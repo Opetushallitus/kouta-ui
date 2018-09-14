@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter} from 'react-router-dom';
+import TarjontaMain from "./views/TarjontaMain";
+import './assets/css/styles.css'
 
 ReactDOM.render((
     <BrowserRouter basename={'/kouta'}>
-
-        <h1>Koulutustarjonta</h1>
-
+        <TarjontaMain/>
     </BrowserRouter>
 ), document.getElementById('root'));
 

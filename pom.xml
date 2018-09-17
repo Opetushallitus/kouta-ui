@@ -134,7 +134,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <nodeVersion>v9.5.0</nodeVersion>
+                    <nodeVersion>v10.5.0</nodeVersion>
                     <npmVersion>6.1.0</npmVersion>
                     <failOnError>true</failOnError>
                     <workingDirectory>src/main/app</workingDirectory>

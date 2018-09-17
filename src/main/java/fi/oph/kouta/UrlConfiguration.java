@@ -10,6 +10,8 @@ public class UrlConfiguration extends OphProperties {
 
     @Autowired
     public UrlConfiguration(Environment environment) {
-
+        addFiles("/kouta-ui-oph.properties");
+        this.addOverride("host-tarjonta", environment.getRequiredProperty("host.host-tarjonta"));
+        this.frontProperties.setProperty("kouta-backend.base-url", this.require("kouta-backend.base-url"));
     }
 }

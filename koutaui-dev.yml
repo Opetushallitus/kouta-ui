@@ -1,3 +1,5 @@
 server:
   servlet:
     context-path: /kouta
+host:
+  host-tarjonta: http://localhost:8099

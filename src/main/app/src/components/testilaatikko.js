@@ -15,7 +15,7 @@ class TestiLaatikko extends Component {
 
     componentDidMount() {
         superagent
-            .get(this.props.urlStore.urls.url('kouta-backend.base-url') + 'kouta-backend/healthcheck')
+            .get(this.props.urlStore.urls.url('kouta-backend.base-url') + '/kouta-backend/healthcheck')
             .then((res) => {
                 console.log(res);
                 this.setState(res.body);

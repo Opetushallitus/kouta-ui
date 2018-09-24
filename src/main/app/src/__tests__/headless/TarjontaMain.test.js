@@ -24,7 +24,7 @@ beforeAll(async () => {
     page = await browser.newPage();
     await page.setRequestInterception(true);
     page.on('request', request => {
-        //console.log(request.url())
+        // console.log(request.url())
         if (request.url().startsWith(backend + '/healthcheck')) {
             request.respond(response({message: "ok"}));
         } else {

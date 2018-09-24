@@ -15,7 +15,12 @@ fi;
 echo 'Port is ' $PORT
 echo 'Port for backend is ' $BACKEND_PORT
 
-node-sass-chokidar src/styles/styles.scss -o ./src/assets/css/ --watch &
-WATCH_PID=$!;
-PORT=$PORT REACT_APP_BACKEND_PORT=$BACKEND_PORT npm run start-and-test;
-kill $WATCH_PID
+if [ -z $CI ]; then
+  node-sass-chokidar src/styles/styles.scss -o ./src/assets/css/ --watch &
+  WATCH_PID=$!;
+  PORT=$PORT REACT_APP_BACKEND_PORT=$BACKEND_PORT npm run start-and-test;
+  kill $WATCH_PID
+else
+  echo 'CI = ' $CI
+  PORT=$PORT REACT_APP_BACKEND_PORT=$BACKEND_PORT CI=true npm run start-and-test;
+fi;

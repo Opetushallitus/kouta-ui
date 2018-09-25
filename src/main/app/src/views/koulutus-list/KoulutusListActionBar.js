@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
-export class KoulutuksetActionBar extends Component {
+export class KoulutusListActionBar extends Component {
 
   constructor(props) {
     super(props);
@@ -28,7 +28,7 @@ export class KoulutuksetActionBar extends Component {
   ) : null;
 
   render = () => (
-    <div className="koulutukset-action-bar">
+    <div className="koulutus-list-action-bar">
       <h1 className="koulutukset-header">Koulutukset</h1>
       <div className="new-koulutus-selector">
         <button className="new-koulutus-button" onClick={this.toggleSelector}>Luo uusi koulutus</button>

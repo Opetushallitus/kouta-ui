@@ -1,18 +1,7 @@
 import React, {Component} from 'react';
-import {StatusBar} from './StatusBar';
-import {MultiStepBar} from './MultiStepBar';
-import {Accordion} from './Accordion';
-import {FooterActionButtons} from './FooterActionButtons';
 
 export class KoulutusPublicationView extends Component {
 
-  render = () => (
-      <React.Fragment>
-        <StatusBar/>
-        <MultiStepBar/>
-        <Accordion/>
-        <FooterActionButtons/>
-      </React.Fragment>
-  )
+  render = () => <h1>Julkaise uusi koulutus (placeholder)</h1>
 
 }

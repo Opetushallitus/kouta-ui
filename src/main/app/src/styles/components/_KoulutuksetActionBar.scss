@@ -36,11 +36,13 @@
       border-radius: 5px;
       right: 5px;
       top: 30px;
-      span {
+      a {
         padding: 5px 10px 5px 10px;
         white-space: nowrap;
+        text-decoration: none;
+        color: black;
       }
-      span:hover {
+      a:hover {
         background-color: #fafafa;
         color: #2da0c7;
         cursor: pointer;

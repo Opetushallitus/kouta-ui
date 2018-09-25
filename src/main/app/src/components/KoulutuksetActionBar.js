@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
 export class KoulutuksetActionBar extends Component {
 
@@ -17,8 +18,12 @@ export class KoulutuksetActionBar extends Component {
 
   renderSelectorLayer = () => this.state.selectorVisible ? (
       <div className="selector-layer">
-        <span>Tutkintoon johtava koulutus</span>
-        <span>Muu koulutus</span>
+          <Link role="button" onClick={this.toggleSelector} to={{
+          pathname: "/tutkintoon-johtava-koulutus"
+        }}>Tutkintoon johtava koulutus</Link>
+        <Link role="button" to={{
+          pathname: "/muu-koulutus"
+        }}>Muu koulutus</Link>
       </div>
   ) : null;
 

@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
-import TestiLaatikko from "../components/KoulutuksetActionBar";
+import KoulutuksetActionBar from "../components/KoulutuksetActionBar";
 
 
 class TarjontaMain extends Component {
     render() {
         return (
-            <Route path='/' render={() => <TestiLaatikko/>}/>
+            <Route path='/' render={() => <KoulutuksetActionBar/>}/>
         )
     }
 }

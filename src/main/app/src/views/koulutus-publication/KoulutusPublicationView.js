@@ -14,7 +14,7 @@ export class KoulutusPublicationView extends Component {
         <MultiStepIndicator/>
         <div className={"koulutus-publication-body"}>
           <div className={"button-row"}>
-            <button className={"secondary-small-button"}>Esikatsele</button>
+            <button className={"secondary small"}>Esikatsele</button>
           </div>
           <LuoKoulutusSection/>
           <ValitseKoulutustyyppiSection/>
@@ -22,9 +22,9 @@ export class KoulutusPublicationView extends Component {
           <KoulutuksenKuvausSection/>
           <ValitseOrganisaatioSection/>
           <div className={"button-row"}>
-            <button className={"secondary-big-button"}>Seuraava</button>
-            <button className={"primary-big-button"}>Tallenna</button>
-            <button className={"primary-big-button"}>Tallenna ja julkaise</button>
+            <button className={"secondary big"}>Seuraava</button>
+            <button className={"primary big"}>Tallenna</button>
+            <button className={"primary big"}>Tallenna ja julkaise</button>
           </div>
         </div>
       </div>

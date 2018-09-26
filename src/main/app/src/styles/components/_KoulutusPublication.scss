@@ -84,11 +84,17 @@
           margin-top: 5px;
           color: #6e6e7e;
         }
-
       }
     }
-
-
+  }
+  .koulutus-publication-body {
+    .button-row {
+      justify-content: flex-end;
+      display: flex;
+      flex-direction: row;
+    }
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
 }

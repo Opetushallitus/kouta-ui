@@ -3,6 +3,6 @@ import {AbstractSection} from './AbstractSection';
 
 export class KoulutuksenKuvausSection extends AbstractSection {
 
-  render = () => <div className="koulutuksen-kuvaus-section">Koulutuksen kuvaus (placeholder)</div>
+  getHeader = () => "4 Koulutuksen kuvaus";
 
 }

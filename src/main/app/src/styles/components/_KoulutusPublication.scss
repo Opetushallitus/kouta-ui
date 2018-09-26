@@ -88,10 +88,12 @@
     }
   }
   .koulutus-publication-body {
+    padding: 20px;
     .button-row {
       justify-content: flex-end;
       display: flex;
       flex-direction: row;
+      margin-top: 10px;
       .small {
         height: 35px;
         width: 150px;
@@ -118,7 +120,42 @@
         margin-left: 10px;
       }
     }
-    padding: 20px;
+    .section {
+      margin-top: 10px;
+      .header {
+        border-style: solid;
+        border-color: #888888;
+        height: 70px;
+        border-width: 1px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        .title {
+          flex-grow: 1;
+          margin-left: 10px;
+          font-size: 25px;
+        }
+        .controller {
+          width: 70px;
+          height: 100%;
+          background-color: #666666;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction:row;
+          i {
+            font-size: 70px;
+            display: flex;
+            color: white;
+            margin-top: -25px;
+          }
+        }
+
+
+      }
+
+    }
+
   }
 
 }

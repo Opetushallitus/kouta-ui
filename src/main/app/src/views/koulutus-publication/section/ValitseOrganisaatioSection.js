@@ -3,6 +3,6 @@ import {AbstractSection} from './AbstractSection';
 
 export class ValitseOrganisaatioSection extends AbstractSection {
 
-  render = () => <div className="valitse-organisaatio-section">Valitse organisaatio (placeholder)</div>
+  getHeader = () => "5 Valitse koulutuksen järjestävä organisaatio";
 
 }

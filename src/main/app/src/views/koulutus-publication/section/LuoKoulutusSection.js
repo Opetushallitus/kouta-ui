@@ -1,7 +1,6 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {AbstractSection} from './AbstractSection';
 import {SelectorButton} from '../../../components/SelectorButton';
-import {FilterList} from '../../../components/FilterList';
 import {showKoulutusSelector} from '../../../states/AppState';
 import {KoulutusSelector} from './luo-koulutus/KoulutusSelector';
 

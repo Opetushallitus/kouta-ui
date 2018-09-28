@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 public class KoutaUIController {
 
     @GetMapping(value = {
-            "*"})
+            "/"})
     public String frontProperties() {
         return "/index.html";
     }

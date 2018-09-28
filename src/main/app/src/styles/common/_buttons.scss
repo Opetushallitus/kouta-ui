@@ -1,0 +1,38 @@
+button {
+  background-color: initial;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: #2da0c7;
+  cursor: pointer;
+  margin-left: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg {
+    margin-left: 15px;
+  }
+}
+
+.button-container {
+  justify-content: flex-end;
+  display: flex;
+  flex-direction: row;
+  .small {
+    height: 35px;
+    width: 150px;
+  }
+  .big {
+    height: 50px;
+    width: 220px;
+  }
+  .secondary {
+    color: #919191;
+    border-color: #9c9c9c;
+    background-color: initial;
+  }
+  .primary {
+    background-color: #2da0c7;
+    color: white;
+  }
+}

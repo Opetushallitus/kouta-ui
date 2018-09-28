@@ -17,6 +17,8 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@material-ui/core": "^3.1.1",
+    "@material-ui/icons": "^3.0.1",
     "oph-urls-js": "github:Opetushallitus/oph-urls-js",
     "oph-virkailija-style-guide": "github:Opetushallitus/virkailija-styles",
     "superagent": "^3.8.3",

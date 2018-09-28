@@ -7,7 +7,7 @@ export class StatusBar extends Component {
       <h1 className={"header"}>Julkaise koulutus</h1>
       <div className={"status-box progress-box"}>
         <div className={"icon"}>
-          <i class="far fa-star"/>
+          <i className="far fa-star"/>
         </div>
         <div className={"info"}>
           <div className={"status-text"}>Tila: Kesken</div>

@@ -16,7 +16,7 @@ export class AbstractSection extends Component {
     <div className={"header"}>
       <div className={"title"}>{this.getHeader()}</div>
       <div className={"controller"}>
-        <i class="fas fa-sort-down"></i>
+        <i className="fas fa-sort-down"></i>
       </div>
     </div>
   )

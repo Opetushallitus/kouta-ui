@@ -151,11 +151,19 @@
           }
         }
       }
+      .content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 10px;
+      }
     }
     .luo-koulutus-section {
       .content {
         display: flex;
         flex-direction: row;
+
         .options-container {
           max-height: 250px;
           overflow-y: auto;

@@ -1,5 +1,7 @@
 @import './common/base';
 @import './common/colors';
 
-@import 'components/KoulutusList';
-@import 'components/KoulutusPublication';
+@import 'components/FilterList';
+
+@import 'views/KoulutusList';
+@import 'views/KoulutusPublication';

@@ -1,0 +1,64 @@
+.koulutus-list-action-bar {
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  height: 70px;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Noto Sans";
+
+  > * {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  button {
+    height: 35px;
+    background-color: initial;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: #2da0c7;
+    cursor: pointer;
+  }
+  .new-koulutus-button {
+    background-color: #2da0c7;
+    color: white;
+  }
+  .new-koulutus-selector {
+    position: relative;
+    .selector-layer {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      background-color: white;
+      box-shadow: 0 0 8px 0 rgba(0,0,0,.25);
+      border-radius: 5px;
+      right: 5px;
+      top: 30px;
+      a {
+        padding: 5px 10px 5px 10px;
+        white-space: nowrap;
+        text-decoration: none;
+        color: black;
+      }
+      a:hover {
+        background-color: #fafafa;
+        color: #2da0c7;
+        cursor: pointer;
+      }
+    }
+  }
+
+
+  .file-import-button {
+    color: #2da0c7;
+  }
+  
+  .koulutukset-header {
+    flex-grow: 1;
+  }
+
+
+  border: $blue-lighten-1 2px solid;
+}

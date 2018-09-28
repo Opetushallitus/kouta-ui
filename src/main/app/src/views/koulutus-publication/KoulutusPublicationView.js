@@ -13,7 +13,7 @@ export class KoulutusPublicationView extends Component {
         <StatusBar/>
         <MultiStepIndicator/>
         <div className={"koulutus-publication-body"}>
-          <div className={"button-row"}>
+          <div className={"button-container"}>
             <button className={"secondary small"}>Esikatsele</button>
           </div>
           <LuoKoulutusSection/>
@@ -21,7 +21,7 @@ export class KoulutusPublicationView extends Component {
           <KoulutuksenTiedotSection/>
           <KoulutuksenKuvausSection/>
           <ValitseOrganisaatioSection/>
-          <div className={"button-row"}>
+          <div className={"button-container"}>
             <button className={"secondary big"}>Seuraava</button>
             <button className={"primary big"}>Tallenna</button>
             <button className={"primary big"}>Tallenna ja julkaise</button>

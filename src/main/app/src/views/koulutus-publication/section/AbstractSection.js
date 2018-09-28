@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
+import {getCssClassName} from '../../../utils/utils';
 const classNames = require('classnames');
-const snake = require('to-snake-case');
+
 
 export class AbstractSection extends Component {
 
 
-  getCssClassName = () => snake(this.constructor.name).replace(/_/g, '-');
+
 
   getHeader = () => {
     throw new Error("AbstractSection:getHeader: implement in subclass!")
@@ -23,7 +24,7 @@ export class AbstractSection extends Component {
   renderContent = () => null;
 
   render = () => (
-      <div className={classNames('section', this.getCssClassName())}>
+      <div className={classNames('section', getCssClassName(this))}>
         {this.renderHeader()}
         {this.renderContent()}
       </div>

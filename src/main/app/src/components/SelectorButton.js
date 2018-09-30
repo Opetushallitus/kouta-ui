@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import classNames from 'classnames';
 export class SelectorButton extends Component {
 
@@ -37,7 +36,7 @@ export class SelectorButton extends Component {
 
   render = () => (
       <div className={"selector-button button-container"}>
-        <button onClick={this.toggleSelector} className={"big primary"}>Selector button <ArrowDropDownIcon/></button>
+        <button onClick={this.toggleSelector} className={"big primary"}>Selector button <icon className="material-icons"/>arrow_drop_down</button>
         {this.renderSelectorLayer()}
       </div>
   )

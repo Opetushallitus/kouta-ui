@@ -24,9 +24,7 @@ export class SelectorButton extends Component {
     this.props.onSelect(option);
   }
 
-  renderSelectorOption = (option, index) => (
-    <span key={index} onClick={() => this.onSelect(option)}>{option.text}</span>
-  );
+  renderSelectorOption = (option, index) => <span key={index} onClick={() => this.onSelect(option)}>{option.text}</span>;
 
   renderSelectorLayer = () => this.state.selectorVisible ? (
       <div className={classNames("selector-layer", this.props.layerAlign)}>
@@ -36,7 +34,7 @@ export class SelectorButton extends Component {
 
   render = () => (
       <div className={"selector-button button-container"}>
-        <button onClick={this.toggleSelector} className={"big primary"}>Selector button <icon className="material-icons"/>arrow_drop_down</button>
+        <button onClick={this.toggleSelector} className={"big primary"}>Selector button <i className="material-icons">arrow_drop_down</i></button>
         {this.renderSelectorLayer()}
       </div>
   )

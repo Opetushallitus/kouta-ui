@@ -12,7 +12,9 @@ export class AbstractSection extends Component {
     }
   }
 
-  getStateCssClass = () => this.state.expanded? "expanded-section" : "collapsed-section";
+  getSectionCssClass = () => this.state.expanded ? "expanded-section" : "collapsed-section";
+
+  getControllerCssClass = () => this.state.expanded ? "expanded-controller" : "collapsed-controller";
 
   getHeader = () => {
     throw new Error("AbstractSection:getHeader: implement in subclass!")
@@ -22,19 +24,21 @@ export class AbstractSection extends Component {
 
   optionallyRenderContent = () => this.state.expanded ? this.renderContent() : null;
 
-  getControlIcon = () =>  this.state.expanded ? "arrow_drop_down" : "arrow_drop_up";
+  getControlIcon = () =>  this.state.expanded ? "expand_more" : "expand_less";
+
+  toggleState = () => this.setState({expanded: !this.state.expanded});
 
   renderHeader = () => (
     <div className={"header"}>
       <div className={"title"}>{this.getHeader()}</div>
-      <div className={"controller"}>
+      <div className={classNames("controller", this.getControllerCssClass())} onClick={this.toggleState}>
         <i className="material-icons">{this.getControlIcon()}</i>
       </div>
     </div>
   )
 
   render = () => (
-      <div className={classNames('section', getCssClassName(this), this.getStateCssClass())}>
+      <div className={classNames('section', getCssClassName(this), this.getSectionCssClass())}>
         {this.renderHeader()}
         {this.optionallyRenderContent()}
       </div>

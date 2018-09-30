@@ -44,7 +44,7 @@ describe('TarjontaMain', () => {
 
     it('renders', async () => {
         expect.assertions(1);
-        await page.waitForSelector('h6');
-        expect(await page.$eval('h6', e => e.innerHTML)).toBe('ok');
+        await page.waitForSelector('#root');
+        expect(await page.$eval('#root', e => e.innerHTML)).toBeTruthy(); // testaa että root-elementillä on sisältöä
     }, timeout);
 });

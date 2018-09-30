@@ -2,4 +2,4 @@ server:
   servlet:
     context-path: /kouta
 host:
-  host-virkailija: http://localhost:8099
+  host-virkailija: {{host_virkailija}}

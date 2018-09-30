@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {connect, disconnect} from 'metamatic'
 import {STATE_KOULUTUS_SELECTOR_VISIBLE} from '../../../../states/AppState';
 

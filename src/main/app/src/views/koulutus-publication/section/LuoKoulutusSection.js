@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
 import {SelectorButton} from '../../../components/SelectorButton';
 import {FilterList} from '../../../components/FilterList';
-import {showKoulutusSelector} from '../../../states/AppState';
+import {expandKoulutusTyyppiSection} from '../../../states/AppState';
 import {KoulutusSelector} from './luo-koulutus/KoulutusSelector';
 
 
@@ -12,7 +12,8 @@ export class LuoKoulutusSection extends AbstractSection {
     super(props);
 
     this.state = {
-      showKoulutusSelector: false
+      showKoulutusSelector: false,
+      expanded: true
     };
   }
 
@@ -21,7 +22,7 @@ export class LuoKoulutusSection extends AbstractSection {
   getSelectorButtonOptions = () => [
     {
       text: 'Luo uusi koulutus',
-      action: () => showKoulutusSelector()
+      action: () => expandKoulutusTyyppiSection()
     },
     {
       text: 'Käytä aikaisemmin luodun koulutuksen tietoja'

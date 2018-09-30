@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {AbstractSection} from './AbstractSection';
+import {AbstractSection} from '../../../components/AbstractSection';
 import {SelectorButton} from '../../../components/SelectorButton';
 import {FilterList} from '../../../components/FilterList';
 import {showKoulutusSelector} from '../../../states/AppState';

@@ -1,5 +1,5 @@
 import React from 'react';
-import {AbstractSection} from './AbstractSection';
+import {AbstractSection} from '../../../components/AbstractSection';
 
 export class ValitseKoulutustyyppiSection extends AbstractSection {
 

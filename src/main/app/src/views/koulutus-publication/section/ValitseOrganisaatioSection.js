@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {AbstractSection} from './AbstractSection';
+import {AbstractSection} from '../../../components/AbstractSection';
 
 export class ValitseOrganisaatioSection extends AbstractSection {
 

@@ -38,10 +38,10 @@ export class AbstractSection extends Component {
   )
 
   render = () => (
-      <div className={classNames('section', getCssClassName(this), this.getSectionCssClass())}>
-        {this.renderHeader()}
-        {this.optionallyRenderContent()}
-      </div>
+    <div className={classNames('section', getCssClassName(this), this.getSectionCssClass())}>
+      {this.renderHeader()}
+      {this.optionallyRenderContent()}
+    </div>
   )
 
 }

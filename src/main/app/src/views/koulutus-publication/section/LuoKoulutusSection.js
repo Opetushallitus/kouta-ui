@@ -1,16 +1,17 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
 import {SelectorButton} from '../../../components/SelectorButton';
-import {FilterList} from '../../../components/FilterList';
-import {expandKoulutusTyyppiSection} from '../../../states/AppState';
 import {KoulutusSelector} from './luo-koulutus/KoulutusSelector';
+import {inject, observer} from 'mobx-react';
 
+const classNames = require('classnames');
 
+@inject("appStore")
+@observer
 export class LuoKoulutusSection extends AbstractSection {
 
   constructor(props) {
     super(props);
-
     this.state = {
       showKoulutusSelector: false,
       expanded: true
@@ -22,21 +23,21 @@ export class LuoKoulutusSection extends AbstractSection {
   getSelectorButtonOptions = () => [
     {
       text: 'Luo uusi koulutus',
-      action: () => expandKoulutusTyyppiSection()
+      action: () => this.props.appStore.setKoulutustyyppiSectionExpanded(true)
     },
     {
       text: 'Käytä aikaisemmin luodun koulutuksen tietoja'
     }
   ];
 
-
-
-  renderContent = () => {
+  renderContent() {
     return (
-      <div className={"content"}>
-        <SelectorButton layerAlign={"left"} label={"LUO UUSI"} onSelect={this.createNewKoulutus} options={this.getSelectorButtonOptions()}/>
-        <KoulutusSelector/>
-      </div>
+        <div className={"content"}>
+          <SelectorButton layerAlign={"left"} label={"LUO UUSI"} onSelect={this.createNewKoulutus} options={this.getSelectorButtonOptions()}/>
+          <KoulutusSelector/>
+        </div>
     )
   }
 }
+
+

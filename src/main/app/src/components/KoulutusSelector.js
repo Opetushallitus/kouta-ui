@@ -44,7 +44,7 @@ export class KoulutusSelector extends Component {
   }
 
   setFilter = (e) => this.setState({
-    filter: e.target.value.toLowerCase();
+    filter: e.target.value.toLowerCase()
   });
 
   render = () => (

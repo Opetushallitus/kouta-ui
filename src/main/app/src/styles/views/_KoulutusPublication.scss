@@ -133,6 +133,7 @@
         }
       }
     }
+
     .koulutustyyppi-section {
       .content {
         .koulutustyyppi-list {
@@ -146,6 +147,20 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+      }
+    }
+
+    .koulutuksen-tiedot-section {
+      .filter-input {
+        min-width: 400px;
+        margin-top: 10px;
+      }
+      .options-container {
+        max-height: 250px;
+        overflow-y: auto;
+        .options-ul {
+
+        }
       }
     }
 

@@ -12,7 +12,10 @@ export class KoulutustyyppiSection extends AbstractSection {
   }
 
 
-  handleCheckboxChange = (event) => this.props.appStore.setKoulutustyyppi(event.target.value);
+  handleCheckboxChange = (event) => {
+    this.props.appStore.setKoulutustyyppi(event.target.value);
+    this.props.appStore.setKoulutuksenTiedotSectionExpanded(true);
+  }
 
   getHeader = () => "2 Valitse koulutustyyppi";
 

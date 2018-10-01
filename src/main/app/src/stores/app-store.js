@@ -17,15 +17,17 @@ class AppStore {
   ];
 
   @observable koulutustyyppiSectionExpanded = false;
+  @observable koulutuksenTiedotSectionExpanded = false;
   @observable koulutustyyppi = null;
 
   @action
   setKoulutustyyppiSectionExpanded = (value) => this.koulutustyyppiSectionExpanded = value;
 
   @action
+  setKoulutuksenTiedotSectionExpanded = (value) => this.koulutuksenTiedotSectionExpanded = value;
+
+  @action
   setKoulutustyyppi = (koulutustyyppi) => this.koulutustyyppi = koulutustyyppi;
-
-
 
 }
 export default AppStore;

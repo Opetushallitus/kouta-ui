@@ -1,4 +1,5 @@
 import { observable, action } from 'mobx';
+import axios from 'axios';
 
 class AppStore {
   @observable koulutustyyppiOptions = [
@@ -19,6 +20,7 @@ class AppStore {
   @observable koulutustyyppiSectionExpanded = false;
   @observable koulutuksenTiedotSectionExpanded = false;
   @observable koulutustyyppi = null;
+  @observable koodisto = null;
 
   @action
   setKoulutustyyppiSectionExpanded = (value) => this.koulutustyyppiSectionExpanded = value;
@@ -28,6 +30,19 @@ class AppStore {
 
   @action
   setKoulutustyyppi = (koulutustyyppi) => this.koulutustyyppi = koulutustyyppi;
+
+  @action
+  findKoodisto = () =>
+      axios.get(`https://virkailija.testiopintopolku.fi/koodisto-service/rest/json/koulutus/koodi?onlyValidKoodis=true`)
+    .then((response) => this.koodisto = response.data);
+
+  @action
+  selectKoulutustyyppi = (value) => {
+    this.setKoulutustyyppi(value);
+    this.setKoulutuksenTiedotSectionExpanded(true);
+    this.findKoodisto();
+  };
+
 
 }
 export default AppStore;

@@ -1,7 +1,6 @@
 import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
 import {SelectorButton} from '../../../components/SelectorButton';
-import {KoulutusSelector} from './luo-koulutus/KoulutusSelector';
 import {inject, observer} from 'mobx-react';
 
 const classNames = require('classnames');
@@ -13,7 +12,6 @@ export class LuoKoulutusSection extends AbstractSection {
   constructor(props) {
     super(props);
     this.state = {
-      showKoulutusSelector: false,
       expanded: true
     };
   }
@@ -34,7 +32,6 @@ export class LuoKoulutusSection extends AbstractSection {
     return (
         <div className={"content"}>
           <SelectorButton layerAlign={"left"} label={"LUO UUSI"} onSelect={this.createNewKoulutus} options={this.getSelectorButtonOptions()}/>
-          <KoulutusSelector/>
         </div>
     )
   }

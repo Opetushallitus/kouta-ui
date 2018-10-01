@@ -1,6 +1,7 @@
 import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
 import {inject, observer} from 'mobx-react/index';
+import {KoulutusSelector} from '../../../components/KoulutusSelector';
 
 @inject("appStore")
 @observer
@@ -17,8 +18,10 @@ export class KoulutuksenTiedotSection extends AbstractSection {
 
   toggleState = () => this.props.appStore.setKoulutuksenTiedotSectionExpanded(!this.isExpanded());
 
-  renderContent = () => {
-
-  }
+  renderContent = () => (
+    <div className={"content"}>
+      <KoulutusSelector/>
+    </div>
+  )
 
 }

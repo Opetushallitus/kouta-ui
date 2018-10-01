@@ -6,9 +6,13 @@ import { Provider } from "mobx-react";
 import './assets/css/styles.css';
 import 'oph-virkailija-style-guide/oph-styles.css';
 import UrlStore from "./stores/url-store";
+import AppStore from './stores/app-store';
+
+const urlStore = new UrlStore();
+const appStore = new AppStore();
 
 ReactDOM.render((
-    <Provider urlStore={new UrlStore()}>
+    <Provider urlStore={urlStore} appStore={appStore}>
         <BrowserRouter basename={'/kouta'}>
             <Main/>
         </BrowserRouter>

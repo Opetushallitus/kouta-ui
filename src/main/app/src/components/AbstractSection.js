@@ -1,32 +1,41 @@
 import React, {Component} from 'react';
 
 import {getCssClassName} from '../utils/utils';
+
 const classNames = require('classnames');
+
 
 export class AbstractSection extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      expanded: false
-    }
+    this.state = {};
   }
 
-  getSectionCssClass = () => this.state.expanded ? "expanded-section" : "collapsed-section";
+  getSectionCssClass = () => this.isExpanded() ? "expanded-section" : "collapsed-section";
 
-  getControllerCssClass = () => this.state.expanded ? "expanded-controller" : "collapsed-controller";
+  getControllerCssClass = () => this.isExpanded() ? "expanded-controller" : "collapsed-controller";
 
   getHeader = () => {
     throw new Error("AbstractSection:getHeader: implement in subclass!")
   }
 
-  renderContent = () => null;
+  renderContent() {
+    return null;
+  }
 
-  optionallyRenderContent = () => this.state.expanded ? this.renderContent() : null;
+  isExpanded = () => this.state.expanded;
 
-  getControlIcon = () =>  this.state.expanded ? "expand_more" : "expand_less";
+  optionallyRenderContent() {
+    if (!this.isExpanded()) {
+      return null;
+    }
+    return this.renderContent();
+  }
 
-  toggleState = () => this.setState({expanded: !this.state.expanded});
+  getControlIcon = () => this.isExpanded() ? "expand_more" : "expand_less";
+
+  toggleState = () => this.setState({expanded: !this.isExpanded()});
 
   renderHeader = () => (
     <div className={"header"}>
@@ -37,11 +46,14 @@ export class AbstractSection extends Component {
     </div>
   )
 
-  render = () => (
-    <div className={classNames('section', getCssClassName(this), this.getSectionCssClass())}>
-      {this.renderHeader()}
-      {this.optionallyRenderContent()}
-    </div>
-  )
+  render() {
+    return (
+        <div className={classNames('section', getCssClassName(this), this.getSectionCssClass())}>
+          {this.renderHeader()}
+          {this.optionallyRenderContent()}
+        </div>
+    )
+  }
+
 
 }

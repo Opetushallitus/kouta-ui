@@ -1,20 +1,43 @@
 import React from 'react';
-import {connect, disconnect} from 'metamatic';
 import {AbstractSection} from '../../../components/AbstractSection';
-import {STATE_SECTION_KOULUTUSTYYPPI_EXPANDED} from '../../../states/AppState';
+import {inject, observer} from 'mobx-react/index';
 
+@inject("appStore")
+@observer
 export class KoulutustyyppiSection extends AbstractSection {
 
   constructor(props) {
     super(props);
-    connect(this, STATE_SECTION_KOULUTUSTYYPPI_EXPANDED, (expanded) => this.setState({expanded}));
+    this.state = {};
   }
 
-  componentWillUnmount = () => disconnect(this);
 
-  renderContent = () => <h1>Content</h1>
+  handleCheckboxChange = (event) => this.props.appStore.setKoulutustyyppi(event.target.value);
 
   getHeader = () => "2 Valitse koulutustyyppi";
+
+  isExpanded = () => this.props.appStore.koulutustyyppiSectionExpanded;
+
+  isOptionChecked = (option) => option.value === this.props.appStore.koulutustyyppi;
+
+  toggleState = () => (this.props.appStore.setKoulutustyyppiSectionExpanded(!this.isExpanded()));
+
+  renderKoulutustyyppiOption = (koulutustyyppiOption, index) => (
+    <li key={index}>
+      <input type="radio" name={"koulutustyyppi"} value={koulutustyyppiOption.value} checked={this.isOptionChecked(koulutustyyppiOption)}
+             onChange={this.handleCheckboxChange} />{koulutustyyppiOption.label}
+    </li>
+  )
+
+  renderContent() {
+    return (
+        <div className={"content"}>
+          <ul className={"koulutustyyppi-list"}>
+            {this.props.appStore.koulutustyyppiOptions.map(this.renderKoulutustyyppiOption)}
+          </ul>
+        </div>
+    );
+  }
 
 
 }

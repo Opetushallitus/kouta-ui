@@ -1,3 +1,4 @@
+import {AlakoodiList, KOODISTO_URI_KOULUTUSALA} from './Alakoodi';
 
 export class Koulutuskoodi {
 
@@ -20,8 +21,13 @@ export class Koulutuskoodi {
 
   getVersio = () => this.data.versio;
 
-  configureKoulutusDetails = (alakoodiList) => {
-    console.log('Koulutuskoodi:configureKoulutusDetails', alakoodiList);
+  configureKoulutusDetails = (alakoodiJsonArray) => {
+    const alakoodiList = AlakoodiList.createFromJsonArray(alakoodiJsonArray);
+    this.osaamisalaList = AlakoodiList.findOsaamisalaList(alakoodiList, this.language);
+    this.koulutusala = AlakoodiList.findKoulutusala(alakoodiList, this.language);
+    this.opintojenLaajuus = AlakoodiList.findOpintojenLaajuus(alakoodiList, this.language);
+    this.opintojenLaajuusyksikko = AlakoodiList.findOpintojenLaajuusyksikko(alakoodiList, this.language);
   };
+
 
 };

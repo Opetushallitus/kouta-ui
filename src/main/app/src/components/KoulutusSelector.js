@@ -12,40 +12,39 @@ export class KoulutusSelector extends Component {
     };
   }
 
-  getOptions = () => this.props.appStore.koodisto || [];
+  getOptions = () => this.props.appStore.koulutusOptions || [];
 
-  matchOption = (option) => option.metadata[0]['nimi'].toLowerCase().indexOf(this.state.filter) > -1;
+  matchOption = (option) => option.comparisonValue.indexOf(this.state.filter) > -1;
 
   compareOptions = (a, b) => {
-    const aName =  a.metadata[0]['nimi'];
-    const bName = b.metadata[0]['nimi'];
+    const aName =  a.label;
+    const bName = b.label;
     if(aName < bName) return -1;
     if(aName > bName) return 1;
     return 0;
   }
 
-  getFilteredOptions = () => this.getOptions().filter(this.matchOption).sort(this.compareOptions)
+  getFilteredOptions = () => this.getOptions().filter(this.matchOption).sort(this.compareOptions);
+
+  selectOption = (event) => this.props.appStore.selectKoulutus(event.target.getAttribute("data-id"));
 
   renderOption = (option, index) => (
-    <li key={index} className={"option-li"}>
-      {option.metadata[0]['nimi']}
+    <li key={index} className={"option-li"} data-id={option.id} onClick={this.selectOption}>
+      {option.label}
     </li>
   )
-
-  renderOptions = () => {
-    const options  = this.getFilteredOptions();
-    return (
-        <div className={"options-container"}>
-          <ul className={"options-ul"}>
-            {this.getFilteredOptions().map(this.renderOption)}
-          </ul>
-        </div>
-    );
-  }
 
   setFilter = (e) => this.setState({
     filter: e.target.value.toLowerCase()
   });
+
+  renderOptions = () => (
+      <div className={"options-container"}>
+        <ul className={"options-ul"}>
+          {this.getFilteredOptions().map(this.renderOption)}
+        </ul>
+      </div>
+  );
 
   render = () => (
     <div className={"filter-list"}>

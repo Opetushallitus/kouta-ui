@@ -1,6 +1,6 @@
-import { observable } from 'mobx';
-import { urls as ophUrls } from 'oph-urls-js';
-import { production, development } from '../tarjonta-urls.js';
+import {observable} from 'mobx';
+import {urls as ophUrls} from 'oph-urls-js';
+import {development, production} from '../tarjonta-urls.js';
 
 class UrlStore {
     @observable urls = ophUrls;
@@ -20,4 +20,11 @@ class UrlStore {
     }
 }
 
-export default UrlStore;
+let urlStore = null;
+
+export const getUrlStore = () => {
+  if (!urlStore) {
+    urlStore = new UrlStore();
+  }
+  return urlStore;
+};

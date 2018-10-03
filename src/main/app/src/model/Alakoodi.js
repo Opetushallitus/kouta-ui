@@ -7,8 +7,8 @@ const KOODISTO_URI_OPINTOJEN_LAAJUUSYKSIKKO = 'opintojenlaajuusyksikko';
 const AlakoodiFinder = {
   findMany: (alakoodiList, alakoodiType) =>  alakoodiList.filter((item) => item.isOfType(alakoodiType)),
   findOne: (alakoodiList, alakoodiType) =>  alakoodiList.find((item) => item.isOfType(alakoodiType)),
-  findName: (alakoodiList, alakoodiType, language) => AlakoodiFinder.findOne(alakoodiList, alakoodiType).findName(language),
-  findNames: (alakoodiList, alakoodiType, language) => AlakoodiFinder.findMany(alakoodiList, alakoodiType).map((item) => item.findName())
+  findName: (alakoodiList, alakoodiType, language) => AlakoodiItem.findName(AlakoodiFinder.findOne(alakoodiList, alakoodiType), language),
+  findNames: (alakoodiList, alakoodiType, language) => AlakoodiFinder.findMany(alakoodiList, alakoodiType).map((item) => item.findName(language))
 };
 
 export const AlakoodiList = {
@@ -23,6 +23,8 @@ export const AlakoodiList = {
 export class AlakoodiItem {
 
   static createFromJson = (json) => new AlakoodiItem(json);
+
+  static findName = (item, language) => item ? item.findName(language) : null;
 
   constructor(json){
     this.data = json;

@@ -1,0 +1,15 @@
+.koulutus-details {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  max-width: 50%;
+  align-items: stretch;
+  .details-row {
+    display: flex;
+    flex-direction: row;
+    div {
+      max-width: 50%;
+      flex-grow: 1;
+    }
+  }
+}

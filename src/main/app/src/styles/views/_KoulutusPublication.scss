@@ -151,17 +151,17 @@
     }
 
     .koulutuksen-tiedot-section {
-      .filter-input {
-        min-width: 400px;
-        margin-top: 10px;
-      }
-      .options-container {
-        max-height: 250px;
-        overflow-y: auto;
-        .options-ul {
-
+      .content {
+        .filter-input {
+          min-width: 400px;
+          margin-top: 10px;
+        }
+        .options-container {
+          max-height: 250px;
+          overflow-y: auto;
         }
       }
+
     }
 
   }

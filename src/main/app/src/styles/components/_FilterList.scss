@@ -1,9 +1,9 @@
 
 .filter-list {
   flex-grow: 1;
+  max-width: 50%;
   ul {
     list-style: none;
-    columns: 2;
     padding-left: 0;
     li {
       cursor: pointer;

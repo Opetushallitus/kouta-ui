@@ -1,17 +1,16 @@
-import {AlakoodiList, KOODISTO_URI_KOULUTUSALA} from './Alakoodi';
-
 export class Koulutuskoodi {
 
   constructor(data, language) {
     this.data = data;
     this.language = language;
+    this.id = this.getKoodiUri() + '-' + this.getVersio();
   }
 
-  getId = () =>   this.getKoodiUri() + '-' + this.getVersio();
+  getId = () => this.id;
 
-  getNimi = () => this.findLocalizedMetadataEntry().nimi;
+  getNimi = () => this.findLocalizedMetadataEntries()[0].nimi;
 
-  findLocalizedMetadataEntry = () => this.data.metadata.find((entry) => entry.kieli === this.language);
+  findLocalizedMetadataEntries = () => this.data.metadata.filter((entry) => entry.kieli === this.language);
 
   getSelectionOptions = () => this.findLocalizedMetadataEntries().map((entry) => ({
     label: entry.nimi,

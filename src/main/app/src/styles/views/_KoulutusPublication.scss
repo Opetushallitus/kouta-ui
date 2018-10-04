@@ -152,13 +152,9 @@
 
     .koulutuksen-tiedot-section {
       .content {
-        .filter-input {
-          min-width: 400px;
-          margin-top: 10px;
-        }
-        .options-container {
-          max-height: 250px;
-          overflow-y: auto;
+        align-items: stretch;
+        > div {
+          margin: 5px;
         }
       }
 

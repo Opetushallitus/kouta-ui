@@ -11,18 +11,23 @@ export class KoulutustyyppiSection extends AbstractSection {
     this.state = {};
   }
 
-
   handleCheckboxChange = (event) => {
-    this.props.appStore.selectKoulutustyyppi(event.target.value);
+    this.setState({
+      expanded: true,
+      koulutustyyppi: event.target.value
+    }, () => {
+      this.dispatchKoulutustyyppi();
+      this.setSectionDone();
+    })
+  }
+
+  dispatchKoulutustyyppi = () => {
+    this.props.appStore.selectKoulutustyyppi(this.state.koulutustyyppi);
   }
 
   getHeader = () => "2 Valitse koulutustyyppi";
 
-  isExpanded = () => this.props.appStore.koulutustyyppiSectionExpanded;
-
   isOptionChecked = (option) => option.value === this.props.appStore.koulutustyyppi;
-
-  toggleState = () => (this.props.appStore.setKoulutustyyppiSectionExpanded(!this.isExpanded()));
 
   renderKoulutustyyppiOption = (koulutustyyppiOption, index) => (
     <li key={index}>

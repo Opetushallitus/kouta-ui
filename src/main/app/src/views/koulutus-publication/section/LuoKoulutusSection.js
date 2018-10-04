@@ -2,24 +2,16 @@ import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
 import {SelectorButton} from '../../../components/SelectorButton';
 import {inject, observer} from 'mobx-react';
+import {getAppStore} from '../../../stores/AppStore';
 
-@inject("appStore")
-@observer
 export class LuoKoulutusSection extends AbstractSection {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      expanded: true
-    };
-  }
 
   getHeader = () => "1 Luo koulutus";
 
   getSelectorButtonOptions = () => [
     {
       text: 'Luo uusi koulutus',
-      action: () => this.props.appStore.setKoulutustyyppiSectionExpanded(true)
+      action: () => this.setSectionDone()
     },
     {
       text: 'Käytä aikaisemmin luodun koulutuksen tietoja'

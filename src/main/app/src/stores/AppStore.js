@@ -2,6 +2,7 @@ import {action, observable, computed} from 'mobx';
 import axios from 'axios';
 import {Koulutuskoodi} from '../model/Koulutuskoodi';
 import {getKoulutusDetailsStore} from './KoulutusDetailsStore';
+import {getConsecutiveSectionName} from '../model/KoulutuksenJulkaiseminen';
 
 class AppStore {
   @observable koulutustyyppiOptions = [
@@ -26,6 +27,7 @@ class AppStore {
   @observable koulutustyyppi = null;
   @observable koulutusOptions = null;
   @observable activeKoulutus = null;
+  @observable activeSection = 'LuoKoulutusSection';
 
   koulutusMap = null;
 
@@ -64,7 +66,6 @@ class AppStore {
   @action
   selectKoulutustyyppi = (value) => {
     this.setKoulutustyyppi(value);
-    this.setKoulutuksenTiedotSectionExpanded(true);
     this.findKoulutusList();
   };
 
@@ -76,6 +77,19 @@ class AppStore {
 
   @action
   setAlakoodiList = (alakoodiList) => this.activeKoulutus = this.activeKoulutus.configureKoulutusDetails(alakoodiList);
+
+  @action
+  setActiveSection = (activeSection) => this.activeSection = activeSection;
+
+  @action
+  setSectionDone = (sectionName) => {
+    const consecutiveSection = getConsecutiveSectionName(sectionName);
+    if (!consecutiveSection) {
+      return;
+    }
+    this.setActiveSection(consecutiveSection);
+  }
+
 }
 
 let appStore = null;

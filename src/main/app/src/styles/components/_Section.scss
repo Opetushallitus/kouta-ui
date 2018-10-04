@@ -8,6 +8,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    background-color: white;
+
     .title {
       flex-grow: 1;
       margin-left: 10px;
@@ -28,9 +30,13 @@
         color: white;
       }
     }
+
     .expanded-controller {
       background-color: #1e7998;
     }
+  }
+  .active-header {
+    background-color: #e0f2fd;
   }
   .content {
     display: flex;

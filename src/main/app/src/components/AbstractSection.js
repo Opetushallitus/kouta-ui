@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import {getCssClassName} from '../utils/utils';
+import {getAppStore} from '../stores/AppStore';
 
 const classNames = require('classnames');
 
@@ -16,30 +17,36 @@ export class AbstractSection extends Component {
 
   getControllerCssClass = () => this.isExpanded() ? "expanded-controller" : "collapsed-controller";
 
-  getHeader = () => {
-    throw new Error("AbstractSection:getHeader: implement in subclass!")
-  }
+  getHeaderCssClass = () => this.isActive() ? "active-header" : "";
+
+  getHeader = () => null;
 
   renderContent() {
     return null;
   }
 
-  isExpanded = () => this.state.expanded;
+  isActive = () => getAppStore().activeSection === this.constructor.name;
 
-  optionallyRenderContent() {
-    if (!this.isExpanded()) {
-      return null;
-    }
-    return this.renderContent();
-  }
+  isExpanded = () => this.state.expanded || this.isActive();
+
+  optionallyRenderContent = () => this.isExpanded() ? this.renderContent() : null;
 
   getControlIcon = () => this.isExpanded() ? "expand_more" : "expand_less";
 
-  toggleState = () => this.setState({expanded: !this.isExpanded()});
+  notifyStoreOnExpansion = () => {
+    if (!this.isExpanded()) {
+      return;
+    }
+    getAppStore().setActiveSection(this.constructor.name);
+  }
+
+  toggleState = () => this.setState({expanded: !this.isExpanded()}, () => this.notifyStoreOnExpansion());
+
+  setSectionDone = () => getAppStore().setSectionDone(this.constructor.name);
 
   renderHeader = () => (
-    <div className={"header"}>
-      <div className={"title"}>{this.getHeader()}</div>
+    <div className={classNames("header", this.getHeaderCssClass())}>
+      <div className={classNames("title")}>{this.getHeader()}</div>
       <div className={classNames("controller", this.getControllerCssClass())} onClick={this.toggleState}>
         <i className="material-icons">{this.getControlIcon()}</i>
       </div>
@@ -54,6 +61,4 @@ export class AbstractSection extends Component {
         </div>
     )
   }
-
-
 }

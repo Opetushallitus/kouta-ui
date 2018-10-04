@@ -15,10 +15,6 @@ export class KoulutuksenTiedotSection extends AbstractSection {
 
   getHeader = () => "3 Koulutuksen tiedot";
 
-  isExpanded = () => this.props.appStore.koulutuksenTiedotSectionExpanded;
-
-  toggleState = () => this.props.appStore.setKoulutuksenTiedotSectionExpanded(!this.isExpanded());
-
   renderContent = () => (
     <div className={"content"}>
       <KoulutusSelector/>

@@ -1,7 +1,7 @@
 import {action, observable} from 'mobx';
 import axios from 'axios';
 import {Koulutuskoodi} from '../model/Koulutuskoodi';
-import {getKoulutusItemStore} from './KoulutusItemStore';
+import {getKoulutusDetailsStore} from './KoulutusDetailsStore';
 
 class AppStore {
   @observable koulutustyyppiOptions = [
@@ -66,8 +66,7 @@ class AppStore {
   @action
   selectKoulutus = (koulutusId) => {
     this.activeKoulutus = this.koulutusMap[koulutusId];
-    getKoulutusItemStore().configure(this.activeKoulutus.getKoodiUri(), this.activeKoulutus.getVersio());
-    //this.findAlakoodiList(this.activeKoulutus.getKoodiUri(), this.activeKoulutus.getVersio());
+    getKoulutusDetailsStore().configure(this.activeKoulutus.getKoodiUri(), this.activeKoulutus.getVersio());
   }
 
   findAlakoodiList = (koodiUri, versio) =>

@@ -2,7 +2,7 @@ import {observable, action} from 'mobx';
 import {AlakoodiList} from '../model/Alakoodi';
 import axios from 'axios';
 
-class KoulutusItemStore {
+class KoulutusDetailsStore {
 
   language = 'FI';
 
@@ -26,11 +26,11 @@ class KoulutusItemStore {
 
 }
 
-let koulutusItemStore;
+let koulutusDetailsStore;
 
-export const getKoulutusItemStore = () => {
-  if (!koulutusItemStore) {
-    koulutusItemStore = new KoulutusItemStore();
+export const getKoulutusDetailsStore = () => {
+  if (!koulutusDetailsStore) {
+    koulutusDetailsStore = new KoulutusDetailsStore();
   }
-  return koulutusItemStore;
+  return koulutusDetailsStore;
 };

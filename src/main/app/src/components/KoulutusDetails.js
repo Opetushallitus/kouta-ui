@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {inject, observer} from 'mobx-react';
 import {getCssClassName} from '../utils/utils';
 
-@inject("koulutusItemStore")
+@inject("koulutusDetailsStore")
 @observer
 export class KoulutusDetails extends Component {
   
@@ -15,8 +15,8 @@ export class KoulutusDetails extends Component {
 
   render = () => (
     <div className={getCssClassName(this)}>
-      {this.renderDetailsRow('Koulutusala:', this.props.koulutusItemStore.koulutusala)}
-      {this.renderDetailsRow('Laajuus:', this.props.koulutusItemStore.opintojenLaajuus)}
+      {this.renderDetailsRow('Koulutusala:', this.props.koulutusDetailsStore.koulutusala)}
+      {this.renderDetailsRow('Laajuus:', this.props.koulutusDetailsStore.opintojenLaajuus)}
     </div>
   )
 }

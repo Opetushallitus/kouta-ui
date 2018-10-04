@@ -3,8 +3,6 @@ import {AbstractSection} from '../../../components/AbstractSection';
 import {SelectorButton} from '../../../components/SelectorButton';
 import {inject, observer} from 'mobx-react';
 
-const classNames = require('classnames');
-
 @inject("appStore")
 @observer
 export class LuoKoulutusSection extends AbstractSection {

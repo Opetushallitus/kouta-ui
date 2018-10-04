@@ -13,10 +13,10 @@ export class KoulutusDetails extends Component {
       </div>
   )
 
-  render = () => (
+  render = () => this.props.koulutusDetailsStore.active ?  (
     <div className={getCssClassName(this)}>
       {this.renderDetailsRow('Koulutusala:', this.props.koulutusDetailsStore.koulutusala)}
       {this.renderDetailsRow('Laajuus:', this.props.koulutusDetailsStore.opintojenLaajuus)}
     </div>
-  )
+  ) : null;
 }

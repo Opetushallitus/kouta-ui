@@ -7,14 +7,21 @@ class KoulutusDetailsStore {
   language = 'FI';
 
   @observable active = false;
-  @observable osaamisalaList = null;
-  @observable koulutusala = null;
-  @observable opintojenLaajuus = null;
-  @observable opintojenLaajuusyksikko = null;
 
-  configure = (koodiUri, versio) => {
+  osaamisalaList = null;
+  koulutusala = null;
+  opintojenLaajuus = null;
+  opintojenLaajuusyksikko = null;
+  nimi = null;
+  koodiUri = null;
+  versio = null;
+
+  configure = (koulutuskoodi) => {
     this.setActive(false);
-    axios.get(`https://virkailija.testiopintopolku.fi/koodisto-service/rest/json/relaatio/sisaltyy-alakoodit/${koodiUri}?koodiVersio=${versio}`)
+    this.koodiUri = koulutuskoodi.getKoodiUri();
+    this.versio = koulutuskoodi.getVersio();
+    this.nimi = koulutuskoodi.getNimi();
+    axios.get(`https://virkailija.testiopintopolku.fi/koodisto-service/rest/json/relaatio/sisaltyy-alakoodit/${this.koodiUri}?koodiVersio=${this.versio}`)
     .then((response) => this.setData(response.data));
   }
 

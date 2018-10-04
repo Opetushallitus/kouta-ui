@@ -1,4 +1,4 @@
-import {action, observable} from 'mobx';
+import {action, observable, computed} from 'mobx';
 import axios from 'axios';
 import {Koulutuskoodi} from '../model/Koulutuskoodi';
 import {getKoulutusDetailsStore} from './KoulutusDetailsStore';
@@ -28,6 +28,11 @@ class AppStore {
   @observable activeKoulutus = null;
 
   koulutusMap = null;
+
+  @computed get activeKoulutusId() {
+      return this.activeKoulutus ? this.activeKoulutus.id : null;
+  }
+
   @action
   setKoulutustyyppiSectionExpanded = (value) => this.koulutustyyppiSectionExpanded = value;
 
@@ -66,12 +71,8 @@ class AppStore {
   @action
   selectKoulutus = (koulutusId) => {
     this.activeKoulutus = this.koulutusMap[koulutusId];
-    getKoulutusDetailsStore().configure(this.activeKoulutus.getKoodiUri(), this.activeKoulutus.getVersio());
+    getKoulutusDetailsStore().configure(this.activeKoulutus);
   }
-
-  findAlakoodiList = (koodiUri, versio) =>
-      axios.get(`https://virkailija.testiopintopolku.fi/koodisto-service/rest/json/relaatio/sisaltyy-alakoodit/${koodiUri}?koodiVersio=${versio}`)
-      .then((response) => this.setAlakoodiList(response.data));
 
   @action
   setAlakoodiList = (alakoodiList) => this.activeKoulutus = this.activeKoulutus.configureKoulutusDetails(alakoodiList);

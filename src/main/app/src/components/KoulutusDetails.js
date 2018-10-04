@@ -7,14 +7,15 @@ import {getCssClassName} from '../utils/utils';
 export class KoulutusDetails extends Component {
   
   renderDetailsRow = (label, value) => (
-      <div className={"details-row"}>
-        <div className={"label-column"}>{label}</div>
-        <div className={"value-column"}>{value}</div>
-      </div>
+    <div className={"details-row"}>
+      <div className={"label-column"}>{label}</div>
+      <div className={"value-column"}>{value}</div>
+    </div>
   )
 
   render = () => this.props.koulutusDetailsStore.active ?  (
     <div className={getCssClassName(this)}>
+      {this.renderDetailsRow('Koulutus:', this.props.koulutusDetailsStore.nimi)}
       {this.renderDetailsRow('Koulutusala:', this.props.koulutusDetailsStore.koulutusala)}
       {this.renderDetailsRow('Laajuus:', this.props.koulutusDetailsStore.opintojenLaajuus)}
     </div>

@@ -1,4 +1,4 @@
-export const KOODISTO_URI_KOULUTUSALA = 'okmohjauksenala'; //Terveys- ja hyvinvointialat
+const KOODISTO_URI_KOULUTUSALA = 'okmohjauksenala';
 const KOODISTO_URI_OSAAMISALA = 'osaamisala';
 const KOODISTO_URI_TUTKINTONIMIKKEET = 'tutkintonimikkeet';
 const KOODISTO_URI_OPINTOJEN_LAAJUUS = 'opintojenlaajuus';
@@ -49,11 +49,6 @@ export class AlakoodiItem {
   }
 
   isOfType = (koodistoUriType) =>  this.koodistoUri === koodistoUriType;
-  isKoulutusala = () => this.koodistoUri === KOODISTO_URI_KOULUTUSALA;
-  isOsaamisala = () => this.koodistoUri === KOODISTO_URI_OSAAMISALA;
-  isTutkintonimike = () => this.koodistoUri === KOODISTO_URI_TUTKINTONIMIKKEET;
-  isOpintojenLaajuus = () => this.koodistoUri === KOODISTO_URI_OPINTOJEN_LAAJUUS;
-  isOpintojenLaajuusyksikko = () => this.koodistoUri === KOODISTO_URI_OPINTOJEN_LAAJUUSYKSIKKO;
 
 };
 

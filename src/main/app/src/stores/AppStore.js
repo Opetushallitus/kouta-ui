@@ -1,8 +1,11 @@
 import {action, observable, computed} from 'mobx';
 import axios from 'axios';
 import {Koulutuskoodi} from '../model/Koulutuskoodi';
-import {getKoulutusDetailsStore} from './KoulutusDetailsStore';
+import {getKoulutusDetailsStore, loadKoulutusDetails} from './KoulutusDetailsStore';
 import {getConsecutiveSectionName} from '../model/KoulutuksenJulkaiseminen';
+import {LuoKoulutusSection} from '../views/koulutus-publication/section/LuoKoulutusSection';
+import {APP_STATE_SECTION_EXPANSION_MAP} from '../config/constants';
+import {observe, updateState} from '../utils/utils';
 
 class AppStore {
   @observable koulutustyyppiOptions = [
@@ -69,28 +72,40 @@ class AppStore {
     this.findKoulutusList();
   };
 
+
   @action
   selectKoulutus = (koulutusId) => {
+    console.log('KoulutusDetailsStore:selectKoulutus:koulutusId', koulutusId);
     this.activeKoulutus = this.koulutusMap[koulutusId];
-    getKoulutusDetailsStore().configure(this.activeKoulutus);
+    loadKoulutusDetails(this.activeKoulutus);
   }
 
   @action
-  setAlakoodiList = (alakoodiList) => this.activeKoulutus = this.activeKoulutus.configureKoulutusDetails(alakoodiList);
-
-  @action
-  setActiveSection = (activeSection) => this.activeSection = activeSection;
-
-  @action
-  setSectionDone = (sectionName) => {
-    const consecutiveSection = getConsecutiveSectionName(sectionName);
-    if (!consecutiveSection) {
-      return;
-    }
-    this.setActiveSection(consecutiveSection);
+  setSectionExpansion = (sectionName, expanded) => {
+    const expansionMap = { ...this.sectionExpansionMap };
+    expansionMap[sectionName] = expanded;
+    console.log('AppStore:setSectionExpansion:state', expansionMap);
+    this.expansionMap  =  expansionMap;
   }
-
 }
+
+export const setSectionExpansion = (sectionName, expanded) => updateState(APP_STATE_SECTION_EXPANSION_MAP, {
+  [sectionName]: expanded,
+  activeSection: sectionName
+});
+
+export const setSectionDone = (sectionName) => {
+  const consecutiveSection = getConsecutiveSectionName(sectionName);
+  if (!consecutiveSection) {
+    return;
+  }
+  setSectionExpansion(consecutiveSection, true);
+}
+
+observe(APP_STATE_SECTION_EXPANSION_MAP, {
+  LuoKoulutusSection: true,
+  activeSection: 'LuoKoulutusSection'
+});
 
 let appStore = null;
 

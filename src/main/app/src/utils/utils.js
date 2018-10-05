@@ -2,7 +2,6 @@ const snake = require('to-snake-case');
 
 export const getCssClassName = (component) => snake(component.constructor.name).replace(/_/g, '-');
 
-
 const connectionMap = {};
 const dataStore = {};
 let listenerId = 0;
@@ -10,6 +9,7 @@ let listenerId = 0;
 export const observe = (eventName, item) => dataStore[eventName] = clone(item);
 
 export const updateState = (eventName, item) => {
+  dataStore[eventName] = dataStore[eventName] || {};
   dataStore[eventName] = Object.assign(dataStore[eventName], item);
   broadcast(eventName, dataStore[eventName]);
 }

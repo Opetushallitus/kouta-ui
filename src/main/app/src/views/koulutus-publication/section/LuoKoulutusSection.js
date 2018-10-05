@@ -1,8 +1,6 @@
 import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
 import {SelectorButton} from '../../../components/SelectorButton';
-import {inject, observer} from 'mobx-react';
-import {getAppStore} from '../../../stores/AppStore';
 
 export class LuoKoulutusSection extends AbstractSection {
 

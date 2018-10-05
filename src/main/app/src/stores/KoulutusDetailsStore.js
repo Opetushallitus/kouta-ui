@@ -1,50 +1,31 @@
-import {observable, action} from 'mobx';
 import {AlakoodiList} from '../model/Alakoodi';
 import axios from 'axios';
+import {updateState} from '../utils/utils';
+import {getLanguage} from '../config/configuration';
+import {APP_STATE_KOULUTUS_DETAILS} from '../config/constants';
 
-class KoulutusDetailsStore {
+export const loadKoulutusDetails = (koulutuskoodi) => {
+  const koodiUri = koulutuskoodi.getKoodiUri();
+  const versio = koulutuskoodi.getVersio();
+  updateState(APP_STATE_KOULUTUS_DETAILS, {
+    active: false,
+    koodiUri: koodiUri,
+    versio: versio,
+    nimi: koulutuskoodi.getNimi()
+  });
 
-  language = 'FI';
-
-  @observable active = false;
-
-  osaamisalaList = null;
-  koulutusala = null;
-  opintojenLaajuus = null;
-  opintojenLaajuusyksikko = null;
-  nimi = null;
-  koodiUri = null;
-  versio = null;
-
-  configure = (koulutuskoodi) => {
-    this.setActive(false);
-    this.koodiUri = koulutuskoodi.getKoodiUri();
-    this.versio = koulutuskoodi.getVersio();
-    this.nimi = koulutuskoodi.getNimi();
-    axios.get(`https://virkailija.testiopintopolku.fi/koodisto-service/rest/json/relaatio/sisaltyy-alakoodit/${this.koodiUri}?koodiVersio=${this.versio}`)
-    .then((response) => this.setData(response.data));
-  }
-
-  @action
-  setActive = (active) => this.active = active;
-
-  @action
-  setData = (alakoodiJsonArray) => {
-    const alakoodiList = AlakoodiList.createFromJsonArray(alakoodiJsonArray);
-    this.osaamisalaList = AlakoodiList.findOsaamisalaList(alakoodiList, this.language);
-    this.koulutusala = AlakoodiList.findKoulutusala(alakoodiList, this.language);
-    this.opintojenLaajuus = AlakoodiList.findOpintojenLaajuus(alakoodiList, this.language);
-    this.opintojenLaajuusyksikko = AlakoodiList.findOpintojenLaajuusyksikko(alakoodiList, this.language);
-    this.active = true;
-  }
-
+  axios.get(`https://virkailija.testiopintopolku.fi/koodisto-service/rest/json/relaatio/sisaltyy-alakoodit/${koodiUri}?koodiVersio=${versio}`)
+  .then((response) => setData(response.data));
 }
 
-let koulutusDetailsStore;
-
-export const getKoulutusDetailsStore = () => {
-  if (!koulutusDetailsStore) {
-    koulutusDetailsStore = new KoulutusDetailsStore();
-  }
-  return koulutusDetailsStore;
-};
+const setData = (alakoodiJsonArray) => {
+  const alakoodiList = AlakoodiList.createFromJsonArray(alakoodiJsonArray);
+  const language = getLanguage();
+  updateState(APP_STATE_KOULUTUS_DETAILS, {
+    osaamisalaList: AlakoodiList.findOsaamisalaList(alakoodiList, language),
+    koulutusala: AlakoodiList.findKoulutusala(alakoodiList, language),
+    opintojenLaajuus: AlakoodiList.findOpintojenLaajuus(alakoodiList, language),
+    opintojenLaajuusyksikko: AlakoodiList.findOpintojenLaajuusyksikko(alakoodiList, language),
+    active: true
+  });
+}

@@ -10,7 +10,7 @@ import {getAppStore} from './stores/AppStore';
 import {getKoulutusDetailsStore} from './stores/KoulutusDetailsStore';
 
 ReactDOM.render((
-    <Provider urlStore={getUrlStore()} appStore={getAppStore()} koulutusDetailsStore={getKoulutusDetailsStore()} >
+    <Provider urlStore={getUrlStore()} appStore={getAppStore()} >
         <BrowserRouter basename={'/kouta'}>
             <Main/>
         </BrowserRouter>

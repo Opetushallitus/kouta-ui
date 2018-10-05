@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-
-import {getCssClassName} from '../utils/utils';
-import {getAppStore} from '../stores/AppStore';
+import {connect, getCssClassName} from '../utils/utils';
+import {getAppStore, setSectionDone, setSectionExpansion} from '../stores/AppStore';
+import {APP_STATE_SECTION_EXPANSION_MAP} from '../config/constants';
 
 const classNames = require('classnames');
-
 
 export class AbstractSection extends Component {
 
@@ -12,6 +11,13 @@ export class AbstractSection extends Component {
     super(props);
     this.state = {};
   }
+
+  componentDidMount = () => connect(APP_STATE_SECTION_EXPANSION_MAP, this, (expansionMap) => this.setState({
+    expanded: expansionMap[this.constructor.name] === true,
+    active: expansionMap.activeSection === this.constructor.name
+  }))
+
+  getAppStore = () => getAppStore();
 
   getSectionCssClass = () => this.isExpanded() ? "expanded-section" : "collapsed-section";
 
@@ -25,24 +31,20 @@ export class AbstractSection extends Component {
     return null;
   }
 
-  isActive = () => getAppStore().activeSection === this.constructor.name;
+  isActive = () => this.state.active;
 
-  isExpanded = () => this.state.expanded || this.isActive();
+  isExpanded = () => this.state.expanded;
 
   optionallyRenderContent = () => this.isExpanded() ? this.renderContent() : null;
 
   getControlIcon = () => this.isExpanded() ? "expand_more" : "expand_less";
 
-  notifyStoreOnExpansion = () => {
-    if (!this.isExpanded()) {
-      return;
-    }
-    getAppStore().setActiveSection(this.constructor.name);
+  toggleState = () => {
+    const newState = !this.isExpanded();
+    setSectionExpansion(this.constructor.name, newState);
   }
 
-  toggleState = () => this.setState({expanded: !this.isExpanded()}, () => this.notifyStoreOnExpansion());
-
-  setSectionDone = () => getAppStore().setSectionDone(this.constructor.name);
+  setSectionDone = () => setSectionDone(this.constructor.name);
 
   renderHeader = () => (
     <div className={classNames("header", this.getHeaderCssClass())}>
@@ -53,12 +55,10 @@ export class AbstractSection extends Component {
     </div>
   )
 
-  render() {
-    return (
-        <div className={classNames('section', getCssClassName(this), this.getSectionCssClass())}>
-          {this.renderHeader()}
-          {this.optionallyRenderContent()}
-        </div>
-    )
-  }
+  render = () => (
+    <div className={classNames('section', getCssClassName(this), this.getSectionCssClass())}>
+      {this.renderHeader()}
+      {this.optionallyRenderContent()}
+    </div>
+  )
 }

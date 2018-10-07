@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect, getCssClassName} from '../utils/utils';
-import {APP_STATE_KOULUTUS_DETAILS} from '../config/constants';
+import {APP_STATE_KOULUTUS_DETAILS} from '../config/states';
 
 export class KoulutusDetails extends Component {
 

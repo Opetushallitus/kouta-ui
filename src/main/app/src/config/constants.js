@@ -1,4 +1,14 @@
-export const APP_STATE_SECTION_EXPANSION_MAP = 'APP_STATE_SECTION EXPANSION_MAP';
-export const APP_STATE_KOULUTUS_DETAILS = 'APP_STATE_KOULUTUS_DETAILS';
+export const ENV_MOCK = 'ENV_MOCK';
+export const ENV_DEV = 'ENV_DEV';
+export const LANGUAGE = 'FI';
+
+export const SERVICE_DOMAINS =  {
+  [ENV_DEV]: 'https://virkailija.testiopintopolku.fi',
+  [ENV_MOCK]: 'http://localhost:3001'
+};
+
+
+
+
 
 

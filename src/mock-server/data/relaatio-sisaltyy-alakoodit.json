@@ -1,0 +1,3210 @@
+[
+  {
+    "koodiUri": "osaamisala_1787",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/osaamisala_1787",
+    "version": 8,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamisala",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        3
+      ]
+    },
+    "koodiArvo": "1787",
+    "paivitysPvm": 1516703244736,
+    "voimassaAlkuPvm": "2017-11-17",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Ikääntyvien hoidon ja kuntoutumisen osaamisala",
+        "kuvaus": "Ikääntyvien hoidon ja kuntoutumisen osaamisala",
+        "lyhytNimi": "Ikääntyvien hoidon ja kuntoutumisen osaamisala",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Kompetensområdet för vård och rehabilitering av äldre",
+        "kuvaus": "Kompetensområdet för vård och rehabilitering av äldre",
+        "lyhytNimi": "Kompetensområdet för vård och rehabilitering av äldre",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "osaamisala_1511",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/osaamisala_1511",
+    "version": 18,
+    "versio": 3,
+    "koodisto": {
+      "koodistoUri": "osaamisala",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        3
+      ]
+    },
+    "koodiArvo": "1511",
+    "paivitysPvm": 1516703287637,
+    "voimassaAlkuPvm": "2014-01-01",
+    "voimassaLoppuPvm": "2017-11-30",
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Sairaanhoidon ja huolenpidon osaamisala",
+        "kuvaus": "Sairaanhoidon ja huolenpidon osaamisala",
+        "lyhytNimi": "Sairaanhoidon ja huolenpidon osaamisala",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Kompetensområdet för sjukvård och omsorg",
+        "kuvaus": "Kompetensområdet för sjukvård och omsorg",
+        "lyhytNimi": "Kompetensområdet för sjukvård och omsorg",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "osaamisala_1598",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/osaamisala_1598",
+    "version": 19,
+    "versio": 3,
+    "koodisto": {
+      "koodistoUri": "osaamisala",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        3
+      ]
+    },
+    "koodiArvo": "1598",
+    "paivitysPvm": 1516703287637,
+    "voimassaAlkuPvm": "2014-01-01",
+    "voimassaLoppuPvm": "2018-07-31",
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Kompetensområdet för rehabilitering",
+        "kuvaus": "Kompetensområdet för rehabilitering",
+        "lyhytNimi": "Kompetensområdet för rehabilitering",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Kuntoutuksen osaamisala",
+        "kuvaus": "Kuntoutuksen osaamisala",
+        "lyhytNimi": "Kuntoutuksen osaamisala",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "koulutusohjelmaamm_1514",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/koulutusohjelmaamm_1514",
+    "version": 18,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "koulutusohjelmaamm",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "1514",
+    "paivitysPvm": 1516703287637,
+    "voimassaAlkuPvm": "1999-08-01",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Utbildningsprogrammet för äldreomsorg, närvårdare",
+        "kuvaus": "Utbildningsprogrammet för äldreomsorg, närvårdare",
+        "lyhytNimi": "äldreomsorg, närvårdare",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Vanhustyön koulutusohjelma, lähihoitaja",
+        "kuvaus": "Vanhustyön koulutusohjelma, lähihoitaja",
+        "lyhytNimi": "Vanhustyö, lähihoitaja",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "osaamisala_1788",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/osaamisala_1788",
+    "version": 6,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamisala",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        3
+      ]
+    },
+    "koodiArvo": "1788",
+    "paivitysPvm": 1516703244736,
+    "voimassaAlkuPvm": "2017-11-17",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Jalkojenhoidon osaamisala",
+        "kuvaus": "Jalkojenhoidon osaamisala",
+        "lyhytNimi": "Jalkojenhoidon osaamisala",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Kompetensområdet för fotvård",
+        "kuvaus": "Kompetensområdet för fotvård",
+        "lyhytNimi": "Kompetensområdet för fotvård",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso3_0913",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/kansallinenkoulutusluokitus2016koulutusalataso3_0913",
+    "version": 64,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso3",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "0913",
+    "paivitysPvm": 1514963993325,
+    "voimassaAlkuPvm": "2016-03-17",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Omvårdnad",
+        "kuvaus": null,
+        "lyhytNimi": null,
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Hoitotyö",
+        "kuvaus": null,
+        "lyhytNimi": null,
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Nursing and midwifery",
+        "kuvaus": null,
+        "lyhytNimi": null,
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "EN"
+      }
+    ]
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusastetaso2_32",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/kansallinenkoulutusluokitus2016koulutusastetaso2_32",
+    "version": 1277,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusastetaso2",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "32",
+    "paivitysPvm": 1528199439273,
+    "voimassaAlkuPvm": "2016-03-17",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Yrkesutbildning",
+        "kuvaus": "",
+        "lyhytNimi": "",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Ammatillinen peruskoulutus",
+        "kuvaus": "",
+        "lyhytNimi": "",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Vocational upper secondary education and training",
+        "kuvaus": "",
+        "lyhytNimi": "",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "EN"
+      }
+    ]
+  },
+  {
+    "koodiUri": "isced2011koulutusalataso1_09",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/isced2011koulutusalataso1_09",
+    "version": 700,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "isced2011koulutusalataso1",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "09",
+    "paivitysPvm": 1514964030042,
+    "voimassaAlkuPvm": "2016-03-17",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Health and welfare",
+        "kuvaus": null,
+        "lyhytNimi": null,
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Hälsovård och välfärd",
+        "kuvaus": null,
+        "lyhytNimi": null,
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Terveys- ja hyvinvointialat",
+        "kuvaus": null,
+        "lyhytNimi": null,
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "opintoalaoph1995_44",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/opintoalaoph1995_44",
+    "version": 964,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "opintoalaoph1995",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "44",
+    "paivitysPvm": 1514963993223,
+    "voimassaAlkuPvm": "1993-01-01",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Sosiaali- ja terveysala",
+        "kuvaus": "Sosiaali- ja terveysala",
+        "lyhytNimi": "Sosiaali- ja terveysala",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Social- och hälsovårdsbranschen",
+        "kuvaus": "Social- och hälsovårdsbranschen",
+        "lyhytNimi": "Social- och hälsovårdsbranschen",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "osaamisala_1791",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/osaamisala_1791",
+    "version": 9,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamisala",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        3
+      ]
+    },
+    "koodiArvo": "1791",
+    "paivitysPvm": 1516703313713,
+    "voimassaAlkuPvm": "2017-11-17",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Perustason ensihoidon osaamisala",
+        "kuvaus": "Perustason ensihoidon osaamisala",
+        "lyhytNimi": "Perustason ensihoidon osaamisala",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Kompetensområdet för akutvård på grundnivå",
+        "kuvaus": "Kompetensområdet för akutvård på grundnivå",
+        "lyhytNimi": "Kompetensområdet för akutvård på grundnivå",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "koulutustyyppi_13",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/koulutustyyppi_13",
+    "version": 401,
+    "versio": 2,
+    "koodisto": {
+      "koodistoUri": "koulutustyyppi",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        2
+      ]
+    },
+    "koodiArvo": "13",
+    "paivitysPvm": 1537794776429,
+    "voimassaAlkuPvm": "2014-04-01",
+    "voimassaLoppuPvm": "2018-09-24",
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Ammatillinen perustutkinto näyttötutkintona",
+        "kuvaus": "",
+        "lyhytNimi": "Ammatillinen perustutkinto näyttötutkintona",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Yrkesinriktad grundexamen som fristående examen",
+        "kuvaus": "",
+        "lyhytNimi": "Yrkesinriktad grundexamen som fristående examen",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Ammatillinen perustutkinto näyttötutkintona",
+        "kuvaus": "ammatillinen perustutkinto näyttötutkintona",
+        "lyhytNimi": "ammatillinen perustutkinto näyttötutkintona",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "osaamisala_1792",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/osaamisala_1792",
+    "version": 6,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamisala",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        3
+      ]
+    },
+    "koodiArvo": "1792",
+    "paivitysPvm": 1516703244736,
+    "voimassaAlkuPvm": "2017-11-17",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Sairaanhoidon ja huolenpidon osaamisala",
+        "kuvaus": "Sairaanhoidon ja huolenpidon osaamisala",
+        "lyhytNimi": "Sairaanhoidon ja huolenpidon osaamisala",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Kompetensområdet för sjukvård och omsorg",
+        "kuvaus": "Kompetensområdet för sjukvård och omsorg",
+        "lyhytNimi": "Kompetensområdet för sjukvård och omsorg",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "osaamisala_1789",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/osaamisala_1789",
+    "version": 17,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamisala",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        3
+      ]
+    },
+    "koodiArvo": "1789",
+    "paivitysPvm": 1528192778139,
+    "voimassaAlkuPvm": "2018-01-09",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Lasten ja nuorten kasvatuksen ja hoidon osaamisala",
+        "kuvaus": "Lasten ja nuorten kasvatuksen ja hoidon osaamisala",
+        "lyhytNimi": "Lasten ja nuorten kasvatuksen ja hoidon osaamisala",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Kompetensområdet för pedagogisk verksamhet och vård av barn och unga",
+        "kuvaus": "Kompetensområdet för pedagogisk verksamhet och vård av barn och unga",
+        "lyhytNimi": "Kompetensområdet för pedagogisk verksamhet och vård av barn och unga",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "osaamisala_1790",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/osaamisala_1790",
+    "version": 6,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamisala",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        3
+      ]
+    },
+    "koodiArvo": "1790",
+    "paivitysPvm": 1516703244736,
+    "voimassaAlkuPvm": "2017-11-17",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Kompetensområdet för mentalhälsoarbete och missbrukarvård",
+        "kuvaus": "Kompetensområdet för mentalhälsoarbete och missbrukarvård",
+        "lyhytNimi": "Kompetensområdet för mentalhälsoarbete och missbrukarvård",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Mielenterveys- ja päihdetyön osaamisala",
+        "kuvaus": "Mielenterveys- ja päihdetyön osaamisala",
+        "lyhytNimi": "Mielenterveys- ja päihdetyön osaamisala",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "koulutustyyppi_4",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/koulutustyyppi_4",
+    "version": 412,
+    "versio": 2,
+    "koodisto": {
+      "koodistoUri": "koulutustyyppi",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        2
+      ]
+    },
+    "koodiArvo": "4",
+    "paivitysPvm": 1514963993247,
+    "voimassaAlkuPvm": "2013-10-28",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Ammatillinen perustutkinto erityisopetuksena",
+        "kuvaus": "Ammatillinen perustutkinto erityisopetuksena",
+        "lyhytNimi": "Ammatillinen perustutkinto erityisopetuksena",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Yrkesinriktad grundexamen som ordnas som specialundervisning",
+        "kuvaus": "Yrkesinriktad grundexamen som ordnas som specialundervisning",
+        "lyhytNimi": "Yrkesinriktad grundexamen som ordnas som specialundervisning",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_091",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/kansallinenkoulutusluokitus2016koulutusalataso2_091",
+    "version": 307,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso2",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "091",
+    "paivitysPvm": 1514964027218,
+    "voimassaAlkuPvm": "2016-03-17",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Terveys",
+        "kuvaus": "",
+        "lyhytNimi": "",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Health",
+        "kuvaus": "",
+        "lyhytNimi": "",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Hälsovård",
+        "kuvaus": "",
+        "lyhytNimi": "",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "tutkintotyyppi_02",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/tutkintotyyppi_02",
+    "version": 887,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "tutkintotyyppi",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "02",
+    "paivitysPvm": 1528873615616,
+    "voimassaAlkuPvm": "1990-01-01",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Ammatilliset perustutkinnot",
+        "kuvaus": "Ammatilliset perustutkinnot",
+        "lyhytNimi": "Ammatilliset perustutkinnot",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Yrkesinriktade grundexamina",
+        "kuvaus": "Yrkesinriktade grundexamina",
+        "lyhytNimi": "Yrkesinriktade grundexamina",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "osaamisala_1509",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/osaamisala_1509",
+    "version": 19,
+    "versio": 3,
+    "koodisto": {
+      "koodistoUri": "osaamisala",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        3
+      ]
+    },
+    "koodiArvo": "1509",
+    "paivitysPvm": 1516703287637,
+    "voimassaAlkuPvm": "2014-01-01",
+    "voimassaLoppuPvm": "2018-07-31",
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Lasten ja nuorten hoidon ja kasvatuksen osaamisala",
+        "kuvaus": "Lasten ja nuorten hoidon ja kasvatuksen osaamisala",
+        "lyhytNimi": "Lasten ja nuorten hoidon ja kasvatuksen osaamisala",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Kompetensområdet för vård och fostran av barn och unga",
+        "kuvaus": "Kompetensområdet för vård och fostran av barn och unga",
+        "lyhytNimi": "Kompetensområdet för vård och fostran av barn och unga",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "koulutustyyppi_1",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/koulutustyyppi_1",
+    "version": 415,
+    "versio": 2,
+    "koodisto": {
+      "koodistoUri": "koulutustyyppi",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        2
+      ]
+    },
+    "koodiArvo": "1",
+    "paivitysPvm": 1537794643862,
+    "voimassaAlkuPvm": "2013-10-28",
+    "voimassaLoppuPvm": "2018-09-24",
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Yrkesinriktad grundexamen",
+        "kuvaus": "Yrkesinriktad grundexamen",
+        "lyhytNimi": "Yrkesinriktad grundexamen",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Ammatillinen perustutkinto",
+        "kuvaus": "Ammatillinen perustutkinto",
+        "lyhytNimi": "Ammatillinen perustutkinto",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "koulutusalaoph2002_7",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/koulutusalaoph2002_7",
+    "version": 1528,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "koulutusalaoph2002",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "7",
+    "paivitysPvm": 1514964029914,
+    "voimassaAlkuPvm": "1995-01-01",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Social services, Health and Sports",
+        "kuvaus": "Social services, Health and Sports",
+        "lyhytNimi": "Social services, Health and Sports",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Sosiaali-, terveys- ja liikunta-ala",
+        "kuvaus": "Sosiaali-, terveys- ja liikunta-ala",
+        "lyhytNimi": "Sosiaali-, terveys- ja liikunta-ala",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Social-, hälso- och idrottsområdet",
+        "kuvaus": "Social-, hälso- och idrottsområdet",
+        "lyhytNimi": "Social-, hälso- och idrottsområdet",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "osaamisala_1793",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/osaamisala_1793",
+    "version": 7,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamisala",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        3
+      ]
+    },
+    "koodiArvo": "1793",
+    "paivitysPvm": 1516703244736,
+    "voimassaAlkuPvm": "2017-11-17",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Kompetensområdet för munhälsovård",
+        "kuvaus": "Kompetensområdet för munhälsovård",
+        "lyhytNimi": "Kompetensområdet för munhälsovård",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Suunhoidon osaamisala",
+        "kuvaus": "Suunhoidon osaamisala",
+        "lyhytNimi": "Suunhoidon osaamisala",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "koulutusohjelmaamm_1511",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/koulutusohjelmaamm_1511",
+    "version": 18,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "koulutusohjelmaamm",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "1511",
+    "paivitysPvm": 1516703287637,
+    "voimassaAlkuPvm": "1999-08-01",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Sairaanhoidon ja huolenpidon koulutusohjelma, lähihoitaja",
+        "kuvaus": "Sairaanhoidon ja huolenpidon koulutusohjelma, lähihoitaja",
+        "lyhytNimi": "Sairaanhoito ja huolenpito, lähihoitaja",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Utbildningsprogrammet för sjukvård och omsorg, närvårdare",
+        "kuvaus": "Utbildningsprogrammet för sjukvård och omsorg, närvårdare",
+        "lyhytNimi": "sjukvård och omsorg, närvårdare",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "osaamisala_1794",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/osaamisala_1794",
+    "version": 6,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "osaamisala",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        3
+      ]
+    },
+    "koodiArvo": "1794",
+    "paivitysPvm": 1516703244736,
+    "voimassaAlkuPvm": "2017-11-17",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Kompetensområdet för arbete med personer med funktionsnedsättning",
+        "kuvaus": "Kompetensområdet för arbete med personer med funktionsnedsättning",
+        "lyhytNimi": "Kompetensområdet för arbete med personer med funktionsnedsättning",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Vammaistyön osaamisala",
+        "kuvaus": "Vammaistyön osaamisala",
+        "lyhytNimi": "Vammaistyön osaamisala",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "osaamisala_1655",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/osaamisala_1655",
+    "version": 18,
+    "versio": 3,
+    "koodisto": {
+      "koodistoUri": "osaamisala",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        3
+      ]
+    },
+    "koodiArvo": "1655",
+    "paivitysPvm": 1516703287637,
+    "voimassaAlkuPvm": "2014-01-01",
+    "voimassaLoppuPvm": "2017-11-30",
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Kompetensområdet för fotvård",
+        "kuvaus": "Kompetensområdet för fotvård",
+        "lyhytNimi": "Kompetensområdet för fotvård",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Jalkojenhoidon osaamisala",
+        "kuvaus": "Jalkojenhoidon osaamisala",
+        "lyhytNimi": "Jalkojenhoidon osaamisala",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "isced2011koulutusalataso2_091",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/isced2011koulutusalataso2_091",
+    "version": 412,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "isced2011koulutusalataso2",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "091",
+    "paivitysPvm": 1514964027220,
+    "voimassaAlkuPvm": "2016-03-17",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Terveys",
+        "kuvaus": null,
+        "lyhytNimi": null,
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Hälsovård",
+        "kuvaus": null,
+        "lyhytNimi": null,
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Health",
+        "kuvaus": null,
+        "lyhytNimi": null,
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "EN"
+      }
+    ]
+  },
+  {
+    "koodiUri": "aikuhakukohteet_4317",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/aikuhakukohteet_4317",
+    "version": 8,
+    "versio": 4,
+    "koodisto": {
+      "koodistoUri": "aikuhakukohteet",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        4
+      ]
+    },
+    "koodiArvo": "4317",
+    "paivitysPvm": 1536734627092,
+    "voimassaAlkuPvm": "2014-08-29",
+    "voimassaLoppuPvm": null,
+    "tila": "HYVAKSYTTY",
+    "metadata": [
+      {
+        "nimi": "Sosiaali- ja terveysalan perustutkinto",
+        "kuvaus": "Sosiaali- ja terveysalan perustutkinto",
+        "lyhytNimi": "Sosiaali- ja terveysalan perustutkinto",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Grundexamen inom social- och hälsovårdsbranschen",
+        "kuvaus": "Grundexamen inom social- och hälsovårdsbranschen",
+        "lyhytNimi": "Grundexamen inom social- och hälsovårdsbranschen",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "koulutusasteoph2002_32",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/koulutusasteoph2002_32",
+    "version": 7868,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "koulutusasteoph2002",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "32",
+    "paivitysPvm": 1514964035196,
+    "voimassaAlkuPvm": "1995-01-01",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Yrkesutbildning",
+        "kuvaus": "Yrkesutbildning",
+        "lyhytNimi": "Yrkesutbildning",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Ammatillinen koulutus",
+        "kuvaus": "Ammatillinen koulutus",
+        "lyhytNimi": "Ammatillinen koulutus",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Vocational education and training",
+        "kuvaus": "Vocational education and training",
+        "lyhytNimi": "Vocational education and training",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "EN"
+      }
+    ]
+  },
+  {
+    "koodiUri": "isced2011koulutusastetaso1_3",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/isced2011koulutusastetaso1_3",
+    "version": 2837,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "isced2011koulutusastetaso1",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "3",
+    "paivitysPvm": 1514964035246,
+    "voimassaAlkuPvm": "2016-03-17",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Upper secondary education",
+        "kuvaus": null,
+        "lyhytNimi": null,
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Andra stadiet",
+        "kuvaus": null,
+        "lyhytNimi": null,
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Toinen aste",
+        "kuvaus": null,
+        "lyhytNimi": null,
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "isced2011koulutusaste_25",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/isced2011koulutusaste_25",
+    "version": 2775,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "isced2011koulutusaste",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "25",
+    "paivitysPvm": 1514964035249,
+    "voimassaAlkuPvm": "2016-05-01",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Lower secondary education, vocational education",
+        "kuvaus": null,
+        "lyhytNimi": null,
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Lower secondary education, vocational education",
+        "kuvaus": "Ploteuksessa tähän kuuluu myös ylempi toinen aste (upper secondary)",
+        "lyhytNimi": null,
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "opintojenlaajuus_180",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuus_180",
+    "version": 1645,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "opintojenlaajuus",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "180",
+    "paivitysPvm": 1514964039678,
+    "voimassaAlkuPvm": "2013-04-10",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "180",
+        "kuvaus": "",
+        "lyhytNimi": "",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "EN"
+      },
+      {
+        "nimi": "180",
+        "kuvaus": "180",
+        "lyhytNimi": "180",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "180",
+        "kuvaus": "",
+        "lyhytNimi": "",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "tutkintoonjohtavakoulutus_1",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/tutkintoonjohtavakoulutus_1",
+    "version": 11633,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "tutkintoonjohtavakoulutus",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "1",
+    "paivitysPvm": 1514964039640,
+    "voimassaAlkuPvm": "2016-04-01",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "on tutkinto",
+        "kuvaus": "Koulutus johtaa tutkintoon",
+        "lyhytNimi": null,
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "isced2011koulutusastetaso2_35",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/isced2011koulutusastetaso2_35",
+    "version": 2772,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "isced2011koulutusastetaso2",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "35",
+    "paivitysPvm": 1514964035240,
+    "voimassaAlkuPvm": "2016-03-01",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Upper secondary education, Vocational",
+        "kuvaus": null,
+        "lyhytNimi": null,
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "EN"
+      }
+    ]
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusastetaso1_3",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/kansallinenkoulutusluokitus2016koulutusastetaso1_3",
+    "version": 2135,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusastetaso1",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "3",
+    "paivitysPvm": 1514964035247,
+    "voimassaAlkuPvm": "2016-03-17",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Andra stadiet",
+        "kuvaus": "",
+        "lyhytNimi": "",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Toinen aste",
+        "kuvaus": "",
+        "lyhytNimi": "",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Upper secondary education",
+        "kuvaus": "",
+        "lyhytNimi": "",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "EN"
+      }
+    ]
+  },
+  {
+    "koodiUri": "osaamisala_1513",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/osaamisala_1513",
+    "version": 18,
+    "versio": 3,
+    "koodisto": {
+      "koodistoUri": "osaamisala",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        3
+      ]
+    },
+    "koodiArvo": "1513",
+    "paivitysPvm": 1516703287637,
+    "voimassaAlkuPvm": "2014-01-01",
+    "voimassaLoppuPvm": "2017-11-30",
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Vammaistyön osaamisala",
+        "kuvaus": "Vammaistyön osaamisala",
+        "lyhytNimi": "Vammaistyön osaamisala",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Kompetensområdet för handikappomsorg",
+        "kuvaus": "Kompetensområdet för handikappomsorg",
+        "lyhytNimi": "Kompetensområdet för handikappomsorg",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "koulutusohjelmaamm_1509",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/koulutusohjelmaamm_1509",
+    "version": 18,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "koulutusohjelmaamm",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "1509",
+    "paivitysPvm": 1516703287637,
+    "voimassaAlkuPvm": "1999-08-01",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Utbildningsprogrammet för vård och fostran av barn och unga, närvårdare",
+        "kuvaus": "Utbildningsprogrammet för vård och fostran av barn och unga, närvårdare",
+        "lyhytNimi": "vård och fostran av barn och unga, närvårdare",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Lasten ja nuorten hoidon ja kasvatuksen koulutusohjelma, lähihoitaja",
+        "kuvaus": "Lasten ja nuorten hoidon ja kasvatuksen koulutusohjelma, lähihoitaja",
+        "lyhytNimi": "Lasten ja nuorten hoito ja kasvatus, lähihoitaja",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "koulutusasteoph1995_1",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/koulutusasteoph1995_1",
+    "version": 7507,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "koulutusasteoph1995",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "1",
+    "paivitysPvm": 1514964035196,
+    "voimassaAlkuPvm": "1992-01-01",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Toinen aste",
+        "kuvaus": "Toinen aste",
+        "lyhytNimi": "Toinen aste",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Utbildning på andra stadiet",
+        "kuvaus": "Utbildning på andra stadiet",
+        "lyhytNimi": "Andra stadiet",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "osaamisala_1656",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/osaamisala_1656",
+    "version": 22,
+    "versio": 2,
+    "koodisto": {
+      "koodistoUri": "osaamisala",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        3
+      ]
+    },
+    "koodiArvo": "1656",
+    "paivitysPvm": 1516703287633,
+    "voimassaAlkuPvm": "2015-09-28",
+    "voimassaLoppuPvm": "2017-11-30",
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Kompetensområdet för förstavård på basnivå (försök)",
+        "kuvaus": "",
+        "lyhytNimi": "Kompetensområdet för förstavård på basnivå (försök)",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Perustason ensihoidon osaamisala (kokeilu)",
+        "kuvaus": "",
+        "lyhytNimi": "Perustason ensihoidon osaamisala (kokeilu)",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "eqf_4",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/eqf_4",
+    "version": 455,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "eqf",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "4",
+    "paivitysPvm": 1514963993247,
+    "voimassaAlkuPvm": "2013-04-02",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Level 4",
+        "kuvaus": "Level 4",
+        "lyhytNimi": "Level 4",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Taso 4",
+        "kuvaus": "Taso 4",
+        "lyhytNimi": "Taso 4",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Nivå 4",
+        "kuvaus": "Nivå 4",
+        "lyhytNimi": "Nivå 4",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "koulutusohjelmaamm_1513",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/koulutusohjelmaamm_1513",
+    "version": 18,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "koulutusohjelmaamm",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "1513",
+    "paivitysPvm": 1516703287637,
+    "voimassaAlkuPvm": "1999-08-01",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Vammaistyön koulutusohjelma, lähihoitaja",
+        "kuvaus": "Vammaistyön koulutusohjelma, lähihoitaja",
+        "lyhytNimi": "Vammaistyö, lähihoitaja",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Utbildningsprogrammet för handikappomsorg, närvårdare",
+        "kuvaus": "Utbildningsprogrammet för handikappomsorg, närvårdare",
+        "lyhytNimi": "handikappomsorg, närvårdare",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "okmohjauksenala_11",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/okmohjauksenala_11",
+    "version": 463,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "okmohjauksenala",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "11",
+    "paivitysPvm": 1523518239393,
+    "voimassaAlkuPvm": "2016-01-01",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Health and welfare",
+        "kuvaus": "",
+        "lyhytNimi": "",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Hälsovård och välfärd",
+        "kuvaus": "",
+        "lyhytNimi": "",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Terveys- ja hyvinvointialat",
+        "kuvaus": "",
+        "lyhytNimi": "",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "hakukohteet_900",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/hakukohteet_900",
+    "version": 0,
+    "versio": 5,
+    "koodisto": {
+      "koodistoUri": "hakukohteet",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        5
+      ]
+    },
+    "koodiArvo": "900",
+    "paivitysPvm": 1533796648600,
+    "voimassaAlkuPvm": "1990-01-01",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Grundexamen inom social- och hälsovårdsbranschen, st",
+        "kuvaus": "Grundexamen inom social- och hälsovårdsbranschen, st",
+        "lyhytNimi": "Grex inom social- och hälsovårdsbr, st",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Sosiaali- ja terveysalan perustutkinto, yo",
+        "kuvaus": "Sosiaali- ja terveysalan perustutkinto, yo",
+        "lyhytNimi": "Sosiaali- ja terveysalan pt, yo",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "opintojenlaajuusyksikko_6",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/opintojenlaajuusyksikko_6",
+    "version": 459,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "opintojenlaajuusyksikko",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "6",
+    "paivitysPvm": 1514963993247,
+    "voimassaAlkuPvm": "2014-11-27",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "kompetenspoäng",
+        "kuvaus": "kompetenspoäng",
+        "lyhytNimi": "kp",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "osaamispistettä",
+        "kuvaus": "osaamispistettä",
+        "lyhytNimi": "osp",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "ECVET competence points",
+        "kuvaus": "competence points",
+        "lyhytNimi": "competence points",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "EN"
+      }
+    ]
+  },
+  {
+    "koodiUri": "nqf_4",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/nqf_4",
+    "version": 1382,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "nqf",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "4",
+    "paivitysPvm": 1514964035241,
+    "voimassaAlkuPvm": "2017-07-18",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Nivå 4",
+        "kuvaus": null,
+        "lyhytNimi": null,
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Level 4",
+        "kuvaus": "General upper secondary syllabus, Matriculation examination, Vocational upper secondary, qualifications, Further vocational qualifications,\nBasic Examination in Prison Services,\nFire Fighter Qualification,\nEmergency Response Centre Operator Qualification",
+        "lyhytNimi": null,
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Taso 4",
+        "kuvaus": "ylioppilastutkinto ja lukion oppimäärä, ammatilliset perustutkinnot ja ammattitutkinnot sekä rikosseuraamusalan tutkinto, pelastajatutkinto ja hätäkeskuspäivystäjätutkinto",
+        "lyhytNimi": "Taso 4",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "koulutusohjelmaamm_1515",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/koulutusohjelmaamm_1515",
+    "version": 18,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "koulutusohjelmaamm",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "1515",
+    "paivitysPvm": 1516703287637,
+    "voimassaAlkuPvm": "1999-08-01",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Asiakaspalvelun ja tietohallinnan koulutusohjelma, lähihoitaja",
+        "kuvaus": "Asiakaspalvelun ja tietohallinnan koulutusohjelma, lähihoitaja",
+        "lyhytNimi": "Asiakaspalvelu ja tietohallinta, lähihoitaja",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Utbildningsprogrammet för kundbetjäning och informationshantering, närvårdare",
+        "kuvaus": "Utbildningsprogrammet för kundbetjäning och informationshantering, närvårdare",
+        "lyhytNimi": "kundbetjäning och informationshantering, närvårdare",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "koulutustyyppi_26",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/koulutustyyppi_26",
+    "version": 115,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "koulutustyyppi",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        2
+      ]
+    },
+    "koodiArvo": "26",
+    "paivitysPvm": 1516104838902,
+    "voimassaAlkuPvm": "2017-08-07",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Ammatillinen perustutkinto (reformin mukainen)",
+        "kuvaus": "",
+        "lyhytNimi": "",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Yrkesinriktad grundexamen (enligt reformen)",
+        "kuvaus": "",
+        "lyhytNimi": "",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "isced2011koulutusastetaso2_32",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/isced2011koulutusastetaso2_32",
+    "version": 1276,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "isced2011koulutusastetaso2",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "32",
+    "paivitysPvm": 1514964024570,
+    "voimassaAlkuPvm": "2016-03-17",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Ammatillinen peruskoulutus",
+        "kuvaus": null,
+        "lyhytNimi": null,
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Vocational upper secondary education and training",
+        "kuvaus": null,
+        "lyhytNimi": null,
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Yrkesutbildning",
+        "kuvaus": null,
+        "lyhytNimi": null,
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "hakukohteet_873",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/hakukohteet_873",
+    "version": 0,
+    "versio": 5,
+    "koodisto": {
+      "koodistoUri": "hakukohteet",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        5
+      ]
+    },
+    "koodiArvo": "873",
+    "paivitysPvm": 1533796647242,
+    "voimassaAlkuPvm": "1990-01-01",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Sosiaali- ja terveysalan perustutkinto, pk",
+        "kuvaus": "Sosiaali- ja terveysalan perustutkinto, pk",
+        "lyhytNimi": "Sosiaali- ja terveysalan pt, pk",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Grundexamen inom social- och hälsovårdsbranschen, gr",
+        "kuvaus": "Grundexamen inom social- och hälsovårdsbranschen, gr",
+        "lyhytNimi": "Grex inom social- och hälsovårdsbr, gr",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "osaamisala_1508",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/osaamisala_1508",
+    "version": 23,
+    "versio": 3,
+    "koodisto": {
+      "koodistoUri": "osaamisala",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        3
+      ]
+    },
+    "koodiArvo": "1508",
+    "paivitysPvm": 1516703333430,
+    "voimassaAlkuPvm": "2014-01-01",
+    "voimassaLoppuPvm": "2018-07-31",
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Kompetensområdet för akutvård",
+        "kuvaus": "Kompetensområdet för akutvård",
+        "lyhytNimi": "Kompetensområdet för akutvård",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Ensihoidon osaamisala",
+        "kuvaus": "Ensihoidon osaamisala",
+        "lyhytNimi": "Ensihoidon osaamisala",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "koulutusohjelmaamm_1598",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/koulutusohjelmaamm_1598",
+    "version": 18,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "koulutusohjelmaamm",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "1598",
+    "paivitysPvm": 1516703287637,
+    "voimassaAlkuPvm": "2001-08-01",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Utbildningsprogrammet för rehabilitering, närvårdare",
+        "kuvaus": "Utbildningsprogrammet för rehabilitering, närvårdare",
+        "lyhytNimi": "rehabilitering, närvårdare",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Kuntoutuksen koulutusohjelma, lähihoitaja",
+        "kuvaus": "Kuntoutuksen koulutusohjelma, lähihoitaja",
+        "lyhytNimi": "Kuntoutus, lähihoitaja",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "opintoalaoph2002_703",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/opintoalaoph2002_703",
+    "version": 144,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "opintoalaoph2002",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "703",
+    "paivitysPvm": 1514963993301,
+    "voimassaAlkuPvm": "1995-01-01",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Sosiaali- ja terveysala (alojen yhteiset ohjelmat)",
+        "kuvaus": "Sosiaali- ja terveysala (alojen yhteiset ohjelmat)",
+        "lyhytNimi": "Sosiaali- ja terveysala (alojen yhteiset ohjelmat)",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Social- och hälsoområdet (gemensamma program)",
+        "kuvaus": "Social- och hälsoområdet (gemensamma program)",
+        "lyhytNimi": "Social- och hälsoområdet (gemensamma program)",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Health care and social services",
+        "kuvaus": "Health care and social services",
+        "lyhytNimi": "Health care and social services",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "EN"
+      }
+    ]
+  },
+  {
+    "koodiUri": "osaamisala_1512",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/osaamisala_1512",
+    "version": 19,
+    "versio": 3,
+    "koodisto": {
+      "koodistoUri": "osaamisala",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        3
+      ]
+    },
+    "koodiArvo": "1512",
+    "paivitysPvm": 1516703287637,
+    "voimassaAlkuPvm": "2014-01-01",
+    "voimassaLoppuPvm": "2018-07-31",
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Kompetensområdet för munhälsovård",
+        "kuvaus": "Kompetensområdet för munhälsovård",
+        "lyhytNimi": "Kompetensområdet för munhälsovård",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Suun terveydenhoidon osaamisala",
+        "kuvaus": "Suun terveydenhoidon osaamisala",
+        "lyhytNimi": "Suun terveydenhoidon osaamisala",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "koulutusohjelmaamm_1655",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/koulutusohjelmaamm_1655",
+    "version": 18,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "koulutusohjelmaamm",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "1655",
+    "paivitysPvm": 1516703287637,
+    "voimassaAlkuPvm": "2012-01-01",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Jalkojenhoidon koulutusohjelma, lähihoitaja",
+        "kuvaus": "Jalkojenhoidon koulutusohjelma, lähihoitaja",
+        "lyhytNimi": "Jalkojenhoito, lähihoitaja",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Utbildningsprogrammet för fotvård, närvårdare",
+        "kuvaus": "Utbildningsprogrammet för fotvård, närvårdare",
+        "lyhytNimi": "fotvård, närvårdare",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "koulutusohjelmaamm_1508",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/koulutusohjelmaamm_1508",
+    "version": 24,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "koulutusohjelmaamm",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "1508",
+    "paivitysPvm": 1516703333430,
+    "voimassaAlkuPvm": "1999-08-01",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Utbildningsprogrammet för akutvård, närvårdare",
+        "kuvaus": "Utbildningsprogrammet för akutvård, närvårdare",
+        "lyhytNimi": "akutvård, närvårdare",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Ensihoidon koulutusohjelma, lähihoitaja",
+        "kuvaus": "Ensihoidon koulutusohjelma, lähihoitaja",
+        "lyhytNimi": "Ensihoito, lähihoitaja",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "kansallinenkoulutusluokitus2016koulutusalataso1_09",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/kansallinenkoulutusluokitus2016koulutusalataso1_09",
+    "version": 498,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "kansallinenkoulutusluokitus2016koulutusalataso1",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "09",
+    "paivitysPvm": 1514964030043,
+    "voimassaAlkuPvm": "2016-03-17",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Hälsovård och välfärd",
+        "kuvaus": "",
+        "lyhytNimi": "",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Health and welfare",
+        "kuvaus": "",
+        "lyhytNimi": "",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Terveys- ja hyvinvointialat",
+        "kuvaus": "",
+        "lyhytNimi": "",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "koulutusasteisced1997_30",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/koulutusasteisced1997_30",
+    "version": 6229,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "koulutusasteisced1997",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "30",
+    "paivitysPvm": 1514964035242,
+    "voimassaAlkuPvm": "1997-01-01",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Upper secondary",
+        "kuvaus": "Upper secondary",
+        "lyhytNimi": "Upper secondary",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Upper secondary",
+        "kuvaus": "Upper secondary",
+        "lyhytNimi": "Upper secondary",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "EN"
+      }
+    ]
+  },
+  {
+    "koodiUri": "ammatillisetopsperustaiset_1",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/ammatillisetopsperustaiset_1",
+    "version": 4089,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "ammatillisetopsperustaiset",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "1",
+    "paivitysPvm": 1514964036658,
+    "voimassaAlkuPvm": "2015-02-28",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "No",
+        "kuvaus": "",
+        "lyhytNimi": "",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Kyllä",
+        "kuvaus": "",
+        "lyhytNimi": "",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Nej",
+        "kuvaus": "",
+        "lyhytNimi": "",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "osaamisala_0104",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/osaamisala_0104",
+    "version": 22,
+    "versio": 3,
+    "koodisto": {
+      "koodistoUri": "osaamisala",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        3
+      ]
+    },
+    "koodiArvo": "0104",
+    "paivitysPvm": 1516703287633,
+    "voimassaAlkuPvm": "2014-12-16",
+    "voimassaLoppuPvm": "2015-10-08",
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Kompetensområdet för förstavård på basnivå (försök)",
+        "kuvaus": "Kompetensområdet för förstavård på basnivå (försök)",
+        "lyhytNimi": "Kompetensområdet för förstavård på basnivå (försök)",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Perustason ensihoidon osaamisala (kokeilu)",
+        "kuvaus": "Perustason ensihoidon osaamisala (kokeilu)",
+        "lyhytNimi": "Perustason ensihoidon osaamisala (kokeilu)",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "koulutusohjelmaamm_1510",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/koulutusohjelmaamm_1510",
+    "version": 18,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "koulutusohjelmaamm",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "1510",
+    "paivitysPvm": 1516703287637,
+    "voimassaAlkuPvm": "1999-08-01",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Utbildningsprogrammet för mentalhälsoarbete och missbrukarvård, närvårdare",
+        "kuvaus": "Utbildningsprogrammet för mentalhälsoarbete och missbrukarvård, närvårdare",
+        "lyhytNimi": "mentalhälsoarbete och missbrukarvård, närvårdare",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Mielenterveys- ja päihdetyön koulutusohjelma, lähihoitaja",
+        "kuvaus": "Mielenterveys- ja päihdetyön koulutusohjelma, lähihoitaja",
+        "lyhytNimi": "Mielenterveys- ja päihdetyö, lähihoitaja",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "tutkintonimikkeet_10008",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/tutkintonimikkeet_10008",
+    "version": 6,
+    "versio": 2,
+    "koodisto": {
+      "koodistoUri": "tutkintonimikkeet",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        2
+      ]
+    },
+    "koodiArvo": "10008",
+    "paivitysPvm": 1514963993425,
+    "voimassaAlkuPvm": "1999-08-01",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Närvårdare",
+        "kuvaus": "Närvårdare",
+        "lyhytNimi": "Närvårdare",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Lähihoitaja",
+        "kuvaus": "Lähihoitaja",
+        "lyhytNimi": "Lähihoitaja",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "osaamisala_1515",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/osaamisala_1515",
+    "version": 19,
+    "versio": 3,
+    "koodisto": {
+      "koodistoUri": "osaamisala",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        3
+      ]
+    },
+    "koodiArvo": "1515",
+    "paivitysPvm": 1516703287637,
+    "voimassaAlkuPvm": "2014-01-01",
+    "voimassaLoppuPvm": "2018-07-31",
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Asiakaspalvelun ja tietohallinnan osaamisala",
+        "kuvaus": "Asiakaspalvelun ja tietohallinnan osaamisala",
+        "lyhytNimi": "Asiakaspalvelun ja tietohallinnan osaamisala",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Kompetensområdet för kundbetjäning och informationshantering",
+        "kuvaus": "Kompetensområdet för kundbetjäning och informationshantering",
+        "lyhytNimi": "Kompetensområdet för kundbetjäning och informationshantering",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "osaamisala_1510",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/osaamisala_1510",
+    "version": 18,
+    "versio": 3,
+    "koodisto": {
+      "koodistoUri": "osaamisala",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        3
+      ]
+    },
+    "koodiArvo": "1510",
+    "paivitysPvm": 1516703287637,
+    "voimassaAlkuPvm": "2014-01-01",
+    "voimassaLoppuPvm": "2017-11-30",
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Kompetensområdet för mentalhälsoarbete och missbrukarvård",
+        "kuvaus": "Kompetensområdet för mentalhälsoarbete och missbrukarvård",
+        "lyhytNimi": "Kompetensområdet för mentalhälsoarbete och missbrukarvård",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Mielenterveys- ja päihdetyön osaamisala",
+        "kuvaus": "Mielenterveys- ja päihdetyön osaamisala",
+        "lyhytNimi": "Mielenterveys- ja päihdetyön osaamisala",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "koulutusohjelmaamm_1512",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/koulutusohjelmaamm_1512",
+    "version": 18,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "koulutusohjelmaamm",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "1512",
+    "paivitysPvm": 1516703287637,
+    "voimassaAlkuPvm": "1999-08-01",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Utbildningsprogrammet för munhälsovård, närvårdare",
+        "kuvaus": "Utbildningsprogrammet för munhälsovård, närvårdare",
+        "lyhytNimi": "munhälsovård, närvårdare",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Suun terveydenhoidon koulutusohjelma, lähihoitaja",
+        "kuvaus": "Suun terveydenhoidon koulutusohjelma, lähihoitaja",
+        "lyhytNimi": "Suun terveydenhoito, lähihoitaja",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "koulutusohjelmaamm_0104",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/koulutusohjelmaamm_0104",
+    "version": 31,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "koulutusohjelmaamm",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "0104",
+    "paivitysPvm": 1516703287633,
+    "voimassaAlkuPvm": "2014-01-01",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Utbildningsprogrammet för förstavård på basnivå (försök)",
+        "kuvaus": "Utbildningsprogrammet för förstavård på basnivå (försök)\nI kraft 2014-2018",
+        "lyhytNimi": "Förstavård på basnivå (försök)",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Perustason ensihoidon koulutusohjelma (kokeilu)",
+        "kuvaus": "Perustason ensihoidon koulutusohjelma (kokeilu)\nVoimassa 2014-2018",
+        "lyhytNimi": "Perustason ensihoito (kokeilu)",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "tutkintonimikkeet_01004",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/tutkintonimikkeet_01004",
+    "version": 4,
+    "versio": 2,
+    "koodisto": {
+      "koodistoUri": "tutkintonimikkeet",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        2
+      ]
+    },
+    "koodiArvo": "01004",
+    "paivitysPvm": 1519734210646,
+    "voimassaAlkuPvm": "2014-11-01",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Perustason ensihoitaja",
+        "kuvaus": "Perustason ensihoitaja",
+        "lyhytNimi": "Perustason ensihoitaja",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Akutvårdare på grundnivå",
+        "kuvaus": "Akutvårdare på grundnivå",
+        "lyhytNimi": "Akutvårdare på grundnivå",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "isced2011koulutusalataso3_0913",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/isced2011koulutusalataso3_0913",
+    "version": 83,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "isced2011koulutusalataso3",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "0913",
+    "paivitysPvm": 1514963993326,
+    "voimassaAlkuPvm": "2016-03-17",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Nursing and midwifery",
+        "kuvaus": null,
+        "lyhytNimi": null,
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "EN"
+      },
+      {
+        "nimi": "Omvårdnad",
+        "kuvaus": null,
+        "lyhytNimi": null,
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Hoitotyö",
+        "kuvaus": null,
+        "lyhytNimi": null,
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "osaamisala_1514",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/osaamisala_1514",
+    "version": 19,
+    "versio": 3,
+    "koodisto": {
+      "koodistoUri": "osaamisala",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        3
+      ]
+    },
+    "koodiArvo": "1514",
+    "paivitysPvm": 1516703287637,
+    "voimassaAlkuPvm": "2014-01-01",
+    "voimassaLoppuPvm": "2018-07-31",
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Vanhustyön osaamisala",
+        "kuvaus": "Vanhustyön osaamisala",
+        "lyhytNimi": "Vanhustyön osaamisala",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Kompetensområdet för äldreomsorg",
+        "kuvaus": "Kompetensområdet för äldreomsorg",
+        "lyhytNimi": "Kompetensområdet för äldreomsorg",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      }
+    ]
+  },
+  {
+    "koodiUri": "koulutusalaoph1995_5",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/koulutusalaoph1995_5",
+    "version": 1419,
+    "versio": 1,
+    "koodisto": {
+      "koodistoUri": "koulutusalaoph1995",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        1
+      ]
+    },
+    "koodiArvo": "5",
+    "paivitysPvm": 1514964030042,
+    "voimassaAlkuPvm": "1998-01-01",
+    "voimassaLoppuPvm": "2002-12-31",
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Social- och hälsovårdsbranschen",
+        "kuvaus": "Social- och hälsovårdsbranschen",
+        "lyhytNimi": "Social- och hälsovårdsbranschen",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "SV"
+      },
+      {
+        "nimi": "Sosiaali- ja terveysala",
+        "kuvaus": "Sosiaali- ja terveysala",
+        "lyhytNimi": "Sosiaali- ja terveysala",
+        "kayttoohje": null,
+        "kasite": null,
+        "sisaltaaMerkityksen": null,
+        "eiSisallaMerkitysta": null,
+        "huomioitavaKoodi": null,
+        "sisaltaaKoodiston": null,
+        "kieli": "FI"
+      }
+    ]
+  },
+  {
+    "koodiUri": "aikuhakukohteet_4317",
+    "resourceUri": "https://virkailija.testiopintopolku.fi/koodisto-service/rest/codeelement/aikuhakukohteet_4317",
+    "version": 0,
+    "versio": 5,
+    "koodisto": {
+      "koodistoUri": "aikuhakukohteet",
+      "organisaatioOid": "1.2.246.562.10.00000000001",
+      "koodistoVersios": [
+        5
+      ]
+    },
+    "koodiArvo": "4317",
+    "paivitysPvm": 1536734652416,
+    "voimassaAlkuPvm": "2014-08-29",
+    "voimassaLoppuPvm": null,
+    "tila": "LUONNOS",
+    "metadata": [
+      {
+        "nimi": "Sosiaali- ja terveysalan perustutkinto",
+        "kuvaus": "Sosiaali- ja terveysalan perustutkinto",
+        "lyhytNimi": "Sosiaali- ja terveysalan perustutkinto",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "FI"
+      },
+      {
+        "nimi": "Grundexamen inom social- och hälsovårdsbranschen",
+        "kuvaus": "Grundexamen inom social- och hälsovårdsbranschen",
+        "lyhytNimi": "Grundexamen inom social- och hälsovårdsbranschen",
+        "kayttoohje": "",
+        "kasite": "",
+        "sisaltaaMerkityksen": "",
+        "eiSisallaMerkitysta": "",
+        "huomioitavaKoodi": "",
+        "sisaltaaKoodiston": "",
+        "kieli": "SV"
+      }
+    ]
+  }
+]

@@ -1,11 +1,12 @@
 import {action, observable, computed} from 'mobx';
 import axios from 'axios';
 import {Koulutuskoodi} from '../model/Koulutuskoodi';
-import {getKoulutusDetailsStore, loadKoulutusDetails} from './KoulutusDetailsStore';
+import {loadKoulutusDetails} from './KoulutusDetailsStore';
 import {getConsecutiveSectionName} from '../model/KoulutuksenJulkaiseminen';
 import {LuoKoulutusSection} from '../views/koulutus-publication/section/LuoKoulutusSection';
-import {APP_STATE_SECTION_EXPANSION_MAP} from '../config/constants';
+import {APP_STATE_SECTION_EXPANSION_MAP} from '../config/states';
 import {observe, updateState} from '../utils/utils';
+import {urlKoulutuskoodit} from '../config/urls';
 
 class AppStore {
   @observable koulutustyyppiOptions = [
@@ -62,9 +63,11 @@ class AppStore {
     this.koulutusOptions = selectionOptions;
   }
 
-  findKoulutusList = () =>
-      axios.get(`https://virkailija.testiopintopolku.fi/koodisto-service/rest/json/koulutus/koodi?onlyValidKoodis=true`)
-    .then((response) => this.setKoodisto(response.data));
+  findKoulutusList = () => {
+    const url = urlKoulutuskoodit();
+    console.log("find url:",url);
+    return axios.get(url).then((response) => this.setKoodisto(response.data));
+  }
 
   @action
   selectKoulutustyyppi = (value) => {

@@ -1,8 +1,9 @@
 import {AlakoodiList} from '../model/Alakoodi';
 import axios from 'axios';
 import {updateState} from '../utils/utils';
-import {getLanguage} from '../config/configuration';
-import {APP_STATE_KOULUTUS_DETAILS} from '../config/constants';
+import {LANGUAGE} from '../config/constants';
+import {APP_STATE_KOULUTUS_DETAILS} from '../config/states';
+import {urlRelaatioAlakoodit} from '../config/urls';
 
 export const loadKoulutusDetails = (koulutuskoodi) => {
   const koodiUri = koulutuskoodi.getKoodiUri();
@@ -14,18 +15,17 @@ export const loadKoulutusDetails = (koulutuskoodi) => {
     nimi: koulutuskoodi.getNimi()
   });
 
-  axios.get(`https://virkailija.testiopintopolku.fi/koodisto-service/rest/json/relaatio/sisaltyy-alakoodit/${koodiUri}?koodiVersio=${versio}`)
+  axios.get(urlRelaatioAlakoodit(koodiUri, versio))
   .then((response) => setData(response.data));
 }
 
 const setData = (alakoodiJsonArray) => {
   const alakoodiList = AlakoodiList.createFromJsonArray(alakoodiJsonArray);
-  const language = getLanguage();
   updateState(APP_STATE_KOULUTUS_DETAILS, {
-    osaamisalaList: AlakoodiList.findOsaamisalaList(alakoodiList, language),
-    koulutusala: AlakoodiList.findKoulutusala(alakoodiList, language),
-    opintojenLaajuus: AlakoodiList.findOpintojenLaajuus(alakoodiList, language),
-    opintojenLaajuusyksikko: AlakoodiList.findOpintojenLaajuusyksikko(alakoodiList, language),
+    osaamisalaList: AlakoodiList.findOsaamisalaList(alakoodiList, LANGUAGE),
+    koulutusala: AlakoodiList.findKoulutusala(alakoodiList, LANGUAGE),
+    opintojenLaajuus: AlakoodiList.findOpintojenLaajuus(alakoodiList, LANGUAGE),
+    opintojenLaajuusyksikko: AlakoodiList.findOpintojenLaajuusyksikko(alakoodiList, LANGUAGE),
     active: true
   });
 }

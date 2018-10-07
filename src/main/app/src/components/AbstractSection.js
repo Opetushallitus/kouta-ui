@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect, getCssClassName} from '../utils/utils';
 import {getAppStore, setSectionDone, setSectionExpansion} from '../stores/AppStore';
-import {APP_STATE_SECTION_EXPANSION_MAP} from '../config/constants';
+import {APP_STATE_SECTION_EXPANSION_MAP} from '../config/states';
 
 const classNames = require('classnames');
 

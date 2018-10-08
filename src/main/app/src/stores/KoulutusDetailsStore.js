@@ -1,20 +1,23 @@
-import {AlakoodiList} from '../model/Alakoodi';
 import axios from 'axios';
-import {updateState} from '../utils/utils';
+import {AlakoodiList} from '../model/Alakoodi';
+import {connect, updateState} from '../utils/utils';
 import {LANGUAGE} from '../config/constants';
-import {APP_STATE_KOULUTUS_DETAILS} from '../config/states';
+import {APP_STATE_ACTIVE_KOULUTUS, APP_STATE_KOULUTUS_DETAILS} from '../config/states';
 import {urlRelaatioAlakoodit} from '../config/urls';
+import {getKoodiUri, getNimi, getVersio} from '../model/Koulutuskoodi';
+
+
+connect(APP_STATE_ACTIVE_KOULUTUS, {}, (koulutus) => loadKoulutusDetails(koulutus.activeKoulutus));
 
 export const loadKoulutusDetails = (koulutuskoodi) => {
-  const koodiUri = koulutuskoodi.getKoodiUri();
-  const versio = koulutuskoodi.getVersio();
+  const koodiUri = getKoodiUri(koulutuskoodi);
+  const versio = getVersio(koulutuskoodi);
   updateState(APP_STATE_KOULUTUS_DETAILS, {
     active: false,
     koodiUri: koodiUri,
     versio: versio,
-    nimi: koulutuskoodi.getNimi()
+    nimi: getNimi(koulutuskoodi)
   });
-
   axios.get(urlRelaatioAlakoodit(koodiUri, versio))
   .then((response) => setData(response.data));
 }

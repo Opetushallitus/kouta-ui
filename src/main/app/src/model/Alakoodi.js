@@ -20,6 +20,9 @@ export const AlakoodiList = {
   findOpintojenLaajuusyksikko: (alakoodiList, language) => AlakoodiFinder.findName(alakoodiList, KOODISTO_URI_OPINTOJEN_LAAJUUSYKSIKKO, language)
 };
 
+
+// TODO: replace class with functional approach
+
 export class AlakoodiItem {
 
   static createFromJson = (json) => new AlakoodiItem(json);

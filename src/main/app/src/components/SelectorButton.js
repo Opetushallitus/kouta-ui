@@ -34,7 +34,7 @@ export class SelectorButton extends Component {
 
   render = () => (
       <div className={"selector-button button-container"}>
-        <button onClick={this.toggleSelector} className={"big primary"}>Selector button <i className="material-icons">arrow_drop_down</i></button>
+        <button onClick={this.toggleSelector} className={"big primary"}>{this.props.label}<i className="material-icons">arrow_drop_down</i></button>
         {this.renderSelectorLayer()}
       </div>
   )

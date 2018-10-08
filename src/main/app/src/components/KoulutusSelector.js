@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {inject, observer} from 'mobx-react/index';
-import {getCssClassName} from '../utils/utils';
+import {connect, getCssClassName} from '../utils/utils';
+import {selectKoulutus} from '../stores/AppStore';
+import {APP_STATE_ACTIVE_KOULUTUS} from '../config/states';
 const classNames = require('classnames');
 
 @inject("appStore")
@@ -13,6 +15,10 @@ export class KoulutusSelector extends Component {
       filter: ''
     };
   }
+
+  componentDidMount = () => connect(APP_STATE_ACTIVE_KOULUTUS, this, (state) => {
+    this.setState({...this.state, ...state});
+  });
 
   getOptions = () => this.props.appStore.koulutusOptions || [];
 
@@ -28,9 +34,12 @@ export class KoulutusSelector extends Component {
 
   getFilteredOptions = () => this.state.filter.length > 0 ? this.getOptions().filter(this.matchOption).sort(this.compareOptions) : [];
 
-  selectOption = (event) => this.props.appStore.selectKoulutus(event.target.getAttribute("data-id"));
+  selectOption = (event) => {
+    const value = event.target.getAttribute("data-id");
+    selectKoulutus(value);
+  }
 
-  getOptionCssClass = (option) => option.id === this.props.appStore.activeKoulutusId ? 'selected' : '';
+  getOptionCssClass = (option) => option.id === this.state.activeKoulutusId ? 'selected' : '';
 
   renderOption = (option, index) => (
     <li key={index} className={classNames("option-li", this.getOptionCssClass(option))} data-id={option.id} onClick={this.selectOption}>

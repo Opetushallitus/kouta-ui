@@ -1,10 +1,10 @@
 import {action, observable, computed} from 'mobx';
 import axios from 'axios';
-import {Koulutuskoodi} from '../model/Koulutuskoodi';
+import {getId, getSelectedOptions, Koulutuskoodi} from '../model/Koulutuskoodi';
 import {loadKoulutusDetails} from './KoulutusDetailsStore';
-import {getConsecutiveSectionName} from '../model/KoulutuksenJulkaiseminen';
+import {getActiveKoulutusById, getConsecutiveSectionName, setKoulutusMap, setKoulutusOptions} from '../model/KoulutuksenJulkaiseminen';
 import {LuoKoulutusSection} from '../views/koulutus-publication/section/LuoKoulutusSection';
-import {APP_STATE_SECTION_EXPANSION_MAP} from '../config/states';
+import {APP_STATE_ACTIVE_KOULUTUS, APP_STATE_SECTION_EXPANSION_MAP} from '../config/states';
 import {observe, updateState} from '../utils/utils';
 import {urlKoulutuskoodit} from '../config/urls';
 
@@ -33,8 +33,6 @@ class AppStore {
   @observable activeKoulutus = null;
   @observable activeSection = 'LuoKoulutusSection';
 
-  koulutusMap = null;
-
   @computed get activeKoulutusId() {
       return this.activeKoulutus ? this.activeKoulutus.id : null;
   }
@@ -54,18 +52,21 @@ class AppStore {
     const koodiSelectionList = [];
     let koulutuskoodi;
     let selectionOptions = [];
-    koodiList.forEach((entry) => {
-        koulutuskoodi = new Koulutuskoodi(entry, this.language);
-        koulutusMap[koulutuskoodi.getId()] = koulutuskoodi;
-        selectionOptions = selectionOptions.concat(koulutuskoodi.getSelectionOptions());
+    koodiList.forEach((koulutuskoodi) => {
+        let id = getId(koulutuskoodi);
+        koulutusMap[id] = koulutuskoodi;
+        let options = getSelectedOptions(koulutuskoodi);
+
+        selectionOptions = selectionOptions.concat(options);
     });
     this.koulutusMap = koulutusMap;
     this.koulutusOptions = selectionOptions;
+    setKoulutusMap(this.koulutusMap);
+    setKoulutusOptions(this.koulutusOptions);
   }
 
   findKoulutusList = () => {
     const url = urlKoulutuskoodit();
-    console.log("find url:",url);
     return axios.get(url).then((response) => this.setKoodisto(response.data));
   }
 
@@ -77,17 +78,9 @@ class AppStore {
 
 
   @action
-  selectKoulutus = (koulutusId) => {
-    console.log('KoulutusDetailsStore:selectKoulutus:koulutusId', koulutusId);
-    this.activeKoulutus = this.koulutusMap[koulutusId];
-    loadKoulutusDetails(this.activeKoulutus);
-  }
-
-  @action
   setSectionExpansion = (sectionName, expanded) => {
     const expansionMap = { ...this.sectionExpansionMap };
     expansionMap[sectionName] = expanded;
-    console.log('AppStore:setSectionExpansion:state', expansionMap);
     this.expansionMap  =  expansionMap;
   }
 }
@@ -103,12 +96,24 @@ export const setSectionDone = (sectionName) => {
     return;
   }
   setSectionExpansion(consecutiveSection, true);
-}
+};
+
+
+const koulutusMap = {};
 
 observe(APP_STATE_SECTION_EXPANSION_MAP, {
   LuoKoulutusSection: true,
   activeSection: 'LuoKoulutusSection'
 });
+
+export const selectKoulutus = (activeKoulutusId) => {
+  const activeKoulutus = getActiveKoulutusById(activeKoulutusId);
+  updateState(APP_STATE_ACTIVE_KOULUTUS, {
+    activeKoulutusId,
+    activeKoulutus
+  });
+};
+
 
 let appStore = null;
 

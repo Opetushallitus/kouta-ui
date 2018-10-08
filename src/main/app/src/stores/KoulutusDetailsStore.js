@@ -8,7 +8,7 @@ import {getKoodiUri, getNimi, getVersio} from '../model/Koulutuskoodi';
 
 connect(APP_STATE_ACTIVE_KOULUTUS, {}, (koulutus) => loadKoulutusDetails(koulutus.activeKoulutus));
 
-export const loadKoulutusDetails = (koulutuskoodi) => {
+const loadKoulutusDetails = (koulutuskoodi) => {
   const koodiUri = getKoodiUri(koulutuskoodi);
   const versio = getVersio(koulutuskoodi);
   updateState(APP_STATE_KOULUTUS_DETAILS, {
@@ -17,8 +17,7 @@ export const loadKoulutusDetails = (koulutuskoodi) => {
     versio: versio,
     nimi: getNimi(koulutuskoodi)
   });
-  axios.get(urlRelaatioAlakoodit(koodiUri, versio))
-  .then((response) => setData(response.data));
+  axios.get(urlRelaatioAlakoodit(koodiUri, versio)).then((response) => setData(response.data));
 }
 
 const setData = (alakoodiJsonArray) => {

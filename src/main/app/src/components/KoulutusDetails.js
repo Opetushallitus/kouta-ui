@@ -24,10 +24,10 @@ export class KoulutusDetails extends Component {
 
   renderOpintojenLaajuusInfo = () => this.renderOpintojenLaajuus() + ' ' + this.renderOpintojenLaajuusyksikko();
 
-  renderOsaamisalaItem = (item) => (
-      <li className={"osaamisala-item"}>
-        {item}
-      </li>
+  renderOsaamisalaItem = (item, index) => (
+    <li key={index} className={"osaamisala-item"}>
+      {item}
+    </li>
   )
 
   renderOsaamisalaList = () => (
@@ -43,7 +43,7 @@ export class KoulutusDetails extends Component {
       {this.renderDetailsRow('Koulutus:', this.state.nimi)}
       {this.renderDetailsRow('Koulutusala:', this.state.koulutusala)}
       {this.renderDetailsRow('Osaamisalat:', this.renderOsaamisalaList())}
-      {this.renderDetailsRow('Tutkintonimike:', this.renderTutkintonimikeList)}
+      {this.renderDetailsRow('Tutkintonimike:', this.renderTutkintonimikeList())}
       {this.renderDetailsRow('Laajuus:', this.renderOpintojenLaajuusInfo())}
     </div>
   ) : null;

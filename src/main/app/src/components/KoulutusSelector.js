@@ -3,6 +3,7 @@ import {inject, observer} from 'mobx-react/index';
 import {connect, getCssClassName} from '../utils/utils';
 import {selectKoulutus} from '../stores/AppStore';
 import {APP_STATE_ACTIVE_KOULUTUS} from '../config/states';
+import {getNimi} from '../model/Koulutuskoodi';
 const classNames = require('classnames');
 
 @inject("appStore")
@@ -12,12 +13,14 @@ export class KoulutusSelector extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      filter: ''
+      filter: '',
+      editableName: '',
     };
   }
 
   componentDidMount = () => connect(APP_STATE_ACTIVE_KOULUTUS, this, (state) => {
-    this.setState({...this.state, ...state});
+    const editableName = getNimi(state.activeKoulutus);
+    this.setState({...this.state, ...state, editableName});
   });
 
   getOptions = () => this.props.appStore.koulutusOptions || [];
@@ -51,6 +54,10 @@ export class KoulutusSelector extends Component {
     filter: e.target.value.trim().toLowerCase()
   });
 
+  updateName = (e) => this.setState({
+    editableName: e.target.value.trim()
+  })
+
   renderOptions = () => {
     const filteredOptions = this.getFilteredOptions();
     return filteredOptions.length > 0 ? (
@@ -62,10 +69,19 @@ export class KoulutusSelector extends Component {
     ) : null;
   }
 
+  renderNameEditor = () => this.state.activeKoulutusId ? (
+    <div className={"name-editor"}>
+      <span>Muokkaa koulutuksen nimeä</span>
+      <input type={"text"} className={"filter-input"} placeholder={"Koulutuksen nimi"} onChange={this.updateName} value={this.state.editableName}></input>
+    </div>
+  ) : null;
+
   render = () => (
     <div className={getCssClassName(this)}>
+      <span>Valitse koulutus listasta</span>
       <input type={"text"} className={"filter-input"} placeholder={"Valitse koulutus..."} onChange={this.setFilter}></input>
       {this.renderOptions()}
+      {this.renderNameEditor()}
     </div>
   );
 

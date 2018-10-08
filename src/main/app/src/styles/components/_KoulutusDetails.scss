@@ -7,11 +7,17 @@
   .details-row {
     display: flex;
     flex-direction: row;
+    margin-bottom: 10px;
     div {
       max-width: 50%;
+      display: flex;
+    }
+
+    .label-column {
       flex-grow: 1;
     }
     .value-column {
+      flex-grow: 2;
       .osaamisala-list {
         margin: 0;
         list-style: none;
@@ -21,5 +27,7 @@
         }
       }
     }
+
+
   }
 }

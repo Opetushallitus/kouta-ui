@@ -6,6 +6,8 @@
   align-items: stretch;
   .filter-input {
     display: flex;
+  }
+  span {
     margin-top: 10px;
   }
   .options-container {
@@ -29,9 +31,13 @@
         cursor: pointer;
       }
       .selected {
-        background-color: #f5f5f5;;
+        background-color: #f5f5f5;
       }
     }
+  }
+  .name-editor {
+    display: flex;
+    flex-direction: column;
   }
 }
 

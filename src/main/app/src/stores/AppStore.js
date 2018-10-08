@@ -76,13 +76,6 @@ class AppStore {
     this.findKoulutusList();
   };
 
-
-  @action
-  setSectionExpansion = (sectionName, expanded) => {
-    const expansionMap = { ...this.sectionExpansionMap };
-    expansionMap[sectionName] = expanded;
-    this.expansionMap  =  expansionMap;
-  }
 }
 
 export const setSectionExpansion = (sectionName, expanded) => updateState(APP_STATE_SECTION_EXPANSION_MAP, {

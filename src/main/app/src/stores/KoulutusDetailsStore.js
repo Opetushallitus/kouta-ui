@@ -4,7 +4,7 @@ import {connect, updateState} from '../utils/utils';
 import {LANGUAGE} from '../config/constants';
 import {APP_STATE_ACTIVE_KOULUTUS, APP_STATE_KOULUTUS_DETAILS} from '../config/states';
 import {urlRelaatioAlakoodit} from '../config/urls';
-import {getKoodiUri, getNimi, getVersio} from '../model/Koulutuskoodi';
+import {getKoodiUri, getKuvaus, getNimi, getVersio} from '../model/Koulutuskoodi';
 
 connect(APP_STATE_ACTIVE_KOULUTUS, {}, (koulutus) => loadKoulutusDetails(koulutus.activeKoulutus));
 
@@ -15,7 +15,8 @@ const loadKoulutusDetails = (koulutuskoodi) => {
     active: false,
     koodiUri: koodiUri,
     versio: versio,
-    nimi: getNimi(koulutuskoodi)
+    nimi: getNimi(koulutuskoodi),
+    kuvaus: getKuvaus(koulutuskoodi)
   });
   axios.get(urlRelaatioAlakoodit(koodiUri, versio)).then((response) => setData(response.data));
 }

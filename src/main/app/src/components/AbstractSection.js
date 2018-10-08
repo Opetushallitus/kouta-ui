@@ -12,7 +12,9 @@ export class AbstractSection extends Component {
     this.state = {};
   }
 
-  componentDidMount = () => connect(APP_STATE_SECTION_EXPANSION_MAP, this, (expansionMap) => this.setState({
+  componentDidMount = () => this.connectToSectionStateMap();
+
+  connectToSectionStateMap = () => connect(APP_STATE_SECTION_EXPANSION_MAP, this, (expansionMap) => this.setState({
     expanded: expansionMap[this.constructor.name] === true,
     active: expansionMap.activeSection === this.constructor.name
   }))

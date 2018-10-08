@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {inject, observer} from 'mobx-react/index';
 import {connect, getCssClassName} from '../utils/utils';
-import {selectKoulutus} from '../stores/AppStore';
+import {selectKoulutus, setSectionExpansion} from '../stores/AppStore';
 import {APP_STATE_ACTIVE_KOULUTUS} from '../config/states';
 import {getNimi} from '../model/Koulutuskoodi';
 const classNames = require('classnames');
@@ -40,6 +40,7 @@ export class KoulutusSelector extends Component {
   selectOption = (event) => {
     const value = event.target.getAttribute("data-id");
     selectKoulutus(value);
+    setSectionExpansion('KoulutuksenKuvausSection', true);
   }
 
   getOptionCssClass = (option) => option.id === this.state.activeKoulutusId ? 'selected' : '';

@@ -98,9 +98,6 @@ export const setSectionDone = (sectionName) => {
   setSectionExpansion(consecutiveSection, true);
 };
 
-
-const koulutusMap = {};
-
 observe(APP_STATE_SECTION_EXPANSION_MAP, {
   LuoKoulutusSection: true,
   activeSection: 'LuoKoulutusSection'

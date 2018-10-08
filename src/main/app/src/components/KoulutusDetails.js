@@ -18,11 +18,33 @@ export class KoulutusDetails extends Component {
     </div>
   )
 
+  renderOpintojenLaajuus = () => this.state.opintojenLaajuus || '';
+
+  renderOpintojenLaajuusyksikko = () => this.state.opintojenLaajuusyksikko || '';
+
+  renderOpintojenLaajuusInfo = () => this.renderOpintojenLaajuus() + ' ' + this.renderOpintojenLaajuusyksikko();
+
+  renderOsaamisalaItem = (item) => (
+      <li className={"osaamisala-item"}>
+        {item}
+      </li>
+  )
+
+  renderOsaamisalaList = () => (
+    <ul className={"osaamisala-list"}>
+      {this.state.osaamisalaList.map(this.renderOsaamisalaItem)}
+    </ul>
+  )
+
+  renderTutkintonimikeList = () => this.state.tutkintonimikeList.join(', ');
+
   render = () => this.state.active ?  (
     <div className={getCssClassName(this)}>
       {this.renderDetailsRow('Koulutus:', this.state.nimi)}
       {this.renderDetailsRow('Koulutusala:', this.state.koulutusala)}
-      {this.renderDetailsRow('Laajuus:', this.state.opintojenLaajuus)}
+      {this.renderDetailsRow('Osaamisalat:', this.renderOsaamisalaList())}
+      {this.renderDetailsRow('Tutkintonimike:', this.renderTutkintonimikeList)}
+      {this.renderDetailsRow('Laajuus:', this.renderOpintojenLaajuusInfo())}
     </div>
   ) : null;
 }

@@ -11,5 +11,15 @@
       max-width: 50%;
       flex-grow: 1;
     }
+    .value-column {
+      .osaamisala-list {
+        margin: 0;
+        list-style: none;
+        padding-left: 0;
+        li {
+          margin: 0;
+        }
+      }
+    }
   }
 }

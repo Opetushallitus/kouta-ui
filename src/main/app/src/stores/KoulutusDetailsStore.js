@@ -6,7 +6,6 @@ import {APP_STATE_ACTIVE_KOULUTUS, APP_STATE_KOULUTUS_DETAILS} from '../config/s
 import {urlRelaatioAlakoodit} from '../config/urls';
 import {getKoodiUri, getNimi, getVersio} from '../model/Koulutuskoodi';
 
-
 connect(APP_STATE_ACTIVE_KOULUTUS, {}, (koulutus) => loadKoulutusDetails(koulutus.activeKoulutus));
 
 export const loadKoulutusDetails = (koulutuskoodi) => {
@@ -25,8 +24,9 @@ export const loadKoulutusDetails = (koulutuskoodi) => {
 const setData = (alakoodiJsonArray) => {
   const alakoodiList = AlakoodiList.createFromJsonArray(alakoodiJsonArray);
   updateState(APP_STATE_KOULUTUS_DETAILS, {
-    osaamisalaList: AlakoodiList.findOsaamisalaList(alakoodiList, LANGUAGE),
     koulutusala: AlakoodiList.findKoulutusala(alakoodiList, LANGUAGE),
+    osaamisalaList: AlakoodiList.findOsaamisalaList(alakoodiList, LANGUAGE),
+    tutkintonimikeList: AlakoodiList.findTutkintonimikeList(alakoodiList, LANGUAGE),
     opintojenLaajuus: AlakoodiList.findOpintojenLaajuus(alakoodiList, LANGUAGE),
     opintojenLaajuusyksikko: AlakoodiList.findOpintojenLaajuusyksikko(alakoodiList, LANGUAGE),
     active: true

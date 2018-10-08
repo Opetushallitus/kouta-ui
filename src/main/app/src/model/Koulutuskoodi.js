@@ -1,25 +1,19 @@
-export class Koulutuskoodi {
+//TODO: Remove class and replace with functional approach
 
-  constructor(data, language) {
-    this.data = data;
-    this.language = language;
-    this.id = this.getKoodiUri() + '-' + this.getVersio();
-  }
+import {LANGUAGE} from '../config/constants';
 
-  getId = () => this.id;
+const findLocalizedMetadataEntries = (koulutuskoodi) => koulutuskoodi.metadata.filter((entry) => entry.kieli === LANGUAGE);
 
-  getNimi = () => this.findLocalizedMetadataEntries()[0].nimi;
+export const getKoodiUri = (koulutuskoodi) =>  koulutuskoodi.koodiUri;
 
-  findLocalizedMetadataEntries = () => this.data.metadata.filter((entry) => entry.kieli === this.language);
+export const getNimi = (koulutuskoodi) => findLocalizedMetadataEntries(koulutuskoodi)[0].nimi;
 
-  getSelectionOptions = () => this.findLocalizedMetadataEntries().map((entry) => ({
-    label: entry.nimi,
-    id: this.getId(),
-    comparisonValue: entry.nimi.toLowerCase()
-  }));
+export const getId = (koulutuskoodi) => getKoodiUri(koulutuskoodi) + '-' + getVersio(koulutuskoodi);
 
-  getKoodiUri = () => this.data.koodiUri;
+export const getSelectedOptions = (koulutuskoodi) => findLocalizedMetadataEntries(koulutuskoodi).map((entry) => ({
+  label: entry.nimi,
+  id: getId(koulutuskoodi),
+  comparisonValue: entry.nimi.toLowerCase()
+}));
 
-  getVersio = () => this.data.versio;
-
-};
+export const getVersio = (koulutuskoodi) => koulutuskoodi.versio;

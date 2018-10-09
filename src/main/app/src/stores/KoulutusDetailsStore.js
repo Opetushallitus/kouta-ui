@@ -3,10 +3,14 @@ import {AlakoodiList} from '../model/Alakoodi';
 import {connect, updateState} from '../utils/utils';
 import {LANGUAGE} from '../config/constants';
 import {APP_STATE_ACTIVE_KOULUTUS, APP_STATE_KOULUTUS_DETAILS} from '../config/states';
-import {urlRelaatioAlakoodit} from '../config/urls';
+import {urlKoulutuksenKuvaus, urlOrganisaatiot, urlRelaatioAlakoodit} from '../config/urls';
 import {getKoodiUri, getKuvaus, getNimi, getVersio} from '../model/Koulutuskoodi';
+import {getKoulutuksenKuvaus} from '../model/KoulutuksenJulkaiseminen';
 
-connect(APP_STATE_ACTIVE_KOULUTUS, {}, (koulutus) => loadKoulutusDetails(koulutus.activeKoulutus));
+connect(APP_STATE_ACTIVE_KOULUTUS, {}, (koulutus) => {
+  loadKoulutusDetails(koulutus.activeKoulutus);
+  loadKoulutuksenKuvaus(koulutus.activeKoulutus);
+});
 
 const loadKoulutusDetails = (koulutuskoodi) => {
   const koodiUri = getKoodiUri(koulutuskoodi);
@@ -15,13 +19,12 @@ const loadKoulutusDetails = (koulutuskoodi) => {
     active: false,
     koodiUri: koodiUri,
     versio: versio,
-    nimi: getNimi(koulutuskoodi),
-    kuvaus: getKuvaus(koulutuskoodi)
+    nimi: getNimi(koulutuskoodi)
   });
-  axios.get(urlRelaatioAlakoodit(koodiUri, versio)).then((response) => setData(response.data));
+  axios.get(urlRelaatioAlakoodit(koodiUri, versio)).then((response) => setKoulutusDetailsData(response.data));
 }
 
-const setData = (alakoodiJsonArray) => {
+const setKoulutusDetailsData = (alakoodiJsonArray) => {
   const alakoodiList = AlakoodiList.createFromJsonArray(alakoodiJsonArray);
   updateState(APP_STATE_KOULUTUS_DETAILS, {
     koulutusala: AlakoodiList.findKoulutusala(alakoodiList, LANGUAGE),
@@ -31,4 +34,14 @@ const setData = (alakoodiJsonArray) => {
     opintojenLaajuusyksikko: AlakoodiList.findOpintojenLaajuusyksikko(alakoodiList, LANGUAGE),
     active: true
   });
+}
+
+const loadKoulutuksenKuvaus = (koulutuskoodi) => {
+  const koodiUri = getKoodiUri(koulutuskoodi);
+  axios.get(urlKoulutuksenKuvaus(koodiUri)).then((response) => setKoulutuksenKuvausData(response.data));
+}
+
+const setKoulutuksenKuvausData = (jsonData) => {
+  const kuvaus = getKoulutuksenKuvaus(jsonData);
+  updateState(APP_STATE_KOULUTUS_DETAILS, {kuvaus});
 }

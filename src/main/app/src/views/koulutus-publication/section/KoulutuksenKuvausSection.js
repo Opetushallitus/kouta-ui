@@ -12,10 +12,7 @@ export class KoulutuksenKuvausSection extends AbstractSection {
     connect(APP_STATE_KOULUTUS_DETAILS, {}, (state) => this.setState({kuvaus: state.kuvaus}));
   }
 
-  renderContent = () => (
-    <div className={"content"}>
-      {this.state.kuvaus}
-    </div>
-  )
+  renderContent = () =>
+      <div className={"content"} dangerouslySetInnerHTML={{__html: this.state.kuvaus}}/>
 
 }

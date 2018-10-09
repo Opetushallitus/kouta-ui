@@ -157,7 +157,12 @@
           margin: 5px;
         }
       }
+    }
 
+    .koulutuksen-kuvaus-section {
+      .content {
+        flex-direction: column;
+      }
     }
 
   }

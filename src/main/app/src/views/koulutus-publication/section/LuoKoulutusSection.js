@@ -16,13 +16,11 @@ export class LuoKoulutusSection extends AbstractSection {
     }
   ];
 
-  renderContent() {
-    return (
-        <div className={"content"}>
-          <SelectorButton layerAlign={"left"} label={"LUO UUSI"} onSelect={this.createNewKoulutus} options={this.getSelectorButtonOptions()}/>
-        </div>
-    )
-  }
+  renderContent = () => (
+      <div className={"content"}>
+        <SelectorButton layerAlign={"left"} label={"LUO UUSI"} onSelect={this.createNewKoulutus} options={this.getSelectorButtonOptions()}/>
+      </div>
+  )
 }
 
 

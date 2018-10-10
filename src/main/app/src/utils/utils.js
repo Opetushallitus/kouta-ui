@@ -19,18 +19,20 @@ export const getState = (eventName, property) => {
   return safeClone(property ? state[property] : state);
 }
 
-// a simple function to couple a listener with matching event
-export const connect = (eventName, listener, targetFunction) => {
+//retrieves ID from listener and creates one if it does not exist yet
+const enforceListenerId = (listener) => {
   if (!listener._listenerId) {
     listenerId += 1;
-    listener._listenerId = listenerId;
+    listener._listenerId = listenerId.toString();
   }
+  return listener._listenerId;
+}
 
-  if (!connectionMap[eventName]) {
-    connectionMap[eventName] = {};
-  }
-  const stringId = listenerId.toString();
-  connectionMap[eventName][stringId] = targetFunction;
+// a simple function to couple a listener with matching event
+export const connect = (eventName, listener, targetFunction) => {
+  const listenerId = enforceListenerId(listener);
+  connectionMap[eventName] = connectionMap[eventName] || {};
+  connectionMap[eventName][listenerId.toString()] = targetFunction;
   const dataItem = dataStore[eventName];
   if (dataItem) {
     broadcast(eventName, clone(dataItem));
@@ -38,7 +40,6 @@ export const connect = (eventName, listener, targetFunction) => {
 };
 
 const clone = (item) => {
-
   try {
     return JSON.parse(JSON.stringify(item));
   } catch(e) {
@@ -48,7 +49,7 @@ const clone = (item) => {
 
 const safeClone = (item) => item ? clone(item) : null;
 
-//A simple callback mechanism to achieve what MobX can't do: 1) pass change when value is changed inside a nested object, and work 2) with inheritance
+//A simple callback mechanism to achieve what MobX can't do: 1) pass change when value is changed inside a nested object, and 2) work with inheritance
 export const broadcast = (eventName, item) => Object.values(connectionMap[eventName] || {}).forEach((listener) => listener(clone(item)));
 
 

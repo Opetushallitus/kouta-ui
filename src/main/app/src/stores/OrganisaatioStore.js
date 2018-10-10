@@ -6,10 +6,9 @@ import {extractOrganisaatioOptions} from '../model/Organisaatio';
 
 export const OrganisaatioStore = () => {
   connect(APP_STATE_KOULUTUS_DETAILS, {}, () => loadOrganisaatioList());
-  connect(APP_STATE_ORGANISAATIO, {}, (state) => {
-    console.log('APP_STATE_ORGANISAATIO:state', state);
-  })
 }
+
+export const selectOrganisaatio = (activeOrganisaatioId) => updateState(APP_STATE_ORGANISAATIO, {activeOrganisaatioId});
 
 const loadOrganisaatioList = () => axios.get(urlOrganisaatioList()).then((response) => setOrganisaatioOptionsData(response.data));
 

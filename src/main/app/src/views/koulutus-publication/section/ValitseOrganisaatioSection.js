@@ -2,6 +2,7 @@ import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
 import {APP_STATE_ORGANISAATIO} from '../../../config/states';
 import {connect} from '../../../utils/utils';
+import {selectOrganisaatio} from '../../../stores/OrganisaatioStore';
 
 export class ValitseOrganisaatioSection extends AbstractSection {
 
@@ -12,7 +13,13 @@ export class ValitseOrganisaatioSection extends AbstractSection {
     connect(APP_STATE_ORGANISAATIO, this, (state) => this.setState(state));
   }
 
-  isOptionChecked = () => false;
+  isOptionChecked = (option) => option.value === this.state.activeOrganisaatioId;
+
+  handleCheckboxChange = (event) => {
+    const value = event.target.value;
+    selectOrganisaatio(value);
+    this.setSectionDone();
+  }
 
   renderOrganisaatioOption = (option, index) => (
       <li key={index}>

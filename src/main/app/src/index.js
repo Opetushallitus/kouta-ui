@@ -7,6 +7,10 @@ import './assets/css/styles.css';
 import 'oph-virkailija-style-guide/oph-styles.css';
 import  {getUrlStore} from "./stores/UrlStore";
 import {getAppStore} from './stores/AppStore';
+import {initStores} from './stores/_index';
+
+
+initStores();
 
 ReactDOM.render((
     <Provider urlStore={getUrlStore()} appStore={getAppStore()} >

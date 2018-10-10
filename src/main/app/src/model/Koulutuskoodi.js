@@ -4,13 +4,11 @@ import {LANGUAGE} from '../config/constants';
 
 const findLocalizedMetadataEntries = (koulutuskoodi) => koulutuskoodi.metadata.filter((entry) => entry.kieli === LANGUAGE);
 
-export const getKoodiUri = (koulutuskoodi) =>  koulutuskoodi.koodiUri;
+export const extractKoodiUri = (koulutuskoodi) =>  koulutuskoodi.koodiUri;
 
 export const getNimi = (koulutuskoodi) => koulutuskoodi ? findLocalizedMetadataEntries(koulutuskoodi)[0].nimi : null;
 
-export const getKuvaus = (koulutuskoodi) => koulutuskoodi ? findLocalizedMetadataEntries(koulutuskoodi)[0].kuvaus : null;
-
-export const getId = (koulutuskoodi) => getKoodiUri(koulutuskoodi) + '-' + getVersio(koulutuskoodi);
+export const getId = (koulutuskoodi) => extractKoodiUri(koulutuskoodi) + '-' + getVersio(koulutuskoodi);
 
 export const getSelectedOptions = (koulutuskoodi) => findLocalizedMetadataEntries(koulutuskoodi).map((entry) => ({
   label: entry.nimi,

@@ -43,39 +43,6 @@ class AppStore {
   @action
   setKoulutuksenTiedotSectionExpanded = (value) => this.koulutuksenTiedotSectionExpanded = value;
 
-  @action
-  setKoulutustyyppi = (koulutustyyppi) => this.koulutustyyppi = koulutustyyppi;
-
-  @action
-  setKoodisto = (koodiList) => {
-    const koulutusMap = {};
-    const koodiSelectionList = [];
-    let koulutuskoodi;
-    let selectionOptions = [];
-    koodiList.forEach((koulutuskoodi) => {
-        let id = getId(koulutuskoodi);
-        koulutusMap[id] = koulutuskoodi;
-        let options = getSelectedOptions(koulutuskoodi);
-
-        selectionOptions = selectionOptions.concat(options);
-    });
-    this.koulutusMap = koulutusMap;
-    this.koulutusOptions = selectionOptions;
-    setKoulutusMap(this.koulutusMap);
-    setKoulutusOptions(this.koulutusOptions);
-  }
-
-  findKoulutusList = () => {
-    const url = urlKoulutuskoodit();
-    return axios.get(url).then((response) => this.setKoodisto(response.data));
-  }
-
-  @action
-  selectKoulutustyyppi = (value) => {
-    this.setKoulutustyyppi(value);
-    this.findKoulutusList();
-  };
-
 }
 
 export const setSectionExpansion = (sectionName, expanded) => updateState(APP_STATE_SECTION_EXPANSION_MAP, {
@@ -85,7 +52,7 @@ export const setSectionExpansion = (sectionName, expanded) => updateState(APP_ST
 
 export const setSectionDone = (sectionName) => {
   const consecutiveSection = getConsecutiveSectionName(sectionName);
-  if (!consecutiveSection) {
+  if (!consecutiveSection) { q
     return;
   }
   setSectionExpansion(consecutiveSection, true);
@@ -96,13 +63,6 @@ observe(APP_STATE_SECTION_EXPANSION_MAP, {
   activeSection: 'LuoKoulutusSection'
 });
 
-export const selectKoulutus = (activeKoulutusId) => {
-  const activeKoulutus = getActiveKoulutusById(activeKoulutusId);
-  updateState(APP_STATE_ACTIVE_KOULUTUS, {
-    activeKoulutusId,
-    activeKoulutus
-  });
-};
 
 
 let appStore = null;

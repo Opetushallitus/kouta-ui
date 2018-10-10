@@ -14,5 +14,5 @@ export const urlKoulutuskoodit = () =>
 export const urlKoulutuksenKuvaus = (koodiUri) =>
     `${SERVICE_DOMAIN}/eperusteet-service/api/perusteet?tuleva=true&siirtyma=true&voimassaolo=true&poistunut=true&kieli=fi&koulutuskoodi=${koodiUri}`;
 
-export const urlOrganisaatiot = () =>
+export const urlOrganisaatioList = () =>
     `${SERVICE_DOMAIN}/organisaatio-service/rest/organisaatio/v4/hae?aktiiviset=true&suunnitellut=true&lakkautetut=false&organisaatiotyyppi=organisaatiotyyppi_02`;

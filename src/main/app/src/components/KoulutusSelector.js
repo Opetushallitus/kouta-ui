@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
-import {inject, observer} from 'mobx-react/index';
 import {connect, getCssClassName} from '../utils/utils';
-import {selectKoulutus, setSectionExpansion} from '../stores/AppStore';
-import {APP_STATE_ACTIVE_KOULUTUS} from '../config/states';
+import {setSectionExpansion} from '../stores/AppStore';
+import {APP_STATE_ACTIVE_KOULUTUS, APP_STATE_KOULUTUS_LIST} from '../config/states';
 import {getNimi} from '../model/Koulutuskoodi';
+import {selectKoulutus} from '../stores/KoulutusListStore';
 const classNames = require('classnames');
-
-@inject("appStore")
-@observer
 export class KoulutusSelector extends Component {
 
   constructor(props) {
@@ -18,12 +15,17 @@ export class KoulutusSelector extends Component {
     };
   }
 
-  componentDidMount = () => connect(APP_STATE_ACTIVE_KOULUTUS, this, (state) => {
-    const editableName = getNimi(state.activeKoulutus);
-    this.setState({...this.state, ...state, editableName});
-  });
+  componentDidMount = () => {
+    connect(APP_STATE_KOULUTUS_LIST, this, (state) => {
+        this.setState({...this.state, ...state});
+    });
+    connect(APP_STATE_ACTIVE_KOULUTUS, this, (state) => {
+      const editableName = getNimi(state.activeKoulutus);
+      this.setState({...this.state, ...state, editableName});
+    });
+  };
 
-  getOptions = () => this.props.appStore.koulutusOptions || [];
+  getOptions = () => this.state.koulutusOptions || [];
 
   matchOption = (option) => option.comparisonValue.indexOf(this.state.filter) > -1;
 

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect, getCssClassName} from '../utils/utils';
-import {getAppStore, setSectionDone, setSectionExpansion} from '../stores/AppStore';
+import {setSectionDone, setSectionExpansion} from '../stores/SectionStateStore';
 import {APP_STATE_SECTION_EXPANSION_MAP} from '../config/states';
 
 const classNames = require('classnames');
@@ -19,8 +19,6 @@ export class AbstractSection extends Component {
     active: expansionMap.activeSection === this.constructor.name
   }))
 
-  getAppStore = () => getAppStore();
-
   getSectionCssClass = () => this.isExpanded() ? "expanded-section" : "collapsed-section";
 
   getControllerCssClass = () => this.isExpanded() ? "expanded-controller" : "collapsed-controller";
@@ -29,9 +27,7 @@ export class AbstractSection extends Component {
 
   getHeader = () => null;
 
-  renderContent() {
-    return null;
-  }
+  renderContent = () => null;
 
   isActive = () => this.state.active;
 

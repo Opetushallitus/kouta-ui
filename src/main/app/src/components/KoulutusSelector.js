@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect, getCssClassName} from '../utils/utils';
-import {setSectionExpansion} from '../stores/AppStore';
+import {setSectionExpansion} from '../stores/SectionStateStore';
 import {APP_STATE_ACTIVE_KOULUTUS, APP_STATE_KOULUTUS_LIST} from '../config/states';
 import {getNimi} from '../model/Koulutuskoodi';
 import {selectKoulutus} from '../stores/KoulutusListStore';

@@ -14,6 +14,11 @@ export const updateState = (eventName, item) => {
   broadcast(eventName, dataStore[eventName]);
 }
 
+export const getState = (eventName, property) => {
+  const state = dataStore[eventName] || {};
+  return safeClone(property ? state[property] : state);
+}
+
 // a simple function to couple a listener with matching event
 export const connect = (eventName, listener, targetFunction) => {
   if (!listener._listenerId) {
@@ -33,6 +38,7 @@ export const connect = (eventName, listener, targetFunction) => {
 };
 
 const clone = (item) => {
+
   try {
     return JSON.parse(JSON.stringify(item));
   } catch(e) {
@@ -40,8 +46,10 @@ const clone = (item) => {
   }
 }
 
+const safeClone = (item) => item ? clone(item) : null;
+
 //A simple callback mechanism to achieve what MobX can't do: 1) pass change when value is changed inside a nested object, and work 2) with inheritance
-export const broadcast = (eventName, item) => Object.values(connectionMap[eventName]).forEach((listener) => listener(clone(item)));
+export const broadcast = (eventName, item) => Object.values(connectionMap[eventName] || {}).forEach((listener) => listener(clone(item)));
 
 
 

@@ -52,7 +52,7 @@ export const setSectionExpansion = (sectionName, expanded) => updateState(APP_ST
 
 export const setSectionDone = (sectionName) => {
   const consecutiveSection = getConsecutiveSectionName(sectionName);
-  if (!consecutiveSection) { q
+  if (!consecutiveSection) { 
     return;
   }
   setSectionExpansion(consecutiveSection, true);

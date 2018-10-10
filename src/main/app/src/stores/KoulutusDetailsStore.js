@@ -38,6 +38,7 @@ const setKoulutusDetailsData = (alakoodiJsonArray) => {
 
 const loadKoulutuksenKuvaus = (koulutuskoodi) =>
     axios.get(urlKoulutuksenKuvaus(extractKoodiUri(koulutuskoodi))).then((response) => setKoulutuksenKuvausData(response.data));
+
 const setKoulutuksenKuvausData = (jsonData) => updateState(APP_STATE_KOULUTUS_DETAILS, {
   kuvaus: extractKoulutuksenKuvaus(jsonData)
 });

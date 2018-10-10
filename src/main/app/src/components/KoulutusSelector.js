@@ -43,6 +43,7 @@ export class KoulutusSelector extends Component {
     const value = event.target.getAttribute("data-id");
     selectKoulutus(value);
     setSectionExpansion('KoulutuksenKuvausSection', true);
+    setSectionExpansion('ValitseOrganisaatioSection', true);
   }
 
   getOptionCssClass = (option) => option.id === this.state.activeKoulutusId ? 'selected' : '';

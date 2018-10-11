@@ -8,7 +8,7 @@ export const extractKoodiUri = (koulutuskoodi) =>  koulutuskoodi.koodiUri;
 
 export const getNimi = (koulutuskoodi) => koulutuskoodi ? findLocalizedMetadataEntries(koulutuskoodi)[0].nimi : null;
 
-export const getId = (koulutuskoodi) => extractKoodiUri(koulutuskoodi) + '-' + getVersio(koulutuskoodi);
+export const getId = (koulutuskoodi) => extractKoodiUri(koulutuskoodi) + '-' + extractVersio(koulutuskoodi);
 
 export const getSelectedOptions = (koulutuskoodi) => findLocalizedMetadataEntries(koulutuskoodi).map((entry) => ({
   label: entry.nimi,
@@ -16,4 +16,4 @@ export const getSelectedOptions = (koulutuskoodi) => findLocalizedMetadataEntrie
   comparisonValue: entry.nimi.toLowerCase()
 }));
 
-export const getVersio = (koulutuskoodi) => koulutuskoodi.versio;
+export const extractVersio = (koulutuskoodi) => koulutuskoodi.versio;

@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "classnames": "^2.2.6",
     "mobx": "^4.3.1",
     "mobx-react": "^5.2.5",
     "oph-urls-js": "github:Opetushallitus/oph-urls-js",

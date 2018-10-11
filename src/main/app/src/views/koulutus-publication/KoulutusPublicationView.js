@@ -6,7 +6,12 @@ import {KoulutustyyppiSection} from './section/KoulutustyyppiSection';
 import {KoulutuksenTiedotSection} from './section/KoulutuksenTiedotSection';
 import {KoulutuksenKuvausSection} from './section/KoulutuksenKuvausSection';
 import {ValitseOrganisaatioSection} from './section/ValitseOrganisaatioSection';
+import {saveAndPublishKoulutus, saveKoulutus} from '../../stores/KoulutusPersistencyStore';
 export class KoulutusPublicationView extends Component {
+
+  saveKoulutus = () => saveKoulutus();
+
+  saveAndPublishKoulutus = () => saveAndPublishKoulutus();
 
   render = () => (
       <div className={"koulutus-publication-view"}>
@@ -23,8 +28,8 @@ export class KoulutusPublicationView extends Component {
           <ValitseOrganisaatioSection/>
           <div className={"button-container"}>
             <button className={"secondary big"}>Seuraava</button>
-            <button className={"primary big"}>Tallenna</button>
-            <button className={"primary big"}>Tallenna ja julkaise</button>
+            <button className={"primary big"} onClick={this.saveKoulutus}>Tallenna</button>
+            <button className={"primary big"} onClick={this.saveAndPublishKoulutus}>Tallenna ja julkaise</button>
           </div>
         </div>
       </div>

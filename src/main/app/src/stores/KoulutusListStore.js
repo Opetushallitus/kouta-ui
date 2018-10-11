@@ -11,15 +11,15 @@ export const KoulutusListStore = () => {
 export const configureKoulutustyyppiOptions = () => observe(APP_STATE_KOULUTUSTYYPPI, {
   koulutustyyppiOptions: [
     {
-      value: 'ammatillinen-koulutus',
+      value: 'amm',
       label: 'Ammatillinen koulutus'
     },
     {
-      value: 'korkeakoulukoulutus',
+      value: 'kk',
       label: 'Korkeakoulukoulutus'
     },
     {
-      value: 'lukiokoulutus',
+      value: 'lk',
       label: 'Lukiokoulutus'
     }
   ]
@@ -31,6 +31,8 @@ export const selectKoulutustyyppi = (value) => {
 };
 
 const setKoulutustyyppi = (activeKoulutustyyppi) => updateState(APP_STATE_KOULUTUSTYYPPI, {activeKoulutustyyppi});
+
+export const getKoulutustyyppi = () => getState(APP_STATE_KOULUTUSTYYPPI, 'activeKoulutustyyppi');
 
 const loadKoulutusList = () => axios.get(urlKoulutuskoodit()).then((response) => setKoulutusListData(response.data));
 
@@ -55,7 +57,6 @@ export const getActiveKoulutusById = (activeKoulutusId) => {
   const koulutusMap = getState(APP_STATE_KOULUTUS_LIST, 'koulutusMap');
   return koulutusMap[activeKoulutusId];
 }
-
 
 export const selectKoulutus = (activeKoulutusId) => {
   const activeKoulutus = getActiveKoulutusById(activeKoulutusId);

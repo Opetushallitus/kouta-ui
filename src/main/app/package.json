@@ -17,12 +17,13 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "mobx": "^4.3.1",
+    "mobx-react": "^5.2.5",
     "oph-urls-js": "github:Opetushallitus/oph-urls-js",
     "oph-virkailija-style-guide": "github:Opetushallitus/virkailija-styles",
     "superagent": "^3.8.3",
-    "to-snake-case": "^1.0.0",
-    "mobx": "^4.3.1",
-    "mobx-react": "^5.2.5"
+    "to-snake-case": "^1.0.0"
   },
   "devDependencies": {
     "ajv": "^6.5.3",

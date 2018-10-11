@@ -4,8 +4,6 @@ button {
   border-radius: 5px;
   border-color: #2da0c7;
   cursor: pointer;
-  margin-left: 10px;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,7 +13,7 @@ button {
 }
 
 .button-container {
-  justify-content: flex-end;
+
   display: flex;
   flex-direction: row;
   .small {
@@ -34,5 +32,12 @@ button {
   .primary {
     background-color: #2da0c7;
     color: white;
+  }
+}
+
+.button-container-right {
+  justify-content: flex-end;
+  button {
+    margin-left: 10px;
   }
 }

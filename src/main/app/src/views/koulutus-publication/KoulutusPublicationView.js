@@ -26,7 +26,7 @@ export class KoulutusPublicationView extends Component {
           <KoulutuksenTiedotSection/>
           <KoulutuksenKuvausSection/>
           <ValitseOrganisaatioSection/>
-          <div className={"button-container"}>
+          <div className={"button-container button-container-right"}>
             <button className={"secondary big"}>Seuraava</button>
             <button className={"primary big"} onClick={this.saveKoulutus}>Tallenna</button>
             <button className={"primary big"} onClick={this.saveAndPublishKoulutus}>Tallenna ja julkaise</button>

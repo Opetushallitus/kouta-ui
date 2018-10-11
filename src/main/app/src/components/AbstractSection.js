@@ -9,7 +9,11 @@ export class AbstractSection extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      visibleClearButton: true,
+      visibleSubmitButton: true,
+      visibleFooter: true,
+    };
   }
 
   componentDidMount = () => this.connectToSectionStateMap();
@@ -33,7 +37,15 @@ export class AbstractSection extends Component {
 
   isExpanded = () => this.state.expanded;
 
+  isFooterVisible = () => this.state.visibleFooter;
+
+  isClearButtonVisible = () => this.state.visibleClearButton
+
+  isSubmitButtonVisible = () => this.state.visibleSubmitButton;
+
   optionallyRenderContent = () => this.isExpanded() ? this.renderContent() : null;
+
+  optionallyRenderFooter = () => this.isExpanded() && this.isFooterVisible() ? this.renderFooter() : null;
 
   getControlIcon = () => this.isExpanded() ? "expand_more" : "expand_less";
 
@@ -53,10 +65,38 @@ export class AbstractSection extends Component {
     </div>
   )
 
+  getClearButtonText = () => 'Tyhjennä';
+
+  getSubmitButtonText = () => 'Jatka';
+
+  onClearButtonClick = () => {
+  };
+
+  onSubmitButtonClick = () => this.setSectionDone();
+
+  renderClearButton = () => this.isClearButtonVisible() ? (
+      <button className={"clear-button small secondary clear-button"} onClick={this.onClearButtonClick}>{this.getClearButtonText()}</button>
+  ) : null;
+
+  renderSubmitButton = () => this.isSubmitButtonVisible() ? (
+      <button className={"clear-button small primary submit-button"} onClick={this.onSubmitButtonClick}>{this.getSubmitButtonText()}</button>
+  ) : null;
+
+  renderFooter = () => (
+      <div className={classNames("footer button-container")}>
+        {this.renderClearButton()}
+        <div className={"spacer"}/>
+        {this.renderSubmitButton()}
+      </div>
+  )
+
+
+
   render = () => (
     <div className={classNames('section', getCssClassName(this), this.getSectionCssClass())}>
       {this.renderHeader()}
       {this.optionallyRenderContent()}
+      {this.optionallyRenderFooter()}
     </div>
   )
 }

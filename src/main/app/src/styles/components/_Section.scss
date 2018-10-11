@@ -1,5 +1,6 @@
 .section {
   margin-top: 10px;
+  background-color: white;
   .header {
     border-style: solid;
     border-color: #888888;
@@ -45,5 +46,19 @@
     justify-content: flex-start;
     padding: 10px;
     background-color: white;
+  }
+  .footer {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    justify-content: space-between;
+    background-color: white;
+    border-top-style: solid;
+    border-top-color: #e0f2fd;
+    border-width: 1px;
+
+    .spacer {
+      flex-grow: 1;
+    }
   }
 }

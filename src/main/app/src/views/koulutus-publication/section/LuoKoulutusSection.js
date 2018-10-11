@@ -6,6 +6,8 @@ export class LuoKoulutusSection extends AbstractSection {
 
   getHeader = () => "1 Luo koulutus";
 
+  isFooterVisible = () =>false;
+
   getSelectorButtonOptions = () => [
     {
       text: 'Luo uusi koulutus',

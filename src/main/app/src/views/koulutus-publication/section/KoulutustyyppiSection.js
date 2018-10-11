@@ -8,7 +8,6 @@ export class KoulutustyyppiSection extends AbstractSection {
 
   constructor(props) {
     super(props);
-    this.state = {};
   }
 
   componentDidMount = () => {

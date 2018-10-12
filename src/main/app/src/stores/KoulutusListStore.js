@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {urlKoulutuskoodit, urlOrganisaatiot} from '../config/urls';
+import {urlKoulutuskoodit} from '../config/urls';
 import {APP_STATE_ACTIVE_KOULUTUS, APP_STATE_KOULUTUS_LIST, APP_STATE_KOULUTUSTYYPPI} from '../config/states';
 import {getState, observe, updateState} from '../utils/utils';
 import {getId, getSelectedOptions} from '../model/Koulutuskoodi';
@@ -38,8 +38,6 @@ const loadKoulutusList = () => axios.get(urlKoulutuskoodit()).then((response) =>
 
 const setKoulutusListData = (koodiList) => {
   const koulutusMap = {};
-  const koodiSelectionList = [];
-  let koulutuskoodi;
   let koulutusOptions = [];
   koodiList.forEach((koulutuskoodi) => {
     let id = getId(koulutuskoodi);

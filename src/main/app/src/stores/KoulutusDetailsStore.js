@@ -3,7 +3,7 @@ import {AlakoodiList} from '../model/Alakoodi';
 import {connect, getState, updateState} from '../utils/utils';
 import {LANGUAGE} from '../config/constants';
 import {APP_STATE_ACTIVE_KOULUTUS, APP_STATE_KOULUTUS_DETAILS} from '../config/states';
-import {urlKoulutuksenKuvaus, urlOrganisaatiot, urlRelaatioAlakoodit} from '../config/urls';
+import {urlKoulutuksenKuvaus, urlRelaatioAlakoodit} from '../config/urls';
 import {extractKoodiUri, getNimi, extractVersio} from '../model/Koulutuskoodi';
 import {extractKoulutuksenKuvaus} from '../model/KoulutuksenKuvaus';
 

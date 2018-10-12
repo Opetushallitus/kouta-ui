@@ -1,5 +1,6 @@
 import {LANGUAGE} from '../config/constants';
 
+/*
 const jsonDataExample = {
   "organisaatiot": [
     {
@@ -9,6 +10,7 @@ const jsonDataExample = {
       }
     }]
 };
+*/
 
 export const extractOrganisaatioOptions = (jsonData) => jsonData.organisaatiot.map((entry) => ({
   label: entry.nimi[LANGUAGE.toLowerCase()],

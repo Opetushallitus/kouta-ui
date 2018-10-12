@@ -6,10 +6,6 @@ import {connect} from '../../../utils/utils';
 
 export class KoulutustyyppiSection extends AbstractSection {
 
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount = () => {
     this.connectToSectionStateMap();
     connect(APP_STATE_KOULUTUSTYYPPI, {}, (state) => this.setState(state));

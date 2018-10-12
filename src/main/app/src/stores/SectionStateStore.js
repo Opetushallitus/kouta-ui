@@ -1,7 +1,3 @@
-import {Koulutuskoodi} from '../model/Koulutuskoodi';
-import {loadKoulutusDetails} from './KoulutusDetailsStore';
-import {getActiveKoulutusById, getConsecutiveSectionName} from '../model/KoulutuksenJulkaiseminen';
-import {LuoKoulutusSection} from '../views/koulutus-publication/section/LuoKoulutusSection';
 import {APP_STATE_SECTION_EXPANSION_MAP} from '../config/states';
 import {observe, updateState} from '../utils/utils';
 
@@ -9,6 +5,16 @@ export const SectionStateStore = () => observe(APP_STATE_SECTION_EXPANSION_MAP, 
   LuoKoulutusSection: true,
   activeSection: 'LuoKoulutusSection'
 });
+
+
+const consecutiveSections = [
+  'LuoKoulutusSection',
+  'KoulutustyyppiSection',
+  'KoulutuksenTiedotSection',
+  'KoulutuksenKuvausSection',
+  'ValitseOrganisaatioSection'
+];
+
 
 export const setSectionExpansion = (sectionName, expanded) => updateState(APP_STATE_SECTION_EXPANSION_MAP, {
   [sectionName]: expanded,
@@ -23,3 +29,12 @@ export const setSectionDone = (sectionName) => {
   setSectionExpansion(consecutiveSection, true);
 };
 
+
+const getConsecutiveSectionName = (sectionName) => {
+  const index = consecutiveSections.indexOf(sectionName);
+  const nextIndex = index + 1;
+  if (nextIndex > (consecutiveSections.length - 1)) {
+    return null;
+  }
+  return consecutiveSections[nextIndex];
+}

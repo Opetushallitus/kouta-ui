@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {urlOrganisaatioList, urlOrganisaatiot} from '../config/urls';
+import {urlOrganisaatioList} from '../config/urls';
 import {APP_STATE_KOULUTUS_DETAILS, APP_STATE_ORGANISAATIO} from '../config/states';
 import {connect, updateState} from '../utils/utils';
 import {extractOrganisaatioOptions} from '../model/Organisaatio';

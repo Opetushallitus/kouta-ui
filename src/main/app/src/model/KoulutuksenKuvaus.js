@@ -1,6 +1,6 @@
 import {LANGUAGE} from '../config/constants';
 
-const jsonDataExample = {
+/*const jsonDataExample = {
   "data": [
     {
       "kuvaus": {
@@ -10,6 +10,7 @@ const jsonDataExample = {
     }
   ]
 };
+*/
 
 export const extractKoulutuksenKuvaus = (jsonData) =>
     ((k) => k.data || [])(jsonData)

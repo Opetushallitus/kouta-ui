@@ -4,7 +4,10 @@ import {SelectorButton} from '../../../components/SelectorButton';
 
 export class LuoKoulutusSection extends AbstractSection {
 
-  getHeader = () => "1 Luo koulutus";
+
+  getClassName = () => 'LuoKoulutusSection';
+
+  getHeader = () => '1 Luo koulutus';
 
   isFooterVisible = () =>false;
 

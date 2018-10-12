@@ -6,7 +6,9 @@ import {selectOrganisaatio} from '../../../stores/OrganisaatioStore';
 
 export class ValitseOrganisaatioSection extends AbstractSection {
 
-  getHeader = () => "5 Valitse koulutuksen järjestävä organisaatio";
+  getClassName = () => 'ValitseOrganisaatioSection';
+
+  getHeader = () => '5 Valitse koulutuksen järjestävä organisaatio';
 
   componentDidMount = () => {
     this.connectToSectionStateMap();

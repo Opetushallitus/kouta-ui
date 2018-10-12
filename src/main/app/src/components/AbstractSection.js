@@ -20,8 +20,11 @@ export class AbstractSection extends Component {
 
   connectToSectionStateMap = () => connect(APP_STATE_SECTION_EXPANSION_MAP, this, (expansionMap) => this.setState({
     expanded: expansionMap[this.constructor.name] === true,
-    active: expansionMap.activeSection === this.constructor.name
+    active: expansionMap.activeSection === this.getClassName()
   }))
+
+
+  getClassName = () => 'AbstractSection';
 
   getSectionCssClass = () => this.isExpanded() ? "expanded-section" : "collapsed-section";
 
@@ -51,10 +54,10 @@ export class AbstractSection extends Component {
 
   toggleState = () => {
     const newState = !this.isExpanded();
-    setSectionExpansion(this.constructor.name, newState);
+    setSectionExpansion(this.getClassName(), newState);
   }
 
-  setSectionDone = () => setSectionDone(this.constructor.name);
+  setSectionDone = () => setSectionDone(this.getClassName());
 
   renderHeader = () => (
     <div className={classNames("header", this.getHeaderCssClass())}>

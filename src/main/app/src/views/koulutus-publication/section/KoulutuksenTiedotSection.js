@@ -5,6 +5,8 @@ import {KoulutusDetails} from '../../../components/KoulutusDetails';
 
 export class KoulutuksenTiedotSection extends AbstractSection {
 
+  getClassName = () => 'KoulutuksenTiedotSection';
+
   getHeader = () => "3 Koulutuksen tiedot";
 
   renderContent = () => (

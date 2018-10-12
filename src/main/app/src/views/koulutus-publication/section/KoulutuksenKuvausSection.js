@@ -5,6 +5,8 @@ import {APP_STATE_KOULUTUS_DETAILS} from '../../../config/states';
 
 export class KoulutuksenKuvausSection extends AbstractSection {
 
+  getClassName = () => 'KoulutuksenKuvausSection';
+
   getHeader = () => '4 Koulutuksen kuvaus';
 
   componentDidMount = () => {

@@ -11,13 +11,15 @@ export class KoulutustyyppiSection extends AbstractSection {
     connect(APP_STATE_KOULUTUSTYYPPI, {}, (state) => this.setState(state));
   }
 
+  getClassName = () => 'KoulutustyyppiSection';
+
+  getHeader = () => '2 Valitse koulutustyyppi';
+
   handleCheckboxChange = (event) => {
     const value = event.target.value;
     selectKoulutustyyppi(value);
     this.setSectionDone();
   }
-
-  getHeader = () => "2 Valitse koulutustyyppi";
 
   isOptionChecked = (option) => option.value === this.state.activeKoulutustyyppi;
 

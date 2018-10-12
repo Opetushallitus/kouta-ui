@@ -1,17 +1,35 @@
 const connectionMap = {};
-const dataStore = {};
 let listenerId = 0;
 
-export const observe = (eventName, item) => dataStore[eventName] = clone(item);
+
+const parseJson = (jsonString) => {
+  if (!jsonString) {
+    return null;
+  }
+  try {
+    return JSON.parse(jsonString);
+  } catch(e) {
+    return null;
+  }
+}
+
+const getItem = (eventName) => parseJson(localStorage.getItem(eventName));
+
+const enforceItem = (eventName) => getItem(eventName) || {};
+
+const setItem = (eventName, item) => localStorage.setItem(eventName, JSON.stringify(item));
+
+export const observe = (eventName, item) => setItem(eventName, clone(item));
 
 export const updateState = (eventName, item) => {
-  dataStore[eventName] = dataStore[eventName] || {};
-  dataStore[eventName] = Object.assign(dataStore[eventName], item);
-  broadcast(eventName, dataStore[eventName]);
+  let targetItem = enforceItem(eventName);
+  targetItem = Object.assign(targetItem, item);
+  setItem(eventName, targetItem);
+  broadcast(eventName, targetItem);
 }
 
 export const getState = (eventName, property) => {
-  const state = dataStore[eventName] || {};
+  const state = getItem(eventName);
   return safeClone(property ? state[property] : state);
 }
 
@@ -29,9 +47,9 @@ export const connect = (eventName, listener, targetFunction) => {
   const listenerId = enforceListenerId(listener);
   connectionMap[eventName] = connectionMap[eventName] || {};
   connectionMap[eventName][listenerId.toString()] = targetFunction;
-  const dataItem = dataStore[eventName];
+  const dataItem = getItem(eventName);
   if (dataItem) {
-    broadcast(eventName, clone(dataItem));
+    broadcast(eventName, dataItem);
   }
 };
 

@@ -23,8 +23,7 @@
     "mobx-react": "^5.2.5",
     "oph-urls-js": "github:Opetushallitus/oph-urls-js",
     "oph-virkailija-style-guide": "github:Opetushallitus/virkailija-styles",
-    "superagent": "^3.8.3",
-    "to-snake-case": "^1.0.0"
+    "superagent": "^3.8.3"
   },
   "devDependencies": {
     "ajv": "^6.5.3",

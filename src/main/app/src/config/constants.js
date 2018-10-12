@@ -6,9 +6,3 @@ export const SERVICE_DOMAINS =  {
   [ENV_DEV]: 'https://virkailija.hahtuvaopintopolku.fi',
   [ENV_MOCK]: 'http://localhost:3001'
 };
-
-
-
-
-
-

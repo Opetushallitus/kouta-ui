@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {connect, getCssClassName} from '../utils/utils';
+import {connect} from '../utils/utils';
 import {APP_STATE_KOULUTUS_DETAILS} from '../config/states';
 
 export class KoulutusDetails extends Component {
@@ -39,7 +39,7 @@ export class KoulutusDetails extends Component {
   renderTutkintonimikeList = () => this.state.tutkintonimikeList.join(', ');
 
   render = () => this.state.active ?  (
-    <div className={getCssClassName(this)}>
+    <div className={"koulutus-details"}>
       {this.renderDetailsRow('Koulutus:', this.state.nimi)}
       {this.renderDetailsRow('Koulutusala:', this.state.koulutusala)}
       {this.renderDetailsRow('Osaamisalat:', this.renderOsaamisalaList())}

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {connect, getCssClassName} from '../utils/utils';
+import {connect} from '../utils/utils';
 import {setSectionDone, setSectionExpansion} from '../stores/SectionStateStore';
 import {APP_STATE_SECTION_EXPANSION_MAP} from '../config/states';
 
@@ -93,7 +93,7 @@ export class AbstractSection extends Component {
 
 
   render = () => (
-    <div className={classNames('section', getCssClassName(this), this.getSectionCssClass())}>
+    <div className={classNames('section', 'abstract-section', this.getSectionCssClass())}>
       {this.renderHeader()}
       {this.optionallyRenderContent()}
       {this.optionallyRenderFooter()}

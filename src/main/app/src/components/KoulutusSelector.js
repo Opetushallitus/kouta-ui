@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {connect, getCssClassName} from '../utils/utils';
+import {connect} from '../utils/utils';
 import {setSectionExpansion} from '../stores/SectionStateStore';
 import {APP_STATE_ACTIVE_KOULUTUS, APP_STATE_KOULUTUS_LIST} from '../config/states';
 import {getNimi} from '../model/Koulutuskoodi';
 import {selectKoulutus} from '../stores/KoulutusListStore';
+
 const classNames = require('classnames');
 export class KoulutusSelector extends Component {
 
@@ -81,7 +82,7 @@ export class KoulutusSelector extends Component {
   ) : null;
 
   render = () => (
-    <div className={getCssClassName(this)}>
+      <div className={"koulutus-selector"}>
       <span>Valitse koulutus listasta</span>
       <input type={"text"} className={"filter-input"} placeholder={"Valitse koulutus..."} onChange={this.setFilter}></input>
       {this.renderOptions()}

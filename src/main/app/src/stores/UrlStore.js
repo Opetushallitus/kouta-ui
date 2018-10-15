@@ -1,30 +1,33 @@
-import {observable} from 'mobx';
+import {APP_STATE_URL} from '../config/states';
 import {urls as ophUrls} from 'oph-urls-js';
-import {development, production} from '../tarjonta-urls.js';
+import {development, production} from '../tarjonta-urls';
+import {getState, updateState} from '../utils/utils';
 
-class UrlStore {
-    @observable urls = ophUrls;
+const ATTR_URL_KOUTA_BACKEND_KOULUTUS = 'urlKoutaBackendKoulutus';
 
-    async loadFrontProperties() {
-        await this.urls.load({overrides: '/kouta/rest/config/frontProperties'});
-    }
+export const UrlStore = () => configure();
 
-    constructor() {
-        console.log('Ollaan ympäristössä ' + process.env.NODE_ENV);
-        if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
-            this.urls.addProperties(development);
-        } else {
-            this.urls.addProperties(production);
-            this.loadFrontProperties();
-        }
-    }
+const configure = () => {
+  configureEnvironment(ophUrls);
+  const urlKoutaBackendKoulutus = ophUrls.url('kouta-backend.koulutus');
+  updateState(APP_STATE_URL, {
+    urls: ophUrls,
+    [ATTR_URL_KOUTA_BACKEND_KOULUTUS]: urlKoutaBackendKoulutus
+  })
+};
+
+async function configureEnvironment(urls) {
+  console.log('Ollaan ympäristössä ' + process.env.NODE_ENV);
+  if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
+    urls.addProperties(development);
+  } else {
+    urls.addProperties(production);
+    await loadFrontProperties(urls);
+  }
+};
+
+async function loadFrontProperties(urls) {
+  await urls.load({overrides: '/kouta/rest/config/frontProperties'});
 }
 
-let urlStore = null;
-
-export const getUrlStore = () => {
-  if (!urlStore) {
-    urlStore = new UrlStore();
-  }
-  return urlStore;
-};
+export const getUrlKoutaBackendKoulutus = () => getState(APP_STATE_URL, ATTR_URL_KOUTA_BACKEND_KOULUTUS);

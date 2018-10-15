@@ -3,10 +3,10 @@ import {KoulutusDetailsStore} from './KoulutusDetailsStore';
 import {KoulutusListStore} from './KoulutusListStore';
 import {SectionStateStore} from './SectionStateStore';
 import {KoulutusPersistencyStore} from './KoulutusPersistencyStore';
-import {clearEventLog} from '../utils/logging';
+import {UrlStore} from './UrlStore';
 
 export const initStores = () => {
-  clearEventLog();
+  UrlStore();
   OrganisaatioStore();
   KoulutusListStore();
   KoulutusDetailsStore();

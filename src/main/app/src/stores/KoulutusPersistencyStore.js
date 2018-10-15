@@ -1,14 +1,13 @@
 import axios from 'axios';
 import {getKoodiUri, getVersio} from './KoulutusDetailsStore';
 import {getKoulutustyyppi} from './KoulutusListStore';
+import {getUrlKoutaBackendKoulutus} from './UrlStore';
 
-export const KoulutusPersistencyStore = () => {
-};
+export const KoulutusPersistencyStore = () => {};
 
-export const saveKoulutus = () => {
-};
+export const saveKoulutus = () => {};
 
-const getPlaceholderJson = () => ({
+const buildJson = () => ({
   "johtaaTutkintoon": true,
   "koulutustyyppi": getKoulutustyyppi(),
   "koulutusKoodiUri": getKoodiUri() + "#" + getVersio(),
@@ -22,7 +21,6 @@ const getPlaceholderJson = () => ({
   "muokkaaja": "1.2.3.2.2"
 });
 
-export const saveAndPublishKoulutus = () => {
-  axios.put('http://localhost:8099/kouta-backend/koulutus/', getPlaceholderJson()).then(r => console.log(r.status))
+export const saveAndPublishKoulutus = () => axios.put(getUrlKoutaBackendKoulutus(), buildJson()).then(r => console.log(r.status))
   .catch(e => console.log(e));
-};
+

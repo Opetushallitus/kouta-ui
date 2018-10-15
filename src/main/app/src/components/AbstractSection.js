@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from '../utils/utils';
 import {setSectionDone, setSectionExpansion} from '../stores/SectionStateStore';
 import {APP_STATE_SECTION_EXPANSION_MAP} from '../config/states';
+import {logEvent} from '../utils/logging';
 
 const classNames = require('classnames');
 
@@ -54,7 +55,7 @@ export class AbstractSection extends Component {
 
   toggleState = () => {
     const newState = !this.isExpanded();
-    console.log('AbstractSection:ToggleState:newState', newState);
+    logEvent('AbstractSection:ToggleState:newState', newState);
     setSectionExpansion(this.getClassName(), newState);
   }
 
@@ -94,13 +95,16 @@ export class AbstractSection extends Component {
       </div>
   )
 
+  preRender = () => {}
 
-
-  render = () => (
-    <div className={classNames('section', 'abstract-section', this.getSectionCssClass())}>
-      {this.renderHeader()}
-      {this.optionallyRenderContent()}
-      {this.optionallyRenderFooter()}
-    </div>
-  )
+  render = () => {
+    this.preRender();
+    return (
+        <div className={classNames('section', 'abstract-section', this.getSectionCssClass())}>
+          {this.renderHeader()}
+          {this.optionallyRenderContent()}
+          {this.optionallyRenderFooter()}
+        </div>
+    )
+  }
 }

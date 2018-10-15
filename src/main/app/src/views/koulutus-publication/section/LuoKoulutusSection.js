@@ -1,7 +1,7 @@
 import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
 import {SelectorButton} from '../../../components/SelectorButton';
-
+import {logEvent} from '../../../utils/logging';
 export class LuoKoulutusSection extends AbstractSection {
 
 
@@ -18,7 +18,7 @@ export class LuoKoulutusSection extends AbstractSection {
     {
       text: 'Luo uusi koulutus',
       action: () => {
-        console.log('LuoKoulutusSection:action:setSectionDone')
+        logEvent('LuoKoulutusSection:action:setSectionDone')
         this.setSectionDone()
       }
     },
@@ -27,8 +27,12 @@ export class LuoKoulutusSection extends AbstractSection {
     }
   ];
 
+  preRender = () => {
+    logEvent('LuoKoulutusSection:render:state');
+    logEvent(this.state);
+  }
+
   renderContent = () => {
-    console.log('LuoKoulutusSection:renderContent:state', this.state);
     return (
         <div className={"content"}>
           <SelectorButton layerAlign={"left"} label={"LUO UUSI"} options={this.getSelectorButtonOptions()}/>

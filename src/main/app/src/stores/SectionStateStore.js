@@ -1,6 +1,5 @@
 import {APP_STATE_SECTION_EXPANSION_MAP} from '../config/states';
 import {observe, updateState} from '../utils/utils';
-import {logEvent} from '../utils/logging';
 
 export const SectionStateStore = () => observe(APP_STATE_SECTION_EXPANSION_MAP, {
   LuoKoulutusSection: true,
@@ -16,17 +15,10 @@ const consecutiveSections = [
   'ValitseOrganisaatioSection'
 ];
 
-
-export const setSectionExpansion = (sectionName, expanded) => {
-  logEvent('SectionStateStore:setSectionExpansion:sectionName');
-  logEvent(sectionName);
-  const updatedState = updateState(APP_STATE_SECTION_EXPANSION_MAP, {
-    [sectionName]: expanded,
-    activeSection: sectionName
-  });
-  logEvent('SectionStateStore:setSectionExpansion:sectionName:updatedState');
-  logEvent(updatedState);
-};
+export const setSectionExpansion = (sectionName, expanded) => updateState(APP_STATE_SECTION_EXPANSION_MAP, {
+  [sectionName]: expanded,
+  activeSection: sectionName
+});
 
 
 export const setSectionDone = (sectionName) => {

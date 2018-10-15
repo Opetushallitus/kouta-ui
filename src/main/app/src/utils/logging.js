@@ -3,7 +3,7 @@ const getLogMessages = () => {
   const messagesJson = localStorage.getItem('logger');
   if (messagesJson) {
     return JSON.parse(messagesJson)
-  };
+  }
   return [];
 };
 

@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from '../utils/utils';
 import {setSectionDone, setSectionExpansion} from '../stores/SectionStateStore';
 import {APP_STATE_SECTION_EXPANSION_MAP} from '../config/states';
-import {logEvent} from '../utils/logging';
 
 const classNames = require('classnames');
 
@@ -43,7 +42,7 @@ export class AbstractSection extends Component {
 
   isFooterVisible = () => this.state.visibleFooter;
 
-  isClearButtonVisible = () => this.state.visibleClearButton
+  isClearButtonVisible = () => this.state.visibleClearButton;
 
   isSubmitButtonVisible = () => this.state.visibleSubmitButton;
 
@@ -55,9 +54,7 @@ export class AbstractSection extends Component {
 
   toggleState = () => {
     const newState = !this.isExpanded();
-    logEvent('AbstractSection:ToggleState:newState', newState);
     const className = this.getClassName();
-    logEvent('AbstractSection:ToggleState:className', className)
     setSectionExpansion(className, newState);
   }
 

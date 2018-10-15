@@ -24,18 +24,12 @@ export class LuoKoulutusSection extends AbstractSection {
     }
   ];
 
-  preRender = () => {
-    logEvent('LuoKoulutusSection:render:state');
-    logEvent(this.state);
-  }
-
-  renderContent = () => {
-    return (
+  renderContent = () => (
         <div className={"content"}>
           <SelectorButton layerAlign={"left"} label={"LUO UUSI"} options={this.getSelectorButtonOptions()}/>
         </div>
-    )
-  }
+  );
+
 
 }
 

@@ -1,7 +1,6 @@
 const connectionMap = {};
 let listenerId = 0;
 
-
 const parseJson = (jsonString) => {
   if (!jsonString) {
     return null;
@@ -55,6 +54,16 @@ export const connect = (eventName, listener, targetFunction) => {
     broadcast(eventName, dataItem);
   }
 };
+
+const setState = (stateName, newState) => {
+  let targetItem = enforceItem(stateName);
+  targetItem = newState;
+  setItem(stateName, targetItem);
+  broadcast(stateName, targetItem);
+  return safeClone(targetItem);
+};
+
+export const clearState = (stateName) => setState(stateName, {});
 
 const clone = (item) => {
   try {

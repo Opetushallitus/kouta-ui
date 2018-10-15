@@ -4,6 +4,7 @@ import {KoulutusListStore} from './KoulutusListStore';
 import {SectionStateStore} from './SectionStateStore';
 import {KoulutusPersistencyStore} from './KoulutusPersistencyStore';
 import {UrlStore} from './UrlStore';
+import {WorkflowStore} from './WorkflowStore';
 
 export const initStores = () => {
   UrlStore();
@@ -12,4 +13,5 @@ export const initStores = () => {
   KoulutusDetailsStore();
   SectionStateStore();
   KoulutusPersistencyStore();
+  WorkflowStore();
 }

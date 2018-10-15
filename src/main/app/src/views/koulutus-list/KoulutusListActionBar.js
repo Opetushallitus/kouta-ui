@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import {broadcast, clearAllStates} from '../../utils/utils';
+import {selectWorkflowTutkintoonJohtavaKoulutus} from '../../stores/WorkflowStore';
 
 export class KoulutusListActionBar extends Component {
 
@@ -16,9 +18,12 @@ export class KoulutusListActionBar extends Component {
     });
   };
 
+  selectTutkintoonJohtavaKoulutus = () => selectWorkflowTutkintoonJohtavaKoulutus();
+
+
   renderSelectorLayer = () => this.state.selectorVisible ? (
       <div className="selector-layer">
-          <Link role="button" onClick={this.toggleSelector} to={{
+          <Link role="button" onClick={this.selectTutkintoonJohtavaKoulutus} to={{
           pathname: "/koulutus"
         }}>Tutkintoon johtava koulutus</Link>
         <Link role="button" to={{

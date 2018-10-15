@@ -20,7 +20,6 @@ export const setSectionExpansion = (sectionName, expanded) => updateState(APP_ST
   activeSection: sectionName
 });
 
-
 export const setSectionDone = (sectionName) => {
   const consecutiveSection = getConsecutiveSectionName(sectionName);
   if (!consecutiveSection) {
@@ -28,7 +27,6 @@ export const setSectionDone = (sectionName) => {
   }
   setSectionExpansion(consecutiveSection, true);
 };
-
 
 const getConsecutiveSectionName = (sectionName) => {
   const index = consecutiveSections.indexOf(sectionName);

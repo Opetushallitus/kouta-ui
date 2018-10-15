@@ -1,16 +1,25 @@
 import axios from 'axios';
 import {AlakoodiList} from '../model/Alakoodi';
-import {connect, getState, updateState} from '../utils/utils';
+import {clearState, connect, getState, updateState} from '../utils/utils';
 import {LANGUAGE} from '../config/constants';
-import {APP_STATE_ACTIVE_KOULUTUS, APP_STATE_KOULUTUS_DETAILS} from '../config/states';
+import {APP_STATE_ACTIVE_KOULUTUS, APP_STATE_KOULUTUS_DETAILS, APP_STATE_KOULUTUS_LIST, APP_STATE_WORKFLOW} from '../config/states';
 import {urlKoulutuksenKuvaus, urlRelaatioAlakoodit} from '../config/urls';
 import {extractKoodiUri, extractNimi, extractVersio} from '../model/Koulutuskoodi';
 import {extractKoulutuksenKuvaus} from '../model/KoulutuksenKuvaus';
 
-export const KoulutusDetailsStore = () => connect(APP_STATE_ACTIVE_KOULUTUS, {}, (koulutus) => {
-  loadKoulutusDetails(koulutus.activeKoulutus);
-  loadKoulutuksenKuvaus(koulutus.activeKoulutus);
-});
+export const KoulutusDetailsStore = () => {
+  connect(APP_STATE_WORKFLOW, {}, () => {
+    clearState(APP_STATE_KOULUTUS_DETAILS);
+  });
+  connect(APP_STATE_ACTIVE_KOULUTUS, {}, (koulutus) => {
+    if (!koulutus.activeKoulutus) {
+      return;
+    }
+    loadKoulutusDetails(koulutus.activeKoulutus);
+    loadKoulutuksenKuvaus(koulutus.activeKoulutus);
+  });
+}
+
 
 const loadKoulutusDetails = (koulutuskoodi) => {
   const koodiUri = extractKoodiUri(koulutuskoodi);

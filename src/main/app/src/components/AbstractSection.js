@@ -73,8 +73,7 @@ export class AbstractSection extends Component {
 
   getSubmitButtonText = () => 'Jatka';
 
-  onClearButtonClick = () => {
-  };
+  onClearButtonClick = () => {};
 
   onSubmitButtonClick = () => this.setSectionDone();
 

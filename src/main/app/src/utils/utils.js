@@ -29,6 +29,8 @@ export const updateState = (eventName, item) => {
   return safeClone(targetItem);
 }
 
+export const containsState = (eventName, property) => getItem(eventName) !== null;
+
 export const getState = (eventName, property) => {
   const state = getItem(eventName);
   return safeClone(property ? state[property] : state);

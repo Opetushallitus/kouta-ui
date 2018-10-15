@@ -19,10 +19,10 @@ export class KoulutusListActionBar extends Component {
   renderSelectorLayer = () => this.state.selectorVisible ? (
       <div className="selector-layer">
           <Link role="button" onClick={this.toggleSelector} to={{
-          pathname: "/tutkintoon-johtava-koulutus"
+          pathname: "/koulutus"
         }}>Tutkintoon johtava koulutus</Link>
         <Link role="button" to={{
-          pathname: "/muu-koulutus"
+          pathname: "/koulutus"
         }}>Muu koulutus</Link>
       </div>
   ) : null;

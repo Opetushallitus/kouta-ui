@@ -12,7 +12,7 @@ export class Main extends Component {
           <Route path='/' render={() => <Header/>}/>
           <Route exact path='/' render={() => <KoulutusListView/>}/>
           <Route path='/koulutukset' render={() => <KoulutusListView/>}/>
-          <Route path='/tutkintoon-johtava-koulutus' render={() => <KoulutusPublicationView/>}/>
+          <Route path='/koulutus' render={() => <KoulutusPublicationView/>}/>
           <Route path='/' render={() => <Footer/>}/>
         </React.Fragment>
     )

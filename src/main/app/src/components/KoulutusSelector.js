@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from '../utils/utils';
 import {setSectionExpansion} from '../stores/SectionStateStore';
-import {APP_STATE_ACTIVE_KOULUTUS, APP_STATE_KOULUTUS_LIST} from '../config/states';
-import {getNimi} from '../model/Koulutuskoodi';
+import {APP_STATE_ACTIVE_KOULUTUS, APP_STATE_KOULUTUS_DETAILS, APP_STATE_KOULUTUS_LIST} from '../config/states';
 import {selectKoulutus} from '../stores/KoulutusListStore';
+import {updateKoulutuksenNimi} from '../stores/KoulutusDetailsStore';
 
 const classNames = require('classnames');
 export class KoulutusSelector extends Component {
@@ -21,8 +21,10 @@ export class KoulutusSelector extends Component {
         this.setState({...this.state, ...state});
     });
     connect(APP_STATE_ACTIVE_KOULUTUS, this, (state) => {
-      const editableName = getNimi(state.activeKoulutus);
-      this.setState({...this.state, ...state, editableName});
+      this.setState({...this.state, ...state});
+    });
+    connect(APP_STATE_KOULUTUS_DETAILS, this, (state) => {
+      this.setState({...this.state, ...state});
     });
   };
 
@@ -59,9 +61,7 @@ export class KoulutusSelector extends Component {
     filter: e.target.value.trim().toLowerCase()
   });
 
-  updateName = (e) => this.setState({
-    editableName: e.target.value.trim()
-  })
+  updateName = (e) => updateKoulutuksenNimi(e.target.value);
 
   renderOptions = () => {
     const filteredOptions = this.getFilteredOptions();
@@ -77,7 +77,7 @@ export class KoulutusSelector extends Component {
   renderNameEditor = () => this.state.activeKoulutusId ? (
     <div className={"name-editor"}>
       <span>Muokkaa koulutuksen nimeä</span>
-      <input type={"text"} className={"filter-input"} placeholder={"Koulutuksen nimi"} onChange={this.updateName} value={this.state.editableName}></input>
+      <input type={"text"} className={"filter-input"} placeholder={"Koulutuksen nimi"} onChange={this.updateName} value={this.state.nimi}></input>
     </div>
   ) : null;
 

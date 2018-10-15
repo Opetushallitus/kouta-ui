@@ -1,8 +1,8 @@
 import axios from 'axios';
-import {getKoodiUri, getVersio} from './KoulutusDetailsStore';
+import {getKoodiUri, getKoulutuksenNimi, getVersio} from './KoulutusDetailsStore';
 import {getKoulutustyyppi} from './KoulutusListStore';
 import {getUrlKoutaBackendKoulutus} from './UrlStore';
-import {JULKAISUTILA} from '../config/constants';
+import {JULKAISUTILA, LANGUAGE} from '../config/constants';
 
 export const KoulutusPersistencyStore = () => {};
 
@@ -13,9 +13,7 @@ const buildJson = (julkaisutila) => ({
   "tila": julkaisutila,
   "tarjoajat": ["2.2", "3.2", "4.2"],
   "nimi": {
-    "fi": "kiva nimi",
-    "sv": "nimi sv",
-    "en": "nice name"
+    [LANGUAGE.toLowerCase()]: getKoulutuksenNimi()
   },
   "muokkaaja": "1.2.3.2.2"
 });
@@ -26,5 +24,4 @@ const createKoulutus = (julkaisutila) =>
 export const saveAndPublishKoulutus = () => createKoulutus(JULKAISUTILA.JULKAISTU);
 
 export const saveKoulutus = () => createKoulutus(JULKAISUTILA.TALLENNETTU);
-
 

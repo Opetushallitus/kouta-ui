@@ -6,7 +6,7 @@ const findLocalizedMetadataEntries = (koulutuskoodi) => koulutuskoodi.metadata.f
 
 export const extractKoodiUri = (koulutuskoodi) =>  koulutuskoodi.koodiUri;
 
-export const getNimi = (koulutuskoodi) => koulutuskoodi ? findLocalizedMetadataEntries(koulutuskoodi)[0].nimi : null;
+export const extractNimi = (koulutuskoodi) => koulutuskoodi ? findLocalizedMetadataEntries(koulutuskoodi)[0].nimi : null;
 
 export const getId = (koulutuskoodi) => extractKoodiUri(koulutuskoodi) + '-' + extractVersio(koulutuskoodi);
 

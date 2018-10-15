@@ -2,14 +2,8 @@ import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
 import {SelectorButton} from '../../../components/SelectorButton';
 import {logEvent} from '../../../utils/logging';
-import {APP_STATE_SECTION_EXPANSION_MAP} from '../../../config/states';
-import {connect} from '../../../utils/utils';
-export class LuoKoulutusSection extends AbstractSection {
 
-  componentDidMount = () => connect(APP_STATE_SECTION_EXPANSION_MAP, this, (expansionMap) => this.setState({
-    expanded: expansionMap[this.constructor.name] === true,
-    active: expansionMap.activeSection === this.getClassName()
-  }));
+export class LuoKoulutusSection extends AbstractSection {
 
   getClassName = () => 'LuoKoulutusSection';
 

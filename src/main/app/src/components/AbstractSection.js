@@ -20,7 +20,7 @@ export class AbstractSection extends Component {
   componentDidMount = () => this.connectToSectionStateMap();
 
   connectToSectionStateMap = () => connect(APP_STATE_SECTION_EXPANSION_MAP, this, (expansionMap) => this.setState({
-    expanded: expansionMap[this.constructor.name] === true,
+    expanded: expansionMap[this.getClassName()] === true,
     active: expansionMap.activeSection === this.getClassName()
   }))
 

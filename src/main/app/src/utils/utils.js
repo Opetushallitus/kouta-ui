@@ -26,6 +26,7 @@ export const updateState = (eventName, item) => {
   targetItem = Object.assign(targetItem, item);
   setItem(eventName, targetItem);
   broadcast(eventName, targetItem);
+  return safeClone(targetItem);
 }
 
 export const getState = (eventName, property) => {

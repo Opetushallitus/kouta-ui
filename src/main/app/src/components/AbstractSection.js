@@ -56,7 +56,9 @@ export class AbstractSection extends Component {
   toggleState = () => {
     const newState = !this.isExpanded();
     logEvent('AbstractSection:ToggleState:newState', newState);
-    setSectionExpansion(this.getClassName(), newState);
+    const className = this.getClassName();
+    logEvent('AbstractSection:ToggleState:className', className)
+    setSectionExpansion(className, newState);
   }
 
   setSectionDone = () => setSectionDone(this.getClassName());

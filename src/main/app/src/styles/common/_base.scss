@@ -1,10 +1,18 @@
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Helvetica";
   background-color: #f5f5f5;
+
   ul {
     li {
       list-style: none;
       padding-left: 0;
     }
+  }
+
+  input {
+    border-radius: 5px;
+    border-style: solid;
+    border-color: #9c9c9c;
+    border-width: 1px;
   }
 }

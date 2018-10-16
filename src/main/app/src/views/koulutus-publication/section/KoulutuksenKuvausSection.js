@@ -18,7 +18,13 @@ export class KoulutuksenKuvausSection extends AbstractSection {
 
   isClearButtonVisible = () => false;
 
-  renderContent = () =>
-      <div className={"content"} dangerouslySetInnerHTML={{__html: this.state.kuvaus}}/>
+  renderContent = () => this.state.kuvaus ? (
+      <div className={"content"} dangerouslySetInnerHTML={{__html: this.renderKuvaus()}}/>
+  ) : (
+      <div className={"content"}>
+        <span className={"kuvaus-warning-span"}>Koulutukselle ei ole määritelty kuvausta.</span>
+      </div>
+  )
+
 
 }

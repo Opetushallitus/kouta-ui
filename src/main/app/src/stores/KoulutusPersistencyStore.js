@@ -3,6 +3,8 @@ import {getKoodiUri, getKoulutuksenNimi, getVersio} from './KoulutusDetailsStore
 import {getKoulutustyyppi} from './KoulutusListStore';
 import {getUrlKoutaBackendKoulutus} from './UrlStore';
 import {JULKAISUTILA, LANGUAGE} from '../config/constants';
+import {updateState} from '../utils/utils';
+import {APP_STATE_KOULUTUS_PERSISTENCY} from '../config/states';
 
 export const KoulutusPersistencyStore = () => {};
 
@@ -19,9 +21,11 @@ const buildJson = (julkaisutila) => ({
 });
 
 const createKoulutus = (julkaisutila) =>
-    axios.put(getUrlKoutaBackendKoulutus(), buildJson(julkaisutila)).then(r => console.log(r.status)).catch(e => console.log(e));
+    axios.put(getUrlKoutaBackendKoulutus(), buildJson(julkaisutila)).then(r => setPersistencyStatus(julkaisutila)).catch(e => console.log(e));
 
 export const saveAndPublishKoulutus = () => createKoulutus(JULKAISUTILA.JULKAISTU);
 
 export const saveKoulutus = () => createKoulutus(JULKAISUTILA.TALLENNETTU);
+
+export const setPersistencyStatus = (julkaisutila) => updateState(APP_STATE_KOULUTUS_PERSISTENCY, {[julkaisutila]: true })
 

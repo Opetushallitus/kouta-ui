@@ -12,7 +12,6 @@ export const KoulutusDetailsStore = () => {
     clearState(APP_STATE_KOULUTUS_DETAILS);
   });
   connect(APP_STATE_ACTIVE_KOULUTUS, {}, (koulutus) => {
-    console.log('KoulutusDetailsStore:koulutus', koulutus)
     if (!koulutus.activeKoulutus) {
       return clearKoulutusDetails();
     }

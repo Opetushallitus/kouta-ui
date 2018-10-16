@@ -2,7 +2,7 @@ import axios from 'axios';
 import {AlakoodiList} from '../model/Alakoodi';
 import {clearState, connect, getState, updateState} from '../utils/utils';
 import {LANGUAGE} from '../config/constants';
-import {APP_STATE_ACTIVE_KOULUTUS, APP_STATE_KOULUTUS_DETAILS, APP_STATE_KOULUTUS_LIST, APP_STATE_WORKFLOW} from '../config/states';
+import {APP_STATE_ACTIVE_KOULUTUS, APP_STATE_KOULUTUS_DETAILS, APP_STATE_WORKFLOW} from '../config/states';
 import {urlKoulutuksenKuvaus, urlRelaatioAlakoodit} from '../config/urls';
 import {extractKoodiUri, extractNimi, extractVersio} from '../model/Koulutuskoodi';
 import {extractKoulutuksenKuvaus} from '../model/KoulutuksenKuvaus';

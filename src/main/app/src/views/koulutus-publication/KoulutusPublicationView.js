@@ -18,7 +18,7 @@ export class KoulutusPublicationView extends Component {
         <StatusBar/>
         <MultiStepIndicator/>
         <div className={"koulutus-publication-body"}>
-          <div className={"button-container"}>
+          <div className={"button-container button-container-right"}>
             <button className={"secondary small"}>Esikatsele</button>
           </div>
           <LuoKoulutusSection/>

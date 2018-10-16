@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {broadcast, clearAllStates} from '../../utils/utils';
 import {selectWorkflowTutkintoonJohtavaKoulutus} from '../../stores/WorkflowStore';
 
 export class KoulutusListActionBar extends Component {
@@ -12,14 +11,11 @@ export class KoulutusListActionBar extends Component {
     };
   }
 
-  toggleSelector = () => {
-    this.setState( {
-      selectorVisible: !this.state.selectorVisible
-    });
-  };
+  toggleSelector = () => this.setState({
+    selectorVisible: !this.state.selectorVisible
+  });
 
   selectTutkintoonJohtavaKoulutus = () => selectWorkflowTutkintoonJohtavaKoulutus();
-
 
   renderSelectorLayer = () => this.state.selectorVisible ? (
       <div className="selector-layer">

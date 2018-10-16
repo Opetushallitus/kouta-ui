@@ -68,6 +68,12 @@ const setState = (stateName, newState) => {
 
 export const clearState = (stateName) => setState(stateName, {});
 
+export const clearValues = (stateName) => {
+  const state = getItem(stateName);
+  Object.keys(state).forEach(key => state[key] = null);
+  return setState(stateName, state);
+}
+
 const clone = (item) => {
   try {
     return JSON.parse(JSON.stringify(item));

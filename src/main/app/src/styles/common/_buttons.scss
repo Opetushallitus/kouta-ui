@@ -32,6 +32,11 @@ button {
     background-color: #2da0c7;
     color: white;
   }
+  .disabled {
+    background-color: gray;
+    border-color: gray;
+    cursor: default;
+  }
 }
 
 .button-container-right {

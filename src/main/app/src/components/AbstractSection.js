@@ -23,7 +23,6 @@ export class AbstractSection extends Component {
     active: expansionMap.activeSection === this.getClassName()
   }))
 
-
   getClassName = () => 'AbstractSection';
 
   getSectionCssClass = () => this.isExpanded() ? "expanded-section" : "collapsed-section";
@@ -46,6 +45,8 @@ export class AbstractSection extends Component {
 
   isSubmitButtonVisible = () => this.state.visibleSubmitButton;
 
+  isValid = () => false;
+
   optionallyRenderContent = () => this.isExpanded() ? this.renderContent() : null;
 
   optionallyRenderFooter = () => this.isExpanded() && this.isFooterVisible() ? this.renderFooter() : null;
@@ -61,12 +62,12 @@ export class AbstractSection extends Component {
   setSectionDone = () => setSectionDone(this.getClassName());
 
   renderHeader = () => (
-    <div className={classNames("header", this.getHeaderCssClass())}>
-      <div className={classNames("title")}>{this.getHeader()}</div>
-      <div className={classNames("controller", this.getControllerCssClass())} onClick={this.toggleState}>
-        <i className="material-icons">{this.getControlIcon()}</i>
+      <div className={classNames("header", this.getHeaderCssClass())}>
+        <div className={classNames("title")}>{this.getHeader()}</div>
+        <div className={classNames("controller", this.getControllerCssClass())} onClick={this.toggleState}>
+          <i className="material-icons">{this.getControlIcon()}</i>
+        </div>
       </div>
-    </div>
   )
 
   getClearButtonText = () => 'Tyhjennä';
@@ -81,8 +82,8 @@ export class AbstractSection extends Component {
       <button className={"clear-button small secondary clear-button"} onClick={this.onClearButtonClick}>{this.getClearButtonText()}</button>
   ) : null;
 
-  renderSubmitButton = () => this.isSubmitButtonVisible() ? (
-      <button className={"clear-button small primary submit-button"} onClick={this.onSubmitButtonClick}>{this.getSubmitButtonText()}</button>
+  renderSubmitButton = () => (this.isSubmitButtonVisible() && this.isValid()) ? (
+      <button className={"small primary submit-button"} onClick={this.onSubmitButtonClick}>{this.getSubmitButtonText()}</button>
   ) : null;
 
   renderFooter = () => (
@@ -93,16 +94,11 @@ export class AbstractSection extends Component {
       </div>
   )
 
-  preRender = () => {}
-
-  render = () => {
-    this.preRender();
-    return (
-        <div className={classNames('section', 'abstract-section', this.getSectionCssClass())}>
-          {this.renderHeader()}
-          {this.optionallyRenderContent()}
-          {this.optionallyRenderFooter()}
-        </div>
-    )
-  }
+  render = () => (
+      <div className={classNames('section', 'abstract-section', this.getSectionCssClass())}>
+        {this.renderHeader()}
+        {this.optionallyRenderContent()}
+        {this.optionallyRenderFooter()}
+      </div>
+  )
 }

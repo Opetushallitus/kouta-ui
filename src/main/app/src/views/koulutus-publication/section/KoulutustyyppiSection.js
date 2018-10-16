@@ -2,7 +2,7 @@ import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
 import {selectKoulutustyyppi} from '../../../stores/KoulutusListStore';
 import {APP_STATE_KOULUTUSTYYPPI} from '../../../config/states';
-import {connect} from '../../../utils/utils';
+import {connect, isVariableDefined} from '../../../utils/utils';
 
 export class KoulutustyyppiSection extends AbstractSection {
 
@@ -20,6 +20,8 @@ export class KoulutustyyppiSection extends AbstractSection {
     selectKoulutustyyppi(value);
     this.setSectionDone();
   }
+
+  isValid = () => isVariableDefined(this.state.activeKoulutustyyppi);
 
   isOptionChecked = (option) => option.value === this.state.activeKoulutustyyppi;
 

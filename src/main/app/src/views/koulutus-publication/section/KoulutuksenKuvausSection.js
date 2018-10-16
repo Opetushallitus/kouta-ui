@@ -9,6 +9,8 @@ export class KoulutuksenKuvausSection extends AbstractSection {
 
   getHeader = () => '4 Koulutuksen kuvaus';
 
+  isValid = () => true;
+
   componentDidMount = () => {
     this.connectToSectionStateMap();
     connect(APP_STATE_KOULUTUS_DETAILS, {}, (state) => this.setState({kuvaus: state.kuvaus}));

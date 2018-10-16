@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from '../utils/utils';
-import {setSectionExpansion} from '../stores/SectionStateStore';
 import {APP_STATE_ACTIVE_KOULUTUS, APP_STATE_KOULUTUS_DETAILS, APP_STATE_KOULUTUS_LIST} from '../config/states';
 import {selectKoulutus} from '../stores/KoulutusListStore';
 import {updateKoulutuksenNimi} from '../stores/KoulutusDetailsStore';
@@ -45,8 +44,6 @@ export class KoulutusSelector extends Component {
   selectOption = (event) => {
     const value = event.target.getAttribute("data-id");
     selectKoulutus(value);
-    setSectionExpansion('KoulutuksenKuvausSection', true);
-    setSectionExpansion('ValitseOrganisaatioSection', true);
   }
 
   getOptionCssClass = (option) => option.id === this.state.activeKoulutusId ? 'selected' : '';

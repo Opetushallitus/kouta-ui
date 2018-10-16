@@ -7,12 +7,9 @@ import {APP_STATE_KOULUTUS_DETAILS} from '../../../config/states';
 
 export class KoulutuksenTiedotSection extends AbstractSection {
 
-
   componentDidMount = () =>  {
     this.connectToSectionStateMap();
-    connect(APP_STATE_KOULUTUS_DETAILS, this, (state) => {
-      this.setState({...this.state, ...state});
-    });
+    connect(APP_STATE_KOULUTUS_DETAILS, this, (state) => this.setState({...this.state, ...state}));
   }
 
   getClassName = () => 'KoulutuksenTiedotSection';

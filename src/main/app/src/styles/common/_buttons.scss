@@ -32,6 +32,21 @@ button {
     background-color: #2da0c7;
     color: white;
   }
+
+  .success {
+    background-color: green;
+    border-color: green;
+    cursor: default;
+    font-style: italic;
+  }
+
+  .failure {
+    background-color: red;
+    border-color: red;
+    cursor: default;
+    font-style: italic;
+  }
+
   .disabled {
     background-color: gray;
     border-color: gray;

@@ -11,3 +11,10 @@ export const JULKAISUTILA = {
   TALLENNETTU: 'tallennettu',
   JULKAISTU: 'julkaistu'
 };
+
+export const REQUEST_STATUS = {
+  SUCCESS: 'success',
+  FAILURE: 'failure',
+  DISABLED: 'disabled',
+  ENABLED: 'enabled'
+}

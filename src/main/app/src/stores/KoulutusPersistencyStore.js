@@ -2,11 +2,17 @@ import axios from 'axios';
 import {getKoodiUri, getKoulutuksenNimi, getVersio} from './KoulutusDetailsStore';
 import {getKoulutustyyppi} from './KoulutusListStore';
 import {getUrlKoutaBackendKoulutus} from './UrlStore';
-import {JULKAISUTILA, LANGUAGE} from '../config/constants';
-import {updateState} from '../utils/utils';
+import {JULKAISUTILA, LANGUAGE, REQUEST_STATUS} from '../config/constants';
+import {observe, updateState} from '../utils/utils';
 import {APP_STATE_KOULUTUS_PERSISTENCY} from '../config/states';
 
-export const KoulutusPersistencyStore = () => {};
+export const ATTR_SAVE_AND_PUBLISH = 'saveAndPublish';
+export const ATTR_SAVE = 'save';
+
+export const KoulutusPersistencyStore = () => observe(APP_STATE_KOULUTUS_PERSISTENCY, {
+  [ATTR_SAVE_AND_PUBLISH]: REQUEST_STATUS.ENABLED,
+  [ATTR_SAVE]: REQUEST_STATUS.ENABLED
+});
 
 const buildJson = (julkaisutila) => ({
   "johtaaTutkintoon": true,
@@ -20,12 +26,15 @@ const buildJson = (julkaisutila) => ({
   "muokkaaja": "1.2.3.2.2"
 });
 
-const createKoulutus = (julkaisutila) =>
-    axios.put(getUrlKoutaBackendKoulutus(), buildJson(julkaisutila)).then(r => setPersistencyStatus(julkaisutila)).catch(e => console.log(e));
+const createKoulutus = (actionType, julkaisutila) =>
+    axios.put(getUrlKoutaBackendKoulutus(), buildJson(julkaisutila))
+    .then(r => setButtonStatus(actionType, REQUEST_STATUS.SUCCESS))
+    .catch(e => setButtonStatus(actionType, REQUEST_STATUS.FAILURE));
 
-export const saveAndPublishKoulutus = () => createKoulutus(JULKAISUTILA.JULKAISTU);
+export const saveAndPublishKoulutus = () => createKoulutus(ATTR_SAVE_AND_PUBLISH, JULKAISUTILA.JULKAISTU);
 
-export const saveKoulutus = () => createKoulutus(JULKAISUTILA.TALLENNETTU);
+export const saveKoulutus = () => createKoulutus(ATTR_SAVE, JULKAISUTILA.TALLENNETTU);
 
-export const setPersistencyStatus = (julkaisutila) => updateState(APP_STATE_KOULUTUS_PERSISTENCY, {[julkaisutila]: true })
-
+const setButtonStatus = (actionType, status) => updateState(APP_STATE_KOULUTUS_PERSISTENCY, {
+  [actionType]: status
+});

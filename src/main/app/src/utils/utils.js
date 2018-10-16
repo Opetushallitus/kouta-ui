@@ -12,11 +12,14 @@ const parseJson = (jsonString) => {
   }
 }
 
+
 const getItem = (eventName) => parseJson(localStorage.getItem(eventName));
 
 const enforceItem = (eventName) => getItem(eventName) || {};
 
 const setItem = (eventName, item) => localStorage.setItem(eventName, JSON.stringify(item));
+
+export const isVariableDefined = (variable) => !(typeof variable === 'undefined' || variable === null);
 
 export const observe = (eventName, item) => setItem(eventName, clone(item));
 

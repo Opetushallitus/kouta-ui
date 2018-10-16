@@ -65,7 +65,7 @@ export class KoulutusSelector extends Component {
     return filteredOptions.length > 0 ? (
       <div className={"options-container"}>
         <ul className={"options-ul"}>
-          {this.getFilteredOptions().map(this.renderOption)}
+          {filteredOptions.map(this.renderOption)}
         </ul>
       </div>
     ) : null;

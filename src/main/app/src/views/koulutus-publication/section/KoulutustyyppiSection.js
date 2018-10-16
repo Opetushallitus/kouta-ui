@@ -24,6 +24,8 @@ export class KoulutustyyppiSection extends AbstractSection {
 
   isOptionChecked = (option) => option.value === this.state.activeKoulutustyyppi;
 
+  onClearButtonClick = () => selectKoulutustyyppi(null);
+
   renderKoulutustyyppiOption = (koulutustyyppiOption, index) => (
     <li key={index}>
       <input type="radio" name="koulutustyyppi" value={koulutustyyppiOption.value} checked={this.isOptionChecked(koulutustyyppiOption)}

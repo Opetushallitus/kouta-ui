@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {AlakoodiList} from '../model/Alakoodi';
-import {clearState, connect, getState, updateState} from '../utils/utils';
+import {clearState, clearValues, connect, getState, updateState} from '../utils/utils';
 import {LANGUAGE} from '../config/constants';
 import {APP_STATE_ACTIVE_KOULUTUS, APP_STATE_KOULUTUS_DETAILS, APP_STATE_WORKFLOW} from '../config/states';
 import {urlKoulutuksenKuvaus, urlRelaatioAlakoodit} from '../config/urls';
@@ -12,14 +12,14 @@ export const KoulutusDetailsStore = () => {
     clearState(APP_STATE_KOULUTUS_DETAILS);
   });
   connect(APP_STATE_ACTIVE_KOULUTUS, {}, (koulutus) => {
+    console.log('KoulutusDetailsStore:koulutus', koulutus)
     if (!koulutus.activeKoulutus) {
-      return;
+      return clearKoulutusDetails();
     }
     loadKoulutusDetails(koulutus.activeKoulutus);
     loadKoulutuksenKuvaus(koulutus.activeKoulutus);
   });
 }
-
 
 const loadKoulutusDetails = (koulutuskoodi) => {
   const koodiUri = extractKoodiUri(koulutuskoodi);
@@ -44,6 +44,8 @@ const setKoulutusDetailsData = (alakoodiJsonArray) => {
     active: true
   });
 }
+
+export const clearKoulutusDetails = () => clearValues(APP_STATE_KOULUTUS_DETAILS);
 
 export const getKoodiUri = () => getState(APP_STATE_KOULUTUS_DETAILS, 'koodiUri');
 

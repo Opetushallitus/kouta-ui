@@ -23,6 +23,8 @@ export class ValitseOrganisaatioSection extends AbstractSection {
     this.setSectionDone();
   }
 
+  onClearButtonClick = () => selectOrganisaatio(null);
+
   renderOrganisaatioOption = (option, index) => (
       <li key={index}>
         <input type="radio" name="organisaatio" value={option.value} checked={this.isOptionChecked(option)}

@@ -4,6 +4,7 @@ import {KoulutusSelector} from '../../../components/KoulutusSelector';
 import {KoulutusDetails} from '../../../components/KoulutusDetails';
 import {connect, isVariableDefined} from '../../../utils/utils';
 import {APP_STATE_KOULUTUS_DETAILS} from '../../../config/states';
+import {deselectKoulutus} from '../../../stores/KoulutusListStore';
 
 export class KoulutuksenTiedotSection extends AbstractSection {
 
@@ -17,6 +18,8 @@ export class KoulutuksenTiedotSection extends AbstractSection {
   getHeader = () => "3 Koulutuksen tiedot";
 
   isValid = () => isVariableDefined(this.state.nimi);
+
+  onClearButtonClick = () => deselectKoulutus();
 
   renderContent = () => (
     <div className={"content"}>

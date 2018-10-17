@@ -3,15 +3,29 @@ import {getKoodiUri, getKoulutuksenNimi, getVersio} from './KoulutusDetailsStore
 import {getKoulutustyyppi} from './KoulutusListStore';
 import {getUrlKoutaBackendKoulutus} from './UrlStore';
 import {JULKAISUTILA, LANGUAGE, REQUEST_STATUS} from '../config/constants';
-import {observe, updateState} from '../utils/utils';
-import {APP_STATE_KOULUTUS_PERSISTENCY} from '../config/states';
+import {connectToMany, isVariableDefined, observe, updateState} from '../utils/utils';
+import {APP_EVENT_SECTION_CLEAR_CLICK, APP_EVENT_SECTION_SUBMIT_CLICK, APP_STATE_KOULUTUS_PERSISTENCY} from '../config/states';
+import {getOrganisaatioId} from './OrganisaatioStore';
 
 export const ATTR_SAVE_AND_PUBLISH = 'saveAndPublish';
 export const ATTR_SAVE = 'save';
 
-export const KoulutusPersistencyStore = () => observe(APP_STATE_KOULUTUS_PERSISTENCY, {
-  [ATTR_SAVE_AND_PUBLISH]: REQUEST_STATUS.ENABLED,
-  [ATTR_SAVE]: REQUEST_STATUS.ENABLED
+export const KoulutusPersistencyStore = () => {
+  observe(APP_STATE_KOULUTUS_PERSISTENCY, {
+    [ATTR_SAVE_AND_PUBLISH]: REQUEST_STATUS.DISABLED,
+    [ATTR_SAVE]: REQUEST_STATUS.ENABLED
+  });
+  connectToMany([
+    APP_EVENT_SECTION_CLEAR_CLICK,
+    APP_EVENT_SECTION_SUBMIT_CLICK,
+  ], {}, (state) => validateKoulutus());
+}
+
+const isAnyKoulutusFieldUndefined = () => [getKoulutustyyppi(), getKoodiUri(), getVersio(), getKoulutuksenNimi(), getOrganisaatioId()]
+.filter((entry) => !isVariableDefined(entry)).length > 0;
+
+const validateKoulutus = () => updateState(APP_STATE_KOULUTUS_PERSISTENCY, {
+  [ATTR_SAVE_AND_PUBLISH]: isAnyKoulutusFieldUndefined() ? REQUEST_STATUS.DISABLED : REQUEST_STATUS.ENABLED
 });
 
 const buildJson = (julkaisutila) => ({

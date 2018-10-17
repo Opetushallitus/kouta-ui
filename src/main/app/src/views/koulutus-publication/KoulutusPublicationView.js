@@ -9,6 +9,7 @@ import {ValitseOrganisaatioSection} from './section/ValitseOrganisaatioSection';
 import {ATTR_SAVE, ATTR_SAVE_AND_PUBLISH, saveAndPublishKoulutus, saveKoulutus} from '../../stores/KoulutusPersistencyStore';
 import {connect} from '../../utils/utils';
 import {APP_STATE_KOULUTUS_PERSISTENCY} from '../../config/states';
+import {JULKAISUTILA, REQUEST_STATUS} from '../../config/constants';
 
 const classNames = require('classnames');
 
@@ -27,7 +28,7 @@ export class KoulutusPublicationView extends Component {
 
   isSaveButtonEnabled = () => true;
 
-  isPublishButtonEnabled = () => true;
+  isPublishButtonEnabled = () => this.state[ATTR_SAVE_AND_PUBLISH] === REQUEST_STATUS.ENABLED;
 
   getSaveButtonCssClass = () => this.state[ATTR_SAVE];
 

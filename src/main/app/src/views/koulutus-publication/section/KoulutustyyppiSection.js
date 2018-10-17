@@ -15,10 +15,7 @@ export class KoulutustyyppiSection extends AbstractSection {
 
   getHeader = () => '2 Valitse koulutustyyppi';
 
-  handleCheckboxChange = (event) => {
-    const value = event.target.value;
-    selectKoulutustyyppi(value);
-  }
+  handleCheckboxChange = (event) => selectKoulutustyyppi(event.target.value);
 
   isValid = () => isVariableDefined(this.state.activeKoulutustyyppi);
 

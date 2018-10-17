@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {connect} from '../utils/utils';
+import {broadcast, connect} from '../utils/utils';
 import {setSectionDone, setSectionExpansion} from '../stores/SectionStateStore';
-import {APP_STATE_SECTION_EXPANSION_MAP} from '../config/states';
+import {APP_EVENT_SECTION_CLEAR_CLICK, APP_EVENT_SECTION_SUBMIT_CLICK, APP_STATE_SECTION_EXPANSION_MAP} from '../config/states';
 
 const classNames = require('classnames');
 
@@ -74,16 +74,26 @@ export class AbstractSection extends Component {
 
   getSubmitButtonText = () => 'Jatka';
 
+  handleSubmitButtonClick = () => {
+    this.onSubmitButtonClick();
+    broadcast(APP_EVENT_SECTION_SUBMIT_CLICK)
+  }
+
+  handleClearButtonClick = () => {
+    this.onClearButtonClick();
+    broadcast(APP_EVENT_SECTION_CLEAR_CLICK);
+  }
+
   onClearButtonClick = () => {};
 
   onSubmitButtonClick = () => this.setSectionDone();
 
   renderClearButton = () => this.isClearButtonVisible() ? (
-      <button className={"clear-button small secondary clear-button"} onClick={this.onClearButtonClick}>{this.getClearButtonText()}</button>
+      <button className={"clear-button small secondary clear-button"} onClick={this.handleClearButtonClick}>{this.getClearButtonText()}</button>
   ) : null;
 
   renderSubmitButton = () => (this.isSubmitButtonVisible() && this.isValid()) ? (
-      <button className={"small primary submit-button"} onClick={this.onSubmitButtonClick}>{this.getSubmitButtonText()}</button>
+      <button className={"small primary submit-button"} onClick={this.handleSubmitButtonClick}>{this.getSubmitButtonText()}</button>
   ) : null;
 
   renderFooter = () => (

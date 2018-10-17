@@ -1,7 +1,7 @@
 import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
 import {APP_STATE_ORGANISAATIO} from '../../../config/states';
-import {connect} from '../../../utils/utils';
+import {connect, isVariableDefined} from '../../../utils/utils';
 import {selectOrganisaatio} from '../../../stores/OrganisaatioStore';
 
 export class ValitseOrganisaatioSection extends AbstractSection {
@@ -22,6 +22,8 @@ export class ValitseOrganisaatioSection extends AbstractSection {
     selectOrganisaatio(value);
     this.setSectionDone();
   }
+
+  isValid = () => isVariableDefined(this.state.activeOrganisaatioId);
 
   onClearButtonClick = () => selectOrganisaatio(null);
 

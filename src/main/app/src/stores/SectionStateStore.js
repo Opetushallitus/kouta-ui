@@ -6,7 +6,6 @@ export const SectionStateStore = () => observe(APP_STATE_SECTION_EXPANSION_MAP, 
   activeSection: 'LuoKoulutusSection'
 });
 
-
 const consecutiveSections = [
   'LuoKoulutusSection',
   'KoulutustyyppiSection',

@@ -1,7 +1,7 @@
 import React from 'react';
-import {connect} from '../../../utils/utils';
 import {AbstractSection} from '../../../components/AbstractSection';
 import {APP_STATE_KOULUTUS_DETAILS} from '../../../config/states';
+import {connectToOne} from '../../../utils/stateUtils';
 
 export class KoulutuksenKuvausSection extends AbstractSection {
 
@@ -13,7 +13,7 @@ export class KoulutuksenKuvausSection extends AbstractSection {
 
   componentDidMount = () => {
     this.connectToSectionStateMap();
-    connect(APP_STATE_KOULUTUS_DETAILS, {}, (state) => this.setState({kuvaus: state.kuvaus}));
+    connectToOne(APP_STATE_KOULUTUS_DETAILS, this, (state) => this.setState({kuvaus: state.kuvaus}));
   }
 
   isClearButtonVisible = () => false;

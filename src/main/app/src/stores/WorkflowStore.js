@@ -1,4 +1,4 @@
-import {updateState} from '../utils/utils';
+import {updateState} from '../utils/stateUtils';
 import {APP_STATE_WORKFLOW} from '../config/states';
 
 export const WorkflowStore = () => {};

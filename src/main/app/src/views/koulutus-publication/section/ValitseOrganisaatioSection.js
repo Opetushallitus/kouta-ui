@@ -1,8 +1,9 @@
 import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
 import {APP_STATE_ORGANISAATIO} from '../../../config/states';
-import {connect, isVariableDefined} from '../../../utils/utils';
 import {selectOrganisaatio} from '../../../stores/OrganisaatioStore';
+import {connectToOne} from '../../../utils/stateUtils';
+import {isVariableDefined} from '../../../utils/objectUtils';
 
 export class ValitseOrganisaatioSection extends AbstractSection {
 
@@ -12,7 +13,7 @@ export class ValitseOrganisaatioSection extends AbstractSection {
 
   componentDidMount = () => {
     this.connectToSectionStateMap();
-    connect(APP_STATE_ORGANISAATIO, this, (state) => this.setState(state));
+    connectToOne(APP_STATE_ORGANISAATIO, this, (state) => this.setState(state));
   }
 
   isOptionChecked = (option) => option.value === this.state.activeOrganisaatioId;

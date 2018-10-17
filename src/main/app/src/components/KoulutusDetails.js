@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {connect} from '../utils/utils';
 import {APP_STATE_KOULUTUS_DETAILS} from '../config/states';
+import {connectToOne} from '../utils/stateUtils';
 
 export class KoulutusDetails extends Component {
 
@@ -9,7 +9,7 @@ export class KoulutusDetails extends Component {
     this.state = {};
   }
 
-  componentDidMount = () => connect(APP_STATE_KOULUTUS_DETAILS, this, (state) => this.setState(state));
+  componentDidMount = () => connectToOne(APP_STATE_KOULUTUS_DETAILS, this, (state) => this.setState(state));
 
   renderDetailsRow = (label, value) => (
     <div className={"details-row"}>

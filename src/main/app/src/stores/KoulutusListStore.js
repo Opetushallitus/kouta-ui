@@ -1,12 +1,12 @@
 import axios from 'axios';
 import {urlKoulutuskoodit} from '../config/urls';
 import {APP_STATE_ACTIVE_KOULUTUS, APP_STATE_KOULUTUS_LIST, APP_STATE_KOULUTUSTYYPPI, APP_STATE_WORKFLOW} from '../config/states';
-import {clearState, clearValues, connect, getState, observe, updateState} from '../utils/utils';
+import {clearState, clearValues, connectToOne, getState, observe, updateState} from '../utils/stateUtils';
 import {getId, getSelectedOptions} from '../model/Koulutuskoodi';
 
 export const KoulutusListStore = () => {
   configureKoulutustyyppiOptions();
-  connect(APP_STATE_WORKFLOW, {}, () => {
+  connectToOne(APP_STATE_WORKFLOW, {}, () => {
     clearState(APP_STATE_KOULUTUS_LIST);
     clearState(APP_STATE_ACTIVE_KOULUTUS);
   })

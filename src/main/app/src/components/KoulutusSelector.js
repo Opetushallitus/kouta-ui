@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {connect} from '../utils/utils';
 import {APP_STATE_ACTIVE_KOULUTUS, APP_STATE_KOULUTUS_DETAILS, APP_STATE_KOULUTUS_LIST} from '../config/states';
 import {selectKoulutus} from '../stores/KoulutusListStore';
 import {updateKoulutuksenNimi} from '../stores/KoulutusDetailsStore';
+import {connectToOne} from '../utils/stateUtils';
 
 const classNames = require('classnames');
 export class KoulutusSelector extends Component {
@@ -16,13 +16,13 @@ export class KoulutusSelector extends Component {
   }
 
   componentDidMount = () => {
-    connect(APP_STATE_KOULUTUS_LIST, this, (state) => {
+    connectToOne(APP_STATE_KOULUTUS_LIST, this, (state) => {
         this.setState({...this.state, ...state});
     });
-    connect(APP_STATE_ACTIVE_KOULUTUS, this, (state) => {
+    connectToOne(APP_STATE_ACTIVE_KOULUTUS, this, (state) => {
       this.setState({...this.state, ...state});
     });
-    connect(APP_STATE_KOULUTUS_DETAILS, this, (state) => {
+    connectToOne(APP_STATE_KOULUTUS_DETAILS, this, (state) => {
       this.setState({...this.state, ...state});
     });
   };

@@ -2,13 +2,14 @@ import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
 import {selectKoulutustyyppi} from '../../../stores/KoulutusListStore';
 import {APP_STATE_KOULUTUSTYYPPI} from '../../../config/states';
-import {connect, isVariableDefined} from '../../../utils/utils';
+import {connectToOne} from '../../../utils/stateUtils';
+import {isVariableDefined} from '../../../utils/objectUtils';
 
 export class KoulutustyyppiSection extends AbstractSection {
 
   componentDidMount = () => {
     this.connectToSectionStateMap();
-    connect(APP_STATE_KOULUTUSTYYPPI, {}, (state) => this.setState(state));
+    connectToOne(APP_STATE_KOULUTUSTYYPPI, this, (state) => this.setState(state));
   }
 
   getClassName = () => 'KoulutustyyppiSection';

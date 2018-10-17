@@ -1,5 +1,5 @@
 import {APP_STATE_SECTION_EXPANSION_MAP} from '../config/states';
-import {observe, updateState} from '../utils/utils';
+import {observe, updateState} from '../utils/stateUtils';
 
 export const SectionStateStore = () => observe(APP_STATE_SECTION_EXPANSION_MAP, {
   LuoKoulutusSection: true,

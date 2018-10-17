@@ -7,9 +7,9 @@ import {KoulutuksenTiedotSection} from './section/KoulutuksenTiedotSection';
 import {KoulutuksenKuvausSection} from './section/KoulutuksenKuvausSection';
 import {ValitseOrganisaatioSection} from './section/ValitseOrganisaatioSection';
 import {ATTR_SAVE, ATTR_SAVE_AND_PUBLISH, saveAndPublishKoulutus, saveKoulutus} from '../../stores/KoulutusPersistencyStore';
-import {connect} from '../../utils/utils';
 import {APP_STATE_KOULUTUS_PERSISTENCY} from '../../config/states';
-import {JULKAISUTILA, REQUEST_STATUS} from '../../config/constants';
+import {REQUEST_STATUS} from '../../config/constants';
+import {connectToOne} from '../../utils/stateUtils';
 
 const classNames = require('classnames');
 
@@ -20,7 +20,7 @@ export class KoulutusPublicationView extends Component {
     this.state = {};
   }
 
-  componentDidMount = () => connect(APP_STATE_KOULUTUS_PERSISTENCY, {}, (state) => this.setState(state));
+  componentDidMount = () => connectToOne(APP_STATE_KOULUTUS_PERSISTENCY, {}, (state) => this.setState(state));
 
   saveKoulutus = () => saveKoulutus();
 

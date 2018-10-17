@@ -3,9 +3,10 @@ import {getKoodiUri, getKoulutuksenNimi, getVersio} from './KoulutusDetailsStore
 import {getKoulutustyyppi} from './KoulutusListStore';
 import {getUrlKoutaBackendKoulutus} from './UrlStore';
 import {JULKAISUTILA, LANGUAGE, REQUEST_STATUS} from '../config/constants';
-import {connectToMany, isVariableDefined, observe, updateState} from '../utils/utils';
+import {connectToMany, observe, updateState} from '../utils/stateUtils';
 import {APP_EVENT_SECTION_CLEAR_CLICK, APP_EVENT_SECTION_SUBMIT_CLICK, APP_STATE_KOULUTUS_PERSISTENCY} from '../config/states';
 import {getOrganisaatioId} from './OrganisaatioStore';
+import {isVariableDefined} from '../utils/objectUtils';
 
 export const ATTR_SAVE_AND_PUBLISH = 'saveAndPublish';
 export const ATTR_SAVE = 'save';

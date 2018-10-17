@@ -1,17 +1,18 @@
 import axios from 'axios';
 import {AlakoodiList} from '../model/Alakoodi';
-import {clearState, clearValues, connect, getState, updateState} from '../utils/utils';
+import {clearState, clearValues, getState, updateState} from '../utils/stateUtils';
 import {LANGUAGE} from '../config/constants';
 import {APP_STATE_ACTIVE_KOULUTUS, APP_STATE_KOULUTUS_DETAILS, APP_STATE_WORKFLOW} from '../config/states';
 import {urlKoulutuksenKuvaus, urlRelaatioAlakoodit} from '../config/urls';
 import {extractKoodiUri, extractNimi, extractVersio} from '../model/Koulutuskoodi';
 import {extractKoulutuksenKuvaus} from '../model/KoulutuksenKuvaus';
+import {connectToOne} from '../utils/stateUtils';
 
 export const KoulutusDetailsStore = () => {
-  connect(APP_STATE_WORKFLOW, {}, () => {
+  connectToOne(APP_STATE_WORKFLOW, {}, () => {
     clearState(APP_STATE_KOULUTUS_DETAILS);
   });
-  connect(APP_STATE_ACTIVE_KOULUTUS, {}, (koulutus) => {
+  connectToOne(APP_STATE_ACTIVE_KOULUTUS, {}, (koulutus) => {
     if (!koulutus.activeKoulutus) {
       return clearKoulutusDetails();
     }

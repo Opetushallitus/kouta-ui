@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {broadcast, connect} from '../utils/utils';
 import {setSectionDone, setSectionExpansion} from '../stores/SectionStateStore';
 import {APP_EVENT_SECTION_CLEAR_CLICK, APP_EVENT_SECTION_SUBMIT_CLICK, APP_STATE_SECTION_EXPANSION_MAP} from '../config/states';
+import {broadcast, connectToOne} from '../utils/stateUtils';
 
 const classNames = require('classnames');
 
@@ -18,7 +18,7 @@ export class AbstractSection extends Component {
 
   componentDidMount = () => this.connectToSectionStateMap();
 
-  connectToSectionStateMap = () => connect(APP_STATE_SECTION_EXPANSION_MAP, this, (expansionMap) => this.setState({
+  connectToSectionStateMap = () => connectToOne(APP_STATE_SECTION_EXPANSION_MAP, this, (expansionMap) => this.setState({
     expanded: expansionMap[this.getClassName()] === true,
     active: expansionMap.activeSection === this.getClassName()
   }))

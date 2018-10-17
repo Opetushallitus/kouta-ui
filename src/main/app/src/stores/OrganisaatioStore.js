@@ -1,10 +1,10 @@
 import axios from 'axios';
 import {urlOrganisaatioList} from '../config/urls';
 import {APP_STATE_KOULUTUS_DETAILS, APP_STATE_ORGANISAATIO} from '../config/states';
-import {connect, containsState, getState, updateState} from '../utils/utils';
+import {connectToOne, containsState, getState, updateState} from '../utils/stateUtils';
 import {extractOrganisaatioOptions} from '../model/Organisaatio';
 
-export const OrganisaatioStore = () => connect(APP_STATE_KOULUTUS_DETAILS, {}, () => loadOrganisaatioList());
+export const OrganisaatioStore = () => connectToOne(APP_STATE_KOULUTUS_DETAILS, {}, () => loadOrganisaatioList());
 
 const excludesOrganisaatioList = () => !containsState(APP_STATE_ORGANISAATIO, 'options');
 

@@ -58,6 +58,9 @@ export const connect = (eventName, listener, targetFunction) => {
   }
 };
 
+export const connectToMany = (eventList, listener, targetFunction) =>
+    eventList.forEach(eventName => connect(eventName, listener, targetFunction));
+
 const setState = (stateName, newState) => {
   let targetItem = enforceItem(stateName);
   targetItem = newState;

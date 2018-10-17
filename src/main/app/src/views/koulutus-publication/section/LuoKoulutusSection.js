@@ -30,7 +30,6 @@ export class LuoKoulutusSection extends AbstractSection {
         </div>
   );
 
-
 }
 
 

@@ -2,128 +2,85 @@
 .koulutus-publication-view {
   display: flex;
   flex-direction: column;
-  .status-bar {
+
+  padding: 20px;
+  .button-row {
+    justify-content: flex-end;
     display: flex;
     flex-direction: row;
-
-    .progress-box {
-      flex-grow: 1;
-      justify-content: center;
+    margin-top: 10px;
+    .small {
+      height: 35px;
+      width: 150px;
     }
+    .big {
+      height: 50px;
+      width: 220px;
+    }
+    .secondary {
+      color: #919191;
+      border-color: #9c9c9c;
+      background-color: initial;
+    }
+    .primary {
+      background-color: #2da0c7;
+      color: white;
+    }
+    button {
+      background-color: initial;
+      border-style: solid;
+      border-radius: 5px;
+      border-color: #2da0c7;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+  }
 
-    .status-box {
+  .luo-koulutus-section {
+    .content {
       display: flex;
       flex-direction: row;
-      .icon {
-        justify-content: center;
-        align-items: center;
-        display: flex;
-        i {
-          font-size: 20px;
-        }
-      }
-      .info {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin-left: 10px;
-        .link-text  {
-          cursor: pointer;
-          text-decoration: underline;
-          color: #2da0c7;
-        }
+
+      .options-container {
+        max-height: 250px;
+        overflow-y: auto;
+        width: 100%;
       }
     }
   }
 
-  .koulutus-publication-body {
-    padding: 20px;
-    .button-row {
-      justify-content: flex-end;
+  .koulutustyyppi-section {
+    .content {
+      .koulutustyyppi-list {
+        padding-left: 0;
+        li {
+          list-style: none;
+          display: flex;
+          flex-direction: row;
+        }
+      }
       display: flex;
-      flex-direction: row;
-      margin-top: 10px;
-      .small {
-        height: 35px;
-        width: 150px;
-      }
-      .big {
-        height: 50px;
-        width: 220px;
-      }
-      .secondary {
-        color: #919191;
-        border-color: #9c9c9c;
-        background-color: initial;
-      }
-      .primary {
-        background-color: #2da0c7;
-        color: white;
-      }
-      button {
-        background-color: initial;
-        border-style: solid;
-        border-radius: 5px;
-        border-color: #2da0c7;
-        cursor: pointer;
-        margin-left: 10px;
-      }
+      flex-direction: column;
+      align-items: flex-start;
     }
-
-    .luo-koulutus-section {
-      .content {
-        display: flex;
-        flex-direction: row;
-
-        .options-container {
-          max-height: 250px;
-          overflow-y: auto;
-          width: 100%;
-        }
-      }
-    }
-
-    .koulutustyyppi-section {
-      .content {
-        .koulutustyyppi-list {
-          padding-left: 0;
-          li {
-            list-style: none;
-            display: flex;
-            flex-direction: row;
-          }
-        }
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-
-    .koulutuksen-tiedot-section {
-      .content {
-        align-items: stretch;
-        > div {
-          margin: 5px;
-        }
-      }
-    }
-
-    .koulutuksen-kuvaus-section {
-      .content {
-        flex-direction: column;
-      }
-    }
-
-    .valitse-organisaatio-section {
-      .content {
-
-      }
-    }
-
-    .button-container {
-      margin-top: 10px;
-    }
-
   }
 
+  .koulutuksen-tiedot-section {
+    .content {
+      align-items: stretch;
+      > div {
+        margin: 5px;
+      }
+    }
+  }
+
+  .koulutuksen-kuvaus-section {
+    .content {
+      flex-direction: column;
+    }
+  }
+
+  .button-container {
+    margin-top: 10px;
+  }
 }

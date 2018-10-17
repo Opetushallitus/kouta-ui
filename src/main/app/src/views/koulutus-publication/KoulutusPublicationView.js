@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {StatusBar} from './StatusBar';
 import {LuoKoulutusSection} from './section/LuoKoulutusSection';
 import {KoulutustyyppiSection} from './section/KoulutustyyppiSection';
 import {KoulutuksenTiedotSection} from './section/KoulutuksenTiedotSection';
@@ -10,8 +9,6 @@ export class KoulutusPublicationView extends Component {
 
   render = () => (
       <div className={"koulutus-publication-view"}>
-        <StatusBar/>
-        <div className={"koulutus-publication-body"}>
           <div className={"button-container button-container-right"}>
             <button className={"secondary small"}>Esikatsele</button>
           </div>
@@ -20,7 +17,6 @@ export class KoulutusPublicationView extends Component {
           <KoulutuksenTiedotSection/>
           <KoulutuksenKuvausSection/>
           <ValitseOrganisaatioSection/>
-        </div>
       </div>
   )
 }

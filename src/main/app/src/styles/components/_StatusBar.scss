@@ -1,0 +1,33 @@
+.status-bar {
+  display: flex;
+  flex-direction: row;
+
+  .progress-box {
+    flex-grow: 1;
+    justify-content: center;
+  }
+
+  .status-box {
+    display: flex;
+    flex-direction: row;
+    .icon {
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      i {
+        font-size: 20px;
+      }
+    }
+    .info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-left: 10px;
+      .link-text {
+        cursor: pointer;
+        text-decoration: underline;
+        color: #2da0c7;
+      }
+    }
+  }
+}

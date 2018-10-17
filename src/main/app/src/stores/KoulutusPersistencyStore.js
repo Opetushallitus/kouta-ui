@@ -3,10 +3,9 @@ import {getKoodiUri, getKoulutuksenNimi, getVersio} from './KoulutusDetailsStore
 import {getKoulutustyyppi} from './KoulutusListStore';
 import {getUrlKoutaBackendKoulutus} from './UrlStore';
 import {JULKAISUTILA, LANGUAGE, REQUEST_STATUS} from '../config/constants';
-import {connectToMany, observe, updateState} from '../utils/stateUtils';
-import {APP_EVENT_SECTION_CLEAR_CLICK, APP_EVENT_SECTION_SUBMIT_CLICK, APP_STATE_KOULUTUS_PERSISTENCY} from '../config/states';
-import {getOrganisaatioId} from './OrganisaatioStore';
-import {isVariableDefined} from '../utils/objectUtils';
+import {connectToOne, observe, updateState} from '../utils/stateUtils';
+import {APP_EVENT_SECTION_VALIDATION_REQUEST, APP_STATE_KOULUTUS_PERSISTENCY} from '../config/states';
+import {getSelectedOrganisaatioOidList} from './OrganisaatioStore';
 
 export const ATTR_SAVE_AND_PUBLISH = 'saveAndPublish';
 export const ATTR_SAVE = 'save';
@@ -16,17 +15,18 @@ export const KoulutusPersistencyStore = () => {
     [ATTR_SAVE_AND_PUBLISH]: REQUEST_STATUS.DISABLED,
     [ATTR_SAVE]: REQUEST_STATUS.ENABLED
   });
-  connectToMany([
-    APP_EVENT_SECTION_CLEAR_CLICK,
-    APP_EVENT_SECTION_SUBMIT_CLICK,
-  ], {}, (state) => validateKoulutus());
+  connectToOne(APP_EVENT_SECTION_VALIDATION_REQUEST, {}, (state) => validateKoulutus());
 }
 
-const isAnyKoulutusFieldUndefined = () => [getKoulutustyyppi(), getKoodiUri(), getVersio(), getKoulutuksenNimi(), getOrganisaatioId()]
-.filter((entry) => !isVariableDefined(entry)).length > 0;
+const isFieldEmpty = (fieldValue) => typeof fieldValue === 'undefined' || fieldValue === null || fieldValue === false;
+
+const isAnyOrganisaatioSelected = () => getSelectedOrganisaatioOidList().length > 0;
+
+const isAnyKoulutusFieldEmpty = () => [getKoulutustyyppi(), getKoodiUri(), getVersio(), getKoulutuksenNimi(), isAnyOrganisaatioSelected()]
+.filter((entry) => isFieldEmpty(entry)).length > 0;
 
 const validateKoulutus = () => updateState(APP_STATE_KOULUTUS_PERSISTENCY, {
-  [ATTR_SAVE_AND_PUBLISH]: isAnyKoulutusFieldUndefined() ? REQUEST_STATUS.DISABLED : REQUEST_STATUS.ENABLED
+  [ATTR_SAVE_AND_PUBLISH]: isAnyKoulutusFieldEmpty() ? REQUEST_STATUS.DISABLED : REQUEST_STATUS.ENABLED
 });
 
 const buildJson = (julkaisutila) => ({
@@ -34,7 +34,7 @@ const buildJson = (julkaisutila) => ({
   "koulutustyyppi": getKoulutustyyppi(),
   "koulutusKoodiUri": getKoodiUri() + "#" + getVersio(),
   "tila": julkaisutila,
-  "tarjoajat": ["2.2", "3.2", "4.2"],
+  "tarjoajat": getSelectedOrganisaatioOidList(),
   "nimi": {
     [LANGUAGE.toLowerCase()]: getKoulutuksenNimi()
   },

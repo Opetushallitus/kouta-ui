@@ -1,9 +1,8 @@
 import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
-import {APP_STATE_ORGANISAATIO} from '../../../config/states';
-import {selectOrganisaatio} from '../../../stores/OrganisaatioStore';
-import {connectToOne} from '../../../utils/stateUtils';
-import {isVariableDefined} from '../../../utils/objectUtils';
+import {APP_EVENT_SECTION_VALIDATION_REQUEST, APP_STATE_ORGANISAATIO, APP_STATE_ORGANISAATIO_SELECTION_MAP} from '../../../config/states';
+import {clearOrganisaatioSelections, selectOrganisaatio} from '../../../stores/OrganisaatioStore';
+import {broadcast, connectToOne} from '../../../utils/stateUtils';
 
 export class ValitseOrganisaatioSection extends AbstractSection {
 
@@ -13,24 +12,33 @@ export class ValitseOrganisaatioSection extends AbstractSection {
 
   componentDidMount = () => {
     this.connectToSectionStateMap();
-    connectToOne(APP_STATE_ORGANISAATIO, this, (state) => this.setState(state));
+    connectToOne(APP_STATE_ORGANISAATIO, this, (state) => {
+      this.setState({...this.state, ...state});
+    });
+    connectToOne(APP_STATE_ORGANISAATIO_SELECTION_MAP, this, (state) => this.setState({...this.state, organisaatioSelectionMap: state}));
   }
 
-  isOptionChecked = (option) => option.value === this.state.activeOrganisaatioId;
+  isOrganisaatioSelected = (organisaatioId) => this.state.organisaatioSelectionMap[organisaatioId] === true;
+
+  isOptionChecked = (option) => this.isOrganisaatioSelected(option.value);
 
   handleCheckboxChange = (event) => {
     const value = event.target.value;
-    selectOrganisaatio(value);
+    const selected = event.target.checked
+    selectOrganisaatio(value, selected);
     this.setSectionDone();
+    broadcast(APP_EVENT_SECTION_VALIDATION_REQUEST, this.getClassName());
   }
 
-  isValid = () => isVariableDefined(this.state.activeOrganisaatioId);
+  isAnyOrganisaatioSelected = () => Object.values(this.state.organisaatioSelectionMap).filter(value => value === true).length > 0;
 
-  onClearButtonClick = () => selectOrganisaatio(null);
+  isValid = () => this.isAnyOrganisaatioSelected();
+
+  onClearButtonClick = () => clearOrganisaatioSelections();
 
   renderOrganisaatioOption = (option, index) => (
       <li key={index}>
-        <input type="radio" name="organisaatio" value={option.value} checked={this.isOptionChecked(option)}
+        <input type="checkbox" name="organisaatio" value={option.value} checked={this.isOptionChecked(option)}
                onChange={this.handleCheckboxChange}/>{option.label}
       </li>
   );

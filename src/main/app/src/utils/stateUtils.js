@@ -14,7 +14,7 @@ export const updateState = (eventName, item) => {
   return safeClone(targetItem);
 }
 
-export const containsState = (eventName, property) => getItem(eventName) !== null;
+export const containsValue = (eventName, property) => (getItem(eventName) || {})[property];
 
 export const getState = (eventName, property) => {
   const state = getItem(eventName) || {};
@@ -39,7 +39,7 @@ export const connectToOne = (eventName, listener, targetFunction) => {
   if (dataItem) {
     broadcast(eventName, dataItem);
   }
-};
+}
 
 export const connectToMany = (eventList, listener, targetFunction) =>
     eventList.forEach(eventName => connectToOne(eventName, listener, targetFunction));
@@ -62,6 +62,3 @@ export const clearValues = (stateName) => {
 
 //A simple callback mechanism to achieve what MobX can't do: 1) pass change when value is changed inside a nested object, and 2) work with inheritance
 export const broadcast = (eventName, item) => Object.values(connectionMap[eventName] || {}).forEach((listener) => listener(clone(item)));
-
-
-

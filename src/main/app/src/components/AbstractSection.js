@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import {setSectionDone, setSectionExpansion} from '../stores/SectionStateStore';
-import {APP_EVENT_SECTION_CLEAR_CLICK, APP_EVENT_SECTION_SUBMIT_CLICK, APP_STATE_SECTION_EXPANSION_MAP} from '../config/states';
+import {
+  APP_EVENT_SECTION_VALIDATION_REQUEST,
+  APP_STATE_SECTION_EXPANSION_MAP
+} from '../config/states';
 import {broadcast, connectToOne} from '../utils/stateUtils';
 
 const classNames = require('classnames');
@@ -76,12 +79,12 @@ export class AbstractSection extends Component {
 
   handleSubmitButtonClick = () => {
     this.onSubmitButtonClick();
-    broadcast(APP_EVENT_SECTION_SUBMIT_CLICK)
+    broadcast(APP_EVENT_SECTION_VALIDATION_REQUEST, this.getClassName())
   }
 
   handleClearButtonClick = () => {
     this.onClearButtonClick();
-    broadcast(APP_EVENT_SECTION_CLEAR_CLICK);
+    broadcast(APP_EVENT_SECTION_VALIDATION_REQUEST, this.getClassName());
   }
 
   onClearButtonClick = () => {};

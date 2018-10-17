@@ -5,7 +5,6 @@ import {KoulutustyyppiSection} from './section/KoulutustyyppiSection';
 import {KoulutuksenTiedotSection} from './section/KoulutuksenTiedotSection';
 import {KoulutuksenKuvausSection} from './section/KoulutuksenKuvausSection';
 import {ValitseOrganisaatioSection} from './section/ValitseOrganisaatioSection';
-import {FooterActionButtons} from './FooterActionButtons';
 
 export class KoulutusPublicationView extends Component {
 
@@ -21,7 +20,6 @@ export class KoulutusPublicationView extends Component {
           <KoulutuksenTiedotSection/>
           <KoulutuksenKuvausSection/>
           <ValitseOrganisaatioSection/>
-          <FooterActionButtons/>
         </div>
       </div>
   )

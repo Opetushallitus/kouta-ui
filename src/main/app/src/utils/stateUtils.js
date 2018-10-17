@@ -17,7 +17,7 @@ export const updateState = (eventName, item) => {
 export const containsValue = (eventName, property) => (getItem(eventName) || {})[property];
 
 export const getState = (eventName, property) => {
-  const state = getItem(eventName) || {};
+  const state = enforceItem(eventName);
   return safeClone(property ? state[property] : state);
 }
 

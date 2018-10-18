@@ -1,9 +1,10 @@
 import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
-import {selectKoulutustyyppi} from '../../../stores/KoulutusListStore';
 import {APP_STATE_KOULUTUSTYYPPI} from '../../../config/states';
 import {connectToOne} from '../../../utils/stateUtils';
 import {isVariableDefined} from '../../../utils/objectUtils';
+import {activeKoulutustyyppi, koulutustyyppiOptions} from '../../../model/Koulutustyyppi';
+import {setKoulutustyyppi} from '../../../stores/KoulutustyyppiStore';
 
 export class KoulutustyyppiSection extends AbstractSection {
 
@@ -16,13 +17,13 @@ export class KoulutustyyppiSection extends AbstractSection {
 
   getHeader = () => '2 Valitse koulutustyyppi';
 
-  handleCheckboxChange = (event) => selectKoulutustyyppi(event.target.value);
+  handleCheckboxChange = (event) => setKoulutustyyppi(event.target.value);
 
-  isValid = () => isVariableDefined(this.state.activeKoulutustyyppi);
+  isValid = () => isVariableDefined(this.state[activeKoulutustyyppi]);
 
-  isOptionChecked = (option) => option.value === this.state.activeKoulutustyyppi;
+  isOptionChecked = (option) => option.value === this.state[activeKoulutustyyppi];
 
-  onClearButtonClick = () => selectKoulutustyyppi(null);
+  onClearButtonClick = () => setKoulutustyyppi(null);
 
   renderKoulutustyyppiOption = (koulutustyyppiOption, index) => (
     <li key={index}>
@@ -33,7 +34,7 @@ export class KoulutustyyppiSection extends AbstractSection {
 
   renderKoulutustyyppiList = () => this.state.koulutustyyppiOptions ? (
     <ul className={"koulutustyyppi-list"}>
-      {this.state.koulutustyyppiOptions.map(this.renderKoulutustyyppiOption)}
+      {this.state[koulutustyyppiOptions].map(this.renderKoulutustyyppiOption)}
     </ul>
   ) : null;
 

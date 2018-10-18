@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {getKoodiUri, getKoulutuksenNimi, getVersio} from './KoulutusDetailsStore';
-import {getKoulutustyyppi} from './KoulutusListStore';
+import {getKoulutustyyppi} from './KoulutustyyppiStore';
 import {getUrlKoutaBackendKoulutus} from './UrlStore';
 import {JULKAISUTILA, LANGUAGE, REQUEST_STATUS} from '../config/constants';
 import {connectToOne, observe, updateState} from '../utils/stateUtils';

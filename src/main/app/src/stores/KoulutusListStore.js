@@ -1,42 +1,16 @@
 import axios from 'axios';
 import {urlKoulutuskoodit} from '../config/urls';
 import {APP_STATE_ACTIVE_KOULUTUS, APP_STATE_KOULUTUS_LIST, APP_STATE_KOULUTUSTYYPPI, APP_STATE_WORKFLOW} from '../config/states';
-import {clearState, clearValues, connectToOne, getState, observe, updateState} from '../utils/stateUtils';
+import {clearState, clearValues, connectToOne, getState, updateState} from '../utils/stateUtils';
 import {getId, getSelectedOptions} from '../model/Koulutuskoodi';
 
 export const KoulutusListStore = () => {
-  configureKoulutustyyppiOptions();
   connectToOne(APP_STATE_WORKFLOW, {}, () => {
     clearState(APP_STATE_KOULUTUS_LIST);
     clearState(APP_STATE_ACTIVE_KOULUTUS);
-  })
-};
-
-export const configureKoulutustyyppiOptions = () => observe(APP_STATE_KOULUTUSTYYPPI, {
-  koulutustyyppiOptions: [
-    {
-      value: 'amm',
-      label: 'Ammatillinen koulutus'
-    },
-    {
-      value: 'kk',
-      label: 'Korkeakoulukoulutus'
-    },
-    {
-      value: 'lk',
-      label: 'Lukiokoulutus'
-    }
-  ]
-});
-
-export const selectKoulutustyyppi = (value) => {
-  setKoulutustyyppi(value);
-  loadKoulutusList();
-};
-
-const setKoulutustyyppi = (activeKoulutustyyppi) => updateState(APP_STATE_KOULUTUSTYYPPI, {activeKoulutustyyppi});
-
-export const getKoulutustyyppi = () => getState(APP_STATE_KOULUTUSTYYPPI, 'activeKoulutustyyppi');
+  });
+  connectToOne(APP_STATE_KOULUTUSTYYPPI, {}, (koulutustyyppi) => loadKoulutusList());
+}
 
 const loadKoulutusList = () => axios.get(urlKoulutuskoodit()).then((response) => setKoulutusListData(response.data));
 

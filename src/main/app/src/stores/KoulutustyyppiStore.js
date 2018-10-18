@@ -1,11 +1,9 @@
 import {getState, setState, updateState} from '../utils/stateUtils';
-import {APP_STATE_KOULUTUSTYYPPI} from '../config/states';
-import {activeKoulutustyyppi, koulutustyyppiOptions} from '../model/Koulutustyyppi';
+import {APP_STATE_ACTIVE_KOULUTUSTYYPPI, APP_STATE_KOULUTUSTYYPPI_OPTIONS} from '../config/states';
 
 export const KoulutustyyppiStore = () => configureKoulutustyyppiOptions();
 
-export const configureKoulutustyyppiOptions = () => setState(APP_STATE_KOULUTUSTYYPPI, {
-  [koulutustyyppiOptions]: [
+export const configureKoulutustyyppiOptions = () => setState(APP_STATE_KOULUTUSTYYPPI_OPTIONS, [
     {
       value: 'amm',
       label: 'Ammatillinen koulutus'
@@ -17,12 +15,9 @@ export const configureKoulutustyyppiOptions = () => setState(APP_STATE_KOULUTUST
     {
       value: 'lk',
       label: 'Lukiokoulutus'
-    }
-  ]
-});
+    }]
+);
 
-export const setKoulutustyyppi = (koulutustyyppi) => updateState(APP_STATE_KOULUTUSTYYPPI, {
-  [activeKoulutustyyppi]: koulutustyyppi
-});
+export const setKoulutustyyppi = (activeKoulutustyyppi) => updateState(APP_STATE_ACTIVE_KOULUTUSTYYPPI, activeKoulutustyyppi);
 
-export const getKoulutustyyppi = () => getState(APP_STATE_KOULUTUSTYYPPI, [activeKoulutustyyppi]);
+export const getKoulutustyyppi = () => getState(APP_STATE_ACTIVE_KOULUTUSTYYPPI);

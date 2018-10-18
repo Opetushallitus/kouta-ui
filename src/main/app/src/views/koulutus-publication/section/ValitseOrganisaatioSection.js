@@ -18,7 +18,7 @@ export class ValitseOrganisaatioSection extends AbstractSection {
     connectToOne(APP_STATE_ORGANISAATIO_SELECTION_MAP, this, (state) => this.setState({...this.state, organisaatioSelectionMap: state}));
   }
 
-  isOrganisaatioSelected = (organisaatioId) => (this.state.organisaatioSelectionMap || {})[organisaatioId] === true;
+  isOrganisaatioSelected = (organisaatioId) => this.state.organisaatioSelectionMap[organisaatioId] === true;
 
   isOptionChecked = (option) => this.isOrganisaatioSelected(option.value);
 

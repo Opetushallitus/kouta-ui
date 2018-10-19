@@ -3,7 +3,6 @@ const KOODISTO_URI_OSAAMISALA = 'osaamisala';
 const KOODISTO_URI_TUTKINTONIMIKKEET = 'tutkintonimikkeet';
 const KOODISTO_URI_OPINTOJEN_LAAJUUS = 'opintojenlaajuus';
 const KOODISTO_URI_OPINTOJEN_LAAJUUSYKSIKKO = 'opintojenlaajuusyksikko';
-const KOODISTO_URI_KUVAUS = 'nqf';
 
 const AlakoodiFinder = {
   findMany: (alakoodiList, alakoodiType) =>  alakoodiList.filter((item) => item.isOfType(alakoodiType)),
@@ -18,8 +17,7 @@ export const AlakoodiList = {
   findOsaamisalaList: (alakoodiList, language) => AlakoodiFinder.findNames(alakoodiList, KOODISTO_URI_OSAAMISALA, language),
   findTutkintonimikeList: (alakoodiList, language) => AlakoodiFinder.findNames(alakoodiList, KOODISTO_URI_TUTKINTONIMIKKEET, language),
   findOpintojenLaajuus: (alakoodiList, language) => AlakoodiFinder.findName(alakoodiList, KOODISTO_URI_OPINTOJEN_LAAJUUS, language),
-  findOpintojenLaajuusyksikko: (alakoodiList, language) => AlakoodiFinder.findName(alakoodiList, KOODISTO_URI_OPINTOJEN_LAAJUUSYKSIKKO, language),
-  findKuvaus: (alakoodiList, language) =>  AlakoodiFinder.findName(alakoodiList, KOODISTO_URI_KUVAUS, language)
+  findOpintojenLaajuusyksikko: (alakoodiList, language) => AlakoodiFinder.findName(alakoodiList, KOODISTO_URI_OPINTOJEN_LAAJUUSYKSIKKO, language)
 };
 
 

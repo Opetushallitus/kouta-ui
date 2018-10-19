@@ -5,12 +5,12 @@ import {SectionStateStore} from './SectionStateStore';
 import {KoulutusPersistencyStore} from './KoulutusPersistencyStore';
 import {UrlStore} from './UrlStore';
 import {WorkflowStore} from './WorkflowStore';
-import {KoulutustyyppiCategoryStore} from './KoulutustyyppiCategoryStore';
+import {KoulutustyyppiStore} from './KoulutustyyppiStore';
 
 export const initStores = () => {
   UrlStore();
   OrganisaatioStore();
-  KoulutustyyppiCategoryStore();
+  KoulutustyyppiStore();
   KoulutusListStore();
   KoulutusDetailsStore();
   SectionStateStore();

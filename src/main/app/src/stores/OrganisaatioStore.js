@@ -28,6 +28,7 @@ export const getSelectedOrganisaatioOidList = () => {
     organisaatioSelectionMap[organisaatioOid] === true && selectedOids.push(organisaatioOid);
     return selectedOids;
   }, []);
+  console.log('selected oids', oids);
   return oids;
 }
 

@@ -1,28 +1,29 @@
 import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
-import {selectKoulutustyyppi} from '../../../stores/KoulutusListStore';
-import {APP_STATE_KOULUTUSTYYPPI} from '../../../config/states';
+import {APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY, APP_STATE_KOULUTUSTYYPPI_OPTIONS} from '../../../config/states';
 import {connectToOne} from '../../../utils/stateUtils';
 import {isVariableDefined} from '../../../utils/objectUtils';
+import {setKoulutustyyppiCategory} from '../../../stores/KoulutustyyppiCategoryStore';
 
 export class KoulutustyyppiSection extends AbstractSection {
 
   componentDidMount = () => {
     this.connectToSectionStateMap();
-    connectToOne(APP_STATE_KOULUTUSTYYPPI, this, (state) => this.setState(state));
+    connectToOne(APP_STATE_KOULUTUSTYYPPI_OPTIONS, this, (koulutustyyppiOptions) => this.setState({...this.state, koulutustyyppiOptions}));
+    connectToOne(APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY, this, (activeKoulutustyyppi) => this.setState({...this.state, activeKoulutustyyppi}));
   }
 
   getClassName = () => 'KoulutustyyppiSection';
 
   getHeader = () => '2 Valitse koulutustyyppi';
 
-  handleCheckboxChange = (event) => selectKoulutustyyppi(event.target.value);
+  handleCheckboxChange = (event) => setKoulutustyyppiCategory(event.target.value);
 
   isValid = () => isVariableDefined(this.state.activeKoulutustyyppi);
 
   isOptionChecked = (option) => option.value === this.state.activeKoulutustyyppi;
 
-  onClearButtonClick = () => selectKoulutustyyppi(null);
+  onClearButtonClick = () => setKoulutustyyppiCategory(null);
 
   renderKoulutustyyppiOption = (koulutustyyppiOption, index) => (
     <li key={index}>

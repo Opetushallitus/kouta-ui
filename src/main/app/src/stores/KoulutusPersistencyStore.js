@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {getKoodiUri, getKoulutuksenNimi, getVersio} from './KoulutusDetailsStore';
-import {getKoulutustyyppi} from './KoulutusListStore';
+import {getKoulutustyyppiCategory} from './KoulutustyyppiCategoryStore';
 import {getUrlKoutaBackendKoulutus} from './UrlStore';
 import {JULKAISUTILA, LANGUAGE, REQUEST_STATUS} from '../config/constants';
 import {connectToOne, observe, updateState} from '../utils/stateUtils';
@@ -22,7 +22,7 @@ const isFieldEmpty = (fieldValue) => typeof fieldValue === 'undefined' || fieldV
 
 const isAnyOrganisaatioSelected = () => getSelectedOrganisaatioOidList().length > 0;
 
-const isAnyKoulutusFieldEmpty = () => [getKoulutustyyppi(), getKoodiUri(), getVersio(), getKoulutuksenNimi(), isAnyOrganisaatioSelected()]
+const isAnyKoulutusFieldEmpty = () => [getKoulutustyyppiCategory(), getKoodiUri(), getVersio(), getKoulutuksenNimi(), isAnyOrganisaatioSelected()]
 .filter((entry) => isFieldEmpty(entry)).length > 0;
 
 const validateKoulutus = () => updateState(APP_STATE_KOULUTUS_PERSISTENCY, {
@@ -31,7 +31,7 @@ const validateKoulutus = () => updateState(APP_STATE_KOULUTUS_PERSISTENCY, {
 
 const buildJson = (julkaisutila) => ({
   "johtaaTutkintoon": true,
-  "koulutustyyppi": getKoulutustyyppi(),
+  "koulutustyyppi": getKoulutustyyppiCategory(),
   "koulutusKoodiUri": getKoodiUri() + "#" + getVersio(),
   "tila": julkaisutila,
   "tarjoajat": getSelectedOrganisaatioOidList(),

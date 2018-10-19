@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import classNames from 'classnames';
 export class SelectorButton extends Component {
-
-
+  
   constructor(props) {
     super(props);
     this.state = {

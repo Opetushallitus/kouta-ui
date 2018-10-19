@@ -19,15 +19,15 @@ export const REQUEST_STATUS = {
   ENABLED: 'enabled'
 };
 
-export const KOULUTUSTYYPPI = {
+export const KOULUTUSTYYPPI_CATEGORY = {
   AMMATILLINEN_KOULUTUS: 'amm',
   KORKEAKOULUKOULUTUS: 'kk',
   LUKIOKOULUTUS: 'lk',
   MUU_KOULUTUS: 'muu'
 };
 
-export const KOULUTUSTYYPPI_TO_KOULUTUSLIST_IDS_MAP = {
-  [KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS]: [
+export const KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP = {
+  [KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS]: [
     'koulutustyyppi_1',
     'koulutustyyppi_4',
     'koulutustyyppi_5',
@@ -41,16 +41,16 @@ export const KOULUTUSTYYPPI_TO_KOULUTUSLIST_IDS_MAP = {
     'koulutustyyppi_26',
     'koulutustyyppi_26'
   ],
-  [KOULUTUSTYYPPI.KORKEAKOULUKOULUTUS]: [
+  [KOULUTUSTYYPPI_CATEGORY.KORKEAKOULUKOULUTUS]: [
     'koulutustyyppi_3'
   ],
-  [KOULUTUSTYYPPI.LUKIOKOULUTUS]: [
+  [KOULUTUSTYYPPI_CATEGORY.LUKIOKOULUTUS]: [
     'koulutustyyppi_2',
     'koulutustyyppi_9',
     'koulutustyyppi_14',
     'koulutustyyppi_23'
   ],
-  [KOULUTUSTYYPPI.MUU_KOULUTUS]: [
+  [KOULUTUSTYYPPI_CATEGORY.MUU_KOULUTUS]: [
     'koulutustyyppi_6',
     'koulutustyyppi_10',
     'koulutustyyppi_15',

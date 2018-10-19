@@ -8,8 +8,8 @@ const buildUrl = (urlBody) => urlBody.indexOf('http') === 0 ? urlBody : SERVICE_
 export const  urlRelaatioAlakoodit = (koodiUri, versio) =>
     buildUrl(`${SERVICE_DOMAIN}/koodisto-service/rest/json/relaatio/sisaltyy-alakoodit/${koodiUri}?koodiVersio=${versio}`);
 
-export const urlKoulutuskoodit = () =>
-    `${SERVICE_DOMAIN}/koodisto-service/rest/json/koulutus/koodi?onlyValidKoodis=true`;
+export const urlKoulutuskoodit = (koulutustyyppiId) =>
+    `${SERVICE_DOMAIN}/koodisto-service/rest/json/relaatio/sisaltyy-ylakoodit/${koulutustyyppiId}`;
 
 export const urlKoulutuksenKuvaus = (koodiUri) =>
     `${SERVICE_DOMAIN}/eperusteet-service/api/perusteet?tuleva=true&siirtyma=true&voimassaolo=true&poistunut=true&kieli=fi&koulutuskoodi=${koodiUri}`;

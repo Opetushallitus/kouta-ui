@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {APP_STATE_ACTIVE_KOULUTUS, APP_STATE_KOULUTUS_DETAILS, APP_STATE_KOULUTUS_LIST} from '../config/states';
-import {selectKoulutus} from '../stores/KoulutusListStore';
-import {updateKoulutuksenNimi} from '../stores/KoulutusDetailsStore';
+import {selectKoulutus, updateKoulutuksenNimi} from '../stores/KoulutusDetailsStore';
 import {connectToOne} from '../utils/stateUtils';
 
 const classNames = require('classnames');

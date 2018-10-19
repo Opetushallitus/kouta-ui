@@ -26,7 +26,7 @@ export const KOULUTUSTYYPPI = {
   MUU_KOULUTUS: 'muu'
 };
 
-export const KOULUTUSTYYPPI_TO_KOULUTUSLIST_IDS_MAP = {
+export const KOULUTUSTYYPPI_MAP = {
   [KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS]: [
     'koulutustyyppi_1',
     'koulutustyyppi_4',

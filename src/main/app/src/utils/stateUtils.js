@@ -1,14 +1,15 @@
-import {getItem, setItem, enforceItem} from './storageUtils';
-import {clone, safeClone} from './objectUtils'
+import {getItem, setItem, enforceItem, } from './storageUtils';
+import {clone, safeClone, enforceObject, getValueOrClone} from './objectUtils'
 
 const connectionMap = {};
 let listenerId = 0;
 
 export const observe = (eventName, item) => setItem(eventName, clone(item));
 
-export const updateState = (eventName, item) => {
+export const updateState = (eventName, newState) => {
   let targetItem = enforceItem(eventName);
-  targetItem = Object.assign(targetItem, item);
+  newState = enforceObject(newState);
+  targetItem = Object.assign(targetItem, newState);
   setItem(eventName, targetItem);
   broadcast(eventName, targetItem);
   return safeClone(targetItem);
@@ -18,7 +19,7 @@ export const containsValue = (eventName, property) => (getItem(eventName) || {})
 
 export const getState = (eventName, property) => {
   const state = enforceItem(eventName);
-  return safeClone(property ? state[property] : state);
+  return state['_value'] || safeClone(property ? state[property] : state);
 }
 
 //retrieves ID from listener and creates one if it does not exist yet
@@ -45,11 +46,10 @@ export const connectToMany = (eventList, listener, targetFunction) =>
     eventList.forEach(eventName => connectToOne(eventName, listener, targetFunction));
 
 export const setState = (stateName, newState) => {
-  let targetItem = enforceItem(stateName);
-  targetItem = newState;
-  setItem(stateName, targetItem);
-  broadcast(stateName, targetItem);
-  return safeClone(targetItem);
+  newState = enforceObject(newState);
+  setItem(stateName, newState);
+  broadcast(stateName, newState);
+  return safeClone(newState);
 };
 
 export const clearState = (stateName) => setState(stateName, {});
@@ -61,4 +61,4 @@ export const clearValues = (stateName) => {
 }
 
 //A simple callback mechanism to achieve what MobX can't do: 1) pass change when value is changed inside a nested object, and 2) work with inheritance
-export const broadcast = (eventName, item) => Object.values(connectionMap[eventName] || {}).forEach((listener) => listener(clone(item)));
+export const broadcast = (eventName, item) => Object.values(connectionMap[eventName] || {}).forEach((listener) => listener(getValueOrClone(item)));

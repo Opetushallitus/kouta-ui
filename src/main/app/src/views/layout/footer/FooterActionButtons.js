@@ -31,9 +31,15 @@ export class FooterActionButtons extends Component {
 
   getPublishButtonClickHandler = () => this.isPublishButtonEnabled() ? this.saveAndPublishKoulutus : null;
 
-  getSaveButtonLabel = () => 'Tallenna';
+  getSaveButtonLabel = () => ({
+    [REQUEST_STATUS.SUCCESS]: 'Tallennettu',
+    [REQUEST_STATUS.FAILURE]: 'Tallennuksessa tapahtui virhe'
+  }[this.state[ATTR_SAVE]]) || 'Tallenna';
 
-  getPublishButtonLabel = () => 'Tallenna ja julkaise';
+  getPublishButtonLabel = () => ({
+    [REQUEST_STATUS.SUCCESS]: 'Julkaistu',
+    [REQUEST_STATUS.FAILURE]: 'Julkaisussa tapahtui virhe'
+  }[this.state[ATTR_SAVE_AND_PUBLISH]]) || 'Tallenna ja julkaise';
 
   renderSaveButton = () => (
       <button className={classNames("primary", "big", this.getSaveButtonCssClass())}

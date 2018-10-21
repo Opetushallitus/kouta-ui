@@ -16,3 +16,15 @@ export const urlKoulutuksenKuvaus = (koodiUri) =>
 
 export const urlOrganisaatioList = () =>
     `${SERVICE_DOMAIN}/organisaatio-service/rest/organisaatio/v4/hae?aktiiviset=true&suunnitellut=true&lakkautetut=false&organisaatiotyyppi=organisaatiotyyppi_02`;
+
+export const workflowUrlToteutus = () => '/toteutus';
+
+export const workflowUrlKoulutus = () => '/koulutus';
+
+export const workflowUrlHaku = () => '/haku';
+
+export const workflowUrlHakukohde = () => '/hakukohde';
+
+export const workflowUrlValintaperusteet = () => '/valintaperusteet';
+
+export const workflowUrlYhteenveto = () => '/yhteenveto';

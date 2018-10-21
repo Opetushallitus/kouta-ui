@@ -1,18 +1,19 @@
 import axios from 'axios';
 import {AlakoodiList} from '../model/Alakoodi';
-import {clearState, clearValues, connectToOne, getState, updateState} from '../utils/stateUtils';
+import {clearValues, connectToOne, getState, updateState} from '../utils/stateUtils';
 import {LANGUAGE} from '../config/constants';
-import {APP_STATE_KOULUTUS_DETAILS, APP_STATE_KOULUTUS_LIST, APP_STATE_WORKFLOW} from '../config/states';
+import {APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION, APP_STATE_KOULUTUS_DETAILS, APP_STATE_KOULUTUS_LIST, APP_STATE_WORKFLOW} from '../config/states';
 import {urlRelaatioAlakoodit} from '../config/urls';
 import {getKoulutusOptionById} from './KoulutusListStore';
 
-export const KoulutusDetailsStore = () => connectToOne(APP_STATE_WORKFLOW, {}, () => {
-    clearState(APP_STATE_KOULUTUS_DETAILS);
-  });
+export const KoulutusDetailsStore = () => {
+  connectToOne(APP_STATE_WORKFLOW, {}, () => clearKoulutusDetails());
+  connectToOne(APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION, {}, () => clearKoulutusDetails());
+}
 
 const loadKoulutusDetails = (koulutusId) => {
   const koulutusOption = getKoulutusOptionById(koulutusId);
-  updateState(APP_STATE_KOULUTUS_DETAILS, koulutusOption);
+  updateState(APP_STATE_KOULUTUS_DETAILS, {...koulutusOption, active: false });
   axios.get(urlRelaatioAlakoodit(koulutusOption.koodiUri, koulutusOption.versio))
   .then((response) => setKoulutusDetailsData(response.data));
 }

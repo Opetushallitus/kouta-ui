@@ -25,5 +25,5 @@ const isObject = (item) => ({}.constructor === item.constructor);
 
 export const enforceObject = (item) => isObject(item) ? item : {_value: item};
 
-export const getValueOrClone = (item) => safeClone(item['_value'] || item);
+export const getValueOrClone = (item) => item ? safeClone(item['_value'] || item) : null;
 

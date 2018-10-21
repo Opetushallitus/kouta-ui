@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {APP_STATE_ACTIVE_KOULUTUS, APP_STATE_KOULUTUS_DETAILS, APP_STATE_KOULUTUS_LIST} from '../config/states';
+import {APP_STATE_KOULUTUS_DETAILS, APP_STATE_KOULUTUS_LIST} from '../config/states';
 import {selectKoulutus, updateKoulutuksenNimi} from '../stores/KoulutusDetailsStore';
 import {connectToOne} from '../utils/stateUtils';
 
@@ -15,20 +15,25 @@ export class KoulutusSelector extends Component {
   }
 
   componentDidMount = () => {
-    connectToOne(APP_STATE_KOULUTUS_LIST, this, (state) => {
-        this.setState({...this.state, ...state});
-    });
-    connectToOne(APP_STATE_ACTIVE_KOULUTUS, this, (state) => {
-      this.setState({...this.state, ...state});
-    });
+    connectToOne(APP_STATE_KOULUTUS_LIST, this, (state) =>
+      this.setState({
+        koulutusOptions: state.koulutusOptions
+      })
+    );
     connectToOne(APP_STATE_KOULUTUS_DETAILS, this, (state) => {
-      this.setState({...this.state, ...state});
+      this.setState({
+        nimi: state.nimi
+      });
     });
   };
 
+  getFilter = () => this.state.filter || '';
+
   getOptions = () => this.state.koulutusOptions || [];
 
-  matchOption = (option) => option.comparisonValue.indexOf(this.state.filter) > -1;
+  hasOptions = () => this.getOptions().length > 0;
+
+  matchOption = (option) => option.comparisonValue.indexOf(this.getFilter()) > -1;
 
   compareOptions = (a, b) => {
     const aName =  a.label;
@@ -38,7 +43,7 @@ export class KoulutusSelector extends Component {
     return 0;
   }
 
-  getFilteredOptions = () => this.state.filter.length > 0 ? this.getOptions().filter(this.matchOption).sort(this.compareOptions) : [];
+  getFilteredOptions = () => this.getFilter().length > 0 ? this.getOptions().filter(this.matchOption).sort(this.compareOptions) : [];
 
   selectOption = (event) => {
     const value = event.target.getAttribute("data-id");
@@ -77,14 +82,16 @@ export class KoulutusSelector extends Component {
     </div>
   ) : null;
 
-  render = () => (
+  render = () => this.hasOptions() ? (
       <div className={"koulutus-selector"}>
       <span>Valitse koulutus listasta</span>
       <input type={"text"} className={"filter-input"} placeholder={"Valitse koulutus..."} onChange={this.setFilter}></input>
       {this.renderOptions()}
       {this.renderNameEditor()}
     </div>
+  ) : (
+      <div className={"koulutus-selector"}>
+        Valitse ensin koulutustyyppi.
+      </div>
   );
-
-
 }

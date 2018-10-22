@@ -48,7 +48,7 @@ export class AbstractSection extends Component {
 
   isSubmitButtonVisible = () => this.state.visibleSubmitButton;
 
-  isValid = () => false;
+  isValid = () => true;
 
   optionallyRenderContent = () => this.isExpanded() ? this.renderContent() : null;
 

@@ -32,8 +32,6 @@ export class ValitseOrganisaatioSection extends AbstractSection {
 
   isAnyOrganisaatioSelected = () => Object.values(this.state.organisaatioSelectionMap).filter(value => value === true).length > 0;
 
-  isValid = () => this.isAnyOrganisaatioSelected();
-
   onClearButtonClick = () => clearOrganisaatioSelections();
 
   renderOrganisaatioOption = (option, index) => (

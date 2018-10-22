@@ -22,7 +22,8 @@ export class KoulutusSelector extends Component {
     );
     connectToOne(APP_STATE_KOULUTUS_DETAILS, this, (state) => {
       this.setState({
-        nimi: state.nimi
+        nimi: state.nimi,
+        enabled: state.enabled
       });
     });
   };
@@ -75,7 +76,7 @@ export class KoulutusSelector extends Component {
     ) : null;
   }
 
-  renderNameEditor = () => this.state.activeKoulutusId ? (
+  renderNameEditor = () => this.state.enabled ? (
     <div className={"name-editor"}>
       <span>Muokkaa koulutuksen nimeä</span>
       <input type={"text"} className={"filter-input"} placeholder={"Koulutuksen nimi"} onChange={this.updateName} value={this.state.nimi}></input>

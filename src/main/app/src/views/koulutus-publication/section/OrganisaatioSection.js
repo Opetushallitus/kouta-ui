@@ -1,54 +1,25 @@
-import React from 'react';
-import {AbstractSection} from '../../../components/AbstractSection';
-import {APP_EVENT_SECTION_VALIDATION_REQUEST, APP_STATE_ORGANISAATIO, APP_STATE_ORGANISAATIO_SELECTION_MAP} from '../../../config/states';
-import {clearOrganisaatioSelections, selectOrganisaatio} from '../../../stores/OrganisaatioStore';
-import {broadcast, connectToOne} from '../../../utils/stateUtils';
+import {
+  APP_EVENT_ORGANISAATIO_SELECTION_CHANGE,
+  APP_EVENT_ORGANISAATIO_SELECTION_CLEAR,
+  APP_STATE_ORGANISAATIO_OPTIONS,
+  APP_STATE_ORGANISAATIO_SELECTIONS
+} from '../../../config/states';
+import {AbstractCheckboxSection} from '../../../components/AbstractCheckboxSection';
 
-export class OrganisaatioSection extends AbstractSection {
+export class OrganisaatioSection extends AbstractCheckboxSection {
+
+  getOptionsStateName = () => APP_STATE_ORGANISAATIO_OPTIONS;
+
+  getSelectionsStateName = () => APP_STATE_ORGANISAATIO_SELECTIONS;
+
+  getSelectionChangeEventName = () => APP_EVENT_ORGANISAATIO_SELECTION_CHANGE;
+
+  getSelectionClearEventName = () => APP_EVENT_ORGANISAATIO_SELECTION_CLEAR;
 
   getClassName = () => 'OrganisaatioSection';
 
-  getHeader = () => 'Valitse koulutuksen järjestävä organisaatio';
+  getHeader = () => 'Valitse organisaatio';
 
-  componentDidMount = () => {
-    this.connectToSectionStateMap();
-    connectToOne(APP_STATE_ORGANISAATIO, this, (state) => {
-      this.setState({...this.state, ...state});
-    });
-    connectToOne(APP_STATE_ORGANISAATIO_SELECTION_MAP, this, (state) => this.setState({...this.state, organisaatioSelectionMap: state}));
-  }
-
-  isOrganisaatioSelected = (organisaatioId) => this.state.organisaatioSelectionMap[organisaatioId] === true;
-
-  isOptionChecked = (option) => this.isOrganisaatioSelected(option.value);
-
-  handleCheckboxChange = (event) => {
-    const value = event.target.value;
-    const selected = event.target.checked
-    selectOrganisaatio(value, selected);
-    this.setSectionDone();
-    broadcast(APP_EVENT_SECTION_VALIDATION_REQUEST, this.getClassName());
-  }
-
-  onClearButtonClick = () => clearOrganisaatioSelections();
-
-  renderOrganisaatioOption = (option, index) => (
-      <li key={index}>
-        <input type="checkbox" name="organisaatio" value={option.value} checked={this.isOptionChecked(option)}
-               onChange={this.handleCheckboxChange}/>{option.label}
-      </li>
-  );
-
-  renderOrganisaatioList = () => this.state.options ? (
-      <ul className={"organisaatio-list"}>
-        {this.state.options.map(this.renderOrganisaatioOption)}
-      </ul>
-  ) : null;
-
-  renderContent = () => (
-      <div className={"content"}>
-        {this.renderOrganisaatioList()}
-      </div>
-  );
+  getInstruction = () => 'Valitse koulutuksen järjestävä organisaatio';
 
 }

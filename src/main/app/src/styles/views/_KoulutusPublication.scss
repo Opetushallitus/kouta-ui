@@ -65,11 +65,12 @@
     }
   }
 
-  .kieliversio-section {
+  .kieliversio-section, .organisaatio-section {
     .content {
       flex-direction: column;
     }
   }
+
   .koulutuksen-tiedot-section {
     .content {
       align-items: stretch;

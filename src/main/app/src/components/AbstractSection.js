@@ -6,8 +6,8 @@ import {
 } from '../config/states';
 import {broadcast, connectToOne} from '../utils/stateUtils';
 import {toCssCase} from '../utils/stringUtils';
-
 const classNames = require('classnames');
+
 export class AbstractSection extends Component {
 
   constructor(props) {

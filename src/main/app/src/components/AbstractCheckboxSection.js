@@ -1,6 +1,7 @@
 import React from 'react';
 import {AbstractSection} from './AbstractSection';
 import {broadcast, connectToOne} from '../utils/stateUtils';
+const classNames = require('classnames');
 
 export class AbstractCheckboxSection extends AbstractSection {
 
@@ -60,16 +61,17 @@ export class AbstractCheckboxSection extends AbstractSection {
   );
 
   renderOptionList = () => this.state.options ? (
-      <ul className={this.getClassName() + "-list"}>
+      <ul className={this.getCssClassName() + "-list"}>
         {this.state.options.map(this.renderOption)}
       </ul>
   ) : null;
 
   renderContent = () => (
-      <div className={"content"}>
+      <div className={classNames("content", "checkbox-section-content")}>
         {this.getInstruction()}
         {this.renderOptionList()}
       </div>
   );
 
 }
+

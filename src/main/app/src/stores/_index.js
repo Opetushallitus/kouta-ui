@@ -6,6 +6,7 @@ import {KoulutusPersistencyStore} from './KoulutusPersistencyStore';
 import {UrlStore} from './UrlStore';
 import {WorkflowStore} from './WorkflowStore';
 import {KoulutustyyppiCategoryStore} from './KoulutustyyppiCategoryStore';
+import {KieliversioStore} from './KieliversioStore';
 
 export const initStores = () => {
   UrlStore();
@@ -16,4 +17,5 @@ export const initStores = () => {
   SectionStateStore();
   KoulutusPersistencyStore();
   WorkflowStore();
+  KieliversioStore();
 }

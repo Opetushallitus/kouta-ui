@@ -1,14 +1,20 @@
 import axios from 'axios';
 import {AlakoodiList} from '../model/Alakoodi';
-import {clearValues, connectToOne, getState, setState, updateState} from '../utils/stateUtils';
+import {clearValues, connectToMany, connectToOne, getState, setState, updateState} from '../utils/stateUtils';
 import {LANGUAGE} from '../config/constants';
-import {APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION, APP_STATE_KOULUTUS_DETAILS, APP_STATE_KOULUTUS_LIST, APP_STATE_WORKFLOW} from '../config/states';
+import {
+  APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION,
+  APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY,
+  APP_STATE_KOULUTUS_DETAILS,
+  APP_STATE_KOULUTUS_LIST,
+  APP_STATE_WORKFLOW
+} from '../config/states';
 import {urlRelaatioAlakoodit} from '../config/urls';
 import {getKoulutusOptionById} from './KoulutusListStore';
 
 export const KoulutusDetailsStore = () => {
   connectToOne(APP_STATE_WORKFLOW, {}, () => clearKoulutusDetails());
-  connectToOne(APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION, {}, () => clearKoulutusDetails());
+  connectToMany([APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION, APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY], {}, () => clearKoulutusDetails());
   setState(APP_STATE_KOULUTUS_DETAILS, {
     enabled: false
   })

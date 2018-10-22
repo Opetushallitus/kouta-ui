@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {APP_STATE_KOULUTUS_DETAILS, APP_STATE_KOULUTUS_LIST} from '../config/states';
+import {APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY, APP_STATE_KOULUTUS_DETAILS, APP_STATE_KOULUTUS_LIST} from '../config/states';
 import {selectKoulutus, updateKoulutuksenNimi} from '../stores/KoulutusDetailsStore';
 import {connectToOne} from '../utils/stateUtils';
+import {KOULUTUSTYYPPI_CATEGORY} from '../config/constants';
 
 const classNames = require('classnames');
 export class KoulutusSelector extends Component {
@@ -15,16 +16,15 @@ export class KoulutusSelector extends Component {
   }
 
   componentDidMount = () => {
-    connectToOne(APP_STATE_KOULUTUS_LIST, this, (state) =>
-      this.setState({
+    connectToOne(APP_STATE_KOULUTUS_LIST, this, (state) => this.setState(...this.state, {
         koulutusOptions: state.koulutusOptions
-      })
-    );
-    connectToOne(APP_STATE_KOULUTUS_DETAILS, this, (state) => {
-      this.setState({
+    }));
+    connectToOne(APP_STATE_KOULUTUS_DETAILS, this, (state) => this.setState(...this.state, {
         nimi: state.nimi,
         enabled: state.enabled
-      });
+    }));
+    connectToOne(APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY, this, (koulutustyyppiCategory) => {
+      this.setState(...this.state, {koulutustyyppiCategory});
     });
   };
 
@@ -35,6 +35,8 @@ export class KoulutusSelector extends Component {
   hasOptions = () => this.getOptions().length > 0;
 
   matchOption = (option) => option.comparisonValue.indexOf(this.getFilter()) > -1;
+
+  isNameEditingAllowed = () =>  this.state.enabled && this.state.koulutustyyppiCategory !== KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS;
 
   compareOptions = (a, b) => {
     const aName =  a.label;
@@ -76,11 +78,11 @@ export class KoulutusSelector extends Component {
     ) : null;
   }
 
-  renderNameEditor = () => this.state.enabled ? (
-    <div className={"name-editor"}>
-      <span>Muokkaa koulutuksen nimeä</span>
-      <input type={"text"} className={"filter-input"} placeholder={"Koulutuksen nimi"} onChange={this.updateName} value={this.state.nimi}></input>
-    </div>
+  renderNameEditor = () => this.isNameEditingAllowed() ? (
+      <div className={"name-editor"}>
+        <span>Muokkaa koulutuksen nimeä</span>
+        <input type={"text"} className={"filter-input"} placeholder={"Koulutuksen nimi"} onChange={this.updateName} value={this.state.nimi}></input>
+      </div>
   ) : null;
 
   render = () => this.hasOptions() ? (

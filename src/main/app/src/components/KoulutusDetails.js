@@ -38,7 +38,7 @@ export class KoulutusDetails extends Component {
 
   renderTutkintonimikeList = () => this.state.tutkintonimikeList.join(', ');
 
-  render = () => this.state.active ?  (
+  render = () => this.state.enabled ?  (
     <div className={"koulutus-details"}>
       {this.renderDetailsRow('Koulutus:', this.state.nimi)}
       {this.renderDetailsRow('Koulutusala:', this.state.koulutusala)}

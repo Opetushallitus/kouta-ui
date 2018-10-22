@@ -9,11 +9,14 @@ import {getKoulutusOptionById} from './KoulutusListStore';
 export const KoulutusDetailsStore = () => {
   connectToOne(APP_STATE_WORKFLOW, {}, () => clearKoulutusDetails());
   connectToOne(APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION, {}, () => clearKoulutusDetails());
+  setState(APP_STATE_KOULUTUS_DETAILS, {
+    enabled: false
+  })
 }
 
 const loadKoulutusDetails = (koulutusId) => {
   const koulutusOption = getKoulutusOptionById(koulutusId);
-  updateState(APP_STATE_KOULUTUS_DETAILS, {...koulutusOption, active: false });
+  updateState(APP_STATE_KOULUTUS_DETAILS, {...koulutusOption, enabled: false });
   axios.get(urlRelaatioAlakoodit(koulutusOption.koodiUri, koulutusOption.versio))
   .then((response) => setKoulutusDetailsData(response.data));
 }
@@ -26,12 +29,12 @@ const setKoulutusDetailsData = (alakoodiJsonArray) => {
     tutkintonimikeList: AlakoodiList.findTutkintonimikeList(alakoodiList, LANGUAGE),
     opintojenLaajuus: AlakoodiList.findOpintojenLaajuus(alakoodiList, LANGUAGE),
     opintojenLaajuusyksikko: AlakoodiList.findOpintojenLaajuusyksikko(alakoodiList, LANGUAGE),
-    active: true
+    enabled: true
   });
 }
 
 export const clearKoulutusDetails = () => setState(APP_STATE_KOULUTUS_DETAILS, {
-  active: false
+  enabled: false
 });
 
 export const getKoodiUri = () => getState(APP_STATE_KOULUTUS_DETAILS, 'koodiUri');

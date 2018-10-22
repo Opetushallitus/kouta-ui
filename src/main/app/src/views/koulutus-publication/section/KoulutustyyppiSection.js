@@ -1,9 +1,12 @@
 import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
-import {APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION, APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY, APP_STATE_KOULUTUSTYYPPI_OPTIONS} from '../../../config/states';
+import {
+  APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION,
+  APP_EVENT_SELECT_KOULUTUSTYYPPI,
+  APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY,
+  APP_STATE_KOULUTUSTYYPPI_OPTIONS
+} from '../../../config/states';
 import {broadcast, connectToOne} from '../../../utils/stateUtils';
-import {isVariableDefined} from '../../../utils/objectUtils';
-import {setKoulutustyyppiCategory} from '../../../stores/KoulutustyyppiCategoryStore';
 
 export class KoulutustyyppiSection extends AbstractSection {
 
@@ -17,14 +20,11 @@ export class KoulutustyyppiSection extends AbstractSection {
 
   getHeader = () => '2 Valitse koulutustyyppi';
 
-  handleCheckboxChange = (event) => setKoulutustyyppiCategory(event.target.value);
-
-  isValid = () => isVariableDefined(this.state.activeKoulutustyyppi);
+  handleCheckboxChange = (event) => broadcast(APP_EVENT_SELECT_KOULUTUSTYYPPI, event.target.value);
 
   isOptionChecked = (option) => option.value === this.state.activeKoulutustyyppi;
 
   onClearButtonClick = () => broadcast(APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION);
-
 
   renderKoulutustyyppiOption = (koulutustyyppiOption, index) => (
     <li key={index}>

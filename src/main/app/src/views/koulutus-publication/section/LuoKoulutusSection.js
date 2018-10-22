@@ -7,7 +7,7 @@ export class LuoKoulutusSection extends AbstractSection {
 
   getClassName = () => 'LuoKoulutusSection';
 
-  getHeader = () => '1 Luo koulutus';
+  getHeader = () => 'Luo koulutus';
 
   isFooterVisible = () => false;
 

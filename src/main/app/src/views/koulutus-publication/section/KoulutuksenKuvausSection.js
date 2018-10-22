@@ -7,7 +7,7 @@ export class KoulutuksenKuvausSection extends AbstractSection {
 
   getClassName = () => 'KoulutuksenKuvausSection';
 
-  getHeader = () => '4 Koulutuksen kuvaus';
+  getHeader = () => 'Koulutuksen kuvaus';
 
   componentDidMount = () => {
     this.connectToSectionStateMap();

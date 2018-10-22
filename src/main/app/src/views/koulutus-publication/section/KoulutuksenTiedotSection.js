@@ -15,7 +15,7 @@ export class KoulutuksenTiedotSection extends AbstractSection {
 
   getClassName = () => 'KoulutuksenTiedotSection';
 
-  getHeader = () => "3 Koulutuksen tiedot";
+  getHeader = () => 'Koulutuksen tiedot';
 
   onClearButtonClick = () => deselectKoulutus();
 

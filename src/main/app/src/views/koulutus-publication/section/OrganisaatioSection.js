@@ -4,11 +4,11 @@ import {APP_EVENT_SECTION_VALIDATION_REQUEST, APP_STATE_ORGANISAATIO, APP_STATE_
 import {clearOrganisaatioSelections, selectOrganisaatio} from '../../../stores/OrganisaatioStore';
 import {broadcast, connectToOne} from '../../../utils/stateUtils';
 
-export class ValitseOrganisaatioSection extends AbstractSection {
+export class OrganisaatioSection extends AbstractSection {
 
-  getClassName = () => 'ValitseOrganisaatioSection';
+  getClassName = () => 'OrganisaatioSection';
 
-  getHeader = () => '5 Valitse koulutuksen järjestävä organisaatio';
+  getHeader = () => 'Valitse koulutuksen järjestävä organisaatio';
 
   componentDidMount = () => {
     this.connectToSectionStateMap();
@@ -29,8 +29,6 @@ export class ValitseOrganisaatioSection extends AbstractSection {
     this.setSectionDone();
     broadcast(APP_EVENT_SECTION_VALIDATION_REQUEST, this.getClassName());
   }
-
-  isAnyOrganisaatioSelected = () => Object.values(this.state.organisaatioSelectionMap).filter(value => value === true).length > 0;
 
   onClearButtonClick = () => clearOrganisaatioSelections();
 

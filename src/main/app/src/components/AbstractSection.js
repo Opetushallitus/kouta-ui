@@ -34,7 +34,11 @@ export class AbstractSection extends Component {
 
   getHeaderCssClass = () => this.isActive() ? "active-header" : "";
 
+  getNumberedHeader = () => `${this.getOrderNumber()} ${this.getHeader()}`.trim();
+
   getHeader = () => null;
+
+  getOrderNumber = () => this.props.orderNumber || '';
 
   renderContent = () => null;
 
@@ -66,7 +70,7 @@ export class AbstractSection extends Component {
 
   renderHeader = () => (
       <div className={classNames("header", this.getHeaderCssClass())}>
-        <div className={classNames("title")}>{this.getHeader()}</div>
+        <div className={classNames("title")}>{this.getNumberedHeader()}</div>
         <div className={classNames("controller", this.getControllerCssClass())} onClick={this.toggleState}>
           <i className="material-icons">{this.getControlIcon()}</i>
         </div>

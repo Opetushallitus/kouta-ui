@@ -18,7 +18,7 @@ export class KoulutustyyppiSection extends AbstractSection {
 
   getClassName = () => 'KoulutustyyppiSection';
 
-  getHeader = () => '2 Valitse koulutustyyppi';
+  getHeader = () => 'Valitse koulutustyyppi';
 
   handleCheckboxChange = (event) => broadcast(APP_EVENT_SELECT_KOULUTUSTYYPPI, event.target.value);
 

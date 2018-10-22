@@ -11,7 +11,7 @@ const consecutiveSections = [
   'KoulutustyyppiSection',
   'KoulutuksenTiedotSection',
   'KoulutuksenKuvausSection',
-  'ValitseOrganisaatioSection'
+  'OrganisaatioSection'
 ];
 
 export const setSectionExpansion = (sectionName, expanded) => updateState(APP_STATE_SECTION_EXPANSION_MAP, {

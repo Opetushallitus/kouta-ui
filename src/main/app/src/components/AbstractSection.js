@@ -5,9 +5,9 @@ import {
   APP_STATE_SECTION_EXPANSION_MAP
 } from '../config/states';
 import {broadcast, connectToOne} from '../utils/stateUtils';
+import {toCssCase} from '../utils/stringUtils';
 
 const classNames = require('classnames');
-
 export class AbstractSection extends Component {
 
   constructor(props) {
@@ -28,7 +28,9 @@ export class AbstractSection extends Component {
 
   getClassName = () => 'AbstractSection';
 
-  getSectionCssClass = () => this.isExpanded() ? "expanded-section" : "collapsed-section";
+  getCssClassName = () => toCssCase(this.getClassName());
+
+  getExpansionStateCssClass = () => this.isExpanded() ? "expanded-section" : "collapsed-section";
 
   getControllerCssClass = () => this.isExpanded() ? "expanded-controller" : "collapsed-controller";
 
@@ -112,7 +114,7 @@ export class AbstractSection extends Component {
   )
 
   render = () => (
-      <div className={classNames('section', 'abstract-section', this.getSectionCssClass())}>
+      <div className={classNames('section', this.getCssClassName(), this.getExpansionStateCssClass())}>
         {this.renderHeader()}
         {this.optionallyRenderContent()}
         {this.optionallyRenderFooter()}

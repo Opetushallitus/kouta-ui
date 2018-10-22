@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {AlakoodiList} from '../model/Alakoodi';
-import {clearValues, connectToOne, getState, updateState} from '../utils/stateUtils';
+import {clearValues, connectToOne, getState, setState, updateState} from '../utils/stateUtils';
 import {LANGUAGE} from '../config/constants';
 import {APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION, APP_STATE_KOULUTUS_DETAILS, APP_STATE_KOULUTUS_LIST, APP_STATE_WORKFLOW} from '../config/states';
 import {urlRelaatioAlakoodit} from '../config/urls';
@@ -20,7 +20,6 @@ const loadKoulutusDetails = (koulutusId) => {
 
 const setKoulutusDetailsData = (alakoodiJsonArray) => {
   const alakoodiList = AlakoodiList.createFromJsonArray(alakoodiJsonArray);
-
   updateState(APP_STATE_KOULUTUS_DETAILS, {
     koulutusala: AlakoodiList.findKoulutusala(alakoodiList, LANGUAGE),
     osaamisalaList: AlakoodiList.findOsaamisalaList(alakoodiList, LANGUAGE),
@@ -31,7 +30,9 @@ const setKoulutusDetailsData = (alakoodiJsonArray) => {
   });
 }
 
-export const clearKoulutusDetails = () => clearValues(APP_STATE_KOULUTUS_DETAILS);
+export const clearKoulutusDetails = () => setState(APP_STATE_KOULUTUS_DETAILS, {
+  active: false
+});
 
 export const getKoodiUri = () => getState(APP_STATE_KOULUTUS_DETAILS, 'koodiUri');
 

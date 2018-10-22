@@ -13,16 +13,28 @@ export class KoulutuksenKuvausSection extends AbstractSection {
 
   componentDidMount = () => {
     this.connectToSectionStateMap();
-    connectToOne(APP_STATE_KOULUTUS_DETAILS, this, (state) => this.setState({kuvaus: state.kuvaus}));
+    connectToOne(APP_STATE_KOULUTUS_DETAILS, this, (state) => this.setState({
+      kuvaus: state.kuvaus,
+      active: state.active
+    }));
   }
 
   isClearButtonVisible = () => false;
 
-  renderContent = () => this.state.kuvaus ? (
-      <div className={"content"} dangerouslySetInnerHTML={{__html: this.state.kuvaus}}/>
-  ) : (
+  isActive = () => this.state.active === true;
+
+  containsKuvaus = () => this.state.kuvaus !== null;
+
+  renderWarning = (warningMessage) => (
       <div className={"content"}>
-        <span className={"kuvaus-warning-span"}>Koulutukselle ei ole määritelty kuvausta.</span>
+        <span className={"kuvaus-warning-span"}>{warningMessage}</span>
       </div>
   )
+
+  renderKuvaus = () => this.containsKuvaus() ? (
+      <div className={"content"} dangerouslySetInnerHTML={{__html: this.state.kuvaus}}/>
+  ) : this.renderWarning('Koulutukselle ei ole määritelty kuvausta.');
+
+  renderContent = () => this.isActive() ? this.renderKuvaus() : this.renderWarning('Valitse ensin koulutus.');
+
 }

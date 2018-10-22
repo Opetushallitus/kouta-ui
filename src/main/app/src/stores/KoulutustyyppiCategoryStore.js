@@ -23,5 +23,4 @@ export const setKoulutustyyppiCategory = (activeKoulutustyyppi) =>
 
 export const clearKoulutustyyppiCategory = () => clearState(APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY);
 
-
 export const getKoulutustyyppiCategory = () => getState(APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY);

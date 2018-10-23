@@ -9,7 +9,7 @@ import {KoulutuksenYhteystiedotSection} from './sections/KoulutuksenYhteystiedot
 import {ToteutuksenHautSection} from './sections/ToteutuksenHautSection';
 import {KoulutuksenNayttamistiedotSection} from './sections/KoulutuksenNayttamistiedotSection';
 
-export class KoulutuksenToteutusView extends Component {
+export class ToteutusView extends Component {
 
   render = () => (
       <div className={"workflow-view"}>

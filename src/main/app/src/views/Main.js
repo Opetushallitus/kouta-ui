@@ -3,7 +3,7 @@ import {Route} from 'react-router-dom';
 import {Header} from "./layout/Header";
 import {Footer} from "./layout/Footer";
 import {KoulutusPublicationView} from './koulutus-publication/KoulutusPublicationView';
-import {KoulutuksenToteutusView} from './koulutuksen-toteutus/KoulutuksenToteutusView';
+import {ToteutusView} from './toteutus/ToteutusView';
 
 export class Main extends Component {
 
@@ -13,7 +13,7 @@ export class Main extends Component {
           <Route exact path='/' render={() => <KoulutusPublicationView/>}/>
           <Route path='/koulutukset' render={() => <KoulutusPublicationView/>}/>
           <Route path='/koulutus' render={() => <KoulutusPublicationView/>}/>
-          <Route path='/toteutus' render={() => <KoulutuksenToteutusView/>}/>
+          <Route path='/toteutus' render={() => <ToteutusView/>}/>
           <Route path='/' render={() => <Footer/>}/>
         </React.Fragment>
     )

@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
-import {LuoKoulutusSection} from './section/LuoKoulutusSection';
-import {KoulutustyyppiSection} from './section/KoulutustyyppiSection';
-import {KoulutuksenTiedotSection} from './section/KoulutuksenTiedotSection';
-import {KoulutuksenKuvausSection} from './section/KoulutuksenKuvausSection';
-import {OrganisaatioSection} from './section/OrganisaatioSection';
-import {KieliversioSection} from './section/KieliversioSection';
+import {LuoKoulutusSection} from './sections/LuoKoulutusSection';
+import {KoulutustyyppiSection} from './sections/KoulutustyyppiSection';
+import {KoulutuksenTiedotSection} from './sections/KoulutuksenTiedotSection';
+import {KoulutuksenKuvausSection} from './sections/KoulutuksenKuvausSection';
+import {OrganisaatioSection} from './sections/OrganisaatioSection';
+import {KieliversioSection} from './sections/KieliversioSection';
 
 export class KoulutusPublicationView extends Component {
 
   render = () => (
-      <div className={"koulutus-publication-view"}>
+      <div className={"workflow-view"}>
           <div className={"button-container button-container-right"}>
             <button className={"secondary small"}>Esikatsele</button>
           </div>

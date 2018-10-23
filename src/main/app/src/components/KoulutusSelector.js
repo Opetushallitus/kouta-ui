@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY, APP_STATE_KOULUTUS_DETAILS, APP_STATE_KOULUTUS_LIST} from '../config/states';
 import {selectKoulutus, updateKoulutuksenNimi} from '../stores/KoulutusDetailsStore';
 import {connectToOne} from '../utils/stateUtils';
-import {KoulutusNameTranslationEditor} from '../views/koulutus-publication/section/koulutuksen-tiedot/KoulutusNameTranslationEditor';
+import {KoulutusNameTranslationEditor} from '../views/koulutus-publication/sections/koulutuksen-tiedot/KoulutusNameTranslationEditor';
 import {KOULUTUSTYYPPI_CATEGORY} from '../config/constants';
 
 const classNames = require('classnames');

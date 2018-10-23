@@ -63,3 +63,4 @@ export const deselectKoulutus = () => clearValues(APP_STATE_KOULUTUS_DETAILS);
 
 export const selectKoulutus = (activeKoulutusId) => loadKoulutusDetails(activeKoulutusId)
 
+export const getNameTranslationMap = () => getState(APP_STATE_KOULUTUS_DETAILS, 'nameTranslationMap') || {};

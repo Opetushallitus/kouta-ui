@@ -24,4 +24,5 @@ export class ToteutusView extends Component {
           <ToteutuksenHautSection orderNumber={"9"}/>
       </div>
   )
+
 }

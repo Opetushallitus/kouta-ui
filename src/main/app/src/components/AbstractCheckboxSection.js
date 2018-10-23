@@ -5,6 +5,16 @@ const classNames = require('classnames');
 
 export class AbstractCheckboxSection extends AbstractSection {
 
+  componentDidMount = () => {
+    this.connectToSectionStateMap();
+    connectToOne(this.getOptionsStateName(), this, (state) => {
+      this.setState({...this.state, options: state});
+    });
+    connectToOne(this.getSelectionsStateName(), this, (state) => {
+      this.setState({...this.state, selections: state});
+    });
+  }
+
   getClassName = () => {
     throw new Error('AbstractCheckboxSection:getClassName(): implement in subclass!')
   };
@@ -31,16 +41,6 @@ export class AbstractCheckboxSection extends AbstractSection {
 
   getSelectionClearEventName = () => {
     throw new Error('AbstractCheckboxSection:getSelectionClearEventName(): implement in subclass!');
-  }
-
-  componentDidMount = () => {
-    this.connectToSectionStateMap();
-    connectToOne(this.getOptionsStateName(), this, (state) => {
-      this.setState({...this.state, options: state});
-    });
-    connectToOne(this.getSelectionsStateName(), this, (state) => {
-      this.setState({...this.state, selections: state});
-    });
   }
 
   isOptionChecked = (option) => this.state.selections[option.value] === true;

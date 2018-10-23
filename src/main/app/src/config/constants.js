@@ -60,3 +60,10 @@ export const KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP = {
     'koulutustyyppi_22'
   ]
 };
+
+export const LANGUAGE_CODE_TO_LANGUAGE_NAME = {
+  'fi': 'Suomi',
+  'sv': 'Ruotsi',
+  'en': 'Englanti'
+}
+

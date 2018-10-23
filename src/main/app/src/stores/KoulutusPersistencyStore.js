@@ -1,11 +1,12 @@
 import axios from 'axios';
-import {getKoodiUri, getKoulutuksenNimi, getVersio} from './KoulutusDetailsStore';
+import {getKoodiUri, getVersio} from './KoulutusDetailsStore';
 import {getKoulutustyyppiCategory} from './KoulutustyyppiCategoryStore';
 import {getUrlKoutaBackendKoulutus} from './UrlStore';
-import {JULKAISUTILA, LANGUAGE, REQUEST_STATUS} from '../config/constants';
+import {JULKAISUTILA, REQUEST_STATUS} from '../config/constants';
 import {connectToOne, observe, updateState} from '../utils/stateUtils';
 import {APP_EVENT_SECTION_VALIDATION_REQUEST, APP_STATE_KOULUTUS_PERSISTENCY} from '../config/states';
 import {getSelectedOrganisaatioOidList} from './OrganisaatioStore';
+import {getEditedTranslationMap} from './KoulutusNameTranslationStore';
 
 export const ATTR_SAVE_AND_PUBLISH = 'saveAndPublish';
 export const ATTR_SAVE = 'save';
@@ -22,7 +23,9 @@ const isFieldEmpty = (fieldValue) => typeof fieldValue === 'undefined' || fieldV
 
 const isAnyOrganisaatioSelected = () => getSelectedOrganisaatioOidList().length > 0;
 
-const isAnyKoulutusFieldEmpty = () => [getKoulutustyyppiCategory(), getKoodiUri(), getVersio(), getKoulutuksenNimi(), isAnyOrganisaatioSelected()]
+const hasNameTranslations = () => Object.keys(getEditedTranslationMap()).length > 0;
+
+const isAnyKoulutusFieldEmpty = () => [getKoulutustyyppiCategory(), getKoodiUri(), getVersio(), hasNameTranslations(), isAnyOrganisaatioSelected()]
 .filter((entry) => isFieldEmpty(entry)).length > 0;
 
 const validateKoulutus = () => updateState(APP_STATE_KOULUTUS_PERSISTENCY, {
@@ -35,9 +38,7 @@ const buildJson = (julkaisutila) => ({
   "koulutusKoodiUri": getKoodiUri() + "#" + getVersio(),
   "tila": julkaisutila,
   "tarjoajat": getSelectedOrganisaatioOidList(),
-  "nimi": {
-    [LANGUAGE.toLowerCase()]: getKoulutuksenNimi()
-  },
+  "nimi": getEditedTranslationMap(),
   "muokkaaja": "1.2.3.2.2"
 });
 

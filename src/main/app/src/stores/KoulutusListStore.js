@@ -34,6 +34,8 @@ const setKoulutusListData = (koulutustyyyppi, koodiList) => {
     const koodiUri = entry.koodiUri;
     const versio = entry.versio;
     const localizedMetadataEntry = entry.metadata.find(entry => entry.kieli === LANGUAGE);
+    const nameTranslationMap = {};
+    entry.metadata.forEach(entry => {nameTranslationMap[entry['kieli'].toLowerCase()] = entry.nimi});
     const nimi = localizedMetadataEntry.nimi;
     const kuvaus = localizedMetadataEntry.kuvaus;
     optionsMap[nimi] = {
@@ -43,6 +45,7 @@ const setKoulutusListData = (koulutustyyyppi, koodiList) => {
       versio,
       nimi,
       kuvaus,
+      nameTranslationMap,
       comparisonValue: nimi.toLowerCase()
     }
   });

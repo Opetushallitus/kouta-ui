@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY, APP_STATE_KOULUTUS_DETAILS, APP_STATE_KOULUTUS_LIST} from '../config/states';
 import {selectKoulutus, updateKoulutuksenNimi} from '../stores/KoulutusDetailsStore';
 import {connectToOne} from '../utils/stateUtils';
+import {KoulutusNameTranslationEditor} from '../views/koulutus-publication/section/koulutuksen-tiedot/KoulutusNameTranslationEditor';
 import {KOULUTUSTYYPPI_CATEGORY} from '../config/constants';
 
 const classNames = require('classnames');
@@ -79,19 +80,16 @@ export class KoulutusSelector extends Component {
   }
 
   renderNameEditor = () => this.isNameEditingAllowed() ? (
-      <div className={"name-editor"}>
-        <span>Muokkaa koulutuksen nimeä</span>
-        <input type={"text"} className={"filter-input"} placeholder={"Koulutuksen nimi"} onChange={this.updateName} value={this.state.nimi}></input>
-      </div>
+      <KoulutusNameTranslationEditor/>
   ) : null;
 
   render = () => this.hasOptions() ? (
       <div className={"koulutus-selector"}>
-      <span>Valitse koulutus listasta</span>
-      <input type={"text"} className={"filter-input"} placeholder={"Valitse koulutus..."} onChange={this.setFilter}></input>
-      {this.renderOptions()}
-      {this.renderNameEditor()}
-    </div>
+        <span>Valitse koulutus listasta</span>
+        <input type={"text"} className={"filter-input"} placeholder={"Valitse koulutus..."} onChange={this.setFilter}></input>
+        {this.renderOptions()}
+        {this.renderNameEditor()}
+      </div>
   ) : (
       <div className={"koulutus-selector"}>
         Valitse ensin koulutustyyppi.

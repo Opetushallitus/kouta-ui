@@ -7,7 +7,7 @@ let listenerId = 0;
 export const observe = (eventName, item) => setItem(eventName, clone(item));
 
 export const updateState = (eventName, newState) => {
-  let targetItem = enforceItem(eventName);
+  let targetItem = enforceItem(eventName) || {};
   newState = enforceObject(newState);
   targetItem = Object.assign(targetItem, newState);
   setItem(eventName, targetItem);
@@ -19,7 +19,7 @@ export const containsValue = (eventName, property) => (getItem(eventName) || {})
 
 export const getState = (eventName, property) => {
   const state = enforceItem(eventName);
-  return state['_value'] || safeClone(property ? state[property] : state);
+  return state ? state['_value'] || safeClone(property ? state[property] : state) : null;
 }
 
 //retrieves ID from listener and creates one if it does not exist yet

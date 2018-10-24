@@ -11,9 +11,7 @@ import {clearState, connectToOne, containsValue, getState, setState, updateState
 import {extractOrganisaatioOptions} from '../model/Organisaatio';
 
 export const OrganisaatioStore = () => {
-  connectToOne(APP_STATE_KOULUTUS_DETAILS, {}, () => {
-    loadOrganisaatioList()
-  });
+  connectToOne(APP_STATE_KOULUTUS_DETAILS, {}, () => loadOrganisaatioList());
   setState(APP_STATE_ORGANISAATIO_OPTIONS, []);
   setState(APP_STATE_ORGANISAATIO_SELECTIONS, {});
   connectToOne(APP_EVENT_ORGANISAATIO_SELECTION_CHANGE, {}, (selection) => selectOrganisaatio(selection.value, selection.selected));
@@ -30,7 +28,6 @@ export const clearOrganisaatioSelections = () => clearState(APP_STATE_ORGANISAAT
 
 export const getSelectedOrganisaatioOidList = () => {
   const selections = getOrganisaatioSelections();
-  console.log('OrganisaatioStore:getSelectedOrganisaatioOidList:selections', selections);
   return Object.keys(selections).reduce((selectedOids, organisaatioOid) => {
     selections[organisaatioOid] && selectedOids.push(organisaatioOid);
     return selectedOids;

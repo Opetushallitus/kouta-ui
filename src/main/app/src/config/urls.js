@@ -26,5 +26,3 @@ export const workflowUrlHaku = () => '/haku';
 export const workflowUrlHakukohde = () => '/hakukohde';
 
 export const workflowUrlValintaperusteet = () => '/valintaperusteet';
-
-export const workflowUrlYhteenveto = () => '/yhteenveto';

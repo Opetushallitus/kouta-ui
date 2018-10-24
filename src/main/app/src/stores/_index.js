@@ -8,6 +8,7 @@ import {WorkflowStore} from './WorkflowStore';
 import {KoulutustyyppiCategoryStore} from './KoulutustyyppiCategoryStore';
 import {KieliversioStore} from './KieliversioStore';
 import {KoulutusNameTranslationStore} from './KoulutusNameTranslationStore';
+import {KoulutusListStore} from './KoulutusListStore';
 
 export const initStores = () => {
   UrlStore();
@@ -20,4 +21,5 @@ export const initStores = () => {
   WorkflowStore();
   KieliversioStore();
   KoulutusNameTranslationStore();
+  KoulutusListStore();
 }

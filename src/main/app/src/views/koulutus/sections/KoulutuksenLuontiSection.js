@@ -3,9 +3,9 @@ import {AbstractSection} from '../../../components/AbstractSection';
 import {SelectorButton} from '../../../components/SelectorButton';
 import {logEvent} from '../../../utils/logging';
 
-export class LuoKoulutusSection extends AbstractSection {
+export class KoulutuksenLuontiSection extends AbstractSection {
 
-  getClassName = () => 'LuoKoulutusSection';
+  getClassName = () => 'KoulutuksenLuontiSection';
 
   getHeader = () => 'Luo koulutus';
 
@@ -15,7 +15,7 @@ export class LuoKoulutusSection extends AbstractSection {
     {
       text: 'Luo uusi koulutus',
       action: () => {
-        logEvent('LuoKoulutusSection:action:setSectionDone')
+        logEvent('KoulutuksenLuontiSection:action:setSectionDone')
         this.setSectionDone()
       }
     },

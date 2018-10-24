@@ -8,7 +8,7 @@ import {
 } from '../../../config/states';
 import {broadcast, connectToOne} from '../../../utils/stateUtils';
 
-export class KoulutustyyppiSection extends AbstractSection {
+export class KoulutuksenTyyppiSection extends AbstractSection {
 
   componentDidMount = () => {
     this.connectToSectionStateMap();
@@ -16,7 +16,7 @@ export class KoulutustyyppiSection extends AbstractSection {
     connectToOne(APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY, this, (activeKoulutustyyppi) => this.setState({...this.state, activeKoulutustyyppi}));
   }
 
-  getClassName = () => 'KoulutustyyppiSection';
+  getClassName = () => 'KoulutuksenTyyppiSection';
 
   getHeader = () => 'Valitse koulutustyyppi';
 

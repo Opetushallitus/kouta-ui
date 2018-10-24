@@ -6,7 +6,7 @@ const INTERNAL_STATE_SEQUENCE_TO_SECTION_MAP = 'INTERNAL_STATE_SEQUENCE_TO_SECTI
 
 export const SectionStateStore = () => observe(APP_STATE_SECTION_EXPANSION_MAP, {
   KoulutustyyppiSection: true,
-  activeSection: 'KoulutustyyppiSection'
+  activeSection: 'KoulutuksenTyyppiSection'
 });
 
 export const setSectionExpansion = (sectionName, expanded) => updateState(APP_STATE_SECTION_EXPANSION_MAP, {

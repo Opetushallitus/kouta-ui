@@ -6,7 +6,7 @@ import {
 } from '../../../config/states';
 import {AbstractCheckboxSection} from '../../../components/AbstractCheckboxSection';
 
-export class KieliversioSection extends AbstractCheckboxSection {
+export class KoulutuksenKieliversioSection extends AbstractCheckboxSection {
 
   getOptionsStateName = () => APP_STATE_KIELIVERSIO_OPTIONS;
 
@@ -16,7 +16,7 @@ export class KieliversioSection extends AbstractCheckboxSection {
 
   getSelectionClearEventName = () => APP_EVENT_KIELIVERSIO_SELECTION_CLEAR;
 
-  getClassName = () => 'KieliversioSection';
+  getClassName = () => 'KoulutuksenKieliversioSection';
 
   getHeader = () => 'Kieliversiot';
 

@@ -6,11 +6,11 @@ import {
   APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION,
   APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY,
   APP_STATE_KOULUTUS_DETAILS,
-  APP_STATE_KOULUTUS_LIST,
+  APP_STATE_KOULUTUSKOODI_LIST,
   APP_STATE_WORKFLOW
 } from '../config/states';
 import {urlRelaatioAlakoodit} from '../config/urls';
-import {getKoulutusOptionById} from './KoulutusListStore';
+import {getKoulutusOptionById} from './KoulutuskoodiListStore';
 
 export const KoulutusDetailsStore = () => {
   connectToOne(APP_STATE_WORKFLOW, {}, () => clearKoulutusDetails());
@@ -55,7 +55,7 @@ export const updateKoulutuksenNimi = (nimi) => updateState(APP_STATE_KOULUTUS_DE
 export const getKoulutuksenNimi = () => getState(APP_STATE_KOULUTUS_DETAILS, 'nimi');
 
 export const getActiveKoulutusById = (activeKoulutusId) => {
-  const koulutusMap = getState(APP_STATE_KOULUTUS_LIST, 'koulutusMap');
+  const koulutusMap = getState(APP_STATE_KOULUTUSKOODI_LIST, 'koulutusMap');
   return koulutusMap[activeKoulutusId];
 }
 

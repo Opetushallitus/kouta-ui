@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY, APP_STATE_KOULUTUS_DETAILS, APP_STATE_KOULUTUS_LIST} from '../config/states';
+import {APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY, APP_STATE_KOULUTUS_DETAILS, APP_STATE_KOULUTUSKOODI_LIST} from '../config/states';
 import {selectKoulutus, updateKoulutuksenNimi} from '../stores/KoulutusDetailsStore';
 import {connectToOne} from '../utils/stateUtils';
 import {KoulutusNameTranslationEditor} from '../views/koulutus-publication/sections/koulutuksen-tiedot/KoulutusNameTranslationEditor';
@@ -17,7 +17,7 @@ export class KoulutusSelector extends Component {
   }
 
   componentDidMount = () => {
-    connectToOne(APP_STATE_KOULUTUS_LIST, this, (state) => this.setState(...this.state, {
+    connectToOne(APP_STATE_KOULUTUSKOODI_LIST, this, (state) => this.setState(...this.state, {
         koulutusOptions: state.koulutusOptions
     }));
     connectToOne(APP_STATE_KOULUTUS_DETAILS, this, (state) => this.setState(...this.state, {

@@ -1,6 +1,6 @@
 import {OrganisaatioStore} from './OrganisaatioStore';
 import {KoulutusDetailsStore} from './KoulutusDetailsStore';
-import {KoulutusListStore} from './KoulutusListStore';
+import {KoulutuskoodiListStore} from './KoulutuskoodiListStore';
 import {SectionStateStore} from './SectionStateStore';
 import {KoulutusPersistencyStore} from './KoulutusPersistencyStore';
 import {UrlStore} from './UrlStore';
@@ -13,7 +13,7 @@ export const initStores = () => {
   UrlStore();
   OrganisaatioStore();
   KoulutustyyppiCategoryStore();
-  KoulutusListStore();
+  KoulutuskoodiListStore();
   KoulutusDetailsStore();
   SectionStateStore();
   KoulutusPersistencyStore();

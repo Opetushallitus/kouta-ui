@@ -1,19 +1,13 @@
 import {APP_STATE_SECTION_EXPANSION_MAP} from '../config/states';
-import {observe, updateState} from '../utils/stateUtils';
+import {getState, observe, updateState} from '../utils/stateUtils';
+
+const INTERNAL_STATE_SECTION_TO_SEQUENCE_MAP = 'INTERNAL_STATE_SECTION_TO_SEQUENCE_MAP';
+const INTERNAL_STATE_SEQUENCE_TO_SECTION_MAP = 'INTERNAL_STATE_SEQUENCE_TO_SECTION_MAP';
 
 export const SectionStateStore = () => observe(APP_STATE_SECTION_EXPANSION_MAP, {
   KoulutustyyppiSection: true,
   activeSection: 'KoulutustyyppiSection'
 });
-
-const consecutiveSections = [
-  'KoulutustyyppiSection',
-  'LuoKoulutusSection',
-  'KieliversioSection',
-  'KoulutuksenTiedotSection',
-  'KoulutuksenKuvausSection',
-  'OrganisaatioSection'
-];
 
 export const setSectionExpansion = (sectionName, expanded) => updateState(APP_STATE_SECTION_EXPANSION_MAP, {
   [sectionName]: expanded,
@@ -22,17 +16,34 @@ export const setSectionExpansion = (sectionName, expanded) => updateState(APP_ST
 
 export const setSectionDone = (sectionName) => {
   const consecutiveSection = getConsecutiveSectionName(sectionName);
-  if (!consecutiveSection) {
-    return;
-  }
-  setSectionExpansion(consecutiveSection, true);
+  consecutiveSection && setSectionExpansion(consecutiveSection, true);
 };
 
+export const registerSection = (sectionName) => {
+  const sequence = getNextSequence();
+  updateState(INTERNAL_STATE_SECTION_TO_SEQUENCE_MAP, {
+    [sectionName]: sequence
+  });
+  updateState(INTERNAL_STATE_SEQUENCE_TO_SECTION_MAP, {
+    [sequence]: sectionName
+  });
+}
+
+const getSequenceToSectionMap = () => getState(INTERNAL_STATE_SEQUENCE_TO_SECTION_MAP) || {};
+
+const getSectionToSequenceMap = () => getState(INTERNAL_STATE_SECTION_TO_SEQUENCE_MAP) || {};
+
+const getNextSequence = () => Object.keys(getSequenceToSectionMap()).length + 1;
+
+const getSequenceBySection = (sectionName) => {
+  const map = getSectionToSequenceMap();
+  return map[sectionName];
+}
+
+const getSectionBySequence = (sequence) => getSequenceToSectionMap()[sequence];
+
 const getConsecutiveSectionName = (sectionName) => {
-  const index = consecutiveSections.indexOf(sectionName);
-  const nextIndex = index + 1;
-  if (nextIndex > (consecutiveSections.length - 1)) {
-    return null;
-  }
-  return consecutiveSections[nextIndex];
+  const sequence = getSequenceBySection(sectionName);
+  const nextSequence = sequence + 1;
+  return getSectionBySequence(nextSequence);
 }

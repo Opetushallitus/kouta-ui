@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {setSectionDone, setSectionExpansion} from '../stores/SectionStateStore';
+import {registerSection, setSectionDone, setSectionExpansion} from '../stores/SectionStateStore';
 import {
   APP_EVENT_SECTION_VALIDATION_REQUEST,
   APP_STATE_SECTION_EXPANSION_MAP
@@ -21,10 +21,13 @@ export class AbstractSection extends Component {
 
   componentDidMount = () => this.connectToSectionStateMap();
 
-  connectToSectionStateMap = () => connectToOne(APP_STATE_SECTION_EXPANSION_MAP, this, (expansionMap) => this.setState({
-    expanded: expansionMap[this.getClassName()] === true,
-    active: expansionMap.activeSection === this.getClassName()
-  }))
+  connectToSectionStateMap = () => {
+    registerSection(this.getClassName());
+    connectToOne(APP_STATE_SECTION_EXPANSION_MAP, this, (expansionMap) => this.setState({
+      expanded: expansionMap[this.getClassName()] === true,
+      active: expansionMap.activeSection === this.getClassName()
+    }));
+  }
 
   getClassName = () => 'AbstractSection';
 

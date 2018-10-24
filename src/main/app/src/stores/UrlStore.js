@@ -31,3 +31,5 @@ async function loadFrontProperties(urls) {
 }
 
 export const getUrlKoutaBackendKoulutus = () => getState(APP_STATE_URL, ATTR_URL_KOUTA_BACKEND_KOULUTUS);
+
+export const getUrlKoutaBackendKoulutusList = () => `${getUrlKoutaBackendKoulutus}/list`;

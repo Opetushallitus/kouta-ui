@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 
 import {withRouter} from 'react-router-dom'
 import {
-  workflowUrlHaku, workflowUrlHakukohde, workflowUrlKoulutus, workflowUrlToteutus, workflowUrlValintaperusteet,
-  workflowUrlYhteenveto
+  workflowUrlHaku, workflowUrlHakukohde, workflowUrlKoulutus, workflowUrlToteutus, workflowUrlValintaperusteet
 } from '../../../config/urls';
 
 const classNames = require('classnames');
@@ -34,7 +33,6 @@ export class MultiStepIndicator extends Component {
           <StepperCircle workflowUrl={workflowUrlHaku()} ready={false} title={"3"} description={"Haku"} onClick={this.navigateToWorkflow}/>
           <StepperCircle workflowUrl={workflowUrlHakukohde()} ready={false} title={"4"} description={"Hakukohde"} onClick={this.navigateToWorkflow}/>
           <StepperCircle workflowUrl={workflowUrlValintaperusteet()} ready={false} title={"5"} description={"Valintaperusteet"} onClick={this.navigateToWorkflow}/>
-          <StepperCircle workflowUrl={workflowUrlYhteenveto()} ready={false} title={"6"} description={"Yhteenveto"} onClick={this.navigateToWorkflow}/>
         </div>
       </div>
   )

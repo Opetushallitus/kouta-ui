@@ -2,45 +2,61 @@ import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
 import {SelectorButton} from '../../../components/SelectorButton';
 import {InfoDropdown} from '../../../components/InfoDropdown';
+import {broadcast, connectToOne} from '../../../utils/stateUtils';
+import {
+  APP_EVENT_KOULUTUS_CREATION_MODE,
+  APP_STATE_KOULUTUS_CREATION_MODE,
+  APP_STATE_KOULUTUS_OPTIONS
+} from '../../../config/states';
+import {EVENT_KOULUTUS_CREATION_MODE} from '../../../config/constants';
 
-export class KoulutuksenLuontiSection extends AbstractSection {
+export class KoulutuksenPohjaSection extends AbstractSection {
 
-  getClassName = () => 'KoulutuksenLuontiSection';
+  componentDidMount = () => {
+    this.connectToSectionStateMap();
+    connectToOne(APP_STATE_KOULUTUS_OPTIONS, this, (options) => this.setState({
+      ...this.state,
+      dropdownOptions: options
+    }));
+    connectToOne(APP_STATE_KOULUTUS_CREATION_MODE, this, (incomingState) =>
+      this.setState({
+        ...this.state,
+        creationMode: incomingState.creationMode}));
+  };
+
+  getClassName = () => 'KoulutuksenPohjaSection';
 
   getHeader = () => 'Luo koulutus';
 
-  isFooterVisible = () => false;
+  getDropdownOptions = () => this.state.dropdownOptions || [];
 
   getSelectorButtonOptions = () => [
     {
       text: 'Luo uusi koulutus',
-      action: () => this.setSectionDone()
+      action: () => {
+        broadcast(APP_EVENT_KOULUTUS_CREATION_MODE, EVENT_KOULUTUS_CREATION_MODE.NEW_KOULUTUS);
+        this.setSectionDone();
+      }
     },
     {
-      text: 'Käytä aikaisemmin luodun koulutuksen tietoja'
+      text: 'Käytä aikaisemmin luodun koulutuksen tietoja',
+      action: () => broadcast(APP_EVENT_KOULUTUS_CREATION_MODE, EVENT_KOULUTUS_CREATION_MODE.TEMPLATE_KOULUTUS)
     }
   ];
 
-  getDropdownOptions = () => [
-    {
-      "value": "1.2.246.562.13.00000000000000000001",
-      "label": "Insinööri (ylempi AMK), merenkulku"
-    },
-    {
-      "value": "1231",
-      "label": "Insinööri (ylempi AMK), merenkulku"
-    }
-  ];
+  handleDropdownChange = (event) => console.log(event.target.value);
 
-  handleDropdownChange = (event) => {
-    const value = event.target.value;
-  }
+  renderInfoDropdown = () => this.state.creationMode === EVENT_KOULUTUS_CREATION_MODE.TEMPLATE_KOULUTUS ? (
+    <InfoDropdown label={'Valitse listasta'} onChange={this.handleDropdownChange}
+                  options={this.getDropdownOptions()}/>
+  ) : null;
 
   renderContent = () => (
-      <div className={"content"}>
-        <SelectorButton layerAlign={"left"} label={"Valitse pohja"} options={this.getSelectorButtonOptions()}/>
-        <InfoDropdown label={"Valitse listasta"} onChange={this.handleDropdownChange} selection={"1.2.246.562.13.00000000000000000001"} options={this.getDropdownOptions()}/>
-      </div>
+    <div className={'content'}>
+      <SelectorButton layerAlign={'left'} label={'Valitse pohja'} options={this.getSelectorButtonOptions()}/>
+      {this.renderInfoDropdown()}
+
+    </div>
   );
 
 }

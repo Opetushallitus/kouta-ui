@@ -15,9 +15,7 @@ export class AbstractCheckboxSection extends AbstractSection {
     });
   }
 
-  getClassName = () => {
-    throw new Error('AbstractCheckboxSection:getClassName(): implement in subclass!')
-  };
+  getClassName = () => 'CheckboxSection';
 
   getHeader = () => {
     throw new Error('AbstractCheckboxSection:getHeader(): implement in subclass!');

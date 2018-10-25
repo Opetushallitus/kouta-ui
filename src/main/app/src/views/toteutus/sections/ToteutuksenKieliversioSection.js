@@ -16,9 +16,9 @@ export class ToteutuksenKieliversioSection extends AbstractCheckboxSection {
 
   getSelectionClearEventName = () => APP_EVENT_KIELIVERSIO_SELECTION_CLEAR;
 
-  getClassName = () => 'ToteutuksenKieliversioSection';
-
   getHeader = () => 'Kieliversiot';
+
+  getClassName = () => 'ToteutuksenKieliversioSection';
 
   getInstruction = () => 'Valitse ne kielet, joilla tiedot julkaistaan Opintopolussa';
 

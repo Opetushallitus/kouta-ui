@@ -6,7 +6,7 @@ import {
 } from '../../../config/states';
 import {AbstractCheckboxSection} from '../../../components/AbstractCheckboxSection';
 
-export class OrganisaatioSection extends AbstractCheckboxSection {
+export class KoulutuksenOrganisaatioSection extends AbstractCheckboxSection {
 
   getOptionsStateName = () => APP_STATE_ORGANISAATIO_OPTIONS;
 
@@ -15,8 +15,6 @@ export class OrganisaatioSection extends AbstractCheckboxSection {
   getSelectionChangeEventName = () => APP_EVENT_ORGANISAATIO_SELECTION_CHANGE;
 
   getSelectionClearEventName = () => APP_EVENT_ORGANISAATIO_SELECTION_CLEAR;
-
-  getClassName = () => 'OrganisaatioSection';
 
   getHeader = () => 'Valitse organisaatio';
 

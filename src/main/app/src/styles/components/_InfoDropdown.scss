@@ -1,0 +1,10 @@
+.info-dropdown {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  select {
+    background-color: white;
+    min-height: 30px;
+    border-radius: 5px;
+  }
+}

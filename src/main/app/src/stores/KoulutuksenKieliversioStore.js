@@ -1,11 +1,11 @@
 import {
-  APP_EVENT_KIELIVERSIO_SELECTION_CHANGE, APP_EVENT_KIELIVERSIO_SELECTION_CLEAR, APP_STATE_KIELIVERSIO_OPTIONS,
-  APP_STATE_KIELIVERSIO_SELECTIONS, APP_STATE_KIELIVERSIO_SUPPORTED_LANGUAGES
+  APP_EVENT_KOULUTUKSEN_KIELIVERSIO_SELECTION_CHANGE, APP_EVENT_KOULUTUKSEN_KIELIVERSIO_SELECTION_CLEAR, APP_STATE_KOULUTUKSEN_KIELIVERSIO_OPTIONS,
+  APP_STATE_KOULUTUKSEN_KIELIVERSIO_SELECTIONS, APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES
 } from '../config/states';
 import {clearState, connectToOne, getState, setState, updateState} from '../utils/stateUtils';
 
 export const KieliversioStore = () => {
-  setState(APP_STATE_KIELIVERSIO_OPTIONS, [
+  setState(APP_STATE_KOULUTUKSEN_KIELIVERSIO_OPTIONS, [
     {
       value: 'fi',
       label: 'Suomi'
@@ -19,22 +19,22 @@ export const KieliversioStore = () => {
       label: 'Englanti'
     }
   ]);
-  connectToOne(APP_EVENT_KIELIVERSIO_SELECTION_CHANGE, {}, (selection) => selectKieliversio(selection.value, selection.selected));
-  connectToOne(APP_EVENT_KIELIVERSIO_SELECTION_CLEAR, {}, () => clearKieliversioSelections());
+  connectToOne(APP_EVENT_KOULUTUKSEN_KIELIVERSIO_SELECTION_CHANGE, {}, (selection) => selectKieliversio(selection.value, selection.selected));
+  connectToOne(APP_EVENT_KOULUTUKSEN_KIELIVERSIO_SELECTION_CLEAR, {}, () => clearKieliversioSelections());
   selectKieliversio('fi', true);
 }
 
 export const selectKieliversio = (kieliversioId, selected) => {
-  const selections = updateState(APP_STATE_KIELIVERSIO_SELECTIONS, {
+  const selections = updateState(APP_STATE_KOULUTUKSEN_KIELIVERSIO_SELECTIONS, {
     [kieliversioId]: selected
   });
   const selectedLanguages = extractSelectedLanguages(selections);
-  updateState(APP_STATE_KIELIVERSIO_SUPPORTED_LANGUAGES, selectedLanguages);
+  updateState(APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES, selectedLanguages);
 }
 
-export const clearKieliversioSelections = () => clearState(APP_STATE_KIELIVERSIO_SELECTIONS);
+export const clearKieliversioSelections = () => clearState(APP_STATE_KOULUTUKSEN_KIELIVERSIO_SELECTIONS);
 
-const getKieliversioSelections = () => getState(APP_STATE_KIELIVERSIO_SELECTIONS);
+const getKieliversioSelections = () => getState(APP_STATE_KOULUTUKSEN_KIELIVERSIO_SELECTIONS);
 
 export const getSelectedKieliversioIdList = () => {
   const kieliversioSelections = getKieliversioSelections();
@@ -53,4 +53,4 @@ const sortLanguageCodesByPreferredOrder = (langCodes) => {
 const extractSelectedLanguages = (languageSelectionMap) => sortLanguageCodesByPreferredOrder(Object.keys(languageSelectionMap))
   .filter(languageKey => languageSelectionMap[languageKey] === true);
 
-export const getSupportedLanguages = () => getState(APP_STATE_KIELIVERSIO_SUPPORTED_LANGUAGES) || [];
+export const getSupportedLanguages = () => getState(APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES) || [];

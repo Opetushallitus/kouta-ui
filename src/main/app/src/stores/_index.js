@@ -6,7 +6,7 @@ import {KoulutusPersistencyStore} from './KoulutusPersistencyStore';
 import {UrlStore} from './UrlStore';
 import {WorkflowStore} from './WorkflowStore';
 import {KoulutustyyppiCategoryStore} from './KoulutustyyppiCategoryStore';
-import {KieliversioStore} from './KieliversioStore';
+import {KieliversioStore} from './KoulutuksenKieliversioStore';
 import {KoulutusNameTranslationStore} from './KoulutusNameTranslationStore';
 import {KoulutusListStore} from './KoulutusListStore';
 import {KoulutuksenPohjaStore} from './KoulutuksenPohjaStore';

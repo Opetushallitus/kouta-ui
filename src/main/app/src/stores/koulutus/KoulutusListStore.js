@@ -1,8 +1,8 @@
 import axios from 'axios';
-import {getUrlKoutaBackendKoulutusList} from './UrlStore';
-import {updateState} from '../utils/stateUtils';
-import {APP_STATE_KOULUTUS_LIST, APP_STATE_KOULUTUS_OPTIONS} from '../config/states';
-import {LANGUAGE} from '../config/constants';
+import {getUrlKoutaBackendKoulutusList} from '../generic/UrlStore';
+import {updateState} from '../../utils/stateUtils';
+import {APP_STATE_KOULUTUS_LIST, APP_STATE_KOULUTUS_OPTIONS} from '../../config/states';
+import {LANGUAGE} from '../../config/constants';
 
 export const KoulutusListStore = () => loadKoulutusList();
 

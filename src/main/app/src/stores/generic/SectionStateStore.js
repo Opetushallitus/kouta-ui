@@ -1,5 +1,5 @@
-import {APP_STATE_SECTION_EXPANSION_MAP} from '../config/states';
-import {getState, observe, updateState} from '../utils/stateUtils';
+import {APP_STATE_SECTION_EXPANSION_MAP} from '../../config/states';
+import {getState, observe, updateState} from '../../utils/stateUtils';
 
 const INTERNAL_STATE_SECTION_TO_SEQUENCE_MAP = 'INTERNAL_STATE_SECTION_TO_SEQUENCE_MAP';
 const INTERNAL_STATE_SEQUENCE_TO_SECTION_MAP = 'INTERNAL_STATE_SEQUENCE_TO_SECTION_MAP';

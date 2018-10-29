@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {selectWorkflowTutkintoonJohtavaKoulutus} from '../../stores/WorkflowStore';
+import {selectWorkflowTutkintoonJohtavaKoulutus} from '../../stores/generic/WorkflowStore';
 
 export class KoulutusListActionBar extends Component {
 

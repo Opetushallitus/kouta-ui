@@ -1,14 +1,14 @@
 import axios from 'axios';
-import {urlOrganisaatioList} from '../config/urls';
+import {urlOrganisaatioList} from '../../config/urls';
 import {
   APP_EVENT_ORGANISAATIO_SELECTION_CHANGE,
   APP_EVENT_ORGANISAATIO_SELECTION_CLEAR,
   APP_STATE_KOULUTUS_DETAILS,
   APP_STATE_ORGANISAATIO_OPTIONS,
   APP_STATE_ORGANISAATIO_SELECTIONS
-} from '../config/states';
-import {clearState, connectToOne, containsValue, getState, setState, updateState} from '../utils/stateUtils';
-import {extractOrganisaatioOptions} from '../model/Organisaatio';
+} from '../../config/states';
+import {clearState, connectToOne, containsValue, getState, setState, updateState} from '../../utils/stateUtils';
+import {extractOrganisaatioOptions} from '../../model/Organisaatio';
 
 export const OrganisaatioStore = () => {
   connectToOne(APP_STATE_KOULUTUS_DETAILS, {}, () => loadOrganisaatioList());

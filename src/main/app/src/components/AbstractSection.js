@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {registerSection, setSectionDone, setSectionExpansion} from '../stores/SectionStateStore';
+import {registerSection, setSectionDone, setSectionExpansion} from '../stores/generic/SectionStateStore';
 import {
   APP_EVENT_SECTION_VALIDATION_REQUEST,
   APP_STATE_SECTION_EXPANSION_MAP

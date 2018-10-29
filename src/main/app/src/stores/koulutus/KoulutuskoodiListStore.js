@@ -1,11 +1,11 @@
 import {
   APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION, APP_STATE_ACTIVE_KOULUTUS, APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY, APP_STATE_KOULUTUSKOODI_LIST,
   APP_STATE_WORKFLOW
-} from '../config/states';
-import {clearState, connectToOne, getState, updateState} from '../utils/stateUtils';
-import {KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP, LANGUAGE} from '../config/constants';
+} from '../../config/states';
+import {clearState, connectToOne, getState, updateState} from '../../utils/stateUtils';
+import {KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP, LANGUAGE} from '../../config/constants';
 import axios from 'axios/index';
-import {urlKoulutuskoodit} from '../config/urls';
+import {urlKoulutuskoodit} from '../../config/urls';
 
 export const KoulutuskoodiListStore = () => {
   connectToOne(APP_STATE_WORKFLOW, {}, () => {

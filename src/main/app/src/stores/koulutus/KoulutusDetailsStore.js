@@ -1,15 +1,15 @@
 import axios from 'axios';
-import {AlakoodiList} from '../model/Alakoodi';
-import {clearValues, connectToMany, connectToOne, getState, setState, updateState} from '../utils/stateUtils';
-import {LANGUAGE} from '../config/constants';
+import {AlakoodiList} from '../../model/Alakoodi';
+import {clearValues, connectToMany, connectToOne, getState, setState, updateState} from '../../utils/stateUtils';
+import {LANGUAGE} from '../../config/constants';
 import {
   APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION,
   APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY,
   APP_STATE_KOULUTUS_DETAILS,
   APP_STATE_KOULUTUSKOODI_LIST,
   APP_STATE_WORKFLOW
-} from '../config/states';
-import {urlRelaatioAlakoodit} from '../config/urls';
+} from '../../config/states';
+import {urlRelaatioAlakoodit} from '../../config/urls';
 import {getKoulutusOptionById} from './KoulutuskoodiListStore';
 
 export const KoulutusDetailsStore = () => {

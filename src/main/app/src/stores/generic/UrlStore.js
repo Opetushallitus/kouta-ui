@@ -1,7 +1,7 @@
-import {APP_STATE_URL} from '../config/states';
+import {APP_STATE_URL} from '../../config/states';
 import {urls as ophUrls} from 'oph-urls-js';
-import {development, production} from '../tarjonta-urls';
-import {getState, updateState} from '../utils/stateUtils';
+import {development, production} from '../../tarjonta-urls';
+import {getState, updateState} from '../../utils/stateUtils';
 
 const ATTR_URL_KOUTA_BACKEND_KOULUTUS = 'urlKoutaBackendKoulutus';
 

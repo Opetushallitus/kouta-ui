@@ -1,8 +1,8 @@
 import {
   APP_EVENT_KOULUTUKSEN_KIELIVERSIO_SELECTION_CHANGE, APP_EVENT_KOULUTUKSEN_KIELIVERSIO_SELECTION_CLEAR, APP_STATE_KOULUTUKSEN_KIELIVERSIO_OPTIONS,
   APP_STATE_KOULUTUKSEN_KIELIVERSIO_SELECTIONS, APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES
-} from '../config/states';
-import {clearState, connectToOne, getState, setState, updateState} from '../utils/stateUtils';
+} from '../../config/states';
+import {clearState, connectToOne, getState, setState, updateState} from '../../utils/stateUtils';
 
 export const KieliversioStore = () => {
   setState(APP_STATE_KOULUTUKSEN_KIELIVERSIO_OPTIONS, [

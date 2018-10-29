@@ -1,15 +1,15 @@
-import {OrganisaatioStore} from './OrganisaatioStore';
-import {KoulutusDetailsStore} from './KoulutusDetailsStore';
-import {KoulutuskoodiListStore} from './KoulutuskoodiListStore';
-import {SectionStateStore} from './SectionStateStore';
-import {KoulutusPersistencyStore} from './KoulutusPersistencyStore';
-import {UrlStore} from './UrlStore';
-import {WorkflowStore} from './WorkflowStore';
-import {KoulutustyyppiCategoryStore} from './KoulutustyyppiCategoryStore';
-import {KieliversioStore} from './KoulutuksenKieliversioStore';
-import {KoulutusNameTranslationStore} from './KoulutusNameTranslationStore';
-import {KoulutusListStore} from './KoulutusListStore';
-import {KoulutuksenPohjaStore} from './KoulutuksenPohjaStore';
+import {OrganisaatioStore} from './koulutus/OrganisaatioStore';
+import {KoulutusDetailsStore} from './koulutus/KoulutusDetailsStore';
+import {KoulutuskoodiListStore} from './koulutus/KoulutuskoodiListStore';
+import {SectionStateStore} from './generic/SectionStateStore';
+import {KoulutusPersistencyStore} from './koulutus/KoulutusPersistencyStore';
+import {UrlStore} from './generic/UrlStore';
+import {WorkflowStore} from './generic/WorkflowStore';
+import {KoulutustyyppiCategoryStore} from './koulutus/KoulutustyyppiCategoryStore';
+import {KieliversioStore} from './koulutus/KoulutuksenKieliversioStore';
+import {KoulutusNameTranslationStore} from './koulutus/KoulutusNameTranslationStore';
+import {KoulutusListStore} from './koulutus/KoulutusListStore';
+import {KoulutuksenPohjaStore} from './koulutus/KoulutuksenPohjaStore';
 import {ToteutuksenPohjaStore} from './toteutus/ToteutuksenPohjaStore';
 
 const initGenericStores = () => {

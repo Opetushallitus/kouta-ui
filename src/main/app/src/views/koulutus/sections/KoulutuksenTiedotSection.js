@@ -4,7 +4,7 @@ import {KoulutusSelector} from '../../../components/KoulutusSelector';
 import {KoulutusDetails} from '../../../components/KoulutusDetails';
 import {APP_STATE_KOULUTUS_DETAILS} from '../../../config/states';
 import {connectToOne} from '../../../utils/stateUtils';
-import {deselectKoulutus} from '../../../stores/KoulutusDetailsStore';
+import {deselectKoulutus} from '../../../stores/koulutus/KoulutusDetailsStore';
 
 export class KoulutuksenTiedotSection extends AbstractSection {
 

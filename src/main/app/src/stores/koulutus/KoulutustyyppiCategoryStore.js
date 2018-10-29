@@ -1,8 +1,8 @@
-import {clearState, connectToOne, getState, setState, updateState} from '../utils/stateUtils';
+import {clearState, connectToOne, getState, setState, updateState} from '../../utils/stateUtils';
 import {
   APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION, APP_EVENT_SELECT_KOULUTUSTYYPPI, APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY,
   APP_STATE_KOULUTUSTYYPPI_OPTIONS
-} from '../config/states';
+} from '../../config/states';
 
 export const KoulutustyyppiCategoryStore = () => {
   configureKoulutustyyppiCategoryOptions();

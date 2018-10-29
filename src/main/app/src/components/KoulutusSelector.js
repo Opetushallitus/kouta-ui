@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY, APP_STATE_KOULUTUS_DETAILS, APP_STATE_KOULUTUSKOODI_LIST} from '../config/states';
-import {selectKoulutus, updateKoulutuksenNimi} from '../stores/KoulutusDetailsStore';
+import {selectKoulutus, updateKoulutuksenNimi} from '../stores/koulutus/KoulutusDetailsStore';
 import {connectToOne} from '../utils/stateUtils';
 import {KoulutusNameTranslationEditor} from '../views/koulutus/sections/koulutuksen-tiedot/KoulutusNameTranslationEditor';
 import {KOULUTUSTYYPPI_CATEGORY} from '../config/constants';

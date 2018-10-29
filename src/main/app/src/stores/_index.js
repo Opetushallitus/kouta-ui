@@ -6,11 +6,12 @@ import {KoulutusPersistencyStore} from './koulutus/KoulutusPersistencyStore';
 import {UrlStore} from './generic/UrlStore';
 import {WorkflowStore} from './generic/WorkflowStore';
 import {KoulutustyyppiCategoryStore} from './koulutus/KoulutustyyppiCategoryStore';
-import {KieliversioStore} from './koulutus/KoulutuksenKieliversioStore';
+import {KoulutuksenKieliversioStore} from './koulutus/KoulutuksenKieliversioStore';
 import {KoulutusNameTranslationStore} from './koulutus/KoulutusNameTranslationStore';
 import {KoulutusListStore} from './koulutus/KoulutusListStore';
 import {KoulutuksenPohjaStore} from './koulutus/KoulutuksenPohjaStore';
 import {ToteutuksenPohjaStore} from './toteutus/ToteutuksenPohjaStore';
+import {ToteutuksenKieliversioStore} from './toteutus/ToteutuksenKieliversioStore';
 
 const initGenericStores = () => {
   UrlStore();
@@ -24,7 +25,7 @@ const initKoulutusStores = () => {
   KoulutuskoodiListStore();
   KoulutusDetailsStore();
   KoulutusPersistencyStore();
-  KieliversioStore();
+  KoulutuksenKieliversioStore();
   KoulutusNameTranslationStore();
   KoulutusListStore();
   KoulutuksenPohjaStore();
@@ -32,6 +33,7 @@ const initKoulutusStores = () => {
 
 const initToteutusStores = () => {
   ToteutuksenPohjaStore();
+  ToteutuksenKieliversioStore();
 }
 
 export const initStores = () => {

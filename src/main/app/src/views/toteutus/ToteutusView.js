@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {PohjanValintaSection} from './sections/PohjanValintaSection';
+import {ToteutuksenPohjanValintaSection} from './sections/ToteutuksenPohjanValintaSection';
 import {ToteutuksenKieliversioSection} from './sections/ToteutuksenKieliversioSection';
 import {OsaamisalaSection} from './sections/OsaamisalaSection';
 import {ToteutuksenJarjestamistiedotSection} from './sections/ToteutuksenJarjestamistiedotSection';
@@ -13,7 +13,7 @@ export class ToteutusView extends Component {
 
   render = () => (
       <div className={"workflow-view"}>
-          <PohjanValintaSection orderNumber={"1"}/>
+          <ToteutuksenPohjanValintaSection orderNumber={"1"}/>
           <ToteutuksenKieliversioSection orderNumber={"2"}/>
           <OsaamisalaSection orderNumber={"3"}/>
           <ToteutuksenJarjestamistiedotSection orderNumber={"4"}/>

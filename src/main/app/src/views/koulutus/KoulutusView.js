@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {KoulutuksenPohjaSection} from './sections/KoulutuksenPohjaSection';
+import {KoulutuksenPohjanValintaSection} from './sections/KoulutuksenPohjanValintaSection';
 import {KoulutuksenTyyppiSection} from './sections/KoulutuksenTyyppiSection';
 import {KoulutuksenTiedotSection} from './sections/KoulutuksenTiedotSection';
 import {KoulutuksenKuvausSection} from './sections/KoulutuksenKuvausSection';
@@ -14,7 +14,7 @@ export class KoulutusView extends Component {
             <button className={"secondary small"}>Esikatsele</button>
           </div>
           <KoulutuksenTyyppiSection orderNumber={"1"}/>
-          <KoulutuksenPohjaSection orderNumber={"2"}/>
+          <KoulutuksenPohjanValintaSection orderNumber={"2"}/>
           <KoulutuksenKieliversioSection orderNumber={"3"}/>
           <KoulutuksenTiedotSection orderNumber={"4"}/>
           <KoulutuksenKuvausSection orderNumber={"5"}/>

@@ -10,18 +10,32 @@ import {KieliversioStore} from './KieliversioStore';
 import {KoulutusNameTranslationStore} from './KoulutusNameTranslationStore';
 import {KoulutusListStore} from './KoulutusListStore';
 import {KoulutuksenPohjaStore} from './KoulutuksenPohjaStore';
+import {ToteutuksenPohjaStore} from './toteutus/ToteutuksenPohjaStore';
 
-export const initStores = () => {
+const initGenericStores = () => {
   UrlStore();
+  SectionStateStore();
+  WorkflowStore();
+};
+
+const initKoulutusStores = () => {
   OrganisaatioStore();
   KoulutustyyppiCategoryStore();
   KoulutuskoodiListStore();
   KoulutusDetailsStore();
-  SectionStateStore();
   KoulutusPersistencyStore();
-  WorkflowStore();
   KieliversioStore();
   KoulutusNameTranslationStore();
   KoulutusListStore();
   KoulutuksenPohjaStore();
+}
+
+const initToteutusStores = () => {
+  ToteutuksenPohjaStore();
+}
+
+export const initStores = () => {
+  initGenericStores();
+  initKoulutusStores();
+  initToteutusStores();
 }

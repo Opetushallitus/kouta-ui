@@ -1,11 +1,11 @@
 import {connectToOne, updateState} from '../utils/stateUtils';
-import {APP_EVENT_KOULUTUS_CREATION_MODE, APP_STATE_KOULUTUS_CREATION_MODE} from '../config/states';
-import {EVENT_KOULUTUS_CREATION_MODE} from '../config/constants';
+import {APP_EVENT_KOULUTUS_MODIFICATION_MODE, APP_STATE_KOULUTUS_MODIFICATION_MODE} from '../config/states';
+import {ENTITY_MODIFICATION_MODE} from '../config/constants';
 
-export const KoulutuksenPohjaStore = () => updateState(APP_STATE_KOULUTUS_CREATION_MODE, {
-  creationMode: EVENT_KOULUTUS_CREATION_MODE.NEW_KOULUTUS
+export const KoulutuksenPohjaStore = () => updateState(APP_STATE_KOULUTUS_MODIFICATION_MODE, {
+  creationMode: ENTITY_MODIFICATION_MODE.CREATE_ENTITY
 });
 
-connectToOne(APP_EVENT_KOULUTUS_CREATION_MODE, {}, (creationMode) => updateState(
-  APP_STATE_KOULUTUS_CREATION_MODE, {creationMode}
+connectToOne(APP_EVENT_KOULUTUS_MODIFICATION_MODE, {}, (creationMode) => updateState(
+  APP_STATE_KOULUTUS_MODIFICATION_MODE, {creationMode}
 ));

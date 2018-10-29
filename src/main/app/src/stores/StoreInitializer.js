@@ -12,6 +12,9 @@ import {KoulutusListStore} from './koulutus/KoulutusListStore';
 import {KoulutuksenPohjaStore} from './koulutus/KoulutuksenPohjaStore';
 import {ToteutuksenPohjaStore} from './toteutus/ToteutuksenPohjaStore';
 import {ToteutuksenKieliversioStore} from './toteutus/ToteutuksenKieliversioStore';
+import {HaunKieliversioStore} from './haku/HaunKieliversioStore';
+import {HakukohteenKieliversioStore} from './hakukohde/HakukohteenKieliversioStore';
+import {ValintaperusteenKieliversioStore} from './valintaperusteet/ValintaperusteenKieliversioStore';
 
 const initGenericStores = () => {
   UrlStore();
@@ -36,8 +39,23 @@ const initToteutusStores = () => {
   ToteutuksenKieliversioStore();
 }
 
+const initHakuStores = () => {
+  HaunKieliversioStore();
+}
+
+const initHakukohdeStores = () => {
+  HakukohteenKieliversioStore();
+}
+
+const initValintaperusteStores = () => {
+  ValintaperusteenKieliversioStore();
+}
+
 export const initStores = () => {
   initGenericStores();
   initKoulutusStores();
   initToteutusStores();
+  initHakuStores();
+  initHakukohdeStores();
+  initValintaperusteStores();
 }

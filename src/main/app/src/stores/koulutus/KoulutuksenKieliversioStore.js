@@ -1,35 +1,6 @@
-import {
-  APP_EVENT_KOULUTUKSEN_KIELIVERSIO_SELECTION_CHANGE,
-  APP_EVENT_KOULUTUKSEN_KIELIVERSIO_SELECTION_CLEAR,
-  APP_STATE_KOULUTUKSEN_KIELIVERSIO_OPTIONS,
-  APP_STATE_KOULUTUKSEN_KIELIVERSIO_SELECTIONS,
-  APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES
-} from '../../config/states';
-import {clearState, connectToOne, getState, setState, updateState} from '../../utils/stateUtils';
-import {
-  convertKieliversioSelectionsToIdList, extractSelectedLanguages,
-  getKieliversioOptions
-} from '../generic/KieliversioStore';
+import {SCOPE_KOULUTUKSEN_KIELIVERSIO} from '../../config/scopes/Kieliversio';
+import {getSupportedLanguagesInScope, KieliversioStore} from '../generic/KieliversioStore';
 
-export const KoulutuksenKieliversioStore = () => {
-  setState(APP_STATE_KOULUTUKSEN_KIELIVERSIO_OPTIONS, getKieliversioOptions());
-  connectToOne(APP_EVENT_KOULUTUKSEN_KIELIVERSIO_SELECTION_CHANGE, {}, (selection) => selectKieliversio(selection.value, selection.selected));
-  connectToOne(APP_EVENT_KOULUTUKSEN_KIELIVERSIO_SELECTION_CLEAR, {}, () => clearKieliversioSelections());
-  selectKieliversio('fi', true);
-}
+export const KoulutuksenKieliversioStore = () => KieliversioStore(SCOPE_KOULUTUKSEN_KIELIVERSIO);
 
-export const selectKieliversio = (kieliversioId, selected) => {
-  const selections = updateState(APP_STATE_KOULUTUKSEN_KIELIVERSIO_SELECTIONS, {
-    [kieliversioId]: selected
-  });
-  const selectedLanguages = extractSelectedLanguages(selections);
-  updateState(APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES, selectedLanguages);
-}
-
-export const clearKieliversioSelections = () => clearState(APP_STATE_KOULUTUKSEN_KIELIVERSIO_SELECTIONS);
-
-const getKieliversioSelections = () => getState(APP_STATE_KOULUTUKSEN_KIELIVERSIO_SELECTIONS);
-
-export const getSelectedKieliversioIdList = () => convertKieliversioSelectionsToIdList(getKieliversioSelections());
-
-export const getSupportedLanguages = () => getState(APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES) || [];
+export const getSupportedLanguages = () => getSupportedLanguagesInScope(SCOPE_KOULUTUKSEN_KIELIVERSIO);

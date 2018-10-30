@@ -31,8 +31,12 @@ const enforceListenerId = (listener) => {
   return listener._listenerId;
 }
 
+export const connectComponent = (component, handlerMap) =>
+  Object.keys(handlerMap).map(eventName => connectListener(component, eventName, handlerMap[eventName]))
+
+
 // a simple function to couple a listener with matching event
-export const connectToOne = (eventName, listener, targetFunction) => {
+export const connectListener = (listener, eventName, targetFunction) => {
   const listenerId = enforceListenerId(listener);
   connectionMap[eventName] = connectionMap[eventName] || {};
   connectionMap[eventName][listenerId.toString()] = targetFunction;
@@ -42,8 +46,25 @@ export const connectToOne = (eventName, listener, targetFunction) => {
   }
 }
 
+// use handleEvent to connect anonymous listeners that don't need to be unmounted thus disconnected
+export const handleEvent = (eventName, targetFunction) => connectListener({}, eventName, targetFunction);
+
+//add handlers to multiple events with a single method call
+export const handleEvents = (eventMap) =>
+  Object.keys(eventMap).map(key => handleEvent(key, eventMap[key]));
+
+//use to disconnect react components upon unmounting
+export const disconnectListener = (listener) =>
+  Object.keys(connectionMap).forEach(eventName => removeListenerFromEvent(eventName, listener));
+
+const removeListenerFromEvent = (eventName, listener) => {
+  const listenerId = listener._listenerId;
+  const listenerMap = connectionMap[eventName];
+  delete listenerMap[listenerId.toString()];
+}
+
 export const connectToMany = (eventList, listener, targetFunction) =>
-    eventList.forEach(eventName => connectToOne(eventName, listener, targetFunction));
+    eventList.forEach(eventName => connectListener(eventName, listener, targetFunction));
 
 export const setState = (stateName, newState) => {
   newState = enforceObject(newState);

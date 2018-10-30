@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
-import {registerSection, setSectionDone, setSectionExpansion} from '../stores/generic/SectionStateStore';
-import {APP_EVENT_SECTION_VALIDATION_REQUEST, APP_STATE_SECTION_EXPANSION_MAP} from '../config/states';
+import {registerSection, selectTab, setSectionDone, setSectionExpansion} from '../stores/generic/SectionStateStore';
+import {
+  APP_EVENT_SECTION_VALIDATION_REQUEST, APP_STATE_SECTION_EXPANSION_MAP,
+  APP_STATE_SECTION_TAB_MAP
+} from '../config/states';
 import {broadcast, connectComponent, disconnectListener} from '../utils/stateUtils';
 import {toCssCase} from '../utils/stringUtils';
+import {LANGUAGE_CODE_TO_TAB_NAME} from '../config/constants';
 
 const classNames = require('classnames');
 
@@ -32,7 +36,8 @@ export class AbstractSection extends Component {
       [APP_STATE_SECTION_EXPANSION_MAP]: (expansionMap) => this.setState({
         expanded: expansionMap[this.getClassName()] === true,
         active: expansionMap.activeSection === this.getClassName()
-      })
+      }),
+      [APP_STATE_SECTION_TAB_MAP]: (sectionMap) => this.setState({...this.state, activeTabId: sectionMap[this.getClassName()]})
     });
   }
 
@@ -66,11 +71,29 @@ export class AbstractSection extends Component {
 
   isValid = () => true;
 
+  isMultiLingual = () => this.getSupportedLanguages().length > 0;
+
   optionallyRenderContent = () => this.isExpanded() ? this.renderContent() : null;
 
   optionallyRenderFooter = () => this.isExpanded() && this.isFooterVisible() ? this.renderFooter() : null;
 
   getControlIcon = () => this.isExpanded() ? "expand_more" : "expand_less";
+
+  selectTab = (event) => selectTab(this.getClassName(), event.target.getAttribute('data-id'));
+
+  isTabActive = (language) => language === this.state.activeTabId;
+
+  getTabClassNames = (language) => classNames('language-tab', this.isTabActive(language) ? 'active-tab' : null);
+
+  renderLanguageTabs = () => this.getSupportedLanguages()
+    .map(language => <li key={language} className={this.getTabClassNames(language)} data-id={language}
+                         onClick={this.selectTab}>{LANGUAGE_CODE_TO_TAB_NAME[language]}</li>);
+
+  renderLanguageBar = () => this.isMultiLingual() && this.isExpanded() ? (
+    <ul className={'language-tabs'}>
+      {this.renderLanguageTabs()}
+    </ul>
+  ) : null;
 
   toggleState = () => {
     const newState = !this.isExpanded();
@@ -80,11 +103,12 @@ export class AbstractSection extends Component {
 
   setSectionDone = () => setSectionDone(this.getClassName());
 
-  getSupportedLanguages = () => [];
+  getSupportedLanguages = () => this.state.supportedLanguages || [];
 
   renderHeader = () => (
       <div className={classNames("header", this.getHeaderCssClass())}>
         <div className={classNames("title")}>{this.getNumberedHeader()}</div>
+        {this.renderLanguageBar()}
         <div className={classNames("controller", this.getControllerCssClass())} onClick={this.toggleState}>
           <i className="material-icons">{this.getControlIcon()}</i>
         </div>

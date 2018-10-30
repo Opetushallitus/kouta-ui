@@ -10,6 +10,7 @@
     flex-direction: row;
     align-items: center;
     background-color: white;
+    position: relative;
 
     .title {
       flex-grow: 1;
@@ -31,9 +32,31 @@
         color: white;
       }
     }
-
     .expanded-controller {
       background-color: #1e7998;
+    }
+    .language-tabs {
+      display: flex;
+      position: absolute;
+      right: 100px;
+      margin: 0;
+      bottom: -1px;
+
+      .language-tab {
+        border-color: #888888;
+        color: #2da0c7;
+        border-width: 1px;
+        border-style: solid;
+        margin-left: 10px;
+        padding: 5px;
+        background-color: white;
+        cursor: pointer;
+      }
+      .active-tab {
+        border-bottom-style: none;
+        color: black;
+
+      }
     }
   }
   .active-header {

@@ -73,3 +73,8 @@ export const LANGUAGE_CODE_TO_LANGUAGE_NAME = {
   'en': 'Englanti'
 }
 
+export const LANGUAGE_CODE_TO_TAB_NAME = {
+  'fi': 'Suomeksi',
+  'sv': 'Ruotsiksi',
+  'en': 'Englanniksi'
+};

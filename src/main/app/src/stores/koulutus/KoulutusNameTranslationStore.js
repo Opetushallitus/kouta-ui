@@ -1,22 +1,24 @@
-import {clearState, connectToOne, getState, setState, updateState} from '../../utils/stateUtils';
+import {clearState, getState, handleEvents, setState, updateState} from '../../utils/stateUtils';
 import {
   APP_EVENT_KOULUTUS_NAME_EDITED_TRANSLATION_MAP,
   APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES,
   APP_STATE_KOULUTUS_DETAILS,
-  APP_STATE_KOULUTUS_NAME_EDITED_TRANSLATION_MAP,
-  APP_STATE_KOULUTUS_NAME_DEFAULT_TRANSLATION_MAP
+  APP_STATE_KOULUTUS_NAME_DEFAULT_TRANSLATION_MAP,
+  APP_STATE_KOULUTUS_NAME_EDITED_TRANSLATION_MAP
 } from '../../config/states';
 import {getSupportedLanguages} from './KoulutuksenKieliversioStore';
 import {getNameTranslationMap} from './KoulutusDetailsStore';
 
 export const KoulutusNameTranslationStore = () => {
   configureTranslationInputs();
-  connectToOne(APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES, {}, () => configureTranslationInputs());
-  connectToOne(APP_STATE_KOULUTUS_DETAILS, {}, () => {
-    clearEditedTranslations();
-    configureTranslationInputs();
-  })
-  connectToOne(APP_EVENT_KOULUTUS_NAME_EDITED_TRANSLATION_MAP, {}, (translations) => setEditedTranslations(translations));
+  handleEvents({
+    [APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES]: () => configureTranslationInputs(),
+    [APP_STATE_KOULUTUS_DETAILS]: () => {
+      clearEditedTranslations();
+      configureTranslationInputs();
+    },
+    [APP_EVENT_KOULUTUS_NAME_EDITED_TRANSLATION_MAP]: (translations) => setEditedTranslations(translations)
+  });
 }
 
 const configureTranslationInputs = () => {

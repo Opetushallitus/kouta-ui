@@ -1,4 +1,4 @@
-import {clearState, connectToOne, getState, setState, updateState} from '../../utils/stateUtils';
+import {clearState, getState, handleEvents, setState, updateState} from '../../utils/stateUtils';
 import {
   EVENT_SELECTION_CHANGE,
   EVENT_SELECTION_CLEAR,
@@ -8,9 +8,10 @@ import {
 } from '../../config/scopes/Kieliversio';
 
 export const KieliversioStore = (scope) => {
-  connectToOne(scope[EVENT_SELECTION_CHANGE], {}, (selection) =>
-    selectKieliversio(scope, selection.value, selection.selected));
-  connectToOne(scope[EVENT_SELECTION_CLEAR], {}, () => clearKieliversioSelections(scope));
+  handleEvents({
+    [scope[EVENT_SELECTION_CHANGE]]: (selection) => selectKieliversio(scope, selection.value, selection.selected),
+    [scope[EVENT_SELECTION_CLEAR]]: () => clearKieliversioSelections(scope)
+  });
   setState(scope[STATE_OPTIONS], getKieliversioOptions());
   selectKieliversio(scope, 'fi', true);
 };

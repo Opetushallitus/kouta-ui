@@ -23,6 +23,10 @@ export const setSectionDone = (sectionName) => {
   consecutiveSection && setSectionExpansion(consecutiveSection, true);
 };
 
+export const selectTab = (sectionName, tabId) => updateState(APP_STATE_SECTION_TAB_MAP, {
+  [sectionName]: tabId
+});
+
 export const registerSection = (sectionName) => {
   const sequence = getNextSequence();
   updateState(INTERNAL_STATE_SECTION_TO_SEQUENCE_MAP, {

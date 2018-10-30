@@ -1,20 +1,23 @@
 import {
-  APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION, APP_STATE_ACTIVE_KOULUTUS, APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY, APP_STATE_KOULUTUSKOODI_LIST,
+  APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION,
+  APP_STATE_ACTIVE_KOULUTUS,
+  APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY,
+  APP_STATE_KOULUTUSKOODI_LIST,
   APP_STATE_WORKFLOW
 } from '../../config/states';
-import {clearState, connectToOne, getState, updateState} from '../../utils/stateUtils';
+import {clearState, getState, handleEvents, updateState} from '../../utils/stateUtils';
 import {KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP, LANGUAGE} from '../../config/constants';
 import axios from 'axios/index';
 import {urlKoulutuskoodit} from '../../config/urls';
 
-export const KoulutuskoodiListStore = () => {
-  connectToOne(APP_STATE_WORKFLOW, {}, () => {
+export const KoulutuskoodiListStore = () => handleEvents({
+  [APP_STATE_WORKFLOW]: () => {
     clearState(APP_STATE_KOULUTUSKOODI_LIST);
     clearState(APP_STATE_ACTIVE_KOULUTUS);
-  });
-  connectToOne(APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY, {}, (koulutustyyppi) => setKoulutuskoodiListIds(koulutustyyppi));
-  connectToOne(APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION, {}, () => clearKoulutuskoodiList())
-}
+  },
+  [APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY]: (koulutustyyppi) => setKoulutuskoodiListIds(koulutustyyppi),
+  [APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION]: () => clearKoulutuskoodiList()
+});
 
 const setKoulutuskoodiListIds = (activeKoulutustyyppi) => {
   const idList = KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP[activeKoulutustyyppi];

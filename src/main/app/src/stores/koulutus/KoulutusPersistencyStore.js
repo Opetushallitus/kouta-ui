@@ -3,7 +3,7 @@ import {getKoodiUri, getVersio} from './KoulutusDetailsStore';
 import {getKoulutustyyppiCategory} from './KoulutustyyppiCategoryStore';
 import {getUrlKoutaBackendKoulutus} from '../generic/UrlStore';
 import {JULKAISUTILA, REQUEST_STATUS} from '../../config/constants';
-import {connectToOne, observe, updateState} from '../../utils/stateUtils';
+import {handleEvent, observe, updateState} from '../../utils/stateUtils';
 import {APP_EVENT_SECTION_VALIDATION_REQUEST, APP_STATE_KOULUTUS_PERSISTENCY} from '../../config/states';
 import {getSelectedOrganisaatioOidList} from './OrganisaatioStore';
 import {getEditedTranslationMap} from './KoulutusNameTranslationStore';
@@ -16,7 +16,7 @@ export const KoulutusPersistencyStore = () => {
     [ATTR_SAVE_AND_PUBLISH]: REQUEST_STATUS.DISABLED,
     [ATTR_SAVE]: REQUEST_STATUS.ENABLED
   });
-  connectToOne(APP_EVENT_SECTION_VALIDATION_REQUEST, {}, (state) => validateKoulutus());
+  handleEvent(APP_EVENT_SECTION_VALIDATION_REQUEST, (state) => validateKoulutus());
 }
 
 const isFieldEmpty = (fieldValue) => typeof fieldValue === 'undefined' || fieldValue === null || fieldValue === false;

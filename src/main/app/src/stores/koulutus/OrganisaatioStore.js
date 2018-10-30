@@ -7,15 +7,20 @@ import {
   APP_STATE_ORGANISAATIO_OPTIONS,
   APP_STATE_ORGANISAATIO_SELECTIONS
 } from '../../config/states';
-import {clearState, connectToOne, containsValue, getState, setState, updateState} from '../../utils/stateUtils';
+import {
+  clearState, containsValue, getState, handleEvents, setState,
+  updateState
+} from '../../utils/stateUtils';
 import {extractOrganisaatioOptions} from '../../model/Organisaatio';
 
 export const OrganisaatioStore = () => {
-  connectToOne(APP_STATE_KOULUTUS_DETAILS, {}, () => loadOrganisaatioList());
+  handleEvents({
+    [APP_STATE_KOULUTUS_DETAILS]: () => loadOrganisaatioList(),
+    [APP_EVENT_ORGANISAATIO_SELECTION_CHANGE]: (selection) => selectOrganisaatio(selection.value, selection.selected),
+    [APP_EVENT_ORGANISAATIO_SELECTION_CLEAR]: () => clearOrganisaatioSelections()
+  });
   setState(APP_STATE_ORGANISAATIO_OPTIONS, []);
   setState(APP_STATE_ORGANISAATIO_SELECTIONS, {});
-  connectToOne(APP_EVENT_ORGANISAATIO_SELECTION_CHANGE, {}, (selection) => selectOrganisaatio(selection.value, selection.selected));
-  connectToOne(APP_EVENT_ORGANISAATIO_SELECTION_CLEAR, {}, () => clearOrganisaatioSelections());
 }
 
 const excludesOrganisaatioList = () => !containsValue(APP_STATE_ORGANISAATIO_OPTIONS, 'options');

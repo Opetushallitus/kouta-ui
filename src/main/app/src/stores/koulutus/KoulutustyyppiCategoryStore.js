@@ -1,13 +1,17 @@
-import {clearState, connectToOne, getState, setState, updateState} from '../../utils/stateUtils';
+import {clearState, getState, handleEvents, setState, updateState} from '../../utils/stateUtils';
 import {
-  APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION, APP_EVENT_SELECT_KOULUTUSTYYPPI, APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY,
+  APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION,
+  APP_EVENT_SELECT_KOULUTUSTYYPPI,
+  APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY,
   APP_STATE_KOULUTUSTYYPPI_OPTIONS
 } from '../../config/states';
 
 export const KoulutustyyppiCategoryStore = () => {
   configureKoulutustyyppiCategoryOptions();
-  connectToOne(APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION, {}, () => clearKoulutustyyppiCategory());
-  connectToOne(APP_EVENT_SELECT_KOULUTUSTYYPPI, {}, (koulututustyyppi) => setKoulutustyyppiCategory(koulututustyyppi));
+  handleEvents({
+    [APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION]: () => clearKoulutustyyppiCategory(),
+    [APP_EVENT_SELECT_KOULUTUSTYYPPI]: (koulutustyyppi) => setKoulutustyyppiCategory(koulutustyyppi)
+  });
 }
 
 export const configureKoulutustyyppiCategoryOptions = () => setState(APP_STATE_KOULUTUSTYYPPI_OPTIONS, [

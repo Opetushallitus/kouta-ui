@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
 import {registerSection, setSectionDone, setSectionExpansion} from '../stores/generic/SectionStateStore';
-import {
-  APP_EVENT_SECTION_VALIDATION_REQUEST,
-  APP_STATE_SECTION_EXPANSION_MAP
-} from '../config/states';
-import {broadcast, connectToOne} from '../utils/stateUtils';
+import {APP_EVENT_SECTION_VALIDATION_REQUEST, APP_STATE_SECTION_EXPANSION_MAP} from '../config/states';
+import {broadcast, connectComponent, disconnectListener} from '../utils/stateUtils';
 import {toCssCase} from '../utils/stringUtils';
+
 const classNames = require('classnames');
 
 export class AbstractSection extends Component {
@@ -15,18 +13,27 @@ export class AbstractSection extends Component {
     this.state = {
       visibleClearButton: true,
       visibleSubmitButton: true,
-      visibleFooter: true,
+      visibleFooter: true
     };
   }
 
-  componentDidMount = () => this.connectToSectionStateMap();
+  componentDidMount = () => {
+    this.connectToSectionStateMap();
+    this.onMount();
+  };
+
+  componentWillUnmount = () => disconnectListener(this);
+
+  onMount = () => null;
 
   connectToSectionStateMap = () => {
     registerSection(this.getClassName());
-    connectToOne(APP_STATE_SECTION_EXPANSION_MAP, this, (expansionMap) => this.setState({
-      expanded: expansionMap[this.getClassName()] === true,
-      active: expansionMap.activeSection === this.getClassName()
-    }));
+    connectComponent(this, {
+      [APP_STATE_SECTION_EXPANSION_MAP]: (expansionMap) => this.setState({
+        expanded: expansionMap[this.getClassName()] === true,
+        active: expansionMap.activeSection === this.getClassName()
+      })
+    });
   }
 
   getClassName = () => 'AbstractSection';
@@ -72,6 +79,8 @@ export class AbstractSection extends Component {
   }
 
   setSectionDone = () => setSectionDone(this.getClassName());
+
+  getSupportedLanguages = () => [];
 
   renderHeader = () => (
       <div className={classNames("header", this.getHeaderCssClass())}>

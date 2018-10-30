@@ -6,15 +6,20 @@ import {
   APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY,
   APP_STATE_KOULUTUSTYYPPI_OPTIONS
 } from '../../../config/states';
-import {broadcast, connectToOne} from '../../../utils/stateUtils';
+import {broadcast, connectComponent} from '../../../utils/stateUtils';
 
 export class KoulutuksenTyyppiSection extends AbstractSection {
 
-  componentDidMount = () => {
-    this.connectToSectionStateMap();
-    connectToOne(APP_STATE_KOULUTUSTYYPPI_OPTIONS, this, (koulutustyyppiOptions) => this.setState({...this.state, koulutustyyppiOptions}));
-    connectToOne(APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY, this, (activeKoulutustyyppi) => this.setState({...this.state, activeKoulutustyyppi}));
-  }
+  onMount = () => connectComponent(this, {
+    [APP_STATE_KOULUTUSTYYPPI_OPTIONS]: (koulutustyyppiOptions) => this.setState({
+      ...this.state,
+      koulutustyyppiOptions
+    }),
+    [APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY]: (activeKoulutustyyppi) => this.setState({
+      ...this.state,
+      activeKoulutustyyppi
+    })
+  });
 
   getClassName = () => 'KoulutuksenTyyppiSection';
 

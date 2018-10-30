@@ -3,15 +3,12 @@ import {AbstractSection} from '../../../components/AbstractSection';
 import {KoulutusSelector} from '../../../components/KoulutusSelector';
 import {KoulutusDetails} from '../../../components/KoulutusDetails';
 import {APP_STATE_KOULUTUS_DETAILS} from '../../../config/states';
-import {connectToOne} from '../../../utils/stateUtils';
+import {connectListener} from '../../../utils/stateUtils';
 import {deselectKoulutus} from '../../../stores/koulutus/KoulutusDetailsStore';
 
 export class KoulutuksenTiedotSection extends AbstractSection {
 
-  componentDidMount = () =>  {
-    this.connectToSectionStateMap();
-    connectToOne(APP_STATE_KOULUTUS_DETAILS, this, (state) => this.setState({...this.state, ...state}));
-  }
+  onMount = () => connectListener(this, APP_STATE_KOULUTUS_DETAILS, (state) => this.setState({...this.state, ...state}));
 
   getClassName = () => 'KoulutuksenTiedotSection';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
 import {SelectorButton} from '../../../components/SelectorButton';
 import {InfoDropdown} from '../../../components/InfoDropdown';
-import {broadcast, connectToOne} from '../../../utils/stateUtils';
+import {broadcast, connectComponent} from '../../../utils/stateUtils';
 import {
   APP_EVENT_KOULUTUS_MODIFICATION_MODE,
   APP_STATE_KOULUTUS_MODIFICATION_MODE,
@@ -12,17 +12,17 @@ import {ENTITY_MODIFICATION_MODE} from '../../../config/constants';
 
 export class KoulutuksenPohjanValintaSection extends AbstractSection {
 
-  componentDidMount = () => {
-    this.connectToSectionStateMap();
-    connectToOne(APP_STATE_KOULUTUS_OPTIONS, this, (options) => this.setState({
+  onMount = () => connectComponent(this, {
+    [APP_STATE_KOULUTUS_OPTIONS]: (options) => this.setState({
       ...this.state,
       dropdownOptions: options
-    }));
-    connectToOne(APP_STATE_KOULUTUS_MODIFICATION_MODE, this, (incomingState) =>
+    }),
+    [APP_STATE_KOULUTUS_MODIFICATION_MODE]: (incomingState) =>
       this.setState({
         ...this.state,
-        creationMode: incomingState.creationMode}));
-  };
+        creationMode: incomingState.creationMode
+      })
+  });
 
   getClassName = () => 'KoulutuksenPohjanValintaSection';
 

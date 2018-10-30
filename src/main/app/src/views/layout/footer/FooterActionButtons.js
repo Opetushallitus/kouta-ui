@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {ATTR_SAVE, ATTR_SAVE_AND_PUBLISH, saveAndPublishKoulutus, saveKoulutus} from '../../../stores/koulutus/KoulutusPersistencyStore';
 import {APP_STATE_KOULUTUS_PERSISTENCY} from '../../../config/states';
 import {REQUEST_STATUS} from '../../../config/constants';
-import {connectToOne} from '../../../utils/stateUtils';
+import {connectListener} from '../../../utils/stateUtils';
 
 const classNames = require('classnames');
 
@@ -13,7 +13,7 @@ export class FooterActionButtons extends Component {
     this.state = {};
   }
 
-  componentDidMount = () => connectToOne(APP_STATE_KOULUTUS_PERSISTENCY, {}, (state) => this.setState(state));
+  componentDidMount = () => connectListener(this, APP_STATE_KOULUTUS_PERSISTENCY, (state) => this.setState(state));
 
   saveKoulutus = () => saveKoulutus();
 

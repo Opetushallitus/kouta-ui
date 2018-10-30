@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {broadcast, connectToOne} from '../utils/stateUtils';
+import {broadcast, connectListener} from '../utils/stateUtils';
 import {APP_EVENT_KOULUTUS_NAME_EDITED_TRANSLATION_MAP} from '../config/states';
 import {LANGUAGE_CODE_TO_LANGUAGE_NAME} from '../config/constants';
 
@@ -10,7 +10,7 @@ export class AbstractTranslationEditor extends Component {
     this.state = {};
   }
 
-  componentDidMount = () => connectToOne(this.getInputsStateName(), this, (translationMap) =>
+  onMount = () => connectListener(this, this.getInputsStateName(), (translationMap) =>
       this.setState({...this.state, translationMap}));
 
   getInputsStateName = () => {

@@ -5,25 +5,24 @@ import {
   APP_STATE_TOTEUTUS_MODIFICATION_MODE,
   APP_STATE_TOTEUTUS_OPTIONS
 } from '../../../config/states';
-import {broadcast, connectToOne} from '../../../utils/stateUtils';
+import {broadcast, connectComponent} from '../../../utils/stateUtils';
 import {ENTITY_MODIFICATION_MODE} from '../../../config/constants';
 import {InfoDropdown} from '../../../components/InfoDropdown';
 import {SelectorButton} from '../../../components/SelectorButton';
 
 export class ToteutuksenPohjanValintaSection extends AbstractSection {
 
-  componentDidMount = () => {
-    this.connectToSectionStateMap();
-    connectToOne(APP_STATE_TOTEUTUS_OPTIONS, this, (options) => this.setState({
+  onMount = () => connectComponent(this, {
+    [APP_STATE_TOTEUTUS_OPTIONS]: (options) => this.setState({
       ...this.state,
       dropdownOptions: options
-    }));
-    connectToOne(APP_STATE_TOTEUTUS_MODIFICATION_MODE, this, (incomingState) =>
+    }),
+    [APP_STATE_TOTEUTUS_MODIFICATION_MODE]: (incomingState) =>
       this.setState({
         ...this.state,
         creationMode: incomingState.modificationMode
-      }));
-  };
+      })
+  });
 
   getClassName = () => 'ToteutuksenPohjanValintaSection';
 

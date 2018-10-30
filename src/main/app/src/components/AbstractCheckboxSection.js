@@ -1,19 +1,15 @@
 import React from 'react';
 import {AbstractSection} from './AbstractSection';
-import {broadcast, connectToOne} from '../utils/stateUtils';
+import {broadcast, connectComponent} from '../utils/stateUtils';
+
 const classNames = require('classnames');
 
 export class AbstractCheckboxSection extends AbstractSection {
 
-  componentDidMount = () => {
-    this.connectToSectionStateMap();
-    connectToOne(this.getOptionsStateName(), this, (state) => {
-      this.setState({...this.state, options: state});
-    });
-    connectToOne(this.getSelectionsStateName(), this, (state) => {
-      this.setState({...this.state, selections: state});
-    });
-  }
+  onMount = () => connectComponent(this, {
+    [this.getOptionsStateName()]: (state) => this.setState({...this.state, options: state}),
+    [this.getSelectionsStateName()]: (state) => this.setState({...this.state, selections: state})
+  });
 
   getClassName = () => 'CheckboxSection';
 
@@ -26,7 +22,7 @@ export class AbstractCheckboxSection extends AbstractSection {
   }
 
   getOptionsStateName = () => {
-    throw new Error('AbstractCheckboxSection:getOptionsStateName(): implement in subclass!');
+    throw new Error('AbstractCheckboxSection:getOpti]onsStateName(): implement in subclass!');
   }
 
   getSelectionsStateName = () => {

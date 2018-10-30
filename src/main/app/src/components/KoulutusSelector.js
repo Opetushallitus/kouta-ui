@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
-import {APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY, APP_STATE_KOULUTUS_DETAILS, APP_STATE_KOULUTUSKOODI_LIST} from '../config/states';
+import {
+  APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY,
+  APP_STATE_KOULUTUS_DETAILS,
+  APP_STATE_KOULUTUSKOODI_LIST
+} from '../config/states';
 import {selectKoulutus, updateKoulutuksenNimi} from '../stores/koulutus/KoulutusDetailsStore';
-import {connectToOne} from '../utils/stateUtils';
+import {connectComponent} from '../utils/stateUtils';
 import {KoulutusNameTranslationEditor} from '../views/koulutus/sections/koulutuksen-tiedot/KoulutusNameTranslationEditor';
 import {KOULUTUSTYYPPI_CATEGORY} from '../config/constants';
 
@@ -16,18 +20,17 @@ export class KoulutusSelector extends Component {
     };
   }
 
-  componentDidMount = () => {
-    connectToOne(APP_STATE_KOULUTUSKOODI_LIST, this, (state) => this.setState(...this.state, {
+  onMount = () => connectComponent(this, {
+    [APP_STATE_KOULUTUSKOODI_LIST]: (state) => this.setState(...this.state, {
         koulutusOptions: state.koulutusOptions
-    }));
-    connectToOne(APP_STATE_KOULUTUS_DETAILS, this, (state) => this.setState(...this.state, {
+    }),
+    [APP_STATE_KOULUTUS_DETAILS]: (state) => this.setState(...this.state, {
         nimi: state.nimi,
         enabled: state.enabled
-    }));
-    connectToOne(APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY, this, (koulutustyyppiCategory) => {
-      this.setState(...this.state, {koulutustyyppiCategory});
+    }),
+    [APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY]: (koulutustyyppiCategory) =>
+      this.setState(...this.state, {koulutustyyppiCategory})
     });
-  };
 
   getFilter = () => this.state.filter || '';
 

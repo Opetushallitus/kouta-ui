@@ -33,8 +33,9 @@ const getKieliversioOptions = () => [
 
 const sortLanguageCodesByPreferredOrder = (langCodes) => {
   const languagePreferredOrder = {'fi': 1, 'sv': 2, 'en': 3};
-  const comparator = (a, b) => languagePreferredOrder[a] > languagePreferredOrder[b];
-  return langCodes.sort(comparator);
+  const comparator = (a, b) => languagePreferredOrder[a] - languagePreferredOrder[b];
+  const results = langCodes.sort(comparator);
+  return results;
 };
 
 const extractSelectedLanguages = (languageSelectionMap) => sortLanguageCodesByPreferredOrder(Object.keys(languageSelectionMap))

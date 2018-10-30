@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {registerSection, selectTab, setSectionDone, setSectionExpansion} from '../stores/generic/SectionStateStore';
 import {
-  APP_EVENT_SECTION_VALIDATION_REQUEST, APP_STATE_SECTION_EXPANSION_MAP,
+  APP_EVENT_SECTION_VALIDATION_REQUEST,
+  APP_STATE_SECTION_EXPANSION_MAP,
   APP_STATE_SECTION_TAB_MAP
 } from '../config/states';
 import {broadcast, connectComponent, disconnectListener} from '../utils/stateUtils';
@@ -37,9 +38,16 @@ export class AbstractSection extends Component {
         expanded: expansionMap[this.getClassName()] === true,
         active: expansionMap.activeSection === this.getClassName()
       }),
-      [APP_STATE_SECTION_TAB_MAP]: (sectionMap) => this.setState({...this.state, activeTabId: sectionMap[this.getClassName()]})
+      [APP_STATE_SECTION_TAB_MAP]: (sectionMap) => this.setState({
+        ...this.state,
+        activeTabId: sectionMap[this.getClassName()]
+      }),
+      [this.getSupportedLanguagesStateName()]: (supportedLanguages) =>
+        this.setState({...this.state, supportedLanguages})
     });
   }
+
+  getSupportedLanguagesStateName = () => 'REDEFINE_STATE_NAME_IN_SUBCLASS';
 
   getClassName = () => 'AbstractSection';
 
@@ -77,11 +85,19 @@ export class AbstractSection extends Component {
 
   optionallyRenderFooter = () => this.isExpanded() && this.isFooterVisible() ? this.renderFooter() : null;
 
-  getControlIcon = () => this.isExpanded() ? "expand_more" : "expand_less";
+  getControlIcon = () => this.isExpanded() ? 'expand_more' : 'expand_less';
 
   selectTab = (event) => selectTab(this.getClassName(), event.target.getAttribute('data-id'));
 
-  isTabActive = (language) => language === this.state.activeTabId;
+  getSupportedActiveTabId = () => this.state.activeTabId &&
+    this.getSupportedLanguages().includes(this.state.activeTabId) ? this.state.activeTabId : null;
+
+  getFirstAvailableTabId = () => this.getSupportedLanguages().length > 0 && this.getSupportedLanguages()[0];
+
+  getActiveTabId = () => this.getSupportedActiveTabId() ||
+    this.getFirstAvailableTabId() || 'fi';
+
+  isTabActive = (language) =>  language === this.getActiveTabId();
 
   getTabClassNames = (language) => classNames('language-tab', this.isTabActive(language) ? 'active-tab' : null);
 

@@ -1,19 +1,22 @@
-import {AbstractSection} from '../../../components/AbstractSection';
-import {connectListener} from '../../../utils/stateUtils';
-import {APP_STATE_TOTEUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES} from '../../../config/states';
+import {
+  APP_EVENT_TOTEUTUKSEN_NIMI_TRANSLATION_CLEAR,
+  APP_STATE_TOTEUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES,
+  APP_STATE_TOTEUTUKSEN_NIMI_TRANSLATION_MAP
+} from '../../../config/states';
+import {AbstractNimiSection} from '../../../components/AbstractNimiSection';
 
-export class ToteutuksenNimiSection extends AbstractSection {
+export class ToteutuksenNimiSection extends AbstractNimiSection {
 
-  onMount = () => connectListener(this, APP_STATE_TOTEUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES, (supportedLanguages) =>
-    this.setState({...this.state, supportedLanguages}));
+  getTranslationMapStateName = () => APP_STATE_TOTEUTUKSEN_NIMI_TRANSLATION_MAP;
+
+  getSupportedLanguagesStateName = () => APP_STATE_TOTEUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES;
+
+  getClearTranslationMapEventName = () => APP_EVENT_TOTEUTUKSEN_NIMI_TRANSLATION_CLEAR;
 
   getClassName = () => 'ToteutuksenNimiSection';
 
   getHeader = () => 'Toteutuksen nimi';
 
-
-  renderContent = () => {
-    console.log('ToteutuksenNimiSection:renderContent:state', this.state);
-  }
+  getPromptText = () => 'Anna toteutukselle nimi';
 
 }

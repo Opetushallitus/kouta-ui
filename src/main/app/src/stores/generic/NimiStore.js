@@ -8,6 +8,7 @@ export const NimiStore = (scope) => {
     [scope[EVENT_TRANSLATION_CLEAR]]: () => clearTranslations(scope)
   });
   clearTranslations(scope);
+  setState(scope[STATE_TRANSLATION_MAP], {fi: '', sv: '', en: ''});
 };
 
 const clearTranslations = (scope) => setState(scope[STATE_TRANSLATION_MAP], {fi: '', sv: '', en: ''});

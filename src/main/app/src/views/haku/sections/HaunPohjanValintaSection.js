@@ -1,9 +1,16 @@
-import {AbstractSection} from '../../../components/AbstractSection';
+import {AbstractPohjanValintaSection} from '../../../components/AbstractPohjanValintaSection';
+import {SCOPE_HAUN_POHJA} from '../../../config/scopes/PohjanValinta';
 
-export class HaunPohjanValintaSection extends AbstractSection {
+export class HaunPohjanValintaSection extends AbstractPohjanValintaSection {
+
+  getScope = () => SCOPE_HAUN_POHJA;
+
+  getCssClassName = () => 'pohjan-valinta-section haun-pohjan-valinta-section';
 
   getClassName = () => 'HaunPohjanValintaSection';
 
   getHeader = () => 'Pohjan valinta';
+
+  getCreateEntityInfoText = () => 'Luodaan uusi haku.';
 
 }

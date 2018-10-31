@@ -36,15 +36,3 @@ beforeAll(async () => {
 afterAll(async () => {
     await browser.close();
 }, timeout);
-
-describe('TarjontaMain', () => {
-    beforeEach(async () => {
-        await page.goto(host);
-    }, timeout);
-
-    it('renders', async () => {
-        expect.assertions(1);
-        await page.waitForSelector('#root');
-        expect(await page.$eval('#root', e => e.innerHTML)).toBeTruthy(); // testaa että root-elementillä on sisältöä
-    }, timeout);
-});

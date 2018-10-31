@@ -6,6 +6,8 @@ let listenerId = 0;
 
 export const observe = (eventName, item) => setItem(eventName, clone(item));
 
+export const setStates = (stateMap) => Object.keys(stateMap).map(key => setState(key, stateMap[key]));
+
 export const updateState = (eventName, newState) => {
   let targetItem = enforceItem(eventName) || {};
   newState = enforceObject(newState);
@@ -33,7 +35,6 @@ const enforceListenerId = (listener) => {
 
 export const connectComponent = (component, handlerMap) =>
   Object.keys(handlerMap).map(eventName => connectListener(component, eventName, handlerMap[eventName]))
-
 
 // a simple function to couple a listener with matching event
 export const connectListener = (listener, eventName, targetFunction) => {
@@ -82,4 +83,5 @@ export const clearValues = (stateName) => {
 }
 
 //A simple callback mechanism to achieve what MobX can't do: 1) pass change when value is changed inside a nested object, and 2) work with inheritance
-export const broadcast = (eventName, item) => Object.values(connectionMap[eventName] || {}).forEach((listener) => listener(getValueOrClone(item)));
+export const broadcast = (eventName, item) =>
+  Object.values(connectionMap[eventName] || {}).forEach((listener) => listener(getValueOrClone(item)));

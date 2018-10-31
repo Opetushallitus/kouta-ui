@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import classNames from 'classnames';
 export class SelectorButton extends Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -23,7 +23,7 @@ export class SelectorButton extends Component {
     this.props.onSelect(option);
   }
 
-  renderSelectorOption = (option, index) => <span key={index} onClick={() => this.onSelect(option)}>{option.text}</span>;
+  renderSelectorOption = (option, index) => <span key={index} onClick={() => this.onSelect(option.value)}>{option.label}</span>;
 
   renderSelectorLayer = () => this.state.selectorVisible ? (
       <div className={classNames("selector-layer", this.props.layerAlign)}>

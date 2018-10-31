@@ -1,11 +1,22 @@
-import {handleEvent, updateState} from '../../utils/stateUtils';
-import {APP_EVENT_TOTEUTUS_MODIFICATION_MODE, APP_STATE_TOTEUTUS_MODIFICATION_MODE} from '../../config/states';
+import {getUrlKoutaBackendToteutusList} from '../generic/UrlStore';
+import {PohjanValintaStore} from '../generic/PohjanValintaStore';
+import {SCOPE_TOTEUTUKSEN_POHJA} from '../../config/scopes/PohjanValinta';
 import {ENTITY_MODIFICATION_MODE} from '../../config/constants';
 
-export const ToteutuksenPohjaStore = () => updateState(APP_STATE_TOTEUTUS_MODIFICATION_MODE, {
-  modificationMode: ENTITY_MODIFICATION_MODE.CREATE_ENTITY
-});
+export const ToteutuksenPohjaStore = () =>
+  PohjanValintaStore(SCOPE_TOTEUTUKSEN_POHJA, getUrlKoutaBackendToteutusList(), getModeOptions());
 
-handleEvent(APP_EVENT_TOTEUTUS_MODIFICATION_MODE, (modificationMode) => updateState(
-  APP_STATE_TOTEUTUS_MODIFICATION_MODE, {modificationMode}
-));
+const getModeOptions = () => [
+  {
+    label: 'Luo uusi toteutus',
+    value: ENTITY_MODIFICATION_MODE.CREATE_ENTITY
+  },
+  {
+    label: 'Kopioi pohjaksi aiemmin luotu toteutus',
+    value: ENTITY_MODIFICATION_MODE.INHERIT_ENTITY
+  },
+  {
+    label: 'Käytä olemassa olevan toteutuksen tietoja',
+    value: ENTITY_MODIFICATION_MODE.USE_ENTITY
+  }
+];

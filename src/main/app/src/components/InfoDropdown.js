@@ -8,13 +8,13 @@ export class InfoDropdown extends Component {
     this.state = {};
   }
 
-  handleChange = (event) => this.props.onChange(event);
+  handleChange = (event) => this.props.onChange(event.target.value);
 
   onClearButtonClick = () => broadcast(this.getSelectionClearEventName());
 
   renderOption = (option, index) => <option key={index} value={option.value}>{option.label}</option>
 
-  getSelection = () => 'no-selection' //this.props.selection
+  getSelection = () => this.props.selection;
 
   getLabel = () => this.props.label;
 

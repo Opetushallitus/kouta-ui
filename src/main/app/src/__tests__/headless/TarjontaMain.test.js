@@ -38,7 +38,7 @@ afterAll(async () => {
 }, timeout);
 
 describe('TarjontaMain', () => {
-    it('passes tests', async () => {
+    it('passes a test', async () => {
         expect(true).toEqual(true);
     }, timeout);
 });

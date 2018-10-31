@@ -1,63 +1,33 @@
-import React from 'react';
-import {AbstractSection} from '../../../components/AbstractSection';
-import {SelectorButton} from '../../../components/SelectorButton';
-import {InfoDropdown} from '../../../components/InfoDropdown';
-import {broadcast, connectComponent} from '../../../utils/stateUtils';
 import {
-  APP_EVENT_KOULUTUS_MODIFICATION_MODE,
-  APP_STATE_KOULUTUS_MODIFICATION_MODE,
-  APP_STATE_KOULUTUS_OPTIONS
+  APP_EVENT_KOULUTUKSEN_POHJA_ENTRY,
+  APP_EVENT_KOULUTUKSEN_POHJA_MODE,
+  APP_STATE_KOULUTUKSEN_POHJA_ENTRY,
+  APP_STATE_KOULUTUKSEN_POHJA_ENTRY_OPTIONS,
+  APP_STATE_KOULUTUKSEN_POHJA_MODE,
+  APP_STATE_KOULUTUKSEN_POHJA_MODE_OPTIONS
 } from '../../../config/states';
-import {ENTITY_MODIFICATION_MODE} from '../../../config/constants';
+import {AbstractPohjanValintaSection} from '../../../components/AbstractPohjanValintaSection';
 
-export class KoulutuksenPohjanValintaSection extends AbstractSection {
+export class KoulutuksenPohjanValintaSection extends AbstractPohjanValintaSection {
 
-  onMount = () => connectComponent(this, {
-    [APP_STATE_KOULUTUS_OPTIONS]: (options) => this.setState({
-      ...this.state,
-      dropdownOptions: options
-    }),
-    [APP_STATE_KOULUTUS_MODIFICATION_MODE]: (incomingState) =>
-      this.setState({
-        ...this.state,
-        creationMode: incomingState.creationMode
-      })
-  });
+  getCssClassName = () => 'pohjan-valinta-section koulutuksen-pohjan-valinta-section';
 
   getClassName = () => 'KoulutuksenPohjanValintaSection';
 
   getHeader = () => 'Luo koulutus';
 
-  getDropdownOptions = () => this.state.dropdownOptions || [];
+  getCreateEntityInfoText = () => 'Luodaan uusi koulutus.';
 
-  getSelectorButtonOptions = () => [
-    {
-      text: 'Luo uusi koulutus',
-      action: () => {
-        broadcast(APP_EVENT_KOULUTUS_MODIFICATION_MODE, ENTITY_MODIFICATION_MODE.CREATE_ENTITY);
-        this.setSectionDone();
-      }
-    },
-    {
-      text: 'Käytä aikaisemmin luodun koulutuksen tietoja',
-      action: () => broadcast(APP_EVENT_KOULUTUS_MODIFICATION_MODE, ENTITY_MODIFICATION_MODE.INHERIT_ENTITY)
-    }
-  ];
+  getStateNameForEntryOptions = () => APP_STATE_KOULUTUKSEN_POHJA_ENTRY_OPTIONS;
 
-  handleDropdownChange = (event) => console.log(event.target.value);
+  getStateNameForMode = () => APP_STATE_KOULUTUKSEN_POHJA_MODE;
 
-  renderInfoDropdown = () => this.state.creationMode === ENTITY_MODIFICATION_MODE.INHERIT_ENTITY ? (
-    <InfoDropdown label={'Valitse listasta'} onChange={this.handleDropdownChange}
-                  options={this.getDropdownOptions()}/>
-  ) : null;
+  getStateNameForModeOptions = () => APP_STATE_KOULUTUKSEN_POHJA_MODE_OPTIONS;
 
-  renderContent = () => (
-    <div className={'content'}>
-      <SelectorButton layerAlign={'left'} label={'Valitse pohja'} options={this.getSelectorButtonOptions()}/>
-      {this.renderInfoDropdown()}
-    </div>
-  );
+  getStateNameForEntry = () => APP_STATE_KOULUTUKSEN_POHJA_ENTRY;
+
+  getEventNameForEntry = () => APP_EVENT_KOULUTUKSEN_POHJA_ENTRY;
+
+  getEventNameForMode = () => APP_EVENT_KOULUTUKSEN_POHJA_MODE;
 
 }
-
-

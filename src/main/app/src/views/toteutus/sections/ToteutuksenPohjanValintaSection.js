@@ -44,7 +44,7 @@ export class ToteutuksenPohjanValintaSection extends AbstractSection {
     },
     {
       text: 'Käytä olemassa olevan toteutuksen tietoja',
-      action: () => broadcast(APP_EVENT_TOTEUTUS_MODIFICATION_MODE, ENTITY_MODIFICATION_MODE.EDIT_ENTITY)
+      action: () => broadcast(APP_EVENT_TOTEUTUS_MODIFICATION_MODE, ENTITY_MODIFICATION_MODE.USE_ENTITY)
     }
   ];
 

@@ -1,11 +1,5 @@
-import {handleEvent, updateState} from '../../utils/stateUtils';
-import {APP_EVENT_KOULUTUS_MODIFICATION_MODE, APP_STATE_KOULUTUS_MODIFICATION_MODE} from '../../config/states';
-import {ENTITY_MODIFICATION_MODE} from '../../config/constants';
+import {getUrlKoutaBackendKoulutusList} from '../generic/UrlStore';
+import {PohjanValintaStore} from '../generic/PohjanValintaStore';
+import {SCOPE_KOULUTUKSEN_POHJA} from '../../config/scopes/PohjanValinta';
 
-export const KoulutuksenPohjaStore = () => updateState(APP_STATE_KOULUTUS_MODIFICATION_MODE, {
-  creationMode: ENTITY_MODIFICATION_MODE.CREATE_ENTITY
-});
-
-handleEvent(APP_EVENT_KOULUTUS_MODIFICATION_MODE, (creationMode) => updateState(
-  APP_STATE_KOULUTUS_MODIFICATION_MODE, {creationMode}
-));
+export const KoulutuksenPohjaStore = () => PohjanValintaStore(SCOPE_KOULUTUKSEN_POHJA, getUrlKoutaBackendKoulutusList());

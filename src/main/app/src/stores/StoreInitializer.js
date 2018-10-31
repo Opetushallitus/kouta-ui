@@ -8,7 +8,6 @@ import {WorkflowStore} from './generic/WorkflowStore';
 import {KoulutustyyppiCategoryStore} from './koulutus/KoulutustyyppiCategoryStore';
 import {KoulutuksenKieliversioStore} from './koulutus/KoulutuksenKieliversioStore';
 import {KoulutusNameTranslationStore} from './koulutus/KoulutusNameTranslationStore';
-import {KoulutusListStore} from './koulutus/KoulutusListStore';
 import {KoulutuksenPohjaStore} from './koulutus/KoulutuksenPohjaStore';
 import {ToteutuksenPohjaStore} from './toteutus/ToteutuksenPohjaStore';
 import {ToteutuksenKieliversioStore} from './toteutus/ToteutuksenKieliversioStore';
@@ -34,7 +33,6 @@ const initKoulutusStores = () => {
   KoulutusPersistencyStore();
   KoulutuksenKieliversioStore();
   KoulutusNameTranslationStore();
-  KoulutusListStore();
   KoulutuksenPohjaStore();
 }
 

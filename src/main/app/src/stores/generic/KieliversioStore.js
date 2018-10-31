@@ -1,4 +1,4 @@
-import {clearState, getState, handleEvents, setState, updateState} from '../../utils/stateUtils';
+import {clearState, getState, handleEvents, setState, setStates, updateState} from '../../utils/stateUtils';
 import {
   EVENT_SELECTION_CHANGE,
   EVENT_SELECTION_CLEAR,
@@ -6,6 +6,7 @@ import {
   STATE_SELECTIONS,
   STATE_SUPPORTED_LANGUAGES
 } from '../../config/scopes/Kieliversio';
+import {LANGUAGE} from '../../config/constants';
 
 export const KieliversioStore = (scope) => {
   handleEvents({
@@ -41,14 +42,29 @@ const sortLanguageCodesByPreferredOrder = (langCodes) => {
 const extractSelectedLanguages = (languageSelectionMap) => sortLanguageCodesByPreferredOrder(Object.keys(languageSelectionMap))
   .filter(languageKey => languageSelectionMap[languageKey] === true);
 
-const selectKieliversio = (scope, kieliversioId, selected) => {
-  const selections = updateState(scope[STATE_SELECTIONS], {
-    [kieliversioId]: selected
-  });
-  const selectedLanguages = extractSelectedLanguages(selections);
-  updateState(scope[STATE_SUPPORTED_LANGUAGES], selectedLanguages);
+const dreamStateUpdate = (scope, kieliversioId, selected) => {
+  const state = getState(scope[STATE_SELECTIONS]);
+  state[kieliversioId] = selected;
+  return state;
 };
 
-const clearKieliversioSelections = (scope) => clearState(scope[STATE_SELECTIONS]);
+const hasDreamedStateAnyLanguagesSelected = (dreamedState) => extractSelectedLanguages(dreamedState).length > 0;
+
+const selectKieliversio = (scope, kieliversioId, selected) => {
+  const dreamedState = dreamStateUpdate(scope, kieliversioId, selected);
+  hasDreamedStateAnyLanguagesSelected(dreamedState) && setStates({
+    [scope[STATE_SELECTIONS]]: dreamedState,
+    [scope[STATE_SUPPORTED_LANGUAGES]]: extractSelectedLanguages(dreamedState)
+  });
+};
+
+const clearKieliversioSelections = (scope) => {
+  clearState(scope[STATE_SELECTIONS]);
+  const selectionState = updateState(scope[STATE_SELECTIONS], {
+    [LANGUAGE.toLowerCase()]: true
+  });
+  const supportedLanguages = extractSelectedLanguages(selectionState);
+  updateState(scope[STATE_SUPPORTED_LANGUAGES], supportedLanguages);
+};
 
 export const getSupportedLanguagesInScope = (scope) => getState(scope[STATE_SUPPORTED_LANGUAGES]) || [];

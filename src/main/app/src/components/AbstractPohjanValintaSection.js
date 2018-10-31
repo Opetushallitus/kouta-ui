@@ -5,6 +5,10 @@ import {InfoDropdown} from './InfoDropdown';
 import {broadcast, connectComponent} from '../utils/stateUtils';
 import {ENTITY_MODIFICATION_MODE} from '../config/constants';
 import {AbstractSection} from './AbstractSection';
+import {
+  EVENT_ENTRY, EVENT_MODE, STATE_ENTRY, STATE_ENTRY_OPTIONS, STATE_MODE,
+  STATE_MODE_OPTIONS
+} from '../config/scopes/PohjanValinta';
 
 export class AbstractPohjanValintaSection extends AbstractSection {
 
@@ -20,6 +24,10 @@ export class AbstractPohjanValintaSection extends AbstractSection {
 
   getCssClassName = () => 'pohjan-valinta-section';
 
+  getScope = () => {
+    throw new Error('AbstractPohjanValintaSection:getScope(): implement in subclass!');
+  };
+
   getClassName = () => {
     throw new Error('AbstractPohjanValintaSection:getClassName(): implement in subclass!');
   };
@@ -32,29 +40,17 @@ export class AbstractPohjanValintaSection extends AbstractSection {
     throw new Error('AbstractPohjanValintaSection:getCreateEntityInfoText(): implement in subclass!');
   };
 
-  getStateNameForEntryOptions = () => {
-    throw new Error('AbstractPohjanValintaSection:getStateNameForEntryOptions(): implement in subclass!');
-  };
+  getStateNameForEntryOptions = () => this.getScope()[STATE_ENTRY_OPTIONS];
 
-  getStateNameForMode = () => {
-    throw new Error('AbstractPohjanValintaSection:getStateNameForMode(): implement in subclass!');
-  };
+  getStateNameForMode = () => this.getScope()[STATE_MODE];
 
-  getStateNameForModeOptions = () => {
-    throw new Error('AbstractPohjanValintaSection:getStateNameForModeOptions(): implement in subclass!');
-  };
+  getStateNameForModeOptions = () => this.getScope()[STATE_MODE_OPTIONS];
 
-  getStateNameForEntry = () => {
-    throw new Error('AbstractPohjanValintaSection:getStateNameForEntry(): implement in subclass!');
-  };
+  getStateNameForEntry = () => this.getScope()[STATE_ENTRY];
 
-  getEventNameForEntry = () => {
-    throw new Error('AbstractPohjanValintaSection:getEventNameForEntry(): implement in subclass!');
-  };
+  getEventNameForEntry = () => this.getScope()[EVENT_ENTRY];
 
-  getEventNameForMode = () => {
-    throw new Error('AbstractPohjanValintaSection:getEventNameForMode(): implement in subclass!');
-  };
+  getEventNameForMode = () => this.getScope()[EVENT_MODE];
 
   getEntryOptions = () => this.state.entryOptions || [];
 

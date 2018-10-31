@@ -150,11 +150,13 @@ export class AbstractSection extends Component {
   onSubmitButtonClick = () => this.setSectionDone();
 
   renderClearButton = () => this.isClearButtonVisible() ? (
-      <button className={"clear-button small secondary clear-button"} onClick={this.handleClearButtonClick}>{this.getClearButtonText()}</button>
+      <button className={"clear-button small secondary clear-button"}
+              onClick={this.handleClearButtonClick}>{this.getClearButtonText()}</button>
   ) : null;
 
   renderSubmitButton = () => (this.isSubmitButtonVisible() && this.isValid()) ? (
-      <button className={"small primary submit-button"} onClick={this.handleSubmitButtonClick}>{this.getSubmitButtonText()}</button>
+      <button className={"small primary submit-button"}
+              onClick={this.handleSubmitButtonClick}>{this.getSubmitButtonText()}</button>
   ) : null;
 
   renderFooter = () => (

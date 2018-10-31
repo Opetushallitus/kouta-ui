@@ -20,7 +20,7 @@ export class KoulutusSelector extends Component {
     };
   }
 
-  onMount = () => connectComponent(this, {
+  componentDidMount = () => connectComponent(this, {
     [APP_STATE_KOULUTUSKOODI_LIST]: (state) => this.setState(...this.state, {
         koulutusOptions: state.koulutusOptions
     }),

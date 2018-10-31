@@ -1,6 +1,6 @@
 import {getUrlKoutaBackendHakukohdeList} from '../generic/UrlStore';
 import {PohjanValintaStore} from '../generic/PohjanValintaStore';
-import {SCOPE_HAKUKOHTEEN_POHJA, SCOPE_HAUN_POHJA} from '../../config/scopes/PohjanValinta';
+import {SCOPE_HAKUKOHTEEN_POHJA} from '../../config/scopes/PohjanValinta';
 import {ENTITY_MODIFICATION_MODE} from '../../config/constants';
 
 export const HakukohteenPohjaStore = () =>

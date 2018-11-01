@@ -97,6 +97,8 @@ export class AbstractSection extends Component {
   getActiveTabId = () => this.getSupportedActiveTabId() ||
     this.getFirstAvailableTabId() || 'fi';
 
+  getActiveLanguage = () => this.getActiveTabId();
+
   isTabActive = (language) =>  language === this.getActiveTabId();
 
   getTabClassNames = (language) => classNames('language-tab', this.isTabActive(language) ? 'active-tab' : null);

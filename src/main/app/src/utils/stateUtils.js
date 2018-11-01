@@ -21,7 +21,7 @@ export const containsValue = (eventName, property) => (getItem(eventName) || {})
 
 export const getState = (eventName, property) => {
   const state = enforceItem(eventName);
-  return state ? state['_value'] || safeClone(property ? state[property] : state) : null;
+  return state ? state['_value'] || safeClone(property ? state[property] : state) : {};
 }
 
 //retrieves ID from listener and creates one if it does not exist yet

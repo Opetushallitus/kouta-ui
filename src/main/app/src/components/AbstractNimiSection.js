@@ -50,7 +50,7 @@ export class AbstractNimiSection extends AbstractSection {
       <input type={'text'} className={'translation-input'} value={this.getTranslation()}
              placeholder={this.getPromptText()}
              onChange={this.updateTranslation}></input>
-      <span className={'info'}>Huom! Tämä teksti näkyy oppijalle Opintopolun sivuilla</span>
+      <span className={'info-span'}>Huom! Tämä teksti näkyy oppijalle Opintopolun sivuilla</span>
     </div>
   );
 

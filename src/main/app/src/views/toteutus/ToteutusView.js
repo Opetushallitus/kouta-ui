@@ -5,7 +5,7 @@ import {OsaamisalaSection} from './sections/OsaamisalaSection';
 import {ToteutuksenJarjestamistiedotSection} from './sections/ToteutuksenJarjestamistiedotSection';
 import {JarjestamispaikkaSection} from './sections/JarjestamispaikkaSection';
 import {ToteutuksenNimiSection} from './sections/ToteutuksenNimiSection';
-import {KoulutuksenYhteystiedotSection} from './sections/KoulutuksenYhteystiedotSection';
+import {ToteutuksenYhteystiedotSection} from './sections/ToteutuksenYhteystiedotSection';
 import {ToteutuksenHautSection} from './sections/ToteutuksenHautSection';
 import {KoulutuksenNayttamistiedotSection} from './sections/KoulutuksenNayttamistiedotSection';
 
@@ -20,7 +20,7 @@ export class ToteutusView extends Component {
           <KoulutuksenNayttamistiedotSection orderNumber={"5"}/>
           <JarjestamispaikkaSection orderNumber={"6"}/>
           <ToteutuksenNimiSection orderNumber={"7"}/>
-          <KoulutuksenYhteystiedotSection orderNumber={"8"}/>
+          <ToteutuksenYhteystiedotSection orderNumber={"8"}/>
           <ToteutuksenHautSection orderNumber={"9"}/>
       </div>
   )

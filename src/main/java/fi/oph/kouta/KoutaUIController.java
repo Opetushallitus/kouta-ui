@@ -9,7 +9,15 @@ public class KoutaUIController {
     @GetMapping(value = {
             "/",
             "/koulutus",
-            "/koulutus/*"
+            "/koulutus/*",
+            "/toteutus",
+            "/toteutus/*",
+            "/haku",
+            "/haku/*",
+            "/hakukohde",
+            "/hakukohde/*",
+            "/valintaperusteet",
+            "/valintaperusteet/*"
     })
 
     public String frontProperties() {

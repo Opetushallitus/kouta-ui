@@ -1,6 +1,7 @@
 .status-bar {
   display: flex;
   flex-direction: row;
+  margin: 10px;
 
   .progress-box {
     flex-grow: 1;

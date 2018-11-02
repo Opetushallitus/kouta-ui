@@ -4,6 +4,7 @@ import {withRouter} from 'react-router-dom'
 import {
   workflowUrlHaku, workflowUrlHakukohde, workflowUrlKoulutus, workflowUrlToteutus, workflowUrlValintaperusteet
 } from '../../../config/urls';
+import {selectWorkflow} from '../../../stores/generic/WorkflowStore';
 
 const classNames = require('classnames');
 
@@ -23,7 +24,10 @@ class StepperCircle extends Component {
 
 export class MultiStepIndicator extends Component {
 
-  navigateToWorkflow = (workflowUrl) => this.props.history.push(workflowUrl);
+  navigateToWorkflow = (workflowUrl) => {
+    selectWorkflow(workflowUrl);
+    this.props.history.push(workflowUrl);
+  }
 
   render = () => (
       <div className={"multi-step-indicator"}>

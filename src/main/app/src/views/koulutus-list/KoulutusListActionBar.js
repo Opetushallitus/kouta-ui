@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {selectWorkflowTutkintoonJohtavaKoulutus} from '../../stores/generic/WorkflowStore';
+import {selectWorkflowKoulutus} from '../../stores/generic/WorkflowStore';
 
 export class KoulutusListActionBar extends Component {
 
@@ -15,7 +15,7 @@ export class KoulutusListActionBar extends Component {
     selectorVisible: !this.state.selectorVisible
   });
 
-  selectTutkintoonJohtavaKoulutus = () => selectWorkflowTutkintoonJohtavaKoulutus();
+  selectTutkintoonJohtavaKoulutus = () => selectWorkflowKoulutus();
 
   renderSelectorLayer = () => this.state.selectorVisible ? (
       <div className="selector-layer">

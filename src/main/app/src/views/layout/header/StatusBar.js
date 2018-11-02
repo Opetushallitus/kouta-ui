@@ -1,10 +1,24 @@
 import React, {Component} from 'react';
+import {APP_STATE_WORKFLOW} from '../../../config/states';
+import {connectListener} from '../../../utils/stateUtils';
+import {tr} from '../../../stores/generic/LanguageStore';
 
 export class StatusBar extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  componentDidMount = () => connectListener(this, APP_STATE_WORKFLOW, (incomingState) => this.setState({
+    workflowName: tr(incomingState.activeWorkFlow)
+  }));
+
+  getWorkflowName = () => this.state.workflowName;
+
   render = () => (
     <div className={"status-bar"}>
-      <h1 className={"header"}>Julkaise koulutus</h1>
+      <h1 className={'header'}>{this.getWorkflowName()}</h1>
       <div className={"status-box progress-box"}>
         <div className={"icon"}>
           <i className="far fa-star"/>

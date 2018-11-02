@@ -1,9 +1,19 @@
+import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
+import {OsaamisalaSelector} from './toteutuksen-osaamisalat/OsaamisalaSelector';
+import {OsaamisalaViewer} from './toteutuksen-osaamisalat/OsaamisalaViewer';
 
-export class OsaamisalaSection extends AbstractSection {
+export class ToteutuksenOsaamisalatSection extends AbstractSection {
 
-  getClassName = () => 'OsaamisalaSection';
+  getClassName = () => 'ToteutuksenOsaamisalatSection';
 
   getHeader = () => 'Valitse osaamisalat';
+
+  renderContent = () => (
+    <div className={"content"}>
+      <OsaamisalaSelector/>
+      <OsaamisalaViewer/>
+    </div>
+  )
 
 }

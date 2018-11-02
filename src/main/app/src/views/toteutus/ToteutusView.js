@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {ToteutuksenPohjanValintaSection} from './sections/ToteutuksenPohjanValintaSection';
 import {ToteutuksenKieliversioSection} from './sections/ToteutuksenKieliversioSection';
-import {OsaamisalaSection} from './sections/OsaamisalaSection';
+import {ToteutuksenOsaamisalatSection} from './sections/ToteutuksenOsaamisalatSection';
 import {ToteutuksenJarjestamistiedotSection} from './sections/ToteutuksenJarjestamistiedotSection';
 import {JarjestamispaikkaSection} from './sections/JarjestamispaikkaSection';
 import {ToteutuksenNimiSection} from './sections/ToteutuksenNimiSection';
@@ -15,7 +15,7 @@ export class ToteutusView extends Component {
       <div className={"workflow-view"}>
           <ToteutuksenPohjanValintaSection orderNumber={"1"}/>
           <ToteutuksenKieliversioSection orderNumber={"2"}/>
-          <OsaamisalaSection orderNumber={"3"}/>
+          <ToteutuksenOsaamisalatSection orderNumber={"3"}/>
           <ToteutuksenJarjestamistiedotSection orderNumber={"4"}/>
           <KoulutuksenNayttamistiedotSection orderNumber={"5"}/>
           <JarjestamispaikkaSection orderNumber={"6"}/>

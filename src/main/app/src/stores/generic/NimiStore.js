@@ -1,4 +1,4 @@
-import {handleEvents, setState, updateState} from '../../utils/stateUtils';
+import {handleEvents, initState, setState, updateState} from '../../utils/stateUtils';
 import {EVENT_TRANSLATION_CHANGE, EVENT_TRANSLATION_CLEAR, STATE_TRANSLATION_MAP} from '../../config/scopes/Nimi';
 
 export const NimiStore = (scope) => {
@@ -8,7 +8,7 @@ export const NimiStore = (scope) => {
     [scope[EVENT_TRANSLATION_CLEAR]]: () => clearTranslations(scope)
   });
   clearTranslations(scope);
-  setState(scope[STATE_TRANSLATION_MAP], {fi: '', sv: '', en: ''});
+  initState(scope[STATE_TRANSLATION_MAP], {fi: '', sv: '', en: ''});
 };
 
 const clearTranslations = (scope) => setState(scope[STATE_TRANSLATION_MAP], {fi: '', sv: '', en: ''});

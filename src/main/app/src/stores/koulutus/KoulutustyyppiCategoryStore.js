@@ -1,4 +1,4 @@
-import {clearState, getState, handleEvents, setState, updateState} from '../../utils/stateUtils';
+import {clearState, getState, handleEvents, initState, updateState} from '../../utils/stateUtils';
 import {
   APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION,
   APP_EVENT_SELECT_KOULUTUSTYYPPI,
@@ -14,7 +14,7 @@ export const KoulutustyyppiCategoryStore = () => {
   });
 }
 
-export const configureKoulutustyyppiCategoryOptions = () => setState(APP_STATE_KOULUTUSTYYPPI_OPTIONS, [
+export const configureKoulutustyyppiCategoryOptions = () => initState(APP_STATE_KOULUTUSTYYPPI_OPTIONS, [
     {
       value: 'amm',
       label: 'Ammatillinen koulutus'

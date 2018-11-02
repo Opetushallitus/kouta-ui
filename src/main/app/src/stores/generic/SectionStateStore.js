@@ -1,15 +1,13 @@
 import {APP_STATE_SECTION_EXPANSION_MAP, APP_STATE_SECTION_TAB_MAP} from '../../config/states';
-import {getState, observe, updateState} from '../../utils/stateUtils';
+import {getState, initState, updateState} from '../../utils/stateUtils';
 
 const INTERNAL_STATE_SECTION_TO_SEQUENCE_MAP = 'INTERNAL_STATE_SECTION_TO_SEQUENCE_MAP';
 const INTERNAL_STATE_SEQUENCE_TO_SECTION_MAP = 'INTERNAL_STATE_SEQUENCE_TO_SECTION_MAP';
 
-export const SectionStateStore = () => {
-  observe(APP_STATE_SECTION_EXPANSION_MAP, {
-    KoulutustyyppiSection: true,
-    activeSection: 'KoulutuksenTyyppiSection'
-  });
-};
+export const SectionStateStore = () => initState(APP_STATE_SECTION_EXPANSION_MAP, {
+  KoulutustyyppiSection: true,
+  activeSection: 'KoulutuksenTyyppiSection'
+});
 
 export const setSectionExpansion = (sectionName, expanded) => updateState(APP_STATE_SECTION_EXPANSION_MAP, {
   [sectionName]: expanded,

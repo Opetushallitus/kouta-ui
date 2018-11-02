@@ -1,7 +1,7 @@
-import {setState} from '../../utils/stateUtils';
+import {initState, setState} from '../../utils/stateUtils';
 import {APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT} from '../../config/states';
 
-export const ToteutuksenYhteystiedotStore = () => setState(APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT, getInitialState());
+export const ToteutuksenYhteystiedotStore = () => initState(APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT, getInitialState());
 
 export const clearValues = () => setState(APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT, getInitialState());
 

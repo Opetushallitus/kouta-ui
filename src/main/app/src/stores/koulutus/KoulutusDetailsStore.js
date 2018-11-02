@@ -1,24 +1,22 @@
 import axios from 'axios';
 import {AlakoodiList} from '../../model/Alakoodi';
-import {clearValues, getState, handleEvents, setState, updateState} from '../../utils/stateUtils';
+import {clearValues, getState, handleEvents, initState, setState, updateState} from '../../utils/stateUtils';
 import {LANGUAGE} from '../../config/constants';
 import {
   APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION,
   APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY,
   APP_STATE_KOULUTUS_DETAILS,
-  APP_STATE_KOULUTUSKOODI_LIST,
-  APP_STATE_WORKFLOW
+  APP_STATE_KOULUTUSKOODI_LIST
 } from '../../config/states';
 import {urlRelaatioAlakoodit} from '../../config/urls';
 import {getKoulutusOptionById} from './KoulutuskoodiListStore';
 
 export const KoulutusDetailsStore = () => {
   handleEvents({
-    [APP_STATE_WORKFLOW]: () => clearKoulutusDetails(),
     [APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION]: () => clearKoulutusDetails(),
     [APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY]: () => clearKoulutusDetails()
   });
-  setState(APP_STATE_KOULUTUS_DETAILS, {
+  initState(APP_STATE_KOULUTUS_DETAILS, {
     enabled: false
   })
 }
@@ -45,6 +43,8 @@ const setKoulutusDetailsData = (alakoodiJsonArray) => {
     enabled: true
   });
 }
+
+
 
 export const clearKoulutusDetails = () => setState(APP_STATE_KOULUTUS_DETAILS, {
   enabled: false

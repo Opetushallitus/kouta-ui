@@ -3,7 +3,7 @@ import {getKoodiUri, getVersio} from './KoulutusDetailsStore';
 import {getKoulutustyyppiCategory} from './KoulutustyyppiCategoryStore';
 import {getUrlKoutaBackendKoulutus} from '../generic/UrlStore';
 import {JULKAISUTILA, REQUEST_STATUS} from '../../config/constants';
-import {handleEvent, observe, updateState} from '../../utils/stateUtils';
+import {handleEvent, initState, updateState} from '../../utils/stateUtils';
 import {APP_EVENT_SECTION_VALIDATION_REQUEST, APP_STATE_KOULUTUS_PERSISTENCY} from '../../config/states';
 import {getSelectedOrganisaatioOidList} from './OrganisaatioStore';
 import {getEditedTranslationMap} from './KoulutusNameTranslationStore';
@@ -12,7 +12,7 @@ export const ATTR_SAVE_AND_PUBLISH = 'saveAndPublish';
 export const ATTR_SAVE = 'save';
 
 export const KoulutusPersistencyStore = () => {
-  observe(APP_STATE_KOULUTUS_PERSISTENCY, {
+  initState(APP_STATE_KOULUTUS_PERSISTENCY, {
     [ATTR_SAVE_AND_PUBLISH]: REQUEST_STATUS.DISABLED,
     [ATTR_SAVE]: REQUEST_STATUS.ENABLED
   });

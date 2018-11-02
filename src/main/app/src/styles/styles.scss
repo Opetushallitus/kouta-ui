@@ -2,20 +2,22 @@
 @import './common/colors';
 @import './common/buttons';
 
-@import 'components/KoulutusSelector';
+@import 'views/koulutus/KoulutusSelector';
 @import 'components/SelectorButton';
 @import 'components/Section';
-@import 'components/KoulutusDetails';
-@import 'components/MultiStepIndicator';
-@import 'components/FooterActionButtons';
-@import 'components/StatusBar';
+@import 'views/koulutus/KoulutusDetails';
+@import 'views/generic/MultiStepIndicator';
+@import 'views/generic/FooterActionButtons';
+@import 'views/generic/StatusBar';
 @import 'components/TranslationEditor';
 @import 'components/CheckboxSection';
 @import 'components/InfoDropdown';
 @import 'components/NimiSection';
 @import 'components/PohjanValintaSection';
 @import 'components/InputField';
-@import 'components/ToteutuksenYhteystiedotSection';
+@import 'views/toteutus/ToteutuksenYhteystiedotSection';
 
 @import 'views/KoulutusList';
 @import 'views/Workflow';
+@import 'views/toteutus/OsaamisalaSelector';
+@import 'views/toteutus/OsaamisalaViewer';

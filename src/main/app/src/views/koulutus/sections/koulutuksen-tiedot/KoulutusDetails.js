@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {APP_STATE_KOULUTUS_DETAILS} from '../config/states';
-import {connectListener} from '../utils/stateUtils';
+import {APP_STATE_KOULUTUS_DETAILS} from '../../../../config/states';
+import {connectListener} from '../../../../utils/stateUtils';
 
 export class KoulutusDetails extends Component {
 

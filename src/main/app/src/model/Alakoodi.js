@@ -15,7 +15,8 @@ const AlakoodiFinder = {
 export const AlakoodiList = {
   createFromJsonArray: (jsonArray) => jsonArray.map(AlakoodiItem.createFromJson),
   findKoulutusala: (alakoodiList, language) => AlakoodiFinder.findName(alakoodiList, KOODISTO_URI_KOULUTUSALA, language),
-  findOsaamisalaList: (alakoodiList, language) => AlakoodiFinder.findNames(alakoodiList, KOODISTO_URI_OSAAMISALA, language),
+  findOsaamisalaNameList: (alakoodiList, language) => AlakoodiFinder.findNames(alakoodiList, KOODISTO_URI_OSAAMISALA, language),
+  findOsaamisalaList: (alakoodiList, language) =>  AlakoodiFinder.findMany(alakoodiList, KOODISTO_URI_OSAAMISALA),
   findTutkintonimikeList: (alakoodiList, language) => AlakoodiFinder.findNames(alakoodiList, KOODISTO_URI_TUTKINTONIMIKKEET, language),
   findOpintojenLaajuus: (alakoodiList, language) => AlakoodiFinder.findName(alakoodiList, KOODISTO_URI_OPINTOJEN_LAAJUUS, language),
   findOpintojenLaajuusyksikko: (alakoodiList, language) => AlakoodiFinder.findName(alakoodiList, KOODISTO_URI_OPINTOJEN_LAAJUUSYKSIKKO, language),
@@ -37,6 +38,10 @@ export class AlakoodiItem {
     this.findName = this.findName.bind(this);
   }
 
+  get koodiUri() {
+    return this.data.koodiUri;
+  }
+
   get koodistoUri() {
     return this.data.koodisto.koodistoUri;
   }
@@ -55,5 +60,4 @@ export class AlakoodiItem {
 
   isOfType = (koodistoUriType) =>  this.koodistoUri === koodistoUriType;
 
-};
-
+}

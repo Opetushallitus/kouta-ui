@@ -9,10 +9,10 @@ export class OsaamisalaSelector extends Connectable {
     this.setState(state);
   });
 
-  getOsaamisalaList = () => this.state.osaamisalaList || [];
+  getOsaamisalaOptions = () => this.state.osaamisalaOptions || [];
 
   renderCheckboxes = () => {
-    const list = this.getOsaamisalaList();
+    const list = this.getOsaamisalaOptions();
     return (<div>
       OsaamisalaSelector
     </div>);

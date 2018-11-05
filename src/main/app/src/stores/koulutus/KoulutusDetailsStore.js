@@ -1,10 +1,9 @@
 import axios from 'axios';
-import {AlakoodiList} from '../../model/Alakoodi';
+import {AlakoodiItem, AlakoodiList} from '../../model/Alakoodi';
 import {clearValues, getState, handleEvents, initState, setState, updateState} from '../../utils/stateUtils';
 import {LANGUAGE} from '../../config/constants';
 import {
   APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION,
-  APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY,
   APP_STATE_KOULUTUS_DETAILS,
   APP_STATE_KOULUTUSKOODI_LIST
 } from '../../config/states';
@@ -13,8 +12,7 @@ import {getKoulutusOptionById} from './KoulutuskoodiListStore';
 
 export const KoulutusDetailsStore = () => {
   handleEvents({
-    [APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION]: () => clearKoulutusDetails(),
-    [APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY]: () => clearKoulutusDetails()
+    [APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION]: () => clearKoulutusDetails()
   });
   initState(APP_STATE_KOULUTUS_DETAILS, {
     enabled: false
@@ -36,7 +34,8 @@ const setKoulutusDetailsData = (alakoodiJsonArray) => {
   const alakoodiList = AlakoodiList.createFromJsonArray(alakoodiJsonArray);
   updateState(APP_STATE_KOULUTUS_DETAILS, {
     koulutusala: AlakoodiList.findKoulutusala(alakoodiList, LANGUAGE),
-    osaamisalaList: AlakoodiList.findOsaamisalaList(alakoodiList, LANGUAGE),
+    osaamisalaNameList: AlakoodiList.findOsaamisalaNameList(alakoodiList, LANGUAGE),
+    osaamisalaOptions: createOsaamisalaOptions(alakoodiList),
     tutkintonimikeList: AlakoodiList.findTutkintonimikeList(alakoodiList, LANGUAGE),
     opintojenLaajuus: AlakoodiList.findOpintojenLaajuus(alakoodiList, LANGUAGE),
     opintojenLaajuusyksikko: AlakoodiList.findOpintojenLaajuusyksikko(alakoodiList, LANGUAGE),
@@ -44,7 +43,10 @@ const setKoulutusDetailsData = (alakoodiJsonArray) => {
   });
 }
 
-
+const createOsaamisalaOptions = (alakoodiList) => AlakoodiList.findOsaamisalaList(alakoodiList).map(listentry => ({
+  label: AlakoodiItem.findName(listentry, LANGUAGE),
+  value: listentry.koodiUri
+}));
 
 export const clearKoulutusDetails = () => setState(APP_STATE_KOULUTUS_DETAILS, {
   enabled: false

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {APP_STATE_KOULUTUS_DETAILS} from '../../../../config/states';
 import {connectListener} from '../../../../utils/stateUtils';
 import {Connectable} from '../../../../components/Connectable';

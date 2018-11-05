@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {Redirect, Route} from 'react-router-dom';
-import {Header} from "./layout/Header";
-import {Footer} from "./layout/Footer";
+import {Route} from 'react-router-dom';
+import {Header} from './layout/Header';
+import {Footer} from './layout/Footer';
 import {KoulutusView} from './koulutus/KoulutusView';
 import {ToteutusView} from './toteutus/ToteutusView';
 import {HakuView} from './haku/HakuView';

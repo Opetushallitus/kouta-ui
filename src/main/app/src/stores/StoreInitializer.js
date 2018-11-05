@@ -22,6 +22,7 @@ import {HaunPohjaStore} from './haku/HaunPohjaStore';
 import {HakukohteenPohjaStore} from './hakukohde/HakukohteenPohjaStore';
 import {ValintaperusteenPohjaStore} from './valintaperusteet/ValintaperusteenPohjaStore';
 import {ToteutuksenYhteystiedotStore} from './toteutus/ToteutuksenYhteystiedotStore';
+import {ToteutuksenOsaamisalaStore} from './toteutus/ToteutuksenOsaamisalaStore';
 
 const initGenericStores = () => {
   UrlStore();
@@ -43,6 +44,7 @@ const initKoulutusStores = () => {
 const initToteutusStores = () => {
   ToteutuksenPohjaStore();
   ToteutuksenKieliversioStore();
+  ToteutuksenOsaamisalaStore();
   ToteutuksenNimiStore();
   ToteutuksenYhteystiedotStore();
 }

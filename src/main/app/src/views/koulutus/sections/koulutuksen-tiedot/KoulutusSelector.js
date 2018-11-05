@@ -5,7 +5,7 @@ import {
   APP_STATE_KOULUTUSKOODI_LIST
 } from '../../../../config/states';
 import {selectKoulutus, updateKoulutuksenNimi} from '../../../../stores/koulutus/KoulutusDetailsStore';
-import {connectComponent} from '../../../../utils/stateUtils';
+import {connectComponent, disconnectListener} from '../../../../utils/stateUtils';
 import {KoulutusNameTranslationEditor} from './KoulutusNameTranslationEditor';
 import {KOULUTUSTYYPPI_CATEGORY} from '../../../../config/constants';
 
@@ -31,6 +31,8 @@ export class KoulutusSelector extends Component {
     [APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY]: (koulutustyyppiCategory) =>
       this.setState(...this.state, {koulutustyyppiCategory})
     });
+
+  componentWillUnmount = () => disconnectListener(this);
 
   getFilter = () => this.state.filter || '';
 

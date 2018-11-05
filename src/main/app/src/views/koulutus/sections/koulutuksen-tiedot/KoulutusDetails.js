@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {APP_STATE_KOULUTUS_DETAILS} from '../../../../config/states';
 import {connectListener} from '../../../../utils/stateUtils';
+import {Connectable} from '../../../../components/Connectable';
 
-export class KoulutusDetails extends Component {
+export class KoulutusDetails extends Connectable {
 
   constructor(props) {
     super(props);
@@ -32,7 +33,7 @@ export class KoulutusDetails extends Component {
 
   renderOsaamisalaList = () => (
     <ul className={"osaamisala-list"}>
-      {this.state.osaamisalaList.map(this.renderOsaamisalaItem)}
+      {this.state.osaamisalaNameList.map(this.renderOsaamisalaItem)}
     </ul>
   )
 

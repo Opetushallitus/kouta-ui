@@ -13,9 +13,6 @@ export class Main extends Component {
     render = () => (
         <React.Fragment>
           <Route path='/' render={() => <Header/>}/>
-          <Route exact path='/'>
-            <Redirect to="/koulutus" />
-          </Route>
           <Route path='/koulutukset' render={() => <KoulutusView/>}/>
           <Route path='/koulutus' render={() => <KoulutusView/>}/>
           <Route path='/toteutus' render={() => <ToteutusView/>}/>

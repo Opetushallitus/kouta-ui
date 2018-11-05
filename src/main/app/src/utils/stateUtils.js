@@ -26,6 +26,8 @@ export const initState = (eventName, newState) => {
   return safeClone(targetItem);
 }
 
+export const initStates = (stateMap) => Object.keys(stateMap).map(key => setState(key, stateMap[key]));
+
 export const containsValue = (eventName, property) => (getItem(eventName) || {})[property];
 
 export const getState = (eventName, property) => {

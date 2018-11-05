@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {broadcast} from '../utils/stateUtils';
 
 export class InfoDropdown extends Component {
 
@@ -9,8 +8,6 @@ export class InfoDropdown extends Component {
   }
 
   handleChange = (event) => this.props.onChange(event.target.value);
-
-  onClearButtonClick = () => broadcast(this.getSelectionClearEventName());
 
   renderOption = (option, index) => <option key={index} value={option.value}>{option.label}</option>
 

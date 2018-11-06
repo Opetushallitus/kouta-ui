@@ -27,3 +27,17 @@ export const enforceObject = (item) => item ? isObject(item) ? item : {_value: i
 
 export const getValueOrClone = (item) => item ? safeClone(item['_value'] || item) : null;
 
+const deepFind = (item, regex, results) => {
+  if (Array.isArray(item)) {
+    item.forEach(arrayItem => deepFind(arrayItem, regex, results));
+    return results;
+  }
+  const keys = Object.keys(item);
+  keys.filter(key => regex.test(key)).forEach(matchingKey =>
+    results.push(item[matchingKey])
+  );
+  Object.values(item).filter(isObject).forEach(childItem => deepFind(childItem, regex, results));
+  return results;
+}
+
+export const findByKey = (item, key) => deepFind(item, new RegExp(key), []);

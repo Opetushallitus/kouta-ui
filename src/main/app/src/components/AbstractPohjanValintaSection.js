@@ -58,7 +58,7 @@ export class AbstractPohjanValintaSection extends AbstractSection {
 
   getModeOptions = () => this.state.modeOptions || [];
 
-  getMode = () => this.state.mode;
+  getMode = () => this.state.mode || ENTITY_MODIFICATION_MODE.CREATE_ENTITY;
 
   handleDropdownChange = (value) => broadcast(this.getEventNameForEntry(), value);
 

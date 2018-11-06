@@ -1,5 +1,5 @@
-import {getItem, setItem, enforceItem, } from './storageUtils';
-import {clone, safeClone, enforceObject, getValueOrClone} from './objectUtils'
+import {enforceItem, getItem, setItem} from './storageUtils';
+import {clone, enforceObject, getValueOrClone, safeClone} from './objectUtils';
 
 const connectionMap = {};
 let listenerId = 0;
@@ -26,7 +26,7 @@ export const initState = (eventName, newState) => {
   return safeClone(targetItem);
 }
 
-export const initStates = (stateMap) => Object.keys(stateMap).map(key => setState(key, stateMap[key]));
+export const initStates = (stateMap) => Object.keys(stateMap).map(key => initState(key, stateMap[key]));
 
 export const containsValue = (eventName, property) => (getItem(eventName) || {})[property];
 
@@ -45,7 +45,7 @@ const enforceListenerId = (listener) => {
 }
 
 export const connectComponent = (component, handlerMap) =>
-  Object.keys(handlerMap).map(eventName => connectListener(component, eventName, handlerMap[eventName]))
+  Object.keys(handlerMap).map(eventName => connectListener(component, eventName, handlerMap[eventName]));
 
 // a simple function to couple a listener with matching event
 export const connectListener = (listener, eventName, targetFunction) => {
@@ -54,7 +54,7 @@ export const connectListener = (listener, eventName, targetFunction) => {
   connectionMap[eventName][listenerId.toString()] = targetFunction;
   const dataItem = getItem(eventName);
   if (dataItem) {
-    broadcast(eventName, dataItem);
+    targetFunction(getValueOrClone(dataItem));
   }
 }
 

@@ -14,14 +14,13 @@ export const KoulutusDetailsStore = () => {
   handleEvents({
     [APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION]: () => clearKoulutusDetails()
   });
-  initState(APP_STATE_KOULUTUS_DETAILS, {
-    enabled: false
-  })
+  initKoulutusDetails();
 }
 
 const loadKoulutusDetails = (koulutusId) => {
   const koulutusOption = getKoulutusOptionById(koulutusId);
-  updateState(APP_STATE_KOULUTUS_DETAILS, {...koulutusOption,
+  updateKoulutusDetails({
+    ...koulutusOption,
     enabled: false,
     koodiUri: koulutusOption.koodiUri,
     versio: koulutusOption.versio
@@ -32,7 +31,7 @@ const loadKoulutusDetails = (koulutusId) => {
 
 const setKoulutusDetailsData = (alakoodiJsonArray) => {
   const alakoodiList = AlakoodiList.createFromJsonArray(alakoodiJsonArray);
-  updateState(APP_STATE_KOULUTUS_DETAILS, {
+  updateKoulutusDetails({
     koulutusala: AlakoodiList.findKoulutusala(alakoodiList, LANGUAGE),
     osaamisalaNameList: AlakoodiList.findOsaamisalaNameList(alakoodiList, LANGUAGE),
     osaamisalaOptions: createOsaamisalaOptions(alakoodiList),
@@ -42,6 +41,12 @@ const setKoulutusDetailsData = (alakoodiJsonArray) => {
     enabled: true
   });
 }
+
+const initKoulutusDetails = () => initState(APP_STATE_KOULUTUS_DETAILS, {
+  enabled: false
+});
+
+const updateKoulutusDetails = (stateUpdate) => updateState(APP_STATE_KOULUTUS_DETAILS, stateUpdate);
 
 const createOsaamisalaOptions = (alakoodiList) => AlakoodiList.findOsaamisalaList(alakoodiList).map(listentry => ({
   label: AlakoodiItem.findName(listentry, LANGUAGE),
@@ -66,6 +71,6 @@ export const getActiveKoulutusById = (activeKoulutusId) => {
 
 export const deselectKoulutus = () => clearValues(APP_STATE_KOULUTUS_DETAILS);
 
-export const selectKoulutus = (activeKoulutusId) => loadKoulutusDetails(activeKoulutusId)
+export const selectKoulutus = (activeKoulutusId) => loadKoulutusDetails(activeKoulutusId);
 
 export const getNameTranslationMap = () => getState(APP_STATE_KOULUTUS_DETAILS, 'nameTranslationMap') || {};

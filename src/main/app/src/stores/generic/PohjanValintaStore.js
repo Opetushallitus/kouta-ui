@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {handleEvent, initState, updateState} from '../../utils/stateUtils';
+import {handleEvent, initStates, updateState} from '../../utils/stateUtils';
 import {ENTITY_MODIFICATION_MODE, LANGUAGE} from '../../config/constants';
 
 import {
@@ -14,7 +14,7 @@ export const PohjanValintaStore = (scope, listRetrievalUrl, modeOptions) => {
   handleEvent(scope[EVENT_MODE], (mode) => updateState(
     scope[STATE_MODE], mode
   ));
-  initState({
+  initStates({
     [scope[STATE_MODE]]: ENTITY_MODIFICATION_MODE.CREATE_ENTITY,
     [scope[STATE_MODE_OPTIONS]]: modeOptions
   });

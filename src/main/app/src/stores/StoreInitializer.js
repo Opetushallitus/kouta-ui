@@ -23,6 +23,7 @@ import {HakukohteenPohjaStore} from './hakukohde/HakukohteenPohjaStore';
 import {ValintaperusteenPohjaStore} from './valintaperusteet/ValintaperusteenPohjaStore';
 import {ToteutuksenYhteystiedotStore} from './toteutus/ToteutuksenYhteystiedotStore';
 import {ToteutuksenOsaamisalaStore} from './toteutus/ToteutuksenOsaamisalaStore';
+import {KoulutuksenKuvausStore} from './koulutus/KoulutuksenKuvausStore';
 
 const initGenericStores = () => {
   UrlStore();
@@ -39,6 +40,7 @@ const initKoulutusStores = () => {
   KoulutuksenKieliversioStore();
   KoulutusNameTranslationStore();
   KoulutuksenPohjaStore();
+  KoulutuksenKuvausStore();
 }
 
 const initToteutusStores = () => {

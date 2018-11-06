@@ -11,11 +11,14 @@ export const  urlRelaatioAlakoodit = (koodiUri, versio) =>
 export const urlKoulutuskoodit = (koulutustyyppiId) =>
     `${SERVICE_DOMAIN}/koodisto-service/rest/json/relaatio/sisaltyy-ylakoodit/${koulutustyyppiId}`;
 
-export const urlKoulutuksenKuvaus = (koodiUri) =>
-    `${SERVICE_DOMAIN}/eperusteet-service/api/perusteet?tuleva=true&siirtyma=true&voimassaolo=true&poistunut=true&kieli=fi&koulutuskoodi=${koodiUri}`;
+export const urlEPerusteList = (koodiUri) =>
+    `${SERVICE_DOMAIN}/eperusteet-service/api/perusteet?tuleva=true&siirtyma=false&voimassaolo=true&poistunut=false&kieli=fi&koulutuskoodi=${koodiUri}`;
 
 export const urlOrganisaatioList = () =>
     `${SERVICE_DOMAIN}/organisaatio-service/rest/organisaatio/v4/hae?aktiiviset=true&suunnitellut=true&lakkautetut=false&organisaatiotyyppi=organisaatiotyyppi_02`;
+
+export const urlOsaamisalaKuvausList = (eperusteId) =>
+  `${SERVICE_DOMAIN}/eperusteet-service/api/perusteet/${eperusteId}/osaamisalakuvaukset`;
 
 export const workflowUrlToteutus = () => '/toteutus';
 

@@ -35,16 +35,20 @@ const setKoulutusListData = (koulutustyyyppi, koodiList) => {
   const optionsMap = {};
   koodiList.forEach((entry) => {
     const koodiUri = entry.koodiUri;
+    const koodiArvo = entry.koodiArvo;
     const versio = entry.versio;
     const localizedMetadataEntry = entry.metadata.find(entry => entry.kieli === LANGUAGE);
     const nameTranslationMap = {};
     entry.metadata.forEach(entry => {nameTranslationMap[entry['kieli'].toLowerCase()] = entry.nimi});
     const nimi = localizedMetadataEntry.nimi;
+    const koodistoUri = entry.koodisto.koodistoUri;
     const kuvaus = localizedMetadataEntry.kuvaus;
     optionsMap[nimi] = {
       label: nimi,
       id: koodiUri + '-' + versio,
+      koodiArvo,
       koodiUri,
+      koodistoUri,
       versio,
       nimi,
       kuvaus,

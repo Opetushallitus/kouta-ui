@@ -28,6 +28,7 @@ export class OsaamisalaViewer extends Component {
 
   getOsaamisalaByKey = (key) => this.getOsaamisalakuvausMap()[key];
 
+  //TODO: Move this logic to stores
   getSelectedEntries = () => {
     const selections = this.getSelections();
     let entries = [];

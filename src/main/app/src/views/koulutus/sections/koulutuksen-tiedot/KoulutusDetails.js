@@ -31,9 +31,11 @@ export class KoulutusDetails extends Connectable {
     </li>
   )
 
+  getOsaamisaalaNameList = () => this.state.osaamisalaNameList || [];
+
   renderOsaamisalaList = () => (
     <ul className={"osaamisala-list"}>
-      {this.state.osaamisalaNameList.map(this.renderOsaamisalaItem)}
+      {this.getOsaamisaalaNameList().map(this.renderOsaamisalaItem)}
     </ul>
   )
 

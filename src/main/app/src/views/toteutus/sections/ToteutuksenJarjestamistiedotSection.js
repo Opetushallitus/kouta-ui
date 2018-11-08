@@ -2,9 +2,20 @@ import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
 import {CheckboxSelector} from '../../../components/CheckboxSelector';
 import {RadiobuttonSelector} from '../../../components/RadiobuttonSelector';
+import {TextAreaField} from '../../../components/TextAreaField';
 
 export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
 
+  onMount = () => {
+    this.setState({
+      ...this.state,
+      lisattavaOsioOptions: this.getLisattavaOsioOptions(),
+      opetuskieliOptions: this.getOpetuskieliOptions(),
+      opetusaikaOptions: this.getOpetusaikaOptions(),
+      opetustapaOptions: this.getOpetustapaOptions(),
+      maksullisuusOptions: this.getMaksullisuusOptions()
+    });
+  };
   getClassName = () => 'ToteutuksenJarjestamistiedotSection';
 
   getHeader = () => 'Toteutuksen järjestämistiedot';
@@ -12,15 +23,15 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
   getOpetuskieliOptions = () => [
     {
       label: 'Suomi',
-      value: 'fi'
+      key: 'fi'
     },
     {
       label: 'Ruotsi',
-      value: 'sv'
+      key: 'sv'
     },
     {
       label: 'Englanti',
-      value: 'en'
+      key: 'en'
     }
   ];
 
@@ -28,15 +39,15 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
   getOpetusaikaOptions= () => [
     {
       label: 'Päiväopetus',
-      value: 'paivaopetus'
+      key: 'paivaopetus'
     },
     {
       label: 'Iltaopetus',
-      value: 'iltaopetus'
+      key: 'iltaopetus'
     },
     {
       label: 'Viikonloppuopetus',
-      value: 'viikonloppuopetus'
+      key: 'viikonloppuopetus'
     }
   ];
 
@@ -44,120 +55,125 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
   getOpetustapaOptions = () => [
     {
       label: 'Lähiopiskelu',
-      value: 'lahiopiskelu'
+      key: 'lahiopiskelu'
     },
     {
       label: 'Etäopiskelu',
-      value: 'etaopiskelu'
+      key: 'etaopiskelu'
     }
   ];
 
   getMaksullisuusOptions = () => [
     {
       label: 'Ei',
-      value: 'ei'
+      key: 'ei'
     },
     {
       label: 'Kyllä',
-      value: 'kylla'
+      key: 'kylla'
     }
   ]
 
   getLisattavaOsioOptions = () => [
     {
       label: 'Opintojen rakenne',
-      value: 'opintojen-rakenne'
+      key: 'opintojen-rakenne'
     },
     {
       label: 'Jatko-opintomahdollisuudet',
-      value: 'jatko-opintomahdollisuudet'
+      key: 'jatko-opintomahdollisuudet'
     },
     {
       label: 'Osaamisalan valinta',
-      value: 'osaamisalan-valinta'
+      key: 'osaamisalan-valinta'
     },
     {
       label: 'Sisältö',
-      value: 'sisalto'
+      key: 'sisalto'
     },
     {
       label: 'Uramahdollisuudet',
-      value: 'uramahdollisuudet'
+      key: 'uramahdollisuudet'
     },
     {
       label: 'Kohderyhmä',
-      value: 'kohderyhma'
+      key: 'kohderyhma'
     },
     {
       label: 'Kansainvälistyminen',
-      value: 'kansainvalistyminen'
+      key: 'kansainvalistyminen'
     },
     {
       label: 'Yhteistyö muiden toimijoiden kanssa',
-      value: 'yhteistyo'
+      key: 'yhteistyo'
     }
   ];
 
-  getOpetuskieliSelections = () => this.state.opetuskieliSelections || {};
+  getLisattavaOsioActiveOptions = () => this.state.lisattavaOsioOptions.filter(entry => entry.active);
 
-  getOpetusaikaSelections = () => this.state.opetusaikaSelections || {};
+  changeCheckboxSelection = (targetOptions, change) => this.setState({
+    ...this.state,
+    [targetOptions]: this.state[targetOptions].map(entry => ({
+      ...entry,
+      active: change.key === entry.key ? change.value : entry.active
+    }))
+  });
 
-  getOpetustapaSelections = () => this.state.opetustapaSelections || {};
+  changeRadioSelection = (targetOptions, change) => this.setState({
+    ...this.state,
+    [targetOptions]: this.state[targetOptions].map(entry => ({
+      ...entry,
+      active: change.key === entry.key ? change.value : false
+    }))
+  });
 
-  getMaksullisuusSelections = () => this.state.maksullisuusSelections || {};
+  changeValue = (targetOptions, change) => this.setState({
+    ...this.state,
+    [targetOptions]: this.state[targetOptions].map(entry => ({
+      ...entry,
+      value: change.key === entry.key ? change.value : entry.value
+    }))
+  });
 
-  getLisattavaOsioSelections = () => this.state.lisattavaOsioSelections || {};
+  changeLisattavaOsioSelection = (change) => this.changeCheckboxSelection('lisattavaOsioOptions', change);
 
-  changeOpetuskieli = (change) => {
-    const opetuskieliSelections = {...this.getOpetuskieliSelections()};
-    opetuskieliSelections[change.value] = change.selected;
-    this.setState({...this.state, opetuskieliSelections});
-  }
+  changeOpetuskieliSelection = (change) => this.changeCheckboxSelection('opetuskieliOptions', change);
 
-  changeOpetusaika = (change) => {
-    this.setState({
-      ...this.state,
-      opetusaikaSelections: {
-        [change.value]: change.selected
-      }
-    })
-  }
+  changeOpetusaikaSelection = (change) => this.changeRadioSelection('opetusaikaOptions', change);
 
-  changeOpetustapa = (change) => {
-    this.setState({
-      ...this.state,
-      opetustapaSelections: {
-        [change.value]: change.selected
-      }
-    })
-  }
+  changeOpetustapaSelection = (change) => this.changeRadioSelection('opetustapaOptions', change);
 
-  changeMaksullisuus = (change) => {
-    this.setState({
-      ...this.state,
-      maksullisuusSelections: {
-        [change.value]: change.selected
-      }
-    })
-  }
+  changeLisattavaOsioValue = (change) => this.changeValue('lisattavaOsioOptions', change);
 
-  changeLisattavaOsio = (change) => {
-    const lisattavaOsioSelections = {...this.getLisattavaOsioSelections()};
-    lisattavaOsioSelections[change.value] = change.selected;
-    this.setState({...this.state, lisattavaOsioSelections});
-  }
+  changeMaksullisuusSelection = (change) => this.changeRadioSelection('maksullisuusOptions', change);
+
+  renderLisattavaOsioTextAreas = () => this.getLisattavaOsioActiveOptions().map(entry => (
+    <TextAreaField onChange={this.changeLisattavaOsioValue} id={entry.key} key={entry.key} label={entry.label}
+                   value={entry.value}/>
+  ));
 
   renderContent = () => {
+    console.log('Section:renderCOntent', this.state);
     return (
       <div className={'content'}>
-        <CheckboxSelector label={"Opetuskieli"} selections={this.getOpetuskieliSelections()} options={this.getOpetuskieliOptions()} onChange={this.changeOpetuskieli}/>
-        <RadiobuttonSelector label={"Opetusaika"} selections={this.getOpetusaikaSelections()} options={this.getOpetusaikaOptions()} onChange={this.changeOpetusaika}/>
-        <RadiobuttonSelector label={"Pääasiallinen opetustapa"} selections={this.getOpetustapaSelections()} options={this.getOpetustapaOptions()} onChange={this.changeOpetustapa}/>
-        <RadiobuttonSelector label={"Onko opetus maksullista?"} selections={this.getMaksullisuusSelections()} options={this.getMaksullisuusOptions()} onChange={this.changeMaksullisuus}/>
-        <CheckboxSelector label={"Valitse lisättävä osio"} selections={this.getLisattavaOsioSelections()}
-                          options={this.getLisattavaOsioOptions()} onChange={this.changeLisattavaOsio}/>
+        <CheckboxSelector label={'Opetuskieli'}
+                          options={this.state.opetuskieliOptions}
+                          onChange={this.changeOpetuskieliSelection}
+        />
+        <RadiobuttonSelector label={'Opetusaika'}
+                             options={this.state.opetusaikaOptions}
+                             onChange={this.changeOpetusaikaSelection}/>
+        <RadiobuttonSelector label={'Pääasiallinen opetustapa'}
+                             options={this.state.opetustapaOptions}
+                             onChange={this.changeOpetustapaSelection}/>
+        <RadiobuttonSelector label={'Onko opetus maksullista?'}
+                             options={this.state.maksullisuusOptions}
+                             onChange={this.changeMaksullisuusSelection}/>
+        <CheckboxSelector label={'Valitse lisättävä osio'}
+                          options={this.state.lisattavaOsioOptions}
+                          onChange={this.changeLisattavaOsioSelection}/>;
+        {this.renderLisattavaOsioTextAreas()}
       </div>
-    );
+    )
   };
-
 }

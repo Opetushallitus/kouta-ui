@@ -16,6 +16,7 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
       maksullisuusOptions: this.getMaksullisuusOptions()
     });
   };
+
   getClassName = () => 'ToteutuksenJarjestamistiedotSection';
 
   getHeader = () => 'Toteutuksen järjestämistiedot';
@@ -35,7 +36,6 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
     }
   ];
 
-
   getOpetusaikaOptions= () => [
     {
       label: 'Päiväopetus',
@@ -50,7 +50,6 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
       key: 'viikonloppuopetus'
     }
   ];
-
 
   getOpetustapaOptions = () => [
     {
@@ -72,7 +71,7 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
       label: 'Kyllä',
       key: 'kylla'
     }
-  ]
+  ];
 
   getLisattavaOsioOptions = () => [
     {
@@ -169,7 +168,7 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
                              onChange={this.changeMaksullisuusSelection}/>
         <CheckboxSelector label={'Valitse lisättävä osio'}
                           options={this.state.lisattavaOsioOptions}
-                          onChange={this.changeLisattavaOsioSelection}/>;
+                          onChange={this.changeLisattavaOsioSelection}/>
         {this.renderLisattavaOsioTextAreas()}
       </div>
     )

@@ -7,7 +7,7 @@ import {JarjestamispaikkaSection} from './sections/JarjestamispaikkaSection';
 import {ToteutuksenNimiSection} from './sections/ToteutuksenNimiSection';
 import {ToteutuksenYhteystiedotSection} from './sections/ToteutuksenYhteystiedotSection';
 import {ToteutuksenHautSection} from './sections/ToteutuksenHautSection';
-import {KoulutuksenNayttamistiedotSection} from './sections/KoulutuksenNayttamistiedotSection';
+import {ToteutuksenNayttamistiedotSection} from './sections/ToteutuksenNayttamistiedotSection';
 
 export class ToteutusView extends Component {
 
@@ -17,7 +17,7 @@ export class ToteutusView extends Component {
           <ToteutuksenKieliversioSection orderNumber={"2"}/>
           <ToteutuksenOsaamisalatSection orderNumber={"3"}/>
           <ToteutuksenJarjestamistiedotSection orderNumber={"4"}/>
-          <KoulutuksenNayttamistiedotSection orderNumber={"5"}/>
+          <ToteutuksenNayttamistiedotSection orderNumber={"5"}/>
           <JarjestamispaikkaSection orderNumber={"6"}/>
           <ToteutuksenNimiSection orderNumber={"7"}/>
           <ToteutuksenYhteystiedotSection orderNumber={"8"}/>

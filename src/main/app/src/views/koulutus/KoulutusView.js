@@ -5,6 +5,7 @@ import {KoulutuksenTiedotSection} from './sections/KoulutuksenTiedotSection';
 import {KoulutuksenKuvausSection} from './sections/KoulutuksenKuvausSection';
 import {KoulutuksenOrganisaatioSection} from './sections/KoulutuksenOrganisaatioSection';
 import {KoulutuksenKieliversioSection} from './sections/KoulutuksenKieliversioSection';
+import {KoulutuksenNimiSection} from './sections/KoulutuksenNimiSection';
 
 export class KoulutusView extends Component {
 
@@ -17,8 +18,9 @@ export class KoulutusView extends Component {
           <KoulutuksenPohjanValintaSection orderNumber={"2"}/>
           <KoulutuksenKieliversioSection orderNumber={"3"}/>
           <KoulutuksenTiedotSection orderNumber={"4"}/>
-          <KoulutuksenKuvausSection orderNumber={"5"}/>
-          <KoulutuksenOrganisaatioSection orderNumber={"6"}/>
+          <KoulutuksenNimiSection orderNumber={"5"}/>
+          <KoulutuksenKuvausSection orderNumber={"6"}/>
+          <KoulutuksenOrganisaatioSection orderNumber={"7"}/>
       </div>
   )
 }

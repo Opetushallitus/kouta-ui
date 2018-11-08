@@ -7,7 +7,7 @@ import {UrlStore} from './generic/UrlStore';
 import {WorkflowStore} from './generic/WorkflowStore';
 import {KoulutustyyppiCategoryStore} from './koulutus/KoulutustyyppiCategoryStore';
 import {KoulutuksenKieliversioStore} from './koulutus/KoulutuksenKieliversioStore';
-import {KoulutusNameTranslationStore} from './koulutus/KoulutusNameTranslationStore';
+import {KoulutuksenNimiStore} from './koulutus/KoulutuksenNimiStore';
 import {KoulutuksenPohjaStore} from './koulutus/KoulutuksenPohjaStore';
 import {ToteutuksenPohjaStore} from './toteutus/ToteutuksenPohjaStore';
 import {ToteutuksenKieliversioStore} from './toteutus/ToteutuksenKieliversioStore';
@@ -38,7 +38,7 @@ const initKoulutusStores = () => {
   KoulutusDetailsStore();
   KoulutusPersistencyStore();
   KoulutuksenKieliversioStore();
-  KoulutusNameTranslationStore();
+  KoulutuksenNimiStore();
   KoulutuksenPohjaStore();
   KoulutuksenKuvausStore();
 }

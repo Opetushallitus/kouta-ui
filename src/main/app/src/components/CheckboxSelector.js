@@ -4,20 +4,16 @@ export class CheckboxSelector extends Component {
 
   getOptions = () => this.props.options || [];
 
-  getSelections = () => this.props.selections || [];
-
   getLabel = () => this.props.label;
 
-  isOptionChecked = (option) => this.getSelections()[option.value] === true;
-
   handleCheckboxChange = (event) => this.props.onChange({
-    value: event.target.value,
-    selected: event.target.checked
+    key: event.target.value,
+    value: event.target.checked
   });
 
   renderOption = (option, index) => (
     <li key={index}>
-      <input type="checkbox" value={option.value} checked={this.isOptionChecked(option)}
+      <input type="checkbox" value={option.key} checked={option.active}
              onChange={this.handleCheckboxChange}/>{option.label}
     </li>
   );

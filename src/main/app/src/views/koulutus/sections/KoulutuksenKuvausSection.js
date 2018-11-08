@@ -5,6 +5,7 @@ import {
   APP_STATE_KOULUTUS_DETAILS
 } from '../../../config/states';
 import {connectComponent} from '../../../utils/stateUtils';
+import {isVariableDefined} from '../../../utils/objectUtils';
 
 export class KoulutuksenKuvausSection extends AbstractSection {
 
@@ -29,7 +30,7 @@ export class KoulutuksenKuvausSection extends AbstractSection {
 
   isEnabled = () => this.state.enabled === true;
 
-  containsKuvaus = () => this.state.kuvaus !== null;
+  containsKuvaus = () => isVariableDefined(this.state.kuvaus[this.getActiveLanguage()]);
 
   renderWarning = (warningMessage) => (
       <div className={"content"}>

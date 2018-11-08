@@ -22,6 +22,8 @@ export class OsaamisalaSelector extends Connectable {
 
   getOptions = () => this.state.options || [];
 
+  hasOptions = () => this.getOptions().length > 0;
+
   getSelections = () => this.state.selections || [];
 
   isOptionChecked = (option) => this.getSelections()[option.value] === true;
@@ -38,11 +40,13 @@ export class OsaamisalaSelector extends Connectable {
     </li>
   );
 
-  renderOptionList = () => (
+  renderOptionList = () => this.hasOptions() ? (
     <ul className={'osaamisala-list'}>
       {this.getOptions().map(this.renderOption)}
     </ul>
-  );
+  ) : (
+    <span>Valitse ensin koulutus, jolla on osaamisaloja.</span>
+  )
 
   render = () => (
     <div className={'osaamisala-selector'}>

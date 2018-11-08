@@ -63,6 +63,41 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
     }
   ]
 
+  getLisattavaOsioOptions = () => [
+    {
+      label: 'Opintojen rakenne',
+      value: 'opintojen-rakenne'
+    },
+    {
+      label: 'Jatko-opintomahdollisuudet',
+      value: 'jatko-opintomahdollisuudet'
+    },
+    {
+      label: 'Osaamisalan valinta',
+      value: 'osaamisalan-valinta'
+    },
+    {
+      label: 'Sisältö',
+      value: 'sisalto'
+    },
+    {
+      label: 'Uramahdollisuudet',
+      value: 'uramahdollisuudet'
+    },
+    {
+      label: 'Kohderyhmä',
+      value: 'kohderyhma'
+    },
+    {
+      label: 'Kansainvälistyminen',
+      value: 'kansainvalistyminen'
+    },
+    {
+      label: 'Yhteistyö muiden toimijoiden kanssa',
+      value: 'yhteistyo'
+    }
+  ];
+
   getOpetuskieliSelections = () => this.state.opetuskieliSelections || {};
 
   getOpetusaikaSelections = () => this.state.opetusaikaSelections || {};
@@ -71,6 +106,7 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
 
   getMaksullisuusSelections = () => this.state.maksullisuusSelections || {};
 
+  getLisattavaOsioSelections = () => this.state.lisattavaOsioSelections || {};
 
   changeOpetuskieli = (change) => {
     const opetuskieliSelections = {...this.getOpetuskieliSelections()};
@@ -105,6 +141,12 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
     })
   }
 
+  changeLisattavaOsio = (change) => {
+    const lisattavaOsioSelections = {...this.getLisattavaOsioSelections()};
+    lisattavaOsioSelections[change.value] = change.selected;
+    this.setState({...this.state, lisattavaOsioSelections});
+  }
+
   renderContent = () => {
     return (
       <div className={'content'}>
@@ -112,6 +154,8 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
         <RadiobuttonSelector label={"Opetusaika"} selections={this.getOpetusaikaSelections()} options={this.getOpetusaikaOptions()} onChange={this.changeOpetusaika}/>
         <RadiobuttonSelector label={"Pääasiallinen opetustapa"} selections={this.getOpetustapaSelections()} options={this.getOpetustapaOptions()} onChange={this.changeOpetustapa}/>
         <RadiobuttonSelector label={"Onko opetus maksullista?"} selections={this.getMaksullisuusSelections()} options={this.getMaksullisuusOptions()} onChange={this.changeMaksullisuus}/>
+        <CheckboxSelector label={"Valitse lisättävä osio"} selections={this.getLisattavaOsioSelections()}
+                          options={this.getLisattavaOsioOptions()} onChange={this.changeLisattavaOsio}/>
       </div>
     );
   };

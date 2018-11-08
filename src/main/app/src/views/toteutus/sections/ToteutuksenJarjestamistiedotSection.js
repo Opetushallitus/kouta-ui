@@ -152,9 +152,7 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
                    value={entry.value}/>
   ));
 
-  renderContent = () => {
-    console.log('Section:renderCOntent', this.state);
-    return (
+  renderContent = () => (
       <div className={'content'}>
         <CheckboxSelector label={'Opetuskieli'}
                           options={this.state.opetuskieliOptions}
@@ -175,5 +173,4 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
         {this.renderLisattavaOsioTextAreas()}
       </div>
     )
-  };
 }

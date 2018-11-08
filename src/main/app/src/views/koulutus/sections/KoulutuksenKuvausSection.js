@@ -1,7 +1,10 @@
 import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
-import {APP_STATE_KOULUTUS_DETAILS} from '../../../config/states';
-import {connectListener} from '../../../utils/stateUtils';
+import {
+  APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES, APP_STATE_KOULUTUKSEN_KUVAUS,
+  APP_STATE_KOULUTUS_DETAILS
+} from '../../../config/states';
+import {connectComponent} from '../../../utils/stateUtils';
 
 export class KoulutuksenKuvausSection extends AbstractSection {
 
@@ -9,10 +12,18 @@ export class KoulutuksenKuvausSection extends AbstractSection {
 
   getHeader = () => 'Koulutuksen kuvaus';
 
-  onMount = () => connectListener(this, APP_STATE_KOULUTUS_DETAILS, (state) => this.setState({
-    kuvaus: state.kuvaus,
-    enabled: state.enabled
-  }));
+  getSupportedLanguagesStateName = () => APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES;
+
+  onMount = () => connectComponent(this, {
+    [APP_STATE_KOULUTUS_DETAILS]: (state) => this.setState({
+      ...this.state,
+      enabled: state.enabled
+    }),
+    [APP_STATE_KOULUTUKSEN_KUVAUS]: (kuvaus) => this.setState({
+      ...this.state,
+        kuvaus
+    })
+  });
 
   isClearButtonVisible = () => false;
 
@@ -27,7 +38,7 @@ export class KoulutuksenKuvausSection extends AbstractSection {
   )
 
   renderKuvaus = () => this.containsKuvaus() ? (
-      <div className={"content"} dangerouslySetInnerHTML={{__html: this.state.kuvaus}}/>
+      <div className={"content"} dangerouslySetInnerHTML={{__html: this.state.kuvaus[this.getActiveLanguage()]}}/>
   ) : this.renderWarning('Koulutukselle ei ole määritelty kuvausta.');
 
   renderContent = () => this.isEnabled() ? this.renderKuvaus() : this.renderWarning('Valitse ensin koulutus.');

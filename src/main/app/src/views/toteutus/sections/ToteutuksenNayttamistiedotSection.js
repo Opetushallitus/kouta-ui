@@ -1,6 +1,6 @@
 import {AbstractSection} from '../../../components/AbstractSection';
 
-export class KoulutuksenNayttamistiedotSection extends AbstractSection {
+export class ToteutuksenNayttamistiedotSection extends AbstractSection {
 
   getClassName = () => 'KoulutuksenNayttamistiedotSection';
 

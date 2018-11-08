@@ -47,16 +47,22 @@ export class KoulutusSelector extends Component {
   compareOptions = (a, b) => {
     const aName =  a.label;
     const bName = b.label;
-    if(aName < bName) return -1;
-    if(aName > bName) return 1;
+    if (aName < bName) return -1;
+    if (aName > bName) return 1;
     return 0;
   }
 
-  getFilteredOptions = () => this.getFilter().length > 0 ? this.getOptions().filter(this.matchOption).sort(this.compareOptions) : [];
+  getFilteredOptions = () => this.getFilter().length > 0 ? this.getOptions()
+    .filter(this.matchOption)
+    .sort(this.compareOptions) : [];
 
   selectOption = (event) => {
     const value = event.target.getAttribute("data-id");
-    selectKoulutus(value);
+    this.setState({
+      ...this.state,
+      filter: '',
+      optionsEnabled: false
+    }, () => selectKoulutus(value));
   }
 
   getOptionCssClass = (option) => option.id === this.state.activeKoulutusId ? 'selected' : '';
@@ -68,14 +74,16 @@ export class KoulutusSelector extends Component {
   )
 
   setFilter = (e) => this.setState({
-    filter: e.target.value.trim().toLowerCase()
+    ...this.state,
+    filter: e.target.value.trim().toLowerCase(),
+    optionsEnabled: true
   });
 
   updateName = (e) => updateKoulutuksenNimi(e.target.value);
 
   renderOptions = () => {
     const filteredOptions = this.getFilteredOptions();
-    return filteredOptions.length > 0 ? (
+    return filteredOptions.length > 0 && this.state.optionsEnabled ? (
       <div className={"options-container"}>
         <ul className={"options-ul"}>
           {filteredOptions.map(this.renderOption)}
@@ -91,7 +99,7 @@ export class KoulutusSelector extends Component {
   render = () => this.hasOptions() ? (
       <div className={"koulutus-selector"}>
         <span>Valitse koulutus listasta</span>
-        <input type={"text"} className={"filter-input"} placeholder={"Valitse koulutus..."} onChange={this.setFilter}></input>
+        <input type={"text"} value={this.state.filter} className={"filter-input"} placeholder={"Valitse koulutus..."} onChange={this.setFilter}></input>
         {this.renderOptions()}
         {this.renderNameEditor()}
       </div>

@@ -5,8 +5,7 @@ import {broadcast, connectComponent} from '../utils/stateUtils';
 export class AbstractNimiSection extends AbstractSection {
 
   onMount = () => connectComponent(this, {
-    [this.getTranslationMapStateName()]: (translationMap) =>
-      this.setState({...this.state, translationMap})
+    [this.getTranslationMapStateName()]: (translationMap) => this.setState({...this.state, translationMap})
   });
 
   getTranslationMapStateName = () => {
@@ -29,9 +28,13 @@ export class AbstractNimiSection extends AbstractSection {
     throw new Error('AbstractNimiSection:getPromptText(): implement in subclass!');
   };
 
+  getErrorInstruction = () => {
+    throw new Error('AbstractNimiSection:getErrorInstruction(): implement in subclass!');
+  }
+
   getCssClassName = () => 'nimi-section';
 
-  getTranslationMap = () => ({...(this.state.translationMap || {})});
+  getTranslationMap = () => ({...this.state.translationMap});
 
   getTranslation = () => this.getTranslationMap()[this.getActiveTabId()] || '';
 
@@ -44,14 +47,20 @@ export class AbstractNimiSection extends AbstractSection {
     this.setState({...this.state, translationMap});
   };
 
-  renderContent = () => (
-    <div className={'content'}>
-      <span className={'label'}>{this.getPromptText()}</span>
-      <input type={'text'} className={'translation-input'} value={this.getTranslation()}
+  isEnabled = () => true;
+
+  renderContent = () => this.isEnabled() ? (
+    <div className={"content"}>
+      <span className={"label"}>{this.getPromptText()}</span>
+      <input type={"text"} className={"translation-input"} value={this.getTranslation()}
              placeholder={this.getPromptText()}
              onChange={this.updateTranslation}></input>
-      <span className={'info-span'}>Huom! Tämä teksti näkyy oppijalle Opintopolun sivuilla</span>
+      <span className={"info-span"}>Huom! Tämä teksti näkyy oppijalle Opintopolun sivuilla.</span>
     </div>
-  );
+  ) : (
+    <div className={"content"}>
+      <span>{this.getErrorInstruction()}</span>
+    </div>
+  )
 
 }

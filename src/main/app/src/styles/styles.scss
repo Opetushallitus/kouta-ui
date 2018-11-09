@@ -16,10 +16,13 @@
 @import 'components/PohjanValintaSection';
 @import 'components/InputField';
 @import 'components/TextAreaField';
+@import 'components/CheckboxFilterSelector';
 
 @import 'views/toteutus/ToteutuksenYhteystiedotSection';
 @import 'views/toteutus/ToteutuksenOsaamisalatSection';
 @import 'views/toteutus/ToteutuksenJarjestamistiedotSection';
+@import 'views/toteutus/ToteutuksenNayttamistiedotSection';
+
 @import 'views/KoulutusList';
 @import 'views/Workflow';
 @import 'views/toteutus/OsaamisalaSelector';

@@ -7,6 +7,7 @@ import {handleEvent, initState, updateState} from '../../utils/stateUtils';
 import {APP_EVENT_SECTION_VALIDATION_REQUEST, APP_STATE_KOULUTUS_PERSISTENCY} from '../../config/states';
 import {getSelectedOrganisaatioOidList} from './OrganisaatioStore';
 import {getEditedTranslationMap} from './KoulutuksenNimiStore';
+import {getSupportedLanguages} from './KoulutuksenKieliversioStore'
 
 export const ATTR_SAVE_AND_PUBLISH = 'saveAndPublish';
 export const ATTR_SAVE = 'save';
@@ -33,6 +34,7 @@ const validateKoulutus = () => updateState(APP_STATE_KOULUTUS_PERSISTENCY, {
 });
 
 const buildJson = (julkaisutila) => ({
+  "kielivalinta": getSupportedLanguages(),
   "johtaaTutkintoon": true,
   "koulutustyyppi": getKoulutustyyppiCategory(),
   "koulutusKoodiUri": getKoodiUri() + "#" + getVersio(),

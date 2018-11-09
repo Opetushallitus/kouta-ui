@@ -6,7 +6,7 @@ import {JULKAISUTILA, REQUEST_STATUS} from '../../config/constants';
 import {handleEvent, initState, updateState} from '../../utils/stateUtils';
 import {APP_EVENT_SECTION_VALIDATION_REQUEST, APP_STATE_KOULUTUS_PERSISTENCY} from '../../config/states';
 import {getSelectedOrganisaatioOidList} from './OrganisaatioStore';
-import {getEditedTranslationMap} from './KoulutuksenNimiStore';
+import {getTranslationMapByLanguages} from './KoulutuksenNimiStore';
 import {getSupportedLanguages} from './KoulutuksenKieliversioStore'
 
 export const ATTR_SAVE_AND_PUBLISH = 'saveAndPublish';
@@ -24,7 +24,7 @@ const isFieldEmpty = (fieldValue) => typeof fieldValue === 'undefined' || fieldV
 
 const isAnyOrganisaatioSelected = () => getSelectedOrganisaatioOidList().length > 0;
 
-const hasNameTranslations = () => Object.keys(getEditedTranslationMap()).length > 0;
+const hasNameTranslations = () => Object.keys(getTranslationMapByLanguages(getSupportedLanguages())).length > 0;
 
 const isAnyKoulutusFieldEmpty = () => [getKoulutustyyppiCategory(), getKoodiUri(), getVersio(), hasNameTranslations(), isAnyOrganisaatioSelected()]
 .filter((entry) => isFieldEmpty(entry)).length > 0;
@@ -40,7 +40,7 @@ const buildJson = (julkaisutila) => ({
   "koulutusKoodiUri": getKoodiUri() + "#" + getVersio(),
   "tila": julkaisutila,
   "tarjoajat": getSelectedOrganisaatioOidList(),
-  "nimi": getEditedTranslationMap(),
+  "nimi": getTranslationMapByLanguages(getSupportedLanguages()),
   "muokkaaja": "1.2.3.2.2"
 });
 

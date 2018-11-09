@@ -41,3 +41,10 @@ const deepFind = (item, regex, results) => {
 }
 
 export const findByKey = (item, key) => deepFind(item, new RegExp(key), []);
+
+export const filterByKeys = (item, keys) => {
+  if(keys) {
+      Object.keys(item).filter(k => !keys.includes(k)).forEach(k => delete item[k])
+  }
+  return item;
+};

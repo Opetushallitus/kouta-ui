@@ -1,6 +1,7 @@
 .checkbox-filter-selector {
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px;
   .options-container {
     border-color: #9c9c9c;
     border-radius: 5px;
@@ -14,10 +15,28 @@
     .options-list {
       margin: 0;
       padding-left: 0;
-      height: 250px;
+      height: 150px;
       overflow-y: auto;
       overflow-x: hidden;
       list-style: none;
+    }
+  }
+
+  .controls {
+    display: flex;
+    .expand-button {
+      display: flex;
+      width: 30px;
+      height: 30px;
+      padding: 3px;
+      margin-left: 5px;
+      cursor: pointer;
+      color: white;
+      border-radius: 5px;
+      background-color: #2da0c7;
+      i {
+        padding: 3px;
+      }
     }
   }
 
@@ -26,11 +45,20 @@
     flex-wrap: wrap;
     display: flex;
     .tag {
+      display: flex;
       background-color: #979797;
       color: white;
       border-radius: 5px;
       padding: 5px;
       margin: 5px;
+      cursor: pointer;
+      span {
+        text-align: center;
+        padding: 5px;
+      }
+      i {
+        padding: 3px;
+      }
     }
   }
 }

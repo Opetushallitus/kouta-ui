@@ -19,7 +19,11 @@ export class CheckboxFilterSelector extends Component {
     visibleList: true
   });
 
-  getOptions = () => (this.props.options || []).filter(option => option.label.includes(this.state.filter));
+  supportsTags = () => this.props.maxTags && this.props.maxTags > 0;
+
+  getFilteredOptions = () => (this.props.options || []).filter(option => option.label.includes(this.state.filter));
+
+  getActiveOptions = () => (this.props.options || []).filter(option => option.active);
 
   getLabel = () => this.props.label;
 
@@ -40,10 +44,20 @@ export class CheckboxFilterSelector extends Component {
   renderOptionList = () => this.state.visibleList && (
     <div className={'options-container'}>
       <ul className={'options-list'}>
-        {this.getOptions().map(this.renderOption)}
+        {this.getFilteredOptions().map(this.renderOption)}
       </ul>
     </div>
   );
+
+  renderTag = (option) => (
+    <div className={'tag'}>{option.label}</div>
+  )
+
+  renderTags = () => this.supportsTags() && (
+    <div className={'tags-container'}>
+      {this.getActiveOptions().map(this.renderTag)}
+    </div>
+  )
 
   render = () => (
     <div className={'checkbox-filter-selector'}>
@@ -52,6 +66,7 @@ export class CheckboxFilterSelector extends Component {
       </span>
       <input type={'text'} value={this.getFilter()} onChange={this.setFilter}/>
       {this.renderOptionList()}
+      {this.renderTags()}
     </div>
   );
 }

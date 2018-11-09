@@ -18,7 +18,19 @@
       overflow-y: auto;
       overflow-x: hidden;
       list-style: none;
+    }
+  }
 
+  .tags-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    display: flex;
+    .tag {
+      background-color: #979797;
+      color: white;
+      border-radius: 5px;
+      padding: 5px;
+      margin: 5px;
     }
   }
 }

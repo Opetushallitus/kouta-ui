@@ -3,6 +3,10 @@ import {AbstractSection} from '../../../components/AbstractSection';
 import {CheckboxSelector} from '../../../components/CheckboxSelector';
 import {RadiobuttonSelector} from '../../../components/RadiobuttonSelector';
 import {TextAreaField} from '../../../components/TextAreaField';
+import {
+  updateMultiSelectionOptionActivation, changeSingleSelection,
+  updateSingleSelectionOptionActivation, updateOptionValue
+} from '../../../utils/optionListUtils';
 
 export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
 
@@ -112,26 +116,17 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
 
   changeCheckboxSelection = (targetOptions, change) => this.setState({
     ...this.state,
-    [targetOptions]: this.state[targetOptions].map(entry => ({
-      ...entry,
-      active: change.key === entry.key ? change.value : entry.active
-    }))
+    [targetOptions]: updateMultiSelectionOptionActivation(this.state[targetOptions], change)
   });
 
   changeRadioSelection = (targetOptions, change) => this.setState({
     ...this.state,
-    [targetOptions]: this.state[targetOptions].map(entry => ({
-      ...entry,
-      active: change.key === entry.key ? change.value : false
-    }))
+    [targetOptions]: updateSingleSelectionOptionActivation(this.state[targetOptions], change)
   });
 
-  changeValue = (targetOptions, change) => this.setState({
+  changeSelectionValue = (targetOptions, change) => this.setState({
     ...this.state,
-    [targetOptions]: this.state[targetOptions].map(entry => ({
-      ...entry,
-      value: change.key === entry.key ? change.value : entry.value
-    }))
+    [targetOptions]: updateOptionValue(this.state[targetOptions], change)
   });
 
   changeLisattavaOsioSelection = (change) => this.changeCheckboxSelection('lisattavaOsioOptions', change);
@@ -142,7 +137,7 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
 
   changeOpetustapaSelection = (change) => this.changeRadioSelection('opetustapaOptions', change);
 
-  changeLisattavaOsioValue = (change) => this.changeValue('lisattavaOsioOptions', change);
+  changeLisattavaOsioValue = (change) => this.changeSelectionValue('lisattavaOsioOptions', change);
 
   changeMaksullisuusSelection = (change) => this.changeRadioSelection('maksullisuusOptions', change);
 

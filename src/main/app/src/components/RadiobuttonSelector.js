@@ -10,12 +10,12 @@ export class RadiobuttonSelector extends Component {
 
   handleCheckboxChange = (event) => this.props.onChange({
     key: event.target.value,
-    value: event.target.checked
+    active: event.target.checked
   });
 
   renderOption = (option, index) => (
     <li key={index}>
-      <input type="radio" name={this.getName()} value={option.key} checked={option.active}
+      <input type="radio" name={this.getName()} value={option.key} checked={option.active === true}
              onChange={this.handleCheckboxChange}/>{option.label}
     </li>
   );

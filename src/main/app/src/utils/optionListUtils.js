@@ -5,13 +5,14 @@ export const getActiveOptions = (options) => options.filter(entry => entry.activ
 
 //makes one option active or inactive in an option list that can have multiple active options
 export const updateMultiSelectionOptionActivation = (options, change) => options.map(entry => ({
-  active: change.key === entry.key ? change.value : entry.active
+  ...entry,
+  active: change.key === entry.key ? change.active : (entry.active === true)
 }));
 
 //makes one option active or inactive in an option list that can have only one active option
 export const updateSingleSelectionOptionActivation = (options, change) => options.map(entry => ({
   ...entry,
-  active: change.key === entry.key ? change.value : false
+  active: change.key === entry.key ? change.active : false
 }));
 
 //changes value inside one option

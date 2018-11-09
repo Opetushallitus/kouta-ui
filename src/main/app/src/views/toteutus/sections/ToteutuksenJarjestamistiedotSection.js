@@ -4,8 +4,9 @@ import {CheckboxSelector} from '../../../components/CheckboxSelector';
 import {RadiobuttonSelector} from '../../../components/RadiobuttonSelector';
 import {TextAreaField} from '../../../components/TextAreaField';
 import {
-  updateMultiSelectionOptionActivation, changeSingleSelection,
-  updateSingleSelectionOptionActivation, updateOptionValue
+  updateMultiSelectionOptionActivation,
+  updateOptionValue,
+  updateSingleSelectionOptionActivation
 } from '../../../utils/optionListUtils';
 
 export class ToteutuksenJarjestamistiedotSection extends AbstractSection {

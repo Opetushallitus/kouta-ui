@@ -30,7 +30,7 @@ export class KoulutuksenKuvausSection extends AbstractSection {
 
   isEnabled = () => this.state.enabled === true;
 
-  containsKuvaus = () => isVariableDefined(this.state.kuvaus[this.getActiveLanguage()]);
+  containsKuvaus = () => isVariableDefined(this.state.kuvaus) && isVariableDefined(this.state.kuvaus[this.getActiveLanguage()]);
 
   renderWarning = (warningMessage) => (
       <div className={"content"}>

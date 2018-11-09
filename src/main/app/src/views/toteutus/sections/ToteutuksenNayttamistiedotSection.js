@@ -40,6 +40,42 @@ export class ToteutuksenNayttamistiedotSection extends AbstractSection {
     {
       label: 'Sairaanhoitaja',
       key: 'sairaanhoitaja'
+    },
+    {
+      label: 'Lääkäri',
+      key: 'laakari'
+    },
+    {
+      label: 'Fysioterapeutti',
+      key: 'fysioterapeutti'
+    },
+    {
+      label: 'Terveydenhoitaja',
+      key: 'terveydenhoitaja'
+    },
+    {
+      label: 'Hammasteknikko',
+      key: 'hammasteknikko'
+    },
+    {
+      label: 'Kirurgi',
+      key: 'kirurgi'
+    },
+    {
+      label: 'Geriatri',
+      key: 'geriatri'
+    },
+    {
+      label: 'Psykologi',
+      key: 'psykologi'
+    },
+    {
+      label: 'Psykiatri',
+      key: 'psykiatri'
+    },
+    {
+      label: 'Psykologi',
+      key: 'psykologi'
     }
   ];
 
@@ -66,8 +102,32 @@ export class ToteutuksenNayttamistiedotSection extends AbstractSection {
       key: 'saattohoito'
     },
     {
-      label: 'Kriisiapu',
-      key: 'kriisiapu'
+      label: 'Geriatria',
+      key: 'geriatria'
+    },
+    {
+      label: 'Ravintotieto',
+      key: 'ravintotieto'
+    },
+    {
+      label: 'Kulkutaudit',
+      key: 'kulkutaudit'
+    },
+    {
+      label: 'Tukipalvelut',
+      key: 'tukipalvelut'
+    },
+    {
+      label: 'Eläimet',
+      key: 'eläimet'
+    },
+    {
+      label: 'Elämäntavat',
+      key: 'elämäntavat'
+    },
+    {
+      label: 'Seuranta',
+      key: 'seuranta'
     }
   ];
 

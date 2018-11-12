@@ -17,3 +17,8 @@ export const logEvent = (message) => {
 export const clearEventLog = () => {
   localStorage.setItem('logger', JSON.stringify([]));
 }
+
+export const logResult = (object, message) => {
+  console.log(message, object);
+  return object;
+}

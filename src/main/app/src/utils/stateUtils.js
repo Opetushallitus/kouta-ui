@@ -1,4 +1,4 @@
-import {enforceItem, getItem, setItem} from './storageUtils';
+import {enforceItem, existsItem, getItem, setItem} from './storageUtils';
 import {clone, enforceObject, getValueOrClone, safeClone} from './objectUtils';
 
 const connectionMap = {};
@@ -17,14 +17,28 @@ export const updateState = (eventName, newState) => {
   return safeClone(targetItem);
 }
 
-export const initState = (eventName, newState) => {
+const initArrayState = (eventName, newState) => {
+  if (existsItem(eventName)) {
+    const existingItem = getItem(eventName);
+    broadcast(eventName, existingItem);
+    return existingItem;
+  }
+  setItem(eventName, newState);
+  broadcast(eventName, newState);
+  return safeClone(newState);
+};
+
+const initObjectState = (eventName, newState) => {
   let targetItem = enforceItem(eventName) || {};
   newState = enforceObject(newState);
   Object.keys(newState).forEach(key => !targetItem.hasOwnProperty(key) && (targetItem[key] = newState[key]));
   setItem(eventName, targetItem);
   broadcast(eventName, targetItem);
   return safeClone(targetItem);
-}
+};
+
+export const initState = (eventName, newState) => Array.isArray(newState) ? initArrayState(eventName, newState) :
+  initObjectState(eventName, newState);
 
 export const initStates = (stateMap) => Object.keys(stateMap).map(key => initState(key, stateMap[key]));
 

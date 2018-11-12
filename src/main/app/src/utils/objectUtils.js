@@ -21,9 +21,9 @@ export const safeClone = (item) => item ? clone(item) : null;
 
 export const isVariableDefined = (variable) => !(typeof variable === 'undefined' || variable === null);
 
-const isObject = (item) => item && (typeof item  === 'object');
+const isComposite = (item) => item && (typeof item  === 'object' || item instanceof Array);
 
-export const enforceObject = (item) => item ? isObject(item) ? item : {_value: item} : {};
+export const enforceObject = (item) => item ? isComposite(item) ? item : {_value: item} : {};
 
 export const getValueOrClone = (item) => item ? safeClone(item['_value'] || item) : null;
 
@@ -36,7 +36,7 @@ const deepFind = (item, regex, results) => {
   keys.filter(key => regex.test(key)).forEach(matchingKey =>
     results.push(item[matchingKey])
   );
-  Object.values(item).filter(isObject).forEach(childItem => deepFind(childItem, regex, results));
+  Object.values(item).filter(isComposite).forEach(childItem => deepFind(childItem, regex, results));
   return results;
 }
 

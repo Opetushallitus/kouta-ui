@@ -5,3 +5,5 @@ export const getItem = (eventName) => parseJson(localStorage.getItem(eventName))
 export const enforceItem = (eventName) => getItem(eventName) || null;
 
 export const setItem = (eventName, item) => localStorage.setItem(eventName, JSON.stringify(item));
+
+export const existsItem = (eventName) => localStorage.getItem(eventName) !== null;

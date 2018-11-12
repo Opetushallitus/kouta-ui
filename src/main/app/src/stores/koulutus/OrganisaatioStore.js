@@ -44,5 +44,6 @@ const loadOrganisaatioList = () => excludesOrganisaatioList() ?
     axios.get(urlOrganisaatioList()).then((response) => setOrganisaatioOptionsData(response.data)) : null;
 
 const setOrganisaatioOptionsData = (jsonData) =>
-    updateState(APP_STATE_ORGANISAATIO_OPTIONS, extractOrganisaatioOptions(jsonData));
+  updateState(APP_STATE_ORGANISAATIO_OPTIONS, extractOrganisaatioOptions(jsonData));
+
 

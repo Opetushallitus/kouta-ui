@@ -9,6 +9,7 @@ import {
 } from '../../config/states';
 import {clearState, containsValue, getState, handleEvents, initStates, updateState} from '../../utils/stateUtils';
 import {extractOrganisaatioOptions} from '../../model/Organisaatio';
+import {getLanguage} from '../generic/LanguageStore';
 
 export const OrganisaatioStore = () => {
   handleEvents({
@@ -46,4 +47,8 @@ const loadOrganisaatioList = () => excludesOrganisaatioList() ?
 const setOrganisaatioOptionsData = (jsonData) =>
   updateState(APP_STATE_ORGANISAATIO_OPTIONS, extractOrganisaatioOptions(jsonData));
 
-
+const extractOrganisaatioOptions = (jsonData) =>
+  jsonData.filter(entry => entry.tyypit.includes('organisaatiotyyppi_02')).map((entry) => ({
+    label: entry.nimi[getLanguage()],
+    value: entry.oid
+  }));

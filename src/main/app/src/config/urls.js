@@ -14,8 +14,8 @@ export const urlKoulutuskoodit = (koulutustyyppiId) =>
 export const urlEPerusteList = (koodiUri) =>
     `${SERVICE_DOMAIN}/eperusteet-service/api/perusteet?tuleva=true&siirtyma=false&voimassaolo=true&poistunut=false&kieli=fi&koulutuskoodi=${koodiUri}`;
 
-export const urlOrganisaatioList = () =>
-    `${SERVICE_DOMAIN}/organisaatio-service/rest/organisaatio/v4/1.2.246.562.10.594252633210/children?includeImage=false`;
+export const urlOrganisaatioList = (parentOid) =>
+    `${SERVICE_DOMAIN}/organisaatio-service/rest/organisaatio/v4/${parentOid}/children?includeImage=false`;
 
 export const urlOsaamisalaKuvausList = (eperusteId) =>
   `${SERVICE_DOMAIN}/eperusteet-service/api/perusteet/${eperusteId}/osaamisalakuvaukset`;

@@ -3,7 +3,7 @@ import {ToteutuksenPohjanValintaSection} from './sections/ToteutuksenPohjanValin
 import {ToteutuksenKieliversioSection} from './sections/ToteutuksenKieliversioSection';
 import {ToteutuksenOsaamisalatSection} from './sections/ToteutuksenOsaamisalatSection';
 import {ToteutuksenJarjestamistiedotSection} from './sections/ToteutuksenJarjestamistiedotSection';
-import {JarjestamispaikkaSection} from './sections/JarjestamispaikkaSection';
+import {ToteutuksenJarjestamispaikkaSection} from './sections/ToteutuksenJarjestamispaikkaSection';
 import {ToteutuksenNimiSection} from './sections/ToteutuksenNimiSection';
 import {ToteutuksenYhteystiedotSection} from './sections/ToteutuksenYhteystiedotSection';
 import {ToteutuksenHautSection} from './sections/ToteutuksenHautSection';
@@ -18,7 +18,7 @@ export class ToteutusView extends Component {
           <ToteutuksenOsaamisalatSection orderNumber={"3"}/>
           <ToteutuksenJarjestamistiedotSection orderNumber={"4"}/>
           <ToteutuksenNayttamistiedotSection orderNumber={"5"}/>
-          <JarjestamispaikkaSection orderNumber={"6"}/>
+          <ToteutuksenJarjestamispaikkaSection orderNumber={"6"}/>
           <ToteutuksenNimiSection orderNumber={"7"}/>
           <ToteutuksenYhteystiedotSection orderNumber={"8"}/>
           <ToteutuksenHautSection orderNumber={"9"}/>

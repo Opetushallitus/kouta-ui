@@ -21,7 +21,7 @@ export const safeClone = (item) => item ? clone(item) : null;
 
 export const isVariableDefined = (variable) => !(typeof variable === 'undefined' || variable === null);
 
-const isObject = (item) => ({}.constructor === item.constructor);
+const isObject = (item) => item && (typeof item  === 'object');
 
 export const enforceObject = (item) => item ? isObject(item) ? item : {_value: item} : {};
 

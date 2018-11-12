@@ -37,6 +37,8 @@ export class AbstractCheckboxSection extends AbstractSection {
     throw new Error('AbstractCheckboxSection:getSelectionClearEventName(): implement in subclass!');
   }
 
+  getOptions = () => this.state.options || [];
+
   isOptionChecked = (option) => this.state.selections[option.value] === true;
 
   handleCheckboxChange = (event) => {
@@ -56,7 +58,7 @@ export class AbstractCheckboxSection extends AbstractSection {
 
   renderOptionList = () => this.state.options ? (
       <ul className={this.getCssClassName() + "-list"}>
-        {this.state.options.map(this.renderOption)}
+        {this.getOptions().map(this.renderOption)}
       </ul>
   ) : null;
 

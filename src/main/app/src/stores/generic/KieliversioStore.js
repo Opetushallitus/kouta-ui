@@ -19,15 +19,15 @@ export const KieliversioStore = (scope) => {
 
 const getKieliversioOptions = () => [
   {
-    value: 'fi',
+    key: 'fi',
     label: 'Suomi'
   },
   {
-    value: 'sv',
+    key: 'sv',
     label: 'Ruotsi'
   },
   {
-    value: 'en',
+    key: 'en',
     label: 'Englanti'
   }
 ];

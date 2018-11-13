@@ -1,0 +1,13 @@
+.haun-aikataulut-section {
+  .content {
+    display: flex;
+    flex-direction: column;
+    .hakuaika-editors {
+      display: flex;
+      flex-direction: row;
+      .date-time-editor {
+        margin-right: 20px;
+      }
+    }
+  }
+}

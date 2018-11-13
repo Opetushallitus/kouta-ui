@@ -24,6 +24,7 @@ import {ValintaperusteenPohjaStore} from './valintaperusteet/ValintaperusteenPoh
 import {ToteutuksenYhteystiedotStore} from './toteutus/ToteutuksenYhteystiedotStore';
 import {ToteutuksenOsaamisalaStore} from './toteutus/ToteutuksenOsaamisalaStore';
 import {KoulutuksenKuvausStore} from './koulutus/KoulutuksenKuvausStore';
+import {HaunKohdejoukkoStore} from './haku/HaunKohdejoukkoStore';
 
 const initGenericStores = () => {
   UrlStore();
@@ -55,6 +56,7 @@ const initHakuStores = () => {
   HaunPohjaStore();
   HaunKieliversioStore();
   HaunNimiStore();
+  HaunKohdejoukkoStore();
 }
 
 const initHakukohdeStores = () => {

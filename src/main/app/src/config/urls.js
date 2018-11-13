@@ -20,6 +20,9 @@ export const urlOrganisaatioList = (parentOid) =>
 export const urlOsaamisalaKuvausList = (eperusteId) =>
   `${SERVICE_DOMAIN}/eperusteet-service/api/perusteet/${eperusteId}/osaamisalakuvaukset`;
 
+export const urlHaunKohdejoukko = () =>
+  `${SERVICE_DOMAIN}/koodisto-service/rest/json/haunkohdejoukko/koodi?onlyValidKoodis=true`;
+
 export const workflowUrlToteutus = () => '/toteutus';
 
 export const workflowUrlKoulutus = () => '/koulutus';

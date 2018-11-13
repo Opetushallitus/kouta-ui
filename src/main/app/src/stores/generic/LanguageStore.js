@@ -5,4 +5,6 @@ export const LanguageStore = () => {};
 
 export const getLanguage = () => LANGUAGE.toLowerCase();
 
+export const matchLanguage = (language) => language && language.toLowerCase() === getLanguage();
+
 export const tr = (entry) => TRANSLATIONS[entry][getLanguage()] || entry;

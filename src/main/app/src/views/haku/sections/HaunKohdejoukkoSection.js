@@ -4,7 +4,7 @@ import {
   APP_STATE_HAUN_KOHDEJOUKKO_OPTIONS,
   APP_STATE_HAUN_KOHDEJOUKKO_SELECTIONS
 } from '../../../stores/haku/HaunKohdejoukkoStore';
-import {AbstractCheckboxSection} from '../../../components/AbstractCheckboxSection';
+import {AbstractCheckboxSection, DISPLAY_MODE} from '../../../components/AbstractCheckboxSection';
 
 export class HaunKohdejoukkoSection extends AbstractCheckboxSection {
 
@@ -23,5 +23,7 @@ export class HaunKohdejoukkoSection extends AbstractCheckboxSection {
   getSelectionClearEventName = () => APP_EVENT_HAUN_KOHDEJOUKKO_SELECTION_CLEAR;
 
   getInstruction = () => 'Valitse haun kohdejoukko.';
+
+  getDisplayMode = () => DISPLAY_MODE.RADIO_BUTTONS;
 
 }

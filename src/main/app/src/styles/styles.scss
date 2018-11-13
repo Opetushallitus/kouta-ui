@@ -1,14 +1,9 @@
-@import './common/base';
-@import './common/colors';
-@import './common/buttons';
+@import 'common/base';
+@import 'common/colors';
+@import 'common/buttons';
 
-@import 'views/koulutus/KoulutusSelector';
 @import 'components/SelectorButton';
 @import 'components/Section';
-@import 'views/koulutus/KoulutusDetails';
-@import 'views/generic/MultiStepIndicator';
-@import 'views/generic/FooterActionButtons';
-@import 'views/generic/StatusBar';
 @import 'components/TranslationEditor';
 @import 'components/CheckboxSection';
 @import 'components/InfoDropdown';
@@ -18,13 +13,25 @@
 @import 'components/TextAreaField';
 @import 'components/CheckboxFilterSelector';
 @import 'components/DateTimeEditor';
+@import 'components/InfoHeader';
+
+@import 'views/generic/MultiStepIndicator';
+@import 'views/generic/FooterActionButtons';
+@import 'views/generic/StatusBar';
 
 @import 'views/toteutus/ToteutuksenYhteystiedotSection';
 @import 'views/toteutus/ToteutuksenOsaamisalatSection';
 @import 'views/toteutus/ToteutuksenJarjestamistiedotSection';
 @import 'views/toteutus/ToteutuksenNayttamistiedotSection';
-
-@import 'views/KoulutusList';
-@import 'views/Workflow';
+@import 'views/toteutus/ToteutuksenNayttamistiedotSection';
 @import 'views/toteutus/OsaamisalaSelector';
 @import 'views/toteutus/OsaamisalaViewer';
+
+@import 'views/KoulutusList';
+@import 'views/koulutus/KoulutusSelector';
+@import 'views/koulutus/KoulutusDetails';
+
+@import 'views/haku/HaunAikataulutSection';
+
+@import 'views/Workflow';
+

@@ -1,12 +1,12 @@
-import {handleEvents, updateState, getState, initState, setState} from "../../utils/stateUtils";
+import {getState, handleEvents, initState, setState, updateState} from '../../utils/stateUtils';
 import {
-    APP_EVENT_ORGANISAATIO_SELECTION_CHANGE,
-    APP_EVENT_SECTION_VALIDATION_REQUEST,
-    APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES
-} from "../../config/states";
-import {REQUEST_STATUS} from "../../config/constants";
-import axios from "axios";
-import {getUrlKoutaBackendKoulutus} from "../generic/UrlStore";
+  APP_EVENT_ORGANISAATIO_SELECTION_CHANGE,
+  APP_EVENT_SECTION_VALIDATION_REQUEST,
+  APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES
+} from '../../config/states';
+import {REQUEST_STATUS} from '../../config/constants';
+import axios from 'axios';
+import {getUrlKoutaBackendKoulutus} from '../generic/UrlStore';
 
 export const APP_STATE_KOULUTUS_JSON = "APP_STATE_KOULUTUS_JSON";
 export const APP_STATE_SAVE_KOULUTUS = "APP_STATE_SAVE_KOULUTUS";
@@ -51,7 +51,7 @@ const updateKoulutuskoodi = (koulutuskoodiOption) => {
 const isKoulutusValid = (koulutus) => {
     const isFieldEmpty = (fieldValue) => typeof fieldValue === 'undefined' || fieldValue === null || fieldValue === false;
 
-    koulutus &&
+    return koulutus &&
     !isFieldEmpty(koulutus.koulutusKoodiUri) &&
     !isFieldEmpty(koulutus.koulutusKoodiUri) &&
     koulutus.kielivalinta && koulutus.kielivalinta.length > 0 &&

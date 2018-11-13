@@ -1,8 +1,8 @@
 import {NimiStore} from '../generic/NimiStore';
 import {SCOPE_KOULUTUKSEN_NIMI} from '../../config/scopes/Nimi';
 import {APP_STATE_KOULUTUKSEN_NIMI_TRANSLATION_MAP} from '../../config/states';
-import {getState, handleEvent, updateState} from '../../utils/stateUtils';
-import {APP_STATE_KOULUTUKSEN_TIEDOT} from "./KoulutuksenTiedotStore";
+import {handleEvent, updateState} from '../../utils/stateUtils';
+import {APP_STATE_KOULUTUKSEN_TIEDOT} from './KoulutuksenTiedotStore';
 
 export const KoulutuksenNimiStore = () => {
   NimiStore(SCOPE_KOULUTUKSEN_NIMI);

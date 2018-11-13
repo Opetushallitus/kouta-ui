@@ -8,7 +8,7 @@ export class AbstractCheckboxSection extends AbstractSection {
 
   onMount = () => connectComponent(this, {
     [this.getOptionsStateName()]: (state) => this.setState({...this.state, options: state}),
-    [this.getSelectionsStateName()]: (state) => this.setState({...this.state, selections: state})
+    [this.getSelectionsStateName()]: (selections) => this.setState({...this.state, selections})
   });
 
   getClassName = () => 'CheckboxSection';
@@ -39,7 +39,7 @@ export class AbstractCheckboxSection extends AbstractSection {
 
   getOptions = () => this.state.options || [];
 
-  isOptionChecked = (option) => this.state.selections[option.value] === true;
+  isOptionChecked = (option) => this.state.selections[option.key] === true;
 
   handleCheckboxChange = (event) => {
     const value = event.target.value;
@@ -51,7 +51,7 @@ export class AbstractCheckboxSection extends AbstractSection {
 
   renderOption = (option, index) => (
       <li key={index}>
-        <input type="checkbox" name={this.getClassName()} value={option.value} checked={this.isOptionChecked(option)}
+        <input type="checkbox" name={this.getClassName()} value={option.key} checked={this.isOptionChecked(option)}
                onChange={this.handleCheckboxChange}/>{option.label}
       </li>
   );

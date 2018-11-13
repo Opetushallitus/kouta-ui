@@ -36,6 +36,8 @@ export const OrganisaatioStore = () => {
 const excludesOrganisaatioList = () => !containsValue(APP_STATE_ORGANISAATIO_OPTIONS, 'options');
 
 export const selectOrganisaatio = (activeOrganisaatioId, selected) => {
+  console.log('selectOrganisaatio:activeOrganisaatioId', activeOrganisaatioId);
+  console.log('selectOrganisaatio:selected', selected);
   updateState(APP_STATE_ORGANISAATIO_SELECTIONS, {
     [activeOrganisaatioId]: selected
   });
@@ -65,7 +67,7 @@ const extractOrganisaatioOptions = (jsonData) =>
   jsonData.filter(entry => entry.tyypit.includes('organisaatiotyyppi_02') && entry.status !== 'PASSIIVINEN')
     .map((entry) => ({
     label: entry.nimi[getLanguage()],
-    value: entry.oid
+    key: entry.oid
   }));
 
 export const APP_STATE_ORGANISAATION_TOIMIPISTE_ENTRIES = 'APP_STATE_ORGANISAATION_TOIMIPISTE_ENTRIES';
@@ -99,7 +101,7 @@ const createToimipisteEntry = (data, organisaatioOid) => {
 };
 
 const getOrganisaatioNameByOid = (organisaatioOid) =>
-  getState(APP_STATE_ORGANISAATIO_OPTIONS).find(entry => entry.value === organisaatioOid).label;
+  getState(APP_STATE_ORGANISAATIO_OPTIONS).find(entry => entry.key === organisaatioOid).label;
 
 export const loadToimipisteList = () => {
   const organisaatioOids = getSelectedOrganisaatioOidList();

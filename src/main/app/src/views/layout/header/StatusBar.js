@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {APP_STATE_WORKFLOW} from '../../../config/states';
 import {connectListener} from '../../../utils/stateUtils';
 import {tr} from '../../../stores/generic/LanguageStore';
+import {APP_STATE_WORKFLOW} from '../../../stores/generic/WorkflowStore';
 
 export class StatusBar extends Component {
 
@@ -10,8 +10,8 @@ export class StatusBar extends Component {
     this.state = {};
   }
 
-  componentDidMount = () => connectListener(this, APP_STATE_WORKFLOW, (incomingState) => this.setState({
-    workflowName: tr(incomingState.activeWorkFlow)
+  componentDidMount = () => connectListener(this, APP_STATE_WORKFLOW, (workflow) => this.setState({
+    workflowName: tr(workflow)
   }));
 
   getWorkflowName = () => this.state.workflowName;

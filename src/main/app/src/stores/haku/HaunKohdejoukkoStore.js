@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {clearState, handleEvents, initState, setState, updateState} from '../../utils/stateUtils';
+import {clearState, handleEvents, initState, setState} from '../../utils/stateUtils';
 import {APP_STATE_WORKFLOW} from '../generic/WorkflowStore';
 import {WORKFLOW} from '../../config/constants';
 import {urlHaunKohdejoukko} from '../../config/urls';

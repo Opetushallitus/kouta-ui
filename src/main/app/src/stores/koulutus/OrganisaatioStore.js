@@ -36,8 +36,6 @@ export const OrganisaatioStore = () => {
 const excludesOrganisaatioList = () => !containsValue(APP_STATE_ORGANISAATIO_OPTIONS, 'options');
 
 export const selectOrganisaatio = (activeOrganisaatioId, selected) => {
-  console.log('selectOrganisaatio:activeOrganisaatioId', activeOrganisaatioId);
-  console.log('selectOrganisaatio:selected', selected);
   updateState(APP_STATE_ORGANISAATIO_SELECTIONS, {
     [activeOrganisaatioId]: selected
   });

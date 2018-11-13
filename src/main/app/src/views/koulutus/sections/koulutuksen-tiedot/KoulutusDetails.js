@@ -1,8 +1,7 @@
 import React from 'react';
-import {APP_STATE_KOULUTUS_DETAILS} from '../../../../config/states';
 import {connectListener} from '../../../../utils/stateUtils';
 import {Connectable} from '../../../../components/Connectable';
-import {APP_STATE_KOULUTUKSEN_TIEDOT} from "../../../../stores/koulutus/KoulutuksenTiedotStore";
+import {APP_STATE_KOULUTUKSEN_TIEDOT} from '../../../../stores/koulutus/KoulutuksenTiedotStore';
 
 export class KoulutusDetails extends Connectable {
 

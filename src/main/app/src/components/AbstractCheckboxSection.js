@@ -4,6 +4,11 @@ import {broadcast, connectComponent} from '../utils/stateUtils';
 
 const classNames = require('classnames');
 
+export const DISPLAY_MODE = {
+  CHECKBOXES: 'checkbox',
+  RADIO_BUTTONS: 'radio'
+}
+
 export class AbstractCheckboxSection extends AbstractSection {
 
   onMount = () => connectComponent(this, {
@@ -37,6 +42,9 @@ export class AbstractCheckboxSection extends AbstractSection {
     throw new Error('AbstractCheckboxSection:getSelectionClearEventName(): implement in subclass!');
   }
 
+  // override this with DISPLAY_MODE.RADIOBUTTONS to get radiobuttons
+  getDisplayMode = () => DISPLAY_MODE.CHECKBOXES;
+
   getOptions = () => this.state.options || [];
 
   isOptionChecked = (option) => this.state.selections[option.key] === true;
@@ -51,7 +59,7 @@ export class AbstractCheckboxSection extends AbstractSection {
 
   renderOption = (option, index) => (
       <li key={index}>
-        <input type="checkbox" name={this.getClassName()} value={option.key} checked={this.isOptionChecked(option)}
+        <input type={this.getDisplayMode()} name={this.getClassName()} value={option.key} checked={this.isOptionChecked(option)}
                onChange={this.handleCheckboxChange}/>{option.label}
       </li>
   );

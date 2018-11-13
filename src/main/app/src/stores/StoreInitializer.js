@@ -23,8 +23,9 @@ import {ToteutuksenYhteystiedotStore} from './toteutus/ToteutuksenYhteystiedotSt
 import {ToteutuksenOsaamisalaStore} from './toteutus/ToteutuksenOsaamisalaStore';
 import {KoulutuksenKuvausStore} from './koulutus/KoulutuksenKuvausStore';
 import {HaunKohdejoukkoStore} from './haku/HaunKohdejoukkoStore';
-import {KoulutusOptionsStore} from "./koulutus/KoulutusOptionsStore";
-import {KoulutuksenTiedotStore} from "./koulutus/KoulutuksenTiedotStore";
+import {KoulutusOptionsStore} from './koulutus/KoulutusOptionsStore';
+import {KoulutuksenTiedotStore} from './koulutus/KoulutuksenTiedotStore';
+import {HaunHakutapaStore} from './haku/HaunHakutapaStore';
 
 const initGenericStores = () => {
   UrlStore();
@@ -58,6 +59,7 @@ const initHakuStores = () => {
   HaunKieliversioStore();
   HaunNimiStore();
   HaunKohdejoukkoStore();
+  HaunHakutapaStore();
 }
 
 const initHakukohdeStores = () => {

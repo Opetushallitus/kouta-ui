@@ -3,7 +3,7 @@ import {HaunPohjanValintaSection} from './sections/HaunPohjanValintaSection';
 import {HaunKieliversioSection} from './sections/HaunKieliversioSection';
 import {HaunNimiSection} from './sections/HaunNimiSection';
 import {HaunKohdejoukkoSection} from './sections/HaunKohdejoukkoSection';
-import {HakutapaSection} from './sections/HakutapaSection';
+import {HaunHakutapaSection} from './sections/HaunHakutapaSection';
 import {HaunAikataulutSection} from './sections/HaunAikataulutSection';
 import {HakulomakkeenValintaSection} from './sections/HakulomakkeenValintaSection';
 import {HaunYhteystiedotSection} from './sections/HaunYhteystiedotSection';
@@ -17,7 +17,7 @@ export class HakuView extends Component {
         <HaunKieliversioSection orderNumber={"2"}/>
         <HaunNimiSection orderNumber={"3"}/>
         <HaunKohdejoukkoSection orderNumber={"4"}/>
-        <HakutapaSection orderNumber={"5"}/>
+        <HaunHakutapaSection orderNumber={"5"}/>
         <HaunAikataulutSection orderNumber={"6"}/>
         <HakulomakkeenValintaSection orderNumber={"7"}/>
         <HaunYhteystiedotSection orderNumber={"8"}/>

@@ -3,7 +3,6 @@ import {WORKFLOW} from '../../config/constants';
 
 export const APP_STATE_WORKFLOW = 'APP_STATE_WORKFLOW';
 
-
 export const WorkflowStore = () => {
   initState(APP_STATE_WORKFLOW, WORKFLOW.KOULUTUS);
 }

@@ -12,14 +12,15 @@ export const APP_EVENT_HAUN_KOHDEJOUKKO_SELECTION_CLEAR = 'APP_EVENT_ORGANISAATI
 
 export const HaunKohdejoukkoStore = () => {
   handleEvents({
-    [APP_STATE_WORKFLOW]: (workflow) => workflow === WORKFLOW.HAKU && loadHaunKohdejoukkoList(workflow),
+    [APP_STATE_WORKFLOW]: (workflow) => workflow === WORKFLOW.HAKU && loadHaunKohdejoukkoList(),
     [APP_EVENT_HAUN_KOHDEJOUKKO_SELECTION_CHANGE]: (selection) => selectHaunKohdejoukko(selection.value, selection.selected),
     [APP_EVENT_HAUN_KOHDEJOUKKO_SELECTION_CLEAR]: () => clearHaunKohdejoukkoSelections()
   });
   initState(APP_STATE_HAUN_KOHDEJOUKKO_SELECTIONS, {});
+  loadHaunKohdejoukkoList();
 };
 
-const loadHaunKohdejoukkoList = (workflow) =>
+const loadHaunKohdejoukkoList = () =>
   axios.get(urlHaunKohdejoukko()).then(response => configureHaunKohdejoukkoOptions(response.data));
 
 const configureHaunKohdejoukkoOptions = (data) => setState(APP_STATE_HAUN_KOHDEJOUKKO_OPTIONS, data.map(entry => ({

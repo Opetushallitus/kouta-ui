@@ -4,14 +4,14 @@ import {
   APP_STATE_KOULUTUKSEN_EPERUSTE_IDS,
   APP_STATE_KOULUTUKSEN_KUVAUS,
   APP_STATE_KOULUTUKSEN_OSAAMISALAT,
-  APP_STATE_KOULUTUKUSEN_OSAAMISALAKUVAUS_MAP,
-  APP_STATE_KOULUTUS_DETAILS
+  APP_STATE_KOULUTUKUSEN_OSAAMISALAKUVAUS_MAP
 } from '../../config/states';
 import {urlEPerusteList, urlOsaamisalaKuvausList} from '../../config/urls';
 import {findByKey} from '../../utils/objectUtils';
+import {APP_STATE_KOULUTUKSEN_TIEDOT} from "./KoulutuksenTiedotStore";
 
 export const KoulutuksenKuvausStore = () => handleEvents({
-  [APP_STATE_KOULUTUS_DETAILS]: (details) => loadEPerusteList(details),
+  [APP_STATE_KOULUTUKSEN_TIEDOT]: (details) => loadEPerusteList(details),
   [APP_STATE_KOULUTUKSEN_EPERUSTE_IDS]: (ePerusteIds) => loadOsaamisalaKuvausList(ePerusteIds, [])
 });
 

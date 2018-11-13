@@ -5,7 +5,7 @@ import {
   APP_STATE_ORGANISAATION_TOIMIPISTE_ENTRIES,
   APP_STATE_ORGANISAATION_TOIMIPISTE_SELECTIONS,
   selectToimipiste
-} from '../../../stores/koulutus/OrganisaatioStore';
+} from '../../../stores/koulutus/KoulutuksenOrganisaatioStore';
 import {CheckboxSelector} from '../../../components/CheckboxSelector';
 
 export class ToteutuksenJarjestamispaikkaSection extends AbstractSection {

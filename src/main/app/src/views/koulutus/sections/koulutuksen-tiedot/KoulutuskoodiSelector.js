@@ -1,19 +1,23 @@
 import React, {Component} from 'react';
 import {
-  APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY,
-  APP_STATE_KOULUTUS_DETAILS,
   APP_STATE_KOULUTUSKOODI_LIST
 } from '../../../../config/states';
-import {selectKoulutus, updateKoulutuksenNimi} from '../../../../stores/koulutus/KoulutusDetailsStore';
-import {connectComponent, disconnectListener} from '../../../../utils/stateUtils';
+//import {selectKoulutus, updateKoulutuksenNimi} from '../../../../stores/koulutus/KoulutusDetailsStore';
+import {broadcast, connectComponent, disconnectListener} from '../../../../utils/stateUtils';
 import {KoulutusNameTranslationEditor} from './KoulutusNameTranslationEditor';
 import {KOULUTUSTYYPPI_CATEGORY} from '../../../../config/constants';
+import {
+    APP_EVENT_SELECT_KOULUTUSKOODI,
+    APP_EVENT_SELECT_KOULUTUSTYYPPI
+} from "../../../../stores/koulutus/KoulutusStore";
+import {APP_STATE_KOULUTUKSEN_TIEDOT} from "../../../../stores/koulutus/KoulutuksenTiedotStore";
+import {getKoulutusOptionById} from "../../../../stores/koulutus/KoulutuskoodiListStore";
 
 const classNames = require('classnames');
-export class KoulutusSelector extends Component {
+export class KoulutuskoodiSelector extends Component {
 
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       filter: '',
       editableName: '',
@@ -24,12 +28,12 @@ export class KoulutusSelector extends Component {
     [APP_STATE_KOULUTUSKOODI_LIST]: (state) => this.setState(...this.state, {
         koulutusOptions: state.koulutusOptions
     }),
-    [APP_STATE_KOULUTUS_DETAILS]: (state) => this.setState(...this.state, {
+    [APP_STATE_KOULUTUKSEN_TIEDOT]: (state) => this.setState(...this.state, {
         nimi: state.nimi,
         enabled: state.enabled
     }),
-    [APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY]: (koulutustyyppiCategory) =>
-      this.setState(...this.state, {koulutustyyppiCategory})
+    [APP_EVENT_SELECT_KOULUTUSTYYPPI]: (koulutustyyppi) =>
+      this.setState(...this.state, { koulutustyyppi: koulutustyyppi })
     });
 
   componentWillUnmount = () => disconnectListener(this);
@@ -42,7 +46,7 @@ export class KoulutusSelector extends Component {
 
   matchOption = (option) => option.comparisonValue.indexOf(this.getFilter()) > -1;
 
-  isNameEditingAllowed = () =>  this.state.enabled && this.state.koulutustyyppiCategory !== KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS;
+  isNameEditingAllowed = () =>  this.state.enabled && this.state.koulutustyyppi !== KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS;
 
   compareOptions = (a, b) => {
     const aName =  a.label;
@@ -50,7 +54,7 @@ export class KoulutusSelector extends Component {
     if (aName < bName) return -1;
     if (aName > bName) return 1;
     return 0;
-  }
+  };
 
   getFilteredOptions = () => this.getFilter().length > 0 ? this.getOptions()
     .filter(this.matchOption)
@@ -62,8 +66,8 @@ export class KoulutusSelector extends Component {
       ...this.state,
       filter: '',
       optionsEnabled: false
-    }, () => selectKoulutus(value));
-  }
+    }, () => broadcast(APP_EVENT_SELECT_KOULUTUSKOODI, getKoulutusOptionById(value)));
+  };
 
   getOptionCssClass = (option) => option.id === this.state.activeKoulutusId ? 'selected' : '';
 
@@ -71,7 +75,7 @@ export class KoulutusSelector extends Component {
     <li key={index} className={classNames("option-li", this.getOptionCssClass(option))} data-id={option.id} onClick={this.selectOption}>
       {option.label}
     </li>
-  )
+  );
 
   setFilter = (e) => this.setState({
     ...this.state,
@@ -79,7 +83,7 @@ export class KoulutusSelector extends Component {
     optionsEnabled: true
   });
 
-  updateName = (e) => updateKoulutuksenNimi(e.target.value);
+  //updateName = (e) => updateKoulutuksenNimi(e.target.value);
 
   renderOptions = () => {
     const filteredOptions = this.getFilteredOptions();
@@ -90,7 +94,7 @@ export class KoulutusSelector extends Component {
         </ul>
       </div>
     ) : null;
-  }
+  };
 
   renderNameEditor = () => this.isNameEditingAllowed() ? (
       <KoulutusNameTranslationEditor/>

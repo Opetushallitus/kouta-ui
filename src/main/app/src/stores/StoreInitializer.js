@@ -1,11 +1,9 @@
-import {OrganisaatioStore} from './koulutus/OrganisaatioStore';
-import {KoulutusDetailsStore} from './koulutus/KoulutusDetailsStore';
+import {KoulutuksenOrganisaatioStore} from './koulutus/KoulutuksenOrganisaatioStore';
 import {KoulutuskoodiListStore} from './koulutus/KoulutuskoodiListStore';
 import {SectionStateStore} from './generic/SectionStateStore';
-import {KoulutusPersistencyStore} from './koulutus/KoulutusPersistencyStore';
 import {UrlStore} from './generic/UrlStore';
 import {WorkflowStore} from './generic/WorkflowStore';
-import {KoulutustyyppiCategoryStore} from './koulutus/KoulutustyyppiCategoryStore';
+import {KoulutusStore} from './koulutus/KoulutusStore';
 import {KoulutuksenKieliversioStore} from './koulutus/KoulutuksenKieliversioStore';
 import {KoulutuksenNimiStore} from './koulutus/KoulutuksenNimiStore';
 import {KoulutuksenPohjaStore} from './koulutus/KoulutuksenPohjaStore';
@@ -25,6 +23,8 @@ import {ToteutuksenYhteystiedotStore} from './toteutus/ToteutuksenYhteystiedotSt
 import {ToteutuksenOsaamisalaStore} from './toteutus/ToteutuksenOsaamisalaStore';
 import {KoulutuksenKuvausStore} from './koulutus/KoulutuksenKuvausStore';
 import {HaunKohdejoukkoStore} from './haku/HaunKohdejoukkoStore';
+import {KoulutusOptionsStore} from "./koulutus/KoulutusOptionsStore";
+import {KoulutuksenTiedotStore} from "./koulutus/KoulutuksenTiedotStore";
 
 const initGenericStores = () => {
   UrlStore();
@@ -33,11 +33,12 @@ const initGenericStores = () => {
 };
 
 const initKoulutusStores = () => {
-  OrganisaatioStore();
-  KoulutustyyppiCategoryStore();
+  KoulutuksenOrganisaatioStore();
+  KoulutusOptionsStore();
+  KoulutusStore();
+  KoulutuksenTiedotStore();
   KoulutuskoodiListStore();
-  KoulutusDetailsStore();
-  KoulutusPersistencyStore();
+  KoulutuksenTiedotStore();
   KoulutuksenKieliversioStore();
   KoulutuksenNimiStore();
   KoulutuksenPohjaStore();

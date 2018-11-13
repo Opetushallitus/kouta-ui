@@ -1,16 +1,19 @@
-import {
-  APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION,
-  APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY,
-  APP_STATE_KOULUTUSKOODI_LIST
-} from '../../config/states';
 import {getState, handleEvents, updateState} from '../../utils/stateUtils';
 import {KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP, LANGUAGE} from '../../config/constants';
 import axios from 'axios/index';
 import {urlKoulutuskoodit} from '../../config/urls';
+import {APP_EVENT_SELECT_KOULUTUSTYYPPI} from "./KoulutusStore";
+
+export const APP_STATE_KOULUTUSKOODI_LIST = 'APP_STATE_KOULUTUSKOODI_LIST';
 
 export const KoulutuskoodiListStore = () => handleEvents({
-  [APP_STATE_ACTIVE_KOULUTUSTYYPPI_CATEGORY]: (koulutustyyppi) => setKoulutuskoodiListIds(koulutustyyppi),
-  [APP_EVENT_CLEAR_KOULUTUSTYYPPI_SECTION]: () => clearKoulutuskoodiList()
+  [APP_EVENT_SELECT_KOULUTUSTYYPPI]: (koulutustyyppi) => {
+    if(koulutustyyppi) {
+        setKoulutuskoodiListIds(koulutustyyppi)
+    } else {
+        clearKoulutuskoodiList()
+    }
+  }
 });
 
 const setKoulutuskoodiListIds = (activeKoulutustyyppi) => {

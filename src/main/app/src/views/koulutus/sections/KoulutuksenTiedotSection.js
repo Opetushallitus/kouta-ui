@@ -1,24 +1,24 @@
 import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
-import {KoulutusSelector} from './koulutuksen-tiedot/KoulutusSelector';
+import {KoulutuskoodiSelector} from './koulutuksen-tiedot/KoulutuskoodiSelector';
 import {KoulutusDetails} from './koulutuksen-tiedot/KoulutusDetails';
-import {APP_STATE_KOULUTUS_DETAILS} from '../../../config/states';
-import {connectListener} from '../../../utils/stateUtils';
-import {deselectKoulutus} from '../../../stores/koulutus/KoulutusDetailsStore';
+import {broadcast, connectListener} from '../../../utils/stateUtils';
+import {APP_EVENT_SELECT_KOULUTUSKOODI} from "../../../stores/koulutus/KoulutusStore";
+import {APP_STATE_KOULUTUKSEN_TIEDOT} from "../../../stores/koulutus/KoulutuksenTiedotStore";
 
 export class KoulutuksenTiedotSection extends AbstractSection {
 
-  onMount = () => connectListener(this, APP_STATE_KOULUTUS_DETAILS, (state) => this.setState({...this.state, ...state}));
+  onMount = () => connectListener(this, APP_STATE_KOULUTUKSEN_TIEDOT, (state) => this.setState({...this.state, ...state}));
 
   getClassName = () => 'KoulutuksenTiedotSection';
 
   getHeader = () => 'Koulutuksen tiedot';
 
-  onClearButtonClick = () => deselectKoulutus();
+  onClearButtonClick = () => broadcast(APP_EVENT_SELECT_KOULUTUSKOODI);
 
   renderContent = () => (
     <div className={"content"}>
-      <KoulutusSelector/>
+      <KoulutuskoodiSelector/>
       <KoulutusDetails/>
     </div>
   )

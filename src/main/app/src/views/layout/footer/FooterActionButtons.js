@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
-import {ATTR_SAVE, ATTR_SAVE_AND_PUBLISH, saveAndPublishKoulutus, saveKoulutus} from '../../../stores/koulutus/KoulutusPersistencyStore';
-import {APP_STATE_KOULUTUS_PERSISTENCY} from '../../../config/states';
 import {REQUEST_STATUS} from '../../../config/constants';
-import {connectListener} from '../../../utils/stateUtils';
+import {broadcast, connectListener} from '../../../utils/stateUtils';
+import {
+    APP_EVENT_SAVE_AND_PUBLISH_KOULUTUS, APP_EVENT_SAVE_KOULUTUS,
+    APP_STATE_SAVE_KOULUTUS,
+    ATTR_SAVE,
+    ATTR_SAVE_AND_PUBLISH
+} from "../../../stores/koulutus/KoulutusStore";
 
 const classNames = require('classnames');
 
@@ -13,11 +17,11 @@ export class FooterActionButtons extends Component {
     this.state = {};
   }
 
-  componentDidMount = () => connectListener(this, APP_STATE_KOULUTUS_PERSISTENCY, (state) => this.setState(state));
+  componentDidMount = () => connectListener(this, APP_STATE_SAVE_KOULUTUS, (state) => this.setState(state));
 
-  saveKoulutus = () => saveKoulutus();
+  saveKoulutus = () => broadcast(APP_EVENT_SAVE_KOULUTUS);
 
-  saveAndPublishKoulutus = () => saveAndPublishKoulutus();
+  saveAndPublishKoulutus = () => broadcast(APP_EVENT_SAVE_AND_PUBLISH_KOULUTUS);
 
   isSaveButtonEnabled = () => true;
 

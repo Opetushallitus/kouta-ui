@@ -2,6 +2,7 @@ import React from 'react';
 import {APP_STATE_KOULUTUS_DETAILS} from '../../../../config/states';
 import {connectListener} from '../../../../utils/stateUtils';
 import {Connectable} from '../../../../components/Connectable';
+import {APP_STATE_KOULUTUKSEN_TIEDOT} from "../../../../stores/koulutus/KoulutuksenTiedotStore";
 
 export class KoulutusDetails extends Connectable {
 
@@ -10,7 +11,7 @@ export class KoulutusDetails extends Connectable {
     this.state = {};
   }
 
-  componentDidMount = () => connectListener(this, APP_STATE_KOULUTUS_DETAILS, (state) => this.setState(state));
+  componentDidMount = () => connectListener(this, APP_STATE_KOULUTUKSEN_TIEDOT, (state) => this.setState(state));
 
   renderDetailsRow = (label, value) => (
     <div className={"details-row"}>

@@ -2,10 +2,11 @@ import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
 import {
   APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES, APP_STATE_KOULUTUKSEN_KUVAUS,
-  APP_STATE_KOULUTUS_DETAILS
+  //APP_STATE_KOULUTUS_DETAILS
 } from '../../../config/states';
 import {connectComponent} from '../../../utils/stateUtils';
 import {isVariableDefined} from '../../../utils/objectUtils';
+import {APP_STATE_KOULUTUKSEN_TIEDOT} from "../../../stores/koulutus/KoulutuksenTiedotStore";
 
 export class KoulutuksenKuvausSection extends AbstractSection {
 
@@ -16,7 +17,7 @@ export class KoulutuksenKuvausSection extends AbstractSection {
   getSupportedLanguagesStateName = () => APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES;
 
   onMount = () => connectComponent(this, {
-    [APP_STATE_KOULUTUS_DETAILS]: (state) => this.setState({
+    [APP_STATE_KOULUTUKSEN_TIEDOT]: (state) => this.setState({
       ...this.state,
       enabled: state.enabled
     }),

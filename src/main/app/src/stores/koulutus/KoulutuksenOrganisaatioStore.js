@@ -3,7 +3,6 @@ import {urlOrganisaatioList} from '../../config/urls';
 import {
   APP_EVENT_ORGANISAATIO_SELECTION_CHANGE,
   APP_EVENT_ORGANISAATIO_SELECTION_CLEAR,
-  APP_STATE_KOULUTUS_DETAILS,
   APP_STATE_ORGANISAATIO_OPTIONS,
   APP_STATE_ORGANISAATIO_SELECTIONS
 } from '../../config/states';
@@ -17,13 +16,14 @@ import {
   updateState
 } from '../../utils/stateUtils';
 import {getLanguage} from '../generic/LanguageStore';
+import {APP_STATE_KOULUTUKSEN_TIEDOT} from "./KoulutuksenTiedotStore";
 
 //REPLACE THIS WITH OID COMING FROM CAS
 const DEFAULT_OID = '1.2.246.562.10.594252633210';
 
-export const OrganisaatioStore = () => {
+export const KoulutuksenOrganisaatioStore = () => {
   handleEvents({
-    [APP_STATE_KOULUTUS_DETAILS]: () => loadOrganisaatioList(DEFAULT_OID),
+    [APP_STATE_KOULUTUKSEN_TIEDOT]: () => loadOrganisaatioList(DEFAULT_OID),
     [APP_EVENT_ORGANISAATIO_SELECTION_CHANGE]: (selection) => selectOrganisaatio(selection.value, selection.selected),
     [APP_EVENT_ORGANISAATIO_SELECTION_CLEAR]: () => clearOrganisaatioSelections()
   });

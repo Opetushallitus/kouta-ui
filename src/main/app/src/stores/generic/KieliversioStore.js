@@ -1,4 +1,4 @@
-import {clearState, getState, handleEvents, initState, setStates, updateState} from '../../utils/stateUtils';
+import {clearState, getState, handleEvents, setState, setStates, updateState} from '../../utils/stateUtils';
 import {
   EVENT_SELECTION_CHANGE,
   EVENT_SELECTION_CLEAR,
@@ -13,7 +13,8 @@ export const KieliversioStore = (scope) => {
     [scope[EVENT_SELECTION_CHANGE]]: (selection) => selectKieliversio(scope, selection.value, selection.selected),
     [scope[EVENT_SELECTION_CLEAR]]: () => clearKieliversioSelections(scope)
   });
-  initState(scope[STATE_OPTIONS], getKieliversioOptions());
+  //change this to initState later
+  setState(scope[STATE_OPTIONS], getKieliversioOptions());
   selectKieliversio(scope, 'fi', true);
 };
 

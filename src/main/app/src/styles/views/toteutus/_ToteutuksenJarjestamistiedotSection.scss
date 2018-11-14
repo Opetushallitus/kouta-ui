@@ -12,6 +12,11 @@
     .info-header {
       margin-bottom: 0;
     }
+    input[type=text] {
+      min-width: 0;
+      width: 100px;
+      margin-right: 10px;
+    }
     .option-controls-row {
       @extend .row;
       align-items: flex-end !important;
@@ -19,11 +24,12 @@
         justify-content: flex-end;
         margin-left: 10px;
         margin-bottom: 10px;
-        input {
-          min-width: 0;
-          width: 100px;
-          margin-right: 10px;
-        }
+      }
+    }
+    .stipendi-editor {
+      textarea {
+        min-height: 200px;
+        width: 100%;
       }
     }
 

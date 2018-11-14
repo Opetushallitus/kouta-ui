@@ -23,6 +23,21 @@ class MaksunMaaraInput extends Component {
 
 }
 
+class StipendiEditor extends Component  {
+
+  render = () => (
+    <div className={'stipendi-editor column'}>
+      <span>Summa</span>
+      <div className={'row'}>
+        <input type={'text'} placeholder={'Maksun määrä'}></input> euroa / prosenttia
+      </div>
+      <span>Anna lisätietoja stipendin myöntämisestä</span>
+      <textarea placeholder={'Miten koulutus järjestetään teidän oppilaitoksessanne?'}>
+      </textarea>
+    </div>
+  )
+}
+
 export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
 
   onMount = () => this.setState({
@@ -170,14 +185,17 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
   addNewLanguage = (event) => {
   };
 
-
   isMaksullisuusSelected = () => this.getRadioValue('maksullisuusOptions') === 'kylla';
 
   isLukuvuosimaksuSelected = () => this.getRadioValue('lukuvuosimaksuOptions') === 'kylla';
 
+  isStipendiSelected = () => this.getRadioValue('stipendiOptions') === 'kylla';
+
   optionallyRenderMaksullisuusMaksunMaara = () => this.isMaksullisuusSelected() && <MaksunMaaraInput/>
 
   optionallyRenderLukuvuosiMaksunMaara = () => this.isLukuvuosimaksuSelected() && <MaksunMaaraInput/>
+
+  optionallyRenderStipendiEditor = () => this.isStipendiSelected() && <StipendiEditor/>
 
   renderContent = () => (
       <div className={'content'}>
@@ -211,7 +229,7 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
         <InfoHeader label={'Onko stipendit käytössä?'}/>
         <RadiobuttonSelector options={this.state.stipendiOptions}
                              onChange={this.changeStipendiSelection}/>
-
+        {this.optionallyRenderStipendiEditor()}
         <InfoHeader label={'Valitse lisättävä osio'}/>
         <CheckboxSelector options={this.state.lisattavaOsioOptions}
                           onChange={this.changeLisattavaOsioSelection}/>

@@ -29,4 +29,14 @@ body {
     color: #2da0c7;
     margin-top: 10px;
   }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+  }
 }

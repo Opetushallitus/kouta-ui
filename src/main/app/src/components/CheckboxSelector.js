@@ -4,8 +4,6 @@ export class CheckboxSelector extends Component {
 
   getOptions = () => this.props.options || [];
 
-  getLabel = () => this.props.label;
-
   handleCheckboxChange = (event) => this.props.onChange({
     key: event.target.value,
     active: event.target.checked
@@ -26,9 +24,6 @@ export class CheckboxSelector extends Component {
 
   render = () => (
     <div className={'checkbox-selector'}>
-      <span className={"label"}>
-        {this.getLabel()}
-      </span>
       {this.renderOptionList()}
     </div>
   );

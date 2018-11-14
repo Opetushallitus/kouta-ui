@@ -4,8 +4,6 @@ export class RadiobuttonSelector extends Component {
 
   getOptions = () => this.props.options || [];
 
-  getLabel = () => this.props.label;
-
   getName = () => this.props.name;
 
   handleCheckboxChange = (event) => this.props.onChange({
@@ -28,9 +26,6 @@ export class RadiobuttonSelector extends Component {
 
   render = () => (
     <div className={'radiobutton-selector'}>
-      <span className={'label'}>
-        {this.getLabel()}
-      </span>
       {this.renderOptionList()}
     </div>
   );

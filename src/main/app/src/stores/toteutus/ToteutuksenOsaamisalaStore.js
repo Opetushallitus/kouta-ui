@@ -15,10 +15,11 @@ export const ToteutuksenOsaamisalaStore = () => {
   });
 };
 
+
 export const selectToteutuksenOsaamisala = (osaamisalaId, selected) => updateState(APP_STATE_TOTEUTUKSEN_OSAAMISALA_SELECTIONS, {
   [osaamisalaId]: selected
 });
 
-const clearToteutuksenOsaamisalaSelections = () => clearState(APP_STATE_TOTEUTUKSEN_OSAAMISALA_SELECTIONS);
+export const clearToteutuksenOsaamisalaSelections = () => clearState(APP_STATE_TOTEUTUKSEN_OSAAMISALA_SELECTIONS);
 
 export const getToteutuksenOsaamisalaSelections = () => getState(APP_STATE_TOTEUTUKSEN_OSAAMISALA_SELECTIONS);

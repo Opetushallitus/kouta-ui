@@ -2,18 +2,17 @@ import React from 'react';
 import {broadcast, connectComponent} from '../../../../utils/stateUtils';
 import {
   APP_EVENT_TOTEUTUKSEN_OSAAMISALA_SELECTION_CHANGE,
-  //APP_STATE_KOULUTUS_DETAILS,
   APP_STATE_TOTEUTUKSEN_OSAAMISALA_SELECTIONS
 } from '../../../../config/states';
 import {Connectable} from '../../../../components/Connectable';
-import {APP_STATE_KOULUTUKSEN_TIEDOT} from "../../../../stores/koulutus/KoulutuksenTiedotStore";
+import {APP_STATE_KOULUTUKSEN_OSAAMISALA_OPTIONS} from '../../../../stores/koulutus/KoulutuksenKuvausStore';
 
 export class OsaamisalaSelector extends Connectable {
 
   componentDidMount = () => connectComponent(this, {
-    [APP_STATE_KOULUTUKSEN_TIEDOT]: (incomingState) => this.setState({
+    [APP_STATE_KOULUTUKSEN_OSAAMISALA_OPTIONS]: (options) => this.setState({
       ...this.state,
-      options: incomingState.osaamisalaOptions
+      options
     }),
     [APP_STATE_TOTEUTUKSEN_OSAAMISALA_SELECTIONS]: (selections) => this.setState({
       ...this.state,

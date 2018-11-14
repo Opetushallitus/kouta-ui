@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import {connectComponent, disconnectListener} from '../../../../utils/stateUtils';
-import {
-  APP_STATE_KOULUTUKUSEN_OSAAMISALAKUVAUS_MAP,
-  APP_STATE_TOTEUTUKSEN_OSAAMISALA_SELECTIONS
-} from '../../../../config/states';
+import {APP_STATE_TOTEUTUKSEN_OSAAMISALA_SELECTIONS} from '../../../../config/states';
 import {getLanguage} from '../../../../stores/generic/LanguageStore';
+import {APP_STATE_KOULUTUKSEN_OSAAMISALAKUVAUS_MAP} from '../../../../stores/koulutus/KoulutuksenKuvausStore';
 
 export class OsaamisalaViewer extends Component {
 
@@ -14,7 +12,10 @@ export class OsaamisalaViewer extends Component {
   }
 
   componentDidMount = () => connectComponent(this, {
-    [APP_STATE_KOULUTUKUSEN_OSAAMISALAKUVAUS_MAP]: (osaamisalakuvausMap) => this.setState({...this.state, osaamisalakuvausMap}),
+    [APP_STATE_KOULUTUKSEN_OSAAMISALAKUVAUS_MAP]: (osaamisalakuvausMap) => this.setState({
+      ...this.state,
+      osaamisalakuvausMap
+    }),
     [APP_STATE_TOTEUTUKSEN_OSAAMISALA_SELECTIONS]: (selections) => this.setState({...this.state, selections})
   });
 

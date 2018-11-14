@@ -1,9 +1,9 @@
 import axios from 'axios';
-import {AlakoodiItem, AlakoodiList} from '../../model/Alakoodi';
+import {AlakoodiList} from '../../model/Alakoodi';
 import {clearValues, handleEvents, initState, setState, updateState} from '../../utils/stateUtils';
 import {LANGUAGE} from '../../config/constants';
 import {urlRelaatioAlakoodit} from '../../config/urls';
-import {APP_EVENT_SELECT_KOULUTUSKOODI, APP_EVENT_SELECT_KOULUTUSTYYPPI} from "./KoulutusStore";
+import {APP_EVENT_SELECT_KOULUTUSKOODI, APP_EVENT_SELECT_KOULUTUSTYYPPI} from './KoulutusStore';
 
 export const APP_STATE_KOULUTUKSEN_TIEDOT = 'APP_STATE_KOULUTUKSEN_TIEDOT';
 
@@ -26,7 +26,6 @@ const clearKoulutusDetails = () => setState(APP_STATE_KOULUTUKSEN_TIEDOT, {
 });
 
 const loadKoulutusDetails = (koulutusOption) => {
-  //const koulutusOption = getKoulutusOptionById(koulutusId);
   updateKoulutuksenTiedot({
     ...koulutusOption,
     enabled: false,
@@ -41,16 +40,9 @@ const setKoulutusDetailsData = (alakoodiJsonArray) => {
   const alakoodiList = AlakoodiList.createFromJsonArray(alakoodiJsonArray);
   updateKoulutuksenTiedot({
     koulutusala: AlakoodiList.findKoulutusala(alakoodiList, LANGUAGE),
-    osaamisalaNameList: AlakoodiList.findOsaamisalaNameList(alakoodiList, LANGUAGE),
-    osaamisalaOptions: createOsaamisalaOptions(alakoodiList),
     tutkintonimikeList: AlakoodiList.findTutkintonimikeList(alakoodiList, LANGUAGE),
     opintojenLaajuus: AlakoodiList.findOpintojenLaajuus(alakoodiList, LANGUAGE),
     opintojenLaajuusyksikko: AlakoodiList.findOpintojenLaajuusyksikko(alakoodiList, LANGUAGE),
     enabled: true
   });
 };
-
-const createOsaamisalaOptions = (alakoodiList) => AlakoodiList.findOsaamisalaList(alakoodiList).map(listentry => ({
-  label: AlakoodiItem.findName(listentry, LANGUAGE),
-  value: listentry.koodiUri
-}));

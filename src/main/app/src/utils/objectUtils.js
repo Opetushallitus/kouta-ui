@@ -48,3 +48,8 @@ export const filterByKeys = (item, keys) => {
   }
   return item;
 };
+
+export const removeDuplicatesByFeature = (items, getFeatureValue) => Object.values(items.reduce((itemMap, item) => ({
+  ...itemMap,
+  [getFeatureValue(item)]: item
+}), {}));

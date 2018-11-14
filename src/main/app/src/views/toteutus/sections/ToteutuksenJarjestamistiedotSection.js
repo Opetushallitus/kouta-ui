@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
 import {CheckboxSelector} from '../../../components/CheckboxSelector';
 import {RadiobuttonSelector} from '../../../components/RadiobuttonSelector';
@@ -8,19 +8,33 @@ import {
   updateOptionValue,
   updateSingleSelectionOptionActivation
 } from '../../../utils/optionListUtils';
+import {InfoHeader} from '../../../components/InfoHeader';
+import {ActionLink} from '../../../components/ActionLink';
+
+class MaksunMaaraInput extends Component {
+
+  render = () => (
+    <div className={'input-field-container column'}>
+      <div className={'row'}>
+        <input type={'text'} placeholder={'Maksun määrä'}></input> euroa
+      </div>
+    </div>
+  );
+
+}
 
 export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
 
-  onMount = () => {
-    this.setState({
+  onMount = () => this.setState({
       ...this.state,
       lisattavaOsioOptions: this.getLisattavaOsioOptions(),
       opetuskieliOptions: this.getOpetuskieliOptions(),
       opetusaikaOptions: this.getOpetusaikaOptions(),
       opetustapaOptions: this.getOpetustapaOptions(),
-      maksullisuusOptions: this.getMaksullisuusOptions()
+      maksullisuusOptions: this.getBooleanOptions(),
+      lukuvuosimaksuOptions: this.getBooleanOptions(),
+      stipendiOptions: this.getBooleanOptions()
     });
-  };
 
   getClassName = () => 'ToteutuksenJarjestamistiedotSection';
 
@@ -67,7 +81,7 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
     }
   ];
 
-  getMaksullisuusOptions = () => [
+  getBooleanOptions = () => [
     {
       label: 'Ei',
       key: 'ei'
@@ -130,6 +144,8 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
     [targetOptions]: updateOptionValue(this.state[targetOptions], change)
   });
 
+  getRadioValue = (targetOptions) => (this.state[targetOptions].find(option => option.active) || {}).key
+
   changeLisattavaOsioSelection = (change) => this.changeCheckboxSelection('lisattavaOsioOptions', change);
 
   changeOpetuskieliSelection = (change) => this.changeCheckboxSelection('opetuskieliOptions', change);
@@ -142,28 +158,62 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
 
   changeMaksullisuusSelection = (change) => this.changeRadioSelection('maksullisuusOptions', change);
 
+  changeStipendiSelection = (change) => this.changeRadioSelection('stipendiOptions', change);
+
+  changeLukuvuosimaksuSelection = (change) => this.changeRadioSelection('lukuvuosimaksuOptions', change);
+
   renderLisattavaOsioTextAreas = () => this.getLisattavaOsioActiveOptions().map(entry => (
     <TextAreaField onChange={this.changeLisattavaOsioValue} id={entry.key} key={entry.key} label={entry.label}
                    value={entry.value}/>
   ));
 
+  addNewLanguage = (event) => {
+  };
+
+
+  isMaksullisuusSelected = () => this.getRadioValue('maksullisuusOptions') === 'kylla';
+
+  isLukuvuosimaksuSelected = () => this.getRadioValue('lukuvuosimaksuOptions') === 'kylla';
+
+  optionallyRenderMaksullisuusMaksunMaara = () => this.isMaksullisuusSelected() && <MaksunMaaraInput/>
+
+  optionallyRenderLukuvuosiMaksunMaara = () => this.isLukuvuosimaksuSelected() && <MaksunMaaraInput/>
+
   renderContent = () => (
       <div className={'content'}>
-        <CheckboxSelector label={'Opetuskieli'}
-                          options={this.state.opetuskieliOptions}
-                          onChange={this.changeOpetuskieliSelection}
-        />
-        <RadiobuttonSelector label={'Opetusaika'}
-                             options={this.state.opetusaikaOptions}
+        <InfoHeader label={'Opetuskieli'}/>
+        <div className={'row'}>
+          <CheckboxSelector options={this.state.opetuskieliOptions} onChange={this.changeOpetuskieliSelection}/>
+        </div>
+
+        <ActionLink label={'Lisää uusi kieli'} onClick={this.addNewLanguage}/>
+
+        <InfoHeader label={'Opetusaika'}/>
+        <RadiobuttonSelector options={this.state.opetusaikaOptions}
                              onChange={this.changeOpetusaikaSelection}/>
-        <RadiobuttonSelector label={'Pääasiallinen opetustapa'}
-                             options={this.state.opetustapaOptions}
+        <InfoHeader label={'Pääasiallinen opetustapa'}/>
+        <RadiobuttonSelector options={this.state.opetustapaOptions}
                              onChange={this.changeOpetustapaSelection}/>
-        <RadiobuttonSelector label={'Onko opetus maksullista?'}
-                             options={this.state.maksullisuusOptions}
+        <InfoHeader label={'Onko opetus maksullista?'}/>
+
+        <div className={'option-controls-row'}>
+          <RadiobuttonSelector options={this.state.maksullisuusOptions}
                              onChange={this.changeMaksullisuusSelection}/>
-        <CheckboxSelector label={'Valitse lisättävä osio'}
-                          options={this.state.lisattavaOsioOptions}
+          {this.optionallyRenderMaksullisuusMaksunMaara()}
+        </div>
+
+        <InfoHeader label={'Onko lukuvuosimaksua?'}/>
+        <div className={'option-controls-row'}>
+          <RadiobuttonSelector options={this.state.lukuvuosimaksuOptions}
+                               onChange={this.changeLukuvuosimaksuSelection}/>
+          {this.optionallyRenderLukuvuosiMaksunMaara()}
+        </div>
+        <InfoHeader label={'Onko stipendit käytössä?'}/>
+        <RadiobuttonSelector options={this.state.stipendiOptions}
+                             onChange={this.changeStipendiSelection}/>
+
+        <InfoHeader label={'Valitse lisättävä osio'}/>
+        <CheckboxSelector options={this.state.lisattavaOsioOptions}
                           onChange={this.changeLisattavaOsioSelection}/>
         {this.renderLisattavaOsioTextAreas()}
       </div>

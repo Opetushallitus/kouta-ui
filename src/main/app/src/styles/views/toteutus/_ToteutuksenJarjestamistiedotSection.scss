@@ -9,5 +9,23 @@
         min-height: 200px;
       }
     }
+    .info-header {
+      margin-bottom: 0;
+    }
+    .option-controls-row {
+      @extend .row;
+      align-items: flex-end !important;
+      .input-field-container {
+        justify-content: flex-end;
+        margin-left: 10px;
+        margin-bottom: 10px;
+        input {
+          min-width: 0;
+          width: 100px;
+          margin-right: 10px;
+        }
+      }
+    }
+
   }
 }

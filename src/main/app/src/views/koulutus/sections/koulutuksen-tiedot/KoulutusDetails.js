@@ -1,7 +1,8 @@
 import React from 'react';
-import {connectListener} from '../../../../utils/stateUtils';
+import {connectComponent} from '../../../../utils/stateUtils';
 import {Connectable} from '../../../../components/Connectable';
 import {APP_STATE_KOULUTUKSEN_TIEDOT} from '../../../../stores/koulutus/KoulutuksenTiedotStore';
+import {APP_STATE_KOULUTUKSEN_OSAAMISALA_NAME_LIST} from '../../../../stores/koulutus/KoulutuksenKuvausStore';
 
 export class KoulutusDetails extends Connectable {
 
@@ -10,7 +11,16 @@ export class KoulutusDetails extends Connectable {
     this.state = {};
   }
 
-  componentDidMount = () => connectListener(this, APP_STATE_KOULUTUKSEN_TIEDOT, (state) => this.setState(state));
+  componentDidMount = () => connectComponent(this, {
+    [APP_STATE_KOULUTUKSEN_TIEDOT]: (koulutuksenTiedot) => this.setState({
+      ...this.state,
+      ...koulutuksenTiedot
+    }),
+    [APP_STATE_KOULUTUKSEN_OSAAMISALA_NAME_LIST]: (osaamisalaNameList) => this.setState({
+      ...this.state,
+      osaamisalaNameList
+    })
+  });
 
   renderDetailsRow = (label, value) => (
     <div className={"details-row"}>
@@ -26,16 +36,16 @@ export class KoulutusDetails extends Connectable {
   renderOpintojenLaajuusInfo = () => this.renderOpintojenLaajuus() + ' ' + this.renderOpintojenLaajuusyksikko();
 
   renderOsaamisalaItem = (item, index) => (
-    <li key={index} className={"osaamisala-item"}>
+    <li key={index} className={'osaamisala-item'}>
       {item}
     </li>
-  )
+  );
 
-  getOsaamisaalaNameList = () => this.state.osaamisalaNameList || [];
+  getOsaamisalaNameList = () => this.state.osaamisalaNameList || [];
 
   renderOsaamisalaList = () => (
     <ul className={"osaamisala-list"}>
-      {this.getOsaamisaalaNameList().map(this.renderOsaamisalaItem)}
+      {this.getOsaamisalaNameList().map(this.renderOsaamisalaItem)}
     </ul>
   )
 

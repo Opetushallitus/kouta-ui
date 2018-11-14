@@ -1,14 +1,16 @@
 import axios from 'axios';
 import {handleEvents, setState, setStates} from '../../utils/stateUtils';
-import {
-  APP_STATE_KOULUTUKSEN_EPERUSTE_IDS,
-  APP_STATE_KOULUTUKSEN_KUVAUS,
-  APP_STATE_KOULUTUKSEN_OSAAMISALAT,
-  APP_STATE_KOULUTUKUSEN_OSAAMISALAKUVAUS_MAP
-} from '../../config/states';
+
 import {urlEPerusteList, urlOsaamisalaKuvausList} from '../../config/urls';
-import {findByKey} from '../../utils/objectUtils';
-import {APP_STATE_KOULUTUKSEN_TIEDOT} from "./KoulutuksenTiedotStore";
+import {findByKey, removeDuplicatesByFeature} from '../../utils/objectUtils';
+import {APP_STATE_KOULUTUKSEN_TIEDOT} from './KoulutuksenTiedotStore';
+import {LANGUAGE} from '../../config/constants';
+import {AlakoodiItem, AlakoodiList} from '../../model/Alakoodi';
+import {getLanguage} from '../generic/LanguageStore';
+
+export const APP_STATE_KOULUTUKSEN_KUVAUS = 'APP_STATE_KOULUTUKSEN_KUVAUS';
+export const APP_STATE_KOULUTUKSEN_OSAAMISALAT = 'APP_STATE_KOULUTUKSEN_OSAAMISALAT';
+export const APP_STATE_KOULUTUKSEN_EPERUSTE_IDS = 'APP_STATE_KOULUTUKSEN_EPERUSTE_IDS';
 
 export const KoulutuksenKuvausStore = () => handleEvents({
   [APP_STATE_KOULUTUKSEN_TIEDOT]: (details) => loadEPerusteList(details),
@@ -41,23 +43,41 @@ const configureEPerusteListData = (data) => {
   });
 };
 
-const setOsaamisalaKuvausData = (osaamisalaList) =>
-  setState(APP_STATE_KOULUTUKUSEN_OSAAMISALAKUVAUS_MAP, osaamisalaList.map(entry => entry[0]).map(entry => ({
+export const APP_STATE_KOULUTUKSEN_OSAAMISALAKUVAUS_MAP = 'APP_STATE_KOULUTUKSEN_OSAAMISALAKUVAUS_MAP';
+export const APP_STATE_KOULUTUKSEN_OSAAMISALA_OPTIONS = 'APP_STATE_KOULUTUKSEN_OSAAMISALA_OPTIONS';
+export const APP_STATE_KOULUTUKSEN_OSAAMISALA_NAME_LIST = 'APP_STATE_KOULUTUKSEN_OSAAMISALA_NAME_LIST';
+
+const setOsaamisalaKuvausData = (osaamisalaList) => {
+  const entries = removeDuplicatesByFeature(osaamisalaList.map(entry => entry[0]), (entry) => entry.osaamisala.uri);
+  const osaamisalakuvausMap = entries.map(entry => ({
     nimi: entry.nimi,
     uri: entry.osaamisala.uri,
     teksti: entry.teksti
   })).reduce((kuvausMap, entry) => ({
     ...kuvausMap,
     [entry['uri']]: entry
-  }), {})
-);
+  }), {});
+
+  const osaamisalaOptions = entries.map(entry => ({
+    label: entry.nimi[getLanguage()],
+    value: entry.osaamisala.uri
+  }))
+
+  const osaamisalaNameList = entries.map(entry => entry.nimi[getLanguage()]);
+
+  setStates({
+    [APP_STATE_KOULUTUKSEN_OSAAMISALAKUVAUS_MAP]: osaamisalakuvausMap,
+    [APP_STATE_KOULUTUKSEN_OSAAMISALA_OPTIONS]: osaamisalaOptions,
+    [APP_STATE_KOULUTUKSEN_OSAAMISALA_NAME_LIST]: osaamisalaNameList
+  });
+}
 
 const loadOsaamisalaKuvausList = (ePerusteIds, osaamisalaList) => {
   if (ePerusteIds.length === 0) {
     return setOsaamisalaKuvausData(osaamisalaList);
   }
   const ePerusteId = ePerusteIds.shift();
-
+  const url = urlOsaamisalaKuvausList(ePerusteId);
   axios.get(urlOsaamisalaKuvausList(ePerusteId)).then(response => {
     const data = response.data;
     const osaamisalaArray = findByKey(data, '^osaamisala_');

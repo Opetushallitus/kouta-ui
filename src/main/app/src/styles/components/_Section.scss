@@ -32,9 +32,11 @@
         color: white;
       }
     }
+
     .expanded-controller {
       background-color: #1e7998;
     }
+
     .language-tabs {
       display: flex;
       position: absolute;
@@ -69,19 +71,6 @@
     justify-content: flex-start;
     padding: 10px;
     background-color: white;
-
-    .label {
-      width: 102px;
-      height: 21px;
-      font-family: Helvetica;
-      font-size: 16px;
-      font-weight: normal;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: 1.31;
-      letter-spacing: normal;
-      color: #6e6e7e;
-    }
   }
   .footer {
     display: flex;

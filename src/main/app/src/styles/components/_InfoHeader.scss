@@ -3,13 +3,25 @@
   align-items: center;
   font-weight: bold;
   font-size: 20px;
-  span {
-    margin-left: 10px;
-    margin-right: 10px;
-  }
+  color: #666666;
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #888888;
   margin-bottom: 20px;
   margin-top: 20px;
+
+  .arrow-icon {
+    cursor: pointer;
+    font-size: 15px;
+  }
+
+  .label {
+    margin-left: 10px;
+    margin-right: 10px;
+    flex-grow: 1;
+  }
+
+  .help-icon {
+    cursor: pointer;
+  }
 }

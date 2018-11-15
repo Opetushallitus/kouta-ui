@@ -36,10 +36,6 @@ export class AbstractPohjanValintaSection extends AbstractSection {
     throw new Error('AbstractPohjanValintaSection:getHeader(): implement in subclass!');
   };
 
-  getCreateEntityInfoText = () => {
-    throw new Error('AbstractPohjanValintaSection:getCreateEntityInfoText(): implement in subclass!');
-  };
-
   getStateNameForEntryOptions = () => this.getScope()[STATE_ENTRY_OPTIONS];
 
   getStateNameForMode = () => this.getScope()[STATE_MODE];
@@ -58,29 +54,35 @@ export class AbstractPohjanValintaSection extends AbstractSection {
 
   getModeOptions = () => this.state.modeOptions || [];
 
-  getMode = () => this.state.mode || ENTITY_MODIFICATION_MODE.CREATE_ENTITY;
+  getMode = () => this.state.mode;
 
   handleDropdownChange = (value) => broadcast(this.getEventNameForEntry(), value);
 
   selectMode = (mode) => broadcast(this.getEventNameForMode(), mode);
 
-  renderMode = () => ({
-    [ENTITY_MODIFICATION_MODE.CREATE_ENTITY]: () => <span
-      className={'info-span'}>{this.getCreateEntityInfoText()}</span>,
+  renderMode = () => (this.getMode() ? {
+    [ENTITY_MODIFICATION_MODE.CREATE_ENTITY]: () => <div/>,
     [ENTITY_MODIFICATION_MODE.INHERIT_ENTITY]: () => this.renderInfoDropdown(),
     [ENTITY_MODIFICATION_MODE.USE_ENTITY]: () => this.renderInfoDropdown()
-  }[this.getMode()]());
+  }[this.getMode()]() : <div/>);
 
   renderInfoDropdown = () => (
     <InfoDropdown label={'Valitse listasta'} selection={this.getEntry()} onChange={this.handleDropdownChange}
                   options={this.getEntryOptions()}/>
   );
 
+  getButtonText = () => {
+    const mode = this.getMode();
+    const option = this.getModeOptions().find((option) => option.value === mode);
+    return option ? option.label : 'Valitse pohja';
+  };
+
   renderContent = () => {
-    return (<div className={'content'}>
-      <SelectorButton layerAlign={'left'} label={'Valitse pohja'} onSelect={this.selectMode}
+    return (
+      <div className={'content'}>
+      <SelectorButton layerAlign={'left'} label={this.getButtonText()} onSelect={this.selectMode}
                       options={this.getModeOptions()}/>
       {this.renderMode()}
-    </div>);
+        </div>);
   };
 }

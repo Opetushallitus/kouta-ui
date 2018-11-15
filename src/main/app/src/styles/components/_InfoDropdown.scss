@@ -4,7 +4,9 @@
   margin: 10px;
   select {
     background-color: white;
-    min-height: 30px;
-    border-radius: 5px;
+    border-radius: 2px;
+    min-width: 500px;
+    min-height: 40px;
+    border: solid 1px #999999;
   }
 }

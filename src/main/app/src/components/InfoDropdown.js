@@ -17,26 +17,22 @@ export class InfoDropdown extends Component {
 
   getOptions = () => this.props.options || [];
 
-  getDefaultOption = () => <option key={"-"} value={"no-selection"} disabled={true}>Valitse koulutus</option>
+  getDefaultOption = () => <option key={"-"} value={"no-selection"}>Valitse koulutus</option>
 
-  renderOptions = () => this.getOptions() ?
-    [this.getDefaultOption()].concat(this.getOptions().map(this.renderOption))
-    : null;
+  renderOptions = () => {
+      const options = Array.isArray(this.getOptions()) ? this.getOptions() : Object.values(this.getOptions());
+      return options ? [this.getDefaultOption()].concat(options.map(this.renderOption)) : [this.getDefaultOption()];
+  };
 
   hasOptions = () => this.getOptions().length > 0;
 
-  render = () => this.hasOptions() ? (
+  render = () => (
       <div className={"info-dropdown"}>
-        {this.getLabel()}
+        <span className={"label"}>{this.getLabel()}</span>
         <select value={this.getSelection()} onChange={this.handleChange}>
           {this.renderOptions()}
         </select>
       </div>
-  ) : (
-    <div className={"info-dropdown"}>
-      Valintoja ei ole saatavilla.
-    </div>
   )
-
 
 }

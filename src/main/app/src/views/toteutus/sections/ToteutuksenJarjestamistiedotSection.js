@@ -10,6 +10,7 @@ import {
 } from '../../../utils/optionListUtils';
 import {InfoHeader} from '../../../components/InfoHeader';
 import {ActionLink} from '../../../components/ActionLink';
+import {DropdownSelector} from '../../../components/DropdownSelector';
 
 class MaksunMaaraInput extends Component {
 
@@ -41,20 +42,39 @@ class StipendiEditor extends Component  {
 export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
 
   onMount = () => this.setState({
-      ...this.state,
-      lisattavaOsioOptions: this.getLisattavaOsioOptions(),
-      opetuskieliOptions: this.getOpetuskieliOptions(),
-      opetusaikaOptions: this.getOpetusaikaOptions(),
-      opetustapaOptions: this.getOpetustapaOptions(),
-      maksullisuusOptions: this.getBooleanOptions(),
-      lukuvuosimaksuOptions: this.getBooleanOptions(),
-      stipendiOptions: this.getBooleanOptions()
-    });
+    ...this.state,
+    lisattavaOsioOptions: this.getLisattavaOsioOptions(),
+    opetuskieliOptions: this.getOpetuskieliOptions(),
+    opetusaikaOptions: this.getOpetusaikaOptions(),
+    opetustapaOptions: this.getOpetustapaOptions(),
+    maksullisuusOptions: this.getBooleanOptions(),
+    lukuvuosimaksuOptions: this.getBooleanOptions(),
+    stipendiOptions: this.getBooleanOptions(),
+    lukukausiOptions: this.getLukukausiOptions(),
+    lukuvuosiOptions: this.getLukuvuosiOptions()
+  });
 
   getClassName = () => 'ToteutuksenJarjestamistiedotSection';
 
   getHeader = () => 'Toteutuksen järjestämistiedot';
 
+  //TODO: siirrä storeen
+  getLukukausiOptions = () => [
+    {
+      label: 'Kevät',
+      key: 'kevat'
+    },
+    {
+      label: 'Kesä',
+      key: 'kesa'
+    },
+    {
+      label: 'Syksy',
+      key: 'syksy'
+    }
+  ];
+
+  //TODO: siirrä storeen
   getOpetuskieliOptions = () => [
     {
       label: 'Suomi',
@@ -70,6 +90,7 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
     }
   ];
 
+  //TODO: siirrä storeen
   getOpetusaikaOptions= () => [
     {
       label: 'Päiväopetus',
@@ -85,6 +106,7 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
     }
   ];
 
+  //TODO: siirrä storeen
   getOpetustapaOptions = () => [
     {
       label: 'Lähiopiskelu',
@@ -96,6 +118,7 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
     }
   ];
 
+  //TODO: siirrä storeen
   getBooleanOptions = () => [
     {
       label: 'Ei',
@@ -107,6 +130,7 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
     }
   ];
 
+  //TODO: siirrä storeen
   getLisattavaOsioOptions = () => [
     {
       label: 'Opintojen rakenne',
@@ -139,6 +163,26 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
     {
       label: 'Yhteistyö muiden toimijoiden kanssa',
       key: 'yhteistyo'
+    }
+  ];
+
+  //TODO: siirrä storeen
+  getLukuvuosiOptions = () => [
+    {
+      label: '2019',
+      key: '2019'
+    },
+    {
+      label: '2020',
+      key: '2020'
+    },
+    {
+      label: '2021',
+      key: '2021'
+    },
+    {
+      label: '2022',
+      key: '2022'
     }
   ];
 
@@ -177,6 +221,10 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
 
   changeLukuvuosimaksuSelection = (change) => this.changeRadioSelection('lukuvuosimaksuOptions', change);
 
+  changeLukuvuosi = (change) => this.changeRadioSelection('lukuvuosiOptions', change);
+
+  changeLukukausi = (change) => this.changeRadioSelection('lukukausiOptions', change);
+
   renderLisattavaOsioTextAreas = () => this.getLisattavaOsioActiveOptions().map(entry => (
     <TextAreaField onChange={this.changeLisattavaOsioValue} id={entry.key} key={entry.key} label={entry.label}
                    value={entry.value}/>
@@ -199,41 +247,61 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
 
   renderContent = () => (
       <div className={'content'}>
-        <InfoHeader label={'Opetuskieli'}/>
-        <div className={'row'}>
-          <CheckboxSelector options={this.state.opetuskieliOptions} onChange={this.changeOpetuskieliSelection}/>
+        <div className={'column'}>
+          <InfoHeader label={'Opetuskieli'}/>
+          <div className={'row'}>
+            <CheckboxSelector options={this.state.opetuskieliOptions} onChange={this.changeOpetuskieliSelection}/>
+          </div>
+
+          <ActionLink label={'Lisää uusi kieli'} onClick={this.addNewLanguage}/>
+
+          <InfoHeader label={'Opetusaika'}/>
+          <RadiobuttonSelector options={this.state.opetusaikaOptions}
+                               onChange={this.changeOpetusaikaSelection}/>
+          <InfoHeader label={'Pääasiallinen opetustapa'}/>
+          <RadiobuttonSelector options={this.state.opetustapaOptions}
+                               onChange={this.changeOpetustapaSelection}/>
+          <InfoHeader label={'Onko opetus maksullista?'}/>
+
+          <div className={'option-controls-row'}>
+            <RadiobuttonSelector options={this.state.maksullisuusOptions}
+                                 onChange={this.changeMaksullisuusSelection}/>
+            {this.optionallyRenderMaksullisuusMaksunMaara()}
+          </div>
+
+          <InfoHeader label={'Onko lukuvuosimaksua?'}/>
+          <div className={'option-controls-row'}>
+            <RadiobuttonSelector options={this.state.lukuvuosimaksuOptions}
+                                 onChange={this.changeLukuvuosimaksuSelection}/>
+            {this.optionallyRenderLukuvuosiMaksunMaara()}
+          </div>
+          <InfoHeader label={'Onko stipendit käytössä?'}/>
+          <RadiobuttonSelector options={this.state.stipendiOptions}
+                               onChange={this.changeStipendiSelection}/>
+          {this.optionallyRenderStipendiEditor()}
+
+          <InfoHeader label={'Tieto suunnitelluista koulutuksen alkamisajankohdista'}/>
+
+          <div className={'koulutuksen-alkamisajankohta row'}>
+            <RadiobuttonSelector options={this.state.lukukausiOptions} onChange={this.changeLukukausi}/>
+            <span className={'label'}>Vuosi</span>
+            <DropdownSelector options={this.state.lukuvuosiOptions} prompt={'Valitse lukuvuosi'}
+                              onChange={this.changeLukuvuosi}/>
+          </div>
+
+          <div className={'toteutuksen-kuvaus column'}>
+            <InfoHeader label={'Toteutuksen kuvaus'}/>
+            <textarea className={'toteutuksen-kuvaus-textarea'}
+                      placeholder={'Kirjoita kuvaus miten koulutukssen toteutus järjestetään teidän oppilaitoksessanne'}/>
+            <span className={'info-span'}>Huom! Tämä teksti näkyy oppijalle Opintopolun sivuilla</span>
+          </div>
+
+          <InfoHeader label={'Valitse lisättävä osio'}/>
+          <CheckboxSelector options={this.state.lisattavaOsioOptions}
+                            onChange={this.changeLisattavaOsioSelection}/>
+          {this.renderLisattavaOsioTextAreas()}
         </div>
-
-        <ActionLink label={'Lisää uusi kieli'} onClick={this.addNewLanguage}/>
-
-        <InfoHeader label={'Opetusaika'}/>
-        <RadiobuttonSelector options={this.state.opetusaikaOptions}
-                             onChange={this.changeOpetusaikaSelection}/>
-        <InfoHeader label={'Pääasiallinen opetustapa'}/>
-        <RadiobuttonSelector options={this.state.opetustapaOptions}
-                             onChange={this.changeOpetustapaSelection}/>
-        <InfoHeader label={'Onko opetus maksullista?'}/>
-
-        <div className={'option-controls-row'}>
-          <RadiobuttonSelector options={this.state.maksullisuusOptions}
-                             onChange={this.changeMaksullisuusSelection}/>
-          {this.optionallyRenderMaksullisuusMaksunMaara()}
-        </div>
-
-        <InfoHeader label={'Onko lukuvuosimaksua?'}/>
-        <div className={'option-controls-row'}>
-          <RadiobuttonSelector options={this.state.lukuvuosimaksuOptions}
-                               onChange={this.changeLukuvuosimaksuSelection}/>
-          {this.optionallyRenderLukuvuosiMaksunMaara()}
-        </div>
-        <InfoHeader label={'Onko stipendit käytössä?'}/>
-        <RadiobuttonSelector options={this.state.stipendiOptions}
-                             onChange={this.changeStipendiSelection}/>
-        {this.optionallyRenderStipendiEditor()}
-        <InfoHeader label={'Valitse lisättävä osio'}/>
-        <CheckboxSelector options={this.state.lisattavaOsioOptions}
-                          onChange={this.changeLisattavaOsioSelection}/>
-        {this.renderLisattavaOsioTextAreas()}
       </div>
+
     )
 }

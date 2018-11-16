@@ -12,7 +12,7 @@
 
   .modal-box {
     background-color: white;
-
+    border-radius: 5px;
     width: 80vw;
     min-height: 300px;
     top: 50%;
@@ -34,7 +34,12 @@
       .modal-box-close-icon {
         cursor: pointer;
       }
-
     }
+    .modal-box-content {
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+    }
+
   }
 }

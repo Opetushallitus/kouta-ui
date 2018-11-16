@@ -40,4 +40,18 @@ body {
     display: flex;
     flex-direction: column;
   }
+
+  select {
+    height: 35px;
+    border-radius: 5px;
+    background-color: white;
+    option {
+      background-color: white
+    }
+  }
+
+  textarea {
+    border-radius: 5px;
+    height: 250px;
+  }
 }

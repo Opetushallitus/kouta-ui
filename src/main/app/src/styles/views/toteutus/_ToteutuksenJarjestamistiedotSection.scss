@@ -9,14 +9,17 @@
         min-height: 200px;
       }
     }
+
     .info-header {
       margin-bottom: 0;
     }
+
     input[type=text] {
       min-width: 0;
       width: 100px;
       margin-right: 10px;
     }
+
     .option-controls-row {
       @extend .row;
       align-items: flex-end !important;
@@ -26,12 +29,27 @@
         margin-bottom: 10px;
       }
     }
+
     .stipendi-editor {
       textarea {
         min-height: 200px;
         width: 100%;
       }
     }
+
+    .koulutuksen-alkamisajankohta {
+      .label {
+        margin-left: 20px;
+      }
+      .dropdown-selector {
+        margin-left: 10px;
+      }
+    }
+
+    .toteutuksen-kuvaus-textarea {
+      margin-top: 10px;
+    }
+
 
   }
 }

@@ -1,12 +1,12 @@
 import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
-import {ToteutuksenHautBox} from './toteutuksen-haut/ToteutuksenHautBox';
+import ToteutuksenHautBox from './toteutuksen-haut/ToteutuksenHautBox';
 
 export class ToteutuksenHautSection extends AbstractSection {
 
   onMount = () => this.setState({
     ...this.state,
-    modalBoxVisible: true
+    modalBoxVisible: false
   });
 
   getClassName = () => 'ToteutuksenHautSection';

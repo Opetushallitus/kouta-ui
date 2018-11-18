@@ -15,22 +15,26 @@ export const HaunLiitetytHakukohteetStore = () => setStates({
       {
         id: 'nimi',
         index: 1,
+        sortIndex: 0,
+        sortDirection: 'asc',
         title: 'Hakukohteen nimi',
-        sortOrder: 'DESCENDING',
         visible: true
       },
       {
         id: 'organisaatio',
         index: 2,
+        sortIndex: 1,
+        sortDirection: 'asc',
         title: 'Organisaatio',
-        sortOrder: 'DESCENDING',
         visible: true
       },
       {
         id: 'toimipiste',
         index: 3,
+        sortIndex: 2,
+        sortDirection: 'asc',
         title: 'Toimipiste',
-        sortOrder: 'DESCENDING',
+        sortOrder: 'asc',
         visible: true
       }
     ]

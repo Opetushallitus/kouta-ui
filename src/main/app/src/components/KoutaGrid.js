@@ -1,6 +1,6 @@
+import {sortBy} from 'lodash';
 import React, {Component} from 'react';
 import {getItemsOnPage} from '../utils/objectUtils';
-import {logResult} from '../utils/logging';
 
 export class KoutaGrid extends Component {
 
@@ -14,21 +14,34 @@ export class KoutaGrid extends Component {
     };
   }
 
-  getColumns = () => logResult(this.state.columns, 'KoutaGrid columns') || [];
+  getColumns = () => this.state.columns;
 
   getVisibleColumns = () => this.getColumns().filter(column => column.visible);
 
   getSortIconName = (column) => ({
-    'ASCENDING': 'arrow_drop_up',
-    'DESCENDING': 'arrow_drop_down'
-  }[column.sortOrder]);
+    'asc': 'arrow_drop_down',
+    'desc': 'arrow_drop_up'
+  }[column.sortDirection]);
 
-  changeSortOrder = (column) => {
-    //TODO: implementoi changeSortOrder
+  changeSortOrder = (changeColumn) => {
+    const sortDirection = changeColumn.sortDirection || 'asc';
+    const newsortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+    const columns = this.getColumns().map(column => column.id === changeColumn.id ? ({
+      ...column,
+      sortDirection: newsortDirection,
+      sortIndex: 0
+    }) : ({
+      ...column,
+      sortIndex: column.sortIndex + 1
+    }));
+    this.setState({
+      ...this.state,
+      columns
+    });
   };
 
-  renderSortIcon = (column) => column.sortOrder && (
-    <i className={'material-icons kouta-grid-header-column-sort-icon'}
+  renderSortIcon = (column) => column.sortDirection && (
+    <i className={'material-icons column-sort-icon'}
        onClick={() => this.changeSortOrder(column)}
     >
       {this.getSortIconName(column)}
@@ -44,14 +57,28 @@ export class KoutaGrid extends Component {
     </th>
   );
 
-  getColumnByIndex = (colIndex) => this.getColumns()[colIndex];
+  getColumnsSortedBySortIndex = () => sortBy(this.getVisibleColumns(), 'sortIndex', 'asc');
 
   getData = () => this.state.data || [];
 
   sortData = (data) => {
-    //TODO: implement data sorting;
-    return [...data];
+    const columns = this.getColumnsSortedBySortIndex();
+    return this.sortAlphabetically(data, columns[0]);
   };
+
+  //TODO: implement sort based on multiple fields
+  sortAlphabetically = (array, column) => array.sort((a, b) => {
+    const sortDirectionAmplifier = column.sortDirection === 'desc' ? -1 : 1;
+    const nameA = a[column.id].toLowerCase();
+    const nameB = b[column.id].toLowerCase();
+    if (nameA < nameB) {
+      return -1 * sortDirectionAmplifier;
+    }
+    if (nameA > nameB) {
+      return 1 * sortDirectionAmplifier;
+    }
+    return 0;
+  });
 
   getSortedData = () => this.sortData(this.getData());
 

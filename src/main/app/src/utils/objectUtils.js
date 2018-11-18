@@ -53,3 +53,24 @@ export const removeDuplicatesByFeature = (items, getFeatureValue) => Object.valu
   ...itemMap,
   [getFeatureValue(item)]: item
 }), {}));
+
+export const paginateItems = (items, pageSize) => {
+  let currentPage = [];
+  const pages = [];
+  items.forEach(item => {
+    if (currentPage.length === pageSize) {
+      pages.push(currentPage);
+      currentPage = [];
+    }
+    currentPage.push(item);
+  });
+  if (currentPage.length > 0) {
+    pages.push(currentPage);
+  }
+  return pages;
+}
+
+export const getItemsOnPage = (allItems, pageSize, pageIndex) => {
+  const pages = paginateItems(allItems, pageSize);
+  return (pages.length <= pageIndex) ? [] : pages[pageIndex];
+};

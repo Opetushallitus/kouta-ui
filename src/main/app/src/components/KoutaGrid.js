@@ -82,9 +82,9 @@ export class KoutaGrid extends Component {
 
   getSortedData = () => this.sortData(this.getData());
 
-  renderCell = (dataCell, colId) => (
+  renderCell = (dataItem, colId) => (
     <td className={'kouta-grid-data-cell'}>
-      {dataCell[colId]}
+      {dataItem[colId]}
     </td>
   );
 

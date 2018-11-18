@@ -24,14 +24,34 @@ export class HaunLiitetytKohteetSection extends AbstractSection {
     })
   });
 
+
+  toggleCellSelection = (dataItem) => {
+    //TODO: implement data item selection
+  }
+
+  getRenderFunctionByColumnId = (columnId) => ({
+    'nimi':  (dataItem, colId) => (
+      <td className={'kouta-grid-data-cell hakukohde-cell'} onClick={() => this.toggleCellSelection(dataItem)}>
+        {dataItem[colId]}
+      </td>
+    )
+  }[columnId]);
+
+
+  appendRenderFunction = (column) => ({
+    ...column,
+    renderCell: this.getRenderFunctionByColumnId(column.id)
+  })
+
   getGridColumns = () => {
-    return this.state.gridColumns || [];
+    return (this.state.gridColumns || []).map(this.appendRenderFunction);
   };
 
   getEntries = () => this.state.entries || [];
 
   renderContent = () => (
     <div className={'column'}>
+      <span>Tämä haku on liitetty seuraaviin hakukohteisiin</span>
       <KoutaGrid columns={this.getGridColumns()} data={this.getEntries()} pageIndex={0} pageSize={100}/>
     </div>
   );

@@ -2,19 +2,19 @@ import {sortBy} from 'lodash';
 import React, {Component} from 'react';
 import {getItemsOnPage} from '../utils/objectUtils';
 
+const classNames = require('classnames');
+
 export class KoutaGrid extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      columns: props.columns,
-      data: props.data,
       currentPageIndex: props.currentPageIndex || 0,
       pageSize: props.pageSize || 10
     };
   }
 
-  getColumns = () => this.state.columns;
+  getColumns = () => this.props.columns || [];
 
   getVisibleColumns = () => this.getColumns().filter(column => column.visible);
 
@@ -34,10 +34,7 @@ export class KoutaGrid extends Component {
       ...column,
       sortIndex: column.sortIndex + 1
     }));
-    this.setState({
-      ...this.state,
-      columns
-    });
+    this.props.onColumnChange(columns);
   };
 
   renderSortIcon = (column) => column.sortDirection && (
@@ -50,7 +47,7 @@ export class KoutaGrid extends Component {
 
   renderHeaderColumn = (column) => (
     <th>
-      <span className={'kouta-grid-header-column-title'}>
+      <span className={'header-column-title'}>
         {column.title}
       </span>
       {this.renderSortIcon(column)}
@@ -59,7 +56,7 @@ export class KoutaGrid extends Component {
 
   getColumnsSortedBySortIndex = () => sortBy(this.getVisibleColumns(), 'sortIndex', 'asc');
 
-  getData = () => this.state.data || [];
+  getData = () => this.props.data || [];
 
   sortData = (data) => {
     const columns = this.getColumnsSortedBySortIndex();
@@ -83,7 +80,7 @@ export class KoutaGrid extends Component {
   getSortedData = () => this.sortData(this.getData());
 
   renderCell = (dataItem, colId) => (
-    <td className={'kouta-grid-data-cell'}>
+    <td className={'data-cell'}>
       {dataItem[colId]}
     </td>
   );
@@ -93,8 +90,10 @@ export class KoutaGrid extends Component {
     return renderFunction(dataCell, column.id);
   };
 
-  renderDataItemAsRow = (dataItem) => (
-    <tr className={'kouta-grid-data-row'}>
+  getRowClass = (dataItem) => dataItem.active && 'active';
+
+  renderDataItemAsRow = (dataItem, index) => (
+    <tr key={index} className={classNames('data-row', this.getRowClass(dataItem))}>
       {this.getVisibleColumns().map(column => this.renderDataCell(column, dataItem))}
     </tr>
   );
@@ -113,15 +112,17 @@ export class KoutaGrid extends Component {
   renderDataRows = () => this.getEntriesOnCurrentPage().map(this.renderDataItemAsRow);
 
   renderHeaderRow = () => (
-    <tr className={'kouta-grid-header-row'}>
+    <tr className={'header-row'}>
       {this.getVisibleColumns().map(this.renderHeaderColumn)}
     </tr>
   );
 
   render = () => (
     <table className={'kouta-grid'}>
+      <tbody>
       {this.renderHeaderRow()}
       {this.renderDataRows()}
+      </tbody>
     </table>
   );
 }

@@ -3,7 +3,7 @@ import {AbstractSection} from '../../../components/AbstractSection';
 import {connectComponent} from '../../../utils/stateUtils';
 import {
   APP_STATE_HAUN_LIITETYT_HAKUKOHTEET_ENTRIES,
-  APP_STATE_HAUN_LIITETYT_HAKUKOHTEET_GRID_CONFIG
+  APP_STATE_HAUN_LIITETYT_HAKUKOHTEET_GRID_CONFIG, deselectRows, toggleHakukohdeActive, updateColumns
 } from '../../../stores/haku/HaunLiitetytHakukohteetStore';
 import {KoutaGrid} from '../../../components/KoutaGrid';
 
@@ -24,14 +24,13 @@ export class HaunLiitetytKohteetSection extends AbstractSection {
     })
   });
 
+  handleClearButtonClick = () => deselectRows();
 
-  toggleCellSelection = (dataItem) => {
-    //TODO: implement data item selection
-  }
+  toggleCellSelection = (event) => toggleHakukohdeActive(event.target.getAttribute('data-id'));
 
   getRenderFunctionByColumnId = (columnId) => ({
     'nimi':  (dataItem, colId) => (
-      <td className={'kouta-grid-data-cell hakukohde-cell'} onClick={() => this.toggleCellSelection(dataItem)}>
+      <td className={'kouta-grid-data-cell hakukohde-cell'} data-id={dataItem.oid} onClick={this.toggleCellSelection}>
         {dataItem[colId]}
       </td>
     )
@@ -47,12 +46,18 @@ export class HaunLiitetytKohteetSection extends AbstractSection {
     return (this.state.gridColumns || []).map(this.appendRenderFunction);
   };
 
+  onColumnChange = (columns) => updateColumns(columns);
+
   getEntries = () => this.state.entries || [];
 
   renderContent = () => (
-    <div className={'column'}>
+    <div className={'content'}>
       <span>Tämä haku on liitetty seuraaviin hakukohteisiin</span>
-      <KoutaGrid columns={this.getGridColumns()} data={this.getEntries()} pageIndex={0} pageSize={100}/>
+      <KoutaGrid columns={this.getGridColumns()}
+                 onColumnChange={this.onColumnChange}
+                 data={this.getEntries()}
+                 pageIndex={0}
+                 pageSize={100}/>
     </div>
   );
 }

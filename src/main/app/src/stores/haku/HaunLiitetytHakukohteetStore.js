@@ -1,10 +1,10 @@
-import {setStates} from '../../utils/stateUtils';
+import {getState, setState, setStates, updateState} from '../../utils/stateUtils';
 
 export const APP_STATE_HAUN_LIITETYT_HAKUKOHTEET_ENTRIES = 'APP_STATE_HAUN_LIITETYT_HAKUKOHTEET_ENTRIES';
 export const APP_STATE_HAUN_LIITETYT_HAKUKOHTEET_GRID_CONFIG = 'APP_STATE_HAUN_LIITETYT_HAKUKOHTEET_GRID_CONFIG;';
 
 export const HaunLiitetytHakukohteetStore = () => setStates({
-  [APP_STATE_HAUN_LIITETYT_HAKUKOHTEET_ENTRIES]: getLiitetytHakukohteetEntries(),
+  [APP_STATE_HAUN_LIITETYT_HAKUKOHTEET_ENTRIES]: mockLiitetytHakukohteetEntries(),
   [APP_STATE_HAUN_LIITETYT_HAKUKOHTEET_GRID_CONFIG]: {
     columns: [
       {
@@ -43,14 +43,13 @@ export const HaunLiitetytHakukohteetStore = () => setStates({
 
 //TODO: replace this with hakukohde entries coming from backend over ajax. This is for temporary demo purpose.
 
-const getLiitetytHakukohteetEntries = () => [
+const mockLiitetytHakukohteetEntries = () => [
   {
     nimi: 'Sosiaali- ja terveysalan perustutkinto',
     organisaatio: 'Koulutuskeskus Salpaus',
     toimipiste: 'Lahti, Katsastajankatu',
     oid: '1'
   },
-
   {
     nimi: 'Sosiaali- ja terveysalan perustutkinto, PK',
     organisaatio: 'Koulutuskeskus Salpaus',
@@ -123,5 +122,26 @@ const getLiitetytHakukohteetEntries = () => [
     toimipiste: 'Lahti, Katsastajankatu',
     oid: '13'
   }
-
 ];
+
+const getHaunLiitetytHakukohteetEntries = () => getState(APP_STATE_HAUN_LIITETYT_HAKUKOHTEET_ENTRIES);
+
+export const toggleHakukohdeActive = (oid) => {
+  const entries = getHaunLiitetytHakukohteetEntries().map(iEntry => iEntry.oid === oid ? ({
+    ...iEntry,
+    active: !(iEntry.active === true)
+  }) : iEntry);
+  setState(APP_STATE_HAUN_LIITETYT_HAKUKOHTEET_ENTRIES, entries);
+};
+
+export const updateColumns = (columns) => updateState(APP_STATE_HAUN_LIITETYT_HAKUKOHTEET_GRID_CONFIG, {
+  columns: columns
+});
+
+export const deselectRows = () => {
+  const entries = getHaunLiitetytHakukohteetEntries().map(iEntry => ({
+    ...iEntry,
+    active: false
+  }));
+  setState(APP_STATE_HAUN_LIITETYT_HAKUKOHTEET_ENTRIES, entries);
+};

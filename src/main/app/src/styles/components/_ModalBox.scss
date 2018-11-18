@@ -17,6 +17,9 @@
     min-height: 300px;
     top: 50%;
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
 
     .modal-box-header {
       display: flex;
@@ -26,6 +29,7 @@
       background-color: #2da0c7;
       padding: 10px;
       font-size: 20px;
+      border-radius: 5px 5px 0 0;
 
       .modal-box-title {
         margin-left: 10px;
@@ -37,9 +41,18 @@
     }
     .modal-box-content {
       display: flex;
+      flex-grow: 1;
       flex-direction: column;
       padding: 10px;
     }
 
+    .modal-box-footer {
+      justify-content: space-between;
+      padding: 10px;
+      border-top-color: #2da0c7;
+      border-top-width: 2px;
+      border-top-style: solid;
+
+    }
   }
 }

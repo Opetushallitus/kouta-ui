@@ -19,6 +19,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
+    "lodash": "^4.17.11",
     "oph-urls-js": "github:Opetushallitus/oph-urls-js",
     "oph-virkailija-style-guide": "github:Opetushallitus/virkailija-styles",
     "superagent": "^3.8.3",

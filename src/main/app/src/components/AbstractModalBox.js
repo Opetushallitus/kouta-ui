@@ -25,7 +25,9 @@ export class AbstractModalBox extends Component {
   );
 
   renderFooter = () => (
-    <div className={'modal-box-footer'}>
+    <div className={'modal-box-footer button-container'}>
+      <button className={'secondary big'} onClick={this.props.onClose}>Peruuta</button>
+      <button className={'primary big'} onClick={this.props.onClose}>Jatka</button>
     </div>
   );
 

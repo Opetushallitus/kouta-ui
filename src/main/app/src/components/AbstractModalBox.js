@@ -34,6 +34,7 @@ export class AbstractModalBox extends Component {
     <div className={'modal-box-footer button-container'}>
       <button className={'secondary big'} onClick={this.onCancel}>Peruuta</button>
       <button className={'primary big'} onClick={this.onSubmit}>Jatka</button>
+
     </div>
   );
 

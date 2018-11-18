@@ -60,7 +60,6 @@ class ToteutuksenHautBox extends AbstractModalBox {
     dropdownVisible: true
   }, callback);
 
-  //TODO: replace this with state update in store when the desired functionality has been confirmed.
   handleDropdownChange = () => {}
 
   renderInfoDropdown = () => this.state.dropdownVisible &&

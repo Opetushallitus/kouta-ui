@@ -124,10 +124,10 @@ export class AbstractSection extends Component {
   getSupportedLanguages = () => this.state.supportedLanguages || [];
 
   renderHeader = () => (
-      <div className={classNames("header", this.getHeaderCssClass())} onClick={this.toggleState}>
+      <div className={classNames("header", this.getHeaderCssClass())} >
         <div className={classNames("title")}>{this.getNumberedHeader()}</div>
         {this.renderLanguageBar()}
-        <div className={classNames("controller", this.getControllerCssClass())}>
+        <div className={classNames("controller", this.getControllerCssClass())} onClick={this.toggleState}>
           <i className="material-icons">{this.getControlIcon()}</i>
         </div>
       </div>

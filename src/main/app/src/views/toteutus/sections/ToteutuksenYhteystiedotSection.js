@@ -1,7 +1,7 @@
-import React from 'react';
 import {APP_STATE_TOTEUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES} from '../../../config/states';
 import {
-  APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT, clearValues,
+  APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT,
+  clearValues,
   storeValues
 } from '../../../stores/toteutus/ToteutuksenYhteystiedotStore';
 import {AbstractYhteystiedotSection} from '../../../components/AbstractYhteystiedotSection';

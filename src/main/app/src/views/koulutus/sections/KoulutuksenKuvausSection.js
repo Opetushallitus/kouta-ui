@@ -12,7 +12,7 @@ export class KoulutuksenKuvausSection extends AbstractSection {
 
   getHeader = () => 'Koulutuksen kuvaus';
 
-  getSupportedLanguagesStateName = () => APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES;
+  getStateNameForSupportedLanguages = () => APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES;
 
   onMount = () => connectComponent(this, {
     [APP_STATE_KOULUTUKSEN_TIEDOT]: (state) => this.setState({

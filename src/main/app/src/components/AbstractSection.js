@@ -45,12 +45,12 @@ export class AbstractSection extends Component {
         ...this.state,
         activeTabId: sectionMap[this.getClassName()]
       }),
-      [this.getSupportedLanguagesStateName()]: (supportedLanguages) =>
+      [this.getStateNameForSupportedLanguages()]: (supportedLanguages) =>
         this.setState({...this.state, supportedLanguages})
     });
   }
 
-  getSupportedLanguagesStateName = () => 'REDEFINE_STATE_NAME_IN_SUBCLASS';
+  getStateNameForSupportedLanguages = () => 'REDEFINE_STATE_NAME_IN_SUBCLASS';
 
   getClassName = () => 'AbstractSection';
 

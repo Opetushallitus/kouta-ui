@@ -5,19 +5,19 @@ import {broadcast, connectComponent} from '../utils/stateUtils';
 export class AbstractNimiSection extends AbstractSection {
 
   onMount = () => connectComponent(this, {
-    [this.getTranslationMapStateName()]: (translationMap) => this.setState({...this.state, translationMap})
+    [this.getStateNameForTranslationMap()]: (translationMap) => this.setState({...this.state, translationMap})
   });
 
-  getTranslationMapStateName = () => {
-    throw new Error('AbstractNimiSection:getTranslationMapStateName(): implement in subclass!');
+  getStateNameForTranslationMap = () => {
+    throw new Error('AbstractNimiSection:getStateNameForTranslationMap(): implement in subclass!');
   };
 
-  getSupportedLanguagesStateName = () => {
-    throw new Error('AbstractNimiSection:getSupportedLanguagesStateName(): implement in subclass!');
+  getStateNameForSupportedLanguages = () => {
+    throw new Error('AbstractNimiSection:getStateNameForSupportedLanguages(): implement in subclass!');
   };
 
-  getClearTranslationMapEventName = () => {
-    throw new Error('AbstractNimiSection:getClearTranslationMapEventName(): implement in subclass!');
+  getEventNameForClearTranslationMap = () => {
+    throw new Error('AbstractNimiSection:getEventNameForClearTranslationMap(): implement in subclass!');
   }
 
   getHeader = () => {
@@ -38,7 +38,7 @@ export class AbstractNimiSection extends AbstractSection {
 
   getTranslation = () => this.getTranslationMap()[this.getActiveTabId()] || '';
 
-  onClearButtonClick = () => broadcast(this.getClearTranslationMapEventName());
+  onClearButtonClick = () => broadcast(this.getEventNameForClearTranslationMap());
 
   updateTranslation = (event) => {
     const value = event.target.value;

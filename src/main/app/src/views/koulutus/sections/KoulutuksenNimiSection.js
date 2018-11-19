@@ -21,11 +21,11 @@ export class KoulutuksenNimiSection extends AbstractNimiSection {
     })
   });
 
-  getTranslationMapStateName = () => APP_STATE_KOULUTUKSEN_NIMI_TRANSLATION_MAP;
+  getStateNameForTranslationMap = () => APP_STATE_KOULUTUKSEN_NIMI_TRANSLATION_MAP;
 
-  getSupportedLanguagesStateName = () => APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES;
+  getStateNameForSupportedLanguages = () => APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES;
 
-  getClearTranslationMapEventName = () => APP_EVENT_KOULUTUKSEN_NIMI_TRANSLATION_CLEAR;
+  getEventNameForClearTranslationMap = () => APP_EVENT_KOULUTUKSEN_NIMI_TRANSLATION_CLEAR;
 
   getClassName = () => 'KoulutuksenNimiSection';
 
@@ -37,10 +37,5 @@ export class KoulutuksenNimiSection extends AbstractNimiSection {
 
   getErrorInstruction = () => 'Valitse ensin koulutus.';
 
-  /*onSubmitButtonClick = () => {
-    const state = this.state;
-    console.log('KoulutuksenNimiSecion:onSubmitButtonClick:state', state);
-    setKoulutuksenNimet(state.translationMap)
-  }*/
 }
 

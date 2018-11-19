@@ -1,13 +1,19 @@
-import {initState, setState} from '../../utils/stateUtils';
+import {setState, updateState} from '../../utils/stateUtils';
 import {APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT} from '../../config/states';
 
-export const ToteutuksenYhteystiedotStore = () => initState(APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT, getInitialState());
+export const ToteutuksenYhteystiedotStore = () => setState(APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT, {
+  valueMap: getInitialValueMap(),
+  fields: getFields()
+});
 
-export const clearValues = () => setState(APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT, getInitialState());
+export const clearValues = () => updateState(APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT, {
+  valueMap: getInitialValueMap(),
+  fields: getFields()
+});
 
-export const storeValues = (values) => setState(APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT, values);
+export const storeValues = (valueMap) => updateState(APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT, {valueMap});
 
-const getInitialState = () => ({
+const getInitialValueMap = () => ({
   nimi: {
     fi: '',
     sv: '',
@@ -29,3 +35,22 @@ const getInitialState = () => ({
     en: ''
   }
 });
+
+const getFields = () => [
+  {
+    id: 'nimi',
+    label: 'Nimi'
+  },
+  {
+    id: 'titteli',
+    label: 'Titteli?'
+  },
+  {
+    id: 'sahkoposti',
+    label: 'Sähköposti'
+  },
+  {
+    id: 'puhelinnumero',
+    label: 'Puhelinnumero'
+  }
+];

@@ -3,18 +3,15 @@ import {AbstractSection} from '../../../components/AbstractSection';
 import {CheckboxSelector} from '../../../components/CheckboxSelector';
 import {RadiobuttonSelector} from '../../../components/RadiobuttonSelector';
 import {TextAreaField} from '../../../components/TextAreaField';
-import {
-  updateMultiSelectionOptionActivation,
-  updateOptionValue,
-  updateSingleSelectionOptionActivation
-} from '../../../utils/optionListUtils';
 import {InfoHeader} from '../../../components/InfoHeader';
 import {ActionLink} from '../../../components/ActionLink';
 import {DropdownSelector} from '../../../components/DropdownSelector';
 import {connectComponent} from '../../../utils/stateUtils';
 import {
   APP_STATE_TOTEUTUKSEN_JARJESTAMISTIEDOT_OPTIONS,
-  changeCheckboxSelection, changeRadioSelection, changeSelectionValue
+  changeCheckboxSelection,
+  changeRadioSelection,
+  changeSelectionValue
 } from '../../../stores/toteutus/ToteutuksenJarjestamistiedotStore';
 
 class MaksunMaaraInput extends Component {

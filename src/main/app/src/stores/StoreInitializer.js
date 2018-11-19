@@ -28,7 +28,6 @@ import {KoulutuksenTiedotStore} from './koulutus/KoulutuksenTiedotStore';
 import {HaunHakutapaStore} from './haku/HaunHakutapaStore';
 import {HaunLiitetytHakukohteetStore} from './haku/HaunLiitetytHakukohteetStore';
 import {HaunYhteystiedotStore} from './haku/HaunYhteystiedotStore';
-import {ToteutuksenJarjestamistiedotStore} from './toteutus/ToteutuksenJarjestamistiedotStore';
 
 const initGenericStores = () => {
   UrlStore();

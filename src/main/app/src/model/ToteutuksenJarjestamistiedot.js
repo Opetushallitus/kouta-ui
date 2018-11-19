@@ -1,5 +1,5 @@
 //TODO: Tässä tiedostossa olevat datat korvataan Demon jälkeen API:sta tulevilla tai osassa laskennallislla arvoilla.
-//Storessa
+
 export const getLukukausiOptions = () => [
   {
     label: 'Kevät',
@@ -15,7 +15,6 @@ export const getLukukausiOptions = () => [
   }
 ];
 
-//TODO: siirretään storeen ja mahdollisesti tulemaan API:sta. Toteutettu näin tässä vaiheessa demon mahdollistamiseksi.
 export const getOpetuskieliOptions = () => [
   {
     label: 'Suomi',
@@ -31,7 +30,6 @@ export const getOpetuskieliOptions = () => [
   }
 ];
 
-//TODO: siirretään storeen ja mahdollisesti tulemaan API:sta. Toteutettu näin tässä vaiheessa demon mahdollistamiseksi.
 export const getOpetusaikaOptions= () => [
   {
     label: 'Päiväopetus',
@@ -47,7 +45,6 @@ export const getOpetusaikaOptions= () => [
   }
 ];
 
-//TODO: siirretään storeen ja mahdollisesti tulemaan API:sta. Toteutettu näin tässä vaiheessa demon mahdollistamiseksi.
 export const getOpetustapaOptions = () => [
   {
     label: 'Lähiopiskelu',
@@ -59,7 +56,6 @@ export const getOpetustapaOptions = () => [
   }
 ];
 
-//TODO: siirretään storeen ja mahdollisesti tulemaan API:sta. Toteutettu näin tässä vaiheessa demon mahdollistamiseksi.
 export const getBooleanOptions = () => [
   {
     label: 'Ei',
@@ -71,7 +67,6 @@ export const getBooleanOptions = () => [
   }
 ];
 
-//TODO: siirretään storeen ja mahdollisesti tulemaan API:sta. Toteutettu näin tässä vaiheessa demon mahdollistamiseksi.
 export const getLisattavaOsioOptions = () => [
   {
     label: 'Opintojen rakenne',
@@ -107,7 +102,6 @@ export const getLisattavaOsioOptions = () => [
   }
 ];
 
-//TODO: siirrä storeen ja generoidaan laskennallisesti.
 export const getLukuvuosiOptions = () => [
   {
     label: '2019',

@@ -32,7 +32,6 @@ const getInitialState = () => ({
   }
 );
 
-
 export const selectHakemuspalvelunLomake = (change) => updateState(APP_STATE_HAUN_LOMAKKEET, {
   hakemuspalvelunLomakeOptions: updateSingleSelectionOptionActivation(getHakemuspalvelunLomakeOptions(), change)
 });

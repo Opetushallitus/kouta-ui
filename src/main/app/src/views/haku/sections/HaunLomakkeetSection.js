@@ -2,7 +2,7 @@ import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
 import {
   APP_STATE_HAUN_LOMAKKEET,
-  changeLomakkeenTyyppiSelection,
+  changeLomakkeenTyyppiSelection, clearSelections,
   HAKULOMAKE_TYPE,
   selectHakemuspalvelunLomake,
   selectJarjestelmalomake,
@@ -15,12 +15,10 @@ import {DropdownSelector} from '../../../components/DropdownSelector';
 export class HaunLomakkeetSection extends AbstractSection {
 
   onMount = () => connectComponent(this, {
-      [APP_STATE_HAUN_LOMAKKEET]: (newState) => {
-        this.setState({
+      [APP_STATE_HAUN_LOMAKKEET]: (newState) => this.setState({
           ...this.state,
           ...newState
-        });
-      }
+      })
     }
   );
 
@@ -54,8 +52,7 @@ export class HaunLomakkeetSection extends AbstractSection {
 
   getMuuLomakeValue = () => this.state.muuLomakeValue;
 
-  changeMuuLomakeUrl = (changedText) => {
-  };
+  onClearButtonClick = () => clearSelections();
 
   updateMuuLomakeValue = (event) => updateMuuLomakeValue(event.target.value);
 

@@ -1,4 +1,4 @@
-import {getState, setState, updateState} from '../../utils/stateUtils';
+import {getState, initState, setState, updateState} from '../../utils/stateUtils';
 import {getActiveKey, updateSingleSelectionOptionActivation} from '../../utils/optionListUtils';
 
 export const APP_STATE_HAUN_LOMAKKEET = 'APP_STATE_HAUN_LOMAKKEET';
@@ -10,14 +10,7 @@ export const HAKULOMAKE_TYPE = {
   EI_SAHKOINEN: 'ei_sahkoinen'
 };
 
-export const HaunLomakkeetStore = () => setState(APP_STATE_HAUN_LOMAKKEET, {
-  lomakkeenTyyppiOptions: getHakulomakkeenTyyppiInitialOptions(),
-  jarjestelmalomakeOptions: getJarjestelmalomakeInitialOptions(),
-  hakemuspalvelunLomakeOptions: getHakemuspalvelunLomakeInitialOptions(),
-  form: {
-    muuLomake: 'Muu lomake jee je jee'
-  }
-});
+export const HaunLomakkeetStore = () => initState(APP_STATE_HAUN_LOMAKKEET, getInitialState());
 
 export const changeLomakkeenTyyppiSelection = (change) => {
   const lomakkeenTyyppiOptions = updateSingleSelectionOptionActivation(getHakulomakkeenTyyppiOptions(), change);
@@ -27,6 +20,18 @@ export const changeLomakkeenTyyppiSelection = (change) => {
     activeLomakkeenTyyppi
   });
 };
+
+const getInitialState = () => ({
+    activeLomakkeenTyyppi: null,
+    lomakkeenTyyppiOptions: getHakulomakkeenTyyppiInitialOptions(),
+    jarjestelmalomakeOptions: getJarjestelmalomakeInitialOptions(),
+    hakemuspalvelunLomakeOptions: getHakemuspalvelunLomakeInitialOptions(),
+    form: {
+      muuLomake: ''
+    }
+  }
+);
+
 
 export const selectHakemuspalvelunLomake = (change) => updateState(APP_STATE_HAUN_LOMAKKEET, {
   hakemuspalvelunLomakeOptions: updateSingleSelectionOptionActivation(getHakemuspalvelunLomakeOptions(), change)
@@ -43,6 +48,8 @@ export const updateMuuLomakeValue = (value) => {
     }
   });
 };
+
+export const clearSelections = () => setState(APP_STATE_HAUN_LOMAKKEET, getInitialState());
 
 const getHakulomakkeenTyyppiOptions = () => getState(APP_STATE_HAUN_LOMAKKEET, 'lomakkeenTyyppiOptions');
 
@@ -65,6 +72,8 @@ const getHakulomakkeenTyyppiInitialOptions = () => [
   }
 ];
 
+//TODO: change these to be loaded from API
+
 const getHakemuspalvelunLomakeInitialOptions = () => [
   {
     key: 'hakemuspalvelun-lomake-1',
@@ -80,6 +89,7 @@ const getHakemuspalvelunLomakeInitialOptions = () => [
   }
 ];
 
+//TODO: change these to be loaded from API
 const getJarjestelmalomakeInitialOptions = () => [
   {
     key: 'jarjestelmalomake-1',

@@ -3,14 +3,16 @@ import {AbstractSection} from '../../../components/AbstractSection';
 import {CheckboxSelector} from '../../../components/CheckboxSelector';
 import {RadiobuttonSelector} from '../../../components/RadiobuttonSelector';
 import {TextAreaField} from '../../../components/TextAreaField';
-import {
-  updateMultiSelectionOptionActivation,
-  updateOptionValue,
-  updateSingleSelectionOptionActivation
-} from '../../../utils/optionListUtils';
 import {InfoHeader} from '../../../components/InfoHeader';
 import {ActionLink} from '../../../components/ActionLink';
 import {DropdownSelector} from '../../../components/DropdownSelector';
+import {connectComponent} from '../../../utils/stateUtils';
+import {
+  APP_STATE_TOTEUTUKSEN_JARJESTAMISTIEDOT_OPTIONS,
+  changeCheckboxSelection,
+  changeRadioSelection,
+  changeSelectionValue
+} from '../../../stores/toteutus/ToteutuksenJarjestamistiedotStore';
 
 class MaksunMaaraInput extends Component {
 
@@ -41,189 +43,40 @@ class StipendiEditor extends Component  {
 
 export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
 
-  onMount = () => this.setState({
-    ...this.state,
-    lisattavaOsioOptions: this.getLisattavaOsioOptions(),
-    opetuskieliOptions: this.getOpetuskieliOptions(),
-    opetusaikaOptions: this.getOpetusaikaOptions(),
-    opetustapaOptions: this.getOpetustapaOptions(),
-    maksullisuusOptions: this.getBooleanOptions(),
-    lukuvuosimaksuOptions: this.getBooleanOptions(),
-    stipendiOptions: this.getBooleanOptions(),
-    lukukausiOptions: this.getLukukausiOptions(),
-    lukuvuosiOptions: this.getLukuvuosiOptions()
+  onMount = () => connectComponent(this, {
+    [APP_STATE_TOTEUTUKSEN_JARJESTAMISTIEDOT_OPTIONS]: (options) => this.setState({
+      ...this.state,
+      ...options
+    })
   });
 
   getClassName = () => 'ToteutuksenJarjestamistiedotSection';
 
   getHeader = () => 'Toteutuksen järjestämistiedot';
 
-  //TODO: siirrä storeen
-  getLukukausiOptions = () => [
-    {
-      label: 'Kevät',
-      key: 'kevat'
-    },
-    {
-      label: 'Kesä',
-      key: 'kesa'
-    },
-    {
-      label: 'Syksy',
-      key: 'syksy'
-    }
-  ];
-
-  //TODO: siirrä storeen
-  getOpetuskieliOptions = () => [
-    {
-      label: 'Suomi',
-      key: 'fi'
-    },
-    {
-      label: 'Ruotsi',
-      key: 'sv'
-    },
-    {
-      label: 'Englanti',
-      key: 'en'
-    }
-  ];
-
-  //TODO: siirrä storeen
-  getOpetusaikaOptions= () => [
-    {
-      label: 'Päiväopetus',
-      key: 'paivaopetus'
-    },
-    {
-      label: 'Iltaopetus',
-      key: 'iltaopetus'
-    },
-    {
-      label: 'Viikonloppuopetus',
-      key: 'viikonloppuopetus'
-    }
-  ];
-
-  //TODO: siirrä storeen
-  getOpetustapaOptions = () => [
-    {
-      label: 'Lähiopiskelu',
-      key: 'lahiopiskelu'
-    },
-    {
-      label: 'Etäopiskelu',
-      key: 'etaopiskelu'
-    }
-  ];
-
-  //TODO: siirrä storeen
-  getBooleanOptions = () => [
-    {
-      label: 'Ei',
-      key: 'ei'
-    },
-    {
-      label: 'Kyllä',
-      key: 'kylla'
-    }
-  ];
-
-  //TODO: siirrä storeen
-  getLisattavaOsioOptions = () => [
-    {
-      label: 'Opintojen rakenne',
-      key: 'opintojen-rakenne'
-    },
-    {
-      label: 'Jatko-opintomahdollisuudet',
-      key: 'jatko-opintomahdollisuudet'
-    },
-    {
-      label: 'Osaamisalan valinta',
-      key: 'osaamisalan-valinta'
-    },
-    {
-      label: 'Sisältö',
-      key: 'sisalto'
-    },
-    {
-      label: 'Uramahdollisuudet',
-      key: 'uramahdollisuudet'
-    },
-    {
-      label: 'Kohderyhmä',
-      key: 'kohderyhma'
-    },
-    {
-      label: 'Kansainvälistyminen',
-      key: 'kansainvalistyminen'
-    },
-    {
-      label: 'Yhteistyö muiden toimijoiden kanssa',
-      key: 'yhteistyo'
-    }
-  ];
-
-  //TODO: siirrä storeen
-  getLukuvuosiOptions = () => [
-    {
-      label: '2019',
-      key: '2019'
-    },
-    {
-      label: '2020',
-      key: '2020'
-    },
-    {
-      label: '2021',
-      key: '2021'
-    },
-    {
-      label: '2022',
-      key: '2022'
-    }
-  ];
-
   getLisattavaOsioActiveOptions = () => this.state.lisattavaOsioOptions.filter(entry => entry.active);
-
-  changeCheckboxSelection = (targetOptions, change) => this.setState({
-    ...this.state,
-    [targetOptions]: updateMultiSelectionOptionActivation(this.state[targetOptions], change)
-  });
-
-  changeRadioSelection = (targetOptions, change) => this.setState({
-    ...this.state,
-    [targetOptions]: updateSingleSelectionOptionActivation(this.state[targetOptions], change)
-  });
-
-  changeSelectionValue = (targetOptions, change) => this.setState({
-    ...this.state,
-    [targetOptions]: updateOptionValue(this.state[targetOptions], change)
-  });
 
   getRadioValue = (targetOptions) => (this.state[targetOptions].find(option => option.active) || {}).key
 
-  changeLisattavaOsioSelection = (change) => this.changeCheckboxSelection('lisattavaOsioOptions', change);
+  changeLisattavaOsioSelection = (change) => changeCheckboxSelection('lisattavaOsioOptions', change);
 
-  changeOpetuskieliSelection = (change) => this.changeCheckboxSelection('opetuskieliOptions', change);
+  changeOpetuskieliSelection = (change) => changeCheckboxSelection('opetuskieliOptions', change);
 
-  changeOpetusaikaSelection = (change) => this.changeRadioSelection('opetusaikaOptions', change);
+  changeOpetusaikaSelection = (change) => changeRadioSelection('opetusaikaOptions', change);
 
-  changeOpetustapaSelection = (change) => this.changeRadioSelection('opetustapaOptions', change);
+  changeOpetustapaSelection = (change) => changeRadioSelection('opetustapaOptions', change);
 
-  changeLisattavaOsioValue = (change) => this.changeSelectionValue('lisattavaOsioOptions', change);
+  changeLisattavaOsioValue = (change) => changeSelectionValue('lisattavaOsioOptions', change);
 
-  changeMaksullisuusSelection = (change) => this.changeRadioSelection('maksullisuusOptions', change);
+  changeMaksullisuusSelection = (change) => changeRadioSelection('maksullisuusOptions', change);
 
-  changeStipendiSelection = (change) => this.changeRadioSelection('stipendiOptions', change);
+  changeStipendiSelection = (change) => changeRadioSelection('stipendiOptions', change);
 
-  changeLukuvuosimaksuSelection = (change) => this.changeRadioSelection('lukuvuosimaksuOptions', change);
+  changeLukuvuosimaksuSelection = (change) => changeRadioSelection('lukuvuosimaksuOptions', change);
 
-  changeLukuvuosi = (change) => this.changeRadioSelection('lukuvuosiOptions', change);
+  changeLukuvuosi = (change) => changeRadioSelection('lukuvuosiOptions', change);
 
-  changeLukukausi = (change) => this.changeRadioSelection('lukukausiOptions', change);
+  changeLukukausi = (change) => changeRadioSelection('lukukausiOptions', change);
 
   renderLisattavaOsioTextAreas = () => this.getLisattavaOsioActiveOptions().map(entry => (
     <TextAreaField onChange={this.changeLisattavaOsioValue} id={entry.key} key={entry.key} label={entry.label}

@@ -26,6 +26,7 @@ import {HaunKohdejoukkoStore} from './haku/HaunKohdejoukkoStore';
 import {KoulutusOptionsStore} from './koulutus/KoulutusOptionsStore';
 import {KoulutuksenTiedotStore} from './koulutus/KoulutuksenTiedotStore';
 import {HaunHakutapaStore} from './haku/HaunHakutapaStore';
+import {ToteutuksenJarjestamistiedotStore} from './toteutus/ToteutuksenJarjestamistiedotStore';
 
 const initGenericStores = () => {
   UrlStore();
@@ -52,6 +53,7 @@ const initToteutusStores = () => {
   ToteutuksenOsaamisalaStore();
   ToteutuksenNimiStore();
   ToteutuksenYhteystiedotStore();
+  ToteutuksenJarjestamistiedotStore();
 }
 
 const initHakuStores = () => {

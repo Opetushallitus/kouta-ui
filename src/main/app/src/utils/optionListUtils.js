@@ -20,3 +20,5 @@ export const updateOptionValue = (options, change) => options.map(entry => ({
   ...entry,
   value: change.key === entry.key ? change.value : entry.value
 }));
+
+export const getActiveKey = (options) => (options.find(option => option.active) || {}).key;

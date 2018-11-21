@@ -32,7 +32,6 @@ const getInitialState = () => ({
   }
 );
 
-
 export const selectHakemuspalvelunLomake = (change) => updateState(APP_STATE_HAUN_LOMAKKEET, {
   hakemuspalvelunLomakeOptions: updateSingleSelectionOptionActivation(getHakemuspalvelunLomakeOptions(), change)
 });
@@ -41,13 +40,11 @@ export const selectJarjestelmalomake = (change) => updateState(APP_STATE_HAUN_LO
   jarjestelmalomakeOptions: updateSingleSelectionOptionActivation(getJarjestelmalomakeOptions(), change)
 });
 
-export const updateMuuLomakeValue = (value) => {
-  updateState(APP_STATE_HAUN_LOMAKKEET, {
-    form: {
-      muuLomake: value
-    }
-  });
-};
+export const updateMuuLomakeValue = (value) => updateState(APP_STATE_HAUN_LOMAKKEET, {
+  form: {
+    muuLomake: value
+  }
+});
 
 export const clearSelections = () => setState(APP_STATE_HAUN_LOMAKKEET, getInitialState());
 
@@ -73,7 +70,6 @@ const getHakulomakkeenTyyppiInitialOptions = () => [
 ];
 
 //TODO: change these to be loaded from API
-
 const getHakemuspalvelunLomakeInitialOptions = () => [
   {
     key: 'hakemuspalvelun-lomake-1',

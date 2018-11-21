@@ -5,7 +5,7 @@ import {HaunNimiSection} from './sections/HaunNimiSection';
 import {HaunKohdejoukkoSection} from './sections/HaunKohdejoukkoSection';
 import {HaunHakutapaSection} from './sections/HaunHakutapaSection';
 import {HaunAikataulutSection} from './sections/HaunAikataulutSection';
-import {HakulomakkeenValintaSection} from './sections/HakulomakkeenValintaSection';
+import {HaunLomakkeetSection} from './sections/HaunLomakkeetSection';
 import {HaunYhteystiedotSection} from './sections/HaunYhteystiedotSection';
 import {HaunLiitetytKohteetSection} from './sections/HaunLiitetytKohteetSection';
 
@@ -19,7 +19,7 @@ export class HakuView extends Component {
         <HaunKohdejoukkoSection orderNumber={"4"}/>
         <HaunHakutapaSection orderNumber={"5"}/>
         <HaunAikataulutSection orderNumber={"6"}/>
-        <HakulomakkeenValintaSection orderNumber={"7"}/>
+        <HaunLomakkeetSection orderNumber={"7"}/>
         <HaunYhteystiedotSection orderNumber={"8"}/>
         <HaunLiitetytKohteetSection orderNumber={"9"}/>
       </div>

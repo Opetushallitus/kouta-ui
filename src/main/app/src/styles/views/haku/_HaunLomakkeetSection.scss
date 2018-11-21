@@ -1,0 +1,17 @@
+.haun-lomakkeet-section {
+  .content {
+    align-items: flex-start;
+    .lomakkeen-tyyppi-selector {
+      margin-right: 40px;
+      padding-right: 40px;
+      border-right-width: 1px;
+      border-right-style: solid;
+      border-right-color: #888888;
+    }
+    .radiobutton-selector {
+      .option-list {
+        margin: 0;
+      }
+    }
+  }
+}

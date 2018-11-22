@@ -14,7 +14,7 @@ import {HakukohteenKieliversioStore} from './hakukohde/HakukohteenKieliversioSto
 import {ValintaperusteenKieliversioStore} from './valintaperusteet/ValintaperusteenKieliversioStore';
 import {ToteutuksenNimiStore} from './toteutus/ToteutuksenNimiStore';
 import {HaunNimiStore} from './haku/HaunNimiStore';
-import {HakukohteenNimiStore} from './hakukohde/HakukohteenNimiStore';
+import {HakukohteenPerustiedotStore} from './hakukohde/HakukohteenPerustiedotStore';
 import {ValintaperusteenNimiStore} from './valintaperusteet/ValintaperusteenNimiStore';
 import {HaunPohjaStore} from './haku/HaunPohjaStore';
 import {HakukohteenPohjaStore} from './hakukohde/HakukohteenPohjaStore';
@@ -74,7 +74,7 @@ const initHakuStores = () => {
 const initHakukohdeStores = () => {
   HakukohteenPohjaStore();
   HakukohteenKieliversioStore();
-  HakukohteenNimiStore();
+  HakukohteenPerustiedotStore();
   HakukohteenPohjakoulutusvaatimusStore();
 }
 

@@ -29,7 +29,6 @@ import {HaunHakutapaStore} from './haku/HaunHakutapaStore';
 import {ToteutuksenJarjestamistiedotStore} from './toteutus/ToteutuksenJarjestamistiedotStore';
 import {HaunLiitetytHakukohteetStore} from './haku/HaunLiitetytHakukohteetStore';
 import {HaunYhteystiedotStore} from './haku/HaunYhteystiedotStore';
-import {ToteutuksenJarjestamistiedotStore} from './toteutus/ToteutuksenJarjestamistiedotStore';
 import {HaunLomakkeetStore} from './haku/HaunLomakkeetStore';
 import {HakukohteenPohjakoulutusvaatimusStore} from './hakukohde/HakukohteenPohjakoulutusvaatimusStore';
 

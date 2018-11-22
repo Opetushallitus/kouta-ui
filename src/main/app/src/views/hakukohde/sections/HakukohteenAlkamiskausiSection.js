@@ -1,9 +1,9 @@
 import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
 
-export class HakukohteenKoulutuksenAlkamiskausiSection extends AbstractSection {
+export class HakukohteenAlkamiskausiSection extends AbstractSection {
 
-  getClassName = () => 'HakukohteenKoulutuksenAlkamiskausiSection';
+  getClassName = () => 'HakukohteenAlkamiskausiSection';
 
   getHeader = () => 'Koulutuksen alkamiskausi';
 

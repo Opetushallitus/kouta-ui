@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {HakukohteenPohjakoulutusvaatimusSection} from './sections/HakukohteenPohjakoulutusvaatimusSection';
 import {HakukohteenKieliversioSection} from './sections/HakukohteenKieliversioSection';
-import {HakukohteenNimiSection} from './sections/HakukohteenNimiSection';
+import {HakukohteenPerustiedotSection} from './sections/HakukohteenPerustiedotSection';
 import {HakukohteenHakuajatSection} from './sections/HakukohteenHakuajatSection';
 import {HakukohteenLomakeSection} from './sections/HakukohteenLomakeSection';
 import {HakukohteenKoulutuksenAlkamiskausiSection} from './sections/HakukohteenKoulutuksenAlkamiskausiSection';
@@ -15,7 +15,7 @@ export class HakukohdeView extends Component {
       <div className={"workflow-view"}>
         <HakukohteenPohjakoulutusvaatimusSection orderNumber={"1"}/>
         <HakukohteenKieliversioSection orderNumber={"2"}/>
-        <HakukohteenNimiSection orderNumber={"3"}/>
+        <HakukohteenPerustiedotSection orderNumber={'3'}/>
         <HakukohteenHakuajatSection orderNumber={"4"}/>
         <HakukohteenLomakeSection orderNumber={"5"}/>
         <HakukohteenKoulutuksenAlkamiskausiSection orderNumber={"6"}/>

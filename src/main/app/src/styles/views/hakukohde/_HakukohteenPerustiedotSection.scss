@@ -1,0 +1,12 @@
+.hakukohteen-perustiedot-section {
+  .content {
+    display: flex;
+    flex-direction: column;
+    .instruction-span {
+      margin-bottom: 0;
+    }
+    input {
+      margin-top: 10px;
+    }
+  }
+}

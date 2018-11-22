@@ -31,6 +31,20 @@ import {HaunLiitetytHakukohteetStore} from './haku/HaunLiitetytHakukohteetStore'
 import {HaunYhteystiedotStore} from './haku/HaunYhteystiedotStore';
 import {HaunLomakkeetStore} from './haku/HaunLomakkeetStore';
 import {HakukohteenPohjakoulutusvaatimusStore} from './hakukohde/HakukohteenPohjakoulutusvaatimusStore';
+import {HakukohteenLomakeStore} from './hakukohde/HakukohteenLomakeStore';
+import {HakukohteenHakuajatStore} from './hakukohde/HakukohteenHakuajatStore';
+import {HakukohteenAlkamiskausiStore} from './hakukohde/HakukohteenAlkamiskausiStore';
+import {HakukohteenAloituspaikatStore} from './hakukohde/HakukohteenAloituspaikatStore';
+import {HakukohteenValintaperusteenKuvausStore} from './hakukohde/HakukohteenValintaperusteenKuvausStore';
+import {HakukohteenValintakoeStore} from './hakukohde/HakukohteenValintakoeStore';
+import {HakukohteenTarvittavatLiitteetStore} from './hakukohde/HakukohteenTarvittavatLiitteetStore';
+import {ValintaperusteenSoraKuvausStore} from './valintaperusteet/ValintaperusteenSoraKuvausStore';
+import {ValintaperusteenKielitaitovaatimuksetStore} from './valintaperusteet/ValintaperusteenKielitaitovaatimuksetStore';
+import {ValintaperusteenVahimmaisehdotStore} from './valintaperusteet/ValintaperusteenVahimmaisehdotStore';
+import {ValintaperusteenOsaamistaustaStore} from './valintaperusteet/ValintaperusteenOsaamistaustaStore';
+import {ValintaperusteenHaunKohdejoukkoStore} from './valintaperusteet/ValintaperusteenHaunKohdejoukkoStore';
+import {ValintaperusteenValintatapaStore} from './valintaperusteet/ValintaperusteenValintatapaStore';
+import {ValintaperusteenHakutapaStore} from './valintaperusteet/ValintaperusteenHakutapaStore';
 
 const initGenericStores = () => {
   UrlStore();
@@ -76,12 +90,27 @@ const initHakukohdeStores = () => {
   HakukohteenKieliversioStore();
   HakukohteenPerustiedotStore();
   HakukohteenPohjakoulutusvaatimusStore();
+  HakukohteenHakuajatStore();
+  HakukohteenLomakeStore();
+  HakukohteenAlkamiskausiStore();
+  HakukohteenAloituspaikatStore();
+  HakukohteenValintaperusteenKuvausStore();
+  HakukohteenValintakoeStore();
+  HakukohteenTarvittavatLiitteetStore();
 }
 
 const initValintaperusteStores = () => {
   ValintaperusteenPohjaStore();
   ValintaperusteenKieliversioStore();
   ValintaperusteenNimiStore();
+  ValintaperusteenHakutapaStore();
+  ValintaperusteenHaunKohdejoukkoStore();
+  ValintaperusteenOsaamistaustaStore();
+  ValintaperusteenVahimmaisehdotStore();
+  ValintaperusteenValintatapaStore();
+  ValintaperusteenKielitaitovaatimuksetStore();
+  ValintaperusteenSoraKuvausStore();
+
 }
 
 export const initStores = () => {

@@ -24,10 +24,16 @@ export class AbstractModalBox extends Component {
     </div>
   );
 
+  //overwrite this in subclass to change default behaviour
+  onCancel = (event) => this.props.onCancel(event);
+
+  //overwrite this in subclass to change default behaviour
+  onSubmit = (event) => this.props.onSubmit(event);
+
   renderFooter = () => (
     <div className={'modal-box-footer button-container'}>
-      <button className={'secondary big'} onClick={this.props.onClose}>Peruuta</button>
-      <button className={'primary big'} onClick={this.props.onClose}>Jatka</button>
+      <button className={'secondary big'} onClick={this.onCancel}>Peruuta</button>
+      <button className={'primary big'} onClick={this.onSubmit}>Jatka</button>
     </div>
   );
 

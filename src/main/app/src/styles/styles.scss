@@ -15,6 +15,7 @@
 @import 'components/DateTimeEditor';
 @import 'components/InfoHeader';
 @import 'components/ActionLink';
+@import 'components/ModalBox';
 
 @import 'views/generic/MultiStepIndicator';
 @import 'views/generic/FooterActionButtons';
@@ -25,6 +26,8 @@
 @import 'views/toteutus/ToteutuksenJarjestamistiedotSection';
 @import 'views/toteutus/ToteutuksenNayttamistiedotSection';
 @import 'views/toteutus/ToteutuksenNayttamistiedotSection';
+@import 'views/toteutus/ToteutuksenHautSection';
+
 @import 'views/toteutus/OsaamisalaSelector';
 @import 'views/toteutus/OsaamisalaViewer';
 

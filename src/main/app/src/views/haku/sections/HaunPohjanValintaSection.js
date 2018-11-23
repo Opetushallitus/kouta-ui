@@ -1,5 +1,5 @@
 import {AbstractPohjanValintaSection} from '../../../components/AbstractPohjanValintaSection';
-import {SCOPE_HAUN_POHJA} from '../../../config/scopes/PohjanValinta';
+import {SCOPE_HAUN_POHJA} from '../../../stores/haku/HaunPohjaStore';
 
 export class HaunPohjanValintaSection extends AbstractPohjanValintaSection {
 

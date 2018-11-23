@@ -20,7 +20,7 @@ export class AbstractModalBox extends Component {
     <div className={'modal-box-header'}>
       <i className={'material-icons modal-box-title-icon'}>{this.getIcon()}</i>
       <div className={'modal-box-title'}>{this.getTitle()}</div>
-      <i className={'material-icons modal-box-close-icon'} onClick={this.props.onClose}>close</i>
+      <i className={'material-icons modal-box-close-icon'} onClick={this.props.onCancel}>close</i>
     </div>
   );
 

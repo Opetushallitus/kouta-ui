@@ -25,7 +25,7 @@ export class ToteutuksenHautSection extends AbstractSection {
     modalBoxVisible: false
   });
 
-  renderModalBox = () => this.state.modalBoxVisible && <ToteutuksenHautBox onClose={this.hideModalBox}/>;
+  renderModalBox = () => this.state.modalBoxVisible && <ToteutuksenHautBox onCancel={this.hideModalBox}/>;
 
   onSubmitButtonClick = () => this.showModalBox();
 

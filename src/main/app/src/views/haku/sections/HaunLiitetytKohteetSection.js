@@ -36,15 +36,12 @@ export class HaunLiitetytKohteetSection extends AbstractSection {
     )
   }[columnId]);
 
-
   appendRenderFunction = (column) => ({
     ...column,
     renderCell: this.getRenderFunctionByColumnId(column.id)
   })
 
-  getGridColumns = () => {
-    return (this.state.gridColumns || []).map(this.appendRenderFunction);
-  };
+  getGridColumns = () => (this.state.gridColumns || []).map(this.appendRenderFunction);
 
   onColumnChange = (columns) => updateColumns(columns);
 

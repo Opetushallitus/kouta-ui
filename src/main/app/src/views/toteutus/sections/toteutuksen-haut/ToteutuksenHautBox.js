@@ -49,9 +49,10 @@ class ToteutuksenHautBox extends AbstractModalBox {
 
   getEntry = () => this.state.entry;
 
-  showDropdown = () => this.setState({
+  showDropdown = (event) => this.setState({
     ...this.state,
-    dropdownVisible: true
+    dropdownVisible: true,
+    activeDropdown: event
   });
 
   hideDropdown = (callback) => this.setState({
@@ -59,8 +60,8 @@ class ToteutuksenHautBox extends AbstractModalBox {
     dropdownVisible: true
   }, callback);
 
-  //TODO: replace this with state update in store
-  handleDropdownChange = () => this.redirectToHaku();
+  //TODO: replace this with state update in store when the desired functionality has been confirmed.
+  handleDropdownChange = () => {}
 
   renderInfoDropdown = () => this.state.dropdownVisible &&
     <InfoDropdown label={'Valitse listasta'} selection={this.getEntry()}
@@ -69,13 +70,16 @@ class ToteutuksenHautBox extends AbstractModalBox {
 
   selectAction = (event) => this.hideDropdown(({
     [ENTITY_MODIFICATION_MODE.CREATE_ENTITY]: () => this.redirectToHaku(),
-    [ENTITY_MODIFICATION_MODE.INHERIT_ENTITY]: () => this.showDropdown(),
-    [ENTITY_MODIFICATION_MODE.USE_ENTITY]: () => this.redirectToHakukohde()
+    [ENTITY_MODIFICATION_MODE.INHERIT_ENTITY]: () => this.showDropdown(event),
+    [ENTITY_MODIFICATION_MODE.USE_ENTITY]: () => this.showDropdown(event)
   }[event]()));
 
   getButtonOptions = () => this.state.options || [];
 
   getEntryOptions = () => this.state.entryOptions || [];
+
+  onSubmit = () => this.state.activeDropdown === ENTITY_MODIFICATION_MODE.USE_ENTITY
+    ? this.redirectToHakukohde() : this.redirectToHaku();
 
   renderContent = () => (
     <div className={'modal-box-content'}>

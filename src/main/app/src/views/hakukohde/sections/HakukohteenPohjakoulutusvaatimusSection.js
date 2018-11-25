@@ -2,16 +2,14 @@ import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
 import {connectComponent} from '../../../utils/stateUtils';
 import {
-  APP_STATE_HAKUKUOHTEEN_POHJAKOULUTUSVAATIMUS, clearSelections,
-  selectPohjakoulutusvaatimus, updateMuuValinta
+  APP_STATE_HAKUKUOHTEEN_POHJAKOULUTUSVAATIMUS,
+  clearSelections,
+  selectPohjakoulutusvaatimus,
+  updateMuuValinta
 } from '../../../stores/hakukohde/HakukohteenPohjakoulutusvaatimusStore';
 import {RadiobuttonSelector} from '../../../components/RadiobuttonSelector';
 
 export class HakukohteenPohjakoulutusvaatimusSection extends AbstractSection {
-
-  getClassName = () => 'HakukohteenPohjakoulutusvaatimusSection';
-
-  getHeader = () => 'Pohjakoulutusvaatimus';
 
   onMount = () => connectComponent(this, {
     [APP_STATE_HAKUKUOHTEEN_POHJAKOULUTUSVAATIMUS]: (incomingState) => this.setState({
@@ -19,6 +17,10 @@ export class HakukohteenPohjakoulutusvaatimusSection extends AbstractSection {
       ...incomingState
     })
   });
+
+  getClassName = () => 'HakukohteenPohjakoulutusvaatimusSection';
+
+  getHeader = () => 'Pohjakoulutusvaatimus';
 
   getOptions = () => this.state.options || [];
 

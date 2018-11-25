@@ -1,8 +1,9 @@
-import {initState, setState} from '../../utils/stateUtils';
+import {getState, setState, updateState} from '../../utils/stateUtils';
+import {updateSingleSelectionOptionActivation} from '../../utils/optionListUtils';
 
 export const APP_STATE_VALINTAPERUSTEEN_HAKUTAPA = 'APP_STATE_VALINTAPERUSTEEN_HAKUTAPA';
 
-export const ValintaperusteenHakutapaStore = () => initState(APP_STATE_VALINTAPERUSTEEN_HAKUTAPA, getInitialState());
+export const ValintaperusteenHakutapaStore = () => setState(APP_STATE_VALINTAPERUSTEEN_HAKUTAPA, getInitialState());
 
 export const clearSelections = () => setState(APP_STATE_VALINTAPERUSTEEN_HAKUTAPA, getInitialState());
 
@@ -18,4 +19,10 @@ const getInitialState = () => ({
       label: 'Yhteishaku (näkyy vain rekisterin pitäjälle)'
     }
   ]
+});
+
+const getOptions = () => getState(APP_STATE_VALINTAPERUSTEEN_HAKUTAPA, 'options');
+
+export const selectOption = (change) => updateState(APP_STATE_VALINTAPERUSTEEN_HAKUTAPA, {
+  options: updateSingleSelectionOptionActivation(getOptions(), change)
 });

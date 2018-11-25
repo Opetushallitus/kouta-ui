@@ -1,10 +1,11 @@
-import {initState, setState} from '../../utils/stateUtils';
+import {getState, initState, setState, updateState} from '../../utils/stateUtils';
+import {updateSingleSelectionOptionActivation} from '../../utils/optionListUtils';
 
-export const APP_STATE_VALINTAPERUSTEEN_HAUN_KOHDEJOUKKO = 'APP_STATE_VALINTAPERUSTEEN_HAUN_KOHDEJOUKKO';
+export const APP_STATE_VALINTTAPERUSTEEN_KOHDE = 'APP_STATE_VALINTTAPERUSTEEN_KOHDE';
 
-export const ValintaperusteenHaunKohdejoukkoStore = () => initState(APP_STATE_VALINTAPERUSTEEN_HAUN_KOHDEJOUKKO, getInitialState());
+export const ValintaperusteenHaunKohdejoukkoStore = () => initState(APP_STATE_VALINTTAPERUSTEEN_KOHDE, getInitialState());
 
-export const clearSelections = () => setState(APP_STATE_VALINTAPERUSTEEN_HAUN_KOHDEJOUKKO, getInitialState());
+export const clearSelections = () => setState(APP_STATE_VALINTTAPERUSTEEN_KOHDE, getInitialState());
 
 //TODO: check if there is API for this && implement as API request
 const getInitialState = () => ({
@@ -71,3 +72,10 @@ const getInitialState = () => ({
     }
   ]
 });
+
+const getOptions = () => getState(APP_STATE_VALINTTAPERUSTEEN_KOHDE, 'options');
+
+export const selectOption = (change) => updateState(APP_STATE_VALINTTAPERUSTEEN_KOHDE, {
+  options: updateSingleSelectionOptionActivation(getOptions(), change)
+});
+

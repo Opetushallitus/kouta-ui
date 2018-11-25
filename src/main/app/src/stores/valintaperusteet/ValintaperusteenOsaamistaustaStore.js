@@ -1,8 +1,9 @@
-import {initState, setState} from '../../utils/stateUtils';
+import {getState, setState, updateState} from '../../utils/stateUtils';
+import {updateSingleSelectionOptionActivation} from '../../utils/optionListUtils';
 
 export const APP_STATE_VALINTAPERUSTEEN_OSAAMISTAUSTA = 'APP_STATE_VALINTAPERUSTEEN_OSAAMISTAUSTA';
 
-export const ValintaperusteenOsaamistaustaStore = () => initState(APP_STATE_VALINTAPERUSTEEN_OSAAMISTAUSTA, getInitialState());
+export const ValintaperusteenOsaamistaustaStore = () => setState(APP_STATE_VALINTAPERUSTEEN_OSAAMISTAUSTA, getInitialState());
 
 export const clearSelections = () => setState(APP_STATE_VALINTAPERUSTEEN_OSAAMISTAUSTA, getInitialState());
 
@@ -56,3 +57,11 @@ const getInitialState = () => ({
     }
   ]
 });
+
+const getOptions = () => getState(APP_STATE_VALINTAPERUSTEEN_OSAAMISTAUSTA, 'options');
+
+export const selectOption = (change) => updateState(APP_STATE_VALINTAPERUSTEEN_OSAAMISTAUSTA, {
+  options: updateSingleSelectionOptionActivation(getOptions(), change)
+});
+
+

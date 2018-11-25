@@ -1,5 +1,5 @@
 import {getState, setState, updateState} from '../../utils/stateUtils';
-import {updateMultiSelectionOptionActivation, updateSingleSelectionOptionActivation} from '../../utils/optionListUtils';
+import {updateMultiSelectionOptionActivation} from '../../utils/optionListUtils';
 
 export const APP_STATE_VALINTAPERUSTEEN_OSAAMISTAUSTA = 'APP_STATE_VALINTAPERUSTEEN_OSAAMISTAUSTA';
 

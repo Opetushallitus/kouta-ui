@@ -2,7 +2,8 @@ import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
 import {
   APP_STATE_VALINTTAPERUSTEEN_KOHDE,
-  selectOption
+  selectOption,
+  clearSelections
 } from '../../../stores/valintaperusteet/ValintaperusteenKohdeStore';
 import {connectComponent} from '../../../utils/stateUtils';
 import {RadiobuttonSelector} from '../../../components/RadiobuttonSelector';
@@ -21,6 +22,8 @@ export class ValintaperusteenKohdeSection extends AbstractSection {
       ...incomingState
     })
   });
+
+  onClearButtonClick = () => clearSelections();
 
   renderContent = () => (
     <div className={'content'}>

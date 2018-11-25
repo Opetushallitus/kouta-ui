@@ -1,6 +1,6 @@
 import {AbstractSection} from '../../../components/AbstractSection';
 import {connectComponent} from '../../../utils/stateUtils';
-import {APP_STATE_VALINTAPERUSTEEN_VALINTATAPA} from '../../../stores/valintaperusteet/ValintaperusteenValintatapaStore';
+import {APP_STATE_VALINTAPERUSTEEN_VALINTATAPA, clearSelections} from '../../../stores/valintaperusteet/ValintaperusteenValintatapaStore';
 
 export class ValintaperusteenValintatapaSection extends AbstractSection {
 
@@ -14,5 +14,7 @@ export class ValintaperusteenValintatapaSection extends AbstractSection {
   getClassName = () => 'ValintaperusteenValintatapaSection';
 
   getHeader = () => 'Valintatapa';
+
+  onClearButtonClick = () => clearSelections();
 
 }

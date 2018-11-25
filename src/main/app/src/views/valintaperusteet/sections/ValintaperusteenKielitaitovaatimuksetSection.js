@@ -6,7 +6,8 @@ import {
   selectKielitaito,
   selectKielitutkinto,
   updateCustomKielitaito,
-  updateTaso
+  updateTaso,
+  clearSelections
 } from '../../../stores/valintaperusteet/ValintaperusteenKielitaitovaatimuksetStore';
 import {CheckboxSelector} from '../../../components/CheckboxSelector';
 import {DropdownSelector} from '../../../components/DropdownSelector';
@@ -30,6 +31,8 @@ export class ValintaperusteenKielitaitovaatimuksetSection extends AbstractSectio
   getKielitaitoOptions = () => this.state.kielitaitoOptions || [];
 
   getActiveKielitutkinto = () => this.getKielitutkintoOptions().find(option => option.active === true);
+
+  onClearButtonClick = () => clearSelections();
 
   updateTaso = (event) => {
     const dataId = event.target.getAttribute('data-id');
@@ -59,6 +62,8 @@ export class ValintaperusteenKielitaitovaatimuksetSection extends AbstractSectio
     const optionIds = Object.keys(content);
     return optionIds.map(optionId => this.renderKielitutkintoSelector(content, optionId));
   };
+
+
 
   renderContent = () => (
     <div className={'content'}>

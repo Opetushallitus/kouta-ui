@@ -3,7 +3,8 @@ import {AbstractSection} from '../../../components/AbstractSection';
 import {connectComponent} from '../../../utils/stateUtils';
 import {
   APP_STATE_VALINTAPERUSTEEN_HAKUTAPA,
-  selectOption
+  selectOption,
+  clearSelections
 } from '../../../stores/valintaperusteet/ValintaperusteenHakutapaStore';
 import {RadiobuttonSelector} from '../../../components/RadiobuttonSelector';
 

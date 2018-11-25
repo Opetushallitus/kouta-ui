@@ -1,8 +1,9 @@
-import {initState, setState} from '../../utils/stateUtils';
+import {getState, setState, updateState} from '../../utils/stateUtils';
+import {updateSingleSelectionOptionActivation} from '../../utils/optionListUtils';
 
 export const APP_STATE_VALINTAPERUSTEEN_VAHIMMAISEHDOT = 'APP_STATE_VALINTAPERUSTEEN_VAHIMMAISEHDOT';
 
-export const ValintaperusteenVahimmaisehdotStore = () => initState(APP_STATE_VALINTAPERUSTEEN_VAHIMMAISEHDOT, getInitialState());
+export const ValintaperusteenVahimmaisehdotStore = () => setState(APP_STATE_VALINTAPERUSTEEN_VAHIMMAISEHDOT, getInitialState());
 
 export const clearSelections = () => setState(APP_STATE_VALINTAPERUSTEEN_VAHIMMAISEHDOT, getInitialState());
 
@@ -10,20 +11,26 @@ export const clearSelections = () => setState(APP_STATE_VALINTAPERUSTEEN_VAHIMMA
 const getInitialState = () => ({
   options: [
     {
-      label: 'osoittaa-tarvittaessa-hakukelpoisuuden-määräajan-kuluessa',
+      key: 'osoittaa-tarvittaessa-hakukelpoisuuden-määräajan-kuluessa',
       label: 'osoittaa tarvittaessa hakukelpoisuuden määräajan kuluessa'
     },
     {
-      label: 'toimittaa-hakemuksen-määräajan-kuluessa',
+      key: 'toimittaa-hakemuksen-määräajan-kuluessa',
       label: 'toimittaa hakemuksen määräajan kuluessa'
     },
     {
-      label: 'osallistuu-valintakokeen-ja-suorittaa-sen-hyvaksyttavasti',
+      key: 'osallistuu-valintakokeen-ja-suorittaa-sen-hyvaksyttavasti',
       label: 'osallistuu valintakokeeseen ja suorittaa sen hyväksyttävästi'
     },
     {
-      label: 'suorittaa-mahdolliset-lsianaytot',
+      key: 'suorittaa-mahdolliset-lisanaytot',
       label: 'suorittaa mahdolliset lisänäytöt'
     }
   ]
+});
+
+const getOptions = () => getState(APP_STATE_VALINTAPERUSTEEN_VAHIMMAISEHDOT, 'options');
+
+export const selectOption = (change) => updateState(APP_STATE_VALINTAPERUSTEEN_VAHIMMAISEHDOT, {
+  options: updateSingleSelectionOptionActivation(getOptions(), change)
 });

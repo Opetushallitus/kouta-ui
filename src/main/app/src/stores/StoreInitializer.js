@@ -42,7 +42,7 @@ import {ValintaperusteenSoraKuvausStore} from './valintaperusteet/Valintaperuste
 import {ValintaperusteenKielitaitovaatimuksetStore} from './valintaperusteet/ValintaperusteenKielitaitovaatimuksetStore';
 import {ValintaperusteenVahimmaisehdotStore} from './valintaperusteet/ValintaperusteenVahimmaisehdotStore';
 import {ValintaperusteenOsaamistaustaStore} from './valintaperusteet/ValintaperusteenOsaamistaustaStore';
-import {ValintaperusteenHaunKohdejoukkoStore} from './valintaperusteet/ValintaperusteenHaunKohdejoukkoStore';
+import {ValintaperusteenHaunKohdejoukkoStore} from './valintaperusteet/ValintaperusteenKohdeStore';
 import {ValintaperusteenValintatapaStore} from './valintaperusteet/ValintaperusteenValintatapaStore';
 import {ValintaperusteenHakutapaStore} from './valintaperusteet/ValintaperusteenHakutapaStore';
 

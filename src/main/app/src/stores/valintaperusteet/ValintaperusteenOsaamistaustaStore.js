@@ -1,5 +1,5 @@
 import {getState, setState, updateState} from '../../utils/stateUtils';
-import {updateSingleSelectionOptionActivation} from '../../utils/optionListUtils';
+import {updateMultiSelectionOptionActivation, updateSingleSelectionOptionActivation} from '../../utils/optionListUtils';
 
 export const APP_STATE_VALINTAPERUSTEEN_OSAAMISTAUSTA = 'APP_STATE_VALINTAPERUSTEEN_OSAAMISTAUSTA';
 
@@ -61,7 +61,7 @@ const getInitialState = () => ({
 const getOptions = () => getState(APP_STATE_VALINTAPERUSTEEN_OSAAMISTAUSTA, 'options');
 
 export const selectOption = (change) => updateState(APP_STATE_VALINTAPERUSTEEN_OSAAMISTAUSTA, {
-  options: updateSingleSelectionOptionActivation(getOptions(), change)
+  options: updateMultiSelectionOptionActivation(getOptions(), change)
 });
 
 

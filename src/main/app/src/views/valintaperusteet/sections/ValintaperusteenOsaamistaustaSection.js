@@ -3,7 +3,8 @@ import {AbstractSection} from '../../../components/AbstractSection';
 import {connectComponent} from '../../../utils/stateUtils';
 import {
   APP_STATE_VALINTAPERUSTEEN_OSAAMISTAUSTA,
-  selectOption
+  selectOption,
+  clearSelections
 } from '../../../stores/valintaperusteet/ValintaperusteenOsaamistaustaStore';
 import {CheckboxSelector} from '../../../components/CheckboxSelector';
 
@@ -21,6 +22,8 @@ export class ValintaperusteenOsaamistaustaSection extends AbstractSection {
   getHeader = () => 'Osaamistausta';
 
   getOptions = () => this.state.options || [];
+
+  onClearButtonClick = () => clearSelections();
 
   renderContent = () => (
     <div className={'content'}>

@@ -30,7 +30,7 @@ export class HaunLiitetytKohteetSection extends AbstractSection {
 
   getRenderFunctionByColumnId = (columnId) => ({
     'nimi':  (dataItem, colId) => (
-      <td className={'kouta-grid-data-cell hakukohde-cell'} data-id={dataItem.oid} onClick={this.toggleCellSelection}>
+      <td className={'kouta-grid-data-cell hakukohde-cell'} data-id={dataItem.oid}>
         {dataItem[colId]}
       </td>
     )

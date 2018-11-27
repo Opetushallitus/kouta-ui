@@ -45,6 +45,7 @@ import {ValintaperusteenOsaamistaustaStore} from './valintaperusteet/Valintaperu
 import {ValintaperusteenHaunKohdejoukkoStore} from './valintaperusteet/ValintaperusteenKohdejoukkoStore';
 import {ValintaperusteenValintatapaStore} from './valintaperusteet/ValintaperusteenValintatapaStore';
 import {ValintaperusteenHakutapaStore} from './valintaperusteet/ValintaperusteenHakutapaStore';
+import {ToteutusStore} from './toteutus/ToteutusStore';
 
 const initGenericStores = () => {
   UrlStore();
@@ -72,6 +73,7 @@ const initToteutusStores = () => {
   ToteutuksenNimiStore();
   ToteutuksenYhteystiedotStore();
   ToteutuksenJarjestamistiedotStore();
+  ToteutusStore();
 }
 
 const initHakuStores = () => {

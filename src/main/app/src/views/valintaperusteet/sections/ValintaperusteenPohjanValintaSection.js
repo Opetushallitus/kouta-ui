@@ -1,5 +1,5 @@
 import {AbstractPohjanValintaSection} from '../../../components/AbstractPohjanValintaSection';
-import {SCOPE_VALINTAPERUSTEEN_POHJA} from '../../../config/scopes/PohjanValinta';
+import {SCOPE_VALINTAPERUSTEEN_POHJA} from '../../../stores/valintaperusteet/ValintaperusteenPohjaStore';
 
 export class ValintaperusteenPohjanValintaSection extends AbstractPohjanValintaSection {
 

@@ -1,10 +1,9 @@
+import {AbstractCheckboxSection} from '../../../components/AbstractCheckboxSection';
 import {
-  APP_EVENT_VALINTAPERUSTEEN_KIELIVERSIO_SELECTION_CHANGE,
-  APP_EVENT_VALINTAPERUSTEEN_KIELIVERSIO_SELECTION_CLEAR,
+  APP_EVENT_VALINTAPERUSTEEN_KIELIVERSIO_SELECTION_CHANGE, APP_EVENT_VALINTAPERUSTEEN_KIELIVERSIO_SELECTION_CLEAR,
   APP_STATE_VALINTAPERUSTEEN_KIELIVERSIO_OPTIONS,
   APP_STATE_VALINTAPERUSTEEN_KIELIVERSIO_SELECTIONS
-} from '../../../config/states';
-import {AbstractCheckboxSection} from '../../../components/AbstractCheckboxSection';
+} from '../../../stores/valintaperusteet/ValintaperusteenKieliversioStore';
 
 export class ValintaperusteenKieliversioSection extends AbstractCheckboxSection {
 

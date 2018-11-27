@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {connectComponent, disconnectListener} from '../../../../utils/stateUtils';
-import {APP_STATE_TOTEUTUKSEN_OSAAMISALA_SELECTIONS} from '../../../../config/states';
 import {getLanguage} from '../../../../stores/generic/LanguageStore';
 import {APP_STATE_KOULUTUKSEN_OSAAMISALAKUVAUS_MAP} from '../../../../stores/koulutus/KoulutuksenKuvausStore';
+import {APP_STATE_TOTEUTUKSEN_OSAAMISALA_SELECTIONS} from '../../../../stores/toteutus/ToteutuksenOsaamisalaStore';
 
 export class OsaamisalaViewer extends Component {
 

@@ -1,10 +1,9 @@
-import React from 'react';
-import {connectComponent} from '../../../../utils/stateUtils';
-import {Connectable} from '../../../../components/Connectable';
+import React, {Component} from 'react';
+import {connectComponent, disconnectListener} from '../../../../utils/stateUtils';
 import {APP_STATE_KOULUTUKSEN_TIEDOT} from '../../../../stores/koulutus/KoulutuksenTiedotStore';
 import {APP_STATE_KOULUTUKSEN_OSAAMISALA_NAME_LIST} from '../../../../stores/koulutus/KoulutuksenKuvausStore';
 
-export class KoulutusDetails extends Connectable {
+export class KoulutusDetails extends Component {
 
   constructor(props) {
     super(props);
@@ -21,6 +20,8 @@ export class KoulutusDetails extends Connectable {
       osaamisalaNameList
     })
   });
+
+  componentWillUnmount = () => disconnectListener(this);
 
   renderDetailsRow = (label, value) => (
     <div className={"details-row"}>

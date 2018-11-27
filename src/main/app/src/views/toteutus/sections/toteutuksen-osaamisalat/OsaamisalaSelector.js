@@ -1,13 +1,9 @@
-import React from 'react';
-import {broadcast, connectComponent} from '../../../../utils/stateUtils';
-import {
-  APP_EVENT_TOTEUTUKSEN_OSAAMISALA_SELECTION_CHANGE,
-  APP_STATE_TOTEUTUKSEN_OSAAMISALA_SELECTIONS
-} from '../../../../config/states';
-import {Connectable} from '../../../../components/Connectable';
+import React, {Component} from 'react';
+import {broadcast, connectComponent, disconnectListener} from '../../../../utils/stateUtils';
+import {APP_EVENT_TOTEUTUKSEN_OSAAMISALA_SELECTION_CHANGE, APP_STATE_TOTEUTUKSEN_OSAAMISALA_SELECTIONS} from '../../../../config/states';
 import {APP_STATE_KOULUTUKSEN_OSAAMISALA_OPTIONS} from '../../../../stores/koulutus/KoulutuksenKuvausStore';
 
-export class OsaamisalaSelector extends Connectable {
+export class OsaamisalaSelector extends Component {
 
   componentDidMount = () => connectComponent(this, {
     [APP_STATE_KOULUTUKSEN_OSAAMISALA_OPTIONS]: (options) => this.setState({
@@ -19,6 +15,8 @@ export class OsaamisalaSelector extends Connectable {
       selections
     })
   });
+
+  componentWillUnmount = () => disconnectListener(this);
 
   getOptions = () => this.state.options || [];
 

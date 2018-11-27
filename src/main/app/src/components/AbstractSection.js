@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
-import {registerSection, selectTab, setSectionDone, setSectionExpansion} from '../stores/generic/SectionStateStore';
 import {
   APP_EVENT_SECTION_VALIDATION_REQUEST,
   APP_STATE_SECTION_EXPANSION_MAP,
-  APP_STATE_SECTION_TAB_MAP
-} from '../config/states';
+  APP_STATE_SECTION_TAB_MAP,
+  registerSection,
+  selectTab,
+  setSectionDone,
+  setSectionExpansion
+} from '../stores/generic/SectionStateStore';
 import {broadcast, connectComponent, disconnectListener} from '../utils/stateUtils';
 import {toCssCase} from '../utils/stringUtils';
 import {LANGUAGE_CODE_TO_TAB_NAME} from '../config/constants';

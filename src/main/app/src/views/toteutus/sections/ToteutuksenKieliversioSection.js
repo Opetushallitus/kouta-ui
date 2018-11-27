@@ -1,9 +1,10 @@
+import {AbstractCheckboxSection} from '../../../components/AbstractCheckboxSection';
 import {
-  APP_EVENT_TOTEUTUKSEN_KIELIVERSIO_SELECTION_CHANGE, APP_EVENT_TOTEUTUKSEN_KIELIVERSIO_SELECTION_CLEAR,
+  APP_EVENT_TOTEUTUKSEN_KIELIVERSIO_SELECTION_CHANGE,
+  APP_EVENT_TOTEUTUKSEN_KIELIVERSIO_SELECTION_CLEAR,
   APP_STATE_TOTEUTUKSEN_KIELIVERSIO_OPTIONS,
   APP_STATE_TOTEUTUKSEN_KIELIVERSIO_SELECTIONS
-} from '../../../config/states';
-import {AbstractCheckboxSection} from '../../../components/AbstractCheckboxSection';
+} from '../../../stores/toteutus/ToteutuksenKieliversioStore';
 
 export class ToteutuksenKieliversioSection extends AbstractCheckboxSection {
 

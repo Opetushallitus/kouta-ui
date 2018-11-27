@@ -1,6 +1,6 @@
 import {AbstractPohjanValintaSection} from '../../../components/AbstractPohjanValintaSection';
-import {SCOPE_KOULUTUKSEN_POHJA} from '../../../config/scopes/PohjanValinta';
 import {broadcast} from "../../../utils/stateUtils";
+import {SCOPE_KOULUTUKSEN_POHJA} from '../../../stores/koulutus/KoulutuksenPohjaStore';
 
 export class KoulutuksenPohjanValintaSection extends AbstractPohjanValintaSection {
 

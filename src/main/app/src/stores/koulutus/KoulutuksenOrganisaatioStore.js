@@ -1,22 +1,13 @@
 import axios from 'axios';
 import {urlOrganisaatioList} from '../../config/urls';
-import {
-  APP_EVENT_ORGANISAATIO_SELECTION_CHANGE,
-  APP_EVENT_ORGANISAATIO_SELECTION_CLEAR,
-  APP_STATE_ORGANISAATIO_OPTIONS,
-  APP_STATE_ORGANISAATIO_SELECTIONS
-} from '../../config/states';
-import {
-  clearState,
-  containsValue,
-  getState,
-  handleEvents,
-  initStates,
-  setState,
-  updateState
-} from '../../utils/stateUtils';
+import {clearState, containsValue, getState, handleEvents, initStates, setState, updateState} from '../../utils/stateUtils';
 import {getLanguage} from '../generic/LanguageStore';
 import {APP_STATE_KOULUTUKSEN_TIEDOT} from "./KoulutuksenTiedotStore";
+
+export const APP_STATE_ORGANISAATIO_OPTIONS = 'APP_STATE_ORGANISAATIO_OPTIONS';
+export const APP_STATE_ORGANISAATIO_SELECTIONS = 'APP_STATE_ORGANISAATIO_SELECTIONS';
+export const APP_EVENT_ORGANISAATIO_SELECTION_CHANGE = 'APP_EVENT_ORGANISAATIO_SELECTION_CHANGE';
+export const APP_EVENT_ORGANISAATIO_SELECTION_CLEAR = 'APP_EVENT_ORGANISAATIO_SELECTION_CLEAR';
 
 //REPLACE THIS WITH OID COMING FROM CAS
 const DEFAULT_OID = '1.2.246.562.10.594252633210';

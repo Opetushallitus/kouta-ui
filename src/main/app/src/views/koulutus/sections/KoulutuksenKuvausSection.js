@@ -1,10 +1,10 @@
 import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
-import {APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES} from '../../../config/states';
 import {connectComponent} from '../../../utils/stateUtils';
 import {isVariableDefined} from '../../../utils/objectUtils';
 import {APP_STATE_KOULUTUKSEN_TIEDOT} from '../../../stores/koulutus/KoulutuksenTiedotStore';
 import {APP_STATE_KOULUTUKSEN_KUVAUS} from '../../../stores/koulutus/KoulutuksenKuvausStore';
+import {APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES} from '../../../stores/koulutus/KoulutuksenKieliversioStore';
 
 export class KoulutuksenKuvausSection extends AbstractSection {
 

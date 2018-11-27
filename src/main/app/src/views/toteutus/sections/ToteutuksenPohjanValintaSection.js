@@ -1,5 +1,5 @@
 import {AbstractPohjanValintaSection} from '../../../components/AbstractPohjanValintaSection';
-import {SCOPE_TOTEUTUKSEN_POHJA} from '../../../config/scopes/PohjanValinta';
+import {SCOPE_TOTEUTUKSEN_POHJA} from '../../../stores/toteutus/ToteutuksenPohjaStore';
 
 export class ToteutuksenPohjanValintaSection extends AbstractPohjanValintaSection {
 

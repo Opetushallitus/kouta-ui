@@ -1,10 +1,10 @@
+import {AbstractCheckboxSection} from '../../../components/AbstractCheckboxSection';
 import {
   APP_EVENT_KOULUTUKSEN_KIELIVERSIO_SELECTION_CHANGE,
   APP_EVENT_KOULUTUKSEN_KIELIVERSIO_SELECTION_CLEAR,
   APP_STATE_KOULUTUKSEN_KIELIVERSIO_OPTIONS,
   APP_STATE_KOULUTUKSEN_KIELIVERSIO_SELECTIONS
-} from '../../../config/states';
-import {AbstractCheckboxSection} from '../../../components/AbstractCheckboxSection';
+} from '../../../stores/koulutus/KoulutuksenKieliversioStore';
 
 export class KoulutuksenKieliversioSection extends AbstractCheckboxSection {
 

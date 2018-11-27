@@ -1,12 +1,9 @@
 import {getState, handleEvents, initState, setState, updateState} from '../../utils/stateUtils';
-import {
-  APP_EVENT_ORGANISAATIO_SELECTION_CHANGE,
-  APP_EVENT_SECTION_VALIDATION_REQUEST,
-  APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES
-} from '../../config/states';
+import {APP_EVENT_SECTION_VALIDATION_REQUEST, APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES} from '../../config/states';
 import {REQUEST_STATUS} from '../../config/constants';
 import axios from 'axios';
 import {getUrlKoutaBackendKoulutus} from '../generic/UrlStore';
+import {APP_EVENT_ORGANISAATIO_SELECTION_CHANGE} from './KoulutuksenOrganisaatioStore';
 
 export const APP_STATE_KOULUTUS_JSON = "APP_STATE_KOULUTUS_JSON";
 export const APP_STATE_SAVE_KOULUTUS = "APP_STATE_SAVE_KOULUTUS";
@@ -40,13 +37,10 @@ const getKoulutus = () => getState(APP_STATE_KOULUTUS_JSON);
 
 const updateKoulutus = (value) => updateState(APP_STATE_KOULUTUS_JSON, value);
 
-const updateKoulutuskoodi = (koulutuskoodiOption) => {
-    console.log(koulutuskoodiOption);
-    updateKoulutus( {
-        koulutusKoodiUri: koulutuskoodiOption ? koulutuskoodiOption.koodiUri + "#" + koulutuskoodiOption.versio : undefined,
-        nimi: koulutuskoodiOption ? koulutuskoodiOption.nameTranslationMap : undefined
-    });
-};
+const updateKoulutuskoodi = (koulutuskoodiOption) => updateKoulutus({
+    koulutusKoodiUri: koulutuskoodiOption ? koulutuskoodiOption.koodiUri + "#" + koulutuskoodiOption.versio : undefined,
+    nimi: koulutuskoodiOption ? koulutuskoodiOption.nameTranslationMap : undefined
+});
 
 const isKoulutusValid = (koulutus) => {
     const isFieldEmpty = (fieldValue) => typeof fieldValue === 'undefined' || fieldValue === null || fieldValue === false;
@@ -67,11 +61,9 @@ const saveStatus = (actionType, status) => updateState(APP_STATE_SAVE_KOULUTUS, 
     [actionType]: status
 });
 
-const saveAndPublishKoulutus = () => {
-    storeKoulutus({...getKoulutus(), tila: 'julkaistu'},
-                  () => saveStatus(ATTR_SAVE_AND_PUBLISH, REQUEST_STATUS.SUCCESS),
-                  () => saveStatus(ATTR_SAVE_AND_PUBLISH, REQUEST_STATUS.FAILURE));
-};
+const saveAndPublishKoulutus = () => storeKoulutus({...getKoulutus(), tila: 'julkaistu'},
+    () => saveStatus(ATTR_SAVE_AND_PUBLISH, REQUEST_STATUS.SUCCESS),
+    () => saveStatus(ATTR_SAVE_AND_PUBLISH, REQUEST_STATUS.FAILURE));
 
 const saveKoulutus = () => {
     const koulutus = getKoulutus();

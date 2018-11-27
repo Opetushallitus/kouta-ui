@@ -15,7 +15,6 @@
     "start-for-test": "BROWSER=none NODE_ENV=test react-app-rewired start",
     "run-test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject",
-    "pretest": "eslint --ignore-path .gitignore .",
     "lint": "eslint --ignore-path .gitignore .",
     "lint-fix": "eslint --fix --ignore-path .gitignore ."
   },

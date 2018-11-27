@@ -9,7 +9,6 @@
   },
   "rules": {
     "semi": 0,
-      "indent": ["error", 2, {"CallExpression": {"arguments": "first"}}]
-    //"function-paren-newline": ["error", "always"]
+    "indent": ["error", 2, {"CallExpression": {"arguments": "first"}}]
   }
 }

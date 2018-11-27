@@ -1,15 +1,8 @@
 import React, {Component} from 'react';
-import {
-  APP_STATE_KOULUTUSKOODI_LIST
-} from '../../../../config/states';
-//import {selectKoulutus, updateKoulutuksenNimi} from '../../../../stores/koulutus/KoulutusDetailsStore';
+import {APP_STATE_KOULUTUSKOODI_LIST} from '../../../../config/states';
 import {broadcast, connectComponent, disconnectListener} from '../../../../utils/stateUtils';
-import {KoulutusNameTranslationEditor} from './KoulutusNameTranslationEditor';
 import {KOULUTUSTYYPPI_CATEGORY} from '../../../../config/constants';
-import {
-    APP_EVENT_SELECT_KOULUTUSKOODI,
-    APP_EVENT_SELECT_KOULUTUSTYYPPI
-} from "../../../../stores/koulutus/KoulutusStore";
+import {APP_EVENT_SELECT_KOULUTUSKOODI, APP_EVENT_SELECT_KOULUTUSTYYPPI} from "../../../../stores/koulutus/KoulutusStore";
 import {APP_STATE_KOULUTUKSEN_TIEDOT} from "../../../../stores/koulutus/KoulutuksenTiedotStore";
 import {getKoulutusOptionById} from "../../../../stores/koulutus/KoulutuskoodiListStore";
 
@@ -96,16 +89,11 @@ export class KoulutuskoodiSelector extends Component {
     ) : null;
   };
 
-  renderNameEditor = () => this.isNameEditingAllowed() ? (
-      <KoulutusNameTranslationEditor/>
-  ) : null;
-
   render = () => this.hasOptions() ? (
       <div className={"koulutus-selector"}>
         <span>Valitse koulutus listasta</span>
         <input type={"text"} value={this.state.filter} className={"filter-input"} placeholder={"Valitse koulutus..."} onChange={this.setFilter}></input>
         {this.renderOptions()}
-        {this.renderNameEditor()}
       </div>
   ) : (
       <div className={"koulutus-selector"}>

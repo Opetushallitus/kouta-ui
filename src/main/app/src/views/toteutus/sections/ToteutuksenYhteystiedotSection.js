@@ -1,12 +1,10 @@
 import React from 'react';
 import {connectListener} from '../../../utils/stateUtils';
 import {AbstractSection} from '../../../components/AbstractSection';
-import {
-  APP_STATE_TOTEUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES,
-  APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT
-} from '../../../config/states';
+import {APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT} from '../../../config/states';
 import {InputField} from '../../../components/InputField';
 import {clearValues, storeValues} from '../../../stores/toteutus/ToteutuksenYhteystiedotStore';
+import {APP_STATE_TOTEUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES} from '../../../stores/toteutus/ToteutuksenKieliversioStore';
 
 export class ToteutuksenYhteystiedotSection extends AbstractSection {
 

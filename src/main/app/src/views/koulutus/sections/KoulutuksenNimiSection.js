@@ -1,8 +1,8 @@
-import {APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES} from '../../../config/states';
 import {AbstractNimiSection} from '../../../components/AbstractNimiSection';
 import {connectComponent} from '../../../utils/stateUtils';
 import {APP_STATE_KOULUTUKSEN_TIEDOT} from "../../../stores/koulutus/KoulutuksenTiedotStore";
 import {APP_EVENT_KOULUTUKSEN_NIMI_TRANSLATION_CLEAR, APP_STATE_KOULUTUKSEN_NIMI_TRANSLATION_MAP} from '../../../stores/koulutus/KoulutuksenNimiStore';
+import {APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES} from '../../../stores/koulutus/KoulutuksenKieliversioStore';
 
 export class KoulutuksenNimiSection extends AbstractNimiSection {
 

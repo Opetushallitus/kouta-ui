@@ -1,10 +1,10 @@
-import {getState, handleEvents, initState, setState, updateState} from '../../utils/stateUtils';
-import {APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES} from '../../config/states';
-import {REQUEST_STATUS} from '../../config/constants';
 import axios from 'axios';
+import {getState, handleEvents, initState, setState, updateState} from '../../utils/stateUtils';
 import {getUrlKoutaBackendKoulutus} from '../generic/UrlStore';
+import {REQUEST_STATUS} from '../../config/constants';
 import {APP_EVENT_ORGANISAATIO_SELECTION_CHANGE} from './KoulutuksenOrganisaatioStore';
 import {APP_EVENT_SECTION_VALIDATION_REQUEST} from '../generic/SectionStateStore';
+import {APP_STATE_KOULUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES} from './KoulutuksenKieliversioStore';
 
 export const APP_STATE_KOULUTUS_JSON = "APP_STATE_KOULUTUS_JSON";
 export const APP_STATE_SAVE_KOULUTUS = "APP_STATE_SAVE_KOULUTUS";

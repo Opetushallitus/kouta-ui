@@ -1,5 +1,6 @@
 import {initState, setState} from '../../utils/stateUtils';
-import {APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT} from '../../config/states';
+
+export const APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT = 'APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT';
 
 export const ToteutuksenYhteystiedotStore = () => initState(APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT, getInitialState());
 

@@ -1,7 +1,8 @@
-import {APP_STATE_URL} from '../../config/states';
 import {urls as ophUrls} from 'oph-urls-js';
 import {development, production} from '../../tarjonta-urls';
 import {getState, updateState} from '../../utils/stateUtils';
+
+export const APP_STATE_URL = 'APP_STATE_URL';
 
 export const UrlStore = () => configure();
 

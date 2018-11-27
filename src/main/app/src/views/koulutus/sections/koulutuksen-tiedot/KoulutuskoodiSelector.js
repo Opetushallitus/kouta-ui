@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import {APP_STATE_KOULUTUSKOODI_LIST} from '../../../../config/states';
 import {broadcast, connectComponent, disconnectListener} from '../../../../utils/stateUtils';
 import {KOULUTUSTYYPPI_CATEGORY} from '../../../../config/constants';
 import {APP_EVENT_SELECT_KOULUTUSKOODI, APP_EVENT_SELECT_KOULUTUSTYYPPI} from "../../../../stores/koulutus/KoulutusStore";
 import {APP_STATE_KOULUTUKSEN_TIEDOT} from "../../../../stores/koulutus/KoulutuksenTiedotStore";
-import {getKoulutusOptionById} from "../../../../stores/koulutus/KoulutuskoodiListStore";
+import {APP_STATE_KOULUTUSKOODI_LIST, getKoulutusOptionById} from "../../../../stores/koulutus/KoulutuskoodiListStore";
 
 const classNames = require('classnames');
+
 export class KoulutuskoodiSelector extends Component {
 
   constructor(props) {

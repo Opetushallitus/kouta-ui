@@ -14,11 +14,15 @@
     "start-and-test": "start-test start-for-test $PORT run-test",
     "start-for-test": "BROWSER=none NODE_ENV=test react-app-rewired start",
     "run-test": "react-app-rewired test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "pretest": "eslint --ignore-path .gitignore .",
+    "lint": "eslint --ignore-path .gitignore .",
+    "lint-fix": "eslint --fix --ignore-path .gitignore ."
   },
   "dependencies": {
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
+    "lint": "^1.1.2",
     "oph-urls-js": "github:Opetushallitus/oph-urls-js",
     "oph-virkailija-style-guide": "github:Opetushallitus/virkailija-styles",
     "superagent": "^3.8.3",
@@ -26,6 +30,7 @@
   },
   "devDependencies": {
     "ajv": "^6.5.3",
+    "eslint": "^5.9.0",
     "eslint-plugin-flowtype": "^2.50.3",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-react": "^7.11.1",

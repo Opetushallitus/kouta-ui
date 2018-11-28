@@ -48,8 +48,6 @@ export const updateMuuLomakeValue = (value) => updateState(APP_STATE_HAUN_LOMAKK
 
 export const clearSelections = () => setState(APP_STATE_HAUN_LOMAKKEET, getInitialState());
 
-export const clearSelections = () => setState(APP_STATE_HAUN_LOMAKKEET, getInitialState());
-
 const getHakulomakkeenTyyppiOptions = () => getState(APP_STATE_HAUN_LOMAKKEET, 'lomakkeenTyyppiOptions');
 
 const getHakulomakkeenTyyppiInitialOptions = () => [

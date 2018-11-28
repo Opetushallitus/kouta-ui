@@ -1,8 +1,8 @@
 import {getState, initState, updateState} from '../../utils/stateUtils';
 import {
   getBooleanOptions,
-  getLisattavaOsioOptions, getLukukausiOptions,
-  getLukuvuosiOptions, getOpetusaikaOptions, getOpetuskieliOptions, getOpetustapaOptions
+  getLisattavaOsioOptions, /*getLukukausiOptions,
+  getLukuvuosiOptions,*/ getOpetusaikaOptions, getOpetuskieliOptions, getOpetustapaOptions
 } from '../../model/ToteutuksenJarjestamistiedot';
 import {
   updateMultiSelectionOptionActivation, updateOptionValue,
@@ -16,11 +16,11 @@ export const ToteutuksenJarjestamistiedotStore = () => initState(APP_STATE_TOTEU
     opetuskieliOptions: getOpetuskieliOptions(),
     opetusaikaOptions: getOpetusaikaOptions(),
     opetustapaOptions: getOpetustapaOptions(),
-    maksullisuusOptions: getBooleanOptions(),
-    lukuvuosimaksuOptions: getBooleanOptions(),
-    stipendiOptions: getBooleanOptions(),
-    lukukausiOptions: getLukukausiOptions(),
-    lukuvuosiOptions: getLukuvuosiOptions()
+    maksullisuusOptions: getBooleanOptions()
+    //lukuvuosimaksuOptions: getBooleanOptions(),
+    //stipendiOptions: getBooleanOptions(),
+    //lukukausiOptions: getLukukausiOptions(),
+    //lukuvuosiOptions: getLukuvuosiOptions()
   }
 );
 

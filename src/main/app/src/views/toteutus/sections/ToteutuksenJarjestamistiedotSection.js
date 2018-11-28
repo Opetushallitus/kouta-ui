@@ -5,7 +5,7 @@ import {RadiobuttonSelector} from '../../../components/RadiobuttonSelector';
 import {TextAreaField} from '../../../components/TextAreaField';
 import {InfoHeader} from '../../../components/InfoHeader';
 import {ActionLink} from '../../../components/ActionLink';
-import {DropdownSelector} from '../../../components/DropdownSelector';
+//import {DropdownSelector} from '../../../components/DropdownSelector';
 import {connectComponent} from '../../../utils/stateUtils';
 import {
   APP_STATE_TOTEUTUKSEN_JARJESTAMISTIEDOT_OPTIONS,
@@ -70,13 +70,13 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
 
   changeMaksullisuusSelection = (change) => changeRadioSelection('maksullisuusOptions', change);
 
-  changeStipendiSelection = (change) => changeRadioSelection('stipendiOptions', change);
+  //changeStipendiSelection = (change) => changeRadioSelection('stipendiOptions', change);
 
-  changeLukuvuosimaksuSelection = (change) => changeRadioSelection('lukuvuosimaksuOptions', change);
+  //changeLukuvuosimaksuSelection = (change) => changeRadioSelection('lukuvuosimaksuOptions', change);
 
-  changeLukuvuosi = (change) => changeRadioSelection('lukuvuosiOptions', change);
+  //changeLukuvuosi = (change) => changeRadioSelection('lukuvuosiOptions', change);
 
-  changeLukukausi = (change) => changeRadioSelection('lukukausiOptions', change);
+  //changeLukukausi = (change) => changeRadioSelection('lukukausiOptions', change);
 
   renderLisattavaOsioTextAreas = () => this.getLisattavaOsioActiveOptions().map(entry => (
     <TextAreaField onChange={this.changeLisattavaOsioValue} id={entry.key} key={entry.key} label={entry.label}
@@ -88,15 +88,15 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
 
   isMaksullisuusSelected = () => this.getRadioValue('maksullisuusOptions') === 'kylla';
 
-  isLukuvuosimaksuSelected = () => this.getRadioValue('lukuvuosimaksuOptions') === 'kylla';
+  //isLukuvuosimaksuSelected = () => this.getRadioValue('lukuvuosimaksuOptions') === 'kylla';
 
-  isStipendiSelected = () => this.getRadioValue('stipendiOptions') === 'kylla';
+  //isStipendiSelected = () => this.getRadioValue('stipendiOptions') === 'kylla';
 
   optionallyRenderMaksullisuusMaksunMaara = () => this.isMaksullisuusSelected() && <MaksunMaaraInput/>
 
-  optionallyRenderLukuvuosiMaksunMaara = () => this.isLukuvuosimaksuSelected() && <MaksunMaaraInput/>
+  //optionallyRenderLukuvuosiMaksunMaara = () => this.isLukuvuosimaksuSelected() && <MaksunMaaraInput/>
 
-  optionallyRenderStipendiEditor = () => this.isStipendiSelected() && <StipendiEditor/>
+  //optionallyRenderStipendiEditor = () => this.isStipendiSelected() && <StipendiEditor/>
 
   renderContent = () => (
       <div className={'content'}>
@@ -122,6 +122,8 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
             {this.optionallyRenderMaksullisuusMaksunMaara()}
           </div>
 
+          {/* Nämä kentät kuuluvat kk-toteutukselle
+
           <InfoHeader label={'Onko lukuvuosimaksua?'}/>
           <div className={'option-controls-row'}>
             <RadiobuttonSelector options={this.state.lukuvuosimaksuOptions}
@@ -140,7 +142,7 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
             <span className={'label'}>Vuosi</span>
             <DropdownSelector options={this.state.lukuvuosiOptions} prompt={'Valitse lukuvuosi'}
                               onChange={this.changeLukuvuosi}/>
-          </div>
+          </div>*/}
 
           <div className={'toteutuksen-kuvaus column'}>
             <InfoHeader label={'Toteutuksen kuvaus'}/>

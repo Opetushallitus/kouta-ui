@@ -1,13 +1,13 @@
 import React from 'react';
-import {APP_STATE_HAKUKOHTEEN_KIELIVERSIO_SUPPORTED_LANGUAGES} from '../../../config/states';
 import {AbstractSection} from '../../../components/AbstractSection';
 import {connectComponent} from '../../../utils/stateUtils';
 import {
-  APP_STATE_HAKUKOHTEEN_PERUSTIEDOT,
-  setKaksoistutkintoActive,
-  updateNimi,
-  clearSelections
+    APP_STATE_HAKUKOHTEEN_PERUSTIEDOT,
+    clearSelections,
+    setKaksoistutkintoActive,
+    updateNimi
 } from '../../../stores/hakukohde/HakukohteenPerustiedotStore';
+import {APP_STATE_HAKUKOHTEEN_KIELIVERSIO_SUPPORTED_LANGUAGES} from "../../../stores/hakukohde/HakukohteenKieliversioStore";
 
 export class HakukohteenPerustiedotSection extends AbstractSection {
 

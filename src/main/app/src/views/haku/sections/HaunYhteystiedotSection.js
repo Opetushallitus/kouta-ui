@@ -1,5 +1,5 @@
-import {APP_STATE_HAUN_KIELIVERSIO_SUPPORTED_LANGUAGES} from '../../../config/states';
 import {APP_STATE_HAUN_YHTEYSTIEDOT, clearValues, storeValues} from '../../../stores/haku/HaunYhteystiedotStore';
+import {APP_STATE_HAUN_KIELIVERSIO_SUPPORTED_LANGUAGES} from "../../../stores/haku/HaunKieliversioStore";
 import {AbstractYhteystiedotSection} from '../../../components/AbstractYhteystiedotSection';
 
 export class HaunYhteystiedotSection extends AbstractYhteystiedotSection {

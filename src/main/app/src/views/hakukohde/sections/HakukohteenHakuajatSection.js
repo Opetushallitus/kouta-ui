@@ -77,7 +77,6 @@ export class HakukohteenHakuajatSection extends AbstractSection {
 
     togglePoikkeavaHakukohteenHakuaika = (event) => setPoikkeavaHakuaika(event.target.checked);
 
-
     renderContent = () => (
         <div className={'content'}>
             <div className={'form-column'}>

@@ -1,6 +1,8 @@
-.hakukohteen-koulutuksen-alkamiskausi {
+.hakukohteen-alkamiskausi-section {
   .content {
-    display: flex;
-    flex-direction: column;
+    align-items: center;
+    .radiobutton-selector {
+      margin-right: 20px;
+    }
   }
 }

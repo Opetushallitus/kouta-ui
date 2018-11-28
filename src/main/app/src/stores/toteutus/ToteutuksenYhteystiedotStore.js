@@ -1,32 +1,16 @@
-import {initState, setState} from '../../utils/stateUtils';
+import {setState, updateState} from '../../utils/stateUtils';
+import {getFields, getInitialValueMap} from '../generic/YhteystiedotStore';
 
 export const APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT = 'APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT';
 
-export const ToteutuksenYhteystiedotStore = () => initState(APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT, getInitialState());
-
-export const clearValues = () => setState(APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT, getInitialState());
-
-export const storeValues = (values) => setState(APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT, values);
-
-const getInitialState = () => ({
-  nimi: {
-    fi: '',
-    sv: '',
-    en: ''
-  },
-  titteli: {
-    fi: '',
-    sv: '',
-    en: ''
-  },
-  sahkoposti: {
-    fi: '',
-    sv: '',
-    en: ''
-  },
-  puhelinnumero: {
-    fi: '',
-    sv: '',
-    en: ''
-  }
+export const ToteutuksenYhteystiedotStore = () => setState(APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT, {
+  valueMap: getInitialValueMap(),
+  fields: getFields()
 });
+
+export const clearValues = () => updateState(APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT, {
+  valueMap: getInitialValueMap(),
+  fields: getFields()
+});
+
+export const storeValues = (valueMap) => updateState(APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT, {valueMap});

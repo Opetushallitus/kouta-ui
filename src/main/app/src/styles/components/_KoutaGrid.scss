@@ -1,0 +1,15 @@
+.kouta-grid {
+  .column-sort-icon {
+    cursor: pointer;
+  }
+
+  .header-row {
+    th {
+      text-align: start;
+    }
+  }
+
+  .active {
+    background-color: #e0f2fd;
+  }
+}

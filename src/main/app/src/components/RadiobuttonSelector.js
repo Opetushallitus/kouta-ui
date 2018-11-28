@@ -11,10 +11,19 @@ export class RadiobuttonSelector extends Component {
     active: event.target.checked
   });
 
+  handleInputFieldChange = (event) => this.props.onInput({
+    key: event.target.getAttribute('data-key'),
+    value:  event.target.value
+  });
+
+  optionallyRenderInputField = (option) => option.input && option.active ? (
+    <input type={'text'} data-key={option.key} value={option.value} onChange={this.handleInputFieldChange}/>
+  ) : null;
+
   renderOption = (option, index) => (
     <li key={index}>
       <input type="radio" name={this.getName()} value={option.key} checked={option.active === true}
-             onChange={this.handleCheckboxChange}/>{option.label}
+             onChange={this.handleCheckboxChange}/>{option.label} {this.optionallyRenderInputField(option)}
     </li>
   );
 

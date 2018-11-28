@@ -45,12 +45,12 @@ export class AbstractSection extends Component {
         ...this.state,
         activeTabId: sectionMap[this.getClassName()]
       }),
-      [this.getSupportedLanguagesStateName()]: (supportedLanguages) =>
+      [this.getStateNameForSupportedLanguages()]: (supportedLanguages) =>
         this.setState({...this.state, supportedLanguages})
     });
   }
 
-  getSupportedLanguagesStateName = () => 'REDEFINE_STATE_NAME_IN_SUBCLASS';
+  getStateNameForSupportedLanguages = () => 'REDEFINE_STATE_NAME_IN_SUBCLASS';
 
   getClassName = () => 'AbstractSection';
 
@@ -97,8 +97,7 @@ export class AbstractSection extends Component {
 
   getFirstAvailableTabId = () => this.getSupportedLanguages().length > 0 && this.getSupportedLanguages()[0];
 
-  getActiveTabId = () => this.getSupportedActiveTabId() ||
-    this.getFirstAvailableTabId() || 'fi';
+  getActiveTabId = () => this.getSupportedActiveTabId() || this.getFirstAvailableTabId() || 'fi';
 
   getActiveLanguage = () => this.getActiveTabId();
 
@@ -116,7 +115,10 @@ export class AbstractSection extends Component {
     </ul>
   ) : null;
 
-  toggleState = () => {
+  toggleState = (event) => {
+    if (event.target.className === 'language-tab') {
+      return;
+    }
     const newState = !this.isExpanded();
     const className = this.getClassName();
     setSectionExpansion(className, newState);
@@ -127,10 +129,10 @@ export class AbstractSection extends Component {
   getSupportedLanguages = () => this.state.supportedLanguages || [];
 
   renderHeader = () => (
-      <div className={classNames("header", this.getHeaderCssClass())} onClick={this.toggleState}>
+    <div className={classNames('header', this.getHeaderCssClass())} onClick={this.toggleState} >
         <div className={classNames("title")}>{this.getNumberedHeader()}</div>
         {this.renderLanguageBar()}
-        <div className={classNames("controller", this.getControllerCssClass())}>
+      <div className={classNames('controller', this.getControllerCssClass())} >
           <i className="material-icons">{this.getControlIcon()}</i>
         </div>
       </div>

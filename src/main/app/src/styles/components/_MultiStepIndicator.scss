@@ -21,6 +21,9 @@
       flex-direction: column;
       margin:10px;
       flex-grow: 1;
+      i {
+        font-size: 40px;
+      }
       .circle {
         cursor: pointer;
         height: 75px;

@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
 
-import {withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom';
 import {
-  workflowUrlHaku, workflowUrlHakukohde, workflowUrlKoulutus, workflowUrlToteutus, workflowUrlValintaperusteet
+  workflowUrlHaku,
+  workflowUrlHakukohde,
+  workflowUrlKoulutus,
+  workflowUrlToteutus,
+  workflowUrlValintaperusteet
 } from '../../../config/urls';
 import {selectWorkflow} from '../../../stores/generic/WorkflowStore';
 
@@ -15,8 +19,9 @@ class StepperCircle extends Component {
   getCssClassActive = () => window.location.href.endsWith(this.props.workflowUrl) ? 'active' : 'inactive';
 
   render = () => (
-      <div className={"stepper-circle"} onClick={this.onClick}>
-      <div className={classNames("circle", this.getCssClassActive())}>{this.props.title}</div>
+    <div className={classNames("stepper-circle", this.props.nameClass)} onClick={this.onClick}>
+      <div className={classNames("circle", this.getCssClassActive())}><i
+        className={'material-icons'}>{this.props.icon}</i></div>
       <div className={"description"}>{this.props.description}</div>
     </div>
   )
@@ -30,15 +35,20 @@ export class MultiStepIndicator extends Component {
   }
 
   render = () => (
-      <div className={"multi-step-indicator"}>
-        <div className={"circle-container"}>
-          <StepperCircle workflowUrl={workflowUrlKoulutus()} ready={true} title={"1"} description={"Koulutus"} onClick={this.navigateToWorkflow}/>
-          <StepperCircle workflowUrl={workflowUrlToteutus()} ready={false} title={"2"} description={"Toteutus"} onClick={this.navigateToWorkflow}/>
-          <StepperCircle workflowUrl={workflowUrlHaku()} ready={false} title={"3"} description={"Haku"} onClick={this.navigateToWorkflow}/>
-          <StepperCircle workflowUrl={workflowUrlHakukohde()} ready={false} title={"4"} description={"Hakukohde"} onClick={this.navigateToWorkflow}/>
-          <StepperCircle workflowUrl={workflowUrlValintaperusteet()} ready={false} title={"5"} description={"Valintaperusteet"} onClick={this.navigateToWorkflow}/>
-        </div>
+    <div className={"multi-step-indicator"}>
+      <div className={"circle-container"}>
+        <StepperCircle nameClass={'koulutus-circle'} workflowUrl={workflowUrlKoulutus()} ready={true} description={"Koulutus"}
+          onClick={this.navigateToWorkflow} icon={'school'}/>
+        <StepperCircle nameClass={'toteutus-circle'} workflowUrl={workflowUrlToteutus()} ready={false} description={"Toteutus"}
+          onClick={this.navigateToWorkflow} icon={'settings'}/>
+        <StepperCircle nameClass={'haku-circle'} workflowUrl={workflowUrlHaku()} ready={false} description={"Haku"}
+          onClick={this.navigateToWorkflow} icon={'schedule'}/>
+        <StepperCircle nameClass={'hakukohde-circle'} workflowUrl={workflowUrlHakukohde()} ready={false} description={"Hakukohde"}
+          onClick={this.navigateToWorkflow} icon={'grain'}/>
+        <StepperCircle nameClass={'valintaperusteet-circle'} workflowUrl={workflowUrlValintaperusteet()} ready={false}
+          description={"Valintaperusteet"} onClick={this.navigateToWorkflow} icon={'select_all'}/>
       </div>
+    </div>
   )
 }
 

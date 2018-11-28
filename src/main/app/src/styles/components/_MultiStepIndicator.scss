@@ -14,6 +14,13 @@
     flex-direction: row;
     width: 100%;
     max-width: 1024px;
+
+    .haku-circle {
+      padding-left: 10vw;
+    }
+    .valintaperusteet-circle {
+      padding-left: 10vw;
+    }
     .stepper-circle {
       justify-content: center;
       align-items: center;
@@ -21,6 +28,9 @@
       flex-direction: column;
       margin:10px;
       flex-grow: 1;
+      i {
+        font-size: 40px;
+      }
       .circle {
         cursor: pointer;
         height: 75px;

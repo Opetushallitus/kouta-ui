@@ -11,6 +11,7 @@ import {
 import {DateTimeEditor} from "../../../components/DateTimeEditor";
 import {ActionLink} from "../../../components/ActionLink";
 import {InfoHeader} from "../../../components/InfoHeader";
+import {APP_STATE_HAKUKOHTEEN_KIELIVERSIO_SUPPORTED_LANGUAGES} from "../../../stores/hakukohde/HakukohteenKieliversioStore";
 
 class HakukohteenHakuaikaEditor extends Component {
 
@@ -57,6 +58,8 @@ export class HakukohteenHakuajatSection extends AbstractSection {
     getClassName = () => 'HakukohteenHakuajatSection';
 
     getHeader = () => 'Hakuajat';
+
+    getStateNameForSupportedLanguages = () => APP_STATE_HAKUKOHTEEN_KIELIVERSIO_SUPPORTED_LANGUAGES;
 
     getHakukohteenHakuaikaEntries = () => this.state.hakukohteenHakuaikaEntries || [];
 

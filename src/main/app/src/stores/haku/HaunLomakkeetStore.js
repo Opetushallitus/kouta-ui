@@ -4,10 +4,10 @@ import {getActiveKey, updateSingleSelectionOptionActivation} from '../../utils/o
 export const APP_STATE_HAUN_LOMAKKEET = 'APP_STATE_HAUN_LOMAKKEET';
 
 export const HAKULOMAKE_TYPE = {
-  HAKEMUSPALVELU: 'hakemuspalvelu',
-  JARJESTELMA: 'jarjestelma',
+  HAKEMUSPALVELU: 'ataru',
+  JARJESTELMA: 'haku-app',
   MUU: 'muu',
-  EI_SAHKOINEN: 'ei_sahkoinen'
+  EI_SAHKOINEN: 'ei sähköistä'
 };
 
 export const HaunLomakkeetStore = () => initState(APP_STATE_HAUN_LOMAKKEET, getInitialState());

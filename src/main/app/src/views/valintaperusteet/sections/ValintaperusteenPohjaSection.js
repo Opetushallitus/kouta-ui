@@ -5,7 +5,7 @@ export class ValintaperusteenPohjaSection extends AbstractPohjanValintaSection {
 
   getScope = () => SCOPE_VALINTAPERUSTEEN_POHJA;
 
-  getCssClassName = () => 'pohjan-valinta-section valintaperusteen-pohjan-valinta-section';
+  getCssClassName = () => 'pohjan-valinta-section valintaperusteen-pohja-section';
 
   getClassName = () => 'ValintaperusteenPohjaSection';
 

@@ -1,9 +1,9 @@
 import {sortBy} from 'lodash';
 import React, {Component} from 'react';
-import {getItemsOnPage} from '../utils/objectUtils';
 
 const classNames = require('classnames');
 
+//TODO: tarkistetaan voisiko toteuttaa jostakin kirjastosta tulevalla komponentilla.
 export class KoutaGrid extends Component {
 
   constructor(props) {
@@ -98,18 +98,7 @@ export class KoutaGrid extends Component {
     </tr>
   );
 
-  getCurrentPageIndex = () => this.state.currentPageIndex;
-
-  getPageSize = () => this.state.pageSize;
-
-  getEntriesOnCurrentPage = () => {
-    const sortedData = this.getSortedData();
-    const currentPageIndex = this.getCurrentPageIndex();
-    const pageSize = this.getPageSize();
-    return getItemsOnPage(sortedData, pageSize, currentPageIndex);
-  };
-
-  renderDataRows = () => this.getEntriesOnCurrentPage().map(this.renderDataItemAsRow);
+    renderDataRows = () => this.getSortedData().map(this.renderDataItemAsRow);
 
   renderHeaderRow = () => (
     <tr className={'header-row'}>

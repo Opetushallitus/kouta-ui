@@ -1,6 +1,6 @@
 .valintaperusteen-pohja-section {
   .content {
-    display: flex;
-    flex-direction: column;
+    align-items: flex-start;
+    flex-direction: row !important;
   }
 }

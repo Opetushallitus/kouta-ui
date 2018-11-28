@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ValintaperusteenPohjaSection} from './sections/ValintaperusteenPohjanValintaSection';
+import {ValintaperusteenPohjaSection} from './sections/ValintaperusteenPohjaSection';
 import {ValintaperusteenKohdeSection} from './sections/ValintaperusteenKohdeSection';
 import {ValintaperusteenKieliversioSection} from './sections/ValintaperusteenKieliversioSection';
 import {ValintaperusteenNimiSection} from './sections/ValintaperusteenNimiSection';
@@ -13,7 +13,7 @@ import {ValintaperusteenHakutapaSection} from './sections/ValintaperusteenHakuta
 export class ValintaperusteetView extends Component {
 
   render = () => (
-      <div className={"workflow-view"}>
+      <div className={"workflow-view valintaperusteet-view"}>
         <ValintaperusteenKieliversioSection orderNumber={'1'}/>
         <ValintaperusteenPohjaSection orderNumber={'2'}/>
         <ValintaperusteenHakutapaSection orderNumber={'3'}/>

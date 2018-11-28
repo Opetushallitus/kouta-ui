@@ -21,23 +21,23 @@ export const clearSelections = () => setState(APP_STATE_HAKUKUOHTEEN_POHJAKOULUT
 
 const getHakukohteenPohjakoulutusvaatimusInitialOptions = () => [
   {
-    key: 'eruskoulu-pk',
+    key: 'pohjakoulutusvaatimustoinenaste_pk#2',
     label: 'Peruskoulu PK'
   },
   {
-    key: 'lukion-oppimaara-yo',
+    key: 'pohjakoulutusvaatimustoinenaste_yo#2',
     label: 'Lukion oppimäärä YO'
   },
   {
-    key: 'erityisopetus-amm',
+    key: 'pohjakoulutusvaatimustoinenaste_amm#2',
     label: 'Erityisopetuksena järjestettävä ammatillinen perustutkinto'
   },
   {
-    key: 'ei-pohjakouluvaatimusta',
+    key: 'pohjakoulutusvaatimustoinenaste_xx#2',
     label: 'Ei pohjakouluvaatimusta'
   },
   {
-    key: 'muu-valinta',
+    key: 'pohjakoulutusvaatimustoinenaste_muu#2',
     label: 'Muu, mikä',
     input: true
   }

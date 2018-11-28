@@ -1,10 +1,10 @@
 import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
 import {
-  APP_STATE_VALINTTAPERUSTEEN_KOHDE,
+  APP_STATE_VALINTAPERUSTEEN_KOHDEJOUKKO,
   selectOption,
   clearSelections
-} from '../../../stores/valintaperusteet/ValintaperusteenKohdeStore';
+} from '../../../stores/valintaperusteet/ValintaperusteenKohdejoukkoStore';
 import {connectComponent} from '../../../utils/stateUtils';
 import {RadiobuttonSelector} from '../../../components/RadiobuttonSelector';
 
@@ -17,7 +17,7 @@ export class ValintaperusteenKohdeSection extends AbstractSection {
   getOptions = () => this.state.options || [];
 
   onMount = () => connectComponent(this, {
-    [APP_STATE_VALINTTAPERUSTEEN_KOHDE]: (incomingState) => this.setState({
+    [APP_STATE_VALINTAPERUSTEEN_KOHDEJOUKKO]: (incomingState) => this.setState({
       ...this.state,
       ...incomingState
     })

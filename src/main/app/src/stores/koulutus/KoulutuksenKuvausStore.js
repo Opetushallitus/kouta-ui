@@ -5,6 +5,7 @@ import {urls} from 'oph-urls-js';
 import {findByKey, removeDuplicatesByFeature} from '../../utils/objectUtils';
 import {APP_STATE_KOULUTUKSEN_TIEDOT} from './KoulutuksenTiedotStore';
 import {getLanguage} from '../generic/LanguageStore';
+import {removeDuplicatesByFeature} from "../../utils/arrayUtils";
 
 export const APP_STATE_KOULUTUKSEN_KUVAUS = 'APP_STATE_KOULUTUKSEN_KUVAUS';
 export const APP_STATE_KOULUTUKSEN_OSAAMISALAT = 'APP_STATE_KOULUTUKSEN_OSAAMISALAT';

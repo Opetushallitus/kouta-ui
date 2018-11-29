@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 export class InputField extends Component {
 
   onChange = (event) => this.props.onChange({
+      id: this.getId(),
       key: this.getId(),
       value: event.target.value
   });

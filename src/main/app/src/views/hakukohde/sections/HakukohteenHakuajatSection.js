@@ -63,7 +63,7 @@ export class HakukohteenHakuajatSection extends AbstractSection {
 
     getHakukohteenHakuaikaEntries = () => this.state.hakukohteenHakuaikaEntries || [];
 
-    renderHakuaikaEditor = (hakuaika) => <HakukohteenHakuaikaEditor hakuaika={hakuaika} onChange={updateHakuaika}/>;
+    renderHakuaikaEditor = (hakuaika, index) => <HakukohteenHakuaikaEditor key={index} hakuaika={hakuaika} onChange={updateHakuaika}/>;
 
     renderHakuaikaEditors = () => this.getHakukohteenHakuaikaEntries().map(this.renderHakuaikaEditor);
 

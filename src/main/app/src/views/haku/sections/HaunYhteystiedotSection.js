@@ -14,8 +14,9 @@ export class HaunYhteystiedotSection extends AbstractYhteystiedotSection {
 
   onClearButtonClick = () => clearValues();
 
+  notifyValuesUpdated = () => storeValues(this.state.valueMap);
+
   onSubmitButtonClick = () => {
-    storeValues(this.state);
     this.setSectionDone();
   };
 

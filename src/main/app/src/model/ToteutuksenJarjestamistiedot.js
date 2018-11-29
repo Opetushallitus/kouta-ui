@@ -3,56 +3,56 @@
 export const getLukukausiOptions = () => [
   {
     label: 'Kevät',
-    key: 'kevat'
+    key: 'kausi_k#1'
   },
   {
     label: 'Kesä',
-    key: 'kesa'
+    key: 'kausi_kesa#2' //Huom! Ei ole oikeasti vielä koodistossa
   },
   {
     label: 'Syksy',
-    key: 'syksy'
+    key: 'kausi_s#1'
   }
 ];
 
 export const getOpetuskieliOptions = () => [
   {
     label: 'Suomi',
-    key: 'fi'
+    key: 'kieli_fi#1'
   },
   {
     label: 'Ruotsi',
-    key: 'sv'
+    key: 'kieli_sv#1'
   },
   {
     label: 'Englanti',
-    key: 'en'
+    key: 'kieli_en#1'
   }
 ];
 
 export const getOpetusaikaOptions= () => [
   {
     label: 'Päiväopetus',
-    key: 'paivaopetus'
+    key: 'opetusaikakk_1#1'
   },
   {
     label: 'Iltaopetus',
-    key: 'iltaopetus'
+    key: 'opetusaikakk_2#1'
   },
   {
     label: 'Viikonloppuopetus',
-    key: 'viikonloppuopetus'
+    key: 'opetusaikakk_3#1'
   }
 ];
 
 export const getOpetustapaOptions = () => [
   {
-    label: 'Lähiopiskelu',
-    key: 'lahiopiskelu'
+    label: 'Lähiopetus',
+    key: 'opetuspaikkakk_1#1'
   },
   {
-    label: 'Etäopiskelu',
-    key: 'etaopiskelu'
+    label: 'Etäopetus',
+    key: 'opetuspaikkakk_2#1'
   }
 ];
 

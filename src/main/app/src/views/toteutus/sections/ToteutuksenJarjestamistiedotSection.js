@@ -1,32 +1,23 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
 import {CheckboxSelector} from '../../../components/CheckboxSelector';
 import {RadiobuttonSelector} from '../../../components/RadiobuttonSelector';
 import {TextAreaField} from '../../../components/TextAreaField';
 import {InfoHeader} from '../../../components/InfoHeader';
 import {ActionLink} from '../../../components/ActionLink';
-import {DropdownSelector} from '../../../components/DropdownSelector';
+//import {DropdownSelector} from '../../../components/DropdownSelector';
 import {connectComponent} from '../../../utils/stateUtils';
 import {
   APP_STATE_TOTEUTUKSEN_JARJESTAMISTIEDOT_OPTIONS,
   changeCheckboxSelection,
   changeRadioSelection,
-  changeSelectionValue
+  changeSelectionValue,
+  addKieliValue,
+  getKieliValue
 } from '../../../stores/toteutus/ToteutuksenJarjestamistiedotStore';
+import {APP_STATE_TOTEUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES} from '../../../stores/toteutus/ToteutuksenKieliversioStore';
 
-class MaksunMaaraInput extends Component {
-
-  render = () => (
-    <div className={'input-field-container column'}>
-      <div className={'row'}>
-        <input type={'text'} placeholder={'Maksun määrä'}></input> euroa
-      </div>
-    </div>
-  );
-
-}
-
-class StipendiEditor extends Component  {
+/*class StipendiEditor extends Component  {
 
   render = () => (
     <div className={'stipendi-editor column'}>
@@ -39,7 +30,7 @@ class StipendiEditor extends Component  {
       </textarea>
     </div>
   )
-}
+}*/
 
 export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
 
@@ -53,6 +44,8 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
   getClassName = () => 'ToteutuksenJarjestamistiedotSection';
 
   getHeader = () => 'Toteutuksen järjestämistiedot';
+
+  getSupportedLanguagesStateName = () => APP_STATE_TOTEUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES;
 
   getLisattavaOsioActiveOptions = () => this.state.lisattavaOsioOptions.filter(entry => entry.active);
 
@@ -70,33 +63,49 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
 
   changeMaksullisuusSelection = (change) => changeRadioSelection('maksullisuusOptions', change);
 
-  changeStipendiSelection = (change) => changeRadioSelection('stipendiOptions', change);
+  changeMaksunMaara = (event) => addKieliValue('maksunMaara', this.getActiveLanguage(), event.target.value);
 
-  changeLukuvuosimaksuSelection = (change) => changeRadioSelection('lukuvuosimaksuOptions', change);
+  getMaksunMaara = () => getKieliValue('maksunMaara', this.getActiveLanguage());
 
-  changeLukuvuosi = (change) => changeRadioSelection('lukuvuosiOptions', change);
+  changeKuvaus = (event) => addKieliValue('kuvaus', this.getActiveLanguage(), event.target.value);
 
-  changeLukukausi = (change) => changeRadioSelection('lukukausiOptions', change);
+  getKuvaus = () => getKieliValue('kuvaus', this.getActiveLanguage());
+
+  //changeStipendiSelection = (change) => changeRadioSelection('stipendiOptions', change);
+
+  //changeLukuvuosimaksuSelection = (change) => changeRadioSelection('lukuvuosimaksuOptions', change);
+
+  //changeLukuvuosi = (change) => changeRadioSelection('lukuvuosiOptions', change);
+
+  //changeLukukausi = (change) => changeRadioSelection('lukukausiOptions', change);
 
   renderLisattavaOsioTextAreas = () => this.getLisattavaOsioActiveOptions().map(entry => (
     <TextAreaField onChange={this.changeLisattavaOsioValue} id={entry.key} key={entry.key} label={entry.label}
                    value={entry.value}/>
   ));
 
+  renderMaksunMaaraInputField = () => (
+      <div className={'input-field-container column'}>
+          <div className={'row'}>
+              <input type={'text'} placeholder={'Maksun määrä'} onChange={this.changeMaksunMaara} value={this.getMaksunMaara()}></input> euroa
+          </div>
+      </div>
+  );
+    //if (!(event instanceof Event)).
   addNewLanguage = (event) => {
   };
 
   isMaksullisuusSelected = () => this.getRadioValue('maksullisuusOptions') === 'kylla';
 
-  isLukuvuosimaksuSelected = () => this.getRadioValue('lukuvuosimaksuOptions') === 'kylla';
+  //isLukuvuosimaksuSelected = () => this.getRadioValue('lukuvuosimaksuOptions') === 'kylla';
 
-  isStipendiSelected = () => this.getRadioValue('stipendiOptions') === 'kylla';
+  //isStipendiSelected = () => this.getRadioValue('stipendiOptions') === 'kylla';
 
-  optionallyRenderMaksullisuusMaksunMaara = () => this.isMaksullisuusSelected() && <MaksunMaaraInput/>
+  optionallyRenderMaksullisuusMaksunMaara = () => this.isMaksullisuusSelected() && this.renderMaksunMaaraInputField();
 
-  optionallyRenderLukuvuosiMaksunMaara = () => this.isLukuvuosimaksuSelected() && <MaksunMaaraInput/>
+  //optionallyRenderLukuvuosiMaksunMaara = () => this.isLukuvuosimaksuSelected() && <MaksunMaaraInput/>
 
-  optionallyRenderStipendiEditor = () => this.isStipendiSelected() && <StipendiEditor/>
+  //optionallyRenderStipendiEditor = () => this.isStipendiSelected() && <StipendiEditor/>
 
   renderContent = () => (
       <div className={'content'}>
@@ -122,6 +131,8 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
             {this.optionallyRenderMaksullisuusMaksunMaara()}
           </div>
 
+          {/* Nämä kentät kuuluvat kk-toteutukselle
+
           <InfoHeader label={'Onko lukuvuosimaksua?'}/>
           <div className={'option-controls-row'}>
             <RadiobuttonSelector options={this.state.lukuvuosimaksuOptions}
@@ -140,12 +151,13 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
             <span className={'label'}>Vuosi</span>
             <DropdownSelector options={this.state.lukuvuosiOptions} prompt={'Valitse lukuvuosi'}
                               onChange={this.changeLukuvuosi}/>
-          </div>
+          </div>*/}
 
           <div className={'toteutuksen-kuvaus column'}>
             <InfoHeader label={'Toteutuksen kuvaus'}/>
             <textarea className={'toteutuksen-kuvaus-textarea'}
-                      placeholder={'Kirjoita kuvaus miten koulutukssen toteutus järjestetään teidän oppilaitoksessanne'}/>
+                      placeholder={'Kirjoita kuvaus miten koulutukssen toteutus järjestetään teidän oppilaitoksessanne'}
+                      onChange={this.changeKuvaus}>{this.getKuvaus()}</textarea>
             <span className={'info-span'}>Huom! Tämä teksti näkyy oppijalle Opintopolun sivuilla</span>
           </div>
 

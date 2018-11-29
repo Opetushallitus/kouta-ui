@@ -12,27 +12,31 @@ export class AbstractYhteystiedotSection extends AbstractSection {
 
   getStateNameForYhteystiedot = () => {
     throw new Error('AbstractYhteystiedotSection:getStateNameForYhteystiedot: implement in subclass');
-  }
+  };
 
   getStateNameForSupportedLanguages = () => {
     throw new Error('AbstractYhteystiedotSection:getStateNameForSupportedLanguages: implement in subclass');
-  }
+  };
 
   getClassName = () =>  {
     throw new Error('AbstractYhteystiedotSection:getClassName: implement in subclass');
-  }
+  };
 
   getHeader = () => {
     throw new Error('AbstractYhteystiedotSection:getHeader: implement in subclass');
-  }
+  };
 
   onClearButtonClick = () => {
     throw new Error('AbstractYhteystiedotSection:onSubmitButtonClick: implement in subclass');
-  }
+  };
 
   onSubmitButtonClick = () => {
     throw new Error('AbstractYhteystiedotSection:onSubmitButtonClick: implement in subclass');
-  }
+  };
+
+  notifyValuesUpdated = () => {
+    throw new Error('AbstractYhteystiedotSection:notifyValuesUpdated: implement in subclass');
+  };
 
   getValueMap = () => this.state.valueMap || {};
 
@@ -49,17 +53,19 @@ export class AbstractYhteystiedotSection extends AbstractSection {
     value: this.getFieldValueInActiveLanguage(field.id)
   }));
 
-  updateEntry = (field) => {
-    const language = this.getActiveLanguage();
-    const fieldId = field.id;
-    const value = field.value;
-    const valueMap = {...this.getValueMap()};
-    valueMap[fieldId][language] = value;
-    this.shallCloneValues() && this.cloneFieldValueToAllLanguages(valueMap, fieldId);
-    this.setState({...this.state, valueMap});
+  updateValues = (valueMap) => {
+      this.setState({...this.state, valueMap});
+      this.notifyValuesUpdated();
   };
 
-  renderField = (field) => <InputField key={field.id} field={field} onChange={this.updateEntry}/>;
+  updateEntry = (field) => {
+    var valueMap = {...this.getValueMap()};
+    valueMap[field.id][this.getActiveLanguage()] = field.value;
+    this.shallCloneValues() && this.cloneFieldValueToAllLanguages(valueMap, field.id);
+    this.updateValues(valueMap);
+  };
+
+  renderField = (field) => <InputField key={field.id} field={field} onChange={this.updateEntry} value={this.getFieldValueInActiveLanguage(field.id)}/>;
 
   renderFields = () => this.getDataFields().map(this.renderField);
 
@@ -74,7 +80,7 @@ export class AbstractYhteystiedotSection extends AbstractSection {
 
   cloneValuesToOtherLanguages = () => {
     const valueMap = this.getFieldIds().reduce(this.cloneFieldValueToAllLanguages, {...this.getValueMap()});
-    this.setState({...this.state, valueMap});
+    this.updateValues(valueMap);
   };
 
   toggleCloneOption = (event) => {

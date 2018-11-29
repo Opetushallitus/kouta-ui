@@ -38,12 +38,11 @@ export const  changeSelectionValue = (targetOptions, change) => updateState(APP_
   [targetOptions]: updateOptionValue(getOptionsByName(targetOptions), change)
 });
 
-export const addKieliValue = (target, language, change) => {
+export const addKieliValue = (target, language, change) =>
     updateState(APP_STATE_TOTEUTUKSEN_JARJESTAMISTIEDOT_OPTIONS, { [target]: {
         ...getOptionsByName(target),
         [language]: change
     }});
-};
 
 export const getKieliValue = (target, language) => {
   const value = getOptionsByName(target);

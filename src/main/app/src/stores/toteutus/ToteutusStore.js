@@ -40,9 +40,9 @@ const appendToMetadata = (key, value) => {
     }
 };
 
-const createToimipisteArray = (toimipisteet) => { return {
+const createToimipisteArray = (toimipisteet) => ({
     ...toimipisteet && { tarjoajat: Object.keys(toimipisteet).filter(k => toimipisteet[k]) }
-}};
+});
 
 const createOsaamisalaArray = (osaamisalat) => Object.keys(osaamisalat).filter(
     k => osaamisalat[k] === true).map((o) => {return {koodiUri: o}});

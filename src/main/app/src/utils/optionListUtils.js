@@ -3,6 +3,9 @@
 //return only options that are active (often: selected or checked)
 export const getActiveOptions = (options) => options.filter(entry => entry.active);
 
+//return only first active option (relevant for single selection options)
+export const getActiveOption = (options) => options.find(entry => entry.active);
+
 //makes one option active or inactive in an option list that can have multiple active options
 export const updateMultiSelectionOptionActivation = (options, change) => options.map(entry => ({
   ...entry,

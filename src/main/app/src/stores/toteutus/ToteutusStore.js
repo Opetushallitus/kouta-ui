@@ -5,6 +5,7 @@ import {APP_STATE_ORGANISAATION_TOIMIPISTE_SELECTIONS} from "../koulutus/Koulutu
 import {APP_STATE_TOTEUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES} from "./ToteutuksenKieliversioStore";
 import {APP_STATE_TOTEUTUKSEN_OSAAMISALA_SELECTIONS} from "./ToteutuksenOsaamisalaStore";
 import {APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT} from "./ToteutuksenYhteystiedotStore";
+import {APP_STATE_TOTEUTUKSEN_NIMI_TRANSLATION_MAP} from "./ToteutuksenNimiStore";
 
 
 export const APP_STATE_TOTEUTUS_JSON = "APP_STATE_TOTEUTUS_JSON";
@@ -16,7 +17,8 @@ export const ToteutusStore = () => {
         [APP_STATE_TOTEUTUKSEN_OSAAMISALA_SELECTIONS]: (osaamisalat) => updateToteutus( appendToMetadata("osaamisalat", createOsaamisalaArray(osaamisalat))),
         [APP_STATE_TOTEUTUKSEN_JARJESTAMISTIEDOT_OPTIONS]: (jarjestamistiedot) => updateToteutus(appendToMetadata("opetus", createOpetusMetadata(jarjestamistiedot))),
         [APP_STATE_ORGANISAATION_TOIMIPISTE_SELECTIONS]: (toimipisteet) => updateToteutus(createToimipisteArray(toimipisteet)),
-        [APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT]: (yhteystiedot) => updateToteutus( appendToMetadata("yhteystieto", yhteystiedot.valueMap))
+        [APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT]: (yhteystiedot) => updateToteutus( appendToMetadata("yhteystieto", yhteystiedot.valueMap)),
+        [APP_STATE_TOTEUTUKSEN_NIMI_TRANSLATION_MAP]: (nimi) => updateToteutus( {nimi: nimi})
         //nimi
         //yhteystiedot
         //asiasanat ja ammattinimikkeet

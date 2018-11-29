@@ -49,12 +49,15 @@ export class AbstractNimiSection extends AbstractSection {
 
   isEnabled = () => true;
 
+  isEditable = () => true;
+
   renderContent = () => this.isEnabled() ? (
     <div className={"content"}>
       <span className={"label"}>{this.getPromptText()}</span>
       <input type={"text"} className={"translation-input"} value={this.getTranslation()}
              placeholder={this.getPromptText()}
-             onChange={this.updateTranslation}></input>
+             onChange={this.updateTranslation}
+             disabled = {this.isEditable() ? "" : "disabled"} ></input>
       <span className={"info-span"}>Huom! Tämä teksti näkyy oppijalle Opintopolun sivuilla.</span>
     </div>
   ) : (

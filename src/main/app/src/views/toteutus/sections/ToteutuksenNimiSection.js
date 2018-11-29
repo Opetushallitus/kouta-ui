@@ -16,4 +16,5 @@ export class ToteutuksenNimiSection extends AbstractNimiSection {
 
   getPromptText = () => 'Anna toteutukselle nimi';
 
+  isEditable = () => false;
 }

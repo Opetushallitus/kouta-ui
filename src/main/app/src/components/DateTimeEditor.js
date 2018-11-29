@@ -2,33 +2,25 @@ import React, {Component} from 'react';
 
 export class DateTimeEditor extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      id: props.id || '',
-      time: props.time || '',
-      date: props.date || '',
-      label: props.label || ''
-    };
-  }
+  getDateTime = () => this.props.dateTime || {};
 
-  getDate = () => this.state.date;
+  getDate = () => this.getDateTime().date;
 
-  getTime = () => this.state.time;
+  getTime = () => this.getDateTime().time;
 
   getId = () => this.props.id;
 
-  getLabel = () => this.state.label;
+  getLabel = () => this.props.label;
 
-  onDateChange = (event) => this.setState({
-    ...this.state,
-    date: event.target.value
-  }, () => this.props.onChange(this.state));
+  onDateChange = (event) => this.props.onChange({
+      ...this.props.dateTime,
+      date: event.target.value
+  });
 
-  onTimeChange = (event) => this.setState({
-    ...this.state,
-    time: event.target.value
-  }, () => this.props.onChange(this.state));
+  onTimeChange = (event) => this.props.onChange({
+      ...this.props.dateTime,
+      time: event.target.value
+  });
 
   render = () => (
     <div id={this.getId()} className={'date-time-editor'}>

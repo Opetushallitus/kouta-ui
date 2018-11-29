@@ -34,15 +34,23 @@ const notifyKoulutusNimiUpdate = (koulutusNimi) =>
     storeNimi(koulutusNimi, readOpetusaikaFromState());
 
 const findOpetusaika = (jarjestamistiedot) => {
-  let activeOption = jarjestamistiedot.opetusaikaOptions.find(k => k.active);
+  let activeOption = jarjestamistiedot.opetusaikaOptions ? jarjestamistiedot.opetusaikaOptions.find(k => k.active) : undefined;
   return activeOption && activeOption.label.toLowerCase();
 };
 
 const storeNimi = (koulutusNimi, opetusaika) => {
   let opetusaikaAppend = opetusaika ? ", " + opetusaika : "";
-  updateState(APP_STATE_TOTEUTUKSEN_NIMI_TRANSLATION_MAP, {
-      fi: koulutusNimi["fi"] + opetusaikaAppend, //TODO: opetusajan käännös
-      sv: koulutusNimi["sv"] + opetusaikaAppend,
-      en: koulutusNimi["en"] + opetusaikaAppend
-  });
+  if(koulutusNimi) {
+      updateState(APP_STATE_TOTEUTUKSEN_NIMI_TRANSLATION_MAP, {
+          fi: koulutusNimi["fi"] + opetusaikaAppend, //TODO: opetusajan käännös
+          sv: koulutusNimi["sv"] + opetusaikaAppend,
+          en: koulutusNimi["en"] + opetusaikaAppend
+      });
+  } else {
+      updateState(APP_STATE_TOTEUTUKSEN_NIMI_TRANSLATION_MAP, {
+          fi: "",
+          sv: "",
+          en: ""
+      });
+  }
 };

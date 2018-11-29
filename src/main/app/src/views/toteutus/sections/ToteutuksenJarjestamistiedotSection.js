@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
 import {CheckboxSelector} from '../../../components/CheckboxSelector';
 import {RadiobuttonSelector} from '../../../components/RadiobuttonSelector';
@@ -17,19 +17,7 @@ import {
 } from '../../../stores/toteutus/ToteutuksenJarjestamistiedotStore';
 import {APP_STATE_TOTEUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES} from '../../../stores/toteutus/ToteutuksenKieliversioStore';
 
-/*class MaksunMaaraInput extends Component {
-
-  render = () => (
-    <div className={'input-field-container column'}>
-      <div className={'row'}>
-        <input type={'text'} placeholder={'Maksun määrä'} onChange={}></input> euroa
-      </div>
-    </div>
-  );
-
-}
-
-class StipendiEditor extends Component  {
+/*class StipendiEditor extends Component  {
 
   render = () => (
     <div className={'stipendi-editor column'}>

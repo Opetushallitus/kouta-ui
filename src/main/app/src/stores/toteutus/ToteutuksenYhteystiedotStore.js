@@ -1,4 +1,4 @@
-import {initState, setState, updateState} from '../../utils/stateUtils';
+import {initState, updateState} from '../../utils/stateUtils';
 import {getFields, getInitialValueMap} from '../generic/YhteystiedotStore';
 
 export const APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT = 'APP_STATE_TOTEUTUKSEN_YHTEYSTIEDOT';

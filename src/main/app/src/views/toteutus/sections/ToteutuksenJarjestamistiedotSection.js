@@ -11,15 +11,18 @@ import {
   APP_STATE_TOTEUTUKSEN_JARJESTAMISTIEDOT_OPTIONS,
   changeCheckboxSelection,
   changeRadioSelection,
-  changeSelectionValue
+  changeSelectionValue,
+  addKieliValue,
+  getKieliValue
 } from '../../../stores/toteutus/ToteutuksenJarjestamistiedotStore';
+import {APP_STATE_TOTEUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES} from '../../../stores/toteutus/ToteutuksenKieliversioStore';
 
-class MaksunMaaraInput extends Component {
+/*class MaksunMaaraInput extends Component {
 
   render = () => (
     <div className={'input-field-container column'}>
       <div className={'row'}>
-        <input type={'text'} placeholder={'Maksun määrä'}></input> euroa
+        <input type={'text'} placeholder={'Maksun määrä'} onChange={}></input> euroa
       </div>
     </div>
   );
@@ -39,7 +42,7 @@ class StipendiEditor extends Component  {
       </textarea>
     </div>
   )
-}
+}*/
 
 export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
 
@@ -53,6 +56,8 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
   getClassName = () => 'ToteutuksenJarjestamistiedotSection';
 
   getHeader = () => 'Toteutuksen järjestämistiedot';
+
+  getSupportedLanguagesStateName = () => APP_STATE_TOTEUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES;
 
   getLisattavaOsioActiveOptions = () => this.state.lisattavaOsioOptions.filter(entry => entry.active);
 
@@ -70,6 +75,14 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
 
   changeMaksullisuusSelection = (change) => changeRadioSelection('maksullisuusOptions', change);
 
+  changeMaksunMaara = (event) => addKieliValue('maksunMaara', this.getActiveLanguage(), event.target.value);
+
+  getMaksunMaara = () => getKieliValue('maksunMaara', this.getActiveLanguage());
+
+  changeKuvaus = (event) => addKieliValue('kuvaus', this.getActiveLanguage(), event.target.value);
+
+  getKuvaus = () => getKieliValue('kuvaus', this.getActiveLanguage());
+
   //changeStipendiSelection = (change) => changeRadioSelection('stipendiOptions', change);
 
   //changeLukuvuosimaksuSelection = (change) => changeRadioSelection('lukuvuosimaksuOptions', change);
@@ -83,6 +96,14 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
                    value={entry.value}/>
   ));
 
+  renderMaksunMaaraInputField = () => (
+      <div className={'input-field-container column'}>
+          <div className={'row'}>
+              <input type={'text'} placeholder={'Maksun määrä'} onChange={this.changeMaksunMaara} value={this.getMaksunMaara()}></input> euroa
+          </div>
+      </div>
+  );
+    //if (!(event instanceof Event)).
   addNewLanguage = (event) => {
   };
 
@@ -92,7 +113,7 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
 
   //isStipendiSelected = () => this.getRadioValue('stipendiOptions') === 'kylla';
 
-  optionallyRenderMaksullisuusMaksunMaara = () => this.isMaksullisuusSelected() && <MaksunMaaraInput/>
+  optionallyRenderMaksullisuusMaksunMaara = () => this.isMaksullisuusSelected() && this.renderMaksunMaaraInputField();
 
   //optionallyRenderLukuvuosiMaksunMaara = () => this.isLukuvuosimaksuSelected() && <MaksunMaaraInput/>
 
@@ -147,7 +168,8 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
           <div className={'toteutuksen-kuvaus column'}>
             <InfoHeader label={'Toteutuksen kuvaus'}/>
             <textarea className={'toteutuksen-kuvaus-textarea'}
-                      placeholder={'Kirjoita kuvaus miten koulutukssen toteutus järjestetään teidän oppilaitoksessanne'}/>
+                      placeholder={'Kirjoita kuvaus miten koulutukssen toteutus järjestetään teidän oppilaitoksessanne'}
+                      onChange={this.changeKuvaus}>{this.getKuvaus()}</textarea>
             <span className={'info-span'}>Huom! Tämä teksti näkyy oppijalle Opintopolun sivuilla</span>
           </div>
 

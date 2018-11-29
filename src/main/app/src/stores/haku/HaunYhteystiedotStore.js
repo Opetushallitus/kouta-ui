@@ -13,4 +13,4 @@ export const clearValues = () => updateState(APP_STATE_HAUN_YHTEYSTIEDOT, {
   fields: getFields()
 });
 
-export const storeValues = (valueMap) => updateState(APP_STATE_HAUN_YHTEYSTIEDOT, {valueMap});
+export const storeValues = (valueMap) => updateState(APP_STATE_HAUN_YHTEYSTIEDOT, {valueMap: valueMap});

@@ -16,7 +16,9 @@ export const ToteutuksenJarjestamistiedotStore = () => initState(APP_STATE_TOTEU
     opetuskieliOptions: getOpetuskieliOptions(),
     opetusaikaOptions: getOpetusaikaOptions(),
     opetustapaOptions: getOpetustapaOptions(),
-    maksullisuusOptions: getBooleanOptions()
+    maksullisuusOptions: getBooleanOptions(),
+    kuvaus: {},
+    maksunMaara: {}
     //lukuvuosimaksuOptions: getBooleanOptions(),
     //stipendiOptions: getBooleanOptions(),
     //lukukausiOptions: getLukukausiOptions(),
@@ -35,6 +37,18 @@ export const changeRadioSelection = (targetOptions, change) =>  updateState(APP_
 export const  changeSelectionValue = (targetOptions, change) => updateState(APP_STATE_TOTEUTUKSEN_JARJESTAMISTIEDOT_OPTIONS, {
   [targetOptions]: updateOptionValue(getOptionsByName(targetOptions), change)
 });
+
+export const addKieliValue = (target, language, change) => {
+    updateState(APP_STATE_TOTEUTUKSEN_JARJESTAMISTIEDOT_OPTIONS, { [target]: {
+        ...getOptionsByName(target),
+        [language]: change
+    }});
+};
+
+export const getKieliValue = (target, language) => {
+  const value = getOptionsByName(target);
+  return value && value[language];
+};
 
 const getOptionsByName = (optionsName) => getState(APP_STATE_TOTEUTUKSEN_JARJESTAMISTIEDOT_OPTIONS, optionsName);
 

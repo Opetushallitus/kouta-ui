@@ -2,7 +2,7 @@ import axios from 'axios';
 import {handleEvents, setStates} from '../../utils/stateUtils';
 
 import {urls} from 'oph-urls-js';
-import {findByKey, removeDuplicatesByFeature} from '../../utils/objectUtils';
+import {findByKey} from '../../utils/objectUtils';
 import {APP_STATE_KOULUTUKSEN_TIEDOT} from './KoulutuksenTiedotStore';
 import {getLanguage} from '../generic/LanguageStore';
 import {removeDuplicatesByFeature} from "../../utils/arrayUtils";

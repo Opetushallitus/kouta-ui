@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {urlOrganisaatioList} from '../../config/urls';
+import {urls} from 'oph-urls-js';
 import {clearState, containsValue, getState, handleEvents, initStates, setState, updateState} from '../../utils/stateUtils';
 import {getLanguage} from '../generic/LanguageStore';
 import {APP_STATE_KOULUTUKSEN_TIEDOT} from "./KoulutuksenTiedotStore";
@@ -46,7 +46,7 @@ export const getSelectedOrganisaatioOidList = () => {
 const getOrganisaatioSelections = () => getState(APP_STATE_ORGANISAATIO_SELECTIONS);
 
 const loadOrganisaatioList = (parentOid) => excludesOrganisaatioList() ?
-  axios.get(urlOrganisaatioList(parentOid))
+  axios.get(urls.url('organisaatio-service.children', parentOid))
     .then((response) => setOrganisaatioOptionsData(response.data)) : null;
 
 const setOrganisaatioOptionsData = (jsonData) =>
@@ -65,8 +65,7 @@ const loadNextToimipiste = (organisaatioOids, entries) => {
     return setState(APP_STATE_ORGANISAATION_TOIMIPISTE_ENTRIES, entries);
   }
   const organisaatioOid = organisaatioOids.shift();
-  const url = urlOrganisaatioList(organisaatioOid);
-  axios.get(url).then(response => {
+  axios.get(urls.url('organisaatio-service.children', organisaatioOid)).then(response => {
     const toimipisteEntry = createToimipisteEntry(response.data, organisaatioOid);
     entries.push(toimipisteEntry);
     loadNextToimipiste(organisaatioOids, entries);

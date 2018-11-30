@@ -1,5 +1,5 @@
-import {getUrlKoutaBackendKoulutusList} from '../generic/UrlStore';
 import {PohjanValintaStore} from '../generic/PohjanValintaStore';
+import {urls} from 'oph-urls-js';
 import {
   EVENT_ENTRY,
   EVENT_MODE,
@@ -30,7 +30,7 @@ export const SCOPE_KOULUTUKSEN_POHJA = {
 };
 
 export const KoulutuksenPohjaStore = () =>
-  PohjanValintaStore(SCOPE_KOULUTUKSEN_POHJA, getUrlKoutaBackendKoulutusList(), getModeOptions());
+  PohjanValintaStore(SCOPE_KOULUTUKSEN_POHJA, urls.url('kouta-backend.koulutus-list'), getModeOptions());
 
 const getModeOptions = () => [
   {

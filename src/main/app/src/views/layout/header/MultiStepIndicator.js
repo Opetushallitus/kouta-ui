@@ -1,13 +1,6 @@
 import React, {Component} from 'react';
 
 import {withRouter} from 'react-router-dom';
-import {
-  workflowUrlHaku,
-  workflowUrlHakukohde,
-  workflowUrlKoulutus,
-  workflowUrlToteutus,
-  workflowUrlValintaperusteet
-} from '../../../config/urls';
 import {selectWorkflow} from '../../../stores/generic/WorkflowStore';
 
 const classNames = require('classnames');
@@ -37,15 +30,15 @@ export class MultiStepIndicator extends Component {
   render = () => (
     <div className={"multi-step-indicator"}>
       <div className={"circle-container"}>
-        <StepperCircle nameClass={'koulutus-circle'} workflowUrl={workflowUrlKoulutus()} ready={true} description={"Koulutus"}
+        <StepperCircle nameClass={'koulutus-circle'} workflowUrl={'/koulutus'} ready={true} description={"Koulutus"}
           onClick={this.navigateToWorkflow} icon={'school'}/>
-        <StepperCircle nameClass={'toteutus-circle'} workflowUrl={workflowUrlToteutus()} ready={false} description={"Toteutus"}
+        <StepperCircle nameClass={'toteutus-circle'} workflowUrl={'/toteutus'} ready={false} description={"Toteutus"}
           onClick={this.navigateToWorkflow} icon={'settings'}/>
-        <StepperCircle nameClass={'haku-circle'} workflowUrl={workflowUrlHaku()} ready={false} description={"Haku"}
+        <StepperCircle nameClass={'haku-circle'} workflowUrl={'/haku'} ready={false} description={"Haku"}
           onClick={this.navigateToWorkflow} icon={'schedule'}/>
-        <StepperCircle nameClass={'hakukohde-circle'} workflowUrl={workflowUrlHakukohde()} ready={false} description={"Hakukohde"}
+        <StepperCircle nameClass={'hakukohde-circle'} workflowUrl={'/hakukohde'} ready={false} description={"Hakukohde"}
           onClick={this.navigateToWorkflow} icon={'grain'}/>
-        <StepperCircle nameClass={'valintaperusteet-circle'} workflowUrl={workflowUrlValintaperusteet()} ready={false}
+        <StepperCircle nameClass={'valintaperusteet-circle'} workflowUrl={'/valintaperusteet'} ready={false}
           description={"Valintaperusteet"} onClick={this.navigateToWorkflow} icon={'select_all'}/>
       </div>
     </div>

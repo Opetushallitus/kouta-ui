@@ -1,7 +1,7 @@
 import {getState, handleEvents, updateState} from '../../utils/stateUtils';
 import {KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP, LANGUAGE} from '../../config/constants';
 import axios from 'axios/index';
-import {urlKoulutuskoodit} from '../../config/urls';
+import {urls} from 'oph-urls-js';
 import {APP_EVENT_SELECT_KOULUTUSTYYPPI} from "./KoulutusStore";
 
 export const APP_STATE_KOULUTUSKOODI_LIST = 'APP_STATE_KOULUTUSKOODI_LIST';
@@ -22,7 +22,7 @@ const setKoulutuskoodiListIds = (activeKoulutustyyppi) => {
     return;
   }
   loadKoulutuskoodiLists(activeKoulutustyyppi, idList);
-}
+};
 
 const clearKoulutuskoodiList = () => updateState(APP_STATE_KOULUTUSKOODI_LIST, {
   koulutusOptions: []
@@ -72,11 +72,11 @@ const loadKoulutuskoodiLists = (koulutustyyppi, loadableIds, allLists) => {
     return setKoulutusListData(koulutustyyppi, allLists);
   }
 
-  axios.get(urlKoulutuskoodit(koulutusListId)).then((response) => {
+  axios.get(urls.url('koodisto-service.sisaltyy-ylakoodit', koulutusListId)).then((response) => {
     allLists = allLists.concat(response.data);
     loadKoulutuskoodiLists(koulutustyyppi, loadableIds, allLists)
   });
-}
+};
 
 
 

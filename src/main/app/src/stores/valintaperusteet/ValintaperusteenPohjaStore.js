@@ -1,4 +1,3 @@
-import {getUrlKoutaBackendValintaperusteList} from '../generic/UrlStore';
 import {PohjanValintaStore} from '../generic/PohjanValintaStore';
 import {
   EVENT_ENTRY,
@@ -10,6 +9,7 @@ import {
   STATE_MODE_OPTIONS
 } from '../../config/scopes/PohjanValinta';
 import {ENTITY_MODIFICATION_MODE} from '../../config/constants';
+import {urls} from "oph-urls-js";
 
 //TODO: yhdistetään tiloja yhden tilan alle
 
@@ -33,7 +33,7 @@ export const SCOPE_VALINTAPERUSTEEN_POHJA = {
 
 
 export const ValintaperusteenPohjaStore = () =>
-  PohjanValintaStore(SCOPE_VALINTAPERUSTEEN_POHJA, getUrlKoutaBackendValintaperusteList(), getModeOptions());
+  PohjanValintaStore(SCOPE_VALINTAPERUSTEEN_POHJA, urls.url('kouta-backend.valintaperuste-list'), getModeOptions());
 
 const getModeOptions = () => [
   {

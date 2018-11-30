@@ -2,7 +2,7 @@ import axios from 'axios';
 import {clearState, handleEvents, initState, setState} from '../../utils/stateUtils';
 import {APP_STATE_WORKFLOW} from '../generic/WorkflowStore';
 import {WORKFLOW} from '../../config/constants';
-import {urlHaunKohdejoukko} from '../../config/urls';
+import {urls} from 'oph-urls-js';
 import {matchLanguage} from '../generic/LanguageStore';
 
 export const APP_STATE_HAUN_KOHDEJOUKKO_OPTIONS = 'APP_STATE_HAUN_KOHDEJOUKKO_OPTIONS';
@@ -21,7 +21,7 @@ export const HaunKohdejoukkoStore = () => {
 };
 
 const loadHaunKohdejoukkoList = () =>
-  axios.get(urlHaunKohdejoukko()).then(response => configureHaunKohdejoukkoOptions(response.data));
+  axios.get(urls.url('koodisto-service.koodi', 'haunkohdejoukko')).then(response => configureHaunKohdejoukkoOptions(response.data));
 
 const configureHaunKohdejoukkoOptions = (data) => setState(APP_STATE_HAUN_KOHDEJOUKKO_OPTIONS, data.map(entry => ({
   key: entry.koodiUri,

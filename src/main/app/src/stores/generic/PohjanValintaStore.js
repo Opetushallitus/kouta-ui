@@ -17,6 +17,7 @@ export const PohjanValintaStore = (scope, listRetrievalUrl, modeOptions) => {
   initStates({
     [scope[STATE_MODE_OPTIONS]]: modeOptions
   });
+  //TODO: Listaa ei pitäisi hakea vielä tässä vaiheessa, vaan vasta sitten, kun käyttäjä avaa näkymän! Nyt tulee turhia kutsuja.
   loadSavedEntries(scope, listRetrievalUrl);
 };
 

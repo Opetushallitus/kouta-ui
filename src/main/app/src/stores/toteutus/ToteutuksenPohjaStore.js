@@ -1,7 +1,7 @@
-import {getUrlKoutaBackendToteutusList} from '../generic/UrlStore';
 import {PohjanValintaStore} from '../generic/PohjanValintaStore';
 import {EVENT_ENTRY, EVENT_MODE, STATE_ENTRY, STATE_ENTRY_LIST, STATE_ENTRY_OPTIONS, STATE_MODE, STATE_MODE_OPTIONS} from '../../config/scopes/PohjanValinta';
 import {ENTITY_MODIFICATION_MODE} from '../../config/constants';
+import {urls} from "oph-urls-js";
 
 export const APP_STATE_TOTEUTUKSEN_POHJA_MODE_OPTIONS = 'APP_STATE_TOTEUTUKSEN_POHJA_MODE_OPTIONS';
 export const APP_STATE_TOTEUTUKSEN_POHJA_MODE = 'APP_STATE_TOTEUTUKSEN_POHJA_MODE';
@@ -23,7 +23,7 @@ export const SCOPE_TOTEUTUKSEN_POHJA = {
 
 
 export const ToteutuksenPohjaStore = () =>
-  PohjanValintaStore(SCOPE_TOTEUTUKSEN_POHJA, getUrlKoutaBackendToteutusList(), getModeOptions());
+  PohjanValintaStore(SCOPE_TOTEUTUKSEN_POHJA, urls.url('kouta-backend.toteutus-list'), getModeOptions());
 
 const getModeOptions = () => [
   {

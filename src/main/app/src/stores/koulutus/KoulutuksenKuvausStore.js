@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {handleEvents, setStates} from '../../utils/stateUtils';
 
-import {urlEPerusteList, urlOsaamisalaKuvausList} from '../../config/urls';
+import {urls} from 'oph-urls-js';
 import {findByKey, removeDuplicatesByFeature} from '../../utils/objectUtils';
 import {APP_STATE_KOULUTUKSEN_TIEDOT} from './KoulutuksenTiedotStore';
 import {getLanguage} from '../generic/LanguageStore';
@@ -19,8 +19,7 @@ const loadEPerusteList = (details) => {
   if (!details.enabled || !details.koodiArvo) {
     return;
   }
-  const url = urlEPerusteList(details.koodiArvo);
-  axios.get(url).then(response => configureEPerusteListData(response.data));
+  axios.get(urls.url('eperusteet-service.perusteet-koulutuskoodilla', details.koodiArvo)).then(response => configureEPerusteListData(response.data));
 };
 
 const configureEPerusteListData = (data) => {
@@ -75,7 +74,7 @@ const loadOsaamisalaKuvausList = (ePerusteIds, osaamisalaList) => {
     return setOsaamisalaKuvausData(osaamisalaList);
   }
   const ePerusteId = ePerusteIds.shift();
-  axios.get(urlOsaamisalaKuvausList(ePerusteId)).then(response => {
+  axios.get(urls.url('eperusteet-service.osaamisalakuvaukset', ePerusteId)).then(response => {
     const data = response.data;
     const osaamisalaArray = findByKey(data, '^osaamisala_');
     osaamisalaList = osaamisalaList.concat(osaamisalaArray);

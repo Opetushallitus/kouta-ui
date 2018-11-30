@@ -1,5 +1,5 @@
 import {urls as ophUrls} from 'oph-urls-js';
-import {development, production} from '../../tarjonta-urls';
+import {development, production} from '../../backend-and-service-urls';
 
 export const UrlStore = () => configure();
 

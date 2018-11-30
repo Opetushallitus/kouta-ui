@@ -16,7 +16,7 @@ const production = {
   'kouta-backend.valintaperuste-by-oid': '/kouta-backend/valintaperuste/$1',
   'kouta-backend.valintaperuste-list': '/kouta-backend/valintaperuste/list',
   'koodisto-service.base-url': '/',
-  'koodisto-service.sisaltyy-alakoodit': '/koodisto-service/rest/json/relaatio/sisaltyy-alakoodit/${koodiUri}?koodiVersio=${versio}',
+  'koodisto-service.sisaltyy-alakoodit': '/koodisto-service/rest/json/relaatio/sisaltyy-alakoodit/$1?koodiVersio=$2',
   'koodisto-service.sisaltyy-ylakoodit': '/koodisto-service/rest/json/relaatio/sisaltyy-ylakoodit/$1',
   'koodisto-service.koodi' : '/koodisto-service/rest/json/$1/koodi?onlyValidKoodis=true',
   'eperusteet-service.base-url' : '/',

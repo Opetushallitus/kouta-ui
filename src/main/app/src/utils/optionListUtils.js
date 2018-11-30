@@ -3,6 +3,8 @@
 //return only options that are active (often: selected or checked)
 export const getActiveOptions = (options) => options.filter(entry => entry.active);
 
+export const findOptionByKey = (options, key) => options.find(entry => entry.key === key);
+
 //return only first active option (relevant for single selection options)
 export const getActiveOption = (options) => options.find(entry => entry.active);
 

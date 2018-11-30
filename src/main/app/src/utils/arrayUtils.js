@@ -6,3 +6,6 @@ export const removeDuplicatesByFeature = (items, getFeatureValue) => Object.valu
 export const replaceItemsWithMatchingProperty = (items, replacementItem, propertyName) =>
     items.map(oldItem => oldItem[propertyName] === replacementItem[propertyName] ? replacementItem : oldItem);
 
+
+export const deleteItemsWithMatchingProperty = (items, deletableItem, propertyName) =>
+    items.filter(item => item[propertyName] !== deletableItem[propertyName]);

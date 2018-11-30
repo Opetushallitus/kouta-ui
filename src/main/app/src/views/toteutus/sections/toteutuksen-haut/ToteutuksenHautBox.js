@@ -9,7 +9,6 @@ import {SelectorButton} from '../../../../components/SelectorButton';
 import {ENTITY_MODIFICATION_MODE} from '../../../../config/constants';
 
 import {withRouter} from 'react-router-dom';
-import {workflowUrlHaku, workflowUrlHakukohde} from '../../../../config/urls';
 import {InfoDropdown} from '../../../../components/InfoDropdown';
 import {selectWorkflow} from '../../../../stores/generic/WorkflowStore';
 
@@ -38,13 +37,13 @@ class ToteutuksenHautBox extends AbstractModalBox {
   getTitle = () => 'Haun liittäminen toteutukseen';
 
   redirectToHaku = () => {
-    selectWorkflow(workflowUrlHaku());
-    this.props.history.push(workflowUrlHaku());
+    selectWorkflow('/haku');
+    this.props.history.push('/haku');
   };
 
   redirectToHakukohde = () => {
-    selectWorkflow(workflowUrlHakukohde());
-    this.props.history.push(workflowUrlHakukohde());
+    selectWorkflow('/hakukohde');
+    this.props.history.push('/hakukohde');
   };
 
   getEntry = () => this.state.entry;

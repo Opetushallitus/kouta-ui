@@ -1,7 +1,7 @@
-import {getUrlKoutaBackendHakukohdeList} from '../generic/UrlStore';
 import {PohjanValintaStore} from '../generic/PohjanValintaStore';
 import {EVENT_ENTRY, EVENT_MODE, STATE_ENTRY, STATE_ENTRY_LIST, STATE_ENTRY_OPTIONS, STATE_MODE, STATE_MODE_OPTIONS} from '../../config/scopes/PohjanValinta';
 import {ENTITY_MODIFICATION_MODE} from '../../config/constants';
+import {urls} from "oph-urls-js";
 
 export const APP_STATE_HAKUKOHTEEN_POHJA_MODE_OPTIONS = 'APP_STATE_HAKUKOHTEEN_POHJA_MODE_OPTIONS';
 export const APP_STATE_HAKUKOHTEEN_POHJA_MODE = 'APP_STATE_HAKUKOHTEEN_POHJA_MODE';
@@ -23,7 +23,7 @@ export const SCOPE_HAKUKOHTEEN_POHJA = {
 };
 
 export const HakukohteenPohjaStore = () =>
-  PohjanValintaStore(SCOPE_HAKUKOHTEEN_POHJA, getUrlKoutaBackendHakukohdeList(), getModeOptions());
+  PohjanValintaStore(SCOPE_HAKUKOHTEEN_POHJA, urls.url('kouta-backend.hakukohde-list'), getModeOptions());
 
 const getModeOptions = () => [
   {

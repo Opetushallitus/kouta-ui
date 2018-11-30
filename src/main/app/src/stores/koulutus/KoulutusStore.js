@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {getState, handleEvents, initState, setState, updateState} from '../../utils/stateUtils';
-import {getUrlKoutaBackendKoulutus} from '../generic/UrlStore';
+import {urls} from 'oph-urls-js';
 import {REQUEST_STATUS} from '../../config/constants';
 import {APP_EVENT_ORGANISAATIO_SELECTION_CHANGE} from './KoulutuksenOrganisaatioStore';
 import {APP_EVENT_SECTION_VALIDATION_REQUEST} from '../generic/SectionStateStore';
@@ -74,18 +74,18 @@ const saveKoulutus = () => {
 
 const storeKoulutus = (koulutus, onSuccess, onFailure) => {
   if(!koulutus.oid) {
-    axios.put(getUrlKoutaBackendKoulutus(), koulutus)
+    axios.put(urls.url('kouta-backend.koulutus'), koulutus)
       .then(r => { httpGetKoulutus(r.data.oid); onSuccess();})
       .catch(e => onFailure());
   } else {
-    axios.post(getUrlKoutaBackendKoulutus(), koulutus, {headers: {'If-Unmodified-Since': koulutus.lastModified}})
+    axios.post(urls.url('kouta-backend.koulutus'), koulutus, {headers: {'If-Unmodified-Since': koulutus.lastModified}})
       .then(r => { httpGetKoulutus(koulutus.oid); onSuccess();})
       .catch(e => onFailure());
   }
 };
 
 const httpGetKoulutus = (oid) => {
-  axios.get(getUrlKoutaBackendKoulutus() + "/" + oid)
+  axios.get(urls.url('kouta-backend.koulutus-by-oid', oid))
     .then(r => {
       console.log(r);
       setState(APP_STATE_KOULUTUS_JSON, {...r.data, lastModified: r.headers['last-modified']});

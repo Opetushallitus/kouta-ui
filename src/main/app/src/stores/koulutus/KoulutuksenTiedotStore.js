@@ -2,7 +2,7 @@ import axios from 'axios';
 import {AlakoodiList} from '../../model/Alakoodi';
 import {clearValues, handleEvents, initState, setState, updateState} from '../../utils/stateUtils';
 import {LANGUAGE} from '../../config/constants';
-import {urlRelaatioAlakoodit} from '../../config/urls';
+import {urls} from 'oph-urls-js';
 import {APP_EVENT_SELECT_KOULUTUSKOODI, APP_EVENT_SELECT_KOULUTUSTYYPPI} from './KoulutusStore';
 
 export const APP_STATE_KOULUTUKSEN_TIEDOT = 'APP_STATE_KOULUTUKSEN_TIEDOT';
@@ -32,7 +32,7 @@ const loadKoulutusDetails = (koulutusOption) => {
     koodiUri: koulutusOption.koodiUri,
     versio: koulutusOption.versio
   });
-  axios.get(urlRelaatioAlakoodit(koulutusOption.koodiUri, koulutusOption.versio))
+  axios.get(urls.url('koodisto-service.sisaltyy-alakoodit', koulutusOption.koodiUri, koulutusOption.versio))
   .then((response) => setKoulutusDetailsData(response.data));
 };
 

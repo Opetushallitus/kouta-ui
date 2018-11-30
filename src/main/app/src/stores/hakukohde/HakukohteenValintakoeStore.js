@@ -31,9 +31,7 @@ const getInitialState = () => ({
             label: 'Ei valintakoetta'
         }
     ],
-    soveltuvuuskoeEntries: [
-        createNewEntry(1)
-    ],
+    soveltuvuuskoeEntries: [],
     lisanayttoEntries: [],
     lisapisteEntries: [],
     haastatteluEntries: [],

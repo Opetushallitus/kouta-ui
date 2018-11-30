@@ -10,6 +10,7 @@ import {
 } from '../../../stores/hakukohde/HakukohteenTarvittavatLiitteetStore';
 import {ActionLink} from "../../../components/ActionLink";
 import {HakukohteenLiiteEditor} from "./hakukohteen-tarvittavat-liitteet/HakukohteenLiiteEditor";
+import {APP_STATE_HAKUKOHTEEN_KIELIVERSIO_SUPPORTED_LANGUAGES} from "../../../stores/hakukohde/HakukohteenKieliversioStore";
 
 
 export class HakukohteenTarvittavatLiitteetSection extends AbstractSection {
@@ -21,6 +22,8 @@ export class HakukohteenTarvittavatLiitteetSection extends AbstractSection {
     getClassName = () => 'HakukohteenTarvittavatLiitteetSection';
 
     getHeader = () => 'Tarvittavat liitteet';
+
+    getStateNameForSupportedLanguages = () => APP_STATE_HAKUKOHTEEN_KIELIVERSIO_SUPPORTED_LANGUAGES;
 
     renderHakukohteenLiiteEditor = (hakukohteenLiite, index) => <HakukohteenLiiteEditor key={index}
                                                                                         id={index}

@@ -5,32 +5,16 @@ import {RadiobuttonSelector} from '../../../components/RadiobuttonSelector';
 import {TextAreaField} from '../../../components/TextAreaField';
 import {InfoHeader} from '../../../components/InfoHeader';
 import {ActionLink} from '../../../components/ActionLink';
-//import {DropdownSelector} from '../../../components/DropdownSelector';
 import {connectComponent} from '../../../utils/stateUtils';
 import {
-  APP_STATE_TOTEUTUKSEN_JARJESTAMISTIEDOT_OPTIONS,
-  changeCheckboxSelection,
-  changeRadioSelection,
-  changeSelectionValue,
-  addKieliValue,
-  getKieliValue
+    addKieliValue,
+    APP_STATE_TOTEUTUKSEN_JARJESTAMISTIEDOT_OPTIONS,
+    changeCheckboxSelection,
+    changeRadioSelection,
+    changeSelectionValue,
+    getKieliValue
 } from '../../../stores/toteutus/ToteutuksenJarjestamistiedotStore';
 import {APP_STATE_TOTEUTUKSEN_KIELIVERSIO_SUPPORTED_LANGUAGES} from '../../../stores/toteutus/ToteutuksenKieliversioStore';
-
-/*class StipendiEditor extends Component  {
-
-  render = () => (
-    <div className={'stipendi-editor column'}>
-      <span>Summa</span>
-      <div className={'row'}>
-        <input type={'text'} placeholder={'Maksun määrä'}></input> euroa / prosenttia
-      </div>
-      <span>Anna lisätietoja stipendin myöntämisestä</span>
-      <textarea placeholder={'Miten koulutus järjestetään teidän oppilaitoksessanne?'}>
-      </textarea>
-    </div>
-  )
-}*/
 
 export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
 
@@ -71,14 +55,6 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
 
   getKuvaus = () => getKieliValue('kuvaus', this.getActiveLanguage());
 
-  //changeStipendiSelection = (change) => changeRadioSelection('stipendiOptions', change);
-
-  //changeLukuvuosimaksuSelection = (change) => changeRadioSelection('lukuvuosimaksuOptions', change);
-
-  //changeLukuvuosi = (change) => changeRadioSelection('lukuvuosiOptions', change);
-
-  //changeLukukausi = (change) => changeRadioSelection('lukukausiOptions', change);
-
   renderLisattavaOsioTextAreas = () => this.getLisattavaOsioActiveOptions().map(entry => (
     <TextAreaField onChange={this.changeLisattavaOsioValue} id={entry.key} key={entry.key} label={entry.label}
                    value={entry.value}/>
@@ -91,21 +67,13 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
           </div>
       </div>
   );
-    //if (!(event instanceof Event)).
-  addNewLanguage = (event) => {
+
+    addNewLanguage = (event) => {
   };
 
   isMaksullisuusSelected = () => this.getRadioValue('maksullisuusOptions') === 'kylla';
 
-  //isLukuvuosimaksuSelected = () => this.getRadioValue('lukuvuosimaksuOptions') === 'kylla';
-
-  //isStipendiSelected = () => this.getRadioValue('stipendiOptions') === 'kylla';
-
   optionallyRenderMaksullisuusMaksunMaara = () => this.isMaksullisuusSelected() && this.renderMaksunMaaraInputField();
-
-  //optionallyRenderLukuvuosiMaksunMaara = () => this.isLukuvuosimaksuSelected() && <MaksunMaaraInput/>
-
-  //optionallyRenderStipendiEditor = () => this.isStipendiSelected() && <StipendiEditor/>
 
   renderContent = () => (
       <div className={'content'}>
@@ -130,28 +98,6 @@ export class ToteutuksenJarjestamistiedotSection extends AbstractSection {
                                  onChange={this.changeMaksullisuusSelection}/>
             {this.optionallyRenderMaksullisuusMaksunMaara()}
           </div>
-
-          {/* Nämä kentät kuuluvat kk-toteutukselle
-
-          <InfoHeader label={'Onko lukuvuosimaksua?'}/>
-          <div className={'option-controls-row'}>
-            <RadiobuttonSelector options={this.state.lukuvuosimaksuOptions}
-                                 onChange={this.changeLukuvuosimaksuSelection}/>
-            {this.optionallyRenderLukuvuosiMaksunMaara()}
-          </div>
-          <InfoHeader label={'Onko stipendit käytössä?'}/>
-          <RadiobuttonSelector options={this.state.stipendiOptions}
-                               onChange={this.changeStipendiSelection}/>
-          {this.optionallyRenderStipendiEditor()}
-
-          <InfoHeader label={'Tieto suunnitelluista koulutuksen alkamisajankohdista'}/>
-
-          <div className={'koulutuksen-alkamisajankohta row'}>
-            <RadiobuttonSelector options={this.state.lukukausiOptions} onChange={this.changeLukukausi}/>
-            <span className={'label'}>Vuosi</span>
-            <DropdownSelector options={this.state.lukuvuosiOptions} prompt={'Valitse lukuvuosi'}
-                              onChange={this.changeLukuvuosi}/>
-          </div>*/}
 
           <div className={'toteutuksen-kuvaus column'}>
             <InfoHeader label={'Toteutuksen kuvaus'}/>

@@ -7,11 +7,16 @@ export const HakukohteenValintaperusteenKuvausStore = () => initState(APP_STATE_
 export const clearSelections = () => setState(APP_STATE_HAKUKOHTEEN_VALINTAPERUSTEEN_KUVAUS, getInitialState());
 
 const getInitialState = () => ({
-    valintaperusteSelections: {}
+    valintaperusteSelection: {}
 });
 
 export const selectHakukohteenValintaperuste = (option) => updateState(APP_STATE_HAKUKOHTEEN_VALINTAPERUSTEEN_KUVAUS, {
-    valintaperusteSelections: {
+    valintaperusteSelection: {
         [option.key]: true
     }
 })
+
+export const createValintaperusteenKuvaus = (valintaperusteenKuvaus) => {
+    //TODO: toteuta valintaperusteen kuvauksen tallentaminen
+}
+

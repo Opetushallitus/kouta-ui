@@ -9,6 +9,8 @@ export const clearSelections = () => setState(APP_STATE_HAKUKOHTEEN_ALKAMISKAUSI
 
 //TODO: ainakin vuosi tulee muuttaa generoiduksi
 const getInitialState = () => ({
+    /* TODO: tulisiko lukukausiOptions ja lukuvuosiOptions siirtää eri storeen koska niitä käytetän myös muualla,
+    esim. ValintaperusteEditorModalBox */
     lukukausiOptions: [
         {
             key: 'kevät',
@@ -36,19 +38,28 @@ const getInitialState = () => ({
             key: '2021',
             label: '2021'
         }
-    ]
+    ],
+    lukukausiSelection: {},
+    lukuvuosiSelection: {}
 });
 
 const getLukukausiOptions = () => getState(APP_STATE_HAKUKOHTEEN_ALKAMISKAUSI, 'lukukausiOptions');
 
-const getVuosiOptions = () => getState(APP_STATE_HAKUKOHTEEN_ALKAMISKAUSI, 'lukuvuosiOptions');
+const getVuosiOptions = () =>  getState(APP_STATE_HAKUKOHTEEN_ALKAMISKAUSI, 'lukuvuosiOptions');
 
+//aktiivista valintaa säilytetään erillisessä selectionissa koska optioneita tarvitaan useammissa komponenteissa
 export const selectLukukausi = (change) => updateState(APP_STATE_HAKUKOHTEEN_ALKAMISKAUSI, {
-    lukukausiOptions: updateSingleSelectionOptionActivation(getLukukausiOptions(), change)
+    lukukausiSelection: {
+        [change.key]: change.active
+    }
 });
 
+//aktiivista valintaa säilytetään erillisessä selectionissa koska optioneita tarvitaan useammissa komponenteissa
 export const selectLukuvuosi = (change) => updateState(APP_STATE_HAKUKOHTEEN_ALKAMISKAUSI, {
-    lukuvuosiOptions: updateSingleSelectionOptionActivation(getVuosiOptions(), change)
+    lukuvuosiSelection: {
+        [change.key]: change.active
+    }
 });
+
 
 

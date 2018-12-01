@@ -9,6 +9,7 @@ import {
 } from '../../../stores/hakukohde/HakukohteenAlkamiskausiStore';
 import {RadiobuttonSelector} from "../../../components/RadiobuttonSelector";
 import {DropdownSelector} from "../../../components/DropdownSelector";
+import {getStatefulOptions} from "../../../utils/optionListUtils";
 
 export class HakukohteenAlkamiskausiSection extends AbstractSection {
 
@@ -23,9 +24,9 @@ export class HakukohteenAlkamiskausiSection extends AbstractSection {
 
   getHeader = () => 'Koulutuksen alkamiskausi';
 
-  getLukukausiOptions = () => this.state.lukukausiOptions || [];
+  getLukukausiOptions = () => getStatefulOptions(this.state, 'lukukausiOptions', 'lukukausiSelection');
 
-  getLukuvuosiOptions = () => this.state.lukuvuosiOptions || [];
+  getLukuvuosiOptions = () => getStatefulOptions(this.state, 'lukuvuosiOptions', 'lukuvuosiSelection');
 
   onClearButtonClick = () => clearSelections();
 

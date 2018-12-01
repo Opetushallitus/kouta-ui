@@ -8,9 +8,8 @@ export class AbstractModalBox extends Component {
     throw new Error('AbstractModalBox:getTitle: implement in subclass');
   };
 
-  getIcon = () => {
-    throw new Error('AbstractModalBox:getIcon: implement in subclass');
-  };
+    //overwrite this with other material icon name in subclass to change default icon
+  getIcon = () => 'grid_on';
 
   renderContent = () => {
     throw new Error('AbstractModalBox:renderContent: implement in subclass');
@@ -30,10 +29,16 @@ export class AbstractModalBox extends Component {
   //overwrite this in subclass to change default behaviour
   onSubmit = (event) => this.props.onSubmit(event);
 
+    //overwrite this in subclass to change default behaviour
+  getSubmitText = () => 'Jatka';
+
+    //overwrite this in subclass to change default behaviour
+  getCancelText = () => 'Peruuta';
+
   renderFooter = () => (
     <div className={'modal-box-footer button-container'}>
-      <button className={'secondary big'} onClick={this.onCancel}>Peruuta</button>
-      <button className={'primary big'} onClick={this.onSubmit}>Jatka</button>
+      <button className={'secondary big'} onClick={this.onCancel}>{this.getCancelText()}</button>
+      <button className={'primary big'} onClick={this.onSubmit}>{this.getSubmitText()}</button>
     </div>
   );
 

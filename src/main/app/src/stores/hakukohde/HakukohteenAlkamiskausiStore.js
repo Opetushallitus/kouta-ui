@@ -1,5 +1,4 @@
-import {getState, setState, updateState} from '../../utils/stateUtils';
-import {updateSingleSelectionOptionActivation} from "../../utils/optionListUtils";
+import {setState, updateState} from '../../utils/stateUtils';
 
 export const APP_STATE_HAKUKOHTEEN_ALKAMISKAUSI = 'APP_STATE_HAKUKOHTEEN_ALKAMISKAUSI';
 
@@ -42,10 +41,6 @@ const getInitialState = () => ({
     lukukausiSelection: {},
     lukuvuosiSelection: {}
 });
-
-const getLukukausiOptions = () => getState(APP_STATE_HAKUKOHTEEN_ALKAMISKAUSI, 'lukukausiOptions');
-
-const getVuosiOptions = () =>  getState(APP_STATE_HAKUKOHTEEN_ALKAMISKAUSI, 'lukuvuosiOptions');
 
 //aktiivista valintaa säilytetään erillisessä selectionissa koska optioneita tarvitaan useammissa komponenteissa
 export const selectLukukausi = (change) => updateState(APP_STATE_HAKUKOHTEEN_ALKAMISKAUSI, {

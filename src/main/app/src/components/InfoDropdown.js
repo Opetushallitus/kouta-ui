@@ -12,7 +12,7 @@ export class InfoDropdown extends Component {
 
   getOptions = () => this.props.options || [];
 
-  getDefaultOption = () => <option key={"-"} value={"no-selection"}>Valitse koulutus</option>
+  getDefaultOption = () => <option key={"-"} value={"no-selection"}>Valitse</option>
 
   renderOptions = () => {
       const options = Array.isArray(this.getOptions()) ? this.getOptions() : Object.values(this.getOptions());

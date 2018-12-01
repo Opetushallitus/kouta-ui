@@ -28,7 +28,11 @@ export const updateOptionValue = (options, change) => options.map(entry => ({
 
 export const getActiveKey = (options) => (options.find(option => option.active) || {}).key;
 
-export const getStatefulOptions = (options, selections) => options.map(option => ({
-    ...option,
-    active: selections[option.key]
-}));
+export const getStatefulOptions = (parentMap, optionsArrayName, selectionMapName) => {
+    const options = parentMap[optionsArrayName] || [];
+    const selection = parentMap[selectionMapName] || {};
+    return options.map(option => ({
+        ...option,
+        active: selection[option.key]
+    }));
+}

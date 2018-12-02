@@ -2,7 +2,7 @@ import {WORKFLOW} from './constants';
 
 export const TRANSLATIONS = {
   [WORKFLOW.KOULUTUS]: {
-    fi: 'Koulutus'
+    fi: 'Tutkintoon johtava koulutus'
   },
   [WORKFLOW.TOTEUTUS]: {
     fi: 'Koulutuksen toteutus'

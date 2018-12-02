@@ -11,9 +11,6 @@ export class KoulutusView extends Component {
 
   render = () => (
       <div className={"workflow-view"}>
-          <div className={"button-container button-container-right"}>
-            <button className={"secondary small"}>Esikatsele</button>
-          </div>
           <KoulutuksenTyyppiSection orderNumber={"1"}/>
           <KoulutuksenPohjanValintaSection orderNumber={"2"}/>
           <KoulutuksenKieliversioSection orderNumber={"3"}/>

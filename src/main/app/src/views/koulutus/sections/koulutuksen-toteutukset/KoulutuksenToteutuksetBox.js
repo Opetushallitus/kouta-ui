@@ -7,7 +7,6 @@ import {ENTITY_MODIFICATION_MODE} from '../../../../config/constants';
 import {withRouter} from 'react-router-dom';
 import {InfoDropdown} from '../../../../components/InfoDropdown';
 import {selectWorkflow} from '../../../../stores/generic/WorkflowStore';
-import {APP_STATE_KOULUTUKSEN_POHJA_ENTRY_OPTIONS} from "../../../../stores/koulutus/KoulutuksenPohjaStore";
 import {
     APP_STATE_TOTEUTUKSEN_POHJA_ENTRY_OPTIONS,
     APP_STATE_TOTEUTUKSEN_POHJA_MODE_OPTIONS

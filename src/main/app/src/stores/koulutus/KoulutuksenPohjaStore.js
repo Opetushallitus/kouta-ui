@@ -52,7 +52,7 @@ const getModeOptions = () => [
     value: ENTITY_MODIFICATION_MODE.INHERIT_ENTITY
   },
   {
-    label: 'Käytä olemassa olevan toteutuksen tietoja',
+    label: 'Käytä olemassa olevan koulutuksen tietoja',
     value: ENTITY_MODIFICATION_MODE.USE_ENTITY
   }
 ];
@@ -60,16 +60,16 @@ const getModeOptions = () => [
 //TODO: replace this with entries coming from backend
 const getEntryOptions = () => [
     {
-        label: 'Toteutus 1',
-        value: 'Toteutus 1',
+        label: 'Koulutus 1',
+        value: 'Koulutus 1',
     },
     {
-        label: 'Toteutus 2',
-        value: 'Toteutus 2'
+        label: 'Koulutus 2',
+        value: 'Koulutus 2'
     },
     {
-        label: 'Toteutus 3',
-        value: 'Toteutus 3'
+        label: 'Koulutus 3',
+        value: 'Koulutus 3'
     }
 ];
 

@@ -7,10 +7,11 @@ import {ENTITY_MODIFICATION_MODE} from '../../../../config/constants';
 import {withRouter} from 'react-router-dom';
 import {InfoDropdown} from '../../../../components/InfoDropdown';
 import {selectWorkflow} from '../../../../stores/generic/WorkflowStore';
+import {APP_STATE_KOULUTUKSEN_POHJA_ENTRY_OPTIONS} from "../../../../stores/koulutus/KoulutuksenPohjaStore";
 import {
-    APP_STATE_KOULUTUKSEN_POHJA_ENTRY_OPTIONS,
-    APP_STATE_KOULUTUKSEN_POHJA_MODE_OPTIONS
-} from "../../../../stores/koulutus/KoulutuksenPohjaStore";
+    APP_STATE_TOTEUTUKSEN_POHJA_ENTRY_OPTIONS,
+    APP_STATE_TOTEUTUKSEN_POHJA_MODE_OPTIONS
+} from "../../../../stores/toteutus/ToteutuksenPohjaStore";
 
 class KoulutuksenToteutuksetBox extends AbstractModalBox {
 
@@ -22,11 +23,11 @@ class KoulutuksenToteutuksetBox extends AbstractModalBox {
     }
 
     componentDidMount = () => connectComponent(this, {
-        [APP_STATE_KOULUTUKSEN_POHJA_MODE_OPTIONS]: (options) => this.setState({
+        [APP_STATE_TOTEUTUKSEN_POHJA_MODE_OPTIONS]: (options) => this.setState({
             ...this.state,
             options
         }),
-        [APP_STATE_KOULUTUKSEN_POHJA_ENTRY_OPTIONS]: (entryOptions) => this.setState({
+        [APP_STATE_TOTEUTUKSEN_POHJA_ENTRY_OPTIONS]: (entryOptions) => this.setState({
             ...this.state,
             entryOptions
         })

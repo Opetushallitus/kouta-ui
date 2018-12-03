@@ -1,166 +1,58 @@
 import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
-import {CheckboxFilterSelector} from '../../../components/CheckboxFilterSelector';
+import axios from 'axios';
+import {urls} from 'oph-urls-js';
+import {updateState} from "../../../utils/stateUtils";
+import {
+    APP_EVENT_AMMATTINIMIKE_DELETE,
+    APP_EVENT_AMMATTINIMIKE_INSERT,
+    APP_EVENT_ASIASANA_DELETE,
+    APP_EVENT_ASIASANA_INSERT,
+    listAmmattinimikkeet,
+    listAsiasanat
+} from "../../../stores/toteutus/ToteutusStore";
+import {KeywordSelector} from "../../../components/KeywordSelector";
 
 export class ToteutuksenNayttamistiedotSection extends AbstractSection {
 
-  onMount = () => {
-    this.setState({
-      ammattinimikeOptions: this.getAmmattinimikeOptions(),
-      avainsanaOptions: this.getAvainsanaOptions()
-    });
-  };
+  onMount = () => {};
 
   getClassName = () => 'ToteutuksenNayttamistiedotSection';
 
   getHeader = () => 'Koulutuksen näyttämiseen liittyvät tiedot';
 
-  // replace this with data that comes from store
-  getAmmattinimikeOptions = () => [
-    {
-      label: 'Hoiva-avustaja',
-      key: 'hoiva-avustaja'
-    },
-    {
-      label: 'Lastenhoitaja',
-      key: 'lastenhoitaja'
-    },
-    {
-      label: 'Laitoshoitaja',
-      key: 'laitoshoitaja'
-    },
-    {
-      label: 'Ambulanssihoitaja',
-      key: 'ambulanssihoitaja'
-    },
-    {
-      label: 'Lähihoitaja',
-      key: 'lahihoitaja'
-    },
-    {
-      label: 'Sairaanhoitaja',
-      key: 'sairaanhoitaja'
-    },
-    {
-      label: 'Lääkäri',
-      key: 'laakari'
-    },
-    {
-      label: 'Fysioterapeutti',
-      key: 'fysioterapeutti'
-    },
-    {
-      label: 'Terveydenhoitaja',
-      key: 'terveydenhoitaja'
-    },
-    {
-      label: 'Hammasteknikko',
-      key: 'hammasteknikko'
-    },
-    {
-      label: 'Kirurgi',
-      key: 'kirurgi'
-    },
-    {
-      label: 'Geriatri',
-      key: 'geriatri'
-    },
-    {
-      label: 'Psykologi',
-      key: 'psykologi'
-    },
-    {
-      label: 'Psykiatri',
-      key: 'psykiatri'
-    },
-    {
-      label: 'Psykologi',
-      key: 'psykologi'
-    }
-  ];
+  findAmmattinimikkeet = (value, onSuccess) =>
+    axios.get(urls.url('kouta-backend.ammattinimike-search', value, 'fi', 10)).then(r =>
+        onSuccess(r.data)
+    ).catch(r => console.log("TODO: error handle"));
 
-  // replace this with data that comes from store
-  getAvainsanaOptions = () => [
-    {
-      label: 'Lapset',
-      key: 'lapset'
-    },
-    {
-      label: 'Nuoret',
-      key: 'nuoret'
-    },
-    {
-      label: 'Vanhukset',
-      key: 'vanhukset'
-    },
-    {
-      label: 'Ensiapu',
-      key: 'ensiapu'
-    },
-    {
-      label: 'Saattohoito',
-      key: 'saattohoito'
-    },
-    {
-      label: 'Geriatria',
-      key: 'geriatria'
-    },
-    {
-      label: 'Ravintotieto',
-      key: 'ravintotieto'
-    },
-    {
-      label: 'Kulkutaudit',
-      key: 'kulkutaudit'
-    },
-    {
-      label: 'Tukipalvelut',
-      key: 'tukipalvelut'
-    },
-    {
-      label: 'Eläimet',
-      key: 'eläimet'
-    },
-    {
-      label: 'Elämäntavat',
-      key: 'elämäntavat'
-    },
-    {
-      label: 'Seuranta',
-      key: 'seuranta'
-    }
-  ];
+  findAsiasanat = (value, onSuccess) =>
+    axios.get(urls.url('kouta-backend.asiasana-search', value, 'fi', 10)).then(r =>
+        onSuccess(r.data)
+    ).catch(r => console.log("TODO: error handle"));
 
-  //move options into store
-  setAmmattinimikeOptions = (ammattinimikeOptions) => {
-    this.setState({
-      ...this.state,
-      ammattinimikeOptions
-    })
-  }
+  addAmmattinimike = (ammattinimike) => updateState(APP_EVENT_AMMATTINIMIKE_INSERT, ammattinimike);
 
-  setAvainsanaOptions = (avainsanaOptions) => {
-    this.setState({
-      ...this.state,
-      avainsanaOptions
-    })
-  };
+  deleteAmmattinimike = (ammattinimike) => updateState(APP_EVENT_AMMATTINIMIKE_DELETE, ammattinimike);
+
+  addAsiasana = (asiasana) => updateState(APP_EVENT_ASIASANA_INSERT, asiasana);
+
+  deleteAsiasana = (asiasana) => updateState(APP_EVENT_ASIASANA_DELETE, asiasana);
 
   renderContent = () => (
     <div className={'content'}>
-      <CheckboxFilterSelector label={'Ammattinimike'}
-                              instruction={'Lisää ammattinimike (Max 5 kpl)'}
-                              options={this.state.ammattinimikeOptions}
-                              onSelect={this.setAmmattinimikeOptions}
-                              maxTags={5}
-      />
-      <CheckboxFilterSelector label={'Avainsanat'}
-                              instruction={'Lisää av (Max 5 kpl)'}
-                              options={this.state.avainsanaOptions}
-                              onSelect={this.setAvainsanaOptions}
-                              maxTags={5}
-      />
+        <KeywordSelector header="Ammattinimike"
+                         info="Lisää ammattinimike (Max 5 kpl)"
+                         searchKeywords={this.findAmmattinimikkeet}
+                         listKeywords={listAmmattinimikkeet}
+                         addKeyword={this.addAmmattinimike}
+                         deleteKeyword={this.deleteAmmattinimike}/>
+        <KeywordSelector header="Asiasana"
+                         info="Lisää asiasana (Max 5 kpl)"
+                         searchKeywords={this.findAsiasanat}
+                         listKeywords={listAsiasanat}
+                         addKeyword={this.addAsiasana}
+                         deleteKeyword={this.deleteAsiasana}/>
     </div>
   );
-
 }

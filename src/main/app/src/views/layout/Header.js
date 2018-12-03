@@ -9,7 +9,7 @@ export class Header extends Component {
         <StatusBar/>
         <MultiStepIndicator/>
         <div className={"button-container button-container-right organisaatio-div"}>
-              Oranisaatio: Salpaus
+              Organisaatio: Salpaus
         </div>
       </div>
     )

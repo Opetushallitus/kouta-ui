@@ -55,7 +55,7 @@ const getOrganisaatioSelections = () => getState(APP_STATE_ORGANISAATIO_SELECTIO
 
 const loadOrganisaatioList = (parentOid) => excludesOrganisaatioList() ?
   axios.get(urls.url('organisaatio-service.children', parentOid))
-    .then((response) => setOrganisaatioOptionsData(response.data)) : null;
+    .then((response) => setOrganisaatioOptionsData(response.data.filter(e => e.status !== 'PASSIIVINEN'))) : null;
 
 const setOrganisaatioOptionsData = (jsonData) => {
     const options = extractOrganisaatioOptions(jsonData);
@@ -63,6 +63,7 @@ const setOrganisaatioOptionsData = (jsonData) => {
     if (options.length ===1) {
       const activeOid = options[0].key;
       selections[activeOid] = true;
+        loadToimipisteList();
     }
     setStates({
         [APP_STATE_ORGANISAATIO_OPTIONS] : options,
@@ -85,7 +86,7 @@ const loadNextToimipiste = (organisaatioOids, entries) => {
   }
   const organisaatioOid = organisaatioOids.shift();
   axios.get(urls.url('organisaatio-service.children', organisaatioOid)).then(response => {
-    const toimipisteEntry = createToimipisteEntry(response.data, organisaatioOid);
+    const toimipisteEntry = createToimipisteEntry(response.data.filter(e => e.status !== 'PASSIIVINEN'), organisaatioOid);
     entries.push(toimipisteEntry);
     loadNextToimipiste(organisaatioOids, entries);
   });

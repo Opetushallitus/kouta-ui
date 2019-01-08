@@ -2,5 +2,9 @@
   .content {
     display: flex;
     flex-direction: column;
+    input {
+      min-width: 0;
+      width: 100px;
+    }
   }
 }

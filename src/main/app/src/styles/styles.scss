@@ -12,6 +12,7 @@
 @import 'components/InputField';
 @import 'components/TextAreaField';
 @import 'components/CheckboxFilterSelector';
+@import 'components/DropdownFilterSelector';
 @import 'components/DateTimeEditor';
 @import 'components/InfoHeader';
 @import 'components/ActionLink';
@@ -20,6 +21,8 @@
 @import 'components/RadiobuttonSelector';
 @import 'components/ContentfulOptionSelector';
 @import 'components/MultiStepIndicator';
+@import 'components/Division';
+@import 'components/Tag';
 
 @import 'views/generic/FooterActionButtons';
 @import 'views/generic/StatusBar';
@@ -36,7 +39,8 @@
 
 @import 'views/KoulutusList';
 @import 'views/koulutus/KoulutusSelector';
-@import 'views/koulutus/KoulutusDetails';
+@import 'views/koulutus/KoulutuksenToteutuksetSection';
+@import 'views/koulutus/KoulutuksenTiedotSection';
 
 @import 'views/haku/HaunAikataulutSection';
 @import 'views/haku/HaunLiitetytKohteetSection';
@@ -52,6 +56,7 @@
 @import 'views/hakukohde/HakukohteenLomakeSection';
 @import 'views/hakukohde/HakukohteenValintakoeSection';
 @import 'views/hakukohde/HakukohteenValintaperusteenKuvausSection';
+@import 'views/hakukohde/HakukohteenTarvittavatLiitteetSection';
 
 @import 'views/valintaperusteet/ValintaperusteetView';
 @import 'views/valintaperusteet/ValintaperusteenKielitaitovaatimuksetSection';

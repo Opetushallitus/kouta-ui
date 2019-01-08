@@ -1,0 +1,82 @@
+.dropdown-filter-selector {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  .options-container {
+    border-color: #9c9c9c;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    background-color: white;
+    margin-top: 10px;
+    padding: 5px;
+    overflow: hidden;
+
+    .options-list {
+      width: 500px;
+      max-width: 500px;
+      margin: 0;
+      padding-left: 0;
+      height: 150px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      list-style: none;
+      li {
+        cursor: pointer;
+      }
+      :first-child {
+        background-color: #e0f2fd;
+      }
+    }
+  }
+
+  .controls {
+    display: flex;
+    position: relative;
+    input[type=text] {
+      width: 500px;
+      max-width: 500px;
+      min-width: 500px;
+    }
+    .expand-button {
+      position: absolute;
+      right: 0;
+      display: flex;
+      width: 30px;
+      height: 30px;
+      padding: 3px;
+      margin-left: 5px;
+      cursor: pointer;
+      color: black;
+      border-radius: 5px;
+      i {
+        padding: 3px;
+      }
+    }
+  }
+
+  .tags-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    display: flex;
+    max-width: 500px;
+    .tag {
+      display: flex;
+      background-color: #979797;
+      color: white;
+      border-radius: 5px;
+      padding: 5px;
+      margin: 5px;
+      cursor: pointer;
+      span {
+        text-align: center;
+        padding: 5px;
+      }
+      i {
+        padding: 3px;
+      }
+    }
+  }
+}
+
+

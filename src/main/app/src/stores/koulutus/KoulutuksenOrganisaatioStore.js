@@ -1,6 +1,14 @@
 import axios from 'axios';
 import {urls} from 'oph-urls-js';
-import {clearState, containsValue, getState, handleEvents, initStates, setState, updateState} from '../../utils/stateUtils';
+import {
+    clearState,
+    containsValue,
+    getState,
+    handleEvents,
+    initStates,
+    setState, setStates,
+    updateState
+} from '../../utils/stateUtils';
 import {getLanguage} from '../generic/LanguageStore';
 import {APP_STATE_KOULUTUKSEN_TIEDOT} from "./KoulutuksenTiedotStore";
 
@@ -47,10 +55,22 @@ const getOrganisaatioSelections = () => getState(APP_STATE_ORGANISAATIO_SELECTIO
 
 const loadOrganisaatioList = (parentOid) => excludesOrganisaatioList() ?
   axios.get(urls.url('organisaatio-service.children', parentOid))
-    .then((response) => setOrganisaatioOptionsData(response.data)) : null;
+    .then((response) => setOrganisaatioOptionsData(response.data.filter(e => e.status !== 'PASSIIVINEN'))) : null;
 
-const setOrganisaatioOptionsData = (jsonData) =>
-  setState(APP_STATE_ORGANISAATIO_OPTIONS, extractOrganisaatioOptions(jsonData));
+const setOrganisaatioOptionsData = (jsonData) => {
+    const options = extractOrganisaatioOptions(jsonData);
+    const selections = {}
+    if (options.length ===1) {
+      const activeOid = options[0].key;
+      selections[activeOid] = true;
+        loadToimipisteList();
+    }
+    setStates({
+        [APP_STATE_ORGANISAATIO_OPTIONS] : options,
+        [APP_STATE_ORGANISAATIO_SELECTIONS]: selections
+    });
+};
+
 
 const extractOrganisaatioOptions = (jsonData) =>
   jsonData.filter(entry => entry.tyypit.includes('organisaatiotyyppi_02') && entry.status !== 'PASSIIVINEN')
@@ -66,7 +86,7 @@ const loadNextToimipiste = (organisaatioOids, entries) => {
   }
   const organisaatioOid = organisaatioOids.shift();
   axios.get(urls.url('organisaatio-service.children', organisaatioOid)).then(response => {
-    const toimipisteEntry = createToimipisteEntry(response.data, organisaatioOid);
+    const toimipisteEntry = createToimipisteEntry(response.data.filter(e => e.status !== 'PASSIIVINEN'), organisaatioOid);
     entries.push(toimipisteEntry);
     loadNextToimipiste(organisaatioOids, entries);
   });

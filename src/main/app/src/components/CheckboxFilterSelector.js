@@ -82,7 +82,7 @@ export class CheckboxFilterSelector extends Component {
 
   render = () => (
     <div className={'checkbox-filter-selector'}>
-      <span className={'label'}>
+      <span className={'label-span'}>
         {this.getLabel()}
       </span>
       <div className={'controls'}>

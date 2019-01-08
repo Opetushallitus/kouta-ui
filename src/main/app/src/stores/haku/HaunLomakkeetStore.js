@@ -1,4 +1,4 @@
-import {getState, initState, setState, updateState} from '../../utils/stateUtils';
+import {getState, setState, updateState} from '../../utils/stateUtils';
 import {getActiveKey, updateSingleSelectionOptionActivation} from '../../utils/optionListUtils';
 
 export const APP_STATE_HAUN_LOMAKKEET = 'APP_STATE_HAUN_LOMAKKEET';
@@ -10,7 +10,7 @@ export const HAKULOMAKE_TYPE = {
   EI_SAHKOINEN: 'ei sähköistä'
 };
 
-export const HaunLomakkeetStore = () => initState(APP_STATE_HAUN_LOMAKKEET, getInitialState());
+export const HaunLomakkeetStore = () => setState(APP_STATE_HAUN_LOMAKKEET, getInitialState());
 
 export const changeLomakkeenTyyppiSelection = (change) => {
   const lomakkeenTyyppiOptions = updateSingleSelectionOptionActivation(getHakulomakkeenTyyppiOptions(), change);

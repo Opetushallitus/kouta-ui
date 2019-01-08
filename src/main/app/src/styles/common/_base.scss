@@ -36,6 +36,16 @@ body {
     margin-bottom: 10px;
   }
 
+  .label-span {
+    color: #6e6e7e;
+    margin-bottom: 5px;
+  }
+
+  .title-span {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
   .row {
     display: flex;
     flex-direction: row;
@@ -59,5 +69,10 @@ body {
   textarea {
     border-radius: 5px;
     height: 250px;
+  }
+
+  .organisaatio-div {
+    margin-top: 30px;
+    margin-right: 20px;
   }
 }

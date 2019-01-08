@@ -17,7 +17,7 @@ export class TextAreaField extends Component {
 
   render = () => (
     <div id={this.getId()} key={this.getKey()} className={'textarea-field'}>
-      <span className={'label'}>
+      <span className={'label-span'}>
         {this.getLabel()}
       </span>
       <textarea value={this.getValue()} onChange={this.onChange}/>

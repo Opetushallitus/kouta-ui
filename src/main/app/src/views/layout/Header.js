@@ -8,6 +8,9 @@ export class Header extends Component {
       <div className={"header"}>
         <StatusBar/>
         <MultiStepIndicator/>
+        <div className={"button-container button-container-right organisaatio-div"}>
+              Organisaatio: Salpaus
+        </div>
       </div>
     )
 }

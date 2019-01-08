@@ -1,0 +1,32 @@
+.division {
+  display: flex;
+  flex-direction: column;
+
+  .division-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    color: #666666;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #888888;
+    margin-bottom: 20px;
+    margin-top: 20px;
+
+    .material-icons {
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    .label {
+      margin-left: 5px;
+      margin-right: 10px;
+      flex-grow: 1;
+      cursor: pointer;
+    }
+
+  }
+}

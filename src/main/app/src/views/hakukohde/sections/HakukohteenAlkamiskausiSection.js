@@ -1,7 +1,15 @@
 import React from 'react';
 import {AbstractSection} from '../../../components/AbstractSection';
 import {connectComponent} from '../../../utils/stateUtils';
-import {APP_STATE_HAKUKOHTEEN_ALKAMISKAUSI} from '../../../stores/hakukohde/HakukohteenAlkamiskausiStore';
+import {
+    APP_STATE_HAKUKOHTEEN_ALKAMISKAUSI,
+    clearSelections,
+    selectLukukausi,
+    selectLukuvuosi
+} from '../../../stores/hakukohde/HakukohteenAlkamiskausiStore';
+import {RadiobuttonSelector} from "../../../components/RadiobuttonSelector";
+import {DropdownSelector} from "../../../components/DropdownSelector";
+import {getStatefulOptions} from "../../../utils/optionListUtils";
 
 export class HakukohteenAlkamiskausiSection extends AbstractSection {
 
@@ -16,10 +24,17 @@ export class HakukohteenAlkamiskausiSection extends AbstractSection {
 
   getHeader = () => 'Koulutuksen alkamiskausi';
 
-  renderContent = () => (
-    <div className={'content'}>
+  getLukukausiOptions = () => getStatefulOptions(this.state, 'lukukausiOptions', 'lukukausiSelection');
 
-    </div>
+  getLukuvuosiOptions = () => getStatefulOptions(this.state, 'lukuvuosiOptions', 'lukuvuosiSelection');
+
+  onClearButtonClick = () => clearSelections();
+
+  renderContent = () => (
+      <div className={'content'}>
+          <RadiobuttonSelector options={this.getLukukausiOptions()} onChange={selectLukukausi}/>
+          <DropdownSelector options={this.getLukuvuosiOptions()} onChange={selectLukuvuosi}/>
+      </div>
   );
 
 }

@@ -1,6 +1,42 @@
 .hakukohteen-valintakoe-section {
   .content {
-    display: flex;
-    flex-direction: column;
+    .valintakokeen-tyyppi {
+      flex-direction: column;
+      margin-right: 40px;
+    }
+    .valintakokeen-editointi {
+      border-style: solid;
+      border-color: #888888;
+      border-width: 0;
+      border-left-width: 1px;
+      flex-grow: 1;
+      flex-direction: column;
+      padding-left: 20px;
+      max-width: 500px;
+
+      input[type=text] {
+        min-width: 0;
+      }
+
+      .row {
+        :first-child {
+          margin-right: 5px;
+          flex-grow: 1;
+        }
+        :last-child {
+          flex-grow: 1;
+        }
+      }
+
+      .date-time-row {
+        justify-content: space-between;
+      }
+
+    }
+
+    .notes {
+      flex-grow: 1;
+    }
+
   }
 }

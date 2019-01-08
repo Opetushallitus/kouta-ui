@@ -2,11 +2,6 @@ import React, {Component} from 'react';
 
 export class InfoDropdown extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   handleChange = (event) => this.props.onChange(event.target.value);
 
   renderOption = (option, index) => <option key={index} value={option.value}>{option.label}</option>
@@ -17,7 +12,7 @@ export class InfoDropdown extends Component {
 
   getOptions = () => this.props.options || [];
 
-  getDefaultOption = () => <option key={"-"} value={"no-selection"}>Valitse koulutus</option>
+  getDefaultOption = () => <option key={"-"} value={"no-selection"}>Valitse</option>
 
   renderOptions = () => {
       const options = Array.isArray(this.getOptions()) ? this.getOptions() : Object.values(this.getOptions());
@@ -28,7 +23,7 @@ export class InfoDropdown extends Component {
 
   render = () => (
       <div className={"info-dropdown"}>
-        <span className={"label"}>{this.getLabel()}</span>
+        <span className={"label-span"}>{this.getLabel()}</span>
         <select value={this.getSelection()} onChange={this.handleChange}>
           {this.renderOptions()}
         </select>

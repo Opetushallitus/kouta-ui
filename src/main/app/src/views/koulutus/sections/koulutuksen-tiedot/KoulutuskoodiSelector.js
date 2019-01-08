@@ -37,6 +37,7 @@ export class KoulutuskoodiSelector extends Component {
 
   hasOptions = () => this.getOptions().length > 0;
 
+
   matchOption = (option) => option.comparisonValue.indexOf(this.getFilter()) > -1;
 
   isNameEditingAllowed = () =>  this.state.enabled && this.state.koulutustyyppi !== KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS;
@@ -92,8 +93,9 @@ export class KoulutuskoodiSelector extends Component {
   render = () => this.hasOptions() ? (
       <div className={"koulutus-selector"}>
         <span>Valitse koulutus listasta</span>
-        <input type={"text"} value={this.state.filter} className={"filter-input"} placeholder={"Valitse koulutus..."} onChange={this.setFilter}></input>
+        <input type={"text"} value={this.state.filter} className={"filter-input"} placeholder={"Valitse koulutus..."} onChange={this.setFilter}/>
         {this.renderOptions()}
+          <span className={'title-span'}>{this.state.nimi}</span>
       </div>
   ) : (
       <div className={"koulutus-selector"}>

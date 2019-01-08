@@ -38,8 +38,6 @@ export class ContentfulOptionRenderer extends Component {
     </ul>
   );
 
-  renderContent = () => this.props.content;
-
   render = () => (
     <div className={'contentful-option-selector'}>
       {this.renderOptionList()}

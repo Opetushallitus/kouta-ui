@@ -65,7 +65,7 @@ export class AbstractYhteystiedotSection extends AbstractSection {
     this.updateValues(valueMap);
   };
 
-  renderField = (field) => <InputField key={field.id} field={field} onChange={this.updateEntry} value={this.getFieldValueInActiveLanguage(field.id)}/>;
+  renderField = (field) => <InputField key={field.id} id={field.id} label={field.label} onChange={this.updateEntry} value={this.getFieldValueInActiveLanguage(field.id)}/>;
 
   renderFields = () => this.getDataFields().map(this.renderField);
 

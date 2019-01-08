@@ -1,7 +1,7 @@
 {
   "short_name": "Kouta UI",
   "name": "Kouta UI",
-  "start_url": ".",
+  "start_url": "./index.html",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"

@@ -15,5 +15,4 @@ fi;
 echo 'Port is ' $PORT
 echo 'Port for backend is ' $BACKEND_PORT
 
-npm run watch-css &
-PORT=$PORT REACT_APP_BACKEND_PORT=$BACKEND_PORT npm run start-for-start
+PORT=$PORT REACT_APP_BACKEND_PORT=$BACKEND_PORT npm start

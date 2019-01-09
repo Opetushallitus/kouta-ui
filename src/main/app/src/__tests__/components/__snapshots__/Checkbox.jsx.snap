@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+.c0 {
+  font-family: sans-serif;
+  font-size: 1rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  line-height: 1.5;
+  color: #666666;
+}
+
+.c2 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin-left: 6px;
+}
+
+.c1 {
+  -webkit-flex: 0;
+  -ms-flex: 0;
+  flex: 0;
+}
+
+<styled.label>
+  <label
+    className="c0"
+  >
+    <styled.div>
+      <div
+        className="c1"
+      >
+        <input
+          type="checkbox"
+        />
+      </div>
+    </styled.div>
+    <styled.div>
+      <div
+        className="c2"
+      >
+        Checkbox
+      </div>
+    </styled.div>
+  </label>
+</styled.label>
+`;

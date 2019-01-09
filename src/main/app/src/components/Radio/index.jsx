@@ -33,7 +33,7 @@ export const RadioGroup = ({ value, onChange, ...props }) => {
   const children = React.Children.map(props.children, child => {
     const checked = value !== undefined && child.props.value === value;
 
-    return React.cloneElement(child, { checked, onClick: onChange });
+    return React.cloneElement(child, { checked, onChange });
   });
 
   return <div {...props}>{children}</div>;

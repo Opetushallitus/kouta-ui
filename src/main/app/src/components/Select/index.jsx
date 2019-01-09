@@ -11,14 +11,8 @@ export const Option = styled.option`
   padding: 6px 12px;
 `;
 
-export const Select = ({ value, ...props }) => {
-  const children = React.Children.map(props.children, child => {
-    const selected = value !== undefined && child.props.value === value;
-
-    return React.cloneElement(child, { selected });
-  });
-
-  return <SelectBase {...props}>{children}</SelectBase>;
+export const Select = ({ ...props }) => {
+  return <SelectBase {...props} />;
 };
 
 export default Select;

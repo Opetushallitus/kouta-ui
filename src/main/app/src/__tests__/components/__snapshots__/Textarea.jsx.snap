@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+.c0 {
+  border: 1px solid #999999;
+  color: #666666;
+  font-family: sans-serif;
+  line-height: 1.5;
+  border-radius: 4px;
+  outline: none;
+  padding: 6px 12px;
+  font-size: 1rem;
+  -webkit-transition: border-color 0.25s,box-shadow 0.25s;
+  transition: border-color 0.25s,box-shadow 0.25s;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.c0:focus {
+  border-color: #2da0c7;
+  box-shadow: 0 0 0 1px #2da0c7;
+}
+
+<Styled(styled.input)
+  rows={3}
+>
+  <textarea
+    className="c0"
+    rows={3}
+  />
+</Styled(styled.input)>
+`;

@@ -1,0 +1,157 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly with color 1`] = `
+.c0 {
+  outline: none;
+  padding: 6px 16px;
+  border-radius: 4px;
+  font-family: sans-serif;
+  font-size: 1rem;
+  border: 2px solid;
+  line-height: 1.5;
+  -webkit-transition: background-color 0.25s,border-color 0.25s;
+  transition: background-color 0.25s,border-color 0.25s;
+  border-color: #2da0c7;
+  background-color: #2da0c7;
+  color: #ffffff;
+}
+
+.c0:hover {
+  border-color: #288fb2;
+  background-color: #288fb2;
+}
+
+.c0:active {
+  border-color: #247f9d;
+  background-color: #247f9d;
+}
+
+<styled.button
+  color="primary"
+  variant="contained"
+>
+  <button
+    className="c0"
+    color="primary"
+  >
+    Primary button
+  </button>
+</styled.button>
+`;
+
+exports[`renders correctly with color 2`] = `
+.c0 {
+  outline: none;
+  padding: 6px 16px;
+  border-radius: 4px;
+  font-family: sans-serif;
+  font-size: 1rem;
+  border: 2px solid;
+  line-height: 1.5;
+  -webkit-transition: background-color 0.25s,border-color 0.25s;
+  transition: background-color 0.25s,border-color 0.25s;
+  border-color: #999999;
+  background-color: #999999;
+  color: #ffffff;
+}
+
+.c0:hover {
+  border-color: #8c8c8c;
+  background-color: #8c8c8c;
+}
+
+.c0:active {
+  border-color: #808080;
+  background-color: #808080;
+}
+
+<styled.button
+  color="secondary"
+  variant="contained"
+>
+  <button
+    className="c0"
+    color="secondary"
+  >
+    Secondary button
+  </button>
+</styled.button>
+`;
+
+exports[`renders correctly with variant 1`] = `
+.c0 {
+  outline: none;
+  padding: 6px 16px;
+  border-radius: 4px;
+  font-family: sans-serif;
+  font-size: 1rem;
+  border: 2px solid;
+  line-height: 1.5;
+  -webkit-transition: background-color 0.25s,border-color 0.25s;
+  transition: background-color 0.25s,border-color 0.25s;
+  border-color: #2da0c7;
+  background-color: #2da0c7;
+  color: #ffffff;
+}
+
+.c0:hover {
+  border-color: #288fb2;
+  background-color: #288fb2;
+}
+
+.c0:active {
+  border-color: #247f9d;
+  background-color: #247f9d;
+}
+
+<styled.button
+  color="primary"
+  variant="contained"
+>
+  <button
+    className="c0"
+    color="primary"
+  >
+    Contained button
+  </button>
+</styled.button>
+`;
+
+exports[`renders correctly with variant 2`] = `
+.c0 {
+  outline: none;
+  padding: 6px 16px;
+  border-radius: 4px;
+  font-family: sans-serif;
+  font-size: 1rem;
+  border: 2px solid;
+  line-height: 1.5;
+  -webkit-transition: color 0.25s,border-color 0.25s;
+  transition: color 0.25s,border-color 0.25s;
+  background-color: transparent;
+  border-color: #2da0c7;
+  color: #2da0c7;
+}
+
+.c0:hover {
+  border-color: #288fb2;
+  color: #288fb2;
+}
+
+.c0:active {
+  border-color: #247f9d;
+  color: #247f9d;
+}
+
+<styled.button
+  color="primary"
+  variant="outlined"
+>
+  <button
+    className="c0"
+    color="primary"
+  >
+    Outlined button
+  </button>
+</styled.button>
+`;

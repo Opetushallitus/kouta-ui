@@ -1,0 +1,19 @@
+import React from 'react';
+import { storiesOf } from '@storybook/react';
+
+import Button from './index';
+
+storiesOf('Button', module)
+  .add('Basic', () => <Button>Button</Button>)
+  .add('With variant', () => (
+    <>
+      <Button variant="contained">Button</Button>
+      <Button variant="outlined">Button</Button>
+    </>
+  ))
+  .add('With color', () => (
+    <>
+      <Button color="secondary">Button</Button>
+      <Button color="primary">Button</Button>
+    </>
+  ));

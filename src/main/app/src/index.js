@@ -1,16 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter} from 'react-router-dom';
-import {Main} from "./views/Main";
-import './assets/css/styles.css';
-import 'oph-virkailija-style-guide/oph-styles.css';
-import {initStores} from './stores/StoreInitializer';
 
-initStores();
+import * as serviceWorker from './serviceWorker';
+import App from './components/App';
+import store from './state';
+import defaultTheme from './theme';
 
-ReactDOM.render((
-  <BrowserRouter basename={'/kouta'}>
-      <Main/>
-  </BrowserRouter>
-), document.getElementById('root'));
+ReactDOM.render(
+  <App store={store} theme={defaultTheme} />,
+  document.getElementById('root'),
+);
 
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: http://bit.ly/CRA-PWA
+serviceWorker.unregister();

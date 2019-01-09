@@ -1,0 +1,18 @@
+import React from 'react';
+import styled from 'styled-components';
+
+import Input from '../Input';
+
+const SelectBase = styled(Input).attrs({ as: 'select' })`
+  height: calc(2.25rem + 2px);
+`;
+
+export const Option = styled.option`
+  padding: 6px 12px;
+`;
+
+export const Select = ({ ...props }) => {
+  return <SelectBase {...props} />;
+};
+
+export default Select;

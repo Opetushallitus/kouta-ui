@@ -1,5 +1,6 @@
 import React from 'react';
 import { configure, addDecorator } from '@storybook/react';
+import '@storybook/addon-actions/register';
 import { ThemeProvider } from 'styled-components';
 
 import defaultTheme from '../src/theme';

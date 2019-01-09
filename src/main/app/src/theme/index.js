@@ -1,4 +1,7 @@
 import merge from 'lodash/merge';
+import get from 'lodash/get';
+
+export const getThemeProp = path => props => get(props.theme, path);
 
 export const createTheme = (theme = {}) => {
   const defaults = {
@@ -8,15 +11,24 @@ export const createTheme = (theme = {}) => {
       fontSize: '1rem',
     },
     palette: {
+      border: '#999999',
       text: {
-        primary: 'black',
+        primary: '#666666',
       },
       primary: {
-        main: '#ffffff',
+        main: '#2da0c7',
+        contrastText: '#ffffff',
+      },
+      secondary: {
+        main: '#999999',
+        contrastText: '#ffffff',
       },
     },
     spacing: {
       unit: 8,
+    },
+    shape: {
+      borderRadius: '4px',
     },
   };
 

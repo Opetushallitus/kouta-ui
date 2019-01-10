@@ -53,7 +53,7 @@ export const getThemeProp = path => props => get(props.theme, path);
 
 export const createTheme = (theme = {}) => {
   const textPrimaryColor = '#666666';
-  const fontFamily = 'sans-serif';
+  const fontFamily = "'Open Sans', sans-serif";
 
   const headingTypography = createHeadingTypography({
     sizes: [3, 2.5, 2, 1.5, 1.25, 1],

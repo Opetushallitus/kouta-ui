@@ -2,7 +2,7 @@
 
 exports[`renders correctly 1`] = `
 .c0 {
-  font-family: sans-serif;
+  font-family: 'Open Sans',sans-serif;
   font-size: 1rem;
   display: -webkit-box;
   display: -webkit-flex;

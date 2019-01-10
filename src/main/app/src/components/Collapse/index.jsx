@@ -34,7 +34,6 @@ const HeaderContent = styled.div`
   display: flex;
   align-items: center;
   flex: 1;
-  padding: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
 const FooterContainer = styled.div`
@@ -51,13 +50,17 @@ const ContentWrapper = styled.div`
   padding: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
+const HeaderTextContent = styled(Typography).attrs({ variant: 'h5' })`
+  padding: ${({ theme }) => theme.spacing.unit * 2}px;
+`;
+
 const ContentContainer = styled.div`
   ${({ open }) => !open && hideVisually()};
 `;
 
 const renderHeader = header => {
   return isString(header) ? (
-    <Typography variant="h5">{header}</Typography>
+    <HeaderTextContent>{header}</HeaderTextContent>
   ) : (
     header
   );

@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+Array [
+  .c0 {
+  margin-left: 8px;
+  margin-right: 16px;
+  margin-bottom: 24px;
+  margin-top: 32px;
+}
+
+<styled.div
+    marginBottom={3}
+    marginLeft={1}
+    marginRight={2}
+    marginTop={4}
+  >
+    <div
+      className="c0"
+    >
+      With margins
+    </div>
+  </styled.div>,
+  .c0 {
+  padding-left: 8px;
+  padding-right: 16px;
+  padding-bottom: 24px;
+  padding-top: 32px;
+}
+
+<styled.div
+    paddingBottom={3}
+    paddingLeft={1}
+    paddingRight={2}
+    paddingTop={4}
+  >
+    <div
+      className="c0"
+    >
+      With paddings
+    </div>
+  </styled.div>,
+]
+`;

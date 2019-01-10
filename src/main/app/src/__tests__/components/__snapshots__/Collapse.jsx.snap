@@ -1,0 +1,472 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+.c3 {
+  font-family: sans-serif;
+  color: #666666;
+  line-height: 1.5;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  color: #666666;
+  font-family: sans-serif;
+  font-size: 1.25rem;
+  font-weight: normal;
+  line-height: 1.2;
+}
+
+.c6 {
+  font-size: 1.5rem;
+}
+
+.c0 {
+  border: 1px solid #999999;
+}
+
+.c4 {
+  -webkit-flex: 0;
+  -ms-flex: 0;
+  flex: 0;
+  background-color: #1e7998;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-height: 3rem;
+  padding: 0px 16px;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-bottom: 1px solid #999999;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  padding: 16px;
+}
+
+.c8 {
+  padding: 16px;
+  border-top: 1px solid #999999;
+}
+
+.c5 {
+  color: white;
+  font-size: 2rem;
+}
+
+.c7 {
+  padding: 16px;
+}
+
+<styled.div>
+  <div
+    className="c0"
+  >
+    <styled.div
+      open={true}
+    >
+      <div
+        className="c1"
+        open={true}
+      >
+        <styled.div>
+          <div
+            className="c2"
+          >
+            <styled.span
+              as="h5"
+              variant="h5"
+            >
+              <h5
+                className="c3"
+              >
+                Text header
+              </h5>
+            </styled.span>
+          </div>
+        </styled.div>
+        <styled.div
+          onClick={[Function]}
+        >
+          <div
+            className="c4"
+            onClick={[Function]}
+          >
+            <Styled(Icon)
+              type="expand_less"
+            >
+              <styled.i
+                className="material-icons c5"
+              >
+                <i
+                  className="material-icons c5 c6"
+                >
+                  expand_less
+                </i>
+              </styled.i>
+            </Styled(Icon)>
+          </div>
+        </styled.div>
+      </div>
+    </styled.div>
+    <styled.div
+      open={true}
+    >
+      <div
+        className=""
+        open={true}
+      >
+        <styled.div>
+          <div
+            className="c7"
+          >
+            <div>
+              Collapse children
+            </div>
+          </div>
+        </styled.div>
+        <styled.div>
+          <div
+            className="c8"
+          >
+            <button>
+              Footer button
+            </button>
+          </div>
+        </styled.div>
+      </div>
+    </styled.div>
+  </div>
+</styled.div>
+`;
+
+exports[`renders correctly 2`] = `
+.c5 {
+  font-size: 1.5rem;
+}
+
+.c0 {
+  border: 1px solid #999999;
+}
+
+.c3 {
+  -webkit-flex: 0;
+  -ms-flex: 0;
+  flex: 0;
+  background-color: #1e7998;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-height: 3rem;
+  padding: 0px 16px;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-bottom: 1px solid #999999;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  padding: 16px;
+}
+
+.c7 {
+  padding: 16px;
+  border-top: 1px solid #999999;
+}
+
+.c4 {
+  color: white;
+  font-size: 2rem;
+}
+
+.c6 {
+  padding: 16px;
+}
+
+<styled.div>
+  <div
+    className="c0"
+  >
+    <styled.div
+      open={true}
+    >
+      <div
+        className="c1"
+        open={true}
+      >
+        <styled.div>
+          <div
+            className="c2"
+          >
+            <div>
+              Element header
+            </div>
+          </div>
+        </styled.div>
+        <styled.div
+          onClick={[Function]}
+        >
+          <div
+            className="c3"
+            onClick={[Function]}
+          >
+            <Styled(Icon)
+              type="expand_less"
+            >
+              <styled.i
+                className="material-icons c4"
+              >
+                <i
+                  className="material-icons c4 c5"
+                >
+                  expand_less
+                </i>
+              </styled.i>
+            </Styled(Icon)>
+          </div>
+        </styled.div>
+      </div>
+    </styled.div>
+    <styled.div
+      open={true}
+    >
+      <div
+        className=""
+        open={true}
+      >
+        <styled.div>
+          <div
+            className="c6"
+          >
+            <div>
+              Collapse children
+            </div>
+          </div>
+        </styled.div>
+        <styled.div>
+          <div
+            className="c7"
+          >
+            <button>
+              Footer button
+            </button>
+          </div>
+        </styled.div>
+      </div>
+    </styled.div>
+  </div>
+</styled.div>
+`;
+
+exports[`renders correctly when closed 1`] = `
+.c3 {
+  font-family: sans-serif;
+  color: #666666;
+  line-height: 1.5;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  color: #666666;
+  font-family: sans-serif;
+  font-size: 1.25rem;
+  font-weight: normal;
+  line-height: 1.2;
+}
+
+.c6 {
+  font-size: 1.5rem;
+}
+
+.c0 {
+  border: 1px solid #999999;
+}
+
+.c4 {
+  -webkit-flex: 0;
+  -ms-flex: 0;
+  flex: 0;
+  background-color: #1e7998;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  min-height: 3rem;
+  padding: 0px 16px;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  padding: 16px;
+}
+
+.c9 {
+  padding: 16px;
+  border-top: 1px solid #999999;
+}
+
+.c5 {
+  color: white;
+  font-size: 2rem;
+}
+
+.c8 {
+  padding: 16px;
+}
+
+.c7 {
+  border: 0;
+  -webkit-clip: rect(0 0 0 0);
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(50%);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+<styled.div>
+  <div
+    className="c0"
+  >
+    <styled.div
+      open={false}
+    >
+      <div
+        className="c1"
+        open={false}
+      >
+        <styled.div>
+          <div
+            className="c2"
+          >
+            <styled.span
+              as="h5"
+              variant="h5"
+            >
+              <h5
+                className="c3"
+              >
+                Header
+              </h5>
+            </styled.span>
+          </div>
+        </styled.div>
+        <styled.div
+          onClick={[Function]}
+        >
+          <div
+            className="c4"
+            onClick={[Function]}
+          >
+            <Styled(Icon)
+              type="expand_more"
+            >
+              <styled.i
+                className="material-icons c5"
+              >
+                <i
+                  className="material-icons c5 c6"
+                >
+                  expand_more
+                </i>
+              </styled.i>
+            </Styled(Icon)>
+          </div>
+        </styled.div>
+      </div>
+    </styled.div>
+    <styled.div
+      open={false}
+    >
+      <div
+        className="c7"
+        open={false}
+      >
+        <styled.div>
+          <div
+            className="c8"
+          >
+            <div>
+              Hello world!
+            </div>
+          </div>
+        </styled.div>
+        <styled.div>
+          <div
+            className="c9"
+          >
+            <div>
+              footer
+            </div>
+          </div>
+        </styled.div>
+      </div>
+    </styled.div>
+  </div>
+</styled.div>
+`;

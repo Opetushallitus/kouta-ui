@@ -1,0 +1,53 @@
+import React from 'react';
+import styled from 'styled-components';
+import format from 'date-fns/format';
+
+import Icon from '../Icon';
+import { getThemeProp } from '../../theme';
+import { isDate } from '../../utils';
+import Spacing from '../Spacing';
+import Anchor from '../Anchor';
+
+const InfoIcon = styled(Icon).attrs({ type: 'info' })`
+  color: ${getThemeProp('palette.primary.main')};
+`;
+
+const IconContainer = styled.div`
+  margin-right: ${getThemeProp('spacing.unit')}px;
+  flex: 0;
+`;
+
+const InfoContainer = styled.div`
+  font-size: 0.8rem;
+  font-family: ${getThemeProp('typography.fontFamily')};
+  color: ${getThemeProp('palette.text.primary')};
+  line-height: ${getThemeProp('typography.lineHeight')};
+`;
+
+const Container = styled.div`
+  display: flex;
+`;
+
+const FormEditInfo = ({ editor, date, historyUrl, ...props }) => {
+  return (
+    <Container {...props}>
+      <IconContainer>
+        <InfoIcon />
+      </IconContainer>
+      <InfoContainer>
+        <Spacing marginBottom={0.25}>Muokattu viimeksi:</Spacing>
+        <Spacing marginBottom={0.25}>
+          {isDate(date) ? format(date, 'DD.MM.YYYY HH:mm') : null}{' '}
+          {editor ? editor : null}
+        </Spacing>
+        <div>
+          <Anchor href={historyUrl} target="_blank">
+            Näytä versiohistoria
+          </Anchor>
+        </div>
+      </InfoContainer>
+    </Container>
+  );
+};
+
+export default FormEditInfo;

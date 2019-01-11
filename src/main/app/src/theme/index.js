@@ -89,6 +89,14 @@ export const createTheme = (theme = {}) => {
         main: '#999999',
         contrastText: '#ffffff',
       },
+      success: {
+        main: '#43a047',
+        contrastText: '#ffffff',
+      },
+      warning: {
+        main: '#de9a06',
+        contrastText: '#ffffff',
+      },
     },
     spacing: {
       unit: 8,

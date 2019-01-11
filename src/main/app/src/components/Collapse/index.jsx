@@ -9,12 +9,12 @@ import Icon from '../Icon';
 
 const Container = styled.div`
   border: 1px solid ${getThemeProp('palette.border')};
+  background-color: white;
 `;
 
 const HeaderToggle = styled.div`
   flex: 0;
   background-color: ${getThemeProp('palette.primary.dark')};
-  cursor: pointer;
   display: flex;
   align-items: center;
   min-height: 3rem;
@@ -23,6 +23,8 @@ const HeaderToggle = styled.div`
 
 const HeaderContainer = styled.div`
   display: flex;
+  cursor: pointer;
+
   ${({ open }) =>
     open &&
     css`
@@ -79,9 +81,9 @@ const Collapse = ({
   ...props
 }) => (
   <Container {...props}>
-    <HeaderContainer open={open}>
+    <HeaderContainer open={open} onClick={onToggle}>
       <HeaderContent>{renderHeader(header)}</HeaderContent>
-      <HeaderToggle onClick={onToggle}>
+      <HeaderToggle>
         <ToggleIcon type={getIconType(open)} />
       </HeaderToggle>
     </HeaderContainer>

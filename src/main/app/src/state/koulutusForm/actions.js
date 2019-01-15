@@ -2,6 +2,7 @@ import { getFormValues } from 'redux-form';
 import get from 'lodash/get';
 
 import { JULKAISUTILA } from '../../constants';
+import { getKoulutusByKoodi } from '../../apiUtils';
 
 const getKoulutusFormValues = getFormValues('koulutusForm');
 
@@ -10,12 +11,14 @@ export const saveKoulutus = koulutus => (
   getState,
   { apiUrls, httpClient },
 ) => {
+  console.log(koulutus);
   return httpClient.put(apiUrls.url('kouta-backend.koulutus'), koulutus);
 };
 
-export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => (
+export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   dispatch,
   getState,
+  { httpClient, apiUrls },
 ) => {
   const state = getState();
   const values = getKoulutusFormValues(state);
@@ -29,7 +32,13 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => (
   );
 
   const tarjoajat = get(values, 'organization.organizations') || null;
-  const koulutsKoodiUri = get(values, 'information.koulutus') || null;
+  const koulutusKoodiUri = get(values, 'information.koulutus') || null;
+
+  const { nimi = null } = await getKoulutusByKoodi({
+    koodiUri: koulutusKoodiUri,
+    httpClient,
+    apiUrls,
+  });
 
   const koulutus = {
     organisaatioOid,
@@ -37,7 +46,8 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => (
     kielivalinta,
     tila,
     tarjoajat,
-    koulutsKoodiUri,
+    koulutusKoodiUri,
+    nimi,
   };
 
   return dispatch(saveKoulutus(koulutus));

@@ -64,7 +64,7 @@ const getContainerStatusCss = ({ theme, status }) => {
 
 const Container = styled.div`
   display: inline-flex;
-  padding: 16px;
+  padding: 8px;
   border: 1px solid;
   border-radius: ${getThemeProp('shape.borderRadius')};
   align-items: center;

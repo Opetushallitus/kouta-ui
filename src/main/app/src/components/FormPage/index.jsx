@@ -5,6 +5,7 @@ import { getThemeProp } from '../../theme';
 import Header from './Header';
 import Navigation from './Navigation';
 import Content from './Content';
+import FooterRoutes from './FooterRoutes';
 
 const FormNavContainer = styled.div`
   display: flex;
@@ -42,6 +43,7 @@ const FormPage = () => (
         <Content />
       </ContentWrapper>
     </FormContent>
+    <FooterRoutes />
   </>
 );
 

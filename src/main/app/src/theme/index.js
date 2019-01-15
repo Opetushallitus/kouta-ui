@@ -70,6 +70,7 @@ export const createTheme = (theme = {}) => {
       body: {
         fontSize: '1rem',
         color: textPrimaryColor,
+        lineHeight: 1.5,
         fontFamily,
       },
       ...headingTypography,

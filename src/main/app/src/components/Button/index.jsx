@@ -84,6 +84,7 @@ const ButtonBase = styled.button`
     disabled &&
     css`
       opacity: 0.5;
+      cursor: not-allowed;
     `}
 `;
 

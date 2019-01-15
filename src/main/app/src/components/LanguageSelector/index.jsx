@@ -23,6 +23,22 @@ class LanguageSelector extends Component {
     });
   };
 
+  static getDerivedStateFromProps(props, state) {
+    const { languages } = props;
+
+    if (languages.length === 0) {
+      return null;
+    }
+
+    const active = languages.find(({ value }) => value === state.value);
+
+    if (active) {
+      return null;
+    }
+
+    return { value: languages[0].value };
+  }
+
   render() {
     const { languages, children } = this.props;
     const { value } = this.state;

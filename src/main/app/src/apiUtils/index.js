@@ -7,6 +7,15 @@ import groupBy from 'lodash/groupBy';
 import toPairs from 'lodash/toPairs';
 import maxBy from 'lodash/maxBy';
 
+const getKoodiUriParts = uri => {
+  const [koodiUri, versio = null] = uri.split('#');
+
+  return {
+    koodiUri,
+    versio,
+  };
+};
+
 export const getKoulutuksetByKoulutusTyyppi = async ({
   httpClient,
   apiUrls,
@@ -53,9 +62,10 @@ export const getKoulutuksetByKoulutusTyyppi = async ({
 export const getKoulutusByKoodi = async ({
   httpClient,
   apiUrls,
-  koodiUri,
-  versio = null,
+  koodiUri: argKoodiUri,
 }) => {
+  const { koodiUri, versio } = getKoodiUriParts(argKoodiUri);
+
   const [
     perusteetResponse,
     alakooditResponse,

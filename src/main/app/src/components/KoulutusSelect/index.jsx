@@ -21,6 +21,8 @@ const getKoulutusLabel = (koulutus, language) => {
   );
 };
 
+const getKoulutusValue = koulutus => `${koulutus.koodiUri}#${koulutus.versio}`;
+
 const KoulutusSelect = ({
   koulutusTyyppi = 'amm',
   language = 'fi',
@@ -39,7 +41,10 @@ const KoulutusSelect = ({
         <Select value={value || ''} {...props}>
           <Option value="">Valitse koulutus</Option>
           {koulutukset.map(koulutus => (
-            <Option key={koulutus.koodiUri} value={koulutus.koodiUri}>
+            <Option
+              key={getKoulutusValue(koulutus)}
+              value={getKoulutusValue(koulutus)}
+            >
               {getKoulutusLabel(koulutus, language)}
             </Option>
           ))}

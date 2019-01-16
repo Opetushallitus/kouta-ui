@@ -2,18 +2,10 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import FormHeader from '../FormHeader';
-import FormStatus from '../FormStatus';
-import FormEditInfo from '../FormEditInfo';
 
-const editInfo = (
-  <FormEditInfo
-    editor="John Doe"
-    date={new Date(1547205166507)}
-    historyUrl="https://google.fi"
-  />
-);
+const editInfo = null;
 
-const status = <FormStatus status="saved" />;
+const status = null;
 
 const KoulutusHeader = () => (
   <FormHeader status={status} editInfo={editInfo}>

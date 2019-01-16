@@ -1,3 +1,4 @@
+import React from 'react';
 import { reduxForm } from 'redux-form';
 import get from 'lodash/get';
 import set from 'lodash/set';
@@ -47,4 +48,4 @@ export default reduxForm({
       en: false,
     },
   },
-})(KoulutusForm);
+})(props => <KoulutusForm {...props} steps />);

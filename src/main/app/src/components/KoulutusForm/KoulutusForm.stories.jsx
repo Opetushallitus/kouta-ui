@@ -12,4 +12,4 @@ const Form = reduxForm({
 storiesOf('KoulutusForm', module)
   .addDecorator(makeStoreDecorator())
   .addDecorator(makeApiDecorator())
-  .add('Basic', () => <Form />);
+  .add('Basic', () => <Form steps={true} />);

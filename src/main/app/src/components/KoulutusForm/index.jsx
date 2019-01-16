@@ -8,10 +8,11 @@ import LanguageSection from './LanguageSection';
 import InformationSection from './InformationSection';
 import DescriptionSection from './DescriptionSection';
 import OrganizationSection from './OrganizationSection';
-import ImplementationSection from './ImplementationSection';
-import { UncontrolledCollapse } from '../Collapse';
+import Collapse from '../Collapse';
 import Button from '../Button';
-import { isObject } from 'util';
+import FormStepper from '../FormStepper';
+import ResetFormSection from '../ResetFormSection';
+import { isObject, isFunction } from 'util';
 
 const CollapseFooterContainer = styled.div`
   display: flex;
@@ -28,51 +29,40 @@ const LANGUAGES = [
   { label: 'Englanniksi', value: 'en' },
 ];
 
-const FormCollapse = ({
-  onClear = () => {},
-  onContinue = () => {},
-  ...props
-}) => (
-  <CollapseWrapper>
-    <UncontrolledCollapse
-      footer={
-        <CollapseFooterContainer>
-          <Button type="button" variant="outlined" onClick={onClear}>
-            Tyhjennä tiedot
-          </Button>
-          <Button type="button" onClick={onContinue}>
-            Jatka
-          </Button>
-        </CollapseFooterContainer>
-      }
-      defaultOpen={true}
-      {...props}
-    />
-  </CollapseWrapper>
-);
+const FormCollapse = ({ onContinue, section, children = null, ...props }) => {
+  return (
+    <CollapseWrapper>
+      <Collapse
+        footer={
+          <CollapseFooterContainer>
+            {section ? (
+              <ResetFormSection name={section}>
+                {({ onReset }) => (
+                  <Button type="button" variant="outlined" onClick={onReset}>
+                    Tyhjennä tiedot
+                  </Button>
+                )}
+              </ResetFormSection>
+            ) : null}
 
-const ImplementationCollapse = ({
-  onClear = () => {},
-  onIncludeImplementation = () => {},
-  ...props
-}) => (
-  <CollapseWrapper>
-    <UncontrolledCollapse
-      footer={
-        <CollapseFooterContainer>
-          <Button type="button" variant="outlined" onClick={onClear}>
-            Tyhjennä tiedot
-          </Button>
-          <Button type="button" onClick={onIncludeImplementation}>
-            Liitä toteutus
-          </Button>
-        </CollapseFooterContainer>
-      }
-      defaultOpen={true}
-      {...props}
-    />
-  </CollapseWrapper>
-);
+            {isFunction(onContinue) ? (
+              <Button type="button" onClick={onContinue}>
+                Jatka
+              </Button>
+            ) : null}
+          </CollapseFooterContainer>
+        }
+        {...props}
+      >
+        {section ? (
+          <FormSection name={section}>{children}</FormSection>
+        ) : (
+          children
+        )}
+      </Collapse>
+    </CollapseWrapper>
+  );
+};
 
 const ActiveLanguages = formValues({
   language: 'language',
@@ -94,71 +84,103 @@ const ActiveKoulutus = formValues({
   koulutus: 'information.koulutus',
 })(({ koulutus, children }) => children({ koulutus }));
 
-const KoulutusForm = ({ handleSubmit, ...props }) => {
-  return (
-    <form onSubmit={handleSubmit}>
-      <ActiveLanguages>
-        {({ languages }) => (
-          <>
-            <FormCollapse header="1 Koulutustyyppi">
-              <FormSection name="type">
-                <TypeSection />
-              </FormSection>
-            </FormCollapse>
+const defaultGetStepCollapseProps = () => ({
+  open: true,
+});
 
-            <FormCollapse header="2 Pohjan valinta">
-              <FormSection name="base">
-                <BaseSelectionSection />
-              </FormSection>
-            </FormCollapse>
+const KoulutusFormBase = ({
+  handleSubmit,
+  getStepCollapseProps = defaultGetStepCollapseProps,
+}) => (
+  <form onSubmit={handleSubmit}>
+    <ActiveLanguages>
+      {({ languages }) => (
+        <>
+          <FormCollapse
+            header="1 Koulutustyyppi"
+            section="type"
+            {...getStepCollapseProps(0)}
+          >
+            <TypeSection />
+          </FormCollapse>
 
-            <FormCollapse header="3 Kieliversiot">
-              <FormSection name="language">
-                <LanguageSection />
-              </FormSection>
-            </FormCollapse>
+          <FormCollapse
+            header="2 Pohjan valinta"
+            section="base"
+            {...getStepCollapseProps(1)}
+          >
+            <BaseSelectionSection />
+          </FormCollapse>
 
-            <FormCollapse header="4 Koulutuksen tiedot">
-              <ActiveKoulutusTyyppi>
-                {({ koulutusTyyppi }) => (
-                  <FormSection name="information">
-                    <InformationSection
-                      languages={languages}
-                      koulutusTyyppi={koulutusTyyppi}
-                    />
-                  </FormSection>
-                )}
-              </ActiveKoulutusTyyppi>
-            </FormCollapse>
+          <FormCollapse
+            header="3 Kieliversiot"
+            section="language"
+            {...getStepCollapseProps(2)}
+          >
+            <LanguageSection />
+          </FormCollapse>
 
-            <FormCollapse header="5 Valitun koulutuksen kuvaus">
-              <ActiveKoulutus>
-                {({ koulutus }) => (
-                  <FormSection name="description">
-                    <DescriptionSection
-                      languages={languages}
-                      koodiUri={koulutus}
-                    />
-                  </FormSection>
-                )}
-              </ActiveKoulutus>
-            </FormCollapse>
+          <ActiveKoulutusTyyppi>
+            {({ koulutusTyyppi }) => (
+              <FormCollapse
+                header="4 Koulutuksen tiedot"
+                section="information"
+                {...getStepCollapseProps(3)}
+              >
+                <InformationSection
+                  languages={languages}
+                  koulutusTyyppi={koulutusTyyppi}
+                />
+              </FormCollapse>
+            )}
+          </ActiveKoulutusTyyppi>
 
-            <FormCollapse header="6 Koulutuksen järjestävä organisaatio">
-              <FormSection name="organization">
-                <OrganizationSection />
-              </FormSection>
-            </FormCollapse>
+          <ActiveKoulutus>
+            {({ koulutus }) => (
+              <FormCollapse
+                header="5 Valitun koulutuksen kuvaus"
+                section="description"
+                {...getStepCollapseProps(4)}
+              >
+                <DescriptionSection languages={languages} koodiUri={koulutus} />
+              </FormCollapse>
+            )}
+          </ActiveKoulutus>
 
-            <ImplementationCollapse header="7 Koulutukseen liitetyt toteutukset">
-              <FormSection name="implementation">
-                <ImplementationSection />
-              </FormSection>
-            </ImplementationCollapse>
-          </>
-        )}
-      </ActiveLanguages>
-    </form>
+          <FormCollapse
+            header="6 Koulutuksen järjestävä organisaatio"
+            section="organization"
+            {...getStepCollapseProps(5)}
+          >
+            <OrganizationSection />
+          </FormCollapse>
+        </>
+      )}
+    </ActiveLanguages>
+  </form>
+);
+
+const KoulutusForm = ({ steps = false, ...props }) => {
+  return steps ? (
+    <FormStepper stepCount={6}>
+      {({ activeStep, makeOnGoToStep }) => {
+        const getStepCollapseProps = step => {
+          return {
+            open: activeStep >= step,
+            onContinue: makeOnGoToStep(step + 1),
+          };
+        };
+
+        return (
+          <KoulutusFormBase
+            getStepCollapseProps={getStepCollapseProps}
+            {...props}
+          />
+        );
+      }}
+    </FormStepper>
+  ) : (
+    <KoulutusFormBase {...props} />
   );
 };
 

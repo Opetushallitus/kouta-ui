@@ -7,7 +7,6 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import HomePage from '../HomePage';
 import FormPage from '../FormPage';
 
 const MainPage = () => {
@@ -15,7 +14,7 @@ const MainPage = () => {
     <Router basename="/kouta">
       <>
         <Switch>
-          <Route path="/" component={HomePage} exact />
+          <Redirect from="/" to="/koulutus" exact />
           <Route
             path={[
               '/koulutus',

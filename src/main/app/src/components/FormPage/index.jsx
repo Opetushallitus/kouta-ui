@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { getThemeProp } from '../../theme';
-import Header from './Header';
+import HeaderRoutes from './HeaderRoutes';
 import Navigation from './Navigation';
 import Content from './Content';
 import FooterRoutes from './FooterRoutes';
@@ -31,7 +31,7 @@ const FormContent = styled.div`
 const FormPage = () => (
   <>
     <ContentWrapper>
-      <Header />
+      <HeaderRoutes />
     </ContentWrapper>
     <FormNavContainer>
       <ContentWrapper>

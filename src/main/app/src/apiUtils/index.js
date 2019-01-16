@@ -1,9 +1,11 @@
 import { KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP } from '../constants';
 import { isArray } from '../utils';
-import uniqBy from 'lodash/uniqBy';
 import keyBy from 'lodash/keyBy';
 import mapValues from 'lodash/mapValues';
 import get from 'lodash/get';
+import groupBy from 'lodash/groupBy';
+import toPairs from 'lodash/toPairs';
+import maxBy from 'lodash/maxBy';
 
 export const getKoulutuksetByKoulutusTyyppi = async ({
   httpClient,
@@ -31,36 +33,52 @@ export const getKoulutuksetByKoulutusTyyppi = async ({
 
     return [
       ...acc,
-      ...data.map(({ metadata, koodisto, koodiArvo, koodiUri }) => ({
+      ...data.map(({ metadata, koodisto, koodiArvo, koodiUri, versio }) => ({
         metadata,
         koodisto,
         koodiArvo,
         koodiUri,
+        versio,
       })),
     ];
   }, []);
 
-  return uniqBy(koulutukset, ({ koodiUri }) => koodiUri);
+  const latestKoulutukset = toPairs(
+    groupBy(koulutukset, ({ koodiUri }) => koodiUri),
+  ).map(([, versiot]) => maxBy(versiot, ({ versio }) => versio));
+
+  return latestKoulutukset;
 };
 
 export const getKoulutusByKoodi = async ({
   httpClient,
   apiUrls,
   koodiUri,
-  versio = '',
+  versio = null,
 }) => {
-  const [perusteetResponse, alakooditResponse] = await Promise.all([
+  const [
+    perusteetResponse,
+    alakooditResponse,
+    koodiResponse,
+  ] = await Promise.all([
     httpClient.get(
       apiUrls.url('eperusteet-service.perusteet-koulutuskoodilla', koodiUri),
     ),
     httpClient.get(
-      apiUrls.url('koodisto-service.sisaltyy-alakoodit', koodiUri, versio),
+      apiUrls.url(
+        'koodisto-service.sisaltyy-alakoodit',
+        koodiUri,
+        versio || '',
+      ),
     ),
+    httpClient.get(apiUrls.url('koodisto-service.codeelement', koodiUri)),
   ]);
 
   const {
     data: { data: perusteetData },
   } = perusteetResponse;
+
+  const { data: koodiData } = koodiResponse;
 
   const { data: alakooditData = [] } = alakooditResponse;
 
@@ -74,10 +92,6 @@ export const getKoulutusByKoodi = async ({
 
   const opintojenlaajuusYksikkoKoodi = alakooditData.find(
     ({ koodiUri }) => koodiUri && /^opintojenlaajuusyksikko_/.test(koodiUri),
-  );
-
-  const aikahakukohdeKoodi = alakooditData.find(
-    ({ koodiUri }) => koodiUri && /^aikuhakukohteet_/.test(koodiUri),
   );
 
   const koulutusala =
@@ -100,9 +114,13 @@ export const getKoulutusByKoodi = async ({
         )
       : null;
 
+  const latestKoodi = isArray(koodiData)
+    ? maxBy(koodiData, ({ versio }) => versio)
+    : null;
+
   const nimi =
-    aikahakukohdeKoodi && isArray(aikahakukohdeKoodi.metadata)
-      ? keyBy(aikahakukohdeKoodi.metadata, ({ kieli }) =>
+    latestKoodi && isArray(latestKoodi.metadata)
+      ? keyBy(latestKoodi.metadata, ({ kieli }) =>
           kieli ? kieli.toLowerCase() : '_',
         )
       : null;

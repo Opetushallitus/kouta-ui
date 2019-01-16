@@ -22,6 +22,7 @@ export const production = {
     '/koodisto-service/rest/json/relaatio/sisaltyy-ylakoodit/$1',
   'koodisto-service.koodi':
     '/koodisto-service/rest/json/$1/koodi?onlyValidKoodis=true',
+  'koodisto-service.codeelement': '/koodisto-service/rest/codeelement/$1',
   'eperusteet-service.base-url': '/',
   'eperusteet-service.perusteet-koulutuskoodilla':
     '/eperusteet-service/api/perusteet?tuleva=true&siirtyma=false&voimassaolo=true&poistunut=false&kieli=fi&koulutuskoodi=$1',
@@ -103,6 +104,8 @@ export const development = {
     'https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/json/relaatio/sisaltyy-ylakoodit/$1',
   'koodisto-service.koodi':
     'https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/json/$1/koodi?onlyValidKoodis=true',
+  'koodisto-service.codeelement':
+    'https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/$1',
   'eperusteet-service.base-url':
     'https://virkailija.hahtuvaopintopolku.fi/eperusteet-service',
   'eperusteet-service.perusteet-koulutuskoodilla':

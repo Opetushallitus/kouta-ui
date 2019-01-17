@@ -171,3 +171,11 @@ export const getOrganisaatioByOid = async ({ oid, apiUrls, httpClient }) => {
 
   return data;
 };
+
+export const getKoutaKoulutusByOid = async ({ oid, apiUrls, httpClient }) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-backend.koulutus-by-oid', oid),
+  );
+
+  return data;
+};

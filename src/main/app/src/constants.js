@@ -55,3 +55,9 @@ export const LANGUAGE_CODE_TO_TAB_NAME = {
   sv: 'Ruotsiksi',
   en: 'Englanniksi',
 };
+
+export const LANGUAGE_TABS = [
+  { label: LANGUAGE_CODE_TO_TAB_NAME.fi, value: 'fi' },
+  { label: LANGUAGE_CODE_TO_TAB_NAME.sv, value: 'sv' },
+  { label: LANGUAGE_CODE_TO_TAB_NAME.en, value: 'en' },
+];

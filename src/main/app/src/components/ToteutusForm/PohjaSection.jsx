@@ -27,9 +27,9 @@ const SelectionContainer = styled.div`
   padding-left: ${({ theme }) => theme.spacing.unit * 3}px;
 `;
 
-const BaseFieldValue = formValues({
-  base: 'base',
-})(({ base, children }) => children({ base }));
+const PohjaFieldValue = formValues({
+  pohja: 'pohja',
+})(({ pohja, children }) => children({ pohja }));
 
 const renderBaseDropdownField = ({ input }) => {
   const { onChange } = input;
@@ -38,14 +38,14 @@ const renderBaseDropdownField = ({ input }) => {
     <UncontrolledDropdown
       overlay={
         <DropdownMenu>
-          <DropdownMenuItem onClick={() => onChange('new_koulutus')}>
-            Luo uusi koulutus
+          <DropdownMenuItem onClick={() => onChange('new_toteutus')}>
+            Luo uusi toteutus
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => onChange('copy_koulutus')}>
-            Kopio pohjaksi aiemmin luotu koulutus
+          <DropdownMenuItem onClick={() => onChange('copy_toteutus')}>
+            Kopio pohjaksi aiemmin luotu toteutus
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => onChange('existing_koulutus')}>
-            Käytä olemassa olevaa koulutusta
+          <DropdownMenuItem onClick={() => onChange('existing_toteutus')}>
+            Käytä olemassa olevaa toteutusta
           </DropdownMenuItem>
         </DropdownMenu>
       }
@@ -69,32 +69,32 @@ const renderEducationSelectionField = ({ options = [], input }) => (
   </Select>
 );
 
-const BaseSelectionSection = props => {
+const PohjaSection = () => {
   return (
     <ContentContainer>
       <DropdownContainer>
-        <Field name="base" component={renderBaseDropdownField} />
+        <Field name="pohja" component={renderBaseDropdownField} />
       </DropdownContainer>
       <SelectionContainer>
-        <BaseFieldValue>
-          {({ base }) =>
-            ['copy_koulutus', 'existing_koulutus'].includes(base) ? (
+        <PohjaFieldValue>
+          {({ pohja }) =>
+            ['copy_toteutus', 'existing_toteutus'].includes(pohja) ? (
               <>
                 <Typography variant="h6" marginBottom={1}>
-                  Valitse koulutus
+                  Valitse toteutus
                 </Typography>
                 <Field
-                  name="education"
-                  options={[{ label: 'Koulutus 1', value: 'koulutus_1' }]}
+                  name="toteutus"
+                  options={[{ label: 'Toteutus 1', value: 'Toteutus_1' }]}
                   component={renderEducationSelectionField}
                 />
               </>
             ) : null
           }
-        </BaseFieldValue>
+        </PohjaFieldValue>
       </SelectionContainer>
     </ContentContainer>
   );
 };
 
-export default BaseSelectionSection;
+export default PohjaSection;

@@ -1,10 +1,26 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 
-const MainPage = () => {
+import { Router, Route, Redirect, Switch } from 'react-router-dom';
+
+import CreateKoulutusPage from '../CreateKoulutusPage';
+import CreateToteutusPage from '../CreateToteutusPage';
+
+const MainPage = ({ history }) => {
   return (
-    <Router basename="/kouta">
-      <div>Hello world!</div>
+    <Router history={history}>
+      <Switch>
+        <Route
+          path="/organisaatio/:oid/koulutus"
+          component={CreateKoulutusPage}
+          exact
+        />
+        <Route
+          path="/koulutus/:oid/toteutus"
+          component={CreateToteutusPage}
+          exact
+        />
+        <Redirect to="/" />
+      </Switch>
     </Router>
   );
 };

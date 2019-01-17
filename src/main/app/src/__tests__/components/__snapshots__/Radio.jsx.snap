@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-.c0 {
-  font-family: sans-serif;
+.c1 {
+  font-family: 'Open Sans',sans-serif;
   font-size: 1rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -12,94 +12,125 @@ exports[`renders correctly 1`] = `
   color: #666666;
 }
 
-.c2 {
+.c0 {
+  margin-bottom: 4px;
+}
+
+.c3 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
   margin-left: 6px;
 }
 
-.c1 {
+.c2 {
   -webkit-flex: 0;
   -ms-flex: 0;
   flex: 0;
 }
 
 <div>
-  <styled.label>
-    <label
+  <styled.div
+    key=".0"
+    last={false}
+  >
+    <div
       className="c0"
     >
-      <styled.div>
-        <div
+      <styled.label>
+        <label
           className="c1"
         >
-          <input
-            checked={false}
-            onChange={[Function]}
-            type="radio"
-            value="a"
-          />
-        </div>
-      </styled.div>
-      <styled.div>
-        <div
-          className="c2"
-        >
-          Radio A
-        </div>
-      </styled.div>
-    </label>
-  </styled.label>
-  <styled.label>
-    <label
+          <styled.div>
+            <div
+              className="c2"
+            >
+              <input
+                checked={false}
+                onChange={[Function]}
+                type="radio"
+                value="a"
+              />
+            </div>
+          </styled.div>
+          <styled.div>
+            <div
+              className="c3"
+            >
+              Radio A
+            </div>
+          </styled.div>
+        </label>
+      </styled.label>
+    </div>
+  </styled.div>
+  <styled.div
+    key=".1"
+    last={false}
+  >
+    <div
       className="c0"
     >
-      <styled.div>
-        <div
+      <styled.label>
+        <label
           className="c1"
         >
-          <input
-            checked={true}
-            onChange={[Function]}
-            type="radio"
-            value="b"
-          />
-        </div>
-      </styled.div>
-      <styled.div>
-        <div
-          className="c2"
-        >
-          Radio B
-        </div>
-      </styled.div>
-    </label>
-  </styled.label>
-  <styled.label>
-    <label
-      className="c0"
+          <styled.div>
+            <div
+              className="c2"
+            >
+              <input
+                checked={true}
+                onChange={[Function]}
+                type="radio"
+                value="b"
+              />
+            </div>
+          </styled.div>
+          <styled.div>
+            <div
+              className="c3"
+            >
+              Radio B
+            </div>
+          </styled.div>
+        </label>
+      </styled.label>
+    </div>
+  </styled.div>
+  <styled.div
+    key=".2"
+    last={true}
+  >
+    <div
+      className=""
     >
-      <styled.div>
-        <div
+      <styled.label>
+        <label
           className="c1"
         >
-          <input
-            checked={false}
-            onChange={[Function]}
-            type="radio"
-            value="c"
-          />
-        </div>
-      </styled.div>
-      <styled.div>
-        <div
-          className="c2"
-        >
-          Radio C
-        </div>
-      </styled.div>
-    </label>
-  </styled.label>
+          <styled.div>
+            <div
+              className="c2"
+            >
+              <input
+                checked={false}
+                onChange={[Function]}
+                type="radio"
+                value="c"
+              />
+            </div>
+          </styled.div>
+          <styled.div>
+            <div
+              className="c3"
+            >
+              Radio C
+            </div>
+          </styled.div>
+        </label>
+      </styled.label>
+    </div>
+  </styled.div>
 </div>
 `;

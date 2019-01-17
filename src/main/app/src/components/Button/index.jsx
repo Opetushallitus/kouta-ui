@@ -76,6 +76,7 @@ const ButtonBase = styled.button`
   font-size: 1rem;
   border: 2px solid;
   line-height: 1.5;
+  white-space: nowrap;
 
   ${getVariantCss}
 
@@ -83,6 +84,7 @@ const ButtonBase = styled.button`
     disabled &&
     css`
       opacity: 0.5;
+      cursor: not-allowed;
     `}
 `;
 

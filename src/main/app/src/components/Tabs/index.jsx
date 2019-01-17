@@ -14,16 +14,25 @@ const activeCss = css`
   color: ${getThemeProp('palette.text.primary')};
 `;
 
+const TabWrapper = styled.div`
+  ${({ last }) =>
+    !last &&
+    css`
+      margin-right: 6px;
+    `}
+`;
+
 export const Tab = styled.div`
-  padding: 10px 20px;
+  padding: 6px 16px;
   position: relative;
   z-index: 1;
+  white-space: nowrap;
   bottom: -1px;
   font-family: ${getThemeProp('typography.fontFamily')};
+  line-height: ${getThemeProp('typography.lineHeight')};
   font-size: 1rem;
   color: ${getThemeProp('palette.primary.main')};
   border-bottom: 0px none;
-  margin-right: 6px;
   cursor: pointer;
   border: 1px solid transparent;
   border-top: 2px solid transparent;
@@ -32,15 +41,20 @@ export const Tab = styled.div`
 `;
 
 const Tabs = ({ value, onChange = () => {}, ...props }) => {
-  const children = React.Children.map(props.children, child => {
-    const active = value !== undefined && child.props.value === value;
+  const childrenCount = React.Children.count(props.children);
 
-    return React.cloneElement(child, {
+  const children = React.Children.map(props.children, (child, index) => {
+    const active = value !== undefined && child.props.value === value;
+    const last = index === childrenCount - 1;
+
+    const element = React.cloneElement(child, {
       active,
       onClick: () => {
         onChange(child.props.value);
       },
     });
+
+    return <TabWrapper last={last}>{element}</TabWrapper>;
   });
 
   return <Wrapper {...props}>{children}</Wrapper>;

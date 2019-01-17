@@ -9,30 +9,36 @@ exports[`renders correctly 1`] = `
 }
 
 .c1 {
-  padding: 10px 20px;
+  margin-right: 6px;
+}
+
+.c2 {
+  padding: 6px 16px;
   position: relative;
   z-index: 1;
+  white-space: nowrap;
   bottom: -1px;
-  font-family: sans-serif;
+  font-family: 'Open Sans',sans-serif;
+  line-height: 1.5;
   font-size: 1rem;
   color: #2da0c7;
   border-bottom: 0px none;
-  margin-right: 6px;
   cursor: pointer;
   border: 1px solid transparent;
   border-top: 2px solid transparent;
 }
 
-.c2 {
-  padding: 10px 20px;
+.c3 {
+  padding: 6px 16px;
   position: relative;
   z-index: 1;
+  white-space: nowrap;
   bottom: -1px;
-  font-family: sans-serif;
+  font-family: 'Open Sans',sans-serif;
+  line-height: 1.5;
   font-size: 1rem;
   color: #2da0c7;
   border-bottom: 0px none;
-  margin-right: 6px;
   cursor: pointer;
   border: 1px solid transparent;
   border-top: 2px solid transparent;
@@ -47,45 +53,69 @@ exports[`renders correctly 1`] = `
     className="c0"
   >
     <styled.div
-      active={false}
       key=".0"
-      onClick={[Function]}
-      value="a"
+      last={false}
     >
       <div
         className="c1"
-        onClick={[Function]}
-        value="a"
       >
-        Tab A
+        <styled.div
+          active={false}
+          onClick={[Function]}
+          value="a"
+        >
+          <div
+            className="c2"
+            onClick={[Function]}
+            value="a"
+          >
+            Tab A
+          </div>
+        </styled.div>
       </div>
     </styled.div>
     <styled.div
-      active={true}
       key=".1"
-      onClick={[Function]}
-      value="b"
-    >
-      <div
-        className="c2"
-        onClick={[Function]}
-        value="b"
-      >
-        Tab B
-      </div>
-    </styled.div>
-    <styled.div
-      active={false}
-      key=".2"
-      onClick={[Function]}
-      value="c"
+      last={false}
     >
       <div
         className="c1"
-        onClick={[Function]}
-        value="c"
       >
-        Tab C
+        <styled.div
+          active={true}
+          onClick={[Function]}
+          value="b"
+        >
+          <div
+            className="c3"
+            onClick={[Function]}
+            value="b"
+          >
+            Tab B
+          </div>
+        </styled.div>
+      </div>
+    </styled.div>
+    <styled.div
+      key=".2"
+      last={true}
+    >
+      <div
+        className=""
+      >
+        <styled.div
+          active={false}
+          onClick={[Function]}
+          value="c"
+        >
+          <div
+            className="c2"
+            onClick={[Function]}
+            value="c"
+          >
+            Tab C
+          </div>
+        </styled.div>
       </div>
     </styled.div>
   </div>

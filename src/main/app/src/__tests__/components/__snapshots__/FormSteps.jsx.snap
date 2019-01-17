@@ -1,0 +1,386 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+.c6 {
+  font-size: 1.5rem;
+}
+
+.c3 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c4 {
+  border-radius: 50%;
+  width: 3.5rem;
+  height: 3.5rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border: 3px solid;
+  background-color: white;
+  border-color: #cecece;
+  border-color: #2da0c7;
+}
+
+.c8 {
+  border-radius: 50%;
+  width: 3.5rem;
+  height: 3.5rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border: 3px solid;
+  background-color: white;
+  border-color: #cecece;
+  background-color: #2da0c7;
+  border-color: white;
+}
+
+.c10 {
+  border-radius: 50%;
+  width: 3.5rem;
+  height: 3.5rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border: 3px solid;
+  background-color: white;
+  border-color: #cecece;
+}
+
+.c7 {
+  margin-top: 8px;
+  text-align: center;
+  font-family: 'Open Sans',sans-serif;
+  color: #666666;
+  font-size: 0.8rem;
+}
+
+.c5 {
+  font-size: 2rem;
+  color: #666666;
+}
+
+.c9 {
+  font-size: 2rem;
+  color: #666666;
+  color: white;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c2 {
+  -webkit-flex: 0;
+  -ms-flex: 0;
+  flex: 0;
+  margin-right: 24px;
+}
+
+.c2:last-child {
+  margin-right: 0px;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+<styled.div>
+  <div
+    className="c0"
+  >
+    <styled.div>
+      <div
+        className="c1"
+      >
+        <Styled(FormStepsIcon)
+          active={false}
+          done={true}
+          icon="school"
+        >
+          <styled.div
+            className="c2"
+          >
+            <div
+              className="c2 c3"
+            >
+              <styled.div
+                active={false}
+                done={true}
+              >
+                <div
+                  className="c4"
+                >
+                  <Styled(Icon)
+                    active={false}
+                    type="school"
+                  >
+                    <styled.i
+                      active={false}
+                      className="material-icons c5"
+                    >
+                      <i
+                        className="material-icons c5 c6"
+                      >
+                        school
+                      </i>
+                    </styled.i>
+                  </Styled(Icon)>
+                </div>
+              </styled.div>
+              <styled.div>
+                <div
+                  className="c7"
+                >
+                  Koulutus
+                </div>
+              </styled.div>
+            </div>
+          </styled.div>
+        </Styled(FormStepsIcon)>
+        <Styled(FormStepsIcon)
+          active={false}
+          done={true}
+          icon="settings"
+        >
+          <styled.div
+            className="c2"
+          >
+            <div
+              className="c2 c3"
+            >
+              <styled.div
+                active={false}
+                done={true}
+              >
+                <div
+                  className="c4"
+                >
+                  <Styled(Icon)
+                    active={false}
+                    type="settings"
+                  >
+                    <styled.i
+                      active={false}
+                      className="material-icons c5"
+                    >
+                      <i
+                        className="material-icons c5 c6"
+                      >
+                        settings
+                      </i>
+                    </styled.i>
+                  </Styled(Icon)>
+                </div>
+              </styled.div>
+              <styled.div>
+                <div
+                  className="c7"
+                >
+                  Toteutus
+                </div>
+              </styled.div>
+            </div>
+          </styled.div>
+        </Styled(FormStepsIcon)>
+      </div>
+    </styled.div>
+    <styled.div>
+      <div
+        className="c1"
+      >
+        <Styled(FormStepsIcon)
+          active={false}
+          done={true}
+          icon="access_time"
+        >
+          <styled.div
+            className="c2"
+          >
+            <div
+              className="c2 c3"
+            >
+              <styled.div
+                active={false}
+                done={true}
+              >
+                <div
+                  className="c4"
+                >
+                  <Styled(Icon)
+                    active={false}
+                    type="access_time"
+                  >
+                    <styled.i
+                      active={false}
+                      className="material-icons c5"
+                    >
+                      <i
+                        className="material-icons c5 c6"
+                      >
+                        access_time
+                      </i>
+                    </styled.i>
+                  </Styled(Icon)>
+                </div>
+              </styled.div>
+              <styled.div>
+                <div
+                  className="c7"
+                >
+                  Haku
+                </div>
+              </styled.div>
+            </div>
+          </styled.div>
+        </Styled(FormStepsIcon)>
+        <Styled(FormStepsIcon)
+          active={true}
+          done={false}
+          icon="grain"
+        >
+          <styled.div
+            className="c2"
+          >
+            <div
+              className="c2 c3"
+            >
+              <styled.div
+                active={true}
+                done={false}
+              >
+                <div
+                  className="c8"
+                >
+                  <Styled(Icon)
+                    active={true}
+                    type="grain"
+                  >
+                    <styled.i
+                      active={true}
+                      className="material-icons c9"
+                    >
+                      <i
+                        className="material-icons c9 c6"
+                      >
+                        grain
+                      </i>
+                    </styled.i>
+                  </Styled(Icon)>
+                </div>
+              </styled.div>
+              <styled.div>
+                <div
+                  className="c7"
+                >
+                  Hakukohde
+                </div>
+              </styled.div>
+            </div>
+          </styled.div>
+        </Styled(FormStepsIcon)>
+      </div>
+    </styled.div>
+    <styled.div>
+      <div
+        className="c1"
+      >
+        <Styled(FormStepsIcon)
+          active={false}
+          done={false}
+          icon="select_all"
+        >
+          <styled.div
+            className="c2"
+          >
+            <div
+              className="c2 c3"
+            >
+              <styled.div
+                active={false}
+                done={false}
+              >
+                <div
+                  className="c10"
+                >
+                  <Styled(Icon)
+                    active={false}
+                    type="select_all"
+                  >
+                    <styled.i
+                      active={false}
+                      className="material-icons c5"
+                    >
+                      <i
+                        className="material-icons c5 c6"
+                      >
+                        select_all
+                      </i>
+                    </styled.i>
+                  </Styled(Icon)>
+                </div>
+              </styled.div>
+              <styled.div>
+                <div
+                  className="c7"
+                >
+                  Valintaperusteet
+                </div>
+              </styled.div>
+            </div>
+          </styled.div>
+        </Styled(FormStepsIcon)>
+      </div>
+    </styled.div>
+  </div>
+</styled.div>
+`;

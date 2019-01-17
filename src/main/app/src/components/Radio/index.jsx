@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { getThemeProp } from '../../theme';
 
@@ -9,6 +9,14 @@ const Label = styled.label`
   display: flex;
   line-height: 1.5;
   color: ${getThemeProp('palette.text.primary')};
+`;
+
+const RadioContainer = styled.div`
+  ${({ last }) =>
+    !last &&
+    css`
+      margin-bottom: ${({ theme }) => theme.spacing.unit * 0.5}px;
+    `}
 `;
 
 const LabelWrapper = styled.div`
@@ -30,10 +38,14 @@ const Radio = ({ children = null, ...props }) => (
 );
 
 export const RadioGroup = ({ value, onChange, ...props }) => {
-  const children = React.Children.map(props.children, child => {
-    const checked = value !== undefined && child.props.value === value;
+  const childrenCount = React.Children.count(props.children);
 
-    return React.cloneElement(child, { checked, onChange });
+  const children = React.Children.map(props.children, (child, index) => {
+    const checked = value !== undefined && child.props.value === value;
+    const element = React.cloneElement(child, { checked, onChange });
+    const last = index === childrenCount - 1;
+
+    return <RadioContainer last={last}>{element}</RadioContainer>;
   });
 
   return <div {...props}>{children}</div>;

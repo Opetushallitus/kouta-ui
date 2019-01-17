@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 
+import me from './me';
+
 export default (reducers = {}) =>
   combineReducers({
-    reducer: (state = {}, action) => state,
+    me,
     ...reducers,
   });

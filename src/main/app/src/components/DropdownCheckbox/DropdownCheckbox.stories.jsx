@@ -10,8 +10,10 @@ const list = [
   {label: 'Option D', key: 'd'}
 ];
 
-storiesOf('DropdownSelectbox', module)
+const listOfKeys = [{label: 'Option A', key: 'a'}];
+
+storiesOf('DropdownCheckbox', module)
   .add('Basic', () => (
-    <DropdownCheckbox options={list}>
+    <DropdownCheckbox options={list} onChange={action('change')} value={listOfKeys}>
     </DropdownCheckbox>
   ));

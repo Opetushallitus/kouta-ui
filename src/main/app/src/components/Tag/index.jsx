@@ -33,15 +33,22 @@ padding-left: 10px;
 `;
 
 export class TagSelect extends React.Component {
+
+  static defaultProps = {
+    options: [],
+    value: [],
+    maxTags: 5,
+    onChange: () => null,
+  };
+
+
   constructor(props) {
     super(props);
     this.state = {
         filter: '',
         expanded: false,
-        tags: [],
-        maxTags: props.maxTags
     };
-}
+  }
 
 getFilter = () => this.state.filter || '';
 
@@ -53,37 +60,32 @@ setFilter = (event) => this.setState({
     expanded: true
 });
 
-supportsTags = () => this.state.maxTags && this.state.maxTags > 0;
+supportsTags = () => this.props.maxTags && this.props.maxTags > 0;
 
-checkTagCount = () => this.state.tags.length < this.state.maxTags;
+checkTagCount = () => this.props.value.length < this.props.maxTags;
 
 getFilteredOptions = () => (this.props.options || []).filter(option => option.label.toLowerCase().includes(this.getFilter().toLowerCase()) && !this.hasTagWithKey(option.key));
 
-getTags = () => this.state.tags || [];
+getTags = () => this.props.value || [];
 
-getLabel = () => this.props.label;
-
-selectOption = (event) => this.checkTagCount() && this.selectOptionByKey(event.target.getAttribute('data-id'));
+selectOption = (event) => this.checkTagCount() && this.makeOnChangeOption(event.target.getAttribute('data-id'));
 
 findOptionByKey = (key) => this.getOptions().find(option => option.key === key);
 
 hasTagWithKey = (key) => this.getTags().find(tag => tag.key === key);
 
-addTagByKey = (key) => this.hasTagWithKey(key) ? this.getTags() : this.getTags().concat([{...this.findOptionByKey(key)}]);
-
-selectOptionByKey = (key) => key && this.setState({
-    filter: '',
-    expanded: false,
-    tags: this.addTagByKey(key)
-});
+makeOnChangeOption = key => {
+  const {onChange} = this.props
+  onChange(key);
+};
 
 getKeyFromFirstFilteredOption = () => (this.getFilteredOptions().shift() || {}).key;
 
-selectOnEnterKey = (event) => event.keyCode === 13 && this.selectOptionByKey(this.getKeyFromFirstFilteredOption());
+selectOnEnterKey = (event) => event.keyCode === 13 && this.makeOnChangeOption(this.getKeyFromFirstFilteredOption());
 
 toggleExpanded = () => this.setState({
     ...this.state,
-    expanded: !this.state.expanded
+    expanded: !this.state.expanded 
 });
 
 renderOption = (option, index) => (
@@ -98,15 +100,10 @@ renderOptionList = () => this.state.expanded && (
     </DropdownMenu>
 );
 
-removeTag = (key) => this.setState({
-    ...this.state,
-    tags: this.getTags().filter(tag => tag.key !== key)
-});
-
 renderTag = (option, index) => (
     <Tag key={index}>
         <TagText>{option.label}
-          <RemoveButton onClick={() => this.removeTag(option.key)}>clear</RemoveButton>
+          <RemoveButton onClick={() => this.makeOnChangeOption(option.key)}>clear</RemoveButton>
         </TagText>
     </Tag>
 );

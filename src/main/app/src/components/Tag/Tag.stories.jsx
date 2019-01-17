@@ -11,9 +11,9 @@ const list = [
     {label: 'ambulanssihoitaja', key: 'ambulanssihoitaja'}
 ];
 
+const tags = [{label: 'sosiaalityöntekijä', key: 'sosiaalityöntekijä'},]
+
 storiesOf('Tag', module)
 .add('Basic', () => (
-    <TagSelect
-    options={list}
-    maxTags={5}/>
+    <TagSelect options={list} maxTags={5} value={tags} onChange={action('change')}/>
   ));

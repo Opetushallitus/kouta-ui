@@ -22,7 +22,7 @@ Kehityksen aikana käyttöliittymää kannattaa ajaa pelkästään nodella, joll
 
 Käyttöliittymä aukeaa osoitteeseen:
 
-http://localhost:3030/
+http://localhost:3000/
 
 Portteja voi vaihtaa ajamalla:
 
@@ -61,3 +61,7 @@ Testit voi ajaa default porteissa komennolla
 tai tietyissä porteissa
 
 `PORT=5555 BACKEND_PORT=5556 npm test`
+
+## Storybook
+
+[Storybookin](https://github.com/storybooks/storybook) voi käynnistää komennolla `npm run storybook`. Käynnistymisen jälkeen Storybook löytyy osoitteesta [http://localhost:9009](http://localhost:9009).

@@ -4,21 +4,20 @@ import get from 'lodash/get';
 import { JULKAISUTILA } from '../../constants';
 import { getKoulutusByKoodi } from '../../apiUtils';
 
-const getKoulutusFormValues = getFormValues('koulutusForm');
+const getKoulutusFormValues = getFormValues('createKoulutusForm');
 
 export const saveKoulutus = koulutus => (
   dispatch,
   getState,
   { apiUrls, httpClient },
 ) => {
-  console.log(koulutus);
   return httpClient.put(apiUrls.url('kouta-backend.koulutus'), koulutus);
 };
 
 export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   dispatch,
   getState,
-  { httpClient, apiUrls },
+  { httpClient, apiUrls, history },
 ) => {
   const state = getState();
   const values = getKoulutusFormValues(state);
@@ -53,5 +52,13 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
     koulutustyyppi,
   };
 
-  return dispatch(saveKoulutus(koulutus));
+  const { data: koulutusData } = await dispatch(saveKoulutus(koulutus));
+
+  if (get(koulutusData, 'oid') && JULKAISUTILA.JULKAISTU) {
+    const { oid: koulutusOid } = koulutusData;
+
+    history.push(`/koulutus/${koulutusOid}/toteutus`);
+  } else {
+    history.push('/');
+  }
 };

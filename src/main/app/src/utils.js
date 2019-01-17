@@ -12,3 +12,5 @@ export const isArray = value => toString.call(value) === '[object Array]';
 
 export const getLanguageValue = (value, language = 'fi') =>
   isObject(value) ? value[language] || value['fi'] || null : null;
+
+export const isFunction = value => typeof value === 'function';

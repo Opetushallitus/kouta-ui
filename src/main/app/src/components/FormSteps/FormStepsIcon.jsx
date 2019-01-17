@@ -7,7 +7,6 @@ import { getThemeProp } from '../../theme';
 const Container = styled.div`
   display: inline-flex;
   flex-direction: column;
-  cursor: pointer;
   align-items: center;
 `;
 
@@ -55,7 +54,7 @@ const IconBase = styled(Icon)`
     `}
 `;
 
-const NavIcon = ({
+const FormStepsIcon = ({
   children = null,
   icon = null,
   active = false,
@@ -70,4 +69,4 @@ const NavIcon = ({
   </Container>
 );
 
-export default NavIcon;
+export default FormStepsIcon;

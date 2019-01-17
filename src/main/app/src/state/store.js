@@ -5,7 +5,7 @@ import { reducer as formReducer } from 'redux-form';
 
 import createRootReducer from './rootReducer';
 
-export default ({ apiUrls, httpClient }) => {
+export default ({ apiUrls, httpClient, history }) => {
   const rootReducer = createRootReducer({
     form: formReducer,
   });
@@ -13,6 +13,7 @@ export default ({ apiUrls, httpClient }) => {
   const context = {
     httpClient,
     apiUrls,
+    history,
   };
 
   const middleware = applyMiddleware(thunk.withExtraArgument(context));

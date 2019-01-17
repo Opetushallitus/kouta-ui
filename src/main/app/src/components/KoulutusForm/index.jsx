@@ -12,7 +12,7 @@ import Collapse from '../Collapse';
 import Button from '../Button';
 import FormStepper from '../FormStepper';
 import ResetFormSection from '../ResetFormSection';
-import { isObject, isFunction } from 'util';
+import { isObject, isFunction } from '../../utils';
 
 const CollapseFooterContainer = styled.div`
   display: flex;

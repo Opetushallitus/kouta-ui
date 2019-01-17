@@ -1,7 +1,7 @@
-import React from 'react';
 import { reduxForm } from 'redux-form';
 import get from 'lodash/get';
 import set from 'lodash/set';
+import { compose, withProps } from 'recompose';
 
 import KoulutusForm from '../KoulutusForm';
 import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
@@ -35,17 +35,22 @@ const validate = values => {
   return errors;
 };
 
-export default reduxForm({
-  form: 'koulutusForm',
-  validate,
-  initialValues: {
-    type: {
-      type: KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS,
+export default compose(
+  withProps({
+    steps: true,
+  }),
+  reduxForm({
+    form: 'createKoulutusForm',
+    validate,
+    initialValues: {
+      type: {
+        type: KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS,
+      },
+      language: {
+        fi: true,
+        sv: true,
+        en: false,
+      },
     },
-    language: {
-      fi: true,
-      sv: true,
-      en: false,
-    },
-  },
-})(props => <KoulutusForm {...props} steps />);
+  }),
+)(KoulutusForm);

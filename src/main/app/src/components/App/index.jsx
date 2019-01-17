@@ -7,14 +7,14 @@ import HttpContext from '../HttpContext';
 import UrlContext from '../UrlContext';
 import MainPage from '../MainPage';
 
-const App = ({ store, theme, httpClient, urls }) => {
+const App = ({ store, theme, httpClient, urls, history }) => {
   return (
     <>
       <Provider store={store}>
         <ThemeProvider theme={theme}>
           <HttpContext.Provider value={httpClient}>
             <UrlContext.Provider value={urls}>
-              <MainPage />
+              <MainPage history={history} />
             </UrlContext.Provider>
           </HttpContext.Provider>
         </ThemeProvider>

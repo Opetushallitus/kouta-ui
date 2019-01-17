@@ -31,6 +31,10 @@ export const production = {
   'organisaatio-service.base-url': '/',
   'organisaatio-service.children':
     '/organisaatio-service/rest/organisaatio/v4/$1/children?includeImage=false',
+  'organisaatio-service.hierarkia':
+    '/organisaatio-service/rest/organisaatio/v4/hierarkia/hae?oid=$1&aktiiviset=true&suunnitellut=true&lakkautetut=false',
+  'organisaatio-service.organisaatio-by-oid':
+    '/organisaatio-service/rest/organisaatio/v4/$1?includeImage=false',
 };
 
 export const development = {
@@ -116,4 +120,8 @@ export const development = {
     'https://virkailija.hahtuvaopintopolku.fi/organisaatio-service',
   'organisaatio-service.children':
     'https://virkailija.hahtuvaopintopolku.fi/organisaatio-service/rest/organisaatio/v4/$1/children?includeImage=false',
+  'organisaatio-service.hierarkia':
+    'https://virkailija.hahtuvaopintopolku.fi/organisaatio-service/rest/organisaatio/v4/hierarkia/hae?oid=$1&aktiiviset=true&suunnitellut=true&lakkautetut=false',
+  'organisaatio-service.organisaatio-by-oid':
+    'https://virkailija.hahtuvaopintopolku.fi/organisaatio-service/rest/organisaatio/v4/$1?includeImage=false',
 };

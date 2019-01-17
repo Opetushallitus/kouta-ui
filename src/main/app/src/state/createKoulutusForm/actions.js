@@ -6,6 +6,12 @@ import { getKoulutusByKoodi } from '../../apiUtils';
 
 const getKoulutusFormValues = getFormValues('createKoulutusForm');
 
+const getOrganisaatioOidFromPathname = pathname => {
+  const split = pathname.split('/').filter(p => !!p);
+
+  return split[1];
+};
+
 export const saveKoulutus = koulutus => (
   dispatch,
   getState,
@@ -22,8 +28,12 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   const state = getState();
   const values = getKoulutusFormValues(state);
 
+  const organisaatioOid = getOrganisaatioOidFromPathname(
+    history.location.pathname,
+  );
+
   const {
-    me: { organisaatioOid, kayttajaOid },
+    me: { kayttajaOid },
   } = state;
 
   const kielivalinta = Object.keys(values.language).filter(

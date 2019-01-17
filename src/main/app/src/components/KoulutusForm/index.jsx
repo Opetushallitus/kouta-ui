@@ -91,6 +91,7 @@ const defaultGetStepCollapseProps = () => ({
 const KoulutusFormBase = ({
   handleSubmit,
   getStepCollapseProps = defaultGetStepCollapseProps,
+  organisaatioOid,
 }) => (
   <form onSubmit={handleSubmit}>
     <ActiveLanguages>
@@ -152,7 +153,7 @@ const KoulutusFormBase = ({
             section="organization"
             {...getStepCollapseProps(5)}
           >
-            <OrganizationSection />
+            <OrganizationSection organisaatioOid={organisaatioOid} />
           </FormCollapse>
         </>
       )}

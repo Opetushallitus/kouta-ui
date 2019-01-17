@@ -151,3 +151,23 @@ export const getKoulutusByKoodi = async ({
     nimi: mapValues(nimi, ({ nimi: nimiField }) => nimiField || null),
   };
 };
+
+export const getOrganisaatioHierarchyByOid = async ({
+  oid,
+  apiUrls,
+  httpClient,
+}) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('organisaatio-service.hierarkia', oid),
+  );
+
+  return get(data, 'organisaatiot') || [];
+};
+
+export const getOrganisaatioByOid = async ({ oid, apiUrls, httpClient }) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('organisaatio-service.organisaatio-by-oid', oid),
+  );
+
+  return data;
+};

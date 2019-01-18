@@ -2,7 +2,7 @@
 
 exports[`renders correctly 1`] = `
 .c1 {
-  font-family: 'Open Sans',sans-serif;
+  font-family: 'Roboto',sans-serif;
   font-size: 1rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -16,7 +16,7 @@ exports[`renders correctly 1`] = `
   margin-bottom: 4px;
 }
 
-.c3 {
+.c4 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -27,6 +27,10 @@ exports[`renders correctly 1`] = `
   -webkit-flex: 0;
   -ms-flex: 0;
   flex: 0;
+}
+
+.c3 {
+  font-size: inherit;
 }
 
 <div>
@@ -45,17 +49,25 @@ exports[`renders correctly 1`] = `
             <div
               className="c2"
             >
-              <input
+              <styled.input
                 checked={false}
                 onChange={[Function]}
                 type="radio"
                 value="a"
-              />
+              >
+                <input
+                  checked={false}
+                  className="c3"
+                  onChange={[Function]}
+                  type="radio"
+                  value="a"
+                />
+              </styled.input>
             </div>
           </styled.div>
           <styled.div>
             <div
-              className="c3"
+              className="c4"
             >
               Radio A
             </div>
@@ -79,17 +91,25 @@ exports[`renders correctly 1`] = `
             <div
               className="c2"
             >
-              <input
+              <styled.input
                 checked={true}
                 onChange={[Function]}
                 type="radio"
                 value="b"
-              />
+              >
+                <input
+                  checked={true}
+                  className="c3"
+                  onChange={[Function]}
+                  type="radio"
+                  value="b"
+                />
+              </styled.input>
             </div>
           </styled.div>
           <styled.div>
             <div
-              className="c3"
+              className="c4"
             >
               Radio B
             </div>
@@ -113,17 +133,25 @@ exports[`renders correctly 1`] = `
             <div
               className="c2"
             >
-              <input
+              <styled.input
                 checked={false}
                 onChange={[Function]}
                 type="radio"
                 value="c"
-              />
+              >
+                <input
+                  checked={false}
+                  className="c3"
+                  onChange={[Function]}
+                  type="radio"
+                  value="c"
+                />
+              </styled.input>
             </div>
           </styled.div>
           <styled.div>
             <div
-              className="c3"
+              className="c4"
             >
               Radio C
             </div>

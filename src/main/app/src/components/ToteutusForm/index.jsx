@@ -4,18 +4,19 @@ import { formValues } from 'redux-form';
 import FormStepper from '../FormStepper';
 import { isObject } from '../../utils';
 import FormCollapse from '../FormCollapse';
+import KieliversiotFormSection from '../KieliversiotFormSection';
 import { LANGUAGE_TABS } from '../../constants';
 import OsaamisalatSection from './OsaamisalatSection';
 import YhteystiedotSection from './YhteystiedotSection';
 import NimiSection from './NimiSection';
 import PohjaSection from './PohjaSection';
+import JarjestamisPaikatSection from './JarjestamisPaikatSection';
+import JarjestamisTiedotSection from './JarjestamisTiedotSection';
 
 const ActiveLanguages = formValues({
-  language: 'language',
-})(({ language, ...props }) => {
-  const activeLanguages = isObject(language)
-    ? Object.keys(language).filter(key => !!language[key])
-    : [];
+  languages: 'kieliversiot.languages',
+})(({ languages, ...props }) => {
+  const activeLanguages = languages || [];
 
   return props.children({
     languages: LANGUAGE_TABS.filter(({ value }) =>
@@ -32,6 +33,7 @@ const ToteutusFormBase = ({
   handleSubmit,
   getStepCollapseProps = defaultGetStepCollapseProps,
   koulutusKoodiUri,
+  organisaatioOid,
 }) => (
   <form onSubmit={handleSubmit}>
     <ActiveLanguages>
@@ -46,54 +48,63 @@ const ToteutusFormBase = ({
           </FormCollapse>
 
           <FormCollapse
-            header="2 Valitse osaamisalat"
-            section="osaamisalat"
+            header="2 Kieliversiot"
+            section="kieliversiot"
             {...getStepCollapseProps(1)}
           >
+            <KieliversiotFormSection />
+          </FormCollapse>
+
+          <FormCollapse
+            header="3 Valitse osaamisalat"
+            section="osaamisalat"
+            {...getStepCollapseProps(2)}
+          >
             <OsaamisalatSection
-              languages={LANGUAGE_TABS}
+              languages={languages}
               koulutusKoodiUri={koulutusKoodiUri}
             />
           </FormCollapse>
 
           <FormCollapse
-            header="3 Toteutuksen järjestämistiedot"
+            header="4 Toteutuksen järjestämistiedot"
             section="jarjestamistiedot"
-            {...getStepCollapseProps(2)}
-          >
-            <div />
-          </FormCollapse>
-
-          <FormCollapse
-            header="4 Koulutuksen näyttämiseen liittyvät tiedot"
-            section="nayttamistiedot"
             {...getStepCollapseProps(3)}
           >
-            <div />
+            <JarjestamisTiedotSection languages={languages} />
           </FormCollapse>
 
           <FormCollapse
-            header="5 Missä järjestetään?"
-            section="jarjestamispaikat"
+            header="5 Koulutuksen näyttämiseen liittyvät tiedot"
+            section="nayttamistiedot"
             {...getStepCollapseProps(4)}
           >
             <div />
           </FormCollapse>
 
           <FormCollapse
-            header="6 Toteutuksen nimi"
-            section="nimi"
+            header="6 Missä järjestetään?"
+            section="jarjestamispaikat"
             {...getStepCollapseProps(5)}
           >
-            <NimiSection languages={LANGUAGE_TABS} />
+            <JarjestamisPaikatSection organisaatioOid={organisaatioOid} />
           </FormCollapse>
 
           <FormCollapse
-            header="7 Koulutuksen yhteystiedot"
-            section="yhteystiedot"
+            header="7 Toteutuksen nimi"
+            section="nimi"
             {...getStepCollapseProps(6)}
           >
-            <YhteystiedotSection languages={LANGUAGE_TABS} />
+            <NimiSection languages={languages} />
+          </FormCollapse>
+
+          <FormCollapse
+            header="8 Koulutuksen yhteystiedot"
+            section="yhteystiedot"
+            {...getStepCollapseProps(7)}
+            onContinue={null}
+          >
+            <YhteystiedotSection languages={languages} />
           </FormCollapse>
         </>
       )}
@@ -102,8 +113,10 @@ const ToteutusFormBase = ({
 );
 
 const ToteutusForm = ({ steps = false, ...props }) => {
+  const stepCount = 8;
+
   return steps ? (
-    <FormStepper stepCount={8}>
+    <FormStepper stepCount={stepCount}>
       {({ activeStep, makeOnGoToStep }) => {
         const getStepCollapseProps = step => {
           return {

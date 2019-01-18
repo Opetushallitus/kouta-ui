@@ -1,11 +1,10 @@
 import React from 'react';
 
-import FormPage from '../FormPage';
+import FormPage, { OrganisaatioInfo } from '../FormPage';
 import CreateKoulutusHeader from './CreateKoulutusHeader';
 import CreateKoulutusSteps from './CreateKoulutusSteps';
 import CreateKoulutusForm from './CreateKoulutusForm';
 import CreateKoulutusFooter from './CreateKoulutusFooter';
-import OrganisaatioInfo from './OrganisaatioInfo';
 
 const CreateKoulutusPage = props => {
   const {

@@ -12,4 +12,4 @@ const Form = reduxForm({
 storiesOf('ToteutusForm', module)
   .addDecorator(makeStoreDecorator())
   .addDecorator(makeApiDecorator())
-  .add('Basic', () => <Form koulutusKoodiUri="koulutus_361101#11" />);
+  .add('Basic', () => <Form koulutusKoodiUri="koulutus_361101#11" organisaatioOid="1.2.246.562.10.594252633210" steps={false} />);

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ApiAsync from '../ApiAsync';
-import FormPage from '../FormPage';
+import FormPage, { OrganisaatioInfo } from '../FormPage';
 import { getKoutaKoulutusByOid } from '../../apiUtils';
 
 import CreateToteutusHeader from './CreateToteutusHeader';
@@ -15,7 +15,13 @@ const CreateToteutusFormAsync = ({ oid }) => (
   <ApiAsync promiseFn={getKoulutus} oid={oid} watch={oid}>
     {({ data }) =>
       data ? (
-        <CreateToteutusForm koulutusKoodiUri={data.koulutusKoodiUri} />
+        <>
+          <OrganisaatioInfo organisaatioOid={data.organisaatioOid} />
+          <CreateToteutusForm
+            koulutusKoodiUri={data.koulutusKoodiUri}
+            organisaatioOid={data.organisaatioOid}
+          />
+        </>
       ) : null
     }
   </ApiAsync>

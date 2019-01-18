@@ -2,7 +2,7 @@
 
 exports[`renders correctly 1`] = `
 .c0 {
-  font-family: 'Open Sans',sans-serif;
+  font-family: 'Roboto',sans-serif;
   font-size: 1rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -12,7 +12,7 @@ exports[`renders correctly 1`] = `
   color: #666666;
 }
 
-.c2 {
+.c3 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -25,6 +25,10 @@ exports[`renders correctly 1`] = `
   flex: 0;
 }
 
+.c2 {
+  font-size: inherit;
+}
+
 <styled.label>
   <label
     className="c0"
@@ -33,14 +37,17 @@ exports[`renders correctly 1`] = `
       <div
         className="c1"
       >
-        <input
-          type="checkbox"
-        />
+        <styled.input>
+          <input
+            className="c2"
+            type="checkbox"
+          />
+        </styled.input>
       </div>
     </styled.div>
     <styled.div>
       <div
-        className="c2"
+        className="c3"
       >
         Checkbox
       </div>

@@ -52,9 +52,6 @@ const OsaamisalatContainer = ({ koulutus, language }) => {
   return (
     <>
       <Typography variant="h6" marginBottom={1}>
-        Valitse osaamisalat
-      </Typography>
-      <Typography variant="h6" marginBottom={1}>
         {getLanguageValue(nimi, language)}
       </Typography>
       <Field

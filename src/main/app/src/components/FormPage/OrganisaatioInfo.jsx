@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { getThemeProp } from '../../theme';
 import ApiAsync from '../ApiAsync';
 import { getOrganisaatioByOid } from '../../apiUtils';
-import { isObject } from '../../utils';
+import { isObject, getFirstLanguageValue } from '../../utils';
 
 const getOrganisaatio = args => getOrganisaatioByOid(args);
 
@@ -17,12 +17,12 @@ const OrganisaatioInfoContainer = styled.div`
 
 const getOrganisaatioName = organisaatio => {
   return organisaatio && isObject(organisaatio.nimi)
-    ? organisaatio.nimi.fi || null
+    ? getFirstLanguageValue(organisaatio.nimi)
     : null;
 };
 
-const OrganisaatioInfo = ({ organisaatioOid }) => (
-  <OrganisaatioInfoContainer>
+const OrganisaatioInfo = ({ organisaatioOid, ...props }) => (
+  <OrganisaatioInfoContainer {...props}>
     <ApiAsync
       promiseFn={getOrganisaatio}
       oid={organisaatioOid}

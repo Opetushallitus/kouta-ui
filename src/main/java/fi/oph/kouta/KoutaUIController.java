@@ -7,17 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class KoutaUIController {
 
     @GetMapping(value = {
-            "/",
-            "/koulutus",
-            "/koulutus/*",
-            "/toteutus",
-            "/toteutus/*",
-            "/haku",
-            "/haku/*",
-            "/hakukohde",
-            "/hakukohde/*",
-            "/valintaperusteet",
-            "/valintaperusteet/*"
+        "/",
+        "/organisaatio/**",
+        "/koulutus/**",
+        "/toteutus/**",
+        "/haku/**",
+        "/hakukohde/**",
+        "/valintaperusteet/**"
     })
 
     public String frontProperties() {

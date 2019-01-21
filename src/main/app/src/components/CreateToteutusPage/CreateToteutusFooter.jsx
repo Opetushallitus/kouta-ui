@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { isValid } from 'redux-form';
 
-import { submit as submitKoulutusForm } from '../../state/createKoulutusForm';
+import { submit as submitToteutusForm } from '../../state/createToteutusForm';
 import { JULKAISUTILA } from '../../constants';
 import Button from '../Button';
 
@@ -37,4 +37,16 @@ const CreateToteutusFooter = ({
   </Wrapper>
 );
 
-export default CreateToteutusFooter;
+export default connect(
+  state => ({
+    valid: toteutusFormIsValid(state),
+  }),
+  dispatch => ({
+    onSave: () => {
+      dispatch(submitToteutusForm({ tila: JULKAISUTILA.TALLENNETTU }));
+    },
+    onSaveAndPublish: () => {
+      dispatch(submitToteutusForm({ tila: JULKAISUTILA.JULKAISTU }));
+    },
+  }),
+)(CreateToteutusFooter);

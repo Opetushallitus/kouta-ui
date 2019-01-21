@@ -1,7 +1,7 @@
 import { reduxForm } from 'redux-form';
 import { compose, withProps } from 'recompose';
 
-import ToteutusForm from '../ToteutusForm';
+import ToteutusForm, { initialValues } from '../ToteutusForm';
 
 const validate = values => {
   const errors = {};
@@ -16,6 +16,6 @@ export default compose(
   reduxForm({
     form: 'createToteutusForm',
     validate,
-    initialValues: {},
+    initialValues,
   }),
 )(ToteutusForm);

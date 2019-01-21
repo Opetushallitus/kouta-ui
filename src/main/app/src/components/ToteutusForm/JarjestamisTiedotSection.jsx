@@ -9,6 +9,7 @@ import Typography from '../Typography';
 import Input from '../Input';
 import Textarea from '../Textarea';
 import LanguageSelector from '../LanguageSelector';
+import { isArray } from '../../utils';
 
 const renderInputField = ({ input, ...props }) => (
   <Input {...input} {...props} />
@@ -62,9 +63,33 @@ const osioOptions = [
   { value: 'yhteistyo', label: 'Yhteistyö muiden toimijoiden kanssa' },
 ];
 
+const opetuskieliOptions = [
+  { value: 'fi', label: 'Suomi' },
+  { value: 'sv', label: 'Ruotsi' },
+  { value: 'se', label: 'Saame' },
+  { value: 'en', label: 'Englanti' },
+];
+
+const renderOsiot = ({ osiot, language }) => {
+  const osiotArray = isArray(osiot) ? osiot : [];
+  const checkedOsiot = osioOptions.filter(({ value }) => osiotArray.includes(value));
+
+  return checkedOsiot
+    .map(({ value, label }, index) => (
+      <Spacing marginBottom={index !== checkedOsiot.length - 1 ? 2 : 0} key={value}>
+        <Typography variant="h6" marginBottom={1}>{label}</Typography>
+        <Field name={`osioKuvaukset.${value}.${language}`} component={renderTextareaField} />
+      </Spacing>
+    ));
+};
+
 const MaksullisuusFieldValue = formValues({
   maksullisuus: 'maksullisuus',
 })(({ maksullisuus, children }) => children({ maksullisuus }));
+
+const OsiotFieldValue = formValues({
+  osiot: 'osiot',
+})(({ osiot, children }) => children({ osiot }));
 
 const MaksuWrapper = styled.div`
   max-width: 250px;
@@ -82,12 +107,12 @@ const MaksuCurrencyContainer = styled.div`
   padding-left: ${({ theme }) => theme.spacing.unit}px;
 `;
 
-const MaksuContainer = () => (
+const MaksuContainer = ({ language }) => (
   <Spacing marginTop={1}>
     <MaksuWrapper>
       <MaksuInputContainer>
         <Field
-          name="maksunmaara"
+          name={`maksumaara.${language}`}
           type="number"
           component={renderInputField}
           placeholder="Maksun määrä"
@@ -106,7 +131,12 @@ const JarjestamisTiedotSection = ({ organisaatioOid, languages = [] }) => {
       {({ value: activeLanguage }) => (
         <>
           <Spacing marginBottom={2}>
-            <Typography variant="h6">Opetuskieli</Typography>
+            <Typography variant="h6" marginBottom={1}>Opetuskieli</Typography>
+            <Field
+              name="opetuskieli"
+              component={renderCheckboxGroupField}
+              options={opetuskieliOptions}
+            />
           </Spacing>
           <Spacing marginBottom={2}>
             <Typography variant="h6" marginBottom={1}>
@@ -139,7 +169,7 @@ const JarjestamisTiedotSection = ({ organisaatioOid, languages = [] }) => {
             />
             <MaksullisuusFieldValue>
               {({ maksullisuus }) =>
-                maksullisuus === 'kylla' ? <MaksuContainer /> : null
+                maksullisuus === 'kylla' ? <MaksuContainer language={activeLanguage} /> : null
               }
             </MaksullisuusFieldValue>
           </Spacing>
@@ -153,7 +183,7 @@ const JarjestamisTiedotSection = ({ organisaatioOid, languages = [] }) => {
               placeholder="Kirjoita kuvaus, miten koulutuksen toteutus järjestetään teidän oppilaitoksessanne"
             />
           </Spacing>
-          <Spacing>
+          <Spacing marginBottom={2}>
             <Typography variant="h6" marginBottom={1}>
               Valitse lisättävä osio
             </Typography>
@@ -163,6 +193,11 @@ const JarjestamisTiedotSection = ({ organisaatioOid, languages = [] }) => {
               options={osioOptions}
             />
           </Spacing>
+          <OsiotFieldValue>
+            {({ osiot }) => (
+              renderOsiot({ osiot, language: activeLanguage })
+            )}
+          </OsiotFieldValue>
         </>
       )}
     </LanguageSelector>

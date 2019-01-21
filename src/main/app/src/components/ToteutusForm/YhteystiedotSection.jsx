@@ -13,38 +13,38 @@ const renderInputField = ({ input, type = 'text' }) => (
 const YhteystiedotSection = ({ languages }) => {
   return (
     <LanguageSelector languages={languages} defaultValue="fi">
-      {({ value }) => {
+      {({ value: activeLanguage }) => {
         return (
           <>
             <Spacing marginBottom={2}>
               <Typography variant="h6" marginBottom={1}>
                 Nimi
               </Typography>
-              <Field name="name" component={renderInputField} />
+              <Field name={`name.${activeLanguage}`} component={renderInputField} />
             </Spacing>
             <Spacing marginBottom={2}>
               <Typography variant="h6" marginBottom={1}>
                 Titteli
               </Typography>
-              <Field name="title" component={renderInputField} />
+              <Field name={`title.${activeLanguage}`} component={renderInputField} />
             </Spacing>
             <Spacing marginBottom={2}>
               <Typography variant="h6" marginBottom={1}>
                 Sähköposti
               </Typography>
-              <Field name="email" type="email" component={renderInputField} />
+              <Field name={`email.${activeLanguage}`} type="email" component={renderInputField} />
             </Spacing>
             <Spacing marginBottom={2}>
               <Typography variant="h6" marginBottom={1}>
                 Puhelin
               </Typography>
-              <Field name="phone" component={renderInputField} />
+              <Field name={`phone.${activeLanguage}`} component={renderInputField} />
             </Spacing>
             <Spacing>
               <Typography variant="h6" marginBottom={1}>
                 Verkkosivut
               </Typography>
-              <Field name="website" type="url" component={renderInputField} />
+              <Field name={`website.${activeLanguage}`} type="url" component={renderInputField} />
             </Spacing>
           </>
         );

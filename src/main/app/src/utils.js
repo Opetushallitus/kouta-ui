@@ -53,3 +53,13 @@ export const getFirstLanguageValue = (value, priority = ['fi', 'en', 'sv']) => {
 
   return null;
 };
+
+export const truncateString = (value, length) => {
+  if (!isString(value)) {
+    return '';
+  }
+
+  const slice = value.slice(0, length);
+
+  return slice.length < length ? `${slice}...` : slice;
+};

@@ -125,7 +125,7 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   dispatch(
     createTemporaryToast({
       status: 'success',
-      title: 'Toteutus on talennettu onnistuneesti',
+      title: 'Toteutus on tallennettu onnistuneesti',
     }),
   );
 

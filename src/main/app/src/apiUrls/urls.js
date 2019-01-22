@@ -1,3 +1,5 @@
+const koutaBackendDevUrl = `http://localhost:${process.env.REACT_APP_BACKEND_PORT}/kouta-backend`;
+
 export const development = {
   'kouta-backend.base-url': 'http://localhost:' + process.env.REACT_APP_BACKEND_PORT,
   'kouta-backend.koulutus': 'http://localhost:' + process.env.REACT_APP_BACKEND_PORT + '/kouta-backend/koulutus',
@@ -15,6 +17,8 @@ export const development = {
   'kouta-backend.valintaperuste': 'http://localhost:' + process.env.REACT_APP_BACKEND_PORT + '/kouta-backend/valintaperuste',
   'kouta-backend.valintaperuste-by-oid': 'http://localhost:' + process.env.REACT_APP_BACKEND_PORT + '/kouta-backend/valintaperuste/$1',
   'kouta-backend.valintaperuste-list': 'http://localhost:' + process.env.REACT_APP_BACKEND_PORT + '/kouta-backend/valintaperuste/list',
+  'kouta-backend.ammattinimike-search': `${koutaBackendDevUrl}/ammattinimike/search/$1`,
+  'kouta-backend.asiasana-search': `${koutaBackendDevUrl}/asiasana/search/$1`,
   'koodisto-service.base-url': 'https://virkailija.hahtuvaopintopolku.fi/koodisto-service',
   'koodisto-service.sisaltyy-alakoodit': 'https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/json/relaatio/sisaltyy-alakoodit/$1?koodiVersio=$2',
   'koodisto-service.sisaltyy-ylakoodit': 'https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/json/relaatio/sisaltyy-ylakoodit/$1',

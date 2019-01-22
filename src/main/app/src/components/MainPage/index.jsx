@@ -2,12 +2,17 @@ import React from 'react';
 
 import { Router, Route, Redirect, Switch } from 'react-router-dom';
 
+import { ReduxToaster } from '../Toaster'; 
 import CreateKoulutusPage from '../CreateKoulutusPage';
 import CreateToteutusPage from '../CreateToteutusPage';
+
+const CreateHakuPage = () => 'Haku';
 
 const MainPage = ({ history }) => {
   return (
     <Router history={history}>
+      <>
+      <ReduxToaster style={{ position: 'fixed', top: '16px', right: '16px' }} />
       <Switch>
         <Route
           path="/organisaatio/:oid/koulutus"
@@ -15,12 +20,18 @@ const MainPage = ({ history }) => {
           exact
         />
         <Route
-          path="/koulutus/:oid/toteutus"
+          path="/organisaatio/:organisaatioOid/koulutus/:koulutusOid/toteutus"
           component={CreateToteutusPage}
+          exact
+        />
+        <Route
+          path="/organisaatio/:organisaatioOid/haku"
+          component={CreateHakuPage}
           exact
         />
         <Redirect to="/" />
       </Switch>
+      </>
     </Router>
   );
 };

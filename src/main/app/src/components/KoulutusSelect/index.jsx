@@ -3,7 +3,7 @@ import get from 'lodash/get';
 
 import ApiAsync from '../ApiAsync';
 
-import Select, { Option } from '../Select';
+import Select, { Option } from '../NativeSelect';
 import { getKoulutuksetByKoulutusTyyppi } from '../../apiUtils';
 
 const getKoulutukset = args => getKoulutuksetByKoulutusTyyppi(args);

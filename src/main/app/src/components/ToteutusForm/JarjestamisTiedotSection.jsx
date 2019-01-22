@@ -10,6 +10,10 @@ import Input from '../Input';
 import Textarea from '../Textarea';
 import LanguageSelector from '../LanguageSelector';
 import { isArray } from '../../utils';
+import { TOTEUTUKSEN_OSIOT_OPTIONS } from '../../constants';
+import Select from '../Select';
+
+const nop = () => {};
 
 const renderInputField = ({ input, ...props }) => (
   <Input {...input} {...props} />
@@ -17,6 +21,10 @@ const renderInputField = ({ input, ...props }) => (
 
 const renderCheckboxGroupField = ({ input, ...props }) => (
   <CheckboxGroup {...input} {...props} />
+);
+
+const renderSelectField = ({ input, ...props }) => (
+  <Select {...input} onBlur={nop} {...props} />
 );
 
 const renderRadioGroupField = ({ input, options }) => (
@@ -52,17 +60,6 @@ const maksullisuusOptions = [
   { value: 'kylla', label: 'Kyllä' },
 ];
 
-const osioOptions = [
-  { value: 'opintojen_rakenne', label: 'Opintojen rakenne' },
-  { value: 'jatko_opintomahdollisuudet', label: 'Jatko-opintomahdollisuudet' },
-  { value: 'osaamisalan_valinta', label: 'Osaamisalan valinta' },
-  { value: 'sisalto', label: 'Sisältö' },
-  { value: 'uramahdollisuudet', label: 'Uramahdollisuudet' },
-  { value: 'kohderyhma', label: 'Kohderyhmä' },
-  { value: 'kansainvalistyminen', label: 'Kansainvälistyminen' },
-  { value: 'yhteistyo', label: 'Yhteistyö muiden toimijoiden kanssa' },
-];
-
 const opetuskieliOptions = [
   { value: 'fi', label: 'Suomi' },
   { value: 'sv', label: 'Ruotsi' },
@@ -72,15 +69,26 @@ const opetuskieliOptions = [
 
 const renderOsiot = ({ osiot, language }) => {
   const osiotArray = isArray(osiot) ? osiot : [];
-  const checkedOsiot = osioOptions.filter(({ value }) => osiotArray.includes(value));
 
-  return checkedOsiot
-    .map(({ value, label }, index) => (
-      <Spacing marginBottom={index !== checkedOsiot.length - 1 ? 2 : 0} key={value}>
-        <Typography variant="h6" marginBottom={1}>{label}</Typography>
-        <Field name={`osioKuvaukset.${value}.${language}`} component={renderTextareaField} />
-      </Spacing>
-    ));
+  const checkedOsiot = TOTEUTUKSEN_OSIOT_OPTIONS.filter(
+    ({ value }) =>
+      !!osiotArray.find(({ value: osioValue }) => osioValue === value),
+  );
+
+  return checkedOsiot.map(({ value, label }, index) => (
+    <Spacing
+      marginBottom={index !== checkedOsiot.length - 1 ? 2 : 0}
+      key={value}
+    >
+      <Typography variant="h6" marginBottom={1}>
+        {label}
+      </Typography>
+      <Field
+        name={`osioKuvaukset.${value}.${language}`}
+        component={renderTextareaField}
+      />
+    </Spacing>
+  ));
 };
 
 const MaksullisuusFieldValue = formValues({
@@ -125,13 +133,15 @@ const MaksuContainer = ({ language }) => (
   </Spacing>
 );
 
-const JarjestamisTiedotSection = ({ organisaatioOid, languages = [] }) => {
+const JarjestamisTiedotSection = ({ languages = [] }) => {
   return (
     <LanguageSelector languages={languages} defaultValue="fi">
       {({ value: activeLanguage }) => (
         <>
           <Spacing marginBottom={2}>
-            <Typography variant="h6" marginBottom={1}>Opetuskieli</Typography>
+            <Typography variant="h6" marginBottom={1}>
+              Opetuskieli
+            </Typography>
             <Field
               name="opetuskieli"
               component={renderCheckboxGroupField}
@@ -169,7 +179,9 @@ const JarjestamisTiedotSection = ({ organisaatioOid, languages = [] }) => {
             />
             <MaksullisuusFieldValue>
               {({ maksullisuus }) =>
-                maksullisuus === 'kylla' ? <MaksuContainer language={activeLanguage} /> : null
+                maksullisuus === 'kylla' ? (
+                  <MaksuContainer language={activeLanguage} />
+                ) : null
               }
             </MaksullisuusFieldValue>
           </Spacing>
@@ -189,14 +201,13 @@ const JarjestamisTiedotSection = ({ organisaatioOid, languages = [] }) => {
             </Typography>
             <Field
               name="osiot"
-              component={renderCheckboxGroupField}
-              options={osioOptions}
+              component={renderSelectField}
+              options={TOTEUTUKSEN_OSIOT_OPTIONS}
+              isMulti
             />
           </Spacing>
           <OsiotFieldValue>
-            {({ osiot }) => (
-              renderOsiot({ osiot, language: activeLanguage })
-            )}
+            {({ osiot }) => renderOsiot({ osiot, language: activeLanguage })}
           </OsiotFieldValue>
         </>
       )}

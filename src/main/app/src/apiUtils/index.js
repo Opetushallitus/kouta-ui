@@ -213,3 +213,33 @@ export const getOsaamisalakuvauksetByPerusteId = async ({
 
   return get(data, 'reformi') ? data.reformi : {};
 };
+
+export const getAmmattinimikkeetByTerm = async ({
+  httpClient,
+  apiUrls,
+  term,
+  limit = 15,
+  language = 'fi',
+}) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-backend.ammattinimike-search', term),
+    { params: { limit, kieli: language } },
+  );
+
+  return data;
+};
+
+export const getAvainsanatByTerm = async ({
+  httpClient,
+  apiUrls,
+  term,
+  limit = 15,
+  language = 'fi',
+}) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-backend.asiasana-search', term),
+    { params: { limit, kieli: language } },
+  );
+
+  return data;
+};

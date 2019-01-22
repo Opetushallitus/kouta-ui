@@ -53,6 +53,7 @@ export const getThemeProp = path => props => get(props.theme, path);
 
 export const createTheme = (theme = {}) => {
   const textPrimaryColor = '#666666';
+  const textSecondaryColor = '#a6a6a6';
   const fontFamily = "'Roboto', sans-serif";
 
   const headingTypography = createHeadingTypography({
@@ -73,12 +74,19 @@ export const createTheme = (theme = {}) => {
         lineHeight: 1.5,
         fontFamily,
       },
+      secondary: {
+        fontSize: '0.85rem',
+        color: textSecondaryColor,
+        lineHeight: 1.5,
+        fontFamily,
+      },
       ...headingTypography,
     },
     palette: {
       border: '#999999',
       text: {
         primary: textPrimaryColor,
+        secondary: textSecondaryColor,
       },
       primary: {
         light: '#e0f2fd',

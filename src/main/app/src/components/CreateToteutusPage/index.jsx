@@ -11,26 +11,26 @@ import CreateToteutusFooter from './CreateToteutusFooter';
 
 const getKoulutus = args => getKoutaKoulutusByOid(args);
 
-const CreateToteutusFormAsync = ({ oid }) => (
-  <ApiAsync promiseFn={getKoulutus} oid={oid} watch={oid}>
-    {({ data }) =>
-      data ? (
-        <>
-          <OrganisaatioInfo organisaatioOid={data.organisaatioOid} />
+const CreateToteutusFormAsync = ({ koulutusOid, organisaatioOid }) => (
+  <>
+    <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+    <ApiAsync promiseFn={getKoulutus} oid={koulutusOid} watch={koulutusOid}>
+      {({ data }) =>
+        data ? (
           <CreateToteutusForm
             koulutusKoodiUri={data.koulutusKoodiUri}
-            organisaatioOid={data.organisaatioOid}
+            organisaatioOid={organisaatioOid}
           />
-        </>
-      ) : null
-    }
-  </ApiAsync>
+        ) : null
+      }
+    </ApiAsync>
+  </>
 );
 
 const CreateToteutusPage = props => {
   const {
     match: {
-      params: { oid },
+      params: { organisaatioOid, koulutusOid },
     },
   } = props;
 
@@ -40,7 +40,10 @@ const CreateToteutusPage = props => {
       steps={<CreateToteutusSteps />}
       footer={<CreateToteutusFooter />}
     >
-      <CreateToteutusFormAsync oid={oid} />
+      <CreateToteutusFormAsync
+        koulutusOid={koulutusOid}
+        organisaatioOid={organisaatioOid}
+      />
     </FormPage>
   );
 };

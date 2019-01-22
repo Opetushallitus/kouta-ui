@@ -11,6 +11,7 @@ import NimiSection from './NimiSection';
 import PohjaSection from './PohjaSection';
 import JarjestamisPaikatSection from './JarjestamisPaikatSection';
 import JarjestamisTiedotSection from './JarjestamisTiedotSection';
+import NayttamisTiedotSection from './NayttamisTiedotSection';
 
 const ActiveLanguages = formValues({
   languages: 'kieliversiot.languages',
@@ -78,7 +79,7 @@ const ToteutusFormBase = ({
             section="nayttamistiedot"
             {...getStepCollapseProps(4)}
           >
-            <div />
+            <NayttamisTiedotSection languages={languages} />
           </FormCollapse>
 
           <FormCollapse

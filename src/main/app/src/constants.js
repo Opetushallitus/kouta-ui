@@ -61,3 +61,14 @@ export const LANGUAGE_TABS = [
   { label: LANGUAGE_CODE_TO_TAB_NAME.sv, value: 'sv' },
   { label: LANGUAGE_CODE_TO_TAB_NAME.en, value: 'en' },
 ];
+
+export const TOTEUTUKSEN_OSIOT_OPTIONS = [
+  { value: 'opintojen_rakenne', label: 'Opintojen rakenne' },
+  { value: 'jatko_opintomahdollisuudet', label: 'Jatko-opintomahdollisuudet' },
+  { value: 'osaamisalan_valinta', label: 'Osaamisalan valinta' },
+  { value: 'sisalto', label: 'Sisältö' },
+  { value: 'uramahdollisuudet', label: 'Uramahdollisuudet' },
+  { value: 'kohderyhma', label: 'Kohderyhmä' },
+  { value: 'kansainvalistyminen', label: 'Kansainvälistyminen' },
+  { value: 'yhteistyo', label: 'Yhteistyö muiden toimijoiden kanssa' },
+];

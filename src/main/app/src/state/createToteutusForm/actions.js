@@ -1,14 +1,20 @@
 import { getFormValues } from 'redux-form';
 import get from 'lodash/get';
+import toPairs from 'lodash/toPairs';
+import flatMap from 'lodash/flatMap';
 
 import { JULKAISUTILA } from '../../constants';
+import { createTemporaryToast } from '../toaster';
 
 const getToteutusFormValues = getFormValues('createToteutusForm');
 
-const getKoulutusOidFromPathname = pathname => {
+const getOidsFromPathname = pathname => {
   const split = pathname.split('/').filter(p => !!p);
 
-  return split[1];
+  return {
+    organisaatioOid: split[1],
+    koulutusOid: split[3],
+  };
 };
 
 export const saveToteutus = toteutus => (
@@ -31,9 +37,9 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
     me: { kayttajaOid: muokkaaja },
   } = state;
 
-  const koulutusOid = getKoulutusOidFromPathname(history.location.pathname);
-
-  const organisaatioOid = '';
+  const { koulutusOid, organisaatioOid } = getOidsFromPathname(
+    history.location.pathname,
+  );
   const tarjoajat = get(values, 'jarjestamispaikat.jarjestajat') || [];
   const kielivalinta = get(values, 'kieliversiot.languages') || [];
   const nimi = get(values, 'nimi.name') || {};
@@ -42,7 +48,10 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   const osioKuvaukset = get(values, 'jarjestamistiedot.osioKuvaukset') || {};
 
   const osiot = (get(values, 'jarjestamistiedot.osiot') || []).map(osio => ({
-    teksti: osioKuvaukset[osio] || {},
+    otsikko: {
+      fi: osio.label,
+    },
+    teksti: osioKuvaukset[osio.value] || {},
   }));
 
   const onkoMaksullinen =
@@ -68,7 +77,28 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
     puhelinnumero: get(values, 'yhteystiedot.phone') || {},
   };
 
+  const ammattinimikkeet = flatMap(
+    toPairs(get(values, 'nayttamistiedot.ammattinimikkeet') || {}),
+    ([language, nimikkeet]) => {
+      return (nimikkeet || []).map(({ value }) => ({
+        kieli: language,
+        arvo: value,
+      }));
+    },
+  );
+
+  const asiasanat = flatMap(
+    toPairs(get(values, 'nayttamistiedot.avainsanat') || {}),
+    ([language, sanat]) => {
+      return (sanat || []).map(({ value }) => ({
+        kieli: language,
+        arvo: value,
+      }));
+    },
+  );
+
   const toteutus = {
+    tila,
     muokkaaja,
     organisaatioOid,
     koulutusOid,
@@ -85,8 +115,23 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
       },
       osaamisalat,
       yhteystieto,
+      ammattinimikkeet,
+      asiasanat,
     },
   };
 
-  console.log(toteutus);
+  await dispatch(saveToteutus(toteutus));
+
+  dispatch(
+    createTemporaryToast({
+      status: 'success',
+      title: 'Toteutus on talennettu onnistuneesti',
+    }),
+  );
+
+  if (JULKAISUTILA.JULKAISTU) {
+    history.push(`/organisaatio/${organisaatioOid}/haku`);
+  } else {
+    history.push('/');
+  }
 };

@@ -31,4 +31,5 @@ export const development = {
   'organisaatio-service.children': 'https://virkailija.hahtuvaopintopolku.fi/organisaatio-service/rest/organisaatio/v4/$1/children?includeImage=false',
   'organisaatio-service.hierarkia': 'https://virkailija.hahtuvaopintopolku.fi/organisaatio-service/rest/organisaatio/v4/hierarkia/hae?oid=$1&aktiiviset=true&suunnitellut=true&lakkautetut=false',
   'organisaatio-service.organisaatio-by-oid': 'https://virkailija.hahtuvaopintopolku.fi/organisaatio-service/rest/organisaatio/v4/$1?includeImage=false',
+  'lokalisaatio-service.localisation': 'https://virkailija.hahtuvaopintopolku.fi/lokalisointi/cxf/rest/v1/localisation?category=$1',
 };

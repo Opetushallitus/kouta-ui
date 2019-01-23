@@ -251,3 +251,27 @@ export const getKoodisto = async ({ koodistoUri, httpClient, apiUrls }) => {
 
   return data;
 };
+
+export const getLocalisation = async ({
+  category = '',
+  httpClient,
+  apiUrls,
+}) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('lokalisaatio-service.localisation', category),
+  );
+
+  let resource = {};
+
+  for (const translation of data) {
+    const locale = translation.locale.toLowerCase();
+    const { key, value } = translation;
+
+    if (locale && key && value) {
+      resource[locale] = resource[locale] || { translation: {} };
+      resource[locale].translation[key] = value;
+    }
+  }
+
+  return resource;
+};

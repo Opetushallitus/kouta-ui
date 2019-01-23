@@ -9,6 +9,8 @@ import configureUrls from './apiUrls';
 import { urls as ophUrls } from 'oph-urls-js';
 import axios from 'axios';
 import createBrowserHistory from 'history/createBrowserHistory';
+import createLocalisation from './localisation';
+import { getLocalisation } from './apiUtils';
 
 const history = createBrowserHistory({ basename: 'kouta' });
 
@@ -21,7 +23,23 @@ serviceWorker.unregister();
   const httpClient = axios.create({});
   const apiUrls = await configureUrls(ophUrls);
 
-  const store = createStore({ apiUrls, httpClient, history });
+  const localisationResources = await getLocalisation({
+    category: 'kouta',
+    httpClient,
+    apiUrls,
+  });
+
+  const localisationInstance = await createLocalisation({
+    resources: localisationResources,
+    debug: process.env.NODE_ENV === 'development',
+  });
+
+  const store = createStore({
+    apiUrls,
+    httpClient,
+    history,
+    localisation: localisationInstance,
+  });
 
   ReactDOM.render(
     <App
@@ -30,6 +48,7 @@ serviceWorker.unregister();
       urls={apiUrls}
       httpClient={httpClient}
       history={history}
+      localisation={localisationInstance}
     />,
     document.getElementById('root'),
   );

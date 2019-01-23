@@ -3,7 +3,6 @@ import { Field, formValues } from 'redux-form';
 import styled from 'styled-components';
 
 import Radio, { RadioGroup } from '../Radio';
-import CheckboxGroup from '../CheckboxGroup';
 import Spacing from '../Spacing';
 import Typography from '../Typography';
 import Input from '../Input';

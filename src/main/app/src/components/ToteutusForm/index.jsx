@@ -8,9 +8,6 @@ export const initialValues = {
     languages: ['fi', 'sv'],
   },
   jarjestamistiedot: {
-    opetuskieli: ['fi'],
-    opetusaika: 'paivaopetus',
-    opetustapa: 'lahiopiskelu',
     maksullisuus: 'ei',
   },
 };
@@ -21,6 +18,9 @@ export const validate = values => {
   const kieliversiot = get(values, 'kieliversiot.languages') || [];
   const osaamisalat = get(values, 'osaamisalat.osaamisalat') || [];
   const jarjestajat = get(values, 'jarjestamispaikat.jarjestajat') || [];
+  const opetuskielet = get(values, 'jarjestamistiedot.opetuskieli') || [];
+  const opetustapa = get(values, 'jarjestamistiedot.opetustapa');
+  const opetusaika = get(values, 'jarjestamistiedot.opetusaika');
 
   if (kieliversiot.length === 0) {
     set(errors, 'kieliversiot.langues', 'Valitse vähintään yksi kieli');
@@ -32,6 +32,18 @@ export const validate = values => {
 
   if (jarjestajat.length === 0) {
     set(errors, 'jarjestamispaikat.jarjestajat', 'Valitse vähintään yksi järjestäjä');
+  }
+
+  if (opetuskielet.length === 0) {
+    set(errors, 'jarjestamistiedot.opetuskieli', 'Valitse vähintään yksi opetuskieli');
+  }
+
+  if (!opetustapa) {
+    set(errors, 'jarjestamistiedot.opetustapa', 'Valitse opetustapa');
+  }
+
+  if (!opetusaika) {
+    set(errors, 'jarjestamistiedot.opetusaika', 'Valitse opetusaika');
   }
 
   return errors;

@@ -12,7 +12,7 @@ const MainPage = ({ history }) => {
   return (
     <Router history={history}>
       <>
-      <ReduxToaster style={{ position: 'fixed', top: '16px', right: '16px' }} />
+      <ReduxToaster style={{ position: 'fixed', top: '16px', right: '16px', zIndex: '999' }} />
       <Switch>
         <Route
           path="/organisaatio/:oid/koulutus"

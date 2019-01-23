@@ -12,6 +12,9 @@ import LanguageSelector from '../LanguageSelector';
 import { isArray } from '../../utils';
 import { TOTEUTUKSEN_OSIOT_OPTIONS } from '../../constants';
 import Select from '../Select';
+import OpetusaikaRadioGroup from './OpetusaikaRadioGroup';
+import OpetuskieliCheckboxGroup from './OpetuskieliCheckboxGroup';
+import OpetustapaRadioGroup from './OpetustapaRadioGroup';
 
 const nop = () => {};
 
@@ -19,12 +22,20 @@ const renderInputField = ({ input, ...props }) => (
   <Input {...input} {...props} />
 );
 
-const renderCheckboxGroupField = ({ input, ...props }) => (
-  <CheckboxGroup {...input} {...props} />
-);
-
 const renderSelectField = ({ input, ...props }) => (
   <Select {...input} onBlur={nop} {...props} />
+);
+
+const renderOpetusaikaField = ({ input }) => (
+  <OpetusaikaRadioGroup {...input} />
+);
+
+const renderOpetuskieliField = ({ input }) => (
+  <OpetuskieliCheckboxGroup {...input} />
+);
+
+const renderOpetustapaField = ({ input }) => (
+  <OpetustapaRadioGroup {...input} />
 );
 
 const renderRadioGroupField = ({ input, options }) => (
@@ -41,30 +52,9 @@ const renderTextareaField = ({ input, ...props }) => (
   <Textarea {...input} {...props} />
 );
 
-const opetusaikaOptions = [
-  {
-    value: 'paivaopetus',
-    label: 'Päiväopetus',
-  },
-  { value: 'iltaopetus', label: 'Iltaopetus' },
-  { value: 'viikonloppuopetus', label: 'Viikonloppuopetus' },
-];
-
-const opetustapaOptions = [
-  { value: 'lahiopiskelu', label: 'Lähiopiskelu' },
-  { value: 'etaopiskelu', label: 'Etäopiskelu' },
-];
-
 const maksullisuusOptions = [
   { value: 'ei', label: 'Ei' },
   { value: 'kylla', label: 'Kyllä' },
-];
-
-const opetuskieliOptions = [
-  { value: 'fi', label: 'Suomi' },
-  { value: 'sv', label: 'Ruotsi' },
-  { value: 'se', label: 'Saame' },
-  { value: 'en', label: 'Englanti' },
 ];
 
 const renderOsiot = ({ osiot, language }) => {
@@ -144,8 +134,7 @@ const JarjestamisTiedotSection = ({ languages = [] }) => {
             </Typography>
             <Field
               name="opetuskieli"
-              component={renderCheckboxGroupField}
-              options={opetuskieliOptions}
+              component={renderOpetuskieliField}
             />
           </Spacing>
           <Spacing marginBottom={2}>
@@ -154,8 +143,7 @@ const JarjestamisTiedotSection = ({ languages = [] }) => {
             </Typography>
             <Field
               name="opetusaika"
-              component={renderRadioGroupField}
-              options={opetusaikaOptions}
+              component={renderOpetusaikaField}
             />
           </Spacing>
           <Spacing marginBottom={2}>
@@ -164,8 +152,7 @@ const JarjestamisTiedotSection = ({ languages = [] }) => {
             </Typography>
             <Field
               name="opetustapa"
-              component={renderRadioGroupField}
-              options={opetustapaOptions}
+              component={renderOpetustapaField}
             />
           </Spacing>
           <Spacing marginBottom={2}>

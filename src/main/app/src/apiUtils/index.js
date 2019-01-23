@@ -243,3 +243,11 @@ export const getAvainsanatByTerm = async ({
 
   return data;
 };
+
+export const getKoodisto = async ({ koodistoUri, httpClient, apiUrls }) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('koodisto-service.koodi', koodistoUri),
+  );
+
+  return data;
+};

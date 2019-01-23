@@ -46,6 +46,8 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   const opetuskielet = get(values, 'jarjestamistiedot.opetuskieli') || [];
   const kuvaus = get(values, 'jarjestamistiedot.kuvaus') || {};
   const osioKuvaukset = get(values, 'jarjestamistiedot.osioKuvaukset') || {};
+  const opetustapaKoodiUri = get(values, 'jarjestamistiedot.opetustapa');
+  const opetusaikaKoodiUri = get(values, 'jarjestamistiedot.opetusaika');
 
   const osiot = (get(values, 'jarjestamistiedot.osiot') || []).map(osio => ({
     otsikko: {
@@ -112,6 +114,8 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
         kuvaus,
         onkoMaksullinen,
         maksunMaara,
+        opetustapaKoodiUri,
+        opetusaikaKoodiUri,
       },
       osaamisalat,
       yhteystieto,
@@ -120,7 +124,16 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
     },
   };
 
-  await dispatch(saveToteutus(toteutus));
+  try {
+    await dispatch(saveToteutus(toteutus));
+  } catch (e) {
+    return dispatch(
+      createTemporaryToast({
+        status: 'danger',
+        title: 'Toteutuksen tallennus epäonnistui',
+      }),
+    );
+  }
 
   dispatch(
     createTemporaryToast({

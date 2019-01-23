@@ -135,10 +135,16 @@ export const getKoulutusByKoodi = async ({
         )
       : null;
 
-  const { kuvaus = null, osaamisalat = [], tutkintonimikeKoodit = [] } =
-    perusteetData[0] || {};
+  const {
+    kuvaus = null,
+    osaamisalat = [],
+    tutkintonimikeKoodit = [],
+    id: perusteId,
+  } = perusteetData[0] || {};
 
   return {
+    koodiUri,
+    perusteId,
     kuvaus,
     osaamisalat,
     tutkintonimikeKoodit,
@@ -167,6 +173,80 @@ export const getOrganisaatioHierarchyByOid = async ({
 export const getOrganisaatioByOid = async ({ oid, apiUrls, httpClient }) => {
   const { data } = await httpClient.get(
     apiUrls.url('organisaatio-service.organisaatio-by-oid', oid),
+  );
+
+  return data;
+};
+
+export const getKoutaKoulutusByOid = async ({ oid, apiUrls, httpClient }) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-backend.koulutus-by-oid', oid),
+  );
+
+  return data;
+};
+
+export const getOsaamisalatByKoulutusKoodi = async ({
+  httpClient,
+  apiUrls,
+  koodiUri: argKoodiUri,
+}) => {
+  const { koodiUri } = getKoodiUriParts(argKoodiUri);
+
+  const { data } = await httpClient.get(
+    apiUrls.url('eperusteet-service.perusteet-koulutuskoodilla', koodiUri),
+  );
+
+  const { osaamisalat = [] } = data.data[0] || {};
+
+  return osaamisalat;
+};
+
+export const getOsaamisalakuvauksetByPerusteId = async ({
+  httpClient,
+  apiUrls,
+  perusteId,
+}) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('eperusteet-service.osaamisalakuvaukset', perusteId),
+  );
+
+  return get(data, 'reformi') ? data.reformi : {};
+};
+
+export const getAmmattinimikkeetByTerm = async ({
+  httpClient,
+  apiUrls,
+  term,
+  limit = 15,
+  language = 'fi',
+}) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-backend.ammattinimike-search', term),
+    { params: { limit, kieli: language } },
+  );
+
+  return data;
+};
+
+export const getAvainsanatByTerm = async ({
+  httpClient,
+  apiUrls,
+  term,
+  limit = 15,
+  language = 'fi',
+}) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-backend.asiasana-search', term),
+    { params: { limit, kieli: language } },
+  );
+
+  return data;
+};
+
+export const getKoodisto = async ({ koodistoUri, httpClient, apiUrls }) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('koodisto-service.koodi', koodistoUri),
   );
 
   return data;

@@ -21,7 +21,7 @@ export default ({ apiUrls, httpClient, history }) => {
   const enhancer =
     process.env.NODE_ENV === 'development'
       ? composeWithDevTools(compose(middleware))
-      : undefined;
+      : compose(middleware);
 
   return createStore(rootReducer, enhancer);
 };

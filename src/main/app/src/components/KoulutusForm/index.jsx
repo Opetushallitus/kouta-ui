@@ -152,6 +152,7 @@ const KoulutusFormBase = ({
             header="6 Koulutuksen järjestävä organisaatio"
             section="organization"
             {...getStepCollapseProps(5)}
+            onContinue={null}
           >
             <OrganizationSection organisaatioOid={organisaatioOid} />
           </FormCollapse>

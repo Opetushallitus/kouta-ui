@@ -20,10 +20,14 @@ const CheckboxWrapper = styled.div`
   flex: 0;
 `;
 
+const CheckboxInput = styled.input.attrs({ type: 'checkbox' })`
+  font-size: inherit;
+`;
+
 const Checkbox = ({ children = null, ...props }) => (
   <Label>
     <CheckboxWrapper>
-      <input type="checkbox" {...props} />
+      <CheckboxInput {...props} />
     </CheckboxWrapper>
     <LabelWrapper>{children}</LabelWrapper>
   </Label>

@@ -28,10 +28,14 @@ const RadioWrapper = styled.div`
   flex: 0;
 `;
 
+const RadioInput = styled.input.attrs({ type: 'radio' })`
+  font-size: inherit;
+`;
+
 const Radio = ({ children = null, ...props }) => (
   <Label>
     <RadioWrapper>
-      <input type="radio" {...props} />
+      <RadioInput type="radio" {...props} />
     </RadioWrapper>
     <LabelWrapper>{children}</LabelWrapper>
   </Label>

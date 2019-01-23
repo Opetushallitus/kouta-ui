@@ -12,7 +12,7 @@ import {
 } from '../Dropdown';
 
 import Typography from '../Typography';
-import Select, { Option } from '../Select';
+import Select, { Option } from '../NativeSelect';
 
 const ContentContainer = styled.div`
   display: flex;
@@ -51,7 +51,7 @@ const renderBaseDropdownField = ({ input }) => {
       }
     >
       {({ ref, onToggle }) => (
-        <Button innerRef={ref} onClick={onToggle}>
+        <Button innerRef={ref} onClick={onToggle} type="button">
           Valitse pohja
         </Button>
       )}
@@ -73,9 +73,6 @@ const BaseSelectionSection = props => {
   return (
     <ContentContainer>
       <DropdownContainer>
-        <Typography variant="h6" marginBottom={1}>
-          Luo uusi
-        </Typography>
         <Field name="base" component={renderBaseDropdownField} />
       </DropdownContainer>
       <SelectionContainer>

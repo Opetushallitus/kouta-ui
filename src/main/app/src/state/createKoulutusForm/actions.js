@@ -3,6 +3,7 @@ import get from 'lodash/get';
 
 import { JULKAISUTILA } from '../../constants';
 import { getKoulutusByKoodi } from '../../apiUtils';
+import { createTemporaryToast } from '../toaster';
 
 const getKoulutusFormValues = getFormValues('createKoulutusForm');
 
@@ -64,10 +65,19 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
 
   const { data: koulutusData } = await dispatch(saveKoulutus(koulutus));
 
+  dispatch(
+    createTemporaryToast({
+      status: 'success',
+      title: 'Koulutus on tallennettu onnistuneesti',
+    }),
+  );
+
   if (get(koulutusData, 'oid') && JULKAISUTILA.JULKAISTU) {
     const { oid: koulutusOid } = koulutusData;
 
-    history.push(`/koulutus/${koulutusOid}/toteutus`);
+    history.push(
+      `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/toteutus`,
+    );
   } else {
     history.push('/');
   }

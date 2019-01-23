@@ -11,7 +11,7 @@ export const DropdownMenu = styled.div`
   min-width: 200px;
   border: 1px solid ${getThemeProp('palette.border')};
   border-radius: ${getThemeProp('shape.borderRadius')};
-  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 3px 6px rgba(0,0,0,0.15);
   background-color: white;
 `;
 
@@ -170,6 +170,7 @@ export class UncontrolledDropdown extends Component {
       children,
       overlay,
       toggleOnOverlayClick,
+      toggleOnOutsideClick,
       ...props
     } = this.props;
 

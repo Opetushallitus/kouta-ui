@@ -2,12 +2,15 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import Select, { Option } from './index';
+import Select, { CreatableSelect } from './index';
 
-storiesOf('Select', module).add('Basic', () => (
-  <Select value="b" onChange={action('change')}>
-    <Option value="a">Option A</Option>
-    <Option value="b">Option B</Option>
-    <Option value="c">Option C</Option>
-  </Select>
-));
+const options = [
+  { value: 'a', label: 'Option A' },
+  { value: 'b', label: 'Option B' },
+];
+
+storiesOf('Select', module)
+  .add('Basic', () => <Select options={options} onChange={action('change')} />)
+  .add('With CreatableSelect', () => (
+    <CreatableSelect isClearable isMulti onChange={action('change')} />
+  ));

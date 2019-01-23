@@ -10,7 +10,7 @@ const createHeadingTypography = ({ sizes, fontFamily, color, lineHeight }) => {
       color,
       fontFamily,
       fontSize: `${curr}rem`,
-      fontWeight: 'normal',
+      fontWeight: '700',
       lineHeight,
     };
 
@@ -53,7 +53,8 @@ export const getThemeProp = path => props => get(props.theme, path);
 
 export const createTheme = (theme = {}) => {
   const textPrimaryColor = '#666666';
-  const fontFamily = "'Open Sans', sans-serif";
+  const textSecondaryColor = '#a6a6a6';
+  const fontFamily = "'Roboto', sans-serif";
 
   const headingTypography = createHeadingTypography({
     sizes: [3, 2.5, 2, 1.5, 1.25, 1],
@@ -73,12 +74,19 @@ export const createTheme = (theme = {}) => {
         lineHeight: 1.5,
         fontFamily,
       },
+      secondary: {
+        fontSize: '0.85rem',
+        color: textSecondaryColor,
+        lineHeight: 1.5,
+        fontFamily,
+      },
       ...headingTypography,
     },
     palette: {
       border: '#999999',
       text: {
         primary: textPrimaryColor,
+        secondary: textSecondaryColor,
       },
       primary: {
         light: '#e0f2fd',
@@ -96,6 +104,10 @@ export const createTheme = (theme = {}) => {
       },
       warning: {
         main: '#de9a06',
+        contrastText: '#ffffff',
+      },
+      danger: {
+        main: '#e05055',
         contrastText: '#ffffff',
       },
     },

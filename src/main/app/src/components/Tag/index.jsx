@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Input from '../Input';
 import Dropdown, {DropdownMenu, DropdownMenuItem} from '../Dropdown';
+
 import { getThemeProp } from '../../theme';
 
 export const Tag = styled.div`

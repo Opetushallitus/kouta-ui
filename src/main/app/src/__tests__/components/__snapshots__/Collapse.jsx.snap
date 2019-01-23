@@ -2,15 +2,15 @@
 
 exports[`renders correctly 1`] = `
 .c4 {
-  font-family: 'Open Sans',sans-serif;
+  font-family: 'Roboto',sans-serif;
   color: #666666;
   line-height: 1.5;
   margin-bottom: 0px;
   margin-top: 0px;
   color: #666666;
-  font-family: 'Open Sans',sans-serif;
+  font-family: 'Roboto',sans-serif;
   font-size: 1.25rem;
-  font-weight: normal;
+  font-weight: 700;
   line-height: 1.2;
 }
 
@@ -305,15 +305,15 @@ exports[`renders correctly 2`] = `
 
 exports[`renders correctly when closed 1`] = `
 .c4 {
-  font-family: 'Open Sans',sans-serif;
+  font-family: 'Roboto',sans-serif;
   color: #666666;
   line-height: 1.5;
   margin-bottom: 0px;
   margin-top: 0px;
   color: #666666;
-  font-family: 'Open Sans',sans-serif;
+  font-family: 'Roboto',sans-serif;
   font-size: 1.25rem;
-  font-weight: normal;
+  font-weight: 700;
   line-height: 1.2;
 }
 

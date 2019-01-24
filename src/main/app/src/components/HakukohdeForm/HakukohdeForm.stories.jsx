@@ -12,4 +12,4 @@ const Form = reduxForm({
 storiesOf('HakukohdeForm', module)
   .addDecorator(makeStoreDecorator())
   .addDecorator(makeApiDecorator())
-  .add('Basic', () => <Form steps={false} />);
+  .add('Basic', () => <Form steps={false} organisaatioOid="1.2.246.562.10.594252633210" />);

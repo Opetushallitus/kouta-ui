@@ -15,7 +15,6 @@ const MAX_ITEMS = 5;
 
 const makeLoadAmmattinimikkeet = memoize(
   (httpClient, apiUrls, language) => inputValue => {
-    console.log(inputValue);
     return getAmmattinimikkeetByTerm({
       httpClient,
       apiUrls,

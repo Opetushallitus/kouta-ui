@@ -6,6 +6,12 @@ import FormCollapse from '../FormCollapse';
 import KieliversiotFormSection from '../KieliversiotFormSection';
 import { LANGUAGE_TABS } from '../../constants';
 import PohjakoulutusSection from './PohjakoulutusSection';
+import PerustiedotSection from './PerustiedotSection';
+import AloituspaikatSection from './AloituspaikatSection';
+import HakuajatSection from './HakuajatSection';
+import ValintakoeSection from './ValintakoeSection';
+import AlkamiskausiSection from './AlkamiskausiSection';
+import LiitteetSection from './LiitteetSection';
 
 const ActiveLanguages = formValues({
   languages: 'kieliversiot.languages',
@@ -26,6 +32,7 @@ const defaultGetStepCollapseProps = () => ({
 const HakukohdeFormBase = ({
   handleSubmit,
   getStepCollapseProps = defaultGetStepCollapseProps,
+  organisaatioOid
 }) => (
   <form onSubmit={handleSubmit}>
     <ActiveLanguages>
@@ -52,7 +59,7 @@ const HakukohdeFormBase = ({
             section="perustiedot"
             {...getStepCollapseProps(2)}
           >
-            <div />
+            <PerustiedotSection languages={languages} />
           </FormCollapse>
 
           <FormCollapse
@@ -60,7 +67,7 @@ const HakukohdeFormBase = ({
             section="hakuajat"
             {...getStepCollapseProps(3)}
           >
-            <div />
+            <HakuajatSection languages={languages} />
           </FormCollapse>
 
           <FormCollapse
@@ -76,7 +83,7 @@ const HakukohdeFormBase = ({
             section="alkamiskausi"
             {...getStepCollapseProps(5)}
           >
-            <div />
+            <AlkamiskausiSection />
           </FormCollapse>
 
           <FormCollapse
@@ -84,7 +91,7 @@ const HakukohdeFormBase = ({
             section="aloituspaikat"
             {...getStepCollapseProps(6)}
           >
-            <div />
+            <AloituspaikatSection />
           </FormCollapse>
 
           <FormCollapse
@@ -101,7 +108,7 @@ const HakukohdeFormBase = ({
             {...getStepCollapseProps(8)}
             onContinue={null}
           >
-            <div />
+            <ValintakoeSection languages={languages} />
           </FormCollapse>
 
           <FormCollapse
@@ -110,7 +117,7 @@ const HakukohdeFormBase = ({
             {...getStepCollapseProps(9)}
             onContinue={null}
           >
-            <div />
+            <LiitteetSection languages={languages} organisaatioOid={organisaatioOid} />
           </FormCollapse>
         </>
       )}

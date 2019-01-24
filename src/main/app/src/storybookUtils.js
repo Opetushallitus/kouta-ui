@@ -9,6 +9,10 @@ import createStore from './state/store';
 import configureUrls from './apiUrls';
 import HttpContext from './components/HttpContext';
 import UrlContext from './components/UrlContext';
+import LocalisationProvider from './components/LocalisationProvider';
+import { getLocalisation } from './apiUtils';
+import ApiAsync from './components/ApiAsync';
+import createLocalisation from './localisation';
 
 const defaultHttpClient = axios.create({});
 const configureOphUrls = () => configureUrls(ophUrls);
@@ -40,4 +44,22 @@ export const makeStoreDecorator = ({ logging = false } = {}) => storyFn => {
   }
 
   return <Provider store={store}>{storyFn()}</Provider>;
+};
+
+export const makeLocalisationDecorator = ({
+  category = 'kouta',
+} = {}) => storyFn => {
+  return (
+    <ApiAsync promiseFn={getLocalisation} category={category}>
+      {({ data }) =>
+        data ? (
+          <LocalisationProvider
+            i18n={createLocalisation({ resources: data, debug: true })}
+          >
+            {storyFn()}
+          </LocalisationProvider>
+        ) : null
+      }
+    </ApiAsync>
+  );
 };

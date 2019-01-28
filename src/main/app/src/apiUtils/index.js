@@ -295,3 +295,35 @@ export const getOrganisaatioContactInfo = organisaatio => {
     sahkoposti,
   };
 };
+
+export const getKoutaToteutusByOid = async ({ oid, httpClient, apiUrls }) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-backend.toteutus-by-oid', oid),
+  );
+
+  return data;
+};
+
+export const getKoutaHakuByOid = async ({ oid, httpClient, apiUrls }) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-backend.haku-by-oid', oid),
+  );
+
+  return data;
+};
+
+export const getKoutaValintaperusteet = async ({
+  organisaatioOid,
+  hakuOid,
+  httpClient,
+  apiUrls,
+}) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-backend.valintaperuste-list'),
+    {
+      params: { organisaatioOid, hakuOid },
+    },
+  );
+
+  return data;
+};

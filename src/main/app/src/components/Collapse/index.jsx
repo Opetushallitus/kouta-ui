@@ -36,6 +36,11 @@ const HeaderContent = styled.div`
   display: flex;
   align-items: center;
   flex: 1;
+  background-color: white;
+
+  ${({ active }) => active && css`
+    background-color: ${getThemeProp('palette.primary.light')};
+  `}
 `;
 
 const FooterContainer = styled.div`
@@ -77,12 +82,13 @@ const Collapse = ({
   footer = null,
   children = null,
   open = false,
+  active = false,
   onToggle = () => {},
   ...props
 }) => (
   <Container {...props}>
     <HeaderContainer open={open} onClick={onToggle}>
-      <HeaderContent>{renderHeader(header)}</HeaderContent>
+      <HeaderContent active={active}>{renderHeader(header)}</HeaderContent>
       <HeaderToggle>
         <ToggleIcon type={getIconType(open)} />
       </HeaderToggle>

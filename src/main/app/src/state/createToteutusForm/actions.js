@@ -142,7 +142,7 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
     }),
   );
 
-  if (JULKAISUTILA.JULKAISTU) {
+  if (JULKAISUTILA.TALLENNETTU) {
     history.push(`/organisaatio/${organisaatioOid}/haku`);
   } else {
     history.push('/');

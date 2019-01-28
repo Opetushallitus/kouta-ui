@@ -32,4 +32,15 @@ storiesOf('Collapse', module)
     <UncontrolledCollapse header={header} footer={footer} defaultOpen={true}>
       {children}
     </UncontrolledCollapse>
+  ))
+  .add('With active', () => (
+    <Collapse
+      header={header}
+      footer={footer}
+      open={true}
+      active={true}
+      onToggle={action('toggle')}
+    >
+      {children}
+    </Collapse>
   ));

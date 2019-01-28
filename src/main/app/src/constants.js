@@ -72,3 +72,10 @@ export const TOTEUTUKSEN_OSIOT_OPTIONS = [
   { value: 'kansainvalistyminen', label: 'Kansainvälistyminen' },
   { value: 'yhteistyo', label: 'Yhteistyö muiden toimijoiden kanssa' },
 ];
+
+export const HAKUKOHDE_LOMAKETYYPPI_OPTIONS = [
+  { value: 'ataru', label: 'Käytetään hakemuspalvelun lomaketta' },
+  { value: 'haku-app', label: 'Käytetään järjestelmän hakulomaketta' },
+  { value: 'muu', label: 'Käytetään muuta hakulomaketta' },
+  { value: 'ei_hakua', label: 'Ei sähköistä hakua' },
+];

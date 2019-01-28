@@ -1,37 +1,60 @@
 import React from 'react';
-import { Field, formValues } from 'redux-form';
+import { Field } from 'redux-form';
+import mapValues from 'lodash/mapValues';
 
 import Radio, { RadioGroup } from '../Radio';
 import Typography from '../Typography';
-import Input from '../Input';
-import Spacing from '../Spacing';
+import { getKoodisto } from '../../apiUtils';
+import ApiAsync from '../ApiAsync';
 
-const renderKoulutusvaatimusField = ({ input }) => (
+import {
+  isArray,
+  getFirstLanguageValue,
+  arrayToTranslationObject,
+} from '../../utils';
+
+const getPohjokoulutusvaatimukset = async ({ httpClient, apiUrls }) => {
+  const vaatimukset = await getKoodisto({
+    koodistoUri: 'pohjakoulutusvaatimustoinenaste',
+    httpClient,
+    apiUrls,
+  });
+
+  return isArray(vaatimukset)
+    ? vaatimukset.map(({ metadata, koodiUri, versio }) => ({
+        koodiUri: `${koodiUri}#${versio}`,
+        nimi: mapValues(arrayToTranslationObject(metadata), ({ nimi }) => nimi),
+      }))
+    : [];
+};
+
+const renderRadioGroupField = ({ input, options }) => (
   <RadioGroup {...input}>
-    <Radio value="peruskoulu">Peruskoulu PK</Radio>
-    <Radio value="lukio">Lukion oppimäärä YO</Radio>
-    <Radio value="ammatillinen">Eristyisopetuksena järjestettävä ammattillinen perustutkinto</Radio>
-    <Radio value="ei">Ei pohjakoulutusvaatimusta</Radio>
-    <Radio value="muu">Muu</Radio>
+    {options.map(({ value, label }) => (
+      <Radio value={value} key={value}>
+        {label}
+      </Radio>
+    ))}
   </RadioGroup>
 );
 
-const KoulutusvaatimusFieldValue = formValues({
-  koulutusvaatimus: 'koulutusvaatimus',
-})(({ koulutusvaatimus, children }) => children({ koulutusvaatimus }))
+const getVaatimusOptions = vaatimukset =>
+  vaatimukset.map(({ koodiUri, nimi }) => ({
+    value: koodiUri,
+    label: getFirstLanguageValue(nimi),
+  }));
 
-const PohjakoulutusSection = props => {
+const PohjakoulutusSection = () => {
   return (
     <>
-      <Typography variant="h6" marginBottom={1}>Valitse pohjakoulutusvaatimus</Typography>
-      <Field name="koulutusvaatimus" component={renderKoulutusvaatimusField} />
-      <KoulutusvaatimusFieldValue>
-        {({ koulutusvaatimus }) => koulutusvaatimus === 'muu' ? (
-          <Spacing marginTop={1}>
-          
-          </Spacing>
-        ) : null}
-      </KoulutusvaatimusFieldValue>
+      <Typography variant="h6" marginBottom={1}>
+        Valitse pohjakoulutusvaatimus
+      </Typography>
+      <ApiAsync promiseFn={getPohjokoulutusvaatimukset}>
+        {({ data }) => (
+          <Field name="koulutusvaatimus" component={renderRadioGroupField} options={data ? getVaatimusOptions(data) : []} />
+        )}
+      </ApiAsync>
     </>
   );
 };

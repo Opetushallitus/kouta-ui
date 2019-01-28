@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Field, FieldArray, formValues } from 'redux-form';
-import get from 'lodash/get';
+import mapValues from 'lodash/mapValues';
 
 import Typography from '../Typography';
 import Spacing from '../Spacing';
@@ -13,8 +13,28 @@ import Input from '../Input';
 import Textarea from '../Textarea';
 import Select from '../Select';
 import Divider from '../Divider';
-import { getOrganisaatioByOid, getOrganisaatioContactInfo } from '../../apiUtils';
+import {
+  getOrganisaatioByOid,
+  getOrganisaatioContactInfo,
+  getKoodisto,
+} from '../../apiUtils';
 import ApiAsync from '../ApiAsync';
+import { isArray, arrayToTranslationObject, getFirstLanguageValue } from '../../utils';
+
+const getLiitetyypit = async ({ httpClient, apiUrls }) => {
+  const liitetyypit = await getKoodisto({
+    koodistoUri: 'liitetyypitamm',
+    httpClient,
+    apiUrls,
+  });
+
+  return isArray(liitetyypit)
+    ? liitetyypit.map(({ metadata, koodiUri, versio }) => ({
+        koodiUri: `${koodiUri}#${versio}`,
+        nimi: mapValues(arrayToTranslationObject(metadata), ({ nimi }) => nimi),
+      }))
+    : [];
+};
 
 const getOrganisaatioYhteystiedot = async ({ oid, httpClient, apiUrls }) => {
   const organisaatio = await getOrganisaatioByOid({ oid, httpClient, apiUrls });
@@ -22,14 +42,22 @@ const getOrganisaatioYhteystiedot = async ({ oid, httpClient, apiUrls }) => {
   return getOrganisaatioContactInfo(organisaatio);
 };
 
-const getYhteystiedotFieldValues = ({ yhteystiedot, language }) => ({
-  toimitusosoite: { [language]: get(yhteystiedot, 'osoite') || '' },
-  toimituspostinumero: get(yhteystiedot, 'postinumero') || '',
-  toimituspostitoimipaikka: {
-    [language]: get(yhteystiedot, 'postitoimipaikka') || '',
-  },
-  toimitussahkoposti: get(yhteystiedot, 'sahkoposti') || '',
-});
+const getLiitteetData = async ({ organisaatioOid, httpClient, apiUrls }) => {
+  const [liitetyypit, yhteystiedot] = await Promise.all([
+    getLiitetyypit({ httpClient, apiUrls }),
+    getOrganisaatioYhteystiedot({ httpClient, apiUrls, oid: organisaatioOid }),
+  ]);
+
+  return {
+    liitetyypit,
+    yhteystiedot,
+  };
+};
+
+const getTyyppiOptions = tyypit => tyypit.map(({ koodiUri, nimi }) => ({
+  value: koodiUri,
+  label: getFirstLanguageValue(nimi),
+}));
 
 const nop = () => {};
 
@@ -52,10 +80,6 @@ const renderTextareaField = ({ input, ...props }) => (
 const renderInputMaskField = ({ input, ...props }) => (
   <InputMask {...input} {...props} />
 );
-
-const typeOptions = [{ value: 'tyyppi_a', label: 'Tyyppi A' }];
-
-const nameOptions = [{ value: 'name_a', label: 'Nimi A' }];
 
 const ToimitusaikaSection = ({ getFieldName }) => (
   <>
@@ -141,6 +165,7 @@ const renderLiitteetFields = ({
   yhteystiedot,
   includeToimitusaika = true,
   includeToimituspaikka = true,
+  tyyppiOptions,
 }) => {
   return (
     <>
@@ -151,9 +176,9 @@ const renderLiitteetFields = ({
               Tyyppi
             </Typography>
             <Field
-              name="tyyppi"
+              name={`${liite}.tyyppi`}
               component={renderSelectField}
-              options={typeOptions}
+              options={tyyppiOptions}
             />
           </Spacing>
 
@@ -161,18 +186,17 @@ const renderLiitteetFields = ({
             <Typography as="h6" marginBottom={1}>
               Nimi
             </Typography>
-            <Field
-              name="nimi"
-              component={renderSelectField}
-              options={nameOptions}
-            />
+            <Field name={`${liite}.nimi.${language}`} component={renderInputField} />
           </Spacing>
 
           <Spacing marginBottom={2}>
             <Typography as="h6" marginBottom={1}>
               Kuvaus
             </Typography>
-            <Field name="kuvaus" component={renderTextareaField} />
+            <Field
+              name={`${liite}.kuvaus.${language}`}
+              component={renderTextareaField}
+            />
           </Spacing>
 
           {includeToimitusaika ? (
@@ -185,7 +209,10 @@ const renderLiitteetFields = ({
 
           {includeToimituspaikka ? (
             <Spacing marginBottom={2}>
-              <ToimituspaikkaSection language={language} getFieldName={baseName => `${liite}.${baseName}`} />
+              <ToimituspaikkaSection
+                language={language}
+                getFieldName={baseName => `${liite}.${baseName}`}
+              />
             </Spacing>
           ) : null}
 
@@ -207,7 +234,7 @@ const renderLiitteetFields = ({
       <Button
         type="button"
         onClick={() => {
-          fields.push(getYhteystiedotFieldValues({ yhteystiedot, language }));
+          fields.push({});
         }}
       >
         Lisää liite
@@ -231,8 +258,8 @@ const LiitteetSection = ({ languages, organisaatioOid }) => {
     <LanguageSelector languages={languages} defaultValue="fi">
       {({ value: activeLanguage }) => (
         <ApiAsync
-          promiseFn={getOrganisaatioYhteystiedot}
-          oid={organisaatioOid}
+          promiseFn={getLiitteetData}
+          organisaatioOid={organisaatioOid}
           watch={organisaatioOid}
         >
           {({ data }) => (
@@ -247,7 +274,9 @@ const LiitteetSection = ({ languages, organisaatioOid }) => {
                     />
                     {yhteinenToimitusaika ? (
                       <Spacing marginTop={1} marginBottom={2}>
-                        <ToimitusaikaSection getFieldName={baseName => baseName} />
+                        <ToimitusaikaSection
+                          getFieldName={baseName => baseName}
+                        />
                       </Spacing>
                     ) : null}
                   </Spacing>
@@ -257,9 +286,12 @@ const LiitteetSection = ({ languages, organisaatioOid }) => {
                       component={renderCheckboxField}
                       label="Käytä liitteille yhteistä toimituspaikkaa"
                     />
-                    {yhteinenToimituspaikka? (
+                    {yhteinenToimituspaikka ? (
                       <Spacing marginTop={1}>
-                        <ToimituspaikkaSection getFieldName={baseName => baseName} language={activeLanguage} />
+                        <ToimituspaikkaSection
+                          getFieldName={baseName => baseName}
+                          language={activeLanguage}
+                        />
                       </Spacing>
                     ) : null}
                   </Spacing>
@@ -269,9 +301,10 @@ const LiitteetSection = ({ languages, organisaatioOid }) => {
                       name="liitteet"
                       component={renderLiitteetFields}
                       language={activeLanguage}
-                      yhteystiedot={data}
+                      yhteystiedot={data ? data.yhteystiedot : {}}
                       includeToimitusaika={!yhteinenToimitusaika}
                       includeToimituspaikka={!yhteinenToimituspaikka}
+                      tyyppiOptions={getTyyppiOptions(data ? data.liitetyypit : [])}
                     />
                   </Spacing>
                 </>

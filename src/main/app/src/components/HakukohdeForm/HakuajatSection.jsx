@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field, FieldArray, formValues } from 'redux-form';
 import styled, { css } from 'styled-components';
+import formatDate from 'date-fns/format';
 
 import Typography from '../Typography';
 import Spacing from '../Spacing';
@@ -8,6 +9,28 @@ import LanguageSelector from '../LanguageSelector';
 import Checkbox from '../Checkbox';
 import InputMask from '../InputMask';
 import Button from '../Button';
+import { isArray } from '../../utils';
+
+const renderHakuaikaInterval = ({ haku }) => {
+  const dateFormat = 'DD.MM.YYYY HH:mm';
+
+  const hakuajat = (haku && isArray(haku.hakuajat) ? haku.hakuajat : []).map(
+    ({ alkaa, paattyy }) => [
+      formatDate(new Date(alkaa), dateFormat),
+      formatDate(new Date(paattyy), dateFormat),
+    ],
+  );
+
+  return hakuajat.legth === 0 ? (
+    <Typography variant="secondary">
+      Haulle ei ole määritelty hakuaikoja
+    </Typography>
+  ) : hakuajat.map(([start, end], index) => (
+    <Typography variant="div" marginBottom={index < hakuajat.length -1 ? 1 : 0} key={index}>
+      {start} - {end}
+    </Typography>
+  ));
+};
 
 const renderCheckboxField = ({ input, label = null }) => (
   <Checkbox checked={input.value} onChange={input.onChange} children={label} />
@@ -149,11 +172,17 @@ const EriHakuaikaFieldValue = formValues({
   eriHakuaika: 'eriHakuaika',
 })(({ eriHakuaika, children }) => children({ eriHakuaika }));
 
-const HakuajatSection = ({ languages }) => {
+const HakuajatSection = ({ languages, haku }) => {
   return (
     <LanguageSelector languages={languages} defaultValue="fi">
       {({ value: activeLanguage }) => (
         <>
+          <Spacing marginBottom={2}>
+            <Typography variant="h6" marginBottom={1}>
+              Hakuun liitetyt hakuajat
+            </Typography>
+            {renderHakuaikaInterval({ haku })}
+          </Spacing>
           <Field
             name="eriHakuaika"
             component={renderCheckboxField}

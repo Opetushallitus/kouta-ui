@@ -5,6 +5,7 @@ import { Router, Route, Redirect, Switch } from 'react-router-dom';
 import { ReduxToaster } from '../Toaster'; 
 import CreateKoulutusPage from '../CreateKoulutusPage';
 import CreateToteutusPage from '../CreateToteutusPage';
+import CreateHakukohdePage from '../CreateHakukohdePage';
 
 const CreateHakuPage = () => 'Haku';
 
@@ -27,6 +28,11 @@ const MainPage = ({ history }) => {
         <Route
           path="/organisaatio/:organisaatioOid/haku"
           component={CreateHakuPage}
+          exact
+        />
+        <Route
+          path="/organisaatio/:organisaatioOid/toteutus/:toteutusOid/haku/:hakuOid/hakukohde"
+          component={CreateHakukohdePage}
           exact
         />
         <Redirect to="/" />

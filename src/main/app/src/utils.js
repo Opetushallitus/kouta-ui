@@ -4,6 +4,8 @@ import toPairs from 'lodash/toPairs';
 import dateAndTime from 'date-and-time';
 import zipObject from 'lodash/zipObject';
 import pick from 'lodash/pick';
+import addHours from 'date-fns/add_hours';
+import formatDate from 'date-fns/format';
 
 export const isString = value => typeof value === 'string';
 
@@ -117,4 +119,16 @@ export const getInvalidTranslations = (
 
 export const parseDate = (dateString, dateFormat) => {
   return dateAndTime.parse(dateString, dateFormat);
+};
+
+export const toKoutaDateString = date => {
+  if (!isDate(date)) {
+    return null;
+  }
+
+  const timezoneOffset = date.getTimezoneOffset() / 60;
+  const timezoneDifference = timezoneOffset + 2;
+  const fixedDate = addHours(date, timezoneDifference);
+
+  return formatDate(fixedDate, 'YYYY-MM-DD[T]HH:mm');
 };

@@ -3,7 +3,7 @@ import get from 'lodash/get';
 
 import { JULKAISUTILA } from '../../constants';
 import { createTemporaryToast } from '../toaster';
-import { isArray, parseDate } from '../../utils';
+import { isArray, parseDate, toKoutaDateString } from '../../utils';
 
 const getHakukohdeFormValues = getFormValues('createHakukohdeForm');
 
@@ -53,8 +53,10 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
 
   const hakuajat = (get(values, 'hakuajat.hakuajat') || []).map(
     ({ fromDate, fromTime, toDate, toTime }) => ({
-      alkaa: parseDate(`${fromDate} ${fromTime}`, DATE_FORMAT),
-      paattyy: parseDate(`${toDate} ${toTime}`, DATE_FORMAT),
+      alkaa: toKoutaDateString(
+        parseDate(`${fromDate} ${fromTime}`, DATE_FORMAT),
+      ),
+      paattyy: toKoutaDateString(parseDate(`${toDate} ${toTime}`, DATE_FORMAT)),
     }),
   );
 
@@ -70,9 +72,11 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
 
   const liitteidenToimitusaika =
     get(values, 'liitteet.deliverDate') && get(values, 'liitteet.deliverTime')
-      ? parseDate(
-          `${values.liitteet.deliverDate} ${values.liitteet.deliverTime}`,
-          DATE_FORMAT,
+      ? toKoutaDateString(
+          parseDate(
+            `${values.liitteet.deliverDate} ${values.liitteet.deliverTime}`,
+            DATE_FORMAT,
+          ),
         )
       : null;
 
@@ -101,7 +105,9 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
       tyyppi: get(tyyppi, 'value') || null,
       nimi: nimi || null,
       toimitusaika: liitteetOnkoSamaToimitusaika
-        ? parseDate(`${deliverDate} ${deliverTime}`, DATE_FORMAT)
+        ? toKoutaDateString(
+            parseDate(`${deliverDate} ${deliverTime}`, DATE_FORMAT),
+          )
         : null,
       toimitusosoite: {
         osoite: {
@@ -145,8 +151,12 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
                 postitoimipaikka: postitoimipaikka || null,
               },
               aika: {
-                alkaa: parseDate(`${fromDate} ${fromTime}`, DATE_FORMAT),
-                paattyy: parseDate(`${toDate} ${toTime}`, DATE_FORMAT),
+                alkaa: toKoutaDateString(
+                  parseDate(`${fromDate} ${fromTime}`, DATE_FORMAT),
+                ),
+                paattyy: toKoutaDateString(
+                  parseDate(`${toDate} ${toTime}`, DATE_FORMAT),
+                ),
               },
               lisatietoja: lisatietoja || null,
             }),

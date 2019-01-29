@@ -51,5 +51,7 @@ public class UrlConfiguration extends OphProperties {
         this.frontProperties.setProperty("organisaatio-service.children", this.require("organisaatio-service.children"));
         this.frontProperties.setProperty("organisaatio-service.hierarkia", this.require("organisaatio-service.hierarkia"));
         this.frontProperties.setProperty("organisaatio-service.organisaatio-by-oid", this.require("organisaatio-service.organisaatio-by-oid"));
+
+        this.frontProperties.setProperty("lokalisaatio-service.localisation", this.require("lokalisaatio-service.localisation"));
     }
 }

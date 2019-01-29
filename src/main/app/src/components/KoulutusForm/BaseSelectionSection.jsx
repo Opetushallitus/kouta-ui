@@ -4,6 +4,7 @@ import { Field } from 'redux-form';
 import { formValues } from 'redux-form';
 
 import Button from '../Button';
+import Icon from '../Icon';
 
 import {
   UncontrolledDropdown,
@@ -27,18 +28,25 @@ const SelectionContainer = styled.div`
   padding-left: ${({ theme }) => theme.spacing.unit * 3}px;
 `;
 
+const DropdownButton = styled(Button)`
+  display: inline-flex;
+`;
+
 const BaseFieldValue = formValues({
   base: 'base',
 })(({ base, children }) => children({ base }));
 
-const renderBaseDropdownField = ({ input }) => {
+const renderBaseDropdownField = ({ input, onContinue }) => {
   const { onChange } = input;
 
   return (
     <UncontrolledDropdown
       overlay={
         <DropdownMenu>
-          <DropdownMenuItem onClick={() => onChange('new_koulutus')}>
+          <DropdownMenuItem onClick={() => {
+            onChange('new_koulutus');
+            onContinue();
+          }}>
             Luo uusi koulutus
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => onChange('copy_koulutus')}>
@@ -50,10 +58,11 @@ const renderBaseDropdownField = ({ input }) => {
         </DropdownMenu>
       }
     >
-      {({ ref, onToggle }) => (
-        <Button innerRef={ref} onClick={onToggle} type="button">
-          Valitse pohja
-        </Button>
+      {({ ref, onToggle, visible }) => (
+        <DropdownButton innerRef={ref} onClick={onToggle} type="button">
+          Valitse pohja{' '}
+          <Icon type={visible ? 'arrow_drop_up' : 'arrow_drop_down'} />
+        </DropdownButton>
       )}
     </UncontrolledDropdown>
   );
@@ -69,11 +78,11 @@ const renderEducationSelectionField = ({ options = [], input }) => (
   </Select>
 );
 
-const BaseSelectionSection = props => {
+const BaseSelectionSection = ({ onContinue }) => {
   return (
     <ContentContainer>
       <DropdownContainer>
-        <Field name="base" component={renderBaseDropdownField} />
+        <Field name="base" component={renderBaseDropdownField} onContinue={onContinue} />
       </DropdownContainer>
       <SelectionContainer>
         <BaseFieldValue>

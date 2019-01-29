@@ -1,57 +1,54 @@
 import React from 'react';
-import get from 'lodash/get';
+import mapValues from 'lodash/mapValues';
 
 import ApiAsync from '../ApiAsync';
+import memoize from 'memoizee';
 
-import Select, { Option } from '../NativeSelect';
+import Select from '../Select';
 import { getKoulutuksetByKoulutusTyyppi } from '../../apiUtils';
+import { arrayToTranslationObject, isArray, getFirstLanguageValue } from '../../utils';
 
-const getKoulutukset = args => getKoulutuksetByKoulutusTyyppi(args);
+const getKoulutukset = async ({ koulutusTyyppi, httpClient, apiUrls }) => {
+  const koulutukset = await getKoulutuksetByKoulutusTyyppi({
+    koulutusTyyppi,
+    httpClient,
+    apiUrls,
+  });
 
-const getKoulutusLabel = (koulutus, language) => {
-  const translations = koulutus.metadata || [];
-
-  return (
-    get(
-      translations.find(
-        ({ kieli }) => kieli && kieli.toLowerCase() === language,
-      ) || translations[0],
-      'nimi',
-    ) || null
-  );
+  return isArray(koulutukset)
+    ? koulutukset.map(({ metadata, koodiUri, versio }) => ({
+        nimi: mapValues(arrayToTranslationObject(metadata), ({ nimi }) => nimi),
+        koodiUri: `${koodiUri}#${versio}`,
+      }))
+    : [];
 };
 
-const getKoulutusValue = koulutus => `${koulutus.koodiUri}#${koulutus.versio}`;
+const getOptions = memoize(koulutukset => {
+  return koulutukset.map(({ nimi, koodiUri }) => ({
+    value: koodiUri,
+    label: getFirstLanguageValue(nimi),
+  }))
+});
 
 const KoulutusSelect = ({
   koulutusTyyppi = 'amm',
   language = 'fi',
   value,
   ...props
-}) => (
-  <ApiAsync
-    promiseFn={getKoulutukset}
-    watch={koulutusTyyppi}
-    koulutusTyyppi={koulutusTyyppi}
-  >
-    {({ data }) => {
-      const koulutukset = data || [];
+}) => {
+  return (
+    <ApiAsync
+      promiseFn={getKoulutukset}
+      watch={koulutusTyyppi}
+      koulutusTyyppi={koulutusTyyppi}
+    >
+      {({ data }) => {
+        const koulutukset = data || [];
 
-      return (
-        <Select value={value || ''} {...props}>
-          <Option value="">Valitse koulutus</Option>
-          {koulutukset.map(koulutus => (
-            <Option
-              key={getKoulutusValue(koulutus)}
-              value={getKoulutusValue(koulutus)}
-            >
-              {getKoulutusLabel(koulutus, language)}
-            </Option>
-          ))}
-        </Select>
-      );
-    }}
-  </ApiAsync>
-);
+        return <Select {...props} options={getOptions(koulutukset)} />;
+      }}
+    </ApiAsync>
+  );
+};
 
 export default KoulutusSelect;

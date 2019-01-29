@@ -42,7 +42,7 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   );
 
   const tarjoajat = get(values, 'organization.organizations') || null;
-  const koulutusKoodiUri = get(values, 'information.koulutus') || null;
+  const koulutusKoodiUri = get(values, 'information.koulutus.value') || null;
   const koulutustyyppi = get(values, 'type.type') || null;
 
   const { nimi = null } = await getKoulutusByKoodi({

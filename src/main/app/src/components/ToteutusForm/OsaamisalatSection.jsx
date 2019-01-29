@@ -70,14 +70,20 @@ const makeOnCheckboxChange = ({ value, onChange, optionValue }) => e => {
 
 const getOsaamisalat = async ({ httpClient, apiUrls, koodiUri }) => {
   const koulutus = await getKoulutusByKoodi({ httpClient, apiUrls, koodiUri });
+  const { osaamisalat = [] } = koulutus;
+
+  if (!koulutus.perusteId) {
+    return {
+      koulutus,
+      osaamisalat,
+    };
+  }
 
   const osaamisalakuvaukset = await getOsaamisalakuvauksetByPerusteId({
     httpClient,
     apiUrls,
     perusteId: koulutus.perusteId,
   });
-
-  const { osaamisalat = [] } = koulutus;
 
   const osaamisalatWithDescriptions = osaamisalat.map(osaamisala => ({
     ...osaamisala,

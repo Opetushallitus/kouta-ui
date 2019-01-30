@@ -37,7 +37,7 @@ const renderBaseDropdownField = ({ input }) => {
       overlay={
         <DropdownMenu>
           <DropdownMenuItem onClick={() => onChange('new_koulutus')}>
-            Luo uusi koulutus
+            Luo uusi haku
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => onChange('copy_koulutus')}>
             Kopio pohjaksi aiemmin luotu koulutus

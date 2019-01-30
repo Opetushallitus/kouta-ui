@@ -57,7 +57,9 @@ export const getKoulutuksetByKoulutusTyyppi = async ({
     groupBy(koulutukset, ({ koodiUri }) => koodiUri),
   ).map(([, versiot]) => maxBy(versiot, ({ versio }) => versio));
 
-  return latestKoulutukset;
+  return latestKoulutukset.filter(({ koodiUri }) =>
+    /^koulutus_/.test(koodiUri),
+  );
 };
 
 export const getKoulutusByKoodi = async ({

@@ -55,8 +55,10 @@ const InfoContent = styled(Content)`
   ${getThemeProp('typography.body')};
 `;
 
+const nop = () => {};
+
 const renderSelectField = ({ input, koulutusTyyppi, ...props }) => (
-  <KoulutusSelect {...input} koulutusTyyppi={koulutusTyyppi} {...props} />
+  <KoulutusSelect {...input} koulutusTyyppi={koulutusTyyppi} {...props} onBlur={nop} />
 );
 
 const ActiveKoulutus = formValues({
@@ -133,7 +135,7 @@ const InformationSection = ({ languages = [], koulutusTyyppi, ...props }) => {
                     <InfoContent>
                       {koulutus ? (
                         <InformationAsync
-                          koodiUri={koulutus}
+                          koodiUri={koulutus.value}
                           language={value}
                         />
                       ) : null}

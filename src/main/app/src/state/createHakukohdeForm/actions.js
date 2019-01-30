@@ -1,5 +1,6 @@
 import { getFormValues } from 'redux-form';
 import get from 'lodash/get';
+import pick from 'lodash/pick';
 
 import { JULKAISUTILA } from '../../constants';
 import { createTemporaryToast } from '../toaster';
@@ -62,10 +63,15 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
 
   const liitteidenToimitusosoite = {
     osoite: {
-      osoite: get(values, 'liitteet.toimitusosoite') || null,
+      osoite: pick(
+        get(values, 'liitteet.toimitusosoite') || null,
+        kielivalinta,
+      ),
       postinumero: get(values, 'liitteet.toimituspostinumero') || null,
-      postitoimipaikka:
+      postitoimipaikka: pick(
         get(values, 'liitteet.toimituspostitoimipaikka') || null,
+        kielivalinta,
+      ),
     },
     sahkoposti: get(values, 'liitteet.toimitussahkoposti') || null,
   };
@@ -103,7 +109,7 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
       toimitussahkoposti,
     }) => ({
       tyyppi: get(tyyppi, 'value') || null,
-      nimi: nimi || null,
+      nimi: pick(nimi || null, kielivalinta),
       toimitusaika: liitteetOnkoSamaToimitusaika
         ? toKoutaDateString(
             parseDate(`${deliverDate} ${deliverTime}`, DATE_FORMAT),
@@ -111,17 +117,21 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
         : null,
       toimitusosoite: {
         osoite: {
-          osoite: toimitusosoite || null,
+          osoite: pick(toimitusosoite || null, kielivalinta),
           postinumero: toimituspostinumero || null,
-          postitoimipaikka: toimituspostitoimipaikka || null,
+          postitoimipaikka: pick(
+            toimituspostitoimipaikka || null,
+            kielivalinta,
+          ),
         },
         sahkoposti: toimitussahkoposti || null,
       },
-      kuvaus: kuvaus || null,
+      kuvaus: pick(kuvaus || null, kielivalinta),
     }),
   );
 
-  const nimi = get(values, 'perustiedot.nimi') || null;
+  const nimi = pick(get(values, 'perustiedot.nimi') || null, kielivalinta);
+
   const toinenAsteOnkoKaksoistutkinto = !!get(
     values,
     'perustiedot.voiSuorittaaKaksoistutkinnon',
@@ -146,9 +156,9 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
               lisatietoja,
             }) => ({
               osoite: {
-                osoite: osoite || null,
+                osoite: pick(osoite || null, kielivalinta),
                 postinumero: postinumero || null,
-                postitoimipaikka: postitoimipaikka || null,
+                postitoimipaikka: pick(postitoimipaikka || null, kielivalinta),
               },
               aika: {
                 alkaa: toKoutaDateString(
@@ -158,7 +168,7 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
                   parseDate(`${toDate} ${toTime}`, DATE_FORMAT),
                 ),
               },
-              lisatietoja: lisatietoja || null,
+              lisatietoja: pick(lisatietoja || null, kielivalinta),
             }),
           )
         : [],

@@ -6,6 +6,7 @@ import zipObject from 'lodash/zipObject';
 import pick from 'lodash/pick';
 import addHours from 'date-fns/add_hours';
 import formatDate from 'date-fns/format';
+import _isValidDate from 'date-fns/is_valid';
 
 export const isString = value => typeof value === 'string';
 
@@ -16,6 +17,8 @@ export const isDate = value => _isDate(value);
 export const isObject = value => toString.call(value) === '[object Object]';
 
 export const isArray = value => toString.call(value) === '[object Array]';
+
+export const isValidDate = value => isDate(value) && _isValidDate(value);
 
 export const getLanguageValue = (value, language = 'fi') =>
   isObject(value) ? value[language] || null : null;
@@ -122,7 +125,7 @@ export const parseDate = (dateString, dateFormat) => {
 };
 
 export const toKoutaDateString = date => {
-  if (!isDate(date)) {
+  if (!isValidDate(date)) {
     return null;
   }
 

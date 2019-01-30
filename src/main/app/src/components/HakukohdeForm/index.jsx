@@ -2,29 +2,47 @@ import merge from 'lodash/merge';
 import getYear from 'date-fns/get_year';
 import get from 'lodash/get';
 import set from 'lodash/set';
-import flatMap from 'lodash/flatMap';
+import mapValues from 'lodash/mapValues';
+import pick from 'lodash/pick';
 
-import { getInvalidTranslations, isDate, parseDate } from '../../utils';
+import { getInvalidTranslations, parseDate, isValidDate } from '../../utils';
 import { getLiiteToimituspaikkaFieldValues } from './utils';
 
 const DATE_FORMAT = 'DD.MM.YYYY HH:mm';
 
 const isValidDateTime = (date, time) => {
-  return isDate(parseDate(`${date} ${time}`, DATE_FORMAT));
+  return isValidDate(parseDate(`${date} ${time}`, DATE_FORMAT));
 };
+
+const getValintakoeErrors = valintakoe => {
+  const errors = {};
+  
+  const kokeet = get(valintakoe, 'kokeet') || [];
+
+  const invalidValintakokeet = kokeet.filter(
+    ({ fromDate, fromTime, toDate, toTime }) =>
+      !(isValidDateTime(fromDate, fromTime) && isValidDateTime(toDate, toTime)),
+  );
+
+  if (invalidValintakokeet.length > 0) {
+    set(errors, 'kokeet._error', 'Tarkista syöttämiesi valintakokeiden tiedot');
+  }
+
+  return errors;
+}
 
 export { default } from './HakukohdeForm';
 
 export const validate = values => {
   const errors = {};
-
+  
   const kieliversiot = get(values, 'kieliversiot.languages') || [];
   const pohjakoulutusvaatimus = get(values, 'pohjakoulutus.koulutusvaatimus');
   const nimi = get(values, 'perustiedot.nimi');
   const invalidNimiTranslations = getInvalidTranslations(nimi, kieliversiot);
   const eriHakuaika = !!get(values, 'hakuajat.eriHakuaika');
   const hakuajat = get(values, 'hakuajat.hakuajat') || [];
-  
+
   const invalidHakuajat = eriHakuaika
     ? hakuajat.filter(
         ({ fromDate, fromTime, toDate, toTime }) =>
@@ -39,18 +57,14 @@ export const validate = values => {
   const alkamisvuosi = get(values, 'alkamiskausi.vuosi');
   const aloituspaikat = get(values, 'aloituspaikat.aloituspaikkamaara');
   const valintakoetyypit = get(values, 'valintakoe.types') || [];
-  const valintakokeet = flatMap(
-    valintakoetyypit,
-    t => get(values, ['valintakoe', 'kokeet', t, 'kokeet']) || [],
-  );
 
-  const invalidValintakokeet = valintakokeet.filter(
-    ({ fromDate, fromTime, toDate, toTime }) =>
-      !(isValidDateTime(fromDate, fromTime) && isValidDateTime(toDate, toTime)),
+  const valintakoeErrors = mapValues(
+    pick(get(values, 'valintakoe.kokeet'), valintakoetyypit),
+    getValintakoeErrors,
   );
 
   const liitteet = get(values, 'liitteet.liitteet') || [];
-  
+
   const liitteillaYhteinentoimitusaika = !!get(
     values,
     'liitteet.yhteinenToimitusaika',
@@ -90,7 +104,7 @@ export const validate = values => {
   if (eriHakuaika && invalidHakuajat.length > 0) {
     set(
       errors,
-      'hakuajat.hakuajat',
+      'hakuajat.hakuajat._error',
       'Tarkista syöttämiesi hakuaikojen päivämäärät ja kellonajat',
     );
   }
@@ -111,16 +125,18 @@ export const validate = values => {
     );
   }
 
-  if (invalidValintakokeet.length > 0) {
-    set(
-      errors,
-      'valintakoe.kokeet',
-      'Tarkista syöttämiesi valintakokeiden tiedot',
-    );
-  }
+  set(
+    errors,
+    'valintakoe.kokeet',
+    valintakoeErrors,
+  );
 
   if (invalidLiitteet.length > 0) {
-    set(errors, 'liitteet.liitteet', 'Tarkista syöttämiesi liitteiden tiedot');
+    set(
+      errors,
+      'liitteet.liitteet._error',
+      'Tarkista syöttämiesi liitteiden tiedot',
+    );
   }
 
   return errors;

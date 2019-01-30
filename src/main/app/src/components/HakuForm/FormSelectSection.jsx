@@ -7,6 +7,7 @@ import Radio, { RadioGroup } from '../Radio';
 import Select from '../Select';
 import Button from '../Button';
 import LanguageSelector from '../LanguageSelector';
+import Select from '../Select';
 
 const SelectionContainer = styled.div`
   flex: 1;
@@ -42,7 +43,7 @@ const FormSelectSection = ({ languages, koodiUri, ...props }) => {
                 <Field
                   name="education"
                   options={[{ label: 'testi lomake 1', value: '1' }, { label: 'testi lomake 2', value: '2' }]}
-                  component={renderEducationSelectionField}
+                  component={renderLomakeSelectionField}
                 />
               </SelectionContainer>
               <div style={{'marginLeft': '23px', 'marginTop': '11px', 'float': 'right'}}>
@@ -63,9 +64,8 @@ const FormSelectSection = ({ languages, koodiUri, ...props }) => {
   )
 };
 
-const renderEducationSelectionField = ({ options = [], input }) => (
+const renderLomakeSelectionField = ({ options = [], input }) => (
   <Select options={options} style={{'maxWidth': '508px'}} {...input}>
-
   </Select>
 );
 

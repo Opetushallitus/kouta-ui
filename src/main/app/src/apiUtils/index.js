@@ -1,11 +1,12 @@
 import { KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP } from '../constants';
-import { isArray } from '../utils';
+import { isArray, isString } from '../utils';
 import keyBy from 'lodash/keyBy';
 import mapValues from 'lodash/mapValues';
 import get from 'lodash/get';
 import groupBy from 'lodash/groupBy';
 import toPairs from 'lodash/toPairs';
 import maxBy from 'lodash/maxBy';
+import upperFirst from 'lodash/upperFirst';
 
 const getKoodiUriParts = uri => {
   const [koodiUri, versio = null] = uri.split('#');
@@ -274,4 +275,55 @@ export const getLocalisation = async ({
   }
 
   return resource;
+};
+
+export const getOrganisaatioContactInfo = organisaatio => {
+  const postitoimipaikka = get(organisaatio, 'kayntiosoite.postitoimipaikka');
+  const postinumeroUri = get(organisaatio, 'kayntiosoite.postinumeroUri');
+  const [, postinumero] = postinumeroUri ? postinumeroUri.split('_') : [];
+  const sahkopostiYhteystieto = (get(organisaatio, 'yhteystiedot') || []).find(
+    ({ email }) => isString(email),
+  );
+  const sahkoposti = sahkopostiYhteystieto ? sahkopostiYhteystieto.email : null;
+
+  return {
+    osoite: get(organisaatio, 'kayntiosoite.osoite') || null,
+    postitoimipaikka: postitoimipaikka
+      ? upperFirst(postitoimipaikka.toLowerCase())
+      : null,
+    postinumero: postinumero || null,
+    sahkoposti,
+  };
+};
+
+export const getKoutaToteutusByOid = async ({ oid, httpClient, apiUrls }) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-backend.toteutus-by-oid', oid),
+  );
+
+  return data;
+};
+
+export const getKoutaHakuByOid = async ({ oid, httpClient, apiUrls }) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-backend.haku-by-oid', oid),
+  );
+
+  return data;
+};
+
+export const getKoutaValintaperusteet = async ({
+  organisaatioOid,
+  hakuOid,
+  httpClient,
+  apiUrls,
+}) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-backend.valintaperuste-list'),
+    {
+      params: { organisaatioOid, hakuOid },
+    },
+  );
+
+  return data;
 };

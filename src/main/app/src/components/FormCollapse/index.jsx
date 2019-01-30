@@ -2,7 +2,7 @@ import React from 'react';
 import { FormSection } from 'redux-form';
 import styled from 'styled-components';
 
-import Collapse from '../Collapse';
+import Collapse, { UncontrolledCollapse } from '../Collapse';
 import Button from '../Button';
 import ResetFormSection from '../ResetFormSection';
 import { isFunction } from '../../utils';
@@ -16,10 +16,39 @@ const CollapseWrapper = styled.div`
   margin-bottom: ${({ theme }) => theme.spacing.unit * 3}px;
 `;
 
-const FormCollapse = ({ onContinue, section, children = null, ...props }) => {
+const renderChildren = ({ onContinue, children, section }) => {
+  const renderedChildren = isFunction(children)
+    ? children({ onContinue })
+    : children;
+
+  return section ? (
+    <FormSection name={section}>{renderedChildren}</FormSection>
+  ) : (
+    renderedChildren
+  );
+};
+
+const FormCollapse = ({
+  onContinue,
+  section,
+  children = null,
+  controlled = true,
+  open = false,
+  ...props
+}) => {
+  const CollapseComponent = controlled ? Collapse : UncontrolledCollapse;
+
+  const collapseProps = controlled
+    ? {
+        open,
+      }
+    : {
+        defaultOpen: true,
+      };
+
   return (
     <CollapseWrapper>
-      <Collapse
+      <CollapseComponent
         footer={
           <CollapseFooterContainer>
             {section ? (
@@ -39,14 +68,11 @@ const FormCollapse = ({ onContinue, section, children = null, ...props }) => {
             ) : null}
           </CollapseFooterContainer>
         }
+        {...collapseProps}
         {...props}
       >
-        {section ? (
-          <FormSection name={section}>{children}</FormSection>
-        ) : (
-          children
-        )}
-      </Collapse>
+        {renderChildren({ onContinue, children, section })}
+      </CollapseComponent>
     </CollapseWrapper>
   );
 };

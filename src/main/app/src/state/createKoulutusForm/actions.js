@@ -72,7 +72,7 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
     }),
   );
 
-  if (get(koulutusData, 'oid') && JULKAISUTILA.JULKAISTU) {
+  if (get(koulutusData, 'oid') && JULKAISUTILA.TALLENNETTU) {
     const { oid: koulutusOid } = koulutusData;
 
     history.push(

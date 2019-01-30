@@ -61,6 +61,7 @@ exports[`renders correctly 1`] = `
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
+  background-color: white;
 }
 
 .c9 {
@@ -94,7 +95,9 @@ exports[`renders correctly 1`] = `
         onClick={[Function]}
         open={true}
       >
-        <styled.div>
+        <styled.div
+          active={false}
+        >
           <div
             className="c2"
           >
@@ -213,6 +216,7 @@ exports[`renders correctly 2`] = `
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
+  background-color: white;
 }
 
 .c7 {
@@ -242,7 +246,9 @@ exports[`renders correctly 2`] = `
         onClick={[Function]}
         open={true}
       >
-        <styled.div>
+        <styled.div
+          active={false}
+        >
           <div
             className="c2"
           >
@@ -363,6 +369,7 @@ exports[`renders correctly when closed 1`] = `
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
+  background-color: white;
 }
 
 .c10 {
@@ -411,7 +418,9 @@ exports[`renders correctly when closed 1`] = `
         onClick={[Function]}
         open={false}
       >
-        <styled.div>
+        <styled.div
+          active={false}
+        >
           <div
             className="c2"
           >

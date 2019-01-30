@@ -51,6 +51,9 @@ export const spacingCss = css`
 
 export const getThemeProp = path => props => get(props.theme, path);
 
+export const spacing = (amount = 1) => ({ theme }) =>
+  `${theme.spacing.unit * amount}px`;
+
 export const createTheme = (theme = {}) => {
   const textPrimaryColor = '#666666';
   const textSecondaryColor = '#a6a6a6';

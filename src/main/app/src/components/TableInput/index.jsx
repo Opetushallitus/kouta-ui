@@ -1,0 +1,343 @@
+import React, { Component } from 'react';
+import styled, { css } from 'styled-components';
+import get from 'lodash/get';
+import produce from 'immer';
+import set from 'lodash/set';
+
+import { isArray, isObject, isFunction } from '../../utils';
+import Flex, { FlexItem } from '../Flex';
+import { getThemeProp, spacing } from '../../theme';
+
+import {
+  addColumnToIndex,
+  removeColumn,
+  addRowToIndex,
+  getNumberOfColumns,
+  removeRow,
+  setRowHeaderStatus,
+} from './utils';
+
+import {
+  DropdownMenu,
+  DropdownMenuItem,
+  UncontrolledDropdown,
+} from '../Dropdown';
+
+const ColumnInput = styled.textarea.attrs({ rows: 2 })`
+  width: 100%;
+  height: 100%;
+  border: 0px none;
+  outline: none;
+  display: block;
+  box-sizing: border-box;
+  padding: ${spacing(1)};
+  ${getThemeProp('typography.body')};
+  transition: box-shadow 0.25s;
+  box-shadow: 0 0 0 0;
+  resize: none;
+  background-color: transparent;
+
+  &:focus {
+    box-shadow: 0 0 0 2px ${getThemeProp('palette.primary.main')};
+    position: relative;
+    z-index: 1;
+  }
+`;
+
+const Column = styled(FlexItem)`
+  border-right: 1px solid ${getThemeProp('palette.border')};
+  box-sizing: border-box;
+  width: 17rem;
+`;
+
+const Row = styled(Flex).attrs({ inline: true })`
+  background-color: white;
+  border-top: 1px solid ${getThemeProp('palette.border')};
+  border-left: 1px solid ${getThemeProp('palette.border')};
+
+  ${({ isLast }) =>
+    isLast &&
+    css`
+      border-bottom: 1px solid ${getThemeProp('palette.border')};
+    `}
+
+  ${({ isHeader }) =>
+    isHeader &&
+    css`
+      background-color: ${getThemeProp('palette.primary.light')};
+    `}
+`;
+
+const RowContainer = styled.div``;
+
+const Container = styled.div``;
+
+const EditRowBase = styled(FlexItem)`
+  background-color: #f5f5f5;
+  width: 2rem;
+  text-align: center;
+  padding: ${spacing(1)};
+  cursor: pointer;
+  ${getThemeProp('typography.body')};
+  border-right: 1px solid ${getThemeProp('palette.border')};
+
+  ${({ isHeader }) =>
+    isHeader &&
+    css`
+      background-color: ${getThemeProp('palette.primary.light')};
+    `};
+`;
+
+const EditRowPlaceholder = styled(EditRowBase)`
+  cursor: default;
+`;
+
+const EditColumnBase = styled(Column)`
+  background-color: #f5f5f5;
+  ${getThemeProp('typography.body')};
+  cursor: pointer;
+  text-align: center;
+  padding: ${spacing(1)};
+`;
+
+const EditColumn = ({
+  onAddColumnRight,
+  onAddColumnLeft,
+  onRemoveColumn,
+  ...props
+}) => {
+  const overlay = (
+    <DropdownMenu>
+      <DropdownMenuItem onClick={onAddColumnRight}>
+        Lisää sarake oikealle
+      </DropdownMenuItem>
+      <DropdownMenuItem onClick={onAddColumnLeft}>
+        Lisää sarake vasemmalle
+      </DropdownMenuItem>
+      {isFunction(onRemoveColumn) ? (
+        <DropdownMenuItem onClick={onRemoveColumn}>
+          Poista sarake
+        </DropdownMenuItem>
+      ) : null}
+    </DropdownMenu>
+  );
+
+  return (
+    <UncontrolledDropdown overlay={overlay}>
+      {({ ref, onToggle }) => (
+        <div style={{ display: 'flex' }} ref={ref} onClick={onToggle}>
+          <EditColumnBase {...props} />
+        </div>
+      )}
+    </UncontrolledDropdown>
+  );
+};
+
+const EditRow = ({
+  onAddRowBelow,
+  onAddRowAbove,
+  onRemoveRow,
+  onToggleHeaderStatus,
+  isHeader,
+  ...props
+}) => {
+  const overlay = (
+    <DropdownMenu>
+      <DropdownMenuItem onClick={onToggleHeaderStatus}>
+        {isHeader ? 'Merkitse tavalliseksi riviksi' : 'Merkitse otsikkoriviksi'}
+      </DropdownMenuItem>
+      <DropdownMenuItem onClick={onAddRowBelow}>
+        Lisää rivi alapuolelle
+      </DropdownMenuItem>
+      <DropdownMenuItem onClick={onAddRowAbove}>
+        Lisää rivi yläpuolelle
+      </DropdownMenuItem>
+      {isFunction(onRemoveRow) ? (
+        <DropdownMenuItem onClick={onRemoveRow}>Poista rivi</DropdownMenuItem>
+      ) : null}
+    </DropdownMenu>
+  );
+
+  return (
+    <UncontrolledDropdown overlay={overlay}>
+      {({ ref, onToggle }) => (
+        <div style={{ display: 'flex' }} ref={ref} onClick={onToggle}>
+          <EditRowBase isHeader={isHeader} {...props} />
+        </div>
+      )}
+    </UncontrolledDropdown>
+  );
+};
+
+class TableInput extends Component {
+  static defaultProps = {
+    onChange: () => {},
+  };
+
+  getValue() {
+    return this.props.value || { rows: [{ columns: [{ text: '' }] }] };
+  }
+
+  makeOnRemoveColumn = ({ columnIndex }) => () => {
+    const nextValue = removeColumn({ columnIndex, value: this.getValue() });
+
+    this.props.onChange(nextValue);
+  };
+
+  makeOnAddColumnLeft = ({ columnIndex }) => () => {
+    const nextValue = addColumnToIndex({
+      value: this.getValue(),
+      columnIndex: columnIndex - 1,
+    });
+
+    this.props.onChange(nextValue);
+  };
+
+  makeOnAddColumnRight = ({ columnIndex }) => () => {
+    const nextValue = addColumnToIndex({ value: this.getValue(), columnIndex });
+
+    this.props.onChange(nextValue);
+  };
+
+  makeOnAddRowBelow = ({ rowIndex }) => () => {
+    const nextValue = addRowToIndex({ value: this.getValue(), rowIndex });
+
+    this.props.onChange(nextValue);
+  };
+
+  makeOnAddRowAbove = ({ rowIndex }) => () => {
+    const nextValue = addRowToIndex({
+      value: this.getValue(),
+      rowIndex: rowIndex - 1,
+    });
+
+    this.props.onChange(nextValue);
+  };
+
+  makeOnToggleRowHeaderStatus = ({ rowIndex }) => () => {
+    const value = this.getValue();
+    const currentStatus = !!get(value, ['rows', rowIndex, 'header']);
+
+    this.props.onChange(
+      setRowHeaderStatus({
+        value,
+        rowIndex,
+        status: !currentStatus,
+      }),
+    );
+  };
+
+  makeOnRemoveRow = ({ rowIndex }) => () => {
+    const nextValue = removeRow({ value: this.getValue(), rowIndex });
+
+    this.props.onChange(nextValue);
+  };
+
+  makeOnColumnFieldChange = ({
+    rowIndex,
+    columnIndex,
+    field = 'text',
+  }) => e => {
+    const { onChange } = this.props;
+    const value = this.getValue();
+
+    const nextValue = produce(value, draft => {
+      set(
+        draft,
+        ['rows', rowIndex, 'columns', columnIndex, field],
+        e.target.value,
+      );
+    });
+
+    onChange(nextValue);
+  };
+
+  renderColumn = ({ column, columnIndex, rowIndex }) => {
+    return (
+      <Column key={`${rowIndex}.${columnIndex}`} grow={0}>
+        <ColumnInput
+          value={get(column, 'text') || ''}
+          onChange={this.makeOnColumnFieldChange({
+            rowIndex,
+            columnIndex,
+            field: 'text',
+          })}
+        />
+      </Column>
+    );
+  };
+
+  renderRow = ({ row, index: rowIndex, isLast, numRows }) => {
+    const isHeader = !!row.header;
+
+    return (
+      <RowContainer key={rowIndex}>
+        <Row isLast={isLast} isHeader={isHeader}>
+          <EditRow
+            isHeader={isHeader}
+            onAddRowAbove={this.makeOnAddRowAbove({ rowIndex })}
+            onAddRowBelow={this.makeOnAddRowBelow({ rowIndex })}
+            onRemoveRow={
+              numRows > 1 ? this.makeOnRemoveRow({ rowIndex }) : null
+            }
+            onToggleHeaderStatus={this.makeOnToggleRowHeaderStatus({
+              rowIndex,
+            })}
+          >
+            {rowIndex + 1}
+          </EditRow>
+          {isArray(row.columns)
+            ? row.columns.map((column, columnIndex) =>
+                this.renderColumn({ column, columnIndex, rowIndex }),
+              )
+            : null}
+        </Row>
+      </RowContainer>
+    );
+  };
+
+  getRows() {
+    const value = this.getValue();
+
+    return isObject(value) && isArray(value.rows) ? value.rows : [];
+  }
+
+  render() {
+    const rows = this.getRows();
+    const numberOfColumns = getNumberOfColumns(rows);
+
+    return (
+      <Container>
+        <Row>
+          <EditRowPlaceholder> </EditRowPlaceholder>
+          {[...new Array(numberOfColumns)].map((v, columnIndex) => (
+            <EditColumn
+              onAddColumnLeft={this.makeOnAddColumnLeft({ columnIndex })}
+              onAddColumnRight={this.makeOnAddColumnRight({
+                columnIndex,
+              })}
+              onRemoveColumn={
+                numberOfColumns > 1
+                  ? this.makeOnRemoveColumn({ columnIndex })
+                  : null
+              }
+              key={columnIndex}
+            >
+              {columnIndex + 1}
+            </EditColumn>
+          ))}
+        </Row>
+        {rows.map((row, index) =>
+          this.renderRow({
+            row,
+            index,
+            isLast: index === rows.length - 1,
+            numRows: rows.length,
+          }),
+        )}
+      </Container>
+    );
+  }
+}
+
+export default TableInput;

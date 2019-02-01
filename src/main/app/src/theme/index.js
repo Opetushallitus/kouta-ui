@@ -120,6 +120,9 @@ export const createTheme = (theme = {}) => {
     shape: {
       borderRadius: '4px',
     },
+    zIndex: {
+      modal: 999,
+    },
   };
 
   return merge({}, defaults, theme);

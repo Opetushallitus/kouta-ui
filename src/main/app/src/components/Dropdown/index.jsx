@@ -13,6 +13,7 @@ export const DropdownMenu = styled.div`
   border-radius: ${getThemeProp('shape.borderRadius')};
   box-shadow: 0px 3px 6px rgba(0,0,0,0.15);
   background-color: white;
+
 `;
 
 export const DropdownMenuItem = styled.div`
@@ -78,7 +79,7 @@ const Dropdown = ({
         {({ ref, style, placement }) => (
           <div
             ref={ref}
-            style={{ ...style, ...getMarginStyle(placement) }}
+            style={{ ...style, ...getMarginStyle(placement), zIndex: '1' }}
             data-placement={placement}
             {...props}
           >

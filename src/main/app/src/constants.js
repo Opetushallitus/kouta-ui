@@ -79,3 +79,26 @@ export const HAKUKOHDE_LOMAKETYYPPI_OPTIONS = [
   { value: 'muu', label: 'Käytetään muuta hakulomaketta' },
   { value: 'ei_hakua', label: 'Ei sähköistä hakua' },
 ];
+
+export const VALINTAPERUSTEET_KIELITAITO_OPTIONS = [
+  { value: 'yleinen_kielitutkinto', label: 'Yleinen kielitutkinto' },
+  { value: 'toefl', label: 'TOELF' },
+  { value: 'ielts', label: 'IELTS (Academic IELTS only)' },
+  { value: 'cae_cpe', label: 'CAE/CPE' },
+];
+
+export const VALINTAPERUSTEET_KIELITAITO_OSOITUS_OPTIONS = [
+  {
+    value: 'kk_tutkinto_suomessa',
+    label: 'kk-tutkinto Suomessa (suomeksi, ruotsiksi tai englanniksi)',
+  },
+  {
+    value: 'kk_tutkinto_eu_eta',
+    label: 'kk-tutkinto englanniksi EU/ETA-maassa',
+  },
+  {
+    value: 'kk_tunkinto_muualla',
+    label:
+      'kk-tutkinto englanniksi paikan päällä suoritettuna joissain seuraavista maista: USA, Kanada, Australia, Irlanti, Uusi-Seelanti',
+  },
+];

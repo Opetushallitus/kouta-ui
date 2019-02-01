@@ -6,6 +6,7 @@ import { ReduxToaster } from '../Toaster';
 import CreateKoulutusPage from '../CreateKoulutusPage';
 import CreateToteutusPage from '../CreateToteutusPage';
 import CreateHakukohdePage from '../CreateHakukohdePage';
+import CreateValintaperusteetPage from '../CreateValintaperusteetPage';
 
 const CreateHakuPage = () => 'Haku';
 
@@ -33,6 +34,11 @@ const MainPage = ({ history }) => {
         <Route
           path="/organisaatio/:organisaatioOid/toteutus/:toteutusOid/haku/:hakuOid/hakukohde"
           component={CreateHakukohdePage}
+          exact
+        />
+        <Route
+          path="/organisaatio/:oid/valintaperusteet"
+          component={CreateValintaperusteetPage}
           exact
         />
         <Redirect to="/" />

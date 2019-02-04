@@ -20,6 +20,7 @@ import {
   arrayToTranslationObject,
 } from '../../utils';
 
+
 const FieldWrapper = styled.div`
   margin-bottom: 27px;
 `;
@@ -251,6 +252,7 @@ const ContentWrapper = ({name}) => {
     <Spacing marginTop={2}>
       <FieldArray name={name} component={renderHakuajatFields} />
     </Spacing>
+
   );
 };
 

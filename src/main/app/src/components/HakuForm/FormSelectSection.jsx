@@ -8,7 +8,6 @@ import Select from '../Select';
 import Button from '../Button';
 import LanguageSelector from '../LanguageSelector';
 import Spacing from '../Spacing';
-
 const SelectionContainer = styled.div`
   flex: 1;
   padding-left: ${({ theme }) => theme.spacing.unit * 3}px;

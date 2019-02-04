@@ -1,66 +1,67 @@
 import React from 'react';
 import { Field } from 'redux-form';
+import mapValues from 'lodash/mapValues';
 
 import Typography from '../Typography';
 import Radio, { RadioGroup } from '../Radio';
+import ApiAsync from '../ApiAsync';
+import { getKoodisto } from '../../apiUtils';
+import {
+  isArray,
+  getFirstLanguageValue,
+  arrayToTranslationObject,
+} from '../../utils';
+import Spacing from '../Spacing';
 
-const renderRadioGroupField = ({ input }) =>  (
+const getHaunKohdejoukot = async ({ httpClient, apiUrls }) => {
+  const haunkohdejoukko = await getKoodisto({
+    koodistoUri: 'haunkohdejoukko',
+    httpClient,
+    apiUrls,
+  });
+
+  return isArray(haunkohdejoukko)
+    ? haunkohdejoukko.map(({ metadata, koodiUri, versio }) => ({
+        koodiUri: `${koodiUri}#${versio}`,
+        nimi: mapValues(arrayToTranslationObject(metadata), ({ nimi }) => nimi),
+      }))
+    : [];
+};
+
+const getKohdejoukkoOptions = haunkohdejoukko =>
+  haunkohdejoukko.map(({ koodiUri, nimi }) => ({
+    value: koodiUri,
+    label: getFirstLanguageValue(nimi),
+  }));
+
+const renderRadioGroupField = ({ input, options }) => {
+  return(
   <RadioGroup {...input}>
-    <Radio value="10">
-      10 Aikuiskoulutus
-    </Radio>
-    <Radio value="11">
-      11 Ammatillinen koulutus ja lukiokoulutus
-    </Radio>
-    <Radio value="12">
-      12 Korkeakoulutus
-    </Radio>
-    <Radio value="13">
-      13 Täydennyskoulutus
-    </Radio>
-    <Radio value="14">
-      14 Vapaa sivistyö
-    </Radio>
-    <Radio value="15">
-      15 Ammatillinen peruskoulutus erityisopetuksena
-    </Radio>
-    <Radio value="16">
-      16 Valmentava ja kuntouttava koulutus
-    </Radio>
-    <Radio value="17">
-      17 Perusopetuksen jälkeinen valmistava koulutus
-    </Radio>
-    <Radio value="18">
-      18 Vapaan sivistystyön koulutus
-    </Radio>
-    <Radio value="19">
-      19 Aikuisten perusopetus
-    </Radio>
-    <Radio value="20">
-      20 erityisopetuksena järjestettävä ammatillinen koulutus
-    </Radio>
-    <Radio value="21">
-      21 Yhteishaun ulkopuolinen lukiokoulutus
-    </Radio>
-    <Radio value="22">
-      22 Pelastusalan koulutus
-    </Radio>
-    <Radio value="23">
-      23 Ammatillinen koulutus
-    </Radio>
-    <Radio value="24">
-      24 Lukiokoulutus
-    </Radio>
+    {options.map(({ value, label }) => (
+      <Radio value={value} key={value}>
+        {label}
+      </Radio>
+    ))}
   </RadioGroup>
-);
+);};
 
-const TargetGroupSection = () => (
-  <div>
-    <Typography variant="h6" marginBottom={2}>
-      Haun kohdejoukko
-    </Typography>
-    <Field name="type" component={renderRadioGroupField} />
-  </div>
-);
+const TargetGroupSection = () => {
+  return (
+    <ApiAsync promiseFn={getHaunKohdejoukot}>
+    {({ data })  => (
+      <>
+          <Spacing>
+            <Typography variant="h6" marginBottom={2}>
+              Haun kohdejoukko
+            </Typography>
+            {isArray(data) ? (
+            <Field name="type" component={renderRadioGroupField} options={getKohdejoukkoOptions(data)} />
+            ) : null}
+          </Spacing>
+          </>
+        )}
+      </ApiAsync>
+  );
+};
 
 export default TargetGroupSection;

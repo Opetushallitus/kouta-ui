@@ -5,6 +5,7 @@ import Typography from '../Typography';
 import LanguageSelector from '../LanguageSelector';
 import Input from '../Input'
 import Checkbox from '../Checkbox';
+import Spacing from '../Spacing';
 
 const renderInputField = ({ input, placeholder}) => {
   const { onChange, value } = input;
@@ -30,7 +31,7 @@ const ContactInfoSection = ({ languages, koodiUri, ...props }) => {
         {({ value }) => {
           return (
             <>
-            <div style={{'maxWidth': '510px'}}>
+            <div>
               <Typography variant="h6" marginTop={1} marginBottom={0.25}>
                 Nimi
               </Typography>
@@ -47,9 +48,9 @@ const ContactInfoSection = ({ languages, koodiUri, ...props }) => {
                 Puhelin
               </Typography>
               <Field name="phone" component={renderInputField} placeholder="050 XXX XXXX" />
-              <div style={{'marginTop': '21px'}}>
+              <Spacing marginTop='21px'>
                 <Field name="fi" component={renderCheckboxField} />
-              </div>
+              </Spacing>
             </div>
             </>
           );

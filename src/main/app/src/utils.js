@@ -7,6 +7,7 @@ import pick from 'lodash/pick';
 import addHours from 'date-fns/add_hours';
 import formatDate from 'date-fns/format';
 import _isValidDate from 'date-fns/is_valid';
+import mapValues from 'lodash/mapValues';
 
 export const isString = value => typeof value === 'string';
 
@@ -134,4 +135,13 @@ export const toKoutaDateString = date => {
   const fixedDate = addHours(date, timezoneDifference);
 
   return formatDate(fixedDate, 'YYYY-MM-DD[T]HH:mm');
+};
+
+export const getKoodistoNimiAndKoodiUri = koodisto => {
+  return isArray(koodisto)
+    ? koodisto.map(({ metadata, koodiUri, versio }) => ({
+        koodiUri: `${koodiUri}#${versio}`,
+        nimi: mapValues(arrayToTranslationObject(metadata), ({ nimi }) => nimi),
+      }))
+    : [];
 };

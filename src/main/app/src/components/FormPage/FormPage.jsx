@@ -14,7 +14,12 @@ const StepsContainer = styled.div`
 const FooterContainer = styled.div`
   background-color: white;
   border-top: 2px solid ${getThemeProp('palette.primary.main')};
-  padding: ${({ theme }) => theme.spacing.unit * 3}px 0px;
+  padding: ${({ theme }) => theme.spacing.unit * 2}px 0px;
+  bottom: 0px;
+  position: fixed;
+  left: 0px;
+  width: 100%;
+  z-index: 99;
 `;
 
 const ContentWrapper = styled.div`
@@ -27,7 +32,9 @@ const ContentWrapper = styled.div`
 
 const FormContent = styled.div`
   background-color: #f5f5f5;
-  padding: ${({ theme }) => theme.spacing.unit * 6}px 0px;
+  padding-top: ${({ theme }) => theme.spacing.unit * 6}px
+  padding-bottom: ${({ theme, hasFooter }) =>
+    theme.spacing.unit * 6 + (hasFooter ? 50 : 0)}px;
 `;
 
 const FormPage = ({
@@ -41,7 +48,7 @@ const FormPage = ({
     <StepsContainer>
       <ContentWrapper>{steps}</ContentWrapper>
     </StepsContainer>
-    <FormContent>
+    <FormContent hasFooter={!!footer}>
       <ContentWrapper>{children}</ContentWrapper>
     </FormContent>
     <FooterContainer>

@@ -81,24 +81,30 @@ export const HAKUKOHDE_LOMAKETYYPPI_OPTIONS = [
 ];
 
 export const VALINTAPERUSTEET_KIELITAITO_OPTIONS = [
-  { value: 'yleinen_kielitutkinto', label: 'Yleinen kielitutkinto' },
-  { value: 'toefl', label: 'TOELF' },
-  { value: 'ielts', label: 'IELTS (Academic IELTS only)' },
-  { value: 'cae_cpe', label: 'CAE/CPE' },
+  { value: 'yleinen_kielitutkinto#1', label: 'Yleinen kielitutkinto' },
+  { value: 'toefl#1', label: 'TOELF' },
+  { value: 'ielts#1', label: 'IELTS (Academic IELTS only)' },
+  { value: 'cae_cpe#1', label: 'CAE/CPE' },
 ];
 
-export const VALINTAPERUSTEET_KIELITAITO_OSOITUS_OPTIONS = [
+export const VALINTAPERUSTEET_KIELITAITO_KUVAUS_OPTIONS = [
   {
-    value: 'kk_tutkinto_suomessa',
-    label: 'kk-tutkinto Suomessa (suomeksi, ruotsiksi tai englanniksi)',
+    value: 'kuullun_ymmartaminen#1',
+    label: 'Kuullun ymmärtäminen',
   },
   {
-    value: 'kk_tutkinto_eu_eta',
-    label: 'kk-tutkinto englanniksi EU/ETA-maassa',
+    value: 'luetun_ymmartaminen#1',
+    label: 'Luetun ymmärtäminen',
   },
   {
-    value: 'kk_tunkinto_muualla',
-    label:
-      'kk-tutkinto englanniksi paikan päällä suoritettuna joissain seuraavista maista: USA, Kanada, Australia, Irlanti, Uusi-Seelanti',
+    value: 'kirjoittaminen#1',
+    label: 'Kirjoittaminen',
+  },
+  {
+    value: 'puhuminen#1',
+    label: 'Puhuminen',
   },
 ];
+
+export const VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI =
+  'kielitaidonosoittaminen_04';

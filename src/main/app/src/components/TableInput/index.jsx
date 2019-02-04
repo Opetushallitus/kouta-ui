@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import get from 'lodash/get';
-import produce from 'immer';
-import set from 'lodash/set';
 
 import { isArray, isObject, isFunction } from '../../utils';
 import Flex, { FlexItem } from '../Flex';
@@ -15,6 +13,7 @@ import {
   getNumberOfColumns,
   removeRow,
   setRowHeaderStatus,
+  setColumnFieldValue,
 } from './utils';
 
 import {
@@ -172,6 +171,7 @@ const EditRow = ({
 class TableInput extends Component {
   static defaultProps = {
     onChange: () => {},
+    language: 'fi',
   };
 
   getValue() {
@@ -233,34 +233,38 @@ class TableInput extends Component {
     this.props.onChange(nextValue);
   };
 
-  makeOnColumnFieldChange = ({
-    rowIndex,
-    columnIndex,
-    field = 'text',
-  }) => e => {
-    const { onChange } = this.props;
+  makeOnColumnTextFieldChange = ({ rowIndex, columnIndex }) => e => {
+    const { onChange, language } = this.props;
     const value = this.getValue();
 
-    const nextValue = produce(value, draft => {
-      set(
-        draft,
-        ['rows', rowIndex, 'columns', columnIndex, field],
-        e.target.value,
-      );
-    });
+    onChange(
+      setColumnFieldValue({
+        value,
+        language,
+        rowIndex,
+        columnIndex,
+        field: 'text',
+        fieldValue: e.target.value,
+      }),
+    );
+  };
 
-    onChange(nextValue);
+  getColumnTextFieldValue = column => {
+    const { language } = this.props;
+
+    const path = language ? ['text', language] : ['text'];
+
+    return get(column, path) || '';
   };
 
   renderColumn = ({ column, columnIndex, rowIndex }) => {
     return (
       <Column key={`${rowIndex}.${columnIndex}`} grow={0}>
         <ColumnInput
-          value={get(column, 'text') || ''}
-          onChange={this.makeOnColumnFieldChange({
+          value={this.getColumnTextFieldValue(column)}
+          onChange={this.makeOnColumnTextFieldChange({
             rowIndex,
             columnIndex,
-            field: 'text',
           })}
         />
       </Column>
@@ -268,7 +272,7 @@ class TableInput extends Component {
   };
 
   renderRow = ({ row, index: rowIndex, isLast, numRows }) => {
-    const isHeader = !!row.header;
+    const isHeader = !!row.isHeader;
 
     return (
       <RowContainer key={rowIndex}>

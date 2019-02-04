@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import Typography from '../Typography';
 import { getThemeProp } from '../../theme';
@@ -19,6 +20,7 @@ const IconContainer = styled.div`
   margin-right: ${({ theme }) => theme.spacing.unit * 2}px;
   border: 1px solid ${getThemeProp('palette.text.primary')};
   border-radius: ${getThemeProp('shape.borderRadius')};
+  cursor: pointer;
 `;
 
 const Container = styled.div`
@@ -33,12 +35,20 @@ const TitleContainer = styled.div`
   align-items: center;
 `;
 
-const FormHeader = ({ status, children = null, editInfo = null, ...props }) => {
+const FormHeader = ({
+  status,
+  children = null,
+  editInfo = null,
+  hasHomeLink = true,
+  ...props
+}) => {
+  const homeIconProps = hasHomeLink ? { as: Link, to: '/' } : {};
+
   return (
     <Container {...props}>
       {children ? (
         <TitleContainer>
-          <IconContainer>
+          <IconContainer {...homeIconProps}>
             <HomeIcon />
           </IconContainer>
           <Typography variant="h4">{children}</Typography>

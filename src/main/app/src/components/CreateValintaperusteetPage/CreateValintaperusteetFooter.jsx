@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { isValid } from 'redux-form';
 
 import { JULKAISUTILA } from '../../constants';
+import { submit as submitValintaperusteet } from '../../state/createValintaperusteetForm';
 import Button from '../Button';
 
 const valintaperusteetFormIsValid = isValid('createValintaperusteetForm');
@@ -42,8 +43,10 @@ export default connect(
   }),
   dispatch => ({
     onSave: () => {
+      dispatch(submitValintaperusteet({ tila: JULKAISUTILA.TALLENNETTU }));
     },
     onSaveAndPublish: () => {
+      dispatch(submitValintaperusteet({ tila: JULKAISUTILA.JULKAISTU }));
     },
   }),
 )(CreateValintaperusteetFooter);

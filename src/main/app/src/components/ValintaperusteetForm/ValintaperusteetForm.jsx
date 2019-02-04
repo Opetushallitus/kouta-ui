@@ -10,7 +10,6 @@ import HakutavanRajausSection from './HakutavanRajausSection';
 import NimiSection from './NimiSection';
 import ValintatapaSection from './ValintatapaSection';
 import PohjaSection from './PohjaSection';
-import SorakuvausSection from './SorakuvausSection';
 import KielitaitovaatimuksetSection from './KielitaitovaatimuksetSection';
 
 const ActiveLanguages = formValues({
@@ -72,7 +71,7 @@ const ValintaperusteetForm = ({
 
           <FormCollapse
             header="6 Valintatapa"
-            section="valintapa"
+            section="valintatapa"
           >
             <ValintatapaSection languages={languages} />
           </FormCollapse>
@@ -82,13 +81,6 @@ const ValintaperusteetForm = ({
             section="kielitaitovaatimukset"
           >
             <KielitaitovaatimuksetSection languages={languages} />
-          </FormCollapse>
-
-          <FormCollapse
-            header="8 Sora-kuvaus"
-            section="sorakuvaus"
-          >
-            <SorakuvausSection />
           </FormCollapse>
         </FormCollapseGroup>
       )}

@@ -64,11 +64,13 @@ const renderSelectField = ({ input, options }) => (
   <Select {...input} options={options} onBlur={nop} />
 );
 
-const renderTableInputField = ({ input }) => <TableInput {...input} />;
+const renderTableInputField = ({ input, language }) => (
+  <TableInput {...input} language={language} />
+);
 
 const renderTextareaField = ({ input }) => <Textarea {...input} />;
 
-const renderTaulukotField = ({ fields }) => {
+const renderTaulukotField = ({ fields, language }) => {
   return (
     <>
       {fields.length > 0 ? (
@@ -82,6 +84,7 @@ const renderTaulukotField = ({ fields }) => {
                 <ModalController
                   modal={renderTaulukkoModal}
                   nameBase={taulukko}
+                  language={language}
                   onRemove={() => {
                     fields.remove(index);
                   }}
@@ -89,7 +92,10 @@ const renderTaulukotField = ({ fields }) => {
                 >
                   {({ onToggle }) => (
                     <TaulukkoAnchor as="span" onClick={onToggle}>
-                      {get(taulukkoField, 'otsikko') || `Taulukko ${index + 1}`}
+                      {getFirstLanguageValue(
+                        get(taulukkoField, 'otsikko'),
+                        language,
+                      ) || `Taulukko ${index + 1}`}
                     </TaulukkoAnchor>
                   )}
                 </ModalController>
@@ -139,6 +145,7 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language }) => (
         <FieldArray
           name={`${valintatapa}.taulukot`}
           component={renderTaulukotField}
+          language={language}
         />
       </Spacing>
     </Spacing>
@@ -207,7 +214,13 @@ const renderValintavat = ({ fields, tapaOptions, language }) => (
   </>
 );
 
-const renderTaulukkoModal = ({ onClose, nameBase, onRemove, ...props }) => (
+const renderTaulukkoModal = ({
+  onClose,
+  nameBase,
+  onRemove,
+  language,
+  ...props
+}) => (
   <Modal
     onClose={onClose}
     footer={
@@ -237,12 +250,16 @@ const renderTaulukkoModal = ({ onClose, nameBase, onRemove, ...props }) => (
         <Typography variant="h6" marginBottom={1}>
           Otsikko
         </Typography>
-        <Field name={`${nameBase}.otsikko`} component={renderInputField} />
+        <Field
+          name={`${nameBase}.otsikko.${language}`}
+          component={renderInputField}
+        />
       </Spacing>
       <TableInputContainer>
         <Field
           name={`${nameBase}.taulukko`}
           component={renderTableInputField}
+          language={language}
         />
       </TableInputContainer>
     </Spacing>

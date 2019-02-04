@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
+import Button from '../Button';
 import TableInput from './index';
 
 const columns = [{ text: 'Hello' }, { text: 'World' }];
+const changeAction = action('change');
 
 const value = {
   rows: [{ columns }, { columns }],
@@ -16,17 +18,45 @@ class StatefulTableInput extends Component {
 
     this.state = {
       value,
+      language: 'fi',
     };
   }
 
-  onValueChange = (value) => {
+  onValueChange = value => {
+    changeAction(value);
+
     this.setState({ value });
-  }
+  };
+
+  onLanguageChange = language => {
+    this.setState({ language });
+  };
 
   render() {
-    return <TableInput value={this.state.value} onChange={this.onValueChange} />
+    return (
+      <>
+        <TableInput
+          value={this.state.value}
+          onChange={this.onValueChange}
+          language={this.state.language}
+        />
+        <Button
+          onClick={() => {
+            this.onLanguageChange('fi');
+          }}
+        >
+          Suomeksi
+        </Button>
+        <Button
+          onClick={() => {
+            this.onLanguageChange('sv');
+          }}
+        >
+          På svenska
+        </Button>
+      </>
+    );
   }
 }
 
-storiesOf('TableInput', module)
-  .add('Basic', () => <StatefulTableInput />)
+storiesOf('TableInput', module).add('Basic', () => <StatefulTableInput />);

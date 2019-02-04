@@ -80,6 +80,25 @@ export const removeRow = ({ value, rowIndex }) => {
 
 export const setRowHeaderStatus = ({ value, rowIndex, status }) => {
   return produce(value, draft => {
-    set(draft, ['rows', rowIndex, 'header'], status);
+    set(draft, ['rows', rowIndex, 'isHeader'], status);
+  });
+};
+
+export const setColumnFieldValue = ({
+  value,
+  rowIndex,
+  columnIndex,
+  field,
+  fieldValue,
+  language,
+}) => {
+  let path = ['rows', rowIndex, 'columns', columnIndex, field];
+
+  if (language) {
+    path = [...path, language];
+  }
+
+  return produce(value, draft => {
+    set(draft, path, fieldValue);
   });
 };

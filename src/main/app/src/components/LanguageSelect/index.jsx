@@ -36,7 +36,7 @@ const getKieliOptions = memoize((kielet, language) =>
   }))
 );
 
-const LanguageSelect = ({ language = 'fi', props }) => {
+const LanguageSelect = ({ language = 'fi', ...props }) => {
   return (
     <ApiAsync promiseFn={getKielet}>
       {({ data }) => (

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Field, FieldArray } from 'redux-form';
+import get from 'lodash/get';
 
 import Typography from '../Typography';
 import Input from '../Input';
@@ -10,11 +11,36 @@ import Divider from '../Divider';
 import Button from '../Button';
 import {
   VALINTAPERUSTEET_KIELITAITO_OPTIONS,
-  VALINTAPERUSTEET_KIELITAITO_OSOITUS_OPTIONS,
+  VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI,
+  VALINTAPERUSTEET_KIELITAITO_KUVAUS_OPTIONS,
 } from '../../constants';
 import Select from '../Select';
 import Flex, { FlexItem } from '../Flex';
 import CheckboxGroup from '../CheckboxGroup';
+import Checkbox from '../Checkbox';
+import { getKoodisto } from '../../apiUtils';
+import { getKoodistoNimiAndKoodiUri, getFirstLanguageValue } from '../../utils';
+import ApiAsync from '../ApiAsync';
+
+const getKielitaitoKoodistot = async ({ apiUrls, httpClient }) => {
+  const [osoittaminen] = await Promise.all([
+    getKoodisto({
+      apiUrls,
+      httpClient,
+      koodistoUri: 'kielitaidonosoittaminen',
+    }),
+  ]);
+
+  return {
+    osoittaminen: getKoodistoNimiAndKoodiUri(osoittaminen),
+  };
+};
+
+const getKoodistoOptions = koodisto =>
+  koodisto.map(({ nimi, koodiUri }) => ({
+    value: koodiUri,
+    label: getFirstLanguageValue(nimi),
+  }));
 
 const nop = () => {};
 
@@ -32,7 +58,33 @@ const renderCheckboxGroupField = ({ input, options }) => (
   <CheckboxGroup {...input} options={options} />
 );
 
-const renderKuvauksetField = ({ fields }) => {
+const renderVaatimustyyppiField = ({
+  input,
+  label,
+  kuvausOptions,
+  vaatimus,
+  vaatimusTyyppi,
+  isLast,
+}) => {
+  const { value } = input;
+
+  return (
+    <>
+      <Checkbox {...input}>{label}</Checkbox>
+      {!!value ? (
+        <Spacing marginTop={2} marginBottom={isLast ? 0 : 2}>
+          <FieldArray
+            name={`${vaatimus}.kuvaukset.${vaatimusTyyppi}`}
+            component={renderKuvauksetField}
+            kuvausOptions={kuvausOptions}
+          />
+        </Spacing>
+      ) : null}
+    </>
+  );
+};
+
+const renderKuvauksetField = ({ fields, kuvausOptions }) => {
   return (
     <>
       {fields.map((kuvaus, index) => (
@@ -44,7 +96,7 @@ const renderKuvauksetField = ({ fields }) => {
             <Field
               name={`${kuvaus}.kuvaus`}
               component={renderSelectField}
-              options={[]}
+              options={kuvausOptions}
             />
           </FlexItem>
           <FlexItem grow={0} basis="20%">
@@ -81,52 +133,82 @@ const renderKuvauksetField = ({ fields }) => {
   );
 };
 
-const renderVaatimuksetField = ({ fields, kielitaitoOptions }) => {
+const renderVaatimuksetField = ({
+  fields,
+  kielitaitoOptions,
+  kuvausOptions,
+  osoitusOptions,
+  language,
+}) => {
   return (
     <>
-      {fields.map((vaatimus, index) => (
-        <Spacing key={index}>
-          <Spacing marginBottom={2}>
-            <Typography variant="h6" marginBottom={1}>
-              Valitse kieli
-            </Typography>
-            <Field
-              name={`${vaatimus}.kieli`}
-              component={renderLanguageSelectField}
-            />
+      {fields.map((vaatimus, index) => {
+        return (
+          <Spacing key={index}>
+            <Spacing marginBottom={2}>
+              <Typography variant="h6" marginBottom={1}>
+                Valitse kieli
+              </Typography>
+              <Field
+                name={`${vaatimus}.kieli`}
+                component={renderLanguageSelectField}
+              />
+            </Spacing>
+
+            <Flex>
+              <FlexItem grow={1}>
+                <Typography variant="h6" marginBottom={1}>
+                  Valitse vaatimustyypit
+                </Typography>
+
+                {kielitaitoOptions.map(({ value, label }, index) => (
+                  <Field
+                    key={value}
+                    name={`${vaatimus}.tyyppi.${value}`}
+                    component={renderVaatimustyyppiField}
+                    vaatimus={vaatimus}
+                    kuvausOptions={kuvausOptions}
+                    label={label}
+                    vaatimusTyyppi={value}
+                    isLast={index === kielitaitoOptions.length - 1}
+                  />
+                ))}
+              </FlexItem>
+              <FlexItem grow={0} basis="40%" paddingLeft={4}>
+                <Spacing marginBottom={2}>
+                  <Typography variant="h6" marginBottom={1}>
+                    Ehdot kielitaidon osoitukseen, tai vapautukseen
+                  </Typography>
+                  <Field
+                    name={`${vaatimus}.osoitustavat`}
+                    component={renderCheckboxGroupField}
+                    options={osoitusOptions}
+                  />
+                </Spacing>
+                <FieldArray
+                  name={`${vaatimus}.muutOsoitustavat`}
+                  component={renderMuutOsoitustavatField}
+                  language={language}
+                />
+              </FlexItem>
+            </Flex>
+
+            <Flex marginTop={2} justifyEnd>
+              <Button
+                type="button"
+                variant="outlined"
+                color="secondary"
+                onClick={() => {
+                  fields.remove(index);
+                }}
+              >
+                Poista
+              </Button>
+            </Flex>
+            <Divider marginTop={3} marginBottom={3} />
           </Spacing>
-
-          <Spacing marginBottom={2}>
-            <Typography variant="h6" marginBottom={1}>
-              Valitse vaatimustyyppi
-            </Typography>
-            <Field
-              name={`${vaatimus}.tyyppi`}
-              component={renderSelectField}
-              options={kielitaitoOptions}
-            />
-          </Spacing>
-
-          <FieldArray
-            name={`${vaatimus}.kuvaukset`}
-            component={renderKuvauksetField}
-          />
-
-          <Flex marginTop={2} justifyEnd>
-            <Button
-              type="button"
-              variant="outlined"
-              color="secondary"
-              onClick={() => {
-                fields.remove(index);
-              }}
-            >
-              Poista
-            </Button>
-          </Flex>
-          <Divider marginTop={3} marginBottom={3} />
-        </Spacing>
-      ))}
+        );
+      })}
       <Button
         type="button"
         onClick={() => {
@@ -145,8 +227,13 @@ const renderMuutOsoitustavatField = ({ fields, language }) => {
       {fields.map((tapa, index) => (
         <Flex marginBottom={2} key={index} alignEnd>
           <FlexItem grow={1}>
-            <Typography variant="h6" marginBottom={1}>Kuvaus</Typography>
-            <Field name={`${tapa}.kuvaus.${language}`} component={renderInputField} />
+            <Typography variant="h6" marginBottom={1}>
+              Kuvaus
+            </Typography>
+            <Field
+              name={`${tapa}.kuvaus.${language}`}
+              component={renderInputField}
+            />
           </FlexItem>
           <FlexItem grow={0} paddingLeft={2}>
             <Button
@@ -164,6 +251,8 @@ const renderMuutOsoitustavatField = ({ fields, language }) => {
       ))}
       <Button
         type="button"
+        color="primary"
+        variant="outlined"
         onClick={() => {
           fields.push({});
         }}
@@ -178,32 +267,29 @@ const KielitaitovaatimuksetSection = ({ languages }) => {
   return (
     <LanguageSelector languages={languages} defaultValue="fi">
       {({ value: activeLanguage }) => (
-        <Flex>
-          <FlexItem grow={1}>
-            <FieldArray
-              name="kielet"
-              component={renderVaatimuksetField}
-              kielitaitoOptions={VALINTAPERUSTEET_KIELITAITO_OPTIONS}
-            />
-          </FlexItem>
-          <FlexItem grow={0} basis="40%" paddingLeft={4}>
-            <Spacing marginBottom={2}>
-              <Typography variant="h6" marginBottom={1}>
-                Ehdot kielitaidon osoitukseen, tai vapautukseen
-              </Typography>
-              <Field
-                name="osoitustavat"
-                component={renderCheckboxGroupField}
-                options={VALINTAPERUSTEET_KIELITAITO_OSOITUS_OPTIONS}
+        <ApiAsync promiseFn={getKielitaitoKoodistot}>
+          {({ data }) => {
+            const osoitusOptions = getKoodistoOptions(
+              get(data, 'osoittaminen') || [],
+            ).filter(
+              ({ value }) =>
+                !new RegExp(
+                  `^${VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI}`,
+                ).test(value),
+            );
+
+            return (
+              <FieldArray
+                name="kielet"
+                component={renderVaatimuksetField}
+                kielitaitoOptions={VALINTAPERUSTEET_KIELITAITO_OPTIONS}
+                kuvausOptions={VALINTAPERUSTEET_KIELITAITO_KUVAUS_OPTIONS}
+                osoitusOptions={osoitusOptions}
+                language={activeLanguage}
               />
-            </Spacing>
-            <FieldArray
-              name="muutOsoitustavat"
-              component={renderMuutOsoitustavatField}
-              language={activeLanguage}
-            />
-          </FlexItem>
-        </Flex>
+            );
+          }}
+        </ApiAsync>
       )}
     </LanguageSelector>
   );

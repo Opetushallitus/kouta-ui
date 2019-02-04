@@ -1,12 +1,14 @@
 import { getFormValues } from 'redux-form';
 import get from 'lodash/get';
 import toPairs from 'lodash/toPairs';
+import produce from 'immer';
 
 import {
   JULKAISUTILA,
   VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI,
 } from '../../constants';
 import { createTemporaryToast } from '../toaster';
+import { isObject } from '../../utils';
 
 const getValintaperusteetFormValues = getFormValues(
   'createValintaperusteetForm',
@@ -18,6 +20,22 @@ const getOidsFromPathname = pathname => {
   return {
     organisaatioOid: split[1],
   };
+};
+
+const getTaulukkoWithIndexes = taulukko => {
+  return produce(taulukko, draft => {
+    (draft.rows || []).forEach((row, rowIndex) => {
+      if (isObject(row)) {
+        row.index = rowIndex;
+
+        (row.columns || []).forEach((column, columnIndex) => {
+          if (isObject(column)) {
+            column.index = columnIndex;
+          }
+        });
+      }
+    });
+  });
 };
 
 export const saveValintaperusteet = valintaperusteet => (
@@ -67,7 +85,10 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
     }) => ({
       kuvaus,
       valintapaKoodiUri: get(tapa, 'value'),
-      taulukot: taulukot || [],
+      taulukot: (taulukot || []).map(({ taulukko, otsikko }) => ({
+        nimi: otsikko,
+        ...getTaulukkoWithIndexes(taulukko),
+      })),
       kaytaMuuntotaulukkoa: false,
       kynnysehto,
       enimmaispisteet: enimmaispistemaara,
@@ -112,6 +133,7 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   const valintaperusteet = {
     tila,
     muokkaaja,
+    kielivalinta,
     organisaatioOid,
     hakutapaKoodiUri,
     kohdejoukkoKoodiUri,

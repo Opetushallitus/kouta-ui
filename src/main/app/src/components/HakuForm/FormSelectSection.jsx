@@ -31,6 +31,10 @@ const ButtonContainer = styled.div`
   float: right;
 `;
 
+const ShowLomakeButton = styled(Button)`
+  margin-right: ${({ theme }) => theme.spacing.unit * 2}px;
+`;
+
 const renderBaseDropdownField = ({ input }) => (
     <RadioGroup style={{'display': 'inline-block'}} {...input}>
       <Radio value="a">Käytetään hakemuspalvelun lomaketta</Radio>
@@ -47,7 +51,7 @@ const FormSelectSection = ({ languages, koodiUri, ...props }) => {
       {({ value }) => {
         return (
           <>
-            <Spacing marginRight='30px'>
+            <Spacing marginRight={4}>
               <RadioFieldContainer>
                 <div> 
                   <Typography>Valitse mitä hakulomaketta käytetään</Typography>
@@ -55,7 +59,7 @@ const FormSelectSection = ({ languages, koodiUri, ...props }) => {
                 <Field name="base" component={renderBaseDropdownField} />
               </RadioFieldContainer>
               <DropdownContainer>
-                <Typography style={{'paddingLeft': '23px'}}>Valitse hakulomake</Typography>
+                <Typography paddingLeft={3}>Valitse hakulomake</Typography>
                 <SelectionContainer>
                   <Field
                     name="education"
@@ -64,14 +68,14 @@ const FormSelectSection = ({ languages, koodiUri, ...props }) => {
                   />
                 </SelectionContainer>
                 <ButtonContainer>
-                  <Button style={{'marginRight': '20px'}} type="button" variant="outlined">
-                    Näytä lomake
-                  </Button>
+                    <ShowLomakeButton type="button" variant="outlined">
+                      Näytä lomake
+                    </ShowLomakeButton>
                   <Button type="button" variant="outlined">
                     Muokkaa lomaketta
                   </Button>
                 </ButtonContainer>
-              </DropdownContainer>
+              </DropdownContainer> 
             </Spacing>
           </>
           );

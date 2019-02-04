@@ -48,7 +48,7 @@ const ContactInfoSection = ({ languages, koodiUri, ...props }) => {
                 Puhelin
               </Typography>
               <Field name="phone" component={renderInputField} placeholder="050 XXX XXXX" />
-              <Spacing marginTop='21px'>
+              <Spacing marginTop={3}>
                 <Field name="fi" component={renderCheckboxField} />
               </Spacing>
             </div>

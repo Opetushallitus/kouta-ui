@@ -7,11 +7,8 @@ import Radio, { RadioGroup } from '../Radio';
 import Select from '../Select';
 import Button from '../Button';
 import LanguageSelector from '../LanguageSelector';
-<<<<<<< HEAD
-import Spacing from '../Spacing';
-=======
 import Select from '../Select';
->>>>>>> fixed content
+import Spacing from '../Spacing';
 
 const SelectionContainer = styled.div`
   flex: 1;

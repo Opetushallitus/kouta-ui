@@ -283,7 +283,7 @@ const ScheduleSection = props => {
             Koulutuksen alkamiskausi
           </HeaderColum>
         </HeaderWrapper>
-        <Spacing marginRight="30px">
+        <Spacing marginRight={4}>
           <ApiAsync promiseFn={getHakukaudet}>
             {({ data }) => (
               <>

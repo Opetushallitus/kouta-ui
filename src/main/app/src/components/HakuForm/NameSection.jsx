@@ -1,9 +1,15 @@
 import React from 'react';
 import { Field } from 'redux-form';
+import styled from 'styled-components';
 
 import Typography from '../Typography';
 import LanguageSelector from '../LanguageSelector';
 import Input from '../Input'
+import { getThemeProp } from '../../theme';
+
+const Notification = styled(Typography)`
+  color: ${getThemeProp('palette.primary.main')};
+`;
 
 const renderInputField = ({ input}) => {
   const { onChange, value } = input;
@@ -19,14 +25,14 @@ const NameSection = ({ languages, ...props }) => {
         {({ value }) => {
           return (
             <>
-              <div style={{'maxWidth': '510px'}}>
+              <div>
                 <Typography variant="h6" marginBottom={1}>
                   Anna haulle nimi
                 </Typography>
                 <Field name="name" component={renderInputField} />
-                <Typography variant="h6" marginTop={1.375} style={{'color': '#1e7998'}}>
+                <Notification variant="h6" marginTop={1.375}>
                   Huom! Tämä teksti näkyy oppijalle Opintopolun sivuilla
-                </Typography>
+                </Notification>
               </div>
             </>
           );

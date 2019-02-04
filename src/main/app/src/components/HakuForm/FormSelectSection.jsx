@@ -7,11 +7,28 @@ import Radio, { RadioGroup } from '../Radio';
 import Select from '../Select';
 import Button from '../Button';
 import LanguageSelector from '../LanguageSelector';
-import Select from '../Select';
+import Spacing from '../Spacing';
 
 const SelectionContainer = styled.div`
   flex: 1;
   padding-left: ${({ theme }) => theme.spacing.unit * 3}px;
+`;
+
+const RadioFieldContainer = styled.div`
+  width: 350px;
+  border-right: solid 1px #979797;
+  display: inline-block;
+`;
+
+const DropdownContainer = styled.div`
+  display: inline-block;
+  vertical-align: top;
+`;
+
+const ButtonContainer = styled.div`
+  margin-left: 23px;
+  margin-top: 11px;
+  float: right;
 `;
 
 const renderBaseDropdownField = ({ input }) => (
@@ -30,32 +47,32 @@ const FormSelectSection = ({ languages, koodiUri, ...props }) => {
       {({ value }) => {
         return (
           <>
-            <div style={{'display': 'block', 'marginRight': '30px'}}>
-              <div style={{'width': '350px', 'borderRight': 'solid 1px #979797', 'display': 'inline-block'}}>
-                <div>
+            <Spacing marginRight='30px'>
+              <RadioFieldContainer>
+                <div> 
                   <Typography>Valitse mitä hakulomaketta käytetään</Typography>
                 </div>
                 <Field name="base" component={renderBaseDropdownField} />
-              </div>
-              <div style={{'display': 'inline-block', 'verticalAlign': 'top'}}>
-              <Typography style={{'paddingLeft': '23px'}}>Valitse hakulomake</Typography>
-              <SelectionContainer>
-                <Field
-                  name="education"
-                  options={[{ label: 'testi lomake 1', value: '1' }, { label: 'testi lomake 2', value: '2' }]}
-                  component={renderLomakeSelectionField}
-                />
-              </SelectionContainer>
-              <div style={{'marginLeft': '23px', 'marginTop': '11px', 'float': 'right'}}>
-              <Button style={{'marginRight': '20px'}} type="button" variant="outlined">
-                Näytä lomake
-              </Button>
-              <Button type="button" variant="outlined">
-                Muokkaa lomaketta
-              </Button>
-              </div>
-            </div>
-            </div>
+              </RadioFieldContainer>
+              <DropdownContainer>
+                <Typography style={{'paddingLeft': '23px'}}>Valitse hakulomake</Typography>
+                <SelectionContainer>
+                  <Field
+                    name="education"
+                    options={[{ label: 'testi lomake 1', value: '1' }, { label: 'testi lomake 2', value: '2' }]}
+                    component={renderLomakeSelectionField}
+                  />
+                </SelectionContainer>
+                <ButtonContainer>
+                  <Button style={{'marginRight': '20px'}} type="button" variant="outlined">
+                    Näytä lomake
+                  </Button>
+                  <Button type="button" variant="outlined">
+                    Muokkaa lomaketta
+                  </Button>
+                </ButtonContainer>
+              </DropdownContainer>
+            </Spacing>
           </>
           );
         }}

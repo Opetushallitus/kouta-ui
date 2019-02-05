@@ -317,14 +317,14 @@ const ScheduleSection = props => {
         </HeaderWrapper>
         <HakuDateTimeWrapper>
           <HakuDateSecondContainer>
-            <Field name="lisääminen/peruminen.pvm"
+            <Field name="liittäminen_pvm"
                     placeholder="pp.kk.vvvv"
                     component={renderInputMaskField}
                     mask="99.99.9999" />
           </HakuDateSecondContainer>
           <EventIcon type="event" />
           <HakuTimeSecondContainer>
-            <Field name="lisääminen/peruminen.aika"
+            <Field name="liittäminen_aika"
                     placeholder="tt:mm"
                     component={renderInputMaskField}
                     mask="99:99" />
@@ -340,14 +340,14 @@ const ScheduleSection = props => {
         </HeaderWrapper>
         <HakuDateTimeWrapper>
           <HakuDateSecondContainer>
-            <Field name="muokkaus.pvm"
+            <Field name="muokkaus_pvm"
                     placeholder="pp.kk.vvvv"
                     component={renderInputMaskField}
                     mask="99.99.9999" />
           </HakuDateSecondContainer>
           <EventIcon type="event" />
           <HakuTimeSecondContainer>
-            <Field name="muokkaus.aika"
+            <Field name="muokkaus_aika"
                     placeholder="tt:mm"
                     component={renderInputMaskField}
                     mask="99:99" />

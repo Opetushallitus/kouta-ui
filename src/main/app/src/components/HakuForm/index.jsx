@@ -3,7 +3,7 @@ import { FormSection, formValues } from 'redux-form';
 import styled from 'styled-components';
 
 import BaseSelectionSection from './BaseSelectionSection';
-import LanguageSection from './LanguageSection';
+import KieliversiotFormSection from '../KieliversiotFormSection';
 import Collapse from '../Collapse';
 import Button from '../Button';
 import FormStepper from '../FormStepper';
@@ -92,7 +92,7 @@ const HakuFormBase = ({
         <>
           <FormCollapse
             header="1 Pohjan valinta"
-            section="type"
+            section="pohja"
             {...getStepCollapseProps(0)}
           >
             <BaseSelectionSection />
@@ -100,15 +100,15 @@ const HakuFormBase = ({
 
           <FormCollapse
             header="2 Kieliversiot"
-            section="language"
+            section="kieliversiot"
             {...getStepCollapseProps(1)}
           >
-            <LanguageSection />
+            <KieliversiotFormSection />
           </FormCollapse>
 
           <FormCollapse
             header="3 Haun nimi"
-            section="name"
+            section="nimi"
             {...getStepCollapseProps(2)}
           >
             <NameSection languages={languages} />
@@ -116,7 +116,7 @@ const HakuFormBase = ({
 
           <FormCollapse
             header="4 Haun kohdejoukko"
-            section="targetgroup"
+            section="kohdejoukko"
             {...getStepCollapseProps(3)}
           >
             <TargetGroupSection />
@@ -124,7 +124,7 @@ const HakuFormBase = ({
 
           <FormCollapse
             header="5 Haukutapa"
-            section="searchtype"
+            section="hakutapa"
             {...getStepCollapseProps(4)}
           >
             <SearchTypeSection />
@@ -132,7 +132,7 @@ const HakuFormBase = ({
 
           <FormCollapse
             header="6 Haun aikataulut"
-            section="schedule"
+            section="aikataulut"
             {...getStepCollapseProps(5)}
           >
             <ScheduleSection />
@@ -140,7 +140,7 @@ const HakuFormBase = ({
 
           <FormCollapse
             header="7 Hakulomakkeen valinta"
-            section="formselect"
+            section="hakulomake"
             {...getStepCollapseProps(6)}
           >
             <FormSelectSection languages={languages} />
@@ -148,7 +148,7 @@ const HakuFormBase = ({
 
           <FormCollapse
             header="8 Haun yhteystiedot"
-            section="contactinfo"
+            section="yhteystiedot"
             {...getStepCollapseProps(7)}
           >
             <ContactInfoSection languages={languages} />

@@ -19,11 +19,11 @@ const HeaderToggle = styled.div`
   align-items: center;
   min-height: 3rem;
   padding: 0px ${({ theme }) => theme.spacing.unit * 2}px;
+  cursor: pointer;
 `;
 
 const HeaderContainer = styled.div`
   display: flex;
-  cursor: pointer;
 
   ${({ open }) =>
     open &&
@@ -38,9 +38,17 @@ const HeaderContent = styled.div`
   flex: 1;
   background-color: white;
 
-  ${({ active }) => active && css`
-    background-color: ${getThemeProp('palette.primary.light')};
-  `}
+  ${({ toggleOnHeaderClick }) =>
+    toggleOnHeaderClick &&
+    css`
+      cursor: pointer;
+    `}
+
+  ${({ active }) =>
+    active &&
+    css`
+      background-color: ${getThemeProp('palette.primary.light')};
+    `}
 `;
 
 const FooterContainer = styled.div`
@@ -77,6 +85,8 @@ const getIconType = open => {
   return open ? 'expand_less' : 'expand_more';
 };
 
+const nop = () => {};
+
 const Collapse = ({
   header = null,
   footer = null,
@@ -84,12 +94,19 @@ const Collapse = ({
   open = false,
   active = false,
   onToggle = () => {},
+  toggleOnHeaderClick = true,
   ...props
 }) => (
   <Container {...props}>
-    <HeaderContainer open={open} onClick={onToggle}>
-      <HeaderContent active={active}>{renderHeader(header)}</HeaderContent>
-      <HeaderToggle>
+    <HeaderContainer open={open}>
+      <HeaderContent
+        toggleOnHeaderClick={toggleOnHeaderClick}
+        onClick={toggleOnHeaderClick ? onToggle : nop}
+        active={active}
+      >
+        {renderHeader(header)}
+      </HeaderContent>
+      <HeaderToggle onClick={onToggle}>
         <ToggleIcon type={getIconType(open)} />
       </HeaderToggle>
     </HeaderContainer>

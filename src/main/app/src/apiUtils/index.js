@@ -451,3 +451,29 @@ export const getKoutaHaut = async ({
 
   return data;
 };
+
+const memoizedGetKayttajanOrganisaatiot = memoize(
+  async (httpClient, apiUrls, oid) => {
+    return Promise.all([
+      getOrganisaatioByOid({
+        oid: '1.2.246.562.10.594252633210',
+        httpClient,
+        apiUrls,
+      }),
+      getOrganisaatioByOid({
+        oid: '1.2.246.562.10.67476956288',
+        httpClient,
+        apiUrls,
+      }),
+    ]);
+  },
+  { promise: true },
+);
+
+export const getKayttajanOrganisaatiot = async ({
+  oid,
+  httpClient,
+  apiUrls,
+}) => {
+  return memoizedGetKayttajanOrganisaatiot(httpClient, apiUrls, oid);
+};

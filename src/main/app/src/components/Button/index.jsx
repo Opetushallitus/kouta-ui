@@ -69,6 +69,8 @@ const ButtonBase = styled.button`
   border: 2px solid;
   line-height: 1.5;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
 
   ${getVariantCss}
 

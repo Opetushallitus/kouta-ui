@@ -3,6 +3,6 @@
   "name": "Kouta UI",
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#e0f2fd",
   "background_color": "#ffffff"
 }

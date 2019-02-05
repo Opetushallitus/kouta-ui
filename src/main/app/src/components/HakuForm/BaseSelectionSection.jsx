@@ -80,7 +80,7 @@ const BaseSelectionSection = props => {
                   Valitse koulutus
                 </Typography>
                 <Field
-                  name="education"
+                  name="koulutus"
                   options={[{ label: 'Koulutus 1', value: 'koulutus_1' }]}
                   component={renderEducationSelectionField}
                 />

@@ -55,13 +55,13 @@ const FormSelectSection = ({ languages, koodiUri, ...props }) => {
                 <div> 
                   <Typography>Valitse mitä hakulomaketta käytetään</Typography>
                 </div>
-                <Field name="base" component={renderBaseDropdownField} />
+                <Field name="lomaketyyppi" component={renderBaseDropdownField} />
               </RadioFieldContainer>
               <DropdownContainer>
                 <Typography paddingLeft={3}>Valitse hakulomake</Typography>
                 <SelectionContainer>
                   <Field
-                    name="education"
+                    name="lomake"
                     options={[{ label: 'testi lomake 1', value: '1' }, { label: 'testi lomake 2', value: '2' }]}
                     component={renderLomakeSelectionField}
                   />

@@ -55,7 +55,7 @@ const TargetGroupSection = () => {
               Valitse hakutapa
             </Typography>
             {isArray(data) ? (
-            <Field name="type" component={renderRadioGroupField} options={getHakutapaOptions(data)} />
+            <Field name="tapa" component={renderRadioGroupField} options={getHakutapaOptions(data)} />
             ) : null}
           </Spacing>
           </>

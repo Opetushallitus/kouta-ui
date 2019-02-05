@@ -29,7 +29,7 @@ const NameSection = ({ languages, ...props }) => {
                 <Typography variant="h6" marginBottom={1}>
                   Anna haulle nimi
                 </Typography>
-                <Field name="name" component={renderInputField} />
+                <Field name="nimi" component={renderInputField} />
                 <Notification variant="h6" marginTop={1.375}>
                   Huom! Tämä teksti näkyy oppijalle Opintopolun sivuilla
                 </Notification>

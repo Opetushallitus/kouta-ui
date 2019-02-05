@@ -55,7 +55,7 @@ const TargetGroupSection = () => {
               Haun kohdejoukko
             </Typography>
             {isArray(data) ? (
-            <Field name="type" component={renderRadioGroupField} options={getKohdejoukkoOptions(data)} />
+            <Field name="kohde" component={renderRadioGroupField} options={getKohdejoukkoOptions(data)} />
             ) : null}
           </Spacing>
           </>

@@ -1,14 +1,8 @@
 import { getFormValues } from 'redux-form';
-import get from 'lodash/get';
-import toPairs from 'lodash/toPairs';
-import produce from 'immer';
 
-import {
-  JULKAISUTILA,
-  VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI,
-} from '../../constants';
+import { JULKAISUTILA } from '../../constants';
 import { createTemporaryToast } from '../toaster';
-import { isObject } from '../../utils';
+import { getValintaperusteetByValues } from './utils';
 
 const getValintaperusteetFormValues = getFormValues(
   'createValintaperusteetForm',
@@ -20,22 +14,6 @@ const getOidsFromPathname = pathname => {
   return {
     organisaatioOid: split[1],
   };
-};
-
-const getTaulukkoWithIndexes = taulukko => {
-  return produce(taulukko, draft => {
-    (draft.rows || []).forEach((row, rowIndex) => {
-      if (isObject(row)) {
-        row.index = rowIndex;
-
-        (row.columns || []).forEach((column, columnIndex) => {
-          if (isObject(column)) {
-            column.index = columnIndex;
-          }
-        });
-      }
-    });
-  });
 };
 
 export const saveValintaperusteet = valintaperusteet => (
@@ -57,91 +35,19 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   const state = getState();
   const values = getValintaperusteetFormValues(state);
 
+  const valintaperusteetFormData = getValintaperusteetByValues(values);
+
   const {
     me: { kayttajaOid: muokkaaja },
   } = state;
 
   const { organisaatioOid } = getOidsFromPathname(history.location.pathname);
 
-  const hakutapaKoodiUri = get(values, 'hakutavanRajaus.hakutapa');
-
-  const kielivalinta = get(values, 'kieliversiot.languages') || [];
-
-  const kohdejoukkoKoodiUri = get(
-    values,
-    'kohdejoukonRajaus.kohdejoukko.value',
-  );
-
-  const nimi = get(values, 'nimi.nimi');
-
-  const valintavat = (get(values, 'valintatapa.valintatavat') || []).map(
-    ({
-      tapa,
-      kuvaus,
-      taulukot,
-      kynnysehto,
-      enimmaispistemaara,
-      vahimmaispistemaara,
-    }) => ({
-      kuvaus,
-      valintapaKoodiUri: get(tapa, 'value'),
-      taulukot: (taulukot || []).map(({ taulukko, otsikko }) => ({
-        nimi: otsikko,
-        ...getTaulukkoWithIndexes(taulukko),
-      })),
-      kaytaMuuntotaulukkoa: false,
-      kynnysehto,
-      enimmaispisteet: enimmaispistemaara,
-      vahimmaispiteet: vahimmaispistemaara,
-    }),
-  );
-
-  const kielitaitovaatimukset = (
-    get(values, 'kielitaitovaatimukset.kielet') || []
-  ).map(({ kieli, tyyppi, kuvaukset, osoitustavat, muutOsoitustavat }) => {
-    const activeTyypit = toPairs(tyyppi || {})
-      .filter(([uri, value]) => !!value)
-      .map(([uri]) => uri);
-
-    const vaatimukset = activeTyypit.map(kielitaitovaatimusKoodiUri => ({
-      kielitaitovaatimusKoodiUri,
-      kielitaitovaatimusKuvaukset: (
-        get(kuvaukset, kielitaitovaatimusKoodiUri) || []
-      ).map(({ kuvaus, taso }) => ({
-        kielitaitovaatimusTaso: taso,
-        kielitaitovaatimusKuvausKoodiUri: get(kuvaus, 'value'),
-      })),
-    }));
-
-    return {
-      kielivalinta,
-      kieliKoodiUri: get(kieli, 'value'),
-      vaatimukset,
-      kielitaidonVoiOsoittaa: [
-        ...(osoitustavat || []).map(kielitaitoKoodiUri => ({
-          kielitaitoKoodiUri,
-          lisatieto: {},
-        })),
-        ...(muutOsoitustavat || []).map(({ kuvaus }) => ({
-          kielitaitoKoodiUri: `${VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI}#1`,
-          lisatieto: kuvaus,
-        })),
-      ],
-    };
-  });
-
   const valintaperusteet = {
     tila,
     muokkaaja,
-    kielivalinta,
     organisaatioOid,
-    hakutapaKoodiUri,
-    kohdejoukkoKoodiUri,
-    nimi,
-    metadata: {
-      valintavat,
-      kielitaitovaatimukset,
-    },
+    ...valintaperusteetFormData,
   };
 
   try {

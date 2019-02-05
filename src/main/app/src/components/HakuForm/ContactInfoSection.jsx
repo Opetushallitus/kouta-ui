@@ -35,11 +35,11 @@ const ContactInfoSection = ({ languages, koodiUri, ...props }) => {
               <Typography variant="h6" marginTop={1} marginBottom={0.25}>
                 Nimi
               </Typography>
-              <Field name="name" component={renderInputField} placeholder="Kaija Koulutus" />
+              <Field name="nimi" component={renderInputField} placeholder="Kaija Koulutus" />
               <Typography variant="h6" marginTop={1} marginBottom={0.25}>
                 Titteli
               </Typography>
-              <Field name="title" component={renderInputField} placeholder="Opinto-ohjaaja" />
+              <Field name="titteli" component={renderInputField} placeholder="Opinto-ohjaaja" />
               <Typography variant="h6" marginTop={1} marginBottom={0.25}>
                 Sähköposti
               </Typography>
@@ -47,7 +47,7 @@ const ContactInfoSection = ({ languages, koodiUri, ...props }) => {
               <Typography variant="h6" marginTop={1} marginBottom={0.25}>
                 Puhelin
               </Typography>
-              <Field name="phone" component={renderInputField} placeholder="050 XXX XXXX" />
+              <Field name="puhelin" component={renderInputField} placeholder="050 XXX XXXX" />
               <Spacing marginTop={3}>
                 <Field name="fi" component={renderCheckboxField} />
               </Spacing>

@@ -1,9 +1,0 @@
-export const STATE_ENTRY_LIST = 'STATE_ENTRY_LIST';
-export const STATE_ENTRY_OPTIONS = 'STATE_ENTRY_OPTIONS';
-export const STATE_MODE = 'STATE_MODE';
-export const STATE_MODE_OPTIONS = 'STATE_MODE_OPTIONS';
-export const STATE_ENTRY = 'STATE_ENTRY';
-export const EVENT_ENTRY = 'EVENT_ENTRY';
-export const EVENT_MODE = 'EVENT_MODE';
-
-

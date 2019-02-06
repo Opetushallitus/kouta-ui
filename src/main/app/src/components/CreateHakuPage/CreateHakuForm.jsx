@@ -8,6 +8,7 @@ export default compose(
     steps: true,
    // initialValues: getInitialValues({ organisaatio }),
 
+
   })),
   reduxForm({
     form: 'createHakuForm',

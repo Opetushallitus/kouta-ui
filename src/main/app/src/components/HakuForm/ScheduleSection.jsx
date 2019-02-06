@@ -161,7 +161,7 @@ const renderInputMaskField = ({ input, ...props }) => (
 );
 
 const renderHakuajatFields = ({ fields }) => {
-  if(fields.length == 0){
+  if(fields.length === 0){
     fields.push({})
   }
   return (

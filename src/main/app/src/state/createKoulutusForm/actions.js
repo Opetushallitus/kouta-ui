@@ -1,9 +1,10 @@
-import { getFormValues } from 'redux-form';
+import { getFormValues, initialize } from 'redux-form';
 import get from 'lodash/get';
 
 import { JULKAISUTILA } from '../../constants';
-import { getKoulutusByKoodi } from '../../apiUtils';
+import { getKoulutusByKoodi, getKoutaKoulutusByOid } from '../../apiUtils';
 import { createTemporaryToast } from '../toaster';
+import { getKoulutusByValues, getValuesByKoulutus } from './utils';
 
 const getKoulutusFormValues = getFormValues('createKoulutusForm');
 
@@ -37,16 +38,10 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
     me: { kayttajaOid },
   } = state;
 
-  const kielivalinta = Object.keys(values.language).filter(
-    key => !!values.language[key],
-  );
-
-  const tarjoajat = get(values, 'organization.organizations') || null;
-  const koulutusKoodiUri = get(values, 'information.koulutus.value') || null;
-  const koulutustyyppi = get(values, 'type.type') || null;
+  const koulutusFormData = getKoulutusByValues(values);
 
   const { nimi = null } = await getKoulutusByKoodi({
-    koodiUri: koulutusKoodiUri,
+    koodiUri: koulutusFormData.koulutusKoodiUri,
     httpClient,
     apiUrls,
   });
@@ -54,13 +49,10 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   const koulutus = {
     organisaatioOid,
     muokkaaja: kayttajaOid,
-    kielivalinta,
     tila,
-    tarjoajat,
-    koulutusKoodiUri,
     nimi,
     johtaaTutkintoon: true,
-    koulutustyyppi,
+    ...koulutusFormData,
   };
 
   const { data: koulutusData } = await dispatch(saveKoulutus(koulutus));
@@ -81,4 +73,20 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   } else {
     history.push('/');
   }
+};
+
+export const copy = koulutusOid => async (
+  dispatch,
+  getState,
+  { apiUrls, httpClient },
+) => {
+  const koulutus = await getKoutaKoulutusByOid({
+    oid: koulutusOid,
+    httpClient,
+    apiUrls,
+  });
+
+  return dispatch(
+    initialize('createKoulutusForm', getValuesByKoulutus(koulutus)),
+  );
 };

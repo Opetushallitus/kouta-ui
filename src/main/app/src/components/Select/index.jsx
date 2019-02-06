@@ -6,6 +6,9 @@ import ReactAsyncSelect from 'react-select/lib/Async';
 import { withTheme } from 'styled-components';
 import { setLightness } from 'polished';
 import memoize from 'memoizee';
+import get from 'lodash/get';
+
+import { isArray } from '../../utils';
 
 const getStyles = memoize(theme => ({
   container: provided => ({
@@ -49,8 +52,18 @@ const getDefaultProps = memoize(theme => ({
   theme: getTheme(theme),
 }));
 
-const Select = ({ theme, ...props }) => {
-  return <ReactSelect {...getDefaultProps(theme)} {...props} />;
+const getValue = memoize((value, options) => {
+  if (get(value, 'value') && !get(value, 'label') && isArray(options)) {
+    return options.find(option => get(option, 'value') === value.value) || null;
+  }
+
+  return value;
+});
+
+const Select = ({ theme, value, options, ...props }) => {
+  const resolvedValue = getValue(value, options);
+
+  return <ReactSelect {...getDefaultProps(theme)} value={resolvedValue} options={options} {...props} />;
 };
 
 const CreatableBase = ({ theme, ...props }) => (

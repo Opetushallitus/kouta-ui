@@ -329,3 +329,18 @@ export const getKoutaValintaperusteet = async ({
 
   return data;
 };
+
+export const getKoutaKoulutukset = async ({
+  organisaatioOid,
+  httpClient,
+  apiUrls,
+}) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-backend.koulutus-list'),
+    {
+      params: { organisaatioOid },
+    },
+  );
+
+  return data;
+};

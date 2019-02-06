@@ -13,28 +13,21 @@ import {
 } from '../Dropdown';
 
 import Typography from '../Typography';
-import Select, { Option } from '../NativeSelect';
-
-const ContentContainer = styled.div`
-  display: flex;
-`;
-
-const DropdownContainer = styled.div`
-  flex: 0;
-`;
-
-const SelectionContainer = styled.div`
-  flex: 1;
-  padding-left: ${({ theme }) => theme.spacing.unit * 3}px;
-`;
+import Select from '../Select';
+import ApiAsync from '../ApiAsync';
+import { getKoutaKoulutukset } from '../../apiUtils';
+import Flex, { FlexItem } from '../Flex';
+import Spacing from '../Spacing';
+import { getFirstLanguageValue } from '../../utils';
 
 const DropdownButton = styled(Button)`
   display: inline-flex;
 `;
 
-const BaseFieldValue = formValues({
+const BaseAndEducationFieldValue = formValues({
   base: 'base',
-})(({ base, children }) => children({ base }));
+  education: 'education',
+})(({ base, education, children }) => children({ base, education }));
 
 const renderBaseDropdownField = ({ input, onContinue }) => {
   const { onChange } = input;
@@ -43,17 +36,16 @@ const renderBaseDropdownField = ({ input, onContinue }) => {
     <UncontrolledDropdown
       overlay={
         <DropdownMenu>
-          <DropdownMenuItem onClick={() => {
-            onChange('new_koulutus');
-            onContinue();
-          }}>
+          <DropdownMenuItem
+            onClick={() => {
+              onChange('new_koulutus');
+              onContinue();
+            }}
+          >
             Luo uusi koulutus
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => onChange('copy_koulutus')}>
             Kopio pohjaksi aiemmin luotu koulutus
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => onChange('existing_koulutus')}>
-            Käytä olemassa olevaa koulutusta
           </DropdownMenuItem>
         </DropdownMenu>
       }
@@ -68,41 +60,74 @@ const renderBaseDropdownField = ({ input, onContinue }) => {
   );
 };
 
-const renderEducationSelectionField = ({ options = [], input }) => (
-  <Select {...input}>
-    {options.map(({ label, value }) => (
-      <Option value={value} key={value}>
-        {label}
-      </Option>
-    ))}
-  </Select>
+const nop = () => {};
+
+const renderSelectField = ({ options = [], input }) => (
+  <Select {...input} options={options} onBlur={nop} />
 );
 
-const BaseSelectionSection = ({ onContinue }) => {
+const getKoulutusOptions = koulutukset => {
+  return koulutukset.map(({ nimi, oid }) => ({
+    value: oid,
+    label: getFirstLanguageValue(nimi),
+  }));
+};
+
+const BaseSelectionSection = ({ onContinue, organisaatioOid, onCopy }) => {
   return (
-    <ContentContainer>
-      <DropdownContainer>
-        <Field name="base" component={renderBaseDropdownField} onContinue={onContinue} />
-      </DropdownContainer>
-      <SelectionContainer>
-        <BaseFieldValue>
-          {({ base }) =>
-            ['copy_koulutus', 'existing_koulutus'].includes(base) ? (
-              <>
-                <Typography variant="h6" marginBottom={1}>
-                  Valitse koulutus
-                </Typography>
-                <Field
-                  name="education"
-                  options={[{ label: 'Koulutus 1', value: 'koulutus_1' }]}
-                  component={renderEducationSelectionField}
-                />
-              </>
-            ) : null
-          }
-        </BaseFieldValue>
-      </SelectionContainer>
-    </ContentContainer>
+    <ApiAsync
+      promiseFn={getKoutaKoulutukset}
+      organisaatioOid={organisaatioOid}
+      watch={organisaatioOid}
+    >
+      {({ data: koulutukset }) => (
+        <Flex>
+          <FlexItem grow={0}>
+            <Field
+              name="base"
+              component={renderBaseDropdownField}
+              onContinue={onContinue}
+            />
+          </FlexItem>
+          <FlexItem grow={1} paddingLeft={3}>
+            <BaseAndEducationFieldValue>
+              {({ base, education }) =>
+                ['copy_koulutus'].includes(base) ? (
+                  <>
+                    <Spacing marginBottom={2}>
+                      <Typography variant="h6" marginBottom={1}>
+                        Valitse koulutus
+                      </Typography>
+                      <Field
+                        name="education"
+                        options={getKoulutusOptions(koulutukset || [])}
+                        component={renderSelectField}
+                      />
+                    </Spacing>
+                    <Button
+                      type="button"
+                      disabled={!education}
+                      onClick={
+                        education
+                          ? () => {
+                              onCopy(education.value);
+                              onContinue();
+                            }
+                          : nop
+                      }
+                      color="primary"
+                      variant="outlined"
+                    >
+                      Valitse
+                    </Button>
+                  </>
+                ) : null
+              }
+            </BaseAndEducationFieldValue>
+          </FlexItem>
+        </Flex>
+      )}
+    </ApiAsync>
   );
 };
 

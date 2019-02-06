@@ -57,9 +57,9 @@ const InfoContent = styled(Content)`
 
 const nop = () => {};
 
-const renderSelectField = ({ input, koulutusTyyppi, ...props }) => (
-  <KoulutusSelect {...input} koulutusTyyppi={koulutusTyyppi} {...props} onBlur={nop} />
-);
+const renderSelectField = ({ input, koulutusTyyppi, ...props }) => {
+  return <KoulutusSelect {...input} koulutusTyyppi={koulutusTyyppi} {...props} onBlur={nop} />
+};
 
 const ActiveKoulutus = formValues({
   koulutus: 'koulutus',

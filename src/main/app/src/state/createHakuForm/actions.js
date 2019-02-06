@@ -4,7 +4,7 @@ import pick from 'lodash/pick';
 
 import { JULKAISUTILA } from '../../constants';
 import { createTemporaryToast } from '../toaster';
-import { isArray, parseDate, toKoutaDateString } from '../../utils';
+import { parseDate, toKoutaDateString } from '../../utils';
 
 const getHakuFormValues = getFormValues('createHakuForm');
 

@@ -251,6 +251,7 @@ const ContentWrapper = ({name}) => {
     <Spacing marginTop={2}>
       <FieldArray name={name} component={renderHakuajatFields} />
     </Spacing>
+
   );
 };
 

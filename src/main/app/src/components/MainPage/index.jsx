@@ -6,8 +6,7 @@ import { ReduxToaster } from '../Toaster';
 import CreateKoulutusPage from '../CreateKoulutusPage';
 import CreateToteutusPage from '../CreateToteutusPage';
 import CreateHakukohdePage from '../CreateHakukohdePage';
-
-const CreateHakuPage = () => 'Haku';
+import CreateHakuPage from '../CreateHakuPage';
 
 const MainPage = ({ history }) => {
   return (

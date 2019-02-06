@@ -1,186 +1,145 @@
-import React from 'react';
-import { FormSection, formValues } from 'redux-form';
-import styled from 'styled-components';
+import get from 'lodash/get';
+import set from 'lodash/set';
 
-import BaseSelectionSection from './BaseSelectionSection';
-import KieliversiotFormSection from '../KieliversiotFormSection';
-import Collapse from '../Collapse';
-import Button from '../Button';
-import FormStepper from '../FormStepper';
-import ResetFormSection from '../ResetFormSection';
-import { isObject, isFunction } from '../../utils';
-import NameSection from './NameSection';
-import TargetGroupSection from './TargetGroupSection'
-import SearchTypeSection from './SearchTypeSection';
-import ScheduleSection from './ScheduleSection';
-import FormSelectSection from './FormSelectSection';
-import ContactInfoSection from './ContactInfoSection';
+import { getInvalidTranslations, parseDate, isValidDate } from '../../utils';
 
-const CollapseFooterContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
+const DATE_FORMAT = 'DD.MM.YYYY HH:mm';
 
-const CollapseWrapper = styled.div`
-  margin-bottom: ${({ theme }) => theme.spacing.unit * 3}px;
-`;
-
-const LANGUAGES = [
-  { label: 'Suomeksi', value: 'fi' },
-  { label: 'Ruotsiksi', value: 'sv' },
-  { label: 'Englanniksi', value: 'en' },
-];
-
-const FormCollapse = ({ onContinue, section, children = null, ...props }) => {
-  return (
-    <CollapseWrapper>
-      <Collapse
-        footer={
-          <CollapseFooterContainer>
-            {section ? (
-              <ResetFormSection name={section}>
-                {({ onReset }) => (
-                  <Button type="button" variant="outlined" onClick={onReset}>
-                    Tyhjennä tiedot
-                  </Button>
-                )}
-              </ResetFormSection>
-            ) : null}
-
-            {isFunction(onContinue) ? (
-              <Button type="button" onClick={onContinue}>
-                Jatka
-              </Button>
-            ) : null}
-          </CollapseFooterContainer>
-        }
-        {...props}
-      >
-        {section ? (
-          <FormSection name={section}>{children}</FormSection>
-        ) : (
-          children
-        )}
-      </Collapse>
-    </CollapseWrapper>
-  );
+const isValidDateTime = (date, time) => {
+  return isValidDate(parseDate(`${date} ${time}`, DATE_FORMAT));
 };
 
-const ActiveLanguages = formValues({
-  language: 'language',
-})(({ language, ...props }) => {
-  const activeLanguages = isObject(language)
-    ? Object.keys(language).filter(key => !!language[key])
-    : [];
+export { default } from './HakukohdeForm';
 
-  return props.children({
-    languages: LANGUAGES.filter(({ value }) => activeLanguages.includes(value)),
-  });
-});
+export const validate = values => {
 
-const defaultGetStepCollapseProps = () => ({
-  open: true,
-});
+  const errors = {};
+  
+  const kieliversiot = get(values, 'kieliversiot.languages') || [];
 
-const HakuFormBase = ({
-  handleSubmit,
-  getStepCollapseProps = defaultGetStepCollapseProps,
-}) => (
-  <form onSubmit={handleSubmit}>
-    <ActiveLanguages>
-      {({ languages }) => (
-        <>
-          <FormCollapse
-            header="1 Pohjan valinta"
-            section="pohja"
-            {...getStepCollapseProps(0)}
-          >
-            <BaseSelectionSection />
-          </FormCollapse>
+  const nimi = get(values, 'nimi.nimi');
 
-          <FormCollapse
-            header="2 Kieliversiot"
-            section="kieliversiot"
-            {...getStepCollapseProps(1)}
-          >
-            <KieliversiotFormSection />
-          </FormCollapse>
+  const invalidNimiTranslations = getInvalidTranslations(nimi, kieliversiot);
 
-          <FormCollapse
-            header="3 Haun nimi"
-            section="nimi"
-            {...getStepCollapseProps(2)}
-          >
-            <NameSection languages={languages} />
-          </FormCollapse>
+  const alkamiskausi = get(values, 'aikataulut.kausi');
 
-          <FormCollapse
-            header="4 Haun kohdejoukko"
-            section="kohdejoukko"
-            {...getStepCollapseProps(3)}
-          >
-            <TargetGroupSection />
-          </FormCollapse>
+  const alkamisvuosi = get(values, 'aikataulut.vuosi');
 
-          <FormCollapse
-            header="5 Haukutapa"
-            section="hakutapa"
-            {...getStepCollapseProps(4)}
-          >
-            <SearchTypeSection />
-          </FormCollapse>
+  const hakutapaKoodiUri = get(values, 'hakutapa.tapa') || [];
 
-          <FormCollapse
-            header="6 Haun aikataulut"
-            section="aikataulut"
-            {...getStepCollapseProps(5)}
-          >
-            <ScheduleSection />
-          </FormCollapse>
+  const hakulomaketyyppi = get(values, 'hakulomake.lomaketyyppi') || [];
 
-          <FormCollapse
-            header="7 Hakulomakkeen valinta"
-            section="hakulomake"
-            {...getStepCollapseProps(6)}
-          >
-            <FormSelectSection languages={languages} />
-          </FormCollapse>
+  const hakulomake = get(values, 'hakulomake.lomake') || [];
 
-          <FormCollapse
-            header="8 Haun yhteystiedot"
-            section="yhteystiedot"
-            {...getStepCollapseProps(7)}
-          >
-            <ContactInfoSection languages={languages} />
-          </FormCollapse>
-        </>
-      )}
-    </ActiveLanguages>
-  </form>
-);
+  const hakukohteenLiittamisenTakarajaPVM = get(values, 'aikataulut.liittäminen_pvm');
 
-const HakuForm = ({ steps = false, ...props }) => {
-  return steps ? (
-    <FormStepper stepCount={9}>
-      {({ activeStep, makeOnGoToStep }) => {
-        const getStepCollapseProps = step => {
-          return {
-            open: activeStep >= step,
-            onContinue: makeOnGoToStep(step + 1),
-          };
-        };
+  const hakukohteenLiittamisenTakarajaAika = get(values, 'aikataulut.liittäminen_aika');
 
-        return (
-          <HakuFormBase
-            getStepCollapseProps={getStepCollapseProps}
-            {...props}
-          />
-        );
-      }}
-    </FormStepper>
-  ) : (
-    <HakuFormBase {...props} />
-  );
+  const hakukohteenLiittamisenTakaraja = isValidDateTime(hakukohteenLiittamisenTakarajaPVM, hakukohteenLiittamisenTakarajaAika);
+
+  const kohdejoukkoKoodiUri = get(values, 'kohdejoukko.kohde') || [];
+
+  const metaNimi = get(values, 'yhteystiedot.nimi');
+
+  const metaTitteli = get(values, 'yhteystiedot.titteli');
+
+  const metaSahkoposti = get(values, 'yhteystiedot.email');
+
+  const metaPuhelinnumero = get(values, 'yhteystiedot.numero');
+
+  const hakukohteenMuokkaamisenTakarajaPVM = get(values, 'aikataulut.muokkaus_pvm');
+
+  const hakukohteenMuokkaamisenTakarajaAika = get(values, 'aikataulut.muokkaus_aika');
+
+  const hakukohteenMuokkaamisenTakaraja = isValidDateTime(hakukohteenMuokkaamisenTakarajaPVM, hakukohteenMuokkaamisenTakarajaAika);
+
+  const hakuajat = get(values, 'aikataulut.hakuajat') || [];
+
+  const invalidHakuajat = hakuajat.filter(
+        ({ fromDate, fromTime, toDate, toTime }) =>
+          !(
+            isValidDateTime(fromDate, fromTime) &&
+            isValidDateTime(toDate, toTime)
+          ),
+      )
+      || [];
+
+
+  if (kieliversiot.length === 0) {
+    set(errors, 'kieliversiot.languages', 'Valitse ainakin yksi kieli');
+  }
+
+  if (!nimi || invalidNimiTranslations.length > 0) {
+    set(
+      errors,
+      'nimi.nimi',
+      'Syötä nimi kaikille valituille kieliversioille',
+    );
+  }
+
+  if (invalidHakuajat.length > 0) {
+    set(
+      errors,
+      'aikataulut.hakuajat._error',
+      'Tarkista syöttämiesi hakuaikojen päivämäärät ja kellonajat',
+    );
+  }
+
+  if (!hakukohteenMuokkaamisenTakaraja) {
+    set(
+      errors,
+      'hakuajat._error',
+      'Tarkista syöttämiesi hakuaikojen päivämäärät ja kellonajat',
+    );
+  }
+
+  if (!hakukohteenLiittamisenTakaraja) {
+    set(
+      errors,
+      'hakuajat._error',
+      'Tarkista syöttämiesi hakuaikojen päivämäärät ja kellonajat',
+    );
+  }
+
+  if (!alkamiskausi) {
+    set(errors, 'aikataulut.kausi', 'Valitse alkamiskausi');
+  }
+
+  if (!alkamisvuosi) {
+    set(errors, 'aikataulut.vuosi', 'Valitse alkamisvuosi');
+  }
+
+  if (!hakutapaKoodiUri) {
+    set(errors, 'hakutapa.tapa', 'Valitse hakutapa');
+  }
+
+  if (!hakulomaketyyppi) {
+    set(errors, 'hakulomake.lomaketyyppi', 'Valitse hakulomaketyyppi');
+  }
+
+  if (!hakulomake) {
+    set(errors, 'hakulomake.lomake', 'Valitse hakulomake');
+  }
+
+  if (!kohdejoukkoKoodiUri) {
+    set(errors, 'kohdejoukko.kohde', 'Valitse kohdejoukko');
+  }
+
+  if (!metaNimi) {
+    set(errors, 'yhteystiedot.nimi', 'Anna yhteystietoihin nimi');
+  }
+
+  if (!metaTitteli) {
+    set(errors, 'yhteystiedot.titteli', 'Anna yhteystietoihin titteli');
+  }
+
+  if (!metaSahkoposti) {
+    set(errors, 'yhteystiedot.email', 'Anna yhteystietoihin sähköpostiosoite');
+  }
+
+  if (!metaPuhelinnumero) {
+    set(errors, 'yhteystiedot.numero', 'Anna yhteystietoihin puhleinnumero');
+  }
+
+  return errors;
 };
-
-export default HakuForm;

@@ -9,7 +9,7 @@ const isValidDateTime = (date, time) => {
   return isValidDate(parseDate(`${date} ${time}`, DATE_FORMAT));
 };
 
-export { default } from './HakukohdeForm';
+export { default } from './HakuForm';
 
 export const validate = values => {
 

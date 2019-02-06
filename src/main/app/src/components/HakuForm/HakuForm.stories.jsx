@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { reduxForm } from 'redux-form';
 
-import HakuForm from './index';
+import HakuForm from './HakuForm';
 import { makeStoreDecorator, makeApiDecorator } from '../../storybookUtils';
 
 const Form = reduxForm({

@@ -1,10 +1,10 @@
-
 import get from 'lodash/get';
 import set from 'lodash/set';
 
 import { getInvalidTranslations, parseDate, isValidDate } from '../../utils';
 
 const DATE_FORMAT = 'DD.MM.YYYY HH:mm';
+
 
 const isValidDateTime = (date, time) => {
   return isValidDate(parseDate(`${date} ${time}`, DATE_FORMAT));
@@ -145,4 +145,3 @@ export const validate = values => {
   return errors;
 
 };
-

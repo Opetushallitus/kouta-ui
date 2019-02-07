@@ -344,3 +344,18 @@ export const getKoutaKoulutukset = async ({
 
   return data;
 };
+
+export const getKoutaToteutukset = async ({
+  organisaatioOid,
+  httpClient,
+  apiUrls,
+}) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-backend.toteutus-list'),
+    {
+      params: { organisaatioOid },
+    },
+  );
+
+  return data;
+};

@@ -26,12 +26,6 @@ const CollapseWrapper = styled.div`
   margin-bottom: ${({ theme }) => theme.spacing.unit * 3}px;
 `;
 
-const LANGUAGES = [
-  { label: 'Suomeksi', value: 'fi' },
-  { label: 'Ruotsiksi', value: 'sv' },
-  { label: 'Englanniksi', value: 'en' },
-];
-
 const FormCollapse = ({ onContinue, section, children = null, ...props }) => {
   return (
     <CollapseWrapper>

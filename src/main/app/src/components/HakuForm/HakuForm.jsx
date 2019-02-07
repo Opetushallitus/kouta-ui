@@ -4,11 +4,12 @@ import styled from 'styled-components';
 
 import BaseSelectionSection from './BaseSelectionSection';
 import KieliversiotFormSection from '../KieliversiotFormSection';
+import { LANGUAGE_TABS } from '../../constants';
 import Collapse from '../Collapse';
 import Button from '../Button';
 import FormStepper from '../FormStepper';
 import ResetFormSection from '../ResetFormSection';
-import { isObject, isFunction } from '../../utils';
+import { isFunction } from '../../utils';
 import NameSection from './NameSection';
 import TargetGroupSection from './TargetGroupSection'
 import SearchTypeSection from './SearchTypeSection';
@@ -67,14 +68,14 @@ const FormCollapse = ({ onContinue, section, children = null, ...props }) => {
 };
 
 const ActiveLanguages = formValues({
-  language: 'language',
-})(({ language, ...props }) => {
-  const activeLanguages = isObject(language)
-    ? Object.keys(language).filter(key => !!language[key])
-    : [];
+  languages: 'kieliversiot.languages',
+})(({ languages, ...props }) => {
+  const activeLanguages = languages || [];
 
   return props.children({
-    languages: LANGUAGES.filter(({ value }) => activeLanguages.includes(value)),
+    languages: LANGUAGE_TABS.filter(({ value }) =>
+      activeLanguages.includes(value),
+    ),
   });
 });
 

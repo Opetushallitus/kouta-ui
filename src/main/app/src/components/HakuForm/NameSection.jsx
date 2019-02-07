@@ -11,25 +11,20 @@ const Notification = styled(Typography)`
   color: ${getThemeProp('palette.primary.main')};
 `;
 
-const renderInputField = ({ input}) => {
-  const { onChange, value } = input;
-  return (
-    <Input onChange={onChange} value={value} />
-  );
-};
+const renderInputField = ({ input }) => <Input {...input} />;
 
 const NameSection = ({ languages, ...props }) => {
   return (
     <div {...props}>
       <LanguageSelector languages={languages} defaultValue="fi">
-        {({ value }) => {
+        {({ value: activeLanguage }) => {
           return (
             <>
               <div>
                 <Typography variant="h6" marginBottom={1}>
                   Anna haulle nimi
                 </Typography>
-                <Field name="nimi" component={renderInputField} />
+                <Field name={`nimi.${activeLanguage}`} component={renderInputField} />
                 <Notification variant="h6" marginTop={1.375}>
                   Huom! Tämä teksti näkyy oppijalle Opintopolun sivuilla
                 </Notification>

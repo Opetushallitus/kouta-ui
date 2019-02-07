@@ -48,7 +48,7 @@ const FormSelectSection = ({ languages, koodiUri, ...props }) => {
   return ( 
     <div {...props}>
     <LanguageSelector languages={languages} defaultValue="fi">
-      {({ value }) => {
+      {({ value: activeLanguage }) => {
         return (
           <>
             <Spacing marginRight={4}>
@@ -56,13 +56,13 @@ const FormSelectSection = ({ languages, koodiUri, ...props }) => {
                 <div> 
                   <Typography>Valitse mitä hakulomaketta käytetään</Typography>
                 </div>
-                <Field name="lomaketyyppi" component={renderBaseDropdownField} />
+                <Field name={`lomaketyyppi.${activeLanguage}`} component={renderBaseDropdownField} />
               </RadioFieldContainer>
               <DropdownContainer>
                 <Typography paddingLeft={3}>Valitse hakulomake</Typography>
                 <SelectionContainer>
                   <Field
-                    name="lomake"
+                    name={`lokame.${activeLanguage}`}
                     options={[{ label: 'testi lomake 1', value: '1' }, { label: 'testi lomake 2', value: '2' }]}
                     component={renderLomakeSelectionField}
                   />

@@ -17,19 +17,17 @@ import Select from '../Select';
 import ApiAsync from '../ApiAsync';
 import { getKoutaToteutukset } from '../../apiUtils';
 import Flex, { FlexItem } from '../Flex';
-import Spacing from '../Spacing';
 import { getFirstLanguageValue } from '../../utils';
 
 const DropdownButton = styled(Button)`
   display: inline-flex;
 `;
 
-const PohjaAndToteutusFieldValue = formValues({
+const PohjaFieldValue = formValues({
   pohja: 'pohja',
-  toteutus: 'toteutus',
-})(({ pohja, toteutus, children }) => children({ pohja, toteutus }));
+})(({ pohja, children }) => children({ pohja }));
 
-const renderBaseDropdownField = ({ input, onContinue }) => {
+const renderBaseDropdownField = ({ input, onContinue, onCreateNew }) => {
   const { onChange } = input;
 
   return (
@@ -39,6 +37,7 @@ const renderBaseDropdownField = ({ input, onContinue }) => {
           <DropdownMenuItem
             onClick={() => {
               onChange('new_toteutus');
+              onCreateNew();
               onContinue();
             }}
           >
@@ -75,7 +74,7 @@ const getToteutusOptions = toteutukset => {
   }));
 };
 
-const PohjaSection = ({ organisaatioOid, onContinue, onCopy }) => {
+const PohjaSection = ({ organisaatioOid, onContinue, onCreateNew }) => {
   return (
     <ApiAsync
       promiseFn={getKoutaToteutukset}
@@ -89,43 +88,26 @@ const PohjaSection = ({ organisaatioOid, onContinue, onCopy }) => {
               name="pohja"
               component={renderBaseDropdownField}
               onContinue={onContinue}
+              onCreateNew={onCreateNew}
             />
           </FlexItem>
           <FlexItem grow={1} paddingLeft={3}>
-            <PohjaAndToteutusFieldValue>
-              {({ pohja, toteutus }) =>
+            <PohjaFieldValue>
+              {({ pohja }) =>
                 ['copy_toteutus'].includes(pohja) ? (
                   <>
-                    <Spacing marginBottom={2}>
-                      <Typography variant="h6" marginBottom={1}>
-                        Valitse koulutus
-                      </Typography>
-                      <Field
-                        name="toteutus"
-                        options={getToteutusOptions(koulutukset || [])}
-                        component={renderSelectField}
-                      />
-                    </Spacing>
-                    <Button
-                      type="button"
-                      disabled={!toteutus}
-                      onClick={
-                        toteutus
-                          ? () => {
-                              onCopy(toteutus.value);
-                              onContinue();
-                            }
-                          : noop
-                      }
-                      color="primary"
-                      variant="outlined"
-                    >
-                      Valitse
-                    </Button>
+                    <Typography variant="h6" marginBottom={1}>
+                      Valitse toteutus
+                    </Typography>
+                    <Field
+                      name="toteutus"
+                      options={getToteutusOptions(koulutukset || [])}
+                      component={renderSelectField}
+                    />
                   </>
                 ) : null
               }
-            </PohjaAndToteutusFieldValue>
+            </PohjaFieldValue>
           </FlexItem>
         </Flex>
       )}

@@ -1,9 +1,9 @@
-import { getFormValues, initialize } from 'redux-form';
+import { getFormValues } from 'redux-form';
+import get from 'lodash/get';
 
 import { JULKAISUTILA } from '../../constants';
 import { createTemporaryToast } from '../toaster';
-import { getToteutusByValues, getValuesByToteutus } from './utils';
-import { getKoutaToteutusByOid } from '../../apiUtils';
+import { getToteutusByValues } from './utils';
 
 const getToteutusFormValues = getFormValues('createToteutusForm');
 
@@ -75,16 +75,19 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   }
 };
 
-export const copy = toteutusOid => async (
-  dispatch,
-  getState,
-  { apiUrls, httpClient },
-) => {
-  const toteutus = await getKoutaToteutusByOid({
-    oid: toteutusOid,
-    httpClient,
-    apiUrls,
-  });
+export const maybeCopy = () => (dispatch, getState) => {
+  const values = getToteutusFormValues(getState());
 
-  dispatch(initialize('createToteutusForm', getValuesByToteutus(toteutus)));
+  if (
+    get(values, 'base.pohja') === 'copy_toteutus' &&
+    !!get(values, 'base.toteutus.value')
+  ) {
+    dispatch(copy(values.base.toteutus.value));
+  }
+};
+
+export const copy = toteutusOid => async (dispatch, getState, { history }) => {
+  history.replace({
+    search: `?kopioToteutusOid=${toteutusOid}`,
+  });
 };

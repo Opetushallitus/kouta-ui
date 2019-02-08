@@ -29,16 +29,25 @@ const ToteutusForm = ({
   handleSubmit,
   koulutusKoodiUri,
   organisaatioOid,
-  onCopy = () => {},
+  onMaybeCopy = () => {},
+  onCreateNew = () => {},
   steps = false,
 }) => (
   <form onSubmit={handleSubmit}>
     <ActiveLanguages>
       {({ languages }) => (
         <FormCollapseGroup enabled={steps}>
-          <FormCollapse header="1 Pohjan valinta" section="base">
+          <FormCollapse
+            header="1 Pohjan valinta"
+            section="base"
+            onContinue={onMaybeCopy}
+          >
             {({ onContinue }) => (
-              <PohjaSection organisaatioOid={organisaatioOid} onCopy={onCopy} onContinue={onContinue} />
+              <PohjaSection
+                organisaatioOid={organisaatioOid}
+                onCreateNew={onCreateNew}
+                onContinue={onContinue}
+              />
             )}
           </FormCollapse>
 

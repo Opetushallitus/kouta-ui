@@ -3,13 +3,14 @@ import React, { Component } from 'react';
 class FormCollapseGroup extends Component {
   static defaultProps = {
     enabled: true,
+    defaultActiveStep: 0,
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      activeStep: 0,
+      activeStep: this.props.defaultActiveStep,
     };
   }
 

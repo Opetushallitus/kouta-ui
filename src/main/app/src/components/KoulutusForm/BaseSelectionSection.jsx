@@ -29,7 +29,7 @@ const BaseAndEducationFieldValue = formValues({
   education: 'education',
 })(({ base, education, children }) => children({ base, education }));
 
-const renderBaseDropdownField = ({ input, onContinue }) => {
+const renderBaseDropdownField = ({ input, onContinue, onCreateNew }) => {
   const { onChange } = input;
 
   return (
@@ -39,6 +39,7 @@ const renderBaseDropdownField = ({ input, onContinue }) => {
           <DropdownMenuItem
             onClick={() => {
               onChange('new_koulutus');
+              onCreateNew();
               onContinue();
             }}
           >
@@ -73,7 +74,7 @@ const getKoulutusOptions = koulutukset => {
   }));
 };
 
-const BaseSelectionSection = ({ onContinue, organisaatioOid, onCopy }) => {
+const BaseSelectionSection = ({ onContinue, organisaatioOid, onCreateNew }) => {
   return (
     <ApiAsync
       promiseFn={getKoutaKoulutukset}
@@ -87,11 +88,12 @@ const BaseSelectionSection = ({ onContinue, organisaatioOid, onCopy }) => {
               name="base"
               component={renderBaseDropdownField}
               onContinue={onContinue}
+              onCreateNew={onCreateNew}
             />
           </FlexItem>
           <FlexItem grow={1} paddingLeft={3}>
             <BaseAndEducationFieldValue>
-              {({ base, education }) =>
+              {({ base }) =>
                 ['copy_koulutus'].includes(base) ? (
                   <>
                     <Spacing marginBottom={2}>

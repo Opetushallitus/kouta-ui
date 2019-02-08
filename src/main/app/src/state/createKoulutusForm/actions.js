@@ -1,10 +1,10 @@
-import { getFormValues, initialize } from 'redux-form';
+import { getFormValues } from 'redux-form';
 import get from 'lodash/get';
 
 import { JULKAISUTILA } from '../../constants';
-import { getKoulutusByKoodi, getKoutaKoulutusByOid } from '../../apiUtils';
+import { getKoulutusByKoodi } from '../../apiUtils';
 import { createTemporaryToast } from '../toaster';
-import { getKoulutusByValues, getValuesByKoulutus } from './utils';
+import { getKoulutusByValues } from './utils';
 
 const getKoulutusFormValues = getFormValues('createKoulutusForm');
 
@@ -86,18 +86,8 @@ export const maybeCopy = () => (dispatch, getState) => {
   }
 };
 
-export const copy = koulutusOid => async (
-  dispatch,
-  getState,
-  { apiUrls, httpClient },
-) => {
-  const koulutus = await getKoutaKoulutusByOid({
-    oid: koulutusOid,
-    httpClient,
-    apiUrls,
+export const copy = koulutusOid => async (dispatch, getState, { history }) => {
+  history.replace({
+    search: `?kopioKoulutusOid=${koulutusOid}`,
   });
-
-  return dispatch(
-    initialize('createKoulutusForm', getValuesByKoulutus(koulutus)),
-  );
 };

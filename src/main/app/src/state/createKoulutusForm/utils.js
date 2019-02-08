@@ -17,8 +17,8 @@ export const getKoulutusByValues = values => {
 export const getValuesByKoulutus = koulutus => {
   const {
     kielivalinta = [],
-    koulutusKoodiUri = null,
-    koulutustyyppi = null,
+    koulutusKoodiUri = '',
+    koulutustyyppi = '',
     tarjoajat = [],
   } = koulutus;
 

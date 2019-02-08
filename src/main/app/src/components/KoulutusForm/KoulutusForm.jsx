@@ -37,6 +37,7 @@ const KoulutusForm = ({
   onCopy = () => {},
   onMaybeCopy = () => {},
   steps = false,
+  onCreateNew,
 }) => (
   <form onSubmit={handleSubmit}>
     <ActiveLanguages>
@@ -56,6 +57,7 @@ const KoulutusForm = ({
                         onContinue={onContinue}
                         organisaatioOid={organisaatioOid}
                         onCopy={onCopy}
+                        onCreateNew={onCreateNew}
                       />
                     )}
                   </FormCollapse>

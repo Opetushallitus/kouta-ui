@@ -35,6 +35,7 @@ const KoulutusForm = ({
   handleSubmit,
   organisaatioOid,
   onCopy = () => {},
+  onMaybeCopy = () => {},
   steps = false,
 }) => (
   <form onSubmit={handleSubmit}>
@@ -49,7 +50,7 @@ const KoulutusForm = ({
                     <TypeSection />
                   </FormCollapse>
 
-                  <FormCollapse header="2 Pohjan valinta" section="base">
+                  <FormCollapse header="2 Pohjan valinta" section="base" onContinue={onMaybeCopy}>
                     {({ onContinue }) => (
                       <BaseSelectionSection
                         onContinue={onContinue}

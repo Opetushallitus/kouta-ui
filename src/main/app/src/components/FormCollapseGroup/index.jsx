@@ -19,7 +19,11 @@ class FormCollapseGroup extends Component {
     return React.Children.count(children);
   }
 
-  makeOnContinue = index => () => {
+  makeOnContinue = (index, child) => () => {
+    if (child.props.onContinue) {
+      child.props.onContinue();
+    }
+
     if (index < this.getChildrenCount() - 1) {
       return this.setState(() => ({
         activeStep: index + 1,
@@ -37,7 +41,7 @@ class FormCollapseGroup extends Component {
             controlled: true,
             open: index <= activeStep,
             active: index === activeStep,
-            onContinue: index < this.getChildrenCount() - 1 ? this.makeOnContinue(index) : null,
+            onContinue: index < this.getChildrenCount() - 1 ? this.makeOnContinue(index, child) : null,
           }
         : {
             controlled: false,

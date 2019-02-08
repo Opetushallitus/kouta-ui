@@ -75,6 +75,17 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   }
 };
 
+export const maybeCopy = () => (dispatch, getState) => {
+  const values = getKoulutusFormValues(getState());
+
+  if (
+    get(values, 'base.base') === 'copy_koulutus' &&
+    !!get(values, 'base.education.value')
+  ) {
+    dispatch(copy(values.base.education.value));
+  }
+};
+
 export const copy = koulutusOid => async (
   dispatch,
   getState,
@@ -87,6 +98,8 @@ export const copy = koulutusOid => async (
   });
 
   return dispatch(
-    initialize('createKoulutusForm', getValuesByKoulutus(koulutus)),
+    initialize('createKoulutusForm', getValuesByKoulutus(koulutus), {
+      keepValues: true,
+    }),
   );
 };

@@ -4,12 +4,15 @@ import { connect } from 'react-redux';
 
 import KoulutusForm, { validate } from '../KoulutusForm';
 import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
-import { copy as copyKoulutus } from '../../state/createKoulutusForm';
+import { copy as copyKoulutus, maybeCopy as maybeCopyKoulutus } from '../../state/createKoulutusForm';
 
 export default compose(
   connect(null, dispatch => ({
     onCopy: koulutusOid => {
       dispatch(copyKoulutus(koulutusOid));
+    },
+    onMaybeCopy: () => {
+      dispatch(maybeCopyKoulutus());
     },
   })),
   withProps({

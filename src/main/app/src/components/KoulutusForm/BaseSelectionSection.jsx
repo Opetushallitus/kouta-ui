@@ -104,22 +104,6 @@ const BaseSelectionSection = ({ onContinue, organisaatioOid, onCopy }) => {
                         component={renderSelectField}
                       />
                     </Spacing>
-                    <Button
-                      type="button"
-                      disabled={!education}
-                      onClick={
-                        education
-                          ? () => {
-                              onCopy(education.value);
-                              onContinue();
-                            }
-                          : nop
-                      }
-                      color="primary"
-                      variant="outlined"
-                    >
-                      Valitse
-                    </Button>
                   </>
                 ) : null
               }

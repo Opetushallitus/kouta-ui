@@ -1,4 +1,5 @@
 import React from 'react';
+import queryString from 'query-string';
 
 import FormPage, { OrganisaatioInfo } from '../FormPage';
 import CreateKoulutusHeader from './CreateKoulutusHeader';
@@ -11,7 +12,11 @@ const CreateKoulutusPage = props => {
     match: {
       params: { oid },
     },
+    location: { search },
+    history,
   } = props;
+
+  const { kopioKoulutusOid = null } = queryString.parse(search);
 
   return (
     <FormPage
@@ -20,7 +25,13 @@ const CreateKoulutusPage = props => {
       footer={<CreateKoulutusFooter />}
     >
       <OrganisaatioInfo organisaatioOid={oid} />
-      <CreateKoulutusForm organisaatioOid={oid} />
+      <CreateKoulutusForm
+        organisaatioOid={oid}
+        kopioKoulutusOid={kopioKoulutusOid}
+        onCreateNew={() => {
+          history.replace({ search: '' });
+        }}
+      />
     </FormPage>
   );
 };

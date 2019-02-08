@@ -3,29 +3,23 @@ import { formValues } from 'redux-form';
 
 import TypeSection from './TypeSection';
 import BaseSelectionSection from './BaseSelectionSection';
-import LanguageSection from './LanguageSection';
 import InformationSection from './InformationSection';
 import DescriptionSection from './DescriptionSection';
 import OrganizationSection from './OrganizationSection';
-import { isObject } from '../../utils';
 import FormCollapseGroup from '../FormCollapseGroup';
 import FormCollapse from '../FormCollapse';
-
-const LANGUAGES = [
-  { label: 'Suomeksi', value: 'fi' },
-  { label: 'Ruotsiksi', value: 'sv' },
-  { label: 'Englanniksi', value: 'en' },
-];
+import KieliversiotFormSection from '../KieliversiotFormSection';
+import { LANGUAGE_TABS } from '../../constants';
 
 const ActiveLanguages = formValues({
-  language: 'language',
-})(({ language, ...props }) => {
-  const activeLanguages = isObject(language)
-    ? Object.keys(language).filter(key => !!language[key])
-    : [];
+  languages: 'kieliversiot.languages',
+})(({ languages, ...props }) => {
+  const activeLanguages = languages || [];
 
   return props.children({
-    languages: LANGUAGES.filter(({ value }) => activeLanguages.includes(value)),
+    languages: LANGUAGE_TABS.filter(({ value }) =>
+      activeLanguages.includes(value),
+    ),
   });
 });
 
@@ -37,7 +31,14 @@ const ActiveKoulutus = formValues({
   koulutus: 'information.koulutus',
 })(({ koulutus, children }) => children({ koulutus }));
 
-const KoulutusForm = ({ handleSubmit, organisaatioOid, steps = false }) => (
+const KoulutusForm = ({
+  handleSubmit,
+  organisaatioOid,
+  onCopy = () => {},
+  onMaybeCopy = () => {},
+  steps = false,
+  onCreateNew,
+}) => (
   <form onSubmit={handleSubmit}>
     <ActiveLanguages>
       {({ languages }) => (
@@ -50,14 +51,19 @@ const KoulutusForm = ({ handleSubmit, organisaatioOid, steps = false }) => (
                     <TypeSection />
                   </FormCollapse>
 
-                  <FormCollapse header="2 Pohjan valinta" section="base">
+                  <FormCollapse header="2 Pohjan valinta" section="base" onContinue={onMaybeCopy}>
                     {({ onContinue }) => (
-                      <BaseSelectionSection onContinue={onContinue} />
+                      <BaseSelectionSection
+                        onContinue={onContinue}
+                        organisaatioOid={organisaatioOid}
+                        onCopy={onCopy}
+                        onCreateNew={onCreateNew}
+                      />
                     )}
                   </FormCollapse>
 
-                  <FormCollapse header="3 Kieliversiot" section="language">
-                    <LanguageSection />
+                  <FormCollapse header="3 Kieliversiot" section="kieliversiot">
+                    <KieliversiotFormSection />
                   </FormCollapse>
 
                   <FormCollapse

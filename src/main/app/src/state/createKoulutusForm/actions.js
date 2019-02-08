@@ -4,6 +4,7 @@ import get from 'lodash/get';
 import { JULKAISUTILA } from '../../constants';
 import { getKoulutusByKoodi } from '../../apiUtils';
 import { createTemporaryToast } from '../toaster';
+import { getKoulutusByValues } from './utils';
 
 const getKoulutusFormValues = getFormValues('createKoulutusForm');
 
@@ -37,16 +38,10 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
     me: { kayttajaOid },
   } = state;
 
-  const kielivalinta = Object.keys(values.language).filter(
-    key => !!values.language[key],
-  );
-
-  const tarjoajat = get(values, 'organization.organizations') || null;
-  const koulutusKoodiUri = get(values, 'information.koulutus.value') || null;
-  const koulutustyyppi = get(values, 'type.type') || null;
+  const koulutusFormData = getKoulutusByValues(values);
 
   const { nimi = null } = await getKoulutusByKoodi({
-    koodiUri: koulutusKoodiUri,
+    koodiUri: koulutusFormData.koulutusKoodiUri,
     httpClient,
     apiUrls,
   });
@@ -54,13 +49,10 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   const koulutus = {
     organisaatioOid,
     muokkaaja: kayttajaOid,
-    kielivalinta,
     tila,
-    tarjoajat,
-    koulutusKoodiUri,
     nimi,
     johtaaTutkintoon: true,
-    koulutustyyppi,
+    ...koulutusFormData,
   };
 
   const { data: koulutusData } = await dispatch(saveKoulutus(koulutus));
@@ -81,4 +73,21 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   } else {
     history.push('/');
   }
+};
+
+export const maybeCopy = () => (dispatch, getState) => {
+  const values = getKoulutusFormValues(getState());
+
+  if (
+    get(values, 'base.base') === 'copy_koulutus' &&
+    !!get(values, 'base.education.value')
+  ) {
+    dispatch(copy(values.base.education.value));
+  }
+};
+
+export const copy = koulutusOid => async (dispatch, getState, { history }) => {
+  history.replace({
+    search: `?kopioKoulutusOid=${koulutusOid}`,
+  });
 };

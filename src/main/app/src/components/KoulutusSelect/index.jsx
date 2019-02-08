@@ -45,7 +45,7 @@ const KoulutusSelect = ({
       {({ data }) => {
         const koulutukset = data || [];
 
-        return <Select {...props} options={getOptions(koulutukset)} />;
+        return <Select {...props} value={value} options={getOptions(koulutukset)} />;
       }}
     </ApiAsync>
   );

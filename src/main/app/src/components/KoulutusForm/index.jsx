@@ -1,7 +1,17 @@
 import get from 'lodash/get';
 import set from 'lodash/set';
+import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
 
 export { default } from './KoulutusForm';
+
+export const initialValues = {
+  type: {
+    type: KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS,
+  },
+  kieliversiot: {
+    languages: ['fi', 'sv'],
+  },
+};
 
 export const validate = values => {
   const languages = Object.keys(values.language || {}).filter(

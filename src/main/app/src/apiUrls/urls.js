@@ -3,8 +3,8 @@ const koutaBackendDevUrl = `http://localhost:${process.env.REACT_APP_BACKEND_POR
 export const development = {
   'kouta-backend.base-url': 'http://localhost:' + process.env.REACT_APP_BACKEND_PORT,
   'kouta-backend.koulutus': 'http://localhost:' + process.env.REACT_APP_BACKEND_PORT + '/kouta-backend/koulutus',
-  'kouta-backend.koulutus-by-oid': 'http://localhost:' + process.env.REACT_APP_BACKEND_PORT + '/kouta-backend/koulutus/$1',
-  'kouta-backend.koulutus-list': 'http://localhost:' + process.env.REACT_APP_BACKEND_PORT + '/kouta-backend/koulutus/list',
+  'kouta-backend.koulutus-by-oid': `${koutaBackendDevUrl}/koulutus/$1`,
+  'kouta-backend.koulutus-list': `${koutaBackendDevUrl}/koulutus/list`,
   'kouta-backend.toteutus': 'http://localhost:' + process.env.REACT_APP_BACKEND_PORT + '/kouta-backend/toteutus',
   'kouta-backend.toteutus-by-oid': 'http://localhost:' + process.env.REACT_APP_BACKEND_PORT + '/kouta-backend/toteutus/$1',
   'kouta-backend.toteutus-list': 'http://localhost:' + process.env.REACT_APP_BACKEND_PORT + '/kouta-backend/toteutus/list',

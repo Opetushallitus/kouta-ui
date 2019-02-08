@@ -2,6 +2,7 @@ import { reduxForm } from 'redux-form';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import React from 'react';
+import memoize from 'memoizee';
 
 import KoulutusForm, { validate, initialValues } from '../KoulutusForm';
 import {
@@ -27,6 +28,10 @@ const getCopyValues = koulutusOid => ({
   },
 });
 
+const getInitialValues = memoize(koulutus => {
+  return {...getCopyValues(koulutus.oid), ...getValuesByKoulutus(koulutus) };
+});
+
 const CreateKoulutusForm = props => {
   const { kopioKoulutusOid } = props;
 
@@ -44,7 +49,7 @@ const CreateKoulutusForm = props => {
             {...props}
             steps
             initialValues={
-              kopioKoulutusOid ? {...getCopyValues(kopioKoulutusOid), ...getValuesByKoulutus(data) } : initialValues
+              kopioKoulutusOid ? getInitialValues(data) : initialValues
             }
           />
         ) : null;

@@ -98,8 +98,6 @@ export const copy = koulutusOid => async (
   });
 
   return dispatch(
-    initialize('createKoulutusForm', getValuesByKoulutus(koulutus), {
-      keepValues: true,
-    }),
+    initialize('createKoulutusForm', getValuesByKoulutus(koulutus)),
   );
 };

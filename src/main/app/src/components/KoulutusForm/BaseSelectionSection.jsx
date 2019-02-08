@@ -52,10 +52,12 @@ const renderBaseDropdownField = ({ input, onContinue, onCreateNew }) => {
       }
     >
       {({ ref, onToggle, visible }) => (
-        <DropdownButton innerRef={ref} onClick={onToggle} type="button">
-          Valitse pohja{' '}
-          <Icon type={visible ? 'arrow_drop_up' : 'arrow_drop_down'} />
-        </DropdownButton>
+        <div ref={ref}>
+          <DropdownButton onClick={onToggle} type="button">
+            Valitse pohja{' '}
+            <Icon type={visible ? 'arrow_drop_up' : 'arrow_drop_down'} />
+          </DropdownButton>
+        </div>
       )}
     </UncontrolledDropdown>
   );
@@ -63,9 +65,9 @@ const renderBaseDropdownField = ({ input, onContinue, onCreateNew }) => {
 
 const nop = () => {};
 
-const renderSelectField = ({ options = [], input }) => (
-  <Select {...input} options={options} onBlur={nop} />
-);
+const renderSelectField = ({ options = [], input }) => {
+  return <Select {...input} options={options} onBlur={nop} />
+};
 
 const getKoulutusOptions = koulutukset => {
   return koulutukset.map(({ nimi, oid }) => ({

@@ -29,7 +29,9 @@ const getCopyValues = koulutusOid => ({
 });
 
 const getInitialValues = memoize(koulutus => {
-  return {...getCopyValues(koulutus.oid), ...getValuesByKoulutus(koulutus) };
+  return koulutus.oid
+    ? { ...getCopyValues(koulutus.oid), ...getValuesByKoulutus(koulutus) }
+    : initialValues;
 });
 
 const CreateKoulutusForm = props => {

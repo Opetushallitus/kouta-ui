@@ -92,6 +92,7 @@ export const getValuesByToteutus = toteutus => {
     tarjoajat = [],
     metadata = {},
   } = toteutus;
+
   const {
     kuvaus = {},
     ammattinimikkeet = [],
@@ -108,7 +109,7 @@ export const getValuesByToteutus = toteutus => {
       languages: kielivalinta,
     },
     jarjestamispaikat: {
-      jarjestajat: [...tarjoajat, 'a', 'b'],
+      jarjestajat: tarjoajat,
     },
     jarjestamistiedot: {
       kuvaus,

@@ -1,10 +1,9 @@
 import { getFormValues } from 'redux-form';
 import get from 'lodash/get';
-import toPairs from 'lodash/toPairs';
-import flatMap from 'lodash/flatMap';
 
 import { JULKAISUTILA } from '../../constants';
 import { createTemporaryToast } from '../toaster';
+import { getToteutusByValues } from './utils';
 
 const getToteutusFormValues = getFormValues('createToteutusForm');
 
@@ -40,88 +39,15 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   const { koulutusOid, organisaatioOid } = getOidsFromPathname(
     history.location.pathname,
   );
-  const tarjoajat = get(values, 'jarjestamispaikat.jarjestajat') || [];
-  const kielivalinta = get(values, 'kieliversiot.languages') || [];
-  const nimi = get(values, 'nimi.name') || {};
-  const opetuskielet = get(values, 'jarjestamistiedot.opetuskieli') || [];
-  const kuvaus = get(values, 'jarjestamistiedot.kuvaus') || {};
-  const osioKuvaukset = get(values, 'jarjestamistiedot.osioKuvaukset') || {};
-  const opetustapaKoodiUri = get(values, 'jarjestamistiedot.opetustapa');
-  const opetusaikaKoodiUri = get(values, 'jarjestamistiedot.opetusaika');
 
-  const osiot = (get(values, 'jarjestamistiedot.osiot') || []).map(osio => ({
-    otsikko: {
-      fi: osio.label,
-    },
-    teksti: osioKuvaukset[osio.value] || {},
-  }));
-
-  const onkoMaksullinen =
-    get(values, 'jarjestamistiedot.maksullisuus') === 'kylla';
-  const maksunMaara = get(values, 'jarjestamistiedot.maksumaara') || {};
-
-  const osaamisalaLinkit = get(values, 'osaamisalat.osaamisalaLinkit') || {};
-  const osaamisalaLinkkiOtsikot =
-    get(values, 'osaamisalat.osaamisalaLinkkiOtsikot') || {};
-
-  const osaamisalat = (get(values, 'osaamisalat.osaamisalat') || []).map(
-    osaamisala => ({
-      koodi: osaamisala,
-      linkki: osaamisalaLinkit[osaamisala] || {},
-      otsikko: osaamisalaLinkkiOtsikot[osaamisala] || {},
-    }),
-  );
-
-  const yhteystieto = {
-    nimi: get(values, 'yhteystiedot.name') || {},
-    titteli: get(values, 'yhteystiedot.title') || {},
-    sahkoposti: get(values, 'yhteystiedot.email') || {},
-    puhelinnumero: get(values, 'yhteystiedot.phone') || {},
-  };
-
-  const ammattinimikkeet = flatMap(
-    toPairs(get(values, 'nayttamistiedot.ammattinimikkeet') || {}),
-    ([language, nimikkeet]) => {
-      return (nimikkeet || []).map(({ value }) => ({
-        kieli: language,
-        arvo: value,
-      }));
-    },
-  );
-
-  const asiasanat = flatMap(
-    toPairs(get(values, 'nayttamistiedot.avainsanat') || {}),
-    ([language, sanat]) => {
-      return (sanat || []).map(({ value }) => ({
-        kieli: language,
-        arvo: value,
-      }));
-    },
-  );
+  const toteutusFormData = getToteutusByValues(values);
 
   const toteutus = {
     tila,
     muokkaaja,
     organisaatioOid,
     koulutusOid,
-    nimi,
-    tarjoajat,
-    kielivalinta,
-    metadata: {
-      opetus: {
-        osiot,
-        opetuskielet,
-        kuvaus,
-        onkoMaksullinen,
-        maksunMaara,
-        opetustapaKoodiUri,
-        opetusaikaKoodiUri,
-      },
-      osaamisalat,
-      yhteystieto,
-      ammattinimikkeet,
-      asiasanat,
-    },
+    ...toteutusFormData,
   };
 
   try {
@@ -147,4 +73,21 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   } else {
     history.push('/');
   }
+};
+
+export const maybeCopy = () => (dispatch, getState) => {
+  const values = getToteutusFormValues(getState());
+
+  if (
+    get(values, 'base.pohja') === 'copy_toteutus' &&
+    !!get(values, 'base.toteutus.value')
+  ) {
+    dispatch(copy(values.base.toteutus.value));
+  }
+};
+
+export const copy = toteutusOid => async (dispatch, getState, { history }) => {
+  history.replace({
+    search: `?kopioToteutusOid=${toteutusOid}`,
+  });
 };

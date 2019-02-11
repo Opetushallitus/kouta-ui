@@ -16,7 +16,6 @@ export const validate = values => {
   const errors = {};
 
   const kieliversiot = get(values, 'kieliversiot.languages') || [];
-  const osaamisalat = get(values, 'osaamisalat.osaamisalat') || [];
   const jarjestajat = get(values, 'jarjestamispaikat.jarjestajat') || [];
   const opetuskielet = get(values, 'jarjestamistiedot.opetuskieli') || [];
   const opetustapa = get(values, 'jarjestamistiedot.opetustapa');
@@ -24,10 +23,6 @@ export const validate = values => {
 
   if (kieliversiot.length === 0) {
     set(errors, 'kieliversiot.langues', 'Valitse vähintään yksi kieli');
-  }
-
-  if (osaamisalat.length === 0) {
-    set(errors, 'osaamisalat.osaamisalat', 'Valitse vähintään yksi osaamisala');
   }
 
   if (jarjestajat.length === 0) {

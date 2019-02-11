@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import queryString from 'query-string';
 
 import ApiAsync from '../ApiAsync';
 import FormPage, { OrganisaatioInfo } from '../FormPage';
@@ -11,7 +12,7 @@ import CreateToteutusFooter from './CreateToteutusFooter';
 
 const getKoulutus = args => getKoutaKoulutusByOid(args);
 
-const CreateToteutusFormAsync = ({ koulutusOid, organisaatioOid }) => (
+const CreateToteutusFormAsync = ({ koulutusOid, organisaatioOid, ...props }) => (
   <>
     <OrganisaatioInfo organisaatioOid={organisaatioOid} />
     <ApiAsync promiseFn={getKoulutus} oid={koulutusOid} watch={koulutusOid}>
@@ -20,6 +21,7 @@ const CreateToteutusFormAsync = ({ koulutusOid, organisaatioOid }) => (
           <CreateToteutusForm
             koulutusKoodiUri={data.koulutusKoodiUri}
             organisaatioOid={organisaatioOid}
+            {...props}
           />
         ) : null
       }
@@ -32,7 +34,17 @@ const CreateToteutusPage = props => {
     match: {
       params: { organisaatioOid, koulutusOid },
     },
+    location: {
+      search,
+    },
+    history,
   } = props;
+
+  const { kopioToteutusOid = null } = queryString.parse(search);
+
+  const onCreateNew = useCallback(() => {
+    history.replace({ search: '' });
+  }, [history]);
 
   return (
     <FormPage
@@ -43,6 +55,8 @@ const CreateToteutusPage = props => {
       <CreateToteutusFormAsync
         koulutusOid={koulutusOid}
         organisaatioOid={organisaatioOid}
+        kopioToteutusOid={kopioToteutusOid}
+        onCreateNew={onCreateNew}
       />
     </FormPage>
   );

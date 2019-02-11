@@ -1,12 +1,23 @@
 import React from 'react';
 
 import Checkbox from '../Checkbox';
+import { isArray } from '../../utils';
 
-const makeOnCheckboxChange = ({ value, onChange, optionValue }) => e => {
+const cleanValue = (value, options) => {
+  const optionValues = options.map(({ value }) => value);
+
+  if (!isArray(options) || !isArray(value)) {
+    return value;
+  }
+
+  return value.filter(v => optionValues.includes(v));
+};
+
+const makeOnCheckboxChange = ({ value, onChange, optionValue, options }) => e => {
   if (e.target.checked) {
-    onChange([...value, optionValue]);
+    onChange(cleanValue([...value, optionValue], options));
   } else {
-    onChange(value.filter(v => v !== optionValue));
+    onChange(cleanValue(value.filter(v => v !== optionValue), options));
   }
 };
 
@@ -15,7 +26,7 @@ const CheckboxGroup = ({ value = [], onChange, options = [] }) => {
     <Checkbox
       key={optionValue}
       checked={value.includes(optionValue)}
-      onChange={makeOnCheckboxChange({ value, onChange, optionValue })}
+      onChange={makeOnCheckboxChange({ value, onChange, optionValue, options })}
     >
       {label}
     </Checkbox>

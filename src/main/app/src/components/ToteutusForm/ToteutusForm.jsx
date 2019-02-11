@@ -1,7 +1,6 @@
 import React from 'react';
 import { formValues } from 'redux-form';
 
-import FormStepper from '../FormStepper';
 import FormCollapse from '../FormCollapse';
 import KieliversiotFormSection from '../KieliversiotFormSection';
 import { LANGUAGE_TABS } from '../../constants';
@@ -12,11 +11,12 @@ import PohjaSection from './PohjaSection';
 import JarjestamisPaikatSection from './JarjestamisPaikatSection';
 import JarjestamisTiedotSection from './JarjestamisTiedotSection';
 import NayttamisTiedotSection from './NayttamisTiedotSection';
+import FormCollapseGroup from '../FormCollapseGroup';
 
 const ActiveLanguages = formValues({
   languages: 'kieliversiot.languages',
 })(({ languages, ...props }) => {
-  const activeLanguages = languages || [];
+  const activeLanguages = languages || [];
 
   return props.children({
     languages: LANGUAGE_TABS.filter(({ value }) =>
@@ -25,41 +25,37 @@ const ActiveLanguages = formValues({
   });
 });
 
-const defaultGetStepCollapseProps = () => ({
-  open: true,
-});
-
-const ToteutusFormBase = ({
+const ToteutusForm = ({
   handleSubmit,
-  getStepCollapseProps = defaultGetStepCollapseProps,
   koulutusKoodiUri,
   organisaatioOid,
+  onMaybeCopy = () => {},
+  onCreateNew = () => {},
+  steps = false,
 }) => (
   <form onSubmit={handleSubmit}>
     <ActiveLanguages>
       {({ languages }) => (
-        <>
+        <FormCollapseGroup enabled={steps}>
           <FormCollapse
             header="1 Pohjan valinta"
             section="base"
-            {...getStepCollapseProps(0)}
+            onContinue={onMaybeCopy}
           >
-            <PohjaSection />
+            {({ onContinue }) => (
+              <PohjaSection
+                organisaatioOid={organisaatioOid}
+                onCreateNew={onCreateNew}
+                onContinue={onContinue}
+              />
+            )}
           </FormCollapse>
 
-          <FormCollapse
-            header="2 Kieliversiot"
-            section="kieliversiot"
-            {...getStepCollapseProps(1)}
-          >
+          <FormCollapse header="2 Kieliversiot" section="kieliversiot">
             <KieliversiotFormSection />
           </FormCollapse>
 
-          <FormCollapse
-            header="3 Valitse osaamisalat"
-            section="osaamisalat"
-            {...getStepCollapseProps(2)}
-          >
+          <FormCollapse header="3 Valitse osaamisalat" section="osaamisalat">
             <OsaamisalatSection
               languages={languages}
               koulutusKoodiUri={koulutusKoodiUri}
@@ -69,7 +65,6 @@ const ToteutusFormBase = ({
           <FormCollapse
             header="4 Toteutuksen järjestämistiedot"
             section="jarjestamistiedot"
-            {...getStepCollapseProps(3)}
           >
             <JarjestamisTiedotSection languages={languages} />
           </FormCollapse>
@@ -77,7 +72,6 @@ const ToteutusFormBase = ({
           <FormCollapse
             header="5 Koulutuksen näyttämiseen liittyvät tiedot"
             section="nayttamistiedot"
-            {...getStepCollapseProps(4)}
           >
             <NayttamisTiedotSection languages={languages} />
           </FormCollapse>
@@ -85,57 +79,24 @@ const ToteutusFormBase = ({
           <FormCollapse
             header="6 Missä järjestetään?"
             section="jarjestamispaikat"
-            {...getStepCollapseProps(5)}
           >
             <JarjestamisPaikatSection organisaatioOid={organisaatioOid} />
           </FormCollapse>
 
-          <FormCollapse
-            header="7 Toteutuksen nimi"
-            section="nimi"
-            {...getStepCollapseProps(6)}
-          >
+          <FormCollapse header="7 Toteutuksen nimi" section="nimi">
             <NimiSection languages={languages} />
           </FormCollapse>
 
           <FormCollapse
             header="8 Koulutuksen yhteystiedot"
             section="yhteystiedot"
-            {...getStepCollapseProps(7)}
-            onContinue={null}
           >
             <YhteystiedotSection languages={languages} />
           </FormCollapse>
-        </>
+        </FormCollapseGroup>
       )}
     </ActiveLanguages>
   </form>
 );
-
-const ToteutusForm = ({ steps = false, ...props }) => {
-  const stepCount = 8;
-
-  return steps ? (
-    <FormStepper stepCount={stepCount}>
-      {({ activeStep, makeOnGoToStep }) => {
-        const getStepCollapseProps = step => {
-          return {
-            open: activeStep >= step,
-            onContinue: makeOnGoToStep(step + 1),
-          };
-        };
-
-        return (
-          <ToteutusFormBase
-            getStepCollapseProps={getStepCollapseProps}
-            {...props}
-          />
-        );
-      }}
-    </FormStepper>
-  ) : (
-    <ToteutusFormBase {...props} />
-  );
-};
 
 export default ToteutusForm;

@@ -1,10 +1,16 @@
 import React from 'react';
 import uniq from 'lodash/uniq';
+import memoize from 'memoizee';
 
 import ApiAsync from '../ApiAsync';
 import { getOrganisaatioHierarchyByOid } from '../../apiUtils';
 import CheckboxGroup from '../CheckboxGroup';
-import { isArray, getTreeLevel, arrayDiff, getFirstLanguageValue } from '../../utils';
+import {
+  isArray,
+  getTreeLevel,
+  arrayDiff,
+  getFirstLanguageValue,
+} from '../../utils';
 import Typography from '../Typography';
 import Spacing from '../Spacing';
 
@@ -32,17 +38,44 @@ const getOptions = organisaatiot => {
   }));
 };
 
+const getFlatOptions = memoize(options => {
+  return isArray(options)
+    ? options.reduce((acc, curr) => {
+        if (isArray(curr.children)) {
+          return [...acc, ...curr.children];
+        }
+
+        return acc;
+      }, [])
+    : [];
+});
+
+const cleanValue = (value, options) => {
+  const flatOptions = getFlatOptions(options);
+
+  const optionValues = flatOptions.map(({ value }) => value);
+
+  if (!isArray(options) || !isArray(value)) {
+    return value;
+  }
+
+  return value.filter(v => optionValues.includes(v));
+};
+
 const makeOnGroupChange = ({
   options = [],
   value = [],
   onChange,
+  allOptions = [],
 }) => newValue => {
   const optionValue = options.map(({ value }) => value);
   const previousOptionValue = value.filter(v => optionValue.includes(v));
   const newOptionValue = newValue.filter(v => optionValue.includes(v));
   const { added, removed } = arrayDiff(previousOptionValue, newOptionValue);
 
-  onChange(uniq([...added, ...value.filter(v => !removed.includes(v))]));
+  onChange(
+    cleanValue(uniq([...added, ...value.filter(v => !removed.includes(v))]), allOptions),
+  );
 };
 
 const MultiSelection = ({ value = [], onChange = () => {}, options = [] }) => {
@@ -56,7 +89,12 @@ const MultiSelection = ({ value = [], onChange = () => {}, options = [] }) => {
           </Typography>
           <CheckboxGroup
             value={value}
-            onChange={makeOnGroupChange({ options: children, value, onChange })}
+            onChange={makeOnGroupChange({
+              options: children,
+              value,
+              onChange,
+              allOptions: options,
+            })}
             options={children}
           />
         </Spacing>

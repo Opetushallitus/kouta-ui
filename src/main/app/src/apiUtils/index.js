@@ -7,6 +7,7 @@ import groupBy from 'lodash/groupBy';
 import toPairs from 'lodash/toPairs';
 import maxBy from 'lodash/maxBy';
 import upperFirst from 'lodash/upperFirst';
+import memoize from 'memoizee';
 
 const getKoodiUriParts = uri => {
   const [koodiUri, versio = null] = uri.split('#');
@@ -62,103 +63,106 @@ export const getKoulutuksetByKoulutusTyyppi = async ({
   );
 };
 
-export const getKoulutusByKoodi = async ({
-  httpClient,
-  apiUrls,
-  koodiUri: argKoodiUri,
-}) => {
-  const { koodiUri, versio } = getKoodiUriParts(argKoodiUri);
+const memoizedGetKoulutusByKoodi = memoize(
+  async (httpClient, apiUrls, argKoodiUri) => {
+    const { koodiUri, versio } = getKoodiUriParts(argKoodiUri);
 
-  const [
-    perusteetResponse,
-    alakooditResponse,
-    koodiResponse,
-  ] = await Promise.all([
-    httpClient.get(
-      apiUrls.url('eperusteet-service.perusteet-koulutuskoodilla', koodiUri),
-    ),
-    httpClient.get(
-      apiUrls.url(
-        'koodisto-service.sisaltyy-alakoodit',
-        koodiUri,
-        versio || '',
+    const [
+      perusteetResponse,
+      alakooditResponse,
+      koodiResponse,
+    ] = await Promise.all([
+      httpClient.get(
+        apiUrls.url('eperusteet-service.perusteet-koulutuskoodilla', koodiUri),
       ),
-    ),
-    httpClient.get(apiUrls.url('koodisto-service.codeelement', koodiUri)),
-  ]);
+      httpClient.get(
+        apiUrls.url(
+          'koodisto-service.sisaltyy-alakoodit',
+          koodiUri,
+          versio || '',
+        ),
+      ),
+      httpClient.get(apiUrls.url('koodisto-service.codeelement', koodiUri)),
+    ]);
 
-  const {
-    data: { data: perusteetData },
-  } = perusteetResponse;
+    const {
+      data: { data: perusteetData },
+    } = perusteetResponse;
 
-  const { data: koodiData } = koodiResponse;
+    const { data: koodiData } = koodiResponse;
 
-  const { data: alakooditData = [] } = alakooditResponse;
+    const { data: alakooditData = [] } = alakooditResponse;
 
-  const koulutusalaKoodi = alakooditData.find(
-    ({ koodiUri }) => koodiUri && /^okmohjauksenala_/.test(koodiUri),
-  );
+    const koulutusalaKoodi = alakooditData.find(
+      ({ koodiUri }) => koodiUri && /^okmohjauksenala_/.test(koodiUri),
+    );
 
-  const opintojenlaajuusKoodi = alakooditData.find(
-    ({ koodiUri }) => koodiUri && /^opintojenlaajuus_/.test(koodiUri),
-  );
+    const opintojenlaajuusKoodi = alakooditData.find(
+      ({ koodiUri }) => koodiUri && /^opintojenlaajuus_/.test(koodiUri),
+    );
 
-  const opintojenlaajuusYksikkoKoodi = alakooditData.find(
-    ({ koodiUri }) => koodiUri && /^opintojenlaajuusyksikko_/.test(koodiUri),
-  );
+    const opintojenlaajuusYksikkoKoodi = alakooditData.find(
+      ({ koodiUri }) => koodiUri && /^opintojenlaajuusyksikko_/.test(koodiUri),
+    );
 
-  const koulutusala =
-    koulutusalaKoodi && isArray(koulutusalaKoodi.metadata)
-      ? keyBy(koulutusalaKoodi.metadata, ({ kieli }) =>
-          kieli ? kieli.toLowerCase() : '_',
-        )
+    const koulutusala =
+      koulutusalaKoodi && isArray(koulutusalaKoodi.metadata)
+        ? keyBy(koulutusalaKoodi.metadata, ({ kieli }) =>
+            kieli ? kieli.toLowerCase() : '_',
+          )
+        : null;
+
+    const opintojenlaajuus =
+      opintojenlaajuusKoodi && isArray(opintojenlaajuusKoodi.metadata)
+        ? get(opintojenlaajuusKoodi.metadata, '[0].nimi') || null
+        : null;
+
+    const opintojenlaajuusYksikko =
+      opintojenlaajuusYksikkoKoodi &&
+      isArray(opintojenlaajuusYksikkoKoodi.metadata)
+        ? keyBy(opintojenlaajuusYksikkoKoodi.metadata, ({ kieli }) =>
+            kieli ? kieli.toLowerCase() : '_',
+          )
+        : null;
+
+    const latestKoodi = isArray(koodiData)
+      ? maxBy(koodiData, ({ versio }) => versio)
       : null;
 
-  const opintojenlaajuus =
-    opintojenlaajuusKoodi && isArray(opintojenlaajuusKoodi.metadata)
-      ? get(opintojenlaajuusKoodi.metadata, '[0].nimi') || null
-      : null;
+    const nimi =
+      latestKoodi && isArray(latestKoodi.metadata)
+        ? keyBy(latestKoodi.metadata, ({ kieli }) =>
+            kieli ? kieli.toLowerCase() : '_',
+          )
+        : null;
 
-  const opintojenlaajuusYksikko =
-    opintojenlaajuusYksikkoKoodi &&
-    isArray(opintojenlaajuusYksikkoKoodi.metadata)
-      ? keyBy(opintojenlaajuusYksikkoKoodi.metadata, ({ kieli }) =>
-          kieli ? kieli.toLowerCase() : '_',
-        )
-      : null;
+    const {
+      kuvaus = null,
+      osaamisalat = [],
+      tutkintonimikeKoodit = [],
+      id: perusteId,
+    } = perusteetData[0] || {};
 
-  const latestKoodi = isArray(koodiData)
-    ? maxBy(koodiData, ({ versio }) => versio)
-    : null;
+    return {
+      koodiUri,
+      perusteId,
+      kuvaus,
+      osaamisalat,
+      tutkintonimikeKoodit,
+      koulutusala: mapValues(koulutusala, ({ nimi }) => nimi || null),
+      opintojenlaajuus,
+      opintojenlaajuusYksikko: mapValues(
+        opintojenlaajuusYksikko,
+        ({ nimi }) => nimi || null,
+      ),
+      nimi: mapValues(nimi, ({ nimi: nimiField }) => nimiField || null),
+    };
+  },
+  { promise: true },
+);
 
-  const nimi =
-    latestKoodi && isArray(latestKoodi.metadata)
-      ? keyBy(latestKoodi.metadata, ({ kieli }) =>
-          kieli ? kieli.toLowerCase() : '_',
-        )
-      : null;
-
-  const {
-    kuvaus = null,
-    osaamisalat = [],
-    tutkintonimikeKoodit = [],
-    id: perusteId,
-  } = perusteetData[0] || {};
-
-  return {
-    koodiUri,
-    perusteId,
-    kuvaus,
-    osaamisalat,
-    tutkintonimikeKoodit,
-    koulutusala: mapValues(koulutusala, ({ nimi }) => nimi || null),
-    opintojenlaajuus,
-    opintojenlaajuusYksikko: mapValues(
-      opintojenlaajuusYksikko,
-      ({ nimi }) => nimi || null,
-    ),
-    nimi: mapValues(nimi, ({ nimi: nimiField }) => nimiField || null),
-  };
+export const getKoulutusByKoodi = ({ httpClient, apiUrls, koodiUri }) => {
+  return memoizedGetKoulutusByKoodi(httpClient, apiUrls, koodiUri);
 };
 
 export const getOrganisaatioHierarchyByOid = async ({
@@ -173,12 +177,19 @@ export const getOrganisaatioHierarchyByOid = async ({
   return get(data, 'organisaatiot') || [];
 };
 
-export const getOrganisaatioByOid = async ({ oid, apiUrls, httpClient }) => {
-  const { data } = await httpClient.get(
-    apiUrls.url('organisaatio-service.organisaatio-by-oid', oid),
-  );
+const memoizedGetOrganisaatioByOid = memoize(
+  async (httpClient, apiUrls, oid) => {
+    const { data } = await httpClient.get(
+      apiUrls.url('organisaatio-service.organisaatio-by-oid', oid),
+    );
 
-  return data;
+    return data;
+  },
+  { promise: true },
+);
+
+export const getOrganisaatioByOid = ({ oid, apiUrls, httpClient }) => {
+  return memoizedGetOrganisaatioByOid(httpClient, apiUrls, oid);
 };
 
 export const getKoutaKoulutusByOid = async ({ oid, apiUrls, httpClient }) => {
@@ -247,12 +258,25 @@ export const getAvainsanatByTerm = async ({
   return data;
 };
 
-export const getKoodisto = async ({ koodistoUri, httpClient, apiUrls }) => {
-  const { data } = await httpClient.get(
-    apiUrls.url('koodisto-service.koodi', koodistoUri),
-  );
+const memoizedGetKoodisto = memoize(
+  async (httpClient, apiUrls, koodistoUri, koodistoVersio) => {
+    const { data } = await httpClient.get(
+      apiUrls.url('koodisto-service.koodi', koodistoUri),
+      { params: { koodistoVersio } },
+    );
 
-  return data;
+    return data;
+  },
+  { promise: true },
+);
+
+export const getKoodisto = ({
+  koodistoUri,
+  httpClient,
+  apiUrls,
+  koodistoVersio = '',
+}) => {
+  return memoizedGetKoodisto(httpClient, apiUrls, koodistoUri, koodistoVersio);
 };
 
 export const getLocalisation = async ({
@@ -337,6 +361,21 @@ export const getKoutaKoulutukset = async ({
 }) => {
   const { data } = await httpClient.get(
     apiUrls.url('kouta-backend.koulutus-list'),
+    {
+      params: { organisaatioOid },
+    },
+  );
+
+  return data;
+};
+
+export const getKoutaToteutukset = async ({
+  organisaatioOid,
+  httpClient,
+  apiUrls,
+}) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-backend.toteutus-list'),
     {
       params: { organisaatioOid },
     },

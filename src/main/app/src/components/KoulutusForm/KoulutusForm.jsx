@@ -115,7 +115,7 @@ const KoulutusForm = ({
                     
                     {isFunction(onSaveAndAttachToteutus) ? (
                       <FormCollapse
-                        header="7 Koulutuksee liitetyt toteutukset"
+                        header="7 Koulutukseen liitetyt toteutukset"
                         section="toteutukset"
                         actions={
                           <ToteutuksetPohjaFieldValue>

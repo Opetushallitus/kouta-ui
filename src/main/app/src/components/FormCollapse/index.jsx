@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Collapse, { UncontrolledCollapse } from '../Collapse';
 import Button from '../Button';
-import ResetFormSection from '../ResetFormSection';
+import ClearFormSection from './ClearFormSection';
 import { isFunction } from '../../utils';
 
 const CollapseFooterContainer = styled.div`
@@ -34,6 +34,8 @@ const FormCollapse = ({
   children = null,
   controlled = true,
   open = false,
+  clearable = true,
+  actions: actionsProp = null,
   ...props
 }) => {
   const CollapseComponent = controlled ? Collapse : UncontrolledCollapse;
@@ -46,26 +48,29 @@ const FormCollapse = ({
         defaultOpen: true,
       };
 
+  const actions = actionsProp ? actionsProp : (
+    isFunction(onContinue) ? (
+      <Button type="button" onClick={onContinue}>
+        Jatka
+      </Button>
+    ) : null
+  );
+
   return (
     <CollapseWrapper>
       <CollapseComponent
         footer={
           <CollapseFooterContainer>
-            {section ? (
-              <ResetFormSection name={section}>
-                {({ onReset }) => (
-                  <Button type="button" variant="outlined" onClick={onReset}>
+            {section && clearable ? (
+              <ClearFormSection name={section}>
+                {({ onClear }) => (
+                  <Button type="button" variant="outlined" onClick={onClear}>
                     Tyhjennä tiedot
                   </Button>
                 )}
-              </ResetFormSection>
+              </ClearFormSection>
             ) : null}
-
-            {isFunction(onContinue) ? (
-              <Button type="button" onClick={onContinue}>
-                Jatka
-              </Button>
-            ) : null}
+            {actions}
           </CollapseFooterContainer>
         }
         {...collapseProps}

@@ -80,6 +80,12 @@ const Footer = styled.div`
 const BodyWrapper = styled.div`
   max-height: 400px;
   overflow-y: auto;
+
+  ${({ minHeight }) =>
+    minHeight &&
+    css`
+      min-height: ${minHeight};
+    `}
 `;
 
 const Body = styled.div`
@@ -151,6 +157,7 @@ class ModalDialog extends Component {
       contentStyle,
       maxWidth,
       fullWidth,
+      minHeight,
     } = this.props;
 
     return createPortal(
@@ -167,7 +174,7 @@ class ModalDialog extends Component {
           >
             {header ? <Header onClose={onClose}>{header}</Header> : null}
             {children ? (
-              <BodyWrapper>
+              <BodyWrapper minHeight={minHeight}>
                 <Body>{children}</Body>
               </BodyWrapper>
             ) : null}

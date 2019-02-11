@@ -9,6 +9,7 @@ import Button from '../Button';
 import LanguageSelector from '../LanguageSelector';
 import Select from '../Select';
 import Spacing from '../Spacing';
+import { HAKUKOHDE_LOMAKETYYPPI_OPTIONS } from '../../constants';
 
 const SelectionContainer = styled.div`
   flex: 1;
@@ -36,13 +37,14 @@ const ShowLomakeButton = styled(Button)`
   margin-right: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
-const renderBaseDropdownField = ({ input }) => (
-    <RadioGroup style={{'display': 'inline-block'}} {...input}>
-      <Radio value="a">Käytetään hakemuspalvelun lomaketta</Radio>
-      <Radio value="b">Käytetään järjestelmän hakulomaketta</Radio>
-      <Radio value="c">Käytetään muuta hakulomaketta</Radio>
-      <Radio value="d">Ei sähköistä hakua</Radio>
-    </RadioGroup>
+const renderBaseDropdownField = ({ input, options }) => (
+  <RadioGroup {...input}>
+    {options.map(({ label, value }) => (
+      <Radio value={value} key={value}>
+        {label}
+      </Radio>
+    ))}
+  </RadioGroup>
 );
 
 const FormSelectSection = ({ languages, koodiUri, ...props }) => {
@@ -57,13 +59,13 @@ const FormSelectSection = ({ languages, koodiUri, ...props }) => {
                 <div> 
                   <Typography>Valitse mitä hakulomaketta käytetään</Typography>
                 </div>
-                <Field name={`lomaketyyppi.${activeLanguage}`} component={renderBaseDropdownField} />
+                <Field name={`lomaketyyppi.${activeLanguage}`} component={renderBaseDropdownField} options={HAKUKOHDE_LOMAKETYYPPI_OPTIONS} />
               </RadioFieldContainer>
               <DropdownContainer>
                 <Typography paddingLeft={3}>Valitse hakulomake</Typography>
                 <SelectionContainer>
                   <Field
-                    name={`lokame.${activeLanguage}`}
+                    name={`lomake.${activeLanguage}`}
                     options={[{ label: 'testi lomake 1', value: '1' }, { label: 'testi lomake 2', value: '2' }]}
                     component={renderLomakeSelectionField}
                   />

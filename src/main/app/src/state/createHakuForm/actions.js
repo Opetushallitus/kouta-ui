@@ -82,6 +82,8 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
 
   const kohdejoukkoKoodiUri = get(values, 'kohdejoukko.kohde') || null;
 
+  const kohdejoukonTarkenneKoodiUri = null;
+
   const metadata = {
     yhteystieto: {
       nimi: pick(get(values, 'yhteystiedot.nimi') || null, kielivalinta),
@@ -117,6 +119,7 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
     hakukohteenLiittamisenTakaraja,
     nimi,
     kohdejoukkoKoodiUri,
+    kohdejoukonTarkenneKoodiUri,
     hakulomaketyyppi,
     muokkaaja,
     metadata,

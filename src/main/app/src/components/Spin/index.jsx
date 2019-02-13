@@ -28,13 +28,13 @@ const SpinCircle = styled.div`
   width: 35px;
   height: 35px;
   border-style: solid;
-  border-color: rgb(0, 0, 0, 0.1);
-  border-right-color: ${({ theme }) => theme.palette.primary.main};
+  border-color: rgba(0, 0, 0, 0.1);
+  border-top-color: ${({ theme }) => theme.palette.primary.main};
   border-radius: 50%;
   animation: ${spin};
-  animation-duration: 0.75s;
+  animation-duration: 1s;
   animation-iteration-count: infinite;
-  animation-timing-function: linear;
+  animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
   display: inline-flex;
   flex-grow: 0;
 

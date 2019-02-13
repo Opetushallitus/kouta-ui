@@ -17,7 +17,9 @@ export const getKoulutusByValues = values => {
     tarjoajat,
     koulutusKoodiUri,
     koulutustyyppi,
-    osiot: osiotWithKuvaukset,
+    metadata: {
+      osiot: osiotWithKuvaukset,
+    },
   };
 };
 
@@ -27,8 +29,10 @@ export const getValuesByKoulutus = koulutus => {
     koulutusKoodiUri = '',
     koulutustyyppi = '',
     tarjoajat = [],
-    osiot: osiotArg = [],
+    metadata = {},
   } = koulutus;
+
+  const { osiot: osiotArg = [] } = metadata;
 
   const osiot = osiotArg
     .filter(({ koodiUri }) => !!koodiUri)

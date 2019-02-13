@@ -8,9 +8,7 @@ export const useApiAsync = (asyncArgs = {}) => {
   const httpClient = useContext(HttpContext);
   const apiUrls = useContext(UrlContext);
 
-  const props = useAsync({ httpClient, apiUrls, ...asyncArgs });
-
-  return props;
+  return useAsync({ httpClient, apiUrls, ...asyncArgs });
 };
 
 export default useApiAsync;

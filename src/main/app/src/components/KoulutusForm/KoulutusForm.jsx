@@ -16,6 +16,7 @@ import { ModalController } from '../Modal';
 import Button from '../Button';
 import { isFunction } from '../../utils';
 import LisatiedotSection from './LisatiedotSection';
+import Flex from '../Flex';
 
 const ActiveLanguages = formValues({
   languages: 'kieliversiot.languages',
@@ -50,7 +51,10 @@ const KoulutusForm = ({
   onMaybeCopy = () => {},
   steps = false,
   onCreateNew,
-  onSaveAndAttachToteutus,
+  onAttachToteutus,
+  canCopy = true,
+  scrollTarget,
+  koulutus: koulutusProp = null,
 }) => {
   return (
     <form onSubmit={handleSubmit}>
@@ -60,35 +64,34 @@ const KoulutusForm = ({
             {({ koulutus }) => (
               <ActiveKoulutusTyyppi>
                 {({ koulutusTyyppi }) => (
-                  <FormCollapseGroup enabled={steps}>
-                    <FormCollapse header="1 Koulutustyyppi" section="type">
+                  <FormCollapseGroup enabled={steps} scrollTarget={scrollTarget}>
+                    <FormCollapse header="Koulutustyyppi" section="type">
                       <TypeSection />
                     </FormCollapse>
 
-                    <FormCollapse
-                      header="2 Pohjan valinta"
-                      section="base"
-                      onContinue={onMaybeCopy}
-                    >
-                      {({ onContinue }) => (
-                        <BaseSelectionSection
-                          onContinue={onContinue}
-                          organisaatioOid={organisaatioOid}
-                          onCopy={onCopy}
-                          onCreateNew={onCreateNew}
-                        />
-                      )}
-                    </FormCollapse>
+                    {canCopy ? (
+                      <FormCollapse
+                        header="Pohjan valinta"
+                        section="base"
+                        onContinue={onMaybeCopy}
+                      >
+                        {({ onContinue }) => (
+                          <BaseSelectionSection
+                            onContinue={onContinue}
+                            organisaatioOid={organisaatioOid}
+                            onCopy={onCopy}
+                            onCreateNew={onCreateNew}
+                          />
+                        )}
+                      </FormCollapse>
+                    ) : null}
 
-                    <FormCollapse
-                      header="3 Kieliversiot"
-                      section="kieliversiot"
-                    >
+                    <FormCollapse header="Kieliversiot" section="kieliversiot">
                       <KieliversiotFormSection />
                     </FormCollapse>
 
                     <FormCollapse
-                      header="4 Koulutuksen tiedot"
+                      header="Koulutuksen tiedot"
                       section="information"
                     >
                       <InformationSection
@@ -98,7 +101,7 @@ const KoulutusForm = ({
                     </FormCollapse>
 
                     <FormCollapse
-                      header="5 Valitun koulutuksen kuvaus"
+                      header="Valitun koulutuksen kuvaus"
                       section="description"
                     >
                       <DescriptionSection
@@ -108,23 +111,24 @@ const KoulutusForm = ({
                     </FormCollapse>
 
                     <FormCollapse
-                      header="6 Koulutuksen lisätiedot"
+                      header="Koulutuksen lisätiedot"
                       section="lisatiedot"
                     >
                       <LisatiedotSection languages={languages} />
                     </FormCollapse>
 
                     <FormCollapse
-                      header="6 Koulutuksen järjestävä organisaatio"
+                      header="Koulutuksen järjestävä organisaatio"
                       section="organization"
                     >
                       <OrganizationSection organisaatioOid={organisaatioOid} />
                     </FormCollapse>
 
-                    {isFunction(onSaveAndAttachToteutus) ? (
+                    {isFunction(onAttachToteutus) ? (
                       <FormCollapse
-                        header="7 Koulutukseen liitetyt toteutukset"
-                        section="toteutukset"
+                        header="Koulutukseen liitetyt toteutukset"
+                        id="koulutukseen-liitetetyt-toteutukset"
+                        clearable={false}
                         actions={
                           <ToteutuksetPohjaFieldValue>
                             {({ pohja }) => (
@@ -133,19 +137,21 @@ const KoulutusForm = ({
                                 pohjaValue={pohja}
                                 fieldName="toteutukset"
                                 organisaatioOid={organisaatioOid}
-                                onSave={onSaveAndAttachToteutus}
+                                onSave={onAttachToteutus}
                               >
                                 {({ onToggle }) => (
-                                  <Button onClick={onToggle} type="button">
-                                    Liitä toteutus
-                                  </Button>
+                                  <Flex justifyEnd full>
+                                    <Button onClick={onToggle} type="button">
+                                      Liitä toteutus
+                                    </Button>
+                                  </Flex>
                                 )}
                               </ModalController>
                             )}
                           </ToteutuksetPohjaFieldValue>
                         }
                       >
-                        <ToteutuksetSection />
+                        <ToteutuksetSection koulutus={koulutusProp} />
                       </FormCollapse>
                     ) : null}
                   </FormCollapseGroup>

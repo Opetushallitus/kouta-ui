@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import format from 'date-fns/format';
 
 import Icon from '../Icon';
 import { getThemeProp } from '../../theme';
-import { isDate } from '../../utils';
+import { isDate, foarmatDateInFinnishTimeZone } from '../../utils';
 import Spacing from '../Spacing';
 import Anchor from '../Anchor';
 
@@ -37,13 +36,15 @@ const FormEditInfo = ({ editor, date, historyUrl, ...props }) => {
       <InfoContainer>
         <Spacing marginBottom={0.25}>Muokattu viimeksi:</Spacing>
         <Spacing marginBottom={0.25}>
-          {isDate(date) ? format(date, 'DD.MM.YYYY HH:mm') : null}{' '}
+          {isDate(date) ? foarmatDateInFinnishTimeZone(date, 'DD.MM.YYYY HH:mm') : null}{' '}
           {editor ? editor : null}
         </Spacing>
         <div>
-          <Anchor href={historyUrl} target="_blank">
-            Näytä versiohistoria
-          </Anchor>
+          {historyUrl ? (
+            <Anchor href={historyUrl} target="_blank">
+              Näytä versiohistoria
+            </Anchor>
+          ) : null}
         </div>
       </InfoContainer>
     </Container>

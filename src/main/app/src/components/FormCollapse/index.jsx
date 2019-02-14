@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Collapse, { UncontrolledCollapse } from '../Collapse';
 import Button from '../Button';
 import ClearFormSection from './ClearFormSection';
-import { isFunction } from '../../utils';
+import { isFunction, isString } from '../../utils';
 
 const CollapseFooterContainer = styled.div`
   display: flex;
@@ -36,6 +36,9 @@ const FormCollapse = ({
   open = false,
   clearable = true,
   actions: actionsProp = null,
+  index,
+  header: headerProp = null,
+  id,
   ...props
 }) => {
   const CollapseComponent = controlled ? Collapse : UncontrolledCollapse;
@@ -48,17 +51,22 @@ const FormCollapse = ({
         defaultOpen: true,
       };
 
-  const actions = actionsProp ? actionsProp : (
-    isFunction(onContinue) ? (
-      <Button type="button" onClick={onContinue}>
-        Jatka
-      </Button>
-    ) : null
-  );
+  const actions = actionsProp ? (
+    actionsProp
+  ) : isFunction(onContinue) ? (
+    <Button type="button" onClick={onContinue}>
+      Jatka
+    </Button>
+  ) : null;
+
+  const header = isString(headerProp)
+    ? `${index + 1} ${headerProp}`
+    : headerProp;
 
   return (
-    <CollapseWrapper>
+    <CollapseWrapper {...id && { id }}>
       <CollapseComponent
+        header={header}
         footer={
           <CollapseFooterContainer>
             {section && clearable ? (

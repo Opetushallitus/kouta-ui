@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { isFunction } from '../../utils';
+
 class FormCollapseGroup extends Component {
   static defaultProps = {
     enabled: true,
@@ -32,6 +34,22 @@ class FormCollapseGroup extends Component {
     }
   };
 
+  componentDidMount() {
+    const { scrollTarget } = this.props;
+
+    if (!scrollTarget) {
+      return;
+    }
+
+    const element = document.getElementById(scrollTarget);
+
+    if (element && isFunction(element.scrollIntoView)) {
+      setTimeout(() => {
+        element.scrollIntoView();
+      }, 500);
+    }
+  }
+
   render() {
     const { activeStep } = this.state;
     const { enabled, children } = this.props;
@@ -42,6 +60,7 @@ class FormCollapseGroup extends Component {
       const childProps = enabled
         ? {
             controlled: true,
+            index,
             open: index <= activeStep,
             active: index === activeStep,
             onContinue:
@@ -51,6 +70,7 @@ class FormCollapseGroup extends Component {
           }
         : {
             controlled: false,
+            index,
           };
 
       return React.cloneElement(child, childProps);

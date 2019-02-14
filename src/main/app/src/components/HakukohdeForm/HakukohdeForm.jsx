@@ -39,70 +39,70 @@ const HakukohdeForm = ({
       {({ languages }) => (
         <FormCollapseGroup enabled={steps}>
           <FormCollapse
-            header="1 Kieliversiot"
+            header="Kieliversiot"
             section="kieliversiot"
           >
             <KieliversiotFormSection />
           </FormCollapse>
 
           <FormCollapse
-            header="2 Pohjakoulutusvaatimus"
+            header="Pohjakoulutusvaatimus"
             section="pohjakoulutus"
           >
             <PohjakoulutusSection languages={languages} />
           </FormCollapse>
 
           <FormCollapse
-            header="3 Hakukohteen perustiedot"
+            header="Hakukohteen perustiedot"
             section="perustiedot"
           >
             <PerustiedotSection languages={languages} />
           </FormCollapse>
 
           <FormCollapse
-            header="4 Hakuajat"
+            header="Hakuajat"
             section="hakuajat"
           >
             <HakuajatSection haku={haku} languages={languages} />
           </FormCollapse>
 
           <FormCollapse
-            header="5 Lomake"
+            header="Lomake"
             section="lomake"
           >
             <LomakeSection />
           </FormCollapse>
 
           <FormCollapse
-            header="6 Koulutuksen alkamiskausi"
+            header="Koulutuksen alkamiskausi"
             section="alkamiskausi"
           >
             <AlkamiskausiSection />
           </FormCollapse>
 
           <FormCollapse
-            header="7 Aloituspaikat"
+            header="Aloituspaikat"
             section="aloituspaikat"
           >
             <AloituspaikatSection />
           </FormCollapse>
 
           <FormCollapse
-            header="8 Valintaperusteen kuvaus"
+            header="Valintaperusteen kuvaus"
             section="valintaperusteenKuvaus"
           >
             <KuvausSection organisaatio={organisaatio} haku={haku} />
           </FormCollapse>
 
           <FormCollapse
-            header="9 Valintakoe"
+            header="Valintakoe"
             section="valintakoe"
           >
             <ValintakoeSection languages={languages} />
           </FormCollapse>
 
           <FormCollapse
-            header="10 Tarvittavat liitteet"
+            header="Tarvittavat liitteet"
             section="liitteet"
           >
             <LiitteetSection languages={languages} organisaatioOid={organisaatioOid} />

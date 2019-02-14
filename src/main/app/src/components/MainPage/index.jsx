@@ -7,6 +7,7 @@ import CreateKoulutusPage from '../CreateKoulutusPage';
 import CreateToteutusPage from '../CreateToteutusPage';
 import CreateHakukohdePage from '../CreateHakukohdePage';
 import CreateValintaperusteetPage from '../CreateValintaperusteetPage';
+import EditKoulutusPage from '../EditKoulutusPage';
 
 const CreateHakuPage = () => 'Haku';
 
@@ -39,6 +40,11 @@ const MainPage = ({ history }) => {
         <Route
           path="/organisaatio/:oid/valintaperusteet"
           component={CreateValintaperusteetPage}
+          exact
+        />
+        <Route
+          path="/koulutus/:oid/muokkaus"
+          component={EditKoulutusPage}
           exact
         />
         <Redirect to="/" />

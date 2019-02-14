@@ -33,14 +33,14 @@ const ValintaperusteetForm = ({
       {({ languages }) => (
         <FormCollapseGroup enabled={steps}>
           <FormCollapse
-            header="1 Kieliversiot"
+            header="Kieliversiot"
             section="kieliversiot"
           >
             <KieliversiotFormSection />
           </FormCollapse>
 
           <FormCollapse
-            header="2 Valitse pohja"
+            header="Valitse pohja"
             section="pohja"
           >
             {({ onContinue }) => (
@@ -49,35 +49,35 @@ const ValintaperusteetForm = ({
           </FormCollapse>
 
           <FormCollapse
-            header="3 Hakutavan rajaus"
+            header="Hakutavan rajaus"
             section="hakutavanRajaus"
           >
             <HakutavanRajausSection />
           </FormCollapse>
 
           <FormCollapse
-            header="4 Haun kohdejoukon rajaus"
+            header="Haun kohdejoukon rajaus"
             section="kohdejoukonRajaus"
           >
             <KohdejoukonRajausSection />
           </FormCollapse>
 
           <FormCollapse
-            header="5 Valintaperusteen nimi"
+            header="Valintaperusteen nimi"
             section="nimi"
           >
             <NimiSection languages={languages} />
           </FormCollapse>
 
           <FormCollapse
-            header="6 Valintatapa"
+            header="Valintatapa"
             section="valintatapa"
           >
             <ValintatapaSection languages={languages} />
           </FormCollapse>
 
           <FormCollapse
-            header="7 Kielitaitovaatimukset"
+            header="Kielitaitovaatimukset"
             section="kielitaitovaatimukset"
           >
             <KielitaitovaatimuksetSection languages={languages} />

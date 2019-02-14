@@ -55,17 +55,9 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
     }),
   );
 
-  /*const hakulomaketyyppi = pick(
-    get(values, 'hakulomake.lomaketyyppi') || null,
-    kielivalinta,
-  );*/
-
   const hakulomaketyyppi = get(values, 'hakulomake.lomaketyyppi') || null;
 
-  const hakulomake = pick(
-    get(values, 'hakulomake.lomake') || null,
-    kielivalinta,
-  );
+  const hakulomake = get(values, 'hakulomake.lomake') || null;
 
   const hakukohteenLiittamisenTakaraja =
     get(values, 'aikataulut.liittäminen_pvm') &&

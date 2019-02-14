@@ -138,7 +138,7 @@ const HakuFormBase = ({
             section="hakulomake"
             {...getStepCollapseProps(6)}
           >
-            <FormSelectSection languages={languages} />
+            <FormSelectSection />
           </FormCollapse>
 
           <FormCollapse

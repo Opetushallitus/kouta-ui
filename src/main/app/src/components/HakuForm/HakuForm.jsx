@@ -118,7 +118,7 @@ const HakuFormBase = ({
           </FormCollapse>
 
           <FormCollapse
-            header="5 Haukutapa"
+            header="5 Hakutapa"
             section="hakutapa"
             {...getStepCollapseProps(4)}
           >

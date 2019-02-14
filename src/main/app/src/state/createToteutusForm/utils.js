@@ -34,12 +34,14 @@ export const getToteutusByValues = values => {
   );
   const alkamiskausiKoodiUri =
     get(values, 'jarjestamistiedot.alkamiskausi.kausi') || null;
-  const alkamisvuosi =
-    get(values, 'jarjestamistiedot.alkamiskausi.vuosi') || null;
+
+  const alkamisvuosi = get(values, 'jarjestamistiedot.alkamiskausi.vuosi')
+    ? values.jarjestamistiedot.alkamiskausi.vuosi.toString()
+    : null;
 
   const osiot = (get(values, 'jarjestamistiedot.osiot') || []).map(
-    ({ value, label }) => ({
-      koodiUri: label,
+    ({ value }) => ({
+      otsikkoKoodiUri: value,
       teksti: pick(osioKuvaukset[value] || {}, kielivalinta),
     }),
   );
@@ -94,7 +96,7 @@ export const getToteutusByValues = values => {
     kielivalinta,
     metadata: {
       opetus: {
-        osiot,
+        lisatiedot: osiot,
         opetuskielet,
         kuvaus,
         onkoMaksullinen,
@@ -105,7 +107,7 @@ export const getToteutusByValues = values => {
         opetustapaKuvaus,
         opetusaikaKuvaus,
         maksullisuusKuvaus,
-        alkamiskausiKuvaus,
+        alkamisaikaKuvaus: alkamiskausiKuvaus,
         alkamiskausiKoodiUri,
         alkamisvuosi,
       },
@@ -133,15 +135,15 @@ export const getValuesByToteutus = toteutus => {
     opetus = {},
   } = metadata;
 
-  const { osiot: osiotArg = [] } = opetus;
+  const { lisatiedot = [] } = opetus;
 
-  const osiot = osiotArg
-    .filter(({ koodiUri }) => !!koodiUri)
-    .map(({ koodiUri }) => ({ value: koodiUri }));
+  const osiot = lisatiedot
+    .filter(({ otsikkoKoodiUri }) => !!otsikkoKoodiUri)
+    .map(({ otsikkoKoodiUri }) => ({ value: otsikkoKoodiUri }));
 
-  const osioKuvaukset = osiotArg.reduce((acc, curr) => {
-    if (curr.koodiUri) {
-      acc[curr.koodiUri] = curr.teksti || {};
+  const osioKuvaukset = lisatiedot.reduce((acc, curr) => {
+    if (curr.otsikkoKoodiUri) {
+      acc[curr.otsikkoKoodiUri] = curr.teksti || {};
     }
 
     return acc;

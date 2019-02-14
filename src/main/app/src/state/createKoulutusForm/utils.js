@@ -9,7 +9,10 @@ export const getKoulutusByValues = values => {
   const osioKuvaukset = get(values, 'lisatiedot.osioKuvaukset') || {};
 
   const osiotWithKuvaukset = osiot
-    .map(({ value }) => ({ koodiUri: value, teksti: osioKuvaukset[value] }))
+    .map(({ value }) => ({
+      otsikkoKoodiUri: value,
+      teksti: osioKuvaukset[value],
+    }))
     .filter(({ teksti }) => !!teksti);
 
   return {
@@ -18,7 +21,7 @@ export const getKoulutusByValues = values => {
     koulutusKoodiUri,
     koulutustyyppi,
     metadata: {
-      osiot: osiotWithKuvaukset,
+      lisatiedot: osiotWithKuvaukset,
     },
   };
 };
@@ -32,15 +35,15 @@ export const getValuesByKoulutus = koulutus => {
     metadata = {},
   } = koulutus;
 
-  const { osiot: osiotArg = [] } = metadata;
+  const { lisatiedot = [] } = metadata;
 
-  const osiot = osiotArg
-    .filter(({ koodiUri }) => !!koodiUri)
-    .map(({ koodiUri }) => ({ value: koodiUri }));
+  const osiot = lisatiedot
+    .filter(({ otsikkoKoodiUri }) => !!otsikkoKoodiUri)
+    .map(({ otsikkoKoodiUri }) => ({ value: otsikkoKoodiUri }));
 
-  const osioKuvaukset = osiotArg.reduce((acc, curr) => {
-    if (curr.koodiUri) {
-      acc[curr.koodiUri] = curr.teksti || {};
+  const osioKuvaukset = lisatiedot.reduce((acc, curr) => {
+    if (curr.otsikkoKoodiUri) {
+      acc[curr.otsikkoKoodiUri] = curr.teksti || {};
     }
 
     return acc;

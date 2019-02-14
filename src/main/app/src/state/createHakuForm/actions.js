@@ -60,7 +60,7 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
     kielivalinta,
   );*/
 
-  const hakulomaketyyppi = get(values, 'hakulomake.lomake') || null;
+  const hakulomaketyyppi = get(values, 'hakulomake.lomaketyyppi') || null;
 
   const hakulomake = pick(
     get(values, 'hakulomake.lomake') || null,

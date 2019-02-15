@@ -65,7 +65,15 @@ const getToteutusOptions = toteutukset => {
 };
 
 const renderSelectField = ({ options = [], input }) => {
-  return <Select {...input} options={options} onBlur={noop} />;
+  return (
+    <Select
+      {...input}
+      options={options}
+      onBlur={noop}
+      menuPortalTarget={document.body}
+      menuPosition="fixed"
+    />
+  );
 };
 
 const ToteutuksetModal = ({

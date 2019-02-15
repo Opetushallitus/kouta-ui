@@ -15,6 +15,13 @@ const getStyles = memoize(theme => ({
     ...provided,
     fontFamily: theme.typography.fontFamily,
   }),
+  menuPortal: provided => {
+    return {
+      ...provided,
+      fontFamily: theme.typography.fontFamily,
+      zIndex: 9999,
+    };
+  },
 }));
 
 const defaultNoOptionsMessage = () => 'Valittavia kohteita ei löytynyt';

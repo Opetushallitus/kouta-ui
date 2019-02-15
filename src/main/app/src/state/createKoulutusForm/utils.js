@@ -1,4 +1,5 @@
 import get from 'lodash/get';
+import pick from 'lodash/pick';
 
 export const getKoulutusByValues = values => {
   const kielivalinta = get(values, 'kieliversiot.languages') || [];
@@ -8,12 +9,10 @@ export const getKoulutusByValues = values => {
   const osiot = get(values, 'lisatiedot.osiot') || [];
   const osioKuvaukset = get(values, 'lisatiedot.osioKuvaukset') || {};
 
-  const osiotWithKuvaukset = osiot
-    .map(({ value }) => ({
-      otsikkoKoodiUri: value,
-      teksti: osioKuvaukset[value],
-    }))
-    .filter(({ teksti }) => !!teksti);
+  const osiotWithKuvaukset = osiot.map(({ value }) => ({
+    otsikkoKoodiUri: value,
+    teksti: pick(osioKuvaukset[value] || {}, kielivalinta),
+  }));
 
   return {
     kielivalinta,

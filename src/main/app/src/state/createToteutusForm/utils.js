@@ -6,12 +6,13 @@ import pick from 'lodash/pick';
 export const getToteutusByValues = values => {
   const tarjoajat = get(values, 'jarjestamispaikat.jarjestajat') || [];
   const kielivalinta = get(values, 'kieliversiot.languages') || [];
-  const nimi = get(values, 'nimi.name') || {};
+  const nimi = pick(get(values, 'nimi.name') || {}, kielivalinta);
   const opetuskielet = get(values, 'jarjestamistiedot.opetuskieli') || [];
   const kuvaus = get(values, 'jarjestamistiedot.kuvaus') || {};
   const osioKuvaukset = get(values, 'jarjestamistiedot.osioKuvaukset') || {};
   const opetustapaKoodiUrit = get(values, 'jarjestamistiedot.opetustapa') || [];
   const opetusaikaKoodiUri = get(values, 'jarjestamistiedot.opetusaika');
+
   const opetuskieliKuvaus = pick(
     get(values, 'jarjestamistiedot.opetuskieliKuvaus') || {},
     kielivalinta,
@@ -48,7 +49,11 @@ export const getToteutusByValues = values => {
 
   const onkoMaksullinen =
     get(values, 'jarjestamistiedot.maksullisuus') === 'kylla';
-  const maksunMaara = get(values, 'jarjestamistiedot.maksumaara') || {};
+
+  const maksunMaara = pick(
+    get(values, 'jarjestamistiedot.maksumaara') || {},
+    kielivalinta,
+  );
 
   const osaamisalaLinkit = get(values, 'osaamisalat.osaamisalaLinkit') || {};
   const osaamisalaLinkkiOtsikot =
@@ -63,11 +68,11 @@ export const getToteutusByValues = values => {
   );
 
   const yhteystieto = {
-    nimi: get(values, 'yhteystiedot.name') || {},
-    titteli: get(values, 'yhteystiedot.title') || {},
-    sahkoposti: get(values, 'yhteystiedot.email') || {},
-    puhelinnumero: get(values, 'yhteystiedot.phone') || {},
-    wwwSivu: get(values, 'yhteystiedot.website') || {},
+    nimi: pick(get(values, 'yhteystiedot.name') || {}, kielivalinta),
+    titteli: pick(get(values, 'yhteystiedot.title') || {}, kielivalinta),
+    sahkoposti: pick(get(values, 'yhteystiedot.email') || {}, kielivalinta),
+    puhelinnumero: pick(get(values, 'yhteystiedot.phone') || {}, kielivalinta),
+    wwwSivu: pick(get(values, 'yhteystiedot.website') || {}, kielivalinta),
   };
 
   const ammattinimikkeet = flatMap(

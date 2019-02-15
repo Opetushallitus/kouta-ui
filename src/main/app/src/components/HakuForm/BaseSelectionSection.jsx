@@ -29,7 +29,7 @@ const BaseAndEducationFieldValue = formValues({
   education: 'education',
 })(({ base, education, children }) => children({ base, education }));
 
-const renderBaseDropdownField = ({ input, onContinue, onCreateNew }) => {
+const renderBaseDropdownField = ({ input, onCreateNew }) => {
   const { onChange } = input;
 
   return (
@@ -40,7 +40,6 @@ const renderBaseDropdownField = ({ input, onContinue, onCreateNew }) => {
             onClick={() => {
               onChange('new_haku');
               onCreateNew();
-              onContinue();
             }}
           >
             Luo uusi haku
@@ -76,7 +75,7 @@ const getHakuOptions = haut => {
   }));
 };
 
-const BaseSelectionSection = ({ onContinue, organisaatioOid, onCreateNew }) => {
+const BaseSelectionSection = ({ organisaatioOid, onCreateNew }) => {
   return (
     <ApiAsync
       promiseFn={getKoutaHaut}
@@ -89,7 +88,6 @@ const BaseSelectionSection = ({ onContinue, organisaatioOid, onCreateNew }) => {
             <Field
               name="base"
               component={renderBaseDropdownField}
-              onContinue={onContinue}
               onCreateNew={onCreateNew}
             />
           </FlexItem>

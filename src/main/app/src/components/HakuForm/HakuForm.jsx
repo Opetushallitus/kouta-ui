@@ -78,8 +78,10 @@ const defaultGetStepCollapseProps = () => ({
 });
 
 const HakuFormBase = ({
+  organisaatioOid,
   handleSubmit,
   getStepCollapseProps = defaultGetStepCollapseProps,
+  onCreateNew = () => {},
 }) => (
   <form onSubmit={handleSubmit}>
     <ActiveLanguages>
@@ -90,7 +92,10 @@ const HakuFormBase = ({
             section="pohja"
             {...getStepCollapseProps(0)}
           >
-            <BaseSelectionSection />
+              <BaseSelectionSection
+                organisaatioOid={organisaatioOid}
+                onCreateNew={onCreateNew}
+              />
           </FormCollapse>
 
           <FormCollapse

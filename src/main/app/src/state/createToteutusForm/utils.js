@@ -97,13 +97,13 @@ export const getToteutusByValues = values => {
     metadata: {
       opetus: {
         lisatiedot: osiot,
-        opetuskielet,
+        opetuskieliKoodiUrit: opetuskielet,
         kuvaus,
         onkoMaksullinen,
         maksunMaara,
         opetustapaKoodiUrit,
         opetusaikaKoodiUri,
-        opetuskieliKuvaus,
+        opetuskieletKuvaus: opetuskieliKuvaus,
         opetustapaKuvaus,
         opetusaikaKuvaus,
         maksullisuusKuvaus,
@@ -168,15 +168,15 @@ export const getValuesByToteutus = toteutus => {
       opetuskieli: get(opetus, 'opetuskieliKoodiUrit') || [],
       opetusaikaKuvaus: get(opetus, 'opetusaikaKuvaus') || {},
       opetustapaKuvaus: get(opetus, 'opetustapaKuvaus') || {},
-      opetuskieliKuvaus: get(opetus, 'opetuskieliKuvaus') || {},
+      opetuskieliKuvaus: get(opetus, 'opetuskieletKuvaus') || {},
       maksullisuusKuvaus: get(opetus, 'maksullisuusKuvaus') || {},
       osiot,
       osioKuvaukset,
       alkamiskausi: {
         kausi: get(opetus, 'alkamiskausiKoodiUri') || '',
-        vuosi: get(get, 'alkamisvuosi') || '',
+        vuosi: get(opetus, 'alkamisvuosi') || '',
       },
-      alkamiskausiKuvaus: get(opetus, 'alkamiskausiKuvaus') || {},
+      alkamiskausiKuvaus: get(opetus, 'alkamisaikaKuvaus') || {},
     },
     nayttamistiedot: {
       ammattinimikkeet: ammattinimikkeet.reduce((acc, curr) => {

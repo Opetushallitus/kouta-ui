@@ -14,15 +14,17 @@ const EditKoulutusPage = props => {
     match: {
       params: { oid },
     },
-    location: { search },
+    location: { search, state = {} },
   } = props;
 
+  const { koulutusUpdatedAt = null } = state;
   const { scrollTarget = null } = queryString.parse(search);
+  const watch = JSON.stringify([oid, koulutusUpdatedAt]);
 
   const { data: koulutus = null } = useApiAsync({
     promiseFn: getKoutaKoulutusByOid,
     oid,
-    watch: oid,
+    watch,
   });
 
   const organisaatioOid = koulutus ? koulutus.organisaatioOid : null;

@@ -69,7 +69,9 @@ export const submit = ({
     }),
   );
 
-  history.push(`/koulutus/${koulutusOid}/muokkaus`);
+  history.push(`/koulutus/${koulutusOid}/muokkaus`, {
+    koulutusUpdatedAt: Date.now(),
+  });
 
   return koulutusData;
 };

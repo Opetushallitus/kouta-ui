@@ -15,6 +15,7 @@ import ToteutuksetSection from './ToteutuksetSection';
 import { ModalController } from '../Modal';
 import Button from '../Button';
 import { isFunction } from '../../utils';
+import LisatiedotSection from './LisatiedotSection';
 
 const ActiveLanguages = formValues({
   languages: 'kieliversiot.languages',
@@ -107,12 +108,19 @@ const KoulutusForm = ({
                     </FormCollapse>
 
                     <FormCollapse
+                      header="6 Koulutuksen lisätiedot"
+                      section="lisatiedot"
+                    >
+                      <LisatiedotSection languages={languages} />
+                    </FormCollapse>
+
+                    <FormCollapse
                       header="6 Koulutuksen järjestävä organisaatio"
                       section="organization"
                     >
                       <OrganizationSection organisaatioOid={organisaatioOid} />
                     </FormCollapse>
-                    
+
                     {isFunction(onSaveAndAttachToteutus) ? (
                       <FormCollapse
                         header="7 Koulutukseen liitetyt toteutukset"

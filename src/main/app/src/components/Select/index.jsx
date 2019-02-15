@@ -8,7 +8,7 @@ import { setLightness } from 'polished';
 import memoize from 'memoizee';
 import get from 'lodash/get';
 
-import { isArray } from '../../utils';
+import { isArray, isObject } from '../../utils';
 
 const getStyles = memoize(theme => ({
   container: provided => ({
@@ -52,9 +52,31 @@ const getDefaultProps = memoize(theme => ({
   theme: getTheme(theme),
 }));
 
+const getOptionLabelByValue = options => {
+  return options.reduce((acc, curr) => {
+    acc[curr.value || '_'] = curr.label;
+
+    return acc;
+  }, {});
+};
+
 const getValue = memoize((value, options) => {
-  if (get(value, 'value') && !get(value, 'label') && isArray(options)) {
-    return options.find(option => get(option, 'value') === value.value) || null;
+  const hasOptions = isArray(options);
+
+  if (isObject(value) && value.value && hasOptions) {
+    return !value.label
+      ? options.find(option => get(option, 'value') === value.value) || null
+      : value;
+  }
+
+  if (isArray(value) && hasOptions) {
+    const labelByValue = getOptionLabelByValue(options);
+
+    return value.map(({ value, label, ...rest }) => ({
+      value,
+      label: label || labelByValue[value] || ' ',
+      ...rest,
+    }));
   }
 
   return value;
@@ -63,7 +85,14 @@ const getValue = memoize((value, options) => {
 const Select = ({ theme, value, options, ...props }) => {
   const resolvedValue = getValue(value, options);
 
-  return <ReactSelect {...getDefaultProps(theme)} value={resolvedValue} options={options} {...props} />;
+  return (
+    <ReactSelect
+      {...getDefaultProps(theme)}
+      value={resolvedValue}
+      options={options}
+      {...props}
+    />
+  );
 };
 
 const CreatableBase = ({ theme, ...props }) => (

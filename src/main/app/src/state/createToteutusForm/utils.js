@@ -1,27 +1,59 @@
 import get from 'lodash/get';
 import toPairs from 'lodash/toPairs';
 import flatMap from 'lodash/flatMap';
+import pick from 'lodash/pick';
 
 export const getToteutusByValues = values => {
   const tarjoajat = get(values, 'jarjestamispaikat.jarjestajat') || [];
   const kielivalinta = get(values, 'kieliversiot.languages') || [];
-  const nimi = get(values, 'nimi.name') || {};
+  const nimi = pick(get(values, 'nimi.name') || {}, kielivalinta);
   const opetuskielet = get(values, 'jarjestamistiedot.opetuskieli') || [];
   const kuvaus = get(values, 'jarjestamistiedot.kuvaus') || {};
   const osioKuvaukset = get(values, 'jarjestamistiedot.osioKuvaukset') || {};
-  const opetustapaKoodiUri = get(values, 'jarjestamistiedot.opetustapa');
+  const opetustapaKoodiUrit = get(values, 'jarjestamistiedot.opetustapa') || [];
   const opetusaikaKoodiUri = get(values, 'jarjestamistiedot.opetusaika');
 
-  const osiot = (get(values, 'jarjestamistiedot.osiot') || []).map(osio => ({
-    otsikko: {
-      fi: osio.label,
-    },
-    teksti: osioKuvaukset[osio.value] || {},
-  }));
+  const opetuskieliKuvaus = pick(
+    get(values, 'jarjestamistiedot.opetuskieliKuvaus') || {},
+    kielivalinta,
+  );
+  const opetusaikaKuvaus = pick(
+    get(values, 'jarjestamistiedot.opetusaikaKuvaus') || {},
+    kielivalinta,
+  );
+  const opetustapaKuvaus = pick(
+    get(values, 'jarjestamistiedot.opetustapaKuvaus') || {},
+    kielivalinta,
+  );
+  const maksullisuusKuvaus = pick(
+    get(values, 'jarjestamistiedot.maksullisuusKuvaus') || {},
+    kielivalinta,
+  );
+  const alkamiskausiKuvaus = pick(
+    get(values, 'jarjestamistiedot.alkamiskausiKuvaus') || {},
+    kielivalinta,
+  );
+  const alkamiskausiKoodiUri =
+    get(values, 'jarjestamistiedot.alkamiskausi.kausi') || null;
+
+  const alkamisvuosi = get(values, 'jarjestamistiedot.alkamiskausi.vuosi')
+    ? values.jarjestamistiedot.alkamiskausi.vuosi.toString()
+    : null;
+
+  const osiot = (get(values, 'jarjestamistiedot.osiot') || []).map(
+    ({ value }) => ({
+      otsikkoKoodiUri: value,
+      teksti: pick(osioKuvaukset[value] || {}, kielivalinta),
+    }),
+  );
 
   const onkoMaksullinen =
     get(values, 'jarjestamistiedot.maksullisuus') === 'kylla';
-  const maksunMaara = get(values, 'jarjestamistiedot.maksumaara') || {};
+
+  const maksunMaara = pick(
+    get(values, 'jarjestamistiedot.maksumaara') || {},
+    kielivalinta,
+  );
 
   const osaamisalaLinkit = get(values, 'osaamisalat.osaamisalaLinkit') || {};
   const osaamisalaLinkkiOtsikot =
@@ -36,11 +68,11 @@ export const getToteutusByValues = values => {
   );
 
   const yhteystieto = {
-    nimi: get(values, 'yhteystiedot.name') || {},
-    titteli: get(values, 'yhteystiedot.title') || {},
-    sahkoposti: get(values, 'yhteystiedot.email') || {},
-    puhelinnumero: get(values, 'yhteystiedot.phone') || {},
-    wwwSivu: get(values, 'yhteystiedot.website') || {},
+    nimi: pick(get(values, 'yhteystiedot.name') || {}, kielivalinta),
+    titteli: pick(get(values, 'yhteystiedot.title') || {}, kielivalinta),
+    sahkoposti: pick(get(values, 'yhteystiedot.email') || {}, kielivalinta),
+    puhelinnumero: pick(get(values, 'yhteystiedot.phone') || {}, kielivalinta),
+    wwwSivu: pick(get(values, 'yhteystiedot.website') || {}, kielivalinta),
   };
 
   const ammattinimikkeet = flatMap(
@@ -69,13 +101,20 @@ export const getToteutusByValues = values => {
     kielivalinta,
     metadata: {
       opetus: {
-        osiot,
-        opetuskielet,
+        lisatiedot: osiot,
+        opetuskieliKoodiUrit: opetuskielet,
         kuvaus,
         onkoMaksullinen,
         maksunMaara,
-        opetustapaKoodiUri,
+        opetustapaKoodiUrit,
         opetusaikaKoodiUri,
+        opetuskieletKuvaus: opetuskieliKuvaus,
+        opetustapaKuvaus,
+        opetusaikaKuvaus,
+        maksullisuusKuvaus,
+        alkamisaikaKuvaus: alkamiskausiKuvaus,
+        alkamiskausiKoodiUri,
+        alkamisvuosi,
       },
       osaamisalat,
       yhteystieto,
@@ -101,6 +140,20 @@ export const getValuesByToteutus = toteutus => {
     opetus = {},
   } = metadata;
 
+  const { lisatiedot = [] } = opetus;
+
+  const osiot = lisatiedot
+    .filter(({ otsikkoKoodiUri }) => !!otsikkoKoodiUri)
+    .map(({ otsikkoKoodiUri }) => ({ value: otsikkoKoodiUri }));
+
+  const osioKuvaukset = lisatiedot.reduce((acc, curr) => {
+    if (curr.otsikkoKoodiUri) {
+      acc[curr.otsikkoKoodiUri] = curr.teksti || {};
+    }
+
+    return acc;
+  }, {});
+
   return {
     nimi: {
       name: nimi,
@@ -115,9 +168,20 @@ export const getValuesByToteutus = toteutus => {
       kuvaus,
       maksullisuus: get(opetus, 'onkoMaksullinen') ? 'kylla' : 'ei',
       maksumaara: get(opetus, 'maksunMaara') || {},
-      opetustapa: get(opetus, 'opetustapaKoodiUri') || '',
+      opetustapa: get(opetus, 'opetustapaKoodiUrit') || [],
       opetusaika: get(opetus, 'opetusaikaKoodiUri') || '',
       opetuskieli: get(opetus, 'opetuskieliKoodiUrit') || [],
+      opetusaikaKuvaus: get(opetus, 'opetusaikaKuvaus') || {},
+      opetustapaKuvaus: get(opetus, 'opetustapaKuvaus') || {},
+      opetuskieliKuvaus: get(opetus, 'opetuskieletKuvaus') || {},
+      maksullisuusKuvaus: get(opetus, 'maksullisuusKuvaus') || {},
+      osiot,
+      osioKuvaukset,
+      alkamiskausi: {
+        kausi: get(opetus, 'alkamiskausiKoodiUri') || '',
+        vuosi: get(opetus, 'alkamisvuosi') || '',
+      },
+      alkamiskausiKuvaus: get(opetus, 'alkamisaikaKuvaus') || {},
     },
     nayttamistiedot: {
       ammattinimikkeet: ammattinimikkeet.reduce((acc, curr) => {

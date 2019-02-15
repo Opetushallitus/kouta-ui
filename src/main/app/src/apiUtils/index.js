@@ -383,3 +383,18 @@ export const getKoutaToteutukset = async ({
 
   return data;
 };
+
+export const getKoutaHaut = async ({
+  organisaatioOid,
+  httpClient,
+  apiUrls,
+}) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-backend.haku-list'),
+    {
+      params: { organisaatioOid },
+    },
+  );
+
+  return data;
+};

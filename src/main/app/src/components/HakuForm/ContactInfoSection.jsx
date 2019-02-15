@@ -30,19 +30,31 @@ const ContactInfoSection = ({ languages, koodiUri, ...props }) => {
               <Typography variant="h6" marginTop={1} marginBottom={0.25}>
                 Nimi
               </Typography>
-              <Field name={`nimi.${activeLanguage}`} component={renderInputField} placeholder="Kaija Koulutus" />
+              <Field name={`nimi.${activeLanguage}`} 
+                      component={renderInputField} 
+                      //placeholder="Kaija Koulutus" 
+                      />
               <Typography variant="h6" marginTop={1} marginBottom={0.25}>
                 Titteli
               </Typography>
-              <Field name={`titteli.${activeLanguage}`} component={renderInputField} placeholder="Opinto-ohjaaja" />
+              <Field name={`titteli.${activeLanguage}`} 
+                     component={renderInputField}
+                     //placeholder="Opinto-ohjaaja" 
+                     />
               <Typography variant="h6" marginTop={1} marginBottom={0.25}>
                 Sähköposti
               </Typography>
-              <Field name={`email.${activeLanguage}`} component={renderInputField} placeholder="etunimi.sukunimi@salpaus.fi" />
+              <Field name={`email.${activeLanguage}`}
+                     component={renderInputField}
+                     //placeholder="etunimi.sukunimi@salpaus.fi" 
+                     />
               <Typography variant="h6" marginTop={1} marginBottom={0.25}>
                 Puhelin
               </Typography>
-              <Field name={`puhelin.${activeLanguage}`} component={renderInputField} placeholder="050 XXX XXXX" />
+              <Field name={`puhelin.${activeLanguage}`}
+                     component={renderInputField}
+                     //placeholder="050 XXX XXXX"
+                     />
               <Spacing marginTop={3}>
                 <Field name="fi" component={renderCheckboxField} />
               </Spacing>

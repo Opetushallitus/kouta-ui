@@ -1,43 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Field } from 'redux-form';
+import { Field, formValues } from 'redux-form';
 
 import Typography from '../Typography';
 import Radio, { RadioGroup } from '../Radio';
-import Select from '../Select';
-import Button from '../Button';
-import LanguageSelector from '../LanguageSelector';
-import Select from '../Select';
-import Spacing from '../Spacing';
 import { HAKUKOHDE_LOMAKETYYPPI_OPTIONS } from '../../constants';
+import Flex, { FlexItem } from '../Flex';
+import Select from '../Select';
 
-const SelectionContainer = styled.div`
-  flex: 1;
-  padding-left: ${({ theme }) => theme.spacing.unit * 3}px;
-`;
-
-const RadioFieldContainer = styled.div`
-  width: 350px;
-  border-right: solid 1px #979797;
-  display: inline-block;
-`;
-
-const DropdownContainer = styled.div`
-  display: inline-block;
-  vertical-align: top;
-`;
-
-const ButtonContainer = styled.div`
-  margin-left: 23px;
-  margin-top: 11px;
-  float: right;
-`;
-
-const ShowLomakeButton = styled(Button)`
-  margin-right: ${({ theme }) => theme.spacing.unit * 2}px;
-`;
-
-const renderBaseDropdownField = ({ input, options }) => (
+const renderHakulomaketyyppiField = ({ input, options }) => (
   <RadioGroup {...input}>
     {options.map(({ label, value }) => (
       <Radio value={value} key={value}>
@@ -47,42 +17,43 @@ const renderBaseDropdownField = ({ input, options }) => (
   </RadioGroup>
 );
 
-const FormSelectSection = ({ koodiUri, ...props }) => {
-  return ( 
-    <div {...props}>
-            <Spacing marginRight={4}>
-              <RadioFieldContainer>
-                <div> 
-                  <Typography>Valitse mitä hakulomaketta käytetään</Typography>
-                </div>
-                <Field name={`lomaketyyppi`} component={renderBaseDropdownField} options={HAKUKOHDE_LOMAKETYYPPI_OPTIONS} />
-              </RadioFieldContainer>
-              <DropdownContainer>
-                <Typography paddingLeft={3}>Valitse hakulomake</Typography>
-                <SelectionContainer>
-                  <Field
-                    name={`lomake`}
-                    options={[{ label: 'testi lomake 1', value: '1' }, { label: 'testi lomake 2', value: '2' }]}
-                    component={renderLomakeSelectionField}
-                  />
-                </SelectionContainer>
-                <ButtonContainer>
-                    <ShowLomakeButton type="button" variant="outlined">
-                      Näytä lomake
-                    </ShowLomakeButton>
-                  <Button type="button" variant="outlined">
-                    Muokkaa lomaketta
-                  </Button>
-                </ButtonContainer>
-              </DropdownContainer> 
-            </Spacing>
-    </div>
-  )
-};
-
-const renderLomakeSelectionField = ({ options = [], input }) => (
-  <Select options={options} style={{'maxWidth': '508px'}} {...input}>
-  </Select>
+const HakulomakeTyyppiFieldValue = formValues('lomaketyyppi')(
+  ({ lomaketyyppi, children }) => children({ lomaketyyppi }),
 );
 
-export default FormSelectSection;
+const LomakeSelect = ({ lomaketyyppi }) => (
+  <>
+    <Typography variant="h6" marginBottom={1}>
+      Valitse hakulomake
+    </Typography>
+    <Select />
+  </>
+);
+
+const LomakeSection = () => {
+  return (
+    <Flex>
+      <FlexItem grow={0} basis="30%">
+        <Typography variant="h6" marginBottom={1}>
+          Valitse mitä hakulomaketta käytetään
+        </Typography>
+        <Field
+          name="lomaketyyppi"
+          component={renderHakulomaketyyppiField}
+          options={HAKUKOHDE_LOMAKETYYPPI_OPTIONS}
+        />
+      </FlexItem>
+      <FlexItem grow={1} paddingLeft={2}>
+        <HakulomakeTyyppiFieldValue>
+          {({ lomaketyyppi }) =>
+            lomaketyyppi && lomaketyyppi !== 'ei_hakua' ? (
+              <LomakeSelect lomaketyyppi={lomaketyyppi} />
+            ) : null
+          }
+        </HakulomakeTyyppiFieldValue>
+      </FlexItem>
+    </Flex>
+  );
+};
+
+export default LomakeSection;

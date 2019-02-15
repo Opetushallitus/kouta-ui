@@ -4,92 +4,118 @@ import { Field } from 'redux-form';
 import { formValues } from 'redux-form';
 
 import Button from '../Button';
+import Icon from '../Icon';
+
 import {
   UncontrolledDropdown,
   DropdownMenu,
   DropdownMenuItem,
 } from '../Dropdown';
+
 import Typography from '../Typography';
 import Select from '../Select';
+import ApiAsync from '../ApiAsync';
+import { getKoutaHaut } from '../../apiUtils';
+import Flex, { FlexItem } from '../Flex';
+import Spacing from '../Spacing';
+import { getFirstLanguageValue } from '../../utils';
 
-const ContentContainer = styled.div`
-  display: flex;
+const DropdownButton = styled(Button)`
+  display: inline-flex;
 `;
 
-const DropdownContainer = styled.div`
-  flex: 0;
-`;
-
-const SelectionContainer = styled.div`
-  flex: 1;
-  padding-left: ${({ theme }) => theme.spacing.unit * 3}px;
-`;
-
-const BaseFieldValue = formValues({
+const BaseAndEducationFieldValue = formValues({
   base: 'base',
-})(({ base, children }) => children({ base }));
+  education: 'education',
+})(({ base, education, children }) => children({ base, education }));
 
-const renderBaseDropdownField = ({ input }) => {
+const renderBaseDropdownField = ({ input, onContinue, onCreateNew }) => {
   const { onChange } = input;
 
   return (
     <UncontrolledDropdown
       overlay={
         <DropdownMenu>
-          <DropdownMenuItem onClick={() => onChange('new_koulutus')}>
+          <DropdownMenuItem
+            onClick={() => {
+              onChange('new_haku');
+              onCreateNew();
+              onContinue();
+            }}
+          >
             Luo uusi haku
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => onChange('copy_koulutus')}>
-            Kopio pohjaksi aiemmin luotu koulutus
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => onChange('existing_koulutus')}>
-            Käytä olemassa olevaa koulutusta
+          <DropdownMenuItem onClick={() => onChange('copy_haku')}>
+            Kopio pohjaksi aiemmin luotu haku
           </DropdownMenuItem>
         </DropdownMenu>
       }
     >
-      {({ ref, onToggle }) => (
-        <Button innerRef={ref} onClick={onToggle}>
-          Valitse pohja
-        </Button>
+      {({ ref, onToggle, visible }) => (
+        <div ref={ref}>
+          <DropdownButton onClick={onToggle} type="button">
+            Valitse pohja{' '}
+            <Icon type={visible ? 'arrow_drop_up' : 'arrow_drop_down'} />
+          </DropdownButton>
+        </div>
       )}
     </UncontrolledDropdown>
   );
 };
 
-const renderEducationSelectionField = ({ options = [], input }) => (
-  <Select options={options} {...input}>
-  </Select>
-);
+const nop = () => {};
 
-const BaseSelectionSection = props => {
+const renderSelectField = ({ options = [], input }) => {
+  return <Select {...input} options={options} onBlur={nop} />
+};
+
+const getHakuOptions = haut => {
+  return haut.map(({ nimi, oid }) => ({
+    value: oid,
+    label: getFirstLanguageValue(nimi),
+  }));
+};
+
+const BaseSelectionSection = ({ onContinue, organisaatioOid, onCreateNew }) => {
   return (
-    <ContentContainer>
-      <DropdownContainer>
-        <Typography variant="h6" marginBottom={1}>
-          Luo uusi
-        </Typography>
-        <Field name="base" component={renderBaseDropdownField} />
-      </DropdownContainer>
-      <SelectionContainer>
-        <BaseFieldValue>
-          {({ base }) =>
-            ['copy_koulutus', 'existing_koulutus'].includes(base) ? (
-              <>
-                <Typography variant="h6" marginBottom={1}>
-                  Valitse koulutus
-                </Typography>
-                <Field
-                  name="koulutus"
-                  options={[{ label: 'Koulutus 1', value: 'koulutus_1' }]}
-                  component={renderEducationSelectionField}
-                />
-              </>
-            ) : null
-          }
-        </BaseFieldValue>
-      </SelectionContainer>
-    </ContentContainer>
+    <ApiAsync
+      promiseFn={getKoutaHaut}
+      organisaatioOid={organisaatioOid}
+      watch={organisaatioOid}
+    >
+      {({ data: haut }) => (
+        <Flex>
+          <FlexItem grow={0}>
+            <Field
+              name="base"
+              component={renderBaseDropdownField}
+              onContinue={onContinue}
+              onCreateNew={onCreateNew}
+            />
+          </FlexItem>
+          <FlexItem grow={1} paddingLeft={3}>
+            <BaseAndEducationFieldValue>
+              {({ base }) =>
+                ['copy_haku'].includes(base) ? (
+                  <>
+                    <Spacing marginBottom={2}>
+                      <Typography variant="h6" marginBottom={1}>
+                        Valitse haku
+                      </Typography>
+                      <Field
+                        name="education"
+                        options={getHakuOptions(haut || [])}
+                        component={renderSelectField}
+                      />
+                    </Spacing>
+                  </>
+                ) : null
+              }
+            </BaseAndEducationFieldValue>
+          </FlexItem>
+        </Flex>
+      )}
+    </ApiAsync>
   );
 };
 

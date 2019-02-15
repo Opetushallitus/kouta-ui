@@ -146,7 +146,7 @@ export const getKoodistoNimiAndKoodiUri = koodisto => {
     : [];
 };
 
-export const foarmatDateInFinnishTimeZone = (date, dateFormat) => {
+export const formatDateInFinnishTimeZone = (date, dateFormat) => {
   if (!isValidDate(date)) {
     return null;
   }

@@ -16,10 +16,14 @@ class FormCollapseGroup extends Component {
     };
   }
 
-  getChildrenCount() {
+  getChildren() {
     const { children } = this.props;
 
-    return React.Children.count(children);
+    return React.Children.toArray(children).filter(c => !!c);
+  }
+
+  getChildrenCount() {
+    return this.getChildren().length;
   }
 
   makeOnContinue = (index, child) => () => {
@@ -52,11 +56,9 @@ class FormCollapseGroup extends Component {
 
   render() {
     const { activeStep } = this.state;
-    const { enabled, children } = this.props;
+    const { enabled } = this.props;
 
-    const nonNullChildren = React.Children.toArray(children).filter(c => !!c);
-
-    return React.Children.map(nonNullChildren, (child, index) => {
+    return React.Children.map(this.getChildren(), (child, index) => {
       const childProps = enabled
         ? {
             controlled: true,

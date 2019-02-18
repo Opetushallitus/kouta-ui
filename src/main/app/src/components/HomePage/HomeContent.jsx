@@ -9,7 +9,6 @@ import Typography from '../Typography';
 import { getThemeProp, spacing } from '../../theme';
 import Spacing from '../Spacing';
 import KoulutuksetSection from './KoulutuksetSection';
-import ToteutuksetSection from './ToteutuksetSection';
 
 const Container = styled.div`
   max-width: ${getThemeProp('contentMaxWidth')}
@@ -48,9 +47,6 @@ const HomeContent = ({ organisaatiot, organisaatioOid, history }) => {
       <Typography variant="h3" marginBottom={3}>Koulutukset ja haut</Typography>
       <Spacing marginBottom={3}>
         <KoulutuksetSection organisaatioOid={organisaatioOid} />
-      </Spacing>
-      <Spacing>
-        <ToteutuksetSection organisaatioOid={organisaatioOid} />
       </Spacing>
     </Container>
   );

@@ -477,3 +477,36 @@ export const getKayttajanOrganisaatiot = async ({
 }) => {
   return memoizedGetKayttajanOrganisaatiot(httpClient, apiUrls, oid);
 };
+
+export const getKoutaIndexKoulutukset = async ({
+  httpClient,
+  apiUrls,
+  organisaatioOid: organisaatioOidArg = [],
+  nimi = '',
+  language = 'fi',
+  size = 10,
+  arkistoidut = false,
+  page = 1,
+  orderField,
+  orderDirection,
+}) => {
+  const organisaatio = organisaatioOidArg.join(',');
+
+  const params = {
+    ...(nimi && { nimi }),
+    ...(orderField && { 'order-by': orderField }),
+    ...(orderDirection && { order: orderDirection }),
+    organisaatio,
+    language,
+    size,
+    arkistoidut,
+    page,
+  };
+
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-index.koulutus-list'),
+    { params },
+  );
+
+  return data;
+};

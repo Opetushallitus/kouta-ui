@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useCallback } from 'react';
 import styled, { css } from 'styled-components';
 
 import Select from '../Select';
@@ -40,12 +40,19 @@ const getPageOptions = pageCount =>
   }));
 
 const Pagination = ({ value = 0, onChange = () => {}, pageCount = 1 }) => {
-  const options = getPageOptions(pageCount);
+  const options = useMemo(() => getPageOptions(pageCount), [pageCount]);
+  const onPrev = useCallback(() => onChange(value - 1), [value, onChange]);
+  const onNext = useCallback(() => onChange(value + 1), [value, onChange]);
+  const onSelectChange = useCallback(({ value }) => onChange(value), [onChange]);
+
   const pageValue = options[value];
 
   return (
     <Flex alignCenter inline>
-      <Button disabled={value === 0} onClick={() => { onChange(value - 1); }}>
+      <Button
+        disabled={value === 0}
+        onClick={onPrev}
+      >
         <ButtonIcon type="arrow_back" before /> Edellinen
       </Button>
       <FlexItem marginLeft={2} grow={2} basis="10rem">
@@ -53,16 +60,18 @@ const Pagination = ({ value = 0, onChange = () => {}, pageCount = 1 }) => {
           <Select
             options={options}
             value={pageValue}
-            onChange={({ value }) => {
-              onChange(value);
-            }}
+            menuPlacement="auto"
+            onChange={onSelectChange}
           />
         </SelectWrapper>
       </FlexItem>
       <FlexItem marginLeft={1} marginRight={2}>
         <PageCount>/ {pageCount}</PageCount>
       </FlexItem>
-      <Button disalbed={value === pageCount - 1} onClick={() => { onChange(value + 1); }}>
+      <Button
+        disabled={value === pageCount - 1}
+        onClick={onNext}
+      >
         Seuraava
         <ButtonIcon type="arrow_forward" after />
       </Button>

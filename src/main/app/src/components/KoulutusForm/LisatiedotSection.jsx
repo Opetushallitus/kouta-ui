@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Field, formValues } from 'redux-form';
 import mapValues from 'lodash/mapValues';
+import get from 'lodash/get';
 
 import Spacing from '../Spacing';
 import Typography from '../Typography';
@@ -13,7 +14,7 @@ import {
   arrayToTranslationObject,
   getFirstLanguageValue,
 } from '../../utils';
-import ApiAsync from '../ApiAsync';
+import useApiAsync from '../useApiAsync';
 
 const getOsiot = async ({ httpClient, apiUrls }) => {
   const osiot = await getKoodisto({
@@ -46,10 +47,20 @@ const renderTextareaField = ({ input, ...props }) => (
   <Textarea {...input} {...props} />
 );
 
-const OsiotFieldsBase = ({ osiot, language }) => {
+const OsiotFieldsBase = ({ osiot, language, osiotOptions }) => {
   const osiotArr = osiot || [];
 
-  return osiotArr.map(({ value, label }, index) => (
+  const osiotArrWithLabels = useMemo(() => {
+    return osiotArr.map(({ value, label }) => ({
+      value,
+      label: label
+        ? label
+        : get(osiotOptions.find(({ value: v }) => v === value), 'label') ||
+          null,
+    }));
+  }, [osiotArr, osiotOptions]);
+
+  return osiotArrWithLabels.map(({ value, label }, index) => (
     <Spacing marginBottom={index !== osiot.length - 1 ? 2 : 0} key={value}>
       <Typography variant="h6" marginBottom={1}>
         {label}
@@ -65,6 +76,12 @@ const OsiotFieldsBase = ({ osiot, language }) => {
 const OsiotFields = formValues({ osiot: 'osiot' })(OsiotFieldsBase);
 
 const LisatiedotSection = ({ languages = [] }) => {
+  const { data: osiot } = useApiAsync({ promiseFn: getOsiot });
+
+  const osiotOptions = useMemo(() => {
+    return getOsiotOptions(osiot || []);
+  }, [osiot]);
+
   return (
     <LanguageSelector languages={languages} defaultValue="fi">
       {({ value: activeLanguage }) => (
@@ -73,18 +90,14 @@ const LisatiedotSection = ({ languages = [] }) => {
             <Typography variant="h6" marginBottom={1}>
               Valitse lisättävä osio
             </Typography>
-            <ApiAsync promiseFn={getOsiot}>
-              {({ data }) => (
-                <Field
-                  name="osiot"
-                  component={renderSelectField}
-                  options={getOsiotOptions(data || [])}
-                  isMulti
-                />
-              )}
-            </ApiAsync>
+            <Field
+              name="osiot"
+              component={renderSelectField}
+              options={osiotOptions}
+              isMulti
+            />
           </Spacing>
-          <OsiotFields language={activeLanguage} />
+          <OsiotFields language={activeLanguage} osiotOptions={osiotOptions} />
         </>
       )}
     </LanguageSelector>

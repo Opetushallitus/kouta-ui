@@ -7,9 +7,9 @@ storiesOf('FormStatus', module)
   .add('Basic', () => <FormStatus />)
   .add('With status', () => (
     <>
-      <FormStatus status="saved" />
-      <FormStatus status="archived" />
-      <FormStatus status="published" />
+      <FormStatus status="julkaistu" />
+      <FormStatus status="tallennettu" />
+      <FormStatus status="arkistoitu" />
     </>
   ))
   .add('With custom label', () => <FormStatus>Foo bar</FormStatus>);

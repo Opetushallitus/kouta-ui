@@ -28,7 +28,7 @@ const KoulutusFooter = ({
   valid = true,
 }) => (
   <Wrapper>
-    <SaveButton onClick={onSave} disabled={!valid}>
+    <SaveButton onClick={onSave}>
       Tallenna
     </SaveButton>
     <Button onClick={onSaveAndPublish} disabled={!valid}>

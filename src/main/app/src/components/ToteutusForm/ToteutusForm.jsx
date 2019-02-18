@@ -38,7 +38,7 @@ const ToteutusForm = ({
       {({ languages }) => (
         <FormCollapseGroup enabled={steps}>
           <FormCollapse
-            header="1 Pohjan valinta"
+            header="Pohjan valinta"
             section="base"
             onContinue={onMaybeCopy}
           >
@@ -51,11 +51,11 @@ const ToteutusForm = ({
             )}
           </FormCollapse>
 
-          <FormCollapse header="2 Kieliversiot" section="kieliversiot">
+          <FormCollapse header="Kieliversiot" section="kieliversiot">
             <KieliversiotFormSection />
           </FormCollapse>
 
-          <FormCollapse header="3 Valitse osaamisalat" section="osaamisalat">
+          <FormCollapse header="Valitse osaamisalat" section="osaamisalat">
             <OsaamisalatSection
               languages={languages}
               koulutusKoodiUri={koulutusKoodiUri}
@@ -63,32 +63,32 @@ const ToteutusForm = ({
           </FormCollapse>
 
           <FormCollapse
-            header="4 Toteutuksen järjestämistiedot"
+            header="Toteutuksen järjestämistiedot"
             section="jarjestamistiedot"
           >
             <JarjestamisTiedotSection languages={languages} />
           </FormCollapse>
 
           <FormCollapse
-            header="5 Koulutuksen näyttämiseen liittyvät tiedot"
+            header="Koulutuksen näyttämiseen liittyvät tiedot"
             section="nayttamistiedot"
           >
             <NayttamisTiedotSection languages={languages} />
           </FormCollapse>
 
           <FormCollapse
-            header="6 Missä järjestetään?"
+            header="Missä järjestetään?"
             section="jarjestamispaikat"
           >
             <JarjestamisPaikatSection organisaatioOid={organisaatioOid} />
           </FormCollapse>
 
-          <FormCollapse header="7 Toteutuksen nimi" section="nimi">
+          <FormCollapse header="Toteutuksen nimi" section="nimi">
             <NimiSection languages={languages} />
           </FormCollapse>
 
           <FormCollapse
-            header="8 Koulutuksen yhteystiedot"
+            header="Koulutuksen yhteystiedot"
             section="yhteystiedot"
           >
             <YhteystiedotSection languages={languages} />

@@ -51,6 +51,7 @@ exports[`renders correctly 1`] = `
             >
               <styled.input
                 checked={false}
+                disabled={false}
                 onChange={[Function]}
                 type="radio"
                 value="a"
@@ -58,6 +59,7 @@ exports[`renders correctly 1`] = `
                 <input
                   checked={false}
                   className="c3"
+                  disabled={false}
                   onChange={[Function]}
                   type="radio"
                   value="a"
@@ -93,6 +95,7 @@ exports[`renders correctly 1`] = `
             >
               <styled.input
                 checked={true}
+                disabled={false}
                 onChange={[Function]}
                 type="radio"
                 value="b"
@@ -100,6 +103,7 @@ exports[`renders correctly 1`] = `
                 <input
                   checked={true}
                   className="c3"
+                  disabled={false}
                   onChange={[Function]}
                   type="radio"
                   value="b"
@@ -135,6 +139,7 @@ exports[`renders correctly 1`] = `
             >
               <styled.input
                 checked={false}
+                disabled={false}
                 onChange={[Function]}
                 type="radio"
                 value="c"
@@ -142,6 +147,7 @@ exports[`renders correctly 1`] = `
                 <input
                   checked={false}
                   className="c3"
+                  disabled={false}
                   onChange={[Function]}
                   type="radio"
                   value="c"

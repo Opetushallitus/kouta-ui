@@ -21,12 +21,13 @@ const makeOnCheckboxChange = ({ value, onChange, optionValue, options }) => e =>
   }
 };
 
-const CheckboxGroup = ({ value = [], onChange, options = [] }) => {
+const CheckboxGroup = ({ value = [], onChange, options = [], disabled = false }) => {
   return options.map(({ value: optionValue, label }) => (
     <Checkbox
       key={optionValue}
       checked={value.includes(optionValue)}
       onChange={makeOnCheckboxChange({ value, onChange, optionValue, options })}
+      disabled={disabled}
     >
       {label}
     </Checkbox>

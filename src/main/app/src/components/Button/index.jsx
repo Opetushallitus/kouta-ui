@@ -1,15 +1,12 @@
 import React from 'react';
 import { darken } from 'polished';
 import styled, { css } from 'styled-components';
+import get from 'lodash/get';
 
 import { getThemeProp } from '../../theme';
 
 const getOutlinedColorCss = ({ color, theme }) => {
-  let outlineColor = theme.palette.primary.main;
-
-  if (color === 'secondary') {
-    outlineColor = theme.palette.secondary.main;
-  }
+  const outlineColor = get(theme, ['palette', color, 'main']) || theme.palette.primary.main;
 
   return `
     border-color: ${outlineColor};
@@ -28,13 +25,8 @@ const getOutlinedColorCss = ({ color, theme }) => {
 };
 
 const getContainedColorCss = ({ color, theme }) => {
-  let fontColor = theme.palette.primary.contrastText;
-  let containColor = theme.palette.primary.main;
-
-  if (color === 'secondary') {
-    fontColor = theme.palette.secondary.contrastText;
-    containColor = theme.palette.secondary.main;
-  }
+  const fontColor = get(theme, ['palette', color, 'contrastText']) || theme.palette.primary.contrastText;
+  const containColor = get(theme, ['palette', color, 'main']) || theme.palette.primary.main;
 
   return `
     border-color: ${containColor};

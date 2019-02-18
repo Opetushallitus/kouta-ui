@@ -1,5 +1,5 @@
 import { KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP } from '../constants';
-import { isArray, isString } from '../utils';
+import { isArray, isString, isObject } from '../utils';
 import keyBy from 'lodash/keyBy';
 import mapValues from 'lodash/mapValues';
 import get from 'lodash/get';
@@ -212,11 +212,13 @@ export const getOrganisaatioByOid = ({ oid, apiUrls, httpClient }) => {
 };
 
 export const getKoutaKoulutusByOid = async ({ oid, apiUrls, httpClient }) => {
-  const { data } = await httpClient.get(
+  const { data, headers } = await httpClient.get(
     apiUrls.url('kouta-backend.koulutus-by-oid', oid),
   );
 
-  return data;
+  const lastModified = get(headers, 'last-modified') || null;
+
+  return isObject(data) ? { lastModified, ...data } : data;
 };
 
 export const getOsaamisalatByKoulutusKoodi = async ({
@@ -398,6 +400,38 @@ export const getKoutaToteutukset = async ({
     {
       params: { organisaatioOid },
     },
+  );
+
+  return data;
+};
+
+export const getKoutaKoulutusToteutukset = async ({
+  httpClient,
+  apiUrls,
+  oid,
+}) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-backend.koulutus-toteutukset', oid),
+  );
+
+  return data;
+};
+
+export const updateKoutaKoulutus = async ({
+  koulutus,
+  httpClient,
+  apiUrls,
+}) => {
+  const { lastModified = '', ...rest } = koulutus;
+
+  const headers = {
+    'If-Unmodified-Since': lastModified,
+  };
+
+  const { data } = await httpClient.post(
+    apiUrls.url('kouta-backend.koulutus'),
+    rest,
+    { headers },
   );
 
   return data;

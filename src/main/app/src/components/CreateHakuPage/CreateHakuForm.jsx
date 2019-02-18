@@ -37,7 +37,7 @@ const HakuReduxForm = reduxForm({
 })(HakuForm);
 
 const getCopyValues = hakuOid => ({
-  base: {
+  pohja: {
     base: 'copy_haku',
     search: { value: hakuOid },
   },

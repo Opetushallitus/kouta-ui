@@ -1,6 +1,6 @@
 import get from 'lodash/get';
 
-export const getValuesByHaku = toteutus => {
+export const getValuesByHaku = haku => {
   const {
     alkamiskausiKoodiUri = '',
     hakutapaKoodiUri = '',
@@ -9,7 +9,7 @@ export const getValuesByHaku = toteutus => {
     kielivalinta = [],
     nimi = {},
     metadata = {},
-  } = toteutus;
+  } = haku;
 
   const { yhteystieto = {} } = metadata;
 

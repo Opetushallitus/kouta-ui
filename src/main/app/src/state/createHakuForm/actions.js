@@ -26,6 +26,23 @@ export const saveHaku = haku => (
   return httpClient.put(apiUrls.url('kouta-backend.haku'), haku);
 };
 
+export const maybeCopy = () => (dispatch, getState) => {
+  const values = getHakuFormValues(getState());
+
+  if (
+    get(values, 'pohja.base') === 'copy_haku' &&
+    !!get(values, 'pohja.search.value')
+  ) {
+    dispatch(copy(values.pohja.search.value));
+  }
+};
+
+export const copy = hakuOid => async (dispatch, getState, { history }) => {
+  history.replace({
+    search: `?kopioHakuOid=${hakuOid}`,
+  });
+};
+
 export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   dispatch,
   getState,

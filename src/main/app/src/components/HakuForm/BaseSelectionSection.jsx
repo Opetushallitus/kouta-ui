@@ -24,12 +24,11 @@ const DropdownButton = styled(Button)`
   display: inline-flex;
 `;
 
-const BaseAndEducationFieldValue = formValues({
+const BaseAndSearchFieldValue = formValues({
   base: 'base',
-  education: 'education',
-})(({ base, education, children }) => children({ base, education }));
+})(({ base, children }) => children({ base }));
 
-const renderBaseDropdownField = ({ input, onCreateNew }) => {
+const renderBaseDropdownField = ({ input, onContinue, onCreateNew }) => {
   const { onChange } = input;
 
   return (
@@ -40,6 +39,7 @@ const renderBaseDropdownField = ({ input, onCreateNew }) => {
             onClick={() => {
               onChange('new_haku');
               onCreateNew();
+              onContinue();
             }}
           >
             Luo uusi haku
@@ -75,7 +75,7 @@ const getHakuOptions = haut => {
   }));
 };
 
-const BaseSelectionSection = ({ organisaatioOid, onCreateNew }) => {
+const BaseSelectionSection = ({ organisaatioOid, onContinue, onCreateNew }) => {
   return (
     <ApiAsync
       promiseFn={getKoutaHaut}
@@ -88,11 +88,12 @@ const BaseSelectionSection = ({ organisaatioOid, onCreateNew }) => {
             <Field
               name="base"
               component={renderBaseDropdownField}
+              onContinue={onContinue}
               onCreateNew={onCreateNew}
             />
           </FlexItem>
           <FlexItem grow={1} paddingLeft={3}>
-            <BaseAndEducationFieldValue>
+            <BaseAndSearchFieldValue>
               {({ base }) =>
                 ['copy_haku'].includes(base) ? (
                   <>
@@ -101,7 +102,7 @@ const BaseSelectionSection = ({ organisaatioOid, onCreateNew }) => {
                         Valitse haku
                       </Typography>
                       <Field
-                        name="education"
+                        name="search"
                         options={getHakuOptions(haut || [])}
                         component={renderSelectField}
                       />
@@ -109,7 +110,7 @@ const BaseSelectionSection = ({ organisaatioOid, onCreateNew }) => {
                   </>
                 ) : null
               }
-            </BaseAndEducationFieldValue>
+            </BaseAndSearchFieldValue>
           </FlexItem>
         </Flex>
       )}

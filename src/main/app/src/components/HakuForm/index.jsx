@@ -3,8 +3,13 @@ import set from 'lodash/set';
 
 import { getInvalidTranslations, parseDate, isValidDate } from '../../utils';
 
-const DATE_FORMAT = 'DD.MM.YYYY HH:mm';
+export const initialValues = {
+  kieliversiot: {
+    languages: ['fi', 'sv'],
+  },
+};
 
+const DATE_FORMAT = 'DD.MM.YYYY HH:mm';
 
 const isValidDateTime = (date, time) => {
   return isValidDate(parseDate(`${date} ${time}`, DATE_FORMAT));

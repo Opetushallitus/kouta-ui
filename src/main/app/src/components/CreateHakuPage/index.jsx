@@ -1,87 +1,26 @@
-import React from 'react';
-import get from 'lodash/get';
+import React, { useCallback } from 'react';
+import queryString from 'query-string';
 
-import ApiAsync from '../ApiAsync';
-import FormPage from '../FormPage';
-import {
-  getOrganisaatioByOid,
-} from '../../apiUtils';
-import Flex, { FlexItem } from '../Flex';
-import { getFirstLanguageValue } from '../../utils';
-
+import FormPage, { OrganisaatioInfo } from '../FormPage';
 import CreateHakuHeader from './CreateHakuHeader';
 import CreateHakuSteps from './CreateHakuSteps';
 import CreateHakuForm from './CreateHakuForm';
 import CreateHakuFooter from './CreateHakuFooter';
-import Typography from '../Typography';
-
-const getHakuData = async ({
-  organisaatioOid,
-  httpClient,
-  apiUrls,
-}) => {
-  const [organisaatio] = await Promise.all([
-    getOrganisaatioByOid({ oid: organisaatioOid, httpClient, apiUrls }),
-  ]);
-
-  return {
-    organisaatio,
-  };
-};
-
-const CreateHakuFormAsync = ({
-  organisaatioOid,
-}) => (
-  <>
-    <ApiAsync
-      promiseFn={getHakuData}
-      organisaatioOid={organisaatioOid}
-      watch={[organisaatioOid].join(',')}
-    >
-      {({ data }) =>
-        data ? (
-          <>
-            <Flex marginBottom={2} justifyBetween>
-              <FlexItem grow={0} paddingRight={2}>
-                <Typography variant="h6" marginBottom={1}>
-                  Organisaatio
-                </Typography>
-                <Typography>
-                  {getFirstLanguageValue(get(data, 'organisaatio.nimi'))}
-                </Typography>
-              </FlexItem>
-              <FlexItem grow={0}>
-                <Typography variant="h6" marginBottom={1}>
-                  Haku
-                </Typography>
-                <Typography>
-                  {getFirstLanguageValue(get(data, 'haku.nimi'))}
-                </Typography>
-              </FlexItem>
-              <FlexItem grow={0}>
-              <Typography variant="h6" marginBottom={1}>
-                  Toteutus
-                </Typography>
-                <Typography>{getFirstLanguageValue(get(data, 'toteutus.nimi'))}</Typography>
-              </FlexItem>
-            </Flex>
-            <CreateHakuForm
-              organisaatio={data.organisaatio}
-              organisaatioOid={organisaatioOid}
-            />
-          </>
-        ) : null
-      }
-    </ApiAsync>
-  </>
-);
 
 const CreateHakuPage = props => {
   const {
     match: {
-      params: { organisaatioOid },
+      params: { oid },
     },
+    location: { search },
+    history,
   } = props;
+
+  const { kopiohakuOid = null } = queryString.parse(search);
+
+  const onCreateNew = useCallback(() => {
+    history.replace({ search: '' });
+  }, [history]);
 
   return (
     <FormPage
@@ -89,8 +28,11 @@ const CreateHakuPage = props => {
       steps={<CreateHakuSteps />}
       footer={<CreateHakuFooter />}
     >
-      <CreateHakuFormAsync
-        organisaatioOid={organisaatioOid}
+      <OrganisaatioInfo organisaatioOid={oid} />
+      <CreateHakuForm
+        organisaatioOid={oid}
+        kopiohakuOid={kopiohakuOid}
+        onCreateNew={onCreateNew}
       />
     </FormPage>
   );

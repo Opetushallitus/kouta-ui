@@ -1,65 +1,17 @@
 import React from 'react';
-import { FormSection, formValues } from 'redux-form';
-import styled from 'styled-components';
+import { formValues } from 'redux-form';
 
 import BaseSelectionSection from './BaseSelectionSection';
 import KieliversiotFormSection from '../KieliversiotFormSection';
 import { LANGUAGE_TABS } from '../../constants';
-import Collapse from '../Collapse';
-import Button from '../Button';
-import FormStepper from '../FormStepper';
-import ResetFormSection from '../ResetFormSection';
-import { isFunction } from '../../utils';
 import NameSection from './NameSection';
 import TargetGroupSection from './TargetGroupSection'
 import SearchTypeSection from './SearchTypeSection';
 import ScheduleSection from './ScheduleSection';
 import FormSelectSection from './FormSelectSection';
 import ContactInfoSection from './ContactInfoSection';
-
-const CollapseFooterContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const CollapseWrapper = styled.div`
-  margin-bottom: ${({ theme }) => theme.spacing.unit * 3}px;
-`;
-
-const FormCollapse = ({ onContinue, section, children = null, ...props }) => {
-  return (
-    <CollapseWrapper>
-      <Collapse
-        footer={
-          <CollapseFooterContainer>
-            {section ? (
-              <ResetFormSection name={section}>
-                {({ onReset }) => (
-                  <Button type="button" variant="outlined" onClick={onReset}>
-                    Tyhjennä tiedot
-                  </Button>
-                )}
-              </ResetFormSection>
-            ) : null}
-
-            {isFunction(onContinue) ? (
-              <Button type="button" onClick={onContinue}>
-                Jatka
-              </Button>
-            ) : null}
-          </CollapseFooterContainer>
-        }
-        {...props}
-      >
-        {section ? (
-          <FormSection name={section}>{children}</FormSection>
-        ) : (
-          children
-        )}
-      </Collapse>
-    </CollapseWrapper>
-  );
-};
+import FormCollapseGroup from '../FormCollapseGroup';
+import FormCollapse from '../FormCollapse';
 
 const ActiveLanguages = formValues({
   languages: 'kieliversiot.languages',
@@ -73,35 +25,36 @@ const ActiveLanguages = formValues({
   });
 });
 
-const defaultGetStepCollapseProps = () => ({
-  open: true,
-});
-
-const HakuFormBase = ({
+const HakuForm = ({
   organisaatioOid,
   handleSubmit,
-  getStepCollapseProps = defaultGetStepCollapseProps,
+  onCopy = () => {},
+  onMaybeCopy = () => {},
   onCreateNew = () => {},
+  steps = false,
 }) => (
   <form onSubmit={handleSubmit}>
     <ActiveLanguages>
       {({ languages }) => (
-        <>
+        <FormCollapseGroup enabled={steps}>
           <FormCollapse
             header="1 Pohjan valinta"
             section="pohja"
-            {...getStepCollapseProps(0)}
-          >
-              <BaseSelectionSection
-                organisaatioOid={organisaatioOid}
-                onCreateNew={onCreateNew}
-              />
-          </FormCollapse>
+            onContinue={onMaybeCopy}
+            >
+              {({ onContinue }) => (
+                <BaseSelectionSection
+                  onContinue={onContinue}
+                  organisaatioOid={organisaatioOid}
+                  onCopy={onCopy}
+                  onCreateNew={onCreateNew}
+                />
+              )}
+            </FormCollapse>
 
           <FormCollapse
             header="2 Kieliversiot"
             section="kieliversiot"
-            {...getStepCollapseProps(1)}
           >
             <KieliversiotFormSection />
           </FormCollapse>
@@ -109,7 +62,6 @@ const HakuFormBase = ({
           <FormCollapse
             header="3 Haun nimi"
             section="nimi"
-            {...getStepCollapseProps(2)}
           >
             <NameSection languages={languages} />
           </FormCollapse>
@@ -117,7 +69,6 @@ const HakuFormBase = ({
           <FormCollapse
             header="4 Haun kohdejoukko"
             section="kohdejoukko"
-            {...getStepCollapseProps(3)}
           >
             <TargetGroupSection />
           </FormCollapse>
@@ -125,7 +76,6 @@ const HakuFormBase = ({
           <FormCollapse
             header="5 Hakutapa"
             section="hakutapa"
-            {...getStepCollapseProps(4)}
           >
             <SearchTypeSection />
           </FormCollapse>
@@ -133,7 +83,6 @@ const HakuFormBase = ({
           <FormCollapse
             header="6 Haun aikataulut"
             section="aikataulut"
-            {...getStepCollapseProps(5)}
           >
             <ScheduleSection />
           </FormCollapse>
@@ -141,7 +90,6 @@ const HakuFormBase = ({
           <FormCollapse
             header="7 Hakulomakkeen valinta"
             section="hakulomake"
-            {...getStepCollapseProps(6)}
           >
             <FormSelectSection />
           </FormCollapse>
@@ -149,38 +97,13 @@ const HakuFormBase = ({
           <FormCollapse
             header="8 Haun yhteystiedot"
             section="yhteystiedot"
-            {...getStepCollapseProps(7)}
           >
             <ContactInfoSection languages={languages} />
           </FormCollapse>
-        </>
+          </FormCollapseGroup>
       )}
     </ActiveLanguages>
   </form>
 );
-
-const HakuForm = ({ steps = false, ...props }) => {
-  return steps ? (
-    <FormStepper stepCount={9}>
-      {({ activeStep, makeOnGoToStep }) => {
-        const getStepCollapseProps = step => {
-          return {
-            open: activeStep >= step,
-            onContinue: makeOnGoToStep(step + 1),
-          };
-        };
-
-        return (
-          <HakuFormBase
-            getStepCollapseProps={getStepCollapseProps}
-            {...props}
-          />
-        );
-      }}
-    </FormStepper>
-  ) : (
-    <HakuFormBase {...props} />
-  );
-};
 
 export default HakuForm;

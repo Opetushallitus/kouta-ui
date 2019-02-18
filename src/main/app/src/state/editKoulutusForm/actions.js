@@ -57,7 +57,7 @@ export const submit = ({
     return dispatch(
       createTemporaryToast({
         status: 'danger',
-        title: 'Koulutuksen talennus epäonnistui',
+        title: 'Koulutuksen tallennus epäonnistui',
       }),
     );
   }

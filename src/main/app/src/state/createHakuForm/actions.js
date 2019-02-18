@@ -101,7 +101,7 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
       titteli: pick(get(values, 'yhteystiedot.titteli') || null, kielivalinta),
       sahkoposti: pick(get(values, 'yhteystiedot.email') || null, kielivalinta),
       puhelinnumero: pick(
-        get(values, 'yhteystiedot.numero') || null,
+        get(values, 'yhteystiedot.puhelin') || null,
         kielivalinta,
       ),
     },

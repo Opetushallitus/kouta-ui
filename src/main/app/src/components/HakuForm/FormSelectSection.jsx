@@ -3,7 +3,7 @@ import { Field, formValues } from 'redux-form';
 
 import Typography from '../Typography';
 import Radio, { RadioGroup } from '../Radio';
-import { HAKUKOHDE_LOMAKETYYPPI_OPTIONS } from '../../constants';
+import { HAKU_LOMAKETYYPPI_OPTIONS } from '../../constants';
 import Flex, { FlexItem } from '../Flex';
 import Select from '../Select';
 
@@ -40,7 +40,7 @@ const LomakeSection = () => {
         <Field
           name="lomaketyyppi"
           component={renderHakulomaketyyppiField}
-          options={HAKUKOHDE_LOMAKETYYPPI_OPTIONS}
+          options={HAKU_LOMAKETYYPPI_OPTIONS}
         />
       </FlexItem>
       <FlexItem grow={1} paddingLeft={2}>

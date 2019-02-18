@@ -80,6 +80,13 @@ export const HAKUKOHDE_LOMAKETYYPPI_OPTIONS = [
   { value: 'ei_hakua', label: 'Ei sähköistä hakua' },
 ];
 
+export const HAKU_LOMAKETYYPPI_OPTIONS = [
+  { value: 'ataru', label: 'Käytetään hakemuspalvelun lomaketta' },
+  { value: 'haku-app', label: 'Käytetään järjestelmän hakulomaketta' },
+  { value: 'muu', label: 'Käytetään muuta hakulomaketta' },
+  { value: 'ei sähköistä', label: 'Ei sähköistä hakua' },
+];
+
 export const VALINTAPERUSTEET_KIELITAITO_OPTIONS = [
   { value: 'yleinen_kielitutkinto#1', label: 'Yleinen kielitutkinto' },
   { value: 'toefl#1', label: 'TOELF' },

@@ -38,7 +38,7 @@ const HakuForm = ({
       {({ languages }) => (
         <FormCollapseGroup enabled={steps}>
           <FormCollapse
-            header="1 Pohjan valinta"
+            header="Pohjan valinta"
             section="pohja"
             onContinue={onMaybeCopy}
             >
@@ -53,49 +53,49 @@ const HakuForm = ({
             </FormCollapse>
 
           <FormCollapse
-            header="2 Kieliversiot"
+            header="Kieliversiot"
             section="kieliversiot"
           >
             <KieliversiotFormSection />
           </FormCollapse>
 
           <FormCollapse
-            header="3 Haun nimi"
+            header="Haun nimi"
             section="nimi"
           >
             <NameSection languages={languages} />
           </FormCollapse>
 
           <FormCollapse
-            header="4 Haun kohdejoukko"
+            header="Haun kohdejoukko"
             section="kohdejoukko"
           >
             <TargetGroupSection />
           </FormCollapse>
 
           <FormCollapse
-            header="5 Hakutapa"
+            header="Hakutapa"
             section="hakutapa"
           >
             <SearchTypeSection />
           </FormCollapse>
 
           <FormCollapse
-            header="6 Haun aikataulut"
+            header="Haun aikataulut"
             section="aikataulut"
           >
             <ScheduleSection />
           </FormCollapse>
 
           <FormCollapse
-            header="7 Hakulomakkeen valinta"
+            header="Hakulomakkeen valinta"
             section="hakulomake"
           >
             <FormSelectSection />
           </FormCollapse>
 
           <FormCollapse
-            header="8 Haun yhteystiedot"
+            header="Haun yhteystiedot"
             section="yhteystiedot"
           >
             <ContactInfoSection languages={languages} />

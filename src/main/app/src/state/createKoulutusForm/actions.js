@@ -80,11 +80,11 @@ export const submit = ({
     return koulutusData;
   }
 
-  if (get(koulutusData, 'oid') && JULKAISUTILA.TALLENNETTU) {
+  if (get(koulutusData, 'oid')) {
     const { oid: koulutusOid } = koulutusData;
 
     history.push(
-      `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/toteutus`,
+      `/koulutus/${koulutusOid}/muokkaus?scrollTarget=koulutukseen-liitetetyt-toteutukset`,
     );
   } else {
     history.push('/');
@@ -108,40 +108,4 @@ export const copy = koulutusOid => async (dispatch, getState, { history }) => {
   history.replace({
     search: `?kopioKoulutusOid=${koulutusOid}`,
   });
-};
-
-export const saveAndAttachToteutus = () => async (
-  dispatch,
-  getState,
-  { history },
-) => {
-  const values = getKoulutusFormValues(getState());
-
-  const koulutus = await dispatch(
-    submit({
-      tila: JULKAISUTILA.TALLENNETTU,
-      redirect: false,
-    }),
-  );
-
-  const organisaatioOid = getOrganisaatioOidFromPathname(
-    history.location.pathname,
-  );
-
-  const kopioToteutusOid =
-    get(values, 'toteutukset.pohja') === 'copy_toteutus'
-      ? get(values, 'toteutukset.toteutus.value')
-      : null;
-
-  const { oid: koulutusOid } = koulutus;
-
-  if (kopioToteutusOid) {
-    history.push(
-      `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/toteutus?kopioToteutusOid=${kopioToteutusOid}`,
-    );
-  } else {
-    history.push(
-      `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/toteutus`,
-    );
-  }
 };

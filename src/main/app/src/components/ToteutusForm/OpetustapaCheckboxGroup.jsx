@@ -2,7 +2,7 @@ import React from 'react';
 
 import { getKoodisto } from '../../apiUtils';
 import ApiAsync from '../ApiAsync';
-import Radio, { RadioGroup } from '../Radio';
+import CheckboxGroup from '../CheckboxGroup';
 import { isArray, getFirstLanguageValue } from '../../utils';
 
 const getOpetustapaKoodisto = async ({ httpClient, apiUrls }) => {
@@ -33,22 +33,16 @@ const getOptions = koodisto => {
   }));
 };
 
-const OpetustapaRadioGroup = props => {
+const OpetustapaCheckboxGroup = props => {
   return (
     <ApiAsync promiseFn={getOpetustapaKoodisto}>
       {({ data }) =>
         data ? (
-          <RadioGroup {...props}>
-            {getOptions(data).map(({ label, value }) => (
-              <Radio key={value} value={value}>
-                {label}
-              </Radio>
-            ))}
-          </RadioGroup>
+          <CheckboxGroup options={getOptions(data || [])} {...props} />
         ) : null
       }
     </ApiAsync>
   );
 };
 
-export default OpetustapaRadioGroup;
+export default OpetustapaCheckboxGroup;

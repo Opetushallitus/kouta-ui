@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { getThemeProp } from '../../theme';
 
@@ -21,6 +21,24 @@ const Input = styled.input`
     border-color: ${getThemeProp('palette.primary.main')};
     box-shadow: 0 0 0 1px ${getThemeProp('palette.primary.main')};
   }
+
+  ${({ invalid }) =>
+    invalid &&
+    css`
+      border-color: ${getThemeProp('palette.danger.main')};
+
+      &:focus {
+        border-color: ${getThemeProp('palette.danger.main')};
+        box-shadow: 0 0 0 1px ${getThemeProp('palette.danger.main')};
+      }
+    `}
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      opacity: 0.5;
+      cursor: not-allowed;
+    `}
 `;
 
 export default Input;

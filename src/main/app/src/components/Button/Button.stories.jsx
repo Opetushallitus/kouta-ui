@@ -13,7 +13,9 @@ storiesOf('Button', module)
   ))
   .add('With color', () => (
     <>
-      <Button color="secondary">Button</Button>
-      <Button color="primary">Button</Button>
+      <Button color="secondary">Secondary</Button>
+      <Button color="primary">Primary</Button>
+      <Button color="success">Success</Button>
+      <Button color="danger">Danger</Button>
     </>
   ));

@@ -8,21 +8,21 @@ import Typography from '../Typography';
 import Input from '../Input';
 import Textarea from '../Textarea';
 import LanguageSelector from '../LanguageSelector';
-import { isArray } from '../../utils';
-import { TOTEUTUKSEN_OSIOT_OPTIONS } from '../../constants';
-import Select from '../Select';
 import OpetusaikaRadioGroup from './OpetusaikaRadioGroup';
 import OpetuskieliCheckboxGroup from './OpetuskieliCheckboxGroup';
-import OpetustapaRadioGroup from './OpetustapaRadioGroup';
+import OpetustapaCheckboxGroup from './OpetustapaCheckboxGroup';
+import Flex, { FlexItem } from '../Flex';
+import AlkamiskausiFields from './AlkamiskausiFields';
+import OsiotSelect from './OsiotSelect';
 
-const nop = () => {};
+const BorderHeading = styled(Typography).attrs({ variant: 'h6', paddingBottom: 1, marginBottom: 2 })`
+  border-bottom: 1px solid ${({ theme }) => theme.palette.border};
+`;
+
+const noop = () => {};
 
 const renderInputField = ({ input, ...props }) => (
   <Input {...input} {...props} />
-);
-
-const renderSelectField = ({ input, ...props }) => (
-  <Select {...input} onBlur={nop} {...props} />
 );
 
 const renderOpetusaikaField = ({ input }) => (
@@ -34,7 +34,7 @@ const renderOpetuskieliField = ({ input }) => (
 );
 
 const renderOpetustapaField = ({ input }) => (
-  <OpetustapaRadioGroup {...input} />
+  <OpetustapaCheckboxGroup {...input} />
 );
 
 const renderRadioGroupField = ({ input, options }) => (
@@ -51,24 +51,20 @@ const renderTextareaField = ({ input, ...props }) => (
   <Textarea {...input} {...props} />
 );
 
+const renderOsiotField = ({ input }) => (
+  <OsiotSelect {...input} onBlur={noop} />
+);
+
 const maksullisuusOptions = [
   { value: 'ei', label: 'Ei' },
   { value: 'kylla', label: 'Kyllä' },
 ];
 
-const renderOsiot = ({ osiot, language }) => {
-  const osiotArray = isArray(osiot) ? osiot : [];
+const OsiotFieldsBase = ({ osiot, language }) => {
+  const osiotArr = osiot || [];
 
-  const checkedOsiot = TOTEUTUKSEN_OSIOT_OPTIONS.filter(
-    ({ value }) =>
-      !!osiotArray.find(({ value: osioValue }) => osioValue === value),
-  );
-
-  return checkedOsiot.map(({ value, label }, index) => (
-    <Spacing
-      marginBottom={index !== checkedOsiot.length - 1 ? 2 : 0}
-      key={value}
-    >
+  return osiotArr.map(({ value, label }, index) => (
+    <Spacing marginBottom={index !== osiot.length - 1 ? 2 : 0} key={value}>
       <Typography variant="h6" marginBottom={1}>
         {label}
       </Typography>
@@ -80,13 +76,11 @@ const renderOsiot = ({ osiot, language }) => {
   ));
 };
 
+const OsiotFields = formValues({ osiot: 'osiot' })(OsiotFieldsBase);
+
 const MaksullisuusFieldValue = formValues({
   maksullisuus: 'maksullisuus',
 })(({ maksullisuus, children }) => children({ maksullisuus }));
-
-const OsiotFieldValue = formValues({
-  osiot: 'osiot',
-})(({ osiot, children }) => children({ osiot }));
 
 const MaksuWrapper = styled.div`
   max-width: 250px;
@@ -128,73 +122,121 @@ const JarjestamisTiedotSection = ({ languages = [] }) => {
       {({ value: activeLanguage }) => (
         <>
           <Spacing marginBottom={2}>
-            <Typography variant="h6" marginBottom={1}>
+            <BorderHeading>
               Opetuskieli
-            </Typography>
-            <Field
-              name="opetuskieli"
-              component={renderOpetuskieliField}
-            />
+            </BorderHeading>
+            <Flex>
+              <FlexItem grow={0} basis="30%">
+                <Field name="opetuskieli" component={renderOpetuskieliField} />
+              </FlexItem>
+              <FlexItem grow={1} paddingLeft={3}>
+                <Typography marginBottom={1} as="div">
+                  Opetuskielen tarkempi kuvaus
+                </Typography>
+                <Field
+                  name={`opetuskieliKuvaus.${activeLanguage}`}
+                  component={renderTextareaField}
+                />
+              </FlexItem>
+            </Flex>
           </Spacing>
           <Spacing marginBottom={2}>
-            <Typography variant="h6" marginBottom={1}>
+            <BorderHeading>
               Pääasiallinen opetusaika
-            </Typography>
-            <Field
-              name="opetusaika"
-              component={renderOpetusaikaField}
-            />
+            </BorderHeading>
+            <Flex>
+              <FlexItem grow={0} basis="30%">
+                <Field name="opetusaika" component={renderOpetusaikaField} />
+              </FlexItem>
+              <FlexItem grow={1} paddingLeft={3}>
+                <Typography marginBottom={1} as="div">
+                  Opetusajan tarkempi kuvaus
+                </Typography>
+                <Field
+                  name={`opetusaikaKuvaus.${activeLanguage}`}
+                  component={renderTextareaField}
+                />
+              </FlexItem>
+            </Flex>
           </Spacing>
           <Spacing marginBottom={2}>
-            <Typography variant="h6" marginBottom={1}>
+            <BorderHeading>
               Pääasiallinen opetustapa
-            </Typography>
-            <Field
-              name="opetustapa"
-              component={renderOpetustapaField}
-            />
+            </BorderHeading>
+            <Flex>
+              <FlexItem grow={0} basis="30%">
+                <Field name="opetustapa" component={renderOpetustapaField} />
+              </FlexItem>
+              <FlexItem grow={1} paddingLeft={3}>
+                <Typography marginBottom={1} as="div">
+                  Opetustavan tarkempi kuvaus
+                </Typography>
+                <Field
+                  name={`opetustapaKuvaus.${activeLanguage}`}
+                  component={renderTextareaField}
+                />
+              </FlexItem>
+            </Flex>
           </Spacing>
           <Spacing marginBottom={2}>
-            <Typography variant="h6" marginBottom={1}>
+            <BorderHeading>
               Onko opetus maksullista?
-            </Typography>
-            <Field
-              name="maksullisuus"
-              component={renderRadioGroupField}
-              options={maksullisuusOptions}
-            />
-            <MaksullisuusFieldValue>
-              {({ maksullisuus }) =>
-                maksullisuus === 'kylla' ? (
-                  <MaksuContainer language={activeLanguage} />
-                ) : null
-              }
-            </MaksullisuusFieldValue>
+            </BorderHeading>
+            <Flex>
+              <FlexItem grow={0} basis="30%">
+                <Field
+                  name="maksullisuus"
+                  component={renderRadioGroupField}
+                  options={maksullisuusOptions}
+                />
+                <MaksullisuusFieldValue>
+                  {({ maksullisuus }) =>
+                    maksullisuus === 'kylla' ? (
+                      <MaksuContainer language={activeLanguage} />
+                    ) : null
+                  }
+                </MaksullisuusFieldValue>
+              </FlexItem>
+              <FlexItem grow={1} paddingLeft={3}>
+                <Typography marginBottom={1} as="div">
+                  Lisätietoa maksullisuudesta
+                </Typography>
+                <Field
+                  name={`maksullisuusKuvaus.${activeLanguage}`}
+                  component={renderTextareaField}
+                />
+              </FlexItem>
+            </Flex>
           </Spacing>
           <Spacing marginBottom={2}>
-            <Typography variant="h6" marginBottom={1}>
-              Toteutuksen kuvaus
-            </Typography>
-            <Field
-              name={`kuvaus.${activeLanguage}`}
-              component={renderTextareaField}
-              placeholder="Kirjoita kuvaus, miten koulutuksen toteutus järjestetään teidän oppilaitoksessanne"
-            />
+            <BorderHeading>
+              Koulutuksen alkamiskausi
+            </BorderHeading>
+            <Flex>
+              <FlexItem grow={0} basis="30%">
+                <AlkamiskausiFields name="alkamiskausi" />
+              </FlexItem>
+              <FlexItem grow={1} paddingLeft={3}>
+                <Typography marginBottom={1} as="div">
+                  Lisätietoa alkamisajankohdasta
+                </Typography>
+                <Field
+                  name={`alkamiskausiKuvaus.${activeLanguage}`}
+                  component={renderTextareaField}
+                />
+              </FlexItem>
+            </Flex>
           </Spacing>
           <Spacing marginBottom={2}>
-            <Typography variant="h6" marginBottom={1}>
+            <BorderHeading>
               Valitse lisättävä osio
-            </Typography>
+            </BorderHeading>
             <Field
               name="osiot"
-              component={renderSelectField}
-              options={TOTEUTUKSEN_OSIOT_OPTIONS}
-              isMulti
+              component={renderOsiotField}
             />
           </Spacing>
-          <OsiotFieldValue>
-            {({ osiot }) => renderOsiot({ osiot, language: activeLanguage })}
-          </OsiotFieldValue>
+          <OsiotFields language={activeLanguage} />
         </>
       )}
     </LanguageSelector>

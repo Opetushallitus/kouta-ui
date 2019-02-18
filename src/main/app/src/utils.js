@@ -145,3 +145,15 @@ export const getKoodistoNimiAndKoodiUri = koodisto => {
       }))
     : [];
 };
+
+export const formatDateInFinnishTimeZone = (date, dateFormat) => {
+  if (!isValidDate(date)) {
+    return null;
+  }
+
+  const timezoneOffset = date.getTimezoneOffset() / 60;
+  const timezoneDifference = timezoneOffset + 2;
+  const fixedDate = addHours(date, timezoneDifference);
+
+  return formatDate(fixedDate, dateFormat);
+};

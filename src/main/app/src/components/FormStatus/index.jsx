@@ -6,17 +6,18 @@ import { isString } from '../../utils';
 import { getThemeProp } from '../../theme';
 import Icon from '../Icon';
 import Typography from '../Typography';
+import { JULKAISUTILA } from '../../constants';
 
 const statusByIcon = {
-  archived: 'get_app',
-  published: 'done',
-  saved: 'save',
+  [JULKAISUTILA.ARKISTOITU]: 'get_app',
+  [JULKAISUTILA.JULKAISTU]: 'done',
+  [JULKAISUTILA.TALLENNETTU]: 'save',
 };
 
 const labelByStatus = {
-  archived: 'Arkistoitu',
-  published: 'Julkaistu',
-  saved: 'Tallennettu',
+  [JULKAISUTILA.ARKISTOITU]: 'Arkistoitu',
+  [JULKAISUTILA.JULKAISTU]: 'Julkaistu',
+  [JULKAISUTILA.TALLENNETTU]: 'Tallennettu',
 };
 
 const getStatusIconType = status => {
@@ -38,11 +39,11 @@ const getLabel = status => {
 const getColor = ({ theme, status }) => {
   let color = theme.palette.primary.main;
 
-  if (status === 'saved') {
+  if (status === JULKAISUTILA.TALLENNETTU) {
     color = theme.palette.primary.main;
-  } else if (status === 'archived') {
+  } else if (status === JULKAISUTILA.ARKISTOITU) {
     color = theme.palette.warning.main;
-  } else if (status === 'published') {
+  } else if (status === JULKAISUTILA.JULKAISTU) {
     color = theme.palette.success.main;
   }
 
@@ -93,7 +94,7 @@ const LabelContainer = styled(Typography)`
   font-size: 1rem;
 `;
 
-const FormStatus = ({ status = 'saved', children = null, ...props }) => {
+const FormStatus = ({ status = JULKAISUTILA.TALLENNETTU, children = null, ...props }) => {
   return (
     <Container status={status} {...props}>
       <IconContainer status={status}>

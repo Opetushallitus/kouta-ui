@@ -1,5 +1,5 @@
 import { KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP } from '../constants';
-import { isArray, isString } from '../utils';
+import { isArray, isString, isObject } from '../utils';
 import keyBy from 'lodash/keyBy';
 import mapValues from 'lodash/mapValues';
 import get from 'lodash/get';
@@ -18,48 +18,60 @@ const getKoodiUriParts = uri => {
   };
 };
 
+const memoizedGetKoulutuksetByKoulutusTyyppi = memoize(
+  async (httpClient, apiUrls, koulutusTyyppi) => {
+    const ids =
+      KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP[koulutusTyyppi];
+
+    if (!ids) {
+      return [];
+    }
+
+    const responses = await Promise.all(
+      ids.map(id =>
+        httpClient.get(apiUrls.url('koodisto-service.sisaltyy-ylakoodit', id)),
+      ),
+    );
+
+    const koulutukset = responses.reduce((acc, response) => {
+      const { data } = response;
+
+      if (!isArray(data)) {
+        return acc;
+      }
+
+      return [
+        ...acc,
+        ...data.map(({ metadata, koodisto, koodiArvo, koodiUri, versio }) => ({
+          metadata,
+          koodisto,
+          koodiArvo,
+          koodiUri,
+          versio,
+        })),
+      ];
+    }, []);
+
+    const latestKoulutukset = toPairs(
+      groupBy(koulutukset, ({ koodiUri }) => koodiUri),
+    ).map(([, versiot]) => maxBy(versiot, ({ versio }) => versio));
+
+    return latestKoulutukset.filter(({ koodiUri }) =>
+      /^koulutus_/.test(koodiUri),
+    );
+  },
+  { promise: true },
+);
+
 export const getKoulutuksetByKoulutusTyyppi = async ({
   httpClient,
   apiUrls,
   koulutusTyyppi,
 }) => {
-  const ids = KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP[koulutusTyyppi];
-
-  if (!ids) {
-    return [];
-  }
-
-  const responses = await Promise.all(
-    ids.map(id =>
-      httpClient.get(apiUrls.url('koodisto-service.sisaltyy-ylakoodit', id)),
-    ),
-  );
-
-  const koulutukset = responses.reduce((acc, response) => {
-    const { data } = response;
-
-    if (!isArray(data)) {
-      return acc;
-    }
-
-    return [
-      ...acc,
-      ...data.map(({ metadata, koodisto, koodiArvo, koodiUri, versio }) => ({
-        metadata,
-        koodisto,
-        koodiArvo,
-        koodiUri,
-        versio,
-      })),
-    ];
-  }, []);
-
-  const latestKoulutukset = toPairs(
-    groupBy(koulutukset, ({ koodiUri }) => koodiUri),
-  ).map(([, versiot]) => maxBy(versiot, ({ versio }) => versio));
-
-  return latestKoulutukset.filter(({ koodiUri }) =>
-    /^koulutus_/.test(koodiUri),
+  return memoizedGetKoulutuksetByKoulutusTyyppi(
+    httpClient,
+    apiUrls,
+    koulutusTyyppi,
   );
 };
 
@@ -165,16 +177,23 @@ export const getKoulutusByKoodi = ({ httpClient, apiUrls, koodiUri }) => {
   return memoizedGetKoulutusByKoodi(httpClient, apiUrls, koodiUri);
 };
 
+const memoizedGetOrganisaatioHierarchyByOid = memoize(
+  async (httpClient, apiUrls, oid) => {
+    const { data } = await httpClient.get(
+      apiUrls.url('organisaatio-service.hierarkia', oid),
+    );
+
+    return get(data, 'organisaatiot') || [];
+  },
+  { promise: true },
+);
+
 export const getOrganisaatioHierarchyByOid = async ({
   oid,
   apiUrls,
   httpClient,
 }) => {
-  const { data } = await httpClient.get(
-    apiUrls.url('organisaatio-service.hierarkia', oid),
-  );
-
-  return get(data, 'organisaatiot') || [];
+  return memoizedGetOrganisaatioHierarchyByOid(httpClient, apiUrls, oid);
 };
 
 const memoizedGetOrganisaatioByOid = memoize(
@@ -193,11 +212,13 @@ export const getOrganisaatioByOid = ({ oid, apiUrls, httpClient }) => {
 };
 
 export const getKoutaKoulutusByOid = async ({ oid, apiUrls, httpClient }) => {
-  const { data } = await httpClient.get(
+  const { data, headers } = await httpClient.get(
     apiUrls.url('kouta-backend.koulutus-by-oid', oid),
   );
 
-  return data;
+  const lastModified = get(headers, 'last-modified') || null;
+
+  return isObject(data) ? { lastModified, ...data } : data;
 };
 
 export const getOsaamisalatByKoulutusKoodi = async ({
@@ -379,6 +400,38 @@ export const getKoutaToteutukset = async ({
     {
       params: { organisaatioOid },
     },
+  );
+
+  return data;
+};
+
+export const getKoutaKoulutusToteutukset = async ({
+  httpClient,
+  apiUrls,
+  oid,
+}) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-backend.koulutus-toteutukset', oid),
+  );
+
+  return data;
+};
+
+export const updateKoutaKoulutus = async ({
+  koulutus,
+  httpClient,
+  apiUrls,
+}) => {
+  const { lastModified = '', ...rest } = koulutus;
+
+  const headers = {
+    'If-Unmodified-Since': lastModified,
+  };
+
+  const { data } = await httpClient.post(
+    apiUrls.url('kouta-backend.koulutus'),
+    rest,
+    { headers },
   );
 
   return data;

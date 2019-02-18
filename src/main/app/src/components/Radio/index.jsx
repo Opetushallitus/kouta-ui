@@ -41,12 +41,12 @@ const Radio = ({ children = null, ...props }) => (
   </Label>
 );
 
-export const RadioGroup = ({ value, onChange, ...props }) => {
+export const RadioGroup = ({ value, onChange, disabled = false, ...props }) => {
   const childrenCount = React.Children.count(props.children);
 
   const children = React.Children.map(props.children, (child, index) => {
     const checked = value !== undefined && child.props.value === value;
-    const element = React.cloneElement(child, { checked, onChange });
+    const element = React.cloneElement(child, { checked, onChange, disabled });
     const last = index === childrenCount - 1;
 
     return <RadioContainer last={last}>{element}</RadioContainer>;

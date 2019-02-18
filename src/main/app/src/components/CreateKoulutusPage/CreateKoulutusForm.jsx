@@ -9,7 +9,6 @@ import {
   copy as copyKoulutus,
   maybeCopy as maybeCopyKoulutus,
   getValuesByKoulutus,
-  saveAndAttachToteutus,
 } from '../../state/createKoulutusForm';
 import { getKoutaKoulutusByOid } from '../../apiUtils';
 import ApiAsync from '../ApiAsync';
@@ -70,9 +69,6 @@ export default compose(
       },
       onMaybeCopy: () => {
         dispatch(maybeCopyKoulutus());
-      },
-      onSaveAndAttachToteutus: () => {
-        dispatch(saveAndAttachToteutus());
       },
     }),
   ),

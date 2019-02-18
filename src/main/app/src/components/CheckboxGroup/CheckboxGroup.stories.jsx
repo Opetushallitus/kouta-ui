@@ -19,6 +19,19 @@ const options = [
   },
 ];
 
-storiesOf('CheckboxGroup', module).add('Basic', () => (
-  <CheckboxGroup value={['1']} options={options} onChange={action('change')} />
-));
+storiesOf('CheckboxGroup', module)
+  .add('Basic', () => (
+    <CheckboxGroup
+      value={['1']}
+      options={options}
+      onChange={action('change')}
+    />
+  ))
+  .add('With disabled', () => (
+    <CheckboxGroup
+      value={['1']}
+      options={options}
+      disabled
+      onChange={action('change')}
+    />
+  ));

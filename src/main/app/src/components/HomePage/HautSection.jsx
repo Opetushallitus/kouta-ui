@@ -50,10 +50,10 @@ const tableColumns = [
   makeModifiedColumn(),
   makeMuokkaajaColumn(),
   {
-    title: 'Kiinnitettyjä toteutuksia',
-    key: 'toteutukset',
-    render: ({ toteutukset = 0 }) => (
-      <Badge color="primary">{toteutukset}</Badge>
+    title: 'Hakukohteet',
+    key: 'hakukohteet',
+    render: ({ hakukohteet = 0 }) => (
+      <Badge color="primary">{hakukohteet}</Badge>
     ),
   },
 ];

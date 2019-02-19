@@ -42,7 +42,7 @@ const tableColumns = [
   makeModifiedColumn(),
   makeMuokkaajaColumn(),
   {
-    title: 'Kiinnitettyjä hakuja',
+    title: 'Kiinnitetyt haut',
     key: 'haut',
     render: ({ haut = 0 }) => <Badge color="primary">{haut}</Badge>,
   },

@@ -89,7 +89,7 @@ const tableColumns = [
   makeModifiedColumn(),
   makeMuokkaajaColumn(),
   {
-    title: 'Kiinnitettyjä toteutuksia',
+    title: 'Kiinnitetyt toteutukset',
     key: 'toteutukset',
     render: ({ toteutukset = 0 }) => (
       <Badge color="primary">{toteutukset}</Badge>

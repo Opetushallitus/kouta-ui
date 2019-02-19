@@ -57,9 +57,11 @@ export const TableBody = styled.tbody``;
 
 export const TableHead = ({ children, ...props }) => {
   const childrenProp = React.Children.map(children, child =>
-    React.cloneElement(child, {
-      isTableHead: true,
-    }),
+    child
+      ? React.cloneElement(child, {
+          isTableHead: true,
+        })
+      : null,
   );
 
   return <TableHeadBase children={childrenProp} {...props} />;
@@ -81,10 +83,12 @@ const TableRowBase = styled.tr`
 
 export const TableRow = ({ children, isTableHead = false, ...props }) => {
   const childrenProp = React.Children.map(children, child =>
-    React.cloneElement(child, {
-      isTableHead,
-      ...(isTableHead ? { as: 'th' } : {}),
-    }),
+    child
+      ? React.cloneElement(child, {
+          isTableHead,
+          ...(isTableHead ? { as: 'th' } : {}),
+        })
+      : null,
   );
 
   return (

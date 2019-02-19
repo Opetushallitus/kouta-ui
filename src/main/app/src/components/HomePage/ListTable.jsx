@@ -75,7 +75,6 @@ export const ListTable = ({
   columns = [],
   rows = [],
   renderActionsMenu,
-  onRemove,
 }) => {
   return (
     <Table>

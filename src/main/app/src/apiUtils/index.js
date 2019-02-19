@@ -478,17 +478,16 @@ export const getKayttajanOrganisaatiot = async ({
   return memoizedGetKayttajanOrganisaatiot(httpClient, apiUrls, oid);
 };
 
-export const getKoutaIndexKoulutukset = async ({
-  httpClient,
-  apiUrls,
+const toKoutaIndexParams = ({
   organisaatioOid: organisaatioOidArg = [],
   nimi = '',
   language = 'fi',
-  size = 10,
-  arkistoidut = false,
+  pageSize = 10,
+  showArchived = false,
   page = 1,
   orderField,
   orderDirection,
+  tila,
 }) => {
   const organisaatio = organisaatioOidArg.join(',');
 
@@ -496,17 +495,53 @@ export const getKoutaIndexKoulutukset = async ({
     ...(nimi && { nimi }),
     ...(orderField && { 'order-by': orderField }),
     ...(orderDirection && { order: orderDirection }),
+    ...(tila && { tila }),
     organisaatio,
     language,
-    size,
-    arkistoidut,
+    size: pageSize,
+    arkistoidut: showArchived,
     page,
   };
+
+  return params;
+};
+
+export const getKoutaIndexKoulutukset = async ({
+  httpClient,
+  apiUrls,
+  ...rest
+}) => {
+  const params = toKoutaIndexParams(rest);
 
   const { data } = await httpClient.get(
     apiUrls.url('kouta-index.koulutus-list'),
     { params },
   );
+
+  return data;
+};
+
+export const getKoutaIndexToteutukset = async ({
+  httpClient,
+  apiUrls,
+  ...rest
+}) => {
+  const params = toKoutaIndexParams(rest);
+
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-index.toteutus-list'),
+    { params },
+  );
+
+  return data;
+};
+
+export const getKoutaIndexHaut = async ({ httpClient, apiUrls, ...rest }) => {
+  const params = toKoutaIndexParams(rest);
+
+  const { data } = await httpClient.get(apiUrls.url('kouta-index.haku-list'), {
+    params,
+  });
 
   return data;
 };

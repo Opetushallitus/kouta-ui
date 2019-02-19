@@ -7,10 +7,9 @@ import Button from '../Button';
 import Pagination from '../Pagination';
 import Flex from '../Flex';
 import Spacing from '../Spacing';
-import Icon from '../Icon';
 import Spin from '../Spin';
 import useApiAsync from '../useApiAsync';
-import { getKoutaIndexKoulutukset } from '../../apiUtils';
+import { getKoutaIndexHaut } from '../../apiUtils';
 import { getIndexParamsByFilters } from './utils';
 import Filters from './Filters';
 import Badge from '../Badge';
@@ -20,18 +19,10 @@ import {
   getFirstLanguageValue,
 } from '../../utils';
 
-import {
-  UncontrolledDropdown,
-  DropdownMenu,
-  DropdownMenuItem,
-} from '../Dropdown';
-
-import Anchor from '../Anchor';
-
-const getKoulutukset = async ({ httpClient, apiUrls, ...filters }) => {
+const getHaut = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
 
-  const { result, totalCount } = await getKoutaIndexKoulutukset({
+  const { result, totalCount } = await getKoutaIndexHaut({
     httpClient,
     apiUrls,
     ...params,
@@ -40,38 +31,10 @@ const getKoulutukset = async ({ httpClient, apiUrls, ...filters }) => {
   return { result, pageCount: Math.ceil(totalCount / 10) };
 };
 
-const LuoKoulutusDropdown = ({ organisaatioOid }) => {
-  const overlay = (
-    <DropdownMenu>
-      <DropdownMenuItem
-        as={Link}
-        to={`/organisaatio/${organisaatioOid}/koulutus?johtaaTutkintoon=true`}
-      >
-        Tutkintoon johtava koulutus
-      </DropdownMenuItem>
-    </DropdownMenu>
-  );
-
-  return (
-    <UncontrolledDropdown
-      overlay={overlay}
-      portalTarget={document.body}
-      overflow
-    >
-      {({ ref, onToggle, visible }) => (
-        <div ref={ref} onClick={onToggle}>
-          <Button>
-            Luo uusi koulutus{' '}
-            <Icon type={visible ? 'arrow_drop_up' : 'arrow_drop_down'} />
-          </Button>
-        </div>
-      )}
-    </UncontrolledDropdown>
-  );
-};
-
 const Actions = ({ organisaatioOid }) => (
-  <LuoKoulutusDropdown organisaatioOid={organisaatioOid} />
+  <Button as={Link} to={`/organisaatio/${organisaatioOid}/haku`}>
+    Luo uusi haku
+  </Button>
 );
 
 const tableColumns = [
@@ -80,9 +43,7 @@ const tableColumns = [
     key: 'nimi',
     sortable: true,
     render: ({ nimi, oid }) => (
-      <Anchor as={Link} to={`/koulutus/${oid}/muokkaus`}>
-        {getFirstLanguageValue(nimi)}
-      </Anchor>
+        getFirstLanguageValue(nimi)
     ),
   },
   makeTilaColumn(),
@@ -118,8 +79,8 @@ const KoulutuksetSection = ({ organisaatioOid }) => {
     tila,
   ]);
 
-  const { data: { result: koulutukset, pageCount = 0 } = {} } = useApiAsync({
-    promiseFn: getKoulutukset,
+  const { data: { result: haut, pageCount = 0 } = {} } = useApiAsync({
+    promiseFn: getHaut,
     nimi: debouncedNimi,
     page,
     showArchived,
@@ -130,20 +91,20 @@ const KoulutuksetSection = ({ organisaatioOid }) => {
   });
 
   const rows = useMemo(() => {
-    return koulutukset
-      ? koulutukset.map(koulutus => ({ ...koulutus, key: koulutus.oid }))
+    return haut
+      ? haut.map(haku => ({ ...haku, key: haku.oid }))
       : null;
-  }, [koulutukset]);
+  }, [haut]);
 
   return (
     <ListCollapse
-      icon="school"
-      header="Koulutukset"
+      icon="access_time"
+      header="Haut"
       actions={<Actions organisaatioOid={organisaatioOid} />}
       defaultOpen
     >
       <Spacing marginBottom={2}>
-        <Filters {...filtersProps} nimiPlaceholder="Hae koulutuksia" />
+        <Filters {...filtersProps} nimiPlaceholder="Hae hakuja" />
       </Spacing>
 
       {rows ? (

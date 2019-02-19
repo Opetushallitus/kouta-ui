@@ -1,74 +1,113 @@
-import React from 'react';
-import formatDate from 'date-fns/format';
+import React, { useMemo } from 'react';
 
 import ListCollapse from './ListCollapse';
-import Table, { TableHead, TableBody, TableRow, TableCell } from '../Table';
+import ListTable, {
+  makeModifiedColumn,
+  makeMuokkaajaColumn,
+  makeTilaColumn,
+} from './ListTable';
 import Pagination from '../Pagination';
-import Flex, { FlexItem } from '../Flex';
-import TilaLabel from './TilaLabel';
-import Input from '../Input';
-import Checkbox from '../Checkbox';
+import Flex from '../Flex';
 import Spacing from '../Spacing';
+import Spin from '../Spin';
+import useApiAsync from '../useApiAsync';
+import { getKoutaIndexToteutukset } from '../../apiUtils';
+import { getIndexParamsByFilters } from './utils';
+import Filters from './Filters';
+import Badge from '../Badge';
+import useFilterState from './useFilterState';
 
-const data = [
+import { getFirstLanguageValue } from '../../utils';
+
+const getToteutukset = async ({ httpClient, apiUrls, ...filters }) => {
+  const params = getIndexParamsByFilters(filters);
+
+  const { result, totalCount } = await getKoutaIndexToteutukset({
+    httpClient,
+    apiUrls,
+    ...params,
+  });
+
+  return { result, pageCount: Math.ceil(totalCount / 10) };
+};
+
+const tableColumns = [
   {
-    nimi: 'Sosiaali- ja terveysalan perustutkinto, päiväopetus',
-    tila: 'julkaistu',
-    muokattu: new Date(),
-    muokkaaja: 'Kalle Ilves',
-    toteutukset: [],
+    title: 'Nimi',
+    key: 'nimi',
+    sortable: true,
+    render: ({ nimi }) => getFirstLanguageValue(nimi),
+  },
+  makeTilaColumn(),
+  makeModifiedColumn(),
+  makeMuokkaajaColumn(),
+  {
+    title: 'Kiinnitettyjä hakuja',
+    key: 'haut',
+    render: ({ haut = 0 }) => <Badge color="primary">{haut}</Badge>,
   },
 ];
 
-const Filters = () => (
-  <Flex alignCenter>
-    <FlexItem grow={1} paddingRight={2}>
-      <Input placeholder="Hae toteutuksia" />
-    </FlexItem>
-    <FlexItem grow={0}>
-      <Checkbox checked={true}>Näytä myös arkistoidut</Checkbox>
-    </FlexItem>
-  </Flex>
-);
+const ToteutuksetSection = ({ organisaatioOid }) => {
+  const {
+    debouncedNimi,
+    showArchived,
+    page,
+    setPage,
+    orderBy,
+    setOrderBy,
+    tila,
+    filtersProps,
+  } = useFilterState();
 
-const ToteutuksetSection = ({ organisaatioOid }) => (
-  <ListCollapse icon="settings" header="Koulutuksen toteutukset" defaultOpen>
-    <Spacing marginBottom={2}>
-      <Filters />
-    </Spacing>
-    <Table>
-      <TableHead>
-        <TableRow>
-          <TableCell sortDirection="desc">Nimi</TableCell>
-          <TableCell sortDirection="desc">Tila</TableCell>
-          <TableCell sortDirection="desc">Muokattu viimeksi</TableCell>
-          <TableCell sortDirection="desc">Muokkaajan nimi</TableCell>
-          <TableCell>Kiinnitetyt haut</TableCell>
-          <TableCell>Toimenpiteet</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {data.map(({ nimi, tila, muokattu, muokkaaja }, index) => (
-          <TableRow key={index}>
-            <TableCell>{nimi}</TableCell>
-            <TableCell>
-              <TilaLabel color="success">Julkaistu</TilaLabel>
-            </TableCell>
-            <TableCell>
-              {muokattu ? formatDate(muokattu, 'DD.MM.YYYY HH:mm') : null}
-            </TableCell>
-            <TableCell>{muokkaaja ? muokkaaja : null}</TableCell>
-            <TableCell> </TableCell>
-            <TableCell> </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+  const watch = JSON.stringify([
+    page,
+    debouncedNimi,
+    organisaatioOid,
+    showArchived,
+    orderBy,
+    tila,
+  ]);
 
-    <Flex marginTop={2}>
-      <Pagination value={0} pageCount={10} />
-    </Flex>
-  </ListCollapse>
-);
+  const { data: { result: toteutukset, pageCount = 0 } = {} } = useApiAsync({
+    promiseFn: getToteutukset,
+    nimi: debouncedNimi,
+    page,
+    showArchived,
+    organisaatioOid,
+    orderBy,
+    tila,
+    watch,
+  });
+
+  const rows = useMemo(() => {
+    return toteutukset
+      ? toteutukset.map(toteutus => ({ ...toteutus, key: toteutus.oid }))
+      : null;
+  }, [toteutukset]);
+
+  return (
+    <ListCollapse icon="settings" header="Koulutuksen toteutukset" defaultOpen>
+      <Spacing marginBottom={2}>
+        <Filters {...filtersProps} nimiPlaceholder="Hae toteutuksia" />
+      </Spacing>
+
+      {rows ? (
+        <ListTable
+          rows={rows}
+          columns={tableColumns}
+          onSort={setOrderBy}
+          sort={orderBy}
+        />
+      ) : (
+        <Spin center />
+      )}
+
+      <Flex marginTop={2}>
+        <Pagination value={page} onChange={setPage} pageCount={pageCount} />
+      </Flex>
+    </ListCollapse>
+  );
+};
 
 export default ToteutuksetSection;

@@ -34,4 +34,6 @@ export const development = {
   'organisaatio-service.organisaatio-by-oid': 'https://virkailija.hahtuvaopintopolku.fi/organisaatio-service/rest/organisaatio/v4/$1?includeImage=false',
   'lokalisaatio-service.localisation': 'https://virkailija.hahtuvaopintopolku.fi/lokalisointi/cxf/rest/v1/localisation?category=$1',
   'kouta-index.koulutus-list': 'https://virkailija.hahtuvaopintopolku.fi/kouta-index/koulutus/filtered-list',
+  'kouta-index.toteutus-list': 'https://virkailija.hahtuvaopintopolku.fi/kouta-index/toteutus/filtered-list',
+  'kouta-index.haku-list': 'https://virkailija.hahtuvaopintopolku.fi/kouta-index/haku/filtered-list',
 };

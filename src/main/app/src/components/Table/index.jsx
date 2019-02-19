@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 
 import { getThemeProp, spacing } from '../../theme';
 import Icon from '../Icon';
+import { isFunction } from '../../utils';
 
 export const TableBase = styled.table`
   width: 100%;
@@ -18,11 +19,13 @@ const SortIcon = styled(Icon)`
   margin-left: ${spacing(0.5)};
   color: ${getThemeProp('palette.text.primary')};
   cursor: pointer;
+  font-size: 1.2rem;
 `;
 
 const SortContainer = styled.div`
   display: inline-flex;
   align-items: center;
+  cursor: pointer;
 `;
 
 export const TableCellBase = styled.td`
@@ -31,6 +34,12 @@ export const TableCellBase = styled.td`
   border-bottom: 1px solid ${getThemeProp('palette.border')};
   text-align: left;
   ${getThemeProp('typography.body')};
+
+  ${({ textCenter }) =>
+    textCenter &&
+    css`
+      text-align: center;
+    `}
 
   ${({ isTableHead }) =>
     isTableHead &&
@@ -89,23 +98,26 @@ export const TableRow = ({ children, isTableHead = false, ...props }) => {
 
 export const TableCell = ({
   sortDirection,
-  onSort = () => {},
+  onSort,
   children = null,
   ...props
 }) => {
   return (
     <TableCellBase {...props}>
-      {sortDirection ? (
-        <SortContainer>
+      {isFunction(onSort) ? (
+        <SortContainer
+          onClick={() => {
+            onSort(sortDirection === 'desc' ? 'asc' : 'desc');
+          }}
+        >
           {children}
-          <SortIcon
-            onClick={() => {
-              onSort(sortDirection === 'desc' ? 'asc' : 'desc');
-            }}
-            type={
-              sortDirection === 'desc' ? 'arrow_drop_down' : 'arrow_drop_up'
-            }
-          />
+          {sortDirection ? (
+            <SortIcon
+              type={
+                sortDirection === 'desc' ? 'arrow_downward' : 'arrow_upward'
+              }
+            />
+          ) : null}
         </SortContainer>
       ) : (
         children

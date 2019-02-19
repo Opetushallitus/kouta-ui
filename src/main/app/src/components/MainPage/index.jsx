@@ -8,8 +8,7 @@ import CreateToteutusPage from '../CreateToteutusPage';
 import CreateHakukohdePage from '../CreateHakukohdePage';
 import CreateValintaperusteetPage from '../CreateValintaperusteetPage';
 import EditKoulutusPage from '../EditKoulutusPage';
-
-const CreateHakuPage = () => 'Haku';
+import CreateHakuPage from '../CreateHakuPage';
 
 const MainPage = ({ history }) => {
   return (

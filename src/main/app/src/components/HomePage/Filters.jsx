@@ -6,7 +6,6 @@ import Checkbox from '../Checkbox';
 import Select from '../Select';
 import { JULKAISUTILA } from '../../constants';
 
-
 const defaultTilaOptions = [
   { value: JULKAISUTILA.JULKAISTU, label: 'Julkaistu' },
   { value: JULKAISUTILA.TALLENNETTU, label: 'Tallennettu' },

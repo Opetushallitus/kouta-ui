@@ -50,8 +50,12 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
     ...toteutusFormData,
   };
 
+  let toteutusData;
+
   try {
-    await dispatch(saveToteutus(toteutus));
+    const { data } = await dispatch(saveToteutus(toteutus));
+
+    toteutusData = data;
   } catch (e) {
     return dispatch(
       createTemporaryToast({
@@ -68,8 +72,12 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
     }),
   );
 
-  if (JULKAISUTILA.TALLENNETTU) {
-    history.push(`/organisaatio/${organisaatioOid}/haku`);
+  if (get(toteutusData, 'oid')) {
+    const { oid: toteutusOid } = toteutusData;
+
+    history.push(
+      `/toteutus/${toteutusOid}/muokkaus?scrollTarget=toteutukseen-liitetetyt-hakukohteet`,
+    );
   } else {
     history.push('/');
   }

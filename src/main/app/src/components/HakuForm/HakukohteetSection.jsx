@@ -18,7 +18,7 @@ const HakukohteetSection = ({ haku, organisaatioOid }) => {
     watch: hakuOid,
     organisaatioOid: organisaatioOid,
   });
-console.log("asd", hakukohteet);
+
   const hakukohdeNames = hakukohteet
     ? hakukohteet.map(({ nimi }) => getFirstLanguageValue(nimi)).filter(n => !!n)
     : [];

@@ -32,6 +32,10 @@ const renderSelectField = ({ options = [], input }) => {
   );
 };
 
+const FooterField = formValues('toteutus')(
+  ({ toteutus, children }) => children({ toteutus }),
+);
+
 const HakukohteetModal = ({
   onClose,
   organisaatioOid,
@@ -45,10 +49,6 @@ const HakukohteetModal = ({
     organisaatioOid,
     watch: organisaatioOid,
   });
-
-  const FooterField = formValues('toteutus')(
-    ({ toteutus, children }) => children({ toteutus }),
-  );
 
   const getState = (toteutus) => {
     return toteutus ? true : false;

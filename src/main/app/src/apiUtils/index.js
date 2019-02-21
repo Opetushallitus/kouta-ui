@@ -403,7 +403,6 @@ export const getKoutaHakuHakukohteet = async ({
       params: { organisaatioOid },
     },
   );
-  console.log('api', data);
 
   return data;
 };

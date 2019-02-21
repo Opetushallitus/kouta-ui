@@ -451,3 +451,97 @@ export const getKoutaHaut = async ({
 
   return data;
 };
+
+const memoizedGetKayttajanOrganisaatiot = memoize(
+  async (httpClient, apiUrls, oid) => {
+    return Promise.all([
+      getOrganisaatioByOid({
+        oid: '1.2.246.562.10.594252633210',
+        httpClient,
+        apiUrls,
+      }),
+      getOrganisaatioByOid({
+        oid: '1.2.246.562.10.67476956288',
+        httpClient,
+        apiUrls,
+      }),
+    ]);
+  },
+  { promise: true },
+);
+
+export const getKayttajanOrganisaatiot = async ({
+  oid,
+  httpClient,
+  apiUrls,
+}) => {
+  return memoizedGetKayttajanOrganisaatiot(httpClient, apiUrls, oid);
+};
+
+const toKoutaIndexParams = ({
+  organisaatioOid: organisaatioOidArg = [],
+  nimi = '',
+  language = 'fi',
+  pageSize = 10,
+  showArchived = false,
+  page = 1,
+  orderField,
+  orderDirection,
+  tila,
+}) => {
+  const organisaatio = organisaatioOidArg.join(',');
+
+  const params = {
+    ...(nimi && { nimi }),
+    ...(orderField && { 'order-by': orderField }),
+    ...(orderDirection && { order: orderDirection }),
+    ...(tila && { tila }),
+    organisaatio,
+    language,
+    size: pageSize,
+    arkistoidut: showArchived,
+    page,
+  };
+
+  return params;
+};
+
+export const getKoutaIndexKoulutukset = async ({
+  httpClient,
+  apiUrls,
+  ...rest
+}) => {
+  const params = toKoutaIndexParams(rest);
+
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-index.koulutus-list'),
+    { params },
+  );
+
+  return data;
+};
+
+export const getKoutaIndexToteutukset = async ({
+  httpClient,
+  apiUrls,
+  ...rest
+}) => {
+  const params = toKoutaIndexParams(rest);
+
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-index.toteutus-list'),
+    { params },
+  );
+
+  return data;
+};
+
+export const getKoutaIndexHaut = async ({ httpClient, apiUrls, ...rest }) => {
+  const params = toKoutaIndexParams(rest);
+
+  const { data } = await httpClient.get(apiUrls.url('kouta-index.haku-list'), {
+    params,
+  });
+
+  return data;
+};

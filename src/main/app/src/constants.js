@@ -3,6 +3,7 @@ export const LANGUAGE = 'fi';
 export const JULKAISUTILA = {
   TALLENNETTU: 'tallennettu',
   JULKAISTU: 'julkaistu',
+  ARKISTOITU: 'arkistoitu',
 };
 
 export const KOULUTUSTYYPPI_CATEGORY = {

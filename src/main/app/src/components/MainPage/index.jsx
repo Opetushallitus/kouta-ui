@@ -2,52 +2,61 @@ import React from 'react';
 
 import { Router, Route, Redirect, Switch } from 'react-router-dom';
 
-import { ReduxToaster } from '../Toaster'; 
+import { ReduxToaster } from '../Toaster';
 import CreateKoulutusPage from '../CreateKoulutusPage';
 import CreateToteutusPage from '../CreateToteutusPage';
 import CreateHakukohdePage from '../CreateHakukohdePage';
 import CreateValintaperusteetPage from '../CreateValintaperusteetPage';
 import EditKoulutusPage from '../EditKoulutusPage';
 import CreateHakuPage from '../CreateHakuPage';
+import HomePage from '../HomePage';
 
 const MainPage = ({ history }) => {
   return (
     <Router history={history}>
       <>
-      <ReduxToaster style={{ position: 'fixed', top: '16px', right: '16px', zIndex: '9999' }} />
-      <Switch>
-        <Route
-          path="/organisaatio/:oid/koulutus"
-          component={CreateKoulutusPage}
-          exact
+        <ReduxToaster
+          style={{
+            position: 'fixed',
+            top: '16px',
+            right: '16px',
+            zIndex: '9999',
+          }}
         />
-        <Route
-          path="/organisaatio/:organisaatioOid/koulutus/:koulutusOid/toteutus"
-          component={CreateToteutusPage}
-          exact
-        />
-        <Route
-          path="/organisaatio/:organisaatioOid/haku"
-          component={CreateHakuPage}
-          exact
-        />
-        <Route
-          path="/organisaatio/:organisaatioOid/toteutus/:toteutusOid/haku/:hakuOid/hakukohde"
-          component={CreateHakukohdePage}
-          exact
-        />
-        <Route
-          path="/organisaatio/:oid/valintaperusteet"
-          component={CreateValintaperusteetPage}
-          exact
-        />
-        <Route
-          path="/koulutus/:oid/muokkaus"
-          component={EditKoulutusPage}
-          exact
-        />
-        <Redirect to="/" />
-      </Switch>
+        <Switch>
+          <Route path="/" exact component={HomePage} />
+          <Route
+            path="/organisaatio/:oid/koulutus"
+            component={CreateKoulutusPage}
+            exact
+          />
+          <Route
+            path="/organisaatio/:organisaatioOid/koulutus/:koulutusOid/toteutus"
+            component={CreateToteutusPage}
+            exact
+          />
+          <Route
+            path="/organisaatio/:organisaatioOid/haku"
+            component={CreateHakuPage}
+            exact
+          />
+          <Route
+            path="/organisaatio/:organisaatioOid/toteutus/:toteutusOid/haku/:hakuOid/hakukohde"
+            component={CreateHakukohdePage}
+            exact
+          />
+          <Route
+            path="/organisaatio/:oid/valintaperusteet"
+            component={CreateValintaperusteetPage}
+            exact
+          />
+          <Route
+            path="/koulutus/:oid/muokkaus"
+            component={EditKoulutusPage}
+            exact
+          />
+          <Redirect to="/" />
+        </Switch>
       </>
     </Router>
   );

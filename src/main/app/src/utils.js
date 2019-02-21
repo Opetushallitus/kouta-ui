@@ -8,6 +8,7 @@ import addHours from 'date-fns/add_hours';
 import formatDate from 'date-fns/format';
 import _isValidDate from 'date-fns/is_valid';
 import mapValues from 'lodash/mapValues';
+import produce from 'immer';
 
 export const isString = value => typeof value === 'string';
 
@@ -156,4 +157,19 @@ export const formatDateInFinnishTimeZone = (date, dateFormat) => {
   const fixedDate = addHours(date, timezoneDifference);
 
   return formatDate(fixedDate, dateFormat);
+};
+
+export const updateAll = ({ data, updates, keyField = 'oid' }) => {
+  const updateArr = isArray(updates) ? updates : [updates];
+
+  return produce(data, draft => {
+    for (const obj of updateArr) {
+      if (isObject(obj) && obj[keyField]) {
+        draft.byOid[obj[keyField]] = {
+          ...(draft.byOid[keyField] || {}),
+          ...obj,
+        };
+      }
+    }
+  });
 };

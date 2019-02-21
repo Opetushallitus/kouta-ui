@@ -38,6 +38,7 @@ exports[`renders correctly 1`] = `
   align-items: center;
   min-height: 3rem;
   padding: 0px 16px;
+  cursor: pointer;
 }
 
 .c1 {
@@ -45,7 +46,6 @@ exports[`renders correctly 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  cursor: pointer;
   border-bottom: 1px solid #999999;
 }
 
@@ -62,6 +62,7 @@ exports[`renders correctly 1`] = `
   -ms-flex: 1;
   flex: 1;
   background-color: white;
+  cursor: pointer;
 }
 
 .c9 {
@@ -87,19 +88,20 @@ exports[`renders correctly 1`] = `
     className="c0"
   >
     <styled.div
-      onClick={[Function]}
       open={true}
     >
       <div
         className="c1"
-        onClick={[Function]}
         open={true}
       >
         <styled.div
           active={false}
+          onClick={[Function]}
+          toggleOnHeaderClick={true}
         >
           <div
             className="c2"
+            onClick={[Function]}
           >
             <Styled(Typography)>
               <styled.span
@@ -116,9 +118,12 @@ exports[`renders correctly 1`] = `
             </Styled(Typography)>
           </div>
         </styled.div>
-        <styled.div>
+        <styled.div
+          onClick={[Function]}
+        >
           <div
             className="c5"
+            onClick={[Function]}
           >
             <Styled(Icon)
               type="expand_less"
@@ -193,6 +198,7 @@ exports[`renders correctly 2`] = `
   align-items: center;
   min-height: 3rem;
   padding: 0px 16px;
+  cursor: pointer;
 }
 
 .c1 {
@@ -200,7 +206,6 @@ exports[`renders correctly 2`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  cursor: pointer;
   border-bottom: 1px solid #999999;
 }
 
@@ -217,6 +222,7 @@ exports[`renders correctly 2`] = `
   -ms-flex: 1;
   flex: 1;
   background-color: white;
+  cursor: pointer;
 }
 
 .c7 {
@@ -238,28 +244,32 @@ exports[`renders correctly 2`] = `
     className="c0"
   >
     <styled.div
-      onClick={[Function]}
       open={true}
     >
       <div
         className="c1"
-        onClick={[Function]}
         open={true}
       >
         <styled.div
           active={false}
+          onClick={[Function]}
+          toggleOnHeaderClick={true}
         >
           <div
             className="c2"
+            onClick={[Function]}
           >
             <div>
               Element header
             </div>
           </div>
         </styled.div>
-        <styled.div>
+        <styled.div
+          onClick={[Function]}
+        >
           <div
             className="c3"
+            onClick={[Function]}
           >
             <Styled(Icon)
               type="expand_less"
@@ -347,6 +357,7 @@ exports[`renders correctly when closed 1`] = `
   align-items: center;
   min-height: 3rem;
   padding: 0px 16px;
+  cursor: pointer;
 }
 
 .c1 {
@@ -354,7 +365,6 @@ exports[`renders correctly when closed 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  cursor: pointer;
 }
 
 .c2 {
@@ -370,6 +380,7 @@ exports[`renders correctly when closed 1`] = `
   -ms-flex: 1;
   flex: 1;
   background-color: white;
+  cursor: pointer;
 }
 
 .c10 {
@@ -410,19 +421,20 @@ exports[`renders correctly when closed 1`] = `
     className="c0"
   >
     <styled.div
-      onClick={[Function]}
       open={false}
     >
       <div
         className="c1"
-        onClick={[Function]}
         open={false}
       >
         <styled.div
           active={false}
+          onClick={[Function]}
+          toggleOnHeaderClick={true}
         >
           <div
             className="c2"
+            onClick={[Function]}
           >
             <Styled(Typography)>
               <styled.span
@@ -439,9 +451,12 @@ exports[`renders correctly when closed 1`] = `
             </Styled(Typography)>
           </div>
         </styled.div>
-        <styled.div>
+        <styled.div
+          onClick={[Function]}
+        >
           <div
             className="c5"
+            onClick={[Function]}
           >
             <Styled(Icon)
               type="expand_more"

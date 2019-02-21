@@ -585,6 +585,36 @@ export const getKoutaHakukohteet = async ({
   return data;
 };
 
+export const getKoutaHakukohdeByOid = async ({ oid, httpClient, apiUrls }) => {
+  const { data, headers } = await httpClient.get(
+    apiUrls.url('kouta-backend.hakukohde-by-oid', oid),
+  );
+
+  const lastModified = get(headers, 'last-modified') || null;
+
+  return isObject(data) ? { lastModified, ...data } : data;
+};
+
+export const updateKoutaHakukohde = async ({
+  hakukohde,
+  httpClient,
+  apiUrls,
+}) => {
+  const { lastModified = '', ...rest } = hakukohde;
+
+  const headers = {
+    'If-Unmodified-Since': lastModified,
+  };
+
+  const { data } = await httpClient.post(
+    apiUrls.url('kouta-backend.hakukohde'),
+    rest,
+    { headers },
+  );
+
+  return data;
+};
+
 export const getKoutaIndexHaut = async ({ httpClient, apiUrls, ...rest }) => {
   const params = toKoutaIndexParams(rest);
 

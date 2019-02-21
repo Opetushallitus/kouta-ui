@@ -10,7 +10,11 @@ import CreateValintaperusteetPage from '../CreateValintaperusteetPage';
 import EditKoulutusPage from '../EditKoulutusPage';
 import CreateHakuPage from '../CreateHakuPage';
 import HomePage from '../HomePage';
+<<<<<<< HEAD
 import EditToteutusPage from '../EditToteutusPage';
+=======
+import EditHakukohdePage from '../EditHakukohdePage';
+>>>>>>> Hakukohteen muokkaus
 
 const MainPage = ({ history }) => {
   return (
@@ -59,6 +63,10 @@ const MainPage = ({ history }) => {
           <Route
             path="/toteutus/:oid/muokkaus"
             component={EditToteutusPage}
+          />
+          <Route
+            path="/hakukohde/:oid/muokkaus"
+            component={EditHakukohdePage}
             exact
           />
           <Redirect to="/" />

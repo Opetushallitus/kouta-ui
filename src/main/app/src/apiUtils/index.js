@@ -173,8 +173,40 @@ const memoizedGetKoulutusByKoodi = memoize(
   { promise: true },
 );
 
+const memoizedGetHakuByKoodi = memoize(
+  async (httpClient, apiUrls, argKoodiUri) => {
+    const { koodiUri } = getKoodiUriParts(argKoodiUri);
+
+    const [koodiResponse] = await Promise.all([
+      httpClient.get(apiUrls.url('koodisto-service.codeelement', koodiUri)),
+    ]);
+
+    const { data: koodiData } = koodiResponse;
+
+    const latestKoodi = isArray(koodiData)
+      ? maxBy(koodiData, ({ versio }) => versio)
+      : null;
+
+    const nimi =
+      latestKoodi && isArray(latestKoodi.metadata)
+        ? keyBy(latestKoodi.metadata, ({ kieli }) =>
+            kieli ? kieli.toLowerCase() : '_',
+          )
+        : null;
+
+    return {
+      nimi: mapValues(nimi, ({ nimi: nimiField }) => nimiField || null),
+    };
+  },
+  { promise: true },
+);
+
 export const getKoulutusByKoodi = ({ httpClient, apiUrls, koodiUri }) => {
   return memoizedGetKoulutusByKoodi(httpClient, apiUrls, koodiUri);
+};
+
+export const getHakuByKoodi = ({ httpClient, apiUrls, koodiUri }) => {
+  return memoizedGetHakuByKoodi(httpClient, apiUrls, koodiUri);
 };
 
 const memoizedGetOrganisaatioHierarchyByOid = memoize(
@@ -359,6 +391,23 @@ export const getKoutaHakuByOid = async ({ oid, httpClient, apiUrls }) => {
   return data;
 };
 
+export const getKoutaHakuHakukohteet = async ({
+  httpClient,
+  apiUrls,
+  organisaatioOid,
+  oid,
+}) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-backend.haku-hakukohteet', oid),
+    {
+      params: { organisaatioOid },
+    },
+  );
+  console.log('api', data);
+
+  return data;
+};
+
 export const getKoutaValintaperusteet = async ({
   organisaatioOid,
   hakuOid,
@@ -430,6 +479,22 @@ export const updateKoutaKoulutus = async ({
 
   const { data } = await httpClient.post(
     apiUrls.url('kouta-backend.koulutus'),
+    rest,
+    { headers },
+  );
+
+  return data;
+};
+
+export const updateKoutaHaku = async ({ haku, httpClient, apiUrls }) => {
+  const { lastModified = '', ...rest } = haku;
+
+  const headers = {
+    'If-Unmodified-Since': lastModified,
+  };
+
+  const { data } = await httpClient.post(
+    apiUrls.url('kouta-backend.haku'),
     rest,
     { headers },
   );

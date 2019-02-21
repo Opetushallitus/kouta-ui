@@ -9,6 +9,7 @@ import CreateHakukohdePage from '../CreateHakukohdePage';
 import CreateValintaperusteetPage from '../CreateValintaperusteetPage';
 import EditKoulutusPage from '../EditKoulutusPage';
 import CreateHakuPage from '../CreateHakuPage';
+import EditHakuPage from '../EditHakuPage';
 
 const MainPage = ({ history }) => {
   return (
@@ -44,6 +45,11 @@ const MainPage = ({ history }) => {
         <Route
           path="/koulutus/:oid/muokkaus"
           component={EditKoulutusPage}
+          exact
+        />
+        <Route
+          path="/haku/:oid/muokkaus"
+          component={EditHakuPage}
           exact
         />
         <Redirect to="/" />

@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { Link } from 'react-router-dom';
 
 import ListCollapse from './ListCollapse';
 import ListTable, {
@@ -16,8 +17,8 @@ import { getIndexParamsByFilters } from './utils';
 import Filters from './Filters';
 import Badge from '../Badge';
 import useFilterState from './useFilterState';
-
 import { getFirstLanguageValue } from '../../utils';
+import Anchor from '../Anchor';
 
 const getToteutukset = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
@@ -36,7 +37,11 @@ const tableColumns = [
     title: 'Nimi',
     key: 'nimi',
     sortable: true,
-    render: ({ nimi }) => getFirstLanguageValue(nimi),
+    render: ({ nimi, oid }) => (
+      <Anchor as={Link} to={`/toteutus/${oid}/muokkaus`}>
+        {getFirstLanguageValue(nimi)}
+      </Anchor>
+    ),
   },
   makeTilaColumn(),
   makeModifiedColumn(),

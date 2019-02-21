@@ -132,7 +132,7 @@ const ToteutusForm = ({
                       {({ onToggle }) => (
                         <Flex justifyEnd full>
                           <Button onClick={onToggle} type="button">
-                            Liitä toteutus
+                            Liitä hakukohde
                           </Button>
                         </Flex>
                       )}

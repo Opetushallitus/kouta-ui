@@ -72,7 +72,7 @@ export const submit = ({
     return dispatch(
       createTemporaryToast({
         status: 'danger',
-        title: 'Haun talennus epäonnistui',
+        title: 'Haun tallennus epäonnistui',
       }),
     );
   }

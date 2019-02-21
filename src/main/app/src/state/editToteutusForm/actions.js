@@ -20,6 +20,7 @@ export const submit = ({
   organisaatioOid,
   tila,
   lastModified,
+  koulutusOid,
 }) => async (dispatch, getState, { history, apiUrls, httpClient }) => {
   const state = getState();
   const values = getToteutusFormValues(state);
@@ -36,6 +37,7 @@ export const submit = ({
     muokkaaja: kayttajaOid,
     ...(tila && { tila }),
     ...(organisaatioOid && { organisaatioOid }),
+    ...(koulutusOid && { koulutusOid }),
     ...toteutusFormData,
   };
 

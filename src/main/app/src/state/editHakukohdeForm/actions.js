@@ -19,6 +19,8 @@ export const submit = ({
   organisaatioOid,
   tila,
   lastModified,
+  hakuOid,
+  toteutusOid,
 }) => async (dispatch, getState, { history, apiUrls, httpClient }) => {
   const state = getState();
   const values = getHakukohdeFormValues(state);
@@ -35,6 +37,8 @@ export const submit = ({
     muokkaaja: kayttajaOid,
     ...(tila && { tila }),
     ...(organisaatioOid && { organisaatioOid }),
+    ...(hakuOid && { hakuOid }),
+    ...(toteutusOid && { toteutusOid }),
     ...hakukohdeFormData,
   };
 

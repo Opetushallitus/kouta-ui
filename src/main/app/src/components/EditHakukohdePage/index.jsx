@@ -17,6 +17,7 @@ import {
 import { getFirstLanguageValue } from '../../utils';
 import Flex, { FlexItem } from '../Flex';
 import Typography from '../Typography';
+import Spin from '../Spin';
 
 const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
   const hakukohde = await getKoutaHakukohdeByOid({
@@ -104,7 +105,7 @@ const EditHakukohdePage = props => {
             hakukohde={hakukohde}
           />
         </>
-      ) : null}
+      ) : <Spin center />}
     </FormPage>
   );
 };

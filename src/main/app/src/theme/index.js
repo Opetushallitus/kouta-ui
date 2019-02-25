@@ -87,6 +87,7 @@ export const createTheme = (theme = {}) => {
     },
     palette: {
       border: '#999999',
+      mainBackground: '#f5f5f5',
       text: {
         primary: textPrimaryColor,
         secondary: textSecondaryColor,
@@ -113,6 +114,14 @@ export const createTheme = (theme = {}) => {
         main: '#e05055',
         contrastText: '#ffffff',
       },
+      orange: {
+        main: '#e77e22',
+        contrastText: '#ffffff',
+      },
+      yellow: {
+        main: '#fdce4c',
+        contrastText: '#ffffff',
+      },
     },
     spacing: {
       unit: 8,
@@ -123,6 +132,7 @@ export const createTheme = (theme = {}) => {
     zIndex: {
       modal: 999,
     },
+    contentMaxWidth: '1200px',
   };
 
   return merge({}, defaults, theme);

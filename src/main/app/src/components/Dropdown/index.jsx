@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { createPortal } from 'react-dom';
 import { Manager, Reference, Popper } from 'react-popper';
 import styled from 'styled-components';
 import memoize from 'lodash/memoize';
@@ -11,9 +12,8 @@ export const DropdownMenu = styled.div`
   min-width: 200px;
   border: 1px solid ${getThemeProp('palette.border')};
   border-radius: ${getThemeProp('shape.borderRadius')};
-  box-shadow: 0px 3px 6px rgba(0,0,0,0.15);
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
   background-color: white;
-
 `;
 
 export const DropdownMenuItem = styled.div`
@@ -70,26 +70,36 @@ const Dropdown = ({
   overlay = null,
   visible = false,
   children = () => {},
+  portalTarget,
+  overflow,
   ...props
-}) => (
-  <Manager>
-    <Reference>{children}</Reference>
-    {visible ? (
-      <Popper placement={defaultPlacement}>
-        {({ ref, style, placement }) => (
-          <div
-            ref={ref}
-            style={{ ...style, ...getMarginStyle(placement), zIndex: '1' }}
-            data-placement={placement}
-            {...props}
-          >
-            {overlay}
-          </div>
-        )}
-      </Popper>
-    ) : null}
-  </Manager>
-);
+}) => {
+  const modifiers = {
+    ...(overflow && { preventOverflow: { enabled: false } }),
+  };
+
+  const content = visible ? (
+    <Popper placement={defaultPlacement} modifiers={modifiers}>
+      {({ ref, style, placement }) => (
+        <div
+          ref={ref}
+          style={{ ...style, ...getMarginStyle(placement), zIndex: '1' }}
+          data-placement={placement}
+          {...props}
+        >
+          {overlay}
+        </div>
+      )}
+    </Popper>
+  ) : null;
+
+  return (
+    <Manager>
+      <Reference>{children}</Reference>
+      {portalTarget ? createPortal(content, portalTarget) : content}
+    </Manager>
+  );
+};
 
 export class UncontrolledDropdown extends Component {
   static defaultProps = {

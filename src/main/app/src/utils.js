@@ -173,3 +173,11 @@ export const updateAll = ({ data, updates, keyField = 'oid' }) => {
     }
   });
 };
+
+export const createChainedFunction = (...fns) => (...args) => {
+  for (let fn in fns) {
+    if (isFunction(fn)) {
+      fn(...args);
+    }
+  }
+};

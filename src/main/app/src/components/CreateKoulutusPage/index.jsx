@@ -16,7 +16,9 @@ const CreateKoulutusPage = props => {
     history,
   } = props;
 
-  const { kopioKoulutusOid = null } = queryString.parse(search);
+  const {
+    kopioKoulutusOid = null,
+  } = queryString.parse(search);
 
   return (
     <FormPage

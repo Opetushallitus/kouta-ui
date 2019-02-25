@@ -63,12 +63,12 @@ const CreateKoulutusForm = props => {
 export default compose(
   connect(
     null,
-    dispatch => ({
+    (dispatch, { organisaatioOid }) => ({
       onCopy: koulutusOid => {
         dispatch(copyKoulutus(koulutusOid));
       },
       onMaybeCopy: () => {
-        dispatch(maybeCopyKoulutus());
+        dispatch(maybeCopyKoulutus({ organisaatioOid }));
       },
     }),
   ),

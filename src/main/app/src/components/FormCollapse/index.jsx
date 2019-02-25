@@ -59,6 +59,25 @@ const FormCollapse = ({
     </Button>
   ) : null;
 
+  const clearContent =
+    section && clearable ? (
+      <ClearFormSection name={section}>
+        {({ onClear }) => (
+          <Button type="button" variant="outlined" onClick={onClear}>
+            Tyhjennä tiedot
+          </Button>
+        )}
+      </ClearFormSection>
+    ) : null;
+
+  const footer =
+    actions || clearContent ? (
+      <CollapseFooterContainer>
+        {clearContent}
+        {actions}
+      </CollapseFooterContainer>
+    ) : null;
+
   const header = isString(headerProp)
     ? `${index + 1} ${headerProp}`
     : headerProp;
@@ -67,20 +86,7 @@ const FormCollapse = ({
     <CollapseWrapper {...id && { id }}>
       <CollapseComponent
         header={header}
-        footer={
-          <CollapseFooterContainer>
-            {section && clearable ? (
-              <ClearFormSection name={section}>
-                {({ onClear }) => (
-                  <Button type="button" variant="outlined" onClick={onClear}>
-                    Tyhjennä tiedot
-                  </Button>
-                )}
-              </ClearFormSection>
-            ) : null}
-            {actions}
-          </CollapseFooterContainer>
-        }
+        footer={footer}
         {...collapseProps}
         {...props}
       >

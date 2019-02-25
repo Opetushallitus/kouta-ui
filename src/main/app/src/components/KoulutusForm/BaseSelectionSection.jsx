@@ -48,6 +48,9 @@ const renderBaseDropdownField = ({ input, onContinue, onCreateNew }) => {
           <DropdownMenuItem onClick={() => onChange('copy_koulutus')}>
             Kopio pohjaksi aiemmin luotu koulutus
           </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => onChange('existing_koulutus')}>
+            Käytä olemassaolevaa koulutusta
+          </DropdownMenuItem>
         </DropdownMenu>
       }
     >
@@ -96,7 +99,7 @@ const BaseSelectionSection = ({ onContinue, organisaatioOid, onCreateNew }) => {
           <FlexItem grow={1} paddingLeft={3}>
             <BaseAndEducationFieldValue>
               {({ base }) =>
-                ['copy_koulutus'].includes(base) ? (
+                ['copy_koulutus', 'existing_koulutus'].includes(base) ? (
                   <>
                     <Spacing marginBottom={2}>
                       <Typography variant="h6" marginBottom={1}>

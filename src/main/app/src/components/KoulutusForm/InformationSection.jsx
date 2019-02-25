@@ -112,7 +112,8 @@ const InformationAsync = ({ koodiUri, language = 'fi' }) => (
   </ApiAsync>
 );
 
-const InformationSection = ({ languages = [], koulutusTyyppi, ...props }) => {
+const InformationSection = ({ languages = [], koulutusTyyppi,  disabled = false, ...props }) => {
+  console.log(disabled);
   return (
     <div {...props}>
       <LanguageSelector languages={languages} defaultValue="fi">
@@ -130,6 +131,7 @@ const InformationSection = ({ languages = [], koulutusTyyppi, ...props }) => {
                         name="koulutus"
                         component={renderSelectField}
                         koulutusTyyppi={koulutusTyyppi}
+                        isDisabled={disabled}
                       />
                     </Content>
                     <InfoContent>

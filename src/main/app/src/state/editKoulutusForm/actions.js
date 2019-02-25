@@ -20,6 +20,7 @@ export const submit = ({
   organisaatioOid,
   tila,
   lastModified,
+  liitos = false,
 }) => async (dispatch, getState, { history, apiUrls, httpClient }) => {
   const state = getState();
   const values = getKoulutusFormValues(state);

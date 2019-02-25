@@ -93,14 +93,21 @@ export const submit = ({
   return koulutusData;
 };
 
-export const maybeCopy = () => (dispatch, getState) => {
+export const maybeCopy = ({ organisaatioOid } = {}) => (
+  dispatch,
+  getState,
+  { history },
+) => {
   const values = getKoulutusFormValues(getState());
+  const baseType = get(values, 'base.base');
+  const baseKoulutusOid = get(values, 'base.education.value');
 
-  if (
-    get(values, 'base.base') === 'copy_koulutus' &&
-    !!get(values, 'base.education.value')
-  ) {
-    dispatch(copy(values.base.education.value));
+  if (baseType === 'copy_koulutus' && baseKoulutusOid) {
+    dispatch(copy(baseKoulutusOid));
+  } else if (baseType === 'existing_koulutus' && baseKoulutusOid) {
+    history.push(
+      `/koulutus/${baseKoulutusOid}/muokkaus?organisaatioOid=${organisaatioOid}&liitos=true`,
+    );
   }
 };
 

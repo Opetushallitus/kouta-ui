@@ -47,7 +47,7 @@ const renderTextareaField = ({ input, ...props }) => (
   <Textarea {...input} {...props} />
 );
 
-const OsiotFieldsBase = ({ osiot, language, osiotOptions }) => {
+const OsiotFieldsBase = ({ osiot, language, osiotOptions, disabled }) => {
   const osiotArr = osiot || [];
 
   const osiotArrWithLabels = useMemo(() => {
@@ -68,6 +68,7 @@ const OsiotFieldsBase = ({ osiot, language, osiotOptions }) => {
       <Field
         name={`osioKuvaukset.${value}.${language}`}
         component={renderTextareaField}
+        disabled={disabled}
       />
     </Spacing>
   ));
@@ -75,7 +76,7 @@ const OsiotFieldsBase = ({ osiot, language, osiotOptions }) => {
 
 const OsiotFields = formValues({ osiot: 'osiot' })(OsiotFieldsBase);
 
-const LisatiedotSection = ({ languages = [] }) => {
+const LisatiedotSection = ({ languages = [], disabled = false }) => {
   const { data: osiot } = useApiAsync({ promiseFn: getOsiot });
 
   const osiotOptions = useMemo(() => {
@@ -95,9 +96,10 @@ const LisatiedotSection = ({ languages = [] }) => {
               component={renderSelectField}
               options={osiotOptions}
               isMulti
+              isDisabled={disabled}
             />
           </Spacing>
-          <OsiotFields language={activeLanguage} osiotOptions={osiotOptions} />
+          <OsiotFields language={activeLanguage} osiotOptions={osiotOptions} disabled={disabled} />
         </>
       )}
     </LanguageSelector>

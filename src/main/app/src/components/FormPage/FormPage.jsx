@@ -65,18 +65,20 @@ const FormPage = ({
     <FormContent hasFooter={!!footer}>
       <ContentWrapper>{children}</ContentWrapper>
     </FormContent>
-    <FooterContainer>
-      <ContentWrapper>
-        <FooterWrapper hasFooterHomeLink={hasFooterHomeLink}>
-          {hasFooterHomeLink ? (
-            <Button as={Link} to="/" color="primary" variant="outlined">
-              Etusivulle
-            </Button>
-          ) : null}
-          <FooterActions>{footer}</FooterActions>
-        </FooterWrapper>
-      </ContentWrapper>
-    </FooterContainer>
+    {footer ? (
+      <FooterContainer>
+        <ContentWrapper>
+          <FooterWrapper hasFooterHomeLink={hasFooterHomeLink}>
+            {hasFooterHomeLink ? (
+              <Button as={Link} to="/" color="primary" variant="outlined">
+                Etusivulle
+              </Button>
+            ) : null}
+            <FooterActions>{footer}</FooterActions>
+          </FooterWrapper>
+        </ContentWrapper>
+      </FooterContainer>
+    ) : null}
   </>
 );
 

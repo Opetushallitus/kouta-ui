@@ -55,6 +55,8 @@ const KoulutusForm = ({
   canCopy = true,
   scrollTarget,
   koulutus: koulutusProp = null,
+  liitos = false,
+  myOrganisaatioOid,
 }) => {
   return (
     <form onSubmit={handleSubmit}>
@@ -65,8 +67,8 @@ const KoulutusForm = ({
               <ActiveKoulutusTyyppi>
                 {({ koulutusTyyppi }) => (
                   <FormCollapseGroup enabled={steps} scrollTarget={scrollTarget}>
-                    <FormCollapse header="Koulutustyyppi" section="type">
-                      <TypeSection />
+                    <FormCollapse header="Koulutustyyppi" section="type" clearable={!liitos}>
+                      <TypeSection disabled={liitos} />
                     </FormCollapse>
 
                     {canCopy ? (
@@ -86,15 +88,17 @@ const KoulutusForm = ({
                       </FormCollapse>
                     ) : null}
 
-                    <FormCollapse header="Kieliversiot" section="kieliversiot">
-                      <KieliversiotFormSection />
+                    <FormCollapse header="Kieliversiot" section="kieliversiot" clearable={!liitos}>
+                      <KieliversiotFormSection disabled={liitos} />
                     </FormCollapse>
 
                     <FormCollapse
                       header="Koulutuksen tiedot"
                       section="information"
+                      clearable={!liitos}
                     >
                       <InformationSection
+                        disabled={liitos}
                         languages={languages}
                         koulutusTyyppi={koulutusTyyppi}
                       />
@@ -103,8 +107,10 @@ const KoulutusForm = ({
                     <FormCollapse
                       header="Valitun koulutuksen kuvaus"
                       section="description"
+                      clearable={!liitos}
                     >
                       <DescriptionSection
+                        disabled={liitos}
                         languages={languages}
                         koodiUri={koulutus ? koulutus.value : null}
                       />
@@ -113,15 +119,16 @@ const KoulutusForm = ({
                     <FormCollapse
                       header="Koulutuksen lisätiedot"
                       section="lisatiedot"
+                      clearable={!liitos}
                     >
-                      <LisatiedotSection languages={languages} />
+                      <LisatiedotSection languages={languages} disabled={liitos} />
                     </FormCollapse>
 
                     <FormCollapse
                       header="Koulutuksen järjestävä organisaatio"
                       section="organization"
                     >
-                      <OrganizationSection organisaatioOid={organisaatioOid} />
+                      <OrganizationSection organisaatioOid={myOrganisaatioOid || organisaatioOid} />
                     </FormCollapse>
 
                     {isFunction(onAttachToteutus) ? (

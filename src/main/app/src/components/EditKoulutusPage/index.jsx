@@ -8,6 +8,7 @@ import EditKoulutusForm from './EditKoulutusForm';
 import EditKoulutusFooter from './EditKoulutusFooter';
 import useApiAsync from '../useApiAsync';
 import { getKoutaKoulutusByOid } from '../../apiUtils';
+import Spin from '../Spin';
 
 const EditKoulutusPage = props => {
   const {
@@ -18,8 +19,9 @@ const EditKoulutusPage = props => {
   } = props;
 
   const { koulutusUpdatedAt = null } = state;
-  const { scrollTarget = null } = queryString.parse(search);
+  const { scrollTarget = null, organisaatioOid: myOrganisaatioOid, liitos } = queryString.parse(search);
   const watch = JSON.stringify([oid, koulutusUpdatedAt]);
+  const isLiitos = liitos === 'true';
 
   const { data: koulutus = null } = useApiAsync({
     promiseFn: getKoutaKoulutusByOid,
@@ -33,7 +35,7 @@ const EditKoulutusPage = props => {
     <FormPage
       header={<EditKoulutusHeader koulutus={koulutus} />}
       steps={<EditKoulutusSteps />}
-      footer={koulutus ? <EditKoulutusFooter koulutus={koulutus} /> : null}
+      footer={koulutus ? <EditKoulutusFooter koulutus={koulutus} liitos={isLiitos} myOrganisaatioOid={myOrganisaatioOid} /> : null}
     >
       {organisaatioOid ? (
         <OrganisaatioInfo organisaatioOid={organisaatioOid} />
@@ -43,8 +45,10 @@ const EditKoulutusPage = props => {
           koulutus={koulutus}
           organisaatioOid={organisaatioOid}
           scrollTarget={scrollTarget}
+          myOrganisaatioOid={myOrganisaatioOid}
+          liitos={isLiitos}
         />
-      ) : null}
+      ) : <Spin center />}
     </FormPage>
   );
 };

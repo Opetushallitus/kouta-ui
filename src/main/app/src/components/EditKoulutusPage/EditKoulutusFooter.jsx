@@ -22,8 +22,10 @@ const PublishButton = styled(Button)`
   margin-left: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
-const EditKoulutusFooter = ({ koulutus, valid, onSave = () => {} }) => {
+const EditKoulutusFooter = ({ koulutus, valid, liitos = false, onSave = () => {} }) => {
   const { tila } = koulutus;
+
+  const showPublishButton = tila !== JULKAISUTILA.JULKAISTU && !liitos;
 
   const onSaveAndPublish = useCallback(() => {
     onSave({ tila: JULKAISUTILA.JULKAISTU });
@@ -34,7 +36,7 @@ const EditKoulutusFooter = ({ koulutus, valid, onSave = () => {} }) => {
       <Button variant="outlined" onClick={onSave}>
         Tallenna
       </Button>
-      {tila !== JULKAISUTILA.JULKAISTU ? (
+      {showPublishButton ? (
         <PublishButton disabled={!valid} onClick={onSaveAndPublish}>
           Tallenna ja julkaise
         </PublishButton>
@@ -47,8 +49,23 @@ export default connect(
   state => ({
     valid: koulutusFormIsValid(state),
   }),
-  (dispatch, { koulutus: { oid: koulutusOid, organisaatioOid, tila, lastModified } }) => ({
+  (
+    dispatch,
+    {
+      koulutus: { oid: koulutusOid, organisaatioOid, tila, lastModified },
+      liitos,
+      myOrganisaatioOid,
+    },
+  ) => ({
     onSave: ({ tila: tilaArg } = {}) =>
-      dispatch(submit({ koulutusOid, tila: tilaArg || tila, organisaatioOid, lastModified })),
+      dispatch(
+        submit({
+          koulutusOid,
+          tila: tilaArg || tila,
+          organisaatioOid: organisaatioOid || myOrganisaatioOid,
+          lastModified,
+          liitos,
+        }),
+      ),
   }),
 )(EditKoulutusFooter);

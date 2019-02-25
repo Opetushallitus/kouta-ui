@@ -42,6 +42,7 @@ const tableColumns = [
     title: 'Nimi',
     key: 'nimi',
     sortable: true,
+    width: '35%',
     render: ({ nimi, oid }) => (
         getFirstLanguageValue(nimi)
     ),

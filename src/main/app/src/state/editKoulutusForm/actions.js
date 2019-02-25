@@ -1,27 +1,20 @@
-import { getFormValues } from 'redux-form';
+import { getFormValues, getFormInitialValues } from 'redux-form';
 import get from 'lodash/get';
 
 import { getKoulutusByValues } from '../createKoulutusForm';
 import { getKoulutusByKoodi, updateKoutaKoulutus } from '../../apiUtils';
 import { createTemporaryToast } from '../toaster';
+import { arrayDiff } from '../../utils';
 
 const getKoulutusFormValues = getFormValues('editKoulutusForm');
+const getKoulutusFormInitialValues = getFormInitialValues('editKoulutusForm');
 
-export const saveKoulutus = koulutus => (
-  dispatch,
-  getState,
-  { apiUrls, httpClient },
-) => {
-  return updateKoutaKoulutus({ httpClient, apiUrls, koulutus });
-};
-
-export const submit = ({
-  koulutusOid,
-  organisaatioOid,
+const updateKoulutus = ({
   tila,
   lastModified,
-  liitos = false,
-}) => async (dispatch, getState, { history, apiUrls, httpClient }) => {
+  organisaatioOid,
+  koulutusOid,
+}) => async (dispatch, getState, { history, httpClient, apiUrls }) => {
   const state = getState();
   const values = getKoulutusFormValues(state);
 
@@ -48,12 +41,62 @@ export const submit = ({
     ...koulutusFormData,
   };
 
-  let koulutusData;
+  const { data } = await updateKoutaKoulutus({ httpClient, apiUrls, koulutus });
 
+  return data;
+};
+
+const updateJarjestajat = ({ koulutusOid }) => async (
+  dispatch,
+  getState,
+  { history },
+) => {
+  const state = getState();
+  const koulutus = getKoulutusByValues(getKoulutusFormValues(state));
+  const initialKoulutus = getKoulutusByValues(
+    getKoulutusFormInitialValues(state),
+  );
+
+  const { tarjoajat = [] } = koulutus;
+  const { tarjoajat: initialTarjoajat = [] } = initialKoulutus;
+  const { removed, added } = arrayDiff(initialTarjoajat, tarjoajat);
+
+  console.log({ lisatyt: added, poistetut: removed });
+};
+
+export const submit = ({
+  koulutusOid,
+  organisaatioOid,
+  tila,
+  lastModified,
+  liitos = false,
+}) => async (dispatch, getState, { history, apiUrls, httpClient }) => {
   try {
-    const { data } = await dispatch(saveKoulutus(koulutus));
+    if (liitos) {
+      await dispatch(updateJarjestajat({ koulutusOid }));
 
-    koulutusData = data;
+      history.push(
+        `/koulutus/${koulutusOid}/muokkaus?organisaatioOid=${organisaatioOid}&liitos=true`,
+        {
+          koulutusUpdatedAt: Date.now(),
+        },
+      );
+    } else {
+      await dispatch(
+        updateKoulutus({ koulutusOid, organisaatioOid, tila, lastModified }),
+      );
+
+      history.push(`/koulutus/${koulutusOid}/muokkaus`, {
+        koulutusUpdatedAt: Date.now(),
+      });
+    }
+
+    dispatch(
+      createTemporaryToast({
+        status: 'success',
+        title: 'Koulutus on tallennettu onnistuneesti',
+      }),
+    );
   } catch (e) {
     return dispatch(
       createTemporaryToast({
@@ -62,19 +105,6 @@ export const submit = ({
       }),
     );
   }
-
-  dispatch(
-    createTemporaryToast({
-      status: 'success',
-      title: 'Koulutus on tallennettu onnistuneesti',
-    }),
-  );
-
-  history.push(`/koulutus/${koulutusOid}/muokkaus`, {
-    koulutusUpdatedAt: Date.now(),
-  });
-
-  return koulutusData;
 };
 
 export const attachToteutus = ({ organisaatioOid, koulutusOid }) => async (

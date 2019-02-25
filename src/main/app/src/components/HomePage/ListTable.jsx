@@ -8,9 +8,7 @@ import Icon from '../Icon';
 import TilaLabel from './TilaLabel';
 import { formatKoutaDateString } from '../../utils';
 
-import {
-  UncontrolledDropdown,
-} from '../Dropdown';
+import { UncontrolledDropdown } from '../Dropdown';
 
 export const makeTilaColumn = () => ({
   title: 'Tila',
@@ -81,7 +79,7 @@ export const ListTable = ({
       <TableHead>
         <TableRow>
           {columns.map(columnProps => {
-            const { key, title, sortable = false } = columnProps;
+            const { key, title, width, sortable = false } = columnProps;
 
             return (
               <TableCell
@@ -90,6 +88,7 @@ export const ListTable = ({
                   sortable ? getSortDirection({ sort, name: key }) : null
                 }
                 onSort={sortable ? makeOnSort({ name: key, onSort }) : null}
+                {...width && { style: { width } }}
               >
                 {title}
               </TableCell>

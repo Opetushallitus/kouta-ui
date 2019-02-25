@@ -30,6 +30,7 @@ const EditKoulutusPage = props => {
   });
 
   const organisaatioOid = koulutus ? koulutus.organisaatioOid : null;
+  const headerOrganisaatioOid = myOrganisaatioOid || organisaatioOid;
 
   return (
     <FormPage
@@ -37,8 +38,8 @@ const EditKoulutusPage = props => {
       steps={<EditKoulutusSteps />}
       footer={koulutus ? <EditKoulutusFooter koulutus={koulutus} liitos={isLiitos} myOrganisaatioOid={myOrganisaatioOid} /> : null}
     >
-      {organisaatioOid ? (
-        <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+      {headerOrganisaatioOid ? (
+        <OrganisaatioInfo organisaatioOid={headerOrganisaatioOid} />
       ) : null}
       {koulutus ? (
         <EditKoulutusForm

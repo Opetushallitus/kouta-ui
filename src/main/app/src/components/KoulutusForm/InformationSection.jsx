@@ -113,7 +113,6 @@ const InformationAsync = ({ koodiUri, language = 'fi' }) => (
 );
 
 const InformationSection = ({ languages = [], koulutusTyyppi,  disabled = false, ...props }) => {
-  console.log(disabled);
   return (
     <div {...props}>
       <LanguageSelector languages={languages} defaultValue="fi">

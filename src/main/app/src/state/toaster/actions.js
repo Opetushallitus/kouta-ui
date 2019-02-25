@@ -28,3 +28,15 @@ export const createTemporaryToast = ({ delay = 5000, ...toast }) => (
     dispatch(removeToast(key));
   }, delay);
 };
+
+export const createGenericErrorToast = (opts = {}) => dispatch => {
+  dispatch(
+    createTemporaryToast({
+      status: 'danger',
+      title: 'Tapahtui virhe',
+      description:
+        'Jos virhe aiheuttaa ongelmia järjestelmän käytössä, yritä päivittää sivu, tai ota yhteyttä tukeen',
+      ...opts,
+    }),
+  );
+};

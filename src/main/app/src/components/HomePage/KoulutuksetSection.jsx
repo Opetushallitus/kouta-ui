@@ -79,6 +79,7 @@ const tableColumns = [
     title: 'Nimi',
     key: 'nimi',
     sortable: true,
+    width: '35%',
     render: ({ nimi, oid }) => (
       <Anchor as={Link} to={`/koulutus/${oid}/muokkaus`}>
         {getFirstLanguageValue(nimi)}

@@ -143,7 +143,7 @@ const KoulutusForm = ({
                                 modal={toteutuksetModal}
                                 pohjaValue={pohja}
                                 fieldName="toteutukset"
-                                organisaatioOid={organisaatioOid}
+                                organisaatioOid={myOrganisaatioOid || organisaatioOid}
                                 onSave={onAttachToteutus}
                               >
                                 {({ onToggle }) => (

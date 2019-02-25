@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import throttle from 'lodash/throttle';
 
 import * as serviceWorker from './serviceWorker';
 import App from './components/App';
@@ -11,6 +12,11 @@ import axios from 'axios';
 import createBrowserHistory from 'history/createBrowserHistory';
 import createLocalisation from './localisation';
 import { getLocalisation } from './apiUtils';
+import { createGenericErrorToast } from './state/toaster';
+
+const notifyError = throttle((error, store) => {
+  store.dispatch(createGenericErrorToast());
+}, 5000);
 
 const history = createBrowserHistory({ basename: 'kouta' });
 
@@ -41,6 +47,12 @@ serviceWorker.unregister();
     localisation: localisationInstance,
   });
 
+  httpClient.interceptors.response.use(null, error => {
+    notifyError(error, store);
+
+    return Promise.reject(error);
+  });
+
   ReactDOM.render(
     <App
       store={store}
@@ -49,6 +61,10 @@ serviceWorker.unregister();
       httpClient={httpClient}
       history={history}
       localisation={localisationInstance}
+      onCatch={error => {
+        notifyError(error, store);
+        console.error(error);
+      }}
     />,
     document.getElementById('root'),
   );

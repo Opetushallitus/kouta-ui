@@ -38,14 +38,18 @@ export const getHakukohdeByValues = values => {
   );
   const kaytetaanHaunAikataulua = !get(values, 'hakuajat.eriHakuaika');
 
-  const hakuajat = (get(values, 'hakuajat.hakuajat') || []).map(
-    ({ fromDate, fromTime, toDate, toTime }) => ({
-      alkaa: toKoutaDateString(
-        parseDate(`${fromDate} ${fromTime}`, DATE_FORMAT),
-      ),
-      paattyy: toKoutaDateString(parseDate(`${toDate} ${toTime}`, DATE_FORMAT)),
-    }),
-  );
+  const hakuajat = kaytetaanHaunAikataulua
+    ? []
+    : (get(values, 'hakuajat.hakuajat') || []).map(
+        ({ fromDate, fromTime, toDate, toTime }) => ({
+          alkaa: toKoutaDateString(
+            parseDate(`${fromDate} ${fromTime}`, DATE_FORMAT),
+          ),
+          paattyy: toKoutaDateString(
+            parseDate(`${toDate} ${toTime}`, DATE_FORMAT),
+          ),
+        }),
+      );
 
   const liitteidenToimitusosoite = {
     osoite: {

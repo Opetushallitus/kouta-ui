@@ -50,9 +50,9 @@ const EditHakukohdePage = props => {
     location: { search, state = {} },
   } = props;
 
-  const { koulutusUpdatedAt = null } = state;
+  const { hakukohdeUpdatedAt = null } = state;
   const { scrollTarget = null } = queryString.parse(search);
-  const watch = JSON.stringify([oid, koulutusUpdatedAt]);
+  const watch = JSON.stringify([oid, hakukohdeUpdatedAt]);
 
   const {
     data: { hakukohde, organisaatio, toteutus, haku } = {},

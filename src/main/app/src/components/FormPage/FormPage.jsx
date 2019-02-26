@@ -1,7 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import { getThemeProp } from '../../theme';
+import Button from '../Button';
 
 const StepsContainer = styled.div`
   display: flex;
@@ -37,11 +39,23 @@ const FormContent = styled.div`
     theme.spacing.unit * 6 + (hasFooter ? 50 : 0)}px;
 `;
 
+const FooterWrapper = styled.div`
+  ${({ hasFooterHomeLink }) =>
+    hasFooterHomeLink &&
+    css`
+      display: flex;
+      justify-content: space-between;
+    `}
+`;
+
+const FooterActions = styled.div``;
+
 const FormPage = ({
   header = null,
   steps = null,
   children = null,
   footer = null,
+  hasFooterHomeLink = true,
 }) => (
   <>
     <ContentWrapper>{header}</ContentWrapper>
@@ -52,7 +66,16 @@ const FormPage = ({
       <ContentWrapper>{children}</ContentWrapper>
     </FormContent>
     <FooterContainer>
-      <ContentWrapper>{footer}</ContentWrapper>
+      <ContentWrapper>
+        <FooterWrapper hasFooterHomeLink={hasFooterHomeLink}>
+          {hasFooterHomeLink ? (
+            <Button as={Link} to="/" color="primary" variant="outlined">
+              Etusivulle
+            </Button>
+          ) : null}
+          <FooterActions>{footer}</FooterActions>
+        </FooterWrapper>
+      </ContentWrapper>
     </FooterContainer>
   </>
 );

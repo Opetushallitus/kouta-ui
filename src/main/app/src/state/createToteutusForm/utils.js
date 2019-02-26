@@ -138,7 +138,24 @@ export const getValuesByToteutus = toteutus => {
     asiasanat = [],
     yhteystieto = {},
     opetus = {},
+    osaamisalat: osaamisalatArg = [],
   } = metadata;
+
+  const osaamisalat = osaamisalatArg.map(({ koodi }) => koodi);
+
+  const { osaamisalaLinkit, osaamisalaLinkkiOtsikot } = osaamisalatArg.reduce(
+    (acc, curr) => {
+      const { koodi, linkki = {}, otsikko = {} } = curr;
+
+      if (koodi) {
+        acc.osaamisalaLinkit[koodi] = linkki;
+        acc.osaamisalaLinkkiOtsikot[koodi] = otsikko;
+      }
+
+      return acc;
+    },
+    { osaamisalaLinkit: {}, osaamisalaLinkkiOtsikot: {} },
+  );
 
   const { lisatiedot = [] } = opetus;
 
@@ -213,6 +230,11 @@ export const getValuesByToteutus = toteutus => {
       email: get(yhteystieto, 'sahkoposti') || {},
       phone: get(yhteystieto, 'puhelinnumero') || {},
       website: get(yhteystieto, 'wwwSivu') || {},
+    },
+    osaamisalat: {
+      osaamisalat,
+      osaamisalaLinkit,
+      osaamisalaLinkkiOtsikot,
     },
   };
 };

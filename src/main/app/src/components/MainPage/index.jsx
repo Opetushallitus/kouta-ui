@@ -11,6 +11,7 @@ import EditKoulutusPage from '../EditKoulutusPage';
 import CreateHakuPage from '../CreateHakuPage';
 import EditHakuPage from '../EditHakuPage';
 import HomePage from '../HomePage';
+import EditToteutusPage from '../EditToteutusPage';
 
 const MainPage = ({ history }) => {
   return (
@@ -59,6 +60,10 @@ const MainPage = ({ history }) => {
           <Route
             path="/haku/:oid/muokkaus"
             component={EditHakuPage}
+          />
+          <Route
+            path="/toteutus/:oid/muokkaus"
+            component={EditToteutusPage}
             exact
           />
           <Redirect to="/" />

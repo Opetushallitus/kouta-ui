@@ -3,30 +3,41 @@ import pick from 'lodash/pick';
 
 import {
   isArray,
-  parseDate,
-  toKoutaDateString,
-  formatDateInFinnishTimeZone,
-  isValidDate,
+  getKoutaDateString,
+  isNumeric,
+  formatKoutaDateString,
 } from '../../utils';
 
 const DATE_FORMAT = 'DD.MM.YYYY HH:mm';
 
-const getDateTimeValues = maybeDate => {
-  if (!maybeDate) {
+const getDateTimeValues = dateString => {
+  if (!dateString) {
     return { date: '', time: '' };
   }
 
-  const date = new Date(maybeDate);
-
-  if (!isValidDate(date)) {
-    return { date: '', time: '' };
-  }
-
-  const formattedDate = formatDateInFinnishTimeZone(date, DATE_FORMAT);
+  const formattedDate = formatKoutaDateString(dateString, DATE_FORMAT);
 
   const [d = '', t = ''] = formattedDate.split(' ');
 
   return { date: d, time: t };
+};
+
+const getKoutaDateStringByDateTime = ({ date = '', time = '' }) => {
+  const [day, month, year] = date.split('.');
+
+  if (!isNumeric(day) || !isNumeric(month) || !isNumeric(year)) {
+    return null;
+  }
+
+  const [hour, minute] = time.split(':');
+
+  return getKoutaDateString({
+    day,
+    month,
+    year,
+    hour: hour || 0,
+    minute: minute || 0,
+  });
 };
 
 export const getHakukohdeByValues = values => {
@@ -42,12 +53,11 @@ export const getHakukohdeByValues = values => {
     ? []
     : (get(values, 'hakuajat.hakuajat') || []).map(
         ({ fromDate, fromTime, toDate, toTime }) => ({
-          alkaa: toKoutaDateString(
-            parseDate(`${fromDate} ${fromTime}`, DATE_FORMAT),
-          ),
-          paattyy: toKoutaDateString(
-            parseDate(`${toDate} ${toTime}`, DATE_FORMAT),
-          ),
+          alkaa: getKoutaDateStringByDateTime({
+            date: fromDate,
+            time: fromTime,
+          }),
+          paattyy: getKoutaDateStringByDateTime({ date: toDate, time: toTime }),
         }),
       );
 
@@ -68,12 +78,10 @@ export const getHakukohdeByValues = values => {
 
   const liitteidenToimitusaika =
     get(values, 'liitteet.deliverDate') && get(values, 'liitteet.deliverTime')
-      ? toKoutaDateString(
-          parseDate(
-            `${values.liitteet.deliverDate} ${values.liitteet.deliverTime}`,
-            DATE_FORMAT,
-          ),
-        )
+      ? getKoutaDateStringByDateTime({
+          date: values.liitteet.deliverDate,
+          time: values.liitteet.deliverTime,
+        })
       : null;
 
   const liitteetOnkoSamaToimitusosoite = !!get(
@@ -101,9 +109,7 @@ export const getHakukohdeByValues = values => {
       tyyppi: get(tyyppi, 'value') || null,
       nimi: pick(nimi || null, kielivalinta),
       toimitusaika: liitteetOnkoSamaToimitusaika
-        ? toKoutaDateString(
-            parseDate(`${deliverDate} ${deliverTime}`, DATE_FORMAT),
-          )
+        ? getKoutaDateStringByDateTime({ date: deliverDate, time: deliverTime })
         : null,
       toimitusosoite: {
         osoite: {
@@ -151,12 +157,14 @@ export const getHakukohdeByValues = values => {
                 postitoimipaikka: pick(postitoimipaikka || null, kielivalinta),
               },
               aika: {
-                alkaa: toKoutaDateString(
-                  parseDate(`${fromDate} ${fromTime}`, DATE_FORMAT),
-                ),
-                paattyy: toKoutaDateString(
-                  parseDate(`${toDate} ${toTime}`, DATE_FORMAT),
-                ),
+                alkaa: getKoutaDateStringByDateTime({
+                  date: fromDate,
+                  time: fromTime,
+                }),
+                paattyy: getKoutaDateStringByDateTime({
+                  date: toDate,
+                  time: toTime,
+                }),
               },
               lisatietoja: pick(lisatietoja || null, kielivalinta),
             }),
@@ -228,6 +236,7 @@ export const getValuesByHakukohde = hakukohde => {
               const { date: fromDate, time: fromTime } = getDateTimeValues(
                 alkaa,
               );
+
               const { date: toDate, time: toTime } = getDateTimeValues(paattyy);
 
               return {

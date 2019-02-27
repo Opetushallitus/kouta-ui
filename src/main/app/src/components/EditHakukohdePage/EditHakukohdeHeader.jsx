@@ -12,7 +12,7 @@ const EditHakukohdeHeader = ({ hakukohde }) => (
     }
     editInfo={
       get(hakukohde, 'modified') ? (
-        <FormEditInfo date={new Date(hakukohde.modified)} />
+        <FormEditInfo date={hakukohde.modified} />
       ) : null
     }
   >

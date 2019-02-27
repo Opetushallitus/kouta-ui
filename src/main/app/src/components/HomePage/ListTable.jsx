@@ -6,7 +6,7 @@ import Table, { TableHead, TableBody, TableRow, TableCell } from '../Table';
 import { getSortDirection, makeOnSort } from './utils';
 import Icon from '../Icon';
 import TilaLabel from './TilaLabel';
-import { formatDateInFinnishTimeZone } from '../../utils';
+import { formatKoutaDateString } from '../../utils';
 
 import {
   UncontrolledDropdown,
@@ -25,7 +25,7 @@ export const makeModifiedColumn = () => ({
   sortable: true,
   render: ({ modified }) =>
     modified
-      ? formatDateInFinnishTimeZone(new Date(modified), 'DD.MM.YYYY HH:mm')
+      ? formatKoutaDateString(modified, 'DD.MM.YYYY HH:mm')
       : null,
 });
 

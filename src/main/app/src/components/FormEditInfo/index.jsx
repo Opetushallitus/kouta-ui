@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Icon from '../Icon';
 import { getThemeProp } from '../../theme';
-import { isDate, formatDateInFinnishTimeZone } from '../../utils';
+import { formatKoutaDateString } from '../../utils';
 import Spacing from '../Spacing';
 import Anchor from '../Anchor';
 
@@ -36,7 +36,7 @@ const FormEditInfo = ({ editor, date, historyUrl, ...props }) => {
       <InfoContainer>
         <Spacing marginBottom={0.25}>Muokattu viimeksi:</Spacing>
         <Spacing marginBottom={0.25}>
-          {isDate(date) ? formatDateInFinnishTimeZone(date, 'DD.MM.YYYY HH:mm') : null}{' '}
+          {date ? formatKoutaDateString(date, 'DD.MM.YYYY HH:mm') : null}{' '}
           {editor ? editor : null}
         </Spacing>
         <div>

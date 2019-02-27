@@ -266,7 +266,18 @@ const LiitteetSection = ({ languages, organisaatioOid }) => {
             <YhteinenToimitusFieldValues>
               {({ yhteinenToimitusaika, yhteinenToimituspaikka }) => (
                 <>
-                  <Spacing marginBottom={1}>
+                  <Spacing marginBottom={2}>
+                    <FieldArray
+                      name="liitteet"
+                      component={renderLiitteetFields}
+                      language={activeLanguage}
+                      yhteystiedot={data ? data.yhteystiedot : {}}
+                      includeToimitusaika={!yhteinenToimitusaika}
+                      includeToimituspaikka={!yhteinenToimituspaikka}
+                      tyyppiOptions={getTyyppiOptions(data ? data.liitetyypit : [])}
+                    />
+                  </Spacing>
+                  <Spacing>
                     <Field
                       name="yhteinenToimitusaika"
                       component={renderCheckboxField}
@@ -294,18 +305,6 @@ const LiitteetSection = ({ languages, organisaatioOid }) => {
                         />
                       </Spacing>
                     ) : null}
-                  </Spacing>
-                  <Divider marginTop={3} marginBottom={3} />
-                  <Spacing>
-                    <FieldArray
-                      name="liitteet"
-                      component={renderLiitteetFields}
-                      language={activeLanguage}
-                      yhteystiedot={data ? data.yhteystiedot : {}}
-                      includeToimitusaika={!yhteinenToimitusaika}
-                      includeToimituspaikka={!yhteinenToimituspaikka}
-                      tyyppiOptions={getTyyppiOptions(data ? data.liitetyypit : [])}
-                    />
                   </Spacing>
                 </>
               )}

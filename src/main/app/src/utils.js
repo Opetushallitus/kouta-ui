@@ -9,6 +9,7 @@ import formatDate from 'date-fns/format';
 import _isValidDate from 'date-fns/is_valid';
 import mapValues from 'lodash/mapValues';
 import produce from 'immer';
+import padStart from 'lodash/padStart';
 
 export const isString = value => typeof value === 'string';
 
@@ -21,6 +22,18 @@ export const isObject = value => toString.call(value) === '[object Object]';
 export const isArray = value => toString.call(value) === '[object Array]';
 
 export const isValidDate = value => isDate(value) && _isValidDate(value);
+
+export const isNumeric = value => {
+  if (isNumber(value)) {
+    return true;
+  }
+
+  if (isString(value)) {
+    return !isNaN(parseInt(value));
+  }
+
+  return false;
+};
 
 export const getLanguageValue = (value, language = 'fi') =>
   isObject(value) ? value[language] || null : null;
@@ -154,9 +167,36 @@ export const formatDateInFinnishTimeZone = (date, dateFormat) => {
 
   const timezoneOffset = date.getTimezoneOffset() / 60;
   const timezoneDifference = timezoneOffset + 2;
+
   const fixedDate = addHours(date, timezoneDifference);
 
   return formatDate(fixedDate, dateFormat);
+};
+
+export const getKoutaDateString = ({ year, month, day, hour, minute }) => {
+  return `${year}-${padStart(month, 2, '0')}-${padStart(day, 2, '0')}T${
+    isNumeric(hour) ? padStart(hour, 2, '0') : '00'
+  }:${isNumeric(minute) ? padStart(minute, 2, '0') : '00'}`;
+};
+
+export const formatKoutaDateString = (dateString, format) => {
+  if (!isString(dateString)) {
+    return '';
+  }
+
+  const [date, time = ''] = dateString.split('T');
+  const [year, month, day] = date.split('-');
+  const [hour = '0', minute = '0'] = time.split(':');
+
+  let formattedDate = format;
+
+  formattedDate = formattedDate.replace(/DD/g, padStart(day, 2, '0'));
+  formattedDate = formattedDate.replace(/MM/g, padStart(month, 2, '0'));
+  formattedDate = formattedDate.replace(/YYYY/g, year);
+  formattedDate = formattedDate.replace(/HH/g, padStart(hour, 2, '0'));
+  formattedDate = formattedDate.replace(/mm/g, padStart(minute, 2, '0'));
+
+  return formattedDate;
 };
 
 export const updateAll = ({ data, updates, keyField = 'oid' }) => {
@@ -172,4 +212,12 @@ export const updateAll = ({ data, updates, keyField = 'oid' }) => {
       }
     }
   });
+};
+
+export const createChainedFunction = (...fns) => (...args) => {
+  for (let fn of fns) {
+    if (isFunction(fn)) {
+      fn(...args);
+    }
+  }
 };

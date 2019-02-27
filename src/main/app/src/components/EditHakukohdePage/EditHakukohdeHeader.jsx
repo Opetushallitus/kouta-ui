@@ -5,19 +5,19 @@ import FormHeader from '../FormHeader';
 import FormStatus from '../FormStatus';
 import FormEditInfo from '../FormEditInfo';
 
-const EditToteutusHeader = ({ toteutus }) => (
+const EditHakukohdeHeader = ({ hakukohde }) => (
   <FormHeader
     status={
-      get(toteutus, 'tila') ? <FormStatus status={toteutus.tila} /> : null
+      get(hakukohde, 'tila') ? <FormStatus status={hakukohde.tila} /> : null
     }
     editInfo={
-      get(toteutus, 'modified') ? (
-        <FormEditInfo date={toteutus.modified} />
+      get(hakukohde, 'modified') ? (
+        <FormEditInfo date={hakukohde.modified} />
       ) : null
     }
   >
-    Koulutuksen toteutus
+    Hakukohde
   </FormHeader>
 );
 
-export default EditToteutusHeader;
+export default EditHakukohdeHeader;

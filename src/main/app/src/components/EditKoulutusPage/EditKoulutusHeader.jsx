@@ -12,7 +12,7 @@ const EditKoulutusHeader = ({ koulutus }) => (
     }
     editInfo={
       get(koulutus, 'modified') ? (
-        <FormEditInfo date={new Date(koulutus.modified)} />
+        <FormEditInfo date={koulutus.modified} />
       ) : null
     }
   >

@@ -1,11 +1,27 @@
 import get from 'lodash/get';
 import pick from 'lodash/pick';
 
-import { parseDate, toKoutaDateString } from '../../utils';
+import { getKoutaDateString, isNumeric } from '../../utils';
+
+const getKoutaDateStringByDateTime = ({ date = '', time = '' }) => {
+  const [day, month, year] = date.split('.');
+
+  if (!isNumeric(day) || !isNumeric(month) || !isNumeric(year)) {
+    return null;
+  }
+
+  const [hour, minute] = time.split(':');
+
+  return getKoutaDateString({
+    day,
+    month,
+    year,
+    hour: hour || 0,
+    minute: minute || 0,
+  });
+};
 
 export const getHakuByValues = values => {
-  const DATE_FORMAT = 'DD.MM.YYYY HH:mm';
-
   const alkamiskausiKoodiUri = get(values, 'aikataulut.kausi') || null;
   const alkamisvuosi = parseInt(get(values, 'aikataulut.vuosi'));
   const kielivalinta = get(values, 'kieliversiot.languages') || [];
@@ -14,10 +30,14 @@ export const getHakuByValues = values => {
 
   const hakuajat = (get(values, 'aikataulut.hakuaika') || []).map(
     ({ fromDate, fromTime, toDate, toTime }) => ({
-      alkaa: toKoutaDateString(
-        parseDate(`${fromDate} ${fromTime}`, DATE_FORMAT),
-      ),
-      paattyy: toKoutaDateString(parseDate(`${toDate} ${toTime}`, DATE_FORMAT)),
+      alkaa: getKoutaDateStringByDateTime({
+        date: fromDate,
+        time: fromTime,
+      }),
+      paattyy: getKoutaDateStringByDateTime({
+        date: toDate,
+        time: toTime,
+      }),
     }),
   );
 
@@ -28,14 +48,10 @@ export const getHakuByValues = values => {
   const hakukohteenLiittamisenTakaraja =
     get(values, 'aikataulut.liittäminen_pvm') &&
     get(values, 'aikataulut.liittäminen_aika')
-      ? toKoutaDateString(
-          parseDate(
-            `${values.aikataulut.liittäminen_pvm} ${
-              values.aikataulut.liittäminen_aika
-            }`,
-            DATE_FORMAT,
-          ),
-        )
+      ? getKoutaDateStringByDateTime({
+          date: values.aikataulut.liittäminen_pvm,
+          time: values.aikataulut.liittäminen_aika,
+        })
       : null;
 
   const nimi = pick(get(values, 'nimi.nimi') || null, kielivalinta);
@@ -59,14 +75,10 @@ export const getHakuByValues = values => {
   const hakukohteenMuokkaamisenTakaraja =
     get(values, 'aikataulut.muokkaus_pvm') &&
     get(values, 'aikataulut.muokkaus_aika')
-      ? toKoutaDateString(
-          parseDate(
-            `${values.aikataulut.muokkaus_pvm} ${
-              values.aikataulut.muokkaus_aika
-            }`,
-            DATE_FORMAT,
-          ),
-        )
+      ? getKoutaDateStringByDateTime({
+          date: values.aikataulut.muokkaus_pvm,
+          time: values.aikataulut.muokkaus_aika,
+        })
       : null;
 
   return {

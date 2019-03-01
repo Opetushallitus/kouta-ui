@@ -386,11 +386,13 @@ export const getKoutaToteutusByOid = async ({ oid, httpClient, apiUrls }) => {
 };
 
 export const getKoutaHakuByOid = async ({ oid, httpClient, apiUrls }) => {
-  const { data } = await httpClient.get(
+  const { data, headers } = await httpClient.get(
     apiUrls.url('kouta-backend.haku-by-oid', oid),
   );
 
-  return data;
+  const lastModified = get(headers, 'last-modified') || null;
+
+  return isObject(data) ? { lastModified, ...data } : data;
 };
 
 export const getKoutaHakuHakukohteet = async ({

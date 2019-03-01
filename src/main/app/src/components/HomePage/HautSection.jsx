@@ -31,8 +31,8 @@ const getHaut = async ({ httpClient, apiUrls, ...filters }) => {
   return { result, pageCount: Math.ceil(totalCount / 10) };
 };
 
-const Actions = ({ organisaatioOid }) => (
-  <Button as={Link} to={`/organisaatio/${organisaatioOid}/haku`}>
+const Actions = ({ rootOrganisaatioOid }) => (
+  <Button as={Link} to={`/organisaatio/${rootOrganisaatioOid}/haku`}>
     Luo uusi haku
   </Button>
 );
@@ -58,7 +58,7 @@ const tableColumns = [
   },
 ];
 
-const KoulutuksetSection = ({ organisaatioOid }) => {
+const KoulutuksetSection = ({ organisaatioOid, rootOrganisaatioOid }) => {
   const {
     debouncedNimi,
     showArchived,
@@ -100,7 +100,7 @@ const KoulutuksetSection = ({ organisaatioOid }) => {
     <ListCollapse
       icon="access_time"
       header="Haut"
-      actions={<Actions organisaatioOid={organisaatioOid} />}
+      actions={<Actions rootOrganisaatioOid={rootOrganisaatioOid} />}
       defaultOpen
     >
       <Spacing marginBottom={2}>

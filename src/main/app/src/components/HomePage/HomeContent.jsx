@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
+import get from 'lodash/get';
 
-import Select from '../Select';
 import Flex, { FlexItem } from '../Flex';
 import { getFirstLanguageValue } from '../../utils';
 import Typography from '../Typography';
@@ -11,55 +11,99 @@ import Spacing from '../Spacing';
 import KoulutuksetSection from './KoulutuksetSection';
 import ToteutuksetSection from './ToteutuksetSection';
 import HautSection from './HautSection';
+import OrganisaatioDrawer from './OrganisaatioDrawer';
+import Button from '../Button';
+import {
+  getOrganisaatioFromHierarkia,
+  getOrganisaatioHierarkiaRoot,
+} from './utils';
+import Icon from '../Icon';
 
 const Container = styled.div`
   max-width: ${getThemeProp('contentMaxWidth')}
   margin: 0px auto;
   padding: ${spacing(3)};
-
 `;
 
-const getOrganisaatiotOptions = organisaatiot =>
-  organisaatiot.map(({ oid, nimi }) => ({
-    value: oid,
-    label: getFirstLanguageValue(nimi),
-  }));
-
-const makeOnOrganisaatioChange = history => ({ value }) => {
-  history.push(`/?organisaatioOid=${value}`);
-};
-
 const HomeContent = ({ organisaatiot, organisaatioOid, history }) => {
-  const organisaatioOptions = getOrganisaatiotOptions(organisaatiot);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
-  const organisaatioValue = organisaatioOptions.find(
-    ({ value }) => value === organisaatioOid,
+  const onCloseDrawer = useCallback(() => setDrawerOpen(false), [
+    setDrawerOpen,
+  ]);
+
+  const onOpenDrawer = useCallback(() => setDrawerOpen(true), [setDrawerOpen]);
+
+  const organisaatio = getOrganisaatioFromHierarkia(
+    organisaatiot,
+    organisaatioOid,
+  );
+
+  const rootOrganisaatioOid = organisaatioOid
+    ? get(getOrganisaatioHierarkiaRoot(organisaatiot, organisaatioOid), 'oid')
+    : null;
+
+  console.log(rootOrganisaatioOid);
+
+  const onOrganisaatioChange = useCallback(
+    value => history.push(`/?organisaatioOid=${value}`),
+    [history],
   );
 
   return (
-    <Container>
-      <Flex marginBottom={3} justifyEnd>
-        <FlexItem grow={0} basis="30rem">
-          <Typography variant="h6" marginBottom={1}>
-            Vaihda organisaatiota
-          </Typography>
-          <Select options={organisaatioOptions} value={organisaatioValue} onChange={makeOnOrganisaatioChange(history)} />
-        </FlexItem>
-      </Flex>
-      <Typography variant="h3" marginBottom={3}>Koulutukset ja haut</Typography>
-      <Spacing marginBottom={3}>
-        <KoulutuksetSection organisaatioOid={organisaatioOid} />
-      </Spacing>
-      <Spacing marginBottom={2}>
-        <ToteutuksetSection organisaatioOid={organisaatioOid} />
-      </Spacing>
-      <Spacing>
-        <HautSection organisaatioOid={organisaatioOid} />
-      </Spacing>
-    </Container>
+    <>
+      <OrganisaatioDrawer
+        open={drawerOpen}
+        onClose={onCloseDrawer}
+        organisaatioOid={organisaatioOid}
+        organisaatiot={organisaatiot}
+        onOrganisaatioChange={onOrganisaatioChange}
+      />
+      <Container>
+        <Flex marginBottom={3} justifyEnd>
+          <FlexItem>
+            <Flex alignCenter>
+              <FlexItem grow={1} paddingRight={2}>
+                <Typography>
+                  {getFirstLanguageValue(get(organisaatio, 'nimi'))}
+                </Typography>
+              </FlexItem>
+              <FlexItem grow={0}>
+                <Button
+                  onClick={onOpenDrawer}
+                  variant="outlined"
+                  title="Vaihda organisaatiota"
+                >
+                  <Icon type="menu" />
+                </Button>
+              </FlexItem>
+            </Flex>
+          </FlexItem>
+        </Flex>
+        <Typography variant="h3" marginBottom={3}>
+          Koulutukset ja haut
+        </Typography>
+        <Spacing marginBottom={3}>
+          <KoulutuksetSection
+            organisaatioOid={organisaatioOid}
+            rootOrganisaatioOid={rootOrganisaatioOid}
+          />
+        </Spacing>
+        <Spacing marginBottom={2}>
+          <ToteutuksetSection
+            organisaatioOid={organisaatioOid}
+            rootOrganisaatioOid={rootOrganisaatioOid}
+          />
+        </Spacing>
+        <Spacing>
+          <HautSection
+            organisaatioOid={organisaatioOid}
+            rootOrganisaatioOid={rootOrganisaatioOid}
+          />
+        </Spacing>
+      </Container>
+    </>
   );
 };
 
-export default withRouter(
-  HomeContent
-);
+export default withRouter(HomeContent);

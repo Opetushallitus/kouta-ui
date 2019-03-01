@@ -521,7 +521,7 @@ export const getKoutaIndexKoulutukset = async ({
   );
 
   return data;
-}
+};
 
 export const updateKoutaToteutus = async ({
   toteutus,
@@ -566,9 +566,9 @@ export const getKoutaIndexToteutukset = async ({
     apiUrls.url('kouta-index.toteutus-list'),
     { params },
   );
-  
+
   return data;
-}
+};
 
 export const getKoutaHakukohteet = async ({
   httpClient,
@@ -623,4 +623,28 @@ export const getKoutaIndexHaut = async ({ httpClient, apiUrls, ...rest }) => {
   });
 
   return data;
+};
+
+export const getKayttajanOrganisaatioHierarkia = async ({
+  httpClient,
+  apiUrls,
+  oid,
+}) => {
+  const organisaatiot = await getKayttajanOrganisaatiot({
+    httpClient,
+    apiUrls,
+    oid,
+  });
+
+  const hierarkia = await Promise.all(
+    organisaatiot.map(({ oid: orgOid }) =>
+      getOrganisaatioHierarchyByOid({ httpClient, apiUrls, oid: orgOid }).then(
+        h => {
+          return h ? h[0] : null;
+        },
+      ),
+    ),
+  );
+
+  return hierarkia.filter(h => !!h);
 };

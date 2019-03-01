@@ -6,6 +6,7 @@ import memoize from 'lodash/memoize';
 import EventListener from 'react-event-listener';
 
 import { getThemeProp } from '../../theme';
+import { isFunction } from '../../utils';
 
 export const DropdownMenu = styled.div`
   width: 100%;
@@ -174,6 +175,16 @@ export class UncontrolledDropdown extends Component {
     }
   };
 
+  renderOverlay() {
+    const { overlay } = this.props;
+
+    if (isFunction(overlay)) {
+      return overlay({ onToggle: this.onToggle });
+    }
+
+    return overlay;
+  }
+
   render() {
     const { visible } = this.state;
     const {
@@ -185,7 +196,7 @@ export class UncontrolledDropdown extends Component {
       ...props
     } = this.props;
 
-    const wrappedOverlay = <div ref={this.overlayRef}>{overlay}</div>;
+    const wrappedOverlay = <div ref={this.overlayRef}>{this.renderOverlay()}</div>;
 
     return (
       <>

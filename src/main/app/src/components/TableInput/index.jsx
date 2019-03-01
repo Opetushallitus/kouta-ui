@@ -122,7 +122,7 @@ const EditColumn = ({
   );
 
   return (
-    <UncontrolledDropdown overlay={overlay}>
+    <UncontrolledDropdown overlay={overlay} portalTarget={document.body}>
       {({ ref, onToggle }) => (
         <div style={{ display: 'flex' }} ref={ref} onClick={onToggle}>
           <EditColumnBase {...props} />
@@ -158,7 +158,7 @@ const EditRow = ({
   );
 
   return (
-    <UncontrolledDropdown overlay={overlay}>
+    <UncontrolledDropdown overlay={overlay} portalTarget={document.body}>
       {({ ref, onToggle }) => (
         <div style={{ display: 'flex' }} ref={ref} onClick={onToggle}>
           <EditRowBase isHeader={isHeader} {...props} />

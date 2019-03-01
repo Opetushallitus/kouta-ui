@@ -51,7 +51,7 @@ const AddContentDropdown = ({ onAdd }) => {
     <UncontrolledDropdown overlay={overlay}>
       {({ onToggle, visible, ref }) => (
         <div ref={ref} style={{ display: 'inline-block' }}>
-          <Button onClick={onToggle} type="button">
+          <Button onClick={onToggle} type="button" color="primary" variant="outlined">
             Lisää sisältöä{' '}
             <Icon type={visible ? 'arrow_drop_up' : 'arrow_drop_down'} />
           </Button>
@@ -126,6 +126,7 @@ const renderFields = props => {
   return (
     <FieldsSortableContainer
       {...props}
+      lockAxis="y"
       onSortEnd={({ oldIndex, newIndex }) => {
         if (oldIndex !== newIndex) {
           fields.swap(oldIndex, newIndex);

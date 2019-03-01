@@ -1,4 +1,10 @@
-import React, { useCallback, useMemo, createRef, useState } from 'react';
+import React, {
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+  useEffect,
+} from 'react';
 import styled, { css } from 'styled-components';
 import { setLightness } from 'polished';
 
@@ -84,6 +90,12 @@ const LinkDropdownContainer = styled.div`
   width: 20rem;
 `;
 
+const focusEditor = editorRef => {
+  setTimeout(() => {
+    editorRef.current && editorRef.current.focus();
+  }, 100);
+};
+
 const StyleButton = ({
   icon,
   styleName,
@@ -91,6 +103,7 @@ const StyleButton = ({
   editorState,
   inline,
   block,
+  editorRef,
   ...props
 }) => {
   const onSelect = useCallback(() => {
@@ -99,7 +112,9 @@ const StyleButton = ({
     } else if (block) {
       onChange(RichUtils.toggleBlockType(editorState, styleName));
     }
-  }, [editorState, onChange, inline, block]);
+
+    focusEditor(editorRef);
+  }, [editorState, onChange, inline, block, editorRef]);
 
   const isActive = useMemo(() => {
     if (inline) {
@@ -125,12 +140,13 @@ const HEADER_OPTIONS = [
   { value: 'header-three', label: 'Otsikko 3' },
 ];
 
-const HeaderSelect = ({ editorState, onChange }) => {
+const HeaderSelect = ({ editorState, onChange, editorRef }) => {
   const onSelect = useCallback(
     ({ value }) => {
       onChange(RichUtils.toggleBlockType(editorState, value));
+      focusEditor(editorRef);
     },
-    [onChange, editorState],
+    [onChange, editorState, editorRef],
   );
 
   const value = useMemo(() => {
@@ -150,11 +166,22 @@ const HeaderSelect = ({ editorState, onChange }) => {
 };
 
 const LinkDropdown = ({ value, onChange, onSubmit }) => {
+  const inputRef = useRef();
+
+  useEffect(() => {
+    inputRef.current.focus();
+  });
+
   return (
     <LinkDropdownContainer>
       <Flex>
         <FlexItem grow={1} paddingRight={1}>
-          <Input placeholder="https://..." value={value} onChange={onChange} />
+          <Input
+            placeholder="https://..."
+            value={value}
+            onChange={onChange}
+            ref={inputRef}
+          />
         </FlexItem>
         <FlexItem grow={0}>
           <Button type="button" onClick={onSubmit}>
@@ -166,7 +193,7 @@ const LinkDropdown = ({ value, onChange, onSubmit }) => {
   );
 };
 
-const LinkButton = ({ editorState, onChange, ...props }) => {
+const LinkButton = ({ editorState, onChange, editorRef, ...props }) => {
   const [link, setLink] = useState('');
 
   const onAddLink = useCallback(() => {
@@ -214,6 +241,7 @@ const LinkButton = ({ editorState, onChange, ...props }) => {
         onSubmit={() => {
           onAddLink();
           onToggle();
+          focusEditor(editorRef);
         }}
       />
     </DropdownMenu>
@@ -250,63 +278,60 @@ export const EditorState = DraftEditorState;
 export const Editor = ({ value, onChange, ...props }) => {
   const editorState = value ? value : emptyEditorState;
 
-  const editorRef = createRef();
+  const editorRef = useRef();
 
-  const styleButtonProps = { editorState, onChange };
+  const styleButtonProps = { editorState, onChange, editorRef };
 
   return (
-
-      <Container>
-        <Toolbar>
-          <StyleButton
-            icon="format_bold"
-            styleName="BOLD"
-            title="Lihavointi"
-            inline
-            {...styleButtonProps}
-          />
-          <StyleButton
-            icon="format_italic"
-            styleName="ITALIC"
-            title="Kursivointi"
-            inline
-            {...styleButtonProps}
-          />
-          <StyleButton
-            icon="format_underline"
-            styleName="UNDERLINE"
-            title="Alleviivaus"
-            inline
-            {...styleButtonProps}
-          />
-          <StyleButton
-            icon="format_list_bulleted"
-            styleName="unordered-list-item"
-            title="Lista"
-            block
-            {...styleButtonProps}
-          />
-          <StyleButton
-            icon="format_list_numbered"
-            styleName="ordered-list-item"
-            title="Numeroitu lista"
-            block
-            {...styleButtonProps}
-          />
-          <LinkButton {...styleButtonProps} title="Linkki" />
-          <HeaderSelect editorState={editorState} onChange={onChange} />
-        </Toolbar>
-        <EditorWrapper>
-          <DraftEditor
-            ref={editorRef}
-            editorState={editorState}
-            onChange={onChange}
-            style={{ minHeight: '4rem' }}
-            {...props}
-          />
-        </EditorWrapper>
-      </Container>
-
+    <Container>
+      <Toolbar>
+        <StyleButton
+          icon="format_bold"
+          styleName="BOLD"
+          title="Lihavointi"
+          inline
+          {...styleButtonProps}
+        />
+        <StyleButton
+          icon="format_italic"
+          styleName="ITALIC"
+          title="Kursivointi"
+          inline
+          {...styleButtonProps}
+        />
+        <StyleButton
+          icon="format_underline"
+          styleName="UNDERLINE"
+          title="Alleviivaus"
+          inline
+          {...styleButtonProps}
+        />
+        <StyleButton
+          icon="format_list_bulleted"
+          styleName="unordered-list-item"
+          title="Lista"
+          block
+          {...styleButtonProps}
+        />
+        <StyleButton
+          icon="format_list_numbered"
+          styleName="ordered-list-item"
+          title="Numeroitu lista"
+          block
+          {...styleButtonProps}
+        />
+        <LinkButton {...styleButtonProps} title="Linkki" />
+        <HeaderSelect {...styleButtonProps} />
+      </Toolbar>
+      <EditorWrapper>
+        <DraftEditor
+          ref={editorRef}
+          editorState={editorState}
+          onChange={onChange}
+          {...props}
+        />
+      </EditorWrapper>
+    </Container>
   );
 };
 

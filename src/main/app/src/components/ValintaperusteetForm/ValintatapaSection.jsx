@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react';
 import { Field, FieldArray } from 'redux-form';
 import mapValues from 'lodash/mapValues';
-import styled from 'styled-components';
-import get from 'lodash/get';
 
 import Typography from '../Typography';
 import Input from '../Input';
@@ -15,23 +13,14 @@ import Button from '../Button';
 import Flex from '../Flex';
 import { getKoodisto } from '../../apiUtils';
 import ApiAsync from '../ApiAsync';
-import Modal, { ModalController } from '../Modal';
-import TableInput from '../TableInput';
-import Anchor from '../Anchor';
+import ValintatapaContentFields from '../ValintatapaContentFields';
+import Editor from '../Editor';
 
 import {
   getFirstLanguageValue,
   isArray,
   arrayToTranslationObject,
 } from '../../utils';
-
-const TableInputContainer = styled.div`
-  overflow-x: auto;
-`;
-
-const TaulukkoAnchor = styled(Anchor).attrs({ as: 'span' })`
-  cursor: pointer;
-`;
 
 const getValintatavat = async ({ httpClient, apiUrls }) => {
   const valintatavat = await getKoodisto({
@@ -64,62 +53,9 @@ const renderSelectField = ({ input, options }) => (
   <Select {...input} options={options} onBlur={nop} />
 );
 
-const renderTableInputField = ({ input, language }) => (
-  <TableInput {...input} language={language} />
-);
-
 const renderTextareaField = ({ input }) => <Textarea {...input} />;
 
-const renderTaulukotField = ({ fields, language }) => {
-  return (
-    <>
-      {fields.length > 0 ? (
-        <Spacing marginBottom={2}>
-          <Typography>Taulukot:</Typography>{' '}
-          {fields.map((taulukko, index) => {
-            const taulukkoField = fields.get(index);
-
-            return (
-              <span key={index}>
-                <ModalController
-                  modal={renderTaulukkoModal}
-                  nameBase={taulukko}
-                  language={language}
-                  onRemove={() => {
-                    fields.remove(index);
-                  }}
-                  defaultOpen
-                >
-                  {({ onToggle }) => (
-                    <TaulukkoAnchor as="span" onClick={onToggle}>
-                      {getFirstLanguageValue(
-                        get(taulukkoField, 'otsikko'),
-                        language,
-                      ) || `Taulukko ${index + 1}`}
-                    </TaulukkoAnchor>
-                  )}
-                </ModalController>
-                <Typography>
-                  {index !== fields.length - 1 ? ', ' : ''}
-                </Typography>
-              </span>
-            );
-          })}
-        </Spacing>
-      ) : null}
-      <Button
-        type="button"
-        color="primary"
-        variant="outlined"
-        onClick={() => {
-          fields.push({});
-        }}
-      >
-        Lisää taulukko
-      </Button>
-    </>
-  );
-};
+const renderEditorField = ({ input }) => <Editor {...input} />
 
 const renderValintatapaFields = ({ valintatapa, tapaOptions, language }) => (
   <>
@@ -141,13 +77,9 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language }) => (
         name={`${valintatapa}.kuvaus.${language}`}
         component={renderTextareaField}
       />
-      <Spacing marginTop={2}>
-        <FieldArray
-          name={`${valintatapa}.taulukot`}
-          component={renderTaulukotField}
-          language={language}
-        />
-      </Spacing>
+    </Spacing>
+    <Spacing marginBottom={2}>
+      <ValintatapaContentFields name={`${valintatapa}.sisalto.${language}`} />
     </Spacing>
     <Spacing marginBottom={2}>
       <Typography variant="h6" marginBottom={1}>
@@ -155,7 +87,7 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language }) => (
       </Typography>
       <Field
         name={`${valintatapa}.kynnysehto.${language}`}
-        component={renderTextareaField}
+        component={renderEditorField}
       />
     </Spacing>
     <Spacing marginBottom={2}>
@@ -212,58 +144,6 @@ const renderValintavat = ({ fields, tapaOptions, language }) => (
       Lisää valintapa
     </Button>
   </>
-);
-
-const renderTaulukkoModal = ({
-  onClose,
-  nameBase,
-  onRemove,
-  language,
-  ...props
-}) => (
-  <Modal
-    onClose={onClose}
-    footer={
-      <Flex justifyBetween>
-        <Button
-          type="button"
-          color="primary"
-          variant="outlined"
-          onClick={() => {
-            onClose();
-            onRemove();
-          }}
-        >
-          Poista
-        </Button>
-        <Button type="button" onClick={onClose}>
-          Tallenna
-        </Button>
-      </Flex>
-    }
-    header="Lisää taulukko"
-    maxWidth="1200px"
-    {...props}
-  >
-    <Spacing>
-      <Spacing marginBottom={2}>
-        <Typography variant="h6" marginBottom={1}>
-          Otsikko
-        </Typography>
-        <Field
-          name={`${nameBase}.otsikko.${language}`}
-          component={renderInputField}
-        />
-      </Spacing>
-      <TableInputContainer>
-        <Field
-          name={`${nameBase}.taulukko`}
-          component={renderTableInputField}
-          language={language}
-        />
-      </TableInputContainer>
-    </Spacing>
-  </Modal>
 );
 
 const ValintatapaSection = ({ languages }) => {

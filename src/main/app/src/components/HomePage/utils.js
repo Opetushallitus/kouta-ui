@@ -103,3 +103,33 @@ export const getOrganisaatioFromHierarkia = memoize((hierarkia, oid) => {
     }
   }
 });
+
+export const getOrganisaatiotFromHierarkia = (hierarkia, oids = []) => {
+  if (!isArray(hierarkia) || !isArray(oids) || oids.length === 0) {
+    return [];
+  }
+
+  const foundNodes = [];
+
+  const recursiveFindNodes = node => {
+    if (oids.includes(get(node, 'oid'))) {
+      foundNodes.push(node);
+    }
+
+    if (isArray(get(node, 'children'))) {
+      for (let n of node.children) {
+        let node = recursiveFindNodes(n);
+
+        if (node) {
+          return node;
+        }
+      }
+    }
+  };
+
+  for (let n of hierarkia) {
+    recursiveFindNodes(n);
+  }
+
+  return foundNodes;
+};

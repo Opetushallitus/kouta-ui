@@ -34,7 +34,8 @@ const Container = styled(Flex).attrs({ column: true })`
 const TreeContainer = styled(FlexItem).attrs({ grow: 1 })`
   overflow-y: auto;
   overflow-x: auto;
-  max-width: 600px;
+  max-width: 100vw;
+  box-sizing: border-box;
   padding: ${spacing(2)};
 `;
 
@@ -187,9 +188,7 @@ export const OrganisaatioDrawer = ({
   );
 
   const favourites = useMemo(
-    () => {
-     return getOrganisaatiotFromHierarkia(organisaatiot, organisaatioFavourites)
-    },
+    () => getOrganisaatiotFromHierarkia(organisaatiot, organisaatioFavourites),
     [organisaatiot, organisaatioFavourites],
   );
 
@@ -249,7 +248,7 @@ export const OrganisaatioDrawer = ({
 
 export default connect(
   ({ organisaatioFavourites: favourites }) => ({
-    organisaatioFavourites: Object.keys(favourites),
+    organisaatioFavourites: Object.keys(favourites.byOid),
   }),
   dispatch => ({
     onToggleFavourite: oid => dispatch(toggleFavourite(oid)),

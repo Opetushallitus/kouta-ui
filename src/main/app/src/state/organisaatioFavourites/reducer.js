@@ -1,21 +1,27 @@
 import { createReducer } from 'redux-create-reducer';
+import produce from 'immer';
 
 import { ADD_FAVOURITE, REMOVE_FAVOURITE } from './actions';
 
-const initialState = {};
+const initialState = {
+  byOid: {},
+};
 
 export default createReducer(initialState, {
   [ADD_FAVOURITE]: (state, { payload: oid }) => {
     return {
       ...state,
-      [oid]: true,
+      byOid: produce(state.byOid, draft => {
+        draft[oid] = true;
+      }),
     };
   },
   [REMOVE_FAVOURITE]: (state, { payload: oid }) => {
-    const clone = { ...state };
-
-    delete clone[oid];
-
-    return clone;
+    return {
+      ...state,
+      byOid: produce(state.byOid, draft => {
+        delete draft[oid];
+      }),
+    };
   },
 });

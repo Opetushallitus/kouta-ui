@@ -9,7 +9,7 @@ export const removeFavourite = createAction(REMOVE_FAVOURITE);
 export const toggleFavourite = oid => (dispatch, getState) => {
   const { organisaatioFavourites = {} } = getState();
 
-  if (organisaatioFavourites[oid]) {
+  if (organisaatioFavourites.byOid[oid]) {
     return dispatch(removeFavourite(oid));
   }
 

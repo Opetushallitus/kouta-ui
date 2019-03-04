@@ -1,6 +1,5 @@
-import { isNumber, isArray } from '../../utils';
+import { isNumber, isArray, memoize } from '../../utils';
 import get from 'lodash/get';
-import memoize from 'memoizee';
 
 export const makeOnSort = ({ name, onSort }) => dir => onSort(`${name}:${dir}`);
 

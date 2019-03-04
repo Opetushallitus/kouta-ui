@@ -10,6 +10,7 @@ import _isValidDate from 'date-fns/is_valid';
 import mapValues from 'lodash/mapValues';
 import produce from 'immer';
 import padStart from 'lodash/padStart';
+import memoizee from 'memoizee';
 
 export const isString = value => typeof value === 'string';
 
@@ -221,3 +222,8 @@ export const createChainedFunction = (...fns) => (...args) => {
     }
   }
 };
+
+export const memoize = (fn, opts = {}) => memoizee(fn, { max: 100, ...opts });
+
+export const memoizePromise = (fn, opts = {}) =>
+  memoize(fn, { promise: true, ...opts });

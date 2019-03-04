@@ -43,8 +43,6 @@ const HomeContent = ({ organisaatiot, organisaatioOid, history }) => {
     ? get(getOrganisaatioHierarkiaRoot(organisaatiot, organisaatioOid), 'oid')
     : null;
 
-  console.log(rootOrganisaatioOid);
-
   const onOrganisaatioChange = useCallback(
     value => history.push(`/?organisaatioOid=${value}`),
     [history],

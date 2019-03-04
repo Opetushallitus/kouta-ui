@@ -648,3 +648,23 @@ export const getKayttajanOrganisaatioHierarkia = async ({
 
   return hierarkia.filter(h => !!h);
 };
+
+export const getAndUpdateKoutaKoulutus = async ({
+  httpClient,
+  apiUrls,
+  koulutus: koulutusUpdate,
+}) => {
+  const { oid, ...update } = koulutusUpdate;
+
+  if (!oid) {
+    throw Error('Koulutuksella täytyy olla oid');
+  }
+
+  const koulutus = await getKoutaKoulutusByOid({ oid, httpClient, apiUrls });
+
+  return updateKoutaKoulutus({
+    httpClient,
+    apiUrls,
+    koulutus: { ...koulutus, ...update },
+  });
+};

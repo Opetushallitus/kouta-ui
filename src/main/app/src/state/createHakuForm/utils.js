@@ -1,7 +1,25 @@
 import get from 'lodash/get';
 import pick from 'lodash/pick';
 
-import { getKoutaDateString, isNumeric } from '../../utils';
+import {
+  getKoutaDateString,
+  isNumeric,
+  formatKoutaDateString,
+} from '../../utils';
+
+const DATE_FORMAT = 'DD.MM.YYYY HH:mm';
+
+const getDateTimeValues = dateString => {
+  if (!dateString) {
+    return { date: '', time: '' };
+  }
+
+  const formattedDate = formatKoutaDateString(dateString, DATE_FORMAT);
+
+  const [d = '', t = ''] = formattedDate.split(' ');
+
+  return { date: d, time: t };
+};
 
 const getKoutaDateStringByDateTime = ({ date = '', time = '' }) => {
   const [day, month, year] = date.split('.');
@@ -54,6 +72,15 @@ export const getHakuByValues = values => {
         })
       : null;
 
+  const ajastettuJulkaisu =
+    get(values, 'aikataulut.julkaisu_pvm') &&
+    get(values, 'aikataulut.julkaisu_aika')
+      ? getKoutaDateStringByDateTime({
+          date: values.aikataulut.julkaisu_pvm,
+          time: values.aikataulut.julkaisu_aika,
+        })
+      : null;
+
   const nimi = pick(get(values, 'nimi.nimi') || null, kielivalinta);
 
   const kohdejoukkoKoodiUri = get(values, 'kohdejoukko.kohde') || null;
@@ -93,6 +120,7 @@ export const getHakuByValues = values => {
     hakulomaketyyppi,
     metadata,
     hakukohteenMuokkaamisenTakaraja,
+    ajastettuJulkaisu,
     alkamisvuosi,
     hakulomake,
   };
@@ -101,15 +129,32 @@ export const getHakuByValues = values => {
 export const getValuesByHaku = haku => {
   const {
     alkamiskausiKoodiUri = '',
+    alkamisvuosi = '',
+    hakuajat = [],
     hakutapaKoodiUri = '',
     kohdejoukkoKoodiUri = '',
     hakulomaketyyppi = '',
+    hakukohteenLiittamisenTakaraja,
+    hakukohteenMuokkaamisenTakaraja,
+    ajastettuJulkaisu,
     kielivalinta = [],
     nimi = {},
     metadata = {},
   } = haku;
 
   const { yhteystieto = {} } = metadata;
+
+  const { date: liittäminen_pvm, time: liittäminen_aika } = getDateTimeValues(
+    hakukohteenLiittamisenTakaraja,
+  );
+
+  const { date: muokkaus_pvm, time: muokkaus_aika } = getDateTimeValues(
+    hakukohteenMuokkaamisenTakaraja,
+  );
+
+  const { date: julkaisu_pvm, time: julkaisu_aika } = getDateTimeValues(
+    ajastettuJulkaisu,
+  );
 
   return {
     nimi: {
@@ -120,6 +165,24 @@ export const getValuesByHaku = haku => {
     },
     aikataulut: {
       kausi: alkamiskausiKoodiUri,
+      vuosi: alkamisvuosi ? alkamisvuosi.toString() : '',
+      hakuaika: (hakuajat || []).map(({ alkaa, paattyy }) => {
+        const { date: fromDate, time: fromTime } = getDateTimeValues(alkaa);
+        const { date: toDate, time: toTime } = getDateTimeValues(paattyy);
+
+        return {
+          fromDate,
+          fromTime,
+          toDate,
+          toTime,
+        };
+      }),
+      liittäminen_pvm: liittäminen_pvm,
+      liittäminen_aika: liittäminen_aika,
+      muokkaus_pvm: muokkaus_pvm,
+      muokkaus_aika: muokkaus_aika,
+      julkaisu_pvm: julkaisu_pvm,
+      julkaisu_aika: julkaisu_aika,
     },
     hakutapa: {
       tapa: hakutapaKoodiUri,
@@ -130,11 +193,11 @@ export const getValuesByHaku = haku => {
     hakulomake: {
       lomaketyyppi: hakulomaketyyppi,
     },
-    yhteystieto: {
+    yhteystiedot: {
       nimi: get(yhteystieto, 'nimi') || {},
       titteli: get(yhteystieto, 'titteli') || {},
-      sahkoposti: get(yhteystieto, 'sahkoposti') || {},
-      puhelinnumero: get(yhteystieto, 'puhelinnumero') || {},
+      email: get(yhteystieto, 'sahkoposti') || {},
+      puhelin: get(yhteystieto, 'puhelinnumero') || {},
     },
   };
 };

@@ -11,11 +11,11 @@ const ItemContainer = styled.div`
   padding-bottom: ${spacing(1)};
 `;
 
-const renderChildren = ({ children = [], level = 0, renderItem }) => {
+const renderChildren = ({ children = [], level = 0, renderItem, defaultOpen }) => {
   return children.length > 0 ? (
     <ChildrenContainer>
       {children.map(childProps => {
-        const { key, children = [] } = childProps;
+        const { key, children = [], open = defaultOpen } = childProps;
 
         return (
           <div key={key}>
@@ -23,7 +23,7 @@ const renderChildren = ({ children = [], level = 0, renderItem }) => {
               {renderItem({ ...childProps, level: level + 1 })}
             </ItemContainer>
 
-            {renderChildren({ children, level: level + 1, renderItem })}
+            {open ? renderChildren({ children, level: level + 1, renderItem }) : null}
           </div>
         );
       })}
@@ -31,15 +31,15 @@ const renderChildren = ({ children = [], level = 0, renderItem }) => {
   ) : null;
 };
 
-export const TreeList = ({ children: renderItem = () => null, items = [], collapse = false }) => {
+export const TreeList = ({ children: renderItem = () => null, items = [], collapse = false, defaultOpen = true }) => {
   return items.map(childProps => {
-    const { key, children = [] } = childProps;
+    const { key, children = [], open = defaultOpen } = childProps;
 
     return (
       <div key={key}>
         <ItemContainer>{renderItem({ ...childProps, level: 0 })}</ItemContainer>
 
-        {renderChildren({ children, level: 0, renderItem })}
+        {open ? renderChildren({ children, level: 0, renderItem, defaultOpen }) : null}
       </div>
     );
   });

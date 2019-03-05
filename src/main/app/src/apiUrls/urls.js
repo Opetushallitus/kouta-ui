@@ -13,6 +13,7 @@ export const development = {
   'kouta-backend.haku': `${koutaBackendDevUrl}/haku`,
   'kouta-backend.haku-by-oid': `${koutaBackendDevUrl}/haku/$1`,
   'kouta-backend.haku-list': `${koutaBackendDevUrl}/haku/list`,
+  'kouta-backend.haku-hakukohteet': `${koutaBackendDevUrl}/haku/$1/hakukohteet/list`,
   'kouta-backend.hakukohde': `${koutaBackendDevUrl}/hakukohde`,
   'kouta-backend.hakukohde-by-oid': `${koutaBackendDevUrl}/hakukohde/$1`,
   'kouta-backend.hakukohde-list': `${koutaBackendDevUrl}/hakukohde/list`,

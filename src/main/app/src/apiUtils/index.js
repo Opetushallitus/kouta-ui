@@ -678,6 +678,6 @@ export const getAndUpdateKoutaToteutus = async ({
   return updateKoutaToteutus({
     httpClient,
     apiUrls,
-    toteutus: { ...toteutus, update },
+    toteutus: { ...toteutus, ...update },
   });
 };

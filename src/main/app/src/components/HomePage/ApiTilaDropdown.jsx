@@ -5,7 +5,12 @@ import HttpContext from '../HttpContext';
 import TilaDropdown from './TilaDropdown';
 import useApiAsync from '../useApiAsync';
 
-const ToteutusTilaDropdown = ({ initialTila, oid, updateFn, getUpdateProps }) => {
+const ToteutusTilaDropdown = ({
+  initialTila,
+  oid,
+  updateFn,
+  getUpdateProps,
+}) => {
   const [tila, setTila] = useState(initialTila);
   const httpClient = useContext(HttpContext);
   const apiUrls = useContext(UrlContext);
@@ -17,12 +22,12 @@ const ToteutusTilaDropdown = ({ initialTila, oid, updateFn, getUpdateProps }) =>
   const onChange = useCallback(
     async newTila => {
       try {
-        await runUpdate(getUpdateProps({ oid, tila: newTila, httpClient, apiUrls }));
+        await runUpdate(
+          getUpdateProps({ oid, tila: newTila, httpClient, apiUrls }),
+        );
 
         setTila(newTila);
-      } catch (e) {
-        console.log(e);
-      }
+      } catch (e) {}
     },
     [oid, setTila, httpClient, apiUrls],
   );

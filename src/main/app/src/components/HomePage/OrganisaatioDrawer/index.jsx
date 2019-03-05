@@ -149,7 +149,6 @@ export const OrganisaatioDrawer = ({
             onSelect={oid => setSelectedOrganisaatio(oid)}
             onToggleFavourite={onToggleFavourite}
             onToggleOpen={onToggleOpen}
-            open={openOrganisaatiot}
           />
         </TreeContainer>
         <FlexItem grow={0}>

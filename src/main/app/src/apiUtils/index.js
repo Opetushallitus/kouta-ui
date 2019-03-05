@@ -661,3 +661,23 @@ export const getAndUpdateKoutaKoulutus = async ({
     koulutus: { ...koulutus, ...update },
   });
 };
+
+export const getAndUpdateKoutaToteutus = async ({
+  httpClient,
+  apiUrls,
+  toteutus: toteutusUpdate,
+}) => {
+  const { oid, ...update } = toteutusUpdate;
+
+  if (!oid) {
+    throw new Error('Toteutuksella täytyy olla oid');
+  }
+
+  const toteutus = await getKoutaToteutusByOid({ oid, httpClient, apiUrls });
+
+  return updateKoutaToteutus({
+    httpClient,
+    apiUrls,
+    toteutus: { ...toteutus, update },
+  });
+};

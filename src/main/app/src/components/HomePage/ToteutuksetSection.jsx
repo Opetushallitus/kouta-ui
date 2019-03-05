@@ -5,7 +5,6 @@ import ListCollapse from './ListCollapse';
 import ListTable, {
   makeModifiedColumn,
   makeMuokkaajaColumn,
-  makeTilaColumn,
 } from './ListTable';
 import Pagination from '../Pagination';
 import Flex from '../Flex';
@@ -19,6 +18,7 @@ import Badge from '../Badge';
 import useFilterState from './useFilterState';
 import { getFirstLanguageValue } from '../../utils';
 import Anchor from '../Anchor';
+import ToteutusTilaDropdown from './ToteutusTilaDropdown';
 
 const getToteutukset = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
@@ -43,7 +43,14 @@ const tableColumns = [
       </Anchor>
     ),
   },
-  makeTilaColumn(),
+  {
+    title: 'Tila',
+    key: 'tila',
+    sortable: true,
+    render: ({ tila, oid }) => (
+      <ToteutusTilaDropdown initialTila={tila} toteutusOid={oid} />
+    ),
+  },
   makeModifiedColumn(),
   makeMuokkaajaColumn(),
   {

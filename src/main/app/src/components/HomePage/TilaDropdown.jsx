@@ -6,6 +6,7 @@ import {
   DropdownMenu,
   DropdownMenuItem,
 } from '../Dropdown';
+
 import { JULKAISUTILA } from '../../constants';
 import TilaLabel from './TilaLabel';
 import Icon from '../Icon';

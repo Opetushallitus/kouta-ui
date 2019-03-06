@@ -2,7 +2,10 @@ import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
 import ListCollapse from './ListCollapse';
-import ListTable, { makeModifiedColumn, makeMuokkaajaColumn, makeTilaColumn } from './ListTable';
+import ListTable, {
+  makeModifiedColumn,
+  makeMuokkaajaColumn,
+} from './ListTable';
 import Button from '../Button';
 import Pagination from '../Pagination';
 import Flex from '../Flex';
@@ -15,10 +18,9 @@ import { getIndexParamsByFilters } from './utils';
 import Filters from './Filters';
 import Badge from '../Badge';
 import useFilterState from './useFilterState';
+import KoulutusTilaDropdown from './KoulutusTilaDropdown';
 
-import {
-  getFirstLanguageValue,
-} from '../../utils';
+import { getFirstLanguageValue } from '../../utils';
 
 import {
   UncontrolledDropdown,
@@ -40,12 +42,12 @@ const getKoulutukset = async ({ httpClient, apiUrls, ...filters }) => {
   return { result, pageCount: Math.ceil(totalCount / 10) };
 };
 
-const LuoKoulutusDropdown = ({ organisaatioOid }) => {
+const LuoKoulutusDropdown = ({ rootOrganisaatioOid }) => {
   const overlay = (
     <DropdownMenu>
       <DropdownMenuItem
         as={Link}
-        to={`/organisaatio/${organisaatioOid}/koulutus?johtaaTutkintoon=true`}
+        to={`/organisaatio/${rootOrganisaatioOid}/koulutus?johtaaTutkintoon=true`}
       >
         Tutkintoon johtava koulutus
       </DropdownMenuItem>
@@ -70,8 +72,8 @@ const LuoKoulutusDropdown = ({ organisaatioOid }) => {
   );
 };
 
-const Actions = ({ organisaatioOid }) => (
-  <LuoKoulutusDropdown organisaatioOid={organisaatioOid} />
+const Actions = ({ rootOrganisaatioOid }) => (
+  <LuoKoulutusDropdown rootOrganisaatioOid={rootOrganisaatioOid} />
 );
 
 const tableColumns = [
@@ -85,7 +87,12 @@ const tableColumns = [
       </Anchor>
     ),
   },
-  makeTilaColumn(),
+  {
+    title: 'Tila',
+    key: 'tila',
+    sortable: true,
+    render: ({ tila, oid }) => <KoulutusTilaDropdown initialTila={tila} koulutusOid={oid} />,
+  },
   makeModifiedColumn(),
   makeMuokkaajaColumn(),
   {
@@ -97,7 +104,7 @@ const tableColumns = [
   },
 ];
 
-const KoulutuksetSection = ({ organisaatioOid }) => {
+const KoulutuksetSection = ({ organisaatioOid, rootOrganisaatioOid }) => {
   const {
     debouncedNimi,
     showArchived,
@@ -139,7 +146,7 @@ const KoulutuksetSection = ({ organisaatioOid }) => {
     <ListCollapse
       icon="school"
       header="Koulutukset"
-      actions={<Actions organisaatioOid={organisaatioOid} />}
+      actions={<Actions rootOrganisaatioOid={rootOrganisaatioOid} />}
       defaultOpen
     >
       <Spacing marginBottom={2}>

@@ -1,5 +1,5 @@
 import { KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP } from '../constants';
-import { isArray, isString, isObject } from '../utils';
+import { isArray, isString, isObject, memoizePromise } from '../utils';
 import keyBy from 'lodash/keyBy';
 import mapValues from 'lodash/mapValues';
 import get from 'lodash/get';
@@ -7,7 +7,6 @@ import groupBy from 'lodash/groupBy';
 import toPairs from 'lodash/toPairs';
 import maxBy from 'lodash/maxBy';
 import upperFirst from 'lodash/upperFirst';
-import memoize from 'memoizee';
 
 const getKoodiUriParts = uri => {
   const [koodiUri, versio = null] = uri.split('#');
@@ -18,7 +17,7 @@ const getKoodiUriParts = uri => {
   };
 };
 
-const memoizedGetKoulutuksetByKoulutusTyyppi = memoize(
+const memoizedGetKoulutuksetByKoulutusTyyppi = memoizePromise(
   async (httpClient, apiUrls, koulutusTyyppi) => {
     const ids =
       KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP[koulutusTyyppi];
@@ -60,7 +59,6 @@ const memoizedGetKoulutuksetByKoulutusTyyppi = memoize(
       /^koulutus_/.test(koodiUri),
     );
   },
-  { promise: true },
 );
 
 export const getKoulutuksetByKoulutusTyyppi = async ({
@@ -75,7 +73,7 @@ export const getKoulutuksetByKoulutusTyyppi = async ({
   );
 };
 
-const memoizedGetKoulutusByKoodi = memoize(
+const memoizedGetKoulutusByKoodi = memoizePromise(
   async (httpClient, apiUrls, argKoodiUri) => {
     const { koodiUri, versio } = getKoodiUriParts(argKoodiUri);
 
@@ -170,14 +168,13 @@ const memoizedGetKoulutusByKoodi = memoize(
       nimi: mapValues(nimi, ({ nimi: nimiField }) => nimiField || null),
     };
   },
-  { promise: true },
 );
 
 export const getKoulutusByKoodi = ({ httpClient, apiUrls, koodiUri }) => {
   return memoizedGetKoulutusByKoodi(httpClient, apiUrls, koodiUri);
 };
 
-const memoizedGetOrganisaatioHierarchyByOid = memoize(
+const memoizedGetOrganisaatioHierarchyByOid = memoizePromise(
   async (httpClient, apiUrls, oid) => {
     const { data } = await httpClient.get(
       apiUrls.url('organisaatio-service.hierarkia', oid),
@@ -185,7 +182,6 @@ const memoizedGetOrganisaatioHierarchyByOid = memoize(
 
     return get(data, 'organisaatiot') || [];
   },
-  { promise: true },
 );
 
 export const getOrganisaatioHierarchyByOid = async ({
@@ -196,7 +192,7 @@ export const getOrganisaatioHierarchyByOid = async ({
   return memoizedGetOrganisaatioHierarchyByOid(httpClient, apiUrls, oid);
 };
 
-const memoizedGetOrganisaatioByOid = memoize(
+const memoizedGetOrganisaatioByOid = memoizePromise(
   async (httpClient, apiUrls, oid) => {
     const { data } = await httpClient.get(
       apiUrls.url('organisaatio-service.organisaatio-by-oid', oid),
@@ -204,7 +200,6 @@ const memoizedGetOrganisaatioByOid = memoize(
 
     return data;
   },
-  { promise: true },
 );
 
 export const getOrganisaatioByOid = ({ oid, apiUrls, httpClient }) => {
@@ -279,7 +274,7 @@ export const getAvainsanatByTerm = async ({
   return data;
 };
 
-const memoizedGetKoodisto = memoize(
+const memoizedGetKoodisto = memoizePromise(
   async (httpClient, apiUrls, koodistoUri, koodistoVersio) => {
     const { data } = await httpClient.get(
       apiUrls.url('koodisto-service.koodi', koodistoUri),
@@ -288,7 +283,6 @@ const memoizedGetKoodisto = memoize(
 
     return data;
   },
-  { promise: true },
 );
 
 export const getKoodisto = ({
@@ -454,7 +448,7 @@ export const getKoutaHaut = async ({
   return data;
 };
 
-const memoizedGetKayttajanOrganisaatiot = memoize(
+const memoizedGetKayttajanOrganisaatiot = memoizePromise(
   async (httpClient, apiUrls, oid) => {
     return Promise.all([
       getOrganisaatioByOid({
@@ -469,7 +463,6 @@ const memoizedGetKayttajanOrganisaatiot = memoize(
       }),
     ]);
   },
-  { promise: true },
 );
 
 export const getKayttajanOrganisaatiot = async ({
@@ -521,7 +514,7 @@ export const getKoutaIndexKoulutukset = async ({
   );
 
   return data;
-}
+};
 
 export const updateKoutaToteutus = async ({
   toteutus,
@@ -566,9 +559,9 @@ export const getKoutaIndexToteutukset = async ({
     apiUrls.url('kouta-index.toteutus-list'),
     { params },
   );
-  
+
   return data;
-}
+};
 
 export const getKoutaHakukohteet = async ({
   httpClient,
@@ -623,4 +616,68 @@ export const getKoutaIndexHaut = async ({ httpClient, apiUrls, ...rest }) => {
   });
 
   return data;
+};
+
+export const getKayttajanOrganisaatioHierarkia = async ({
+  httpClient,
+  apiUrls,
+  oid,
+}) => {
+  const organisaatiot = await getKayttajanOrganisaatiot({
+    httpClient,
+    apiUrls,
+    oid,
+  });
+
+  const hierarkia = await Promise.all(
+    organisaatiot.map(({ oid: orgOid }) =>
+      getOrganisaatioHierarchyByOid({ httpClient, apiUrls, oid: orgOid }).then(
+        h => {
+          return h ? h[0] : null;
+        },
+      ),
+    ),
+  );
+
+  return hierarkia.filter(h => !!h);
+};
+
+export const getAndUpdateKoutaKoulutus = async ({
+  httpClient,
+  apiUrls,
+  koulutus: koulutusUpdate,
+}) => {
+  const { oid, ...update } = koulutusUpdate;
+
+  if (!oid) {
+    throw Error('Koulutuksella täytyy olla oid');
+  }
+
+  const koulutus = await getKoutaKoulutusByOid({ oid, httpClient, apiUrls });
+
+  return updateKoutaKoulutus({
+    httpClient,
+    apiUrls,
+    koulutus: { ...koulutus, ...update },
+  });
+};
+
+export const getAndUpdateKoutaToteutus = async ({
+  httpClient,
+  apiUrls,
+  toteutus: toteutusUpdate,
+}) => {
+  const { oid, ...update } = toteutusUpdate;
+
+  if (!oid) {
+    throw new Error('Toteutuksella täytyy olla oid');
+  }
+
+  const toteutus = await getKoutaToteutusByOid({ oid, httpClient, apiUrls });
+
+  return updateKoutaToteutus({
+    httpClient,
+    apiUrls,
+    toteutus: { ...toteutus, ...update },
+  });
 };

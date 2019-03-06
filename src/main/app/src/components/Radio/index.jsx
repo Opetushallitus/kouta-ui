@@ -32,7 +32,7 @@ const RadioInput = styled.input.attrs({ type: 'radio' })`
   font-size: inherit;
 `;
 
-const Radio = ({ children = null, ...props }) => (
+export const Radio = ({ children = null, ...props }) => (
   <Label>
     <RadioWrapper>
       <RadioInput type="radio" {...props} />

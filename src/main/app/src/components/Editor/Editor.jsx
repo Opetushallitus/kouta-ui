@@ -90,9 +90,9 @@ const LinkDropdownContainer = styled.div`
   width: 20rem;
 `;
 
-const focusEditor = editorRef => {
+const focusRef = ref => {
   setTimeout(() => {
-    editorRef.current && editorRef.current.focus();
+    ref.current && ref.current.focus();
   }, 100);
 };
 
@@ -113,7 +113,7 @@ const StyleButton = ({
       onChange(RichUtils.toggleBlockType(editorState, styleName));
     }
 
-    focusEditor(editorRef);
+    focusRef(editorRef);
   }, [editorState, onChange, inline, block, editorRef]);
 
   const isActive = useMemo(() => {
@@ -144,7 +144,7 @@ const HeaderSelect = ({ editorState, onChange, editorRef }) => {
   const onSelect = useCallback(
     ({ value }) => {
       onChange(RichUtils.toggleBlockType(editorState, value));
-      focusEditor(editorRef);
+      focusRef(editorRef);
     },
     [onChange, editorState, editorRef],
   );
@@ -169,7 +169,7 @@ const LinkDropdown = ({ value, onChange, onSubmit }) => {
   const inputRef = useRef();
 
   useEffect(() => {
-    inputRef.current.focus();
+    focusRef(inputRef);
   });
 
   return (
@@ -241,7 +241,7 @@ const LinkButton = ({ editorState, onChange, editorRef, ...props }) => {
         onSubmit={() => {
           onAddLink();
           onToggle();
-          focusEditor(editorRef);
+          focusRef(editorRef);
         }}
       />
     </DropdownMenu>
@@ -256,7 +256,8 @@ const LinkButton = ({ editorState, onChange, editorRef, ...props }) => {
       {({ onToggle, ref, visible }) => (
         <div ref={ref}>
           <StyleButtonBase
-            onClick={() => {
+            onClick={e => {
+              e.preventDefault();
               !visible && setLinkByEditorState();
               onToggle();
             }}

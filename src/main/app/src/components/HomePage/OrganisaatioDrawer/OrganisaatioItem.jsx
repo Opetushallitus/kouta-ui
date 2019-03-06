@@ -2,13 +2,11 @@ import React, { useCallback } from 'react';
 import styled, { css } from 'styled-components';
 
 import Typography from '../../Typography';
-import { isArray, getFirstLanguageValue } from '../../../utils';
+import { isNonEmptyArray, getFirstLanguageValue } from '../../../utils';
 import Flex, { FlexItem } from '../../Flex';
 import { getThemeProp } from '../../../theme';
 import Radio from '../../Radio';
 import Icon from '../../Icon';
-
-const isNonEmptyArray = value => isArray(value) && value.length > 0;
 
 const FavouriteIconBase = styled(Icon)`
   color: ${getThemeProp('palette.text.primary')};

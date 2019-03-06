@@ -34,7 +34,7 @@ export const makeApiDecorator = ({
 };
 
 export const makeStoreDecorator = ({ logging = false } = {}) => storyFn => {
-  const store = createStore({});
+  const { store } = createStore({});
   const storeAction = action('change');
 
   if (logging) {

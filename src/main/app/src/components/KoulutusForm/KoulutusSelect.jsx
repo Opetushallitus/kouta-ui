@@ -31,7 +31,7 @@ const getOptions = memoize(koulutukset => {
 });
 
 const KoulutusSelect = ({
-  koulutusTyyppi = 'amm',
+  koulutustyyppi = 'amm',
   language = 'fi',
   value,
   ...props
@@ -39,8 +39,8 @@ const KoulutusSelect = ({
   return (
     <ApiAsync
       promiseFn={getKoulutukset}
-      watch={koulutusTyyppi}
-      koulutusTyyppi={koulutusTyyppi}
+      watch={koulutustyyppi}
+      koulutusTyyppi={koulutustyyppi}
     >
       {({ data }) => {
         const koulutukset = data || [];

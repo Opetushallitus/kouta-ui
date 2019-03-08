@@ -42,7 +42,7 @@ export const submit = ({
 
   let nimi = koulutusFormData.nimi;
 
-  if (!isNonEmptyObject(nimi)) {
+  if (!isNonEmptyObject(nimi) && koulutusFormData.koulutusKoodiUri) {
     const { nimi: koulutusNimi } = await getKoulutusByKoodi({
       koodiUri: koulutusFormData.koulutusKoodiUri,
       httpClient,
@@ -71,7 +71,7 @@ export const submit = ({
     return dispatch(
       createTemporaryToast({
         status: 'danger',
-        title: 'Koulutuksen talennus epäonnistui',
+        title: 'Koulutuksen tallennus epäonnistui',
       }),
     );
   }

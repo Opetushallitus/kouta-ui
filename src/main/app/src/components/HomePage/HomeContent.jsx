@@ -13,10 +13,7 @@ import ToteutuksetSection from './ToteutuksetSection';
 import HautSection from './HautSection';
 import OrganisaatioDrawer from './OrganisaatioDrawer';
 import Button from '../Button';
-import {
-  getOrganisaatioFromHierarkia,
-  getOrganisaatioHierarkiaRoot,
-} from './utils';
+import { getOrganisaatioFromHierarkia } from './utils';
 import Icon from '../Icon';
 
 const Container = styled.div`
@@ -38,10 +35,6 @@ const HomeContent = ({ organisaatiot, organisaatioOid, history }) => {
     organisaatiot,
     organisaatioOid,
   );
-
-  const rootOrganisaatioOid = organisaatioOid
-    ? get(getOrganisaatioHierarkiaRoot(organisaatiot, organisaatioOid), 'oid')
-    : null;
 
   const onOrganisaatioChange = useCallback(
     value => history.push(`/?organisaatioOid=${value}`),
@@ -82,22 +75,13 @@ const HomeContent = ({ organisaatiot, organisaatioOid, history }) => {
           Koulutukset ja haut
         </Typography>
         <Spacing marginBottom={3}>
-          <KoulutuksetSection
-            organisaatioOid={organisaatioOid}
-            rootOrganisaatioOid={rootOrganisaatioOid}
-          />
+          <KoulutuksetSection organisaatioOid={organisaatioOid} />
         </Spacing>
         <Spacing marginBottom={2}>
-          <ToteutuksetSection
-            organisaatioOid={organisaatioOid}
-            rootOrganisaatioOid={rootOrganisaatioOid}
-          />
+          <ToteutuksetSection organisaatioOid={organisaatioOid} />
         </Spacing>
         <Spacing>
-          <HautSection
-            organisaatioOid={organisaatioOid}
-            rootOrganisaatioOid={rootOrganisaatioOid}
-          />
+          <HautSection organisaatioOid={organisaatioOid} />
         </Spacing>
       </Container>
     </>

@@ -9,14 +9,16 @@ const renderTypeField = ({ input }) => (
     <Radio value={KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS}>
       Ammatillinen koulutus
     </Radio>
-    <Radio value={KOULUTUSTYYPPI_CATEGORY.KORKEAKOULUKOULUTUS}>
-      Korkeakoulutus
+    <Radio value={KOULUTUSTYYPPI_CATEGORY.YLIOPISTOKOULUTUS}>
+      Yliopistokoulutus
     </Radio>
-    <Radio value={KOULUTUSTYYPPI_CATEGORY.LUKIOKOULUTUS}>Lukiokoulutus</Radio>
+    <Radio value={KOULUTUSTYYPPI_CATEGORY.AMKKOULUTUS}>
+      AMK-koulutus
+    </Radio>
   </RadioGroup>
 );
 
-const TypeSection = props => {
+const TypeSection = () => {
   return <Field name="type" component={renderTypeField} />;
 };
 

@@ -5,6 +5,7 @@ import { JULKAISUTILA } from '../../constants';
 import { getKoulutusByKoodi } from '../../apiUtils';
 import { createTemporaryToast } from '../toaster';
 import { getKoulutusByValues } from './utils';
+import { isNonEmptyObject } from '../../utils';
 
 const getKoulutusFormValues = getFormValues('createKoulutusForm');
 
@@ -39,19 +40,25 @@ export const submit = ({
 
   const koulutusFormData = getKoulutusByValues(values);
 
-  const { nimi = null } = await getKoulutusByKoodi({
-    koodiUri: koulutusFormData.koulutusKoodiUri,
-    httpClient,
-    apiUrls,
-  });
+  let nimi = koulutusFormData.nimi;
+
+  if (!isNonEmptyObject(nimi) && koulutusFormData.koulutusKoodiUri) {
+    const { nimi: koulutusNimi } = await getKoulutusByKoodi({
+      koodiUri: koulutusFormData.koulutusKoodiUri,
+      httpClient,
+      apiUrls,
+    });
+
+    nimi = koulutusNimi;
+  }
 
   const koulutus = {
     organisaatioOid,
     muokkaaja: kayttajaOid,
     tila,
-    nimi,
     johtaaTutkintoon: true,
     ...koulutusFormData,
+    nimi,
   };
 
   let koulutusData;
@@ -64,7 +71,7 @@ export const submit = ({
     return dispatch(
       createTemporaryToast({
         status: 'danger',
-        title: 'Koulutuksen talennus epäonnistui',
+        title: 'Koulutuksen tallennus epäonnistui',
       }),
     );
   }

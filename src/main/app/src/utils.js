@@ -232,3 +232,6 @@ export const memoizePromise = (fn, opts = {}) =>
 export const isNonEmptyArray = value => isArray(value) && value.length > 0;
 
 export const compose = flowRight;
+
+export const isNonEmptyObject = value =>
+  isObject(value) && Object.keys(value).length > 0;

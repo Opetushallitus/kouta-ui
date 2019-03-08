@@ -17,8 +17,6 @@ const initialValue = createEditorStateWithContent(
   ),
 );
 
-console.log(initialValue);
-
 const StoryEditor = () => {
   const [value, setValue] = useState(initialValue);
 

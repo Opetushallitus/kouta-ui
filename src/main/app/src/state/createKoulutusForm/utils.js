@@ -17,7 +17,7 @@ export const getKoulutusByValues = values => {
   const kuvaus = pick(get(values, 'description.kuvaus') || {}, kielivalinta);
   const nimi = pick(get(values, 'information.nimi') || {}, kielivalinta);
   const opintojenLaajuusKoodiUri =
-    get(values, 'information.opintojenLaajuus') || null;
+    get(values, 'information.opintojenLaajuus.value') || null;
 
   const tutkintonimikeKoodiUrit = (
     get(values, 'information.tutkintonimike') || []
@@ -28,12 +28,15 @@ export const getKoulutusByValues = values => {
     kielivalinta,
   );
 
+  const julkinen = Boolean(get(values, 'nakyvyys.julkinen'));
+
   return {
     kielivalinta,
     tarjoajat,
     koulutusKoodiUri,
     koulutustyyppi,
     nimi,
+    julkinen,
     metadata: {
       lisatiedot: osiotWithKuvaukset,
       kuvaus,
@@ -52,6 +55,7 @@ export const getValuesByKoulutus = koulutus => {
     tarjoajat = [],
     metadata = {},
     nimi = {},
+    julkinen = false,
   } = koulutus;
 
   const {
@@ -101,6 +105,9 @@ export const getValuesByKoulutus = koulutus => {
     description: {
       kuvaus,
       nimi: kuvauksenNimi,
+    },
+    nakyvyys: {
+      julkinen,
     },
   };
 };

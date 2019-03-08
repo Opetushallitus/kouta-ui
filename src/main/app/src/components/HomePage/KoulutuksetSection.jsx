@@ -42,12 +42,12 @@ const getKoulutukset = async ({ httpClient, apiUrls, ...filters }) => {
   return { result, pageCount: Math.ceil(totalCount / 10) };
 };
 
-const LuoKoulutusDropdown = ({ rootOrganisaatioOid }) => {
+const LuoKoulutusDropdown = ({ organisaatioOid }) => {
   const overlay = (
     <DropdownMenu>
       <DropdownMenuItem
         as={Link}
-        to={`/organisaatio/${rootOrganisaatioOid}/koulutus?johtaaTutkintoon=true`}
+        to={`/organisaatio/${organisaatioOid}/koulutus?johtaaTutkintoon=true`}
       >
         Tutkintoon johtava koulutus
       </DropdownMenuItem>
@@ -72,8 +72,8 @@ const LuoKoulutusDropdown = ({ rootOrganisaatioOid }) => {
   );
 };
 
-const Actions = ({ rootOrganisaatioOid }) => (
-  <LuoKoulutusDropdown rootOrganisaatioOid={rootOrganisaatioOid} />
+const Actions = ({ organisaatioOid }) => (
+  <LuoKoulutusDropdown organisaatioOid={organisaatioOid} />
 );
 
 const tableColumns = [
@@ -104,7 +104,7 @@ const tableColumns = [
   },
 ];
 
-const KoulutuksetSection = ({ organisaatioOid, rootOrganisaatioOid }) => {
+const KoulutuksetSection = ({ organisaatioOid }) => {
   const {
     debouncedNimi,
     showArchived,
@@ -146,7 +146,7 @@ const KoulutuksetSection = ({ organisaatioOid, rootOrganisaatioOid }) => {
     <ListCollapse
       icon="school"
       header="Koulutukset"
-      actions={<Actions rootOrganisaatioOid={rootOrganisaatioOid} />}
+      actions={<Actions organisaatioOid={organisaatioOid} />}
       defaultOpen
     >
       <Spacing marginBottom={2}>

@@ -62,6 +62,7 @@ const renderOsaamisalatFields = ({ fields, language }) => (
       </Fragment>
     ))}
     <Button
+      type="button"
       onClick={() => {
         fields.push({});
       }}

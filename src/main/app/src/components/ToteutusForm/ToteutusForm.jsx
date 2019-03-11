@@ -19,6 +19,7 @@ import { ModalController } from '../Modal';
 import Flex from '../Flex';
 import Button from '../Button';
 import KorkeakouluOsaamisalatSection from './KorkeakouluOsaamisalatSection';
+import KuvausSection from './KuvausSection';
 
 import {
   KORKEAKOULUKOULUTUSTYYPIT,
@@ -79,11 +80,20 @@ const ToteutusForm = ({
                 )}
               </FormCollapse>
             ) : null}
-  
+
             <FormCollapse header="Kieliversiot" section="kieliversiot">
               <KieliversiotFormSection />
             </FormCollapse>
-  
+
+            {isKorkeakoulu ? (
+              <FormCollapse
+                header="Koulutuksen toteutuksen tarkempi kuvaus"
+                section="kuvaus"
+              >
+                <KuvausSection languages={languages} />
+              </FormCollapse>
+            ) : null}
+
             {isKorkeakoulu ? (
               <FormCollapse
                 header="Alemman korkeakoulututkinnon erikoistumisalan, opintosuunnan, pääaineen tms. tarkempi kuvaus"
@@ -92,7 +102,7 @@ const ToteutusForm = ({
                 <KorkeakouluOsaamisalatSection languages={languages} />
               </FormCollapse>
             ) : null}
-  
+
             {isKorkeakoulu ? (
               <FormCollapse
                 header="Ylemmän korkeakoulututkinnon erikoistumisalan, opintosuunnan, pääaineen tms. tarkempi kuvaus"
@@ -101,8 +111,9 @@ const ToteutusForm = ({
                 <KorkeakouluOsaamisalatSection languages={languages} />
               </FormCollapse>
             ) : null}
-  
-            {koulutustyyppi === KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS ? (
+
+            {koulutustyyppi ===
+            KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS ? (
               <FormCollapse header="Valitse osaamisalat" section="osaamisalat">
                 <OsaamisalatSection
                   languages={languages}
@@ -110,7 +121,7 @@ const ToteutusForm = ({
                 />
               </FormCollapse>
             ) : null}
-  
+
             <FormCollapse
               header="Toteutuksen järjestämistiedot"
               section="jarjestamistiedot"
@@ -120,32 +131,32 @@ const ToteutusForm = ({
                 koulutustyyppi={koulutustyyppi}
               />
             </FormCollapse>
-  
+
             <FormCollapse
               header="Koulutuksen näyttämiseen liittyvät tiedot"
               section="nayttamistiedot"
             >
               <NayttamisTiedotSection languages={languages} />
             </FormCollapse>
-  
+
             <FormCollapse
               header="Missä järjestetään?"
               section="jarjestamispaikat"
             >
               <JarjestamisPaikatSection organisaatioOid={organisaatioOid} />
             </FormCollapse>
-  
+
             <FormCollapse header="Toteutuksen nimi" section="nimi">
               <NimiSection languages={languages} />
             </FormCollapse>
-  
+
             <FormCollapse
               header="Koulutuksen yhteystiedot"
               section="yhteystiedot"
             >
               <YhteystiedotSection languages={languages} />
             </FormCollapse>
-  
+
             {isFunction(onAttachHakukohde) ? (
               <FormCollapse
                 header="Toteutukseen liitetyt hakukohteet"
@@ -182,6 +193,6 @@ const ToteutusForm = ({
       </ActiveLanguages>
     </form>
   );
-}
+};
 
 export default ToteutusForm;

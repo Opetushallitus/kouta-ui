@@ -19,7 +19,7 @@ export const getToteutusByValues = values => {
   const kielivalinta = get(values, 'kieliversiot.languages') || [];
   const nimi = pick(get(values, 'nimi.name') || {}, kielivalinta);
   const opetuskielet = get(values, 'jarjestamistiedot.opetuskieli') || [];
-  const kuvaus = get(values, 'jarjestamistiedot.kuvaus') || {};
+  const kuvaus = pick(get(values, 'kuvaus.kuvaus') || {}, kielivalinta);
   const osioKuvaukset = get(values, 'jarjestamistiedot.osioKuvaukset') || {};
   const opetustapaKoodiUrit = get(values, 'jarjestamistiedot.opetustapa') || [];
   const opetusaikaKoodiUri = get(values, 'jarjestamistiedot.opetusaika');
@@ -160,7 +160,6 @@ export const getToteutusByValues = values => {
       opetus: {
         lisatiedot: osiot,
         opetuskieliKoodiUrit: opetuskielet,
-        kuvaus,
         onkoMaksullinen,
         maksunMaara,
         opetustapaKoodiUrit,
@@ -185,6 +184,7 @@ export const getToteutusByValues = values => {
       asiasanat,
       ylemmanKorkeakoulututkinnonOsaamisalat,
       alemmanKorkeakoulututkinnonOsaamisalat,
+      kuvaus,
     },
   };
 };
@@ -206,6 +206,7 @@ export const getValuesByToteutus = toteutus => {
     osaamisalat: osaamisalatArg = [],
     ylemmanKorkeakoulututkinnonOsaamisalat: ylemmanKorkeakoulututkinnonOsaamisalatArg = [],
     alemmanKorkeakoulututkinnonOsaamisalat: alemmanKorkeakoulututkinnonOsaamisalatArg = [],
+    kuvaus = {},
   } = metadata;
 
   const osaamisalat = osaamisalatArg.map(({ koodi }) => koodi);
@@ -314,6 +315,9 @@ export const getValuesByToteutus = toteutus => {
     },
     alemmanKorkeakoulututkinnonOsaamisalat: {
       osaamisalat: alemmanKorkeakoulututkinnonOsaamisalatArg,
+    },
+    kuvaus: {
+      kuvaus,
     },
   };
 };

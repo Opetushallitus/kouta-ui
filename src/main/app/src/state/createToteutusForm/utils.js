@@ -206,7 +206,6 @@ export const getValuesByToteutus = toteutus => {
     osaamisalat: osaamisalatArg = [],
     ylemmanKorkeakoulututkinnonOsaamisalat: ylemmanKorkeakoulututkinnonOsaamisalatArg = [],
     alemmanKorkeakoulututkinnonOsaamisalat: alemmanKorkeakoulututkinnonOsaamisalatArg = [],
-    kuvaus = {},
   } = metadata;
 
   const osaamisalat = osaamisalatArg.map(({ koodi }) => koodi);

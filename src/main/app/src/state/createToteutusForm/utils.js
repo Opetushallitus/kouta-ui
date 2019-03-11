@@ -87,7 +87,9 @@ export const getToteutusByValues = values => {
   };
 
   const ammattinimikkeet = flatMap(
-    toPairs(get(values, 'nayttamistiedot.ammattinimikkeet') || {}),
+    toPairs(
+      pick(get(values, 'nayttamistiedot.ammattinimikkeet') || {}, kielivalinta),
+    ),
     ([language, nimikkeet]) => {
       return (nimikkeet || []).map(({ value }) => ({
         kieli: language,
@@ -97,7 +99,9 @@ export const getToteutusByValues = values => {
   );
 
   const asiasanat = flatMap(
-    toPairs(get(values, 'nayttamistiedot.avainsanat') || {}),
+    toPairs(
+      pick(get(values, 'nayttamistiedot.avainsanat') || {}, kielivalinta),
+    ),
     ([language, sanat]) => {
       return (sanat || []).map(({ value }) => ({
         kieli: language,

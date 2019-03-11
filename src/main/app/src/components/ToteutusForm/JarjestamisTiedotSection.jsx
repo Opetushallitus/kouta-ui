@@ -17,6 +17,7 @@ import AlkamiskausiFields from './AlkamiskausiFields';
 import Select from '../Select';
 import { KORKEAKOULUKOULUTUSTYYPIT } from '../../constants';
 import useKoodistoOptions from '../useKoodistoOptions';
+import { isArray } from '../../utils';
 
 const BorderHeading = styled(Typography).attrs({
   variant: 'h6',
@@ -40,8 +41,11 @@ const renderOpetuskieliField = ({ input }) => (
   <OpetuskieliCheckboxGroup {...input} />
 );
 
-const renderOpetustapaField = ({ input }) => (
-  <OpetustapaCheckboxGroup {...input} />
+const renderOpetustapaField = ({ input: { value, onChange } }) => (
+  <OpetustapaCheckboxGroup
+    value={value || []}
+    onChange={items => isArray(items) && items.length <= 2 && onChange(items)}
+  />
 );
 
 const renderRadioGroupField = ({ input, options }) => (
@@ -241,6 +245,9 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi }) => {
         <Flex>
           <FlexItem grow={0} basis="30%">
             <Field name="opetustapa" component={renderOpetustapaField} />
+            <Typography variant="secondary" as="div" marginTop={1}>
+              Voit valita enintään kaksi opetustapaa
+            </Typography>
           </FlexItem>
           <FlexItem grow={1} paddingLeft={3}>
             <Typography marginBottom={1} as="div">

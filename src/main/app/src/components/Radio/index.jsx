@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 import { getThemeProp } from '../../theme';
+import { isArray } from '../../utils';
 
 const Label = styled.label`
   font-family: ${getThemeProp('typography.fontFamily')};
@@ -41,16 +42,38 @@ export const Radio = ({ children = null, ...props }) => (
   </Label>
 );
 
-export const RadioGroup = ({ value, onChange, disabled = false, ...props }) => {
-  const childrenCount = React.Children.count(props.children);
+export const RadioGroup = ({
+  value,
+  onChange,
+  disabled = false,
+  options,
+  ...props
+}) => {
+  let children = null;
 
-  const children = React.Children.map(props.children, (child, index) => {
-    const checked = value !== undefined && child.props.value === value;
-    const element = React.cloneElement(child, { checked, onChange, disabled });
-    const last = index === childrenCount - 1;
+  if (props.children) {
+    const childrenCount = React.Children.count(props.children);
 
-    return <RadioContainer last={last}>{element}</RadioContainer>;
-  });
+    children = React.Children.map(props.children, (child, index) => {
+      const checked = value !== undefined && child.props.value === value;
+      const element = React.cloneElement(child, {
+        checked,
+        onChange,
+        disabled,
+      });
+      const last = index === childrenCount - 1;
+
+      return <RadioContainer last={last}>{element}</RadioContainer>;
+    });
+  } else if (isArray(options)) {
+    children = options.map(({ value: optionValue, label }, index) => (
+      <RadioContainer last={index === options.length - 1}>
+        <Radio checked={value !== undefined && value === optionValue} onChange={onChange} value={optionValue}>
+          {label}
+        </Radio>
+      </RadioContainer>
+    ));
+  }
 
   return <div {...props}>{children}</div>;
 };

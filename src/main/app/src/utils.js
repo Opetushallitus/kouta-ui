@@ -286,3 +286,5 @@ export const getKoodistoVersiot = (value, versiot = {}) => {
 
   return {};
 };
+
+export const noop = () => {};

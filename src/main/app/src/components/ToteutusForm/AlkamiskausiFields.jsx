@@ -1,12 +1,12 @@
 import React from 'react';
 import { Field } from 'redux-form';
-import getYear from 'date-fns/get_year';
 
 import Typography from '../Typography';
 import Spacing from '../Spacing';
 import Radio, { RadioGroup } from '../Radio';
-import NativeSelect, { Option } from '../NativeSelect';
 import useKoodistoOptions from '../useKoodistoOptions';
+import YearSelect from '../YearSelect';
+import { noop } from '../../utils';
 
 const renderRadioGroupField = ({ input, options }) => (
   <RadioGroup {...input}>
@@ -18,23 +18,7 @@ const renderRadioGroupField = ({ input, options }) => (
   </RadioGroup>
 );
 
-const currentYear = getYear(new Date());
-
-const yearOptions = [...new Array(10)].map((value, index) => ({
-  value: `${currentYear + index}`,
-  label: `${currentYear + index}`,
-}));
-
-const renderYearField = ({ input }) => (
-  <NativeSelect {...input}>
-    <Option value="">Valitse vuosi</Option>
-    {yearOptions.map(({ value, label }) => (
-      <Option value={value} key={value}>
-        {label}
-      </Option>
-    ))}
-  </NativeSelect>
-);
+const renderYearField = ({ input }) => <YearSelect {...input} onBlur={noop} />;
 
 const AlkamiskausiFields = ({ name }) => {
   const { options } = useKoodistoOptions({ koodisto: 'kausi' });

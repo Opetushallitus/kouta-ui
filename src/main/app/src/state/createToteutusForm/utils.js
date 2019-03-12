@@ -47,9 +47,8 @@ export const getToteutusByValues = values => {
   const alkamiskausiKoodiUri =
     get(values, 'jarjestamistiedot.alkamiskausi.kausi') || null;
 
-  const alkamisvuosi = get(values, 'jarjestamistiedot.alkamiskausi.vuosi')
-    ? values.jarjestamistiedot.alkamiskausi.vuosi.toString()
-    : null;
+  const alkamisvuosi =
+    get(values, 'jarjestamistiedot.alkamiskausi.vuosi.value') || null;
 
   const osiot = (get(values, 'jarjestamistiedot.osiot') || []).map(
     ({ value }) => ({

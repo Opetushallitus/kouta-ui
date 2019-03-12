@@ -235,3 +235,54 @@ export const compose = flowRight;
 
 export const isNonEmptyObject = value =>
   isObject(value) && Object.keys(value).length > 0;
+
+export const isKoodiUri = value =>
+  isString(value) && /^\w+_\w+#[0-9]+$/.test(value);
+
+export const parseKoodiUri = value => {
+  if (!isKoodiUri(value)) {
+    return { koodisto: null, koodi: null, versio: null };
+  }
+
+  const [koodi, versio] = value.split('#');
+
+  const [koodisto] = koodi.split('_');
+
+  return {
+    koodisto,
+    koodi,
+    versio,
+  };
+};
+
+export const getKoodistoVersiot = (value, versiot = {}) => {
+  if (isString(value)) {
+    const { koodisto, versio } = parseKoodiUri(value);
+
+    return koodisto !== null && versio !== null ? { [koodisto]: versio } : {};
+  }
+
+  if (isObject(value)) {
+    return {
+      ...versiot,
+      ...Object.keys(value).reduce((acc, curr) => {
+        acc = { ...acc, ...getKoodistoVersiot(value[curr], versiot) };
+
+        return acc;
+      }, {}),
+    };
+  }
+
+  if (isArray(value)) {
+    return {
+      ...versiot,
+      ...value.reduce((acc, curr) => {
+        acc = { ...acc, ...getKoodistoVersiot(curr, versiot) };
+
+        return acc;
+      }, {}),
+    };
+  }
+
+  return {};
+};

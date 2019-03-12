@@ -10,7 +10,7 @@ import Button from '../Button';
 import Pagination from '../Pagination';
 import Flex from '../Flex';
 import Spacing from '../Spacing';
-import Icon from '../Icon';
+import DropdownIcon from '../DropdownIcon';
 import Spin from '../Spin';
 import useApiAsync from '../useApiAsync';
 import { getKoutaIndexKoulutukset } from '../../apiUtils';
@@ -64,7 +64,7 @@ const LuoKoulutusDropdown = ({ organisaatioOid }) => {
         <div ref={ref} onClick={onToggle}>
           <Button>
             Luo uusi koulutus{' '}
-            <Icon type={visible ? 'arrow_drop_up' : 'arrow_drop_down'} />
+            <DropdownIcon open={visible} />
           </Button>
         </div>
       )}

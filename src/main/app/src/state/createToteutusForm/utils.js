@@ -3,12 +3,23 @@ import toPairs from 'lodash/toPairs';
 import flatMap from 'lodash/flatMap';
 import pick from 'lodash/pick';
 
+const getOsaamisalatByValues = ({ osaamisalat, kielivalinta }) => {
+  return (osaamisalat || []).map(
+    ({ kuvaus = {}, nimi = {}, linkki = {}, otsikko = {} }) => ({
+      kuvaus: pick(kuvaus, kielivalinta),
+      nimi: pick(nimi, kielivalinta),
+      linkki: pick(linkki, kielivalinta),
+      otsikko: pick(otsikko, kielivalinta),
+    }),
+  );
+};
+
 export const getToteutusByValues = values => {
   const tarjoajat = get(values, 'jarjestamispaikat.jarjestajat') || [];
   const kielivalinta = get(values, 'kieliversiot.languages') || [];
   const nimi = pick(get(values, 'nimi.name') || {}, kielivalinta);
   const opetuskielet = get(values, 'jarjestamistiedot.opetuskieli') || [];
-  const kuvaus = get(values, 'jarjestamistiedot.kuvaus') || {};
+  const kuvaus = pick(get(values, 'kuvaus.kuvaus') || {}, kielivalinta);
   const osioKuvaukset = get(values, 'jarjestamistiedot.osioKuvaukset') || {};
   const opetustapaKoodiUrit = get(values, 'jarjestamistiedot.opetustapa') || [];
   const opetusaikaKoodiUri = get(values, 'jarjestamistiedot.opetusaika');
@@ -36,9 +47,8 @@ export const getToteutusByValues = values => {
   const alkamiskausiKoodiUri =
     get(values, 'jarjestamistiedot.alkamiskausi.kausi') || null;
 
-  const alkamisvuosi = get(values, 'jarjestamistiedot.alkamiskausi.vuosi')
-    ? values.jarjestamistiedot.alkamiskausi.vuosi.toString()
-    : null;
+  const alkamisvuosi =
+    get(values, 'jarjestamistiedot.alkamiskausi.vuosi.value') || null;
 
   const osiot = (get(values, 'jarjestamistiedot.osiot') || []).map(
     ({ value }) => ({
@@ -76,7 +86,9 @@ export const getToteutusByValues = values => {
   };
 
   const ammattinimikkeet = flatMap(
-    toPairs(get(values, 'nayttamistiedot.ammattinimikkeet') || {}),
+    toPairs(
+      pick(get(values, 'nayttamistiedot.ammattinimikkeet') || {}, kielivalinta),
+    ),
     ([language, nimikkeet]) => {
       return (nimikkeet || []).map(({ value }) => ({
         kieli: language,
@@ -86,7 +98,9 @@ export const getToteutusByValues = values => {
   );
 
   const asiasanat = flatMap(
-    toPairs(get(values, 'nayttamistiedot.avainsanat') || {}),
+    toPairs(
+      pick(get(values, 'nayttamistiedot.avainsanat') || {}, kielivalinta),
+    ),
     ([language, sanat]) => {
       return (sanat || []).map(({ value }) => ({
         kieli: language,
@@ -94,6 +108,48 @@ export const getToteutusByValues = values => {
       }));
     },
   );
+
+  const onkoLukuvuosimaksua =
+    get(values, 'jarjestamistiedot.onkoLukuvuosimaksua') === 'kylla';
+
+  const lukuvuosimaksuKuvaus = pick(
+    get(values, 'jarjestamistiedot.lukuvuosimaksuKuvaus') || {},
+    kielivalinta,
+  );
+
+  const lukuvuosimaksu = pick(
+    get(values, 'jarjestamistiedot.lukuvuosimaksu') || {},
+    kielivalinta,
+  );
+
+  const onkoStipendia =
+    get(values, 'jarjestamistiedot.onkoStipendia') === 'kylla';
+
+  const stipendinKuvaus = pick(
+    get(values, 'jarjestamistiedot.stipendinKuvaus') || {},
+    kielivalinta,
+  );
+
+  const stipendinMaara = pick(
+    get(values, 'jarjestamistiedot.stipendinMaara') || {},
+    kielivalinta,
+  );
+
+  const ylemmanKorkeakoulututkinnonOsaamisalat = getOsaamisalatByValues({
+    osaamisalat: get(
+      values,
+      'ylemmanKorkeakoulututkinnonOsaamisalat.osaamisalat',
+    ),
+    kielivalinta,
+  });
+
+  const alemmanKorkeakoulututkinnonOsaamisalat = getOsaamisalatByValues({
+    osaamisalat: get(
+      values,
+      'alemmanKorkeakoulututkinnonOsaamisalat.osaamisalat',
+    ),
+    kielivalinta,
+  });
 
   return {
     nimi,
@@ -103,7 +159,6 @@ export const getToteutusByValues = values => {
       opetus: {
         lisatiedot: osiot,
         opetuskieliKoodiUrit: opetuskielet,
-        kuvaus,
         onkoMaksullinen,
         maksunMaara,
         opetustapaKoodiUrit,
@@ -115,11 +170,20 @@ export const getToteutusByValues = values => {
         alkamisaikaKuvaus: alkamiskausiKuvaus,
         alkamiskausiKoodiUri,
         alkamisvuosi,
+        onkoLukuvuosimaksua,
+        lukuvuosimaksu,
+        lukuvuosimaksuKuvaus,
+        onkoStipendia,
+        stipendinKuvaus,
+        stipendinMaara,
       },
       osaamisalat,
       yhteystieto,
       ammattinimikkeet,
       asiasanat,
+      ylemmanKorkeakoulututkinnonOsaamisalat,
+      alemmanKorkeakoulututkinnonOsaamisalat,
+      kuvaus,
     },
   };
 };
@@ -139,6 +203,8 @@ export const getValuesByToteutus = toteutus => {
     yhteystieto = {},
     opetus = {},
     osaamisalat: osaamisalatArg = [],
+    ylemmanKorkeakoulututkinnonOsaamisalat: ylemmanKorkeakoulututkinnonOsaamisalatArg = [],
+    alemmanKorkeakoulututkinnonOsaamisalat: alemmanKorkeakoulututkinnonOsaamisalatArg = [],
   } = metadata;
 
   const osaamisalat = osaamisalatArg.map(({ koodi }) => koodi);
@@ -199,6 +265,12 @@ export const getValuesByToteutus = toteutus => {
         vuosi: get(opetus, 'alkamisvuosi') || '',
       },
       alkamiskausiKuvaus: get(opetus, 'alkamisaikaKuvaus') || {},
+      onkoLukuvuosimaksua: get(opetus, 'onkoLukuvuosimaksua') ? 'kylla' : 'ei',
+      lukuvuosimaksu: get(opetus, 'lukuvuosimaksu') || {},
+      lukuvuosimaksuKuvaus: get(opetus, 'lukuvuosimaksuKuvaus') || {},
+      onkoStipendia: get(opetus, 'onkoStipendia') ? 'kylla' : 'ei',
+      stipendinMaara: get(opetus, 'stipendinMaara') || {},
+      stipendinKuvaus: get(opetus, 'stipendinKuvaus') || {},
     },
     nayttamistiedot: {
       ammattinimikkeet: ammattinimikkeet.reduce((acc, curr) => {
@@ -235,6 +307,15 @@ export const getValuesByToteutus = toteutus => {
       osaamisalat,
       osaamisalaLinkit,
       osaamisalaLinkkiOtsikot,
+    },
+    ylemmanKorkeakoulututkinnonOsaamisalat: {
+      osaamisalat: ylemmanKorkeakoulututkinnonOsaamisalatArg,
+    },
+    alemmanKorkeakoulututkinnonOsaamisalat: {
+      osaamisalat: alemmanKorkeakoulututkinnonOsaamisalatArg,
+    },
+    kuvaus: {
+      kuvaus,
     },
   };
 };

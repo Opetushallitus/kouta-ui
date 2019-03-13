@@ -21,6 +21,7 @@ const CreateToteutusFormAsync = ({ koulutusOid, organisaatioOid, ...props }) => 
           <CreateToteutusForm
             koulutusKoodiUri={data.koulutusKoodiUri}
             organisaatioOid={organisaatioOid}
+            koulutustyyppi={data.koulutustyyppi}
             {...props}
           />
         ) : null

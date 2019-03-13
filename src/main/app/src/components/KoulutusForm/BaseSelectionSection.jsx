@@ -4,7 +4,7 @@ import { Field } from 'redux-form';
 import { formValues } from 'redux-form';
 
 import Button from '../Button';
-import Icon from '../Icon';
+import DropdownIcon from '../DropdownIcon';
 
 import {
   UncontrolledDropdown,
@@ -54,8 +54,7 @@ const renderBaseDropdownField = ({ input, onContinue, onCreateNew }) => {
       {({ ref, onToggle, visible }) => (
         <div ref={ref}>
           <DropdownButton onClick={onToggle} type="button">
-            Valitse pohja{' '}
-            <Icon type={visible ? 'arrow_drop_up' : 'arrow_drop_down'} />
+            Valitse pohja <DropdownIcon open={visible} />
           </DropdownButton>
         </div>
       )}
@@ -66,7 +65,7 @@ const renderBaseDropdownField = ({ input, onContinue, onCreateNew }) => {
 const nop = () => {};
 
 const renderSelectField = ({ options = [], input }) => {
-  return <Select {...input} options={options} onBlur={nop} />
+  return <Select {...input} options={options} onBlur={nop} />;
 };
 
 const getKoulutusOptions = koulutukset => {

@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { Field, formValues } from 'redux-form';
 import styled from 'styled-components';
 import get from 'lodash/get';
-import mapValues from 'lodash/mapValues';
 
 import Radio, { RadioGroup } from '../Radio';
 import Spacing from '../Spacing';
@@ -15,14 +14,10 @@ import OpetuskieliCheckboxGroup from './OpetuskieliCheckboxGroup';
 import OpetustapaCheckboxGroup from './OpetustapaCheckboxGroup';
 import Flex, { FlexItem } from '../Flex';
 import AlkamiskausiFields from './AlkamiskausiFields';
-import { getKoodisto } from '../../apiUtils';
-import {
-  isArray,
-  arrayToTranslationObject,
-  getFirstLanguageValue,
-} from '../../utils';
-import { useApiAsync } from '../useApiAsync';
 import Select from '../Select';
+import { KORKEAKOULUKOULUTUSTYYPIT } from '../../constants';
+import useKoodistoOptions from '../useKoodistoOptions';
+import { isArray } from '../../utils';
 
 const BorderHeading = styled(Typography).attrs({
   variant: 'h6',
@@ -31,27 +26,6 @@ const BorderHeading = styled(Typography).attrs({
 })`
   border-bottom: 1px solid ${({ theme }) => theme.palette.border};
 `;
-
-const getOsiot = async ({ httpClient, apiUrls }) => {
-  const osiot = await getKoodisto({
-    koodistoUri: 'koulutuksenjarjestamisenlisaosiot',
-    httpClient,
-    apiUrls,
-  });
-
-  return isArray(osiot)
-    ? osiot.map(({ metadata, koodiUri, versio }) => ({
-        koodiUri: `${koodiUri}#${versio}`,
-        nimi: mapValues(arrayToTranslationObject(metadata), ({ nimi }) => nimi),
-      }))
-    : [];
-};
-
-const getOsiotOptions = osiot =>
-  osiot.map(({ nimi, koodiUri }) => ({
-    value: koodiUri,
-    label: getFirstLanguageValue(nimi),
-  }));
 
 const noop = () => {};
 
@@ -67,8 +41,11 @@ const renderOpetuskieliField = ({ input }) => (
   <OpetuskieliCheckboxGroup {...input} />
 );
 
-const renderOpetustapaField = ({ input }) => (
-  <OpetustapaCheckboxGroup {...input} />
+const renderOpetustapaField = ({ input: { value, onChange } }) => (
+  <OpetustapaCheckboxGroup
+    value={value || []}
+    onChange={items => isArray(items) && items.length <= 2 && onChange(items)}
+  />
 );
 
 const renderRadioGroupField = ({ input, options }) => (
@@ -89,7 +66,7 @@ const renderSelectField = ({ input, ...props }) => (
   <Select {...input} {...props} onBlur={noop} />
 );
 
-const maksullisuusOptions = [
+const noOrYesOptions = [
   { value: 'ei', label: 'Ei' },
   { value: 'kylla', label: 'Kyllä' },
 ];
@@ -122,50 +99,110 @@ const OsiotFieldsBase = ({ osiot, language, osiotOptions }) => {
 
 const OsiotFields = formValues({ osiot: 'osiot' })(OsiotFieldsBase);
 
+const WithOnkoLukuvuosimaksua = formValues({
+  onkoLukuvuosimaksua: 'onkoLukuvuosimaksua',
+})(({ children, ...rest }) => children(rest));
+
+const WithOnkoStipendia = formValues({
+  onkoStipendia: 'onkoStipendia',
+})(({ children, ...rest }) => children(rest));
+
 const MaksullisuusFieldValue = formValues({
   maksullisuus: 'maksullisuus',
 })(({ maksullisuus, children }) => children({ maksullisuus }));
 
-const MaksuWrapper = styled.div`
+const ExtraFieldWrapper = styled.div`
   max-width: 250px;
   width: 100%;
-  display: flex;
-  align-items: center;
 `;
 
-const MaksuInputContainer = styled.div`
-  flex: 1;
-`;
-
-const MaksuCurrencyContainer = styled.div`
-  flex: 0;
-  padding-left: ${({ theme }) => theme.spacing.unit}px;
-`;
-
-const MaksuContainer = ({ language }) => (
-  <Spacing marginTop={1}>
-    <MaksuWrapper>
-      <MaksuInputContainer>
-        <Field
-          name={`maksumaara.${language}`}
-          type="number"
-          component={renderInputField}
-          placeholder="Maksun määrä"
-        />
-      </MaksuInputContainer>
-      <MaksuCurrencyContainer>
-        <Typography>euroa</Typography>
-      </MaksuCurrencyContainer>
-    </MaksuWrapper>
-  </Spacing>
+const ExtraField = ({ label = null, children = null }) => (
+  <ExtraFieldWrapper>
+    {children}
+    <Typography variant="secondary" as="div" marginTop={1}>
+      {label}
+    </Typography>
+  </ExtraFieldWrapper>
 );
 
-const JarjestamisTiedotContent = ({ language }) => {
-  const { data: osiot } = useApiAsync({ promiseFn: getOsiot });
+const LukuvuosimaksuFields = ({ language }) => (
+  <Flex>
+    <FlexItem grow={0} basis="30%">
+      <Field
+        name="onkoLukuvuosimaksua"
+        component={renderRadioGroupField}
+        options={noOrYesOptions}
+      />
+      <WithOnkoLukuvuosimaksua>
+        {({ onkoLukuvuosimaksua }) =>
+          onkoLukuvuosimaksua === 'kylla' ? (
+            <Spacing marginTop={1}>
+              <ExtraField label="Euroa">
+                <Field
+                  name={`lukuvuosimaksu.${language}`}
+                  component={renderInputField}
+                  placeholder="Maksun määrä"
+                />
+              </ExtraField>
+            </Spacing>
+          ) : null
+        }
+      </WithOnkoLukuvuosimaksua>
+    </FlexItem>
+    <FlexItem grow={1} paddingLeft={3}>
+      <Typography marginBottom={1} as="div">
+        Lisätietoa lukuvuosimaksusta
+      </Typography>
+      <Field
+        name={`lukuvuosimaksuKuvaus.${language}`}
+        component={renderTextareaField}
+      />
+    </FlexItem>
+  </Flex>
+);
 
-  const osiotOptions = useMemo(() => {
-    return getOsiotOptions(osiot || []);
-  }, [osiot]);
+const StipendiFields = ({ language }) => (
+  <Flex>
+    <FlexItem grow={0} basis="30%">
+      <Field
+        name="onkoStipendia"
+        component={renderRadioGroupField}
+        options={noOrYesOptions}
+      />
+      <WithOnkoStipendia>
+        {({ onkoStipendia }) =>
+          onkoStipendia === 'kylla' ? (
+            <Spacing marginTop={1}>
+              <ExtraField label="Euroa tai prosenttia">
+                <Field
+                  name={`stipendinMaara.${language}`}
+                  component={renderInputField}
+                  placeholder="Stipendin määrä"
+                />
+              </ExtraField>
+            </Spacing>
+          ) : null
+        }
+      </WithOnkoStipendia>
+    </FlexItem>
+    <FlexItem grow={1} paddingLeft={3}>
+      <Typography marginBottom={1} as="div">
+        Lisätietoa stipendin myöntämisestä
+      </Typography>
+      <Field
+        name={`stipendinKuvaus.${language}`}
+        component={renderTextareaField}
+      />
+    </FlexItem>
+  </Flex>
+);
+
+const JarjestamisTiedotContent = ({ language, koulutustyyppi }) => {
+  const { options: osiotOptions } = useKoodistoOptions({
+    koodisto: 'koulutuksenjarjestamisenlisaosiot',
+  });
+
+  const isKorkeakoulu = KORKEAKOULUKOULUTUSTYYPIT.includes(koulutustyyppi);
 
   return (
     <>
@@ -208,6 +245,9 @@ const JarjestamisTiedotContent = ({ language }) => {
         <Flex>
           <FlexItem grow={0} basis="30%">
             <Field name="opetustapa" component={renderOpetustapaField} />
+            <Typography variant="secondary" as="div" marginTop={1}>
+              Voit valita enintään kaksi opetustapaa
+            </Typography>
           </FlexItem>
           <FlexItem grow={1} paddingLeft={3}>
             <Typography marginBottom={1} as="div">
@@ -227,12 +267,20 @@ const JarjestamisTiedotContent = ({ language }) => {
             <Field
               name="maksullisuus"
               component={renderRadioGroupField}
-              options={maksullisuusOptions}
+              options={noOrYesOptions}
             />
             <MaksullisuusFieldValue>
               {({ maksullisuus }) =>
                 maksullisuus === 'kylla' ? (
-                  <MaksuContainer language={language} />
+                  <Spacing marginTop={1}>
+                    <ExtraField label="Euroa">
+                      <Field
+                        name={`maksumaara.${language}`}
+                        component={renderInputField}
+                        placeholder="Maksun määrä"
+                      />
+                    </ExtraField>
+                  </Spacing>
                 ) : null
               }
             </MaksullisuusFieldValue>
@@ -248,6 +296,18 @@ const JarjestamisTiedotContent = ({ language }) => {
           </FlexItem>
         </Flex>
       </Spacing>
+      {isKorkeakoulu ? (
+        <Spacing marginBottom={2}>
+          <BorderHeading>Onko lukuvuosimaksua?</BorderHeading>
+          <LukuvuosimaksuFields language={language} />
+        </Spacing>
+      ) : null}
+      {isKorkeakoulu ? (
+        <Spacing marginBottom={2}>
+          <BorderHeading>Onko stipendit käytössä?</BorderHeading>
+          <StipendiFields language={language} />
+        </Spacing>
+      ) : null}
       <Spacing marginBottom={2}>
         <BorderHeading>Koulutuksen alkamiskausi</BorderHeading>
         <Flex>
@@ -279,11 +339,14 @@ const JarjestamisTiedotContent = ({ language }) => {
   );
 };
 
-const JarjestamisTiedotSection = ({ languages = [] }) => {
+const JarjestamisTiedotSection = ({ languages = [], koulutustyyppi }) => {
   return (
     <LanguageSelector languages={languages} defaultValue="fi">
       {({ value: activeLanguage }) => (
-        <JarjestamisTiedotContent language={activeLanguage} />
+        <JarjestamisTiedotContent
+          language={activeLanguage}
+          koulutustyyppi={koulutustyyppi}
+        />
       )}
     </LanguageSelector>
   );

@@ -2,62 +2,41 @@ import { useMemo } from 'react';
 import mapValues from 'lodash/mapValues';
 import sortBy from 'lodash/sortBy';
 
-import useApiAsync from '../useApiAsync';
 import {
   isArray,
   arrayToTranslationObject,
   getFirstLanguageValue,
 } from '../../utils';
 
-import { getKoodisto } from '../../apiUtils';
+import useKoodisto from '../useKoodisto';
 
-const getKoodistoNimet = async ({
-  httpClient,
-  apiUrls,
-  koodistoUri,
-  koodistoVersio,
-}) => {
-  const osiot = await getKoodisto({
-    koodistoUri,
-    koodistoVersio,
-    httpClient,
-    apiUrls,
-  });
-
-  return isArray(osiot)
-    ? osiot.map(({ metadata, koodiUri, versio }) => ({
+const getOptions = ({ koodisto, language, sort = true }) => {
+  const nimet = isArray(koodisto)
+    ? koodisto.map(({ metadata, koodiUri, versio }) => ({
         koodiUri: `${koodiUri}#${versio}`,
         nimi: mapValues(arrayToTranslationObject(metadata), ({ nimi }) => nimi),
       }))
     : [];
-};
 
-const getOptions = ({ koodisto, language }) =>
-  sortBy(
-    koodisto.map(({ nimi, koodiUri }) => ({
-      value: koodiUri,
-      label: getFirstLanguageValue(nimi, language),
-    })),
-    ({ label }) => label,
-  );
+  const options = nimet.map(({ nimi, koodiUri }) => ({
+    value: koodiUri,
+    label: getFirstLanguageValue(nimi, language),
+  }));
+
+  return sort ? sortBy(options, ({ value }) => value) : options;
+};
 
 export const useKoodistoOptions = ({
   koodisto,
-  versio = '',
+  versio,
   language = 'fi',
+  sort = true,
 }) => {
-  const watch = JSON.stringify([koodisto, versio]);
-
-  const { data, ...rest } = useApiAsync({
-    promiseFn: getKoodistoNimet,
-    koodistoUri: koodisto,
-    koodistoVersio: versio,
-    watch,
-  });
+  const { data, ...rest } = useKoodisto({ koodisto, versio });
 
   const options = useMemo(
     () => {
-      return data ? getOptions({ koodisto: data, language }) : [];
+      return data ? getOptions({ koodisto: data, language, sort }) : [];
     },
     [data, language],
   );

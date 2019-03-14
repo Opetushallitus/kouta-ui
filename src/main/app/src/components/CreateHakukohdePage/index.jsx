@@ -7,6 +7,7 @@ import {
   getOrganisaatioByOid,
   getKoutaToteutusByOid,
   getKoutaHakuByOid,
+  getKoulutustyyppiByKoulutusOid,
 } from '../../apiUtils';
 import Flex, { FlexItem } from '../Flex';
 import { getFirstLanguageValue } from '../../utils';
@@ -16,6 +17,7 @@ import CreateHakukohdeSteps from './CreateHakukohdeSteps';
 import CreateHakukohdeForm from './CreateHakukohdeForm';
 import CreateHakukohdeFooter from './CreateHakukohdeFooter';
 import Typography from '../Typography';
+import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
 
 const getHakukohdeData = async ({
   organisaatioOid,
@@ -30,10 +32,19 @@ const getHakukohdeData = async ({
     getKoutaHakuByOid({ oid: hakuOid, httpClient, apiUrls }),
   ]);
 
+  const koulutustyyppi = await (toteutus && toteutus.koulutusOid
+    ? getKoulutustyyppiByKoulutusOid({
+        oid: toteutus.koulutusOid,
+        httpClient,
+        apiUrls,
+      })
+    : null);
+
   return {
     organisaatio,
     toteutus,
     haku,
+    koulutustyyppi,
   };
 };
 
@@ -72,10 +83,12 @@ const CreateHakukohdeFormAsync = ({
                 </Typography>
               </FlexItem>
               <FlexItem grow={0}>
-              <Typography variant="h6" marginBottom={1}>
+                <Typography variant="h6" marginBottom={1}>
                   Toteutus
                 </Typography>
-                <Typography>{getFirstLanguageValue(get(data, 'toteutus.nimi'))}</Typography>
+                <Typography>
+                  {getFirstLanguageValue(get(data, 'toteutus.nimi'))}
+                </Typography>
               </FlexItem>
             </Flex>
             <CreateHakukohdeForm
@@ -83,6 +96,10 @@ const CreateHakukohdeFormAsync = ({
               organisaatioOid={organisaatioOid}
               haku={data.haku}
               toteutus={data.toteutus}
+              koulutustyyppi={
+                data.koulutustyyppi ||
+                KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS
+              }
             />
           </>
         ) : null

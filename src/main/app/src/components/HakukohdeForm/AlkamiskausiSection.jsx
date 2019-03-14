@@ -1,95 +1,41 @@
 import React from 'react';
 import { Field } from 'redux-form';
-import getYear from 'date-fns/get_year';
-import mapValues from 'lodash/mapValues';
 
 import Typography from '../Typography';
 import Spacing from '../Spacing';
-import Radio, { RadioGroup } from '../Radio';
-import NativeSelect, { Option } from '../NativeSelect';
-import ApiAsync from '../ApiAsync';
-import { getKoodisto } from '../../apiUtils';
-import {
-  isArray,
-  getFirstLanguageValue,
-  arrayToTranslationObject,
-} from '../../utils';
-
-const getHakukaudet = async ({ httpClient, apiUrls }) => {
-  const hakukaudet = await getKoodisto({
-    koodistoUri: 'kausi',
-    httpClient,
-    apiUrls,
-  });
-
-  return isArray(hakukaudet)
-    ? hakukaudet.map(({ metadata, koodiUri, versio }) => ({
-        koodiUri: `${koodiUri}#${versio}`,
-        nimi: mapValues(arrayToTranslationObject(metadata), ({ nimi }) => nimi),
-      }))
-    : [];
-};
+import { RadioGroup } from '../Radio';
+import useKoodistoOptions from '../useKoodistoOptions';
+import YearSelect from '../YearSelect';
 
 const renderRadioGroupField = ({ input, options }) => (
-  <RadioGroup {...input}>
-    {options.map(({ value, label }) => (
-      <Radio value={value} key={value}>
-        {label}
-      </Radio>
-    ))}
-  </RadioGroup>
+  <RadioGroup {...input} options={options} />
 );
 
-const currentYear = getYear(new Date());
-
-const yearOptions = [...new Array(10)].map((value, index) => ({
-  value: `${currentYear + index}`,
-  label: `${currentYear + index}`,
-}));
-
-const renderYearField = ({ input }) => (
-  <NativeSelect {...input}>
-    <Option value="">Valitse vuosi</Option>
-    {yearOptions.map(({ value, label }) => (
-      <Option value={value} key={value}>
-        {label}
-      </Option>
-    ))}
-  </NativeSelect>
-);
-
-const getHakukausiOptions = hakukaudet =>
-  hakukaudet.map(({ koodiUri, nimi }) => ({
-    value: koodiUri,
-    label: getFirstLanguageValue(nimi),
-  }));
+const renderYearField = ({ input }) => <YearSelect {...input} />;
 
 const AlkamiskausiSection = () => {
+  const { options } = useKoodistoOptions({ koodisto: 'kausi' });
+
   return (
-    <ApiAsync promiseFn={getHakukaudet}>
-      {({ data }) => (
-        <>
-          <Spacing marginBottom={2}>
-            <Typography variant="h6" marginBottom={1}>
-              Kausi
-            </Typography>
-            {isArray(data) ? (
-              <Field
-                name="kausi"
-                component={renderRadioGroupField}
-                options={getHakukausiOptions(data)}
-              />
-            ) : null}
-          </Spacing>
-          <Spacing>
-            <Typography variant="h6" marginBottom={1}>
-              Vuosi
-            </Typography>
-            <Field name="vuosi" component={renderYearField} />
-          </Spacing>
-        </>
-      )}
-    </ApiAsync>
+    <>
+      <Spacing marginBottom={2}>
+        <Typography variant="h6" marginBottom={1}>
+          Kausi
+        </Typography>
+
+        <Field
+          name="kausi"
+          component={renderRadioGroupField}
+          options={options}
+        />
+      </Spacing>
+      <Spacing>
+        <Typography variant="h6" marginBottom={1}>
+          Vuosi
+        </Typography>
+        <Field name="vuosi" component={renderYearField} />
+      </Spacing>
+    </>
   );
 };
 

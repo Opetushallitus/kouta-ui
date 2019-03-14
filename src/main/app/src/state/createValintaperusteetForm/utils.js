@@ -2,16 +2,22 @@ import get from 'lodash/get';
 import produce from 'immer';
 import toPairs from 'lodash/toPairs';
 import pick from 'lodash/pick';
+import mapValues from 'lodash/mapValues';
 
-import { isObject } from '../../utils';
+import { isObject, isArray } from '../../utils';
 import { VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI } from '../../constants';
 
-const formatTaulukko = ({ taulukko, kielivalinta }) => {
-  if (!get(taulukko, 'rows')) {
+import {
+  serialize as serializeEditor,
+  parse as parseEditor,
+} from '../../components/Editor';
+
+const serializeTable = ({ table, kielivalinta }) => {
+  if (!get(table, 'rows')) {
     return { rows: [] };
   }
 
-  return produce(taulukko, draft => {
+  return produce(table, draft => {
     (draft.rows || []).forEach((row, rowIndex) => {
       if (isObject(row)) {
         row.index = rowIndex;
@@ -27,6 +33,32 @@ const formatTaulukko = ({ taulukko, kielivalinta }) => {
         });
       }
     });
+  });
+};
+
+const serializeSisalto = ({ sisalto, kielivalinta = [] }) => {
+  if (!isArray(sisalto)) {
+    return [];
+  }
+
+  return sisalto.map(({ type, data }) => {
+    let serializedData = {};
+
+    if (type === 'text') {
+      serializedData = pick(
+        isObject(data) ? mapValues(data, serializeEditor) : {},
+        kielivalinta,
+      );
+    }
+
+    if (type === 'table') {
+      serializedData = serializeTable({ table: data, kielivalinta });
+    }
+
+    return {
+      type,
+      data: serializedData,
+    };
   });
 };
 
@@ -46,19 +78,18 @@ export const getValintaperusteetByValues = values => {
     ({
       tapa,
       kuvaus,
-      taulukot,
+      nimi,
       kynnysehto,
       enimmaispistemaara,
       vahimmaispistemaara,
+      sisalto,
     }) => ({
-      kuvaus: pick(kuvaus, kielivalinta),
+      kuvaus: pick(kuvaus || {}, kielivalinta),
+      nimi: pick(nimi || {}, kielivalinta),
       valintapaKoodiUri: get(tapa, 'value'),
-      taulukot: (taulukot || []).map(({ taulukko, otsikko }) => ({
-        nimi: pick(otsikko, kielivalinta),
-        ...formatTaulukko({ taulukko, kielivalinta }),
-      })),
+      sisalto: serializeSisalto({ sisalto, kielivalinta }),
       kaytaMuuntotaulukkoa: false,
-      kynnysehto: pick(kynnysehto, kielivalinta),
+      kynnysehto: pick(kynnysehto || {}, kielivalinta),
       enimmaispisteet: enimmaispistemaara,
       vahimmaispiteet: vahimmaispistemaara,
     }),
@@ -98,14 +129,24 @@ export const getValintaperusteetByValues = values => {
     };
   });
 
+  const kuvaus = pick(
+    mapValues(get(values, 'loppukuvaus.kuvaus') || {}, serializeEditor),
+    kielivalinta,
+  );
+
   return {
     kielivalinta,
     hakutapaKoodiUri,
     kohdejoukkoKoodiUri,
     nimi,
+    kuvaus,
     metadata: {
       valintavat,
       kielitaitovaatimukset,
     },
   };
+};
+
+export const getValuesByValintaperusteet = valintaperusteet => {
+  return {};
 };

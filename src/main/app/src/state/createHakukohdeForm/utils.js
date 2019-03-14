@@ -10,6 +10,10 @@ import {
 
 const DATE_FORMAT = 'DD.MM.YYYY HH:mm';
 
+const getAsNumberOrNull = value => {
+  return isNumeric(value) ? parseInt(value) : null;
+};
+
 const getDateTimeValues = dateString => {
   if (!dateString) {
     return { date: '', time: '' };
@@ -42,9 +46,11 @@ const getKoutaDateStringByDateTime = ({ date = '', time = '' }) => {
 
 export const getHakukohdeByValues = values => {
   const alkamiskausiKoodiUri = get(values, 'alkamiskausi.kausi') || null;
-  const alkamisvuosi = parseInt(get(values, 'alkamiskausi.vuosi'));
+  const alkamisvuosi = getAsNumberOrNull(
+    get(values, 'alkamiskausi.vuosi.value'),
+  );
   const kielivalinta = get(values, 'kieliversiot.languages') || [];
-  const aloituspaikat = parseInt(
+  const aloituspaikat = getAsNumberOrNull(
     get(values, 'aloituspaikat.aloituspaikkamaara'),
   );
   const kaytetaanHaunAikataulua = !get(values, 'hakuajat.eriHakuaika');
@@ -177,6 +183,10 @@ export const getHakukohdeByValues = values => {
   const valintaperuste =
     get(values, 'valintaperusteenKuvaus.valintaperuste.value') || null;
 
+  const ensikertalaisenAloituspaikat = getAsNumberOrNull(
+    get(values, 'aloituspaikat.ensikertalaismaara'),
+  );
+
   return {
     alkamiskausiKoodiUri,
     kaytetaanHaunAikataulua,
@@ -194,6 +204,7 @@ export const getHakukohdeByValues = values => {
     valintakokeet,
     pohjakoulutusvaatimusKoodiUri,
     valintaperuste,
+    ensikertalaisenAloituspaikat,
   };
 };
 
@@ -215,6 +226,7 @@ export const getValuesByHakukohde = hakukohde => {
     valintakokeet = [],
     pohjakoulutusvaatimusKoodiUri = '',
     valintaperuste = '',
+    ensikertalaisenAloituspaikat = '',
   } = hakukohde;
 
   const valintakoeTyypit = (valintakokeet || []).map(({ tyyppi }) => tyyppi);
@@ -273,7 +285,12 @@ export const getValuesByHakukohde = hakukohde => {
       languages: kielivalinta,
     },
     aloituspaikat: {
-      aloituspaikkamaara: aloituspaikat.toString(),
+      aloituspaikkamaara: isNumeric(aloituspaikat)
+        ? aloituspaikat.toString()
+        : '',
+      ensikertalaismaara: isNumeric(ensikertalaisenAloituspaikat)
+        ? ensikertalaisenAloituspaikat.toString()
+        : '',
     },
     hakuajat: {
       eriHakuaika: !kaytetaanHaunAikataulua,

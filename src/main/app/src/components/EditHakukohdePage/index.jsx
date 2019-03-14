@@ -13,11 +13,13 @@ import {
   getKoutaToteutusByOid,
   getKoutaHakuByOid,
   getOrganisaatioByOid,
+  getKoulutustyyppiByKoulutusOid,
 } from '../../apiUtils';
 import { getFirstLanguageValue } from '../../utils';
 import Flex, { FlexItem } from '../Flex';
 import Typography from '../Typography';
 import Spin from '../Spin';
+import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
 
 const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
   const hakukohde = await getKoutaHakukohdeByOid({
@@ -34,11 +36,20 @@ const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
     getKoutaHakuByOid({ httpClient, apiUrls, oid: hakuOid }),
   ]);
 
+  const koulutustyyppi = await (toteutus && toteutus.koulutusOid
+    ? getKoulutustyyppiByKoulutusOid({
+        oid: toteutus.koulutusOid,
+        httpClient,
+        apiUrls,
+      })
+    : null);
+
   return {
     hakukohde,
     organisaatio,
     toteutus,
     haku,
+    koulutustyyppi,
   };
 };
 
@@ -55,7 +66,7 @@ const EditHakukohdePage = props => {
   const watch = JSON.stringify([oid, hakukohdeUpdatedAt]);
 
   const {
-    data: { hakukohde, organisaatio, toteutus, haku } = {},
+    data: { hakukohde, organisaatio, toteutus, haku, koulutustyyppi } = {},
   } = useApiAsync({
     promiseFn: getData,
     oid,
@@ -103,9 +114,14 @@ const EditHakukohdePage = props => {
             haku={haku}
             toteutus={toteutus}
             hakukohde={hakukohde}
+            koulutustyyppi={
+              koulutustyyppi || KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS
+            }
           />
         </>
-      ) : <Spin center />}
+      ) : (
+        <Spin center />
+      )}
     </FormPage>
   );
 };

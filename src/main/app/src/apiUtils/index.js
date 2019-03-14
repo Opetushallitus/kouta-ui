@@ -1,5 +1,5 @@
 import { KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP } from '../constants';
-import { isArray, isString, isObject, memoizePromise } from '../utils';
+import { isArray, isString, isObject, memoizePromise, memoize } from '../utils';
 import keyBy from 'lodash/keyBy';
 import mapValues from 'lodash/mapValues';
 import get from 'lodash/get';
@@ -746,4 +746,20 @@ export const getAndUpdateKoutaToteutus = async ({
     apiUrls,
     toteutus: { ...toteutus, ...update },
   });
+};
+
+const memoizedGetKoulutustyyppiByKoulutusOid = memoizePromise(
+  async (oid, httpClient, apiUrls) => {
+    const koulutus = await getKoutaKoulutusByOid({ oid, httpClient, apiUrls });
+
+    return get(koulutus, 'koulutustyyppi') || null;
+  },
+);
+
+export const getKoulutustyyppiByKoulutusOid = ({
+  oid,
+  httpClient,
+  apiUrls,
+}) => {
+  return memoizedGetKoulutustyyppiByKoulutusOid(oid, httpClient, apiUrls);
 };

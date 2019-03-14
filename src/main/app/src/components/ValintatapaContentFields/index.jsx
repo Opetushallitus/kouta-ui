@@ -29,6 +29,7 @@ const MoveButton = SortableHandle(props => (
 
 const InputContainer = styled(FlexItem)`
   overflow-x: auto;
+  overflow-y: hidden;
 `;
 
 const AddContentDropdown = ({ onAdd }) => {
@@ -61,15 +62,15 @@ const AddContentDropdown = ({ onAdd }) => {
   );
 };
 
-const renderTableInputField = ({ input }) => <TableInput {...input} />;
+const renderTableInputField = ({ input, language }) => <TableInput {...input} language={language} />;
 
 const renderEditorField = ({ input }) => <Editor {...input} />;
 
-const ContentField = ({ type, name }) => {
+const ContentField = ({ type, name, language }) => {
   if (type === 'table') {
-    return <Field name={`${name}.data`} component={renderTableInputField} />;
+    return <Field name={`${name}.data`} component={renderTableInputField} language={language} />;
   } else if (type === 'text') {
-    return <Field name={`${name}.data`} component={renderEditorField} />;
+    return <Field name={`${name}.data.${language}`} component={renderEditorField} />;
   }
 
   return null;
@@ -77,7 +78,7 @@ const ContentField = ({ type, name }) => {
 
 const FieldSortableElement = SortableElement(props => <div {...props} />);
 
-const FieldsSortableContainer = SortableContainer(({ fields }) => {
+const FieldsSortableContainer = SortableContainer(({ fields, language }) => {
   return (
     <div>
       {fields.map((content, index) => {
@@ -86,7 +87,7 @@ const FieldsSortableContainer = SortableContainer(({ fields }) => {
           <FieldSortableElement key={index} index={index}>
             <Flex marginBottom={index < fields.length - 1 ? 2 : 0}>
               <InputContainer grow={1}>
-                <ContentField {...contentValue} name={content} />
+                <ContentField {...contentValue} name={content} language={language} />
               </InputContainer>
               <FlexItem grow={0} paddingLeft={2}>
                 <Spacing marginBottom={2}>
@@ -137,8 +138,8 @@ const renderFields = props => {
   );
 };
 
-export const ValintatapaContentFields = props => (
-  <FieldArray {...props} component={renderFields} />
+export const ValintatapaContentFields = ({ language = 'fi', ...props }) => (
+  <FieldArray {...props} component={renderFields} language={language} />
 );
 
 export default ValintatapaContentFields;

@@ -1,8 +1,10 @@
 import { getFormValues } from 'redux-form';
+import produce from 'immer';
 
 import { JULKAISUTILA } from '../../constants';
 import { createTemporaryToast } from '../toaster';
 import { getValintaperusteetByValues } from './utils';
+import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
 
 const getValintaperusteetFormValues = getFormValues(
   'createValintaperusteetForm',
@@ -27,11 +29,10 @@ export const saveValintaperusteet = valintaperusteet => (
   );
 };
 
-export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
-  dispatch,
-  getState,
-  { history },
-) => {
+export const submit = ({
+  tila = JULKAISUTILA.TALLENNETTU,
+  koulutustyyppi = KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS,
+} = {}) => async (dispatch, getState, { history }) => {
   const state = getState();
   const values = getValintaperusteetFormValues(state);
 
@@ -43,12 +44,17 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
 
   const { organisaatioOid } = getOidsFromPathname(history.location.pathname);
 
-  const valintaperusteet = {
-    tila,
-    muokkaaja,
-    organisaatioOid,
-    ...valintaperusteetFormData,
-  };
+  const valintaperusteet = produce(
+    {
+      tila,
+      muokkaaja,
+      organisaatioOid,
+      ...valintaperusteetFormData,
+    },
+    draft => {
+      draft.metadata.tyyppi = koulutustyyppi;
+    },
+  );
 
   try {
     await dispatch(saveValintaperusteet(valintaperusteet));

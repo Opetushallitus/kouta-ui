@@ -12,6 +12,10 @@ import {
   parse as parseEditor,
 } from '../../components/Editor';
 
+const kielitaitoMuuOsoitusKoodiUriRegExp = new RegExp(
+  `^${VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI}`,
+);
+
 const serializeTable = ({ table, kielivalinta }) => {
   if (!get(table, 'rows')) {
     return { rows: [] };
@@ -113,7 +117,6 @@ export const getValintaperusteetByValues = values => {
     }));
 
     return {
-      kielivalinta,
       kieliKoodiUri: get(kieli, 'value'),
       vaatimukset,
       kielitaidonVoiOsoittaa: [
@@ -134,6 +137,10 @@ export const getValintaperusteetByValues = values => {
     kielivalinta,
   );
 
+  const osaamistaustaKoodiUrit = (
+    get(values, 'osaamistausta.osaamistausta') || []
+  ).map(({ value }) => value);
+
   return {
     kielivalinta,
     hakutapaKoodiUri,
@@ -143,10 +150,96 @@ export const getValintaperusteetByValues = values => {
     metadata: {
       valintavat,
       kielitaitovaatimukset,
+      osaamistaustaKoodiUrit,
     },
   };
 };
 
 export const getValuesByValintaperusteet = valintaperusteet => {
-  return {};
+  const {
+    hakutapaKoodiUri = null,
+    kielivalinta = [],
+    kohdejoukkoKoodiUri = null,
+    nimi = {},
+    kuvaus = {},
+    metadata = {},
+  } = valintaperusteet;
+
+  const {
+    osaamistaustaKoodiUrit = [],
+    kielitaitovaatimukset: kielitaitovaatimuksetArg = [],
+  } = metadata;
+
+  const kielitaitovaatimukset = (kielitaitovaatimuksetArg || []).map(
+    ({
+      kieliKoodiUri = null,
+      vaatimukset = [],
+      kielitaidonVoiOsoittaa = [],
+    }) => {
+      return {
+        kieli: kieliKoodiUri ? { value: kieliKoodiUri } : null,
+        ...(vaatimukset || []).reduce(
+          (
+            acc,
+            { kielitaitovaatimusKoodiUri, kielitaitovaatimusKuvaukset },
+          ) => {
+            if (kielitaitovaatimusKoodiUri) {
+              acc.tyyppi[kielitaitovaatimusKoodiUri] = true;
+              acc.kuvaukset[kielitaitovaatimusKoodiUri] = (
+                kielitaitovaatimusKuvaukset || []
+              ).map(
+                ({
+                  kielitaitovaatimusTaso,
+                  kielitaitovaatimusKuvausKoodiUri,
+                }) => ({
+                  taso: kielitaitovaatimusTaso || '',
+                  kuvaus: kielitaitovaatimusKuvausKoodiUri
+                    ? { value: kielitaitovaatimusKuvausKoodiUri }
+                    : null,
+                }),
+              );
+            }
+
+            return acc;
+          },
+          { kuvaukset: {}, tyyppi: {} },
+        ),
+        osoitustavat: kielitaidonVoiOsoittaa
+          .filter(
+            ({ kielitaitoKoodiUri }) =>
+              !kielitaitoMuuOsoitusKoodiUriRegExp.test(kielitaitoKoodiUri),
+          )
+          .map(({ kielitaitoKoodiUri }) => kielitaitoKoodiUri),
+        muutOsoitustavat: kielitaidonVoiOsoittaa
+          .filter(({ kielitaitoKoodiUri }) =>
+            kielitaitoMuuOsoitusKoodiUriRegExp.test(kielitaitoKoodiUri),
+          )
+          .map(({ lisatieto = {} }) => ({ kuvaus: lisatieto })),
+      };
+    },
+  );
+
+  return {
+    kieliversiot: {
+      languages: kielivalinta,
+    },
+    hakutavanRajaus: {
+      hakutapa: hakutapaKoodiUri,
+    },
+    kohdejoukonRajaus: {
+      kohdejoukko: kohdejoukkoKoodiUri ? { value: kohdejoukkoKoodiUri } : null,
+    },
+    nimi: {
+      nimi,
+    },
+    loppukuvaus: {
+      kuvaus: mapValues(kuvaus || {}, parseEditor),
+    },
+    osaamistausta: {
+      osaamistausta: (osaamistaustaKoodiUrit || []).map(value => ({ value })),
+    },
+    kielitaitovaatimukset: {
+      kielet: kielitaitovaatimukset,
+    },
+  };
 };

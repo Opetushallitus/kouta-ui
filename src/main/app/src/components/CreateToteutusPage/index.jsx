@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import queryString from 'query-string';
 
-import ApiAsync from '../ApiAsync';
 import FormPage, { OrganisaatioInfo } from '../FormPage';
 import { getKoutaKoulutusByOid } from '../../apiUtils';
 
@@ -9,35 +8,16 @@ import CreateToteutusHeader from './CreateToteutusHeader';
 import CreateToteutusSteps from './CreateToteutusSteps';
 import CreateToteutusForm from './CreateToteutusForm';
 import CreateToteutusFooter from './CreateToteutusFooter';
-
-const getKoulutus = args => getKoutaKoulutusByOid(args);
-
-const CreateToteutusFormAsync = ({ koulutusOid, organisaatioOid, ...props }) => (
-  <>
-    <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-    <ApiAsync promiseFn={getKoulutus} oid={koulutusOid} watch={koulutusOid}>
-      {({ data }) =>
-        data ? (
-          <CreateToteutusForm
-            koulutusKoodiUri={data.koulutusKoodiUri}
-            organisaatioOid={organisaatioOid}
-            koulutustyyppi={data.koulutustyyppi}
-            {...props}
-          />
-        ) : null
-      }
-    </ApiAsync>
-  </>
-);
+import useApiAsync from '../useApiAsync';
+import Spin from '../Spin';
+import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
 
 const CreateToteutusPage = props => {
   const {
     match: {
       params: { organisaatioOid, koulutusOid },
     },
-    location: {
-      search,
-    },
+    location: { search },
     history,
   } = props;
 
@@ -47,18 +27,37 @@ const CreateToteutusPage = props => {
     history.replace({ search: '' });
   }, [history]);
 
+  const { data } = useApiAsync({
+    promiseFn: getKoutaKoulutusByOid,
+    oid: koulutusOid,
+    watch: koulutusOid,
+  });
+
+  const koulutustyyppi =
+    data && data.koulutustyyppi
+      ? data.koulutustyyppi
+      : KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS;
+
   return (
     <FormPage
       header={<CreateToteutusHeader />}
       steps={<CreateToteutusSteps />}
-      footer={<CreateToteutusFooter />}
+      footer={
+        data ? <CreateToteutusFooter koulutustyyppi={koulutustyyppi} /> : null
+      }
     >
-      <CreateToteutusFormAsync
-        koulutusOid={koulutusOid}
-        organisaatioOid={organisaatioOid}
-        kopioToteutusOid={kopioToteutusOid}
-        onCreateNew={onCreateNew}
-      />
+      <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+      {data ? (
+        <CreateToteutusForm
+          koulutusKoodiUri={data.koulutusKoodiUri}
+          organisaatioOid={organisaatioOid}
+          koulutustyyppi={koulutustyyppi}
+          kopioToteutusOid={kopioToteutusOid}
+          onCreateNew={onCreateNew}
+        />
+      ) : (
+        <Spin center />
+      )}
     </FormPage>
   );
 };

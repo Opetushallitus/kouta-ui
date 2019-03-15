@@ -1,5 +1,5 @@
 import { KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP } from '../constants';
-import { isArray, isString, isObject, memoizePromise, memoize } from '../utils';
+import { isArray, isString, isObject, memoizePromise } from '../utils';
 import keyBy from 'lodash/keyBy';
 import mapValues from 'lodash/mapValues';
 import get from 'lodash/get';

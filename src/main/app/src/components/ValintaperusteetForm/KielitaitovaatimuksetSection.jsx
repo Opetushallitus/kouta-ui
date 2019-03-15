@@ -1,6 +1,5 @@
 import React from 'react';
 import { Field, FieldArray } from 'redux-form';
-import get from 'lodash/get';
 
 import Typography from '../Typography';
 import Input from '../Input';
@@ -9,49 +8,22 @@ import LanguageSelect from '../LanguageSelect';
 import Spacing from '../Spacing';
 import Divider from '../Divider';
 import Button from '../Button';
-import {
-  VALINTAPERUSTEET_KIELITAITO_OPTIONS,
-  VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI,
-  VALINTAPERUSTEET_KIELITAITO_KUVAUS_OPTIONS,
-} from '../../constants';
+import { VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI } from '../../constants';
 import Select from '../Select';
 import Flex, { FlexItem } from '../Flex';
 import CheckboxGroup from '../CheckboxGroup';
 import Checkbox from '../Checkbox';
-import { getKoodisto } from '../../apiUtils';
-import { getKoodistoNimiAndKoodiUri, getFirstLanguageValue } from '../../utils';
-import ApiAsync from '../ApiAsync';
-
-const getKielitaitoKoodistot = async ({ apiUrls, httpClient }) => {
-  const [osoittaminen] = await Promise.all([
-    getKoodisto({
-      apiUrls,
-      httpClient,
-      koodistoUri: 'kielitaidonosoittaminen',
-    }),
-  ]);
-
-  return {
-    osoittaminen: getKoodistoNimiAndKoodiUri(osoittaminen),
-  };
-};
-
-const getKoodistoOptions = koodisto =>
-  koodisto.map(({ nimi, koodiUri }) => ({
-    value: koodiUri,
-    label: getFirstLanguageValue(nimi),
-  }));
-
-const nop = () => {};
+import { noop } from '../../utils';
+import useKoodistoOptions from '../useKoodistoOptions';
 
 const renderInputField = ({ input }) => <Input {...input} />;
 
 const renderSelectField = ({ input, options, isMulti = false }) => (
-  <Select {...input} options={options} onBlur={nop} isMulti={isMulti} />
+  <Select {...input} options={options} onBlur={noop} isMulti={isMulti} />
 );
 
 const renderLanguageSelectField = ({ input }) => (
-  <LanguageSelect {...input} onBlur={nop} />
+  <LanguageSelect {...input} onBlur={noop} />
 );
 
 const renderCheckboxGroupField = ({ input, options }) => (
@@ -264,32 +236,36 @@ const renderMuutOsoitustavatField = ({ fields, language }) => {
 };
 
 const KielitaitovaatimuksetSection = ({ languages }) => {
+  const { options: fullOsoitusOptions } = useKoodistoOptions({
+    koodisto: 'kielitaidonosoittaminen',
+  });
+
+  const { options: kielitaitoOptions } = useKoodistoOptions({
+    koodisto: 'kielitaitovaatimustyypit',
+  });
+
+  const { options: kuvausOptions } = useKoodistoOptions({
+    koodisto: 'kielitaitovaatimustyypitkuvaus',
+  });
+
+  const osoitusOptions = fullOsoitusOptions.filter(
+    ({ value }) =>
+      !new RegExp(`^${VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI}`).test(
+        value,
+      ),
+  );
+
   return (
     <LanguageSelector languages={languages} defaultValue="fi">
       {({ value: activeLanguage }) => (
-        <ApiAsync promiseFn={getKielitaitoKoodistot}>
-          {({ data }) => {
-            const osoitusOptions = getKoodistoOptions(
-              get(data, 'osoittaminen') || [],
-            ).filter(
-              ({ value }) =>
-                !new RegExp(
-                  `^${VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI}`,
-                ).test(value),
-            );
-
-            return (
-              <FieldArray
-                name="kielet"
-                component={renderVaatimuksetField}
-                kielitaitoOptions={VALINTAPERUSTEET_KIELITAITO_OPTIONS}
-                kuvausOptions={VALINTAPERUSTEET_KIELITAITO_KUVAUS_OPTIONS}
-                osoitusOptions={osoitusOptions}
-                language={activeLanguage}
-              />
-            );
-          }}
-        </ApiAsync>
+        <FieldArray
+          name="kielet"
+          component={renderVaatimuksetField}
+          kielitaitoOptions={kielitaitoOptions}
+          kuvausOptions={kuvausOptions}
+          osoitusOptions={osoitusOptions}
+          language={activeLanguage}
+        />
       )}
     </LanguageSelector>
   );

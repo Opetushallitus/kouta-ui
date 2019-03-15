@@ -47,28 +47,12 @@ export default connect(
   state => ({
     valid: hakukohdeFormIsValid(state),
   }),
-  (
-    dispatch,
-    {
-      hakukohde: {
-        oid: hakukohdeOid,
-        organisaatioOid,
-        tila,
-        lastModified,
-        hakuOid,
-        toteutusOid,
-      },
-    },
-  ) => ({
+  (dispatch, { hakukohde }) => ({
     onSave: ({ tila: tilaArg } = {}) =>
       dispatch(
         submit({
-          hakukohdeOid,
-          tila: tilaArg || tila,
-          organisaatioOid,
-          lastModified,
-          hakuOid,
-          toteutusOid,
+          hakukohde,
+          tila: tilaArg,
         }),
       ),
   }),

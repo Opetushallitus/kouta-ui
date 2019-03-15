@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import ReactSelect from 'react-select';
 import ReactCreatable from 'react-select/lib/Creatable';
 import ReactAsyncCreatableSelect from 'react-select/lib/AsyncCreatable';
@@ -8,7 +8,7 @@ import { setLightness } from 'polished';
 import memoize from 'memoizee';
 import get from 'lodash/get';
 
-import { isArray, isObject } from '../../utils';
+import { isArray, isObject, isString } from '../../utils';
 
 const getStyles = memoize(theme => ({
   container: provided => ({
@@ -71,8 +71,12 @@ const getOptionLabelByValue = options => {
   }, {});
 };
 
-const getValue = memoize((value, options) => {
+const getValue = (value, options) => {
   const hasOptions = isArray(options);
+
+  if (isString(value)) {
+    return options.find(option => get(option, 'value') === value) || value;
+  }
 
   if (isObject(value) && value.value && hasOptions) {
     return !value.label
@@ -83,18 +87,38 @@ const getValue = memoize((value, options) => {
   if (isArray(value) && hasOptions) {
     const labelByValue = getOptionLabelByValue(options);
 
-    return value.map(({ value, label, ...rest }) => ({
-      value,
-      label: label || labelByValue[value] || ' ',
-      ...rest,
-    }));
+    return value
+      .map(item => {
+        if (isString(item)) {
+          return {
+            value: item,
+            label: labelByValue[item] || ' ',
+          };
+        } else if (isObject(item)) {
+          const { value: itemValue, label: itemLabel, ...rest } = item;
+
+          return {
+            value: itemValue,
+            label: itemLabel || labelByValue[itemValue] || ' ',
+            ...rest,
+          };
+        }
+
+        return {
+          value: null,
+        };
+      })
+      .filter(({ value: v }) => !!v);
   }
 
   return value;
-});
+};
 
 const Select = ({ theme, value, options, ...props }) => {
-  const resolvedValue = getValue(value, options);
+  const resolvedValue = useMemo(() => getValue(value, options), [
+    value,
+    options,
+  ]);
 
   return (
     <ReactSelect

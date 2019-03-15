@@ -21,13 +21,12 @@ const PohjakoulutusSection = () => {
         Valitse pohjakoulutusvaatimus
       </Typography>
 
-        <Field
-          name="koulutusvaatimukset"
-          component={renderSelectField}
-          options={options}
-          isMulti
-        />
-      
+      <Field
+        name="koulutusvaatimukset"
+        component={renderSelectField}
+        options={options}
+        isMulti
+      />
     </>
   );
 };

@@ -10,7 +10,6 @@ import Divider from '../Divider';
 import Button from '../Button';
 import Flex from '../Flex';
 import ValintatapaContentFields from '../ValintatapaContentFields';
-import Editor from '../Editor';
 import useKoodistoOptions from '../useKoodistoOptions';
 import Textarea from '../Textarea';
 
@@ -25,8 +24,6 @@ const renderSelectField = ({ input, options }) => (
 );
 
 const renderTextareaField = ({ input }) => <Textarea {...input} />;
-
-const renderEditorField = ({ input }) => <Editor {...input} />;
 
 const renderValintatapaFields = ({ valintatapa, tapaOptions, language }) => (
   <>

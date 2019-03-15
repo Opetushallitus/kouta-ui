@@ -23,10 +23,11 @@ export const saveKoulutus = koulutus => (
   return httpClient.put(apiUrls.url('kouta-backend.koulutus'), koulutus);
 };
 
-export const submit = ({
-  tila = JULKAISUTILA.TALLENNETTU,
-  redirect = true,
-} = {}) => async (dispatch, getState, { httpClient, apiUrls, history }) => {
+export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
+  dispatch,
+  getState,
+  { httpClient, apiUrls, history },
+) => {
   const state = getState();
   const values = getKoulutusFormValues(state);
 
@@ -82,10 +83,6 @@ export const submit = ({
       title: 'Koulutus on tallennettu onnistuneesti',
     }),
   );
-
-  if (!redirect) {
-    return koulutusData;
-  }
 
   if (get(koulutusData, 'oid')) {
     const { oid: koulutusOid } = koulutusData;

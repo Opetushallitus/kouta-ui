@@ -47,8 +47,8 @@ export default connect(
   state => ({
     valid: koulutusFormIsValid(state),
   }),
-  (dispatch, { koulutus: { oid: koulutusOid, organisaatioOid, tila, lastModified } }) => ({
-    onSave: ({ tila: tilaArg } = {}) =>
-      dispatch(submit({ koulutusOid, tila: tilaArg || tila, organisaatioOid, lastModified })),
+  (dispatch, { koulutus }) => ({
+    onSave: ({ tila } = {}) =>
+      dispatch(submit({ koulutus, tila })),
   }),
 )(EditKoulutusFooter);

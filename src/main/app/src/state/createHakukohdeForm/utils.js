@@ -178,8 +178,10 @@ export const getHakukohdeByValues = values => {
         : [],
     }));
 
-  const pohjakoulutusvaatimusKoodiUri =
-    get(values, 'pohjakoulutus.koulutusvaatimus') || null;
+  const pohjakoulutusvaatimusKoodiUrit = (
+    get(values, 'pohjakoulutus.koulutusvaatimukset') || []
+  ).map(({ value }) => value);
+
   const valintaperuste =
     get(values, 'valintaperusteenKuvaus.valintaperuste.value') || null;
 
@@ -202,7 +204,7 @@ export const getHakukohdeByValues = values => {
     nimi,
     toinenAsteOnkoKaksoistutkinto,
     valintakokeet,
-    pohjakoulutusvaatimusKoodiUri,
+    pohjakoulutusvaatimusKoodiUrit,
     valintaperuste,
     ensikertalaisenAloituspaikat,
   };
@@ -224,7 +226,7 @@ export const getValuesByHakukohde = hakukohde => {
     nimi = {},
     toinenAsteOnkoKaksoistutkinto,
     valintakokeet = [],
-    pohjakoulutusvaatimusKoodiUri = '',
+    pohjakoulutusvaatimusKoodiUrit = [],
     valintaperuste = '',
     ensikertalaisenAloituspaikat = '',
   } = hakukohde;
@@ -279,7 +281,9 @@ export const getValuesByHakukohde = hakukohde => {
   return {
     alkamiskausi: {
       kausi: alkamiskausiKoodiUri,
-      vuosi: alkamisvuosi ? alkamisvuosi.toString() : '',
+      vuosi: {
+        value: isNumeric(alkamisvuosi) ? alkamisvuosi.toString() : null,
+      },
     },
     kieliversiot: {
       languages: kielivalinta,
@@ -311,7 +315,9 @@ export const getValuesByHakukohde = hakukohde => {
       voiSuorittaaKaksoistutkinnon: !!toinenAsteOnkoKaksoistutkinto,
     },
     pohjakoulutus: {
-      koulutusvaatimus: pohjakoulutusvaatimusKoodiUri,
+      koulutusvaatimus: (pohjakoulutusvaatimusKoodiUrit || []).map(value => ({
+        value,
+      })),
     },
     valintaperusteenKuvaus: {
       valintaperuste: {

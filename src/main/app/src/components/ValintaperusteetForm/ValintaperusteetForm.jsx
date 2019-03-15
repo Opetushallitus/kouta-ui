@@ -18,6 +18,7 @@ import ValintatapaSection from './ValintatapaSection';
 import PohjaSection from './PohjaSection';
 import KielitaitovaatimuksetSection from './KielitaitovaatimuksetSection';
 import LoppukuvausSection from './LoppukuvausSection';
+import OsaamistaustaSection from './OsaamistaustaSection';
 
 const ActiveLanguages = formValues({
   languages: 'kieliversiot.languages',
@@ -65,6 +66,12 @@ const ValintaperusteetForm = ({
             <FormCollapse header="Valintaperusteen nimi" section="nimi">
               <NimiSection languages={languages} />
             </FormCollapse>
+
+            {isKorkeakoulu ? (
+              <FormCollapse header="Osaamistausta" section="osaamistausta">
+                <OsaamistaustaSection />
+              </FormCollapse>
+            ) : null}
 
             <FormCollapse header="Valintatapa" section="valintatapa">
               <ValintatapaSection languages={languages} />

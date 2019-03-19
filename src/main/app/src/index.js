@@ -34,7 +34,7 @@ serviceWorker.unregister();
     debug: process.env.NODE_ENV === 'development',
   });
 
-  const store = createStore({
+  const { store, persistor } = createStore({
     apiUrls,
     httpClient,
     history,
@@ -49,6 +49,7 @@ serviceWorker.unregister();
       httpClient={httpClient}
       history={history}
       localisation={localisationInstance}
+      persistor={persistor}
     />,
     document.getElementById('root'),
   );

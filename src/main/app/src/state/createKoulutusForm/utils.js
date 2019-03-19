@@ -14,13 +14,35 @@ export const getKoulutusByValues = values => {
     teksti: pick(osioKuvaukset[value] || {}, kielivalinta),
   }));
 
+  const kuvaus = pick(get(values, 'description.kuvaus') || {}, kielivalinta);
+  const nimi = pick(get(values, 'information.nimi') || {}, kielivalinta);
+  const opintojenLaajuusKoodiUri =
+    get(values, 'information.opintojenLaajuus.value') || null;
+
+  const tutkintonimikeKoodiUrit = (
+    get(values, 'information.tutkintonimike') || []
+  ).map(({ value }) => value);
+
+  const kuvauksenNimi = pick(
+    get(values, 'description.nimi') || {},
+    kielivalinta,
+  );
+
+  const julkinen = Boolean(get(values, 'nakyvyys.julkinen'));
+
   return {
     kielivalinta,
     tarjoajat,
     koulutusKoodiUri,
     koulutustyyppi,
+    nimi,
+    julkinen,
     metadata: {
       lisatiedot: osiotWithKuvaukset,
+      kuvaus,
+      opintojenLaajuusKoodiUri,
+      tutkintonimikeKoodiUrit,
+      kuvauksenNimi,
     },
   };
 };
@@ -32,9 +54,17 @@ export const getValuesByKoulutus = koulutus => {
     koulutustyyppi = '',
     tarjoajat = [],
     metadata = {},
+    nimi = {},
+    julkinen = false,
   } = koulutus;
 
-  const { lisatiedot = [] } = metadata;
+  const {
+    lisatiedot = [],
+    kuvaus = {},
+    opintojenLaajuusKoodiUri = '',
+    tutkintonimikeKoodiUrit = [],
+    kuvauksenNimi = {},
+  } = metadata;
 
   const osiot = lisatiedot
     .filter(({ otsikkoKoodiUri }) => !!otsikkoKoodiUri)
@@ -56,9 +86,14 @@ export const getValuesByKoulutus = koulutus => {
       organizations: tarjoajat,
     },
     information: {
+      nimi,
       koulutus: {
         value: koulutusKoodiUri,
       },
+      opintojenLaajuus: {
+        value: opintojenLaajuusKoodiUri,
+      },
+      tutkintonimike: tutkintonimikeKoodiUrit.map(value => ({ value })),
     },
     type: {
       type: koulutustyyppi,
@@ -66,6 +101,13 @@ export const getValuesByKoulutus = koulutus => {
     lisatiedot: {
       osioKuvaukset,
       osiot,
+    },
+    description: {
+      kuvaus,
+      nimi: kuvauksenNimi,
+    },
+    nakyvyys: {
+      julkinen,
     },
   };
 };

@@ -10,6 +10,8 @@ import _isValidDate from 'date-fns/is_valid';
 import mapValues from 'lodash/mapValues';
 import produce from 'immer';
 import padStart from 'lodash/padStart';
+import memoizee from 'memoizee';
+import flowRight from 'lodash/flowRight';
 
 export const isString = value => typeof value === 'string';
 
@@ -221,3 +223,68 @@ export const createChainedFunction = (...fns) => (...args) => {
     }
   }
 };
+
+export const memoize = (fn, opts = {}) => memoizee(fn, { max: 100, ...opts });
+
+export const memoizePromise = (fn, opts = {}) =>
+  memoize(fn, { promise: true, ...opts });
+
+export const isNonEmptyArray = value => isArray(value) && value.length > 0;
+
+export const compose = flowRight;
+
+export const isNonEmptyObject = value =>
+  isObject(value) && Object.keys(value).length > 0;
+
+export const isKoodiUri = value =>
+  isString(value) && /^\w+_\w+#[0-9]+$/.test(value);
+
+export const parseKoodiUri = value => {
+  if (!isKoodiUri(value)) {
+    return { koodisto: null, koodi: null, versio: null };
+  }
+
+  const [koodi, versio] = value.split('#');
+
+  const [koodisto] = koodi.split('_');
+
+  return {
+    koodisto,
+    koodi,
+    versio,
+  };
+};
+
+export const getKoodistoVersiot = (value, versiot = {}) => {
+  if (isString(value)) {
+    const { koodisto, versio } = parseKoodiUri(value);
+
+    return koodisto !== null && versio !== null ? { [koodisto]: versio } : {};
+  }
+
+  if (isObject(value)) {
+    return {
+      ...versiot,
+      ...Object.keys(value).reduce((acc, curr) => {
+        acc = { ...acc, ...getKoodistoVersiot(value[curr], versiot) };
+
+        return acc;
+      }, {}),
+    };
+  }
+
+  if (isArray(value)) {
+    return {
+      ...versiot,
+      ...value.reduce((acc, curr) => {
+        acc = { ...acc, ...getKoodistoVersiot(curr, versiot) };
+
+        return acc;
+      }, {}),
+    };
+  }
+
+  return {};
+};
+
+export const noop = () => {};

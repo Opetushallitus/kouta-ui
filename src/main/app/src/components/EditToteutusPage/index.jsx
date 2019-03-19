@@ -17,7 +17,11 @@ const getToteutusAndKoulutus = async ({ httpClient, apiUrls, oid }) => {
     return { toteutus };
   }
 
-  const koulutus = await getKoutaKoulutusByOid({ httpClient, apiUrls, oid: toteutus.koulutusOid });
+  const koulutus = await getKoutaKoulutusByOid({
+    httpClient,
+    apiUrls,
+    oid: toteutus.koulutusOid,
+  });
 
   return { toteutus, koulutus };
 };
@@ -56,9 +60,12 @@ const EditToteutusPage = props => {
           toteutus={toteutus}
           organisaatioOid={organisaatioOid}
           koulutusKoodiUri={koulutus ? koulutus.koulutusKoodiUri : null}
+          koulutustyyppi={koulutus ? koulutus.koulutustyyppi : null}
           scrollTarget={scrollTarget}
         />
-      ) : <Spin center />}
+      ) : (
+        <Spin center />
+      )}
     </FormPage>
   );
 };

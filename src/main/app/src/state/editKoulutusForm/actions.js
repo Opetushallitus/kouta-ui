@@ -4,6 +4,7 @@ import get from 'lodash/get';
 import { getKoulutusByValues } from '../createKoulutusForm';
 import { getKoulutusByKoodi, updateKoutaKoulutus } from '../../apiUtils';
 import { createTemporaryToast } from '../toaster';
+import { isNonEmptyObject } from '../../utils';
 
 const getKoulutusFormValues = getFormValues('editKoulutusForm');
 
@@ -30,21 +31,27 @@ export const submit = ({
 
   const koulutusFormData = getKoulutusByValues(values);
 
-  const { nimi = null } = await getKoulutusByKoodi({
-    koodiUri: koulutusFormData.koulutusKoodiUri,
-    httpClient,
-    apiUrls,
-  });
+  let nimi = koulutusFormData.nimi;
+
+  if (!isNonEmptyObject(nimi) && koulutusFormData.koulutusKoodiUri) {
+    const { nimi: koulutusNimi } = await getKoulutusByKoodi({
+      koodiUri: koulutusFormData.koulutusKoodiUri,
+      httpClient,
+      apiUrls,
+    });
+
+    nimi = koulutusNimi;
+  }
 
   const koulutus = {
     lastModified,
     oid: koulutusOid,
     muokkaaja: kayttajaOid,
-    nimi,
     johtaaTutkintoon: true,
     ...(tila && { tila }),
     ...(organisaatioOid && { organisaatioOid }),
     ...koulutusFormData,
+    nimi,
   };
 
   let koulutusData;

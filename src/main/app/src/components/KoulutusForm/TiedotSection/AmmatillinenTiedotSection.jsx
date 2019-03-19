@@ -1,14 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Field, formValues } from 'redux-form';
+import { Field } from 'redux-form';
 
-import LanguageSelector from '../LanguageSelector';
-import Typography from '../Typography';
+import Typography from '../../Typography';
 import KoulutusSelect from '../KoulutusSelect';
-import ApiAsync from '../ApiAsync';
-import { getKoulutusByKoodi } from '../../apiUtils';
-import { getThemeProp } from '../../theme';
-import { getLanguageValue } from '../../utils';
+import ApiAsync from '../../ApiAsync';
+import { getKoulutusByKoodi } from '../../../apiUtils';
+import { getThemeProp } from '../../../theme';
+import { getLanguageValue } from '../../../utils';
 
 const getTutkintonimikkeet = ({ koulutus, language }) => {
   const { tutkintonimikeKoodit = [] } = koulutus;
@@ -58,12 +57,15 @@ const InfoContent = styled(Content)`
 const nop = () => {};
 
 const renderSelectField = ({ input, koulutusTyyppi, ...props }) => {
-  return <KoulutusSelect {...input} koulutusTyyppi={koulutusTyyppi} {...props} onBlur={nop} />
+  return (
+    <KoulutusSelect
+      {...input}
+      koulutusTyyppi={koulutusTyyppi}
+      {...props}
+      onBlur={nop}
+    />
+  );
 };
-
-const ActiveKoulutus = formValues({
-  koulutus: 'koulutus',
-})(({ koulutus, children }) => children({ koulutus: koulutus || null }));
 
 const KoulutusInfo = ({ koulutus, language = 'fi' }) => {
   const { opintojenlaajuus } = koulutus;
@@ -112,43 +114,33 @@ const InformationAsync = ({ koodiUri, language = 'fi' }) => (
   </ApiAsync>
 );
 
-const InformationSection = ({ languages = [], koulutusTyyppi, ...props }) => {
-  return (
-    <div {...props}>
-      <LanguageSelector languages={languages} defaultValue="fi">
-        {({ value }) => (
-          <>
-            <Typography variant="h6" marginBottom={1}>
-              Valitse koulutus listasta
-            </Typography>
-            <Container>
-              <ActiveKoulutus>
-                {({ koulutus }) => (
-                  <>
-                    <Content>
-                      <Field
-                        name="koulutus"
-                        component={renderSelectField}
-                        koulutusTyyppi={koulutusTyyppi}
-                      />
-                    </Content>
-                    <InfoContent>
-                      {koulutus ? (
-                        <InformationAsync
-                          koodiUri={koulutus.value}
-                          language={value}
-                        />
-                      ) : null}
-                    </InfoContent>
-                  </>
-                )}
-              </ActiveKoulutus>
-            </Container>
-          </>
-        )}
-      </LanguageSelector>
-    </div>
-  );
-};
+const AmmatillinenTiedotSection = ({
+  koulutustyyppi,
+  language,
+  koulutusValue,
+}) => (
+  <>
+    <Typography variant="h6" marginBottom={1}>
+      Valitse koulutus listasta
+    </Typography>
+    <Container>
+      <Content>
+        <Field
+          name="koulutus"
+          component={renderSelectField}
+          koulutusTyyppi={koulutustyyppi}
+        />
+      </Content>
+      <InfoContent>
+        {koulutusValue ? (
+          <InformationAsync
+            koodiUri={koulutusValue.value}
+            language={language}
+          />
+        ) : null}
+      </InfoContent>
+    </Container>
+  </>
+);
 
-export default InformationSection;
+export default AmmatillinenTiedotSection;

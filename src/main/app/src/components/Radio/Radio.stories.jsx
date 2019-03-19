@@ -12,4 +12,14 @@ storiesOf('Radio', module)
       <Radio value="b">Radio B</Radio>
       <Radio value="c">Radio C</Radio>
     </RadioGroup>
+  ))
+  .add('Width radio group options prop', () => (
+    <RadioGroup
+      options={[
+        { value: 'a', label: 'Radio A' },
+        { value: 'b', label: 'Radio B' },
+        { value: 'c', label: 'Radio C' },
+      ]}
+      onChange={action('change')}
+    />
   ));

@@ -1,8 +1,6 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import uniq from 'lodash/uniq';
-import memoize from 'memoizee';
 
-import ApiAsync from '../ApiAsync';
 import { getOrganisaatioHierarchyByOid } from '../../apiUtils';
 import CheckboxGroup from '../CheckboxGroup';
 import {
@@ -10,9 +8,11 @@ import {
   getTreeLevel,
   arrayDiff,
   getFirstLanguageValue,
+  memoize,
 } from '../../utils';
 import Typography from '../Typography';
 import Spacing from '../Spacing';
+import useApiAsync from '../useApiAsync';
 
 const filterByOrganisaatioTyyppi = tyyppi => ({ organisaatiotyypit }) =>
   isArray(organisaatiotyypit) && organisaatiotyypit.includes(tyyppi);
@@ -103,17 +103,13 @@ const MultiSelection = ({ value = [], onChange = () => {}, options = [] }) => {
 };
 
 const JarjestamisPaikatSelect = ({ organisaatioOid, ...props }) => {
-  return (
-    <ApiAsync
-      promiseFn={getOrganisaatiot}
-      oid={organisaatioOid}
-      watch={organisaatioOid}
-    >
-      {({ data }) =>
-        data ? <MultiSelection options={getOptions(data)} {...props} /> : null
-      }
-    </ApiAsync>
-  );
+  const { data } = useApiAsync({ promiseFn: getOrganisaatiot, oid: organisaatioOid, watch: organisaatioOid });
+
+  const options = useMemo(() => {
+    return data ? getOptions(data) : [];
+  }, [data])
+
+  return <MultiSelection options={options} {...props} />;
 };
 
 export default JarjestamisPaikatSelect;

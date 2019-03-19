@@ -11,7 +11,7 @@ import {
   DropdownMenuItem,
 } from '../Dropdown';
 
-import Icon from '../Icon';
+import DropdownIcon from '../DropdownIcon';
 import Typography from '../Typography';
 import Select from '../Select';
 import ApiAsync from '../ApiAsync';
@@ -50,10 +50,9 @@ const renderBaseDropdownField = ({ input, onContinue, onCreateNew }) => {
       }
     >
       {({ ref, onToggle, visible }) => (
-        <div ref={ref}>
+        <div ref={ref} style={{ display: 'inline-block' }}>
           <DropdownButton onClick={onToggle} type="button">
-            Valitse pohja{' '}
-            <Icon type={visible ? 'arrow_drop_up' : 'arrow_drop_down'} />
+            Valitse pohja <DropdownIcon open={visible} />
           </DropdownButton>
         </div>
       )}

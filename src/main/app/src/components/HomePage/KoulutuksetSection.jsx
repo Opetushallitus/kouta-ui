@@ -2,12 +2,15 @@ import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
 import ListCollapse from './ListCollapse';
-import ListTable, { makeModifiedColumn, makeMuokkaajaColumn, makeTilaColumn } from './ListTable';
+import ListTable, {
+  makeModifiedColumn,
+  makeMuokkaajaColumn,
+} from './ListTable';
 import Button from '../Button';
 import Pagination from '../Pagination';
 import Flex from '../Flex';
 import Spacing from '../Spacing';
-import Icon from '../Icon';
+import DropdownIcon from '../DropdownIcon';
 import Spin from '../Spin';
 import useApiAsync from '../useApiAsync';
 import { getKoutaIndexKoulutukset } from '../../apiUtils';
@@ -15,10 +18,9 @@ import { getIndexParamsByFilters } from './utils';
 import Filters from './Filters';
 import Badge from '../Badge';
 import useFilterState from './useFilterState';
+import KoulutusTilaDropdown from './KoulutusTilaDropdown';
 
-import {
-  getFirstLanguageValue,
-} from '../../utils';
+import { getFirstLanguageValue } from '../../utils';
 
 import {
   UncontrolledDropdown,
@@ -62,7 +64,7 @@ const LuoKoulutusDropdown = ({ organisaatioOid }) => {
         <div ref={ref} onClick={onToggle}>
           <Button>
             Luo uusi koulutus{' '}
-            <Icon type={visible ? 'arrow_drop_up' : 'arrow_drop_down'} />
+            <DropdownIcon open={visible} />
           </Button>
         </div>
       )}
@@ -85,7 +87,12 @@ const tableColumns = [
       </Anchor>
     ),
   },
-  makeTilaColumn(),
+  {
+    title: 'Tila',
+    key: 'tila',
+    sortable: true,
+    render: ({ tila, oid }) => <KoulutusTilaDropdown initialTila={tila} koulutusOid={oid} />,
+  },
   makeModifiedColumn(),
   makeMuokkaajaColumn(),
   {

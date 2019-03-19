@@ -17,7 +17,7 @@ const EditKoulutusForm = ({ onSave, koulutus, ...props }) => {
   }, [koulutus]);
 
   return (
-    <KoulutusReduxForm {...props} koulutus={koulutus} steps={false} canCopy={false} initialValues={initialValues} />
+    <KoulutusReduxForm {...props} koulutus={koulutus} steps={false} canCopy={false} initialValues={initialValues} canEditKoulutustyyppi={false} />
   );
 };
 

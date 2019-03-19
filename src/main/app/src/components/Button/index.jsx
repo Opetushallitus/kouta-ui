@@ -6,7 +6,8 @@ import get from 'lodash/get';
 import { getThemeProp } from '../../theme';
 
 const getOutlinedColorCss = ({ color, theme }) => {
-  const outlineColor = get(theme, ['palette', color, 'main']) || theme.palette.primary.main;
+  const outlineColor =
+    get(theme, ['palette', color, 'main']) || theme.palette.primary.main;
 
   return `
     border-color: ${outlineColor};
@@ -25,8 +26,11 @@ const getOutlinedColorCss = ({ color, theme }) => {
 };
 
 const getContainedColorCss = ({ color, theme }) => {
-  const fontColor = get(theme, ['palette', color, 'contrastText']) || theme.palette.primary.contrastText;
-  const containColor = get(theme, ['palette', color, 'main']) || theme.palette.primary.main;
+  const fontColor =
+    get(theme, ['palette', color, 'contrastText']) ||
+    theme.palette.primary.contrastText;
+  const containColor =
+    get(theme, ['palette', color, 'main']) || theme.palette.primary.main;
 
   return `
     border-color: ${containColor};
@@ -71,6 +75,7 @@ const ButtonBase = styled.button`
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
+  box-sizing: border-box;
 
   ${getVariantCss}
 
@@ -79,6 +84,13 @@ const ButtonBase = styled.button`
     css`
       opacity: 0.5;
       cursor: not-allowed;
+    `}
+  
+  ${({ fullWidth }) =>
+    fullWidth &&
+    css`
+      width: 100%;
+      justify-content: center;
     `}
 `;
 

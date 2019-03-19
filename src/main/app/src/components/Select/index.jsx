@@ -22,6 +22,10 @@ const getStyles = memoize(theme => ({
       zIndex: 9999,
     };
   },
+  menu: provided => ({
+    ...provided,
+    zIndex: 3,
+  }),
 }));
 
 const defaultNoOptionsMessage = () => 'Valittavia kohteita ei löytynyt';

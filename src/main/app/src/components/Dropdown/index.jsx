@@ -4,8 +4,10 @@ import { Manager, Reference, Popper } from 'react-popper';
 import styled from 'styled-components';
 import memoize from 'lodash/memoize';
 import EventListener from 'react-event-listener';
+import { Transition } from 'react-spring';
 
 import { getThemeProp } from '../../theme';
+import { isFunction } from '../../utils';
 
 export const DropdownMenu = styled.div`
   width: 100%;
@@ -65,6 +67,58 @@ const getMarginStyle = placement => {
   return {};
 };
 
+const DropdownDialog = ({
+  overlay,
+  visible,
+  placement: placementProp,
+  modifiers,
+  ...props
+}) => (
+  <Transition
+    items={visible}
+    enter={{
+      opacity: 1,
+      scale: 1,
+    }}
+    leave={{
+      opacity: 0,
+      scale: 0.8,
+    }}
+    from={{
+      opacity: 0,
+      scale: 0.8,
+    }}
+  >
+    {visible =>
+      visible &&
+      (({ opacity, scale }) => (
+        <Popper placement={placementProp} modifiers={modifiers}>
+          {({ ref, style, placement }) => {
+            const { transform: popperTransform = '', ...restStyle } = style;
+
+            return (
+              <div
+                ref={ref}
+                style={{
+                  ...restStyle,
+                  ...getMarginStyle(placement),
+                  zIndex: '1',
+                  opacity,
+                  transform: `${popperTransform} scaleY(${scale})`,
+                }}
+                data-placement={placement}
+                {...props}
+              >
+                {overlay}
+              </div>
+            )
+          }}
+        </Popper>
+      ))
+    }
+  </Transition>
+);
+
 const Dropdown = ({
   placement: defaultPlacement = 'bottom-start',
   overlay = null,
@@ -78,20 +132,15 @@ const Dropdown = ({
     ...(overflow && { preventOverflow: { enabled: false } }),
   };
 
-  const content = visible ? (
-    <Popper placement={defaultPlacement} modifiers={modifiers}>
-      {({ ref, style, placement }) => (
-        <div
-          ref={ref}
-          style={{ ...style, ...getMarginStyle(placement), zIndex: '1' }}
-          data-placement={placement}
-          {...props}
-        >
-          {overlay}
-        </div>
-      )}
-    </Popper>
-  ) : null;
+  const content = (
+    <DropdownDialog
+      overlay={overlay}
+      modifiers={modifiers}
+      visible={visible}
+      placement={defaultPlacement}
+      {...props}
+    />
+  );
 
   return (
     <Manager>
@@ -174,6 +223,16 @@ export class UncontrolledDropdown extends Component {
     }
   };
 
+  renderOverlay() {
+    const { overlay } = this.props;
+
+    if (isFunction(overlay)) {
+      return overlay({ onToggle: this.onToggle });
+    }
+
+    return overlay;
+  }
+
   render() {
     const { visible } = this.state;
     const {
@@ -185,7 +244,9 @@ export class UncontrolledDropdown extends Component {
       ...props
     } = this.props;
 
-    const wrappedOverlay = <div ref={this.overlayRef}>{overlay}</div>;
+    const wrappedOverlay = (
+      <div ref={this.overlayRef}>{this.renderOverlay()}</div>
+    );
 
     return (
       <>

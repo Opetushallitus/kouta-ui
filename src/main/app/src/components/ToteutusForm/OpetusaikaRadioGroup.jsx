@@ -1,53 +1,19 @@
 import React from 'react';
 
-import { getKoodisto } from '../../apiUtils';
-import ApiAsync from '../ApiAsync';
 import Radio, { RadioGroup } from '../Radio';
-import { isArray, getFirstLanguageValue } from '../../utils';
-
-const getOpetusaikaKoodisto = async ({ httpClient, apiUrls }) => {
-  const koodisto = await getKoodisto({
-    koodistoUri: 'opetusaikakk',
-    httpClient,
-    apiUrls,
-  });
-
-  if (!isArray(koodisto)) {
-    return [];
-  }
-
-  return koodisto.map(({ metadata = [], koodiUri, versio }) => ({
-    koodiUri: `${koodiUri}#${versio}`,
-    nimi: metadata.reduce((acc, { kieli, nimi }) => {
-      acc[kieli.toLowerCase()] = nimi;
-
-      return acc;
-    }, {}),
-  }));
-};
-
-const getOptions = koodisto => {
-  return koodisto.map(({ nimi, koodiUri }) => ({
-    label: getFirstLanguageValue(nimi),
-    value: koodiUri,
-  }));
-};
+import useKoodistoOptions from '../useKoodistoOptions';
 
 const OpetusaikaRadioGroup = props => {
+  const { options } = useKoodistoOptions({ koodisto: 'opetusaikakk' });
+
   return (
-    <ApiAsync promiseFn={getOpetusaikaKoodisto}>
-      {({ data }) =>
-        data ? (
-          <RadioGroup {...props}>
-            {getOptions(data).map(({ label, value }) => (
-              <Radio key={value} value={value}>
-                {label}
-              </Radio>
-            ))}
-          </RadioGroup>
-        ) : null
-      }
-    </ApiAsync>
+    <RadioGroup {...props}>
+      {options.map(({ label, value }) => (
+        <Radio key={value} value={value}>
+          {label}
+        </Radio>
+      ))}
+    </RadioGroup>
   );
 };
 

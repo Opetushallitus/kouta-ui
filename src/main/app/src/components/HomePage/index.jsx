@@ -5,7 +5,7 @@ import get from 'lodash/get';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { getKayttajanOrganisaatiot } from '../../apiUtils';
+import { getKayttajanOrganisaatioHierarkia } from '../../apiUtils';
 import HomeContent from './HomeContent';
 import useApiAsync from '../useApiAsync';
 
@@ -18,17 +18,17 @@ const Container = styled.div`
 const getFirstOrganisaatioOid = organisaatiot => get(organisaatiot, '[0].oid');
 
 const HomeRoute = ({ kayttajaOid, organisaatioOid }) => {
-  const { data } = useApiAsync({
-    promiseFn: getKayttajanOrganisaatiot,
+  const { data: organisaatioHierarkia } = useApiAsync({
+    promiseFn: getKayttajanOrganisaatioHierarkia,
     oid: kayttajaOid,
     watch: kayttajaOid,
   });
 
-  if (!data) {
+  if (!organisaatioHierarkia) {
     return null;
   }
 
-  const firstOrganisaatioOid = getFirstOrganisaatioOid(data);
+  const firstOrganisaatioOid = getFirstOrganisaatioOid(organisaatioHierarkia);
 
   // TODO: display some message
   if (!firstOrganisaatioOid) {
@@ -50,7 +50,7 @@ const HomeRoute = ({ kayttajaOid, organisaatioOid }) => {
 
   return (
     <HomeContent
-      organisaatiot={data}
+      organisaatiot={organisaatioHierarkia}
       kayttajaOid={kayttajaOid}
       organisaatioOid={organisaatioOid}
     />

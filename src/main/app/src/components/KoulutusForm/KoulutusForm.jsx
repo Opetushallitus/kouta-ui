@@ -1,15 +1,16 @@
 import React from 'react';
 import { formValues } from 'redux-form';
+import get from 'lodash/get';
 
 import TypeSection from './TypeSection';
 import BaseSelectionSection from './BaseSelectionSection';
-import InformationSection from './InformationSection';
-import DescriptionSection from './DescriptionSection';
+import TiedotSection from './TiedotSection/TiedotSection';
+import KuvausSection from './KuvausSection';
 import OrganizationSection from './OrganizationSection';
 import FormCollapseGroup from '../FormCollapseGroup';
 import FormCollapse from '../FormCollapse';
 import KieliversiotFormSection from '../KieliversiotFormSection';
-import { LANGUAGE_TABS } from '../../constants';
+import { LANGUAGE_TABS, KORKEAKOULUKOULUTUSTYYPIT } from '../../constants';
 import ToteutuksetModal from './ToteutuksetModal';
 import ToteutuksetSection from './ToteutuksetSection';
 import { ModalController } from '../Modal';
@@ -17,28 +18,19 @@ import Button from '../Button';
 import { isFunction } from '../../utils';
 import LisatiedotSection from './LisatiedotSection';
 import Flex from '../Flex';
+import NakyvyysSection from './NakyvyysSection';
 
-const ActiveLanguages = formValues({
-  languages: 'kieliversiot.languages',
-})(({ languages, ...props }) => {
-  const activeLanguages = languages || [];
+const getLanguageTabs = languages => {
+  return LANGUAGE_TABS.filter(({ value }) => (languages || []).includes(value));
+};
 
-  return props.children({
-    languages: LANGUAGE_TABS.filter(({ value }) =>
-      activeLanguages.includes(value),
-    ),
-  });
-});
+const WithValues = formValues({
+  koulutustyyppiValue: 'type.type',
+  languagesValue: 'kieliversiot.languages',
+  koulutusValue: 'information.koulutus',
+})(({ children, ...rest }) => children(rest));
 
-const ActiveKoulutusTyyppi = formValues({
-  koulutusTyyppi: 'type.type',
-})(({ koulutusTyyppi, children }) => children({ koulutusTyyppi }));
-
-const ActiveKoulutus = formValues({
-  koulutus: 'information.koulutus',
-})(({ koulutus, children }) => children({ koulutus }));
-
-const ToteutuksetPohjaFieldValue = formValues({
+const WithToteutuksetPohja = formValues({
   pohja: 'toteutukset.pohja',
 })(({ pohja, children }) => children({ pohja }));
 
@@ -55,112 +47,122 @@ const KoulutusForm = ({
   canCopy = true,
   scrollTarget,
   koulutus: koulutusProp = null,
+  canEditKoulutustyyppi = true,
 }) => {
   return (
     <form onSubmit={handleSubmit}>
-      <ActiveLanguages>
-        {({ languages }) => (
-          <ActiveKoulutus>
-            {({ koulutus }) => (
-              <ActiveKoulutusTyyppi>
-                {({ koulutusTyyppi }) => (
-                  <FormCollapseGroup enabled={steps} scrollTarget={scrollTarget}>
-                    <FormCollapse header="Koulutustyyppi" section="type">
-                      <TypeSection />
-                    </FormCollapse>
+      <WithValues>
+        {({ languagesValue, koulutusValue, koulutustyyppiValue }) => {
+          const koulutustyyppi =
+            get(koulutusProp, 'koulutustyyppi') || koulutustyyppiValue;
 
-                    {canCopy ? (
-                      <FormCollapse
-                        header="Pohjan valinta"
-                        section="base"
-                        onContinue={onMaybeCopy}
-                      >
-                        {({ onContinue }) => (
-                          <BaseSelectionSection
-                            onContinue={onContinue}
-                            organisaatioOid={organisaatioOid}
-                            onCopy={onCopy}
-                            onCreateNew={onCreateNew}
-                          />
-                        )}
-                      </FormCollapse>
-                    ) : null}
+          const languageTabs = getLanguageTabs(languagesValue);
 
-                    <FormCollapse header="Kieliversiot" section="kieliversiot">
-                      <KieliversiotFormSection />
-                    </FormCollapse>
+          return (
+            <FormCollapseGroup enabled={steps} scrollTarget={scrollTarget}>
+              {canEditKoulutustyyppi ? (
+                <FormCollapse header="Koulutustyyppi" section="type">
+                  <TypeSection />
+                </FormCollapse>
+              ) : null}
 
-                    <FormCollapse
-                      header="Koulutuksen tiedot"
-                      section="information"
-                    >
-                      <InformationSection
-                        languages={languages}
-                        koulutusTyyppi={koulutusTyyppi}
-                      />
-                    </FormCollapse>
+              {canCopy ? (
+                <FormCollapse
+                  header="Pohjan valinta"
+                  section="base"
+                  onContinue={onMaybeCopy}
+                >
+                  {({ onContinue }) => (
+                    <BaseSelectionSection
+                      onContinue={onContinue}
+                      organisaatioOid={organisaatioOid}
+                      onCopy={onCopy}
+                      onCreateNew={onCreateNew}
+                    />
+                  )}
+                </FormCollapse>
+              ) : null}
 
-                    <FormCollapse
-                      header="Valitun koulutuksen kuvaus"
-                      section="description"
-                    >
-                      <DescriptionSection
-                        languages={languages}
-                        koodiUri={koulutus ? koulutus.value : null}
-                      />
-                    </FormCollapse>
+              <FormCollapse header="Kieliversiot" section="kieliversiot">
+                <KieliversiotFormSection />
+              </FormCollapse>
 
-                    <FormCollapse
-                      header="Koulutuksen lisätiedot"
-                      section="lisatiedot"
-                    >
-                      <LisatiedotSection languages={languages} />
-                    </FormCollapse>
+              <FormCollapse header="Koulutuksen tiedot" section="information">
+                <TiedotSection
+                  languages={languageTabs}
+                  koulutustyyppi={koulutustyyppi}
+                  koulutusValue={koulutusValue}
+                />
+              </FormCollapse>
 
-                    <FormCollapse
-                      header="Koulutuksen järjestävä organisaatio"
-                      section="organization"
-                    >
-                      <OrganizationSection organisaatioOid={organisaatioOid} />
-                    </FormCollapse>
+              <FormCollapse
+                header="Valitun koulutuksen kuvaus"
+                section="description"
+              >
+                <KuvausSection
+                  languages={languageTabs}
+                  koulutustyyppi={koulutustyyppi}
+                  koulutusValue={koulutusValue}
+                />
+              </FormCollapse>
 
-                    {isFunction(onAttachToteutus) ? (
-                      <FormCollapse
-                        header="Koulutukseen liitetyt toteutukset"
-                        id="koulutukseen-liitetetyt-toteutukset"
-                        clearable={false}
-                        actions={
-                          <ToteutuksetPohjaFieldValue>
-                            {({ pohja }) => (
-                              <ModalController
-                                modal={toteutuksetModal}
-                                pohjaValue={pohja}
-                                fieldName="toteutukset"
-                                organisaatioOid={organisaatioOid}
-                                onSave={onAttachToteutus}
-                              >
-                                {({ onToggle }) => (
-                                  <Flex justifyEnd full>
-                                    <Button onClick={onToggle} type="button">
-                                      Liitä toteutus
-                                    </Button>
-                                  </Flex>
-                                )}
-                              </ModalController>
-                            )}
-                          </ToteutuksetPohjaFieldValue>
-                        }
-                      >
-                        <ToteutuksetSection koulutus={koulutusProp} />
-                      </FormCollapse>
-                    ) : null}
-                  </FormCollapseGroup>
-                )}
-              </ActiveKoulutusTyyppi>
-            )}
-          </ActiveKoulutus>
-        )}
-      </ActiveLanguages>
+              <FormCollapse
+                header="Koulutuksen lisätiedot"
+                section="lisatiedot"
+              >
+                <LisatiedotSection languages={languageTabs} />
+              </FormCollapse>
+
+              <FormCollapse
+                header="Koulutuksen järjestävä organisaatio"
+                section="organization"
+              >
+                <OrganizationSection organisaatioOid={organisaatioOid} />
+              </FormCollapse>
+
+              {KORKEAKOULUKOULUTUSTYYPIT.includes(koulutustyyppi) ? (
+                <FormCollapse
+                  header="Koulutuksen näkyminen muille koulutustoimijoille"
+                  section="nakyvyys"
+                >
+                  <NakyvyysSection />
+                </FormCollapse>
+              ) : null}
+
+              {isFunction(onAttachToteutus) ? (
+                <FormCollapse
+                  header="Koulutukseen liitetyt toteutukset"
+                  id="koulutukseen-liitetetyt-toteutukset"
+                  clearable={false}
+                  actions={
+                    <WithToteutuksetPohja>
+                      {({ pohja }) => (
+                        <ModalController
+                          modal={toteutuksetModal}
+                          pohjaValue={pohja}
+                          fieldName="toteutukset"
+                          organisaatioOid={organisaatioOid}
+                          onSave={onAttachToteutus}
+                        >
+                          {({ onToggle }) => (
+                            <Flex justifyEnd full>
+                              <Button onClick={onToggle} type="button">
+                                Liitä toteutus
+                              </Button>
+                            </Flex>
+                          )}
+                        </ModalController>
+                      )}
+                    </WithToteutuksetPohja>
+                  }
+                >
+                  <ToteutuksetSection koulutus={koulutusProp} />
+                </FormCollapse>
+              ) : null}
+            </FormCollapseGroup>
+          );
+        }}
+      </WithValues>
     </form>
   );
 };

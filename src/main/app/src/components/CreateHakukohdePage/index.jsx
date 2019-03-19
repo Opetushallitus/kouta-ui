@@ -18,6 +18,7 @@ import CreateHakukohdeFooter from './CreateHakukohdeFooter';
 import Typography from '../Typography';
 import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
 import useApiAsync from '../useApiAsync';
+import Spin from '../Spin';
 
 const getHakukohdeData = async ({
   organisaatioOid,
@@ -109,7 +110,7 @@ const CreateHakukohdePage = props => {
             koulutustyyppi={koulutustyyppi}
           />
         </>
-      ) : null}
+      ) : <Spin center />}
     </FormPage>
   );
 };

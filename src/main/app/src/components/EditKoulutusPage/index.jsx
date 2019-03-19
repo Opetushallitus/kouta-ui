@@ -8,6 +8,7 @@ import EditKoulutusForm from './EditKoulutusForm';
 import EditKoulutusFooter from './EditKoulutusFooter';
 import useApiAsync from '../useApiAsync';
 import { getKoutaKoulutusByOid } from '../../apiUtils';
+import Spin from '../Spin';
 
 const EditKoulutusPage = props => {
   const {
@@ -44,7 +45,9 @@ const EditKoulutusPage = props => {
           organisaatioOid={organisaatioOid}
           scrollTarget={scrollTarget}
         />
-      ) : null}
+      ) : (
+        <Spin center />
+      )}
     </FormPage>
   );
 };

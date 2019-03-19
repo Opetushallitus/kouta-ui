@@ -4,7 +4,7 @@ import toPairs from 'lodash/toPairs';
 import pick from 'lodash/pick';
 import mapValues from 'lodash/mapValues';
 
-import { isObject, isArray } from '../../utils';
+import { isObject, isArray, isString } from '../../utils';
 import { VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI } from '../../constants';
 
 import {
@@ -66,7 +66,24 @@ const serializeSisalto = ({ sisalto, kielivalinta = [] }) => {
   });
 };
 
-export const getValintaperusteetByValues = values => {
+const parseSisalto = ({ sisalto }) => {
+  if (!isArray(sisalto)) {
+    return [];
+  }
+
+  return sisalto.map(({ type, data }) => {
+    if (type === 'text') {
+      return {
+        type,
+        data: isString(data) ? parseEditor(data) : parseEditor(''),
+      };
+    }
+
+    return { type, data };
+  });
+};
+
+export const getValintaperusteByValues = values => {
   const hakutapaKoodiUri = get(values, 'hakutavanRajaus.hakutapa');
 
   const kielivalinta = get(values, 'kieliversiot.languages') || [];
@@ -90,7 +107,7 @@ export const getValintaperusteetByValues = values => {
     }) => ({
       kuvaus: pick(kuvaus || {}, kielivalinta),
       nimi: pick(nimi || {}, kielivalinta),
-      valintapaKoodiUri: get(tapa, 'value'),
+      valintapaKoodiUri: get(tapa, 'value') || null,
       sisalto: serializeSisalto({ sisalto, kielivalinta }),
       kaytaMuuntotaulukkoa: false,
       kynnysehto: pick(kynnysehto || {}, kielivalinta),
@@ -112,7 +129,7 @@ export const getValintaperusteetByValues = values => {
         get(kuvaukset, kielitaitovaatimusKoodiUri) || []
       ).map(({ kuvaus, taso }) => ({
         kielitaitovaatimusTaso: taso,
-        kielitaitovaatimusKuvausKoodiUri: get(kuvaus, 'value'),
+        kielitaitovaatimusKuvausKoodiUri: get(kuvaus, 'value') || null,
       })),
     }));
 
@@ -141,12 +158,15 @@ export const getValintaperusteetByValues = values => {
     get(values, 'osaamistausta.osaamistausta') || []
   ).map(({ value }) => value);
 
+  const tyyppi = get(values, 'tyyppi.tyyppi') || null;
+
   return {
     kielivalinta,
     hakutapaKoodiUri,
     kohdejoukkoKoodiUri,
     nimi,
     kuvaus,
+    tyyppi,
     metadata: {
       valintavat,
       kielitaitovaatimukset,
@@ -155,7 +175,7 @@ export const getValintaperusteetByValues = values => {
   };
 };
 
-export const getValuesByValintaperusteet = valintaperusteet => {
+export const getValuesByValintaperuste = valintaperuste => {
   const {
     hakutapaKoodiUri = null,
     kielivalinta = [],
@@ -163,11 +183,13 @@ export const getValuesByValintaperusteet = valintaperusteet => {
     nimi = {},
     kuvaus = {},
     metadata = {},
-  } = valintaperusteet;
+    tyyppi = null,
+  } = valintaperuste;
 
   const {
     osaamistaustaKoodiUrit = [],
     kielitaitovaatimukset: kielitaitovaatimuksetArg = [],
+    valintatavat = [],
   } = metadata;
 
   const kielitaitovaatimukset = (kielitaitovaatimuksetArg || []).map(
@@ -240,6 +262,30 @@ export const getValuesByValintaperusteet = valintaperusteet => {
     },
     kielitaitovaatimukset: {
       kielet: kielitaitovaatimukset,
+    },
+    valintatapa: {
+      valintavat: (valintatavat || []).map(
+        ({
+          kuvaus,
+          nimi,
+          valintapakoodiUri,
+          sisalto,
+          kynnysehto,
+          enimmaispisteet,
+          vahimmaispiteet,
+        }) => ({
+          kuvaus: kuvaus || {},
+          nimi: nimi || {},
+          kynnysehto: kynnysehto || {},
+          tapa: valintapakoodiUri ? { value: valintapakoodiUri } : null,
+          enimmaispistemaara: enimmaispisteet || '',
+          vahimmaispistemaara: vahimmaispiteet || '',
+          sisalto: parseSisalto({ sisalto }),
+        }),
+      ),
+    },
+    tyyppi: {
+      tyyppi,
     },
   };
 };

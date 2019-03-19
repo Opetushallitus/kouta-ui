@@ -414,7 +414,7 @@ export const getKoutaValintaperusteet = async ({
   const { data } = await httpClient.get(
     apiUrls.url('kouta-backend.valintaperuste-list'),
     {
-      params: { organisaatioOid, hakuOid },
+      params: { organisaatioOid, ...(hakuOid && { hakuOid }) },
     },
   );
 
@@ -762,4 +762,38 @@ export const getKoulutustyyppiByKoulutusOid = ({
   apiUrls,
 }) => {
   return memoizedGetKoulutustyyppiByKoulutusOid(oid, httpClient, apiUrls);
+};
+
+export const getKoutaValintaperusteByOid = async ({
+  oid,
+  httpClient,
+  apiUrls,
+}) => {
+  const { data, headers } = await httpClient.get(
+    apiUrls.url('kouta-backend.valintaperuste-by-oid', oid),
+  );
+
+  const lastModified = get(headers, 'last-modified') || null;
+
+  return isObject(data) ? { lastModified, ...data } : data;
+};
+
+export const updateKoutaValintaperuste = async ({
+  valintaperuste,
+  httpClient,
+  apiUrls,
+}) => {
+  const { lastModified = '', ...rest } = valintaperuste;
+
+  const headers = {
+    'If-Unmodified-Since': lastModified,
+  };
+
+  const { data } = await httpClient.post(
+    apiUrls.url('kouta-backend.valintaperuste'),
+    rest,
+    { headers },
+  );
+
+  return data;
 };

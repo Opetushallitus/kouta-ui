@@ -6,18 +6,20 @@ import { ReduxToaster } from '../Toaster';
 import CreateKoulutusPage from '../CreateKoulutusPage';
 import CreateToteutusPage from '../CreateToteutusPage';
 import CreateHakukohdePage from '../CreateHakukohdePage';
-import CreateValintaperusteetPage from '../CreateValintaperusteetPage';
+import CreateValintaperustePage from '../CreateValintaperustePage';
 import EditKoulutusPage from '../EditKoulutusPage';
 import CreateHakuPage from '../CreateHakuPage';
 import EditHakuPage from '../EditHakuPage';
 import HomePage from '../HomePage';
 import EditToteutusPage from '../EditToteutusPage';
 import EditHakukohdePage from '../EditHakukohdePage';
+import EditValintaperustePage from '../EditValintaperustePage';
+import RouterScrollToTop from '../RouterScrollToTop';
 
 const MainPage = ({ history }) => {
   return (
     <Router history={history}>
-      <>
+      <RouterScrollToTop>
         <ReduxToaster
           style={{
             position: 'fixed',
@@ -50,7 +52,7 @@ const MainPage = ({ history }) => {
           />
           <Route
             path="/organisaatio/:oid/valintaperusteet"
-            component={CreateValintaperusteetPage}
+            component={CreateValintaperustePage}
             exact
           />
           <Route
@@ -72,9 +74,14 @@ const MainPage = ({ history }) => {
             component={EditHakukohdePage}
             exact
           />
+          <Route
+            path="/valintaperusteet/:oid/muokkaus"
+            component={EditValintaperustePage}
+            exact
+          />
           <Redirect to="/" />
         </Switch>
-      </>
+      </RouterScrollToTop>
     </Router>
   );
 };

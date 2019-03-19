@@ -2,8 +2,8 @@ import React from 'react';
 
 import FormSteps from '../FormSteps';
 
-const CreateValintaperusteetSteps = ({ ...props }) => (
+const CreateValintaperusteSteps = ({ ...props }) => (
   <FormSteps activeStep="valintaperusteet" {...props} />
 );
 
-export default CreateValintaperusteetSteps;
+export default CreateValintaperusteSteps;

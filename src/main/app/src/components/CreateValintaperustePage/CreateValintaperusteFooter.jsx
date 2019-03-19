@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import { isValid } from 'redux-form';
 
 import { JULKAISUTILA } from '../../constants';
-import { submit as submitValintaperusteet } from '../../state/createValintaperusteetForm';
+import { submit as submitValintaperuste } from '../../state/createValintaperusteForm';
 import Button from '../Button';
 
-const valintaperusteetFormIsValid = isValid('createValintaperusteetForm');
+const valintaperusteFormIsValid = isValid('createValintaperusteForm');
 
 const Wrapper = styled.div`
   max-width: 1200px;
@@ -22,7 +22,7 @@ const SaveButton = styled(Button).attrs({ variant: 'outlined' })`
   margin-right: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
-const CreateValintaperusteetFooter = ({
+const CreateValintaperusteFooter = ({
   onSave = () => {},
   onSaveAndPublish = () => {},
   valid = true,
@@ -39,14 +39,14 @@ const CreateValintaperusteetFooter = ({
 
 export default connect(
   state => ({
-    valid: valintaperusteetFormIsValid(state),
+    valid: valintaperusteFormIsValid(state),
   }),
   dispatch => ({
     onSave: () => {
-      dispatch(submitValintaperusteet({ tila: JULKAISUTILA.TALLENNETTU }));
+      dispatch(submitValintaperuste({ tila: JULKAISUTILA.TALLENNETTU }));
     },
     onSaveAndPublish: () => {
-      dispatch(submitValintaperusteet({ tila: JULKAISUTILA.JULKAISTU }));
+      dispatch(submitValintaperuste({ tila: JULKAISUTILA.JULKAISTU }));
     },
   }),
-)(CreateValintaperusteetFooter);
+)(CreateValintaperusteFooter);

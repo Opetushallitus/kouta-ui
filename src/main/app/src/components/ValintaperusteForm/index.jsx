@@ -1,4 +1,4 @@
-export { default } from './ValintaperusteetForm';
+export { default } from './ValintaperusteForm';
 
 export const validate = values => {
   const errors = {};

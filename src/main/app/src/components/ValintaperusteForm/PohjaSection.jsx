@@ -38,9 +38,6 @@ const renderPohjaField = ({ input, onContinue }) => {
       <DropdownMenuItem onClick={() => onChange('copy_valintaperuste')}>
         Kopio pohjaksi aiemmin luotu valintaperuste
       </DropdownMenuItem>
-      <DropdownMenuItem onClick={() => onChange('existing_valintaperuste')}>
-        Käytä olemassa olevaa valintaperustetta
-      </DropdownMenuItem>
     </DropdownMenu>
   );
 

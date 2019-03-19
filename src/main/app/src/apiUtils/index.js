@@ -170,7 +170,7 @@ const memoizedGetKoulutusByKoodi = memoizePromise(
   },
 );
 
-const memoizedGetHakuByKoodi = memoize(
+const memoizedGetHakuByKoodi = memoizePromise(
   async (httpClient, apiUrls, argKoodiUri) => {
     const { koodiUri } = getKoodiUriParts(argKoodiUri);
 

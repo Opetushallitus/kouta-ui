@@ -43,6 +43,7 @@ const HakuForm = ({
   onCopy = () => {},
   onMaybeCopy = () => {},
   onCreateNew = () => {},
+  canCopy = true,
   onAttachHakukohde,
   steps = false,
   scrollTarget,
@@ -52,20 +53,22 @@ const HakuForm = ({
     <ActiveLanguages>
       {({ languages }) => (
         <FormCollapseGroup enabled={steps} scrollTarget={scrollTarget}>
-          <FormCollapse
-            header="Pohjan valinta"
-            section="pohja"
-            onContinue={onMaybeCopy}
-            >
-              {({ onContinue }) => (
-                <BaseSelectionSection
-                  onContinue={onContinue}
-                  organisaatioOid={organisaatioOid}
-                  onCopy={onCopy}
-                  onCreateNew={onCreateNew}
-                />
-              )}
-            </FormCollapse>
+          {canCopy ? (
+            <FormCollapse
+              header="Pohjan valinta"
+              section="pohja"
+              onContinue={onMaybeCopy}
+              >
+                {({ onContinue }) => (
+                  <BaseSelectionSection
+                    onContinue={onContinue}
+                    organisaatioOid={organisaatioOid}
+                    onCopy={onCopy}
+                    onCreateNew={onCreateNew}
+                  />
+                )}
+              </FormCollapse>
+            ) : null}
 
           <FormCollapse
             header="Kieliversiot"

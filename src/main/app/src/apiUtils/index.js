@@ -797,3 +797,20 @@ export const updateKoutaValintaperuste = async ({
 
   return data;
 };
+
+export const getKoutaIndexValintaperusteet = async ({
+  httpClient,
+  apiUrls,
+  ...rest
+}) => {
+  const params = toKoutaIndexParams(rest);
+
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-index.valintaperuste-list'),
+    {
+      params,
+    },
+  );
+
+  return data;
+};

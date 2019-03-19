@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
-import { hideVisually } from 'polished';
+import { Spring } from 'react-spring';
 
 import { isString } from '../../utils';
 import { getThemeProp } from '../../theme';
 import Typography from '../Typography';
-import Icon from '../Icon';
+import DropdownIcon from '../DropdownIcon';
 
 const Container = styled.div`
   border: 1px solid ${getThemeProp('palette.border')};
@@ -56,7 +56,7 @@ const FooterContainer = styled.div`
   border-top: 1px solid ${getThemeProp('palette.border')};
 `;
 
-const ToggleIcon = styled(Icon)`
+const ToggleIcon = styled(DropdownIcon)`
   color: white;
   font-size: 2rem;
 `;
@@ -69,9 +69,28 @@ const HeaderTextContent = styled(Typography).attrs({ variant: 'h5' })`
   padding: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
-const ContentContainer = styled.div`
-  ${({ open }) => !open && hideVisually()};
-`;
+const ContentContainerBase = styled.div``;
+
+const ContentContainer = ({ open, children }) => {
+  return (
+    <Spring
+      from={{ opacity: 1, height: 'auto' }}
+      to={open ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
+    >
+      {({ opacity, height }) => (
+        <ContentContainerBase
+          style={{
+            opacity,
+            height,
+            overflow: opacity === 1 ? 'visible' : 'hidden',
+          }}
+        >
+          {children}
+        </ContentContainerBase>
+      )}
+    </Spring>
+  );
+};
 
 const renderHeader = header => {
   return isString(header) ? (
@@ -79,10 +98,6 @@ const renderHeader = header => {
   ) : (
     header
   );
-};
-
-const getIconType = open => {
-  return open ? 'expand_less' : 'expand_more';
 };
 
 const nop = () => {};
@@ -107,7 +122,7 @@ const Collapse = ({
         {renderHeader(header)}
       </HeaderContent>
       <HeaderToggle onClick={onToggle}>
-        <ToggleIcon type={getIconType(open)} />
+        <ToggleIcon icon="expand_more" open={open} />
       </HeaderToggle>
     </HeaderContainer>
     <ContentContainer open={open}>

@@ -71,7 +71,7 @@ const DropdownDialog = ({
   overlay,
   visible,
   placement: placementProp,
-  modifiers,
+  modifiers = {},
   ...props
 }) => (
   <Transition

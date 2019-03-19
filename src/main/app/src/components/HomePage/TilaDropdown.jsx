@@ -7,9 +7,9 @@ import {
   DropdownMenuItem,
 } from '../Dropdown';
 
+import DropdownIcon from '../DropdownIcon';
 import { JULKAISUTILA } from '../../constants';
 import TilaLabel from './TilaLabel';
-import Icon from '../Icon';
 
 const TilaItem = styled(DropdownMenuItem)`
   cursor: pointer;
@@ -23,8 +23,7 @@ const DropdownContainer = styled.div`
 `;
 
 export const TilaDropdown = ({ onChange, value }) => {
-  const tilat = Object.values(JULKAISUTILA)
-    .filter(v => v !== value)
+  const tilat = Object.values(JULKAISUTILA).filter(v => v !== value);
 
   const overlay = (
     <DropdownMenu>
@@ -44,8 +43,7 @@ export const TilaDropdown = ({ onChange, value }) => {
     >
       {({ ref, onToggle, visible }) => (
         <DropdownContainer ref={ref} onClick={onToggle} title="Muuta tilaa">
-          <TilaLabel tila={value} />{' '}
-          <Icon type={visible ? 'arrow_drop_up' : 'arrow_drop_down'} />
+          <TilaLabel tila={value} /> <DropdownIcon open={visible} />
         </DropdownContainer>
       )}
     </UncontrolledDropdown>

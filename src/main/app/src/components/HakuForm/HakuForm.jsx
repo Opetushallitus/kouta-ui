@@ -47,7 +47,7 @@ const HakuForm = ({
   onAttachHakukohde,
   steps = false,
   scrollTarget,
-  haku: hakuProps = null,
+  haku: hakuProp = null,
 }) => (
   <form onSubmit={handleSubmit}>
     <ActiveLanguages>
@@ -146,7 +146,7 @@ const HakuForm = ({
                 </HakukohteetPohjaFieldValue>
               }
             >
-              <HakukohteetSection haku={hakuProps} organisaatioOid={organisaatioOid} />
+              <HakukohteetSection haku={hakuProp} organisaatioOid={organisaatioOid} />
             </FormCollapse>
           ) : null}
           </FormCollapseGroup>

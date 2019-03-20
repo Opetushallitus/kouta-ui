@@ -153,7 +153,7 @@ exports[`renders correctly 1`] = `
         </styled.div>
       </div>
     </styled.div>
-    <styled.div
+    <div
       style={
         Object {
           "height": 0,
@@ -162,36 +162,25 @@ exports[`renders correctly 1`] = `
         }
       }
     >
-      <div
-        className=""
-        style={
-          Object {
-            "height": 0,
-            "opacity": 1,
-            "overflow": "visible",
-          }
-        }
-      >
-        <styled.div>
-          <div
-            className="c8"
-          >
-            <div>
-              Collapse children
-            </div>
+      <styled.div>
+        <div
+          className="c8"
+        >
+          <div>
+            Collapse children
           </div>
-        </styled.div>
-        <styled.div>
-          <div
-            className="c9"
-          >
-            <button>
-              Footer button
-            </button>
-          </div>
-        </styled.div>
-      </div>
-    </styled.div>
+        </div>
+      </styled.div>
+      <styled.div>
+        <div
+          className="c9"
+        >
+          <button>
+            Footer button
+          </button>
+        </div>
+      </styled.div>
+    </div>
   </div>
 </styled.div>
 `;
@@ -322,7 +311,7 @@ exports[`renders correctly 2`] = `
         </styled.div>
       </div>
     </styled.div>
-    <styled.div
+    <div
       style={
         Object {
           "height": 0,
@@ -331,36 +320,25 @@ exports[`renders correctly 2`] = `
         }
       }
     >
-      <div
-        className=""
-        style={
-          Object {
-            "height": 0,
-            "opacity": 1,
-            "overflow": "visible",
-          }
-        }
-      >
-        <styled.div>
-          <div
-            className="c6"
-          >
-            <div>
-              Collapse children
-            </div>
+      <styled.div>
+        <div
+          className="c6"
+        >
+          <div>
+            Collapse children
           </div>
-        </styled.div>
-        <styled.div>
-          <div
-            className="c7"
-          >
-            <button>
-              Footer button
-            </button>
-          </div>
-        </styled.div>
-      </div>
-    </styled.div>
+        </div>
+      </styled.div>
+      <styled.div>
+        <div
+          className="c7"
+        >
+          <button>
+            Footer button
+          </button>
+        </div>
+      </styled.div>
+    </div>
   </div>
 </styled.div>
 `;
@@ -517,7 +495,7 @@ exports[`renders correctly when closed 1`] = `
         </styled.div>
       </div>
     </styled.div>
-    <styled.div
+    <div
       style={
         Object {
           "height": 0,
@@ -526,36 +504,25 @@ exports[`renders correctly when closed 1`] = `
         }
       }
     >
-      <div
-        className=""
-        style={
-          Object {
-            "height": 0,
-            "opacity": 1,
-            "overflow": "visible",
-          }
-        }
-      >
-        <styled.div>
-          <div
-            className="c8"
-          >
-            <div>
-              Hello world!
-            </div>
+      <styled.div>
+        <div
+          className="c8"
+        >
+          <div>
+            Hello world!
           </div>
-        </styled.div>
-        <styled.div>
-          <div
-            className="c9"
-          >
-            <div>
-              footer
-            </div>
+        </div>
+      </styled.div>
+      <styled.div>
+        <div
+          className="c9"
+        >
+          <div>
+            footer
           </div>
-        </styled.div>
-      </div>
-    </styled.div>
+        </div>
+      </styled.div>
+    </div>
   </div>
 </styled.div>
 `;

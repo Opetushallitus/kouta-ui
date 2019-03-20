@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect, useCallback } from 'react';
+import React, { Fragment, useState } from 'react';
 import styled, { css } from 'styled-components';
 import get from 'lodash/get';
 
@@ -72,38 +72,6 @@ const Cell = styled(TableCell)`
       cursor: pointer;
     `}
 `;
-
-const ListTableCell = ({
-  columnKey,
-  rowKey,
-  onCollapsedChange: onCollapsedChangeProp,
-  collapsedRow,
-  collapsedColumn,
-  children,
-}) => {
-  const columnIsCollapsed =
-    collapsedColumn === columnKey && collapsedRow === rowKey;
-
-  const onCollapsedChange = useCallback(() => {
-    if (!isFunction(onCollapsedChangeProp)) {
-      return;
-    }
-
-    columnIsCollapsed
-      ? onCollapsedChangeProp({})
-      : onCollapsedChangeProp({ column: columnKey, row: rowKey });
-  }, [columnIsCollapsed, columnKey, rowKey, onCollapsedChangeProp]);
-
-  return (
-    <Cell
-      active={columnIsCollapsed}
-      noBorder={columnIsCollapsed}
-      onClick={onCollapsedChange}
-    >
-      {children}
-    </Cell>
-  );
-};
 
 export const ListTable = ({
   onSort,

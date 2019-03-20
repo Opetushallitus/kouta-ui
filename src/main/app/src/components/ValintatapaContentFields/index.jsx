@@ -98,6 +98,7 @@ const FieldsSortableContainer = SortableContainer(({ fields, language }) => {
     <div>
       {fields.map((content, index) => {
         const contentValue = fields.get(index);
+
         return (
           <FieldSortableElement key={index} index={index}>
             <Flex marginBottom={index < fields.length - 1 ? 2 : 0}>

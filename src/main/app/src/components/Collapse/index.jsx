@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
-import { Spring } from 'react-spring';
 
-import { isString } from '../../utils';
+import { isString, noop } from '../../utils';
 import { getThemeProp } from '../../theme';
 import Typography from '../Typography';
 import DropdownIcon from '../DropdownIcon';
+import CollapseContent from '../CollapseContent';
 
 const Container = styled.div`
   border: 1px solid ${getThemeProp('palette.border')};
@@ -69,29 +69,6 @@ const HeaderTextContent = styled(Typography).attrs({ variant: 'h5' })`
   padding: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
-const ContentContainerBase = styled.div``;
-
-const ContentContainer = ({ open, children }) => {
-  return (
-    <Spring
-      from={{ opacity: 1, height: 'auto' }}
-      to={open ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
-    >
-      {({ opacity, height }) => (
-        <ContentContainerBase
-          style={{
-            opacity,
-            height,
-            overflow: opacity === 1 ? 'visible' : 'hidden',
-          }}
-        >
-          {children}
-        </ContentContainerBase>
-      )}
-    </Spring>
-  );
-};
-
 const renderHeader = header => {
   return isString(header) ? (
     <HeaderTextContent>{header}</HeaderTextContent>
@@ -99,8 +76,6 @@ const renderHeader = header => {
     header
   );
 };
-
-const nop = () => {};
 
 const Collapse = ({
   header = null,
@@ -116,7 +91,7 @@ const Collapse = ({
     <HeaderContainer open={open}>
       <HeaderContent
         toggleOnHeaderClick={toggleOnHeaderClick}
-        onClick={toggleOnHeaderClick ? onToggle : nop}
+        onClick={toggleOnHeaderClick ? onToggle : noop}
         active={active}
       >
         {renderHeader(header)}
@@ -125,10 +100,10 @@ const Collapse = ({
         <ToggleIcon icon="expand_more" open={open} />
       </HeaderToggle>
     </HeaderContainer>
-    <ContentContainer open={open}>
+    <CollapseContent open={open}>
       <ContentWrapper>{children}</ContentWrapper>
       {footer ? <FooterContainer>{footer}</FooterContainer> : null}
-    </ContentContainer>
+    </CollapseContent>
   </Container>
 );
 

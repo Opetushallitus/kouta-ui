@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment, useState, useEffect, useCallback } from 'react';
 import styled, { css } from 'styled-components';
 import get from 'lodash/get';
 
@@ -6,11 +6,9 @@ import Table, { TableHead, TableBody, TableRow, TableCell } from '../Table';
 import { getSortDirection, makeOnSort } from './utils';
 import Icon from '../Icon';
 import TilaLabel from './TilaLabel';
-import { formatKoutaDateString } from '../../utils';
+import { formatKoutaDateString, isFunction } from '../../utils';
 
-import {
-  UncontrolledDropdown,
-} from '../Dropdown';
+import { UncontrolledDropdown } from '../Dropdown';
 
 export const makeTilaColumn = () => ({
   title: 'Tila',
@@ -24,9 +22,7 @@ export const makeModifiedColumn = () => ({
   key: 'modified',
   sortable: true,
   render: ({ modified }) =>
-    modified
-      ? formatKoutaDateString(modified, 'DD.MM.YYYY HH:mm')
-      : null,
+    modified ? formatKoutaDateString(modified, 'DD.MM.YYYY HH:mm') : null,
 });
 
 export const makeMuokkaajaColumn = () => ({
@@ -69,13 +65,64 @@ const ActionsDropdown = ({ actionsMenu }) => {
   );
 };
 
+const Cell = styled(TableCell)`
+  ${({ onClick }) =>
+    isFunction(onClick) &&
+    css`
+      cursor: pointer;
+    `}
+`;
+
+const ListTableCell = ({
+  columnKey,
+  rowKey,
+  onCollapsedChange: onCollapsedChangeProp,
+  collapsedRow,
+  collapsedColumn,
+  children,
+}) => {
+  const columnIsCollapsed =
+    collapsedColumn === columnKey && collapsedRow === rowKey;
+
+  const onCollapsedChange = useCallback(() => {
+    if (!isFunction(onCollapsedChangeProp)) {
+      return;
+    }
+
+    columnIsCollapsed
+      ? onCollapsedChangeProp({})
+      : onCollapsedChangeProp({ column: columnKey, row: rowKey });
+  }, [columnIsCollapsed, columnKey, rowKey, onCollapsedChangeProp]);
+
+  return (
+    <Cell
+      active={columnIsCollapsed}
+      noBorder={columnIsCollapsed}
+      onClick={onCollapsedChange}
+    >
+      {children}
+    </Cell>
+  );
+};
+
 export const ListTable = ({
   onSort,
   sort,
   columns = [],
   rows = [],
   renderActionsMenu,
+  defaultCollapsedRow = null,
+  defaultCollapsedColumn = null,
 }) => {
+  const [collapsed, setCollapsed] = useState({
+    row: defaultCollapsedRow,
+    column: defaultCollapsedColumn,
+  });
+
+  const { row: collapsedRow, column: collapsedColumn } = collapsed;
+
+  const columnCount = columns.length;
+
   return (
     <Table>
       <TableHead>
@@ -100,18 +147,53 @@ export const ListTable = ({
       <TableBody>
         {rows.map(rowProps => {
           const { key } = rowProps;
+          const rowIsCollapsed = collapsedRow === key;
 
           return (
-            <TableRow key={key}>
-              {columns.map(({ key: columnKey, render }) => (
-                <TableCell key={columnKey}>{render(rowProps)}</TableCell>
-              ))}
-              {renderActionsMenu ? (
-                <TableCell textCenter>
-                  <ActionsDropdown actionsMenu={renderActionsMenu(rowProps)} />
-                </TableCell>
+            <Fragment key={key}>
+              <TableRow>
+                {columns.map(
+                  ({ key: columnKey, render, collapsible = false }) => {
+                    const columnIsCollapsed =
+                      rowIsCollapsed && columnKey === collapsedColumn;
+
+                    return (
+                      <Cell
+                        active={columnIsCollapsed}
+                        noBorder={columnIsCollapsed}
+                        onClick={
+                          collapsible
+                            ? () => {
+                                setCollapsed(
+                                  columnIsCollapsed
+                                    ? {}
+                                    : { row: key, column: columnKey },
+                                );
+                              }
+                            : null
+                        }
+                      >
+                        {render(rowProps)}
+                      </Cell>
+                    );
+                  },
+                )}
+                {renderActionsMenu ? (
+                  <TableCell textCenter>
+                    <ActionsDropdown
+                      actionsMenu={renderActionsMenu(rowProps)}
+                    />
+                  </TableCell>
+                ) : null}
+              </TableRow>
+              {rowIsCollapsed ? (
+                <TableRow>
+                  <TableCell colSpan={columnCount} active>
+                    Lorem
+                  </TableCell>
+                </TableRow>
               ) : null}
-            </TableRow>
+            </Fragment>
           );
         })}
       </TableBody>

@@ -47,6 +47,18 @@ export const TableCellBase = styled.td`
       font-weight: bold;
       border-bottom: 2px solid ${getThemeProp('palette.primary.main')};
     `};
+
+  ${({ active }) =>
+    active &&
+    css`
+      background-color: ${getThemeProp('palette.primary.light')};
+    `}
+
+  ${({ noBorder }) =>
+    noBorder &&
+    css`
+      border-color: transparent;
+    `}
 `;
 
 const TableHeadBase = styled.thead`
@@ -79,6 +91,14 @@ const TableRowBase = styled.tr`
       }
     }
   `}
+
+  ${({ noBorder }) =>
+    noBorder &&
+    css`
+      ${TableCellBase} {
+        border-bottom: 0px none;
+      }
+    `}
 `;
 
 export const TableRow = ({ children, isTableHead = false, ...props }) => {

@@ -2,7 +2,11 @@ import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
 import ListCollapse from './ListCollapse';
-import ListTable, { makeModifiedColumn, makeMuokkaajaColumn, makeTilaColumn } from './ListTable';
+import ListTable, {
+  makeModifiedColumn,
+  makeMuokkaajaColumn,
+  makeTilaColumn,
+} from './ListTable';
 import Button from '../Button';
 import Pagination from '../Pagination';
 import Flex from '../Flex';
@@ -14,10 +18,9 @@ import { getIndexParamsByFilters } from './utils';
 import Filters from './Filters';
 import Badge from '../Badge';
 import useFilterState from './useFilterState';
+import ErrorAlert from '../ErrorAlert';
 
-import {
-  getFirstLanguageValue,
-} from '../../utils';
+import { getFirstLanguageValue } from '../../utils';
 
 const getHaut = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
@@ -42,9 +45,7 @@ const tableColumns = [
     title: 'Nimi',
     key: 'nimi',
     sortable: true,
-    render: ({ nimi, oid }) => (
-        getFirstLanguageValue(nimi)
-    ),
+    render: ({ nimi, oid }) => getFirstLanguageValue(nimi),
   },
   makeTilaColumn(),
   makeModifiedColumn(),
@@ -79,7 +80,11 @@ const KoulutuksetSection = ({ organisaatioOid }) => {
     tila,
   ]);
 
-  const { data: { result: haut, pageCount = 0 } = {} } = useApiAsync({
+  const {
+    data: { result: haut, pageCount = 0 } = {},
+    error,
+    reload,
+  } = useApiAsync({
     promiseFn: getHaut,
     nimi: debouncedNimi,
     page,
@@ -91,9 +96,7 @@ const KoulutuksetSection = ({ organisaatioOid }) => {
   });
 
   const rows = useMemo(() => {
-    return haut
-      ? haut.map(haku => ({ ...haku, key: haku.oid }))
-      : null;
+    return haut ? haut.map(haku => ({ ...haku, key: haku.oid })) : null;
   }, [haut]);
 
   return (
@@ -114,6 +117,8 @@ const KoulutuksetSection = ({ organisaatioOid }) => {
           onSort={setOrderBy}
           sort={orderBy}
         />
+      ) : error ? (
+        <ErrorAlert onReload={reload} center />
       ) : (
         <Spin center />
       )}

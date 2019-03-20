@@ -19,6 +19,7 @@ import useFilterState from './useFilterState';
 import { getFirstLanguageValue } from '../../utils';
 import Anchor from '../Anchor';
 import Button from '../Button';
+import ErrorAlert from '../ErrorAlert';
 
 const getValintaperusteet = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
@@ -77,6 +78,8 @@ const ValintaperusteetSection = ({ organisaatioOid }) => {
 
   const {
     data: { result: valintaperusteet, pageCount = 0 } = {},
+    error,
+    reload,
   } = useApiAsync({
     promiseFn: getValintaperusteet,
     nimi: debouncedNimi,
@@ -115,6 +118,8 @@ const ValintaperusteetSection = ({ organisaatioOid }) => {
           onSort={setOrderBy}
           sort={orderBy}
         />
+      ) : error ? (
+        <ErrorAlert onReload={reload} center />
       ) : (
         <Spin center />
       )}

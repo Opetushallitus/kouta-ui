@@ -19,6 +19,7 @@ import Filters from './Filters';
 import Badge from '../Badge';
 import useFilterState from './useFilterState';
 import KoulutusTilaDropdown from './KoulutusTilaDropdown';
+import ErrorAlert from '../ErrorAlert';
 
 import { getFirstLanguageValue } from '../../utils';
 
@@ -63,8 +64,7 @@ const LuoKoulutusDropdown = ({ organisaatioOid }) => {
       {({ ref, onToggle, visible }) => (
         <div ref={ref} onClick={onToggle}>
           <Button>
-            Luo uusi koulutus{' '}
-            <DropdownIcon open={visible} />
+            Luo uusi koulutus <DropdownIcon open={visible} />
           </Button>
         </div>
       )}
@@ -91,7 +91,9 @@ const tableColumns = [
     title: 'Tila',
     key: 'tila',
     sortable: true,
-    render: ({ tila, oid }) => <KoulutusTilaDropdown initialTila={tila} koulutusOid={oid} />,
+    render: ({ tila, oid }) => (
+      <KoulutusTilaDropdown initialTila={tila} koulutusOid={oid} />
+    ),
   },
   makeModifiedColumn(),
   makeMuokkaajaColumn(),
@@ -125,7 +127,11 @@ const KoulutuksetSection = ({ organisaatioOid }) => {
     tila,
   ]);
 
-  const { data: { result: koulutukset, pageCount = 0 } = {} } = useApiAsync({
+  const {
+    data: { result: koulutukset, pageCount = 0 } = {},
+    error,
+    reload,
+  } = useApiAsync({
     promiseFn: getKoulutukset,
     nimi: debouncedNimi,
     page,
@@ -160,6 +166,8 @@ const KoulutuksetSection = ({ organisaatioOid }) => {
           onSort={setOrderBy}
           sort={orderBy}
         />
+      ) : error ? (
+        <ErrorAlert onReload={reload} center />
       ) : (
         <Spin center />
       )}

@@ -45,22 +45,22 @@ const serializeSisalto = ({ sisalto, kielivalinta = [] }) => {
     return [];
   }
 
-  return sisalto.map(({ type, data }) => {
+  return sisalto.map(({ tyyppi, data }) => {
     let serializedData = {};
 
-    if (type === 'text') {
+    if (tyyppi === 'teksti') {
       serializedData = pick(
         isObject(data) ? mapValues(data, serializeEditor) : {},
         kielivalinta,
       );
     }
 
-    if (type === 'table') {
+    if (tyyppi === 'taulukko') {
       serializedData = serializeTable({ table: data, kielivalinta });
     }
 
     return {
-      type,
+      tyyppi,
       data: serializedData,
     };
   });
@@ -71,15 +71,15 @@ const parseSisalto = ({ sisalto }) => {
     return [];
   }
 
-  return sisalto.map(({ type, data }) => {
-    if (type === 'text') {
+  return sisalto.map(({ tyyppi, data }) => {
+    if (tyyppi === 'teksti') {
       return {
-        type,
+        tyyppi,
         data: isString(data) ? parseEditor(data) : parseEditor(''),
       };
     }
 
-    return { type, data };
+    return { tyyppi, data };
   });
 };
 
@@ -165,12 +165,12 @@ export const getValintaperusteByValues = values => {
     hakutapaKoodiUri,
     kohdejoukkoKoodiUri,
     nimi,
-    kuvaus,
     tyyppi,
     metadata: {
       valintavat,
       kielitaitovaatimukset,
       osaamistaustaKoodiUrit,
+      kuvaus,
     },
   };
 };
@@ -181,7 +181,6 @@ export const getValuesByValintaperuste = valintaperuste => {
     kielivalinta = [],
     kohdejoukkoKoodiUri = null,
     nimi = {},
-    kuvaus = {},
     metadata = {},
     tyyppi = null,
   } = valintaperuste;
@@ -190,6 +189,7 @@ export const getValuesByValintaperuste = valintaperuste => {
     osaamistaustaKoodiUrit = [],
     kielitaitovaatimukset: kielitaitovaatimuksetArg = [],
     valintatavat = [],
+    kuvaus = {},
   } = metadata;
 
   const kielitaitovaatimukset = (kielitaitovaatimuksetArg || []).map(

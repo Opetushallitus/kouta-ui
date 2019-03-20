@@ -39,19 +39,24 @@ const ValintaperusteForm = ({
   handleSubmit,
   steps = true,
   canEditTyyppi = true,
-  koulutustyyppi: koulutustyyppiProp = KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS,
+  koulutustyyppi: koulutustyyppiProp,
   onMaybeCopy = () => {},
   canCopy = true,
   organisaatioOid,
   onCreateNew = () => {},
 }) => {
-
   return (
     <form onSubmit={handleSubmit}>
       <WithLanguagesAndTyyppiValue>
         {({ languages, tyyppi }) => {
-          const koulutustyyppi = tyyppi || koulutustyyppiProp;
-          const isKorkeakoulu = KORKEAKOULUKOULUTUSTYYPIT.includes(koulutustyyppi);
+          const koulutustyyppi =
+            tyyppi ||
+            koulutustyyppiProp ||
+            KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS;
+
+          const isKorkeakoulu = KORKEAKOULUKOULUTUSTYYPIT.includes(
+            koulutustyyppi,
+          );
 
           return (
             <FormCollapseGroup enabled={steps}>
@@ -60,11 +65,11 @@ const ValintaperusteForm = ({
                   <TyyppiSection />
                 </FormCollapse>
               ) : null}
-  
+
               <FormCollapse header="Kieliversiot" section="kieliversiot">
                 <KieliversiotFormSection />
               </FormCollapse>
-  
+
               {canCopy ? (
                 <FormCollapse
                   header="Pohjan valinta"
@@ -80,39 +85,39 @@ const ValintaperusteForm = ({
                   )}
                 </FormCollapse>
               ) : null}
-  
+
               <FormCollapse header="Hakutavan rajaus" section="hakutavanRajaus">
                 <HakutavanRajausSection />
               </FormCollapse>
-  
+
               <FormCollapse
                 header="Haun kohdejoukon rajaus"
                 section="kohdejoukonRajaus"
               >
                 <KohdejoukonRajausSection />
               </FormCollapse>
-  
+
               <FormCollapse header="Valintaperusteen nimi" section="nimi">
                 <NimiSection languages={languages} />
               </FormCollapse>
-  
+
               {isKorkeakoulu ? (
                 <FormCollapse header="Osaamistausta" section="osaamistausta">
                   <OsaamistaustaSection />
                 </FormCollapse>
               ) : null}
-  
+
               <FormCollapse header="Valintatapa" section="valintatapa">
                 <ValintatapaSection languages={languages} />
               </FormCollapse>
-  
+
               <FormCollapse
                 header="Kielitaitovaatimukset"
                 section="kielitaitovaatimukset"
               >
                 <KielitaitovaatimuksetSection languages={languages} />
               </FormCollapse>
-  
+
               {isKorkeakoulu ? (
                 <FormCollapse
                   header="Valintaperusteen loppukuvaus"

@@ -1,15 +1,14 @@
 import React from 'react';
-import { Spring, Transition, animated } from 'react-spring';
+import { Spring, Transition } from 'react-spring';
 
 export const CollapseContent = ({ open = false, children }) => {
   return (
     <Spring
-      native
       from={{ opacity: 1, height: 'auto' }}
       to={open ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
     >
       {({ opacity, height }) => (
-        <animated.div
+        <div
           style={{
             opacity,
             height,
@@ -17,7 +16,7 @@ export const CollapseContent = ({ open = false, children }) => {
           }}
         >
           {children}
-        </animated.div>
+        </div>
       )}
     </Spring>
   );
@@ -26,7 +25,6 @@ export const CollapseContent = ({ open = false, children }) => {
 export const UnmountingCollapseContent = ({ open, children }) => {
   return (
     <Transition
-      native
       enter={{ opacity: 1, height: 'auto' }}
       leave={{ opacity: 0, height: 0 }}
       from={{ opacity: 0, height: 0 }}
@@ -35,15 +33,15 @@ export const UnmountingCollapseContent = ({ open, children }) => {
       {open =>
         open &&
         (({ opacity, height }) => (
-          <animated.div
+          <div
             style={{
               opacity,
               height,
-              overflow: opacity === 1 ? 'visible' : 'hidden',
+              overflow: opacity.value === 1 ? 'visible' : 'hidden',
             }}
           >
             {children}
-          </animated.div>
+          </div>
         ))
       }
     </Transition>

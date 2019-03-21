@@ -127,6 +127,7 @@ export const ListTable = ({
 
                     return (
                       <Cell
+                        key={columnKey}
                         active={columnIsCollapsed}
                         noBorder={columnIsCollapsed}
                         onClick={

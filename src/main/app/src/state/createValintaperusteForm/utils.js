@@ -264,7 +264,7 @@ export const getValuesByValintaperuste = valintaperuste => {
       kielet: kielitaitovaatimukset,
     },
     valintatapa: {
-      valintavat: (valintatavat || []).map(
+      valintatavat: (valintatavat || []).map(
         ({
           kuvaus,
           nimi,

@@ -59,7 +59,7 @@ export const submit = ({ valintaperuste, tila: tilaArg }) => async (
     }),
   );
 
-  history.push(`/valintaperusteet/${valintaperuste.oid}/muokkaus`, {
+  history.push(`/valintaperusteet/${valintaperuste.id}/muokkaus`, {
     valintaperusteUpdatedAt: Date.now(),
   });
 

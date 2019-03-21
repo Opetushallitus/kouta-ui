@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 
-import CollapseContent from './index';
+import CollapseContent, { UnmountingCollapseContent } from './index';
 import Typography from '../Typography';
 import Button from '../Button';
 
-const Story = () => {
+const Story = ({ component: Component = CollapseContent }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -13,10 +13,15 @@ const Story = () => {
       <Button onClick={() => setOpen(currentOpen => !currentOpen)}>
         {open ? 'Close' : 'Open'}
       </Button>
-      <CollapseContent open={open}>
+      <Component open={open}>
         <Typography>Lorem ipsum dolor sit amet</Typography>
-      </CollapseContent>
+      </Component>
     </>
   );
 };
-storiesOf('CollapseContent', module).add('Basic', () => <Story />);
+
+storiesOf('CollapseContent', module)
+  .add('Basic', () => <Story />)
+  .add('With UnmountingCollapseContent', () => (
+    <Story component={UnmountingCollapseContent} />
+  ));

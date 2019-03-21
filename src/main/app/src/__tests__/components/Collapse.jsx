@@ -1,7 +1,13 @@
 import React from 'react';
 
 import Collapse from '../../components/Collapse';
-import { mountWithTheme } from '../../testUtils';
+import { mountWithTheme, setMockDate } from '../../testUtils';
+
+let clearMockDate;
+
+beforeAll(() => {
+  clearMockDate = setMockDate(new Date(1553161674015));
+});
 
 test('renders correctly', () => {
   const footer = <button>Footer button</button>;
@@ -52,4 +58,8 @@ test('renders correctly when closed', () => {
       </Collapse>,
     ),
   ).toMatchSnapshot();
+});
+
+afterAll(() => {
+  clearMockDate();
 });

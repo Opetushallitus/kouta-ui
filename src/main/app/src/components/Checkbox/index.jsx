@@ -25,7 +25,7 @@ const CheckboxInput = styled.input.attrs({ type: 'checkbox' })`
 `;
 
 const Checkbox = ({ children = null, value, checked: checkedProp, ...props }) => {
-  const checked = checkedProp || value || false;
+  const checked = checkedProp || value;
 
   return (
     <Label>

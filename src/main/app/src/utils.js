@@ -31,7 +31,7 @@ export const isNumeric = value => {
   }
 
   if (isString(value)) {
-    return !isNaN(parseInt(value));
+    return !isNaN(parseFloat(value));
   }
 
   return false;

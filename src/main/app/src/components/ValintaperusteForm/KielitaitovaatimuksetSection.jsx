@@ -38,11 +38,13 @@ const renderVaatimustyyppiField = ({
   vaatimusTyyppi,
   isLast,
 }) => {
-  const { value } = input;
+  const { value, onChange } = input;
 
   return (
     <>
-      <Checkbox {...input}>{label}</Checkbox>
+      <Checkbox checked={value} onChange={onChange}>
+        {label}
+      </Checkbox>
       {!!value ? (
         <Spacing marginTop={2} marginBottom={isLast ? 0 : 2}>
           <FieldArray

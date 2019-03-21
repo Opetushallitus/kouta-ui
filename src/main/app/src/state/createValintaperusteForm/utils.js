@@ -4,7 +4,7 @@ import toPairs from 'lodash/toPairs';
 import pick from 'lodash/pick';
 import mapValues from 'lodash/mapValues';
 
-import { isObject, isArray, isString } from '../../utils';
+import { isObject, isArray, isString, isNumeric } from '../../utils';
 import { VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI } from '../../constants';
 
 import {
@@ -107,12 +107,16 @@ export const getValintaperusteByValues = values => {
     }) => ({
       kuvaus: pick(kuvaus || {}, kielivalinta),
       nimi: pick(nimi || {}, kielivalinta),
-      valintapaKoodiUri: get(tapa, 'value') || null,
+      valintatapaKoodiUri: get(tapa, 'value') || null,
       sisalto: serializeSisalto({ sisalto, kielivalinta }),
       kaytaMuuntotaulukkoa: false,
       kynnysehto: pick(kynnysehto || {}, kielivalinta),
-      enimmaispisteet: enimmaispistemaara,
-      vahimmaispiteet: vahimmaispistemaara,
+      enimmaispisteet: isNumeric(enimmaispistemaara)
+        ? parseFloat(enimmaispistemaara)
+        : null,
+      vahimmaispisteet: isNumeric(vahimmaispistemaara)
+        ? parseFloat(vahimmaispistemaara)
+        : null,
     }),
   );
 
@@ -268,18 +272,18 @@ export const getValuesByValintaperuste = valintaperuste => {
         ({
           kuvaus,
           nimi,
-          valintapakoodiUri,
+          valintatapaKoodiUri,
           sisalto,
           kynnysehto,
           enimmaispisteet,
-          vahimmaispiteet,
+          vahimmaispisteet,
         }) => ({
           kuvaus: kuvaus || {},
           nimi: nimi || {},
           kynnysehto: kynnysehto || {},
-          tapa: valintapakoodiUri ? { value: valintapakoodiUri } : null,
+          tapa: valintatapaKoodiUri ? { value: valintatapaKoodiUri } : null,
           enimmaispistemaara: enimmaispisteet || '',
-          vahimmaispistemaara: vahimmaispiteet || '',
+          vahimmaispistemaara: vahimmaispisteet || '',
           sisalto: parseSisalto({ sisalto }),
         }),
       ),

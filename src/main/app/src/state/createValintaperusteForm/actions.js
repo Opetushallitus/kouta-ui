@@ -74,7 +74,7 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   if (get(valintaperusteData, 'oid')) {
     const { oid: valintaperusteOid } = valintaperusteData;
 
-    history.push(`/valintaperuste/${valintaperusteOid}/muokkaus`);
+    history.push(`/valintaperusteet/${valintaperusteOid}/muokkaus`);
   } else {
     history.push('/');
   }

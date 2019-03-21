@@ -24,13 +24,17 @@ const CheckboxInput = styled.input.attrs({ type: 'checkbox' })`
   font-size: inherit;
 `;
 
-const Checkbox = ({ children = null, ...props }) => (
-  <Label>
-    <CheckboxWrapper>
-      <CheckboxInput {...props} />
-    </CheckboxWrapper>
-    <LabelWrapper>{children}</LabelWrapper>
-  </Label>
-);
+const Checkbox = ({ children = null, value, checked: checkedProp, ...props }) => {
+  const checked = checkedProp || value || false;
+
+  return (
+    <Label>
+      <CheckboxWrapper>
+        <CheckboxInput checked={checked} {...props} />
+      </CheckboxWrapper>
+      <LabelWrapper>{children}</LabelWrapper>
+    </Label>
+  );
+}
 
 export default Checkbox;

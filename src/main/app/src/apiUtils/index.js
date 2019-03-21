@@ -527,6 +527,11 @@ const memoizedGetKayttajanOrganisaatiot = memoizePromise(
         httpClient,
         apiUrls,
       }),
+      getOrganisaatioByOid({
+        oid: '1.2.246.562.10.240484683010',
+        httpClient,
+        apiUrls,
+      }),
     ]);
   },
 );

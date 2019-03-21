@@ -157,7 +157,6 @@ export const ListTable = ({
               {rowIsCollapsed ? (
                 <TableRow>
                   <TableCell colSpan={columnCount} active>
-                    Lorem
                   </TableCell>
                 </TableRow>
               ) : null}

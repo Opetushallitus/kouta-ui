@@ -95,7 +95,7 @@ export const getValintaperusteByValues = values => {
 
   const nimi = pick(get(values, 'nimi.nimi'), kielivalinta);
 
-  const valintavat = (get(values, 'valintatapa.valintatavat') || []).map(
+  const valintatavat = (get(values, 'valintatapa.valintatavat') || []).map(
     ({
       tapa,
       kuvaus,
@@ -167,7 +167,7 @@ export const getValintaperusteByValues = values => {
     nimi,
     tyyppi,
     metadata: {
-      valintavat,
+      valintatavat,
       kielitaitovaatimukset,
       osaamistaustaKoodiUrit,
       kuvaus,

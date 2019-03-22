@@ -19,6 +19,7 @@ import Filters from './Filters';
 import Badge from '../Badge';
 import useFilterState from './useFilterState';
 import ErrorAlert from '../ErrorAlert';
+import Anchor from '../Anchor';
 
 import { getFirstLanguageValue } from '../../utils';
 
@@ -45,7 +46,11 @@ const tableColumns = [
     title: 'Nimi',
     key: 'nimi',
     sortable: true,
-    render: ({ nimi, oid }) => getFirstLanguageValue(nimi),
+    render: ({ nimi, oid }) => (
+      <Anchor as={Link} to={`/haku/${oid}/muokkaus`}>
+        {getFirstLanguageValue(nimi)}
+      </Anchor>
+    ),
   },
   makeTilaColumn(),
   makeModifiedColumn(),

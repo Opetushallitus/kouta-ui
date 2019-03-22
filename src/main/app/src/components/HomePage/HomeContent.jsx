@@ -78,10 +78,10 @@ const HomeContent = ({ organisaatiot, organisaatioOid, history }) => {
         <Spacing marginBottom={3}>
           <KoulutuksetSection organisaatioOid={organisaatioOid} />
         </Spacing>
-        <Spacing marginBottom={2}>
+        <Spacing marginBottom={3}>
           <ToteutuksetSection organisaatioOid={organisaatioOid} />
         </Spacing>
-        <Spacing marginBottom={2}>
+        <Spacing marginBottom={3}>
           <HautSection organisaatioOid={organisaatioOid} />
         </Spacing>
         <Spacing>

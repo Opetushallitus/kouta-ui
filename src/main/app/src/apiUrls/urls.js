@@ -1,4 +1,4 @@
-const koutaBackendDevUrl = `https://virkailija.hahtuvaopintopolku.fi/kouta-backend`;
+const koutaBackendDevUrl = `http://localhost:${process.env.REACT_APP_BACKEND_PORT}`;
 
 export const development = {
   'kouta-backend.base-url': 'http://localhost:' + process.env.REACT_APP_BACKEND_PORT,

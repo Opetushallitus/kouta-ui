@@ -162,15 +162,16 @@ export const getValintaperusteByValues = values => {
     get(values, 'osaamistausta.osaamistausta') || []
   ).map(({ value }) => value);
 
-  const tyyppi = get(values, 'tyyppi.tyyppi') || null;
+  const koulutustyyppi = get(values, 'tyyppi.tyyppi') || null;
 
   return {
     kielivalinta,
     hakutapaKoodiUri,
     kohdejoukkoKoodiUri,
     nimi,
-    tyyppi,
+    koulutustyyppi,
     metadata: {
+      koulutustyyppi,
       valintatavat,
       kielitaitovaatimukset,
       osaamistaustaKoodiUrit,
@@ -186,7 +187,7 @@ export const getValuesByValintaperuste = valintaperuste => {
     kohdejoukkoKoodiUri = null,
     nimi = {},
     metadata = {},
-    tyyppi = null,
+    koulutustyyppi = null,
   } = valintaperuste;
 
   const {
@@ -289,7 +290,7 @@ export const getValuesByValintaperuste = valintaperuste => {
       ),
     },
     tyyppi: {
-      tyyppi,
+      tyyppi: koulutustyyppi,
     },
   };
 };

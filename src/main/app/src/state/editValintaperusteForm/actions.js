@@ -34,7 +34,6 @@ export const submit = ({ valintaperuste, tila: tilaArg }) => async (
     muokkaaja: kayttajaOid,
     tila,
     ...valintaperusteFormData,
-    tyyppi: valintaperuste.tyyppi,
   };
 
   let valintaperusteData;

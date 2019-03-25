@@ -1,5 +1,6 @@
 import { getFormValues } from 'redux-form';
 import get from 'lodash/get';
+import produce from 'immer';
 
 import { JULKAISUTILA } from '../../constants';
 import { createTemporaryToast } from '../toaster';
@@ -42,12 +43,21 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
 
   const { organisaatioOid } = getOidsFromPathname(history.location.pathname);
 
-  const valintaperuste = {
-    tila,
-    muokkaaja,
-    organisaatioOid,
-    ...valintaperusteFormData,
-  };
+  const {
+    metadata: { koulutustyyppi = null },
+  } = valintaperusteFormData;
+
+  const valintaperuste = produce(
+    {
+      tila,
+      muokkaaja,
+      organisaatioOid,
+      ...valintaperusteFormData,
+    },
+    draft => {
+      draft.koulutustyyppi = koulutustyyppi;
+    },
+  );
 
   let valintaperusteData;
 

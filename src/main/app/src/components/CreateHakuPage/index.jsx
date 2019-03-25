@@ -17,7 +17,7 @@ const CreateHakuPage = props => {
     history,
   } = props;
 
-  const { kopiohakuOid = null } = queryString.parse(search);
+  const { kopioHakuOid = null } = queryString.parse(search);
 
   const onCreateNew = useCallback(() => {
     history.replace({ search: '' });
@@ -32,7 +32,7 @@ const CreateHakuPage = props => {
     <OrganisaatioInfo organisaatioOid={organisaatioOid} />
       <CreateHakuForm
         organisaatioOid={organisaatioOid}
-        kopiohakuOid={kopiohakuOid}
+        kopioHakuOid={kopioHakuOid}
         onCreateNew={onCreateNew}
       />
     </FormPage>

@@ -364,14 +364,14 @@ const ScheduleSection = props => {
         </HeaderWrapper>
         <HakuDateTimeWrapper>
           <HakuDateSecondContainer>
-            <Field name="julkaisu.pvm"
+            <Field name="julkaisu_pvm"
                     placeholder="pp.kk.vvvv"
                     component={renderInputMaskField}
                     mask="99.99.9999" />
           </HakuDateSecondContainer>
           <EventIcon type="event" />
           <HakuTimeSecondContainer>
-            <Field name="julkaisu.aika"
+            <Field name="julkaisu_aika"
                     placeholder="tt:mm"
                     component={renderInputMaskField}
                     mask="99:99" />

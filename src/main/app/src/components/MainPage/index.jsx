@@ -9,6 +9,7 @@ import CreateHakukohdePage from '../CreateHakukohdePage';
 import CreateValintaperusteetPage from '../CreateValintaperusteetPage';
 import EditKoulutusPage from '../EditKoulutusPage';
 import CreateHakuPage from '../CreateHakuPage';
+import EditHakuPage from '../EditHakuPage';
 import HomePage from '../HomePage';
 import EditToteutusPage from '../EditToteutusPage';
 import EditHakukohdePage from '../EditHakukohdePage';
@@ -56,6 +57,10 @@ const MainPage = ({ history }) => {
             path="/koulutus/:oid/muokkaus"
             component={EditKoulutusPage}
             exact
+          />
+          <Route
+            path="/haku/:oid/muokkaus"
+            component={EditHakuPage}
           />
           <Route
             path="/toteutus/:oid/muokkaus"

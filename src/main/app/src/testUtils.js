@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { ThemeProvider } from 'styled-components';
-import jest from 'jest';
 
 import defaultTheme from './theme';
 

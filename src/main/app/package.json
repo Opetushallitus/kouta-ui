@@ -4,6 +4,7 @@
   "homepage": "/kouta",
   "private": true,
   "dependencies": {
+    "@babel/polyfill": "^7.4.0",
     "axios": "^0.18.0",
     "date-and-time": "^0.6.3",
     "date-fns": "^1.30.1",

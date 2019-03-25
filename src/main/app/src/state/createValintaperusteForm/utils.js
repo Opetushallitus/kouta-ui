@@ -4,7 +4,7 @@ import toPairs from 'lodash/toPairs';
 import pick from 'lodash/pick';
 import mapValues from 'lodash/mapValues';
 
-import { isObject, isArray, isString, isNumeric } from '../../utils';
+import { isObject, isArray, isNumeric } from '../../utils';
 import { VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI } from '../../constants';
 
 import {

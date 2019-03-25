@@ -75,7 +75,7 @@ const parseSisalto = ({ sisalto }) => {
     if (tyyppi === 'teksti') {
       return {
         tyyppi,
-        data: isString(data) ? parseEditor(data) : parseEditor(''),
+        data: isObject(data) ? mapValues(data, parseEditor) : {},
       };
     }
 

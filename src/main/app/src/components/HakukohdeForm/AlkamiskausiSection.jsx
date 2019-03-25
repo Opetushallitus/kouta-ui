@@ -6,12 +6,13 @@ import Spacing from '../Spacing';
 import { RadioGroup } from '../Radio';
 import useKoodistoOptions from '../useKoodistoOptions';
 import YearSelect from '../YearSelect';
+import { noop } from '../../utils';
 
 const renderRadioGroupField = ({ input, options }) => (
   <RadioGroup {...input} options={options} />
 );
 
-const renderYearField = ({ input }) => <YearSelect {...input} />;
+const renderYearField = ({ input }) => <YearSelect {...input} onBlur={noop} />;
 
 const AlkamiskausiSection = () => {
   const { options } = useKoodistoOptions({ koodisto: 'kausi' });

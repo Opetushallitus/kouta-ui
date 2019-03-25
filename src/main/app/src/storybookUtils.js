@@ -48,13 +48,18 @@ export const makeStoreDecorator = ({ logging = false } = {}) => storyFn => {
 
 export const makeLocalisationDecorator = ({
   category = 'kouta',
+  language = 'fi',
 } = {}) => storyFn => {
   return (
     <ApiAsync promiseFn={getLocalisation} category={category}>
       {({ data }) =>
         data ? (
           <LocalisationProvider
-            i18n={createLocalisation({ resources: data, debug: true })}
+            i18n={createLocalisation({
+              resources: data,
+              debug: true,
+              language,
+            })}
           >
             {storyFn()}
           </LocalisationProvider>

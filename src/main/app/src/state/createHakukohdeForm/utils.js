@@ -114,7 +114,7 @@ export const getHakukohdeByValues = values => {
     }) => ({
       tyyppi: get(tyyppi, 'value') || null,
       nimi: pick(nimi || null, kielivalinta),
-      toimitusaika: liitteetOnkoSamaToimitusaika
+      toimitusaika: !liitteetOnkoSamaToimitusaika
         ? getKoutaDateStringByDateTime({ date: deliverDate, time: deliverTime })
         : null,
       toimitusosoite: {
@@ -282,7 +282,7 @@ export const getValuesByHakukohde = hakukohde => {
     alkamiskausi: {
       kausi: alkamiskausiKoodiUri,
       vuosi: {
-        value: isNumeric(alkamisvuosi) ? alkamisvuosi.toString() : null,
+        value: isNumeric(alkamisvuosi) ? alkamisvuosi.toString() : '',
       },
     },
     kieliversiot: {

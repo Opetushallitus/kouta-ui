@@ -1,4 +1,5 @@
 import { getFormValues } from 'redux-form';
+import produce from 'immer';
 
 import { getHakukohdeByValues } from '../createHakukohdeForm';
 import { updateKoutaHakukohde } from '../../apiUtils';
@@ -14,16 +15,14 @@ export const saveHakukohde = hakukohde => (
   return updateKoutaHakukohde({ httpClient, apiUrls, hakukohde });
 };
 
-export const submit = ({
-  hakukohdeOid,
-  organisaatioOid,
-  tila,
-  lastModified,
-  hakuOid,
-  toteutusOid,
-}) => async (dispatch, getState, { history, apiUrls, httpClient }) => {
+export const submit = ({ hakukohde, tila: tilaArg }) => async (
+  dispatch,
+  getState,
+  { history, apiUrls, httpClient },
+) => {
   const state = getState();
   const values = getHakukohdeFormValues(state);
+  const tila = tilaArg || hakukohde.tila;
 
   const {
     me: { kayttajaOid },
@@ -31,21 +30,20 @@ export const submit = ({
 
   const hakukohdeFormData = getHakukohdeByValues(values);
 
-  const hakukohde = {
-    lastModified,
-    oid: hakukohdeOid,
-    muokkaaja: kayttajaOid,
-    ...(tila && { tila }),
-    ...(organisaatioOid && { organisaatioOid }),
-    ...(hakuOid && { hakuOid }),
-    ...(toteutusOid && { toteutusOid }),
-    ...hakukohdeFormData,
-  };
+  const updatedHakukohde = produce(
+    {
+      ...hakukohde,
+      muokkaaja: kayttajaOid,
+      tila,
+      ...hakukohdeFormData,
+    },
+    () => {},
+  );
 
   let hakukohdeData;
 
   try {
-    const { data } = await dispatch(saveHakukohde(hakukohde));
+    const { data } = await dispatch(saveHakukohde(updatedHakukohde));
 
     hakukohdeData = data;
   } catch (e) {
@@ -64,7 +62,7 @@ export const submit = ({
     }),
   );
 
-  history.push(`/hakukohde/${hakukohdeOid}/muokkaus`, {
+  history.push(`/hakukohde/${hakukohde.oid}/muokkaus`, {
     hakukohdeUpdatedAt: Date.now(),
   });
 

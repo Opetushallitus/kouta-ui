@@ -4,9 +4,9 @@ import { Field, formValues } from 'redux-form';
 
 import Flex, { FlexItem } from '../Flex';
 import Button from '../Button';
-import Icon from '../Icon';
 import Select from '../Select';
 import Typography from '../Typography';
+import DropdownIcon from '../DropdownIcon';
 
 import {
   DropdownMenu,
@@ -38,9 +38,6 @@ const renderPohjaField = ({ input, onContinue }) => {
       <DropdownMenuItem onClick={() => onChange('copy_valintaperuste')}>
         Kopio pohjaksi aiemmin luotu valintaperuste
       </DropdownMenuItem>
-      <DropdownMenuItem onClick={() => onChange('existing_valintaperuste')}>
-        Käytä olemassa olevaa valintaperustetta
-      </DropdownMenuItem>
     </DropdownMenu>
   );
 
@@ -48,8 +45,7 @@ const renderPohjaField = ({ input, onContinue }) => {
     <UncontrolledDropdown overlay={overlay}>
       {({ ref, onToggle, visible }) => (
         <DropdownButton innerRef={ref} onClick={onToggle} type="button">
-          Valitse pohja{' '}
-          <Icon type={visible ? 'arrow_drop_up' : 'arrow_drop_down'} />
+          Valitse pohja <DropdownIcon open={visible} />
         </DropdownButton>
       )}
     </UncontrolledDropdown>

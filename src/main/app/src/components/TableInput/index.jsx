@@ -43,6 +43,10 @@ const ColumnInput = styled.textarea.attrs({ rows: 2 })`
   }
 `;
 
+const Invisible = styled.div`
+  visibility: hidden;
+`;
+
 const Column = styled(FlexItem)`
   border-right: 1px solid ${getThemeProp('palette.border')};
   box-sizing: border-box;
@@ -103,6 +107,7 @@ const EditColumn = ({
   onAddColumnRight,
   onAddColumnLeft,
   onRemoveColumn,
+  overflow,
   ...props
 }) => {
   const overlay = (
@@ -122,7 +127,7 @@ const EditColumn = ({
   );
 
   return (
-    <UncontrolledDropdown overlay={overlay} portalTarget={document.body}>
+    <UncontrolledDropdown overlay={overlay} portalTarget={document.body} overflow={overflow}>
       {({ ref, onToggle }) => (
         <div style={{ display: 'flex' }} ref={ref} onClick={onToggle}>
           <EditColumnBase {...props} />
@@ -138,6 +143,7 @@ const EditRow = ({
   onRemoveRow,
   onToggleHeaderStatus,
   isHeader,
+  overflow,
   ...props
 }) => {
   const overlay = (
@@ -158,7 +164,7 @@ const EditRow = ({
   );
 
   return (
-    <UncontrolledDropdown overlay={overlay} portalTarget={document.body}>
+    <UncontrolledDropdown overlay={overlay} portalTarget={document.body}  overflow={overflow}>
       {({ ref, onToggle }) => (
         <div style={{ display: 'flex' }} ref={ref} onClick={onToggle}>
           <EditRowBase isHeader={isHeader} {...props} />
@@ -172,6 +178,7 @@ class TableInput extends Component {
   static defaultProps = {
     onChange: () => {},
     language: 'fi',
+    overflowDropdowns: true,
   };
 
   getValue() {
@@ -216,7 +223,7 @@ class TableInput extends Component {
 
   makeOnToggleRowHeaderStatus = ({ rowIndex }) => () => {
     const value = this.getValue();
-    const currentStatus = !!get(value, ['rows', rowIndex, 'header']);
+    const currentStatus = !!get(value, ['rows', rowIndex, 'isHeader']);
 
     this.props.onChange(
       setRowHeaderStatus({
@@ -287,6 +294,7 @@ class TableInput extends Component {
             onToggleHeaderStatus={this.makeOnToggleRowHeaderStatus({
               rowIndex,
             })}
+            overflow={this.props.overflowDropdowns}
           >
             {rowIndex + 1}
           </EditRow>
@@ -313,7 +321,9 @@ class TableInput extends Component {
     return (
       <Container>
         <Row>
-          <EditRowPlaceholder> </EditRowPlaceholder>
+          <EditRowPlaceholder>
+            <Invisible>0</Invisible>
+          </EditRowPlaceholder>
           {[...new Array(numberOfColumns)].map((v, columnIndex) => (
             <EditColumn
               onAddColumnLeft={this.makeOnAddColumnLeft({ columnIndex })}
@@ -325,6 +335,7 @@ class TableInput extends Component {
                   ? this.makeOnRemoveColumn({ columnIndex })
                   : null
               }
+              overflow={this.props.overflowDropdowns}
               key={columnIndex}
             >
               {columnIndex + 1}

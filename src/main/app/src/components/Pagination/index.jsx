@@ -39,7 +39,7 @@ const getPageOptions = pageCount =>
     label: index + 1,
   }));
 
-const Pagination = ({ value = 0, onChange = () => {}, pageCount = 1 }) => {
+const Pagination = ({ value = 0, onChange = () => {}, pageCount = 0 }) => {
   const options = useMemo(() => getPageOptions(pageCount), [pageCount]);
   const onPrev = useCallback(() => onChange(value - 1), [value, onChange]);
   const onNext = useCallback(() => onChange(value + 1), [value, onChange]);
@@ -69,7 +69,7 @@ const Pagination = ({ value = 0, onChange = () => {}, pageCount = 1 }) => {
         <PageCount>/ {pageCount}</PageCount>
       </FlexItem>
       <Button
-        disabled={value === pageCount - 1}
+        disabled={pageCount === 0 || value === pageCount - 1}
         onClick={onNext}
       >
         Seuraava

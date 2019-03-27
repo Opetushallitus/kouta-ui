@@ -11,3 +11,13 @@ const makeFnWithTheme = fn => tree => {
 export const shallowWithTheme = makeFnWithTheme(shallow);
 
 export const mountWithTheme = makeFnWithTheme(mount);
+
+export const setMockDate = date => {
+  const _Date = Date;
+
+  global.Date.now = () => +date;
+
+  return () => {
+    global.Date = _Date;
+  };
+};

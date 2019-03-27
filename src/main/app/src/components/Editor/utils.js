@@ -7,6 +7,7 @@ import {
 
 import get from 'lodash/get';
 import { EditorState, CompositeDecorator } from 'draft-js';
+import { isObject, isFunction, isString } from '../../utils';
 
 import Anchor from '../Anchor';
 
@@ -88,3 +89,19 @@ export const createEditorStateWithContent = contentState =>
 
 export const createEmptyEditorState = () =>
   EditorState.createEmpty(linkDecorator);
+
+export const serialize = value => {
+  if (!isObject(value) || !isFunction(value.getCurrentContent)) {
+    return '';
+  }
+
+  return convertToHTML(value.getCurrentContent());
+};
+
+export const parse = value => {
+  if (!isString(value)) {
+    return createEmptyEditorState();
+  }
+
+  return createEditorStateWithContent(convertFromHTML(value));
+};

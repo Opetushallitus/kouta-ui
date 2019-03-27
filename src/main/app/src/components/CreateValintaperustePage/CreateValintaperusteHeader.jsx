@@ -2,8 +2,8 @@ import React from 'react';
 
 import FormHeader from '../FormHeader';
 
-const CreateValintaperusteetHeader = () => (
+const CreateValintaperusteHeader = () => (
   <FormHeader>Valintaperusteet</FormHeader>
 );
 
-export default CreateValintaperusteetHeader;
+export default CreateValintaperusteHeader;

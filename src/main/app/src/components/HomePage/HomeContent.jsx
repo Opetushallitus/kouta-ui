@@ -15,6 +15,7 @@ import OrganisaatioDrawer from './OrganisaatioDrawer';
 import Button from '../Button';
 import { getOrganisaatioFromHierarkia } from './utils';
 import Icon from '../Icon';
+import ValintaperusteetSection from './ValintaperusteetSection';
 
 const Container = styled.div`
   max-width: ${getThemeProp('contentMaxWidth')}
@@ -77,11 +78,14 @@ const HomeContent = ({ organisaatiot, organisaatioOid, history }) => {
         <Spacing marginBottom={3}>
           <KoulutuksetSection organisaatioOid={organisaatioOid} />
         </Spacing>
-        <Spacing marginBottom={2}>
+        <Spacing marginBottom={3}>
           <ToteutuksetSection organisaatioOid={organisaatioOid} />
         </Spacing>
-        <Spacing>
+        <Spacing marginBottom={3}>
           <HautSection organisaatioOid={organisaatioOid} />
+        </Spacing>
+        <Spacing>
+          <ValintaperusteetSection organisaatioOid={organisaatioOid} />
         </Spacing>
       </Container>
     </>

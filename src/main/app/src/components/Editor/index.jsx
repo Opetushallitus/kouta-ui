@@ -1,2 +1,2 @@
-export { convertToHTML, convertFromHTML, createEditorStateWithContent } from './utils';
+export { convertToHTML, convertFromHTML, createEditorStateWithContent, serialize, parse } from './utils';
 export { default } from './Editor';

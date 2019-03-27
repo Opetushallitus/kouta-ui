@@ -1,9 +1,11 @@
 import { getFormValues } from 'redux-form';
 import get from 'lodash/get';
+import produce from 'immer';
 
 import { JULKAISUTILA } from '../../constants';
 import { createTemporaryToast } from '../toaster';
 import { getToteutusByValues } from './utils';
+import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
 
 const getToteutusFormValues = getFormValues('createToteutusForm');
 
@@ -24,11 +26,10 @@ export const saveToteutus = toteutus => (
   return httpClient.put(apiUrls.url('kouta-backend.toteutus'), toteutus);
 };
 
-export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
-  dispatch,
-  getState,
-  { httpClient, apiUrls, history },
-) => {
+export const submit = ({
+  tila = JULKAISUTILA.TALLENNETTU,
+  koulutustyyppi = KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS,
+} = {}) => async (dispatch, getState, { history }) => {
   const state = getState();
   const values = getToteutusFormValues(state);
 
@@ -42,13 +43,18 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
 
   const toteutusFormData = getToteutusByValues(values);
 
-  const toteutus = {
-    tila,
-    muokkaaja,
-    organisaatioOid,
-    koulutusOid,
-    ...toteutusFormData,
-  };
+  const toteutus = produce(
+    {
+      tila,
+      muokkaaja,
+      organisaatioOid,
+      koulutusOid,
+      ...toteutusFormData,
+    },
+    draft => {
+      draft.metadata.tyyppi = koulutustyyppi;
+    },
+  );
 
   let toteutusData;
 

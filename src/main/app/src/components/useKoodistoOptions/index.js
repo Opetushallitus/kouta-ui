@@ -9,6 +9,7 @@ import {
 } from '../../utils';
 
 import useKoodisto from '../useKoodisto';
+import useLanguage from '../useLanguage';
 
 const getOptions = ({ koodisto, language, sort = true }) => {
   const nimet = isArray(koodisto)
@@ -29,9 +30,12 @@ const getOptions = ({ koodisto, language, sort = true }) => {
 export const useKoodistoOptions = ({
   koodisto,
   versio,
-  language = 'fi',
+  language: languageProp,
   sort = true,
 }) => {
+  const translationLanguage = useLanguage();
+  const language = languageProp || translationLanguage || 'fi';
+
   const { data, ...rest } = useKoodisto({ koodisto, versio });
 
   const options = useMemo(

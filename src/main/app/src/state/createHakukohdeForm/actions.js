@@ -28,7 +28,7 @@ export const saveHakukohde = hakukohde => (
 export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   dispatch,
   getState,
-  { httpClient, apiUrls, history },
+  { history },
 ) => {
   const state = getState();
   const values = getHakukohdeFormValues(state);

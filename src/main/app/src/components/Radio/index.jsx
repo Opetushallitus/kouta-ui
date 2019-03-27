@@ -67,7 +67,7 @@ export const RadioGroup = ({
     });
   } else if (isArray(options)) {
     children = options.map(({ value: optionValue, label }, index) => (
-      <RadioContainer last={index === options.length - 1}>
+      <RadioContainer last={index === options.length - 1} key={optionValue}>
         <Radio checked={value !== undefined && value === optionValue} onChange={onChange} value={optionValue}>
           {label}
         </Radio>

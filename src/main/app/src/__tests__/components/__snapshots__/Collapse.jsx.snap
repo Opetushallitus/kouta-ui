@@ -125,50 +125,62 @@ exports[`renders correctly 1`] = `
             className="c5"
             onClick={[Function]}
           >
-            <Styled(Icon)
-              type="expand_less"
+            <Styled(DropdownIcon)
+              icon="expand_more"
+              open={true}
             >
               <styled.i
                 className="material-icons c6"
+                style={
+                  Object {
+                    "transform": "rotate(0deg)",
+                  }
+                }
               >
                 <i
                   className="material-icons c6 c7"
+                  style={
+                    Object {
+                      "transform": "rotate(0deg)",
+                    }
+                  }
                 >
-                  expand_less
+                  expand_more
                 </i>
               </styled.i>
-            </Styled(Icon)>
+            </Styled(DropdownIcon)>
           </div>
         </styled.div>
       </div>
     </styled.div>
-    <styled.div
-      open={true}
+    <div
+      style={
+        Object {
+          "height": 0,
+          "opacity": 1,
+          "overflow": "visible",
+        }
+      }
     >
-      <div
-        className=""
-        open={true}
-      >
-        <styled.div>
-          <div
-            className="c8"
-          >
-            <div>
-              Collapse children
-            </div>
+      <styled.div>
+        <div
+          className="c8"
+        >
+          <div>
+            Collapse children
           </div>
-        </styled.div>
-        <styled.div>
-          <div
-            className="c9"
-          >
-            <button>
-              Footer button
-            </button>
-          </div>
-        </styled.div>
-      </div>
-    </styled.div>
+        </div>
+      </styled.div>
+      <styled.div>
+        <div
+          className="c9"
+        >
+          <button>
+            Footer button
+          </button>
+        </div>
+      </styled.div>
+    </div>
   </div>
 </styled.div>
 `;
@@ -271,50 +283,62 @@ exports[`renders correctly 2`] = `
             className="c3"
             onClick={[Function]}
           >
-            <Styled(Icon)
-              type="expand_less"
+            <Styled(DropdownIcon)
+              icon="expand_more"
+              open={true}
             >
               <styled.i
                 className="material-icons c4"
+                style={
+                  Object {
+                    "transform": "rotate(0deg)",
+                  }
+                }
               >
                 <i
                   className="material-icons c4 c5"
+                  style={
+                    Object {
+                      "transform": "rotate(0deg)",
+                    }
+                  }
                 >
-                  expand_less
+                  expand_more
                 </i>
               </styled.i>
-            </Styled(Icon)>
+            </Styled(DropdownIcon)>
           </div>
         </styled.div>
       </div>
     </styled.div>
-    <styled.div
-      open={true}
+    <div
+      style={
+        Object {
+          "height": 0,
+          "opacity": 1,
+          "overflow": "visible",
+        }
+      }
     >
-      <div
-        className=""
-        open={true}
-      >
-        <styled.div>
-          <div
-            className="c6"
-          >
-            <div>
-              Collapse children
-            </div>
+      <styled.div>
+        <div
+          className="c6"
+        >
+          <div>
+            Collapse children
           </div>
-        </styled.div>
-        <styled.div>
-          <div
-            className="c7"
-          >
-            <button>
-              Footer button
-            </button>
-          </div>
-        </styled.div>
-      </div>
-    </styled.div>
+        </div>
+      </styled.div>
+      <styled.div>
+        <div
+          className="c7"
+        >
+          <button>
+            Footer button
+          </button>
+        </div>
+      </styled.div>
+    </div>
   </div>
 </styled.div>
 `;
@@ -383,7 +407,7 @@ exports[`renders correctly when closed 1`] = `
   cursor: pointer;
 }
 
-.c10 {
+.c9 {
   padding: 16px;
   border-top: 1px solid #999999;
 }
@@ -393,27 +417,12 @@ exports[`renders correctly when closed 1`] = `
   font-size: 2rem;
 }
 
-.c9 {
+.c8 {
   padding: 16px;
 }
 
 .c3 {
   padding: 16px;
-}
-
-.c8 {
-  border: 0;
-  -webkit-clip: rect(0 0 0 0);
-  clip: rect(0 0 0 0);
-  -webkit-clip-path: inset(50%);
-  clip-path: inset(50%);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
 }
 
 <styled.div>
@@ -458,50 +467,62 @@ exports[`renders correctly when closed 1`] = `
             className="c5"
             onClick={[Function]}
           >
-            <Styled(Icon)
-              type="expand_more"
+            <Styled(DropdownIcon)
+              icon="expand_more"
+              open={false}
             >
               <styled.i
                 className="material-icons c6"
+                style={
+                  Object {
+                    "transform": "rotate(0deg)",
+                  }
+                }
               >
                 <i
                   className="material-icons c6 c7"
+                  style={
+                    Object {
+                      "transform": "rotate(0deg)",
+                    }
+                  }
                 >
                   expand_more
                 </i>
               </styled.i>
-            </Styled(Icon)>
+            </Styled(DropdownIcon)>
           </div>
         </styled.div>
       </div>
     </styled.div>
-    <styled.div
-      open={false}
+    <div
+      style={
+        Object {
+          "height": 0,
+          "opacity": 1,
+          "overflow": "visible",
+        }
+      }
     >
-      <div
-        className="c8"
-        open={false}
-      >
-        <styled.div>
-          <div
-            className="c9"
-          >
-            <div>
-              Hello world!
-            </div>
+      <styled.div>
+        <div
+          className="c8"
+        >
+          <div>
+            Hello world!
           </div>
-        </styled.div>
-        <styled.div>
-          <div
-            className="c10"
-          >
-            <div>
-              footer
-            </div>
+        </div>
+      </styled.div>
+      <styled.div>
+        <div
+          className="c9"
+        >
+          <div>
+            footer
           </div>
-        </styled.div>
-      </div>
-    </styled.div>
+        </div>
+      </styled.div>
+    </div>
   </div>
 </styled.div>
 `;

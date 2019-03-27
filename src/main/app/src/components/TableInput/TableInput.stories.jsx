@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import Button from '../Button';
 import TableInput from './index';
 
-const columns = [{ text: 'Hello' }, { text: 'World' }];
+const columns = [{ text: { fi: 'Hello' } }, { text: { fi: 'World' } }];
 const changeAction = action('change');
 
 const value = {

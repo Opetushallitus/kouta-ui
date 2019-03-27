@@ -1,4 +1,4 @@
-const koutaBackendDevUrl = `http://localhost:${process.env.REACT_APP_BACKEND_PORT}/kouta-backend`;
+const koutaBackendDevUrl = `http://localhost:${process.env.REACT_APP_BACKEND_PORT}`;
 
 export const development = {
   'kouta-backend.base-url': 'http://localhost:' + process.env.REACT_APP_BACKEND_PORT,
@@ -38,4 +38,5 @@ export const development = {
   'kouta-index.koulutus-list': 'https://virkailija.hahtuvaopintopolku.fi/kouta-index/koulutus/filtered-list',
   'kouta-index.toteutus-list': 'https://virkailija.hahtuvaopintopolku.fi/kouta-index/toteutus/filtered-list',
   'kouta-index.haku-list': 'https://virkailija.hahtuvaopintopolku.fi/kouta-index/haku/filtered-list',
+  'kouta-index.valintaperuste-list': 'https://virkailija.hahtuvaopintopolku.fi/kouta-index/valintaperuste/filtered-list',
 };

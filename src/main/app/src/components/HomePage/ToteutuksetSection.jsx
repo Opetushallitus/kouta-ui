@@ -19,6 +19,7 @@ import useFilterState from './useFilterState';
 import { getFirstLanguageValue } from '../../utils';
 import Anchor from '../Anchor';
 import ToteutusTilaDropdown from './ToteutusTilaDropdown';
+import ErrorAlert from '../ErrorAlert';
 
 const getToteutukset = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
@@ -81,7 +82,11 @@ const ToteutuksetSection = ({ organisaatioOid }) => {
     tila,
   ]);
 
-  const { data: { result: toteutukset, pageCount = 0 } = {} } = useApiAsync({
+  const {
+    data: { result: toteutukset, pageCount = 0 } = {},
+    error,
+    reload,
+  } = useApiAsync({
     promiseFn: getToteutukset,
     nimi: debouncedNimi,
     page,
@@ -111,6 +116,8 @@ const ToteutuksetSection = ({ organisaatioOid }) => {
           onSort={setOrderBy}
           sort={orderBy}
         />
+      ) : error ? (
+        <ErrorAlert onReload={reload} center />
       ) : (
         <Spin center />
       )}

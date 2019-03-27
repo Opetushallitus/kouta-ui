@@ -1,5 +1,6 @@
 import { getFormValues } from 'redux-form';
 import get from 'lodash/get';
+import produce from 'immer';
 
 import { getToteutusByValues } from '../createToteutusForm';
 import { updateKoutaToteutus } from '../../apiUtils';
@@ -15,15 +16,14 @@ export const saveToteutus = toteutus => (
   return updateKoutaToteutus({ httpClient, apiUrls, toteutus });
 };
 
-export const submit = ({
-  toteutusOid,
-  organisaatioOid,
-  tila,
-  lastModified,
-  koulutusOid,
-}) => async (dispatch, getState, { history, apiUrls, httpClient }) => {
+export const submit = ({ toteutus, tila: tilaArg }) => async (
+  dispatch,
+  getState,
+  { history, apiUrls, httpClient },
+) => {
   const state = getState();
   const values = getToteutusFormValues(state);
+  const tila = tilaArg || toteutus.tila;
 
   const {
     me: { kayttajaOid },
@@ -31,20 +31,22 @@ export const submit = ({
 
   const toteutusFormData = getToteutusByValues(values);
 
-  const toteutus = {
-    lastModified,
-    oid: toteutusOid,
-    muokkaaja: kayttajaOid,
-    ...(tila && { tila }),
-    ...(organisaatioOid && { organisaatioOid }),
-    ...(koulutusOid && { koulutusOid }),
-    ...toteutusFormData,
-  };
+  const updatedToteutus = produce(
+    {
+      ...toteutus,
+      muokkaaja: kayttajaOid,
+      tila,
+      ...toteutusFormData,
+    },
+    draft => {
+      draft.metadata.tyyppi = toteutus.metadata.tyyppi;
+    },
+  );
 
   let toteutusData;
 
   try {
-    const { data } = await dispatch(saveToteutus(toteutus));
+    const { data } = await dispatch(saveToteutus(updatedToteutus));
 
     toteutusData = data;
   } catch (e) {
@@ -63,7 +65,7 @@ export const submit = ({
     }),
   );
 
-  history.push(`/toteutus/${toteutusOid}/muokkaus`, {
+  history.push(`/toteutus/${toteutus.oid}/muokkaus`, {
     toteutusUpdatedAt: Date.now(),
   });
 

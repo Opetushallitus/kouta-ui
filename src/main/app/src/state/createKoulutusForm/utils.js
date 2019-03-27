@@ -38,6 +38,7 @@ export const getKoulutusByValues = values => {
     nimi,
     julkinen,
     metadata: {
+      tyyppi: koulutustyyppi,
       lisatiedot: osiotWithKuvaukset,
       kuvaus,
       opintojenLaajuusKoodiUri,

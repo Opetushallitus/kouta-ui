@@ -414,7 +414,7 @@ export const getKoutaValintaperusteet = async ({
   const { data } = await httpClient.get(
     apiUrls.url('kouta-backend.valintaperuste-list'),
     {
-      params: { organisaatioOid, hakuOid },
+      params: { organisaatioOid, ...(hakuOid && { hakuOid }) },
     },
   );
 
@@ -524,6 +524,11 @@ const memoizedGetKayttajanOrganisaatiot = memoizePromise(
       }),
       getOrganisaatioByOid({
         oid: '1.2.246.562.10.67476956288',
+        httpClient,
+        apiUrls,
+      }),
+      getOrganisaatioByOid({
+        oid: '1.2.246.562.10.240484683010',
         httpClient,
         apiUrls,
       }),
@@ -746,4 +751,71 @@ export const getAndUpdateKoutaToteutus = async ({
     apiUrls,
     toteutus: { ...toteutus, ...update },
   });
+};
+
+const memoizedGetKoulutustyyppiByKoulutusOid = memoizePromise(
+  async (oid, httpClient, apiUrls) => {
+    const koulutus = await getKoutaKoulutusByOid({ oid, httpClient, apiUrls });
+
+    return get(koulutus, 'koulutustyyppi') || null;
+  },
+);
+
+export const getKoulutustyyppiByKoulutusOid = ({
+  oid,
+  httpClient,
+  apiUrls,
+}) => {
+  return memoizedGetKoulutustyyppiByKoulutusOid(oid, httpClient, apiUrls);
+};
+
+export const getKoutaValintaperusteByOid = async ({
+  oid,
+  httpClient,
+  apiUrls,
+}) => {
+  const { data, headers } = await httpClient.get(
+    apiUrls.url('kouta-backend.valintaperuste-by-oid', oid),
+  );
+
+  const lastModified = get(headers, 'last-modified') || null;
+
+  return isObject(data) ? { lastModified, ...data } : data;
+};
+
+export const updateKoutaValintaperuste = async ({
+  valintaperuste,
+  httpClient,
+  apiUrls,
+}) => {
+  const { lastModified = '', ...rest } = valintaperuste;
+
+  const headers = {
+    'If-Unmodified-Since': lastModified,
+  };
+
+  const { data } = await httpClient.post(
+    apiUrls.url('kouta-backend.valintaperuste'),
+    rest,
+    { headers },
+  );
+
+  return data;
+};
+
+export const getKoutaIndexValintaperusteet = async ({
+  httpClient,
+  apiUrls,
+  ...rest
+}) => {
+  const params = toKoutaIndexParams(rest);
+
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-index.valintaperuste-list'),
+    {
+      params,
+    },
+  );
+
+  return data;
 };

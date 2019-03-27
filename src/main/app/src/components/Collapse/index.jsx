@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
-import { hideVisually } from 'polished';
 
-import { isString } from '../../utils';
+import { isString, noop } from '../../utils';
 import { getThemeProp } from '../../theme';
 import Typography from '../Typography';
-import Icon from '../Icon';
+import DropdownIcon from '../DropdownIcon';
+import CollapseContent from '../CollapseContent';
 
 const Container = styled.div`
   border: 1px solid ${getThemeProp('palette.border')};
@@ -56,7 +56,7 @@ const FooterContainer = styled.div`
   border-top: 1px solid ${getThemeProp('palette.border')};
 `;
 
-const ToggleIcon = styled(Icon)`
+const ToggleIcon = styled(DropdownIcon)`
   color: white;
   font-size: 2rem;
 `;
@@ -69,10 +69,6 @@ const HeaderTextContent = styled(Typography).attrs({ variant: 'h5' })`
   padding: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
-const ContentContainer = styled.div`
-  ${({ open }) => !open && hideVisually()};
-`;
-
 const renderHeader = header => {
   return isString(header) ? (
     <HeaderTextContent>{header}</HeaderTextContent>
@@ -80,12 +76,6 @@ const renderHeader = header => {
     header
   );
 };
-
-const getIconType = open => {
-  return open ? 'expand_less' : 'expand_more';
-};
-
-const nop = () => {};
 
 const Collapse = ({
   header = null,
@@ -101,19 +91,19 @@ const Collapse = ({
     <HeaderContainer open={open}>
       <HeaderContent
         toggleOnHeaderClick={toggleOnHeaderClick}
-        onClick={toggleOnHeaderClick ? onToggle : nop}
+        onClick={toggleOnHeaderClick ? onToggle : noop}
         active={active}
       >
         {renderHeader(header)}
       </HeaderContent>
       <HeaderToggle onClick={onToggle}>
-        <ToggleIcon type={getIconType(open)} />
+        <ToggleIcon icon="expand_more" open={open} />
       </HeaderToggle>
     </HeaderContainer>
-    <ContentContainer open={open}>
+    <CollapseContent open={open}>
       <ContentWrapper>{children}</ContentWrapper>
       {footer ? <FooterContainer>{footer}</FooterContainer> : null}
-    </ContentContainer>
+    </CollapseContent>
   </Container>
 );
 

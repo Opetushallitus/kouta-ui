@@ -1,5 +1,6 @@
 import { getFormValues } from 'redux-form';
 import get from 'lodash/get';
+import produce from 'immer';
 
 import { getKoulutusByValues } from '../createKoulutusForm';
 import { getKoulutusByKoodi, updateKoutaKoulutus } from '../../apiUtils';
@@ -16,14 +17,14 @@ export const saveKoulutus = koulutus => (
   return updateKoutaKoulutus({ httpClient, apiUrls, koulutus });
 };
 
-export const submit = ({
-  koulutusOid,
-  organisaatioOid,
-  tila,
-  lastModified,
-}) => async (dispatch, getState, { history, apiUrls, httpClient }) => {
+export const submit = ({ koulutus, tila: tilaArg }) => async (
+  dispatch,
+  getState,
+  { history, apiUrls, httpClient },
+) => {
   const state = getState();
   const values = getKoulutusFormValues(state);
+  const tila = tilaArg || koulutus.tila;
 
   const {
     me: { kayttajaOid },
@@ -43,21 +44,23 @@ export const submit = ({
     nimi = koulutusNimi;
   }
 
-  const koulutus = {
-    lastModified,
-    oid: koulutusOid,
-    muokkaaja: kayttajaOid,
-    johtaaTutkintoon: true,
-    ...(tila && { tila }),
-    ...(organisaatioOid && { organisaatioOid }),
-    ...koulutusFormData,
-    nimi,
-  };
+  const updatedKoulutus = produce(
+    {
+      ...koulutus,
+      muokkaaja: kayttajaOid,
+      tila,
+      ...koulutusFormData,
+      nimi,
+    },
+    draft => {
+      draft.metadata.tyyppi = koulutus.metadata.tyyppi;
+    },
+  );
 
   let koulutusData;
 
   try {
-    const { data } = await dispatch(saveKoulutus(koulutus));
+    const { data } = await dispatch(saveKoulutus(updatedKoulutus));
 
     koulutusData = data;
   } catch (e) {
@@ -76,7 +79,7 @@ export const submit = ({
     }),
   );
 
-  history.push(`/koulutus/${koulutusOid}/muokkaus`, {
+  history.push(`/koulutus/${koulutus.oid}/muokkaus`, {
     koulutusUpdatedAt: Date.now(),
   });
 

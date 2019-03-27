@@ -28,9 +28,7 @@ const CreateToteutusFooter = ({
   valid = true,
 }) => (
   <Wrapper>
-    <SaveButton onClick={onSave}>
-      Tallenna
-    </SaveButton>
+    <SaveButton onClick={onSave}>Tallenna</SaveButton>
     <Button onClick={onSaveAndPublish} disabled={!valid}>
       Tallenna ja julkaise
     </Button>
@@ -41,12 +39,16 @@ export default connect(
   state => ({
     valid: toteutusFormIsValid(state),
   }),
-  dispatch => ({
+  (dispatch, { koulutustyyppi }) => ({
     onSave: () => {
-      dispatch(submitToteutusForm({ tila: JULKAISUTILA.TALLENNETTU }));
+      dispatch(
+        submitToteutusForm({ tila: JULKAISUTILA.TALLENNETTU, koulutustyyppi }),
+      );
     },
     onSaveAndPublish: () => {
-      dispatch(submitToteutusForm({ tila: JULKAISUTILA.JULKAISTU }));
+      dispatch(
+        submitToteutusForm({ tila: JULKAISUTILA.JULKAISTU, koulutustyyppi }),
+      );
     },
   }),
 )(CreateToteutusFooter);

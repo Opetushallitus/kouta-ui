@@ -3,7 +3,9 @@ import { formValues } from 'redux-form';
 
 import FormCollapse from '../FormCollapse';
 import KieliversiotFormSection from '../KieliversiotFormSection';
-import { LANGUAGE_TABS } from '../../constants';
+
+import { LANGUAGE_TABS, KOULUTUSTYYPPI_CATEGORY } from '../../constants';
+
 import PohjakoulutusSection from './PohjakoulutusSection';
 import PerustiedotSection from './PerustiedotSection';
 import AloituspaikatSection from './AloituspaikatSection';
@@ -18,7 +20,7 @@ import KuvausSection from './KuvausSection';
 const ActiveLanguages = formValues({
   languages: 'kieliversiot.languages',
 })(({ languages, ...props }) => {
-  const activeLanguages = languages || [];
+  const activeLanguages = languages || [];
 
   return props.children({
     languages: LANGUAGE_TABS.filter(({ value }) =>
@@ -33,43 +35,35 @@ const HakukohdeForm = ({
   organisaatioOid,
   organisaatio,
   haku,
+  koulutustyyppi = KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS,
 }) => (
   <form onSubmit={handleSubmit}>
     <ActiveLanguages>
       {({ languages }) => (
         <FormCollapseGroup enabled={steps}>
-          <FormCollapse
-            header="Kieliversiot"
-            section="kieliversiot"
-          >
+          <FormCollapse header="Kieliversiot" section="kieliversiot">
             <KieliversiotFormSection />
           </FormCollapse>
 
-          <FormCollapse
-            header="Pohjakoulutusvaatimus"
-            section="pohjakoulutus"
-          >
-            <PohjakoulutusSection languages={languages} />
+          <FormCollapse header="Pohjakoulutusvaatimus" section="pohjakoulutus">
+            <PohjakoulutusSection
+              languages={languages}
+              koulutustyyppi={koulutustyyppi}
+            />
           </FormCollapse>
 
-          <FormCollapse
-            header="Hakukohteen perustiedot"
-            section="perustiedot"
-          >
-            <PerustiedotSection languages={languages} />
+          <FormCollapse header="Hakukohteen perustiedot" section="perustiedot">
+            <PerustiedotSection
+              languages={languages}
+              koulutustyyppi={koulutustyyppi}
+            />
           </FormCollapse>
 
-          <FormCollapse
-            header="Hakuajat"
-            section="hakuajat"
-          >
+          <FormCollapse header="Hakuajat" section="hakuajat">
             <HakuajatSection haku={haku} languages={languages} />
           </FormCollapse>
 
-          <FormCollapse
-            header="Lomake"
-            section="lomake"
-          >
+          <FormCollapse header="Lomake" section="lomake">
             <LomakeSection />
           </FormCollapse>
 
@@ -80,11 +74,8 @@ const HakukohdeForm = ({
             <AlkamiskausiSection />
           </FormCollapse>
 
-          <FormCollapse
-            header="Aloituspaikat"
-            section="aloituspaikat"
-          >
-            <AloituspaikatSection />
+          <FormCollapse header="Aloituspaikat" section="aloituspaikat">
+            <AloituspaikatSection koulutustyyppi={koulutustyyppi} />
           </FormCollapse>
 
           <FormCollapse
@@ -94,18 +85,15 @@ const HakukohdeForm = ({
             <KuvausSection organisaatio={organisaatio} haku={haku} />
           </FormCollapse>
 
-          <FormCollapse
-            header="Valintakoe"
-            section="valintakoe"
-          >
+          <FormCollapse header="Valintakoe" section="valintakoe">
             <ValintakoeSection languages={languages} />
           </FormCollapse>
 
-          <FormCollapse
-            header="Tarvittavat liitteet"
-            section="liitteet"
-          >
-            <LiitteetSection languages={languages} organisaatioOid={organisaatioOid} />
+          <FormCollapse header="Tarvittavat liitteet" section="liitteet">
+            <LiitteetSection
+              languages={languages}
+              organisaatioOid={organisaatioOid}
+            />
           </FormCollapse>
         </FormCollapseGroup>
       )}

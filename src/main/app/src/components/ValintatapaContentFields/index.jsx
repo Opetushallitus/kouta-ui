@@ -14,6 +14,7 @@ import Button from '../Button';
 import Icon from '../Icon';
 import Spacing from '../Spacing';
 import Flex, { FlexItem } from '../Flex';
+import DropdownIcon from '../DropdownIcon';
 
 import {
   UncontrolledDropdown,
@@ -29,15 +30,16 @@ const MoveButton = SortableHandle(props => (
 
 const InputContainer = styled(FlexItem)`
   overflow-x: auto;
+  overflow-y: hidden;
 `;
 
 const AddContentDropdown = ({ onAdd }) => {
   const onAddText = useCallback(() => {
-    onAdd({ type: 'text', data: null });
+    onAdd({ tyyppi: 'teksti', data: null });
   }, [onAdd]);
 
   const onAddTable = useCallback(() => {
-    onAdd({ type: 'table', data: null });
+    onAdd({ tyyppi: 'taulukko', data: null });
   }, [onAdd]);
 
   const overlay = (
@@ -51,9 +53,13 @@ const AddContentDropdown = ({ onAdd }) => {
     <UncontrolledDropdown overlay={overlay}>
       {({ onToggle, visible, ref }) => (
         <div ref={ref} style={{ display: 'inline-block' }}>
-          <Button onClick={onToggle} type="button" color="primary" variant="outlined">
-            Lisää sisältöä{' '}
-            <Icon type={visible ? 'arrow_drop_up' : 'arrow_drop_down'} />
+          <Button
+            onClick={onToggle}
+            type="button"
+            color="primary"
+            variant="outlined"
+          >
+            Lisää sisältöä <DropdownIcon open={visible} />
           </Button>
         </div>
       )}
@@ -61,15 +67,25 @@ const AddContentDropdown = ({ onAdd }) => {
   );
 };
 
-const renderTableInputField = ({ input }) => <TableInput {...input} />;
+const renderTableInputField = ({ input, language }) => (
+  <TableInput {...input} language={language} />
+);
 
 const renderEditorField = ({ input }) => <Editor {...input} />;
 
-const ContentField = ({ type, name }) => {
-  if (type === 'table') {
-    return <Field name={`${name}.data`} component={renderTableInputField} />;
-  } else if (type === 'text') {
-    return <Field name={`${name}.data`} component={renderEditorField} />;
+const ContentField = ({ tyyppi, name, language }) => {
+  if (tyyppi === 'taulukko') {
+    return (
+      <Field
+        name={`${name}.data`}
+        component={renderTableInputField}
+        language={language}
+      />
+    );
+  } else if (tyyppi === 'teksti') {
+    return (
+      <Field name={`${name}.data.${language}`} component={renderEditorField} />
+    );
   }
 
   return null;
@@ -77,16 +93,21 @@ const ContentField = ({ type, name }) => {
 
 const FieldSortableElement = SortableElement(props => <div {...props} />);
 
-const FieldsSortableContainer = SortableContainer(({ fields }) => {
+const FieldsSortableContainer = SortableContainer(({ fields, language }) => {
   return (
     <div>
       {fields.map((content, index) => {
         const contentValue = fields.get(index);
+
         return (
           <FieldSortableElement key={index} index={index}>
             <Flex marginBottom={index < fields.length - 1 ? 2 : 0}>
               <InputContainer grow={1}>
-                <ContentField {...contentValue} name={content} />
+                <ContentField
+                  {...contentValue}
+                  name={content}
+                  language={language}
+                />
               </InputContainer>
               <FlexItem grow={0} paddingLeft={2}>
                 <Spacing marginBottom={2}>
@@ -137,8 +158,8 @@ const renderFields = props => {
   );
 };
 
-export const ValintatapaContentFields = props => (
-  <FieldArray {...props} component={renderFields} />
+export const ValintatapaContentFields = ({ language = 'fi', ...props }) => (
+  <FieldArray {...props} component={renderFields} language={language} />
 );
 
 export default ValintatapaContentFields;

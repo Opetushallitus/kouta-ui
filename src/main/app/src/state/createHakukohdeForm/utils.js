@@ -10,6 +10,10 @@ import {
 
 const DATE_FORMAT = 'DD.MM.YYYY HH:mm';
 
+const getAsNumberOrNull = value => {
+  return isNumeric(value) ? parseInt(value) : null;
+};
+
 const getDateTimeValues = dateString => {
   if (!dateString) {
     return { date: '', time: '' };
@@ -42,9 +46,11 @@ const getKoutaDateStringByDateTime = ({ date = '', time = '' }) => {
 
 export const getHakukohdeByValues = values => {
   const alkamiskausiKoodiUri = get(values, 'alkamiskausi.kausi') || null;
-  const alkamisvuosi = parseInt(get(values, 'alkamiskausi.vuosi'));
+  const alkamisvuosi = getAsNumberOrNull(
+    get(values, 'alkamiskausi.vuosi.value'),
+  );
   const kielivalinta = get(values, 'kieliversiot.languages') || [];
-  const aloituspaikat = parseInt(
+  const aloituspaikat = getAsNumberOrNull(
     get(values, 'aloituspaikat.aloituspaikkamaara'),
   );
   const kaytetaanHaunAikataulua = !get(values, 'hakuajat.eriHakuaika');
@@ -108,7 +114,7 @@ export const getHakukohdeByValues = values => {
     }) => ({
       tyyppi: get(tyyppi, 'value') || null,
       nimi: pick(nimi || null, kielivalinta),
-      toimitusaika: liitteetOnkoSamaToimitusaika
+      toimitusaika: !liitteetOnkoSamaToimitusaika
         ? getKoutaDateStringByDateTime({ date: deliverDate, time: deliverTime })
         : null,
       toimitusosoite: {
@@ -172,10 +178,16 @@ export const getHakukohdeByValues = values => {
         : [],
     }));
 
-  const pohjakoulutusvaatimusKoodiUri =
-    get(values, 'pohjakoulutus.koulutusvaatimus') || null;
+  const pohjakoulutusvaatimusKoodiUrit = (
+    get(values, 'pohjakoulutus.koulutusvaatimukset') || []
+  ).map(({ value }) => value);
+
   const valintaperuste =
     get(values, 'valintaperusteenKuvaus.valintaperuste.value') || null;
+
+  const ensikertalaisenAloituspaikat = getAsNumberOrNull(
+    get(values, 'aloituspaikat.ensikertalaismaara'),
+  );
 
   return {
     alkamiskausiKoodiUri,
@@ -192,8 +204,9 @@ export const getHakukohdeByValues = values => {
     nimi,
     toinenAsteOnkoKaksoistutkinto,
     valintakokeet,
-    pohjakoulutusvaatimusKoodiUri,
+    pohjakoulutusvaatimusKoodiUrit,
     valintaperuste,
+    ensikertalaisenAloituspaikat,
   };
 };
 
@@ -213,8 +226,9 @@ export const getValuesByHakukohde = hakukohde => {
     nimi = {},
     toinenAsteOnkoKaksoistutkinto,
     valintakokeet = [],
-    pohjakoulutusvaatimusKoodiUri = '',
+    pohjakoulutusvaatimusKoodiUrit = [],
     valintaperuste = '',
+    ensikertalaisenAloituspaikat = '',
   } = hakukohde;
 
   const valintakoeTyypit = (valintakokeet || []).map(({ tyyppi }) => tyyppi);
@@ -267,13 +281,20 @@ export const getValuesByHakukohde = hakukohde => {
   return {
     alkamiskausi: {
       kausi: alkamiskausiKoodiUri,
-      vuosi: alkamisvuosi ? alkamisvuosi.toString() : '',
+      vuosi: {
+        value: isNumeric(alkamisvuosi) ? alkamisvuosi.toString() : '',
+      },
     },
     kieliversiot: {
       languages: kielivalinta,
     },
     aloituspaikat: {
-      aloituspaikkamaara: aloituspaikat.toString(),
+      aloituspaikkamaara: isNumeric(aloituspaikat)
+        ? aloituspaikat.toString()
+        : '',
+      ensikertalaismaara: isNumeric(ensikertalaisenAloituspaikat)
+        ? ensikertalaisenAloituspaikat.toString()
+        : '',
     },
     hakuajat: {
       eriHakuaika: !kaytetaanHaunAikataulua,
@@ -294,7 +315,9 @@ export const getValuesByHakukohde = hakukohde => {
       voiSuorittaaKaksoistutkinnon: !!toinenAsteOnkoKaksoistutkinto,
     },
     pohjakoulutus: {
-      koulutusvaatimus: pohjakoulutusvaatimusKoodiUri,
+      koulutusvaatimus: (pohjakoulutusvaatimusKoodiUrit || []).map(value => ({
+        value,
+      })),
     },
     valintaperusteenKuvaus: {
       valintaperuste: {

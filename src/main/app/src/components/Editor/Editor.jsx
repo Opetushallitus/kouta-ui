@@ -43,6 +43,11 @@ const EditorWrapper = styled.div`
   ${getThemeProp('typography.body')};
 `;
 
+const EditorContent = styled.div`
+  max-height: 250px;
+  overflow-y: auto;
+`;
+
 const Toolbar = styled.div`
   padding ${spacing(1)};
   border-bottom: 1px solid ${getThemeProp('palette.border')};
@@ -325,12 +330,14 @@ export const Editor = ({ value, onChange, ...props }) => {
         <HeaderSelect {...styleButtonProps} />
       </Toolbar>
       <EditorWrapper>
-        <DraftEditor
-          ref={editorRef}
-          editorState={editorState}
-          onChange={onChange}
-          {...props}
-        />
+        <EditorContent>
+          <DraftEditor
+            ref={editorRef}
+            editorState={editorState}
+            onChange={onChange}
+            {...props}
+          />
+        </EditorContent>
       </EditorWrapper>
     </Container>
   );

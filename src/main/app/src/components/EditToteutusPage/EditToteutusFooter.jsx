@@ -47,8 +47,8 @@ export default connect(
   state => ({
     valid: toteutusFormIsValid(state),
   }),
-  (dispatch, { toteutus: { oid: toteutusOid, organisaatioOid, tila, lastModified, koulutusOid } }) => ({
+  (dispatch, { toteutus }) => ({
     onSave: ({ tila: tilaArg } = {}) =>
-      dispatch(submit({ toteutusOid, tila: tilaArg || tila, organisaatioOid, lastModified, koulutusOid })),
+      dispatch(submit({ toteutus, tila: tilaArg })),
   }),
 )(EditToteutusFooter);

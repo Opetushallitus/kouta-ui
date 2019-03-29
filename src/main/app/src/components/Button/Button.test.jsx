@@ -1,7 +1,6 @@
 import React from 'react';
-import { mount } from 'enzyme';
 
-import Button from '../../components/Button';
+import Button from './index';
 import { mountWithTheme } from '../../testUtils';
 
 test('renders correctly with variant', () => {

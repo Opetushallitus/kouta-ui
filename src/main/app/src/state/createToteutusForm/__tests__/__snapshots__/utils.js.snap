@@ -1,0 +1,433 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getToteutusByValues returns correct toteutus given form values 1`] = `
+Object {
+  "kielivalinta": Array [
+    "fi",
+    "sv",
+  ],
+  "metadata": Object {
+    "alemmanKorkeakoulututkinnonOsaamisalat": Array [
+      Object {
+        "kuvaus": Object {
+          "fi": "Fi alempikuvaus",
+          "sv": "Sv alempikuvaus",
+        },
+        "linkki": Object {
+          "fi": "Fi alempilinkki",
+          "sv": "Sv alempilinkki",
+        },
+        "nimi": Object {
+          "fi": "Fi alempinimi",
+          "sv": "Sv alempinimi",
+        },
+        "otsikko": Object {
+          "fi": "Fi alempiotsikko",
+          "sv": "Sv alempiotsikko",
+        },
+      },
+    ],
+    "ammattinimikkeet": Array [
+      Object {
+        "arvo": "nimike1",
+        "kieli": "fi",
+      },
+      Object {
+        "arvo": "nimike2",
+        "kieli": "sv",
+      },
+    ],
+    "asiasanat": Array [
+      Object {
+        "arvo": "avainsana1",
+        "kieli": "fi",
+      },
+      Object {
+        "arvo": "avainsana2",
+        "kieli": "sv",
+      },
+    ],
+    "kuvaus": Object {
+      "fi": "Fi kuvaus",
+      "sv": "Sv kuvaus",
+    },
+    "opetus": Object {
+      "alkamisaikaKuvaus": Object {
+        "fi": "Fi kausikuvaus",
+        "sv": "Sv kausikuvaus",
+      },
+      "alkamiskausiKoodiUri": "kausi_1#1",
+      "alkamisvuosi": "2020",
+      "lisatiedot": Array [
+        Object {
+          "otsikkoKoodiUri": "osio_1#1",
+          "teksti": Object {
+            "fi": "Fi kuvaus1",
+            "sv": "Sv kuvaus1",
+          },
+        },
+        Object {
+          "otsikkoKoodiUri": "osio_2#1",
+          "teksti": Object {
+            "fi": "Fi kuvaus2",
+            "sv": "Sv kuvaus2",
+          },
+        },
+      ],
+      "lukuvuosimaksu": Object {
+        "fi": "20e",
+        "sv": "20kr",
+      },
+      "lukuvuosimaksuKuvaus": Object {
+        "fi": "Fi maksukuvaus",
+        "sv": "Sv maksukuvaus",
+      },
+      "maksullisuusKuvaus": Object {
+        "fi": "Fi maksullisuuskuvaus",
+        "sv": "Sv maksullisuuskuvaus",
+      },
+      "maksunMaara": Object {
+        "fi": "5e",
+        "sv": "5kr",
+      },
+      "onkoLukuvuosimaksua": true,
+      "onkoMaksullinen": true,
+      "onkoStipendia": true,
+      "opetusaikaKoodiUri": "opetusaika_1#1",
+      "opetusaikaKuvaus": Object {
+        "fi": "Fi aikakuvaus",
+        "sv": "Sv aikakuvaus",
+      },
+      "opetuskieletKuvaus": Object {
+        "fi": "Fi kielikuvaus",
+        "sv": "Sv kielikuvaus",
+      },
+      "opetuskieliKoodiUrit": Array [
+        "opetuskieli_1#1",
+        "opetuskieli_2#1",
+      ],
+      "opetustapaKoodiUrit": Array [
+        "opetustapa_1#1",
+        "opetustapa_2#1",
+      ],
+      "opetustapaKuvaus": Object {
+        "fi": "Fi tapakuvaus",
+        "sv": "Sv tapakuvaus",
+      },
+      "stipendinKuvaus": Object {
+        "fi": "Fi stipendikuvaus",
+        "sv": "Sv stipendikuvaus",
+      },
+      "stipendinMaara": Object {
+        "fi": "20e",
+        "sv": "20kr",
+      },
+    },
+    "osaamisalat": Array [
+      Object {
+        "koodi": "osaamisala1",
+        "linkki": Object {
+          "fi": "Fi linkki1",
+          "sv": "Sv linkki1",
+        },
+        "otsikko": Object {
+          "fi": "Fi otsikko1",
+          "sv": "Sv otsikko1",
+        },
+      },
+      Object {
+        "koodi": "osaamisala2",
+        "linkki": Object {
+          "fi": "Fi linkki2",
+          "sv": "Sv linkki2",
+        },
+        "otsikko": Object {
+          "fi": "Fi otsikko2",
+          "sv": "Sv otsikko2",
+        },
+      },
+    ],
+    "yhteystieto": Object {
+      "nimi": Object {
+        "fi": "Fi nimi",
+        "sv": "Sv nimi",
+      },
+      "puhelinnumero": Object {
+        "fi": "Fi puhelinnumero",
+        "sv": "Sv puhelinnumero",
+      },
+      "sahkoposti": Object {
+        "fi": "Fi sähköposti",
+        "sv": "Sv sähköposti",
+      },
+      "titteli": Object {
+        "fi": "Fi titteli",
+        "sv": "Sv titteli",
+      },
+      "wwwSivu": Object {
+        "fi": "Fi verkkosivu",
+        "sv": "Sv verkkosivu",
+      },
+    },
+    "ylemmanKorkeakoulututkinnonOsaamisalat": Array [
+      Object {
+        "kuvaus": Object {
+          "fi": "Fi ylempikuvaus",
+          "sv": "Sv ylempikuvaus",
+        },
+        "linkki": Object {
+          "fi": "Fi ylempilinkki",
+          "sv": "Sv ylempilinkki",
+        },
+        "nimi": Object {
+          "fi": "Fi ylempinimi",
+          "sv": "Sv ylempinimi",
+        },
+        "otsikko": Object {
+          "fi": "Fi ylempiotsikko",
+          "sv": "Sv ylempiotsikko",
+        },
+      },
+    ],
+  },
+  "nimi": Object {
+    "fi": "Fi nimi",
+    "sv": "Sv nimi",
+  },
+  "tarjoajat": Array [
+    "org1",
+    "org2",
+  ],
+}
+`;
+
+exports[`getValuesByToteutus returns correct form values given toteutus 1`] = `
+Object {
+  "alemmanKorkeakoulututkinnonOsaamisalat": Object {
+    "osaamisalat": Array [
+      Object {
+        "kuvaus": Object {
+          "fi": "Fi alempikuvaus",
+          "sv": "Sv alempikuvaus",
+        },
+        "linkki": Object {
+          "fi": "Fi alempilinkki",
+          "sv": "Sv alempilinkki",
+        },
+        "nimi": Object {
+          "fi": "Fi alempinimi",
+          "sv": "Sv alempinimi",
+        },
+        "otsikko": Object {
+          "fi": "Fi alempiotsikko",
+          "sv": "Sv alempiotsikko",
+        },
+      },
+    ],
+  },
+  "jarjestamispaikat": Object {
+    "jarjestajat": Array [
+      "org1",
+      "org2",
+    ],
+  },
+  "jarjestamistiedot": Object {
+    "alkamiskausi": Object {
+      "kausi": "kausi_1#1",
+      "vuosi": "2020",
+    },
+    "alkamiskausiKuvaus": Object {
+      "fi": "Fi kausikuvaus",
+      "sv": "Sv kausikuvaus",
+    },
+    "kuvaus": Object {
+      "fi": "Fi kuvaus",
+      "sv": "Sv kuvaus",
+    },
+    "lukuvuosimaksu": Object {
+      "fi": "20e",
+      "sv": "20kr",
+    },
+    "lukuvuosimaksuKuvaus": Object {
+      "fi": "Fi maksukuvaus",
+      "sv": "Sv maksukuvaus",
+    },
+    "maksullisuus": true,
+    "maksullisuusKuvaus": Object {
+      "fi": "Fi maksullisuuskuvaus",
+      "sv": "Sv maksullisuuskuvaus",
+    },
+    "maksumaara": Object {
+      "fi": "5e",
+      "sv": "5kr",
+    },
+    "onkoLukuvuosimaksua": true,
+    "onkoStipendia": true,
+    "opetusaika": "opetusaika_1#1",
+    "opetusaikaKuvaus": Object {
+      "fi": "Fi aikakuvaus",
+      "sv": "Sv aikakuvaus",
+    },
+    "opetuskieli": Array [
+      "opetuskieli_1#1",
+      "opetuskieli_2#1",
+    ],
+    "opetuskieliKuvaus": Object {
+      "fi": "Fi kielikuvaus",
+      "sv": "Sv kielikuvaus",
+    },
+    "opetustapa": Array [
+      "opetustapa_1#1",
+      "opetustapa_2#1",
+    ],
+    "opetustapaKuvaus": Object {
+      "fi": "Fi tapakuvaus",
+      "sv": "Sv tapakuvaus",
+    },
+    "osioKuvaukset": Object {
+      "osio_1#1": Object {
+        "fi": "Fi kuvaus1",
+        "sv": "Sv kuvaus1",
+      },
+      "osio_2#1": Object {
+        "fi": "Fi kuvaus2",
+        "sv": "Sv kuvaus2",
+      },
+    },
+    "osiot": Array [
+      Object {
+        "value": "osio_1#1",
+      },
+      Object {
+        "value": "osio_2#1",
+      },
+    ],
+    "stipendinKuvaus": Object {
+      "fi": "Fi stipendikuvaus",
+      "sv": "Sv stipendikuvaus",
+    },
+    "stipendinMaara": Object {
+      "fi": "20e",
+      "sv": "20kr",
+    },
+  },
+  "kieliversiot": Object {
+    "languages": Array [
+      "fi",
+      "sv",
+    ],
+  },
+  "kuvaus": Object {
+    "kuvaus": Object {
+      "fi": "Fi kuvaus",
+      "sv": "Sv kuvaus",
+    },
+  },
+  "nayttamistiedot": Object {
+    "ammattinimikkeet": Object {
+      "fi": Array [
+        Object {
+          "label": "nimike1",
+          "value": "nimike1",
+        },
+      ],
+      "sv": Array [
+        Object {
+          "label": "nimike2",
+          "value": "nimike2",
+        },
+      ],
+    },
+    "avainsanat": Object {
+      "fi": Array [
+        Object {
+          "label": "avainsana1",
+          "value": "avainsana1",
+        },
+      ],
+      "sv": Array [
+        Object {
+          "label": "avainsana2",
+          "value": "avainsana2",
+        },
+      ],
+    },
+  },
+  "nimi": Object {
+    "name": Object {
+      "fi": "Fi nimi",
+      "sv": "Sv nimi",
+    },
+  },
+  "osaamisalat": Object {
+    "osaamisalaLinkit": Object {
+      "osaamisala1": Object {
+        "fi": "Fi linkki1",
+        "sv": "Sv linkki1",
+      },
+      "osaamisala2": Object {
+        "fi": "Fi linkki2",
+        "sv": "Sv linkki2",
+      },
+    },
+    "osaamisalaLinkkiOtsikot": Object {
+      "osaamisala1": Object {
+        "fi": "Fi otsikko1",
+        "sv": "Sv otsikko1",
+      },
+      "osaamisala2": Object {
+        "fi": "Fi otsikko2",
+        "sv": "Sv otsikko2",
+      },
+    },
+    "osaamisalat": Array [
+      "osaamisala1",
+      "osaamisala2",
+    ],
+  },
+  "yhteystiedot": Object {
+    "email": Object {
+      "fi": "Fi sähköposti",
+      "sv": "Sv sähköposti",
+    },
+    "name": Object {
+      "fi": "Fi nimi",
+      "sv": "Sv nimi",
+    },
+    "phone": Object {
+      "fi": "Fi puhelinnumero",
+      "sv": "Sv puhelinnumero",
+    },
+    "title": Object {
+      "fi": "Fi titteli",
+      "sv": "Sv titteli",
+    },
+    "website": Object {
+      "fi": "Fi verkkosivu",
+      "sv": "Sv verkkosivu",
+    },
+  },
+  "ylemmanKorkeakoulututkinnonOsaamisalat": Object {
+    "osaamisalat": Array [
+      Object {
+        "kuvaus": Object {
+          "fi": "Fi ylempikuvaus",
+          "sv": "Sv ylempikuvaus",
+        },
+        "linkki": Object {
+          "fi": "Fi ylempilinkki",
+          "sv": "Sv ylempilinkki",
+        },
+        "nimi": Object {
+          "fi": "Fi ylempinimi",
+          "sv": "Sv ylempinimi",
+        },
+        "otsikko": Object {
+          "fi": "Fi ylempiotsikko",
+          "sv": "Sv ylempiotsikko",
+        },
+      },
+    ],
+  },
+}
+`;

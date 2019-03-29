@@ -63,7 +63,9 @@ const HakukohteetModal = ({
         <FooterField>
           {({ toteutus }) => (
             <Flex justifyBetween>
-              <Button onClick={onClose} variant="outlined" type="button" />
+              <Button onClick={onClose} variant="outlined" type="button">
+                {t('yleiset.sulje')}
+              </Button>
               <Button onClick={onSave} type="button" disabled={!toteutus}>
                 {t('yleiset.luoUusiHakukohde')}
               </Button>

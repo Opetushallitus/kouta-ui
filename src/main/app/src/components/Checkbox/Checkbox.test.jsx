@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Checkbox from '../../components/Checkbox';
+import Checkbox from './index';
 import { mountWithTheme } from '../../testUtils';
 
 test('renders correctly', () => {

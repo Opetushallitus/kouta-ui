@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Textarea from '../../components/Textarea';
+import Textarea from './index';
 import { mountWithTheme } from '../../testUtils';
 
 test('renders correctly', () => {

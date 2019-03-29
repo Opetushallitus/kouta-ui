@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Radio, { RadioGroup } from '../../components/Radio';
+import Radio, { RadioGroup } from './index';
 import { mountWithTheme } from '../../testUtils';
 
 test('renders correctly', () => {

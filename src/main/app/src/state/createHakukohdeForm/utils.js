@@ -315,9 +315,11 @@ export const getValuesByHakukohde = hakukohde => {
       voiSuorittaaKaksoistutkinnon: !!toinenAsteOnkoKaksoistutkinto,
     },
     pohjakoulutus: {
-      koulutusvaatimus: (pohjakoulutusvaatimusKoodiUrit || []).map(value => ({
-        value,
-      })),
+      koulutusvaatimukset: (pohjakoulutusvaatimusKoodiUrit || []).map(
+        value => ({
+          value,
+        }),
+      ),
     },
     valintaperusteenKuvaus: {
       valintaperuste: {

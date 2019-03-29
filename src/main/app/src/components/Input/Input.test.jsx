@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Input from '../../components/Input';
+import Input from './index';
 import { mountWithTheme } from '../../testUtils';
 
 test('renders correctly', () => {

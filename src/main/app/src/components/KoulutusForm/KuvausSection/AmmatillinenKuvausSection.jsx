@@ -5,6 +5,7 @@ import ApiAsync from '../../ApiAsync';
 import { getKoulutusByKoodi } from '../../../apiUtils';
 import Typography from '../../Typography';
 import { getLanguageValue } from '../../../utils';
+import useTranslation from '../../useTranslation';
 
 const getKuvaus = (koulutus, language) => {
   const kuvaus = koulutus ? getLanguageValue(koulutus.kuvaus, language) : null;
@@ -21,10 +22,12 @@ const DescriptionAsync = ({ koodiUri, language = 'fi' }) => (
 );
 
 const AmmatillinenKuvausSection = ({ language, koulutusValue }) => {
+  const { t } = useTranslation();
+
   return (
     <>
       <Typography variant="h6" marginBottom={1}>
-        Koulutuksen kuvaus
+        {t('yleiset.kuvaus')}
       </Typography>
       {koulutusValue && koulutusValue.value ? (
         <DescriptionAsync koodiUri={koulutusValue.value} language={language} />

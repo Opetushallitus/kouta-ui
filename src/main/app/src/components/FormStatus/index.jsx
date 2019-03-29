@@ -7,17 +7,12 @@ import { getThemeProp } from '../../theme';
 import Icon from '../Icon';
 import Typography from '../Typography';
 import { JULKAISUTILA } from '../../constants';
+import useTranslation from '../useTranslation';
 
 const statusByIcon = {
   [JULKAISUTILA.ARKISTOITU]: 'get_app',
   [JULKAISUTILA.JULKAISTU]: 'done',
   [JULKAISUTILA.TALLENNETTU]: 'save',
-};
-
-const labelByStatus = {
-  [JULKAISUTILA.ARKISTOITU]: 'Arkistoitu',
-  [JULKAISUTILA.JULKAISTU]: 'Julkaistu',
-  [JULKAISUTILA.TALLENNETTU]: 'Tallennettu',
 };
 
 const getStatusIconType = status => {
@@ -28,9 +23,15 @@ const getStatusIconType = status => {
   return statusByIcon[status] || '';
 };
 
-const getLabel = status => {
+const getLabel = ({ status, t }) => {
   if (!isString(status)) {
     return null;
+  }
+
+  const labelByStatus = {
+    [JULKAISUTILA.ARKISTOITU]: t('yleiset.arkistoitu'),
+    [JULKAISUTILA.JULKAISTU]: t('yleiset.julkaistu'),
+    [JULKAISUTILA.TALLENNETTU]: t('yleiset.tallennettu'),
   }
 
   return labelByStatus[status] || null;
@@ -95,12 +96,14 @@ const LabelContainer = styled(Typography)`
 `;
 
 const FormStatus = ({ status = JULKAISUTILA.TALLENNETTU, children = null, ...props }) => {
+  const { t } = useTranslation();
+
   return (
     <Container status={status} {...props}>
       <IconContainer status={status}>
         <StatusIcon type={getStatusIconType(status)} />
       </IconContainer>
-      <LabelContainer>{children || getLabel(status)}</LabelContainer>
+      <LabelContainer>{children || getLabel({ status, t })}</LabelContainer>
     </Container>
   );
 };

@@ -1,59 +1,62 @@
-import React, { Component } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
+import sortBy from 'lodash/sortBy';
 
 import LanguageTabs from './LanguageTabs';
 import Spacing from '../Spacing';
+import useTranslation from '../useTranslation';
 
-class LanguageSelector extends Component {
-  static defaultProps = {
-    children: () => null,
-    languages: [],
+const sortOrder = ['fi', 'sv', 'en'];
+
+const getLanguageOptions = ({ languages = [], t }) => {
+  const labelByValue = {
+    fi: t('yleiset.suomeksi'),
+    sv: t('yleiset.ruotsiksi'),
+    en: t('yleiset.englanniksi'),
   };
 
-  constructor(props) {
-    super(props);
+  return sortBy(
+    languages.map(item => {
+      return {
+        label: labelByValue[item] || item,
+        value: item,
+      };
+    }),
+    ({ value }) => sortOrder.indexOf(value),
+  );
+};
 
-    this.state = {
-      value: props.defaultValue,
-    };
-  }
+const LanguageSelector = ({
+  languages = [],
+  children = () => null,
+  initialLanguage = 'fi',
+}) => {
+  const [language, setLanguage] = useState(initialLanguage);
 
-  onChange = value => {
-    this.setState({
-      value,
-    });
-  };
-
-  static getDerivedStateFromProps(props, state) {
-    const { languages } = props;
-
-    if (languages.length === 0) {
-      return null;
+  useEffect(() => {
+    if (languages.length > 0 && !languages.find(lng => lng === language)) {
+      setLanguage(languages[0]);
     }
+  }, [languages]);
 
-    const active = languages.find(({ value }) => value === state.value);
+  const { t } = useTranslation();
 
-    if (active) {
-      return null;
-    }
+  const options = useMemo(() => getLanguageOptions({ t, languages }), [
+    t,
+    languages,
+  ]);
 
-    return { value: languages[0].value };
-  }
-
-  render() {
-    const { languages, children } = this.props;
-    const { value } = this.state;
-
-    return (
-      <>
-        <LanguageTabs
-          onChange={this.onChange}
-          value={value}
-          languages={languages}
-        />
-        <Spacing paddingTop={2}>{value ? children({ value }) : null}</Spacing>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <LanguageTabs
+        onChange={setLanguage}
+        value={language}
+        languages={options}
+      />
+      <Spacing paddingTop={2}>
+        {language ? children({ language, value: language }) : null}
+      </Spacing>
+    </>
+  );
+};
 
 export default LanguageSelector;

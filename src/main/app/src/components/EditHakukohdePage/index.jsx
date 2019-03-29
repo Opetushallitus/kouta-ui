@@ -20,6 +20,7 @@ import Flex, { FlexItem } from '../Flex';
 import Typography from '../Typography';
 import Spin from '../Spin';
 import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
+import useTranslation from '../useTranslation';
 
 const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
   const hakukohde = await getKoutaHakukohdeByOid({
@@ -73,6 +74,8 @@ const EditHakukohdePage = props => {
     watch,
   });
 
+  const { t } = useTranslation();
+
   return (
     <FormPage
       header={<EditHakukohdeHeader hakukohde={hakukohde} />}
@@ -84,7 +87,7 @@ const EditHakukohdePage = props => {
           <Flex marginBottom={2} justifyBetween>
             <FlexItem grow={0} paddingRight={2}>
               <Typography variant="h6" marginBottom={1}>
-                Organisaatio
+                {t('yleiset.organisaatio')}
               </Typography>
               <Typography>
                 {getFirstLanguageValue(get(organisaatio, 'nimi'))}
@@ -92,7 +95,7 @@ const EditHakukohdePage = props => {
             </FlexItem>
             <FlexItem grow={0}>
               <Typography variant="h6" marginBottom={1}>
-                Haku
+                {t('yleiset.haku')}
               </Typography>
               <Typography>
                 {getFirstLanguageValue(get(haku, 'nimi'))}
@@ -100,7 +103,7 @@ const EditHakukohdePage = props => {
             </FlexItem>
             <FlexItem grow={0}>
               <Typography variant="h6" marginBottom={1}>
-                Toteutus
+                {t('yleiset.toteutus')}
               </Typography>
               <Typography>
                 {getFirstLanguageValue(get(toteutus, 'nimi'))}

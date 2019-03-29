@@ -5,7 +5,6 @@ import FormCollapse from '../FormCollapse';
 import KieliversiotFormSection from '../KieliversiotFormSection';
 
 import {
-  LANGUAGE_TABS,
   KOULUTUSTYYPPI_CATEGORY,
   KORKEAKOULUKOULUTUSTYYPIT,
 } from '../../constants';
@@ -20,18 +19,15 @@ import KielitaitovaatimuksetSection from './KielitaitovaatimuksetSection';
 import LoppukuvausSection from './LoppukuvausSection';
 import OsaamistaustaSection from './OsaamistaustaSection';
 import TyyppiSection from './TyyppiSection';
+import useTranslation from '../useTranslation';
 
 const WithLanguagesAndTyyppiValue = formValues({
   languages: 'kieliversiot.languages',
   tyyppi: 'tyyppi.tyyppi',
 })(({ languages, children, ...props }) => {
-  const activeLanguages = languages || [];
-
   return children({
     ...props,
-    languages: LANGUAGE_TABS.filter(({ value }) =>
-      activeLanguages.includes(value),
-    ),
+    languages: languages || [],
   });
 });
 
@@ -45,6 +41,8 @@ const ValintaperusteForm = ({
   organisaatioOid,
   onCreateNew = () => {},
 }) => {
+  const { t } = useTranslation(); 
+
   return (
     <form onSubmit={handleSubmit}>
       <WithLanguagesAndTyyppiValue>
@@ -61,18 +59,18 @@ const ValintaperusteForm = ({
           return (
             <FormCollapseGroup enabled={steps}>
               {canEditTyyppi ? (
-                <FormCollapse header="Koulutustyyppi" section="tyyppi">
+                <FormCollapse header={t('yleiset.koulutustyyppi')} section="tyyppi">
                   <TyyppiSection />
                 </FormCollapse>
               ) : null}
 
-              <FormCollapse header="Kieliversiot" section="kieliversiot">
+              <FormCollapse header={t('yleiset.kieliversiot')} section="kieliversiot">
                 <KieliversiotFormSection />
               </FormCollapse>
 
               {canCopy ? (
                 <FormCollapse
-                  header="Pohjan valinta"
+                  header={t('yleiset.pohjanValinta')}
                   section="pohja"
                   onContinue={onMaybeCopy}
                 >
@@ -86,41 +84,41 @@ const ValintaperusteForm = ({
                 </FormCollapse>
               ) : null}
 
-              <FormCollapse header="Hakutavan rajaus" section="hakutavanRajaus">
+              <FormCollapse header={t('valintaperustelomake.hakutavanRajaus')} section="hakutavanRajaus">
                 <HakutavanRajausSection />
               </FormCollapse>
 
               <FormCollapse
-                header="Haun kohdejoukon rajaus"
+                header={t('valintaperustelomake.haunKohdejoukonRajaus')}
                 section="kohdejoukonRajaus"
               >
                 <KohdejoukonRajausSection />
               </FormCollapse>
 
-              <FormCollapse header="Valintaperusteen nimi" section="nimi">
+              <FormCollapse header={t('valintaperustelomake.valintaperusteenNimi')} section="nimi">
                 <NimiSection languages={languages} />
               </FormCollapse>
 
               {isKorkeakoulu ? (
-                <FormCollapse header="Osaamistausta" section="osaamistausta">
+                <FormCollapse header={t('valintaperustelomake.osaamistausta')} section="osaamistausta">
                   <OsaamistaustaSection />
                 </FormCollapse>
               ) : null}
 
-              <FormCollapse header="Valintatapa" section="valintatapa">
+              <FormCollapse header={t('valintaperustelomake.valintatapa')} section="valintatapa">
                 <ValintatapaSection languages={languages} />
               </FormCollapse>
 
               <FormCollapse
-                header="Kielitaitovaatimukset"
+                header={t('valintaperustelomake.kielitaitovaatimukset')}
                 section="kielitaitovaatimukset"
               >
                 <KielitaitovaatimuksetSection languages={languages} />
               </FormCollapse>
-
+ 
               {isKorkeakoulu ? (
                 <FormCollapse
-                  header="Valintaperusteen loppukuvaus"
+                  header={t('valintaperustelomake.valintaperusteenLoppukuvaus')}
                   section="loppukuvaus"
                 >
                   <LoppukuvausSection languages={languages} />

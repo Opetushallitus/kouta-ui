@@ -22,6 +22,7 @@ import KoulutusTilaDropdown from './KoulutusTilaDropdown';
 import ErrorAlert from '../ErrorAlert';
 
 import { getFirstLanguageValue } from '../../utils';
+import useTranslation from '../useTranslation';
 
 import {
   UncontrolledDropdown,
@@ -44,6 +45,8 @@ const getKoulutukset = async ({ httpClient, apiUrls, ...filters }) => {
 };
 
 const LuoKoulutusDropdown = ({ organisaatioOid }) => {
+  const { t } = useTranslation();
+
   const overlay = (
     <DropdownMenu>
       <DropdownMenuItem
@@ -64,7 +67,7 @@ const LuoKoulutusDropdown = ({ organisaatioOid }) => {
       {({ ref, onToggle, visible }) => (
         <div ref={ref} onClick={onToggle}>
           <Button>
-            Luo uusi koulutus <DropdownIcon open={visible} />
+            {t('etusivu.luoUusiKoulutus')} <DropdownIcon open={visible} />
           </Button>
         </div>
       )}
@@ -76,9 +79,9 @@ const Actions = ({ organisaatioOid }) => (
   <LuoKoulutusDropdown organisaatioOid={organisaatioOid} />
 );
 
-const tableColumns = [
+const makeTableColumns = t => [
   {
-    title: 'Nimi',
+    title: t('yleiset.nimi'),
     key: 'nimi',
     sortable: true,
     render: ({ nimi, oid }) => (
@@ -88,15 +91,15 @@ const tableColumns = [
     ),
   },
   {
-    title: 'Tila',
+    title: t('yleiset.tila'),
     key: 'tila',
     sortable: true,
     render: ({ tila, oid }) => (
       <KoulutusTilaDropdown initialTila={tila} koulutusOid={oid} />
     ),
   },
-  makeModifiedColumn(),
-  makeMuokkaajaColumn(),
+  makeModifiedColumn(t),
+  makeMuokkaajaColumn(t),
   {
     title: 'Kiinnitetyt toteutukset',
     key: 'toteutukset',
@@ -107,6 +110,8 @@ const tableColumns = [
 ];
 
 const KoulutuksetSection = ({ organisaatioOid }) => {
+  const { t } = useTranslation();
+
   const {
     debouncedNimi,
     showArchived,
@@ -148,15 +153,17 @@ const KoulutuksetSection = ({ organisaatioOid }) => {
       : null;
   }, [koulutukset]);
 
+  const tableColumns = useMemo(() => makeTableColumns(t), [t]);
+
   return (
     <ListCollapse
       icon="school"
-      header="Koulutukset"
+      header={t('yleiset.koulutukset')}
       actions={<Actions organisaatioOid={organisaatioOid} />}
       defaultOpen
     >
       <Spacing marginBottom={2}>
-        <Filters {...filtersProps} nimiPlaceholder="Hae koulutuksia" />
+        <Filters {...filtersProps} nimiPlaceholder={t('etusivu.haeKoulutuksia')} />
       </Spacing>
 
       {rows ? (

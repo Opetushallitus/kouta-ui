@@ -10,23 +10,23 @@ import { formatKoutaDateString, isFunction } from '../../utils';
 
 import { UncontrolledDropdown } from '../Dropdown';
 
-export const makeTilaColumn = () => ({
-  title: 'Tila',
+export const makeTilaColumn = t => ({
+  title: t('yleiset.tila'),
   key: 'tila',
   sortable: true,
   render: ({ tila }) => <TilaLabel tila={tila} />,
 });
 
-export const makeModifiedColumn = () => ({
-  title: 'Muokattu viimeksi',
+export const makeModifiedColumn = t => ({
+  title: t('yleiset.muokattuViimeksi'),
   key: 'modified',
   sortable: true,
   render: ({ modified }) =>
     modified ? formatKoutaDateString(modified, 'DD.MM.YYYY HH:mm') : null,
 });
 
-export const makeMuokkaajaColumn = () => ({
-  title: 'Muokkaaja',
+export const makeMuokkaajaColumn = t => ({
+  title: t('yleiset.muokkaaja'),
   key: 'muokkaaja',
   sortable: true,
   render: ({ muokkaaja }) => get(muokkaaja, 'nimi') || null,

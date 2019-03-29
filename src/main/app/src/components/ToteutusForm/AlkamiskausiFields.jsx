@@ -7,6 +7,7 @@ import Radio, { RadioGroup } from '../Radio';
 import useKoodistoOptions from '../useKoodistoOptions';
 import YearSelect from '../YearSelect';
 import { noop } from '../../utils';
+import useTranslation from '../useTranslation';
 
 const renderRadioGroupField = ({ input, options }) => (
   <RadioGroup {...input}>
@@ -21,13 +22,14 @@ const renderRadioGroupField = ({ input, options }) => (
 const renderYearField = ({ input }) => <YearSelect {...input} onBlur={noop} />;
 
 const AlkamiskausiFields = ({ name }) => {
+  const { t } = useTranslation();
   const { options } = useKoodistoOptions({ koodisto: 'kausi' });
 
   return (
     <>
       <Spacing marginBottom={2}>
         <Typography as="div" marginBottom={1}>
-          Kausi
+          {t('yleiset.kausi')}
         </Typography>
 
         <Field
@@ -38,7 +40,7 @@ const AlkamiskausiFields = ({ name }) => {
       </Spacing>
       <Spacing>
         <Typography as="div" marginBottom={1}>
-          Vuosi
+          {t('yleiset.vuosi')}
         </Typography>
         <Field name={`${name}.vuosi`} component={renderYearField} />
       </Spacing>

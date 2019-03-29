@@ -20,6 +20,7 @@ import { getFirstLanguageValue } from '../../utils';
 import Anchor from '../Anchor';
 import Button from '../Button';
 import ErrorAlert from '../ErrorAlert';
+import useTranslation from '../useTranslation';
 
 const getValintaperusteet = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
@@ -33,15 +34,19 @@ const getValintaperusteet = async ({ httpClient, apiUrls, ...filters }) => {
   return { result, pageCount: Math.ceil(totalCount / 10) };
 };
 
-const Actions = ({ organisaatioOid }) => (
-  <Button as={Link} to={`/organisaatio/${organisaatioOid}/valintaperusteet`}>
-    Luo uusi valintaperuste
-  </Button>
-);
+const Actions = ({ organisaatioOid }) => {
+  const { t } = useTranslation();
 
-const tableColumns = [
+  return (
+    <Button as={Link} to={`/organisaatio/${organisaatioOid}/valintaperusteet`}>
+      {t('etusivu.luoUusiValintaperuste')}
+    </Button>
+  );
+};
+
+const makeTableColumns = t => [
   {
-    title: 'Nimi',
+    title: t('yleiset.nimi'),
     key: 'nimi',
     sortable: true,
     render: ({ nimi, oid }) => (
@@ -50,12 +55,14 @@ const tableColumns = [
       </Anchor>
     ),
   },
-  makeTilaColumn(),
-  makeModifiedColumn(),
-  makeMuokkaajaColumn(),
+  makeTilaColumn(t),
+  makeModifiedColumn(t),
+  makeMuokkaajaColumn(t),
 ];
 
 const ValintaperusteetSection = ({ organisaatioOid }) => {
+  const { t } = useTranslation();
+
   const {
     debouncedNimi,
     showArchived,
@@ -100,15 +107,20 @@ const ValintaperusteetSection = ({ organisaatioOid }) => {
       : null;
   }, [valintaperusteet]);
 
+  const tableColumns = useMemo(() => makeTableColumns(t), [t]);
+
   return (
     <ListCollapse
       icon="select_all"
-      header="Valintaperusteet"
+      header={t('yleiset.valintaperusteet')}
       actions={<Actions organisaatioOid={organisaatioOid} />}
       defaultOpen
     >
       <Spacing marginBottom={2}>
-        <Filters {...filtersProps} nimiPlaceholder="Hae valintaperusteita" />
+        <Filters
+          {...filtersProps}
+          nimiPlaceholder={t('etusivu.haeValintaperusteita')}
+        />
       </Spacing>
 
       {rows ? (

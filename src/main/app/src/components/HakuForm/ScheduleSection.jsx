@@ -1,54 +1,24 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { Field, FieldArray } from 'redux-form';
-import getYear from 'date-fns/get_year';
-import mapValues from 'lodash/mapValues';
 
-import Icon from '../Icon';
-import Radio, { RadioGroup } from '../Radio';
+import { RadioGroup } from '../Radio';
 import Button from '../Button';
 import Spacing from '../Spacing';
 import InputMask from '../InputMask';
 import Typography from '../Typography';
-import { getThemeProp } from '../../theme';
-import NativeSelect, { Option } from '../NativeSelect';
-import ApiAsync from '../ApiAsync';
-import { getKoodisto } from '../../apiUtils';
-import {
-  isArray,
-  getFirstLanguageValue,
-  arrayToTranslationObject,
-} from '../../utils';
+import YearSelect from '../YearSelect';
+import useKoodistoOptions from '../useKoodistoOptions';
+import useTranslation from '../useTranslation';
+import Flex, { FlexItem } from '../Flex';
+import { noop } from '../../utils';
 
-const FieldWrapper = styled.div`
-  margin-bottom: 27px;
-`;
-
-const HeaderWrapper = styled.div`
-  margin-bottom: 12px;
-  border-bottom: solid 1px #979797;
-  width: 570px;
-`;
-
-const HeaderColum = styled(Typography)`
-  font-weight: 600;
-  color: #6e6e7e;
-  font-size: 18px;
-`;
-
-const HeaderIcon = styled(Icon)`
-  font-size: 18px;
-  vertical-align: sub;
-  margin-left: -8px;
-  color: #6e6e7e;
-`;
-
-const EventIcon = styled(Icon)`
-  display: inline-block;
-  margin-left: 5px;
-  font-size: 22px;
-  margin-top: 8px;
-  color: ${getThemeProp('palette.primary.main')};
+const BorderHeading = styled(Typography).attrs({
+  variant: 'h6',
+  paddingBottom: 1,
+  marginBottom: 2,
+})`
+  border-bottom: 1px solid ${({ theme }) => theme.palette.border};
 `;
 
 const HakuContainer = styled.div`
@@ -76,28 +46,11 @@ const HakuDateTimeWrapper = styled.div`
 const HakuDateContainer = styled.div`
   flex: 1;
   padding-right: ${({ theme }) => theme.spacing.unit * 2}px;
-
-`;
-
-const HakuDateSecondContainer = styled.div`
-  flex: 0;
-  & > input {
-    width: 155px;  
-  }
 `;
 
 const HakuTimeContainer = styled.div`
   flex: 0;
   flex-basis: 30%;
-`;
-
-const HakuTimeSecondContainer = styled.div`
-  flex: 0;
-  flex-basis: 30%;
-  & > input {
-    width: 80px;
-    margin-left: 10px;
-  }
 `;
 
 const HakuRemoveContainer = styled.div`
@@ -107,70 +60,24 @@ const HakuRemoveContainer = styled.div`
   align-items: center;
 `;
 
-const getHakukaudet = async ({ httpClient, apiUrls }) => {
-  const hakukaudet = await getKoodisto({
-    koodistoUri: 'kausi',
-    httpClient,
-    apiUrls,
-  });
-
-  return isArray(hakukaudet)
-    ? hakukaudet.map(({ metadata, koodiUri, versio }) => ({
-        koodiUri: `${koodiUri}#${versio}`,
-        nimi: mapValues(arrayToTranslationObject(metadata), ({ nimi }) => nimi),
-      }))
-    : [];
-};
-
 const renderRadioGroupField = ({ input, options }) => (
-  <RadioGroup {...input}>
-    {options.map(({ value, label }) => (
-      <Radio value={value} key={value}>
-        {label}
-      </Radio>
-    ))}
-  </RadioGroup>
+  <RadioGroup {...input} options={options} />
 );
 
-const currentYear = getYear(new Date());
-
-const yearOptions = [...new Array(10)].map((value, index) => ({
-  value: `${currentYear + index}`,
-  label: `${currentYear + index}`,
-}));
-
-const renderYearField = ({ input }) => (
-  <NativeSelect {...input}>
-    <Option value="">Valitse vuosi</Option>
-    {yearOptions.map(({ value, label }) => (
-      <Option value={value} key={value}>
-        {label}
-      </Option>
-    ))}
-  </NativeSelect>
-);
-
-const getHakukausiOptions = hakukaudet =>
-  hakukaudet.map(({ koodiUri, nimi }) => ({
-    value: koodiUri,
-    label: getFirstLanguageValue(nimi),
-  }));
+const renderYearField = ({ input }) => <YearSelect {...input} onBlur={noop} />;
 
 const renderInputMaskField = ({ input, ...props }) => (
   <InputMask {...input} {...props} />
 );
 
-const renderHakuajatFields = ({ fields }) => {
-  if(fields.length === 0){
-    fields.push({})
-  }
+const renderHakuajatFields = ({ fields, t }) => {
   return (
     <>
       {fields.map((hakuaika, index) => (
         <HakuContainer key={index}>
           <HakuDateTimeContainer first>
             <Typography as="div" marginBottom={1}>
-              Alkaa
+              {t('yleiset.alkaa')}
             </Typography>
             <HakuDateTimeWrapper>
               <HakuDateContainer>
@@ -191,12 +98,12 @@ const renderHakuajatFields = ({ fields }) => {
               </HakuTimeContainer>
             </HakuDateTimeWrapper>
             <Typography variant="secondary" as="div" marginTop={1}>
-              Alkuajan päivämäärä ja kellonaika
+              {t('yleiset.paivamaaraJaKellonaika')}
             </Typography>
           </HakuDateTimeContainer>
           <HakuDateTimeContainer>
             <Typography as="div" marginBottom={1}>
-              Päättyy
+              {t('yleiset.paattyy')}
             </Typography>
             <HakuDateTimeWrapper>
               <HakuDateContainer>
@@ -217,7 +124,7 @@ const renderHakuajatFields = ({ fields }) => {
               </HakuTimeContainer>
             </HakuDateTimeWrapper>
             <Typography variant="secondary" as="div" marginTop={1}>
-              Päätösajan päivämäärä ja kellonaika
+              {t('yleiset.paivamaaraJaKellonaika')}
             </Typography>
           </HakuDateTimeContainer>
           <HakuRemoveContainer>
@@ -229,7 +136,7 @@ const renderHakuajatFields = ({ fields }) => {
               variant="outlined"
               color="secondary"
             >
-              Poista
+              {t('yleiset.poista')}
             </Button>
           </HakuRemoveContainer>
         </HakuContainer>
@@ -240,145 +147,133 @@ const renderHakuajatFields = ({ fields }) => {
           fields.push({});
         }}
       >
-        Lisää hakuaika
+        {t('yleiset.lisaaHakuaika')}
       </Button>
     </>
   );
 };
 
-const ContentWrapper = ({name}) => {
-  return (
-    <Spacing marginTop={2}>
-      <FieldArray name={name} component={renderHakuajatFields} />
-    </Spacing>
-
-  );
-};
-
 const ScheduleSection = props => {
-  return ( 
-    <div>
-      <FieldWrapper>
-        <HeaderWrapper>
-          <HeaderColum>
-            <HeaderIcon type="arrow_right" />Hakuaika
-          </HeaderColum>
-        </HeaderWrapper>
-        <ContentWrapper name="hakuaika"/>
-      </FieldWrapper>
-      <FieldWrapper>
-        <HeaderWrapper>
-          <HeaderColum>
-            <HeaderIcon type="arrow_right" />
-            Oppijalle näkyvä informatiivinen aikataulu tulevaisuudesta
-          </HeaderColum>
-        </HeaderWrapper>
-        <ContentWrapper name="aikataulu"/>
-      </FieldWrapper>
-      <FieldWrapper>
-        <HeaderWrapper>
-          <HeaderColum>
-            <HeaderIcon type="arrow_right" />
-            Koulutuksen alkamiskausi
-          </HeaderColum>
-        </HeaderWrapper>
-        <Spacing marginRight={4}>
-          <ApiAsync promiseFn={getHakukaudet}>
-            {({ data }) => (
-              <>
-                <Spacing marginBottom={2}>
-                  <Typography variant="h6" marginBottom={1}>
-                    Kausi
-                  </Typography>
-                  {isArray(data) ? (
-                    <Field
-                      name="kausi"
-                      component={renderRadioGroupField}
-                      options={getHakukausiOptions(data)}
-                    />
-                  ) : null}
-                </Spacing>
-                <Spacing>
-                  <Typography variant="h6" marginBottom={1}>
-                    Vuosi
-                  </Typography>
-                  <Field name="vuosi" component={renderYearField} />
-                </Spacing>
-              </>
-            )}
-          </ApiAsync>
+  const { t } = useTranslation();
+  const { options: kausiOptions } = useKoodistoOptions({ koodisto: 'kausi' });
+
+  return (
+    <>
+      <Spacing marginBottom={2}>
+        <BorderHeading>{t('hakulomake.hakuaika')}</BorderHeading>
+        <FieldArray name="hakuaika" component={renderHakuajatFields} t={t} />
+      </Spacing>
+      <Spacing marginBottom={2}>
+        <BorderHeading>
+          {t('hakulomake.aikatauluTulevaisuudesta')}
+        </BorderHeading>
+        <FieldArray name="aikataulu" component={renderHakuajatFields} t={t} />
+      </Spacing>
+
+      <Spacing marginBottom={2}>
+        <BorderHeading>{t('hakulomake.koulutuksenAlkamiskausi')}</BorderHeading>
+
+        <Spacing marginBottom={2}>
+          <Typography as="div" marginBottom={1}>
+            {t('yleiset.kausi')}
+          </Typography>
+
+          <Field
+            name="kausi"
+            component={renderRadioGroupField}
+            options={kausiOptions}
+          />
         </Spacing>
-      </FieldWrapper>
-      <FieldWrapper>
-        <HeaderWrapper>
-          <HeaderColum>
-            <HeaderIcon type="arrow_right" />
-            Hakukohteen lisäämisen ja perumisen takaraja
-          </HeaderColum>
-        </HeaderWrapper>
-        <HakuDateTimeWrapper>
-          <HakuDateSecondContainer>
-            <Field name="liittäminen_pvm"
-                    placeholder="pp.kk.vvvv"
-                    component={renderInputMaskField}
-                    mask="99.99.9999" />
-          </HakuDateSecondContainer>
-          <EventIcon type="event" />
-          <HakuTimeSecondContainer>
-            <Field name="liittäminen_aika"
-                    placeholder="tt:mm"
-                    component={renderInputMaskField}
-                    mask="99:99" />
-          </HakuTimeSecondContainer>
-        </HakuDateTimeWrapper>
-      </FieldWrapper>
-      <FieldWrapper>
-        <HeaderWrapper>
-          <HeaderColum>
-            <HeaderIcon type="arrow_right" />
-            Hakukohteen muokkauksen takaraja
-          </HeaderColum>
-        </HeaderWrapper>
-        <HakuDateTimeWrapper>
-          <HakuDateSecondContainer>
-            <Field name="muokkaus_pvm"
-                    placeholder="pp.kk.vvvv"
-                    component={renderInputMaskField}
-                    mask="99.99.9999" />
-          </HakuDateSecondContainer>
-          <EventIcon type="event" />
-          <HakuTimeSecondContainer>
-            <Field name="muokkaus_aika"
-                    placeholder="tt:mm"
-                    component={renderInputMaskField}
-                    mask="99:99" />
-          </HakuTimeSecondContainer>
-        </HakuDateTimeWrapper>
-      </FieldWrapper>
-      <FieldWrapper>
-        <HeaderWrapper>
-          <HeaderColum>
-            <HeaderIcon type="arrow_right" />
-            Ajastettu haun julkaisupäivämäärä
-          </HeaderColum>
-        </HeaderWrapper>
-        <HakuDateTimeWrapper>
-          <HakuDateSecondContainer>
-            <Field name="julkaisu_pvm"
-                    placeholder="pp.kk.vvvv"
-                    component={renderInputMaskField}
-                    mask="99.99.9999" />
-          </HakuDateSecondContainer>
-          <EventIcon type="event" />
-          <HakuTimeSecondContainer>
-            <Field name="julkaisu_aika"
-                    placeholder="tt:mm"
-                    component={renderInputMaskField}
-                    mask="99:99" />
-        </HakuTimeSecondContainer>
-        </HakuDateTimeWrapper>
-      </FieldWrapper>
-    </div>
+
+        <Spacing>
+          <Typography as="div" marginBottom={1}>
+            {t('yleiset.vuosi')}
+          </Typography>
+          <Field name="vuosi" component={renderYearField} />
+        </Spacing>
+      </Spacing>
+
+      <Spacing marginBottom={2}>
+        <BorderHeading>
+          {t('hakulomake.hakukohteenLisaamisenJaPerumisenTakaraja')}
+        </BorderHeading>
+        <Flex>
+          <FlexItem grow={1}>
+            <Field
+              name="liittäminen_pvm"
+              placeholder="pp.kk.vvvv"
+              component={renderInputMaskField}
+              mask="99.99.9999"
+            />
+          </FlexItem>
+          <FlexItem basis="30%" grow={0} paddingLeft={2}>
+            <Field
+              name="liittäminen_aika"
+              placeholder="tt:mm"
+              component={renderInputMaskField}
+              mask="99:99"
+            />
+          </FlexItem>
+        </Flex>
+        <Typography variant="secondary" as="div" marginTop={1}>
+          {t('yleiset.paivamaaraJaKellonaika')}
+        </Typography>
+      </Spacing>
+
+      <Spacing marginBottom={2}>
+        <BorderHeading>
+          {t('hakulomake.hakukohteenMuokkauksenTakaraja')}
+        </BorderHeading>
+        <Flex>
+          <FlexItem grow={1}>
+            <Field
+              name="muokkaus_pvm"
+              placeholder="pp.kk.vvvv"
+              component={renderInputMaskField}
+              mask="99.99.9999"
+            />
+          </FlexItem>
+          <FlexItem basis="30%" grow={0} paddingLeft={2}>
+            <Field
+              name="muokkaus_aika"
+              placeholder="tt:mm"
+              component={renderInputMaskField}
+              mask="99:99"
+            />
+          </FlexItem>
+        </Flex>
+        <Typography variant="secondary" as="div" marginTop={1}>
+          {t('yleiset.paivamaaraJaKellonaika')}
+        </Typography>
+      </Spacing>
+
+      <Spacing>
+        <BorderHeading>
+          {t('hakulomake.ajastettuHaunJulkaisupaivamaara')}
+        </BorderHeading>
+        <Flex>
+          <FlexItem grow={1}>
+            <Field
+              name="julkaisu_pvm"
+              placeholder="pp.kk.vvvv"
+              component={renderInputMaskField}
+              mask="99.99.9999"
+            />
+          </FlexItem>
+          <FlexItem basis="30%" grow={0} paddingLeft={2}>
+            <Field
+              name="julkaisu_aika"
+              placeholder="tt:mm"
+              component={renderInputMaskField}
+              mask="99:99"
+            />
+          </FlexItem>
+        </Flex>
+        <Typography variant="secondary" as="div" marginTop={1}>
+          {t('yleiset.paivamaaraJaKellonaika')}
+        </Typography>
+      </Spacing>
+    </>
   );
 };
 

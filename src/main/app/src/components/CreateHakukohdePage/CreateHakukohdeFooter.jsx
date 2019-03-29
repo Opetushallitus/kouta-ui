@@ -6,6 +6,7 @@ import { isValid } from 'redux-form';
 import { submit as submitHakukohdeForm } from '../../state/createHakukohdeForm';
 import { JULKAISUTILA } from '../../constants';
 import Button from '../Button';
+import useTranslation from '../useTranslation';
 
 const hakukohdeFormIsValid = isValid('createHakukohdeForm');
 
@@ -26,16 +27,18 @@ const CreateHakukohdeFooter = ({
   onSave = () => {},
   onSaveAndPublish = () => {},
   valid = true,
-}) => (
-  <Wrapper>
-    <SaveButton onClick={onSave}>
-      Tallenna
-    </SaveButton>
-    <Button onClick={onSaveAndPublish} disabled={!valid}>
-      Tallenna ja julkaise
-    </Button>
-  </Wrapper>
-);
+}) => {
+  const { t } = useTranslation();
+
+  return (
+    <Wrapper>
+      <SaveButton onClick={onSave}>{t('yleiset.tallenna')}</SaveButton>
+      <Button onClick={onSaveAndPublish} disabled={!valid}>
+        {t('yleiset.tallennaJaJulkaise')}
+      </Button>
+    </Wrapper>
+  );
+};
 
 export default connect(
   state => ({
@@ -46,7 +49,7 @@ export default connect(
       dispatch(submitHakukohdeForm({ tila: JULKAISUTILA.TALLENNETTU }));
     },
     onSaveAndPublish: () => {
-      dispatch(submitHakukohdeForm({ tila: JULKAISUTILA.JULKAISTU }))
+      dispatch(submitHakukohdeForm({ tila: JULKAISUTILA.JULKAISTU }));
     },
   }),
 )(CreateHakukohdeFooter);

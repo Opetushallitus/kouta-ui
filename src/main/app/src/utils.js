@@ -292,3 +292,5 @@ export const noop = () => {};
 export const getAsArray = value => (isArray(value) ? value : []);
 
 export const getAsObject = value => (isObject(value) ? value : {});
+
+export const isBoolean = value => typeof value === 'boolean';

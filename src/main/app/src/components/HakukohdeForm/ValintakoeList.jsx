@@ -9,6 +9,7 @@ import Divider from '../Divider';
 import InputMask from '../InputMask';
 import Textarea from '../Textarea';
 import Flex, { FlexItem } from '../Flex';
+import useTranslation from '../useTranslation';
 
 const renderInputField = ({ input, ...props }) => (
   <Input {...input} {...props} />
@@ -20,23 +21,25 @@ const renderInputMaskField = ({ input, ...props }) => (
 
 const renderTextareaField = ({ input }) => <Textarea {...input} />;
 
-
-const renderValintakoeFields = ({ fields, language }) => (
+const renderValintakoeFields = ({ fields, language, t }) => (
   <>
     {fields.map((koe, index) => (
       <Fragment key={index}>
         <Spacing marginBottom={2}>
           <Typography variant="h6" marginBottom={1}>
-            Osoite
+            {t('yleiset.osoite')}
           </Typography>
-          <Field name={`${koe}.osoite.${language}`} component={renderInputField} />
+          <Field
+            name={`${koe}.osoite.${language}`}
+            component={renderInputField}
+          />
         </Spacing>
 
         <Spacing marginBottom={2}>
           <Flex>
             <FlexItem grow={0} basis="30%">
               <Typography variant="h6" marginBottom={1}>
-                Postinumero
+                {t('yleiset.postinumero')}
               </Typography>
               <Field
                 name={`${koe}.postinumero`}
@@ -46,7 +49,7 @@ const renderValintakoeFields = ({ fields, language }) => (
             </FlexItem>
             <FlexItem grow={1} paddingLeft={2}>
               <Typography variant="h6" marginBottom={1}>
-                Postitoimipaikka
+                {t('yleiset.postitoimipaikka')}
               </Typography>
               <Field
                 name={`${koe}.postitoimipaikka.${language}`}
@@ -60,7 +63,7 @@ const renderValintakoeFields = ({ fields, language }) => (
           <Flex>
             <FlexItem grow={1} marginRight={2}>
               <Typography variant="h6" marginBottom={1}>
-                Alkaa
+                {t('yleiset.alkaa')}
               </Typography>
               <Flex>
                 <FlexItem grow={1}>
@@ -81,12 +84,12 @@ const renderValintakoeFields = ({ fields, language }) => (
                 </FlexItem>
               </Flex>
               <Typography variant="secondary" as="div" marginTop={1}>
-                Alkuajan päivämäärä ja kellonaika
+                {t('yleiset.paivamaaraJaKellonaika')}
               </Typography>
             </FlexItem>
             <FlexItem grow={1} marginLeft={2}>
               <Typography variant="h6" marginBottom={1}>
-                Päättyy
+                {t('yleiset.paattyy')}
               </Typography>
               <Flex>
                 <FlexItem grow={1}>
@@ -107,7 +110,7 @@ const renderValintakoeFields = ({ fields, language }) => (
                 </FlexItem>
               </Flex>
               <Typography variant="secondary" as="div" marginTop={1}>
-                Päättymisajan päivämäärä ja kellonaika
+                {t('yleiset.paivamaaraJaKellonaika')}
               </Typography>
             </FlexItem>
           </Flex>
@@ -115,9 +118,12 @@ const renderValintakoeFields = ({ fields, language }) => (
 
         <Spacing>
           <Typography variant="h6" marginBottom={1}>
-            Lisätietoja
+            {t('yleiset.lisatietoja')}
           </Typography>
-          <Field name={`${koe}.lisatietoja.${language}`} component={renderTextareaField} />
+          <Field
+            name={`${koe}.lisatietoja.${language}`}
+            component={renderTextareaField}
+          />
         </Spacing>
 
         <Flex marginTop={2} justifyEnd>
@@ -129,7 +135,7 @@ const renderValintakoeFields = ({ fields, language }) => (
             variant="outlined"
             color="secondary"
           >
-            Poista
+            {t('yleiset.poista')}
           </Button>
         </Flex>
         {index < fields.length - 1 ? (
@@ -144,14 +150,23 @@ const renderValintakoeFields = ({ fields, language }) => (
           fields.push({});
         }}
       >
-        Lisää tilaisuus
+       {t('hakukohdelomake.lisaaTilaisuus')}
       </Button>
     </Spacing>
   </>
 );
 
-const ValintakoeList = ({ language }) => (
-  <FieldArray name="kokeet" component={renderValintakoeFields} language={language} />
-);
+const ValintakoeList = ({ language }) => {
+  const { t } = useTranslation();
+
+  return (
+    <FieldArray
+      name="kokeet"
+      component={renderValintakoeFields}
+      language={language}
+      t={t}
+    />
+  );
+};
 
 export default ValintakoeList;

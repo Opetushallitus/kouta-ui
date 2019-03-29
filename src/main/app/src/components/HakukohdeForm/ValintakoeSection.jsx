@@ -13,6 +13,7 @@ import { spacing, getThemeProp } from '../../theme';
 import ValintakoeList from './ValintakoeList';
 import Divider from '../Divider';
 import useKoodistoOptions from '../useKoodistoOptions';
+import useTranslation from '../useTranslation';
 
 const Container = styled.div`
   display: flex;
@@ -97,6 +98,7 @@ const ValintakoeTypeList = ({ types, options, language }) => {
 
 const ValintakoeSection = ({ languages }) => {
   const { options } = useKoodistoOptions({ koodisto: 'valintakokeentyyppi' });
+  const { t } = useTranslation();
 
   const valintakoeOptions = useMemo(
     () => [
@@ -112,7 +114,7 @@ const ValintakoeSection = ({ languages }) => {
         <Container>
           <TypeContainer>
             <Typography variant="h6" marginBottom={1}>
-              Valitse valintakokeen tyyppi
+              {t('hakukohdelomake.valitseValintakokeenTyyppi')}
             </Typography>
             <Field
               name="types"

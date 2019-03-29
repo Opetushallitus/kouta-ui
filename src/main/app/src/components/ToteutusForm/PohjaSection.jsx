@@ -18,6 +18,7 @@ import ApiAsync from '../ApiAsync';
 import { getKoutaToteutukset } from '../../apiUtils';
 import Flex, { FlexItem } from '../Flex';
 import { getFirstLanguageValue } from '../../utils';
+import useTranslation from '../useTranslation';
 
 const DropdownButton = styled(Button)`
   display: inline-flex;
@@ -27,7 +28,7 @@ const PohjaFieldValue = formValues({
   pohja: 'pohja',
 })(({ pohja, children }) => children({ pohja }));
 
-const renderBaseDropdownField = ({ input, onContinue, onCreateNew }) => {
+const renderBaseDropdownField = ({ input, onContinue, onCreateNew, t }) => {
   const { onChange } = input;
 
   return (
@@ -41,10 +42,10 @@ const renderBaseDropdownField = ({ input, onContinue, onCreateNew }) => {
               onContinue();
             }}
           >
-            Luo uusi toteutus
+            {t('yleiset.luoUusiToteutus')}
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => onChange('copy_toteutus')}>
-            Kopio pohjaksi aiemmin luotu toteutus
+            {t('yleiset.kopioiPohjaksiToteutus')}
           </DropdownMenuItem>
         </DropdownMenu>
       }
@@ -52,7 +53,7 @@ const renderBaseDropdownField = ({ input, onContinue, onCreateNew }) => {
       {({ ref, onToggle, visible }) => (
         <div ref={ref} style={{ display: 'inline-block' }}>
           <DropdownButton onClick={onToggle} type="button">
-            Valitse pohja <DropdownIcon open={visible} />
+            {t('yleiset.valitsePohja')} <DropdownIcon open={visible} />
           </DropdownButton>
         </div>
       )}
@@ -74,6 +75,8 @@ const getToteutusOptions = toteutukset => {
 };
 
 const PohjaSection = ({ organisaatioOid, onContinue, onCreateNew }) => {
+  const { t } = useTranslation();
+
   return (
     <ApiAsync
       promiseFn={getKoutaToteutukset}
@@ -88,6 +91,7 @@ const PohjaSection = ({ organisaatioOid, onContinue, onCreateNew }) => {
               component={renderBaseDropdownField}
               onContinue={onContinue}
               onCreateNew={onCreateNew}
+              t={t}
             />
           </FlexItem>
           <FlexItem grow={1} paddingLeft={3}>
@@ -96,7 +100,7 @@ const PohjaSection = ({ organisaatioOid, onContinue, onCreateNew }) => {
                 ['copy_toteutus'].includes(pohja) ? (
                   <>
                     <Typography variant="h6" marginBottom={1}>
-                      Valitse toteutus
+                      {t('yleiset.valitseToteutus')}
                     </Typography>
                     <Field
                       name="toteutus"

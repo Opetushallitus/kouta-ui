@@ -19,6 +19,7 @@ import Typography from '../Typography';
 import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
 import useApiAsync from '../useApiAsync';
 import Spin from '../Spin';
+import useTranslation from '../useTranslation';
 
 const getHakukohdeData = async ({
   organisaatioOid,
@@ -56,6 +57,8 @@ const CreateHakukohdePage = props => {
     },
   } = props;
 
+  const { t } = useTranslation();
+
   const { data } = useApiAsync({
     promiseFn: getHakukohdeData,
     organisaatioOid: organisaatioOid,
@@ -79,7 +82,7 @@ const CreateHakukohdePage = props => {
           <Flex marginBottom={2} justifyBetween>
             <FlexItem grow={0} paddingRight={2}>
               <Typography variant="h6" marginBottom={1}>
-                Organisaatio
+                {t('yleiset.organisaatio')}
               </Typography>
               <Typography>
                 {getFirstLanguageValue(get(data, 'organisaatio.nimi'))}
@@ -87,7 +90,7 @@ const CreateHakukohdePage = props => {
             </FlexItem>
             <FlexItem grow={0}>
               <Typography variant="h6" marginBottom={1}>
-                Haku
+                {t('yleiset.haku')}
               </Typography>
               <Typography>
                 {getFirstLanguageValue(get(data, 'haku.nimi'))}
@@ -95,7 +98,7 @@ const CreateHakukohdePage = props => {
             </FlexItem>
             <FlexItem grow={0}>
               <Typography variant="h6" marginBottom={1}>
-                Toteutus
+                {t('yleiset.toteutus')}
               </Typography>
               <Typography>
                 {getFirstLanguageValue(get(data, 'toteutus.nimi'))}
@@ -110,7 +113,9 @@ const CreateHakukohdePage = props => {
             koulutustyyppi={koulutustyyppi}
           />
         </>
-      ) : <Spin center />}
+      ) : (
+        <Spin center />
+      )}
     </FormPage>
   );
 };

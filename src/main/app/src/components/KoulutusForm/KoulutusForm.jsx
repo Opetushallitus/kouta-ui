@@ -10,7 +10,7 @@ import OrganizationSection from './OrganizationSection';
 import FormCollapseGroup from '../FormCollapseGroup';
 import FormCollapse from '../FormCollapse';
 import KieliversiotFormSection from '../KieliversiotFormSection';
-import { LANGUAGE_TABS, KORKEAKOULUKOULUTUSTYYPIT } from '../../constants';
+import { KORKEAKOULUKOULUTUSTYYPIT } from '../../constants';
 import ToteutuksetModal from './ToteutuksetModal';
 import ToteutuksetSection from './ToteutuksetSection';
 import { ModalController } from '../Modal';
@@ -19,10 +19,7 @@ import { isFunction } from '../../utils';
 import LisatiedotSection from './LisatiedotSection';
 import Flex from '../Flex';
 import NakyvyysSection from './NakyvyysSection';
-
-const getLanguageTabs = languages => {
-  return LANGUAGE_TABS.filter(({ value }) => (languages || []).includes(value));
-};
+import useTranslation from '../useTranslation';
 
 const WithValues = formValues({
   koulutustyyppiValue: 'type.type',
@@ -49,6 +46,8 @@ const KoulutusForm = ({
   koulutus: koulutusProp = null,
   canEditKoulutustyyppi = true,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <form onSubmit={handleSubmit}>
       <WithValues>
@@ -56,19 +55,19 @@ const KoulutusForm = ({
           const koulutustyyppi =
             get(koulutusProp, 'koulutustyyppi') || koulutustyyppiValue;
 
-          const languageTabs = getLanguageTabs(languagesValue);
+          const languageTabs = languagesValue || [];
 
           return (
             <FormCollapseGroup enabled={steps} scrollTarget={scrollTarget}>
               {canEditKoulutustyyppi ? (
-                <FormCollapse header="Koulutustyyppi" section="type">
+                <FormCollapse header={t('yleiset.koulutustyyppi')} section="type">
                   <TypeSection />
                 </FormCollapse>
               ) : null}
 
               {canCopy ? (
                 <FormCollapse
-                  header="Pohjan valinta"
+                  header={t('yleiset.pohjanValinta')}
                   section="base"
                   onContinue={onMaybeCopy}
                 >
@@ -83,11 +82,11 @@ const KoulutusForm = ({
                 </FormCollapse>
               ) : null}
 
-              <FormCollapse header="Kieliversiot" section="kieliversiot">
+              <FormCollapse header={t('yleiset.kieliversiot')} section="kieliversiot">
                 <KieliversiotFormSection />
               </FormCollapse>
 
-              <FormCollapse header="Koulutuksen tiedot" section="information">
+              <FormCollapse header={t('koulutuslomake.koulutuksenTiedot')} section="information">
                 <TiedotSection
                   languages={languageTabs}
                   koulutustyyppi={koulutustyyppi}
@@ -96,7 +95,7 @@ const KoulutusForm = ({
               </FormCollapse>
 
               <FormCollapse
-                header="Valitun koulutuksen kuvaus"
+                header={t('koulutuslomake.koulutuksenKuvaus')}
                 section="description"
               >
                 <KuvausSection
@@ -107,14 +106,14 @@ const KoulutusForm = ({
               </FormCollapse>
 
               <FormCollapse
-                header="Koulutuksen lisätiedot"
+                header={t('koulutuslomake.koulutuksenLisatiedot')}
                 section="lisatiedot"
               >
                 <LisatiedotSection languages={languageTabs} />
               </FormCollapse>
 
               <FormCollapse
-                header="Koulutuksen järjestävä organisaatio"
+                header={t('koulutuslomake.koulutuksenJarjestaja')}
                 section="organization"
               >
                 <OrganizationSection organisaatioOid={organisaatioOid} />
@@ -131,7 +130,7 @@ const KoulutusForm = ({
 
               {isFunction(onAttachToteutus) ? (
                 <FormCollapse
-                  header="Koulutukseen liitetyt toteutukset"
+                  header={t('koulutuslomake.koulutukseenLiitetytToteutukset')}
                   id="koulutukseen-liitetetyt-toteutukset"
                   clearable={false}
                   actions={
@@ -147,7 +146,7 @@ const KoulutusForm = ({
                           {({ onToggle }) => (
                             <Flex justifyEnd full>
                               <Button onClick={onToggle} type="button">
-                                Liitä toteutus
+                                {t('koulutuslomake.liitaToteutus')}
                               </Button>
                             </Flex>
                           )}

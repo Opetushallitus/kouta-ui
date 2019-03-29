@@ -6,6 +6,7 @@ import { isValid } from 'redux-form';
 import { submit as submitToteutusForm } from '../../state/createToteutusForm';
 import { JULKAISUTILA } from '../../constants';
 import Button from '../Button';
+import useTranslation from '../useTranslation';
 
 const toteutusFormIsValid = isValid('createToteutusForm');
 
@@ -26,14 +27,18 @@ const CreateToteutusFooter = ({
   onSave = () => {},
   onSaveAndPublish = () => {},
   valid = true,
-}) => (
-  <Wrapper>
-    <SaveButton onClick={onSave}>Tallenna</SaveButton>
-    <Button onClick={onSaveAndPublish} disabled={!valid}>
-      Tallenna ja julkaise
-    </Button>
-  </Wrapper>
-);
+}) => {
+  const { t } = useTranslation();
+
+  return (
+    <Wrapper>
+      <SaveButton onClick={onSave}>{t('yleiset.tallenna')}</SaveButton>
+      <Button onClick={onSaveAndPublish} disabled={!valid}>
+        {t('yleiset.tallennaJaJulkaise')}
+      </Button>
+    </Wrapper>
+  );
+}
 
 export default connect(
   state => ({

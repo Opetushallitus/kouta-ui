@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import FormStepsIcon from './FormStepsIcon';
+import useTranslation from '../useTranslation';
 
 const GroupContainer = styled.div`
   display: flex;
@@ -41,50 +42,54 @@ const stepIsDone = (step, activeStep) => {
   return stepIndex < activeStepIndex;
 };
 
-const FormSteps = ({ activeStep = 'koulutus', ...props }) => (
-  <Wrapper {...props}>
-    <GroupContainer>
-      <StepsIcon
-        icon="school"
-        active={stepIsActive('koulutus', activeStep)}
-        done={stepIsDone('koulutus', activeStep)}
-      >
-        Koulutus
-      </StepsIcon>
-      <StepsIcon
-        icon="settings"
-        active={stepIsActive('toteutus', activeStep)}
-        done={stepIsDone('toteutus', activeStep)}
-      >
-        Toteutus
-      </StepsIcon>
-    </GroupContainer>
-    <GroupContainer>
-      <StepsIcon
-        icon="access_time"
-        active={stepIsActive('haku', activeStep)}
-        done={stepIsDone('haku', activeStep)}
-      >
-        Haku
-      </StepsIcon>
-      <StepsIcon
-        icon="grain"
-        active={stepIsActive('hakukohde', activeStep)}
-        done={stepIsDone('hakukohde', activeStep)}
-      >
-        Hakukohde
-      </StepsIcon>
-    </GroupContainer>
-    <GroupContainer>
-      <StepsIcon
-        icon="select_all"
-        active={stepIsActive('valintaperusteet', activeStep)}
-        done={stepIsDone('valintaperusteet', activeStep)}
-      >
-        Valintaperusteet
-      </StepsIcon>
-    </GroupContainer>
-  </Wrapper>
-);
+const FormSteps = ({ activeStep = 'koulutus', ...props }) => {
+  const { t } = useTranslation();
+
+  return (
+    <Wrapper {...props}>
+      <GroupContainer>
+        <StepsIcon
+          icon="school"
+          active={stepIsActive('koulutus', activeStep)}
+          done={stepIsDone('koulutus', activeStep)}
+        >
+          {t('yleiset.koulutus')}
+        </StepsIcon>
+        <StepsIcon
+          icon="settings"
+          active={stepIsActive('toteutus', activeStep)}
+          done={stepIsDone('toteutus', activeStep)}
+        >
+          {t('yleiset.toteutus')}
+        </StepsIcon>
+      </GroupContainer>
+      <GroupContainer>
+        <StepsIcon
+          icon="access_time"
+          active={stepIsActive('haku', activeStep)}
+          done={stepIsDone('haku', activeStep)}
+        >
+          {t('yleiset.haku')}
+        </StepsIcon>
+        <StepsIcon
+          icon="grain"
+          active={stepIsActive('hakukohde', activeStep)}
+          done={stepIsDone('hakukohde', activeStep)}
+        >
+          {t('yleiset.hakukohde')}
+        </StepsIcon>
+      </GroupContainer>
+      <GroupContainer>
+        <StepsIcon
+          icon="select_all"
+          active={stepIsActive('valintaperusteet', activeStep)}
+          done={stepIsDone('valintaperusteet', activeStep)}
+        >
+          {t('yleiset.valintaperusteet')}
+        </StepsIcon>
+      </GroupContainer>
+    </Wrapper>
+  );
+};
 
 export default FormSteps;

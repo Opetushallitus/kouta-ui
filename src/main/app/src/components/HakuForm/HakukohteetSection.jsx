@@ -4,13 +4,22 @@ import Typography from '../Typography';
 import { getKoutaHakuHakukohteet } from '../../apiUtils';
 import useApiAsync from '../useApiAsync';
 import { getFirstLanguageValue } from '../../utils';
+import useTranslation from '../useTranslation';
 
-const getHakukohteet = async ({ httpClient, apiUrls, oid, organisaatioOid }) => {
-  return oid ? getKoutaHakuHakukohteet({ httpClient, apiUrls, oid, organisaatioOid }) : [];
+const getHakukohteet = async ({
+  httpClient,
+  apiUrls,
+  oid,
+  organisaatioOid,
+}) => {
+  return oid
+    ? getKoutaHakuHakukohteet({ httpClient, apiUrls, oid, organisaatioOid })
+    : [];
 };
 
 const HakukohteetSection = ({ haku, organisaatioOid }) => {
   const hakuOid = haku ? haku.oid : null;
+  const { t } = useTranslation();
 
   const { data: hakukohteet } = useApiAsync({
     promiseFn: getHakukohteet,
@@ -20,16 +29,18 @@ const HakukohteetSection = ({ haku, organisaatioOid }) => {
   });
 
   const hakukohdeNames = hakukohteet
-    ? hakukohteet.map(({ nimi }) => getFirstLanguageValue(nimi)).filter(n => !!n)
+    ? hakukohteet
+        .map(({ nimi }) => getFirstLanguageValue(nimi))
+        .filter(n => !!n)
     : [];
 
   return (
     <Typography>
       {hakukohdeNames.length === 0
-        ? 'Tähän hakuun ei ole vielä liitetty hakukohteita'
-        : `Tähän hakuun on liitetty seuraavat hakukohteet: ${hakukohdeNames.join(
-            ', ',
-          )}`}
+        ? t('hakulomake.haullaEiHakukohteita')
+        : `${t(
+            'hakulomake.hakuunOnLiitettyHakukohteet',
+          )}: ${hakukohdeNames.join(', ')}`}
     </Typography>
   );
 };

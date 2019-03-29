@@ -7,6 +7,7 @@ import Button from '../Button';
 import Icon from '../Icon';
 import { spacing } from '../../theme';
 import Typography from '../Typography';
+import useTranslation from '../useTranslation';
 
 const ButtonIcon = styled(Icon)`
   color: white;
@@ -40,6 +41,7 @@ const getPageOptions = pageCount =>
   }));
 
 const Pagination = ({ value = 0, onChange = () => {}, pageCount = 0 }) => {
+  const { t } = useTranslation();
   const options = useMemo(() => getPageOptions(pageCount), [pageCount]);
   const onPrev = useCallback(() => onChange(value - 1), [value, onChange]);
   const onNext = useCallback(() => onChange(value + 1), [value, onChange]);
@@ -53,7 +55,7 @@ const Pagination = ({ value = 0, onChange = () => {}, pageCount = 0 }) => {
         disabled={value === 0}
         onClick={onPrev}
       >
-        <ButtonIcon type="arrow_back" before /> Edellinen
+        <ButtonIcon type="arrow_back" before /> {t('yleiset.edellinen')}
       </Button>
       <FlexItem marginLeft={2} grow={2} basis="10rem">
         <SelectWrapper>
@@ -72,7 +74,7 @@ const Pagination = ({ value = 0, onChange = () => {}, pageCount = 0 }) => {
         disabled={pageCount === 0 || value === pageCount - 1}
         onClick={onNext}
       >
-        Seuraava
+        {t('yleiset.seuraava')}
         <ButtonIcon type="arrow_forward" after />
       </Button>
     </Flex>

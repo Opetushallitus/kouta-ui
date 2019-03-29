@@ -7,6 +7,8 @@ import { spacing } from '../../theme';
 import Typography from '../Typography';
 import { JULKAISUTILA } from '../../constants';
 
+import useTranslation from '../useTranslation';
+
 const Badge = styled.div`
   width: 0.8rem;
   height: 0.8rem;
@@ -22,12 +24,6 @@ const colorByTila = {
   [JULKAISUTILA.ARKISTOITU]: 'orange',
 };
 
-const labelByTila = {
-  [JULKAISUTILA.JULKAISTU]: 'Julkaistu',
-  [JULKAISUTILA.TALLENNETTU]: 'Tallennettu',
-  [JULKAISUTILA.ARKISTOITU]: 'Arkistoitu',
-};
-
 const getColor = ({ tila, color }) => {
   if (color) {
     return color;
@@ -40,23 +36,23 @@ const getColor = ({ tila, color }) => {
   return 'primary';
 };
 
-const getLabel = ({ children, tila }) => {
+const getLabel = ({ children, tila, t }) => {
   if (children) {
     return children;
   }
 
-  if (tila && labelByTila[tila]) {
-    return labelByTila[tila];
-  }
-
-  return null;
+  return t(`yleiset.${tila}`);
 };
 
-const TilaLabel = ({ children, color, tila, ...props }) => (
-  <Flex inline alignCenter>
-    <Badge color={getColor({ tila, color })} />
-    <Typography>{getLabel({ children, tila })}</Typography>
-  </Flex>
-);
+const TilaLabel = ({ children, color, tila, ...props }) => {
+  const { t } = useTranslation();
+
+  return (
+    <Flex inline alignCenter>
+      <Badge color={getColor({ tila, color })} />
+      <Typography>{getLabel({ children, tila, t })}</Typography>
+    </Flex>
+  );
+};
 
 export default TilaLabel;

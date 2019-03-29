@@ -9,6 +9,7 @@ import memoize from 'memoizee';
 import get from 'lodash/get';
 
 import { isArray, isObject, isString } from '../../utils';
+import useTranslation from '../useTranslation';
 
 const getStyles = memoize(theme => ({
   container: provided => ({
@@ -28,11 +29,13 @@ const getStyles = memoize(theme => ({
   }),
 }));
 
-const defaultNoOptionsMessage = () => 'Valittavia kohteita ei löytynyt';
+const makeDefaultNoOptionsMessage = t => () =>
+  t('yleiset.eiValittaviaKohteita');
 
-const defaultFormatCreateLabel = value => `Luo kohde "${value}"`;
+const makeDefaultFormatCreateLabel = t => value =>
+  t('yleiset.luoKohde', { kohde: value });
 
-const defaultPlaceholder = 'Valitse...';
+const makeDefaultPlaceholder = t => `${t('yleiset.valitse')}...`;
 
 const defaultLoadingMessage = () => 'Ladataan...';
 
@@ -54,10 +57,10 @@ const getTheme = memoize(theme => {
   });
 });
 
-const getDefaultProps = memoize(theme => ({
-  formatCreateLabel: defaultFormatCreateLabel,
-  noOptionsMessage: defaultNoOptionsMessage,
-  placeholder: defaultPlaceholder,
+const getDefaultProps = memoize((theme, t) => ({
+  formatCreateLabel: makeDefaultFormatCreateLabel(t),
+  noOptionsMessage: makeDefaultNoOptionsMessage(t),
+  placeholder: makeDefaultPlaceholder(t),
   loadingMessage: defaultLoadingMessage,
   styles: getStyles(theme),
   theme: getTheme(theme),
@@ -120,9 +123,11 @@ const Select = ({ theme, value, options, ...props }) => {
     options,
   ]);
 
+  const { t } = useTranslation();
+
   return (
     <ReactSelect
-      {...getDefaultProps(theme)}
+      {...getDefaultProps(theme, t)}
       value={resolvedValue}
       options={options}
       {...props}
@@ -130,25 +135,35 @@ const Select = ({ theme, value, options, ...props }) => {
   );
 };
 
-const CreatableBase = ({ theme, ...props }) => (
-  <ReactCreatable {...getDefaultProps(theme)} {...props} />
-);
+const CreatableBase = ({ theme, ...props }) => {
+  const { t } = useTranslation();
 
-const AsyncCreatableBase = ({ theme, ...props }) => (
-  <ReactAsyncCreatableSelect
-    {...getDefaultProps(theme)}
-    cacheOptions={true}
-    {...props}
-  />
-);
+  return <ReactCreatable {...getDefaultProps(theme, t)} {...props} />;
+};
 
-const AsyncSelectBase = ({ theme, ...props }) => (
-  <ReactAsyncSelect
-    {...getDefaultProps(theme)}
-    cacheOptions={true}
-    {...props}
-  />
-);
+const AsyncCreatableBase = ({ theme, ...props }) => {
+  const { t } = useTranslation();
+
+  return (
+    <ReactAsyncCreatableSelect
+      {...getDefaultProps(theme, t)}
+      cacheOptions={true}
+      {...props}
+    />
+  );
+};
+
+const AsyncSelectBase = ({ theme, ...props }) => {
+  const { t } = useTranslation();
+
+  return (
+    <ReactAsyncSelect
+      {...getDefaultProps(theme, t)}
+      cacheOptions={true}
+      {...props}
+    />
+  );
+};
 
 export const CreatableSelect = withTheme(CreatableBase);
 

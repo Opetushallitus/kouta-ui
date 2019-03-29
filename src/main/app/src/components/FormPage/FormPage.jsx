@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { getThemeProp } from '../../theme';
 import Button from '../Button';
+import useTranslation from '../useTranslation';
 
 const StepsContainer = styled.div`
   display: flex;
@@ -56,28 +57,32 @@ const FormPage = ({
   children = null,
   footer = null,
   hasFooterHomeLink = true,
-}) => (
-  <>
-    <ContentWrapper>{header}</ContentWrapper>
-    <StepsContainer>
-      <ContentWrapper>{steps}</ContentWrapper>
-    </StepsContainer>
-    <FormContent hasFooter={!!footer}>
-      <ContentWrapper>{children}</ContentWrapper>
-    </FormContent>
-    <FooterContainer>
-      <ContentWrapper>
-        <FooterWrapper hasFooterHomeLink={hasFooterHomeLink}>
-          {hasFooterHomeLink ? (
-            <Button as={Link} to="/" color="primary" variant="outlined">
-              Etusivulle
-            </Button>
-          ) : null}
-          <FooterActions>{footer}</FooterActions>
-        </FooterWrapper>
-      </ContentWrapper>
-    </FooterContainer>
-  </>
-);
+}) => {
+  const { t } = useTranslation();
+
+  return (
+    <>
+      <ContentWrapper>{header}</ContentWrapper>
+      <StepsContainer>
+        <ContentWrapper>{steps}</ContentWrapper>
+      </StepsContainer>
+      <FormContent hasFooter={!!footer}>
+        <ContentWrapper>{children}</ContentWrapper>
+      </FormContent>
+      <FooterContainer>
+        <ContentWrapper>
+          <FooterWrapper hasFooterHomeLink={hasFooterHomeLink}>
+            {hasFooterHomeLink ? (
+              <Button as={Link} to="/" color="primary" variant="outlined">
+                {t('yleiset.etusivulle')}
+              </Button>
+            ) : null}
+            <FooterActions>{footer}</FooterActions>
+          </FooterWrapper>
+        </ContentWrapper>
+      </FooterContainer>
+    </>
+  );
+}
 
 export default FormPage;

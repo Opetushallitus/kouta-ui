@@ -9,6 +9,7 @@ import Select from '../Select';
 import { getFirstLanguageValue } from '../../utils';
 import Typography from '../Typography';
 import useApiAsync from '../useApiAsync';
+import useTranslation from '../useTranslation';
 
 const noop = () => {};
 
@@ -40,6 +41,8 @@ const HakukohteetModal = ({
   onSave = () => {},
   ...props
 }) => {
+  const { t } = useTranslation();
+
   const { data: haut } = useApiAsync({
     promiseFn: getKoutaHaut,
     organisaatioOid,
@@ -57,10 +60,10 @@ const HakukohteetModal = ({
       footer={
         <Flex justifyBetween>
           <Button onClick={onClose} variant="outlined" type="button">
-            Sulje
+            {t('yleiset.sulje')}
           </Button>
           <Button onClick={onSave} type="button" disabled={!hakuValue}>
-            Liitä hakukohde
+            {t('yleiset.liitaHakukohde')}
           </Button>
         </Flex>
       }
@@ -68,7 +71,7 @@ const HakukohteetModal = ({
       {...props}
     >
       <Typography variant="h6" marginBottom={1}>
-        Valitse haku
+        {t('yleiset.valitseHaku')}
       </Typography>
       <Field
         name={`${fieldName}.haku`}

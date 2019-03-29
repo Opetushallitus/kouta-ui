@@ -6,6 +6,7 @@ import { isValid } from 'redux-form';
 import { submit } from '../../state/editHakukohdeForm';
 import Button from '../Button';
 import { JULKAISUTILA } from '../../constants';
+import useTranslation from '../useTranslation';
 
 const hakukohdeFormIsValid = isValid('editHakukohdeForm');
 
@@ -29,14 +30,16 @@ const EditHakukohdeFooter = ({ hakukohde, valid, onSave = () => {} }) => {
     onSave({ tila: JULKAISUTILA.JULKAISTU });
   }, [onSave]);
 
+  const { t } = useTranslation();
+
   return (
     <Wrapper>
       <Button variant="outlined" onClick={onSave}>
-        Tallenna
+        {t('yleiset.tallenna')}
       </Button>
       {tila !== JULKAISUTILA.JULKAISTU ? (
         <PublishButton disabled={!valid} onClick={onSaveAndPublish}>
-          Tallenna ja julkaise
+          {t('yleiset.tallennaJaJulkaise')}
         </PublishButton>
       ) : null}
     </Wrapper>

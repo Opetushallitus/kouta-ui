@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import { Field, formValues } from 'redux-form';
-import mapValues from 'lodash/mapValues';
 import get from 'lodash/get';
 
 import Spacing from '../Spacing';
@@ -8,34 +7,8 @@ import Typography from '../Typography';
 import Textarea from '../Textarea';
 import LanguageSelector from '../LanguageSelector';
 import Select from '../Select';
-import { getKoodisto } from '../../apiUtils';
-import {
-  isArray,
-  arrayToTranslationObject,
-  getFirstLanguageValue,
-} from '../../utils';
-import useApiAsync from '../useApiAsync';
-
-const getOsiot = async ({ httpClient, apiUrls }) => {
-  const osiot = await getKoodisto({
-    koodistoUri: 'koulutuksenjarjestamisenlisaosiot',
-    httpClient,
-    apiUrls,
-  });
-
-  return isArray(osiot)
-    ? osiot.map(({ metadata, koodiUri, versio }) => ({
-        koodiUri: `${koodiUri}#${versio}`,
-        nimi: mapValues(arrayToTranslationObject(metadata), ({ nimi }) => nimi),
-      }))
-    : [];
-};
-
-const getOsiotOptions = osiot =>
-  osiot.map(({ nimi, koodiUri }) => ({
-    value: koodiUri,
-    label: getFirstLanguageValue(nimi),
-  }));
+import useTranslation from '../useTranslation';
+import useKoodistoOptions from '../useKoodistoOptions';
 
 const noop = () => {};
 
@@ -76,11 +49,8 @@ const OsiotFieldsBase = ({ osiot, language, osiotOptions }) => {
 const OsiotFields = formValues({ osiot: 'osiot' })(OsiotFieldsBase);
 
 const LisatiedotSection = ({ languages = [] }) => {
-  const { data: osiot } = useApiAsync({ promiseFn: getOsiot });
-
-  const osiotOptions = useMemo(() => {
-    return getOsiotOptions(osiot || []);
-  }, [osiot]);
+  const { t } = useTranslation();
+  const { options: osiotOptions } = useKoodistoOptions({ koodisto: 'koulutuksenjarjestamisenlisaosiot' });
 
   return (
     <LanguageSelector languages={languages} defaultValue="fi">
@@ -88,7 +58,7 @@ const LisatiedotSection = ({ languages = [] }) => {
         <>
           <Spacing marginBottom={2}>
             <Typography variant="h6" marginBottom={1}>
-              Valitse lisättävä osio
+              {t('yleiset.valitseLisattavaOsio')}
             </Typography>
             <Field
               name="osiot"

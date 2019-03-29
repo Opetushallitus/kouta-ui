@@ -2,39 +2,56 @@ import '@babel/polyfill';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
+import createBrowserHistory from 'history/createBrowserHistory';
+import { urls as ophUrls } from 'oph-urls-js';
+import get from 'lodash/get';
+import merge from 'lodash/merge';
 
 import * as serviceWorker from './serviceWorker';
 import App from './components/App';
 import createStore from './state';
 import defaultTheme from './theme';
 import configureUrls from './apiUrls';
-import { urls as ophUrls } from 'oph-urls-js';
-import axios from 'axios';
-import createBrowserHistory from 'history/createBrowserHistory';
 import createLocalisation from './localisation';
 import { getLocalisation } from './apiUtils';
+import getTranslations from './translations';
 
 const history = createBrowserHistory({ basename: 'kouta' });
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+const loadLocalisation = async ({
+  namespace,
+  language,
+  httpClient,
+  apiUrls,
+}) => {
+  const localisation = await getLocalisation({
+    category: namespace,
+    locale: language,
+    httpClient,
+    apiUrls,
+  });
+
+  const translations = getTranslations();
+
+  return get(translations, [language, namespace])
+    ? merge({}, translations[language][namespace], localisation || {})
+    : localisation;
+};
 
 (async () => {
   const httpClient = axios.create({});
   const apiUrls = await configureUrls(ophUrls);
 
-  const localisationResources = await getLocalisation({
-    category: 'kouta',
-    httpClient,
-    apiUrls,
+  const localisationInstance = createLocalisation({
+    debug: process.env.NODE_ENV === 'development',
+    loadLocalisation: ({ namespace, language }) =>
+      loadLocalisation({ namespace, language, httpClient, apiUrls }),
   });
 
-  const localisationInstance = await createLocalisation({
-    resources: localisationResources,
-    debug: process.env.NODE_ENV === 'development',
-  });
+  window.__i18n__ = localisationInstance;
 
   const { store, persistor } = createStore({
     apiUrls,

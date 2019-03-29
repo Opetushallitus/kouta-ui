@@ -1,35 +1,41 @@
 import React from 'react';
 import { Field, FieldArray, formValues } from 'redux-form';
 import styled, { css } from 'styled-components';
-import formatDate from 'date-fns/format';
 
 import Typography from '../Typography';
 import Spacing from '../Spacing';
-import LanguageSelector from '../LanguageSelector';
 import Checkbox from '../Checkbox';
 import InputMask from '../InputMask';
 import Button from '../Button';
-import { isArray } from '../../utils';
+import { isArray, formatKoutaDateString } from '../../utils';
+import useTranslation from '../useTranslation';
 
-const renderHakuaikaInterval = ({ haku }) => {
+const HakuaikaInterval = ({ haku }) => {
   const dateFormat = 'DD.MM.YYYY HH:mm';
+  const { t } = useTranslation();
 
   const hakuajat = (haku && isArray(haku.hakuajat) ? haku.hakuajat : []).map(
     ({ alkaa, paattyy }) => [
-      formatDate(new Date(alkaa), dateFormat),
-      formatDate(new Date(paattyy), dateFormat),
+      formatKoutaDateString(alkaa, dateFormat),
+      formatKoutaDateString(paattyy, dateFormat),
     ],
   );
 
-  return hakuajat.legth === 0 ? (
+  return hakuajat.length === 0 ? (
     <Typography variant="secondary">
-      Haulle ei ole määritelty hakuaikoja
+      {t('hakukohdelomake.haullaEiHakuaikaa')}
     </Typography>
-  ) : hakuajat.map(([start, end], index) => (
-    <Typography variant="div" marginBottom={index < hakuajat.length -1 ? 1 : 0} key={index}>
-      {start} - {end}
-    </Typography>
-  ));
+  ) : (
+    hakuajat.map(([start, end], index) => (
+      <Typography
+        variant="div"
+        marginBottom={index < hakuajat.length - 1 ? 1 : 0}
+        key={index}
+      >
+        {start} - {end}
+      </Typography>
+    ))
+  );
 };
 
 const renderCheckboxField = ({ input, label = null }) => (
@@ -79,13 +85,13 @@ const HakuRemoveContainer = styled.div`
   align-items: center;
 `;
 
-const renderHakuajatFields = ({ fields }) => (
+const renderHakuajatFields = ({ fields, t }) => (
   <>
     {fields.map((hakuaika, index) => (
       <HakuContainer key={index}>
         <HakuDateTimeContainer first>
           <Typography as="div" marginBottom={1}>
-            Alkaa
+            {t('yleiset.alkaa')}
           </Typography>
           <HakuDateTimeWrapper>
             <HakuDateContainer>
@@ -106,12 +112,12 @@ const renderHakuajatFields = ({ fields }) => (
             </HakuTimeContainer>
           </HakuDateTimeWrapper>
           <Typography variant="secondary" as="div" marginTop={1}>
-            Alkuajan päivämäärä ja kellonaika
+            {t('yleiset.paivamaaraJaKellonaika')}
           </Typography>
         </HakuDateTimeContainer>
         <HakuDateTimeContainer>
           <Typography as="div" marginBottom={1}>
-            Päättyy
+            {t('yleiset.paattyy')}
           </Typography>
           <HakuDateTimeWrapper>
             <HakuDateContainer>
@@ -132,7 +138,7 @@ const renderHakuajatFields = ({ fields }) => (
             </HakuTimeContainer>
           </HakuDateTimeWrapper>
           <Typography variant="secondary" as="div" marginTop={1}>
-            Päätösajan päivämäärä ja kellonaika
+            {t('yleiset.paivamaaraJaKellonaika')}
           </Typography>
         </HakuDateTimeContainer>
         <HakuRemoveContainer>
@@ -144,7 +150,7 @@ const renderHakuajatFields = ({ fields }) => (
             variant="outlined"
             color="secondary"
           >
-            Poista
+            {t('yleiset.poista')}
           </Button>
         </HakuRemoveContainer>
       </HakuContainer>
@@ -155,15 +161,17 @@ const renderHakuajatFields = ({ fields }) => (
         fields.push({});
       }}
     >
-      Lisää hakuaika
+      {t('yleiset.lisaaHakuaika')}
     </Button>
   </>
 );
 
 const CustomHakuaika = () => {
+  const { t } = useTranslation();
+
   return (
     <Spacing marginTop={2}>
-      <FieldArray name="hakuajat" component={renderHakuajatFields} />
+      <FieldArray name="hakuajat" component={renderHakuajatFields} t={t} />
     </Spacing>
   );
 };
@@ -172,28 +180,26 @@ const EriHakuaikaFieldValue = formValues({
   eriHakuaika: 'eriHakuaika',
 })(({ eriHakuaika, children }) => children({ eriHakuaika }));
 
-const HakuajatSection = ({ languages, haku }) => {
+const HakuajatSection = ({ haku }) => {
+  const { t } = useTranslation();
+
   return (
-    <LanguageSelector languages={languages} defaultValue="fi">
-      {({ value: activeLanguage }) => (
-        <>
-          <Spacing marginBottom={2}>
-            <Typography variant="h6" marginBottom={1}>
-              Hakuun liitetyt hakuajat
-            </Typography>
-            {renderHakuaikaInterval({ haku })}
-          </Spacing>
-          <Field
-            name="eriHakuaika"
-            component={renderCheckboxField}
-            label="Hakukohteen hakuaika on eri kuin haun aikataulu"
-          />
-          <EriHakuaikaFieldValue>
-            {({ eriHakuaika }) => (eriHakuaika ? <CustomHakuaika /> : null)}
-          </EriHakuaikaFieldValue>
-        </>
-      )}
-    </LanguageSelector>
+    <>
+      <Spacing marginBottom={2}>
+        <Typography variant="h6" marginBottom={1}>
+          {t('hakukohdelomake.hakuunLiitetytHakuajat')}
+        </Typography>
+        <HakuaikaInterval haku={haku} />
+      </Spacing>
+      <Field
+        name="eriHakuaika"
+        component={renderCheckboxField}
+        label={t('hakukohdelomake.hakukohteellaEriHakuaika')}
+      />
+      <EriHakuaikaFieldValue>
+        {({ eriHakuaika }) => (eriHakuaika ? <CustomHakuaika /> : null)}
+      </EriHakuaikaFieldValue>
+    </>
   );
 };
 

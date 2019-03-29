@@ -8,18 +8,19 @@ import Divider from '../Divider';
 import Flex from '../Flex';
 import Input from '../Input';
 import Textarea from '../Textarea';
+import useTranslation from '../useTranslation';
 
 const renderInputField = ({ input }) => <Input {...input} />;
 
 const renderTextareaField = ({ input }) => <Textarea {...input} />;
 
-const renderOsaamisalatFields = ({ fields, language }) => (
+const renderOsaamisalatFields = ({ fields, language, t }) => (
   <>
     {fields.map((field, index) => (
       <Fragment key={index}>
         <Spacing marginBottom={2}>
           <Typography variant="h6" marginBottom={1}>
-            Nimi
+            {t('yleiset.nimi')}
           </Typography>
 
           <Field name={`${field}.nimi.${language}`} component={renderInputField} />
@@ -27,21 +28,21 @@ const renderOsaamisalatFields = ({ fields, language }) => (
 
         <Spacing marginBottom={2}>
           <Typography variant="h6" marginBottom={1}>
-            Kuvaus
+            {t('yleiset.kuvaus')}
           </Typography>
 
           <Field name={`${field}.kuvaus.${language}`} component={renderTextareaField} />
         </Spacing>
         <Spacing marginBottom={2}>
           <Typography variant="h6" marginBottom={1}>
-            Linkki
+            {t('yleiset.linkki')}
           </Typography>
 
           <Field name={`${field}.linkki.${language}`} component={renderInputField} />
         </Spacing>
         <Spacing marginBottom={2}>
           <Typography variant="h6" marginBottom={1}>
-            Linkin otsikko
+            {t('toteutuslomake.linkinOtsikko')}
           </Typography>
 
           <Field name={`${field}.otsikko.${language}`} component={renderInputField} />
@@ -55,7 +56,7 @@ const renderOsaamisalatFields = ({ fields, language }) => (
             variant="outlined"
             color="secondary"
           >
-            Poista
+            {t('yleiset.poista')}
           </Button>
         </Flex>
         <Divider marginTop={3} marginBottom={3} />
@@ -67,13 +68,15 @@ const renderOsaamisalatFields = ({ fields, language }) => (
         fields.push({});
       }}
     >
-      Lisää osaamisala
+      {t('toteutuslomake.lisaaOsaamisala')}
     </Button>
   </>
 );
 
 const KorkeakouluOsaamisalatFields = ({ name, language }) => {
-  return <FieldArray name={name} component={renderOsaamisalatFields} language={language} />;
+  const { t } = useTranslation();
+
+  return <FieldArray name={name} component={renderOsaamisalatFields} language={language} t={t} />;
 };
 
 export default KorkeakouluOsaamisalatFields;

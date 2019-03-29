@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import { Field } from 'redux-form';
 
@@ -8,6 +8,7 @@ import ApiAsync from '../../ApiAsync';
 import { getKoulutusByKoodi } from '../../../apiUtils';
 import { getThemeProp } from '../../../theme';
 import { getLanguageValue } from '../../../utils';
+import useTranslation from '../../useTranslation';
 
 const getTutkintonimikkeet = ({ koulutus, language }) => {
   const { tutkintonimikeKoodit = [] } = koulutus;
@@ -68,36 +69,49 @@ const renderSelectField = ({ input, koulutusTyyppi, ...props }) => {
 };
 
 const KoulutusInfo = ({ koulutus, language = 'fi' }) => {
+  const { t } = useTranslation();
   const { opintojenlaajuus } = koulutus;
-  const nimikkeet = getTutkintonimikkeet({ koulutus, language });
-  const osaamisalat = getOsaamisalat({ koulutus, language });
-  const koulutusala = getLanguageValue(koulutus.koulutusala, language);
-  const opintojenlaajuusYksikko = getLanguageValue(
-    koulutus.opintojenlaajuusYksikko,
-    language,
+
+  const {
+    nimikkeet,
+    osaamisalat,
+    koulutusala,
+    opintojenlaajuusYksikko,
+    nimi,
+  } = useMemo(
+    () => ({
+      nimikkeet: getTutkintonimikkeet({ koulutus, language }),
+      osaamisalat: getOsaamisalat({ koulutus, language }),
+      koulutusala: getLanguageValue(koulutus.koulutusala, language),
+      opintojenlaajuusYksikko: getLanguageValue(
+        koulutus.opintojenlaajuusYksikko,
+        language,
+      ),
+      nimi: getLanguageValue(koulutus.nimi, language),
+    }),
+    [koulutus, language],
   );
-  const nimi = getLanguageValue(koulutus.nimi, language);
 
   return (
     <Typography>
       <Row>
-        <LabelColumn>Koulutus:</LabelColumn>
+        <LabelColumn>{t('yleiset.koulutus')}:</LabelColumn>
         <ContentColumn>{nimi}</ContentColumn>
       </Row>
       <Row>
-        <LabelColumn>Koulutusala:</LabelColumn>
+        <LabelColumn>{t('yleiset.koulutusala')}:</LabelColumn>
         <ContentColumn>{koulutusala}</ContentColumn>
       </Row>
       <Row>
-        <LabelColumn>Osaamisalat:</LabelColumn>
+        <LabelColumn>{t('yleiset.osaamisalat')}:</LabelColumn>
         <ContentColumn>{osaamisalat.join(', ')}</ContentColumn>
       </Row>
       <Row>
-        <LabelColumn>Tutkintonimike:</LabelColumn>
+        <LabelColumn>{t('yleiset.tutkintonimike')}:</LabelColumn>
         <ContentColumn>{nimikkeet.join(', ')}</ContentColumn>
       </Row>
       <Row>
-        <LabelColumn>Laajuus:</LabelColumn>
+        <LabelColumn>{t('yleiset.laajuus')}:</LabelColumn>
         <ContentColumn>
           {opintojenlaajuus} {opintojenlaajuusYksikko}
         </ContentColumn>
@@ -118,29 +132,33 @@ const AmmatillinenTiedotSection = ({
   koulutustyyppi,
   language,
   koulutusValue,
-}) => (
-  <>
-    <Typography variant="h6" marginBottom={1}>
-      Valitse koulutus listasta
-    </Typography>
-    <Container>
-      <Content>
-        <Field
-          name="koulutus"
-          component={renderSelectField}
-          koulutusTyyppi={koulutustyyppi}
-        />
-      </Content>
-      <InfoContent>
-        {koulutusValue ? (
-          <InformationAsync
-            koodiUri={koulutusValue.value}
-            language={language}
+}) => {
+  const { t } = useTranslation();
+
+  return (
+    <>
+      <Typography variant="h6" marginBottom={1}>
+        {t('koulutuslomake.valitseKoulutus')}
+      </Typography>
+      <Container>
+        <Content>
+          <Field
+            name="koulutus"
+            component={renderSelectField}
+            koulutusTyyppi={koulutustyyppi}
           />
-        ) : null}
-      </InfoContent>
-    </Container>
-  </>
-);
+        </Content>
+        <InfoContent>
+          {koulutusValue ? (
+            <InformationAsync
+              koodiUri={koulutusValue.value}
+              language={language}
+            />
+          ) : null}
+        </InfoContent>
+      </Container>
+    </>
+  );
+};
 
 export default AmmatillinenTiedotSection;

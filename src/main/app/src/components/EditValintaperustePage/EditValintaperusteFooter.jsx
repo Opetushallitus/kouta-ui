@@ -6,6 +6,7 @@ import { isValid } from 'redux-form';
 import { submit } from '../../state/editValintaperusteForm';
 import Button from '../Button';
 import { JULKAISUTILA } from '../../constants';
+import useTranslation from '../useTranslation';
 
 const valintaperusteFormIsValid = isValid('editValintaperusteForm');
 
@@ -22,21 +23,27 @@ const PublishButton = styled(Button)`
   margin-left: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
-const EditValintaperusteFooter = ({ valintaperuste, valid, onSave = () => {} }) => {
+const EditValintaperusteFooter = ({
+  valintaperuste,
+  valid,
+  onSave = () => {},
+}) => {
   const { tila } = valintaperuste;
 
   const onSaveAndPublish = useCallback(() => {
     onSave({ tila: JULKAISUTILA.JULKAISTU });
   }, [onSave]);
 
+  const { t } = useTranslation();
+
   return (
     <Wrapper>
       <Button variant="outlined" onClick={onSave}>
-        Tallenna
+        {t('yleiset.tallenna')}
       </Button>
       {tila !== JULKAISUTILA.JULKAISTU ? (
         <PublishButton disabled={!valid} onClick={onSaveAndPublish}>
-          Tallenna ja julkaise
+          {t('yleiset.tallennaJaJulkaise')}
         </PublishButton>
       ) : null}
     </Wrapper>

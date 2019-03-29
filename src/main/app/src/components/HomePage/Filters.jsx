@@ -1,15 +1,16 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import Flex, { FlexItem } from '../Flex';
 import Input from '../Input';
 import Checkbox from '../Checkbox';
 import Select from '../Select';
 import { JULKAISUTILA } from '../../constants';
+import useTranslation from '../useTranslation';
 
-const defaultTilaOptions = [
-  { value: JULKAISUTILA.JULKAISTU, label: 'Julkaistu' },
-  { value: JULKAISUTILA.TALLENNETTU, label: 'Tallennettu' },
-  { value: JULKAISUTILA.ARKISTOITU, label: 'Arkistoitu' },
+const getDefaultOptions = t => [
+  { value: JULKAISUTILA.JULKAISTU, label: t('yleiset.julkaistu') },
+  { value: JULKAISUTILA.TALLENNETTU, label: t('yleiset.tallennettu') },
+  { value: JULKAISUTILA.ARKISTOITU, label: t('yleiset.arkistoitu') },
 ];
 
 export const Filters = ({
@@ -19,11 +20,20 @@ export const Filters = ({
   onShowArchivedChange,
   onTilaChange: onTilaChangeArg,
   nimiPlaceholder = '',
-  tilaOptions = defaultTilaOptions
+  tilaOptions: tilaOptionsProp,
 }) => {
-  const onTilaChange = useCallback(value => {
-    onTilaChangeArg(value);
-  }, [onTilaChangeArg]);
+  const { t } = useTranslation();
+
+  const onTilaChange = useCallback(
+    value => {
+      onTilaChangeArg(value);
+    },
+    [onTilaChangeArg],
+  );
+
+  const tilaOptions = useMemo(() => tilaOptionsProp || getDefaultOptions(t), [
+    t,
+  ]);
 
   return (
     <Flex alignCenter>
@@ -35,11 +45,16 @@ export const Filters = ({
         />
       </FlexItem>
       <FlexItem grow={0} basis="20%" paddingRight={2}>
-        <Select options={tilaOptions} onChange={onTilaChange} placeholder="Tila" isClearable />
+        <Select
+          options={tilaOptions}
+          onChange={onTilaChange}
+          placeholder={t('yleiset.tila')}
+          isClearable
+        />
       </FlexItem>
       <FlexItem grow={0}>
         <Checkbox checked={showArchived} onChange={onShowArchivedChange}>
-          Näytä myös arkistoidut
+          {t('etusivu.naytaArkistoidut')}
         </Checkbox>
       </FlexItem>
     </Flex>

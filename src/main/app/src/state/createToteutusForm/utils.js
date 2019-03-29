@@ -57,8 +57,9 @@ export const getToteutusByValues = values => {
     }),
   );
 
-  const onkoMaksullinen =
-    get(values, 'jarjestamistiedot.maksullisuus') === 'kylla';
+  const onkoMaksullinen = Boolean(
+    get(values, 'jarjestamistiedot.maksullisuus'),
+  );
 
   const maksunMaara = pick(
     get(values, 'jarjestamistiedot.maksumaara') || {},
@@ -109,8 +110,9 @@ export const getToteutusByValues = values => {
     },
   );
 
-  const onkoLukuvuosimaksua =
-    get(values, 'jarjestamistiedot.onkoLukuvuosimaksua') === 'kylla';
+  const onkoLukuvuosimaksua = Boolean(
+    get(values, 'jarjestamistiedot.onkoLukuvuosimaksua'),
+  );
 
   const lukuvuosimaksuKuvaus = pick(
     get(values, 'jarjestamistiedot.lukuvuosimaksuKuvaus') || {},
@@ -122,8 +124,7 @@ export const getToteutusByValues = values => {
     kielivalinta,
   );
 
-  const onkoStipendia =
-    get(values, 'jarjestamistiedot.onkoStipendia') === 'kylla';
+  const onkoStipendia = Boolean(get(values, 'jarjestamistiedot.onkoStipendia'));
 
   const stipendinKuvaus = pick(
     get(values, 'jarjestamistiedot.stipendinKuvaus') || {},
@@ -249,7 +250,7 @@ export const getValuesByToteutus = toteutus => {
     },
     jarjestamistiedot: {
       kuvaus,
-      maksullisuus: get(opetus, 'onkoMaksullinen') ? 'kylla' : 'ei',
+      maksullisuus: get(opetus, 'onkoMaksullinen'),
       maksumaara: get(opetus, 'maksunMaara') || {},
       opetustapa: get(opetus, 'opetustapaKoodiUrit') || [],
       opetusaika: get(opetus, 'opetusaikaKoodiUri') || '',
@@ -265,10 +266,10 @@ export const getValuesByToteutus = toteutus => {
         vuosi: get(opetus, 'alkamisvuosi') || '',
       },
       alkamiskausiKuvaus: get(opetus, 'alkamisaikaKuvaus') || {},
-      onkoLukuvuosimaksua: get(opetus, 'onkoLukuvuosimaksua') ? 'kylla' : 'ei',
+      onkoLukuvuosimaksua: get(opetus, 'onkoLukuvuosimaksua'),
       lukuvuosimaksu: get(opetus, 'lukuvuosimaksu') || {},
       lukuvuosimaksuKuvaus: get(opetus, 'lukuvuosimaksuKuvaus') || {},
-      onkoStipendia: get(opetus, 'onkoStipendia') ? 'kylla' : 'ei',
+      onkoStipendia: get(opetus, 'onkoStipendia'),
       stipendinMaara: get(opetus, 'stipendinMaara') || {},
       stipendinKuvaus: get(opetus, 'stipendinKuvaus') || {},
     },

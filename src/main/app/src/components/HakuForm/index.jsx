@@ -29,7 +29,7 @@ export const validate = values => {
 
   const alkamiskausi = get(values, 'aikataulut.kausi');
 
-  const alkamisvuosi = get(values, 'aikataulut.vuosi');
+  const alkamisvuosi = get(values, 'aikataulut.vuosi.value');
 
   const hakutapaKoodiUri = get(values, 'hakutapa.tapa') || [];
 

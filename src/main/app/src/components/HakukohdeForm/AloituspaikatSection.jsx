@@ -5,6 +5,7 @@ import Typography from '../Typography';
 import Input from '../Input';
 import Flex, { FlexItem } from '../Flex';
 import { KORKEAKOULUKOULUTUSTYYPIT } from '../../constants';
+import useTranslation from '../useTranslation';
 
 const renderInputField = ({ input, ...props }) => (
   <Input {...input} {...props} />
@@ -12,11 +13,12 @@ const renderInputField = ({ input, ...props }) => (
 
 const AloituspaikatSection = ({ koulutustyyppi }) => {
   const isKorkeakoulu = KORKEAKOULUKOULUTUSTYYPIT.includes(koulutustyyppi);
+  const { t } = useTranslation();
 
   const aloituspaikatField = (
     <>
       <Typography variant="h6" marginBottom={1}>
-        Aloituspaikkojen lukumäärä
+      {t('hakukohdelomake.aloituspaikkojenLukumaara')}
       </Typography>
       <Field
         name="aloituspaikkamaara"
@@ -29,7 +31,7 @@ const AloituspaikatSection = ({ koulutustyyppi }) => {
   const ensikertalaisetField = (
     <>
       <Typography variant="h6" marginBottom={1}>
-        Ensikertalaisten aloituspaikkojen lukumäärä
+        {t('hakukohdelomake.ensikertalaistenAloituspaikkojenLukumaara')}
       </Typography>
       <Field
         name="ensikertalaismaara"

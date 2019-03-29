@@ -8,6 +8,7 @@ import Input from '../../Input';
 import TutkintoNimikeSelect from './TutkintonimikeSelect';
 import useKoodistoOptions from '../../useKoodistoOptions';
 import Select from '../../Select';
+import useTranslation from '../../useTranslation';
 
 const noop = () => {};
 
@@ -28,13 +29,17 @@ const renderSelectField = ({ input, options }) => (
 );
 
 export const KorkeakoulutuTiedotSection = ({ koulutustyyppi, language }) => {
-  const { options: laajuusOptions } = useKoodistoOptions({ koodisto: 'opintojenlaajuus' });
+  const { options: laajuusOptions } = useKoodistoOptions({
+    koodisto: 'opintojenlaajuus',
+  });
+
+  const { t } = useTranslation();
 
   return (
     <>
       <Spacing marginBottom={2}>
         <Typography variant="h6" marginBottom={1}>
-          Valitse koulutuskoodi
+          {t('koulutuslomake.valitseKoulutuskoodi')}
         </Typography>
         <Field
           name="koulutus"
@@ -42,27 +47,31 @@ export const KorkeakoulutuTiedotSection = ({ koulutustyyppi, language }) => {
           koulutustyyppi={koulutustyyppi}
         />
       </Spacing>
-  
+
       <Spacing marginBottom={2}>
         <Typography variant="h6" marginBottom={1}>
-          Muokkaa koulutuksen nimeä
+          {t('koulutuslomake.muokkaaKoulutuksenNimea')}
         </Typography>
         <Field name={`nimi.${language}`} component={renderInputField} />
       </Spacing>
-  
+
       <Spacing marginBottom={2}>
         <Typography variant="h6" marginBottom={1}>
-          Valitse tutkintonimike
+          {t('koulutuslomake.valitseTutkintonimike')}
         </Typography>
         <Field name="tutkintonimike" component={renderTutkintoNimikeField} />
       </Spacing>
-  
+
       <Typography variant="h6" marginBottom={1}>
-        Opintojen laajuus
+        {t('koulutuslomake.valitseOpintojenLaajuus')}
       </Typography>
-      <Field name="opintojenLaajuus" component={renderSelectField} options={laajuusOptions} />
+      <Field
+        name="opintojenLaajuus"
+        component={renderSelectField}
+        options={laajuusOptions}
+      />
     </>
   );
-}
+};
 
 export default KorkeakoulutuTiedotSection;

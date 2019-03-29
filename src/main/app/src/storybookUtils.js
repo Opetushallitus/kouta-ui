@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Provider } from 'react-redux';
 import { action } from '@storybook/addon-actions';
 import Async from 'react-async';
@@ -10,12 +10,26 @@ import configureUrls from './apiUrls';
 import HttpContext from './components/HttpContext';
 import UrlContext from './components/UrlContext';
 import LocalisationProvider from './components/LocalisationProvider';
-import { getLocalisation } from './apiUtils';
-import ApiAsync from './components/ApiAsync';
 import createLocalisation from './localisation';
+import getTranslations from './translations';
 
 const defaultHttpClient = axios.create({});
 const configureOphUrls = () => configureUrls(ophUrls);
+
+const getLocalisationInstance = () => {
+  const localisationInstance = createLocalisation({
+    debug: true,
+  });
+
+  localisationInstance.addResourceBundle(
+    'fi',
+    'kouta',
+    getTranslations().fi.kouta,
+    true,
+  );
+
+  return localisationInstance;
+};
 
 export const makeApiDecorator = ({
   httpClient = defaultHttpClient,
@@ -46,25 +60,12 @@ export const makeStoreDecorator = ({ logging = false } = {}) => storyFn => {
   return <Provider store={store}>{storyFn()}</Provider>;
 };
 
-export const makeLocalisationDecorator = ({
-  category = 'kouta',
-  language = 'fi',
-} = {}) => storyFn => {
+export const makeLocalisationDecorator = () => storyFn => {
+  const instance = getLocalisationInstance();
+
   return (
-    <ApiAsync promiseFn={getLocalisation} category={category}>
-      {({ data }) =>
-        data ? (
-          <LocalisationProvider
-            i18n={createLocalisation({
-              resources: data,
-              debug: true,
-              language,
-            })}
-          >
-            {storyFn()}
-          </LocalisationProvider>
-        ) : null
-      }
-    </ApiAsync>
+    <Suspense fallback={null}>
+      <LocalisationProvider i18n={instance}>{storyFn()}</LocalisationProvider>
+    </Suspense>
   );
 };

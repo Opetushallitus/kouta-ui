@@ -9,6 +9,7 @@ export const OrganisaatioTreeList = ({
   selected,
   onToggleFavourite,
   onToggleOpen,
+  language = 'fi',
 }) => (
   <TreeList items={items} defaultOpen={false}>
     {({ nimi, oid, favourite, children, open }) => (
@@ -22,6 +23,7 @@ export const OrganisaatioTreeList = ({
         onToggleOpen={onToggleOpen}
         children={children}
         open={open}
+        language={language}
         collapse
       />
     )}

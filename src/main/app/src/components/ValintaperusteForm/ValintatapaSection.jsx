@@ -12,8 +12,8 @@ import Flex from '../Flex';
 import ValintatapaContentFields from '../ValintatapaContentFields';
 import useKoodistoOptions from '../useKoodistoOptions';
 import Textarea from '../Textarea';
-
 import { noop } from '../../utils';
+import useTranslation from '../useTranslation';
 
 const renderInputField = ({ input, type = 'text' }) => (
   <Input {...input} type={type} />
@@ -25,11 +25,11 @@ const renderSelectField = ({ input, options }) => (
 
 const renderTextareaField = ({ input }) => <Textarea {...input} />;
 
-const renderValintatapaFields = ({ valintatapa, tapaOptions, language }) => (
+const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
   <>
     <Spacing marginBottom={2}>
       <Typography variant="h6" marginBottom={1}>
-        Valitse tapa
+        {t('valintaperustelomake.valitseTapa')}
       </Typography>
       <Field
         name={`${valintatapa}.tapa`}
@@ -39,7 +39,7 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language }) => (
     </Spacing>
     <Spacing marginBottom={2}>
       <Typography variant="h6" marginBottom={1}>
-        Valintapajonon nimi
+        {t('valintaperustelomake.valintatapajononNimi')}
       </Typography>
       <Field
         name={`${valintatapa}.nimi.${language}`}
@@ -47,11 +47,14 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language }) => (
       />
     </Spacing>
     <Spacing marginBottom={2}>
-      <ValintatapaContentFields name={`${valintatapa}.sisalto`} language={language} />
+      <ValintatapaContentFields
+        name={`${valintatapa}.sisalto`}
+        language={language}
+      />
     </Spacing>
     <Spacing marginBottom={2}>
       <Typography variant="h6" marginBottom={1}>
-        Kynnysehto
+        {t('valintaperustelomake.kynnysehto')}
       </Typography>
       <Field
         name={`${valintatapa}.kynnysehto.${language}`}
@@ -60,7 +63,7 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language }) => (
     </Spacing>
     <Spacing marginBottom={2}>
       <Typography variant="h6" marginBottom={1}>
-        Enimmäispistemäärä
+      {t('valintaperustelomake.enimmaispistemaara')}
       </Typography>
       <Field
         name={`${valintatapa}.enimmaispistemaara`}
@@ -70,7 +73,7 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language }) => (
     </Spacing>
     <Spacing>
       <Typography variant="h6" marginBottom={1}>
-        Vähimmäispistemäärä
+      {t('valintaperustelomake.vahimmaispistemaara')}
       </Typography>
       <Field
         name={`${valintatapa}.vahimmaispistemaara`}
@@ -81,12 +84,12 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language }) => (
   </>
 );
 
-const renderValintavat = ({ fields, tapaOptions, language }) => (
+const renderValintavat = ({ fields, tapaOptions, language, t }) => (
   <>
     {fields.map((valintatapa, index) => (
       <Fragment key={index}>
         <Spacing marginBottom={2}>
-          {renderValintatapaFields({ valintatapa, tapaOptions, language })}
+          {renderValintatapaFields({ valintatapa, tapaOptions, language, t })}
         </Spacing>
         <Flex justifyEnd>
           <Button
@@ -97,7 +100,7 @@ const renderValintavat = ({ fields, tapaOptions, language }) => (
               fields.remove(index);
             }}
           >
-            Poista
+            {t('yleiset.poista')}
           </Button>
         </Flex>
         <Divider marginTop={3} marginBottom={3} />
@@ -109,13 +112,14 @@ const renderValintavat = ({ fields, tapaOptions, language }) => (
         fields.push({});
       }}
     >
-      Lisää valintapa
+      {t('valintaperustelomake.lisaaValintatapa')}
     </Button>
   </>
 );
 
 const ValintatapaSection = ({ languages }) => {
   const { options } = useKoodistoOptions({ koodisto: 'valintatapajono' });
+  const { t } = useTranslation();
 
   return (
     <LanguageSelector languages={languages} defaultValue="fi">
@@ -125,6 +129,7 @@ const ValintatapaSection = ({ languages }) => {
           component={renderValintavat}
           tapaOptions={options}
           language={activeLanguage}
+          t={t}
         />
       )}
     </LanguageSelector>

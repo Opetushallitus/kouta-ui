@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Field, FieldArray } from 'redux-form';
 
 import Typography from '../Typography';
@@ -15,6 +15,7 @@ import CheckboxGroup from '../CheckboxGroup';
 import Checkbox from '../Checkbox';
 import { noop } from '../../utils';
 import useKoodistoOptions from '../useKoodistoOptions';
+import useTranslation from '../useTranslation';
 
 const renderInputField = ({ input }) => <Input {...input} />;
 
@@ -37,6 +38,7 @@ const renderVaatimustyyppiField = ({
   vaatimus,
   vaatimusTyyppi,
   isLast,
+  t,
 }) => {
   const { value, onChange } = input;
 
@@ -51,6 +53,7 @@ const renderVaatimustyyppiField = ({
             name={`${vaatimus}.kuvaukset.${vaatimusTyyppi}`}
             component={renderKuvauksetField}
             kuvausOptions={kuvausOptions}
+            t={t}
           />
         </Spacing>
       ) : null}
@@ -58,14 +61,14 @@ const renderVaatimustyyppiField = ({
   );
 };
 
-const renderKuvauksetField = ({ fields, kuvausOptions }) => {
+const renderKuvauksetField = ({ fields, kuvausOptions, t }) => {
   return (
     <>
       {fields.map((kuvaus, index) => (
         <Flex marginBottom={2} key={index} alignEnd>
           <FlexItem grow={1} paddingRight={2}>
             <Typography variant="h6" marginBottom={1}>
-              Valitse kuvaus
+              {t('yleiset.valitseKuvaus')}
             </Typography>
             <Field
               name={`${kuvaus}.kuvaus`}
@@ -75,7 +78,7 @@ const renderKuvauksetField = ({ fields, kuvausOptions }) => {
           </FlexItem>
           <FlexItem grow={0} basis="20%">
             <Typography variant="h6" marginBottom={1}>
-              Taso
+              {t('yleiset.taso')}
             </Typography>
             <Field name={`${kuvaus}.taso`} component={renderInputField} />
           </FlexItem>
@@ -88,7 +91,7 @@ const renderKuvauksetField = ({ fields, kuvausOptions }) => {
                 fields.remove(index);
               }}
             >
-              Poista
+              {t('yleiset.poista')}
             </Button>
           </FlexItem>
         </Flex>
@@ -101,7 +104,7 @@ const renderKuvauksetField = ({ fields, kuvausOptions }) => {
           fields.push({});
         }}
       >
-        Lisää kuvaus
+        {t('yleiset.lisaaKuvaus')}
       </Button>
     </>
   );
@@ -113,6 +116,7 @@ const renderVaatimuksetField = ({
   kuvausOptions,
   osoitusOptions,
   language,
+  t,
 }) => {
   return (
     <>
@@ -121,7 +125,7 @@ const renderVaatimuksetField = ({
           <Spacing key={index}>
             <Spacing marginBottom={2}>
               <Typography variant="h6" marginBottom={1}>
-                Valitse kieli
+                {t('yleiset.valitseKieli')}
               </Typography>
               <Field
                 name={`${vaatimus}.kieli`}
@@ -132,7 +136,7 @@ const renderVaatimuksetField = ({
             <Flex>
               <FlexItem grow={1}>
                 <Typography variant="h6" marginBottom={1}>
-                  Valitse vaatimustyypit
+                  {t('valintaperustelomake.valitseVaatimustyypit')}
                 </Typography>
 
                 {kielitaitoOptions.map(({ value, label }, index) => (
@@ -145,13 +149,14 @@ const renderVaatimuksetField = ({
                     label={label}
                     vaatimusTyyppi={value}
                     isLast={index === kielitaitoOptions.length - 1}
+                    t={t}
                   />
                 ))}
               </FlexItem>
               <FlexItem grow={0} basis="40%" paddingLeft={4}>
                 <Spacing marginBottom={2}>
                   <Typography variant="h6" marginBottom={1}>
-                    Ehdot kielitaidon osoitukseen, tai vapautukseen
+                    {t('valintaperustelomake.ehdotKielitaidonOsoitukseen')}
                   </Typography>
                   <Field
                     name={`${vaatimus}.osoitustavat`}
@@ -163,6 +168,7 @@ const renderVaatimuksetField = ({
                   name={`${vaatimus}.muutOsoitustavat`}
                   component={renderMuutOsoitustavatField}
                   language={language}
+                  t={t}
                 />
               </FlexItem>
             </Flex>
@@ -176,7 +182,7 @@ const renderVaatimuksetField = ({
                   fields.remove(index);
                 }}
               >
-                Poista
+                {t('yleiset.poista')}
               </Button>
             </Flex>
             <Divider marginTop={3} marginBottom={3} />
@@ -189,20 +195,20 @@ const renderVaatimuksetField = ({
           fields.push({});
         }}
       >
-        Lisää kielitaitovaatimus
+        {t('valintaperustelomake.lisaaKielitaitovaatimus')}
       </Button>
     </>
   );
 };
 
-const renderMuutOsoitustavatField = ({ fields, language }) => {
+const renderMuutOsoitustavatField = ({ fields, language, t }) => {
   return (
     <>
       {fields.map((tapa, index) => (
         <Flex marginBottom={2} key={index} alignEnd>
           <FlexItem grow={1}>
             <Typography variant="h6" marginBottom={1}>
-              Kuvaus
+              {t('yleiset.kuvaus')}
             </Typography>
             <Field
               name={`${tapa}.kuvaus.${language}`}
@@ -218,7 +224,7 @@ const renderMuutOsoitustavatField = ({ fields, language }) => {
                 fields.remove(index);
               }}
             >
-              Poista
+              {t('yleiset.poista')}
             </Button>
           </FlexItem>
         </Flex>
@@ -231,13 +237,15 @@ const renderMuutOsoitustavatField = ({ fields, language }) => {
           fields.push({});
         }}
       >
-        Lisää ehto
+        {t('valintaperustelomake.lisaaEhto')}
       </Button>
     </>
   );
 };
 
 const KielitaitovaatimuksetSection = ({ languages }) => {
+  const { t } = useTranslation();
+
   const { options: fullOsoitusOptions } = useKoodistoOptions({
     koodisto: 'kielitaidonosoittaminen',
   });
@@ -250,12 +258,14 @@ const KielitaitovaatimuksetSection = ({ languages }) => {
     koodisto: 'kielitaitovaatimustyypitkuvaus',
   });
 
-  const osoitusOptions = fullOsoitusOptions.filter(
-    ({ value }) =>
-      !new RegExp(`^${VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI}`).test(
-        value,
-      ),
-  );
+  const osoitusOptions = useMemo(() => {
+    return fullOsoitusOptions.filter(
+      ({ value }) =>
+        !new RegExp(
+          `^${VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI}`,
+        ).test(value),
+    );
+  }, [fullOsoitusOptions]);
 
   return (
     <LanguageSelector languages={languages} defaultValue="fi">
@@ -267,6 +277,7 @@ const KielitaitovaatimuksetSection = ({ languages }) => {
           kuvausOptions={kuvausOptions}
           osoitusOptions={osoitusOptions}
           language={activeLanguage}
+          t={t}
         />
       )}
     </LanguageSelector>

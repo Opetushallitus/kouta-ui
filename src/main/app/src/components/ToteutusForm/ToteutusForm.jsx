@@ -3,7 +3,6 @@ import { formValues } from 'redux-form';
 
 import FormCollapse from '../FormCollapse';
 import KieliversiotFormSection from '../KieliversiotFormSection';
-import { LANGUAGE_TABS } from '../../constants';
 import OsaamisalatSection from './OsaamisalatSection';
 import YhteystiedotSection from './YhteystiedotSection';
 import NimiSection from './NimiSection';
@@ -20,6 +19,7 @@ import Flex from '../Flex';
 import Button from '../Button';
 import KorkeakouluOsaamisalatSection from './KorkeakouluOsaamisalatSection';
 import KuvausSection from './KuvausSection';
+import useTranslation from '../useTranslation';
 
 import {
   KORKEAKOULUKOULUTUSTYYPIT,
@@ -29,12 +29,8 @@ import {
 const ActiveLanguages = formValues({
   languages: 'kieliversiot.languages',
 })(({ languages, ...props }) => {
-  const activeLanguages = languages || [];
-
   return props.children({
-    languages: LANGUAGE_TABS.filter(({ value }) =>
-      activeLanguages.includes(value),
-    ),
+    languages: languages || [],
   });
 });
 
@@ -59,6 +55,7 @@ const ToteutusForm = ({
   koulutustyyppi = KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS,
 }) => {
   const isKorkeakoulu = KORKEAKOULUKOULUTUSTYYPIT.includes(koulutustyyppi);
+  const { t } = useTranslation();
 
   return (
     <form onSubmit={handleSubmit}>
@@ -67,7 +64,7 @@ const ToteutusForm = ({
           <FormCollapseGroup enabled={steps} scrollTarget={scrollTarget}>
             {canCopy ? (
               <FormCollapse
-                header="Pohjan valinta"
+                header={t('yleiset.pohjanValinta')}
                 section="base"
                 onContinue={onMaybeCopy}
               >
@@ -81,13 +78,16 @@ const ToteutusForm = ({
               </FormCollapse>
             ) : null}
 
-            <FormCollapse header="Kieliversiot" section="kieliversiot">
+            <FormCollapse
+              header={t('yleiset.kieliversiot')}
+              section="kieliversiot"
+            >
               <KieliversiotFormSection />
             </FormCollapse>
 
             {isKorkeakoulu ? (
               <FormCollapse
-                header="Koulutuksen toteutuksen tarkempi kuvaus"
+                header={t('toteutuslomake.koulutuksenToteutuksenKuvaus')}
                 section="kuvaus"
               >
                 <KuvausSection languages={languages} />
@@ -96,7 +96,9 @@ const ToteutusForm = ({
 
             {isKorkeakoulu ? (
               <FormCollapse
-                header="Alemman korkeakoulututkinnon erikoistumisalan, opintosuunnan, pääaineen tms. tarkempi kuvaus"
+                header={t(
+                  'toteutuslomake.alemmanKorkeakoulututkinnonErikoistumisalanKuvaus',
+                )}
                 section="alemmanKorkeakoulututkinnonOsaamisalat"
               >
                 <KorkeakouluOsaamisalatSection languages={languages} />
@@ -105,7 +107,9 @@ const ToteutusForm = ({
 
             {isKorkeakoulu ? (
               <FormCollapse
-                header="Ylemmän korkeakoulututkinnon erikoistumisalan, opintosuunnan, pääaineen tms. tarkempi kuvaus"
+                header={t(
+                  'toteutuslomake.ylemmanKorkeakoulututkinnonErikoistumisalanKuvaus',
+                )}
                 section="ylemmanKorkeakoulututkinnonOsaamisalat"
               >
                 <KorkeakouluOsaamisalatSection languages={languages} />
@@ -114,7 +118,10 @@ const ToteutusForm = ({
 
             {koulutustyyppi ===
             KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS ? (
-              <FormCollapse header="Valitse osaamisalat" section="osaamisalat">
+              <FormCollapse
+                header={t('toteutuslomake.valitseOsaamisalat')}
+                section="osaamisalat"
+              >
                 <OsaamisalatSection
                   languages={languages}
                   koulutusKoodiUri={koulutusKoodiUri}
@@ -123,7 +130,7 @@ const ToteutusForm = ({
             ) : null}
 
             <FormCollapse
-              header="Toteutuksen järjestämistiedot"
+              header={t('toteutuslomake.toteutuksenJarjestamistiedot')}
               section="jarjestamistiedot"
             >
               <JarjestamisTiedotSection
@@ -133,25 +140,27 @@ const ToteutusForm = ({
             </FormCollapse>
 
             <FormCollapse
-              header="Koulutuksen näyttämiseen liittyvät tiedot"
+              header={t(
+                'toteutuslomake.koulutuksenNayttamiseenLiittyvatTiedot',
+              )}
               section="nayttamistiedot"
             >
               <NayttamisTiedotSection languages={languages} />
             </FormCollapse>
 
             <FormCollapse
-              header="Missä järjestetään?"
+              header={t('toteutuslomake.toteutuksenJarjestaja')}
               section="jarjestamispaikat"
             >
               <JarjestamisPaikatSection organisaatioOid={organisaatioOid} />
             </FormCollapse>
 
-            <FormCollapse header="Toteutuksen nimi" section="nimi">
+            <FormCollapse header={t('toteutuslomake.toteutuksenNimi')} section="nimi">
               <NimiSection languages={languages} />
             </FormCollapse>
 
             <FormCollapse
-              header="Koulutuksen yhteystiedot"
+              header={t('toteutuslomake.koulutuksenYhteystiedot')}
               section="yhteystiedot"
             >
               <YhteystiedotSection languages={languages} />
@@ -159,7 +168,7 @@ const ToteutusForm = ({
 
             {isFunction(onAttachHakukohde) ? (
               <FormCollapse
-                header="Toteutukseen liitetyt hakukohteet"
+                header={t('toteutuslomake.toteutukseenLiitetytHakukohteet')}
                 id="toteutukseen-liitetetyt-hakukohteet"
                 clearable={false}
                 actions={
@@ -176,7 +185,7 @@ const ToteutusForm = ({
                         {({ onToggle }) => (
                           <Flex justifyEnd full>
                             <Button onClick={onToggle} type="button">
-                              Liitä hakukohde
+                              {t('yleiset.liitaHakukohde')}
                             </Button>
                           </Flex>
                         )}

@@ -7,6 +7,7 @@ import Spacing from '../Spacing';
 import LanguageSelector from '../LanguageSelector';
 import Checkbox from '../Checkbox';
 import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
+import useTranslation from '../useTranslation';
 
 const renderCheckboxField = ({ input, label = null }) => (
   <Checkbox checked={input.value} onChange={input.onChange} children={label} />
@@ -18,13 +19,15 @@ const PerustiedotSection = ({ languages, koulutustyyppi }) => {
   const isAmmatillinen =
     koulutustyyppi === KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS;
 
+  const { t } = useTranslation();
+
   return (
     <LanguageSelector languages={languages} defaultValue="fi">
       {({ value: activeLanguage }) => (
         <>
           <Spacing marginBottom={2}>
             <Typography variant="h6" marginBottom={1}>
-              Anna hakukohteelle nimi
+              {t('yleiset.nimi')}
             </Typography>
             <Field
               name={`nimi.${activeLanguage}`}
@@ -35,7 +38,7 @@ const PerustiedotSection = ({ languages, koulutustyyppi }) => {
             <Field
               name="voiSuorittaaKaksoistutkinnon"
               component={renderCheckboxField}
-              label="Voi suorittaa kaksoistutkinnon"
+              label={t('hakukohdelomake.voiSuorittaaKaksoistutkinnon')}
             />
           ) : null}
         </>

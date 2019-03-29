@@ -16,6 +16,7 @@ import Button from '../Button';
 import { getOrganisaatioFromHierarkia } from './utils';
 import Icon from '../Icon';
 import ValintaperusteetSection from './ValintaperusteetSection';
+import useTranslation from '../useTranslation';
 
 const Container = styled.div`
   max-width: ${getThemeProp('contentMaxWidth')}
@@ -25,6 +26,7 @@ const Container = styled.div`
 
 const HomeContent = ({ organisaatiot, organisaatioOid, history }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const { t } = useTranslation();
 
   const onCloseDrawer = useCallback(() => setDrawerOpen(false), [
     setDrawerOpen,
@@ -73,7 +75,7 @@ const HomeContent = ({ organisaatiot, organisaatioOid, history }) => {
           </FlexItem>
         </Flex>
         <Typography variant="h3" marginBottom={3}>
-          Koulutukset ja haut
+          {t('etusivu.koulutuksetJaHaut')}
         </Typography>
         <Spacing marginBottom={3}>
           <KoulutuksetSection organisaatioOid={organisaatioOid} />

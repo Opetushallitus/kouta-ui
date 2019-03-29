@@ -7,6 +7,7 @@ import Button from '../Button';
 import Select from '../Select';
 import Typography from '../Typography';
 import DropdownIcon from '../DropdownIcon';
+import useTranslation from '../useTranslation';
 
 import {
   DropdownMenu,
@@ -22,7 +23,7 @@ const PohjaFieldValue = formValues('pohja')(({ pohja, children }) =>
   children({ pohja }),
 );
 
-const renderPohjaField = ({ input, onContinue }) => {
+const renderPohjaField = ({ input, onContinue, t }) => {
   const { onChange } = input;
 
   const overlay = (
@@ -33,10 +34,10 @@ const renderPohjaField = ({ input, onContinue }) => {
           onContinue();
         }}
       >
-        Luo uusi valintaperuste
+        {t('valintaperustelomake.luoUusiValintaperuste')}
       </DropdownMenuItem>
       <DropdownMenuItem onClick={() => onChange('copy_valintaperuste')}>
-        Kopio pohjaksi aiemmin luotu valintaperuste
+        {t('valintaperustelomake.kopioiPohjaksiValintaperuste')}
       </DropdownMenuItem>
     </DropdownMenu>
   );
@@ -45,7 +46,7 @@ const renderPohjaField = ({ input, onContinue }) => {
     <UncontrolledDropdown overlay={overlay}>
       {({ ref, onToggle, visible }) => (
         <DropdownButton innerRef={ref} onClick={onToggle} type="button">
-          Valitse pohja <DropdownIcon open={visible} />
+          {t('yleiset.valitsePohja')} <DropdownIcon open={visible} />
         </DropdownButton>
       )}
     </UncontrolledDropdown>
@@ -56,34 +57,41 @@ const renderSelectField = ({ input, options }) => (
   <Select {...input} options={options} />
 );
 
-const PohjaSection = ({ onContinue = () => {} }) => (
-  <Flex>
-    <FlexItem grow={0} paddingRight={2}>
-      <Field
-        name="pohja"
-        component={renderPohjaField}
-        onContinue={onContinue}
-      />
-    </FlexItem>
-    <FlexItem grow={1}>
-      <PohjaFieldValue>
-        {({ pohja }) =>
-          ['copy_valintaperuste', 'existing_valintaperuste'].includes(pohja) ? (
-            <>
-              <Typography variant="h6" marginBottom={1}>
-                Valitse valintaperuste
-              </Typography>
-              <Field
-                name="valintaperuste"
-                component={renderSelectField}
-                options={[]}
-              />
-            </>
-          ) : null
-        }
-      </PohjaFieldValue>
-    </FlexItem>
-  </Flex>
-);
+const PohjaSection = ({ onContinue = () => {} }) => {
+  const { t } = useTranslation();
+
+  return (
+    <Flex>
+      <FlexItem grow={0} paddingRight={2}>
+        <Field
+          name="pohja"
+          component={renderPohjaField}
+          onContinue={onContinue}
+          t={t}
+        />
+      </FlexItem>
+      <FlexItem grow={1}>
+        <PohjaFieldValue>
+          {({ pohja }) =>
+            ['copy_valintaperuste', 'existing_valintaperuste'].includes(
+              pohja,
+            ) ? (
+              <>
+                <Typography variant="h6" marginBottom={1}>
+                  {t('yleiset.valitseValintaperuste')}
+                </Typography>
+                <Field
+                  name="valintaperuste"
+                  component={renderSelectField}
+                  options={[]}
+                />
+              </>
+            ) : null
+          }
+        </PohjaFieldValue>
+      </FlexItem>
+    </Flex>
+  );
+};
 
 export default PohjaSection;

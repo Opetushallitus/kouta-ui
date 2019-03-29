@@ -20,6 +20,7 @@ import { getFirstLanguageValue } from '../../utils';
 import Anchor from '../Anchor';
 import ToteutusTilaDropdown from './ToteutusTilaDropdown';
 import ErrorAlert from '../ErrorAlert';
+import useTranslation from '../useTranslation';
 
 const getToteutukset = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
@@ -33,9 +34,9 @@ const getToteutukset = async ({ httpClient, apiUrls, ...filters }) => {
   return { result, pageCount: Math.ceil(totalCount / 10) };
 };
 
-const tableColumns = [
+const makeTableColumns = t => [
   {
-    title: 'Nimi',
+    title: t('yleiset.nimi'),
     key: 'nimi',
     sortable: true,
     render: ({ nimi, oid }) => (
@@ -45,15 +46,15 @@ const tableColumns = [
     ),
   },
   {
-    title: 'Tila',
+    title: t('yleiset.tila'),
     key: 'tila',
     sortable: true,
     render: ({ tila, oid }) => (
       <ToteutusTilaDropdown initialTila={tila} toteutusOid={oid} />
     ),
   },
-  makeModifiedColumn(),
-  makeMuokkaajaColumn(),
+  makeModifiedColumn(t),
+  makeMuokkaajaColumn(t),
   {
     title: 'Kiinnitetyt haut',
     key: 'haut',
@@ -62,6 +63,8 @@ const tableColumns = [
 ];
 
 const ToteutuksetSection = ({ organisaatioOid }) => {
+  const { t } = useTranslation();
+
   const {
     debouncedNimi,
     showArchived,
@@ -103,10 +106,12 @@ const ToteutuksetSection = ({ organisaatioOid }) => {
       : null;
   }, [toteutukset]);
 
+  const tableColumns = useMemo(() => makeTableColumns(t), [t]);
+
   return (
-    <ListCollapse icon="settings" header="Koulutuksen toteutukset" defaultOpen>
+    <ListCollapse icon="settings" header={t('etusivu.koulutuksenToteutukset')} defaultOpen>
       <Spacing marginBottom={2}>
-        <Filters {...filtersProps} nimiPlaceholder="Hae toteutuksia" />
+        <Filters {...filtersProps} nimiPlaceholder={t('etusivu.haeToteutuksia')} />
       </Spacing>
 
       {rows ? (

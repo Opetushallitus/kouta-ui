@@ -7,13 +7,9 @@ import FormEditInfo from '../FormEditInfo';
 
 const EditHakuHeader = ({ haku }) => (
   <FormHeader
-    status={
-      get(haku, 'tila') ? <FormStatus status={haku.tila} /> : null
-    }
+    status={get(haku, 'tila') ? <FormStatus status={haku.tila} /> : null}
     editInfo={
-      get(haku, 'modified') ? (
-        <FormEditInfo date={new Date(haku.modified)} />
-      ) : null
+      get(haku, 'modified') ? <FormEditInfo date={haku.modified} /> : null
     }
   >
     Haku

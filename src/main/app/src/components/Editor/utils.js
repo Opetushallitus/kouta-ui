@@ -90,6 +90,8 @@ export const createEditorStateWithContent = contentState =>
 export const createEmptyEditorState = () =>
   EditorState.createEmpty(linkDecorator);
 
+export const isEditorState = value => value instanceof EditorState;
+
 export const serialize = value => {
   if (!isObject(value) || !isFunction(value.getCurrentContent)) {
     return '';

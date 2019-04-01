@@ -20,6 +20,7 @@ import Badge from '../Badge';
 import useFilterState from './useFilterState';
 import ErrorAlert from '../ErrorAlert';
 import Anchor from '../Anchor';
+import useTranslation from '../useTranslation';
 
 import { getFirstLanguageValue } from '../../utils';
 
@@ -35,15 +36,19 @@ const getHaut = async ({ httpClient, apiUrls, ...filters }) => {
   return { result, pageCount: Math.ceil(totalCount / 10) };
 };
 
-const Actions = ({ organisaatioOid }) => (
-  <Button as={Link} to={`/organisaatio/${organisaatioOid}/haku`}>
-    Luo uusi haku
-  </Button>
-);
+const Actions = ({ organisaatioOid }) => {
+  const { t } = useTranslation();
 
-const tableColumns = [
+  return (
+    <Button as={Link} to={`/organisaatio/${organisaatioOid}/haku`}>
+      {t('etusivu.luoUusiHaku')}
+    </Button>
+  );
+};
+
+const makeTableColumns = t => [
   {
-    title: 'Nimi',
+    title: t('yleiset.nimi'),
     key: 'nimi',
     sortable: true,
     render: ({ nimi, oid }) => (
@@ -52,9 +57,9 @@ const tableColumns = [
       </Anchor>
     ),
   },
-  makeTilaColumn(),
-  makeModifiedColumn(),
-  makeMuokkaajaColumn(),
+  makeTilaColumn(t),
+  makeModifiedColumn(t),
+  makeMuokkaajaColumn(t),
   {
     title: 'Hakukohteet',
     key: 'hakukohteet',
@@ -65,6 +70,8 @@ const tableColumns = [
 ];
 
 const KoulutuksetSection = ({ organisaatioOid }) => {
+  const { t } = useTranslation();
+
   const {
     debouncedNimi,
     showArchived,
@@ -104,15 +111,17 @@ const KoulutuksetSection = ({ organisaatioOid }) => {
     return haut ? haut.map(haku => ({ ...haku, key: haku.oid })) : null;
   }, [haut]);
 
+  const tableColumns = useMemo(() => makeTableColumns(t), [t]);
+
   return (
     <ListCollapse
       icon="access_time"
-      header="Haut"
+      header={t('yleiset.haut')}
       actions={<Actions organisaatioOid={organisaatioOid} />}
       defaultOpen
     >
       <Spacing marginBottom={2}>
-        <Filters {...filtersProps} nimiPlaceholder="Hae hakuja" />
+        <Filters {...filtersProps} nimiPlaceholder={t('etusivu.haeHakuja')} />
       </Spacing>
 
       {rows ? (

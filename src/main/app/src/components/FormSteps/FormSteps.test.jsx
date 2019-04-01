@@ -1,6 +1,6 @@
 import React from 'react';
 
-import FormSteps from '../../components/FormSteps';
+import FormSteps from './index';
 import { mountWithTheme } from '../../testUtils';
 
 test('renders correctly', () => {

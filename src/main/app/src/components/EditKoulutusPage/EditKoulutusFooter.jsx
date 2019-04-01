@@ -6,6 +6,7 @@ import { isValid } from 'redux-form';
 import { submit } from '../../state/editKoulutusForm';
 import Button from '../Button';
 import { JULKAISUTILA } from '../../constants';
+import useTranslation from '../useTranslation';
 
 const koulutusFormIsValid = isValid('editKoulutusForm');
 
@@ -24,6 +25,7 @@ const PublishButton = styled(Button)`
 
 const EditKoulutusFooter = ({ koulutus, valid, onSave = () => {} }) => {
   const { tila } = koulutus;
+  const { t } = useTranslation();
 
   const onSaveAndPublish = useCallback(() => {
     onSave({ tila: JULKAISUTILA.JULKAISTU });
@@ -32,11 +34,11 @@ const EditKoulutusFooter = ({ koulutus, valid, onSave = () => {} }) => {
   return (
     <Wrapper>
       <Button variant="outlined" onClick={onSave}>
-        Tallenna
+        {t('yleiset.tallenna')}
       </Button>
       {tila !== JULKAISUTILA.JULKAISTU ? (
         <PublishButton disabled={!valid} onClick={onSaveAndPublish}>
-          Tallenna ja julkaise
+          {t('yleiset.tallennaJaJulkaise')}
         </PublishButton>
       ) : null}
     </Wrapper>

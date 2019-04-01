@@ -6,9 +6,8 @@ import Typography from '../Typography';
 import Select from '../Select';
 import ApiAsync from '../ApiAsync';
 import { getKoutaValintaperusteet } from '../../apiUtils';
-import { getFirstLanguageValue } from '../../utils';
-
-const nop = () => {};
+import { getFirstLanguageValue, noop } from '../../utils';
+import useTranslation from '../useTranslation';
 
 const getValintaperusteet = async ({
   httpClient,
@@ -33,18 +32,19 @@ const getValintaperusteetOptions = valintaperusteet =>
   }));
 
 const renderSelectField = ({ input, ...props }) => (
-  <Select {...input} {...props} onBlur={nop} />
+  <Select {...input} {...props} onBlur={noop} />
 );
 
 const KuvausSection = ({ haku, organisaatio }) => {
   const hakuOid = get(haku, 'oid');
   const organisaatioOid = get(organisaatio, 'oid');
   const watch = [hakuOid, organisaatioOid].join(',');
+  const { t } = useTranslation();
 
   return (
     <>
       <Typography variant="h6" marginBottom={1}>
-        Valitse kuvaus
+        {t('yleiset.valitseKuvaus')}
       </Typography>
       <ApiAsync
         promiseFn={getValintaperusteet}

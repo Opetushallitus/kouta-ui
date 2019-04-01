@@ -181,7 +181,7 @@ exports[`renders correctly 1`] = `
                 <div
                   className="c7"
                 >
-                  Koulutus
+                  yleiset.koulutus
                 </div>
               </styled.div>
             </div>
@@ -226,7 +226,7 @@ exports[`renders correctly 1`] = `
                 <div
                   className="c7"
                 >
-                  Toteutus
+                  yleiset.toteutus
                 </div>
               </styled.div>
             </div>
@@ -277,7 +277,7 @@ exports[`renders correctly 1`] = `
                 <div
                   className="c7"
                 >
-                  Haku
+                  yleiset.haku
                 </div>
               </styled.div>
             </div>
@@ -322,7 +322,7 @@ exports[`renders correctly 1`] = `
                 <div
                   className="c7"
                 >
-                  Hakukohde
+                  yleiset.hakukohde
                 </div>
               </styled.div>
             </div>
@@ -373,7 +373,7 @@ exports[`renders correctly 1`] = `
                 <div
                   className="c7"
                 >
-                  Valintaperusteet
+                  yleiset.valintaperusteet
                 </div>
               </styled.div>
             </div>

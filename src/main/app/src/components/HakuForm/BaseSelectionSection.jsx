@@ -4,7 +4,6 @@ import { Field } from 'redux-form';
 import { formValues } from 'redux-form';
 
 import Button from '../Button';
-import Icon from '../Icon';
 
 import {
   UncontrolledDropdown,
@@ -19,6 +18,8 @@ import { getKoutaHaut } from '../../apiUtils';
 import Flex, { FlexItem } from '../Flex';
 import Spacing from '../Spacing';
 import { getFirstLanguageValue } from '../../utils';
+import useTranslation from '../useTranslation';
+import DropdownIcon from '../DropdownIcon';
 
 const DropdownButton = styled(Button)`
   display: inline-flex;
@@ -28,7 +29,7 @@ const BaseAndSearchFieldValue = formValues({
   base: 'base',
 })(({ base, children }) => children({ base }));
 
-const renderBaseDropdownField = ({ input, onContinue, onCreateNew }) => {
+const renderBaseDropdownField = ({ input, onContinue, onCreateNew, t }) => {
   const { onChange } = input;
 
   return (
@@ -42,10 +43,10 @@ const renderBaseDropdownField = ({ input, onContinue, onCreateNew }) => {
               onContinue();
             }}
           >
-            Luo uusi haku
+            {t('hakulomake.luoUusiHaku')}
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => onChange('copy_haku')}>
-            Kopio pohjaksi aiemmin luotu haku
+            {t('hakulomake.kopioiPohjaksiHaku')}
           </DropdownMenuItem>
         </DropdownMenu>
       }
@@ -53,8 +54,7 @@ const renderBaseDropdownField = ({ input, onContinue, onCreateNew }) => {
       {({ ref, onToggle, visible }) => (
         <div ref={ref}>
           <DropdownButton onClick={onToggle} type="button">
-            Valitse pohja{' '}
-            <Icon type={visible ? 'arrow_drop_up' : 'arrow_drop_down'} />
+            {t('yleiset.valitsePohja')} <DropdownIcon open={visible} />
           </DropdownButton>
         </div>
       )}
@@ -65,7 +65,7 @@ const renderBaseDropdownField = ({ input, onContinue, onCreateNew }) => {
 const nop = () => {};
 
 const renderSelectField = ({ options = [], input }) => {
-  return <Select {...input} options={options} onBlur={nop} />
+  return <Select {...input} options={options} onBlur={nop} />;
 };
 
 const getHakuOptions = haut => {
@@ -76,6 +76,8 @@ const getHakuOptions = haut => {
 };
 
 const BaseSelectionSection = ({ organisaatioOid, onContinue, onCreateNew }) => {
+  const { t } = useTranslation();
+
   return (
     <ApiAsync
       promiseFn={getKoutaHaut}
@@ -90,6 +92,7 @@ const BaseSelectionSection = ({ organisaatioOid, onContinue, onCreateNew }) => {
               component={renderBaseDropdownField}
               onContinue={onContinue}
               onCreateNew={onCreateNew}
+              t={t}
             />
           </FlexItem>
           <FlexItem grow={1} paddingLeft={3}>
@@ -99,7 +102,7 @@ const BaseSelectionSection = ({ organisaatioOid, onContinue, onCreateNew }) => {
                   <>
                     <Spacing marginBottom={2}>
                       <Typography variant="h6" marginBottom={1}>
-                        Valitse haku
+                        {t('yleiset.valitseHaku')}
                       </Typography>
                       <Field
                         name="search"

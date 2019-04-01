@@ -19,6 +19,7 @@ import { getKoutaKoulutukset } from '../../apiUtils';
 import Flex, { FlexItem } from '../Flex';
 import Spacing from '../Spacing';
 import { getFirstLanguageValue } from '../../utils';
+import useTranslation from '../useTranslation';
 
 const DropdownButton = styled(Button)`
   display: inline-flex;
@@ -29,7 +30,7 @@ const BaseAndEducationFieldValue = formValues({
   education: 'education',
 })(({ base, education, children }) => children({ base, education }));
 
-const renderBaseDropdownField = ({ input, onContinue, onCreateNew }) => {
+const renderBaseDropdownField = ({ input, onContinue, onCreateNew, t }) => {
   const { onChange } = input;
 
   return (
@@ -43,10 +44,10 @@ const renderBaseDropdownField = ({ input, onContinue, onCreateNew }) => {
               onContinue();
             }}
           >
-            Luo uusi koulutus
+            {t('koulutuslomake.luoUusiKoulutus')}
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => onChange('copy_koulutus')}>
-            Kopio pohjaksi aiemmin luotu koulutus
+            {t('koulutuslomake.kopioiPohjaksiKoulutus')}
           </DropdownMenuItem>
         </DropdownMenu>
       }
@@ -54,7 +55,7 @@ const renderBaseDropdownField = ({ input, onContinue, onCreateNew }) => {
       {({ ref, onToggle, visible }) => (
         <div ref={ref}>
           <DropdownButton onClick={onToggle} type="button">
-            Valitse pohja <DropdownIcon open={visible} />
+            {t('yleiset.valitsePohja')} <DropdownIcon open={visible} />
           </DropdownButton>
         </div>
       )}
@@ -76,6 +77,8 @@ const getKoulutusOptions = koulutukset => {
 };
 
 const BaseSelectionSection = ({ onContinue, organisaatioOid, onCreateNew }) => {
+  const { t } = useTranslation();
+
   return (
     <ApiAsync
       promiseFn={getKoutaKoulutukset}
@@ -90,6 +93,7 @@ const BaseSelectionSection = ({ onContinue, organisaatioOid, onCreateNew }) => {
               component={renderBaseDropdownField}
               onContinue={onContinue}
               onCreateNew={onCreateNew}
+              t={t}
             />
           </FlexItem>
           <FlexItem grow={1} paddingLeft={3}>
@@ -99,7 +103,7 @@ const BaseSelectionSection = ({ onContinue, organisaatioOid, onCreateNew }) => {
                   <>
                     <Spacing marginBottom={2}>
                       <Typography variant="h6" marginBottom={1}>
-                        Valitse koulutus
+                        {t('yleiset.valitseKoulutus')}
                       </Typography>
                       <Field
                         name="education"

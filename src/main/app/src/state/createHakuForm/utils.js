@@ -41,7 +41,11 @@ const getKoutaDateStringByDateTime = ({ date = '', time = '' }) => {
 
 export const getHakuByValues = values => {
   const alkamiskausiKoodiUri = get(values, 'aikataulut.kausi') || null;
-  const alkamisvuosi = parseInt(get(values, 'aikataulut.vuosi'));
+
+  const alkamisvuosi = isNumeric(get(values, 'aikataulut.vuosi.value'))
+    ? parseInt(values.aikataulut.vuosi.value)
+    : null;
+
   const kielivalinta = get(values, 'kieliversiot.languages') || [];
 
   const hakutapaKoodiUri = get(values, 'hakutapa.tapa') || null;
@@ -179,7 +183,7 @@ export const getValuesByHaku = haku => {
     },
     aikataulut: {
       kausi: alkamiskausiKoodiUri,
-      vuosi: alkamisvuosi ? alkamisvuosi.toString() : '',
+      vuosi: { value: alkamisvuosi ? alkamisvuosi.toString() : '' },
       hakuaika: (hakuajat || []).map(({ alkaa, paattyy }) => {
         const { date: fromDate, time: fromTime } = getDateTimeValues(alkaa);
         const { date: toDate, time: toTime } = getDateTimeValues(paattyy);

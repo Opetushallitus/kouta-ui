@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Tabs, { Tab } from '../../components/Tabs';
+import Tabs, { Tab } from './index';
 import { mountWithTheme } from '../../testUtils';
 
 test('renders correctly', () => {

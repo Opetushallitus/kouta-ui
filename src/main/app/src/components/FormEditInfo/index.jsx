@@ -6,6 +6,7 @@ import { getThemeProp } from '../../theme';
 import { formatKoutaDateString } from '../../utils';
 import Spacing from '../Spacing';
 import Anchor from '../Anchor';
+import useTranslation from '../useTranslation';
 
 const InfoIcon = styled(Icon).attrs({ type: 'info' })`
   color: ${getThemeProp('palette.primary.main')};
@@ -28,13 +29,15 @@ const Container = styled.div`
 `;
 
 const FormEditInfo = ({ editor, date, historyUrl, ...props }) => {
+  const { t } = useTranslation();
+
   return (
     <Container {...props}>
       <IconContainer>
         <InfoIcon />
       </IconContainer>
       <InfoContainer>
-        <Spacing marginBottom={0.25}>Muokattu viimeksi:</Spacing>
+        <Spacing marginBottom={0.25}>{t('yleiset.muokattuViimeksi')}:</Spacing>
         <Spacing marginBottom={0.25}>
           {date ? formatKoutaDateString(date, 'DD.MM.YYYY HH:mm') : null}{' '}
           {editor ? editor : null}

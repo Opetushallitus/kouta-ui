@@ -9,6 +9,7 @@ import { isFunction } from '../../utils';
 import Spacing from '../Spacing';
 import Typography from '../Typography';
 import { getThemeProp, spacing } from '../../theme';
+import useTranslation from '../useTranslation';
 
 const ErrorIcon = styled(Icon).attrs({ type: 'error_outline' })`
   color: ${({ theme }) => theme.palette.danger.main};
@@ -37,8 +38,10 @@ export const ErrorAlert = ({
   reloadText: reloadTextProp,
   center = false,
 }) => {
-  const reloadText = reloadTextProp || 'Yritä uudelleen';
-  const text = children || 'Jokin meni vikaan';
+  const { t } = useTranslation();
+
+  const reloadText = reloadTextProp || t('yleiset.yritaUudelleen');
+  const text = children || t('yleiset.virheIlmoitus');
 
   const content = (
     <Container>

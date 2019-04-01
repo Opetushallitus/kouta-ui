@@ -6,6 +6,7 @@ import Collapse, { UncontrolledCollapse } from '../Collapse';
 import Button from '../Button';
 import ClearFormSection from './ClearFormSection';
 import { isFunction, isString } from '../../utils';
+import useTranslation from '../useTranslation';
 
 const CollapseFooterContainer = styled.div`
   display: flex;
@@ -41,6 +42,8 @@ const FormCollapse = ({
   id,
   ...props
 }) => {
+  const { t } = useTranslation();
+
   const CollapseComponent = controlled ? Collapse : UncontrolledCollapse;
 
   const collapseProps = controlled
@@ -55,7 +58,7 @@ const FormCollapse = ({
     actionsProp
   ) : isFunction(onContinue) ? (
     <Button type="button" onClick={onContinue}>
-      Jatka
+      {t('yleiset.jatka')}
     </Button>
   ) : null;
 
@@ -73,7 +76,7 @@ const FormCollapse = ({
               <ClearFormSection name={section}>
                 {({ onClear }) => (
                   <Button type="button" variant="outlined" onClick={onClear}>
-                    Tyhjennä tiedot
+                    {t('yleiset.tyhjennaTiedot')}
                   </Button>
                 )}
               </ClearFormSection>

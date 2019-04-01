@@ -16,7 +16,7 @@ const Form = reduxForm({
 
 storiesOf('HakukohdeForm', module)
   .addDecorator(makeLocalisationDecorator())
-  .addDecorator(makeStoreDecorator())
+  .addDecorator(makeStoreDecorator({ logging: true }))
   .addDecorator(makeApiDecorator())
   .add('Basic', () => (
     <Form

@@ -15,6 +15,7 @@ import Icon from '../Icon';
 import Spacing from '../Spacing';
 import Flex, { FlexItem } from '../Flex';
 import DropdownIcon from '../DropdownIcon';
+import useTranslation from '../useTranslation';
 
 import {
   UncontrolledDropdown,
@@ -34,6 +35,8 @@ const InputContainer = styled(FlexItem)`
 `;
 
 const AddContentDropdown = ({ onAdd }) => {
+  const { t } = useTranslation();
+
   const onAddText = useCallback(() => {
     onAdd({ tyyppi: 'teksti', data: null });
   }, [onAdd]);
@@ -44,8 +47,12 @@ const AddContentDropdown = ({ onAdd }) => {
 
   const overlay = (
     <DropdownMenu>
-      <DropdownMenuItem onClick={onAddText}>Lisää tekstiä</DropdownMenuItem>
-      <DropdownMenuItem onClick={onAddTable}>Lisää taulukko</DropdownMenuItem>
+      <DropdownMenuItem onClick={onAddText}>
+        {t('valintaperustelomake.lisaaTekstia')}
+      </DropdownMenuItem>
+      <DropdownMenuItem onClick={onAddTable}>
+        {t('valintaperustelomake.lisaaTaulukko')}
+      </DropdownMenuItem>
     </DropdownMenu>
   );
 
@@ -59,7 +66,8 @@ const AddContentDropdown = ({ onAdd }) => {
             color="primary"
             variant="outlined"
           >
-            Lisää sisältöä <DropdownIcon open={visible} />
+            {t('valintaperustelomake.lisaaSisaltoa')}{' '}
+            <DropdownIcon open={visible} />
           </Button>
         </div>
       )}
@@ -93,7 +101,7 @@ const ContentField = ({ tyyppi, name, language }) => {
 
 const FieldSortableElement = SortableElement(props => <div {...props} />);
 
-const FieldsSortableContainer = SortableContainer(({ fields, language }) => {
+const FieldsSortableContainer = SortableContainer(({ fields, language, t }) => {
   return (
     <div>
       {fields.map((content, index) => {
@@ -117,7 +125,7 @@ const FieldsSortableContainer = SortableContainer(({ fields, language }) => {
                     type="button"
                     fullWidth
                   >
-                    <Icon type="drag_indicator" /> Siirrä
+                    <Icon type="drag_indicator" /> {t('yleiset.siirra')}
                   </MoveButton>
                 </Spacing>
                 <Button
@@ -127,7 +135,7 @@ const FieldsSortableContainer = SortableContainer(({ fields, language }) => {
                   fullWidth
                   onClick={() => fields.remove(index)}
                 >
-                  Poista
+                  {t('yleiset.poista')}
                 </Button>
               </FlexItem>
             </Flex>
@@ -158,8 +166,12 @@ const renderFields = props => {
   );
 };
 
-export const ValintatapaContentFields = ({ language = 'fi', ...props }) => (
-  <FieldArray {...props} component={renderFields} language={language} />
-);
+export const ValintatapaContentFields = ({ language = 'fi', ...props }) => {
+  const { t } = useTranslation();
+
+  return (
+    <FieldArray {...props} component={renderFields} language={language} t={t} />
+  );
+};
 
 export default ValintatapaContentFields;

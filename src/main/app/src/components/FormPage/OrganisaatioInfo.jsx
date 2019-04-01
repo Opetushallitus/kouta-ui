@@ -5,6 +5,7 @@ import { getThemeProp } from '../../theme';
 import ApiAsync from '../ApiAsync';
 import { getOrganisaatioByOid } from '../../apiUtils';
 import { isObject, getFirstLanguageValue } from '../../utils';
+import useTranslation from '../useTranslation';
 
 const getOrganisaatio = args => getOrganisaatioByOid(args);
 
@@ -21,18 +22,22 @@ const getOrganisaatioName = organisaatio => {
     : null;
 };
 
-const OrganisaatioInfo = ({ organisaatioOid, ...props }) => (
-  <OrganisaatioInfoContainer {...props}>
-    <ApiAsync
-      promiseFn={getOrganisaatio}
-      oid={organisaatioOid}
-      watch={organisaatioOid}
-    >
-      {({ data }) => (
-        <div>Organisaatio: {data ? getOrganisaatioName(data) : null}</div>
-      )}
-    </ApiAsync>
-  </OrganisaatioInfoContainer>
-);
+const OrganisaatioInfo = ({ organisaatioOid, ...props }) => {
+  const { t } = useTranslation();
+
+  return (
+    <OrganisaatioInfoContainer {...props}>
+      <ApiAsync
+        promiseFn={getOrganisaatio}
+        oid={organisaatioOid}
+        watch={organisaatioOid}
+      >
+        {({ data }) => (
+          <div>{t('yleiset.organisaatio')}: {data ? getOrganisaatioName(data) : null}</div>
+        )}
+      </ApiAsync>
+    </OrganisaatioInfoContainer>
+  );
+}
 
 export default OrganisaatioInfo;

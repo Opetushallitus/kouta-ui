@@ -19,7 +19,6 @@ storiesOf('HakuForm', module)
   .addDecorator(makeApiDecorator())
   .add('Basic', () => (
     <Form
-      steps={true}
       organisaatioOid="1.2.246.562.10.594252633210"
     />
   ));

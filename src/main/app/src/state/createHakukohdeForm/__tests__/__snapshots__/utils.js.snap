@@ -1,0 +1,202 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getHakukohdeByValues returns correct hakukohde given form values 1`] = `
+Object {
+  "alkamiskausiKoodiUri": "kausi_1#1",
+  "alkamisvuosi": 2020,
+  "aloituspaikat": 25,
+  "ensikertalaisenAloituspaikat": 29,
+  "hakuajat": Array [
+    Object {
+      "alkaa": "2018-02-01T10:30",
+      "paattyy": "2019-03-02T11:45",
+    },
+    Object {
+      "alkaa": "2018-06-01T12:30",
+      "paattyy": "2019-09-02T16:15",
+    },
+  ],
+  "kaytetaanHaunAikataulua": false,
+  "kielivalinta": Array [
+    "fi",
+    "sv",
+  ],
+  "liitteet": Array [
+    Object {
+      "kuvaus": Object {},
+      "nimi": Object {
+        "fi": "Fi nimi",
+        "sv": "Sv nimi",
+      },
+      "toimitusaika": "2016-10-25T09:45",
+      "toimitusosoite": Object {
+        "osoite": Object {
+          "osoite": Object {
+            "fi": "Fi osoite",
+            "sv": "Sv osoite",
+          },
+          "postinumero": "00610",
+          "postitoimipaikka": Object {
+            "fi": "Fi postitoimipaikka",
+            "sv": "Sv postitoimipaikka",
+          },
+        },
+        "sahkoposti": "sahkoposti2@kouta.fi",
+      },
+      "tyyppi": "liitetyyppi_1#1",
+    },
+  ],
+  "liitteetOnkoSamaToimitusaika": false,
+  "liitteetOnkoSamaToimitusosoite": false,
+  "liitteidenToimitusaika": "2011-12-20T10:30",
+  "liitteidenToimitusosoite": Object {
+    "osoite": Object {
+      "osoite": Object {
+        "fi": "Fi osoite",
+        "sv": "Sv osoite",
+      },
+      "postinumero": "00940",
+      "postitoimipaikka": Object {
+        "fi": "Fi postitoimipaikka",
+        "sv": "Sv postitoimipaikka",
+      },
+    },
+    "sahkoposti": "sahkoposti@kouta.fi",
+  },
+  "nimi": Object {
+    "fi": "Fi nimi",
+    "sv": "Sv nimi",
+  },
+  "pohjakoulutusvaatimusKoodiUrit": Array [
+    "vaatimus_1#1",
+    "vaatimus_2#1",
+  ],
+  "toinenAsteOnkoKaksoistutkinto": true,
+  "valintakokeet": Array [
+    Object {
+      "tilaisuudet": Array [
+        Object {
+          "aika": Object {
+            "alkaa": "2011-11-11T10:30",
+            "paattyy": "2011-12-20T09:45",
+          },
+          "lisatietoja": Object {
+            "fi": "Fi lisatieto",
+          },
+          "osoite": Object {
+            "osoite": Object {
+              "fi": "Fi osoite",
+            },
+            "postinumero": "00940",
+            "postitoimipaikka": Object {
+              "fi": "Fi postitoimipaikka",
+            },
+          },
+        },
+      ],
+      "tyyppi": "koetyyppi_1#1",
+    },
+    Object {
+      "tilaisuudet": Array [],
+      "tyyppi": "koetyyppi_2#1",
+    },
+  ],
+  "valintaperuste": "peruste_1#1",
+}
+`;
+
+exports[`getValuesByHakukohde returns correct form values given hakukohde 1`] = `
+Object {
+  "alkamiskausi": Object {
+    "kausi": "kausi_1#1",
+    "vuosi": Object {
+      "value": "2015",
+    },
+  },
+  "aloituspaikat": Object {
+    "aloituspaikkamaara": "25",
+    "ensikertalaismaara": "39",
+  },
+  "hakuajat": Object {
+    "eriHakuaika": true,
+    "hakuajat": Array [
+      Object {
+        "fromDate": "29.03.2019",
+        "fromTime": "12:28",
+        "toDate": "29.09.2019",
+        "toTime": "12:30",
+      },
+    ],
+  },
+  "kieliversiot": Object {
+    "languages": Array [
+      "fi",
+      "sv",
+    ],
+  },
+  "liitteet": Object {
+    "deliverDate": "20.12.2011",
+    "deliverTime": "10:30",
+    "liitteet": Array [
+      Object {
+        "deliverDate": "25.10.2016",
+        "deliverTime": "09:45",
+        "kuvaus": Object {},
+        "nimi": Object {
+          "fi": "Fi nimi",
+          "sv": "Sv nimi",
+        },
+        "toimitusosoite": Object {
+          "fi": "Fi osoite",
+          "sv": "Sv osoite",
+        },
+        "toimituspostinumero": "00610",
+        "toimituspostitoimipaikka": Object {
+          "fi": "Fi postitoimipaikka",
+          "sv": "Sv postitoimipaikka",
+        },
+        "toimitussahkoposti": "sahkoposti2@kouta.fi",
+        "tyyppi": "liitetyyppi_1#1",
+      },
+    ],
+    "toimitusosoite": Object {
+      "fi": "Fi osoite",
+      "sv": "Sv osoite",
+    },
+    "toimituspostinumero": "00940",
+    "toimituspostitoimipaikka": Object {
+      "fi": "Fi postitoimipaikka",
+      "sv": "Sv postitoimipaikka",
+    },
+    "toimitussahkoposti": "sahkoposti@kouta.fi",
+    "yhteinenToimitusaika": false,
+    "yhteinenToimituspaikka": false,
+  },
+  "perustiedot": Object {
+    "nimi": Object {
+      "fi": "Fi nimi",
+      "sv": "Sv nimi",
+    },
+    "voiSuorittaaKaksoistutkinnon": true,
+  },
+  "pohjakoulutus": Object {
+    "koulutusvaatimukset": Array [
+      Object {
+        "value": "vaatimus_1#1",
+      },
+      Object {
+        "value": "vaatimus_2#1",
+      },
+    ],
+  },
+  "valintakoe": Object {
+    "kokeet": Object {},
+    "types": Array [],
+  },
+  "valintaperusteenKuvaus": Object {
+    "valintaperuste": Object {
+      "value": "peruste_1#1",
+    },
+  },
+}
+`;

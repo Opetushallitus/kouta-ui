@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Spacing from '../../components/Spacing';
+import Spacing from './index';
 import { mountWithTheme } from '../../testUtils';
 
 test('renders correctly', () => {

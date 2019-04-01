@@ -10,6 +10,7 @@ import LanguageSelector from '../LanguageSelector';
 import { AsyncCreatableSelect } from '../Select';
 import Spacing from '../Spacing';
 import { getAmmattinimikkeetByTerm, getAvainsanatByTerm } from '../../apiUtils';
+import useTranslation from '../useTranslation';
 
 const MAX_ITEMS = 5;
 
@@ -63,6 +64,8 @@ const renderCreatableField = ({ input, ...props }) => {
 };
 
 const NayttamisTiedotSection = ({ languages, httpClient, apiUrls }) => {
+  const { t } = useTranslation();
+
   return (
     <LanguageSelector languages={languages} defaultValue="fi">
       {({ value: activeLanguage }) => {
@@ -70,7 +73,7 @@ const NayttamisTiedotSection = ({ languages, httpClient, apiUrls }) => {
           <>
             <Spacing marginBottom={2}>
               <Typography variant="h6" marginBottom={1}>
-                Ammattinimike
+                {t('toteutuslomake.ammattinimikkeet')}
               </Typography>
               <Field
                 name={`ammattinimikkeet.${activeLanguage}`}
@@ -84,12 +87,12 @@ const NayttamisTiedotSection = ({ languages, httpClient, apiUrls }) => {
                 )}
               />
               <Typography variant="secondary" as="div" marginTop={1}>
-                Voit lisätä maksimissaan viisi ammattinimikettä
+                {t('yleiset.voitValitaEnintaan', { lukumaara: MAX_ITEMS })}
               </Typography>
             </Spacing>
             <Spacing>
               <Typography variant="h6" marginBottom={1}>
-                Avainsanat
+                {t('toteutuslomake.avainsanat')}
               </Typography>
               <Field
                 name={`avainsanat.${activeLanguage}`}
@@ -103,7 +106,7 @@ const NayttamisTiedotSection = ({ languages, httpClient, apiUrls }) => {
                 )}
               />
               <Typography variant="secondary" as="div" marginTop={1}>
-                Voit lisätä maksimissaan viisi avainsanaa
+              {t('yleiset.voitValitaEnintaan', { lukumaara: MAX_ITEMS })}
               </Typography>
             </Spacing>
           </>

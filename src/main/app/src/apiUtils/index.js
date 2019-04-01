@@ -7,6 +7,7 @@ import groupBy from 'lodash/groupBy';
 import toPairs from 'lodash/toPairs';
 import maxBy from 'lodash/maxBy';
 import upperFirst from 'lodash/upperFirst';
+import set from 'lodash/set';
 
 const getKoodiUriParts = uri => {
   const [koodiUri, versio = null] = uri.split('#');
@@ -327,23 +328,26 @@ export const getKoodisto = ({
 };
 
 export const getLocalisation = async ({
-  category = '',
+  category = 'kouta',
+  locale = '',
   httpClient,
   apiUrls,
 }) => {
   const { data } = await httpClient.get(
     apiUrls.url('lokalisaatio-service.localisation', category),
+    {
+      params: { locale },
+    },
   );
 
   let resource = {};
 
   for (const translation of data) {
-    const locale = translation.locale.toLowerCase();
+    const lng = translation.locale.toLowerCase();
     const { key, value } = translation;
 
-    if (locale && key && value) {
-      resource[locale] = resource[locale] || { translation: {} };
-      resource[locale].translation[key] = value;
+    if (lng === locale && key && value) {
+      set(resource, key, value);
     }
   }
 

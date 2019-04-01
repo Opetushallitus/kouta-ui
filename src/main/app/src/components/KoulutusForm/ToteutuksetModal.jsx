@@ -17,12 +17,13 @@ import { getFirstLanguageValue } from '../../utils';
 import Spacing from '../Spacing';
 import Typography from '../Typography';
 import useApiAsync from '../useApiAsync';
+import useTranslation from '../useTranslation';
 
 const DropdownButton = styled(Button)`
   display: inline-flex;
 `;
 
-const renderBaseDropdownField = ({ input, onSave }) => {
+const renderBaseDropdownField = ({ input, onSave, t }) => {
   const { onChange } = input;
 
   return (
@@ -35,10 +36,10 @@ const renderBaseDropdownField = ({ input, onSave }) => {
               onSave();
             }}
           >
-            Luo uusi toteutus
+            {t('yleiset.luoUusiToteutus')}
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => onChange('copy_toteutus')}>
-            Kopio pohjaksi aiemmin luotu toteutus
+            {t('yleiset.kopioiPohjaksiToteutus')}
           </DropdownMenuItem>
         </DropdownMenu>
       }
@@ -46,7 +47,7 @@ const renderBaseDropdownField = ({ input, onSave }) => {
       {({ ref, onToggle, visible }) => (
         <div ref={ref}>
           <DropdownButton onClick={onToggle} type="button">
-            Valitse pohja{' '}
+            {t('yleiset.valitsePohja')}{' '}
             <Icon type={visible ? 'arrow_drop_up' : 'arrow_drop_down'} />
           </DropdownButton>
         </div>
@@ -84,6 +85,8 @@ const ToteutuksetModal = ({
   onSave = () => {},
   ...props
 }) => {
+  const { t } = useTranslation();
+
   const { data: toteutukset } = useApiAsync({
     promiseFn: getKoutaToteutukset,
     organisaatioOid,
@@ -97,14 +100,14 @@ const ToteutuksetModal = ({
   return (
     <Modal
       minHeight="200px"
-      header="Toteutuksen liittäminen koulutukseen"
+      header={t('koulutuslomake.toteutuksenLiittaminenKoulutukseen')}
       footer={
         <Flex justifyBetween>
           <Button onClick={onClose} variant="outlined" type="button">
-            Sulje
+            {t('yleiset.sulje')}
           </Button>
           <Button onClick={onSave} type="button">
-            Liitä toteutus
+            {t('koulutuslomake.liitaToteutus')}
           </Button>
         </Flex>
       }
@@ -117,6 +120,7 @@ const ToteutuksetModal = ({
             name={`${fieldName}.pohja`}
             component={renderBaseDropdownField}
             onSave={onSave}
+            t={t}
           />
         </FlexItem>
         <FlexItem grow={1} paddingLeft={3}>
@@ -124,7 +128,7 @@ const ToteutuksetModal = ({
             <>
               <Spacing marginBottom={2}>
                 <Typography variant="h6" marginBottom={1}>
-                  Valitse toteutus
+                  {t('yleiset.valitseToteutus')}
                 </Typography>
                 <Field
                   name={`${fieldName}.toteutus`}

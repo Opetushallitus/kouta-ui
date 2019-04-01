@@ -4,6 +4,7 @@ import { action } from '@storybook/addon-actions';
 
 import Button from '../Button';
 import TableInput from './index';
+import { makeLocalisationDecorator } from '../../storybookUtils';
 
 const columns = [{ text: { fi: 'Hello' } }, { text: { fi: 'World' } }];
 const changeAction = action('change');
@@ -59,4 +60,6 @@ class StatefulTableInput extends Component {
   }
 }
 
-storiesOf('TableInput', module).add('Basic', () => <StatefulTableInput />);
+storiesOf('TableInput', module)
+  .addDecorator(makeLocalisationDecorator())
+  .add('Basic', () => <StatefulTableInput />);

@@ -1,67 +1,30 @@
 import React from 'react';
 import { Field } from 'redux-form';
-import mapValues from 'lodash/mapValues';
 
 import Typography from '../Typography';
-import Radio, { RadioGroup } from '../Radio';
-import ApiAsync from '../ApiAsync';
-import { getKoodisto } from '../../apiUtils';
-
-import {
-  getFirstLanguageValue,
-  isArray,
-  arrayToTranslationObject,
-} from '../../utils';
-
-const getHakutavat = async ({
-  httpClient,
-  apiUrls,
-}) => {
-  const hakutavat = await getKoodisto({
-    koodistoUri: 'hakutapa',
-    httpClient,
-    apiUrls,
-  });
-
-  return isArray(hakutavat)
-    ? hakutavat.map(({ metadata, koodiUri, versio }) => ({
-        koodiUri: `${koodiUri}#${versio}`,
-        nimi: mapValues(arrayToTranslationObject(metadata), ({ nimi }) => nimi),
-      }))
-    : [];
-};
-
-const getHakutapaOptions = hakutavat =>
-  hakutavat.map(({ nimi, koodiUri }) => ({
-    value: koodiUri,
-    label: getFirstLanguageValue(nimi),
-  }));
+import { RadioGroup } from '../Radio';
+import useTranslation from '../useTranslation';
+import useKoodistoOptions from '../useKoodistoOptions';
 
 const renderRadioGroupField = ({ input, options }) => (
-  <RadioGroup {...input}>
-    {options.map(({ value, label }) => (
-      <Radio value={value} key={value}>{label}</Radio>
-    ))}
-  </RadioGroup>
+  <RadioGroup {...input} options={options} />
 );
 
 const HakutavanRajausSection = () => {
+  const { t } = useTranslation();
+  const { options } = useKoodistoOptions({ koodisto: 'hakutapa' });
+
   return (
     <>
       <Typography variant="h6" marginBottom={1}>
-        Valitse hakutapa
+        {t('valintaperustelomake.valitseHakutapa')}
       </Typography>
-      <ApiAsync
-        promiseFn={getHakutavat}
-      >
-        {({ data }) => (
-          <Field
-            name="hakutapa"
-            component={renderRadioGroupField}
-            options={getHakutapaOptions(data || [])}
-          />
-        )}
-      </ApiAsync>
+
+      <Field
+        name="hakutapa"
+        component={renderRadioGroupField}
+        options={options}
+      />
     </>
   );
 };

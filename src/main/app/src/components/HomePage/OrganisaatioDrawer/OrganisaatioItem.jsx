@@ -42,6 +42,7 @@ export const OrganisaatioItem = ({
   collapse = false,
   onToggleOpen: onToggleOpenProp = () => {},
   children = [],
+  language = 'fi',
 }) => {
   const onSelect = useCallback(() => {
     onSelectProp(oid);
@@ -60,7 +61,7 @@ export const OrganisaatioItem = ({
       <Flex alignCenter>
         <FlexItem grow={1} paddingRight={2}>
           <Radio checked={selected} onChange={onSelect}>
-            {getFirstLanguageValue(nimi)}
+            {getFirstLanguageValue(nimi, language)}
           </Radio>
         </FlexItem>
         {collapse && isNonEmptyArray(children) ? (

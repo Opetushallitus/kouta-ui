@@ -3,9 +3,8 @@ import { formValues } from 'redux-form';
 
 import BaseSelectionSection from './BaseSelectionSection';
 import KieliversiotFormSection from '../KieliversiotFormSection';
-import { LANGUAGE_TABS } from '../../constants';
 import NameSection from './NameSection';
-import TargetGroupSection from './TargetGroupSection'
+import TargetGroupSection from './TargetGroupSection';
 import SearchTypeSection from './SearchTypeSection';
 import ScheduleSection from './ScheduleSection';
 import FormSelectSection from './FormSelectSection';
@@ -18,16 +17,13 @@ import { isFunction } from '../../utils';
 import { ModalController } from '../Modal';
 import Flex from '../Flex';
 import Button from '../Button';
+import useTranslation from '../useTranslation';
 
 const ActiveLanguages = formValues({
   languages: 'kieliversiot.languages',
 })(({ languages, ...props }) => {
-  const activeLanguages = languages || [];
-
   return props.children({
-    languages: LANGUAGE_TABS.filter(({ value }) =>
-      activeLanguages.includes(value),
-    ),
+    languages: languages || [],
   });
 });
 
@@ -48,16 +44,19 @@ const HakuForm = ({
   steps = false,
   scrollTarget,
   haku: hakuProp = null,
-}) => (
-  <form onSubmit={handleSubmit}>
-    <ActiveLanguages>
-      {({ languages }) => (
-        <FormCollapseGroup enabled={steps} scrollTarget={scrollTarget}>
-          {canCopy ? (
-            <FormCollapse
-              header="Pohjan valinta"
-              section="pohja"
-              onContinue={onMaybeCopy}
+}) => {
+  const { t } = useTranslation();
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <ActiveLanguages>
+        {({ languages }) => (
+          <FormCollapseGroup enabled={steps} scrollTarget={scrollTarget}>
+            {canCopy ? (
+              <FormCollapse
+                header={t('yleiset.pohjanValinta')}
+                section="pohja"
+                onContinue={onMaybeCopy}
               >
                 {({ onContinue }) => (
                   <BaseSelectionSection
@@ -70,89 +69,86 @@ const HakuForm = ({
               </FormCollapse>
             ) : null}
 
-          <FormCollapse
-            header="Kieliversiot"
-            section="kieliversiot"
-          >
-            <KieliversiotFormSection />
-          </FormCollapse>
-
-          <FormCollapse
-            header="Haun nimi"
-            section="nimi"
-          >
-            <NameSection languages={languages} />
-          </FormCollapse>
-
-          <FormCollapse
-            header="Haun kohdejoukko"
-            section="kohdejoukko"
-          >
-            <TargetGroupSection />
-          </FormCollapse>
-
-          <FormCollapse
-            header="Hakutapa"
-            section="hakutapa"
-          >
-            <SearchTypeSection />
-          </FormCollapse>
-
-          <FormCollapse
-            header="Haun aikataulut"
-            section="aikataulut"
-          >
-            <ScheduleSection />
-          </FormCollapse>
-
-          <FormCollapse
-            header="Hakulomakkeen valinta"
-            section="hakulomake"
-          >
-            <FormSelectSection />
-          </FormCollapse>
-
-          <FormCollapse
-            header="Haun yhteystiedot"
-            section="yhteystiedot"
-          >
-            <ContactInfoSection languages={languages} />
-
-          </FormCollapse>
-          {isFunction(onAttachHakukohde) ? (
             <FormCollapse
-              header="Liitetyt hakukohteet"
-              id="liitetyt-hakukohteet"
-              clearable={false}
-              actions={
-                <HakukohteetPohjaFieldValue>
-                  {({ pohja }) => (
-                    <ModalController
-                      modal={hakukohteetModal}
-                      pohjaValue={pohja}
-                      fieldName="toteutukset"
-                      organisaatioOid={organisaatioOid}
-                      onSave={onAttachHakukohde}
-                    >
-                      {({ onToggle }) => (
-                        <Flex justifyEnd full>
-                          <Button onClick={onToggle} type="button">
-                            Liitä hakukohde
-                          </Button>
-                        </Flex>
-                      )}
-                    </ModalController>
-                  )}
-                </HakukohteetPohjaFieldValue>
-              }
+              header={t('yleiset.kieliversiot')}
+              section="kieliversiot"
             >
-              <HakukohteetSection haku={hakuProp} organisaatioOid={organisaatioOid} />
+              <KieliversiotFormSection />
             </FormCollapse>
-          ) : null}
+
+            <FormCollapse header={t('hakulomake.haunNimi')} section="nimi">
+              <NameSection languages={languages} />
+            </FormCollapse>
+
+            <FormCollapse
+              header={t('hakulomake.haunKohdejoukko')}
+              section="kohdejoukko"
+            >
+              <TargetGroupSection />
+            </FormCollapse>
+
+            <FormCollapse header={t('hakulomake.hakutapa')} section="hakutapa">
+              <SearchTypeSection />
+            </FormCollapse>
+
+            <FormCollapse
+              header={t('hakulomake.haunAikataulu')}
+              section="aikataulut"
+            >
+              <ScheduleSection />
+            </FormCollapse>
+
+            <FormCollapse
+              header={t('yleiset.hakulomakkeenValinta')}
+              section="hakulomake"
+            >
+              <FormSelectSection />
+            </FormCollapse>
+
+            <FormCollapse
+              header={t('hakulomake.haunYhteystiedot')}
+              section="yhteystiedot"
+            >
+              <ContactInfoSection languages={languages} />
+            </FormCollapse>
+            {isFunction(onAttachHakukohde) ? (
+              <FormCollapse
+                header={t('hakulomake.liitetytHakukohteet')}
+                id="liitetyt-hakukohteet"
+                clearable={false}
+                actions={
+                  <HakukohteetPohjaFieldValue>
+                    {({ pohja }) => (
+                      <ModalController
+                        modal={hakukohteetModal}
+                        pohjaValue={pohja}
+                        fieldName="toteutukset"
+                        organisaatioOid={organisaatioOid}
+                        onSave={onAttachHakukohde}
+                      >
+                        {({ onToggle }) => (
+                          <Flex justifyEnd full>
+                            <Button onClick={onToggle} type="button">
+                              {t('yleiset.liitaHakukohde')}
+                            </Button>
+                          </Flex>
+                        )}
+                      </ModalController>
+                    )}
+                  </HakukohteetPohjaFieldValue>
+                }
+              >
+                <HakukohteetSection
+                  haku={hakuProp}
+                  organisaatioOid={organisaatioOid}
+                />
+              </FormCollapse>
+            ) : null}
           </FormCollapseGroup>
-      )}
-    </ActiveLanguages>
-  </form>
-);
+        )}
+      </ActiveLanguages>
+    </form>
+  );
+};
 
 export default HakuForm;

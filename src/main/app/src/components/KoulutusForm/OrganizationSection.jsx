@@ -3,16 +3,19 @@ import { Field } from 'redux-form';
 
 import Typography from '../Typography';
 import JarjestajatSelect from './JarjestajatSelect';
+import useTranslation from '../useTranslation';
 
 const renderOrganizationSelectionField = ({ input, organisaatioOid }) => (
   <JarjestajatSelect {...input} organisaatioOid={organisaatioOid} />
 );
 
 const OrganizationSection = ({ organisaatioOid, ...props }) => {
+  const { t } = useTranslation();
+
   return (
     <div {...props}>
       <Typography variant="h6" marginBottom={1}>
-        Valitse ne organisaatiot, jotka järjestävät koulutusta
+        {t('koulutuslomake.valitseJarjestajat')}
       </Typography>
       <Field
         name="organizations"

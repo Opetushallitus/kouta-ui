@@ -14,6 +14,8 @@ import { toggleFavourite } from '../../../state/organisaatioFavourites';
 import { getOrganisaatiotFromHierarkia } from '../utils';
 import OrganisaatioTreeList from './OrganisaatioTreeList';
 import OrganisaatioFavouritesList from './OrganisaatioFavouritesList';
+import useTranslation from '../../useTranslation';
+import useLanguage from '../../useLanguage';
 
 const CloseIcon = styled(Icon).attrs({ type: 'close' })`
   color: ${getThemeProp('palette.text.primary')};
@@ -82,6 +84,8 @@ export const OrganisaatioDrawer = ({
   onToggleFavourite = () => {},
   ...props
 }) => {
+  const { t } = useTranslation();
+  const language = useLanguage();
   const [openOrganisaatiot, setOpenOrganisaatiot] = useState([]);
 
   const items = useMemo(
@@ -121,7 +125,7 @@ export const OrganisaatioDrawer = ({
         <HeaderContainer>
           <Flex alignCenter>
             <FlexItem grow={1} paddingRight={2}>
-              <Typography variant="h5">Vaihda organisaatiota</Typography>
+              <Typography variant="h5">{t('etusivu.vaihdaOrganisaatiota')}</Typography>
             </FlexItem>
             <FlexItem grow={0}>
               <CloseIcon onClick={onClose} />
@@ -137,6 +141,7 @@ export const OrganisaatioDrawer = ({
                 selected={selectedOrganisaatio}
                 onSelect={oid => setSelectedOrganisaatio(oid)}
                 onToggleFavourite={onToggleFavourite}
+                language={language}
               />
             </FavouriteListContainer>
           </FlexItem>
@@ -149,12 +154,13 @@ export const OrganisaatioDrawer = ({
             onSelect={oid => setSelectedOrganisaatio(oid)}
             onToggleFavourite={onToggleFavourite}
             onToggleOpen={onToggleOpen}
+            language={language}
           />
         </TreeContainer>
         <FlexItem grow={0}>
           <FooterContainer>
             <Button onClick={onSubmit} disabled={!selectedOrganisaatio}>
-              Valitse
+              {t('yleiset.valitse')}
             </Button>
           </FooterContainer>
         </FlexItem>

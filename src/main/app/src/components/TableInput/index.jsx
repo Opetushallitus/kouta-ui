@@ -22,6 +22,8 @@ import {
   UncontrolledDropdown,
 } from '../Dropdown';
 
+import useTranslation from '../useTranslation';
+
 const ColumnInput = styled.textarea.attrs({ rows: 2 })`
   width: 100%;
   height: 100%;
@@ -110,24 +112,30 @@ const EditColumn = ({
   overflow,
   ...props
 }) => {
+  const { t } = useTranslation();
+
   const overlay = (
     <DropdownMenu>
       <DropdownMenuItem onClick={onAddColumnRight}>
-        Lisää sarake oikealle
+        {t('yleiset.lisaaSarakeOikealle')}
       </DropdownMenuItem>
       <DropdownMenuItem onClick={onAddColumnLeft}>
-        Lisää sarake vasemmalle
+        {t('yleiset.lisaaSarakeVasemmalle')}
       </DropdownMenuItem>
       {isFunction(onRemoveColumn) ? (
         <DropdownMenuItem onClick={onRemoveColumn}>
-          Poista sarake
+          {t('yleiset.poistaSarake')}
         </DropdownMenuItem>
       ) : null}
     </DropdownMenu>
   );
 
   return (
-    <UncontrolledDropdown overlay={overlay} portalTarget={document.body} overflow={overflow}>
+    <UncontrolledDropdown
+      overlay={overlay}
+      portalTarget={document.body}
+      overflow={overflow}
+    >
       {({ ref, onToggle }) => (
         <div style={{ display: 'flex' }} ref={ref} onClick={onToggle}>
           <EditColumnBase {...props} />
@@ -146,25 +154,35 @@ const EditRow = ({
   overflow,
   ...props
 }) => {
+  const { t } = useTranslation();
+
   const overlay = (
     <DropdownMenu>
       <DropdownMenuItem onClick={onToggleHeaderStatus}>
-        {isHeader ? 'Merkitse tavalliseksi riviksi' : 'Merkitse otsikkoriviksi'}
+        {isHeader
+          ? t('yleiset.merkitseTavalliseksiRiviksi')
+          : t('yleiset.merkitseOtsikkoriviksi')}
       </DropdownMenuItem>
       <DropdownMenuItem onClick={onAddRowBelow}>
-        Lisää rivi alapuolelle
+        {t('yleiset.lisaaRiviAlapuolelle')}
       </DropdownMenuItem>
       <DropdownMenuItem onClick={onAddRowAbove}>
-        Lisää rivi yläpuolelle
+        {t('yleiset.lisaaRiviYlapuolelle')}
       </DropdownMenuItem>
       {isFunction(onRemoveRow) ? (
-        <DropdownMenuItem onClick={onRemoveRow}>Poista rivi</DropdownMenuItem>
+        <DropdownMenuItem onClick={onRemoveRow}>
+          {t('yleiset.poistaRivi')}
+        </DropdownMenuItem>
       ) : null}
     </DropdownMenu>
   );
 
   return (
-    <UncontrolledDropdown overlay={overlay} portalTarget={document.body}  overflow={overflow}>
+    <UncontrolledDropdown
+      overlay={overlay}
+      portalTarget={document.body}
+      overflow={overflow}
+    >
       {({ ref, onToggle }) => (
         <div style={{ display: 'flex' }} ref={ref} onClick={onToggle}>
           <EditRowBase isHeader={isHeader} {...props} />

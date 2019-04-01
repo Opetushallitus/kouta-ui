@@ -22,6 +22,7 @@ import Divider from '../Divider';
 import AbstractCollapse from '../AbstractCollapse';
 import Icon from '../Icon';
 import { getThemeProp } from '../../theme';
+import useTranslation from '../useTranslation';
 
 const renderInputField = ({ input, type = 'text' }) => (
   <Input {...input} type={type} />
@@ -126,11 +127,13 @@ const OsaamisalatFieldValue = formValues({
 })(({ osaamisalat, children }) => children({ osaamisalat }));
 
 const OsaamisalaDetails = ({ osaamisala, language }) => {
+  const { t } = useTranslation();
+
   return (
     <Spacing marginTop={2}>
       <Spacing marginBottom={2}>
         <Typography variant="body" as="div" marginBottom={1}>
-          Lisää linkki
+          {t('yleiset.linkki')}
         </Typography>
         <Field
           name={`osaamisalaLinkit.${osaamisala.uri}.${language}`}
@@ -139,7 +142,7 @@ const OsaamisalaDetails = ({ osaamisala, language }) => {
       </Spacing>
       <Spacing>
         <Typography variant="body" as="div" marginBottom={1}>
-          Linkin otsikko
+          {t('yleiset.linkinOtsikko')}
         </Typography>
         <Field
           name={`osaamisalaLinkkiOtsikot.${osaamisala.uri}.${language}`}

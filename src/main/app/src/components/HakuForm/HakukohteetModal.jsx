@@ -6,12 +6,11 @@ import Button from '../Button';
 import { getKoutaToteutukset } from '../../apiUtils';
 import Flex, { FlexItem } from '../Flex';
 import Select from '../Select';
-import { getFirstLanguageValue } from '../../utils';
+import { getFirstLanguageValue, noop } from '../../utils';
 import Spacing from '../Spacing';
 import Typography from '../Typography';
 import useApiAsync from '../useApiAsync';
-
-const noop = () => {};
+import useTranslation from '../useTranslation';
 
 const getToteutusOptions = toteutukset => {
   return toteutukset.map(({ nimi, oid }) => ({
@@ -32,8 +31,8 @@ const renderSelectField = ({ options = [], input }) => {
   );
 };
 
-const FooterField = formValues('toteutus')(
-  ({ toteutus, children }) => children({ toteutus }),
+const FooterField = formValues('toteutus')(({ toteutus, children }) =>
+  children({ toteutus }),
 );
 
 const HakukohteetModal = ({
@@ -44,50 +43,47 @@ const HakukohteetModal = ({
   onSave = () => {},
   ...props
 }) => {
+  const { t } = useTranslation();
+
   const { data: toteutukset } = useApiAsync({
     promiseFn: getKoutaToteutukset,
     organisaatioOid,
     watch: organisaatioOid,
   });
 
-  const getState = (toteutus) => {
-    return toteutus ? true : false;
-  };
-
   const toteutuksetOptions = useMemo(() => {
     return toteutukset ? getToteutusOptions(toteutukset) : [];
   }, [toteutukset]);
 
   return (
-
     <Modal
       minHeight="200px"
-      header="Hakukohteen liittäminen hakuun"
+      header={t('yleiset.liitaHakukohde')}
       footer={
         <FooterField>
-          {({ toteutus }) =>
-          <Flex justifyBetween>
-            <Button onClick={onClose} variant="outlined" type="button">
-              Sulje
-            </Button>
-            <Button onClick={onSave} type="button" disabled={!getState(toteutus)}>
-              Luo uusi hakukohde
-            </Button>
-          </Flex>
-          }
+          {({ toteutus }) => (
+            <Flex justifyBetween>
+              <Button onClick={onClose} variant="outlined" type="button">
+                {t('yleiset.sulje')}
+              </Button>
+              <Button onClick={onSave} type="button" disabled={!toteutus}>
+                {t('yleiset.luoUusiHakukohde')}
+              </Button>
+            </Flex>
+          )}
         </FooterField>
       }
       onClose={onClose}
       {...props}
     >
-      <Flex>        
+      <Flex>
         <FlexItem grow={2}>
           <Spacing marginBottom={2}>
             <Typography variant="h6" marginBottom={1}>
-              Valitse ensin toteutus
+              {t('yleiset.valitseToteutus')}
             </Typography>
             <Field
-              name='toteutus'
+              name="toteutus"
               options={toteutuksetOptions}
               component={renderSelectField}
             />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
 import {
@@ -23,7 +23,10 @@ const DropdownContainer = styled.div`
 `;
 
 export const TilaDropdown = ({ onChange, value }) => {
-  const tilat = Object.values(JULKAISUTILA).filter(v => v !== value);
+  const tilat = useMemo(
+    () => Object.values(JULKAISUTILA).filter(v => v !== value),
+    [value],
+  );
 
   const overlay = (
     <DropdownMenu>

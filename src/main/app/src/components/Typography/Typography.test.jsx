@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Typography from '../../components/Typography';
+import Typography from './index';
 import { mountWithTheme } from '../../testUtils';
 
 test('renders correctly', () => {

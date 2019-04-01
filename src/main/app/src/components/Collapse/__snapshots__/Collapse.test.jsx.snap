@@ -1,6 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
+.c7 {
+  font-size: 1.5rem;
+}
+
 .c4 {
   font-family: 'Roboto',sans-serif;
   color: #666666;
@@ -12,10 +16,6 @@ exports[`renders correctly 1`] = `
   font-size: 1.25rem;
   font-weight: 700;
   line-height: 1.2;
-}
-
-.c7 {
-  font-size: 1.5rem;
 }
 
 .c0 {
@@ -344,6 +344,10 @@ exports[`renders correctly 2`] = `
 `;
 
 exports[`renders correctly when closed 1`] = `
+.c7 {
+  font-size: 1.5rem;
+}
+
 .c4 {
   font-family: 'Roboto',sans-serif;
   color: #666666;
@@ -355,10 +359,6 @@ exports[`renders correctly when closed 1`] = `
   font-size: 1.25rem;
   font-weight: 700;
   line-height: 1.2;
-}
-
-.c7 {
-  font-size: 1.5rem;
 }
 
 .c0 {

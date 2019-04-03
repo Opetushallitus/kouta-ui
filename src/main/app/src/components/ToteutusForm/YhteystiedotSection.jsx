@@ -6,6 +6,7 @@ import LanguageSelector from '../LanguageSelector';
 import Input from '../Input';
 import Spacing from '../Spacing';
 import useTranslation from '../useTranslation';
+import { getTestIdProps } from '../../utils';
 
 const renderInputField = ({ input, type = 'text' }) => (
   <Input {...input} type={type} />
@@ -19,7 +20,7 @@ const YhteystiedotSection = ({ languages }) => {
       {({ value: activeLanguage }) => {
         return (
           <>
-            <Spacing marginBottom={2}>
+            <Spacing marginBottom={2} {...getTestIdProps('nimi')}>
               <Typography variant="h6" marginBottom={1}>
                 {t('yleiset.nimi')}
               </Typography>
@@ -28,7 +29,7 @@ const YhteystiedotSection = ({ languages }) => {
                 component={renderInputField}
               />
             </Spacing>
-            <Spacing marginBottom={2}>
+            <Spacing marginBottom={2} {...getTestIdProps('titteli')}>
               <Typography variant="h6" marginBottom={1}>
                 {t('yleiset.titteli')}
               </Typography>
@@ -37,7 +38,7 @@ const YhteystiedotSection = ({ languages }) => {
                 component={renderInputField}
               />
             </Spacing>
-            <Spacing marginBottom={2}>
+            <Spacing marginBottom={2} {...getTestIdProps('sahkoposti')}>
               <Typography variant="h6" marginBottom={1}>
                 {t('yleiset.sahkoposti')}
               </Typography>
@@ -47,7 +48,7 @@ const YhteystiedotSection = ({ languages }) => {
                 component={renderInputField}
               />
             </Spacing>
-            <Spacing marginBottom={2}>
+            <Spacing marginBottom={2} {...getTestIdProps('puhelin')}>
               <Typography variant="h6" marginBottom={1}>
                 {t('yleiset.puhelin')}
               </Typography>
@@ -56,7 +57,7 @@ const YhteystiedotSection = ({ languages }) => {
                 component={renderInputField}
               />
             </Spacing>
-            <Spacing>
+            <Spacing {...getTestIdProps('verkkosivu')}>
               <Typography variant="h6" marginBottom={1}>
                 {t('yleiset.verkkosivu')}
               </Typography>

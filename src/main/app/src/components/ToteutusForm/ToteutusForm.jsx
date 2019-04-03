@@ -12,7 +12,7 @@ import JarjestamisTiedotSection from './JarjestamisTiedotSection';
 import NayttamisTiedotSection from './NayttamisTiedotSection';
 import FormCollapseGroup from '../FormCollapseGroup';
 import HakukohteetSection from './HakukohteetSection';
-import { isFunction } from '../../utils';
+import { isFunction, getTestIdProps } from '../../utils';
 import HakukohteetModal from './HakukohteetModal';
 import { ModalController } from '../Modal';
 import Flex from '../Flex';
@@ -67,6 +67,7 @@ const ToteutusForm = ({
                 header={t('yleiset.pohjanValinta')}
                 section="base"
                 onContinue={onMaybeCopy}
+                {...getTestIdProps('pohjaSection')}
               >
                 {({ onContinue }) => (
                   <PohjaSection
@@ -81,6 +82,7 @@ const ToteutusForm = ({
             <FormCollapse
               header={t('yleiset.kieliversiot')}
               section="kieliversiot"
+              {...getTestIdProps('kieliversiotSection')}
             >
               <KieliversiotFormSection />
             </FormCollapse>
@@ -89,6 +91,7 @@ const ToteutusForm = ({
               <FormCollapse
                 header={t('toteutuslomake.koulutuksenToteutuksenKuvaus')}
                 section="kuvaus"
+                {...getTestIdProps('kuvausSection')}
               >
                 <KuvausSection languages={languages} />
               </FormCollapse>
@@ -100,6 +103,7 @@ const ToteutusForm = ({
                   'toteutuslomake.alemmanKorkeakoulututkinnonErikoistumisalanKuvaus',
                 )}
                 section="alemmanKorkeakoulututkinnonOsaamisalat"
+                {...getTestIdProps('alempiOsaamisalatSection')}
               >
                 <KorkeakouluOsaamisalatSection languages={languages} />
               </FormCollapse>
@@ -111,6 +115,7 @@ const ToteutusForm = ({
                   'toteutuslomake.ylemmanKorkeakoulututkinnonErikoistumisalanKuvaus',
                 )}
                 section="ylemmanKorkeakoulututkinnonOsaamisalat"
+                {...getTestIdProps('ylempiOsaamisalatSection')}
               >
                 <KorkeakouluOsaamisalatSection languages={languages} />
               </FormCollapse>
@@ -121,6 +126,7 @@ const ToteutusForm = ({
               <FormCollapse
                 header={t('toteutuslomake.valitseOsaamisalat')}
                 section="osaamisalat"
+                {...getTestIdProps('osaamisalatSection')}
               >
                 <OsaamisalatSection
                   languages={languages}
@@ -132,6 +138,7 @@ const ToteutusForm = ({
             <FormCollapse
               header={t('toteutuslomake.toteutuksenJarjestamistiedot')}
               section="jarjestamistiedot"
+              {...getTestIdProps('jarjestamistiedotSection')}
             >
               <JarjestamisTiedotSection
                 languages={languages}
@@ -144,6 +151,7 @@ const ToteutusForm = ({
                 'toteutuslomake.koulutuksenNayttamiseenLiittyvatTiedot',
               )}
               section="nayttamistiedot"
+              {...getTestIdProps('nayttamistiedotSection')}
             >
               <NayttamisTiedotSection languages={languages} />
             </FormCollapse>
@@ -151,17 +159,19 @@ const ToteutusForm = ({
             <FormCollapse
               header={t('toteutuslomake.toteutuksenJarjestaja')}
               section="jarjestamispaikat"
+              {...getTestIdProps('jarjestajaSection')}
             >
               <JarjestamisPaikatSection organisaatioOid={organisaatioOid} />
             </FormCollapse>
 
-            <FormCollapse header={t('toteutuslomake.toteutuksenNimi')} section="nimi">
+            <FormCollapse header={t('toteutuslomake.toteutuksenNimi')} section="nimi" {...getTestIdProps('nimiSection')}>
               <NimiSection languages={languages} />
             </FormCollapse>
 
             <FormCollapse
               header={t('toteutuslomake.koulutuksenYhteystiedot')}
               section="yhteystiedot"
+              {...getTestIdProps('yhteystiedotSection')}
             >
               <YhteystiedotSection languages={languages} />
             </FormCollapse>

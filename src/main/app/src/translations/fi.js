@@ -103,6 +103,7 @@ export default {
     poistaSarake: 'Poista sarake',
     merkitseOtsikkoriviksi: 'Merkitse otsikkoriviksi',
     merkitseTavalliseksiRiviksi: 'Merkitse tavalliseksi riviksi',
+    linkinOtsikko: 'Linkin otsikko',
   },
   etusivu: {
     koulutuksetJaHaut: 'Koulutukset ja haut',

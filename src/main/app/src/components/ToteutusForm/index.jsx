@@ -7,9 +7,6 @@ export const initialValues = {
   kieliversiot: {
     languages: ['fi', 'sv'],
   },
-  jarjestamistiedot: {
-    maksullisuus: 'ei',
-  },
 };
 
 export const validate = values => {
@@ -26,11 +23,19 @@ export const validate = values => {
   }
 
   if (jarjestajat.length === 0) {
-    set(errors, 'jarjestamispaikat.jarjestajat', 'Valitse vähintään yksi järjestäjä');
+    set(
+      errors,
+      'jarjestamispaikat.jarjestajat',
+      'Valitse vähintään yksi järjestäjä',
+    );
   }
 
   if (opetuskielet.length === 0) {
-    set(errors, 'jarjestamistiedot.opetuskieli', 'Valitse vähintään yksi opetuskieli');
+    set(
+      errors,
+      'jarjestamistiedot.opetuskieli',
+      'Valitse vähintään yksi opetuskieli',
+    );
   }
 
   if (!opetustapa) {
@@ -42,4 +47,4 @@ export const validate = values => {
   }
 
   return errors;
-}
+};

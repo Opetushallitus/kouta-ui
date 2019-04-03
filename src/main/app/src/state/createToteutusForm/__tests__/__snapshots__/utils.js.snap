@@ -234,7 +234,9 @@ Object {
   "jarjestamistiedot": Object {
     "alkamiskausi": Object {
       "kausi": "kausi_1#1",
-      "vuosi": "2020",
+      "vuosi": Object {
+        "value": "2020",
+      },
     },
     "alkamiskausiKuvaus": Object {
       "fi": "Fi kausikuvaus",

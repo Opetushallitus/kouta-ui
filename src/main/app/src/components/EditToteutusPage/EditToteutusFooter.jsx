@@ -7,6 +7,7 @@ import { submit } from '../../state/editToteutusForm';
 import Button from '../Button';
 import { JULKAISUTILA } from '../../constants';
 import useTranslation from '../useTranslation';
+import { getTestIdProps } from '../../utils';
 
 const toteutusFormIsValid = isValid('editToteutusForm');
 
@@ -34,11 +35,19 @@ const EditToteutusFooter = ({ toteutus, valid, onSave = () => {} }) => {
 
   return (
     <Wrapper>
-      <Button variant="outlined" onClick={onSave}>
+      <Button
+        variant="outlined"
+        onClick={onSave}
+        {...getTestIdProps('tallennaToteutusButton')}
+      >
         {t('yleiset.tallenna')}
       </Button>
       {tila !== JULKAISUTILA.JULKAISTU ? (
-        <PublishButton disabled={!valid} onClick={onSaveAndPublish}>
+        <PublishButton
+          disabled={!valid}
+          onClick={onSaveAndPublish}
+          {...getTestIdProps('tallennaJaJulkaiseToteutusButton')}
+        >
           {t('yleiset.tallennaJaJulkaise')}
         </PublishButton>
       ) : null}

@@ -6,7 +6,7 @@ import Spacing from '../Spacing';
 import Radio, { RadioGroup } from '../Radio';
 import useKoodistoOptions from '../useKoodistoOptions';
 import YearSelect from '../YearSelect';
-import { noop } from '../../utils';
+import { noop, getTestIdProps } from '../../utils';
 import useTranslation from '../useTranslation';
 
 const renderRadioGroupField = ({ input, options }) => (
@@ -42,7 +42,9 @@ const AlkamiskausiFields = ({ name }) => {
         <Typography as="div" marginBottom={1}>
           {t('yleiset.vuosi')}
         </Typography>
-        <Field name={`${name}.vuosi`} component={renderYearField} />
+        <div {...getTestIdProps('vuosi')}>
+          <Field name={`${name}.vuosi`} component={renderYearField} />
+        </div>
       </Spacing>
     </>
   );

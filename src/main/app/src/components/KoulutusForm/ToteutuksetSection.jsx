@@ -31,7 +31,7 @@ const ToteutuksetSection = ({ koulutus }) => {
       {toteutusNames.length === 0
         ? t('koulutuslomake.koulutuksellaEiToteutuksia')
         : `${t(
-            'koulutuslomake.koulutukseenOnLiittettyToteutukset',
+            'koulutuslomake.koulutukseenOnLiitettyToteutukset',
           )}: ${toteutusNames.join(', ')}`}
     </Typography>
   );

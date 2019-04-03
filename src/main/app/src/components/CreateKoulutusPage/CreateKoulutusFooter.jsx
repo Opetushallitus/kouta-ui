@@ -7,6 +7,7 @@ import { submit as submitKoulutusForm } from '../../state/createKoulutusForm';
 import { JULKAISUTILA } from '../../constants';
 import Button from '../Button';
 import useTranslation from '../useTranslation';
+import { getTestIdProps } from '../../utils';
 
 const koulutusFormIsValid = isValid('createKoulutusForm');
 
@@ -32,8 +33,17 @@ const KoulutusFooter = ({
 
   return (
     <Wrapper>
-      <SaveButton onClick={onSave}>{t('yleiset.tallenna')}</SaveButton>
-      <Button onClick={onSaveAndPublish} disabled={!valid}>
+      <SaveButton
+        onClick={onSave}
+        {...getTestIdProps('tallennaKoulutusButton')}
+      >
+        {t('yleiset.tallenna')}
+      </SaveButton>
+      <Button
+        onClick={onSaveAndPublish}
+        {...getTestIdProps('tallennaJaJulkaiseKoulutusButton')}
+        disabled={!valid}
+      >
         {t('yleiset.tallennaJaJulkaise')}
       </Button>
     </Wrapper>

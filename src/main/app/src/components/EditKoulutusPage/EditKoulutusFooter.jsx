@@ -7,6 +7,7 @@ import { submit } from '../../state/editKoulutusForm';
 import Button from '../Button';
 import { JULKAISUTILA } from '../../constants';
 import useTranslation from '../useTranslation';
+import { getTestIdProps } from '../../utils';
 
 const koulutusFormIsValid = isValid('editKoulutusForm');
 
@@ -33,11 +34,19 @@ const EditKoulutusFooter = ({ koulutus, valid, onSave = () => {} }) => {
 
   return (
     <Wrapper>
-      <Button variant="outlined" onClick={onSave}>
+      <Button
+        variant="outlined"
+        onClick={onSave}
+        {...getTestIdProps('tallennaKoulutusButton')}
+      >
         {t('yleiset.tallenna')}
       </Button>
       {tila !== JULKAISUTILA.JULKAISTU ? (
-        <PublishButton disabled={!valid} onClick={onSaveAndPublish}>
+        <PublishButton
+          disabled={!valid}
+          onClick={onSaveAndPublish}
+          {...getTestIdProps('tallennaJaJulkaiseKoulutusButton')}
+        >
           {t('yleiset.tallennaJaJulkaise')}
         </PublishButton>
       ) : null}
@@ -50,7 +59,6 @@ export default connect(
     valid: koulutusFormIsValid(state),
   }),
   (dispatch, { koulutus }) => ({
-    onSave: ({ tila } = {}) =>
-      dispatch(submit({ koulutus, tila })),
+    onSave: ({ tila } = {}) => dispatch(submit({ koulutus, tila })),
   }),
 )(EditKoulutusFooter);

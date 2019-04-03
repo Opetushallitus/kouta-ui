@@ -9,6 +9,7 @@ import LanguageSelector from '../LanguageSelector';
 import Select from '../Select';
 import useTranslation from '../useTranslation';
 import useKoodistoOptions from '../useKoodistoOptions';
+import { getTestIdProps } from '../../utils';
 
 const noop = () => {};
 
@@ -34,7 +35,7 @@ const OsiotFieldsBase = ({ osiot, language, osiotOptions }) => {
   }, [osiotArr, osiotOptions]);
 
   return osiotArrWithLabels.map(({ value, label }, index) => (
-    <Spacing marginBottom={index !== osiot.length - 1 ? 2 : 0} key={value}>
+    <Spacing marginBottom={index !== osiot.length - 1 ? 2 : 0} key={value} {...getTestIdProps(`osioKuvaus.${value}`)}>
       <Typography variant="h6" marginBottom={1}>
         {label}
       </Typography>
@@ -50,7 +51,9 @@ const OsiotFields = formValues({ osiot: 'osiot' })(OsiotFieldsBase);
 
 const LisatiedotSection = ({ languages = [] }) => {
   const { t } = useTranslation();
-  const { options: osiotOptions } = useKoodistoOptions({ koodisto: 'koulutuksenjarjestamisenlisaosiot' });
+  const { options: osiotOptions } = useKoodistoOptions({
+    koodisto: 'koulutuksenjarjestamisenlisaosiot',
+  });
 
   return (
     <LanguageSelector languages={languages} defaultValue="fi">
@@ -60,12 +63,14 @@ const LisatiedotSection = ({ languages = [] }) => {
             <Typography variant="h6" marginBottom={1}>
               {t('yleiset.valitseLisattavaOsio')}
             </Typography>
-            <Field
-              name="osiot"
-              component={renderSelectField}
-              options={osiotOptions}
-              isMulti
-            />
+            <div {...getTestIdProps('osiotSelect')}>
+              <Field
+                name="osiot"
+                component={renderSelectField}
+                options={osiotOptions}
+                isMulti
+              />
+            </div>
           </Spacing>
           <OsiotFields language={activeLanguage} osiotOptions={osiotOptions} />
         </>

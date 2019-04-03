@@ -17,7 +17,7 @@ import AlkamiskausiFields from './AlkamiskausiFields';
 import Select from '../Select';
 import { KORKEAKOULUKOULUTUSTYYPIT } from '../../constants';
 import useKoodistoOptions from '../useKoodistoOptions';
-import { isArray } from '../../utils';
+import { isArray, getTestIdProps } from '../../utils';
 import NoYesRadioGroup from '../NoYesRadioGroup';
 
 const BorderHeading = styled(Typography).attrs({
@@ -73,7 +73,11 @@ const OsiotFieldsBase = ({ osiot, language, osiotOptions }) => {
   }, [osiotArr, osiotOptions]);
 
   return osiotArrWithLabels.map(({ value, label }, index) => (
-    <Spacing marginBottom={index !== osiot.length - 1 ? 2 : 0} key={value}>
+    <Spacing
+      marginBottom={index !== osiot.length - 1 ? 2 : 0}
+      key={value}
+      {...getTestIdProps(`osioKuvaus.${value}`)}
+    >
       <Typography variant="h6" marginBottom={1}>
         {label}
       </Typography>
@@ -97,7 +101,7 @@ const WithOnkoStipendia = formValues({
 
 const MaksullisuusFieldValue = formValues({
   maksullisuus: 'maksullisuus',
-})(({ maksullisuus, children }) => children({ maksullisuus }));
+})(({ children, ...rest }) => children(rest));
 
 const ExtraFieldWrapper = styled.div`
   max-width: 250px;
@@ -117,13 +121,16 @@ const LukuvuosimaksuFields = ({ language }) => {
   const { t } = useTranslation();
 
   return (
-    <Flex>
+    <Flex {...getTestIdProps('lukuvuosimaksu')}>
       <FlexItem grow={0} basis="30%">
         <Field name="onkoLukuvuosimaksua" component={renderNoYesField} />
         <WithOnkoLukuvuosimaksua>
           {({ onkoLukuvuosimaksua }) =>
             onkoLukuvuosimaksua ? (
-              <Spacing marginTop={1}>
+              <Spacing
+                marginTop={1}
+                {...getTestIdProps('lukuvuosimaksunMaara')}
+              >
                 <ExtraField label={t('yleiset.euroa')}>
                   <Field
                     name={`lukuvuosimaksu.${language}`}
@@ -153,13 +160,13 @@ const StipendiFields = ({ language }) => {
   const { t } = useTranslation();
 
   return (
-    <Flex>
+    <Flex {...getTestIdProps('stipendi')}>
       <FlexItem grow={0} basis="30%">
         <Field name="onkoStipendia" component={renderNoYesField} />
         <WithOnkoStipendia>
           {({ onkoStipendia }) =>
             onkoStipendia ? (
-              <Spacing marginTop={1}>
+              <Spacing marginTop={1} {...getTestIdProps('stipendinMaara')}>
                 <ExtraField label="Euroa tai prosenttia">
                   <Field
                     name={`stipendinMaara.${language}`}
@@ -198,7 +205,7 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi }) => {
     <>
       <Spacing marginBottom={2}>
         <BorderHeading>{t('yleiset.opetuskieli')}</BorderHeading>
-        <Flex>
+        <Flex {...getTestIdProps('opetuskieli')}>
           <FlexItem grow={0} basis="30%">
             <Field name="opetuskieli" component={renderOpetuskieliField} />
           </FlexItem>
@@ -217,7 +224,7 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi }) => {
         <BorderHeading>
           {t('toteutuslomake.paaasiallinenOpetusaika')}
         </BorderHeading>
-        <Flex>
+        <Flex {...getTestIdProps('opetusaika')}>
           <FlexItem grow={0} basis="30%">
             <Field name="opetusaika" component={renderOpetusaikaField} />
           </FlexItem>
@@ -236,7 +243,7 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi }) => {
         <BorderHeading>
           {t('toteutuslomake.paaasiallinenOpetustapa')}
         </BorderHeading>
-        <Flex>
+        <Flex {...getTestIdProps('opetustapa')}>
           <FlexItem grow={0} basis="30%">
             <Field name="opetustapa" component={renderOpetustapaField} />
             <Typography variant="secondary" as="div" marginTop={1}>
@@ -258,18 +265,18 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi }) => {
         <BorderHeading>
           {t('toteutuslomake.onkoOpetusMaksullista')}
         </BorderHeading>
-        <Flex>
+        <Flex {...getTestIdProps('maksullisuus')}>
           <FlexItem grow={0} basis="30%">
             <Field name="maksullisuus" component={renderNoYesField} />
             <MaksullisuusFieldValue>
               {({ maksullisuus }) =>
                 maksullisuus ? (
-                  <Spacing marginTop={1}>
+                  <Spacing marginTop={1} {...getTestIdProps('maksunMaara')}>
                     <ExtraField label="Euroa">
                       <Field
                         name={`maksumaara.${language}`}
                         component={renderInputField}
-                        placeholder="Maksun määrä"
+                        placeholder={t('yleiset.maara')}
                       />
                     </ExtraField>
                   </Spacing>
@@ -290,19 +297,25 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi }) => {
       </Spacing>
       {isKorkeakoulu ? (
         <Spacing marginBottom={2}>
-          <BorderHeading>{t('toteutuslomake.onkoLukuvuosimaksua')}</BorderHeading>
+          <BorderHeading>
+            {t('toteutuslomake.onkoLukuvuosimaksua')}
+          </BorderHeading>
           <LukuvuosimaksuFields language={language} />
         </Spacing>
       ) : null}
       {isKorkeakoulu ? (
         <Spacing marginBottom={2}>
-          <BorderHeading>{t('toteutuslomake.onkoStipenditKaytossa')}</BorderHeading>
+          <BorderHeading>
+            {t('toteutuslomake.onkoStipenditKaytossa')}
+          </BorderHeading>
           <StipendiFields language={language} />
         </Spacing>
       ) : null}
       <Spacing marginBottom={2}>
-        <BorderHeading>{t('toteutuslomake.koulutuksenAlkamiskausi')}</BorderHeading>
-        <Flex>
+        <BorderHeading>
+          {t('toteutuslomake.koulutuksenAlkamiskausi')}
+        </BorderHeading>
+        <Flex {...getTestIdProps('alkamiskausi')}>
           <FlexItem grow={0} basis="30%">
             <AlkamiskausiFields name="alkamiskausi" />
           </FlexItem>
@@ -319,12 +332,14 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi }) => {
       </Spacing>
       <Spacing marginBottom={2}>
         <BorderHeading>{t('yleiset.valitseLisattavaOsio')}</BorderHeading>
-        <Field
-          name="osiot"
-          component={renderSelectField}
-          options={osiotOptions}
-          isMulti
-        />
+        <div {...getTestIdProps('osiotSelect')}>
+          <Field
+            name="osiot"
+            component={renderSelectField}
+            options={osiotOptions}
+            isMulti
+          />
+        </div>
       </Spacing>
       <OsiotFields language={language} osiotOptions={osiotOptions} />
     </>

@@ -64,6 +64,7 @@ const getDefaultProps = memoize((theme, t) => ({
   loadingMessage: defaultLoadingMessage,
   styles: getStyles(theme),
   theme: getTheme(theme),
+  className: 'Select__',
 }));
 
 const getOptionLabelByValue = options => {

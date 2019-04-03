@@ -22,7 +22,7 @@ import ErrorAlert from '../ErrorAlert';
 import Anchor from '../Anchor';
 import useTranslation from '../useTranslation';
 
-import { getFirstLanguageValue } from '../../utils';
+import { getFirstLanguageValue, getTestIdProps } from '../../utils';
 
 const getHaut = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
@@ -130,6 +130,7 @@ const KoulutuksetSection = ({ organisaatioOid }) => {
           columns={tableColumns}
           onSort={setOrderBy}
           sort={orderBy}
+          {...getTestIdProps('hautTable')}
         />
       ) : error ? (
         <ErrorAlert onReload={reload} center />

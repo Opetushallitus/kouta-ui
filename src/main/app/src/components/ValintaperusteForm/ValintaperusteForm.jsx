@@ -20,6 +20,7 @@ import LoppukuvausSection from './LoppukuvausSection';
 import OsaamistaustaSection from './OsaamistaustaSection';
 import TyyppiSection from './TyyppiSection';
 import useTranslation from '../useTranslation';
+import { getTestIdProps } from '../../utils';
 
 const WithLanguagesAndTyyppiValue = formValues({
   languages: 'kieliversiot.languages',
@@ -41,7 +42,7 @@ const ValintaperusteForm = ({
   organisaatioOid,
   onCreateNew = () => {},
 }) => {
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
 
   return (
     <form onSubmit={handleSubmit}>
@@ -59,12 +60,20 @@ const ValintaperusteForm = ({
           return (
             <FormCollapseGroup enabled={steps}>
               {canEditTyyppi ? (
-                <FormCollapse header={t('yleiset.koulutustyyppi')} section="tyyppi">
+                <FormCollapse
+                  header={t('yleiset.koulutustyyppi')}
+                  section="tyyppi"
+                  {...getTestIdProps('tyyppiSection')}
+                >
                   <TyyppiSection />
                 </FormCollapse>
               ) : null}
 
-              <FormCollapse header={t('yleiset.kieliversiot')} section="kieliversiot">
+              <FormCollapse
+                header={t('yleiset.kieliversiot')}
+                section="kieliversiot"
+                {...getTestIdProps('kieliversiotSection')}
+              >
                 <KieliversiotFormSection />
               </FormCollapse>
 
@@ -73,6 +82,7 @@ const ValintaperusteForm = ({
                   header={t('yleiset.pohjanValinta')}
                   section="pohja"
                   onContinue={onMaybeCopy}
+                  {...getTestIdProps('pohjaSection')}
                 >
                   {({ onContinue }) => (
                     <PohjaSection
@@ -84,38 +94,55 @@ const ValintaperusteForm = ({
                 </FormCollapse>
               ) : null}
 
-              <FormCollapse header={t('valintaperustelomake.hakutavanRajaus')} section="hakutavanRajaus">
+              <FormCollapse
+                header={t('valintaperustelomake.hakutavanRajaus')}
+                section="hakutavanRajaus"
+                {...getTestIdProps('hakutavanRajausSection')}
+              >
                 <HakutavanRajausSection />
               </FormCollapse>
 
               <FormCollapse
                 header={t('valintaperustelomake.haunKohdejoukonRajaus')}
                 section="kohdejoukonRajaus"
+                {...getTestIdProps('kohdejoukonRajausSection')}
               >
                 <KohdejoukonRajausSection />
               </FormCollapse>
 
-              <FormCollapse header={t('valintaperustelomake.valintaperusteenNimi')} section="nimi">
+              <FormCollapse
+                header={t('valintaperustelomake.valintaperusteenNimi')}
+                section="nimi"
+                {...getTestIdProps('nimiSection')}
+              >
                 <NimiSection languages={languages} />
               </FormCollapse>
 
               {isKorkeakoulu ? (
-                <FormCollapse header={t('valintaperustelomake.osaamistausta')} section="osaamistausta">
+                <FormCollapse
+                  header={t('valintaperustelomake.osaamistausta')}
+                  section="osaamistausta"
+                >
                   <OsaamistaustaSection />
                 </FormCollapse>
               ) : null}
 
-              <FormCollapse header={t('valintaperustelomake.valintatapa')} section="valintatapa">
+              <FormCollapse
+                header={t('valintaperustelomake.valintatapa')}
+                section="valintatapa"
+                {...getTestIdProps('valintatapaSection')}
+              >
                 <ValintatapaSection languages={languages} />
               </FormCollapse>
 
               <FormCollapse
                 header={t('valintaperustelomake.kielitaitovaatimukset')}
                 section="kielitaitovaatimukset"
+                {...getTestIdProps('kielitaitovaatimuksetSection')}
               >
                 <KielitaitovaatimuksetSection languages={languages} />
               </FormCollapse>
- 
+
               {isKorkeakoulu ? (
                 <FormCollapse
                   header={t('valintaperustelomake.valintaperusteenLoppukuvaus')}

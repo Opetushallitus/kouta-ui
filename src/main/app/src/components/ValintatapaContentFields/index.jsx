@@ -16,6 +16,7 @@ import Spacing from '../Spacing';
 import Flex, { FlexItem } from '../Flex';
 import DropdownIcon from '../DropdownIcon';
 import useTranslation from '../useTranslation';
+import { getTestIdProps } from '../../utils';
 
 import {
   UncontrolledDropdown,
@@ -46,11 +47,14 @@ const AddContentDropdown = ({ onAdd }) => {
   }, [onAdd]);
 
   const overlay = (
-    <DropdownMenu>
-      <DropdownMenuItem onClick={onAddText}>
+    <DropdownMenu {...getTestIdProps('sisaltoMenu')}>
+      <DropdownMenuItem onClick={onAddText} {...getTestIdProps('lisaaTekstia')}>
         {t('valintaperustelomake.lisaaTekstia')}
       </DropdownMenuItem>
-      <DropdownMenuItem onClick={onAddTable}>
+      <DropdownMenuItem
+        onClick={onAddTable}
+        {...getTestIdProps('lisaaTaulukko')}
+      >
         {t('valintaperustelomake.lisaaTaulukko')}
       </DropdownMenuItem>
     </DropdownMenu>
@@ -65,6 +69,7 @@ const AddContentDropdown = ({ onAdd }) => {
             type="button"
             color="primary"
             variant="outlined"
+            {...getTestIdProps('sisaltoMenuToggle')}
           >
             {t('valintaperustelomake.lisaaSisaltoa')}{' '}
             <DropdownIcon open={visible} />
@@ -75,8 +80,8 @@ const AddContentDropdown = ({ onAdd }) => {
   );
 };
 
-const renderTableInputField = ({ input, language }) => (
-  <TableInput {...input} language={language} />
+const renderTableInputField = ({ input, language, ...props }) => (
+  <TableInput {...input} language={language} {...props} />
 );
 
 const renderEditorField = ({ input }) => <Editor {...input} />;
@@ -88,11 +93,12 @@ const ContentField = ({ tyyppi, name, language }) => {
         name={`${name}.data`}
         component={renderTableInputField}
         language={language}
+        {...getTestIdProps('taulukkoSisalto')}
       />
     );
   } else if (tyyppi === 'teksti') {
     return (
-      <Field name={`${name}.data.${language}`} component={renderEditorField} />
+      <Field name={`${name}.data.${language}`} component={renderEditorField} {...getTestIdProps('tekstiSisalto')} />
     );
   }
 

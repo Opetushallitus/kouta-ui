@@ -65,7 +65,7 @@ describe('editHakuForm', () => {
       method: 'POST',
       url: '**/haku',
       response: {
-        oid: '1.2.3.4.5.6',
+        muokattu: false,
       },
     }).as('editHakuRequest');
 

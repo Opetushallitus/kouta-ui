@@ -177,7 +177,9 @@ describe('editKoulutusForm', () => {
     cy.route({
       method: 'POST',
       url: '**/koulutus',
-      response: {},
+      response: {
+        muokattu: false,
+      },
     }).as('updateYoKoulutusResponse');
 
     cy.route({

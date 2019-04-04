@@ -12,7 +12,7 @@ import Input from '../Input';
 import Textarea from '../Textarea';
 import Select from '../Select';
 import Divider from '../Divider';
-import { noop } from '../../utils';
+import { noop, getTestIdProps } from '../../utils';
 import useKoodistoOptions from '../useKoodistoOptions';
 import useTranslation from '../useTranslation';
 
@@ -45,7 +45,7 @@ const ToimitusaikaSection = ({ getFieldName }) => {
         {t('hakukohdelomake.toimitusaika')}
       </Typography>
       <Flex>
-        <FlexItem grow={1}>
+        <FlexItem grow={1} {...getTestIdProps('paivamaara')}>
           <Field
             name={getFieldName('deliverDate')}
             placeholder="pp.kk.vvvv"
@@ -53,7 +53,7 @@ const ToimitusaikaSection = ({ getFieldName }) => {
             mask="99.99.9999"
           />
         </FlexItem>
-        <FlexItem grow={0} basis="30%" paddingLeft={2}>
+        <FlexItem grow={0} basis="30%" paddingLeft={2} {...getTestIdProps('kellonaika')}>
           <Field
             name={getFieldName('deliverTime')}
             placeholder="tt:mm"
@@ -74,7 +74,7 @@ const ToimituspaikkaSection = ({ getFieldName, language }) => {
 
   return (
     <>
-      <Spacing marginBottom={2}>
+      <Spacing marginBottom={2} {...getTestIdProps('osoite')}>
         <Typography variant="h6" marginBottom={1}>
           {t('yleiset.osoite')}
         </Typography>
@@ -86,7 +86,7 @@ const ToimituspaikkaSection = ({ getFieldName, language }) => {
 
       <Spacing marginBottom={2}>
         <Flex>
-          <FlexItem grow={0} basis="30%">
+          <FlexItem grow={0} basis="30%" {...getTestIdProps('postinumero')}>
             <Typography variant="h6" marginBottom={1}>
               {t('yleiset.postinumero')}
             </Typography>
@@ -96,7 +96,7 @@ const ToimituspaikkaSection = ({ getFieldName, language }) => {
               type="number"
             />
           </FlexItem>
-          <FlexItem grow={1} paddingLeft={2}>
+          <FlexItem grow={1} paddingLeft={2} {...getTestIdProps('postitoimipaikka')}>
             <Typography variant="h6" marginBottom={1}>
               {t('yleiset.postitoimipaikka')}
             </Typography>
@@ -108,7 +108,7 @@ const ToimituspaikkaSection = ({ getFieldName, language }) => {
         </Flex>
       </Spacing>
 
-      <Spacing>
+      <Spacing {...getTestIdProps('sahkoposti')}>
         <Typography variant="h6" marginBottom={1}>
           {t('yleiset.sahkoposti')}
         </Typography>
@@ -134,7 +134,7 @@ const renderLiitteetFields = ({
     <>
       {fields.map((liite, index) => (
         <Fragment key={index}>
-          <Spacing marginBottom={2}>
+          <Spacing marginBottom={2} {...getTestIdProps('tyyppi')}>
             <Typography as="h6" marginBottom={1}>
               {t('yleiset.tyyppi')}
             </Typography>
@@ -145,7 +145,7 @@ const renderLiitteetFields = ({
             />
           </Spacing>
 
-          <Spacing marginBottom={2}>
+          <Spacing marginBottom={2} {...getTestIdProps('nimi')}>
             <Typography as="h6" marginBottom={1}>
               {t('yleiset.nimi')}
             </Typography>
@@ -155,7 +155,7 @@ const renderLiitteetFields = ({
             />
           </Spacing>
 
-          <Spacing marginBottom={2}>
+          <Spacing marginBottom={2} {...getTestIdProps('kuvaus')}>
             <Typography as="h6" marginBottom={1}>
               {t('yleiset.kuvaus')}
             </Typography>
@@ -166,7 +166,7 @@ const renderLiitteetFields = ({
           </Spacing>
 
           {includeToimitusaika ? (
-            <Spacing marginBottom={2}>
+            <Spacing marginBottom={2} {...getTestIdProps('toimitusaika')}>
               <ToimitusaikaSection
                 getFieldName={baseName => `${liite}.${baseName}`}
               />
@@ -174,7 +174,7 @@ const renderLiitteetFields = ({
           ) : null}
 
           {includeToimituspaikka ? (
-            <Spacing marginBottom={2}>
+            <Spacing marginBottom={2} {...getTestIdProps('toimituspaikka')}>
               <ToimituspaikkaSection
                 language={language}
                 getFieldName={baseName => `${liite}.${baseName}`}
@@ -202,6 +202,7 @@ const renderLiitteetFields = ({
         onClick={() => {
           fields.push({});
         }}
+        {...getTestIdProps('lisaaButton')}
       >
         {t('hakukohdelomake.lisaaLiite')}
       </Button>
@@ -232,7 +233,7 @@ const LiitteetSection = ({ languages, organisaatioOid }) => {
         <YhteinenToimitusFieldValues>
           {({ yhteinenToimitusaika, yhteinenToimituspaikka }) => (
             <>
-              <Spacing marginBottom={2}>
+              <Spacing marginBottom={2} {...getTestIdProps('liitelista')}>
                 <FieldArray
                   name="liitteet"
                   component={renderLiitteetFields}
@@ -247,7 +248,9 @@ const LiitteetSection = ({ languages, organisaatioOid }) => {
                 <Field
                   name="yhteinenToimitusaika"
                   component={renderCheckboxField}
-                  label={t('hakukohdelomake.kaytaLiitteilleYhteistaToimitusaikaa')}
+                  label={t(
+                    'hakukohdelomake.kaytaLiitteilleYhteistaToimitusaikaa',
+                  )}
                 />
                 {yhteinenToimitusaika ? (
                   <Spacing marginTop={1} marginBottom={2}>
@@ -259,7 +262,9 @@ const LiitteetSection = ({ languages, organisaatioOid }) => {
                 <Field
                   name="yhteinenToimituspaikka"
                   component={renderCheckboxField}
-                  label={t('hakukohdelomake.kaytaLiitteilleYhteistaToimituspaikkaa')}
+                  label={t(
+                    'hakukohdelomake.kaytaLiitteilleYhteistaToimituspaikkaa',
+                  )}
                 />
                 {yhteinenToimituspaikka ? (
                   <Spacing marginTop={1}>

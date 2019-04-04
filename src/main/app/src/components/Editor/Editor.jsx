@@ -281,7 +281,7 @@ const emptyEditorState = createEmptyEditorState();
 
 export const EditorState = DraftEditorState;
 
-export const Editor = ({ value, onChange, ...props }) => {
+export const Editor = ({ value, onChange, inputProps, ...props }) => {
   const editorState = value ? value : emptyEditorState;
 
   const editorRef = useRef();
@@ -289,7 +289,7 @@ export const Editor = ({ value, onChange, ...props }) => {
   const styleButtonProps = { editorState, onChange, editorRef };
 
   return (
-    <Container>
+    <Container className="Editor__">
       <Toolbar>
         <StyleButton
           icon="format_bold"

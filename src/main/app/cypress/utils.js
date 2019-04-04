@@ -20,6 +20,12 @@ export const getSelect = cy => {
   return cy.get('.Select__');
 };
 
+export const selectOption = (value, cy) => {
+  getSelect(cy).click();
+
+  getSelectOption(value, cy).click();
+};
+
 export const stubKoodistoRoute = ({ koodisto: koodistonNimi, cy }) => {
   cy.route({
     method: 'GET',
@@ -34,4 +40,14 @@ export const stubLokalisaatioRoute = ({ cy }) => {
     url: '**/lokalisointi/cxf/rest/v1/localisation**',
     response: [],
   });
+};
+
+export const typeToEditor = (value, cy) => {
+  cy.get('.Editor__').within(() => {
+    cy.get('[contenteditable="true"]').type(value, { force: true });
+  });
+};
+
+export const getTableInput = cy => {
+  return cy.get('.TableInput__');
 };

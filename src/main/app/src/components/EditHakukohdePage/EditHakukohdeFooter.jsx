@@ -7,6 +7,7 @@ import { submit } from '../../state/editHakukohdeForm';
 import Button from '../Button';
 import { JULKAISUTILA } from '../../constants';
 import useTranslation from '../useTranslation';
+import { getTestIdProps } from '../../utils';
 
 const hakukohdeFormIsValid = isValid('editHakukohdeForm');
 
@@ -34,11 +35,19 @@ const EditHakukohdeFooter = ({ hakukohde, valid, onSave = () => {} }) => {
 
   return (
     <Wrapper>
-      <Button variant="outlined" onClick={onSave}>
+      <Button
+        variant="outlined"
+        onClick={onSave}
+        {...getTestIdProps('tallennaHakukohdeButton')}
+      >
         {t('yleiset.tallenna')}
       </Button>
       {tila !== JULKAISUTILA.JULKAISTU ? (
-        <PublishButton disabled={!valid} onClick={onSaveAndPublish}>
+        <PublishButton
+          disabled={!valid}
+          onClick={onSaveAndPublish}
+          {...getTestIdProps('tallennaJaJulkaiseHakukohdeButton')}
+        >
           {t('yleiset.tallennaJaJulkaise')}
         </PublishButton>
       ) : null}

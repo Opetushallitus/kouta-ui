@@ -7,7 +7,7 @@ import Spacing from '../Spacing';
 import Checkbox from '../Checkbox';
 import InputMask from '../InputMask';
 import Button from '../Button';
-import { isArray, formatKoutaDateString } from '../../utils';
+import { isArray, formatKoutaDateString, getTestIdProps } from '../../utils';
 import useTranslation from '../useTranslation';
 
 const HakuaikaInterval = ({ haku }) => {
@@ -39,7 +39,12 @@ const HakuaikaInterval = ({ haku }) => {
 };
 
 const renderCheckboxField = ({ input, label = null }) => (
-  <Checkbox checked={input.value} onChange={input.onChange} children={label} />
+  <Checkbox
+    checked={input.value}
+    onChange={input.onChange}
+    name="eriHakuaika"
+    children={label}
+  />
 );
 
 const renderInputMaskField = ({ input, ...props }) => (
@@ -88,13 +93,13 @@ const HakuRemoveContainer = styled.div`
 const renderHakuajatFields = ({ fields, t }) => (
   <>
     {fields.map((hakuaika, index) => (
-      <HakuContainer key={index}>
-        <HakuDateTimeContainer first>
+      <HakuContainer key={index} {...getTestIdProps('hakuaika')}>
+        <HakuDateTimeContainer {...getTestIdProps('alkaa')} first>
           <Typography as="div" marginBottom={1}>
             {t('yleiset.alkaa')}
           </Typography>
           <HakuDateTimeWrapper>
-            <HakuDateContainer>
+            <HakuDateContainer {...getTestIdProps('paivamaara')}>
               <Field
                 name={`${hakuaika}.fromDate`}
                 placeholder="pp.kk.vvvv"
@@ -102,7 +107,7 @@ const renderHakuajatFields = ({ fields, t }) => (
                 mask="99.99.9999"
               />
             </HakuDateContainer>
-            <HakuTimeContainer>
+            <HakuTimeContainer {...getTestIdProps('kellonaika')}>
               <Field
                 name={`${hakuaika}.fromTime`}
                 placeholder="tt:mm"
@@ -115,12 +120,12 @@ const renderHakuajatFields = ({ fields, t }) => (
             {t('yleiset.paivamaaraJaKellonaika')}
           </Typography>
         </HakuDateTimeContainer>
-        <HakuDateTimeContainer>
+        <HakuDateTimeContainer {...getTestIdProps('paattyy')}>
           <Typography as="div" marginBottom={1}>
             {t('yleiset.paattyy')}
           </Typography>
           <HakuDateTimeWrapper>
-            <HakuDateContainer>
+            <HakuDateContainer {...getTestIdProps('paivamaara')}>
               <Field
                 name={`${hakuaika}.toDate`}
                 placeholder="pp.kk.vvvv"
@@ -128,7 +133,7 @@ const renderHakuajatFields = ({ fields, t }) => (
                 mask="99.99.9999"
               />
             </HakuDateContainer>
-            <HakuTimeContainer>
+            <HakuTimeContainer {...getTestIdProps('kellonaika')}>
               <Field
                 name={`${hakuaika}.toTime`}
                 placeholder="tt:mm"
@@ -160,6 +165,7 @@ const renderHakuajatFields = ({ fields, t }) => (
       onClick={() => {
         fields.push({});
       }}
+      {...getTestIdProps('lisaaButton')}
     >
       {t('yleiset.lisaaHakuaika')}
     </Button>

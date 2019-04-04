@@ -4,7 +4,7 @@ import { Field } from 'redux-form';
 import Typography from '../Typography';
 import useKoodistoOptions from '../useKoodistoOptions';
 import Select from '../Select';
-import { noop } from '../../utils';
+import { noop, getTestIdProps } from '../../utils';
 import useTranslation from '../useTranslation';
 
 const renderSelectField = ({ input, options, ...rest }) => (
@@ -24,12 +24,14 @@ const PohjakoulutusSection = () => {
         {t('hakukohdelomake.valitsePohjakoulutusvaatimus')}
       </Typography>
 
-      <Field
-        name="koulutusvaatimukset"
-        component={renderSelectField}
-        options={options}
-        isMulti
-      />
+      <div {...getTestIdProps('pohjakoulutusvaatimusSelect')}>
+        <Field
+          name="koulutusvaatimukset"
+          component={renderSelectField}
+          options={options}
+          isMulti
+        />
+      </div>
     </>
   );
 };

@@ -67,13 +67,15 @@ const fillNimiSection = cy => {
 const lisaaSisaltoa = (tyyppi, cy) => {
   getByTestId('sisaltoMenuToggle', cy).click({ force: true });
 
-  getByTestId('sisaltoMenu', cy).within(() => {
-    if (tyyppi === 'teksti') {
-      getByTestId('lisaaTekstia', cy).click({ force: true });
-    } else if (tyyppi === 'taulukko') {
-      getByTestId('lisaaTaulukko', cy).click({ force: true });
-    }
-  });
+  getByTestId('sisaltoMenu', cy)
+    .first()
+    .within(() => {
+      if (tyyppi === 'teksti') {
+        getByTestId('lisaaTekstia', cy).click({ force: true });
+      } else if (tyyppi === 'taulukko') {
+        getByTestId('lisaaTaulukko', cy).click({ force: true });
+      }
+    });
 };
 
 const fillValintatapaSection = cy => {

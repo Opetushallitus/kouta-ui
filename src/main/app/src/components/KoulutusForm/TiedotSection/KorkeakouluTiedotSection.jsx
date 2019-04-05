@@ -9,6 +9,7 @@ import TutkintoNimikeSelect from './TutkintonimikeSelect';
 import useKoodistoOptions from '../../useKoodistoOptions';
 import Select from '../../Select';
 import useTranslation from '../../useTranslation';
+import { getTestIdProps } from '../../../utils';
 
 const noop = () => {};
 
@@ -41,14 +42,16 @@ export const KorkeakoulutuTiedotSection = ({ koulutustyyppi, language }) => {
         <Typography variant="h6" marginBottom={1}>
           {t('koulutuslomake.valitseKoulutuskoodi')}
         </Typography>
-        <Field
-          name="koulutus"
-          component={renderKoulutusField}
-          koulutustyyppi={koulutustyyppi}
-        />
+        <div {...getTestIdProps('koulutuskoodiSelect')}>
+          <Field
+            name="koulutus"
+            component={renderKoulutusField}
+            koulutustyyppi={koulutustyyppi}
+          />
+        </div>
       </Spacing>
 
-      <Spacing marginBottom={2}>
+      <Spacing marginBottom={2} {...getTestIdProps('nimiInput')}>
         <Typography variant="h6" marginBottom={1}>
           {t('koulutuslomake.muokkaaKoulutuksenNimea')}
         </Typography>
@@ -59,17 +62,21 @@ export const KorkeakoulutuTiedotSection = ({ koulutustyyppi, language }) => {
         <Typography variant="h6" marginBottom={1}>
           {t('koulutuslomake.valitseTutkintonimike')}
         </Typography>
-        <Field name="tutkintonimike" component={renderTutkintoNimikeField} />
+        <div {...getTestIdProps('tutkintonimikeSelect')}>
+          <Field name="tutkintonimike" component={renderTutkintoNimikeField} />
+        </div>
       </Spacing>
 
       <Typography variant="h6" marginBottom={1}>
         {t('koulutuslomake.valitseOpintojenLaajuus')}
       </Typography>
-      <Field
-        name="opintojenLaajuus"
-        component={renderSelectField}
-        options={laajuusOptions}
-      />
+      <div {...getTestIdProps('opintojenLaajuusSelect')}>
+        <Field
+          name="opintojenLaajuus"
+          component={renderSelectField}
+          options={laajuusOptions}
+        />
+      </div>
     </>
   );
 };

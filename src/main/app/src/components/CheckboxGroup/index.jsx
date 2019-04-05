@@ -28,6 +28,7 @@ const CheckboxGroup = ({ value = [], onChange, options = [], disabled = false })
       checked={value.includes(optionValue)}
       onChange={makeOnCheckboxChange({ value, onChange, optionValue, options })}
       disabled={disabled}
+      name={optionValue}
     >
       {label}
     </Checkbox>

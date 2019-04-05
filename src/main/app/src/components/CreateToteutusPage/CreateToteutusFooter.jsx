@@ -7,6 +7,7 @@ import { submit as submitToteutusForm } from '../../state/createToteutusForm';
 import { JULKAISUTILA } from '../../constants';
 import Button from '../Button';
 import useTranslation from '../useTranslation';
+import { getTestIdProps } from '../../utils';
 
 const toteutusFormIsValid = isValid('createToteutusForm');
 
@@ -32,13 +33,22 @@ const CreateToteutusFooter = ({
 
   return (
     <Wrapper>
-      <SaveButton onClick={onSave}>{t('yleiset.tallenna')}</SaveButton>
-      <Button onClick={onSaveAndPublish} disabled={!valid}>
+      <SaveButton
+        onClick={onSave}
+        {...getTestIdProps('tallennaToteutusButton')}
+      >
+        {t('yleiset.tallenna')}
+      </SaveButton>
+      <Button
+        onClick={onSaveAndPublish}
+        disabled={!valid}
+        {...getTestIdProps('tallennaJaJulkaiseToteutusButton')}
+      >
         {t('yleiset.tallennaJaJulkaise')}
       </Button>
     </Wrapper>
   );
-}
+};
 
 export default connect(
   state => ({

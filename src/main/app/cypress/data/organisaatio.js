@@ -1,0 +1,21 @@
+export default () => ({
+  oid: '1.2.246.562.10.594252633210',
+  nimi: { fi: 'Organisaatio' },
+  metadata: {
+    nimi: {},
+    hakutoimistonNimi: {},
+    yhteystiedot: [],
+    hakutoimistoEctsEmail: {},
+    hakutoimistoEctsNimi: {},
+    hakutoimistoEctsPuhelin: {},
+    hakutoimistoEctsTehtavanimike: {},
+    luontiPvm: 1376464481941,
+    muokkausPvm: 1376464481941,
+    data: {},
+  },
+  kayntiosoite: {},
+  ryhmatyypit: [],
+  kayttoryhmat: [],
+  parentOid: '1.2.246.562.10.00000000001',
+  status: 'AKTIIVINEN',
+});

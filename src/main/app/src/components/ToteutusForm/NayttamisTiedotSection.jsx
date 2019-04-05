@@ -1,7 +1,6 @@
 import React from 'react';
 import { Field } from 'redux-form';
 import { subscribe } from 'react-contextual';
-import memoize from 'memoizee';
 
 import UrlContext from '../UrlContext';
 import HttpContext from '../HttpContext';
@@ -11,6 +10,7 @@ import { AsyncCreatableSelect } from '../Select';
 import Spacing from '../Spacing';
 import { getAmmattinimikkeetByTerm, getAvainsanatByTerm } from '../../apiUtils';
 import useTranslation from '../useTranslation';
+import { memoize, getTestIdProps } from '../../utils';
 
 const MAX_ITEMS = 5;
 
@@ -75,17 +75,19 @@ const NayttamisTiedotSection = ({ languages, httpClient, apiUrls }) => {
               <Typography variant="h6" marginBottom={1}>
                 {t('toteutuslomake.ammattinimikkeet')}
               </Typography>
-              <Field
-                name={`ammattinimikkeet.${activeLanguage}`}
-                component={renderCreatableField}
-                isMulti
-                isClearable
-                loadOptions={makeLoadAmmattinimikkeet(
-                  httpClient,
-                  apiUrls,
-                  activeLanguage,
-                )}
-              />
+              <div {...getTestIdProps('ammattinimikkeetSelect')}>
+                <Field
+                  name={`ammattinimikkeet.${activeLanguage}`}
+                  component={renderCreatableField}
+                  isMulti
+                  isClearable
+                  loadOptions={makeLoadAmmattinimikkeet(
+                    httpClient,
+                    apiUrls,
+                    activeLanguage,
+                  )}
+                />
+              </div>
               <Typography variant="secondary" as="div" marginTop={1}>
                 {t('yleiset.voitValitaEnintaan', { lukumaara: MAX_ITEMS })}
               </Typography>
@@ -94,19 +96,21 @@ const NayttamisTiedotSection = ({ languages, httpClient, apiUrls }) => {
               <Typography variant="h6" marginBottom={1}>
                 {t('toteutuslomake.avainsanat')}
               </Typography>
-              <Field
-                name={`avainsanat.${activeLanguage}`}
-                component={renderCreatableField}
-                isMulti
-                isClearable
-                loadOptions={makeLoadAvainsanat(
-                  httpClient,
-                  apiUrls,
-                  activeLanguage,
-                )}
-              />
+              <div {...getTestIdProps('avainsanatSelect')}>
+                <Field
+                  name={`avainsanat.${activeLanguage}`}
+                  component={renderCreatableField}
+                  isMulti
+                  isClearable
+                  loadOptions={makeLoadAvainsanat(
+                    httpClient,
+                    apiUrls,
+                    activeLanguage,
+                  )}
+                />
+              </div>
               <Typography variant="secondary" as="div" marginTop={1}>
-              {t('yleiset.voitValitaEnintaan', { lukumaara: MAX_ITEMS })}
+                {t('yleiset.voitValitaEnintaan', { lukumaara: MAX_ITEMS })}
               </Typography>
             </Spacing>
           </>

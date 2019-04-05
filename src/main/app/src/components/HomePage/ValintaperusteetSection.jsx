@@ -16,7 +16,7 @@ import { getKoutaIndexValintaperusteet } from '../../apiUtils';
 import { getIndexParamsByFilters } from './utils';
 import Filters from './Filters';
 import useFilterState from './useFilterState';
-import { getFirstLanguageValue } from '../../utils';
+import { getFirstLanguageValue, getTestIdProps } from '../../utils';
 import Anchor from '../Anchor';
 import Button from '../Button';
 import ErrorAlert from '../ErrorAlert';
@@ -129,6 +129,7 @@ const ValintaperusteetSection = ({ organisaatioOid }) => {
           columns={tableColumns}
           onSort={setOrderBy}
           sort={orderBy}
+          {...getTestIdProps('valintaperusteetTable')}
         />
       ) : error ? (
         <ErrorAlert onReload={reload} center />

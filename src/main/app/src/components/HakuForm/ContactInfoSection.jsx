@@ -6,6 +6,7 @@ import LanguageSelector from '../LanguageSelector';
 import Input from '../Input';
 import useTranslation from '../useTranslation';
 import Spacing from '../Spacing';
+import { getTestIdProps } from '../../utils';
 
 const renderInputField = ({ input, placeholder }) => (
   <Input placeholder={placeholder} {...input} />
@@ -20,7 +21,7 @@ const ContactInfoSection = ({ languages, koodiUri, ...props }) => {
         {({ value: activeLanguage }) => {
           return (
             <>
-              <Spacing marginBottom={2}>
+              <Spacing marginBottom={2} {...getTestIdProps('nimi')}>
                 <Typography variant="h6" marginTop={1} marginBottom={1}>
                   {t('yleiset.nimi')}
                 </Typography>
@@ -29,7 +30,7 @@ const ContactInfoSection = ({ languages, koodiUri, ...props }) => {
                   component={renderInputField}
                 />
               </Spacing>
-              <Spacing marginBottom={2}>
+              <Spacing marginBottom={2} {...getTestIdProps('titteli')}>
                 <Typography variant="h6" marginTop={1} marginBottom={1}>
                   {t('yleiset.titteli')}
                 </Typography>
@@ -39,7 +40,7 @@ const ContactInfoSection = ({ languages, koodiUri, ...props }) => {
                 />
               </Spacing>
 
-              <Spacing marginBottom={2}>
+              <Spacing marginBottom={2} {...getTestIdProps('sahkoposti')}>
                 <Typography variant="h6" marginTop={1} marginBottom={1}>
                   {t('yleiset.sahkoposti')}
                 </Typography>
@@ -49,13 +50,15 @@ const ContactInfoSection = ({ languages, koodiUri, ...props }) => {
                 />
               </Spacing>
 
-              <Typography variant="h6" marginTop={1} marginBottom={1}>
-                {t('yleiset.puhelin')}
-              </Typography>
-              <Field
-                name={`puhelin.${activeLanguage}`}
-                component={renderInputField}
-              />
+              <Spacing {...getTestIdProps('puhelin')}>
+                <Typography variant="h6" marginTop={1} marginBottom={1}>
+                  {t('yleiset.puhelin')}
+                </Typography>
+                <Field
+                  name={`puhelin.${activeLanguage}`}
+                  component={renderInputField}
+                />
+              </Spacing>
             </>
           );
         }}

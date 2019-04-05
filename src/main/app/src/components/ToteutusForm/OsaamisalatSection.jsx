@@ -15,7 +15,7 @@ import {
 import Checkbox from '../Checkbox';
 import Typography from '../Typography';
 import LanguageSelector from '../LanguageSelector';
-import { getLanguageValue, isString } from '../../utils';
+import { getLanguageValue, isString, getTestIdProps } from '../../utils';
 import Spacing from '../Spacing';
 import Input from '../Input';
 import Divider from '../Divider';
@@ -50,9 +50,9 @@ const OsaamisalaDetailsToggleContainer = styled.div`
   ${getThemeProp('typography.body')};
 `;
 
-const OsaamisalaDetailsToggle = ({ open, onToggle }) => {
+const OsaamisalaDetailsToggle = ({ open, onToggle, ...props }) => {
   return (
-    <OsaamisalaDetailsToggleContainer onClick={onToggle}>
+    <OsaamisalaDetailsToggleContainer onClick={onToggle} {...props}>
       <Icon type={open ? 'arrow_drop_down' : 'arrow_right'} />
       <Typography>
         {open ? 'Sulje tarkempi kuvaus' : 'Tarkenna kuvausta'}
@@ -105,17 +105,18 @@ const OsaamisalaSelection = ({
   onChange = () => {},
   value = [],
 }) => (
-  <>
+  <div {...getTestIdProps('osaamisalaSelection')}>
     {options.map(({ value: optionValue, label }) => (
       <Checkbox
         key={optionValue}
+        name={optionValue}
         checked={value.includes(optionValue)}
         onChange={makeOnCheckboxChange({ value, onChange, optionValue })}
       >
         {label}
       </Checkbox>
     ))}
-  </>
+  </div>
 );
 
 const renderOsaamisalaSelectionField = ({ input, options }) => {
@@ -131,7 +132,7 @@ const OsaamisalaDetails = ({ osaamisala, language }) => {
 
   return (
     <Spacing marginTop={2}>
-      <Spacing marginBottom={2}>
+      <Spacing marginBottom={2} {...getTestIdProps(`osaamisalaLinkki.${osaamisala.uri}`)}>
         <Typography variant="body" as="div" marginBottom={1}>
           {t('yleiset.linkki')}
         </Typography>
@@ -140,7 +141,7 @@ const OsaamisalaDetails = ({ osaamisala, language }) => {
           component={renderInputField}
         />
       </Spacing>
-      <Spacing>
+      <Spacing {...getTestIdProps(`osaamisalaOtsikko.${osaamisala.uri}`)}>
         <Typography variant="body" as="div" marginBottom={1}>
           {t('yleiset.linkinOtsikko')}
         </Typography>
@@ -177,7 +178,7 @@ const OsaamisalatInfoFields = ({ osaamisalatValue, osaamisalat, language }) => {
             }
           >
             {({ open, onToggle }) => (
-              <OsaamisalaDetailsToggle open={open} onToggle={onToggle} />
+              <OsaamisalaDetailsToggle open={open} onToggle={onToggle} {...getTestIdProps(`osaamisalaToggle.${uri}`)} />
             )}
           </AbstractCollapse>
         </Spacing>

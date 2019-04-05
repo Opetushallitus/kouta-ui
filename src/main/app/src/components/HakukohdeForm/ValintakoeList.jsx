@@ -10,6 +10,7 @@ import InputMask from '../InputMask';
 import Textarea from '../Textarea';
 import Flex, { FlexItem } from '../Flex';
 import useTranslation from '../useTranslation';
+import { getTestIdProps } from '../../utils';
 
 const renderInputField = ({ input, ...props }) => (
   <Input {...input} {...props} />
@@ -25,7 +26,7 @@ const renderValintakoeFields = ({ fields, language, t }) => (
   <>
     {fields.map((koe, index) => (
       <Fragment key={index}>
-        <Spacing marginBottom={2}>
+        <Spacing marginBottom={2} {...getTestIdProps('osoite')}>
           <Typography variant="h6" marginBottom={1}>
             {t('yleiset.osoite')}
           </Typography>
@@ -37,7 +38,7 @@ const renderValintakoeFields = ({ fields, language, t }) => (
 
         <Spacing marginBottom={2}>
           <Flex>
-            <FlexItem grow={0} basis="30%">
+            <FlexItem grow={0} basis="30%" {...getTestIdProps('postinumero')}>
               <Typography variant="h6" marginBottom={1}>
                 {t('yleiset.postinumero')}
               </Typography>
@@ -47,7 +48,11 @@ const renderValintakoeFields = ({ fields, language, t }) => (
                 type="number"
               />
             </FlexItem>
-            <FlexItem grow={1} paddingLeft={2}>
+            <FlexItem
+              grow={1}
+              paddingLeft={2}
+              {...getTestIdProps('postitoimipaikka')}
+            >
               <Typography variant="h6" marginBottom={1}>
                 {t('yleiset.postitoimipaikka')}
               </Typography>
@@ -61,12 +66,12 @@ const renderValintakoeFields = ({ fields, language, t }) => (
 
         <Spacing marginBottom={2}>
           <Flex>
-            <FlexItem grow={1} marginRight={2}>
+            <FlexItem grow={1} marginRight={2} {...getTestIdProps('alkaa')}>
               <Typography variant="h6" marginBottom={1}>
                 {t('yleiset.alkaa')}
               </Typography>
               <Flex>
-                <FlexItem grow={1}>
+                <FlexItem grow={1} {...getTestIdProps('paivamaara')}>
                   <Field
                     name={`${koe}.fromDate`}
                     component={renderInputMaskField}
@@ -74,7 +79,12 @@ const renderValintakoeFields = ({ fields, language, t }) => (
                     mask="99.99.9999"
                   />
                 </FlexItem>
-                <FlexItem grow={0} basis="30%" paddingLeft={2}>
+                <FlexItem
+                  grow={0}
+                  basis="30%"
+                  paddingLeft={2}
+                  {...getTestIdProps('kellonaika')}
+                >
                   <Field
                     name={`${koe}.fromTime`}
                     component={renderInputMaskField}
@@ -87,12 +97,12 @@ const renderValintakoeFields = ({ fields, language, t }) => (
                 {t('yleiset.paivamaaraJaKellonaika')}
               </Typography>
             </FlexItem>
-            <FlexItem grow={1} marginLeft={2}>
+            <FlexItem grow={1} marginLeft={2} {...getTestIdProps('paattyy')}>
               <Typography variant="h6" marginBottom={1}>
                 {t('yleiset.paattyy')}
               </Typography>
               <Flex>
-                <FlexItem grow={1}>
+                <FlexItem grow={1} {...getTestIdProps('paivamaara')}>
                   <Field
                     name={`${koe}.toDate`}
                     component={renderInputMaskField}
@@ -100,7 +110,12 @@ const renderValintakoeFields = ({ fields, language, t }) => (
                     mask="99.99.9999"
                   />
                 </FlexItem>
-                <FlexItem grow={0} basis="30%" paddingLeft={2}>
+                <FlexItem
+                  grow={0}
+                  basis="30%"
+                  paddingLeft={2}
+                  {...getTestIdProps('kellonaika')}
+                >
                   <Field
                     name={`${koe}.toTime`}
                     component={renderInputMaskField}
@@ -116,7 +131,7 @@ const renderValintakoeFields = ({ fields, language, t }) => (
           </Flex>
         </Spacing>
 
-        <Spacing>
+        <Spacing {...getTestIdProps('lisatietoa')}>
           <Typography variant="h6" marginBottom={1}>
             {t('yleiset.lisatietoja')}
           </Typography>
@@ -149,8 +164,9 @@ const renderValintakoeFields = ({ fields, language, t }) => (
         onClick={() => {
           fields.push({});
         }}
+        {...getTestIdProps('lisaaButton')}
       >
-       {t('hakukohdelomake.lisaaTilaisuus')}
+        {t('hakukohdelomake.lisaaTilaisuus')}
       </Button>
     </Spacing>
   </>
@@ -160,12 +176,14 @@ const ValintakoeList = ({ language }) => {
   const { t } = useTranslation();
 
   return (
-    <FieldArray
-      name="kokeet"
-      component={renderValintakoeFields}
-      language={language}
-      t={t}
-    />
+    <div {...getTestIdProps('valintakoelista')}>
+      <FieldArray
+        name="kokeet"
+        component={renderValintakoeFields}
+        language={language}
+        t={t}
+      />
+    </div>
   );
 };
 

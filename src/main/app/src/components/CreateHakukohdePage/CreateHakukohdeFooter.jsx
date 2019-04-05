@@ -7,6 +7,7 @@ import { submit as submitHakukohdeForm } from '../../state/createHakukohdeForm';
 import { JULKAISUTILA } from '../../constants';
 import Button from '../Button';
 import useTranslation from '../useTranslation';
+import { getTestIdProps } from '../../utils';
 
 const hakukohdeFormIsValid = isValid('createHakukohdeForm');
 
@@ -32,8 +33,17 @@ const CreateHakukohdeFooter = ({
 
   return (
     <Wrapper>
-      <SaveButton onClick={onSave}>{t('yleiset.tallenna')}</SaveButton>
-      <Button onClick={onSaveAndPublish} disabled={!valid}>
+      <SaveButton
+        onClick={onSave}
+        {...getTestIdProps('tallennaHakukohdeButton')}
+      >
+        {t('yleiset.tallenna')}
+      </SaveButton>
+      <Button
+        onClick={onSaveAndPublish}
+        disabled={!valid}
+        {...getTestIdProps('tallennaJaJulkaiseHakukohdeButton')}
+      >
         {t('yleiset.tallennaJaJulkaise')}
       </Button>
     </Wrapper>

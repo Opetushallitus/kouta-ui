@@ -13,7 +13,7 @@ import Select from '../Select';
 import Flex, { FlexItem } from '../Flex';
 import CheckboxGroup from '../CheckboxGroup';
 import Checkbox from '../Checkbox';
-import { noop } from '../../utils';
+import { noop, getTestIdProps } from '../../utils';
 import useKoodistoOptions from '../useKoodistoOptions';
 import useTranslation from '../useTranslation';
 
@@ -44,7 +44,7 @@ const renderVaatimustyyppiField = ({
 
   return (
     <>
-      <Checkbox checked={value} onChange={onChange}>
+      <Checkbox checked={value} name={vaatimusTyyppi} onChange={onChange}>
         {label}
       </Checkbox>
       {!!value ? (
@@ -63,10 +63,10 @@ const renderVaatimustyyppiField = ({
 
 const renderKuvauksetField = ({ fields, kuvausOptions, t }) => {
   return (
-    <>
+    <div {...getTestIdProps('vaatimusKuvaus')}>
       {fields.map((kuvaus, index) => (
         <Flex marginBottom={2} key={index} alignEnd>
-          <FlexItem grow={1} paddingRight={2}>
+          <FlexItem grow={1} paddingRight={2} {...getTestIdProps('kuvaus')}>
             <Typography variant="h6" marginBottom={1}>
               {t('yleiset.valitseKuvaus')}
             </Typography>
@@ -76,7 +76,7 @@ const renderKuvauksetField = ({ fields, kuvausOptions, t }) => {
               options={kuvausOptions}
             />
           </FlexItem>
-          <FlexItem grow={0} basis="20%">
+          <FlexItem grow={0} basis="20%" {...getTestIdProps('taso')}>
             <Typography variant="h6" marginBottom={1}>
               {t('yleiset.taso')}
             </Typography>
@@ -103,10 +103,11 @@ const renderKuvauksetField = ({ fields, kuvausOptions, t }) => {
         onClick={() => {
           fields.push({});
         }}
+        {...getTestIdProps('lisaaButton')}
       >
         {t('yleiset.lisaaKuvaus')}
       </Button>
-    </>
+    </div>
   );
 };
 
@@ -119,11 +120,11 @@ const renderVaatimuksetField = ({
   t,
 }) => {
   return (
-    <>
+    <div {...getTestIdProps('kielitaitovaatimuslista')}>
       {fields.map((vaatimus, index) => {
         return (
           <Spacing key={index}>
-            <Spacing marginBottom={2}>
+            <Spacing marginBottom={2} {...getTestIdProps('kielivalinta')}>
               <Typography variant="h6" marginBottom={1}>
                 {t('yleiset.valitseKieli')}
               </Typography>
@@ -134,7 +135,7 @@ const renderVaatimuksetField = ({
             </Spacing>
 
             <Flex>
-              <FlexItem grow={1}>
+              <FlexItem grow={1} {...getTestIdProps('tyyppivalinta')}>
                 <Typography variant="h6" marginBottom={1}>
                   {t('valintaperustelomake.valitseVaatimustyypit')}
                 </Typography>
@@ -153,7 +154,12 @@ const renderVaatimuksetField = ({
                   />
                 ))}
               </FlexItem>
-              <FlexItem grow={0} basis="40%" paddingLeft={4}>
+              <FlexItem
+                grow={0}
+                basis="40%"
+                paddingLeft={4}
+                {...getTestIdProps('osoitusvalinta')}
+              >
                 <Spacing marginBottom={2}>
                   <Typography variant="h6" marginBottom={1}>
                     {t('valintaperustelomake.ehdotKielitaidonOsoitukseen')}
@@ -194,10 +200,11 @@ const renderVaatimuksetField = ({
         onClick={() => {
           fields.push({});
         }}
+        {...getTestIdProps('lisaaButton')}
       >
         {t('valintaperustelomake.lisaaKielitaitovaatimus')}
       </Button>
-    </>
+    </div>
   );
 };
 

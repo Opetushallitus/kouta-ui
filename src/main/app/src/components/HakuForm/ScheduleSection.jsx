@@ -11,7 +11,7 @@ import YearSelect from '../YearSelect';
 import useKoodistoOptions from '../useKoodistoOptions';
 import useTranslation from '../useTranslation';
 import Flex, { FlexItem } from '../Flex';
-import { noop } from '../../utils';
+import { noop, getTestIdProps } from '../../utils';
 
 const BorderHeading = styled(Typography).attrs({
   variant: 'h6',
@@ -75,12 +75,12 @@ const renderHakuajatFields = ({ fields, t }) => {
     <>
       {fields.map((hakuaika, index) => (
         <HakuContainer key={index}>
-          <HakuDateTimeContainer first>
+          <HakuDateTimeContainer {...getTestIdProps('alkaa')} first>
             <Typography as="div" marginBottom={1}>
               {t('yleiset.alkaa')}
             </Typography>
             <HakuDateTimeWrapper>
-              <HakuDateContainer>
+              <HakuDateContainer {...getTestIdProps('paivamaara')}>
                 <Field
                   name={`${hakuaika}.fromDate`}
                   placeholder="pp.kk.vvvv"
@@ -88,7 +88,7 @@ const renderHakuajatFields = ({ fields, t }) => {
                   mask="99.99.9999"
                 />
               </HakuDateContainer>
-              <HakuTimeContainer>
+              <HakuTimeContainer {...getTestIdProps('kellonaika')}>
                 <Field
                   name={`${hakuaika}.fromTime`}
                   placeholder="tt:mm"
@@ -101,12 +101,12 @@ const renderHakuajatFields = ({ fields, t }) => {
               {t('yleiset.paivamaaraJaKellonaika')}
             </Typography>
           </HakuDateTimeContainer>
-          <HakuDateTimeContainer>
+          <HakuDateTimeContainer {...getTestIdProps('paattyy')}>
             <Typography as="div" marginBottom={1}>
               {t('yleiset.paattyy')}
             </Typography>
             <HakuDateTimeWrapper>
-              <HakuDateContainer>
+              <HakuDateContainer {...getTestIdProps('paivamaara')}>
                 <Field
                   name={`${hakuaika}.toDate`}
                   placeholder="pp.kk.vvvv"
@@ -114,7 +114,7 @@ const renderHakuajatFields = ({ fields, t }) => {
                   mask="99.99.9999"
                 />
               </HakuDateContainer>
-              <HakuTimeContainer>
+              <HakuTimeContainer {...getTestIdProps('kellonaika')}>
                 <Field
                   name={`${hakuaika}.toTime`}
                   placeholder="tt:mm"
@@ -146,6 +146,7 @@ const renderHakuajatFields = ({ fields, t }) => {
         onClick={() => {
           fields.push({});
         }}
+        {...getTestIdProps('lisaaButton')}
       >
         {t('yleiset.lisaaHakuaika')}
       </Button>
@@ -159,21 +160,21 @@ const ScheduleSection = props => {
 
   return (
     <>
-      <Spacing marginBottom={2}>
+      <Spacing marginBottom={2} {...getTestIdProps('hakuajat')}>
         <BorderHeading>{t('hakulomake.hakuaika')}</BorderHeading>
         <FieldArray name="hakuaika" component={renderHakuajatFields} t={t} />
       </Spacing>
-      <Spacing marginBottom={2}>
+      <Spacing marginBottom={2} {...getTestIdProps('tulevaisuudenaikataulu')}>
         <BorderHeading>
           {t('hakulomake.aikatauluTulevaisuudesta')}
         </BorderHeading>
         <FieldArray name="aikataulu" component={renderHakuajatFields} t={t} />
       </Spacing>
 
-      <Spacing marginBottom={2}>
+      <Spacing marginBottom={2} {...getTestIdProps('alkamiskausi')}>
         <BorderHeading>{t('hakulomake.koulutuksenAlkamiskausi')}</BorderHeading>
 
-        <Spacing marginBottom={2}>
+        <Spacing marginBottom={2} {...getTestIdProps('kausi')}>
           <Typography as="div" marginBottom={1}>
             {t('yleiset.kausi')}
           </Typography>
@@ -189,16 +190,18 @@ const ScheduleSection = props => {
           <Typography as="div" marginBottom={1}>
             {t('yleiset.vuosi')}
           </Typography>
-          <Field name="vuosi" component={renderYearField} />
+          <div {...getTestIdProps('vuosi')}>
+            <Field name="vuosi" component={renderYearField} />
+          </div>
         </Spacing>
       </Spacing>
 
-      <Spacing marginBottom={2}>
+      <Spacing marginBottom={2} {...getTestIdProps('perumisenTakaraja')}>
         <BorderHeading>
           {t('hakulomake.hakukohteenLisaamisenJaPerumisenTakaraja')}
         </BorderHeading>
         <Flex>
-          <FlexItem grow={1}>
+          <FlexItem grow={1} {...getTestIdProps('paivamaara')}>
             <Field
               name="liittäminen_pvm"
               placeholder="pp.kk.vvvv"
@@ -206,7 +209,7 @@ const ScheduleSection = props => {
               mask="99.99.9999"
             />
           </FlexItem>
-          <FlexItem basis="30%" grow={0} paddingLeft={2}>
+          <FlexItem basis="30%" grow={0} paddingLeft={2} {...getTestIdProps('kellonaika')}>
             <Field
               name="liittäminen_aika"
               placeholder="tt:mm"
@@ -220,12 +223,12 @@ const ScheduleSection = props => {
         </Typography>
       </Spacing>
 
-      <Spacing marginBottom={2}>
+      <Spacing marginBottom={2} {...getTestIdProps('muokkauksenTakaraja')}>
         <BorderHeading>
           {t('hakulomake.hakukohteenMuokkauksenTakaraja')}
         </BorderHeading>
         <Flex>
-          <FlexItem grow={1}>
+          <FlexItem grow={1} {...getTestIdProps('paivamaara')}>
             <Field
               name="muokkaus_pvm"
               placeholder="pp.kk.vvvv"
@@ -233,7 +236,7 @@ const ScheduleSection = props => {
               mask="99.99.9999"
             />
           </FlexItem>
-          <FlexItem basis="30%" grow={0} paddingLeft={2}>
+          <FlexItem basis="30%" grow={0} paddingLeft={2} {...getTestIdProps('kellonaika')}>
             <Field
               name="muokkaus_aika"
               placeholder="tt:mm"
@@ -247,12 +250,12 @@ const ScheduleSection = props => {
         </Typography>
       </Spacing>
 
-      <Spacing>
+      <Spacing {...getTestIdProps('julkaisupaivamaara')}>
         <BorderHeading>
           {t('hakulomake.ajastettuHaunJulkaisupaivamaara')}
         </BorderHeading>
         <Flex>
-          <FlexItem grow={1}>
+          <FlexItem grow={1} {...getTestIdProps('paivamaara')}>
             <Field
               name="julkaisu_pvm"
               placeholder="pp.kk.vvvv"
@@ -260,7 +263,7 @@ const ScheduleSection = props => {
               mask="99.99.9999"
             />
           </FlexItem>
-          <FlexItem basis="30%" grow={0} paddingLeft={2}>
+          <FlexItem basis="30%" grow={0} paddingLeft={2} {...getTestIdProps('kellonaika')}>
             <Field
               name="julkaisu_aika"
               placeholder="tt:mm"

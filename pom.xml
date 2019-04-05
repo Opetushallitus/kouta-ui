@@ -116,11 +116,11 @@
                         </goals>
                         <configuration>
                             <environmentVariables>
-                                <PORT>${browser.test.http.port}</PORT>
+                                <PORT>3000</PORT>
                                 <BACKEND_PORT>${browser.test.http.backend.port}</BACKEND_PORT>
                                 <CI>true</CI>
                             </environmentVariables>
-                            <arguments>test</arguments>
+                            <arguments>run test:ci</arguments>
                         </configuration>
                     </execution>
                     <execution>

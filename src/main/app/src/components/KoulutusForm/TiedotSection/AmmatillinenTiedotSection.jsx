@@ -7,7 +7,7 @@ import KoulutusSelect from '../KoulutusSelect';
 import ApiAsync from '../../ApiAsync';
 import { getKoulutusByKoodi } from '../../../apiUtils';
 import { getThemeProp } from '../../../theme';
-import { getLanguageValue } from '../../../utils';
+import { getLanguageValue, getTestIdProps } from '../../../utils';
 import useTranslation from '../../useTranslation';
 
 const getTutkintonimikkeet = ({ koulutus, language }) => {
@@ -142,11 +142,13 @@ const AmmatillinenTiedotSection = ({
       </Typography>
       <Container>
         <Content>
-          <Field
-            name="koulutus"
-            component={renderSelectField}
-            koulutusTyyppi={koulutustyyppi}
-          />
+          <div {...getTestIdProps('koulutustyyppiSelect')}>
+            <Field
+              name="koulutus"
+              component={renderSelectField}
+              koulutusTyyppi={koulutustyyppi}
+            />
+          </div>
         </Content>
         <InfoContent>
           {koulutusValue ? (

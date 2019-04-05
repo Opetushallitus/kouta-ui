@@ -21,7 +21,7 @@ import useFilterState from './useFilterState';
 import KoulutusTilaDropdown from './KoulutusTilaDropdown';
 import ErrorAlert from '../ErrorAlert';
 
-import { getFirstLanguageValue } from '../../utils';
+import { getFirstLanguageValue, getTestIdProps } from '../../utils';
 import useTranslation from '../useTranslation';
 
 import {
@@ -172,6 +172,7 @@ const KoulutuksetSection = ({ organisaatioOid }) => {
           columns={tableColumns}
           onSort={setOrderBy}
           sort={orderBy}
+          {...getTestIdProps('koulutuksetTable')}
         />
       ) : error ? (
         <ErrorAlert onReload={reload} center />

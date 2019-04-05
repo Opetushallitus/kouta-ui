@@ -7,6 +7,7 @@ import { submit } from '../../state/editValintaperusteForm';
 import Button from '../Button';
 import { JULKAISUTILA } from '../../constants';
 import useTranslation from '../useTranslation';
+import { getTestIdProps } from '../../utils';
 
 const valintaperusteFormIsValid = isValid('editValintaperusteForm');
 
@@ -38,11 +39,19 @@ const EditValintaperusteFooter = ({
 
   return (
     <Wrapper>
-      <Button variant="outlined" onClick={onSave}>
+      <Button
+        variant="outlined"
+        onClick={onSave}
+        {...getTestIdProps('tallennaValintaperusteButton')}
+      >
         {t('yleiset.tallenna')}
       </Button>
       {tila !== JULKAISUTILA.JULKAISTU ? (
-        <PublishButton disabled={!valid} onClick={onSaveAndPublish}>
+        <PublishButton
+          disabled={!valid}
+          onClick={onSaveAndPublish}
+          {...getTestIdProps('tallennaJaJulkaiseValintaperusteButton')}
+        >
           {t('yleiset.tallennaJaJulkaise')}
         </PublishButton>
       ) : null}

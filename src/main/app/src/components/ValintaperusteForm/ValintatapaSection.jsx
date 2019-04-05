@@ -12,7 +12,7 @@ import Flex from '../Flex';
 import ValintatapaContentFields from '../ValintatapaContentFields';
 import useKoodistoOptions from '../useKoodistoOptions';
 import Textarea from '../Textarea';
-import { noop } from '../../utils';
+import { noop, getTestIdProps } from '../../utils';
 import useTranslation from '../useTranslation';
 
 const renderInputField = ({ input, type = 'text' }) => (
@@ -26,8 +26,8 @@ const renderSelectField = ({ input, options }) => (
 const renderTextareaField = ({ input }) => <Textarea {...input} />;
 
 const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
-  <>
-    <Spacing marginBottom={2}>
+  <div {...getTestIdProps('valintatapalista')}>
+    <Spacing marginBottom={2} {...getTestIdProps('tapa')}>
       <Typography variant="h6" marginBottom={1}>
         {t('valintaperustelomake.valitseTapa')}
       </Typography>
@@ -37,7 +37,7 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
         options={tapaOptions}
       />
     </Spacing>
-    <Spacing marginBottom={2}>
+    <Spacing marginBottom={2} {...getTestIdProps('nimi')}>
       <Typography variant="h6" marginBottom={1}>
         {t('valintaperustelomake.valintatapajononNimi')}
       </Typography>
@@ -46,13 +46,13 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
         component={renderInputField}
       />
     </Spacing>
-    <Spacing marginBottom={2}>
+    <Spacing marginBottom={2} {...getTestIdProps('sisalto')}>
       <ValintatapaContentFields
         name={`${valintatapa}.sisalto`}
         language={language}
       />
     </Spacing>
-    <Spacing marginBottom={2}>
+    <Spacing marginBottom={2} {...getTestIdProps('kynnysehto')}>
       <Typography variant="h6" marginBottom={1}>
         {t('valintaperustelomake.kynnysehto')}
       </Typography>
@@ -61,9 +61,9 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
         component={renderTextareaField}
       />
     </Spacing>
-    <Spacing marginBottom={2}>
+    <Spacing marginBottom={2} {...getTestIdProps('enimmaispistemaara')}>
       <Typography variant="h6" marginBottom={1}>
-      {t('valintaperustelomake.enimmaispistemaara')}
+        {t('valintaperustelomake.enimmaispistemaara')}
       </Typography>
       <Field
         name={`${valintatapa}.enimmaispistemaara`}
@@ -71,9 +71,9 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
         type="number"
       />
     </Spacing>
-    <Spacing>
+    <Spacing {...getTestIdProps('vahimmaispistemaara')}>
       <Typography variant="h6" marginBottom={1}>
-      {t('valintaperustelomake.vahimmaispistemaara')}
+        {t('valintaperustelomake.vahimmaispistemaara')}
       </Typography>
       <Field
         name={`${valintatapa}.vahimmaispistemaara`}
@@ -81,7 +81,7 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
         type="number"
       />
     </Spacing>
-  </>
+  </div>
 );
 
 const renderValintavat = ({ fields, tapaOptions, language, t }) => (
@@ -111,6 +111,7 @@ const renderValintavat = ({ fields, tapaOptions, language, t }) => (
       onClick={() => {
         fields.push({});
       }}
+      {...getTestIdProps('lisaaButton')}
     >
       {t('valintaperustelomake.lisaaValintatapa')}
     </Button>

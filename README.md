@@ -48,19 +48,9 @@ http://localhost:8080/
 
 ## Testit
 
-Testit löytyvät hakemistosta `src/main/app/src/__tests__`.
-Nimetään yksikkötestit päätteellä `.test.js` ja laitetaan ne sopiviin hakemistoihin.
-Lisäksi projektissa on headless-selaintestejä, jotka käyttävät Puppeteer-kirjastoa. Laitetaan ne hakemistoon
-`src/main/app/src/__tests__/headless/`. Mock-datan luontiin tarvittavat javascript-luokat ja muut testityökalut
-voi laittaa hakemistoon `src/main/app/src/__tests__/mocks`, joka skipataan testejä ajettaessa.
+Yksikkötestit löytyvät testattavan moduulin `*.test.jsx?` (esim. `components/Input/Input.test.jsx`) tiedostosta, tai sen `__tests__` kansiosta. Integraatiotestit löytyvät `cypress/integration` kansiosta.
 
-Testit voi ajaa default porteissa komennolla
-
-`npm test`
-
-tai tietyissä porteissa
-
-`PORT=5555 BACKEND_PORT=5556 npm test`
+Yksikkötestit voi ajaa komennolla `npm test` ja integraatiotestit komennolla `npm run test:e2e`. Kaikki testit pystyy ajamaan komennolla `npm run test:ci`.
 
 ## Storybook
 

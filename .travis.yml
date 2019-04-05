@@ -8,6 +8,8 @@ services:
 cache:
   directories:
   - $HOME/.m2
+  - ~/.cache
+  npm: true
 
 env:
   global:

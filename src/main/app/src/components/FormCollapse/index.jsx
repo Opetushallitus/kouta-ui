@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Collapse, { UncontrolledCollapse } from '../Collapse';
 import Button from '../Button';
 import ClearFormSection from './ClearFormSection';
-import { isFunction, isString } from '../../utils';
+import { isFunction, isString, getTestIdProps } from '../../utils';
 import useTranslation from '../useTranslation';
 
 const CollapseFooterContainer = styled.div`
@@ -57,7 +57,11 @@ const FormCollapse = ({
   const actions = actionsProp ? (
     actionsProp
   ) : isFunction(onContinue) ? (
-    <Button type="button" onClick={onContinue}>
+    <Button
+      type="button"
+      onClick={onContinue}
+      {...getTestIdProps('jatkaButton')}
+    >
       {t('yleiset.jatka')}
     </Button>
   ) : null;

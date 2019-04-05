@@ -263,7 +263,7 @@ export const getValuesByToteutus = toteutus => {
       osioKuvaukset,
       alkamiskausi: {
         kausi: get(opetus, 'alkamiskausiKoodiUri') || '',
-        vuosi: get(opetus, 'alkamisvuosi') || '',
+        vuosi: { value: get(opetus, 'alkamisvuosi') || '' },
       },
       alkamiskausiKuvaus: get(opetus, 'alkamisaikaKuvaus') || {},
       onkoLukuvuosimaksua: get(opetus, 'onkoLukuvuosimaksua'),

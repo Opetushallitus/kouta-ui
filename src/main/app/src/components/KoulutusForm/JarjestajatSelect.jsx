@@ -3,7 +3,7 @@ import React from 'react';
 import ApiAsync from '../ApiAsync';
 import { getOrganisaatioHierarchyByOid } from '../../apiUtils';
 import Checkbox from '../Checkbox';
-import { isArray } from '../../utils';
+import { isArray, getTestIdProps } from '../../utils';
 
 const makeOnCheckboxChange = ({ value, onChange, optionValue }) => e => {
   if (e.target.checked) {
@@ -36,17 +36,18 @@ const getOptions = organisaatiot => {
 
 const Selection = ({ value = [], onChange, options = [] }) => {
   return (
-    <>
+    <div {...getTestIdProps('jarjestajatSelection')}>
       {options.map(({ value: optionValue, label }) => (
         <Checkbox
           key={optionValue}
+          name={optionValue}
           checked={value.includes(optionValue)}
           onChange={makeOnCheckboxChange({ value, onChange, optionValue })}
         >
           {label}
         </Checkbox>
       ))}
-    </>
+    </div>
   );
 };
 

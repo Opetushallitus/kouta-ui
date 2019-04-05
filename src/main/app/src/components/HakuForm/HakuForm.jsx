@@ -13,7 +13,7 @@ import FormCollapseGroup from '../FormCollapseGroup';
 import FormCollapse from '../FormCollapse';
 import HakukohteetModal from './HakukohteetModal';
 import HakukohteetSection from './HakukohteetSection';
-import { isFunction } from '../../utils';
+import { isFunction, getTestIdProps } from '../../utils';
 import { ModalController } from '../Modal';
 import Flex from '../Flex';
 import Button from '../Button';
@@ -57,6 +57,7 @@ const HakuForm = ({
                 header={t('yleiset.pohjanValinta')}
                 section="pohja"
                 onContinue={onMaybeCopy}
+                {...getTestIdProps('pohjaSection')}
               >
                 {({ onContinue }) => (
                   <BaseSelectionSection
@@ -72,28 +73,39 @@ const HakuForm = ({
             <FormCollapse
               header={t('yleiset.kieliversiot')}
               section="kieliversiot"
+              {...getTestIdProps('kieliversiotSection')}
             >
               <KieliversiotFormSection />
             </FormCollapse>
 
-            <FormCollapse header={t('hakulomake.haunNimi')} section="nimi">
+            <FormCollapse
+              header={t('hakulomake.haunNimi')}
+              section="nimi"
+              {...getTestIdProps('nimiSection')}
+            >
               <NameSection languages={languages} />
             </FormCollapse>
 
             <FormCollapse
               header={t('hakulomake.haunKohdejoukko')}
               section="kohdejoukko"
+              {...getTestIdProps('kohdejoukkoSection')}
             >
               <TargetGroupSection />
             </FormCollapse>
 
-            <FormCollapse header={t('hakulomake.hakutapa')} section="hakutapa">
+            <FormCollapse
+              header={t('hakulomake.hakutapa')}
+              section="hakutapa"
+              {...getTestIdProps('hakutapaSection')}
+            >
               <SearchTypeSection />
             </FormCollapse>
 
             <FormCollapse
               header={t('hakulomake.haunAikataulu')}
               section="aikataulut"
+              {...getTestIdProps('aikatauluSection')}
             >
               <ScheduleSection />
             </FormCollapse>
@@ -101,6 +113,7 @@ const HakuForm = ({
             <FormCollapse
               header={t('yleiset.hakulomakkeenValinta')}
               section="hakulomake"
+              {...getTestIdProps('hakulomakeSection')}
             >
               <FormSelectSection />
             </FormCollapse>
@@ -108,9 +121,11 @@ const HakuForm = ({
             <FormCollapse
               header={t('hakulomake.haunYhteystiedot')}
               section="yhteystiedot"
+              {...getTestIdProps('yhteystiedotSection')}
             >
               <ContactInfoSection languages={languages} />
             </FormCollapse>
+
             {isFunction(onAttachHakukohde) ? (
               <FormCollapse
                 header={t('hakulomake.liitetytHakukohteet')}

@@ -7,6 +7,7 @@ import { submit as submitHakuForm } from '../../state/createHakuForm';
 import { JULKAISUTILA } from '../../constants';
 import Button from '../Button';
 import useTranslation from '../useTranslation';
+import { getTestIdProps } from '../../utils';
 
 const hakuFormIsValid = isValid('createHakuForm');
 
@@ -32,10 +33,18 @@ const CreateHakuFooter = ({
 
   return (
     <Wrapper>
-      <SaveButton onClick={onSave} disabled={!valid}>
+      <SaveButton
+        onClick={onSave}
+        disabled={!valid}
+        {...getTestIdProps('tallennaHakuButton')}
+      >
         {t('yleiset.tallenna')}
       </SaveButton>
-      <Button onClick={onSaveAndPublish} disabled={!valid}>
+      <Button
+        onClick={onSaveAndPublish}
+        disabled={!valid}
+        {...getTestIdProps('tallennaJaJulkaiseHakuButton')}
+      >
         {t('yleiset.tallennaJaJulkaise')}
       </Button>
     </Wrapper>

@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import get from 'lodash/get';
 
 import Flex, { FlexItem } from '../Flex';
-import { getFirstLanguageValue } from '../../utils';
+import { getFirstLanguageValue, getTestIdProps } from '../../utils';
 import Typography from '../Typography';
 import { getThemeProp, spacing } from '../../theme';
 import Spacing from '../Spacing';
@@ -58,7 +58,7 @@ const HomeContent = ({ organisaatiot, organisaatioOid, history }) => {
           <FlexItem>
             <Flex alignCenter>
               <FlexItem grow={1} paddingRight={2}>
-                <Typography>
+                <Typography {...getTestIdProps('selectedOrganisaatio')}>
                   {getFirstLanguageValue(get(organisaatio, 'nimi'))}
                 </Typography>
               </FlexItem>
@@ -67,6 +67,7 @@ const HomeContent = ({ organisaatiot, organisaatioOid, history }) => {
                   onClick={onOpenDrawer}
                   variant="outlined"
                   title="Vaihda organisaatiota"
+                  {...getTestIdProps('toggleOrganisaatioDrawer')}
                 >
                   <Icon type="menu" />
                 </Button>

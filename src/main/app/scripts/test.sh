@@ -20,5 +20,5 @@ if [ -z $CI ]; then
 else
   echo 'CI = ' $CI
   npm run build
-  CI=true npm run test;
+  npm run test:ci;
 fi;

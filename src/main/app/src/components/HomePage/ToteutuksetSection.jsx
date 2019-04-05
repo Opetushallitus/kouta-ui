@@ -16,7 +16,7 @@ import { getIndexParamsByFilters } from './utils';
 import Filters from './Filters';
 import Badge from '../Badge';
 import useFilterState from './useFilterState';
-import { getFirstLanguageValue } from '../../utils';
+import { getFirstLanguageValue, getTestIdProps } from '../../utils';
 import Anchor from '../Anchor';
 import ToteutusTilaDropdown from './ToteutusTilaDropdown';
 import ErrorAlert from '../ErrorAlert';
@@ -120,6 +120,7 @@ const ToteutuksetSection = ({ organisaatioOid }) => {
           columns={tableColumns}
           onSort={setOrderBy}
           sort={orderBy}
+          {...getTestIdProps('toteutuksetTable')}
         />
       ) : error ? (
         <ErrorAlert onReload={reload} center />

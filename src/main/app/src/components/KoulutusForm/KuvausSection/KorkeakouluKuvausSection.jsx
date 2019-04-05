@@ -6,6 +6,7 @@ import Textarea from '../../Textarea';
 import Typography from '../../Typography';
 import Spacing from '../../Spacing';
 import useTranslation from '../../useTranslation';
+import { getTestIdProps } from '../../../utils';
 
 const renderInputField = ({ input }) => <Input {...input} />;
 
@@ -16,18 +17,20 @@ export const KorkeakouluKuvausSection = ({ language }) => {
 
   return (
     <>
-      <Spacing marginBottom={2}>
+      <Spacing marginBottom={2} {...getTestIdProps('kuvauksenNimiInput')}>
         <Typography variant="h6" marginBottom={1}>
           {t('yleiset.kuvauksenNimi')}
         </Typography>
         <Field name={`nimi.${language}`} component={renderInputField} />
       </Spacing>
-      <Typography variant="h6" marginBottom={1}>
-        {t('yleiset.kuvaus')}
-      </Typography>
-      <Field name={`kuvaus.${language}`} component={renderTextareaField} />
+      <Spacing {...getTestIdProps('kuvausInput')}>
+        <Typography variant="h6" marginBottom={1}>
+          {t('yleiset.kuvaus')}
+        </Typography>
+        <Field name={`kuvaus.${language}`} component={renderTextareaField} />
+      </Spacing>
     </>
   );
-}
+};
 
 export default KorkeakouluKuvausSection;

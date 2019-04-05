@@ -5,7 +5,7 @@ import Checkbox from '../Checkbox';
 import useTranslation from '../useTranslation';
 
 const renderCheckboxField = ({ input: { onChange, value }, label }) => (
-  <Checkbox onChange={onChange} checked={value}>
+  <Checkbox onChange={onChange} checked={value} name="julkinen">
     {label}
   </Checkbox>
 );

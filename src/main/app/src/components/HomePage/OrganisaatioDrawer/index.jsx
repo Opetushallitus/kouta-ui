@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import Drawer from '../../Drawer';
 import Typography from '../../Typography';
-import { isArray} from '../../../utils';
+import { isArray, getTestIdProps } from '../../../utils';
 import Flex, { FlexItem } from '../../Flex';
 import { spacing, getThemeProp } from '../../../theme';
 import Button from '../../Button';
@@ -147,7 +147,7 @@ export const OrganisaatioDrawer = ({
           </FlexItem>
         ) : null}
 
-        <TreeContainer>
+        <TreeContainer {...getTestIdProps('organisaatioDrawerOrganisaatioList')}>
           <OrganisaatioTreeList
             items={items}
             selected={selectedOrganisaatio}

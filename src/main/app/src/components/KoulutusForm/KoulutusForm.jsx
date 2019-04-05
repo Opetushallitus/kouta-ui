@@ -15,7 +15,7 @@ import ToteutuksetModal from './ToteutuksetModal';
 import ToteutuksetSection from './ToteutuksetSection';
 import { ModalController } from '../Modal';
 import Button from '../Button';
-import { isFunction } from '../../utils';
+import { isFunction, getTestIdProps } from '../../utils';
 import LisatiedotSection from './LisatiedotSection';
 import Flex from '../Flex';
 import NakyvyysSection from './NakyvyysSection';
@@ -55,12 +55,16 @@ const KoulutusForm = ({
           const koulutustyyppi =
             get(koulutusProp, 'koulutustyyppi') || koulutustyyppiValue;
 
-          const languageTabs = languagesValue || [];
+          const languageTabs = languagesValue || [];
 
           return (
             <FormCollapseGroup enabled={steps} scrollTarget={scrollTarget}>
               {canEditKoulutustyyppi ? (
-                <FormCollapse header={t('yleiset.koulutustyyppi')} section="type">
+                <FormCollapse
+                  header={t('yleiset.koulutustyyppi')}
+                  section="type"
+                  {...getTestIdProps('tyyppiSection')}
+                >
                   <TypeSection />
                 </FormCollapse>
               ) : null}
@@ -70,6 +74,7 @@ const KoulutusForm = ({
                   header={t('yleiset.pohjanValinta')}
                   section="base"
                   onContinue={onMaybeCopy}
+                  {...getTestIdProps('pohjaSection')}
                 >
                   {({ onContinue }) => (
                     <BaseSelectionSection
@@ -82,11 +87,19 @@ const KoulutusForm = ({
                 </FormCollapse>
               ) : null}
 
-              <FormCollapse header={t('yleiset.kieliversiot')} section="kieliversiot">
+              <FormCollapse
+                header={t('yleiset.kieliversiot')}
+                section="kieliversiot"
+                {...getTestIdProps('kieliversiotSection')}
+              >
                 <KieliversiotFormSection />
               </FormCollapse>
 
-              <FormCollapse header={t('koulutuslomake.koulutuksenTiedot')} section="information">
+              <FormCollapse
+                header={t('koulutuslomake.koulutuksenTiedot')}
+                section="information"
+                {...getTestIdProps('tiedotSection')}
+              >
                 <TiedotSection
                   languages={languageTabs}
                   koulutustyyppi={koulutustyyppi}
@@ -97,6 +110,7 @@ const KoulutusForm = ({
               <FormCollapse
                 header={t('koulutuslomake.koulutuksenKuvaus')}
                 section="description"
+                {...getTestIdProps('kuvausSection')}
               >
                 <KuvausSection
                   languages={languageTabs}
@@ -108,6 +122,7 @@ const KoulutusForm = ({
               <FormCollapse
                 header={t('koulutuslomake.koulutuksenLisatiedot')}
                 section="lisatiedot"
+                {...getTestIdProps('lisatiedotSection')}
               >
                 <LisatiedotSection languages={languageTabs} />
               </FormCollapse>
@@ -115,6 +130,7 @@ const KoulutusForm = ({
               <FormCollapse
                 header={t('koulutuslomake.koulutuksenJarjestaja')}
                 section="organization"
+                {...getTestIdProps('jarjestajaSection')}
               >
                 <OrganizationSection organisaatioOid={organisaatioOid} />
               </FormCollapse>
@@ -123,6 +139,7 @@ const KoulutusForm = ({
                 <FormCollapse
                   header="Koulutuksen näkyminen muille koulutustoimijoille"
                   section="nakyvyys"
+                  {...getTestIdProps('nakyvyysSection')}
                 >
                   <NakyvyysSection />
                 </FormCollapse>

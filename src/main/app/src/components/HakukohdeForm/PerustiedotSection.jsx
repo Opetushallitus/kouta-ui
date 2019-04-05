@@ -8,6 +8,7 @@ import LanguageSelector from '../LanguageSelector';
 import Checkbox from '../Checkbox';
 import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
 import useTranslation from '../useTranslation';
+import { getTestIdProps } from '../../utils';
 
 const renderCheckboxField = ({ input, label = null }) => (
   <Checkbox checked={input.value} onChange={input.onChange} children={label} />
@@ -25,7 +26,7 @@ const PerustiedotSection = ({ languages, koulutustyyppi }) => {
     <LanguageSelector languages={languages} defaultValue="fi">
       {({ value: activeLanguage }) => (
         <>
-          <Spacing marginBottom={2}>
+          <Spacing marginBottom={2} {...getTestIdProps('nimi')}>
             <Typography variant="h6" marginBottom={1}>
               {t('yleiset.nimi')}
             </Typography>

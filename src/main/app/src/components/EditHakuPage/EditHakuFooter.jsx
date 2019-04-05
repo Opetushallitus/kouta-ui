@@ -6,6 +6,7 @@ import { isValid } from 'redux-form';
 import { submit } from '../../state/editHakuForm';
 import Button from '../Button';
 import { JULKAISUTILA } from '../../constants';
+import { getTestIdProps } from '../../utils';
 
 const hakuFormIsValid = isValid('editHakuForm');
 
@@ -31,11 +32,19 @@ const EditHakuFooter = ({ haku, valid, onSave = () => {} }) => {
 
   return (
     <Wrapper>
-      <Button variant="outlined" onClick={onSave}>
+      <Button
+        variant="outlined"
+        onClick={onSave}
+        {...getTestIdProps('tallennaHakuButton')}
+      >
         Tallenna
       </Button>
       {tila !== JULKAISUTILA.JULKAISTU ? (
-        <PublishButton disabled={!valid} onClick={onSaveAndPublish}>
+        <PublishButton
+          disabled={!valid}
+          onClick={onSaveAndPublish}
+          {...getTestIdProps('tallennaJaJulkaiseHakuButton')}
+        >
           Tallenna ja julkaise
         </PublishButton>
       ) : null}
@@ -47,8 +56,18 @@ export default connect(
   state => ({
     valid: hakuFormIsValid(state),
   }),
-  (dispatch, { haku: { oid: hakuOid, organisaatioOid, tila, lastModified } }) => ({
+  (
+    dispatch,
+    { haku: { oid: hakuOid, organisaatioOid, tila, lastModified } },
+  ) => ({
     onSave: ({ tila: tilaArg } = {}) =>
-      dispatch(submit({ hakuOid, tila: tilaArg || tila, organisaatioOid, lastModified })),
+      dispatch(
+        submit({
+          hakuOid,
+          tila: tilaArg || tila,
+          organisaatioOid,
+          lastModified,
+        }),
+      ),
   }),
 )(EditHakuFooter);

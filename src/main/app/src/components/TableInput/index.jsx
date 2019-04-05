@@ -337,7 +337,7 @@ class TableInput extends Component {
     const numberOfColumns = getNumberOfColumns(rows);
 
     return (
-      <Container>
+      <Container className="TableInput__">
         <Row>
           <EditRowPlaceholder>
             <Invisible>0</Invisible>

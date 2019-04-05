@@ -122,6 +122,7 @@ const ValintaperusteForm = ({
                 <FormCollapse
                   header={t('valintaperustelomake.osaamistausta')}
                   section="osaamistausta"
+                  {...getTestIdProps('osaamistaustaSection')}
                 >
                   <OsaamistaustaSection />
                 </FormCollapse>
@@ -147,6 +148,7 @@ const ValintaperusteForm = ({
                 <FormCollapse
                   header={t('valintaperustelomake.valintaperusteenLoppukuvaus')}
                   section="loppukuvaus"
+                  {...getTestIdProps('loppukuvausSection')}
                 >
                   <LoppukuvausSection languages={languages} />
                 </FormCollapse>

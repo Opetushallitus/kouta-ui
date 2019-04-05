@@ -21,4 +21,5 @@ export const stubValintaperusteFormRoutes = ({ cy, organisaatioOid }) => {
   stubKoodistoRoute({ koodisto: 'kielitaitovaatimustyypit', cy });
   stubKoodistoRoute({ koodisto: 'kielitaitovaatimustyypitkuvaus', cy });
   stubKoodistoRoute({ koodisto: 'kieli', cy });
+  stubKoodistoRoute({ koodisto: 'osaamistausta', cy });
 };

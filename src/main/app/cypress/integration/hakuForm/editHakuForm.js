@@ -1,8 +1,8 @@
 import merge from 'lodash/merge';
 
-import { getByTestId, stubKoodistoRoute } from '../../utils';
+import { getByTestId } from '../../utils';
+import { stubHakuFormRoutes } from '../../hakuFormUtils';
 
-import organisaatio from '../../data/organisaatio';
 import haku from '../../data/haku';
 
 const tallenna = cy => {
@@ -16,25 +16,7 @@ describe('editHakuForm', () => {
   beforeEach(() => {
     cy.server();
 
-    cy.route({
-      method: 'GET',
-      url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
-      response: merge(organisaatio(), {
-        oid: organisaatioOid,
-      }),
-    });
-
-    stubKoodistoRoute({ koodisto: 'haunkohdejoukko', cy });
-    stubKoodistoRoute({ koodisto: 'hakutapa', cy });
-    stubKoodistoRoute({ koodisto: 'kausi', cy });
-    stubKoodistoRoute({ koodisto: 'opetuspaikkakk', cy });
-    stubKoodistoRoute({ koodisto: 'kausi', cy });
-
-    cy.route({
-      method: 'GET',
-      url: '**/haku/list**',
-      response: [],
-    });
+    stubHakuFormRoutes({ organisaatioOid, cy });
 
     cy.route({
       method: 'GET',

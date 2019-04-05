@@ -1,16 +1,13 @@
-import merge from 'lodash/merge';
-
 import {
   getByTestId,
   getRadio,
-  stubKoodistoRoute,
   selectOption,
   typeToEditor,
   getTableInput,
   getCheckbox,
 } from '../../utils';
 
-import organisaatio from '../../data/organisaatio';
+import { stubValintaperusteFormRoutes } from '../../valintaperusteFormUtils';
 
 const jatka = cy => {
   getByTestId('jatkaButton', cy).click({ force: true });
@@ -152,23 +149,7 @@ describe('createValintaperusteForm', () => {
   const organisaatioOid = '1.1.1.1.1.1';
 
   beforeEach(() => {
-    cy.server();
-
-    cy.route({
-      method: 'GET',
-      url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
-      response: merge(organisaatio(), {
-        oid: organisaatioOid,
-      }),
-    });
-
-    stubKoodistoRoute({ koodisto: 'hakutapa', cy });
-    stubKoodistoRoute({ koodisto: 'haunkohdejoukko', cy });
-    stubKoodistoRoute({ koodisto: 'valintatapajono', cy });
-    stubKoodistoRoute({ koodisto: 'kielitaidonosoittaminen', cy });
-    stubKoodistoRoute({ koodisto: 'kielitaitovaatimustyypit', cy });
-    stubKoodistoRoute({ koodisto: 'kielitaitovaatimustyypitkuvaus', cy });
-    stubKoodistoRoute({ koodisto: 'kieli', cy });
+    stubValintaperusteFormRoutes({ cy, organisaatioOid });
 
     cy.visit(`/organisaatio/${organisaatioOid}/valintaperusteet`);
   });

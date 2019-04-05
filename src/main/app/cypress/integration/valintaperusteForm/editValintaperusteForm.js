@@ -1,9 +1,8 @@
 import merge from 'lodash/merge';
 
-import { getByTestId, stubKoodistoRoute } from '../../utils';
-
-import organisaatio from '../../data/organisaatio';
+import { getByTestId } from '../../utils';
 import valintaperuste from '../../data/valintaperuste';
+import { stubValintaperusteFormRoutes } from '../../valintaperusteFormUtils';
 
 const tallenna = cy => {
   getByTestId('tallennaValintaperusteButton', cy).click({ force: true });
@@ -18,23 +17,7 @@ describe('editValintaperusteForm', () => {
   };
 
   beforeEach(() => {
-    cy.server();
-
-    cy.route({
-      method: 'GET',
-      url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
-      response: merge(organisaatio(), {
-        oid: organisaatioOid,
-      }),
-    });
-
-    stubKoodistoRoute({ koodisto: 'hakutapa', cy });
-    stubKoodistoRoute({ koodisto: 'haunkohdejoukko', cy });
-    stubKoodistoRoute({ koodisto: 'valintatapajono', cy });
-    stubKoodistoRoute({ koodisto: 'kielitaidonosoittaminen', cy });
-    stubKoodistoRoute({ koodisto: 'kielitaitovaatimustyypit', cy });
-    stubKoodistoRoute({ koodisto: 'kielitaitovaatimustyypitkuvaus', cy });
-    stubKoodistoRoute({ koodisto: 'kieli', cy });
+    stubValintaperusteFormRoutes({ cy, organisaatioOid });
 
     cy.visit(`/valintaperusteet/${valintaperusteId}/muokkaus`);
   });

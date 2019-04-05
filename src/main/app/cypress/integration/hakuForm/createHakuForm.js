@@ -1,13 +1,6 @@
-import merge from 'lodash/merge';
+import { getByTestId, getRadio, getSelectOption } from '../../utils';
 
-import {
-  getByTestId,
-  getRadio,
-  getSelectOption,
-  stubKoodistoRoute,
-} from '../../utils';
-
-import organisaatio from '../../data/organisaatio';
+import { stubHakuFormRoutes } from '../../hakuFormUtils';
 
 const jatka = cy => {
   getByTestId('jatkaButton', cy).click({ force: true });
@@ -175,27 +168,7 @@ describe('createHakuForm', () => {
   const organisaatioOid = '1.1.1.1.1.1';
 
   beforeEach(() => {
-    cy.server();
-
-    cy.route({
-      method: 'GET',
-      url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
-      response: merge(organisaatio(), {
-        oid: organisaatioOid,
-      }),
-    });
-
-    stubKoodistoRoute({ koodisto: 'haunkohdejoukko', cy });
-    stubKoodistoRoute({ koodisto: 'hakutapa', cy });
-    stubKoodistoRoute({ koodisto: 'kausi', cy });
-    stubKoodistoRoute({ koodisto: 'opetuspaikkakk', cy });
-    stubKoodistoRoute({ koodisto: 'kausi', cy });
-
-    cy.route({
-      method: 'GET',
-      url: '**/haku/list**',
-      response: [],
-    });
+    stubHakuFormRoutes({ cy, organisaatioOid });
 
     cy.visit(`/organisaatio/${organisaatioOid}/haku`);
   });

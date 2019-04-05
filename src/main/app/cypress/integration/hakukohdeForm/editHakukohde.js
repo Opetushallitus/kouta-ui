@@ -8,6 +8,7 @@ import haku from '../../data/haku';
 import toteutus from '../../data/toteutus';
 import valintaperuste from '../../data/valintaperuste';
 import hakukohde from '../../data/hakukohde';
+import { stubHakukohdeFormRoutes } from '../../hakukohdeFormUtils';
 
 const tallenna = cy => {
   getByTestId('tallennaHakukohdeButton', cy).click({ force: true });
@@ -31,38 +32,7 @@ describe('createHakukohdeForm', () => {
   beforeEach(() => {
     cy.server();
 
-    cy.route({
-      method: 'GET',
-      url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
-      response: merge(organisaatio(), {
-        oid: organisaatioOid,
-      }),
-    });
-
-    stubKoodistoRoute({ koodisto: 'pohjakoulutusvaatimustoinenaste', cy });
-    stubKoodistoRoute({ koodisto: 'kausi', cy });
-    stubKoodistoRoute({ koodisto: 'valintakokeentyyppi', cy });
-    stubKoodistoRoute({ koodisto: 'liitetyypitamm', cy });
-
-    cy.route({
-      method: 'GET',
-      url: '**/valintaperuste/list**',
-      response: [
-        merge(valintaperuste(), {
-          oid: valintaperusteOid,
-          nimi: { fi: 'Valintaperusteen nimi' },
-        }),
-      ],
-    });
-
-    cy.route({
-      method: 'GET',
-      url: `**/haku/${hakuOid}`,
-      response: merge(haku(), {
-        oid: hakuOid,
-        organisaatioOid: organisaatioOid,
-      }),
-    });
+    stubHakukohdeFormRoutes({ cy, organisaatioOid, hakuOid });
 
     cy.route({
       method: 'GET',
@@ -81,6 +51,17 @@ describe('createHakukohdeForm', () => {
         oid: koulutusOid,
         organisaatioOid: organisaatioOid,
       }),
+    });
+
+    cy.route({
+      method: 'GET',
+      url: '**/valintaperuste/list**',
+      response: [
+        merge(valintaperuste(), {
+          oid: valintaperusteOid,
+          nimi: { fi: 'Valintaperusteen nimi' },
+        }),
+      ],
     });
 
     cy.visit(`/hakukohde/${hakukohdeOid}/muokkaus`);
@@ -104,7 +85,74 @@ describe('createHakukohdeForm', () => {
     tallenna(cy);
 
     cy.wait('@updateHakukohdeRequest').then(({ request }) => {
-      cy.log(JSON.stringify(request.body));
+      expect(request.body).to.deep.equal({
+        oid: '6.1.1.1.1.1',
+        toteutusOid: '2.1.1.1.1.1',
+        hakuOid: '4.1.1.1.1.1',
+        tila: 'tallennettu',
+        nimi: { fi: 'Hakukohteen nimi' },
+        alkamiskausiKoodiUri: 'kausi_0#1',
+        alkamisvuosi: 2024,
+        hakulomake: {},
+        aloituspaikat: 100,
+        pohjakoulutusvaatimusKoodiUrit: ['pohjakoulutusvaatimustoinenaste_0#1'],
+        muuPohjakoulutusvaatimus: {},
+        toinenAsteOnkoKaksoistutkinto: true,
+        kaytetaanHaunAikataulua: false,
+        liitteetOnkoSamaToimitusaika: false,
+        liitteetOnkoSamaToimitusosoite: false,
+        liitteidenToimitusosoite: {
+          osoite: {
+            osoite: { fi: 'Paasikivenkatu 7' },
+            postinumero: '15110',
+            postitoimipaikka: { fi: 'Lahti' },
+          },
+          sahkoposti: 'salpaus@salpaus.fi',
+        },
+        liitteet: [
+          {
+            tyyppi: null,
+            nimi: { fi: 'Nimi' },
+            toimitusaika: '2011-11-11T10:30',
+            toimitusosoite: {
+              osoite: {
+                osoite: { fi: 'Osoite' },
+                postinumero: '00940',
+                postitoimipaikka: { fi: 'Postitoimipaikka' },
+              },
+              sahkoposti: 'sahkoposti@email.com',
+            },
+            kuvaus: { fi: 'Kuvaus' },
+          },
+        ],
+        valintakokeet: [
+          {
+            tyyppi: 'valintakokeentyyppi_0#1',
+            tilaisuudet: [
+              {
+                osoite: {
+                  osoite: { fi: 'Osoite' },
+                  postinumero: '00940',
+                  postitoimipaikka: { fi: 'Postitoimipaikka' },
+                },
+                aika: {
+                  alkaa: '2011-11-11T10:30',
+                  paattyy: '2011-11-12T11:45',
+                },
+                lisatietoja: { fi: 'Lisätietoja' },
+              },
+            ],
+          },
+        ],
+        hakuajat: [{ alkaa: '2011-11-11T10:30', paattyy: '2011-11-12T11:45' }],
+        muokkaaja: '1.2.246.562.24.62301161440',
+        organisaatioOid: '1.1.1.1.1.1',
+        kielivalinta: ['fi', 'sv'],
+        modified: '2019-04-04T08:28',
+        liitteidenToimitusaika: null,
+        valintaperuste: null,
+        ensikertalaisenAloituspaikat: null,
+      });
     });
   });
 });

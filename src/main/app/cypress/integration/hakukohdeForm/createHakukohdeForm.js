@@ -1,18 +1,11 @@
 import merge from 'lodash/merge';
 
-import {
-  getByTestId,
-  getRadio,
-  stubKoodistoRoute,
-  selectOption,
-  getCheckbox,
-} from '../../utils';
+import { getByTestId, getRadio, selectOption, getCheckbox } from '../../utils';
 
-import organisaatio from '../../data/organisaatio';
 import koulutus from '../../data/koulutus';
-import haku from '../../data/haku';
 import toteutus from '../../data/toteutus';
 import valintaperuste from '../../data/valintaperuste';
+import { stubHakukohdeFormRoutes } from '../../hakukohdeFormUtils';
 
 const jatka = cy => {
   getByTestId('jatkaButton', cy).click({ force: true });
@@ -202,18 +195,7 @@ describe('createHakukohdeForm', () => {
   beforeEach(() => {
     cy.server();
 
-    cy.route({
-      method: 'GET',
-      url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
-      response: merge(organisaatio(), {
-        oid: organisaatioOid,
-      }),
-    });
-
-    stubKoodistoRoute({ koodisto: 'pohjakoulutusvaatimustoinenaste', cy });
-    stubKoodistoRoute({ koodisto: 'kausi', cy });
-    stubKoodistoRoute({ koodisto: 'valintakokeentyyppi', cy });
-    stubKoodistoRoute({ koodisto: 'liitetyypitamm', cy });
+    stubHakukohdeFormRoutes({ cy, organisaatioOid, hakuOid });
 
     cy.route({
       method: 'GET',
@@ -224,15 +206,6 @@ describe('createHakukohdeForm', () => {
           nimi: { fi: 'Valintaperusteen nimi' },
         }),
       ],
-    });
-
-    cy.route({
-      method: 'GET',
-      url: `**/haku/${hakuOid}`,
-      response: merge(haku(), {
-        oid: hakuOid,
-        organisaatioOid: organisaatioOid,
-      }),
     });
 
     cy.route({

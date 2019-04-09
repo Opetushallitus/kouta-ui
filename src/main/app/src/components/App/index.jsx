@@ -10,6 +10,8 @@ import HttpContext from '../HttpContext';
 import UrlContext from '../UrlContext';
 import MainPage from '../MainPage';
 import LocalisationProvider from '../LocalisationProvider';
+import VirkailijaRaamit from '../VirkailijaRaamit';
+import UserGate from '../UserGate';
 
 const SpinContainer = styled.div`
   height: 100vh;
@@ -18,6 +20,12 @@ const SpinContainer = styled.div`
   justify-content: center;
   width: 100%;
 `;
+
+const CenterSpin = () => (
+  <SpinContainer>
+    <Spin size="large" />
+  </SpinContainer>
+);
 
 const App = ({
   store,
@@ -31,25 +39,22 @@ const App = ({
   return (
     <>
       <Provider store={store}>
-        <PersistGate persistor={persistor} loading={null}>
-          <LocalisationProvider i18n={localisation}>
-            <ThemeProvider theme={theme}>
+        <LocalisationProvider i18n={localisation}>
+          <ThemeProvider theme={theme}>
+            <PersistGate persistor={persistor} loading={<CenterSpin />}>
               <HttpContext.Provider value={httpClient}>
                 <UrlContext.Provider value={urls}>
-                  <Suspense
-                    fallback={
-                      <SpinContainer>
-                        <Spin size="large" />
-                      </SpinContainer>
-                    }
-                  >
-                    <MainPage history={history} />
+                  <Suspense fallback={<CenterSpin />}>
+                    <VirkailijaRaamit />
+                    <UserGate fallback={<CenterSpin />}>
+                      <MainPage history={history} />
+                    </UserGate>
                   </Suspense>
                 </UrlContext.Provider>
               </HttpContext.Provider>
-            </ThemeProvider>
-          </LocalisationProvider>
-        </PersistGate>
+            </PersistGate>
+          </ThemeProvider>
+        </LocalisationProvider>
       </Provider>
       <GlobalStyle />
     </>

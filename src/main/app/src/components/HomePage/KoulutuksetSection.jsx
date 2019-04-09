@@ -84,9 +84,9 @@ const makeTableColumns = t => [
     title: t('yleiset.nimi'),
     key: 'nimi',
     sortable: true,
-    render: ({ nimi, oid }) => (
+    render: ({ nimi, oid, language }) => (
       <Anchor as={Link} to={`/koulutus/${oid}/muokkaus`}>
-        {getFirstLanguageValue(nimi)}
+        {getFirstLanguageValue(nimi, language)}
       </Anchor>
     ),
   },
@@ -163,7 +163,10 @@ const KoulutuksetSection = ({ organisaatioOid }) => {
       defaultOpen
     >
       <Spacing marginBottom={2}>
-        <Filters {...filtersProps} nimiPlaceholder={t('etusivu.haeKoulutuksia')} />
+        <Filters
+          {...filtersProps}
+          nimiPlaceholder={t('etusivu.haeKoulutuksia')}
+        />
       </Spacing>
 
       {rows ? (

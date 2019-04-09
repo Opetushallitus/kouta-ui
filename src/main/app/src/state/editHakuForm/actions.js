@@ -36,7 +36,7 @@ export const submit = ({
   }
 
   const {
-    me: { kayttajaOid },
+    me: { oid: kayttajaOid },
   } = state;
 
   const hakuFormData = getHakuByValues(values);

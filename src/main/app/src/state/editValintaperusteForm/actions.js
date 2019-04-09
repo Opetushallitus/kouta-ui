@@ -38,7 +38,7 @@ export const submit = ({ valintaperuste, tila: tilaArg }) => async (
   }
 
   const {
-    me: { kayttajaOid },
+    me: { oid: kayttajaOid },
   } = state;
 
   const valintaperusteFormData = getValintaperusteByValues(values);

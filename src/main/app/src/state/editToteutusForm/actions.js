@@ -37,7 +37,7 @@ export const submit = ({ toteutus, tila: tilaArg }) => async (
   }
 
   const {
-    me: { kayttajaOid },
+    me: { oid: kayttajaOid },
   } = state;
 
   const toteutusFormData = getToteutusByValues(values);

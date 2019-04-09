@@ -60,7 +60,7 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   }
 
   const {
-    me: { kayttajaOid: muokkaaja },
+    me: { oid: muokkaaja },
   } = state;
 
   const { organisaatioOid } = getOidsFromPathname(history.location.pathname);

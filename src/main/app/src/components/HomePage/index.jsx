@@ -71,5 +71,5 @@ const HomePage = ({ kayttajaOid = null, location }) => {
 };
 
 export default connect(state => ({
-  kayttajaOid: state.me.kayttajaOid,
+  kayttajaOid: state.me.oid,
 }))(HomePage);

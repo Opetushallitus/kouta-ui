@@ -813,3 +813,16 @@ export const getKoutaIndexValintaperusteet = async ({
 
   return data;
 };
+
+const memoizedGetMe = memoizePromise(async (httpClient, apiUrls) => {
+  return {
+    uid: 'johndoe',
+    oid: '1.2.246.562.24.62301161440',
+    firstName: 'John',
+    lastName: 'Doe',
+    lang: 'fi',
+  };
+});
+
+export const getMe = ({ httpClient, apiUrls }) =>
+  memoizedGetMe(httpClient, apiUrls);

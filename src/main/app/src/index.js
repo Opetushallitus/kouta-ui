@@ -63,6 +63,8 @@ const loadLocalisation = async ({
     localisation: localisationInstance,
   });
 
+  window.__store__ = store;
+
   ReactDOM.render(
     <App
       store={store}

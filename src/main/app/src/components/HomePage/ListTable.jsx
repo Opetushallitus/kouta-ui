@@ -7,6 +7,7 @@ import { getSortDirection, makeOnSort } from './utils';
 import Icon from '../Icon';
 import TilaLabel from './TilaLabel';
 import { formatKoutaDateString, isFunction } from '../../utils';
+import useLanguage from '../useLanguage';
 
 import { UncontrolledDropdown } from '../Dropdown';
 
@@ -81,12 +82,14 @@ export const ListTable = ({
   renderActionsMenu,
   defaultCollapsedRow = null,
   defaultCollapsedColumn = null,
-  ...props,
+  ...props
 }) => {
   const [collapsed, setCollapsed] = useState({
     row: defaultCollapsedRow,
     column: defaultCollapsedColumn,
   });
+
+  const language = useLanguage();
 
   const { row: collapsedRow, column: collapsedColumn } = collapsed;
 
@@ -143,7 +146,7 @@ export const ListTable = ({
                             : null
                         }
                       >
-                        {render(rowProps)}
+                        {render({ ...rowProps, language })}
                       </Cell>
                     );
                   },
@@ -158,8 +161,7 @@ export const ListTable = ({
               </TableRow>
               {rowIsCollapsed ? (
                 <TableRow>
-                  <TableCell colSpan={columnCount} active>
-                  </TableCell>
+                  <TableCell colSpan={columnCount} active />
                 </TableRow>
               ) : null}
             </Fragment>

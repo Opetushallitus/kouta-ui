@@ -40,4 +40,5 @@ export const development = {
   'kouta-index.haku-list': 'https://virkailija.hahtuvaopintopolku.fi/kouta-index/haku/filtered-list',
   'kouta-index.valintaperuste-list': 'https://virkailija.hahtuvaopintopolku.fi/kouta-index/valintaperuste/filtered-list',
   'kayttooikeus-service.me': 'https://virkailija.hahtuvaopintopolku.fi/kayttooikeus-service/cas/me',
+  'virkailija-raamit.raamitJs': 'https://virkailija.hahtuvaopintopolku.fi/virkailija-raamit/apply-raamit.js',
 };

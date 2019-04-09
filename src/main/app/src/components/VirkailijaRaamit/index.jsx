@@ -1,6 +1,4 @@
-import React, { useLayoutEffect, useContext, useRef } from 'react';
-import { createPortal } from 'react-dom';
-
+import { useEffect, useContext } from 'react';
 import UrlContext from '../UrlContext';
 
 const getScriptUrl = urls => {
@@ -13,29 +11,30 @@ const getScriptUrl = urls => {
   return scriptUrl;
 };
 
+const raamitId = `virkailijaRaamit__${Math.round(Math.random() * 1000)}`;
+
 const VirkalijaRaamit = () => {
   const urls = useContext(UrlContext);
   const scriptUrl = getScriptUrl(urls);
-  const containerRef = useRef();
+  const showRaamit = !!scriptUrl;
 
-  if (!containerRef.current) {
-    containerRef.current = document.createElement('div');
-  }
+  useEffect(() => {
+    let scriptElement;
 
-  useLayoutEffect(() => {
-    document.body.appendChild(containerRef.current);
+    if (showRaamit && !document.getElementById(raamitId)) {
+      scriptElement = document.createElement('script');
+      scriptElement.src = scriptUrl;
+      scriptElement.id = raamitId;
+
+      document.body.appendChild(scriptElement);
+    }
 
     return () => {
-      document.body.removeChild(containerRef.current);
+      scriptElement && document.body.removeChild(scriptElement);
     };
   });
 
-  const showRaamit = !!scriptUrl;
-
-  return createPortal(
-    showRaamit ? <script src={scriptUrl} /> : null,
-    containerRef.current,
-  );
+  return null;
 };
 
 export default VirkalijaRaamit;

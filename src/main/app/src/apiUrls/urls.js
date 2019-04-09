@@ -1,6 +1,6 @@
 const koutaBackendDevUrl = `https://virkailija.hahtuvaopintopolku.fi/kouta-backend`;
 
-export const development = {
+export const development = ({ isCypress }) => ({
   'kouta-backend.base-url': 'http://localhost:' + process.env.REACT_APP_BACKEND_PORT,
   'kouta-backend.koulutus': `${koutaBackendDevUrl}/koulutus`,
   'kouta-backend.koulutus-by-oid': `${koutaBackendDevUrl}/koulutus/$1`,
@@ -40,5 +40,7 @@ export const development = {
   'kouta-index.haku-list': 'https://virkailija.hahtuvaopintopolku.fi/kouta-index/haku/filtered-list',
   'kouta-index.valintaperuste-list': 'https://virkailija.hahtuvaopintopolku.fi/kouta-index/valintaperuste/filtered-list',
   'kayttooikeus-service.me': 'https://virkailija.hahtuvaopintopolku.fi/kayttooikeus-service/cas/me',
-  'virkailija-raamit.raamitJs': 'https://virkailija.hahtuvaopintopolku.fi/virkailija-raamit/apply-raamit.js',
-};
+  ...(!isCypress && {
+    'virkailija-raamit.raamitJs': 'https://virkailija.hahtuvaopintopolku.fi/virkailija-raamit/apply-raamit.js',
+  }),
+});

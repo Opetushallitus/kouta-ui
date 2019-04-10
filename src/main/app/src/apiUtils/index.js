@@ -826,3 +826,12 @@ const memoizedGetMe = memoizePromise(async (httpClient, apiUrls) => {
 
 export const getMe = ({ httpClient, apiUrls }) =>
   memoizedGetMe(httpClient, apiUrls);
+
+export const getOrganisaatiotByOids = async ({ oids, httpClient, apiUrls }) => {
+  const { data } = await httpClient.post(
+    apiUrls.url('organisaatio-service.organisaatiot-by-oids'),
+    oids,
+  );
+
+  return data;
+};

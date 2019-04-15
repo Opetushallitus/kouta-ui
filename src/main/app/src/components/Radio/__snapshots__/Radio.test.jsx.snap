@@ -41,9 +41,12 @@ exports[`renders correctly 1`] = `
     <div
       className="c0"
     >
-      <styled.label>
+      <styled.label
+        disabled={false}
+      >
         <label
           className="c1"
+          disabled={false}
         >
           <styled.div>
             <div
@@ -53,7 +56,6 @@ exports[`renders correctly 1`] = `
                 checked={false}
                 disabled={false}
                 onChange={[Function]}
-                type="radio"
                 value="a"
               >
                 <input
@@ -67,9 +69,12 @@ exports[`renders correctly 1`] = `
               </styled.input>
             </div>
           </styled.div>
-          <styled.div>
+          <styled.div
+            disabled={false}
+          >
             <div
               className="c4"
+              disabled={false}
             >
               Radio A
             </div>
@@ -85,9 +90,12 @@ exports[`renders correctly 1`] = `
     <div
       className="c0"
     >
-      <styled.label>
+      <styled.label
+        disabled={false}
+      >
         <label
           className="c1"
+          disabled={false}
         >
           <styled.div>
             <div
@@ -97,7 +105,6 @@ exports[`renders correctly 1`] = `
                 checked={true}
                 disabled={false}
                 onChange={[Function]}
-                type="radio"
                 value="b"
               >
                 <input
@@ -111,9 +118,12 @@ exports[`renders correctly 1`] = `
               </styled.input>
             </div>
           </styled.div>
-          <styled.div>
+          <styled.div
+            disabled={false}
+          >
             <div
               className="c4"
+              disabled={false}
             >
               Radio B
             </div>
@@ -129,9 +139,12 @@ exports[`renders correctly 1`] = `
     <div
       className=""
     >
-      <styled.label>
+      <styled.label
+        disabled={false}
+      >
         <label
           className="c1"
+          disabled={false}
         >
           <styled.div>
             <div
@@ -141,7 +154,6 @@ exports[`renders correctly 1`] = `
                 checked={false}
                 disabled={false}
                 onChange={[Function]}
-                type="radio"
                 value="c"
               >
                 <input
@@ -155,9 +167,12 @@ exports[`renders correctly 1`] = `
               </styled.input>
             </div>
           </styled.div>
-          <styled.div>
+          <styled.div
+            disabled={false}
+          >
             <div
               className="c4"
+              disabled={false}
             >
               Radio C
             </div>

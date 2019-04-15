@@ -38,6 +38,14 @@ const LanguageTabsWrapper = styled.div`
   padding-left: ${({ theme }) => theme.spacing.unit * 3}px;
 `;
 
+const scrollIntoView = el => {
+  try {
+    setTimeout(() => {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }, 500);
+  } catch (e) {}
+};
+
 const renderChildren = ({ onContinue, children, section, language }) => {
   const childrenProps = {
     onContinue,
@@ -135,10 +143,7 @@ const FormCollapse = ({
 
   useEffect(() => {
     if (active && !collapseOpen) {
-      setTimeout(() => {
-        scrollOnActive && containerRef.current.scrollIntoView({ behavior: 'smooth' });
-      }, 500);
-
+      scrollOnActive && scrollIntoView(containerRef.current);
       setCollapseOpen(true);
     }
   }, [active]);

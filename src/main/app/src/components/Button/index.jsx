@@ -1,5 +1,5 @@
 import React from 'react';
-import { darken } from 'polished';
+import { lighten } from 'polished';
 import styled, { css } from 'styled-components';
 import get from 'lodash/get';
 
@@ -9,18 +9,21 @@ const getOutlinedColorCss = ({ color, theme }) => {
   const outlineColor =
     get(theme, ['palette', color, 'main']) || theme.palette.primary.main;
 
+  const hoverColor = lighten(0.05, outlineColor);
+
   return `
     border-color: ${outlineColor};
     color: ${outlineColor};
 
     &:hover {
-      border-color: ${darken(0.05, outlineColor)};
-      color: ${darken(0.05, outlineColor)};
+      border-color: ${hoverColor};
+      color: ${hoverColor};
     }
 
     &:active {
-      border-color: ${darken(0.1, outlineColor)};
-      color: ${darken(0.1, outlineColor)};
+      border-color: ${hoverColor};
+      color: ${hoverColor};
+      box-shadow: 0 0 5px 0 ${hoverColor};
     }
   `;
 };
@@ -32,19 +35,22 @@ const getContainedColorCss = ({ color, theme }) => {
   const containColor =
     get(theme, ['palette', color, 'main']) || theme.palette.primary.main;
 
+  const hoverColor = lighten(0.05, containColor);
+
   return `
     border-color: ${containColor};
     background-color: ${containColor};
     color: ${fontColor};
 
     &:hover {
-      border-color: ${darken(0.05, containColor)};
-      background-color: ${darken(0.05, containColor)};
+      border-color: ${hoverColor};
+      background-color: ${hoverColor};
     }
 
     &:active {
-      border-color: ${darken(0.1, containColor)};
-      background-color: ${darken(0.1, containColor)};
+      border-color: ${hoverColor};
+      background-color: ${hoverColor};
+      box-shadow: 0 0 5px 0 ${hoverColor};
     }
   `;
 };
@@ -52,13 +58,11 @@ const getContainedColorCss = ({ color, theme }) => {
 const getVariantCss = ({ variant }) => {
   if (variant === 'outlined') {
     return css`
-      transition: color 0.25s, border-color 0.25s;
       background-color: transparent;
       ${getOutlinedColorCss}
     `;
   } else if (variant === 'contained') {
     return css`
-      transition: background-color 0.25s, border-color 0.25s;
       ${getContainedColorCss}
     `;
   }
@@ -76,6 +80,7 @@ const ButtonBase = styled.button`
   display: inline-flex;
   align-items: center;
   box-sizing: border-box;
+  transition: box-shadow 0.25s, background-color 0.25s, border-color 0.25s;
 
   ${getVariantCss}
 

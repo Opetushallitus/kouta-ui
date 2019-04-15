@@ -18,7 +18,7 @@ const IconContainer = styled.div`
   width: 2rem;
   height: 2rem;
   margin-right: ${({ theme }) => theme.spacing.unit * 2}px;
-  border: 1px solid ${getThemeProp('palette.text.primary')};
+  border: 1px solid ${getThemeProp('palette.border')};
   border-radius: ${getThemeProp('shape.borderRadius')};
   cursor: pointer;
 `;

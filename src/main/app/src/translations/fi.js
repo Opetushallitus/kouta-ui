@@ -104,6 +104,10 @@ export default {
     merkitseOtsikkoriviksi: 'Merkitse otsikkoriviksi',
     merkitseTavalliseksiRiviksi: 'Merkitse tavalliseksi riviksi',
     linkinOtsikko: 'Linkin otsikko',
+    valittuOrganisaatio: 'Valittu organisaatio',
+    lahde: 'Lähde',
+    ePerusteet: 'ePerusteet',
+    valitseLomakkeenPohja: 'Valitse lomakkeen pohja',
   },
   etusivu: {
     koulutuksetJaHaut: 'Koulutukset ja haut',
@@ -141,6 +145,8 @@ export default {
     koulutukseenOnLiitettyToteutukset:
       'Tähän koulutukseen on liitetty seuraavat toteutukset',
     toteutuksenLiittaminenKoulutukseen: 'Toteutuksen liittäminen koulutukseen',
+    kuvausEiOleSaatavilla: 'Kuvaus ei ole saatavilla',
+    valitseKoulutustyyppi: 'Valitse koulutustyyppi',
   },
   toteutuslomake: {
     toteutuksellaEiHakukohteita:

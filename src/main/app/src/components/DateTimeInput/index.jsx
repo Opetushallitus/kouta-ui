@@ -1,0 +1,169 @@
+import React, { useRef, useState, useEffect, useCallback } from 'react';
+
+import FormControl from '../FormControl';
+import FormLabel from '../FormLabel';
+import { DatePickerInput } from '../DatePicker';
+import TimeInput from '../TimeInput';
+import Flex, { FlexItem } from '../Flex';
+import {
+  getKoutaDateString,
+  isValidDate,
+  isString,
+  isNumeric,
+} from '../../utils';
+
+const generateId = () =>
+  `DateTimeInput__${Math.round(Math.random() * 10000).toString()}`;
+
+const useId = () => {
+  const ref = useRef();
+
+  if (!ref.current) {
+    ref.current = generateId();
+  }
+
+  return ref.current;
+};
+
+const getTime = value => {
+  const [hour, minute] = value.split(':');
+
+  return hour && minute ? [hour, minute].join(':') : '';
+};
+
+const isValidTime = value => {
+  if (!isString(value)) {
+    return false;
+  }
+
+  const [hour, minute] = value.split(':');
+
+  return isNumeric(hour) && isNumeric(minute);
+};
+
+const parseValue = value => {
+  if (!isString(value)) {
+    return {
+      date: undefined,
+      time: '',
+    };
+  }
+
+  const maybeDate = new Date(value);
+
+  const [, timePart] = value.split('T');
+
+  return {
+    date: isValidDate(maybeDate) ? maybeDate : undefined,
+    time: timePart ? getTime(timePart) : '',
+  };
+};
+
+const isValidState = ({ date, time }) => {
+  return isValidDate(date) && isValidTime(time);
+};
+
+const formatValue = ({ date, time }) => {
+  const [hour, minute] = time.split(':');
+
+  return getKoutaDateString({
+    hour,
+    minute,
+    day: date.getDate(),
+    month: date.getMonth() + 1,
+    year: date.getFullYear(),
+  });
+};
+
+const getCompactTime = time => {
+  if (!isValidTime(time)) {
+    return '';
+  }
+
+  const [hour, minute] = time.split(':');
+
+  return `${parseInt(hour)}:${parseInt(minute)}`;
+};
+
+export const DateTimeInput = ({
+  value,
+  onChange,
+  dateLabel = 'Päivämäärä',
+  timeLabel = 'Kellonaika',
+  disabled = false,
+  error = false,
+  datePlaceholder = '',
+  timePlaceholder = '',
+}) => {
+  const { date: dateValue, time: timeValue } = parseValue(value);
+  const dateId = useId();
+  const timeId = useId();
+  const [date, setDate] = useState(dateValue);
+  const [time, setTime] = useState(timeValue);
+  const formControlProps = { disabled, error };
+
+  useEffect(() => {
+    isValidDate(dateValue) && setDate(dateValue);
+  }, [JSON.stringify(dateValue)]);
+
+  useEffect(() => {
+    isValidTime(timeValue) &&
+      getCompactTime(timeValue) !== getCompactTime(time) &&
+      setTime(timeValue);
+  }, [timeValue]);
+
+  const onTimeChange = useCallback(
+    e => {
+      setTime(e.target.value);
+
+      isValidState({ date, time: e.target.value })
+        ? onChange(formatValue({ date, time: e.target.value }))
+        : onChange(undefined);
+    },
+    [onChange, JSON.stringify(date)],
+  );
+
+  const onDateChange = useCallback(
+    d => {
+      setDate(d);
+
+      isValidState({ date: d, time })
+        ? onChange(formatValue({ date: d, time }))
+        : onChange(undefined);
+    },
+    [onChange, time],
+  );
+
+  return (
+    <Flex>
+      <FlexItem grow={1} paddingRight={1}>
+        <FormControl {...formControlProps}>
+          {dateLabel ? (
+            <FormLabel htmlFor={dateId}>{dateLabel}</FormLabel>
+          ) : null}
+          <DatePickerInput
+            inputProps={{ id: dateId }}
+            value={date}
+            onChange={onDateChange}
+            placeholder={datePlaceholder}
+          />
+        </FormControl>
+      </FlexItem>
+      <FlexItem grow={1} paddingLeft={1}>
+        <FormControl {...formControlProps}>
+          {timeLabel ? (
+            <FormLabel htmlFor={timeId}>{timeLabel}</FormLabel>
+          ) : null}
+          <TimeInput
+            id={timeId}
+            value={time}
+            onChange={onTimeChange}
+            placeholder={timePlaceholder}
+          />
+        </FormControl>
+      </FlexItem>
+    </Flex>
+  );
+};
+
+export default DateTimeInput;

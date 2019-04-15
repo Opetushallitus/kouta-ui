@@ -1,11 +1,13 @@
 import React from 'react';
 import stripTags from 'striptags';
+import get from 'lodash/get';
 
-import ApiAsync from '../../ApiAsync';
 import { getKoulutusByKoodi } from '../../../apiUtils';
 import Typography from '../../Typography';
 import { getLanguageValue } from '../../../utils';
 import useTranslation from '../../useTranslation';
+import useApiAsync from '../../useApiAsync';
+import FormLabel from '../../FormLabel';
 
 const getKuvaus = (koulutus, language) => {
   const kuvaus = koulutus ? getLanguageValue(koulutus.kuvaus, language) : null;
@@ -13,25 +15,36 @@ const getKuvaus = (koulutus, language) => {
   return kuvaus ? stripTags(kuvaus) : null;
 };
 
-const getKoulutus = args => getKoulutusByKoodi(args);
-
-const DescriptionAsync = ({ koodiUri, language = 'fi' }) => (
-  <ApiAsync promiseFn={getKoulutus} koodiUri={koodiUri} watch={koodiUri}>
-    {({ data }) => <Typography>{getKuvaus(data, language)}</Typography>}
-  </ApiAsync>
-);
+const getKoulutus = ({ koodiUri, ...args }) =>
+  koodiUri ? getKoulutusByKoodi({ koodiUri, ...args }) : Promise.resolve(null);
 
 const AmmatillinenKuvausSection = ({ language, koulutusValue }) => {
   const { t } = useTranslation();
+  const koodiUri = get(koulutusValue, 'value');
+
+  const { data } = useApiAsync({
+    promiseFn: getKoulutus,
+    koodiUri,
+    watch: koodiUri,
+  });
+
+  const kuvaus = getKuvaus(data);
 
   return (
     <>
-      <Typography variant="h6" marginBottom={1}>
-        {t('yleiset.kuvaus')}
-      </Typography>
-      {koulutusValue && koulutusValue.value ? (
-        <DescriptionAsync koodiUri={koulutusValue.value} language={language} />
-      ) : null}
+      <FormLabel>{t('yleiset.kuvaus')}</FormLabel>
+      {kuvaus ? (
+        <>
+          <Typography as="div">{kuvaus}</Typography>
+          <Typography variant="secondary" as="div" marginTop={1}>
+            ({t('yleiset.lahde')}: {t('yleiset.ePerusteet')})
+          </Typography>
+        </>
+      ) : (
+        <Typography variant="secondary">
+          {t('koulutuslomake.kuvausEiOleSaatavilla')}
+        </Typography>
+      )}
     </>
   );
 };

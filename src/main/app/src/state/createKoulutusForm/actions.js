@@ -1,7 +1,7 @@
 import { getFormValues } from 'redux-form';
 import get from 'lodash/get';
 
-import { JULKAISUTILA } from '../../constants';
+import { JULKAISUTILA, POHJAVALINNAT } from '../../constants';
 import { getKoulutusByKoodi } from '../../apiUtils';
 import { createTemporaryToast } from '../toaster';
 import { getKoulutusByValues } from './utils';
@@ -101,10 +101,10 @@ export const maybeCopy = () => (dispatch, getState) => {
   const values = getKoulutusFormValues(getState());
 
   if (
-    get(values, 'base.base') === 'copy_koulutus' &&
-    !!get(values, 'base.education.value')
+    get(values, 'base.pohja.tapa') === POHJAVALINNAT.KOPIO &&
+    !!get(values, 'base.pohja.valinta')
   ) {
-    dispatch(copy(values.base.education.value));
+    dispatch(copy(values.base.pohja.valinta.value));
   }
 };
 

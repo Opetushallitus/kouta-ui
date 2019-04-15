@@ -63,6 +63,7 @@ const KoulutusForm = ({
                 <FormCollapse
                   header={t('yleiset.koulutustyyppi')}
                   section="type"
+                  scrollOnActive={false}
                   {...getTestIdProps('tyyppiSection')}
                 >
                   <TypeSection />
@@ -98,10 +99,10 @@ const KoulutusForm = ({
               <FormCollapse
                 header={t('koulutuslomake.koulutuksenTiedot')}
                 section="information"
+                languages={languageTabs}
                 {...getTestIdProps('tiedotSection')}
               >
                 <TiedotSection
-                  languages={languageTabs}
                   koulutustyyppi={koulutustyyppi}
                   koulutusValue={koulutusValue}
                 />
@@ -110,10 +111,10 @@ const KoulutusForm = ({
               <FormCollapse
                 header={t('koulutuslomake.koulutuksenKuvaus')}
                 section="description"
+                languages={languageTabs}
                 {...getTestIdProps('kuvausSection')}
               >
                 <KuvausSection
-                  languages={languageTabs}
                   koulutustyyppi={koulutustyyppi}
                   koulutusValue={koulutusValue}
                 />
@@ -122,9 +123,10 @@ const KoulutusForm = ({
               <FormCollapse
                 header={t('koulutuslomake.koulutuksenLisatiedot')}
                 section="lisatiedot"
+                languages={languageTabs}
                 {...getTestIdProps('lisatiedotSection')}
               >
-                <LisatiedotSection languages={languageTabs} />
+                <LisatiedotSection />
               </FormCollapse>
 
               <FormCollapse

@@ -10,6 +10,12 @@ const Label = styled.label`
   display: flex;
   line-height: 1.5;
   color: ${getThemeProp('palette.text.primary')};
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      cursor: not-allowed;
+    `}
 `;
 
 const RadioContainer = styled.div`
@@ -23,6 +29,12 @@ const RadioContainer = styled.div`
 const LabelWrapper = styled.div`
   flex: 1;
   margin-left: 6px;
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      opacity: 0.5;
+    `}
 `;
 
 const RadioWrapper = styled.div`
@@ -33,12 +45,17 @@ const RadioInput = styled.input.attrs({ type: 'radio' })`
   font-size: inherit;
 `;
 
-export const Radio = ({ children = null, ...props }) => (
-  <Label>
+export const Radio = ({
+  children = null,
+  disabled = false,
+  error,
+  ...props
+}) => (
+  <Label disabled={disabled}>
     <RadioWrapper>
-      <RadioInput type="radio" {...props} />
+      <RadioInput disabled={disabled} {...props} />
     </RadioWrapper>
-    <LabelWrapper>{children}</LabelWrapper>
+    <LabelWrapper disabled={disabled}>{children}</LabelWrapper>
   </Label>
 );
 
@@ -47,6 +64,7 @@ export const RadioGroup = ({
   onChange,
   disabled = false,
   options,
+  error,
   ...props
 }) => {
   let children = null;
@@ -68,7 +86,11 @@ export const RadioGroup = ({
   } else if (isArray(options)) {
     children = options.map(({ value: optionValue, label }, index) => (
       <RadioContainer last={index === options.length - 1} key={optionValue}>
-        <Radio checked={value !== undefined && value === optionValue} onChange={onChange} value={optionValue}>
+        <Radio
+          checked={value !== undefined && value === optionValue}
+          onChange={onChange}
+          value={optionValue}
+        >
           {label}
         </Radio>
       </RadioContainer>

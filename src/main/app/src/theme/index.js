@@ -86,7 +86,7 @@ export const createTheme = (theme = {}) => {
       ...headingTypography,
     },
     palette: {
-      border: '#999999',
+      border: '#cccccc',
       mainBackground: '#f5f5f5',
       text: {
         primary: textPrimaryColor,

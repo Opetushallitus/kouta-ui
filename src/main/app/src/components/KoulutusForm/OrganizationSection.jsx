@@ -1,28 +1,28 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
-import Typography from '../Typography';
 import JarjestajatSelect from './JarjestajatSelect';
 import useTranslation from '../useTranslation';
+import { createFormFieldComponent } from '../FormFields';
 
-const renderOrganizationSelectionField = ({ input, organisaatioOid }) => (
-  <JarjestajatSelect {...input} organisaatioOid={organisaatioOid} />
+const OrganizationField = createFormFieldComponent(
+  JarjestajatSelect,
+  ({ input, ...props }) => ({
+    ...input,
+    ...props,
+  }),
 );
 
-const OrganizationSection = ({ organisaatioOid, ...props }) => {
+const OrganizationSection = ({ organisaatioOid }) => {
   const { t } = useTranslation();
 
   return (
-    <div {...props}>
-      <Typography variant="h6" marginBottom={1}>
-        {t('koulutuslomake.valitseJarjestajat')}
-      </Typography>
-      <Field
-        name="organizations"
-        organisaatioOid={organisaatioOid}
-        component={renderOrganizationSelectionField}
-      />
-    </div>
+    <Field
+      name="organizations"
+      organisaatioOid={organisaatioOid}
+      component={OrganizationField}
+      label={t('koulutuslomake.valitseJarjestajat')}
+    />
   );
 };
 

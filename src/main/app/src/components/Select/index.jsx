@@ -27,6 +27,18 @@ const getStyles = memoize(theme => ({
     ...provided,
     zIndex: 3,
   }),
+  control: provided => {
+    const isActive = !!provided.boxShadow;
+
+    return {
+      ...provided,
+      ...(!isActive && {
+        boxShadow: 'inset 0 1px 2px 0 rgba(0, 0, 0, 0.1)',
+        borderColor: theme.palette.border,
+      }),
+      borderRadius: '2px',
+    };
+  },
 }));
 
 const makeDefaultNoOptionsMessage = t => () =>
@@ -118,7 +130,7 @@ const getValue = (value, options) => {
   return value;
 };
 
-const Select = ({ theme, value, options, ...props }) => {
+const Select = ({ theme, value, options, id, ...props }) => {
   const resolvedValue = useMemo(() => getValue(value, options), [
     value,
     options,
@@ -131,6 +143,7 @@ const Select = ({ theme, value, options, ...props }) => {
       {...getDefaultProps(theme, t)}
       value={resolvedValue}
       options={options}
+      inputId={id}
       {...props}
     />
   );

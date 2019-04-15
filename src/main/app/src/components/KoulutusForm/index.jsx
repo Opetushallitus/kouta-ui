@@ -1,12 +1,17 @@
 import get from 'lodash/get';
 import set from 'lodash/set';
-import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
+import { KOULUTUSTYYPPI_CATEGORY, POHJAVALINNAT } from '../../constants';
 
 export { default } from './KoulutusForm';
 
 export const initialValues = {
   type: {
     type: KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS,
+  },
+  base: {
+    pohja: {
+      tapa: POHJAVALINNAT.UUSI,
+    },
   },
   kieliversiot: {
     languages: ['fi', 'sv'],

@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Input from '../Input';
+import { InputBase } from '../Input';
 
-const SelectBase = styled(Input).attrs({ as: 'select' })`
+const SelectBase = styled(InputBase).attrs({ as: 'select' })`
   height: calc(2.25rem + 2px);
 `;
 

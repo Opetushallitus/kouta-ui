@@ -1,47 +1,10 @@
 import get from 'lodash/get';
 import pick from 'lodash/pick';
 
-import {
-  isArray,
-  getKoutaDateString,
-  isNumeric,
-  formatKoutaDateString,
-} from '../../utils';
-
-const DATE_FORMAT = 'DD.MM.YYYY HH:mm';
+import { isArray, isNumeric } from '../../utils';
 
 const getAsNumberOrNull = value => {
   return isNumeric(value) ? parseInt(value) : null;
-};
-
-const getDateTimeValues = dateString => {
-  if (!dateString) {
-    return { date: '', time: '' };
-  }
-
-  const formattedDate = formatKoutaDateString(dateString, DATE_FORMAT);
-
-  const [d = '', t = ''] = formattedDate.split(' ');
-
-  return { date: d, time: t };
-};
-
-const getKoutaDateStringByDateTime = ({ date = '', time = '' }) => {
-  const [day, month, year] = date.split('.');
-
-  if (!isNumeric(day) || !isNumeric(month) || !isNumeric(year)) {
-    return null;
-  }
-
-  const [hour, minute] = time.split(':');
-
-  return getKoutaDateString({
-    day,
-    month,
-    year,
-    hour: hour || 0,
-    minute: minute || 0,
-  });
 };
 
 export const getHakukohdeByValues = values => {

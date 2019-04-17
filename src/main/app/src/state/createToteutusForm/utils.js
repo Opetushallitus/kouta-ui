@@ -3,6 +3,8 @@ import toPairs from 'lodash/toPairs';
 import flatMap from 'lodash/flatMap';
 import pick from 'lodash/pick';
 
+import { JULKAISUTILA } from '../../constants';
+
 const getOsaamisalatByValues = ({ osaamisalat, kielivalinta }) => {
   return (osaamisalat || []).map(
     ({ kuvaus = {}, nimi = {}, linkki = {}, otsikko = {} }) => ({
@@ -319,4 +321,14 @@ export const getValuesByToteutus = toteutus => {
       kuvaus,
     },
   };
+};
+
+export const validate = ({ tila }) => {
+  if (tila === JULKAISUTILA.TALLENNETTU) {
+    return {};
+  }
+
+  const errors = {};
+
+  return errors;
 };

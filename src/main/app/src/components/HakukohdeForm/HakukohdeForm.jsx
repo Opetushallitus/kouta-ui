@@ -44,6 +44,7 @@ const HakukohdeForm = ({
             <FormCollapse
               header={t('yleiset.kieliversiot')}
               section="kieliversiot"
+              scrollOnActive={false}
               {...getTestIdProps('kieliversiotSection')}
             >
               <KieliversiotFormSection />

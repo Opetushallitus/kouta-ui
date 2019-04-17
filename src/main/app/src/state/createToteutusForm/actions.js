@@ -1,13 +1,15 @@
-import { getFormValues } from 'redux-form';
+import { getFormValues, startSubmit, stopSubmit } from 'redux-form';
 import get from 'lodash/get';
 import produce from 'immer';
 
 import { JULKAISUTILA, POHJAVALINNAT } from '../../constants';
-import { createTemporaryToast } from '../toaster';
-import { getToteutusByValues } from './utils';
+import { createSavingErrorToast, createSavingSuccessToast } from '../toaster';
+import { getToteutusByValues, validate } from './utils';
 import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
+import { isNonEmptyObject } from '../../utils';
 
-const getToteutusFormValues = getFormValues('createToteutusForm');
+const formName = 'createToteutusForm';
+const getToteutusFormValues = getFormValues(formName);
 
 const getOidsFromPathname = pathname => {
   const split = pathname.split('/').filter(p => !!p);
@@ -32,6 +34,15 @@ export const submit = ({
 } = {}) => async (dispatch, getState, { history }) => {
   const state = getState();
   const values = getToteutusFormValues(state);
+  const errors = validate({ values, tila, koulutustyyppi });
+
+  dispatch(startSubmit(formName));
+
+  if (isNonEmptyObject(errors)) {
+    dispatch(stopSubmit(formName, errors));
+    dispatch(createSavingErrorToast());
+    return;
+  }
 
   const {
     me: { kayttajaOid: muokkaaja },
@@ -63,20 +74,13 @@ export const submit = ({
 
     toteutusData = data;
   } catch (e) {
-    return dispatch(
-      createTemporaryToast({
-        status: 'danger',
-        title: 'Toteutuksen tallennus epäonnistui',
-      }),
-    );
+    dispatch(stopSubmit(formName));
+    dispatch(createSavingErrorToast());
+    return;
   }
 
-  dispatch(
-    createTemporaryToast({
-      status: 'success',
-      title: 'Toteutus on tallennettu onnistuneesti',
-    }),
-  );
+  dispatch(stopSubmit(formName));
+  dispatch(createSavingSuccessToast());
 
   if (get(toteutusData, 'oid')) {
     const { oid: toteutusOid } = toteutusData;

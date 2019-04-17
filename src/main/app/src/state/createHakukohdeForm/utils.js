@@ -2,6 +2,7 @@ import get from 'lodash/get';
 import pick from 'lodash/pick';
 
 import { isArray, isNumeric } from '../../utils';
+import { JULKAISUTILA } from '../../constants';
 
 const getAsNumberOrNull = value => {
   return isNumeric(value) ? parseInt(value) : null;
@@ -288,4 +289,14 @@ export const getValuesByHakukohde = hakukohde => {
       ),
     },
   };
+};
+
+export const validate = ({ tila }) => {
+  if (tila === JULKAISUTILA.TALLENNETTU) {
+    return {};
+  }
+
+  const errors = {};
+
+  return errors;
 };

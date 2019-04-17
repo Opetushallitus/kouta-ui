@@ -132,6 +132,15 @@
                             <arguments>run build</arguments>
                         </configuration>
                     </execution>
+                     <execution>
+                        <id>Build storybook</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run build-storybook</arguments>
+                        </configuration>
+                    </execution>
                 </executions>
                 <configuration>
                     <nodeVersion>v10.5.0</nodeVersion>

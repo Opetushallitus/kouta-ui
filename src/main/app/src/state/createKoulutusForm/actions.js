@@ -85,12 +85,11 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   } catch (e) {
     dispatch(stopSubmit('createKoulutusForm'));
     dispatch(createSavingErrorToast());
-
     return;
   }
 
-  dispatch(createSavingSuccessToast());
   dispatch(stopSubmit('createKoulutusForm'));
+  dispatch(createSavingSuccessToast());
 
   if (get(koulutusData, 'oid')) {
     const { oid: koulutusOid } = koulutusData;

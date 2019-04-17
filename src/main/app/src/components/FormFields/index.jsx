@@ -11,6 +11,7 @@ import DateTimeInput from '../DateTimeInput';
 import TimeInput from '../TimeInput';
 import Editor from '../Editor';
 import YearSelect from '../YearSelect';
+import FileInput from '../FileInput';
 
 const simpleMapProps = ({ meta, input, ...props }) => ({
   ...input,
@@ -78,3 +79,5 @@ export const FormFieldYearSelect = createComponent(
     id,
   }),
 );
+
+export const FormFieldFileInput = createComponent(FileInput, simpleMapProps);

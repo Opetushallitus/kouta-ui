@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import DatePicker, { DatePickerInput } from './index';
+import { makeLocalisationDecorator } from '../../storybookUtils';
 
 const Story = () => {
   const [date, setDate] = useState(undefined);
@@ -19,5 +20,6 @@ const Story = () => {
 };
 
 storiesOf('DatePicker', module)
+  .addDecorator(makeLocalisationDecorator())
   .add('Basic', () => <DatePicker value={new Date()} />)
   .add('With DayPickerInput', () => <Story />);

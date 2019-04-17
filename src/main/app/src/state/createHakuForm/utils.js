@@ -2,6 +2,7 @@ import get from 'lodash/get';
 import pick from 'lodash/pick';
 
 import { isNumeric } from '../../utils';
+import { JULKAISUTILA } from '../../constants';
 
 export const getHakuByValues = values => {
   const alkamiskausiKoodiUri = get(values, 'aikataulut.kausi') || null;
@@ -137,4 +138,14 @@ export const getValuesByHaku = haku => {
       puhelin: get(yhteystieto, 'puhelinnumero') || {},
     },
   };
+};
+
+export const validate = ({ tila }) => {
+  if (tila === JULKAISUTILA.TALLENNETTU) {
+    return {};
+  }
+
+  const errors = {};
+
+  return errors;
 };

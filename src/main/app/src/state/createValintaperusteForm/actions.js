@@ -1,12 +1,14 @@
-import { getFormValues } from 'redux-form';
+import { getFormValues, startSubmit, stopSubmit } from 'redux-form';
 import get from 'lodash/get';
 import produce from 'immer';
 
 import { JULKAISUTILA, POHJAVALINNAT } from '../../constants';
-import { createTemporaryToast } from '../toaster';
-import { getValintaperusteByValues } from './utils';
+import { createSavingErrorToast, createSavingSuccessToast } from '../toaster';
+import { getValintaperusteByValues, validate } from './utils';
+import { isNonEmptyObject } from '../../utils';
 
-const getValintaperusteFormValues = getFormValues('createValintaperusteForm');
+const formName = 'createValintaperusteForm';
+const getValintaperusteFormValues = getFormValues(formName);
 
 const getOidsFromPathname = pathname => {
   const split = pathname.split('/').filter(p => !!p);
@@ -34,6 +36,15 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
 ) => {
   const state = getState();
   const values = getValintaperusteFormValues(state);
+  const errors = validate({ values, tila });
+
+  dispatch(startSubmit(formName));
+
+  if (isNonEmptyObject(errors)) {
+    dispatch(stopSubmit(formName, errors));
+    dispatch(createSavingErrorToast());
+    return;
+  }
 
   const valintaperusteFormData = getValintaperusteByValues(values);
 
@@ -66,20 +77,13 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
 
     valintaperusteData = data;
   } catch (e) {
-    return dispatch(
-      createTemporaryToast({
-        status: 'danger',
-        title: 'Valintaperusteen tallennus epäonnistui',
-      }),
-    );
+    dispatch(stopSubmit(formName));
+    dispatch(createSavingErrorToast());
+    return;
   }
 
-  dispatch(
-    createTemporaryToast({
-      status: 'success',
-      title: 'Valintaperuste on tallennettu onnistuneesti',
-    }),
-  );
+  dispatch(stopSubmit(formName));
+  dispatch(createSavingSuccessToast());
 
   if (get(valintaperusteData, 'id')) {
     const { id: valintaperusteOid } = valintaperusteData;

@@ -32,7 +32,6 @@ export const submit = ({ koulutus, tila: tilaArg }) => async (
   if (isNonEmptyObject(errors)) {
     dispatch(stopSubmit('editKoulutusForm', errors));
     dispatch(createSavingErrorToast());
-
     return;
   }
 
@@ -76,7 +75,6 @@ export const submit = ({ koulutus, tila: tilaArg }) => async (
   } catch (e) {
     dispatch(stopSubmit('editKoulutusForm'));
     dispatch(createSavingErrorToast());
-
     return;
   }
 

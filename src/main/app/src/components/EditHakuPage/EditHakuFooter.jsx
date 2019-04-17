@@ -1,14 +1,12 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { isValid } from 'redux-form';
 
 import { submit } from '../../state/editHakuForm';
 import Button from '../Button';
 import { JULKAISUTILA } from '../../constants';
 import { getTestIdProps } from '../../utils';
-
-const hakuFormIsValid = isValid('editHakuForm');
+import useTranslation from '../useTranslation';
 
 const Wrapper = styled.div`
   max-width: 1200px;
@@ -23,12 +21,14 @@ const PublishButton = styled(Button)`
   margin-left: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
-const EditHakuFooter = ({ haku, valid, onSave = () => {} }) => {
+const EditHakuFooter = ({ haku, onSave = () => {} }) => {
   const { tila } = haku;
 
   const onSaveAndPublish = useCallback(() => {
     onSave({ tila: JULKAISUTILA.JULKAISTU });
   }, [onSave]);
+
+  const { t } = useTranslation();
 
   return (
     <Wrapper>
@@ -37,15 +37,14 @@ const EditHakuFooter = ({ haku, valid, onSave = () => {} }) => {
         onClick={onSave}
         {...getTestIdProps('tallennaHakuButton')}
       >
-        Tallenna
+        {t('yleiset.tallenna')}
       </Button>
       {tila !== JULKAISUTILA.JULKAISTU ? (
         <PublishButton
-          disabled={!valid}
           onClick={onSaveAndPublish}
           {...getTestIdProps('tallennaJaJulkaiseHakuButton')}
         >
-          Tallenna ja julkaise
+          {t('yleiset.tallennaJaJulkaise')}
         </PublishButton>
       ) : null}
     </Wrapper>
@@ -53,9 +52,7 @@ const EditHakuFooter = ({ haku, valid, onSave = () => {} }) => {
 };
 
 export default connect(
-  state => ({
-    valid: hakuFormIsValid(state),
-  }),
+  null,
   (
     dispatch,
     { haku: { oid: hakuOid, organisaatioOid, tila, lastModified } },

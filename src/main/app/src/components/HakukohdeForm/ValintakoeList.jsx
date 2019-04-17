@@ -2,50 +2,38 @@ import React, { Fragment } from 'react';
 import { FieldArray, Field } from 'redux-form';
 
 import Spacing from '../Spacing';
-import Typography from '../Typography';
-import Input from '../Input';
 import Button from '../Button';
 import Divider from '../Divider';
-import InputMask from '../InputMask';
-import Textarea from '../Textarea';
 import Flex, { FlexItem } from '../Flex';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
 
-const renderInputField = ({ input, ...props }) => (
-  <Input {...input} {...props} />
-);
-
-const renderInputMaskField = ({ input, ...props }) => (
-  <InputMask {...input} {...props} />
-);
-
-const renderTextareaField = ({ input }) => <Textarea {...input} />;
+import {
+  FormFieldInput,
+  FormFieldDateTimeInput,
+  FormFieldTextarea,
+} from '../FormFields';
 
 const renderValintakoeFields = ({ fields, language, t }) => (
   <>
     {fields.map((koe, index) => (
       <Fragment key={index}>
         <Spacing marginBottom={2} {...getTestIdProps('osoite')}>
-          <Typography variant="h6" marginBottom={1}>
-            {t('yleiset.osoite')}
-          </Typography>
           <Field
             name={`${koe}.osoite.${language}`}
-            component={renderInputField}
+            component={FormFieldInput}
+            label={t('yleiset.osoite')}
           />
         </Spacing>
 
         <Spacing marginBottom={2}>
           <Flex>
             <FlexItem grow={0} basis="30%" {...getTestIdProps('postinumero')}>
-              <Typography variant="h6" marginBottom={1}>
-                {t('yleiset.postinumero')}
-              </Typography>
               <Field
                 name={`${koe}.postinumero`}
-                component={renderInputField}
+                component={FormFieldInput}
                 type="number"
+                label={t('yleiset.postinumero')}
               />
             </FlexItem>
             <FlexItem
@@ -53,91 +41,39 @@ const renderValintakoeFields = ({ fields, language, t }) => (
               paddingLeft={2}
               {...getTestIdProps('postitoimipaikka')}
             >
-              <Typography variant="h6" marginBottom={1}>
-                {t('yleiset.postitoimipaikka')}
-              </Typography>
               <Field
                 name={`${koe}.postitoimipaikka.${language}`}
-                component={renderInputField}
+                component={FormFieldInput}
+                label={t('yleiset.postitoimipaikka')}
               />
             </FlexItem>
           </Flex>
         </Spacing>
 
-        <Spacing marginBottom={2}>
-          <Flex>
-            <FlexItem grow={1} marginRight={2} {...getTestIdProps('alkaa')}>
-              <Typography variant="h6" marginBottom={1}>
-                {t('yleiset.alkaa')}
-              </Typography>
-              <Flex>
-                <FlexItem grow={1} {...getTestIdProps('paivamaara')}>
-                  <Field
-                    name={`${koe}.fromDate`}
-                    component={renderInputMaskField}
-                    placeholder="pp.kk.vvvv"
-                    mask="99.99.9999"
-                  />
-                </FlexItem>
-                <FlexItem
-                  grow={0}
-                  basis="30%"
-                  paddingLeft={2}
-                  {...getTestIdProps('kellonaika')}
-                >
-                  <Field
-                    name={`${koe}.fromTime`}
-                    component={renderInputMaskField}
-                    placeholder="tt:mm"
-                    mask="99:99"
-                  />
-                </FlexItem>
-              </Flex>
-              <Typography variant="secondary" as="div" marginTop={1}>
-                {t('yleiset.paivamaaraJaKellonaika')}
-              </Typography>
-            </FlexItem>
-            <FlexItem grow={1} marginLeft={2} {...getTestIdProps('paattyy')}>
-              <Typography variant="h6" marginBottom={1}>
-                {t('yleiset.paattyy')}
-              </Typography>
-              <Flex>
-                <FlexItem grow={1} {...getTestIdProps('paivamaara')}>
-                  <Field
-                    name={`${koe}.toDate`}
-                    component={renderInputMaskField}
-                    placeholder="pp.kk.vvvv"
-                    mask="99.99.9999"
-                  />
-                </FlexItem>
-                <FlexItem
-                  grow={0}
-                  basis="30%"
-                  paddingLeft={2}
-                  {...getTestIdProps('kellonaika')}
-                >
-                  <Field
-                    name={`${koe}.toTime`}
-                    component={renderInputMaskField}
-                    placeholder="tt:mm"
-                    mask="99:99"
-                  />
-                </FlexItem>
-              </Flex>
-              <Typography variant="secondary" as="div" marginTop={1}>
-                {t('yleiset.paivamaaraJaKellonaika')}
-              </Typography>
-            </FlexItem>
-          </Flex>
-        </Spacing>
+        <Flex marginBottom={2} alignCenter>
+          <FlexItem grow={1} paddingRight={2} {...getTestIdProps('alkaa')}>
+            <Field
+              name={`${koe}.alkaa`}
+              component={FormFieldDateTimeInput}
+              label={t('yleiset.alkaa')}
+              helperText={t('yleiset.paivamaaraJaKellonaika')}
+            />
+          </FlexItem>
+          <FlexItem grow={1} paddingLeft={2} {...getTestIdProps('paattyy')}>
+            <Field
+              name={`${koe}.paattyy`}
+              component={FormFieldDateTimeInput}
+              label={t('yleiset.paattyy')}
+              helperText={t('yleiset.paivamaaraJaKellonaika')}
+            />
+          </FlexItem>
+        </Flex>
 
         <Spacing {...getTestIdProps('lisatietoa')}>
-          <Typography variant="h6" marginBottom={1}>
-            {t('yleiset.lisatietoja')}
-          </Typography>
           <Field
             name={`${koe}.lisatietoja.${language}`}
-            component={renderTextareaField}
+            component={FormFieldTextarea}
+            label={t('yleiset.lisatietoja')}
           />
         </Spacing>
 

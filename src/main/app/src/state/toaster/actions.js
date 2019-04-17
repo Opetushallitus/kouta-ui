@@ -28,3 +28,30 @@ export const createTemporaryToast = ({ delay = 5000, ...toast }) => (
     dispatch(removeToast(key));
   }, delay);
 };
+
+export const createSavingErrorToast = () => (
+  dispatch,
+  getState,
+  { localisation },
+) => {
+  return dispatch(
+    createTemporaryToast({
+      status: 'danger',
+      title: localisation.t('yleiset.tallennusEpaonnistui'),
+      description: localisation.t('yleiset.tarkistaLomakkeenTiedot'),
+    }),
+  );
+};
+
+export const createSavingSuccessToast = () => (
+  dispatch,
+  getState,
+  { localisation },
+) => {
+  return dispatch(
+    createTemporaryToast({
+      status: 'success',
+      title: localisation.t('yleiset.tallennusOnnistui'),
+    }),
+  );
+};

@@ -2,13 +2,12 @@ import { reduxForm } from 'redux-form';
 import React, { useMemo } from 'react';
 import { connect } from 'react-redux';
 
-import ToteutusForm, { validate } from '../ToteutusForm';
+import ToteutusForm from '../ToteutusForm';
 import { getValuesByToteutus } from '../../state/createToteutusForm';
 import { attachHakukohde } from '../../state/editToteutusForm';
 
 const ToteutusReduxForm = reduxForm({
   form: 'editToteutusForm',
-  validate,
 })(ToteutusForm);
 
 const EditToteutusForm = ({ onSave, toteutus, ...props }) => {

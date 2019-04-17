@@ -1,15 +1,12 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { isValid } from 'redux-form';
 
 import { submit } from '../../state/editValintaperusteForm';
 import Button from '../Button';
 import { JULKAISUTILA } from '../../constants';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
-
-const valintaperusteFormIsValid = isValid('editValintaperusteForm');
 
 const Wrapper = styled.div`
   max-width: 1200px;
@@ -26,7 +23,6 @@ const PublishButton = styled(Button)`
 
 const EditValintaperusteFooter = ({
   valintaperuste,
-  valid,
   onSave = () => {},
 }) => {
   const { tila } = valintaperuste;
@@ -48,7 +44,6 @@ const EditValintaperusteFooter = ({
       </Button>
       {tila !== JULKAISUTILA.JULKAISTU ? (
         <PublishButton
-          disabled={!valid}
           onClick={onSaveAndPublish}
           {...getTestIdProps('tallennaJaJulkaiseValintaperusteButton')}
         >
@@ -60,9 +55,7 @@ const EditValintaperusteFooter = ({
 };
 
 export default connect(
-  state => ({
-    valid: valintaperusteFormIsValid(state),
-  }),
+  null,
   (dispatch, { valintaperuste }) => ({
     onSave: ({ tila: tilaArg } = {}) =>
       dispatch(submit({ valintaperuste, tila: tilaArg })),

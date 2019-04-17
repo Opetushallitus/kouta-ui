@@ -57,15 +57,10 @@ export const getHakukohdeByValues = values => {
 
   const hakuajat = kaytetaanHaunAikataulua
     ? []
-    : (get(values, 'hakuajat.hakuajat') || []).map(
-        ({ fromDate, fromTime, toDate, toTime }) => ({
-          alkaa: getKoutaDateStringByDateTime({
-            date: fromDate,
-            time: fromTime,
-          }),
-          paattyy: getKoutaDateStringByDateTime({ date: toDate, time: toTime }),
-        }),
-      );
+    : (get(values, 'hakuajat.hakuajat') || []).map(({ alkaa, paattyy }) => ({
+        alkaa: alkaa || null,
+        paattyy: paattyy || null,
+      }));
 
   const liitteidenToimitusosoite = {
     osoite: {
@@ -82,13 +77,7 @@ export const getHakukohdeByValues = values => {
     sahkoposti: get(values, 'liitteet.toimitussahkoposti') || null,
   };
 
-  const liitteidenToimitusaika =
-    get(values, 'liitteet.deliverDate') && get(values, 'liitteet.deliverTime')
-      ? getKoutaDateStringByDateTime({
-          date: values.liitteet.deliverDate,
-          time: values.liitteet.deliverTime,
-        })
-      : null;
+  const liitteidenToimitusaika = get(values, 'liitteet.toimitusaika') || null;
 
   const liitteetOnkoSamaToimitusosoite = !!get(
     values,
@@ -105,8 +94,7 @@ export const getHakukohdeByValues = values => {
       tyyppi,
       nimi,
       kuvaus,
-      deliverDate,
-      deliverTime,
+      toimitusaika,
       toimitusosoite,
       toimituspostinumero,
       toimituspostitoimipaikka,
@@ -114,9 +102,7 @@ export const getHakukohdeByValues = values => {
     }) => ({
       tyyppi: get(tyyppi, 'value') || null,
       nimi: pick(nimi || null, kielivalinta),
-      toimitusaika: !liitteetOnkoSamaToimitusaika
-        ? getKoutaDateStringByDateTime({ date: deliverDate, time: deliverTime })
-        : null,
+      toimitusaika: !liitteetOnkoSamaToimitusaika ? toimitusaika || null : null,
       toimitusosoite: {
         osoite: {
           osoite: pick(toimitusosoite || null, kielivalinta),
@@ -151,10 +137,8 @@ export const getHakukohdeByValues = values => {
               osoite,
               postinumero,
               postitoimipaikka,
-              fromDate,
-              fromTime,
-              toDate,
-              toTime,
+              alkaa,
+              paattyy,
               lisatietoja,
             }) => ({
               osoite: {
@@ -163,14 +147,8 @@ export const getHakukohdeByValues = values => {
                 postitoimipaikka: pick(postitoimipaikka || null, kielivalinta),
               },
               aika: {
-                alkaa: getKoutaDateStringByDateTime({
-                  date: fromDate,
-                  time: fromTime,
-                }),
-                paattyy: getKoutaDateStringByDateTime({
-                  date: toDate,
-                  time: toTime,
-                }),
+                alkaa: alkaa || null,
+                paattyy: paattyy || null,
               },
               lisatietoja: pick(lisatietoja || null, kielivalinta),
             }),
@@ -247,21 +225,13 @@ export const getValuesByHakukohde = hakukohde => {
               } = {},
               lisatietoja = {},
             }) => {
-              const { date: fromDate, time: fromTime } = getDateTimeValues(
-                alkaa,
-              );
-
-              const { date: toDate, time: toTime } = getDateTimeValues(paattyy);
-
               return {
                 osoite,
                 postinumero,
                 postitoimipaikka,
                 lisatietoja,
-                fromDate,
-                fromTime,
-                toDate,
-                toTime,
+                alkaa: alkaa || '',
+                paattyy: paattyy || '',
               };
             },
           ),
@@ -272,11 +242,6 @@ export const getValuesByHakukohde = hakukohde => {
     },
     {},
   );
-
-  const {
-    date: liitteetDeliverDate,
-    time: liitteetDeliverTime,
-  } = getDateTimeValues(liitteidenToimitusaika);
 
   return {
     alkamiskausi: {
@@ -299,14 +264,9 @@ export const getValuesByHakukohde = hakukohde => {
     hakuajat: {
       eriHakuaika: !kaytetaanHaunAikataulua,
       hakuajat: (hakuajat || []).map(({ alkaa, paattyy }) => {
-        const { date: fromDate, time: fromTime } = getDateTimeValues(alkaa);
-        const { date: toDate, time: toTime } = getDateTimeValues(paattyy);
-
         return {
-          fromDate,
-          fromTime,
-          toDate,
-          toTime,
+          alkaa: alkaa || '',
+          paattyy: paattyy || '',
         };
       }),
     },
@@ -339,8 +299,7 @@ export const getValuesByHakukohde = hakukohde => {
       toimitussahkoposti: get(liitteidenToimitusosoite, 'sahkoposti') || '',
       yhteinenToimituspaikka: !!liitteetOnkoSamaToimitusosoite,
       yhteinenToimitusaika: !!liitteetOnkoSamaToimitusaika,
-      deliverDate: liitteetDeliverDate,
-      deliverTime: liitteetDeliverTime,
+      toimitusaika: liitteidenToimitusaika || '',
       liitteet: (liitteet || []).map(
         ({
           tyyppi,
@@ -352,16 +311,11 @@ export const getValuesByHakukohde = hakukohde => {
           } = {},
           kuvaus = {},
         }) => {
-          const { date: deliverDate, time: deliverTime } = getDateTimeValues(
-            toimitusaika,
-          );
-
           return {
             tyyppi,
             nimi,
             kuvaus,
-            deliverDate,
-            deliverTime,
+            toimitusaika: toimitusaika || '',
             toimitussahkoposti: sahkoposti || '',
             toimitusosoite: osoite || {},
             toimituspostinumero: postinumero || '',

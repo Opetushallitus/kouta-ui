@@ -13,6 +13,7 @@ const options = [
 storiesOf('Select', module)
   .addDecorator(makeLocalisationDecorator())
   .add('Basic', () => <Select options={options} onChange={action('change')} />)
+  .add('With error', () => <Select options={options} onChange={action('change')} error />)
   .add('With CreatableSelect', () => (
     <CreatableSelect isClearable isMulti onChange={action('change')} />
   ));

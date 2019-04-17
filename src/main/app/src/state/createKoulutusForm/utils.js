@@ -1,8 +1,15 @@
 import get from 'lodash/get';
 import pick from 'lodash/pick';
+import set from 'lodash/set';
+import merge from 'lodash/merge';
+
+import { JULKAISUTILA, KORKEAKOULUKOULUTUSTYYPIT } from '../../constants';
+import { getInvalidTranslations } from '../../utils';
+
+const getKielivalinta = values => get(values, 'kieliversiot.languages') || [];
 
 export const getKoulutusByValues = values => {
-  const kielivalinta = get(values, 'kieliversiot.languages') || [];
+  const kielivalinta = getKielivalinta(values);
   const tarjoajat = get(values, 'organization.organizations') || null;
   const koulutusKoodiUri = get(values, 'information.koulutus.value') || null;
   const koulutustyyppi = get(values, 'type.type') || null;
@@ -111,4 +118,67 @@ export const getValuesByKoulutus = koulutus => {
       julkinen,
     },
   };
+};
+
+const validateCommon = ({ values }) => {
+  const languages = getKielivalinta(values);
+  const koulutus = get(values, 'information.koulutus');
+  const jarjestajat = get(values, 'organization.organizations') || [];
+
+  const errors = {};
+
+  if (languages.length === 0) {
+    set(errors, 'kieliversiot.languages', 'Valitse vähintään yksi kieli');
+  }
+
+  if (!koulutus) {
+    set(errors, 'information.koulutus', 'Valitse koulutus');
+  }
+
+  if (jarjestajat.length === 0) {
+    set(
+      errors,
+      'organization.organizations',
+      'Valitse ainakin yksi järjestävä organisaatio',
+    );
+  }
+
+  return errors;
+};
+
+const validateKorkeakoulu = ({ values }) => {
+  const errors = {};
+
+  const kielivalinta = getKielivalinta(values);
+  const kuvaus = get(values, 'description.kuvaus') || {};
+
+  const invalidKuvausTranslations = getInvalidTranslations(
+    kuvaus,
+    kielivalinta,
+  );
+
+  invalidKuvausTranslations.length > 0 &&
+    kielivalinta.forEach(l => {
+      set(
+        errors,
+        ['description', 'kuvaus', l],
+        'Valitse kuvaus kaikille käännöksille',
+      );
+    });
+
+  return errors;
+};
+
+export const validate = ({ values, koulutustyyppi, tila }) => {
+  if (tila === JULKAISUTILA.TALLENNETTU) {
+    return {};
+  }
+
+  let errors = validateCommon({ values });
+
+  if (KORKEAKOULUKOULUTUSTYYPIT.includes(koulutustyyppi)) {
+    errors = merge({}, errors, validateKorkeakoulu({ values }));
+  }
+
+  return errors;
 };

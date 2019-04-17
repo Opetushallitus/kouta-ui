@@ -124,7 +124,7 @@ export const getInvalidTranslations = (
   validate = v => !!v,
 ) => {
   if (!isObject(obj)) {
-    return [];
+    return languages;
   }
 
   const translationObj = {

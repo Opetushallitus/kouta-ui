@@ -1,10 +1,10 @@
-import { getFormValues } from 'redux-form';
+import { getFormValues, stopSubmit, startSubmit } from 'redux-form';
 import get from 'lodash/get';
 
 import { JULKAISUTILA, POHJAVALINNAT } from '../../constants';
 import { getKoulutusByKoodi } from '../../apiUtils';
-import { createTemporaryToast } from '../toaster';
-import { getKoulutusByValues } from './utils';
+import { createSavingErrorToast, createSavingSuccessToast } from '../toaster';
+import { getKoulutusByValues, validate } from './utils';
 import { isNonEmptyObject } from '../../utils';
 
 const getKoulutusFormValues = getFormValues('createKoulutusForm');
@@ -30,6 +30,22 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
 ) => {
   const state = getState();
   const values = getKoulutusFormValues(state);
+  const koulutusFormData = getKoulutusByValues(values);
+
+  const errors = validate({
+    values,
+    tila,
+    koulutustyyppi: koulutusFormData.koulutustyyppi,
+  });
+
+  dispatch(startSubmit('createKoulutusForm'));
+
+  if (isNonEmptyObject(errors)) {
+    dispatch(stopSubmit('createKoulutusForm', errors));
+    dispatch(createSavingErrorToast());
+
+    return;
+  }
 
   const organisaatioOid = getOrganisaatioOidFromPathname(
     history.location.pathname,
@@ -38,8 +54,6 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   const {
     me: { kayttajaOid },
   } = state;
-
-  const koulutusFormData = getKoulutusByValues(values);
 
   let nimi = koulutusFormData.nimi;
 
@@ -69,32 +83,30 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
 
     koulutusData = data;
   } catch (e) {
-    return dispatch(
-      createTemporaryToast({
-        status: 'danger',
-        title: 'Koulutuksen tallennus epäonnistui',
-      }),
-    );
+    dispatch(stopSubmit('createKoulutusForm'));
+    dispatch(createSavingErrorToast());
+
+    return;
   }
 
-  dispatch(
-    createTemporaryToast({
-      status: 'success',
-      title: 'Koulutus on tallennettu onnistuneesti',
-    }),
-  );
+  dispatch(createSavingSuccessToast());
+  dispatch(stopSubmit('createKoulutusForm'));
 
   if (get(koulutusData, 'oid')) {
     const { oid: koulutusOid } = koulutusData;
 
-    history.push(
-      `/koulutus/${koulutusOid}/muokkaus?scrollTarget=koulutukseen-liitetetyt-toteutukset`,
-    );
+    history.push(`/koulutus/${koulutusOid}/muokkaus`);
   } else {
     history.push('/');
   }
 
   return koulutusData;
+};
+
+export const copy = koulutusOid => async (dispatch, getState, { history }) => {
+  history.replace({
+    search: `?kopioKoulutusOid=${koulutusOid}`,
+  });
 };
 
 export const maybeCopy = () => (dispatch, getState) => {
@@ -106,10 +118,4 @@ export const maybeCopy = () => (dispatch, getState) => {
   ) {
     dispatch(copy(values.base.pohja.valinta.value));
   }
-};
-
-export const copy = koulutusOid => async (dispatch, getState, { history }) => {
-  history.replace({
-    search: `?kopioKoulutusOid=${koulutusOid}`,
-  });
 };

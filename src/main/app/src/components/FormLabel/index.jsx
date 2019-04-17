@@ -5,7 +5,7 @@ import { getThemeProp, spacingCss } from '../../theme';
 export const FormLabel = styled.label.attrs({ marginBottom: 1 })`
   ${getThemeProp('typography.body')};
   ${spacingCss}
-  display: block;
+  display: inline-block;
 
   ${({ disabled }) => disabled && css`
     opacity: 0.5;

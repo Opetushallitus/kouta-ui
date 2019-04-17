@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import DayPicker from 'react-day-picker';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { createGlobalStyle } from 'styled-components';
@@ -8,6 +8,27 @@ import 'react-day-picker/lib/style.css';
 import { getThemeProp } from '../../theme';
 import Input, { AddonIcon } from '../Input';
 import { isValidDate, formatDate, isNumeric, isString } from '../../utils';
+import { useTranslation } from '../useTranslation';
+
+const getLocalisationProps = t => ({
+  months: [
+    'tammikuu',
+    'helmikuu',
+    'maaliskuu',
+    'huhtikuu',
+    'toukokuu',
+    'kesakuu',
+    'heinakuu',
+    'elokuu',
+    'syyskuu',
+    'lokakuu',
+    'marraskuu',
+    'joulukuu',
+  ].map(k => t(`yleiset.kuukaudet.${k}`)),
+  weekdaysShort: ['su', 'ma', 'ti', 'ke', 'to', 'pe', 'la'].map(v =>
+    t(`yleiset.viikonpaivalyhenteet.${v}`),
+  ),
+});
 
 const firstYear = new Date(0).getFullYear();
 
@@ -50,12 +71,14 @@ const DatePickerStyle = createGlobalStyle`
     border: 1px solid ${getThemeProp('palette.border')};
     border-radius: ${getThemeProp('shape.borderRadius')};
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
+    background-color: white;
   }
 
   .DatePickerOverlayWrapper__ {
     display: inline-block !important;
     transform: translateY(${getThemeProp('spacing.unit')}px);
     position: absolute;
+    z-index: 1;
   }
 `;
 
@@ -111,26 +134,34 @@ export const DatePickerInput = ({
   onChange = () => {},
   inputProps = {},
   ...props
-}) => (
-  <>
-    <DatePickerStyle />
-    <DayPickerInput
-      classNames={datePickerInputClassNames}
-      format="D.M.YYYY"
-      selectedDay={value}
-      value={value}
-      component={Input}
-      inputProps={{
-        ...inputProps,
-        addonAfter: <AddonIcon type="event" />,
-      }}
-      parseDate={parseDateFn}
-      formatDate={formatDateFn}
-      placeholder={placeholder}
-      onDayChange={onChange}
-      {...props}
-    />
-  </>
-);
+}) => {
+  const { t } = useTranslation();
+  const localisationProps = useMemo(() => getLocalisationProps(t), [t]);
+
+  return (
+    <>
+      <DatePickerStyle />
+      <DayPickerInput
+        classNames={datePickerInputClassNames}
+        format="D.M.YYYY"
+        selectedDay={value}
+        value={value}
+        component={Input}
+        dayPickerProps={{
+          ...localisationProps,
+        }}
+        inputProps={{
+          ...inputProps,
+          addonAfter: <AddonIcon type="event" />,
+        }}
+        parseDate={parseDateFn}
+        formatDate={formatDateFn}
+        placeholder={placeholder}
+        onDayChange={onChange}
+        {...props}
+      />
+    </>
+  );
+};
 
 export default DatePicker;

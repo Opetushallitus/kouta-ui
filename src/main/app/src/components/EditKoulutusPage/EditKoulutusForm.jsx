@@ -2,13 +2,12 @@ import { reduxForm } from 'redux-form';
 import React, { useMemo } from 'react';
 import { connect } from 'react-redux';
 
-import KoulutusForm, { validate } from '../KoulutusForm';
+import KoulutusForm from '../KoulutusForm';
 import { getValuesByKoulutus } from '../../state/createKoulutusForm';
 import { attachToteutus } from '../../state/editKoulutusForm';
 
 const KoulutusReduxForm = reduxForm({
   form: 'editKoulutusForm',
-  validate,
 })(KoulutusForm);
 
 const EditKoulutusForm = ({ onSave, koulutus, ...props }) => {
@@ -17,13 +16,21 @@ const EditKoulutusForm = ({ onSave, koulutus, ...props }) => {
   }, [koulutus]);
 
   return (
-    <KoulutusReduxForm {...props} koulutus={koulutus} steps={false} canCopy={false} initialValues={initialValues} canEditKoulutustyyppi={false} />
+    <KoulutusReduxForm
+      {...props}
+      koulutus={koulutus}
+      steps={false}
+      canCopy={false}
+      initialValues={initialValues}
+      canEditKoulutustyyppi={false}
+    />
   );
 };
 
 export default connect(
   null,
   (dispatch, { koulutus: { oid: koulutusOid, organisaatioOid } }) => ({
-    onAttachToteutus: () => dispatch(attachToteutus({ koulutusOid, organisaatioOid })),
+    onAttachToteutus: () =>
+      dispatch(attachToteutus({ koulutusOid, organisaatioOid })),
   }),
 )(EditKoulutusForm);

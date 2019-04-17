@@ -41,7 +41,7 @@ const AmmatillinenKuvausSection = ({ language, koulutusValue }) => {
           </Typography>
         </>
       ) : (
-        <Typography variant="secondary">
+        <Typography variant="secondary" as="div">
           {t('koulutuslomake.kuvausEiOleSaatavilla')}
         </Typography>
       )}

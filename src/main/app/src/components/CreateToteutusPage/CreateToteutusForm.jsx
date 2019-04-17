@@ -4,26 +4,26 @@ import { connect } from 'react-redux';
 import React from 'react';
 import memoize from 'memoizee';
 
-import ToteutusForm, { initialValues, validate } from '../ToteutusForm';
+import ToteutusForm, { initialValues } from '../ToteutusForm';
 import {
   getValuesByToteutus,
   maybeCopy as maybeCopyToteutus,
 } from '../../state/createToteutusForm';
 import { getKoutaToteutusByOid } from '../../apiUtils';
 import ApiAsync from '../ApiAsync';
+import { POHJAVALINNAT } from '../../constants';
 
 const resolveFn = () => Promise.resolve({});
 
 const ToteutusReduxForm = reduxForm({
   form: 'createToteutusForm',
-  validate,
   enableReinitialize: true,
 })(ToteutusForm);
 
 const getCopyValues = toteutusOid => ({
-  base: {
-    pohja: 'copy_toteutus',
-    toteutus: { value: toteutusOid },
+  pohja: {
+    tapa: POHJAVALINNAT.KOPIO,
+    valinta: { value: toteutusOid },
   },
 });
 

@@ -102,7 +102,7 @@ const ValintaperusteetSection = ({ organisaatioOid }) => {
     return valintaperusteet
       ? valintaperusteet.map(valintaperuste => ({
           ...valintaperuste,
-          key: valintaperuste.oid,
+          key: valintaperuste.id,
         }))
       : null;
   }, [valintaperusteet]);

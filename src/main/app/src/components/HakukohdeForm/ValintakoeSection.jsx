@@ -4,8 +4,6 @@ import { Field, FormSection, formValues } from 'redux-form';
 
 import Typography from '../Typography';
 import Spacing from '../Spacing';
-import LanguageSelector from '../LanguageSelector';
-import CheckboxGroup from '../CheckboxGroup';
 import AbstractCollapse from '../AbstractCollapse';
 import { isArray } from '../../utils';
 import Icon from '../Icon';
@@ -14,6 +12,7 @@ import ValintakoeList from './ValintakoeList';
 import Divider from '../Divider';
 import useKoodistoOptions from '../useKoodistoOptions';
 import useTranslation from '../useTranslation';
+import { FormFieldCheckboxGroup } from '../FormFields';
 
 const Container = styled.div`
   display: flex;
@@ -40,10 +39,6 @@ const ItemTitleContainer = styled.div`
       margin-bottom: ${spacing(1)};
     `}
 `;
-
-const renderCheckboxGroupField = ({ input, options }) => (
-  <CheckboxGroup {...input} options={options} />
-);
 
 const TypesFieldValue = formValues({
   types: 'types',
@@ -96,7 +91,7 @@ const ValintakoeTypeList = ({ types, options, language }) => {
   );
 };
 
-const ValintakoeSection = ({ languages }) => {
+const ValintakoeSection = ({ language }) => {
   const { options } = useKoodistoOptions({ koodisto: 'valintakokeentyyppi' });
   const { t } = useTranslation();
 
@@ -109,35 +104,29 @@ const ValintakoeSection = ({ languages }) => {
   );
 
   return (
-    <LanguageSelector languages={languages} defaultValue="fi">
-      {({ value: activeLanguage }) => (
-        <Container>
-          <TypeContainer>
-            <Typography variant="h6" marginBottom={1}>
-              {t('hakukohdelomake.valitseValintakokeenTyyppi')}
-            </Typography>
-            <Field
-              name="types"
-              component={renderCheckboxGroupField}
-              options={valintakoeOptions}
-            />
-          </TypeContainer>
-          <ItemContainer>
-            <TypesFieldValue>
-              {({ types }) =>
-                isArray(types) ? (
-                  <ValintakoeTypeList
-                    types={types}
-                    language={activeLanguage}
-                    options={valintakoeOptions}
-                  />
-                ) : null
-              }
-            </TypesFieldValue>
-          </ItemContainer>
-        </Container>
-      )}
-    </LanguageSelector>
+    <Container>
+      <TypeContainer>
+        <Field
+          name="types"
+          component={FormFieldCheckboxGroup}
+          options={valintakoeOptions}
+          label={t('hakukohdelomake.valitseValintakokeenTyyppi')}
+        />
+      </TypeContainer>
+      <ItemContainer>
+        <TypesFieldValue>
+          {({ types }) =>
+            isArray(types) ? (
+              <ValintakoeTypeList
+                types={types}
+                language={language}
+                options={valintakoeOptions}
+              />
+            ) : null
+          }
+        </TypesFieldValue>
+      </ItemContainer>
+    </Container>
   );
 };
 

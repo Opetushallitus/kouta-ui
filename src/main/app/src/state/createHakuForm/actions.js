@@ -1,7 +1,7 @@
 import { getFormValues } from 'redux-form';
 import get from 'lodash/get';
 
-import { JULKAISUTILA } from '../../constants';
+import { JULKAISUTILA, POHJAVALINNAT } from '../../constants';
 import { createTemporaryToast } from '../toaster';
 import { getHakuByValues } from './utils';
 
@@ -27,10 +27,10 @@ export const maybeCopy = () => (dispatch, getState) => {
   const values = getHakuFormValues(getState());
 
   if (
-    get(values, 'pohja.base') === 'copy_haku' &&
-    !!get(values, 'pohja.search.value')
+    get(values, 'pohja.pohja.tapa') === POHJAVALINNAT.KOPIO &&
+    !!get(values, 'pohja.pohja.valinta.value')
   ) {
-    dispatch(copy(values.pohja.search.value));
+    dispatch(copy(values.pohja.pohja.valinta.value));
   }
 };
 

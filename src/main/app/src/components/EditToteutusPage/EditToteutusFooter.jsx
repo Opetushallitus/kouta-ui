@@ -1,15 +1,12 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { isValid } from 'redux-form';
 
 import { submit } from '../../state/editToteutusForm';
 import Button from '../Button';
 import { JULKAISUTILA } from '../../constants';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
-
-const toteutusFormIsValid = isValid('editToteutusForm');
 
 const Wrapper = styled.div`
   max-width: 1200px;
@@ -24,7 +21,7 @@ const PublishButton = styled(Button)`
   margin-left: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
-const EditToteutusFooter = ({ toteutus, valid, onSave = () => {} }) => {
+const EditToteutusFooter = ({ toteutus, onSave = () => {} }) => {
   const { tila } = toteutus;
 
   const onSaveAndPublish = useCallback(() => {
@@ -44,7 +41,6 @@ const EditToteutusFooter = ({ toteutus, valid, onSave = () => {} }) => {
       </Button>
       {tila !== JULKAISUTILA.JULKAISTU ? (
         <PublishButton
-          disabled={!valid}
           onClick={onSaveAndPublish}
           {...getTestIdProps('tallennaJaJulkaiseToteutusButton')}
         >
@@ -56,9 +52,7 @@ const EditToteutusFooter = ({ toteutus, valid, onSave = () => {} }) => {
 };
 
 export default connect(
-  state => ({
-    valid: toteutusFormIsValid(state),
-  }),
+  null,
   (dispatch, { toteutus }) => ({
     onSave: ({ tila: tilaArg } = {}) =>
       dispatch(submit({ toteutus, tila: tilaArg })),

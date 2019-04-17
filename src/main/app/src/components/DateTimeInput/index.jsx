@@ -5,11 +5,13 @@ import FormLabel from '../FormLabel';
 import { DatePickerInput } from '../DatePicker';
 import TimeInput from '../TimeInput';
 import Flex, { FlexItem } from '../Flex';
+
 import {
   getKoutaDateString,
   isValidDate,
   isString,
   isNumeric,
+  getTestIdProps,
 } from '../../utils';
 
 const generateId = () =>
@@ -88,8 +90,8 @@ const getCompactTime = time => {
 export const DateTimeInput = ({
   value,
   onChange,
-  dateLabel = 'Päivämäärä',
-  timeLabel = 'Kellonaika',
+  dateLabel,
+  timeLabel,
   disabled = false,
   error = false,
   datePlaceholder = '',
@@ -135,8 +137,12 @@ export const DateTimeInput = ({
   );
 
   return (
-    <Flex>
-      <FlexItem grow={1} paddingRight={1}>
+    <Flex {...getTestIdProps('DateTimeInput')}>
+      <FlexItem
+        grow={1}
+        paddingRight={1}
+        {...getTestIdProps('DateTimeInput__Date')}
+      >
         <FormControl {...formControlProps}>
           {dateLabel ? (
             <FormLabel htmlFor={dateId}>{dateLabel}</FormLabel>
@@ -149,7 +155,11 @@ export const DateTimeInput = ({
           />
         </FormControl>
       </FlexItem>
-      <FlexItem grow={1} paddingLeft={1}>
+      <FlexItem
+        grow={1}
+        paddingLeft={1}
+        {...getTestIdProps('DateTimeInput__Time')}
+      >
         <FormControl {...formControlProps}>
           {timeLabel ? (
             <FormLabel htmlFor={timeId}>{timeLabel}</FormLabel>

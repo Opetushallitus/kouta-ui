@@ -1,10 +1,10 @@
-import { getFormValues } from 'redux-form';
+import { getFormValues, stopSubmit, startSubmit } from 'redux-form';
 import get from 'lodash/get';
 import produce from 'immer';
 
-import { getKoulutusByValues } from '../createKoulutusForm';
+import { getKoulutusByValues, validate } from '../createKoulutusForm';
 import { getKoulutusByKoodi, updateKoutaKoulutus } from '../../apiUtils';
-import { createTemporaryToast } from '../toaster';
+import { createSavingErrorToast, createSavingSuccessToast } from '../toaster';
 import { isNonEmptyObject } from '../../utils';
 
 const getKoulutusFormValues = getFormValues('editKoulutusForm');
@@ -25,6 +25,16 @@ export const submit = ({ koulutus, tila: tilaArg }) => async (
   const state = getState();
   const values = getKoulutusFormValues(state);
   const tila = tilaArg || koulutus.tila;
+  const errors = validate({ values, tila, tyyppi: koulutus.metadata.tyyppi });
+
+  dispatch(startSubmit('editKoulutusForm'));
+
+  if (isNonEmptyObject(errors)) {
+    dispatch(stopSubmit('editKoulutusForm', errors));
+    dispatch(createSavingErrorToast());
+
+    return;
+  }
 
   const {
     me: { kayttajaOid },
@@ -64,20 +74,14 @@ export const submit = ({ koulutus, tila: tilaArg }) => async (
 
     koulutusData = data;
   } catch (e) {
-    return dispatch(
-      createTemporaryToast({
-        status: 'danger',
-        title: 'Koulutuksen tallennus epäonnistui',
-      }),
-    );
+    dispatch(stopSubmit('editKoulutusForm'));
+    dispatch(createSavingErrorToast());
+
+    return;
   }
 
-  dispatch(
-    createTemporaryToast({
-      status: 'success',
-      title: 'Koulutus on tallennettu onnistuneesti',
-    }),
-  );
+  dispatch(stopSubmit('editKoulutusForm'));
+  dispatch(createSavingSuccessToast());
 
   history.push(`/koulutus/${koulutus.oid}/muokkaus`, {
     koulutusUpdatedAt: Date.now(),

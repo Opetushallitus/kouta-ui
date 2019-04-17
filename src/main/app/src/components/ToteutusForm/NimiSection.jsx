@@ -1,34 +1,18 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
-import Typography from '../Typography';
-import LanguageSelector from '../LanguageSelector';
-import Input from '../Input';
 import useTranslation from '../useTranslation';
+import { FormFieldInput } from '../FormFields';
 
-const renderInputField = ({ input, type = 'text' }) => (
-  <Input {...input} type={type} />
-);
-
-const NimiSection = ({ languages }) => {
+const NimiSection = ({ language }) => {
   const { t } = useTranslation();
 
   return (
-    <LanguageSelector languages={languages} defaultValue="fi">
-      {({ value: activeLanguage }) => {
-        return (
-          <>
-            <Typography variant="h6" marginBottom={1}>
-              {t('yleiset.nimi')}
-            </Typography>
-            <Field
-              name={`name.${activeLanguage}`}
-              component={renderInputField}
-            />
-          </>
-        );
-      }}
-    </LanguageSelector>
+    <Field
+      name={`name.${language}`}
+      component={FormFieldInput}
+      label={t('yleiset.nimi')}
+    />
   );
 };
 

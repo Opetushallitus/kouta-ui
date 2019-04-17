@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Field } from 'redux-form';
 import get from 'lodash/get';
 
-import Typography from '../Typography';
-import Select from '../Select';
-import ApiAsync from '../ApiAsync';
 import { getKoutaValintaperusteet } from '../../apiUtils';
-import { getFirstLanguageValue, noop } from '../../utils';
+import { getFirstLanguageValue } from '../../utils';
 import useTranslation from '../useTranslation';
+import useApiAsync from '../useApiAsync';
+import { FormFieldSelect } from '../FormFields';
 
 const getValintaperusteet = async ({
   httpClient,
@@ -31,36 +30,28 @@ const getValintaperusteetOptions = valintaperusteet =>
     label: getFirstLanguageValue(nimi),
   }));
 
-const renderSelectField = ({ input, ...props }) => (
-  <Select {...input} {...props} onBlur={noop} />
-);
-
 const KuvausSection = ({ haku, organisaatio }) => {
   const hakuOid = get(haku, 'oid');
   const organisaatioOid = get(organisaatio, 'oid');
   const watch = [hakuOid, organisaatioOid].join(',');
   const { t } = useTranslation();
 
+  const { data } = useApiAsync({
+    promiseFn: getValintaperusteet,
+    hakuOid,
+    organisaatioOid,
+    watch,
+  });
+
+  const options = useMemo(() => getValintaperusteetOptions(data || []), [data]);
+
   return (
-    <>
-      <Typography variant="h6" marginBottom={1}>
-        {t('yleiset.valitseKuvaus')}
-      </Typography>
-      <ApiAsync
-        promiseFn={getValintaperusteet}
-        hakuOid={hakuOid}
-        organisaatioOid={organisaatioOid}
-        watch={watch}
-      >
-        {({ data }) => (
-          <Field
-            name="valintaperuste"
-            component={renderSelectField}
-            options={getValintaperusteetOptions(data || [])}
-          />
-        )}
-      </ApiAsync>
-    </>
+    <Field
+      name="valintaperuste"
+      component={FormFieldSelect}
+      options={options}
+      label={t('yleiset.valitseKuvaus')}
+    />
   );
 };
 

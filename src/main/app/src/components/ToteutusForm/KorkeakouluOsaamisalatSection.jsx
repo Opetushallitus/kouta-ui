@@ -1,16 +1,11 @@
 import React from 'react';
 
 import KorkeakouluOsaamisalatFields from './KorkeakoulutuOsaamisalatFields';
-import LanguageSelector from '../LanguageSelector';
 
-export const KorkeakouluOsaamisalatSection = ({ languages }) => {
+export const KorkeakouluOsaamisalatSection = ({ language }) => {
   return (
-    <LanguageSelector languages={languages} defaultValue="fi">
-      {({ value: language }) => (
-        <KorkeakouluOsaamisalatFields language={language} name="osaamisalat" />
-      )}
-    </LanguageSelector>
-  )
+    <KorkeakouluOsaamisalatFields language={language} name="osaamisalat" />
+  );
 };
 
 export default KorkeakouluOsaamisalatSection;

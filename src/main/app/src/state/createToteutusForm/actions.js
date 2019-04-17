@@ -2,7 +2,7 @@ import { getFormValues } from 'redux-form';
 import get from 'lodash/get';
 import produce from 'immer';
 
-import { JULKAISUTILA } from '../../constants';
+import { JULKAISUTILA, POHJAVALINNAT } from '../../constants';
 import { createTemporaryToast } from '../toaster';
 import { getToteutusByValues } from './utils';
 import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
@@ -81,9 +81,7 @@ export const submit = ({
   if (get(toteutusData, 'oid')) {
     const { oid: toteutusOid } = toteutusData;
 
-    history.push(
-      `/toteutus/${toteutusOid}/muokkaus?scrollTarget=toteutukseen-liitetetyt-hakukohteet`,
-    );
+    history.push(`/toteutus/${toteutusOid}/muokkaus`);
   } else {
     history.push('/');
   }
@@ -93,10 +91,10 @@ export const maybeCopy = () => (dispatch, getState) => {
   const values = getToteutusFormValues(getState());
 
   if (
-    get(values, 'base.pohja') === 'copy_toteutus' &&
-    !!get(values, 'base.toteutus.value')
+    get(values, 'base.pohja.tapa') === POHJAVALINNAT.KOPIO &&
+    !!get(values, 'base.pohja.valinta')
   ) {
-    dispatch(copy(values.base.toteutus.value));
+    dispatch(copy(values.base.pohja.valinta.value));
   }
 };
 

@@ -63,6 +63,7 @@ const ValintaperusteForm = ({
                 <FormCollapse
                   header={t('yleiset.koulutustyyppi')}
                   section="tyyppi"
+                  scrollOnActive={false}
                   {...getTestIdProps('tyyppiSection')}
                 >
                   <TyyppiSection />
@@ -113,9 +114,10 @@ const ValintaperusteForm = ({
               <FormCollapse
                 header={t('valintaperustelomake.valintaperusteenNimi')}
                 section="nimi"
+                languages={languages}
                 {...getTestIdProps('nimiSection')}
               >
-                <NimiSection languages={languages} />
+                <NimiSection />
               </FormCollapse>
 
               {isKorkeakoulu ? (
@@ -131,26 +133,29 @@ const ValintaperusteForm = ({
               <FormCollapse
                 header={t('valintaperustelomake.valintatapa')}
                 section="valintatapa"
+                languages={languages}
                 {...getTestIdProps('valintatapaSection')}
               >
-                <ValintatapaSection languages={languages} />
+                <ValintatapaSection />
               </FormCollapse>
 
               <FormCollapse
                 header={t('valintaperustelomake.kielitaitovaatimukset')}
                 section="kielitaitovaatimukset"
+                languages={languages}
                 {...getTestIdProps('kielitaitovaatimuksetSection')}
               >
-                <KielitaitovaatimuksetSection languages={languages} />
+                <KielitaitovaatimuksetSection />
               </FormCollapse>
 
               {isKorkeakoulu ? (
                 <FormCollapse
                   header={t('valintaperustelomake.valintaperusteenLoppukuvaus')}
                   section="loppukuvaus"
+                  languages={languages}
                   {...getTestIdProps('loppukuvausSection')}
                 >
-                  <LoppukuvausSection languages={languages} />
+                  <LoppukuvausSection />
                 </FormCollapse>
               ) : null}
             </FormCollapseGroup>

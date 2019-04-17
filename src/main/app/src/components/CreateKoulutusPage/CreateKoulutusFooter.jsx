@@ -1,15 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { isValid } from 'redux-form';
 
 import { submit as submitKoulutusForm } from '../../state/createKoulutusForm';
 import { JULKAISUTILA } from '../../constants';
 import Button from '../Button';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
-
-const koulutusFormIsValid = isValid('createKoulutusForm');
 
 const Wrapper = styled.div`
   max-width: 1200px;
@@ -24,11 +21,7 @@ const SaveButton = styled(Button).attrs({ variant: 'outlined' })`
   margin-right: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
-const KoulutusFooter = ({
-  onSave = () => {},
-  onSaveAndPublish = () => {},
-  valid = true,
-}) => {
+const KoulutusFooter = ({ onSave = () => {}, onSaveAndPublish = () => {} }) => {
   const { t } = useTranslation();
 
   return (
@@ -42,7 +35,6 @@ const KoulutusFooter = ({
       <Button
         onClick={onSaveAndPublish}
         {...getTestIdProps('tallennaJaJulkaiseKoulutusButton')}
-        disabled={!valid}
       >
         {t('yleiset.tallennaJaJulkaise')}
       </Button>
@@ -51,9 +43,7 @@ const KoulutusFooter = ({
 };
 
 export default connect(
-  state => ({
-    valid: koulutusFormIsValid(state),
-  }),
+  null,
   dispatch => ({
     onSave: () => {
       dispatch(submitKoulutusForm({ tila: JULKAISUTILA.TALLENNETTU }));

@@ -33,7 +33,7 @@ export const createComponent = (Component, mapProps) => {
     render() {
       const { disabled, label, helperText, meta } = this.props;
       const hasError = !!meta.error;
-      const showError = hasError && meta.touched;
+      const showError = hasError;
       const id = this.props.id || this.genId;
 
       const children = createElement(

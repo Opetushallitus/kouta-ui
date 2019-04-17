@@ -11,7 +11,7 @@ import get from 'lodash/get';
 import { isArray, isObject, isString } from '../../utils';
 import useTranslation from '../useTranslation';
 
-const getStyles = memoize(theme => ({
+const getStyles = memoize((theme, error) => ({
   container: provided => ({
     ...provided,
     fontFamily: theme.typography.fontFamily,
@@ -34,10 +34,19 @@ const getStyles = memoize(theme => ({
       ...provided,
       ...(!isActive && {
         boxShadow: 'inset 0 1px 2px 0 rgba(0, 0, 0, 0.1)',
-        borderColor: theme.palette.border,
+        borderColor: error ? theme.palette.danger.main : theme.palette.border,
       }),
       borderRadius: '2px',
     };
+  },
+  option: (provided, state) => ({
+    ...provided,
+    color: state.isSelected ? 'white' : theme.palette.text.primary,
+  }),
+  singleValue: (provided, state) => {
+    const opacity = state.isDisabled ? 0.5 : 1;
+
+    return { ...provided, opacity, color: theme.palette.text.primary };
   },
 }));
 
@@ -69,12 +78,12 @@ const getTheme = memoize(theme => {
   });
 });
 
-const getDefaultProps = memoize((theme, t) => ({
+const getDefaultProps = memoize((theme, t, error) => ({
   formatCreateLabel: makeDefaultFormatCreateLabel(t),
   noOptionsMessage: makeDefaultNoOptionsMessage(t),
   placeholder: makeDefaultPlaceholder(t),
   loadingMessage: defaultLoadingMessage,
-  styles: getStyles(theme),
+  styles: getStyles(theme, error),
   theme: getTheme(theme),
   className: 'Select__',
 }));
@@ -130,7 +139,7 @@ const getValue = (value, options) => {
   return value;
 };
 
-const Select = ({ theme, value, options, id, ...props }) => {
+const Select = ({ theme, value, options, id, error = false, ...props }) => {
   const resolvedValue = useMemo(() => getValue(value, options), [
     value,
     options,
@@ -140,7 +149,7 @@ const Select = ({ theme, value, options, id, ...props }) => {
 
   return (
     <ReactSelect
-      {...getDefaultProps(theme, t)}
+      {...getDefaultProps(theme, t, error)}
       value={resolvedValue}
       options={options}
       inputId={id}

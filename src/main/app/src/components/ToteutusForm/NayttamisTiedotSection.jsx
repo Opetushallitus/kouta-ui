@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Field } from 'redux-form';
-import { subscribe } from 'react-contextual';
 
 import UrlContext from '../UrlContext';
 import HttpContext from '../HttpContext';
-import Typography from '../Typography';
-import LanguageSelector from '../LanguageSelector';
 import { AsyncCreatableSelect } from '../Select';
 import Spacing from '../Spacing';
 import { getAmmattinimikkeetByTerm, getAvainsanatByTerm } from '../../apiUtils';
 import useTranslation from '../useTranslation';
-import { memoize, getTestIdProps } from '../../utils';
+import { memoize, getTestIdProps, noop, isArray } from '../../utils';
+import { createFormFieldComponent } from '../FormFields';
+
+const CreatableField = createFormFieldComponent(
+  AsyncCreatableSelect,
+  ({ input: { onChange, ...input }, maxItems, ...props }) => ({
+    ...input,
+    onBlur: noop,
+    onChange: v => isArray(v) && v.length <= maxItems && onChange(v),
+    maxItems,
+    ...props,
+  }),
+);
 
 const MAX_ITEMS = 5;
 
@@ -46,81 +55,51 @@ const makeLoadAvainsanat = memoize(
   },
 );
 
-const nop = () => {};
-
-const renderCreatableField = ({ input, ...props }) => {
-  const { onChange, ...restInput } = input;
-
-  return (
-    <AsyncCreatableSelect
-      onChange={value => {
-        value.length <= MAX_ITEMS && onChange(value);
-      }}
-      {...restInput}
-      onBlur={nop}
-      {...props}
-    />
-  );
-};
-
-const NayttamisTiedotSection = ({ languages, httpClient, apiUrls }) => {
+const NayttamisTiedotSection = ({ language }) => {
   const { t } = useTranslation();
+  const httpClient = useContext(HttpContext);
+  const apiUrls = useContext(UrlContext);
 
   return (
-    <LanguageSelector languages={languages} defaultValue="fi">
-      {({ value: activeLanguage }) => {
-        return (
-          <>
-            <Spacing marginBottom={2}>
-              <Typography variant="h6" marginBottom={1}>
-                {t('toteutuslomake.ammattinimikkeet')}
-              </Typography>
-              <div {...getTestIdProps('ammattinimikkeetSelect')}>
-                <Field
-                  name={`ammattinimikkeet.${activeLanguage}`}
-                  component={renderCreatableField}
-                  isMulti
-                  isClearable
-                  loadOptions={makeLoadAmmattinimikkeet(
-                    httpClient,
-                    apiUrls,
-                    activeLanguage,
-                  )}
-                />
-              </div>
-              <Typography variant="secondary" as="div" marginTop={1}>
-                {t('yleiset.voitValitaEnintaan', { lukumaara: MAX_ITEMS })}
-              </Typography>
-            </Spacing>
-            <Spacing>
-              <Typography variant="h6" marginBottom={1}>
-                {t('toteutuslomake.avainsanat')}
-              </Typography>
-              <div {...getTestIdProps('avainsanatSelect')}>
-                <Field
-                  name={`avainsanat.${activeLanguage}`}
-                  component={renderCreatableField}
-                  isMulti
-                  isClearable
-                  loadOptions={makeLoadAvainsanat(
-                    httpClient,
-                    apiUrls,
-                    activeLanguage,
-                  )}
-                />
-              </div>
-              <Typography variant="secondary" as="div" marginTop={1}>
-                {t('yleiset.voitValitaEnintaan', { lukumaara: MAX_ITEMS })}
-              </Typography>
-            </Spacing>
-          </>
-        );
-      }}
-    </LanguageSelector>
+    <>
+      <Spacing marginBottom={2}>
+        <div {...getTestIdProps('ammattinimikkeetSelect')}>
+          <Field
+            name={`ammattinimikkeet.${language}`}
+            component={CreatableField}
+            isMulti
+            isClearable
+            loadOptions={makeLoadAmmattinimikkeet(
+              httpClient,
+              apiUrls,
+              language,
+            )}
+            label={t('toteutuslomake.ammattinimikkeet')}
+            helperText={t('yleiset.voitValitaEnintaan', {
+              lukumaara: MAX_ITEMS,
+            })}
+            maxItems={MAX_ITEMS}
+          />
+        </div>
+      </Spacing>
+      <Spacing>
+        <div {...getTestIdProps('avainsanatSelect')}>
+          <Field
+            name={`avainsanat.${language}`}
+            component={CreatableField}
+            isMulti
+            isClearable
+            loadOptions={makeLoadAvainsanat(httpClient, apiUrls, language)}
+            label={t('toteutuslomake.avainsanat')}
+            helperText={t('yleiset.voitValitaEnintaan', {
+              lukumaara: MAX_ITEMS,
+            })}
+            maxItems={MAX_ITEMS}
+          />
+        </div>
+      </Spacing>
+    </>
   );
 };
 
-export default subscribe([UrlContext, HttpContext], (apiUrls, httpClient) => ({
-  httpClient,
-  apiUrls,
-}))(NayttamisTiedotSection);
+export default NayttamisTiedotSection;

@@ -2,7 +2,7 @@ import { getFormValues } from 'redux-form';
 import get from 'lodash/get';
 import produce from 'immer';
 
-import { JULKAISUTILA } from '../../constants';
+import { JULKAISUTILA, POHJAVALINNAT } from '../../constants';
 import { createTemporaryToast } from '../toaster';
 import { getValintaperusteByValues } from './utils';
 
@@ -94,10 +94,10 @@ export const maybeCopy = () => (dispatch, getState) => {
   const values = getValintaperusteFormValues(getState());
 
   if (
-    get(values, 'pohja.pohja') === 'copy_valintaperuste' &&
-    !!get(values, 'pohja.valintaperuste.value')
+    get(values, 'pohja.pohja.tapa') === POHJAVALINNAT.KOPIO &&
+    !!get(values, 'pohja.pohja.valinta.value')
   ) {
-    dispatch(copy(values.pohja.valintaperuste.value));
+    dispatch(copy(values.pohja.pohja.valinta.value));
   }
 };
 

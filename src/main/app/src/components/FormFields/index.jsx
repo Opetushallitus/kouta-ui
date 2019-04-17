@@ -10,6 +10,7 @@ import DatePicker from '../DatePicker';
 import DateTimeInput from '../DateTimeInput';
 import TimeInput from '../TimeInput';
 import Editor from '../Editor';
+import YearSelect from '../YearSelect';
 
 const simpleMapProps = ({ meta, input, ...props }) => ({
   ...input,
@@ -67,3 +68,13 @@ export const FormFieldDateTimeInput = createComponent(
 );
 
 export const FormFieldEditor = createComponent(Editor, simpleMapProps);
+
+export const FormFieldYearSelect = createComponent(
+  YearSelect,
+  ({ meta, input, id, ...props }) => ({
+    ...input,
+    onBlur: noop,
+    ...props,
+    id,
+  }),
+);

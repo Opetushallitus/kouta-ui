@@ -132,11 +132,12 @@ export default {
       la: 'La',
       su: 'Su',
     },
-    pudotaTiedostoLadataksesi: 'Pudota Tiedosto ladataksesi',
+    pudotaTiedostoLadataksesi: 'Pudota tiedosto ladataksesi',
     raahaaLiitettavaTiedosto:
       'Raahaa liitetettävä tiedosto, tai klikkaa selataksesi tiedostoja',
     tiedostonLataaminenEpaonnistui:
       'Tiedoston lataaminen epäonnistui, yritä uudelleen',
+    ladatutTiedostot: 'Ladatut tiedostot',
   },
   etusivu: {
     koulutuksetJaHaut: 'Koulutukset ja haut',

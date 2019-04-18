@@ -2,7 +2,7 @@ import React from 'react';
 import get from 'lodash/get';
 
 import FormHeader from '../FormHeader';
-import FormStatus from '../FormStatus';
+import StatusTag from '../StatusTag';
 import FormEditInfo from '../FormEditInfo';
 import useTranslation from '../useTranslation';
 
@@ -13,7 +13,7 @@ const EditValintaperusteHeader = ({ valintaperuste }) => {
     <FormHeader
       status={
         get(valintaperuste, 'tila') ? (
-          <FormStatus status={valintaperuste.tila} />
+          <StatusTag status={valintaperuste.tila} large />
         ) : null
       }
       editInfo={

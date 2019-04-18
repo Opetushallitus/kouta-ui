@@ -68,6 +68,15 @@ const getVariantCss = ({ variant }) => {
   }
 };
 
+const getSizeCss = ({ size }) => {
+  if (size === 'small') {
+    return css`
+      font-size: 0.875rem;
+      padding: 4px 10px;
+    `;
+  }
+};
+
 const ButtonBase = styled.button`
   outline: none;
   padding: 6px 16px;
@@ -83,6 +92,7 @@ const ButtonBase = styled.button`
   transition: box-shadow 0.25s, background-color 0.25s, border-color 0.25s;
 
   ${getVariantCss}
+  ${getSizeCss};
 
   ${({ disabled }) =>
     disabled &&
@@ -90,7 +100,7 @@ const ButtonBase = styled.button`
       opacity: 0.5;
       cursor: not-allowed;
     `}
-  
+
   ${({ fullWidth }) =>
     fullWidth &&
     css`
@@ -99,8 +109,19 @@ const ButtonBase = styled.button`
     `}
 `;
 
-const Button = ({ variant = 'contained', color = 'primary', ...props }) => (
-  <ButtonBase variant={variant} color={color} ref={props.innerRef} {...props} />
+const Button = ({
+  variant = 'contained',
+  color = 'primary',
+  size = 'medium',
+  ...props
+}) => (
+  <ButtonBase
+    variant={variant}
+    color={color}
+    size={size}
+    ref={props.innerRef}
+    {...props}
+  />
 );
 
 export default Button;

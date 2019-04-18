@@ -1,5 +1,4 @@
 import { getFormValues, stopSubmit, startSubmit } from 'redux-form';
-import get from 'lodash/get';
 import produce from 'immer';
 
 import { getKoulutusByValues, validate } from '../createKoulutusForm';
@@ -93,20 +92,7 @@ export const attachToteutus = ({ organisaatioOid, koulutusOid }) => async (
   getState,
   { history },
 ) => {
-  const values = getKoulutusFormValues(getState());
-
-  const kopioToteutusOid =
-    get(values, 'toteutukset.pohja') === 'copy_toteutus'
-      ? get(values, 'toteutukset.toteutus.value')
-      : null;
-
-  if (kopioToteutusOid) {
-    history.push(
-      `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/toteutus?kopioToteutusOid=${kopioToteutusOid}`,
-    );
-  } else {
-    history.push(
-      `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/toteutus`,
-    );
-  }
+  history.push(
+    `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/toteutus`,
+  );
 };

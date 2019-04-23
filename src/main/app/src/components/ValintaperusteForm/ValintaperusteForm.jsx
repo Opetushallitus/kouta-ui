@@ -58,7 +58,7 @@ const ValintaperusteForm = ({
           );
 
           return (
-            <FormCollapseGroup enabled={steps}>
+            <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
               {canEditTyyppi ? (
                 <FormCollapse
                   header={t('yleiset.koulutustyyppi')}

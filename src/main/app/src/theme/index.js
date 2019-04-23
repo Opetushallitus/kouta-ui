@@ -57,12 +57,13 @@ export const spacing = (amount = 1) => ({ theme }) =>
 export const createTheme = (theme = {}) => {
   const textPrimaryColor = '#666666';
   const textSecondaryColor = '#a6a6a6';
+  const textDarkColor = '#2a2a2a';
   const fontFamily = "'Roboto', sans-serif";
 
   const headingTypography = createHeadingTypography({
     sizes: [3, 2.5, 2, 1.5, 1.25, 1],
     fontFamily,
-    color: textPrimaryColor,
+    color: textDarkColor,
     lineHeight: 1.2,
   });
 
@@ -91,6 +92,7 @@ export const createTheme = (theme = {}) => {
       text: {
         primary: textPrimaryColor,
         secondary: textSecondaryColor,
+        dark: textDarkColor,
       },
       primary: {
         light: '#e0f2fd',

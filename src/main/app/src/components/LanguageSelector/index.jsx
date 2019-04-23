@@ -36,7 +36,7 @@ const LanguageSelector = ({
     if (languages.length > 0 && !languages.find(lng => lng === language)) {
       setLanguage(languages[0]);
     }
-  }, [languages]);
+  }, [languages, language]);
 
   const { t } = useTranslation();
 

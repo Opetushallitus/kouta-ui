@@ -109,19 +109,19 @@ const ButtonBase = styled.button`
     `}
 `;
 
-const Button = ({
-  variant = 'contained',
-  color = 'primary',
-  size = 'medium',
-  ...props
-}) => (
-  <ButtonBase
-    variant={variant}
-    color={color}
-    size={size}
-    ref={props.innerRef}
-    {...props}
-  />
+const Button = React.forwardRef(
+  (
+    { variant = 'contained', color = 'primary', size = 'medium', ...props },
+    ref,
+  ) => (
+    <ButtonBase
+      variant={variant}
+      color={color}
+      size={size}
+      ref={ref}
+      {...props}
+    />
+  ),
 );
 
 export default Button;

@@ -6,6 +6,7 @@ export const FormLabel = styled.label.attrs({ marginBottom: 1 })`
   ${getThemeProp('typography.body')};
   ${spacingCss}
   display: inline-block;
+  color: ${getThemeProp('palette.text.dark')};
 
   ${({ disabled }) => disabled && css`
     opacity: 0.5;

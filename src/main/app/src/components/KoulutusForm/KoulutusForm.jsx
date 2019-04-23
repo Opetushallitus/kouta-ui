@@ -50,7 +50,7 @@ const KoulutusForm = ({
           const languageTabs = languagesValue || [];
 
           return (
-            <FormCollapseGroup enabled={steps} scrollTarget={scrollTarget}>
+            <FormCollapseGroup enabled={steps} scrollTarget={scrollTarget} defaultOpen={!steps}>
               {canEditKoulutustyyppi ? (
                 <FormCollapse
                   header={t('yleiset.koulutustyyppi')}

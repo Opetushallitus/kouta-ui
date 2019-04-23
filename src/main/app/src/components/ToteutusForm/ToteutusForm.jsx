@@ -61,7 +61,7 @@ const ToteutusForm = ({
     <form onSubmit={handleSubmit}>
       <ActiveLanguages>
         {({ languages }) => (
-          <FormCollapseGroup enabled={steps} scrollTarget={scrollTarget}>
+          <FormCollapseGroup enabled={steps} scrollTarget={scrollTarget} defaultOpen={!steps}>
             {canCopy ? (
               <FormCollapse
                 header={t('yleiset.pohjanValinta')}

@@ -37,19 +37,23 @@ exports[`renders correctly with color 1`] = `
   box-shadow: 0 0 5px 0 #3bacd3;
 }
 
-<styled.button
+<ForwardRef
   color="primary"
-  size="medium"
-  variant="contained"
 >
-  <button
-    className="c0"
+  <styled.button
     color="primary"
     size="medium"
+    variant="contained"
   >
-    Primary button
-  </button>
-</styled.button>
+    <button
+      className="c0"
+      color="primary"
+      size="medium"
+    >
+      Primary button
+    </button>
+  </styled.button>
+</ForwardRef>
 `;
 
 exports[`renders correctly with color 2`] = `
@@ -89,19 +93,23 @@ exports[`renders correctly with color 2`] = `
   box-shadow: 0 0 5px 0 #a6a6a6;
 }
 
-<styled.button
+<ForwardRef
   color="secondary"
-  size="medium"
-  variant="contained"
 >
-  <button
-    className="c0"
+  <styled.button
     color="secondary"
     size="medium"
+    variant="contained"
   >
-    Secondary button
-  </button>
-</styled.button>
+    <button
+      className="c0"
+      color="secondary"
+      size="medium"
+    >
+      Secondary button
+    </button>
+  </styled.button>
+</ForwardRef>
 `;
 
 exports[`renders correctly with variant 1`] = `
@@ -141,19 +149,23 @@ exports[`renders correctly with variant 1`] = `
   box-shadow: 0 0 5px 0 #3bacd3;
 }
 
-<styled.button
-  color="primary"
-  size="medium"
+<ForwardRef
   variant="contained"
 >
-  <button
-    className="c0"
+  <styled.button
     color="primary"
     size="medium"
+    variant="contained"
   >
-    Contained button
-  </button>
-</styled.button>
+    <button
+      className="c0"
+      color="primary"
+      size="medium"
+    >
+      Contained button
+    </button>
+  </styled.button>
+</ForwardRef>
 `;
 
 exports[`renders correctly with variant 2`] = `
@@ -193,17 +205,21 @@ exports[`renders correctly with variant 2`] = `
   box-shadow: 0 0 5px 0 #3bacd3;
 }
 
-<styled.button
-  color="primary"
-  size="medium"
+<ForwardRef
   variant="outlined"
 >
-  <button
-    className="c0"
+  <styled.button
     color="primary"
     size="medium"
+    variant="outlined"
   >
-    Outlined button
-  </button>
-</styled.button>
+    <button
+      className="c0"
+      color="primary"
+      size="medium"
+    >
+      Outlined button
+    </button>
+  </styled.button>
+</ForwardRef>
 `;

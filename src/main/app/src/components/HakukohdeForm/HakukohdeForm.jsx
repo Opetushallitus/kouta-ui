@@ -40,7 +40,7 @@ const HakukohdeForm = ({
     <form onSubmit={handleSubmit}>
       <ActiveLanguages>
         {({ languages }) => (
-          <FormCollapseGroup enabled={steps}>
+          <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
             <FormCollapse
               header={t('yleiset.kieliversiot')}
               section="kieliversiot"

@@ -176,25 +176,28 @@ export const FileInput = props => {
   const [uploadError, setUploadError] = useState(false);
   const { t } = useTranslation();
 
-  const onDrop = useCallback(async files => {
-    setLoading(true);
-    setUploadError(false);
+  const onDrop = useCallback(
+    async files => {
+      setLoading(true);
+      setUploadError(false);
 
-    try {
-      const binaries = await getBinaries(files);
-      const values = await upload(binaries);
+      try {
+        const binaries = await getBinaries(files);
+        const values = await upload(binaries);
 
-      setLoading(false);
-      onChange(values);
-    } catch (e) {
-      setLoading(false);
-      setUploadError(true);
+        setLoading(false);
+        onChange(values);
+      } catch (e) {
+        setLoading(false);
+        setUploadError(true);
 
-      setTimeout(() => {
-        setUploadError(false);
-      }, 2000);
-    }
-  }, []);
+        setTimeout(() => {
+          setUploadError(false);
+        }, 2000);
+      }
+    },
+    [onChange, upload],
+  );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 

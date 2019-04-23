@@ -15,7 +15,7 @@ const CollapseFooterContainer = styled.div`
 `;
 
 const CollapseWrapper = styled.div`
-  margin-bottom: ${({ theme }) => theme.spacing.unit * 3}px;
+  margin-bottom: ${({ theme }) => theme.spacing.unit * 4}px;
 `;
 
 const HeaderWrapper = styled.div`
@@ -146,13 +146,13 @@ const FormCollapse = ({
       scrollOnActive && scrollIntoView(containerRef.current);
       setCollapseOpen(true);
     }
-  }, [active]);
+  }, [active]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (languages.length > 0 && !languages.find(lng => lng === language)) {
       setLanguage(languages[0]);
     }
-  }, [languages]);
+  }, [languages]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const actions = renderActions({ actions: actionsProp, t, onContinue });
 

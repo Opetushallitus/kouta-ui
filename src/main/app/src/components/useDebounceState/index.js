@@ -7,23 +7,20 @@ export const useDebounceState = (initialValue = null, wait = 0) => {
 
   const debounceRef = useRef();
 
-  useEffect(
-    () => {
-      debounceRef.current = debounce(newValue => {
-        setDebouncedValue(newValue);
-      }, wait);
+  useEffect(() => {
+    debounceRef.current = debounce(newValue => {
+      setDebouncedValue(newValue);
+    }, wait);
 
-      return () => debounceRef.current.cancel();
-    },
-    [wait],
-  );
+    return () => debounceRef.current.cancel();
+  }, [wait]);
 
   const setValueFn = useCallback(
     newValue => {
       setValue(newValue);
       debounceRef.current(newValue);
     },
-    [setValue, debounceRef.current],
+    [setValue],
   );
 
   return [value, setValueFn, debouncedValue];

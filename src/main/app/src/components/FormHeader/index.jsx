@@ -7,7 +7,7 @@ import { getThemeProp } from '../../theme';
 import Icon from '../Icon';
 
 const HomeIcon = styled(Icon).attrs({ type: 'home' })`
-  color: ${getThemeProp('palette.text.primary')};
+  color: ${getThemeProp('palette.text.dark')};
   font-size: 1.5rem;
 `;
 

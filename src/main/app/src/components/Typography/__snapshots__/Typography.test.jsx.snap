@@ -55,7 +55,7 @@ Array [
   line-height: 1.5;
   margin-bottom: 0px;
   margin-top: 0px;
-  color: #666666;
+  color: #2a2a2a;
   font-family: 'Roboto',sans-serif;
   font-size: 3rem;
   font-weight: 700;
@@ -78,7 +78,7 @@ Array [
   line-height: 1.5;
   margin-bottom: 0px;
   margin-top: 0px;
-  color: #666666;
+  color: #2a2a2a;
   font-family: 'Roboto',sans-serif;
   font-size: 2.5rem;
   font-weight: 700;
@@ -101,7 +101,7 @@ Array [
   line-height: 1.5;
   margin-bottom: 0px;
   margin-top: 0px;
-  color: #666666;
+  color: #2a2a2a;
   font-family: 'Roboto',sans-serif;
   font-size: 2rem;
   font-weight: 700;
@@ -124,7 +124,7 @@ Array [
   line-height: 1.5;
   margin-bottom: 0px;
   margin-top: 0px;
-  color: #666666;
+  color: #2a2a2a;
   font-family: 'Roboto',sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
@@ -147,7 +147,7 @@ Array [
   line-height: 1.5;
   margin-bottom: 0px;
   margin-top: 0px;
-  color: #666666;
+  color: #2a2a2a;
   font-family: 'Roboto',sans-serif;
   font-size: 1.25rem;
   font-weight: 700;
@@ -170,7 +170,7 @@ Array [
   line-height: 1.5;
   margin-bottom: 0px;
   margin-top: 0px;
-  color: #666666;
+  color: #2a2a2a;
   font-family: 'Roboto',sans-serif;
   font-size: 1rem;
   font-weight: 700;

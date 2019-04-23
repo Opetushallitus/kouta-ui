@@ -1,17 +1,20 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Field, FieldArray } from 'redux-form';
 
-import { RadioGroup } from '../Radio';
 import Button from '../Button';
 import Spacing from '../Spacing';
-import InputMask from '../InputMask';
 import Typography from '../Typography';
-import YearSelect from '../YearSelect';
 import useKoodistoOptions from '../useKoodistoOptions';
 import useTranslation from '../useTranslation';
 import Flex, { FlexItem } from '../Flex';
-import { noop, getTestIdProps } from '../../utils';
+import { getTestIdProps } from '../../utils';
+
+import {
+  FormFieldDateTimeInput,
+  FormFieldRadioGroup,
+  FormFieldYearSelect,
+} from '../FormFields';
 
 const BorderHeading = styled(Typography).attrs({
   variant: 'h6',
@@ -21,125 +24,37 @@ const BorderHeading = styled(Typography).attrs({
   border-bottom: 1px solid ${({ theme }) => theme.palette.border};
 `;
 
-const HakuContainer = styled.div`
-  display: flex;
-  margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
-  align-items: center;
-`;
-
-const HakuDateTimeContainer = styled.div`
-  flex: 1;
-  ${({ first }) =>
-    first
-      ? css`
-          padding-right: ${({ theme }) => theme.spacing.unit * 2}px;
-        `
-      : css`
-          padding-left: ${({ theme }) => theme.spacing.unit * 2}px;
-        `}
-`;
-
-const HakuDateTimeWrapper = styled.div`
-  display: flex;
-`;
-
-const HakuDateContainer = styled.div`
-  flex: 1;
-  padding-right: ${({ theme }) => theme.spacing.unit * 2}px;
-`;
-
-const HakuTimeContainer = styled.div`
-  flex: 0;
-  flex-basis: 30%;
-`;
-
-const HakuRemoveContainer = styled.div`
-  flex: 0;
-  padding-left: ${({ theme }) => theme.spacing.unit * 2}px;
-  display: flex;
-  align-items: center;
-`;
-
-const renderRadioGroupField = ({ input, options }) => (
-  <RadioGroup {...input} options={options} />
-);
-
-const renderYearField = ({ input }) => <YearSelect {...input} onBlur={noop} />;
-
-const renderInputMaskField = ({ input, ...props }) => (
-  <InputMask {...input} {...props} />
-);
-
 const renderHakuajatFields = ({ fields, t }) => {
   return (
     <>
       {fields.map((hakuaika, index) => (
-        <HakuContainer key={index}>
-          <HakuDateTimeContainer {...getTestIdProps('alkaa')} first>
-            <Typography as="div" marginBottom={1}>
-              {t('yleiset.alkaa')}
-            </Typography>
-            <HakuDateTimeWrapper>
-              <HakuDateContainer {...getTestIdProps('paivamaara')}>
-                <Field
-                  name={`${hakuaika}.fromDate`}
-                  placeholder="pp.kk.vvvv"
-                  component={renderInputMaskField}
-                  mask="99.99.9999"
-                />
-              </HakuDateContainer>
-              <HakuTimeContainer {...getTestIdProps('kellonaika')}>
-                <Field
-                  name={`${hakuaika}.fromTime`}
-                  placeholder="tt:mm"
-                  component={renderInputMaskField}
-                  mask="99:99"
-                />
-              </HakuTimeContainer>
-            </HakuDateTimeWrapper>
-            <Typography variant="secondary" as="div" marginTop={1}>
-              {t('yleiset.paivamaaraJaKellonaika')}
-            </Typography>
-          </HakuDateTimeContainer>
-          <HakuDateTimeContainer {...getTestIdProps('paattyy')}>
-            <Typography as="div" marginBottom={1}>
-              {t('yleiset.paattyy')}
-            </Typography>
-            <HakuDateTimeWrapper>
-              <HakuDateContainer {...getTestIdProps('paivamaara')}>
-                <Field
-                  name={`${hakuaika}.toDate`}
-                  placeholder="pp.kk.vvvv"
-                  component={renderInputMaskField}
-                  mask="99.99.9999"
-                />
-              </HakuDateContainer>
-              <HakuTimeContainer {...getTestIdProps('kellonaika')}>
-                <Field
-                  name={`${hakuaika}.toTime`}
-                  placeholder="tt:mm"
-                  component={renderInputMaskField}
-                  mask="99:99"
-                />
-              </HakuTimeContainer>
-            </HakuDateTimeWrapper>
-            <Typography variant="secondary" as="div" marginTop={1}>
-              {t('yleiset.paivamaaraJaKellonaika')}
-            </Typography>
-          </HakuDateTimeContainer>
-          <HakuRemoveContainer>
+        <Flex key={index} marginBottom={2} alignCenter>
+          <FlexItem grow={1} paddingRight={2} {...getTestIdProps('alkaa')}>
+            <Field
+              name={`${hakuaika}.alkaa`}
+              component={FormFieldDateTimeInput}
+              label={t('yleiset.alkaa')}
+              helperText={t('yleiset.paivamaaraJaKellonaika')}
+            />
+          </FlexItem>
+          <FlexItem grow={1} paddingLeft={2} {...getTestIdProps('paattyy')}>
+            <Field
+              name={`${hakuaika}.paattyy`}
+              component={FormFieldDateTimeInput}
+              label={t('yleiset.paattyy')}
+              helperText={t('yleiset.paivamaaraJaKellonaika')}
+            />
+          </FlexItem>
+          <FlexItem grow={0} paddingLeft={2}>
             <Button
-              type="button"
-              onClick={() => {
-                fields.remove(index);
-              }}
+              onClick={() => fields.remove(index)}
               variant="outlined"
               color="secondary"
             >
               {t('yleiset.poista')}
             </Button>
-          </HakuRemoveContainer>
-        </HakuContainer>
+          </FlexItem>
+        </Flex>
       ))}
       <Button
         type="button"
@@ -154,7 +69,7 @@ const renderHakuajatFields = ({ fields, t }) => {
   );
 };
 
-const ScheduleSection = props => {
+const ScheduleSection = () => {
   const { t } = useTranslation();
   const { options: kausiOptions } = useKoodistoOptions({ koodisto: 'kausi' });
 
@@ -175,23 +90,21 @@ const ScheduleSection = props => {
         <BorderHeading>{t('hakulomake.koulutuksenAlkamiskausi')}</BorderHeading>
 
         <Spacing marginBottom={2} {...getTestIdProps('kausi')}>
-          <Typography as="div" marginBottom={1}>
-            {t('yleiset.kausi')}
-          </Typography>
-
           <Field
             name="kausi"
-            component={renderRadioGroupField}
+            component={FormFieldRadioGroup}
             options={kausiOptions}
+            label={t('yleiset.kausi')}
           />
         </Spacing>
 
         <Spacing>
-          <Typography as="div" marginBottom={1}>
-            {t('yleiset.vuosi')}
-          </Typography>
           <div {...getTestIdProps('vuosi')}>
-            <Field name="vuosi" component={renderYearField} />
+            <Field
+              name="vuosi"
+              component={FormFieldYearSelect}
+              label={t('yleiset.vuosi')}
+            />
           </div>
         </Spacing>
       </Spacing>
@@ -200,81 +113,33 @@ const ScheduleSection = props => {
         <BorderHeading>
           {t('hakulomake.hakukohteenLisaamisenJaPerumisenTakaraja')}
         </BorderHeading>
-        <Flex>
-          <FlexItem grow={1} {...getTestIdProps('paivamaara')}>
-            <Field
-              name="liittäminen_pvm"
-              placeholder="pp.kk.vvvv"
-              component={renderInputMaskField}
-              mask="99.99.9999"
-            />
-          </FlexItem>
-          <FlexItem basis="30%" grow={0} paddingLeft={2} {...getTestIdProps('kellonaika')}>
-            <Field
-              name="liittäminen_aika"
-              placeholder="tt:mm"
-              component={renderInputMaskField}
-              mask="99:99"
-            />
-          </FlexItem>
-        </Flex>
-        <Typography variant="secondary" as="div" marginTop={1}>
-          {t('yleiset.paivamaaraJaKellonaika')}
-        </Typography>
+        <Field
+          name="lisaamisenTakaraja"
+          component={FormFieldDateTimeInput}
+          helperText={t('yleiset.paivamaaraJaKellonaika')}
+        />
       </Spacing>
 
       <Spacing marginBottom={2} {...getTestIdProps('muokkauksenTakaraja')}>
         <BorderHeading>
           {t('hakulomake.hakukohteenMuokkauksenTakaraja')}
         </BorderHeading>
-        <Flex>
-          <FlexItem grow={1} {...getTestIdProps('paivamaara')}>
-            <Field
-              name="muokkaus_pvm"
-              placeholder="pp.kk.vvvv"
-              component={renderInputMaskField}
-              mask="99.99.9999"
-            />
-          </FlexItem>
-          <FlexItem basis="30%" grow={0} paddingLeft={2} {...getTestIdProps('kellonaika')}>
-            <Field
-              name="muokkaus_aika"
-              placeholder="tt:mm"
-              component={renderInputMaskField}
-              mask="99:99"
-            />
-          </FlexItem>
-        </Flex>
-        <Typography variant="secondary" as="div" marginTop={1}>
-          {t('yleiset.paivamaaraJaKellonaika')}
-        </Typography>
+        <Field
+          name="muokkauksenTakaraja"
+          component={FormFieldDateTimeInput}
+          helperText={t('yleiset.paivamaaraJaKellonaika')}
+        />
       </Spacing>
 
       <Spacing {...getTestIdProps('julkaisupaivamaara')}>
         <BorderHeading>
           {t('hakulomake.ajastettuHaunJulkaisupaivamaara')}
         </BorderHeading>
-        <Flex>
-          <FlexItem grow={1} {...getTestIdProps('paivamaara')}>
-            <Field
-              name="julkaisu_pvm"
-              placeholder="pp.kk.vvvv"
-              component={renderInputMaskField}
-              mask="99.99.9999"
-            />
-          </FlexItem>
-          <FlexItem basis="30%" grow={0} paddingLeft={2} {...getTestIdProps('kellonaika')}>
-            <Field
-              name="julkaisu_aika"
-              placeholder="tt:mm"
-              component={renderInputMaskField}
-              mask="99:99"
-            />
-          </FlexItem>
-        </Flex>
-        <Typography variant="secondary" as="div" marginTop={1}>
-          {t('yleiset.paivamaaraJaKellonaika')}
-        </Typography>
+        <Field
+          name="ajastettuJulkaisu"
+          component={FormFieldDateTimeInput}
+          helperText={t('yleiset.paivamaaraJaKellonaika')}
+        />
       </Spacing>
     </>
   );

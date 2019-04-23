@@ -1,32 +1,21 @@
 import React from 'react';
 import { Field } from 'redux-form';
-
-import Typography from '../Typography';
-import Select from '../Select';
-import { noop } from '../../utils';
+ 
 import useKoodistoOptions from '../useKoodistoOptions';
 import useTranslation from '../useTranslation';
-
-const renderSelectField = ({ input, ...props }) => (
-  <Select {...input} {...props} onBlur={noop} />
-);
+import { FormFieldSelect } from '../FormFields';
 
 const KohdejoukonRajausSection = () => {
   const { options } = useKoodistoOptions({ koodisto: 'haunkohdejoukko' });
   const { t } = useTranslation();
 
   return (
-    <>
-      <Typography variant="h6" marginBottom={1}>
-        {t('valintaperustelomake.valitseHaunKohdejoukko')}
-      </Typography>
-
-      <Field
-        name="kohdejoukko"
-        component={renderSelectField}
-        options={options}
-      />
-    </>
+    <Field
+      name="kohdejoukko"
+      component={FormFieldSelect}
+      options={options}
+      label={t('valintaperustelomake.valitseHaunKohdejoukko')}
+    />
   );
 };
 

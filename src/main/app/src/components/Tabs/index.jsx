@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { lighten } from 'polished';
 
 import { getThemeProp } from '../../theme';
 
@@ -12,6 +13,7 @@ const activeCss = css`
   border-top: 2px solid ${getThemeProp('palette.primary.main')};
   border-bottom: 1px solid white;
   color: ${getThemeProp('palette.text.primary')};
+  background-color: white;
 `;
 
 const TabWrapper = styled.div`
@@ -36,6 +38,13 @@ export const Tab = styled.div`
   cursor: pointer;
   border: 1px solid transparent;
   border-top: 2px solid transparent;
+  transition: color 0.25s;
+
+  ${({ active }) => !active && css`
+    &:hover {
+      color: ${({ theme }) => lighten(0.05, theme.palette.primary.main)};
+    }
+  `}
 
   ${({ active }) => active && activeCss};
 `;

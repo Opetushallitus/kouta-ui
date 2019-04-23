@@ -1,11 +1,13 @@
-import { getFormValues } from 'redux-form';
+import { getFormValues, startSubmit, stopSubmit } from 'redux-form';
 import get from 'lodash/get';
 
-import { JULKAISUTILA } from '../../constants';
-import { createTemporaryToast } from '../toaster';
-import { getHakuByValues } from './utils';
+import { JULKAISUTILA, POHJAVALINNAT } from '../../constants';
+import { createSavingErrorToast, createSavingSuccessToast } from '../toaster';
+import { getHakuByValues, validate } from './utils';
+import { isNonEmptyObject } from '../../utils';
 
-const getHakuFormValues = getFormValues('createHakuForm');
+const formName = 'createHakuForm';
+const getHakuFormValues = getFormValues(formName);
 
 const getOidsFromPathname = pathname => {
   const split = pathname.split('/').filter(p => !!p);
@@ -27,10 +29,10 @@ export const maybeCopy = () => (dispatch, getState) => {
   const values = getHakuFormValues(getState());
 
   if (
-    get(values, 'pohja.base') === 'copy_haku' &&
-    !!get(values, 'pohja.search.value')
+    get(values, 'pohja.pohja.tapa') === POHJAVALINNAT.KOPIO &&
+    !!get(values, 'pohja.pohja.valinta.value')
   ) {
-    dispatch(copy(values.pohja.search.value));
+    dispatch(copy(values.pohja.pohja.valinta.value));
   }
 };
 
@@ -40,12 +42,22 @@ export const copy = hakuOid => async (dispatch, getState, { history }) => {
   });
 };
 
-export const submit = ({
-  tila = JULKAISUTILA.TALLENNETTU,
-  redirect = true,
-} = {}) => async (dispatch, getState, { httpClient, apiUrls, history }) => {
+export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
+  dispatch,
+  getState,
+  { history },
+) => {
   const state = getState();
   const values = getHakuFormValues(state);
+  const errors = validate({ values, tila });
+
+  dispatch(startSubmit(formName));
+
+  if (isNonEmptyObject(errors)) {
+    dispatch(stopSubmit(formName, errors));
+    dispatch(createSavingErrorToast());
+    return;
+  }
 
   const {
     me: { kayttajaOid: muokkaaja },
@@ -69,29 +81,18 @@ export const submit = ({
 
     hakuData = data;
   } catch (e) {
-    return dispatch(
-      createTemporaryToast({
-        status: 'danger',
-        title: 'Haun tallennus epäonnistui',
-      }),
-    );
+    dispatch(stopSubmit(formName));
+    dispatch(createSavingErrorToast());
+    return;
   }
 
-  dispatch(
-    createTemporaryToast({
-      status: 'success',
-      title: 'Haku on tallennettu onnistuneesti',
-    }),
-  );
-
-  if (!redirect) {
-    return hakuData;
-  }
+  dispatch(stopSubmit(formName));
+  dispatch(createSavingSuccessToast());
 
   if (get(hakuData, 'oid')) {
     const { oid: hakuOid } = hakuData;
 
-    history.push(`/haku/${hakuOid}/muokkaus?scrollTarget=liitetyt-hakukohteet`);
+    history.push(`/haku/${hakuOid}/muokkaus`);
   } else {
     history.push('/');
   }

@@ -1,50 +1,36 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
-import Typography from '../Typography';
-import Input from '../Input';
 import Spacing from '../Spacing';
-import LanguageSelector from '../LanguageSelector';
-import Checkbox from '../Checkbox';
 import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
+import { FormFieldCheckbox, FormFieldInput } from '../FormFields';
 
-const renderCheckboxField = ({ input, label = null }) => (
-  <Checkbox checked={input.value} onChange={input.onChange} children={label} />
-);
-
-const renderInputField = ({ input }) => <Input {...input} />;
-
-const PerustiedotSection = ({ languages, koulutustyyppi }) => {
+const PerustiedotSection = ({ language, koulutustyyppi }) => {
   const isAmmatillinen =
     koulutustyyppi === KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS;
 
   const { t } = useTranslation();
 
   return (
-    <LanguageSelector languages={languages} defaultValue="fi">
-      {({ value: activeLanguage }) => (
-        <>
-          <Spacing marginBottom={2} {...getTestIdProps('nimi')}>
-            <Typography variant="h6" marginBottom={1}>
-              {t('yleiset.nimi')}
-            </Typography>
-            <Field
-              name={`nimi.${activeLanguage}`}
-              component={renderInputField}
-            />
-          </Spacing>
-          {isAmmatillinen ? (
-            <Field
-              name="voiSuorittaaKaksoistutkinnon"
-              component={renderCheckboxField}
-              label={t('hakukohdelomake.voiSuorittaaKaksoistutkinnon')}
-            />
-          ) : null}
-        </>
-      )}
-    </LanguageSelector>
+    <>
+      <Spacing marginBottom={2} {...getTestIdProps('nimi')}>
+        <Field
+          name={`nimi.${language}`}
+          component={FormFieldInput}
+          label={t('yleiset.nimi')}
+        />
+      </Spacing>
+      {isAmmatillinen ? (
+        <Field
+          name="voiSuorittaaKaksoistutkinnon"
+          component={FormFieldCheckbox}
+        >
+          {t('hakukohdelomake.voiSuorittaaKaksoistutkinnon')}
+        </Field>
+      ) : null}
+    </>
   );
 };
 

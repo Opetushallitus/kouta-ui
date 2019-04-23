@@ -19,16 +19,12 @@ test('getHakukohdeByValues returns correct hakukohde given form values', () => {
       eriHakuaika: true,
       hakuajat: [
         {
-          fromDate: '01.02.2018',
-          fromTime: '10:30',
-          toDate: '02.03.2019',
-          toTime: '11:45',
+          alkaa: '2019-04-17T05:52',
+          paattyy: '2019-04-22T05:52',
         },
         {
-          fromDate: '01.06.2018',
-          fromTime: '12:30',
-          toDate: '02.09.2019',
-          toTime: '16:15',
+          alkaa: '2019-05-17T05:52',
+          paattyy: '2019-05-18T05:52',
         },
       ],
     },
@@ -53,8 +49,8 @@ test('getHakukohdeByValues returns correct hakukohde given form values', () => {
         'koetyyppi_1#1': {
           kokeet: [
             {
-              fromDate: '11.11.2011',
-              fromTime: '10:30',
+              alkaa: '2019-04-17T05:52',
+              paattyy: '2019-04-18T05:52',
               lisatietoja: {
                 fi: 'Fi lisatieto',
               },
@@ -65,8 +61,6 @@ test('getHakukohdeByValues returns correct hakukohde given form values', () => {
               postitoimipaikka: {
                 fi: 'Fi postitoimipaikka',
               },
-              toDate: '20.12.2011',
-              toTime: '09:45',
             },
           ],
         },
@@ -88,8 +82,7 @@ test('getHakukohdeByValues returns correct hakukohde given form values', () => {
       toimitussahkoposti: 'sahkoposti@kouta.fi',
       yhteinenToimituspaikka: false,
       yhteinenToimitusaika: false,
-      deliverDate: '20.12.2011',
-      deliverTime: '10:30',
+      toimitusaika: '2019-04-17T05:52',
       liitteet: [
         {
           tyyppi: { value: 'liitetyyppi_1#1' },
@@ -97,8 +90,7 @@ test('getHakukohdeByValues returns correct hakukohde given form values', () => {
             fi: 'Fi nimi',
             sv: 'Sv nimi',
           },
-          deliverDate: '25.10.2016',
-          deliverTime: '09:45',
+          toimitusaika: '2019-08-17T05:52',
           toimitussahkoposti: 'sahkoposti2@kouta.fi',
           toimitusosoite: {
             fi: 'Fi osoite',

@@ -1,7 +1,7 @@
 import { reduxForm } from 'redux-form';
 import { compose, withProps } from 'recompose';
 
-import HakukohdeForm, { validate, getInitialValues } from '../HakukohdeForm';
+import HakukohdeForm, { getInitialValues } from '../HakukohdeForm';
 
 export default compose(
   withProps(({ organisaatio }) => ({
@@ -10,6 +10,5 @@ export default compose(
   })),
   reduxForm({
     form: 'createHakukohdeForm',
-    validate,
   }),
 )(HakukohdeForm);

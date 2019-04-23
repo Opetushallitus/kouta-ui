@@ -18,4 +18,10 @@ storiesOf('Button', module)
       <Button color="success">Success</Button>
       <Button color="danger">Danger</Button>
     </>
+  ))
+  .add('With size', () => (
+    <>
+      <Button variant="contained" size="small">Small</Button>
+      <Button variant="contained" size="medium">Medium</Button>
+    </>
   ));

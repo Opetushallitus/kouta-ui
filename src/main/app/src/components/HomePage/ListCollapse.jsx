@@ -9,7 +9,7 @@ import { getThemeProp, spacing } from '../../theme';
 
 const HeaderIcon = styled(Icon)`
   font-size: 1.6rem;
-  color: ${getThemeProp('palette.text.primary')};
+  color: ${getThemeProp('palette.text.dark')};
 `;
 
 const HeaderContainer = styled.div`
@@ -20,6 +20,10 @@ const HeaderContainer = styled.div`
 const HeaderWrapper = styled.div`
   width: 100%;
   padding: ${spacing(2)};
+`;
+
+const HeaderTypography = styled(Typography).attrs({ variant: 'h4' })`
+  color: ${getThemeProp('palette.text.dark')};
 `;
 
 const ListCollapse = ({
@@ -36,9 +40,7 @@ const ListCollapse = ({
           <HeaderContainer>
             {icon ? <HeaderIcon type={icon} /> : null}
             {header ? (
-              <Typography variant="h4" marginLeft={2}>
-                {header}
-              </Typography>
+              <HeaderTypography marginLeft={2}>{header}</HeaderTypography>
             ) : null}
           </HeaderContainer>
         </FlexItem>

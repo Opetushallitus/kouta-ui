@@ -40,10 +40,11 @@ const HakukohdeForm = ({
     <form onSubmit={handleSubmit}>
       <ActiveLanguages>
         {({ languages }) => (
-          <FormCollapseGroup enabled={steps}>
+          <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
             <FormCollapse
               header={t('yleiset.kieliversiot')}
               section="kieliversiot"
+              scrollOnActive={false}
               {...getTestIdProps('kieliversiotSection')}
             >
               <KieliversiotFormSection />
@@ -54,21 +55,16 @@ const HakukohdeForm = ({
               section="pohjakoulutus"
               {...getTestIdProps('pohjakoulutusvaatimusSection')}
             >
-              <PohjakoulutusSection
-                languages={languages}
-                koulutustyyppi={koulutustyyppi}
-              />
+              <PohjakoulutusSection koulutustyyppi={koulutustyyppi} />
             </FormCollapse>
 
             <FormCollapse
               header={t('hakukohdelomake.hakukohteenPerustiedot')}
               section="perustiedot"
+              languages={languages}
               {...getTestIdProps('perustiedotSection')}
             >
-              <PerustiedotSection
-                languages={languages}
-                koulutustyyppi={koulutustyyppi}
-              />
+              <PerustiedotSection koulutustyyppi={koulutustyyppi} />
             </FormCollapse>
 
             <FormCollapse
@@ -76,7 +72,7 @@ const HakukohdeForm = ({
               section="hakuajat"
               {...getTestIdProps('hakuajatSection')}
             >
-              <HakuajatSection haku={haku} languages={languages} />
+              <HakuajatSection haku={haku} />
             </FormCollapse>
 
             <FormCollapse
@@ -114,20 +110,19 @@ const HakukohdeForm = ({
             <FormCollapse
               header={t('hakukohdelomake.valintakoe')}
               section="valintakoe"
+              languages={languages}
               {...getTestIdProps('valintakoeSection')}
             >
-              <ValintakoeSection languages={languages} />
+              <ValintakoeSection />
             </FormCollapse>
 
             <FormCollapse
               header={t('hakukohdelomake.tarvittavatLiitteet')}
               section="liitteet"
+              languages={languages}
               {...getTestIdProps('liitteetSection')}
             >
-              <LiitteetSection
-                languages={languages}
-                organisaatioOid={organisaatioOid}
-              />
+              <LiitteetSection organisaatioOid={organisaatioOid} />
             </FormCollapse>
           </FormCollapseGroup>
         )}

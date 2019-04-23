@@ -38,12 +38,9 @@ export const useKoodistoOptions = ({
 
   const { data, ...rest } = useKoodisto({ koodisto, versio });
 
-  const options = useMemo(
-    () => {
-      return data ? getOptions({ koodisto: data, language, sort }) : [];
-    },
-    [data, language],
-  );
+  const options = useMemo(() => {
+    return data ? getOptions({ koodisto: data, language, sort }) : [];
+  }, [data, language, sort]);
 
   return { ...rest, options };
 };

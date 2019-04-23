@@ -1,6 +1,12 @@
 import merge from 'lodash/merge';
 
-import { getByTestId, getRadio, selectOption, getCheckbox } from '../../utils';
+import {
+  getByTestId,
+  getRadio,
+  selectOption,
+  getCheckbox,
+  fillDateTimeInput,
+} from '../../utils';
 
 import koulutus from '../../data/koulutus';
 import toteutus from '../../data/toteutus';
@@ -34,12 +40,7 @@ const fillPohjakoulutusvaatimusSection = cy => {
 };
 
 const fillDatetime = ({ date, time, cy }) => {
-  getByTestId('paivamaara', cy)
-    .find('input')
-    .type(date, { force: true });
-  getByTestId('kellonaika', cy)
-    .find('input')
-    .type(time, { force: true });
+  fillDateTimeInput({ date, time, cy });
 };
 
 const fillHakuajatSection = cy => {

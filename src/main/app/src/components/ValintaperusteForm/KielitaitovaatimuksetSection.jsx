@@ -2,33 +2,32 @@ import React, { useMemo } from 'react';
 import { Field, FieldArray } from 'redux-form';
 
 import Typography from '../Typography';
-import Input from '../Input';
 import LanguageSelector from '../LanguageSelector';
 import LanguageSelect from '../LanguageSelect';
 import Spacing from '../Spacing';
 import Divider from '../Divider';
 import Button from '../Button';
 import { VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI } from '../../constants';
-import Select from '../Select';
 import Flex, { FlexItem } from '../Flex';
-import CheckboxGroup from '../CheckboxGroup';
 import Checkbox from '../Checkbox';
 import { noop, getTestIdProps } from '../../utils';
 import useKoodistoOptions from '../useKoodistoOptions';
 import useTranslation from '../useTranslation';
 
-const renderInputField = ({ input }) => <Input {...input} />;
+import {
+  FormFieldCheckboxGroup,
+  FormFieldInput,
+  FormFieldSelect,
+  createFormFieldComponent,
+} from '../FormFields';
 
-const renderSelectField = ({ input, options, isMulti = false }) => (
-  <Select {...input} options={options} onBlur={noop} isMulti={isMulti} />
-);
-
-const renderLanguageSelectField = ({ input }) => (
-  <LanguageSelect {...input} onBlur={noop} />
-);
-
-const renderCheckboxGroupField = ({ input, options }) => (
-  <CheckboxGroup {...input} options={options} />
+const LanguageField = createFormFieldComponent(
+  LanguageSelect,
+  ({ input, meta, ...props }) => ({
+    ...input,
+    onBlur: noop,
+    ...props,
+  }),
 );
 
 const renderVaatimustyyppiField = ({
@@ -67,20 +66,19 @@ const renderKuvauksetField = ({ fields, kuvausOptions, t }) => {
       {fields.map((kuvaus, index) => (
         <Flex marginBottom={2} key={index} alignEnd>
           <FlexItem grow={1} paddingRight={2} {...getTestIdProps('kuvaus')}>
-            <Typography variant="h6" marginBottom={1}>
-              {t('yleiset.valitseKuvaus')}
-            </Typography>
             <Field
               name={`${kuvaus}.kuvaus`}
-              component={renderSelectField}
+              component={FormFieldSelect}
               options={kuvausOptions}
+              label={t('yleiset.valitseKuvaus')}
             />
           </FlexItem>
           <FlexItem grow={0} basis="20%" {...getTestIdProps('taso')}>
-            <Typography variant="h6" marginBottom={1}>
-              {t('yleiset.taso')}
-            </Typography>
-            <Field name={`${kuvaus}.taso`} component={renderInputField} />
+            <Field
+              name={`${kuvaus}.taso`}
+              label={t('yleiset.taso')}
+              component={FormFieldInput}
+            />
           </FlexItem>
           <FlexItem grow={0} paddingLeft={2}>
             <Button
@@ -125,12 +123,10 @@ const renderVaatimuksetField = ({
         return (
           <Spacing key={index}>
             <Spacing marginBottom={2} {...getTestIdProps('kielivalinta')}>
-              <Typography variant="h6" marginBottom={1}>
-                {t('yleiset.valitseKieli')}
-              </Typography>
               <Field
                 name={`${vaatimus}.kieli`}
-                component={renderLanguageSelectField}
+                component={LanguageField}
+                label={t('yleiset.valitseKieli')}
               />
             </Spacing>
 
@@ -161,13 +157,13 @@ const renderVaatimuksetField = ({
                 {...getTestIdProps('osoitusvalinta')}
               >
                 <Spacing marginBottom={2}>
-                  <Typography variant="h6" marginBottom={1}>
-                    {t('valintaperustelomake.ehdotKielitaidonOsoitukseen')}
-                  </Typography>
                   <Field
                     name={`${vaatimus}.osoitustavat`}
-                    component={renderCheckboxGroupField}
+                    component={FormFieldCheckboxGroup}
                     options={osoitusOptions}
+                    label={t(
+                      'valintaperustelomake.ehdotKielitaidonOsoitukseen',
+                    )}
                   />
                 </Spacing>
                 <FieldArray
@@ -214,12 +210,10 @@ const renderMuutOsoitustavatField = ({ fields, language, t }) => {
       {fields.map((tapa, index) => (
         <Flex marginBottom={2} key={index} alignEnd>
           <FlexItem grow={1}>
-            <Typography variant="h6" marginBottom={1}>
-              {t('yleiset.kuvaus')}
-            </Typography>
             <Field
               name={`${tapa}.kuvaus.${language}`}
-              component={renderInputField}
+              component={FormFieldInput}
+              label={t('yleiset.kuvaus')}
             />
           </FlexItem>
           <FlexItem grow={0} paddingLeft={2}>

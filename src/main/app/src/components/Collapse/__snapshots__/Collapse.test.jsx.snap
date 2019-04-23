@@ -11,7 +11,7 @@ exports[`renders correctly 1`] = `
   line-height: 1.5;
   margin-bottom: 0px;
   margin-top: 0px;
-  color: #666666;
+  color: #2a2a2a;
   font-family: 'Roboto',sans-serif;
   font-size: 1.25rem;
   font-weight: 700;
@@ -19,7 +19,7 @@ exports[`renders correctly 1`] = `
 }
 
 .c0 {
-  border: 1px solid #999999;
+  border: 1px solid #cccccc;
   background-color: white;
 }
 
@@ -27,7 +27,6 @@ exports[`renders correctly 1`] = `
   -webkit-flex: 0;
   -ms-flex: 0;
   flex: 0;
-  background-color: #1e7998;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -36,8 +35,7 @@ exports[`renders correctly 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  min-height: 3rem;
-  padding: 0px 16px;
+  padding: 0px 24px;
   cursor: pointer;
 }
 
@@ -46,7 +44,7 @@ exports[`renders correctly 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #999999;
+  border-bottom: 1px solid #cccccc;
 }
 
 .c2 {
@@ -66,24 +64,27 @@ exports[`renders correctly 1`] = `
 }
 
 .c9 {
-  padding: 16px;
-  border-top: 1px solid #999999;
+  padding: 24px;
+  border-top: 1px solid #cccccc;
 }
 
 .c6 {
-  color: white;
+  color: #666666;
   font-size: 2rem;
 }
 
 .c8 {
-  padding: 16px;
+  padding: 24px;
 }
 
 .c3 {
-  padding: 16px;
+  color: #2a2a2a;
+  padding: 24px;
 }
 
-<styled.div>
+<styled.div
+  active={false}
+>
   <div
     className="c0"
   >
@@ -95,7 +96,6 @@ exports[`renders correctly 1`] = `
         open={true}
       >
         <styled.div
-          active={false}
           onClick={[Function]}
           toggleOnHeaderClick={true}
         >
@@ -133,7 +133,7 @@ exports[`renders correctly 1`] = `
                 className="material-icons c6"
                 style={
                   Object {
-                    "transform": "rotate(0deg)",
+                    "transform": "rotate(180deg)",
                   }
                 }
               >
@@ -141,7 +141,7 @@ exports[`renders correctly 1`] = `
                   className="material-icons c6 c7"
                   style={
                     Object {
-                      "transform": "rotate(0deg)",
+                      "transform": "rotate(180deg)",
                     }
                   }
                 >
@@ -191,7 +191,7 @@ exports[`renders correctly 2`] = `
 }
 
 .c0 {
-  border: 1px solid #999999;
+  border: 1px solid #cccccc;
   background-color: white;
 }
 
@@ -199,7 +199,6 @@ exports[`renders correctly 2`] = `
   -webkit-flex: 0;
   -ms-flex: 0;
   flex: 0;
-  background-color: #1e7998;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -208,8 +207,7 @@ exports[`renders correctly 2`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  min-height: 3rem;
-  padding: 0px 16px;
+  padding: 0px 24px;
   cursor: pointer;
 }
 
@@ -218,7 +216,7 @@ exports[`renders correctly 2`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #999999;
+  border-bottom: 1px solid #cccccc;
 }
 
 .c2 {
@@ -238,20 +236,22 @@ exports[`renders correctly 2`] = `
 }
 
 .c7 {
-  padding: 16px;
-  border-top: 1px solid #999999;
+  padding: 24px;
+  border-top: 1px solid #cccccc;
 }
 
 .c4 {
-  color: white;
+  color: #666666;
   font-size: 2rem;
 }
 
 .c6 {
-  padding: 16px;
+  padding: 24px;
 }
 
-<styled.div>
+<styled.div
+  active={false}
+>
   <div
     className="c0"
   >
@@ -263,7 +263,6 @@ exports[`renders correctly 2`] = `
         open={true}
       >
         <styled.div
-          active={false}
           onClick={[Function]}
           toggleOnHeaderClick={true}
         >
@@ -291,7 +290,7 @@ exports[`renders correctly 2`] = `
                 className="material-icons c4"
                 style={
                   Object {
-                    "transform": "rotate(0deg)",
+                    "transform": "rotate(180deg)",
                   }
                 }
               >
@@ -299,7 +298,7 @@ exports[`renders correctly 2`] = `
                   className="material-icons c4 c5"
                   style={
                     Object {
-                      "transform": "rotate(0deg)",
+                      "transform": "rotate(180deg)",
                     }
                   }
                 >
@@ -354,7 +353,7 @@ exports[`renders correctly when closed 1`] = `
   line-height: 1.5;
   margin-bottom: 0px;
   margin-top: 0px;
-  color: #666666;
+  color: #2a2a2a;
   font-family: 'Roboto',sans-serif;
   font-size: 1.25rem;
   font-weight: 700;
@@ -362,7 +361,7 @@ exports[`renders correctly when closed 1`] = `
 }
 
 .c0 {
-  border: 1px solid #999999;
+  border: 1px solid #cccccc;
   background-color: white;
 }
 
@@ -370,7 +369,6 @@ exports[`renders correctly when closed 1`] = `
   -webkit-flex: 0;
   -ms-flex: 0;
   flex: 0;
-  background-color: #1e7998;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -379,8 +377,7 @@ exports[`renders correctly when closed 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  min-height: 3rem;
-  padding: 0px 16px;
+  padding: 0px 24px;
   cursor: pointer;
 }
 
@@ -408,24 +405,27 @@ exports[`renders correctly when closed 1`] = `
 }
 
 .c9 {
-  padding: 16px;
-  border-top: 1px solid #999999;
+  padding: 24px;
+  border-top: 1px solid #cccccc;
 }
 
 .c6 {
-  color: white;
+  color: #666666;
   font-size: 2rem;
 }
 
 .c8 {
-  padding: 16px;
+  padding: 24px;
 }
 
 .c3 {
-  padding: 16px;
+  color: #2a2a2a;
+  padding: 24px;
 }
 
-<styled.div>
+<styled.div
+  active={false}
+>
   <div
     className="c0"
   >
@@ -437,7 +437,6 @@ exports[`renders correctly when closed 1`] = `
         open={false}
       >
         <styled.div
-          active={false}
           onClick={[Function]}
           toggleOnHeaderClick={true}
         >
@@ -499,8 +498,8 @@ exports[`renders correctly when closed 1`] = `
       style={
         Object {
           "height": 0,
-          "opacity": 1,
-          "overflow": "visible",
+          "opacity": 0,
+          "overflow": "hidden",
         }
       }
     >

@@ -19,13 +19,13 @@ const menu = (
 storiesOf('Dropdown', module)
   .add('Basic', () => (
     <Dropdown overlay={menu} visible>
-      {({ ref }) => <Button innerRef={ref}>Dropdown</Button>}
+      {({ ref }) => <Button ref={ref}>Dropdown</Button>}
     </Dropdown>
   ))
   .add('With uncontrolled dropdown', () => (
     <UncontrolledDropdown overlay={menu}>
       {({ ref, onToggle, visible }) => (
-        <Button innerRef={ref} onClick={onToggle}>
+        <Button ref={ref} onClick={onToggle}>
           Dropdown is {visible ? 'visible' : 'hidden'}
         </Button>
       )}

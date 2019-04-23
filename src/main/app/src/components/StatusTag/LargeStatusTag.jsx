@@ -8,6 +8,7 @@ import Icon from '../Icon';
 import Typography from '../Typography';
 import { JULKAISUTILA } from '../../constants';
 import useTranslation from '../useTranslation';
+import { getColor, getLabel } from './utils';
 
 const statusByIcon = {
   [JULKAISUTILA.ARKISTOITU]: 'get_app',
@@ -23,34 +24,6 @@ const getStatusIconType = status => {
   return statusByIcon[status] || '';
 };
 
-const getLabel = ({ status, t }) => {
-  if (!isString(status)) {
-    return null;
-  }
-
-  const labelByStatus = {
-    [JULKAISUTILA.ARKISTOITU]: t('yleiset.arkistoitu'),
-    [JULKAISUTILA.JULKAISTU]: t('yleiset.julkaistu'),
-    [JULKAISUTILA.TALLENNETTU]: t('yleiset.tallennettu'),
-  }
-
-  return labelByStatus[status] || null;
-};
-
-const getColor = ({ theme, status }) => {
-  let color = theme.palette.primary.main;
-
-  if (status === JULKAISUTILA.TALLENNETTU) {
-    color = theme.palette.primary.main;
-  } else if (status === JULKAISUTILA.ARKISTOITU) {
-    color = theme.palette.warning.main;
-  } else if (status === JULKAISUTILA.JULKAISTU) {
-    color = theme.palette.success.main;
-  }
-
-  return color;
-};
-
 const getIconContainerStatusCss = ({ theme, status }) => ({
   backgroundColor: getColor({ theme, status }),
 });
@@ -60,14 +33,14 @@ const getContainerStatusCss = ({ theme, status }) => {
 
   return {
     borderColor: color,
-    backgroundColor: setLightness(0.9, color),
+    backgroundColor: setLightness(0.95, color),
   };
 };
 
 const Container = styled.div`
   display: inline-flex;
-  padding: 8px;
-  border: 1px solid;
+  padding: 8px 16px;
+  border: 2px solid;
   border-radius: ${getThemeProp('shape.borderRadius')};
   align-items: center;
 
@@ -77,8 +50,8 @@ const Container = styled.div`
 const IconContainer = styled.div`
   display: inline-flex;
   border-radius: 50%;
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 1.5rem;
+  height: 1.5rem;
   justify-content: center;
   align-items: center;
   margin-right: 8px;
@@ -87,7 +60,7 @@ const IconContainer = styled.div`
 `;
 
 const StatusIcon = styled(Icon)`
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: white;
 `;
 
@@ -95,7 +68,7 @@ const LabelContainer = styled(Typography)`
   font-size: 1rem;
 `;
 
-const FormStatus = ({ status = JULKAISUTILA.TALLENNETTU, children = null, ...props }) => {
+const LargeStatusTag = ({ status, children = null, ...props }) => {
   const { t } = useTranslation();
 
   return (
@@ -106,6 +79,6 @@ const FormStatus = ({ status = JULKAISUTILA.TALLENNETTU, children = null, ...pro
       <LabelContainer>{children || getLabel({ status, t })}</LabelContainer>
     </Container>
   );
-};
+}
 
-export default FormStatus;
+export default LargeStatusTag;

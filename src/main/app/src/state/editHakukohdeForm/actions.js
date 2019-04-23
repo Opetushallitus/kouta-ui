@@ -1,11 +1,13 @@
-import { getFormValues } from 'redux-form';
+import { getFormValues, startSubmit, stopSubmit } from 'redux-form';
 import produce from 'immer';
 
-import { getHakukohdeByValues } from '../createHakukohdeForm';
+import { getHakukohdeByValues, validate } from '../createHakukohdeForm';
 import { updateKoutaHakukohde } from '../../apiUtils';
-import { createTemporaryToast } from '../toaster';
+import { createSavingErrorToast, createSavingSuccessToast } from '../toaster';
+import { isNonEmptyObject } from '../../utils';
 
-const getHakukohdeFormValues = getFormValues('editHakukohdeForm');
+const formName = 'editHakukohdeForm';
+const getHakukohdeFormValues = getFormValues(formName);
 
 export const saveHakukohde = hakukohde => (
   dispatch,
@@ -18,11 +20,20 @@ export const saveHakukohde = hakukohde => (
 export const submit = ({ hakukohde, tila: tilaArg }) => async (
   dispatch,
   getState,
-  { history, apiUrls, httpClient },
+  { history },
 ) => {
   const state = getState();
   const values = getHakukohdeFormValues(state);
   const tila = tilaArg || hakukohde.tila;
+  const errors = validate({ values, tila });
+
+  dispatch(startSubmit(formName));
+
+  if (isNonEmptyObject(errors)) {
+    dispatch(stopSubmit(formName, errors));
+    dispatch(createSavingErrorToast());
+    return;
+  }
 
   const {
     me: { kayttajaOid },
@@ -47,20 +58,13 @@ export const submit = ({ hakukohde, tila: tilaArg }) => async (
 
     hakukohdeData = data;
   } catch (e) {
-    return dispatch(
-      createTemporaryToast({
-        status: 'danger',
-        title: 'Hakukohteen tallennus epäonnistui',
-      }),
-    );
+    dispatch(stopSubmit(formName));
+    dispatch(createSavingErrorToast());
+    return;
   }
 
-  dispatch(
-    createTemporaryToast({
-      status: 'success',
-      title: 'Hakukohde on tallennettu onnistuneesti',
-    }),
-  );
+  dispatch(stopSubmit(formName));
+  dispatch(createSavingSuccessToast());
 
   history.push(`/hakukohde/${hakukohde.oid}/muokkaus`, {
     hakukohdeUpdatedAt: Date.now(),

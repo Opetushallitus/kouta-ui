@@ -1,24 +1,28 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Field, FieldArray, formValues } from 'redux-form';
-import styled, { css } from 'styled-components';
 
 import Typography from '../Typography';
 import Spacing from '../Spacing';
 import Checkbox from '../Checkbox';
-import InputMask from '../InputMask';
 import Button from '../Button';
 import { isArray, formatKoutaDateString, getTestIdProps } from '../../utils';
 import useTranslation from '../useTranslation';
+import Flex, { FlexItem } from '../Flex';
+import { FormFieldDateTimeInput } from '../FormFields';
 
 const HakuaikaInterval = ({ haku }) => {
   const dateFormat = 'DD.MM.YYYY HH:mm';
   const { t } = useTranslation();
 
-  const hakuajat = (haku && isArray(haku.hakuajat) ? haku.hakuajat : []).map(
-    ({ alkaa, paattyy }) => [
-      formatKoutaDateString(alkaa, dateFormat),
-      formatKoutaDateString(paattyy, dateFormat),
-    ],
+  const hakuajat = useMemo(
+    () =>
+      (haku && isArray(haku.hakuajat) ? haku.hakuajat : []).map(
+        ({ alkaa, paattyy }) => [
+          formatKoutaDateString(alkaa, dateFormat),
+          formatKoutaDateString(paattyy, dateFormat),
+        ],
+      ),
+    [haku],
   );
 
   return hakuajat.length === 0 ? (
@@ -47,118 +51,36 @@ const renderCheckboxField = ({ input, label = null }) => (
   />
 );
 
-const renderInputMaskField = ({ input, ...props }) => (
-  <InputMask {...input} {...props} />
-);
-
-const HakuContainer = styled.div`
-  display: flex;
-  margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
-  align-items: center;
-`;
-
-const HakuDateTimeContainer = styled.div`
-  flex: 1;
-  ${({ first }) =>
-    first
-      ? css`
-          padding-right: ${({ theme }) => theme.spacing.unit * 2}px;
-        `
-      : css`
-          padding-left: ${({ theme }) => theme.spacing.unit * 2}px;
-        `}
-`;
-
-const HakuDateTimeWrapper = styled.div`
-  display: flex;
-`;
-
-const HakuDateContainer = styled.div`
-  flex: 1;
-  padding-right: ${({ theme }) => theme.spacing.unit * 2}px;
-`;
-
-const HakuTimeContainer = styled.div`
-  flex: 0;
-  flex-basis: 30%;
-`;
-
-const HakuRemoveContainer = styled.div`
-  flex: 0;
-  padding-left: ${({ theme }) => theme.spacing.unit * 2}px;
-  display: flex;
-  align-items: center;
-`;
-
 const renderHakuajatFields = ({ fields, t }) => (
   <>
     {fields.map((hakuaika, index) => (
-      <HakuContainer key={index} {...getTestIdProps('hakuaika')}>
-        <HakuDateTimeContainer {...getTestIdProps('alkaa')} first>
-          <Typography as="div" marginBottom={1}>
-            {t('yleiset.alkaa')}
-          </Typography>
-          <HakuDateTimeWrapper>
-            <HakuDateContainer {...getTestIdProps('paivamaara')}>
-              <Field
-                name={`${hakuaika}.fromDate`}
-                placeholder="pp.kk.vvvv"
-                component={renderInputMaskField}
-                mask="99.99.9999"
-              />
-            </HakuDateContainer>
-            <HakuTimeContainer {...getTestIdProps('kellonaika')}>
-              <Field
-                name={`${hakuaika}.fromTime`}
-                placeholder="tt:mm"
-                component={renderInputMaskField}
-                mask="99:99"
-              />
-            </HakuTimeContainer>
-          </HakuDateTimeWrapper>
-          <Typography variant="secondary" as="div" marginTop={1}>
-            {t('yleiset.paivamaaraJaKellonaika')}
-          </Typography>
-        </HakuDateTimeContainer>
-        <HakuDateTimeContainer {...getTestIdProps('paattyy')}>
-          <Typography as="div" marginBottom={1}>
-            {t('yleiset.paattyy')}
-          </Typography>
-          <HakuDateTimeWrapper>
-            <HakuDateContainer {...getTestIdProps('paivamaara')}>
-              <Field
-                name={`${hakuaika}.toDate`}
-                placeholder="pp.kk.vvvv"
-                component={renderInputMaskField}
-                mask="99.99.9999"
-              />
-            </HakuDateContainer>
-            <HakuTimeContainer {...getTestIdProps('kellonaika')}>
-              <Field
-                name={`${hakuaika}.toTime`}
-                placeholder="tt:mm"
-                component={renderInputMaskField}
-                mask="99:99"
-              />
-            </HakuTimeContainer>
-          </HakuDateTimeWrapper>
-          <Typography variant="secondary" as="div" marginTop={1}>
-            {t('yleiset.paivamaaraJaKellonaika')}
-          </Typography>
-        </HakuDateTimeContainer>
-        <HakuRemoveContainer>
+      <Flex key={index} marginBottom={2} alignCenter>
+        <FlexItem grow={1} paddingRight={2} {...getTestIdProps('alkaa')}>
+          <Field
+            name={`${hakuaika}.alkaa`}
+            component={FormFieldDateTimeInput}
+            label={t('yleiset.alkaa')}
+            helperText={t('yleiset.paivamaaraJaKellonaika')}
+          />
+        </FlexItem>
+        <FlexItem grow={1} paddingLeft={2} {...getTestIdProps('paattyy')}>
+          <Field
+            name={`${hakuaika}.paattyy`}
+            component={FormFieldDateTimeInput}
+            label={t('yleiset.paattyy')}
+            helperText={t('yleiset.paivamaaraJaKellonaika')}
+          />
+        </FlexItem>
+        <FlexItem grow={0} paddingLeft={2}>
           <Button
-            type="button"
-            onClick={() => {
-              fields.remove(index);
-            }}
+            onClick={() => fields.remove(index)}
             variant="outlined"
             color="secondary"
           >
             {t('yleiset.poista')}
           </Button>
-        </HakuRemoveContainer>
-      </HakuContainer>
+        </FlexItem>
+      </Flex>
     ))}
     <Button
       type="button"

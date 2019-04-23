@@ -51,3 +51,14 @@ export const typeToEditor = (value, cy) => {
 export const getTableInput = cy => {
   return cy.get('.TableInput__');
 };
+
+export const fillDateTimeInput = ({ date, time, cy }) => {
+  getByTestId('DateTimeInput', cy).within(() => {
+    getByTestId('DateTimeInput__Date', cy)
+      .find('input')
+      .type(date, { force: true });
+    getByTestId('DateTimeInput__Time', cy)
+      .find('input')
+      .type(time, { force: true });
+  });
+};

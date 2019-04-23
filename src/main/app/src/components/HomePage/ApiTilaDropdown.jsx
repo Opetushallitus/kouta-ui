@@ -29,7 +29,7 @@ const ToteutusTilaDropdown = ({
         setTila(newTila);
       } catch (e) {}
     },
-    [oid, setTila, httpClient, apiUrls],
+    [oid, setTila, httpClient, apiUrls, getUpdateProps, runUpdate],
   );
 
   return <TilaDropdown value={tila} onChange={onChange} />;

@@ -5,7 +5,7 @@ import dateAndTime from 'date-and-time';
 import zipObject from 'lodash/zipObject';
 import pick from 'lodash/pick';
 import addHours from 'date-fns/add_hours';
-import formatDate from 'date-fns/format';
+import _formatDate from 'date-fns/format';
 import _isValidDate from 'date-fns/is_valid';
 import mapValues from 'lodash/mapValues';
 import produce from 'immer';
@@ -24,6 +24,8 @@ export const isObject = value => toString.call(value) === '[object Object]';
 export const isArray = value => toString.call(value) === '[object Array]';
 
 export const isValidDate = value => isDate(value) && _isValidDate(value);
+
+export const formatDate = _formatDate;
 
 export const isNumeric = value => {
   if (isNumber(value)) {
@@ -122,7 +124,7 @@ export const getInvalidTranslations = (
   validate = v => !!v,
 ) => {
   if (!isObject(obj)) {
-    return [];
+    return languages;
   }
 
   const translationObj = {

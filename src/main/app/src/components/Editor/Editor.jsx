@@ -119,7 +119,7 @@ const StyleButton = ({
     }
 
     focusRef(editorRef);
-  }, [editorState, onChange, inline, block, editorRef]);
+  }, [editorState, onChange, inline, block, editorRef, styleName]);
 
   const isActive = useMemo(() => {
     if (inline) {
@@ -224,7 +224,7 @@ const LinkButton = ({ editorState, onChange, editorRef, ...props }) => {
     );
 
     setLink('');
-  });
+  }, [onChange, editorState, link]);
 
   const onLinkChange = useCallback(
     e => {

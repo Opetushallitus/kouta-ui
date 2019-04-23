@@ -1,19 +1,10 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
-import Typography from '../Typography';
 import Spacing from '../Spacing';
-import { RadioGroup } from '../Radio';
 import useKoodistoOptions from '../useKoodistoOptions';
-import YearSelect from '../YearSelect';
-import { noop } from '../../utils';
 import useTranslation from '../useTranslation';
-
-const renderRadioGroupField = ({ input, options }) => (
-  <RadioGroup {...input} options={options} />
-);
-
-const renderYearField = ({ input }) => <YearSelect {...input} onBlur={noop} />;
+import { FormFieldRadioGroup, FormFieldYearSelect } from '../FormFields';
 
 const AlkamiskausiSection = () => {
   const { t } = useTranslation();
@@ -22,21 +13,19 @@ const AlkamiskausiSection = () => {
   return (
     <>
       <Spacing marginBottom={2}>
-        <Typography variant="h6" marginBottom={1}>
-          {t('yleiset.kausi')}
-        </Typography>
-
         <Field
           name="kausi"
-          component={renderRadioGroupField}
+          component={FormFieldRadioGroup}
           options={options}
+          label={t('yleiset.kausi')}
         />
       </Spacing>
       <Spacing>
-        <Typography variant="h6" marginBottom={1}>
-          {t('yleiset.vuosi')}
-        </Typography>
-        <Field name="vuosi" component={renderYearField} />
+        <Field
+          name="vuosi"
+          component={FormFieldYearSelect}
+          label={t('yleiset.vuosi')}
+        />
       </Spacing>
     </>
   );

@@ -10,7 +10,6 @@ export const DropdownIcon = ({
 }) => {
   return (
     <Spring
-      from={{ transform: 'rotate(0deg)' }}
       to={{ transform: open ?  'rotate(180deg)' : 'rotate(0deg)' }}
     >
       {({ transform }) => (

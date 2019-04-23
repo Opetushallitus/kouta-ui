@@ -1,15 +1,10 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
-import Typography from '../Typography';
-import Input from '../Input';
 import Flex, { FlexItem } from '../Flex';
 import { KORKEAKOULUKOULUTUSTYYPIT } from '../../constants';
 import useTranslation from '../useTranslation';
-
-const renderInputField = ({ input, ...props }) => (
-  <Input {...input} {...props} />
-);
+import { FormFieldInput } from '../FormFields';
 
 const AloituspaikatSection = ({ koulutustyyppi }) => {
   const isKorkeakoulu = KORKEAKOULUKOULUTUSTYYPIT.includes(koulutustyyppi);
@@ -17,26 +12,22 @@ const AloituspaikatSection = ({ koulutustyyppi }) => {
 
   const aloituspaikatField = (
     <>
-      <Typography variant="h6" marginBottom={1}>
-      {t('hakukohdelomake.aloituspaikkojenLukumaara')}
-      </Typography>
       <Field
         name="aloituspaikkamaara"
-        component={renderInputField}
+        component={FormFieldInput}
         type="number"
+        label={t('hakukohdelomake.aloituspaikkojenLukumaara')}
       />
     </>
   );
 
   const ensikertalaisetField = (
     <>
-      <Typography variant="h6" marginBottom={1}>
-        {t('hakukohdelomake.ensikertalaistenAloituspaikkojenLukumaara')}
-      </Typography>
       <Field
         name="ensikertalaismaara"
-        component={renderInputField}
+        component={FormFieldInput}
         type="number"
+        label={t('hakukohdelomake.ensikertalaistenAloituspaikkojenLukumaara')}
       />
     </>
   );

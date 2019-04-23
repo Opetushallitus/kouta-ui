@@ -5,30 +5,17 @@ import Modal from '../Modal';
 import Button from '../Button';
 import { getKoutaToteutukset } from '../../apiUtils';
 import Flex, { FlexItem } from '../Flex';
-import Select from '../Select';
-import { getFirstLanguageValue, noop } from '../../utils';
+import { getFirstLanguageValue } from '../../utils';
 import Spacing from '../Spacing';
-import Typography from '../Typography';
 import useApiAsync from '../useApiAsync';
 import useTranslation from '../useTranslation';
+import { FormFieldSelect } from '../FormFields';
 
 const getToteutusOptions = toteutukset => {
   return toteutukset.map(({ nimi, oid }) => ({
     value: oid,
     label: getFirstLanguageValue(nimi),
   }));
-};
-
-const renderSelectField = ({ options = [], input }) => {
-  return (
-    <Select
-      {...input}
-      options={options}
-      onBlur={noop}
-      menuPortalTarget={document.body}
-      menuPosition="fixed"
-    />
-  );
 };
 
 const FooterField = formValues('toteutus')(({ toteutus, children }) =>
@@ -79,13 +66,13 @@ const HakukohteetModal = ({
       <Flex>
         <FlexItem grow={2}>
           <Spacing marginBottom={2}>
-            <Typography variant="h6" marginBottom={1}>
-              {t('yleiset.valitseToteutus')}
-            </Typography>
             <Field
               name="toteutus"
               options={toteutuksetOptions}
-              component={renderSelectField}
+              component={FormFieldSelect}
+              menuPortalTarget={document.body}
+              menuPosition="fixed"
+              label={t('yleiset.valitseToteutus')}
             />
           </Spacing>
         </FlexItem>

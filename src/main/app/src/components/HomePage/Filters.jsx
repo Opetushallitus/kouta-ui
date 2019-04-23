@@ -33,6 +33,7 @@ export const Filters = ({
 
   const tilaOptions = useMemo(() => tilaOptionsProp || getDefaultOptions(t), [
     t,
+    tilaOptionsProp,
   ]);
 
   return (

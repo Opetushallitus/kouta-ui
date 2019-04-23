@@ -1,10 +1,15 @@
-import { getFormValues } from 'redux-form';
+import { getFormValues, startSubmit, stopSubmit } from 'redux-form';
 
-import { getValintaperusteByValues } from '../createValintaperusteForm';
+import {
+  getValintaperusteByValues,
+  validate,
+} from '../createValintaperusteForm';
 import { updateKoutaValintaperuste } from '../../apiUtils';
-import { createTemporaryToast } from '../toaster';
+import { createSavingErrorToast, createSavingSuccessToast } from '../toaster';
+import { isNonEmptyObject } from '../../utils';
 
-const getValintaperusteFormValues = getFormValues('editValintaperusteForm');
+const formName = 'editValintaperusteForm';
+const getValintaperusteFormValues = getFormValues(formName);
 
 export const saveValintaperuste = valintaperuste => (
   dispatch,
@@ -22,6 +27,15 @@ export const submit = ({ valintaperuste, tila: tilaArg }) => async (
   const state = getState();
   const values = getValintaperusteFormValues(state);
   const tila = tilaArg || valintaperuste.tila;
+  const errors = validate({ values, tila });
+
+  dispatch(startSubmit(formName));
+
+  if (isNonEmptyObject(errors)) {
+    dispatch(stopSubmit(formName, errors));
+    dispatch(createSavingErrorToast());
+    return;
+  }
 
   const {
     me: { kayttajaOid },
@@ -43,20 +57,13 @@ export const submit = ({ valintaperuste, tila: tilaArg }) => async (
 
     valintaperusteData = data;
   } catch (e) {
-    return dispatch(
-      createTemporaryToast({
-        status: 'danger',
-        title: 'Valintaperusteen tallennus epäonnistui',
-      }),
-    );
+    dispatch(stopSubmit(formName, errors));
+    dispatch(createSavingErrorToast());
+    return;
   }
 
-  dispatch(
-    createTemporaryToast({
-      status: 'success',
-      title: 'Valintaperuste on tallennettu onnistuneesti',
-    }),
-  );
+  dispatch(stopSubmit(formName));
+  dispatch(createSavingSuccessToast());
 
   history.push(`/valintaperusteet/${valintaperuste.id}/muokkaus`, {
     valintaperusteUpdatedAt: Date.now(),

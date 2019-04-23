@@ -7,8 +7,9 @@ import KoulutusSelect from '../KoulutusSelect';
 import ApiAsync from '../../ApiAsync';
 import { getKoulutusByKoodi } from '../../../apiUtils';
 import { getThemeProp } from '../../../theme';
-import { getLanguageValue, getTestIdProps } from '../../../utils';
+import { getLanguageValue, getTestIdProps, noop } from '../../../utils';
 import useTranslation from '../../useTranslation';
+import { createFormFieldComponent } from '../../FormFields';
 
 const getTutkintonimikkeet = ({ koulutus, language }) => {
   const { tutkintonimikeKoodit = [] } = koulutus;
@@ -55,18 +56,12 @@ const InfoContent = styled(Content)`
   ${getThemeProp('typography.body')};
 `;
 
-const nop = () => {};
 
-const renderSelectField = ({ input, koulutusTyyppi, ...props }) => {
-  return (
-    <KoulutusSelect
-      {...input}
-      koulutusTyyppi={koulutusTyyppi}
-      {...props}
-      onBlur={nop}
-    />
-  );
-};
+const KoulutusField = createFormFieldComponent(KoulutusSelect, ({ input, ...props }) => ({
+  ...input,
+  onBlur: noop,
+  ...props,
+}));
 
 const KoulutusInfo = ({ koulutus, language = 'fi' }) => {
   const { t } = useTranslation();
@@ -137,16 +132,14 @@ const AmmatillinenTiedotSection = ({
 
   return (
     <>
-      <Typography variant="h6" marginBottom={1}>
-        {t('koulutuslomake.valitseKoulutus')}
-      </Typography>
       <Container>
         <Content>
           <div {...getTestIdProps('koulutustyyppiSelect')}>
             <Field
               name="koulutus"
-              component={renderSelectField}
+              component={KoulutusField}
               koulutusTyyppi={koulutustyyppi}
+              label={t('koulutuslomake.valitseKoulutus')}
             />
           </div>
         </Content>

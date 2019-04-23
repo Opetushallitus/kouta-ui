@@ -1,15 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { isValid } from 'redux-form';
-
 import { submit as submitToteutusForm } from '../../state/createToteutusForm';
 import { JULKAISUTILA } from '../../constants';
 import Button from '../Button';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
-
-const toteutusFormIsValid = isValid('createToteutusForm');
 
 const Wrapper = styled.div`
   max-width: 1200px;
@@ -27,7 +23,6 @@ const SaveButton = styled(Button).attrs({ variant: 'outlined' })`
 const CreateToteutusFooter = ({
   onSave = () => {},
   onSaveAndPublish = () => {},
-  valid = true,
 }) => {
   const { t } = useTranslation();
 
@@ -41,7 +36,6 @@ const CreateToteutusFooter = ({
       </SaveButton>
       <Button
         onClick={onSaveAndPublish}
-        disabled={!valid}
         {...getTestIdProps('tallennaJaJulkaiseToteutusButton')}
       >
         {t('yleiset.tallennaJaJulkaise')}
@@ -51,9 +45,7 @@ const CreateToteutusFooter = ({
 };
 
 export default connect(
-  state => ({
-    valid: toteutusFormIsValid(state),
-  }),
+  null,
   (dispatch, { koulutustyyppi }) => ({
     onSave: () => {
       dispatch(

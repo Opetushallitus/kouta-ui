@@ -2,21 +2,21 @@
 
 exports[`getHakuByValues returns correct haku given form values 1`] = `
 Object {
-  "ajastettuJulkaisu": "2020-29-01T00:00",
+  "ajastettuJulkaisu": "2019-11-16T08:44",
   "alkamiskausiKoodiUri": "alkamiskausi_1#1",
   "alkamisvuosi": 2020,
   "hakuajat": Array [
     Object {
-      "alkaa": "2018-02-01T10:30",
-      "paattyy": "2019-03-02T11:45",
+      "alkaa": "2019-04-16T08:44",
+      "paattyy": "2019-04-18T08:44",
     },
     Object {
-      "alkaa": "2018-06-01T12:30",
-      "paattyy": "2019-09-02T16:15",
+      "alkaa": "2019-06-16T08:44",
+      "paattyy": "2019-06-18T08:44",
     },
   ],
-  "hakukohteenLiittamisenTakaraja": "2018-02-01T11:45",
-  "hakukohteenMuokkaamisenTakaraja": "2019-15-10T05:30",
+  "hakukohteenLiittamisenTakaraja": "2019-09-16T08:44",
+  "hakukohteenMuokkaamisenTakaraja": "2019-10-16T08:44",
   "hakulomake": null,
   "hakulomaketyyppi": "tyyppi",
   "hakutapaKoodiUri": "hakutapa_1#1",
@@ -29,12 +29,12 @@ Object {
   "metadata": Object {
     "tulevaisuudenAikataulu": Array [
       Object {
-        "alkaa": "2018-02-05T09:30",
-        "paattyy": "2019-03-06T20:45",
+        "alkaa": "2019-08-16T08:44",
+        "paattyy": "2019-08-18T08:44",
       },
       Object {
-        "alkaa": "2018-06-09T15:30",
-        "paattyy": "2019-09-10T12:15",
+        "alkaa": "2019-09-16T08:44",
+        "paattyy": "2019-09-18T08:44",
       },
     ],
     "yhteystieto": Object {
@@ -68,27 +68,20 @@ Object {
   "aikataulut": Object {
     "aikataulu": Array [
       Object {
-        "fromDate": "20.02.2019",
-        "fromTime": "12:28",
-        "toDate": "01.08.2019",
-        "toTime": "12:45",
+        "alkaa": "2019-02-20T12:28",
+        "paattyy": "2019-08-01T12:45",
       },
     ],
+    "ajastettuJulkaisu": "2020-01-20T05:00",
     "hakuaika": Array [
       Object {
-        "fromDate": "29.03.2019",
-        "fromTime": "12:28",
-        "toDate": "29.09.2019",
-        "toTime": "12:30",
+        "alkaa": "2019-03-29T12:28",
+        "paattyy": "2019-09-29T12:30",
       },
     ],
-    "julkaisu_aika": "05:00",
-    "julkaisu_pvm": "20.01.2020",
     "kausi": "kausi_1#1",
-    "liittäminen_aika": "12:28",
-    "liittäminen_pvm": "29.03.2019",
-    "muokkaus_aika": "09:45",
-    "muokkaus_pvm": "11.03.2019",
+    "lisaamisenTakaraja": "2019-03-29T12:28",
+    "muokkauksenTakaraja": "2019-03-11T09:45",
     "vuosi": Object {
       "value": "2020",
     },

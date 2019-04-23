@@ -2,12 +2,12 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import FormHeader from './index';
-import FormStatus from '../FormStatus';
+import StatusTag from '../StatusTag';
 import FormEditInfo from '../FormEditInfo';
 
 storiesOf('FormHeader', module).add('Basic', () => (
   <FormHeader
-    status={<FormStatus status="saved" />}
+    status={<StatusTag status="saved" large />}
     editInfo={
       <FormEditInfo
         editor="John Doe"

@@ -1,15 +1,12 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { isValid } from 'redux-form';
 
 import { submit } from '../../state/editHakukohdeForm';
 import Button from '../Button';
 import { JULKAISUTILA } from '../../constants';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
-
-const hakukohdeFormIsValid = isValid('editHakukohdeForm');
 
 const Wrapper = styled.div`
   max-width: 1200px;
@@ -24,7 +21,7 @@ const PublishButton = styled(Button)`
   margin-left: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
-const EditHakukohdeFooter = ({ hakukohde, valid, onSave = () => {} }) => {
+const EditHakukohdeFooter = ({ hakukohde, onSave = () => {} }) => {
   const { tila } = hakukohde;
 
   const onSaveAndPublish = useCallback(() => {
@@ -44,7 +41,6 @@ const EditHakukohdeFooter = ({ hakukohde, valid, onSave = () => {} }) => {
       </Button>
       {tila !== JULKAISUTILA.JULKAISTU ? (
         <PublishButton
-          disabled={!valid}
           onClick={onSaveAndPublish}
           {...getTestIdProps('tallennaJaJulkaiseHakukohdeButton')}
         >
@@ -56,9 +52,7 @@ const EditHakukohdeFooter = ({ hakukohde, valid, onSave = () => {} }) => {
 };
 
 export default connect(
-  state => ({
-    valid: hakukohdeFormIsValid(state),
-  }),
+  null,
   (dispatch, { hakukohde }) => ({
     onSave: ({ tila: tilaArg } = {}) =>
       dispatch(

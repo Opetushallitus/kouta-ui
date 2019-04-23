@@ -1,19 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { getThemeProp } from '../../theme';
-import ApiAsync from '../ApiAsync';
+import Typography from '../Typography';
 import { getOrganisaatioByOid } from '../../apiUtils';
 import { isObject, getFirstLanguageValue } from '../../utils';
 import useTranslation from '../useTranslation';
+import useApiAsync from '../useApiAsync';
 
 const getOrganisaatio = args => getOrganisaatioByOid(args);
 
 const OrganisaatioInfoContainer = styled.div`
-  ${getThemeProp('typography.body')};
   margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
   display: flex;
   justify-content: flex-end;
+`;
+
+const OrganisaatioName = styled(Typography)`
+  font-weight: bold;
 `;
 
 const getOrganisaatioName = organisaatio => {
@@ -24,20 +27,24 @@ const getOrganisaatioName = organisaatio => {
 
 const OrganisaatioInfo = ({ organisaatioOid, ...props }) => {
   const { t } = useTranslation();
+  const { data } = useApiAsync({
+    promiseFn: getOrganisaatio,
+    oid: organisaatioOid,
+    watch: organisaatioOid,
+  });
 
   return (
     <OrganisaatioInfoContainer {...props}>
-      <ApiAsync
-        promiseFn={getOrganisaatio}
-        oid={organisaatioOid}
-        watch={organisaatioOid}
-      >
-        {({ data }) => (
-          <div>{t('yleiset.organisaatio')}: {data ? getOrganisaatioName(data) : null}</div>
-        )}
-      </ApiAsync>
+      <div>
+        <Typography as="div" marginBottom={0.5}>
+          {t('yleiset.valittuOrganisaatio')}:
+        </Typography>
+        <OrganisaatioName>
+          {data ? getOrganisaatioName(data) : ''}
+        </OrganisaatioName>
+      </div>
     </OrganisaatioInfoContainer>
   );
-}
+};
 
 export default OrganisaatioInfo;

@@ -11,9 +11,7 @@ import FormCollapseGroup from '../FormCollapseGroup';
 import FormCollapse from '../FormCollapse';
 import KieliversiotFormSection from '../KieliversiotFormSection';
 import { KORKEAKOULUKOULUTUSTYYPIT } from '../../constants';
-import ToteutuksetModal from './ToteutuksetModal';
 import ToteutuksetSection from './ToteutuksetSection';
-import { ModalController } from '../Modal';
 import Button from '../Button';
 import { isFunction, getTestIdProps } from '../../utils';
 import LisatiedotSection from './LisatiedotSection';
@@ -26,12 +24,6 @@ const WithValues = formValues({
   languagesValue: 'kieliversiot.languages',
   koulutusValue: 'information.koulutus',
 })(({ children, ...rest }) => children(rest));
-
-const WithToteutuksetPohja = formValues({
-  pohja: 'toteutukset.pohja',
-})(({ pohja, children }) => children({ pohja }));
-
-const toteutuksetModal = props => <ToteutuksetModal {...props} />;
 
 const KoulutusForm = ({
   handleSubmit,
@@ -58,11 +50,12 @@ const KoulutusForm = ({
           const languageTabs = languagesValue || [];
 
           return (
-            <FormCollapseGroup enabled={steps} scrollTarget={scrollTarget}>
+            <FormCollapseGroup enabled={steps} scrollTarget={scrollTarget} defaultOpen={!steps}>
               {canEditKoulutustyyppi ? (
                 <FormCollapse
                   header={t('yleiset.koulutustyyppi')}
                   section="type"
+                  scrollOnActive={false}
                   {...getTestIdProps('tyyppiSection')}
                 >
                   <TypeSection />
@@ -98,10 +91,10 @@ const KoulutusForm = ({
               <FormCollapse
                 header={t('koulutuslomake.koulutuksenTiedot')}
                 section="information"
+                languages={languageTabs}
                 {...getTestIdProps('tiedotSection')}
               >
                 <TiedotSection
-                  languages={languageTabs}
                   koulutustyyppi={koulutustyyppi}
                   koulutusValue={koulutusValue}
                 />
@@ -110,10 +103,10 @@ const KoulutusForm = ({
               <FormCollapse
                 header={t('koulutuslomake.koulutuksenKuvaus')}
                 section="description"
+                languages={languageTabs}
                 {...getTestIdProps('kuvausSection')}
               >
                 <KuvausSection
-                  languages={languageTabs}
                   koulutustyyppi={koulutustyyppi}
                   koulutusValue={koulutusValue}
                 />
@@ -122,9 +115,10 @@ const KoulutusForm = ({
               <FormCollapse
                 header={t('koulutuslomake.koulutuksenLisatiedot')}
                 section="lisatiedot"
+                languages={languageTabs}
                 {...getTestIdProps('lisatiedotSection')}
               >
-                <LisatiedotSection languages={languageTabs} />
+                <LisatiedotSection />
               </FormCollapse>
 
               <FormCollapse
@@ -149,27 +143,16 @@ const KoulutusForm = ({
                 <FormCollapse
                   header={t('koulutuslomake.koulutukseenLiitetytToteutukset')}
                   id="koulutukseen-liitetetyt-toteutukset"
-                  clearable={false}
                   actions={
-                    <WithToteutuksetPohja>
-                      {({ pohja }) => (
-                        <ModalController
-                          modal={toteutuksetModal}
-                          pohjaValue={pohja}
-                          fieldName="toteutukset"
-                          organisaatioOid={organisaatioOid}
-                          onSave={onAttachToteutus}
-                        >
-                          {({ onToggle }) => (
-                            <Flex justifyEnd full>
-                              <Button onClick={onToggle} type="button">
-                                {t('koulutuslomake.liitaToteutus')}
-                              </Button>
-                            </Flex>
-                          )}
-                        </ModalController>
-                      )}
-                    </WithToteutuksetPohja>
+                    <Flex justifyCenter>
+                      <Button
+                        color="primary"
+                        onClick={onAttachToteutus}
+                        type="button"
+                      >
+                        {t('koulutuslomake.liitaToteutus')}
+                      </Button>
+                    </Flex>
                   }
                 >
                   <ToteutuksetSection koulutus={koulutusProp} />

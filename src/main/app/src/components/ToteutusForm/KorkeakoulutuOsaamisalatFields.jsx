@@ -3,61 +3,43 @@ import { FieldArray, Field } from 'redux-form';
 
 import Button from '../Button';
 import Spacing from '../Spacing';
-import Typography from '../Typography';
 import Divider from '../Divider';
 import Flex from '../Flex';
-import Input from '../Input';
-import Textarea from '../Textarea';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
-
-const renderInputField = ({ input }) => <Input {...input} />;
-
-const renderTextareaField = ({ input }) => <Textarea {...input} />;
+import { FormFieldInput, FormFieldTextarea } from '../FormFields';
 
 const renderOsaamisalatFields = ({ fields, language, t }) => (
   <>
     {fields.map((field, index) => (
       <Fragment key={index}>
         <Spacing marginBottom={2} {...getTestIdProps('osaamisalanNimi')}>
-          <Typography variant="h6" marginBottom={1}>
-            {t('yleiset.nimi')}
-          </Typography>
-
           <Field
             name={`${field}.nimi.${language}`}
-            component={renderInputField}
+            component={FormFieldInput}
+            label={t('yleiset.nimi')}
           />
         </Spacing>
 
         <Spacing marginBottom={2} {...getTestIdProps('osaamisalanKuvaus')}>
-          <Typography variant="h6" marginBottom={1}>
-            {t('yleiset.kuvaus')}
-          </Typography>
-
           <Field
             name={`${field}.kuvaus.${language}`}
-            component={renderTextareaField}
+            component={FormFieldTextarea}
+            label={t('yleiset.kuvaus')}
           />
         </Spacing>
         <Spacing marginBottom={2} {...getTestIdProps('osaamisalanLinkki')}>
-          <Typography variant="h6" marginBottom={1}>
-            {t('yleiset.linkki')}
-          </Typography>
-
           <Field
             name={`${field}.linkki.${language}`}
-            component={renderInputField}
+            component={FormFieldInput}
+            label={t('yleiset.linkki')}
           />
         </Spacing>
         <Spacing marginBottom={2} {...getTestIdProps('osaamisalanOtsikko')}>
-          <Typography variant="h6" marginBottom={1}>
-            {t('toteutuslomake.linkinOtsikko')}
-          </Typography>
-
           <Field
             name={`${field}.otsikko.${language}`}
-            component={renderInputField}
+            component={FormFieldInput}
+            label={t('toteutuslomake.linkinOtsikko')}
           />
         </Spacing>
         <Flex justifyEnd>

@@ -1,25 +1,21 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
-import Typography from '../Typography';
 import Spacing from '../Spacing';
-import Radio, { RadioGroup } from '../Radio';
 import useKoodistoOptions from '../useKoodistoOptions';
 import YearSelect from '../YearSelect';
 import { noop, getTestIdProps } from '../../utils';
 import useTranslation from '../useTranslation';
+import { FormFieldRadioGroup, createFormFieldComponent } from '../FormFields';
 
-const renderRadioGroupField = ({ input, options }) => (
-  <RadioGroup {...input}>
-    {options.map(({ value, label }) => (
-      <Radio value={value} key={value}>
-        {label}
-      </Radio>
-    ))}
-  </RadioGroup>
+const YearField = createFormFieldComponent(
+  YearSelect,
+  ({ input, ...props }) => ({
+    ...input,
+    onBlur: noop,
+    ...props,
+  }),
 );
-
-const renderYearField = ({ input }) => <YearSelect {...input} onBlur={noop} />;
 
 const AlkamiskausiFields = ({ name }) => {
   const { t } = useTranslation();
@@ -28,22 +24,20 @@ const AlkamiskausiFields = ({ name }) => {
   return (
     <>
       <Spacing marginBottom={2}>
-        <Typography as="div" marginBottom={1}>
-          {t('yleiset.kausi')}
-        </Typography>
-
         <Field
           name={`${name}.kausi`}
-          component={renderRadioGroupField}
+          component={FormFieldRadioGroup}
+          label={t('yleiset.kausi')}
           options={options}
         />
       </Spacing>
       <Spacing>
-        <Typography as="div" marginBottom={1}>
-          {t('yleiset.vuosi')}
-        </Typography>
         <div {...getTestIdProps('vuosi')}>
-          <Field name={`${name}.vuosi`} component={renderYearField} />
+          <Field
+            name={`${name}.vuosi`}
+            component={YearField}
+            label={t('yleiset.vuosi')}
+          />
         </div>
       </Spacing>
     </>

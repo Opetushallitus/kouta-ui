@@ -2,29 +2,31 @@ import { reduxForm } from 'redux-form';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import React from 'react';
-import memoize from 'memoizee';
 
-import KoulutusForm, { validate, initialValues } from '../KoulutusForm';
+import KoulutusForm, { initialValues } from '../KoulutusForm';
 import {
   copy as copyKoulutus,
   maybeCopy as maybeCopyKoulutus,
   getValuesByKoulutus,
 } from '../../state/createKoulutusForm';
 import { getKoutaKoulutusByOid } from '../../apiUtils';
-import ApiAsync from '../ApiAsync';
+import useApiAsync from '../useApiAsync';
+import { POHJAVALINNAT } from '../../constants';
+import { memoize } from '../../utils';
 
 const resolveFn = () => Promise.resolve({});
 
 const KoulutusReduxForm = reduxForm({
   form: 'createKoulutusForm',
-  validate,
   enableReinitialize: true,
 })(KoulutusForm);
 
 const getCopyValues = koulutusOid => ({
   base: {
-    base: 'copy_koulutus',
-    education: { value: koulutusOid },
+    pohja: {
+      tapa: POHJAVALINNAT.KOPIO,
+      valinta: { value: koulutusOid },
+    },
   },
 });
 
@@ -39,25 +41,19 @@ const CreateKoulutusForm = props => {
 
   const promiseFn = kopioKoulutusOid ? getKoutaKoulutusByOid : resolveFn;
 
-  return (
-    <ApiAsync
-      promiseFn={promiseFn}
-      oid={kopioKoulutusOid}
-      watch={kopioKoulutusOid}
-    >
-      {({ data }) => {
-        return data ? (
-          <KoulutusReduxForm
-            {...props}
-            steps
-            initialValues={
-              kopioKoulutusOid ? getInitialValues(data) : initialValues
-            }
-          />
-        ) : null;
-      }}
-    </ApiAsync>
-  );
+  const { data } = useApiAsync({
+    promiseFn,
+    oid: kopioKoulutusOid,
+    watch: kopioKoulutusOid,
+  });
+
+  return data ? (
+    <KoulutusReduxForm
+      {...props}
+      steps
+      initialValues={kopioKoulutusOid ? getInitialValues(data) : initialValues}
+    />
+  ) : null;
 };
 
 export default compose(

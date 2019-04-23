@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Field, formValues } from 'redux-form';
 import styled from 'styled-components';
 import stripTags from 'striptags';
 import mapValues from 'lodash/mapValues';
 import get from 'lodash/get';
 
-import ApiAsync from '../ApiAsync';
+import useApiAsync from '../useApiAsync';
 
 import {
   getKoulutusByKoodi,
@@ -14,19 +14,14 @@ import {
 
 import Checkbox from '../Checkbox';
 import Typography from '../Typography';
-import LanguageSelector from '../LanguageSelector';
 import { getLanguageValue, isString, getTestIdProps } from '../../utils';
 import Spacing from '../Spacing';
-import Input from '../Input';
 import Divider from '../Divider';
 import AbstractCollapse from '../AbstractCollapse';
 import Icon from '../Icon';
 import { getThemeProp } from '../../theme';
 import useTranslation from '../useTranslation';
-
-const renderInputField = ({ input, type = 'text' }) => (
-  <Input {...input} type={type} />
-);
+import { FormFieldInput } from '../FormFields';
 
 const Container = styled.div`
   display: flex;
@@ -132,22 +127,21 @@ const OsaamisalaDetails = ({ osaamisala, language }) => {
 
   return (
     <Spacing marginTop={2}>
-      <Spacing marginBottom={2} {...getTestIdProps(`osaamisalaLinkki.${osaamisala.uri}`)}>
-        <Typography variant="body" as="div" marginBottom={1}>
-          {t('yleiset.linkki')}
-        </Typography>
+      <Spacing
+        marginBottom={2}
+        {...getTestIdProps(`osaamisalaLinkki.${osaamisala.uri}`)}
+      >
         <Field
           name={`osaamisalaLinkit.${osaamisala.uri}.${language}`}
-          component={renderInputField}
+          component={FormFieldInput}
+          label={t('yleiset.linkki')}
         />
       </Spacing>
       <Spacing {...getTestIdProps(`osaamisalaOtsikko.${osaamisala.uri}`)}>
-        <Typography variant="body" as="div" marginBottom={1}>
-          {t('yleiset.linkinOtsikko')}
-        </Typography>
         <Field
           name={`osaamisalaLinkkiOtsikot.${osaamisala.uri}.${language}`}
-          component={renderInputField}
+          component={FormFieldInput}
+          label={t('yleiset.linkinOtsikko')}
         />
       </Spacing>
     </Spacing>
@@ -161,7 +155,7 @@ const OsaamisalatInfoFields = ({ osaamisalatValue, osaamisalat, language }) => {
 
   return activeOsaamisalat.map((osaamisala, index) => {
     const { nimi, kuvaus, uri } = osaamisala;
-  
+
     return (
       <div key={uri}>
         <Spacing key={uri}>
@@ -178,7 +172,11 @@ const OsaamisalatInfoFields = ({ osaamisalatValue, osaamisalat, language }) => {
             }
           >
             {({ open, onToggle }) => (
-              <OsaamisalaDetailsToggle open={open} onToggle={onToggle} {...getTestIdProps(`osaamisalaToggle.${uri}`)} />
+              <OsaamisalaDetailsToggle
+                open={open}
+                onToggle={onToggle}
+                {...getTestIdProps(`osaamisalaToggle.${uri}`)}
+              />
             )}
           </AbstractCollapse>
         </Spacing>
@@ -193,10 +191,14 @@ const OsaamisalatInfoFields = ({ osaamisalatValue, osaamisalat, language }) => {
 const OsaamisalatContainer = ({ osaamisalat, koulutus, language }) => {
   const { nimi } = koulutus;
 
-  const osaamisalaOptions = osaamisalat.map(({ nimi, uri }) => ({
-    label: nimi.fi,
-    value: uri,
-  }));
+  const osaamisalaOptions = useMemo(
+    () =>
+      osaamisalat.map(({ nimi, uri }) => ({
+        label: nimi.fi,
+        value: uri,
+      })),
+    [osaamisalat],
+  );
 
   return (
     <>
@@ -225,38 +227,23 @@ const OsaamisalatContainer = ({ osaamisalat, koulutus, language }) => {
   );
 };
 
-const OsaamisalatAsync = ({ koulutusKoodiUri, language }) => {
-  return (
-    <ApiAsync
-      promiseFn={getOsaamisalat}
-      koodiUri={koulutusKoodiUri}
-      watch={koulutusKoodiUri}
-    >
-      {({ data }) =>
-        data ? (
-          <OsaamisalatContainer
-            osaamisalat={data.osaamisalat}
-            koulutus={data.koulutus}
-            language={language}
-          />
-        ) : null
-      }
-    </ApiAsync>
-  );
-};
+const OsaamisalatSection = ({ language, koulutusKoodiUri }) => {
+  const { data } = useApiAsync({
+    promiseFn: getOsaamisalat,
+    koodiUri: koulutusKoodiUri,
+    watch: koulutusKoodiUri,
+  });
 
-const OsaamisalatSection = ({ languages = [], koulutusKoodiUri }) => {
   return (
-    <LanguageSelector languages={languages} defaultValue="fi">
-      {({ value: activeLanguage }) => (
-        <Container>
-          <OsaamisalatAsync
-            language={activeLanguage}
-            koulutusKoodiUri={koulutusKoodiUri}
-          />
-        </Container>
-      )}
-    </LanguageSelector>
+    <Container>
+      {data ? (
+        <OsaamisalatContainer
+          osaamisalat={data.osaamisalat}
+          koulutus={data.koulutus}
+          language={language}
+        />
+      ) : null}
+    </Container>
   );
 };
 

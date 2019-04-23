@@ -6,6 +6,7 @@ class FormCollapseGroup extends Component {
   static defaultProps = {
     enabled: true,
     defaultActiveStep: 0,
+    defaultOpen: false,
   };
 
   constructor(props) {
@@ -56,14 +57,13 @@ class FormCollapseGroup extends Component {
 
   render() {
     const { activeStep } = this.state;
-    const { enabled } = this.props;
+    const { enabled, defaultOpen } = this.props;
 
     return React.Children.map(this.getChildren(), (child, index) => {
       const childProps = enabled
         ? {
-            controlled: true,
             index,
-            open: index <= activeStep,
+            defaultOpen,
             active: index === activeStep,
             onContinue:
               index < this.getChildrenCount() - 1
@@ -71,8 +71,8 @@ class FormCollapseGroup extends Component {
                 : null,
           }
         : {
-            controlled: false,
             index,
+            defaultOpen,
           };
 
       return React.cloneElement(child, childProps);

@@ -1,71 +1,32 @@
 import React, { Fragment } from 'react';
 import { Field, FieldArray, formValues } from 'redux-form';
 
-import Typography from '../Typography';
 import Spacing from '../Spacing';
-import LanguageSelector from '../LanguageSelector';
-import Checkbox from '../Checkbox';
-import InputMask from '../InputMask';
 import Button from '../Button';
 import Flex, { FlexItem } from '../Flex';
-import Input from '../Input';
-import Textarea from '../Textarea';
-import Select from '../Select';
 import Divider from '../Divider';
-import { noop, getTestIdProps } from '../../utils';
+import { getTestIdProps } from '../../utils';
 import useKoodistoOptions from '../useKoodistoOptions';
 import useTranslation from '../useTranslation';
 
-const renderCheckboxField = ({ input, label = null }) => (
-  <Checkbox checked={input.value} onChange={input.onChange} children={label} />
-);
-
-const renderSelectField = ({ input, ...props }) => (
-  <Select {...input} {...props} onBlur={noop} />
-);
-
-const renderInputField = ({ input, ...props }) => (
-  <Input {...input} {...props} />
-);
-
-const renderTextareaField = ({ input, ...props }) => (
-  <Textarea {...input} {...props} />
-);
-
-const renderInputMaskField = ({ input, ...props }) => (
-  <InputMask {...input} {...props} />
-);
+import {
+  FormFieldDateTimeInput,
+  FormFieldInput,
+  FormFieldSelect,
+  FormFieldTextarea,
+  FormFieldCheckbox,
+} from '../FormFields';
 
 const ToimitusaikaSection = ({ getFieldName }) => {
   const { t } = useTranslation();
 
   return (
-    <>
-      <Typography as="h6" marginBottom={1}>
-        {t('hakukohdelomake.toimitusaika')}
-      </Typography>
-      <Flex>
-        <FlexItem grow={1} {...getTestIdProps('paivamaara')}>
-          <Field
-            name={getFieldName('deliverDate')}
-            placeholder="pp.kk.vvvv"
-            component={renderInputMaskField}
-            mask="99.99.9999"
-          />
-        </FlexItem>
-        <FlexItem grow={0} basis="30%" paddingLeft={2} {...getTestIdProps('kellonaika')}>
-          <Field
-            name={getFieldName('deliverTime')}
-            placeholder="tt:mm"
-            component={renderInputMaskField}
-            mask="99:99"
-          />
-        </FlexItem>
-      </Flex>
-      <Typography as="div" variant="secondary" marginTop={1}>
-        {t('yleiset.paivamaaraJaKellonaika')}
-      </Typography>
-    </>
+    <Field
+      name={getFieldName('toimitusaika')}
+      component={FormFieldDateTimeInput}
+      label={t('hakukohdelomake.toimitusaika')}
+      helperText={t('yleiset.paivamaaraJaKellonaika')}
+    />
   );
 };
 
@@ -75,47 +36,43 @@ const ToimituspaikkaSection = ({ getFieldName, language }) => {
   return (
     <>
       <Spacing marginBottom={2} {...getTestIdProps('osoite')}>
-        <Typography variant="h6" marginBottom={1}>
-          {t('yleiset.osoite')}
-        </Typography>
         <Field
           name={`${getFieldName('toimitusosoite')}.${language}`}
-          component={renderInputField}
+          component={FormFieldInput}
+          label={t('yleiset.osoite')}
         />
       </Spacing>
 
       <Spacing marginBottom={2}>
         <Flex>
           <FlexItem grow={0} basis="30%" {...getTestIdProps('postinumero')}>
-            <Typography variant="h6" marginBottom={1}>
-              {t('yleiset.postinumero')}
-            </Typography>
             <Field
               name={getFieldName('toimituspostinumero')}
-              component={renderInputField}
+              component={FormFieldInput}
               type="number"
+              label={t('yleiset.postinumero')}
             />
           </FlexItem>
-          <FlexItem grow={1} paddingLeft={2} {...getTestIdProps('postitoimipaikka')}>
-            <Typography variant="h6" marginBottom={1}>
-              {t('yleiset.postitoimipaikka')}
-            </Typography>
+          <FlexItem
+            grow={1}
+            paddingLeft={2}
+            {...getTestIdProps('postitoimipaikka')}
+          >
             <Field
               name={`${getFieldName('toimituspostitoimipaikka')}.${language}`}
-              component={renderInputField}
+              component={FormFieldInput}
+              label={t('yleiset.postitoimipaikka')}
             />
           </FlexItem>
         </Flex>
       </Spacing>
 
       <Spacing {...getTestIdProps('sahkoposti')}>
-        <Typography variant="h6" marginBottom={1}>
-          {t('yleiset.sahkoposti')}
-        </Typography>
         <Field
           name={getFieldName('toimitussahkoposti')}
-          component={renderInputField}
+          component={FormFieldInput}
           type="email"
+          label={t('yleiset.sahkoposti')}
         />
       </Spacing>
     </>
@@ -135,33 +92,27 @@ const renderLiitteetFields = ({
       {fields.map((liite, index) => (
         <Fragment key={index}>
           <Spacing marginBottom={2} {...getTestIdProps('tyyppi')}>
-            <Typography as="h6" marginBottom={1}>
-              {t('yleiset.tyyppi')}
-            </Typography>
             <Field
               name={`${liite}.tyyppi`}
-              component={renderSelectField}
+              component={FormFieldSelect}
               options={tyyppiOptions}
+              label={t('yleiset.tyyppi')}
             />
           </Spacing>
 
           <Spacing marginBottom={2} {...getTestIdProps('nimi')}>
-            <Typography as="h6" marginBottom={1}>
-              {t('yleiset.nimi')}
-            </Typography>
             <Field
               name={`${liite}.nimi.${language}`}
-              component={renderInputField}
+              component={FormFieldInput}
+              label={t('yleiset.nimi')}
             />
           </Spacing>
 
           <Spacing marginBottom={2} {...getTestIdProps('kuvaus')}>
-            <Typography as="h6" marginBottom={1}>
-              {t('yleiset.kuvaus')}
-            </Typography>
             <Field
               name={`${liite}.kuvaus.${language}`}
-              component={renderTextareaField}
+              component={FormFieldTextarea}
+              label={t('yleiset.kuvaus')}
             />
           </Spacing>
 
@@ -220,7 +171,7 @@ const YhteinenToimitusFieldValues = formValues({
   }),
 );
 
-const LiitteetSection = ({ languages, organisaatioOid }) => {
+const LiitteetSection = ({ language, organisaatioOid }) => {
   const { options: tyyppiOptions } = useKoodistoOptions({
     koodisto: 'liitetyypitamm',
   });
@@ -228,58 +179,46 @@ const LiitteetSection = ({ languages, organisaatioOid }) => {
   const { t } = useTranslation();
 
   return (
-    <LanguageSelector languages={languages} defaultValue="fi">
-      {({ value: activeLanguage }) => (
-        <YhteinenToimitusFieldValues>
-          {({ yhteinenToimitusaika, yhteinenToimituspaikka }) => (
-            <>
-              <Spacing marginBottom={2} {...getTestIdProps('liitelista')}>
-                <FieldArray
-                  name="liitteet"
-                  component={renderLiitteetFields}
-                  language={activeLanguage}
-                  includeToimitusaika={!yhteinenToimitusaika}
-                  includeToimituspaikka={!yhteinenToimituspaikka}
-                  tyyppiOptions={tyyppiOptions}
-                  t={t}
+    <YhteinenToimitusFieldValues>
+      {({ yhteinenToimitusaika, yhteinenToimituspaikka }) => (
+        <>
+          <Spacing marginBottom={2} {...getTestIdProps('liitelista')}>
+            <FieldArray
+              name="liitteet"
+              component={renderLiitteetFields}
+              language={language}
+              includeToimitusaika={!yhteinenToimitusaika}
+              includeToimituspaikka={!yhteinenToimituspaikka}
+              tyyppiOptions={tyyppiOptions}
+              t={t}
+            />
+          </Spacing>
+          <Spacing>
+            <Field name="yhteinenToimitusaika" component={FormFieldCheckbox}>
+              {t('hakukohdelomake.kaytaLiitteilleYhteistaToimitusaikaa')}
+            </Field>
+            {yhteinenToimitusaika ? (
+              <Spacing marginTop={1} marginBottom={2}>
+                <ToimitusaikaSection getFieldName={baseName => baseName} />
+              </Spacing>
+            ) : null}
+          </Spacing>
+          <Spacing>
+            <Field name="yhteinenToimituspaikka" component={FormFieldCheckbox}>
+              {t('hakukohdelomake.kaytaLiitteilleYhteistaToimituspaikkaa')}
+            </Field>
+            {yhteinenToimituspaikka ? (
+              <Spacing marginTop={1}>
+                <ToimituspaikkaSection
+                  getFieldName={baseName => baseName}
+                  language={language}
                 />
               </Spacing>
-              <Spacing>
-                <Field
-                  name="yhteinenToimitusaika"
-                  component={renderCheckboxField}
-                  label={t(
-                    'hakukohdelomake.kaytaLiitteilleYhteistaToimitusaikaa',
-                  )}
-                />
-                {yhteinenToimitusaika ? (
-                  <Spacing marginTop={1} marginBottom={2}>
-                    <ToimitusaikaSection getFieldName={baseName => baseName} />
-                  </Spacing>
-                ) : null}
-              </Spacing>
-              <Spacing>
-                <Field
-                  name="yhteinenToimituspaikka"
-                  component={renderCheckboxField}
-                  label={t(
-                    'hakukohdelomake.kaytaLiitteilleYhteistaToimituspaikkaa',
-                  )}
-                />
-                {yhteinenToimituspaikka ? (
-                  <Spacing marginTop={1}>
-                    <ToimituspaikkaSection
-                      getFieldName={baseName => baseName}
-                      language={activeLanguage}
-                    />
-                  </Spacing>
-                ) : null}
-              </Spacing>
-            </>
-          )}
-        </YhteinenToimitusFieldValues>
+            ) : null}
+          </Spacing>
+        </>
       )}
-    </LanguageSelector>
+    </YhteinenToimitusFieldValues>
   );
 };
 

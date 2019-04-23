@@ -6,14 +6,19 @@ import { isArray } from '../../utils';
 const cleanValue = (value, options) => {
   const optionValues = options.map(({ value }) => value);
 
-  if (!isArray(options) || !isArray(value)) {
+  if (!isArray(options) || !isArray(value)) {
     return value;
   }
 
   return value.filter(v => optionValues.includes(v));
 };
 
-const makeOnCheckboxChange = ({ value, onChange, optionValue, options }) => e => {
+const makeOnCheckboxChange = ({
+  value,
+  onChange,
+  optionValue,
+  options,
+}) => e => {
   if (e.target.checked) {
     onChange(cleanValue([...value, optionValue], options));
   } else {
@@ -21,7 +26,13 @@ const makeOnCheckboxChange = ({ value, onChange, optionValue, options }) => e =>
   }
 };
 
-const CheckboxGroup = ({ value = [], onChange, options = [], disabled = false }) => {
+const CheckboxGroup = ({
+  value = [],
+  onChange,
+  options = [],
+  error,
+  disabled = false,
+}) => {
   return options.map(({ value: optionValue, label }) => (
     <Checkbox
       key={optionValue}

@@ -1,15 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { isValid } from 'redux-form';
 
 import { JULKAISUTILA } from '../../constants';
 import { submit as submitValintaperuste } from '../../state/createValintaperusteForm';
 import Button from '../Button';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
-
-const valintaperusteFormIsValid = isValid('createValintaperusteForm');
 
 const Wrapper = styled.div`
   max-width: 1200px;
@@ -27,7 +24,6 @@ const SaveButton = styled(Button).attrs({ variant: 'outlined' })`
 const CreateValintaperusteFooter = ({
   onSave = () => {},
   onSaveAndPublish = () => {},
-  valid = true,
 }) => {
   const { t } = useTranslation();
 
@@ -35,14 +31,12 @@ const CreateValintaperusteFooter = ({
     <Wrapper>
       <SaveButton
         onClick={onSave}
-        disabled={!valid}
         {...getTestIdProps('tallennaValintaperusteButton')}
       >
         {t('yleiset.tallenna')}
       </SaveButton>
       <Button
         onClick={onSaveAndPublish}
-        disabled={!valid}
         {...getTestIdProps('tallennaJaJulkaiseValintaperusteButton')}
       >
         {t('yleiset.tallennaJaJulkaise')}
@@ -52,9 +46,7 @@ const CreateValintaperusteFooter = ({
 };
 
 export default connect(
-  state => ({
-    valid: valintaperusteFormIsValid(state),
-  }),
+  null,
   dispatch => ({
     onSave: () => {
       dispatch(submitValintaperuste({ tila: JULKAISUTILA.TALLENNETTU }));

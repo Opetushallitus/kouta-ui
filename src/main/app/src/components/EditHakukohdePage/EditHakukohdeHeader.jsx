@@ -2,7 +2,7 @@ import React from 'react';
 import get from 'lodash/get';
 
 import FormHeader from '../FormHeader';
-import FormStatus from '../FormStatus';
+import StatusTag from '../StatusTag';
 import FormEditInfo from '../FormEditInfo';
 import useTranslation from '../useTranslation';
 
@@ -12,7 +12,7 @@ const EditHakukohdeHeader = ({ hakukohde }) => {
   return (
     <FormHeader
       status={
-        get(hakukohde, 'tila') ? <FormStatus status={hakukohde.tila} /> : null
+        get(hakukohde, 'tila') ? <StatusTag status={hakukohde.tila} large /> : null
       }
       editInfo={
         get(hakukohde, 'modified') ? (

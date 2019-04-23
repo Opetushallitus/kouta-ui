@@ -19,7 +19,7 @@ const Wrapper = styled.div`
 `;
 
 const Overlay = styled.div`
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.5);
   position: absolute;
   top: 0px;
   left: 0px;

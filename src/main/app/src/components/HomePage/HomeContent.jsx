@@ -78,13 +78,13 @@ const HomeContent = ({ organisaatiot, organisaatioOid, history }) => {
         <Typography variant="h3" marginBottom={3}>
           {t('etusivu.koulutuksetJaHaut')}
         </Typography>
-        <Spacing marginBottom={3}>
+        <Spacing marginBottom={4}>
           <KoulutuksetSection organisaatioOid={organisaatioOid} />
         </Spacing>
-        <Spacing marginBottom={3}>
+        <Spacing marginBottom={4}>
           <ToteutuksetSection organisaatioOid={organisaatioOid} />
         </Spacing>
-        <Spacing marginBottom={3}>
+        <Spacing marginBottom={4}>
           <HautSection organisaatioOid={organisaatioOid} />
         </Spacing>
         <Spacing>

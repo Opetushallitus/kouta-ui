@@ -1,4 +1,6 @@
-import '@babel/polyfill';
+import 'core-js/features/object/keys';
+import 'core-js/features/object/values';
+import 'core-js/features/promise';
 
 import React from 'react';
 import ReactDOM from 'react-dom';

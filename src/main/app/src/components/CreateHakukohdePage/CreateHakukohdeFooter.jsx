@@ -1,15 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { isValid } from 'redux-form';
 
 import { submit as submitHakukohdeForm } from '../../state/createHakukohdeForm';
 import { JULKAISUTILA } from '../../constants';
 import Button from '../Button';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
-
-const hakukohdeFormIsValid = isValid('createHakukohdeForm');
 
 const Wrapper = styled.div`
   max-width: 1200px;
@@ -27,7 +24,6 @@ const SaveButton = styled(Button).attrs({ variant: 'outlined' })`
 const CreateHakukohdeFooter = ({
   onSave = () => {},
   onSaveAndPublish = () => {},
-  valid = true,
 }) => {
   const { t } = useTranslation();
 
@@ -41,7 +37,6 @@ const CreateHakukohdeFooter = ({
       </SaveButton>
       <Button
         onClick={onSaveAndPublish}
-        disabled={!valid}
         {...getTestIdProps('tallennaJaJulkaiseHakukohdeButton')}
       >
         {t('yleiset.tallennaJaJulkaise')}
@@ -51,9 +46,7 @@ const CreateHakukohdeFooter = ({
 };
 
 export default connect(
-  state => ({
-    valid: hakukohdeFormIsValid(state),
-  }),
+  null,
   dispatch => ({
     onSave: () => {
       dispatch(submitHakukohdeForm({ tila: JULKAISUTILA.TALLENNETTU }));

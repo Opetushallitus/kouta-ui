@@ -3,23 +3,10 @@ import { Field, formValues } from 'redux-form';
 import get from 'lodash/get';
 
 import Spacing from '../Spacing';
-import Typography from '../Typography';
-import Textarea from '../Textarea';
-import LanguageSelector from '../LanguageSelector';
-import Select from '../Select';
 import useTranslation from '../useTranslation';
 import useKoodistoOptions from '../useKoodistoOptions';
 import { getTestIdProps } from '../../utils';
-
-const noop = () => {};
-
-const renderSelectField = ({ input, ...props }) => (
-  <Select {...input} onBlur={noop} {...props} />
-);
-
-const renderTextareaField = ({ input, ...props }) => (
-  <Textarea {...input} {...props} />
-);
+import { FormFieldTextarea, FormFieldSelect } from '../FormFields';
 
 const OsiotFieldsBase = ({ osiot, language, osiotOptions }) => {
   const osiotArr = osiot || [];
@@ -35,13 +22,15 @@ const OsiotFieldsBase = ({ osiot, language, osiotOptions }) => {
   }, [osiotArr, osiotOptions]);
 
   return osiotArrWithLabels.map(({ value, label }, index) => (
-    <Spacing marginBottom={index !== osiot.length - 1 ? 2 : 0} key={value} {...getTestIdProps(`osioKuvaus.${value}`)}>
-      <Typography variant="h6" marginBottom={1}>
-        {label}
-      </Typography>
+    <Spacing
+      marginBottom={index !== osiot.length - 1 ? 2 : 0}
+      key={value}
+      {...getTestIdProps(`osioKuvaus.${value}`)}
+    >
       <Field
         name={`osioKuvaukset.${value}.${language}`}
-        component={renderTextareaField}
+        component={FormFieldTextarea}
+        label={label}
       />
     </Spacing>
   ));
@@ -49,33 +38,27 @@ const OsiotFieldsBase = ({ osiot, language, osiotOptions }) => {
 
 const OsiotFields = formValues({ osiot: 'osiot' })(OsiotFieldsBase);
 
-const LisatiedotSection = ({ languages = [] }) => {
+const LisatiedotSection = ({ language }) => {
   const { t } = useTranslation();
   const { options: osiotOptions } = useKoodistoOptions({
     koodisto: 'koulutuksenjarjestamisenlisaosiot',
   });
 
   return (
-    <LanguageSelector languages={languages} defaultValue="fi">
-      {({ value: activeLanguage }) => (
-        <>
-          <Spacing marginBottom={2}>
-            <Typography variant="h6" marginBottom={1}>
-              {t('yleiset.valitseLisattavaOsio')}
-            </Typography>
-            <div {...getTestIdProps('osiotSelect')}>
-              <Field
-                name="osiot"
-                component={renderSelectField}
-                options={osiotOptions}
-                isMulti
-              />
-            </div>
-          </Spacing>
-          <OsiotFields language={activeLanguage} osiotOptions={osiotOptions} />
-        </>
-      )}
-    </LanguageSelector>
+    <>
+      <Spacing marginBottom={2}>
+        <div {...getTestIdProps('osiotSelect')}>
+          <Field
+            name="osiot"
+            component={FormFieldSelect}
+            options={osiotOptions}
+            label={t('yleiset.valitseLisattavaOsio')}
+            isMulti
+          />
+        </div>
+      </Spacing>
+      <OsiotFields language={language} osiotOptions={osiotOptions} />
+    </>
   );
 };
 

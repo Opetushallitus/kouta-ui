@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 import memoize from 'memoizee';
 
-import HakuForm, { validate, initialValues } from '../HakuForm';
+import HakuForm, { initialValues } from '../HakuForm';
 import {
   copy as copyHaku,
   maybeCopy as maybeCopyHaku,
@@ -12,19 +12,21 @@ import {
 } from '../../state/createHakuForm';
 import { getKoutaHakuByOid } from '../../apiUtils';
 import ApiAsync from '../ApiAsync';
+import { POHJAVALINNAT } from '../../constants';
 
 const resolveFn = () => Promise.resolve({});
 
 const HakuReduxForm = reduxForm({
   form: 'createHakuForm',
-  validate,
   enableReinitialize: true,
 })(HakuForm);
 
 const getCopyValues = hakuOid => ({
   pohja: {
-    base: 'copy_haku',
-    search: { value: hakuOid },
+    pohja: {
+      tapa: POHJAVALINNAT.KOPIO,
+      valinta: { value: hakuOid },
+    },
   },
 });
 
@@ -40,11 +42,7 @@ const CreateHakuForm = props => {
   const promiseFn = kopioHakuOid ? getKoutaHakuByOid : resolveFn;
 
   return (
-    <ApiAsync
-      promiseFn={promiseFn}
-      oid={kopioHakuOid}
-      watch={kopioHakuOid}
-    >
+    <ApiAsync promiseFn={promiseFn} oid={kopioHakuOid} watch={kopioHakuOid}>
       {({ data }) => {
         return data ? (
           <HakuReduxForm
@@ -73,4 +71,3 @@ export default compose(
     }),
   ),
 )(CreateHakuForm);
-

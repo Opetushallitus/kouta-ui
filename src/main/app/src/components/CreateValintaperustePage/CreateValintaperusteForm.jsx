@@ -1,21 +1,21 @@
 import React, { useMemo } from 'react';
 import { reduxForm } from 'redux-form';
 
-import ValintaperusteForm, {
-  validate,
-  initialValues,
-} from '../ValintaperusteForm';
+import ValintaperusteForm, { initialValues } from '../ValintaperusteForm';
 
 import { getValuesByValintaperuste } from '../../state/createValintaperusteForm';
 import { getKoutaValintaperusteByOid } from '../../apiUtils';
 import useApiAsync from '../useApiAsync';
+import { POHJAVALINNAT } from '../../constants';
 
 const resolveFn = () => Promise.resolve(null);
 
 const getCopyValues = valintaperusteOid => ({
   pohja: {
-    pohja: 'copy_valintaperuste',
-    valintaperuste: { value: valintaperusteOid },
+    pohja: {
+      tapa: POHJAVALINNAT.KOPIO,
+      valinta: { value: valintaperusteOid },
+    },
   },
 });
 
@@ -30,7 +30,6 @@ const getInitialValues = valintaperuste => {
 
 const ValintaperusteReduxForm = reduxForm({
   form: 'createValintaperusteForm',
-  validate,
   initialValues,
   enableReinitialize: true,
 })(ValintaperusteForm);

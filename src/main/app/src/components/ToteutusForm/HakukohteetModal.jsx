@@ -5,31 +5,16 @@ import Modal from '../Modal';
 import Button from '../Button';
 import { getKoutaHaut } from '../../apiUtils';
 import Flex from '../Flex';
-import Select from '../Select';
 import { getFirstLanguageValue } from '../../utils';
-import Typography from '../Typography';
 import useApiAsync from '../useApiAsync';
 import useTranslation from '../useTranslation';
-
-const noop = () => {};
+import { FormFieldSelect } from '../FormFields';
 
 const getOptions = items => {
   return items.map(({ nimi, oid }) => ({
     value: oid,
     label: getFirstLanguageValue(nimi),
   }));
-};
-
-const renderSelectField = ({ options = [], input }) => {
-  return (
-    <Select
-      {...input}
-      options={options}
-      onBlur={noop}
-      menuPortalTarget={document.body}
-      menuPosition="fixed"
-    />
-  );
 };
 
 const HakukohteetModal = ({
@@ -70,13 +55,13 @@ const HakukohteetModal = ({
       onClose={onClose}
       {...props}
     >
-      <Typography variant="h6" marginBottom={1}>
-        {t('yleiset.valitseHaku')}
-      </Typography>
       <Field
         name={`${fieldName}.haku`}
         options={hautOptions}
-        component={renderSelectField}
+        component={FormFieldSelect}
+        menuPortalTarget={document.body}
+        menuPosition="fixed"
+        label={t('yleiset.valitseHaku')}
       />
     </Modal>
   );

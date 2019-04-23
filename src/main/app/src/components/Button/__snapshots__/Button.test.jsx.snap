@@ -19,34 +19,41 @@ exports[`renders correctly with color 1`] = `
   -ms-flex-align: center;
   align-items: center;
   box-sizing: border-box;
-  -webkit-transition: background-color 0.25s,border-color 0.25s;
-  transition: background-color 0.25s,border-color 0.25s;
+  -webkit-transition: box-shadow 0.25s,background-color 0.25s,border-color 0.25s;
+  transition: box-shadow 0.25s,background-color 0.25s,border-color 0.25s;
   border-color: #2da0c7;
   background-color: #2da0c7;
   color: #ffffff;
 }
 
 .c0:hover {
-  border-color: #288fb2;
-  background-color: #288fb2;
+  border-color: #3bacd3;
+  background-color: #3bacd3;
 }
 
 .c0:active {
-  border-color: #247f9d;
-  background-color: #247f9d;
+  border-color: #3bacd3;
+  background-color: #3bacd3;
+  box-shadow: 0 0 5px 0 #3bacd3;
 }
 
-<styled.button
+<ForwardRef
   color="primary"
-  variant="contained"
 >
-  <button
-    className="c0"
+  <styled.button
     color="primary"
+    size="medium"
+    variant="contained"
   >
-    Primary button
-  </button>
-</styled.button>
+    <button
+      className="c0"
+      color="primary"
+      size="medium"
+    >
+      Primary button
+    </button>
+  </styled.button>
+</ForwardRef>
 `;
 
 exports[`renders correctly with color 2`] = `
@@ -68,34 +75,41 @@ exports[`renders correctly with color 2`] = `
   -ms-flex-align: center;
   align-items: center;
   box-sizing: border-box;
-  -webkit-transition: background-color 0.25s,border-color 0.25s;
-  transition: background-color 0.25s,border-color 0.25s;
+  -webkit-transition: box-shadow 0.25s,background-color 0.25s,border-color 0.25s;
+  transition: box-shadow 0.25s,background-color 0.25s,border-color 0.25s;
   border-color: #999999;
   background-color: #999999;
   color: #ffffff;
 }
 
 .c0:hover {
-  border-color: #8c8c8c;
-  background-color: #8c8c8c;
+  border-color: #a6a6a6;
+  background-color: #a6a6a6;
 }
 
 .c0:active {
-  border-color: #808080;
-  background-color: #808080;
+  border-color: #a6a6a6;
+  background-color: #a6a6a6;
+  box-shadow: 0 0 5px 0 #a6a6a6;
 }
 
-<styled.button
+<ForwardRef
   color="secondary"
-  variant="contained"
 >
-  <button
-    className="c0"
+  <styled.button
     color="secondary"
+    size="medium"
+    variant="contained"
   >
-    Secondary button
-  </button>
-</styled.button>
+    <button
+      className="c0"
+      color="secondary"
+      size="medium"
+    >
+      Secondary button
+    </button>
+  </styled.button>
+</ForwardRef>
 `;
 
 exports[`renders correctly with variant 1`] = `
@@ -117,34 +131,41 @@ exports[`renders correctly with variant 1`] = `
   -ms-flex-align: center;
   align-items: center;
   box-sizing: border-box;
-  -webkit-transition: background-color 0.25s,border-color 0.25s;
-  transition: background-color 0.25s,border-color 0.25s;
+  -webkit-transition: box-shadow 0.25s,background-color 0.25s,border-color 0.25s;
+  transition: box-shadow 0.25s,background-color 0.25s,border-color 0.25s;
   border-color: #2da0c7;
   background-color: #2da0c7;
   color: #ffffff;
 }
 
 .c0:hover {
-  border-color: #288fb2;
-  background-color: #288fb2;
+  border-color: #3bacd3;
+  background-color: #3bacd3;
 }
 
 .c0:active {
-  border-color: #247f9d;
-  background-color: #247f9d;
+  border-color: #3bacd3;
+  background-color: #3bacd3;
+  box-shadow: 0 0 5px 0 #3bacd3;
 }
 
-<styled.button
-  color="primary"
+<ForwardRef
   variant="contained"
 >
-  <button
-    className="c0"
+  <styled.button
     color="primary"
+    size="medium"
+    variant="contained"
   >
-    Contained button
-  </button>
-</styled.button>
+    <button
+      className="c0"
+      color="primary"
+      size="medium"
+    >
+      Contained button
+    </button>
+  </styled.button>
+</ForwardRef>
 `;
 
 exports[`renders correctly with variant 2`] = `
@@ -166,32 +187,39 @@ exports[`renders correctly with variant 2`] = `
   -ms-flex-align: center;
   align-items: center;
   box-sizing: border-box;
-  -webkit-transition: color 0.25s,border-color 0.25s;
-  transition: color 0.25s,border-color 0.25s;
+  -webkit-transition: box-shadow 0.25s,background-color 0.25s,border-color 0.25s;
+  transition: box-shadow 0.25s,background-color 0.25s,border-color 0.25s;
   background-color: transparent;
   border-color: #2da0c7;
   color: #2da0c7;
 }
 
 .c0:hover {
-  border-color: #288fb2;
-  color: #288fb2;
+  border-color: #3bacd3;
+  color: #3bacd3;
 }
 
 .c0:active {
-  border-color: #247f9d;
-  color: #247f9d;
+  border-color: #3bacd3;
+  color: #3bacd3;
+  box-shadow: 0 0 5px 0 #3bacd3;
 }
 
-<styled.button
-  color="primary"
+<ForwardRef
   variant="outlined"
 >
-  <button
-    className="c0"
+  <styled.button
     color="primary"
+    size="medium"
+    variant="outlined"
   >
-    Outlined button
-  </button>
-</styled.button>
+    <button
+      className="c0"
+      color="primary"
+      size="medium"
+    >
+      Outlined button
+    </button>
+  </styled.button>
+</ForwardRef>
 `;

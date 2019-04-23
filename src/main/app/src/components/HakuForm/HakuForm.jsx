@@ -51,12 +51,17 @@ const HakuForm = ({
     <form onSubmit={handleSubmit}>
       <ActiveLanguages>
         {({ languages }) => (
-          <FormCollapseGroup enabled={steps} scrollTarget={scrollTarget}>
+          <FormCollapseGroup
+            enabled={steps}
+            scrollTarget={scrollTarget}
+            defaultOpen={!steps}
+          >
             {canCopy ? (
               <FormCollapse
                 header={t('yleiset.pohjanValinta')}
                 section="pohja"
                 onContinue={onMaybeCopy}
+                scrollOnActive={false}
                 {...getTestIdProps('pohjaSection')}
               >
                 {({ onContinue }) => (
@@ -81,9 +86,10 @@ const HakuForm = ({
             <FormCollapse
               header={t('hakulomake.haunNimi')}
               section="nimi"
+              languages={languages}
               {...getTestIdProps('nimiSection')}
             >
-              <NameSection languages={languages} />
+              <NameSection />
             </FormCollapse>
 
             <FormCollapse
@@ -121,9 +127,10 @@ const HakuForm = ({
             <FormCollapse
               header={t('hakulomake.haunYhteystiedot')}
               section="yhteystiedot"
+              languages={languages}
               {...getTestIdProps('yhteystiedotSection')}
             >
-              <ContactInfoSection languages={languages} />
+              <ContactInfoSection />
             </FormCollapse>
 
             {isFunction(onAttachHakukohde) ? (

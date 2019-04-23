@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
+import { setLightness } from 'polished';
 
 import { isString, noop } from '../../utils';
-import { getThemeProp } from '../../theme';
+import { getThemeProp, spacing } from '../../theme';
 import Typography from '../Typography';
 import DropdownIcon from '../DropdownIcon';
 import CollapseContent from '../CollapseContent';
@@ -10,15 +11,22 @@ import CollapseContent from '../CollapseContent';
 const Container = styled.div`
   border: 1px solid ${getThemeProp('palette.border')};
   background-color: white;
+
+  ${({ active }) =>
+    active &&
+    css`
+      border-color: ${getThemeProp('palette.primary.main')};
+      box-shadow: 0 0 0 1px ${getThemeProp('palette.primary.main')},
+        0 0 7px 1px
+          ${({ theme }) => setLightness(0.8, theme.palette.primary.main)};
+    `}
 `;
 
 const HeaderToggle = styled.div`
   flex: 0;
-  background-color: ${getThemeProp('palette.primary.dark')};
   display: flex;
   align-items: center;
-  min-height: 3rem;
-  padding: 0px ${({ theme }) => theme.spacing.unit * 2}px;
+  padding: 0px ${spacing(3)};
   cursor: pointer;
 `;
 
@@ -43,30 +51,25 @@ const HeaderContent = styled.div`
     css`
       cursor: pointer;
     `}
-
-  ${({ active }) =>
-    active &&
-    css`
-      background-color: ${getThemeProp('palette.primary.light')};
-    `}
 `;
 
 const FooterContainer = styled.div`
-  padding: ${({ theme }) => theme.spacing.unit * 2}px;
+  padding: ${spacing(3)};
   border-top: 1px solid ${getThemeProp('palette.border')};
 `;
 
 const ToggleIcon = styled(DropdownIcon)`
-  color: white;
+  color: ${getThemeProp('palette.text.primary')};
   font-size: 2rem;
 `;
 
 const ContentWrapper = styled.div`
-  padding: ${({ theme }) => theme.spacing.unit * 2}px;
+  padding: ${spacing(3)};
 `;
 
 const HeaderTextContent = styled(Typography).attrs({ variant: 'h5' })`
-  padding: ${({ theme }) => theme.spacing.unit * 2}px;
+  color: ${getThemeProp('palette.text.dark')};
+  padding: ${spacing(3)};
 `;
 
 const renderHeader = header => {
@@ -87,12 +90,11 @@ const Collapse = ({
   toggleOnHeaderClick = true,
   ...props
 }) => (
-  <Container {...props}>
+  <Container active={active} {...props}>
     <HeaderContainer open={open}>
       <HeaderContent
         toggleOnHeaderClick={toggleOnHeaderClick}
         onClick={toggleOnHeaderClick ? onToggle : noop}
-        active={active}
       >
         {renderHeader(header)}
       </HeaderContent>

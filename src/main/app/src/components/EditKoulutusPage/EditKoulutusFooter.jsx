@@ -1,15 +1,12 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { isValid } from 'redux-form';
 
 import { submit } from '../../state/editKoulutusForm';
 import Button from '../Button';
 import { JULKAISUTILA } from '../../constants';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
-
-const koulutusFormIsValid = isValid('editKoulutusForm');
 
 const Wrapper = styled.div`
   max-width: 1200px;
@@ -24,7 +21,7 @@ const PublishButton = styled(Button)`
   margin-left: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
-const EditKoulutusFooter = ({ koulutus, valid, onSave = () => {} }) => {
+const EditKoulutusFooter = ({ koulutus, onSave = () => {} }) => {
   const { tila } = koulutus;
   const { t } = useTranslation();
 
@@ -43,7 +40,6 @@ const EditKoulutusFooter = ({ koulutus, valid, onSave = () => {} }) => {
       </Button>
       {tila !== JULKAISUTILA.JULKAISTU ? (
         <PublishButton
-          disabled={!valid}
           onClick={onSaveAndPublish}
           {...getTestIdProps('tallennaJaJulkaiseKoulutusButton')}
         >
@@ -55,9 +51,7 @@ const EditKoulutusFooter = ({ koulutus, valid, onSave = () => {} }) => {
 };
 
 export default connect(
-  state => ({
-    valid: koulutusFormIsValid(state),
-  }),
+  null,
   (dispatch, { koulutus }) => ({
     onSave: ({ tila } = {}) => dispatch(submit({ koulutus, tila })),
   }),

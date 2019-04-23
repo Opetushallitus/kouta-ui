@@ -1,4 +1,9 @@
-import { getByTestId, getRadio, getSelectOption } from '../../utils';
+import {
+  getByTestId,
+  getRadio,
+  getSelectOption,
+  fillDateTimeInput,
+} from '../../utils';
 
 import { stubHakuFormRoutes } from '../../hakuFormUtils';
 
@@ -47,12 +52,7 @@ const lisaa = cy => {
 };
 
 const fillDatetime = ({ date, time, cy }) => {
-  getByTestId('paivamaara', cy)
-    .find('input')
-    .type(date, { force: true });
-  getByTestId('kellonaika', cy)
-    .find('input')
-    .type(time, { force: true });
+  fillDateTimeInput({ date, time, cy });
 };
 
 const fillAikatauluSection = cy => {

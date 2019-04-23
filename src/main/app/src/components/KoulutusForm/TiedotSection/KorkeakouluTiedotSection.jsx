@@ -2,31 +2,34 @@ import React from 'react';
 import { Field } from 'redux-form';
 
 import KoulutusSelect from '../KoulutusSelect';
-import Typography from '../../Typography';
 import Spacing from '../../Spacing';
-import Input from '../../Input';
 import TutkintoNimikeSelect from './TutkintonimikeSelect';
 import useKoodistoOptions from '../../useKoodistoOptions';
-import Select from '../../Select';
 import useTranslation from '../../useTranslation';
-import { getTestIdProps } from '../../../utils';
+import { getTestIdProps, noop } from '../../../utils';
 
-const noop = () => {};
+import {
+  FormFieldInput,
+  FormFieldSelect,
+  createFormFieldComponent,
+} from '../../FormFields';
 
-const renderKoulutusField = ({ input, koulutustyyppi }) => (
-  <KoulutusSelect koulutustyyppi={koulutustyyppi} {...input} onBlur={noop} />
+const KoulutusField = createFormFieldComponent(
+  KoulutusSelect,
+  ({ input, ...props }) => ({
+    ...input,
+    onBlur: noop,
+    ...props,
+  }),
 );
 
-const renderInputField = ({ input, ...props }) => (
-  <Input {...input} {...props} />
-);
-
-const renderTutkintoNimikeField = ({ input }) => (
-  <TutkintoNimikeSelect {...input} onBlur={noop} />
-);
-
-const renderSelectField = ({ input, options }) => (
-  <Select {...input} options={options} onBlur={noop} />
+const TutkintoNimikeField = createFormFieldComponent(
+  TutkintoNimikeSelect,
+  ({ input, ...props }) => ({
+    ...input,
+    onBlur: noop,
+    ...props,
+  }),
 );
 
 export const KorkeakoulutuTiedotSection = ({ koulutustyyppi, language }) => {
@@ -39,42 +42,40 @@ export const KorkeakoulutuTiedotSection = ({ koulutustyyppi, language }) => {
   return (
     <>
       <Spacing marginBottom={2}>
-        <Typography variant="h6" marginBottom={1}>
-          {t('koulutuslomake.valitseKoulutuskoodi')}
-        </Typography>
         <div {...getTestIdProps('koulutuskoodiSelect')}>
           <Field
             name="koulutus"
-            component={renderKoulutusField}
+            component={KoulutusField}
             koulutustyyppi={koulutustyyppi}
+            label={t('koulutuslomake.valitseKoulutuskoodi')}
           />
         </div>
       </Spacing>
 
       <Spacing marginBottom={2} {...getTestIdProps('nimiInput')}>
-        <Typography variant="h6" marginBottom={1}>
-          {t('koulutuslomake.muokkaaKoulutuksenNimea')}
-        </Typography>
-        <Field name={`nimi.${language}`} component={renderInputField} />
+        <Field
+          name={`nimi.${language}`}
+          component={FormFieldInput}
+          label={t('koulutuslomake.muokkaaKoulutuksenNimea')}
+        />
       </Spacing>
 
       <Spacing marginBottom={2}>
-        <Typography variant="h6" marginBottom={1}>
-          {t('koulutuslomake.valitseTutkintonimike')}
-        </Typography>
         <div {...getTestIdProps('tutkintonimikeSelect')}>
-          <Field name="tutkintonimike" component={renderTutkintoNimikeField} />
+          <Field
+            name="tutkintonimike"
+            component={TutkintoNimikeField}
+            label={t('koulutuslomake.valitseTutkintonimike')}
+          />
         </div>
       </Spacing>
 
-      <Typography variant="h6" marginBottom={1}>
-        {t('koulutuslomake.valitseOpintojenLaajuus')}
-      </Typography>
       <div {...getTestIdProps('opintojenLaajuusSelect')}>
         <Field
           name="opintojenLaajuus"
-          component={renderSelectField}
+          component={FormFieldSelect}
           options={laajuusOptions}
+          label={t('koulutuslomake.valitseOpintojenLaajuus')}
         />
       </div>
     </>

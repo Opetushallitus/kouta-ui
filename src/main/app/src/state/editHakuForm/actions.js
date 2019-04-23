@@ -1,11 +1,13 @@
-import { getFormValues } from 'redux-form';
+import { getFormValues, stopSubmit, startSubmit } from 'redux-form';
 import get from 'lodash/get';
 
-import { getHakuByValues } from '../createHakuForm/utils';
+import { getHakuByValues, validate } from '../createHakuForm/utils';
 import { updateKoutaHaku } from '../../apiUtils';
-import { createTemporaryToast } from '../toaster';
+import { createSavingErrorToast, createSavingSuccessToast } from '../toaster';
+import { isNonEmptyObject } from '../../utils';
 
-const getHakuFormValues = getFormValues('editHakuForm');
+const formName = 'editHakuForm';
+const getHakuFormValues = getFormValues(formName);
 
 export const saveHaku = haku => (
   dispatch,
@@ -20,9 +22,18 @@ export const submit = ({
   organisaatioOid,
   tila,
   lastModified,
-}) => async (dispatch, getState, { history, apiUrls, httpClient }) => {
+}) => async (dispatch, getState, { history }) => {
   const state = getState();
   const values = getHakuFormValues(state);
+  const errors = validate({ values, tila });
+
+  dispatch(startSubmit(formName));
+
+  if (isNonEmptyObject(errors)) {
+    dispatch(stopSubmit(formName, errors));
+    dispatch(createSavingErrorToast());
+    return;
+  }
 
   const {
     me: { kayttajaOid },
@@ -46,20 +57,13 @@ export const submit = ({
 
     hakuData = data;
   } catch (e) {
-    return dispatch(
-      createTemporaryToast({
-        status: 'danger',
-        title: 'Haun tallennus epäonnistui',
-      }),
-    );
+    dispatch(stopSubmit(formName));
+    dispatch(createSavingErrorToast());
+    return;
   }
 
-  dispatch(
-    createTemporaryToast({
-      status: 'success',
-      title: 'Haku on tallennettu onnistuneesti',
-    }),
-  );
+  dispatch(stopSubmit(formName));
+  dispatch(createSavingSuccessToast());
 
   history.push(`/haku/${hakuOid}/muokkaus`, {
     hakuUpdatedAt: Date.now(),

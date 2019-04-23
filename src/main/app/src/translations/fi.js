@@ -104,6 +104,40 @@ export default {
     merkitseOtsikkoriviksi: 'Merkitse otsikkoriviksi',
     merkitseTavalliseksiRiviksi: 'Merkitse tavalliseksi riviksi',
     linkinOtsikko: 'Linkin otsikko',
+    valittuOrganisaatio: 'Valittu organisaatio',
+    lahde: 'Lähde',
+    ePerusteet: 'ePerusteet',
+    valitseLomakkeenPohja: 'Valitse lomakkeen pohja',
+    tarkistaLomakkeenTiedot: 'Tarkista lomakkeen tiedot',
+    kuukaudet: {
+      tammikuu: 'Tammikuu',
+      helmikuu: 'Helmikuu',
+      maaliskuu: 'Maaliskuu',
+      huhtikuu: 'Huhtikuu',
+      toukokuu: 'Toukokuu',
+      kesakuu: 'Kesäkuu',
+      heinakuu: 'Heinäkuu',
+      elokuu: 'Elokuu',
+      syyskuu: 'Syyskuu',
+      lokakuu: 'Lokakuu',
+      marraskuu: 'Marraskuu',
+      joulukuu: 'Joulukuu',
+    },
+    viikonpaivalyhenteet: {
+      ma: 'Ma',
+      ti: 'Ti',
+      ke: 'Ke',
+      to: 'To',
+      pe: 'Pe',
+      la: 'La',
+      su: 'Su',
+    },
+    pudotaTiedostoLadataksesi: 'Pudota tiedosto ladataksesi',
+    raahaaLiitettavaTiedosto:
+      'Raahaa liitetettävä tiedosto, tai klikkaa selataksesi tiedostoja',
+    tiedostonLataaminenEpaonnistui:
+      'Tiedoston lataaminen epäonnistui, yritä uudelleen',
+    ladatutTiedostot: 'Ladatut tiedostot',
   },
   etusivu: {
     koulutuksetJaHaut: 'Koulutukset ja haut',
@@ -141,6 +175,8 @@ export default {
     koulutukseenOnLiitettyToteutukset:
       'Tähän koulutukseen on liitetty seuraavat toteutukset',
     toteutuksenLiittaminenKoulutukseen: 'Toteutuksen liittäminen koulutukseen',
+    kuvausEiOleSaatavilla: 'Kuvaus ei ole saatavilla',
+    valitseKoulutustyyppi: 'Valitse koulutustyyppi',
   },
   toteutuslomake: {
     toteutuksellaEiHakukohteita:
@@ -249,5 +285,6 @@ export default {
       'Kopioi pohjaksi aiemmin luotu valintaperuste',
     valitseTapa: 'Valitse tapa',
     valintatapajononNimi: 'Valintatapajonon nimi',
+    valitseKoulutustyyppi: 'Valitse koulutustyyppi',
   },
 };

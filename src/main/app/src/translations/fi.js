@@ -139,6 +139,12 @@ export default {
       'Tiedoston lataaminen epäonnistui, yritä uudelleen',
     ladatutTiedostot: 'Ladatut tiedostot',
   },
+  validointivirheet: {
+    syotaArvo: 'Syötä kentälle arvo',
+    syotaArvoKaannoksille: 'Syötä arvo kaikille kentän käännöksille',
+    valitseVahintaanYksi: 'Valitse vähintään yksi',
+    valitseVahintaan: 'Valitse vähintään {{lukumaara}}',
+  },
   etusivu: {
     koulutuksetJaHaut: 'Koulutukset ja haut',
     luoUusiKoulutus: 'Luo uusi koulutus',

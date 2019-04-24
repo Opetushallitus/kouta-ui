@@ -120,7 +120,7 @@ export const DateTimeInput = ({
 
       isValidState({ date, time: e.target.value })
         ? onChange(formatValue({ date, time: e.target.value }))
-        : onChange(undefined);
+        : onChange(null);
     },
     [onChange, JSON.stringify(date)], // eslint-disable-line react-hooks/exhaustive-deps
   );
@@ -131,7 +131,7 @@ export const DateTimeInput = ({
 
       isValidState({ date: d, time })
         ? onChange(formatValue({ date: d, time }))
-        : onChange(undefined);
+        : onChange(null);
     },
     [onChange, time],
   );

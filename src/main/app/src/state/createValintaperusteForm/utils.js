@@ -9,6 +9,7 @@ import {
   VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI,
   JULKAISUTILA,
 } from '../../constants';
+import { ErrorBuilder } from '../../validation';
 
 import {
   serialize as serializeEditor,
@@ -18,6 +19,8 @@ import {
 const kielitaitoMuuOsoitusKoodiUriRegExp = new RegExp(
   `^${VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI}`,
 );
+
+const getKieliversiot = values => get(values, 'kieliversiot.languages') || [];
 
 const serializeTable = ({ table, kielivalinta }) => {
   if (!get(table, 'rows')) {
@@ -298,12 +301,32 @@ export const getValuesByValintaperuste = valintaperuste => {
   };
 };
 
-export const validate = ({ tila }) => {
+const validateCommon = ({ errorBuilder, values }) => {
+  const kieliversiot = getKieliversiot(values);
+
+  return errorBuilder
+    .validateArrayMinLength('kieliversiot.languages', 1)
+    .validateExistence('hakutavanRajaus.hakutapa')
+    .validateExistence('kohdejoukonRajaus.kohdejoukko')
+    .validateTranslations('nimi.nimi', kieliversiot)
+    .validateArray('valintatapa.valintatavat', eb => {
+      return eb
+        .validateExistence('tapa')
+        .validateTranslations('nimi', kieliversiot)
+        .validateTranslations('kynnysehto', kieliversiot)
+        .validateExistence('enimmaispistemaara')
+        .validateExistence('vahimmaispistemaara');
+    });
+};
+
+export const validate = ({ tila, values }) => {
   if (tila === JULKAISUTILA.TALLENNETTU) {
     return {};
   }
 
-  const errors = {};
+  let errorBuilder = new ErrorBuilder({ values });
 
-  return errors;
+  errorBuilder = validateCommon({ errorBuilder, values });
+
+  return errorBuilder.getErrors();
 };

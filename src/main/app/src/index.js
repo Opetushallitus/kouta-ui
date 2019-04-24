@@ -1,6 +1,7 @@
 import 'core-js/features/object/keys';
 import 'core-js/features/object/values';
 import 'core-js/features/promise';
+import 'core-js/features/array/includes';
 
 import React from 'react';
 import ReactDOM from 'react-dom';

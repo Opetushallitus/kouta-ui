@@ -133,6 +133,7 @@ export const DatePickerInput = ({
   placeholder = '',
   onChange = () => {},
   inputProps = {},
+  error = false,
   ...props
 }) => {
   const { t } = useTranslation();
@@ -153,6 +154,7 @@ export const DatePickerInput = ({
         inputProps={{
           ...inputProps,
           addonAfter: <AddonIcon type="event" />,
+          error,
         }}
         parseDate={parseDateFn}
         formatDate={formatDateFn}

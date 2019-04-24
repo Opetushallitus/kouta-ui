@@ -169,6 +169,7 @@ const ToteutusForm = ({
             <FormCollapse
               header={t('toteutuslomake.toteutuksenNimi')}
               section="nimi"
+              languages={languages}
               {...getTestIdProps('nimiSection')}
             >
               <NimiSection />

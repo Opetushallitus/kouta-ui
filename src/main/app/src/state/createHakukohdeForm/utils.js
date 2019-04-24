@@ -3,6 +3,18 @@ import pick from 'lodash/pick';
 
 import { isArray, isNumeric } from '../../utils';
 import { JULKAISUTILA } from '../../constants';
+import { ErrorBuilder } from '../../validation';
+
+const getKieliversiot = values => get(values, 'kieliversiot.languages') || [];
+
+const getLiitteillaYhteinenToimitusaika = values =>
+  !!get(values, 'liitteet.yhteinenToimitusaika');
+
+const getLiitteillaYhteinenToimitusosoite = values =>
+  !!get(values, 'liitteet.yhteinenToimituspaikka');
+
+const getKaytetaanHaunAikataulua = values =>
+  !get(values, 'hakuajat.eriHakuaika');
 
 const getAsNumberOrNull = value => {
   return isNumeric(value) ? parseInt(value) : null;
@@ -13,11 +25,11 @@ export const getHakukohdeByValues = values => {
   const alkamisvuosi = getAsNumberOrNull(
     get(values, 'alkamiskausi.vuosi.value'),
   );
-  const kielivalinta = get(values, 'kieliversiot.languages') || [];
+  const kielivalinta = getKieliversiot(values);
   const aloituspaikat = getAsNumberOrNull(
     get(values, 'aloituspaikat.aloituspaikkamaara'),
   );
-  const kaytetaanHaunAikataulua = !get(values, 'hakuajat.eriHakuaika');
+  const kaytetaanHaunAikataulua = getKaytetaanHaunAikataulua(values);
 
   const hakuajat = kaytetaanHaunAikataulua
     ? []
@@ -43,14 +55,12 @@ export const getHakukohdeByValues = values => {
 
   const liitteidenToimitusaika = get(values, 'liitteet.toimitusaika') || null;
 
-  const liitteetOnkoSamaToimitusosoite = !!get(
+  const liitteetOnkoSamaToimitusosoite = getLiitteillaYhteinenToimitusosoite(
     values,
-    'liitteet.yhteinenToimituspaikka',
   );
 
-  const liitteetOnkoSamaToimitusaika = !!get(
+  const liitteetOnkoSamaToimitusaika = getLiitteillaYhteinenToimitusaika(
     values,
-    'liitteet.yhteinenToimitusaika',
   );
 
   const liitteet = (get(values, 'liitteet.liitteet') || []).map(
@@ -291,12 +301,110 @@ export const getValuesByHakukohde = hakukohde => {
   };
 };
 
-export const validate = ({ tila }) => {
+const validateLiitteet = ({ errorBuilder, values }) => {
+  const kieliversiot = getKieliversiot(values);
+
+  const liitteillaYhteinenToimitusaika = getLiitteillaYhteinenToimitusaika(
+    values,
+  );
+
+  const liitteillaYhteinenToimitusosoite = getLiitteillaYhteinenToimitusosoite(
+    values,
+  );
+
+  let enhancedErrorBuilder = errorBuilder.validateArray(
+    'liitteet.liitteet',
+    liitteetEb => {
+      let enhancedLiitteetEb = liitteetEb
+        .validateExistence('tyyppi')
+        .validateTranslations('nimi', kieliversiot)
+        .validateTranslations('kuvaus', kieliversiot);
+
+      if (!liitteillaYhteinenToimitusaika) {
+        enhancedLiitteetEb = enhancedLiitteetEb.validateExistence(
+          'toimitusaika',
+        );
+      }
+
+      if (!liitteillaYhteinenToimitusosoite) {
+        enhancedLiitteetEb = enhancedLiitteetEb
+          .validateTranslations('toimitusosoite', kieliversiot)
+          .validateTranslations('toimituspostitoimipaikka', kieliversiot)
+          .validateExistence('toimituspostinumero')
+          .validateExistence('toimitussahkoposti');
+      }
+
+      return enhancedLiitteetEb;
+    },
+  );
+
+  if (liitteillaYhteinenToimitusaika) {
+    enhancedErrorBuilder = enhancedErrorBuilder.validateExistence(
+      'liitteet.toimitusaika',
+    );
+  }
+
+  if (liitteillaYhteinenToimitusosoite) {
+    enhancedErrorBuilder = enhancedErrorBuilder
+      .validateTranslations('liitteet.toimitusosoite', kieliversiot)
+      .validateTranslations('liitteet.toimituspostitoimipaikka', kieliversiot)
+      .validateExistence('liitteet.toimituspostinumero')
+      .validateExistence('liitteet.toimitussahkoposti');
+  }
+
+  return enhancedErrorBuilder;
+};
+
+const validateCommon = ({ errorBuilder, values }) => {
+  const kieliversiot = getKieliversiot(values);
+
+  let enhancedErrorBuilder = errorBuilder
+    .validateArrayMinLength('kieliversiot.languages', 1)
+    .validateArrayMinLength('pohjakoulutus.koulutusvaatimukset', 1)
+    .validateTranslations('perustiedot.nimi', kieliversiot)
+    .validateExistence('aloituspaikat.aloituspaikkamaara');
+
+  enhancedErrorBuilder = validateLiitteet({
+    errorBuilder: enhancedErrorBuilder,
+    values,
+  });
+
+  if (!getKaytetaanHaunAikataulua(values)) {
+    enhancedErrorBuilder = enhancedErrorBuilder.validateArray(
+      'hakuajat.hakuajat',
+      eb => {
+        return eb.validateExistence('alkaa');
+      },
+    );
+  }
+
+  const valintakokeet = pick(
+    get(values, 'valintakoe.kokeet'),
+    get(values, 'valintakoe.types'),
+  );
+
+  enhancedErrorBuilder = Object.keys(valintakokeet).reduce((acc, tyyppi) => {
+    return acc.validateArray(`valintakoe.kokeet.${tyyppi}.kokeet`, eb => {
+      return eb
+        .validateTranslations('osoite', kieliversiot)
+        .validateExistence('postinumero')
+        .validateTranslations('postitoimipaikka', kieliversiot)
+        .validateExistence('alkaa')
+        .validateExistence('paattyy');
+    });
+  }, enhancedErrorBuilder);
+
+  return enhancedErrorBuilder;
+};
+
+export const validate = ({ tila, values }) => {
   if (tila === JULKAISUTILA.TALLENNETTU) {
     return {};
   }
 
-  const errors = {};
+  let errorBuilder = new ErrorBuilder({ values });
 
-  return errors;
+  errorBuilder = validateCommon({ errorBuilder, values });
+
+  return errorBuilder.getErrors();
 };

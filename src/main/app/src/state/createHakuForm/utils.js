@@ -3,6 +3,9 @@ import pick from 'lodash/pick';
 
 import { isNumeric } from '../../utils';
 import { JULKAISUTILA } from '../../constants';
+import { ErrorBuilder } from '../../validation';
+
+const getKielivalinta = values => get(values, 'kieliversiot.languages') || [];
 
 export const getHakuByValues = values => {
   const alkamiskausiKoodiUri = get(values, 'aikataulut.kausi') || null;
@@ -140,12 +143,49 @@ export const getValuesByHaku = haku => {
   };
 };
 
-export const validate = ({ tila }) => {
+const validateCommon = ({ values, errorBuilder }) => {
+  const kielivalinta = getKielivalinta(values);
+  const hakutapa = get(values, 'hakutapa.tapa');
+  const isYhteishaku = new RegExp('^hakutapa_01').test(hakutapa);
+  const isErillishaku = new RegExp('^hakutapa_02').test(hakutapa);
+
+  let enhancedErrorBuilder = errorBuilder
+    .validateArrayMinLength('kieliversiot.languages', 1)
+    .validateTranslations('nimi.nimi', kielivalinta)
+    .validateExistence('kohdejoukko.kohde')
+    .validateExistence('hakutapa.tapa')
+    .validateArray('aikataulut.hakuaika', eb => {
+      if (isErillishaku || isYhteishaku) {
+        return eb.validateExistence('alkaa').validateExistence('paattyy');
+      }
+
+      return eb.validateExistence('alkaa');
+    });
+
+  const shouldValidateContactName = !![
+    get(values, 'yhteystiedot.email'),
+    get(values, 'yhteystiedot.puhelin'),
+    get(values, 'yhteystiedot.verkkosivu'),
+  ].find(v => !!v);
+
+  if (shouldValidateContactName) {
+    enhancedErrorBuilder = enhancedErrorBuilder.validateTranslations(
+      'yhteystiedot.nimi',
+      kielivalinta,
+    );
+  }
+
+  return enhancedErrorBuilder;
+};
+
+export const validate = ({ tila, values }) => {
   if (tila === JULKAISUTILA.TALLENNETTU) {
     return {};
   }
 
-  const errors = {};
+  let errorBuilder = new ErrorBuilder({ values });
 
-  return errors;
+  errorBuilder = validateCommon({ values, errorBuilder });
+
+  return errorBuilder.getErrors();
 };

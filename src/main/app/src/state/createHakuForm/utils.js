@@ -162,11 +162,13 @@ const validateCommon = ({ values, errorBuilder }) => {
       return eb.validateExistence('alkaa');
     });
 
-  const shouldValidateContactName = !![
-    get(values, 'yhteystiedot.email'),
-    get(values, 'yhteystiedot.puhelin'),
-    get(values, 'yhteystiedot.verkkosivu'),
-  ].find(v => !!v);
+  const shouldValidateContactName = Boolean(
+    [
+      get(values, 'yhteystiedot.email'),
+      get(values, 'yhteystiedot.puhelin'),
+      get(values, 'yhteystiedot.verkkosivu'),
+    ].find(v => !!v),
+  );
 
   if (shouldValidateContactName) {
     enhancedErrorBuilder = enhancedErrorBuilder.validateTranslations(

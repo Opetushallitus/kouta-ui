@@ -32,6 +32,7 @@ const KoulutusFooter = ({ onSave = () => {}, onSaveAndPublish = () => {} }) => {
       >
         {t('yleiset.tallenna')}
       </SaveButton>
+
       <Button
         onClick={onSaveAndPublish}
         {...getTestIdProps('tallennaJaJulkaiseKoulutusButton')}
@@ -46,10 +47,10 @@ export default connect(
   null,
   dispatch => ({
     onSave: () => {
-      dispatch(submitKoulutusForm({ tila: JULKAISUTILA.TALLENNETTU }));
+      return dispatch(submitKoulutusForm({ tila: JULKAISUTILA.TALLENNETTU }));
     },
     onSaveAndPublish: () => {
-      dispatch(submitKoulutusForm({ tila: JULKAISUTILA.JULKAISTU }));
+      return dispatch(submitKoulutusForm({ tila: JULKAISUTILA.JULKAISTU }));
     },
   }),
 )(KoulutusFooter);

@@ -3,6 +3,7 @@ import {
   getRadio,
   getSelectOption,
   fillDateTimeInput,
+  chooseKieliversiotLanguages,
 } from '../../utils';
 
 import { stubHakuFormRoutes } from '../../hakuFormUtils';
@@ -19,6 +20,7 @@ const fillPohjaSection = cy => {
 
 const fillKieliversiotSection = cy => {
   getByTestId('kieliversiotSection', cy).within(() => {
+    chooseKieliversiotLanguages(['fi'], cy);
     jatka(cy);
   });
 };
@@ -144,7 +146,7 @@ const fillHakulomakeSection = cy => {
 };
 
 const tallenna = cy => {
-  getByTestId('tallennaHakuButton', cy).click({ force: true });
+  getByTestId('tallennaJaJulkaiseHakuButton', cy).click({ force: true });
 };
 
 const fillYhteystiedotSection = cy => {
@@ -197,9 +199,9 @@ describe('createHakuForm', () => {
       expect(request.body).to.deep.equal({
         organisaatioOid: '1.1.1.1.1.1',
         muokkaaja: '1.2.246.562.24.62301161440',
-        tila: 'tallennettu',
+        tila: 'julkaistu',
         alkamiskausiKoodiUri: 'kausi_0#1',
-        kielivalinta: ['fi', 'sv'],
+        kielivalinta: ['fi'],
         hakutapaKoodiUri: 'hakutapa_0#1',
         hakuajat: [{ alkaa: '2019-04-02T10:45', paattyy: '2019-11-25T23:59' }],
         hakukohteenLiittamisenTakaraja: '2019-12-24T21:20',

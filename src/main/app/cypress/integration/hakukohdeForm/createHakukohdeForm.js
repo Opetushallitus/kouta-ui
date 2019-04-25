@@ -6,6 +6,7 @@ import {
   selectOption,
   getCheckbox,
   fillDateTimeInput,
+  chooseKieliversiotLanguages,
 } from '../../utils';
 
 import koulutus from '../../data/koulutus';
@@ -22,11 +23,12 @@ const lisaa = cy => {
 };
 
 const tallenna = cy => {
-  getByTestId('tallennaHakukohdeButton', cy).click({ force: true });
+  getByTestId('tallennaJaJulkaiseHakukohdeButton', cy).click({ force: true });
 };
 
 const fillKieliversiotSection = cy => {
   getByTestId('kieliversiotSection', cy).within(() => {
+    chooseKieliversiotLanguages(['fi'], cy);
     jatka(cy);
   });
 };
@@ -259,7 +261,7 @@ describe('createHakukohdeForm', () => {
       expect(request.body).to.deep.equal({
         alkamiskausiKoodiUri: 'kausi_0#1',
         kaytetaanHaunAikataulua: false,
-        kielivalinta: ['fi', 'sv'],
+        kielivalinta: ['fi'],
         aloituspaikat: 100,
         hakuajat: [{ alkaa: '2019-04-02T10:45', paattyy: '2019-11-25T23:59' }],
         liitteetOnkoSamaToimitusaika: false,
@@ -317,7 +319,7 @@ describe('createHakukohdeForm', () => {
         organisaatioOid: '1.1.1.1.1.1',
         toteutusOid: '2.1.1.1.1.1',
         hakuOid: '4.1.1.1.1.1',
-        tila: 'tallennettu',
+        tila: 'julkaistu',
         muokkaaja: '1.2.246.562.24.62301161440',
       });
     });

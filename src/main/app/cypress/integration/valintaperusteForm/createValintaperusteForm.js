@@ -5,6 +5,7 @@ import {
   typeToEditor,
   getTableInput,
   getCheckbox,
+  chooseKieliversiotLanguages,
 } from '../../utils';
 
 import { stubValintaperusteFormRoutes } from '../../valintaperusteFormUtils';
@@ -18,7 +19,9 @@ const lisaa = cy => {
 };
 
 const tallenna = cy => {
-  getByTestId('tallennaValintaperusteButton', cy).click({ force: true });
+  getByTestId('tallennaJaJulkaiseValintaperusteButton', cy).click({
+    force: true,
+  });
 };
 
 const fillTyyppiSection = (tyyppi, cy) => {
@@ -36,6 +39,7 @@ const fillPohjaSection = cy => {
 
 const fillKieliversiotSection = cy => {
   getByTestId('kieliversiotSection', cy).within(() => {
+    chooseKieliversiotLanguages(['fi'], cy);
     jatka(cy);
   });
 };
@@ -160,6 +164,14 @@ const fillKielitaitovaatimuksetSection = (cy, jatkaArg = false) => {
   });
 };
 
+const fillValituksiTulemisenVahimmaisehdotSection = cy => {
+  getByTestId('valituksiTuleminenSection', cy).within(() => {
+    cy.get('textarea').type('Ehto', { force: true });
+
+    jatka(cy);
+  });
+};
+
 describe('createValintaperusteForm', () => {
   const organisaatioOid = '1.1.1.1.1.1';
 
@@ -184,6 +196,7 @@ describe('createValintaperusteForm', () => {
     fillHakutavanRajausSection(cy);
     fillKohdejoukonRajausSection(cy);
     fillNimiSection(cy);
+    fillValituksiTulemisenVahimmaisehdotSection(cy);
     fillValintatapaSection(cy);
     fillKielitaitovaatimuksetSection(cy);
 
@@ -191,10 +204,10 @@ describe('createValintaperusteForm', () => {
 
     cy.wait('@createValintaperusteRequest').then(({ request }) => {
       expect(request.body).to.deep.equal({
-        tila: 'tallennettu',
+        tila: 'julkaistu',
         muokkaaja: '1.2.246.562.24.62301161440',
         organisaatioOid: '1.1.1.1.1.1',
-        kielivalinta: ['fi', 'sv'],
+        kielivalinta: ['fi'],
         hakutapaKoodiUri: 'hakutapa_0#1',
         kohdejoukkoKoodiUri: 'haunkohdejoukko_0#1',
         nimi: { fi: 'Valintaperusteen nimi' },
@@ -251,6 +264,9 @@ describe('createValintaperusteForm', () => {
           ],
           osaamistaustaKoodiUrit: [],
           kuvaus: {},
+          valituksiTulemisenVahimmaisehto: {
+            fi: 'Ehto',
+          },
         },
       });
     });
@@ -271,6 +287,7 @@ describe('createValintaperusteForm', () => {
     fillHakutavanRajausSection(cy);
     fillKohdejoukonRajausSection(cy);
     fillNimiSection(cy);
+    fillValituksiTulemisenVahimmaisehdotSection(cy);
     fillOsaamistaustaSection(cy);
     fillValintatapaSection(cy);
     fillKielitaitovaatimuksetSection(cy, true);
@@ -280,10 +297,10 @@ describe('createValintaperusteForm', () => {
 
     cy.wait('@createValintaperusteRequest').then(({ request }) => {
       expect(request.body).to.deep.equal({
-        tila: 'tallennettu',
+        tila: 'julkaistu',
         muokkaaja: '1.2.246.562.24.62301161440',
         organisaatioOid: '1.1.1.1.1.1',
-        kielivalinta: ['fi', 'sv'],
+        kielivalinta: ['fi'],
         hakutapaKoodiUri: 'hakutapa_0#1',
         kohdejoukkoKoodiUri: 'haunkohdejoukko_0#1',
         nimi: { fi: 'Valintaperusteen nimi' },
@@ -338,6 +355,9 @@ describe('createValintaperusteForm', () => {
               ],
             },
           ],
+          valituksiTulemisenVahimmaisehto: {
+            fi: 'Ehto',
+          },
           osaamistaustaKoodiUrit: ['osaamistausta_0#1'],
           kuvaus: { fi: '<p>Loppukuvaus</p>' },
         },

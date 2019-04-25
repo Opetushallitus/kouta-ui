@@ -138,6 +138,8 @@ export default {
     tiedostonLataaminenEpaonnistui:
       'Tiedoston lataaminen epäonnistui, yritä uudelleen',
     ladatutTiedostot: 'Ladatut tiedostot',
+    varmistaLomakkeenKentat:
+      'Varmistathan että olet täyttänyt lomakkeen kaikki pakolliset kentät',
   },
   validointivirheet: {
     syotaArvo: 'Syötä kentälle arvo',
@@ -292,5 +294,8 @@ export default {
     valitseTapa: 'Valitse tapa',
     valintatapajononNimi: 'Valintatapajonon nimi',
     valitseKoulutustyyppi: 'Valitse koulutustyyppi',
+    kerroValituksiTulemisenVahimmaisehdoista:
+      'Kerro valituksi tulemisen vähimmäisehdoista',
+    valituksiTulemisenVahimmaisehdot: 'Valituksi tulemisen vähimmäisehdot',
   },
 };

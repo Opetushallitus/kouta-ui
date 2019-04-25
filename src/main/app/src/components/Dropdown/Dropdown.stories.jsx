@@ -1,11 +1,13 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 
 import Dropdown, {
   UncontrolledDropdown,
   DropdownMenu,
   DropdownMenuItem,
 } from './index';
+
 import Button from '../Button';
 
 const menu = (
@@ -18,7 +20,12 @@ const menu = (
 
 storiesOf('Dropdown', module)
   .add('Basic', () => (
-    <Dropdown overlay={menu} visible>
+    <Dropdown
+      overlay={menu}
+      onOutsideClick={action('outsideClick')}
+      onOverlayClick={action('overlayClick')}
+      visible
+    >
       {({ ref }) => <Button ref={ref}>Dropdown</Button>}
     </Dropdown>
   ))

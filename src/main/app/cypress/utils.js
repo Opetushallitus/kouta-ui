@@ -62,3 +62,13 @@ export const fillDateTimeInput = ({ date, time, cy }) => {
       .type(time, { force: true });
   });
 };
+
+export const chooseKieliversiotLanguages = (languages, cy) => {
+  cy.get('input[name=sv]').uncheck();
+  cy.get('input[name=fi]').uncheck();
+  cy.get('input[name=en]').uncheck();
+
+  languages.forEach(language => {
+    cy.get(`input[name=${language}]`).check();
+  });
+};

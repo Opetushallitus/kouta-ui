@@ -105,6 +105,9 @@ describe('editValintaperusteForm', () => {
           ],
           osaamistaustaKoodiUrit: [],
           kuvaus: {},
+          valituksiTulemisenVahimmaisehto: {
+            fi: 'Ehto',
+          },
         },
         organisaatioOid: '1.1.1.1.1.1',
         muokkaaja: '1.2.246.562.24.62301161440',
@@ -197,6 +200,9 @@ describe('editValintaperusteForm', () => {
           ],
           osaamistaustaKoodiUrit: ['osaamistausta_0#1'],
           kuvaus: { fi: '<p>Loppukuvaus</p>' },
+          valituksiTulemisenVahimmaisehto: {
+            fi: 'Ehto',
+          },
         },
         organisaatioOid: '1.1.1.1.1.1',
         muokkaaja: '1.2.246.562.24.62301161440',

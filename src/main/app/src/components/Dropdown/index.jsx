@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useRef, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { Manager, Reference, Popper } from 'react-popper';
 import styled from 'styled-components';
@@ -111,13 +111,21 @@ const DropdownDialog = ({
               >
                 {overlay}
               </div>
-            )
+            );
           }}
         </Popper>
       ))
     }
   </Transition>
 );
+
+const createForwardingRef = memoize((targetRef, ref) => {
+  return node => {
+    targetRef.current = node;
+
+    ref(node);
+  };
+});
 
 const Dropdown = ({
   placement: defaultPlacement = 'bottom-start',
@@ -126,15 +134,54 @@ const Dropdown = ({
   children = () => {},
   portalTarget,
   overflow,
+  onOutsideClick,
+  onOverlayClick,
   ...props
 }) => {
   const modifiers = {
     ...(overflow && { preventOverflow: { enabled: false } }),
   };
 
+  const overlayRef = useRef();
+  const targetRef = useRef();
+  const wrappedOverlay = overlay ? <div ref={overlayRef}>{overlay}</div> : null;
+
+  const childrenFn = useCallback(
+    ({ ref, ...rest }) => {
+      return children({
+        ref: createForwardingRef(targetRef, ref),
+        ...rest,
+      });
+    },
+    [children],
+  );
+
+  const onWindowClick = useCallback(
+    e => {
+      const isTriggerElement =
+        targetRef.current &&
+        (targetRef.current === e.target ||
+          targetRef.current.contains(e.target));
+
+      const isOverlay =
+        overlayRef.current &&
+        (overlayRef.current === e.target ||
+          overlayRef.current.contains(e.target));
+
+      if (isOverlay && isFunction(onOverlayClick)) {
+        return onOverlayClick();
+      }
+
+      if (!isTriggerElement && isFunction(onOutsideClick) && visible) {
+        return onOutsideClick();
+      }
+    },
+    [onOverlayClick, onOutsideClick, visible],
+  );
+
   const content = (
     <DropdownDialog
-      overlay={overlay}
+      overlay={wrappedOverlay}
       modifiers={modifiers}
       visible={visible}
       placement={defaultPlacement}
@@ -143,10 +190,15 @@ const Dropdown = ({
   );
 
   return (
-    <Manager>
-      <Reference>{children}</Reference>
-      {portalTarget ? createPortal(content, portalTarget) : content}
-    </Manager>
+    <>
+      {isFunction(onOutsideClick) || isFunction(onOverlayClick) ? (
+        <EventListener target="window" onClick={onWindowClick} />
+      ) : null}
+      <Manager>
+        <Reference>{childrenFn}</Reference>
+        {portalTarget ? createPortal(content, portalTarget) : content}
+      </Manager>
+    </>
   );
 };
 
@@ -176,51 +228,12 @@ export class UncontrolledDropdown extends Component {
     }));
   };
 
-  onOverlayClick = () => {
-    if (this.props.toggleOnOverlayClick) {
-      this.onToggle();
-    }
-  };
-
-  createWrappedRef = memoize(ref => {
-    return node => {
-      this.triggerElement = node;
-
-      ref(node);
-    };
-  });
-
   renderChildren = ({ ref }) => {
-    const wrappedRef = this.createWrappedRef(ref);
-
     return this.props.children({
-      ref: wrappedRef,
+      ref,
       visible: this.state.visible,
       onToggle: this.onToggle,
     });
-  };
-
-  onWindowClick = e => {
-    const { visible } = this.state;
-    const { toggleOnOutsideClick, toggleOnOverlayClick } = this.props;
-
-    const isTriggerElement =
-      this.triggerElement &&
-      (this.triggerElement === e.target ||
-        this.triggerElement.contains(e.target));
-
-    const isOverlay =
-      this.overlayRef.current &&
-      (this.overlayRef.current === e.target ||
-        this.overlayRef.current.contains(e.target));
-
-    if (isOverlay && !toggleOnOverlayClick) {
-      return;
-    }
-
-    if (!isTriggerElement && toggleOnOutsideClick && visible) {
-      this.onToggle();
-    }
   };
 
   renderOverlay() {
@@ -235,6 +248,7 @@ export class UncontrolledDropdown extends Component {
 
   render() {
     const { visible } = this.state;
+
     const {
       defaultVisible,
       children,
@@ -244,14 +258,15 @@ export class UncontrolledDropdown extends Component {
       ...props
     } = this.props;
 
-    const wrappedOverlay = (
-      <div ref={this.overlayRef}>{this.renderOverlay()}</div>
-    );
-
     return (
       <>
-        <EventListener target="window" onClick={this.onWindowClick} />
-        <Dropdown visible={visible} overlay={wrappedOverlay} {...props}>
+        <Dropdown
+          visible={visible}
+          overlay={this.renderOverlay()}
+          onOutsideClick={toggleOnOutsideClick ? this.onToggle : null}
+          onOverlayClick={toggleOnOverlayClick ? this.onToggle : null}
+          {...props}
+        >
           {this.renderChildren}
         </Dropdown>
       </>

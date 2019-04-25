@@ -135,6 +135,10 @@ Object {
         "valintatapaKoodiUri": "tapa_1#1",
       },
     ],
+    "valituksiTulemisenVahimmaisehto": Object {
+      "fi": "Fi ehto",
+      "sv": "Sv ehto",
+    },
   },
   "nimi": Object {
     "fi": "Fi nimi",
@@ -303,6 +307,12 @@ Object {
         "vahimmaispistemaara": 10,
       },
     ],
+  },
+  "valituksiTuleminen": Object {
+    "ehto": Object {
+      "fi": "Fi ehto",
+      "sv": "Sv ehto",
+    },
   },
 }
 `;

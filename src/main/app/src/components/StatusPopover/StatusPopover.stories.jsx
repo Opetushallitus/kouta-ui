@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 
 import StatusPopover from './index';
 import Button from '../Button';
@@ -16,6 +17,7 @@ storiesOf('StatusPopover', module).add('Basic', () => (
         </Typography>
       }
       status="success"
+      onClose={action('close')}
       visible
     >
       {({ ref }) => <Button ref={ref}>Button</Button>}

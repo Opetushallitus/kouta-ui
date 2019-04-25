@@ -64,11 +64,11 @@ export const fillDateTimeInput = ({ date, time, cy }) => {
 };
 
 export const chooseKieliversiotLanguages = (languages, cy) => {
-  cy.get('input[name=sv]').uncheck();
-  cy.get('input[name=fi]').uncheck();
-  cy.get('input[name=en]').uncheck();
+  cy.get('input[name=sv]').uncheck({ force: true });
+  cy.get('input[name=fi]').uncheck({ force: true });
+  cy.get('input[name=en]').uncheck({ force: true });
 
   languages.forEach(language => {
-    cy.get(`input[name=${language}]`).check();
+    cy.get(`input[name=${language}]`).check({ force: true });
   });
 };

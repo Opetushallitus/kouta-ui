@@ -1,6 +1,52 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
+.c2 {
+  display: inline-block;
+}
+
+.c7 {
+  fill: none;
+  stroke: white;
+  stroke-width: 2px;
+}
+
+.c4 {
+  border: 0;
+  -webkit-clip: rect(0 0 0 0);
+  clip: rect(0 0 0 0);
+  -webkit-clippath: inset(50%);
+  clippath: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.c5 {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-color: white;
+  border: 1px solid #cccccc;
+  box-shadow: 0 0 2px 0 rgba(0,0,0,0),inset 0 1px 2px 0 rgba(0,0,0,0.1);
+  border-radius: 2px;
+  -webkit-transition: box-shadow 0.25s,border-color 0.25s,background-color 0.25s;
+  transition: box-shadow 0.25s,border-color 0.25s,background-color 0.25s;
+}
+
+.c3:focus + .c5 {
+  border-color: #2da0c7;
+  box-shadow: 0 0 0 1px #2da0c7;
+}
+
+.c5 .c6 {
+  visibility: hidden;
+}
+
 .c0 {
   font-family: 'Roboto',sans-serif;
   font-size: 1rem;
@@ -16,21 +62,18 @@ exports[`renders correctly 1`] = `
   align-items: center;
 }
 
-.c3 {
+.c8 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
-  margin-left: 6px;
+  margin-left: 9px;
 }
 
 .c1 {
   -webkit-flex: 0;
   -ms-flex: 0;
   flex: 0;
-}
-
-.c2 {
-  font-size: inherit;
+  line-height: 0;
 }
 
 <styled.label
@@ -44,23 +87,46 @@ exports[`renders correctly 1`] = `
       <div
         className="c1"
       >
-        <styled.input
-          disabled={false}
-        >
-          <input
+        <styled.div>
+          <div
             className="c2"
-            disabled={false}
-            type="checkbox"
-          />
-        </styled.input>
+          >
+            <styled.input
+              disabled={false}
+            >
+              <input
+                className="c3 c4"
+                disabled={false}
+                type="checkbox"
+              />
+            </styled.input>
+            <styled.div
+              error={false}
+            >
+              <div
+                className="c5"
+              >
+                <styled.svg
+                  viewBox="0 0 24 24"
+                >
+                  <svg
+                    className="c6 c7"
+                    viewBox="0 0 24 24"
+                  >
+                    <polyline
+                      points="20 6 9 17 4 12"
+                    />
+                  </svg>
+                </styled.svg>
+              </div>
+            </styled.div>
+          </div>
+        </styled.div>
       </div>
     </styled.div>
-    <styled.div
-      disabled={false}
-    >
+    <styled.div>
       <div
-        className="c3"
-        disabled={false}
+        className="c8"
       >
         Checkbox
       </div>

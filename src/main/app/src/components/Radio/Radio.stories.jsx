@@ -12,6 +12,9 @@ storiesOf('Radio', module)
     </>
   ))
   .add('With disabled', () => <Radio checked={true} disabled>Radio</Radio>)
+  .add('With error', () => (
+      <Radio value="a" error>Radio A</Radio>
+  ))
   .add('With radio group', () => (
     <RadioGroup value="b" onChange={action('change')}>
       <Radio value="a">Radio A</Radio>

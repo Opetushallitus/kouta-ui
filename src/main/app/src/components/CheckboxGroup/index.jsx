@@ -30,7 +30,7 @@ const CheckboxGroup = ({
   value = [],
   onChange,
   options = [],
-  error,
+  error = false,
   disabled = false,
 }) => {
   return options.map(({ value: optionValue, label }) => (
@@ -40,6 +40,7 @@ const CheckboxGroup = ({
       onChange={makeOnCheckboxChange({ value, onChange, optionValue, options })}
       disabled={disabled}
       name={optionValue}
+      error={error}
     >
       {label}
     </Checkbox>

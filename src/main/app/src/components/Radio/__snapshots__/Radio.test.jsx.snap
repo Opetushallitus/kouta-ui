@@ -1,6 +1,102 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
+.c0 {
+  margin-bottom: 4px;
+}
+
+.c7 {
+  background-color: white;
+  border-radius: 50%;
+  width: 0.4em;
+  height: 0.4em;
+}
+
+.c4 {
+  border: 0;
+  -webkit-clip: rect(0 0 0 0);
+  clip: rect(0 0 0 0);
+  -webkit-clippath: inset(50%);
+  clippath: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.c5 {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-color: white;
+  border-radius: 50%;
+  border: 1px solid #cccccc;
+  box-shadow: 0 0 2px 0 rgba(0,0,0,0),inset 0 1px 2px 0 rgba(0,0,0,0.1);
+  -webkit-transition: box-shadow 0.25s,border-color 0.25s,background-color 0.25s;
+  transition: box-shadow 0.25s,border-color 0.25s,background-color 0.25s;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  line-height: 0;
+}
+
+.c3:focus + .c5 {
+  border-color: #2da0c7;
+  box-shadow: 0 0 0 1px #2da0c7;
+}
+
+.c5 .c6 {
+  visibility: hidden;
+}
+
+.c9 {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-color: white;
+  border-radius: 50%;
+  border: 1px solid #cccccc;
+  box-shadow: 0 0 2px 0 rgba(0,0,0,0),inset 0 1px 2px 0 rgba(0,0,0,0.1);
+  -webkit-transition: box-shadow 0.25s,border-color 0.25s,background-color 0.25s;
+  transition: box-shadow 0.25s,border-color 0.25s,background-color 0.25s;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  line-height: 0;
+  background-color: #2da0c7;
+  border-color: #2da0c7;
+}
+
+.c3:focus + .c9 {
+  border-color: #2da0c7;
+  box-shadow: 0 0 0 1px #2da0c7;
+}
+
+.c9 .c6 {
+  visibility: visible;
+}
+
 .c1 {
   font-family: 'Roboto',sans-serif;
   font-size: 1rem;
@@ -10,27 +106,24 @@ exports[`renders correctly 1`] = `
   display: flex;
   line-height: 1.5;
   color: #666666;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
-.c0 {
-  margin-bottom: 4px;
-}
-
-.c4 {
+.c8 {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
-  margin-left: 6px;
+  margin-left: 9px;
 }
 
 .c2 {
   -webkit-flex: 0;
   -ms-flex: 0;
   flex: 0;
-}
-
-.c3 {
-  font-size: inherit;
+  line-height: 0;
 }
 
 <div>
@@ -60,21 +153,33 @@ exports[`renders correctly 1`] = `
               >
                 <input
                   checked={false}
-                  className="c3"
+                  className="c3 c4"
                   disabled={false}
                   onChange={[Function]}
                   type="radio"
                   value="a"
                 />
               </styled.input>
+              <styled.div
+                checked={false}
+                error={false}
+              >
+                <div
+                  checked={false}
+                  className="c5"
+                >
+                  <styled.svg>
+                    <svg
+                      className="c6 c7"
+                    />
+                  </styled.svg>
+                </div>
+              </styled.div>
             </div>
           </styled.div>
-          <styled.div
-            disabled={false}
-          >
+          <styled.div>
             <div
-              className="c4"
-              disabled={false}
+              className="c8"
             >
               Radio A
             </div>
@@ -109,21 +214,33 @@ exports[`renders correctly 1`] = `
               >
                 <input
                   checked={true}
-                  className="c3"
+                  className="c3 c4"
                   disabled={false}
                   onChange={[Function]}
                   type="radio"
                   value="b"
                 />
               </styled.input>
+              <styled.div
+                checked={true}
+                error={false}
+              >
+                <div
+                  checked={true}
+                  className="c9"
+                >
+                  <styled.svg>
+                    <svg
+                      className="c6 c7"
+                    />
+                  </styled.svg>
+                </div>
+              </styled.div>
             </div>
           </styled.div>
-          <styled.div
-            disabled={false}
-          >
+          <styled.div>
             <div
-              className="c4"
-              disabled={false}
+              className="c8"
             >
               Radio B
             </div>
@@ -158,21 +275,33 @@ exports[`renders correctly 1`] = `
               >
                 <input
                   checked={false}
-                  className="c3"
+                  className="c3 c4"
                   disabled={false}
                   onChange={[Function]}
                   type="radio"
                   value="c"
                 />
               </styled.input>
+              <styled.div
+                checked={false}
+                error={false}
+              >
+                <div
+                  checked={false}
+                  className="c5"
+                >
+                  <styled.svg>
+                    <svg
+                      className="c6 c7"
+                    />
+                  </styled.svg>
+                </div>
+              </styled.div>
             </div>
           </styled.div>
-          <styled.div
-            disabled={false}
-          >
+          <styled.div>
             <div
-              className="c4"
-              disabled={false}
+              className="c8"
             >
               Radio C
             </div>

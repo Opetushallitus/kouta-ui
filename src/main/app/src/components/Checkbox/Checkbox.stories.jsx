@@ -6,12 +6,27 @@ import Checkbox from './index';
 
 storiesOf('Checkbox', module)
   .add('Basic', () => (
-    <Checkbox checked={true} onChange={action('change')}>
-      Checkbox
-    </Checkbox>
+    <>
+      <Checkbox checked={false} onChange={action('change')}>
+        Checkbox
+      </Checkbox>
+      <Checkbox checked={true} onChange={action('change')}>
+        Checkbox
+      </Checkbox>
+    </>
   ))
   .add('With disabled', () => (
     <Checkbox checked={true} onChange={action('change')} disabled>
       Checkbox
     </Checkbox>
+  ))
+  .add('With error', () => (
+    <>
+      <Checkbox checked={false} onChange={action('change')} error>
+        Checkbox
+      </Checkbox>
+      <Checkbox checked={true} onChange={action('change')} error>
+        Checkbox
+      </Checkbox>
+    </>
   ));

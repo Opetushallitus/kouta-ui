@@ -4,20 +4,6 @@ import styled, { css } from 'styled-components';
 import { getThemeProp } from '../../theme';
 import { isArray } from '../../utils';
 
-const Label = styled.label`
-  font-family: ${getThemeProp('typography.fontFamily')};
-  font-size: 1rem;
-  display: flex;
-  line-height: 1.5;
-  color: ${getThemeProp('palette.text.primary')};
-
-  ${({ disabled }) =>
-    disabled &&
-    css`
-      cursor: not-allowed;
-    `}
-`;
-
 const RadioContainer = styled.div`
   ${({ last }) =>
     !last &&
@@ -26,9 +12,82 @@ const RadioContainer = styled.div`
     `}
 `;
 
+const Icon = styled.svg`
+  background-color: white;
+  border-radius: 50%;
+  width: 0.4em;
+  height: 0.4em;
+`;
+const HiddenRadio = styled.input.attrs({ type: 'radio' })`
+  border: 0;
+  clip: rect(0 0 0 0);
+  clippath: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+`;
+
+const StyledRadio = styled.div`
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-color: white;
+  border-radius: 50%;
+  border: 1px solid ${getThemeProp('palette.border')};
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0), inset 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.25s, border-color 0.25s, background-color 0.25s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 0;
+
+  ${HiddenRadio}:focus + & {
+    border-color: ${getThemeProp('palette.primary.main')};
+    box-shadow: 0 0 0 1px ${getThemeProp('palette.primary.main')};
+  }
+
+  ${({ checked }) =>
+    checked &&
+    css`
+      background-color: ${getThemeProp('palette.primary.main')};
+      border-color: ${getThemeProp('palette.primary.main')};
+    `}
+
+  ${({ error }) =>
+    error &&
+    css`
+      box-shadow: 0 0 0 1px ${getThemeProp('palette.danger.main')};
+      border-color: ${getThemeProp('palette.danger.main')};
+    `}
+
+  ${Icon} {
+    visibility: ${props => (props.checked ? 'visible' : 'hidden')};
+  }
+`;
+
+const Label = styled.label`
+  font-family: ${getThemeProp('typography.fontFamily')};
+  font-size: 1rem;
+  display: flex;
+  line-height: 1.5;
+  color: ${getThemeProp('palette.text.primary')};
+  align-items: center;
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      opacity: 0.5;
+      cursor: not-allowed;
+    `}
+`;
+
 const LabelWrapper = styled.div`
   flex: 1;
-  margin-left: 6px;
+  margin-left: 9px;
 
   ${({ disabled }) =>
     disabled &&
@@ -39,23 +98,25 @@ const LabelWrapper = styled.div`
 
 const RadioWrapper = styled.div`
   flex: 0;
-`;
-
-const RadioInput = styled.input.attrs({ type: 'radio' })`
-  font-size: inherit;
+  line-height: 0;
 `;
 
 export const Radio = ({
-  children = null,
+  className,
+  checked,
+  children,
+  error = false,
   disabled = false,
-  error,
   ...props
 }) => (
   <Label disabled={disabled}>
     <RadioWrapper>
-      <RadioInput disabled={disabled} {...props} />
+      <HiddenRadio checked={checked} disabled={disabled} {...props} />
+      <StyledRadio checked={checked} error={error}>
+        <Icon />
+      </StyledRadio>
     </RadioWrapper>
-    <LabelWrapper disabled={disabled}>{children}</LabelWrapper>
+    <LabelWrapper>{children}</LabelWrapper>
   </Label>
 );
 
@@ -64,7 +125,7 @@ export const RadioGroup = ({
   onChange,
   disabled = false,
   options,
-  error,
+  error = false,
   ...props
 }) => {
   let children = null;
@@ -78,6 +139,7 @@ export const RadioGroup = ({
         checked,
         onChange,
         disabled,
+        error,
       });
       const last = index === childrenCount - 1;
 
@@ -90,6 +152,7 @@ export const RadioGroup = ({
           checked={value !== undefined && value === optionValue}
           onChange={onChange}
           value={optionValue}
+          error={error}
         >
           {label}
         </Radio>

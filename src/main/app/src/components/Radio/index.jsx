@@ -60,7 +60,6 @@ const StyledRadio = styled.div`
   ${({ error }) =>
     error &&
     css`
-      box-shadow: 0 0 0 1px ${getThemeProp('palette.danger.main')};
       border-color: ${getThemeProp('palette.danger.main')};
     `}
 

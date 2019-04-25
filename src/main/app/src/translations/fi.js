@@ -294,8 +294,5 @@ export default {
     valitseTapa: 'Valitse tapa',
     valintatapajononNimi: 'Valintatapajonon nimi',
     valitseKoulutustyyppi: 'Valitse koulutustyyppi',
-    kerroValituksiTulemisenVahimmaisehdoista:
-      'Kerro valituksi tulemisen vähimmäisehdoista',
-    valituksiTulemisenVahimmaisehdot: 'Valituksi tulemisen vähimmäisehdot',
   },
 };

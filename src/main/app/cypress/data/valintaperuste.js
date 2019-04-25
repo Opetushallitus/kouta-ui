@@ -69,9 +69,6 @@ export default ({ tyyppi = 'amm' } = {}) => {
           ],
         },
       ],
-      valituksiTulemisenVahimmaisehto: {
-        fi: 'Ehto',
-      },
     },
     organisaatioOid: '1.2.246.562.10.594252633210',
     muokkaaja: '1.2.246.562.24.62301161440',

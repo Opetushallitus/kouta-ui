@@ -164,14 +164,6 @@ const fillKielitaitovaatimuksetSection = (cy, jatkaArg = false) => {
   });
 };
 
-const fillValituksiTulemisenVahimmaisehdotSection = cy => {
-  getByTestId('valituksiTuleminenSection', cy).within(() => {
-    cy.get('textarea').type('Ehto', { force: true });
-
-    jatka(cy);
-  });
-};
-
 describe('createValintaperusteForm', () => {
   const organisaatioOid = '1.1.1.1.1.1';
 
@@ -196,7 +188,6 @@ describe('createValintaperusteForm', () => {
     fillHakutavanRajausSection(cy);
     fillKohdejoukonRajausSection(cy);
     fillNimiSection(cy);
-    fillValituksiTulemisenVahimmaisehdotSection(cy);
     fillValintatapaSection(cy);
     fillKielitaitovaatimuksetSection(cy);
 
@@ -264,9 +255,6 @@ describe('createValintaperusteForm', () => {
           ],
           osaamistaustaKoodiUrit: [],
           kuvaus: {},
-          valituksiTulemisenVahimmaisehto: {
-            fi: 'Ehto',
-          },
         },
       });
     });
@@ -287,7 +275,6 @@ describe('createValintaperusteForm', () => {
     fillHakutavanRajausSection(cy);
     fillKohdejoukonRajausSection(cy);
     fillNimiSection(cy);
-    fillValituksiTulemisenVahimmaisehdotSection(cy);
     fillOsaamistaustaSection(cy);
     fillValintatapaSection(cy);
     fillKielitaitovaatimuksetSection(cy, true);
@@ -355,9 +342,6 @@ describe('createValintaperusteForm', () => {
               ],
             },
           ],
-          valituksiTulemisenVahimmaisehto: {
-            fi: 'Ehto',
-          },
           osaamistaustaKoodiUrit: ['osaamistausta_0#1'],
           kuvaus: { fi: '<p>Loppukuvaus</p>' },
         },

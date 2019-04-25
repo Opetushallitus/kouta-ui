@@ -114,12 +114,6 @@ test('getValintaperusteByValues returns correct valintaperuste given form values
     tyyppi: {
       tyyppi: 'tyyppi_1#1',
     },
-    valituksiTuleminen: {
-      ehto: {
-        fi: 'Fi ehto',
-        sv: 'Sv ehto',
-      },
-    },
   });
 
   expect(Valintaperuste).toMatchSnapshot();
@@ -254,10 +248,6 @@ test('getValuesByValintaperuste returns correct form values given valintaperuste
           valintatapaKoodiUri: 'tapa_1#1',
         },
       ],
-      valituksiTulemisenVahimmaisehto: {
-        fi: 'Fi ehto',
-        sv: 'Sv ehto',
-      },
     },
     nimi: {
       fi: 'Fi nimi',

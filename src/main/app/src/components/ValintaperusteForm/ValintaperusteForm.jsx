@@ -21,7 +21,6 @@ import OsaamistaustaSection from './OsaamistaustaSection';
 import TyyppiSection from './TyyppiSection';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
-import ValituksiTuleminenSection from './ValituksiTuleminenSection';
 
 const WithLanguagesAndTyyppiValue = formValues({
   languages: 'kieliversiot.languages',
@@ -119,17 +118,6 @@ const ValintaperusteForm = ({
                 {...getTestIdProps('nimiSection')}
               >
                 <NimiSection />
-              </FormCollapse>
-
-              <FormCollapse
-                header={t(
-                  'valintaperustelomake.valituksiTulemisenVahimmaisehdot',
-                )}
-                section="valituksiTuleminen"
-                languages={languages}
-                {...getTestIdProps('valituksiTuleminenSection')}
-              >
-                <ValituksiTuleminenSection />
               </FormCollapse>
 
               {isKorkeakoulu ? (

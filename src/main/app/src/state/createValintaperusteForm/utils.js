@@ -170,11 +170,6 @@ export const getValintaperusteByValues = values => {
 
   const koulutustyyppi = get(values, 'tyyppi.tyyppi') || null;
 
-  const valituksiTulemisenVahimmaisehto = pick(
-    get(values, 'valituksiTuleminen.ehto'),
-    kielivalinta,
-  );
-
   return {
     kielivalinta,
     hakutapaKoodiUri,
@@ -187,7 +182,6 @@ export const getValintaperusteByValues = values => {
       kielitaitovaatimukset,
       osaamistaustaKoodiUrit,
       kuvaus,
-      valituksiTulemisenVahimmaisehto,
     },
   };
 };
@@ -207,7 +201,6 @@ export const getValuesByValintaperuste = valintaperuste => {
     kielitaitovaatimukset: kielitaitovaatimuksetArg = [],
     valintatavat = [],
     kuvaus = {},
-    valituksiTulemisenVahimmaisehto = {},
   } = metadata;
 
   const kielitaitovaatimukset = (kielitaitovaatimuksetArg || []).map(
@@ -305,9 +298,6 @@ export const getValuesByValintaperuste = valintaperuste => {
     tyyppi: {
       tyyppi: koulutustyyppi,
     },
-    valituksiTuleminen: {
-      ehto: valituksiTulemisenVahimmaisehto || {},
-    },
   };
 };
 
@@ -319,7 +309,6 @@ const validateCommon = ({ errorBuilder, values }) => {
     .validateExistence('hakutavanRajaus.hakutapa')
     .validateExistence('kohdejoukonRajaus.kohdejoukko')
     .validateTranslations('nimi.nimi', kieliversiot)
-    .validateTranslations('valituksiTuleminen.ehto', kieliversiot)
     .validateArray('valintatapa.valintatavat', eb => {
       return eb
         .validateExistence('tapa')

@@ -334,7 +334,7 @@ export const validate = ({ tila, values }) => {
   errorBuilder = validateEssentials({ errorBuilder, values });
 
   if (tila === JULKAISUTILA.TALLENNETTU) {
-    return {};
+    return errorBuilder.getErrors();
   }
 
   errorBuilder = validateCommon({ errorBuilder, values });

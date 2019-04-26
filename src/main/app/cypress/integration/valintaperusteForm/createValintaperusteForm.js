@@ -81,8 +81,6 @@ const lisaaSisaltoa = (tyyppi, cy) => {
 
 const fillValintatapaSection = cy => {
   getByTestId('valintatapaSection', cy).within(() => {
-    lisaa(cy);
-
     getByTestId('valintatapalista', cy).within(() => {
       getByTestId('tapa', cy).within(() => {
         selectOption('valintatapajono_0', cy);

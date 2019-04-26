@@ -154,6 +154,7 @@ const validateCommon = ({ values, errorBuilder }) => {
     .validateTranslations('nimi.nimi', kielivalinta)
     .validateExistence('kohdejoukko.kohde')
     .validateExistence('hakutapa.tapa')
+    .validateArrayMinLength('aikataulut.hakuaika', 1, { isFieldArray: true })
     .validateArray('aikataulut.hakuaika', eb => {
       if (isErillishaku || isYhteishaku) {
         return eb.validateExistence('alkaa').validateExistence('paattyy');

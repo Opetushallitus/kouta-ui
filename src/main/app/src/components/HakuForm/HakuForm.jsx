@@ -149,7 +149,7 @@ const HakuForm = ({
                         onSave={onAttachHakukohde}
                       >
                         {({ onToggle }) => (
-                          <Flex justifyEnd full>
+                          <Flex justifyCenter full>
                             <Button onClick={onToggle} type="button">
                               {t('yleiset.liitaHakukohde')}
                             </Button>

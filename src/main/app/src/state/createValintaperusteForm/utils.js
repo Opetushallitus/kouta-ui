@@ -309,6 +309,9 @@ const validateCommon = ({ errorBuilder, values }) => {
     .validateExistence('hakutavanRajaus.hakutapa')
     .validateExistence('kohdejoukonRajaus.kohdejoukko')
     .validateTranslations('nimi.nimi', kieliversiot)
+    .validateArrayMinLength('valintatapa.valintatavat', 1, {
+      isFieldArray: true,
+    })
     .validateArray('valintatapa.valintatavat', eb => {
       return eb
         .validateExistence('tapa')

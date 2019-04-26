@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { Field, FieldArray } from 'redux-form';
 
 import Typography from '../Typography';
-import LanguageSelector from '../LanguageSelector';
 import LanguageSelect from '../LanguageSelect';
 import Spacing from '../Spacing';
 import Divider from '../Divider';
@@ -244,7 +243,7 @@ const renderMuutOsoitustavatField = ({ fields, language, t }) => {
   );
 };
 
-const KielitaitovaatimuksetSection = ({ languages }) => {
+const KielitaitovaatimuksetSection = ({ language }) => {
   const { t } = useTranslation();
 
   const { options: fullOsoitusOptions } = useKoodistoOptions({
@@ -269,19 +268,15 @@ const KielitaitovaatimuksetSection = ({ languages }) => {
   }, [fullOsoitusOptions]);
 
   return (
-    <LanguageSelector languages={languages} defaultValue="fi">
-      {({ value: activeLanguage }) => (
-        <FieldArray
-          name="kielet"
-          component={renderVaatimuksetField}
-          kielitaitoOptions={kielitaitoOptions}
-          kuvausOptions={kuvausOptions}
-          osoitusOptions={osoitusOptions}
-          language={activeLanguage}
-          t={t}
-        />
-      )}
-    </LanguageSelector>
+    <FieldArray
+      name="kielet"
+      component={renderVaatimuksetField}
+      kielitaitoOptions={kielitaitoOptions}
+      kuvausOptions={kuvausOptions}
+      osoitusOptions={osoitusOptions}
+      language={language}
+      t={t}
+    />
   );
 };
 

@@ -1,12 +1,6 @@
-import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
+import { KOULUTUSTYYPPI_CATEGORY, POHJAVALINNAT } from '../../constants';
 
 export { default } from './ValintaperusteForm';
-
-export const validate = values => {
-  const errors = {};
-
-  return errors;
-};
 
 export const initialValues = {
   tyyppi: {
@@ -14,5 +8,13 @@ export const initialValues = {
   },
   kieliversiot: {
     languages: ['fi', 'sv'],
+  },
+  pohja: {
+    pohja: {
+      tapa: POHJAVALINNAT.UUSI,
+    },
+  },
+  valintatapa: {
+    valintatavat: [{}],
   },
 };

@@ -25,38 +25,6 @@ const FieldFormGroup = ({
 };
 
 export const createComponent = (Component, mapProps) => {
-  /*class InputComponent extends React.Component {
-    constructor() {
-      super();
-
-      this.genId = generateId('FormField');
-    }
-
-    render() {
-      const { disabled, label, helperText, meta } = this.props;
-      const hasError = !!meta.error;
-      const showError = hasError;
-      const id = this.props.id || this.genId;
-
-      const children = createElement(
-        Component,
-        mapProps({ id, ...this.props }),
-      );
-
-      return (
-        <FieldFormGroup
-          error={showError}
-          helperText={showError ? meta.error : helperText}
-          label={label}
-          disabled={disabled}
-          id={id}
-        >
-          {children}
-        </FieldFormGroup>
-      );
-    }
-  }*/
-
   const InputComponent = props => {
     const idRef = useRef();
     const { t } = useTranslation();

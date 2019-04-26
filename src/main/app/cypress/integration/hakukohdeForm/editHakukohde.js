@@ -1,14 +1,18 @@
 import merge from 'lodash/merge';
 
-import { getByTestId, stubKoodistoRoute } from '../../utils';
+import { getByTestId, chooseKieliversiotLanguages } from '../../utils';
 
-import organisaatio from '../../data/organisaatio';
 import koulutus from '../../data/koulutus';
-import haku from '../../data/haku';
 import toteutus from '../../data/toteutus';
 import valintaperuste from '../../data/valintaperuste';
 import hakukohde from '../../data/hakukohde';
 import { stubHakukohdeFormRoutes } from '../../hakukohdeFormUtils';
+
+const fillKieliversiotSection = cy => {
+  getByTestId('kieliversiotSection', cy).within(() => {
+    chooseKieliversiotLanguages(['fi'], cy);
+  });
+};
 
 const tallenna = cy => {
   getByTestId('tallennaHakukohdeButton', cy).click({ force: true });
@@ -82,6 +86,7 @@ describe('createHakukohdeForm', () => {
       },
     }).as('updateHakukohdeRequest');
 
+    fillKieliversiotSection(cy);
     tallenna(cy);
 
     cy.wait('@updateHakukohdeRequest').then(({ request }) => {
@@ -147,7 +152,7 @@ describe('createHakukohdeForm', () => {
         hakuajat: [{ alkaa: '2011-11-11T10:30', paattyy: '2011-11-12T11:45' }],
         muokkaaja: '1.2.246.562.24.62301161440',
         organisaatioOid: '1.1.1.1.1.1',
-        kielivalinta: ['fi', 'sv'],
+        kielivalinta: ['fi'],
         modified: '2019-04-04T08:28',
         liitteidenToimitusaika: null,
         valintaperuste: null,

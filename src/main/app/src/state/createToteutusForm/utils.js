@@ -326,12 +326,18 @@ export const getValuesByToteutus = toteutus => {
   };
 };
 
+const validateEssentials = ({ errorBuilder, values }) => {
+  const kielivalinta = getKielivalinta(values);
+
+  return errorBuilder
+    .validateArrayMinLength('kieliversiot.languages', 1)
+    .validateTranslations('nimi.name', kielivalinta);
+};
+
 const validateCommon = ({ values, errorBuilder }) => {
   const kielivalinta = getKielivalinta(values);
 
   let enhancedErrorBuilder = errorBuilder
-    .validateArrayMinLength('kieliversiot.languages', 1)
-    .validateTranslations('nimi.name', kielivalinta)
     .validateArrayMinLength('jarjestamispaikat.jarjestajat', 1)
     .validateExistence('jarjestamistiedot.opetusaika')
     .validateArrayMinLength('jarjestamistiedot.opetuskieli', 1)
@@ -368,8 +374,10 @@ const validateKorkeakoulu = ({ values, errorBuilder }) => {
 export const validate = ({ tila, koulutustyyppi, values }) => {
   let errorBuilder = new ErrorBuilder({ values });
 
+  errorBuilder = validateEssentials({ errorBuilder, values });
+
   if (tila === JULKAISUTILA.TALLENNETTU) {
-    return {};
+    return errorBuilder.getErrors();
   }
 
   errorBuilder = validateCommon({ values, errorBuilder });

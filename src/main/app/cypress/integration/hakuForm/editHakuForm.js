@@ -1,9 +1,15 @@
 import merge from 'lodash/merge';
 
-import { getByTestId } from '../../utils';
+import { getByTestId, chooseKieliversiotLanguages } from '../../utils';
 import { stubHakuFormRoutes } from '../../hakuFormUtils';
 
 import haku from '../../data/haku';
+
+const fillKieliversiotSection = cy => {
+  getByTestId('kieliversiotSection', cy).within(() => {
+    chooseKieliversiotLanguages(['fi'], cy);
+  });
+};
 
 const tallenna = cy => {
   getByTestId('tallennaHakuButton', cy).click();
@@ -51,6 +57,8 @@ describe('editHakuForm', () => {
       },
     }).as('editHakuRequest');
 
+    fillKieliversiotSection(cy);
+
     tallenna(cy);
 
     cy.wait('@editHakuRequest').then(({ request }) => {
@@ -60,7 +68,7 @@ describe('editHakuForm', () => {
         tila: 'tallennettu',
         organisaatioOid: '1.1.1.1.1.1',
         alkamiskausiKoodiUri: 'kausi_0#1',
-        kielivalinta: ['fi', 'sv'],
+        kielivalinta: ['fi'],
         hakutapaKoodiUri: 'hakutapa_0#1',
         hakuajat: [{ alkaa: '2019-02-08T07:05', paattyy: '2020-02-08T07:05' }],
         hakukohteenLiittamisenTakaraja: '2019-02-08T07:05',

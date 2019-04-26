@@ -301,14 +301,20 @@ export const getValuesByValintaperuste = valintaperuste => {
   };
 };
 
-const validateCommon = ({ errorBuilder, values }) => {
+const validateEssentials = ({ errorBuilder, values }) => {
   const kieliversiot = getKieliversiot(values);
 
   return errorBuilder
     .validateArrayMinLength('kieliversiot.languages', 1)
+    .validateTranslations('nimi.nimi', kieliversiot);
+};
+
+const validateCommon = ({ errorBuilder, values }) => {
+  const kieliversiot = getKieliversiot(values);
+
+  return errorBuilder
     .validateExistence('hakutavanRajaus.hakutapa')
     .validateExistence('kohdejoukonRajaus.kohdejoukko')
-    .validateTranslations('nimi.nimi', kieliversiot)
     .validateArrayMinLength('valintatapa.valintatavat', 1, {
       isFieldArray: true,
     })
@@ -323,11 +329,13 @@ const validateCommon = ({ errorBuilder, values }) => {
 };
 
 export const validate = ({ tila, values }) => {
+  let errorBuilder = new ErrorBuilder({ values });
+
+  errorBuilder = validateEssentials({ errorBuilder, values });
+
   if (tila === JULKAISUTILA.TALLENNETTU) {
     return {};
   }
-
-  let errorBuilder = new ErrorBuilder({ values });
 
   errorBuilder = validateCommon({ errorBuilder, values });
 

@@ -118,11 +118,14 @@ export const getValuesByKoulutus = koulutus => {
   };
 };
 
-const validateCommon = ({ errorBuilder }) => {
+const validateEssentials = ({ errorBuilder }) => {
   return errorBuilder
     .validateArrayMinLength('kieliversiot.languages', 1)
-    .validateExistence('information.koulutus')
-    .validateArrayMinLength('organization.organizations', 1);
+    .validateExistence('information.koulutus');
+};
+
+const validateCommon = ({ errorBuilder }) => {
+  return errorBuilder.validateArrayMinLength('organization.organizations', 1);
 };
 
 const validateKorkeakoulu = ({ values, errorBuilder }) => {
@@ -134,8 +137,10 @@ const validateKorkeakoulu = ({ values, errorBuilder }) => {
 export const validate = ({ values, koulutustyyppi, tila }) => {
   let errorBuilder = new ErrorBuilder({ values });
 
+  errorBuilder = validateEssentials({ errorBuilder, values });
+
   if (tila === JULKAISUTILA.TALLENNETTU) {
-    return {};
+    return errorBuilder.getErrors();
   }
 
   errorBuilder = validateCommon({ values, errorBuilder });

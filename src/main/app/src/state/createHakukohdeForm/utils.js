@@ -355,13 +355,19 @@ const validateLiitteet = ({ errorBuilder, values }) => {
   return enhancedErrorBuilder;
 };
 
+const validateEssentials = ({ values, errorBuilder }) => {
+  const kielivalinta = getKieliversiot(values);
+
+  return errorBuilder
+    .validateArrayMinLength('kieliversiot.languages', 1)
+    .validateTranslations('perustiedot.nimi', kielivalinta);
+};
+
 const validateCommon = ({ errorBuilder, values }) => {
   const kieliversiot = getKieliversiot(values);
 
   let enhancedErrorBuilder = errorBuilder
-    .validateArrayMinLength('kieliversiot.languages', 1)
     .validateArrayMinLength('pohjakoulutus.koulutusvaatimukset', 1)
-    .validateTranslations('perustiedot.nimi', kieliversiot)
     .validateExistence('aloituspaikat.aloituspaikkamaara');
 
   enhancedErrorBuilder = validateLiitteet({
@@ -398,11 +404,13 @@ const validateCommon = ({ errorBuilder, values }) => {
 };
 
 export const validate = ({ tila, values }) => {
-  if (tila === JULKAISUTILA.TALLENNETTU) {
-    return {};
-  }
-
   let errorBuilder = new ErrorBuilder({ values });
+
+  errorBuilder = validateEssentials({ values, errorBuilder });
+
+  if (tila === JULKAISUTILA.TALLENNETTU) {
+    return errorBuilder.getErrors();
+  }
 
   errorBuilder = validateCommon({ errorBuilder, values });
 

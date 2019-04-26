@@ -143,6 +143,14 @@ export const getValuesByHaku = haku => {
   };
 };
 
+const validateEssentials = ({ values, errorBuilder }) => {
+  const kielivalinta = getKielivalinta(values);
+
+  return errorBuilder
+    .validateArrayMinLength('kieliversiot.languages', 1)
+    .validateTranslations('nimi.nimi', kielivalinta);
+};
+
 const validateCommon = ({ values, errorBuilder }) => {
   const kielivalinta = getKielivalinta(values);
   const hakutapa = get(values, 'hakutapa.tapa');
@@ -150,8 +158,6 @@ const validateCommon = ({ values, errorBuilder }) => {
   const isErillishaku = new RegExp('^hakutapa_02').test(hakutapa);
 
   let enhancedErrorBuilder = errorBuilder
-    .validateArrayMinLength('kieliversiot.languages', 1)
-    .validateTranslations('nimi.nimi', kielivalinta)
     .validateExistence('kohdejoukko.kohde')
     .validateExistence('hakutapa.tapa')
     .validateArrayMinLength('aikataulut.hakuaika', 1, { isFieldArray: true })
@@ -182,11 +188,13 @@ const validateCommon = ({ values, errorBuilder }) => {
 };
 
 export const validate = ({ tila, values }) => {
-  if (tila === JULKAISUTILA.TALLENNETTU) {
-    return {};
-  }
-
   let errorBuilder = new ErrorBuilder({ values });
+
+  errorBuilder = validateEssentials({ values, errorBuilder });
+
+  if (tila === JULKAISUTILA.TALLENNETTU) {
+    return errorBuilder.getErrors();
+  }
 
   errorBuilder = validateCommon({ values, errorBuilder });
 

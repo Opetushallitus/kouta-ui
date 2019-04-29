@@ -55,6 +55,7 @@ public class UrlConfiguration extends OphProperties {
         this.frontProperties.setProperty("organisaatio-service.hierarkia", this.require("organisaatio-service.hierarkia"));
         this.frontProperties.setProperty("organisaatio-service.organisaatio-by-oid", this.require("organisaatio-service.organisaatio-by-oid"));
         this.frontProperties.setProperty("organisaatio-service.organisaatiot-by-oids", this.require("organisaatio-service.organisaatiot-by-oids"));
+        this.frontProperties.setProperty("organisaatio-service.hierarkia-haku", this.require("organisaatio-service.hierarkia-haku"));
 
         this.frontProperties.setProperty("lokalisaatio-service.localisation", this.require("lokalisaatio-service.localisation"));
 
@@ -63,5 +64,6 @@ public class UrlConfiguration extends OphProperties {
         this.frontProperties.setProperty("kouta-index.haku-list", this.require("kouta-index.haku-list"));
         this.frontProperties.setProperty("kouta-index.valintaperuste-list", this.require("kouta-index.valintaperuste-list"));
         this.frontProperties.setProperty("virkailija-raamit.raamitJs", this.require("virkailija-raamit.raamitJs"));
+        this.frontProperties.setProperty("kayttooikeus-service.me", this.require("kayttooikeus-service.me"));
     }
 }

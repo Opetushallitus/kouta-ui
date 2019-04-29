@@ -22,7 +22,7 @@ const UserGate = ({ fallback = null, children = null, onUserChange }) => {
     onUserChange(data);
   }, [data, i18n, onUserChange]);
 
-  return !data ? (typeof data) : children;
+  return !data ? fallback : children;
 };
 
 export default connect(

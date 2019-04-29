@@ -85,7 +85,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
-    "@cypress/snapshot": "^2.0.1",
     "@storybook/addon-actions": "^4.1.6",
     "@storybook/addon-links": "^4.1.4",
     "@storybook/addons": "^4.1.4",

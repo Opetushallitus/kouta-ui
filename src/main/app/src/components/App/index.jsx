@@ -12,6 +12,7 @@ import MainPage from '../MainPage';
 import LocalisationProvider from '../LocalisationProvider';
 import VirkailijaRaamit from '../VirkailijaRaamit';
 import UserGate from '../UserGate';
+import HttpErrorNotifier from '../HttpErrorNotifier';
 
 const SpinContainer = styled.div`
   height: 100vh;
@@ -47,6 +48,7 @@ const App = ({
                   <Suspense fallback={<CenterSpin />}>
                     <VirkailijaRaamit />
                     <UserGate fallback={<CenterSpin />}>
+                      <HttpErrorNotifier />
                       <MainPage history={history} />
                     </UserGate>
                   </Suspense>

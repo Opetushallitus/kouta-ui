@@ -5,7 +5,6 @@ import 'core-js/features/array/includes';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
 import createBrowserHistory from 'history/createBrowserHistory';
 import { urls as ophUrls } from 'oph-urls-js';
 import get from 'lodash/get';
@@ -19,6 +18,7 @@ import configureUrls from './apiUrls';
 import createLocalisation from './localisation';
 import { getLocalisation } from './apiUtils';
 import getTranslations from './translations';
+import createHttpClient from './httpClient';
 
 const history = createBrowserHistory({ basename: 'kouta' });
 
@@ -45,8 +45,8 @@ const loadLocalisation = async ({
 };
 
 (async () => {
-  const httpClient = axios.create({});
   const apiUrls = await configureUrls(ophUrls);
+  const httpClient = createHttpClient({ apiUrls });
 
   const localisationInstance = createLocalisation({
     debug: process.env.NODE_ENV === 'development',

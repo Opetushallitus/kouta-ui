@@ -140,6 +140,8 @@ export default {
     ladatutTiedostot: 'Ladatut tiedostot',
     varmistaLomakkeenKentat:
       'Varmistathan että olet täyttänyt lomakkeen kaikki pakolliset kentät',
+    virheIlmoitusKuvaus:
+      'Jos virhe aiheuttaa ongelmia järjestelmän käytössä, yritä päivittää sivu, tai ota yhteyttä tukeen',
   },
   validointivirheet: {
     syotaArvo: 'Syötä kentälle arvo',

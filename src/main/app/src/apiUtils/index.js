@@ -519,8 +519,13 @@ export const getKoutaHaut = async ({
 };
 
 const memoizedGetKayttajanOrganisaatioOids = memoizePromise(
-  async (httpClient, apiUrls, oid) => {
-    return ['1.2.246.562.10.594252633210'];
+  async (httpClient, apiUrls) => {
+    const { data } = await httpClient.get(
+      apiUrls.url('kayttooikeus-service.kayttajan-organisaatiot'),
+      { params: { kayttajaTyyppi: 'VIRKAILIJA' } },
+    );
+
+    return data;
   },
 );
 

@@ -42,6 +42,12 @@ const stubMyOrganisations = () => {
       }),
     ],
   });
+
+  cy.route({
+    method: 'GET',
+    url: '**/kayttooikeus-service/organisaatiohenkilo/organisaatioOid**',
+    response: [oid],
+  });
 };
 
 describe('frontPage', () => {

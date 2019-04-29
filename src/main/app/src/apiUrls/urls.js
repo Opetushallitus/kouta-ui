@@ -33,6 +33,7 @@ export const development = ({ isCypress }) => ({
   'organisaatio-service.base-url': 'https://virkailija.hahtuvaopintopolku.fi/organisaatio-service',
   'organisaatio-service.children': 'https://virkailija.hahtuvaopintopolku.fi/organisaatio-service/rest/organisaatio/v4/$1/children?includeImage=false',
   'organisaatio-service.hierarkia': 'https://virkailija.hahtuvaopintopolku.fi/organisaatio-service/rest/organisaatio/v4/hierarkia/hae?oid=$1&aktiiviset=true&suunnitellut=true&lakkautetut=false',
+  'organisaatio-service.hierarkia-haku': 'https://virkailija.hahtuvaopintopolku.fi/organisaatio-service/rest/organisaatio/v4/hierarkia/hae',
   'organisaatio-service.organisaatio-by-oid': 'https://virkailija.hahtuvaopintopolku.fi/organisaatio-service/rest/organisaatio/v4/$1?includeImage=false',
   'organisaatio-service.organisaatiot-by-oids': 'https://virkailija.hahtuvaopintopolku.fi/organisaatio-service/rest/organisaatio/v4/findbyoids',
   'lokalisaatio-service.localisation': 'https://virkailija.hahtuvaopintopolku.fi/lokalisointi/cxf/rest/v1/localisation?category=$1',

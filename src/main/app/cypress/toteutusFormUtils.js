@@ -22,6 +22,16 @@ export const stubToteutusFormRoutes = ({ cy, organisaatioOid, perusteId }) => {
     }),
   });
 
+  cy.route({
+    method: 'POST',
+    url: '**/organisaatio-service/rest/organisaatio/v4/findbyoids',
+    response: [
+      merge(organisaatio(), {
+        oid: organisaatioOid,
+      }),
+    ],
+  });
+
   stubKoodistoRoute({ koodisto: 'koulutuksenjarjestamisenlisaosiot', cy });
   stubKoodistoRoute({ koodisto: 'oppilaitoksenopetuskieli', cy });
   stubKoodistoRoute({ koodisto: 'opetusaikakk', cy });

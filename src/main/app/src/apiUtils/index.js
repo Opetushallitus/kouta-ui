@@ -518,24 +518,18 @@ export const getKoutaHaut = async ({
   return data;
 };
 
-const memoizedGetKayttajanOrganisaatiot = memoizePromise(
+const memoizedGetKayttajanOrganisaatioOids = memoizePromise(
   async (httpClient, apiUrls, oid) => {
-    return Promise.all([
-      getOrganisaatioByOid({
-        oid: '1.2.246.562.10.594252633210',
-        httpClient,
-        apiUrls,
-      }),
-    ]);
+    return ['1.2.246.562.10.594252633210'];
   },
 );
 
-export const getKayttajanOrganisaatiot = async ({
+export const getKayttajanOrganisaatioOids = async ({
   oid,
   httpClient,
   apiUrls,
 }) => {
-  return memoizedGetKayttajanOrganisaatiot(httpClient, apiUrls, oid);
+  return memoizedGetKayttajanOrganisaatioOids(httpClient, apiUrls, oid);
 };
 
 const toKoutaIndexParams = ({
@@ -683,30 +677,6 @@ export const getKoutaIndexHaut = async ({ httpClient, apiUrls, ...rest }) => {
   return data;
 };
 
-export const getKayttajanOrganisaatioHierarkia = async ({
-  httpClient,
-  apiUrls,
-  oid,
-}) => {
-  const organisaatiot = await getKayttajanOrganisaatiot({
-    httpClient,
-    apiUrls,
-    oid,
-  });
-
-  const hierarkia = await Promise.all(
-    organisaatiot.map(({ oid: orgOid }) =>
-      getOrganisaatioHierarchyByOid({ httpClient, apiUrls, oid: orgOid }).then(
-        h => {
-          return h ? h[0] : null;
-        },
-      ),
-    ),
-  );
-
-  return hierarkia.filter(h => !!h);
-};
-
 export const getAndUpdateKoutaKoulutus = async ({
   httpClient,
   apiUrls,
@@ -815,13 +785,9 @@ export const getKoutaIndexValintaperusteet = async ({
 };
 
 const memoizedGetMe = memoizePromise(async (httpClient, apiUrls) => {
-  return {
-    uid: 'johndoe',
-    oid: '1.2.246.562.24.62301161440',
-    firstName: 'John',
-    lastName: 'Doe',
-    lang: 'fi',
-  };
+  const { data } = await httpClient.get(apiUrls.url('kayttooikeus-service.me'));
+
+  return data;
 });
 
 export const getMe = ({ httpClient, apiUrls }) =>
@@ -834,4 +800,27 @@ export const getOrganisaatiotByOids = async ({ oids, httpClient, apiUrls }) => {
   );
 
   return data;
+};
+
+export const getOrganisaatioHierarkia = async ({
+  searchString = '',
+  aktiiviset = true,
+  suunnitellut = true,
+  lakkautetut = false,
+  apiUrls,
+  httpClient,
+}) => {
+  const params = {
+    searchStr: searchString,
+    aktiiviset: aktiiviset ? 'true' : 'false',
+    suunnitellut: suunnitellut ? 'true' : 'false',
+    lakkautetut: lakkautetut ? 'true' : 'false',
+  };
+
+  const { data } = await httpClient.get(
+    apiUrls.url('organisaatio-service.hierarkia-haku'),
+    { params },
+  );
+
+  return get(data, 'organisaatiot') || [];
 };

@@ -1,5 +1,5 @@
 import { useCallback, useContext } from 'react';
-import DataLoader from 'DataLoader';
+import DataLoader from 'dataloader';
 
 import { memoize } from '../../utils';
 import useApiAsync from '../useApiAsync';
@@ -59,7 +59,7 @@ export const useOrganisaatiot = oids => {
   const { data: organisaatiot, ...rest } = useApiAsync({
     promiseFn,
     oids,
-    watch: oids,
+    watch: JSON.stringify(oids),
   });
 
   return { ...rest, organisaatiot };

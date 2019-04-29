@@ -13,10 +13,10 @@ import ToteutuksetSection from './ToteutuksetSection';
 import HautSection from './HautSection';
 import OrganisaatioDrawer from './OrganisaatioDrawer';
 import Button from '../Button';
-import { getOrganisaatioFromHierarkia } from './utils';
 import Icon from '../Icon';
 import ValintaperusteetSection from './ValintaperusteetSection';
 import useTranslation from '../useTranslation';
+import { useOrganisaatio } from '../useOrganisaatio';
 
 const Container = styled.div`
   max-width: ${getThemeProp('contentMaxWidth')}
@@ -24,7 +24,7 @@ const Container = styled.div`
   padding: ${spacing(3)};
 `;
 
-const HomeContent = ({ organisaatiot, organisaatioOid, history }) => {
+const HomeContent = ({ organisaatioOids, organisaatioOid, history }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const { t } = useTranslation();
 
@@ -34,10 +34,7 @@ const HomeContent = ({ organisaatiot, organisaatioOid, history }) => {
 
   const onOpenDrawer = useCallback(() => setDrawerOpen(true), [setDrawerOpen]);
 
-  const organisaatio = getOrganisaatioFromHierarkia(
-    organisaatiot,
-    organisaatioOid,
-  );
+  const { organisaatio } = useOrganisaatio(organisaatioOid);
 
   const onOrganisaatioChange = useCallback(
     value => history.push(`/?organisaatioOid=${value}`),
@@ -50,7 +47,7 @@ const HomeContent = ({ organisaatiot, organisaatioOid, history }) => {
         open={drawerOpen}
         onClose={onCloseDrawer}
         organisaatioOid={organisaatioOid}
-        organisaatiot={organisaatiot}
+        organisaatioOids={organisaatioOids}
         onOrganisaatioChange={onOrganisaatioChange}
       />
       <Container>
@@ -59,7 +56,9 @@ const HomeContent = ({ organisaatiot, organisaatioOid, history }) => {
             <Flex alignCenter>
               <FlexItem grow={1} paddingRight={2}>
                 <Typography {...getTestIdProps('selectedOrganisaatio')}>
-                  {getFirstLanguageValue(get(organisaatio, 'nimi'))}
+                  {organisaatio
+                    ? getFirstLanguageValue(get(organisaatio, 'nimi'))
+                    : null}
                 </Typography>
               </FlexItem>
               <FlexItem grow={0}>

@@ -12,7 +12,12 @@ export default (reducers = {}) =>
     me,
     toaster,
     organisaatioFavourites: persistReducer(
-      { storage, key: 'organisaatioFavourites', stateReconciler: hardSet },
+      {
+        storage,
+        key: 'organisaatioFavourites',
+        stateReconciler: hardSet,
+        version: 1,
+      },
       organisaatioFavourites,
     ),
     ...reducers,

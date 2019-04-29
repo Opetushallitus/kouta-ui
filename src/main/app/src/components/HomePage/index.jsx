@@ -5,9 +5,10 @@ import get from 'lodash/get';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { getKayttajanOrganisaatioHierarkia } from '../../apiUtils';
+import { getKayttajanOrganisaatioOids } from '../../apiUtils';
 import HomeContent from './HomeContent';
 import useApiAsync from '../useApiAsync';
+import { isArray } from '../../utils';
 
 const Container = styled.div`
   width: 100%;
@@ -15,20 +16,18 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.palette.mainBackground};
 `;
 
-const getFirstOrganisaatioOid = organisaatiot => get(organisaatiot, '[0].oid');
-
 const HomeRoute = ({ kayttajaOid, organisaatioOid }) => {
-  const { data: organisaatioHierarkia } = useApiAsync({
-    promiseFn: getKayttajanOrganisaatioHierarkia,
-    oid: kayttajaOid,
-    watch: kayttajaOid,
+  const { data: organisaatioOids } = useApiAsync({
+    promiseFn: getKayttajanOrganisaatioOids,
   });
 
-  if (!organisaatioHierarkia) {
+  if (!organisaatioOids) {
     return null;
   }
 
-  const firstOrganisaatioOid = getFirstOrganisaatioOid(organisaatioHierarkia);
+  const firstOrganisaatioOid = isArray(organisaatioOids)
+    ? organisaatioOids[0]
+    : null;
 
   // TODO: display some message
   if (!firstOrganisaatioOid) {
@@ -50,7 +49,7 @@ const HomeRoute = ({ kayttajaOid, organisaatioOid }) => {
 
   return (
     <HomeContent
-      organisaatiot={organisaatioHierarkia}
+      organisaatioOids={organisaatioOids}
       kayttajaOid={kayttajaOid}
       organisaatioOid={organisaatioOid}
     />

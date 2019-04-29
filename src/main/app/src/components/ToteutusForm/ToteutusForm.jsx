@@ -61,7 +61,11 @@ const ToteutusForm = ({
     <form onSubmit={handleSubmit}>
       <ActiveLanguages>
         {({ languages }) => (
-          <FormCollapseGroup enabled={steps} scrollTarget={scrollTarget} defaultOpen={!steps}>
+          <FormCollapseGroup
+            enabled={steps}
+            scrollTarget={scrollTarget}
+            defaultOpen={!steps}
+          >
             {canCopy ? (
               <FormCollapse
                 header={t('yleiset.pohjanValinta')}
@@ -169,6 +173,7 @@ const ToteutusForm = ({
             <FormCollapse
               header={t('toteutuslomake.toteutuksenNimi')}
               section="nimi"
+              languages={languages}
               {...getTestIdProps('nimiSection')}
             >
               <NimiSection />
@@ -200,7 +205,7 @@ const ToteutusForm = ({
                         onSave={onAttachHakukohde}
                       >
                         {({ onToggle }) => (
-                          <Flex justifyEnd full>
+                          <Flex justifyCenter full>
                             <Button onClick={onToggle} type="button">
                               {t('yleiset.liitaHakukohde')}
                             </Button>

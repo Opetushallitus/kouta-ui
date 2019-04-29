@@ -1,8 +1,14 @@
 import merge from 'lodash/merge';
 
-import { getByTestId } from '../../utils';
+import { getByTestId, chooseKieliversiotLanguages } from '../../utils';
 import valintaperuste from '../../data/valintaperuste';
 import { stubValintaperusteFormRoutes } from '../../valintaperusteFormUtils';
+
+const fillKieliversiotSection = cy => {
+  getByTestId('kieliversiotSection', cy).within(() => {
+    chooseKieliversiotLanguages(['fi'], cy);
+  });
+};
 
 const tallenna = cy => {
   getByTestId('tallennaValintaperusteButton', cy).click({ force: true });
@@ -40,6 +46,7 @@ describe('editValintaperusteForm', () => {
       ),
     });
 
+    fillKieliversiotSection(cy);
     tallenna(cy);
 
     cy.wait('@updateValintaperusteRequest').then(({ request }) => {
@@ -108,7 +115,7 @@ describe('editValintaperusteForm', () => {
         },
         organisaatioOid: '1.1.1.1.1.1',
         muokkaaja: '1.2.246.562.24.62301161440',
-        kielivalinta: ['fi', 'sv'],
+        kielivalinta: ['fi'],
         modified: '2019-04-03T13:56',
       });
     });
@@ -132,6 +139,7 @@ describe('editValintaperusteForm', () => {
       ),
     });
 
+    fillKieliversiotSection(cy);
     tallenna(cy);
 
     cy.wait('@updateValintaperusteRequest').then(({ request }) => {
@@ -200,7 +208,7 @@ describe('editValintaperusteForm', () => {
         },
         organisaatioOid: '1.1.1.1.1.1',
         muokkaaja: '1.2.246.562.24.62301161440',
-        kielivalinta: ['fi', 'sv'],
+        kielivalinta: ['fi'],
         modified: '2019-04-03T13:56',
       });
     });

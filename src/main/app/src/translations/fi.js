@@ -138,6 +138,14 @@ export default {
     tiedostonLataaminenEpaonnistui:
       'Tiedoston lataaminen epäonnistui, yritä uudelleen',
     ladatutTiedostot: 'Ladatut tiedostot',
+    varmistaLomakkeenKentat:
+      'Varmistathan että olet täyttänyt lomakkeen kaikki pakolliset kentät',
+  },
+  validointivirheet: {
+    syotaArvo: 'Syötä kentälle arvo',
+    syotaArvoKaannoksille: 'Syötä arvo kaikille kentän käännöksille',
+    valitseVahintaanYksi: 'Valitse vähintään yksi',
+    valitseVahintaan: 'Valitse vähintään {{lukumaara}}',
   },
   etusivu: {
     koulutuksetJaHaut: 'Koulutukset ja haut',

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { setLightness } from 'polished';
 import { Transition } from 'react-spring';
 import { connect } from 'react-redux';
 import get from 'lodash/get';
@@ -18,7 +17,6 @@ const ToasterContainer = styled.div`
 
 const ToastContainer = styled.div`
   display: inline-flex;
-  border-radius: ${getThemeProp('shape.borderRadius')};
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
   max-width: 450px;
 `;
@@ -43,8 +41,6 @@ const ToastStatus = styled.div`
   flex: 0;
   color: white;
   padding: ${({ theme }) => theme.spacing.unit * 2}px;
-  border-top-left-radius: ${getThemeProp('shape.borderRadius')};
-  border-bottom-left-radius: ${getThemeProp('shape.borderRadius')};
 
   ${({ status }) =>
     status === 'success' &&
@@ -67,20 +63,7 @@ const ToastContent = styled.div`
   padding: ${({ theme }) => theme.spacing.unit * 2}px;
   flex: 1;
   display: flex;
-
-  ${({ status }) =>
-    status === 'success' &&
-    css`
-      background-color: ${({ theme }) =>
-        setLightness(0.95, theme.palette.success.main)};
-    `}
-
-  ${({ status }) =>
-    status === 'danger' &&
-    css`
-      background-color: ${({ theme }) =>
-        setLightness(0.95, theme.palette.danger.main)};
-    `}
+  background-color: white;
 `;
 
 const StatusTitle = styled(Typography).attrs({ variant: 'h5' })`
@@ -98,8 +81,8 @@ const StatusTitle = styled(Typography).attrs({ variant: 'h5' })`
 `;
 
 const iconByStatus = {
-  success: 'sentiment_very_satisfied',
-  danger: 'sentiment_very_dissatisfied',
+  success: 'check_circle_outline',
+  danger: 'error_outline',
 };
 
 export const Toast = ({

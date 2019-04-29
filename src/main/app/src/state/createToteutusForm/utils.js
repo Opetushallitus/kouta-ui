@@ -3,7 +3,10 @@ import toPairs from 'lodash/toPairs';
 import flatMap from 'lodash/flatMap';
 import pick from 'lodash/pick';
 
-import { JULKAISUTILA } from '../../constants';
+import { JULKAISUTILA, KORKEAKOULUKOULUTUSTYYPIT } from '../../constants';
+import { ErrorBuilder } from '../../validation';
+
+const getKielivalinta = values => get(values, 'kieliversiot.languages') || [];
 
 const getOsaamisalatByValues = ({ osaamisalat, kielivalinta }) => {
   return (osaamisalat || []).map(
@@ -323,12 +326,65 @@ export const getValuesByToteutus = toteutus => {
   };
 };
 
-export const validate = ({ tila }) => {
-  if (tila === JULKAISUTILA.TALLENNETTU) {
-    return {};
+const validateEssentials = ({ errorBuilder, values }) => {
+  const kielivalinta = getKielivalinta(values);
+
+  return errorBuilder
+    .validateArrayMinLength('kieliversiot.languages', 1)
+    .validateTranslations('nimi.name', kielivalinta);
+};
+
+const validateCommon = ({ values, errorBuilder }) => {
+  const kielivalinta = getKielivalinta(values);
+
+  let enhancedErrorBuilder = errorBuilder
+    .validateArrayMinLength('jarjestamispaikat.jarjestajat', 1)
+    .validateExistence('jarjestamistiedot.opetusaika')
+    .validateArrayMinLength('jarjestamistiedot.opetuskieli', 1)
+    .validateExistence('jarjestamistiedot.maksullisuus');
+
+  const shouldValidateContactName = !![
+    get(values, 'yhteystiedot.email'),
+    get(values, 'yhteystiedot.phone'),
+    get(values, 'yhteystiedot.website'),
+  ].find(v => !!v);
+
+  if (shouldValidateContactName) {
+    enhancedErrorBuilder = enhancedErrorBuilder.validateTranslations(
+      'yhteystiedot.name',
+      kielivalinta,
+    );
   }
 
-  const errors = {};
+  return enhancedErrorBuilder;
+};
 
-  return errors;
+const validateKorkeakoulu = ({ values, errorBuilder }) => {
+  const kielivalinta = getKielivalinta(values);
+
+  return errorBuilder
+    .validateArray('ylemmanKorkeakoulututkinnonOsaamisalat.osaamisalat', eb => {
+      return eb.validateTranslations('nimi', kielivalinta);
+    })
+    .validateArray('alemmanKorkeakoulututkinnonOsaamisalat.osaamisalat', eb => {
+      return eb.validateTranslations('nimi', kielivalinta);
+    });
+};
+
+export const validate = ({ tila, koulutustyyppi, values }) => {
+  let errorBuilder = new ErrorBuilder({ values });
+
+  errorBuilder = validateEssentials({ errorBuilder, values });
+
+  if (tila === JULKAISUTILA.TALLENNETTU) {
+    return errorBuilder.getErrors();
+  }
+
+  errorBuilder = validateCommon({ values, errorBuilder });
+
+  if (KORKEAKOULUKOULUTUSTYYPIT.includes(koulutustyyppi)) {
+    errorBuilder = validateKorkeakoulu({ values, errorBuilder });
+  }
+
+  return errorBuilder.getErrors();
 };

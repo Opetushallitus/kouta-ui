@@ -6,6 +6,7 @@ import Dropdown from '../Dropdown';
 import Flex, { FlexItem } from '../Flex';
 import Icon from '../Icon';
 import Typography from '../Typography';
+import { isFunction } from '../../utils';
 
 const Header = styled.div`
   ${({ status }) =>
@@ -54,8 +55,11 @@ export const StatusPopover = ({
   visible = false,
   placement = 'top-right',
   children,
+  onClose,
   ...props
 }) => {
+  const canClose = isFunction(onClose);
+
   const overlay = (
     <Container>
       <Header status={status}>
@@ -63,16 +67,24 @@ export const StatusPopover = ({
           <FlexItem>
             <Flex alignCenter>
               <FlexItem>
-                <StatusIcon type="check_circle_outline" />
+                <StatusIcon
+                  type={
+                    status === 'success'
+                      ? 'check_circle_outline'
+                      : 'error_outline'
+                  }
+                />
               </FlexItem>
               <FlexItem paddingTop={2} paddingLeft={2} paddingBottom={2}>
                 <HeaderTypography>{header}</HeaderTypography>
               </FlexItem>
             </Flex>
           </FlexItem>
-          <FlexItem paddingLeft={2}>
-            <CloseIcon />
-          </FlexItem>
+          {canClose ? (
+            <FlexItem paddingLeft={2}>
+              <CloseIcon onClick={onClose} />
+            </FlexItem>
+          ) : null}
         </Flex>
       </Header>
       <Body>{body}</Body>
@@ -80,7 +92,12 @@ export const StatusPopover = ({
   );
 
   return (
-    <Dropdown overlay={overlay} visible={visible} {...props}>
+    <Dropdown
+      overlay={overlay}
+      visible={visible}
+      placement={placement}
+      {...props}
+    >
       {children}
     </Dropdown>
   );

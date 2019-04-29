@@ -73,7 +73,7 @@ const HeaderTypography = styled(Typography).attrs({
 `;
 
 const Footer = styled.div`
-  border-top: 2px solid ${getThemeProp('palette.primary.main')};
+  border-top: 1px solid ${getThemeProp('palette.border')};
   padding: ${spacing(2)};
 `;
 

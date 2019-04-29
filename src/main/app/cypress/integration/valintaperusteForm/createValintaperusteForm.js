@@ -5,6 +5,7 @@ import {
   typeToEditor,
   getTableInput,
   getCheckbox,
+  chooseKieliversiotLanguages,
 } from '../../utils';
 
 import { stubValintaperusteFormRoutes } from '../../valintaperusteFormUtils';
@@ -18,7 +19,9 @@ const lisaa = cy => {
 };
 
 const tallenna = cy => {
-  getByTestId('tallennaValintaperusteButton', cy).click({ force: true });
+  getByTestId('tallennaJaJulkaiseValintaperusteButton', cy).click({
+    force: true,
+  });
 };
 
 const fillTyyppiSection = (tyyppi, cy) => {
@@ -36,6 +39,7 @@ const fillPohjaSection = cy => {
 
 const fillKieliversiotSection = cy => {
   getByTestId('kieliversiotSection', cy).within(() => {
+    chooseKieliversiotLanguages(['fi'], cy);
     jatka(cy);
   });
 };
@@ -77,8 +81,6 @@ const lisaaSisaltoa = (tyyppi, cy) => {
 
 const fillValintatapaSection = cy => {
   getByTestId('valintatapaSection', cy).within(() => {
-    lisaa(cy);
-
     getByTestId('valintatapalista', cy).within(() => {
       getByTestId('tapa', cy).within(() => {
         selectOption('valintatapajono_0', cy);
@@ -191,10 +193,10 @@ describe('createValintaperusteForm', () => {
 
     cy.wait('@createValintaperusteRequest').then(({ request }) => {
       expect(request.body).to.deep.equal({
-        tila: 'tallennettu',
+        tila: 'julkaistu',
         muokkaaja: '1.2.246.562.24.62301161440',
         organisaatioOid: '1.1.1.1.1.1',
-        kielivalinta: ['fi', 'sv'],
+        kielivalinta: ['fi'],
         hakutapaKoodiUri: 'hakutapa_0#1',
         kohdejoukkoKoodiUri: 'haunkohdejoukko_0#1',
         nimi: { fi: 'Valintaperusteen nimi' },
@@ -280,10 +282,10 @@ describe('createValintaperusteForm', () => {
 
     cy.wait('@createValintaperusteRequest').then(({ request }) => {
       expect(request.body).to.deep.equal({
-        tila: 'tallennettu',
+        tila: 'julkaistu',
         muokkaaja: '1.2.246.562.24.62301161440',
         organisaatioOid: '1.1.1.1.1.1',
-        kielivalinta: ['fi', 'sv'],
+        kielivalinta: ['fi'],
         hakutapaKoodiUri: 'hakutapa_0#1',
         kohdejoukkoKoodiUri: 'haunkohdejoukko_0#1',
         nimi: { fi: 'Valintaperusteen nimi' },

@@ -1,10 +1,8 @@
 import get from 'lodash/get';
 import pick from 'lodash/pick';
-import set from 'lodash/set';
-import merge from 'lodash/merge';
 
 import { JULKAISUTILA, KORKEAKOULUKOULUTUSTYYPIT } from '../../constants';
-import { getInvalidTranslations } from '../../utils';
+import { ErrorBuilder } from '../../validation';
 
 const getKielivalinta = values => get(values, 'kieliversiot.languages') || [];
 
@@ -120,65 +118,36 @@ export const getValuesByKoulutus = koulutus => {
   };
 };
 
-const validateCommon = ({ values }) => {
-  const languages = getKielivalinta(values);
-  const koulutus = get(values, 'information.koulutus');
-  const jarjestajat = get(values, 'organization.organizations') || [];
-
-  const errors = {};
-
-  if (languages.length === 0) {
-    set(errors, 'kieliversiot.languages', 'Valitse vähintään yksi kieli');
-  }
-
-  if (!koulutus) {
-    set(errors, 'information.koulutus', 'Valitse koulutus');
-  }
-
-  if (jarjestajat.length === 0) {
-    set(
-      errors,
-      'organization.organizations',
-      'Valitse ainakin yksi järjestävä organisaatio',
-    );
-  }
-
-  return errors;
+const validateEssentials = ({ errorBuilder }) => {
+  return errorBuilder
+    .validateArrayMinLength('kieliversiot.languages', 1)
+    .validateExistence('information.koulutus');
 };
 
-const validateKorkeakoulu = ({ values }) => {
-  const errors = {};
+const validateCommon = ({ errorBuilder }) => {
+  return errorBuilder.validateArrayMinLength('organization.organizations', 1);
+};
 
+const validateKorkeakoulu = ({ values, errorBuilder }) => {
   const kielivalinta = getKielivalinta(values);
-  const kuvaus = get(values, 'description.kuvaus') || {};
 
-  const invalidKuvausTranslations = getInvalidTranslations(
-    kuvaus,
-    kielivalinta,
-  );
-
-  invalidKuvausTranslations.length > 0 &&
-    kielivalinta.forEach(l => {
-      set(
-        errors,
-        ['description', 'kuvaus', l],
-        'Valitse kuvaus kaikille käännöksille',
-      );
-    });
-
-  return errors;
+  return errorBuilder.validateTranslations('description.kuvaus', kielivalinta);
 };
 
 export const validate = ({ values, koulutustyyppi, tila }) => {
+  let errorBuilder = new ErrorBuilder({ values });
+
+  errorBuilder = validateEssentials({ errorBuilder, values });
+
   if (tila === JULKAISUTILA.TALLENNETTU) {
-    return {};
+    return errorBuilder.getErrors();
   }
 
-  let errors = validateCommon({ values });
+  errorBuilder = validateCommon({ values, errorBuilder });
 
   if (KORKEAKOULUKOULUTUSTYYPIT.includes(koulutustyyppi)) {
-    errors = merge({}, errors, validateKorkeakoulu({ values }));
+    errorBuilder = validateKorkeakoulu({ values, errorBuilder });
   }
 
-  return errors;
+  return errorBuilder.getErrors();
 };

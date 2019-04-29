@@ -1,7 +1,9 @@
-import React, { createElement } from 'react';
+import React, { createElement, useRef } from 'react';
 import FormControl from '../FormControl';
 import FormLabel from '../FormLabel';
 import FormHelperText from '../FormHelperText';
+import useTranslation from '../useTranslation';
+import { isArray } from '../../utils';
 
 const generateId = prefix =>
   `${prefix}__${Math.round(Math.random() * 100000).toString()}`;
@@ -23,37 +25,39 @@ const FieldFormGroup = ({
 };
 
 export const createComponent = (Component, mapProps) => {
-  class InputComponent extends React.Component {
-    constructor() {
-      super();
+  const InputComponent = props => {
+    const idRef = useRef();
+    const { t } = useTranslation();
 
-      this.genId = generateId('FormField');
+    if (!idRef.current) {
+      idRef.current = generateId('FormField');
     }
 
-    render() {
-      const { disabled, label, helperText, meta } = this.props;
-      const hasError = !!meta.error;
-      const showError = hasError;
-      const id = this.props.id || this.genId;
+    const { disabled, label, helperText, meta } = props;
+    const hasError = !!meta.error;
+    const showError = hasError;
+    const id = props.id || idRef.current;
 
-      const children = createElement(
-        Component,
-        mapProps({ id, ...this.props }),
-      );
+    const children = createElement(Component, mapProps({ id, ...props }));
 
-      return (
-        <FieldFormGroup
-          error={showError}
-          helperText={showError ? meta.error : helperText}
-          label={label}
-          disabled={disabled}
-          id={id}
-        >
-          {children}
-        </FieldFormGroup>
-      );
-    }
-  }
+    return (
+      <FieldFormGroup
+        error={showError}
+        helperText={
+          showError
+            ? isArray(meta.error)
+              ? t(...meta.error)
+              : t(meta.error)
+            : helperText
+        }
+        label={label}
+        disabled={disabled}
+        id={id}
+      >
+        {children}
+      </FieldFormGroup>
+    );
+  };
 
   InputComponent.displayName = `FormField${Component.name}`;
 

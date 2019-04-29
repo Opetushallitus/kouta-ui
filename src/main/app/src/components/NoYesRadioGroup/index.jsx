@@ -37,6 +37,7 @@ export const NoYesRadioGroup = ({ value, onChange = noop, ...props }) => {
       value={getRadioValue(value)}
       options={options}
       onChange={onRadioGroupChange}
+      {...props}
     />
   );
 };

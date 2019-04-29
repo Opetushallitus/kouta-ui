@@ -3,6 +3,9 @@ import pick from 'lodash/pick';
 
 import { isNumeric } from '../../utils';
 import { JULKAISUTILA } from '../../constants';
+import { ErrorBuilder } from '../../validation';
+
+const getKielivalinta = values => get(values, 'kieliversiot.languages') || [];
 
 export const getHakuByValues = values => {
   const alkamiskausiKoodiUri = get(values, 'aikataulut.kausi') || null;
@@ -140,12 +143,60 @@ export const getValuesByHaku = haku => {
   };
 };
 
-export const validate = ({ tila }) => {
-  if (tila === JULKAISUTILA.TALLENNETTU) {
-    return {};
+const validateEssentials = ({ values, errorBuilder }) => {
+  const kielivalinta = getKielivalinta(values);
+
+  return errorBuilder
+    .validateArrayMinLength('kieliversiot.languages', 1)
+    .validateTranslations('nimi.nimi', kielivalinta);
+};
+
+const validateCommon = ({ values, errorBuilder }) => {
+  const kielivalinta = getKielivalinta(values);
+  const hakutapa = get(values, 'hakutapa.tapa');
+  const isYhteishaku = new RegExp('^hakutapa_01').test(hakutapa);
+  const isErillishaku = new RegExp('^hakutapa_02').test(hakutapa);
+
+  let enhancedErrorBuilder = errorBuilder
+    .validateExistence('kohdejoukko.kohde')
+    .validateExistence('hakutapa.tapa')
+    .validateArrayMinLength('aikataulut.hakuaika', 1, { isFieldArray: true })
+    .validateArray('aikataulut.hakuaika', eb => {
+      if (isErillishaku || isYhteishaku) {
+        return eb.validateExistence('alkaa').validateExistence('paattyy');
+      }
+
+      return eb.validateExistence('alkaa');
+    });
+
+  const shouldValidateContactName = Boolean(
+    [
+      get(values, 'yhteystiedot.email'),
+      get(values, 'yhteystiedot.puhelin'),
+      get(values, 'yhteystiedot.verkkosivu'),
+    ].find(v => !!v),
+  );
+
+  if (shouldValidateContactName) {
+    enhancedErrorBuilder = enhancedErrorBuilder.validateTranslations(
+      'yhteystiedot.nimi',
+      kielivalinta,
+    );
   }
 
-  const errors = {};
+  return enhancedErrorBuilder;
+};
 
-  return errors;
+export const validate = ({ tila, values }) => {
+  let errorBuilder = new ErrorBuilder({ values });
+
+  errorBuilder = validateEssentials({ values, errorBuilder });
+
+  if (tila === JULKAISUTILA.TALLENNETTU) {
+    return errorBuilder.getErrors();
+  }
+
+  errorBuilder = validateCommon({ values, errorBuilder });
+
+  return errorBuilder.getErrors();
 };

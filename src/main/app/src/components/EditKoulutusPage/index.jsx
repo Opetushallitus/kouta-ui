@@ -31,24 +31,26 @@ const EditKoulutusPage = props => {
   const organisaatioOid = koulutus ? koulutus.organisaatioOid : null;
 
   return (
-    <FormPage
-      header={<EditKoulutusHeader koulutus={koulutus} />}
-      steps={<EditKoulutusSteps />}
-      footer={koulutus ? <EditKoulutusFooter koulutus={koulutus} /> : null}
-    >
-      {organisaatioOid ? (
-        <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-      ) : null}
-      {koulutus ? (
-        <EditKoulutusForm
-          koulutus={koulutus}
-          organisaatioOid={organisaatioOid}
-          scrollTarget={scrollTarget}
-        />
-      ) : (
-        <Spin center />
-      )}
-    </FormPage>
+    <>
+      <FormPage
+        header={<EditKoulutusHeader koulutus={koulutus} />}
+        steps={<EditKoulutusSteps />}
+        footer={koulutus ? <EditKoulutusFooter koulutus={koulutus} /> : null}
+      >
+        {organisaatioOid ? (
+          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+        ) : null}
+        {koulutus ? (
+          <EditKoulutusForm
+            koulutus={koulutus}
+            organisaatioOid={organisaatioOid}
+            scrollTarget={scrollTarget}
+          />
+        ) : (
+          <Spin center />
+        )}
+      </FormPage>
+    </>
   );
 };
 

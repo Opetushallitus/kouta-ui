@@ -3,6 +3,7 @@ import {
   getRadio,
   getSelectOption,
   getCheckbox,
+  chooseKieliversiotLanguages,
 } from '../../utils';
 
 import { stubKoulutusFormRoutes } from '../../koulutusFormUtils';
@@ -15,6 +16,7 @@ const fillPohjaSection = cy => {
 
 const fillKieliversiotSection = cy => {
   getByTestId('kieliversiotSection', cy).within(() => {
+    chooseKieliversiotLanguages(['fi'], cy);
     getByTestId('jatkaButton', cy).click({ force: true });
   });
 };
@@ -42,7 +44,7 @@ const fillLisatiedotSection = cy => {
 };
 
 const tallenna = cy => {
-  getByTestId('tallennaKoulutusButton', cy).click({ force: true });
+  getByTestId('tallennaJaJulkaiseKoulutusButton', cy).click({ force: true });
 };
 
 const jatka = cy => {
@@ -111,9 +113,9 @@ describe('createKoulutusForm', () => {
       expect(request.body).to.deep.equal({
         organisaatioOid: '1.1.1.1.1.1',
         muokkaaja: '1.2.246.562.24.62301161440',
-        tila: 'tallennettu',
+        tila: 'julkaistu',
         johtaaTutkintoon: true,
-        kielivalinta: ['fi', 'sv'],
+        kielivalinta: ['fi'],
         tarjoajat: ['4.1.1.1.1.1', '2.1.1.1.1.1'],
         koulutusKoodiUri: 'koulutus_0#1',
         koulutustyyppi: 'amm',
@@ -210,9 +212,9 @@ describe('createKoulutusForm', () => {
       expect(request.body).to.deep.equal({
         organisaatioOid: '1.1.1.1.1.1',
         muokkaaja: '1.2.246.562.24.62301161440',
-        tila: 'tallennettu',
+        tila: 'julkaistu',
         johtaaTutkintoon: true,
-        kielivalinta: ['fi', 'sv'],
+        kielivalinta: ['fi'],
         tarjoajat: ['4.1.1.1.1.1', '2.1.1.1.1.1'],
         koulutusKoodiUri: 'koulutus_0#1',
         koulutustyyppi: 'yo',

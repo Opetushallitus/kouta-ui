@@ -1,8 +1,14 @@
 import merge from 'lodash/merge';
 
-import { getByTestId } from '../../utils';
+import { getByTestId, chooseKieliversiotLanguages } from '../../utils';
 import koulutus from '../../data/koulutus';
 import { stubKoulutusFormRoutes } from '../../koulutusFormUtils';
+
+const fillKieliversiotSection = cy => {
+  getByTestId('kieliversiotSection', cy).within(() => {
+    chooseKieliversiotLanguages(['fi'], cy);
+  });
+};
 
 const tallenna = cy => {
   getByTestId('tallennaKoulutusButton', cy).click();
@@ -56,6 +62,7 @@ describe('editKoulutusForm', () => {
       response: testKoulutus,
     });
 
+    fillKieliversiotSection(cy);
     tallenna(cy);
 
     cy.wait('@updateAmmKoulutusResponse').then(({ request }) => {
@@ -67,7 +74,6 @@ describe('editKoulutusForm', () => {
         tarjoajat: ['4.1.1.1.1.1', '2.1.1.1.1.1'],
         nimi: {
           fi: 'Maatalousalan perustutkinto',
-          sv: 'Grundexamen inom lantbruksbranschen',
         },
         metadata: {
           tyyppi: 'amm',
@@ -85,7 +91,7 @@ describe('editKoulutusForm', () => {
         julkinen: false,
         muokkaaja: '1.2.246.562.24.62301161440',
         organisaatioOid: organisaatioOid,
-        kielivalinta: ['fi', 'sv'],
+        kielivalinta: ['fi'],
         modified: '2019-04-01T13:01',
       });
     });
@@ -106,6 +112,7 @@ describe('editKoulutusForm', () => {
       response: merge(koulutus({ tyyppi: 'yo' }), testKoulutusFields),
     });
 
+    fillKieliversiotSection(cy);
     tallenna(cy);
 
     cy.wait('@updateYoKoulutusResponse').then(({ request }) => {
@@ -115,7 +122,7 @@ describe('editKoulutusForm', () => {
         koulutusKoodiUri: 'koulutus_0#1',
         tila: 'tallennettu',
         tarjoajat: ['4.1.1.1.1.1', '2.1.1.1.1.1'],
-        nimi: { fi: 'Fi nimi', sv: 'Sv nimi' },
+        nimi: { fi: 'Fi nimi' },
         metadata: {
           tyyppi: 'yo',
           lisatiedot: [
@@ -124,18 +131,18 @@ describe('editKoulutusForm', () => {
               teksti: { fi: 'koulutuksenjarjestamisenlisaosiot_0 kuvaus' },
             },
           ],
-          kuvaus: { fi: 'Fi kuvaus', sv: 'Sv kuvaus' },
+          kuvaus: { fi: 'Fi kuvaus' },
           opintojenLaajuusKoodiUri: 'opintojenlaajuus_1#1',
           tutkintonimikeKoodiUrit: [
             'tutkintonimikekk_1#1',
             'tutkintonimikekk_2#1',
           ],
-          kuvauksenNimi: { fi: 'Fi kuvauksen nimi', sv: 'Sv kuvauksen nimi' },
+          kuvauksenNimi: { fi: 'Fi kuvauksen nimi' },
         },
         julkinen: true,
         muokkaaja: '1.2.246.562.24.62301161440',
         organisaatioOid: '1.1.1.1.1.1',
-        kielivalinta: ['fi', 'sv'],
+        kielivalinta: ['fi'],
         modified: '2019-04-01T13:01',
         johtaaTutkintoon: true,
       });

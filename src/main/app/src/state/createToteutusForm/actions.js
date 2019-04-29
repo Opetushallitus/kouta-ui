@@ -31,7 +31,7 @@ export const saveToteutus = toteutus => (
 export const submit = ({
   tila = JULKAISUTILA.TALLENNETTU,
   koulutustyyppi = KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS,
-} = {}) => async (dispatch, getState, { history }) => {
+} = {}) => async (dispatch, getState, { history, localisation }) => {
   const state = getState();
   const values = getToteutusFormValues(state);
   const errors = validate({ values, tila, koulutustyyppi });

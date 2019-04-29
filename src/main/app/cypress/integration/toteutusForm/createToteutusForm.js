@@ -5,6 +5,7 @@ import {
   getRadio,
   getSelectOption,
   getCheckbox,
+  chooseKieliversiotLanguages,
 } from '../../utils';
 
 import koulutus from '../../data/koulutus';
@@ -22,6 +23,7 @@ const fillPohjaSection = cy => {
 
 const fillKieliversiotSection = cy => {
   getByTestId('kieliversiotSection', cy).within(() => {
+    chooseKieliversiotLanguages(['fi'], cy);
     jatka(cy);
   });
 };
@@ -143,7 +145,7 @@ const fillNayttamistiedotSection = cy => {
 };
 
 const tallenna = cy => {
-  getByTestId('tallennaToteutusButton', cy).click({ force: true });
+  getByTestId('tallennaJaJulkaiseToteutusButton', cy).click({ force: true });
 };
 
 const fillJarjestajatSection = cy => {
@@ -276,13 +278,13 @@ describe('createToteutusForm', () => {
 
     cy.wait('@createAmmToteutusResponse').then(({ request }) => {
       expect(request.body).to.deep.equal({
-        tila: 'tallennettu',
+        tila: 'julkaistu',
         muokkaaja: '1.2.246.562.24.62301161440',
         organisaatioOid: '1.1.1.1.1.1',
         koulutusOid: '1.2.1.1.1.1',
         nimi: { fi: 'toteutuksen nimi' },
         tarjoajat: ['5.1.1.1.1.1', '3.1.1.1.1.1'],
-        kielivalinta: ['fi', 'sv'],
+        kielivalinta: ['fi'],
         metadata: {
           opetus: {
             lisatiedot: [
@@ -380,13 +382,13 @@ describe('createToteutusForm', () => {
 
     cy.wait('@createYoToteutusResponse').then(({ request }) => {
       expect(request.body).to.deep.equal({
-        tila: 'tallennettu',
+        tila: 'julkaistu',
         muokkaaja: '1.2.246.562.24.62301161440',
         organisaatioOid: '1.1.1.1.1.1',
         koulutusOid: '1.2.1.1.1.1',
         nimi: { fi: 'toteutuksen nimi' },
         tarjoajat: ['5.1.1.1.1.1', '3.1.1.1.1.1'],
-        kielivalinta: ['fi', 'sv'],
+        kielivalinta: ['fi'],
         metadata: {
           opetus: {
             lisatiedot: [

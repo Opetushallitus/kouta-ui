@@ -1,9 +1,15 @@
 import merge from 'lodash/merge';
 
-import { getByTestId } from '../../utils';
+import { getByTestId, chooseKieliversiotLanguages } from '../../utils';
 import koulutus from '../../data/koulutus';
 import toteutus from '../../data/toteutus';
 import { stubToteutusFormRoutes } from '../../toteutusFormUtils';
+
+const fillKieliversiotSection = cy => {
+  getByTestId('kieliversiotSection', cy).within(() => {
+    chooseKieliversiotLanguages(['fi'], cy);
+  });
+};
 
 const tallenna = cy => {
   getByTestId('tallennaToteutusButton', cy).click();
@@ -70,6 +76,7 @@ describe('editToteutusForm', () => {
       },
     }).as('updateAmmToteutusResponse');
 
+    fillKieliversiotSection(cy);
     tallenna(cy);
 
     cy.wait('@updateAmmToteutusResponse').then(({ request }) => {
@@ -134,7 +141,7 @@ describe('editToteutusForm', () => {
         },
         muokkaaja: '1.2.246.562.24.62301161440',
         organisaatioOid: '1.1.1.1.1.1',
-        kielivalinta: ['fi', 'sv'],
+        kielivalinta: ['fi'],
         modified: '2019-03-26T10:19',
       });
     });
@@ -161,6 +168,7 @@ describe('editToteutusForm', () => {
       },
     }).as('updateYoToteutusResponse');
 
+    fillKieliversiotSection(cy);
     tallenna(cy);
 
     cy.wait('@updateYoToteutusResponse').then(({ request }) => {
@@ -231,7 +239,7 @@ describe('editToteutusForm', () => {
         },
         muokkaaja: '1.2.246.562.24.62301161440',
         organisaatioOid: '1.1.1.1.1.1',
-        kielivalinta: ['fi', 'sv'],
+        kielivalinta: ['fi'],
         modified: '2019-03-26T10:19',
       });
     });

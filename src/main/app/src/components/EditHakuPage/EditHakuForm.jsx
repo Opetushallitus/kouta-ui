@@ -2,13 +2,12 @@ import { reduxForm } from 'redux-form';
 import React, { useMemo } from 'react';
 import { connect } from 'react-redux';
 
-import HakuForm, { validate } from '../HakuForm';
+import HakuForm from '../HakuForm';
 import { getValuesByHaku } from '../../state/createHakuForm';
 import { attachHakukohde } from '../../state/editHakuForm/actions';
 
 const HakuReduxForm = reduxForm({
   form: 'editHakuForm',
-  validate,
 })(HakuForm);
 
 const EditHakuForm = ({ onSave, haku, ...props }) => {

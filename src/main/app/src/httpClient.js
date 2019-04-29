@@ -31,7 +31,9 @@ const withAuthorizationInterceptor = client => {
 };
 
 const createHttpClient = () => {
-  const client = axios.create({});
+  const client = axios.create({
+    withCredentials: true,
+  });
 
   withAuthorizationInterceptor(client);
 

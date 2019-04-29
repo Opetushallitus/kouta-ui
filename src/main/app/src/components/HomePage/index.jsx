@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
 import get from 'lodash/get';
@@ -9,6 +9,7 @@ import { getKayttajanOrganisaatioOids } from '../../apiUtils';
 import HomeContent from './HomeContent';
 import useApiAsync from '../useApiAsync';
 import { isArray } from '../../utils';
+import { selectOrganisaatio } from '../../state/organisaatioSelection';
 
 const Container = styled.div`
   width: 100%;
@@ -16,10 +17,22 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.palette.mainBackground};
 `;
 
-const HomeRoute = ({ kayttajaOid, organisaatioOid }) => {
+const HomeRoute = ({
+  kayttajaOid,
+  organisaatioOid,
+  persistedOrganisaatioOid,
+}) => {
   const { data: organisaatioOids } = useApiAsync({
     promiseFn: getKayttajanOrganisaatioOids,
   });
+
+  const persistedOrganisaatioOidIsValid = useMemo(() => {
+    return (
+      persistedOrganisaatioOid &&
+      isArray(organisaatioOids) &&
+      organisaatioOids.includes(persistedOrganisaatioOid)
+    );
+  }, [organisaatioOids, persistedOrganisaatioOid]);
 
   if (!organisaatioOids) {
     return null;
@@ -40,7 +53,9 @@ const HomeRoute = ({ kayttajaOid, organisaatioOid }) => {
         to={{
           path: '/',
           search: queryString.stringify({
-            organisaatioOid: firstOrganisaatioOid,
+            organisaatioOid: persistedOrganisaatioOidIsValid
+              ? persistedOrganisaatioOid
+              : firstOrganisaatioOid,
           }),
         }}
       />
@@ -56,7 +71,11 @@ const HomeRoute = ({ kayttajaOid, organisaatioOid }) => {
   );
 };
 
-const HomePage = ({ kayttajaOid = null, location }) => {
+const HomePage = ({
+  kayttajaOid = null,
+  location,
+  persistedOrganisaatioOid,
+}) => {
   const { search } = location;
 
   const query = queryString.parse(search);
@@ -64,11 +83,16 @@ const HomePage = ({ kayttajaOid = null, location }) => {
 
   return (
     <Container>
-      <HomeRoute kayttajOid={kayttajaOid} organisaatioOid={organisaatioOid} />
+      <HomeRoute
+        kayttajOid={kayttajaOid}
+        organisaatioOid={organisaatioOid}
+        persistedOrganisaatioOid={persistedOrganisaatioOid}
+      />
     </Container>
   );
 };
 
 export default connect(state => ({
   kayttajaOid: state.me.oid,
+  persistedOrganisaatioOid: selectOrganisaatio(state),
 }))(HomePage);

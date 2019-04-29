@@ -10,7 +10,10 @@ import Flex, { FlexItem } from '../../Flex';
 import { spacing, getThemeProp } from '../../../theme';
 import Button from '../../Button';
 import Icon from '../../Icon';
-import { toggleFavourite } from '../../../state/organisaatioFavourites';
+import {
+  toggleFavourite,
+  selectOrganisaatioFavourites,
+} from '../../../state/organisaatioFavourites';
 import OrganisaatioTreeList from './OrganisaatioTreeList';
 import OrganisaatioFavouritesList from './OrganisaatioFavouritesList';
 import useTranslation from '../../useTranslation';
@@ -218,8 +221,8 @@ export const OrganisaatioDrawer = props => {
 };
 
 export default connect(
-  ({ organisaatioFavourites: favourites }) => ({
-    organisaatioFavourites: Object.keys(favourites.byOid),
+  state => ({
+    organisaatioFavourites: selectOrganisaatioFavourites(state),
   }),
   dispatch => ({
     onToggleFavourite: oid => dispatch(toggleFavourite(oid)),

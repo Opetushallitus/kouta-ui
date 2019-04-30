@@ -6,10 +6,10 @@ const isKoutaBackendUrl = url => {
 };
 
 const isAuthorizationError = error => {
-  return get(error, 'response.status') === 401;
+  return [401, 403].includes(get(error, 'response.status'));
 };
 
-const withAuthorizationInterceptor = client => {
+const withAuthorizationInterceptor = apiUrls => client => {
   client.interceptors.response.use(
     response => response,
     error => {
@@ -19,8 +19,8 @@ const withAuthorizationInterceptor = client => {
 
       const responseUrl = get(error, 'request.responseURL');
 
-      if (isKoutaBackendUrl(responseUrl)) {
-        // TODO: Redirect somewhere
+      if (isKoutaBackendUrl(responseUrl) && apiUrls) {
+        window.location.reload();
       }
 
       return Promise.reject(error);
@@ -30,12 +30,12 @@ const withAuthorizationInterceptor = client => {
   return client;
 };
 
-const createHttpClient = () => {
+const createHttpClient = ({ apiUrls } = {}) => {
   const client = axios.create({
     withCredentials: true,
   });
 
-  withAuthorizationInterceptor(client);
+  withAuthorizationInterceptor(apiUrls)(client);
 
   return client;
 };

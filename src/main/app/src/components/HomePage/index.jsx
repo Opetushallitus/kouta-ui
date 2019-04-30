@@ -10,6 +10,7 @@ import HomeContent from './HomeContent';
 import useApiAsync from '../useApiAsync';
 import { isArray } from '../../utils';
 import { selectOrganisaatio } from '../../state/organisaatioSelection';
+import FullSpin from '../FullSpin';
 
 const Container = styled.div`
   width: 100%;
@@ -22,7 +23,7 @@ const HomeRoute = ({
   organisaatioOid,
   persistedOrganisaatioOid,
 }) => {
-  const { data: organisaatioOids } = useApiAsync({
+  const { data: organisaatioOids, isLoading } = useApiAsync({
     promiseFn: getKayttajanOrganisaatioOids,
   });
 
@@ -34,20 +35,18 @@ const HomeRoute = ({
     );
   }, [organisaatioOids, persistedOrganisaatioOid]);
 
-  if (!organisaatioOids) {
+  if (isLoading && !organisaatioOids) {
+    return <FullSpin size="large" />;
+  }
+
+  // TODO: display an error
+  if (!isArray(organisaatioOids) || organisaatioOids.length === 0) {
     return null;
   }
 
-  const firstOrganisaatioOid = isArray(organisaatioOids)
-    ? organisaatioOids[0]
-    : null;
+  const firstOrganisaatioOid = organisaatioOids[0];
 
-  // TODO: display some message
-  if (!firstOrganisaatioOid) {
-    return null;
-  }
-
-  if (!organisaatioOid) {
+  if (!organisaatioOid || !organisaatioOids.includes(organisaatioOid)) {
     return (
       <Redirect
         to={{

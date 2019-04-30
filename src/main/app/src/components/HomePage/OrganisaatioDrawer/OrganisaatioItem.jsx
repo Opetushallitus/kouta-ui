@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import styled, { css } from 'styled-components';
+import { ellipsis } from 'polished';
 
 import Typography from '../../Typography';
 import { isNonEmptyArray, getFirstLanguageValue } from '../../../utils';
@@ -31,6 +32,10 @@ const FavouriteIcon = ({ active = false, ...props }) => (
   />
 );
 
+const NameContainer = styled.div`
+  ${ellipsis('25rem')};
+`;
+
 export const OrganisaatioItem = ({
   selected,
   favourite,
@@ -61,7 +66,9 @@ export const OrganisaatioItem = ({
       <Flex alignCenter>
         <FlexItem grow={1} paddingRight={2}>
           <Radio checked={selected} onChange={onSelect}>
-            {getFirstLanguageValue(nimi, language)}
+            <NameContainer>
+              {getFirstLanguageValue(nimi, language)}
+            </NameContainer>
           </Radio>
         </FlexItem>
         {collapse && isNonEmptyArray(children) ? (

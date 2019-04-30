@@ -2,12 +2,20 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { update } from '../../state/me';
-import { getMe } from '../../apiUtils';
+import { getMe, koutaBackendLogin } from '../../apiUtils';
 import useApiAsync from '../useApiAsync';
 import useTranslation from '../useTranslation';
 
+const getMeAndUpdateSession = async ({ httpClient, apiUrls }) => {
+  const me = await getMe({ httpClient, apiUrls });
+
+  await koutaBackendLogin({ httpClient, apiUrls });
+
+  return me;
+};
+
 const UserGate = ({ fallback = null, children = null, onUserChange }) => {
-  const { data } = useApiAsync({ promiseFn: getMe });
+  const { data } = useApiAsync({ promiseFn: getMeAndUpdateSession });
   const { i18n } = useTranslation();
 
   useEffect(() => {

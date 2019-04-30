@@ -829,3 +829,9 @@ export const getOrganisaatioHierarkia = async ({
 
   return get(data, 'organisaatiot') || [];
 };
+
+export const koutaBackendLogin = async ({ httpClient, apiUrls }) => {
+  const { data } = await httpClient.get(apiUrls.url('kouta-backend.login'));
+
+  return data;
+};

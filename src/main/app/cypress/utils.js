@@ -87,3 +87,11 @@ export const stubKayttoOikeusMeRoute = ({ user = {}, cy }) => {
     },
   });
 };
+
+export const stubKoutaBackendLoginRoute = ({ cy }) => {
+  cy.route({
+    method: 'GET',
+    url: '**/kouta-backend/auth/login',
+    response: {},
+  });
+};

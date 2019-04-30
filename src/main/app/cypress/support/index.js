@@ -1,5 +1,9 @@
 import './commands';
-import { stubLokalisaatioRoute, stubKayttoOikeusMeRoute } from '../utils';
+import {
+  stubLokalisaatioRoute,
+  stubKayttoOikeusMeRoute,
+  stubKoutaBackendLoginRoute,
+} from '../utils';
 
 require('cypress-plugin-retries');
 
@@ -8,4 +12,5 @@ beforeEach(() => {
 
   stubLokalisaatioRoute({ cy });
   stubKayttoOikeusMeRoute({ cy });
+  stubKoutaBackendLoginRoute({ cy });
 });

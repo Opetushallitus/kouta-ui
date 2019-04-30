@@ -66,9 +66,11 @@ export const OrganisaatioItem = ({
       <Flex alignCenter>
         <FlexItem grow={1} paddingRight={2}>
           <Radio checked={selected} onChange={onSelect}>
-            <NameContainer>
-              {getFirstLanguageValue(nimi, language)}
-            </NameContainer>
+            <Flex>
+              <NameContainer>
+                {getFirstLanguageValue(nimi, language)}
+              </NameContainer>
+            </Flex>
           </Radio>
         </FlexItem>
         {collapse && isNonEmptyArray(children) ? (

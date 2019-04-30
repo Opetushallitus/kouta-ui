@@ -7,7 +7,6 @@ import { isFunction } from '../../utils';
 
 export const TableBase = styled.table`
   width: 100%;
-  border: 1px solid ${getThemeProp('palette.border')};
   border-spacing: 0px;
 `;
 
@@ -31,7 +30,6 @@ const SortContainer = styled.div`
 export const TableCellBase = styled.td`
   border-spacing: 0px;
   padding: ${spacing(1)} ${spacing(2)};
-  border-bottom: 1px solid ${getThemeProp('palette.border')};
   text-align: left;
   ${getThemeProp('typography.body')};
 
@@ -44,8 +42,10 @@ export const TableCellBase = styled.td`
   ${({ isTableHead }) =>
     isTableHead &&
     css`
-      font-weight: bold;
-      border-bottom: 2px solid ${getThemeProp('palette.primary.main')};
+      white-space: nowrap;
+      color: ${getThemeProp('palette.text.dark')};
+      font-weight: 500;
+      border-bottom: 1px solid ${getThemeProp('palette.border')};
     `};
 
   ${({ active }) =>
@@ -84,13 +84,15 @@ const TableRowBase = styled.tr`
 
   ${({ isTableHead }) =>
     !isTableHead &&
-    `
-    &:last-child {
-      ${TableCellBase} {
-        border-bottom: 0px none;
+    css`
+      &:nth-child(even) {
+        background-color: #f5f5f5;
       }
-    }
-  `}
+
+      &:hover {
+        background-color: ${({ theme }) => theme.palette.primary.light};
+      }
+    `}
 
   ${({ noBorder }) =>
     noBorder &&
@@ -138,7 +140,7 @@ export const TableCell = ({
           {sortDirection ? (
             <SortIcon
               type={
-                sortDirection === 'desc' ? 'arrow_downward' : 'arrow_upward'
+                sortDirection === 'desc' ? 'arrow_drop_down' : 'arrow_drop_up'
               }
             />
           ) : null}

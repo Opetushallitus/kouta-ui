@@ -18,6 +18,16 @@ storiesOf('Table', module).add('Basic', () => (
         <TableCell>Solu 2</TableCell>
         <TableCell>Solu 3</TableCell>
       </TableRow>
+      <TableRow>
+        <TableCell>Solu 1</TableCell>
+        <TableCell>Solu 2</TableCell>
+        <TableCell>Solu 3</TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Solu 1</TableCell>
+        <TableCell>Solu 2</TableCell>
+        <TableCell>Solu 3</TableCell>
+      </TableRow>
     </TableBody>
   </Table>
 ));

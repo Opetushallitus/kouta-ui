@@ -258,70 +258,7 @@ describe('createHakukohdeForm', () => {
     tallenna(cy);
 
     cy.wait('@createHakukohdeRequest').then(({ request }) => {
-      expect(request.body).to.deep.equal({
-        alkamiskausiKoodiUri: 'kausi_0#1',
-        kaytetaanHaunAikataulua: false,
-        kielivalinta: ['fi'],
-        aloituspaikat: 100,
-        hakuajat: [{ alkaa: '2019-04-02T10:45', paattyy: '2019-11-25T23:59' }],
-        liitteetOnkoSamaToimitusaika: false,
-        liitteetOnkoSamaToimitusosoite: false,
-        liitteet: [
-          {
-            tyyppi: 'liitetyypitamm_0#1',
-            nimi: { fi: 'Nimi' },
-            toimitusaika: '2019-11-25T23:59',
-            toimitusosoite: {
-              osoite: {
-                osoite: { fi: 'Osoite' },
-                postinumero: '00940',
-                postitoimipaikka: { fi: 'Helsinki' },
-              },
-              sahkoposti: 'sahkoposti@email.com',
-            },
-            kuvaus: { fi: 'Kuvaus' },
-          },
-        ],
-        alkamisvuosi: new Date().getFullYear(),
-        liitteidenToimitusosoite: {
-          osoite: {
-            osoite: { fi: '' },
-            postinumero: null,
-            postitoimipaikka: { fi: '' },
-          },
-          sahkoposti: null,
-        },
-        liitteidenToimitusaika: null,
-        nimi: { fi: 'Hakukohteen nimi' },
-        toinenAsteOnkoKaksoistutkinto: false,
-        valintakokeet: [
-          {
-            tyyppi: 'valintakokeentyyppi_0#1',
-            tilaisuudet: [
-              {
-                osoite: {
-                  osoite: { fi: 'Osoite' },
-                  postinumero: '00940',
-                  postitoimipaikka: { fi: 'Helsinki' },
-                },
-                aika: {
-                  alkaa: '2019-04-02T10:45',
-                  paattyy: '2019-11-25T23:59',
-                },
-                lisatietoja: { fi: 'Lisätietoa' },
-              },
-            ],
-          },
-        ],
-        pohjakoulutusvaatimusKoodiUrit: ['pohjakoulutusvaatimustoinenaste_0#1'],
-        valintaperuste: '649adb37-cd4d-4846-91a9-84b58b90f928',
-        ensikertalaisenAloituspaikat: null,
-        organisaatioOid: '1.1.1.1.1.1',
-        toteutusOid: '2.1.1.1.1.1',
-        hakuOid: '4.1.1.1.1.1',
-        tila: 'julkaistu',
-        muokkaaja: '1.2.246.562.24.62301161440',
-      });
+      cy.wrap(request.body).snapshot();
     });
   });
 });

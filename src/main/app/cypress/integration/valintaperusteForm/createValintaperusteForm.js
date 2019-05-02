@@ -192,69 +192,7 @@ describe('createValintaperusteForm', () => {
     tallenna(cy);
 
     cy.wait('@createValintaperusteRequest').then(({ request }) => {
-      expect(request.body).to.deep.equal({
-        tila: 'julkaistu',
-        muokkaaja: '1.2.246.562.24.62301161440',
-        organisaatioOid: '1.1.1.1.1.1',
-        kielivalinta: ['fi'],
-        hakutapaKoodiUri: 'hakutapa_0#1',
-        kohdejoukkoKoodiUri: 'haunkohdejoukko_0#1',
-        nimi: { fi: 'Valintaperusteen nimi' },
-        koulutustyyppi: 'amm',
-        metadata: {
-          koulutustyyppi: 'amm',
-          valintatavat: [
-            {
-              kuvaus: {},
-              nimi: { fi: 'Valintatavan nimi' },
-              valintatapaKoodiUri: 'valintatapajono_0#1',
-              sisalto: [
-                { tyyppi: 'teksti', data: { fi: '<p>Sisältötekstiä</p>' } },
-                {
-                  tyyppi: 'taulukko',
-                  data: {
-                    rows: [
-                      {
-                        columns: [{ text: { fi: 'Solu' }, index: 0 }],
-                        index: 0,
-                      },
-                    ],
-                  },
-                },
-              ],
-              kaytaMuuntotaulukkoa: false,
-              kynnysehto: { fi: 'Kynnysehto' },
-              enimmaispisteet: 100,
-              vahimmaispisteet: 10,
-            },
-          ],
-          kielitaitovaatimukset: [
-            {
-              kieliKoodiUri: 'kieli_0#1',
-              vaatimukset: [
-                {
-                  kielitaitovaatimusKoodiUri: 'kielitaitovaatimustyypit_0#1',
-                  kielitaitovaatimusKuvaukset: [
-                    {
-                      kielitaitovaatimusTaso: 'Taso',
-                      kielitaitovaatimusKuvausKoodiUri:
-                        'kielitaitovaatimustyypitkuvaus_0#1',
-                    },
-                  ],
-                },
-              ],
-              kielitaidonVoiOsoittaa: [
-                {
-                  kielitaitoKoodiUri: 'kielitaidonosoittaminen_0#1',
-                  lisatieto: {},
-                },
-              ],
-            },
-          ],
-          osaamistaustaKoodiUrit: [],
-          kuvaus: {},
-        },
-      });
+      cy.wrap(request.body).snapshot();
     });
   });
 
@@ -281,69 +219,7 @@ describe('createValintaperusteForm', () => {
     tallenna(cy);
 
     cy.wait('@createValintaperusteRequest').then(({ request }) => {
-      expect(request.body).to.deep.equal({
-        tila: 'julkaistu',
-        muokkaaja: '1.2.246.562.24.62301161440',
-        organisaatioOid: '1.1.1.1.1.1',
-        kielivalinta: ['fi'],
-        hakutapaKoodiUri: 'hakutapa_0#1',
-        kohdejoukkoKoodiUri: 'haunkohdejoukko_0#1',
-        nimi: { fi: 'Valintaperusteen nimi' },
-        koulutustyyppi: 'yo',
-        metadata: {
-          koulutustyyppi: 'yo',
-          valintatavat: [
-            {
-              kuvaus: {},
-              nimi: { fi: 'Valintatavan nimi' },
-              valintatapaKoodiUri: 'valintatapajono_0#1',
-              sisalto: [
-                { tyyppi: 'teksti', data: { fi: '<p>Sisältötekstiä</p>' } },
-                {
-                  tyyppi: 'taulukko',
-                  data: {
-                    rows: [
-                      {
-                        columns: [{ text: { fi: 'Solu' }, index: 0 }],
-                        index: 0,
-                      },
-                    ],
-                  },
-                },
-              ],
-              kaytaMuuntotaulukkoa: false,
-              kynnysehto: { fi: 'Kynnysehto' },
-              enimmaispisteet: 100,
-              vahimmaispisteet: 10,
-            },
-          ],
-          kielitaitovaatimukset: [
-            {
-              kieliKoodiUri: 'kieli_0#1',
-              vaatimukset: [
-                {
-                  kielitaitovaatimusKoodiUri: 'kielitaitovaatimustyypit_0#1',
-                  kielitaitovaatimusKuvaukset: [
-                    {
-                      kielitaitovaatimusTaso: 'Taso',
-                      kielitaitovaatimusKuvausKoodiUri:
-                        'kielitaitovaatimustyypitkuvaus_0#1',
-                    },
-                  ],
-                },
-              ],
-              kielitaidonVoiOsoittaa: [
-                {
-                  kielitaitoKoodiUri: 'kielitaidonosoittaminen_0#1',
-                  lisatieto: {},
-                },
-              ],
-            },
-          ],
-          osaamistaustaKoodiUrit: ['osaamistausta_0#1'],
-          kuvaus: { fi: '<p>Loppukuvaus</p>' },
-        },
-      });
+      cy.wrap(request.body).snapshot();
     });
   });
 });

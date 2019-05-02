@@ -277,63 +277,7 @@ describe('createToteutusForm', () => {
     tallenna(cy);
 
     cy.wait('@createAmmToteutusResponse').then(({ request }) => {
-      expect(request.body).to.deep.equal({
-        tila: 'julkaistu',
-        muokkaaja: '1.2.246.562.24.62301161440',
-        organisaatioOid: '1.1.1.1.1.1',
-        koulutusOid: '1.2.1.1.1.1',
-        nimi: { fi: 'toteutuksen nimi' },
-        tarjoajat: ['5.1.1.1.1.1', '3.1.1.1.1.1'],
-        kielivalinta: ['fi'],
-        metadata: {
-          opetus: {
-            lisatiedot: [
-              {
-                otsikkoKoodiUri: 'koulutuksenjarjestamisenlisaosiot_0#1',
-                teksti: { fi: 'koulutuksenjarjestamisenlisaosiot_0 kuvaus' },
-              },
-            ],
-            opetuskieliKoodiUrit: ['oppilaitoksenopetuskieli_0#1'],
-            onkoMaksullinen: true,
-            maksunMaara: { fi: '10' },
-            opetustapaKoodiUrit: ['opetuspaikkakk_0#1'],
-            opetusaikaKoodiUri: 'opetusaikakk_0#1',
-            opetuskieletKuvaus: { fi: 'opetuskieli kuvaus' },
-            opetustapaKuvaus: { fi: 'opetustapa kuvaus' },
-            opetusaikaKuvaus: { fi: 'opetusaika kuvaus' },
-            maksullisuusKuvaus: { fi: 'maksullisuus kuvaus' },
-            alkamisaikaKuvaus: { fi: 'kausi kuvaus' },
-            alkamiskausiKoodiUri: 'kausi_0#1',
-            alkamisvuosi: new Date().getFullYear().toString(),
-            onkoLukuvuosimaksua: false,
-            lukuvuosimaksu: {},
-            lukuvuosimaksuKuvaus: {},
-            onkoStipendia: false,
-            stipendinKuvaus: {},
-            stipendinMaara: {},
-          },
-          osaamisalat: [
-            {
-              koodi: 'osaamisala_0',
-              linkki: { fi: 'osaamisala_0 linkki' },
-              otsikko: { fi: 'osaamisala_0 otsikko' },
-            },
-          ],
-          yhteystieto: {
-            nimi: { fi: 'nimi' },
-            titteli: { fi: 'titteli' },
-            sahkoposti: { fi: 'sähkoposti' },
-            puhelinnumero: { fi: 'puhelin' },
-            wwwSivu: { fi: 'verkkosivu' },
-          },
-          ammattinimikkeet: [{ kieli: 'fi', arvo: 'ammattinimike' }],
-          asiasanat: [{ kieli: 'fi', arvo: 'avainsana' }],
-          ylemmanKorkeakoulututkinnonOsaamisalat: [],
-          alemmanKorkeakoulututkinnonOsaamisalat: [],
-          kuvaus: {},
-          tyyppi: 'amm',
-        },
-      });
+      cy.wrap(request.body).snapshot();
     });
   });
 
@@ -381,71 +325,7 @@ describe('createToteutusForm', () => {
     tallenna(cy);
 
     cy.wait('@createYoToteutusResponse').then(({ request }) => {
-      expect(request.body).to.deep.equal({
-        tila: 'julkaistu',
-        muokkaaja: '1.2.246.562.24.62301161440',
-        organisaatioOid: '1.1.1.1.1.1',
-        koulutusOid: '1.2.1.1.1.1',
-        nimi: { fi: 'toteutuksen nimi' },
-        tarjoajat: ['5.1.1.1.1.1', '3.1.1.1.1.1'],
-        kielivalinta: ['fi'],
-        metadata: {
-          opetus: {
-            lisatiedot: [
-              {
-                otsikkoKoodiUri: 'koulutuksenjarjestamisenlisaosiot_0#1',
-                teksti: { fi: 'koulutuksenjarjestamisenlisaosiot_0 kuvaus' },
-              },
-            ],
-            opetuskieliKoodiUrit: ['oppilaitoksenopetuskieli_0#1'],
-            onkoMaksullinen: true,
-            maksunMaara: { fi: '10' },
-            opetustapaKoodiUrit: ['opetuspaikkakk_0#1'],
-            opetusaikaKoodiUri: 'opetusaikakk_0#1',
-            opetuskieletKuvaus: { fi: 'opetuskieli kuvaus' },
-            opetustapaKuvaus: { fi: 'opetustapa kuvaus' },
-            opetusaikaKuvaus: { fi: 'opetusaika kuvaus' },
-            maksullisuusKuvaus: { fi: 'maksullisuus kuvaus' },
-            alkamisaikaKuvaus: { fi: 'kausi kuvaus' },
-            alkamiskausiKoodiUri: 'kausi_0#1',
-            alkamisvuosi: new Date().getFullYear().toString(),
-            onkoLukuvuosimaksua: true,
-            lukuvuosimaksu: { fi: '30' },
-            lukuvuosimaksuKuvaus: { fi: 'lukuvuosimaksu kuvaus' },
-            onkoStipendia: true,
-            stipendinKuvaus: { fi: 'stipendi kuvaus' },
-            stipendinMaara: { fi: '20' },
-          },
-          osaamisalat: [],
-          yhteystieto: {
-            nimi: { fi: 'nimi' },
-            titteli: { fi: 'titteli' },
-            sahkoposti: { fi: 'sähkoposti' },
-            puhelinnumero: { fi: 'puhelin' },
-            wwwSivu: { fi: 'verkkosivu' },
-          },
-          ammattinimikkeet: [{ kieli: 'fi', arvo: 'ammattinimike' }],
-          asiasanat: [{ kieli: 'fi', arvo: 'avainsana' }],
-          ylemmanKorkeakoulututkinnonOsaamisalat: [
-            {
-              kuvaus: { fi: 'osaamisalan kuvaus' },
-              nimi: { fi: 'osaamisalan nimi' },
-              linkki: { fi: 'linkki' },
-              otsikko: { fi: 'osaamisalan otsikko' },
-            },
-          ],
-          alemmanKorkeakoulututkinnonOsaamisalat: [
-            {
-              kuvaus: { fi: 'osaamisalan kuvaus' },
-              nimi: { fi: 'osaamisalan nimi' },
-              linkki: { fi: 'linkki' },
-              otsikko: { fi: 'osaamisalan otsikko' },
-            },
-          ],
-          kuvaus: { fi: 'toteutuksen kuvaus' },
-          tyyppi: 'yo',
-        },
-      });
+      cy.wrap(request.body).snapshot();
     });
   });
 });

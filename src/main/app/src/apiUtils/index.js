@@ -846,5 +846,5 @@ const memoizedGetHakemuspaveluLomakkeet = memoizePromise(
   },
 );
 
-export const getHakumuspalveluLomakkeet = ({ httpClient, apiUrls }) =>
+export const getHakemuspalveluLomakkeet = ({ httpClient, apiUrls }) =>
   memoizedGetHakemuspaveluLomakkeet(httpClient, apiUrls);

@@ -75,11 +75,7 @@ const HakukohdeForm = ({
               <HakuajatSection haku={haku} />
             </FormCollapse>
 
-            <FormCollapse
-              header="Lomake"
-              section="lomake"
-              {...getTestIdProps('lomakeSection')}
-            >
+            <FormCollapse header="Lomake" {...getTestIdProps('lomakeSection')}>
               <LomakeSection />
             </FormCollapse>
 

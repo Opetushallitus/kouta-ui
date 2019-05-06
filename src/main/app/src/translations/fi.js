@@ -142,6 +142,7 @@ export default {
       'Varmistathan että olet täyttänyt lomakkeen kaikki pakolliset kentät',
     virheIlmoitusKuvaus:
       'Jos virhe aiheuttaa ongelmia järjestelmän käytössä, yritä päivittää sivu, tai ota yhteyttä tukeen',
+    valitseMitaHakulomakettaKaytetaan: 'Valitse mitä hakulomaketta käytetään',
   },
   validointivirheet: {
     syotaArvo: 'Syötä kentälle arvo',

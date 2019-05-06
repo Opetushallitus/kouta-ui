@@ -95,3 +95,16 @@ export const stubKoutaBackendLoginRoute = ({ cy }) => {
     response: {},
   });
 };
+
+export const stubHakemuspalveluLomakkeetRoute = ({
+  cy,
+  lomakkeet = [{ name: { fi: 'Lomake 1' }, key: 'lomake_1' }],
+}) => {
+  cy.route({
+    method: 'GET',
+    url: '**/lomake-editori/api/forms',
+    response: {
+      forms: lomakkeet,
+    },
+  });
+};

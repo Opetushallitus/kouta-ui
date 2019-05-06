@@ -44,8 +44,11 @@ export const development = ({ isCypress }) => ({
   'kouta-index.valintaperuste-list': 'https://virkailija.hahtuvaopintopolku.fi/kouta-index/valintaperuste/filtered-list',
   'kayttooikeus-service.me': 'https://virkailija.hahtuvaopintopolku.fi/kayttooikeus-service/cas/me',
   'kayttooikeus-service.kayttajan-organisaatiot': 'https://virkailija.hahtuvaopintopolku.fi/kayttooikeus-service/organisaatiohenkilo/organisaatioOid',
+  'cas.login': 'https://virkailija.hahtuvaopintopolku.fi/cas/login',
   ...(!isCypress && {
     'virkailija-raamit.raamitJs': 'https://virkailija.hahtuvaopintopolku.fi/virkailija-raamit/apply-raamit.js',
   }),
   'lomake-editori.lomakkeet': 'https://virkailija.hahtuvaopintopolku.fi/lomake-editori/api/forms',
+  'lomake-editori.cas': 'https://virkailija.hahtuvaopintopolku.fi/lomake-editori/auth/cas',
+  'lomake-editori.muokkaus-sivu': 'https://virkailija.hahtuvaopintopolku.fi/lomake-editori/editor/$1',
 });

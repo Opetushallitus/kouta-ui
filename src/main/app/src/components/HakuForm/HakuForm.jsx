@@ -7,7 +7,6 @@ import NameSection from './NameSection';
 import TargetGroupSection from './TargetGroupSection';
 import SearchTypeSection from './SearchTypeSection';
 import ScheduleSection from './ScheduleSection';
-import FormSelectSection from './FormSelectSection';
 import ContactInfoSection from './ContactInfoSection';
 import FormCollapseGroup from '../FormCollapseGroup';
 import FormCollapse from '../FormCollapse';
@@ -18,6 +17,7 @@ import { ModalController } from '../Modal';
 import Flex from '../Flex';
 import Button from '../Button';
 import useTranslation from '../useTranslation';
+import LomakeSection from './LomakeSection';
 
 const ActiveLanguages = formValues({
   languages: 'kieliversiot.languages',
@@ -118,10 +118,10 @@ const HakuForm = ({
 
             <FormCollapse
               header={t('yleiset.hakulomakkeenValinta')}
-              section="hakulomake"
+              languages={languages}
               {...getTestIdProps('hakulomakeSection')}
             >
-              <FormSelectSection />
+              <LomakeSection />
             </FormCollapse>
 
             <FormCollapse

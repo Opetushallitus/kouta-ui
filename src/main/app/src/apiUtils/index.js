@@ -835,3 +835,16 @@ export const koutaBackendLogin = async ({ httpClient, apiUrls }) => {
 
   return data;
 };
+
+const memoizedGetHakemuspaveluLomakkeet = memoizePromise(
+  async (httpClient, apiUrls) => {
+    const { data } = await httpClient.get(
+      apiUrls.url('lomake-editori.lomakkeet'),
+    );
+
+    return get(data, 'forms') || [];
+  },
+);
+
+export const getHakumuspalveluLomakkeet = ({ httpClient, apiUrls }) =>
+  memoizedGetHakemuspaveluLomakkeet(httpClient, apiUrls);

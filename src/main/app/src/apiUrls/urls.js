@@ -47,4 +47,5 @@ export const development = ({ isCypress }) => ({
   ...(!isCypress && {
     'virkailija-raamit.raamitJs': 'https://virkailija.hahtuvaopintopolku.fi/virkailija-raamit/apply-raamit.js',
   }),
+  'lomake-editori.lomakkeet': 'https://virkailija.hahtuvaopintopolku.fi/lomake-editori/api/forms',
 });

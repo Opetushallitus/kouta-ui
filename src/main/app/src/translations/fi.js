@@ -149,6 +149,12 @@ export default {
     valitseVahintaanYksi: 'Valitse vähintään yksi',
     valitseVahintaan: 'Valitse vähintään {{lukumaara}}',
   },
+  hakulomakeValinnat: {
+    ataru: 'Käytetään hakemuspalvelun lomaketta',
+    hakuapp: 'Käytetään järjestelmän hakulomaketta',
+    muu: 'Käytetään muuta hakulomaketta',
+    eiSahkoistaHakua: 'Ei sähköistä hakua',
+  },
   etusivu: {
     koulutuksetJaHaut: 'Koulutukset ja haut',
     luoUusiKoulutus: 'Luo uusi koulutus',

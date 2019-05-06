@@ -72,3 +72,26 @@ export const chooseKieliversiotLanguages = (languages, cy) => {
     cy.get(`input[name=${language}]`).check({ force: true });
   });
 };
+
+export const stubKayttoOikeusMeRoute = ({ user = {}, cy }) => {
+  cy.route({
+    method: 'GET',
+    url: '**/kayttooikeus-service/cas/me',
+    response: {
+      uid: 'johndoe',
+      oid: '1.2.246.562.24.62301161440',
+      firstName: 'John',
+      lastName: 'Doe',
+      lang: 'fi',
+      ...user,
+    },
+  });
+};
+
+export const stubKoutaBackendLoginRoute = ({ cy }) => {
+  cy.route({
+    method: 'GET',
+    url: '**/kouta-backend/auth/login',
+    response: {},
+  });
+};

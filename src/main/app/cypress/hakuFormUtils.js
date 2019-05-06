@@ -14,6 +14,16 @@ export const stubHakuFormRoutes = ({ cy, organisaatioOid }) => {
     }),
   });
 
+  cy.route({
+    method: 'POST',
+    url: '**/organisaatio-service/rest/organisaatio/v4/findbyoids',
+    response: [
+      merge(organisaatio(), {
+        oid: organisaatioOid,
+      }),
+    ],
+  });
+
   stubKoodistoRoute({ koodisto: 'haunkohdejoukko', cy });
   stubKoodistoRoute({ koodisto: 'hakutapa', cy });
   stubKoodistoRoute({ koodisto: 'kausi', cy });

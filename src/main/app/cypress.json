@@ -3,5 +3,6 @@
   "env": {
     "NODE_ENV": "production"
   },
-  "video": false
+  "video": false,
+  "useRelativeSnapshots": true
 }

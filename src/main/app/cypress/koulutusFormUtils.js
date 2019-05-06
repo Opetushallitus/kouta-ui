@@ -23,6 +23,16 @@ export const stubKoulutusFormRoutes = ({ cy, organisaatioOid }) => {
   });
 
   cy.route({
+    method: 'POST',
+    url: '**/organisaatio-service/rest/organisaatio/v4/findbyoids',
+    response: [
+      merge(organisaatio(), {
+        oid: organisaatioOid,
+      }),
+    ],
+  });
+
+  cy.route({
     method: 'GET',
     url:
       '**/koodisto-service/rest/json/relaatio/sisaltyy-ylakoodit/koulutustyyppi_*',

@@ -110,35 +110,7 @@ describe('createKoulutusForm', () => {
     tallenna(cy);
 
     cy.wait('@createAmmKoulutusResponse').then(({ request }) => {
-      expect(request.body).to.deep.equal({
-        organisaatioOid: '1.1.1.1.1.1',
-        muokkaaja: '1.2.246.562.24.62301161440',
-        tila: 'julkaistu',
-        johtaaTutkintoon: true,
-        kielivalinta: ['fi'],
-        tarjoajat: ['4.1.1.1.1.1', '2.1.1.1.1.1'],
-        koulutusKoodiUri: 'koulutus_0#1',
-        koulutustyyppi: 'amm',
-        nimi: {
-          fi: 'Nimi',
-        },
-        julkinen: false,
-        metadata: {
-          tyyppi: 'amm',
-          lisatiedot: [
-            {
-              otsikkoKoodiUri: 'koulutuksenjarjestamisenlisaosiot_0#1',
-              teksti: {
-                fi: 'koulutuksenjarjestamisenlisaosiot_0 kuvaus',
-              },
-            },
-          ],
-          kuvaus: {},
-          opintojenLaajuusKoodiUri: null,
-          tutkintonimikeKoodiUrit: [],
-          kuvauksenNimi: {},
-        },
-      });
+      cy.wrap(request.body).snapshot();
     });
   });
 
@@ -209,39 +181,7 @@ describe('createKoulutusForm', () => {
     tallenna(cy);
 
     cy.wait('@createYoKoulutusResponse').then(({ request }) => {
-      expect(request.body).to.deep.equal({
-        organisaatioOid: '1.1.1.1.1.1',
-        muokkaaja: '1.2.246.562.24.62301161440',
-        tila: 'julkaistu',
-        johtaaTutkintoon: true,
-        kielivalinta: ['fi'],
-        tarjoajat: ['4.1.1.1.1.1', '2.1.1.1.1.1'],
-        koulutusKoodiUri: 'koulutus_0#1',
-        koulutustyyppi: 'yo',
-        nimi: {
-          fi: 'Tiedot nimi',
-        },
-        julkinen: true,
-        metadata: {
-          tyyppi: 'yo',
-          lisatiedot: [
-            {
-              otsikkoKoodiUri: 'koulutuksenjarjestamisenlisaosiot_0#1',
-              teksti: {
-                fi: 'koulutuksenjarjestamisenlisaosiot_0 kuvaus',
-              },
-            },
-          ],
-          kuvaus: {
-            fi: 'Kuvaus',
-          },
-          opintojenLaajuusKoodiUri: 'opintojenlaajuus_0#1',
-          tutkintonimikeKoodiUrit: ['tutkintonimikekk_0#1'],
-          kuvauksenNimi: {
-            fi: 'Kuvauksen nimi',
-          },
-        },
-      });
+      cy.wrap(request.body).snapshot();
     });
   });
 });

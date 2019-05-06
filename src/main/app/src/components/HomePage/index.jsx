@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
 import get from 'lodash/get';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { getKayttajanOrganisaatioHierarkia } from '../../apiUtils';
+import { getKayttajanOrganisaatioOids } from '../../apiUtils';
 import HomeContent from './HomeContent';
 import useApiAsync from '../useApiAsync';
+import { isArray } from '../../utils';
+import { selectOrganisaatio } from '../../state/organisaatioSelection';
+import FullSpin from '../FullSpin';
 
 const Container = styled.div`
   width: 100%;
@@ -15,33 +18,43 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.palette.mainBackground};
 `;
 
-const getFirstOrganisaatioOid = organisaatiot => get(organisaatiot, '[0].oid');
-
-const HomeRoute = ({ kayttajaOid, organisaatioOid }) => {
-  const { data: organisaatioHierarkia } = useApiAsync({
-    promiseFn: getKayttajanOrganisaatioHierarkia,
-    oid: kayttajaOid,
-    watch: kayttajaOid,
+const HomeRoute = ({
+  kayttajaOid,
+  organisaatioOid,
+  persistedOrganisaatioOid,
+}) => {
+  const { data: organisaatioOids, isLoading } = useApiAsync({
+    promiseFn: getKayttajanOrganisaatioOids,
   });
 
-  if (!organisaatioHierarkia) {
+  const persistedOrganisaatioOidIsValid = useMemo(() => {
+    return (
+      persistedOrganisaatioOid &&
+      isArray(organisaatioOids) &&
+      organisaatioOids.includes(persistedOrganisaatioOid)
+    );
+  }, [organisaatioOids, persistedOrganisaatioOid]);
+
+  if (isLoading && !organisaatioOids) {
+    return <FullSpin size="large" />;
+  }
+
+  // TODO: display an error
+  if (!isArray(organisaatioOids) || organisaatioOids.length === 0) {
     return null;
   }
 
-  const firstOrganisaatioOid = getFirstOrganisaatioOid(organisaatioHierarkia);
+  const firstOrganisaatioOid = organisaatioOids[0];
 
-  // TODO: display some message
-  if (!firstOrganisaatioOid) {
-    return null;
-  }
-
-  if (!organisaatioOid) {
+  if (!organisaatioOid || !organisaatioOids.includes(organisaatioOid)) {
     return (
       <Redirect
         to={{
           path: '/',
           search: queryString.stringify({
-            organisaatioOid: firstOrganisaatioOid,
+            organisaatioOid: persistedOrganisaatioOidIsValid
+              ? persistedOrganisaatioOid
+              : firstOrganisaatioOid,
           }),
         }}
       />
@@ -50,14 +63,18 @@ const HomeRoute = ({ kayttajaOid, organisaatioOid }) => {
 
   return (
     <HomeContent
-      organisaatiot={organisaatioHierarkia}
+      organisaatioOids={organisaatioOids}
       kayttajaOid={kayttajaOid}
       organisaatioOid={organisaatioOid}
     />
   );
 };
 
-const HomePage = ({ kayttajaOid = null, location }) => {
+const HomePage = ({
+  kayttajaOid = null,
+  location,
+  persistedOrganisaatioOid,
+}) => {
   const { search } = location;
 
   const query = queryString.parse(search);
@@ -65,11 +82,16 @@ const HomePage = ({ kayttajaOid = null, location }) => {
 
   return (
     <Container>
-      <HomeRoute kayttajOid={kayttajaOid} organisaatioOid={organisaatioOid} />
+      <HomeRoute
+        kayttajOid={kayttajaOid}
+        organisaatioOid={organisaatioOid}
+        persistedOrganisaatioOid={persistedOrganisaatioOid}
+      />
     </Container>
   );
 };
 
 export default connect(state => ({
-  kayttajaOid: state.me.kayttajaOid,
+  kayttajaOid: state.me.oid,
+  persistedOrganisaatioOid: selectOrganisaatio(state),
 }))(HomePage);

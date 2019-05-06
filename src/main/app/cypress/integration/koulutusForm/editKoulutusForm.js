@@ -66,34 +66,7 @@ describe('editKoulutusForm', () => {
     tallenna(cy);
 
     cy.wait('@updateAmmKoulutusResponse').then(({ request }) => {
-      expect(request.body).to.deep.equal({
-        oid: koulutusOid,
-        koulutustyyppi: 'amm',
-        koulutusKoodiUri: 'koulutus_0#1',
-        tila: 'tallennettu',
-        tarjoajat: ['4.1.1.1.1.1', '2.1.1.1.1.1'],
-        nimi: {
-          fi: 'Maatalousalan perustutkinto',
-        },
-        metadata: {
-          tyyppi: 'amm',
-          lisatiedot: [
-            {
-              otsikkoKoodiUri: 'koulutuksenjarjestamisenlisaosiot_0#1',
-              teksti: { fi: 'koulutuksenjarjestamisenlisaosiot_0 kuvaus' },
-            },
-          ],
-          kuvaus: {},
-          opintojenLaajuusKoodiUri: null,
-          tutkintonimikeKoodiUrit: [],
-          kuvauksenNimi: {},
-        },
-        julkinen: false,
-        muokkaaja: '1.2.246.562.24.62301161440',
-        organisaatioOid: organisaatioOid,
-        kielivalinta: ['fi'],
-        modified: '2019-04-01T13:01',
-      });
+      cy.wrap(request.body).snapshot();
     });
   });
 
@@ -116,36 +89,7 @@ describe('editKoulutusForm', () => {
     tallenna(cy);
 
     cy.wait('@updateYoKoulutusResponse').then(({ request }) => {
-      expect(request.body).to.deep.equal({
-        oid: '1.2.3.4.5.6',
-        koulutustyyppi: 'yo',
-        koulutusKoodiUri: 'koulutus_0#1',
-        tila: 'tallennettu',
-        tarjoajat: ['4.1.1.1.1.1', '2.1.1.1.1.1'],
-        nimi: { fi: 'Fi nimi' },
-        metadata: {
-          tyyppi: 'yo',
-          lisatiedot: [
-            {
-              otsikkoKoodiUri: 'koulutuksenjarjestamisenlisaosiot_0#1',
-              teksti: { fi: 'koulutuksenjarjestamisenlisaosiot_0 kuvaus' },
-            },
-          ],
-          kuvaus: { fi: 'Fi kuvaus' },
-          opintojenLaajuusKoodiUri: 'opintojenlaajuus_1#1',
-          tutkintonimikeKoodiUrit: [
-            'tutkintonimikekk_1#1',
-            'tutkintonimikekk_2#1',
-          ],
-          kuvauksenNimi: { fi: 'Fi kuvauksen nimi' },
-        },
-        julkinen: true,
-        muokkaaja: '1.2.246.562.24.62301161440',
-        organisaatioOid: '1.1.1.1.1.1',
-        kielivalinta: ['fi'],
-        modified: '2019-04-01T13:01',
-        johtaaTutkintoon: true,
-      });
+      cy.wrap(request.body).snapshot();
     });
   });
 });

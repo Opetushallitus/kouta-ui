@@ -35,7 +35,7 @@ export const submit = ({ koulutus, tila: tilaArg }) => async (
   }
 
   const {
-    me: { kayttajaOid },
+    me: { oid: kayttajaOid },
   } = state;
 
   const koulutusFormData = getKoulutusByValues(values);

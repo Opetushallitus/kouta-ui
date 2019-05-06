@@ -3,8 +3,8 @@ import XHR from 'i18next-xhr-backend';
 
 const createLocalisation = ({
   loadLocalisation,
-  language = 'fi',
   fallbackLng = 'fi',
+  language = 'fi',
   debug = false,
   defaultNS = 'kouta',
   ns = ['kouta'],
@@ -16,10 +16,10 @@ const createLocalisation = ({
   }
 
   instance.init({
-    lng: language,
     fallbackLng,
     debug,
     defaultNS,
+    lng: language,
     ns,
     ...(loadLocalisation && {
       backend: {

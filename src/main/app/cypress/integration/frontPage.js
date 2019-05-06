@@ -29,6 +29,25 @@ const stubMyOrganisations = () => {
     url: `**/organisaatio-service/rest/organisaatio/v4/hierarkia/hae?oid=${oid}**`,
     response: organisaatioHierarkia({ rootOid: oid }),
   });
+
+  cy.route({
+    method: 'POST',
+    url: '**/organisaatio-service/rest/organisaatio/v4/findbyoids',
+    response: [
+      merge(organisaatio(), {
+        oid,
+        nimi: {
+          fi: 'Organisaatio_1',
+        },
+      }),
+    ],
+  });
+
+  cy.route({
+    method: 'GET',
+    url: '**/kayttooikeus-service/organisaatiohenkilo/organisaatioOid**',
+    response: [oid],
+  });
 };
 
 describe('frontPage', () => {
@@ -53,11 +72,6 @@ describe('frontPage', () => {
     getByTestId('selectedOrganisaatio', cy).should('contain', 'Organisaatio_1');
 
     getByTestId('toggleOrganisaatioDrawer', cy).click();
-
-    getByTestId('organisaatioDrawerOrganisaatioList', cy).should(
-      'contain',
-      'Organisaatio_1',
-    );
   });
 
   it('should list koulutukset', () => {

@@ -2,9 +2,10 @@ import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import get from 'lodash/get';
+import { connect } from 'react-redux';
 
 import Flex, { FlexItem } from '../Flex';
-import { getFirstLanguageValue, getTestIdProps } from '../../utils';
+import { getFirstLanguageValue, getTestIdProps, compose } from '../../utils';
 import Typography from '../Typography';
 import { getThemeProp, spacing } from '../../theme';
 import Spacing from '../Spacing';
@@ -13,10 +14,11 @@ import ToteutuksetSection from './ToteutuksetSection';
 import HautSection from './HautSection';
 import OrganisaatioDrawer from './OrganisaatioDrawer';
 import Button from '../Button';
-import { getOrganisaatioFromHierarkia } from './utils';
 import Icon from '../Icon';
 import ValintaperusteetSection from './ValintaperusteetSection';
 import useTranslation from '../useTranslation';
+import { useOrganisaatio } from '../useOrganisaatio';
+import { setOrganisaatio } from '../../state/organisaatioSelection';
 
 const Container = styled.div`
   max-width: ${getThemeProp('contentMaxWidth')}
@@ -24,7 +26,12 @@ const Container = styled.div`
   padding: ${spacing(3)};
 `;
 
-const HomeContent = ({ organisaatiot, organisaatioOid, history }) => {
+const HomeContent = ({
+  organisaatioOids,
+  organisaatioOid,
+  history,
+  onOrganisaatioChange: onOrganisaatioChangeProp = () => {},
+}) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const { t } = useTranslation();
 
@@ -34,14 +41,14 @@ const HomeContent = ({ organisaatiot, organisaatioOid, history }) => {
 
   const onOpenDrawer = useCallback(() => setDrawerOpen(true), [setDrawerOpen]);
 
-  const organisaatio = getOrganisaatioFromHierarkia(
-    organisaatiot,
-    organisaatioOid,
-  );
+  const { organisaatio } = useOrganisaatio(organisaatioOid);
 
   const onOrganisaatioChange = useCallback(
-    value => history.push(`/?organisaatioOid=${value}`),
-    [history],
+    value => {
+      history.push(`/?organisaatioOid=${value}`);
+      onOrganisaatioChangeProp(value);
+    },
+    [history, onOrganisaatioChangeProp],
   );
 
   return (
@@ -50,7 +57,7 @@ const HomeContent = ({ organisaatiot, organisaatioOid, history }) => {
         open={drawerOpen}
         onClose={onCloseDrawer}
         organisaatioOid={organisaatioOid}
-        organisaatiot={organisaatiot}
+        organisaatioOids={organisaatioOids}
         onOrganisaatioChange={onOrganisaatioChange}
       />
       <Container>
@@ -59,7 +66,9 @@ const HomeContent = ({ organisaatiot, organisaatioOid, history }) => {
             <Flex alignCenter>
               <FlexItem grow={1} paddingRight={2}>
                 <Typography {...getTestIdProps('selectedOrganisaatio')}>
-                  {getFirstLanguageValue(get(organisaatio, 'nimi'))}
+                  {organisaatio
+                    ? getFirstLanguageValue(get(organisaatio, 'nimi'))
+                    : null}
                 </Typography>
               </FlexItem>
               <FlexItem grow={0}>
@@ -95,4 +104,12 @@ const HomeContent = ({ organisaatiot, organisaatioOid, history }) => {
   );
 };
 
-export default withRouter(HomeContent);
+export default compose(
+  connect(
+    null,
+    dispatch => ({
+      onOrganisaatioChange: oid => dispatch(setOrganisaatio(oid)),
+    }),
+  ),
+  withRouter,
+)(HomeContent);

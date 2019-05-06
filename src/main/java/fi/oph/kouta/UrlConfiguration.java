@@ -39,6 +39,7 @@ public class UrlConfiguration extends OphProperties {
         this.frontProperties.setProperty("kouta-backend.valintaperuste-list", this.require("kouta-backend.valintaperuste-list"));
         this.frontProperties.setProperty("kouta-backend.ammattinimike-search", this.require("kouta-backend.ammattinimike-search"));
         this.frontProperties.setProperty("kouta-backend.asiasana-search", this.require("kouta-backend.asiasana-search"));
+        this.frontProperties.setProperty("kouta-backend.login", this.require("kouta-backend.login"));
 
         this.frontProperties.setProperty("koodisto-service.base-url", this.require("koodisto-service.base-url"));
         this.frontProperties.setProperty("koodisto-service.sisaltyy-alakoodit", this.require("koodisto-service.sisaltyy-alakoodit"));
@@ -54,6 +55,8 @@ public class UrlConfiguration extends OphProperties {
         this.frontProperties.setProperty("organisaatio-service.children", this.require("organisaatio-service.children"));
         this.frontProperties.setProperty("organisaatio-service.hierarkia", this.require("organisaatio-service.hierarkia"));
         this.frontProperties.setProperty("organisaatio-service.organisaatio-by-oid", this.require("organisaatio-service.organisaatio-by-oid"));
+        this.frontProperties.setProperty("organisaatio-service.organisaatiot-by-oids", this.require("organisaatio-service.organisaatiot-by-oids"));
+        this.frontProperties.setProperty("organisaatio-service.hierarkia-haku", this.require("organisaatio-service.hierarkia-haku"));
 
         this.frontProperties.setProperty("lokalisaatio-service.localisation", this.require("lokalisaatio-service.localisation"));
 
@@ -61,5 +64,8 @@ public class UrlConfiguration extends OphProperties {
         this.frontProperties.setProperty("kouta-index.toteutus-list", this.require("kouta-index.toteutus-list"));
         this.frontProperties.setProperty("kouta-index.haku-list", this.require("kouta-index.haku-list"));
         this.frontProperties.setProperty("kouta-index.valintaperuste-list", this.require("kouta-index.valintaperuste-list"));
+        this.frontProperties.setProperty("virkailija-raamit.raamitJs", this.require("virkailija-raamit.raamitJs"));
+        this.frontProperties.setProperty("kayttooikeus-service.me", this.require("kayttooikeus-service.me"));
+        this.frontProperties.setProperty("kayttooikeus-service.kayttajan-organisaatiot", this.require("kayttooikeus-service.kayttajan-organisaatiot"));
     }
 }

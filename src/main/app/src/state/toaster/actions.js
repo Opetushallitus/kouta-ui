@@ -55,3 +55,17 @@ export const createSavingSuccessToast = () => (
     }),
   );
 };
+
+export const createGenericErrorToast = () => (
+  dispatch,
+  getState,
+  { localisation },
+) => {
+  return dispatch(
+    createTemporaryToast({
+      status: 'danger',
+      title: localisation.t('yleiset.virheIlmoitus'),
+      description: localisation.t('yleiset.virheIlmoitusKuvaus'),
+    }),
+  );
+};

@@ -140,12 +140,20 @@ export default {
     ladatutTiedostot: 'Ladatut tiedostot',
     varmistaLomakkeenKentat:
       'Varmistathan että olet täyttänyt lomakkeen kaikki pakolliset kentät',
+    virheIlmoitusKuvaus:
+      'Jos virhe aiheuttaa ongelmia järjestelmän käytössä, yritä päivittää sivu, tai ota yhteyttä tukeen',
   },
   validointivirheet: {
     syotaArvo: 'Syötä kentälle arvo',
     syotaArvoKaannoksille: 'Syötä arvo kaikille kentän käännöksille',
     valitseVahintaanYksi: 'Valitse vähintään yksi',
     valitseVahintaan: 'Valitse vähintään {{lukumaara}}',
+  },
+  hakulomakeValinnat: {
+    ataru: 'Käytetään hakemuspalvelun lomaketta',
+    hakuapp: 'Käytetään järjestelmän hakulomaketta',
+    muu: 'Käytetään muuta hakulomaketta',
+    eiSahkoistaHakua: 'Ei sähköistä hakua',
   },
   etusivu: {
     koulutuksetJaHaut: 'Koulutukset ja haut',

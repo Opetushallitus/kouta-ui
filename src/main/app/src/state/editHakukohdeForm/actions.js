@@ -36,7 +36,7 @@ export const submit = ({ hakukohde, tila: tilaArg }) => async (
   }
 
   const {
-    me: { kayttajaOid },
+    me: { oid: kayttajaOid },
   } = state;
 
   const hakukohdeFormData = getHakukohdeByValues(values);

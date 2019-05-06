@@ -45,7 +45,7 @@ export const submit = ({
   }
 
   const {
-    me: { kayttajaOid: muokkaaja },
+    me: { oid: muokkaaja },
   } = state;
 
   const { koulutusOid, organisaatioOid } = getOidsFromPathname(

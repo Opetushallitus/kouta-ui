@@ -2,6 +2,7 @@ import React from 'react';
 import { configure, addDecorator } from '@storybook/react';
 import '@storybook/addon-actions/register';
 import { ThemeProvider } from 'styled-components';
+import { withKnobs } from '@storybook/addon-knobs';
 
 import defaultTheme from '../src/theme';
 import { makeLocalisationDecorator } from '../src/storybookUtils';
@@ -10,6 +11,7 @@ const themeDecorator = storyFn => (
   <ThemeProvider theme={defaultTheme}>{storyFn()}</ThemeProvider>
 );
 
+addDecorator(withKnobs);
 addDecorator(themeDecorator);
 addDecorator(makeLocalisationDecorator());
 

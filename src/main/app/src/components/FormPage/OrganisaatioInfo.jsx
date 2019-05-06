@@ -2,12 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Typography from '../Typography';
-import { getOrganisaatioByOid } from '../../apiUtils';
 import { isObject, getFirstLanguageValue } from '../../utils';
 import useTranslation from '../useTranslation';
-import useApiAsync from '../useApiAsync';
-
-const getOrganisaatio = args => getOrganisaatioByOid(args);
+import { useOrganisaatio } from '../useOrganisaatio';
 
 const OrganisaatioInfoContainer = styled.div`
   margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
@@ -27,11 +24,7 @@ const getOrganisaatioName = organisaatio => {
 
 const OrganisaatioInfo = ({ organisaatioOid, ...props }) => {
   const { t } = useTranslation();
-  const { data } = useApiAsync({
-    promiseFn: getOrganisaatio,
-    oid: organisaatioOid,
-    watch: organisaatioOid,
-  });
+  const { organisaatio } = useOrganisaatio(organisaatioOid);
 
   return (
     <OrganisaatioInfoContainer {...props}>
@@ -40,7 +33,7 @@ const OrganisaatioInfo = ({ organisaatioOid, ...props }) => {
           {t('yleiset.valittuOrganisaatio')}:
         </Typography>
         <OrganisaatioName>
-          {data ? getOrganisaatioName(data) : ''}
+          {organisaatio ? getOrganisaatioName(organisaatio) : ''}
         </OrganisaatioName>
       </div>
     </OrganisaatioInfoContainer>

@@ -39,9 +39,9 @@ const makeTableColumns = t => [
     title: t('yleiset.nimi'),
     key: 'nimi',
     sortable: true,
-    render: ({ nimi, oid }) => (
+    render: ({ nimi, oid, language }) => (
       <Anchor as={Link} to={`/toteutus/${oid}/muokkaus`}>
-        {getFirstLanguageValue(nimi)}
+        {getFirstLanguageValue(nimi, language)}
       </Anchor>
     ),
   },

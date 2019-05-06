@@ -49,24 +49,6 @@ export const KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP = {
   [KOULUTUSTYYPPI_CATEGORY.AMKKOULUTUS]: ['koulutustyyppi_3'],
 };
 
-export const LANGUAGE_CODE_TO_LANGUAGE_NAME = {
-  fi: 'Suomi',
-  sv: 'Ruotsi',
-  en: 'Englanti',
-};
-
-export const LANGUAGE_CODE_TO_TAB_NAME = {
-  fi: 'Suomeksi',
-  sv: 'Ruotsiksi',
-  en: 'Englanniksi',
-};
-
-export const LANGUAGE_TABS = [
-  { label: LANGUAGE_CODE_TO_TAB_NAME.fi, value: 'fi' },
-  { label: LANGUAGE_CODE_TO_TAB_NAME.sv, value: 'sv' },
-  { label: LANGUAGE_CODE_TO_TAB_NAME.en, value: 'en' },
-];
-
 export const HAKUKOHDE_LOMAKETYYPPI_OPTIONS = [
   { value: 'ataru', label: 'Käytetään hakemuspalvelun lomaketta' },
   { value: 'haku-app', label: 'Käytetään järjestelmän hakulomaketta' },
@@ -80,6 +62,13 @@ export const HAKU_LOMAKETYYPPI_OPTIONS = [
   { value: 'muu', label: 'Käytetään muuta hakulomaketta' },
   { value: 'ei sähköistä', label: 'Ei sähköistä hakua' },
 ];
+
+export const HAKULOMAKE_TYYPIT = {
+  ATARU: 'ataru',
+  HAKUAPP: 'hakuapp',
+  MUU: 'muu',
+  EI_SAHKOISTA_HAKUA: 'ei_sahkoista_hakua',
+};
 
 export const VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI =
   'kielitaidonosoittaminen_04';

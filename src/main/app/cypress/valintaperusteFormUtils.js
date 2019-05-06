@@ -14,6 +14,16 @@ export const stubValintaperusteFormRoutes = ({ cy, organisaatioOid }) => {
     }),
   });
 
+  cy.route({
+    method: 'POST',
+    url: '**/organisaatio-service/rest/organisaatio/v4/findbyoids',
+    response: [
+      merge(organisaatio(), {
+        oid: organisaatioOid,
+      }),
+    ],
+  });
+
   stubKoodistoRoute({ koodisto: 'hakutapa', cy });
   stubKoodistoRoute({ koodisto: 'haunkohdejoukko', cy });
   stubKoodistoRoute({ koodisto: 'valintatapajono', cy });

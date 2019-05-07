@@ -1,6 +1,11 @@
 import merge from 'lodash/merge';
 
-import { stubKoodistoRoute, stubHakemuspalveluLomakkeetRoute } from './utils';
+import {
+  stubKoodistoRoute,
+  stubHakemuspalveluLomakkeetRoute,
+  stubOppijanumerorekisteriHenkiloRoute,
+} from './utils';
+
 import organisaatio from './data/organisaatio';
 import haku from './data/haku';
 
@@ -46,4 +51,5 @@ export const stubHakukohdeFormRoutes = ({ cy, organisaatioOid, hakuOid }) => {
   });
 
   stubHakemuspalveluLomakkeetRoute({ cy });
+  stubOppijanumerorekisteriHenkiloRoute({ cy });
 };

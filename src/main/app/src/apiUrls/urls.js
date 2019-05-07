@@ -51,4 +51,5 @@ export const development = ({ isCypress }) => ({
   'lomake-editori.lomakkeet': 'https://virkailija.hahtuvaopintopolku.fi/lomake-editori/api/forms',
   'lomake-editori.cas': 'https://virkailija.hahtuvaopintopolku.fi/lomake-editori/auth/cas',
   'lomake-editori.muokkaus-sivu': 'https://virkailija.hahtuvaopintopolku.fi/lomake-editori/editor/$1',
+  'oppijanumerorekisteri-service.henkilo': 'https://virkailija.hahtuvaopintopolku.fi/oppijanumerorekisteri-service/henkilo/$1',
 });

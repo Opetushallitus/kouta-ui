@@ -12,11 +12,16 @@ const EditToteutusHeader = ({ toteutus }) => {
   return (
     <FormHeader
       status={
-        get(toteutus, 'tila') ? <StatusTag status={toteutus.tila} large /> : null
+        get(toteutus, 'tila') ? (
+          <StatusTag status={toteutus.tila} large />
+        ) : null
       }
       editInfo={
         get(toteutus, 'modified') ? (
-          <FormEditInfo date={toteutus.modified} />
+          <FormEditInfo
+            date={toteutus.modified}
+            editorOid={toteutus.muokkaaja}
+          />
         ) : null
       }
     >

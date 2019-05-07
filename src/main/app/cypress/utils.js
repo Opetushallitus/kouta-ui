@@ -108,3 +108,14 @@ export const stubHakemuspalveluLomakkeetRoute = ({
     },
   });
 };
+
+export const stubOppijanumerorekisteriHenkiloRoute = ({
+  cy,
+  henkilo = { etunimet: 'John', sukunimi: 'Doe' },
+}) => {
+  cy.route({
+    method: 'GET',
+    url: '**/oppijanumerorekisteri-service/henkilo/**',
+    response: henkilo,
+  });
+};

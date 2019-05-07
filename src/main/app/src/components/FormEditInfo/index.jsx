@@ -3,10 +3,12 @@ import styled from 'styled-components';
 
 import Icon from '../Icon';
 import { getThemeProp } from '../../theme';
-import { formatKoutaDateString } from '../../utils';
+import { formatKoutaDateString, isObject } from '../../utils';
 import Spacing from '../Spacing';
 import Anchor from '../Anchor';
 import useTranslation from '../useTranslation';
+import useApiAsync from '../useApiAsync';
+import { getOppijanumerorekisteriHenkilo } from '../../apiUtils';
 
 const InfoIcon = styled(Icon).attrs({ type: 'info' })`
   color: ${getThemeProp('palette.primary.main')};
@@ -28,8 +30,36 @@ const Container = styled.div`
   display: flex;
 `;
 
-const FormEditInfo = ({ editor, date, historyUrl, ...props }) => {
+const getDisplayName = async ({ httpClient, apiUrls, oid }) => {
+  const henkilo = await getOppijanumerorekisteriHenkilo({
+    httpClient,
+    apiUrls,
+    oid,
+  });
+
+  if (!isObject(henkilo)) {
+    return null;
+  }
+
+  const { etunimet, sukunimi } = henkilo;
+
+  if (!etunimet || !sukunimi) {
+    return null;
+  }
+
+  return `${etunimet} ${sukunimi}`;
+};
+
+const noopPromise = () => Promise.resolve(null);
+
+const FormEditInfo = ({ editorOid, date, historyUrl, ...props }) => {
   const { t } = useTranslation();
+
+  const { data: displayName } = useApiAsync({
+    promiseFn: editorOid ? getDisplayName : noopPromise,
+    oid: editorOid,
+    watch: editorOid,
+  });
 
   return (
     <Container {...props}>
@@ -40,7 +70,7 @@ const FormEditInfo = ({ editor, date, historyUrl, ...props }) => {
         <Spacing marginBottom={0.25}>{t('yleiset.muokattuViimeksi')}:</Spacing>
         <Spacing marginBottom={0.25}>
           {date ? formatKoutaDateString(date, 'DD.MM.YYYY HH:mm') : null}{' '}
-          {editor ? editor : null}
+          {displayName ? displayName : null}
         </Spacing>
         <div>
           {historyUrl ? (

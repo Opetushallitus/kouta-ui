@@ -1,6 +1,9 @@
 import merge from 'lodash/merge';
 
-import { stubKoodistoRoute } from './utils';
+import {
+  stubKoodistoRoute,
+  stubOppijanumerorekisteriHenkiloRoute,
+} from './utils';
 import organisaatio from './data/organisaatio';
 import organisaatioHierarkia from './data/organisaatioHierarkia';
 import koodisto from './data/koodisto';
@@ -122,4 +125,6 @@ export const stubToteutusFormRoutes = ({ cy, organisaatioOid, perusteId }) => {
     url: '**/asiasana/search/**',
     response: [],
   });
+
+  stubOppijanumerorekisteriHenkiloRoute({ cy });
 };

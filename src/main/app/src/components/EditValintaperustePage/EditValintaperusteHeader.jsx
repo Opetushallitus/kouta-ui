@@ -18,7 +18,10 @@ const EditValintaperusteHeader = ({ valintaperuste }) => {
       }
       editInfo={
         get(valintaperuste, 'modified') ? (
-          <FormEditInfo date={valintaperuste.modified} />
+          <FormEditInfo
+            date={valintaperuste.modified}
+            editorOid={valintaperuste.muokkaaja}
+          />
         ) : null
       }
     >

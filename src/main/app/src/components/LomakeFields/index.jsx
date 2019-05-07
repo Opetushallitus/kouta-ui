@@ -10,7 +10,6 @@ import {
 import { HAKULOMAKE_TYYPIT } from '../../constants';
 import Spacing from '../Spacing';
 import useTranslation from '../useTranslation';
-import useApiAsync from '../useApiAsync';
 import useLanguage from '../useLanguage';
 import Flex, { FlexItem } from '../Flex';
 import UrlContext from '../UrlContext';
@@ -18,10 +17,9 @@ import Button from '../Button';
 import { isFunction } from '../../utils';
 
 import {
-  getOptions,
   createEnhancedGetTyyppiLabel,
-  createEnhancedGetTyyppiLomakkeet,
   createEnhancedGetTyyppiShowUrl,
+  useLomakeOptions,
 } from './utils';
 
 const MuuFields = ({ baseName, t, language }) => {
@@ -122,8 +120,6 @@ const defaultTyypit = [
   HAKULOMAKE_TYYPIT.EI_SAHKOISTA_HAKUA,
 ];
 
-const noopPromise = () => Promise.resolve([]);
-
 export const LomakeFields = ({
   name,
   tyypit = defaultTyypit,
@@ -160,34 +156,11 @@ export const LomakeFields = ({
     }));
   }, [tyypit, enhancedGetTyyppiLabel]);
 
-  const enhancedGetTyyppiLomakkeet = useMemo(
-    () => createEnhancedGetTyyppiLomakkeet(getTyyppiLomakkeet),
-    [getTyyppiLomakkeet],
-  );
-
-  const { data: ataruLomakkeet } = useApiAsync({
-    promiseFn: tyypit.includes(HAKULOMAKE_TYYPIT.ATARU)
-      ? enhancedGetTyyppiLomakkeet
-      : noopPromise,
-    tyyppi: HAKULOMAKE_TYYPIT.ATARU,
+  const { ataruOptions, hakuappOptions } = useLomakeOptions({
+    getTyyppiLomakkeet,
+    tyypit,
+    language,
   });
-
-  const { data: hakuappLomakkeet } = useApiAsync({
-    promiseFn: tyypit.includes(HAKULOMAKE_TYYPIT.HAKUAPP)
-      ? enhancedGetTyyppiLomakkeet
-      : noopPromise,
-    tyyppi: HAKULOMAKE_TYYPIT.HAKUAPP,
-  });
-
-  const ataruOptions = useMemo(
-    () => getOptions(ataruLomakkeet || [], language),
-    [ataruLomakkeet, language],
-  );
-
-  const hakuappOptions = useMemo(
-    () => getOptions(hakuappLomakkeet || [], language),
-    [hakuappLomakkeet, language],
-  );
 
   return (
     <Flex>

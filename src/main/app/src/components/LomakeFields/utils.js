@@ -1,6 +1,9 @@
+import { useMemo } from 'react';
+
 import { isFunction, isString, getFirstLanguageValue } from '../../utils';
 import { HAKULOMAKE_TYYPIT } from '../../constants';
 import { getHakemuspalveluLomakkeet } from '../../apiUtils';
+import useApiAsync from '../useApiAsync';
 
 const tyyppiToLabel = {
   [HAKULOMAKE_TYYPIT.ATARU]: 'hakulomakeValinnat.ataru',
@@ -72,4 +75,39 @@ export const getOptions = (forms, language) => {
     value: id,
     label: getFirstLanguageValue(name, language),
   }));
+};
+
+const noopPromise = () => Promise.resolve([]);
+
+export const useLomakeOptions = ({ getTyyppiLomakkeet, tyypit, language }) => {
+  const enhancedGetTyyppiLomakkeet = useMemo(
+    () => createEnhancedGetTyyppiLomakkeet(getTyyppiLomakkeet),
+    [getTyyppiLomakkeet],
+  );
+
+  const { data: ataruLomakkeet } = useApiAsync({
+    promiseFn: tyypit.includes(HAKULOMAKE_TYYPIT.ATARU)
+      ? enhancedGetTyyppiLomakkeet
+      : noopPromise,
+    tyyppi: HAKULOMAKE_TYYPIT.ATARU,
+  });
+
+  const { data: hakuappLomakkeet } = useApiAsync({
+    promiseFn: tyypit.includes(HAKULOMAKE_TYYPIT.HAKUAPP)
+      ? enhancedGetTyyppiLomakkeet
+      : noopPromise,
+    tyyppi: HAKULOMAKE_TYYPIT.HAKUAPP,
+  });
+
+  const ataruOptions = useMemo(
+    () => getOptions(ataruLomakkeet || [], language),
+    [ataruLomakkeet, language],
+  );
+
+  const hakuappOptions = useMemo(
+    () => getOptions(hakuappLomakkeet || [], language),
+    [hakuappLomakkeet, language],
+  );
+
+  return { ataruOptions, hakuappOptions };
 };

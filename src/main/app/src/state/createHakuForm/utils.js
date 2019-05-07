@@ -4,6 +4,7 @@ import pick from 'lodash/pick';
 import { isNumeric } from '../../utils';
 import { JULKAISUTILA } from '../../constants';
 import { ErrorBuilder } from '../../validation';
+import { getHakulomakeFieldsData } from '../utils';
 
 const getKielivalinta = values => get(values, 'kieliversiot.languages') || [];
 
@@ -14,7 +15,7 @@ export const getHakuByValues = values => {
     ? parseInt(values.aikataulut.vuosi.value)
     : null;
 
-  const kielivalinta = get(values, 'kieliversiot.languages') || [];
+  const kielivalinta = getKielivalinta(values);
 
   const hakutapaKoodiUri = get(values, 'hakutapa.tapa') || null;
 
@@ -25,9 +26,12 @@ export const getHakuByValues = values => {
     }),
   );
 
-  const hakulomaketyyppi = get(values, 'hakulomake.lomaketyyppi') || null;
-
-  const hakulomake = get(values, 'hakulomake.lomake') || null;
+  const {
+    hakulomaketyyppi,
+    hakulomakeId,
+    hakulomakeLinkki,
+    hakulomakeLinkinOtsikko,
+  } = getHakulomakeFieldsData({ values, kielivalinta });
 
   const hakukohteenLiittamisenTakaraja =
     get(values, 'aikataulut.lisaamisenTakaraja') || null;
@@ -75,7 +79,9 @@ export const getHakuByValues = values => {
     hakukohteenMuokkaamisenTakaraja,
     ajastettuJulkaisu,
     alkamisvuosi,
-    hakulomake,
+    hakulomakeId,
+    hakulomakeLinkki,
+    hakulomakeLinkinOtsikko,
   };
 };
 

@@ -18,225 +18,197 @@ const getKoodiUriParts = uri => {
   };
 };
 
-const memoizedGetKoulutuksetByKoulutusTyyppi = memoizePromise(
-  async (httpClient, apiUrls, koulutusTyyppi) => {
-    const ids =
-      KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP[koulutusTyyppi];
-
-    if (!ids) {
-      return [];
-    }
-
-    const responses = await Promise.all(
-      ids.map(id =>
-        httpClient.get(apiUrls.url('koodisto-service.sisaltyy-ylakoodit', id)),
-      ),
-    );
-
-    const koulutukset = responses.reduce((acc, response) => {
-      const { data } = response;
-
-      if (!isArray(data)) {
-        return acc;
-      }
-
-      return [
-        ...acc,
-        ...data.map(({ metadata, koodisto, koodiArvo, koodiUri, versio }) => ({
-          metadata,
-          koodisto,
-          koodiArvo,
-          koodiUri,
-          versio,
-        })),
-      ];
-    }, []);
-
-    const latestKoulutukset = toPairs(
-      groupBy(koulutukset, ({ koodiUri }) => koodiUri),
-    ).map(([, versiot]) => maxBy(versiot, ({ versio }) => versio));
-
-    return latestKoulutukset.filter(({ koodiUri }) =>
-      /^koulutus_/.test(koodiUri),
-    );
-  },
-);
-
 export const getKoulutuksetByKoulutusTyyppi = async ({
   httpClient,
   apiUrls,
   koulutusTyyppi,
 }) => {
-  return memoizedGetKoulutuksetByKoulutusTyyppi(
-    httpClient,
-    apiUrls,
-    koulutusTyyppi,
+  const ids = KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP[koulutusTyyppi];
+
+  if (!ids) {
+    return [];
+  }
+
+  const responses = await Promise.all(
+    ids.map(id =>
+      httpClient.get(apiUrls.url('koodisto-service.sisaltyy-ylakoodit', id)),
+    ),
+  );
+
+  const koulutukset = responses.reduce((acc, response) => {
+    const { data } = response;
+
+    if (!isArray(data)) {
+      return acc;
+    }
+
+    return [
+      ...acc,
+      ...data.map(({ metadata, koodisto, koodiArvo, koodiUri, versio }) => ({
+        metadata,
+        koodisto,
+        koodiArvo,
+        koodiUri,
+        versio,
+      })),
+    ];
+  }, []);
+
+  const latestKoulutukset = toPairs(
+    groupBy(koulutukset, ({ koodiUri }) => koodiUri),
+  ).map(([, versiot]) => maxBy(versiot, ({ versio }) => versio));
+
+  return latestKoulutukset.filter(({ koodiUri }) =>
+    /^koulutus_/.test(koodiUri),
   );
 };
 
-const memoizedGetKoulutusByKoodi = memoizePromise(
-  async (httpClient, apiUrls, argKoodiUri) => {
-    const { koodiUri, versio } = getKoodiUriParts(argKoodiUri);
+export const getKoulutusByKoodi = async ({
+  httpClient,
+  apiUrls,
+  koodiUri: argKoodiUri,
+}) => {
+  const { koodiUri, versio } = getKoodiUriParts(argKoodiUri);
 
-    const [
-      perusteetResponse,
-      alakooditResponse,
-      koodiResponse,
-    ] = await Promise.all([
-      httpClient.get(
-        apiUrls.url('eperusteet-service.perusteet-koulutuskoodilla', koodiUri),
+  const [
+    perusteetResponse,
+    alakooditResponse,
+    koodiResponse,
+  ] = await Promise.all([
+    httpClient.get(
+      apiUrls.url('eperusteet-service.perusteet-koulutuskoodilla', koodiUri),
+    ),
+    httpClient.get(
+      apiUrls.url(
+        'koodisto-service.sisaltyy-alakoodit',
+        koodiUri,
+        versio || '',
       ),
-      httpClient.get(
-        apiUrls.url(
-          'koodisto-service.sisaltyy-alakoodit',
-          koodiUri,
-          versio || '',
-        ),
-      ),
-      httpClient.get(apiUrls.url('koodisto-service.codeelement', koodiUri)),
-    ]);
+    ),
+    httpClient.get(apiUrls.url('koodisto-service.codeelement', koodiUri)),
+  ]);
 
-    const {
-      data: { data: perusteetData },
-    } = perusteetResponse;
+  const {
+    data: { data: perusteetData },
+  } = perusteetResponse;
 
-    const { data: koodiData } = koodiResponse;
+  const { data: koodiData } = koodiResponse;
 
-    const { data: alakooditData = [] } = alakooditResponse;
+  const { data: alakooditData = [] } = alakooditResponse;
 
-    const koulutusalaKoodi = alakooditData.find(
-      ({ koodiUri }) => koodiUri && /^okmohjauksenala_/.test(koodiUri),
-    );
+  const koulutusalaKoodi = alakooditData.find(
+    ({ koodiUri }) => koodiUri && /^okmohjauksenala_/.test(koodiUri),
+  );
 
-    const opintojenlaajuusKoodi = alakooditData.find(
-      ({ koodiUri }) => koodiUri && /^opintojenlaajuus_/.test(koodiUri),
-    );
+  const opintojenlaajuusKoodi = alakooditData.find(
+    ({ koodiUri }) => koodiUri && /^opintojenlaajuus_/.test(koodiUri),
+  );
 
-    const opintojenlaajuusYksikkoKoodi = alakooditData.find(
-      ({ koodiUri }) => koodiUri && /^opintojenlaajuusyksikko_/.test(koodiUri),
-    );
+  const opintojenlaajuusYksikkoKoodi = alakooditData.find(
+    ({ koodiUri }) => koodiUri && /^opintojenlaajuusyksikko_/.test(koodiUri),
+  );
 
-    const koulutusala =
-      koulutusalaKoodi && isArray(koulutusalaKoodi.metadata)
-        ? keyBy(koulutusalaKoodi.metadata, ({ kieli }) =>
-            kieli ? kieli.toLowerCase() : '_',
-          )
-        : null;
-
-    const opintojenlaajuus =
-      opintojenlaajuusKoodi && isArray(opintojenlaajuusKoodi.metadata)
-        ? get(opintojenlaajuusKoodi.metadata, '[0].nimi') || null
-        : null;
-
-    const opintojenlaajuusYksikko =
-      opintojenlaajuusYksikkoKoodi &&
-      isArray(opintojenlaajuusYksikkoKoodi.metadata)
-        ? keyBy(opintojenlaajuusYksikkoKoodi.metadata, ({ kieli }) =>
-            kieli ? kieli.toLowerCase() : '_',
-          )
-        : null;
-
-    const latestKoodi = isArray(koodiData)
-      ? maxBy(koodiData, ({ versio }) => versio)
+  const koulutusala =
+    koulutusalaKoodi && isArray(koulutusalaKoodi.metadata)
+      ? keyBy(koulutusalaKoodi.metadata, ({ kieli }) =>
+          kieli ? kieli.toLowerCase() : '_',
+        )
       : null;
 
-    const nimi =
-      latestKoodi && isArray(latestKoodi.metadata)
-        ? keyBy(latestKoodi.metadata, ({ kieli }) =>
-            kieli ? kieli.toLowerCase() : '_',
-          )
-        : null;
-
-    const {
-      kuvaus = null,
-      osaamisalat = [],
-      tutkintonimikeKoodit = [],
-      id: perusteId,
-    } = perusteetData[0] || {};
-
-    return {
-      koodiUri,
-      perusteId,
-      kuvaus,
-      osaamisalat,
-      tutkintonimikeKoodit,
-      koulutusala: mapValues(koulutusala, ({ nimi }) => nimi || null),
-      opintojenlaajuus,
-      opintojenlaajuusYksikko: mapValues(
-        opintojenlaajuusYksikko,
-        ({ nimi }) => nimi || null,
-      ),
-      nimi: mapValues(nimi, ({ nimi: nimiField }) => nimiField || null),
-    };
-  },
-);
-
-const memoizedGetHakuByKoodi = memoizePromise(
-  async (httpClient, apiUrls, argKoodiUri) => {
-    const { koodiUri } = getKoodiUriParts(argKoodiUri);
-
-    const [koodiResponse] = await Promise.all([
-      httpClient.get(apiUrls.url('koodisto-service.codeelement', koodiUri)),
-    ]);
-
-    const { data: koodiData } = koodiResponse;
-
-    const latestKoodi = isArray(koodiData)
-      ? maxBy(koodiData, ({ versio }) => versio)
+  const opintojenlaajuus =
+    opintojenlaajuusKoodi && isArray(opintojenlaajuusKoodi.metadata)
+      ? get(opintojenlaajuusKoodi.metadata, '[0].nimi') || null
       : null;
 
-    const nimi =
-      latestKoodi && isArray(latestKoodi.metadata)
-        ? keyBy(latestKoodi.metadata, ({ kieli }) =>
-            kieli ? kieli.toLowerCase() : '_',
-          )
-        : null;
+  const opintojenlaajuusYksikko =
+    opintojenlaajuusYksikkoKoodi &&
+    isArray(opintojenlaajuusYksikkoKoodi.metadata)
+      ? keyBy(opintojenlaajuusYksikkoKoodi.metadata, ({ kieli }) =>
+          kieli ? kieli.toLowerCase() : '_',
+        )
+      : null;
 
-    return {
-      nimi: mapValues(nimi, ({ nimi: nimiField }) => nimiField || null),
-    };
-  },
-  { promise: true },
-);
+  const latestKoodi = isArray(koodiData)
+    ? maxBy(koodiData, ({ versio }) => versio)
+    : null;
 
-export const getKoulutusByKoodi = ({ httpClient, apiUrls, koodiUri }) => {
-  return memoizedGetKoulutusByKoodi(httpClient, apiUrls, koodiUri);
+  const nimi =
+    latestKoodi && isArray(latestKoodi.metadata)
+      ? keyBy(latestKoodi.metadata, ({ kieli }) =>
+          kieli ? kieli.toLowerCase() : '_',
+        )
+      : null;
+
+  const {
+    kuvaus = null,
+    osaamisalat = [],
+    tutkintonimikeKoodit = [],
+    id: perusteId,
+  } = perusteetData[0] || {};
+
+  return {
+    koodiUri,
+    perusteId,
+    kuvaus,
+    osaamisalat,
+    tutkintonimikeKoodit,
+    koulutusala: mapValues(koulutusala, ({ nimi }) => nimi || null),
+    opintojenlaajuus,
+    opintojenlaajuusYksikko: mapValues(
+      opintojenlaajuusYksikko,
+      ({ nimi }) => nimi || null,
+    ),
+    nimi: mapValues(nimi, ({ nimi: nimiField }) => nimiField || null),
+  };
 };
 
-export const getHakuByKoodi = ({ httpClient, apiUrls, koodiUri }) => {
-  return memoizedGetHakuByKoodi(httpClient, apiUrls, koodiUri);
+export const getHakuByKoodi = async ({
+  httpClient,
+  apiUrls,
+  koodiUri: argKoodiUri,
+}) => {
+  const { koodiUri } = getKoodiUriParts(argKoodiUri);
+
+  const [koodiResponse] = await Promise.all([
+    httpClient.get(apiUrls.url('koodisto-service.codeelement', koodiUri)),
+  ]);
+
+  const { data: koodiData } = koodiResponse;
+
+  const latestKoodi = isArray(koodiData)
+    ? maxBy(koodiData, ({ versio }) => versio)
+    : null;
+
+  const nimi =
+    latestKoodi && isArray(latestKoodi.metadata)
+      ? keyBy(latestKoodi.metadata, ({ kieli }) =>
+          kieli ? kieli.toLowerCase() : '_',
+        )
+      : null;
+
+  return {
+    nimi: mapValues(nimi, ({ nimi: nimiField }) => nimiField || null),
+  };
 };
-
-const memoizedGetOrganisaatioHierarchyByOid = memoizePromise(
-  async (httpClient, apiUrls, oid) => {
-    const { data } = await httpClient.get(
-      apiUrls.url('organisaatio-service.hierarkia', oid),
-    );
-
-    return get(data, 'organisaatiot') || [];
-  },
-);
 
 export const getOrganisaatioHierarchyByOid = async ({
   oid,
   apiUrls,
   httpClient,
 }) => {
-  return memoizedGetOrganisaatioHierarchyByOid(httpClient, apiUrls, oid);
+  const { data } = await httpClient.get(
+    apiUrls.url('organisaatio-service.hierarkia', oid),
+  );
+
+  return get(data, 'organisaatiot') || [];
 };
 
-const memoizedGetOrganisaatioByOid = memoizePromise(
-  async (httpClient, apiUrls, oid) => {
-    const { data } = await httpClient.get(
-      apiUrls.url('organisaatio-service.organisaatio-by-oid', oid),
-    );
+export const getOrganisaatioByOid = async ({ oid, apiUrls, httpClient }) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('organisaatio-service.organisaatio-by-oid', oid),
+  );
 
-    return data;
-  },
-);
-
-export const getOrganisaatioByOid = ({ oid, apiUrls, httpClient }) => {
-  return memoizedGetOrganisaatioByOid(httpClient, apiUrls, oid);
+  return data;
 };
 
 export const getKoutaKoulutusByOid = async ({ oid, apiUrls, httpClient }) => {
@@ -307,24 +279,18 @@ export const getAvainsanatByTerm = async ({
   return data;
 };
 
-const memoizedGetKoodisto = memoizePromise(
-  async (httpClient, apiUrls, koodistoUri, koodistoVersio) => {
-    const { data } = await httpClient.get(
-      apiUrls.url('koodisto-service.koodi', koodistoUri),
-      { params: { koodistoVersio } },
-    );
-
-    return data;
-  },
-);
-
-export const getKoodisto = ({
+export const getKoodisto = async ({
   koodistoUri,
   httpClient,
   apiUrls,
   koodistoVersio = '',
 }) => {
-  return memoizedGetKoodisto(httpClient, apiUrls, koodistoUri, koodistoVersio);
+  const { data } = await httpClient.get(
+    apiUrls.url('koodisto-service.koodi', koodistoUri),
+    { params: { koodistoVersio } },
+  );
+
+  return data;
 };
 
 export const getLocalisation = async ({
@@ -518,23 +484,17 @@ export const getKoutaHaut = async ({
   return data;
 };
 
-const memoizedGetKayttajanOrganisaatioOids = memoizePromise(
-  async (httpClient, apiUrls) => {
-    const { data } = await httpClient.get(
-      apiUrls.url('kayttooikeus-service.kayttajan-organisaatiot'),
-      { params: { kayttajaTyyppi: 'VIRKAILIJA' } },
-    );
-
-    return data;
-  },
-);
-
 export const getKayttajanOrganisaatioOids = async ({
   oid,
   httpClient,
   apiUrls,
 }) => {
-  return memoizedGetKayttajanOrganisaatioOids(httpClient, apiUrls, oid);
+  const { data } = await httpClient.get(
+    apiUrls.url('kayttooikeus-service.kayttajan-organisaatiot'),
+    { params: { kayttajaTyyppi: 'VIRKAILIJA' } },
+  );
+
+  return data;
 };
 
 const toKoutaIndexParams = ({
@@ -789,14 +749,11 @@ export const getKoutaIndexValintaperusteet = async ({
   return data;
 };
 
-const memoizedGetMe = memoizePromise(async (httpClient, apiUrls) => {
+export const getMe = async ({ httpClient, apiUrls }) => {
   const { data } = await httpClient.get(apiUrls.url('kayttooikeus-service.me'));
 
   return data;
-});
-
-export const getMe = ({ httpClient, apiUrls }) =>
-  memoizedGetMe(httpClient, apiUrls);
+};
 
 export const getOrganisaatiotByOids = async ({ oids, httpClient, apiUrls }) => {
   const { data } = await httpClient.post(
@@ -836,15 +793,10 @@ export const koutaBackendLogin = async ({ httpClient, apiUrls }) => {
   return data;
 };
 
-const memoizedGetHakemuspaveluLomakkeet = memoizePromise(
-  async (httpClient, apiUrls) => {
-    const { data } = await httpClient.get(
-      apiUrls.url('lomake-editori.lomakkeet'),
-    );
+export const getHakemuspalveluLomakkeet = async ({ httpClient, apiUrls }) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('lomake-editori.lomakkeet'),
+  );
 
-    return get(data, 'forms') || [];
-  },
-);
-
-export const getHakemuspalveluLomakkeet = ({ httpClient, apiUrls }) =>
-  memoizedGetHakemuspaveluLomakkeet(httpClient, apiUrls);
+  return get(data, 'forms') || [];
+};

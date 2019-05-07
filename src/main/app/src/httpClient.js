@@ -1,5 +1,6 @@
 import axios from 'axios';
 import get from 'lodash/get';
+import { setupCache } from 'axios-cache-adapter';
 
 import { compose } from './utils';
 
@@ -7,9 +8,23 @@ const isKoutaBackendUrl = url => {
   return /kouta-backend/.test(url);
 };
 
+const isKoutaIndexUrl = url => {
+  return /kouta-index/.test(url);
+};
+
 const isLomakeEditoriUrl = url => {
   return /lomake-editori/.test(url);
 };
+
+const cache = setupCache({
+  limit: 1000,
+  exclude: {
+    query: false,
+    filter: config => {
+      return isKoutaBackendUrl(config.url) || isKoutaIndexUrl(config.url);
+    },
+  },
+});
 
 const hasBeenRetried = error => {
   return Boolean(get(error, 'config.__retried'));
@@ -44,6 +59,9 @@ const withAuthorizationInterceptor = apiUrls => client => {
       if (isLomakeEditoriUrl(responseUrl) && apiUrls) {
         try {
           await client.get(apiUrls.url('cas.login'), {
+            cache: {
+              ignoreCache: true,
+            },
             params: {
               service: apiUrls.url('lomake-editori.cas'),
             },
@@ -65,6 +83,7 @@ const withAuthorizationInterceptor = apiUrls => client => {
 const createHttpClient = ({ apiUrls } = {}) => {
   let client = axios.create({
     withCredentials: true,
+    adapter: cache.adapter,
   });
 
   client = compose(withAuthorizationInterceptor(apiUrls))(client);

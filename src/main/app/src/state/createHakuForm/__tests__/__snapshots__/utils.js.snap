@@ -18,7 +18,7 @@ Object {
   "hakukohteenLiittamisenTakaraja": "2019-09-16T08:44",
   "hakukohteenMuokkaamisenTakaraja": "2019-10-16T08:44",
   "hakulomakeId": null,
-  "hakulomakeLinkinOtsikko": Object {},
+  "hakulomakeKuvaus": Object {},
   "hakulomakeLinkki": Object {},
   "hakulomaketyyppi": null,
   "hakutapaKoodiUri": "hakutapa_1#1",

@@ -13,7 +13,7 @@ export const getSelectOption = (value, cy) => {
 };
 
 export const getCheckbox = (value, cy) => {
-  return cy.get(`input[type="checkbox"][name="${value}"]`);
+  return cy.get(`input[type="checkbox"]${value ? `[name="${value}"]` : ''}`);
 };
 
 export const getSelect = cy => {

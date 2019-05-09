@@ -175,7 +175,7 @@ describe('createKoulutusForm', () => {
     fillJarjestajaSection(cy, true);
 
     getByTestId('nakyvyysSection', cy).within(() => {
-      getCheckbox('julkinen', cy).click({ force: true });
+      getCheckbox(null, cy).click({ force: true });
     });
 
     tallenna(cy);

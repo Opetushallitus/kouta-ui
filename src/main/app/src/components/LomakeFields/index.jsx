@@ -5,6 +5,7 @@ import {
   FormFieldSelect,
   FormFieldInput,
   FormFieldRadioGroup,
+  FormFieldTextarea,
 } from '../FormFields';
 
 import { HAKULOMAKE_TYYPIT } from '../../constants';
@@ -24,20 +25,21 @@ import {
 
 const MuuFields = ({ baseName, t, language }) => {
   return (
-    <>
-      <Spacing marginBottom={2}>
-        <Field
-          name={`${baseName}.linkki.${language}`}
-          component={FormFieldInput}
-          label={t('yleiset.linkki')}
-        />
-      </Spacing>
-      <Field
-        name={`${baseName}.linkinOtsikko.${language}`}
-        component={FormFieldInput}
-        label={t('yleiset.linkinOtsikko')}
-      />
-    </>
+    <Field
+      name={`${baseName}.linkki.${language}`}
+      component={FormFieldInput}
+      label={t('yleiset.linkki')}
+    />
+  );
+};
+
+const EiHakuaFields = ({ baseName, t, language }) => {
+  return (
+    <Field
+      name={`${baseName}.kuvaus.${language}`}
+      component={FormFieldTextarea}
+      label={t('yleiset.kuvaus')}
+    />
   );
 };
 
@@ -73,7 +75,6 @@ const AdditionalTyyppiFields = ({
   baseName,
   lomakeName,
   ataruOptions,
-  hakuappOptions,
   getTyyppiShowUrl,
   apiUrls,
   language,
@@ -99,16 +100,8 @@ const AdditionalTyyppiFields = ({
     );
   }
 
-  if (value === HAKULOMAKE_TYYPIT.HAKUAPP) {
-    return (
-      <Field
-        name={`${lomakeName}.${value}`}
-        component={LomakeSelect}
-        options={hakuappOptions}
-        label={t('yleiset.valitseHakulomake')}
-        getShowUrl={getShowUrl}
-      />
-    );
+  if (value === HAKULOMAKE_TYYPIT.EI_SAHKOISTA_HAKUA) {
+    return <EiHakuaFields baseName={baseName} t={t} language={language} />;
   }
 
   return null;
@@ -116,6 +109,7 @@ const AdditionalTyyppiFields = ({
 
 const defaultTyypit = [
   HAKULOMAKE_TYYPIT.ATARU,
+  HAKULOMAKE_TYYPIT.HAKUAPP,
   HAKULOMAKE_TYYPIT.MUU,
   HAKULOMAKE_TYYPIT.EI_SAHKOISTA_HAKUA,
 ];
@@ -156,7 +150,7 @@ export const LomakeFields = ({
     }));
   }, [tyypit, enhancedGetTyyppiLabel]);
 
-  const { ataruOptions, hakuappOptions } = useLomakeOptions({
+  const { ataruOptions } = useLomakeOptions({
     getTyyppiLomakkeet,
     tyypit,
     language,
@@ -177,7 +171,6 @@ export const LomakeFields = ({
           baseName={name}
           lomakeName={lomakeName}
           ataruOptions={ataruOptions}
-          hakuappOptions={hakuappOptions}
           name={tyyppiName}
           getTyyppiShowUrl={enhancedGetTyyppiShowUrl}
           apiUrls={apiUrls}

@@ -80,13 +80,13 @@ const withAuthorizationInterceptor = apiUrls => client => {
   return client;
 };
 
-const createHttpClient = ({ apiUrls, sendCallerId = false } = {}) => {
+const createHttpClient = ({ apiUrls, callerId } = {}) => {
   let client = axios.create({
     withCredentials: true,
     adapter: cache.adapter,
-    ...(sendCallerId && {
+    ...(callerId && {
       headers: {
-        'Caller-Id': '1.2.246.562.10.00000000001.koutaui',
+        'Caller-Id': callerId,
       },
     }),
   });

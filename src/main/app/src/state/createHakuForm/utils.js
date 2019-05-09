@@ -30,7 +30,7 @@ export const getHakuByValues = values => {
     hakulomaketyyppi,
     hakulomakeId,
     hakulomakeLinkki,
-    hakulomakeLinkinOtsikko,
+    hakulomakeKuvaus,
   } = getHakulomakeFieldsData({ values, kielivalinta });
 
   const hakukohteenLiittamisenTakaraja =
@@ -81,7 +81,7 @@ export const getHakuByValues = values => {
     alkamisvuosi,
     hakulomakeId,
     hakulomakeLinkki,
-    hakulomakeLinkinOtsikko,
+    hakulomakeKuvaus,
   };
 };
 

@@ -48,7 +48,11 @@ const loadLocalisation = async ({
 
 (async () => {
   const apiUrls = await configureUrls(ophUrls);
-  const httpClient = createHttpClient({ apiUrls, sendCallerId: !isDev });
+
+  const httpClient = createHttpClient({
+    apiUrls,
+    callerId: !isDev ? process.env.REACT_APP_CALLER_ID : null,
+  });
 
   const localisationInstance = createLocalisation({
     debug: isDev,

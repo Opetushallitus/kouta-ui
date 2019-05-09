@@ -63,10 +63,6 @@ export const createEnhancedGetTyyppiLomakkeet = getTyyppiOptions => async ({
     }
   }
 
-  if (tyyppi === HAKULOMAKE_TYYPIT.HAKUAPP) {
-    return [];
-  }
-
   return [];
 };
 
@@ -92,22 +88,10 @@ export const useLomakeOptions = ({ getTyyppiLomakkeet, tyypit, language }) => {
     tyyppi: HAKULOMAKE_TYYPIT.ATARU,
   });
 
-  const { data: hakuappLomakkeet } = useApiAsync({
-    promiseFn: tyypit.includes(HAKULOMAKE_TYYPIT.HAKUAPP)
-      ? enhancedGetTyyppiLomakkeet
-      : noopPromise,
-    tyyppi: HAKULOMAKE_TYYPIT.HAKUAPP,
-  });
-
   const ataruOptions = useMemo(
     () => getOptions(ataruLomakkeet || [], language),
     [ataruLomakkeet, language],
   );
 
-  const hakuappOptions = useMemo(
-    () => getOptions(hakuappLomakkeet || [], language),
-    [hakuappLomakkeet, language],
-  );
-
-  return { ataruOptions, hakuappOptions };
+  return { ataruOptions };
 };

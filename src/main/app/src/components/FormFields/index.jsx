@@ -37,7 +37,7 @@ export const FormFieldCheckbox = createComponent(
   Checkbox,
   ({ meta, input: { value, ...input }, ...props }) => ({
     ...input,
-    value: !!value,
+    checked: !!value,
     ...props,
   }),
 );

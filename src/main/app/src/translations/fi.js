@@ -273,6 +273,7 @@ export default {
     koulutuksenAlkamiskausi: 'Koulutuksen alkamiskausi',
     lisaaTilaisuus: 'Lisää tilaisuus',
     voiSuorittaaKaksoistutkinnon: 'Voi suorittaa kaksoistutkinnon',
+    eriHakulomake: 'Hakukohteen hakulomake on eri kuin haun hakulomake',
   },
   valintaperustelomake: {
     hakutavanRajaus: 'Hakutavan rajaus',

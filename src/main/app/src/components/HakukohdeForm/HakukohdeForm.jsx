@@ -75,7 +75,11 @@ const HakukohdeForm = ({
               <HakuajatSection haku={haku} />
             </FormCollapse>
 
-            <FormCollapse header="Lomake" {...getTestIdProps('lomakeSection')}>
+            <FormCollapse
+              header={t('yleiset.hakulomakkeenValinta')}
+              {...getTestIdProps('lomakeSection')}
+              languages={languages}
+            >
               <LomakeSection />
             </FormCollapse>
 

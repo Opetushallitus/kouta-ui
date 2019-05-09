@@ -4,7 +4,7 @@ import pick from 'lodash/pick';
 import { isNumeric } from '../../utils';
 import { JULKAISUTILA } from '../../constants';
 import { ErrorBuilder } from '../../validation';
-import { getHakulomakeFieldsData } from '../utils';
+import { getHakulomakeFieldsData, getHakulomakeFieldsValues } from '../utils';
 
 const getKielivalinta = values => get(values, 'kieliversiot.languages') || [];
 
@@ -93,6 +93,9 @@ export const getValuesByHaku = haku => {
     hakutapaKoodiUri = '',
     kohdejoukkoKoodiUri = '',
     hakulomaketyyppi = '',
+    hakulomakeId = '',
+    hakulomakeKuvaus = {},
+    hakulomakeLinkki = {},
     hakukohteenLiittamisenTakaraja,
     hakukohteenMuokkaamisenTakaraja,
     ajastettuJulkaisu,
@@ -137,9 +140,12 @@ export const getValuesByHaku = haku => {
     kohdejoukko: {
       kohde: kohdejoukkoKoodiUri,
     },
-    hakulomake: {
-      lomaketyyppi: hakulomaketyyppi,
-    },
+    hakulomake: getHakulomakeFieldsValues({
+      hakulomaketyyppi,
+      hakulomakeId,
+      hakulomakeKuvaus,
+      hakulomakeLinkki,
+    }),
     yhteystiedot: {
       nimi: get(yhteystieto, 'nimi') || {},
       titteli: get(yhteystieto, 'titteli') || {},

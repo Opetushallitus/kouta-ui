@@ -1,4 +1,5 @@
 import { getHakukohdeByValues, getValuesByHakukohde } from '../utils';
+import { HAKULOMAKE_TYYPIT } from '../../../constants';
 
 test('getHakukohdeByValues returns correct hakukohde given form values', () => {
   const hakukohde = getHakukohdeByValues({
@@ -104,6 +105,13 @@ test('getHakukohdeByValues returns correct hakukohde given form values', () => {
         },
       ],
     },
+    hakulomake: {
+      eriHakulomake: true,
+      tyyppi: HAKULOMAKE_TYYPIT.ATARU,
+      lomake: {
+        [HAKULOMAKE_TYYPIT.ATARU]: { value: '12345' },
+      },
+    },
   });
 
   expect(hakukohde).toMatchSnapshot();
@@ -165,6 +173,9 @@ test('getValuesByHakukohde returns correct form values given hakukohde', () => {
     pohjakoulutusvaatimusKoodiUrit: ['vaatimus_1#1', 'vaatimus_2#1'],
     valintaperuste: 'peruste_1#1',
     ensikertalaisenAloituspaikat: 39,
+    hakulomakeId: '12345',
+    hakulomaketyyppi: HAKULOMAKE_TYYPIT.ATARU,
+    eriHakulomake: true,
   });
 
   expect(values).toMatchSnapshot();

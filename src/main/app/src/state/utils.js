@@ -47,20 +47,21 @@ export const getHakulomakeFieldsData = ({
   kielivalinta,
   name = 'hakulomake',
 }) => {
-  const hakulomaketyyppi = get(values, [name, 'tyyppi']) || null;
+  const lomakeValues = get(values, name);
+  const hakulomaketyyppi = get(lomakeValues, 'tyyppi') || null;
 
   const hakulomakeId = [HAKULOMAKE_TYYPIT.ATARU].includes(hakulomaketyyppi)
-    ? get(values, [name, 'lomake', hakulomaketyyppi, 'value']) || null
+    ? get(lomakeValues, ['lomake', hakulomaketyyppi, 'value']) || null
     : null;
 
   const hakulomakeLinkki =
     hakulomaketyyppi === HAKULOMAKE_TYYPIT.MUU
-      ? pick(get(values, [name, 'linkki']) || {}, kielivalinta)
+      ? pick(get(lomakeValues, 'linkki') || {}, kielivalinta)
       : {};
 
   const hakulomakeKuvaus =
     hakulomaketyyppi === HAKULOMAKE_TYYPIT.EI_SAHKOISTA_HAKUA
-      ? pick(get(values, [name, 'kuvaus']) || {}, kielivalinta)
+      ? pick(get(lomakeValues, 'kuvaus') || {}, kielivalinta)
       : {};
 
   return {
@@ -68,5 +69,23 @@ export const getHakulomakeFieldsData = ({
     hakulomakeId,
     hakulomakeLinkki,
     hakulomakeKuvaus,
+  };
+};
+
+export const getHakulomakeFieldsValues = ({
+  hakulomaketyyppi,
+  hakulomakeId,
+  hakulomakeLinkki,
+  hakulomakeKuvaus,
+}) => {
+  return {
+    tyyppi: hakulomaketyyppi,
+    lomake: [HAKULOMAKE_TYYPIT.ATARU].includes(hakulomaketyyppi)
+      ? {
+          [hakulomaketyyppi]: { value: hakulomakeId || '' },
+        }
+      : {},
+    linkki: hakulomakeLinkki || {},
+    kuvaus: hakulomakeKuvaus || {},
   };
 };

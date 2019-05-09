@@ -9,7 +9,9 @@ export default () => ({
   alkamisvuosi: '2024',
   kohdejoukkoKoodiUri: 'haunkohdejoukko_0#1',
   hakulomaketyyppi: 'ataru',
-  hakulomake: {},
+  hakulomakeId: '12345',
+  hakulomakeKuvaus: {},
+  hakulomakeLinkki: {},
   metadata: {
     tulevaisuudenAikataulu: [
       { alkaa: '2019-10-11T09:05', paattyy: '2019-12-25T20:30' },

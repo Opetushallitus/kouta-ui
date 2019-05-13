@@ -1,5 +1,9 @@
+import { useMemo } from 'react';
+
 import { isFunction, isString, getFirstLanguageValue } from '../../utils';
 import { HAKULOMAKE_TYYPIT } from '../../constants';
+import { getHakemuspalveluLomakkeet } from '../../apiUtils';
+import useApiAsync from '../useApiAsync';
 
 const tyyppiToLabel = {
   [HAKULOMAKE_TYYPIT.ATARU]: 'hakulomakeValinnat.ataru',
@@ -17,7 +21,27 @@ export const createEnhancedGetTyyppiLabel = (getTyyppiLabel, t) => tyyppi => {
     : translated;
 };
 
-export const createEnhancedGetTyyppiLomakkeet = getTyyppiOptions => ({
+export const createEnhancedGetTyyppiShowUrl = getTyyppiShowUrl => ({
+  tyyppi,
+  option,
+  apiUrls,
+}) => {
+  if (!option || !option.value) {
+    return null;
+  }
+
+  if (isFunction(getTyyppiShowUrl)) {
+    return getTyyppiShowUrl({ tyyppi, option, apiUrls });
+  }
+
+  if (tyyppi === HAKULOMAKE_TYYPIT.ATARU) {
+    return apiUrls.url('lomake-editori.muokkaus-sivu', option.value);
+  }
+
+  return null;
+};
+
+export const createEnhancedGetTyyppiLomakkeet = getTyyppiOptions => async ({
   httpClient,
   apiUrls,
   tyyppi,
@@ -27,14 +51,19 @@ export const createEnhancedGetTyyppiLomakkeet = getTyyppiOptions => ({
   }
 
   if (tyyppi === HAKULOMAKE_TYYPIT.ATARU) {
-    return Promise.resolve([]);
+    try {
+      const ataruLomakkeet = await getHakemuspalveluLomakkeet({
+        httpClient,
+        apiUrls,
+      });
+
+      return ataruLomakkeet.map(({ name, key }) => ({ name, id: key }));
+    } catch (e) {
+      return [];
+    }
   }
 
-  if (tyyppi === HAKULOMAKE_TYYPIT.HAKUAPP) {
-    return Promise.resolve([]);
-  }
-
-  return Promise.resolve([]);
+  return [];
 };
 
 export const getOptions = (forms, language) => {
@@ -42,4 +71,27 @@ export const getOptions = (forms, language) => {
     value: id,
     label: getFirstLanguageValue(name, language),
   }));
+};
+
+const noopPromise = () => Promise.resolve([]);
+
+export const useLomakeOptions = ({ getTyyppiLomakkeet, tyypit, language }) => {
+  const enhancedGetTyyppiLomakkeet = useMemo(
+    () => createEnhancedGetTyyppiLomakkeet(getTyyppiLomakkeet),
+    [getTyyppiLomakkeet],
+  );
+
+  const { data: ataruLomakkeet } = useApiAsync({
+    promiseFn: tyypit.includes(HAKULOMAKE_TYYPIT.ATARU)
+      ? enhancedGetTyyppiLomakkeet
+      : noopPromise,
+    tyyppi: HAKULOMAKE_TYYPIT.ATARU,
+  });
+
+  const ataruOptions = useMemo(
+    () => getOptions(ataruLomakkeet || [], language),
+    [ataruLomakkeet, language],
+  );
+
+  return { ataruOptions };
 };

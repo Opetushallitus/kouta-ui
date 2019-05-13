@@ -82,6 +82,13 @@ const fillPerustiedotSection = cy => {
 
 const fillLomakeSection = cy => {
   getByTestId('lomakeSection', cy).within(() => {
+    getByTestId('eriHakulomake', cy).within(() => {
+      getCheckbox(null, cy).click({ force: true });
+    });
+
+    getRadio('ataru', cy).click({ force: true });
+    selectOption('Lomake 1', cy);
+
     jatka(cy);
   });
 };

@@ -12,17 +12,22 @@ const EditHakukohdeHeader = ({ hakukohde }) => {
   return (
     <FormHeader
       status={
-        get(hakukohde, 'tila') ? <StatusTag status={hakukohde.tila} large /> : null
+        get(hakukohde, 'tila') ? (
+          <StatusTag status={hakukohde.tila} large />
+        ) : null
       }
       editInfo={
         get(hakukohde, 'modified') ? (
-          <FormEditInfo date={hakukohde.modified} />
+          <FormEditInfo
+            date={hakukohde.modified}
+            editorOid={hakukohde.muokkaaja}
+          />
         ) : null
       }
     >
       {t('yleiset.hakukohde')}
     </FormHeader>
   );
-}
+};
 
 export default EditHakukohdeHeader;

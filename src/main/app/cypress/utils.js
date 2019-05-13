@@ -13,7 +13,7 @@ export const getSelectOption = (value, cy) => {
 };
 
 export const getCheckbox = (value, cy) => {
-  return cy.get(`input[type="checkbox"][name="${value}"]`);
+  return cy.get(`input[type="checkbox"]${value ? `[name="${value}"]` : ''}`);
 };
 
 export const getSelect = cy => {
@@ -93,5 +93,29 @@ export const stubKoutaBackendLoginRoute = ({ cy }) => {
     method: 'GET',
     url: '**/kouta-backend/auth/login',
     response: {},
+  });
+};
+
+export const stubHakemuspalveluLomakkeetRoute = ({
+  cy,
+  lomakkeet = [{ name: { fi: 'Lomake 1' }, key: 'lomake_1' }],
+}) => {
+  cy.route({
+    method: 'GET',
+    url: '**/lomake-editori/api/forms',
+    response: {
+      forms: lomakkeet,
+    },
+  });
+};
+
+export const stubOppijanumerorekisteriHenkiloRoute = ({
+  cy,
+  henkilo = { etunimet: 'John', sukunimi: 'Doe' },
+}) => {
+  cy.route({
+    method: 'GET',
+    url: '**/oppijanumerorekisteri-service/henkilo/**',
+    response: henkilo,
   });
 };

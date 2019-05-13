@@ -1,6 +1,9 @@
 import merge from 'lodash/merge';
 
-import { stubKoodistoRoute } from './utils';
+import {
+  stubKoodistoRoute,
+  stubOppijanumerorekisteriHenkiloRoute,
+} from './utils';
 import organisaatio from './data/organisaatio';
 
 export const stubValintaperusteFormRoutes = ({ cy, organisaatioOid }) => {
@@ -32,4 +35,5 @@ export const stubValintaperusteFormRoutes = ({ cy, organisaatioOid }) => {
   stubKoodistoRoute({ koodisto: 'kielitaitovaatimustyypitkuvaus', cy });
   stubKoodistoRoute({ koodisto: 'kieli', cy });
   stubKoodistoRoute({ koodisto: 'osaamistausta', cy });
+  stubOppijanumerorekisteriHenkiloRoute({ cy });
 };

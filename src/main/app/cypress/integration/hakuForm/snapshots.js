@@ -20,7 +20,7 @@ module.exports = {
         },
         kohdejoukkoKoodiUri: 'haunkohdejoukko_0#1',
         kohdejoukonTarkenneKoodiUri: null,
-        hakulomaketyyppi: null,
+        hakulomaketyyppi: 'ataru',
         metadata: {
           tulevaisuudenAikataulu: [
             {
@@ -46,7 +46,9 @@ module.exports = {
         hakukohteenMuokkaamisenTakaraja: '2019-12-11T19:15',
         ajastettuJulkaisu: '2019-12-05T06:45',
         alkamisvuosi: 2019,
-        hakulomake: null,
+        hakulomakeId: 'lomake_1',
+        hakulomakeLinkki: {},
+        hakulomakeKuvaus: {},
       },
     },
   },
@@ -99,7 +101,9 @@ module.exports = {
         hakukohteenMuokkaamisenTakaraja: '2019-02-08T07:05',
         ajastettuJulkaisu: '2019-12-05T06:45',
         alkamisvuosi: 2024,
-        hakulomake: null,
+        hakulomakeId: '12345',
+        hakulomakeLinkki: {},
+        hakulomakeKuvaus: {},
       },
     },
   },

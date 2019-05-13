@@ -26,7 +26,7 @@ export const FormFieldRadio = createComponent(
   Radio,
   ({ meta, input: { value, ...input }, ...props }) => ({
     ...input,
-    value: !!value,
+    checked: !!value,
     ...props,
   }),
 );
@@ -37,7 +37,7 @@ export const FormFieldCheckbox = createComponent(
   Checkbox,
   ({ meta, input: { value, ...input }, ...props }) => ({
     ...input,
-    value: !!value,
+    checked: !!value,
     ...props,
   }),
 );

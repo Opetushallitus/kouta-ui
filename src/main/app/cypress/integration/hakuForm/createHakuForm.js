@@ -4,6 +4,7 @@ import {
   getSelectOption,
   fillDateTimeInput,
   chooseKieliversiotLanguages,
+  selectOption,
 } from '../../utils';
 
 import { stubHakuFormRoutes } from '../../hakuFormUtils';
@@ -139,6 +140,9 @@ const fillAikatauluSection = cy => {
 
 const fillHakulomakeSection = cy => {
   getByTestId('hakulomakeSection', cy).within(() => {
+    getRadio('ataru', cy).click({ force: true });
+    selectOption('Lomake 1', cy);
+
     jatka(cy);
   });
 };

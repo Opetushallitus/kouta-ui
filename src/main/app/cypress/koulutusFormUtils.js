@@ -1,6 +1,9 @@
 import merge from 'lodash/merge';
 
-import { stubKoodistoRoute } from './utils';
+import {
+  stubKoodistoRoute,
+  stubOppijanumerorekisteriHenkiloRoute,
+} from './utils';
 import organisaatioHierarkia from './data/organisaatioHierarkia';
 import organisaatio from './data/organisaatio';
 import koodisto from './data/koodisto';
@@ -96,4 +99,5 @@ export const stubKoulutusFormRoutes = ({ cy, organisaatioOid }) => {
   stubKoodistoRoute({ koodisto: 'tutkintonimikekk', cy });
   stubKoodistoRoute({ koodisto: 'opintojenlaajuus', cy });
   stubKoodistoRoute({ koodisto: 'koulutuksenjarjestamisenlisaosiot', cy });
+  stubOppijanumerorekisteriHenkiloRoute({ cy });
 };

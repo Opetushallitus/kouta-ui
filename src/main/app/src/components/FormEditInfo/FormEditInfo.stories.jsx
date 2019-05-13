@@ -8,7 +8,7 @@ storiesOf('FormEditInfo', module)
   .addDecorator(makeLocalisationDecorator())
   .add('Basic', () => (
     <FormEditInfo
-      editor="John Doe"
+      editorOid={null}
       date="2011-10-10T10:30"
       historyUrl="https://google.fi"
     />

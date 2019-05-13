@@ -142,6 +142,7 @@ export default {
       'Varmistathan että olet täyttänyt lomakkeen kaikki pakolliset kentät',
     virheIlmoitusKuvaus:
       'Jos virhe aiheuttaa ongelmia järjestelmän käytössä, yritä päivittää sivu, tai ota yhteyttä tukeen',
+    valitseMitaHakulomakettaKaytetaan: 'Valitse mitä hakulomaketta käytetään',
   },
   validointivirheet: {
     syotaArvo: 'Syötä kentälle arvo',
@@ -272,6 +273,7 @@ export default {
     koulutuksenAlkamiskausi: 'Koulutuksen alkamiskausi',
     lisaaTilaisuus: 'Lisää tilaisuus',
     voiSuorittaaKaksoistutkinnon: 'Voi suorittaa kaksoistutkinnon',
+    eriHakulomake: 'Hakukohteen hakulomake on eri kuin haun hakulomake',
   },
   valintaperustelomake: {
     hakutavanRajaus: 'Hakutavan rajaus',

@@ -321,10 +321,7 @@ const validateCommon = ({ errorBuilder, values }) => {
     .validateArray('valintatapa.valintatavat', eb => {
       return eb
         .validateExistence('tapa')
-        .validateTranslations('nimi', kieliversiot)
-        .validateTranslations('kynnysehto', kieliversiot)
-        .validateExistence('enimmaispistemaara')
-        .validateExistence('vahimmaispistemaara');
+        .validateTranslations('nimi', kieliversiot);
     });
 };
 

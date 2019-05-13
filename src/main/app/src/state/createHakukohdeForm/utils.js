@@ -4,6 +4,7 @@ import pick from 'lodash/pick';
 import { isArray, isNumeric } from '../../utils';
 import { JULKAISUTILA } from '../../constants';
 import { ErrorBuilder } from '../../validation';
+import { getHakulomakeFieldsData, getHakulomakeFieldsValues } from '../utils';
 
 const getKieliversiot = values => get(values, 'kieliversiot.languages') || [];
 
@@ -26,9 +27,20 @@ export const getHakukohdeByValues = values => {
     get(values, 'alkamiskausi.vuosi.value'),
   );
   const kielivalinta = getKieliversiot(values);
+
   const aloituspaikat = getAsNumberOrNull(
     get(values, 'aloituspaikat.aloituspaikkamaara'),
   );
+
+  const eriHakulomake = Boolean(get(values, 'hakulomake.eriHakulomake'));
+
+  const {
+    hakulomakeId,
+    hakulomakeKuvaus,
+    hakulomakeLinkki,
+    hakulomaketyyppi,
+  } = getHakulomakeFieldsData({ values, kielivalinta });
+
   const kaytetaanHaunAikataulua = getKaytetaanHaunAikataulua(values);
 
   const hakuajat = kaytetaanHaunAikataulua
@@ -159,6 +171,11 @@ export const getHakukohdeByValues = values => {
     pohjakoulutusvaatimusKoodiUrit,
     valintaperuste,
     ensikertalaisenAloituspaikat,
+    eriHakulomake,
+    hakulomaketyyppi,
+    hakulomakeId,
+    hakulomakeLinkki,
+    hakulomakeKuvaus,
   };
 };
 
@@ -181,6 +198,11 @@ export const getValuesByHakukohde = hakukohde => {
     pohjakoulutusvaatimusKoodiUrit = [],
     valintaperuste = '',
     ensikertalaisenAloituspaikat = '',
+    eriHakulomake,
+    hakulomaketyyppi,
+    hakulomakeId,
+    hakulomakeKuvaus,
+    hakulomakeLinkki,
   } = hakukohde;
 
   const valintakoeTyypit = (valintakokeet || []).map(({ tyyppi }) => tyyppi);
@@ -297,6 +319,15 @@ export const getValuesByHakukohde = hakukohde => {
           };
         },
       ),
+    },
+    hakulomake: {
+      ...getHakulomakeFieldsValues({
+        hakulomaketyyppi,
+        hakulomakeId,
+        hakulomakeKuvaus,
+        hakulomakeLinkki,
+      }),
+      eriHakulomake: Boolean(eriHakulomake),
     },
   };
 };

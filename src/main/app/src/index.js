@@ -24,6 +24,8 @@ const history = createBrowserHistory({ basename: 'kouta' });
 
 serviceWorker.unregister();
 
+const isDev = process.env.NODE_ENV === 'development';
+
 const loadLocalisation = async ({
   namespace,
   language,
@@ -46,10 +48,14 @@ const loadLocalisation = async ({
 
 (async () => {
   const apiUrls = await configureUrls(ophUrls);
-  const httpClient = createHttpClient({ apiUrls });
+
+  const httpClient = createHttpClient({
+    apiUrls,
+    callerId: !isDev ? process.env.REACT_APP_CALLER_ID : null,
+  });
 
   const localisationInstance = createLocalisation({
-    debug: process.env.NODE_ENV === 'development',
+    debug: isDev,
     loadLocalisation: ({ namespace, language }) =>
       loadLocalisation({ namespace, language, httpClient, apiUrls }),
   });

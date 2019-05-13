@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`getHakuByValues returns correct haku given form values 1`] = `
+exports[`getHakuByValues returns correct haku given different hakulomake variations 1`] = `
 Object {
   "ajastettuJulkaisu": "2019-11-16T08:44",
   "alkamiskausiKoodiUri": "alkamiskausi_1#1",
@@ -17,8 +17,12 @@ Object {
   ],
   "hakukohteenLiittamisenTakaraja": "2019-09-16T08:44",
   "hakukohteenMuokkaamisenTakaraja": "2019-10-16T08:44",
-  "hakulomake": null,
-  "hakulomaketyyppi": "tyyppi",
+  "hakulomakeId": null,
+  "hakulomakeKuvaus": Object {},
+  "hakulomakeLinkki": Object {
+    "fi": "https://google.fi",
+  },
+  "hakulomaketyyppi": "muu",
   "hakutapaKoodiUri": "hakutapa_1#1",
   "kielivalinta": Array [
     "fi",
@@ -63,6 +67,278 @@ Object {
 }
 `;
 
+exports[`getHakuByValues returns correct haku given different hakulomake variations 2`] = `
+Object {
+  "ajastettuJulkaisu": "2019-11-16T08:44",
+  "alkamiskausiKoodiUri": "alkamiskausi_1#1",
+  "alkamisvuosi": 2020,
+  "hakuajat": Array [
+    Object {
+      "alkaa": "2019-04-16T08:44",
+      "paattyy": "2019-04-18T08:44",
+    },
+    Object {
+      "alkaa": "2019-06-16T08:44",
+      "paattyy": "2019-06-18T08:44",
+    },
+  ],
+  "hakukohteenLiittamisenTakaraja": "2019-09-16T08:44",
+  "hakukohteenMuokkaamisenTakaraja": "2019-10-16T08:44",
+  "hakulomakeId": null,
+  "hakulomakeKuvaus": Object {
+    "fi": "kuvaus",
+  },
+  "hakulomakeLinkki": Object {},
+  "hakulomaketyyppi": "ei sähköistä",
+  "hakutapaKoodiUri": "hakutapa_1#1",
+  "kielivalinta": Array [
+    "fi",
+    "sv",
+  ],
+  "kohdejoukkoKoodiUri": "kohde_1#1",
+  "kohdejoukonTarkenneKoodiUri": null,
+  "metadata": Object {
+    "tulevaisuudenAikataulu": Array [
+      Object {
+        "alkaa": "2019-08-16T08:44",
+        "paattyy": "2019-08-18T08:44",
+      },
+      Object {
+        "alkaa": "2019-09-16T08:44",
+        "paattyy": "2019-09-18T08:44",
+      },
+    ],
+    "yhteystieto": Object {
+      "nimi": Object {
+        "fi": "Fi nimi",
+        "sv": "Sv nimi",
+      },
+      "puhelinnumero": Object {
+        "fi": "Fi puhelinnumero",
+        "sv": "Sv puhelinnumero",
+      },
+      "sahkoposti": Object {
+        "fi": "Fi sähköposti",
+        "sv": "Sv sähköposti",
+      },
+      "titteli": Object {
+        "fi": "Fi titteli",
+        "sv": "Sv titteli",
+      },
+    },
+  },
+  "nimi": Object {
+    "fi": "Nimi",
+    "sv": "Namn",
+  },
+}
+`;
+
+exports[`getHakuByValues returns correct haku given form values 1`] = `
+Object {
+  "ajastettuJulkaisu": "2019-11-16T08:44",
+  "alkamiskausiKoodiUri": "alkamiskausi_1#1",
+  "alkamisvuosi": 2020,
+  "hakuajat": Array [
+    Object {
+      "alkaa": "2019-04-16T08:44",
+      "paattyy": "2019-04-18T08:44",
+    },
+    Object {
+      "alkaa": "2019-06-16T08:44",
+      "paattyy": "2019-06-18T08:44",
+    },
+  ],
+  "hakukohteenLiittamisenTakaraja": "2019-09-16T08:44",
+  "hakukohteenMuokkaamisenTakaraja": "2019-10-16T08:44",
+  "hakulomakeId": "12345",
+  "hakulomakeKuvaus": Object {},
+  "hakulomakeLinkki": Object {},
+  "hakulomaketyyppi": "ataru",
+  "hakutapaKoodiUri": "hakutapa_1#1",
+  "kielivalinta": Array [
+    "fi",
+    "sv",
+  ],
+  "kohdejoukkoKoodiUri": "kohde_1#1",
+  "kohdejoukonTarkenneKoodiUri": null,
+  "metadata": Object {
+    "tulevaisuudenAikataulu": Array [
+      Object {
+        "alkaa": "2019-08-16T08:44",
+        "paattyy": "2019-08-18T08:44",
+      },
+      Object {
+        "alkaa": "2019-09-16T08:44",
+        "paattyy": "2019-09-18T08:44",
+      },
+    ],
+    "yhteystieto": Object {
+      "nimi": Object {
+        "fi": "Fi nimi",
+        "sv": "Sv nimi",
+      },
+      "puhelinnumero": Object {
+        "fi": "Fi puhelinnumero",
+        "sv": "Sv puhelinnumero",
+      },
+      "sahkoposti": Object {
+        "fi": "Fi sähköposti",
+        "sv": "Sv sähköposti",
+      },
+      "titteli": Object {
+        "fi": "Fi titteli",
+        "sv": "Sv titteli",
+      },
+    },
+  },
+  "nimi": Object {
+    "fi": "Nimi",
+    "sv": "Namn",
+  },
+}
+`;
+
+exports[`getValuesByHaku returns correct form values given different hakulomake variations 1`] = `
+Object {
+  "aikataulut": Object {
+    "aikataulu": Array [
+      Object {
+        "alkaa": "2019-02-20T12:28",
+        "paattyy": "2019-08-01T12:45",
+      },
+    ],
+    "ajastettuJulkaisu": "2020-01-20T05:00",
+    "hakuaika": Array [
+      Object {
+        "alkaa": "2019-03-29T12:28",
+        "paattyy": "2019-09-29T12:30",
+      },
+    ],
+    "kausi": "kausi_1#1",
+    "lisaamisenTakaraja": "2019-03-29T12:28",
+    "muokkauksenTakaraja": "2019-03-11T09:45",
+    "vuosi": Object {
+      "value": "2020",
+    },
+  },
+  "hakulomake": Object {
+    "kuvaus": Object {},
+    "linkki": Object {
+      "fi": "https://google.fi",
+    },
+    "lomake": Object {},
+    "tyyppi": "muu",
+  },
+  "hakutapa": Object {
+    "tapa": "hakutapa_1#1",
+  },
+  "kieliversiot": Object {
+    "languages": Array [
+      "fi",
+      "sv",
+    ],
+  },
+  "kohdejoukko": Object {
+    "kohde": "kohdejoukko_1#1",
+  },
+  "nimi": Object {
+    "nimi": Object {
+      "fi": "Fi nimi",
+      "sv": "Sv nimi",
+    },
+  },
+  "yhteystiedot": Object {
+    "email": Object {
+      "fi": "Fi sähköposti",
+      "sv": "Sv sähköposti",
+    },
+    "nimi": Object {
+      "fi": "Fi nimi",
+      "sv": "Sv nimi",
+    },
+    "puhelin": Object {
+      "fi": "Fi puhelinnumero",
+      "sv": "Sv puhelinnumero",
+    },
+    "titteli": Object {
+      "fi": "Fi titteli",
+      "sv": "Sv titteli",
+    },
+  },
+}
+`;
+
+exports[`getValuesByHaku returns correct form values given different hakulomake variations 2`] = `
+Object {
+  "aikataulut": Object {
+    "aikataulu": Array [
+      Object {
+        "alkaa": "2019-02-20T12:28",
+        "paattyy": "2019-08-01T12:45",
+      },
+    ],
+    "ajastettuJulkaisu": "2020-01-20T05:00",
+    "hakuaika": Array [
+      Object {
+        "alkaa": "2019-03-29T12:28",
+        "paattyy": "2019-09-29T12:30",
+      },
+    ],
+    "kausi": "kausi_1#1",
+    "lisaamisenTakaraja": "2019-03-29T12:28",
+    "muokkauksenTakaraja": "2019-03-11T09:45",
+    "vuosi": Object {
+      "value": "2020",
+    },
+  },
+  "hakulomake": Object {
+    "kuvaus": Object {
+      "fi": "kuvaus",
+    },
+    "linkki": Object {},
+    "lomake": Object {},
+    "tyyppi": "ei sähköistä",
+  },
+  "hakutapa": Object {
+    "tapa": "hakutapa_1#1",
+  },
+  "kieliversiot": Object {
+    "languages": Array [
+      "fi",
+      "sv",
+    ],
+  },
+  "kohdejoukko": Object {
+    "kohde": "kohdejoukko_1#1",
+  },
+  "nimi": Object {
+    "nimi": Object {
+      "fi": "Fi nimi",
+      "sv": "Sv nimi",
+    },
+  },
+  "yhteystiedot": Object {
+    "email": Object {
+      "fi": "Fi sähköposti",
+      "sv": "Sv sähköposti",
+    },
+    "nimi": Object {
+      "fi": "Fi nimi",
+      "sv": "Sv nimi",
+    },
+    "puhelin": Object {
+      "fi": "Fi puhelinnumero",
+      "sv": "Sv puhelinnumero",
+    },
+    "titteli": Object {
+      "fi": "Fi titteli",
+      "sv": "Sv titteli",
+    },
+  },
+}
+`;
+
 exports[`getValuesByHaku returns correct form values given haku 1`] = `
 Object {
   "aikataulut": Object {
@@ -87,7 +363,14 @@ Object {
     },
   },
   "hakulomake": Object {
-    "lomaketyyppi": "tyyppi",
+    "kuvaus": Object {},
+    "linkki": Object {},
+    "lomake": Object {
+      "ataru": Object {
+        "value": "12345",
+      },
+    },
+    "tyyppi": "ataru",
   },
   "hakutapa": Object {
     "tapa": "hakutapa_1#1",

@@ -61,4 +61,9 @@ export default () => ({
   organisaatioOid: '1.2.246.562.10.594252633210',
   kielivalinta: ['fi', 'sv'],
   modified: '2019-04-04T08:28',
+  eriHakulomake: true,
+  hakulomaketyyppi: 'ataru',
+  hakulomakeId: '12345',
+  hakulomakeKuvaus: {},
+  hakulomakeLinkki: {},
 });

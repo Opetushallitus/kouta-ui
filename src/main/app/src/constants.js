@@ -65,9 +65,9 @@ export const HAKU_LOMAKETYYPPI_OPTIONS = [
 
 export const HAKULOMAKE_TYYPIT = {
   ATARU: 'ataru',
-  HAKUAPP: 'hakuapp',
+  HAKUAPP: 'haku-app',
   MUU: 'muu',
-  EI_SAHKOISTA_HAKUA: 'ei_sahkoista_hakua',
+  EI_SAHKOISTA_HAKUA: 'ei sähköistä',
 };
 
 export const VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI =

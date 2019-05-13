@@ -12,17 +12,22 @@ const EditKoulutusHeader = ({ koulutus }) => {
   return (
     <FormHeader
       status={
-        get(koulutus, 'tila') ? <StatusTag status={koulutus.tila} large /> : null
+        get(koulutus, 'tila') ? (
+          <StatusTag status={koulutus.tila} large />
+        ) : null
       }
       editInfo={
         get(koulutus, 'modified') ? (
-          <FormEditInfo date={koulutus.modified} />
+          <FormEditInfo
+            date={koulutus.modified}
+            editorOid={koulutus.muokkaaja}
+          />
         ) : null
       }
     >
       {t('yleiset.tutkintoonJohtavaKoulutus')}
     </FormHeader>
   );
-}
+};
 
 export default EditKoulutusHeader;

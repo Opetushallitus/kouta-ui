@@ -9,7 +9,9 @@ const EditHakuHeader = ({ haku }) => (
   <FormHeader
     status={get(haku, 'tila') ? <StatusTag status={haku.tila} large /> : null}
     editInfo={
-      get(haku, 'modified') ? <FormEditInfo date={haku.modified} /> : null
+      get(haku, 'modified') ? (
+        <FormEditInfo date={haku.modified} editorOid={haku.muokkaaja} />
+      ) : null
     }
   >
     Haku

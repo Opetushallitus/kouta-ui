@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "axios-cache-adapter": "^2.3.0",
     "cleave.js": "^1.4.10",
     "core-js": "^3.0.1",
     "dataloader": "^1.4.0",

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
 import Icon from '../Icon';
@@ -7,8 +7,7 @@ import { formatKoutaDateString, isObject } from '../../utils';
 import Spacing from '../Spacing';
 import Anchor from '../Anchor';
 import useTranslation from '../useTranslation';
-import useApiAsync from '../useApiAsync';
-import { getOppijanumerorekisteriHenkilo } from '../../apiUtils';
+import useHenkilo from '../useHenkilo';
 
 const InfoIcon = styled(Icon).attrs({ type: 'info' })`
   color: ${getThemeProp('palette.primary.main')};
@@ -30,13 +29,7 @@ const Container = styled.div`
   display: flex;
 `;
 
-const getDisplayName = async ({ httpClient, apiUrls, oid }) => {
-  const henkilo = await getOppijanumerorekisteriHenkilo({
-    httpClient,
-    apiUrls,
-    oid,
-  });
-
+const getDisplayName = henkilo => {
   if (!isObject(henkilo)) {
     return null;
   }
@@ -50,16 +43,15 @@ const getDisplayName = async ({ httpClient, apiUrls, oid }) => {
   return `${etunimet} ${sukunimi}`;
 };
 
-const noopPromise = () => Promise.resolve(null);
+const Editor = ({ oid }) => {
+  const { henkilo } = useHenkilo(oid);
+  const displayName = useMemo(() => getDisplayName(henkilo), [henkilo]);
+
+  return displayName;
+};
 
 const FormEditInfo = ({ editorOid, date, historyUrl, ...props }) => {
   const { t } = useTranslation();
-
-  const { data: displayName } = useApiAsync({
-    promiseFn: editorOid ? getDisplayName : noopPromise,
-    oid: editorOid,
-    watch: editorOid,
-  });
 
   return (
     <Container {...props}>
@@ -70,7 +62,7 @@ const FormEditInfo = ({ editorOid, date, historyUrl, ...props }) => {
         <Spacing marginBottom={0.25}>{t('yleiset.muokattuViimeksi')}:</Spacing>
         <Spacing marginBottom={0.25}>
           {date ? formatKoutaDateString(date, 'DD.MM.YYYY HH:mm') : null}{' '}
-          {displayName ? displayName : null}
+          {editorOid ? <Editor oid={editorOid} /> : null}
         </Spacing>
         <div>
           {historyUrl ? (

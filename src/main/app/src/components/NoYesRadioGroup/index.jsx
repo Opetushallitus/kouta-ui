@@ -21,7 +21,12 @@ const getOptions = t => [
   { value: 'ei', label: t('yleiset.ei') },
 ];
 
-export const NoYesRadioGroup = ({ value, onChange = noop, ...props }) => {
+export const NoYesRadioGroup = ({
+  value,
+  onChange = noop,
+  onBlur,
+  ...props
+}) => {
   const { t } = useTranslation();
   const options = useMemo(() => getOptions(t), [t]);
 

@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getSoraKuvausByValues returns correct SoraKuvaus given form values 1`] = `
+Object {
+  "julkinen": true,
+  "kielivalinta": Array [
+    "fi",
+    "sv",
+  ],
+  "koulutustyyppi": "amm",
+  "metadata": Object {
+    "kuvaus": Object {
+      "fi": "<p><strong>Kuvaus fi</strong></p>",
+      "sv": "<p><em>Kuvaus sv</em></p>",
+    },
+  },
+  "nimi": Object {
+    "fi": "Fi nimi",
+    "sv": "Sv nimi",
+  },
+}
+`;
+
+exports[`getValuesBySoraKuvaus returns correct form values given soraKuvaus 1`] = `
+Object {
+  "julkinen": true,
+  "kieliversiot": Array [],
+  "koulutustyyppi": "amm",
+  "tiedot": Object {
+    "kuvaus": Object {
+      "fi":         "<p><strong>Kuvaus fi</strong></p>",
+      "sv":         "<p><em>Kuvaus sv</em></p>",
+    },
+    "nimi": Object {
+      "fi": "Fi nimi",
+      "sv": "Sv nimi",
+    },
+  },
+}
+`;

@@ -29,6 +29,7 @@ const stepOrder = [
   'haku',
   'hakukohde',
   'valintaperusteet',
+  'sora',
 ];
 
 const stepIsActive = (step, activeStep) => {
@@ -86,6 +87,13 @@ const FormSteps = ({ activeStep = 'koulutus', ...props }) => {
           done={stepIsDone('valintaperusteet', activeStep)}
         >
           {t('yleiset.valintaperusteet')}
+        </StepsIcon>
+        <StepsIcon
+          icon="subject"
+          active={stepIsActive('sora', activeStep)}
+          done={stepIsDone('sora', activeStep)}
+        >
+          {t('yleiset.soraKuvaus')}
         </StepsIcon>
       </GroupContainer>
     </Wrapper>

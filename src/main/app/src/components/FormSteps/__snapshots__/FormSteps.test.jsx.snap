@@ -91,6 +91,7 @@ exports[`renders correctly 1`] = `
   font-family: 'Roboto',sans-serif;
   color: #666666;
   font-size: 0.8rem;
+  white-space: nowrap;
 }
 
 .c5 {
@@ -374,6 +375,51 @@ exports[`renders correctly 1`] = `
                   className="c7"
                 >
                   yleiset.valintaperusteet
+                </div>
+              </styled.div>
+            </div>
+          </styled.div>
+        </Styled(FormStepsIcon)>
+        <Styled(FormStepsIcon)
+          active={false}
+          done={false}
+          icon="subject"
+        >
+          <styled.div
+            className="c2"
+          >
+            <div
+              className="c2 c3"
+            >
+              <styled.div
+                active={false}
+                done={false}
+              >
+                <div
+                  className="c10"
+                >
+                  <Styled(Icon)
+                    active={false}
+                    type="subject"
+                  >
+                    <styled.i
+                      active={false}
+                      className="material-icons c5"
+                    >
+                      <i
+                        className="material-icons c5 c6"
+                      >
+                        subject
+                      </i>
+                    </styled.i>
+                  </Styled(Icon)>
+                </div>
+              </styled.div>
+              <styled.div>
+                <div
+                  className="c7"
+                >
+                  yleiset.soraKuvaus
                 </div>
               </styled.div>
             </div>

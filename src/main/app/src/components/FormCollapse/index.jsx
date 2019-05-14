@@ -91,7 +91,7 @@ const renderHeader = ({
 }) => {
   const headerContent = isString(header) ? (
     <HeaderContent>
-      {index + 1} {header}
+      {index + 1}. {header}
     </HeaderContent>
   ) : (
     header

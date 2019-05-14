@@ -1,49 +1,36 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
-import Typography from '../Typography';
-import Select from '../Select';
-import ApiAsync from '../ApiAsync';
-import { getFirstLanguageValue } from '../../utils';
+import { FormFieldSoraKuvausSelect } from '../FormFields';
+import useTranslation from '../useTranslation';
+import Spacing from '../Spacing';
+import Button from '../Button';
 
-const nop = () => {};
+const SoraKuvausSection = ({ name, organisaatioOid }) => {
+  const { t } = useTranslation();
 
-const getSorakuvaukset = async ({
-  httpClient,
-  apiUrls,
-}) => {
-  return [];
-};
-
-const getSorakuvauksetOptions = valintaperusteet =>
-  valintaperusteet.map(({ nimi, id }) => ({
-    value: id,
-    label: getFirstLanguageValue(nimi),
-  }));
-
-const renderSelectField = ({ input, ...props }) => (
-  <Select {...input} {...props} onBlur={nop} />
-);
-
-const SorakuvausSection = () => {
   return (
     <>
-      <Typography variant="h6" marginBottom={1}>
-        Valitse käytettävä sorakuvaus
-      </Typography>
-      <ApiAsync
-        promiseFn={getSorakuvaukset}
+      <Spacing marginBottom={2}>
+        <Field
+          name={name}
+          component={FormFieldSoraKuvausSelect}
+          label={t('valintaperustelomake.valitseSoraKuvaus')}
+          organisaatioOid={organisaatioOid}
+          reloadOnFocus
+        />
+      </Spacing>
+      <Button
+        variant="outlined"
+        color="primary"
+        as="a"
+        href={`/organisaatio/${organisaatioOid}/sora-kuvaus`}
+        target="_blank"
       >
-        {({ data }) => (
-          <Field
-            name="sorakuvaus"
-            component={renderSelectField}
-            options={getSorakuvauksetOptions(data || [])}
-          />
-        )}
-      </ApiAsync>
+        {t('yleiset.luoUusiSoraKuvaus')}
+      </Button>
     </>
   );
 };
 
-export default SorakuvausSection;
+export default SoraKuvausSection;

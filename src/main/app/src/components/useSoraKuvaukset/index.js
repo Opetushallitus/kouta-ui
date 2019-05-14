@@ -1,5 +1,10 @@
 export const useSoraKuvaukset = () => {
-  return { soraKuvaukset: [], reload: () => {} };
+  return {
+    soraKuvaukset: [],
+    reload: () => {
+      console.log('reload');
+    },
+  };
 };
 
 export default useSoraKuvaukset;

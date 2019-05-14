@@ -143,6 +143,11 @@ export default {
     virheIlmoitusKuvaus:
       'Jos virhe aiheuttaa ongelmia järjestelmän käytössä, yritä päivittää sivu, tai ota yhteyttä tukeen',
     valitseMitaHakulomakettaKaytetaan: 'Valitse mitä hakulomaketta käytetään',
+    valitseKoulutustyyppi: 'Valitse koulutustyyppi',
+    luoUusi: 'Luo uusi',
+    kopioiTiedot: 'Kopioi tiedot',
+    soraKuvaus: 'SORA-kuvaus',
+    luoUusiSoraKuvaus: 'Luo uusi SORA-kuvaus',
   },
   validointivirheet: {
     syotaArvo: 'Syötä kentälle arvo',
@@ -304,5 +309,12 @@ export default {
     valitseTapa: 'Valitse tapa',
     valintatapajononNimi: 'Valintatapajonon nimi',
     valitseKoulutustyyppi: 'Valitse koulutustyyppi',
+    valitseSoraKuvaus: 'Valitse käytettävä SORA-kuvaus',
+  },
+  soraKuvausLomake: {
+    soraKuvauksenTiedot: 'SORA-kuvauksen tiedot',
+    soraKuvausOnJulkinen: 'SORA-kuvaus on julkinen',
+    soraKuvauksenNayttamiseenLiittyvatTiedot:
+      'SORA-kuvauksen näyttämiseen liittyvät tiedot',
   },
 };

@@ -15,6 +15,7 @@ import EditToteutusPage from '../EditToteutusPage';
 import EditHakukohdePage from '../EditHakukohdePage';
 import EditValintaperustePage from '../EditValintaperustePage';
 import RouterScrollToTop from '../RouterScrollToTop';
+import CreateSoraKuvausPage from '../CreateSoraKuvausPage';
 
 const MainPage = ({ history }) => {
   return (
@@ -56,14 +57,16 @@ const MainPage = ({ history }) => {
             exact
           />
           <Route
+            path="/organisaatio/:organisaatioOid/sora-kuvaus"
+            component={CreateSoraKuvausPage}
+            exact
+          />
+          <Route
             path="/koulutus/:oid/muokkaus"
             component={EditKoulutusPage}
             exact
           />
-          <Route
-            path="/haku/:oid/muokkaus"
-            component={EditHakuPage}
-          />
+          <Route path="/haku/:oid/muokkaus" component={EditHakuPage} />
           <Route
             path="/toteutus/:oid/muokkaus"
             component={EditToteutusPage}

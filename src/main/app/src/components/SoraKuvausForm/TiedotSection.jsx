@@ -4,24 +4,29 @@ import { Field } from 'redux-form';
 import { FormFieldEditor, FormFieldInput } from '../FormFields';
 import useTranslation from '../useTranslation';
 import Spacing from '../Spacing';
+import { getTestIdProps } from '../../utils';
 
 export const KieliversiotSection = ({ name, language }) => {
   const { t } = useTranslation();
 
   return (
     <>
-      <Spacing marginBottom={2}>
+      <div {...getTestIdProps('nimi')}>
+        <Spacing marginBottom={2}>
+          <Field
+            name={`${name}.nimi.${language}`}
+            label={t('yleiset.nimi')}
+            component={FormFieldInput}
+          />
+        </Spacing>
+      </div>
+      <div {...getTestIdProps('kuvaus')}>
         <Field
-          name={`${name}.nimi.${language}`}
-          label={t('yleiset.nimi')}
-          component={FormFieldInput}
+          name={`${name}.kuvaus.${language}`}
+          label={t('yleiset.kuvaus')}
+          component={FormFieldEditor}
         />
-      </Spacing>
-      <Field
-        name={`${name}.kuvaus.${language}`}
-        label={t('yleiset.kuvaus')}
-        component={FormFieldEditor}
-      />
+      </div>
     </>
   );
 };

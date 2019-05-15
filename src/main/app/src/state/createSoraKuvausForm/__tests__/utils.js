@@ -14,7 +14,7 @@ test('getSoraKuvausByValues returns correct SoraKuvaus given form values', () =>
         sv: parseEditor('<i>Kuvaus sv</i>'),
       },
     },
-    julkinen: true,
+    julkisuus: true,
     koulutustyyppi: 'amm',
   });
 

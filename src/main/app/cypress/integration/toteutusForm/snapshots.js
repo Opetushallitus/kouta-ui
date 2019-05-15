@@ -15,9 +15,9 @@ module.exports = {
           opetus: {
             lisatiedot: [
               {
-                otsikkoKoodiUri: 'koulutuksenjarjestamisenlisaosiot_0#1',
+                otsikkoKoodiUri: 'koulutuksenlisatiedot_0#1',
                 teksti: {
-                  fi: 'koulutuksenjarjestamisenlisaosiot_0 kuvaus',
+                  fi: 'koulutuksenlisatiedot_0 kuvaus',
                 },
               },
             ],
@@ -114,9 +114,9 @@ module.exports = {
           opetus: {
             lisatiedot: [
               {
-                otsikkoKoodiUri: 'koulutuksenjarjestamisenlisaosiot_0#1',
+                otsikkoKoodiUri: 'koulutuksenlisatiedot_0#1',
                 teksti: {
-                  fi: 'koulutuksenjarjestamisenlisaosiot_0 kuvaus',
+                  fi: 'koulutuksenlisatiedot_0 kuvaus',
                 },
               },
             ],
@@ -244,9 +244,9 @@ module.exports = {
           opetus: {
             lisatiedot: [
               {
-                otsikkoKoodiUri: 'koulutuksenjarjestamisenlisaosiot_0#1',
+                otsikkoKoodiUri: 'koulutuksenlisatiedot_0#1',
                 teksti: {
-                  fi: 'koulutuksenjarjestamisenlisaosiot_0 kuvaus',
+                  fi: 'koulutuksenlisatiedot_0 kuvaus',
                 },
               },
             ],
@@ -351,9 +351,9 @@ module.exports = {
           opetus: {
             lisatiedot: [
               {
-                otsikkoKoodiUri: 'koulutuksenjarjestamisenlisaosiot_0#1',
+                otsikkoKoodiUri: 'koulutuksenlisatiedot_0#1',
                 teksti: {
-                  fi: 'koulutuksenjarjestamisenlisaosiot_0 kuvaus',
+                  fi: 'koulutuksenlisatiedot_0 kuvaus',
                 },
               },
             ],

@@ -99,14 +99,14 @@ const fillOsiot = cy => {
   getByTestId('osiotSelect', cy).click();
 
   getByTestId('osiotSelect', cy).within(() => {
-    getSelectOption('koulutuksenjarjestamisenlisaosiot_0', cy).click({
+    getSelectOption('koulutuksenlisatiedot_0', cy).click({
       force: true,
     });
   });
 
-  getByTestId('osioKuvaus.koulutuksenjarjestamisenlisaosiot_0#1', cy)
+  getByTestId('osioKuvaus.koulutuksenlisatiedot_0#1', cy)
     .find('textarea')
-    .type('koulutuksenjarjestamisenlisaosiot_0 kuvaus', { force: true });
+    .type('koulutuksenlisatiedot_0 kuvaus', { force: true });
 };
 
 const fillCommonJarjestamistiedot = cy => {

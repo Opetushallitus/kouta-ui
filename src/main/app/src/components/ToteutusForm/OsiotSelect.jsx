@@ -5,7 +5,7 @@ import useKoodistoOptions from '../useKoodistoOptions';
 
 const OsiotSelect = props => {
   const { options } = useKoodistoOptions({
-    koodisto: 'koulutuksenjarjestamisenlisaosiot',
+    koodisto: 'koulutuksenlisatiedot',
   });
 
   return <Select options={options} isMulti {...props} />;

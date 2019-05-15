@@ -17,7 +17,7 @@ export const getSoraKuvausByValues = values => {
   const nimi = pick(get(values, 'tiedot.nimi') || {}, kielivalinta);
   const kuvaus = pick(get(values, 'tiedot.kuvaus') || {}, kielivalinta);
   const koulutustyyppi = get(values, 'koulutustyyppi') || null;
-  const julkinen = Boolean(get(values, 'julkinen'));
+  const julkinen = Boolean(get(values, 'julkisuus'));
 
   return {
     nimi,

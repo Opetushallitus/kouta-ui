@@ -16,6 +16,7 @@ import EditHakukohdePage from '../EditHakukohdePage';
 import EditValintaperustePage from '../EditValintaperustePage';
 import RouterScrollToTop from '../RouterScrollToTop';
 import CreateSoraKuvausPage from '../CreateSoraKuvausPage';
+import EditSoraKuvausPage from '../EditSoraKuvausPage';
 
 const MainPage = ({ history }) => {
   return (
@@ -80,6 +81,11 @@ const MainPage = ({ history }) => {
           <Route
             path="/valintaperusteet/:oid/muokkaus"
             component={EditValintaperustePage}
+            exact
+          />
+          <Route
+            path="/sora-kuvaus/:id/muokkaus"
+            component={EditSoraKuvausPage}
             exact
           />
           <Redirect to="/" />

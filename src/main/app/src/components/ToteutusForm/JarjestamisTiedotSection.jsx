@@ -193,7 +193,7 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi }) => {
   const { t } = useTranslation();
 
   const { options: osiotOptions } = useKoodistoOptions({
-    koodisto: 'koulutuksenjarjestamisenlisaosiot',
+    koodisto: 'koulutuksenlisatiedot',
   });
 
   const isKorkeakoulu = KORKEAKOULUKOULUTUSTYYPIT.includes(koulutustyyppi);

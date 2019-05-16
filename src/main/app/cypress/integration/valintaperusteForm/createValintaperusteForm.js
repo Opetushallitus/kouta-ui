@@ -130,7 +130,7 @@ const fillLoppukuvausSection = cy => {
   });
 };
 
-const fillKielitaitovaatimuksetSection = (cy, jatkaArg = false) => {
+const fillKielitaitovaatimuksetSection = cy => {
   getByTestId('kielitaitovaatimuksetSection', cy).within(() => {
     lisaa(cy);
 
@@ -157,6 +157,14 @@ const fillKielitaitovaatimuksetSection = (cy, jatkaArg = false) => {
     getByTestId('osoitusvalinta', cy).within(() => {
       getCheckbox('kielitaidonosoittaminen_0#1', cy).click({ force: true });
     });
+
+    jatka(cy);
+  });
+};
+
+const fillSoraKuvausSection = (cy, jatkaArg = false) => {
+  cy.getByTestId('soraKuvausSection').within(() => {
+    selectOption('Sora-kuvaus 1', cy);
 
     jatkaArg && jatka(cy);
   });
@@ -188,6 +196,7 @@ describe('createValintaperusteForm', () => {
     fillNimiSection(cy);
     fillValintatapaSection(cy);
     fillKielitaitovaatimuksetSection(cy);
+    fillSoraKuvausSection(cy);
 
     tallenna(cy);
 
@@ -213,7 +222,8 @@ describe('createValintaperusteForm', () => {
     fillNimiSection(cy);
     fillOsaamistaustaSection(cy);
     fillValintatapaSection(cy);
-    fillKielitaitovaatimuksetSection(cy, true);
+    fillKielitaitovaatimuksetSection(cy);
+    fillSoraKuvausSection(cy, true);
     fillLoppukuvausSection(cy);
 
     tallenna(cy);

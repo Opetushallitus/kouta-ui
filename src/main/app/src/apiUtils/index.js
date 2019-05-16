@@ -824,7 +824,11 @@ export const getKoutaSoraKuvausById = async ({ httpClient, apiUrls, id }) => {
 };
 
 export const getKoutaSoraKuvaukset = async ({ httpClient, apiUrls }) => {
-  return [];
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-backend.sora-kuvaus-list'),
+  );
+
+  return data;
 };
 
 export const updateKoutaSoraKuvaus = async ({

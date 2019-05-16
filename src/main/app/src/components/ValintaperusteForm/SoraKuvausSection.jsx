@@ -24,7 +24,7 @@ const SoraKuvausSection = ({ name, organisaatioOid }) => {
         variant="outlined"
         color="primary"
         as="a"
-        href={`/organisaatio/${organisaatioOid}/sora-kuvaus`}
+        href={`/kouta/organisaatio/${organisaatioOid}/sora-kuvaus`}
         target="_blank"
       >
         {t('yleiset.luoUusiSoraKuvaus')}

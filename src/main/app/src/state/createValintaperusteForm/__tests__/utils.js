@@ -2,7 +2,7 @@ import { getValintaperusteByValues, getValuesByValintaperuste } from '../utils';
 import { parse as parseEditor } from '../../../components/Editor';
 
 test('getValintaperusteByValues returns correct valintaperuste given form values', () => {
-  const Valintaperuste = getValintaperusteByValues({
+  const valintaperuste = getValintaperusteByValues({
     kieliversiot: {
       languages: ['fi', 'sv'],
     },
@@ -114,9 +114,12 @@ test('getValintaperusteByValues returns correct valintaperuste given form values
     tyyppi: {
       tyyppi: 'tyyppi_1#1',
     },
+    soraKuvaus: {
+      value: 'sora_1',
+    },
   });
 
-  expect(Valintaperuste).toMatchSnapshot();
+  expect(valintaperuste).toMatchSnapshot();
 });
 
 test('getValuesByValintaperuste returns correct form values given valintaperuste', () => {
@@ -248,6 +251,7 @@ test('getValuesByValintaperuste returns correct form values given valintaperuste
           valintatapaKoodiUri: 'tapa_1#1',
         },
       ],
+      soraKuvausId: 'sora_1',
     },
     nimi: {
       fi: 'Fi nimi',

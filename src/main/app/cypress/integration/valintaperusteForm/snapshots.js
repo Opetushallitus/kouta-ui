@@ -80,6 +80,7 @@ module.exports = {
           ],
           osaamistaustaKoodiUrit: [],
           kuvaus: {},
+          soraKuvausId: '1',
         },
       },
     },
@@ -165,6 +166,7 @@ module.exports = {
           kuvaus: {
             fi: '<p>Loppukuvaus</p>',
           },
+          soraKuvausId: '1',
         },
       },
     },

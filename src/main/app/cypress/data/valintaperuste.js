@@ -69,6 +69,7 @@ export default ({ tyyppi = 'amm' } = {}) => {
           ],
         },
       ],
+      soraKuvausId: '1',
     },
     organisaatioOid: '1.2.246.562.10.594252633210',
     muokkaaja: '1.2.246.562.24.62301161440',

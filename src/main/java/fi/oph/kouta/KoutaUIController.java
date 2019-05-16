@@ -13,7 +13,8 @@ public class KoutaUIController {
         "/toteutus/**",
         "/haku/**",
         "/hakukohde/**",
-        "/valintaperusteet/**"
+        "/valintaperusteet/**",
+        "/sora-kuvaus/**"
     })
 
     public String frontProperties() {

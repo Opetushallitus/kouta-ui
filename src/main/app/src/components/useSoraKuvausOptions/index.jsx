@@ -2,14 +2,14 @@ import { useMemo } from 'react';
 
 import useSoraKuvaukset from '../useSoraKuvaukset';
 import useLanguage from '../useLanguage';
-import { getFirstLanguageValue } from '../../utils';
+import { getFirstLanguageValue, isArray } from '../../utils';
 
 export const useSoraKuvausOptions = args => {
   const { soraKuvaukset, ...rest } = useSoraKuvaukset(args);
   const language = useLanguage();
 
   const options = useMemo(() => {
-    return soraKuvaukset
+    return isArray(soraKuvaukset)
       ? soraKuvaukset.map(({ id, nimi }) => ({
           value: id,
           label: getFirstLanguageValue(nimi, language),

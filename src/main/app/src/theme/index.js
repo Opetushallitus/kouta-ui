@@ -88,6 +88,7 @@ export const createTheme = (theme = {}) => {
     },
     palette: {
       border: '#cccccc',
+      divider: '#cccccc',
       mainBackground: '#f5f5f5',
       text: {
         primary: textPrimaryColor,

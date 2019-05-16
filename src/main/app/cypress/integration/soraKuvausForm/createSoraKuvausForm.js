@@ -54,7 +54,7 @@ const tallenna = cy => {
   cy.getByTestId('tallennaJaJulkaiseSoraKuvausButton').click({ force: true });
 };
 
-describe('createHakuForm', () => {
+describe('createSoraKuvausForm', () => {
   const organisaatioOid = '1.1.1.1.1.1';
   const soraKuvaus = createSoraKuvaus();
 

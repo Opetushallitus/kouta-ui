@@ -169,6 +169,7 @@ export const getValintaperusteByValues = values => {
   ).map(({ value }) => value);
 
   const koulutustyyppi = get(values, 'tyyppi.tyyppi') || null;
+  const soraKuvausId = get(values, 'soraKuvaus.value') || null;
 
   return {
     kielivalinta,
@@ -182,6 +183,7 @@ export const getValintaperusteByValues = values => {
       kielitaitovaatimukset,
       osaamistaustaKoodiUrit,
       kuvaus,
+      soraKuvausId,
     },
   };
 };
@@ -201,6 +203,7 @@ export const getValuesByValintaperuste = valintaperuste => {
     kielitaitovaatimukset: kielitaitovaatimuksetArg = [],
     valintatavat = [],
     kuvaus = {},
+    soraKuvausId,
   } = metadata;
 
   const kielitaitovaatimukset = (kielitaitovaatimuksetArg || []).map(
@@ -297,6 +300,9 @@ export const getValuesByValintaperuste = valintaperuste => {
     },
     tyyppi: {
       tyyppi: koulutustyyppi,
+    },
+    soraKuvausId: {
+      value: soraKuvausId,
     },
   };
 };

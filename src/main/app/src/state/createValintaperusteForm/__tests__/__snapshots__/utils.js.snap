@@ -61,6 +61,7 @@ Object {
       "tausta_1#1",
       "tausta_2#1",
     ],
+    "soraKuvausId": "sora_1",
     "valintatavat": Array [
       Object {
         "enimmaispisteet": 20,
@@ -223,6 +224,9 @@ Object {
         "value": "tausta_2#1",
       },
     ],
+  },
+  "soraKuvausId": Object {
+    "value": "sora_1",
   },
   "tyyppi": Object {
     "tyyppi": "tyyppi_1#1",

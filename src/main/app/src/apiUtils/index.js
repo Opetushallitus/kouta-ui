@@ -812,3 +812,41 @@ export const getOppijanumerorekisteriHenkilo = async ({
 
   return data;
 };
+
+export const getKoutaSoraKuvausById = async ({ httpClient, apiUrls, id }) => {
+  const { data, headers } = await httpClient.get(
+    apiUrls.url('kouta-backend.sora-kuvaus-by-id', id),
+  );
+
+  const lastModified = get(headers, 'last-modified') || null;
+
+  return isObject(data) ? { lastModified, ...data } : data;
+};
+
+export const getKoutaSoraKuvaukset = async ({ httpClient, apiUrls }) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-backend.sora-kuvaus-list'),
+  );
+
+  return data;
+};
+
+export const updateKoutaSoraKuvaus = async ({
+  httpClient,
+  apiUrls,
+  soraKuvaus,
+}) => {
+  const { lastModified = '', ...rest } = soraKuvaus;
+
+  const headers = {
+    'If-Unmodified-Since': lastModified,
+  };
+
+  const { data } = await httpClient.post(
+    apiUrls.url('kouta-backend.sora-kuvaus'),
+    rest,
+    { headers },
+  );
+
+  return data;
+};

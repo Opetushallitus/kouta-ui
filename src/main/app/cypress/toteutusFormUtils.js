@@ -35,7 +35,7 @@ export const stubToteutusFormRoutes = ({ cy, organisaatioOid, perusteId }) => {
     ],
   });
 
-  stubKoodistoRoute({ koodisto: 'koulutuksenjarjestamisenlisaosiot', cy });
+  stubKoodistoRoute({ koodisto: 'koulutuksenlisatiedot', cy });
   stubKoodistoRoute({ koodisto: 'oppilaitoksenopetuskieli', cy });
   stubKoodistoRoute({ koodisto: 'opetusaikakk', cy });
   stubKoodistoRoute({ koodisto: 'opetuspaikkakk', cy });

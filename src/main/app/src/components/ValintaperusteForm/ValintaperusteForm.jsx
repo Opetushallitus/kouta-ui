@@ -21,6 +21,7 @@ import OsaamistaustaSection from './OsaamistaustaSection';
 import TyyppiSection from './TyyppiSection';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
+import SoraKuvausSection from './SoraKuvausSection';
 
 const WithLanguagesAndTyyppiValue = formValues({
   languages: 'kieliversiot.languages',
@@ -146,6 +147,16 @@ const ValintaperusteForm = ({
                 {...getTestIdProps('kielitaitovaatimuksetSection')}
               >
                 <KielitaitovaatimuksetSection />
+              </FormCollapse>
+
+              <FormCollapse
+                header={t('yleiset.soraKuvaus')}
+                {...getTestIdProps('soraKuvausSection')}
+              >
+                <SoraKuvausSection
+                  name="soraKuvaus"
+                  organisaatioOid={organisaatioOid}
+                />
               </FormCollapse>
 
               {isKorkeakoulu ? (

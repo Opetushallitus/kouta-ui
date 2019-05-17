@@ -41,6 +41,7 @@ const LabelContainer = styled.div`
   font-family: ${getThemeProp('typography.fontFamily')};
   color: ${getThemeProp('palette.text.primary')};
   font-size: 0.8rem;
+  white-space: nowrap;
 `;
 
 const IconBase = styled(Icon)`

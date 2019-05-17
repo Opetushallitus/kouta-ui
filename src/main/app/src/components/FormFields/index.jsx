@@ -12,6 +12,9 @@ import TimeInput from '../TimeInput';
 import Editor from '../Editor';
 import YearSelect from '../YearSelect';
 import FileInput from '../FileInput';
+import KieliversiotSelect from '../KieliversiotSelect';
+import KoulutustyyppiSelect from '../KoulutustyyppiSelect';
+import SoraKuvausSelect from '../SoraKuvausSelect';
 
 const simpleMapProps = ({ meta, input, ...props }) => ({
   ...input,
@@ -81,3 +84,23 @@ export const FormFieldYearSelect = createComponent(
 );
 
 export const FormFieldFileInput = createComponent(FileInput, simpleMapProps);
+
+export const FormFieldKieliversiotSelect = createFormFieldComponent(
+  KieliversiotSelect,
+  simpleMapProps,
+);
+
+export const FormFieldKoulutustyyppiSelect = createFormFieldComponent(
+  KoulutustyyppiSelect,
+  simpleMapProps,
+);
+
+export const FormFieldSoraKuvausSelect = createFormFieldComponent(
+  SoraKuvausSelect,
+  ({ meta, input, id, ...props }) => ({
+    ...input,
+    onBlur: noop,
+    ...props,
+    id,
+  }),
+);

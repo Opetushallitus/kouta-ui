@@ -1,34 +1,16 @@
-import React, { useMemo } from './node_modules/react';
+import React, { useMemo } from 'react';
 
-import {
-  getFirstLanguageValue,
-  createChainedFunction,
-  noop,
-} from '../../utils';
-
-import useSoraKuvaukset from '../useSoraKuvaukset';
-import useLanguage from '../useLanguage';
+import { createChainedFunction, noop } from '../../utils';
+import useSoraKuvausOptions from '../useSoraKuvausOptions';
 import Select from '../Select';
-
-const getOptions = (kuvaukset, language) => {
-  return kuvaukset.map(({ nimi, id }) => ({
-    value: id,
-    label: getFirstLanguageValue(nimi, language),
-  }));
-};
 
 export const SoraKuvausSelect = ({
   reloadOnFocus = false,
   onFocus: onFocusProp = noop,
+  organisaatioOid,
   ...props
 }) => {
-  const { soraKuvaukset, reload } = useSoraKuvaukset();
-  const language = useLanguage();
-
-  const options = useMemo(
-    () => (soraKuvaukset ? getOptions(soraKuvaukset, language) : []),
-    [soraKuvaukset, language],
-  );
+  const { options, reload } = useSoraKuvausOptions({ organisaatioOid });
 
   const onFocus = useMemo(() => {
     return reloadOnFocus

@@ -40,8 +40,9 @@ const OsiotFields = formValues({ osiot: 'osiot' })(OsiotFieldsBase);
 
 const LisatiedotSection = ({ language }) => {
   const { t } = useTranslation();
+
   const { options: osiotOptions } = useKoodistoOptions({
-    koodisto: 'koulutuksenjarjestamisenlisaosiot',
+    koodisto: 'koulutuksenlisatiedot',
   });
 
   return (

@@ -26,18 +26,16 @@ const fillLisatiedotSection = cy => {
     getByTestId('osiotSelect', cy).click();
 
     getByTestId('osiotSelect', cy).within(() => {
-      getSelectOption('koulutuksenjarjestamisenlisaosiot_0', cy).click({
+      getSelectOption('koulutuksenlisatiedot_0', cy).click({
         force: true,
       });
     });
 
-    getByTestId('osioKuvaus.koulutuksenjarjestamisenlisaosiot_0#1', cy).within(
-      () => {
-        cy.get('textarea').type('koulutuksenjarjestamisenlisaosiot_0 kuvaus', {
-          force: true,
-        });
-      },
-    );
+    getByTestId('osioKuvaus.koulutuksenlisatiedot_0#1', cy).within(() => {
+      cy.get('textarea').type('koulutuksenlisatiedot_0 kuvaus', {
+        force: true,
+      });
+    });
 
     getByTestId('jatkaButton', cy).click({ force: true });
   });

@@ -4,7 +4,9 @@ import {
   stubKoodistoRoute,
   stubOppijanumerorekisteriHenkiloRoute,
 } from './utils';
+
 import organisaatio from './data/organisaatio';
+import soraKuvaus from './data/soraKuvaus';
 
 export const stubValintaperusteFormRoutes = ({ cy, organisaatioOid }) => {
   cy.server();
@@ -25,6 +27,17 @@ export const stubValintaperusteFormRoutes = ({ cy, organisaatioOid }) => {
         oid: organisaatioOid,
       }),
     ],
+  });
+
+  cy.route({
+    method: 'GET',
+    url: '**/sora-kuvaus/list**',
+    response: [...new Array(10)].map((v, i) =>
+      merge(soraKuvaus(), {
+        nimi: { fi: `Sora-kuvaus ${i}` },
+        id: i.toString(),
+      }),
+    ),
   });
 
   stubKoodistoRoute({ koodisto: 'hakutapa', cy });

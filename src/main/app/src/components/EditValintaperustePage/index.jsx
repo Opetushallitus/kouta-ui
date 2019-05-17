@@ -33,14 +33,12 @@ const EditValintaperustePage = props => {
     : null;
 
   const koulutustyyppi =
-    get(valintaperuste, 'tyyppi') ||
+    get(valintaperuste, 'koulutustyyppi') ||
     KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS;
 
   return (
     <FormPage
-      header={
-        <EditValintaperusteHeader valintaperuste={valintaperuste} />
-      }
+      header={<EditValintaperusteHeader valintaperuste={valintaperuste} />}
       steps={<EditValintaperusteSteps />}
       footer={
         valintaperuste ? (

@@ -3,13 +3,13 @@ import { Field } from 'redux-form';
 
 import { Radio } from '../Radio';
 import { FormFieldSelect } from '../FormFields';
-import { POHJAVALINNAT } from '../../constants';
+import { POHJAVALINTA } from '../../constants';
 import Spacing from '../Spacing';
 
 const CopyField = ({ meta, input: { value, ...input }, ...props }) => (
   <Radio
-    value={POHJAVALINNAT.KOPIO}
-    checked={value === POHJAVALINNAT.KOPIO}
+    value={POHJAVALINTA.KOPIO}
+    checked={value === POHJAVALINTA.KOPIO}
     {...input}
     {...props}
   />
@@ -17,8 +17,8 @@ const CopyField = ({ meta, input: { value, ...input }, ...props }) => (
 
 const CreateField = ({ meta, input: { value, ...input }, ...props }) => (
   <Radio
-    value={POHJAVALINNAT.UUSI}
-    checked={value === POHJAVALINNAT.UUSI}
+    value={POHJAVALINTA.UUSI}
+    checked={value === POHJAVALINTA.UUSI}
     {...input}
     {...props}
   />
@@ -26,15 +26,15 @@ const CreateField = ({ meta, input: { value, ...input }, ...props }) => (
 
 const ExistingField = ({ meta, input: { value, ...input }, ...props }) => (
   <Radio
-    value={POHJAVALINNAT.AIEMPI}
-    checked={value === POHJAVALINNAT.AIEMPI}
+    value={POHJAVALINTA.AIEMPI}
+    checked={value === POHJAVALINTA.AIEMPI}
     {...input}
     {...props}
   />
 );
 
 const CopySelect = ({ input: { value }, options, selectName }) => {
-  return value === POHJAVALINNAT.KOPIO ? (
+  return value === POHJAVALINTA.KOPIO ? (
     <Spacing marginTop={2} marginBottom={2}>
       <Field name={selectName} component={FormFieldSelect} options={options} />
     </Spacing>
@@ -42,7 +42,7 @@ const CopySelect = ({ input: { value }, options, selectName }) => {
 };
 
 const ExistingSelect = ({ input: { value }, options, selectName }) => {
-  return value === POHJAVALINNAT.AIEMPI ? (
+  return value === POHJAVALINTA.AIEMPI ? (
     <Spacing marginTop={2}>
       <Field name={selectName} component={FormFieldSelect} options={options} />
     </Spacing>

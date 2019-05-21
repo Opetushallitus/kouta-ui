@@ -1,71 +1,73 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { FieldArray, Field } from 'redux-form';
 
 import Button from '../Button';
 import Spacing from '../Spacing';
-import Divider from '../Divider';
-import Flex from '../Flex';
+import Flex, { FlexItem } from '../Flex';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
 import { FormFieldInput, FormFieldTextarea } from '../FormFields';
+import FieldArrayList from '../FieldArrayList';
 
-const renderOsaamisalatFields = ({ fields, language, t }) => (
+const OsaamisalatFieldArray = ({ fields, language, t }) => (
   <>
-    {fields.map((field, index) => (
-      <Fragment key={index}>
-        <Spacing marginBottom={2} {...getTestIdProps('osaamisalanNimi')}>
-          <Field
-            name={`${field}.nimi.${language}`}
-            component={FormFieldInput}
-            label={t('yleiset.nimi')}
-          />
-        </Spacing>
+    <FieldArrayList fields={fields}>
+      {({ field }) => (
+        <>
+          <Spacing marginBottom={2} {...getTestIdProps('osaamisalanNimi')}>
+            <Field
+              name={`${field}.nimi.${language}`}
+              component={FormFieldInput}
+              label={t('yleiset.nimi')}
+            />
+          </Spacing>
 
-        <Spacing marginBottom={2} {...getTestIdProps('osaamisalanKuvaus')}>
-          <Field
-            name={`${field}.kuvaus.${language}`}
-            component={FormFieldTextarea}
-            label={t('yleiset.kuvaus')}
-          />
-        </Spacing>
-        <Spacing marginBottom={2} {...getTestIdProps('osaamisalanLinkki')}>
-          <Field
-            name={`${field}.linkki.${language}`}
-            component={FormFieldInput}
-            label={t('yleiset.linkki')}
-          />
-        </Spacing>
-        <Spacing marginBottom={2} {...getTestIdProps('osaamisalanOtsikko')}>
-          <Field
-            name={`${field}.otsikko.${language}`}
-            component={FormFieldInput}
-            label={t('toteutuslomake.linkinOtsikko')}
-          />
-        </Spacing>
-        <Flex justifyEnd>
-          <Button
-            type="button"
-            onClick={() => {
-              fields.remove(index);
-            }}
-            variant="outlined"
-            color="secondary"
-          >
-            {t('yleiset.poista')}
-          </Button>
-        </Flex>
-        <Divider marginTop={3} marginBottom={3} />
-      </Fragment>
-    ))}
-    <Button
-      type="button"
-      onClick={() => {
-        fields.push({});
-      }}
-      {...getTestIdProps('lisaaOsaamisalaButton')}
-    >
-      {t('toteutuslomake.lisaaOsaamisala')}
-    </Button>
+          <Spacing marginBottom={2} {...getTestIdProps('osaamisalanKuvaus')}>
+            <Field
+              name={`${field}.kuvaus.${language}`}
+              component={FormFieldTextarea}
+              label={t('yleiset.kuvaus')}
+            />
+          </Spacing>
+          <Flex>
+            <FlexItem
+              grow={1}
+              paddingRight={1}
+              {...getTestIdProps('osaamisalanLinkki')}
+            >
+              <Field
+                name={`${field}.linkki.${language}`}
+                component={FormFieldInput}
+                label={t('yleiset.linkki')}
+              />
+            </FlexItem>
+            <FlexItem
+              grow={1}
+              paddingLeft={1}
+              {...getTestIdProps('osaamisalanOtsikko')}
+            >
+              <Field
+                name={`${field}.otsikko.${language}`}
+                component={FormFieldInput}
+                label={t('toteutuslomake.linkinOtsikko')}
+              />
+            </FlexItem>
+          </Flex>
+        </>
+      )}
+    </FieldArrayList>
+    <Flex justifyCenter marginTop={fields.length > 0 ? 4 : 0}>
+      <Button
+        type="button"
+        variant="outlined"
+        onClick={() => {
+          fields.push({});
+        }}
+        {...getTestIdProps('lisaaOsaamisalaButton')}
+      >
+        {t('toteutuslomake.lisaaOsaamisala')}
+      </Button>
+    </Flex>
   </>
 );
 
@@ -75,7 +77,7 @@ const KorkeakouluOsaamisalatFields = ({ name, language }) => {
   return (
     <FieldArray
       name={name}
-      component={renderOsaamisalatFields}
+      component={OsaamisalatFieldArray}
       language={language}
       t={t}
     />

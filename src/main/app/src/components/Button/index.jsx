@@ -55,6 +55,23 @@ const getContainedColorCss = ({ color, theme }) => {
   `;
 };
 
+const getTextVariantColorCss = ({ color, theme }) => {
+  const fontColor =
+    get(theme, ['palette', color, 'main']) || theme.palette.primary.main;
+
+  const fontHoverColor = lighten(0.05, fontColor);
+
+  return `
+    border-color: transparent;
+    background-color: transparent;
+    color: ${fontColor};
+
+    &:hover, &:active {
+      color: ${fontHoverColor}
+    }
+  `;
+};
+
 const getVariantCss = ({ variant }) => {
   if (variant === 'outlined') {
     return css`
@@ -64,6 +81,10 @@ const getVariantCss = ({ variant }) => {
   } else if (variant === 'contained') {
     return css`
       ${getContainedColorCss}
+    `;
+  } else if (variant === 'text') {
+    return css`
+      ${getTextVariantColorCss}
     `;
   }
 };
@@ -90,6 +111,7 @@ const ButtonBase = styled.button`
   align-items: center;
   box-sizing: border-box;
   transition: box-shadow 0.25s, background-color 0.25s, border-color 0.25s;
+  font-weight: 500;
 
   ${getVariantCss}
   ${getSizeCss};

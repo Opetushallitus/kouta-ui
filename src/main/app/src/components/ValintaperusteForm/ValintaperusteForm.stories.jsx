@@ -8,7 +8,7 @@ import {
   makeApiDecorator,
   makeLocalisationDecorator,
 } from '../../storybookUtils';
-import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
+import { KOULUTUSTYYPPI } from '../../constants';
 
 const Form = reduxForm({
   form: 'valintaperusteForm',
@@ -22,6 +22,6 @@ storiesOf('ValintaperusteForm', module)
     <Form
       steps={false}
       organisaatioOid="1.2.246.562.10.594252633210"
-      koulutustyyppi={KOULUTUSTYYPPI_CATEGORY.YLIOPISTOKOULUTUS}
+      koulutustyyppi={KOULUTUSTYYPPI.YLIOPISTOKOULUTUS}
     />
   ));

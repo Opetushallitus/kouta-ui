@@ -4,7 +4,7 @@ import pick from 'lodash/pick';
 
 import { isNonEmptyObject } from '../utils';
 import { createSavingErrorToast, createSavingSuccessToast } from './toaster';
-import { HAKULOMAKE_TYYPIT } from '../constants';
+import { HAKULOMAKETYYPPI } from '../constants';
 
 const identity = arg => arg;
 
@@ -50,17 +50,17 @@ export const getHakulomakeFieldsData = ({
   const lomakeValues = get(values, name);
   const hakulomaketyyppi = get(lomakeValues, 'tyyppi') || null;
 
-  const hakulomakeId = [HAKULOMAKE_TYYPIT.ATARU].includes(hakulomaketyyppi)
+  const hakulomakeId = [HAKULOMAKETYYPPI.ATARU].includes(hakulomaketyyppi)
     ? get(lomakeValues, ['lomake', hakulomaketyyppi, 'value']) || null
     : null;
 
   const hakulomakeLinkki =
-    hakulomaketyyppi === HAKULOMAKE_TYYPIT.MUU
+    hakulomaketyyppi === HAKULOMAKETYYPPI.MUU
       ? pick(get(lomakeValues, 'linkki') || {}, kielivalinta)
       : {};
 
   const hakulomakeKuvaus =
-    hakulomaketyyppi === HAKULOMAKE_TYYPIT.EI_SAHKOISTA_HAKUA
+    hakulomaketyyppi === HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA
       ? pick(get(lomakeValues, 'kuvaus') || {}, kielivalinta)
       : {};
 
@@ -80,7 +80,7 @@ export const getHakulomakeFieldsValues = ({
 }) => {
   return {
     tyyppi: hakulomaketyyppi,
-    lomake: [HAKULOMAKE_TYYPIT.ATARU].includes(hakulomaketyyppi)
+    lomake: [HAKULOMAKETYYPPI.ATARU].includes(hakulomaketyyppi)
       ? {
           [hakulomaketyyppi]: { value: hakulomakeId || '' },
         }

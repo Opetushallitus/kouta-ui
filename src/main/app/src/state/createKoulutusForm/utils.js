@@ -28,6 +28,10 @@ export const getKoulutusByValues = values => {
     get(values, 'information.tutkintonimike') || []
   ).map(({ value }) => value);
 
+  const koulutusalaKoodiUrit = (
+    get(values, 'information.koulutusalat') || []
+  ).map(({ value }) => value);
+
   const kuvauksenNimi = pick(
     get(values, 'description.nimi') || {},
     kielivalinta,
@@ -49,6 +53,7 @@ export const getKoulutusByValues = values => {
       opintojenLaajuusKoodiUri,
       tutkintonimikeKoodiUrit,
       kuvauksenNimi,
+      koulutusalaKoodiUrit,
     },
   };
 };
@@ -70,6 +75,7 @@ export const getValuesByKoulutus = koulutus => {
     opintojenLaajuusKoodiUri = '',
     tutkintonimikeKoodiUrit = [],
     kuvauksenNimi = {},
+    koulutusalaKoodiUrit = [],
   } = metadata;
 
   const osiot = lisatiedot
@@ -100,6 +106,7 @@ export const getValuesByKoulutus = koulutus => {
         value: opintojenLaajuusKoodiUri,
       },
       tutkintonimike: tutkintonimikeKoodiUrit.map(value => ({ value })),
+      koulutusalat: koulutusalaKoodiUrit.map(value => ({ value })),
     },
     type: {
       type: koulutustyyppi,

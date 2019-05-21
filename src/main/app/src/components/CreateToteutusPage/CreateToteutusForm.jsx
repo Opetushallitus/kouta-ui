@@ -11,7 +11,7 @@ import {
 } from '../../state/createToteutusForm';
 import { getKoutaToteutusByOid } from '../../apiUtils';
 import ApiAsync from '../ApiAsync';
-import { POHJAVALINNAT } from '../../constants';
+import { POHJAVALINTA } from '../../constants';
 
 const resolveFn = () => Promise.resolve({});
 
@@ -22,7 +22,7 @@ const ToteutusReduxForm = reduxForm({
 
 const getCopyValues = toteutusOid => ({
   pohja: {
-    tapa: POHJAVALINNAT.KOPIO,
+    tapa: POHJAVALINTA.KOPIO,
     valinta: { value: toteutusOid },
   },
 });

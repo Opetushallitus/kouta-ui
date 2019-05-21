@@ -8,7 +8,7 @@ import {
   makeApiDecorator,
   makeLocalisationDecorator,
 } from '../../storybookUtils';
-import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
+import { KOULUTUSTYYPPI } from '../../constants';
 
 const Form = reduxForm({
   form: 'toteutusForm',
@@ -23,6 +23,6 @@ storiesOf('ToteutusForm', module)
       koulutusKoodiUri="koulutus_361101#11"
       organisaatioOid="1.2.246.562.10.594252633210"
       steps={false}
-      koulutustyyppi={KOULUTUSTYYPPI_CATEGORY.YLIOPISTOKOULUTUS}
+      koulutustyyppi={KOULUTUSTYYPPI.YLIOPISTOKOULUTUS}
     />
   ));

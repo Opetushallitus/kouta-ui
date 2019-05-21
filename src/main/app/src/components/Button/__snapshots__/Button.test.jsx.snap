@@ -21,6 +21,7 @@ exports[`renders correctly with color 1`] = `
   box-sizing: border-box;
   -webkit-transition: box-shadow 0.25s,background-color 0.25s,border-color 0.25s;
   transition: box-shadow 0.25s,background-color 0.25s,border-color 0.25s;
+  font-weight: 500;
   border-color: #2da0c7;
   background-color: #2da0c7;
   color: #ffffff;
@@ -77,6 +78,7 @@ exports[`renders correctly with color 2`] = `
   box-sizing: border-box;
   -webkit-transition: box-shadow 0.25s,background-color 0.25s,border-color 0.25s;
   transition: box-shadow 0.25s,background-color 0.25s,border-color 0.25s;
+  font-weight: 500;
   border-color: #999999;
   background-color: #999999;
   color: #ffffff;
@@ -133,6 +135,7 @@ exports[`renders correctly with variant 1`] = `
   box-sizing: border-box;
   -webkit-transition: box-shadow 0.25s,background-color 0.25s,border-color 0.25s;
   transition: box-shadow 0.25s,background-color 0.25s,border-color 0.25s;
+  font-weight: 500;
   border-color: #2da0c7;
   background-color: #2da0c7;
   color: #ffffff;
@@ -189,6 +192,7 @@ exports[`renders correctly with variant 2`] = `
   box-sizing: border-box;
   -webkit-transition: box-shadow 0.25s,background-color 0.25s,border-color 0.25s;
   transition: box-shadow 0.25s,background-color 0.25s,border-color 0.25s;
+  font-weight: 500;
   background-color: transparent;
   border-color: #2da0c7;
   color: #2da0c7;

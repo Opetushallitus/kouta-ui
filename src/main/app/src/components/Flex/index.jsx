@@ -9,6 +9,7 @@ const Flex = styled(SFlex)`
 
 export const FlexItem = styled(SFlexItem)`
   ${spacingCss};
+  box-sizing: border-box;
 `;
 
 export default Flex;

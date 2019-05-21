@@ -41,29 +41,63 @@ Object {
         "paattyy": "2019-09-18T08:44",
       },
     ],
-    "yhteystieto": Object {
-      "nimi": Object {
-        "fi": "Fi nimi",
-        "sv": "Sv nimi",
+    "yhteyshenkilot": Array [
+      Object {
+        "nimi": Object {
+          "fi": "Fi nimi",
+          "sv": "Sv nimi",
+        },
+        "puhelinnumero": Object {
+          "fi": "Fi puhelinnumero",
+          "sv": "Sv puhelinnumero",
+        },
+        "sahkoposti": Object {
+          "fi": "Fi sähköposti",
+          "sv": "Sv sähköposti",
+        },
+        "titteli": Object {
+          "fi": "Fi titteli",
+          "sv": "Sv titteli",
+        },
+        "wwwSivu": Object {
+          "fi": "Fi verkkosivu",
+          "sv": "Sv verkkosivu",
+        },
       },
-      "puhelinnumero": Object {
-        "fi": "Fi puhelinnumero",
-        "sv": "Sv puhelinnumero",
-      },
-      "sahkoposti": Object {
-        "fi": "Fi sähköposti",
-        "sv": "Sv sähköposti",
-      },
-      "titteli": Object {
-        "fi": "Fi titteli",
-        "sv": "Sv titteli",
-      },
-    },
+    ],
   },
   "nimi": Object {
     "fi": "Nimi",
     "sv": "Namn",
   },
+  "valintakokeet": Array [
+    Object {
+      "tilaisuudet": Array [
+        Object {
+          "aika": Object {
+            "alkaa": "2019-04-16T08:44",
+            "paattyy": "2019-04-18T08:44",
+          },
+          "lisatietoja": Object {
+            "fi": "fi lisatietoja",
+            "sv": "sv lisatietoja",
+          },
+          "osoite": Object {
+            "osoite": Object {
+              "fi": "fi osoite",
+              "sv": "sv osoite",
+            },
+            "postinumero": "00520",
+            "postitoimipaikka": Object {
+              "fi": "fi posititoimipaikka",
+              "sv": "sv posititoimipaikka",
+            },
+          },
+        },
+      ],
+      "tyyppi": "tyyppi_1#1",
+    },
+  ],
 }
 `;
 
@@ -108,29 +142,63 @@ Object {
         "paattyy": "2019-09-18T08:44",
       },
     ],
-    "yhteystieto": Object {
-      "nimi": Object {
-        "fi": "Fi nimi",
-        "sv": "Sv nimi",
+    "yhteyshenkilot": Array [
+      Object {
+        "nimi": Object {
+          "fi": "Fi nimi",
+          "sv": "Sv nimi",
+        },
+        "puhelinnumero": Object {
+          "fi": "Fi puhelinnumero",
+          "sv": "Sv puhelinnumero",
+        },
+        "sahkoposti": Object {
+          "fi": "Fi sähköposti",
+          "sv": "Sv sähköposti",
+        },
+        "titteli": Object {
+          "fi": "Fi titteli",
+          "sv": "Sv titteli",
+        },
+        "wwwSivu": Object {
+          "fi": "Fi verkkosivu",
+          "sv": "Sv verkkosivu",
+        },
       },
-      "puhelinnumero": Object {
-        "fi": "Fi puhelinnumero",
-        "sv": "Sv puhelinnumero",
-      },
-      "sahkoposti": Object {
-        "fi": "Fi sähköposti",
-        "sv": "Sv sähköposti",
-      },
-      "titteli": Object {
-        "fi": "Fi titteli",
-        "sv": "Sv titteli",
-      },
-    },
+    ],
   },
   "nimi": Object {
     "fi": "Nimi",
     "sv": "Namn",
   },
+  "valintakokeet": Array [
+    Object {
+      "tilaisuudet": Array [
+        Object {
+          "aika": Object {
+            "alkaa": "2019-04-16T08:44",
+            "paattyy": "2019-04-18T08:44",
+          },
+          "lisatietoja": Object {
+            "fi": "fi lisatietoja",
+            "sv": "sv lisatietoja",
+          },
+          "osoite": Object {
+            "osoite": Object {
+              "fi": "fi osoite",
+              "sv": "sv osoite",
+            },
+            "postinumero": "00520",
+            "postitoimipaikka": Object {
+              "fi": "fi posititoimipaikka",
+              "sv": "sv posititoimipaikka",
+            },
+          },
+        },
+      ],
+      "tyyppi": "tyyppi_1#1",
+    },
+  ],
 }
 `;
 
@@ -173,29 +241,63 @@ Object {
         "paattyy": "2019-09-18T08:44",
       },
     ],
-    "yhteystieto": Object {
-      "nimi": Object {
-        "fi": "Fi nimi",
-        "sv": "Sv nimi",
+    "yhteyshenkilot": Array [
+      Object {
+        "nimi": Object {
+          "fi": "Fi nimi",
+          "sv": "Sv nimi",
+        },
+        "puhelinnumero": Object {
+          "fi": "Fi puhelinnumero",
+          "sv": "Sv puhelinnumero",
+        },
+        "sahkoposti": Object {
+          "fi": "Fi sähköposti",
+          "sv": "Sv sähköposti",
+        },
+        "titteli": Object {
+          "fi": "Fi titteli",
+          "sv": "Sv titteli",
+        },
+        "wwwSivu": Object {
+          "fi": "Fi verkkosivu",
+          "sv": "Sv verkkosivu",
+        },
       },
-      "puhelinnumero": Object {
-        "fi": "Fi puhelinnumero",
-        "sv": "Sv puhelinnumero",
-      },
-      "sahkoposti": Object {
-        "fi": "Fi sähköposti",
-        "sv": "Sv sähköposti",
-      },
-      "titteli": Object {
-        "fi": "Fi titteli",
-        "sv": "Sv titteli",
-      },
-    },
+    ],
   },
   "nimi": Object {
     "fi": "Nimi",
     "sv": "Namn",
   },
+  "valintakokeet": Array [
+    Object {
+      "tilaisuudet": Array [
+        Object {
+          "aika": Object {
+            "alkaa": "2019-04-16T08:44",
+            "paattyy": "2019-04-18T08:44",
+          },
+          "lisatietoja": Object {
+            "fi": "fi lisatietoja",
+            "sv": "sv lisatietoja",
+          },
+          "osoite": Object {
+            "osoite": Object {
+              "fi": "fi osoite",
+              "sv": "sv osoite",
+            },
+            "postinumero": "00520",
+            "postitoimipaikka": Object {
+              "fi": "fi posititoimipaikka",
+              "sv": "sv posititoimipaikka",
+            },
+          },
+        },
+      ],
+      "tyyppi": "tyyppi_1#1",
+    },
+  ],
 }
 `;
 
@@ -230,9 +332,7 @@ Object {
     "lomake": Object {},
     "tyyppi": "muu",
   },
-  "hakutapa": Object {
-    "tapa": "hakutapa_1#1",
-  },
+  "hakutapa": "hakutapa_1#1",
   "kieliversiot": Object {
     "languages": Array [
       "fi",
@@ -248,24 +348,58 @@ Object {
       "sv": "Sv nimi",
     },
   },
-  "yhteystiedot": Object {
-    "email": Object {
-      "fi": "Fi sähköposti",
-      "sv": "Sv sähköposti",
+  "valintakoe": Object {
+    "tilaisuudet": Object {
+      "tyyppi_1#1": Array [
+        Object {
+          "alkaa": "2019-04-16T08:44",
+          "lisatietoja": Object {
+            "fi": "fi lisatietoja",
+            "sv": "sv lisatietoja",
+          },
+          "osoite": Object {
+            "fi": "fi osoite",
+            "sv": "sv osoite",
+          },
+          "paattyy": "2019-04-18T08:44",
+          "postinumero": "00520",
+          "postitoimipaikka": Object {
+            "fi": "fi posititoimipaikka",
+            "sv": "sv posititoimipaikka",
+          },
+        },
+      ],
     },
-    "nimi": Object {
-      "fi": "Fi nimi",
-      "sv": "Sv nimi",
-    },
-    "puhelin": Object {
-      "fi": "Fi puhelinnumero",
-      "sv": "Sv puhelinnumero",
-    },
-    "titteli": Object {
-      "fi": "Fi titteli",
-      "sv": "Sv titteli",
-    },
+    "tyypit": Array [
+      Object {
+        "value": "tyyppi_1#1",
+      },
+    ],
   },
+  "yhteyshenkilot": Array [
+    Object {
+      "nimi": Object {
+        "fi": "Fi nimi",
+        "sv": "Sv nimi",
+      },
+      "puhelinnumero": Object {
+        "fi": "Fi puhelinnumero",
+        "sv": "Sv puhelinnumero",
+      },
+      "sahkoposti": Object {
+        "fi": "Fi sähköposti",
+        "sv": "Sv sähköposti",
+      },
+      "titteli": Object {
+        "fi": "Fi titteli",
+        "sv": "Sv titteli",
+      },
+      "verkkosivu": Object {
+        "fi": "Fi verkkosivu",
+        "sv": "Sv verkkosivu",
+      },
+    },
+  ],
 }
 `;
 
@@ -300,9 +434,7 @@ Object {
     "lomake": Object {},
     "tyyppi": "ei sähköistä",
   },
-  "hakutapa": Object {
-    "tapa": "hakutapa_1#1",
-  },
+  "hakutapa": "hakutapa_1#1",
   "kieliversiot": Object {
     "languages": Array [
       "fi",
@@ -318,24 +450,58 @@ Object {
       "sv": "Sv nimi",
     },
   },
-  "yhteystiedot": Object {
-    "email": Object {
-      "fi": "Fi sähköposti",
-      "sv": "Sv sähköposti",
+  "valintakoe": Object {
+    "tilaisuudet": Object {
+      "tyyppi_1#1": Array [
+        Object {
+          "alkaa": "2019-04-16T08:44",
+          "lisatietoja": Object {
+            "fi": "fi lisatietoja",
+            "sv": "sv lisatietoja",
+          },
+          "osoite": Object {
+            "fi": "fi osoite",
+            "sv": "sv osoite",
+          },
+          "paattyy": "2019-04-18T08:44",
+          "postinumero": "00520",
+          "postitoimipaikka": Object {
+            "fi": "fi posititoimipaikka",
+            "sv": "sv posititoimipaikka",
+          },
+        },
+      ],
     },
-    "nimi": Object {
-      "fi": "Fi nimi",
-      "sv": "Sv nimi",
-    },
-    "puhelin": Object {
-      "fi": "Fi puhelinnumero",
-      "sv": "Sv puhelinnumero",
-    },
-    "titteli": Object {
-      "fi": "Fi titteli",
-      "sv": "Sv titteli",
-    },
+    "tyypit": Array [
+      Object {
+        "value": "tyyppi_1#1",
+      },
+    ],
   },
+  "yhteyshenkilot": Array [
+    Object {
+      "nimi": Object {
+        "fi": "Fi nimi",
+        "sv": "Sv nimi",
+      },
+      "puhelinnumero": Object {
+        "fi": "Fi puhelinnumero",
+        "sv": "Sv puhelinnumero",
+      },
+      "sahkoposti": Object {
+        "fi": "Fi sähköposti",
+        "sv": "Sv sähköposti",
+      },
+      "titteli": Object {
+        "fi": "Fi titteli",
+        "sv": "Sv titteli",
+      },
+      "verkkosivu": Object {
+        "fi": "Fi verkkosivu",
+        "sv": "Sv verkkosivu",
+      },
+    },
+  ],
 }
 `;
 
@@ -372,9 +538,7 @@ Object {
     },
     "tyyppi": "ataru",
   },
-  "hakutapa": Object {
-    "tapa": "hakutapa_1#1",
-  },
+  "hakutapa": "hakutapa_1#1",
   "kieliversiot": Object {
     "languages": Array [
       "fi",
@@ -390,23 +554,57 @@ Object {
       "sv": "Sv nimi",
     },
   },
-  "yhteystiedot": Object {
-    "email": Object {
-      "fi": "Fi sähköposti",
-      "sv": "Sv sähköposti",
+  "valintakoe": Object {
+    "tilaisuudet": Object {
+      "tyyppi_1#1": Array [
+        Object {
+          "alkaa": "2019-04-16T08:44",
+          "lisatietoja": Object {
+            "fi": "fi lisatietoja",
+            "sv": "sv lisatietoja",
+          },
+          "osoite": Object {
+            "fi": "fi osoite",
+            "sv": "sv osoite",
+          },
+          "paattyy": "2019-04-18T08:44",
+          "postinumero": "00520",
+          "postitoimipaikka": Object {
+            "fi": "fi posititoimipaikka",
+            "sv": "sv posititoimipaikka",
+          },
+        },
+      ],
     },
-    "nimi": Object {
-      "fi": "Fi nimi",
-      "sv": "Sv nimi",
-    },
-    "puhelin": Object {
-      "fi": "Fi puhelinnumero",
-      "sv": "Sv puhelinnumero",
-    },
-    "titteli": Object {
-      "fi": "Fi titteli",
-      "sv": "Sv titteli",
-    },
+    "tyypit": Array [
+      Object {
+        "value": "tyyppi_1#1",
+      },
+    ],
   },
+  "yhteyshenkilot": Array [
+    Object {
+      "nimi": Object {
+        "fi": "Fi nimi",
+        "sv": "Sv nimi",
+      },
+      "puhelinnumero": Object {
+        "fi": "Fi puhelinnumero",
+        "sv": "Sv puhelinnumero",
+      },
+      "sahkoposti": Object {
+        "fi": "Fi sähköposti",
+        "sv": "Sv sähköposti",
+      },
+      "titteli": Object {
+        "fi": "Fi titteli",
+        "sv": "Sv titteli",
+      },
+      "verkkosivu": Object {
+        "fi": "Fi verkkosivu",
+        "sv": "Sv verkkosivu",
+      },
+    },
+  ],
 }
 `;

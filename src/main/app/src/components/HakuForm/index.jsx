@@ -1,4 +1,4 @@
-import { POHJAVALINNAT } from '../../constants';
+import { POHJAVALINTA } from '../../constants';
 
 export const initialValues = {
   kieliversiot: {
@@ -6,7 +6,7 @@ export const initialValues = {
   },
   pohja: {
     pohja: {
-      tapa: POHJAVALINNAT.UUSI,
+      tapa: POHJAVALINTA.UUSI,
     },
   },
   aikataulut: {

@@ -2,10 +2,10 @@ import { getFormValues, startSubmit, stopSubmit } from 'redux-form';
 import get from 'lodash/get';
 import produce from 'immer';
 
-import { JULKAISUTILA, POHJAVALINNAT } from '../../constants';
+import { JULKAISUTILA, POHJAVALINTA } from '../../constants';
 import { createSavingErrorToast, createSavingSuccessToast } from '../toaster';
 import { getToteutusByValues, validate } from './utils';
-import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
+import { KOULUTUSTYYPPI } from '../../constants';
 import { isNonEmptyObject } from '../../utils';
 
 const formName = 'createToteutusForm';
@@ -30,7 +30,7 @@ export const saveToteutus = toteutus => (
 
 export const submit = ({
   tila = JULKAISUTILA.TALLENNETTU,
-  koulutustyyppi = KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS,
+  koulutustyyppi = KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
 } = {}) => async (dispatch, getState, { history, localisation }) => {
   const state = getState();
   const values = getToteutusFormValues(state);
@@ -95,7 +95,7 @@ export const maybeCopy = () => (dispatch, getState) => {
   const values = getToteutusFormValues(getState());
 
   if (
-    get(values, 'base.pohja.tapa') === POHJAVALINNAT.KOPIO &&
+    get(values, 'base.pohja.tapa') === POHJAVALINTA.KOPIO &&
     !!get(values, 'base.pohja.valinta')
   ) {
     dispatch(copy(values.base.pohja.valinta.value));

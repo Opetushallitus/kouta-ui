@@ -148,6 +148,12 @@ export default {
     kopioiTiedot: 'Kopioi tiedot',
     soraKuvaus: 'SORA-kuvaus',
     luoUusiSoraKuvaus: 'Luo uusi SORA-kuvaus',
+    lukiokoulutus: 'Lukiokoulutus',
+    lisaaYhteyshenkilo: 'Lisää yhteyshenkilö',
+    puhelinnumero: 'Puhelinnumero',
+    valitseValintakoetyypit: 'Valitse valintakoetyypit',
+    lisaaTilaisuus: 'Lisää tilaisuus',
+    valintakoe: 'Valintakoe',
   },
   validointivirheet: {
     syotaArvo: 'Syötä kentälle arvo',
@@ -199,6 +205,11 @@ export default {
     toteutuksenLiittaminenKoulutukseen: 'Toteutuksen liittäminen koulutukseen',
     kuvausEiOleSaatavilla: 'Kuvaus ei ole saatavilla',
     valitseKoulutustyyppi: 'Valitse koulutustyyppi',
+    valitseKoulutusalat: 'Valitse koulutusalat',
+    pohjavalintaInfo:
+      'Voit halutessasi käyttää aiemmin luotuja koulutuksia uuden lomakkeen esitäytettynä pohjana tai kopioida vanhan koulutuksen tiedot.',
+    lisatiedotInfo:
+      'Voit halutessasi lisätä vapaasti täytettäviä osioita, jotka antavat tarkempaa tietoa koulutuksesta.',
   },
   toteutuslomake: {
     toteutuksellaEiHakukohteita:
@@ -229,6 +240,7 @@ export default {
       'Koulutuksen näyttämiseen liittyvät tiedot',
     linkinOtsikko: 'Linkin otsikko',
     lisaaLinkki: 'Lisää linkki',
+    kaytossaLukuvuosimaksu: 'Käytössä lukuvuosimaksu',
   },
   hakulomake: {
     haunNimi: 'Haun nimi',

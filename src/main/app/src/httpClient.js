@@ -38,8 +38,12 @@ const withAuthorizationInterceptor = apiUrls => client => {
   client.interceptors.response.use(
     response => response,
     async error => {
-      if (!isAuthorizationError(error) || hasBeenRetried(error)) {
+      if (!isAuthorizationError(error)) {
         return Promise.reject(error);
+      }
+
+      if (hasBeenRetried(error)) {
+        window.location.replace(apiUrls.url('cas.login'));
       }
 
       error.config.__retried = true;
@@ -48,9 +52,13 @@ const withAuthorizationInterceptor = apiUrls => client => {
 
       if (isKoutaBackendUrl(responseUrl) && apiUrls) {
         try {
-          await client.get(apiUrls.url('kouta-backend.login'));
+          await client.get(apiUrls.url('kouta-backend.login'), {
+            cache: {
+              ignoreCache: true,
+            },
+          });
 
-          return client.get(error.config);
+          return client(error.config);
         } catch (e) {
           return Promise.reject(error);
         }

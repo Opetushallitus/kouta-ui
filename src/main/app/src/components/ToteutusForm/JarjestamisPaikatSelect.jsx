@@ -3,6 +3,8 @@ import uniq from 'lodash/uniq';
 
 import { getOrganisaatioHierarchyByOid } from '../../apiUtils';
 import CheckboxGroup from '../CheckboxGroup';
+import Checkbox from '../Checkbox';
+
 import {
   isArray,
   getTreeLevel,
@@ -10,7 +12,7 @@ import {
   getFirstLanguageValue,
   memoize,
 } from '../../utils';
-import Typography from '../Typography';
+
 import Spacing from '../Spacing';
 import useApiAsync from '../useApiAsync';
 
@@ -74,40 +76,70 @@ const makeOnGroupChange = ({
   const { added, removed } = arrayDiff(previousOptionValue, newOptionValue);
 
   onChange(
-    cleanValue(uniq([...added, ...value.filter(v => !removed.includes(v))]), allOptions),
+    cleanValue(
+      uniq([...added, ...value.filter(v => !removed.includes(v))]),
+      allOptions,
+    ),
   );
+};
+
+const makeOnToggleAll = ({ children, onChange, value }) => e => {
+  const checked = Boolean(e.target.checked);
+  const childValues = children.map(({ value: childValue }) => childValue);
+
+  if (checked) {
+    onChange(uniq([...value, ...childValues]));
+  } else {
+    onChange(value.filter(v => !childValues.includes(v)));
+  }
 };
 
 const MultiSelection = ({ value = [], onChange = () => {}, options = [] }) => {
   return options
     .filter(({ children }) => isArray(children) && children.length > 0)
     .map(({ label, children = [], value: oid }, index) => {
+      const onToggleAll = makeOnToggleAll({ children, onChange, value });
+
+      const allChildrenSelected = !children.find(
+        ({ value: childValue }) => !value.includes(childValue),
+      );
+
       return (
         <Spacing marginBottom={index < options.length - 1 ? 2 : 0} key={oid}>
-          <Typography variant="h6" marginBottom={1}>
-            {label}
-          </Typography>
-          <CheckboxGroup
-            value={value}
-            onChange={makeOnGroupChange({
-              options: children,
-              value,
-              onChange,
-              allOptions: options,
-            })}
-            options={children}
-          />
+          <Spacing marginBottom={children.lenght > 0 ? 2 : 0}>
+            <Checkbox checked={allChildrenSelected} onChange={onToggleAll}>
+              {label}
+            </Checkbox>
+          </Spacing>
+          {children.length > 0 ? (
+            <Spacing paddingLeft={3}>
+              <CheckboxGroup
+                value={value}
+                onChange={makeOnGroupChange({
+                  options: children,
+                  value,
+                  onChange,
+                  allOptions: options,
+                })}
+                options={children}
+              />
+            </Spacing>
+          ) : null}
         </Spacing>
       );
     });
 };
 
 const JarjestamisPaikatSelect = ({ organisaatioOid, ...props }) => {
-  const { data } = useApiAsync({ promiseFn: getOrganisaatiot, oid: organisaatioOid, watch: organisaatioOid });
+  const { data } = useApiAsync({
+    promiseFn: getOrganisaatiot,
+    oid: organisaatioOid,
+    watch: organisaatioOid,
+  });
 
   const options = useMemo(() => {
     return data ? getOptions(data) : [];
-  }, [data])
+  }, [data]);
 
   return <MultiSelection options={options} {...props} />;
 };

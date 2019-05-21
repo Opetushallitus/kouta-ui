@@ -8,7 +8,7 @@ import {
   FormFieldTextarea,
 } from '../FormFields';
 
-import { HAKULOMAKE_TYYPIT } from '../../constants';
+import { HAKULOMAKETYYPPI } from '../../constants';
 import Spacing from '../Spacing';
 import useTranslation from '../useTranslation';
 import useLanguage from '../useLanguage';
@@ -84,11 +84,11 @@ const AdditionalTyyppiFields = ({
     return option => getTyyppiShowUrl({ option, apiUrls, tyyppi: value });
   }, [getTyyppiShowUrl, apiUrls, value]);
 
-  if (value === HAKULOMAKE_TYYPIT.MUU) {
+  if (value === HAKULOMAKETYYPPI.MUU) {
     return <MuuFields baseName={baseName} t={t} language={language} />;
   }
 
-  if (value === HAKULOMAKE_TYYPIT.ATARU) {
+  if (value === HAKULOMAKETYYPPI.ATARU) {
     return (
       <Field
         name={`${lomakeName}.${value}`}
@@ -100,7 +100,7 @@ const AdditionalTyyppiFields = ({
     );
   }
 
-  if (value === HAKULOMAKE_TYYPIT.EI_SAHKOISTA_HAKUA) {
+  if (value === HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA) {
     return <EiHakuaFields baseName={baseName} t={t} language={language} />;
   }
 
@@ -108,10 +108,10 @@ const AdditionalTyyppiFields = ({
 };
 
 const defaultTyypit = [
-  HAKULOMAKE_TYYPIT.ATARU,
-  HAKULOMAKE_TYYPIT.HAKUAPP,
-  HAKULOMAKE_TYYPIT.MUU,
-  HAKULOMAKE_TYYPIT.EI_SAHKOISTA_HAKUA,
+  HAKULOMAKETYYPPI.ATARU,
+  HAKULOMAKETYYPPI.HAKUAPP,
+  HAKULOMAKETYYPPI.MUU,
+  HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA,
 ];
 
 export const LomakeFields = ({

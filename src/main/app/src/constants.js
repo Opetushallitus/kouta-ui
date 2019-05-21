@@ -6,7 +6,7 @@ export const JULKAISUTILA = {
   ARKISTOITU: 'arkistoitu',
 };
 
-export const KOULUTUSTYYPPI_CATEGORY = {
+export const KOULUTUSTYYPPI = {
   AMMATILLINEN_KOULUTUS: 'amm',
   KORKEAKOULUKOULUTUS: 'kk',
   LUKIOKOULUTUS: 'lk',
@@ -15,8 +15,8 @@ export const KOULUTUSTYYPPI_CATEGORY = {
   AMKKOULUTUS: 'amk',
 };
 
-export const KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP = {
-  [KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS]: [
+export const KOULUTUSTYYPPI_TO_KOULUTUSTYYPPI_IDS_MAP = {
+  [KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS]: [
     'koulutustyyppi_1',
     'koulutustyyppi_4',
     'koulutustyyppi_5',
@@ -29,14 +29,14 @@ export const KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP = {
     'koulutustyyppi_19',
     'koulutustyyppi_26',
   ],
-  [KOULUTUSTYYPPI_CATEGORY.KORKEAKOULUKOULUTUS]: ['koulutustyyppi_3'],
-  [KOULUTUSTYYPPI_CATEGORY.LUKIOKOULUTUS]: [
+  [KOULUTUSTYYPPI.KORKEAKOULUKOULUTUS]: ['koulutustyyppi_3'],
+  [KOULUTUSTYYPPI.LUKIOKOULUTUS]: [
     'koulutustyyppi_2',
     'koulutustyyppi_9',
     'koulutustyyppi_14',
     'koulutustyyppi_23',
   ],
-  [KOULUTUSTYYPPI_CATEGORY.MUU_KOULUTUS]: [
+  [KOULUTUSTYYPPI.MUU_KOULUTUS]: [
     'koulutustyyppi_6',
     'koulutustyyppi_10',
     'koulutustyyppi_15',
@@ -45,25 +45,11 @@ export const KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP = {
     'koulutustyyppi_21',
     'koulutustyyppi_22',
   ],
-  [KOULUTUSTYYPPI_CATEGORY.YLIOPISTOKOULUTUS]: ['koulutustyyppi_3'],
-  [KOULUTUSTYYPPI_CATEGORY.AMKKOULUTUS]: ['koulutustyyppi_3'],
+  [KOULUTUSTYYPPI.YLIOPISTOKOULUTUS]: ['koulutustyyppi_3'],
+  [KOULUTUSTYYPPI.AMKKOULUTUS]: ['koulutustyyppi_3'],
 };
 
-export const HAKUKOHDE_LOMAKETYYPPI_OPTIONS = [
-  { value: 'ataru', label: 'Käytetään hakemuspalvelun lomaketta' },
-  { value: 'haku-app', label: 'Käytetään järjestelmän hakulomaketta' },
-  { value: 'muu', label: 'Käytetään muuta hakulomaketta' },
-  { value: 'ei_hakua', label: 'Ei sähköistä hakua' },
-];
-
-export const HAKU_LOMAKETYYPPI_OPTIONS = [
-  { value: 'ataru', label: 'Käytetään hakemuspalvelun lomaketta' },
-  { value: 'haku-app', label: 'Käytetään järjestelmän hakulomaketta' },
-  { value: 'muu', label: 'Käytetään muuta hakulomaketta' },
-  { value: 'ei sähköistä', label: 'Ei sähköistä hakua' },
-];
-
-export const HAKULOMAKE_TYYPIT = {
+export const HAKULOMAKETYYPPI = {
   ATARU: 'ataru',
   HAKUAPP: 'haku-app',
   MUU: 'muu',
@@ -74,13 +60,18 @@ export const VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI =
   'kielitaidonosoittaminen_04';
 
 export const KORKEAKOULUKOULUTUSTYYPIT = [
-  KOULUTUSTYYPPI_CATEGORY.YLIOPISTOKOULUTUS,
-  KOULUTUSTYYPPI_CATEGORY.AMKKOULUTUS,
-  KOULUTUSTYYPPI_CATEGORY.KORKEAKOULUKOULUTUS,
+  KOULUTUSTYYPPI.YLIOPISTOKOULUTUS,
+  KOULUTUSTYYPPI.AMKKOULUTUS,
+  KOULUTUSTYYPPI.KORKEAKOULUKOULUTUS,
 ];
 
-export const POHJAVALINNAT = {
+export const POHJAVALINTA = {
   UUSI: 'uusi',
   KOPIO: 'kopio',
   AIEMPI: 'aiempi',
 };
+
+export const OPETUSHALLITUS_APP_TARJONTA_CRUD_ROOLI =
+  'APP_TARJONTA_CRUD_1.2.246.562.10.00000000001';
+
+export const HAKUTAPA_YHTEISHAKU_KOODI_URI = 'hakutapa_01';

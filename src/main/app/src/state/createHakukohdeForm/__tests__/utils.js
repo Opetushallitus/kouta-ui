@@ -1,5 +1,5 @@
 import { getHakukohdeByValues, getValuesByHakukohde } from '../utils';
-import { HAKULOMAKE_TYYPIT } from '../../../constants';
+import { HAKULOMAKETYYPPI } from '../../../constants';
 
 test('getHakukohdeByValues returns correct hakukohde given form values', () => {
   const hakukohde = getHakukohdeByValues({
@@ -107,9 +107,9 @@ test('getHakukohdeByValues returns correct hakukohde given form values', () => {
     },
     hakulomake: {
       eriHakulomake: true,
-      tyyppi: HAKULOMAKE_TYYPIT.ATARU,
+      tyyppi: HAKULOMAKETYYPPI.ATARU,
       lomake: {
-        [HAKULOMAKE_TYYPIT.ATARU]: { value: '12345' },
+        [HAKULOMAKETYYPPI.ATARU]: { value: '12345' },
       },
     },
   });
@@ -174,7 +174,7 @@ test('getValuesByHakukohde returns correct form values given hakukohde', () => {
     valintaperuste: 'peruste_1#1',
     ensikertalaisenAloituspaikat: 39,
     hakulomakeId: '12345',
-    hakulomaketyyppi: HAKULOMAKE_TYYPIT.ATARU,
+    hakulomaketyyppi: HAKULOMAKETYYPPI.ATARU,
     eriHakulomake: true,
   });
 

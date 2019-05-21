@@ -5,6 +5,7 @@ import pick from 'lodash/pick';
 
 import { JULKAISUTILA, KORKEAKOULUKOULUTUSTYYPIT } from '../../constants';
 import { ErrorBuilder } from '../../validation';
+import { isNumeric } from '../../utils';
 
 const getKielivalinta = values => get(values, 'kieliversiot.languages') || [];
 
@@ -20,14 +21,14 @@ const getOsaamisalatByValues = ({ osaamisalat, kielivalinta }) => {
 };
 
 export const getToteutusByValues = values => {
+  const kielivalinta = getKielivalinta(values);
   const tarjoajat = get(values, 'jarjestamispaikat.jarjestajat') || [];
-  const kielivalinta = get(values, 'kieliversiot.languages') || [];
   const nimi = pick(get(values, 'nimi.name') || {}, kielivalinta);
   const opetuskielet = get(values, 'jarjestamistiedot.opetuskieli') || [];
   const kuvaus = pick(get(values, 'kuvaus.kuvaus') || {}, kielivalinta);
   const osioKuvaukset = get(values, 'jarjestamistiedot.osioKuvaukset') || {};
   const opetustapaKoodiUrit = get(values, 'jarjestamistiedot.opetustapa') || [];
-  const opetusaikaKoodiUri = get(values, 'jarjestamistiedot.opetusaika');
+  const opetusaikaKoodiUrit = get(values, 'jarjestamistiedot.opetusaika') || [];
 
   const opetuskieliKuvaus = pick(
     get(values, 'jarjestamistiedot.opetuskieliKuvaus') || {},
@@ -62,14 +63,26 @@ export const getToteutusByValues = values => {
     }),
   );
 
-  const onkoMaksullinen = Boolean(
-    get(values, 'jarjestamistiedot.maksullisuus'),
+  const maksullisuustyyppi = get(
+    values,
+    'jarjestamistiedot.maksullisuus.tyyppi',
   );
 
-  const maksunMaara = pick(
-    get(values, 'jarjestamistiedot.maksumaara') || {},
-    kielivalinta,
-  );
+  const maksullisuusMaksu = get(values, 'jarjestamistiedot.maksullisuus.maksu');
+
+  const onkoLukuvuosimaksua = maksullisuustyyppi === 'lukuvuosimaksu';
+
+  const lukuvuosimaksu =
+    onkoLukuvuosimaksua && isNumeric(maksullisuusMaksu)
+      ? parseFloat(maksullisuusMaksu)
+      : null;
+
+  const onkoMaksullinen = maksullisuustyyppi === 'kylla';
+
+  const maksunMaara =
+    onkoMaksullinen && isNumeric(maksullisuusMaksu)
+      ? parseFloat(maksullisuusMaksu)
+      : null;
 
   const osaamisalaLinkit = get(values, 'osaamisalat.osaamisalaLinkit') || {};
   const osaamisalaLinkkiOtsikot =
@@ -83,13 +96,15 @@ export const getToteutusByValues = values => {
     }),
   );
 
-  const yhteystieto = {
-    nimi: pick(get(values, 'yhteystiedot.name') || {}, kielivalinta),
-    titteli: pick(get(values, 'yhteystiedot.title') || {}, kielivalinta),
-    sahkoposti: pick(get(values, 'yhteystiedot.email') || {}, kielivalinta),
-    puhelinnumero: pick(get(values, 'yhteystiedot.phone') || {}, kielivalinta),
-    wwwSivu: pick(get(values, 'yhteystiedot.website') || {}, kielivalinta),
-  };
+  const yhteyshenkilot = (get(values, 'yhteyshenkilot') || []).map(
+    ({ nimi, titteli, sahkoposti, puhelinnumero, verkkosivu }) => ({
+      nimi: pick(nimi || {}, kielivalinta),
+      titteli: pick(titteli || {}, kielivalinta),
+      sahkoposti: pick(sahkoposti || {}, kielivalinta),
+      puhelinnumero: pick(puhelinnumero || {}, kielivalinta),
+      wwwSivu: pick(verkkosivu || {}, kielivalinta),
+    }),
+  );
 
   const ammattinimikkeet = flatMap(
     toPairs(
@@ -115,20 +130,6 @@ export const getToteutusByValues = values => {
     },
   );
 
-  const onkoLukuvuosimaksua = Boolean(
-    get(values, 'jarjestamistiedot.onkoLukuvuosimaksua'),
-  );
-
-  const lukuvuosimaksuKuvaus = pick(
-    get(values, 'jarjestamistiedot.lukuvuosimaksuKuvaus') || {},
-    kielivalinta,
-  );
-
-  const lukuvuosimaksu = pick(
-    get(values, 'jarjestamistiedot.lukuvuosimaksu') || {},
-    kielivalinta,
-  );
-
   const onkoStipendia = Boolean(get(values, 'jarjestamistiedot.onkoStipendia'));
 
   const stipendinKuvaus = pick(
@@ -142,18 +143,12 @@ export const getToteutusByValues = values => {
   );
 
   const ylemmanKorkeakoulututkinnonOsaamisalat = getOsaamisalatByValues({
-    osaamisalat: get(
-      values,
-      'ylemmanKorkeakoulututkinnonOsaamisalat.osaamisalat',
-    ),
+    osaamisalat: get(values, 'ylemmanKorkeakoulututkinnonOsaamisalat'),
     kielivalinta,
   });
 
   const alemmanKorkeakoulututkinnonOsaamisalat = getOsaamisalatByValues({
-    osaamisalat: get(
-      values,
-      'alemmanKorkeakoulututkinnonOsaamisalat.osaamisalat',
-    ),
+    osaamisalat: get(values, 'alemmanKorkeakoulututkinnonOsaamisalat'),
     kielivalinta,
   });
 
@@ -168,7 +163,7 @@ export const getToteutusByValues = values => {
         onkoMaksullinen,
         maksunMaara,
         opetustapaKoodiUrit,
-        opetusaikaKoodiUri,
+        opetusaikaKoodiUrit,
         opetuskieletKuvaus: opetuskieliKuvaus,
         opetustapaKuvaus,
         opetusaikaKuvaus,
@@ -178,13 +173,12 @@ export const getToteutusByValues = values => {
         alkamisvuosi,
         onkoLukuvuosimaksua,
         lukuvuosimaksu,
-        lukuvuosimaksuKuvaus,
         onkoStipendia,
         stipendinKuvaus,
         stipendinMaara,
       },
       osaamisalat,
-      yhteystieto,
+      yhteyshenkilot,
       ammattinimikkeet,
       asiasanat,
       ylemmanKorkeakoulututkinnonOsaamisalat,
@@ -206,11 +200,11 @@ export const getValuesByToteutus = toteutus => {
     kuvaus = {},
     ammattinimikkeet = [],
     asiasanat = [],
-    yhteystieto = {},
     opetus = {},
     osaamisalat: osaamisalatArg = [],
     ylemmanKorkeakoulututkinnonOsaamisalat: ylemmanKorkeakoulututkinnonOsaamisalatArg = [],
     alemmanKorkeakoulututkinnonOsaamisalat: alemmanKorkeakoulututkinnonOsaamisalatArg = [],
+    yhteyshenkilot = [],
   } = metadata;
 
   const osaamisalat = osaamisalatArg.map(({ koodi }) => koodi);
@@ -243,6 +237,12 @@ export const getValuesByToteutus = toteutus => {
     return acc;
   }, {});
 
+  const maksullistyyppi = get(opetus, 'onkoLukuvuosimaksua')
+    ? 'lukuvuosimaksu'
+    : get(opetus, 'onkoMaksullinen')
+    ? 'kylla'
+    : 'ei';
+
   return {
     nimi: {
       name: nimi,
@@ -255,10 +255,16 @@ export const getValuesByToteutus = toteutus => {
     },
     jarjestamistiedot: {
       kuvaus,
-      maksullisuus: get(opetus, 'onkoMaksullinen'),
+      maksullisuus: {
+        tyyppi: maksullistyyppi,
+        maksu: (maksullistyyppi === 'lukuvuosimaksu'
+          ? get(opetus, 'lukuvuosimaksu') || ''
+          : get(opetus, 'maksunMaara') || ''
+        ).toString(),
+      },
       maksumaara: get(opetus, 'maksunMaara') || {},
       opetustapa: get(opetus, 'opetustapaKoodiUrit') || [],
-      opetusaika: get(opetus, 'opetusaikaKoodiUri') || '',
+      opetusaika: get(opetus, 'opetusaikaKoodiUrit') || [],
       opetuskieli: get(opetus, 'opetuskieliKoodiUrit') || [],
       opetusaikaKuvaus: get(opetus, 'opetusaikaKuvaus') || {},
       opetustapaKuvaus: get(opetus, 'opetustapaKuvaus') || {},
@@ -302,24 +308,22 @@ export const getValuesByToteutus = toteutus => {
         return acc;
       }, {}),
     },
-    yhteystiedot: {
-      name: get(yhteystieto, 'nimi') || {},
-      title: get(yhteystieto, 'titteli') || {},
-      email: get(yhteystieto, 'sahkoposti') || {},
-      phone: get(yhteystieto, 'puhelinnumero') || {},
-      website: get(yhteystieto, 'wwwSivu') || {},
-    },
+    yhteyshenkilot: yhteyshenkilot.map(
+      ({ nimi, titteli, sahkoposti, wwwSivu, puhelinnumero }) => ({
+        nimi: nimi || {},
+        titteli: titteli || {},
+        sahkoposti: sahkoposti || {},
+        verkkosivu: wwwSivu || {},
+        puhelinnumero: puhelinnumero || {},
+      }),
+    ),
     osaamisalat: {
       osaamisalat,
       osaamisalaLinkit,
       osaamisalaLinkkiOtsikot,
     },
-    ylemmanKorkeakoulututkinnonOsaamisalat: {
-      osaamisalat: ylemmanKorkeakoulututkinnonOsaamisalatArg,
-    },
-    alemmanKorkeakoulututkinnonOsaamisalat: {
-      osaamisalat: alemmanKorkeakoulututkinnonOsaamisalatArg,
-    },
+    ylemmanKorkeakoulututkinnonOsaamisalat: ylemmanKorkeakoulututkinnonOsaamisalatArg,
+    alemmanKorkeakoulututkinnonOsaamisalat: alemmanKorkeakoulututkinnonOsaamisalatArg,
     kuvaus: {
       kuvaus,
     },
@@ -335,26 +339,11 @@ const validateEssentials = ({ errorBuilder, values }) => {
 };
 
 const validateCommon = ({ values, errorBuilder }) => {
-  const kielivalinta = getKielivalinta(values);
-
   let enhancedErrorBuilder = errorBuilder
     .validateArrayMinLength('jarjestamispaikat.jarjestajat', 1)
-    .validateExistence('jarjestamistiedot.opetusaika')
+    .validateArrayMinLength('jarjestamistiedot.opetusaika', 1)
     .validateArrayMinLength('jarjestamistiedot.opetuskieli', 1)
-    .validateExistence('jarjestamistiedot.maksullisuus');
-
-  const shouldValidateContactName = !![
-    get(values, 'yhteystiedot.email'),
-    get(values, 'yhteystiedot.phone'),
-    get(values, 'yhteystiedot.website'),
-  ].find(v => !!v);
-
-  if (shouldValidateContactName) {
-    enhancedErrorBuilder = enhancedErrorBuilder.validateTranslations(
-      'yhteystiedot.name',
-      kielivalinta,
-    );
-  }
+    .validateExistence('jarjestamistiedot.maksullisuus.tyyppi');
 
   return enhancedErrorBuilder;
 };
@@ -363,10 +352,10 @@ const validateKorkeakoulu = ({ values, errorBuilder }) => {
   const kielivalinta = getKielivalinta(values);
 
   return errorBuilder
-    .validateArray('ylemmanKorkeakoulututkinnonOsaamisalat.osaamisalat', eb => {
+    .validateArray('ylemmanKorkeakoulututkinnonOsaamisalat', eb => {
       return eb.validateTranslations('nimi', kielivalinta);
     })
-    .validateArray('alemmanKorkeakoulututkinnonOsaamisalat.osaamisalat', eb => {
+    .validateArray('alemmanKorkeakoulututkinnonOsaamisalat', eb => {
       return eb.validateTranslations('nimi', kielivalinta);
     });
 };

@@ -12,7 +12,7 @@ import {
 } from '../../state/createHakuForm';
 import { getKoutaHakuByOid } from '../../apiUtils';
 import ApiAsync from '../ApiAsync';
-import { POHJAVALINNAT } from '../../constants';
+import { POHJAVALINTA } from '../../constants';
 
 const resolveFn = () => Promise.resolve({});
 
@@ -24,7 +24,7 @@ const HakuReduxForm = reduxForm({
 const getCopyValues = hakuOid => ({
   pohja: {
     pohja: {
-      tapa: POHJAVALINNAT.KOPIO,
+      tapa: POHJAVALINTA.KOPIO,
       valinta: { value: hakuOid },
     },
   },

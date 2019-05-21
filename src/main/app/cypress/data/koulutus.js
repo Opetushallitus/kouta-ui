@@ -58,6 +58,9 @@ const getKorkeakouluFields = ({ tyyppi }) => {
       tutkintonimikeKoodiUrit: ['tutkintonimikekk_1#1', 'tutkintonimikekk_2#1'],
       opintojenLaajuusKoodiUri: 'opintojenlaajuus_1#1',
       kuvauksenNimi: { fi: 'Fi kuvauksen nimi', sv: 'Sv kuvauksen nimi' },
+      koulutusalaKoodiUrit: [
+        'kansallinenkoulutusluokitus2016koulutusalataso2_1#1',
+      ],
     },
     julkinen: true,
   });

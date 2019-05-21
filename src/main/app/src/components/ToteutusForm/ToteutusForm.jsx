@@ -4,7 +4,6 @@ import { formValues } from 'redux-form';
 import FormCollapse from '../FormCollapse';
 import KieliversiotFormSection from '../KieliversiotFormSection';
 import OsaamisalatSection from './OsaamisalatSection';
-import YhteystiedotSection from './YhteystiedotSection';
 import NimiSection from './NimiSection';
 import PohjaSection from './PohjaSection';
 import JarjestamisPaikatSection from './JarjestamisPaikatSection';
@@ -20,11 +19,9 @@ import Button from '../Button';
 import KorkeakouluOsaamisalatSection from './KorkeakouluOsaamisalatSection';
 import KuvausSection from './KuvausSection';
 import useTranslation from '../useTranslation';
+import YhteyshenkilotSection from './YhteyshenkilotSection';
 
-import {
-  KORKEAKOULUKOULUTUSTYYPIT,
-  KOULUTUSTYYPPI_CATEGORY,
-} from '../../constants';
+import { KORKEAKOULUKOULUTUSTYYPIT, KOULUTUSTYYPPI } from '../../constants';
 
 const ActiveLanguages = formValues({
   languages: 'kieliversiot.languages',
@@ -52,7 +49,7 @@ const ToteutusForm = ({
   scrollTarget,
   toteutus,
   onAttachHakukohde,
-  koulutustyyppi = KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS,
+  koulutustyyppi = KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
 }) => {
   const isKorkeakoulu = KORKEAKOULUKOULUTUSTYYPIT.includes(koulutustyyppi);
   const { t } = useTranslation();
@@ -108,11 +105,10 @@ const ToteutusForm = ({
                 header={t(
                   'toteutuslomake.alemmanKorkeakoulututkinnonErikoistumisalanKuvaus',
                 )}
-                section="alemmanKorkeakoulututkinnonOsaamisalat"
                 languages={languages}
                 {...getTestIdProps('alempiOsaamisalatSection')}
               >
-                <KorkeakouluOsaamisalatSection />
+                <KorkeakouluOsaamisalatSection name="alemmanKorkeakoulututkinnonOsaamisalat" />
               </FormCollapse>
             ) : null}
 
@@ -121,16 +117,14 @@ const ToteutusForm = ({
                 header={t(
                   'toteutuslomake.ylemmanKorkeakoulututkinnonErikoistumisalanKuvaus',
                 )}
-                section="ylemmanKorkeakoulututkinnonOsaamisalat"
                 languages={languages}
                 {...getTestIdProps('ylempiOsaamisalatSection')}
               >
-                <KorkeakouluOsaamisalatSection />
+                <KorkeakouluOsaamisalatSection name="ylemmanKorkeakoulututkinnonOsaamisalat" />
               </FormCollapse>
             ) : null}
 
-            {koulutustyyppi ===
-            KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS ? (
+            {koulutustyyppi === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS ? (
               <FormCollapse
                 header={t('toteutuslomake.valitseOsaamisalat')}
                 section="osaamisalat"
@@ -181,11 +175,10 @@ const ToteutusForm = ({
 
             <FormCollapse
               header={t('toteutuslomake.koulutuksenYhteystiedot')}
-              section="yhteystiedot"
               languages={languages}
               {...getTestIdProps('yhteystiedotSection')}
             >
-              <YhteystiedotSection />
+              <YhteyshenkilotSection name="yhteyshenkilot" />
             </FormCollapse>
 
             {isFunction(onAttachHakukohde) ? (

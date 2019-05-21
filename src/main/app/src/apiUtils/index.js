@@ -1,4 +1,4 @@
-import { KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP } from '../constants';
+import { KOULUTUSTYYPPI_TO_KOULUTUSTYYPPI_IDS_MAP } from '../constants';
 import { isArray, isString, isObject, memoizePromise } from '../utils';
 import keyBy from 'lodash/keyBy';
 import mapValues from 'lodash/mapValues';
@@ -23,7 +23,7 @@ export const getKoulutuksetByKoulutusTyyppi = async ({
   apiUrls,
   koulutusTyyppi,
 }) => {
-  const ids = KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP[koulutusTyyppi];
+  const ids = KOULUTUSTYYPPI_TO_KOULUTUSTYYPPI_IDS_MAP[koulutusTyyppi];
 
   if (!ids) {
     return [];

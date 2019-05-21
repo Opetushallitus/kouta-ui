@@ -4,6 +4,7 @@ import {
   getSelectOption,
   getCheckbox,
   chooseKieliversiotLanguages,
+  selectOption,
 } from '../../utils';
 
 import { stubKoulutusFormRoutes } from '../../koulutusFormUtils';
@@ -145,6 +146,10 @@ describe('createKoulutusForm', () => {
 
       getByTestId('tutkintonimikeSelect', cy).within(() => {
         getSelectOption('tutkintonimikekk_0', cy).click({ force: true });
+      });
+
+      cy.getByTestId('koulutusalatSelect').within(() => {
+        selectOption('kansallinenkoulutusluokitus2016koulutusalataso2_0', cy);
       });
 
       getByTestId('opintojenLaajuusSelect', cy).click();

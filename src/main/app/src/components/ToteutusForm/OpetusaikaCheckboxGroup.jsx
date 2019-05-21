@@ -1,20 +1,12 @@
 import React from 'react';
 
-import Radio, { RadioGroup } from '../Radio';
+import CheckboxGroup from '../CheckboxGroup';
 import useKoodistoOptions from '../useKoodistoOptions';
 
 const OpetusaikaRadioGroup = props => {
   const { options } = useKoodistoOptions({ koodisto: 'opetusaikakk' });
 
-  return (
-    <RadioGroup {...props}>
-      {options.map(({ label, value }) => (
-        <Radio key={value} value={value}>
-          {label}
-        </Radio>
-      ))}
-    </RadioGroup>
-  );
+  return <CheckboxGroup options={options} {...props} />;
 };
 
 export default OpetusaikaRadioGroup;

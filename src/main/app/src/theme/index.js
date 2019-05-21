@@ -10,7 +10,7 @@ const createHeadingTypography = ({ sizes, fontFamily, color, lineHeight }) => {
       color,
       fontFamily,
       fontSize: `${curr}rem`,
-      fontWeight: '700',
+      fontWeight: '500',
       lineHeight,
     };
 

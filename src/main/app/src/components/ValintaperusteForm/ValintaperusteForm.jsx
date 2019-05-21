@@ -5,7 +5,7 @@ import FormCollapse from '../FormCollapse';
 import KieliversiotFormSection from '../KieliversiotFormSection';
 
 import {
-  KOULUTUSTYYPPI_CATEGORY,
+  KOULUTUSTYYPPI,
   KORKEAKOULUKOULUTUSTYYPIT,
 } from '../../constants';
 
@@ -52,7 +52,7 @@ const ValintaperusteForm = ({
           const koulutustyyppi =
             tyyppi ||
             koulutustyyppiProp ||
-            KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS;
+            KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
           const isKorkeakoulu = KORKEAKOULUKOULUTUSTYYPIT.includes(
             koulutustyyppi,

@@ -2,9 +2,12 @@ import get from 'lodash/get';
 import pick from 'lodash/pick';
 
 import { isNumeric } from '../../utils';
+import getValintakoeFieldsData from '../../utils/getValintakoeFieldsData';
+import getValintakoeFieldsValues from '../../utils/getValintakoeFieldsValues';
+import getHakulomakeFieldsData from '../../utils/getHakulomakeFieldsData';
+import getHakulomakeFieldsValues from '../../utils/getHakulomakeFieldsValues';
 import { JULKAISUTILA } from '../../constants';
 import { ErrorBuilder } from '../../validation';
-import { getHakulomakeFieldsData, getHakulomakeFieldsValues } from '../utils';
 
 const getKielivalinta = values => get(values, 'kieliversiot.languages') || [];
 
@@ -31,7 +34,10 @@ export const getHakuByValues = values => {
     hakulomakeId,
     hakulomakeLinkki,
     hakulomakeKuvaus,
-  } = getHakulomakeFieldsData({ values, kielivalinta });
+  } = getHakulomakeFieldsData({
+    hakulomakeValues: get(values, 'hakulomake'),
+    kielivalinta,
+  });
 
   const hakukohteenLiittamisenTakaraja =
     get(values, 'aikataulut.lisaamisenTakaraja') || null;
@@ -62,34 +68,10 @@ export const getHakuByValues = values => {
     ),
   };
 
-  const valintakokeet = (get(values, 'valintakoe.tyypit') || []).map(
-    ({ value }) => ({
-      tyyppi: value,
-      tilaisuudet: (
-        get(values, ['valintakoe', 'tilaisuudet', value]) || []
-      ).map(
-        ({
-          osoite,
-          postinumero,
-          postitoimipaikka,
-          alkaa,
-          paattyy,
-          lisatietoja,
-        }) => ({
-          osoite: {
-            osoite: pick(osoite || {}, kielivalinta),
-            postinumero: postinumero || null,
-            postitoimipaikka: pick(postitoimipaikka || {}, kielivalinta),
-          },
-          aika: {
-            alkaa: alkaa || null,
-            paattyy: paattyy || null,
-          },
-          lisatietoja: pick(lisatietoja || {}, kielivalinta),
-        }),
-      ),
-    }),
-  );
+  const valintakokeet = getValintakoeFieldsData({
+    valintakoeValues: get(values, 'valintakoe'),
+    kielivalinta,
+  });
 
   const hakukohteenMuokkaamisenTakaraja =
     get(values, 'aikataulut.muokkauksenTakaraja') || null;
@@ -182,25 +164,7 @@ export const getValuesByHaku = haku => {
         verkkosivu: wwwSivu || {},
       }),
     ),
-    valintakoe: {
-      tyypit: (valintakokeet || []).map(({ tyyppi }) => ({ value: tyyppi })),
-      tilaisuudet: (valintakokeet || []).reduce(
-        (acc, { tyyppi, tilaisuudet }) => ({
-          ...acc,
-          [tyyppi]: (tilaisuudet || []).map(
-            ({ osoite, aika, lisatietoja }) => ({
-              osoite: get(osoite, 'osoite') || {},
-              postinumero: get(osoite, 'postinumero') || '',
-              postitoimipaikka: get(osoite, 'postitoimipaikka') || {},
-              alkaa: get(aika, 'alkaa') || '',
-              paattyy: get(aika, 'paattyy') || '',
-              lisatietoja: lisatietoja || {},
-            }),
-          ),
-        }),
-        {},
-      ),
-    },
+    valintakoe: getValintakoeFieldsValues(valintakokeet),
   };
 };
 

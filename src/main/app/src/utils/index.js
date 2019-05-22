@@ -7,8 +7,6 @@ import pick from 'lodash/pick';
 import addHours from 'date-fns/add_hours';
 import _formatDate from 'date-fns/format';
 import _isValidDate from 'date-fns/is_valid';
-import mapValues from 'lodash/mapValues';
-import produce from 'immer';
 import padStart from 'lodash/padStart';
 import memoizee from 'memoizee';
 import flowRight from 'lodash/flowRight';
@@ -155,28 +153,6 @@ export const toKoutaDateString = date => {
   return formatDate(fixedDate, 'YYYY-MM-DD[T]HH:mm');
 };
 
-export const getKoodistoNimiAndKoodiUri = koodisto => {
-  return isArray(koodisto)
-    ? koodisto.map(({ metadata, koodiUri, versio }) => ({
-        koodiUri: `${koodiUri}#${versio}`,
-        nimi: mapValues(arrayToTranslationObject(metadata), ({ nimi }) => nimi),
-      }))
-    : [];
-};
-
-export const formatDateInFinnishTimeZone = (date, dateFormat) => {
-  if (!isValidDate(date)) {
-    return null;
-  }
-
-  const timezoneOffset = date.getTimezoneOffset() / 60;
-  const timezoneDifference = timezoneOffset + 2;
-
-  const fixedDate = addHours(date, timezoneDifference);
-
-  return formatDate(fixedDate, dateFormat);
-};
-
 export const getKoutaDateString = ({ year, month, day, hour, minute }) => {
   return `${year}-${padStart(month, 2, '0')}-${padStart(day, 2, '0')}T${
     isNumeric(hour) ? padStart(hour, 2, '0') : '00'
@@ -203,21 +179,6 @@ export const formatKoutaDateString = (dateString, format) => {
   return formattedDate;
 };
 
-export const updateAll = ({ data, updates, keyField = 'oid' }) => {
-  const updateArr = isArray(updates) ? updates : [updates];
-
-  return produce(data, draft => {
-    for (const obj of updateArr) {
-      if (isObject(obj) && obj[keyField]) {
-        draft.byOid[obj[keyField]] = {
-          ...(draft.byOid[keyField] || {}),
-          ...obj,
-        };
-      }
-    }
-  });
-};
-
 export const createChainedFunction = (...fns) => (...args) => {
   for (let fn of fns) {
     if (isFunction(fn)) {
@@ -231,63 +192,10 @@ export const memoize = (fn, opts = {}) => memoizee(fn, { max: 100, ...opts });
 export const memoizePromise = (fn, opts = {}) =>
   memoize(fn, { promise: true, ...opts });
 
-export const isNonEmptyArray = value => isArray(value) && value.length > 0;
-
 export const compose = flowRight;
 
 export const isNonEmptyObject = value =>
   isObject(value) && Object.keys(value).length > 0;
-
-export const isKoodiUri = value =>
-  isString(value) && /^\w+_\w+#[0-9]+$/.test(value);
-
-export const parseKoodiUri = value => {
-  if (!isKoodiUri(value)) {
-    return { koodisto: null, koodi: null, versio: null };
-  }
-
-  const [koodi, versio] = value.split('#');
-
-  const [koodisto] = koodi.split('_');
-
-  return {
-    koodisto,
-    koodi,
-    versio,
-  };
-};
-
-export const getKoodistoVersiot = (value, versiot = {}) => {
-  if (isString(value)) {
-    const { koodisto, versio } = parseKoodiUri(value);
-
-    return koodisto !== null && versio !== null ? { [koodisto]: versio } : {};
-  }
-
-  if (isObject(value)) {
-    return {
-      ...versiot,
-      ...Object.keys(value).reduce((acc, curr) => {
-        acc = { ...acc, ...getKoodistoVersiot(value[curr], versiot) };
-
-        return acc;
-      }, {}),
-    };
-  }
-
-  if (isArray(value)) {
-    return {
-      ...versiot,
-      ...value.reduce((acc, curr) => {
-        acc = { ...acc, ...getKoodistoVersiot(curr, versiot) };
-
-        return acc;
-      }, {}),
-    };
-  }
-
-  return {};
-};
 
 export const noop = () => {};
 

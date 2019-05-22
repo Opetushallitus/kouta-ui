@@ -109,20 +109,21 @@ const HakukohdeForm = ({
 
             <FormCollapse
               header={t('hakukohdelomake.valintakoe')}
-              section="valintakoe"
               languages={languages}
               {...getTestIdProps('valintakoeSection')}
             >
-              <ValintakoeSection />
+              <ValintakoeSection name="valintakoe" />
             </FormCollapse>
 
             <FormCollapse
               header={t('hakukohdelomake.tarvittavatLiitteet')}
-              section="liitteet"
               languages={languages}
               {...getTestIdProps('liitteetSection')}
             >
-              <LiitteetSection organisaatioOid={organisaatioOid} />
+              <LiitteetSection
+                name="liitteet"
+                organisaatioOid={organisaatioOid}
+              />
             </FormCollapse>
           </FormCollapseGroup>
         )}

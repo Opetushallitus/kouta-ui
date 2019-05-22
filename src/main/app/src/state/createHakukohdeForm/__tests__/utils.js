@@ -45,42 +45,45 @@ test('getHakukohdeByValues returns correct hakukohde given form values', () => {
       },
     },
     valintakoe: {
-      types: ['koetyyppi_1#1', 'koetyyppi_2#1'],
-      kokeet: {
-        'koetyyppi_1#1': {
-          kokeet: [
-            {
-              alkaa: '2019-04-17T05:52',
-              paattyy: '2019-04-18T05:52',
-              lisatietoja: {
-                fi: 'Fi lisatieto',
-              },
-              osoite: {
-                fi: 'Fi osoite',
-              },
-              postinumero: '00940',
-              postitoimipaikka: {
-                fi: 'Fi postitoimipaikka',
-              },
+      tyypit: [{ value: 'tyyppi_1#1' }],
+      tilaisuudet: {
+        'tyyppi_1#1': [
+          {
+            osoite: { fi: 'fi osoite', sv: 'sv osoite' },
+            postinumero: '00520',
+            postitoimipaikka: {
+              fi: 'fi posititoimipaikka',
+              sv: 'sv posititoimipaikka',
             },
-          ],
-        },
-        'koetyyppi_2#1': {
-          kokeet: [],
-        },
+            alkaa: '2019-04-16T08:44',
+            paattyy: '2019-04-18T08:44',
+            lisatietoja: {
+              fi: 'fi lisatietoja',
+              sv: 'sv lisatietoja',
+            },
+          },
+        ],
       },
     },
     liitteet: {
-      toimitusosoite: {
-        fi: 'Fi osoite',
-        sv: 'Sv osoite',
+      toimitustapa: {
+        tapa: 'muu_osoite',
+        paikka: {
+          osoite: {
+            fi: 'Fi osoite',
+            sv: 'Sv osoite',
+          },
+          postinumero: '00940',
+          postitoimipaikka: {
+            fi: 'Fi postitoimipaikka',
+            sv: 'Sv postitoimipaikka',
+          },
+          sahkoposti: {
+            fi: 'Fi sahkoposti',
+            sv: 'Sv sahkoposti',
+          },
+        },
       },
-      toimituspostinumero: '00940',
-      toimituspostitoimipaikka: {
-        fi: 'Fi postitoimipaikka',
-        sv: 'Sv postitoimipaikka',
-      },
-      toimitussahkoposti: 'sahkoposti@kouta.fi',
       yhteinenToimituspaikka: false,
       yhteinenToimitusaika: false,
       toimitusaika: '2019-04-17T05:52',
@@ -91,16 +94,28 @@ test('getHakukohdeByValues returns correct hakukohde given form values', () => {
             fi: 'Fi nimi',
             sv: 'Sv nimi',
           },
-          toimitusaika: '2019-08-17T05:52',
-          toimitussahkoposti: 'sahkoposti2@kouta.fi',
-          toimitusosoite: {
-            fi: 'Fi osoite',
-            sv: 'Sv osoite',
+          kuvaus: {
+            fi: 'Fi kuvaus',
+            sv: 'Sv kuvaus',
           },
-          toimituspostinumero: '00610',
-          toimituspostitoimipaikka: {
-            fi: 'Fi postitoimipaikka',
-            sv: 'Sv postitoimipaikka',
+          toimitusaika: '2019-08-17T05:52',
+          toimitustapa: {
+            tapa: 'muu_osoite',
+            paikka: {
+              osoite: {
+                fi: 'Fi osoite',
+                sv: 'Sv osoite',
+              },
+              postinumero: '00940',
+              postitoimipaikka: {
+                fi: 'Fi postitoimipaikka',
+                sv: 'Sv postitoimipaikka',
+              },
+              sahkoposti: {
+                fi: 'Fi sahkoposti',
+                sv: 'Sv sahkoposti',
+              },
+            },
           },
         },
       ],
@@ -128,7 +143,10 @@ test('getValuesByHakukohde returns correct form values given hakukohde', () => {
     liitteetOnkoSamaToimitusosoite: false,
     liitteet: [
       {
-        kuvaus: {},
+        kuvaus: {
+          fi: 'Fi kuvaus',
+          sv: 'Sv kuvaus',
+        },
         nimi: {
           fi: 'Fi nimi',
           sv: 'Sv nimi',
@@ -146,9 +164,13 @@ test('getValuesByHakukohde returns correct form values given hakukohde', () => {
               sv: 'Sv postitoimipaikka',
             },
           },
-          sahkoposti: 'sahkoposti2@kouta.fi',
+          sahkoposti: {
+            fi: 'Fi sahkoposti',
+            sv: 'Sv sahkoposti',
+          },
         },
         tyyppi: 'liitetyyppi_1#1',
+        toimitustapa: 'muu_osoite',
       },
     ],
     alkamisvuosi: 2015,
@@ -164,12 +186,39 @@ test('getValuesByHakukohde returns correct form values given hakukohde', () => {
           sv: 'Sv postitoimipaikka',
         },
       },
-      sahkoposti: 'sahkoposti@kouta.fi',
+      sahkoposti: {
+        fi: 'Fi sahkoposti',
+        sv: 'Sv sahkoposti',
+      },
     },
     liitteidenToimitusaika: '2011-12-20T10:30',
     nimi: { fi: 'Fi nimi', sv: 'Sv nimi' },
     toinenAsteOnkoKaksoistutkinto: true,
-    valintakokeet: [],
+    valintakokeet: [
+      {
+        tyyppi: 'tyyppi_1#1',
+        tilaisuudet: [
+          {
+            osoite: {
+              osoite: { fi: 'fi osoite', sv: 'sv osoite' },
+              postinumero: '00520',
+              postitoimipaikka: {
+                fi: 'fi posititoimipaikka',
+                sv: 'sv posititoimipaikka',
+              },
+            },
+            aika: {
+              alkaa: '2019-04-16T08:44',
+              paattyy: '2019-04-18T08:44',
+            },
+            lisatietoja: {
+              fi: 'fi lisatietoja',
+              sv: 'sv lisatietoja',
+            },
+          },
+        ],
+      },
+    ],
     pohjakoulutusvaatimusKoodiUrit: ['vaatimus_1#1', 'vaatimus_2#1'],
     valintaperuste: 'peruste_1#1',
     ensikertalaisenAloituspaikat: 39,

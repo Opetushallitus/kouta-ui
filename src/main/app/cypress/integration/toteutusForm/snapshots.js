@@ -223,7 +223,7 @@ module.exports = {
       },
     },
   },
-  __version: '3.3.0',
+  __version: '3.2.0',
   editToteutusForm: {
     'should be able to edit ammatillinen toteutus': {
       '1': {

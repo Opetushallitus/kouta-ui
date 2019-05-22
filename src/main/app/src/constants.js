@@ -75,3 +75,9 @@ export const OPETUSHALLITUS_APP_TARJONTA_CRUD_ROOLI =
   'APP_TARJONTA_CRUD_1.2.246.562.10.00000000001';
 
 export const HAKUTAPA_YHTEISHAKU_KOODI_URI = 'hakutapa_01';
+
+export const LIITTEEN_TOIMITUSTAPA = {
+  TOIMITETAAN_LAHETTAMISEN_YHTEYDESSA: 'toimitetaan_lahettamisen_yhteydessa',
+  JARJESTAJAN_OSOITE: 'jarjestajan_osoite',
+  MUU_OSOITE: 'muu_osoite',
+};

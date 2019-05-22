@@ -3,7 +3,8 @@ import styled, { css } from 'styled-components';
 import { ellipsis } from 'polished';
 
 import Typography from '../../Typography';
-import { isNonEmptyArray, getFirstLanguageValue } from '../../../utils';
+import { getFirstLanguageValue } from '../../../utils';
+import isEmpty from '../../../utils/isEmpty';
 import Flex, { FlexItem } from '../../Flex';
 import { getThemeProp } from '../../../theme';
 import Radio from '../../Radio';
@@ -73,7 +74,7 @@ export const OrganisaatioItem = ({
             </Flex>
           </Radio>
         </FlexItem>
-        {collapse && isNonEmptyArray(children) ? (
+        {collapse && !isEmpty(children) ? (
           <FlexItem grow={0} paddingRight={2}>
             <CollapseIcon
               onClick={onToggleOpen}

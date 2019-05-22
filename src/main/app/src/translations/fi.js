@@ -167,6 +167,13 @@ export default {
     muu: 'Käytetään muuta hakulomaketta',
     eiSahkoistaHakua: 'Ei sähköistä hakua',
   },
+  liitteenToimitustapaValinnat: {
+    valitseToimitustapa: 'Valitse liitteen toimitustapa',
+    toimitetaanLahettamisenYhteydessa:
+      'Toimitetaan lomakkeen lähettämisen yhteydessä',
+    jarjestajanOsoite: 'Koulutuksen järjestäjän hakijapalvelun osoite',
+    muuOsoite: 'Muu osoite',
+  },
   etusivu: {
     koulutuksetJaHaut: 'Koulutukset ja haut',
     luoUusiKoulutus: 'Luo uusi koulutus',

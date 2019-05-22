@@ -14,8 +14,10 @@ module.exports = {
         ],
         liitteetOnkoSamaToimitusaika: false,
         liitteetOnkoSamaToimitusosoite: false,
+        liitteidenToimitustapa: null,
         liitteet: [
           {
+            toimitustapa: 'muu_osoite',
             tyyppi: 'liitetyypitamm_0#1',
             nimi: {
               fi: 'Nimi',
@@ -39,18 +41,7 @@ module.exports = {
           },
         ],
         alkamisvuosi: 2019,
-        liitteidenToimitusosoite: {
-          osoite: {
-            osoite: {
-              fi: '',
-            },
-            postinumero: null,
-            postitoimipaikka: {
-              fi: '',
-            },
-          },
-          sahkoposti: null,
-        },
+        liitteidenToimitusosoite: null,
         liitteidenToimitusaika: null,
         nimi: {
           fi: 'Hakukohteen nimi',
@@ -58,24 +49,24 @@ module.exports = {
         toinenAsteOnkoKaksoistutkinto: false,
         valintakokeet: [
           {
-            tyyppi: 'valintakokeentyyppi_0#1',
+            tyyppi: 'valintakokeentyyppi_1#1',
             tilaisuudet: [
               {
                 osoite: {
                   osoite: {
-                    fi: 'Osoite',
+                    fi: 'osoite',
                   },
-                  postinumero: '00940',
+                  postinumero: '00510',
                   postitoimipaikka: {
-                    fi: 'Helsinki',
+                    fi: 'postitoimipaikka',
                   },
                 },
                 aika: {
                   alkaa: '2019-04-02T10:45',
-                  paattyy: '2019-11-25T23:59',
+                  paattyy: '2019-04-02T19:00',
                 },
                 lisatietoja: {
-                  fi: 'Lisätietoa',
+                  fi: 'lisatietoja',
                 },
               },
             ],
@@ -195,7 +186,96 @@ module.exports = {
         hakulomakeLinkki: {},
         hakulomakeKuvaus: {},
       },
+      '2': {
+        oid: '6.1.1.1.1.1',
+        toteutusOid: '2.1.1.1.1.1',
+        hakuOid: '4.1.1.1.1.1',
+        tila: 'tallennettu',
+        nimi: {
+          fi: 'Hakukohteen nimi',
+        },
+        alkamiskausiKoodiUri: 'kausi_0#1',
+        alkamisvuosi: 2024,
+        hakulomake: {},
+        aloituspaikat: 100,
+        pohjakoulutusvaatimusKoodiUrit: ['pohjakoulutusvaatimustoinenaste_0#1'],
+        muuPohjakoulutusvaatimus: {},
+        toinenAsteOnkoKaksoistutkinto: true,
+        kaytetaanHaunAikataulua: false,
+        liitteetOnkoSamaToimitusaika: false,
+        liitteetOnkoSamaToimitusosoite: false,
+        liitteidenToimitusosoite: null,
+        liitteet: [
+          {
+            toimitustapa: null,
+            tyyppi: null,
+            nimi: {
+              fi: 'Nimi',
+            },
+            toimitusaika: '2011-11-11T10:30',
+            toimitusosoite: {
+              osoite: {
+                osoite: {
+                  fi: 'Osoite',
+                },
+                postinumero: '00940',
+                postitoimipaikka: {
+                  fi: 'Postitoimipaikka',
+                },
+              },
+              sahkoposti: 'sahkoposti@email.com',
+            },
+            kuvaus: {
+              fi: 'Kuvaus',
+            },
+          },
+        ],
+        valintakokeet: [
+          {
+            tyyppi: 'valintakokeentyyppi_0#1',
+            tilaisuudet: [
+              {
+                osoite: {
+                  osoite: {
+                    fi: 'Osoite',
+                  },
+                  postinumero: '00940',
+                  postitoimipaikka: {
+                    fi: 'Postitoimipaikka',
+                  },
+                },
+                aika: {
+                  alkaa: '2011-11-11T10:30',
+                  paattyy: '2011-11-12T11:45',
+                },
+                lisatietoja: {
+                  fi: 'Lisätietoja',
+                },
+              },
+            ],
+          },
+        ],
+        hakuajat: [
+          {
+            alkaa: '2011-11-11T10:30',
+            paattyy: '2011-11-12T11:45',
+          },
+        ],
+        muokkaaja: '1.2.246.562.24.62301161440',
+        organisaatioOid: '1.1.1.1.1.1',
+        kielivalinta: ['fi'],
+        modified: '2019-04-04T08:28',
+        eriHakulomake: true,
+        hakulomaketyyppi: 'ataru',
+        hakulomakeId: '12345',
+        hakulomakeKuvaus: {},
+        hakulomakeLinkki: {},
+        liitteidenToimitustapa: null,
+        liitteidenToimitusaika: null,
+        valintaperuste: null,
+        ensikertalaisenAloituspaikat: null,
+      },
     },
   },
-  __version: '3.3.0',
+  __version: '3.2.0',
 };

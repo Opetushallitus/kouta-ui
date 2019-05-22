@@ -28,7 +28,10 @@ Object {
   ],
   "liitteet": Array [
     Object {
-      "kuvaus": Object {},
+      "kuvaus": Object {
+        "fi": "Fi kuvaus",
+        "sv": "Sv kuvaus",
+      },
       "nimi": Object {
         "fi": "Fi nimi",
         "sv": "Sv nimi",
@@ -40,34 +43,26 @@ Object {
             "fi": "Fi osoite",
             "sv": "Sv osoite",
           },
-          "postinumero": "00610",
+          "postinumero": "00940",
           "postitoimipaikka": Object {
             "fi": "Fi postitoimipaikka",
             "sv": "Sv postitoimipaikka",
           },
         },
-        "sahkoposti": "sahkoposti2@kouta.fi",
+        "sahkoposti": Object {
+          "fi": "Fi sahkoposti",
+          "sv": "Sv sahkoposti",
+        },
       },
+      "toimitustapa": "muu_osoite",
       "tyyppi": "liitetyyppi_1#1",
     },
   ],
   "liitteetOnkoSamaToimitusaika": false,
   "liitteetOnkoSamaToimitusosoite": false,
-  "liitteidenToimitusaika": "2019-04-17T05:52",
-  "liitteidenToimitusosoite": Object {
-    "osoite": Object {
-      "osoite": Object {
-        "fi": "Fi osoite",
-        "sv": "Sv osoite",
-      },
-      "postinumero": "00940",
-      "postitoimipaikka": Object {
-        "fi": "Fi postitoimipaikka",
-        "sv": "Sv postitoimipaikka",
-      },
-    },
-    "sahkoposti": "sahkoposti@kouta.fi",
-  },
+  "liitteidenToimitusaika": null,
+  "liitteidenToimitusosoite": null,
+  "liitteidenToimitustapa": null,
   "nimi": Object {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
@@ -82,28 +77,27 @@ Object {
       "tilaisuudet": Array [
         Object {
           "aika": Object {
-            "alkaa": "2019-04-17T05:52",
-            "paattyy": "2019-04-18T05:52",
+            "alkaa": "2019-04-16T08:44",
+            "paattyy": "2019-04-18T08:44",
           },
           "lisatietoja": Object {
-            "fi": "Fi lisatieto",
+            "fi": "fi lisatietoja",
+            "sv": "sv lisatietoja",
           },
           "osoite": Object {
             "osoite": Object {
-              "fi": "Fi osoite",
+              "fi": "fi osoite",
+              "sv": "sv osoite",
             },
-            "postinumero": "00940",
+            "postinumero": "00520",
             "postitoimipaikka": Object {
-              "fi": "Fi postitoimipaikka",
+              "fi": "fi posititoimipaikka",
+              "sv": "sv posititoimipaikka",
             },
           },
         },
       ],
-      "tyyppi": "koetyyppi_1#1",
-    },
-    Object {
-      "tilaisuudet": Array [],
-      "tyyppi": "koetyyppi_2#1",
+      "tyyppi": "tyyppi_1#1",
     },
   ],
   "valintaperuste": "peruste_1#1",
@@ -151,36 +145,55 @@ Object {
   "liitteet": Object {
     "liitteet": Array [
       Object {
-        "kuvaus": Object {},
+        "kuvaus": Object {
+          "fi": "Fi kuvaus",
+          "sv": "Sv kuvaus",
+        },
         "nimi": Object {
           "fi": "Fi nimi",
           "sv": "Sv nimi",
         },
         "toimitusaika": "2016-10-25T09:45",
-        "toimitusosoite": Object {
-          "fi": "Fi osoite",
-          "sv": "Sv osoite",
+        "toimitustapa": Object {
+          "paikka": Object {
+            "osoite": Object {
+              "fi": "Fi osoite",
+              "sv": "Sv osoite",
+            },
+            "postinumero": "00610",
+            "postitoimipaikka": Object {
+              "fi": "Fi postitoimipaikka",
+              "sv": "Sv postitoimipaikka",
+            },
+            "sahkoposti": Object {
+              "fi": "Fi sahkoposti",
+              "sv": "Sv sahkoposti",
+            },
+          },
+          "tapa": "muu_osoite",
         },
-        "toimituspostinumero": "00610",
-        "toimituspostitoimipaikka": Object {
-          "fi": "Fi postitoimipaikka",
-          "sv": "Sv postitoimipaikka",
-        },
-        "toimitussahkoposti": "sahkoposti2@kouta.fi",
         "tyyppi": "liitetyyppi_1#1",
       },
     ],
     "toimitusaika": "2011-12-20T10:30",
-    "toimitusosoite": Object {
-      "fi": "Fi osoite",
-      "sv": "Sv osoite",
+    "toimitustapa": Object {
+      "paikka": Object {
+        "osoite": Object {
+          "fi": "Fi osoite",
+          "sv": "Sv osoite",
+        },
+        "postinumero": "00940",
+        "postitoimipaikka": Object {
+          "fi": "Fi postitoimipaikka",
+          "sv": "Sv postitoimipaikka",
+        },
+        "sahkoposti": Object {
+          "fi": "Fi sahkoposti",
+          "sv": "Sv sahkoposti",
+        },
+      },
+      "tapa": "",
     },
-    "toimituspostinumero": "00940",
-    "toimituspostitoimipaikka": Object {
-      "fi": "Fi postitoimipaikka",
-      "sv": "Sv postitoimipaikka",
-    },
-    "toimitussahkoposti": "sahkoposti@kouta.fi",
     "yhteinenToimitusaika": false,
     "yhteinenToimituspaikka": false,
   },
@@ -202,8 +215,32 @@ Object {
     ],
   },
   "valintakoe": Object {
-    "kokeet": Object {},
-    "types": Array [],
+    "tilaisuudet": Object {
+      "tyyppi_1#1": Array [
+        Object {
+          "alkaa": "2019-04-16T08:44",
+          "lisatietoja": Object {
+            "fi": "fi lisatietoja",
+            "sv": "sv lisatietoja",
+          },
+          "osoite": Object {
+            "fi": "fi osoite",
+            "sv": "sv osoite",
+          },
+          "paattyy": "2019-04-18T08:44",
+          "postinumero": "00520",
+          "postitoimipaikka": Object {
+            "fi": "fi posititoimipaikka",
+            "sv": "sv posititoimipaikka",
+          },
+        },
+      ],
+    },
+    "tyypit": Array [
+      Object {
+        "value": "tyyppi_1#1",
+      },
+    ],
   },
   "valintaperusteenKuvaus": Object {
     "valintaperuste": Object {

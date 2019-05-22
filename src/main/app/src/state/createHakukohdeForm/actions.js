@@ -36,6 +36,8 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   const values = getHakukohdeFormValues(state);
   const errors = validate({ values, tila });
 
+  console.log(errors);
+
   dispatch(startSubmit(formName));
 
   if (isNonEmptyObject(errors)) {

@@ -58,13 +58,6 @@ const fillKohdejoukonRajausSection = cy => {
   });
 };
 
-const fillNimiSection = cy => {
-  getByTestId('nimiSection', cy).within(() => {
-    cy.get('input').type('Valintaperusteen nimi', { force: true });
-    jatka(cy);
-  });
-};
-
 const lisaaSisaltoa = (tyyppi, cy) => {
   getByTestId('sisaltoMenuToggle', cy).click({ force: true });
 
@@ -124,9 +117,17 @@ const fillOsaamistaustaSection = cy => {
   });
 };
 
-const fillLoppukuvausSection = cy => {
-  getByTestId('loppukuvausSection', cy).within(() => {
-    typeToEditor('Loppukuvaus', cy);
+const fillKuvausSection = cy => {
+  getByTestId('kuvausSection', cy).within(() => {
+    cy.getByTestId('nimi')
+      .find('input')
+      .type('Valintaperusteen nimi', { force: true });
+
+    cy.getByTestId('kuvaus').within(() => {
+      typeToEditor('Kuvaus', cy);
+    });
+
+    jatka(cy);
   });
 };
 
@@ -193,7 +194,7 @@ describe('createValintaperusteForm', () => {
     fillPohjaSection(cy);
     fillHakutavanRajausSection(cy);
     fillKohdejoukonRajausSection(cy);
-    fillNimiSection(cy);
+    fillKuvausSection(cy);
     fillValintatapaSection(cy);
     fillKielitaitovaatimuksetSection(cy);
     fillSoraKuvausSection(cy);
@@ -219,12 +220,11 @@ describe('createValintaperusteForm', () => {
     fillPohjaSection(cy);
     fillHakutavanRajausSection(cy);
     fillKohdejoukonRajausSection(cy);
-    fillNimiSection(cy);
+    fillKuvausSection(cy);
     fillOsaamistaustaSection(cy);
     fillValintatapaSection(cy);
     fillKielitaitovaatimuksetSection(cy);
-    fillSoraKuvausSection(cy, true);
-    fillLoppukuvausSection(cy);
+    fillSoraKuvausSection(cy);
 
     tallenna(cy);
 

@@ -14,9 +14,9 @@ import Button from '../Button';
 import Icon from '../Icon';
 import Spacing from '../Spacing';
 import Flex, { FlexItem } from '../Flex';
-import DropdownIcon from '../DropdownIcon';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
+import { spacing } from '../../theme';
 
 import {
   UncontrolledDropdown,
@@ -33,6 +33,11 @@ const MoveButton = SortableHandle(props => (
 const InputContainer = styled(FlexItem)`
   overflow-x: auto;
   overflow-y: hidden;
+`;
+
+const AddIcon = styled(Icon).attrs({ type: 'add' })`
+  font-size: 1rem;
+  margin-left: ${spacing(0.5)};
 `;
 
 const AddContentDropdown = ({ onAdd }) => {
@@ -68,11 +73,10 @@ const AddContentDropdown = ({ onAdd }) => {
             onClick={onToggle}
             type="button"
             color="primary"
-            variant="outlined"
+            variant="text"
             {...getTestIdProps('sisaltoMenuToggle')}
           >
-            {t('valintaperustelomake.lisaaSisaltoa')}{' '}
-            <DropdownIcon open={visible} />
+            {t('valintaperustelomake.lisaaSisaltoa')} <AddIcon />
           </Button>
         </div>
       )}
@@ -98,7 +102,11 @@ const ContentField = ({ tyyppi, name, language }) => {
     );
   } else if (tyyppi === 'teksti') {
     return (
-      <Field name={`${name}.data.${language}`} component={renderEditorField} {...getTestIdProps('tekstiSisalto')} />
+      <Field
+        name={`${name}.data.${language}`}
+        component={renderEditorField}
+        {...getTestIdProps('tekstiSisalto')}
+      />
     );
   }
 

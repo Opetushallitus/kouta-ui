@@ -22,6 +22,8 @@ exports[`renders correctly with color 1`] = `
   -webkit-transition: box-shadow 0.25s,background-color 0.25s,border-color 0.25s;
   transition: box-shadow 0.25s,background-color 0.25s,border-color 0.25s;
   font-weight: 500;
+  -webkit-text-decoration: none;
+  text-decoration: none;
   border-color: #2da0c7;
   background-color: #2da0c7;
   color: #ffffff;
@@ -79,6 +81,8 @@ exports[`renders correctly with color 2`] = `
   -webkit-transition: box-shadow 0.25s,background-color 0.25s,border-color 0.25s;
   transition: box-shadow 0.25s,background-color 0.25s,border-color 0.25s;
   font-weight: 500;
+  -webkit-text-decoration: none;
+  text-decoration: none;
   border-color: #999999;
   background-color: #999999;
   color: #ffffff;
@@ -136,6 +140,8 @@ exports[`renders correctly with variant 1`] = `
   -webkit-transition: box-shadow 0.25s,background-color 0.25s,border-color 0.25s;
   transition: box-shadow 0.25s,background-color 0.25s,border-color 0.25s;
   font-weight: 500;
+  -webkit-text-decoration: none;
+  text-decoration: none;
   border-color: #2da0c7;
   background-color: #2da0c7;
   color: #ffffff;
@@ -193,6 +199,8 @@ exports[`renders correctly with variant 2`] = `
   -webkit-transition: box-shadow 0.25s,background-color 0.25s,border-color 0.25s;
   transition: box-shadow 0.25s,background-color 0.25s,border-color 0.25s;
   font-weight: 500;
+  -webkit-text-decoration: none;
+  text-decoration: none;
   background-color: transparent;
   border-color: #2da0c7;
   color: #2da0c7;

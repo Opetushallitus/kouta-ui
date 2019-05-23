@@ -1,14 +1,15 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Field, FieldArray } from 'redux-form';
 
 import Spacing from '../Spacing';
-import Divider from '../Divider';
 import Button from '../Button';
-import Flex from '../Flex';
+import Flex, { FlexItem } from '../Flex';
 import ValintatapaContentFields from '../ValintatapaContentFields';
 import useKoodistoOptions from '../useKoodistoOptions';
 import { getTestIdProps } from '../../utils';
 import useTranslation from '../useTranslation';
+import FieldArrayList from '../FieldArrayList';
+
 import {
   FormFieldInput,
   FormFieldSelect,
@@ -45,66 +46,64 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
         label={t('valintaperustelomake.kynnysehto')}
       />
     </Spacing>
-    <Spacing marginBottom={2} {...getTestIdProps('enimmaispistemaara')}>
-      <Field
-        name={`${valintatapa}.enimmaispistemaara`}
-        component={FormFieldInput}
-        type="number"
-        label={t('valintaperustelomake.enimmaispistemaara')}
-      />
-    </Spacing>
-    <Spacing {...getTestIdProps('vahimmaispistemaara')}>
-      <Field
-        name={`${valintatapa}.vahimmaispistemaara`}
-        component={FormFieldInput}
-        type="number"
-        label={t('valintaperustelomake.vahimmaispistemaara')}
-      />
-    </Spacing>
+    <Flex marginBottom={2}>
+      <FlexItem
+        grow={1}
+        paddingRight={1}
+        {...getTestIdProps('enimmaispistemaara')}
+      >
+        <Field
+          name={`${valintatapa}.enimmaispistemaara`}
+          component={FormFieldInput}
+          type="number"
+          label={t('valintaperustelomake.enimmaispistemaara')}
+        />
+      </FlexItem>
+      <FlexItem
+        grow={1}
+        paddingLeft={1}
+        {...getTestIdProps('vahimmaispistemaara')}
+      >
+        <Field
+          name={`${valintatapa}.vahimmaispistemaara`}
+          component={FormFieldInput}
+          type="number"
+          label={t('valintaperustelomake.vahimmaispistemaara')}
+        />
+      </FlexItem>
+    </Flex>
   </div>
 );
 
 const renderValintavat = ({ fields, tapaOptions, language, t }) => (
   <>
-    {fields.map((valintatapa, index) => (
-      <Fragment key={index}>
-        <Spacing marginBottom={2}>
-          {renderValintatapaFields({ valintatapa, tapaOptions, language, t })}
-        </Spacing>
-        <Flex justifyEnd>
-          <Button
-            variant="outlined"
-            color="secondary"
-            type="button"
-            onClick={() => {
-              fields.remove(index);
-            }}
-          >
-            {t('yleiset.poista')}
-          </Button>
-        </Flex>
-        <Divider marginTop={3} marginBottom={3} />
-      </Fragment>
-    ))}
-    <Button
-      type="button"
-      onClick={() => {
-        fields.push({});
-      }}
-      {...getTestIdProps('lisaaButton')}
-    >
-      {t('valintaperustelomake.lisaaValintatapa')}
-    </Button>
+    <FieldArrayList fields={fields}>
+      {({ field: valintatapa }) =>
+        renderValintatapaFields({ valintatapa, tapaOptions, language, t })
+      }
+    </FieldArrayList>
+    <Flex justifyCenter marginTop={fields.length > 0 ? 4 : 0}>
+      <Button
+        type="button"
+        variant="outlined"
+        onClick={() => {
+          fields.push({});
+        }}
+        {...getTestIdProps('lisaaButton')}
+      >
+        {t('valintaperustelomake.lisaaValintatapa')}
+      </Button>
+    </Flex>
   </>
 );
 
-const ValintatapaSection = ({ language }) => {
+const ValintatapaSection = ({ language, name }) => {
   const { options } = useKoodistoOptions({ koodisto: 'valintatapajono' });
   const { t } = useTranslation();
 
   return (
     <FieldArray
-      name="valintatavat"
+      name={name}
       component={renderValintavat}
       tapaOptions={options}
       language={language}

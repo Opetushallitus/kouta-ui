@@ -14,7 +14,5 @@ export const initialValues = {
       tapa: POHJAVALINTA.UUSI,
     },
   },
-  valintatapa: {
-    valintatavat: [{}],
-  },
+  valintatavat: [{}],
 };

@@ -321,7 +321,7 @@ export default {
     ehdotKielitaidonOsoitukseen:
       'Ehdot kielitaidon osoitukseen, tai vapautukseen',
     lisaaEhto: 'Lisää ehto',
-    valintaperusteenLoppukuvaus: 'Valintaperusteen loppukuvaus',
+    valintaperusteenKuvaus: 'Valintaperusteen kuvaus',
     luoUusiValintaperuste: 'Luo uusi valintaperuste',
     kopioiPohjaksiValintaperuste:
       'Kopioi pohjaksi aiemmin luotu valintaperuste',
@@ -329,6 +329,8 @@ export default {
     valintatapajononNimi: 'Valintatapajonon nimi',
     valitseKoulutustyyppi: 'Valitse koulutustyyppi',
     valitseSoraKuvaus: 'Valitse käytettävä SORA-kuvaus',
+    kuvauksenNimi: 'Valintaperusteen kuvauksen nimi',
+    kuvauksenTarkenne: 'Kuvauksen tarkenne',
   },
   soraKuvausLomake: {
     soraKuvauksenTiedot: 'SORA-kuvauksen tiedot',

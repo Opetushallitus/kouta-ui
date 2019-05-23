@@ -85,15 +85,16 @@ const getVariantCss = ({ variant }) => {
   } else if (variant === 'text') {
     return css`
       ${getTextVariantColorCss}
+      padding: 6px 8px;
     `;
   }
 };
 
-const getSizeCss = ({ size }) => {
+const getSizeCss = ({ size, variant }) => {
   if (size === 'small') {
     return css`
       font-size: 0.875rem;
-      padding: 4px 10px;
+      padding: ${variant === 'text' ? '4px 6px' : '4px 10px'};
     `;
   }
 };
@@ -112,6 +113,7 @@ const ButtonBase = styled.button`
   box-sizing: border-box;
   transition: box-shadow 0.25s, background-color 0.25s, border-color 0.25s;
   font-weight: 500;
+  text-decoration: none;
 
   ${getVariantCss}
   ${getSizeCss};

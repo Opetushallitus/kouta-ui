@@ -10,12 +10,12 @@ import OpetuskieliCheckboxGroup from './OpetuskieliCheckboxGroup';
 import OpetustapaCheckboxGroup from './OpetustapaCheckboxGroup';
 import Flex, { FlexItem } from '../Flex';
 import AlkamiskausiFields from './AlkamiskausiFields';
-import { KORKEAKOULUKOULUTUSTYYPIT } from '../../constants';
 import useKoodistoOptions from '../useKoodistoOptions';
 import { isArray, getTestIdProps } from '../../utils';
 import NoYesRadioGroup from '../NoYesRadioGroup';
 import DividerHeading from '../DividerHeading';
 import MaksullisuusFields from './MaksullisuusFields';
+import isKorkeakouluKoulutustyyppi from '../../utils/isKorkeakouluKoulutustyyppi';
 
 import {
   FormFieldTextarea,
@@ -148,7 +148,7 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi }) => {
     koodisto: 'koulutuksenlisatiedot',
   });
 
-  const isKorkeakoulu = KORKEAKOULUKOULUTUSTYYPIT.includes(koulutustyyppi);
+  const isKorkeakoulu = isKorkeakouluKoulutustyyppi(koulutustyyppi);
 
   return (
     <>

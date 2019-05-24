@@ -21,3 +21,5 @@ export const getOrganisaatioContactInfo = organisaatio => {
     sahkoposti,
   };
 };
+
+export default getOrganisaatioContactInfo;

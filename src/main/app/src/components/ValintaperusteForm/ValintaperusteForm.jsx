@@ -4,7 +4,7 @@ import { formValues } from 'redux-form';
 import FormCollapse from '../FormCollapse';
 import KieliversiotFormSection from '../KieliversiotFormSection';
 
-import { KOULUTUSTYYPPI, KORKEAKOULUKOULUTUSTYYPIT } from '../../constants';
+import { KOULUTUSTYYPPI } from '../../constants';
 import FormCollapseGroup from '../FormCollapseGroup';
 import KohdejoukonRajausSection from './KohdejoukonRajausSection';
 import HakutavanRajausSection from './HakutavanRajausSection';
@@ -17,6 +17,7 @@ import TyyppiSection from './TyyppiSection';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
 import SoraKuvausSection from './SoraKuvausSection';
+import isKorkeakouluKoulutustyyppi from '../../utils/isKorkeakouluKoulutustyyppi';
 
 const WithLanguagesAndTyyppiValue = formValues({
   languages: 'kieliversiot.languages',
@@ -49,9 +50,7 @@ const ValintaperusteForm = ({
             koulutustyyppiProp ||
             KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
-          const isKorkeakoulu = KORKEAKOULUKOULUTUSTYYPIT.includes(
-            koulutustyyppi,
-          );
+          const isKorkeakoulu = isKorkeakouluKoulutustyyppi(koulutustyyppi);
 
           return (
             <FormCollapseGroup enabled={steps} defaultOpen={!steps}>

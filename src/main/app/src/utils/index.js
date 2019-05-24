@@ -92,16 +92,6 @@ export const getFirstLanguageValue = (value, priorityArg) => {
   return null;
 };
 
-export const truncateString = (value, length) => {
-  if (!isString(value)) {
-    return '';
-  }
-
-  const slice = value.slice(0, length);
-
-  return slice.length < length ? `${slice}...` : slice;
-};
-
 export const arrayToTranslationObject = (arr, languageField = 'kieli') => {
   return isArray(arr)
     ? arr.reduce((acc, curr) => {

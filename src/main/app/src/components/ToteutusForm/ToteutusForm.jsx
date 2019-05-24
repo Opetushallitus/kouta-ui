@@ -20,8 +20,8 @@ import KorkeakouluOsaamisalatSection from './KorkeakouluOsaamisalatSection';
 import KuvausSection from './KuvausSection';
 import useTranslation from '../useTranslation';
 import YhteyshenkilotSection from './YhteyshenkilotSection';
-
-import { KORKEAKOULUKOULUTUSTYYPIT, KOULUTUSTYYPPI } from '../../constants';
+import isKorkeakouluKoulutustyyppi from '../../utils/isKorkeakouluKoulutustyyppi';
+import { KOULUTUSTYYPPI } from '../../constants';
 
 const ActiveLanguages = formValues({
   languages: 'kieliversiot.languages',
@@ -51,7 +51,7 @@ const ToteutusForm = ({
   onAttachHakukohde,
   koulutustyyppi = KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
 }) => {
-  const isKorkeakoulu = KORKEAKOULUKOULUTUSTYYPIT.includes(koulutustyyppi);
+  const isKorkeakoulu = isKorkeakouluKoulutustyyppi(koulutustyyppi);
   const { t } = useTranslation();
 
   return (

@@ -11,7 +11,7 @@ const StepsContainer = styled.div`
   padding: ${({ theme }) => theme.spacing.unit * 3}px 0px;
   background-color: ${getThemeProp('palette.primary.light')};
   justify-content: center;
-  border-bottom: 1px solid ${getThemeProp('palette.primary.dark')};
+  border-bottom: 2px solid ${getThemeProp('palette.primary.main')};
 `;
 
 const FooterContainer = styled.div`

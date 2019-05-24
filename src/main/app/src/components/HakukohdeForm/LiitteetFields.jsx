@@ -10,6 +10,9 @@ import useKoodistoOptions from '../useKoodistoOptions';
 import useTranslation from '../useTranslation';
 import FieldArrayList from '../FieldArrayList';
 import { LIITTEEN_TOIMITUSTAPA } from '../../constants';
+import useOrganisaatio from '../useOrganisaatio';
+import getOrganisaatioContactInfo from '../../utils/getOrganisaatioContactInfo';
+import Typography from '../Typography';
 
 import {
   FormFieldDateTimeInput,
@@ -19,6 +22,18 @@ import {
   FormFieldCheckbox,
   FormFieldRadioGroup,
 } from '../FormFields';
+
+const ContactInfo = ({ osoite, postinumero, postitoimipaikka, sahkoposti }) => {
+  return osoite && postinumero && postitoimipaikka && sahkoposti
+    ? [osoite, `${postinumero} ${postitoimipaikka}`, sahkoposti].map(
+        (value, index) => (
+          <Typography variant="secondary" as="div" key={index}>
+            {value}
+          </Typography>
+        ),
+      )
+    : null;
+};
 
 const ToimitusaikaFields = ({ name }) => {
   const { t } = useTranslation();
@@ -31,6 +46,16 @@ const ToimitusaikaFields = ({ name }) => {
       helperText={t('yleiset.paivamaaraJaKellonaika')}
     />
   );
+};
+
+const useOrganisaatioContactInfo = oid => {
+  const { organisaatio, ...rest } = useOrganisaatio(oid);
+
+  const contactInfo = useMemo(() => {
+    return organisaatio ? getOrganisaatioContactInfo(organisaatio) : null;
+  }, [organisaatio]);
+
+  return { contactInfo, ...rest };
 };
 
 const ToimituspaikkaFields = ({ name, language }) => {
@@ -86,16 +111,29 @@ const ToimitustapaPaikkaFields = ({
   input: { value: toimitustapa },
   baseName,
   language,
-  t,
+  contactInfo,
 }) => {
-  return toimitustapa === 'muu_osoite' ? (
-    <Spacing marginTop={2}>
-      <ToimituspaikkaFields name={baseName} language={language} />
-    </Spacing>
-  ) : null;
+  if (toimitustapa === LIITTEEN_TOIMITUSTAPA.MUU_OSOITE) {
+    return (
+      <Spacing marginTop={2}>
+        <ToimituspaikkaFields name={baseName} language={language} />
+      </Spacing>
+    );
+  } else if (
+    toimitustapa === LIITTEEN_TOIMITUSTAPA.JARJESTAJAN_OSOITE &&
+    contactInfo
+  ) {
+    return (
+      <Spacing marginTop={2}>
+        <ContactInfo {...contactInfo} />
+      </Spacing>
+    );
+  }
+
+  return null;
 };
 
-const ToimitustapaFields = ({ name, t, language }) => {
+const ToimitustapaFields = ({ name, t, language, contactInfo }) => {
   const options = useMemo(() => {
     return [
       {
@@ -132,6 +170,7 @@ const ToimitustapaFields = ({ name, t, language }) => {
         component={ToimitustapaPaikkaFields}
         language={language}
         baseName={`${name}.paikka`}
+        contactInfo={contactInfo}
         t={t}
       />
     </>
@@ -144,6 +183,7 @@ const LiitteetListField = ({
   includeToimitusaika = true,
   includeToimituspaikka = true,
   tyyppiOptions,
+  contactInfo,
   t,
 }) => {
   return (
@@ -194,6 +234,7 @@ const LiitteetListField = ({
               <ToimitustapaFields
                 language={language}
                 name={`${liite}.toimitustapa`}
+                contactInfo={contactInfo}
                 t={t}
               />
             ) : null}
@@ -223,6 +264,7 @@ const LiitteetField = ({
   t,
   yhteinenToimitusaikaName,
   yhteinenToimituspaikkaName,
+  contactInfo,
   ...props
 }) => {
   const yhteinenToimitusaika = Boolean(
@@ -243,6 +285,7 @@ const LiitteetField = ({
           includeToimitusaika={!yhteinenToimitusaika}
           includeToimituspaikka={!yhteinenToimituspaikka}
           tyyppiOptions={tyyppiOptions}
+          contactInfo={contactInfo}
           t={t}
         />
       </Spacing>
@@ -266,6 +309,7 @@ const LiitteetField = ({
               language={language}
               name={`${baseName}.toimitustapa`}
               t={t}
+              contactInfo={contactInfo}
             />
           </Spacing>
         ) : null}
@@ -274,12 +318,13 @@ const LiitteetField = ({
   );
 };
 
-const LiitteetFields = ({ language, name }) => {
+const LiitteetFields = ({ language, name, organisaatioOid }) => {
   const { options: tyyppiOptions } = useKoodistoOptions({
     koodisto: 'liitetyypitamm',
   });
 
   const { t } = useTranslation();
+  const { contactInfo } = useOrganisaatioContactInfo(organisaatioOid);
 
   const yhteinenToimitusaikaName = `${name}.yhteinenToimitusaika`;
   const yhteinenToimituspaikkaName = `${name}.yhteinenToimituspaikka`;
@@ -294,6 +339,7 @@ const LiitteetFields = ({ language, name }) => {
       yhteinenToimitusaikaName={yhteinenToimitusaikaName}
       yhteinenToimituspaikkaName={yhteinenToimituspaikkaName}
       baseName={name}
+      contactInfo={contactInfo}
     />
   );
 };

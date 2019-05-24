@@ -130,7 +130,7 @@ const ValueContent = ({ value, t, onRemove, message }) => {
       </FlexItem>
       <FlexItem>{links}</FlexItem>
       <FlexItem marginTop={2}>
-        <Button size="small" color="danger" type="button" onClick={onRemove}>
+        <Button size="small" color="danger" variant="outlined" type="button" onClick={onRemove}>
           {t('yleiset.poista')}
         </Button>
       </FlexItem>

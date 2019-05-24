@@ -31,6 +31,11 @@ const MoveButton = SortableHandle(props => (
 ));
 
 const InputContainer = styled(FlexItem)`
+  max-width: 100%;
+  min-width: 0;
+`;
+
+const InputWrapper = styled.div`
   overflow-x: auto;
   overflow-y: hidden;
 `;
@@ -125,11 +130,13 @@ const FieldsSortableContainer = SortableContainer(({ fields, language, t }) => {
           <FieldSortableElement key={index} index={index}>
             <Flex marginBottom={index < fields.length - 1 ? 2 : 0}>
               <InputContainer grow={1}>
-                <ContentField
-                  {...contentValue}
-                  name={content}
-                  language={language}
-                />
+                <InputWrapper>
+                  <ContentField
+                    {...contentValue}
+                    name={content}
+                    language={language}
+                  />
+                </InputWrapper>
               </InputContainer>
               <FlexItem grow={0} paddingLeft={2}>
                 <Spacing marginBottom={2}>

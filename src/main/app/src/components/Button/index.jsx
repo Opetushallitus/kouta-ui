@@ -1,5 +1,5 @@
 import React from 'react';
-import { lighten } from 'polished';
+import { lighten, transparentize } from 'polished';
 import styled, { css } from 'styled-components';
 import get from 'lodash/get';
 
@@ -60,6 +60,7 @@ const getTextVariantColorCss = ({ color, theme }) => {
     get(theme, ['palette', color, 'main']) || theme.palette.primary.main;
 
   const fontHoverColor = lighten(0.05, fontColor);
+  const backgroundHoverColor = transparentize(0.9, fontColor);
 
   return `
     border-color: transparent;
@@ -68,6 +69,7 @@ const getTextVariantColorCss = ({ color, theme }) => {
 
     &:hover, &:active {
       color: ${fontHoverColor}
+      background-color: ${backgroundHoverColor};
     }
   `;
 };

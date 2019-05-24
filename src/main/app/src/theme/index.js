@@ -1,8 +1,15 @@
 import { css } from 'styled-components';
 import merge from 'lodash/merge';
 import get from 'lodash/get';
+import { generateMedia } from 'styled-media-query';
 
 import { isNumber } from '../utils';
+
+export const media = generateMedia({
+  large: '992px',
+  medium: '768px',
+  small: '576px',
+});
 
 const createHeadingTypography = ({ sizes, fontFamily, color, lineHeight }) => {
   return sizes.reduce((acc, curr, index) => {

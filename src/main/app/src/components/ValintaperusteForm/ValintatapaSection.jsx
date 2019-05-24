@@ -3,12 +3,14 @@ import { Field, FieldArray } from 'redux-form';
 
 import Spacing from '../Spacing';
 import Button from '../Button';
-import Flex, { FlexItem } from '../Flex';
+import Flex from '../Flex';
 import ValintatapaContentFields from '../ValintatapaContentFields';
 import useKoodistoOptions from '../useKoodistoOptions';
 import { getTestIdProps } from '../../utils';
 import useTranslation from '../useTranslation';
 import FieldArrayList from '../FieldArrayList';
+import GridRow from '../GridRow';
+import GridColumn from '../GridColumn';
 
 import {
   FormFieldInput,
@@ -26,6 +28,7 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
         options={tapaOptions}
       />
     </Spacing>
+
     <Spacing marginBottom={2} {...getTestIdProps('nimi')}>
       <Field
         name={`${valintatapa}.nimi.${language}`}
@@ -33,12 +36,28 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
         label={t('valintaperustelomake.valintatapajononNimi')}
       />
     </Spacing>
-    <Spacing marginBottom={2} {...getTestIdProps('sisalto')}>
-      <ValintatapaContentFields
-        name={`${valintatapa}.sisalto`}
-        language={language}
-      />
+
+    <Spacing marginBottom={2}>
+      <GridRow>
+        <GridColumn sm={6} {...getTestIdProps('enimmaispistemaara')}>
+          <Field
+            name={`${valintatapa}.enimmaispistemaara`}
+            component={FormFieldInput}
+            type="number"
+            label={t('valintaperustelomake.enimmaispistemaara')}
+          />
+        </GridColumn>
+        <GridColumn sm={6} {...getTestIdProps('vahimmaispistemaara')}>
+          <Field
+            name={`${valintatapa}.vahimmaispistemaara`}
+            component={FormFieldInput}
+            type="number"
+            label={t('valintaperustelomake.vahimmaispistemaara')}
+          />
+        </GridColumn>
+      </GridRow>
     </Spacing>
+
     <Spacing marginBottom={2} {...getTestIdProps('kynnysehto')}>
       <Field
         name={`${valintatapa}.kynnysehto.${language}`}
@@ -46,32 +65,13 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
         label={t('valintaperustelomake.kynnysehto')}
       />
     </Spacing>
-    <Flex marginBottom={2}>
-      <FlexItem
-        grow={1}
-        paddingRight={1}
-        {...getTestIdProps('enimmaispistemaara')}
-      >
-        <Field
-          name={`${valintatapa}.enimmaispistemaara`}
-          component={FormFieldInput}
-          type="number"
-          label={t('valintaperustelomake.enimmaispistemaara')}
-        />
-      </FlexItem>
-      <FlexItem
-        grow={1}
-        paddingLeft={1}
-        {...getTestIdProps('vahimmaispistemaara')}
-      >
-        <Field
-          name={`${valintatapa}.vahimmaispistemaara`}
-          component={FormFieldInput}
-          type="number"
-          label={t('valintaperustelomake.vahimmaispistemaara')}
-        />
-      </FlexItem>
-    </Flex>
+
+    <div {...getTestIdProps('sisalto')}>
+      <ValintatapaContentFields
+        name={`${valintatapa}.sisalto`}
+        language={language}
+      />
+    </div>
   </div>
 );
 

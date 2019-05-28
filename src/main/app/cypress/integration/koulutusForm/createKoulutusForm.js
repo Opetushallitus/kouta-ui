@@ -5,6 +5,7 @@ import {
   getCheckbox,
   chooseKieliversiotLanguages,
   selectOption,
+  fillTreeSelect,
 } from '../../utils';
 
 import { stubKoulutusFormRoutes } from '../../koulutusFormUtils';
@@ -53,8 +54,7 @@ const jatka = cy => {
 const fillJarjestajaSection = (cy, jatkaArg = false) => {
   getByTestId('jarjestajaSection', cy).within(() => {
     getByTestId('jarjestajatSelection', cy).within(() => {
-      getCheckbox('4.1.1.1.1.1', cy).click({ force: true });
-      getCheckbox('2.1.1.1.1.1', cy).click({ force: true });
+      fillTreeSelect(['4.1.1.1.1.1'], cy);
     });
 
     jatkaArg && jatka(cy);

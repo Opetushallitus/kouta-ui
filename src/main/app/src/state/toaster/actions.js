@@ -64,8 +64,8 @@ export const createGenericErrorToast = () => (
   return dispatch(
     createTemporaryToast({
       status: 'danger',
-      title: localisation.t('yleiset.virheIlmoitus'),
-      description: localisation.t('yleiset.virheIlmoitusKuvaus'),
+      title: localisation.t('yleiset.virheilmoitus'),
+      description: localisation.t('yleiset.virheilmoitusKuvaus'),
     }),
   );
 };

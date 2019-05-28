@@ -5,9 +5,7 @@ test('getKoulutusByValues returns correct koulutus given form values', () => {
     kieliversiot: {
       languages: ['fi', 'sv'],
     },
-    organization: {
-      organizations: ['123.456.789'],
-    },
+    tarjoajat: ['123.456.789'],
     information: {
       nimi: {
         fi: 'Fi nimi',

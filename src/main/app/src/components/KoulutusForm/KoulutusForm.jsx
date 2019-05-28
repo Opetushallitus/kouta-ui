@@ -6,7 +6,7 @@ import TypeSection from './TypeSection';
 import BaseSelectionSection from './BaseSelectionSection';
 import TiedotSection from './TiedotSection/TiedotSection';
 import KuvausSection from './KuvausSection';
-import OrganizationSection from './OrganizationSection';
+import JarjestajaSection from './JarjestajaSection';
 import FormCollapseGroup from '../FormCollapseGroup';
 import FormCollapse from '../FormCollapse';
 import KieliversiotFormSection from '../KieliversiotFormSection';
@@ -50,7 +50,11 @@ const KoulutusForm = ({
           const languageTabs = languagesValue || [];
 
           return (
-            <FormCollapseGroup enabled={steps} scrollTarget={scrollTarget} defaultOpen={!steps}>
+            <FormCollapseGroup
+              enabled={steps}
+              scrollTarget={scrollTarget}
+              defaultOpen={!steps}
+            >
               {canEditKoulutustyyppi ? (
                 <FormCollapse
                   header={t('yleiset.koulutustyyppi')}
@@ -123,10 +127,12 @@ const KoulutusForm = ({
 
               <FormCollapse
                 header={t('koulutuslomake.koulutuksenJarjestaja')}
-                section="organization"
                 {...getTestIdProps('jarjestajaSection')}
               >
-                <OrganizationSection organisaatioOid={organisaatioOid} />
+                <JarjestajaSection
+                  organisaatioOid={organisaatioOid}
+                  name="tarjoajat"
+                />
               </FormCollapse>
 
               {KORKEAKOULUKOULUTUSTYYPIT.includes(koulutustyyppi) ? (

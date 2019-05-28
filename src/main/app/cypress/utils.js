@@ -178,3 +178,9 @@ export const stubOppijanumerorekisteriHenkiloRoute = ({
     response: henkilo,
   });
 };
+
+export const fillTreeSelect = (value, cy) => {
+  value.forEach(val => {
+    cy.get(`input[type="checkbox"][name="${val}"]`).check({ force: true });
+  });
+};

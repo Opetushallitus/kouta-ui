@@ -3,6 +3,7 @@
 exports[`renders correctly 1`] = `
 .c2 {
   display: inline-block;
+  position: relative;
 }
 
 .c7 {
@@ -28,6 +29,7 @@ exports[`renders correctly 1`] = `
 
 .c5 {
   display: inline-block;
+  position: relative;
   width: 1em;
   height: 1em;
   background-color: white;
@@ -102,6 +104,7 @@ exports[`renders correctly 1`] = `
             </styled.input>
             <styled.div
               error={false}
+              indeterminate={false}
             >
               <div
                 className="c5"

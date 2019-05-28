@@ -118,11 +118,9 @@ Object {
   "nakyvyys": Object {
     "julkinen": true,
   },
-  "organization": Object {
-    "organizations": Array [
-      "123.456.789",
-    ],
-  },
+  "tarjoajat": Array [
+    "123.456.789",
+  ],
   "type": Object {
     "type": "yo",
   },

@@ -5,17 +5,23 @@ import get from 'lodash/get';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { getKayttajanOrganisaatioOids } from '../../apiUtils';
 import HomeContent from './HomeContent';
-import useApiAsync from '../useApiAsync';
-import { isArray } from '../../utils';
+import Alert from '../Alert';
 import { selectOrganisaatio } from '../../state/organisaatioSelection';
-import FullSpin from '../FullSpin';
+import useAuthorizedUser from '../useAuthorizedUser';
+import getUserOrganisaatiotWithRoles from '../../utils/getUserOrganisaatiotWithRoles';
+import { KOUTA_INDEX_READ_ROLE } from '../../constants';
+import useTranslation from '../useTranslation';
+import Container from '../Container';
+import { spacing, getThemeProp } from '../../theme';
 
-const Container = styled.div`
-  width: 100%;
+const HomeContainer = styled.div`
+  padding-top: ${spacing(3)}
+  padding-bottom: ${spacing(3)}
   min-height: 100vh;
-  background-color: ${({ theme }) => theme.palette.mainBackground};
+  width: 100%;
+  box-sizing: border-box;
+  background-color: ${getThemeProp('palette.mainBackground')};
 `;
 
 const HomeRoute = ({
@@ -23,36 +29,32 @@ const HomeRoute = ({
   organisaatioOid,
   persistedOrganisaatioOid,
 }) => {
-  const { data: organisaatioOids, isLoading } = useApiAsync({
-    promiseFn: getKayttajanOrganisaatioOids,
-  });
+  const { t } = useTranslation();
+  const user = useAuthorizedUser();
+  const organisaatioOids = useMemo(
+    () => getUserOrganisaatiotWithRoles(user, [KOUTA_INDEX_READ_ROLE]),
+    [user],
+  );
 
-  const persistedOrganisaatioOidIsValid = useMemo(() => {
+  if (organisaatioOids.length === 0) {
     return (
-      persistedOrganisaatioOid &&
-      isArray(organisaatioOids) &&
-      organisaatioOids.includes(persistedOrganisaatioOid)
+      <Alert
+        variant="danger"
+        message={t('etusivu.eiOikeuksiaVirheilmoitus')}
+        description={t('etusivu.eiOikeuksiaVirheilmoitusKuvaus')}
+      />
     );
-  }, [organisaatioOids, persistedOrganisaatioOid]);
-
-  if (isLoading && !organisaatioOids) {
-    return <FullSpin size="large" />;
-  }
-
-  // TODO: display an error
-  if (!isArray(organisaatioOids) || organisaatioOids.length === 0) {
-    return null;
   }
 
   const firstOrganisaatioOid = organisaatioOids[0];
 
-  if (!organisaatioOid || !organisaatioOids.includes(organisaatioOid)) {
+  if (!organisaatioOid) {
     return (
       <Redirect
         to={{
           path: '/',
           search: queryString.stringify({
-            organisaatioOid: persistedOrganisaatioOidIsValid
+            organisaatioOid: persistedOrganisaatioOid
               ? persistedOrganisaatioOid
               : firstOrganisaatioOid,
           }),
@@ -81,13 +83,15 @@ const HomePage = ({
   const organisaatioOid = get(query, 'organisaatioOid') || null;
 
   return (
-    <Container>
-      <HomeRoute
-        kayttajOid={kayttajaOid}
-        organisaatioOid={organisaatioOid}
-        persistedOrganisaatioOid={persistedOrganisaatioOid}
-      />
-    </Container>
+    <HomeContainer>
+      <Container>
+        <HomeRoute
+          kayttajOid={kayttajaOid}
+          organisaatioOid={organisaatioOid}
+          persistedOrganisaatioOid={persistedOrganisaatioOid}
+        />
+      </Container>
+    </HomeContainer>
   );
 };
 

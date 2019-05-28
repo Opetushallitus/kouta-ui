@@ -141,6 +141,10 @@ const DrawerContent = ({
     [openOrganisaatiot, setOpenOrganisaatiot],
   );
 
+  const onSelect = useCallback(oid => setSelectedOrganisaatio(oid), [
+    setSelectedOrganisaatio,
+  ]);
+
   return (
     <Container>
       <HeaderContainer>
@@ -190,7 +194,7 @@ const DrawerContent = ({
           <OrganisaatioTreeList
             items={items}
             selected={selectedOrganisaatio}
-            onSelect={oid => setSelectedOrganisaatio(oid)}
+            onSelect={onSelect}
             onToggleFavourite={onToggleFavourite}
             onToggleOpen={onToggleOpen}
             language={language}

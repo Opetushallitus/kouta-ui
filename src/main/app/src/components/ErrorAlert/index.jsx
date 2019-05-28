@@ -41,7 +41,7 @@ export const ErrorAlert = ({
   const { t } = useTranslation();
 
   const reloadText = reloadTextProp || t('yleiset.yritaUudelleen');
-  const text = children || t('yleiset.virheIlmoitus');
+  const text = children || t('yleiset.virheilmoitus');
 
   const content = (
     <Container>

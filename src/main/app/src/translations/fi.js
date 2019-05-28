@@ -18,7 +18,7 @@ export default {
     eiValittaviaKohteita: 'Valittavia kohteita ei löytynyt',
     luoKohde: 'Luo kohde "{{kohde}}"',
     yritaUudelleen: 'Yritä uudelleen',
-    virheIlmoitus: 'Jokin meni vikaan',
+    virheilmoitus: 'Jokin meni vikaan',
     koulutus: 'Koulutus',
     toteutus: 'Toteutus',
     haku: 'Haku',
@@ -140,7 +140,7 @@ export default {
     ladatutTiedostot: 'Ladatut tiedostot',
     varmistaLomakkeenKentat:
       'Varmistathan että olet täyttänyt lomakkeen kaikki pakolliset kentät',
-    virheIlmoitusKuvaus:
+    virheilmoitusKuvaus:
       'Jos virhe aiheuttaa ongelmia järjestelmän käytössä, yritä päivittää sivu, tai ota yhteyttä tukeen',
     valitseMitaHakulomakettaKaytetaan: 'Valitse mitä hakulomaketta käytetään',
     valitseKoulutustyyppi: 'Valitse koulutustyyppi',
@@ -154,6 +154,9 @@ export default {
     valitseValintakoetyypit: 'Valitse valintakoetyypit',
     lisaaTilaisuus: 'Lisää tilaisuus',
     valintakoe: 'Valintakoe',
+    kayttooikeusVirheilmoitus: 'Käyttöoikeuksissasi on puutteita',
+    kayttooikeusVirheilmoitusKuvaus:
+      'Käyttöoikeuksien tarkistuksessa tapahtui virhe. Tarkistathan, että käyttäjälläsi on tarvittavat käyttöoikeudet',
   },
   validointivirheet: {
     syotaArvo: 'Syötä kentälle arvo',
@@ -187,6 +190,9 @@ export default {
     haeHakuja: 'Hae hakuja',
     haeToteutuksia: 'Hae toteutuksia',
     haeValintaperusteita: 'Hae valintaperusteita',
+    eiOikeuksiaVirheilmoitus: 'Käyttöoikeuksissasi on puutteita',
+    eiOikeuksiaVirheilmoitusKuvaus:
+      'Käyttäjältäsi puuttuu järjestelmän käyttöön vaadittavia rooleja',
   },
   koulutuslomake: {
     koulutuksenTiedot: 'Koulutuksen tiedot',

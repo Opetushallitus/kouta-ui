@@ -31,7 +31,7 @@ const hasBeenRetried = error => {
 };
 
 const isAuthorizationError = error => {
-  return [401, 403].includes(get(error, 'response.status'));
+  return [401].includes(get(error, 'response.status'));
 };
 
 const withAuthorizationInterceptor = apiUrls => client => {
@@ -43,7 +43,7 @@ const withAuthorizationInterceptor = apiUrls => client => {
       }
 
       if (hasBeenRetried(error)) {
-        window.location.replace(apiUrls.url('cas.login'));
+        return window.location.replace(apiUrls.url('cas.login'));
       }
 
       error.config.__retried = true;

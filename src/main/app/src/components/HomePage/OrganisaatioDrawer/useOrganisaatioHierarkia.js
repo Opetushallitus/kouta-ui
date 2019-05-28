@@ -3,25 +3,26 @@ import { useMemo } from 'react';
 import { isString, isArray } from '../../../utils';
 import { getOrganisaatioHierarkia } from '../../../apiUtils';
 import useApiAsync from '../../useApiAsync';
-import { getFilteredHierarkia } from '../utils';
+import useAuthorizedUser from '../../useAuthorizedUser';
+import userHasOrganisaatioRoles from '../../../utils/userHasOrganisaatioRoles';
+import { KOUTA_INDEX_READ_ROLE } from '../../../constants';
 
-const getMap = arr => {
-  let map = {};
-
-  for (let value of arr) {
-    if (isString(value)) {
-      map[value] = true;
-    }
-  }
-
-  return map;
+const hasRequiredRoles = (user, organisaatioOid) => {
+  return userHasOrganisaatioRoles(user, organisaatioOid, [
+    KOUTA_INDEX_READ_ROLE,
+  ]);
 };
 
-const getParentOidPath = parentOidPathString =>
-  isString(parentOidPathString) ? parentOidPathString.split('/') : [];
+const filterHierarkiaByUser = (hierarkia, user) => {
+  return hierarkia.flatMap(org => [
+    ...(hasRequiredRoles(user, org.oid)
+      ? [org]
+      : filterHierarkiaByUser(org.children, user)),
+  ]);
+};
 
-const useOrganisaatioHierarkia = ({ includedOids = [], name }) => {
-  const oidMap = useMemo(() => getMap(includedOids), [includedOids]);
+const useOrganisaatioHierarkia = ({ name }) => {
+  const user = useAuthorizedUser();
 
   const promiseFn = useMemo(() => {
     if (!isString(name) || name.length < 3) {
@@ -38,14 +39,8 @@ const useOrganisaatioHierarkia = ({ includedOids = [], name }) => {
   });
 
   const hierarkia = useMemo(() => {
-    return isArray(data)
-      ? getFilteredHierarkia(
-          data,
-          ({ oid, parentOidPath }) =>
-            oidMap[oid] || getParentOidPath(parentOidPath).find(o => oidMap[o]),
-        )
-      : [];
-  }, [data, oidMap]);
+    return isArray(data) && user ? filterHierarkiaByUser(data, user) : [];
+  }, [data, user]);
 
   return { hierarkia, ...rest };
 };

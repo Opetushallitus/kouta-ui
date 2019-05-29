@@ -9,7 +9,7 @@ module.exports = {
         nimi: {
           fi: 'toteutuksen nimi',
         },
-        tarjoajat: ['5.1.1.1.1.1', '3.1.1.1.1.1'],
+        tarjoajat: ['4.1.1.1.1.1', '5.1.1.1.1.1'],
         kielivalinta: ['fi'],
         metadata: {
           opetus: {
@@ -107,7 +107,7 @@ module.exports = {
         nimi: {
           fi: 'toteutuksen nimi',
         },
-        tarjoajat: ['5.1.1.1.1.1', '3.1.1.1.1.1'],
+        tarjoajat: ['4.1.1.1.1.1', '5.1.1.1.1.1'],
         kielivalinta: ['fi'],
         metadata: {
           opetus: {

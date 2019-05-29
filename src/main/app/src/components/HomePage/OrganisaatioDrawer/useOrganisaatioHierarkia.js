@@ -5,12 +5,10 @@ import { getOrganisaatioHierarkia } from '../../../apiUtils';
 import useApiAsync from '../../useApiAsync';
 import useAuthorizedUser from '../../useAuthorizedUser';
 import userHasOrganisaatioRoles from '../../../utils/userHasOrganisaatioRoles';
-import { KOUTA_INDEX_READ_ROLE } from '../../../constants';
+import { KOUTA_CRUD_ROLE } from '../../../constants';
 
 const hasRequiredRoles = (user, organisaatioOid) => {
-  return userHasOrganisaatioRoles(user, organisaatioOid, [
-    KOUTA_INDEX_READ_ROLE,
-  ]);
+  return userHasOrganisaatioRoles(user, organisaatioOid, [KOUTA_CRUD_ROLE]);
 };
 
 const filterHierarkiaByUser = (hierarkia, user) => {

@@ -6,7 +6,7 @@ import KieliversiotFormSection from '../KieliversiotFormSection';
 import OsaamisalatSection from './OsaamisalatSection';
 import NimiSection from './NimiSection';
 import PohjaSection from './PohjaSection';
-import JarjestamisPaikatSection from './JarjestamisPaikatSection';
+import JarjestamispaikatSection from './JarjestamispaikatSection';
 import JarjestamisTiedotSection from './JarjestamisTiedotSection';
 import NayttamisTiedotSection from './NayttamisTiedotSection';
 import FormCollapseGroup from '../FormCollapseGroup';
@@ -157,11 +157,13 @@ const ToteutusForm = ({
 
             <FormCollapse
               header={t('toteutuslomake.toteutuksenJarjestaja')}
-              section="jarjestamispaikat"
               languages={languages}
-              {...getTestIdProps('jarjestajaSection')}
+              {...getTestIdProps('jarjestamispaikatSection')}
             >
-              <JarjestamisPaikatSection organisaatioOid={organisaatioOid} />
+              <JarjestamispaikatSection
+                name="jarjestamispaikat"
+                organisaatioOid={organisaatioOid}
+              />
             </FormCollapse>
 
             <FormCollapse

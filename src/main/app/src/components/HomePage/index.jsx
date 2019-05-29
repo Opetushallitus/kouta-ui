@@ -10,7 +10,7 @@ import Alert from '../Alert';
 import { selectOrganisaatio } from '../../state/organisaatioSelection';
 import useAuthorizedUser from '../useAuthorizedUser';
 import getUserOrganisaatiotWithRoles from '../../utils/getUserOrganisaatiotWithRoles';
-import { KOUTA_INDEX_READ_ROLE } from '../../constants';
+import { KOUTA_CRUD_ROLE } from '../../constants';
 import useTranslation from '../useTranslation';
 import Container from '../Container';
 import { spacing, getThemeProp } from '../../theme';
@@ -31,8 +31,9 @@ const HomeRoute = ({
 }) => {
   const { t } = useTranslation();
   const user = useAuthorizedUser();
+
   const organisaatioOids = useMemo(
-    () => getUserOrganisaatiotWithRoles(user, [KOUTA_INDEX_READ_ROLE]),
+    () => getUserOrganisaatiotWithRoles(user, [KOUTA_CRUD_ROLE]),
     [user],
   );
 

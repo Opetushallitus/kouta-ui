@@ -2,7 +2,6 @@ import React from 'react';
 import { Field } from 'redux-form';
 
 import OrganisaatioHierarkiaTreeSelect from '../OrganisaatioHierarkiaTreeSelect';
-import useTranslation from '../useTranslation';
 import useOrganisaatioHierarkia from '../useOrganisaatioHierarkia';
 import { createFormFieldComponent } from '../FormFields';
 import { getTestIdProps } from '../../utils';
@@ -16,22 +15,20 @@ const JarjestajatField = createFormFieldComponent(
   }),
 );
 
-const OrganizationSection = ({ organisaatioOid, name }) => {
-  const { t } = useTranslation();
+const JarjestamispaikatSection = ({ organisaatioOid, name }) => {
   const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid);
   const user = useAuthorizedUser();
 
   return (
-    <div {...getTestIdProps('jarjestajatSelection')}>
+    <div {...getTestIdProps('jarjestamispaikatSelection')}>
       <Field
         name={name}
         hierarkia={hierarkia}
         user={user}
         component={JarjestajatField}
-        label={t('koulutuslomake.valitseJarjestajat')}
       />
     </div>
   );
 };
 
-export default OrganizationSection;
+export default JarjestamispaikatSection;

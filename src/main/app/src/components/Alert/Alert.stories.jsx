@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { select } from '@storybook/addon-knobs';
+import { select, boolean } from '@storybook/addon-knobs';
 
 import Alert from './index';
 
@@ -12,12 +12,15 @@ storiesOf('Alert', module).add('Basic', () => {
       Success: 'success',
       Danger: 'danger',
     },
-    'contained',
+    'info',
   );
+
+  const showIcon = boolean('Show icon', true);
 
   return (
     <Alert
       variant={variant}
+      showIcon={showIcon}
       message="Alert message"
       description="Alert description"
     />

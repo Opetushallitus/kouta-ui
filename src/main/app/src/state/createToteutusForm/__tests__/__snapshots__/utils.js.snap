@@ -189,10 +189,12 @@ Object {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
-  "tarjoajat": Array [
-    "org1",
-    "org2",
-  ],
+  "tarjoajat": Object {
+    "jarjestajat": Array [
+      "org1",
+      "org2",
+    ],
+  },
 }
 `;
 
@@ -218,12 +220,10 @@ Object {
       },
     },
   ],
-  "jarjestamispaikat": Object {
-    "jarjestajat": Array [
-      "org1",
-      "org2",
-    ],
-  },
+  "jarjestamispaikat": Array [
+    "org1",
+    "org2",
+  ],
   "jarjestamistiedot": Object {
     "alkamiskausi": Object {
       "kausi": "kausi_1#1",

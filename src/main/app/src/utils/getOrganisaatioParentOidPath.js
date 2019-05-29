@@ -1,6 +1,6 @@
 import get from 'lodash/get';
 
-import { isString } from './utils';
+import { isString } from './index';
 
 const getSeparator = str => {
   if (str.indexOf('|') >= 0) {
@@ -9,7 +9,7 @@ const getSeparator = str => {
     return '/';
   }
 
-  return undefined;
+  return '/';
 };
 
 const getOrganisaatioParentOidPath = organisaatio => {
@@ -20,10 +20,6 @@ const getOrganisaatioParentOidPath = organisaatio => {
   }
 
   const separator = getSeparator(pathStr);
-
-  if (!separator) {
-    return [];
-  }
 
   return pathStr.split(separator).filter(v => !!v);
 };

@@ -1,6 +1,5 @@
 import get from 'lodash/get';
 import toPairs from 'lodash/toPairs';
-import flatMap from 'lodash/flatMap';
 import pick from 'lodash/pick';
 
 import { JULKAISUTILA, KORKEAKOULUKOULUTUSTYYPIT } from '../../constants';
@@ -22,7 +21,7 @@ const getOsaamisalatByValues = ({ osaamisalat, kielivalinta }) => {
 
 export const getToteutusByValues = values => {
   const kielivalinta = getKielivalinta(values);
-  const tarjoajat = get(values, 'jarjestamispaikat.jarjestajat') || [];
+  const tarjoajat = get(values, 'jarjestamispaikat') || [];
   const nimi = pick(get(values, 'nimi.name') || {}, kielivalinta);
   const opetuskielet = get(values, 'jarjestamistiedot.opetuskieli') || [];
   const kuvaus = pick(get(values, 'kuvaus.kuvaus') || {}, kielivalinta);
@@ -106,29 +105,23 @@ export const getToteutusByValues = values => {
     }),
   );
 
-  const ammattinimikkeet = flatMap(
-    toPairs(
-      pick(get(values, 'nayttamistiedot.ammattinimikkeet') || {}, kielivalinta),
-    ),
-    ([language, nimikkeet]) => {
-      return (nimikkeet || []).map(({ value }) => ({
-        kieli: language,
-        arvo: value,
-      }));
-    },
-  );
+  const ammattinimikkeet = toPairs(
+    pick(get(values, 'nayttamistiedot.ammattinimikkeet') || {}, kielivalinta),
+  ).flatMap(([language, nimikkeet]) => {
+    return (nimikkeet || []).map(({ value }) => ({
+      kieli: language,
+      arvo: value,
+    }));
+  });
 
-  const asiasanat = flatMap(
-    toPairs(
-      pick(get(values, 'nayttamistiedot.avainsanat') || {}, kielivalinta),
-    ),
-    ([language, sanat]) => {
-      return (sanat || []).map(({ value }) => ({
-        kieli: language,
-        arvo: value,
-      }));
-    },
-  );
+  const asiasanat = toPairs(
+    pick(get(values, 'nayttamistiedot.avainsanat') || {}, kielivalinta),
+  ).flatMap(([language, sanat]) => {
+    return (sanat || []).map(({ value }) => ({
+      kieli: language,
+      arvo: value,
+    }));
+  });
 
   const onkoStipendia = Boolean(get(values, 'jarjestamistiedot.onkoStipendia'));
 
@@ -250,9 +243,7 @@ export const getValuesByToteutus = toteutus => {
     kieliversiot: {
       languages: kielivalinta,
     },
-    jarjestamispaikat: {
-      jarjestajat: tarjoajat,
-    },
+    jarjestamispaikat: tarjoajat,
     jarjestamistiedot: {
       kuvaus,
       maksullisuus: {
@@ -340,7 +331,7 @@ const validateEssentials = ({ errorBuilder, values }) => {
 
 const validateCommon = ({ values, errorBuilder }) => {
   let enhancedErrorBuilder = errorBuilder
-    .validateArrayMinLength('jarjestamispaikat.jarjestajat', 1)
+    .validateArrayMinLength('jarjestamispaikat', 1)
     .validateArrayMinLength('jarjestamistiedot.opetusaika', 1)
     .validateArrayMinLength('jarjestamistiedot.opetuskieli', 1)
     .validateExistence('jarjestamistiedot.maksullisuus.tyyppi');

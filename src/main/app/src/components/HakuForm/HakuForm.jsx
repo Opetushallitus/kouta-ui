@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { formValues } from 'redux-form';
 
 import BaseSelectionSection from './BaseSelectionSection';
@@ -18,12 +18,14 @@ import Flex from '../Flex';
 import Button from '../Button';
 import useTranslation from '../useTranslation';
 import LomakeSection from './LomakeSection';
-import useAuthorizedUserHasRoles from '../useAuthorizedUserHasRoles';
+import useAuthorizedUser from '../useAuthorizedUser';
 import ValintakoeSection from './ValintakoeSection';
+import userHasOrganisaatioRoles from '../../utils/userHasOrganisaatioRoles';
 
 import {
-  OPETUSHALLITUS_APP_TARJONTA_CRUD_ROOLI,
   HAKUTAPA_YHTEISHAKU_KOODI_URI,
+  KOUTA_CRUD_ROLE,
+  OPETUSHALLITUS_ORGANISAATIO_OID,
 } from '../../constants';
 
 const ActiveLanguages = formValues({
@@ -64,10 +66,15 @@ const HakuForm = ({
   haku: hakuProp = null,
 }) => {
   const { t } = useTranslation();
+  const user = useAuthorizedUser();
 
-  const isOphVirkailija = useAuthorizedUserHasRoles([
-    OPETUSHALLITUS_APP_TARJONTA_CRUD_ROOLI,
-  ]);
+  const isOphVirkailija = useMemo(
+    () =>
+      userHasOrganisaatioRoles(user, OPETUSHALLITUS_ORGANISAATIO_OID, [
+        KOUTA_CRUD_ROLE,
+      ]),
+    [user],
+  );
 
   return (
     <form onSubmit={handleSubmit}>

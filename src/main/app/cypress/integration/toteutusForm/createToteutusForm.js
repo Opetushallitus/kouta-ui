@@ -7,6 +7,7 @@ import {
   getCheckbox,
   chooseKieliversiotLanguages,
   selectOption,
+  fillTreeSelect,
 } from '../../utils';
 
 import koulutus from '../../data/koulutus';
@@ -139,9 +140,10 @@ const tallenna = cy => {
 };
 
 const fillJarjestajatSection = cy => {
-  getByTestId('jarjestajaSection', cy).within(() => {
-    getCheckbox('3.1.1.1.1.1', cy).click({ force: true });
-    getCheckbox('5.1.1.1.1.1', cy).click({ force: true });
+  getByTestId('jarjestamispaikatSection', cy).within(() => {
+    getByTestId('jarjestamispaikatSelection', cy).within(() => {
+      fillTreeSelect(['4.1.1.1.1.1'], cy);
+    });
 
     jatka(cy);
   });

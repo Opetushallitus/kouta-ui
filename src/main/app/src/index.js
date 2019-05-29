@@ -1,9 +1,4 @@
-import 'core-js/features/object/keys';
-import 'core-js/features/object/values';
-import 'core-js/features/promise';
-import 'core-js/features/array/includes';
-import 'core-js/features/array/every';
-import 'core-js/features/array/flat-map';
+import 'core-js/es';
 
 import React from 'react';
 import ReactDOM from 'react-dom';

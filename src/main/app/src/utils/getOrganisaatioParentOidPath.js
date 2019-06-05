@@ -5,8 +5,6 @@ import { isString } from './index';
 const getSeparator = str => {
   if (str.indexOf('|') >= 0) {
     return '|';
-  } else if (str.indexOf('/') >= 0) {
-    return '/';
   }
 
   return '/';

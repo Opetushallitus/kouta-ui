@@ -9,11 +9,17 @@ import HomeContent from './HomeContent';
 import Alert from '../Alert';
 import { selectOrganisaatio } from '../../state/organisaatioSelection';
 import useAuthorizedUser from '../useAuthorizedUser';
-import getUserOrganisaatiotWithRoles from '../../utils/getUserOrganisaatiotWithRoles';
-import { KOUTA_CRUD_ROLE } from '../../constants';
+import {
+  KOULUTUS_ROLE,
+  TOTEUTUS_ROLE,
+  HAKU_ROLE,
+  VALINTAPERUSTE_ROLE,
+} from '../../constants';
 import useTranslation from '../useTranslation';
 import Container from '../Container';
 import { spacing, getThemeProp } from '../../theme';
+import getUserRoles from '../../utils/getUserRoles';
+import getRoleOrganisaatioOid from '../../utils/getRoleOrganisaatioOid';
 
 const HomeContainer = styled.div`
   padding-top: ${spacing(3)}
@@ -24,6 +30,28 @@ const HomeContainer = styled.div`
   background-color: ${getThemeProp('palette.mainBackground')};
 `;
 
+const getFirstOrganisaatioOidWithRequiredRole = user => {
+  const userRoles = getUserRoles(user);
+
+  if (userRoles.length === 0) {
+    return undefined;
+  }
+
+  const validRole = userRoles.find(role => {
+    return (
+      [KOULUTUS_ROLE, TOTEUTUS_ROLE, HAKU_ROLE, VALINTAPERUSTE_ROLE]
+        .map(
+          roleName =>
+            role.startsWith(`${roleName}_CRUD`) ||
+            role.startsWith(`${roleName}_READ`),
+        )
+        .some(Boolean) && getRoleOrganisaatioOid(role)
+    );
+  });
+
+  return validRole ? getRoleOrganisaatioOid(validRole) : undefined;
+};
+
 const HomeRoute = ({
   kayttajaOid,
   organisaatioOid,
@@ -32,12 +60,12 @@ const HomeRoute = ({
   const { t } = useTranslation();
   const user = useAuthorizedUser();
 
-  const organisaatioOids = useMemo(
-    () => getUserOrganisaatiotWithRoles(user, [KOUTA_CRUD_ROLE]),
+  const firstOrganisaatioOid = useMemo(
+    () => getFirstOrganisaatioOidWithRequiredRole(user),
     [user],
   );
 
-  if (organisaatioOids.length === 0) {
+  if (!firstOrganisaatioOid) {
     return (
       <Alert
         variant="danger"
@@ -46,8 +74,6 @@ const HomeRoute = ({
       />
     );
   }
-
-  const firstOrganisaatioOid = organisaatioOids[0];
 
   if (!organisaatioOid) {
     return (
@@ -65,11 +91,7 @@ const HomeRoute = ({
   }
 
   return (
-    <HomeContent
-      organisaatioOids={organisaatioOids}
-      kayttajaOid={kayttajaOid}
-      organisaatioOid={organisaatioOid}
-    />
+    <HomeContent kayttajaOid={kayttajaOid} organisaatioOid={organisaatioOid} />
   );
 };
 

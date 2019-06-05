@@ -60,7 +60,7 @@ const makeTableColumns = t => [
   makeMuokkaajaColumn(t),
 ];
 
-const ValintaperusteetSection = ({ organisaatioOid }) => {
+const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
   const {
@@ -113,7 +113,7 @@ const ValintaperusteetSection = ({ organisaatioOid }) => {
     <ListCollapse
       icon="select_all"
       header={t('yleiset.valintaperusteet')}
-      actions={<Actions organisaatioOid={organisaatioOid} />}
+      actions={canCreate ? <Actions organisaatioOid={organisaatioOid} /> : null}
       defaultOpen
     >
       <Spacing marginBottom={2}>

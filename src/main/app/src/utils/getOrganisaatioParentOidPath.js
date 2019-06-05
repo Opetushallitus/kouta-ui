@@ -16,7 +16,7 @@ const getOrganisaatioParentOidPath = organisaatio => {
   const pathStr = get(organisaatio, 'parentOidPath');
 
   if (!isString(pathStr)) {
-    return [];
+    return get(organisaatio, 'oid') ? [organisaatio.oid] : [];
   }
 
   const separator = getSeparator(pathStr);

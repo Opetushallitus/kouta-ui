@@ -93,7 +93,6 @@ const DrawerContent = ({
   onOrganisaatioChange,
   onClose,
   organisaatioFavourites,
-  organisaatioOids,
   onToggleFavourite,
 }) => {
   const { t } = useTranslation();
@@ -105,7 +104,6 @@ const DrawerContent = ({
   );
 
   const { hierarkia, isLoading: loadingHierarkia } = useOrganisaatioHierarkia({
-    includedOids: organisaatioOids,
     name: debounceNameFilter,
   });
 

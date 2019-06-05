@@ -69,7 +69,7 @@ const makeTableColumns = t => [
   },
 ];
 
-const KoulutuksetSection = ({ organisaatioOid }) => {
+const KoulutuksetSection = ({ organisaatioOid, canCreate }) => {
   const { t } = useTranslation();
 
   const {
@@ -117,7 +117,7 @@ const KoulutuksetSection = ({ organisaatioOid }) => {
     <ListCollapse
       icon="access_time"
       header={t('yleiset.haut')}
-      actions={<Actions organisaatioOid={organisaatioOid} />}
+      actions={canCreate ? <Actions organisaatioOid={organisaatioOid} /> : null}
       defaultOpen
     >
       <Spacing marginBottom={2}>

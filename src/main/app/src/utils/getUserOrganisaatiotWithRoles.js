@@ -1,16 +1,6 @@
 import getUserRoles from './getUserRoles';
-import isOid from './isOid';
-import { isArray, isString } from './index';
-
-const getRoleOrganisaatioOid = role => {
-  if (!isString(role)) {
-    return undefined;
-  }
-
-  const oidStr = role.slice(role.lastIndexOf('_') + 1, role.length);
-
-  return isOid(oidStr) ? oidStr : undefined;
-};
+import getRoleOrganisaatioOid from './getRoleOrganisaatioOid';
+import { isArray } from './index';
 
 const getUserOrganisaatiotWithRoles = (user, roles) => {
   if (!isArray(roles) || !user) {
@@ -19,17 +9,25 @@ const getUserOrganisaatiotWithRoles = (user, roles) => {
 
   const userRoles = getUserRoles(user);
 
-  return userRoles
-    .map(role => {
-      const isMatch = Boolean(roles.find(r => role.startsWith(r)));
+  const organisaatioOids = [];
 
-      if (!isMatch) {
-        return undefined;
-      }
+  for (let role of userRoles) {
+    const isMatch = Boolean(roles.find(r => role.startsWith(r)));
 
-      return getRoleOrganisaatioOid(role);
-    })
-    .filter(Boolean);
+    if (!isMatch) {
+      continue;
+    }
+
+    const oid = getRoleOrganisaatioOid(role);
+
+    if (!oid) {
+      continue;
+    }
+
+    organisaatioOids.push(oid);
+  }
+
+  return organisaatioOids;
 };
 
 export default getUserOrganisaatiotWithRoles;

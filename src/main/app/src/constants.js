@@ -73,7 +73,19 @@ export const POHJAVALINTA = {
 
 export const OPETUSHALLITUS_ORGANISAATIO_OID = '1.2.246.562.10.00000000001';
 
+export const KOUTA_ROLE = 'APP_TARJONTA';
+
 export const KOUTA_CRUD_ROLE = 'APP_TARJONTA_CRUD';
+
+export const KOULUTUS_ROLE = 'APP_TARJONTA';
+
+export const TOTEUTUS_ROLE = 'APP_TARJONTA';
+
+export const HAKUKOHDE_ROLE = 'APP_TARJONTA';
+
+export const HAKU_ROLE = 'APP_TARJONTA';
+
+export const VALINTAPERUSTE_ROLE = 'APP_TARJONTA';
 
 export const HAKUTAPA_YHTEISHAKU_KOODI_URI = 'hakutapa_01';
 

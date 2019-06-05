@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Field } from 'redux-form';
 
 import OrganisaatioHierarkiaTreeSelect from '../OrganisaatioHierarkiaTreeSelect';
@@ -6,7 +6,8 @@ import useTranslation from '../useTranslation';
 import useOrganisaatioHierarkia from '../useOrganisaatioHierarkia';
 import { createFormFieldComponent } from '../FormFields';
 import { getTestIdProps } from '../../utils';
-import useAuthorizedUser from '../useAuthorizedUser';
+import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
+import { KOULUTUS_ROLE } from '../../constants';
 
 const JarjestajatField = createFormFieldComponent(
   OrganisaatioHierarkiaTreeSelect,
@@ -19,14 +20,21 @@ const JarjestajatField = createFormFieldComponent(
 const OrganizationSection = ({ organisaatioOid, name }) => {
   const { t } = useTranslation();
   const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid);
-  const user = useAuthorizedUser();
+  const roleBuilder = useAuthorizedUserRoleBuilder();
+
+  const getIsDisabled = useCallback(
+    organisaatio => {
+      return !roleBuilder.hasWrite(KOULUTUS_ROLE, organisaatio).result();
+    },
+    [roleBuilder],
+  );
 
   return (
     <div {...getTestIdProps('jarjestajatSelection')}>
       <Field
         name={name}
         hierarkia={hierarkia}
-        user={user}
+        getIsDisabled={getIsDisabled}
         component={JarjestajatField}
         label={t('koulutuslomake.valitseJarjestajat')}
       />

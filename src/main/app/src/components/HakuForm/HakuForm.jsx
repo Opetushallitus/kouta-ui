@@ -18,13 +18,12 @@ import Flex from '../Flex';
 import Button from '../Button';
 import useTranslation from '../useTranslation';
 import LomakeSection from './LomakeSection';
-import useAuthorizedUser from '../useAuthorizedUser';
+import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
 import ValintakoeSection from './ValintakoeSection';
-import userHasOrganisaatioRoles from '../../utils/userHasOrganisaatioRoles';
 
 import {
   HAKUTAPA_YHTEISHAKU_KOODI_URI,
-  KOUTA_CRUD_ROLE,
+  HAKU_ROLE,
   OPETUSHALLITUS_ORGANISAATIO_OID,
 } from '../../constants';
 
@@ -66,14 +65,12 @@ const HakuForm = ({
   haku: hakuProp = null,
 }) => {
   const { t } = useTranslation();
-  const user = useAuthorizedUser();
+  const roleBuilder = useAuthorizedUserRoleBuilder();
 
   const isOphVirkailija = useMemo(
     () =>
-      userHasOrganisaatioRoles(user, OPETUSHALLITUS_ORGANISAATIO_OID, [
-        KOUTA_CRUD_ROLE,
-      ]),
-    [user],
+      roleBuilder.hasWrite(HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID).result(),
+    [roleBuilder],
   );
 
   return (

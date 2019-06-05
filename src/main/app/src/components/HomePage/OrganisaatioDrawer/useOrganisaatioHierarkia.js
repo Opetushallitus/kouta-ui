@@ -1,26 +1,25 @@
-import { useMemo } from 'react';
+import { useMemo, useCallback } from 'react';
 
 import { isString, isArray } from '../../../utils';
 import { getOrganisaatioHierarkia } from '../../../apiUtils';
 import useApiAsync from '../../useApiAsync';
-import useAuthorizedUser from '../../useAuthorizedUser';
-import userHasOrganisaatioRoles from '../../../utils/userHasOrganisaatioRoles';
-import { KOUTA_CRUD_ROLE } from '../../../constants';
+import useAuthorizedUserRoleBuilder from '../../useAuthorizedUserRoleBuilder';
 
-const hasRequiredRoles = (user, organisaatioOid) => {
-  return userHasOrganisaatioRoles(user, organisaatioOid, [KOUTA_CRUD_ROLE]);
-};
+import {
+  KOULUTUS_ROLE,
+  TOTEUTUS_ROLE,
+  HAKU_ROLE,
+  VALINTAPERUSTE_ROLE,
+} from '../../../constants';
 
-const filterHierarkiaByUser = (hierarkia, user) => {
+const filterHierarkia = (hierarkia, filterFn) => {
   return hierarkia.flatMap(org => [
-    ...(hasRequiredRoles(user, org.oid)
-      ? [org]
-      : filterHierarkiaByUser(org.children, user)),
+    ...(filterFn(org) ? [org] : filterHierarkia(org.children, filterFn)),
   ]);
 };
 
 const useOrganisaatioHierarkia = ({ name }) => {
-  const user = useAuthorizedUser();
+  const roleBuilder = useAuthorizedUserRoleBuilder();
 
   const promiseFn = useMemo(() => {
     if (!isString(name) || name.length < 3) {
@@ -36,9 +35,21 @@ const useOrganisaatioHierarkia = ({ name }) => {
     watch: name,
   });
 
+  const hasRequiredRoles = useCallback(
+    organisaatio => {
+      return roleBuilder
+        .hasReadOneOf(
+          [KOULUTUS_ROLE, TOTEUTUS_ROLE, HAKU_ROLE, VALINTAPERUSTE_ROLE],
+          organisaatio,
+        )
+        .result();
+    },
+    [roleBuilder],
+  );
+
   const hierarkia = useMemo(() => {
-    return isArray(data) && user ? filterHierarkiaByUser(data, user) : [];
-  }, [data, user]);
+    return isArray(data) ? filterHierarkia(data, hasRequiredRoles) : [];
+  }, [data, hasRequiredRoles]);
 
   return { hierarkia, ...rest };
 };

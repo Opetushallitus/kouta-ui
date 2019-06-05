@@ -6,6 +6,7 @@ import { getThemeProp } from '../../theme';
 const CheckboxContainer = styled.div`
   display: inline-block;
   position: relative;
+  top: 0.15em;
 `;
 
 const Icon = styled.svg`
@@ -66,7 +67,7 @@ const Label = styled.label`
   display: flex;
   line-height: 1.5;
   color: ${getThemeProp('palette.text.primary')};
-  align-items: center;
+  align-items: flex-start;
 
   ${({ disabled }) =>
     disabled &&

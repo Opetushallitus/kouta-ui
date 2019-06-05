@@ -4,6 +4,7 @@ exports[`renders correctly 1`] = `
 .c2 {
   display: inline-block;
   position: relative;
+  top: 0.15em;
 }
 
 .c7 {
@@ -58,10 +59,10 @@ exports[`renders correctly 1`] = `
   display: flex;
   line-height: 1.5;
   color: #666666;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
 }
 
 .c8 {

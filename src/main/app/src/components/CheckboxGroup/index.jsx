@@ -1,7 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import Checkbox from '../Checkbox';
 import { isArray } from '../../utils';
+
+const CheckboxContainer = styled.div`
+  margin-bottom: 4px;
+`;
 
 const cleanValue = (value, options) => {
   const optionValues = options.map(({ value }) => value);
@@ -34,16 +39,22 @@ const CheckboxGroup = ({
   disabled = false,
 }) => {
   return options.map(({ value: optionValue, label }) => (
-    <Checkbox
-      key={optionValue}
-      checked={value.includes(optionValue)}
-      onChange={makeOnCheckboxChange({ value, onChange, optionValue, options })}
-      disabled={disabled}
-      name={optionValue}
-      error={error}
-    >
-      {label}
-    </Checkbox>
+    <CheckboxContainer key={optionValue}>
+      <Checkbox
+        checked={value.includes(optionValue)}
+        onChange={makeOnCheckboxChange({
+          value,
+          onChange,
+          optionValue,
+          options,
+        })}
+        disabled={disabled}
+        name={optionValue}
+        error={error}
+      >
+        {label}
+      </Checkbox>
+    </CheckboxContainer>
   ));
 };
 

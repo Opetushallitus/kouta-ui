@@ -67,20 +67,6 @@ class RoleBuilder {
   }
 
   hasRead(role, organisaatio) {
-    console.log(
-      this.roleLookup,
-      role,
-      organisaatio,
-      Boolean(
-        resolveOidPath(organisaatio).find(oid => {
-          return (
-            this.hasOrganisaatioRole(`${role}_READ`, oid) ||
-            this.hasOrganisaatioRole(`${role}_CRUD`, oid)
-          );
-        }),
-      ),
-    );
-
     return this.clone(
       Boolean(
         resolveOidPath(organisaatio).find(oid => {

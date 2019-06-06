@@ -16,11 +16,11 @@ const isLomakeEditoriUrl = url => {
   return /lomake-editori/.test(url);
 };
 
-const oneHour = 3600000;
+const threeHours = 10800000;
 
 const cache = setupCache({
-  limit: 500,
-  maxAge: oneHour,
+  limit: 200,
+  maxAge: threeHours,
   exclude: {
     query: false,
     filter: config => {

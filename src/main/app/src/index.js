@@ -19,7 +19,7 @@ import createHttpClient from './httpClient';
 
 const history = createBrowserHistory({ basename: 'kouta' });
 
-serviceWorker.unregister();
+serviceWorker.register();
 
 const isDev = process.env.NODE_ENV === 'development';
 

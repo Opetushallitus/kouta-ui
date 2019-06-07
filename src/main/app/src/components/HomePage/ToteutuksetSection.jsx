@@ -110,7 +110,7 @@ const ToteutuksetSection = ({ organisaatioOid }) => {
 
   return (
     <ListCollapse icon="settings" header={t('etusivu.koulutuksenToteutukset')} defaultOpen>
-      <Spacing marginBottom={2}>
+      <Spacing marginBottom={3}>
         <Filters {...filtersProps} nimiPlaceholder={t('etusivu.haeToteutuksia')} />
       </Spacing>
 
@@ -128,7 +128,7 @@ const ToteutuksetSection = ({ organisaatioOid }) => {
         <Spin center />
       )}
 
-      <Flex marginTop={2}>
+      <Flex marginTop={3} justifyCenter>
         <Pagination value={page} onChange={setPage} pageCount={pageCount} />
       </Flex>
     </ListCollapse>

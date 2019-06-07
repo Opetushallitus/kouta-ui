@@ -12,16 +12,18 @@ const UserGate = ({ fallback = null, children = null, onUserChange }) => {
   const { i18n } = useTranslation();
 
   useEffect(() => {
+    if (data && data.lang) {
+      i18n.changeLanguage(data.lang);
+    }
+  }, [data, i18n]);
+
+  useEffect(() => {
     if (!data) {
       return;
     }
 
-    if (data.lang) {
-      i18n.changeLanguage(data.lang);
-    }
-
     onUserChange(data);
-  }, [data, i18n, onUserChange]);
+  }, [data, onUserChange]);
 
   return !data ? (
     fallback

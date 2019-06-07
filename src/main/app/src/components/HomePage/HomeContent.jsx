@@ -147,13 +147,14 @@ const HomeContent = ({
         {t('etusivu.koulutuksetJaHaut')}
       </Typography>
       {organisaatio ? (
-        listSections.map((section, index) =>
-          index < listSections.length - 1 ? (
-            <Spacing marginBottom={4}>{section}</Spacing>
-          ) : (
-            section
-          ),
-        )
+        listSections.map((section, index) => (
+          <Spacing
+            marginBottom={index < listSections.length - 1 ? 4 : 0}
+            key={index}
+          >
+            {section}
+          </Spacing>
+        ))
       ) : (
         <Spin center />
       )}

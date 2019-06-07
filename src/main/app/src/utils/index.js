@@ -13,9 +13,10 @@ export const isNumber = value => typeof value === 'number';
 
 export const isDate = value => value instanceof Date;
 
-export const isObject = value => toString.call(value) === '[object Object]';
+export const isObject = value =>
+  Object.prototype.toString.call(value) === '[object Object]';
 
-export const isArray = value => toString.call(value) === '[object Array]';
+export const isArray = value => Array.isArray(value);
 
 export const isValidDate = value => isDate(value) && !isNaN(value);
 

@@ -46,6 +46,7 @@ const EiHakuaFields = ({ baseName, t, language }) => {
 const LomakeSelect = ({
   input: { value, onBlur, ...restInput },
   getShowUrl,
+  t,
   ...props
 }) => {
   const url = isFunction(getShowUrl) ? getShowUrl(value) : null;
@@ -62,7 +63,7 @@ const LomakeSelect = ({
             variant="outlined"
             color="primary"
           >
-            Avaa lomake
+            {t('yleiset.avaaLomake')}
           </Button>
         </Spacing>
       ) : null}
@@ -96,6 +97,7 @@ const AdditionalTyyppiFields = ({
         options={ataruOptions}
         label={t('yleiset.valitseHakulomake')}
         getShowUrl={getShowUrl}
+        t={t}
       />
     );
   }
@@ -109,7 +111,6 @@ const AdditionalTyyppiFields = ({
 
 const defaultTyypit = [
   HAKULOMAKETYYPPI.ATARU,
-  HAKULOMAKETYYPPI.HAKUAPP,
   HAKULOMAKETYYPPI.MUU,
   HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA,
 ];

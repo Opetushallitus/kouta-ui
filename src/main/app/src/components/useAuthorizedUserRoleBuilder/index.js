@@ -4,7 +4,7 @@ import useAuthorizedUser from '../useAuthorizedUser';
 import getUserRoles from '../../utils/getUserRoles';
 import createRoleBuilder from '../../utils/createRoleBuilder';
 
-export const useAuthorizedUserRoleBuilder = roles => {
+export const useAuthorizedUserRoleBuilder = () => {
   const user = useAuthorizedUser();
 
   const roleBuilder = useMemo(

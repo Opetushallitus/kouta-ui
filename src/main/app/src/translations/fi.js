@@ -157,6 +157,7 @@ export default {
     kayttooikeusVirheilmoitus: 'Käyttöoikeuksissasi on puutteita',
     kayttooikeusVirheilmoitusKuvaus:
       'Käyttöoikeuksien tarkistuksessa tapahtui virhe. Tarkistathan, että käyttäjälläsi on tarvittavat käyttöoikeudet',
+    avaaLomake: 'Avaa lomake',
   },
   validointivirheet: {
     syotaArvo: 'Syötä kentälle arvo',

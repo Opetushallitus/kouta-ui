@@ -59,6 +59,18 @@ class RoleBuilder {
     this.roleLookup = roleLookup ? roleLookup : createRoleLookup(roles);
   }
 
+  hasOneOfFn(getCheckFn, roles, organisaatio) {
+    return roles.reduce((acc, curr) => {
+      return acc.or(rb => getCheckFn(rb)(curr, organisaatio));
+    }, this.clone(false));
+  }
+
+  hasAllFn(getCheckFn, roles, organisaatio) {
+    return roles.reduce((acc, curr) => {
+      return acc.and(rb => getCheckFn(rb)(curr, organisaatio));
+    }, this.clone(true));
+  }
+
   hasOrganisaatioRole(role, organisaatioOid) {
     return (
       this.roleLookup.hasOwnProperty(organisaatioOid) &&
@@ -80,15 +92,19 @@ class RoleBuilder {
   }
 
   hasReadOneOf(roles, organisaatio) {
-    return roles.reduce((acc, curr) => {
-      return acc.or(rb => rb.hasRead(curr, organisaatio));
-    }, this.clone(false));
+    return this.hasOneOfFn(
+      rb => (...args) => rb.hasRead(...args),
+      roles,
+      organisaatio,
+    );
   }
 
   hasReadAll(roles, organisaatio) {
-    return roles.reduce((acc, curr) => {
-      return acc.and(rb => rb.hasRead(curr, organisaatio));
-    }, this.clone(true));
+    return this.hasAllFn(
+      rb => (...args) => rb.hasRead(...args),
+      roles,
+      organisaatio,
+    );
   }
 
   hasWrite(role, organisaatio) {
@@ -105,15 +121,19 @@ class RoleBuilder {
   }
 
   hasWriteOneOf(roles, organisaatio) {
-    return roles.reduce((acc, curr) => {
-      return acc.or(rb => rb.hasWrite(curr, organisaatio));
-    }, this.clone(false));
+    return this.hasOneOfFn(
+      rb => (...args) => rb.hasWrite(...args),
+      roles,
+      organisaatio,
+    );
   }
 
   hasWriteAll(roles, organisaatio) {
-    return roles.reduce((acc, curr) => {
-      return acc.and(rb => rb.hasWrite(curr, organisaatio));
-    }, this.clone(true));
+    return this.hasAllFn(
+      rb => (...args) => rb.hasWrite(...args),
+      roles,
+      organisaatio,
+    );
   }
 
   hasCrud(role, organisaatio) {
@@ -127,15 +147,19 @@ class RoleBuilder {
   }
 
   hasCrudOneOf(roles, organisaatio) {
-    return roles.reduce((acc, curr) => {
-      return acc.or(rb => rb.hasCrud(curr, organisaatio));
-    }, this.clone(false));
+    return this.hasOneOfFn(
+      rb => (...args) => rb.hasCrud(...args),
+      roles,
+      organisaatio,
+    );
   }
 
   hasCrudAll(roles, organisaatio) {
-    return roles.reduce((acc, curr) => {
-      return acc.and(rb => rb.hasCrud(curr, organisaatio));
-    }, this.clone(true));
+    return this.hasAllFn(
+      rb => (...args) => rb.hasCrud(...args),
+      roles,
+      organisaatio,
+    );
   }
 
   clone(result) {

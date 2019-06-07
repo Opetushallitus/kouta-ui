@@ -33,7 +33,7 @@ test('hasReadAll works correctly', () => {
     rb1.hasReadAll(['TEST', 'TEST2'], makeOrganisaatio(['1.1.1'])).result(),
   ).toBe(true);
   expect(
-    rb1.hasReadOneOf(['TEST2', 'TEST3'], makeOrganisaatio(['1.1.3'])).result(),
+    rb1.hasReadAll(['TEST2', 'TEST3'], makeOrganisaatio(['1.1.3'])).result(),
   ).toBe(false);
 });
 
@@ -70,6 +70,32 @@ test('hasWriteAll works correctly', () => {
     rb1.hasWriteAll(['TEST', 'TEST2'], makeOrganisaatio(['1.1.1'])).result(),
   ).toBe(true);
   expect(
-    rb1.hasWriteOneOf(['TEST2', 'TEST3'], makeOrganisaatio(['1.1.3'])).result(),
+    rb1.hasWriteAll(['TEST2', 'TEST3'], makeOrganisaatio(['1.1.3'])).result(),
+  ).toBe(false);
+});
+
+test('hasCrudOneOf works correctly', () => {
+  const rb1 = createRoleBuilder({
+    roles: ['TEST_CRUD_1.1.1', 'TEST_CRUD_1.1.2'],
+  });
+
+  expect(
+    rb1.hasCrudOneOf(['TEST', 'TEST2'], makeOrganisaatio(['1.1.1'])).result(),
+  ).toBe(true);
+  expect(
+    rb1.hasCrudOneOf(['TEST2', 'TEST3'], makeOrganisaatio(['1.1.3'])).result(),
+  ).toBe(false);
+});
+
+test('hasCrudAll works correctly', () => {
+  const rb1 = createRoleBuilder({
+    roles: ['TEST_CRUD_1.1.1', 'TEST2_CRUD_1.1.1'],
+  });
+
+  expect(
+    rb1.hasCrudAll(['TEST', 'TEST2'], makeOrganisaatio(['1.1.1'])).result(),
+  ).toBe(true);
+  expect(
+    rb1.hasCrudAll(['TEST2', 'TEST3'], makeOrganisaatio(['1.1.3'])).result(),
   ).toBe(false);
 });

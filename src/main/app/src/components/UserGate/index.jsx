@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import { update } from '../../state/me';
+import { update as updateMe } from '../../state/me';
 import { getMe } from '../../apiUtils';
 import useApiAsync from '../useApiAsync';
 import useTranslation from '../useTranslation';
 import AuthorizedUserContext from '../AuthorizedUserContext';
 
-const UserGate = ({ fallback = null, children = null, onUserChange }) => {
+const UserGate = ({ fallback = null, children = null }) => {
   const { data } = useApiAsync({ promiseFn: getMe });
   const { i18n } = useTranslation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (data && data.lang) {
@@ -22,8 +23,8 @@ const UserGate = ({ fallback = null, children = null, onUserChange }) => {
       return;
     }
 
-    onUserChange(data);
-  }, [data, onUserChange]);
+    dispatch(updateMe(data));
+  }, [data, dispatch]);
 
   return !data ? (
     fallback
@@ -34,9 +35,4 @@ const UserGate = ({ fallback = null, children = null, onUserChange }) => {
   );
 };
 
-export default connect(
-  null,
-  dispatch => ({
-    onUserChange: user => dispatch(update(user)),
-  }),
-)(UserGate);
+export default UserGate;

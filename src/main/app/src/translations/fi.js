@@ -18,7 +18,7 @@ export default {
     eiValittaviaKohteita: 'Valittavia kohteita ei löytynyt',
     luoKohde: 'Luo kohde "{{kohde}}"',
     yritaUudelleen: 'Yritä uudelleen',
-    virheIlmoitus: 'Jokin meni vikaan',
+    virheilmoitus: 'Jokin meni vikaan',
     koulutus: 'Koulutus',
     toteutus: 'Toteutus',
     haku: 'Haku',
@@ -140,7 +140,7 @@ export default {
     ladatutTiedostot: 'Ladatut tiedostot',
     varmistaLomakkeenKentat:
       'Varmistathan että olet täyttänyt lomakkeen kaikki pakolliset kentät',
-    virheIlmoitusKuvaus:
+    virheilmoitusKuvaus:
       'Jos virhe aiheuttaa ongelmia järjestelmän käytössä, yritä päivittää sivu, tai ota yhteyttä tukeen',
     valitseMitaHakulomakettaKaytetaan: 'Valitse mitä hakulomaketta käytetään',
     valitseKoulutustyyppi: 'Valitse koulutustyyppi',
@@ -148,6 +148,16 @@ export default {
     kopioiTiedot: 'Kopioi tiedot',
     soraKuvaus: 'SORA-kuvaus',
     luoUusiSoraKuvaus: 'Luo uusi SORA-kuvaus',
+    lukiokoulutus: 'Lukiokoulutus',
+    lisaaYhteyshenkilo: 'Lisää yhteyshenkilö',
+    puhelinnumero: 'Puhelinnumero',
+    valitseValintakoetyypit: 'Valitse valintakoetyypit',
+    lisaaTilaisuus: 'Lisää tilaisuus',
+    valintakoe: 'Valintakoe',
+    kayttooikeusVirheilmoitus: 'Käyttöoikeuksissasi on puutteita',
+    kayttooikeusVirheilmoitusKuvaus:
+      'Käyttöoikeuksien tarkistuksessa tapahtui virhe. Tarkistathan, että käyttäjälläsi on tarvittavat käyttöoikeudet',
+    avaaLomake: 'Avaa lomake',
   },
   validointivirheet: {
     syotaArvo: 'Syötä kentälle arvo',
@@ -160,6 +170,13 @@ export default {
     hakuapp: 'Käytetään järjestelmän hakulomaketta',
     muu: 'Käytetään muuta hakulomaketta',
     eiSahkoistaHakua: 'Ei sähköistä hakua',
+  },
+  liitteenToimitustapaValinnat: {
+    valitseToimitustapa: 'Valitse liitteen toimitustapa',
+    toimitetaanLahettamisenYhteydessa:
+      'Toimitetaan lomakkeen lähettämisen yhteydessä',
+    jarjestajanOsoite: 'Koulutuksen järjestäjän hakijapalvelun osoite',
+    muuOsoite: 'Muu osoite',
   },
   etusivu: {
     koulutuksetJaHaut: 'Koulutukset ja haut',
@@ -174,6 +191,9 @@ export default {
     haeHakuja: 'Hae hakuja',
     haeToteutuksia: 'Hae toteutuksia',
     haeValintaperusteita: 'Hae valintaperusteita',
+    eiOikeuksiaVirheilmoitus: 'Käyttöoikeuksissasi on puutteita',
+    eiOikeuksiaVirheilmoitusKuvaus:
+      'Käyttäjältäsi puuttuu järjestelmän käyttöön vaadittavia rooleja',
   },
   koulutuslomake: {
     koulutuksenTiedot: 'Koulutuksen tiedot',
@@ -199,6 +219,11 @@ export default {
     toteutuksenLiittaminenKoulutukseen: 'Toteutuksen liittäminen koulutukseen',
     kuvausEiOleSaatavilla: 'Kuvaus ei ole saatavilla',
     valitseKoulutustyyppi: 'Valitse koulutustyyppi',
+    valitseKoulutusalat: 'Valitse koulutusalat',
+    pohjavalintaInfo:
+      'Voit halutessasi käyttää aiemmin luotuja koulutuksia uuden lomakkeen esitäytettynä pohjana tai kopioida vanhan koulutuksen tiedot.',
+    lisatiedotInfo:
+      'Voit halutessasi lisätä vapaasti täytettäviä osioita, jotka antavat tarkempaa tietoa koulutuksesta.',
   },
   toteutuslomake: {
     toteutuksellaEiHakukohteita:
@@ -229,6 +254,7 @@ export default {
       'Koulutuksen näyttämiseen liittyvät tiedot',
     linkinOtsikko: 'Linkin otsikko',
     lisaaLinkki: 'Lisää linkki',
+    kaytossaLukuvuosimaksu: 'Käytössä lukuvuosimaksu',
   },
   hakulomake: {
     haunNimi: 'Haun nimi',
@@ -302,7 +328,7 @@ export default {
     ehdotKielitaidonOsoitukseen:
       'Ehdot kielitaidon osoitukseen, tai vapautukseen',
     lisaaEhto: 'Lisää ehto',
-    valintaperusteenLoppukuvaus: 'Valintaperusteen loppukuvaus',
+    valintaperusteenKuvaus: 'Valintaperusteen kuvaus',
     luoUusiValintaperuste: 'Luo uusi valintaperuste',
     kopioiPohjaksiValintaperuste:
       'Kopioi pohjaksi aiemmin luotu valintaperuste',
@@ -310,6 +336,8 @@ export default {
     valintatapajononNimi: 'Valintatapajonon nimi',
     valitseKoulutustyyppi: 'Valitse koulutustyyppi',
     valitseSoraKuvaus: 'Valitse käytettävä SORA-kuvaus',
+    kuvauksenNimi: 'Valintaperusteen kuvauksen nimi',
+    kuvauksenTarkenne: 'Kuvauksen tarkenne',
   },
   soraKuvausLomake: {
     soraKuvauksenTiedot: 'SORA-kuvauksen tiedot',

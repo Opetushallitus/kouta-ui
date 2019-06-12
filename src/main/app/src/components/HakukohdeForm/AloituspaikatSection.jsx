@@ -2,12 +2,12 @@ import React from 'react';
 import { Field } from 'redux-form';
 
 import Flex, { FlexItem } from '../Flex';
-import { KORKEAKOULUKOULUTUSTYYPIT } from '../../constants';
 import useTranslation from '../useTranslation';
 import { FormFieldInput } from '../FormFields';
+import isKorkeakouluKoulutustyyppi from '../../utils/isKorkeakouluKoulutustyyppi';
 
 const AloituspaikatSection = ({ koulutustyyppi }) => {
-  const isKorkeakoulu = KORKEAKOULUKOULUTUSTYYPIT.includes(koulutustyyppi);
+  const isKorkeakoulu = isKorkeakouluKoulutustyyppi(koulutustyyppi);
   const { t } = useTranslation();
 
   const aloituspaikatField = (

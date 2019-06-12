@@ -1,10 +1,8 @@
 import React, { useMemo } from 'react';
 import { Field, FieldArray } from 'redux-form';
 
-import Typography from '../Typography';
 import LanguageSelect from '../LanguageSelect';
 import Spacing from '../Spacing';
-import Divider from '../Divider';
 import Button from '../Button';
 import { VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI } from '../../constants';
 import Flex, { FlexItem } from '../Flex';
@@ -12,6 +10,9 @@ import Checkbox from '../Checkbox';
 import { noop, getTestIdProps } from '../../utils';
 import useKoodistoOptions from '../useKoodistoOptions';
 import useTranslation from '../useTranslation';
+import FieldArrayList from '../FieldArrayList';
+import DividerHeading from '../DividerHeading';
+import FormLabel from '../FormLabel';
 
 import {
   FormFieldCheckboxGroup,
@@ -118,9 +119,9 @@ const renderVaatimuksetField = ({
 }) => {
   return (
     <div {...getTestIdProps('kielitaitovaatimuslista')}>
-      {fields.map((vaatimus, index) => {
-        return (
-          <Spacing key={index}>
+      <FieldArrayList fields={fields}>
+        {({ field: vaatimus }) => (
+          <>
             <Spacing marginBottom={2} {...getTestIdProps('kielivalinta')}>
               <Field
                 name={`${vaatimus}.kieli`}
@@ -129,76 +130,60 @@ const renderVaatimuksetField = ({
               />
             </Spacing>
 
-            <Flex>
-              <FlexItem grow={1} {...getTestIdProps('tyyppivalinta')}>
-                <Typography variant="h6" marginBottom={1}>
-                  {t('valintaperustelomake.valitseVaatimustyypit')}
-                </Typography>
+            <Spacing marginBottom={4} {...getTestIdProps('tyyppivalinta')}>
+              <FormLabel>
+                {t('valintaperustelomake.valitseVaatimustyypit')}
+              </FormLabel>
 
-                {kielitaitoOptions.map(({ value, label }, index) => (
-                  <Field
-                    key={value}
-                    name={`${vaatimus}.tyyppi.${value}`}
-                    component={renderVaatimustyyppiField}
-                    vaatimus={vaatimus}
-                    kuvausOptions={kuvausOptions}
-                    label={label}
-                    vaatimusTyyppi={value}
-                    isLast={index === kielitaitoOptions.length - 1}
-                    t={t}
-                  />
-                ))}
-              </FlexItem>
-              <FlexItem
-                grow={0}
-                basis="40%"
-                paddingLeft={4}
-                {...getTestIdProps('osoitusvalinta')}
-              >
-                <Spacing marginBottom={2}>
-                  <Field
-                    name={`${vaatimus}.osoitustavat`}
-                    component={FormFieldCheckboxGroup}
-                    options={osoitusOptions}
-                    label={t(
-                      'valintaperustelomake.ehdotKielitaidonOsoitukseen',
-                    )}
-                  />
-                </Spacing>
-                <FieldArray
-                  name={`${vaatimus}.muutOsoitustavat`}
-                  component={renderMuutOsoitustavatField}
-                  language={language}
+              {kielitaitoOptions.map(({ value, label }, index) => (
+                <Field
+                  key={value}
+                  name={`${vaatimus}.tyyppi.${value}`}
+                  component={renderVaatimustyyppiField}
+                  vaatimus={vaatimus}
+                  kuvausOptions={kuvausOptions}
+                  label={label}
+                  vaatimusTyyppi={value}
+                  isLast={index === kielitaitoOptions.length - 1}
                   t={t}
                 />
-              </FlexItem>
-            </Flex>
+              ))}
+            </Spacing>
 
-            <Flex marginTop={2} justifyEnd>
-              <Button
-                type="button"
-                variant="outlined"
-                color="secondary"
-                onClick={() => {
-                  fields.remove(index);
-                }}
-              >
-                {t('yleiset.poista')}
-              </Button>
-            </Flex>
-            <Divider marginTop={3} marginBottom={3} />
-          </Spacing>
-        );
-      })}
-      <Button
-        type="button"
-        onClick={() => {
-          fields.push({});
-        }}
-        {...getTestIdProps('lisaaButton')}
-      >
-        {t('valintaperustelomake.lisaaKielitaitovaatimus')}
-      </Button>
+            <DividerHeading>
+              {t('valintaperustelomake.ehdotKielitaidonOsoitukseen')}
+            </DividerHeading>
+
+            <div {...getTestIdProps('osoitusvalinta')}>
+              <Spacing marginBottom={2}>
+                <Field
+                  name={`${vaatimus}.osoitustavat`}
+                  component={FormFieldCheckboxGroup}
+                  options={osoitusOptions}
+                />
+              </Spacing>
+              <FieldArray
+                name={`${vaatimus}.muutOsoitustavat`}
+                component={renderMuutOsoitustavatField}
+                language={language}
+                t={t}
+              />
+            </div>
+          </>
+        )}
+      </FieldArrayList>
+      <Flex justifyCenter marginTop={fields.length > 0 ? 4 : 0}>
+        <Button
+          type="button"
+          variant="outlined"
+          onClick={() => {
+            fields.push({});
+          }}
+          {...getTestIdProps('lisaaButton')}
+        >
+          {t('valintaperustelomake.lisaaKielitaitovaatimus')}
+        </Button>
+      </Flex>
     </div>
   );
 };
@@ -243,7 +228,7 @@ const renderMuutOsoitustavatField = ({ fields, language, t }) => {
   );
 };
 
-const KielitaitovaatimuksetSection = ({ language }) => {
+const KielitaitovaatimuksetSection = ({ language, name }) => {
   const { t } = useTranslation();
 
   const { options: fullOsoitusOptions } = useKoodistoOptions({
@@ -269,7 +254,7 @@ const KielitaitovaatimuksetSection = ({ language }) => {
 
   return (
     <FieldArray
-      name="kielet"
+      name={name}
       component={renderVaatimuksetField}
       kielitaitoOptions={kielitaitoOptions}
       kuvausOptions={kuvausOptions}

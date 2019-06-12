@@ -84,6 +84,7 @@ const renderHakuajatFields = ({ fields, t }) => (
     ))}
     <Button
       type="button"
+      variant="outlined"
       onClick={() => {
         fields.push({});
       }}

@@ -4,6 +4,8 @@ import {
   getSelectOption,
   getCheckbox,
   chooseKieliversiotLanguages,
+  selectOption,
+  fillTreeSelect,
 } from '../../utils';
 
 import { stubKoulutusFormRoutes } from '../../koulutusFormUtils';
@@ -52,8 +54,7 @@ const jatka = cy => {
 const fillJarjestajaSection = (cy, jatkaArg = false) => {
   getByTestId('jarjestajaSection', cy).within(() => {
     getByTestId('jarjestajatSelection', cy).within(() => {
-      getCheckbox('4.1.1.1.1.1', cy).click({ force: true });
-      getCheckbox('2.1.1.1.1.1', cy).click({ force: true });
+      fillTreeSelect(['4.1.1.1.1.1'], cy);
     });
 
     jatkaArg && jatka(cy);
@@ -145,6 +146,10 @@ describe('createKoulutusForm', () => {
 
       getByTestId('tutkintonimikeSelect', cy).within(() => {
         getSelectOption('tutkintonimikekk_0', cy).click({ force: true });
+      });
+
+      cy.getByTestId('koulutusalatSelect').within(() => {
+        selectOption('kansallinenkoulutusluokitus2016koulutusalataso2_0', cy);
       });
 
       getByTestId('opintojenLaajuusSelect', cy).click();

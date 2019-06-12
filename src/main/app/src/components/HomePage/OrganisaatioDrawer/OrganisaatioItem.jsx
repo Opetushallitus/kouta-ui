@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
 import styled, { css } from 'styled-components';
-import { ellipsis } from 'polished';
 
 import Typography from '../../Typography';
-import { isNonEmptyArray, getFirstLanguageValue } from '../../../utils';
+import { getFirstLanguageValue, noop } from '../../../utils';
+import isEmpty from '../../../utils/isEmpty';
 import Flex, { FlexItem } from '../../Flex';
 import { getThemeProp } from '../../../theme';
 import Radio from '../../Radio';
@@ -12,6 +12,13 @@ import Icon from '../../Icon';
 const FavouriteIconBase = styled(Icon)`
   color: ${getThemeProp('palette.text.primary')};
   cursor: pointer;
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      opacity: 0.5;
+      cursor: not-allowed;
+    `}
 
   ${({ active }) =>
     active &&
@@ -33,7 +40,7 @@ const FavouriteIcon = ({ active = false, ...props }) => (
 );
 
 const NameContainer = styled.div`
-  ${ellipsis('25rem')};
+  max-width: 25rem;
 `;
 
 export const OrganisaatioItem = ({
@@ -48,6 +55,7 @@ export const OrganisaatioItem = ({
   onToggleOpen: onToggleOpenProp = () => {},
   children = [],
   language = 'fi',
+  disabled = false,
 }) => {
   const onSelect = useCallback(() => {
     onSelectProp(oid);
@@ -63,9 +71,9 @@ export const OrganisaatioItem = ({
 
   return (
     <Typography>
-      <Flex alignCenter>
+      <Flex>
         <FlexItem grow={1} paddingRight={2}>
-          <Radio checked={selected} onChange={onSelect}>
+          <Radio checked={selected} onChange={onSelect} disabled={disabled}>
             <Flex>
               <NameContainer>
                 {getFirstLanguageValue(nimi, language)}
@@ -73,7 +81,7 @@ export const OrganisaatioItem = ({
             </Flex>
           </Radio>
         </FlexItem>
-        {collapse && isNonEmptyArray(children) ? (
+        {collapse && !isEmpty(children) ? (
           <FlexItem grow={0} paddingRight={2}>
             <CollapseIcon
               onClick={onToggleOpen}
@@ -84,8 +92,9 @@ export const OrganisaatioItem = ({
         <FlexItem grow={0}>
           <FavouriteIcon
             active={favourite}
+            disabled={disabled}
             title="Lisää suosikkeihin"
-            onClick={onToggleFavourite}
+            onClick={disabled ? noop : onToggleFavourite}
           />
         </FlexItem>
       </Flex>

@@ -18,6 +18,8 @@ const ToasterContainer = styled.div`
 const ToastContainer = styled.div`
   display: inline-flex;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
+  border-radius: ${getThemeProp('shape.borderRadius')};
+  overflow: hidden;
   max-width: 450px;
 `;
 
@@ -66,7 +68,7 @@ const ToastContent = styled.div`
   background-color: white;
 `;
 
-const StatusTitle = styled(Typography).attrs({ variant: 'h5' })`
+const StatusTitle = styled(Typography).attrs({ variant: 'h6' })`
   ${({ status }) =>
     status === 'success' &&
     css`
@@ -90,7 +92,7 @@ export const Toast = ({
   title = null,
   children = null,
   onClose,
-  ...props,
+  ...props
 }) => (
   <ToastContainer {...props}>
     <ToastStatus status={status}>
@@ -167,10 +169,12 @@ export const Toaster = ({ toasts, onClose, ...props }) => (
 
 export const ReduxToaster = connect(
   state => ({
-    toasts: get(state, 'toaster.toasts') || [],
+    toasts: get(state, 'toaster.toasts') || [],
   }),
   dispatch => ({
-    onClose: key => { dispatch(removeToast(key)); },
+    onClose: key => {
+      dispatch(removeToast(key));
+    },
   }),
 )(Toaster);
 

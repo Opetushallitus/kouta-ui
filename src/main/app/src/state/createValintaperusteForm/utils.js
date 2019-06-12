@@ -99,9 +99,14 @@ export const getValintaperusteByValues = values => {
     'kohdejoukonRajaus.kohdejoukko.value',
   );
 
-  const nimi = pick(get(values, 'nimi.nimi'), kielivalinta);
+  const nimi = pick(get(values, 'kuvaus.nimi'), kielivalinta);
 
-  const valintatavat = (get(values, 'valintatapa.valintatavat') || []).map(
+  const kuvaus = pick(
+    mapValues(get(values, 'kuvaus.kuvaus') || {}, serializeEditor),
+    kielivalinta,
+  );
+
+  const valintatavat = (get(values, 'valintatavat') || []).map(
     ({
       tapa,
       kuvaus,
@@ -127,7 +132,7 @@ export const getValintaperusteByValues = values => {
   );
 
   const kielitaitovaatimukset = (
-    get(values, 'kielitaitovaatimukset.kielet') || []
+    get(values, 'kielitaitovaatimukset') || []
   ).map(({ kieli, tyyppi, kuvaukset, osoitustavat, muutOsoitustavat }) => {
     const activeTyypit = toPairs(tyyppi || {})
       .filter(([uri, value]) => !!value)
@@ -158,11 +163,6 @@ export const getValintaperusteByValues = values => {
       ],
     };
   });
-
-  const kuvaus = pick(
-    mapValues(get(values, 'loppukuvaus.kuvaus') || {}, serializeEditor),
-    kielivalinta,
-  );
 
   const osaamistaustaKoodiUrit = (
     get(values, 'osaamistausta.osaamistausta') || []
@@ -265,43 +265,37 @@ export const getValuesByValintaperuste = valintaperuste => {
     kohdejoukonRajaus: {
       kohdejoukko: kohdejoukkoKoodiUri ? { value: kohdejoukkoKoodiUri } : null,
     },
-    nimi: {
+    kuvaus: {
       nimi,
-    },
-    loppukuvaus: {
       kuvaus: mapValues(kuvaus || {}, parseEditor),
     },
     osaamistausta: {
       osaamistausta: (osaamistaustaKoodiUrit || []).map(value => ({ value })),
     },
-    kielitaitovaatimukset: {
-      kielet: kielitaitovaatimukset,
-    },
-    valintatapa: {
-      valintatavat: (valintatavat || []).map(
-        ({
-          kuvaus,
-          nimi,
-          valintatapaKoodiUri,
-          sisalto,
-          kynnysehto,
-          enimmaispisteet,
-          vahimmaispisteet,
-        }) => ({
-          kuvaus: kuvaus || {},
-          nimi: nimi || {},
-          kynnysehto: kynnysehto || {},
-          tapa: valintatapaKoodiUri ? { value: valintatapaKoodiUri } : null,
-          enimmaispistemaara: enimmaispisteet || '',
-          vahimmaispistemaara: vahimmaispisteet || '',
-          sisalto: parseSisalto({ sisalto }),
-        }),
-      ),
-    },
+    kielitaitovaatimukset: kielitaitovaatimukset,
+    valintatavat: (valintatavat || []).map(
+      ({
+        kuvaus,
+        nimi,
+        valintatapaKoodiUri,
+        sisalto,
+        kynnysehto,
+        enimmaispisteet,
+        vahimmaispisteet,
+      }) => ({
+        kuvaus: kuvaus || {},
+        nimi: nimi || {},
+        kynnysehto: kynnysehto || {},
+        tapa: valintatapaKoodiUri ? { value: valintatapaKoodiUri } : null,
+        enimmaispistemaara: enimmaispisteet || '',
+        vahimmaispistemaara: vahimmaispisteet || '',
+        sisalto: parseSisalto({ sisalto }),
+      }),
+    ),
     tyyppi: {
       tyyppi: koulutustyyppi,
     },
-    soraKuvausId: {
+    soraKuvaus: {
       value: soraKuvausId,
     },
   };
@@ -312,7 +306,7 @@ const validateEssentials = ({ errorBuilder, values }) => {
 
   return errorBuilder
     .validateArrayMinLength('kieliversiot.languages', 1)
-    .validateTranslations('nimi.nimi', kieliversiot);
+    .validateTranslations('kuvaus.nimi', kieliversiot);
 };
 
 const validateCommon = ({ errorBuilder, values }) => {
@@ -321,10 +315,10 @@ const validateCommon = ({ errorBuilder, values }) => {
   return errorBuilder
     .validateExistence('hakutavanRajaus.hakutapa')
     .validateExistence('kohdejoukonRajaus.kohdejoukko')
-    .validateArrayMinLength('valintatapa.valintatavat', 1, {
+    .validateArrayMinLength('valintatavat', 1, {
       isFieldArray: true,
     })
-    .validateArray('valintatapa.valintatavat', eb => {
+    .validateArray('valintatavat', eb => {
       return eb
         .validateExistence('tapa')
         .validateTranslations('nimi', kieliversiot);

@@ -7,15 +7,7 @@ import Button from '../Button';
 import { JULKAISUTILA } from '../../constants';
 import { getTestIdProps } from '../../utils';
 import useTranslation from '../useTranslation';
-
-const Wrapper = styled.div`
-  max-width: 1200px;
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0px auto;
-  display: flex;
-  justify-content: flex-end;
-`;
+import Flex from '../Flex';
 
 const PublishButton = styled(Button)`
   margin-left: ${({ theme }) => theme.spacing.unit * 2}px;
@@ -28,10 +20,10 @@ const EditHakuFooter = ({ haku, onSave = () => {} }) => {
     onSave({ tila: JULKAISUTILA.JULKAISTU });
   }, [onSave]);
 
-  const { t } = useTranslation();
+  const { t } = useTranslation();
 
   return (
-    <Wrapper>
+    <Flex justifyEnd>
       <Button
         variant="outlined"
         onClick={onSave}
@@ -47,7 +39,7 @@ const EditHakuFooter = ({ haku, onSave = () => {} }) => {
           {t('yleiset.tallennaJaJulkaise')}
         </PublishButton>
       ) : null}
-    </Wrapper>
+    </Flex>
   );
 };
 

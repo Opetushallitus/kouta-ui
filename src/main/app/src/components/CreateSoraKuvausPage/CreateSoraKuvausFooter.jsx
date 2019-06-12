@@ -7,15 +7,7 @@ import { JULKAISUTILA } from '../../constants';
 import Button from '../Button';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
-
-const Wrapper = styled.div`
-  max-width: 1200px;
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0px auto;
-  display: flex;
-  justify-content: flex-end;
-`;
+import Flex from '../Flex';
 
 const SaveButton = styled(Button).attrs({ variant: 'outlined' })`
   margin-right: ${({ theme }) => theme.spacing.unit * 2}px;
@@ -28,7 +20,7 @@ const CreateSoraKuvausFooter = ({
   const { t } = useTranslation();
 
   return (
-    <Wrapper>
+    <Flex justifyEnd>
       <SaveButton
         onClick={onSave}
         {...getTestIdProps('tallennaSoraKuvausButton')}
@@ -41,7 +33,7 @@ const CreateSoraKuvausFooter = ({
       >
         {t('yleiset.tallennaJaJulkaise')}
       </Button>
-    </Wrapper>
+    </Flex>
   );
 };
 

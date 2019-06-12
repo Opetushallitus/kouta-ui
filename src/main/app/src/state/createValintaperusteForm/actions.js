@@ -2,7 +2,7 @@ import { getFormValues, startSubmit, stopSubmit } from 'redux-form';
 import get from 'lodash/get';
 import produce from 'immer';
 
-import { JULKAISUTILA, POHJAVALINNAT } from '../../constants';
+import { JULKAISUTILA, POHJAVALINTA } from '../../constants';
 import { createSavingErrorToast, createSavingSuccessToast } from '../toaster';
 import { getValintaperusteByValues, validate } from './utils';
 import { isNonEmptyObject } from '../../utils';
@@ -98,7 +98,7 @@ export const maybeCopy = () => (dispatch, getState) => {
   const values = getValintaperusteFormValues(getState());
 
   if (
-    get(values, 'pohja.pohja.tapa') === POHJAVALINNAT.KOPIO &&
+    get(values, 'pohja.pohja.tapa') === POHJAVALINTA.KOPIO &&
     !!get(values, 'pohja.pohja.valinta.value')
   ) {
     dispatch(copy(values.pohja.pohja.valinta.value));

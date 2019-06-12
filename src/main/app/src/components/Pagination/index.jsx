@@ -10,7 +10,6 @@ import Typography from '../Typography';
 import useTranslation from '../useTranslation';
 
 const ButtonIcon = styled(Icon)`
-  color: white;
   font-size: 1.2rem;
 
   ${({ before }) =>
@@ -54,6 +53,7 @@ const Pagination = ({ value = 0, onChange = () => {}, pageCount = 0 }) => {
       <Button
         disabled={value === 0}
         onClick={onPrev}
+        variant="text"
       >
         <ButtonIcon type="arrow_back" before /> {t('yleiset.edellinen')}
       </Button>
@@ -73,6 +73,7 @@ const Pagination = ({ value = 0, onChange = () => {}, pageCount = 0 }) => {
       <Button
         disabled={pageCount === 0 || value === pageCount - 1}
         onClick={onNext}
+        variant="text"
       >
         {t('yleiset.seuraava')}
         <ButtonIcon type="arrow_forward" after />

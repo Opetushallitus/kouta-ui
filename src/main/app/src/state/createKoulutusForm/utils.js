@@ -8,7 +8,7 @@ const getKielivalinta = values => get(values, 'kieliversiot.languages') || [];
 
 export const getKoulutusByValues = values => {
   const kielivalinta = getKielivalinta(values);
-  const tarjoajat = get(values, 'organization.organizations') || null;
+  const tarjoajat = get(values, 'tarjoajat') || [];
   const koulutusKoodiUri = get(values, 'information.koulutus.value') || null;
   const koulutustyyppi = get(values, 'type.type') || null;
   const osiot = get(values, 'lisatiedot.osiot') || [];
@@ -26,6 +26,10 @@ export const getKoulutusByValues = values => {
 
   const tutkintonimikeKoodiUrit = (
     get(values, 'information.tutkintonimike') || []
+  ).map(({ value }) => value);
+
+  const koulutusalaKoodiUrit = (
+    get(values, 'information.koulutusalat') || []
   ).map(({ value }) => value);
 
   const kuvauksenNimi = pick(
@@ -49,6 +53,7 @@ export const getKoulutusByValues = values => {
       opintojenLaajuusKoodiUri,
       tutkintonimikeKoodiUrit,
       kuvauksenNimi,
+      koulutusalaKoodiUrit,
     },
   };
 };
@@ -70,6 +75,7 @@ export const getValuesByKoulutus = koulutus => {
     opintojenLaajuusKoodiUri = '',
     tutkintonimikeKoodiUrit = [],
     kuvauksenNimi = {},
+    koulutusalaKoodiUrit = [],
   } = metadata;
 
   const osiot = lisatiedot
@@ -88,9 +94,7 @@ export const getValuesByKoulutus = koulutus => {
     kieliversiot: {
       languages: kielivalinta,
     },
-    organization: {
-      organizations: tarjoajat,
-    },
+    tarjoajat,
     information: {
       nimi,
       koulutus: {
@@ -100,6 +104,7 @@ export const getValuesByKoulutus = koulutus => {
         value: opintojenLaajuusKoodiUri,
       },
       tutkintonimike: tutkintonimikeKoodiUrit.map(value => ({ value })),
+      koulutusalat: koulutusalaKoodiUrit.map(value => ({ value })),
     },
     type: {
       type: koulutustyyppi,
@@ -125,7 +130,7 @@ const validateEssentials = ({ errorBuilder }) => {
 };
 
 const validateCommon = ({ errorBuilder }) => {
-  return errorBuilder.validateArrayMinLength('organization.organizations', 1);
+  return errorBuilder.validateArrayMinLength('tarjoajat', 1);
 };
 
 const validateKorkeakoulu = ({ values, errorBuilder }) => {

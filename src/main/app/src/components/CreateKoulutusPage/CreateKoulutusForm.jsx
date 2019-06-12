@@ -11,7 +11,7 @@ import {
 } from '../../state/createKoulutusForm';
 import { getKoutaKoulutusByOid } from '../../apiUtils';
 import useApiAsync from '../useApiAsync';
-import { POHJAVALINNAT } from '../../constants';
+import { POHJAVALINTA } from '../../constants';
 import { memoize } from '../../utils';
 
 const resolveFn = () => Promise.resolve({});
@@ -24,7 +24,7 @@ const KoulutusReduxForm = reduxForm({
 const getCopyValues = koulutusOid => ({
   base: {
     pohja: {
-      tapa: POHJAVALINNAT.KOPIO,
+      tapa: POHJAVALINTA.KOPIO,
       valinta: { value: koulutusOid },
     },
   },

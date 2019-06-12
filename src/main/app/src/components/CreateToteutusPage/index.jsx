@@ -10,7 +10,7 @@ import CreateToteutusForm from './CreateToteutusForm';
 import CreateToteutusFooter from './CreateToteutusFooter';
 import useApiAsync from '../useApiAsync';
 import Spin from '../Spin';
-import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
+import { KOULUTUSTYYPPI } from '../../constants';
 
 const CreateToteutusPage = props => {
   const {
@@ -36,7 +36,7 @@ const CreateToteutusPage = props => {
   const koulutustyyppi =
     data && data.koulutustyyppi
       ? data.koulutustyyppi
-      : KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS;
+      : KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
   return (
     <FormPage

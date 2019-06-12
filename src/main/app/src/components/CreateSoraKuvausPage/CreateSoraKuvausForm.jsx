@@ -3,12 +3,12 @@ import { reduxForm } from 'redux-form';
 
 import SoraKuvausForm, { initialValues } from '../SoraKuvausForm';
 
-import { POHJAVALINNAT } from '../../constants';
+import { POHJAVALINTA } from '../../constants';
 import useSoraKuvaus from '../useSoraKuvaus';
 
 const getCopyValues = soraKuvausId => ({
   pohja: {
-    tapa: POHJAVALINNAT.KOPIO,
+    tapa: POHJAVALINTA.KOPIO,
     valinta: { value: soraKuvausId },
   },
 });

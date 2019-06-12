@@ -2,7 +2,7 @@ import merge from 'lodash/merge';
 
 import { getHakuByValues, getValuesByHaku } from '../utils';
 
-import { HAKULOMAKE_TYYPIT } from '../../../constants';
+import { HAKULOMAKETYYPPI } from '../../../constants';
 
 const baseValues = {
   nimi: {
@@ -41,26 +41,48 @@ const baseValues = {
     muokkauksenTakaraja: '2019-10-16T08:44',
     ajastettuJulkaisu: '2019-11-16T08:44',
   },
-  hakutapa: {
-    tapa: 'hakutapa_1#1',
-  },
+  hakutapa: 'hakutapa_1#1',
   kohdejoukko: {
     kohde: 'kohde_1#1',
   },
   hakulomake: {
-    tyyppi: HAKULOMAKE_TYYPIT.ATARU,
+    tyyppi: HAKULOMAKETYYPPI.ATARU,
     lomake: {
-      [HAKULOMAKE_TYYPIT.ATARU]: { value: '12345' },
+      [HAKULOMAKETYYPPI.ATARU]: { value: '12345' },
     },
   },
-  yhteystiedot: {
-    nimi: {
-      fi: 'Fi nimi',
-      sv: 'Sv nimi',
+  yhteyshenkilot: [
+    {
+      nimi: {
+        fi: 'Fi nimi',
+        sv: 'Sv nimi',
+      },
+      titteli: { fi: 'Fi titteli', sv: 'Sv titteli' },
+      sahkoposti: { fi: 'Fi sähköposti', sv: 'Sv sähköposti' },
+      puhelinnumero: { fi: 'Fi puhelinnumero', sv: 'Sv puhelinnumero' },
+      verkkosivu: { fi: 'Fi verkkosivu', sv: 'Sv verkkosivu' },
     },
-    titteli: { fi: 'Fi titteli', sv: 'Sv titteli' },
-    email: { fi: 'Fi sähköposti', sv: 'Sv sähköposti' },
-    puhelin: { fi: 'Fi puhelinnumero', sv: 'Sv puhelinnumero' },
+  ],
+  valintakoe: {
+    tyypit: [{ value: 'tyyppi_1#1' }],
+    tilaisuudet: {
+      'tyyppi_1#1': [
+        {
+          osoite: { fi: 'fi osoite', sv: 'sv osoite' },
+          postinumero: '00520',
+          postitoimipaikka: {
+            fi: 'fi posititoimipaikka',
+            sv: 'sv posititoimipaikka',
+          },
+          alkaa: '2019-04-16T08:44',
+          paattyy: '2019-04-18T08:44',
+          lisatietoja: {
+            fi: 'fi lisatietoja',
+            sv: 'sv lisatietoja',
+          },
+        },
+      ],
+    },
   },
 };
 
@@ -80,18 +102,49 @@ const baseHaku = {
     tulevaisuudenAikataulu: [
       { alkaa: '2019-02-20T12:28', paattyy: '2019-08-01T12:45' },
     ],
-    yhteystieto: {
-      nimi: { fi: 'Fi nimi', sv: 'Sv nimi' },
-      titteli: { fi: 'Fi titteli', sv: 'Sv titteli' },
-      sahkoposti: { fi: 'Fi sähköposti', sv: 'Sv sähköposti' },
-      puhelinnumero: { fi: 'Fi puhelinnumero', sv: 'Sv puhelinnumero' },
-    },
+    yhteyshenkilot: [
+      {
+        nimi: {
+          fi: 'Fi nimi',
+          sv: 'Sv nimi',
+        },
+        titteli: { fi: 'Fi titteli', sv: 'Sv titteli' },
+        sahkoposti: { fi: 'Fi sähköposti', sv: 'Sv sähköposti' },
+        puhelinnumero: { fi: 'Fi puhelinnumero', sv: 'Sv puhelinnumero' },
+        wwwSivu: { fi: 'Fi verkkosivu', sv: 'Sv verkkosivu' },
+      },
+    ],
   },
   hakukohteenMuokkaamisenTakaraja: '2019-03-11T09:45',
   ajastettuJulkaisu: '2020-01-20T05:00',
   alkamisvuosi: 2020,
-  hakulomaketyyppi: HAKULOMAKE_TYYPIT.ATARU,
+  hakulomaketyyppi: HAKULOMAKETYYPPI.ATARU,
   hakulomakeId: '12345',
+  valintakokeet: [
+    {
+      tyyppi: 'tyyppi_1#1',
+      tilaisuudet: [
+        {
+          osoite: {
+            osoite: { fi: 'fi osoite', sv: 'sv osoite' },
+            postinumero: '00520',
+            postitoimipaikka: {
+              fi: 'fi posititoimipaikka',
+              sv: 'sv posititoimipaikka',
+            },
+          },
+          aika: {
+            alkaa: '2019-04-16T08:44',
+            paattyy: '2019-04-18T08:44',
+          },
+          lisatietoja: {
+            fi: 'fi lisatietoja',
+            sv: 'sv lisatietoja',
+          },
+        },
+      ],
+    },
+  ],
 };
 
 test('getHakuByValues returns correct haku given form values', () => {
@@ -104,7 +157,7 @@ test('getHakuByValues returns correct haku given different hakulomake variations
   const hakuMuu = getHakuByValues(
     merge({}, baseValues, {
       hakulomake: {
-        tyyppi: HAKULOMAKE_TYYPIT.MUU,
+        tyyppi: HAKULOMAKETYYPPI.MUU,
         linkki: { fi: 'https://google.fi' },
       },
     }),
@@ -113,7 +166,7 @@ test('getHakuByValues returns correct haku given different hakulomake variations
   const hakuEiHakua = getHakuByValues(
     merge({}, baseValues, {
       hakulomake: {
-        tyyppi: HAKULOMAKE_TYYPIT.EI_SAHKOISTA_HAKUA,
+        tyyppi: HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA,
         kuvaus: { fi: 'kuvaus' },
       },
     }),
@@ -132,7 +185,7 @@ test('getValuesByHaku returns correct form values given haku', () => {
 test('getValuesByHaku returns correct form values given different hakulomake variations', () => {
   const valuesMuu = getValuesByHaku(
     merge({}, baseHaku, {
-      hakulomaketyyppi: HAKULOMAKE_TYYPIT.MUU,
+      hakulomaketyyppi: HAKULOMAKETYYPPI.MUU,
       hakulomakeLinkki: {
         fi: 'https://google.fi',
       },
@@ -141,7 +194,7 @@ test('getValuesByHaku returns correct form values given different hakulomake var
 
   const valuesEiHakua = getValuesByHaku(
     merge({}, baseHaku, {
-      hakulomaketyyppi: HAKULOMAKE_TYYPIT.EI_SAHKOISTA_HAKUA,
+      hakulomaketyyppi: HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA,
       hakulomakeKuvaus: {
         fi: 'kuvaus',
       },

@@ -3,33 +3,30 @@ import { Field } from 'redux-form';
 
 import KoulutusSelect from '../KoulutusSelect';
 import Spacing from '../../Spacing';
-import TutkintoNimikeSelect from './TutkintonimikeSelect';
+import TutkintonimikeSelect from './TutkintonimikeSelect';
 import useKoodistoOptions from '../../useKoodistoOptions';
 import useTranslation from '../../useTranslation';
-import { getTestIdProps, noop } from '../../../utils';
+import { getTestIdProps } from '../../../utils';
+import KoulutusalatSelect from './KoulutusalatSelect';
+import Flex, { FlexItem } from '../../Flex';
 
 import {
   FormFieldInput,
   FormFieldSelect,
   createFormFieldComponent,
+  selectMapProps,
 } from '../../FormFields';
 
-const KoulutusField = createFormFieldComponent(
-  KoulutusSelect,
-  ({ input, ...props }) => ({
-    ...input,
-    onBlur: noop,
-    ...props,
-  }),
+const KoulutusField = createFormFieldComponent(KoulutusSelect, selectMapProps);
+
+const TutkintonimikeField = createFormFieldComponent(
+  TutkintonimikeSelect,
+  selectMapProps,
 );
 
-const TutkintoNimikeField = createFormFieldComponent(
-  TutkintoNimikeSelect,
-  ({ input, ...props }) => ({
-    ...input,
-    onBlur: noop,
-    ...props,
-  }),
+const KoulutusalatField = createFormFieldComponent(
+  KoulutusalatSelect,
+  selectMapProps,
 );
 
 export const KorkeakoulutuTiedotSection = ({ koulutustyyppi, language }) => {
@@ -52,32 +49,51 @@ export const KorkeakoulutuTiedotSection = ({ koulutustyyppi, language }) => {
         </div>
       </Spacing>
 
-      <Spacing marginBottom={2} {...getTestIdProps('nimiInput')}>
+      <Spacing marginBottom={2}>
+        <div {...getTestIdProps('opintojenLaajuusSelect')}>
+          <Field
+            name="opintojenLaajuus"
+            component={FormFieldSelect}
+            options={laajuusOptions}
+            label={t('koulutuslomake.valitseOpintojenLaajuus')}
+          />
+        </div>
+      </Spacing>
+
+      <Flex marginBottom={2}>
+        <FlexItem
+          grow={1}
+          basis="50%"
+          paddingRight={2}
+          {...getTestIdProps('tutkintonimikeSelect')}
+        >
+          <Field
+            name="tutkintonimike"
+            component={TutkintonimikeField}
+            label={t('koulutuslomake.valitseTutkintonimike')}
+          />
+        </FlexItem>
+        <FlexItem
+          grow={1}
+          basis="50%"
+          paddingLeft={2}
+          {...getTestIdProps('koulutusalatSelect')}
+        >
+          <Field
+            name="koulutusalat"
+            component={KoulutusalatField}
+            label={t('koulutuslomake.valitseKoulutusalat')}
+          />
+        </FlexItem>
+      </Flex>
+
+      <Spacing {...getTestIdProps('nimiInput')}>
         <Field
           name={`nimi.${language}`}
           component={FormFieldInput}
           label={t('koulutuslomake.muokkaaKoulutuksenNimea')}
         />
       </Spacing>
-
-      <Spacing marginBottom={2}>
-        <div {...getTestIdProps('tutkintonimikeSelect')}>
-          <Field
-            name="tutkintonimike"
-            component={TutkintoNimikeField}
-            label={t('koulutuslomake.valitseTutkintonimike')}
-          />
-        </div>
-      </Spacing>
-
-      <div {...getTestIdProps('opintojenLaajuusSelect')}>
-        <Field
-          name="opintojenLaajuus"
-          component={FormFieldSelect}
-          options={laajuusOptions}
-          label={t('koulutuslomake.valitseOpintojenLaajuus')}
-        />
-      </div>
     </>
   );
 };

@@ -13,6 +13,9 @@ module.exports = {
         },
         koulutustyyppi: 'amm',
         metadata: {
+          kuvaus: {
+            fi: '<p>Kuvaus</p>',
+          },
           koulutustyyppi: 'amm',
           valintatavat: [
             {
@@ -79,7 +82,6 @@ module.exports = {
             },
           ],
           osaamistaustaKoodiUrit: [],
-          kuvaus: {},
           soraKuvausId: '1',
         },
       },
@@ -164,7 +166,7 @@ module.exports = {
           ],
           osaamistaustaKoodiUrit: ['osaamistausta_0#1'],
           kuvaus: {
-            fi: '<p>Loppukuvaus</p>',
+            fi: '<p>Kuvaus</p>',
           },
           soraKuvausId: '1',
         },
@@ -254,6 +256,7 @@ module.exports = {
           ],
           osaamistaustaKoodiUrit: [],
           kuvaus: {},
+          soraKuvausId: '1',
         },
         organisaatioOid: '1.1.1.1.1.1',
         muokkaaja: '1.2.246.562.24.62301161440',
@@ -344,6 +347,7 @@ module.exports = {
           kuvaus: {
             fi: '<p>Loppukuvaus</p>',
           },
+          soraKuvausId: '1',
         },
         organisaatioOid: '1.1.1.1.1.1',
         muokkaaja: '1.2.246.562.24.62301161440',

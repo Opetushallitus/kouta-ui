@@ -1,10 +1,13 @@
 import get from 'lodash/get';
 import pick from 'lodash/pick';
 
-import { isArray, isNumeric } from '../../utils';
-import { JULKAISUTILA } from '../../constants';
+import { isNumeric } from '../../utils';
+import getValintakoeFieldsData from '../../utils/getValintakoeFieldsData';
+import getValintakoeFieldsValues from '../../utils/getValintakoeFieldsValues';
+import getHakulomakeFieldsData from '../../utils/getHakulomakeFieldsData';
+import getHakulomakeFieldsValues from '../../utils/getHakulomakeFieldsValues';
+import { JULKAISUTILA, LIITTEEN_TOIMITUSTAPA } from '../../constants';
 import { ErrorBuilder } from '../../validation';
-import { getHakulomakeFieldsData, getHakulomakeFieldsValues } from '../utils';
 
 const getKieliversiot = values => get(values, 'kieliversiot.languages') || [];
 
@@ -39,7 +42,10 @@ export const getHakukohdeByValues = values => {
     hakulomakeKuvaus,
     hakulomakeLinkki,
     hakulomaketyyppi,
-  } = getHakulomakeFieldsData({ values, kielivalinta });
+  } = getHakulomakeFieldsData({
+    hakulomakeValues: get(values, 'hakulomake'),
+    kielivalinta,
+  });
 
   const kaytetaanHaunAikataulua = getKaytetaanHaunAikataulua(values);
 
@@ -53,17 +59,20 @@ export const getHakukohdeByValues = values => {
   const liitteidenToimitusosoite = {
     osoite: {
       osoite: pick(
-        get(values, 'liitteet.toimitusosoite') || null,
+        get(values, 'liitteet.toimitustapa.paikka.osoite') || null,
         kielivalinta,
       ),
-      postinumero: get(values, 'liitteet.toimituspostinumero') || null,
+      postinumero:
+        get(values, 'liitteet.toimitustapa.paikka.postinumero') || null,
       postitoimipaikka: pick(
-        get(values, 'liitteet.toimituspostitoimipaikka') || null,
+        get(values, 'liitteet.toimitustapa.paikka.postitoimipaikka') || null,
         kielivalinta,
       ),
     },
-    sahkoposti: get(values, 'liitteet.toimitussahkoposti') || null,
+    sahkoposti: get(values, 'liitteet.toimitustapa.paikka.sahkoposti') || null,
   };
+
+  const liitteidenToimitustapa = get(values, 'liitteet.toimitustapa.tapa');
 
   const liitteidenToimitusaika = get(values, 'liitteet.toimitusaika') || null;
 
@@ -76,31 +85,26 @@ export const getHakukohdeByValues = values => {
   );
 
   const liitteet = (get(values, 'liitteet.liitteet') || []).map(
-    ({
-      tyyppi,
-      nimi,
-      kuvaus,
-      toimitusaika,
-      toimitusosoite,
-      toimituspostinumero,
-      toimituspostitoimipaikka,
-      toimitussahkoposti,
-    }) => ({
+    ({ tyyppi, nimi, kuvaus, toimitusaika, toimitustapa }) => ({
+      toimitustapa: get(toimitustapa, 'tapa') || null,
       tyyppi: get(tyyppi, 'value') || null,
       nimi: pick(nimi || null, kielivalinta),
       toimitusaika: !liitteetOnkoSamaToimitusaika ? toimitusaika || null : null,
       toimitusosoite: {
         osoite: {
-          osoite: pick(toimitusosoite || null, kielivalinta),
-          postinumero: toimituspostinumero || null,
+          osoite: pick(
+            get(toimitustapa, 'paikka.osoite') || null,
+            kielivalinta,
+          ),
+          postinumero: get(toimitustapa, 'paikka.postinumero') || null,
           postitoimipaikka: pick(
-            toimituspostitoimipaikka || null,
+            get(toimitustapa, 'paikka.postitoimipaikka') || null,
             kielivalinta,
           ),
         },
-        sahkoposti: toimitussahkoposti || null,
+        sahkoposti: get(toimitustapa, 'paikka.sahkoposti') || null,
       },
-      kuvaus: pick(kuvaus || null, kielivalinta),
+      kuvaus: pick(kuvaus || {}, kielivalinta),
     }),
   );
 
@@ -110,37 +114,11 @@ export const getHakukohdeByValues = values => {
     values,
     'perustiedot.voiSuorittaaKaksoistutkinnon',
   );
-  const valintakoeTyypit = get(values, 'valintakoe.types') || [];
-  const valintakokeetByTyyppi = get(values, 'valintakoe.kokeet') || {};
 
-  const valintakokeet = valintakoeTyypit
-    .map(tyyppi => ({ tyyppi, ...(valintakokeetByTyyppi[tyyppi] || {}) }))
-    .map(({ tyyppi, kokeet }) => ({
-      tyyppi,
-      tilaisuudet: isArray(kokeet)
-        ? kokeet.map(
-            ({
-              osoite,
-              postinumero,
-              postitoimipaikka,
-              alkaa,
-              paattyy,
-              lisatietoja,
-            }) => ({
-              osoite: {
-                osoite: pick(osoite || null, kielivalinta),
-                postinumero: postinumero || null,
-                postitoimipaikka: pick(postitoimipaikka || null, kielivalinta),
-              },
-              aika: {
-                alkaa: alkaa || null,
-                paattyy: paattyy || null,
-              },
-              lisatietoja: pick(lisatietoja || null, kielivalinta),
-            }),
-          )
-        : [],
-    }));
+  const valintakokeet = getValintakoeFieldsData({
+    valintakoeValues: get(values, 'valintakoe'),
+    kielivalinta,
+  });
 
   const pohjakoulutusvaatimusKoodiUrit = (
     get(values, 'pohjakoulutus.koulutusvaatimukset') || []
@@ -161,10 +139,19 @@ export const getHakukohdeByValues = values => {
     hakuajat,
     liitteetOnkoSamaToimitusaika,
     liitteetOnkoSamaToimitusosoite,
+    liitteidenToimitustapa: liitteetOnkoSamaToimitusosoite
+      ? liitteidenToimitustapa
+      : null,
     liitteet,
     alkamisvuosi,
-    liitteidenToimitusosoite,
-    liitteidenToimitusaika,
+    liitteidenToimitusosoite:
+      liitteetOnkoSamaToimitusosoite &&
+      liitteidenToimitustapa === LIITTEEN_TOIMITUSTAPA.MUU_OSOITE
+        ? liitteidenToimitusosoite
+        : null,
+    liitteidenToimitusaika: liitteetOnkoSamaToimitusaika
+      ? liitteidenToimitusaika
+      : null,
     nimi,
     toinenAsteOnkoKaksoistutkinto,
     valintakokeet,
@@ -192,6 +179,7 @@ export const getValuesByHakukohde = hakukohde => {
     alkamisvuosi,
     liitteidenToimitusosoite = {},
     liitteidenToimitusaika,
+    liitteidenToimitustapa,
     nimi = {},
     toinenAsteOnkoKaksoistutkinto,
     valintakokeet = [],
@@ -204,40 +192,6 @@ export const getValuesByHakukohde = hakukohde => {
     hakulomakeKuvaus,
     hakulomakeLinkki,
   } = hakukohde;
-
-  const valintakoeTyypit = (valintakokeet || []).map(({ tyyppi }) => tyyppi);
-
-  const valintakokeetByTyyppi = (valintakokeet || []).reduce(
-    (acc, { tyyppi, tilaisuudet = [] }) => {
-      if (tyyppi) {
-        acc[tyyppi] = {
-          kokeet: (tilaisuudet || []).map(
-            ({
-              aika: { alkaa, paattyy } = {},
-              osoite: {
-                osoite = {},
-                postinumero = '',
-                postitoimipaikka = {},
-              } = {},
-              lisatietoja = {},
-            }) => {
-              return {
-                osoite,
-                postinumero,
-                postitoimipaikka,
-                lisatietoja,
-                alkaa: alkaa || '',
-                paattyy: paattyy || '',
-              };
-            },
-          ),
-        };
-      }
-
-      return acc;
-    },
-    {},
-  );
 
   return {
     alkamiskausi: {
@@ -282,29 +236,29 @@ export const getValuesByHakukohde = hakukohde => {
         value: valintaperuste,
       },
     },
-    valintakoe: {
-      types: valintakoeTyypit,
-      kokeet: valintakokeetByTyyppi,
-    },
+    valintakoe: getValintakoeFieldsValues(valintakokeet),
     liitteet: {
-      toimitusosoite: get(liitteidenToimitusosoite, 'osoite.osoite') || {},
-      toimituspostinumero:
-        get(liitteidenToimitusosoite, 'osoite.postinumero') || '',
-      toimituspostitoimipaikka:
-        get(liitteidenToimitusosoite, 'osoite.postitoimipaikka') || {},
-      toimitussahkoposti: get(liitteidenToimitusosoite, 'sahkoposti') || '',
-      yhteinenToimituspaikka: !!liitteetOnkoSamaToimitusosoite,
-      yhteinenToimitusaika: !!liitteetOnkoSamaToimitusaika,
+      toimitustapa: {
+        tapa: liitteidenToimitustapa || '',
+        paikka: {
+          sahkoposti: get(liitteidenToimitusosoite, 'sahkoposti') || '',
+          osoite: get(liitteidenToimitusosoite, 'osoite.osoite') || {},
+          postinumero:
+            get(liitteidenToimitusosoite, 'osoite.postinumero') || '',
+          postitoimipaikka:
+            get(liitteidenToimitusosoite, 'osoite.postitoimipaikka') || {},
+        },
+      },
+      yhteinenToimituspaikka: Boolean(liitteetOnkoSamaToimitusosoite),
+      yhteinenToimitusaika: Boolean(liitteetOnkoSamaToimitusaika),
       toimitusaika: liitteidenToimitusaika || '',
       liitteet: (liitteet || []).map(
         ({
           tyyppi,
           nimi = {},
           toimitusaika,
-          toimitusosoite: {
-            sahkoposti,
-            osoite: { osoite, postinumero, postitoimipaikka } = {},
-          } = {},
+          toimitustapa,
+          toimitusosoite,
           kuvaus = {},
         }) => {
           return {
@@ -312,10 +266,16 @@ export const getValuesByHakukohde = hakukohde => {
             nimi,
             kuvaus,
             toimitusaika: toimitusaika || '',
-            toimitussahkoposti: sahkoposti || '',
-            toimitusosoite: osoite || {},
-            toimituspostinumero: postinumero || '',
-            toimituspostitoimipaikka: postitoimipaikka || {},
+            toimitustapa: {
+              tapa: toimitustapa || '',
+              paikka: {
+                osoite: get(toimitusosoite, 'osoite.osoite') || {},
+                postinumero: get(toimitusosoite, 'osoite.postinumero') || '',
+                postitoimipaikka:
+                  get(toimitusosoite, 'osoite.postitoimipaikka') || {},
+                sahkoposti: get(toimitusosoite, 'sahkoposti') || '',
+              },
+            },
           };
         },
       ),
@@ -345,7 +305,7 @@ const validateLiitteet = ({ errorBuilder, values }) => {
 
   let enhancedErrorBuilder = errorBuilder.validateArray(
     'liitteet.liitteet',
-    liitteetEb => {
+    (liitteetEb, liite) => {
       let enhancedLiitteetEb = liitteetEb
         .validateExistence('tyyppi')
         .validateTranslations('nimi', kieliversiot)
@@ -358,11 +318,23 @@ const validateLiitteet = ({ errorBuilder, values }) => {
       }
 
       if (!liitteillaYhteinenToimitusosoite) {
+        enhancedLiitteetEb = enhancedLiitteetEb.validateExistence(
+          'toimitustapa.tapa',
+        );
+      }
+
+      if (
+        !liitteillaYhteinenToimitusosoite &&
+        get(liite, 'toimitustapa.tapa') === LIITTEEN_TOIMITUSTAPA.MUU_OSOITE
+      ) {
         enhancedLiitteetEb = enhancedLiitteetEb
-          .validateTranslations('toimitusosoite', kieliversiot)
-          .validateTranslations('toimituspostitoimipaikka', kieliversiot)
-          .validateExistence('toimituspostinumero')
-          .validateExistence('toimitussahkoposti');
+          .validateTranslations('toimitustapa.paikka.osoite', kieliversiot)
+          .validateTranslations(
+            'toimitustapa.paikka.postitoimipaikka',
+            kieliversiot,
+          )
+          .validateExistence('toimitustapa.paikka.postinumero')
+          .validateExistence('toimitustapa.paikka.sahkoposti');
       }
 
       return enhancedLiitteetEb;
@@ -376,11 +348,24 @@ const validateLiitteet = ({ errorBuilder, values }) => {
   }
 
   if (liitteillaYhteinenToimitusosoite) {
+    enhancedErrorBuilder = enhancedErrorBuilder.validateExistence(
+      'liitteet.toimitustapa.tapa',
+    );
+  }
+
+  if (
+    liitteillaYhteinenToimitusosoite &&
+    get(values, 'liitteet.toimitustapa.tapa') ===
+      LIITTEEN_TOIMITUSTAPA.MUU_OSOITE
+  ) {
     enhancedErrorBuilder = enhancedErrorBuilder
-      .validateTranslations('liitteet.toimitusosoite', kieliversiot)
-      .validateTranslations('liitteet.toimituspostitoimipaikka', kieliversiot)
-      .validateExistence('liitteet.toimituspostinumero')
-      .validateExistence('liitteet.toimitussahkoposti');
+      .validateTranslations('liitteet.toimitustapa.paikka.osoite', kieliversiot)
+      .validateTranslations(
+        'liitteet.toimitustapa.paikka.postitoimipaikka',
+        kieliversiot,
+      )
+      .validateExistence('liitteet.toimitustapa.paikka.postinumero')
+      .validateExistence('liitteet.toimitustapa.paikka.sahkoposti');
   }
 
   return enhancedErrorBuilder;
@@ -416,12 +401,12 @@ const validateCommon = ({ errorBuilder, values }) => {
   }
 
   const valintakokeet = pick(
-    get(values, 'valintakoe.kokeet'),
-    get(values, 'valintakoe.types'),
+    get(values, 'valintakoe.tilaisuudet'),
+    get(values, 'valintakoe.tyypit'),
   );
 
   enhancedErrorBuilder = Object.keys(valintakokeet).reduce((acc, tyyppi) => {
-    return acc.validateArray(`valintakoe.kokeet.${tyyppi}.kokeet`, eb => {
+    return acc.validateArray(`valintakoe.tilaisuudet.${tyyppi}`, eb => {
       return eb
         .validateTranslations('osoite', kieliversiot)
         .validateExistence('postinumero')

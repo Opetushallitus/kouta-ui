@@ -1,27 +1,45 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { select, boolean } from '@storybook/addon-knobs';
 
 import Button from './index';
 
-storiesOf('Button', module)
-  .add('Basic', () => <Button>Button</Button>)
-  .add('With variant', () => (
-    <>
-      <Button variant="contained">Button</Button>
-      <Button variant="outlined">Button</Button>
-    </>
-  ))
-  .add('With color', () => (
-    <>
-      <Button color="secondary">Secondary</Button>
-      <Button color="primary">Primary</Button>
-      <Button color="success">Success</Button>
-      <Button color="danger">Danger</Button>
-    </>
-  ))
-  .add('With size', () => (
-    <>
-      <Button variant="contained" size="small">Small</Button>
-      <Button variant="contained" size="medium">Medium</Button>
-    </>
-  ));
+storiesOf('Button', module).add('Basic', () => {
+  const variant = select(
+    'Variant',
+    {
+      Contained: 'contained',
+      Outlined: 'outlined',
+      Text: 'text',
+    },
+    'contained',
+  );
+
+  const color = select(
+    'Color',
+    {
+      Primary: 'primary',
+      Secondary: 'secondary',
+      Success: 'success',
+      Danger: 'danger',
+    },
+    'primary',
+  );
+
+  const size = select(
+    'Size',
+    {
+      Small: 'small',
+      Medium: 'medium',
+    },
+    'medium',
+  );
+
+  const disabled = boolean('Disabled', false);
+
+  return (
+    <Button variant={variant} color={color} size={size} disabled={disabled}>
+      Button
+    </Button>
+  );
+});

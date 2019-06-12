@@ -1,32 +1,27 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { select, boolean } from '@storybook/addon-knobs';
 
 import Checkbox from './index';
 
-storiesOf('Checkbox', module)
-  .add('Basic', () => (
+storiesOf('Checkbox', module).add('Basic', () => {
+  const checked = boolean('Checked', false);
+  const disabled = boolean('Disabled', false);
+  const indeterminate = boolean('Indeterminate', false);
+  const error = boolean('Error', false);
+
+  return (
     <>
-      <Checkbox checked={false} onChange={action('change')}>
-        Checkbox
-      </Checkbox>
-      <Checkbox checked={true} onChange={action('change')}>
+      <Checkbox
+        checked={checked}
+        disabled={disabled}
+        indeterminate={indeterminate}
+        error={error}
+        onChange={action('change')}
+      >
         Checkbox
       </Checkbox>
     </>
-  ))
-  .add('With disabled', () => (
-    <Checkbox checked={true} onChange={action('change')} disabled>
-      Checkbox
-    </Checkbox>
-  ))
-  .add('With error', () => (
-    <>
-      <Checkbox checked={false} onChange={action('change')} error>
-        Checkbox
-      </Checkbox>
-      <Checkbox checked={true} onChange={action('change')} error>
-        Checkbox
-      </Checkbox>
-    </>
-  ));
+  );
+});

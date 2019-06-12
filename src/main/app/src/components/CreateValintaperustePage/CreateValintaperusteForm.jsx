@@ -6,14 +6,14 @@ import ValintaperusteForm, { initialValues } from '../ValintaperusteForm';
 import { getValuesByValintaperuste } from '../../state/createValintaperusteForm';
 import { getKoutaValintaperusteByOid } from '../../apiUtils';
 import useApiAsync from '../useApiAsync';
-import { POHJAVALINNAT } from '../../constants';
+import { POHJAVALINTA } from '../../constants';
 
 const resolveFn = () => Promise.resolve(null);
 
 const getCopyValues = valintaperusteOid => ({
   pohja: {
     pohja: {
-      tapa: POHJAVALINNAT.KOPIO,
+      tapa: POHJAVALINTA.KOPIO,
       valinta: { value: valintaperusteOid },
     },
   },

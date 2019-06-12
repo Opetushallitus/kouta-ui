@@ -7,7 +7,7 @@ module.exports = {
         tila: 'julkaistu',
         alkamiskausiKoodiUri: 'kausi_0#1',
         kielivalinta: ['fi'],
-        hakutapaKoodiUri: 'hakutapa_0#1',
+        hakutapaKoodiUri: 'hakutapa_01#1',
         hakuajat: [
           {
             alkaa: '2019-04-02T10:45',
@@ -28,20 +28,25 @@ module.exports = {
               paattyy: '2019-12-25T20:30',
             },
           ],
-          yhteystieto: {
-            nimi: {
-              fi: 'nimi',
+          yhteyshenkilot: [
+            {
+              nimi: {
+                fi: 'nimi',
+              },
+              titteli: {
+                fi: 'titteli',
+              },
+              puhelinnumero: {
+                fi: 'puhelin',
+              },
+              wwwSivu: {
+                fi: 'verkkosivu',
+              },
+              sahkoposti: {
+                fi: 'sähkoposti',
+              },
             },
-            titteli: {
-              fi: 'titteli',
-            },
-            sahkoposti: {
-              fi: 'sähkoposti',
-            },
-            puhelinnumero: {
-              fi: 'puhelin',
-            },
-          },
+          ],
         },
         hakukohteenMuokkaamisenTakaraja: '2019-12-11T19:15',
         ajastettuJulkaisu: '2019-12-05T06:45',
@@ -49,6 +54,31 @@ module.exports = {
         hakulomakeId: 'lomake_1',
         hakulomakeLinkki: {},
         hakulomakeKuvaus: {},
+        valintakokeet: [
+          {
+            tyyppi: 'valintakokeentyyppi_1#1',
+            tilaisuudet: [
+              {
+                osoite: {
+                  osoite: {
+                    fi: 'osoite',
+                  },
+                  postinumero: '00510',
+                  postitoimipaikka: {
+                    fi: 'postitoimipaikka',
+                  },
+                },
+                aika: {
+                  alkaa: '2019-04-02T10:45',
+                  paattyy: '2019-04-02T19:00',
+                },
+                lisatietoja: {
+                  fi: 'lisatietoja',
+                },
+              },
+            ],
+          },
+        ],
       },
     },
   },
@@ -83,20 +113,25 @@ module.exports = {
               paattyy: '2019-12-25T20:30',
             },
           ],
-          yhteystieto: {
-            nimi: {
-              fi: 'nimi',
+          yhteyshenkilot: [
+            {
+              nimi: {
+                fi: 'nimi',
+              },
+              titteli: {
+                fi: 'titteli',
+              },
+              puhelinnumero: {
+                fi: 'puhelin',
+              },
+              wwwSivu: {
+                fi: 'verkkosivu',
+              },
+              sahkoposti: {
+                fi: 'sähkoposti',
+              },
             },
-            titteli: {
-              fi: 'titteli',
-            },
-            sahkoposti: {
-              fi: 'sähkoposti',
-            },
-            puhelinnumero: {
-              fi: 'puhelin',
-            },
-          },
+          ],
         },
         hakukohteenMuokkaamisenTakaraja: '2019-02-08T07:05',
         ajastettuJulkaisu: '2019-12-05T06:45',
@@ -104,6 +139,31 @@ module.exports = {
         hakulomakeId: '12345',
         hakulomakeLinkki: {},
         hakulomakeKuvaus: {},
+        valintakokeet: [
+          {
+            tyyppi: 'valintakokeentyyppi_1#1',
+            tilaisuudet: [
+              {
+                osoite: {
+                  osoite: {
+                    fi: 'osoite',
+                  },
+                  postinumero: '00510',
+                  postitoimipaikka: {
+                    fi: 'postitoimipaikka',
+                  },
+                },
+                aika: {
+                  alkaa: '2019-04-02T10:45',
+                  paattyy: '2019-04-02T19:00',
+                },
+                lisatietoja: {
+                  fi: 'lisatietoja',
+                },
+              },
+            ],
+          },
+        ],
       },
     },
   },

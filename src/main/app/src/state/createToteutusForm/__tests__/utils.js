@@ -19,10 +19,12 @@ test('getToteutusByValues returns correct toteutus given form values', () => {
         fi: 'Fi kuvaus',
         sv: 'Sv kuvaus',
       },
-      maksullisuus: true,
-      maksumaara: { fi: '5e', sv: '5kr' },
+      maksullisuus: {
+        tyyppi: 'kylla',
+        maksu: '50.50',
+      },
       opetustapa: ['opetustapa_1#1', 'opetustapa_2#1'],
-      opetusaika: 'opetusaika_1#1',
+      opetusaika: ['opetusaika_1#1', 'opetusaika_2#1'],
       opetuskieli: ['opetuskieli_1#1', 'opetuskieli_2#1'],
       opetusaikaKuvaus: {
         fi: 'Fi aikakuvaus',
@@ -59,12 +61,6 @@ test('getToteutusByValues returns correct toteutus given form values', () => {
         fi: 'Fi kausikuvaus',
         sv: 'Sv kausikuvaus',
       },
-      onkoLukuvuosimaksua: true,
-      lukuvuosimaksu: { fi: '20e', sv: '20kr' },
-      lukuvuosimaksuKuvaus: {
-        fi: 'Fi maksukuvaus',
-        sv: 'Sv maksukuvaus',
-      },
       onkoStipendia: true,
       stipendinMaara: { fi: '20e', sv: '20kr' },
       stipendinKuvaus: {
@@ -82,13 +78,15 @@ test('getToteutusByValues returns correct toteutus given form values', () => {
         sv: [{ value: 'avainsana2' }],
       },
     },
-    yhteystiedot: {
-      name: { fi: 'Fi nimi', sv: 'Sv nimi' },
-      title: { fi: 'Fi titteli', sv: 'Sv titteli' },
-      email: { fi: 'Fi sähköposti', sv: 'Sv sähköposti' },
-      phone: { fi: 'Fi puhelinnumero', sv: 'Sv puhelinnumero' },
-      website: { fi: 'Fi verkkosivu', sv: 'Sv verkkosivu' },
-    },
+    yhteyshenkilot: [
+      {
+        nimi: { fi: 'Fi nimi', sv: 'Sv nimi' },
+        titteli: { fi: 'Fi titteli', sv: 'Sv titteli' },
+        sahkoposti: { fi: 'Fi sähköposti', sv: 'Sv sähköposti' },
+        puhelinnumero: { fi: 'Fi puhelinnumero', sv: 'Sv puhelinnumero' },
+        verkkosivu: { fi: 'Fi verkkosivu', sv: 'Sv verkkosivu' },
+      },
+    ],
     osaamisalat: {
       osaamisalat: ['osaamisala1', 'osaamisala2'],
       osaamisalaLinkit: {
@@ -112,26 +110,22 @@ test('getToteutusByValues returns correct toteutus given form values', () => {
         },
       },
     },
-    ylemmanKorkeakoulututkinnonOsaamisalat: {
-      osaamisalat: [
-        {
-          nimi: { fi: 'Fi ylempinimi', sv: 'Sv ylempinimi' },
-          kuvaus: { fi: 'Fi ylempikuvaus', sv: 'Sv ylempikuvaus' },
-          linkki: { fi: 'Fi ylempilinkki', sv: 'Sv ylempilinkki' },
-          otsikko: { fi: 'Fi ylempiotsikko', sv: 'Sv ylempiotsikko' },
-        },
-      ],
-    },
-    alemmanKorkeakoulututkinnonOsaamisalat: {
-      osaamisalat: [
-        {
-          nimi: { fi: 'Fi alempinimi', sv: 'Sv alempinimi' },
-          kuvaus: { fi: 'Fi alempikuvaus', sv: 'Sv alempikuvaus' },
-          linkki: { fi: 'Fi alempilinkki', sv: 'Sv alempilinkki' },
-          otsikko: { fi: 'Fi alempiotsikko', sv: 'Sv alempiotsikko' },
-        },
-      ],
-    },
+    ylemmanKorkeakoulututkinnonOsaamisalat: [
+      {
+        nimi: { fi: 'Fi ylempinimi', sv: 'Sv ylempinimi' },
+        kuvaus: { fi: 'Fi ylempikuvaus', sv: 'Sv ylempikuvaus' },
+        linkki: { fi: 'Fi ylempilinkki', sv: 'Sv ylempilinkki' },
+        otsikko: { fi: 'Fi ylempiotsikko', sv: 'Sv ylempiotsikko' },
+      },
+    ],
+    alemmanKorkeakoulututkinnonOsaamisalat: [
+      {
+        nimi: { fi: 'Fi alempinimi', sv: 'Sv alempinimi' },
+        kuvaus: { fi: 'Fi alempikuvaus', sv: 'Sv alempikuvaus' },
+        linkki: { fi: 'Fi alempilinkki', sv: 'Sv alempilinkki' },
+        otsikko: { fi: 'Fi alempiotsikko', sv: 'Sv alempiotsikko' },
+      },
+    ],
     kuvaus: {
       kuvaus: {
         fi: 'Fi kuvaus',
@@ -214,10 +208,7 @@ test('getValuesByToteutus returns correct form values given toteutus', () => {
             },
           },
         ],
-        lukuvuosimaksu: {
-          fi: '20e',
-          sv: '20kr',
-        },
+        lukuvuosimaksu: 40.5,
         lukuvuosimaksuKuvaus: {
           fi: 'Fi maksukuvaus',
           sv: 'Sv maksukuvaus',
@@ -226,14 +217,11 @@ test('getValuesByToteutus returns correct form values given toteutus', () => {
           fi: 'Fi maksullisuuskuvaus',
           sv: 'Sv maksullisuuskuvaus',
         },
-        maksunMaara: {
-          fi: '5e',
-          sv: '5kr',
-        },
+        maksunMaara: 50.25,
         onkoLukuvuosimaksua: true,
         onkoMaksullinen: true,
         onkoStipendia: true,
-        opetusaikaKoodiUri: 'opetusaika_1#1',
+        opetusaikaKoodiUrit: ['opetusaika_1#1'],
         opetusaikaKuvaus: {
           fi: 'Fi aikakuvaus',
           sv: 'Sv aikakuvaus',
@@ -281,28 +269,30 @@ test('getValuesByToteutus returns correct form values given toteutus', () => {
           },
         },
       ],
-      yhteystieto: {
-        nimi: {
-          fi: 'Fi nimi',
-          sv: 'Sv nimi',
+      yhteyshenkilot: [
+        {
+          nimi: {
+            fi: 'Fi nimi',
+            sv: 'Sv nimi',
+          },
+          puhelinnumero: {
+            fi: 'Fi puhelinnumero',
+            sv: 'Sv puhelinnumero',
+          },
+          sahkoposti: {
+            fi: 'Fi sähköposti',
+            sv: 'Sv sähköposti',
+          },
+          titteli: {
+            fi: 'Fi titteli',
+            sv: 'Sv titteli',
+          },
+          wwwSivu: {
+            fi: 'Fi verkkosivu',
+            sv: 'Sv verkkosivu',
+          },
         },
-        puhelinnumero: {
-          fi: 'Fi puhelinnumero',
-          sv: 'Sv puhelinnumero',
-        },
-        sahkoposti: {
-          fi: 'Fi sähköposti',
-          sv: 'Sv sähköposti',
-        },
-        titteli: {
-          fi: 'Fi titteli',
-          sv: 'Sv titteli',
-        },
-        wwwSivu: {
-          fi: 'Fi verkkosivu',
-          sv: 'Sv verkkosivu',
-        },
-      },
+      ],
       ylemmanKorkeakoulututkinnonOsaamisalat: [
         {
           kuvaus: {

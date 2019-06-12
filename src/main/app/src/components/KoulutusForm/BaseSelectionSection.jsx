@@ -7,6 +7,7 @@ import { getKoutaKoulutukset } from '../../apiUtils';
 import { getFirstLanguageValue } from '../../utils';
 import useTranslation from '../useTranslation';
 import useApiAsync from '../useApiAsync';
+import Typography from '../Typography';
 
 const getKoulutusOptions = koulutukset => {
   return koulutukset.map(({ nimi, oid }) => ({
@@ -27,15 +28,20 @@ const BaseSelectionSection = ({ organisaatioOid }) => {
   const options = useMemo(() => getKoulutusOptions(data), [data]);
 
   return (
-    <FormControl>
-      <FormLabel>{t('yleiset.valitseLomakkeenPohja')}</FormLabel>
-      <BaseFields
-        name="pohja"
-        createLabel={t('koulutuslomake.luoUusiKoulutus')}
-        copyLabel={t('koulutuslomake.kopioiPohjaksiKoulutus')}
-        copyOptions={options}
-      />
-    </FormControl>
+    <>
+      <Typography variant="secondary" as="div" marginBottom={2}>
+        {t('koulutuslomake.pohjavalintaInfo')}
+      </Typography>
+      <FormControl>
+        <FormLabel>{t('yleiset.valitseLomakkeenPohja')}</FormLabel>
+        <BaseFields
+          name="pohja"
+          createLabel={t('koulutuslomake.luoUusiKoulutus')}
+          copyLabel={t('koulutuslomake.kopioiPohjaksiKoulutus')}
+          copyOptions={options}
+        />
+      </FormControl>
+    </>
   );
 };
 

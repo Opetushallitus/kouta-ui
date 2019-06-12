@@ -7,6 +7,7 @@ import useTranslation from '../useTranslation';
 import useKoodistoOptions from '../useKoodistoOptions';
 import { getTestIdProps } from '../../utils';
 import { FormFieldTextarea, FormFieldSelect } from '../FormFields';
+import Typography from '../Typography';
 
 const OsiotFieldsBase = ({ osiot, language, osiotOptions }) => {
   const osiotArr = osiot || [];
@@ -47,6 +48,9 @@ const LisatiedotSection = ({ language }) => {
 
   return (
     <>
+      <Typography variant="secondary" as="div" marginBottom={2}>
+        {t('koulutuslomake.lisatiedotInfo')}
+      </Typography>
       <Spacing marginBottom={2}>
         <div {...getTestIdProps('osiotSelect')}>
           <Field

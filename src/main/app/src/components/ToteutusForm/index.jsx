@@ -1,4 +1,4 @@
-import { POHJAVALINNAT } from '../../constants';
+import { POHJAVALINTA } from '../../constants';
 
 export { default } from './ToteutusForm';
 
@@ -8,7 +8,7 @@ export const initialValues = {
   },
   base: {
     pohja: {
-      tapa: POHJAVALINNAT.UUSI,
+      tapa: POHJAVALINTA.UUSI,
     },
   },
 };

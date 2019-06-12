@@ -1,8 +1,6 @@
 import merge from 'lodash/merge';
 import getYear from 'date-fns/get_year';
 
-import { getLiiteToimituspaikkaFieldValues } from './utils';
-
 export { default } from './HakukohdeForm';
 
 export const initialValues = {
@@ -14,11 +12,6 @@ export const initialValues = {
   },
 };
 
-export const getInitialValues = ({ organisaatio }) => {
-  return merge({}, initialValues, {
-    liitteet: getLiiteToimituspaikkaFieldValues({
-      organisaatio,
-      language: 'fi',
-    }),
-  });
+export const getInitialValues = () => {
+  return merge({}, initialValues);
 };

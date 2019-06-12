@@ -10,6 +10,10 @@ Object {
   "koulutusKoodiUri": "koulutuskoodi_1#1",
   "koulutustyyppi": "yo",
   "metadata": Object {
+    "koulutusalaKoodiUrit": Array [
+      "koulutusala_1#1",
+      "koulutusala_2#1",
+    ],
     "kuvauksenNimi": Object {
       "fi": "Fi nimi",
       "sv": "Sv nimi",
@@ -64,6 +68,14 @@ Object {
     "koulutus": Object {
       "value": "koulutuskoodi_1#1",
     },
+    "koulutusalat": Array [
+      Object {
+        "value": "koulutusala_1#1",
+      },
+      Object {
+        "value": "koulutusala_2#1",
+      },
+    ],
     "nimi": Object {
       "fi": "Fi nimi",
       "sv": "Sv nimi",
@@ -106,11 +118,9 @@ Object {
   "nakyvyys": Object {
     "julkinen": true,
   },
-  "organization": Object {
-    "organizations": Array [
-      "123.456.789",
-    ],
-  },
+  "tarjoajat": Array [
+    "123.456.789",
+  ],
   "type": Object {
     "type": "yo",
   },

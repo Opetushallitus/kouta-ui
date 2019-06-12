@@ -1,0 +1,187 @@
+import set from 'lodash/set';
+
+import getOrganisaatioParentOidPath from './getOrganisaatioParentOidPath';
+import getRoleOrganisaatioOid from './getRoleOrganisaatioOid';
+import isOid from './isOid';
+import { isString, isObject, isArray } from './index';
+
+const getRoleName = role => {
+  if (!isString(role)) {
+    return undefined;
+  }
+
+  const parts = role.split('_');
+
+  return parts.filter(v => !isOid(v)).join('_');
+};
+
+const resolveOidPath = value => {
+  if (isString(value)) {
+    return [value];
+  }
+
+  if (isArray(value)) {
+    return value;
+  }
+
+  if (isObject(value)) {
+    return getOrganisaatioParentOidPath(value);
+  }
+
+  return [];
+};
+
+const createRoleLookup = roles => {
+  const lookup = {};
+
+  for (let role of roles) {
+    const organisaatioOid = getRoleOrganisaatioOid(role);
+
+    if (!organisaatioOid) {
+      continue;
+    }
+
+    const roleName = getRoleName(role);
+
+    if (!roleName) {
+      continue;
+    }
+
+    set(lookup, [organisaatioOid, roleName], true);
+  }
+
+  return lookup;
+};
+
+class RoleBuilder {
+  constructor({ roles = [], roleLookup, result = true } = {}) {
+    this.currentResult = result;
+    this.roleLookup = roleLookup ? roleLookup : createRoleLookup(roles);
+  }
+
+  hasOneOfFn(getCheckFn, roles, organisaatio) {
+    return roles.reduce((acc, curr) => {
+      return acc.or(rb => getCheckFn(rb)(curr, organisaatio));
+    }, this.clone(false));
+  }
+
+  hasAllFn(getCheckFn, roles, organisaatio) {
+    return roles.reduce((acc, curr) => {
+      return acc.and(rb => getCheckFn(rb)(curr, organisaatio));
+    }, this.clone(true));
+  }
+
+  hasOrganisaatioRole(role, organisaatioOid) {
+    return (
+      this.roleLookup.hasOwnProperty(organisaatioOid) &&
+      this.roleLookup[organisaatioOid].hasOwnProperty(role)
+    );
+  }
+
+  hasRead(role, organisaatio) {
+    return this.clone(
+      Boolean(
+        resolveOidPath(organisaatio).find(oid => {
+          return (
+            this.hasOrganisaatioRole(`${role}_READ`, oid) ||
+            this.hasOrganisaatioRole(`${role}_CRUD`, oid)
+          );
+        }),
+      ),
+    );
+  }
+
+  hasReadOneOf(roles, organisaatio) {
+    return this.hasOneOfFn(
+      rb => (...args) => rb.hasRead(...args),
+      roles,
+      organisaatio,
+    );
+  }
+
+  hasReadAll(roles, organisaatio) {
+    return this.hasAllFn(
+      rb => (...args) => rb.hasRead(...args),
+      roles,
+      organisaatio,
+    );
+  }
+
+  hasWrite(role, organisaatio) {
+    return this.clone(
+      Boolean(
+        resolveOidPath(organisaatio).find(oid => {
+          return (
+            this.hasOrganisaatioRole(`${role}_WRITE`, oid) ||
+            this.hasOrganisaatioRole(`${role}_CRUD`, oid)
+          );
+        }),
+      ),
+    );
+  }
+
+  hasWriteOneOf(roles, organisaatio) {
+    return this.hasOneOfFn(
+      rb => (...args) => rb.hasWrite(...args),
+      roles,
+      organisaatio,
+    );
+  }
+
+  hasWriteAll(roles, organisaatio) {
+    return this.hasAllFn(
+      rb => (...args) => rb.hasWrite(...args),
+      roles,
+      organisaatio,
+    );
+  }
+
+  hasCrud(role, organisaatio) {
+    return this.clone(
+      Boolean(
+        resolveOidPath(organisaatio).find(oid => {
+          return this.hasOrganisaatioRole(`${role}_CRUD`, oid);
+        }),
+      ),
+    );
+  }
+
+  hasCrudOneOf(roles, organisaatio) {
+    return this.hasOneOfFn(
+      rb => (...args) => rb.hasCrud(...args),
+      roles,
+      organisaatio,
+    );
+  }
+
+  hasCrudAll(roles, organisaatio) {
+    return this.hasAllFn(
+      rb => (...args) => rb.hasCrud(...args),
+      roles,
+      organisaatio,
+    );
+  }
+
+  clone(result) {
+    return new RoleBuilder({
+      roleLookup: this.roleLookup,
+      result,
+    });
+  }
+
+  or(fn) {
+    return this.clone(this.result() || fn(this.clone()).result());
+  }
+
+  and(fn) {
+    return this.clone(this.result() && fn(this.clone()).result());
+  }
+
+  result() {
+    return this.currentResult;
+  }
+}
+
+const createRoleBuilder = args => new RoleBuilder(args);
+
+export default createRoleBuilder;

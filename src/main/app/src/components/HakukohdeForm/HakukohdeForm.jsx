@@ -4,7 +4,7 @@ import { formValues } from 'redux-form';
 import FormCollapse from '../FormCollapse';
 import KieliversiotFormSection from '../KieliversiotFormSection';
 
-import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
+import { KOULUTUSTYYPPI } from '../../constants';
 import PohjakoulutusSection from './PohjakoulutusSection';
 import PerustiedotSection from './PerustiedotSection';
 import AloituspaikatSection from './AloituspaikatSection';
@@ -32,7 +32,7 @@ const HakukohdeForm = ({
   organisaatioOid,
   organisaatio,
   haku,
-  koulutustyyppi = KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS,
+  koulutustyyppi = KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
 }) => {
   const { t } = useTranslation();
 
@@ -109,20 +109,21 @@ const HakukohdeForm = ({
 
             <FormCollapse
               header={t('hakukohdelomake.valintakoe')}
-              section="valintakoe"
               languages={languages}
               {...getTestIdProps('valintakoeSection')}
             >
-              <ValintakoeSection />
+              <ValintakoeSection name="valintakoe" />
             </FormCollapse>
 
             <FormCollapse
               header={t('hakukohdelomake.tarvittavatLiitteet')}
-              section="liitteet"
               languages={languages}
               {...getTestIdProps('liitteetSection')}
             >
-              <LiitteetSection organisaatioOid={organisaatioOid} />
+              <LiitteetSection
+                name="liitteet"
+                organisaatioOid={organisaatioOid}
+              />
             </FormCollapse>
           </FormCollapseGroup>
         )}

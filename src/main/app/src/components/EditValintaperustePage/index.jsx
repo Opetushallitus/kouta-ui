@@ -9,7 +9,7 @@ import EditValintaperusteFooter from './EditValintaperusteFooter';
 import useApiAsync from '../useApiAsync';
 import { getKoutaValintaperusteByOid } from '../../apiUtils';
 import Spin from '../Spin';
-import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
+import { KOULUTUSTYYPPI } from '../../constants';
 
 const EditValintaperustePage = props => {
   const {
@@ -34,7 +34,7 @@ const EditValintaperustePage = props => {
 
   const koulutustyyppi =
     get(valintaperuste, 'koulutustyyppi') ||
-    KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS;
+    KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
   return (
     <FormPage

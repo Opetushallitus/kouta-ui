@@ -1,5 +1,6 @@
-import { KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP } from '../constants';
+import { KOULUTUSTYYPPI_TO_KOULUTUSTYYPPI_IDS_MAP } from '../constants';
 import { isArray, isString, isObject, memoizePromise } from '../utils';
+import parseKoodiUri from '../utils/parseKoodiUri';
 import keyBy from 'lodash/keyBy';
 import mapValues from 'lodash/mapValues';
 import get from 'lodash/get';
@@ -9,21 +10,12 @@ import maxBy from 'lodash/maxBy';
 import upperFirst from 'lodash/upperFirst';
 import set from 'lodash/set';
 
-const getKoodiUriParts = uri => {
-  const [koodiUri, versio = null] = uri.split('#');
-
-  return {
-    koodiUri,
-    versio,
-  };
-};
-
 export const getKoulutuksetByKoulutusTyyppi = async ({
   httpClient,
   apiUrls,
   koulutusTyyppi,
 }) => {
-  const ids = KOULUTUSTYYPPI_CATEGORY_TO_KOULUTUSTYYPPI_IDS_MAP[koulutusTyyppi];
+  const ids = KOULUTUSTYYPPI_TO_KOULUTUSTYYPPI_IDS_MAP[koulutusTyyppi];
 
   if (!ids) {
     return [];
@@ -68,7 +60,7 @@ export const getKoulutusByKoodi = async ({
   apiUrls,
   koodiUri: argKoodiUri,
 }) => {
-  const { koodiUri, versio } = getKoodiUriParts(argKoodiUri);
+  const { koodi, versio } = parseKoodiUri(argKoodiUri);
 
   const [
     perusteetResponse,
@@ -76,16 +68,12 @@ export const getKoulutusByKoodi = async ({
     koodiResponse,
   ] = await Promise.all([
     httpClient.get(
-      apiUrls.url('eperusteet-service.perusteet-koulutuskoodilla', koodiUri),
+      apiUrls.url('eperusteet-service.perusteet-koulutuskoodilla', koodi),
     ),
     httpClient.get(
-      apiUrls.url(
-        'koodisto-service.sisaltyy-alakoodit',
-        koodiUri,
-        versio || '',
-      ),
+      apiUrls.url('koodisto-service.sisaltyy-alakoodit', koodi, versio || ''),
     ),
-    httpClient.get(apiUrls.url('koodisto-service.codeelement', koodiUri)),
+    httpClient.get(apiUrls.url('koodisto-service.codeelement', koodi)),
   ]);
 
   const {
@@ -147,7 +135,7 @@ export const getKoulutusByKoodi = async ({
   } = perusteetData[0] || {};
 
   return {
-    koodiUri,
+    koodiUri: koodi,
     perusteId,
     kuvaus,
     osaamisalat,
@@ -167,10 +155,10 @@ export const getHakuByKoodi = async ({
   apiUrls,
   koodiUri: argKoodiUri,
 }) => {
-  const { koodiUri } = getKoodiUriParts(argKoodiUri);
+  const { koodi } = parseKoodiUri(argKoodiUri);
 
   const [koodiResponse] = await Promise.all([
-    httpClient.get(apiUrls.url('koodisto-service.codeelement', koodiUri)),
+    httpClient.get(apiUrls.url('koodisto-service.codeelement', koodi)),
   ]);
 
   const { data: koodiData } = koodiResponse;
@@ -226,10 +214,10 @@ export const getOsaamisalatByKoulutusKoodi = async ({
   apiUrls,
   koodiUri: argKoodiUri,
 }) => {
-  const { koodiUri } = getKoodiUriParts(argKoodiUri);
+  const { koodi } = parseKoodiUri(argKoodiUri);
 
   const { data } = await httpClient.get(
-    apiUrls.url('eperusteet-service.perusteet-koulutuskoodilla', koodiUri),
+    apiUrls.url('eperusteet-service.perusteet-koulutuskoodilla', koodi),
   );
 
   const { osaamisalat = [] } = data.data[0] || {};

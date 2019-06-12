@@ -14,13 +14,13 @@ const koutaIndexItem = () => ({
 });
 
 const stubMyOrganisations = () => {
-  const oid = '1.2.246.562.10.594252633210';
+  const oid = '1.2.246.562.10.00000000001';
 
   cy.route({
     method: 'GET',
     url: `**/organisaatio-service/rest/organisaatio/v4/${oid}**`,
     response: merge(organisaatio(), {
-      oid: '1.2.246.562.10.594252633210',
+      oid,
     }),
   });
 

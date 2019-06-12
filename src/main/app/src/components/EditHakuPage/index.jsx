@@ -7,6 +7,7 @@ import EditHakuSteps from './EditHakuSteps';
 import EditHakuForm from './EditHakuForm';
 import EditHakuFooter from './EditHakuFooter';
 import useApiAsync from '../useApiAsync';
+import Spin from '../Spin';
 import { getKoutaHakuByOid } from '../../apiUtils';
 
 const EditHakuPage = props => {
@@ -44,7 +45,9 @@ const EditHakuPage = props => {
           organisaatioOid={organisaatioOid}
           scrollTarget={scrollTarget}
         />
-      ) : null}
+      ) : (
+        <Spin center />
+      )}
     </FormPage>
   );
 };

@@ -1,27 +1,25 @@
-import { useMemo } from 'react';
+import { useMemo, useCallback } from 'react';
 
 import { isString, isArray } from '../../../utils';
 import { getOrganisaatioHierarkia } from '../../../apiUtils';
 import useApiAsync from '../../useApiAsync';
-import { getFilteredHierarkia } from '../utils';
+import useAuthorizedUserRoleBuilder from '../../useAuthorizedUserRoleBuilder';
 
-const getMap = arr => {
-  let map = {};
+import {
+  KOULUTUS_ROLE,
+  TOTEUTUS_ROLE,
+  HAKU_ROLE,
+  VALINTAPERUSTE_ROLE,
+} from '../../../constants';
 
-  for (let value of arr) {
-    if (isString(value)) {
-      map[value] = true;
-    }
-  }
-
-  return map;
+const filterHierarkia = (hierarkia, filterFn) => {
+  return hierarkia.flatMap(org => [
+    ...(filterFn(org) ? [org] : filterHierarkia(org.children, filterFn)),
+  ]);
 };
 
-const getParentOidPath = parentOidPathString =>
-  isString(parentOidPathString) ? parentOidPathString.split('/') : [];
-
-const useOrganisaatioHierarkia = ({ includedOids = [], name }) => {
-  const oidMap = useMemo(() => getMap(includedOids), [includedOids]);
+const useOrganisaatioHierarkia = ({ name }) => {
+  const roleBuilder = useAuthorizedUserRoleBuilder();
 
   const promiseFn = useMemo(() => {
     if (!isString(name) || name.length < 3) {
@@ -37,15 +35,21 @@ const useOrganisaatioHierarkia = ({ includedOids = [], name }) => {
     watch: name,
   });
 
-  const hierarkia = useMemo(() => {
-    return isArray(data)
-      ? getFilteredHierarkia(
-          data,
-          ({ oid, parentOidPath }) =>
-            oidMap[oid] || getParentOidPath(parentOidPath).find(o => oidMap[o]),
+  const hasRequiredRoles = useCallback(
+    organisaatio => {
+      return roleBuilder
+        .hasReadOneOf(
+          [KOULUTUS_ROLE, TOTEUTUS_ROLE, HAKU_ROLE, VALINTAPERUSTE_ROLE],
+          organisaatio,
         )
-      : [];
-  }, [data, oidMap]);
+        .result();
+    },
+    [roleBuilder],
+  );
+
+  const hierarkia = useMemo(() => {
+    return isArray(data) ? filterHierarkia(data, hasRequiredRoles) : [];
+  }, [data, hasRequiredRoles]);
 
   return { hierarkia, ...rest };
 };

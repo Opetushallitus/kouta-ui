@@ -5,9 +5,7 @@ test('getKoulutusByValues returns correct koulutus given form values', () => {
     kieliversiot: {
       languages: ['fi', 'sv'],
     },
-    organization: {
-      organizations: ['123.456.789'],
-    },
+    tarjoajat: ['123.456.789'],
     information: {
       nimi: {
         fi: 'Fi nimi',
@@ -20,6 +18,10 @@ test('getKoulutusByValues returns correct koulutus given form values', () => {
         value: 'laajuus_1#1',
       },
       tutkintonimike: [{ value: 'nimike_1#1' }, { value: 'nimike_2#1' }],
+      koulutusalat: [
+        { value: 'koulutusala_1#1' },
+        { value: 'koulutusala_2#1' },
+      ],
     },
     type: {
       type: 'yo',
@@ -83,6 +85,7 @@ test('getValuesByKoulutus returns correct form values given koulutus', () => {
       opintojenLaajuusKoodiUri: 'laajuus_1#1',
       tutkintonimikeKoodiUrit: ['nimike_1#1', 'nimike_2#1'],
       tyyppi: 'yo',
+      koulutusalaKoodiUrit: ['koulutusala_1#1', 'koulutusala_2#1'],
     },
     nimi: {
       fi: 'Fi nimi',

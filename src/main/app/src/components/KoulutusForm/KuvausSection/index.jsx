@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {
-  KOULUTUSTYYPPI_CATEGORY,
+  KOULUTUSTYYPPI,
   KORKEAKOULUKOULUTUSTYYPIT,
 } from '../../../constants';
 
@@ -9,7 +9,7 @@ import AmmattilinenKuvausSection from './AmmatillinenKuvausSection';
 import KorkeakouluKuvausSection from './KorkeakouluKuvausSection';
 
 const KuvausSection = ({ language, koulutusValue, koulutustyyppi }) => {
-  if (koulutustyyppi === KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS) {
+  if (koulutustyyppi === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS) {
     return (
       <AmmattilinenKuvausSection
         language={language}

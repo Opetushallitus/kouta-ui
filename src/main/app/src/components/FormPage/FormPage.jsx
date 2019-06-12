@@ -5,13 +5,14 @@ import { Link } from 'react-router-dom';
 import { getThemeProp } from '../../theme';
 import Button from '../Button';
 import useTranslation from '../useTranslation';
+import Container from '../Container';
 
 const StepsContainer = styled.div`
   display: flex;
   padding: ${({ theme }) => theme.spacing.unit * 3}px 0px;
   background-color: ${getThemeProp('palette.primary.light')};
   justify-content: center;
-  border-bottom: 1px solid ${getThemeProp('palette.primary.dark')};
+  border-bottom: 2px solid ${getThemeProp('palette.primary.main')};
 `;
 
 const FooterContainer = styled.div`
@@ -23,14 +24,6 @@ const FooterContainer = styled.div`
   left: 0px;
   width: 100%;
   z-index: 99;
-`;
-
-const ContentWrapper = styled.div`
-  max-width: 1200px;
-  width: 100%;
-  margin: 0px auto;
-  padding: 0px ${({ theme }) => theme.spacing.unit * 3}px;
-  box-sizing: border-box;
 `;
 
 const FormContent = styled.div`
@@ -62,15 +55,15 @@ const FormPage = ({
 
   return (
     <>
-      <ContentWrapper>{header}</ContentWrapper>
+      <Container>{header}</Container>
       <StepsContainer>
-        <ContentWrapper>{steps}</ContentWrapper>
+        <Container>{steps}</Container>
       </StepsContainer>
       <FormContent hasFooter={!!footer}>
-        <ContentWrapper>{children}</ContentWrapper>
+        <Container>{children}</Container>
       </FormContent>
       <FooterContainer>
-        <ContentWrapper>
+        <Container>
           <FooterWrapper hasFooterHomeLink={hasFooterHomeLink}>
             {hasFooterHomeLink ? (
               <Button as={Link} to="/" color="primary" variant="outlined">
@@ -79,10 +72,10 @@ const FormPage = ({
             ) : null}
             <FooterActions>{footer}</FooterActions>
           </FooterWrapper>
-        </ContentWrapper>
+        </Container>
       </FooterContainer>
     </>
   );
-}
+};
 
 export default FormPage;

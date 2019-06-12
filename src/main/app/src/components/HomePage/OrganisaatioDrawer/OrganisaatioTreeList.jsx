@@ -12,7 +12,7 @@ export const OrganisaatioTreeList = ({
   language = 'fi',
 }) => (
   <TreeList items={items} defaultOpen={false}>
-    {({ nimi, oid, favourite, children, open }) => (
+    {({ nimi, oid, favourite, children, open, disabled }) => (
       <OrganisaatioItem
         oid={oid}
         favourite={favourite}
@@ -24,10 +24,11 @@ export const OrganisaatioTreeList = ({
         children={children}
         open={open}
         language={language}
+        disabled={disabled}
         collapse
       />
     )}
   </TreeList>
 );
 
-export default OrganisaatioTreeList;
+export default React.memo(OrganisaatioTreeList);

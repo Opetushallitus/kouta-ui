@@ -12,13 +12,11 @@ test('getValintaperusteByValues returns correct valintaperuste given form values
     kohdejoukonRajaus: {
       kohdejoukko: { value: 'joukko_1#1' },
     },
-    nimi: {
+    kuvaus: {
       nimi: {
         fi: 'Fi nimi',
         sv: 'Sv nimi',
       },
-    },
-    loppukuvaus: {
       kuvaus: {
         fi: parseEditor('<h1>Fi kuvaus</h1>'),
         sv: parseEditor('<h1>Sv kuvaus</h2>'),
@@ -27,90 +25,86 @@ test('getValintaperusteByValues returns correct valintaperuste given form values
     osaamistausta: {
       osaamistausta: [{ value: 'tausta_1#1' }, { value: 'tausta_2#1' }],
     },
-    kielitaitovaatimukset: {
-      kielet: [
-        {
-          kieli: { value: 'kieli_1#1' },
-          tyyppi: {
-            'tyyppi_1#1': true,
-            'tyyppi_2#1': true,
-            'tyyppi_3#1': false,
-          },
-          kuvaukset: {
-            'tyyppi_1#1': [
-              {
-                kuvaus: { value: 'kuvaus_1#1' },
-                taso: 'erinomainen',
-              },
-            ],
-            'tyyppi_2#1': [
-              {
-                kuvaus: { value: 'kuvaus_2#1' },
-                taso: 'ok',
-              },
-            ],
-          },
-          osoitustavat: ['osoitustapa_1#1', 'osoitustapa_2#1'],
-          muutOsoitustavat: [
+    kielitaitovaatimukset: [
+      {
+        kieli: { value: 'kieli_1#1' },
+        tyyppi: {
+          'tyyppi_1#1': true,
+          'tyyppi_2#1': true,
+          'tyyppi_3#1': false,
+        },
+        kuvaukset: {
+          'tyyppi_1#1': [
             {
-              kuvaus: {
-                fi: 'Fi kuvaus',
-                sv: 'Sv kuvaus',
-              },
+              kuvaus: { value: 'kuvaus_1#1' },
+              taso: 'erinomainen',
+            },
+          ],
+          'tyyppi_2#1': [
+            {
+              kuvaus: { value: 'kuvaus_2#1' },
+              taso: 'ok',
             },
           ],
         },
-      ],
-    },
-    valintatapa: {
-      valintatavat: [
-        {
-          kuvaus: {
-            fi: 'Fi kuvaus',
-            sv: 'Sv kuvaus',
-          },
-          nimi: {
-            fi: 'Fi nimi',
-            sv: 'Sv nimi',
-          },
-          kynnysehto: {
-            fi: 'Fi kynnysehto',
-            sv: 'Sv kynnysehto',
-          },
-          tapa: { value: 'tapa_1#1' },
-          enimmaispistemaara: 20,
-          vahimmaispistemaara: 10,
-          sisalto: [
-            {
-              tyyppi: 'teksti',
-              data: {
-                fi: parseEditor('<h2>Fi sisalto</h2>'),
-                sv: parseEditor('<h2>Sv sisalto</h2>'),
-              },
+        osoitustavat: ['osoitustapa_1#1', 'osoitustapa_2#1'],
+        muutOsoitustavat: [
+          {
+            kuvaus: {
+              fi: 'Fi kuvaus',
+              sv: 'Sv kuvaus',
             },
-            {
-              tyyppi: 'taulukko',
-              data: {
-                rows: [
-                  {
-                    columns: [
-                      { text: { fi: 'Fi column1', sv: 'Sv column1' } },
-                      { text: { fi: 'Fi column2', sv: 'Sv column2' } },
-                    ],
-                  },
-                  {
-                    columns: [
-                      { text: { fi: 'Fi column3', sv: 'Sv column3' } },
-                      { text: { fi: 'Fi column4', sv: 'Sv column4' } },
-                    ],
-                  },
-                ],
-              },
-            },
-          ],
+          },
+        ],
+      },
+    ],
+    valintatavat: [
+      {
+        kuvaus: {
+          fi: 'Fi kuvaus',
+          sv: 'Sv kuvaus',
         },
-      ],
-    },
+        nimi: {
+          fi: 'Fi nimi',
+          sv: 'Sv nimi',
+        },
+        kynnysehto: {
+          fi: 'Fi kynnysehto',
+          sv: 'Sv kynnysehto',
+        },
+        tapa: { value: 'tapa_1#1' },
+        enimmaispistemaara: 20,
+        vahimmaispistemaara: 10,
+        sisalto: [
+          {
+            tyyppi: 'teksti',
+            data: {
+              fi: parseEditor('<h2>Fi sisalto</h2>'),
+              sv: parseEditor('<h2>Sv sisalto</h2>'),
+            },
+          },
+          {
+            tyyppi: 'taulukko',
+            data: {
+              rows: [
+                {
+                  columns: [
+                    { text: { fi: 'Fi column1', sv: 'Sv column1' } },
+                    { text: { fi: 'Fi column2', sv: 'Sv column2' } },
+                  ],
+                },
+                {
+                  columns: [
+                    { text: { fi: 'Fi column3', sv: 'Sv column3' } },
+                    { text: { fi: 'Fi column4', sv: 'Sv column4' } },
+                  ],
+                },
+              ],
+            },
+          },
+        ],
+      },
+    ],
     tyyppi: {
       tyyppi: 'tyyppi_1#1',
     },

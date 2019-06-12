@@ -16,7 +16,7 @@ import CreateHakukohdeSteps from './CreateHakukohdeSteps';
 import CreateHakukohdeForm from './CreateHakukohdeForm';
 import CreateHakukohdeFooter from './CreateHakukohdeFooter';
 import Typography from '../Typography';
-import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
+import { KOULUTUSTYYPPI } from '../../constants';
 import useApiAsync from '../useApiAsync';
 import Spin from '../Spin';
 import useTranslation from '../useTranslation';
@@ -69,7 +69,7 @@ const CreateHakukohdePage = props => {
 
   const koulutustyyppi =
     get(data, 'koulutustyyppi') ||
-    KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS;
+    KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
   return (
     <FormPage

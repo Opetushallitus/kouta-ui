@@ -16,8 +16,11 @@ const isLomakeEditoriUrl = url => {
   return /lomake-editori/.test(url);
 };
 
+const threeHours = 10800000;
+
 const cache = setupCache({
-  limit: 1000,
+  limit: 200,
+  maxAge: threeHours,
   exclude: {
     query: false,
     filter: config => {
@@ -31,15 +34,19 @@ const hasBeenRetried = error => {
 };
 
 const isAuthorizationError = error => {
-  return [401, 403].includes(get(error, 'response.status'));
+  return [401].includes(get(error, 'response.status'));
 };
 
 const withAuthorizationInterceptor = apiUrls => client => {
   client.interceptors.response.use(
     response => response,
     async error => {
-      if (!isAuthorizationError(error) || hasBeenRetried(error)) {
+      if (!isAuthorizationError(error)) {
         return Promise.reject(error);
+      }
+
+      if (hasBeenRetried(error)) {
+        return window.location.replace(apiUrls.url('cas.login'));
       }
 
       error.config.__retried = true;
@@ -48,9 +55,13 @@ const withAuthorizationInterceptor = apiUrls => client => {
 
       if (isKoutaBackendUrl(responseUrl) && apiUrls) {
         try {
-          await client.get(apiUrls.url('kouta-backend.login'));
+          await client.get(apiUrls.url('kouta-backend.login'), {
+            cache: {
+              ignoreCache: true,
+            },
+          });
 
-          return client.get(error.config);
+          return client(error.config);
         } catch (e) {
           return Promise.reject(error);
         }

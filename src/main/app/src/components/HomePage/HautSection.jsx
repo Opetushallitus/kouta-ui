@@ -40,7 +40,7 @@ const Actions = ({ organisaatioOid }) => {
   const { t } = useTranslation();
 
   return (
-    <Button as={Link} to={`/organisaatio/${organisaatioOid}/haku`}>
+    <Button as={Link} to={`/organisaatio/${organisaatioOid}/haku`} variant="outlined">
       {t('etusivu.luoUusiHaku')}
     </Button>
   );
@@ -69,7 +69,7 @@ const makeTableColumns = t => [
   },
 ];
 
-const KoulutuksetSection = ({ organisaatioOid }) => {
+const KoulutuksetSection = ({ organisaatioOid, canCreate }) => {
   const { t } = useTranslation();
 
   const {
@@ -117,10 +117,10 @@ const KoulutuksetSection = ({ organisaatioOid }) => {
     <ListCollapse
       icon="access_time"
       header={t('yleiset.haut')}
-      actions={<Actions organisaatioOid={organisaatioOid} />}
+      actions={canCreate ? <Actions organisaatioOid={organisaatioOid} /> : null}
       defaultOpen
     >
-      <Spacing marginBottom={2}>
+      <Spacing marginBottom={3}>
         <Filters {...filtersProps} nimiPlaceholder={t('etusivu.haeHakuja')} />
       </Spacing>
 
@@ -138,7 +138,7 @@ const KoulutuksetSection = ({ organisaatioOid }) => {
         <Spin center />
       )}
 
-      <Flex marginTop={2}>
+      <Flex marginTop={3} justifyCenter>
         <Pagination value={page} onChange={setPage} pageCount={pageCount} />
       </Flex>
     </ListCollapse>

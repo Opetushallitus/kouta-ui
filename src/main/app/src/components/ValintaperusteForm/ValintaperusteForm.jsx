@@ -4,24 +4,20 @@ import { formValues } from 'redux-form';
 import FormCollapse from '../FormCollapse';
 import KieliversiotFormSection from '../KieliversiotFormSection';
 
-import {
-  KOULUTUSTYYPPI_CATEGORY,
-  KORKEAKOULUKOULUTUSTYYPIT,
-} from '../../constants';
-
+import { KOULUTUSTYYPPI } from '../../constants';
 import FormCollapseGroup from '../FormCollapseGroup';
 import KohdejoukonRajausSection from './KohdejoukonRajausSection';
 import HakutavanRajausSection from './HakutavanRajausSection';
-import NimiSection from './NimiSection';
 import ValintatapaSection from './ValintatapaSection';
 import PohjaSection from './PohjaSection';
 import KielitaitovaatimuksetSection from './KielitaitovaatimuksetSection';
-import LoppukuvausSection from './LoppukuvausSection';
+import KuvausSection from './KuvausSection';
 import OsaamistaustaSection from './OsaamistaustaSection';
 import TyyppiSection from './TyyppiSection';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
 import SoraKuvausSection from './SoraKuvausSection';
+import isKorkeakouluKoulutustyyppi from '../../utils/isKorkeakouluKoulutustyyppi';
 
 const WithLanguagesAndTyyppiValue = formValues({
   languages: 'kieliversiot.languages',
@@ -52,11 +48,9 @@ const ValintaperusteForm = ({
           const koulutustyyppi =
             tyyppi ||
             koulutustyyppiProp ||
-            KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS;
+            KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
-          const isKorkeakoulu = KORKEAKOULUKOULUTUSTYYPIT.includes(
-            koulutustyyppi,
-          );
+          const isKorkeakoulu = isKorkeakouluKoulutustyyppi(koulutustyyppi);
 
           return (
             <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
@@ -113,12 +107,11 @@ const ValintaperusteForm = ({
               </FormCollapse>
 
               <FormCollapse
-                header={t('valintaperustelomake.valintaperusteenNimi')}
-                section="nimi"
+                header={t('valintaperustelomake.valintaperusteenKuvaus')}
                 languages={languages}
-                {...getTestIdProps('nimiSection')}
+                {...getTestIdProps('kuvausSection')}
               >
-                <NimiSection />
+                <KuvausSection name="kuvaus" />
               </FormCollapse>
 
               {isKorkeakoulu ? (
@@ -133,20 +126,18 @@ const ValintaperusteForm = ({
 
               <FormCollapse
                 header={t('valintaperustelomake.valintatapa')}
-                section="valintatapa"
                 languages={languages}
                 {...getTestIdProps('valintatapaSection')}
               >
-                <ValintatapaSection />
+                <ValintatapaSection name="valintatavat" />
               </FormCollapse>
 
               <FormCollapse
                 header={t('valintaperustelomake.kielitaitovaatimukset')}
-                section="kielitaitovaatimukset"
                 languages={languages}
                 {...getTestIdProps('kielitaitovaatimuksetSection')}
               >
-                <KielitaitovaatimuksetSection />
+                <KielitaitovaatimuksetSection name="kielitaitovaatimukset" />
               </FormCollapse>
 
               <FormCollapse
@@ -158,17 +149,6 @@ const ValintaperusteForm = ({
                   organisaatioOid={organisaatioOid}
                 />
               </FormCollapse>
-
-              {isKorkeakoulu ? (
-                <FormCollapse
-                  header={t('valintaperustelomake.valintaperusteenLoppukuvaus')}
-                  section="loppukuvaus"
-                  languages={languages}
-                  {...getTestIdProps('loppukuvausSection')}
-                >
-                  <LoppukuvausSection />
-                </FormCollapse>
-              ) : null}
             </FormCollapseGroup>
           );
         }}

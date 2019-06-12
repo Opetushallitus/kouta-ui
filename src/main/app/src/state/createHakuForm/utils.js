@@ -2,9 +2,12 @@ import get from 'lodash/get';
 import pick from 'lodash/pick';
 
 import { isNumeric } from '../../utils';
+import getValintakoeFieldsData from '../../utils/getValintakoeFieldsData';
+import getValintakoeFieldsValues from '../../utils/getValintakoeFieldsValues';
+import getHakulomakeFieldsData from '../../utils/getHakulomakeFieldsData';
+import getHakulomakeFieldsValues from '../../utils/getHakulomakeFieldsValues';
 import { JULKAISUTILA } from '../../constants';
 import { ErrorBuilder } from '../../validation';
-import { getHakulomakeFieldsData, getHakulomakeFieldsValues } from '../utils';
 
 const getKielivalinta = values => get(values, 'kieliversiot.languages') || [];
 
@@ -17,7 +20,7 @@ export const getHakuByValues = values => {
 
   const kielivalinta = getKielivalinta(values);
 
-  const hakutapaKoodiUri = get(values, 'hakutapa.tapa') || null;
+  const hakutapaKoodiUri = get(values, 'hakutapa') || null;
 
   const hakuajat = (get(values, 'aikataulut.hakuaika') || []).map(
     ({ alkaa, paattyy }) => ({
@@ -31,7 +34,10 @@ export const getHakuByValues = values => {
     hakulomakeId,
     hakulomakeLinkki,
     hakulomakeKuvaus,
-  } = getHakulomakeFieldsData({ values, kielivalinta });
+  } = getHakulomakeFieldsData({
+    hakulomakeValues: get(values, 'hakulomake'),
+    kielivalinta,
+  });
 
   const hakukohteenLiittamisenTakaraja =
     get(values, 'aikataulut.lisaamisenTakaraja') || null;
@@ -51,16 +57,21 @@ export const getHakuByValues = values => {
         paattyy: paattyy || null,
       }),
     ),
-    yhteystieto: {
-      nimi: pick(get(values, 'yhteystiedot.nimi') || null, kielivalinta),
-      titteli: pick(get(values, 'yhteystiedot.titteli') || null, kielivalinta),
-      sahkoposti: pick(get(values, 'yhteystiedot.email') || null, kielivalinta),
-      puhelinnumero: pick(
-        get(values, 'yhteystiedot.puhelin') || null,
-        kielivalinta,
-      ),
-    },
+    yhteyshenkilot: (get(values, 'yhteyshenkilot') || []).map(
+      ({ nimi, titteli, puhelinnumero, sahkoposti, verkkosivu }) => ({
+        nimi: pick(nimi || {}, kielivalinta),
+        titteli: pick(titteli || {}, kielivalinta),
+        puhelinnumero: pick(puhelinnumero || {}, kielivalinta),
+        wwwSivu: pick(verkkosivu || {}, kielivalinta),
+        sahkoposti: pick(sahkoposti || {}, kielivalinta),
+      }),
+    ),
   };
+
+  const valintakokeet = getValintakoeFieldsData({
+    valintakoeValues: get(values, 'valintakoe'),
+    kielivalinta,
+  });
 
   const hakukohteenMuokkaamisenTakaraja =
     get(values, 'aikataulut.muokkauksenTakaraja') || null;
@@ -82,6 +93,7 @@ export const getHakuByValues = values => {
     hakulomakeId,
     hakulomakeLinkki,
     hakulomakeKuvaus,
+    valintakokeet,
   };
 };
 
@@ -100,13 +112,12 @@ export const getValuesByHaku = haku => {
     hakukohteenMuokkaamisenTakaraja,
     ajastettuJulkaisu,
     kielivalinta = [],
+    valintakokeet = [],
     nimi = {},
     metadata = {},
   } = haku;
 
-  const { yhteystieto = {} } = metadata;
-
-  const { tulevaisuudenAikataulu = [] } = metadata;
+  const { tulevaisuudenAikataulu = [], yhteyshenkilot = [] } = metadata;
 
   return {
     nimi: {
@@ -134,9 +145,7 @@ export const getValuesByHaku = haku => {
       muokkauksenTakaraja: hakukohteenMuokkaamisenTakaraja,
       ajastettuJulkaisu,
     },
-    hakutapa: {
-      tapa: hakutapaKoodiUri,
-    },
+    hakutapa: hakutapaKoodiUri,
     kohdejoukko: {
       kohde: kohdejoukkoKoodiUri,
     },
@@ -146,12 +155,16 @@ export const getValuesByHaku = haku => {
       hakulomakeKuvaus,
       hakulomakeLinkki,
     }),
-    yhteystiedot: {
-      nimi: get(yhteystieto, 'nimi') || {},
-      titteli: get(yhteystieto, 'titteli') || {},
-      email: get(yhteystieto, 'sahkoposti') || {},
-      puhelin: get(yhteystieto, 'puhelinnumero') || {},
-    },
+    yhteyshenkilot: yhteyshenkilot.map(
+      ({ nimi, titteli, puhelinnumero, sahkoposti, wwwSivu }) => ({
+        nimi: nimi || {},
+        titteli: titteli || {},
+        puhelinnumero: puhelinnumero || {},
+        sahkoposti: sahkoposti || {},
+        verkkosivu: wwwSivu || {},
+      }),
+    ),
+    valintakoe: getValintakoeFieldsValues(valintakokeet),
   };
 };
 
@@ -164,14 +177,13 @@ const validateEssentials = ({ values, errorBuilder }) => {
 };
 
 const validateCommon = ({ values, errorBuilder }) => {
-  const kielivalinta = getKielivalinta(values);
-  const hakutapa = get(values, 'hakutapa.tapa');
+  const hakutapa = get(values, 'hakutapa');
   const isYhteishaku = new RegExp('^hakutapa_01').test(hakutapa);
   const isErillishaku = new RegExp('^hakutapa_02').test(hakutapa);
 
   let enhancedErrorBuilder = errorBuilder
     .validateExistence('kohdejoukko.kohde')
-    .validateExistence('hakutapa.tapa')
+    .validateExistence('hakutapa')
     .validateArrayMinLength('aikataulut.hakuaika', 1, { isFieldArray: true })
     .validateArray('aikataulut.hakuaika', eb => {
       if (isErillishaku || isYhteishaku) {
@@ -180,21 +192,6 @@ const validateCommon = ({ values, errorBuilder }) => {
 
       return eb.validateExistence('alkaa');
     });
-
-  const shouldValidateContactName = Boolean(
-    [
-      get(values, 'yhteystiedot.email'),
-      get(values, 'yhteystiedot.puhelin'),
-      get(values, 'yhteystiedot.verkkosivu'),
-    ].find(v => !!v),
-  );
-
-  if (shouldValidateContactName) {
-    enhancedErrorBuilder = enhancedErrorBuilder.validateTranslations(
-      'yhteystiedot.nimi',
-      kielivalinta,
-    );
-  }
 
   return enhancedErrorBuilder;
 };

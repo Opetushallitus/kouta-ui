@@ -38,7 +38,7 @@ const Actions = ({ organisaatioOid }) => {
   const { t } = useTranslation();
 
   return (
-    <Button as={Link} to={`/organisaatio/${organisaatioOid}/valintaperusteet`}>
+    <Button variant="outlined" as={Link} to={`/organisaatio/${organisaatioOid}/valintaperusteet`}>
       {t('etusivu.luoUusiValintaperuste')}
     </Button>
   );
@@ -60,7 +60,7 @@ const makeTableColumns = t => [
   makeMuokkaajaColumn(t),
 ];
 
-const ValintaperusteetSection = ({ organisaatioOid }) => {
+const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
   const {
@@ -113,10 +113,10 @@ const ValintaperusteetSection = ({ organisaatioOid }) => {
     <ListCollapse
       icon="select_all"
       header={t('yleiset.valintaperusteet')}
-      actions={<Actions organisaatioOid={organisaatioOid} />}
+      actions={canCreate ? <Actions organisaatioOid={organisaatioOid} /> : null}
       defaultOpen
     >
-      <Spacing marginBottom={2}>
+      <Spacing marginBottom={3}>
         <Filters
           {...filtersProps}
           nimiPlaceholder={t('etusivu.haeValintaperusteita')}
@@ -137,7 +137,7 @@ const ValintaperusteetSection = ({ organisaatioOid }) => {
         <Spin center />
       )}
 
-      <Flex marginTop={2}>
+      <Flex marginTop={3} justifyCenter>
         <Pagination value={page} onChange={setPage} pageCount={pageCount} />
       </Flex>
     </ListCollapse>

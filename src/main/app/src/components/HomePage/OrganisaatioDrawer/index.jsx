@@ -93,7 +93,6 @@ const DrawerContent = ({
   onOrganisaatioChange,
   onClose,
   organisaatioFavourites,
-  organisaatioOids,
   onToggleFavourite,
 }) => {
   const { t } = useTranslation();
@@ -105,7 +104,6 @@ const DrawerContent = ({
   );
 
   const { hierarkia, isLoading: loadingHierarkia } = useOrganisaatioHierarkia({
-    includedOids: organisaatioOids,
     name: debounceNameFilter,
   });
 
@@ -140,6 +138,10 @@ const DrawerContent = ({
     },
     [openOrganisaatiot, setOpenOrganisaatiot],
   );
+
+  const onSelect = useCallback(oid => setSelectedOrganisaatio(oid), [
+    setSelectedOrganisaatio,
+  ]);
 
   return (
     <Container>
@@ -190,7 +192,7 @@ const DrawerContent = ({
           <OrganisaatioTreeList
             items={items}
             selected={selectedOrganisaatio}
-            onSelect={oid => setSelectedOrganisaatio(oid)}
+            onSelect={onSelect}
             onToggleFavourite={onToggleFavourite}
             onToggleOpen={onToggleOpen}
             language={language}

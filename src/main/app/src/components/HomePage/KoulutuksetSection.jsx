@@ -66,7 +66,7 @@ const LuoKoulutusDropdown = ({ organisaatioOid }) => {
     >
       {({ ref, onToggle, visible }) => (
         <div ref={ref} onClick={onToggle}>
-          <Button>
+          <Button variant="outlined">
             {t('etusivu.luoUusiKoulutus')} <DropdownIcon open={visible} />
           </Button>
         </div>
@@ -109,7 +109,7 @@ const makeTableColumns = t => [
   },
 ];
 
-const KoulutuksetSection = ({ organisaatioOid }) => {
+const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
   const {
@@ -159,10 +159,10 @@ const KoulutuksetSection = ({ organisaatioOid }) => {
     <ListCollapse
       icon="school"
       header={t('yleiset.koulutukset')}
-      actions={<Actions organisaatioOid={organisaatioOid} />}
+      actions={canCreate ? <Actions organisaatioOid={organisaatioOid} /> : null}
       defaultOpen
     >
-      <Spacing marginBottom={2}>
+      <Spacing marginBottom={3}>
         <Filters
           {...filtersProps}
           nimiPlaceholder={t('etusivu.haeKoulutuksia')}
@@ -183,7 +183,7 @@ const KoulutuksetSection = ({ organisaatioOid }) => {
         <Spin center />
       )}
 
-      <Flex marginTop={2}>
+      <Flex marginTop={3} justifyCenter>
         <Pagination value={page} onChange={setPage} pageCount={pageCount} />
       </Flex>
     </ListCollapse>

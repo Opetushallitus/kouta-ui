@@ -1,5 +1,4 @@
-import React, { useState, useCallback } from 'react';
-import styled from 'styled-components';
+import React, { useState, useCallback, useMemo } from 'react';
 import { withRouter } from 'react-router-dom';
 import get from 'lodash/get';
 import { connect } from 'react-redux';
@@ -7,7 +6,6 @@ import { connect } from 'react-redux';
 import Flex, { FlexItem } from '../Flex';
 import { getFirstLanguageValue, getTestIdProps, compose } from '../../utils';
 import Typography from '../Typography';
-import { getThemeProp, spacing } from '../../theme';
 import Spacing from '../Spacing';
 import KoulutuksetSection from './KoulutuksetSection';
 import ToteutuksetSection from './ToteutuksetSection';
@@ -19,21 +17,24 @@ import ValintaperusteetSection from './ValintaperusteetSection';
 import useTranslation from '../useTranslation';
 import { useOrganisaatio } from '../useOrganisaatio';
 import { setOrganisaatio } from '../../state/organisaatioSelection';
+import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
+import Spin from '../Spin';
 
-const Container = styled.div`
-  max-width: ${getThemeProp('contentMaxWidth')}
-  margin: 0px auto;
-  padding: ${spacing(3)};
-`;
+import {
+  KOULUTUS_ROLE,
+  TOTEUTUS_ROLE,
+  HAKU_ROLE,
+  VALINTAPERUSTE_ROLE,
+} from '../../constants';
 
 const HomeContent = ({
-  organisaatioOids,
   organisaatioOid,
   history,
   onOrganisaatioChange: onOrganisaatioChangeProp = () => {},
 }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const { t } = useTranslation();
+  const roleBuilder = useAuthorizedUserRoleBuilder();
 
   const onCloseDrawer = useCallback(() => setDrawerOpen(false), [
     setDrawerOpen,
@@ -51,55 +52,112 @@ const HomeContent = ({
     [history, onOrganisaatioChangeProp],
   );
 
+  const hasKoulutusWriteRole = useMemo(() => {
+    return roleBuilder.hasWrite(KOULUTUS_ROLE, organisaatio).result();
+  }, [roleBuilder, organisaatio]);
+
+  const hasKoulutusReadRole = useMemo(() => {
+    return roleBuilder.hasRead(KOULUTUS_ROLE, organisaatio).result();
+  }, [roleBuilder, organisaatio]);
+
+  const hasToteutusWriteRole = useMemo(() => {
+    return roleBuilder.hasWrite(TOTEUTUS_ROLE, organisaatio).result();
+  }, [roleBuilder, organisaatio]);
+
+  const hasToteutusReadRole = useMemo(() => {
+    return roleBuilder.hasRead(TOTEUTUS_ROLE, organisaatio).result();
+  }, [roleBuilder, organisaatio]);
+
+  const hasHakuWriteRole = useMemo(() => {
+    return roleBuilder.hasWrite(HAKU_ROLE, organisaatio).result();
+  }, [roleBuilder, organisaatio]);
+
+  const hasHakuReadRole = useMemo(() => {
+    return roleBuilder.hasRead(HAKU_ROLE, organisaatio).result();
+  }, [roleBuilder, organisaatio]);
+
+  const hasValintaperusteWriteRole = useMemo(() => {
+    return roleBuilder.hasWrite(VALINTAPERUSTE_ROLE, organisaatio).result();
+  }, [roleBuilder, organisaatio]);
+
+  const hasValintaperusteReadRole = useMemo(() => {
+    return roleBuilder.hasRead(VALINTAPERUSTE_ROLE, organisaatio).result();
+  }, [roleBuilder, organisaatio]);
+
+  const listSections = [
+    hasKoulutusReadRole && (
+      <KoulutuksetSection
+        canCreate={hasKoulutusWriteRole}
+        organisaatioOid={organisaatioOid}
+      />
+    ),
+    hasToteutusReadRole && (
+      <ToteutuksetSection
+        canCreate={hasToteutusWriteRole}
+        organisaatioOid={organisaatioOid}
+      />
+    ),
+    hasHakuReadRole && (
+      <HautSection
+        canCreate={hasHakuWriteRole}
+        organisaatioOid={organisaatioOid}
+      />
+    ),
+    hasValintaperusteReadRole && (
+      <ValintaperusteetSection
+        canCreate={hasValintaperusteWriteRole}
+        organisaatioOid={organisaatioOid}
+      />
+    ),
+  ].filter(Boolean);
+
   return (
     <>
       <OrganisaatioDrawer
         open={drawerOpen}
         onClose={onCloseDrawer}
         organisaatioOid={organisaatioOid}
-        organisaatioOids={organisaatioOids}
         onOrganisaatioChange={onOrganisaatioChange}
       />
-      <Container>
-        <Flex marginBottom={3} justifyEnd>
-          <FlexItem>
-            <Flex alignCenter>
-              <FlexItem grow={1} paddingRight={2}>
-                <Typography {...getTestIdProps('selectedOrganisaatio')}>
-                  {organisaatio
-                    ? getFirstLanguageValue(get(organisaatio, 'nimi'))
-                    : null}
-                </Typography>
-              </FlexItem>
-              <FlexItem grow={0}>
-                <Button
-                  onClick={onOpenDrawer}
-                  variant="outlined"
-                  title="Vaihda organisaatiota"
-                  {...getTestIdProps('toggleOrganisaatioDrawer')}
-                >
-                  <Icon type="menu" />
-                </Button>
-              </FlexItem>
-            </Flex>
-          </FlexItem>
-        </Flex>
-        <Typography variant="h3" marginBottom={3}>
-          {t('etusivu.koulutuksetJaHaut')}
-        </Typography>
-        <Spacing marginBottom={4}>
-          <KoulutuksetSection organisaatioOid={organisaatioOid} />
-        </Spacing>
-        <Spacing marginBottom={4}>
-          <ToteutuksetSection organisaatioOid={organisaatioOid} />
-        </Spacing>
-        <Spacing marginBottom={4}>
-          <HautSection organisaatioOid={organisaatioOid} />
-        </Spacing>
-        <Spacing>
-          <ValintaperusteetSection organisaatioOid={organisaatioOid} />
-        </Spacing>
-      </Container>
+
+      <Flex marginBottom={3} justifyEnd>
+        <FlexItem>
+          <Flex alignCenter>
+            <FlexItem grow={1} paddingRight={2}>
+              <Typography {...getTestIdProps('selectedOrganisaatio')}>
+                {organisaatio
+                  ? getFirstLanguageValue(get(organisaatio, 'nimi'))
+                  : null}
+              </Typography>
+            </FlexItem>
+            <FlexItem grow={0}>
+              <Button
+                onClick={onOpenDrawer}
+                variant="outlined"
+                title="Vaihda organisaatiota"
+                {...getTestIdProps('toggleOrganisaatioDrawer')}
+              >
+                <Icon type="menu" />
+              </Button>
+            </FlexItem>
+          </Flex>
+        </FlexItem>
+      </Flex>
+      <Typography variant="h3" marginBottom={3}>
+        {t('etusivu.koulutuksetJaHaut')}
+      </Typography>
+      {organisaatio ? (
+        listSections.map((section, index) => (
+          <Spacing
+            marginBottom={index < listSections.length - 1 ? 4 : 0}
+            key={index}
+          >
+            {section}
+          </Spacing>
+        ))
+      ) : (
+        <Spin center />
+      )}
     </>
   );
 };

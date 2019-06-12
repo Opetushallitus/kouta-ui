@@ -25,7 +25,6 @@ const FooterField = formValues('toteutus')(({ toteutus, children }) =>
 const HakukohteetModal = ({
   onClose,
   organisaatioOid,
-  pohjaValue,
   fieldName = 'toteutukset',
   onSave = () => {},
   ...props

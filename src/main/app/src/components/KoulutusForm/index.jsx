@@ -1,14 +1,14 @@
-import { KOULUTUSTYYPPI_CATEGORY, POHJAVALINNAT } from '../../constants';
+import { KOULUTUSTYYPPI, POHJAVALINTA } from '../../constants';
 
 export { default } from './KoulutusForm';
 
 export const initialValues = {
   type: {
-    type: KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS,
+    type: KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
   },
   base: {
     pohja: {
-      tapa: POHJAVALINNAT.UUSI,
+      tapa: POHJAVALINTA.UUSI,
     },
   },
   kieliversiot: {

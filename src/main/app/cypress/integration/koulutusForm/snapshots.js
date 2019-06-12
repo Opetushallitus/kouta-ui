@@ -7,7 +7,7 @@ module.exports = {
         tila: 'julkaistu',
         johtaaTutkintoon: true,
         kielivalinta: ['fi'],
-        tarjoajat: ['4.1.1.1.1.1', '2.1.1.1.1.1'],
+        tarjoajat: ['4.1.1.1.1.1', '5.1.1.1.1.1'],
         koulutusKoodiUri: 'koulutus_0#1',
         koulutustyyppi: 'amm',
         nimi: {
@@ -28,6 +28,7 @@ module.exports = {
           opintojenLaajuusKoodiUri: null,
           tutkintonimikeKoodiUrit: [],
           kuvauksenNimi: {},
+          koulutusalaKoodiUrit: [],
         },
       },
     },
@@ -38,7 +39,7 @@ module.exports = {
         tila: 'julkaistu',
         johtaaTutkintoon: true,
         kielivalinta: ['fi'],
-        tarjoajat: ['4.1.1.1.1.1', '2.1.1.1.1.1'],
+        tarjoajat: ['4.1.1.1.1.1', '5.1.1.1.1.1'],
         koulutusKoodiUri: 'koulutus_0#1',
         koulutustyyppi: 'yo',
         nimi: {
@@ -63,6 +64,9 @@ module.exports = {
           kuvauksenNimi: {
             fi: 'Kuvauksen nimi',
           },
+          koulutusalaKoodiUrit: [
+            'kansallinenkoulutusluokitus2016koulutusalataso2_0#1',
+          ],
         },
       },
     },
@@ -93,6 +97,7 @@ module.exports = {
           opintojenLaajuusKoodiUri: null,
           tutkintonimikeKoodiUrit: [],
           kuvauksenNimi: {},
+          koulutusalaKoodiUrit: [],
         },
         julkinen: false,
         muokkaaja: '1.2.246.562.24.62301161440',
@@ -132,6 +137,9 @@ module.exports = {
           kuvauksenNimi: {
             fi: 'Fi kuvauksen nimi',
           },
+          koulutusalaKoodiUrit: [
+            'kansallinenkoulutusluokitus2016koulutusalataso2_1#1',
+          ],
         },
         julkinen: true,
         muokkaaja: '1.2.246.562.24.62301161440',

@@ -19,7 +19,7 @@ import { getFirstLanguageValue } from '../../utils';
 import Flex, { FlexItem } from '../Flex';
 import Typography from '../Typography';
 import Spin from '../Spin';
-import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
+import { KOULUTUSTYYPPI } from '../../constants';
 import useTranslation from '../useTranslation';
 
 const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
@@ -118,7 +118,7 @@ const EditHakukohdePage = props => {
             toteutus={toteutus}
             hakukohde={hakukohde}
             koulutustyyppi={
-              koulutustyyppi || KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS
+              koulutustyyppi || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
             }
           />
         </>

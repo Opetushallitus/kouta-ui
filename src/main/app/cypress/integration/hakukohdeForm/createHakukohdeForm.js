@@ -7,6 +7,7 @@ import {
   getCheckbox,
   fillDateTimeInput,
   chooseKieliversiotLanguages,
+  fillValintakoeFields,
 } from '../../utils';
 
 import koulutus from '../../data/koulutus';
@@ -117,42 +118,7 @@ const fillValintaperusteenKuvausSection = cy => {
 
 const fillValintakoeSection = cy => {
   getByTestId('valintakoeSection', cy).within(() => {
-    getCheckbox('valintakokeentyyppi_0#1', cy).click({ force: true });
-
-    lisaa(cy);
-
-    getByTestId('valintakoelista', cy).within(() => {
-      getByTestId('osoite', cy)
-        .find('input')
-        .type('Osoite', { force: true });
-      getByTestId('postinumero', cy)
-        .find('input')
-        .type('00940', { force: true });
-      getByTestId('postitoimipaikka', cy)
-        .find('input')
-        .type('Helsinki', { force: true });
-
-      getByTestId('alkaa', cy).within(() => {
-        fillDatetime({
-          date: '02.04.2019',
-          time: '10:45',
-          cy,
-        });
-      });
-
-      getByTestId('paattyy', cy).within(() => {
-        fillDatetime({
-          date: '25.11.2019',
-          time: '23:59',
-          cy,
-        });
-      });
-
-      getByTestId('lisatietoa', cy)
-        .find('textarea')
-        .type('Lisätietoa', { force: true });
-    });
-
+    fillValintakoeFields({ cy });
     jatka(cy);
   });
 };
@@ -177,6 +143,10 @@ const fillLiitteetSection = cy => {
         date: '25.11.2019',
         time: '23:59',
         cy,
+      });
+
+      cy.getByTestId('toimitustapa').within(() => {
+        getRadio('muu_osoite', cy).click({ force: true });
       });
 
       getByTestId('osoite', cy)

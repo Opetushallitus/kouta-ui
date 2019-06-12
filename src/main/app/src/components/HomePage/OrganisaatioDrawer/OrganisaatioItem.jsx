@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react';
 import styled, { css } from 'styled-components';
-import { ellipsis } from 'polished';
 
 import Typography from '../../Typography';
 import { getFirstLanguageValue, noop } from '../../../utils';
@@ -41,7 +40,7 @@ const FavouriteIcon = ({ active = false, ...props }) => (
 );
 
 const NameContainer = styled.div`
-  ${ellipsis('25rem')};
+  max-width: 25rem;
 `;
 
 export const OrganisaatioItem = ({
@@ -72,7 +71,7 @@ export const OrganisaatioItem = ({
 
   return (
     <Typography>
-      <Flex alignCenter>
+      <Flex>
         <FlexItem grow={1} paddingRight={2}>
           <Radio checked={selected} onChange={onSelect} disabled={disabled}>
             <Flex>

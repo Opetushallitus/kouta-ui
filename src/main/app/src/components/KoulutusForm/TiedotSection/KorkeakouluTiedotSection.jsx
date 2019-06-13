@@ -29,7 +29,11 @@ const KoulutusalatField = createFormFieldComponent(
   selectMapProps,
 );
 
-export const KorkeakoulutuTiedotSection = ({ koulutustyyppi, language }) => {
+export const KorkeakoulutuTiedotSection = ({
+  koulutustyyppi,
+  language,
+  name,
+}) => {
   const { options: laajuusOptions } = useKoodistoOptions({
     koodisto: 'opintojenlaajuus',
   });
@@ -41,7 +45,7 @@ export const KorkeakoulutuTiedotSection = ({ koulutustyyppi, language }) => {
       <Spacing marginBottom={2}>
         <div {...getTestIdProps('koulutuskoodiSelect')}>
           <Field
-            name="koulutus"
+            name={`${name}.koulutus`}
             component={KoulutusField}
             koulutustyyppi={koulutustyyppi}
             label={t('koulutuslomake.valitseKoulutuskoodi')}
@@ -52,7 +56,7 @@ export const KorkeakoulutuTiedotSection = ({ koulutustyyppi, language }) => {
       <Spacing marginBottom={2}>
         <div {...getTestIdProps('opintojenLaajuusSelect')}>
           <Field
-            name="opintojenLaajuus"
+            name={`${name}.opintojenLaajuus`}
             component={FormFieldSelect}
             options={laajuusOptions}
             label={t('koulutuslomake.valitseOpintojenLaajuus')}
@@ -68,7 +72,7 @@ export const KorkeakoulutuTiedotSection = ({ koulutustyyppi, language }) => {
           {...getTestIdProps('tutkintonimikeSelect')}
         >
           <Field
-            name="tutkintonimike"
+            name={`${name}.tutkintonimike`}
             component={TutkintonimikeField}
             label={t('koulutuslomake.valitseTutkintonimike')}
           />
@@ -80,7 +84,7 @@ export const KorkeakoulutuTiedotSection = ({ koulutustyyppi, language }) => {
           {...getTestIdProps('koulutusalatSelect')}
         >
           <Field
-            name="koulutusalat"
+            name={`${name}.koulutusalat`}
             component={KoulutusalatField}
             label={t('koulutuslomake.valitseKoulutusalat')}
           />
@@ -89,7 +93,7 @@ export const KorkeakoulutuTiedotSection = ({ koulutustyyppi, language }) => {
 
       <Spacing {...getTestIdProps('nimiInput')}>
         <Field
-          name={`nimi.${language}`}
+          name={`${name}.nimi.${language}`}
           component={FormFieldInput}
           label={t('koulutuslomake.muokkaaKoulutuksenNimea')}
         />

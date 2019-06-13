@@ -2,9 +2,7 @@ import { getKoulutusByValues, getValuesByKoulutus } from '../utils';
 
 test('getKoulutusByValues returns correct koulutus given form values', () => {
   const koulutus = getKoulutusByValues({
-    kieliversiot: {
-      languages: ['fi', 'sv'],
-    },
+    kieliversiot: ['fi', 'sv'],
     tarjoajat: ['123.456.789'],
     information: {
       nimi: {
@@ -23,9 +21,7 @@ test('getKoulutusByValues returns correct koulutus given form values', () => {
         { value: 'koulutusala_2#1' },
       ],
     },
-    type: {
-      type: 'yo',
-    },
+    koulutustyyppi: 'yo',
     lisatiedot: {
       osioKuvaukset: {
         'osio_1#1': {},
@@ -46,9 +42,7 @@ test('getKoulutusByValues returns correct koulutus given form values', () => {
         sv: 'Sv nimi',
       },
     },
-    nakyvyys: {
-      julkinen: true,
-    },
+    julkinen: true,
   });
 
   expect(koulutus).toMatchSnapshot();

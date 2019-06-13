@@ -18,7 +18,7 @@ const getKuvaus = (koulutus, language) => {
 const getKoulutus = ({ koodiUri, ...args }) =>
   koodiUri ? getKoulutusByKoodi({ koodiUri, ...args }) : Promise.resolve(null);
 
-const AmmatillinenKuvausSection = ({ language, koulutusValue }) => {
+const AmmatillinenKuvausSection = ({ koulutusValue }) => {
   const { t } = useTranslation();
   const koodiUri = get(koulutusValue, 'value');
 

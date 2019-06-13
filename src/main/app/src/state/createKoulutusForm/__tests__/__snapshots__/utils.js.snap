@@ -92,12 +92,12 @@ Object {
       },
     ],
   },
-  "kieliversiot": Object {
-    "languages": Array [
-      "fi",
-      "sv",
-    ],
-  },
+  "julkinen": true,
+  "kieliversiot": Array [
+    "fi",
+    "sv",
+  ],
+  "koulutustyyppi": "yo",
   "lisatiedot": Object {
     "osioKuvaukset": Object {
       "osio_1#1": Object {},
@@ -115,14 +115,8 @@ Object {
       },
     ],
   },
-  "nakyvyys": Object {
-    "julkinen": true,
-  },
   "tarjoajat": Array [
     "123.456.789",
   ],
-  "type": Object {
-    "type": "yo",
-  },
 }
 `;

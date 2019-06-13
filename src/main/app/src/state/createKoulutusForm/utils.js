@@ -5,13 +5,13 @@ import { JULKAISUTILA } from '../../constants';
 import { ErrorBuilder } from '../../validation';
 import isKorkeakouluKoulutustyyppi from '../../utils/isKorkeakouluKoulutustyyppi';
 
-const getKielivalinta = values => get(values, 'kieliversiot.languages') || [];
+const getKielivalinta = values => get(values, 'kieliversiot') || [];
 
 export const getKoulutusByValues = values => {
   const kielivalinta = getKielivalinta(values);
   const tarjoajat = get(values, 'tarjoajat') || [];
   const koulutusKoodiUri = get(values, 'information.koulutus.value') || null;
-  const koulutustyyppi = get(values, 'type.type') || null;
+  const koulutustyyppi = get(values, 'koulutustyyppi') || null;
   const osiot = get(values, 'lisatiedot.osiot') || [];
   const osioKuvaukset = get(values, 'lisatiedot.osioKuvaukset') || {};
 
@@ -38,7 +38,7 @@ export const getKoulutusByValues = values => {
     kielivalinta,
   );
 
-  const julkinen = Boolean(get(values, 'nakyvyys.julkinen'));
+  const julkinen = Boolean(get(values, 'julkinen'));
 
   return {
     kielivalinta,
@@ -92,9 +92,7 @@ export const getValuesByKoulutus = koulutus => {
   }, {});
 
   return {
-    kieliversiot: {
-      languages: kielivalinta,
-    },
+    kieliversiot: kielivalinta,
     tarjoajat,
     information: {
       nimi,
@@ -107,9 +105,7 @@ export const getValuesByKoulutus = koulutus => {
       tutkintonimike: tutkintonimikeKoodiUrit.map(value => ({ value })),
       koulutusalat: koulutusalaKoodiUrit.map(value => ({ value })),
     },
-    type: {
-      type: koulutustyyppi,
-    },
+    koulutustyyppi,
     lisatiedot: {
       osioKuvaukset,
       osiot,
@@ -118,15 +114,13 @@ export const getValuesByKoulutus = koulutus => {
       kuvaus,
       nimi: kuvauksenNimi,
     },
-    nakyvyys: {
-      julkinen,
-    },
+    julkinen,
   };
 };
 
 const validateEssentials = ({ errorBuilder }) => {
   return errorBuilder
-    .validateArrayMinLength('kieliversiot.languages', 1)
+    .validateArrayMinLength('kieliversiot', 1)
     .validateExistence('information.koulutus');
 };
 

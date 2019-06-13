@@ -136,12 +136,10 @@ Object {
     },
     "tyyppi": "ataru",
   },
-  "kieliversiot": Object {
-    "languages": Array [
-      "fi",
-      "sv",
-    ],
-  },
+  "kieliversiot": Array [
+    "fi",
+    "sv",
+  ],
   "liitteet": Object {
     "liitteet": Array [
       Object {
@@ -172,7 +170,9 @@ Object {
           },
           "tapa": "muu_osoite",
         },
-        "tyyppi": "liitetyyppi_1#1",
+        "tyyppi": Object {
+          "value": "liitetyyppi_1#1",
+        },
       },
     ],
     "toimitusaika": "2011-12-20T10:30",
@@ -204,16 +204,14 @@ Object {
     },
     "voiSuorittaaKaksoistutkinnon": true,
   },
-  "pohjakoulutus": Object {
-    "koulutusvaatimukset": Array [
-      Object {
-        "value": "vaatimus_1#1",
-      },
-      Object {
-        "value": "vaatimus_2#1",
-      },
-    ],
-  },
+  "pohjakoulutus": Array [
+    Object {
+      "value": "vaatimus_1#1",
+    },
+    Object {
+      "value": "vaatimus_2#1",
+    },
+  ],
   "valintakoe": Object {
     "tilaisuudet": Object {
       "tyyppi_1#1": Array [
@@ -243,9 +241,7 @@ Object {
     ],
   },
   "valintaperusteenKuvaus": Object {
-    "valintaperuste": Object {
-      "value": "peruste_1#1",
-    },
+    "value": "peruste_1#1",
   },
 }
 `;

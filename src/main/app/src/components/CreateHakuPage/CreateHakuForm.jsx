@@ -23,10 +23,8 @@ const HakuReduxForm = reduxForm({
 
 const getCopyValues = hakuOid => ({
   pohja: {
-    pohja: {
-      tapa: POHJAVALINTA.KOPIO,
-      valinta: { value: hakuOid },
-    },
+    tapa: POHJAVALINTA.KOPIO,
+    valinta: { value: hakuOid },
   },
 });
 

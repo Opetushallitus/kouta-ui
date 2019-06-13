@@ -6,16 +6,14 @@ import useTranslation from '../useTranslation';
 import { FormFieldInput } from '../FormFields';
 import isKorkeakouluKoulutustyyppi from '../../utils/isKorkeakouluKoulutustyyppi';
 
-const AloituspaikatSection = ({ koulutustyyppi }) => {
-  const isKorkeakoulu = isKorkeakouluKoulutustyyppi(
-    koulutustyyppi,
-  );
+const AloituspaikatSection = ({ koulutustyyppi, name }) => {
+  const isKorkeakoulu = isKorkeakouluKoulutustyyppi(koulutustyyppi);
   const { t } = useTranslation();
 
   const aloituspaikatField = (
     <>
       <Field
-        name="aloituspaikkamaara"
+        name={`${name}.aloituspaikkamaara`}
         component={FormFieldInput}
         type="number"
         label={t('hakukohdelomake.aloituspaikkojenLukumaara')}
@@ -26,7 +24,7 @@ const AloituspaikatSection = ({ koulutustyyppi }) => {
   const ensikertalaisetField = (
     <>
       <Field
-        name="ensikertalaismaara"
+        name={`${name}.ensikertalaismaara`}
         component={FormFieldInput}
         type="number"
         label={t('hakukohdelomake.ensikertalaistenAloituspaikkojenLukumaara')}

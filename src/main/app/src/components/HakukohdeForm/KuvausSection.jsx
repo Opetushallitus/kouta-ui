@@ -30,7 +30,7 @@ const getValintaperusteetOptions = valintaperusteet =>
     label: getFirstLanguageValue(nimi),
   }));
 
-const KuvausSection = ({ haku, organisaatio }) => {
+const KuvausSection = ({ haku, organisaatio, name }) => {
   const hakuOid = get(haku, 'oid');
   const organisaatioOid = get(organisaatio, 'oid');
   const watch = [hakuOid, organisaatioOid].join(',');
@@ -47,7 +47,7 @@ const KuvausSection = ({ haku, organisaatio }) => {
 
   return (
     <Field
-      name="valintaperuste"
+      name={name}
       component={FormFieldSelect}
       options={options}
       label={t('yleiset.valitseKuvaus')}

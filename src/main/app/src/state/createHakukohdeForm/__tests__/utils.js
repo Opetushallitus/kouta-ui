@@ -9,9 +9,7 @@ test('getHakukohdeByValues returns correct hakukohde given form values', () => {
         value: '2020',
       },
     },
-    kieliversiot: {
-      languages: ['fi', 'sv'],
-    },
+    kieliversiot: ['fi', 'sv'],
     aloituspaikat: {
       aloituspaikkamaara: '25',
       ensikertalaismaara: '29',
@@ -33,16 +31,9 @@ test('getHakukohdeByValues returns correct hakukohde given form values', () => {
       nimi: { fi: 'Fi nimi', sv: 'Sv nimi' },
       voiSuorittaaKaksoistutkinnon: true,
     },
-    pohjakoulutus: {
-      koulutusvaatimukset: [
-        { value: 'vaatimus_1#1' },
-        { value: 'vaatimus_2#1' },
-      ],
-    },
+    pohjakoulutus: [{ value: 'vaatimus_1#1' }, { value: 'vaatimus_2#1' }],
     valintaperusteenKuvaus: {
-      valintaperuste: {
-        value: 'peruste_1#1',
-      },
+      value: 'peruste_1#1',
     },
     valintakoe: {
       tyypit: [{ value: 'tyyppi_1#1' }],

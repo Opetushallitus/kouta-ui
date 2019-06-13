@@ -9,7 +9,7 @@ import getHakulomakeFieldsValues from '../../utils/getHakulomakeFieldsValues';
 import { JULKAISUTILA } from '../../constants';
 import { ErrorBuilder } from '../../validation';
 
-const getKielivalinta = values => get(values, 'kieliversiot.languages') || [];
+const getKielivalinta = values => get(values, 'kieliversiot') || [];
 
 export const getHakuByValues = values => {
   const alkamiskausiKoodiUri = get(values, 'aikataulut.kausi') || null;
@@ -44,9 +44,9 @@ export const getHakuByValues = values => {
 
   const ajastettuJulkaisu = get(values, 'aikataulut.ajastettuJulkaisu') || null;
 
-  const nimi = pick(get(values, 'nimi.nimi') || null, kielivalinta);
+  const nimi = pick(get(values, 'nimi'), kielivalinta);
 
-  const kohdejoukkoKoodiUri = get(values, 'kohdejoukko.kohde') || null;
+  const kohdejoukkoKoodiUri = get(values, 'kohdejoukko') || null;
 
   const kohdejoukonTarkenneKoodiUri = null;
 
@@ -120,12 +120,8 @@ export const getValuesByHaku = haku => {
   const { tulevaisuudenAikataulu = [], yhteyshenkilot = [] } = metadata;
 
   return {
-    nimi: {
-      nimi: nimi,
-    },
-    kieliversiot: {
-      languages: kielivalinta,
-    },
+    nimi,
+    kieliversiot: kielivalinta,
     aikataulut: {
       kausi: alkamiskausiKoodiUri,
       vuosi: { value: alkamisvuosi ? alkamisvuosi.toString() : '' },
@@ -146,9 +142,7 @@ export const getValuesByHaku = haku => {
       ajastettuJulkaisu,
     },
     hakutapa: hakutapaKoodiUri,
-    kohdejoukko: {
-      kohde: kohdejoukkoKoodiUri,
-    },
+    kohdejoukko: kohdejoukkoKoodiUri,
     hakulomake: getHakulomakeFieldsValues({
       hakulomaketyyppi,
       hakulomakeId,
@@ -172,8 +166,8 @@ const validateEssentials = ({ values, errorBuilder }) => {
   const kielivalinta = getKielivalinta(values);
 
   return errorBuilder
-    .validateArrayMinLength('kieliversiot.languages', 1)
-    .validateTranslations('nimi.nimi', kielivalinta);
+    .validateArrayMinLength('kieliversiot', 1)
+    .validateTranslations('nimi', kielivalinta);
 };
 
 const validateCommon = ({ values, errorBuilder }) => {
@@ -182,7 +176,7 @@ const validateCommon = ({ values, errorBuilder }) => {
   const isErillishaku = new RegExp('^hakutapa_02').test(hakutapa);
 
   let enhancedErrorBuilder = errorBuilder
-    .validateExistence('kohdejoukko.kohde')
+    .validateExistence('kohdejoukko')
     .validateExistence('hakutapa')
     .validateArrayMinLength('aikataulut.hakuaika', 1, { isFieldArray: true })
     .validateArray('aikataulut.hakuaika', eb => {

@@ -7,7 +7,7 @@ import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
 import { FormFieldCheckbox, FormFieldInput } from '../FormFields';
 
-const PerustiedotSection = ({ language, koulutustyyppi }) => {
+const PerustiedotSection = ({ language, koulutustyyppi, name }) => {
   const isAmmatillinen = isAmmatillinenKoulutustyyppi(koulutustyyppi);
   const { t } = useTranslation();
 
@@ -15,14 +15,14 @@ const PerustiedotSection = ({ language, koulutustyyppi }) => {
     <>
       <Spacing marginBottom={2} {...getTestIdProps('nimi')}>
         <Field
-          name={`nimi.${language}`}
+          name={`${name}.nimi.${language}`}
           component={FormFieldInput}
           label={t('yleiset.nimi')}
         />
       </Spacing>
       {isAmmatillinen ? (
         <Field
-          name="voiSuorittaaKaksoistutkinnon"
+          name={`${name}.voiSuorittaaKaksoistutkinnon`}
           component={FormFieldCheckbox}
         >
           {t('hakukohdelomake.voiSuorittaaKaksoistutkinnon')}

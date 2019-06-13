@@ -9,7 +9,7 @@ import getHakulomakeFieldsValues from '../../utils/getHakulomakeFieldsValues';
 import { JULKAISUTILA, LIITTEEN_TOIMITUSTAPA } from '../../constants';
 import { ErrorBuilder } from '../../validation';
 
-const getKieliversiot = values => get(values, 'kieliversiot.languages') || [];
+const getKieliversiot = values => get(values, 'kieliversiot') || [];
 
 const getLiitteillaYhteinenToimitusaika = values =>
   !!get(values, 'liitteet.yhteinenToimitusaika');
@@ -121,11 +121,10 @@ export const getHakukohdeByValues = values => {
   });
 
   const pohjakoulutusvaatimusKoodiUrit = (
-    get(values, 'pohjakoulutus.koulutusvaatimukset') || []
+    get(values, 'pohjakoulutus') || []
   ).map(({ value }) => value);
 
-  const valintaperuste =
-    get(values, 'valintaperusteenKuvaus.valintaperuste.value') || null;
+  const valintaperuste = get(values, 'valintaperusteenKuvaus.value') || null;
 
   const ensikertalaisenAloituspaikat = getAsNumberOrNull(
     get(values, 'aloituspaikat.ensikertalaismaara'),
@@ -200,9 +199,7 @@ export const getValuesByHakukohde = hakukohde => {
         value: isNumeric(alkamisvuosi) ? alkamisvuosi.toString() : '',
       },
     },
-    kieliversiot: {
-      languages: kielivalinta,
-    },
+    kieliversiot: kielivalinta,
     aloituspaikat: {
       aloituspaikkamaara: isNumeric(aloituspaikat)
         ? aloituspaikat.toString()
@@ -224,17 +221,11 @@ export const getValuesByHakukohde = hakukohde => {
       nimi,
       voiSuorittaaKaksoistutkinnon: !!toinenAsteOnkoKaksoistutkinto,
     },
-    pohjakoulutus: {
-      koulutusvaatimukset: (pohjakoulutusvaatimusKoodiUrit || []).map(
-        value => ({
-          value,
-        }),
-      ),
-    },
+    pohjakoulutus: (pohjakoulutusvaatimusKoodiUrit || []).map(value => ({
+      value,
+    })),
     valintaperusteenKuvaus: {
-      valintaperuste: {
-        value: valintaperuste,
-      },
+      value: valintaperuste,
     },
     valintakoe: getValintakoeFieldsValues(valintakokeet),
     liitteet: {
@@ -262,7 +253,7 @@ export const getValuesByHakukohde = hakukohde => {
           kuvaus = {},
         }) => {
           return {
-            tyyppi,
+            tyyppi: { value: tyyppi },
             nimi,
             kuvaus,
             toimitusaika: toimitusaika || '',
@@ -375,7 +366,7 @@ const validateEssentials = ({ values, errorBuilder }) => {
   const kielivalinta = getKieliversiot(values);
 
   return errorBuilder
-    .validateArrayMinLength('kieliversiot.languages', 1)
+    .validateArrayMinLength('kieliversiot', 1)
     .validateTranslations('perustiedot.nimi', kielivalinta);
 };
 
@@ -383,7 +374,7 @@ const validateCommon = ({ errorBuilder, values }) => {
   const kieliversiot = getKieliversiot(values);
 
   let enhancedErrorBuilder = errorBuilder
-    .validateArrayMinLength('pohjakoulutus.koulutusvaatimukset', 1)
+    .validateArrayMinLength('pohjakoulutus', 1)
     .validateExistence('aloituspaikat.aloituspaikkamaara');
 
   enhancedErrorBuilder = validateLiitteet({

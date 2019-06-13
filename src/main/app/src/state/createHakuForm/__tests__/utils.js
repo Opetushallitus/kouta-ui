@@ -6,14 +6,10 @@ import { HAKULOMAKETYYPPI } from '../../../constants';
 
 const baseValues = {
   nimi: {
-    nimi: {
-      fi: 'Nimi',
-      sv: 'Namn',
-    },
+    fi: 'Nimi',
+    sv: 'Namn',
   },
-  kieliversiot: {
-    languages: ['fi', 'sv'],
-  },
+  kieliversiot: ['fi', 'sv'],
   aikataulut: {
     kausi: 'alkamiskausi_1#1',
     vuosi: { value: '2020' },
@@ -42,9 +38,7 @@ const baseValues = {
     ajastettuJulkaisu: '2019-11-16T08:44',
   },
   hakutapa: 'hakutapa_1#1',
-  kohdejoukko: {
-    kohde: 'kohde_1#1',
-  },
+  kohdejoukko: 'kohde_1#1',
   hakulomake: {
     tyyppi: HAKULOMAKETYYPPI.ATARU,
     lomake: {

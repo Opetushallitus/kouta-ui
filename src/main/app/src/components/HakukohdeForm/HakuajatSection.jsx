@@ -95,21 +95,25 @@ const renderHakuajatFields = ({ fields, t }) => (
   </>
 );
 
-const CustomHakuaika = () => {
+const CustomHakuaika = ({ name }) => {
   const { t } = useTranslation();
 
   return (
     <Spacing marginTop={2}>
-      <FieldArray name="hakuajat" component={renderHakuajatFields} t={t} />
+      <FieldArray
+        name={`${name}.hakuajat`}
+        component={renderHakuajatFields}
+        t={t}
+      />
     </Spacing>
   );
 };
 
-const EriHakuaikaFieldValue = formValues({
-  eriHakuaika: 'eriHakuaika',
-})(({ eriHakuaika, children }) => children({ eriHakuaika }));
+const EriHakuaikaFieldValue = formValues(({ name }) => ({
+  eriHakuaika: `${name}.eriHakuaika`,
+}))(({ eriHakuaika, children }) => children({ eriHakuaika }));
 
-const HakuajatSection = ({ haku }) => {
+const HakuajatSection = ({ haku, name }) => {
   const { t } = useTranslation();
 
   return (
@@ -121,12 +125,14 @@ const HakuajatSection = ({ haku }) => {
         <HakuaikaInterval haku={haku} />
       </Spacing>
       <Field
-        name="eriHakuaika"
+        name={`${name}.eriHakuaika`}
         component={renderCheckboxField}
         label={t('hakukohdelomake.hakukohteellaEriHakuaika')}
       />
-      <EriHakuaikaFieldValue>
-        {({ eriHakuaika }) => (eriHakuaika ? <CustomHakuaika /> : null)}
+      <EriHakuaikaFieldValue name={name}>
+        {({ eriHakuaika }) =>
+          eriHakuaika ? <CustomHakuaika name={name} /> : null
+        }
       </EriHakuaikaFieldValue>
     </>
   );

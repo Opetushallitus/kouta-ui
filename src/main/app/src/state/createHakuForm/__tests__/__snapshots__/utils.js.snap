@@ -333,20 +333,14 @@ Object {
     "tyyppi": "muu",
   },
   "hakutapa": "hakutapa_1#1",
-  "kieliversiot": Object {
-    "languages": Array [
-      "fi",
-      "sv",
-    ],
-  },
-  "kohdejoukko": Object {
-    "kohde": "kohdejoukko_1#1",
-  },
+  "kieliversiot": Array [
+    "fi",
+    "sv",
+  ],
+  "kohdejoukko": "kohdejoukko_1#1",
   "nimi": Object {
-    "nimi": Object {
-      "fi": "Fi nimi",
-      "sv": "Sv nimi",
-    },
+    "fi": "Fi nimi",
+    "sv": "Sv nimi",
   },
   "valintakoe": Object {
     "tilaisuudet": Object {
@@ -435,20 +429,14 @@ Object {
     "tyyppi": "ei sähköistä",
   },
   "hakutapa": "hakutapa_1#1",
-  "kieliversiot": Object {
-    "languages": Array [
-      "fi",
-      "sv",
-    ],
-  },
-  "kohdejoukko": Object {
-    "kohde": "kohdejoukko_1#1",
-  },
+  "kieliversiot": Array [
+    "fi",
+    "sv",
+  ],
+  "kohdejoukko": "kohdejoukko_1#1",
   "nimi": Object {
-    "nimi": Object {
-      "fi": "Fi nimi",
-      "sv": "Sv nimi",
-    },
+    "fi": "Fi nimi",
+    "sv": "Sv nimi",
   },
   "valintakoe": Object {
     "tilaisuudet": Object {
@@ -539,20 +527,14 @@ Object {
     "tyyppi": "ataru",
   },
   "hakutapa": "hakutapa_1#1",
-  "kieliversiot": Object {
-    "languages": Array [
-      "fi",
-      "sv",
-    ],
-  },
-  "kohdejoukko": Object {
-    "kohde": "kohdejoukko_1#1",
-  },
+  "kieliversiot": Array [
+    "fi",
+    "sv",
+  ],
+  "kohdejoukko": "kohdejoukko_1#1",
   "nimi": Object {
-    "nimi": Object {
-      "fi": "Fi nimi",
-      "sv": "Sv nimi",
-    },
+    "fi": "Fi nimi",
+    "sv": "Sv nimi",
   },
   "valintakoe": Object {
     "tilaisuudet": Object {

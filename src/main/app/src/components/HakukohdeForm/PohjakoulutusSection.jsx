@@ -6,7 +6,7 @@ import { getTestIdProps } from '../../utils';
 import useTranslation from '../useTranslation';
 import { FormFieldSelect } from '../FormFields';
 
-const PohjakoulutusSection = () => {
+const PohjakoulutusSection = ({ name }) => {
   const { options } = useKoodistoOptions({
     koodisto: 'pohjakoulutusvaatimustoinenaste',
   });
@@ -16,7 +16,7 @@ const PohjakoulutusSection = () => {
   return (
     <div {...getTestIdProps('pohjakoulutusvaatimusSelect')}>
       <Field
-        name="koulutusvaatimukset"
+        name={name}
         component={FormFieldSelect}
         options={options}
         label={t('hakukohdelomake.valitsePohjakoulutusvaatimus')}

@@ -106,21 +106,12 @@ module.exports = {
         kaytetaanHaunAikataulua: false,
         liitteetOnkoSamaToimitusaika: false,
         liitteetOnkoSamaToimitusosoite: false,
-        liitteidenToimitusosoite: {
-          osoite: {
-            osoite: {
-              fi: 'Paasikivenkatu 7',
-            },
-            postinumero: '15110',
-            postitoimipaikka: {
-              fi: 'Lahti',
-            },
-          },
-          sahkoposti: 'salpaus@salpaus.fi',
-        },
+        liitteidenToimitusosoite: null,
+        liitteidenToimitustapa: null,
         liitteet: [
           {
-            tyyppi: null,
+            tyyppi: 'liitetyypitamm_0#1',
+            toimitustapa: 'muu_osoite',
             nimi: {
               fi: 'Nimi',
             },

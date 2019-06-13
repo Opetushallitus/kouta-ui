@@ -22,11 +22,9 @@ const KoulutusReduxForm = reduxForm({
 })(KoulutusForm);
 
 const getCopyValues = koulutusOid => ({
-  base: {
-    pohja: {
-      tapa: POHJAVALINTA.KOPIO,
-      valinta: { value: koulutusOid },
-    },
+  pohja: {
+    tapa: POHJAVALINTA.KOPIO,
+    valinta: { value: koulutusOid },
   },
 });
 

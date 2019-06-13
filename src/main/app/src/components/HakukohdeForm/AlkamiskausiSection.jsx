@@ -6,7 +6,7 @@ import useKoodistoOptions from '../useKoodistoOptions';
 import useTranslation from '../useTranslation';
 import { FormFieldRadioGroup, FormFieldYearSelect } from '../FormFields';
 
-const AlkamiskausiSection = () => {
+const AlkamiskausiSection = ({ name }) => {
   const { t } = useTranslation();
   const { options } = useKoodistoOptions({ koodisto: 'kausi' });
 
@@ -14,7 +14,7 @@ const AlkamiskausiSection = () => {
     <>
       <Spacing marginBottom={2}>
         <Field
-          name="kausi"
+          name={`${name}.kausi`}
           component={FormFieldRadioGroup}
           options={options}
           label={t('yleiset.kausi')}
@@ -22,7 +22,7 @@ const AlkamiskausiSection = () => {
       </Spacing>
       <Spacing>
         <Field
-          name="vuosi"
+          name={`${name}.vuosi`}
           component={FormFieldYearSelect}
           label={t('yleiset.vuosi')}
         />

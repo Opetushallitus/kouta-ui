@@ -1,7 +1,7 @@
-import { KORKEAKOULUKOULUTUSTYYPIT } from '../constants';
+import isTutkintoonJohtavaKorkeakouluKoulutustyyppi from './isTutkintoonJohtavaKorkeakouluKoulutustyyppi';
 
-const isKorkeakouluKoulutustyyppi = value => {
-  return KORKEAKOULUKOULUTUSTYYPIT.includes(value);
+const isKorkeakouluKoulutustyyppi = tyyppi => {
+  return isTutkintoonJohtavaKorkeakouluKoulutustyyppi(tyyppi);
 };
 
 export default isKorkeakouluKoulutustyyppi;

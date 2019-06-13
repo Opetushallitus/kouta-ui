@@ -2,9 +2,10 @@ import get from 'lodash/get';
 import toPairs from 'lodash/toPairs';
 import pick from 'lodash/pick';
 
-import { JULKAISUTILA, KORKEAKOULUKOULUTUSTYYPIT } from '../../constants';
+import { JULKAISUTILA } from '../../constants';
 import { ErrorBuilder } from '../../validation';
 import { isNumeric } from '../../utils';
+import isKorkeakouluKoulutustyyppi from '../../utils/isKorkeakouluKoulutustyyppi';
 
 const getKielivalinta = values => get(values, 'kieliversiot.languages') || [];
 
@@ -362,7 +363,7 @@ export const validate = ({ tila, koulutustyyppi, values }) => {
 
   errorBuilder = validateCommon({ values, errorBuilder });
 
-  if (KORKEAKOULUKOULUTUSTYYPIT.includes(koulutustyyppi)) {
+  if (isKorkeakouluKoulutustyyppi(koulutustyyppi)) {
     errorBuilder = validateKorkeakoulu({ values, errorBuilder });
   }
 

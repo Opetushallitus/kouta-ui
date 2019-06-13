@@ -21,6 +21,7 @@ import KuvausSection from './KuvausSection';
 import useTranslation from '../useTranslation';
 import YhteyshenkilotSection from './YhteyshenkilotSection';
 import isKorkeakouluKoulutustyyppi from '../../utils/isKorkeakouluKoulutustyyppi';
+import isAmmatillinenKoulutustyyppi from '../../utils/isAmmatillinenKoulutustyyppi';
 import { KOULUTUSTYYPPI } from '../../constants';
 
 const ActiveLanguages = formValues({
@@ -124,7 +125,7 @@ const ToteutusForm = ({
               </FormCollapse>
             ) : null}
 
-            {koulutustyyppi === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS ? (
+            {isAmmatillinenKoulutustyyppi(koulutustyyppi) ? (
               <FormCollapse
                 header={t('toteutuslomake.valitseOsaamisalat')}
                 section="osaamisalat"

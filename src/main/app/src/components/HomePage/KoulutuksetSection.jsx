@@ -55,6 +55,12 @@ const LuoKoulutusDropdown = ({ organisaatioOid }) => {
       >
         Tutkintoon johtava koulutus
       </DropdownMenuItem>
+      <DropdownMenuItem
+        as={Link}
+        to={`/organisaatio/${organisaatioOid}/koulutus?johtaaTutkintoon=false`}
+      >
+        Tutkintoon johtamaton koulutus
+      </DropdownMenuItem>
     </DropdownMenu>
   );
 

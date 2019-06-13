@@ -6,9 +6,21 @@ import {
   chooseKieliversiotLanguages,
   selectOption,
   fillTreeSelect,
+  fillKoulutustyyppiSelect,
 } from '../../utils';
 
 import { stubKoulutusFormRoutes } from '../../koulutusFormUtils';
+
+const jatka = cy => {
+  getByTestId('jatkaButton', cy).click({ force: true });
+};
+
+const fillKoulutustyyppiSection = (path, cy) => {
+  cy.getByTestId('tyyppiSection').within(() => {
+    fillKoulutustyyppiSelect(path, cy);
+    jatka(cy);
+  });
+};
 
 const fillPohjaSection = cy => {
   getByTestId('pohjaSection', cy).within(() => {
@@ -47,10 +59,6 @@ const tallenna = cy => {
   getByTestId('tallennaJaJulkaiseKoulutusButton', cy).click({ force: true });
 };
 
-const jatka = cy => {
-  getByTestId('jatkaButton', cy).click({ force: true });
-};
-
 const fillJarjestajaSection = (cy, jatkaArg = false) => {
   getByTestId('jarjestajaSection', cy).within(() => {
     getByTestId('jarjestajatSelection', cy).within(() => {
@@ -79,10 +87,7 @@ describe('createKoulutusForm', () => {
       },
     }).as('createAmmKoulutusResponse');
 
-    getByTestId('tyyppiSection', cy).within(() => {
-      getRadio('amm', cy).click({ force: true });
-      getByTestId('jatkaButton', cy).click({ force: true });
-    });
+    fillKoulutustyyppiSection(['amm'], cy);
 
     fillPohjaSection(cy);
 
@@ -122,10 +127,7 @@ describe('createKoulutusForm', () => {
       },
     }).as('createYoKoulutusResponse');
 
-    getByTestId('tyyppiSection', cy).within(() => {
-      getRadio('yo', cy).click({ force: true });
-      jatka(cy);
-    });
+    fillKoulutustyyppiSection(['korkeakoulutus', 'yo'], cy);
 
     fillPohjaSection(cy);
 

@@ -50,7 +50,9 @@ const ValintaperusteForm = ({
             koulutustyyppiProp ||
             KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
-          const isKorkeakoulu = isKorkeakouluKoulutustyyppi(koulutustyyppi);
+          const isKorkeakoulu = isKorkeakouluKoulutustyyppi(
+            koulutustyyppi,
+          );
 
           return (
             <FormCollapseGroup enabled={steps} defaultOpen={!steps}>

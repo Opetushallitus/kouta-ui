@@ -10,7 +10,6 @@ import JarjestajaSection from './JarjestajaSection';
 import FormCollapseGroup from '../FormCollapseGroup';
 import FormCollapse from '../FormCollapse';
 import KieliversiotFormSection from '../KieliversiotFormSection';
-import { KORKEAKOULUKOULUTUSTYYPIT } from '../../constants';
 import ToteutuksetSection from './ToteutuksetSection';
 import Button from '../Button';
 import { isFunction, getTestIdProps } from '../../utils';
@@ -18,6 +17,7 @@ import LisatiedotSection from './LisatiedotSection';
 import Flex from '../Flex';
 import NakyvyysSection from './NakyvyysSection';
 import useTranslation from '../useTranslation';
+import isKorkeakouluKoulutustyyppi from '../../utils/isKorkeakouluKoulutustyyppi';
 
 const WithValues = formValues({
   koulutustyyppiValue: 'type.type',
@@ -37,6 +37,7 @@ const KoulutusForm = ({
   scrollTarget,
   koulutus: koulutusProp = null,
   canEditKoulutustyyppi = true,
+  johtaaTutkintoon = true,
 }) => {
   const { t } = useTranslation();
 
@@ -62,7 +63,7 @@ const KoulutusForm = ({
                   scrollOnActive={false}
                   {...getTestIdProps('tyyppiSection')}
                 >
-                  <TypeSection />
+                  <TypeSection johtaaTutkintoon={johtaaTutkintoon} />
                 </FormCollapse>
               ) : null}
 
@@ -135,7 +136,7 @@ const KoulutusForm = ({
                 />
               </FormCollapse>
 
-              {KORKEAKOULUKOULUTUSTYYPIT.includes(koulutustyyppi) ? (
+              {isKorkeakouluKoulutustyyppi(koulutustyyppi) ? (
                 <FormCollapse
                   header="Koulutuksen näkyminen muille koulutustoimijoille"
                   section="nakyvyys"

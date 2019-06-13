@@ -1,8 +1,9 @@
 import get from 'lodash/get';
 import pick from 'lodash/pick';
 
-import { JULKAISUTILA, KORKEAKOULUKOULUTUSTYYPIT } from '../../constants';
+import { JULKAISUTILA } from '../../constants';
 import { ErrorBuilder } from '../../validation';
+import isKorkeakouluKoulutustyyppi from '../../utils/isKorkeakouluKoulutustyyppi';
 
 const getKielivalinta = values => get(values, 'kieliversiot.languages') || [];
 
@@ -150,7 +151,7 @@ export const validate = ({ values, koulutustyyppi, tila }) => {
 
   errorBuilder = validateCommon({ values, errorBuilder });
 
-  if (KORKEAKOULUKOULUTUSTYYPIT.includes(koulutustyyppi)) {
+  if (isKorkeakouluKoulutustyyppi(koulutustyyppi)) {
     errorBuilder = validateKorkeakoulu({ values, errorBuilder });
   }
 

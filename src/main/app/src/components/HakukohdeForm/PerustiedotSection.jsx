@@ -2,15 +2,13 @@ import React from 'react';
 import { Field } from 'redux-form';
 
 import Spacing from '../Spacing';
-import { KOULUTUSTYYPPI } from '../../constants';
+import isAmmatillinenKoulutustyyppi from '../../utils/isAmmatillinenKoulutustyyppi';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
 import { FormFieldCheckbox, FormFieldInput } from '../FormFields';
 
 const PerustiedotSection = ({ language, koulutustyyppi }) => {
-  const isAmmatillinen =
-    koulutustyyppi === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
-
+  const isAmmatillinen = isAmmatillinenKoulutustyyppi(koulutustyyppi);
   const { t } = useTranslation();
 
   return (

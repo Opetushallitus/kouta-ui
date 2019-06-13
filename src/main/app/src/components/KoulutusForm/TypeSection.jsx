@@ -15,7 +15,7 @@ const TyyppiField = createFormFieldComponent(
   },
 );
 
-const TypeSection = () => {
+const TypeSection = ({ johtaaTutkintoon }) => {
   const { t } = useTranslation();
 
   return (
@@ -23,6 +23,7 @@ const TypeSection = () => {
       name="type"
       component={TyyppiField}
       label={t('koulutuslomake.valitseKoulutustyyppi')}
+      johtaaTutkintoon={johtaaTutkintoon}
     />
   );
 };

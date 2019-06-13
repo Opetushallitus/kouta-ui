@@ -1,15 +1,12 @@
 import React from 'react';
 
-import {
-  KOULUTUSTYYPPI,
-  KORKEAKOULUKOULUTUSTYYPIT,
-} from '../../../constants';
-
 import AmmattilinenTiedotSection from './AmmatillinenTiedotSection';
 import KorkeakouluTiedotSection from './KorkeakouluTiedotSection';
+import isKorkeakouluKoulutustyyppi from '../../../utils/isKorkeakouluKoulutustyyppi';
+import isAmmatillinenKoulutustyyppi from '../../../utils/isAmmatillinenKoulutustyyppi';
 
 const TiedotSection = ({ language, koulutustyyppi, koulutusValue }) => {
-  if (koulutustyyppi === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS) {
+  if (isAmmatillinenKoulutustyyppi(koulutustyyppi)) {
     return (
       <AmmattilinenTiedotSection
         language={language}
@@ -17,7 +14,7 @@ const TiedotSection = ({ language, koulutustyyppi, koulutusValue }) => {
         koulutusValue={koulutusValue}
       />
     );
-  } else if (KORKEAKOULUKOULUTUSTYYPIT.includes(koulutustyyppi)) {
+  } else if (isKorkeakouluKoulutustyyppi(koulutustyyppi)) {
     return (
       <KorkeakouluTiedotSection
         language={language}

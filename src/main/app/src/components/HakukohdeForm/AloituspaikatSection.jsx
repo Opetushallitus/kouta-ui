@@ -7,7 +7,9 @@ import { FormFieldInput } from '../FormFields';
 import isKorkeakouluKoulutustyyppi from '../../utils/isKorkeakouluKoulutustyyppi';
 
 const AloituspaikatSection = ({ koulutustyyppi }) => {
-  const isKorkeakoulu = isKorkeakouluKoulutustyyppi(koulutustyyppi);
+  const isKorkeakoulu = isKorkeakouluKoulutustyyppi(
+    koulutustyyppi,
+  );
   const { t } = useTranslation();
 
   const aloituspaikatField = (

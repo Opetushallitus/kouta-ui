@@ -6,6 +6,7 @@ import {
   getTableInput,
   getCheckbox,
   chooseKieliversiotLanguages,
+  fillKoulutustyyppiSelect,
 } from '../../utils';
 
 import { stubValintaperusteFormRoutes } from '../../valintaperusteFormUtils';
@@ -24,9 +25,9 @@ const tallenna = cy => {
   });
 };
 
-const fillTyyppiSection = (tyyppi, cy) => {
-  getByTestId('tyyppiSection', cy).within(() => {
-    getRadio(tyyppi, cy).click({ force: true });
+const fillKoulutustyyppiSection = (path, cy) => {
+  cy.getByTestId('tyyppiSection').within(() => {
+    fillKoulutustyyppiSelect(path, cy);
     jatka(cy);
   });
 };
@@ -189,7 +190,7 @@ describe('createValintaperusteForm', () => {
       },
     }).as('createValintaperusteRequest');
 
-    fillTyyppiSection('amm', cy);
+    fillKoulutustyyppiSection(['amm'], cy);
     fillKieliversiotSection(cy);
     fillPohjaSection(cy);
     fillHakutavanRajausSection(cy);
@@ -215,7 +216,7 @@ describe('createValintaperusteForm', () => {
       },
     }).as('createValintaperusteRequest');
 
-    fillTyyppiSection('yo', cy);
+    fillKoulutustyyppiSection(['korkeakoulutus', 'yo'], cy);
     fillKieliversiotSection(cy);
     fillPohjaSection(cy);
     fillHakutavanRajausSection(cy);

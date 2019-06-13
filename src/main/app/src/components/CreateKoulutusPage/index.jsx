@@ -16,7 +16,10 @@ const CreateKoulutusPage = props => {
     history,
   } = props;
 
-  const { kopioKoulutusOid = null } = queryString.parse(search);
+  const {
+    kopioKoulutusOid = null,
+    johtaaTutkintoon = 'true',
+  } = queryString.parse(search);
 
   return (
     <FormPage
@@ -28,6 +31,7 @@ const CreateKoulutusPage = props => {
       <CreateKoulutusForm
         organisaatioOid={oid}
         kopioKoulutusOid={kopioKoulutusOid}
+        johtaaTutkintoon={johtaaTutkintoon === 'true'}
         onCreateNew={() => {
           history.replace({ search: '' });
         }}

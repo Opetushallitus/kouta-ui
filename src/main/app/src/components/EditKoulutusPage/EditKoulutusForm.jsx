@@ -23,6 +23,7 @@ const EditKoulutusForm = ({ onSave, koulutus, ...props }) => {
       canCopy={false}
       initialValues={initialValues}
       canEditKoulutustyyppi={false}
+      johtaaTutkintoon={Boolean(koulutus.johtaaTutkintoon)}
     />
   );
 };

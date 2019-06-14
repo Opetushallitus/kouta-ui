@@ -95,10 +95,10 @@ export const maybeCopy = () => (dispatch, getState) => {
   const values = getToteutusFormValues(getState());
 
   if (
-    get(values, 'base.pohja.tapa') === POHJAVALINTA.KOPIO &&
-    !!get(values, 'base.pohja.valinta')
+    get(values, 'pohja.tapa') === POHJAVALINTA.KOPIO &&
+    !!get(values, 'pohja.valinta')
   ) {
-    dispatch(copy(values.base.pohja.valinta.value));
+    dispatch(copy(values.pohja.valinta.value));
   }
 };
 

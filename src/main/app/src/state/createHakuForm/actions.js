@@ -30,10 +30,10 @@ export const maybeCopy = () => (dispatch, getState) => {
   const values = getHakuFormValues(getState());
 
   if (
-    get(values, 'pohja.pohja.tapa') === POHJAVALINTA.KOPIO &&
-    !!get(values, 'pohja.pohja.valinta.value')
+    get(values, 'pohja.tapa') === POHJAVALINTA.KOPIO &&
+    !!get(values, 'pohja.valinta.value')
   ) {
-    dispatch(copy(values.pohja.pohja.valinta.value));
+    dispatch(copy(values.pohja.valinta.value));
   }
 };
 

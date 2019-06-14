@@ -1,7 +1,8 @@
 import { getFormValues, stopSubmit, startSubmit } from 'redux-form';
 import produce from 'immer';
 
-import { getKoulutusByValues, validate } from '../createKoulutusForm';
+import getKoulutusByFormValues from '../../utils/getKoulutusByFormValues';
+import validateKoulutusForm from '../../utils/validateKoulutusForm';
 import { getKoulutusByKoodi, updateKoutaKoulutus } from '../../apiUtils';
 import { openSavingErrorToast, openSavingSuccessToast } from '../toaster';
 import { isNonEmptyObject } from '../../utils';
@@ -24,7 +25,11 @@ export const submit = ({ koulutus, tila: tilaArg }) => async (
   const state = getState();
   const values = getKoulutusFormValues(state);
   const tila = tilaArg || koulutus.tila;
-  const errors = validate({ values, tila, tyyppi: koulutus.metadata.tyyppi });
+  const errors = validateKoulutusForm({
+    values,
+    tila,
+    tyyppi: koulutus.metadata.tyyppi,
+  });
 
   dispatch(startSubmit('editKoulutusForm'));
 
@@ -38,7 +43,7 @@ export const submit = ({ koulutus, tila: tilaArg }) => async (
     me: { oid: kayttajaOid },
   } = state;
 
-  const koulutusFormData = getKoulutusByValues(values);
+  const koulutusFormData = getKoulutusByFormValues(values);
 
   let nimi = koulutusFormData.nimi;
 

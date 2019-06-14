@@ -1,14 +1,10 @@
 import { reduxForm } from 'redux-form';
-import { compose, withProps } from 'recompose';
 
-import HakukohdeForm, { getInitialValues } from '../HakukohdeForm';
+import HakukohdeForm, { initialValues } from '../HakukohdeForm';
 
-export default compose(
-  withProps(({ organisaatio }) => ({
-    steps: true,
-    initialValues: getInitialValues({ organisaatio }),
-  })),
-  reduxForm({
-    form: 'createHakukohdeForm',
-  }),
-)(HakukohdeForm);
+const CreateHakukohdeForm = reduxForm({
+  form: 'createHakukohdeForm',
+  initialValues,
+})(HakukohdeForm);
+
+export default CreateHakukohdeForm;

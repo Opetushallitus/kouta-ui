@@ -1,20 +1,18 @@
 import { reduxForm } from 'redux-form';
-import { compose } from 'recompose';
 import { connect } from 'react-redux';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import KoulutusForm, { initialValues } from '../KoulutusForm';
 import {
   copy as copyKoulutus,
   maybeCopy as maybeCopyKoulutus,
-  getValuesByKoulutus,
 } from '../../state/createKoulutusForm';
+import getFormValuesByKoulutus from '../../utils/getFormValuesByKoulutus';
 import { getKoutaKoulutusByOid } from '../../apiUtils';
 import useApiAsync from '../useApiAsync';
 import { POHJAVALINTA } from '../../constants';
-import { memoize } from '../../utils';
 
-const resolveFn = () => Promise.resolve({});
+const resolveFn = () => Promise.resolve();
 
 const KoulutusReduxForm = reduxForm({
   form: 'createKoulutusForm',
@@ -28,11 +26,11 @@ const getCopyValues = koulutusOid => ({
   },
 });
 
-const getInitialValues = memoize(koulutus => {
-  return koulutus.oid
-    ? { ...getCopyValues(koulutus.oid), ...getValuesByKoulutus(koulutus) }
+const getInitialValues = koulutus => {
+  return koulutus
+    ? { ...getCopyValues(koulutus.oid), ...getFormValuesByKoulutus(koulutus) }
     : initialValues;
-});
+};
 
 const CreateKoulutusForm = props => {
   const { kopioKoulutusOid } = props;
@@ -45,25 +43,21 @@ const CreateKoulutusForm = props => {
     watch: kopioKoulutusOid,
   });
 
-  return data ? (
-    <KoulutusReduxForm
-      {...props}
-      steps
-      initialValues={kopioKoulutusOid ? getInitialValues(data) : initialValues}
-    />
-  ) : null;
+  const initialValues = useMemo(() => {
+    return getInitialValues(data);
+  }, [data]);
+
+  return <KoulutusReduxForm {...props} steps initialValues={initialValues} />;
 };
 
-export default compose(
-  connect(
-    null,
-    dispatch => ({
-      onCopy: koulutusOid => {
-        dispatch(copyKoulutus(koulutusOid));
-      },
-      onMaybeCopy: () => {
-        dispatch(maybeCopyKoulutus());
-      },
-    }),
-  ),
+export default connect(
+  null,
+  dispatch => ({
+    onCopy: koulutusOid => {
+      dispatch(copyKoulutus(koulutusOid));
+    },
+    onMaybeCopy: () => {
+      dispatch(maybeCopyKoulutus());
+    },
+  }),
 )(CreateKoulutusForm);

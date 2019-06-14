@@ -4,7 +4,8 @@ import get from 'lodash/get';
 import { JULKAISUTILA, POHJAVALINTA } from '../../constants';
 import { getKoulutusByKoodi } from '../../apiUtils';
 import { openSavingErrorToast, openSavingSuccessToast } from '../toaster';
-import { getKoulutusByValues, validate } from './utils';
+import getKoulutusByFormValues from '../../utils/getKoulutusByFormValues';
+import validateKoulutusForm from '../../utils/validateKoulutusForm';
 import { isNonEmptyObject } from '../../utils';
 
 const getKoulutusFormValues = getFormValues('createKoulutusForm');
@@ -30,9 +31,9 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
 ) => {
   const state = getState();
   const values = getKoulutusFormValues(state);
-  const koulutusFormData = getKoulutusByValues(values);
+  const koulutusFormData = getKoulutusByFormValues(values);
 
-  const errors = validate({
+  const errors = validateKoulutusForm({
     values,
     tila,
     koulutustyyppi: koulutusFormData.koulutustyyppi,
@@ -115,6 +116,6 @@ export const maybeCopy = () => (dispatch, getState) => {
     get(values, 'pohja.tapa') === POHJAVALINTA.KOPIO &&
     !!get(values, 'pohja.valinta')
   ) {
-    dispatch(copy(values.base.pohja.valinta.value));
+    dispatch(copy(values.pohja.valinta.value));
   }
 };

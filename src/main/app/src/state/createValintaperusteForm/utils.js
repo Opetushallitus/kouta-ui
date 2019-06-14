@@ -9,7 +9,7 @@ import {
   VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI,
   JULKAISUTILA,
 } from '../../constants';
-import { ErrorBuilder } from '../../validation';
+import createErrorBuilder from '../../utils/createErrorBuilder';
 
 import {
   serialize as serializeEditor,
@@ -20,7 +20,7 @@ const kielitaitoMuuOsoitusKoodiUriRegExp = new RegExp(
   `^${VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI}`,
 );
 
-const getKieliversiot = values => get(values, 'kieliversiot.languages') || [];
+const getKieliversiot = values => get(values, 'kieliversiot') || [];
 
 const serializeTable = ({ table, kielivalinta }) => {
   if (!get(table, 'rows')) {
@@ -90,14 +90,11 @@ const parseSisalto = ({ sisalto }) => {
 };
 
 export const getValintaperusteByValues = values => {
-  const hakutapaKoodiUri = get(values, 'hakutavanRajaus.hakutapa');
+  const hakutapaKoodiUri = get(values, 'hakutapa');
 
-  const kielivalinta = get(values, 'kieliversiot.languages') || [];
+  const kielivalinta = get(values, 'kieliversiot') || [];
 
-  const kohdejoukkoKoodiUri = get(
-    values,
-    'kohdejoukonRajaus.kohdejoukko.value',
-  );
+  const kohdejoukkoKoodiUri = get(values, 'kohdejoukko.value') || null;
 
   const nimi = pick(get(values, 'kuvaus.nimi'), kielivalinta);
 
@@ -164,11 +161,11 @@ export const getValintaperusteByValues = values => {
     };
   });
 
-  const osaamistaustaKoodiUrit = (
-    get(values, 'osaamistausta.osaamistausta') || []
-  ).map(({ value }) => value);
+  const osaamistaustaKoodiUrit = (get(values, 'osaamistausta') || []).map(
+    ({ value }) => value,
+  );
 
-  const koulutustyyppi = get(values, 'tyyppi.tyyppi') || null;
+  const koulutustyyppi = get(values, 'tyyppi') || null;
   const soraKuvausId = get(values, 'soraKuvaus.value') || null;
 
   return {
@@ -256,22 +253,14 @@ export const getValuesByValintaperuste = valintaperuste => {
   );
 
   return {
-    kieliversiot: {
-      languages: kielivalinta,
-    },
-    hakutavanRajaus: {
-      hakutapa: hakutapaKoodiUri,
-    },
-    kohdejoukonRajaus: {
-      kohdejoukko: kohdejoukkoKoodiUri ? { value: kohdejoukkoKoodiUri } : null,
-    },
+    kieliversiot: kielivalinta,
+    hakutapa: hakutapaKoodiUri,
+    kohdejoukko: kohdejoukkoKoodiUri ? { value: kohdejoukkoKoodiUri } : null,
     kuvaus: {
       nimi,
       kuvaus: mapValues(kuvaus || {}, parseEditor),
     },
-    osaamistausta: {
-      osaamistausta: (osaamistaustaKoodiUrit || []).map(value => ({ value })),
-    },
+    osaamistausta: (osaamistaustaKoodiUrit || []).map(value => ({ value })),
     kielitaitovaatimukset: kielitaitovaatimukset,
     valintatavat: (valintatavat || []).map(
       ({
@@ -292,9 +281,7 @@ export const getValuesByValintaperuste = valintaperuste => {
         sisalto: parseSisalto({ sisalto }),
       }),
     ),
-    tyyppi: {
-      tyyppi: koulutustyyppi,
-    },
+    tyyppi: koulutustyyppi,
     soraKuvaus: {
       value: soraKuvausId,
     },
@@ -305,7 +292,7 @@ const validateEssentials = ({ errorBuilder, values }) => {
   const kieliversiot = getKieliversiot(values);
 
   return errorBuilder
-    .validateArrayMinLength('kieliversiot.languages', 1)
+    .validateArrayMinLength('kieliversiot', 1)
     .validateTranslations('kuvaus.nimi', kieliversiot);
 };
 
@@ -313,8 +300,8 @@ const validateCommon = ({ errorBuilder, values }) => {
   const kieliversiot = getKieliversiot(values);
 
   return errorBuilder
-    .validateExistence('hakutavanRajaus.hakutapa')
-    .validateExistence('kohdejoukonRajaus.kohdejoukko')
+    .validateExistence('hakutapa')
+    .validateExistence('kohdejoukko')
     .validateArrayMinLength('valintatavat', 1, {
       isFieldArray: true,
     })
@@ -326,7 +313,7 @@ const validateCommon = ({ errorBuilder, values }) => {
 };
 
 export const validate = ({ tila, values }) => {
-  let errorBuilder = new ErrorBuilder({ values });
+  let errorBuilder = createErrorBuilder({ values });
 
   errorBuilder = validateEssentials({ errorBuilder, values });
 

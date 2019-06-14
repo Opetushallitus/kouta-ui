@@ -3,7 +3,7 @@ import get from 'lodash/get';
 import produce from 'immer';
 
 import { JULKAISUTILA, POHJAVALINTA } from '../../constants';
-import { createSavingErrorToast, createSavingSuccessToast } from '../toaster';
+import { openSavingErrorToast, openSavingSuccessToast } from '../toaster';
 import { getToteutusByValues, validate } from './utils';
 import { KOULUTUSTYYPPI } from '../../constants';
 import { isNonEmptyObject } from '../../utils';
@@ -40,7 +40,7 @@ export const submit = ({
 
   if (isNonEmptyObject(errors)) {
     dispatch(stopSubmit(formName, errors));
-    dispatch(createSavingErrorToast());
+    dispatch(openSavingErrorToast());
     return;
   }
 
@@ -75,12 +75,12 @@ export const submit = ({
     toteutusData = data;
   } catch (e) {
     dispatch(stopSubmit(formName));
-    dispatch(createSavingErrorToast());
+    dispatch(openSavingErrorToast());
     return;
   }
 
   dispatch(stopSubmit(formName));
-  dispatch(createSavingSuccessToast());
+  dispatch(openSavingSuccessToast());
 
   if (get(toteutusData, 'oid')) {
     const { oid: toteutusOid } = toteutusData;

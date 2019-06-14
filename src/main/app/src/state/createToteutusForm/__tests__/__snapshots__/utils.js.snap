@@ -189,12 +189,10 @@ Object {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
-  "tarjoajat": Object {
-    "jarjestajat": Array [
-      "org1",
-      "org2",
-    ],
-  },
+  "tarjoajat": Array [
+    "org1",
+    "org2",
+  ],
 }
 `;
 
@@ -305,17 +303,13 @@ Object {
       "sv": "20kr",
     },
   },
-  "kieliversiot": Object {
-    "languages": Array [
-      "fi",
-      "sv",
-    ],
-  },
+  "kieliversiot": Array [
+    "fi",
+    "sv",
+  ],
   "kuvaus": Object {
-    "kuvaus": Object {
-      "fi": "Fi kuvaus",
-      "sv": "Sv kuvaus",
-    },
+    "fi": "Fi kuvaus",
+    "sv": "Sv kuvaus",
   },
   "nayttamistiedot": Object {
     "ammattinimikkeet": Object {
@@ -348,10 +342,8 @@ Object {
     },
   },
   "nimi": Object {
-    "name": Object {
-      "fi": "Fi nimi",
-      "sv": "Sv nimi",
-    },
+    "fi": "Fi nimi",
+    "sv": "Sv nimi",
   },
   "osaamisalat": Object {
     "osaamisalaLinkit": Object {

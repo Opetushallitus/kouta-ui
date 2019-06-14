@@ -1,71 +1,70 @@
 import { createAction } from 'redux-actions';
 
-export const CREATE_TOAST = 'toaster/CREATE_TOAST';
-export const REMOVE_TOAST = 'toaster/REMOVE_TOAST';
+import { isNumber } from '../../utils';
+
+export const OPEN_TOAST = 'toaster/OPEN_TOAST';
+export const CLOSE_TOAST = 'toaster/CLOSE_TOAST';
 
 const genKey = () => `${Date.now()}${Math.round(Math.random() * 1000)}`;
 
-export const createToast = toast => ({
-  type: CREATE_TOAST,
-  payload: { key: genKey(), ...toast },
-});
+export const openToastWithKey = createAction(OPEN_TOAST);
+export const closeToast = createAction(CLOSE_TOAST);
 
-export const removeToast = createAction(REMOVE_TOAST);
+export const openToast = ({
+  title,
+  description,
+  duration = 5000,
+  status,
+  key: keyArg,
+} = {}) => dispatch => {
+  const key = keyArg || genKey();
 
-export const createTemporaryToast = ({ delay = 5000, ...toast }) => (
-  dispatch,
-  getState,
-) => {
-  const { key = genKey(), ...restToast } = toast;
+  dispatch(openToastWithKey({ title, description, status, key }));
 
-  if (!key) {
-    return;
+  if (isNumber(duration) && duration > 0) {
+    setTimeout(() => {
+      dispatch(closeToast(key));
+    }, duration);
   }
-
-  dispatch(createToast({ key, ...restToast }));
-
-  setTimeout(() => {
-    dispatch(removeToast(key));
-  }, delay);
 };
 
-export const createSavingErrorToast = () => (
+export const openSavingErrorToast = () => (
   dispatch,
   getState,
   { localisation },
 ) => {
   return dispatch(
-    createTemporaryToast({
-      status: 'danger',
+    openToast({
       title: localisation.t('yleiset.tallennusEpaonnistui'),
       description: localisation.t('yleiset.tarkistaLomakkeenTiedot'),
-    }),
-  );
-};
-
-export const createSavingSuccessToast = () => (
-  dispatch,
-  getState,
-  { localisation },
-) => {
-  return dispatch(
-    createTemporaryToast({
-      status: 'success',
-      title: localisation.t('yleiset.tallennusOnnistui'),
-    }),
-  );
-};
-
-export const createGenericErrorToast = () => (
-  dispatch,
-  getState,
-  { localisation },
-) => {
-  return dispatch(
-    createTemporaryToast({
       status: 'danger',
+    }),
+  );
+};
+
+export const openSavingSuccessToast = () => (
+  dispatch,
+  getState,
+  { localisation },
+) => {
+  return dispatch(
+    openToast({
+      title: localisation.t('yleiset.tallennusOnnistui'),
+      status: 'success',
+    }),
+  );
+};
+
+export const openGenericErrorToast = () => (
+  dispatch,
+  getState,
+  { localisation },
+) => {
+  return dispatch(
+    openToast({
       title: localisation.t('yleiset.virheilmoitus'),
       description: localisation.t('yleiset.virheilmoitusKuvaus'),
+      status: 'danger',
     }),
   );
 };

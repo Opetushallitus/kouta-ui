@@ -4,12 +4,12 @@ import { Field } from 'redux-form';
 import useTranslation from '../useTranslation';
 import { FormFieldTextarea } from '../FormFields';
 
-const KuvausSection = ({ language }) => {
+const KuvausSection = ({ language, name }) => {
   const { t } = useTranslation();
 
   return (
     <Field
-      name={`kuvaus.${language}`}
+      name={`${name}.${language}`}
       component={FormFieldTextarea}
       label={t('yleiset.kuvaus')}
     />

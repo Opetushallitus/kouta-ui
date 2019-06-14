@@ -5,13 +5,13 @@ import useKoodistoOptions from '../useKoodistoOptions';
 import useTranslation from '../useTranslation';
 import { FormFieldSelect } from '../FormFields';
 
-const OsaamistaustaSection = () => {
+const OsaamistaustaSection = ({ name }) => {
   const { options } = useKoodistoOptions({ koodisto: 'osaamistausta' });
   const { t } = useTranslation();
 
   return (
     <Field
-      name="osaamistausta"
+      name={name}
       component={FormFieldSelect}
       options={options}
       label={t('valintaperustelomake.valitseOsaamistausta')}

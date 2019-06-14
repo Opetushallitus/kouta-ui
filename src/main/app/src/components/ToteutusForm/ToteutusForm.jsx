@@ -2,7 +2,7 @@ import React from 'react';
 import { formValues } from 'redux-form';
 
 import FormCollapse from '../FormCollapse';
-import KieliversiotFormSection from '../KieliversiotFormSection';
+import KieliversiotFields from '../KieliversiotFields';
 import OsaamisalatSection from './OsaamisalatSection';
 import NimiSection from './NimiSection';
 import PohjaSection from './PohjaSection';
@@ -25,7 +25,7 @@ import isAmmatillinenKoulutustyyppi from '../../utils/isAmmatillinenKoulutustyyp
 import { KOULUTUSTYYPPI } from '../../constants';
 
 const ActiveLanguages = formValues({
-  languages: 'kieliversiot.languages',
+  languages: 'kieliversiot',
 })(({ languages, ...props }) => {
   return props.children({
     languages: languages || [],
@@ -67,7 +67,6 @@ const ToteutusForm = ({
             {canCopy ? (
               <FormCollapse
                 header={t('yleiset.pohjanValinta')}
-                section="base"
                 onContinue={onMaybeCopy}
                 scrollOnActive={false}
                 {...getTestIdProps('pohjaSection')}
@@ -77,6 +76,7 @@ const ToteutusForm = ({
                     organisaatioOid={organisaatioOid}
                     onCreateNew={onCreateNew}
                     onContinue={onContinue}
+                    name="pohja"
                   />
                 )}
               </FormCollapse>
@@ -84,20 +84,18 @@ const ToteutusForm = ({
 
             <FormCollapse
               header={t('yleiset.kieliversiot')}
-              section="kieliversiot"
               {...getTestIdProps('kieliversiotSection')}
             >
-              <KieliversiotFormSection />
+              <KieliversiotFields name="kieliversiot" />
             </FormCollapse>
 
             {isKorkeakoulu ? (
               <FormCollapse
                 header={t('toteutuslomake.koulutuksenToteutuksenKuvaus')}
-                section="kuvaus"
                 languages={languages}
                 {...getTestIdProps('kuvausSection')}
               >
-                <KuvausSection />
+                <KuvausSection name="kuvaus" />
               </FormCollapse>
             ) : null}
 
@@ -128,21 +126,25 @@ const ToteutusForm = ({
             {isAmmatillinenKoulutustyyppi(koulutustyyppi) ? (
               <FormCollapse
                 header={t('toteutuslomake.valitseOsaamisalat')}
-                section="osaamisalat"
                 languages={languages}
                 {...getTestIdProps('osaamisalatSection')}
               >
-                <OsaamisalatSection koulutusKoodiUri={koulutusKoodiUri} />
+                <OsaamisalatSection
+                  name="osaamisalat"
+                  koulutusKoodiUri={koulutusKoodiUri}
+                />
               </FormCollapse>
             ) : null}
 
             <FormCollapse
               header={t('toteutuslomake.toteutuksenJarjestamistiedot')}
-              section="jarjestamistiedot"
               languages={languages}
               {...getTestIdProps('jarjestamistiedotSection')}
             >
-              <JarjestamisTiedotSection koulutustyyppi={koulutustyyppi} />
+              <JarjestamisTiedotSection
+                name="jarjestamistiedot"
+                koulutustyyppi={koulutustyyppi}
+              />
             </FormCollapse>
 
             <FormCollapse
@@ -150,10 +152,9 @@ const ToteutusForm = ({
                 'toteutuslomake.koulutuksenNayttamiseenLiittyvatTiedot',
               )}
               languages={languages}
-              section="nayttamistiedot"
               {...getTestIdProps('nayttamistiedotSection')}
             >
-              <NayttamisTiedotSection />
+              <NayttamisTiedotSection name="nayttamistiedot" />
             </FormCollapse>
 
             <FormCollapse
@@ -169,11 +170,10 @@ const ToteutusForm = ({
 
             <FormCollapse
               header={t('toteutuslomake.toteutuksenNimi')}
-              section="nimi"
               languages={languages}
               {...getTestIdProps('nimiSection')}
             >
-              <NimiSection />
+              <NimiSection name="nimi" />
             </FormCollapse>
 
             <FormCollapse

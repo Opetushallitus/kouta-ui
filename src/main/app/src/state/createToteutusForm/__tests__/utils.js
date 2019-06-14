@@ -3,17 +3,11 @@ import { getToteutusByValues, getValuesByToteutus } from '../utils';
 test('getToteutusByValues returns correct toteutus given form values', () => {
   const toteutus = getToteutusByValues({
     nimi: {
-      name: {
-        fi: 'Fi nimi',
-        sv: 'Sv nimi',
-      },
+      fi: 'Fi nimi',
+      sv: 'Sv nimi',
     },
-    kieliversiot: {
-      languages: ['fi', 'sv'],
-    },
-    jarjestamispaikat: {
-      jarjestajat: ['org1', 'org2'],
-    },
+    kieliversiot: ['fi', 'sv'],
+    jarjestamispaikat: ['org1', 'org2'],
     jarjestamistiedot: {
       kuvaus: {
         fi: 'Fi kuvaus',
@@ -127,10 +121,8 @@ test('getToteutusByValues returns correct toteutus given form values', () => {
       },
     ],
     kuvaus: {
-      kuvaus: {
-        fi: 'Fi kuvaus',
-        sv: 'Sv kuvaus',
-      },
+      fi: 'Fi kuvaus',
+      sv: 'Sv kuvaus',
     },
   });
 

@@ -2,7 +2,7 @@ import { getFormValues, startSubmit, stopSubmit } from 'redux-form';
 
 import { getSoraKuvausByValues, validate } from '../createSoraKuvausForm';
 import { updateKoutaSoraKuvaus } from '../../apiUtils';
-import { createSavingErrorToast, createSavingSuccessToast } from '../toaster';
+import { openSavingErrorToast, openSavingSuccessToast } from '../toaster';
 import { isNonEmptyObject } from '../../utils';
 
 const formName = 'editSoraKuvausForm';
@@ -30,7 +30,7 @@ export const submit = ({ soraKuvaus, tila: tilaArg }) => async (
 
   if (isNonEmptyObject(errors)) {
     dispatch(stopSubmit(formName, errors));
-    dispatch(createSavingErrorToast());
+    dispatch(openSavingErrorToast());
     return;
   }
 
@@ -55,12 +55,12 @@ export const submit = ({ soraKuvaus, tila: tilaArg }) => async (
     soraKuvausData = data;
   } catch (e) {
     dispatch(stopSubmit(formName));
-    dispatch(createSavingErrorToast());
+    dispatch(openSavingErrorToast());
     return;
   }
 
   dispatch(stopSubmit(formName));
-  dispatch(createSavingSuccessToast());
+  dispatch(openSavingSuccessToast());
 
   history.push(`/sora-kuvaus/${soraKuvaus.id}/muokkaus`, {
     soraKuvausUpdatedAt: Date.now(),

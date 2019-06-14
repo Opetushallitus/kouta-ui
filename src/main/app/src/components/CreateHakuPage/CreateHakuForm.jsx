@@ -8,11 +8,11 @@ import HakuForm, { initialValues } from '../HakuForm';
 import {
   copy as copyHaku,
   maybeCopy as maybeCopyHaku,
-  getValuesByHaku,
 } from '../../state/createHakuForm';
 import { getKoutaHakuByOid } from '../../apiUtils';
 import ApiAsync from '../ApiAsync';
 import { POHJAVALINTA } from '../../constants';
+import getFormValuesByHaku from '../../utils/getFormValuesByHaku';
 
 const resolveFn = () => Promise.resolve({});
 
@@ -30,7 +30,7 @@ const getCopyValues = hakuOid => ({
 
 const getInitialValues = memoize(haku => {
   return haku.oid
-    ? { ...getCopyValues(haku.oid), ...getValuesByHaku(haku) }
+    ? { ...getCopyValues(haku.oid), ...getFormValuesByHaku(haku) }
     : initialValues;
 });
 

@@ -12,10 +12,8 @@ const resolveFn = () => Promise.resolve(null);
 
 const getCopyValues = valintaperusteOid => ({
   pohja: {
-    pohja: {
-      tapa: POHJAVALINTA.KOPIO,
-      valinta: { value: valintaperusteOid },
-    },
+    tapa: POHJAVALINTA.KOPIO,
+    valinta: { value: valintaperusteOid },
   },
 });
 

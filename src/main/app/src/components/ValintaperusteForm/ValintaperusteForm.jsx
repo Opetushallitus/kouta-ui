@@ -2,8 +2,7 @@ import React from 'react';
 import { formValues } from 'redux-form';
 
 import FormCollapse from '../FormCollapse';
-import KieliversiotFormSection from '../KieliversiotFormSection';
-
+import KieliversiotFields from '../KieliversiotFields';
 import { KOULUTUSTYYPPI } from '../../constants';
 import FormCollapseGroup from '../FormCollapseGroup';
 import KohdejoukonRajausSection from './KohdejoukonRajausSection';
@@ -20,8 +19,8 @@ import SoraKuvausSection from './SoraKuvausSection';
 import isKorkeakouluKoulutustyyppi from '../../utils/isKorkeakouluKoulutustyyppi';
 
 const WithLanguagesAndTyyppiValue = formValues({
-  languages: 'kieliversiot.languages',
-  tyyppi: 'tyyppi.tyyppi',
+  languages: 'kieliversiot',
+  tyyppi: 'tyyppi',
 })(({ languages, children, ...props }) => {
   return children({
     ...props,
@@ -50,35 +49,30 @@ const ValintaperusteForm = ({
             koulutustyyppiProp ||
             KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
-          const isKorkeakoulu = isKorkeakouluKoulutustyyppi(
-            koulutustyyppi,
-          );
+          const isKorkeakoulu = isKorkeakouluKoulutustyyppi(koulutustyyppi);
 
           return (
             <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
               {canEditTyyppi ? (
                 <FormCollapse
                   header={t('yleiset.koulutustyyppi')}
-                  section="tyyppi"
                   scrollOnActive={false}
                   {...getTestIdProps('tyyppiSection')}
                 >
-                  <TyyppiSection />
+                  <TyyppiSection name="tyyppi" />
                 </FormCollapse>
               ) : null}
 
               <FormCollapse
                 header={t('yleiset.kieliversiot')}
-                section="kieliversiot"
                 {...getTestIdProps('kieliversiotSection')}
               >
-                <KieliversiotFormSection />
+                <KieliversiotFields name="kieliversiot" />
               </FormCollapse>
 
               {canCopy ? (
                 <FormCollapse
                   header={t('yleiset.pohjanValinta')}
-                  section="pohja"
                   onContinue={onMaybeCopy}
                   {...getTestIdProps('pohjaSection')}
                 >
@@ -87,6 +81,7 @@ const ValintaperusteForm = ({
                       onContinue={onContinue}
                       organisaatioOid={organisaatioOid}
                       onCreateNew={onCreateNew}
+                      name="pohja"
                     />
                   )}
                 </FormCollapse>
@@ -94,18 +89,16 @@ const ValintaperusteForm = ({
 
               <FormCollapse
                 header={t('valintaperustelomake.hakutavanRajaus')}
-                section="hakutavanRajaus"
                 {...getTestIdProps('hakutavanRajausSection')}
               >
-                <HakutavanRajausSection />
+                <HakutavanRajausSection name="hakutapa" />
               </FormCollapse>
 
               <FormCollapse
                 header={t('valintaperustelomake.haunKohdejoukonRajaus')}
-                section="kohdejoukonRajaus"
                 {...getTestIdProps('kohdejoukonRajausSection')}
               >
-                <KohdejoukonRajausSection />
+                <KohdejoukonRajausSection name="kohdejoukko" />
               </FormCollapse>
 
               <FormCollapse
@@ -119,10 +112,9 @@ const ValintaperusteForm = ({
               {isKorkeakoulu ? (
                 <FormCollapse
                   header={t('valintaperustelomake.osaamistausta')}
-                  section="osaamistausta"
                   {...getTestIdProps('osaamistaustaSection')}
                 >
-                  <OsaamistaustaSection />
+                  <OsaamistaustaSection name="osaamistausta" />
                 </FormCollapse>
               ) : null}
 

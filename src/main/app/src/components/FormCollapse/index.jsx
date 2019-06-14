@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { FormSection } from 'redux-form';
 import styled from 'styled-components';
 
 import Collapse from '../Collapse';
@@ -46,7 +45,7 @@ const scrollIntoView = el => {
   } catch (e) {}
 };
 
-const renderChildren = ({ onContinue, children, section, language }) => {
+const renderChildren = ({ onContinue, children, language }) => {
   const childrenProps = {
     onContinue,
     language,
@@ -60,11 +59,7 @@ const renderChildren = ({ onContinue, children, section, language }) => {
     renderedChildren = React.cloneElement(children, childrenProps);
   }
 
-  return section ? (
-    <FormSection name={section}>{renderedChildren}</FormSection>
-  ) : (
-    renderedChildren
-  );
+  return renderedChildren;
 };
 
 const renderActions = ({ actions, onContinue, t }) => {
@@ -118,7 +113,6 @@ const renderHeader = ({
 
 const FormCollapse = ({
   onContinue,
-  section,
   children = null,
   actions: actionsProp = null,
   index,
@@ -180,7 +174,7 @@ const FormCollapse = ({
         toggleOnHeaderClick={false}
         {...props}
       >
-        {renderChildren({ onContinue, children, section, language })}
+        {renderChildren({ onContinue, children, language })}
       </Collapse>
     </CollapseWrapper>
   );

@@ -13,12 +13,12 @@ const TyyppiField = createFormFieldComponent(
   }),
 );
 
-const TyyppiSection = () => {
+const TyyppiSection = ({ name }) => {
   const { t } = useTranslation();
 
   return (
     <Field
-      name="tyyppi"
+      name={name}
       component={TyyppiField}
       label={t('valintaperustelomake.valitseKoulutustyyppi')}
     />

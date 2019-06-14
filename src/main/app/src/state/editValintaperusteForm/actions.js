@@ -5,7 +5,7 @@ import {
   validate,
 } from '../createValintaperusteForm';
 import { updateKoutaValintaperuste } from '../../apiUtils';
-import { createSavingErrorToast, createSavingSuccessToast } from '../toaster';
+import { openSavingErrorToast, openSavingSuccessToast } from '../toaster';
 import { isNonEmptyObject } from '../../utils';
 
 const formName = 'editValintaperusteForm';
@@ -33,7 +33,7 @@ export const submit = ({ valintaperuste, tila: tilaArg }) => async (
 
   if (isNonEmptyObject(errors)) {
     dispatch(stopSubmit(formName, errors));
-    dispatch(createSavingErrorToast());
+    dispatch(openSavingErrorToast());
     return;
   }
 
@@ -58,12 +58,12 @@ export const submit = ({ valintaperuste, tila: tilaArg }) => async (
     valintaperusteData = data;
   } catch (e) {
     dispatch(stopSubmit(formName, errors));
-    dispatch(createSavingErrorToast());
+    dispatch(openSavingErrorToast());
     return;
   }
 
   dispatch(stopSubmit(formName));
-  dispatch(createSavingSuccessToast());
+  dispatch(openSavingSuccessToast());
 
   history.push(`/valintaperusteet/${valintaperuste.id}/muokkaus`, {
     valintaperusteUpdatedAt: Date.now(),

@@ -2,7 +2,7 @@ import get from 'lodash/get';
 import pick from 'lodash/pick';
 
 import { JULKAISUTILA } from '../../constants';
-import { ErrorBuilder } from '../../validation';
+import createErrorBuilder from '../../utils/createErrorBuilder';
 import isKorkeakouluKoulutustyyppi from '../../utils/isKorkeakouluKoulutustyyppi';
 
 const getKielivalinta = values => get(values, 'kieliversiot') || [];
@@ -135,7 +135,7 @@ const validateKorkeakoulu = ({ values, errorBuilder }) => {
 };
 
 export const validate = ({ values, koulutustyyppi, tila }) => {
-  let errorBuilder = new ErrorBuilder({ values });
+  let errorBuilder = createErrorBuilder({ values });
 
   errorBuilder = validateEssentials({ errorBuilder, values });
 

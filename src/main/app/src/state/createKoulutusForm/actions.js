@@ -3,7 +3,7 @@ import get from 'lodash/get';
 
 import { JULKAISUTILA, POHJAVALINTA } from '../../constants';
 import { getKoulutusByKoodi } from '../../apiUtils';
-import { createSavingErrorToast, createSavingSuccessToast } from '../toaster';
+import { openSavingErrorToast, openSavingSuccessToast } from '../toaster';
 import { getKoulutusByValues, validate } from './utils';
 import { isNonEmptyObject } from '../../utils';
 
@@ -42,7 +42,7 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
 
   if (isNonEmptyObject(errors)) {
     dispatch(stopSubmit('createKoulutusForm', errors));
-    dispatch(createSavingErrorToast());
+    dispatch(openSavingErrorToast());
 
     return;
   }
@@ -84,12 +84,12 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
     koulutusData = data;
   } catch (e) {
     dispatch(stopSubmit('createKoulutusForm'));
-    dispatch(createSavingErrorToast());
+    dispatch(openSavingErrorToast());
     return;
   }
 
   dispatch(stopSubmit('createKoulutusForm'));
-  dispatch(createSavingSuccessToast());
+  dispatch(openSavingSuccessToast());
 
   if (get(koulutusData, 'oid')) {
     const { oid: koulutusOid } = koulutusData;

@@ -146,9 +146,7 @@ Object {
 
 exports[`getValuesByValintaperuste returns correct form values given valintaperuste 1`] = `
 Object {
-  "hakutavanRajaus": Object {
-    "hakutapa": "tapa_1#1",
-  },
+  "hakutapa": "tapa_1#1",
   "kielitaitovaatimukset": Array [
     Object {
       "kieli": Object {
@@ -190,16 +188,12 @@ Object {
       },
     },
   ],
-  "kieliversiot": Object {
-    "languages": Array [
-      "fi",
-      "sv",
-    ],
-  },
-  "kohdejoukonRajaus": Object {
-    "kohdejoukko": Object {
-      "value": "joukko_1#1",
-    },
+  "kieliversiot": Array [
+    "fi",
+    "sv",
+  ],
+  "kohdejoukko": Object {
+    "value": "joukko_1#1",
   },
   "kuvaus": Object {
     "kuvaus": Object {
@@ -211,22 +205,18 @@ Object {
       "sv": "Sv nimi",
     },
   },
-  "osaamistausta": Object {
-    "osaamistausta": Array [
-      Object {
-        "value": "tausta_1#1",
-      },
-      Object {
-        "value": "tausta_2#1",
-      },
-    ],
-  },
+  "osaamistausta": Array [
+    Object {
+      "value": "tausta_1#1",
+    },
+    Object {
+      "value": "tausta_2#1",
+    },
+  ],
   "soraKuvaus": Object {
     "value": "sora_1",
   },
-  "tyyppi": Object {
-    "tyyppi": "tyyppi_1#1",
-  },
+  "tyyppi": "tyyppi_1#1",
   "valintatavat": Array [
     Object {
       "enimmaispistemaara": 20,

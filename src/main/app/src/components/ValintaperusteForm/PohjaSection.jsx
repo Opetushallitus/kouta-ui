@@ -5,7 +5,7 @@ import FormControl from '../FormControl';
 import FormLabel from '../FormLabel';
 import useTranslation from '../useTranslation';
 
-const PohjaSection = ({ organisaatioOid }) => {
+const PohjaSection = ({ organisaatioOid, name }) => {
   const { t } = useTranslation();
 
   const options = [];
@@ -14,7 +14,7 @@ const PohjaSection = ({ organisaatioOid }) => {
     <FormControl>
       <FormLabel>{t('yleiset.valitseLomakkeenPohja')}</FormLabel>
       <BaseFields
-        name="pohja"
+        name={name}
         createLabel={t('valintaperustelomake.luoUusiValintaperuste')}
         copyLabel={t('valintaperustelomake.kopioiPohjaksiValintaperuste')}
         copyOptions={options}

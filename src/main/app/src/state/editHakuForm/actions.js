@@ -1,9 +1,10 @@
 import { getFormValues, stopSubmit, startSubmit } from 'redux-form';
 import get from 'lodash/get';
 
-import { getHakuByValues, validate } from '../createHakuForm/utils';
+import getHakuByFormValues from '../../utils/getHakuByFormValues';
+import validateHakuForm from '../../utils/validateHakuForm';
 import { updateKoutaHaku } from '../../apiUtils';
-import { createSavingErrorToast, createSavingSuccessToast } from '../toaster';
+import { openSavingErrorToast, openSavingSuccessToast } from '../toaster';
 import { isNonEmptyObject } from '../../utils';
 
 const formName = 'editHakuForm';
@@ -25,13 +26,13 @@ export const submit = ({
 }) => async (dispatch, getState, { history }) => {
   const state = getState();
   const values = getHakuFormValues(state);
-  const errors = validate({ values, tila });
+  const errors = validateHakuForm({ values, tila });
 
   dispatch(startSubmit(formName));
 
   if (isNonEmptyObject(errors)) {
     dispatch(stopSubmit(formName, errors));
-    dispatch(createSavingErrorToast());
+    dispatch(openSavingErrorToast());
     return;
   }
 
@@ -39,7 +40,7 @@ export const submit = ({
     me: { oid: kayttajaOid },
   } = state;
 
-  const hakuFormData = getHakuByValues(values);
+  const hakuFormData = getHakuByFormValues(values);
 
   const haku = {
     lastModified,
@@ -58,12 +59,12 @@ export const submit = ({
     hakuData = data;
   } catch (e) {
     dispatch(stopSubmit(formName));
-    dispatch(createSavingErrorToast());
+    dispatch(openSavingErrorToast());
     return;
   }
 
   dispatch(stopSubmit(formName));
-  dispatch(createSavingSuccessToast());
+  dispatch(openSavingSuccessToast());
 
   history.push(`/haku/${hakuOid}/muokkaus`, {
     hakuUpdatedAt: Date.now(),

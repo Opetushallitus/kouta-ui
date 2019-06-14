@@ -3,7 +3,7 @@ import pick from 'lodash/pick';
 import mapValues from 'lodash/mapValues';
 
 import { JULKAISUTILA } from '../../constants';
-import { ErrorBuilder } from '../../validation';
+import createErrorBuilder from '../../utils/createErrorBuilder';
 
 import {
   serialize as serializeEditor,
@@ -69,7 +69,7 @@ const validateCommon = ({ values, errorBuilder }) => {
 };
 
 export const validate = ({ tila, values }) => {
-  let errorBuilder = new ErrorBuilder({ values });
+  let errorBuilder = createErrorBuilder({ values });
 
   errorBuilder = validateEssentials({ values, errorBuilder });
 

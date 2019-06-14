@@ -3,7 +3,7 @@ import produce from 'immer';
 
 import { getKoulutusByValues, validate } from '../createKoulutusForm';
 import { getKoulutusByKoodi, updateKoutaKoulutus } from '../../apiUtils';
-import { createSavingErrorToast, createSavingSuccessToast } from '../toaster';
+import { openSavingErrorToast, openSavingSuccessToast } from '../toaster';
 import { isNonEmptyObject } from '../../utils';
 
 const getKoulutusFormValues = getFormValues('editKoulutusForm');
@@ -30,7 +30,7 @@ export const submit = ({ koulutus, tila: tilaArg }) => async (
 
   if (isNonEmptyObject(errors)) {
     dispatch(stopSubmit('editKoulutusForm', errors));
-    dispatch(createSavingErrorToast());
+    dispatch(openSavingErrorToast());
     return;
   }
 
@@ -73,12 +73,12 @@ export const submit = ({ koulutus, tila: tilaArg }) => async (
     koulutusData = data;
   } catch (e) {
     dispatch(stopSubmit('editKoulutusForm'));
-    dispatch(createSavingErrorToast());
+    dispatch(openSavingErrorToast());
     return;
   }
 
   dispatch(stopSubmit('editKoulutusForm'));
-  dispatch(createSavingSuccessToast());
+  dispatch(openSavingSuccessToast());
 
   history.push(`/koulutus/${koulutus.oid}/muokkaus`, {
     koulutusUpdatedAt: Date.now(),

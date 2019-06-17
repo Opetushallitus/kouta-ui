@@ -87,7 +87,7 @@ class ErrorBuilder {
 
     if (isArray(value)) {
       const errors = value.map(v => {
-        return makeBuilder(new ErrorBuilder({ values: v }), v).getErrors();
+        return makeBuilder(new ErrorBuilder(v), v).getErrors();
       });
 
       if (errors.find(isNonEmptyObject)) {

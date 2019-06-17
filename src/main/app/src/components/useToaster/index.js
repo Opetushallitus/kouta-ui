@@ -11,7 +11,7 @@ const useToaster = () => {
 
   const openToast = useCallback(
     options => {
-      dispatch(openToasterToast(options));
+      return dispatch(openToasterToast(options));
     },
     [dispatch],
   );

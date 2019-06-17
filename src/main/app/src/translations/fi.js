@@ -40,6 +40,7 @@ export default {
     ei: 'Ei',
     kylla: 'Kyllä',
     tutkintoonJohtavaKoulutus: 'Tutkintoon johtava koulutus',
+    tutkintoonJohtamatonKoulutus: 'Tutkintoon johtamaton koulutus',
     kuvaus: 'Kuvaus',
     osoite: 'Osoite',
     postinumero: 'Postinumero',

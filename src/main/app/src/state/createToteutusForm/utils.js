@@ -347,7 +347,7 @@ const validateKorkeakoulu = ({ values, errorBuilder }) => {
 };
 
 export const validate = ({ tila, koulutustyyppi, values }) => {
-  let errorBuilder = createErrorBuilder({ values });
+  let errorBuilder = createErrorBuilder(values);
 
   errorBuilder = validateEssentials({ errorBuilder, values });
 

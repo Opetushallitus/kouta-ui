@@ -10,7 +10,7 @@ const exists = value => {
 };
 
 class ErrorBuilder {
-  constructor({ values = {}, errors = {} }) {
+  constructor(values, errors = {}) {
     this.errors = errors;
     this.values = values;
   }
@@ -24,10 +24,7 @@ class ErrorBuilder {
   }
 
   clone() {
-    return new ErrorBuilder({
-      values: this.values,
-      errors: clone(this.errors),
-    });
+    return new ErrorBuilder(this.values, clone(this.errors));
   }
 
   validateExistence(path, { message } = {}) {
@@ -106,6 +103,6 @@ class ErrorBuilder {
   }
 }
 
-const createErrorBuilder = args => new ErrorBuilder(args);
+const createErrorBuilder = values => new ErrorBuilder(values);
 
 export default createErrorBuilder;

@@ -1,5 +1,5 @@
 import { getValintaperusteByValues, getValuesByValintaperuste } from '../utils';
-import { parse as parseEditor } from '../../../components/Editor';
+import parseEditorState from '../../../utils/draft/parseEditorState';
 
 test('getValintaperusteByValues returns correct valintaperuste given form values', () => {
   const valintaperuste = getValintaperusteByValues({
@@ -12,8 +12,8 @@ test('getValintaperusteByValues returns correct valintaperuste given form values
         sv: 'Sv nimi',
       },
       kuvaus: {
-        fi: parseEditor('<h1>Fi kuvaus</h1>'),
-        sv: parseEditor('<h1>Sv kuvaus</h2>'),
+        fi: parseEditorState('<h1>Fi kuvaus</h1>'),
+        sv: parseEditorState('<h1>Sv kuvaus</h2>'),
       },
     },
     osaamistausta: [{ value: 'tausta_1#1' }, { value: 'tausta_2#1' }],
@@ -71,8 +71,8 @@ test('getValintaperusteByValues returns correct valintaperuste given form values
           {
             tyyppi: 'teksti',
             data: {
-              fi: parseEditor('<h2>Fi sisalto</h2>'),
-              sv: parseEditor('<h2>Sv sisalto</h2>'),
+              fi: parseEditorState('<h2>Fi sisalto</h2>'),
+              sv: parseEditorState('<h2>Sv sisalto</h2>'),
             },
           },
           {

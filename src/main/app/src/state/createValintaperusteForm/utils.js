@@ -5,16 +5,15 @@ import pick from 'lodash/pick';
 import mapValues from 'lodash/mapValues';
 
 import { isObject, isArray, isNumeric } from '../../utils';
+
 import {
   VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI,
   JULKAISUTILA,
 } from '../../constants';
-import createErrorBuilder from '../../utils/createErrorBuilder';
 
-import {
-  serialize as serializeEditor,
-  parse as parseEditor,
-} from '../../components/Editor';
+import createErrorBuilder from '../../utils/createErrorBuilder';
+import parseEditorState from '../../utils/draft/parseEditorState';
+import serializeEditorState from '../../utils/draft/serializeEditorState';
 
 const kielitaitoMuuOsoitusKoodiUriRegExp = new RegExp(
   `^${VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI}`,
@@ -56,7 +55,7 @@ const serializeSisalto = ({ sisalto, kielivalinta = [] }) => {
 
     if (tyyppi === 'teksti') {
       serializedData = pick(
-        isObject(data) ? mapValues(data, serializeEditor) : {},
+        isObject(data) ? mapValues(data, serializeEditorState) : {},
         kielivalinta,
       );
     }
@@ -81,7 +80,7 @@ const parseSisalto = ({ sisalto }) => {
     if (tyyppi === 'teksti') {
       return {
         tyyppi,
-        data: isObject(data) ? mapValues(data, parseEditor) : {},
+        data: isObject(data) ? mapValues(data, parseEditorState) : {},
       };
     }
 
@@ -99,7 +98,7 @@ export const getValintaperusteByValues = values => {
   const nimi = pick(get(values, 'kuvaus.nimi'), kielivalinta);
 
   const kuvaus = pick(
-    mapValues(get(values, 'kuvaus.kuvaus') || {}, serializeEditor),
+    mapValues(get(values, 'kuvaus.kuvaus') || {}, serializeEditorState),
     kielivalinta,
   );
 
@@ -258,7 +257,7 @@ export const getValuesByValintaperuste = valintaperuste => {
     kohdejoukko: kohdejoukkoKoodiUri ? { value: kohdejoukkoKoodiUri } : null,
     kuvaus: {
       nimi,
-      kuvaus: mapValues(kuvaus || {}, parseEditor),
+      kuvaus: mapValues(kuvaus || {}, parseEditorState),
     },
     osaamistausta: (osaamistaustaKoodiUrit || []).map(value => ({ value })),
     kielitaitovaatimukset: kielitaitovaatimukset,
@@ -313,7 +312,7 @@ const validateCommon = ({ errorBuilder, values }) => {
 };
 
 export const validate = ({ tila, values }) => {
-  let errorBuilder = createErrorBuilder({ values });
+  let errorBuilder = createErrorBuilder(values);
 
   errorBuilder = validateEssentials({ errorBuilder, values });
 

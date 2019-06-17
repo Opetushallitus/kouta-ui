@@ -23,7 +23,7 @@ const validateKorkeakoulu = ({ values, errorBuilder }) => {
 };
 
 const validateKoulutusForm = ({ values, koulutustyyppi, tila }) => {
-  let errorBuilder = createErrorBuilder({ values });
+  let errorBuilder = createErrorBuilder(values);
 
   errorBuilder = validateEssentials({ errorBuilder, values });
 

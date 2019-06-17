@@ -4,11 +4,8 @@ import mapValues from 'lodash/mapValues';
 
 import { JULKAISUTILA } from '../../constants';
 import createErrorBuilder from '../../utils/createErrorBuilder';
-
-import {
-  serialize as serializeEditor,
-  parse as parseEditor,
-} from '../../components/Editor';
+import parseEditorState from '../../utils/draft/parseEditorState';
+import serializeEditorState from '../../utils/draft/serializeEditorState';
 
 const getKielivalinta = values => get(values, 'kieliversiot') || [];
 
@@ -25,7 +22,7 @@ export const getSoraKuvausByValues = values => {
     koulutustyyppi,
     kielivalinta,
     metadata: {
-      kuvaus: mapValues(kuvaus, serializeEditor),
+      kuvaus: mapValues(kuvaus, serializeEditorState),
     },
   };
 };
@@ -45,7 +42,7 @@ export const getValuesBySoraKuvaus = soraKuvaus => {
     kieliversiot: kielivalinta || [],
     tiedot: {
       nimi: nimi || {},
-      kuvaus: mapValues(kuvaus || {}, parseEditor),
+      kuvaus: mapValues(kuvaus || {}, parseEditorState),
     },
     julkinen: Boolean(julkinen),
     koulutustyyppi: koulutustyyppi || null,
@@ -69,7 +66,7 @@ const validateCommon = ({ values, errorBuilder }) => {
 };
 
 export const validate = ({ tila, values }) => {
-  let errorBuilder = createErrorBuilder({ values });
+  let errorBuilder = createErrorBuilder(values);
 
   errorBuilder = validateEssentials({ values, errorBuilder });
 

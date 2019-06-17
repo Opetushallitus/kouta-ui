@@ -2,8 +2,9 @@ import { getFormValues, startSubmit, stopSubmit } from 'redux-form';
 import get from 'lodash/get';
 
 import { JULKAISUTILA } from '../../constants';
-import { createSavingErrorToast, createSavingSuccessToast } from '../toaster';
-import { getHakukohdeByValues, validate } from './utils';
+import { openSavingErrorToast, openSavingSuccessToast } from '../toaster';
+import getHakukohdeByFormValues from '../../utils/getHakukohdeByFormValues';
+import validateHakukohdeForm from '../../utils/validateHakukohdeForm';
 import { isNonEmptyObject } from '../../utils';
 
 const formName = 'createHakukohdeForm';
@@ -34,15 +35,13 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
 ) => {
   const state = getState();
   const values = getHakukohdeFormValues(state);
-  const errors = validate({ values, tila });
-
-  console.log(errors);
+  const errors = validateHakukohdeForm({ values, tila });
 
   dispatch(startSubmit(formName));
 
   if (isNonEmptyObject(errors)) {
     dispatch(stopSubmit(formName, errors));
-    dispatch(createSavingErrorToast());
+    dispatch(openSavingErrorToast());
     return;
   }
 
@@ -54,7 +53,7 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
     history.location.pathname,
   );
 
-  const formData = getHakukohdeByValues(values);
+  const formData = getHakukohdeByFormValues(values);
 
   const hakukohde = {
     ...formData,
@@ -73,12 +72,12 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
     hakukohdeData = data;
   } catch (e) {
     dispatch(stopSubmit(formName));
-    dispatch(createSavingErrorToast());
+    dispatch(openSavingErrorToast());
     return;
   }
 
   dispatch(stopSubmit(formName));
-  dispatch(createSavingSuccessToast());
+  dispatch(openSavingSuccessToast());
 
   if (get(hakukohdeData, 'oid')) {
     history.push(`/hakukohde/${hakukohdeData.oid}/muokkaus`);

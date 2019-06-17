@@ -14,14 +14,8 @@ export default () => ({
   kaytetaanHaunAikataulua: false,
   liitteetOnkoSamaToimitusaika: false,
   liitteetOnkoSamaToimitusosoite: false,
-  liitteidenToimitusosoite: {
-    osoite: {
-      osoite: { fi: 'Paasikivenkatu 7' },
-      postinumero: '15110',
-      postitoimipaikka: { fi: 'Lahti' },
-    },
-    sahkoposti: 'salpaus@salpaus.fi',
-  },
+  liitteidenToimitusosoite: null,
+  liitteidenToimitustapa: null,
   liitteet: [
     {
       id: '927ac923-a839-4354-9db4-f95d276d9902',
@@ -37,6 +31,7 @@ export default () => ({
         },
         sahkoposti: 'sahkoposti@email.com',
       },
+      toimitustapa: 'muu_osoite',
     },
   ],
   valintakokeet: [

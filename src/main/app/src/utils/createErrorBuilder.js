@@ -1,7 +1,7 @@
 import get from 'lodash/get';
 import set from 'lodash/set';
 
-import { isArray, getInvalidTranslations, isNonEmptyObject } from './utils';
+import { isArray, getInvalidTranslations, isNonEmptyObject } from './index';
 
 const clone = value => JSON.parse(JSON.stringify(value));
 
@@ -9,8 +9,8 @@ const exists = value => {
   return value !== undefined && value !== '' && value !== null;
 };
 
-export class ErrorBuilder {
-  constructor({ values = {}, errors = {} }) {
+class ErrorBuilder {
+  constructor(values, errors = {}) {
     this.errors = errors;
     this.values = values;
   }
@@ -24,10 +24,7 @@ export class ErrorBuilder {
   }
 
   clone() {
-    return new ErrorBuilder({
-      values: this.values,
-      errors: clone(this.errors),
-    });
+    return new ErrorBuilder(this.values, clone(this.errors));
   }
 
   validateExistence(path, { message } = {}) {
@@ -90,7 +87,7 @@ export class ErrorBuilder {
 
     if (isArray(value)) {
       const errors = value.map(v => {
-        return makeBuilder(new ErrorBuilder({ values: v }), v).getErrors();
+        return makeBuilder(new ErrorBuilder(v), v).getErrors();
       });
 
       if (errors.find(isNonEmptyObject)) {
@@ -105,3 +102,7 @@ export class ErrorBuilder {
     return this.errors;
   }
 }
+
+const createErrorBuilder = values => new ErrorBuilder(values);
+
+export default createErrorBuilder;

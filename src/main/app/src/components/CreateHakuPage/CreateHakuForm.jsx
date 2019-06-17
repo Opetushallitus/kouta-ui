@@ -1,20 +1,18 @@
 import { reduxForm } from 'redux-form';
-import { compose } from 'recompose';
 import { connect } from 'react-redux';
-import React from 'react';
-import memoize from 'memoizee';
+import React, { useMemo } from 'react';
 
 import HakuForm, { initialValues } from '../HakuForm';
 import {
   copy as copyHaku,
   maybeCopy as maybeCopyHaku,
-  getValuesByHaku,
 } from '../../state/createHakuForm';
 import { getKoutaHakuByOid } from '../../apiUtils';
-import ApiAsync from '../ApiAsync';
+import useApiAsync from '../useApiAsync';
 import { POHJAVALINTA } from '../../constants';
+import getFormValuesByHaku from '../../utils/getFormValuesByHaku';
 
-const resolveFn = () => Promise.resolve({});
+const resolveFn = () => Promise.resolve();
 
 const HakuReduxForm = reduxForm({
   form: 'createHakuForm',
@@ -23,51 +21,43 @@ const HakuReduxForm = reduxForm({
 
 const getCopyValues = hakuOid => ({
   pohja: {
-    pohja: {
-      tapa: POHJAVALINTA.KOPIO,
-      valinta: { value: hakuOid },
-    },
+    tapa: POHJAVALINTA.KOPIO,
+    valinta: { value: hakuOid },
   },
 });
 
-const getInitialValues = memoize(haku => {
-  return haku.oid
-    ? { ...getCopyValues(haku.oid), ...getValuesByHaku(haku) }
+const getInitialValues = haku => {
+  return haku
+    ? { ...getCopyValues(haku.oid), ...getFormValuesByHaku(haku) }
     : initialValues;
-});
+};
 
 const CreateHakuForm = props => {
   const { kopioHakuOid } = props;
 
   const promiseFn = kopioHakuOid ? getKoutaHakuByOid : resolveFn;
 
-  return (
-    <ApiAsync promiseFn={promiseFn} oid={kopioHakuOid} watch={kopioHakuOid}>
-      {({ data }) => {
-        return data ? (
-          <HakuReduxForm
-            {...props}
-            steps
-            initialValues={
-              kopioHakuOid ? getInitialValues(data) : initialValues
-            }
-          />
-        ) : null;
-      }}
-    </ApiAsync>
-  );
+  const { data } = useApiAsync({
+    promiseFn,
+    oid: kopioHakuOid,
+    watch: kopioHakuOid,
+  });
+
+  const initialValues = useMemo(() => {
+    return getInitialValues(data);
+  }, [data]);
+
+  return <HakuReduxForm {...props} steps initialValues={initialValues} />;
 };
 
-export default compose(
-  connect(
-    null,
-    dispatch => ({
-      onCopy: hakuOid => {
-        dispatch(copyHaku(hakuOid));
-      },
-      onMaybeCopy: () => {
-        dispatch(maybeCopyHaku());
-      },
-    }),
-  ),
+export default connect(
+  null,
+  dispatch => ({
+    onCopy: hakuOid => {
+      dispatch(copyHaku(hakuOid));
+    },
+    onMaybeCopy: () => {
+      dispatch(maybeCopyHaku());
+    },
+  }),
 )(CreateHakuForm);

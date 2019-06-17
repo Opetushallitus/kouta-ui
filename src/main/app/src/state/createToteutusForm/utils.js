@@ -2,11 +2,12 @@ import get from 'lodash/get';
 import toPairs from 'lodash/toPairs';
 import pick from 'lodash/pick';
 
-import { JULKAISUTILA, KORKEAKOULUKOULUTUSTYYPIT } from '../../constants';
-import { ErrorBuilder } from '../../validation';
+import { JULKAISUTILA } from '../../constants';
+import createErrorBuilder from '../../utils/createErrorBuilder';
 import { isNumeric } from '../../utils';
+import isKorkeakouluKoulutustyyppi from '../../utils/isKorkeakouluKoulutustyyppi';
 
-const getKielivalinta = values => get(values, 'kieliversiot.languages') || [];
+const getKielivalinta = values => get(values, 'kieliversiot') || [];
 
 const getOsaamisalatByValues = ({ osaamisalat, kielivalinta }) => {
   return (osaamisalat || []).map(
@@ -22,9 +23,9 @@ const getOsaamisalatByValues = ({ osaamisalat, kielivalinta }) => {
 export const getToteutusByValues = values => {
   const kielivalinta = getKielivalinta(values);
   const tarjoajat = get(values, 'jarjestamispaikat') || [];
-  const nimi = pick(get(values, 'nimi.name') || {}, kielivalinta);
+  const nimi = pick(get(values, 'nimi') || {}, kielivalinta);
   const opetuskielet = get(values, 'jarjestamistiedot.opetuskieli') || [];
-  const kuvaus = pick(get(values, 'kuvaus.kuvaus') || {}, kielivalinta);
+  const kuvaus = pick(get(values, 'kuvaus') || {}, kielivalinta);
   const osioKuvaukset = get(values, 'jarjestamistiedot.osioKuvaukset') || {};
   const opetustapaKoodiUrit = get(values, 'jarjestamistiedot.opetustapa') || [];
   const opetusaikaKoodiUrit = get(values, 'jarjestamistiedot.opetusaika') || [];
@@ -237,12 +238,8 @@ export const getValuesByToteutus = toteutus => {
     : 'ei';
 
   return {
-    nimi: {
-      name: nimi,
-    },
-    kieliversiot: {
-      languages: kielivalinta,
-    },
+    nimi: nimi,
+    kieliversiot: kielivalinta,
     jarjestamispaikat: tarjoajat,
     jarjestamistiedot: {
       kuvaus,
@@ -315,9 +312,7 @@ export const getValuesByToteutus = toteutus => {
     },
     ylemmanKorkeakoulututkinnonOsaamisalat: ylemmanKorkeakoulututkinnonOsaamisalatArg,
     alemmanKorkeakoulututkinnonOsaamisalat: alemmanKorkeakoulututkinnonOsaamisalatArg,
-    kuvaus: {
-      kuvaus,
-    },
+    kuvaus,
   };
 };
 
@@ -325,11 +320,11 @@ const validateEssentials = ({ errorBuilder, values }) => {
   const kielivalinta = getKielivalinta(values);
 
   return errorBuilder
-    .validateArrayMinLength('kieliversiot.languages', 1)
-    .validateTranslations('nimi.name', kielivalinta);
+    .validateArrayMinLength('kieliversiot', 1)
+    .validateTranslations('nimi', kielivalinta);
 };
 
-const validateCommon = ({ values, errorBuilder }) => {
+const validateCommon = ({ errorBuilder }) => {
   let enhancedErrorBuilder = errorBuilder
     .validateArrayMinLength('jarjestamispaikat', 1)
     .validateArrayMinLength('jarjestamistiedot.opetusaika', 1)
@@ -352,7 +347,7 @@ const validateKorkeakoulu = ({ values, errorBuilder }) => {
 };
 
 export const validate = ({ tila, koulutustyyppi, values }) => {
-  let errorBuilder = new ErrorBuilder({ values });
+  let errorBuilder = createErrorBuilder(values);
 
   errorBuilder = validateEssentials({ errorBuilder, values });
 
@@ -362,7 +357,7 @@ export const validate = ({ tila, koulutustyyppi, values }) => {
 
   errorBuilder = validateCommon({ values, errorBuilder });
 
-  if (KORKEAKOULUKOULUTUSTYYPIT.includes(koulutustyyppi)) {
+  if (isKorkeakouluKoulutustyyppi(koulutustyyppi)) {
     errorBuilder = validateKorkeakoulu({ values, errorBuilder });
   }
 

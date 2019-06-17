@@ -3,7 +3,7 @@ import get from 'lodash/get';
 import produce from 'immer';
 
 import { JULKAISUTILA, POHJAVALINTA } from '../../constants';
-import { createSavingErrorToast, createSavingSuccessToast } from '../toaster';
+import { openSavingErrorToast, openSavingSuccessToast } from '../toaster';
 import { getValintaperusteByValues, validate } from './utils';
 import { isNonEmptyObject } from '../../utils';
 
@@ -42,7 +42,7 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
 
   if (isNonEmptyObject(errors)) {
     dispatch(stopSubmit(formName, errors));
-    dispatch(createSavingErrorToast());
+    dispatch(openSavingErrorToast());
     return;
   }
 
@@ -78,12 +78,12 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
     valintaperusteData = data;
   } catch (e) {
     dispatch(stopSubmit(formName));
-    dispatch(createSavingErrorToast());
+    dispatch(openSavingErrorToast());
     return;
   }
 
   dispatch(stopSubmit(formName));
-  dispatch(createSavingSuccessToast());
+  dispatch(openSavingSuccessToast());
 
   if (get(valintaperusteData, 'id')) {
     const { id: valintaperusteOid } = valintaperusteData;
@@ -98,10 +98,10 @@ export const maybeCopy = () => (dispatch, getState) => {
   const values = getValintaperusteFormValues(getState());
 
   if (
-    get(values, 'pohja.pohja.tapa') === POHJAVALINTA.KOPIO &&
-    !!get(values, 'pohja.pohja.valinta.value')
+    get(values, 'pohja.tapa') === POHJAVALINTA.KOPIO &&
+    !!get(values, 'pohja.valinta.value')
   ) {
-    dispatch(copy(values.pohja.pohja.valinta.value));
+    dispatch(copy(values.pohja.valinta.value));
   }
 };
 

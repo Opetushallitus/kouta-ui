@@ -56,12 +56,14 @@ const InfoContent = styled(Content)`
   ${getThemeProp('typography.body')};
 `;
 
-
-const KoulutusField = createFormFieldComponent(KoulutusSelect, ({ input, ...props }) => ({
-  ...input,
-  onBlur: noop,
-  ...props,
-}));
+const KoulutusField = createFormFieldComponent(
+  KoulutusSelect,
+  ({ input, ...props }) => ({
+    ...input,
+    onBlur: noop,
+    ...props,
+  }),
+);
 
 const KoulutusInfo = ({ koulutus, language = 'fi' }) => {
   const { t } = useTranslation();
@@ -127,6 +129,7 @@ const AmmatillinenTiedotSection = ({
   koulutustyyppi,
   language,
   koulutusValue,
+  name,
 }) => {
   const { t } = useTranslation();
 
@@ -136,7 +139,7 @@ const AmmatillinenTiedotSection = ({
         <Content>
           <div {...getTestIdProps('koulutustyyppiSelect')}>
             <Field
-              name="koulutus"
+              name={`${name}.koulutus`}
               component={KoulutusField}
               koulutusTyyppi={koulutustyyppi}
               label={t('koulutuslomake.valitseKoulutus')}

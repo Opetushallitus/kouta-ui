@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { connect } from 'react-redux';
 
 import KoulutusForm from '../KoulutusForm';
-import { getValuesByKoulutus } from '../../state/createKoulutusForm';
+import getFormValuesByKoulutus from '../../utils/getFormValuesByKoulutus';
 import { attachToteutus } from '../../state/editKoulutusForm';
 
 const KoulutusReduxForm = reduxForm({
@@ -12,7 +12,7 @@ const KoulutusReduxForm = reduxForm({
 
 const EditKoulutusForm = ({ onSave, koulutus, ...props }) => {
   const initialValues = useMemo(() => {
-    return getValuesByKoulutus(koulutus);
+    return getFormValuesByKoulutus(koulutus);
   }, [koulutus]);
 
   return (
@@ -23,6 +23,7 @@ const EditKoulutusForm = ({ onSave, koulutus, ...props }) => {
       canCopy={false}
       initialValues={initialValues}
       canEditKoulutustyyppi={false}
+      johtaaTutkintoon={Boolean(koulutus.johtaaTutkintoon)}
     />
   );
 };

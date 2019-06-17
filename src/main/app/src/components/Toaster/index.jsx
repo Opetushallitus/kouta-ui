@@ -8,7 +8,7 @@ import Icon from '../Icon';
 import { getThemeProp } from '../../theme';
 import Typography from '../Typography';
 import { isString, isFunction } from '../../utils';
-import { removeToast } from '../../state/toaster';
+import { closeToast } from '../../state/toaster';
 
 const ToasterContainer = styled.div`
   display: flex;
@@ -173,7 +173,7 @@ export const ReduxToaster = connect(
   }),
   dispatch => ({
     onClose: key => {
-      dispatch(removeToast(key));
+      dispatch(closeToast(key));
     },
   }),
 )(Toaster);

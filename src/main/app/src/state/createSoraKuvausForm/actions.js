@@ -2,7 +2,7 @@ import { getFormValues, startSubmit, stopSubmit } from 'redux-form';
 import get from 'lodash/get';
 
 import { JULKAISUTILA, POHJAVALINTA } from '../../constants';
-import { createSavingErrorToast, createSavingSuccessToast } from '../toaster';
+import { openSavingErrorToast, openSavingSuccessToast } from '../toaster';
 import { getSoraKuvausByValues, validate } from './utils';
 import { isNonEmptyObject } from '../../utils';
 
@@ -55,7 +55,7 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
 
   if (isNonEmptyObject(errors)) {
     dispatch(stopSubmit(formName, errors));
-    dispatch(createSavingErrorToast());
+    dispatch(openSavingErrorToast());
     return;
   }
 
@@ -82,12 +82,12 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
     soraKuvausData = data;
   } catch (e) {
     dispatch(stopSubmit(formName));
-    dispatch(createSavingErrorToast());
+    dispatch(openSavingErrorToast());
     return;
   }
 
   dispatch(stopSubmit(formName));
-  dispatch(createSavingSuccessToast());
+  dispatch(openSavingSuccessToast());
 
   if (get(soraKuvausData, 'id')) {
     history.push(`/sora-kuvaus/${soraKuvausData.id}/muokkaus`);

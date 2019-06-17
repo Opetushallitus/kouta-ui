@@ -1,0 +1,143 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getFormValuesByHakukohde returns correct form values given hakukohde 1`] = `
+Object {
+  "alkamiskausi": Object {
+    "kausi": "kausi_1#1",
+    "vuosi": Object {
+      "value": "2015",
+    },
+  },
+  "aloituspaikat": Object {
+    "aloituspaikkamaara": "25",
+    "ensikertalaismaara": "39",
+  },
+  "hakuajat": Object {
+    "eriHakuaika": true,
+    "hakuajat": Array [
+      Object {
+        "alkaa": "2019-03-29T12:28",
+        "paattyy": "2019-09-29T12:30",
+      },
+    ],
+  },
+  "hakulomake": Object {
+    "eriHakulomake": true,
+    "kuvaus": Object {},
+    "linkki": Object {},
+    "lomake": Object {
+      "ataru": Object {
+        "value": "12345",
+      },
+    },
+    "tyyppi": "ataru",
+  },
+  "kieliversiot": Array [
+    "fi",
+    "sv",
+  ],
+  "liitteet": Object {
+    "liitteet": Array [
+      Object {
+        "kuvaus": Object {
+          "fi": "Fi kuvaus",
+          "sv": "Sv kuvaus",
+        },
+        "nimi": Object {
+          "fi": "Fi nimi",
+          "sv": "Sv nimi",
+        },
+        "toimitusaika": "2016-10-25T09:45",
+        "toimitustapa": Object {
+          "paikka": Object {
+            "osoite": Object {
+              "fi": "Fi osoite",
+              "sv": "Sv osoite",
+            },
+            "postinumero": "00610",
+            "postitoimipaikka": Object {
+              "fi": "Fi postitoimipaikka",
+              "sv": "Sv postitoimipaikka",
+            },
+            "sahkoposti": Object {
+              "fi": "Fi sahkoposti",
+              "sv": "Sv sahkoposti",
+            },
+          },
+          "tapa": "muu_osoite",
+        },
+        "tyyppi": Object {
+          "value": "liitetyyppi_1#1",
+        },
+      },
+    ],
+    "toimitusaika": "2011-12-20T10:30",
+    "toimitustapa": Object {
+      "paikka": Object {
+        "osoite": Object {
+          "fi": "Fi osoite",
+          "sv": "Sv osoite",
+        },
+        "postinumero": "00940",
+        "postitoimipaikka": Object {
+          "fi": "Fi postitoimipaikka",
+          "sv": "Sv postitoimipaikka",
+        },
+        "sahkoposti": Object {
+          "fi": "Fi sahkoposti",
+          "sv": "Sv sahkoposti",
+        },
+      },
+      "tapa": "",
+    },
+    "yhteinenToimitusaika": false,
+    "yhteinenToimituspaikka": false,
+  },
+  "perustiedot": Object {
+    "nimi": Object {
+      "fi": "Fi nimi",
+      "sv": "Sv nimi",
+    },
+    "voiSuorittaaKaksoistutkinnon": true,
+  },
+  "pohjakoulutus": Array [
+    Object {
+      "value": "vaatimus_1#1",
+    },
+    Object {
+      "value": "vaatimus_2#1",
+    },
+  ],
+  "valintakoe": Object {
+    "tilaisuudet": Object {
+      "tyyppi_1#1": Array [
+        Object {
+          "alkaa": "2019-04-16T08:44",
+          "lisatietoja": Object {
+            "fi": "fi lisatietoja",
+            "sv": "sv lisatietoja",
+          },
+          "osoite": Object {
+            "fi": "fi osoite",
+            "sv": "sv osoite",
+          },
+          "paattyy": "2019-04-18T08:44",
+          "postinumero": "00520",
+          "postitoimipaikka": Object {
+            "fi": "fi posititoimipaikka",
+            "sv": "sv posititoimipaikka",
+          },
+        },
+      ],
+    },
+    "tyypit": Array [
+      Object {
+        "value": "tyyppi_1#1",
+      },
+    ],
+  },
+  "valintaperusteenKuvaus": Object {
+    "value": "peruste_1#1",
+  },
+}
+`;

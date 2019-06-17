@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { formValues } from 'redux-form';
 
 import BaseSelectionSection from './BaseSelectionSection';
-import KieliversiotFormSection from '../KieliversiotFormSection';
+import KieliversiotFields from '../KieliversiotFields';
 import NameSection from './NameSection';
 import TargetGroupSection from './TargetGroupSection';
 import SearchTypeSection from './SearchTypeSection';
@@ -20,15 +20,12 @@ import LomakeSection from './LomakeSection';
 import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
 import ValintakoeSection from './ValintakoeSection';
 import useModal from '../useModal';
+import isYhteishakuHakutapa from '../../utils/isYhteishakuHakutapa';
 
-import {
-  HAKUTAPA_YHTEISHAKU_KOODI_URI,
-  HAKU_ROLE,
-  OPETUSHALLITUS_ORGANISAATIO_OID,
-} from '../../constants';
+import { HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID } from '../../constants';
 
 const ActiveLanguages = formValues({
-  languages: 'kieliversiot.languages',
+  languages: 'kieliversiot',
 })(({ languages, ...props }) => {
   return props.children({
     languages: languages || [],
@@ -39,9 +36,7 @@ const ScheduleSection = formValues({
   hakutapa: 'hakutapa',
 })(({ hakutapa, ...props }) => (
   <ScheduleSectionBase
-    isYhteishaku={new RegExp(HAKUTAPA_YHTEISHAKU_KOODI_URI).test(
-      hakutapa || '',
-    )}
+    isYhteishaku={isYhteishakuHakutapa(hakutapa)}
     {...props}
   />
 ));
@@ -89,7 +84,6 @@ const HakuForm = ({
               {canCopy ? (
                 <FormCollapse
                   header={t('yleiset.pohjanValinta')}
-                  section="pohja"
                   onContinue={onMaybeCopy}
                   scrollOnActive={false}
                   {...getTestIdProps('pohjaSection')}
@@ -100,6 +94,7 @@ const HakuForm = ({
                       organisaatioOid={organisaatioOid}
                       onCopy={onCopy}
                       onCreateNew={onCreateNew}
+                      name="pohja"
                     />
                   )}
                 </FormCollapse>
@@ -107,27 +102,24 @@ const HakuForm = ({
 
               <FormCollapse
                 header={t('yleiset.kieliversiot')}
-                section="kieliversiot"
                 {...getTestIdProps('kieliversiotSection')}
               >
-                <KieliversiotFormSection />
+                <KieliversiotFields name="kieliversiot" />
               </FormCollapse>
 
               <FormCollapse
                 header={t('hakulomake.haunNimi')}
-                section="nimi"
                 languages={languages}
                 {...getTestIdProps('nimiSection')}
               >
-                <NameSection />
+                <NameSection name="nimi" />
               </FormCollapse>
 
               <FormCollapse
                 header={t('hakulomake.haunKohdejoukko')}
-                section="kohdejoukko"
                 {...getTestIdProps('kohdejoukkoSection')}
               >
-                <TargetGroupSection />
+                <TargetGroupSection name="kohdejoukko" />
               </FormCollapse>
 
               <FormCollapse

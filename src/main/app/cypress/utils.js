@@ -184,3 +184,9 @@ export const fillTreeSelect = (value, cy) => {
     cy.get(`input[type="checkbox"][name="${val}"]`).check({ force: true });
   });
 };
+
+export const fillKoulutustyyppiSelect = (path, cy) => {
+  path.forEach(option => {
+    getRadio(option, cy).check({ force: true });
+  });
+};

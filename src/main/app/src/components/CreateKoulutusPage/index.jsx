@@ -16,11 +16,16 @@ const CreateKoulutusPage = props => {
     history,
   } = props;
 
-  const { kopioKoulutusOid = null } = queryString.parse(search);
+  const {
+    kopioKoulutusOid = null,
+    johtaaTutkintoon: johtaaTutkintoonParam = 'true',
+  } = queryString.parse(search);
+
+  const johtaaTutkintoon = johtaaTutkintoonParam === 'true';
 
   return (
     <FormPage
-      header={<CreateKoulutusHeader />}
+      header={<CreateKoulutusHeader johtaaTutkintoon={johtaaTutkintoon} />}
       steps={<CreateKoulutusSteps />}
       footer={<CreateKoulutusFooter />}
     >
@@ -28,6 +33,7 @@ const CreateKoulutusPage = props => {
       <CreateKoulutusForm
         organisaatioOid={oid}
         kopioKoulutusOid={kopioKoulutusOid}
+        johtaaTutkintoon={johtaaTutkintoon}
         onCreateNew={() => {
           history.replace({ search: '' });
         }}

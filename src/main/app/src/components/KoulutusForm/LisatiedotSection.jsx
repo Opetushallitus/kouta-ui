@@ -9,7 +9,7 @@ import { getTestIdProps } from '../../utils';
 import { FormFieldTextarea, FormFieldSelect } from '../FormFields';
 import Typography from '../Typography';
 
-const OsiotFieldsBase = ({ osiot, language, osiotOptions }) => {
+const OsiotFieldsBase = ({ osiot, language, osiotOptions, name }) => {
   const osiotArr = osiot || [];
 
   const osiotArrWithLabels = useMemo(() => {
@@ -29,7 +29,7 @@ const OsiotFieldsBase = ({ osiot, language, osiotOptions }) => {
       {...getTestIdProps(`osioKuvaus.${value}`)}
     >
       <Field
-        name={`osioKuvaukset.${value}.${language}`}
+        name={`${name}.osioKuvaukset.${value}.${language}`}
         component={FormFieldTextarea}
         label={label}
       />
@@ -37,9 +37,11 @@ const OsiotFieldsBase = ({ osiot, language, osiotOptions }) => {
   ));
 };
 
-const OsiotFields = formValues({ osiot: 'osiot' })(OsiotFieldsBase);
+const OsiotFields = formValues(({ name }) => ({ osiot: `${name}.osiot` }))(
+  OsiotFieldsBase,
+);
 
-const LisatiedotSection = ({ language }) => {
+const LisatiedotSection = ({ language, name }) => {
   const { t } = useTranslation();
 
   const { options: osiotOptions } = useKoodistoOptions({
@@ -54,7 +56,7 @@ const LisatiedotSection = ({ language }) => {
       <Spacing marginBottom={2}>
         <div {...getTestIdProps('osiotSelect')}>
           <Field
-            name="osiot"
+            name={`${name}.osiot`}
             component={FormFieldSelect}
             options={osiotOptions}
             label={t('yleiset.valitseLisattavaOsio')}
@@ -62,7 +64,11 @@ const LisatiedotSection = ({ language }) => {
           />
         </div>
       </Spacing>
-      <OsiotFields language={language} osiotOptions={osiotOptions} />
+      <OsiotFields
+        name={name}
+        language={language}
+        osiotOptions={osiotOptions}
+      />
     </>
   );
 };

@@ -1,5 +1,5 @@
 import { getSoraKuvausByValues, getValuesBySoraKuvaus } from '../utils';
-import { parse as parseEditor } from '../../../components/Editor';
+import parseEditorState from '../../../utils/draft/parseEditorState';
 
 test('getSoraKuvausByValues returns correct SoraKuvaus given form values', () => {
   const soraKuvaus = getSoraKuvausByValues({
@@ -10,8 +10,8 @@ test('getSoraKuvausByValues returns correct SoraKuvaus given form values', () =>
         sv: 'Sv nimi',
       },
       kuvaus: {
-        fi: parseEditor('<b>Kuvaus fi</b>'),
-        sv: parseEditor('<i>Kuvaus sv</i>'),
+        fi: parseEditorState('<b>Kuvaus fi</b>'),
+        sv: parseEditorState('<i>Kuvaus sv</i>'),
       },
     },
     julkisuus: true,

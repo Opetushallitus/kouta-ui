@@ -2,8 +2,7 @@ import React from 'react';
 import { formValues } from 'redux-form';
 
 import FormCollapse from '../FormCollapse';
-import KieliversiotFormSection from '../KieliversiotFormSection';
-
+import KieliversiotFields from '../KieliversiotFields';
 import { KOULUTUSTYYPPI } from '../../constants';
 import PohjakoulutusSection from './PohjakoulutusSection';
 import PerustiedotSection from './PerustiedotSection';
@@ -19,7 +18,7 @@ import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
 
 const ActiveLanguages = formValues({
-  languages: 'kieliversiot.languages',
+  languages: 'kieliversiot',
 })(({ languages, ...props }) => {
   return props.children({
     languages: languages || [],
@@ -43,36 +42,38 @@ const HakukohdeForm = ({
           <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
             <FormCollapse
               header={t('yleiset.kieliversiot')}
-              section="kieliversiot"
               scrollOnActive={false}
               {...getTestIdProps('kieliversiotSection')}
             >
-              <KieliversiotFormSection />
+              <KieliversiotFields name="kieliversiot" />
             </FormCollapse>
 
             <FormCollapse
               header={t('hakukohdelomake.pohjakoulutusvaatimus')}
-              section="pohjakoulutus"
               {...getTestIdProps('pohjakoulutusvaatimusSection')}
             >
-              <PohjakoulutusSection koulutustyyppi={koulutustyyppi} />
+              <PohjakoulutusSection
+                name="pohjakoulutus"
+                koulutustyyppi={koulutustyyppi}
+              />
             </FormCollapse>
 
             <FormCollapse
               header={t('hakukohdelomake.hakukohteenPerustiedot')}
-              section="perustiedot"
               languages={languages}
               {...getTestIdProps('perustiedotSection')}
             >
-              <PerustiedotSection koulutustyyppi={koulutustyyppi} />
+              <PerustiedotSection
+                name="perustiedot"
+                koulutustyyppi={koulutustyyppi}
+              />
             </FormCollapse>
 
             <FormCollapse
               header={t('hakukohdelomake.hakuajat')}
-              section="hakuajat"
               {...getTestIdProps('hakuajatSection')}
             >
-              <HakuajatSection haku={haku} />
+              <HakuajatSection name="hakuajat" haku={haku} />
             </FormCollapse>
 
             <FormCollapse
@@ -85,26 +86,30 @@ const HakukohdeForm = ({
 
             <FormCollapse
               header={t('hakukohdelomake.koulutuksenAlkamiskausi')}
-              section="alkamiskausi"
               {...getTestIdProps('alkamiskausiSection')}
             >
-              <AlkamiskausiSection />
+              <AlkamiskausiSection name="alkamiskausi" />
             </FormCollapse>
 
             <FormCollapse
               header={t('hakukohdelomake.aloituspaikat')}
-              section="aloituspaikat"
               {...getTestIdProps('aloituspaikatSection')}
             >
-              <AloituspaikatSection koulutustyyppi={koulutustyyppi} />
+              <AloituspaikatSection
+                name="aloituspaikat"
+                koulutustyyppi={koulutustyyppi}
+              />
             </FormCollapse>
 
             <FormCollapse
               header={t('hakukohdelomake.valintaperusteenKuvaus')}
-              section="valintaperusteenKuvaus"
               {...getTestIdProps('valintaperusteenKuvausSection')}
             >
-              <KuvausSection organisaatio={organisaatio} haku={haku} />
+              <KuvausSection
+                organisaatio={organisaatio}
+                name="valintaperusteenKuvaus"
+                haku={haku}
+              />
             </FormCollapse>
 
             <FormCollapse

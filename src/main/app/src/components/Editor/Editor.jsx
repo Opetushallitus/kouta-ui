@@ -5,6 +5,7 @@ import React, {
   useState,
   useEffect,
 } from 'react';
+
 import styled, { css } from 'styled-components';
 import { setLightness } from 'polished';
 
@@ -23,12 +24,12 @@ import { UncontrolledDropdown, DropdownMenu } from '../Dropdown';
 import Input from '../Input';
 import Flex, { FlexItem } from '../Flex';
 import Button from '../Button';
+import createEmptyEditorState from '../../utils/draft/createEmptyEditorState';
 
 import {
   getBlockType,
   inlineIsActive,
   blockIsActive,
-  createEmptyEditorState,
   getSelectionLinkUrl,
 } from './utils';
 

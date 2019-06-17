@@ -4,12 +4,12 @@ import { Field } from 'redux-form';
 import useTranslation from '../useTranslation';
 import { FormFieldInput } from '../FormFields';
 
-const NameSection = ({ language, ...props }) => {
+const NameSection = ({ language, name, ...props }) => {
   const { t } = useTranslation();
 
   return (
     <Field
-      name={`nimi.${language}`}
+      name={`${name}.${language}`}
       component={FormFieldInput}
       label={t('yleiset.nimi')}
     />

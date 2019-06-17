@@ -9,8 +9,7 @@ import KuvausSection from './KuvausSection';
 import JarjestajaSection from './JarjestajaSection';
 import FormCollapseGroup from '../FormCollapseGroup';
 import FormCollapse from '../FormCollapse';
-import KieliversiotFormSection from '../KieliversiotFormSection';
-import { KORKEAKOULUKOULUTUSTYYPIT } from '../../constants';
+import KieliversiotFields from '../KieliversiotFields';
 import ToteutuksetSection from './ToteutuksetSection';
 import Button from '../Button';
 import { isFunction, getTestIdProps } from '../../utils';
@@ -18,10 +17,11 @@ import LisatiedotSection from './LisatiedotSection';
 import Flex from '../Flex';
 import NakyvyysSection from './NakyvyysSection';
 import useTranslation from '../useTranslation';
+import isKorkeakouluKoulutustyyppi from '../../utils/isKorkeakouluKoulutustyyppi';
 
 const WithValues = formValues({
-  koulutustyyppiValue: 'type.type',
-  languagesValue: 'kieliversiot.languages',
+  koulutustyyppiValue: 'koulutustyyppi',
+  languagesValue: 'kieliversiot',
   koulutusValue: 'information.koulutus',
 })(({ children, ...rest }) => children(rest));
 
@@ -37,6 +37,7 @@ const KoulutusForm = ({
   scrollTarget,
   koulutus: koulutusProp = null,
   canEditKoulutustyyppi = true,
+  johtaaTutkintoon = true,
 }) => {
   const { t } = useTranslation();
 
@@ -58,23 +59,25 @@ const KoulutusForm = ({
               {canEditKoulutustyyppi ? (
                 <FormCollapse
                   header={t('yleiset.koulutustyyppi')}
-                  section="type"
                   scrollOnActive={false}
                   {...getTestIdProps('tyyppiSection')}
                 >
-                  <TypeSection />
+                  <TypeSection
+                    name="koulutustyyppi"
+                    johtaaTutkintoon={johtaaTutkintoon}
+                  />
                 </FormCollapse>
               ) : null}
 
               {canCopy ? (
                 <FormCollapse
                   header={t('yleiset.pohjanValinta')}
-                  section="base"
                   onContinue={onMaybeCopy}
                   {...getTestIdProps('pohjaSection')}
                 >
                   {({ onContinue }) => (
                     <BaseSelectionSection
+                      name="pohja"
                       onContinue={onContinue}
                       organisaatioOid={organisaatioOid}
                       onCopy={onCopy}
@@ -86,43 +89,41 @@ const KoulutusForm = ({
 
               <FormCollapse
                 header={t('yleiset.kieliversiot')}
-                section="kieliversiot"
                 {...getTestIdProps('kieliversiotSection')}
               >
-                <KieliversiotFormSection />
+                <KieliversiotFields name="kieliversiot" />
               </FormCollapse>
 
               <FormCollapse
                 header={t('koulutuslomake.koulutuksenTiedot')}
-                section="information"
                 languages={languageTabs}
                 {...getTestIdProps('tiedotSection')}
               >
                 <TiedotSection
                   koulutustyyppi={koulutustyyppi}
                   koulutusValue={koulutusValue}
+                  name="information"
                 />
               </FormCollapse>
 
               <FormCollapse
                 header={t('koulutuslomake.koulutuksenKuvaus')}
-                section="description"
                 languages={languageTabs}
                 {...getTestIdProps('kuvausSection')}
               >
                 <KuvausSection
                   koulutustyyppi={koulutustyyppi}
                   koulutusValue={koulutusValue}
+                  name="description"
                 />
               </FormCollapse>
 
               <FormCollapse
                 header={t('koulutuslomake.koulutuksenLisatiedot')}
-                section="lisatiedot"
                 languages={languageTabs}
                 {...getTestIdProps('lisatiedotSection')}
               >
-                <LisatiedotSection />
+                <LisatiedotSection name="lisatiedot" />
               </FormCollapse>
 
               <FormCollapse
@@ -135,13 +136,12 @@ const KoulutusForm = ({
                 />
               </FormCollapse>
 
-              {KORKEAKOULUKOULUTUSTYYPIT.includes(koulutustyyppi) ? (
+              {isKorkeakouluKoulutustyyppi(koulutustyyppi) ? (
                 <FormCollapse
                   header="Koulutuksen näkyminen muille koulutustoimijoille"
-                  section="nakyvyys"
                   {...getTestIdProps('nakyvyysSection')}
                 >
-                  <NakyvyysSection />
+                  <NakyvyysSection name="julkinen" />
                 </FormCollapse>
               ) : null}
 

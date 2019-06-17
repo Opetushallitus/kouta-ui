@@ -4,7 +4,7 @@ import produce from 'immer';
 
 import { getToteutusByValues, validate } from '../createToteutusForm';
 import { updateKoutaToteutus } from '../../apiUtils';
-import { createSavingErrorToast, createSavingSuccessToast } from '../toaster';
+import { openSavingErrorToast, openSavingSuccessToast } from '../toaster';
 import { isNonEmptyObject } from '../../utils';
 
 const formName = 'editToteutusForm';
@@ -32,7 +32,7 @@ export const submit = ({ toteutus, tila: tilaArg }) => async (
 
   if (isNonEmptyObject(errors)) {
     dispatch(stopSubmit(formName, errors));
-    dispatch(createSavingErrorToast());
+    dispatch(openSavingErrorToast());
     return;
   }
 
@@ -62,12 +62,12 @@ export const submit = ({ toteutus, tila: tilaArg }) => async (
     toteutusData = data;
   } catch (e) {
     dispatch(stopSubmit(formName));
-    dispatch(createSavingErrorToast());
+    dispatch(openSavingErrorToast());
     return;
   }
 
   dispatch(stopSubmit(formName));
-  dispatch(createSavingSuccessToast());
+  dispatch(openSavingSuccessToast());
 
   history.push(`/toteutus/${toteutus.oid}/muokkaus`, {
     toteutusUpdatedAt: Date.now(),

@@ -2,8 +2,9 @@ import { getFormValues, startSubmit, stopSubmit } from 'redux-form';
 import get from 'lodash/get';
 
 import { JULKAISUTILA, POHJAVALINTA } from '../../constants';
-import { createSavingErrorToast, createSavingSuccessToast } from '../toaster';
-import { getHakuByValues, validate } from './utils';
+import { openSavingErrorToast, openSavingSuccessToast } from '../toaster';
+import getHakuByFormValues from '../../utils/getHakuByFormValues';
+import validateHakuForm from '../../utils/validateHakuForm';
 import { isNonEmptyObject } from '../../utils';
 
 const formName = 'createHakuForm';
@@ -29,10 +30,10 @@ export const maybeCopy = () => (dispatch, getState) => {
   const values = getHakuFormValues(getState());
 
   if (
-    get(values, 'pohja.pohja.tapa') === POHJAVALINTA.KOPIO &&
-    !!get(values, 'pohja.pohja.valinta.value')
+    get(values, 'pohja.tapa') === POHJAVALINTA.KOPIO &&
+    !!get(values, 'pohja.valinta.value')
   ) {
-    dispatch(copy(values.pohja.pohja.valinta.value));
+    dispatch(copy(values.pohja.valinta.value));
   }
 };
 
@@ -49,13 +50,13 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
 ) => {
   const state = getState();
   const values = getHakuFormValues(state);
-  const errors = validate({ values, tila });
+  const errors = validateHakuForm({ values, tila });
 
   dispatch(startSubmit(formName));
 
   if (isNonEmptyObject(errors)) {
     dispatch(stopSubmit(formName, errors));
-    dispatch(createSavingErrorToast());
+    dispatch(openSavingErrorToast());
     return;
   }
 
@@ -65,7 +66,7 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
 
   const { organisaatioOid } = getOidsFromPathname(history.location.pathname);
 
-  const hakuFormData = getHakuByValues(values);
+  const hakuFormData = getHakuByFormValues(values);
 
   const haku = {
     organisaatioOid,
@@ -82,12 +83,12 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
     hakuData = data;
   } catch (e) {
     dispatch(stopSubmit(formName));
-    dispatch(createSavingErrorToast());
+    dispatch(openSavingErrorToast());
     return;
   }
 
   dispatch(stopSubmit(formName));
-  dispatch(createSavingSuccessToast());
+  dispatch(openSavingSuccessToast());
 
   if (get(hakuData, 'oid')) {
     const { oid: hakuOid } = hakuData;

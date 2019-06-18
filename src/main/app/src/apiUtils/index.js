@@ -1,5 +1,5 @@
 import { KOULUTUSTYYPPI_TO_KOULUTUSTYYPPI_IDS_MAP } from '../constants';
-import { isArray, isString, isObject, memoizePromise } from '../utils';
+import { isArray, isString, isObject } from '../utils';
 import parseKoodiUri from '../utils/parseKoodiUri';
 import keyBy from 'lodash/keyBy';
 import mapValues from 'lodash/mapValues';
@@ -197,16 +197,6 @@ export const getOrganisaatioByOid = async ({ oid, apiUrls, httpClient }) => {
   );
 
   return data;
-};
-
-export const getKoutaKoulutusByOid = async ({ oid, apiUrls, httpClient }) => {
-  const { data, headers } = await httpClient.get(
-    apiUrls.url('kouta-backend.koulutus-by-oid', oid),
-  );
-
-  const lastModified = get(headers, 'last-modified') || null;
-
-  return isObject(data) ? { lastModified, ...data } : data;
 };
 
 export const getOsaamisalatByKoulutusKoodi = async ({
@@ -421,26 +411,6 @@ export const getKoutaKoulutusToteutukset = async ({
   return data;
 };
 
-export const updateKoutaKoulutus = async ({
-  koulutus,
-  httpClient,
-  apiUrls,
-}) => {
-  const { lastModified = '', ...rest } = koulutus;
-
-  const headers = {
-    'If-Unmodified-Since': lastModified,
-  };
-
-  const { data } = await httpClient.post(
-    apiUrls.url('kouta-backend.koulutus'),
-    rest,
-    { headers },
-  );
-
-  return data;
-};
-
 export const updateKoutaHaku = async ({ haku, httpClient, apiUrls }) => {
   const { lastModified = '', ...rest } = haku;
 
@@ -630,26 +600,6 @@ export const getKoutaIndexHaut = async ({ httpClient, apiUrls, ...rest }) => {
   return data;
 };
 
-export const getAndUpdateKoutaKoulutus = async ({
-  httpClient,
-  apiUrls,
-  koulutus: koulutusUpdate,
-}) => {
-  const { oid, ...update } = koulutusUpdate;
-
-  if (!oid) {
-    throw Error('Koulutuksella täytyy olla oid');
-  }
-
-  const koulutus = await getKoutaKoulutusByOid({ oid, httpClient, apiUrls });
-
-  return updateKoutaKoulutus({
-    httpClient,
-    apiUrls,
-    koulutus: { ...koulutus, ...update },
-  });
-};
-
 export const getAndUpdateKoutaToteutus = async ({
   httpClient,
   apiUrls,
@@ -668,22 +618,6 @@ export const getAndUpdateKoutaToteutus = async ({
     apiUrls,
     toteutus: { ...toteutus, ...update },
   });
-};
-
-const memoizedGetKoulutustyyppiByKoulutusOid = memoizePromise(
-  async (oid, httpClient, apiUrls) => {
-    const koulutus = await getKoutaKoulutusByOid({ oid, httpClient, apiUrls });
-
-    return get(koulutus, 'koulutustyyppi') || null;
-  },
-);
-
-export const getKoulutustyyppiByKoulutusOid = ({
-  oid,
-  httpClient,
-  apiUrls,
-}) => {
-  return memoizedGetKoulutustyyppiByKoulutusOid(oid, httpClient, apiUrls);
 };
 
 export const getKoutaValintaperusteByOid = async ({

@@ -7,7 +7,8 @@ import EditToteutusSteps from './EditToteutusSteps';
 import EditToteutusForm from './EditToteutusForm';
 import EditToteutusFooter from './EditToteutusFooter';
 import useApiAsync from '../useApiAsync';
-import { getKoutaToteutusByOid, getKoutaKoulutusByOid } from '../../apiUtils';
+import { getKoutaToteutusByOid } from '../../apiUtils';
+import getKoulutusByOid from '../../utils/kouta/getKoulutusByOid';
 import Spin from '../Spin';
 
 const getToteutusAndKoulutus = async ({ httpClient, apiUrls, oid }) => {
@@ -17,7 +18,7 @@ const getToteutusAndKoulutus = async ({ httpClient, apiUrls, oid }) => {
     return { toteutus };
   }
 
-  const koulutus = await getKoutaKoulutusByOid({
+  const koulutus = await getKoulutusByOid({
     httpClient,
     apiUrls,
     oid: toteutus.koulutusOid,

@@ -6,11 +6,10 @@ import {
   getOrganisaatioByOid,
   getKoutaToteutusByOid,
   getKoutaHakuByOid,
-  getKoulutustyyppiByKoulutusOid,
 } from '../../apiUtils';
 import Flex, { FlexItem } from '../Flex';
 import { getFirstLanguageValue } from '../../utils';
-
+import getKoulutustyyppiByKoulutusOid from '../../utils/kouta/getKoulutustyyppiByKoulutusOid';
 import CreateHakukohdeHeader from './CreateHakukohdeHeader';
 import CreateHakukohdeSteps from './CreateHakukohdeSteps';
 import CreateHakukohdeForm from './CreateHakukohdeForm';
@@ -68,8 +67,7 @@ const CreateHakukohdePage = props => {
   });
 
   const koulutustyyppi =
-    get(data, 'koulutustyyppi') ||
-    KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
+    get(data, 'koulutustyyppi') || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
   return (
     <FormPage

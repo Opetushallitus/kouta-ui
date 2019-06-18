@@ -7,7 +7,7 @@ import {
   maybeCopy as maybeCopyKoulutus,
 } from '../../state/createKoulutusForm';
 import getFormValuesByKoulutus from '../../utils/getFormValuesByKoulutus';
-import { getKoutaKoulutusByOid } from '../../apiUtils';
+import getKoulutusByOid from '../../utils/kouta/getKoulutusByOid';
 import useApiAsync from '../useApiAsync';
 import { POHJAVALINTA } from '../../constants';
 import ReduxForm from '../ReduxForm';
@@ -30,7 +30,7 @@ const getInitialValues = koulutus => {
 const CreateKoulutusForm = props => {
   const { kopioKoulutusOid } = props;
 
-  const promiseFn = kopioKoulutusOid ? getKoutaKoulutusByOid : resolveFn;
+  const promiseFn = kopioKoulutusOid ? getKoulutusByOid : resolveFn;
 
   const { data } = useApiAsync({
     promiseFn,

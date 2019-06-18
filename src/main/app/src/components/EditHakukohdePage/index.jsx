@@ -13,7 +13,6 @@ import {
   getKoutaToteutusByOid,
   getKoutaHakuByOid,
   getOrganisaatioByOid,
-  getKoulutustyyppiByKoulutusOid,
 } from '../../apiUtils';
 import { getFirstLanguageValue } from '../../utils';
 import Flex, { FlexItem } from '../Flex';
@@ -21,6 +20,7 @@ import Typography from '../Typography';
 import Spin from '../Spin';
 import { KOULUTUSTYYPPI } from '../../constants';
 import useTranslation from '../useTranslation';
+import getKoulutustyyppiByKoulutusOid from '../../utils/kouta/getKoulutustyyppiByKoulutusOid';
 
 const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
   const hakukohde = await getKoutaHakukohdeByOid({

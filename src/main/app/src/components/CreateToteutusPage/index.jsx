@@ -2,8 +2,7 @@ import React, { useCallback } from 'react';
 import queryString from 'query-string';
 
 import FormPage, { OrganisaatioInfo } from '../FormPage';
-import { getKoutaKoulutusByOid } from '../../apiUtils';
-
+import getKoulutusByOid from '../../utils/kouta/getKoulutusByOid';
 import CreateToteutusHeader from './CreateToteutusHeader';
 import CreateToteutusSteps from './CreateToteutusSteps';
 import CreateToteutusForm from './CreateToteutusForm';
@@ -28,7 +27,7 @@ const CreateToteutusPage = props => {
   }, [history]);
 
   const { data } = useApiAsync({
-    promiseFn: getKoutaKoulutusByOid,
+    promiseFn: getKoulutusByOid,
     oid: koulutusOid,
     watch: koulutusOid,
   });

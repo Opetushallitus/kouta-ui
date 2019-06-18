@@ -1,4 +1,3 @@
-import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import React, { useMemo } from 'react';
 
@@ -7,6 +6,7 @@ import {
   getValuesByToteutus,
   maybeCopy as maybeCopyToteutus,
 } from '../../state/createToteutusForm';
+
 import { getKoutaToteutusByOid } from '../../apiUtils';
 import useApiAsync from '../useApiAsync';
 import { POHJAVALINTA } from '../../constants';

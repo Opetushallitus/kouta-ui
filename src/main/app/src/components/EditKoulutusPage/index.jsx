@@ -7,7 +7,7 @@ import EditKoulutusSteps from './EditKoulutusSteps';
 import EditKoulutusForm from './EditKoulutusForm';
 import EditKoulutusFooter from './EditKoulutusFooter';
 import useApiAsync from '../useApiAsync';
-import { getKoutaKoulutusByOid } from '../../apiUtils';
+import getKoulutusByOid from '../../utils/kouta/getKoulutusByOid';
 import Spin from '../Spin';
 
 const EditKoulutusPage = props => {
@@ -23,7 +23,7 @@ const EditKoulutusPage = props => {
   const watch = JSON.stringify([oid, koulutusUpdatedAt]);
 
   const { data: koulutus = null } = useApiAsync({
-    promiseFn: getKoutaKoulutusByOid,
+    promiseFn: getKoulutusByOid,
     oid,
     watch,
   });

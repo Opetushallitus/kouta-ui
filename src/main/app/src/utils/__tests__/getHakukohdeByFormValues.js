@@ -4,6 +4,7 @@ import { HAKULOMAKETYYPPI } from '../../constants';
 test('getHakukohdeByFormValues returns correct hakukohde given form values', () => {
   const hakukohde = getHakukohdeByFormValues({
     alkamiskausi: {
+      eriAlkamiskausi: true,
       kausi: 'kausi_1#1',
       vuosi: {
         value: '2020',
@@ -11,8 +12,10 @@ test('getHakukohdeByFormValues returns correct hakukohde given form values', () 
     },
     kieliversiot: ['fi', 'sv'],
     aloituspaikat: {
-      aloituspaikkamaara: '25',
-      ensikertalaismaara: '29',
+      minAloituspaikkamaara: '25',
+      maxAloituspaikkamaara: '45',
+      minEnsikertalaismaara: '29',
+      maxEnsikertalaismaara: '49',
     },
     hakuajat: {
       eriHakuaika: true,

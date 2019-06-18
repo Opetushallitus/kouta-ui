@@ -1,14 +1,10 @@
-import { reduxForm } from 'redux-form';
 import React, { useMemo } from 'react';
 import { connect } from 'react-redux';
 
 import HakuForm from '../HakuForm';
 import getFormValuesByHaku from '../../utils/getFormValuesByHaku';
 import { attachHakukohde } from '../../state/editHakuForm/actions';
-
-const HakuReduxForm = reduxForm({
-  form: 'editHakuForm',
-})(HakuForm);
+import ReduxForm from '../ReduxForm';
 
 const EditHakuForm = ({ onSave, haku, ...props }) => {
   const initialValues = useMemo(() => {
@@ -16,13 +12,17 @@ const EditHakuForm = ({ onSave, haku, ...props }) => {
   }, [haku]);
 
   return (
-    <HakuReduxForm
-      {...props}
-      haku={haku}
-      steps={false}
-      canCopy={false}
-      initialValues={initialValues}
-    />
+    <ReduxForm form="editHakuForm" initialValues={initialValues}>
+      {() => (
+        <HakuForm
+          steps={false}
+          initialValues={initialValues}
+          haku={haku}
+          canCopy={false}
+          {...props}
+        />
+      )}
+    </ReduxForm>
   );
 };
 

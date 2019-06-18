@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Field, formValues } from 'redux-form';
+import { Field } from 'redux-form';
 import styled from 'styled-components';
 import get from 'lodash/get';
 import useTranslation from '../useTranslation';
@@ -16,6 +16,7 @@ import NoYesRadioGroup from '../NoYesRadioGroup';
 import DividerHeading from '../DividerHeading';
 import MaksullisuusFields from './MaksullisuusFields';
 import isKorkeakouluKoulutustyyppi from '../../utils/isKorkeakouluKoulutustyyppi';
+import useFieldValue from '../useFieldValue';
 
 import {
   FormFieldTextarea,
@@ -63,7 +64,8 @@ const OpetustapaField = createFormFieldComponent(
   }),
 );
 
-const OsiotFieldsBase = ({ osiot, language, osiotOptions, name }) => {
+const OsiotFields = ({ language, osiotOptions, name }) => {
+  const osiot = useFieldValue(`${name}.osiot`);
   const osiotArr = osiot || [];
 
   const osiotArrWithLabels = useMemo(() => {
@@ -91,14 +93,6 @@ const OsiotFieldsBase = ({ osiot, language, osiotOptions, name }) => {
   ));
 };
 
-const OsiotFields = formValues(({ name }) => ({ osiot: `${name}.osiot` }))(
-  OsiotFieldsBase,
-);
-
-const WithOnkoStipendia = formValues(({ name }) => ({
-  onkoStipendia: `${name}.onkoStipendia`,
-}))(({ children, ...rest }) => children(rest));
-
 const ExtraFieldWrapper = styled.div`
   max-width: 250px;
   width: 100%;
@@ -110,27 +104,24 @@ const ExtraField = ({ children = null }) => (
 
 const StipendiFields = ({ language, name }) => {
   const { t } = useTranslation();
+  const onkoStipendia = useFieldValue(`${name}.onkoStipendia`);
 
   return (
     <Flex {...getTestIdProps('stipendi')}>
       <FlexItem grow={0} basis="30%">
         <Field name={`${name}.onkoStipendia`} component={NoYesField} />
-        <WithOnkoStipendia name={name}>
-          {({ onkoStipendia }) =>
-            onkoStipendia ? (
-              <Spacing marginTop={1} {...getTestIdProps('stipendinMaara')}>
-                <ExtraField>
-                  <Field
-                    name={`${name}.stipendinMaara.${language}`}
-                    component={FormFieldInput}
-                    placeholder={t('yleiset.maara')}
-                    helperText="Euroa tai prosenttia"
-                  />
-                </ExtraField>
-              </Spacing>
-            ) : null
-          }
-        </WithOnkoStipendia>
+        {onkoStipendia ? (
+          <Spacing marginTop={1} {...getTestIdProps('stipendinMaara')}>
+            <ExtraField>
+              <Field
+                name={`${name}.stipendinMaara.${language}`}
+                component={FormFieldInput}
+                placeholder={t('yleiset.maara')}
+                helperText="Euroa tai prosenttia"
+              />
+            </ExtraField>
+          </Spacing>
+        ) : null}
       </FlexItem>
       <FlexItem grow={1} paddingLeft={4}>
         <Field

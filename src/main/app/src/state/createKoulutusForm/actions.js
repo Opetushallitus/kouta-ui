@@ -2,11 +2,11 @@ import { getFormValues, stopSubmit, startSubmit } from 'redux-form';
 import get from 'lodash/get';
 
 import { JULKAISUTILA, POHJAVALINTA } from '../../constants';
-import { getKoulutusByKoodi } from '../../apiUtils';
 import { openSavingErrorToast, openSavingSuccessToast } from '../toaster';
 import getKoulutusByFormValues from '../../utils/getKoulutusByFormValues';
 import validateKoulutusForm from '../../utils/validateKoulutusForm';
 import { isNonEmptyObject } from '../../utils';
+import createKoulutus from '../../utils/kouta/createKoulutus';
 
 const getKoulutusFormValues = getFormValues('createKoulutusForm');
 
@@ -21,7 +21,7 @@ export const saveKoulutus = koulutus => (
   getState,
   { apiUrls, httpClient },
 ) => {
-  return httpClient.put(apiUrls.url('kouta-backend.koulutus'), koulutus);
+  return createKoulutus({ httpClient, apiUrls, koulutus });
 };
 
 export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
@@ -32,6 +32,8 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   const state = getState();
   const values = getKoulutusFormValues(state);
   const koulutusFormData = getKoulutusByFormValues(values);
+
+  console.log(koulutusFormData);
 
   const errors = validateKoulutusForm({
     values,
@@ -56,25 +58,12 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
     me: { oid: kayttajaOid },
   } = state;
 
-  let nimi = koulutusFormData.nimi;
-
-  if (!isNonEmptyObject(nimi) && koulutusFormData.koulutusKoodiUri) {
-    const { nimi: koulutusNimi } = await getKoulutusByKoodi({
-      koodiUri: koulutusFormData.koulutusKoodiUri,
-      httpClient,
-      apiUrls,
-    });
-
-    nimi = koulutusNimi;
-  }
-
   const koulutus = {
     organisaatioOid,
     muokkaaja: kayttajaOid,
     tila,
     johtaaTutkintoon: true,
     ...koulutusFormData,
-    nimi,
   };
 
   let koulutusData;

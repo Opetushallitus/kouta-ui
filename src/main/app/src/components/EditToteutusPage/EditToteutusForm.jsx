@@ -1,14 +1,10 @@
-import { reduxForm } from 'redux-form';
 import React, { useMemo } from 'react';
 import { connect } from 'react-redux';
 
 import ToteutusForm from '../ToteutusForm';
 import { getValuesByToteutus } from '../../state/createToteutusForm';
 import { attachHakukohde } from '../../state/editToteutusForm';
-
-const ToteutusReduxForm = reduxForm({
-  form: 'editToteutusForm',
-})(ToteutusForm);
+import ReduxForm from '../ReduxForm';
 
 const EditToteutusForm = ({ onSave, toteutus, ...props }) => {
   const initialValues = useMemo(() => {
@@ -16,13 +12,16 @@ const EditToteutusForm = ({ onSave, toteutus, ...props }) => {
   }, [toteutus]);
 
   return (
-    <ToteutusReduxForm
-      {...props}
-      toteutus={toteutus}
-      steps={false}
-      canCopy={false}
-      initialValues={initialValues}
-    />
+    <ReduxForm form="editToteutusForm" initialValues={initialValues}>
+      {() => (
+        <ToteutusForm
+          {...props}
+          toteutus={toteutus}
+          steps={false}
+          canCopy={false}
+        />
+      )}
+    </ReduxForm>
   );
 };
 

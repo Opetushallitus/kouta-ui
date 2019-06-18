@@ -304,13 +304,17 @@ export default {
       'Tähän hakuun on liitetty seuraavat hakukohteet',
   },
   hakukohdelomake: {
+    toteutukseenLiitettyAlkamiskausi: 'Toteutukseen liitetty alkamiskausi',
+    toteutukseenEiOleLiitettyAlkamiskautta:
+      'Toteutuksen ei ole liitetty alkamiskautta',
+    hakukohteellaEriAlkamiskausi: 'Hakukohteella on erillinen alkamiskausi',
     pohjakoulutusvaatimus: 'Pohjakoulutusvaatimus',
     valitsePohjakoulutusvaatimus: 'Valitse pohjakoulutusvaatimus',
     hakukohteenPerustiedot: 'Hakukohteen perustiedot',
     hakuajat: 'Hakuajat',
     hakuunLiitetytHakuajat: 'Hakuun liitetetyt hakuajat',
     haullaEiHakuaikaa: 'Hakuun ei ole liitetty hakuaikoja',
-    hakukohteellaEriHakuaika: 'Hakukohteen hakuaika on eri kuin haun aikataulu',
+    hakukohteellaEriHakuaika: 'Hakukohteella on erillinen hakuaika',
     aloituspaikkojenLukumaara: 'Aloituspaikkojen lukumäärä',
     ensikertalaistenAloituspaikkojenLukumaara:
       'Ensikertalaisten aloituspaikkojen lukumäärä',
@@ -329,6 +333,9 @@ export default {
     lisaaTilaisuus: 'Lisää tilaisuus',
     voiSuorittaaKaksoistutkinnon: 'Voi suorittaa kaksoistutkinnon',
     eriHakulomake: 'Hakukohteen hakulomake on eri kuin haun hakulomake',
+    hakuunEiOleLiitettyLomaketta: 'Hakuun ei ole liitetty lomaketta',
+    hakuunLiitettyLomake: 'Hakuun liitetty lomake',
+    avaaLomake: 'Avaa lomake',
   },
   valintaperustelomake: {
     hakutavanRajaus: 'Hakutavan rajaus',

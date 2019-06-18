@@ -1,4 +1,3 @@
-import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import React, { useMemo } from 'react';
 
@@ -11,13 +10,9 @@ import { getKoutaHakuByOid } from '../../apiUtils';
 import useApiAsync from '../useApiAsync';
 import { POHJAVALINTA } from '../../constants';
 import getFormValuesByHaku from '../../utils/getFormValuesByHaku';
+import ReduxForm from '../ReduxForm';
 
 const resolveFn = () => Promise.resolve();
-
-const HakuReduxForm = reduxForm({
-  form: 'createHakuForm',
-  enableReinitialize: true,
-})(HakuForm);
 
 const getCopyValues = hakuOid => ({
   pohja: {
@@ -47,7 +42,15 @@ const CreateHakuForm = props => {
     return getInitialValues(data);
   }, [data]);
 
-  return <HakuReduxForm {...props} steps initialValues={initialValues} />;
+  return (
+    <ReduxForm
+      form="createHakuForm"
+      initialValues={initialValues}
+      enableReinitialize
+    >
+      {() => <HakuForm steps {...props} />}
+    </ReduxForm>
+  );
 };
 
 export default connect(

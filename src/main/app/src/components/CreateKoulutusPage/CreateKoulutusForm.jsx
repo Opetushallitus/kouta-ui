@@ -1,4 +1,3 @@
-import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import React, { useMemo } from 'react';
 
@@ -11,13 +10,9 @@ import getFormValuesByKoulutus from '../../utils/getFormValuesByKoulutus';
 import { getKoutaKoulutusByOid } from '../../apiUtils';
 import useApiAsync from '../useApiAsync';
 import { POHJAVALINTA } from '../../constants';
+import ReduxForm from '../ReduxForm';
 
 const resolveFn = () => Promise.resolve();
-
-const KoulutusReduxForm = reduxForm({
-  form: 'createKoulutusForm',
-  enableReinitialize: true,
-})(KoulutusForm);
 
 const getCopyValues = koulutusOid => ({
   pohja: {
@@ -47,7 +42,15 @@ const CreateKoulutusForm = props => {
     return getInitialValues(data);
   }, [data]);
 
-  return <KoulutusReduxForm {...props} steps initialValues={initialValues} />;
+  return (
+    <ReduxForm
+      form="createKoulutusForm"
+      initialValues={initialValues}
+      enableReinitialize
+    >
+      {() => <KoulutusForm steps {...props} />}
+    </ReduxForm>
+  );
 };
 
 export default connect(

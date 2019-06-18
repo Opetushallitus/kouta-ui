@@ -10,13 +10,9 @@ import {
 import { getKoutaToteutusByOid } from '../../apiUtils';
 import useApiAsync from '../useApiAsync';
 import { POHJAVALINTA } from '../../constants';
+import ReduxForm from '../ReduxForm';
 
 const resolveFn = () => Promise.resolve();
-
-const ToteutusReduxForm = reduxForm({
-  form: 'createToteutusForm',
-  enableReinitialize: true,
-})(ToteutusForm);
 
 const getCopyValues = toteutusOid => ({
   pohja: {
@@ -46,7 +42,15 @@ const CreateToteutusForm = props => {
     return getInitialValues(data);
   }, [data]);
 
-  return <ToteutusReduxForm {...props} steps initialValues={initialValues} />;
+  return (
+    <ReduxForm
+      form="createToteutusForm"
+      initialValues={initialValues}
+      enableReinitialize
+    >
+      {() => <ToteutusForm steps {...props} />}
+    </ReduxForm>
+  );
 };
 
 export default connect(

@@ -3,9 +3,9 @@ import produce from 'immer';
 
 import getKoulutusByFormValues from '../../utils/getKoulutusByFormValues';
 import validateKoulutusForm from '../../utils/validateKoulutusForm';
-import { getKoulutusByKoodi, updateKoutaKoulutus } from '../../apiUtils';
 import { openSavingErrorToast, openSavingSuccessToast } from '../toaster';
 import { isNonEmptyObject } from '../../utils';
+import updateKoulutus from '../../utils/kouta/updateKoulutus';
 
 const getKoulutusFormValues = getFormValues('editKoulutusForm');
 
@@ -14,7 +14,7 @@ export const saveKoulutus = koulutus => (
   getState,
   { apiUrls, httpClient },
 ) => {
-  return updateKoutaKoulutus({ httpClient, apiUrls, koulutus });
+  return updateKoulutus({ httpClient, apiUrls, koulutus });
 };
 
 export const submit = ({ koulutus, tila: tilaArg }) => async (
@@ -45,25 +45,12 @@ export const submit = ({ koulutus, tila: tilaArg }) => async (
 
   const koulutusFormData = getKoulutusByFormValues(values);
 
-  let nimi = koulutusFormData.nimi;
-
-  if (!isNonEmptyObject(nimi) && koulutusFormData.koulutusKoodiUri) {
-    const { nimi: koulutusNimi } = await getKoulutusByKoodi({
-      koodiUri: koulutusFormData.koulutusKoodiUri,
-      httpClient,
-      apiUrls,
-    });
-
-    nimi = koulutusNimi;
-  }
-
   const updatedKoulutus = produce(
     {
       ...koulutus,
       muokkaaja: kayttajaOid,
       tila,
       ...koulutusFormData,
-      nimi,
     },
     draft => {
       draft.metadata.tyyppi = koulutus.metadata.tyyppi;

@@ -9,6 +9,7 @@ import { getFirstLanguageValue } from '../../utils';
 import useApiAsync from '../useApiAsync';
 import useTranslation from '../useTranslation';
 import { FormFieldSelect } from '../FormFields';
+import useFieldValue from '../useFieldValue';
 
 const getOptions = items => {
   return items.map(({ nimi, oid }) => ({
@@ -20,13 +21,12 @@ const getOptions = items => {
 const HakukohteetModal = ({
   onClose,
   organisaatioOid,
-  pohjaValue,
-  hakuValue,
   fieldName = 'hakukohteet',
   onSave = () => {},
   ...props
 }) => {
   const { t } = useTranslation();
+  const hakuValue = useFieldValue(`${fieldName}.haku`);
 
   const { data: haut } = useApiAsync({
     promiseFn: getKoutaHaut,

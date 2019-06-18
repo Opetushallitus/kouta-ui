@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Field, formValues } from 'redux-form';
+import { Field } from 'redux-form';
 
 import Modal from '../Modal';
 import Button from '../Button';
@@ -10,6 +10,7 @@ import Spacing from '../Spacing';
 import useApiAsync from '../useApiAsync';
 import useTranslation from '../useTranslation';
 import { FormFieldSelect } from '../FormFields';
+import useFieldValue from '../useFieldValue';
 
 const getToteutusOptions = toteutukset => {
   return toteutukset.map(({ nimi, oid }) => ({
@@ -17,10 +18,6 @@ const getToteutusOptions = toteutukset => {
     label: getFirstLanguageValue(nimi),
   }));
 };
-
-const FooterField = formValues('toteutus')(({ toteutus, children }) =>
-  children({ toteutus }),
-);
 
 const HakukohteetModal = ({
   onClose,
@@ -30,6 +27,7 @@ const HakukohteetModal = ({
   ...props
 }) => {
   const { t } = useTranslation();
+  const toteutus = useFieldValue('toteutus');
 
   const { data: toteutukset } = useApiAsync({
     promiseFn: getKoutaToteutukset,
@@ -46,18 +44,14 @@ const HakukohteetModal = ({
       minHeight="200px"
       header={t('yleiset.liitaHakukohde')}
       footer={
-        <FooterField>
-          {({ toteutus }) => (
-            <Flex justifyBetween>
-              <Button onClick={onClose} variant="outlined" type="button">
-                {t('yleiset.sulje')}
-              </Button>
-              <Button onClick={onSave} type="button" disabled={!toteutus}>
-                {t('yleiset.luoUusiHakukohde')}
-              </Button>
-            </Flex>
-          )}
-        </FooterField>
+        <Flex justifyBetween>
+          <Button onClick={onClose} variant="outlined" type="button">
+            {t('yleiset.sulje')}
+          </Button>
+          <Button onClick={onSave} type="button" disabled={!toteutus}>
+            {t('yleiset.luoUusiHakukohde')}
+          </Button>
+        </Flex>
       }
       onClose={onClose}
       {...props}

@@ -28,8 +28,12 @@ const getHakukohdeByFormValues = values => {
   );
   const kielivalinta = getKieliversiot(values);
 
-  const aloituspaikat = getAsNumberOrNull(
-    get(values, 'aloituspaikat.aloituspaikkamaara'),
+  const minAloituspaikat = getAsNumberOrNull(
+    get(values, 'aloituspaikat.minAloituspaikkamaara'),
+  );
+
+  const maxAloituspaikat = getAsNumberOrNull(
+    get(values, 'aloituspaikat.maxAloituspaikkamaara'),
   );
 
   const eriHakulomake = Boolean(get(values, 'hakulomake.eriHakulomake'));
@@ -123,15 +127,22 @@ const getHakukohdeByFormValues = values => {
 
   const valintaperuste = get(values, 'valintaperusteenKuvaus.value') || null;
 
-  const ensikertalaisenAloituspaikat = getAsNumberOrNull(
-    get(values, 'aloituspaikat.ensikertalaismaara'),
+  const minEnsikertalaisenAloituspaikat = getAsNumberOrNull(
+    get(values, 'aloituspaikat.minEnsikertalaismaara'),
   );
+
+  const maxEnsikertalaisenAloituspaikat = getAsNumberOrNull(
+    get(values, 'aloituspaikat.maxEnsikertalaismaara'),
+  );
+
+  const eriAlkamiskausi = Boolean(get(values, 'alkamiskausi.eriAlkamiskausi'));
 
   return {
     alkamiskausiKoodiUri,
     kaytetaanHaunAikataulua,
     kielivalinta,
-    aloituspaikat,
+    minAloituspaikat,
+    maxAloituspaikat,
     hakuajat,
     liitteetOnkoSamaToimitusaika,
     liitteetOnkoSamaToimitusosoite,
@@ -153,12 +164,14 @@ const getHakukohdeByFormValues = values => {
     valintakokeet,
     pohjakoulutusvaatimusKoodiUrit,
     valintaperuste,
-    ensikertalaisenAloituspaikat,
+    minEnsikertalaisenAloituspaikat,
+    maxEnsikertalaisenAloituspaikat,
     eriHakulomake,
     hakulomaketyyppi,
     hakulomakeId,
     hakulomakeLinkki,
     hakulomakeKuvaus,
+    eriAlkamiskausi,
   };
 };
 

@@ -48,7 +48,7 @@ const fillDatetime = ({ date, time, cy }) => {
 
 const fillHakuajatSection = cy => {
   getByTestId('hakuajatSection', cy).within(() => {
-    getCheckbox('eriHakuaika', cy).click({ force: true });
+    getCheckbox(null, cy).click({ force: true });
     lisaa(cy);
 
     getByTestId('alkaa', cy).within(() => {
@@ -66,16 +66,24 @@ const fillHakuajatSection = cy => {
         cy,
       });
     });
-
-    jatka(cy);
   });
 };
 
-const fillPerustiedotSection = cy => {
+const fillPerustiedotSection = (cy, { isKorkeakoulu = false } = {}) => {
   getByTestId('perustiedotSection', cy).within(() => {
-    getByTestId('nimi', cy)
+    getByTestId('hakukohteenNimi', cy)
       .find('input')
       .type('Hakukohteen nimi', { force: true });
+
+    if (!isKorkeakoulu) {
+      cy.getByTestId('voiSuorittaaKaksoistutkinnon').within(() => {
+        getCheckbox(null, cy).click({ force: true });
+      });
+    }
+
+    fillHakuajatSection(cy);
+    fillAlkamiskausiSection(cy);
+    fillLomakeSection(cy);
 
     jatka(cy);
   });
@@ -89,22 +97,42 @@ const fillLomakeSection = cy => {
 
     getRadio('ataru', cy).click({ force: true });
     selectOption('Lomake 1', cy);
-
-    jatka(cy);
   });
 };
 
 const fillAlkamiskausiSection = cy => {
   getByTestId('alkamiskausiSection', cy).within(() => {
+    cy.getByTestId('eriAlkamiskausi').within(() => {
+      getCheckbox(null, cy).click({ force: true });
+    });
+
     getRadio('kausi_0#1', cy).click({ force: true });
     selectOption(new Date().getFullYear().toString(), cy);
-    jatka(cy);
   });
 };
 
-const fillAloituspaikatSection = cy => {
+const fillAloituspaikatSection = (cy, { isKorkeakoulu = false } = {}) => {
   getByTestId('aloituspaikatSection', cy).within(() => {
-    cy.get('input').type('100', { force: true });
+    cy.getByTestId('aloituspaikkamaara').within(() => {
+      cy.getByTestId('min')
+        .find('input')
+        .type('5', { force: true });
+      cy.getByTestId('max')
+        .find('input')
+        .type('10', { force: true });
+    });
+
+    if (isKorkeakoulu) {
+      cy.getByTestId('ensikertalaismaara').within(() => {
+        cy.getByTestId('min')
+          .find('input')
+          .type('1', { force: true });
+        cy.getByTestId('max')
+          .find('input')
+          .type('5', { force: true });
+      });
+    }
+
     jatka(cy);
   });
 };
@@ -212,7 +240,7 @@ describe('createHakukohdeForm', () => {
     );
   });
 
-  it('should be able to create hakukohde', () => {
+  it('should be able to create ammatillinen hakukohde', () => {
     cy.route({
       method: 'PUT',
       url: '**/hakukohde',
@@ -224,10 +252,40 @@ describe('createHakukohdeForm', () => {
     fillKieliversiotSection(cy);
     fillPohjakoulutusvaatimusSection(cy);
     fillPerustiedotSection(cy);
-    fillHakuajatSection(cy);
-    fillLomakeSection(cy);
-    fillAlkamiskausiSection(cy);
     fillAloituspaikatSection(cy);
+    fillValintaperusteenKuvausSection(cy);
+    fillValintakoeSection(cy);
+    fillLiitteetSection(cy);
+
+    tallenna(cy);
+
+    cy.wait('@createHakukohdeRequest').then(({ request }) => {
+      cy.wrap(request.body).snapshot();
+    });
+  });
+
+  it('should be able to create korkeakoulu hakukohde', () => {
+    cy.route({
+      method: 'GET',
+      url: `**/koulutus/${koulutusOid}`,
+      response: merge(koulutus({ tyyppi: 'yo' }), {
+        oid: koulutusOid,
+        organisaatioOid: organisaatioOid,
+      }),
+    });
+
+    cy.route({
+      method: 'PUT',
+      url: '**/hakukohde',
+      response: {
+        oid: '1.2.3.4.5.6',
+      },
+    }).as('createHakukohdeRequest');
+
+    fillKieliversiotSection(cy);
+    fillPohjakoulutusvaatimusSection(cy);
+    fillPerustiedotSection(cy, { isKorkeakoulu: true });
+    fillAloituspaikatSection(cy, { isKorkeakoulu: true });
     fillValintaperusteenKuvausSection(cy);
     fillValintakoeSection(cy);
     fillLiitteetSection(cy);

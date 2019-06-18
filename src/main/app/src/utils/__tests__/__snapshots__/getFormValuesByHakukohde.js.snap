@@ -3,14 +3,17 @@
 exports[`getFormValuesByHakukohde returns correct form values given hakukohde 1`] = `
 Object {
   "alkamiskausi": Object {
+    "eriAlkamiskausi": true,
     "kausi": "kausi_1#1",
     "vuosi": Object {
       "value": "2015",
     },
   },
   "aloituspaikat": Object {
-    "aloituspaikkamaara": "25",
-    "ensikertalaismaara": "39",
+    "maxAloituspaikkamaara": "35",
+    "maxEnsikertalaismaara": "49",
+    "minAloituspaikkamaara": "25",
+    "minEnsikertalaismaara": "39",
   },
   "hakuajat": Object {
     "eriHakuaika": true,

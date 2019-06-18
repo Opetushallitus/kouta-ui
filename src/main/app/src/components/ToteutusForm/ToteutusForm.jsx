@@ -1,5 +1,4 @@
 import React from 'react';
-import { formValues } from 'redux-form';
 
 import FormCollapse from '../FormCollapse';
 import KieliversiotFields from '../KieliversiotFields';
@@ -23,24 +22,11 @@ import YhteyshenkilotSection from './YhteyshenkilotSection';
 import isKorkeakouluKoulutustyyppi from '../../utils/isKorkeakouluKoulutustyyppi';
 import isAmmatillinenKoulutustyyppi from '../../utils/isAmmatillinenKoulutustyyppi';
 import { KOULUTUSTYYPPI } from '../../constants';
-
-const ActiveLanguages = formValues({
-  languages: 'kieliversiot',
-})(({ languages, ...props }) => {
-  return props.children({
-    languages: languages || [],
-  });
-});
-
-const HakukohteetPohjaAndHakuFieldValue = formValues({
-  pohja: 'hakukohteet.pohja',
-  haku: 'hakukohteet.haku',
-})(({ pohja, haku, children }) => children({ pohja, haku }));
+import useFieldValue from '../useFieldValue';
 
 const hakukohteetModal = props => <HakukohteetModal {...props} />;
 
 const ToteutusForm = ({
-  handleSubmit,
   koulutusKoodiUri,
   organisaatioOid,
   onMaybeCopy = () => {},
@@ -54,171 +40,159 @@ const ToteutusForm = ({
 }) => {
   const isKorkeakoulu = isKorkeakouluKoulutustyyppi(koulutustyyppi);
   const { t } = useTranslation();
+  const kieliversiot = useFieldValue('kieliversiot');
+  const languages = kieliversiot || [];
 
   return (
-    <form onSubmit={handleSubmit}>
-      <ActiveLanguages>
-        {({ languages }) => (
-          <FormCollapseGroup
-            enabled={steps}
-            scrollTarget={scrollTarget}
-            defaultOpen={!steps}
-          >
-            {canCopy ? (
-              <FormCollapse
-                header={t('yleiset.pohjanValinta')}
-                onContinue={onMaybeCopy}
-                scrollOnActive={false}
-                {...getTestIdProps('pohjaSection')}
-              >
-                {({ onContinue }) => (
-                  <PohjaSection
-                    organisaatioOid={organisaatioOid}
-                    onCreateNew={onCreateNew}
-                    onContinue={onContinue}
-                    name="pohja"
-                  />
-                )}
-              </FormCollapse>
-            ) : null}
+    <FormCollapseGroup
+      enabled={steps}
+      scrollTarget={scrollTarget}
+      defaultOpen={!steps}
+    >
+      {canCopy ? (
+        <FormCollapse
+          header={t('yleiset.pohjanValinta')}
+          onContinue={onMaybeCopy}
+          scrollOnActive={false}
+          {...getTestIdProps('pohjaSection')}
+        >
+          {({ onContinue }) => (
+            <PohjaSection
+              organisaatioOid={organisaatioOid}
+              onCreateNew={onCreateNew}
+              onContinue={onContinue}
+              name="pohja"
+            />
+          )}
+        </FormCollapse>
+      ) : null}
 
-            <FormCollapse
-              header={t('yleiset.kieliversiot')}
-              {...getTestIdProps('kieliversiotSection')}
+      <FormCollapse
+        header={t('yleiset.kieliversiot')}
+        {...getTestIdProps('kieliversiotSection')}
+      >
+        <KieliversiotFields name="kieliversiot" />
+      </FormCollapse>
+
+      {isKorkeakoulu ? (
+        <FormCollapse
+          header={t('toteutuslomake.koulutuksenToteutuksenKuvaus')}
+          languages={languages}
+          {...getTestIdProps('kuvausSection')}
+        >
+          <KuvausSection name="kuvaus" />
+        </FormCollapse>
+      ) : null}
+
+      {isKorkeakoulu ? (
+        <FormCollapse
+          header={t(
+            'toteutuslomake.alemmanKorkeakoulututkinnonErikoistumisalanKuvaus',
+          )}
+          languages={languages}
+          {...getTestIdProps('alempiOsaamisalatSection')}
+        >
+          <KorkeakouluOsaamisalatSection name="alemmanKorkeakoulututkinnonOsaamisalat" />
+        </FormCollapse>
+      ) : null}
+
+      {isKorkeakoulu ? (
+        <FormCollapse
+          header={t(
+            'toteutuslomake.ylemmanKorkeakoulututkinnonErikoistumisalanKuvaus',
+          )}
+          languages={languages}
+          {...getTestIdProps('ylempiOsaamisalatSection')}
+        >
+          <KorkeakouluOsaamisalatSection name="ylemmanKorkeakoulututkinnonOsaamisalat" />
+        </FormCollapse>
+      ) : null}
+
+      {isAmmatillinenKoulutustyyppi(koulutustyyppi) ? (
+        <FormCollapse
+          header={t('toteutuslomake.valitseOsaamisalat')}
+          languages={languages}
+          {...getTestIdProps('osaamisalatSection')}
+        >
+          <OsaamisalatSection
+            name="osaamisalat"
+            koulutusKoodiUri={koulutusKoodiUri}
+          />
+        </FormCollapse>
+      ) : null}
+
+      <FormCollapse
+        header={t('toteutuslomake.toteutuksenJarjestamistiedot')}
+        languages={languages}
+        {...getTestIdProps('jarjestamistiedotSection')}
+      >
+        <JarjestamisTiedotSection
+          name="jarjestamistiedot"
+          koulutustyyppi={koulutustyyppi}
+        />
+      </FormCollapse>
+
+      <FormCollapse
+        header={t('toteutuslomake.koulutuksenNayttamiseenLiittyvatTiedot')}
+        languages={languages}
+        {...getTestIdProps('nayttamistiedotSection')}
+      >
+        <NayttamisTiedotSection name="nayttamistiedot" />
+      </FormCollapse>
+
+      <FormCollapse
+        header={t('toteutuslomake.toteutuksenJarjestaja')}
+        languages={languages}
+        {...getTestIdProps('jarjestamispaikatSection')}
+      >
+        <JarjestamispaikatSection
+          name="jarjestamispaikat"
+          organisaatioOid={organisaatioOid}
+        />
+      </FormCollapse>
+
+      <FormCollapse
+        header={t('toteutuslomake.toteutuksenNimi')}
+        languages={languages}
+        {...getTestIdProps('nimiSection')}
+      >
+        <NimiSection name="nimi" />
+      </FormCollapse>
+
+      <FormCollapse
+        header={t('toteutuslomake.koulutuksenYhteystiedot')}
+        languages={languages}
+        {...getTestIdProps('yhteystiedotSection')}
+      >
+        <YhteyshenkilotSection name="yhteyshenkilot" />
+      </FormCollapse>
+
+      {isFunction(onAttachHakukohde) ? (
+        <FormCollapse
+          header={t('toteutuslomake.toteutukseenLiitetytHakukohteet')}
+          id="toteutukseen-liitetetyt-hakukohteet"
+          clearable={false}
+          actions={
+            <ModalController
+              modal={hakukohteetModal}
+              fieldName="hakukohteet"
+              organisaatioOid={organisaatioOid}
+              onSave={onAttachHakukohde}
             >
-              <KieliversiotFields name="kieliversiot" />
-            </FormCollapse>
-
-            {isKorkeakoulu ? (
-              <FormCollapse
-                header={t('toteutuslomake.koulutuksenToteutuksenKuvaus')}
-                languages={languages}
-                {...getTestIdProps('kuvausSection')}
-              >
-                <KuvausSection name="kuvaus" />
-              </FormCollapse>
-            ) : null}
-
-            {isKorkeakoulu ? (
-              <FormCollapse
-                header={t(
-                  'toteutuslomake.alemmanKorkeakoulututkinnonErikoistumisalanKuvaus',
-                )}
-                languages={languages}
-                {...getTestIdProps('alempiOsaamisalatSection')}
-              >
-                <KorkeakouluOsaamisalatSection name="alemmanKorkeakoulututkinnonOsaamisalat" />
-              </FormCollapse>
-            ) : null}
-
-            {isKorkeakoulu ? (
-              <FormCollapse
-                header={t(
-                  'toteutuslomake.ylemmanKorkeakoulututkinnonErikoistumisalanKuvaus',
-                )}
-                languages={languages}
-                {...getTestIdProps('ylempiOsaamisalatSection')}
-              >
-                <KorkeakouluOsaamisalatSection name="ylemmanKorkeakoulututkinnonOsaamisalat" />
-              </FormCollapse>
-            ) : null}
-
-            {isAmmatillinenKoulutustyyppi(koulutustyyppi) ? (
-              <FormCollapse
-                header={t('toteutuslomake.valitseOsaamisalat')}
-                languages={languages}
-                {...getTestIdProps('osaamisalatSection')}
-              >
-                <OsaamisalatSection
-                  name="osaamisalat"
-                  koulutusKoodiUri={koulutusKoodiUri}
-                />
-              </FormCollapse>
-            ) : null}
-
-            <FormCollapse
-              header={t('toteutuslomake.toteutuksenJarjestamistiedot')}
-              languages={languages}
-              {...getTestIdProps('jarjestamistiedotSection')}
-            >
-              <JarjestamisTiedotSection
-                name="jarjestamistiedot"
-                koulutustyyppi={koulutustyyppi}
-              />
-            </FormCollapse>
-
-            <FormCollapse
-              header={t(
-                'toteutuslomake.koulutuksenNayttamiseenLiittyvatTiedot',
+              {({ onToggle }) => (
+                <Flex justifyCenter full>
+                  <Button onClick={onToggle} type="button">
+                    {t('yleiset.liitaHakukohde')}
+                  </Button>
+                </Flex>
               )}
-              languages={languages}
-              {...getTestIdProps('nayttamistiedotSection')}
-            >
-              <NayttamisTiedotSection name="nayttamistiedot" />
-            </FormCollapse>
-
-            <FormCollapse
-              header={t('toteutuslomake.toteutuksenJarjestaja')}
-              languages={languages}
-              {...getTestIdProps('jarjestamispaikatSection')}
-            >
-              <JarjestamispaikatSection
-                name="jarjestamispaikat"
-                organisaatioOid={organisaatioOid}
-              />
-            </FormCollapse>
-
-            <FormCollapse
-              header={t('toteutuslomake.toteutuksenNimi')}
-              languages={languages}
-              {...getTestIdProps('nimiSection')}
-            >
-              <NimiSection name="nimi" />
-            </FormCollapse>
-
-            <FormCollapse
-              header={t('toteutuslomake.koulutuksenYhteystiedot')}
-              languages={languages}
-              {...getTestIdProps('yhteystiedotSection')}
-            >
-              <YhteyshenkilotSection name="yhteyshenkilot" />
-            </FormCollapse>
-
-            {isFunction(onAttachHakukohde) ? (
-              <FormCollapse
-                header={t('toteutuslomake.toteutukseenLiitetytHakukohteet')}
-                id="toteutukseen-liitetetyt-hakukohteet"
-                clearable={false}
-                actions={
-                  <HakukohteetPohjaAndHakuFieldValue>
-                    {({ pohja, haku }) => (
-                      <ModalController
-                        modal={hakukohteetModal}
-                        pohjaValue={pohja}
-                        hakuValue={haku}
-                        fieldName="hakukohteet"
-                        organisaatioOid={organisaatioOid}
-                        onSave={onAttachHakukohde}
-                      >
-                        {({ onToggle }) => (
-                          <Flex justifyCenter full>
-                            <Button onClick={onToggle} type="button">
-                              {t('yleiset.liitaHakukohde')}
-                            </Button>
-                          </Flex>
-                        )}
-                      </ModalController>
-                    )}
-                  </HakukohteetPohjaAndHakuFieldValue>
-                }
-              >
-                <HakukohteetSection toteutus={toteutus} />
-              </FormCollapse>
-            ) : null}
-          </FormCollapseGroup>
-        )}
-      </ActiveLanguages>
-    </form>
+            </ModalController>
+          }
+        >
+          <HakukohteetSection toteutus={toteutus} />
+        </FormCollapse>
+      ) : null}
+    </FormCollapseGroup>
   );
 };
 

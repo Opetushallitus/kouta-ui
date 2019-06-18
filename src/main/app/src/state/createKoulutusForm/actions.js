@@ -27,13 +27,11 @@ export const saveKoulutus = koulutus => (
 export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   dispatch,
   getState,
-  { httpClient, apiUrls, history },
+  { history },
 ) => {
   const state = getState();
   const values = getKoulutusFormValues(state);
   const koulutusFormData = getKoulutusByFormValues(values);
-
-  console.log(koulutusFormData);
 
   const errors = validateKoulutusForm({
     values,
@@ -69,9 +67,7 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   let koulutusData;
 
   try {
-    const { data } = await dispatch(saveKoulutus(koulutus));
-
-    koulutusData = data;
+    koulutusData = await dispatch(saveKoulutus(koulutus));
   } catch (e) {
     dispatch(stopSubmit('createKoulutusForm'));
     dispatch(openSavingErrorToast());

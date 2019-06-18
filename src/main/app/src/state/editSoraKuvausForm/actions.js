@@ -1,7 +1,7 @@
 import { getFormValues, startSubmit, stopSubmit } from 'redux-form';
 
 import { getSoraKuvausByValues, validate } from '../createSoraKuvausForm';
-import { updateKoutaSoraKuvaus } from '../../apiUtils';
+import updateSoraKuvaus from '../../utils/kouta/updateSoraKuvaus';
 import { openSavingErrorToast, openSavingSuccessToast } from '../toaster';
 import { isNonEmptyObject } from '../../utils';
 
@@ -13,7 +13,7 @@ export const saveSoraKuvaus = soraKuvaus => (
   getState,
   { apiUrls, httpClient },
 ) => {
-  return updateKoutaSoraKuvaus({ httpClient, apiUrls, soraKuvaus });
+  return updateSoraKuvaus({ httpClient, apiUrls, soraKuvaus });
 };
 
 export const submit = ({ soraKuvaus, tila: tilaArg }) => async (

@@ -5,6 +5,7 @@ import { JULKAISUTILA, POHJAVALINTA } from '../../constants';
 import { openSavingErrorToast, openSavingSuccessToast } from '../toaster';
 import { getSoraKuvausByValues, validate } from './utils';
 import { isNonEmptyObject } from '../../utils';
+import createSoraKuvaus from '../../utils/kouta/createSoraKuvaus';
 
 const formName = 'createSoraKuvausForm';
 const getSoraKuvausFormValues = getFormValues(formName);
@@ -22,7 +23,7 @@ export const saveSoraKuvaus = soraKuvaus => (
   getState,
   { apiUrls, httpClient },
 ) => {
-  return httpClient.put(apiUrls.url('kouta-backend.sora-kuvaus'), soraKuvaus);
+  return createSoraKuvaus({ httpClient, apiUrls, soraKuvaus });
 };
 
 export const maybeCopy = () => (dispatch, getState) => {
@@ -77,9 +78,7 @@ export const submit = ({ tila = JULKAISUTILA.TALLENNETTU } = {}) => async (
   let soraKuvausData;
 
   try {
-    const { data } = await dispatch(saveSoraKuvaus(haku));
-
-    soraKuvausData = data;
+    soraKuvausData = await dispatch(saveSoraKuvaus(haku));
   } catch (e) {
     dispatch(stopSubmit(formName));
     dispatch(openSavingErrorToast());

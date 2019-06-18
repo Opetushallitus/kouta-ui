@@ -13,7 +13,7 @@ import Spacing from '../Spacing';
 import DropdownIcon from '../DropdownIcon';
 import Spin from '../Spin';
 import useApiAsync from '../useApiAsync';
-import { getKoutaIndexKoulutukset } from '../../apiUtils';
+import getKoulutukset from '../../utils/koutaIndex/getKoulutukset';
 import { getIndexParamsByFilters } from './utils';
 import Filters from './Filters';
 import Badge from '../Badge';
@@ -32,10 +32,10 @@ import {
 
 import Anchor from '../Anchor';
 
-const getKoulutukset = async ({ httpClient, apiUrls, ...filters }) => {
+const getKoulutuksetFn = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
 
-  const { result, totalCount } = await getKoutaIndexKoulutukset({
+  const { result, totalCount } = await getKoulutukset({
     httpClient,
     apiUrls,
     ...params,
@@ -143,7 +143,7 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
     error,
     reload,
   } = useApiAsync({
-    promiseFn: getKoulutukset,
+    promiseFn: getKoulutuksetFn,
     nimi: debouncedNimi,
     page,
     showArchived,

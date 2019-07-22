@@ -2,6 +2,8 @@ import getKoulutusByFormValues from '../getKoulutusByFormValues';
 
 test('getKoulutusByFormValues returns correct koulutus given form values', () => {
   const koulutus = getKoulutusByFormValues({
+    tila: 'tallennettu',
+    muokkaaja: '1.1.1.1',
     kieliversiot: ['fi', 'sv'],
     tarjoajat: ['123.456.789'],
     information: {

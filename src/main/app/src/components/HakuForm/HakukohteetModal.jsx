@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { Field } from 'redux-form';
 
 import Modal from '../Modal';
@@ -22,18 +22,22 @@ const getToteutusOptions = toteutukset => {
 const HakukohteetModal = ({
   onClose,
   organisaatioOid,
-  fieldName = 'toteutukset',
-  onSave = () => {},
+  fieldName = 'hakukohteet',
+  onSave: onSaveProp = () => {},
   ...props
 }) => {
   const { t } = useTranslation();
-  const toteutus = useFieldValue('toteutus');
+  const toteutus = useFieldValue(`${fieldName}.toteutus`);
 
   const { data: toteutukset } = useApiAsync({
     promiseFn: getKoutaToteutukset,
     organisaatioOid,
     watch: organisaatioOid,
   });
+
+  const onSave = useCallback(() => {
+    return onSaveProp({ toteutusOid: toteutus.value });
+  }, [onSaveProp, toteutus]);
 
   const toteutuksetOptions = useMemo(() => {
     return toteutukset ? getToteutusOptions(toteutukset) : [];

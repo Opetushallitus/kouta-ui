@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getFormValuesBySoraKuvaus returns correct form values given sora-kuvaus 1`] = `
+Object {
+  "julkinen": true,
+  "kieliversiot": Array [],
+  "koulutustyyppi": "amm",
+  "tiedot": Object {
+    "kuvaus": Object {
+      "fi":         "<p><strong>Kuvaus fi</strong></p>",
+      "sv":         "<p><em>Kuvaus sv</em></p>",
+    },
+    "nimi": Object {
+      "fi": "Fi nimi",
+      "sv": "Sv nimi",
+    },
+  },
+}
+`;

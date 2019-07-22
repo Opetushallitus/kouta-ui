@@ -2,10 +2,9 @@ module.exports = {
   createKoulutusForm: {
     'should be able to create ammatillinen koulutus': {
       '1': {
-        organisaatioOid: '1.1.1.1.1.1',
+        johtaaTutkintoon: true,
         muokkaaja: '1.2.246.562.24.62301161440',
         tila: 'julkaistu',
-        johtaaTutkintoon: true,
         kielivalinta: ['fi'],
         tarjoajat: ['4.1.1.1.1.1', '5.1.1.1.1.1'],
         koulutusKoodiUri: 'koulutus_0#1',
@@ -30,14 +29,14 @@ module.exports = {
           kuvauksenNimi: {},
           koulutusalaKoodiUrit: [],
         },
+        organisaatioOid: '1.1.1.1.1.1',
       },
     },
     'should be able to create korkeakoulu koulutus': {
       '1': {
-        organisaatioOid: '1.1.1.1.1.1',
+        johtaaTutkintoon: true,
         muokkaaja: '1.2.246.562.24.62301161440',
         tila: 'julkaistu',
-        johtaaTutkintoon: true,
         kielivalinta: ['fi'],
         tarjoajat: ['4.1.1.1.1.1', '5.1.1.1.1.1'],
         koulutusKoodiUri: 'koulutus_0#1',
@@ -68,6 +67,7 @@ module.exports = {
             'kansallinenkoulutusluokitus2016koulutusalataso2_0#1',
           ],
         },
+        organisaatioOid: '1.1.1.1.1.1',
       },
     },
   },
@@ -104,6 +104,7 @@ module.exports = {
         organisaatioOid: '1.1.1.1.1.1',
         kielivalinta: ['fi'],
         modified: '2019-04-01T13:01',
+        johtaaTutkintoon: true,
       },
     },
     'should be able to edit korkeakoulu koulutus': {

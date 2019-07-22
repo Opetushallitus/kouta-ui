@@ -258,16 +258,6 @@ export const getOrganisaatioContactInfo = organisaatio => {
   };
 };
 
-export const getKoutaToteutusByOid = async ({ oid, httpClient, apiUrls }) => {
-  const { data, headers } = await httpClient.get(
-    apiUrls.url('kouta-backend.toteutus-by-oid', oid),
-  );
-
-  const lastModified = get(headers, 'last-modified') || null;
-
-  return isObject(data) ? { lastModified, ...data } : data;
-};
-
 export const getKoutaHakuByOid = async ({ oid, httpClient, apiUrls }) => {
   const { data, headers } = await httpClient.get(
     apiUrls.url('kouta-backend.haku-by-oid', oid),
@@ -352,22 +342,6 @@ export const getKoutaKoulutusToteutukset = async ({
   return data;
 };
 
-export const updateKoutaHaku = async ({ haku, httpClient, apiUrls }) => {
-  const { lastModified = '', ...rest } = haku;
-
-  const headers = {
-    'If-Unmodified-Since': lastModified,
-  };
-
-  const { data } = await httpClient.post(
-    apiUrls.url('kouta-backend.haku'),
-    rest,
-    { headers },
-  );
-
-  return data;
-};
-
 export const getKoutaHaut = async ({
   organisaatioOid,
   httpClient,
@@ -378,26 +352,6 @@ export const getKoutaHaut = async ({
     {
       params: { organisaatioOid },
     },
-  );
-
-  return data;
-};
-
-export const updateKoutaToteutus = async ({
-  toteutus,
-  httpClient,
-  apiUrls,
-}) => {
-  const { lastModified = '', ...rest } = toteutus;
-
-  const headers = {
-    'If-Unmodified-Since': lastModified,
-  };
-
-  const { data } = await httpClient.post(
-    apiUrls.url('kouta-backend.toteutus'),
-    rest,
-    { headers },
   );
 
   return data;
@@ -440,46 +394,6 @@ export const getKoutaHakukohdeByOid = async ({ oid, httpClient, apiUrls }) => {
   return isObject(data) ? { lastModified, ...data } : data;
 };
 
-export const updateKoutaHakukohde = async ({
-  hakukohde,
-  httpClient,
-  apiUrls,
-}) => {
-  const { lastModified = '', ...rest } = hakukohde;
-
-  const headers = {
-    'If-Unmodified-Since': lastModified,
-  };
-
-  const { data } = await httpClient.post(
-    apiUrls.url('kouta-backend.hakukohde'),
-    rest,
-    { headers },
-  );
-
-  return data;
-};
-
-export const getAndUpdateKoutaToteutus = async ({
-  httpClient,
-  apiUrls,
-  toteutus: toteutusUpdate,
-}) => {
-  const { oid, ...update } = toteutusUpdate;
-
-  if (!oid) {
-    throw new Error('Toteutuksella täytyy olla oid');
-  }
-
-  const toteutus = await getKoutaToteutusByOid({ oid, httpClient, apiUrls });
-
-  return updateKoutaToteutus({
-    httpClient,
-    apiUrls,
-    toteutus: { ...toteutus, ...update },
-  });
-};
-
 export const getKoutaValintaperusteByOid = async ({
   oid,
   httpClient,
@@ -492,26 +406,6 @@ export const getKoutaValintaperusteByOid = async ({
   const lastModified = get(headers, 'last-modified') || null;
 
   return isObject(data) ? { lastModified, ...data } : data;
-};
-
-export const updateKoutaValintaperuste = async ({
-  valintaperuste,
-  httpClient,
-  apiUrls,
-}) => {
-  const { lastModified = '', ...rest } = valintaperuste;
-
-  const headers = {
-    'If-Unmodified-Since': lastModified,
-  };
-
-  const { data } = await httpClient.post(
-    apiUrls.url('kouta-backend.valintaperuste'),
-    rest,
-    { headers },
-  );
-
-  return data;
 };
 
 export const getMe = async ({ httpClient, apiUrls }) => {

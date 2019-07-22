@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
 
 import ValintaperusteForm from '../ValintaperusteForm';
-import { getValuesByValintaperuste } from '../../state/createValintaperusteForm';
+import getFormValuesByValintaperuste from '../../utils/getFormValuesByValintaperuste';
 import ReduxForm from '../ReduxForm';
 
 const EditValintapersuteetForm = ({ valintaperuste, ...props }) => {
   const initialValues = useMemo(() => {
-    return getValuesByValintaperuste(valintaperuste);
+    return getFormValuesByValintaperuste(valintaperuste);
   }, [valintaperuste]);
 
   return (

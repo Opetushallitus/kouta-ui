@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import get from 'lodash/get';
 
 import TypeSection from './TypeSection';
 import BaseSelectionSection from './BaseSelectionSection';
@@ -18,18 +19,34 @@ import useTranslation from '../useTranslation';
 import isKorkeakouluKoulutustyyppi from '../../utils/isKorkeakouluKoulutustyyppi';
 import useFieldValue from '../useFieldValue';
 
+const PohjaFormCollapse = ({ children, onSelectBase, ...props }) => {
+  const tapa = useFieldValue('pohja.tapa');
+  const valinta = useFieldValue('pohja.valinta');
+
+  const onContinue = useCallback(() => {
+    onSelectBase({
+      tapa,
+      valinta: get(valinta, 'value'),
+    });
+  }, [onSelectBase, tapa, valinta]);
+
+  return (
+    <FormCollapse onContinue={onContinue} {...props}>
+      {children}
+    </FormCollapse>
+  );
+};
+
 const KoulutusForm = ({
   organisaatioOid,
-  onCopy = () => {},
-  onMaybeCopy = () => {},
   steps = false,
-  onCreateNew,
   onAttachToteutus,
-  canCopy = true,
+  canSelectBase = true,
   scrollTarget,
   koulutus: koulutusProp = null,
   canEditKoulutustyyppi = true,
   johtaaTutkintoon = true,
+  onSelectBase = () => {},
 }) => {
   const { t } = useTranslation();
 
@@ -57,22 +74,17 @@ const KoulutusForm = ({
         </FormCollapse>
       ) : null}
 
-      {canCopy ? (
-        <FormCollapse
+      {canSelectBase ? (
+        <PohjaFormCollapse
           header={t('yleiset.pohjanValinta')}
-          onContinue={onMaybeCopy}
+          onSelectBase={onSelectBase}
           {...getTestIdProps('pohjaSection')}
         >
-          {({ onContinue }) => (
-            <BaseSelectionSection
-              name="pohja"
-              onContinue={onContinue}
-              organisaatioOid={organisaatioOid}
-              onCopy={onCopy}
-              onCreateNew={onCreateNew}
-            />
-          )}
-        </FormCollapse>
+          <BaseSelectionSection
+            name="pohja"
+            organisaatioOid={organisaatioOid}
+          />
+        </PohjaFormCollapse>
       ) : null}
 
       <FormCollapse

@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
+import get from 'lodash/get';
 
 import BaseSelectionSection from './BaseSelectionSection';
 import KieliversiotFields from '../KieliversiotFields';
@@ -23,16 +24,32 @@ import isYhteishakuHakutapa from '../../utils/isYhteishakuHakutapa';
 import useFieldValue from '../useFieldValue';
 import { HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID } from '../../constants';
 
+const PohjaFormCollapse = ({ children, onSelectBase, ...props }) => {
+  const tapa = useFieldValue('pohja.tapa');
+  const valinta = useFieldValue('pohja.valinta');
+
+  const onContinue = useCallback(() => {
+    onSelectBase({
+      tapa,
+      valinta: get(valinta, 'value'),
+    });
+  }, [onSelectBase, tapa, valinta]);
+
+  return (
+    <FormCollapse onContinue={onContinue} {...props}>
+      {children}
+    </FormCollapse>
+  );
+};
+
 const HakuForm = ({
   organisaatioOid,
-  onCopy = () => {},
-  onMaybeCopy = () => {},
-  onCreateNew = () => {},
-  canCopy = true,
+  canSelectBase = true,
   onAttachHakukohde,
   steps = false,
   scrollTarget,
   haku: hakuProp = null,
+  onSelectBase = () => {},
 }) => {
   const { t } = useTranslation();
   const roleBuilder = useAuthorizedUserRoleBuilder();
@@ -53,7 +70,7 @@ const HakuForm = ({
       <HakukohteetModal
         open={isOpen}
         onClose={close}
-        fieldName="toteutukset"
+        fieldName="hakukohteet"
         organisaatioOid={organisaatioOid}
         onSave={onAttachHakukohde}
       />
@@ -62,23 +79,18 @@ const HakuForm = ({
         scrollTarget={scrollTarget}
         defaultOpen={!steps}
       >
-        {canCopy ? (
-          <FormCollapse
+        {canSelectBase ? (
+          <PohjaFormCollapse
             header={t('yleiset.pohjanValinta')}
-            onContinue={onMaybeCopy}
             scrollOnActive={false}
+            onSelectBase={onSelectBase}
             {...getTestIdProps('pohjaSection')}
           >
-            {({ onContinue }) => (
-              <BaseSelectionSection
-                onContinue={onContinue}
-                organisaatioOid={organisaatioOid}
-                onCopy={onCopy}
-                onCreateNew={onCreateNew}
-                name="pohja"
-              />
-            )}
-          </FormCollapse>
+            <BaseSelectionSection
+              organisaatioOid={organisaatioOid}
+              name="pohja"
+            />
+          </PohjaFormCollapse>
         ) : null}
 
         <FormCollapse

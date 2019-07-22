@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react';
 
 import ValintaperusteForm, { initialValues } from '../ValintaperusteForm';
-import { getValuesByValintaperuste } from '../../state/createValintaperusteForm';
 import { getKoutaValintaperusteByOid } from '../../apiUtils';
 import useApiAsync from '../useApiAsync';
 import { POHJAVALINTA } from '../../constants';
 import ReduxForm from '../ReduxForm';
+import getFormValuesByValintaperuste from '../../utils/getFormValuesByValintaperuste';
 
 const resolveFn = () => Promise.resolve(null);
 
@@ -20,7 +20,7 @@ const getInitialValues = valintaperuste => {
   return valintaperuste && valintaperuste.oid
     ? {
         ...getCopyValues(valintaperuste.oid),
-        ...getValuesByValintaperuste(valintaperuste),
+        ...getFormValuesByValintaperuste(valintaperuste),
       }
     : initialValues;
 };

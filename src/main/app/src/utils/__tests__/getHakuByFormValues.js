@@ -5,6 +5,8 @@ import getHakuByFormValues from '../getHakuByFormValues';
 import { HAKULOMAKETYYPPI } from '../../constants';
 
 const baseValues = {
+  tila: 'tallennettu',
+  muokkaaja: '1.1.1.1',
   nimi: {
     fi: 'Nimi',
     sv: 'Namn',

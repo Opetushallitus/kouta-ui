@@ -1,15 +1,27 @@
-import React, { useMemo } from 'react';
-import { connect } from 'react-redux';
+import React, { useMemo, useCallback } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import ToteutusForm from '../ToteutusForm';
-import { getValuesByToteutus } from '../../state/createToteutusForm';
-import { attachHakukohde } from '../../state/editToteutusForm';
+import getFormValuesByToteutus from '../../utils/getFormValuesByToteutus';
 import ReduxForm from '../ReduxForm';
 
-const EditToteutusForm = ({ onSave, toteutus, ...props }) => {
+const EditToteutusForm = ({ toteutus, history, ...props }) => {
   const initialValues = useMemo(() => {
-    return getValuesByToteutus(toteutus);
+    return getFormValuesByToteutus(toteutus);
   }, [toteutus]);
+
+  const onAttachHakukohde = useCallback(
+    ({ hakuOid }) => {
+      if (hakuOid) {
+        history.push(
+          `/organisaatio/${toteutus.organisaatioOid}/toteutus/${
+            toteutus.oid
+          }/haku/${hakuOid}/hakukohde`,
+        );
+      }
+    },
+    [history, toteutus],
+  );
 
   return (
     <ReduxForm form="editToteutusForm" initialValues={initialValues}>
@@ -19,16 +31,11 @@ const EditToteutusForm = ({ onSave, toteutus, ...props }) => {
           toteutus={toteutus}
           steps={false}
           canCopy={false}
+          onAttachHakukohde={onAttachHakukohde}
         />
       )}
     </ReduxForm>
   );
 };
 
-export default connect(
-  null,
-  (dispatch, { toteutus: { oid: toteutusOid, organisaatioOid } }) => ({
-    onAttachHakukohde: () =>
-      dispatch(attachHakukohde({ toteutusOid, organisaatioOid })),
-  }),
-)(EditToteutusForm);
+export default withRouter(EditToteutusForm);

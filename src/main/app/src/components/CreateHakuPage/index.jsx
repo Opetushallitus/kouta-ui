@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import queryString from 'query-string';
 
 import FormPage, { OrganisaatioInfo } from '../FormPage';
@@ -7,6 +7,7 @@ import CreateHakuHeader from './CreateHakuHeader';
 import CreateHakuSteps from './CreateHakuSteps';
 import CreateHakuForm from './CreateHakuForm';
 import CreateHakuFooter from './CreateHakuFooter';
+import useSelectBase from '../useSelectBase';
 
 const CreateHakuPage = props => {
   const {
@@ -19,21 +20,19 @@ const CreateHakuPage = props => {
 
   const { kopioHakuOid = null } = queryString.parse(search);
 
-  const onCreateNew = useCallback(() => {
-    history.replace({ search: '' });
-  }, [history]);
+  const selectBase = useSelectBase(history, { kopioParam: 'kopioHakuOid' });
 
   return (
     <FormPage
       header={<CreateHakuHeader />}
       steps={<CreateHakuSteps />}
-      footer={<CreateHakuFooter />}
+      footer={<CreateHakuFooter organisaatioOid={organisaatioOid} />}
     >
-    <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+      <OrganisaatioInfo organisaatioOid={organisaatioOid} />
       <CreateHakuForm
         organisaatioOid={organisaatioOid}
         kopioHakuOid={kopioHakuOid}
-        onCreateNew={onCreateNew}
+        onSelectBase={selectBase}
       />
     </FormPage>
   );

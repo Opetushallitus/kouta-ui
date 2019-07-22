@@ -1,15 +1,27 @@
-import React, { useMemo } from 'react';
-import { connect } from 'react-redux';
+import React, { useMemo, useCallback } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import HakuForm from '../HakuForm';
 import getFormValuesByHaku from '../../utils/getFormValuesByHaku';
-import { attachHakukohde } from '../../state/editHakuForm/actions';
 import ReduxForm from '../ReduxForm';
 
-const EditHakuForm = ({ onSave, haku, ...props }) => {
+const EditHakuForm = ({ onSave, haku, history, ...props }) => {
   const initialValues = useMemo(() => {
     return getFormValuesByHaku(haku);
   }, [haku]);
+
+  const onAttachHakukohde = useCallback(
+    ({ toteutusOid }) => {
+      if (toteutusOid) {
+        history.push(
+          `/organisaatio/${haku.organisaatioOid}/toteutus/${toteutusOid}/haku/${
+            haku.oid
+          }/hakukohde`,
+        );
+      }
+    },
+    [history, haku],
+  );
 
   return (
     <ReduxForm form="editHakuForm" initialValues={initialValues}>
@@ -18,7 +30,8 @@ const EditHakuForm = ({ onSave, haku, ...props }) => {
           steps={false}
           initialValues={initialValues}
           haku={haku}
-          canCopy={false}
+          onAttachHakukohde={onAttachHakukohde}
+          canSelectBase={false}
           {...props}
         />
       )}
@@ -26,10 +39,4 @@ const EditHakuForm = ({ onSave, haku, ...props }) => {
   );
 };
 
-export default connect(
-  null,
-  (dispatch, { haku: { oid: hakuOid, organisaatioOid, toteutusOid } }) => ({
-    onAttachHakukohde: () =>
-      dispatch(attachHakukohde({ hakuOid, organisaatioOid, toteutusOid })),
-  }),
-)(EditHakuForm);
+export default withRouter(EditHakuForm);

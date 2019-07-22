@@ -1,11 +1,6 @@
-import { connect } from 'react-redux';
 import React, { useMemo } from 'react';
 
 import KoulutusForm, { initialValues } from '../KoulutusForm';
-import {
-  copy as copyKoulutus,
-  maybeCopy as maybeCopyKoulutus,
-} from '../../state/createKoulutusForm';
 import getFormValuesByKoulutus from '../../utils/getFormValuesByKoulutus';
 import getKoulutusByOid from '../../utils/kouta/getKoulutusByOid';
 import useApiAsync from '../useApiAsync';
@@ -53,14 +48,4 @@ const CreateKoulutusForm = props => {
   );
 };
 
-export default connect(
-  null,
-  dispatch => ({
-    onCopy: koulutusOid => {
-      dispatch(copyKoulutus(koulutusOid));
-    },
-    onMaybeCopy: () => {
-      dispatch(maybeCopyKoulutus());
-    },
-  }),
-)(CreateKoulutusForm);
+export default CreateKoulutusForm;

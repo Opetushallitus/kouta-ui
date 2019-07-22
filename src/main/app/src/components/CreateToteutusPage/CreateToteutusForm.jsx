@@ -1,16 +1,12 @@
-import { connect } from 'react-redux';
 import React, { useMemo } from 'react';
 
 import ToteutusForm, { initialValues } from '../ToteutusForm';
-import {
-  getValuesByToteutus,
-  maybeCopy as maybeCopyToteutus,
-} from '../../state/createToteutusForm';
 
-import { getKoutaToteutusByOid } from '../../apiUtils';
+import getFormValuesByToteutus from '../../utils/getFormValuesByToteutus';
 import useApiAsync from '../useApiAsync';
 import { POHJAVALINTA } from '../../constants';
 import ReduxForm from '../ReduxForm';
+import getToteutusByOid from '../../utils/kouta/getToteutusByOid';
 
 const resolveFn = () => Promise.resolve();
 
@@ -23,14 +19,14 @@ const getCopyValues = toteutusOid => ({
 
 const getInitialValues = toteutus => {
   return toteutus
-    ? { ...getCopyValues(toteutus.oid), ...getValuesByToteutus(toteutus) }
+    ? { ...getCopyValues(toteutus.oid), ...getFormValuesByToteutus(toteutus) }
     : initialValues;
 };
 
 const CreateToteutusForm = props => {
   const { kopioToteutusOid } = props;
 
-  const promiseFn = kopioToteutusOid ? getKoutaToteutusByOid : resolveFn;
+  const promiseFn = kopioToteutusOid ? getToteutusByOid : resolveFn;
 
   const { data } = useApiAsync({
     promiseFn,
@@ -53,11 +49,4 @@ const CreateToteutusForm = props => {
   );
 };
 
-export default connect(
-  null,
-  dispatch => ({
-    onMaybeCopy: () => {
-      dispatch(maybeCopyToteutus());
-    },
-  }),
-)(CreateToteutusForm);
+export default CreateToteutusForm;

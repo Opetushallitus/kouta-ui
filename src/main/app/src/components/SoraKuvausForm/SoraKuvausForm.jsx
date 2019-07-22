@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import get from 'lodash/get';
 
 import PohjaSection from './PohjaSection';
 import FormCollapseGroup from '../FormCollapseGroup';
@@ -11,25 +12,37 @@ import TiedotSection from './TiedotSection';
 import JulkisuusSection from './JulkisuusSection';
 import useFieldValue from '../useFieldValue';
 
+const PohjaFormCollapse = ({ children, onSelectBase, ...props }) => {
+  const tapa = useFieldValue('pohja.tapa');
+  const valinta = useFieldValue('pohja.valinta');
+
+  const onContinue = useCallback(() => {
+    onSelectBase({
+      tapa,
+      valinta: get(valinta, 'value'),
+    });
+  }, [onSelectBase, tapa, valinta]);
+
+  return (
+    <FormCollapse onContinue={onContinue} {...props}>
+      {children}
+    </FormCollapse>
+  );
+};
+
 const SoraKuvausForm = ({
-  onCopy = () => {},
-  onMaybeCopy = () => {},
   steps = false,
-  onCreateNew,
-  canCopy = true,
-  scrollTarget,
   canEditKoulutustyyppi = true,
+  canSelectBase = true,
+  organisaatioOid,
+  onSelectBase = () => {},
 }) => {
   const { t } = useTranslation();
   const kieliversiot = useFieldValue('kieliversiot');
   const languageTabs = kieliversiot || [];
 
   return (
-    <FormCollapseGroup
-      enabled={steps}
-      scrollTarget={scrollTarget}
-      defaultOpen={!steps}
-    >
+    <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
       {canEditKoulutustyyppi ? (
         <FormCollapse
           header={t('yleiset.koulutustyyppi')}
@@ -40,21 +53,14 @@ const SoraKuvausForm = ({
         </FormCollapse>
       ) : null}
 
-      {canCopy ? (
-        <FormCollapse
+      {canSelectBase ? (
+        <PohjaFormCollapse
           header={t('yleiset.pohjanValinta')}
-          onContinue={onMaybeCopy}
+          onSelectBase={onSelectBase}
           {...getTestIdProps('pohjaSection')}
         >
-          {({ onContinue }) => (
-            <PohjaSection
-              name="pohja"
-              onContinue={onContinue}
-              onCopy={onCopy}
-              onCreateNew={onCreateNew}
-            />
-          )}
-        </FormCollapse>
+          <PohjaSection name="pohja" organisaatioOid={organisaatioOid} />
+        </PohjaFormCollapse>
       ) : null}
 
       <FormCollapse

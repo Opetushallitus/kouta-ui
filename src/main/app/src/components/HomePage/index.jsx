@@ -52,11 +52,7 @@ const getFirstOrganisaatioOidWithRequiredRole = user => {
   return validRole ? getRoleOrganisaatioOid(validRole) : undefined;
 };
 
-const HomeRoute = ({
-  kayttajaOid,
-  organisaatioOid,
-  persistedOrganisaatioOid,
-}) => {
+const HomeRoute = ({ organisaatioOid, persistedOrganisaatioOid }) => {
   const { t } = useTranslation();
   const user = useAuthorizedUser();
 
@@ -91,7 +87,7 @@ const HomeRoute = ({
   }
 
   return (
-    <HomeContent kayttajaOid={kayttajaOid} organisaatioOid={organisaatioOid} />
+    <HomeContent kayttajaOid={user.oid} organisaatioOid={organisaatioOid} />
   );
 };
 
@@ -119,6 +115,5 @@ const HomePage = ({
 };
 
 export default connect(state => ({
-  kayttajaOid: state.me.oid,
   persistedOrganisaatioOid: selectOrganisaatio(state),
 }))(HomePage);

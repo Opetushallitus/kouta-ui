@@ -8,6 +8,7 @@ import getHakulomakeFieldsData from './getHakulomakeFieldsData';
 const getKielivalinta = values => get(values, 'kieliversiot') || [];
 
 const getHakuByFormValues = values => {
+  const { muokkaaja, tila } = values;
   const alkamiskausiKoodiUri = get(values, 'aikataulut.kausi') || null;
 
   const alkamisvuosi = isNumeric(get(values, 'aikataulut.vuosi.value'))
@@ -73,6 +74,8 @@ const getHakuByFormValues = values => {
     get(values, 'aikataulut.muokkauksenTakaraja') || null;
 
   return {
+    muokkaaja,
+    tila,
     alkamiskausiKoodiUri,
     kielivalinta,
     hakutapaKoodiUri,

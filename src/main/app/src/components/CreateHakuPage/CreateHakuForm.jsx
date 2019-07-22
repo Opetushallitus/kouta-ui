@@ -1,11 +1,6 @@
-import { connect } from 'react-redux';
 import React, { useMemo } from 'react';
 
 import HakuForm, { initialValues } from '../HakuForm';
-import {
-  copy as copyHaku,
-  maybeCopy as maybeCopyHaku,
-} from '../../state/createHakuForm';
 import { getKoutaHakuByOid } from '../../apiUtils';
 import useApiAsync from '../useApiAsync';
 import { POHJAVALINTA } from '../../constants';
@@ -53,14 +48,4 @@ const CreateHakuForm = props => {
   );
 };
 
-export default connect(
-  null,
-  dispatch => ({
-    onCopy: hakuOid => {
-      dispatch(copyHaku(hakuOid));
-    },
-    onMaybeCopy: () => {
-      dispatch(maybeCopyHaku());
-    },
-  }),
-)(CreateHakuForm);
+export default CreateHakuForm;

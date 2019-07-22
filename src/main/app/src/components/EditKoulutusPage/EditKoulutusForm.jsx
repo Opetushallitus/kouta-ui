@@ -1,24 +1,32 @@
-import React, { useMemo } from 'react';
-import { connect } from 'react-redux';
+import React, { useMemo, useCallback } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import ReduxForm from '../ReduxForm';
 import KoulutusForm from '../KoulutusForm';
 import getFormValuesByKoulutus from '../../utils/getFormValuesByKoulutus';
-import { attachToteutus } from '../../state/editKoulutusForm';
 
-const EditKoulutusForm = ({ onSave, koulutus, ...props }) => {
+const EditKoulutusForm = ({ onSave, koulutus, history, ...props }) => {
   const initialValues = useMemo(() => {
     return getFormValuesByKoulutus(koulutus);
   }, [koulutus]);
+
+  const onAttachToteutus = useCallback(() => {
+    history.push(
+      `/organisaatio/${koulutus.organisaatioOid}/koulutus/${
+        koulutus.oid
+      }/toteutus`,
+    );
+  }, [history, koulutus]);
 
   return (
     <ReduxForm form="editKoulutusForm" initialValues={initialValues}>
       {() => (
         <KoulutusForm
           steps={false}
-          canCopy={false}
+          canSelectBase={false}
           canEditKoulutustyyppi={false}
           johtaaTutkintoon={Boolean(koulutus.johtaaTutkintoon)}
+          onAttachToteutus={onAttachToteutus}
           {...props}
         />
       )}
@@ -26,10 +34,4 @@ const EditKoulutusForm = ({ onSave, koulutus, ...props }) => {
   );
 };
 
-export default connect(
-  null,
-  (dispatch, { koulutus: { oid: koulutusOid, organisaatioOid } }) => ({
-    onAttachToteutus: () =>
-      dispatch(attachToteutus({ koulutusOid, organisaatioOid })),
-  }),
-)(EditKoulutusForm);
+export default withRouter(EditKoulutusForm);

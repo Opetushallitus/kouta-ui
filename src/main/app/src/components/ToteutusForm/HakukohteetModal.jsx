@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { Field } from 'redux-form';
 
 import Modal from '../Modal';
@@ -22,7 +22,7 @@ const HakukohteetModal = ({
   onClose,
   organisaatioOid,
   fieldName = 'hakukohteet',
-  onSave = () => {},
+  onSave: onSaveProp = () => {},
   ...props
 }) => {
   const { t } = useTranslation();
@@ -33,6 +33,10 @@ const HakukohteetModal = ({
     organisaatioOid,
     watch: organisaatioOid,
   });
+
+  const onSave = useCallback(() => {
+    return onSaveProp({ hakuOid: hakuValue.value });
+  }, [onSaveProp, hakuValue]);
 
   const hautOptions = useMemo(() => {
     return haut ? getOptions(haut) : [];

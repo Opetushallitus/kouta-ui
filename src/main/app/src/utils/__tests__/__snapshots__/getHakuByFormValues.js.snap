@@ -66,10 +66,12 @@ Object {
       },
     ],
   },
+  "muokkaaja": "1.1.1.1",
   "nimi": Object {
     "fi": "Nimi",
     "sv": "Namn",
   },
+  "tila": "tallennettu",
   "valintakokeet": Array [
     Object {
       "tilaisuudet": Array [
@@ -167,10 +169,12 @@ Object {
       },
     ],
   },
+  "muokkaaja": "1.1.1.1",
   "nimi": Object {
     "fi": "Nimi",
     "sv": "Namn",
   },
+  "tila": "tallennettu",
   "valintakokeet": Array [
     Object {
       "tilaisuudet": Array [
@@ -266,10 +270,12 @@ Object {
       },
     ],
   },
+  "muokkaaja": "1.1.1.1",
   "nimi": Object {
     "fi": "Nimi",
     "sv": "Namn",
   },
+  "tila": "tallennettu",
   "valintakokeet": Array [
     Object {
       "tilaisuudet": Array [

@@ -29,8 +29,7 @@ const EditSoraKuvausPage = props => {
   const organisaatioOid = soraKuvaus ? soraKuvaus.organisaatioOid : null;
 
   const koulutustyyppi =
-    get(soraKuvaus, 'koulutustyyppi') ||
-    KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
+    get(soraKuvaus, 'koulutustyyppi') || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
   return (
     <FormPage

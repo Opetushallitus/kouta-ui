@@ -15,7 +15,7 @@ const getBaseFields = () => ({
       opetuskieletKuvaus: {
         fi: 'Opetuskieli kuvaus',
       },
-      opetusaikaKoodiUri: 'opetusaikakk_1#1',
+      opetusaikaKoodiUrit: ['opetusaikakk_1#1'],
       opetusaikaKuvaus: {
         fi: 'Opetusaika kuvaus',
       },
@@ -27,7 +27,7 @@ const getBaseFields = () => ({
       maksullisuusKuvaus: {
         fi: 'Maksullisuus kuvaus',
       },
-      maksunMaara: { fi: '20' },
+      maksunMaara: 20,
       alkamiskausiKoodiUri: 'kausi_1#1',
       alkamisvuosi: '2024',
       alkamisaikaKuvaus: {
@@ -47,13 +47,30 @@ const getBaseFields = () => ({
       { kieli: 'fi', arvo: 'eläintenhoito' },
     ],
     ammattinimikkeet: [{ kieli: 'fi', arvo: 'eläintenhoitaja' }],
-    yhteystieto: {
-      nimi: { fi: 'Sami Raunio' },
-      titteli: { fi: 'hakuhemmo' },
-      sahkoposti: { fi: 'hakutoimisto@salpaus.fi' },
-      puhelinnumero: { fi: '123456' },
-      wwwSivu: { fi: 'www.salpaus.fi' },
-    },
+    yhteyshenkilot: [
+      {
+        nimi: {
+          fi: 'Fi nimi',
+          sv: 'Sv nimi',
+        },
+        puhelinnumero: {
+          fi: 'Fi puhelinnumero',
+          sv: 'Sv puhelinnumero',
+        },
+        sahkoposti: {
+          fi: 'Fi sähköposti',
+          sv: 'Sv sähköposti',
+        },
+        titteli: {
+          fi: 'Fi titteli',
+          sv: 'Sv titteli',
+        },
+        wwwSivu: {
+          fi: 'Fi verkkosivu',
+          sv: 'Sv verkkosivu',
+        },
+      },
+    ],
   },
   muokkaaja: '1.2.246.562.24.62301161440',
   organisaatioOid: '1.2.246.562.10.594252633210',
@@ -85,9 +102,7 @@ const getKorkeakouluFields = ({ tyyppi }) =>
       tyyppi,
       opetus: {
         onkoLukuvuosimaksua: true,
-        lukuvuosimaksu: {
-          fi: '30',
-        },
+        lukuvuosimaksu: 30,
         lukuvuosimaksuKuvaus: {
           fi: 'Lukuvuosimaksu kuvaus',
         },

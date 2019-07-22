@@ -143,7 +143,9 @@ const validateCommon = ({ errorBuilder, values }) => {
   return enhancedErrorBuilder;
 };
 
-const validateHakukohdeForm = ({ tila, values }) => {
+const validateHakukohdeForm = values => {
+  const { tila } = values;
+
   let errorBuilder = createErrorBuilder(values);
 
   errorBuilder = validateEssentials({ values, errorBuilder });

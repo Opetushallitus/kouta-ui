@@ -1,12 +1,11 @@
 import React, { useMemo } from 'react';
-import { reduxForm } from 'redux-form';
 
 import ValintaperusteForm, { initialValues } from '../ValintaperusteForm';
-
-import { getValuesByValintaperuste } from '../../state/createValintaperusteForm';
 import { getKoutaValintaperusteByOid } from '../../apiUtils';
 import useApiAsync from '../useApiAsync';
 import { POHJAVALINTA } from '../../constants';
+import ReduxForm from '../ReduxForm';
+import getFormValuesByValintaperuste from '../../utils/getFormValuesByValintaperuste';
 
 const resolveFn = () => Promise.resolve(null);
 
@@ -21,16 +20,10 @@ const getInitialValues = valintaperuste => {
   return valintaperuste && valintaperuste.oid
     ? {
         ...getCopyValues(valintaperuste.oid),
-        ...getValuesByValintaperuste(valintaperuste),
+        ...getFormValuesByValintaperuste(valintaperuste),
       }
     : initialValues;
 };
-
-const ValintaperusteReduxForm = reduxForm({
-  form: 'createValintaperusteForm',
-  initialValues,
-  enableReinitialize: true,
-})(ValintaperusteForm);
 
 export const CreateValintaperusteForm = ({
   kopioValintaperusteOid,
@@ -47,11 +40,17 @@ export const CreateValintaperusteForm = ({
   });
 
   const initialValues = useMemo(() => {
-    getInitialValues(valintaperuste);
+    return getInitialValues(valintaperuste);
   }, [valintaperuste]);
 
   return (
-    <ValintaperusteReduxForm initialValues={initialValues} steps {...props} />
+    <ReduxForm
+      form="createValintaperusteForm"
+      initialValues={initialValues}
+      enableReinitialize
+    >
+      {() => <ValintaperusteForm steps {...props} />}
+    </ReduxForm>
   );
 };
 

@@ -2,15 +2,10 @@ import React from 'react';
 import get from 'lodash/get';
 
 import FormPage from '../FormPage';
-import {
-  getOrganisaatioByOid,
-  getKoutaToteutusByOid,
-  getKoutaHakuByOid,
-  getKoulutustyyppiByKoulutusOid,
-} from '../../apiUtils';
+import { getOrganisaatioByOid, getKoutaHakuByOid } from '../../apiUtils';
 import Flex, { FlexItem } from '../Flex';
 import { getFirstLanguageValue } from '../../utils';
-
+import getKoulutustyyppiByKoulutusOid from '../../utils/kouta/getKoulutustyyppiByKoulutusOid';
 import CreateHakukohdeHeader from './CreateHakukohdeHeader';
 import CreateHakukohdeSteps from './CreateHakukohdeSteps';
 import CreateHakukohdeForm from './CreateHakukohdeForm';
@@ -20,6 +15,7 @@ import { KOULUTUSTYYPPI } from '../../constants';
 import useApiAsync from '../useApiAsync';
 import Spin from '../Spin';
 import useTranslation from '../useTranslation';
+import getToteutusByOid from '../../utils/kouta/getToteutusByOid';
 
 const getHakukohdeData = async ({
   organisaatioOid,
@@ -30,7 +26,7 @@ const getHakukohdeData = async ({
 }) => {
   const [organisaatio, toteutus, haku] = await Promise.all([
     getOrganisaatioByOid({ oid: organisaatioOid, httpClient, apiUrls }),
-    getKoutaToteutusByOid({ oid: toteutusOid, httpClient, apiUrls }),
+    getToteutusByOid({ oid: toteutusOid, httpClient, apiUrls }),
     getKoutaHakuByOid({ oid: hakuOid, httpClient, apiUrls }),
   ]);
 
@@ -68,14 +64,19 @@ const CreateHakukohdePage = props => {
   });
 
   const koulutustyyppi =
-    get(data, 'koulutustyyppi') ||
-    KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
+    get(data, 'koulutustyyppi') || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
   return (
     <FormPage
       header={<CreateHakukohdeHeader />}
       steps={<CreateHakukohdeSteps />}
-      footer={<CreateHakukohdeFooter />}
+      footer={
+        <CreateHakukohdeFooter
+          organisaatioOid={organisaatioOid}
+          hakuOid={hakuOid}
+          toteutusOid={toteutusOid}
+        />
+      }
     >
       {data ? (
         <>

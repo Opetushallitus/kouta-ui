@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Field, formValues } from 'redux-form';
+import { Field } from 'redux-form';
 import styled from 'styled-components';
 import stripTags from 'striptags';
 import mapValues from 'lodash/mapValues';
@@ -22,6 +22,7 @@ import Icon from '../Icon';
 import { getThemeProp } from '../../theme';
 import useTranslation from '../useTranslation';
 import { FormFieldInput } from '../FormFields';
+import useFieldValue from '../useFieldValue';
 
 const Container = styled.div`
   display: flex;
@@ -118,10 +119,6 @@ const renderOsaamisalaSelectionField = ({ input, options }) => {
   return <OsaamisalaSelection {...input} options={options} />;
 };
 
-const OsaamisalatFieldValue = formValues(({ name }) => ({
-  osaamisalat: `${name}.osaamisalat`,
-}))(({ osaamisalat, children }) => children({ osaamisalat }));
-
 const OsaamisalaDetails = ({ osaamisala, language, name }) => {
   const { t } = useTranslation();
 
@@ -209,6 +206,8 @@ const OsaamisalatContainer = ({ osaamisalat, koulutus, language, name }) => {
     [osaamisalat],
   );
 
+  const osaamisalatValue = useFieldValue(`${name}.osaamisalat`);
+
   return (
     <>
       <SelectionContainer>
@@ -222,16 +221,12 @@ const OsaamisalatContainer = ({ osaamisalat, koulutus, language, name }) => {
         />
       </SelectionContainer>
       <InfoContainer>
-        <OsaamisalatFieldValue name={name}>
-          {({ osaamisalat: osaamisalatValue }) => (
-            <OsaamisalatInfoFields
-              osaamisalatValue={osaamisalatValue || []}
-              osaamisalat={osaamisalat}
-              language={language}
-              name={name}
-            />
-          )}
-        </OsaamisalatFieldValue>
+        <OsaamisalatInfoFields
+          osaamisalatValue={osaamisalatValue || []}
+          osaamisalat={osaamisalat}
+          language={language}
+          name={name}
+        />
       </InfoContainer>
     </>
   );

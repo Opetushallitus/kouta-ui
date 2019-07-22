@@ -1,27 +1,26 @@
-import { reduxForm } from 'redux-form';
 import React, { useMemo } from 'react';
 
+import ReduxForm from '../ReduxForm';
 import SoraKuvausForm from '../SoraKuvausForm';
-import { getValuesBySoraKuvaus } from '../../state/createSoraKuvausForm';
-
-const SoraKuvausReduxForm = reduxForm({
-  form: 'editSoraKuvausForm',
-})(SoraKuvausForm);
+import getFormValuesBySoraKuvaus from '../../utils/getFormValuesBySoraKuvaus';
 
 const EditSoraKuvausForm = ({ onSave, soraKuvaus, ...props }) => {
   const initialValues = useMemo(() => {
-    return getValuesBySoraKuvaus(soraKuvaus);
+    return getFormValuesBySoraKuvaus(soraKuvaus);
   }, [soraKuvaus]);
 
   return (
-    <SoraKuvausReduxForm
-      {...props}
-      soraKuvaus={soraKuvaus}
-      steps={false}
-      canCopy={false}
-      canEditKoulutustyyppi={false}
-      initialValues={initialValues}
-    />
+    <ReduxForm form="editSoraKuvausForm" initialValues={initialValues}>
+      {() => (
+        <SoraKuvausForm
+          {...props}
+          soraKuvaus={soraKuvaus}
+          steps={false}
+          canSelectBase={false}
+          canEditKoulutustyyppi={false}
+        />
+      )}
+    </ReduxForm>
   );
 };
 

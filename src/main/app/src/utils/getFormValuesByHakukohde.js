@@ -9,7 +9,8 @@ const getFormValuesByHakukohde = hakukohde => {
     alkamiskausiKoodiUri = '',
     kaytetaanHaunAikataulua,
     kielivalinta = [],
-    aloituspaikat = '',
+    minAloituspaikat = '',
+    maxAloituspaikat = '',
     hakuajat = [],
     liitteetOnkoSamaToimitusaika,
     liitteetOnkoSamaToimitusosoite,
@@ -23,16 +24,19 @@ const getFormValuesByHakukohde = hakukohde => {
     valintakokeet = [],
     pohjakoulutusvaatimusKoodiUrit = [],
     valintaperuste = '',
-    ensikertalaisenAloituspaikat = '',
+    minEnsikertalaisenAloituspaikat = '',
+    maxEnsikertalaisenAloituspaikat = '',
     eriHakulomake,
     hakulomaketyyppi,
     hakulomakeId,
     hakulomakeKuvaus,
     hakulomakeLinkki,
+    eriAlkamiskausi,
   } = hakukohde;
 
   return {
     alkamiskausi: {
+      eriAlkamiskausi: Boolean(eriAlkamiskausi),
       kausi: alkamiskausiKoodiUri,
       vuosi: {
         value: isNumeric(alkamisvuosi) ? alkamisvuosi.toString() : '',
@@ -40,11 +44,17 @@ const getFormValuesByHakukohde = hakukohde => {
     },
     kieliversiot: kielivalinta,
     aloituspaikat: {
-      aloituspaikkamaara: isNumeric(aloituspaikat)
-        ? aloituspaikat.toString()
+      minAloituspaikkamaara: isNumeric(minAloituspaikat)
+        ? minAloituspaikat.toString()
         : '',
-      ensikertalaismaara: isNumeric(ensikertalaisenAloituspaikat)
-        ? ensikertalaisenAloituspaikat.toString()
+      maxAloituspaikkamaara: isNumeric(maxAloituspaikat)
+        ? maxAloituspaikat.toString()
+        : '',
+      minEnsikertalaismaara: isNumeric(minEnsikertalaisenAloituspaikat)
+        ? minEnsikertalaisenAloituspaikat.toString()
+        : '',
+      maxEnsikertalaismaara: isNumeric(maxEnsikertalaisenAloituspaikat)
+        ? maxEnsikertalaisenAloituspaikat.toString()
         : '',
     },
     hakuajat: {

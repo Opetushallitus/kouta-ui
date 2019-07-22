@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Field, formValues } from 'redux-form';
+import { Field } from 'redux-form';
 import get from 'lodash/get';
 
 import Spacing from '../Spacing';
@@ -8,8 +8,10 @@ import useKoodistoOptions from '../useKoodistoOptions';
 import { getTestIdProps } from '../../utils';
 import { FormFieldTextarea, FormFieldSelect } from '../FormFields';
 import Typography from '../Typography';
+import useFieldValue from '../useFieldValue';
 
-const OsiotFieldsBase = ({ osiot, language, osiotOptions, name }) => {
+const OsiotFields = ({ language, osiotOptions, name }) => {
+  const osiot = useFieldValue(`${name}.osiot`);
   const osiotArr = osiot || [];
 
   const osiotArrWithLabels = useMemo(() => {
@@ -36,10 +38,6 @@ const OsiotFieldsBase = ({ osiot, language, osiotOptions, name }) => {
     </Spacing>
   ));
 };
-
-const OsiotFields = formValues(({ name }) => ({ osiot: `${name}.osiot` }))(
-  OsiotFieldsBase,
-);
 
 const LisatiedotSection = ({ language, name }) => {
   const { t } = useTranslation();

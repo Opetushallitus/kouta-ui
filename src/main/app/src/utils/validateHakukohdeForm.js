@@ -105,9 +105,10 @@ const validateEssentials = ({ values, errorBuilder }) => {
 const validateCommon = ({ errorBuilder, values }) => {
   const kieliversiot = getKieliversiot(values);
 
-  let enhancedErrorBuilder = errorBuilder
-    .validateArrayMinLength('pohjakoulutus', 1)
-    .validateExistence('aloituspaikat.aloituspaikkamaara');
+  let enhancedErrorBuilder = errorBuilder.validateArrayMinLength(
+    'pohjakoulutus',
+    1,
+  );
 
   enhancedErrorBuilder = validateLiitteet({
     errorBuilder: enhancedErrorBuilder,
@@ -142,7 +143,9 @@ const validateCommon = ({ errorBuilder, values }) => {
   return enhancedErrorBuilder;
 };
 
-const validateHakukohdeForm = ({ tila, values }) => {
+const validateHakukohdeForm = values => {
+  const { tila } = values;
+
   let errorBuilder = createErrorBuilder(values);
 
   errorBuilder = validateEssentials({ values, errorBuilder });

@@ -6,7 +6,8 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
     alkamiskausiKoodiUri: 'kausi_1#1',
     kaytetaanHaunAikataulua: false,
     kielivalinta: ['fi', 'sv'],
-    aloituspaikat: 25,
+    minAloituspaikat: 25,
+    maxAloituspaikat: 35,
     hakuajat: [{ alkaa: '2019-03-29T12:28', paattyy: '2019-09-29T12:30' }],
     liitteetOnkoSamaToimitusaika: false,
     liitteetOnkoSamaToimitusosoite: false,
@@ -90,10 +91,12 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
     ],
     pohjakoulutusvaatimusKoodiUrit: ['vaatimus_1#1', 'vaatimus_2#1'],
     valintaperuste: 'peruste_1#1',
-    ensikertalaisenAloituspaikat: 39,
+    minEnsikertalaisenAloituspaikat: 39,
+    maxEnsikertalaisenAloituspaikat: 49,
     hakulomakeId: '12345',
     hakulomaketyyppi: HAKULOMAKETYYPPI.ATARU,
     eriHakulomake: true,
+    eriAlkamiskausi: true,
   });
 
   expect(values).toMatchSnapshot();

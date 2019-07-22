@@ -1,7 +1,7 @@
 import React from 'react';
-import ApiTilaDropdown from './ApiTilaDropdown';
 
-import { getAndUpdateKoutaToteutus } from '../../apiUtils';
+import ApiTilaDropdown from './ApiTilaDropdown';
+import getAndUpdateToteutus from '../../utils/kouta/getAndUpdateToteutus';
 
 const getUpdateProps = ({ oid, tila, ...rest }) => ({
   toteutus: { oid, tila },
@@ -14,7 +14,7 @@ const ToteutusTilaDropdown = ({ initialTila, toteutusOid }) => {
       initialTila={initialTila}
       oid={toteutusOid}
       getUpdateProps={getUpdateProps}
-      updateFn={getAndUpdateKoutaToteutus}
+      updateFn={getAndUpdateToteutus}
     />
   );
 };

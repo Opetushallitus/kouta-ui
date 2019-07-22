@@ -1,6 +1,5 @@
 import {
   getByTestId,
-  getRadio,
   getSelectOption,
   getCheckbox,
   chooseKieliversiotLanguages,

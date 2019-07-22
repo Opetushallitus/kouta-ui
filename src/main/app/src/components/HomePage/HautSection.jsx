@@ -13,7 +13,6 @@ import Flex from '../Flex';
 import Spacing from '../Spacing';
 import Spin from '../Spin';
 import useApiAsync from '../useApiAsync';
-import { getKoutaIndexHaut } from '../../apiUtils';
 import { getIndexParamsByFilters } from './utils';
 import Filters from './Filters';
 import Badge from '../Badge';
@@ -21,13 +20,14 @@ import useFilterState from './useFilterState';
 import ErrorAlert from '../ErrorAlert';
 import Anchor from '../Anchor';
 import useTranslation from '../useTranslation';
+import getHaut from '../../utils/koutaIndex/getHaut';
 
 import { getFirstLanguageValue, getTestIdProps } from '../../utils';
 
-const getHaut = async ({ httpClient, apiUrls, ...filters }) => {
+const getHautFn = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
 
-  const { result, totalCount } = await getKoutaIndexHaut({
+  const { result, totalCount } = await getHaut({
     httpClient,
     apiUrls,
     ...params,
@@ -40,7 +40,11 @@ const Actions = ({ organisaatioOid }) => {
   const { t } = useTranslation();
 
   return (
-    <Button as={Link} to={`/organisaatio/${organisaatioOid}/haku`} variant="outlined">
+    <Button
+      as={Link}
+      to={`/organisaatio/${organisaatioOid}/haku`}
+      variant="outlined"
+    >
       {t('etusivu.luoUusiHaku')}
     </Button>
   );
@@ -97,7 +101,7 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate }) => {
     error,
     reload,
   } = useApiAsync({
-    promiseFn: getHaut,
+    promiseFn: getHautFn,
     nimi: debouncedNimi,
     page,
     showArchived,

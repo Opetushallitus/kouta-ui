@@ -26,7 +26,7 @@ const CreateValintaperustePage = props => {
     <FormPage
       header={<CreateValintaperusteHeader />}
       steps={<CreateValintaperusteSteps />}
-      footer={<CreateValintaperusteFooter />}
+      footer={<CreateValintaperusteFooter organisaatioOid={oid} />}
     >
       <OrganisaatioInfo organisaatioOid={oid} />
       <CreateValintaperusteForm

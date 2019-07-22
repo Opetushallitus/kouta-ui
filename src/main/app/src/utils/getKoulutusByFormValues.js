@@ -4,6 +4,7 @@ import pick from 'lodash/pick';
 const getKielivalinta = values => get(values, 'kieliversiot') || [];
 
 const getKoulutusByFormValues = values => {
+  const { muokkaaja, tila } = values;
   const kielivalinta = getKielivalinta(values);
   const tarjoajat = get(values, 'tarjoajat') || [];
   const koulutusKoodiUri = get(values, 'information.koulutus.value') || null;
@@ -37,6 +38,9 @@ const getKoulutusByFormValues = values => {
   const julkinen = Boolean(get(values, 'julkinen'));
 
   return {
+    johtaaTutkintoon: true,
+    muokkaaja,
+    tila,
     kielivalinta,
     tarjoajat,
     koulutusKoodiUri,

@@ -1,27 +1,26 @@
-import { reduxForm } from 'redux-form';
 import React, { useMemo } from 'react';
 
 import ValintaperusteForm from '../ValintaperusteForm';
-import { getValuesByValintaperuste } from '../../state/createValintaperusteForm';
-
-const ValintapersuteetReduxForm = reduxForm({
-  form: 'editValintaperusteForm',
-})(ValintaperusteForm);
+import getFormValuesByValintaperuste from '../../utils/getFormValuesByValintaperuste';
+import ReduxForm from '../ReduxForm';
 
 const EditValintapersuteetForm = ({ valintaperuste, ...props }) => {
   const initialValues = useMemo(() => {
-    return getValuesByValintaperuste(valintaperuste);
+    return getFormValuesByValintaperuste(valintaperuste);
   }, [valintaperuste]);
 
   return (
-    <ValintapersuteetReduxForm
-      {...props}
-      valintaperuste={valintaperuste}
-      steps={false}
-      canCopy={false}
-      canEditTyyppi={false}
-      initialValues={initialValues}
-    />
+    <ReduxForm form="editValintaperusteForm" initialValues={initialValues}>
+      {() => (
+        <ValintaperusteForm
+          {...props}
+          valintaperuste={valintaperuste}
+          steps={false}
+          canCopy={false}
+          canEditTyyppi={false}
+        />
+      )}
+    </ReduxForm>
   );
 };
 

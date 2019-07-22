@@ -12,8 +12,8 @@ import Flex from '../Flex';
 import Spacing from '../Spacing';
 import Spin from '../Spin';
 import useApiAsync from '../useApiAsync';
-import { getKoutaIndexValintaperusteet } from '../../apiUtils';
 import { getIndexParamsByFilters } from './utils';
+import getValintaperusteet from '../../utils/koutaIndex/getValintaperusteet';
 import Filters from './Filters';
 import useFilterState from './useFilterState';
 import { getFirstLanguageValue, getTestIdProps } from '../../utils';
@@ -22,10 +22,10 @@ import Button from '../Button';
 import ErrorAlert from '../ErrorAlert';
 import useTranslation from '../useTranslation';
 
-const getValintaperusteet = async ({ httpClient, apiUrls, ...filters }) => {
+const getValintaperusteetFn = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
 
-  const { result, totalCount } = await getKoutaIndexValintaperusteet({
+  const { result, totalCount } = await getValintaperusteet({
     httpClient,
     apiUrls,
     ...params,
@@ -38,7 +38,11 @@ const Actions = ({ organisaatioOid }) => {
   const { t } = useTranslation();
 
   return (
-    <Button variant="outlined" as={Link} to={`/organisaatio/${organisaatioOid}/valintaperusteet`}>
+    <Button
+      variant="outlined"
+      as={Link}
+      to={`/organisaatio/${organisaatioOid}/valintaperusteet`}
+    >
       {t('etusivu.luoUusiValintaperuste')}
     </Button>
   );
@@ -88,7 +92,7 @@ const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
     error,
     reload,
   } = useApiAsync({
-    promiseFn: getValintaperusteet,
+    promiseFn: getValintaperusteetFn,
     nimi: debouncedNimi,
     page,
     showArchived,

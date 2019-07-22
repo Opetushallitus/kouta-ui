@@ -1,12 +1,8 @@
-import { reduxForm } from 'redux-form';
 import React, { useMemo } from 'react';
 
 import HakukohdeForm from '../HakukohdeForm';
 import getFormValuesByHakukohde from '../../utils/getFormValuesByHakukohde';
-
-const HakukohdeReduxForm = reduxForm({
-  form: 'editHakukohdeForm',
-})(HakukohdeForm);
+import ReduxForm from '../ReduxForm';
 
 const EditHakukohdeForm = ({ onSave, hakukohde, ...props }) => {
   const initialValues = useMemo(() => {
@@ -14,12 +10,9 @@ const EditHakukohdeForm = ({ onSave, hakukohde, ...props }) => {
   }, [hakukohde]);
 
   return (
-    <HakukohdeReduxForm
-      {...props}
-      hakukohde={hakukohde}
-      steps={false}
-      initialValues={initialValues}
-    />
+    <ReduxForm form="editHakukohdeForm" initialValues={initialValues}>
+      {() => <HakukohdeForm steps={false} {...props} />}
+    </ReduxForm>
   );
 };
 

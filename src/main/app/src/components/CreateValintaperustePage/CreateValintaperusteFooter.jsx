@@ -1,34 +1,54 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-import { JULKAISUTILA } from '../../constants';
-import { submit as submitValintaperuste } from '../../state/createValintaperusteForm';
 import Button from '../Button';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
 import Flex from '../Flex';
+import getValintaperusteByFormValues from '../../utils/getValintaperusteByFormValues';
+import validateValintaperusteForm from '../../utils/validateValintaperusteForm';
+import createValintaperuste from '../../utils/kouta/createValintaperuste';
+import useSaveForm from '../useSaveForm';
 
 const SaveButton = styled(Button).attrs({ variant: 'outlined' })`
   margin-right: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
-const CreateValintaperusteFooter = ({
-  onSave = () => {},
-  onSaveAndPublish = () => {},
-}) => {
+const CreateValintaperusteFooter = ({ organisaatioOid, history }) => {
   const { t } = useTranslation();
 
+  const submit = useCallback(
+    async ({ values, httpClient, apiUrls }) => {
+      const { oid } = await createValintaperuste({
+        httpClient,
+        apiUrls,
+        valintaperuste: {
+          ...getValintaperusteByFormValues(values),
+          organisaatioOid,
+        },
+      });
+
+      history.push(`/valintaperusteet/${oid}/muokkaus`);
+    },
+    [organisaatioOid, history],
+  );
+
+  const { save, saveAndPublish } = useSaveForm({
+    form: 'createValintaperusteForm',
+    submit,
+    validate: validateValintaperusteForm,
+  });
   return (
     <Flex justifyEnd>
       <SaveButton
-        onClick={onSave}
+        onClick={save}
         {...getTestIdProps('tallennaValintaperusteButton')}
       >
         {t('yleiset.tallenna')}
       </SaveButton>
       <Button
-        onClick={onSaveAndPublish}
+        onClick={saveAndPublish}
         {...getTestIdProps('tallennaJaJulkaiseValintaperusteButton')}
       >
         {t('yleiset.tallennaJaJulkaise')}
@@ -37,14 +57,4 @@ const CreateValintaperusteFooter = ({
   );
 };
 
-export default connect(
-  null,
-  dispatch => ({
-    onSave: () => {
-      dispatch(submitValintaperuste({ tila: JULKAISUTILA.TALLENNETTU }));
-    },
-    onSaveAndPublish: () => {
-      dispatch(submitValintaperuste({ tila: JULKAISUTILA.JULKAISTU }));
-    },
-  }),
-)(CreateValintaperusteFooter);
+export default withRouter(CreateValintaperusteFooter);

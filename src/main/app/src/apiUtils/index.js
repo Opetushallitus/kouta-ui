@@ -1,5 +1,5 @@
 import { KOULUTUSTYYPPI_TO_KOULUTUSTYYPPI_IDS_MAP } from '../constants';
-import { isArray, isString, isObject, memoizePromise } from '../utils';
+import { isArray, isString, isObject } from '../utils';
 import parseKoodiUri from '../utils/parseKoodiUri';
 import keyBy from 'lodash/keyBy';
 import mapValues from 'lodash/mapValues';
@@ -150,35 +150,6 @@ export const getKoulutusByKoodi = async ({
   };
 };
 
-export const getHakuByKoodi = async ({
-  httpClient,
-  apiUrls,
-  koodiUri: argKoodiUri,
-}) => {
-  const { koodi } = parseKoodiUri(argKoodiUri);
-
-  const [koodiResponse] = await Promise.all([
-    httpClient.get(apiUrls.url('koodisto-service.codeelement', koodi)),
-  ]);
-
-  const { data: koodiData } = koodiResponse;
-
-  const latestKoodi = isArray(koodiData)
-    ? maxBy(koodiData, ({ versio }) => versio)
-    : null;
-
-  const nimi =
-    latestKoodi && isArray(latestKoodi.metadata)
-      ? keyBy(latestKoodi.metadata, ({ kieli }) =>
-          kieli ? kieli.toLowerCase() : '_',
-        )
-      : null;
-
-  return {
-    nimi: mapValues(nimi, ({ nimi: nimiField }) => nimiField || null),
-  };
-};
-
 export const getOrganisaatioHierarchyByOid = async ({
   oid,
   apiUrls,
@@ -197,16 +168,6 @@ export const getOrganisaatioByOid = async ({ oid, apiUrls, httpClient }) => {
   );
 
   return data;
-};
-
-export const getKoutaKoulutusByOid = async ({ oid, apiUrls, httpClient }) => {
-  const { data, headers } = await httpClient.get(
-    apiUrls.url('kouta-backend.koulutus-by-oid', oid),
-  );
-
-  const lastModified = get(headers, 'last-modified') || null;
-
-  return isObject(data) ? { lastModified, ...data } : data;
 };
 
 export const getOsaamisalatByKoulutusKoodi = async ({
@@ -235,36 +196,6 @@ export const getOsaamisalakuvauksetByPerusteId = async ({
   );
 
   return get(data, 'reformi') ? data.reformi : {};
-};
-
-export const getAmmattinimikkeetByTerm = async ({
-  httpClient,
-  apiUrls,
-  term,
-  limit = 15,
-  language = 'fi',
-}) => {
-  const { data } = await httpClient.get(
-    apiUrls.url('kouta-backend.ammattinimike-search', term),
-    { params: { limit, kieli: language } },
-  );
-
-  return data;
-};
-
-export const getAvainsanatByTerm = async ({
-  httpClient,
-  apiUrls,
-  term,
-  limit = 15,
-  language = 'fi',
-}) => {
-  const { data } = await httpClient.get(
-    apiUrls.url('kouta-backend.asiasana-search', term),
-    { params: { limit, kieli: language } },
-  );
-
-  return data;
 };
 
 export const getKoodisto = async ({
@@ -325,16 +256,6 @@ export const getOrganisaatioContactInfo = organisaatio => {
     postinumero: postinumero || null,
     sahkoposti,
   };
-};
-
-export const getKoutaToteutusByOid = async ({ oid, httpClient, apiUrls }) => {
-  const { data, headers } = await httpClient.get(
-    apiUrls.url('kouta-backend.toteutus-by-oid', oid),
-  );
-
-  const lastModified = get(headers, 'last-modified') || null;
-
-  return isObject(data) ? { lastModified, ...data } : data;
 };
 
 export const getKoutaHakuByOid = async ({ oid, httpClient, apiUrls }) => {
@@ -421,42 +342,6 @@ export const getKoutaKoulutusToteutukset = async ({
   return data;
 };
 
-export const updateKoutaKoulutus = async ({
-  koulutus,
-  httpClient,
-  apiUrls,
-}) => {
-  const { lastModified = '', ...rest } = koulutus;
-
-  const headers = {
-    'If-Unmodified-Since': lastModified,
-  };
-
-  const { data } = await httpClient.post(
-    apiUrls.url('kouta-backend.koulutus'),
-    rest,
-    { headers },
-  );
-
-  return data;
-};
-
-export const updateKoutaHaku = async ({ haku, httpClient, apiUrls }) => {
-  const { lastModified = '', ...rest } = haku;
-
-  const headers = {
-    'If-Unmodified-Since': lastModified,
-  };
-
-  const { data } = await httpClient.post(
-    apiUrls.url('kouta-backend.haku'),
-    rest,
-    { headers },
-  );
-
-  return data;
-};
-
 export const getKoutaHaut = async ({
   organisaatioOid,
   httpClient,
@@ -472,82 +357,6 @@ export const getKoutaHaut = async ({
   return data;
 };
 
-export const getKayttajanOrganisaatioOids = async ({
-  oid,
-  httpClient,
-  apiUrls,
-}) => {
-  const { data } = await httpClient.get(
-    apiUrls.url('kayttooikeus-service.kayttajan-organisaatiot'),
-    { params: { kayttajaTyyppi: 'VIRKAILIJA' } },
-  );
-
-  return data;
-};
-
-const toKoutaIndexParams = ({
-  organisaatioOid: organisaatioOidArg = [],
-  nimi = '',
-  language = 'fi',
-  pageSize = 10,
-  showArchived = false,
-  page = 1,
-  orderField,
-  orderDirection,
-  tila,
-}) => {
-  const organisaatio = organisaatioOidArg.join(',');
-
-  const params = {
-    ...(nimi && { nimi }),
-    ...(orderField && { 'order-by': orderField }),
-    ...(orderDirection && { order: orderDirection }),
-    ...(tila && { tila }),
-    organisaatio,
-    language,
-    size: pageSize,
-    arkistoidut: showArchived,
-    page,
-  };
-
-  return params;
-};
-
-export const getKoutaIndexKoulutukset = async ({
-  httpClient,
-  apiUrls,
-  ...rest
-}) => {
-  const params = toKoutaIndexParams(rest);
-
-  const { data } = await httpClient.get(
-    apiUrls.url('kouta-index.koulutus-list'),
-    { params },
-  );
-
-  return data;
-};
-
-export const updateKoutaToteutus = async ({
-  toteutus,
-  httpClient,
-  apiUrls,
-}) => {
-  const { lastModified = '', ...rest } = toteutus;
-
-  const headers = {
-    'If-Unmodified-Since': lastModified,
-  };
-
-  const { data } = await httpClient.post(
-    apiUrls.url('kouta-backend.toteutus'),
-    rest,
-    { headers },
-  );
-
-  return data;
-};
-
 export const getKoutaToteutusHakukohteet = async ({
   httpClient,
   apiUrls,
@@ -555,21 +364,6 @@ export const getKoutaToteutusHakukohteet = async ({
 }) => {
   const { data } = await httpClient.get(
     apiUrls.url('kouta-backend.toteutus-hakukohteet', oid),
-  );
-
-  return data;
-};
-
-export const getKoutaIndexToteutukset = async ({
-  httpClient,
-  apiUrls,
-  ...rest
-}) => {
-  const params = toKoutaIndexParams(rest);
-
-  const { data } = await httpClient.get(
-    apiUrls.url('kouta-index.toteutus-list'),
-    { params },
   );
 
   return data;
@@ -600,92 +394,6 @@ export const getKoutaHakukohdeByOid = async ({ oid, httpClient, apiUrls }) => {
   return isObject(data) ? { lastModified, ...data } : data;
 };
 
-export const updateKoutaHakukohde = async ({
-  hakukohde,
-  httpClient,
-  apiUrls,
-}) => {
-  const { lastModified = '', ...rest } = hakukohde;
-
-  const headers = {
-    'If-Unmodified-Since': lastModified,
-  };
-
-  const { data } = await httpClient.post(
-    apiUrls.url('kouta-backend.hakukohde'),
-    rest,
-    { headers },
-  );
-
-  return data;
-};
-
-export const getKoutaIndexHaut = async ({ httpClient, apiUrls, ...rest }) => {
-  const params = toKoutaIndexParams(rest);
-
-  const { data } = await httpClient.get(apiUrls.url('kouta-index.haku-list'), {
-    params,
-  });
-
-  return data;
-};
-
-export const getAndUpdateKoutaKoulutus = async ({
-  httpClient,
-  apiUrls,
-  koulutus: koulutusUpdate,
-}) => {
-  const { oid, ...update } = koulutusUpdate;
-
-  if (!oid) {
-    throw Error('Koulutuksella täytyy olla oid');
-  }
-
-  const koulutus = await getKoutaKoulutusByOid({ oid, httpClient, apiUrls });
-
-  return updateKoutaKoulutus({
-    httpClient,
-    apiUrls,
-    koulutus: { ...koulutus, ...update },
-  });
-};
-
-export const getAndUpdateKoutaToteutus = async ({
-  httpClient,
-  apiUrls,
-  toteutus: toteutusUpdate,
-}) => {
-  const { oid, ...update } = toteutusUpdate;
-
-  if (!oid) {
-    throw new Error('Toteutuksella täytyy olla oid');
-  }
-
-  const toteutus = await getKoutaToteutusByOid({ oid, httpClient, apiUrls });
-
-  return updateKoutaToteutus({
-    httpClient,
-    apiUrls,
-    toteutus: { ...toteutus, ...update },
-  });
-};
-
-const memoizedGetKoulutustyyppiByKoulutusOid = memoizePromise(
-  async (oid, httpClient, apiUrls) => {
-    const koulutus = await getKoutaKoulutusByOid({ oid, httpClient, apiUrls });
-
-    return get(koulutus, 'koulutustyyppi') || null;
-  },
-);
-
-export const getKoulutustyyppiByKoulutusOid = ({
-  oid,
-  httpClient,
-  apiUrls,
-}) => {
-  return memoizedGetKoulutustyyppiByKoulutusOid(oid, httpClient, apiUrls);
-};
-
 export const getKoutaValintaperusteByOid = async ({
   oid,
   httpClient,
@@ -698,43 +406,6 @@ export const getKoutaValintaperusteByOid = async ({
   const lastModified = get(headers, 'last-modified') || null;
 
   return isObject(data) ? { lastModified, ...data } : data;
-};
-
-export const updateKoutaValintaperuste = async ({
-  valintaperuste,
-  httpClient,
-  apiUrls,
-}) => {
-  const { lastModified = '', ...rest } = valintaperuste;
-
-  const headers = {
-    'If-Unmodified-Since': lastModified,
-  };
-
-  const { data } = await httpClient.post(
-    apiUrls.url('kouta-backend.valintaperuste'),
-    rest,
-    { headers },
-  );
-
-  return data;
-};
-
-export const getKoutaIndexValintaperusteet = async ({
-  httpClient,
-  apiUrls,
-  ...rest
-}) => {
-  const params = toKoutaIndexParams(rest);
-
-  const { data } = await httpClient.get(
-    apiUrls.url('kouta-index.valintaperuste-list'),
-    {
-      params,
-    },
-  );
-
-  return data;
 };
 
 export const getMe = async ({ httpClient, apiUrls }) => {
@@ -775,12 +446,6 @@ export const getOrganisaatioHierarkia = async ({
   return get(data, 'organisaatiot') || [];
 };
 
-export const koutaBackendLogin = async ({ httpClient, apiUrls }) => {
-  const { data } = await httpClient.get(apiUrls.url('kouta-backend.login'));
-
-  return data;
-};
-
 export const getHakemuspalveluLomakkeet = async ({ httpClient, apiUrls }) => {
   const { data } = await httpClient.get(
     apiUrls.url('lomake-editori.lomakkeet'),
@@ -796,44 +461,6 @@ export const getOppijanumerorekisteriHenkilo = async ({
 }) => {
   const { data } = await httpClient.get(
     apiUrls.url('oppijanumerorekisteri-service.henkilo', oid),
-  );
-
-  return data;
-};
-
-export const getKoutaSoraKuvausById = async ({ httpClient, apiUrls, id }) => {
-  const { data, headers } = await httpClient.get(
-    apiUrls.url('kouta-backend.sora-kuvaus-by-id', id),
-  );
-
-  const lastModified = get(headers, 'last-modified') || null;
-
-  return isObject(data) ? { lastModified, ...data } : data;
-};
-
-export const getKoutaSoraKuvaukset = async ({ httpClient, apiUrls }) => {
-  const { data } = await httpClient.get(
-    apiUrls.url('kouta-backend.sora-kuvaus-list'),
-  );
-
-  return data;
-};
-
-export const updateKoutaSoraKuvaus = async ({
-  httpClient,
-  apiUrls,
-  soraKuvaus,
-}) => {
-  const { lastModified = '', ...rest } = soraKuvaus;
-
-  const headers = {
-    'If-Unmodified-Since': lastModified,
-  };
-
-  const { data } = await httpClient.post(
-    apiUrls.url('kouta-backend.sora-kuvaus'),
-    rest,
-    { headers },
   );
 
   return data;

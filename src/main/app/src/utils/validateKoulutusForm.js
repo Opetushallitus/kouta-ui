@@ -22,7 +22,7 @@ const validateKorkeakoulu = ({ values, errorBuilder }) => {
   return errorBuilder.validateTranslations('description.kuvaus', kielivalinta);
 };
 
-const validateKoulutusForm = ({ values, koulutustyyppi, tila }) => {
+const validateKoulutusForm = ({ koulutustyyppi, tila, ...values }) => {
   let errorBuilder = createErrorBuilder(values);
 
   errorBuilder = validateEssentials({ errorBuilder, values });

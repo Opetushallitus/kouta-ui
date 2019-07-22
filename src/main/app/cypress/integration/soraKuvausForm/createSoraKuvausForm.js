@@ -2,6 +2,7 @@ import {
   chooseKieliversiotLanguages,
   typeToEditor,
   getCheckbox,
+  fillKoulutustyyppiSelect,
 } from '../../utils';
 
 import createSoraKuvaus from '../../data/soraKuvaus';
@@ -13,7 +14,7 @@ const jatka = cy => {
 
 const fillKoulutustyyppiSection = cy => {
   cy.getByTestId('tyyppiSection').within(() => {
-    jatka(cy);
+    fillKoulutustyyppiSelect(['amm'], cy);
   });
 };
 

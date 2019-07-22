@@ -6,14 +6,24 @@ import isAmmatillinenKoulutustyyppi from '../../utils/isAmmatillinenKoulutustyyp
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
 import { FormFieldCheckbox, FormFieldInput } from '../FormFields';
+import Divider from '../Divider';
+import HakuajatSection from './HakuajatSection';
+import AlkamiskausiSection from './AlkamiskausiSection';
+import LomakeSection from './LomakeSection';
 
-const PerustiedotSection = ({ language, koulutustyyppi, name }) => {
+const PerustiedotSection = ({
+  language,
+  koulutustyyppi,
+  name,
+  toteutus,
+  haku,
+}) => {
   const isAmmatillinen = isAmmatillinenKoulutustyyppi(koulutustyyppi);
   const { t } = useTranslation();
 
   return (
     <>
-      <Spacing marginBottom={2} {...getTestIdProps('nimi')}>
+      <Spacing marginBottom={2} {...getTestIdProps('hakukohteenNimi')}>
         <Field
           name={`${name}.nimi.${language}`}
           component={FormFieldInput}
@@ -21,13 +31,33 @@ const PerustiedotSection = ({ language, koulutustyyppi, name }) => {
         />
       </Spacing>
       {isAmmatillinen ? (
-        <Field
-          name={`${name}.voiSuorittaaKaksoistutkinnon`}
-          component={FormFieldCheckbox}
-        >
-          {t('hakukohdelomake.voiSuorittaaKaksoistutkinnon')}
-        </Field>
+        <div {...getTestIdProps('voiSuorittaaKaksoistutkinnon')}>
+          <Field
+            name={`${name}.voiSuorittaaKaksoistutkinnon`}
+            component={FormFieldCheckbox}
+          >
+            {t('hakukohdelomake.voiSuorittaaKaksoistutkinnon')}
+          </Field>
+        </div>
       ) : null}
+
+      <Divider marginTop={4} marginBottom={4} />
+
+      <div {...getTestIdProps('hakuajatSection')}>
+        <HakuajatSection name="hakuajat" haku={haku} />
+      </div>
+
+      <Divider marginTop={4} marginBottom={4} />
+
+      <div {...getTestIdProps('alkamiskausiSection')}>
+        <AlkamiskausiSection name="alkamiskausi" toteutus={toteutus} />
+      </div>
+
+      <Divider marginTop={4} marginBottom={4} />
+
+      <div {...getTestIdProps('lomakeSection')}>
+        <LomakeSection haku={haku} />
+      </div>
     </>
   );
 };

@@ -4,8 +4,7 @@ exports[`getHakukohdeByFormValues returns correct hakukohde given form values 1`
 Object {
   "alkamiskausiKoodiUri": "kausi_1#1",
   "alkamisvuosi": 2020,
-  "aloituspaikat": 25,
-  "ensikertalaisenAloituspaikat": 29,
+  "eriAlkamiskausi": true,
   "eriHakulomake": true,
   "hakuajat": Array [
     Object {
@@ -63,6 +62,11 @@ Object {
   "liitteidenToimitusaika": null,
   "liitteidenToimitusosoite": null,
   "liitteidenToimitustapa": null,
+  "maxAloituspaikat": 45,
+  "maxEnsikertalaisenAloituspaikat": 49,
+  "minAloituspaikat": 25,
+  "minEnsikertalaisenAloituspaikat": 29,
+  "muokkaaja": "1.1.1.1",
   "nimi": Object {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
@@ -71,6 +75,7 @@ Object {
     "vaatimus_1#1",
     "vaatimus_2#1",
   ],
+  "tila": "tallennettu",
   "toinenAsteOnkoKaksoistutkinto": true,
   "valintakokeet": Array [
     Object {

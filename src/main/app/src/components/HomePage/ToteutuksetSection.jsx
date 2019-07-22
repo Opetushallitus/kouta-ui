@@ -11,7 +11,7 @@ import Flex from '../Flex';
 import Spacing from '../Spacing';
 import Spin from '../Spin';
 import useApiAsync from '../useApiAsync';
-import { getKoutaIndexToteutukset } from '../../apiUtils';
+import getToteutukset from '../../utils/koutaIndex/getToteutukset';
 import { getIndexParamsByFilters } from './utils';
 import Filters from './Filters';
 import Badge from '../Badge';
@@ -22,10 +22,10 @@ import ToteutusTilaDropdown from './ToteutusTilaDropdown';
 import ErrorAlert from '../ErrorAlert';
 import useTranslation from '../useTranslation';
 
-const getToteutukset = async ({ httpClient, apiUrls, ...filters }) => {
+const getToteutuksetFn = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
 
-  const { result, totalCount } = await getKoutaIndexToteutukset({
+  const { result, totalCount } = await getToteutukset({
     httpClient,
     apiUrls,
     ...params,
@@ -90,7 +90,7 @@ const ToteutuksetSection = ({ organisaatioOid }) => {
     error,
     reload,
   } = useApiAsync({
-    promiseFn: getToteutukset,
+    promiseFn: getToteutuksetFn,
     nimi: debouncedNimi,
     page,
     showArchived,
@@ -109,9 +109,16 @@ const ToteutuksetSection = ({ organisaatioOid }) => {
   const tableColumns = useMemo(() => makeTableColumns(t), [t]);
 
   return (
-    <ListCollapse icon="settings" header={t('etusivu.koulutuksenToteutukset')} defaultOpen>
+    <ListCollapse
+      icon="settings"
+      header={t('etusivu.koulutuksenToteutukset')}
+      defaultOpen
+    >
       <Spacing marginBottom={3}>
-        <Filters {...filtersProps} nimiPlaceholder={t('etusivu.haeToteutuksia')} />
+        <Filters
+          {...filtersProps}
+          nimiPlaceholder={t('etusivu.haeToteutuksia')}
+        />
       </Spacing>
 
       {rows ? (

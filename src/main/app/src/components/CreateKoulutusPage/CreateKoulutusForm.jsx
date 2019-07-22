@@ -1,23 +1,13 @@
-import { reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
 import React, { useMemo } from 'react';
 
 import KoulutusForm, { initialValues } from '../KoulutusForm';
-import {
-  copy as copyKoulutus,
-  maybeCopy as maybeCopyKoulutus,
-} from '../../state/createKoulutusForm';
 import getFormValuesByKoulutus from '../../utils/getFormValuesByKoulutus';
-import { getKoutaKoulutusByOid } from '../../apiUtils';
+import getKoulutusByOid from '../../utils/kouta/getKoulutusByOid';
 import useApiAsync from '../useApiAsync';
 import { POHJAVALINTA } from '../../constants';
+import ReduxForm from '../ReduxForm';
 
 const resolveFn = () => Promise.resolve();
-
-const KoulutusReduxForm = reduxForm({
-  form: 'createKoulutusForm',
-  enableReinitialize: true,
-})(KoulutusForm);
 
 const getCopyValues = koulutusOid => ({
   pohja: {
@@ -35,7 +25,7 @@ const getInitialValues = koulutus => {
 const CreateKoulutusForm = props => {
   const { kopioKoulutusOid } = props;
 
-  const promiseFn = kopioKoulutusOid ? getKoutaKoulutusByOid : resolveFn;
+  const promiseFn = kopioKoulutusOid ? getKoulutusByOid : resolveFn;
 
   const { data } = useApiAsync({
     promiseFn,
@@ -47,17 +37,15 @@ const CreateKoulutusForm = props => {
     return getInitialValues(data);
   }, [data]);
 
-  return <KoulutusReduxForm {...props} steps initialValues={initialValues} />;
+  return (
+    <ReduxForm
+      form="createKoulutusForm"
+      initialValues={initialValues}
+      enableReinitialize
+    >
+      {() => <KoulutusForm steps {...props} />}
+    </ReduxForm>
+  );
 };
 
-export default connect(
-  null,
-  dispatch => ({
-    onCopy: koulutusOid => {
-      dispatch(copyKoulutus(koulutusOid));
-    },
-    onMaybeCopy: () => {
-      dispatch(maybeCopyKoulutus());
-    },
-  }),
-)(CreateKoulutusForm);
+export default CreateKoulutusForm;

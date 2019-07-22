@@ -1,39 +1,60 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-import { submit } from '../../state/editHakuForm';
 import Button from '../Button';
 import { JULKAISUTILA } from '../../constants';
 import { getTestIdProps } from '../../utils';
 import useTranslation from '../useTranslation';
 import Flex from '../Flex';
+import getHakuByFormValues from '../../utils/getHakuByFormValues';
+import updateHaku from '../../utils/kouta/updateHaku';
+import useSaveForm from '../useSaveForm';
+import validateHakuForm from '../../utils/validateHakuForm';
 
 const PublishButton = styled(Button)`
   margin-left: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
-const EditHakuFooter = ({ haku, onSave = () => {} }) => {
+const EditHakuFooter = ({ haku, history }) => {
   const { tila } = haku;
-
-  const onSaveAndPublish = useCallback(() => {
-    onSave({ tila: JULKAISUTILA.JULKAISTU });
-  }, [onSave]);
-
   const { t } = useTranslation();
+
+  const submit = useCallback(
+    async ({ values, httpClient, apiUrls }) => {
+      await updateHaku({
+        httpClient,
+        apiUrls,
+        haku: { ...haku, ...getHakuByFormValues(values) },
+      });
+
+      history.replace({
+        state: {
+          hakuUpdatedAt: Date.now(),
+        },
+      });
+    },
+    [haku, history],
+  );
+
+  const { save, saveAndPublish } = useSaveForm({
+    form: 'editHakuForm',
+    submit,
+    validate: validateHakuForm,
+  });
 
   return (
     <Flex justifyEnd>
       <Button
         variant="outlined"
-        onClick={onSave}
+        onClick={save}
         {...getTestIdProps('tallennaHakuButton')}
       >
         {t('yleiset.tallenna')}
       </Button>
       {tila !== JULKAISUTILA.JULKAISTU ? (
         <PublishButton
-          onClick={onSaveAndPublish}
+          onClick={saveAndPublish}
           {...getTestIdProps('tallennaJaJulkaiseHakuButton')}
         >
           {t('yleiset.tallennaJaJulkaise')}
@@ -43,20 +64,4 @@ const EditHakuFooter = ({ haku, onSave = () => {} }) => {
   );
 };
 
-export default connect(
-  null,
-  (
-    dispatch,
-    { haku: { oid: hakuOid, organisaatioOid, tila, lastModified } },
-  ) => ({
-    onSave: ({ tila: tilaArg } = {}) =>
-      dispatch(
-        submit({
-          hakuOid,
-          tila: tilaArg || tila,
-          organisaatioOid,
-          lastModified,
-        }),
-      ),
-  }),
-)(EditHakuFooter);
+export default withRouter(EditHakuFooter);

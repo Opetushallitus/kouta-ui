@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { Field } from 'redux-form';
 
 import Modal from '../Modal';
@@ -9,6 +9,7 @@ import { getFirstLanguageValue } from '../../utils';
 import useApiAsync from '../useApiAsync';
 import useTranslation from '../useTranslation';
 import { FormFieldSelect } from '../FormFields';
+import useFieldValue from '../useFieldValue';
 
 const getOptions = items => {
   return items.map(({ nimi, oid }) => ({
@@ -20,19 +21,22 @@ const getOptions = items => {
 const HakukohteetModal = ({
   onClose,
   organisaatioOid,
-  pohjaValue,
-  hakuValue,
   fieldName = 'hakukohteet',
-  onSave = () => {},
+  onSave: onSaveProp = () => {},
   ...props
 }) => {
   const { t } = useTranslation();
+  const hakuValue = useFieldValue(`${fieldName}.haku`);
 
   const { data: haut } = useApiAsync({
     promiseFn: getKoutaHaut,
     organisaatioOid,
     watch: organisaatioOid,
   });
+
+  const onSave = useCallback(() => {
+    return onSaveProp({ hakuOid: hakuValue.value });
+  }, [onSaveProp, hakuValue]);
 
   const hautOptions = useMemo(() => {
     return haut ? getOptions(haut) : [];

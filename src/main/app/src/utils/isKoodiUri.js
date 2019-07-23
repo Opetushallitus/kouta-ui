@@ -1,6 +1,7 @@
 import { isString } from './index';
 
-const isKoodiUri = value =>
-  isString(value) && /^\w+_\w+(#[0-9]+)?$/.test(value);
+const koodiUriRegExp = /^\w+_\w+(#[0-9]+)?$/;
+
+const isKoodiUri = value => isString(value) && koodiUriRegExp.test(value);
 
 export default isKoodiUri;

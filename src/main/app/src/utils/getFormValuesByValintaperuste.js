@@ -1,12 +1,7 @@
 import mapValues from 'lodash/mapValues';
 
 import { isObject, isArray } from './index';
-import { VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI } from '../constants';
 import parseEditorState from './draft/parseEditorState';
-
-const kielitaitoMuuOsoitusKoodiUriRegExp = new RegExp(
-  `^${VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI}`,
-);
 
 const parseSisalto = ({ sisalto }) => {
   if (!isArray(sisalto)) {
@@ -33,75 +28,20 @@ const getFormValuesByValintaperuste = valintaperuste => {
     nimi = {},
     metadata = {},
     koulutustyyppi = null,
+    onkoJulkinen = false,
   } = valintaperuste;
 
-  const {
-    osaamistaustaKoodiUrit = [],
-    kielitaitovaatimukset: kielitaitovaatimuksetArg = [],
-    valintatavat = [],
-    kuvaus = {},
-    soraKuvausId,
-  } = metadata;
-
-  const kielitaitovaatimukset = (kielitaitovaatimuksetArg || []).map(
-    ({
-      kieliKoodiUri = null,
-      vaatimukset = [],
-      kielitaidonVoiOsoittaa = [],
-    }) => {
-      return {
-        kieli: kieliKoodiUri ? { value: kieliKoodiUri } : null,
-        ...(vaatimukset || []).reduce(
-          (
-            acc,
-            { kielitaitovaatimusKoodiUri, kielitaitovaatimusKuvaukset },
-          ) => {
-            if (kielitaitovaatimusKoodiUri) {
-              acc.tyyppi[kielitaitovaatimusKoodiUri] = true;
-              acc.kuvaukset[kielitaitovaatimusKoodiUri] = (
-                kielitaitovaatimusKuvaukset || []
-              ).map(
-                ({
-                  kielitaitovaatimusTaso,
-                  kielitaitovaatimusKuvausKoodiUri,
-                }) => ({
-                  taso: kielitaitovaatimusTaso || '',
-                  kuvaus: kielitaitovaatimusKuvausKoodiUri
-                    ? { value: kielitaitovaatimusKuvausKoodiUri }
-                    : null,
-                }),
-              );
-            }
-
-            return acc;
-          },
-          { kuvaukset: {}, tyyppi: {} },
-        ),
-        osoitustavat: kielitaidonVoiOsoittaa
-          .filter(
-            ({ kielitaitoKoodiUri }) =>
-              !kielitaitoMuuOsoitusKoodiUriRegExp.test(kielitaitoKoodiUri),
-          )
-          .map(({ kielitaitoKoodiUri }) => kielitaitoKoodiUri),
-        muutOsoitustavat: kielitaidonVoiOsoittaa
-          .filter(({ kielitaitoKoodiUri }) =>
-            kielitaitoMuuOsoitusKoodiUriRegExp.test(kielitaitoKoodiUri),
-          )
-          .map(({ lisatieto = {} }) => ({ kuvaus: lisatieto })),
-      };
-    },
-  );
+  const { valintatavat = [], kuvaus = {}, soraKuvausId } = metadata;
 
   return {
     kieliversiot: kielivalinta,
     hakutapa: hakutapaKoodiUri,
     kohdejoukko: kohdejoukkoKoodiUri ? { value: kohdejoukkoKoodiUri } : null,
+    julkinen: onkoJulkinen,
     kuvaus: {
       nimi,
       kuvaus: mapValues(kuvaus || {}, parseEditorState),
     },
-    osaamistausta: (osaamistaustaKoodiUrit || []).map(value => ({ value })),
-    kielitaitovaatimukset: kielitaitovaatimukset,
     valintatavat: (valintatavat || []).map(
       ({
         kuvaus,

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import queryString from 'query-string';
 
 import FormPage, { OrganisaatioInfo } from '../FormPage';
@@ -6,6 +6,7 @@ import CreateValintaperusteHeader from './CreateValintaperusteHeader';
 import CreateValintaperusteSteps from './CreateValintaperusteSteps';
 import CreateValintaperusteForm from './CreateValintaperusteForm';
 import CreateValintaperusteFooter from './CreateValintaperusteFooter';
+import useSelectBase from '../useSelectBase';
 
 const CreateValintaperustePage = props => {
   const {
@@ -18,9 +19,9 @@ const CreateValintaperustePage = props => {
 
   const { kopioValintaperusteOid = null } = queryString.parse(search);
 
-  const onCreateNew = useCallback(() => {
-    history.replace({ search: '' });
-  }, [history]);
+  const selectBase = useSelectBase(history, {
+    kopioParam: 'kopioValintaperusteOid',
+  });
 
   return (
     <FormPage
@@ -32,7 +33,7 @@ const CreateValintaperustePage = props => {
       <CreateValintaperusteForm
         organisaatioOid={oid}
         kopioValintaperusteOid={kopioValintaperusteOid}
-        onCreateNew={onCreateNew}
+        onSelectBase={selectBase}
       />
     </FormPage>
   );

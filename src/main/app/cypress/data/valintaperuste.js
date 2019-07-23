@@ -1,12 +1,6 @@
 import merge from 'lodash/merge';
 
-const withKorkeakouluFields = valintaperuste =>
-  merge({}, valintaperuste, {
-    metadata: {
-      osaamistaustaKoodiUrit: ['osaamistausta_0#1'],
-      kuvaus: { fi: '<p>Loppukuvaus</p>' },
-    },
-  });
+const withKorkeakouluFields = valintaperuste => merge({}, valintaperuste, {});
 
 export default ({ tyyppi = 'amm' } = {}) => {
   const baseFields = {
@@ -46,30 +40,9 @@ export default ({ tyyppi = 'amm' } = {}) => {
           vahimmaispisteet: 10.0,
         },
       ],
-      kielitaitovaatimukset: [
-        {
-          kieliKoodiUri: 'kieli_0#1',
-          kielitaidonVoiOsoittaa: [
-            {
-              kielitaitoKoodiUri: 'kielitaidonosoittaminen_0#1',
-              lisatieto: { fi: 'Kuvaus' },
-            },
-          ],
-          vaatimukset: [
-            {
-              kielitaitovaatimusKoodiUri: 'kielitaitovaatimustyypit_0#1',
-              kielitaitovaatimusKuvaukset: [
-                {
-                  kielitaitovaatimusKuvausKoodiUri:
-                    'kielitaitovaatimustyypitkuvaus_0#1',
-                  kielitaitovaatimusTaso: 'hyvä',
-                },
-              ],
-            },
-          ],
-        },
-      ],
+      kielitaitovaatimukset: [],
       soraKuvausId: '1',
+      kuvaus: { fi: '<p>Loppukuvaus</p>' },
     },
     organisaatioOid: '1.2.246.562.10.594252633210',
     muokkaaja: '1.2.246.562.24.62301161440',

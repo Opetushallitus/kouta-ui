@@ -101,6 +101,7 @@ test('getValintaperusteByFormValues returns correct valintaperuste given form va
     soraKuvaus: {
       value: 'sora_1',
     },
+    julkinen: true,
   });
 
   expect(valintaperuste).toMatchSnapshot();

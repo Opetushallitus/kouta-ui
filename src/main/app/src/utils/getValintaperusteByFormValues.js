@@ -1,11 +1,9 @@
 import get from 'lodash/get';
 import produce from 'immer';
-import toPairs from 'lodash/toPairs';
 import pick from 'lodash/pick';
 import mapValues from 'lodash/mapValues';
 
 import { isObject, isArray, isNumeric } from './index';
-import { VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI } from '../constants';
 import serializeEditorState from './draft/serializeEditorState';
 
 const serializeTable = ({ table, kielivalinta }) => {
@@ -99,45 +97,9 @@ const getValintaperusteByFormValues = values => {
     }),
   );
 
-  const kielitaitovaatimukset = (
-    get(values, 'kielitaitovaatimukset') || []
-  ).map(({ kieli, tyyppi, kuvaukset, osoitustavat, muutOsoitustavat }) => {
-    const activeTyypit = toPairs(tyyppi || {})
-      .filter(([uri, value]) => !!value)
-      .map(([uri]) => uri);
-
-    const vaatimukset = activeTyypit.map(kielitaitovaatimusKoodiUri => ({
-      kielitaitovaatimusKoodiUri,
-      kielitaitovaatimusKuvaukset: (
-        get(kuvaukset, kielitaitovaatimusKoodiUri) || []
-      ).map(({ kuvaus, taso }) => ({
-        kielitaitovaatimusTaso: taso,
-        kielitaitovaatimusKuvausKoodiUri: get(kuvaus, 'value') || null,
-      })),
-    }));
-
-    return {
-      kieliKoodiUri: get(kieli, 'value'),
-      vaatimukset,
-      kielitaidonVoiOsoittaa: [
-        ...(osoitustavat || []).map(kielitaitoKoodiUri => ({
-          kielitaitoKoodiUri,
-          lisatieto: {},
-        })),
-        ...(muutOsoitustavat || []).map(({ kuvaus }) => ({
-          kielitaitoKoodiUri: `${VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI}#1`,
-          lisatieto: pick(kuvaus, kielivalinta),
-        })),
-      ],
-    };
-  });
-
-  const osaamistaustaKoodiUrit = (get(values, 'osaamistausta') || []).map(
-    ({ value }) => value,
-  );
-
   const koulutustyyppi = get(values, 'tyyppi') || null;
   const soraKuvausId = get(values, 'soraKuvaus.value') || null;
+  const onkoJulkinen = Boolean(get(values, 'julkinen'));
 
   return {
     tila,
@@ -147,11 +109,12 @@ const getValintaperusteByFormValues = values => {
     kohdejoukkoKoodiUri,
     nimi,
     koulutustyyppi,
+    onkoJulkinen,
     metadata: {
       koulutustyyppi,
       valintatavat,
-      kielitaitovaatimukset,
-      osaamistaustaKoodiUrit,
+      kielitaitovaatimukset: [],
+      osaamistaustaKoodiUrit: [],
       kuvaus,
       soraKuvausId,
     },

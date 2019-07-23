@@ -338,10 +338,8 @@ export default {
     avaaLomake: 'Avaa lomake',
   },
   valintaperustelomake: {
-    hakutavanRajaus: 'Hakutavan rajaus',
-    haunKohdejoukonRajaus: 'Haun kohdejoukon rajaus',
+    valintaperusteenPerustiedot: 'Valintaperusteen perustiedot',
     valintaperusteenNimi: 'Valintaperusteen nimi',
-    osaamistausta: 'Osaamistausta',
     valitseHakutapa: 'Valitse hakutapa',
     valitseHaunKohdejoukko: 'Valitse haun kohdejoukko',
     valitseOsaamistausta: 'Valitse, mikä osaamistausta hakijalla pitää olla',
@@ -369,6 +367,10 @@ export default {
     valitseSoraKuvaus: 'Valitse käytettävä SORA-kuvaus',
     kuvauksenNimi: 'Valintaperusteen kuvauksen nimi',
     kuvauksenTarkenne: 'Kuvauksen tarkenne',
+    valintaperusteOnJulkinen: 'Valintaperuste on julkinen',
+    valintaperusteenNakyminen: 'Valintaperusteen näkyminen muille toimijoille',
+    valitseValintaperusteenNakyminen:
+      'Valitse näkyykö valintaperuste muille koulutustoimijoille',
   },
   soraKuvausLomake: {
     soraKuvauksenTiedot: 'SORA-kuvauksen tiedot',

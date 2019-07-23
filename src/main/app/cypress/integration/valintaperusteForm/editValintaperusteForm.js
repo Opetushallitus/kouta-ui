@@ -28,7 +28,7 @@ describe('editValintaperusteForm', () => {
     cy.visit(`/valintaperusteet/${valintaperusteId}/muokkaus`);
   });
 
-  it('should be able to edit ammatillinen valintaperuste', () => {
+  it('should be able to edit valintaperuste', () => {
     cy.route({
       method: 'POST',
       url: '**/valintaperuste',
@@ -42,32 +42,6 @@ describe('editValintaperusteForm', () => {
       url: `**/valintaperuste/${valintaperusteId}`,
       response: merge(
         valintaperuste({ tyyppi: 'amm' }),
-        testValintaperusteFields,
-      ),
-    });
-
-    fillKieliversiotSection(cy);
-    tallenna(cy);
-
-    cy.wait('@updateValintaperusteRequest').then(({ request }) => {
-      cy.wrap(request.body).snapshot();
-    });
-  });
-
-  it('should be able to edit korkeakoulu valintaperuste', () => {
-    cy.route({
-      method: 'POST',
-      url: '**/valintaperuste',
-      response: {
-        muokattu: false,
-      },
-    }).as('updateValintaperusteRequest');
-
-    cy.route({
-      method: 'GET',
-      url: `**/valintaperuste/${valintaperusteId}`,
-      response: merge(
-        valintaperuste({ tyyppi: 'yo' }),
         testValintaperusteFields,
       ),
     });

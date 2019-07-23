@@ -10,57 +10,13 @@ Object {
   "kohdejoukkoKoodiUri": "joukko_1#1",
   "koulutustyyppi": "tyyppi_1#1",
   "metadata": Object {
-    "kielitaitovaatimukset": Array [
-      Object {
-        "kieliKoodiUri": "kieli_1#1",
-        "kielitaidonVoiOsoittaa": Array [
-          Object {
-            "kielitaitoKoodiUri": "osoitustapa_1#1",
-            "lisatieto": Object {},
-          },
-          Object {
-            "kielitaitoKoodiUri": "osoitustapa_2#1",
-            "lisatieto": Object {},
-          },
-          Object {
-            "kielitaitoKoodiUri": "kielitaidonosoittaminen_04#1",
-            "lisatieto": Object {
-              "fi": "Fi kuvaus",
-              "sv": "Sv kuvaus",
-            },
-          },
-        ],
-        "vaatimukset": Array [
-          Object {
-            "kielitaitovaatimusKoodiUri": "tyyppi_1#1",
-            "kielitaitovaatimusKuvaukset": Array [
-              Object {
-                "kielitaitovaatimusKuvausKoodiUri": "kuvaus_1#1",
-                "kielitaitovaatimusTaso": "erinomainen",
-              },
-            ],
-          },
-          Object {
-            "kielitaitovaatimusKoodiUri": "tyyppi_2#1",
-            "kielitaitovaatimusKuvaukset": Array [
-              Object {
-                "kielitaitovaatimusKuvausKoodiUri": "kuvaus_2#1",
-                "kielitaitovaatimusTaso": "ok",
-              },
-            ],
-          },
-        ],
-      },
-    ],
+    "kielitaitovaatimukset": Array [],
     "koulutustyyppi": "tyyppi_1#1",
     "kuvaus": Object {
       "fi": "<h1>Fi kuvaus</h1>",
       "sv": "<h1>Sv kuvaus</h1>",
     },
-    "osaamistaustaKoodiUrit": Array [
-      "tausta_1#1",
-      "tausta_2#1",
-    ],
+    "osaamistaustaKoodiUrit": Array [],
     "soraKuvausId": "sora_1",
     "valintatavat": Array [
       Object {
@@ -142,6 +98,7 @@ Object {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
+  "onkoJulkinen": true,
   "tila": undefined,
 }
 `;

@@ -36,7 +36,10 @@ Object {
     "fi",
     "sv",
   ],
-  "kohdejoukko": "kohdejoukko_1#1",
+  "kohdejoukko": Object {
+    "kohdejoukko": "kohdejoukko_1#1",
+    "tarkenne": "tarkenne_1#1",
+  },
   "nimi": Object {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
@@ -132,7 +135,10 @@ Object {
     "fi",
     "sv",
   ],
-  "kohdejoukko": "kohdejoukko_1#1",
+  "kohdejoukko": Object {
+    "kohdejoukko": "kohdejoukko_1#1",
+    "tarkenne": "tarkenne_1#1",
+  },
   "nimi": Object {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
@@ -230,7 +236,10 @@ Object {
     "fi",
     "sv",
   ],
-  "kohdejoukko": "kohdejoukko_1#1",
+  "kohdejoukko": Object {
+    "kohdejoukko": "kohdejoukko_1#1",
+    "tarkenne": "tarkenne_1#1",
+  },
   "nimi": Object {
     "fi": "Fi nimi",
     "sv": "Sv nimi",

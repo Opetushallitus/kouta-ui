@@ -43,9 +43,9 @@ const getHakuByFormValues = values => {
 
   const nimi = pick(get(values, 'nimi'), kielivalinta);
 
-  const kohdejoukkoKoodiUri = get(values, 'kohdejoukko') || null;
-
-  const kohdejoukonTarkenneKoodiUri = null;
+  const kohdejoukkoKoodiUri = get(values, 'kohdejoukko.kohdejoukko') || null;
+  const kohdejoukonTarkenneKoodiUri =
+    get(values, 'kohdejoukko.tarkenne') || null;
 
   const metadata = {
     tulevaisuudenAikataulu: (get(values, 'aikataulut.aikataulu') || []).map(

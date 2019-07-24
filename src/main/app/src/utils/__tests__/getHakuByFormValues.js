@@ -40,7 +40,10 @@ const baseValues = {
     ajastettuJulkaisu: '2019-11-16T08:44',
   },
   hakutapa: 'hakutapa_1#1',
-  kohdejoukko: 'kohde_1#1',
+  kohdejoukko: {
+    kohdejoukko: 'kohde_1#1',
+    tarkenne: 'tarkenne_1#1',
+  },
   hakulomake: {
     tyyppi: HAKULOMAKETYYPPI.ATARU,
     lomake: {

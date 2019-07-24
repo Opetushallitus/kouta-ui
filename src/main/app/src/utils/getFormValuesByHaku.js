@@ -8,6 +8,7 @@ const getFormValuesByHaku = haku => {
     hakuajat = [],
     hakutapaKoodiUri = '',
     kohdejoukkoKoodiUri = '',
+    kohdejoukonTarkenneKoodiUri = '',
     hakulomaketyyppi = '',
     hakulomakeId = '',
     hakulomakeKuvaus = {},
@@ -46,7 +47,10 @@ const getFormValuesByHaku = haku => {
       ajastettuJulkaisu,
     },
     hakutapa: hakutapaKoodiUri,
-    kohdejoukko: kohdejoukkoKoodiUri,
+    kohdejoukko: {
+      kohdejoukko: kohdejoukkoKoodiUri,
+      tarkenne: kohdejoukonTarkenneKoodiUri,
+    },
     hakulomake: getHakulomakeFieldsValues({
       hakulomaketyyppi,
       hakulomakeId,

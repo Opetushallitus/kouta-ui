@@ -56,10 +56,9 @@ const OpetuskieliField = createFormFieldComponent(
 
 const OpetustapaField = createFormFieldComponent(
   OpetustapaCheckboxGroup,
-  ({ input: { value, onChange, ...input }, ...props }) => ({
+  ({ input: { value, ...input }, ...props }) => ({
     ...input,
     value: value || [],
-    onChange: makeCountLimitOnChange(onChange, 2),
     ...props,
   }),
 );

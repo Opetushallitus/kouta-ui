@@ -37,8 +37,14 @@ const fillNimiSection = cy => {
 };
 
 const fillKohdejoukkoSection = cy => {
-  getByTestId('kohdejoukkoSection', cy).within(() => {
-    getRadio('haunkohdejoukko_0#1', cy).click({ force: true });
+  cy.getByTestId('kohdejoukkoSection').within(() => {
+    cy.getByTestId('kohdejoukko').within(() => {
+      getRadio('haunkohdejoukko_12#1', cy).click({ force: true });
+    });
+
+    cy.getByTestId('tarkenne').within(() => {
+      getRadio('haunkohdejoukontarkenne_0#1', cy).click({ force: true });
+    });
 
     jatka(cy);
   });

@@ -2,6 +2,7 @@ import merge from 'lodash/merge';
 import createKoodisto from './data/koodisto';
 
 import organisaatio from './data/organisaatio';
+
 import {
   stubKoodistoRoute,
   stubHakemuspalveluLomakkeetRoute,
@@ -29,11 +30,24 @@ export const stubHakuFormRoutes = ({ cy, organisaatioOid }) => {
     ],
   });
 
-  stubKoodistoRoute({ koodisto: 'haunkohdejoukko', cy });
+  stubKoodistoRoute({ koodisto: 'haunkohdejoukontarkenne', cy });
   stubKoodistoRoute({ koodisto: 'kausi', cy });
   stubKoodistoRoute({ koodisto: 'opetuspaikkakk', cy });
   stubKoodistoRoute({ koodisto: 'kausi', cy });
   stubKoodistoRoute({ koodisto: 'valintakokeentyyppi', cy });
+
+  cy.route({
+    method: 'GET',
+    url: `**/koodisto-service/rest/json/haunkohdejoukko/koodi**`,
+    response: createKoodisto({ koodisto: 'haunkohdejoukko' }).map((v, index) =>
+      index === 0
+        ? {
+            ...v,
+            koodiUri: 'haunkohdejoukko_12',
+          }
+        : v,
+    ),
+  });
 
   cy.route({
     method: 'GET',

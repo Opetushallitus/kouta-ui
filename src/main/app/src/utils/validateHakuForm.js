@@ -2,6 +2,8 @@ import get from 'lodash/get';
 
 import { JULKAISUTILA } from '../constants';
 import createErrorBuilder from './createErrorBuilder';
+import isYhteishakuHakutapa from './isYhteishakuHakutapa';
+import isErillishakuHakutapa from './isErillishakuHakutapa';
 
 const getKielivalinta = values => get(values, 'kieliversiot') || [];
 
@@ -15,11 +17,11 @@ const validateEssentials = ({ values, errorBuilder }) => {
 
 const validateCommon = ({ values, errorBuilder }) => {
   const hakutapa = get(values, 'hakutapa');
-  const isYhteishaku = new RegExp('^hakutapa_01').test(hakutapa);
-  const isErillishaku = new RegExp('^hakutapa_02').test(hakutapa);
+  const isYhteishaku = isYhteishakuHakutapa(hakutapa);
+  const isErillishaku = isErillishakuHakutapa(hakutapa);
 
   let enhancedErrorBuilder = errorBuilder
-    .validateExistence('kohdejoukko')
+    .validateExistence('kohdejoukko.kohdejoukko')
     .validateExistence('hakutapa')
     .validateArrayMinLength('aikataulut.hakuaika', 1, { isFieldArray: true })
     .validateArray('aikataulut.hakuaika', eb => {

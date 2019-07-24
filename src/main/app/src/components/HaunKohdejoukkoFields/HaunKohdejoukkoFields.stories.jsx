@@ -1,21 +1,21 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import HakuForm from './index';
+import HaunKohdejoukkoFields from './index';
 import ReduxForm from '../ReduxForm';
 
 import {
-  makeStoreDecorator,
   makeApiDecorator,
   makeLocalisationDecorator,
+  makeStoreDecorator,
 } from '../../storybookUtils';
 
-storiesOf('HakuForm', module)
-  .addDecorator(makeLocalisationDecorator())
+storiesOf('HaunKohdejoukkoFields', module)
   .addDecorator(makeStoreDecorator())
+  .addDecorator(makeLocalisationDecorator())
   .addDecorator(makeApiDecorator())
   .add('Basic', () => (
-    <ReduxForm form="hakuForm">
-      {() => <HakuForm organisaatioOid="1.2.246.562.10.594252633210" />}
+    <ReduxForm form="form">
+      {() => <HaunKohdejoukkoFields name="kohdejoukko" />}
     </ReduxForm>
   ));

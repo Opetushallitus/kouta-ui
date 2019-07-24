@@ -1,5 +1,8 @@
 const createHaku = async ({ httpClient, apiUrls, haku }) => {
-  const { data } = httpClient.put(apiUrls.url('kouta-backend.haku'), haku);
+  const { data } = await httpClient.put(
+    apiUrls.url('kouta-backend.haku'),
+    haku,
+  );
 
   return data;
 };

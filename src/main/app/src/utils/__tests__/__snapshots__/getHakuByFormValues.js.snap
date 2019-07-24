@@ -29,7 +29,7 @@ Object {
     "sv",
   ],
   "kohdejoukkoKoodiUri": "kohde_1#1",
-  "kohdejoukonTarkenneKoodiUri": null,
+  "kohdejoukonTarkenneKoodiUri": "tarkenne_1#1",
   "metadata": Object {
     "tulevaisuudenAikataulu": Array [
       Object {
@@ -132,7 +132,7 @@ Object {
     "sv",
   ],
   "kohdejoukkoKoodiUri": "kohde_1#1",
-  "kohdejoukonTarkenneKoodiUri": null,
+  "kohdejoukonTarkenneKoodiUri": "tarkenne_1#1",
   "metadata": Object {
     "tulevaisuudenAikataulu": Array [
       Object {
@@ -233,7 +233,7 @@ Object {
     "sv",
   ],
   "kohdejoukkoKoodiUri": "kohde_1#1",
-  "kohdejoukonTarkenneKoodiUri": null,
+  "kohdejoukonTarkenneKoodiUri": "tarkenne_1#1",
   "metadata": Object {
     "tulevaisuudenAikataulu": Array [
       Object {

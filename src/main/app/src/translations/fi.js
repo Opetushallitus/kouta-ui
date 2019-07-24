@@ -159,6 +159,8 @@ export default {
     kayttooikeusVirheilmoitusKuvaus:
       'Käyttöoikeuksien tarkistuksessa tapahtui virhe. Tarkistathan, että käyttäjälläsi on tarvittavat käyttöoikeudet',
     avaaLomake: 'Avaa lomake',
+    valitseHaunKohdejoukko: 'Valitse haun kohdejoukko',
+    valitseHaunKohdejoukonTarkenne: 'Valitse haun kohdejoukon tarkenne',
   },
   validointivirheet: {
     syotaArvo: 'Syötä kentälle arvo',
@@ -283,7 +285,6 @@ export default {
   hakulomake: {
     haunNimi: 'Haun nimi',
     haunKohdejoukko: 'Haun kohdejoukko',
-    valitseHaunKohdejoukko: 'Valitse haun kohdejoukko',
     hakutapa: 'Hakutapa',
     valitseHakutapa: 'Valitse hakutapa',
     haunAikataulu: 'Haun aikataulu',

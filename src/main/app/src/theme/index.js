@@ -1,14 +1,13 @@
-import { css } from 'styled-components';
 import merge from 'lodash/merge';
 import get from 'lodash/get';
 import { generateMedia } from 'styled-media-query';
 
-import { isNumber } from '../utils';
+const breakpoints = ['576px', '768px', '992px'];
 
 export const media = generateMedia({
-  large: '992px',
-  medium: '768px',
-  small: '576px',
+  large: breakpoints[2],
+  medium: breakpoints[1],
+  small: breakpoints[0],
 });
 
 const createHeadingTypography = ({ sizes, fontFamily, color, lineHeight }) => {
@@ -24,37 +23,6 @@ const createHeadingTypography = ({ sizes, fontFamily, color, lineHeight }) => {
     return acc;
   }, {});
 };
-
-const getSpacingCss = props => {
-  const spacingProps = [
-    'marginLeft',
-    'marginRight',
-    'marginBottom',
-    'marginTop',
-    'paddingLeft',
-    'paddingRight',
-    'paddingBottom',
-    'paddingTop',
-  ];
-
-  const {
-    theme: {
-      spacing: { unit: spacingUnit },
-    },
-  } = props;
-
-  return spacingProps.reduce((acc, curr) => {
-    if (isNumber(props[curr])) {
-      acc[curr] = `${spacingUnit * props[curr]}px`;
-    }
-
-    return acc;
-  }, {});
-};
-
-export const spacingCss = css`
-  ${props => getSpacingCss(props)}
-`;
 
 export const getThemeProp = path => props => get(props.theme, path);
 
@@ -74,7 +42,49 @@ export const createTheme = (theme = {}) => {
     lineHeight: 1.2,
   });
 
+  const palette = {
+    border: '#cccccc',
+    divider: '#cccccc',
+    mainBackground: '#f5f5f5',
+    text: {
+      primary: textPrimaryColor,
+      secondary: textSecondaryColor,
+      dark: textDarkColor,
+    },
+    primary: {
+      light: '#e0f2fd',
+      main: '#2da0c7',
+      dark: '#1e7998',
+      contrastText: '#ffffff',
+    },
+    secondary: {
+      main: '#999999',
+      contrastText: '#ffffff',
+    },
+    success: {
+      main: '#43a047',
+      contrastText: '#ffffff',
+    },
+    warning: {
+      main: '#de9a06',
+      contrastText: '#ffffff',
+    },
+    danger: {
+      main: '#e05055',
+      contrastText: '#ffffff',
+    },
+    orange: {
+      main: '#e77e22',
+      contrastText: '#ffffff',
+    },
+    yellow: {
+      main: '#fdce4c',
+      contrastText: '#ffffff',
+    },
+  };
+
   const defaults = {
+    breakpoints,
     typography: {
       fontFamily,
       lineHeight: 1.5,
@@ -93,49 +103,12 @@ export const createTheme = (theme = {}) => {
       },
       ...headingTypography,
     },
-    palette: {
-      border: '#cccccc',
-      divider: '#cccccc',
-      mainBackground: '#f5f5f5',
-      text: {
-        primary: textPrimaryColor,
-        secondary: textSecondaryColor,
-        dark: textDarkColor,
-      },
-      primary: {
-        light: '#e0f2fd',
-        main: '#2da0c7',
-        dark: '#1e7998',
-        contrastText: '#ffffff',
-      },
-      secondary: {
-        main: '#999999',
-        contrastText: '#ffffff',
-      },
-      success: {
-        main: '#43a047',
-        contrastText: '#ffffff',
-      },
-      warning: {
-        main: '#de9a06',
-        contrastText: '#ffffff',
-      },
-      danger: {
-        main: '#e05055',
-        contrastText: '#ffffff',
-      },
-      orange: {
-        main: '#e77e22',
-        contrastText: '#ffffff',
-      },
-      yellow: {
-        main: '#fdce4c',
-        contrastText: '#ffffff',
-      },
-    },
+    palette,
+    colors: palette,
     spacing: {
       unit: 8,
     },
+    space: [0, 8, 16, 24, 32, 40, 48, 56, 64],
     shape: {
       borderRadius: '4px',
     },
@@ -143,6 +116,7 @@ export const createTheme = (theme = {}) => {
       modal: 999,
     },
     contentMaxWidth: '1200px',
+    radii: [0, 4],
   };
 
   return merge({}, defaults, theme);

@@ -48,7 +48,8 @@
     "striptags": "^3.1.1",
     "styled-components": "^4.3.2",
     "styled-flex-component": "^3.0.0",
-    "styled-media-query": "^2.1.1"
+    "styled-media-query": "^2.1.1",
+    "styled-system": "^5.0.16"
   },
   "scripts": {
     "start": "react-scripts start",

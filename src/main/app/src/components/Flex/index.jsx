@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 import SFlex, { FlexItem as SFlexItem } from 'styled-flex-component';
 
-import { spacingCss } from '../../theme';
+import { space } from '../../system';
 
 const Flex = styled(SFlex)`
-  ${spacingCss};
+  ${space};
 `;
 
 export const FlexItem = styled(SFlexItem)`
-  ${spacingCss};
+  ${space};
   box-sizing: border-box;
 `;
 

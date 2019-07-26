@@ -2,7 +2,8 @@ import styled, { css } from 'styled-components';
 import React from 'react';
 
 import { isString } from '../../utils';
-import { getThemeProp, spacingCss } from '../../theme';
+import { getThemeProp } from '../../theme';
+import { color, space } from '../../system';
 
 const variantToComponent = {
   h1: 'h1',
@@ -35,7 +36,8 @@ const TypographyBase = styled.span`
   margin-top: 0px;
 
   ${variantCss};
-  ${spacingCss}
+  ${space};
+  ${color};
 `;
 
 const Typography = ({ variant = 'body', ...props }) => (

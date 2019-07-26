@@ -383,6 +383,7 @@ export default {
     oppilaitoksenPerustiedot: 'Oppilaitoksen perustiedot',
     oppilaitoksenNimi: 'Oppilaitoksen nimi',
     paikkakunta: 'Paikkakunta',
+    tyyppi: 'Tyyppi',
     opetuskielet: 'Opetuskielet',
     syotaPerustiedot: 'Syötä perustiedot',
     perustiedotInfo:

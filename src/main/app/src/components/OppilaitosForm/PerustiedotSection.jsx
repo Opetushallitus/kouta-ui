@@ -17,7 +17,9 @@ import { FormFieldInput } from '../FormFields';
 import GridRow from '../GridRow';
 import GridColumn from '../GridColumn';
 
-const InfoLabel = props => <Box flexGrow={0} flexBasis="30%" {...props} />;
+const InfoLabel = props => (
+  <Box flexGrow={0} pr={2} flexBasis="30%" {...props} />
+);
 
 const InfoValue = props => <Box flexGrow={1} {...props} />;
 
@@ -118,10 +120,12 @@ const OrganisaatioSection = ({ organisaatio, t }) => {
   const language = useLanguage();
   const opetuskieletUris = get(organisaatio, 'kieletUris') || [];
   const paikkakuntaUri = get(organisaatio, 'kotipaikkaUri');
+  const oppilaitostyyppiUri = get(organisaatio, 'oppilaitosTyyppiUri');
   const nimi = getFirstLanguageValue(get(organisaatio, 'nimi'), language);
 
   const { opetuskielet } = useOpetuskielet(opetuskieletUris);
   const { nimi: paikkakunta } = useKoodiNimi(paikkakuntaUri);
+  const { nimi: oppilaitostyyppi } = useKoodiNimi(oppilaitostyyppiUri);
 
   return (
     <>
@@ -133,6 +137,16 @@ const OrganisaatioSection = ({ organisaatio, t }) => {
         </InfoLabel>
         <InfoValue>
           <Typography>{nimi}</Typography>
+        </InfoValue>
+      </Box>
+      <Box display="flex" mb={2}>
+        <InfoLabel>
+          <Typography color="text.dark">
+            {t('oppilaitoslomake.tyyppi')}:
+          </Typography>
+        </InfoLabel>
+        <InfoValue>
+          <Typography>{oppilaitostyyppi}</Typography>
         </InfoValue>
       </Box>
       <Box display="flex" mb={2}>

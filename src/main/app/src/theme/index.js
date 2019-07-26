@@ -42,7 +42,7 @@ export const createTheme = (theme = {}) => {
     lineHeight: 1.2,
   });
 
-  const palette = {
+  const colors = {
     border: '#cccccc',
     divider: '#cccccc',
     mainBackground: '#f5f5f5',
@@ -103,8 +103,7 @@ export const createTheme = (theme = {}) => {
       },
       ...headingTypography,
     },
-    palette,
-    colors: palette,
+    colors,
     spacing: {
       unit: 8,
     },
@@ -118,6 +117,8 @@ export const createTheme = (theme = {}) => {
     contentMaxWidth: '1200px',
     radii: [0, 4],
   };
+
+  defaults.palette = defaults.colors; // Alias to ensure backwards compatibility
 
   return merge({}, defaults, theme);
 };

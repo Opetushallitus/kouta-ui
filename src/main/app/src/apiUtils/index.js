@@ -1,5 +1,5 @@
 import { KOULUTUSTYYPPI_TO_KOULUTUSTYYPPI_IDS_MAP } from '../constants';
-import { isArray, isString, isObject } from '../utils';
+import { isArray, isObject } from '../utils';
 import parseKoodiUri from '../utils/parseKoodiUri';
 import keyBy from 'lodash/keyBy';
 import mapValues from 'lodash/mapValues';
@@ -7,7 +7,6 @@ import get from 'lodash/get';
 import groupBy from 'lodash/groupBy';
 import toPairs from 'lodash/toPairs';
 import maxBy from 'lodash/maxBy';
-import upperFirst from 'lodash/upperFirst';
 import set from 'lodash/set';
 
 export const getKoulutuksetByKoulutusTyyppi = async ({
@@ -152,11 +151,13 @@ export const getKoulutusByKoodi = async ({
 
 export const getOrganisaatioHierarchyByOid = async ({
   oid,
+  skipParents = false,
   apiUrls,
   httpClient,
 }) => {
   const { data } = await httpClient.get(
     apiUrls.url('organisaatio-service.hierarkia', oid),
+    { params: { skipParents: skipParents ? 'true' : 'false' } },
   );
 
   return get(data, 'organisaatiot') || [];
@@ -237,25 +238,6 @@ export const getLocalisation = async ({
   }
 
   return resource;
-};
-
-export const getOrganisaatioContactInfo = organisaatio => {
-  const postitoimipaikka = get(organisaatio, 'kayntiosoite.postitoimipaikka');
-  const postinumeroUri = get(organisaatio, 'kayntiosoite.postinumeroUri');
-  const [, postinumero] = postinumeroUri ? postinumeroUri.split('_') : [];
-  const sahkopostiYhteystieto = (get(organisaatio, 'yhteystiedot') || []).find(
-    ({ email }) => isString(email),
-  );
-  const sahkoposti = sahkopostiYhteystieto ? sahkopostiYhteystieto.email : null;
-
-  return {
-    osoite: get(organisaatio, 'kayntiosoite.osoite') || null,
-    postitoimipaikka: postitoimipaikka
-      ? upperFirst(postitoimipaikka.toLowerCase())
-      : null,
-    postinumero: postinumero || null,
-    sahkoposti,
-  };
 };
 
 export const getKoutaHakuByOid = async ({ oid, httpClient, apiUrls }) => {

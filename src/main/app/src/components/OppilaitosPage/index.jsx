@@ -20,7 +20,9 @@ const OppilaitosPage = ({
     <FormPage
       steps={<Steps />}
       header={<OppilaitosPageHeader organisaatio={organisaatio} />}
-      footer={<OppilaitosPageFooter oppilaitos={{}} />}
+      footer={
+        <OppilaitosPageFooter oppilaitos={{}} oppilaitosIsLoading={false} />
+      }
     >
       <OppilaitosPageForm organisaatioOid={organisaatioOid} />
     </FormPage>

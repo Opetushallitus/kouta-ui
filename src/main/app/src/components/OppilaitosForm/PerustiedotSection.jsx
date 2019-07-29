@@ -58,7 +58,7 @@ const TiedotSection = ({ name, t }) => {
         <GridColumn md={4}>
           <Field
             component={FormFieldInput}
-            name={`${name}.numOpiskelijoita`}
+            name={`${name}.opiskelijoita`}
             type="number"
             label={t('oppilaitoslomake.opiskelijoita')}
           />
@@ -66,7 +66,7 @@ const TiedotSection = ({ name, t }) => {
         <GridColumn md={4}>
           <Field
             component={FormFieldInput}
-            name={`${name}.numKorkeakouluja`}
+            name={`${name}.korkeakouluja`}
             type="number"
             label={t('oppilaitoslomake.korkeakouluja')}
           />
@@ -74,7 +74,7 @@ const TiedotSection = ({ name, t }) => {
         <GridColumn md={4}>
           <Field
             component={FormFieldInput}
-            name={`${name}.numTiedekuntia`}
+            name={`${name}.tiedekuntia`}
             type="number"
             label={t('oppilaitoslomake.tiedekuntia')}
           />
@@ -82,7 +82,7 @@ const TiedotSection = ({ name, t }) => {
         <GridColumn md={4}>
           <Field
             component={FormFieldInput}
-            name={`${name}.numKampuksia`}
+            name={`${name}.kampuksia`}
             type="number"
             label={t('oppilaitoslomake.kampuksia')}
           />
@@ -90,7 +90,7 @@ const TiedotSection = ({ name, t }) => {
         <GridColumn md={4}>
           <Field
             component={FormFieldInput}
-            name={`${name}.numYksikoita`}
+            name={`${name}.yksikoita`}
             type="number"
             label={t('oppilaitoslomake.yksikoita')}
           />
@@ -98,7 +98,7 @@ const TiedotSection = ({ name, t }) => {
         <GridColumn md={4}>
           <Field
             component={FormFieldInput}
-            name={`${name}.numToimipisteita`}
+            name={`${name}.toimipisteita`}
             type="number"
             label={t('oppilaitoslomake.toimipisteita')}
           />
@@ -106,7 +106,7 @@ const TiedotSection = ({ name, t }) => {
         <GridColumn md={4}>
           <Field
             component={FormFieldInput}
-            name={`${name}.numAkatemioita`}
+            name={`${name}.akatemioita`}
             type="number"
             label={t('oppilaitoslomake.akatemioita')}
           />

@@ -161,6 +161,8 @@ export default {
     avaaLomake: 'Avaa lomake',
     valitseHaunKohdejoukko: 'Valitse haun kohdejoukko',
     valitseHaunKohdejoukonTarkenne: 'Valitse haun kohdejoukon tarkenne',
+    oppilaitos: 'Oppilaitos',
+    oppilaitoksenOsa: 'Oppilaitoksen osa',
   },
   validointivirheet: {
     syotaArvo: 'Syötä kentälle arvo',

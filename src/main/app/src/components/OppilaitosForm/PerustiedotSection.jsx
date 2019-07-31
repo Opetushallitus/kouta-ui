@@ -1,12 +1,9 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import get from 'lodash/get';
 import { Field } from 'redux-form';
 
 import { useOrganisaatio } from '../useOrganisaatio';
-import useKoodisto from '../useKoodisto';
-import parseKoodiUri from '../../utils/parseKoodiUri';
 import useLanguage from '../useLanguage';
-import getKoodiNimiTranslation from '../../utils/getKoodiNimiTranslation';
 import useKoodiNimi from '../useKoodiNimi';
 import { getFirstLanguageValue } from '../../utils';
 import useTranslation from '../useTranslation';
@@ -16,36 +13,13 @@ import DividerHeading from '../DividerHeading';
 import { FormFieldInput } from '../FormFields';
 import GridRow from '../GridRow';
 import GridColumn from '../GridColumn';
+import useKoodiNimet from '../useKoodiNimet';
 
 const InfoLabel = props => (
   <Box flexGrow={0} pr={2} flexBasis="30%" {...props} />
 );
 
 const InfoValue = props => <Box flexGrow={1} {...props} />;
-
-const useOpetuskielet = koodiUris => {
-  const { koodisto, versio } = parseKoodiUri(koodiUris[0]);
-  const language = useLanguage();
-
-  const { data, ...rest } = useKoodisto({ koodisto, versio });
-
-  const nimet = useMemo(() => {
-    return data
-      ? koodiUris
-          .map(uri => {
-            const { koodi } = parseKoodiUri(uri);
-            const koodiMatch = data.find(({ koodiUri }) => koodiUri === koodi);
-
-            return koodiMatch
-              ? getKoodiNimiTranslation(koodiMatch, language)
-              : undefined;
-          })
-          .filter(k => !!k)
-      : [];
-  }, [koodiUris, data, language]);
-
-  return { opetuskielet: nimet, ...rest };
-};
 
 const TiedotSection = ({ name, t }) => {
   return (
@@ -123,7 +97,7 @@ const OrganisaatioSection = ({ organisaatio, t }) => {
   const oppilaitostyyppiUri = get(organisaatio, 'oppilaitosTyyppiUri');
   const nimi = getFirstLanguageValue(get(organisaatio, 'nimi'), language);
 
-  const { opetuskielet } = useOpetuskielet(opetuskieletUris);
+  const { nimet: opetuskielet } = useKoodiNimet(opetuskieletUris);
   const { nimi: paikkakunta } = useKoodiNimi(paikkakuntaUri);
   const { nimi: oppilaitostyyppi } = useKoodiNimi(oppilaitostyyppiUri);
 
@@ -166,7 +140,7 @@ const OrganisaatioSection = ({ organisaatio, t }) => {
           </Typography>
         </InfoLabel>
         <InfoValue>
-          <Typography>{opetuskielet.join(', ')}</Typography>
+          <Typography>{opetuskielet.filter(k => !!k).join(', ')}</Typography>
         </InfoValue>
       </Box>
     </>

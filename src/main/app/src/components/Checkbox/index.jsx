@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 import { getThemeProp } from '../../theme';
+import { disabledStyle } from '../../system';
 
 const CheckboxContainer = styled.div`
   display: inline-block;
@@ -69,23 +70,14 @@ const Label = styled.label`
   color: ${getThemeProp('palette.text.primary')};
   align-items: flex-start;
 
-  ${({ disabled }) =>
-    disabled &&
-    css`
-      opacity: 0.5;
-      cursor: not-allowed;
-    `}
+  ${disabledStyle}
 `;
 
 const LabelWrapper = styled.div`
   flex: 1;
   margin-left: 9px;
 
-  ${({ disabled }) =>
-    disabled &&
-    css`
-      opacity: 0.5;
-    `}
+  ${disabledStyle}
 `;
 
 const CheckboxWrapper = styled.div`

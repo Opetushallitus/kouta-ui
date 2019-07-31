@@ -10,7 +10,7 @@ import Icon from '../Icon';
 import Flex, { FlexItem } from '../Flex';
 
 const Wrapper = styled.div`
-  z-index: ${getThemeProp('zIndex.modal')};
+  z-index: ${getThemeProp('zIndices.modal')};
   position: fixed;
   top: 0px;
   left: 0px;

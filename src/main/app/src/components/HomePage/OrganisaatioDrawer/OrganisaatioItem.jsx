@@ -8,17 +8,13 @@ import Flex, { FlexItem } from '../../Flex';
 import { getThemeProp } from '../../../theme';
 import Radio from '../../Radio';
 import Icon from '../../Icon';
+import { disabledStyle } from '../../../system';
 
 const FavouriteIconBase = styled(Icon)`
   color: ${getThemeProp('palette.text.primary')};
   cursor: pointer;
 
-  ${({ disabled }) =>
-    disabled &&
-    css`
-      opacity: 0.5;
-      cursor: not-allowed;
-    `}
+  ${disabledStyle}
 
   ${({ active }) =>
     active &&

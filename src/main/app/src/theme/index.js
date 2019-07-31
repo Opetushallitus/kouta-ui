@@ -1,4 +1,3 @@
-import merge from 'lodash/merge';
 import get from 'lodash/get';
 import { generateMedia } from 'styled-media-query';
 
@@ -29,7 +28,7 @@ export const getThemeProp = path => props => get(props.theme, path);
 export const spacing = (amount = 1) => ({ theme }) =>
   `${theme.spacing.unit * amount}px`;
 
-export const createTheme = (theme = {}) => {
+export const createTheme = () => {
   const textPrimaryColor = '#666666';
   const textSecondaryColor = '#a6a6a6';
   const textDarkColor = '#2a2a2a';
@@ -83,7 +82,9 @@ export const createTheme = (theme = {}) => {
     },
   };
 
-  const defaults = {
+  const radii = [0, 4];
+
+  const theme = {
     breakpoints,
     typography: {
       fontFamily,
@@ -111,16 +112,20 @@ export const createTheme = (theme = {}) => {
     shape: {
       borderRadius: '4px',
     },
-    zIndex: {
+    zIndices: {
       modal: 999,
     },
     contentMaxWidth: '1200px',
-    radii: [0, 4],
+    radii,
+    disabled: {
+      cursor: 'not-allowed',
+      opacity: 0.5,
+    },
   };
 
-  defaults.palette = defaults.colors; // Alias to ensure backwards compatibility
+  theme.palette = theme.colors; // Alias to ensure backwards compatibility
 
-  return merge({}, defaults, theme);
+  return theme;
 };
 
 export const defaultTheme = createTheme();

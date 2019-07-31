@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 
 import { getThemeProp } from '../../theme';
 import Icon from '../Icon';
+import { disabledStyle } from '../../system';
 
 export const AddonIcon = styled(Icon)`
   font-size: 1.25rem;
@@ -58,12 +59,7 @@ export const InputBase = styled.input`
       }
     `}
 
-  ${({ disabled }) =>
-    disabled &&
-    css`
-      opacity: 0.5;
-      cursor: not-allowed;
-    `}
+  ${disabledStyle}
   
   ${({ hasAddonBefore }) => hasAddonBefore && css`
       padding-left: 40px;

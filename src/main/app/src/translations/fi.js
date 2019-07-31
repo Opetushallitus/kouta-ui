@@ -408,4 +408,16 @@ export default {
     oppilaitoksenYhteystiedot: 'Oppilaitoksen yhteystiedot',
     yhteystiedotInfo: 'Anna oppilaitokselle tarvittavat yhteystiedot',
   },
+  oppilaitoksenOsaLomake: {
+    oppilaitoksenOsanPerustiedot: 'Oppilaitoksen osan perustiedot',
+    oppilaitoksenOsanNimi: 'Oppilaitoksen osan nimi',
+    perustiedotInfo:
+      'Syötä oppilaitostasi koskevat perustiedot, jotka näkyvät Opintopolussa.',
+    kampus: 'Kampus',
+    lisaaOppilaitoksenOsanEsittelyteksti:
+      'Lisää oppilaitoksen osan esittelyteksti',
+    oppilaitoksenOsanEsittely: 'Oppilaitoksen osan esittely',
+    oppilaitoksenOsanYhteystiedot: 'Oppilaitoksen osan yhteystiedot',
+    yhteystiedotInfo: 'Anna oppilaitokselle tarvittavat yhteystiedot',
+  },
 };

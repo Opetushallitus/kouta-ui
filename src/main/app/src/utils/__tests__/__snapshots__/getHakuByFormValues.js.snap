@@ -17,7 +17,7 @@ Object {
   ],
   "hakukohteenLiittamisenTakaraja": "2019-09-16T08:44",
   "hakukohteenMuokkaamisenTakaraja": "2019-10-16T08:44",
-  "hakulomakeId": null,
+  "hakulomakeAtaruId": null,
   "hakulomakeKuvaus": Object {},
   "hakulomakeLinkki": Object {
     "fi": "https://google.fi",
@@ -120,7 +120,7 @@ Object {
   ],
   "hakukohteenLiittamisenTakaraja": "2019-09-16T08:44",
   "hakukohteenMuokkaamisenTakaraja": "2019-10-16T08:44",
-  "hakulomakeId": null,
+  "hakulomakeAtaruId": null,
   "hakulomakeKuvaus": Object {
     "fi": "kuvaus",
   },
@@ -223,7 +223,7 @@ Object {
   ],
   "hakukohteenLiittamisenTakaraja": "2019-09-16T08:44",
   "hakukohteenMuokkaamisenTakaraja": "2019-10-16T08:44",
-  "hakulomakeId": "12345",
+  "hakulomakeAtaruId": "12345",
   "hakulomakeKuvaus": Object {},
   "hakulomakeLinkki": Object {},
   "hakulomaketyyppi": "ataru",

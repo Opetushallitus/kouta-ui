@@ -40,7 +40,7 @@ const getHakukohdeByFormValues = values => {
   const eriHakulomake = Boolean(get(values, 'hakulomake.eriHakulomake'));
 
   const {
-    hakulomakeId,
+    hakulomakeAtaruId,
     hakulomakeKuvaus,
     hakulomakeLinkki,
     hakulomaketyyppi,
@@ -169,9 +169,9 @@ const getHakukohdeByFormValues = values => {
     valintaperuste,
     minEnsikertalaisenAloituspaikat,
     maxEnsikertalaisenAloituspaikat,
-    eriHakulomake,
+    eriHakulomakeKuinHaulla: eriHakulomake,
     hakulomaketyyppi,
-    hakulomakeId,
+    hakulomakeAtaruId,
     hakulomakeLinkki,
     hakulomakeKuvaus,
     eriAlkamiskausi,

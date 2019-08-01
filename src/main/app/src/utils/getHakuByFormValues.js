@@ -28,7 +28,7 @@ const getHakuByFormValues = values => {
 
   const {
     hakulomaketyyppi,
-    hakulomakeId,
+    hakulomakeAtaruId,
     hakulomakeLinkki,
     hakulomakeKuvaus,
   } = getHakulomakeFieldsData({
@@ -89,7 +89,7 @@ const getHakuByFormValues = values => {
     hakukohteenMuokkaamisenTakaraja,
     ajastettuJulkaisu,
     alkamisvuosi,
-    hakulomakeId,
+    hakulomakeAtaruId,
     hakulomakeLinkki,
     hakulomakeKuvaus,
     valintakokeet,

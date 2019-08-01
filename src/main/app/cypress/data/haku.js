@@ -10,7 +10,7 @@ export default () => ({
   kohdejoukkoKoodiUri: 'haunkohdejoukko_0#1',
   kohdejoukonTarkenneKoodiUri: 'haunkohdejoukontarkenne_0#1',
   hakulomaketyyppi: 'ataru',
-  hakulomakeId: '12345',
+  hakulomakeAtaruId: '12345',
   hakulomakeKuvaus: {},
   hakulomakeLinkki: {},
   metadata: {

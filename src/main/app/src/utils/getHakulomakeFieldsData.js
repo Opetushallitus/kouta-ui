@@ -22,7 +22,7 @@ const getHakulomakeFieldsData = ({ hakulomakeValues, kielivalinta }) => {
 
   return {
     hakulomaketyyppi,
-    hakulomakeId,
+    hakulomakeAtaruId: hakulomakeId,
     hakulomakeLinkki,
     hakulomakeKuvaus,
   };

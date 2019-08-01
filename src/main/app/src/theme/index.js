@@ -45,6 +45,10 @@ export const createTheme = () => {
     regular: '400',
   };
 
+  const fonts = {
+    main: fontFamily,
+  };
+
   const headingTypography = createHeadingTypography({
     sizes: [3, 2.5, 2, 1.5, 1.25, 1],
     fontFamily,
@@ -135,6 +139,7 @@ export const createTheme = () => {
       opacity: 0.5,
     },
     fontWeights,
+    fonts,
   };
 
   theme.palette = theme.colors; // Alias to ensure backwards compatibility

@@ -1,4 +1,5 @@
 import get from 'lodash/get';
+import mapValues from 'lodash/mapValues';
 
 import serializeEditorState from './draft/serializeEditorState';
 import { isNumeric } from './index';
@@ -23,7 +24,7 @@ const getOppilaitoksenOsaByFormValues = ({ tila, muokkaaja, ...values }) => {
       postitoimipaikka: postitoimipaikka || {},
       puhelinnumero: puhelinnumero || null,
       verkkosivu: verkkosivu || null,
-      esittely: serializeEditorState(esittely),
+      esittely: mapValues(esittely || {}, serializeEditorState),
       opiskelijoita: isNumeric(get(perustiedot, 'opiskelijoita'))
         ? parseInt(perustiedot.opiskelijoita)
         : null,

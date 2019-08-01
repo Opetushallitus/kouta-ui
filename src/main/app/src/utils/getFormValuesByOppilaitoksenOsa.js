@@ -1,3 +1,5 @@
+import mapValues from 'lodash/mapValues';
+
 import parseEditorState from './draft/parseEditorState';
 import { isNumber } from './index';
 
@@ -16,7 +18,7 @@ const getFormValuesByOppilaitoksenOsa = oppilaitoksenOsa => {
   } = oppilaitoksenOsa;
 
   return {
-    esittely: parseEditorState(esittely),
+    esittely: mapValues(esittely || {}, parseEditorState),
     yhteystiedot: {
       osoite: osoite || {},
       postinumero: postinumero || '',

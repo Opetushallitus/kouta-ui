@@ -9,13 +9,19 @@ export const media = generateMedia({
   small: breakpoints[0],
 });
 
-const createHeadingTypography = ({ sizes, fontFamily, color, lineHeight }) => {
+const createHeadingTypography = ({
+  sizes,
+  fontFamily,
+  color,
+  lineHeight,
+  fontWeight,
+}) => {
   return sizes.reduce((acc, curr, index) => {
     acc[`h${index + 1}`] = {
       color,
       fontFamily,
       fontSize: `${curr}rem`,
-      fontWeight: '500',
+      fontWeight,
       lineHeight,
     };
 
@@ -34,14 +40,21 @@ export const createTheme = () => {
   const textDarkColor = '#2a2a2a';
   const fontFamily = "'Roboto', sans-serif";
 
+  const fontWeights = {
+    bold: '500',
+    regular: '400',
+  };
+
   const headingTypography = createHeadingTypography({
     sizes: [3, 2.5, 2, 1.5, 1.25, 1],
     fontFamily,
     color: textDarkColor,
     lineHeight: 1.2,
+    fontWeight: fontWeights.bold,
   });
 
   const colors = {
+    white: '#ffffff',
     border: '#cccccc',
     divider: '#cccccc',
     mainBackground: '#f5f5f5',
@@ -121,6 +134,7 @@ export const createTheme = () => {
       cursor: 'not-allowed',
       opacity: 0.5,
     },
+    fontWeights,
   };
 
   theme.palette = theme.colors; // Alias to ensure backwards compatibility

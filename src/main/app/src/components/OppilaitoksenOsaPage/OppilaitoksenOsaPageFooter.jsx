@@ -7,16 +7,19 @@ import { JULKAISUTILA } from '../../constants';
 import { getTestIdProps } from '../../utils';
 import useTranslation from '../useTranslation';
 import useSaveForm from '../useSaveForm';
-import validateOppilaitosForm from '../../utils/validateOppilaitosForm';
+import validateOppilaitoksenOsaForm from '../../utils/validateOppilaitoksenOsaForm';
 
-const OppilaitosPageFooter = ({ oppilaitos, oppilaitosIsLoading = false }) => {
+const OppilaitoksenOsaPageFooter = ({
+  oppilaitoksenOsa,
+  oppilaitoksenOsaIsLoading = false,
+}) => {
   const { t } = useTranslation();
-  const tila = get(oppilaitos, 'tila');
+  const tila = get(oppilaitoksenOsa, 'tila');
 
   const { save, saveAndPublish } = useSaveForm({
-    form: 'oppilaitos',
+    form: 'oppilaitoksenOsa',
     submit: () => Promise.resolve(),
-    validate: validateOppilaitosForm,
+    validate: validateOppilaitoksenOsaForm,
   });
 
   return (
@@ -24,8 +27,8 @@ const OppilaitosPageFooter = ({ oppilaitos, oppilaitosIsLoading = false }) => {
       <Button
         variant="outlined"
         onClick={save}
-        disabled={oppilaitosIsLoading}
-        {...getTestIdProps('tallennaOppilaitosButton')}
+        disabled={oppilaitoksenOsaIsLoading}
+        {...getTestIdProps('tallennaOppilaitoksenOsaButton')}
       >
         {t('yleiset.tallenna')}
       </Button>
@@ -33,8 +36,8 @@ const OppilaitosPageFooter = ({ oppilaitos, oppilaitosIsLoading = false }) => {
         <Box ml={2}>
           <Button
             onClick={saveAndPublish}
-            disabled={oppilaitosIsLoading}
-            {...getTestIdProps('tallennaJaJulkaiseOppilaitosButton')}
+            disabled={oppilaitoksenOsaIsLoading}
+            {...getTestIdProps('tallennaJaJulkaiseOppilaitoksenOsaButton')}
           >
             {t('yleiset.tallennaJaJulkaise')}
           </Button>
@@ -44,4 +47,4 @@ const OppilaitosPageFooter = ({ oppilaitos, oppilaitosIsLoading = false }) => {
   );
 };
 
-export default OppilaitosPageFooter;
+export default OppilaitoksenOsaPageFooter;

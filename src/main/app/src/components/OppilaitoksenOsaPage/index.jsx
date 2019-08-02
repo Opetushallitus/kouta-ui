@@ -22,8 +22,9 @@ const OppilaitoksenOsaPage = ({
       header={<OppilaitoksenOsaPageHeader organisaatio={organisaatio} />}
       footer={
         <OppilaitoksenOsaPageFooter
-          oppilaitoksenOsa={{}}
+          oppilaitoksenOsa={null}
           oppilaitoksenOsaIsLoading={false}
+          organisaatioOid={organisaatioOid}
         />
       }
     >

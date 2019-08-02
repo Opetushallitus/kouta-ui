@@ -21,7 +21,11 @@ const OppilaitosPage = ({
       steps={<Steps />}
       header={<OppilaitosPageHeader organisaatio={organisaatio} />}
       footer={
-        <OppilaitosPageFooter oppilaitos={{}} oppilaitosIsLoading={false} />
+        <OppilaitosPageFooter
+          oppilaitos={null}
+          oppilaitosIsLoading={false}
+          organisaatioOid={organisaatioOid}
+        />
       }
     >
       <OppilaitosPageForm organisaatioOid={organisaatioOid} />

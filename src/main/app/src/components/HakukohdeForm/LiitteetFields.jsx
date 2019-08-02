@@ -5,7 +5,7 @@ import get from 'lodash/get';
 import Spacing from '../Spacing';
 import Button from '../Button';
 import Flex, { FlexItem } from '../Flex';
-import { getTestIdProps } from '../../utils';
+import { getTestIdProps, getFirstLanguageValue } from '../../utils';
 import useKoodistoOptions from '../useKoodistoOptions';
 import useTranslation from '../useTranslation';
 import FieldArrayList from '../FieldArrayList';
@@ -23,15 +23,32 @@ import {
   FormFieldRadioGroup,
 } from '../FormFields';
 
-const ContactInfo = ({ osoite, postinumero, postitoimipaikka, sahkoposti }) => {
-  return osoite && postinumero && postitoimipaikka && sahkoposti
-    ? [osoite, `${postinumero} ${postitoimipaikka}`, sahkoposti].map(
-        (value, index) => (
-          <Typography variant="secondary" as="div" key={index}>
-            {value}
-          </Typography>
-        ),
-      )
+const ContactInfo = ({
+  osoite,
+  postinumero,
+  postitoimipaikka,
+  sahkoposti,
+  language,
+}) => {
+  const translatedOsoite = getFirstLanguageValue(osoite, language);
+  const translatedPostitoimipaikka = getFirstLanguageValue(
+    postitoimipaikka,
+    language,
+  );
+
+  return translatedOsoite &&
+    postinumero &&
+    translatedPostitoimipaikka &&
+    sahkoposti
+    ? [
+        translatedOsoite,
+        `${postinumero} ${translatedPostitoimipaikka}`,
+        sahkoposti,
+      ].map((value, index) => (
+        <Typography variant="secondary" as="div" key={index}>
+          {value}
+        </Typography>
+      ))
     : null;
 };
 
@@ -125,7 +142,7 @@ const ToimitustapaPaikkaFields = ({
   ) {
     return (
       <Spacing marginTop={2}>
-        <ContactInfo {...contactInfo} />
+        <ContactInfo {...contactInfo} language={language} />
       </Spacing>
     );
   }

@@ -13,8 +13,6 @@ const OppilaitoksenOsaPageForm = ({ organisaatio, oppilaitoksenOsa }) => {
     organisaatio,
   ]);
 
-  console.log(organisaatio);
-
   const initialValues = useMemo(
     () => ({
       yhteystiedot: {

@@ -18,7 +18,7 @@ module.exports = {
         liitteidenToimitustapa: null,
         liitteet: [
           {
-            toimitustapa: 'muu_osoite',
+            toimitustapa: 'osoite',
             tyyppi: 'liitetyypitamm_0#1',
             nimi: {
               fi: 'Nimi',
@@ -77,12 +77,12 @@ module.exports = {
         valintaperuste: '649adb37-cd4d-4846-91a9-84b58b90f928',
         minEnsikertalaisenAloituspaikat: null,
         maxEnsikertalaisenAloituspaikat: null,
-        eriHakulomakeKuinHaulla: true,
+        kaytetaanHaunHakulomaketta: false,
         hakulomaketyyppi: 'ataru',
         hakulomakeAtaruId: 'lomake_1',
         hakulomakeLinkki: {},
         hakulomakeKuvaus: {},
-        eriAlkamiskausi: true,
+        kaytetaanHaunAlkamiskautta: false,
         organisaatioOid: '1.1.1.1.1.1',
         toteutusOid: '2.1.1.1.1.1',
         hakuOid: '4.1.1.1.1.1',
@@ -108,7 +108,7 @@ module.exports = {
         liitteidenToimitustapa: null,
         liitteet: [
           {
-            toimitustapa: 'muu_osoite',
+            toimitustapa: 'osoite',
             tyyppi: 'liitetyypitamm_0#1',
             nimi: {
               fi: 'Nimi',
@@ -167,12 +167,12 @@ module.exports = {
         valintaperuste: '649adb37-cd4d-4846-91a9-84b58b90f928',
         minEnsikertalaisenAloituspaikat: 1,
         maxEnsikertalaisenAloituspaikat: 5,
-        eriHakulomakeKuinHaulla: true,
+        kaytetaanHaunHakulomaketta: false,
         hakulomaketyyppi: 'ataru',
         hakulomakeAtaruId: 'lomake_1',
         hakulomakeLinkki: {},
         hakulomakeKuvaus: {},
-        eriAlkamiskausi: true,
+        kaytetaanHaunAlkamiskautta: false,
         organisaatioOid: '1.1.1.1.1.1',
         toteutusOid: '2.1.1.1.1.1',
         hakuOid: '4.1.1.1.1.1',
@@ -196,7 +196,7 @@ module.exports = {
         maxAloituspaikat: 150,
         minEnsikertalaisenAloituspaikat: 39,
         maxEnsikertalaisenAloituspaikat: 49,
-        eriAlkamiskausi: true,
+        kaytetaanHaunAlkamiskautta: false,
         pohjakoulutusvaatimusKoodiUrit: ['pohjakoulutusvaatimustoinenaste_0#1'],
         muuPohjakoulutusvaatimus: {},
         toinenAsteOnkoKaksoistutkinto: true,
@@ -207,7 +207,7 @@ module.exports = {
         liitteidenToimitustapa: null,
         liitteet: [
           {
-            toimitustapa: 'muu_osoite',
+            toimitustapa: 'osoite',
             tyyppi: 'liitetyypitamm_0#1',
             nimi: {
               fi: 'Nimi',
@@ -265,7 +265,7 @@ module.exports = {
         organisaatioOid: '1.1.1.1.1.1',
         kielivalinta: ['fi'],
         modified: '2019-04-04T08:28',
-        eriHakulomakeKuinHaulla: true,
+        kaytetaanHaunHakulomaketta: false,
         hakulomaketyyppi: 'ataru',
         hakulomakeAtaruId: '12345',
         hakulomakeKuvaus: {},

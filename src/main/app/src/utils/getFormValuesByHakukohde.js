@@ -26,17 +26,17 @@ const getFormValuesByHakukohde = hakukohde => {
     valintaperuste = '',
     minEnsikertalaisenAloituspaikat = '',
     maxEnsikertalaisenAloituspaikat = '',
-    eriHakulomakeKuinHaulla,
+    kaytetaanHaunHakulomaketta,
     hakulomaketyyppi,
     hakulomakeAtaruId,
     hakulomakeKuvaus,
     hakulomakeLinkki,
-    eriAlkamiskausi,
+    kaytetaanHaunAlkamiskautta,
   } = hakukohde;
 
   return {
     alkamiskausi: {
-      eriAlkamiskausi: Boolean(eriAlkamiskausi),
+      eriAlkamiskausi: !kaytetaanHaunAlkamiskautta,
       kausi: alkamiskausiKoodiUri,
       vuosi: {
         value: isNumeric(alkamisvuosi) ? alkamisvuosi.toString() : '',
@@ -127,7 +127,7 @@ const getFormValuesByHakukohde = hakukohde => {
         hakulomakeKuvaus,
         hakulomakeLinkki,
       }),
-      eriHakulomake: Boolean(eriHakulomakeKuinHaulla),
+      eriHakulomake: !kaytetaanHaunHakulomaketta,
     },
   };
 };

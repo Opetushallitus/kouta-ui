@@ -169,12 +169,12 @@ const getHakukohdeByFormValues = values => {
     valintaperuste,
     minEnsikertalaisenAloituspaikat,
     maxEnsikertalaisenAloituspaikat,
-    eriHakulomakeKuinHaulla: eriHakulomake,
+    kaytetaanHaunHakulomaketta: !eriHakulomake,
     hakulomaketyyppi,
     hakulomakeAtaruId,
     hakulomakeLinkki,
     hakulomakeKuvaus,
-    eriAlkamiskausi,
+    kaytetaanHaunAlkamiskautta: !eriAlkamiskausi,
   };
 };
 

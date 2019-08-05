@@ -8,6 +8,7 @@ import OppilaitosPageHeader from './OppilaitosPageHeader';
 import OppilaitosPageFooter from './OppilaitosPageFooter';
 import useApiAsync from '../useApiAsync';
 import getOppilaitos from '../../utils/kouta/getOppilaitos';
+import Spin from '../Spin';
 
 const Steps = () => <OppilaitosFormSteps activeStep="oppilaitos" />;
 
@@ -20,10 +21,17 @@ const OppilaitosPage = ({
   const { organisaatio } = useOrganisaatio(organisaatioOid);
   const { oppilaitosUpdatedAt } = state;
 
-  const { data: oppilaitos, isLoading: oppilaitosIsLoading } = useApiAsync({
+  const {
+    data: oppilaitos,
+    isLoading: oppilaitosIsLoading,
+    finishedAt,
+  } = useApiAsync({
     promiseFn: getOppilaitos,
+    organisaatioOid,
     watch: JSON.stringify([organisaatioOid, oppilaitosUpdatedAt]),
   });
+
+  const oppilaitosIsResolved = !!finishedAt;
 
   return (
     <FormPage
@@ -37,7 +45,14 @@ const OppilaitosPage = ({
         />
       }
     >
-      <OppilaitosPageForm organisaatioOid={organisaatioOid} />
+      {organisaatio && oppilaitosIsResolved ? (
+        <OppilaitosPageForm
+          organisaatio={organisaatio}
+          oppilaitos={oppilaitos}
+        />
+      ) : (
+        <Spin center />
+      )}
     </FormPage>
   );
 };

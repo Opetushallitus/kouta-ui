@@ -27,6 +27,7 @@ const OppilaitoksenOsaPage = ({
     finishedAt,
   } = useApiAsync({
     promiseFn: getOppilaitoksenOsa,
+    organisaatioOid,
     watch: JSON.stringify([organisaatioOid, oppilaitoksenOsaUpdatedAt]),
   });
 

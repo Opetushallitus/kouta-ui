@@ -133,7 +133,12 @@ const StyleButton = ({
   }, [editorState, styleName, inline, block]);
 
   return (
-    <StyleButtonBase onClick={onSelect} active={isActive} {...props}>
+    <StyleButtonBase
+      tabIndex="-1"
+      onClick={onSelect}
+      active={isActive}
+      {...props}
+    >
       <StyleIcon type={icon} />
     </StyleButtonBase>
   );
@@ -162,6 +167,7 @@ const HeaderSelect = ({ editorState, onChange, editorRef }) => {
   return (
     <HeaderSelectContainer>
       <Select
+        tabIndex="-1"
         options={HEADER_OPTIONS}
         value={{ value }}
         onChange={onSelect}
@@ -262,6 +268,7 @@ const LinkButton = ({ editorState, onChange, editorRef, ...props }) => {
       {({ onToggle, ref, visible }) => (
         <div ref={ref}>
           <StyleButtonBase
+            tabIndex="-1"
             onClick={e => {
               e.preventDefault();
               !visible && setLinkByEditorState();

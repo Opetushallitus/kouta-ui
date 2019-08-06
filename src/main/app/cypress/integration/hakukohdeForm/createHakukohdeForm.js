@@ -174,7 +174,7 @@ const fillLiitteetSection = cy => {
       });
 
       cy.getByTestId('toimitustapa').within(() => {
-        getRadio('muu_osoite', cy).click({ force: true });
+        getRadio('osoite', cy).click({ force: true });
       });
 
       getByTestId('osoite', cy)

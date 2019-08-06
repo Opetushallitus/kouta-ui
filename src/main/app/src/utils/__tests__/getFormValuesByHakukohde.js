@@ -93,9 +93,9 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
     valintaperuste: 'peruste_1#1',
     minEnsikertalaisenAloituspaikat: 39,
     maxEnsikertalaisenAloituspaikat: 49,
-    hakulomakeId: '12345',
+    hakulomakeAtaruId: '12345',
     hakulomaketyyppi: HAKULOMAKETYYPPI.ATARU,
-    eriHakulomake: true,
+    eriHakulomakeKuinHaulla: true,
     eriAlkamiskausi: true,
   });
 

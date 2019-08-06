@@ -2,7 +2,7 @@ import { HAKULOMAKETYYPPI } from '../constants';
 
 const getHakulomakeFieldsValues = ({
   hakulomaketyyppi,
-  hakulomakeId,
+  hakulomakeAtaruId,
   hakulomakeLinkki,
   hakulomakeKuvaus,
 }) => {
@@ -10,7 +10,7 @@ const getHakulomakeFieldsValues = ({
     tyyppi: hakulomaketyyppi,
     lomake: [HAKULOMAKETYYPPI.ATARU].includes(hakulomaketyyppi)
       ? {
-          [hakulomaketyyppi]: { value: hakulomakeId || '' },
+          [hakulomaketyyppi]: { value: hakulomakeAtaruId || '' },
         }
       : {},
     linkki: hakulomakeLinkki || {},

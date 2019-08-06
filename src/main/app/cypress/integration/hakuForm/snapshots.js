@@ -51,7 +51,7 @@ module.exports = {
         hakukohteenMuokkaamisenTakaraja: '2019-12-11T19:15',
         ajastettuJulkaisu: '2019-12-05T06:45',
         alkamisvuosi: 2019,
-        hakulomakeId: 'lomake_1',
+        hakulomakeAtaruId: 'lomake_1',
         hakulomakeLinkki: {},
         hakulomakeKuvaus: {},
         valintakokeet: [
@@ -136,7 +136,7 @@ module.exports = {
         hakukohteenMuokkaamisenTakaraja: '2019-02-08T07:05',
         ajastettuJulkaisu: '2019-12-05T06:45',
         alkamisvuosi: 2024,
-        hakulomakeId: '12345',
+        hakulomakeAtaruId: '12345',
         hakulomakeLinkki: {},
         hakulomakeKuvaus: {},
         valintakokeet: [
@@ -179,7 +179,7 @@ module.exports = {
         kohdejoukkoKoodiUri: 'haunkohdejoukko_0#1',
         kohdejoukonTarkenneKoodiUri: 'haunkohdejoukontarkenne_0#1',
         hakulomaketyyppi: 'ataru',
-        hakulomakeId: '12345',
+        hakulomakeAtaruId: '12345',
         hakulomakeKuvaus: {},
         hakulomakeLinkki: {},
         metadata: {

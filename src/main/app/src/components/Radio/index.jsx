@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 
 import { getThemeProp } from '../../theme';
 import { isArray } from '../../utils';
+import { disabledStyle } from '../../system';
 
 const RadioContainer = styled.div`
   ${({ last }) =>
@@ -75,12 +76,7 @@ const Label = styled.label`
   line-height: 1.5;
   color: ${getThemeProp('palette.text.primary')};
 
-  ${({ disabled }) =>
-    disabled &&
-    css`
-      opacity: 0.5;
-      cursor: not-allowed;
-    `}
+  ${disabledStyle}
 `;
 
 const LabelWrapper = styled.div`

@@ -10,7 +10,7 @@ const getFormValuesByHaku = haku => {
     kohdejoukkoKoodiUri = '',
     kohdejoukonTarkenneKoodiUri = '',
     hakulomaketyyppi = '',
-    hakulomakeId = '',
+    hakulomakeAtaruId = '',
     hakulomakeKuvaus = {},
     hakulomakeLinkki = {},
     hakukohteenLiittamisenTakaraja,
@@ -53,7 +53,7 @@ const getFormValuesByHaku = haku => {
     },
     hakulomake: getHakulomakeFieldsValues({
       hakulomaketyyppi,
-      hakulomakeId,
+      hakulomakeAtaruId,
       hakulomakeKuvaus,
       hakulomakeLinkki,
     }),

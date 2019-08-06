@@ -4,8 +4,6 @@ exports[`getHakukohdeByFormValues returns correct hakukohde given form values 1`
 Object {
   "alkamiskausiKoodiUri": "kausi_1#1",
   "alkamisvuosi": 2020,
-  "eriAlkamiskausi": true,
-  "eriHakulomake": true,
   "hakuajat": Array [
     Object {
       "alkaa": "2019-04-17T05:52",
@@ -16,11 +14,13 @@ Object {
       "paattyy": "2019-05-18T05:52",
     },
   ],
-  "hakulomakeId": "12345",
+  "hakulomakeAtaruId": "12345",
   "hakulomakeKuvaus": Object {},
   "hakulomakeLinkki": Object {},
   "hakulomaketyyppi": "ataru",
   "kaytetaanHaunAikataulua": false,
+  "kaytetaanHaunAlkamiskautta": false,
+  "kaytetaanHaunHakulomaketta": false,
   "kielivalinta": Array [
     "fi",
     "sv",

@@ -146,7 +146,7 @@ export const VALINTAPERUSTE_ROLE = 'APP_TARJONTA';
 export const HAKUTAPA_YHTEISHAKU_KOODI_URI = 'hakutapa_01';
 
 export const LIITTEEN_TOIMITUSTAPA = {
-  TOIMITETAAN_LAHETTAMISEN_YHTEYDESSA: 'toimitetaan_lahettamisen_yhteydessa',
-  JARJESTAJAN_OSOITE: 'jarjestajan_osoite',
-  MUU_OSOITE: 'muu_osoite',
+  TOIMITETAAN_LAHETTAMISEN_YHTEYDESSA: 'lomake',
+  JARJESTAJAN_OSOITE: 'hakijapalvelu',
+  MUU_OSOITE: 'osoite',
 };

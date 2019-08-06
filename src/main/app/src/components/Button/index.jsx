@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import get from 'lodash/get';
 
 import { getThemeProp } from '../../theme';
+import { disabledStyle } from '../../system';
 
 const getOutlinedColorCss = ({ color, theme }) => {
   const outlineColor =
@@ -119,13 +120,7 @@ const ButtonBase = styled.button`
 
   ${getVariantCss}
   ${getSizeCss};
-
-  ${({ disabled }) =>
-    disabled &&
-    css`
-      opacity: 0.5;
-      cursor: not-allowed;
-    `}
+  ${disabledStyle};
 
   ${({ fullWidth }) =>
     fullWidth &&

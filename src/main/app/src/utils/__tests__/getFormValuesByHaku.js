@@ -37,7 +37,7 @@ const baseHaku = {
   ajastettuJulkaisu: '2020-01-20T05:00',
   alkamisvuosi: 2020,
   hakulomaketyyppi: HAKULOMAKETYYPPI.ATARU,
-  hakulomakeId: '12345',
+  hakulomakeAtaruId: '12345',
   valintakokeet: [
     {
       tyyppi: 'tyyppi_1#1',

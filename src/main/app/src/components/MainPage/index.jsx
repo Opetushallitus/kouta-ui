@@ -17,6 +17,8 @@ import EditValintaperustePage from '../EditValintaperustePage';
 import RouterScrollToTop from '../RouterScrollToTop';
 import CreateSoraKuvausPage from '../CreateSoraKuvausPage';
 import EditSoraKuvausPage from '../EditSoraKuvausPage';
+import OppilaitosPage from '../OppilaitosPage';
+import OppilaitoksenOsaPage from '../OppilaitoksenOsaPage';
 
 const MainPage = ({ history }) => {
   return (
@@ -86,6 +88,16 @@ const MainPage = ({ history }) => {
           <Route
             path="/sora-kuvaus/:id/muokkaus"
             component={EditSoraKuvausPage}
+            exact
+          />
+          <Route
+            path="/organisaatio/:organisaatioOid/oppilaitos"
+            component={OppilaitosPage}
+            exact
+          />
+          <Route
+            path="/organisaatio/:organisaatioOid/oppilaitoksen-osa"
+            component={OppilaitoksenOsaPage}
             exact
           />
           <Redirect to="/" />

@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import FormStepsIcon from './FormStepsIcon';
+import FormStepIcon from '../FormStepIcon';
 import useTranslation from '../useTranslation';
 
 const GroupContainer = styled.div`
   display: flex;
 `;
 
-const StepsIcon = styled(FormStepsIcon)`
+const StepsIcon = styled(FormStepIcon)`
   flex: 0;
   margin-right: ${({ theme }) => theme.spacing.unit * 3}px;
 

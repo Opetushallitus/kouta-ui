@@ -7,6 +7,10 @@ import Button from '../Button';
 import useTranslation from '../useTranslation';
 import Container from '../Container';
 
+const HeaderContainer = styled.div`
+  background-color: white;
+`;
+
 const StepsContainer = styled.div`
   display: flex;
   padding: ${({ theme }) => theme.spacing.unit * 3}px 0px;
@@ -55,7 +59,9 @@ const FormPage = ({
 
   return (
     <>
-      <Container>{header}</Container>
+      <HeaderContainer>
+        <Container>{header}</Container>
+      </HeaderContainer>
       <StepsContainer>
         <Container>{steps}</Container>
       </StepsContainer>

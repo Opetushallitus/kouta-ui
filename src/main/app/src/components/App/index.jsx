@@ -24,33 +24,31 @@ const App = ({
   persistor,
 }) => {
   return (
-    <>
-      <Provider store={store}>
-        <LocalisationProvider i18n={localisation}>
-          <ThemeProvider theme={theme}>
-            <PersistGate
-              persistor={persistor}
-              loading={<FullSpin size="large" />}
-            >
-              <HttpContext.Provider value={httpClient}>
-                <UrlContext.Provider value={urls}>
-                  <Suspense fallback={<FullSpin size="large" />}>
-                    <ErrorBoundaryNotifier>
-                      <VirkailijaRaamit />
-                      <UserGate fallback={<FullSpin size="large" />}>
-                        <HttpErrorNotifier />
-                        <MainPage history={history} />
-                      </UserGate>
-                    </ErrorBoundaryNotifier>
-                  </Suspense>
-                </UrlContext.Provider>
-              </HttpContext.Provider>
-            </PersistGate>
-          </ThemeProvider>
-        </LocalisationProvider>
-      </Provider>
-      <GlobalStyle />
-    </>
+    <Provider store={store}>
+      <LocalisationProvider i18n={localisation}>
+        <ThemeProvider theme={theme}>
+          <PersistGate
+            persistor={persistor}
+            loading={<FullSpin size="large" />}
+          >
+            <HttpContext.Provider value={httpClient}>
+              <UrlContext.Provider value={urls}>
+                <GlobalStyle />
+                <Suspense fallback={<FullSpin size="large" />}>
+                  <ErrorBoundaryNotifier>
+                    <VirkailijaRaamit />
+                    <UserGate fallback={<FullSpin size="large" />}>
+                      <HttpErrorNotifier />
+                      <MainPage history={history} />
+                    </UserGate>
+                  </ErrorBoundaryNotifier>
+                </Suspense>
+              </UrlContext.Provider>
+            </HttpContext.Provider>
+          </PersistGate>
+        </ThemeProvider>
+      </LocalisationProvider>
+    </Provider>
   );
 };
 

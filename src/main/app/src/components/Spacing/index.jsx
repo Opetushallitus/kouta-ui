@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-import { spacingCss } from '../../theme';
+import { space } from '../../system';
 
 const Spacing = styled.div`
-  ${spacingCss};
+  ${space}
 `;
 
 export default Spacing;

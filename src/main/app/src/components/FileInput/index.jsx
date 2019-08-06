@@ -12,6 +12,7 @@ import { noop, isArray, isString } from '../../utils';
 import Spin from '../Spin';
 import Anchor from '../Anchor';
 import Button from '../Button';
+import { disabledStyle } from '../../system';
 
 const Container = styled.div`
   border: 1px dashed ${getThemeProp('palette.border')};
@@ -23,12 +24,7 @@ const Container = styled.div`
   transition: border-color 0.25s, background-color 0.25s;
   min-height: 4rem;
 
-  ${({ disabled }) =>
-    disabled &&
-    css`
-      opacity: 0.5;
-      cursor: not-allowed;
-    `}
+  ${disabledStyle}
 
   ${({ active }) =>
     active &&
@@ -130,7 +126,13 @@ const ValueContent = ({ value, t, onRemove, message }) => {
       </FlexItem>
       <FlexItem>{links}</FlexItem>
       <FlexItem marginTop={2}>
-        <Button size="small" color="danger" variant="outlined" type="button" onClick={onRemove}>
+        <Button
+          size="small"
+          color="danger"
+          variant="outlined"
+          type="button"
+          onClick={onRemove}
+        >
           {t('yleiset.poista')}
         </Button>
       </FlexItem>

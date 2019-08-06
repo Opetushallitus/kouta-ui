@@ -143,14 +143,7 @@ export const memoizePromise = (fn, opts = {}) =>
 
 export const compose = flowRight;
 
-export const isNonEmptyObject = value =>
-  isObject(value) && Object.keys(value).length > 0;
-
 export const noop = () => {};
-
-export const getAsArray = value => (isArray(value) ? value : []);
-
-export const getAsObject = value => (isObject(value) ? value : {});
 
 export const isBoolean = value => typeof value === 'boolean';
 

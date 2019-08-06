@@ -42,6 +42,12 @@ const LabelContainer = styled.div`
   color: ${getThemeProp('palette.text.primary')};
   font-size: 0.8rem;
   white-space: nowrap;
+
+  ${({ active }) =>
+    active &&
+    css`
+      color: ${getThemeProp('palette.primary.main')};
+    `}
 `;
 
 const IconBase = styled(Icon)`
@@ -55,7 +61,7 @@ const IconBase = styled(Icon)`
     `}
 `;
 
-const FormStepsIcon = ({
+const FormStepIcon = ({
   children = null,
   icon = null,
   active = false,
@@ -66,8 +72,8 @@ const FormStepsIcon = ({
     <IconContainer active={active} done={done}>
       <IconBase active={active} type={icon} />
     </IconContainer>
-    <LabelContainer>{children}</LabelContainer>
+    <LabelContainer active={active}>{children}</LabelContainer>
   </Container>
 );
 
-export default FormStepsIcon;
+export default FormStepIcon;

@@ -161,6 +161,8 @@ export default {
     avaaLomake: 'Avaa lomake',
     valitseHaunKohdejoukko: 'Valitse haun kohdejoukko',
     valitseHaunKohdejoukonTarkenne: 'Valitse haun kohdejoukon tarkenne',
+    oppilaitos: 'Oppilaitos',
+    oppilaitoksenOsa: 'Oppilaitoksen osa',
   },
   validointivirheet: {
     syotaArvo: 'Syötä kentälle arvo',
@@ -378,5 +380,44 @@ export default {
     soraKuvausOnJulkinen: 'SORA-kuvaus on julkinen',
     soraKuvauksenNayttamiseenLiittyvatTiedot:
       'SORA-kuvauksen näyttämiseen liittyvät tiedot',
+  },
+  oppilaitoslomake: {
+    oppilaitoksenPerustiedot: 'Oppilaitoksen perustiedot',
+    oppilaitoksenNimi: 'Oppilaitoksen nimi',
+    paikkakunta: 'Paikkakunta',
+    tyyppi: 'Tyyppi',
+    opetuskielet: 'Opetuskielet',
+    syotaPerustiedot: 'Syötä perustiedot',
+    perustiedotInfo:
+      'Syötä oppilaitostasi koskevat perustiedot, jotka näkyvät Opintopolussa. Mikäli jokin tiedoista ei ole tarpeellinen oppilaitoksellesi, jätä se tyhjäksi.',
+    opiskelijoita: 'Opiskelijoita',
+    korkeakouluja: 'Korkeakouluja',
+    tiedekuntia: 'Tiedekuntia',
+    kampuksia: 'Kampuksia',
+    yksikoita: 'Yksiköitä',
+    toimipisteita: 'Toimipisteitä',
+    akatemioita: 'Akatemioita',
+    oppilaitoksenEsittely: 'Oppilaitoksen esittely',
+    lisaaOppilaitoksenEsittelyteksti: 'Lisää oppilaitoksen esittelyteksi',
+    oppilaitoksenOsat: 'Oppilaitoksen osat',
+    valitseOppilaitoksenOsat: 'Valitse aktiiviset oppilaitoksen osat',
+    tietoaOpiskelusta: 'Tietoa opiskelusta',
+    tietoaOpiskelustaOsiotInfo:
+      'Voit halutessasi lisätä vapaasti täytettäviä osioita, jotka antavat tarkempaa tietoa oppilaitoksessa opiskelusta.',
+    valitseLisattavaOsio: 'Valitse lisättävä osio',
+    oppilaitoksenYhteystiedot: 'Oppilaitoksen yhteystiedot',
+    yhteystiedotInfo: 'Anna oppilaitokselle tarvittavat yhteystiedot',
+  },
+  oppilaitoksenOsaLomake: {
+    oppilaitoksenOsanPerustiedot: 'Oppilaitoksen osan perustiedot',
+    oppilaitoksenOsanNimi: 'Oppilaitoksen osan nimi',
+    perustiedotInfo:
+      'Syötä oppilaitostasi koskevat perustiedot, jotka näkyvät Opintopolussa.',
+    kampus: 'Kampus',
+    lisaaOppilaitoksenOsanEsittelyteksti:
+      'Lisää oppilaitoksen osan esittelyteksti',
+    oppilaitoksenOsanEsittely: 'Oppilaitoksen osan esittely',
+    oppilaitoksenOsanYhteystiedot: 'Oppilaitoksen osan yhteystiedot',
+    yhteystiedotInfo: 'Anna oppilaitokselle tarvittavat yhteystiedot',
   },
 };

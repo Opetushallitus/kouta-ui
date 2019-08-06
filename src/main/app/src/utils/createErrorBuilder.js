@@ -1,7 +1,8 @@
 import get from 'lodash/get';
 import set from 'lodash/set';
 
-import { isArray, getInvalidTranslations, isNonEmptyObject } from './index';
+import { isArray, getInvalidTranslations } from './index';
+import isEmpty from './isEmpty';
 
 const clone = value => JSON.parse(JSON.stringify(value));
 
@@ -90,7 +91,7 @@ class ErrorBuilder {
         return makeBuilder(new ErrorBuilder(v), v).getErrors();
       });
 
-      if (errors.find(isNonEmptyObject)) {
+      if (errors.find(e => !isEmpty(e))) {
         this.setError(path, errors);
       }
     }

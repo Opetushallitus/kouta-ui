@@ -3,6 +3,7 @@ import get from 'lodash/get';
 
 import { isFunction } from '../../utils';
 import useFormConfig from '../useFormConfig';
+import Box from '../Box';
 
 const getVisibleChildren = (children, config, configured) => {
   return React.Children.toArray(children).filter(c => {
@@ -34,30 +35,33 @@ const FormCollapseGroup = ({
   const visibleChildren = getVisibleChildren(children, config, configured);
 
   return React.Children.map(visibleChildren, (child, index) => {
+    const isLast = index === visibleChildren.length - 1;
+
     const childProps = enabled
       ? {
           index,
           defaultOpen,
           active: index === activeStep,
-          onContinue:
-            index < visibleChildren.length - 1
-              ? () => {
-                  if (isFunction(child.props.onContinue)) {
-                    child.props.onContinue();
-                  }
-
-                  if (index < visibleChildren.length - 1) {
-                    return setActiveStep(index + 1);
-                  }
+          onContinue: !isLast
+            ? () => {
+                if (isFunction(child.props.onContinue)) {
+                  child.props.onContinue();
                 }
-              : null,
+
+                if (!isLast) {
+                  return setActiveStep(index + 1);
+                }
+              }
+            : null,
         }
       : {
           index,
           defaultOpen,
         };
 
-    return React.cloneElement(child, childProps);
+    return (
+      <Box mb={isLast ? 0 : 4}>{React.cloneElement(child, childProps)}</Box>
+    );
   });
 };
 

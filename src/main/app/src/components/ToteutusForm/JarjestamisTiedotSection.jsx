@@ -226,14 +226,14 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
           </FlexItem>
         </Flex>
       </Spacing>
-      {isKorkeakoulu ? (
-        <Spacing marginBottom={4}>
-          <DividerHeading>
-            {t('toteutuslomake.onkoStipenditKaytossa')}
-          </DividerHeading>
-          <StipendiFields language={language} name={name} />
-        </Spacing>
-      ) : null}
+
+      <Spacing marginBottom={4}>
+        <DividerHeading>
+          {t('toteutuslomake.onkoStipenditKaytossa')}
+        </DividerHeading>
+        <StipendiFields language={language} name={name} />
+      </Spacing>
+
       <Spacing marginBottom={4}>
         <DividerHeading>
           {t('toteutuslomake.koulutuksenAlkamiskausi')}
@@ -251,6 +251,7 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
           </FlexItem>
         </Flex>
       </Spacing>
+      
       <Spacing marginBottom={4}>
         <DividerHeading>{t('yleiset.valitseLisattavaOsio')}</DividerHeading>
         <div {...getTestIdProps('osiotSelect')}>

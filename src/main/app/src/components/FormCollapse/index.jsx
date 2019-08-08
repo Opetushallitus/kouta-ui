@@ -7,6 +7,7 @@ import { isFunction, isString, getTestIdProps, isArray } from '../../utils';
 import useTranslation from '../useTranslation';
 import LanguageTabs from './LanguageTabs';
 import Typography from '../Typography';
+import FormConfigSectionContext from '../FormConfigSectionContext';
 
 const CollapseFooterContainer = styled.div`
   display: flex;
@@ -45,7 +46,7 @@ const scrollIntoView = el => {
   } catch (e) {}
 };
 
-const renderChildren = ({ onContinue, children, language }) => {
+const renderChildren = ({ onContinue, children, language, section }) => {
   const childrenProps = {
     onContinue,
     language,
@@ -59,7 +60,13 @@ const renderChildren = ({ onContinue, children, language }) => {
     renderedChildren = React.cloneElement(children, childrenProps);
   }
 
-  return renderedChildren;
+  return section ? (
+    <FormConfigSectionContext.Provider value={section}>
+      {renderedChildren}
+    </FormConfigSectionContext.Provider>
+  ) : (
+    renderedChildren
+  );
 };
 
 const renderActions = ({ actions, onContinue, t }) => {
@@ -124,6 +131,7 @@ const FormCollapse = ({
   active = false,
   defaultOpen = false,
   scrollOnActive = true,
+  section,
   ...props
 }) => {
   const { t } = useTranslation();
@@ -174,7 +182,7 @@ const FormCollapse = ({
         toggleOnHeaderClick={false}
         {...props}
       >
-        {renderChildren({ onContinue, children, language })}
+        {renderChildren({ onContinue, children, language, section })}
       </Collapse>
     </CollapseWrapper>
   );

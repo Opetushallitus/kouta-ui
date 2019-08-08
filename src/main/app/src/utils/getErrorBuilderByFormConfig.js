@@ -1,16 +1,22 @@
 import get from 'lodash/get';
 
 import { isFunction } from './index';
-import createErrorBuilder from '../createErrorBuilder';
+import createErrorBuilder from './createErrorBuilder';
 
 const getErrorBuilderByFormConfig = (config, values) => {
-  const fields = get(config, 'fields') || {};
+  const sections = get(config, 'sections') || {};
 
-  return Object.entries(fields).reduce((acc, [, value]) => {
-    const validate = get(value, 'validate');
+  return Object.entries(sections)
+    .flatMap(([, value]) => {
+      const fields = get(value, 'fields') || {};
 
-    return isFunction(validate) ? validate(acc, values) : acc;
-  }, createErrorBuilder(values));
+      return Object.entries(fields);
+    })
+    .reduce((acc, [, value]) => {
+      const validate = get(value, 'validate');
+
+      return isFunction(validate) ? validate(acc, values, config) : acc;
+    }, createErrorBuilder(values));
 };
 
 export default getErrorBuilderByFormConfig;

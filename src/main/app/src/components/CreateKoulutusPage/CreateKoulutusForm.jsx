@@ -6,6 +6,9 @@ import getKoulutusByOid from '../../utils/kouta/getKoulutusByOid';
 import useApiAsync from '../useApiAsync';
 import { POHJAVALINTA } from '../../constants';
 import ReduxForm from '../ReduxForm';
+import useFieldValue from '../useFieldValue';
+import getKoulutusFormConfig from '../../utils/getKoulutusFormConfig';
+import FormConfigContext from '../FormConfigContext';
 
 const resolveFn = () => Promise.resolve();
 
@@ -20,6 +23,20 @@ const getInitialValues = koulutus => {
   return koulutus
     ? { ...getCopyValues(koulutus.oid), ...getFormValuesByKoulutus(koulutus) }
     : initialValues;
+};
+
+const KoulutusFormWrapper = props => {
+  const koulutustyyppi = useFieldValue('koulutustyyppi');
+
+  const config = useMemo(() => getKoulutusFormConfig(koulutustyyppi), [
+    koulutustyyppi,
+  ]);
+
+  return (
+    <FormConfigContext.Provider value={config}>
+      <KoulutusForm {...props} />
+    </FormConfigContext.Provider>
+  );
 };
 
 const CreateKoulutusForm = props => {
@@ -43,7 +60,7 @@ const CreateKoulutusForm = props => {
       initialValues={initialValues}
       enableReinitialize
     >
-      {() => <KoulutusForm steps {...props} />}
+      {() => <KoulutusFormWrapper steps {...props} />}
     </ReduxForm>
   );
 };

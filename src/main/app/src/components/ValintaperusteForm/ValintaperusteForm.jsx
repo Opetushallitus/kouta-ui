@@ -13,19 +13,25 @@ import useFieldValue from '../useFieldValue';
 import PerustiedotSection from './PerustiedotSection';
 import JulkisuusSection from './JulkisuusSection';
 
-const PohjaFormCollapse = ({ children, onSelectBase, ...props }) => {
+const PohjaFormCollapse = ({
+  children,
+  onContinue,
+  onSelectBase,
+  ...props
+}) => {
   const tapa = useFieldValue('pohja.tapa');
   const valinta = useFieldValue('pohja.valinta');
 
-  const onContinue = useCallback(() => {
+  const onPohjaContinue = useCallback(() => {
+    onContinue();
     onSelectBase({
       tapa,
       valinta: get(valinta, 'value'),
     });
-  }, [onSelectBase, tapa, valinta]);
+  }, [onSelectBase, tapa, valinta, onContinue]);
 
   return (
-    <FormCollapse onContinue={onContinue} {...props}>
+    <FormCollapse onContinue={onPohjaContinue} {...props}>
       {children}
     </FormCollapse>
   );

@@ -4,12 +4,12 @@ import { Field } from 'redux-form';
 
 import Typography from '../../Typography';
 import KoulutusSelect from '../KoulutusSelect';
-import ApiAsync from '../../ApiAsync';
 import { getKoulutusByKoodi } from '../../../apiUtils';
 import { getThemeProp } from '../../../theme';
 import { getLanguageValue, getTestIdProps, noop } from '../../../utils';
 import useTranslation from '../../useTranslation';
 import { createFormFieldComponent } from '../../FormFields';
+import useApiAsync from '../../useApiAsync';
 
 const getTutkintonimikkeet = ({ koulutus, language }) => {
   const { tutkintonimikeKoodit = [] } = koulutus;
@@ -26,8 +26,6 @@ const getOsaamisalat = ({ koulutus, language }) => {
     .map(({ nimi }) => getLanguageValue(nimi, language))
     .filter(name => !!name);
 };
-
-const getKoulutus = args => getKoulutusByKoodi(args);
 
 const Container = styled.div`
   display: flex;
@@ -65,31 +63,39 @@ const KoulutusField = createFormFieldComponent(
   }),
 );
 
-const KoulutusInfo = ({ koulutus, language = 'fi' }) => {
+const KoulutusInfo = ({ koulutusKoodiUri, language = 'fi' }) => {
   const { t } = useTranslation();
-  const { opintojenlaajuus } = koulutus;
+
+  const { data: koulutus } = useApiAsync({
+    promiseFn: getKoulutusByKoodi,
+    koodiUri: koulutusKoodiUri,
+    watch: koulutusKoodiUri,
+  });
 
   const {
     nimikkeet,
     osaamisalat,
     koulutusala,
+    opintojenlaajuus,
     opintojenlaajuusYksikko,
     nimi,
   } = useMemo(
     () => ({
-      nimikkeet: getTutkintonimikkeet({ koulutus, language }),
-      osaamisalat: getOsaamisalat({ koulutus, language }),
-      koulutusala: getLanguageValue(koulutus.koulutusala, language),
-      opintojenlaajuusYksikko: getLanguageValue(
-        koulutus.opintojenlaajuusYksikko,
-        language,
-      ),
-      nimi: getLanguageValue(koulutus.nimi, language),
+      nimikkeet: koulutus ? getTutkintonimikkeet({ koulutus, language }) : [],
+      osaamisalat: koulutus ? getOsaamisalat({ koulutus, language }) : [],
+      koulutusala: koulutus
+        ? getLanguageValue(koulutus.koulutusala, language)
+        : undefined,
+      opintojenlaajuusYksikko: koulutus
+        ? getLanguageValue(koulutus.opintojenlaajuusYksikko, language)
+        : undefined,
+      nimi: koulutus ? getLanguageValue(koulutus.nimi, language) : undefined,
+      opintojenlaajuus: koulutus ? koulutus.opintojenlaajuus : undefined,
     }),
     [koulutus, language],
   );
 
-  return (
+  return koulutus ? (
     <Typography>
       <Row>
         <LabelColumn>{t('yleiset.koulutus')}:</LabelColumn>
@@ -114,21 +120,13 @@ const KoulutusInfo = ({ koulutus, language = 'fi' }) => {
         </ContentColumn>
       </Row>
     </Typography>
-  );
+  ) : null;
 };
 
-const InformationAsync = ({ koodiUri, language = 'fi' }) => (
-  <ApiAsync promiseFn={getKoulutus} koodiUri={koodiUri} watch={koodiUri}>
-    {({ data }) =>
-      data ? <KoulutusInfo koulutus={data} language={language} /> : null
-    }
-  </ApiAsync>
-);
-
-const AmmatillinenTiedotSection = ({
+const KoulutuksenTiedotSection = ({
   koulutustyyppi,
   language,
-  koulutusValue,
+  koulutuskoodi,
   name,
 }) => {
   const { t } = useTranslation();
@@ -147,9 +145,9 @@ const AmmatillinenTiedotSection = ({
           </div>
         </Content>
         <InfoContent>
-          {koulutusValue ? (
-            <InformationAsync
-              koodiUri={koulutusValue.value}
+          {koulutuskoodi ? (
+            <KoulutusInfo
+              koulutusKoodiUri={koulutuskoodi.value}
               language={language}
             />
           ) : null}
@@ -159,4 +157,4 @@ const AmmatillinenTiedotSection = ({
   );
 };
 
-export default AmmatillinenTiedotSection;
+export default KoulutuksenTiedotSection;

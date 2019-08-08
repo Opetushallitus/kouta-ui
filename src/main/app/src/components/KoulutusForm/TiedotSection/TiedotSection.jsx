@@ -1,31 +1,67 @@
 import React from 'react';
+import { Field } from 'redux-form';
 
-import AmmattilinenTiedotSection from './AmmatillinenTiedotSection';
-import KorkeakouluTiedotSection from './KorkeakouluTiedotSection';
-import isKorkeakouluKoulutustyyppi from '../../../utils/isKorkeakouluKoulutustyyppi';
-import isAmmatillinenKoulutustyyppi from '../../../utils/isAmmatillinenKoulutustyyppi';
+import FormConfigField from '../../FormConfigField';
+import KoulutuksenTiedotSection from './KoulutuksenTiedotSection';
+import KoulutusKoodiField from './KoulutuskoodiField';
+import Box from '../../Box';
+import OpintojenlaajuusField from './OpintojenlaajuusField';
+import TutkintonimikeField from './TutkintonimikeField';
+import KoulutusalatField from './KoulutusalatField';
+import useTranslation from '../../useTranslation';
+import { FormFieldInput } from '../../FormFields';
+import { getTestIdProps } from '../../../utils';
 
-const TiedotSection = ({ language, koulutustyyppi, koulutusValue, name }) => {
-  if (isAmmatillinenKoulutustyyppi(koulutustyyppi)) {
-    return (
-      <AmmattilinenTiedotSection
-        language={language}
-        koulutustyyppi={koulutustyyppi}
-        koulutusValue={koulutusValue}
-        name={name}
-      />
-    );
-  } else if (isKorkeakouluKoulutustyyppi(koulutustyyppi)) {
-    return (
-      <KorkeakouluTiedotSection
-        language={language}
-        koulutustyyppi={koulutustyyppi}
-        name={name}
-      />
-    );
-  }
+const TiedotSection = ({ language, koulutustyyppi, koulutuskoodi, name }) => {
+  const { t } = useTranslation();
 
-  return null;
+  return (
+    <Box mb={-2}>
+      <FormConfigField name="koulutuskoodiTiedoilla">
+        <Box mb={2}>
+          <KoulutuksenTiedotSection
+            language={language}
+            koulutuskoodi={koulutuskoodi}
+            name={name}
+          />
+        </Box>
+      </FormConfigField>
+
+      <FormConfigField name="koulutuskoodi">
+        <Box mb={2}>
+          <KoulutusKoodiField name={name} koulutustyyppi={koulutustyyppi} />
+        </Box>
+      </FormConfigField>
+
+      <FormConfigField name="opintojenlaajuus">
+        <Box mb={2}>
+          <OpintojenlaajuusField name={name} />
+        </Box>
+      </FormConfigField>
+
+      <FormConfigField name="tutkintonimike">
+        <Box mb={2}>
+          <TutkintonimikeField name={name} />
+        </Box>
+      </FormConfigField>
+
+      <FormConfigField name="koulutusalat">
+        <Box mb={2}>
+          <KoulutusalatField name={name} />
+        </Box>
+      </FormConfigField>
+
+      <FormConfigField name="nimi">
+        <Box mb={2} {...getTestIdProps('nimiInput')}>
+          <Field
+            name={`${name}.nimi.${language}`}
+            component={FormFieldInput}
+            label={t('koulutuslomake.muokkaaKoulutuksenNimea')}
+          />
+        </Box>
+      </FormConfigField>
+    </Box>
+  );
 };
 
 export default TiedotSection;

@@ -18,9 +18,9 @@ const getKuvaus = (koulutus, language) => {
 const getKoulutus = ({ koodiUri, ...args }) =>
   koodiUri ? getKoulutusByKoodi({ koodiUri, ...args }) : Promise.resolve(null);
 
-const AmmatillinenKuvausSection = ({ koulutusValue }) => {
+const TekstiKuvausSection = ({ koulutuskoodi, language }) => {
   const { t } = useTranslation();
-  const koodiUri = get(koulutusValue, 'value');
+  const koodiUri = get(koulutuskoodi, 'value');
 
   const { data } = useApiAsync({
     promiseFn: getKoulutus,
@@ -28,7 +28,7 @@ const AmmatillinenKuvausSection = ({ koulutusValue }) => {
     watch: koodiUri,
   });
 
-  const kuvaus = getKuvaus(data);
+  const kuvaus = getKuvaus(data, language);
 
   return (
     <>
@@ -49,4 +49,4 @@ const AmmatillinenKuvausSection = ({ koulutusValue }) => {
   );
 };
 
-export default AmmatillinenKuvausSection;
+export default TekstiKuvausSection;

@@ -1,24 +1,49 @@
 import React from 'react';
+import { Field } from 'redux-form';
 
-import AmmattilinenKuvausSection from './AmmatillinenKuvausSection';
-import KorkeakouluKuvausSection from './KorkeakouluKuvausSection';
-import isKorkeakouluKoulutustyyppi from '../../../utils/isKorkeakouluKoulutustyyppi';
-import isAmmatillinenKoulutustyyppi from '../../../utils/isAmmatillinenKoulutustyyppi';
+import FormConfigField from '../../FormConfigField';
+import Box from '../../Box';
+import TekstiKuvausSection from './TekstiKuvausSection';
+import { FormFieldInput, FormFieldTextarea } from '../../FormFields';
+import useTranslation from '../../useTranslation';
+import { getTestIdProps } from '../../../utils';
 
-const KuvausSection = ({ language, koulutusValue, koulutustyyppi, name }) => {
-  if (isAmmatillinenKoulutustyyppi(koulutustyyppi)) {
-    return (
-      <AmmattilinenKuvausSection
-        language={language}
-        koulutusValue={koulutusValue}
-        name={name}
-      />
-    );
-  } else if (isKorkeakouluKoulutustyyppi(koulutustyyppi)) {
-    return <KorkeakouluKuvausSection language={language} name={name} />;
-  }
+const KuvausSection = ({ language, koulutuskoodi, name }) => {
+  const { t } = useTranslation();
 
-  return null;
+  return (
+    <Box mb={-2}>
+      <FormConfigField name="tekstiKuvaus">
+        <Box mb={2}>
+          <TekstiKuvausSection
+            name={name}
+            language={language}
+            koulutuskoodi={koulutuskoodi}
+          />
+        </Box>
+      </FormConfigField>
+
+      <FormConfigField name="nimi">
+        <Box mb={2} {...getTestIdProps('kuvauksenNimiInput')}>
+          <Field
+            name={`${name}.nimi.${language}`}
+            component={FormFieldInput}
+            label={t('yleiset.kuvauksenNimi')}
+          />
+        </Box>
+      </FormConfigField>
+
+      <FormConfigField name="kuvaus">
+        <Box mb={2} {...getTestIdProps('kuvausInput')}>
+          <Field
+            name={`${name}.kuvaus.${language}`}
+            component={FormFieldTextarea}
+            label={t('yleiset.kuvaus')}
+          />
+        </Box>
+      </FormConfigField>
+    </Box>
+  );
 };
 
 export default KuvausSection;

@@ -102,8 +102,8 @@ const baseConfig = {
   },
 };
 
-const getHakulomakeConfig = () => {
+const getHakuFormConfig = () => {
   return { ...baseConfig };
 };
 
-export default getHakulomakeConfig;
+export default getHakuFormConfig;

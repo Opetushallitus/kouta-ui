@@ -49,8 +49,9 @@ const ValintaperusteForm = ({
   const languages = kieliversiot || [];
 
   return (
-    <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
+    <FormCollapseGroup enabled={steps} defaultOpen={!steps} configured>
       <FormCollapse
+        section="perustiedot"
         header={t('valintaperustelomake.valintaperusteenPerustiedot')}
         scrollOnActive={false}
         {...getTestIdProps('perustiedotSection')}
@@ -60,6 +61,7 @@ const ValintaperusteForm = ({
 
       {canCopy ? (
         <PohjaFormCollapse
+          section="pohja"
           header={t('yleiset.pohjanValinta')}
           onSelectBase={onSelectBase}
           {...getTestIdProps('pohjaSection')}
@@ -69,6 +71,7 @@ const ValintaperusteForm = ({
       ) : null}
 
       <FormCollapse
+        section="kuvaus"
         header={t('valintaperustelomake.valintaperusteenKuvaus')}
         languages={languages}
         {...getTestIdProps('kuvausSection')}
@@ -77,6 +80,7 @@ const ValintaperusteForm = ({
       </FormCollapse>
 
       <FormCollapse
+        section="valintatapa"
         header={t('valintaperustelomake.valintatapa')}
         languages={languages}
         {...getTestIdProps('valintatapaSection')}
@@ -85,6 +89,7 @@ const ValintaperusteForm = ({
       </FormCollapse>
 
       <FormCollapse
+        section="soraKuvaus"
         header={t('yleiset.soraKuvaus')}
         {...getTestIdProps('soraKuvausSection')}
       >
@@ -95,6 +100,7 @@ const ValintaperusteForm = ({
       </FormCollapse>
 
       <FormCollapse
+        section="julkisuus"
         header={t('valintaperustelomake.valintaperusteenNakyminen')}
         {...getTestIdProps('julkisuusSection')}
       >

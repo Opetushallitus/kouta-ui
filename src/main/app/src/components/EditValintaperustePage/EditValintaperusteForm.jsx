@@ -3,6 +3,10 @@ import React, { useMemo } from 'react';
 import ValintaperusteForm from '../ValintaperusteForm';
 import getFormValuesByValintaperuste from '../../utils/getFormValuesByValintaperuste';
 import ReduxForm from '../ReduxForm';
+import getValintaperusteFormConfig from '../../utils/getValintaperusteFormConfig';
+import FormConfigContext from '../FormConfigContext';
+
+const config = getValintaperusteFormConfig();
 
 const EditValintapersuteetForm = ({ valintaperuste, ...props }) => {
   const initialValues = useMemo(() => {
@@ -12,13 +16,15 @@ const EditValintapersuteetForm = ({ valintaperuste, ...props }) => {
   return (
     <ReduxForm form="editValintaperusteForm" initialValues={initialValues}>
       {() => (
-        <ValintaperusteForm
-          {...props}
-          valintaperuste={valintaperuste}
-          steps={false}
-          canCopy={false}
-          canEditTyyppi={false}
-        />
+        <FormConfigContext.Provider value={config}>
+          <ValintaperusteForm
+            {...props}
+            valintaperuste={valintaperuste}
+            steps={false}
+            canCopy={false}
+            canEditTyyppi={false}
+          />
+        </FormConfigContext.Provider>
       )}
     </ReduxForm>
   );

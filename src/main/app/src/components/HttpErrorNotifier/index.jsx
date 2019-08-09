@@ -30,7 +30,7 @@ export const HttpErrorNotifier = () => {
   const { t } = useTranslation();
 
   const openToastThrottle = useMemo(() => {
-    return throttle(openToast, 5000);
+    return throttle(openToast, 3000, { trailing: false });
   }, [openToast]);
 
   useEffect(() => {

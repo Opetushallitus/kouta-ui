@@ -252,6 +252,7 @@ export default {
       'Voit halutessasi käyttää aiemmin luotuja koulutuksia uuden lomakkeen esitäytettynä pohjana tai kopioida vanhan koulutuksen tiedot.',
     lisatiedotInfo:
       'Voit halutessasi lisätä vapaasti täytettäviä osioita, jotka antavat tarkempaa tietoa koulutuksesta.',
+    valitseOsaamisala: 'Valitse osaamisala',
   },
   toteutuslomake: {
     toteutuksellaEiHakukohteita:

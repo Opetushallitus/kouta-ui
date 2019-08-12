@@ -1,5 +1,4 @@
 import {
-  getByTestId,
   getSelectOption,
   getCheckbox,
   chooseKieliversiotLanguages,
@@ -10,62 +9,68 @@ import {
 
 import { stubKoulutusFormRoutes } from '../../koulutusFormUtils';
 
-const jatka = cy => {
-  getByTestId('jatkaButton', cy).click({ force: true });
+const jatka = () => {
+  cy.getByTestId('jatkaButton').click({ force: true });
 };
 
-const fillKoulutustyyppiSection = (path, cy) => {
+const fillKoulutustyyppiSection = path => {
   cy.getByTestId('tyyppiSection').within(() => {
     fillKoulutustyyppiSelect(path, cy);
-    jatka(cy);
+    jatka();
   });
 };
 
-const fillPohjaSection = cy => {
-  getByTestId('pohjaSection', cy).within(() => {
-    getByTestId('jatkaButton', cy).click({ force: true });
+const fillPohjaSection = () => {
+  cy.getByTestId('pohjaSection').within(() => {
+    cy.getByTestId('jatkaButton').click({ force: true });
   });
 };
 
-const fillKieliversiotSection = cy => {
-  getByTestId('kieliversiotSection', cy).within(() => {
+const fillKieliversiotSection = () => {
+  cy.getByTestId('kieliversiotSection').within(() => {
     chooseKieliversiotLanguages(['fi'], cy);
-    getByTestId('jatkaButton', cy).click({ force: true });
+    cy.getByTestId('jatkaButton').click({ force: true });
   });
 };
 
-const fillLisatiedotSection = cy => {
-  getByTestId('lisatiedotSection', cy).within(() => {
-    getByTestId('osiotSelect', cy).click();
+const fillLisatiedotSection = () => {
+  cy.getByTestId('lisatiedotSection').within(() => {
+    cy.getByTestId('osiotSelect').click();
 
-    getByTestId('osiotSelect', cy).within(() => {
+    cy.getByTestId('osiotSelect').within(() => {
       getSelectOption('koulutuksenlisatiedot_0', cy).click({
         force: true,
       });
     });
 
-    getByTestId('osioKuvaus.koulutuksenlisatiedot_0#1', cy).within(() => {
+    cy.getByTestId('osioKuvaus.koulutuksenlisatiedot_0#1').within(() => {
       cy.get('textarea').type('koulutuksenlisatiedot_0 kuvaus', {
         force: true,
       });
     });
 
-    getByTestId('jatkaButton', cy).click({ force: true });
+    cy.getByTestId('jatkaButton').click({ force: true });
   });
 };
 
-const tallenna = cy => {
-  getByTestId('tallennaJaJulkaiseKoulutusButton', cy).click({ force: true });
+const tallenna = () => {
+  cy.getByTestId('tallennaJaJulkaiseKoulutusButton').click({ force: true });
 };
 
-const fillJarjestajaSection = (cy, jatkaArg = false) => {
-  getByTestId('jarjestajaSection', cy).within(() => {
-    getByTestId('jarjestajatSelection', cy).within(() => {
+const fillJarjestajaSection = (jatkaArg = false) => {
+  cy.getByTestId('jarjestajaSection').within(() => {
+    cy.getByTestId('jarjestajatSelection').within(() => {
       fillTreeSelect(['4.1.1.1.1.1'], cy);
     });
 
-    jatkaArg && jatka(cy);
+    jatkaArg && jatka();
   });
+};
+
+const fillCommon = ({ koulutustyyppiPath }) => {
+  fillKoulutustyyppiSection(koulutustyyppiPath);
+  fillPohjaSection();
+  fillKieliversiotSection();
 };
 
 describe('createKoulutusForm', () => {
@@ -86,31 +91,27 @@ describe('createKoulutusForm', () => {
       },
     }).as('createAmmKoulutusResponse');
 
-    fillKoulutustyyppiSection(['amm'], cy);
+    fillCommon({ koulutustyyppiPath: ['amm'] });
 
-    fillPohjaSection(cy);
+    cy.getByTestId('tiedotSection').within(() => {
+      cy.getByTestId('koulutustyyppiSelect').click();
 
-    fillKieliversiotSection(cy);
-
-    getByTestId('tiedotSection', cy).within(() => {
-      getByTestId('koulutustyyppiSelect', cy).click();
-
-      getByTestId('koulutustyyppiSelect', cy).within(() => {
+      cy.getByTestId('koulutustyyppiSelect').within(() => {
         getSelectOption('koulutus_0', cy).click({ force: true });
       });
 
-      getByTestId('jatkaButton', cy).click({ force: true });
+      cy.getByTestId('jatkaButton').click({ force: true });
     });
 
-    getByTestId('kuvausSection', cy).within(() => {
-      getByTestId('jatkaButton', cy).click({ force: true });
+    cy.getByTestId('kuvausSection').within(() => {
+      cy.getByTestId('jatkaButton').click({ force: true });
     });
 
-    fillLisatiedotSection(cy);
+    fillLisatiedotSection();
 
-    fillJarjestajaSection(cy);
+    fillJarjestajaSection();
 
-    tallenna(cy);
+    tallenna();
 
     cy.wait('@createAmmKoulutusResponse').then(({ request }) => {
       cy.wrap(request.body).snapshot();
@@ -126,26 +127,22 @@ describe('createKoulutusForm', () => {
       },
     }).as('createYoKoulutusResponse');
 
-    fillKoulutustyyppiSection(['korkeakoulutus', 'yo'], cy);
+    fillCommon({ koulutustyyppiPath: ['korkeakoulutus', 'yo'] });
 
-    fillPohjaSection(cy);
+    cy.getByTestId('tiedotSection').within(() => {
+      cy.getByTestId('koulutuskoodiSelect').click();
 
-    fillKieliversiotSection(cy);
-
-    getByTestId('tiedotSection', cy).within(() => {
-      getByTestId('koulutuskoodiSelect', cy).click();
-
-      getByTestId('koulutuskoodiSelect', cy).within(() => {
+      cy.getByTestId('koulutuskoodiSelect').within(() => {
         getSelectOption('koulutus_0', cy).click({ force: true });
       });
 
-      getByTestId('nimiInput', cy).within(() => {
+      cy.getByTestId('nimiInput').within(() => {
         cy.get('input').type('Tiedot nimi', { force: true });
       });
 
-      getByTestId('tutkintonimikeSelect', cy).click();
+      cy.getByTestId('tutkintonimikeSelect').click();
 
-      getByTestId('tutkintonimikeSelect', cy).within(() => {
+      cy.getByTestId('tutkintonimikeSelect').within(() => {
         getSelectOption('tutkintonimikekk_0', cy).click({ force: true });
       });
 
@@ -153,38 +150,74 @@ describe('createKoulutusForm', () => {
         selectOption('kansallinenkoulutusluokitus2016koulutusalataso2_0', cy);
       });
 
-      getByTestId('opintojenLaajuusSelect', cy).click();
+      cy.getByTestId('opintojenLaajuusSelect').click();
 
-      getByTestId('opintojenLaajuusSelect', cy).within(() => {
+      cy.getByTestId('opintojenLaajuusSelect').within(() => {
         getSelectOption('opintojenlaajuus_0', cy).click({ force: true });
       });
 
-      jatka(cy);
+      jatka();
     });
 
-    getByTestId('kuvausSection', cy).within(() => {
-      getByTestId('kuvauksenNimiInput', cy).within(() => {
+    cy.getByTestId('kuvausSection').within(() => {
+      cy.getByTestId('kuvauksenNimiInput').within(() => {
         cy.get('input').type('Kuvauksen nimi', { force: true });
       });
 
-      getByTestId('kuvausInput', cy).within(() => {
+      cy.getByTestId('kuvausInput').within(() => {
         cy.get('textarea').type('Kuvaus', { force: true });
       });
 
-      jatka(cy);
+      jatka();
     });
 
-    fillLisatiedotSection(cy);
+    fillLisatiedotSection();
 
-    fillJarjestajaSection(cy, true);
+    fillJarjestajaSection(true);
 
-    getByTestId('nakyvyysSection', cy).within(() => {
+    cy.getByTestId('nakyvyysSection').within(() => {
       getCheckbox(null, cy).click({ force: true });
     });
 
-    tallenna(cy);
+    tallenna();
 
     cy.wait('@createYoKoulutusResponse').then(({ request }) => {
+      cy.wrap(request.body).snapshot();
+    });
+  });
+
+  it.only('should be able to create lukiokoulutus', () => {
+    cy.route({
+      method: 'PUT',
+      url: '**/koulutus',
+      response: {
+        oid: '1.2.3.4.5.6',
+      },
+    }).as('createLkKoulutusResponse');
+
+    fillCommon({ koulutustyyppiPath: ['lk'] });
+
+    cy.getByTestId('tiedotSection').within(() => {
+      cy.getByTestId('koulutustyyppiSelect').click();
+
+      cy.getByTestId('koulutustyyppiSelect').within(() => {
+        getSelectOption('koulutus_0', cy).click({ force: true });
+      });
+
+      cy.getByTestId('jatkaButton').click({ force: true });
+    });
+
+    cy.getByTestId('kuvausSection').within(() => {
+      cy.getByTestId('jatkaButton').click({ force: true });
+    });
+
+    fillLisatiedotSection();
+
+    fillJarjestajaSection();
+
+    tallenna();
+
+    cy.wait('@createLkKoulutusResponse').then(({ request }) => {
       cy.wrap(request.body).snapshot();
     });
   });

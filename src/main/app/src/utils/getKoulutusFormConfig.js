@@ -42,6 +42,9 @@ const baseConfig = {
         koulutuskoodi: {
           validate: eb => eb.validateExistence('information.koulutus'),
         },
+        osaamisala: {
+          validate: eb => eb.validateExistence('information.koulutus'),
+        },
         opintojenlaajuus: true,
         tutkintonimike: true,
         koulutusalat: true,
@@ -113,7 +116,12 @@ const getKoulutusFormConfig = koulutustyyppi => {
       'sections.lisatiedot',
     ]);
   } else if (koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS) {
-    return pick(baseConfig, [...commonConfigPaths, 'sections.lisatiedot']);
+    return pick(baseConfig, [
+      ...commonConfigPaths,
+      'sections.tiedot.fields.osaamisala',
+      'sections.kuvaus.fields.tekstiKuvaus',
+      'sections.lisatiedot',
+    ]);
   }
 
   return pick(baseConfig, commonConfigPaths);

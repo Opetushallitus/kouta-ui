@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { storiesOf } from '@storybook/react';
 
 import KoulutusForm from './index';
 import ReduxForm from '../ReduxForm';
 import getKoulutusFormConfig from '../../utils/getKoulutusFormConfig';
 import FormConfigContext from '../FormConfigContext';
+import useFieldValue from '../useFieldValue';
 
 import {
   makeStoreDecorator,
@@ -12,7 +13,18 @@ import {
   makeLocalisationDecorator,
 } from '../../storybookUtils';
 
-const config = getKoulutusFormConfig();
+const FormWrapper = props => {
+  const koulutustyyppi = useFieldValue('koulutustyyppi');
+  const config = useMemo(() => getKoulutusFormConfig(koulutustyyppi), [
+    koulutustyyppi,
+  ]);
+
+  return (
+    <FormConfigContext.Provider value={config}>
+      <KoulutusForm {...props} />
+    </FormConfigContext.Provider>
+  );
+};
 
 storiesOf('KoulutusForm', module)
   .addDecorator(makeLocalisationDecorator())
@@ -22,12 +34,10 @@ storiesOf('KoulutusForm', module)
     return (
       <ReduxForm form="koulutus">
         {() => (
-          <FormConfigContext.Provider value={config}>
-            <KoulutusForm
-              organisaatioOid="1.2.246.562.10.594252633210"
-              steps={false}
-            />
-          </FormConfigContext.Provider>
+          <FormWrapper
+            organisaatioOid="1.2.246.562.10.594252633210"
+            steps={false}
+          />
         )}
       </ReduxForm>
     );

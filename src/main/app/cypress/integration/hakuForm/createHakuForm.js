@@ -5,6 +5,8 @@ import {
   fillDateTimeInput,
   chooseKieliversiotLanguages,
   selectOption,
+  fillValintakoeFields,
+  fillYhteyshenkilotFields,
 } from '../../utils';
 
 import { stubHakuFormRoutes } from '../../hakuFormUtils';
@@ -35,8 +37,14 @@ const fillNimiSection = cy => {
 };
 
 const fillKohdejoukkoSection = cy => {
-  getByTestId('kohdejoukkoSection', cy).within(() => {
-    getRadio('haunkohdejoukko_0#1', cy).click({ force: true });
+  cy.getByTestId('kohdejoukkoSection').within(() => {
+    cy.getByTestId('kohdejoukko').within(() => {
+      getRadio('haunkohdejoukko_12#1', cy).click({ force: true });
+    });
+
+    cy.getByTestId('tarkenne').within(() => {
+      getRadio('haunkohdejoukontarkenne_0#1', cy).click({ force: true });
+    });
 
     jatka(cy);
   });
@@ -44,7 +52,7 @@ const fillKohdejoukkoSection = cy => {
 
 const fillHakutapaSection = cy => {
   getByTestId('hakutapaSection', cy).within(() => {
-    getRadio('hakutapa_0#1', cy).click({ force: true });
+    getRadio('hakutapa_01#1', cy).click({ force: true });
 
     jatka(cy);
   });
@@ -151,20 +159,16 @@ const tallenna = cy => {
   getByTestId('tallennaJaJulkaiseHakuButton', cy).click({ force: true });
 };
 
+const fillValintakoeSection = cy => {
+  cy.getByTestId('valintakoeSection').within(() => {
+    fillValintakoeFields({ cy });
+    jatka(cy);
+  });
+};
+
 const fillYhteystiedotSection = cy => {
-  getByTestId('yhteystiedotSection', cy).within(() => {
-    getByTestId('nimi', cy)
-      .find('input')
-      .type('nimi', { force: true });
-    getByTestId('titteli', cy)
-      .find('input')
-      .type('titteli', { force: true });
-    getByTestId('sahkoposti', cy)
-      .find('input')
-      .type('sähkoposti', { force: true });
-    getByTestId('puhelin', cy)
-      .find('input')
-      .type('puhelin', { force: true });
+  cy.getByTestId('yhteystiedotSection').within(() => {
+    fillYhteyshenkilotFields({ cy });
   });
 };
 
@@ -193,6 +197,7 @@ describe('createHakuForm', () => {
     fillHakutapaSection(cy);
     fillAikatauluSection(cy);
     fillHakulomakeSection(cy);
+    fillValintakoeSection(cy);
     fillYhteystiedotSection(cy);
 
     tallenna(cy);

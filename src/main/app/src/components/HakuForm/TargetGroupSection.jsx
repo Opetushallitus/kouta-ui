@@ -1,22 +1,8 @@
 import React from 'react';
-import { Field } from 'redux-form';
+import HaunKohdejoukkoFields from '../HaunKohdejoukkoFields';
 
-import useKoodistoOptions from '../useKoodistoOptions';
-import useTranslation from '../useTranslation';
-import { FormFieldRadioGroup } from '../FormFields';
-
-const TargetGroupSection = () => {
-  const { options } = useKoodistoOptions({ koodisto: 'haunkohdejoukko' });
-  const { t } = useTranslation();
-
-  return (
-    <Field
-      name="kohde"
-      component={FormFieldRadioGroup}
-      label={t('hakulomake.valitseHaunKohdejoukko')}
-      options={options}
-    />
-  );
+const TargetGroupSection = ({ name }) => {
+  return <HaunKohdejoukkoFields name={name} />;
 };
 
 export default TargetGroupSection;

@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Field, formValues } from 'redux-form';
+import { Field } from 'redux-form';
 import get from 'lodash/get';
 
 import Spacing from '../Spacing';
@@ -7,8 +7,11 @@ import useTranslation from '../useTranslation';
 import useKoodistoOptions from '../useKoodistoOptions';
 import { getTestIdProps } from '../../utils';
 import { FormFieldTextarea, FormFieldSelect } from '../FormFields';
+import Typography from '../Typography';
+import useFieldValue from '../useFieldValue';
 
-const OsiotFieldsBase = ({ osiot, language, osiotOptions }) => {
+const OsiotFields = ({ language, osiotOptions, name }) => {
+  const osiot = useFieldValue(`${name}.osiot`);
   const osiotArr = osiot || [];
 
   const osiotArrWithLabels = useMemo(() => {
@@ -28,7 +31,7 @@ const OsiotFieldsBase = ({ osiot, language, osiotOptions }) => {
       {...getTestIdProps(`osioKuvaus.${value}`)}
     >
       <Field
-        name={`osioKuvaukset.${value}.${language}`}
+        name={`${name}.osioKuvaukset.${value}.${language}`}
         component={FormFieldTextarea}
         label={label}
       />
@@ -36,9 +39,7 @@ const OsiotFieldsBase = ({ osiot, language, osiotOptions }) => {
   ));
 };
 
-const OsiotFields = formValues({ osiot: 'osiot' })(OsiotFieldsBase);
-
-const LisatiedotSection = ({ language }) => {
+const LisatiedotSection = ({ language, name }) => {
   const { t } = useTranslation();
 
   const { options: osiotOptions } = useKoodistoOptions({
@@ -47,10 +48,13 @@ const LisatiedotSection = ({ language }) => {
 
   return (
     <>
+      <Typography variant="secondary" as="div" marginBottom={2}>
+        {t('koulutuslomake.lisatiedotInfo')}
+      </Typography>
       <Spacing marginBottom={2}>
         <div {...getTestIdProps('osiotSelect')}>
           <Field
-            name="osiot"
+            name={`${name}.osiot`}
             component={FormFieldSelect}
             options={osiotOptions}
             label={t('yleiset.valitseLisattavaOsio')}
@@ -58,7 +62,11 @@ const LisatiedotSection = ({ language }) => {
           />
         </div>
       </Spacing>
-      <OsiotFields language={language} osiotOptions={osiotOptions} />
+      <OsiotFields
+        name={name}
+        language={language}
+        osiotOptions={osiotOptions}
+      />
     </>
   );
 };

@@ -15,7 +15,7 @@ const getHakuOptions = haut => {
   }));
 };
 
-const BaseSelectionSection = ({ organisaatioOid }) => {
+const BaseSelectionSection = ({ organisaatioOid, name }) => {
   const { t } = useTranslation();
 
   const { data = [] } = useApiAsync({
@@ -30,7 +30,7 @@ const BaseSelectionSection = ({ organisaatioOid }) => {
     <FormControl>
       <FormLabel>{t('yleiset.valitseLomakkeenPohja')}</FormLabel>
       <BaseFields
-        name="pohja"
+        name={name}
         createLabel={t('hakulomake.luoUusiHaku')}
         copyLabel={t('hakulomake.kopioiPohjaksiHaku')}
         copyOptions={options}

@@ -1,15 +1,15 @@
 import { useMemo } from 'react';
 
 import { isFunction, isString, getFirstLanguageValue } from '../../utils';
-import { HAKULOMAKE_TYYPIT } from '../../constants';
+import { HAKULOMAKETYYPPI } from '../../constants';
 import { getHakemuspalveluLomakkeet } from '../../apiUtils';
 import useApiAsync from '../useApiAsync';
 
 const tyyppiToLabel = {
-  [HAKULOMAKE_TYYPIT.ATARU]: 'hakulomakeValinnat.ataru',
-  [HAKULOMAKE_TYYPIT.HAKUAPP]: 'hakulomakeValinnat.hakuapp',
-  [HAKULOMAKE_TYYPIT.MUU]: 'hakulomakeValinnat.muu',
-  [HAKULOMAKE_TYYPIT.EI_SAHKOISTA_HAKUA]: 'hakulomakeValinnat.eiSahkoistaHakua',
+  [HAKULOMAKETYYPPI.ATARU]: 'hakulomakeValinnat.ataru',
+  [HAKULOMAKETYYPPI.HAKUAPP]: 'hakulomakeValinnat.hakuapp',
+  [HAKULOMAKETYYPPI.MUU]: 'hakulomakeValinnat.muu',
+  [HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA]: 'hakulomakeValinnat.eiSahkoistaHakua',
 };
 
 export const createEnhancedGetTyyppiLabel = (getTyyppiLabel, t) => tyyppi => {
@@ -34,7 +34,7 @@ export const createEnhancedGetTyyppiShowUrl = getTyyppiShowUrl => ({
     return getTyyppiShowUrl({ tyyppi, option, apiUrls });
   }
 
-  if (tyyppi === HAKULOMAKE_TYYPIT.ATARU) {
+  if (tyyppi === HAKULOMAKETYYPPI.ATARU) {
     return apiUrls.url('lomake-editori.muokkaus-sivu', option.value);
   }
 
@@ -50,7 +50,7 @@ export const createEnhancedGetTyyppiLomakkeet = getTyyppiOptions => async ({
     return getTyyppiOptions({ httpClient, apiUrls, tyyppi });
   }
 
-  if (tyyppi === HAKULOMAKE_TYYPIT.ATARU) {
+  if (tyyppi === HAKULOMAKETYYPPI.ATARU) {
     try {
       const ataruLomakkeet = await getHakemuspalveluLomakkeet({
         httpClient,
@@ -82,10 +82,10 @@ export const useLomakeOptions = ({ getTyyppiLomakkeet, tyypit, language }) => {
   );
 
   const { data: ataruLomakkeet } = useApiAsync({
-    promiseFn: tyypit.includes(HAKULOMAKE_TYYPIT.ATARU)
+    promiseFn: tyypit.includes(HAKULOMAKETYYPPI.ATARU)
       ? enhancedGetTyyppiLomakkeet
       : noopPromise,
-    tyyppi: HAKULOMAKE_TYYPIT.ATARU,
+    tyyppi: HAKULOMAKETYYPPI.ATARU,
   });
 
   const ataruOptions = useMemo(

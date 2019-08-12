@@ -1,28 +1,48 @@
-import { reduxForm } from 'redux-form';
-import React, { useMemo } from 'react';
-import { connect } from 'react-redux';
+import React, { useMemo, useCallback } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import HakuForm from '../HakuForm';
-import { getValuesByHaku } from '../../state/createHakuForm';
-import { attachHakukohde } from '../../state/editHakuForm/actions';
+import getFormValuesByHaku from '../../utils/getFormValuesByHaku';
+import ReduxForm from '../ReduxForm';
+import getHakuFormConfig from '../../utils/getHakuFormConfig';
+import FormConfigContext from '../FormConfigContext';
 
-const HakuReduxForm = reduxForm({
-  form: 'editHakuForm',
-})(HakuForm);
+const config = getHakuFormConfig();
 
-const EditHakuForm = ({ onSave, haku, ...props }) => {
+const EditHakuForm = ({ onSave, haku, history, ...props }) => {
   const initialValues = useMemo(() => {
-    return getValuesByHaku(haku);
+    return getFormValuesByHaku(haku);
   }, [haku]);
 
+  const onAttachHakukohde = useCallback(
+    ({ toteutusOid }) => {
+      if (toteutusOid) {
+        history.push(
+          `/organisaatio/${haku.organisaatioOid}/toteutus/${toteutusOid}/haku/${
+            haku.oid
+          }/hakukohde`,
+        );
+      }
+    },
+    [history, haku],
+  );
+
   return (
-    <HakuReduxForm {...props} haku={haku} steps={false} canCopy={false} initialValues={initialValues} />
+    <ReduxForm form="editHakuForm" initialValues={initialValues}>
+      {() => (
+        <FormConfigContext.Provider value={config}>
+          <HakuForm
+            steps={false}
+            initialValues={initialValues}
+            haku={haku}
+            onAttachHakukohde={onAttachHakukohde}
+            canSelectBase={false}
+            {...props}
+          />
+        </FormConfigContext.Provider>
+      )}
+    </ReduxForm>
   );
 };
 
-export default connect(
-  null,
-  (dispatch, { haku: { oid: hakuOid, organisaatioOid, toteutusOid } }) => ({
-    onAttachHakukohde: () => dispatch(attachHakukohde({ hakuOid, organisaatioOid, toteutusOid })),
-  }),
-)(EditHakuForm);
+export default withRouter(EditHakuForm);

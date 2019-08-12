@@ -47,8 +47,6 @@ const getLabel = ({ children, tila, t }) => {
 const TilaLabel = ({ children, status, color, ...props }) => {
   const { t } = useTranslation();
 
-  console.log(status);
-
   return (
     <Flex inline alignCenter {...props}>
       <Badge color={getColor({ tila: status, color })} />

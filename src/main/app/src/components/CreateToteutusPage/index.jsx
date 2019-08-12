@@ -1,16 +1,16 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import queryString from 'query-string';
 
 import FormPage, { OrganisaatioInfo } from '../FormPage';
-import { getKoutaKoulutusByOid } from '../../apiUtils';
-
+import getKoulutusByOid from '../../utils/kouta/getKoulutusByOid';
 import CreateToteutusHeader from './CreateToteutusHeader';
 import CreateToteutusSteps from './CreateToteutusSteps';
 import CreateToteutusForm from './CreateToteutusForm';
 import CreateToteutusFooter from './CreateToteutusFooter';
 import useApiAsync from '../useApiAsync';
 import Spin from '../Spin';
-import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
+import { KOULUTUSTYYPPI } from '../../constants';
+import useSelectBase from '../useSelectBase';
 
 const CreateToteutusPage = props => {
   const {
@@ -23,27 +23,31 @@ const CreateToteutusPage = props => {
 
   const { kopioToteutusOid = null } = queryString.parse(search);
 
-  const onCreateNew = useCallback(() => {
-    history.replace({ search: '' });
-  }, [history]);
-
   const { data } = useApiAsync({
-    promiseFn: getKoutaKoulutusByOid,
+    promiseFn: getKoulutusByOid,
     oid: koulutusOid,
     watch: koulutusOid,
   });
 
+  const selectBase = useSelectBase(history, { kopioParam: 'kopioToteutusOid' });
+
   const koulutustyyppi =
     data && data.koulutustyyppi
       ? data.koulutustyyppi
-      : KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS;
+      : KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
   return (
     <FormPage
       header={<CreateToteutusHeader />}
       steps={<CreateToteutusSteps />}
       footer={
-        data ? <CreateToteutusFooter koulutustyyppi={koulutustyyppi} /> : null
+        data ? (
+          <CreateToteutusFooter
+            koulutustyyppi={koulutustyyppi}
+            organisaatioOid={organisaatioOid}
+            koulutusOid={koulutusOid}
+          />
+        ) : null
       }
     >
       <OrganisaatioInfo organisaatioOid={organisaatioOid} />
@@ -53,7 +57,7 @@ const CreateToteutusPage = props => {
           organisaatioOid={organisaatioOid}
           koulutustyyppi={koulutustyyppi}
           kopioToteutusOid={kopioToteutusOid}
-          onCreateNew={onCreateNew}
+          onSelectBase={selectBase}
         />
       ) : (
         <Spin center />

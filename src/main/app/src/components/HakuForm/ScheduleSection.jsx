@@ -1,28 +1,19 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Field, FieldArray } from 'redux-form';
 
 import Button from '../Button';
 import Spacing from '../Spacing';
-import Typography from '../Typography';
 import useKoodistoOptions from '../useKoodistoOptions';
 import useTranslation from '../useTranslation';
 import Flex, { FlexItem } from '../Flex';
 import { getTestIdProps } from '../../utils';
+import DividerHeading from '../DividerHeading';
 
 import {
   FormFieldDateTimeInput,
   FormFieldRadioGroup,
   FormFieldYearSelect,
 } from '../FormFields';
-
-const BorderHeading = styled(Typography).attrs({
-  variant: 'h6',
-  paddingBottom: 1,
-  marginBottom: 2,
-})`
-  border-bottom: 1px solid ${({ theme }) => theme.palette.border};
-`;
 
 const renderHakuajatFields = ({ fields, t }) => {
   return (
@@ -58,6 +49,7 @@ const renderHakuajatFields = ({ fields, t }) => {
       ))}
       <Button
         type="button"
+        variant="outlined"
         onClick={() => {
           fields.push({});
         }}
@@ -69,29 +61,45 @@ const renderHakuajatFields = ({ fields, t }) => {
   );
 };
 
-const ScheduleSection = () => {
+const ScheduleSection = ({ isOphVirkailija, isYhteishaku, name }) => {
   const { t } = useTranslation();
   const { options: kausiOptions } = useKoodistoOptions({ koodisto: 'kausi' });
 
   return (
     <>
-      <Spacing marginBottom={2} {...getTestIdProps('hakuajat')}>
-        <BorderHeading>{t('hakulomake.hakuaika')}</BorderHeading>
-        <FieldArray name="hakuaika" component={renderHakuajatFields} t={t} />
-      </Spacing>
-      <Spacing marginBottom={2} {...getTestIdProps('tulevaisuudenaikataulu')}>
-        <BorderHeading>
-          {t('hakulomake.aikatauluTulevaisuudesta')}
-        </BorderHeading>
-        <FieldArray name="aikataulu" component={renderHakuajatFields} t={t} />
+      <Spacing marginBottom={4} {...getTestIdProps('hakuajat')}>
+        <DividerHeading>{t('hakulomake.hakuaika')}</DividerHeading>
+        <FieldArray
+          name={`${name}.hakuaika`}
+          component={renderHakuajatFields}
+          t={t}
+        />
       </Spacing>
 
-      <Spacing marginBottom={2} {...getTestIdProps('alkamiskausi')}>
-        <BorderHeading>{t('hakulomake.koulutuksenAlkamiskausi')}</BorderHeading>
+      {isYhteishaku && isOphVirkailija ? (
+        <Spacing marginBottom={4} {...getTestIdProps('tulevaisuudenaikataulu')}>
+          <DividerHeading>
+            {t('hakulomake.aikatauluTulevaisuudesta')}
+          </DividerHeading>
+          <FieldArray
+            name={`${name}.aikataulu`}
+            component={renderHakuajatFields}
+            t={t}
+          />
+        </Spacing>
+      ) : null}
+
+      <Spacing
+        marginBottom={isYhteishaku && isOphVirkailija ? 4 : 0}
+        {...getTestIdProps('alkamiskausi')}
+      >
+        <DividerHeading>
+          {t('hakulomake.koulutuksenAlkamiskausi')}
+        </DividerHeading>
 
         <Spacing marginBottom={2} {...getTestIdProps('kausi')}>
           <Field
-            name="kausi"
+            name={`${name}.kausi`}
             component={FormFieldRadioGroup}
             options={kausiOptions}
             label={t('yleiset.kausi')}
@@ -101,7 +109,7 @@ const ScheduleSection = () => {
         <Spacing>
           <div {...getTestIdProps('vuosi')}>
             <Field
-              name="vuosi"
+              name={`${name}.vuosi`}
               component={FormFieldYearSelect}
               label={t('yleiset.vuosi')}
             />
@@ -109,38 +117,42 @@ const ScheduleSection = () => {
         </Spacing>
       </Spacing>
 
-      <Spacing marginBottom={2} {...getTestIdProps('perumisenTakaraja')}>
-        <BorderHeading>
-          {t('hakulomake.hakukohteenLisaamisenJaPerumisenTakaraja')}
-        </BorderHeading>
-        <Field
-          name="lisaamisenTakaraja"
-          component={FormFieldDateTimeInput}
-          helperText={t('yleiset.paivamaaraJaKellonaika')}
-        />
-      </Spacing>
+      {isYhteishaku && isOphVirkailija ? (
+        <>
+          <Spacing marginBottom={4} {...getTestIdProps('perumisenTakaraja')}>
+            <DividerHeading>
+              {t('hakulomake.hakukohteenLisaamisenJaPerumisenTakaraja')}
+            </DividerHeading>
+            <Field
+              name={`${name}.lisaamisenTakaraja`}
+              component={FormFieldDateTimeInput}
+              helperText={t('yleiset.paivamaaraJaKellonaika')}
+            />
+          </Spacing>
 
-      <Spacing marginBottom={2} {...getTestIdProps('muokkauksenTakaraja')}>
-        <BorderHeading>
-          {t('hakulomake.hakukohteenMuokkauksenTakaraja')}
-        </BorderHeading>
-        <Field
-          name="muokkauksenTakaraja"
-          component={FormFieldDateTimeInput}
-          helperText={t('yleiset.paivamaaraJaKellonaika')}
-        />
-      </Spacing>
+          <Spacing marginBottom={4} {...getTestIdProps('muokkauksenTakaraja')}>
+            <DividerHeading>
+              {t('hakulomake.hakukohteenMuokkauksenTakaraja')}
+            </DividerHeading>
+            <Field
+              name={`${name}.muokkauksenTakaraja`}
+              component={FormFieldDateTimeInput}
+              helperText={t('yleiset.paivamaaraJaKellonaika')}
+            />
+          </Spacing>
 
-      <Spacing {...getTestIdProps('julkaisupaivamaara')}>
-        <BorderHeading>
-          {t('hakulomake.ajastettuHaunJulkaisupaivamaara')}
-        </BorderHeading>
-        <Field
-          name="ajastettuJulkaisu"
-          component={FormFieldDateTimeInput}
-          helperText={t('yleiset.paivamaaraJaKellonaika')}
-        />
-      </Spacing>
+          <Spacing {...getTestIdProps('julkaisupaivamaara')}>
+            <DividerHeading>
+              {t('hakulomake.ajastettuHaunJulkaisupaivamaara')}
+            </DividerHeading>
+            <Field
+              name={`${name}.ajastettuJulkaisu`}
+              component={FormFieldDateTimeInput}
+              helperText={t('yleiset.paivamaaraJaKellonaika')}
+            />
+          </Spacing>
+        </>
+      ) : null}
     </>
   );
 };

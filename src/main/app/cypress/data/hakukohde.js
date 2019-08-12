@@ -7,21 +7,19 @@ export default () => ({
   alkamiskausiKoodiUri: 'kausi_0#1',
   alkamisvuosi: '2024',
   hakulomake: {},
-  aloituspaikat: 100,
+  minAloituspaikat: 100,
+  maxAloituspaikat: 150,
+  minEnsikertalaisenAloituspaikat: 39,
+  maxEnsikertalaisenAloituspaikat: 49,
+  kaytetaanHaunAlkamiskautta: false,
   pohjakoulutusvaatimusKoodiUrit: ['pohjakoulutusvaatimustoinenaste_0#1'],
   muuPohjakoulutusvaatimus: {},
   toinenAsteOnkoKaksoistutkinto: true,
   kaytetaanHaunAikataulua: false,
   liitteetOnkoSamaToimitusaika: false,
   liitteetOnkoSamaToimitusosoite: false,
-  liitteidenToimitusosoite: {
-    osoite: {
-      osoite: { fi: 'Paasikivenkatu 7' },
-      postinumero: '15110',
-      postitoimipaikka: { fi: 'Lahti' },
-    },
-    sahkoposti: 'salpaus@salpaus.fi',
-  },
+  liitteidenToimitusosoite: null,
+  liitteidenToimitustapa: null,
   liitteet: [
     {
       id: '927ac923-a839-4354-9db4-f95d276d9902',
@@ -37,6 +35,7 @@ export default () => ({
         },
         sahkoposti: 'sahkoposti@email.com',
       },
+      toimitustapa: 'osoite',
     },
   ],
   valintakokeet: [
@@ -61,9 +60,9 @@ export default () => ({
   organisaatioOid: '1.2.246.562.10.594252633210',
   kielivalinta: ['fi', 'sv'],
   modified: '2019-04-04T08:28',
-  eriHakulomake: true,
+  kaytetaanHaunHakulomaketta: false,
   hakulomaketyyppi: 'ataru',
-  hakulomakeId: '12345',
+  hakulomakeAtaruId: '12345',
   hakulomakeKuvaus: {},
   hakulomakeLinkki: {},
 });

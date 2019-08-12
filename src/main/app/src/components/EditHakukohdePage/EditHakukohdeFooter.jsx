@@ -1,65 +1,68 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-import { submit } from '../../state/editHakukohdeForm';
 import Button from '../Button';
 import { JULKAISUTILA } from '../../constants';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
-
-const Wrapper = styled.div`
-  max-width: 1200px;
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0px auto;
-  display: flex;
-  justify-content: flex-end;
-`;
+import Flex from '../Flex';
+import useSaveForm from '../useSaveForm';
+import getHakukohdeByFormValues from '../../utils/getHakukohdeByFormValues';
+import updateHakukohde from '../../utils/kouta/updateHakukohde';
+import validateHakukohdeForm from '../../utils/validateHakukohdeForm';
 
 const PublishButton = styled(Button)`
   margin-left: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
-const EditHakukohdeFooter = ({ hakukohde, onSave = () => {} }) => {
+const EditHakukohdeFooter = ({ hakukohde, history }) => {
   const { tila } = hakukohde;
 
-  const onSaveAndPublish = useCallback(() => {
-    onSave({ tila: JULKAISUTILA.JULKAISTU });
-  }, [onSave]);
+  const submit = useCallback(
+    async ({ values, httpClient, apiUrls }) => {
+      await updateHakukohde({
+        httpClient,
+        apiUrls,
+        hakukohde: { ...hakukohde, ...getHakukohdeByFormValues(values) },
+      });
+
+      history.replace({
+        state: {
+          hakukohdeUpdatedAt: Date.now(),
+        },
+      });
+    },
+    [hakukohde, history],
+  );
+
+  const { save, saveAndPublish } = useSaveForm({
+    form: 'editHakukohdeForm',
+    submit,
+    validate: validateHakukohdeForm,
+  });
 
   const { t } = useTranslation();
 
   return (
-    <Wrapper>
+    <Flex justifyEnd>
       <Button
         variant="outlined"
-        onClick={onSave}
+        onClick={save}
         {...getTestIdProps('tallennaHakukohdeButton')}
       >
         {t('yleiset.tallenna')}
       </Button>
       {tila !== JULKAISUTILA.JULKAISTU ? (
         <PublishButton
-          onClick={onSaveAndPublish}
+          onClick={saveAndPublish}
           {...getTestIdProps('tallennaJaJulkaiseHakukohdeButton')}
         >
           {t('yleiset.tallennaJaJulkaise')}
         </PublishButton>
       ) : null}
-    </Wrapper>
+    </Flex>
   );
 };
 
-export default connect(
-  null,
-  (dispatch, { hakukohde }) => ({
-    onSave: ({ tila: tilaArg } = {}) =>
-      dispatch(
-        submit({
-          hakukohde,
-          tila: tilaArg,
-        }),
-      ),
-  }),
-)(EditHakukohdeFooter);
+export default withRouter(EditHakukohdeFooter);

@@ -1,11 +1,12 @@
 import React from 'react';
-import queryString from 'query-string';
+import qs from 'query-string';
 
 import FormPage, { OrganisaatioInfo } from '../FormPage';
 import CreateKoulutusHeader from './CreateKoulutusHeader';
 import CreateKoulutusSteps from './CreateKoulutusSteps';
 import CreateKoulutusForm from './CreateKoulutusForm';
 import CreateKoulutusFooter from './CreateKoulutusFooter';
+import useSelectBase from '../useSelectBase';
 
 const CreateKoulutusPage = props => {
   const {
@@ -16,21 +17,24 @@ const CreateKoulutusPage = props => {
     history,
   } = props;
 
-  const { kopioKoulutusOid = null } = queryString.parse(search);
+  const selectBase = useSelectBase(history, { kopioParam: 'kopioKoulutusOid' });
+
+  const { kopioKoulutusOid = null, johtaaTutkintoon = 'true' } = qs.parse(
+    search,
+  );
 
   return (
     <FormPage
       header={<CreateKoulutusHeader />}
       steps={<CreateKoulutusSteps />}
-      footer={<CreateKoulutusFooter />}
+      footer={<CreateKoulutusFooter organisaatioOid={oid} />}
     >
       <OrganisaatioInfo organisaatioOid={oid} />
       <CreateKoulutusForm
         organisaatioOid={oid}
         kopioKoulutusOid={kopioKoulutusOid}
-        onCreateNew={() => {
-          history.replace({ search: '' });
-        }}
+        johtaaTutkintoon={johtaaTutkintoon === 'true'}
+        onSelectBase={selectBase}
       />
     </FormPage>
   );

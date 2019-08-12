@@ -1,10 +1,10 @@
+import 'core-js/es';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { createSerializer } from 'enzyme-to-json';
-import {
-  isEditorState,
-  serialize as serializeEditor,
-} from './components/Editor';
+
+import isEditorState from './utils/draft/isEditorState';
+import serializeEditorState from './utils/draft/serializeEditorState';
 
 import 'jest-styled-components';
 
@@ -16,7 +16,7 @@ expect.addSnapshotSerializer({
     return isEditorState(value);
   },
   print(value, serialize, indent) {
-    return indent(serialize(serializeEditor(value)));
+    return indent(serialize(serializeEditorState(value)));
   },
 });
 

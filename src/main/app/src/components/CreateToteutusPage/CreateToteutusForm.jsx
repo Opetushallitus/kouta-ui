@@ -1,71 +1,68 @@
-import { reduxForm } from 'redux-form';
-import { compose } from 'recompose';
-import { connect } from 'react-redux';
-import React from 'react';
-import memoize from 'memoizee';
+import React, { useMemo } from 'react';
 
 import ToteutusForm, { initialValues } from '../ToteutusForm';
-import {
-  getValuesByToteutus,
-  maybeCopy as maybeCopyToteutus,
-} from '../../state/createToteutusForm';
-import { getKoutaToteutusByOid } from '../../apiUtils';
-import ApiAsync from '../ApiAsync';
-import { POHJAVALINNAT } from '../../constants';
 
-const resolveFn = () => Promise.resolve({});
+import getFormValuesByToteutus from '../../utils/getFormValuesByToteutus';
+import useApiAsync from '../useApiAsync';
+import { POHJAVALINTA } from '../../constants';
+import ReduxForm from '../ReduxForm';
+import getToteutusByOid from '../../utils/kouta/getToteutusByOid';
+import getToteutusFormConfig from '../../utils/getToteutusFormConfig';
+import FormConfigContext from '../FormConfigContext';
 
-const ToteutusReduxForm = reduxForm({
-  form: 'createToteutusForm',
-  enableReinitialize: true,
-})(ToteutusForm);
+const resolveFn = () => Promise.resolve();
 
 const getCopyValues = toteutusOid => ({
   pohja: {
-    tapa: POHJAVALINNAT.KOPIO,
+    tapa: POHJAVALINTA.KOPIO,
     valinta: { value: toteutusOid },
   },
 });
 
-const getInitialValues = memoize(toteutus => {
-  return toteutus.oid
-    ? { ...getCopyValues(toteutus.oid), ...getValuesByToteutus(toteutus) }
+const getInitialValues = toteutus => {
+  return toteutus
+    ? { ...getCopyValues(toteutus.oid), ...getFormValuesByToteutus(toteutus) }
     : initialValues;
-});
+};
+
+const ToteutusFormWrapper = props => {
+  const { koulutustyyppi } = props;
+
+  const config = useMemo(() => getToteutusFormConfig(koulutustyyppi), [
+    koulutustyyppi,
+  ]);
+
+  return (
+    <FormConfigContext.Provider value={config}>
+      <ToteutusForm {...props} />
+    </FormConfigContext.Provider>
+  );
+};
 
 const CreateToteutusForm = props => {
   const { kopioToteutusOid } = props;
 
-  const promiseFn = kopioToteutusOid ? getKoutaToteutusByOid : resolveFn;
+  const promiseFn = kopioToteutusOid ? getToteutusByOid : resolveFn;
+
+  const { data } = useApiAsync({
+    promiseFn,
+    oid: kopioToteutusOid,
+    watch: kopioToteutusOid,
+  });
+
+  const initialValues = useMemo(() => {
+    return getInitialValues(data);
+  }, [data]);
 
   return (
-    <ApiAsync
-      promiseFn={promiseFn}
-      oid={kopioToteutusOid}
-      watch={kopioToteutusOid}
+    <ReduxForm
+      form="createToteutusForm"
+      initialValues={initialValues}
+      enableReinitialize
     >
-      {({ data }) => {
-        return data ? (
-          <ToteutusReduxForm
-            {...props}
-            steps
-            initialValues={
-              kopioToteutusOid ? getInitialValues(data) : initialValues
-            }
-          />
-        ) : null;
-      }}
-    </ApiAsync>
+      {() => <ToteutusFormWrapper steps {...props} />}
+    </ReduxForm>
   );
 };
 
-export default compose(
-  connect(
-    null,
-    dispatch => ({
-      onMaybeCopy: () => {
-        dispatch(maybeCopyToteutus());
-      },
-    }),
-  ),
-)(CreateToteutusForm);
+export default CreateToteutusForm;

@@ -29,6 +29,11 @@ const Item = styled.div`
     `}
 `;
 
+const ItemFlex = styled(FlexItem)`
+  max-width: 100%;
+  min-width: 0;
+`;
+
 export const FieldArrayList = ({
   fields,
   hasDivider = true,
@@ -52,7 +57,7 @@ export const FieldArrayList = ({
         hasDivider={itemHasDivider}
       >
         <Flex>
-          <FlexItem grow={1}>{children({ field, index, fields: f })}</FlexItem>
+          <ItemFlex grow={1}>{children({ field, index, fields: f })}</ItemFlex>
           {hasRemoveButton ? (
             <FlexItem grow={0} paddingLeft={4}>
               <Button

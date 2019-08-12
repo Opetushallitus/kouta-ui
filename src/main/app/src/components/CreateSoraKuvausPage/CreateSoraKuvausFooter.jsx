@@ -1,58 +1,58 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-import { submit as submitSoraKuvausForm } from '../../state/createSoraKuvausForm';
-import { JULKAISUTILA } from '../../constants';
 import Button from '../Button';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
-
-const Wrapper = styled.div`
-  max-width: 1200px;
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0px auto;
-  display: flex;
-  justify-content: flex-end;
-`;
+import Flex from '../Flex';
+import useSaveForm from '../useSaveForm';
+import createSoraKuvaus from '../../utils/kouta/createSoraKuvaus';
+import validateSoraKuvausForm from '../../utils/validateSoraKuvausForm';
+import getSoraKuvausByFormValues from '../../utils/getSoraKuvausByFormValues';
 
 const SaveButton = styled(Button).attrs({ variant: 'outlined' })`
   margin-right: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
-const CreateSoraKuvausFooter = ({
-  onSave = () => {},
-  onSaveAndPublish = () => {},
-}) => {
+const CreateSoraKuvausFooter = ({ history, organisaatioOid }) => {
   const { t } = useTranslation();
 
+  const submit = useCallback(
+    async ({ values, httpClient, apiUrls }) => {
+      const { oid } = await createSoraKuvaus({
+        httpClient,
+        apiUrls,
+        soraKuvaus: { ...getSoraKuvausByFormValues(values), organisaatioOid },
+      });
+
+      history.push(`/sora-kuvaus/${oid}/muokkaus`);
+    },
+    [organisaatioOid, history],
+  );
+
+  const { save, saveAndPublish } = useSaveForm({
+    form: 'createSoraKuvausForm',
+    submit,
+    validate: validateSoraKuvausForm,
+  });
+
   return (
-    <Wrapper>
+    <Flex justifyEnd>
       <SaveButton
-        onClick={onSave}
+        onClick={save}
         {...getTestIdProps('tallennaSoraKuvausButton')}
       >
         {t('yleiset.tallenna')}
       </SaveButton>
       <Button
-        onClick={onSaveAndPublish}
+        onClick={saveAndPublish}
         {...getTestIdProps('tallennaJaJulkaiseSoraKuvausButton')}
       >
         {t('yleiset.tallennaJaJulkaise')}
       </Button>
-    </Wrapper>
+    </Flex>
   );
 };
 
-export default connect(
-  null,
-  dispatch => ({
-    onSave: () => {
-      return dispatch(submitSoraKuvausForm({ tila: JULKAISUTILA.TALLENNETTU }));
-    },
-    onSaveAndPublish: () => {
-      return dispatch(submitSoraKuvausForm({ tila: JULKAISUTILA.JULKAISTU }));
-    },
-  }),
-)(CreateSoraKuvausFooter);
+export default withRouter(CreateSoraKuvausFooter);

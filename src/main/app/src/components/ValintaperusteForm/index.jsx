@@ -1,20 +1,12 @@
-import { KOULUTUSTYYPPI_CATEGORY, POHJAVALINNAT } from '../../constants';
+import { KOULUTUSTYYPPI, POHJAVALINTA } from '../../constants';
 
 export { default } from './ValintaperusteForm';
 
 export const initialValues = {
-  tyyppi: {
-    tyyppi: KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS,
-  },
-  kieliversiot: {
-    languages: ['fi', 'sv'],
-  },
+  tyyppi: KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
+  kieliversiot: ['fi', 'sv'],
   pohja: {
-    pohja: {
-      tapa: POHJAVALINNAT.UUSI,
-    },
+    tapa: POHJAVALINTA.UUSI,
   },
-  valintatapa: {
-    valintatavat: [{}],
-  },
+  valintatavat: [{}],
 };

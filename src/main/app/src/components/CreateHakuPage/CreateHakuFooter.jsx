@@ -1,55 +1,55 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-import { submit as submitHakuForm } from '../../state/createHakuForm';
-import { JULKAISUTILA } from '../../constants';
 import Button from '../Button';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
-
-const Wrapper = styled.div`
-  max-width: 1200px;
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0px auto;
-  display: flex;
-  justify-content: flex-end;
-`;
+import Flex from '../Flex';
+import useSaveForm from '../useSaveForm';
+import createHaku from '../../utils/kouta/createHaku';
+import validateHakuForm from '../../utils/validateHakuForm';
+import getHakuByFormValues from '../../utils/getHakuByFormValues';
 
 const SaveButton = styled(Button).attrs({ variant: 'outlined' })`
   margin-right: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
-const CreateHakuFooter = ({
-  onSave = () => {},
-  onSaveAndPublish = () => {},
-}) => {
+const CreateHakuFooter = ({ organisaatioOid, history }) => {
   const { t } = useTranslation();
 
+  const submit = useCallback(
+    async ({ values, httpClient, apiUrls }) => {
+      const { oid } = await createHaku({
+        httpClient,
+        apiUrls,
+        haku: { ...getHakuByFormValues(values), organisaatioOid },
+      });
+
+      history.push(`/haku/${oid}/muokkaus`);
+    },
+    [organisaatioOid, history],
+  );
+
+  const { save, saveAndPublish } = useSaveForm({
+    form: 'createHakuForm',
+    submit,
+    validate: validateHakuForm,
+  });
+
   return (
-    <Wrapper>
-      <SaveButton onClick={onSave} {...getTestIdProps('tallennaHakuButton')}>
+    <Flex justifyEnd>
+      <SaveButton onClick={save} {...getTestIdProps('tallennaHakuButton')}>
         {t('yleiset.tallenna')}
       </SaveButton>
       <Button
-        onClick={onSaveAndPublish}
+        onClick={saveAndPublish}
         {...getTestIdProps('tallennaJaJulkaiseHakuButton')}
       >
         {t('yleiset.tallennaJaJulkaise')}
       </Button>
-    </Wrapper>
+    </Flex>
   );
 };
 
-export default connect(
-  null,
-  dispatch => ({
-    onSave: () => {
-      dispatch(submitHakuForm({ tila: JULKAISUTILA.TALLENNETTU }));
-    },
-    onSaveAndPublish: () => {
-      dispatch(submitHakuForm({ tila: JULKAISUTILA.JULKAISTU }));
-    },
-  }),
-)(CreateHakuFooter);
+export default withRouter(CreateHakuFooter);

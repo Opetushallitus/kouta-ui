@@ -5,13 +5,13 @@ import useTranslation from '../useTranslation';
 import useKoodistoOptions from '../useKoodistoOptions';
 import { FormFieldRadioGroup } from '../FormFields';
 
-const HakutavanRajausSection = () => {
+const HakutavanRajausSection = ({ name }) => {
   const { t } = useTranslation();
   const { options } = useKoodistoOptions({ koodisto: 'hakutapa' });
 
   return (
     <Field
-      name="hakutapa"
+      name={name}
       component={FormFieldRadioGroup}
       options={options}
       label={t('valintaperustelomake.valitseHakutapa')}

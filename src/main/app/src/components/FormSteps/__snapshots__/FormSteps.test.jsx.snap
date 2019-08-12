@@ -64,7 +64,7 @@ exports[`renders correctly 1`] = `
   border-color: white;
 }
 
-.c10 {
+.c11 {
   border-radius: 50%;
   width: 3.5rem;
   height: 3.5rem;
@@ -92,6 +92,16 @@ exports[`renders correctly 1`] = `
   color: #666666;
   font-size: 0.8rem;
   white-space: nowrap;
+}
+
+.c10 {
+  margin-top: 8px;
+  text-align: center;
+  font-family: 'Roboto',sans-serif;
+  color: #666666;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  color: #2da0c7;
 }
 
 .c5 {
@@ -143,7 +153,7 @@ exports[`renders correctly 1`] = `
       <div
         className="c1"
       >
-        <Styled(FormStepsIcon)
+        <Styled(FormStepIcon)
           active={false}
           done={true}
           icon="school"
@@ -178,7 +188,9 @@ exports[`renders correctly 1`] = `
                   </Styled(Icon)>
                 </div>
               </styled.div>
-              <styled.div>
+              <styled.div
+                active={false}
+              >
                 <div
                   className="c7"
                 >
@@ -187,8 +199,8 @@ exports[`renders correctly 1`] = `
               </styled.div>
             </div>
           </styled.div>
-        </Styled(FormStepsIcon)>
-        <Styled(FormStepsIcon)
+        </Styled(FormStepIcon)>
+        <Styled(FormStepIcon)
           active={false}
           done={true}
           icon="settings"
@@ -223,7 +235,9 @@ exports[`renders correctly 1`] = `
                   </Styled(Icon)>
                 </div>
               </styled.div>
-              <styled.div>
+              <styled.div
+                active={false}
+              >
                 <div
                   className="c7"
                 >
@@ -232,14 +246,14 @@ exports[`renders correctly 1`] = `
               </styled.div>
             </div>
           </styled.div>
-        </Styled(FormStepsIcon)>
+        </Styled(FormStepIcon)>
       </div>
     </styled.div>
     <styled.div>
       <div
         className="c1"
       >
-        <Styled(FormStepsIcon)
+        <Styled(FormStepIcon)
           active={false}
           done={true}
           icon="access_time"
@@ -274,7 +288,9 @@ exports[`renders correctly 1`] = `
                   </Styled(Icon)>
                 </div>
               </styled.div>
-              <styled.div>
+              <styled.div
+                active={false}
+              >
                 <div
                   className="c7"
                 >
@@ -283,8 +299,8 @@ exports[`renders correctly 1`] = `
               </styled.div>
             </div>
           </styled.div>
-        </Styled(FormStepsIcon)>
-        <Styled(FormStepsIcon)
+        </Styled(FormStepIcon)>
+        <Styled(FormStepIcon)
           active={true}
           done={false}
           icon="grain"
@@ -319,23 +335,25 @@ exports[`renders correctly 1`] = `
                   </Styled(Icon)>
                 </div>
               </styled.div>
-              <styled.div>
+              <styled.div
+                active={true}
+              >
                 <div
-                  className="c7"
+                  className="c10"
                 >
                   yleiset.hakukohde
                 </div>
               </styled.div>
             </div>
           </styled.div>
-        </Styled(FormStepsIcon)>
+        </Styled(FormStepIcon)>
       </div>
     </styled.div>
     <styled.div>
       <div
         className="c1"
       >
-        <Styled(FormStepsIcon)
+        <Styled(FormStepIcon)
           active={false}
           done={false}
           icon="select_all"
@@ -351,7 +369,7 @@ exports[`renders correctly 1`] = `
                 done={false}
               >
                 <div
-                  className="c10"
+                  className="c11"
                 >
                   <Styled(Icon)
                     active={false}
@@ -370,7 +388,9 @@ exports[`renders correctly 1`] = `
                   </Styled(Icon)>
                 </div>
               </styled.div>
-              <styled.div>
+              <styled.div
+                active={false}
+              >
                 <div
                   className="c7"
                 >
@@ -379,8 +399,8 @@ exports[`renders correctly 1`] = `
               </styled.div>
             </div>
           </styled.div>
-        </Styled(FormStepsIcon)>
-        <Styled(FormStepsIcon)
+        </Styled(FormStepIcon)>
+        <Styled(FormStepIcon)
           active={false}
           done={false}
           icon="subject"
@@ -396,7 +416,7 @@ exports[`renders correctly 1`] = `
                 done={false}
               >
                 <div
-                  className="c10"
+                  className="c11"
                 >
                   <Styled(Icon)
                     active={false}
@@ -415,7 +435,9 @@ exports[`renders correctly 1`] = `
                   </Styled(Icon)>
                 </div>
               </styled.div>
-              <styled.div>
+              <styled.div
+                active={false}
+              >
                 <div
                   className="c7"
                 >
@@ -424,7 +446,7 @@ exports[`renders correctly 1`] = `
               </styled.div>
             </div>
           </styled.div>
-        </Styled(FormStepsIcon)>
+        </Styled(FormStepIcon)>
       </div>
     </styled.div>
   </div>

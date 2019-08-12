@@ -13,7 +13,7 @@ import Spacing from '../Spacing';
 import DropdownIcon from '../DropdownIcon';
 import Spin from '../Spin';
 import useApiAsync from '../useApiAsync';
-import { getKoutaIndexKoulutukset } from '../../apiUtils';
+import getKoulutukset from '../../utils/koutaIndex/getKoulutukset';
 import { getIndexParamsByFilters } from './utils';
 import Filters from './Filters';
 import Badge from '../Badge';
@@ -32,10 +32,10 @@ import {
 
 import Anchor from '../Anchor';
 
-const getKoulutukset = async ({ httpClient, apiUrls, ...filters }) => {
+const getKoulutuksetFn = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
 
-  const { result, totalCount } = await getKoutaIndexKoulutukset({
+  const { result, totalCount } = await getKoulutukset({
     httpClient,
     apiUrls,
     ...params,
@@ -55,6 +55,12 @@ const LuoKoulutusDropdown = ({ organisaatioOid }) => {
       >
         Tutkintoon johtava koulutus
       </DropdownMenuItem>
+      <DropdownMenuItem
+        as={Link}
+        to={`/organisaatio/${organisaatioOid}/koulutus?johtaaTutkintoon=false`}
+      >
+        Tutkintoon johtamaton koulutus
+      </DropdownMenuItem>
     </DropdownMenu>
   );
 
@@ -66,7 +72,7 @@ const LuoKoulutusDropdown = ({ organisaatioOid }) => {
     >
       {({ ref, onToggle, visible }) => (
         <div ref={ref} onClick={onToggle}>
-          <Button>
+          <Button variant="outlined">
             {t('etusivu.luoUusiKoulutus')} <DropdownIcon open={visible} />
           </Button>
         </div>
@@ -109,7 +115,7 @@ const makeTableColumns = t => [
   },
 ];
 
-const KoulutuksetSection = ({ organisaatioOid }) => {
+const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
   const {
@@ -137,7 +143,7 @@ const KoulutuksetSection = ({ organisaatioOid }) => {
     error,
     reload,
   } = useApiAsync({
-    promiseFn: getKoulutukset,
+    promiseFn: getKoulutuksetFn,
     nimi: debouncedNimi,
     page,
     showArchived,
@@ -159,10 +165,10 @@ const KoulutuksetSection = ({ organisaatioOid }) => {
     <ListCollapse
       icon="school"
       header={t('yleiset.koulutukset')}
-      actions={<Actions organisaatioOid={organisaatioOid} />}
+      actions={canCreate ? <Actions organisaatioOid={organisaatioOid} /> : null}
       defaultOpen
     >
-      <Spacing marginBottom={2}>
+      <Spacing marginBottom={3}>
         <Filters
           {...filtersProps}
           nimiPlaceholder={t('etusivu.haeKoulutuksia')}
@@ -183,7 +189,7 @@ const KoulutuksetSection = ({ organisaatioOid }) => {
         <Spin center />
       )}
 
-      <Flex marginTop={2}>
+      <Flex marginTop={3} justifyCenter>
         <Pagination value={page} onChange={setPage} pageCount={pageCount} />
       </Flex>
     </ListCollapse>

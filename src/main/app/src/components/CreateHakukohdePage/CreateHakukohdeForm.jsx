@@ -1,14 +1,19 @@
-import { reduxForm } from 'redux-form';
-import { compose, withProps } from 'recompose';
+import React from 'react';
+import HakukohdeForm, { initialValues } from '../HakukohdeForm';
+import ReduxForm from '../ReduxForm';
+import getHakukohdeFormConfig from '../../utils/getHakukohdeFormConfig';
+import FormConfigContext from '../FormConfigContext';
 
-import HakukohdeForm, { getInitialValues } from '../HakukohdeForm';
+const config = getHakukohdeFormConfig();
 
-export default compose(
-  withProps(({ organisaatio }) => ({
-    steps: true,
-    initialValues: getInitialValues({ organisaatio }),
-  })),
-  reduxForm({
-    form: 'createHakukohdeForm',
-  }),
-)(HakukohdeForm);
+const CreateHakukohdeForm = props => (
+  <ReduxForm form="createHakukohdeForm" initialValues={initialValues}>
+    {() => (
+      <FormConfigContext.Provider value={config}>
+        <HakukohdeForm steps {...props} />
+      </FormConfigContext.Provider>
+    )}
+  </ReduxForm>
+);
+
+export default CreateHakukohdeForm;

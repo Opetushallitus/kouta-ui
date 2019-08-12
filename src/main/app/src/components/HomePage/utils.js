@@ -1,4 +1,4 @@
-import { isNumber, isArray } from '../../utils';
+import { isNumber } from '../../utils';
 
 export const makeOnSort = ({ name, onSort }) => dir => onSort(`${name}:${dir}`);
 
@@ -40,13 +40,4 @@ export const getIndexParamsByFilters = ({
     showArchived,
     tila: tila ? tila.value : null,
   };
-};
-
-export const getFilteredHierarkia = (hierarkia, filter) => {
-  return hierarkia.filter(filter).map(({ children, ...rest }) => {
-    return {
-      ...rest,
-      children: isArray(children) ? getFilteredHierarkia(children, filter) : [],
-    };
-  });
 };

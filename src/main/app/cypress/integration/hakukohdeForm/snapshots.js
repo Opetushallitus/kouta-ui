@@ -1,11 +1,12 @@
 module.exports = {
   createHakukohdeForm: {
-    'should be able to create hakukohde': {
+    'should be able to create ammatillinen hakukohde': {
       '1': {
         alkamiskausiKoodiUri: 'kausi_0#1',
         kaytetaanHaunAikataulua: false,
         kielivalinta: ['fi'],
-        aloituspaikat: 100,
+        minAloituspaikat: 5,
+        maxAloituspaikat: 10,
         hakuajat: [
           {
             alkaa: '2019-04-02T10:45',
@@ -14,8 +15,10 @@ module.exports = {
         ],
         liitteetOnkoSamaToimitusaika: false,
         liitteetOnkoSamaToimitusosoite: false,
+        liitteidenToimitustapa: null,
         liitteet: [
           {
+            toimitustapa: 'osoite',
             tyyppi: 'liitetyypitamm_0#1',
             nimi: {
               fi: 'Nimi',
@@ -39,43 +42,32 @@ module.exports = {
           },
         ],
         alkamisvuosi: 2019,
-        liitteidenToimitusosoite: {
-          osoite: {
-            osoite: {
-              fi: '',
-            },
-            postinumero: null,
-            postitoimipaikka: {
-              fi: '',
-            },
-          },
-          sahkoposti: null,
-        },
+        liitteidenToimitusosoite: null,
         liitteidenToimitusaika: null,
         nimi: {
           fi: 'Hakukohteen nimi',
         },
-        toinenAsteOnkoKaksoistutkinto: false,
+        toinenAsteOnkoKaksoistutkinto: true,
         valintakokeet: [
           {
-            tyyppi: 'valintakokeentyyppi_0#1',
+            tyyppi: 'valintakokeentyyppi_1#1',
             tilaisuudet: [
               {
                 osoite: {
                   osoite: {
-                    fi: 'Osoite',
+                    fi: 'osoite',
                   },
-                  postinumero: '00940',
+                  postinumero: '00510',
                   postitoimipaikka: {
-                    fi: 'Helsinki',
+                    fi: 'postitoimipaikka',
                   },
                 },
                 aika: {
                   alkaa: '2019-04-02T10:45',
-                  paattyy: '2019-11-25T23:59',
+                  paattyy: '2019-04-02T19:00',
                 },
                 lisatietoja: {
-                  fi: 'Lisätietoa',
+                  fi: 'lisatietoja',
                 },
               },
             ],
@@ -83,12 +75,104 @@ module.exports = {
         ],
         pohjakoulutusvaatimusKoodiUrit: ['pohjakoulutusvaatimustoinenaste_0#1'],
         valintaperuste: '649adb37-cd4d-4846-91a9-84b58b90f928',
-        ensikertalaisenAloituspaikat: null,
-        eriHakulomake: true,
+        minEnsikertalaisenAloituspaikat: null,
+        maxEnsikertalaisenAloituspaikat: null,
+        kaytetaanHaunHakulomaketta: false,
         hakulomaketyyppi: 'ataru',
-        hakulomakeId: 'lomake_1',
+        hakulomakeAtaruId: 'lomake_1',
         hakulomakeLinkki: {},
         hakulomakeKuvaus: {},
+        kaytetaanHaunAlkamiskautta: false,
+        organisaatioOid: '1.1.1.1.1.1',
+        toteutusOid: '2.1.1.1.1.1',
+        hakuOid: '4.1.1.1.1.1',
+        tila: 'julkaistu',
+        muokkaaja: '1.2.246.562.24.62301161440',
+      },
+    },
+    'should be able to create korkeakoulu hakukohde': {
+      '1': {
+        alkamiskausiKoodiUri: 'kausi_0#1',
+        kaytetaanHaunAikataulua: false,
+        kielivalinta: ['fi'],
+        minAloituspaikat: 5,
+        maxAloituspaikat: 10,
+        hakuajat: [
+          {
+            alkaa: '2019-04-02T10:45',
+            paattyy: '2019-11-25T23:59',
+          },
+        ],
+        liitteetOnkoSamaToimitusaika: false,
+        liitteetOnkoSamaToimitusosoite: false,
+        liitteidenToimitustapa: null,
+        liitteet: [
+          {
+            toimitustapa: 'osoite',
+            tyyppi: 'liitetyypitamm_0#1',
+            nimi: {
+              fi: 'Nimi',
+            },
+            toimitusaika: '2019-11-25T23:59',
+            toimitusosoite: {
+              osoite: {
+                osoite: {
+                  fi: 'Osoite',
+                },
+                postinumero: '00940',
+                postitoimipaikka: {
+                  fi: 'Helsinki',
+                },
+              },
+              sahkoposti: 'sahkoposti@email.com',
+            },
+            kuvaus: {
+              fi: 'Kuvaus',
+            },
+          },
+        ],
+        alkamisvuosi: 2019,
+        liitteidenToimitusosoite: null,
+        liitteidenToimitusaika: null,
+        nimi: {
+          fi: 'Hakukohteen nimi',
+        },
+        toinenAsteOnkoKaksoistutkinto: false,
+        valintakokeet: [
+          {
+            tyyppi: 'valintakokeentyyppi_1#1',
+            tilaisuudet: [
+              {
+                osoite: {
+                  osoite: {
+                    fi: 'osoite',
+                  },
+                  postinumero: '00510',
+                  postitoimipaikka: {
+                    fi: 'postitoimipaikka',
+                  },
+                },
+                aika: {
+                  alkaa: '2019-04-02T10:45',
+                  paattyy: '2019-04-02T19:00',
+                },
+                lisatietoja: {
+                  fi: 'lisatietoja',
+                },
+              },
+            ],
+          },
+        ],
+        pohjakoulutusvaatimusKoodiUrit: ['pohjakoulutusvaatimustoinenaste_0#1'],
+        valintaperuste: '649adb37-cd4d-4846-91a9-84b58b90f928',
+        minEnsikertalaisenAloituspaikat: 1,
+        maxEnsikertalaisenAloituspaikat: 5,
+        kaytetaanHaunHakulomaketta: false,
+        hakulomaketyyppi: 'ataru',
+        hakulomakeAtaruId: 'lomake_1',
+        hakulomakeLinkki: {},
+        hakulomakeKuvaus: {},
+        kaytetaanHaunAlkamiskautta: false,
         organisaatioOid: '1.1.1.1.1.1',
         toteutusOid: '2.1.1.1.1.1',
         hakuOid: '4.1.1.1.1.1',
@@ -108,28 +192,23 @@ module.exports = {
         alkamiskausiKoodiUri: 'kausi_0#1',
         alkamisvuosi: 2024,
         hakulomake: {},
-        aloituspaikat: 100,
+        minAloituspaikat: 100,
+        maxAloituspaikat: 150,
+        minEnsikertalaisenAloituspaikat: 39,
+        maxEnsikertalaisenAloituspaikat: 49,
+        kaytetaanHaunAlkamiskautta: false,
         pohjakoulutusvaatimusKoodiUrit: ['pohjakoulutusvaatimustoinenaste_0#1'],
         muuPohjakoulutusvaatimus: {},
         toinenAsteOnkoKaksoistutkinto: true,
         kaytetaanHaunAikataulua: false,
         liitteetOnkoSamaToimitusaika: false,
         liitteetOnkoSamaToimitusosoite: false,
-        liitteidenToimitusosoite: {
-          osoite: {
-            osoite: {
-              fi: 'Paasikivenkatu 7',
-            },
-            postinumero: '15110',
-            postitoimipaikka: {
-              fi: 'Lahti',
-            },
-          },
-          sahkoposti: 'salpaus@salpaus.fi',
-        },
+        liitteidenToimitusosoite: null,
+        liitteidenToimitustapa: null,
         liitteet: [
           {
-            tyyppi: null,
+            toimitustapa: 'osoite',
+            tyyppi: 'liitetyypitamm_0#1',
             nimi: {
               fi: 'Nimi',
             },
@@ -186,14 +265,13 @@ module.exports = {
         organisaatioOid: '1.1.1.1.1.1',
         kielivalinta: ['fi'],
         modified: '2019-04-04T08:28',
+        kaytetaanHaunHakulomaketta: false,
+        hakulomaketyyppi: 'ataru',
+        hakulomakeAtaruId: '12345',
+        hakulomakeKuvaus: {},
+        hakulomakeLinkki: {},
         liitteidenToimitusaika: null,
         valintaperuste: null,
-        ensikertalaisenAloituspaikat: null,
-        eriHakulomake: true,
-        hakulomaketyyppi: 'ataru',
-        hakulomakeId: '12345',
-        hakulomakeLinkki: {},
-        hakulomakeKuvaus: {},
       },
     },
   },

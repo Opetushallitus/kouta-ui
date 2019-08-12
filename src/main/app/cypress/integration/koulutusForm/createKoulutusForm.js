@@ -1,12 +1,25 @@
 import {
   getByTestId,
-  getRadio,
   getSelectOption,
   getCheckbox,
   chooseKieliversiotLanguages,
+  selectOption,
+  fillTreeSelect,
+  fillKoulutustyyppiSelect,
 } from '../../utils';
 
 import { stubKoulutusFormRoutes } from '../../koulutusFormUtils';
+
+const jatka = cy => {
+  getByTestId('jatkaButton', cy).click({ force: true });
+};
+
+const fillKoulutustyyppiSection = (path, cy) => {
+  cy.getByTestId('tyyppiSection').within(() => {
+    fillKoulutustyyppiSelect(path, cy);
+    jatka(cy);
+  });
+};
 
 const fillPohjaSection = cy => {
   getByTestId('pohjaSection', cy).within(() => {
@@ -45,15 +58,10 @@ const tallenna = cy => {
   getByTestId('tallennaJaJulkaiseKoulutusButton', cy).click({ force: true });
 };
 
-const jatka = cy => {
-  getByTestId('jatkaButton', cy).click({ force: true });
-};
-
 const fillJarjestajaSection = (cy, jatkaArg = false) => {
   getByTestId('jarjestajaSection', cy).within(() => {
     getByTestId('jarjestajatSelection', cy).within(() => {
-      getCheckbox('4.1.1.1.1.1', cy).click({ force: true });
-      getCheckbox('2.1.1.1.1.1', cy).click({ force: true });
+      fillTreeSelect(['4.1.1.1.1.1'], cy);
     });
 
     jatkaArg && jatka(cy);
@@ -78,10 +86,7 @@ describe('createKoulutusForm', () => {
       },
     }).as('createAmmKoulutusResponse');
 
-    getByTestId('tyyppiSection', cy).within(() => {
-      getRadio('amm', cy).click({ force: true });
-      getByTestId('jatkaButton', cy).click({ force: true });
-    });
+    fillKoulutustyyppiSection(['amm'], cy);
 
     fillPohjaSection(cy);
 
@@ -121,10 +126,7 @@ describe('createKoulutusForm', () => {
       },
     }).as('createYoKoulutusResponse');
 
-    getByTestId('tyyppiSection', cy).within(() => {
-      getRadio('yo', cy).click({ force: true });
-      jatka(cy);
-    });
+    fillKoulutustyyppiSection(['korkeakoulutus', 'yo'], cy);
 
     fillPohjaSection(cy);
 
@@ -145,6 +147,10 @@ describe('createKoulutusForm', () => {
 
       getByTestId('tutkintonimikeSelect', cy).within(() => {
         getSelectOption('tutkintonimikekk_0', cy).click({ force: true });
+      });
+
+      cy.getByTestId('koulutusalatSelect').within(() => {
+        selectOption('kansallinenkoulutusluokitus2016koulutusalataso2_0', cy);
       });
 
       getByTestId('opintojenLaajuusSelect', cy).click();

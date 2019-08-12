@@ -1,63 +1,70 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-import { submit } from '../../state/editValintaperusteForm';
 import Button from '../Button';
 import { JULKAISUTILA } from '../../constants';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
-
-const Wrapper = styled.div`
-  max-width: 1200px;
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0px auto;
-  display: flex;
-  justify-content: flex-end;
-`;
+import Flex from '../Flex';
+import updateValintaperuste from '../../utils/kouta/updateValintaperuste';
+import getValintaperusteByFormValues from '../../utils/getValintaperusteByFormValues';
+import validateValintaperusteForm from '../../utils/validateValintaperusteForm';
+import useSaveForm from '../useSaveForm';
 
 const PublishButton = styled(Button)`
   margin-left: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
-const EditValintaperusteFooter = ({
-  valintaperuste,
-  onSave = () => {},
-}) => {
+const EditValintaperusteFooter = ({ valintaperuste, history }) => {
   const { tila } = valintaperuste;
-
-  const onSaveAndPublish = useCallback(() => {
-    onSave({ tila: JULKAISUTILA.JULKAISTU });
-  }, [onSave]);
-
   const { t } = useTranslation();
 
+  const submit = useCallback(
+    async ({ values, httpClient, apiUrls }) => {
+      await updateValintaperuste({
+        httpClient,
+        apiUrls,
+        valintaperuste: {
+          ...valintaperuste,
+          ...getValintaperusteByFormValues(values),
+        },
+      });
+
+      history.replace({
+        state: {
+          valintaperusteUpdatedAt: Date.now(),
+        },
+      });
+    },
+    [valintaperuste, history],
+  );
+
+  const { save, saveAndPublish } = useSaveForm({
+    form: 'editValintaperusteForm',
+    submit,
+    validate: validateValintaperusteForm,
+  });
+
   return (
-    <Wrapper>
+    <Flex justifyEnd>
       <Button
         variant="outlined"
-        onClick={onSave}
+        onClick={save}
         {...getTestIdProps('tallennaValintaperusteButton')}
       >
         {t('yleiset.tallenna')}
       </Button>
       {tila !== JULKAISUTILA.JULKAISTU ? (
         <PublishButton
-          onClick={onSaveAndPublish}
+          onClick={saveAndPublish}
           {...getTestIdProps('tallennaJaJulkaiseValintaperusteButton')}
         >
           {t('yleiset.tallennaJaJulkaise')}
         </PublishButton>
       ) : null}
-    </Wrapper>
+    </Flex>
   );
 };
 
-export default connect(
-  null,
-  (dispatch, { valintaperuste }) => ({
-    onSave: ({ tila: tilaArg } = {}) =>
-      dispatch(submit({ valintaperuste, tila: tilaArg })),
-  }),
-)(EditValintaperusteFooter);
+export default withRouter(EditValintaperusteFooter);

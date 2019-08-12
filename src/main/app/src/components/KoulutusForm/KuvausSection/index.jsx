@@ -1,26 +1,49 @@
 import React from 'react';
+import { Field } from 'redux-form';
 
-import {
-  KOULUTUSTYYPPI_CATEGORY,
-  KORKEAKOULUKOULUTUSTYYPIT,
-} from '../../../constants';
+import FormConfigField from '../../FormConfigField';
+import Box from '../../Box';
+import TekstiKuvausSection from './TekstiKuvausSection';
+import { FormFieldInput, FormFieldTextarea } from '../../FormFields';
+import useTranslation from '../../useTranslation';
+import { getTestIdProps } from '../../../utils';
 
-import AmmattilinenKuvausSection from './AmmatillinenKuvausSection';
-import KorkeakouluKuvausSection from './KorkeakouluKuvausSection';
+const KuvausSection = ({ language, koulutuskoodi, name }) => {
+  const { t } = useTranslation();
 
-const KuvausSection = ({ language, koulutusValue, koulutustyyppi }) => {
-  if (koulutustyyppi === KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS) {
-    return (
-      <AmmattilinenKuvausSection
-        language={language}
-        koulutusValue={koulutusValue}
-      />
-    );
-  } else if (KORKEAKOULUKOULUTUSTYYPIT.includes(koulutustyyppi)) {
-    return <KorkeakouluKuvausSection language={language} />;
-  }
+  return (
+    <Box mb={-2}>
+      <FormConfigField name="tekstiKuvaus">
+        <Box mb={2}>
+          <TekstiKuvausSection
+            name={name}
+            language={language}
+            koulutuskoodi={koulutuskoodi}
+          />
+        </Box>
+      </FormConfigField>
 
-  return null;
+      <FormConfigField name="nimi">
+        <Box mb={2} {...getTestIdProps('kuvauksenNimiInput')}>
+          <Field
+            name={`${name}.nimi.${language}`}
+            component={FormFieldInput}
+            label={t('yleiset.kuvauksenNimi')}
+          />
+        </Box>
+      </FormConfigField>
+
+      <FormConfigField name="kuvaus">
+        <Box mb={2} {...getTestIdProps('kuvausInput')}>
+          <Field
+            name={`${name}.kuvaus.${language}`}
+            component={FormFieldTextarea}
+            label={t('yleiset.kuvaus')}
+          />
+        </Box>
+      </FormConfigField>
+    </Box>
+  );
 };
 
 export default KuvausSection;

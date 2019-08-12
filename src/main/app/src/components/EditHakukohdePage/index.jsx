@@ -10,17 +10,17 @@ import EditHakukohdeFooter from './EditHakukohdeFooter';
 import useApiAsync from '../useApiAsync';
 import {
   getKoutaHakukohdeByOid,
-  getKoutaToteutusByOid,
   getKoutaHakuByOid,
   getOrganisaatioByOid,
-  getKoulutustyyppiByKoulutusOid,
 } from '../../apiUtils';
 import { getFirstLanguageValue } from '../../utils';
 import Flex, { FlexItem } from '../Flex';
 import Typography from '../Typography';
 import Spin from '../Spin';
-import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
+import { KOULUTUSTYYPPI } from '../../constants';
 import useTranslation from '../useTranslation';
+import getKoulutustyyppiByKoulutusOid from '../../utils/kouta/getKoulutustyyppiByKoulutusOid';
+import getToteutusByOid from '../../utils/kouta/getToteutusByOid';
 
 const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
   const hakukohde = await getKoutaHakukohdeByOid({
@@ -33,7 +33,7 @@ const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
 
   const [organisaatio, toteutus, haku] = await Promise.all([
     getOrganisaatioByOid({ httpClient, apiUrls, oid: organisaatioOid }),
-    getKoutaToteutusByOid({ httpClient, apiUrls, oid: toteutusOid }),
+    getToteutusByOid({ httpClient, apiUrls, oid: toteutusOid }),
     getKoutaHakuByOid({ httpClient, apiUrls, oid: hakuOid }),
   ]);
 
@@ -118,7 +118,7 @@ const EditHakukohdePage = props => {
             toteutus={toteutus}
             hakukohde={hakukohde}
             koulutustyyppi={
-              koulutustyyppi || KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS
+              koulutustyyppi || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
             }
           />
         </>

@@ -1,36 +1,54 @@
-import { reduxForm } from 'redux-form';
-import React, { useMemo } from 'react';
-import { connect } from 'react-redux';
+import React, { useMemo, useCallback } from 'react';
+import { withRouter } from 'react-router-dom';
 
+import ReduxForm from '../ReduxForm';
 import KoulutusForm from '../KoulutusForm';
-import { getValuesByKoulutus } from '../../state/createKoulutusForm';
-import { attachToteutus } from '../../state/editKoulutusForm';
+import FormConfigContext from '../FormConfigContext';
+import getFormValuesByKoulutus from '../../utils/getFormValuesByKoulutus';
+import useFieldValue from '../useFieldValue';
+import getKoulutusFormConfig from '../../utils/getKoulutusFormConfig';
 
-const KoulutusReduxForm = reduxForm({
-  form: 'editKoulutusForm',
-})(KoulutusForm);
+const KoulutusFormWrapper = props => {
+  const koulutustyyppi = useFieldValue('koulutustyyppi');
 
-const EditKoulutusForm = ({ onSave, koulutus, ...props }) => {
-  const initialValues = useMemo(() => {
-    return getValuesByKoulutus(koulutus);
-  }, [koulutus]);
+  const config = useMemo(() => getKoulutusFormConfig(koulutustyyppi), [
+    koulutustyyppi,
+  ]);
 
   return (
-    <KoulutusReduxForm
-      {...props}
-      koulutus={koulutus}
-      steps={false}
-      canCopy={false}
-      initialValues={initialValues}
-      canEditKoulutustyyppi={false}
-    />
+    <FormConfigContext.Provider value={config}>
+      <KoulutusForm {...props} />
+    </FormConfigContext.Provider>
   );
 };
 
-export default connect(
-  null,
-  (dispatch, { koulutus: { oid: koulutusOid, organisaatioOid } }) => ({
-    onAttachToteutus: () =>
-      dispatch(attachToteutus({ koulutusOid, organisaatioOid })),
-  }),
-)(EditKoulutusForm);
+const EditKoulutusForm = ({ onSave, koulutus, history, ...props }) => {
+  const initialValues = useMemo(() => {
+    return getFormValuesByKoulutus(koulutus);
+  }, [koulutus]);
+
+  const onAttachToteutus = useCallback(() => {
+    history.push(
+      `/organisaatio/${koulutus.organisaatioOid}/koulutus/${
+        koulutus.oid
+      }/toteutus`,
+    );
+  }, [history, koulutus]);
+
+  return (
+    <ReduxForm form="editKoulutusForm" initialValues={initialValues}>
+      {() => (
+        <KoulutusFormWrapper
+          steps={false}
+          canSelectBase={false}
+          canEditKoulutustyyppi={false}
+          johtaaTutkintoon={Boolean(koulutus.johtaaTutkintoon)}
+          onAttachToteutus={onAttachToteutus}
+          {...props}
+        />
+      )}
+    </ReduxForm>
+  );
+};
+
+export default withRouter(EditKoulutusForm);

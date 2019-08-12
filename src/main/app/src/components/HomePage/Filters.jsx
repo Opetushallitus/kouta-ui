@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 
 import Flex, { FlexItem } from '../Flex';
-import Input from '../Input';
+import Input, { AddonIcon } from '../Input';
 import Checkbox from '../Checkbox';
 import Select from '../Select';
 import { JULKAISUTILA } from '../../constants';
@@ -43,6 +43,7 @@ export const Filters = ({
           placeholder={nimiPlaceholder}
           value={nimi}
           onChange={onNimiChange}
+          addonAfter={<AddonIcon type="search" />}
         />
       </FlexItem>
       <FlexItem grow={0} basis="20%" paddingRight={2}>

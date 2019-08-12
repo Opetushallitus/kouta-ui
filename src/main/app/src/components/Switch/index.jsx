@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { Spring } from 'react-spring';
 
 import { getThemeProp } from '../../theme';
+import { disabledStyle } from '../../system';
 
 const SwitchContainer = styled.div`
   display: inline-block;
@@ -49,23 +50,14 @@ const Label = styled.label`
   color: ${getThemeProp('palette.text.primary')};
   align-items: center;
 
-  ${({ disabled }) =>
-    disabled &&
-    css`
-      opacity: 0.5;
-      cursor: not-allowed;
-    `}
+  ${disabledStyle}
 `;
 
 const LabelWrapper = styled.div`
   flex: 1;
   margin-left: 9px;
 
-  ${({ disabled }) =>
-    disabled &&
-    css`
-      opacity: 0.5;
-    `}
+  ${disabledStyle}
 `;
 
 const SwitchWrapper = styled.div`

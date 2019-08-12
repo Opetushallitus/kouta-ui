@@ -5,6 +5,7 @@ import React, {
   useState,
   useEffect,
 } from 'react';
+
 import styled, { css } from 'styled-components';
 import { setLightness } from 'polished';
 
@@ -23,12 +24,12 @@ import { UncontrolledDropdown, DropdownMenu } from '../Dropdown';
 import Input from '../Input';
 import Flex, { FlexItem } from '../Flex';
 import Button from '../Button';
+import createEmptyEditorState from '../../utils/draft/createEmptyEditorState';
 
 import {
   getBlockType,
   inlineIsActive,
   blockIsActive,
-  createEmptyEditorState,
   getSelectionLinkUrl,
 } from './utils';
 
@@ -132,7 +133,12 @@ const StyleButton = ({
   }, [editorState, styleName, inline, block]);
 
   return (
-    <StyleButtonBase onClick={onSelect} active={isActive} {...props}>
+    <StyleButtonBase
+      tabIndex="-1"
+      onClick={onSelect}
+      active={isActive}
+      {...props}
+    >
       <StyleIcon type={icon} />
     </StyleButtonBase>
   );
@@ -161,6 +167,7 @@ const HeaderSelect = ({ editorState, onChange, editorRef }) => {
   return (
     <HeaderSelectContainer>
       <Select
+        tabIndex="-1"
         options={HEADER_OPTIONS}
         value={{ value }}
         onChange={onSelect}
@@ -261,6 +268,7 @@ const LinkButton = ({ editorState, onChange, editorRef, ...props }) => {
       {({ onToggle, ref, visible }) => (
         <div ref={ref}>
           <StyleButtonBase
+            tabIndex="-1"
             onClick={e => {
               e.preventDefault();
               !visible && setLinkByEditorState();

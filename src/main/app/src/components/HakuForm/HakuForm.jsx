@@ -1,175 +1,199 @@
-import React from 'react';
-import { formValues } from 'redux-form';
+import React, { useMemo, useCallback } from 'react';
+import get from 'lodash/get';
 
 import BaseSelectionSection from './BaseSelectionSection';
-import KieliversiotFormSection from '../KieliversiotFormSection';
+import KieliversiotFields from '../KieliversiotFields';
 import NameSection from './NameSection';
 import TargetGroupSection from './TargetGroupSection';
 import SearchTypeSection from './SearchTypeSection';
 import ScheduleSection from './ScheduleSection';
-import ContactInfoSection from './ContactInfoSection';
+import YhteyshenkilotSection from './YhteyshenkilotSection';
 import FormCollapseGroup from '../FormCollapseGroup';
 import FormCollapse from '../FormCollapse';
 import HakukohteetModal from './HakukohteetModal';
 import HakukohteetSection from './HakukohteetSection';
 import { isFunction, getTestIdProps } from '../../utils';
-import { ModalController } from '../Modal';
 import Flex from '../Flex';
 import Button from '../Button';
 import useTranslation from '../useTranslation';
 import LomakeSection from './LomakeSection';
+import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
+import ValintakoeSection from './ValintakoeSection';
+import useModal from '../useModal';
+import isYhteishakuHakutapa from '../../utils/isYhteishakuHakutapa';
+import useFieldValue from '../useFieldValue';
+import { HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID } from '../../constants';
 
-const ActiveLanguages = formValues({
-  languages: 'kieliversiot.languages',
-})(({ languages, ...props }) => {
-  return props.children({
-    languages: languages || [],
-  });
-});
+const PohjaFormCollapse = ({
+  children,
+  onContinue,
+  onSelectBase,
+  ...props
+}) => {
+  const tapa = useFieldValue('pohja.tapa');
+  const valinta = useFieldValue('pohja.valinta');
 
-const HakukohteetPohjaFieldValue = formValues({
-  pohja: 'hakukohteet.pohja',
-})(({ pohja, children }) => children({ pohja }));
+  const onPohjaContinue = useCallback(() => {
+    onContinue();
+    onSelectBase({
+      tapa,
+      valinta: get(valinta, 'value'),
+    });
+  }, [onSelectBase, tapa, valinta, onContinue]);
 
-const hakukohteetModal = props => <HakukohteetModal {...props} />;
+  return (
+    <FormCollapse onContinue={onPohjaContinue} {...props}>
+      {children}
+    </FormCollapse>
+  );
+};
 
 const HakuForm = ({
   organisaatioOid,
-  handleSubmit,
-  onCopy = () => {},
-  onMaybeCopy = () => {},
-  onCreateNew = () => {},
-  canCopy = true,
+  canSelectBase = true,
   onAttachHakukohde,
   steps = false,
   scrollTarget,
   haku: hakuProp = null,
+  onSelectBase = () => {},
 }) => {
   const { t } = useTranslation();
+  const roleBuilder = useAuthorizedUserRoleBuilder();
+  const { isOpen, open, close } = useModal();
+  const kieliversiot = useFieldValue('kieliversiot');
+  const languages = kieliversiot || [];
+  const hakutapa = useFieldValue('hakutapa');
+  const isYhteishaku = isYhteishakuHakutapa(hakutapa);
+
+  const isOphVirkailija = useMemo(
+    () =>
+      roleBuilder.hasWrite(HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID).result(),
+    [roleBuilder],
+  );
 
   return (
-    <form onSubmit={handleSubmit}>
-      <ActiveLanguages>
-        {({ languages }) => (
-          <FormCollapseGroup
-            enabled={steps}
-            scrollTarget={scrollTarget}
-            defaultOpen={!steps}
+    <>
+      <HakukohteetModal
+        open={isOpen}
+        onClose={close}
+        fieldName="hakukohteet"
+        organisaatioOid={organisaatioOid}
+        onSave={onAttachHakukohde}
+      />
+      <FormCollapseGroup
+        enabled={steps}
+        scrollTarget={scrollTarget}
+        defaultOpen={!steps}
+        configured
+      >
+        {canSelectBase ? (
+          <PohjaFormCollapse
+            section="pohja"
+            header={t('yleiset.pohjanValinta')}
+            scrollOnActive={false}
+            onSelectBase={onSelectBase}
+            {...getTestIdProps('pohjaSection')}
           >
-            {canCopy ? (
-              <FormCollapse
-                header={t('yleiset.pohjanValinta')}
-                section="pohja"
-                onContinue={onMaybeCopy}
-                scrollOnActive={false}
-                {...getTestIdProps('pohjaSection')}
-              >
-                {({ onContinue }) => (
-                  <BaseSelectionSection
-                    onContinue={onContinue}
-                    organisaatioOid={organisaatioOid}
-                    onCopy={onCopy}
-                    onCreateNew={onCreateNew}
-                  />
-                )}
-              </FormCollapse>
-            ) : null}
+            <BaseSelectionSection
+              organisaatioOid={organisaatioOid}
+              name="pohja"
+            />
+          </PohjaFormCollapse>
+        ) : null}
 
-            <FormCollapse
-              header={t('yleiset.kieliversiot')}
-              section="kieliversiot"
-              {...getTestIdProps('kieliversiotSection')}
-            >
-              <KieliversiotFormSection />
-            </FormCollapse>
+        <FormCollapse
+          section="kieliversiot"
+          header={t('yleiset.kieliversiot')}
+          {...getTestIdProps('kieliversiotSection')}
+        >
+          <KieliversiotFields name="kieliversiot" />
+        </FormCollapse>
 
-            <FormCollapse
-              header={t('hakulomake.haunNimi')}
-              section="nimi"
-              languages={languages}
-              {...getTestIdProps('nimiSection')}
-            >
-              <NameSection />
-            </FormCollapse>
+        <FormCollapse
+          section="nimi"
+          header={t('hakulomake.haunNimi')}
+          languages={languages}
+          {...getTestIdProps('nimiSection')}
+        >
+          <NameSection name="nimi" />
+        </FormCollapse>
 
-            <FormCollapse
-              header={t('hakulomake.haunKohdejoukko')}
-              section="kohdejoukko"
-              {...getTestIdProps('kohdejoukkoSection')}
-            >
-              <TargetGroupSection />
-            </FormCollapse>
+        <FormCollapse
+          section="kohdejoukko"
+          header={t('hakulomake.haunKohdejoukko')}
+          {...getTestIdProps('kohdejoukkoSection')}
+        >
+          <TargetGroupSection name="kohdejoukko" />
+        </FormCollapse>
 
-            <FormCollapse
-              header={t('hakulomake.hakutapa')}
-              section="hakutapa"
-              {...getTestIdProps('hakutapaSection')}
-            >
-              <SearchTypeSection />
-            </FormCollapse>
+        <FormCollapse
+          section="hakutapa"
+          header={t('hakulomake.hakutapa')}
+          {...getTestIdProps('hakutapaSection')}
+        >
+          <SearchTypeSection name="hakutapa" />
+        </FormCollapse>
 
-            <FormCollapse
-              header={t('hakulomake.haunAikataulu')}
-              section="aikataulut"
-              {...getTestIdProps('aikatauluSection')}
-            >
-              <ScheduleSection />
-            </FormCollapse>
+        <FormCollapse
+          section="aikataulu"
+          header={t('hakulomake.haunAikataulu')}
+          {...getTestIdProps('aikatauluSection')}
+        >
+          <ScheduleSection
+            name="aikataulut"
+            isYhteishaku={isYhteishaku}
+            isOphVirkailija={isOphVirkailija}
+          />
+        </FormCollapse>
 
-            <FormCollapse
-              header={t('yleiset.hakulomakkeenValinta')}
-              languages={languages}
-              {...getTestIdProps('hakulomakeSection')}
-            >
-              <LomakeSection />
-            </FormCollapse>
+        <FormCollapse
+          section="hakulomake"
+          header={t('yleiset.hakulomakkeenValinta')}
+          languages={languages}
+          {...getTestIdProps('hakulomakeSection')}
+        >
+          <LomakeSection />
+        </FormCollapse>
 
-            <FormCollapse
-              header={t('hakulomake.haunYhteystiedot')}
-              section="yhteystiedot"
-              languages={languages}
-              {...getTestIdProps('yhteystiedotSection')}
-            >
-              <ContactInfoSection />
-            </FormCollapse>
+        <FormCollapse
+          section="valintakoe"
+          header={t('yleiset.valintakoe')}
+          languages={languages}
+          {...getTestIdProps('valintakoeSection')}
+        >
+          <ValintakoeSection name="valintakoe" />
+        </FormCollapse>
 
-            {isFunction(onAttachHakukohde) ? (
-              <FormCollapse
-                header={t('hakulomake.liitetytHakukohteet')}
-                id="liitetyt-hakukohteet"
-                clearable={false}
-                actions={
-                  <HakukohteetPohjaFieldValue>
-                    {({ pohja }) => (
-                      <ModalController
-                        modal={hakukohteetModal}
-                        pohjaValue={pohja}
-                        fieldName="toteutukset"
-                        organisaatioOid={organisaatioOid}
-                        onSave={onAttachHakukohde}
-                      >
-                        {({ onToggle }) => (
-                          <Flex justifyCenter full>
-                            <Button onClick={onToggle} type="button">
-                              {t('yleiset.liitaHakukohde')}
-                            </Button>
-                          </Flex>
-                        )}
-                      </ModalController>
-                    )}
-                  </HakukohteetPohjaFieldValue>
-                }
-              >
-                <HakukohteetSection
-                  haku={hakuProp}
-                  organisaatioOid={organisaatioOid}
-                />
-              </FormCollapse>
-            ) : null}
-          </FormCollapseGroup>
-        )}
-      </ActiveLanguages>
-    </form>
+        <FormCollapse
+          section="yhteystiedot"
+          header={t('hakulomake.haunYhteystiedot')}
+          languages={languages}
+          {...getTestIdProps('yhteystiedotSection')}
+        >
+          <YhteyshenkilotSection name="yhteyshenkilot" />
+        </FormCollapse>
+
+        {isFunction(onAttachHakukohde) ? (
+          <FormCollapse
+            header={t('hakulomake.liitetytHakukohteet')}
+            id="liitetyt-hakukohteet"
+            clearable={false}
+            actions={
+              <Flex justifyCenter full>
+                <Button onClick={open} type="button">
+                  {t('yleiset.liitaHakukohde')}
+                </Button>
+              </Flex>
+            }
+          >
+            <HakukohteetSection
+              haku={hakuProp}
+              organisaatioOid={organisaatioOid}
+            />
+          </FormCollapse>
+        ) : null}
+      </FormCollapseGroup>
+    </>
   );
 };
 

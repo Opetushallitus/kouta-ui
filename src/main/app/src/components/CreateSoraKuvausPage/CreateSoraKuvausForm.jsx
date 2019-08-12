@@ -1,14 +1,13 @@
 import React, { useMemo } from 'react';
-import { reduxForm } from 'redux-form';
 
 import SoraKuvausForm, { initialValues } from '../SoraKuvausForm';
-
-import { POHJAVALINNAT } from '../../constants';
+import ReduxForm from '../ReduxForm';
+import { POHJAVALINTA } from '../../constants';
 import useSoraKuvaus from '../useSoraKuvaus';
 
 const getCopyValues = soraKuvausId => ({
   pohja: {
-    tapa: POHJAVALINNAT.KOPIO,
+    tapa: POHJAVALINTA.KOPIO,
     valinta: { value: soraKuvausId },
   },
 });
@@ -21,12 +20,6 @@ const getInitialValues = soraKuvaus => {
     : initialValues;
 };
 
-const SoraKuvausReduxForm = reduxForm({
-  form: 'createSoraKuvausForm',
-  initialValues,
-  enableReinitialize: true,
-})(SoraKuvausForm);
-
 export const CreateSoraKuvausForm = ({ kopioSoraKuvausId, ...props }) => {
   const { soraKuvaus } = useSoraKuvaus(kopioSoraKuvausId);
 
@@ -34,7 +27,15 @@ export const CreateSoraKuvausForm = ({ kopioSoraKuvausId, ...props }) => {
     getInitialValues(soraKuvaus);
   }, [soraKuvaus]);
 
-  return <SoraKuvausReduxForm initialValues={initialValues} steps {...props} />;
+  return (
+    <ReduxForm
+      form="createSoraKuvausForm"
+      initialValues={initialValues}
+      enableReinitialize
+    >
+      {() => <SoraKuvausForm steps {...props} />}
+    </ReduxForm>
+  );
 };
 
 export default CreateSoraKuvausForm;

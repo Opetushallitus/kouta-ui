@@ -1,9 +1,10 @@
 import React from 'react';
-import { lighten } from 'polished';
+import { lighten, transparentize } from 'polished';
 import styled, { css } from 'styled-components';
 import get from 'lodash/get';
 
 import { getThemeProp } from '../../theme';
+import { disabledStyle } from '../../system';
 
 const getOutlinedColorCss = ({ color, theme }) => {
   const outlineColor =
@@ -55,6 +56,25 @@ const getContainedColorCss = ({ color, theme }) => {
   `;
 };
 
+const getTextVariantColorCss = ({ color, theme }) => {
+  const fontColor =
+    get(theme, ['palette', color, 'main']) || theme.palette.primary.main;
+
+  const fontHoverColor = lighten(0.05, fontColor);
+  const backgroundHoverColor = transparentize(0.9, fontColor);
+
+  return `
+    border-color: transparent;
+    background-color: transparent;
+    color: ${fontColor};
+
+    &:hover, &:active {
+      color: ${fontHoverColor}
+      background-color: ${backgroundHoverColor};
+    }
+  `;
+};
+
 const getVariantCss = ({ variant }) => {
   if (variant === 'outlined') {
     return css`
@@ -65,14 +85,19 @@ const getVariantCss = ({ variant }) => {
     return css`
       ${getContainedColorCss}
     `;
+  } else if (variant === 'text') {
+    return css`
+      ${getTextVariantColorCss}
+      padding: 6px 8px;
+    `;
   }
 };
 
-const getSizeCss = ({ size }) => {
+const getSizeCss = ({ size, variant }) => {
   if (size === 'small') {
     return css`
       font-size: 0.875rem;
-      padding: 4px 10px;
+      padding: ${variant === 'text' ? '4px 6px' : '4px 10px'};
     `;
   }
 };
@@ -90,16 +115,12 @@ const ButtonBase = styled.button`
   align-items: center;
   box-sizing: border-box;
   transition: box-shadow 0.25s, background-color 0.25s, border-color 0.25s;
+  font-weight: 500;
+  text-decoration: none;
 
   ${getVariantCss}
   ${getSizeCss};
-
-  ${({ disabled }) =>
-    disabled &&
-    css`
-      opacity: 0.5;
-      cursor: not-allowed;
-    `}
+  ${disabledStyle};
 
   ${({ fullWidth }) =>
     fullWidth &&

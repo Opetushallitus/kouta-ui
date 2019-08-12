@@ -1,16 +1,14 @@
-import React from 'react';
-import { formValues } from 'redux-form';
+import React, { useCallback } from 'react';
 import get from 'lodash/get';
 
 import TypeSection from './TypeSection';
 import BaseSelectionSection from './BaseSelectionSection';
 import TiedotSection from './TiedotSection/TiedotSection';
 import KuvausSection from './KuvausSection';
-import OrganizationSection from './OrganizationSection';
+import JarjestajaSection from './JarjestajaSection';
 import FormCollapseGroup from '../FormCollapseGroup';
 import FormCollapse from '../FormCollapse';
-import KieliversiotFormSection from '../KieliversiotFormSection';
-import { KORKEAKOULUKOULUTUSTYYPIT } from '../../constants';
+import KieliversiotFields from '../KieliversiotFields';
 import ToteutuksetSection from './ToteutuksetSection';
 import Button from '../Button';
 import { isFunction, getTestIdProps } from '../../utils';
@@ -18,151 +16,154 @@ import LisatiedotSection from './LisatiedotSection';
 import Flex from '../Flex';
 import NakyvyysSection from './NakyvyysSection';
 import useTranslation from '../useTranslation';
+import useFieldValue from '../useFieldValue';
 
-const WithValues = formValues({
-  koulutustyyppiValue: 'type.type',
-  languagesValue: 'kieliversiot.languages',
-  koulutusValue: 'information.koulutus',
-})(({ children, ...rest }) => children(rest));
+const PohjaFormCollapse = ({
+  children,
+  onSelectBase,
+  onContinue,
+  ...props
+}) => {
+  const tapa = useFieldValue('pohja.tapa');
+  const valinta = useFieldValue('pohja.valinta');
+
+  const onPohjaContinue = useCallback(() => {
+    onContinue();
+    onSelectBase({
+      tapa,
+      valinta: get(valinta, 'value'),
+    });
+  }, [onSelectBase, tapa, valinta, onContinue]);
+
+  return (
+    <FormCollapse onContinue={onPohjaContinue} {...props}>
+      {children}
+    </FormCollapse>
+  );
+};
 
 const KoulutusForm = ({
-  handleSubmit,
   organisaatioOid,
-  onCopy = () => {},
-  onMaybeCopy = () => {},
   steps = false,
-  onCreateNew,
   onAttachToteutus,
-  canCopy = true,
-  scrollTarget,
+  canSelectBase = true,
   koulutus: koulutusProp = null,
   canEditKoulutustyyppi = true,
+  johtaaTutkintoon = true,
+  onSelectBase = () => {},
 }) => {
   const { t } = useTranslation();
 
+  const koulutustyyppi = useFieldValue('koulutustyyppi');
+  const kieliversiotValue = useFieldValue('kieliversiot');
+  const koulutuskoodi = useFieldValue('information.koulutus');
+  const languageTabs = kieliversiotValue || [];
+
   return (
-    <form onSubmit={handleSubmit}>
-      <WithValues>
-        {({ languagesValue, koulutusValue, koulutustyyppiValue }) => {
-          const koulutustyyppi =
-            get(koulutusProp, 'koulutustyyppi') || koulutustyyppiValue;
+    <FormCollapseGroup enabled={steps} defaultOpen={!steps} configured>
+      {canEditKoulutustyyppi ? (
+        <FormCollapse
+          section="koulutustyyppi"
+          header={t('yleiset.koulutustyyppi')}
+          scrollOnActive={false}
+          {...getTestIdProps('tyyppiSection')}
+        >
+          <TypeSection
+            name="koulutustyyppi"
+            johtaaTutkintoon={johtaaTutkintoon}
+          />
+        </FormCollapse>
+      ) : null}
 
-          const languageTabs = languagesValue || [];
+      {canSelectBase ? (
+        <PohjaFormCollapse
+          section="pohja"
+          header={t('yleiset.pohjanValinta')}
+          onSelectBase={onSelectBase}
+          {...getTestIdProps('pohjaSection')}
+        >
+          <BaseSelectionSection
+            name="pohja"
+            organisaatioOid={organisaatioOid}
+          />
+        </PohjaFormCollapse>
+      ) : null}
 
-          return (
-            <FormCollapseGroup enabled={steps} scrollTarget={scrollTarget} defaultOpen={!steps}>
-              {canEditKoulutustyyppi ? (
-                <FormCollapse
-                  header={t('yleiset.koulutustyyppi')}
-                  section="type"
-                  scrollOnActive={false}
-                  {...getTestIdProps('tyyppiSection')}
-                >
-                  <TypeSection />
-                </FormCollapse>
-              ) : null}
+      <FormCollapse
+        section="kieliversiot"
+        header={t('yleiset.kieliversiot')}
+        {...getTestIdProps('kieliversiotSection')}
+      >
+        <KieliversiotFields name="kieliversiot" />
+      </FormCollapse>
 
-              {canCopy ? (
-                <FormCollapse
-                  header={t('yleiset.pohjanValinta')}
-                  section="base"
-                  onContinue={onMaybeCopy}
-                  {...getTestIdProps('pohjaSection')}
-                >
-                  {({ onContinue }) => (
-                    <BaseSelectionSection
-                      onContinue={onContinue}
-                      organisaatioOid={organisaatioOid}
-                      onCopy={onCopy}
-                      onCreateNew={onCreateNew}
-                    />
-                  )}
-                </FormCollapse>
-              ) : null}
+      <FormCollapse
+        section="tiedot"
+        header={t('koulutuslomake.koulutuksenTiedot')}
+        languages={languageTabs}
+        {...getTestIdProps('tiedotSection')}
+      >
+        <TiedotSection
+          koulutustyyppi={koulutustyyppi}
+          koulutuskoodi={koulutuskoodi}
+          name="information"
+        />
+      </FormCollapse>
 
-              <FormCollapse
-                header={t('yleiset.kieliversiot')}
-                section="kieliversiot"
-                {...getTestIdProps('kieliversiotSection')}
-              >
-                <KieliversiotFormSection />
-              </FormCollapse>
+      <FormCollapse
+        section="kuvaus"
+        header={t('koulutuslomake.koulutuksenKuvaus')}
+        languages={languageTabs}
+        {...getTestIdProps('kuvausSection')}
+      >
+        <KuvausSection
+          koulutustyyppi={koulutustyyppi}
+          koulutuskoodi={koulutuskoodi}
+          name="description"
+        />
+      </FormCollapse>
 
-              <FormCollapse
-                header={t('koulutuslomake.koulutuksenTiedot')}
-                section="information"
-                languages={languageTabs}
-                {...getTestIdProps('tiedotSection')}
-              >
-                <TiedotSection
-                  koulutustyyppi={koulutustyyppi}
-                  koulutusValue={koulutusValue}
-                />
-              </FormCollapse>
+      <FormCollapse
+        section="lisatiedot"
+        header={t('koulutuslomake.koulutuksenLisatiedot')}
+        languages={languageTabs}
+        {...getTestIdProps('lisatiedotSection')}
+      >
+        <LisatiedotSection name="lisatiedot" />
+      </FormCollapse>
 
-              <FormCollapse
-                header={t('koulutuslomake.koulutuksenKuvaus')}
-                section="description"
-                languages={languageTabs}
-                {...getTestIdProps('kuvausSection')}
-              >
-                <KuvausSection
-                  koulutustyyppi={koulutustyyppi}
-                  koulutusValue={koulutusValue}
-                />
-              </FormCollapse>
+      <FormCollapse
+        section="jarjestyspaikka"
+        header={t('koulutuslomake.koulutuksenJarjestaja')}
+        {...getTestIdProps('jarjestajaSection')}
+      >
+        <JarjestajaSection organisaatioOid={organisaatioOid} name="tarjoajat" />
+      </FormCollapse>
 
-              <FormCollapse
-                header={t('koulutuslomake.koulutuksenLisatiedot')}
-                section="lisatiedot"
-                languages={languageTabs}
-                {...getTestIdProps('lisatiedotSection')}
-              >
-                <LisatiedotSection />
-              </FormCollapse>
+      <FormCollapse
+        section="julkisuus"
+        header="Koulutuksen näkyminen muille koulutustoimijoille"
+        {...getTestIdProps('nakyvyysSection')}
+      >
+        <NakyvyysSection name="julkinen" />
+      </FormCollapse>
 
-              <FormCollapse
-                header={t('koulutuslomake.koulutuksenJarjestaja')}
-                section="organization"
-                {...getTestIdProps('jarjestajaSection')}
-              >
-                <OrganizationSection organisaatioOid={organisaatioOid} />
-              </FormCollapse>
-
-              {KORKEAKOULUKOULUTUSTYYPIT.includes(koulutustyyppi) ? (
-                <FormCollapse
-                  header="Koulutuksen näkyminen muille koulutustoimijoille"
-                  section="nakyvyys"
-                  {...getTestIdProps('nakyvyysSection')}
-                >
-                  <NakyvyysSection />
-                </FormCollapse>
-              ) : null}
-
-              {isFunction(onAttachToteutus) ? (
-                <FormCollapse
-                  header={t('koulutuslomake.koulutukseenLiitetytToteutukset')}
-                  id="koulutukseen-liitetetyt-toteutukset"
-                  actions={
-                    <Flex justifyCenter>
-                      <Button
-                        color="primary"
-                        onClick={onAttachToteutus}
-                        type="button"
-                      >
-                        {t('koulutuslomake.liitaToteutus')}
-                      </Button>
-                    </Flex>
-                  }
-                >
-                  <ToteutuksetSection koulutus={koulutusProp} />
-                </FormCollapse>
-              ) : null}
-            </FormCollapseGroup>
-          );
-        }}
-      </WithValues>
-    </form>
+      {isFunction(onAttachToteutus) ? (
+        <FormCollapse
+          header={t('koulutuslomake.koulutukseenLiitetytToteutukset')}
+          id="koulutukseen-liitetetyt-toteutukset"
+          actions={
+            <Flex justifyCenter>
+              <Button color="primary" onClick={onAttachToteutus} type="button">
+                {t('koulutuslomake.liitaToteutus')}
+              </Button>
+            </Flex>
+          }
+        >
+          <ToteutuksetSection koulutus={koulutusProp} />
+        </FormCollapse>
+      ) : null}
+    </FormCollapseGroup>
   );
 };
 

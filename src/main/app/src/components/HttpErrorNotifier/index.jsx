@@ -1,38 +1,54 @@
 import { useEffect, useContext, useMemo } from 'react';
-import { connect } from 'react-redux';
 import throttle from 'lodash/throttle';
+import get from 'lodash/get';
 
 import HttpContext from '../HttpContext';
-import { createGenericErrorToast } from '../../state/toaster';
+import useTranslation from '../useTranslation';
+import useToaster from '../useToaster';
 
-export const HttpErrorNotifier = ({ onError = () => {} }) => {
+const getToastOptions = (error, t) => {
+  const status = get(error, 'response.status');
+
+  let title = t('yleiset.virheilmoitus');
+  let description = t('yleiset.virheilmoitusKuvaus');
+
+  if (status === 403) {
+    title = t('yleiset.kayttooikeusVirheilmoitus');
+    description = t('yleiset.kayttooikeusVirheilmoitusKuvaus');
+  }
+
+  return {
+    status: 'danger',
+    title,
+    description,
+  };
+};
+
+export const HttpErrorNotifier = () => {
+  const { openToast } = useToaster();
   const httpClient = useContext(HttpContext);
+  const { t } = useTranslation();
 
-  const onErrorThrottle = useMemo(() => {
-    return throttle(onError, 5000);
-  }, [onError]);
+  const openToastThrottle = useMemo(() => {
+    return throttle(openToast, 3000, { trailing: false });
+  }, [openToast]);
 
   useEffect(() => {
     const interceptor = httpClient.interceptors.response.use(
       response => response,
       error => {
-        onErrorThrottle(error);
+        openToastThrottle(getToastOptions(error, t));
 
         return Promise.reject(error);
       },
     );
 
     return () => {
-      httpClient.inteceptors.response.eject(interceptor);
+      httpClient.interceptors.response.eject(interceptor);
     };
-  }, [onErrorThrottle, httpClient]);
+  }, [openToastThrottle, httpClient, t]);
 
   return null;
 };
 
-export default connect(
-  null,
-  dispatch => ({
-    onError: () => dispatch(createGenericErrorToast()),
-  }),
-)(HttpErrorNotifier);
+export default HttpErrorNotifier;

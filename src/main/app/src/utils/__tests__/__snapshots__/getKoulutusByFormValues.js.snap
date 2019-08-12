@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getKoulutusByFormValues returns correct koulutus given form values 1`] = `
+Object {
+  "johtaaTutkintoon": true,
+  "julkinen": true,
+  "kielivalinta": Array [
+    "fi",
+    "sv",
+  ],
+  "koulutusKoodiUri": "koulutuskoodi_1#1",
+  "koulutustyyppi": "yo",
+  "metadata": Object {
+    "koulutusalaKoodiUrit": Array [
+      "koulutusala_1#1",
+      "koulutusala_2#1",
+    ],
+    "kuvauksenNimi": Object {
+      "fi": "Fi nimi",
+      "sv": "Sv nimi",
+    },
+    "kuvaus": Object {
+      "fi": "Fi kuvaus",
+      "sv": "Sv kuvaus",
+    },
+    "lisatiedot": Array [
+      Object {
+        "otsikkoKoodiUri": "osio_1#1",
+        "teksti": Object {},
+      },
+      Object {
+        "otsikkoKoodiUri": "osio_2#1",
+        "teksti": Object {
+          "fi": "Fi kuvaus",
+          "sv": "Sv kuvaus",
+        },
+      },
+    ],
+    "opintojenLaajuusKoodiUri": "laajuus_1#1",
+    "tutkintonimikeKoodiUrit": Array [
+      "nimike_1#1",
+      "nimike_2#1",
+    ],
+    "tyyppi": "yo",
+  },
+  "muokkaaja": "1.1.1.1",
+  "nimi": Object {
+    "fi": "Fi nimi",
+    "sv": "Sv nimi",
+  },
+  "tarjoajat": Array [
+    "123.456.789",
+  ],
+  "tila": "tallennettu",
+}
+`;

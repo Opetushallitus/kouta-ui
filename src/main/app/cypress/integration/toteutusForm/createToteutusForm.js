@@ -6,6 +6,8 @@ import {
   getSelectOption,
   getCheckbox,
   chooseKieliversiotLanguages,
+  selectOption,
+  fillTreeSelect,
 } from '../../utils';
 
 import koulutus from '../../data/koulutus';
@@ -37,7 +39,7 @@ const fillOpetuskieli = cy => {
 
 const fillOpetusaika = cy => {
   getByTestId('opetusaika', cy).within(() => {
-    getRadio('opetusaikakk_0#1', cy).click({ force: true });
+    getCheckbox('opetusaikakk_0#1', cy).click({ force: true });
     cy.get('textarea').type('opetusaika kuvaus', { force: true });
   });
 };
@@ -49,13 +51,16 @@ const fillOpetustapa = cy => {
   });
 };
 
-const fillMaksullisuus = cy => {
+const fillMaksullisuus = (tyyppi, cy) => {
   getByTestId('maksullisuus', cy).within(() => {
-    getRadio('kylla', cy).click({ force: true });
-    getByTestId('maksunMaara', cy)
+    getRadio(tyyppi, cy).click({ force: true });
+    getByTestId('maksu', cy)
       .find('input')
       .type('10');
-    cy.get('textarea').type('maksullisuus kuvaus', { force: true });
+
+    cy.getByTestId('maksullisuusKuvaus').within(() => {
+      cy.get('textarea').type('maksullisuus kuvaus', { force: true });
+    });
   });
 };
 
@@ -69,29 +74,15 @@ const fillStipendi = cy => {
   });
 };
 
-const fillLukuvuosimaksu = cy => {
-  getByTestId('lukuvuosimaksu', cy).within(() => {
-    getRadio('kylla', cy).click({ force: true });
-    getByTestId('lukuvuosimaksunMaara', cy)
-      .find('input')
-      .type('30');
-    cy.get('textarea').type('lukuvuosimaksu kuvaus', { force: true });
-  });
-};
-
 const fillKausi = cy => {
   getByTestId('alkamiskausi', cy).within(() => {
     getRadio('kausi_0#1', cy).click({ force: true });
 
-    cy.get('textarea').type('kausi kuvaus');
-
-    getByTestId('vuosi', cy).click();
-
-    getByTestId('vuosi', cy).within(() => {
-      getSelectOption(new Date().getFullYear().toString(), cy).click({
-        force: true,
-      });
+    cy.getByTestId('vuosi').within(() => {
+      selectOption(new Date().getFullYear().toString(), cy);
     });
+
+    cy.get('textarea').type('kausi kuvaus');
   });
 };
 
@@ -109,11 +100,11 @@ const fillOsiot = cy => {
     .type('koulutuksenlisatiedot_0 kuvaus', { force: true });
 };
 
-const fillCommonJarjestamistiedot = cy => {
+const fillCommonJarjestamistiedot = ({ maksullisuusTyyppi = 'kylla', cy }) => {
   fillOpetuskieli(cy);
   fillOpetusaika(cy);
   fillOpetustapa(cy);
-  fillMaksullisuus(cy);
+  fillMaksullisuus(maksullisuusTyyppi, cy);
   fillKausi(cy);
   fillOsiot(cy);
 };
@@ -149,9 +140,10 @@ const tallenna = cy => {
 };
 
 const fillJarjestajatSection = cy => {
-  getByTestId('jarjestajaSection', cy).within(() => {
-    getCheckbox('3.1.1.1.1.1', cy).click({ force: true });
-    getCheckbox('5.1.1.1.1.1', cy).click({ force: true });
+  getByTestId('jarjestamispaikatSection', cy).within(() => {
+    getByTestId('jarjestamispaikatSelection', cy).within(() => {
+      fillTreeSelect(['4.1.1.1.1.1'], cy);
+    });
 
     jatka(cy);
   });
@@ -167,6 +159,8 @@ const fillNimiSection = cy => {
 
 const fillYhteystiedotSection = cy => {
   getByTestId('yhteystiedotSection', cy).within(() => {
+    cy.getByTestId('lisaaYhteyshenkiloButton').click({ force: true });
+
     getByTestId('nimi', cy)
       .find('input')
       .type('nimi', { force: true });
@@ -176,7 +170,7 @@ const fillYhteystiedotSection = cy => {
     getByTestId('sahkoposti', cy)
       .find('input')
       .type('sähkoposti', { force: true });
-    getByTestId('puhelin', cy)
+    getByTestId('puhelinnumero', cy)
       .find('input')
       .type('puhelin', { force: true });
     getByTestId('verkkosivu', cy)
@@ -265,7 +259,7 @@ describe('createToteutusForm', () => {
     });
 
     getByTestId('jarjestamistiedotSection', cy).within(() => {
-      fillCommonJarjestamistiedot(cy);
+      fillCommonJarjestamistiedot({ cy });
       jatka(cy);
     });
 
@@ -311,9 +305,8 @@ describe('createToteutusForm', () => {
     });
 
     getByTestId('jarjestamistiedotSection', cy).within(() => {
-      fillCommonJarjestamistiedot(cy);
+      fillCommonJarjestamistiedot({ maksullisuusTyyppi: 'lukuvuosimaksu', cy });
       fillStipendi(cy);
-      fillLukuvuosimaksu(cy);
       jatka(cy);
     });
 

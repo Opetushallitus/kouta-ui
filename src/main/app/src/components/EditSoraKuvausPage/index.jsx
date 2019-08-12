@@ -8,7 +8,7 @@ import EditSoraKuvausForm from './EditSoraKuvausForm';
 import EditSoraKuvausFooter from './EditSoraKuvausFooter';
 import useSoraKuvaus from '../useSoraKuvaus';
 import Spin from '../Spin';
-import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
+import { KOULUTUSTYYPPI } from '../../constants';
 import { isFunction } from '../../utils';
 
 const EditSoraKuvausPage = props => {
@@ -29,8 +29,7 @@ const EditSoraKuvausPage = props => {
   const organisaatioOid = soraKuvaus ? soraKuvaus.organisaatioOid : null;
 
   const koulutustyyppi =
-    get(soraKuvaus, 'koulutustyyppi') ||
-    KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS;
+    get(soraKuvaus, 'koulutustyyppi') || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
   return (
     <FormPage

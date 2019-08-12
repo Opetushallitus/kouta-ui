@@ -34,6 +34,7 @@ export const stubHakukohdeFormRoutes = ({ cy, organisaatioOid, hakuOid }) => {
   stubKoodistoRoute({ koodisto: 'kausi', cy });
   stubKoodistoRoute({ koodisto: 'valintakokeentyyppi', cy });
   stubKoodistoRoute({ koodisto: 'liitetyypitamm', cy });
+  stubKoodistoRoute({ koodisto: 'kausi', cy });
 
   cy.route({
     method: 'GET',

@@ -1,17 +1,17 @@
 import React from 'react';
 import { Field } from 'redux-form';
- 
+
 import useKoodistoOptions from '../useKoodistoOptions';
 import useTranslation from '../useTranslation';
 import { FormFieldSelect } from '../FormFields';
 
-const KohdejoukonRajausSection = () => {
+const KohdejoukonRajausSection = ({ name }) => {
   const { options } = useKoodistoOptions({ koodisto: 'haunkohdejoukko' });
   const { t } = useTranslation();
 
   return (
     <Field
-      name="kohdejoukko"
+      name={name}
       component={FormFieldSelect}
       options={options}
       label={t('valintaperustelomake.valitseHaunKohdejoukko')}

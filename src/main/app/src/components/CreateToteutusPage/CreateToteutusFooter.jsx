@@ -1,61 +1,64 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
-import { submit as submitToteutusForm } from '../../state/createToteutusForm';
-import { JULKAISUTILA } from '../../constants';
+import { withRouter } from 'react-router-dom';
+
 import Button from '../Button';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
-
-const Wrapper = styled.div`
-  max-width: 1200px;
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0px auto;
-  display: flex;
-  justify-content: flex-end;
-`;
+import Flex from '../Flex';
+import getToteutusByFormValues from '../../utils/getToteutusByFormValues';
+import createToteutus from '../../utils/kouta/createToteutus';
+import useSaveForm from '../useSaveForm';
+import validateToteutusForm from '../../utils/validateToteutusForm';
 
 const SaveButton = styled(Button).attrs({ variant: 'outlined' })`
   margin-right: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
 const CreateToteutusFooter = ({
-  onSave = () => {},
-  onSaveAndPublish = () => {},
+  organisaatioOid,
+  koulutustyyppi,
+  history,
+  koulutusOid,
 }) => {
   const { t } = useTranslation();
 
+  const submit = useCallback(
+    async ({ values, httpClient, apiUrls }) => {
+      const { oid } = await createToteutus({
+        httpClient,
+        apiUrls,
+        toteutus: {
+          ...getToteutusByFormValues({ ...values, koulutustyyppi }),
+          organisaatioOid,
+          koulutusOid,
+        },
+      });
+
+      history.push(`/toteutus/${oid}/muokkaus`);
+    },
+    [organisaatioOid, history, koulutustyyppi, koulutusOid],
+  );
+
+  const { save, saveAndPublish } = useSaveForm({
+    form: 'createToteutusForm',
+    submit,
+    validate: validateToteutusForm,
+  });
+
   return (
-    <Wrapper>
-      <SaveButton
-        onClick={onSave}
-        {...getTestIdProps('tallennaToteutusButton')}
-      >
+    <Flex justifyEnd>
+      <SaveButton onClick={save} {...getTestIdProps('tallennaToteutusButton')}>
         {t('yleiset.tallenna')}
       </SaveButton>
       <Button
-        onClick={onSaveAndPublish}
+        onClick={saveAndPublish}
         {...getTestIdProps('tallennaJaJulkaiseToteutusButton')}
       >
         {t('yleiset.tallennaJaJulkaise')}
       </Button>
-    </Wrapper>
+    </Flex>
   );
 };
 
-export default connect(
-  null,
-  (dispatch, { koulutustyyppi }) => ({
-    onSave: () => {
-      dispatch(
-        submitToteutusForm({ tila: JULKAISUTILA.TALLENNETTU, koulutustyyppi }),
-      );
-    },
-    onSaveAndPublish: () => {
-      dispatch(
-        submitToteutusForm({ tila: JULKAISUTILA.JULKAISTU, koulutustyyppi }),
-      );
-    },
-  }),
-)(CreateToteutusFooter);
+export default withRouter(CreateToteutusFooter);

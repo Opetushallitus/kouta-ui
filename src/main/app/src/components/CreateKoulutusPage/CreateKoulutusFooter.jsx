@@ -1,56 +1,56 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-import { submit as submitKoulutusForm } from '../../state/createKoulutusForm';
-import { JULKAISUTILA } from '../../constants';
 import Button from '../Button';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
-
-const Wrapper = styled.div`
-  max-width: 1200px;
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0px auto;
-  display: flex;
-  justify-content: flex-end;
-`;
+import Flex from '../Flex';
+import useSaveForm from '../useSaveForm';
+import createKoulutus from '../../utils/kouta/createKoulutus';
+import validateKoulutusForm from '../../utils/validateKoulutusForm';
+import getKoulutusByFormValues from '../../utils/getKoulutusByFormValues';
 
 const SaveButton = styled(Button).attrs({ variant: 'outlined' })`
   margin-right: ${({ theme }) => theme.spacing.unit * 2}px;
 `;
 
-const KoulutusFooter = ({ onSave = () => {}, onSaveAndPublish = () => {} }) => {
+const CreateKoulutusFooter = ({ organisaatioOid, history }) => {
   const { t } = useTranslation();
 
+  const submit = useCallback(
+    async ({ values, httpClient, apiUrls }) => {
+      const { oid } = await createKoulutus({
+        httpClient,
+        apiUrls,
+        koulutus: { ...getKoulutusByFormValues(values), organisaatioOid },
+      });
+
+      history.push(`/koulutus/${oid}/muokkaus`);
+    },
+    [organisaatioOid, history],
+  );
+
+  const { save, saveAndPublish } = useSaveForm({
+    form: 'createKoulutusForm',
+    submit,
+    validate: validateKoulutusForm,
+  });
+
   return (
-    <Wrapper>
-      <SaveButton
-        onClick={onSave}
-        {...getTestIdProps('tallennaKoulutusButton')}
-      >
+    <Flex justifyEnd>
+      <SaveButton onClick={save} {...getTestIdProps('tallennaKoulutusButton')}>
         {t('yleiset.tallenna')}
       </SaveButton>
 
       <Button
-        onClick={onSaveAndPublish}
+        onClick={saveAndPublish}
         {...getTestIdProps('tallennaJaJulkaiseKoulutusButton')}
       >
         {t('yleiset.tallennaJaJulkaise')}
       </Button>
-    </Wrapper>
+    </Flex>
   );
 };
 
-export default connect(
-  null,
-  dispatch => ({
-    onSave: () => {
-      return dispatch(submitKoulutusForm({ tila: JULKAISUTILA.TALLENNETTU }));
-    },
-    onSaveAndPublish: () => {
-      return dispatch(submitKoulutusForm({ tila: JULKAISUTILA.JULKAISTU }));
-    },
-  }),
-)(KoulutusFooter);
+export default withRouter(CreateKoulutusFooter);

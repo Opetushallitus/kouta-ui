@@ -1,133 +1,108 @@
 import React from 'react';
-import { formValues } from 'redux-form';
 
 import FormCollapse from '../FormCollapse';
-import KieliversiotFormSection from '../KieliversiotFormSection';
-
-import { KOULUTUSTYYPPI_CATEGORY } from '../../constants';
+import KieliversiotFields from '../KieliversiotFields';
+import { KOULUTUSTYYPPI } from '../../constants';
 import PohjakoulutusSection from './PohjakoulutusSection';
 import PerustiedotSection from './PerustiedotSection';
 import AloituspaikatSection from './AloituspaikatSection';
-import HakuajatSection from './HakuajatSection';
 import ValintakoeSection from './ValintakoeSection';
-import AlkamiskausiSection from './AlkamiskausiSection';
 import LiitteetSection from './LiitteetSection';
 import FormCollapseGroup from '../FormCollapseGroup';
-import LomakeSection from './LomakeSection';
 import KuvausSection from './KuvausSection';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
-
-const ActiveLanguages = formValues({
-  languages: 'kieliversiot.languages',
-})(({ languages, ...props }) => {
-  return props.children({
-    languages: languages || [],
-  });
-});
+import useFieldValue from '../useFieldValue';
 
 const HakukohdeForm = ({
-  handleSubmit,
   steps = true,
   organisaatioOid,
   organisaatio,
   haku,
-  koulutustyyppi = KOULUTUSTYYPPI_CATEGORY.AMMATILLINEN_KOULUTUS,
+  toteutus,
+  koulutustyyppi = KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
 }) => {
   const { t } = useTranslation();
+  const kieliversiot = useFieldValue('kieliversiot');
+  const languages = kieliversiot || [];
 
   return (
-    <form onSubmit={handleSubmit}>
-      <ActiveLanguages>
-        {({ languages }) => (
-          <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
-            <FormCollapse
-              header={t('yleiset.kieliversiot')}
-              section="kieliversiot"
-              scrollOnActive={false}
-              {...getTestIdProps('kieliversiotSection')}
-            >
-              <KieliversiotFormSection />
-            </FormCollapse>
+    <FormCollapseGroup enabled={steps} defaultOpen={!steps} configured>
+      <FormCollapse
+        section="kieliversiot"
+        header={t('yleiset.kieliversiot')}
+        scrollOnActive={false}
+        {...getTestIdProps('kieliversiotSection')}
+      >
+        <KieliversiotFields name="kieliversiot" />
+      </FormCollapse>
 
-            <FormCollapse
-              header={t('hakukohdelomake.pohjakoulutusvaatimus')}
-              section="pohjakoulutus"
-              {...getTestIdProps('pohjakoulutusvaatimusSection')}
-            >
-              <PohjakoulutusSection koulutustyyppi={koulutustyyppi} />
-            </FormCollapse>
+      <FormCollapse
+        section="pohjakoulutusvaatimus"
+        header={t('hakukohdelomake.pohjakoulutusvaatimus')}
+        {...getTestIdProps('pohjakoulutusvaatimusSection')}
+      >
+        <PohjakoulutusSection
+          name="pohjakoulutus"
+          koulutustyyppi={koulutustyyppi}
+        />
+      </FormCollapse>
 
-            <FormCollapse
-              header={t('hakukohdelomake.hakukohteenPerustiedot')}
-              section="perustiedot"
-              languages={languages}
-              {...getTestIdProps('perustiedotSection')}
-            >
-              <PerustiedotSection koulutustyyppi={koulutustyyppi} />
-            </FormCollapse>
+      <FormCollapse
+        section="perustiedot"
+        header={t('hakukohdelomake.hakukohteenPerustiedot')}
+        languages={languages}
+        {...getTestIdProps('perustiedotSection')}
+      >
+        <PerustiedotSection
+          name="perustiedot"
+          koulutustyyppi={koulutustyyppi}
+          haku={haku}
+          toteutus={toteutus}
+        />
+      </FormCollapse>
 
-            <FormCollapse
-              header={t('hakukohdelomake.hakuajat')}
-              section="hakuajat"
-              {...getTestIdProps('hakuajatSection')}
-            >
-              <HakuajatSection haku={haku} />
-            </FormCollapse>
+      <FormCollapse
+        section="aloituspaikat"
+        header={t('hakukohdelomake.aloituspaikat')}
+        {...getTestIdProps('aloituspaikatSection')}
+      >
+        <AloituspaikatSection
+          name="aloituspaikat"
+          koulutustyyppi={koulutustyyppi}
+        />
+      </FormCollapse>
 
-            <FormCollapse
-              header={t('yleiset.hakulomakkeenValinta')}
-              {...getTestIdProps('lomakeSection')}
-              languages={languages}
-            >
-              <LomakeSection />
-            </FormCollapse>
+      <FormCollapse
+        section="valintaperusteenKuvaus"
+        header={t('hakukohdelomake.valintaperusteenKuvaus')}
+        {...getTestIdProps('valintaperusteenKuvausSection')}
+      >
+        <KuvausSection
+          organisaatio={organisaatio}
+          name="valintaperusteenKuvaus"
+          haku={haku}
+        />
+      </FormCollapse>
 
-            <FormCollapse
-              header={t('hakukohdelomake.koulutuksenAlkamiskausi')}
-              section="alkamiskausi"
-              {...getTestIdProps('alkamiskausiSection')}
-            >
-              <AlkamiskausiSection />
-            </FormCollapse>
+      <FormCollapse
+        section="valintakoe"
+        header={t('hakukohdelomake.valintakoe')}
+        languages={languages}
+        {...getTestIdProps('valintakoeSection')}
+      >
+        <ValintakoeSection name="valintakoe" />
+      </FormCollapse>
 
-            <FormCollapse
-              header={t('hakukohdelomake.aloituspaikat')}
-              section="aloituspaikat"
-              {...getTestIdProps('aloituspaikatSection')}
-            >
-              <AloituspaikatSection koulutustyyppi={koulutustyyppi} />
-            </FormCollapse>
-
-            <FormCollapse
-              header={t('hakukohdelomake.valintaperusteenKuvaus')}
-              section="valintaperusteenKuvaus"
-              {...getTestIdProps('valintaperusteenKuvausSection')}
-            >
-              <KuvausSection organisaatio={organisaatio} haku={haku} />
-            </FormCollapse>
-
-            <FormCollapse
-              header={t('hakukohdelomake.valintakoe')}
-              section="valintakoe"
-              languages={languages}
-              {...getTestIdProps('valintakoeSection')}
-            >
-              <ValintakoeSection />
-            </FormCollapse>
-
-            <FormCollapse
-              header={t('hakukohdelomake.tarvittavatLiitteet')}
-              section="liitteet"
-              languages={languages}
-              {...getTestIdProps('liitteetSection')}
-            >
-              <LiitteetSection organisaatioOid={organisaatioOid} />
-            </FormCollapse>
-          </FormCollapseGroup>
-        )}
-      </ActiveLanguages>
-    </form>
+      <FormCollapse
+        section="liitteet"
+        header={t('hakukohdelomake.tarvittavatLiitteet')}
+        languages={languages}
+        {...getTestIdProps('liitteetSection')}
+      >
+        <LiitteetSection name="liitteet" organisaatioOid={organisaatioOid} />
+      </FormCollapse>
+    </FormCollapseGroup>
   );
 };
 

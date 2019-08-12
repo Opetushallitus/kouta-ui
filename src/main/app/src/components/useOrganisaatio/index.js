@@ -32,7 +32,7 @@ export const useOrganisaatio = oid => {
 
   const promiseFn = useCallback(
     ({ oid }) => {
-      return organisaatioLoader.load(oid);
+      return oid ? organisaatioLoader.load(oid) : Promise.resolve(null);
     },
     [organisaatioLoader],
   );

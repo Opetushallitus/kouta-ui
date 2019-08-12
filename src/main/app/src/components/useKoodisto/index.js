@@ -5,6 +5,8 @@ import { isObject } from '../../utils';
 import KoodistoversiotContext from '../KoodistoversiotContext';
 import { getKoodisto } from '../../apiUtils';
 
+const noopPromiseFn = () => Promise.resolve();
+
 export const useKoodisto = ({ koodisto, versio: versioProp }) => {
   const versiot = useContext(KoodistoversiotContext);
 
@@ -13,8 +15,10 @@ export const useKoodisto = ({ koodisto, versio: versioProp }) => {
 
   const watch = JSON.stringify([koodisto, versio]);
 
+  const promiseFn = koodisto ? getKoodisto : noopPromiseFn;
+
   return useApiAsync({
-    promiseFn: getKoodisto,
+    promiseFn,
     koodistoUri: koodisto,
     koodistoVersio: versio,
     watch,

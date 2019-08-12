@@ -1,14 +1,14 @@
 import React, { useMemo } from 'react';
-import { Field, FieldArray, formValues } from 'redux-form';
+import { Field, FieldArray } from 'redux-form';
 
 import Typography from '../Typography';
 import Spacing from '../Spacing';
-import Checkbox from '../Checkbox';
 import Button from '../Button';
 import { isArray, formatKoutaDateString, getTestIdProps } from '../../utils';
 import useTranslation from '../useTranslation';
 import Flex, { FlexItem } from '../Flex';
-import { FormFieldDateTimeInput } from '../FormFields';
+import { FormFieldDateTimeInput, FormFieldCheckbox } from '../FormFields';
+import useFieldValue from '../useFieldValue';
 
 const HakuaikaInterval = ({ haku }) => {
   const dateFormat = 'DD.MM.YYYY HH:mm';
@@ -25,31 +25,20 @@ const HakuaikaInterval = ({ haku }) => {
     [haku],
   );
 
+  const hakuajatContent = useMemo(
+    () => hakuajat.map(([start, end]) => `${start} - ${end}`).join(', '),
+    [hakuajat],
+  );
+
   return hakuajat.length === 0 ? (
-    <Typography variant="secondary">
-      {t('hakukohdelomake.haullaEiHakuaikaa')}
-    </Typography>
+    <Typography>{t('hakukohdelomake.haullaEiHakuaikaa')}</Typography>
   ) : (
-    hakuajat.map(([start, end], index) => (
-      <Typography
-        variant="div"
-        marginBottom={index < hakuajat.length - 1 ? 1 : 0}
-        key={index}
-      >
-        {start} - {end}
-      </Typography>
-    ))
+    <Typography>
+      {t('hakukohdelomake.hakuunLiitetytHakuajat')}:{' '}
+      <strong>{hakuajatContent}</strong>
+    </Typography>
   );
 };
-
-const renderCheckboxField = ({ input, label = null }) => (
-  <Checkbox
-    checked={input.value}
-    onChange={input.onChange}
-    name="eriHakuaika"
-    children={label}
-  />
-);
 
 const renderHakuajatFields = ({ fields, t }) => (
   <>
@@ -84,6 +73,7 @@ const renderHakuajatFields = ({ fields, t }) => (
     ))}
     <Button
       type="button"
+      variant="outlined"
       onClick={() => {
         fields.push({});
       }}
@@ -94,39 +84,33 @@ const renderHakuajatFields = ({ fields, t }) => (
   </>
 );
 
-const CustomHakuaika = () => {
+const CustomHakuaika = ({ name }) => {
   const { t } = useTranslation();
 
   return (
     <Spacing marginTop={2}>
-      <FieldArray name="hakuajat" component={renderHakuajatFields} t={t} />
+      <FieldArray
+        name={`${name}.hakuajat`}
+        component={renderHakuajatFields}
+        t={t}
+      />
     </Spacing>
   );
 };
 
-const EriHakuaikaFieldValue = formValues({
-  eriHakuaika: 'eriHakuaika',
-})(({ eriHakuaika, children }) => children({ eriHakuaika }));
-
-const HakuajatSection = ({ haku }) => {
+const HakuajatSection = ({ haku, name }) => {
   const { t } = useTranslation();
+  const eriHakuaika = useFieldValue(`${name}.eriHakuaika`);
 
   return (
     <>
       <Spacing marginBottom={2}>
-        <Typography variant="h6" marginBottom={1}>
-          {t('hakukohdelomake.hakuunLiitetytHakuajat')}
-        </Typography>
         <HakuaikaInterval haku={haku} />
       </Spacing>
-      <Field
-        name="eriHakuaika"
-        component={renderCheckboxField}
-        label={t('hakukohdelomake.hakukohteellaEriHakuaika')}
-      />
-      <EriHakuaikaFieldValue>
-        {({ eriHakuaika }) => (eriHakuaika ? <CustomHakuaika /> : null)}
-      </EriHakuaikaFieldValue>
+      <Field name={`${name}.eriHakuaika`} component={FormFieldCheckbox}>
+        {t('hakukohdelomake.hakukohteellaEriHakuaika')}
+      </Field>
+      {eriHakuaika ? <CustomHakuaika name={name} /> : null}
     </>
   );
 };

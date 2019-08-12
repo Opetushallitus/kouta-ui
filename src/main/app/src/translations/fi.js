@@ -18,7 +18,7 @@ export default {
     eiValittaviaKohteita: 'Valittavia kohteita ei löytynyt',
     luoKohde: 'Luo kohde "{{kohde}}"',
     yritaUudelleen: 'Yritä uudelleen',
-    virheIlmoitus: 'Jokin meni vikaan',
+    virheilmoitus: 'Jokin meni vikaan',
     koulutus: 'Koulutus',
     toteutus: 'Toteutus',
     haku: 'Haku',
@@ -40,6 +40,7 @@ export default {
     ei: 'Ei',
     kylla: 'Kyllä',
     tutkintoonJohtavaKoulutus: 'Tutkintoon johtava koulutus',
+    tutkintoonJohtamatonKoulutus: 'Tutkintoon johtamaton koulutus',
     kuvaus: 'Kuvaus',
     osoite: 'Osoite',
     postinumero: 'Postinumero',
@@ -140,7 +141,7 @@ export default {
     ladatutTiedostot: 'Ladatut tiedostot',
     varmistaLomakkeenKentat:
       'Varmistathan että olet täyttänyt lomakkeen kaikki pakolliset kentät',
-    virheIlmoitusKuvaus:
+    virheilmoitusKuvaus:
       'Jos virhe aiheuttaa ongelmia järjestelmän käytössä, yritä päivittää sivu, tai ota yhteyttä tukeen',
     valitseMitaHakulomakettaKaytetaan: 'Valitse mitä hakulomaketta käytetään',
     valitseKoulutustyyppi: 'Valitse koulutustyyppi',
@@ -148,6 +149,20 @@ export default {
     kopioiTiedot: 'Kopioi tiedot',
     soraKuvaus: 'SORA-kuvaus',
     luoUusiSoraKuvaus: 'Luo uusi SORA-kuvaus',
+    lukiokoulutus: 'Lukiokoulutus',
+    lisaaYhteyshenkilo: 'Lisää yhteyshenkilö',
+    puhelinnumero: 'Puhelinnumero',
+    valitseValintakoetyypit: 'Valitse valintakoetyypit',
+    lisaaTilaisuus: 'Lisää tilaisuus',
+    valintakoe: 'Valintakoe',
+    kayttooikeusVirheilmoitus: 'Käyttöoikeuksissasi on puutteita',
+    kayttooikeusVirheilmoitusKuvaus:
+      'Käyttöoikeuksien tarkistuksessa tapahtui virhe. Tarkistathan, että käyttäjälläsi on tarvittavat käyttöoikeudet',
+    avaaLomake: 'Avaa lomake',
+    valitseHaunKohdejoukko: 'Valitse haun kohdejoukko',
+    valitseHaunKohdejoukonTarkenne: 'Valitse haun kohdejoukon tarkenne',
+    oppilaitos: 'Oppilaitos',
+    oppilaitoksenOsa: 'Oppilaitoksen osa',
   },
   validointivirheet: {
     syotaArvo: 'Syötä kentälle arvo',
@@ -160,6 +175,36 @@ export default {
     hakuapp: 'Käytetään järjestelmän hakulomaketta',
     muu: 'Käytetään muuta hakulomaketta',
     eiSahkoistaHakua: 'Ei sähköistä hakua',
+  },
+  koulutustyypit: {
+    ammatillinen: 'Ammatillinen',
+    valma: 'Valma',
+    telma: 'Telma',
+    tutkinnonOsa: 'Tutkinnon osa',
+    osaamisala: 'Osaamisala',
+    korkeakoulutus: 'Korkeakoulutus',
+    avoinYo: 'Avoin Yo',
+    avoinAmk: 'Avoin AMK',
+    taydennyskoulutus: 'Täydennyskoulutus',
+    erikoistumiskoulutus: 'Erikoistumiskoulutus',
+    valmentavaKoulutus: 'Valmentava koulutus',
+    ammatillinenOpettajakoulutus: 'Ammatillinen opettajakoulutus',
+    vapaaSivistystyo: 'Vapaa sivistystyö',
+    yleissivistava: 'Yleissivistävä',
+    luva: 'LUVA',
+    muutKoulutukset: 'Muut koulutukset',
+    perusopetuksenLisaopetus: 'Perusopetuksen lisäopetus',
+    amm: 'Ammatillinen koulutus',
+    lk: 'Lukiokoulutus',
+    yo: 'Yliopistokoulutus',
+    amk: 'AMK',
+  },
+  liitteenToimitustapaValinnat: {
+    valitseToimitustapa: 'Valitse liitteen toimitustapa',
+    toimitetaanLahettamisenYhteydessa:
+      'Toimitetaan lomakkeen lähettämisen yhteydessä',
+    jarjestajanOsoite: 'Koulutuksen järjestäjän hakijapalvelun osoite',
+    muuOsoite: 'Muu osoite',
   },
   etusivu: {
     koulutuksetJaHaut: 'Koulutukset ja haut',
@@ -174,6 +219,9 @@ export default {
     haeHakuja: 'Hae hakuja',
     haeToteutuksia: 'Hae toteutuksia',
     haeValintaperusteita: 'Hae valintaperusteita',
+    eiOikeuksiaVirheilmoitus: 'Käyttöoikeuksissasi on puutteita',
+    eiOikeuksiaVirheilmoitusKuvaus:
+      'Käyttäjältäsi puuttuu järjestelmän käyttöön vaadittavia rooleja',
   },
   koulutuslomake: {
     koulutuksenTiedot: 'Koulutuksen tiedot',
@@ -199,6 +247,11 @@ export default {
     toteutuksenLiittaminenKoulutukseen: 'Toteutuksen liittäminen koulutukseen',
     kuvausEiOleSaatavilla: 'Kuvaus ei ole saatavilla',
     valitseKoulutustyyppi: 'Valitse koulutustyyppi',
+    valitseKoulutusalat: 'Valitse koulutusalat',
+    pohjavalintaInfo:
+      'Voit halutessasi käyttää aiemmin luotuja koulutuksia uuden lomakkeen esitäytettynä pohjana tai kopioida vanhan koulutuksen tiedot.',
+    lisatiedotInfo:
+      'Voit halutessasi lisätä vapaasti täytettäviä osioita, jotka antavat tarkempaa tietoa koulutuksesta.',
   },
   toteutuslomake: {
     toteutuksellaEiHakukohteita:
@@ -229,11 +282,11 @@ export default {
       'Koulutuksen näyttämiseen liittyvät tiedot',
     linkinOtsikko: 'Linkin otsikko',
     lisaaLinkki: 'Lisää linkki',
+    kaytossaLukuvuosimaksu: 'Käytössä lukuvuosimaksu',
   },
   hakulomake: {
     haunNimi: 'Haun nimi',
     haunKohdejoukko: 'Haun kohdejoukko',
-    valitseHaunKohdejoukko: 'Valitse haun kohdejoukko',
     hakutapa: 'Hakutapa',
     valitseHakutapa: 'Valitse hakutapa',
     haunAikataulu: 'Haun aikataulu',
@@ -254,13 +307,17 @@ export default {
       'Tähän hakuun on liitetty seuraavat hakukohteet',
   },
   hakukohdelomake: {
+    toteutukseenLiitettyAlkamiskausi: 'Toteutukseen liitetty alkamiskausi',
+    toteutukseenEiOleLiitettyAlkamiskautta:
+      'Toteutuksen ei ole liitetty alkamiskautta',
+    hakukohteellaEriAlkamiskausi: 'Hakukohteella on erillinen alkamiskausi',
     pohjakoulutusvaatimus: 'Pohjakoulutusvaatimus',
     valitsePohjakoulutusvaatimus: 'Valitse pohjakoulutusvaatimus',
     hakukohteenPerustiedot: 'Hakukohteen perustiedot',
     hakuajat: 'Hakuajat',
     hakuunLiitetytHakuajat: 'Hakuun liitetetyt hakuajat',
     haullaEiHakuaikaa: 'Hakuun ei ole liitetty hakuaikoja',
-    hakukohteellaEriHakuaika: 'Hakukohteen hakuaika on eri kuin haun aikataulu',
+    hakukohteellaEriHakuaika: 'Hakukohteella on erillinen hakuaika',
     aloituspaikkojenLukumaara: 'Aloituspaikkojen lukumäärä',
     ensikertalaistenAloituspaikkojenLukumaara:
       'Ensikertalaisten aloituspaikkojen lukumäärä',
@@ -279,12 +336,13 @@ export default {
     lisaaTilaisuus: 'Lisää tilaisuus',
     voiSuorittaaKaksoistutkinnon: 'Voi suorittaa kaksoistutkinnon',
     eriHakulomake: 'Hakukohteen hakulomake on eri kuin haun hakulomake',
+    hakuunEiOleLiitettyLomaketta: 'Hakuun ei ole liitetty lomaketta',
+    hakuunLiitettyLomake: 'Hakuun liitetty lomake',
+    avaaLomake: 'Avaa lomake',
   },
   valintaperustelomake: {
-    hakutavanRajaus: 'Hakutavan rajaus',
-    haunKohdejoukonRajaus: 'Haun kohdejoukon rajaus',
+    valintaperusteenPerustiedot: 'Valintaperusteen perustiedot',
     valintaperusteenNimi: 'Valintaperusteen nimi',
-    osaamistausta: 'Osaamistausta',
     valitseHakutapa: 'Valitse hakutapa',
     valitseHaunKohdejoukko: 'Valitse haun kohdejoukko',
     valitseOsaamistausta: 'Valitse, mikä osaamistausta hakijalla pitää olla',
@@ -302,7 +360,7 @@ export default {
     ehdotKielitaidonOsoitukseen:
       'Ehdot kielitaidon osoitukseen, tai vapautukseen',
     lisaaEhto: 'Lisää ehto',
-    valintaperusteenLoppukuvaus: 'Valintaperusteen loppukuvaus',
+    valintaperusteenKuvaus: 'Valintaperusteen kuvaus',
     luoUusiValintaperuste: 'Luo uusi valintaperuste',
     kopioiPohjaksiValintaperuste:
       'Kopioi pohjaksi aiemmin luotu valintaperuste',
@@ -310,11 +368,56 @@ export default {
     valintatapajononNimi: 'Valintatapajonon nimi',
     valitseKoulutustyyppi: 'Valitse koulutustyyppi',
     valitseSoraKuvaus: 'Valitse käytettävä SORA-kuvaus',
+    kuvauksenNimi: 'Valintaperusteen kuvauksen nimi',
+    kuvauksenTarkenne: 'Kuvauksen tarkenne',
+    valintaperusteOnJulkinen: 'Valintaperuste on julkinen',
+    valintaperusteenNakyminen: 'Valintaperusteen näkyminen muille toimijoille',
+    valitseValintaperusteenNakyminen:
+      'Valitse näkyykö valintaperuste muille koulutustoimijoille',
   },
   soraKuvausLomake: {
     soraKuvauksenTiedot: 'SORA-kuvauksen tiedot',
     soraKuvausOnJulkinen: 'SORA-kuvaus on julkinen',
     soraKuvauksenNayttamiseenLiittyvatTiedot:
       'SORA-kuvauksen näyttämiseen liittyvät tiedot',
+  },
+  oppilaitoslomake: {
+    oppilaitoksenPerustiedot: 'Oppilaitoksen perustiedot',
+    oppilaitoksenNimi: 'Oppilaitoksen nimi',
+    paikkakunta: 'Paikkakunta',
+    tyyppi: 'Tyyppi',
+    opetuskielet: 'Opetuskielet',
+    syotaPerustiedot: 'Syötä perustiedot',
+    perustiedotInfo:
+      'Syötä oppilaitostasi koskevat perustiedot, jotka näkyvät Opintopolussa. Mikäli jokin tiedoista ei ole tarpeellinen oppilaitoksellesi, jätä se tyhjäksi.',
+    opiskelijoita: 'Opiskelijoita',
+    korkeakouluja: 'Korkeakouluja',
+    tiedekuntia: 'Tiedekuntia',
+    kampuksia: 'Kampuksia',
+    yksikoita: 'Yksiköitä',
+    toimipisteita: 'Toimipisteitä',
+    akatemioita: 'Akatemioita',
+    oppilaitoksenEsittely: 'Oppilaitoksen esittely',
+    lisaaOppilaitoksenEsittelyteksti: 'Lisää oppilaitoksen esittelyteksi',
+    oppilaitoksenOsat: 'Oppilaitoksen osat',
+    valitseOppilaitoksenOsat: 'Valitse aktiiviset oppilaitoksen osat',
+    tietoaOpiskelusta: 'Tietoa opiskelusta',
+    tietoaOpiskelustaOsiotInfo:
+      'Voit halutessasi lisätä vapaasti täytettäviä osioita, jotka antavat tarkempaa tietoa oppilaitoksessa opiskelusta.',
+    valitseLisattavaOsio: 'Valitse lisättävä osio',
+    oppilaitoksenYhteystiedot: 'Oppilaitoksen yhteystiedot',
+    yhteystiedotInfo: 'Anna oppilaitokselle tarvittavat yhteystiedot',
+  },
+  oppilaitoksenOsaLomake: {
+    oppilaitoksenOsanPerustiedot: 'Oppilaitoksen osan perustiedot',
+    oppilaitoksenOsanNimi: 'Oppilaitoksen osan nimi',
+    perustiedotInfo:
+      'Syötä oppilaitostasi koskevat perustiedot, jotka näkyvät Opintopolussa.',
+    kampus: 'Kampus',
+    lisaaOppilaitoksenOsanEsittelyteksti:
+      'Lisää oppilaitoksen osan esittelyteksti',
+    oppilaitoksenOsanEsittely: 'Oppilaitoksen osan esittely',
+    oppilaitoksenOsanYhteystiedot: 'Oppilaitoksen osan yhteystiedot',
+    yhteystiedotInfo: 'Anna oppilaitokselle tarvittavat yhteystiedot',
   },
 };

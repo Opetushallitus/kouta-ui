@@ -7,17 +7,18 @@ import EditToteutusSteps from './EditToteutusSteps';
 import EditToteutusForm from './EditToteutusForm';
 import EditToteutusFooter from './EditToteutusFooter';
 import useApiAsync from '../useApiAsync';
-import { getKoutaToteutusByOid, getKoutaKoulutusByOid } from '../../apiUtils';
+import getToteutusByOid from '../../utils/kouta/getToteutusByOid';
+import getKoulutusByOid from '../../utils/kouta/getKoulutusByOid';
 import Spin from '../Spin';
 
 const getToteutusAndKoulutus = async ({ httpClient, apiUrls, oid }) => {
-  const toteutus = await getKoutaToteutusByOid({ httpClient, apiUrls, oid });
+  const toteutus = await getToteutusByOid({ httpClient, apiUrls, oid });
 
   if (!toteutus || !toteutus.koulutusOid) {
     return { toteutus };
   }
 
-  const koulutus = await getKoutaKoulutusByOid({
+  const koulutus = await getKoulutusByOid({
     httpClient,
     apiUrls,
     oid: toteutus.koulutusOid,
@@ -44,13 +45,21 @@ const EditToteutusPage = props => {
     watch,
   });
 
+  const koulutustyyppi = koulutus ? koulutus.koulutustyyppi : null;
   const organisaatioOid = toteutus ? toteutus.organisaatioOid : null;
 
   return (
     <FormPage
       header={<EditToteutusHeader toteutus={toteutus} />}
       steps={<EditToteutusSteps />}
-      footer={toteutus ? <EditToteutusFooter toteutus={toteutus} /> : null}
+      footer={
+        toteutus ? (
+          <EditToteutusFooter
+            toteutus={toteutus}
+            koulutustyyppi={koulutustyyppi}
+          />
+        ) : null
+      }
     >
       {organisaatioOid ? (
         <OrganisaatioInfo organisaatioOid={organisaatioOid} />
@@ -60,7 +69,7 @@ const EditToteutusPage = props => {
           toteutus={toteutus}
           organisaatioOid={organisaatioOid}
           koulutusKoodiUri={koulutus ? koulutus.koulutusKoodiUri : null}
-          koulutustyyppi={koulutus ? koulutus.koulutustyyppi : null}
+          koulutustyyppi={koulutustyyppi}
           scrollTarget={scrollTarget}
         />
       ) : (

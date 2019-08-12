@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Field, formValues } from 'redux-form';
+import { Field } from 'redux-form';
 import styled from 'styled-components';
 import stripTags from 'striptags';
 import mapValues from 'lodash/mapValues';
@@ -22,6 +22,7 @@ import Icon from '../Icon';
 import { getThemeProp } from '../../theme';
 import useTranslation from '../useTranslation';
 import { FormFieldInput } from '../FormFields';
+import useFieldValue from '../useFieldValue';
 
 const Container = styled.div`
   display: flex;
@@ -118,11 +119,7 @@ const renderOsaamisalaSelectionField = ({ input, options }) => {
   return <OsaamisalaSelection {...input} options={options} />;
 };
 
-const OsaamisalatFieldValue = formValues({
-  osaamisalat: 'osaamisalat',
-})(({ osaamisalat, children }) => children({ osaamisalat }));
-
-const OsaamisalaDetails = ({ osaamisala, language }) => {
+const OsaamisalaDetails = ({ osaamisala, language, name }) => {
   const { t } = useTranslation();
 
   return (
@@ -132,14 +129,14 @@ const OsaamisalaDetails = ({ osaamisala, language }) => {
         {...getTestIdProps(`osaamisalaLinkki.${osaamisala.uri}`)}
       >
         <Field
-          name={`osaamisalaLinkit.${osaamisala.uri}.${language}`}
+          name={`${name}.osaamisalaLinkit.${osaamisala.uri}.${language}`}
           component={FormFieldInput}
           label={t('yleiset.linkki')}
         />
       </Spacing>
       <Spacing {...getTestIdProps(`osaamisalaOtsikko.${osaamisala.uri}`)}>
         <Field
-          name={`osaamisalaLinkkiOtsikot.${osaamisala.uri}.${language}`}
+          name={`${name}.osaamisalaLinkkiOtsikot.${osaamisala.uri}.${language}`}
           component={FormFieldInput}
           label={t('yleiset.linkinOtsikko')}
         />
@@ -148,7 +145,12 @@ const OsaamisalaDetails = ({ osaamisala, language }) => {
   );
 };
 
-const OsaamisalatInfoFields = ({ osaamisalatValue, osaamisalat, language }) => {
+const OsaamisalatInfoFields = ({
+  osaamisalatValue,
+  osaamisalat,
+  language,
+  name,
+}) => {
   const activeOsaamisalat = osaamisalat.filter(({ uri }) =>
     osaamisalatValue.includes(uri),
   );
@@ -168,7 +170,11 @@ const OsaamisalatInfoFields = ({ osaamisalatValue, osaamisalat, language }) => {
 
           <AbstractCollapse
             content={
-              <OsaamisalaDetails osaamisala={osaamisala} language={language} />
+              <OsaamisalaDetails
+                osaamisala={osaamisala}
+                language={language}
+                name={name}
+              />
             }
           >
             {({ open, onToggle }) => (
@@ -188,7 +194,7 @@ const OsaamisalatInfoFields = ({ osaamisalatValue, osaamisalat, language }) => {
   });
 };
 
-const OsaamisalatContainer = ({ osaamisalat, koulutus, language }) => {
+const OsaamisalatContainer = ({ osaamisalat, koulutus, language, name }) => {
   const { nimi } = koulutus;
 
   const osaamisalaOptions = useMemo(
@@ -200,6 +206,8 @@ const OsaamisalatContainer = ({ osaamisalat, koulutus, language }) => {
     [osaamisalat],
   );
 
+  const osaamisalatValue = useFieldValue(`${name}.osaamisalat`);
+
   return (
     <>
       <SelectionContainer>
@@ -207,27 +215,24 @@ const OsaamisalatContainer = ({ osaamisalat, koulutus, language }) => {
           {getLanguageValue(nimi, language)}
         </Typography>
         <Field
-          name="osaamisalat"
+          name={`${name}.osaamisalat`}
           component={renderOsaamisalaSelectionField}
           options={osaamisalaOptions}
         />
       </SelectionContainer>
       <InfoContainer>
-        <OsaamisalatFieldValue>
-          {({ osaamisalat: osaamisalatValue }) => (
-            <OsaamisalatInfoFields
-              osaamisalatValue={osaamisalatValue || []}
-              osaamisalat={osaamisalat}
-              language={language}
-            />
-          )}
-        </OsaamisalatFieldValue>
+        <OsaamisalatInfoFields
+          osaamisalatValue={osaamisalatValue || []}
+          osaamisalat={osaamisalat}
+          language={language}
+          name={name}
+        />
       </InfoContainer>
     </>
   );
 };
 
-const OsaamisalatSection = ({ language, koulutusKoodiUri }) => {
+const OsaamisalatSection = ({ language, koulutusKoodiUri, name }) => {
   const { data } = useApiAsync({
     promiseFn: getOsaamisalat,
     koodiUri: koulutusKoodiUri,
@@ -241,6 +246,7 @@ const OsaamisalatSection = ({ language, koulutusKoodiUri }) => {
           osaamisalat={data.osaamisalat}
           koulutus={data.koulutus}
           language={language}
+          name={name}
         />
       ) : null}
     </Container>

@@ -73,6 +73,64 @@ export const chooseKieliversiotLanguages = (languages, cy) => {
   });
 };
 
+export const fillYhteyshenkilotFields = ({ cy }) => {
+  cy.getByTestId('lisaaYhteyshenkiloButton').click({ force: true });
+
+  cy.getByTestId('nimi')
+    .find('input')
+    .type('nimi', { force: true });
+  cy.getByTestId('titteli')
+    .find('input')
+    .type('titteli', { force: true });
+  cy.getByTestId('sahkoposti')
+    .find('input')
+    .type('sähkoposti', { force: true });
+  cy.getByTestId('puhelinnumero')
+    .find('input')
+    .type('puhelin', { force: true });
+  cy.getByTestId('verkkosivu')
+    .find('input')
+    .type('verkkosivu', { force: true });
+};
+
+export const fillValintakoeFields = ({ cy }) => {
+  selectOption('valintakokeentyyppi_1', cy);
+
+  cy.getByTestId('lisaaTilaisuusButton').click({ force: true });
+
+  cy.getByTestId('osoite')
+    .find('input')
+    .type('osoite', { force: true });
+
+  cy.getByTestId('postinumero')
+    .find('input')
+    .type('00510', { force: true });
+
+  cy.getByTestId('postitoimipaikka')
+    .find('input')
+    .type('postitoimipaikka', { force: true });
+
+  cy.getByTestId('alkaa').within(() => {
+    fillDateTimeInput({
+      date: '02.04.2019',
+      time: '10:45',
+      cy,
+    });
+  });
+
+  cy.getByTestId('paattyy').within(() => {
+    fillDateTimeInput({
+      date: '02.04.2019',
+      time: '19:00',
+      cy,
+    });
+  });
+
+  cy.getByTestId('lisatietoja')
+    .find('textarea')
+    .type('lisatietoja', { force: true });
+};
+
 export const stubKayttoOikeusMeRoute = ({ user = {}, cy }) => {
   cy.route({
     method: 'GET',
@@ -83,6 +141,7 @@ export const stubKayttoOikeusMeRoute = ({ user = {}, cy }) => {
       firstName: 'John',
       lastName: 'Doe',
       lang: 'fi',
+      roles: JSON.stringify(['APP_TARJONTA_CRUD_1.2.246.562.10.00000000001']),
       ...user,
     },
   });
@@ -117,5 +176,17 @@ export const stubOppijanumerorekisteriHenkiloRoute = ({
     method: 'GET',
     url: '**/oppijanumerorekisteri-service/henkilo/**',
     response: henkilo,
+  });
+};
+
+export const fillTreeSelect = (value, cy) => {
+  value.forEach(val => {
+    cy.get(`input[type="checkbox"][name="${val}"]`).check({ force: true });
+  });
+};
+
+export const fillKoulutustyyppiSelect = (path, cy) => {
+  path.forEach(option => {
+    getRadio(option, cy).check({ force: true });
   });
 };

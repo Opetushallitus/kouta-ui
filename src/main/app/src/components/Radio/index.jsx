@@ -3,12 +3,13 @@ import styled, { css } from 'styled-components';
 
 import { getThemeProp } from '../../theme';
 import { isArray } from '../../utils';
+import { disabledStyle } from '../../system';
 
 const RadioContainer = styled.div`
   ${({ last }) =>
     !last &&
     css`
-      margin-bottom: ${({ theme }) => theme.spacing.unit * 0.5}px;
+      margin-bottom: 4px;
     `}
 `;
 
@@ -74,14 +75,8 @@ const Label = styled.label`
   display: flex;
   line-height: 1.5;
   color: ${getThemeProp('palette.text.primary')};
-  align-items: center;
 
-  ${({ disabled }) =>
-    disabled &&
-    css`
-      opacity: 0.5;
-      cursor: not-allowed;
-    `}
+  ${disabledStyle}
 `;
 
 const LabelWrapper = styled.div`
@@ -98,6 +93,8 @@ const LabelWrapper = styled.div`
 const RadioWrapper = styled.div`
   flex: 0;
   line-height: 0;
+  position: relative;
+  top: 0.15em;
 `;
 
 export const Radio = ({

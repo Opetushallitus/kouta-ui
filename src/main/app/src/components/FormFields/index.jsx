@@ -16,8 +16,14 @@ import KieliversiotSelect from '../KieliversiotSelect';
 import KoulutustyyppiSelect from '../KoulutustyyppiSelect';
 import SoraKuvausSelect from '../SoraKuvausSelect';
 
-const simpleMapProps = ({ meta, input, ...props }) => ({
+export const simpleMapProps = ({ meta, input, ...props }) => ({
   ...input,
+  ...props,
+});
+
+export const selectMapProps = ({ input, ...props }) => ({
+  ...input,
+  onBlur: noop,
   ...props,
 });
 

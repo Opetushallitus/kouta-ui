@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import queryString from 'query-string';
 
 import FormPage, { OrganisaatioInfo } from '../FormPage';
@@ -6,6 +6,7 @@ import CreateSoraKuvausHeader from './CreateSoraKuvausHeader';
 import CreateSoraKuvausSteps from './CreateSoraKuvausSteps';
 import CreateSoraKuvausForm from './CreateSoraKuvausForm';
 import CreateSoraKuvausFooter from './CreateSoraKuvausFooter';
+import useSelectBase from '../useSelectBase';
 
 const CreateSoraKuvausPage = props => {
   const {
@@ -18,21 +19,21 @@ const CreateSoraKuvausPage = props => {
 
   const { kopioSoraKuvausOid = null } = queryString.parse(search);
 
-  const onCreateNew = useCallback(() => {
-    history.replace({ search: '' });
-  }, [history]);
+  const selectBase = useSelectBase(history, {
+    kopioParam: 'kopioSoraKuvausOid',
+  });
 
   return (
     <FormPage
       header={<CreateSoraKuvausHeader />}
       steps={<CreateSoraKuvausSteps />}
-      footer={<CreateSoraKuvausFooter />}
+      footer={<CreateSoraKuvausFooter organisaatioOid={organisaatioOid} />}
     >
       <OrganisaatioInfo organisaatioOid={organisaatioOid} />
       <CreateSoraKuvausForm
         organisaatioOid={organisaatioOid}
         kopioSoraKuvausOid={kopioSoraKuvausOid}
-        onCreateNew={onCreateNew}
+        onSelectBase={selectBase}
       />
     </FormPage>
   );

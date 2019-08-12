@@ -5,7 +5,8 @@ import UrlContext from '../UrlContext';
 import HttpContext from '../HttpContext';
 import { AsyncCreatableSelect } from '../Select';
 import Spacing from '../Spacing';
-import { getAmmattinimikkeetByTerm, getAvainsanatByTerm } from '../../apiUtils';
+import getAmmattinimikkeetByTerm from '../../utils/kouta/getAmmattinimikkeetByTerm';
+import getAvainsanatByTerm from '../../utils/kouta/getAvainsanatByTerm';
 import useTranslation from '../useTranslation';
 import { memoize, getTestIdProps, noop, isArray } from '../../utils';
 import { createFormFieldComponent } from '../FormFields';
@@ -55,7 +56,7 @@ const makeLoadAvainsanat = memoize(
   },
 );
 
-const NayttamisTiedotSection = ({ language }) => {
+const NayttamisTiedotSection = ({ language, name }) => {
   const { t } = useTranslation();
   const httpClient = useContext(HttpContext);
   const apiUrls = useContext(UrlContext);
@@ -65,7 +66,7 @@ const NayttamisTiedotSection = ({ language }) => {
       <Spacing marginBottom={2}>
         <div {...getTestIdProps('ammattinimikkeetSelect')}>
           <Field
-            name={`ammattinimikkeet.${language}`}
+            name={`${name}.ammattinimikkeet.${language}`}
             component={CreatableField}
             isMulti
             isClearable
@@ -85,7 +86,7 @@ const NayttamisTiedotSection = ({ language }) => {
       <Spacing>
         <div {...getTestIdProps('avainsanatSelect')}>
           <Field
-            name={`avainsanat.${language}`}
+            name={`${name}.avainsanat.${language}`}
             component={CreatableField}
             isMulti
             isClearable

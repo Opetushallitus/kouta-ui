@@ -5,6 +5,8 @@ import { FormFieldSoraKuvausSelect } from '../FormFields';
 import useTranslation from '../useTranslation';
 import Spacing from '../Spacing';
 import Button from '../Button';
+import Divider from '../Divider';
+import Flex from '../Flex';
 
 const SoraKuvausSection = ({ name, organisaatioOid }) => {
   const { t } = useTranslation();
@@ -20,15 +22,18 @@ const SoraKuvausSection = ({ name, organisaatioOid }) => {
           reloadOnFocus
         />
       </Spacing>
-      <Button
-        variant="outlined"
-        color="primary"
-        as="a"
-        href={`/kouta/organisaatio/${organisaatioOid}/sora-kuvaus`}
-        target="_blank"
-      >
-        {t('yleiset.luoUusiSoraKuvaus')}
-      </Button>
+      <Divider marginTop={4} marginBottom={4} />
+      <Flex justifyCenter>
+        <Button
+          variant="outlined"
+          color="primary"
+          as="a"
+          href={`/kouta/organisaatio/${organisaatioOid}/sora-kuvaus`}
+          target="_blank"
+        >
+          {t('yleiset.luoUusiSoraKuvaus')}
+        </Button>
+      </Flex>
     </>
   );
 };

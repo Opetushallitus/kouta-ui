@@ -1,5 +1,5 @@
-import React from 'react';
-import { formValues } from 'redux-form';
+import React, { useCallback } from 'react';
+import get from 'lodash/get';
 
 import PohjaSection from './PohjaSection';
 import FormCollapseGroup from '../FormCollapseGroup';
@@ -10,90 +10,87 @@ import { getTestIdProps } from '../../utils';
 import KoulutustyyppiSection from './KoulutustyyppiSection';
 import TiedotSection from './TiedotSection';
 import JulkisuusSection from './JulkisuusSection';
+import useFieldValue from '../useFieldValue';
 
-const WithValues = formValues({
-  languagesValue: 'kieliversiot',
-})(({ children, ...rest }) => children(rest));
-
-const SoraKuvausForm = ({
-  handleSubmit,
-  onCopy = () => {},
-  onMaybeCopy = () => {},
-  steps = false,
-  onCreateNew,
-  canCopy = true,
-  scrollTarget,
-  canEditKoulutustyyppi = true,
+const PohjaFormCollapse = ({
+  children,
+  onContinue,
+  onSelectBase,
+  ...props
 }) => {
-  const { t } = useTranslation();
+  const tapa = useFieldValue('pohja.tapa');
+  const valinta = useFieldValue('pohja.valinta');
+
+  const onPohjaContinue = useCallback(() => {
+    onContinue();
+    onSelectBase({
+      tapa,
+      valinta: get(valinta, 'value'),
+    });
+  }, [onSelectBase, tapa, valinta, onContinue]);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <WithValues>
-        {({ languagesValue }) => {
-          const languageTabs = languagesValue || [];
+    <FormCollapse onContinue={onPohjaContinue} {...props}>
+      {children}
+    </FormCollapse>
+  );
+};
 
-          return (
-            <FormCollapseGroup
-              enabled={steps}
-              scrollTarget={scrollTarget}
-              defaultOpen={!steps}
-            >
-              {canEditKoulutustyyppi ? (
-                <FormCollapse
-                  header={t('yleiset.koulutustyyppi')}
-                  scrollOnActive={false}
-                  {...getTestIdProps('tyyppiSection')}
-                >
-                  <KoulutustyyppiSection name="koulutustyyppi" />
-                </FormCollapse>
-              ) : null}
+const SoraKuvausForm = ({
+  steps = false,
+  canEditKoulutustyyppi = true,
+  canSelectBase = true,
+  organisaatioOid,
+  onSelectBase = () => {},
+}) => {
+  const { t } = useTranslation();
+  const kieliversiot = useFieldValue('kieliversiot');
+  const languageTabs = kieliversiot || [];
 
-              {canCopy ? (
-                <FormCollapse
-                  header={t('yleiset.pohjanValinta')}
-                  onContinue={onMaybeCopy}
-                  {...getTestIdProps('pohjaSection')}
-                >
-                  {({ onContinue }) => (
-                    <PohjaSection
-                      name="pohja"
-                      onContinue={onContinue}
-                      onCopy={onCopy}
-                      onCreateNew={onCreateNew}
-                    />
-                  )}
-                </FormCollapse>
-              ) : null}
+  return (
+    <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
+      {canEditKoulutustyyppi ? (
+        <FormCollapse
+          header={t('yleiset.koulutustyyppi')}
+          scrollOnActive={false}
+          {...getTestIdProps('tyyppiSection')}
+        >
+          <KoulutustyyppiSection name="koulutustyyppi" />
+        </FormCollapse>
+      ) : null}
 
-              <FormCollapse
-                header={t('yleiset.kieliversiot')}
-                {...getTestIdProps('kieliversiotSection')}
-              >
-                <KieliversiotSection name="kieliversiot" />
-              </FormCollapse>
+      {canSelectBase ? (
+        <PohjaFormCollapse
+          header={t('yleiset.pohjanValinta')}
+          onSelectBase={onSelectBase}
+          {...getTestIdProps('pohjaSection')}
+        >
+          <PohjaSection name="pohja" organisaatioOid={organisaatioOid} />
+        </PohjaFormCollapse>
+      ) : null}
 
-              <FormCollapse
-                header={t('soraKuvausLomake.soraKuvauksenTiedot')}
-                languages={languageTabs}
-                {...getTestIdProps('tiedotSection')}
-              >
-                <TiedotSection name="tiedot" />
-              </FormCollapse>
+      <FormCollapse
+        header={t('yleiset.kieliversiot')}
+        {...getTestIdProps('kieliversiotSection')}
+      >
+        <KieliversiotSection name="kieliversiot" />
+      </FormCollapse>
 
-              <FormCollapse
-                header={t(
-                  'soraKuvausLomake.soraKuvauksenNayttamiseenLiittyvatTiedot',
-                )}
-                {...getTestIdProps('julkisuusSection')}
-              >
-                <JulkisuusSection name="julkisuus" />
-              </FormCollapse>
-            </FormCollapseGroup>
-          );
-        }}
-      </WithValues>
-    </form>
+      <FormCollapse
+        header={t('soraKuvausLomake.soraKuvauksenTiedot')}
+        languages={languageTabs}
+        {...getTestIdProps('tiedotSection')}
+      >
+        <TiedotSection name="tiedot" />
+      </FormCollapse>
+
+      <FormCollapse
+        header={t('soraKuvausLomake.soraKuvauksenNayttamiseenLiittyvatTiedot')}
+        {...getTestIdProps('julkisuusSection')}
+      >
+        <JulkisuusSection name="julkisuus" />
+      </FormCollapse>
+    </FormCollapseGroup>
   );
 };
 

@@ -1,83 +1,68 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+import get from 'lodash/get';
 
 import { isFunction } from '../../utils';
+import useFormConfig from '../useFormConfig';
+import Box from '../Box';
 
-class FormCollapseGroup extends Component {
-  static defaultProps = {
-    enabled: true,
-    defaultActiveStep: 0,
-    defaultOpen: false,
-  };
+const getVisibleChildren = (children, config, configured) => {
+  return React.Children.toArray(children).filter(c => {
+    const sectionProp = get(c, 'props.section');
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      activeStep: this.props.defaultActiveStep,
-    };
-  }
-
-  getChildren() {
-    const { children } = this.props;
-
-    return React.Children.toArray(children).filter(c => !!c);
-  }
-
-  getChildrenCount() {
-    return this.getChildren().length;
-  }
-
-  makeOnContinue = (index, child) => () => {
-    if (child.props.onContinue) {
-      child.props.onContinue();
+    if (!c) {
+      return false;
+    } else if (
+      configured &&
+      sectionProp &&
+      !get(config, ['sections', sectionProp])
+    ) {
+      return false;
     }
 
-    if (index < this.getChildrenCount() - 1) {
-      return this.setState(() => ({
-        activeStep: index + 1,
-      }));
-    }
-  };
+    return true;
+  });
+};
 
-  componentDidMount() {
-    const { scrollTarget } = this.props;
+const FormCollapseGroup = ({
+  enabled = true,
+  defaultActiveStep = 0,
+  defaultOpen = false,
+  configured = false,
+  children,
+}) => {
+  const [activeStep, setActiveStep] = useState(defaultActiveStep);
+  const config = useFormConfig();
+  const visibleChildren = getVisibleChildren(children, config, configured);
 
-    if (!scrollTarget) {
-      return;
-    }
+  return React.Children.map(visibleChildren, (child, index) => {
+    const isLast = index === visibleChildren.length - 1;
 
-    const element = document.getElementById(scrollTarget);
+    const childProps = enabled
+      ? {
+          index,
+          defaultOpen,
+          active: index === activeStep,
+          onContinue: !isLast
+            ? () => {
+                if (isFunction(child.props.onContinue)) {
+                  child.props.onContinue();
+                }
 
-    if (element && isFunction(element.scrollIntoView)) {
-      setTimeout(() => {
-        element.scrollIntoView();
-      }, 500);
-    }
-  }
+                if (!isLast) {
+                  return setActiveStep(index + 1);
+                }
+              }
+            : null,
+        }
+      : {
+          index,
+          defaultOpen,
+        };
 
-  render() {
-    const { activeStep } = this.state;
-    const { enabled, defaultOpen } = this.props;
-
-    return React.Children.map(this.getChildren(), (child, index) => {
-      const childProps = enabled
-        ? {
-            index,
-            defaultOpen,
-            active: index === activeStep,
-            onContinue:
-              index < this.getChildrenCount() - 1
-                ? this.makeOnContinue(index, child)
-                : null,
-          }
-        : {
-            index,
-            defaultOpen,
-          };
-
-      return React.cloneElement(child, childProps);
-    });
-  }
-}
+    return (
+      <Box mb={isLast ? 0 : 4}>{React.cloneElement(child, childProps)}</Box>
+    );
+  });
+};
 
 export default FormCollapseGroup;

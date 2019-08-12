@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import { Field, formValues } from 'redux-form';
+import React, { useMemo, useCallback } from 'react';
+import { Field } from 'redux-form';
 
 import Modal from '../Modal';
 import Button from '../Button';
@@ -10,6 +10,7 @@ import Spacing from '../Spacing';
 import useApiAsync from '../useApiAsync';
 import useTranslation from '../useTranslation';
 import { FormFieldSelect } from '../FormFields';
+import useFieldValue from '../useFieldValue';
 
 const getToteutusOptions = toteutukset => {
   return toteutukset.map(({ nimi, oid }) => ({
@@ -18,25 +19,25 @@ const getToteutusOptions = toteutukset => {
   }));
 };
 
-const FooterField = formValues('toteutus')(({ toteutus, children }) =>
-  children({ toteutus }),
-);
-
 const HakukohteetModal = ({
   onClose,
   organisaatioOid,
-  pohjaValue,
-  fieldName = 'toteutukset',
-  onSave = () => {},
+  fieldName = 'hakukohteet',
+  onSave: onSaveProp = () => {},
   ...props
 }) => {
   const { t } = useTranslation();
+  const toteutus = useFieldValue(`${fieldName}.toteutus`);
 
   const { data: toteutukset } = useApiAsync({
     promiseFn: getKoutaToteutukset,
     organisaatioOid,
     watch: organisaatioOid,
   });
+
+  const onSave = useCallback(() => {
+    return onSaveProp({ toteutusOid: toteutus.value });
+  }, [onSaveProp, toteutus]);
 
   const toteutuksetOptions = useMemo(() => {
     return toteutukset ? getToteutusOptions(toteutukset) : [];
@@ -47,18 +48,14 @@ const HakukohteetModal = ({
       minHeight="200px"
       header={t('yleiset.liitaHakukohde')}
       footer={
-        <FooterField>
-          {({ toteutus }) => (
-            <Flex justifyBetween>
-              <Button onClick={onClose} variant="outlined" type="button">
-                {t('yleiset.sulje')}
-              </Button>
-              <Button onClick={onSave} type="button" disabled={!toteutus}>
-                {t('yleiset.luoUusiHakukohde')}
-              </Button>
-            </Flex>
-          )}
-        </FooterField>
+        <Flex justifyBetween>
+          <Button onClick={onClose} variant="outlined" type="button">
+            {t('yleiset.sulje')}
+          </Button>
+          <Button onClick={onSave} type="button" disabled={!toteutus}>
+            {t('yleiset.luoUusiHakukohde')}
+          </Button>
+        </Flex>
       }
       onClose={onClose}
       {...props}

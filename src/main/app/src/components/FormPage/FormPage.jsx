@@ -34,7 +34,7 @@ const FormContent = styled.div`
   background-color: ${getThemeProp('palette.mainBackground')};
   padding-top: ${({ theme }) => theme.spacing.unit * 6}px
   padding-bottom: ${({ theme, hasFooter }) =>
-    theme.spacing.unit * 6 + (hasFooter ? 50 : 0)}px;
+    theme.spacing.unit * 6 + (hasFooter ? 75 : 0)}px;
 `;
 
 const FooterWrapper = styled.div`

@@ -7,6 +7,8 @@ import useApiAsync from '../useApiAsync';
 import { POHJAVALINTA } from '../../constants';
 import ReduxForm from '../ReduxForm';
 import getToteutusByOid from '../../utils/kouta/getToteutusByOid';
+import getToteutusFormConfig from '../../utils/getToteutusFormConfig';
+import FormConfigContext from '../FormConfigContext';
 
 const resolveFn = () => Promise.resolve();
 
@@ -21,6 +23,20 @@ const getInitialValues = toteutus => {
   return toteutus
     ? { ...getCopyValues(toteutus.oid), ...getFormValuesByToteutus(toteutus) }
     : initialValues;
+};
+
+const ToteutusFormWrapper = props => {
+  const { koulutustyyppi } = props;
+
+  const config = useMemo(() => getToteutusFormConfig(koulutustyyppi), [
+    koulutustyyppi,
+  ]);
+
+  return (
+    <FormConfigContext.Provider value={config}>
+      <ToteutusForm {...props} />
+    </FormConfigContext.Provider>
+  );
 };
 
 const CreateToteutusForm = props => {
@@ -44,7 +60,7 @@ const CreateToteutusForm = props => {
       initialValues={initialValues}
       enableReinitialize
     >
-      {() => <ToteutusForm steps {...props} />}
+      {() => <ToteutusFormWrapper steps {...props} />}
     </ReduxForm>
   );
 };

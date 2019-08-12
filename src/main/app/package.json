@@ -22,7 +22,7 @@
     "polished": "^2.3.3",
     "query-string": "^6.2.0",
     "re-reselect": "^2.3.0",
-    "react": "^16.8.0",
+    "react": "^16.9.0",
     "react-async": "^7.0.6",
     "react-contextual": "^5.0.2",
     "react-day-picker": "^7.3.0",

@@ -24,19 +24,25 @@ import isYhteishakuHakutapa from '../../utils/isYhteishakuHakutapa';
 import useFieldValue from '../useFieldValue';
 import { HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID } from '../../constants';
 
-const PohjaFormCollapse = ({ children, onSelectBase, ...props }) => {
+const PohjaFormCollapse = ({
+  children,
+  onContinue,
+  onSelectBase,
+  ...props
+}) => {
   const tapa = useFieldValue('pohja.tapa');
   const valinta = useFieldValue('pohja.valinta');
 
-  const onContinue = useCallback(() => {
+  const onPohjaContinue = useCallback(() => {
+    onContinue();
     onSelectBase({
       tapa,
       valinta: get(valinta, 'value'),
     });
-  }, [onSelectBase, tapa, valinta]);
+  }, [onSelectBase, tapa, valinta, onContinue]);
 
   return (
-    <FormCollapse onContinue={onContinue} {...props}>
+    <FormCollapse onContinue={onPohjaContinue} {...props}>
       {children}
     </FormCollapse>
   );
@@ -78,9 +84,11 @@ const HakuForm = ({
         enabled={steps}
         scrollTarget={scrollTarget}
         defaultOpen={!steps}
+        configured
       >
         {canSelectBase ? (
           <PohjaFormCollapse
+            section="pohja"
             header={t('yleiset.pohjanValinta')}
             scrollOnActive={false}
             onSelectBase={onSelectBase}
@@ -94,6 +102,7 @@ const HakuForm = ({
         ) : null}
 
         <FormCollapse
+          section="kieliversiot"
           header={t('yleiset.kieliversiot')}
           {...getTestIdProps('kieliversiotSection')}
         >
@@ -101,6 +110,7 @@ const HakuForm = ({
         </FormCollapse>
 
         <FormCollapse
+          section="nimi"
           header={t('hakulomake.haunNimi')}
           languages={languages}
           {...getTestIdProps('nimiSection')}
@@ -109,6 +119,7 @@ const HakuForm = ({
         </FormCollapse>
 
         <FormCollapse
+          section="kohdejoukko"
           header={t('hakulomake.haunKohdejoukko')}
           {...getTestIdProps('kohdejoukkoSection')}
         >
@@ -116,6 +127,7 @@ const HakuForm = ({
         </FormCollapse>
 
         <FormCollapse
+          section="hakutapa"
           header={t('hakulomake.hakutapa')}
           {...getTestIdProps('hakutapaSection')}
         >
@@ -123,6 +135,7 @@ const HakuForm = ({
         </FormCollapse>
 
         <FormCollapse
+          section="aikataulu"
           header={t('hakulomake.haunAikataulu')}
           {...getTestIdProps('aikatauluSection')}
         >
@@ -134,6 +147,7 @@ const HakuForm = ({
         </FormCollapse>
 
         <FormCollapse
+          section="hakulomake"
           header={t('yleiset.hakulomakkeenValinta')}
           languages={languages}
           {...getTestIdProps('hakulomakeSection')}
@@ -142,6 +156,7 @@ const HakuForm = ({
         </FormCollapse>
 
         <FormCollapse
+          section="valintakoe"
           header={t('yleiset.valintakoe')}
           languages={languages}
           {...getTestIdProps('valintakoeSection')}
@@ -150,6 +165,7 @@ const HakuForm = ({
         </FormCollapse>
 
         <FormCollapse
+          section="yhteystiedot"
           header={t('hakulomake.haunYhteystiedot')}
           languages={languages}
           {...getTestIdProps('yhteystiedotSection')}

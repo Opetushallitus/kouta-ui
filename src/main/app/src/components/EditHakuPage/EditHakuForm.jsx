@@ -4,6 +4,10 @@ import { withRouter } from 'react-router-dom';
 import HakuForm from '../HakuForm';
 import getFormValuesByHaku from '../../utils/getFormValuesByHaku';
 import ReduxForm from '../ReduxForm';
+import getHakuFormConfig from '../../utils/getHakuFormConfig';
+import FormConfigContext from '../FormConfigContext';
+
+const config = getHakuFormConfig();
 
 const EditHakuForm = ({ onSave, haku, history, ...props }) => {
   const initialValues = useMemo(() => {
@@ -26,14 +30,16 @@ const EditHakuForm = ({ onSave, haku, history, ...props }) => {
   return (
     <ReduxForm form="editHakuForm" initialValues={initialValues}>
       {() => (
-        <HakuForm
-          steps={false}
-          initialValues={initialValues}
-          haku={haku}
-          onAttachHakukohde={onAttachHakukohde}
-          canSelectBase={false}
-          {...props}
-        />
+        <FormConfigContext.Provider value={config}>
+          <HakuForm
+            steps={false}
+            initialValues={initialValues}
+            haku={haku}
+            onAttachHakukohde={onAttachHakukohde}
+            canSelectBase={false}
+            {...props}
+          />
+        </FormConfigContext.Provider>
       )}
     </ReduxForm>
   );

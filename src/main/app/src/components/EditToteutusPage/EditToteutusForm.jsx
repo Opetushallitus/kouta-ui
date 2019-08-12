@@ -4,6 +4,22 @@ import { withRouter } from 'react-router-dom';
 import ToteutusForm from '../ToteutusForm';
 import getFormValuesByToteutus from '../../utils/getFormValuesByToteutus';
 import ReduxForm from '../ReduxForm';
+import FormConfigContext from '../FormConfigContext';
+import getToteutusFormConfig from '../../utils/getToteutusFormConfig';
+
+const ToteutusFormWrapper = props => {
+  const { koulutustyyppi } = props;
+
+  const config = useMemo(() => getToteutusFormConfig(koulutustyyppi), [
+    koulutustyyppi,
+  ]);
+
+  return (
+    <FormConfigContext.Provider value={config}>
+      <ToteutusForm {...props} />
+    </FormConfigContext.Provider>
+  );
+};
 
 const EditToteutusForm = ({ toteutus, history, ...props }) => {
   const initialValues = useMemo(() => {
@@ -26,7 +42,7 @@ const EditToteutusForm = ({ toteutus, history, ...props }) => {
   return (
     <ReduxForm form="editToteutusForm" initialValues={initialValues}>
       {() => (
-        <ToteutusForm
+        <ToteutusFormWrapper
           {...props}
           toteutus={toteutus}
           steps={false}

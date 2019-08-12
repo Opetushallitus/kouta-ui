@@ -6,6 +6,10 @@ import useApiAsync from '../useApiAsync';
 import { POHJAVALINTA } from '../../constants';
 import getFormValuesByHaku from '../../utils/getFormValuesByHaku';
 import ReduxForm from '../ReduxForm';
+import getHakuFormConfig from '../../utils/getHakuFormConfig';
+import FormConfigContext from '../FormConfigContext';
+
+const config = getHakuFormConfig();
 
 const resolveFn = () => Promise.resolve();
 
@@ -43,7 +47,11 @@ const CreateHakuForm = props => {
       initialValues={initialValues}
       enableReinitialize
     >
-      {() => <HakuForm steps {...props} />}
+      {() => (
+        <FormConfigContext.Provider value={config}>
+          <HakuForm steps {...props} />
+        </FormConfigContext.Provider>
+      )}
     </ReduxForm>
   );
 };

@@ -3,7 +3,24 @@ import { withRouter } from 'react-router-dom';
 
 import ReduxForm from '../ReduxForm';
 import KoulutusForm from '../KoulutusForm';
+import FormConfigContext from '../FormConfigContext';
 import getFormValuesByKoulutus from '../../utils/getFormValuesByKoulutus';
+import useFieldValue from '../useFieldValue';
+import getKoulutusFormConfig from '../../utils/getKoulutusFormConfig';
+
+const KoulutusFormWrapper = props => {
+  const koulutustyyppi = useFieldValue('koulutustyyppi');
+
+  const config = useMemo(() => getKoulutusFormConfig(koulutustyyppi), [
+    koulutustyyppi,
+  ]);
+
+  return (
+    <FormConfigContext.Provider value={config}>
+      <KoulutusForm {...props} />
+    </FormConfigContext.Provider>
+  );
+};
 
 const EditKoulutusForm = ({ onSave, koulutus, history, ...props }) => {
   const initialValues = useMemo(() => {
@@ -21,7 +38,7 @@ const EditKoulutusForm = ({ onSave, koulutus, history, ...props }) => {
   return (
     <ReduxForm form="editKoulutusForm" initialValues={initialValues}>
       {() => (
-        <KoulutusForm
+        <KoulutusFormWrapper
           steps={false}
           canSelectBase={false}
           canEditKoulutustyyppi={false}

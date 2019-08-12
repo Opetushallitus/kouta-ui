@@ -13,19 +13,25 @@ import useFieldValue from '../useFieldValue';
 import PerustiedotSection from './PerustiedotSection';
 import JulkisuusSection from './JulkisuusSection';
 
-const PohjaFormCollapse = ({ children, onSelectBase, ...props }) => {
+const PohjaFormCollapse = ({
+  children,
+  onContinue,
+  onSelectBase,
+  ...props
+}) => {
   const tapa = useFieldValue('pohja.tapa');
   const valinta = useFieldValue('pohja.valinta');
 
-  const onContinue = useCallback(() => {
+  const onPohjaContinue = useCallback(() => {
+    onContinue();
     onSelectBase({
       tapa,
       valinta: get(valinta, 'value'),
     });
-  }, [onSelectBase, tapa, valinta]);
+  }, [onSelectBase, tapa, valinta, onContinue]);
 
   return (
-    <FormCollapse onContinue={onContinue} {...props}>
+    <FormCollapse onContinue={onPohjaContinue} {...props}>
       {children}
     </FormCollapse>
   );
@@ -43,8 +49,9 @@ const ValintaperusteForm = ({
   const languages = kieliversiot || [];
 
   return (
-    <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
+    <FormCollapseGroup enabled={steps} defaultOpen={!steps} configured>
       <FormCollapse
+        section="perustiedot"
         header={t('valintaperustelomake.valintaperusteenPerustiedot')}
         scrollOnActive={false}
         {...getTestIdProps('perustiedotSection')}
@@ -54,6 +61,7 @@ const ValintaperusteForm = ({
 
       {canCopy ? (
         <PohjaFormCollapse
+          section="pohja"
           header={t('yleiset.pohjanValinta')}
           onSelectBase={onSelectBase}
           {...getTestIdProps('pohjaSection')}
@@ -63,6 +71,7 @@ const ValintaperusteForm = ({
       ) : null}
 
       <FormCollapse
+        section="kuvaus"
         header={t('valintaperustelomake.valintaperusteenKuvaus')}
         languages={languages}
         {...getTestIdProps('kuvausSection')}
@@ -71,6 +80,7 @@ const ValintaperusteForm = ({
       </FormCollapse>
 
       <FormCollapse
+        section="valintatapa"
         header={t('valintaperustelomake.valintatapa')}
         languages={languages}
         {...getTestIdProps('valintatapaSection')}
@@ -79,6 +89,7 @@ const ValintaperusteForm = ({
       </FormCollapse>
 
       <FormCollapse
+        section="soraKuvaus"
         header={t('yleiset.soraKuvaus')}
         {...getTestIdProps('soraKuvausSection')}
       >
@@ -89,6 +100,7 @@ const ValintaperusteForm = ({
       </FormCollapse>
 
       <FormCollapse
+        section="julkisuus"
         header={t('valintaperustelomake.valintaperusteenNakyminen')}
         {...getTestIdProps('julkisuusSection')}
       >

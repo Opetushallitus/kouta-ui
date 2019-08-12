@@ -6,6 +6,10 @@ import useApiAsync from '../useApiAsync';
 import { POHJAVALINTA } from '../../constants';
 import ReduxForm from '../ReduxForm';
 import getFormValuesByValintaperuste from '../../utils/getFormValuesByValintaperuste';
+import getValintaperusteFormConfig from '../../utils/getValintaperusteFormConfig';
+import FormConfigContext from '../FormConfigContext';
+
+const config = getValintaperusteFormConfig();
 
 const resolveFn = () => Promise.resolve(null);
 
@@ -49,7 +53,11 @@ export const CreateValintaperusteForm = ({
       initialValues={initialValues}
       enableReinitialize
     >
-      {() => <ValintaperusteForm steps {...props} />}
+      {() => (
+        <FormConfigContext.Provider value={config}>
+          <ValintaperusteForm steps {...props} />
+        </FormConfigContext.Provider>
+      )}
     </ReduxForm>
   );
 };

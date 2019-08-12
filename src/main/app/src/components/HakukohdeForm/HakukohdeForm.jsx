@@ -27,8 +27,9 @@ const HakukohdeForm = ({
   const languages = kieliversiot || [];
 
   return (
-    <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
+    <FormCollapseGroup enabled={steps} defaultOpen={!steps} configured>
       <FormCollapse
+        section="kieliversiot"
         header={t('yleiset.kieliversiot')}
         scrollOnActive={false}
         {...getTestIdProps('kieliversiotSection')}
@@ -37,6 +38,7 @@ const HakukohdeForm = ({
       </FormCollapse>
 
       <FormCollapse
+        section="pohjakoulutusvaatimus"
         header={t('hakukohdelomake.pohjakoulutusvaatimus')}
         {...getTestIdProps('pohjakoulutusvaatimusSection')}
       >
@@ -47,6 +49,7 @@ const HakukohdeForm = ({
       </FormCollapse>
 
       <FormCollapse
+        section="perustiedot"
         header={t('hakukohdelomake.hakukohteenPerustiedot')}
         languages={languages}
         {...getTestIdProps('perustiedotSection')}
@@ -60,6 +63,7 @@ const HakukohdeForm = ({
       </FormCollapse>
 
       <FormCollapse
+        section="aloituspaikat"
         header={t('hakukohdelomake.aloituspaikat')}
         {...getTestIdProps('aloituspaikatSection')}
       >
@@ -70,6 +74,7 @@ const HakukohdeForm = ({
       </FormCollapse>
 
       <FormCollapse
+        section="valintaperusteenKuvaus"
         header={t('hakukohdelomake.valintaperusteenKuvaus')}
         {...getTestIdProps('valintaperusteenKuvausSection')}
       >
@@ -81,6 +86,7 @@ const HakukohdeForm = ({
       </FormCollapse>
 
       <FormCollapse
+        section="valintakoe"
         header={t('hakukohdelomake.valintakoe')}
         languages={languages}
         {...getTestIdProps('valintakoeSection')}
@@ -89,6 +95,7 @@ const HakukohdeForm = ({
       </FormCollapse>
 
       <FormCollapse
+        section="liitteet"
         header={t('hakukohdelomake.tarvittavatLiitteet')}
         languages={languages}
         {...getTestIdProps('liitteetSection')}

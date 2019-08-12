@@ -16,22 +16,27 @@ import LisatiedotSection from './LisatiedotSection';
 import Flex from '../Flex';
 import NakyvyysSection from './NakyvyysSection';
 import useTranslation from '../useTranslation';
-import isKorkeakouluKoulutustyyppi from '../../utils/isKorkeakouluKoulutustyyppi';
 import useFieldValue from '../useFieldValue';
 
-const PohjaFormCollapse = ({ children, onSelectBase, ...props }) => {
+const PohjaFormCollapse = ({
+  children,
+  onSelectBase,
+  onContinue,
+  ...props
+}) => {
   const tapa = useFieldValue('pohja.tapa');
   const valinta = useFieldValue('pohja.valinta');
 
-  const onContinue = useCallback(() => {
+  const onPohjaContinue = useCallback(() => {
+    onContinue();
     onSelectBase({
       tapa,
       valinta: get(valinta, 'value'),
     });
-  }, [onSelectBase, tapa, valinta]);
+  }, [onSelectBase, tapa, valinta, onContinue]);
 
   return (
-    <FormCollapse onContinue={onContinue} {...props}>
+    <FormCollapse onContinue={onPohjaContinue} {...props}>
       {children}
     </FormCollapse>
   );
@@ -42,7 +47,6 @@ const KoulutusForm = ({
   steps = false,
   onAttachToteutus,
   canSelectBase = true,
-  scrollTarget,
   koulutus: koulutusProp = null,
   canEditKoulutustyyppi = true,
   johtaaTutkintoon = true,
@@ -52,17 +56,14 @@ const KoulutusForm = ({
 
   const koulutustyyppi = useFieldValue('koulutustyyppi');
   const kieliversiotValue = useFieldValue('kieliversiot');
-  const koulutusValue = useFieldValue('information.koulutus');
+  const koulutuskoodi = useFieldValue('information.koulutus');
   const languageTabs = kieliversiotValue || [];
 
   return (
-    <FormCollapseGroup
-      enabled={steps}
-      scrollTarget={scrollTarget}
-      defaultOpen={!steps}
-    >
+    <FormCollapseGroup enabled={steps} defaultOpen={!steps} configured>
       {canEditKoulutustyyppi ? (
         <FormCollapse
+          section="koulutustyyppi"
           header={t('yleiset.koulutustyyppi')}
           scrollOnActive={false}
           {...getTestIdProps('tyyppiSection')}
@@ -76,6 +77,7 @@ const KoulutusForm = ({
 
       {canSelectBase ? (
         <PohjaFormCollapse
+          section="pohja"
           header={t('yleiset.pohjanValinta')}
           onSelectBase={onSelectBase}
           {...getTestIdProps('pohjaSection')}
@@ -88,6 +90,7 @@ const KoulutusForm = ({
       ) : null}
 
       <FormCollapse
+        section="kieliversiot"
         header={t('yleiset.kieliversiot')}
         {...getTestIdProps('kieliversiotSection')}
       >
@@ -95,30 +98,33 @@ const KoulutusForm = ({
       </FormCollapse>
 
       <FormCollapse
+        section="tiedot"
         header={t('koulutuslomake.koulutuksenTiedot')}
         languages={languageTabs}
         {...getTestIdProps('tiedotSection')}
       >
         <TiedotSection
           koulutustyyppi={koulutustyyppi}
-          koulutusValue={koulutusValue}
+          koulutuskoodi={koulutuskoodi}
           name="information"
         />
       </FormCollapse>
 
       <FormCollapse
+        section="kuvaus"
         header={t('koulutuslomake.koulutuksenKuvaus')}
         languages={languageTabs}
         {...getTestIdProps('kuvausSection')}
       >
         <KuvausSection
           koulutustyyppi={koulutustyyppi}
-          koulutusValue={koulutusValue}
+          koulutuskoodi={koulutuskoodi}
           name="description"
         />
       </FormCollapse>
 
       <FormCollapse
+        section="lisatiedot"
         header={t('koulutuslomake.koulutuksenLisatiedot')}
         languages={languageTabs}
         {...getTestIdProps('lisatiedotSection')}
@@ -127,20 +133,20 @@ const KoulutusForm = ({
       </FormCollapse>
 
       <FormCollapse
+        section="jarjestyspaikka"
         header={t('koulutuslomake.koulutuksenJarjestaja')}
         {...getTestIdProps('jarjestajaSection')}
       >
         <JarjestajaSection organisaatioOid={organisaatioOid} name="tarjoajat" />
       </FormCollapse>
 
-      {isKorkeakouluKoulutustyyppi(koulutustyyppi) ? (
-        <FormCollapse
-          header="Koulutuksen näkyminen muille koulutustoimijoille"
-          {...getTestIdProps('nakyvyysSection')}
-        >
-          <NakyvyysSection name="julkinen" />
-        </FormCollapse>
-      ) : null}
+      <FormCollapse
+        section="julkisuus"
+        header="Koulutuksen näkyminen muille koulutustoimijoille"
+        {...getTestIdProps('nakyvyysSection')}
+      >
+        <NakyvyysSection name="julkinen" />
+      </FormCollapse>
 
       {isFunction(onAttachToteutus) ? (
         <FormCollapse

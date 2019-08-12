@@ -7,7 +7,6 @@ const useFormConfig = () => {
 
   return useMemo(() => {
     return {
-      fields: {},
       sections: {},
       ...(contextConfig || {}),
     };

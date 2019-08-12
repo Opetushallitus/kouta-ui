@@ -3,6 +3,10 @@ import React, { useMemo } from 'react';
 import HakukohdeForm from '../HakukohdeForm';
 import getFormValuesByHakukohde from '../../utils/getFormValuesByHakukohde';
 import ReduxForm from '../ReduxForm';
+import getHakukohdeFormConfig from '../../utils/getHakukohdeFormConfig';
+import FormConfigContext from '../FormConfigContext';
+
+const config = getHakukohdeFormConfig();
 
 const EditHakukohdeForm = ({ onSave, hakukohde, ...props }) => {
   const initialValues = useMemo(() => {
@@ -11,7 +15,11 @@ const EditHakukohdeForm = ({ onSave, hakukohde, ...props }) => {
 
   return (
     <ReduxForm form="editHakukohdeForm" initialValues={initialValues}>
-      {() => <HakukohdeForm steps={false} {...props} />}
+      {() => (
+        <FormConfigContext.Provider value={config}>
+          <HakukohdeForm steps={false} {...props} />
+        </FormConfigContext.Provider>
+      )}
     </ReduxForm>
   );
 };

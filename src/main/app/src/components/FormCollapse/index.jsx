@@ -7,15 +7,8 @@ import { isFunction, isString, getTestIdProps, isArray } from '../../utils';
 import useTranslation from '../useTranslation';
 import LanguageTabs from './LanguageTabs';
 import Typography from '../Typography';
-
-const CollapseFooterContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const CollapseWrapper = styled.div`
-  margin-bottom: ${({ theme }) => theme.spacing.unit * 4}px;
-`;
+import FormConfigSectionContext from '../FormConfigSectionContext';
+import Box from '../Box';
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -24,10 +17,6 @@ const HeaderWrapper = styled.div`
   align-items: center;
   height: 100%;
   padding: 0px ${({ theme }) => theme.spacing.unit * 3}px;
-`;
-
-const HeaderContent = styled(Typography).attrs({ variant: 'h5' })`
-  padding: ${({ theme }) => theme.spacing.unit * 3}px 0px;
 `;
 
 const LanguageTabsWrapper = styled.div`
@@ -45,7 +34,7 @@ const scrollIntoView = el => {
   } catch (e) {}
 };
 
-const renderChildren = ({ onContinue, children, language }) => {
+const renderChildren = ({ onContinue, children, language, section }) => {
   const childrenProps = {
     onContinue,
     language,
@@ -59,7 +48,13 @@ const renderChildren = ({ onContinue, children, language }) => {
     renderedChildren = React.cloneElement(children, childrenProps);
   }
 
-  return renderedChildren;
+  return section ? (
+    <FormConfigSectionContext.Provider value={section}>
+      {renderedChildren}
+    </FormConfigSectionContext.Provider>
+  ) : (
+    renderedChildren
+  );
 };
 
 const renderActions = ({ actions, onContinue, t }) => {
@@ -85,9 +80,9 @@ const renderHeader = ({
   collapseOpen,
 }) => {
   const headerContent = isString(header) ? (
-    <HeaderContent>
+    <Typography variant="h5" py={3} px={0}>
       {index + 1}. {header}
-    </HeaderContent>
+    </Typography>
   ) : (
     header
   );
@@ -98,7 +93,7 @@ const renderHeader = ({
   return (
     <HeaderWrapper>
       {headerContent}
-      {showLanguageTabs ? (
+      {showLanguageTabs && (
         <LanguageTabsWrapper>
           <LanguageTabs
             languages={languages}
@@ -106,7 +101,7 @@ const renderHeader = ({
             onChange={onLanguageChange}
           />
         </LanguageTabsWrapper>
-      ) : null}
+      )}
     </HeaderWrapper>
   );
 };
@@ -124,6 +119,7 @@ const FormCollapse = ({
   active = false,
   defaultOpen = false,
   scrollOnActive = true,
+  section,
   ...props
 }) => {
   const { t } = useTranslation();
@@ -160,13 +156,15 @@ const FormCollapse = ({
   });
 
   return (
-    <CollapseWrapper {...id && { id }} ref={containerRef}>
+    <div {...id && { id }} ref={containerRef}>
       <Collapse
         header={header}
         footer={
-          actions ? (
-            <CollapseFooterContainer>{actions}</CollapseFooterContainer>
-          ) : null
+          actions && (
+            <Box display="flex" justifyContent="center">
+              {actions}
+            </Box>
+          )
         }
         active={active}
         onToggle={onToggleCollapse}
@@ -174,9 +172,9 @@ const FormCollapse = ({
         toggleOnHeaderClick={false}
         {...props}
       >
-        {renderChildren({ onContinue, children, language })}
+        {renderChildren({ onContinue, children, language, section })}
       </Collapse>
-    </CollapseWrapper>
+    </div>
   );
 };
 

@@ -28,6 +28,46 @@ const getToteutusByFormValues = values => {
   const opetustapaKoodiUrit = get(values, 'jarjestamistiedot.opetustapa') || [];
   const opetusaikaKoodiUrit = get(values, 'jarjestamistiedot.opetusaika') || [];
 
+  const diplomiKoodiUrit = (
+    get(values, 'jarjestamistiedot.diplomiTyypit') || []
+  ).map(({ value }) => value);
+
+  const diplomiKuvaus = pick(
+    get(values, 'jarjestamistiedot.diplomiKuvaus') || {},
+    kielivalinta,
+  );
+
+  const A1JaA2Kielivalikoima = (
+    get(values, 'jarjestamistiedot.A1A2Kielet') || []
+  ).map(({ value }) => value);
+
+  const B2Kielivalikoima = (
+    get(values, 'jarjestamistiedot.B2Kielet') || []
+  ).map(({ value }) => value);
+
+  const aidinkieliKielivalikoima = (
+    get(values, 'jarjestamistiedot.aidinkielet') || []
+  ).map(({ value }) => value);
+
+  const B1Kielivalikoima = (
+    get(values, 'jarjestamistiedot.B1Kielet') || []
+  ).map(({ value }) => value);
+
+  const B3Kielivalikoima = (
+    get(values, 'jarjestamistiedot.B3Kielet') || []
+  ).map(({ value }) => value);
+
+  const muuKielivalikoima = (
+    get(values, 'jarjestamistiedot.muutKielet') || []
+  ).map(({ value }) => value);
+
+  const jaksonKuvaus = pick(
+    get(values, 'lukiolinjat.jaksonKuvaus') || {},
+    kielivalinta,
+  );
+
+  const lukiolinjaKoodiUri = get(values, 'lukiolinjat.linja.value') || null;
+
   const opetuskieliKuvaus = pick(
     get(values, 'jarjestamistiedot.opetuskieliKuvaus') || {},
     kielivalinta,
@@ -170,6 +210,16 @@ const getToteutusByFormValues = values => {
         onkoStipendia,
         stipendinKuvaus,
         stipendinMaara,
+        diplomiKoodiUrit,
+        diplomiKuvaus,
+        A1JaA2Kielivalikoima,
+        aidinkieliKielivalikoima,
+        B1Kielivalikoima,
+        B2Kielivalikoima,
+        B3Kielivalikoima,
+        muuKielivalikoima,
+        lukiolinjaKoodiUri,
+        jaksonKuvaus,
       },
       osaamisalat,
       yhteyshenkilot,

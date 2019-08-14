@@ -2,28 +2,31 @@ import React, { useMemo } from 'react';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
 import get from 'lodash/get';
-import useTranslation from '../useTranslation';
 
-import Spacing from '../Spacing';
+import useTranslation from '../../useTranslation';
+import Spacing from '../../Spacing';
 import OpetusaikaCheckboxGroup from './OpetusaikaCheckboxGroup';
 import OpetuskieliCheckboxGroup from './OpetuskieliCheckboxGroup';
 import OpetustapaCheckboxGroup from './OpetustapaCheckboxGroup';
-import Flex, { FlexItem } from '../Flex';
+import Flex, { FlexItem } from '../../Flex';
 import AlkamiskausiFields from './AlkamiskausiFields';
-import useKoodistoOptions from '../useKoodistoOptions';
-import { isArray, getTestIdProps } from '../../utils';
-import NoYesRadioGroup from '../NoYesRadioGroup';
-import DividerHeading from '../DividerHeading';
+import useKoodistoOptions from '../../useKoodistoOptions';
+import { isArray, getTestIdProps } from '../../../utils';
+import NoYesRadioGroup from '../../NoYesRadioGroup';
+import DividerHeading from '../../DividerHeading';
 import MaksullisuusFields from './MaksullisuusFields';
-import isKorkeakouluKoulutustyyppi from '../../utils/isKorkeakouluKoulutustyyppi';
-import useFieldValue from '../useFieldValue';
+import isKorkeakouluKoulutustyyppi from '../../../utils/isKorkeakouluKoulutustyyppi';
+import useFieldValue from '../../useFieldValue';
+import FormConfigField from '../../FormConfigField';
+import DiplomiFields from './DiplomiFields';
+import KielivalikoimaFields from './KielivalikoimaFields';
 
 import {
   FormFieldTextarea,
   FormFieldSelect,
   FormFieldInput,
   createFormFieldComponent,
-} from '../FormFields';
+} from '../../FormFields';
 
 const makeCountLimitOnChange = (onChange, max) => items =>
   isArray(items) && items.length <= max && onChange(items);
@@ -159,6 +162,7 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
           </FlexItem>
         </Flex>
       </Spacing>
+
       <Spacing marginBottom={4}>
         <DividerHeading>
           {t('toteutuslomake.paaasiallinenOpetusaika')}
@@ -180,17 +184,14 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
           </FlexItem>
         </Flex>
       </Spacing>
+
       <Spacing marginBottom={4}>
         <DividerHeading>
           {t('toteutuslomake.paaasiallinenOpetustapa')}
         </DividerHeading>
         <Flex {...getTestIdProps('opetustapa')}>
           <FlexItem grow={0} basis="30%">
-            <Field
-              name={`${name}.opetustapa`}
-              component={OpetustapaField}
-              helperText={t('yleiset.voitValitaEnintaan', { lukumaara: 2 })}
-            />
+            <Field name={`${name}.opetustapa`} component={OpetustapaField} />
           </FlexItem>
           <FlexItem grow={1} paddingLeft={4}>
             <Field
@@ -201,6 +202,7 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
           </FlexItem>
         </Flex>
       </Spacing>
+
       <Spacing marginBottom={4}>
         <DividerHeading>
           {t('toteutuslomake.onkoOpetusMaksullista')}
@@ -251,7 +253,19 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
           </FlexItem>
         </Flex>
       </Spacing>
-      
+
+      <FormConfigField name="kielivalikoima">
+        <Spacing marginBottom={4}>
+          <KielivalikoimaFields name={name} />
+        </Spacing>
+      </FormConfigField>
+
+      <FormConfigField name="diplomi">
+        <Spacing marginBottom={4}>
+          <DiplomiFields name={name} language={language} />
+        </Spacing>
+      </FormConfigField>
+
       <Spacing marginBottom={4}>
         <DividerHeading>{t('yleiset.valitseLisattavaOsio')}</DividerHeading>
         <div {...getTestIdProps('osiotSelect')}>

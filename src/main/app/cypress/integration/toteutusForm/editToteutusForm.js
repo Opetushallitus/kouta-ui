@@ -112,4 +112,33 @@ describe('editToteutusForm', () => {
       cy.wrap(request.body).snapshot();
     });
   });
+
+  it('should be able to edit lukio toteutus', () => {
+    cy.route({
+      method: 'GET',
+      url: `**/koulutus/${koulutusOid}`,
+      response: merge(koulutus({ tyyppi: 'lk' }), testKoulutusFields),
+    });
+
+    cy.route({
+      method: 'GET',
+      url: `**/toteutus/${toteutusOid}`,
+      response: merge(toteutus({ tyyppi: 'lk' }), testToteutusFields),
+    });
+
+    cy.route({
+      method: 'POST',
+      url: '**/toteutus',
+      response: {
+        muokattu: false,
+      },
+    }).as('updateLkToteutusResponse');
+
+    fillKieliversiotSection(cy);
+    tallenna(cy);
+
+    cy.wait('@updateLkToteutusResponse').then(({ request }) => {
+      cy.wrap(request.body).snapshot();
+    });
+  });
 });

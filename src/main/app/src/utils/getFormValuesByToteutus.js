@@ -17,6 +17,16 @@ const getFormValuesByToteutus = toteutus => {
     ylemmanKorkeakoulututkinnonOsaamisalat: ylemmanKorkeakoulututkinnonOsaamisalatArg = [],
     alemmanKorkeakoulututkinnonOsaamisalat: alemmanKorkeakoulututkinnonOsaamisalatArg = [],
     yhteyshenkilot = [],
+    diplomiKoodiUrit,
+    diplomiKuvaus,
+    A1JaA2Kielivalikoima,
+    aidinkieliKielivalikoima,
+    B1Kielivalikoima,
+    B2Kielivalikoima,
+    B3Kielivalikoima,
+    muuKielivalikoima,
+    lukiolinjaKoodiUri,
+    jaksonKuvaus,
   } = metadata;
 
   const osaamisalat = osaamisalatArg.map(({ koodi }) => koodi);
@@ -89,6 +99,16 @@ const getFormValuesByToteutus = toteutus => {
       onkoStipendia: get(opetus, 'onkoStipendia'),
       stipendinMaara: get(opetus, 'stipendinMaara') || {},
       stipendinKuvaus: get(opetus, 'stipendinKuvaus') || {},
+      diplomiTyypit: (diplomiKoodiUrit || []).map(value => ({ value })),
+      diplomiKuvaus: diplomiKuvaus || {},
+      A1A2Kielet: (A1JaA2Kielivalikoima || []).map(value => ({ value })),
+      aidinkielet: (aidinkieliKielivalikoima || []).map(value => ({
+        value,
+      })),
+      B1Kielet: (B1Kielivalikoima || []).map(value => ({ value })),
+      B2Kielet: (B2Kielivalikoima || []).map(value => ({ value })),
+      B3Kielet: (B3Kielivalikoima || []).map(value => ({ value })),
+      muutKielet: (muuKielivalikoima || []).map(value => ({ value })),
     },
     nayttamistiedot: {
       ammattinimikkeet: ammattinimikkeet.reduce((acc, curr) => {
@@ -131,6 +151,10 @@ const getFormValuesByToteutus = toteutus => {
     ylemmanKorkeakoulututkinnonOsaamisalat: ylemmanKorkeakoulututkinnonOsaamisalatArg,
     alemmanKorkeakoulututkinnonOsaamisalat: alemmanKorkeakoulututkinnonOsaamisalatArg,
     kuvaus,
+    lukiolinjat: {
+      linja: lukiolinjaKoodiUri ? { value: lukiolinjaKoodiUri } : '',
+      jaksonKuvaus: jaksonKuvaus || {},
+    },
   };
 };
 

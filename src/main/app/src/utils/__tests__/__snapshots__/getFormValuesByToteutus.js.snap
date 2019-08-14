@@ -27,6 +27,31 @@ Object {
     "org2",
   ],
   "jarjestamistiedot": Object {
+    "A1A2Kielet": Array [
+      Object {
+        "value": "kieli_1#1",
+      },
+    ],
+    "B1Kielet": Array [
+      Object {
+        "value": "kieli_3#1",
+      },
+    ],
+    "B2Kielet": Array [
+      Object {
+        "value": "kieli_2#1",
+      },
+    ],
+    "B3Kielet": Array [
+      Object {
+        "value": "kieli_4#1",
+      },
+    ],
+    "aidinkielet": Array [
+      Object {
+        "value": "kieli_5#1",
+      },
+    ],
     "alkamiskausi": Object {
       "kausi": "kausi_1#1",
       "vuosi": Object {
@@ -37,6 +62,15 @@ Object {
       "fi": "Fi kausikuvaus",
       "sv": "Sv kausikuvaus",
     },
+    "diplomiKuvaus": Object {
+      "fi": "Fi diplomi",
+      "sv": "Sv diplomi",
+    },
+    "diplomiTyypit": Array [
+      Object {
+        "value": "dipmlomi_1#1",
+      },
+    ],
     "kuvaus": Object {
       "fi": "Fi kuvaus",
       "sv": "Sv kuvaus",
@@ -55,6 +89,11 @@ Object {
       "sv": "Sv maksullisuuskuvaus",
     },
     "maksumaara": 50.25,
+    "muutKielet": Array [
+      Object {
+        "value": "kieli_6#1",
+      },
+    ],
     "onkoLukuvuosimaksua": true,
     "onkoStipendia": true,
     "opetusaika": Array [
@@ -114,6 +153,15 @@ Object {
   "kuvaus": Object {
     "fi": "Fi kuvaus",
     "sv": "Sv kuvaus",
+  },
+  "lukiolinjat": Object {
+    "jaksonKuvaus": Object {
+      "fi": "Fi jakso",
+      "sv": "Sv jakso",
+    },
+    "linja": Object {
+      "value": "linja_1#1",
+    },
   },
   "nayttamistiedot": Object {
     "ammattinimikkeet": Object {

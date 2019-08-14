@@ -52,12 +52,36 @@ Object {
       "sv": "Sv kuvaus",
     },
     "opetus": Object {
+      "A1JaA2Kielivalikoima": Array [
+        "kieli_1#1",
+      ],
+      "B1Kielivalikoima": Array [
+        "kieli_4#1",
+      ],
+      "B2Kielivalikoima": Array [
+        "kieli_2#1",
+      ],
+      "B3Kielivalikoima": Array [
+        "kieli_5#1",
+      ],
+      "aidinkieliKielivalikoima": Array [
+        "kieli_3#1",
+      ],
       "alkamisaikaKuvaus": Object {
         "fi": "Fi kausikuvaus",
         "sv": "Sv kausikuvaus",
       },
       "alkamiskausiKoodiUri": "kausi_1#1",
       "alkamisvuosi": "2020",
+      "diplomiKoodiUrit": Array [
+        "diplomi_1#1",
+        "diplomi_2#1",
+      ],
+      "diplomiKuvaus": Object {
+        "fi": "Fi diplomi",
+        "sv": "Sv diplomi",
+      },
+      "jaksonKuvaus": Object {},
       "lisatiedot": Array [
         Object {
           "otsikkoKoodiUri": "osio_1#1",
@@ -74,12 +98,16 @@ Object {
           },
         },
       ],
+      "lukiolinjaKoodiUri": null,
       "lukuvuosimaksu": null,
       "maksullisuusKuvaus": Object {
         "fi": "Fi maksullisuuskuvaus",
         "sv": "Sv maksullisuuskuvaus",
       },
       "maksunMaara": 50.5,
+      "muuKielivalikoima": Array [
+        "kieli_6#1",
+      ],
       "onkoLukuvuosimaksua": false,
       "onkoMaksullinen": true,
       "onkoStipendia": true,

@@ -22,6 +22,7 @@ import YhteyshenkilotSection from './YhteyshenkilotSection';
 import { KOULUTUSTYYPPI } from '../../constants';
 import useFieldValue from '../useFieldValue';
 import useModal from '../useModal';
+import LukiolinjatSection from './LukiolinjatSection';
 
 const PohjaFormCollapse = ({
   children,
@@ -95,6 +96,15 @@ const ToteutusForm = ({
           {...getTestIdProps('kieliversiotSection')}
         >
           <KieliversiotFields name="kieliversiot" />
+        </FormCollapse>
+
+        <FormCollapse
+          section="lukiolinjat"
+          header={t('toteutuslomake.valitseLukioLinjat')}
+          languages={languages}
+          {...getTestIdProps('lukiolinjatSection')}
+        >
+          <LukiolinjatSection name="lukiolinjat" />
         </FormCollapse>
 
         <FormCollapse

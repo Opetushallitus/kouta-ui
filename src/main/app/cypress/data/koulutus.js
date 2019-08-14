@@ -66,11 +66,15 @@ const getKorkeakouluFields = ({ tyyppi }) => {
   });
 };
 
+const getLukioFields = ({ tyyppi }) => getAmmatillinenFields({ tyyppi });
+
 export default ({ tyyppi = 'amm' } = {}) => {
   if (tyyppi === 'amm') {
     return getAmmatillinenFields({ tyyppi });
   } else if (['yo', 'amk'].includes(tyyppi)) {
     return getKorkeakouluFields({ tyyppi });
+  } else if (tyyppi === 'lk') {
+    return getLukioFields({ tyyppi });
   }
 
   return getBaseFields();

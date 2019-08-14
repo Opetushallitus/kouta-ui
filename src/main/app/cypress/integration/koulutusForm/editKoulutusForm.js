@@ -1,17 +1,17 @@
 import merge from 'lodash/merge';
 
-import { getByTestId, chooseKieliversiotLanguages } from '../../utils';
+import { chooseKieliversiotLanguages } from '../../utils';
 import koulutus from '../../data/koulutus';
 import { stubKoulutusFormRoutes } from '../../koulutusFormUtils';
 
-const fillKieliversiotSection = cy => {
-  getByTestId('kieliversiotSection', cy).within(() => {
+const fillKieliversiotSection = () => {
+  cy.getByTestId('kieliversiotSection').within(() => {
     chooseKieliversiotLanguages(['fi'], cy);
   });
 };
 
-const tallenna = cy => {
-  getByTestId('tallennaKoulutusButton', cy).click();
+const tallenna = () => {
+  cy.getByTestId('tallennaKoulutusButton').click();
 };
 
 describe('editKoulutusForm', () => {
@@ -62,8 +62,8 @@ describe('editKoulutusForm', () => {
       response: testKoulutus,
     });
 
-    fillKieliversiotSection(cy);
-    tallenna(cy);
+    fillKieliversiotSection();
+    tallenna();
 
     cy.wait('@updateAmmKoulutusResponse').then(({ request }) => {
       cy.wrap(request.body).snapshot();
@@ -85,10 +85,33 @@ describe('editKoulutusForm', () => {
       response: merge(koulutus({ tyyppi: 'yo' }), testKoulutusFields),
     });
 
-    fillKieliversiotSection(cy);
-    tallenna(cy);
+    fillKieliversiotSection();
+    tallenna();
 
     cy.wait('@updateYoKoulutusResponse').then(({ request }) => {
+      cy.wrap(request.body).snapshot();
+    });
+  });
+
+  it('should be able to edit lukiokoulutus', () => {
+    cy.route({
+      method: 'POST',
+      url: '**/koulutus',
+      response: {
+        muokattu: false,
+      },
+    }).as('updateLkKoulutusResponse');
+
+    cy.route({
+      method: 'GET',
+      url: `**/koulutus/${koulutusOid}`,
+      response: merge(koulutus({ tyyppi: 'lk' }), testKoulutusFields),
+    });
+
+    fillKieliversiotSection();
+    tallenna();
+
+    cy.wait('@updateLkKoulutusResponse').then(({ request }) => {
       cy.wrap(request.body).snapshot();
     });
   });

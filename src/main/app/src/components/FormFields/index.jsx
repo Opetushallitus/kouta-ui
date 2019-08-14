@@ -15,6 +15,7 @@ import FileInput from '../FileInput';
 import KieliversiotSelect from '../KieliversiotSelect';
 import KoulutustyyppiSelect from '../KoulutustyyppiSelect';
 import SoraKuvausSelect from '../SoraKuvausSelect';
+import LanguageSelect from '../LanguageSelect';
 
 export const simpleMapProps = ({ meta, input, ...props }) => ({
   ...input,
@@ -109,4 +110,9 @@ export const FormFieldSoraKuvausSelect = createFormFieldComponent(
     ...props,
     id,
   }),
+);
+
+export const FormFieldLanguageSelect = createFormFieldComponent(
+  LanguageSelect,
+  selectMapProps,
 );

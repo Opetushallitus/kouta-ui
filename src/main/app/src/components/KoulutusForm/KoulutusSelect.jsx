@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import mapValues from 'lodash/mapValues';
 
-import ApiAsync from '../ApiAsync';
-import memoize from 'memoizee';
+import useApiAsync from '../useApiAsync';
 
 import Select from '../Select';
 import { getKoulutuksetByKoulutusTyyppi } from '../../apiUtils';
-import { arrayToTranslationObject, isArray, getFirstLanguageValue } from '../../utils';
 
-const getKoulutukset = async ({ koulutusTyyppi, httpClient, apiUrls }) => {
+import {
+  arrayToTranslationObject,
+  isArray,
+  getFirstLanguageValue,
+} from '../../utils';
+
+const getKoulutukset = async ({ koulutustyyppi, httpClient, apiUrls }) => {
   const koulutukset = await getKoulutuksetByKoulutusTyyppi({
-    koulutusTyyppi,
+    koulutusTyyppi: koulutustyyppi,
     httpClient,
     apiUrls,
   });
@@ -23,12 +27,12 @@ const getKoulutukset = async ({ koulutusTyyppi, httpClient, apiUrls }) => {
     : [];
 };
 
-const getOptions = memoize(koulutukset => {
+const getOptions = koulutukset => {
   return koulutukset.map(({ nimi, koodiUri }) => ({
     value: koodiUri,
     label: getFirstLanguageValue(nimi),
-  }))
-});
+  }));
+};
 
 const KoulutusSelect = ({
   koulutustyyppi = 'amm',
@@ -36,19 +40,19 @@ const KoulutusSelect = ({
   value,
   ...props
 }) => {
-  return (
-    <ApiAsync
-      promiseFn={getKoulutukset}
-      watch={koulutustyyppi}
-      koulutusTyyppi={koulutustyyppi}
-    >
-      {({ data }) => {
-        const koulutukset = data || [];
+  const { data } = useApiAsync({
+    promiseFn: getKoulutukset,
+    koulutustyyppi,
+    watch: koulutustyyppi,
+  });
 
-        return <Select {...props} value={value} options={getOptions(koulutukset)} />;
-      }}
-    </ApiAsync>
-  );
+  console.log(koulutustyyppi);
+
+  const options = useMemo(() => {
+    return data ? getOptions(data) : [];
+  }, [data]);
+
+  return <Select {...props} value={value} options={options} />;
 };
 
 export default KoulutusSelect;

@@ -1,15 +1,14 @@
 import React, { useMemo } from 'react';
-import styled from 'styled-components';
 import { Field } from 'redux-form';
 
 import Typography from '../../Typography';
 import KoulutusSelect from '../KoulutusSelect';
 import { getKoulutusByKoodi } from '../../../apiUtils';
-import { getThemeProp } from '../../../theme';
 import { getLanguageValue, getTestIdProps, noop } from '../../../utils';
 import useTranslation from '../../useTranslation';
 import { createFormFieldComponent } from '../../FormFields';
 import useApiAsync from '../../useApiAsync';
+import Box from '../../Box';
 
 const getTutkintonimikkeet = ({ koulutus, language }) => {
   const { tutkintonimikeKoodit = [] } = koulutus;
@@ -27,32 +26,18 @@ const getOsaamisalat = ({ koulutus, language }) => {
     .filter(name => !!name);
 };
 
-const Container = styled.div`
-  display: flex;
-`;
-
-const Content = styled.div`
-  flex: 1;
-`;
-
-const Row = styled.div`
-  display: flex;
-  margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
-`;
-
-const LabelColumn = styled.div`
-  width: 30%;
-  padding-right: ${({ theme }) => theme.spacing.unit * 2}px;
-`;
-
-const ContentColumn = styled.div`
-  flex: 1;
-`;
-
-const InfoContent = styled(Content)`
-  padding-left: ${({ theme }) => theme.spacing.unit * 3}px;
-  ${getThemeProp('typography.body')};
-`;
+const InfoRow = ({ title, description }) => {
+  return (
+    <Box display="flex" mb={2}>
+      <Box width={0.3} pr={2}>
+        <Typography color="text.dark">{title}:</Typography>
+      </Box>
+      <Box width={0.7}>
+        <Typography>{description}</Typography>
+      </Box>
+    </Box>
+  );
+};
 
 const KoulutusField = createFormFieldComponent(
   KoulutusSelect,
@@ -63,7 +48,11 @@ const KoulutusField = createFormFieldComponent(
   }),
 );
 
-const KoulutusInfo = ({ koulutusKoodiUri, language = 'fi' }) => {
+const KoulutusInfo = ({
+  koulutusKoodiUri,
+  language = 'fi',
+  visibleInfoFields = [],
+}) => {
   const { t } = useTranslation();
 
   const { data: koulutus } = useApiAsync({
@@ -96,63 +85,82 @@ const KoulutusInfo = ({ koulutusKoodiUri, language = 'fi' }) => {
   );
 
   return koulutus ? (
-    <Typography>
-      <Row>
-        <LabelColumn>{t('yleiset.koulutus')}:</LabelColumn>
-        <ContentColumn>{nimi}</ContentColumn>
-      </Row>
-      <Row>
-        <LabelColumn>{t('yleiset.koulutusala')}:</LabelColumn>
-        <ContentColumn>{koulutusala}</ContentColumn>
-      </Row>
-      <Row>
-        <LabelColumn>{t('yleiset.osaamisalat')}:</LabelColumn>
-        <ContentColumn>{osaamisalat.join(', ')}</ContentColumn>
-      </Row>
-      <Row>
-        <LabelColumn>{t('yleiset.tutkintonimike')}:</LabelColumn>
-        <ContentColumn>{nimikkeet.join(', ')}</ContentColumn>
-      </Row>
-      <Row>
-        <LabelColumn>{t('yleiset.laajuus')}:</LabelColumn>
-        <ContentColumn>
-          {opintojenlaajuus} {opintojenlaajuusYksikko}
-        </ContentColumn>
-      </Row>
-    </Typography>
+    <>
+      {visibleInfoFields.includes('koulutus') && (
+        <InfoRow title={t('yleiset.koulutus')} description={nimi} />
+      )}
+
+      {visibleInfoFields.includes('koulutusala') && (
+        <InfoRow title={t('yleiset.koulutusala')} description={koulutusala} />
+      )}
+
+      {visibleInfoFields.includes('osaamisalat') && (
+        <InfoRow
+          title={t('yleiset.osaamisalat')}
+          description={osaamisalat.join(', ')}
+        />
+      )}
+
+      {visibleInfoFields.includes('tutkintonimike') && (
+        <InfoRow
+          title={t('yleiset.tutkintonimike')}
+          description={nimikkeet.join(', ')}
+        />
+      )}
+
+      {visibleInfoFields.includes('laajuus') && (
+        <InfoRow
+          title={t('yleiset.laajuus')}
+          description={<>{opintojenlaajuus} {opintojenlaajuusYksikko}</>}
+        />
+      )}
+    </>
   ) : null;
 };
+
+const defaultVisibleInfoFields = [
+  'koulutus',
+  'koulutusala',
+  'osaamisalat',
+  'tutkintonimike',
+  'laajuus',
+];
 
 const KoulutuksenTiedotSection = ({
   koulutustyyppi,
   language,
   koulutuskoodi,
   name,
+  selectLabel: selectLabelProp,
+  visibleInfoFields = defaultVisibleInfoFields,
 }) => {
   const { t } = useTranslation();
 
+  const selectLabel = selectLabelProp || t('koulutuslomake.valitseKoulutus');
+
   return (
     <>
-      <Container>
-        <Content>
+      <Box display="flex">
+        <Box flexGrow={1} width={0.4}>
           <div {...getTestIdProps('koulutustyyppiSelect')}>
             <Field
               name={`${name}.koulutus`}
               component={KoulutusField}
-              koulutusTyyppi={koulutustyyppi}
-              label={t('koulutuslomake.valitseKoulutus')}
+              koulutustyyppi={koulutustyyppi}
+              label={selectLabel}
             />
           </div>
-        </Content>
-        <InfoContent>
+        </Box>
+        <Box flexGrow={1} pl={3} width={0.6}>
           {koulutuskoodi ? (
             <KoulutusInfo
               koulutusKoodiUri={koulutuskoodi.value}
               language={language}
+              visibleInfoFields={visibleInfoFields}
             />
           ) : null}
-        </InfoContent>
-      </Container>
+        </Box>
+      </Box>
     </>
   );
 };

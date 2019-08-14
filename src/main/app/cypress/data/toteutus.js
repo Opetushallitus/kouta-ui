@@ -33,6 +33,18 @@ const getBaseFields = () => ({
       alkamisaikaKuvaus: {
         fi: 'Alkamisaika kuvaus',
       },
+      onkoLukuvuosimaksua: true,
+      lukuvuosimaksu: 30,
+      lukuvuosimaksuKuvaus: {
+        fi: 'Lukuvuosimaksu kuvaus',
+      },
+      onkoStipendia: true,
+      stipendinMaara: {
+        fi: '90',
+      },
+      stipendinKuvaus: {
+        fi: 'Stipendin kuvaus',
+      },
       lisatiedot: [
         {
           otsikkoKoodiUri: 'koulutuksenlisatiedot_0#1',
@@ -100,20 +112,6 @@ const getKorkeakouluFields = ({ tyyppi }) =>
   merge(getBaseFields(), {
     metadata: {
       tyyppi,
-      opetus: {
-        onkoLukuvuosimaksua: true,
-        lukuvuosimaksu: 30,
-        lukuvuosimaksuKuvaus: {
-          fi: 'Lukuvuosimaksu kuvaus',
-        },
-        onkoStipendia: true,
-        stipendinMaara: {
-          fi: '90',
-        },
-        stipendinKuvaus: {
-          fi: 'Stipendin kuvaus',
-        },
-      },
       ylemmanKorkeakoulututkinnonOsaamisalat: [
         {
           kuvaus: { fi: 'osaamisalan kuvaus' },
@@ -133,11 +131,36 @@ const getKorkeakouluFields = ({ tyyppi }) =>
     },
   });
 
+const getLukioFields = ({ tyyppi }) =>
+  merge(getBaseFields(), {
+    metadata: {
+      tyyppi,
+      diplomiKoodiUrit: ['lukiodiplomit_1#1'],
+      diplomiKuvaus: {
+        fi: 'Fi diplomi',
+        sv: 'Sv diplomi',
+      },
+      A1JaA2Kielivalikoima: ['kieli_1#1'],
+      B2Kielivalikoima: ['kieli_2#1'],
+      B1Kielivalikoima: ['kieli_3#1'],
+      B3Kielivalikoima: ['kieli_4#1'],
+      aidinkieliKielivalikoima: ['kieli_4#1'],
+      muuKielivalikoima: ['kieli_4#1'],
+      lukiolinjaKoodiUri: 'lukiolinjat_0#1',
+      jaksonKuvaus: {
+        fi: 'Fi jakso',
+        sv: 'Sv jakso',
+      },
+    },
+  });
+
 export default ({ tyyppi = 'amm' }) => {
   if (tyyppi === 'amm') {
     return getAmmatillinenFields({ tyyppi });
   } else if (['yo', 'amk'].includes(tyyppi)) {
     return getKorkeakouluFields({ tyyppi });
+  } else if (tyyppi === 'lk') {
+    return getLukioFields({ tyyppi });
   }
 
   return getBaseFields();

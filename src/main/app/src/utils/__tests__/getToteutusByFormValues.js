@@ -61,6 +61,17 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
         fi: 'Fi stipendikuvaus',
         sv: 'Sv stipendikuvaus',
       },
+      diplomiTyypit: [{ value: 'diplomi_1#1' }, { value: 'diplomi_2#1' }],
+      diplomiKuvaus: {
+        fi: 'Fi diplomi',
+        sv: 'Sv diplomi',
+      },
+      A1A2Kielet: [{ value: 'kieli_1#1' }],
+      B2Kielet: [{ value: 'kieli_2#1' }],
+      aidinkielet: [{ value: 'kieli_3#1' }],
+      B1Kielet: [{ value: 'kieli_4#1' }],
+      B3Kielet: [{ value: 'kieli_5#1' }],
+      muutKielet: [{ value: 'kieli_6#1' }],
     },
     nayttamistiedot: {
       ammattinimikkeet: {
@@ -123,6 +134,13 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
     kuvaus: {
       fi: 'Fi kuvaus',
       sv: 'Sv kuvaus',
+    },
+    lukiojaksot: {
+      jakso: { value: 'jakso_1#1' },
+      jaksonKuvaus: {
+        fi: 'Fi jakso',
+        sv: 'Sv jakso',
+      },
     },
   });
 

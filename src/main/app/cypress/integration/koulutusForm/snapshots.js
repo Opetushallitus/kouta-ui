@@ -70,6 +70,38 @@ module.exports = {
         organisaatioOid: '1.1.1.1.1.1',
       },
     },
+    'should be able to create lukiokoulutus': {
+      '1': {
+        johtaaTutkintoon: true,
+        muokkaaja: '1.2.246.562.24.62301161440',
+        tila: 'julkaistu',
+        kielivalinta: ['fi'],
+        tarjoajat: ['4.1.1.1.1.1', '5.1.1.1.1.1'],
+        koulutusKoodiUri: 'koulutus_0#1',
+        koulutustyyppi: 'lk',
+        nimi: {
+          fi: 'Nimi',
+        },
+        julkinen: false,
+        metadata: {
+          tyyppi: 'lk',
+          lisatiedot: [
+            {
+              otsikkoKoodiUri: 'koulutuksenlisatiedot_0#1',
+              teksti: {
+                fi: 'koulutuksenlisatiedot_0 kuvaus',
+              },
+            },
+          ],
+          kuvaus: {},
+          opintojenLaajuusKoodiUri: null,
+          tutkintonimikeKoodiUrit: [],
+          kuvauksenNimi: {},
+          koulutusalaKoodiUrit: [],
+        },
+        organisaatioOid: '1.1.1.1.1.1',
+      },
+    },
   },
   __version: '3.2.0',
   editKoulutusForm: {
@@ -143,6 +175,40 @@ module.exports = {
           ],
         },
         julkinen: true,
+        muokkaaja: '1.2.246.562.24.62301161440',
+        organisaatioOid: '1.1.1.1.1.1',
+        kielivalinta: ['fi'],
+        modified: '2019-04-01T13:01',
+        johtaaTutkintoon: true,
+      },
+    },
+    'should be able to edit lukiokoulutus': {
+      '1': {
+        oid: '1.2.3.4.5.6',
+        koulutustyyppi: 'lk',
+        koulutusKoodiUri: 'koulutus_0#1',
+        tila: 'tallennettu',
+        tarjoajat: ['4.1.1.1.1.1', '2.1.1.1.1.1'],
+        nimi: {
+          fi: 'Maatalousalan perustutkinto',
+        },
+        metadata: {
+          tyyppi: 'lk',
+          lisatiedot: [
+            {
+              otsikkoKoodiUri: 'koulutuksenlisatiedot_0#1',
+              teksti: {
+                fi: 'koulutuksenlisatiedot_0 kuvaus',
+              },
+            },
+          ],
+          kuvaus: {},
+          opintojenLaajuusKoodiUri: null,
+          tutkintonimikeKoodiUrit: [],
+          kuvauksenNimi: {},
+          koulutusalaKoodiUrit: [],
+        },
+        julkinen: false,
         muokkaaja: '1.2.246.562.24.62301161440',
         organisaatioOid: '1.1.1.1.1.1',
         kielivalinta: ['fi'],

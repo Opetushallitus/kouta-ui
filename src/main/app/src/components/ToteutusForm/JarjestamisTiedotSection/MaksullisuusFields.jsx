@@ -2,11 +2,11 @@ import React, { useMemo } from 'react';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
 
-import { FormFieldRadioGroup, FormFieldInput } from '../FormFields';
-import { AddonIcon } from '../Input';
-import useTranslation from '../useTranslation';
-import Spacing from '../Spacing';
-import { getTestIdProps } from '../../utils';
+import { FormFieldRadioGroup, FormFieldInput } from '../../FormFields';
+import { AddonIcon } from '../../Input';
+import useTranslation from '../../useTranslation';
+import Spacing from '../../Spacing';
+import { getTestIdProps } from '../../../utils';
 
 const MaksuInputWrapper = styled.div`
   width: 100%;

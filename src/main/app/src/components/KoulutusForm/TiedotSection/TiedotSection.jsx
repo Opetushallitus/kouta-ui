@@ -22,6 +22,20 @@ const TiedotSection = ({ language, koulutustyyppi, koulutuskoodi, name }) => {
           <KoulutuksenTiedotSection
             language={language}
             koulutuskoodi={koulutuskoodi}
+            koulutustyyppi={koulutustyyppi}
+            name={name}
+          />
+        </Box>
+      </FormConfigField>
+
+      <FormConfigField name="osaamisala">
+        <Box mb={2}>
+          <KoulutuksenTiedotSection
+            language={language}
+            koulutuskoodi={koulutuskoodi}
+            koulutustyyppi={koulutustyyppi}
+            selectLabel={t('koulutuslomake.valitseOsaamisala')}
+            visibleInfoFields={['koulutus', 'koulutusala']}
             name={name}
           />
         </Box>

@@ -1,12 +1,12 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
-import Spacing from '../Spacing';
-import useKoodistoOptions from '../useKoodistoOptions';
-import YearSelect from '../YearSelect';
-import { noop, getTestIdProps } from '../../utils';
-import useTranslation from '../useTranslation';
-import { FormFieldRadioGroup, createFormFieldComponent } from '../FormFields';
+import Spacing from '../../Spacing';
+import useKoodistoOptions from '../../useKoodistoOptions';
+import YearSelect from '../../YearSelect';
+import { noop, getTestIdProps } from '../../../utils';
+import useTranslation from '../../useTranslation';
+import { FormFieldRadioGroup, createFormFieldComponent } from '../../FormFields';
 
 const YearField = createFormFieldComponent(
   YearSelect,

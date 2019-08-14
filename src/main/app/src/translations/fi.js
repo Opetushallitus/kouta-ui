@@ -252,6 +252,7 @@ export default {
       'Voit halutessasi käyttää aiemmin luotuja koulutuksia uuden lomakkeen esitäytettynä pohjana tai kopioida vanhan koulutuksen tiedot.',
     lisatiedotInfo:
       'Voit halutessasi lisätä vapaasti täytettäviä osioita, jotka antavat tarkempaa tietoa koulutuksesta.',
+    valitseOsaamisala: 'Valitse osaamisala',
   },
   toteutuslomake: {
     toteutuksellaEiHakukohteita:
@@ -283,6 +284,20 @@ export default {
     linkinOtsikko: 'Linkin otsikko',
     lisaaLinkki: 'Lisää linkki',
     kaytossaLukuvuosimaksu: 'Käytössä lukuvuosimaksu',
+    lukiodiplomi: 'Lukiodiplomi',
+    valitseDiplomiOppiaineet: 'Valitse diplomi-oppiaineet',
+    lukiodiplominTarkempiKuvaus: 'Lukiodiplomin tarkempi kuvaus',
+    kielivalikoima: 'Kielivalikoima',
+    A1A2Kielet: 'A1- ja A2-kielet',
+    B2Kielet: 'B2-kielet',
+    valinnainenAidinkielenOpetus: 'Valinnainen oman äidinkielen opetus',
+    B1Kielet: 'B1-kielet',
+    B3Kielet: 'B3-kielet',
+    muutKielet: 'Muut kielet',
+    valitseLukioLinjat: 'Valitse lukio linjat',
+    valitseLukioLinja: 'Valitse lukio linja',
+    valitseLinjanTarkenne: 'Valitse linjan tarkenne',
+    jaksonKuvaus: 'Jakson kuvaus',
   },
   hakulomake: {
     haunNimi: 'Haun nimi',

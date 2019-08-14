@@ -80,6 +80,8 @@ const baseConfig = {
         stipendi: true,
         alkamiskausi: true,
         osiot: true,
+        diplomi: true,
+        kielivalikoima: true,
       },
     },
     nayttamistiedot: {
@@ -110,6 +112,12 @@ const baseConfig = {
         yhteyshenkilot: true,
       },
     },
+    lukiolinjat: {
+      fields: {
+        linja: true,
+        kuvaus: true,
+      },
+    },
   },
 };
 
@@ -120,20 +128,31 @@ const commonConfigPaths = [
   'sections.yhteystiedot',
 ];
 
+const commonJarjestamistiedotPaths = [
+  'sections.jarjestamistiedot.fields.opetuskieli',
+  'sections.jarjestamistiedot.fields.opetustapa',
+  'sections.jarjestamistiedot.fields.opetusaika',
+  'sections.jarjestamistiedot.fields.maksullisuus',
+  'sections.jarjestamistiedot.fields.stipendi',
+  'sections.jarjestamistiedot.fields.alkamiskausi',
+  'sections.jarjestamistiedot.fields.osiot',
+];
+
 const getToteutusFormConfig = koulutustyyppi => {
   if (isKorkeakouluKoulutustyyppi(koulutustyyppi)) {
     return pick(baseConfig, [
       ...commonConfigPaths,
+      ...commonJarjestamistiedotPaths,
       'sections.osaamisalatYlempitutkinto',
       'sections.osaamisalatAlempitutkinto',
       'sections.kuvaus',
-      'sections.jarjestamistiedot',
       'sections.nayttamistiedot',
       'sections.nimi',
     ]);
   } else if (isAmmatillinenKoulutustyyppi(koulutustyyppi)) {
     return pick(baseConfig, [
       ...commonConfigPaths,
+      ...commonJarjestamistiedotPaths,
       'sections.osaamisalaTarkenteet',
       'sections.jarjestamistiedot',
       'sections.nayttamistiedot',
@@ -142,8 +161,11 @@ const getToteutusFormConfig = koulutustyyppi => {
   } else if (koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS) {
     return pick(baseConfig, [
       ...commonConfigPaths,
-      'sections.jarjestamistiedot',
+      ...commonJarjestamistiedotPaths,
+      'sections.jarjestamistiedot.fields.diplomi',
+      'sections.jarjestamistiedot.fields.kielivalikoima',
       'sections.nayttamistiedot',
+      'sections.lukiolinjat',
     ]);
   }
 

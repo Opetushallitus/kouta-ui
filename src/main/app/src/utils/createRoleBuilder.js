@@ -4,6 +4,11 @@ import getOrganisaatioParentOidPath from './getOrganisaatioParentOidPath';
 import getRoleOrganisaatioOid from './getRoleOrganisaatioOid';
 import isOid from './isOid';
 import { isString, isObject, isArray } from './index';
+import { OPH_PAAKAYTTAJA_ROLE } from '../constants';
+
+const READ_ROLES = ['READ', 'READ_UPDATE', 'CRUD'];
+const UPDATE_ROLES = ['UPDATE', 'READ_UPDATE', 'CRUD'];
+const CREATE_ROLES = ['CRUD'];
 
 const getRoleName = role => {
   if (!isString(role)) {
@@ -83,8 +88,10 @@ class RoleBuilder {
       Boolean(
         resolveOidPath(organisaatio).find(oid => {
           return (
-            this.hasOrganisaatioRole(`${role}_READ`, oid) ||
-            this.hasOrganisaatioRole(`${role}_CRUD`, oid)
+            this.hasOrganisaatioRole(OPH_PAAKAYTTAJA_ROLE, oid) ||
+            READ_ROLES.map(r =>
+              this.hasOrganisaatioRole(`${role}_${r}`, oid),
+            ).some(Boolean)
           );
         }),
       ),
@@ -107,56 +114,63 @@ class RoleBuilder {
     );
   }
 
-  hasWrite(role, organisaatio) {
+  hasUpdate(role, organisaatio) {
     return this.clone(
       Boolean(
         resolveOidPath(organisaatio).find(oid => {
           return (
-            this.hasOrganisaatioRole(`${role}_WRITE`, oid) ||
-            this.hasOrganisaatioRole(`${role}_CRUD`, oid)
+            this.hasOrganisaatioRole(OPH_PAAKAYTTAJA_ROLE, oid) ||
+            UPDATE_ROLES.map(r =>
+              this.hasOrganisaatioRole(`${role}_${r}`, oid),
+            ).some(Boolean)
           );
         }),
       ),
     );
   }
 
-  hasWriteOneOf(roles, organisaatio) {
+  hasUpdateOneOf(roles, organisaatio) {
     return this.hasOneOfFn(
-      rb => (...args) => rb.hasWrite(...args),
+      rb => (...args) => rb.hasUpdate(...args),
       roles,
       organisaatio,
     );
   }
 
-  hasWriteAll(roles, organisaatio) {
+  hasUpdateAll(roles, organisaatio) {
     return this.hasAllFn(
-      rb => (...args) => rb.hasWrite(...args),
+      rb => (...args) => rb.hasUpdate(...args),
       roles,
       organisaatio,
     );
   }
 
-  hasCrud(role, organisaatio) {
+  hasCreate(role, organisaatio) {
     return this.clone(
       Boolean(
         resolveOidPath(organisaatio).find(oid => {
-          return this.hasOrganisaatioRole(`${role}_CRUD`, oid);
+          return (
+            this.hasOrganisaatioRole(OPH_PAAKAYTTAJA_ROLE, oid) ||
+            CREATE_ROLES.map(r =>
+              this.hasOrganisaatioRole(`${role}_${r}`, oid),
+            ).some(Boolean)
+          );
         }),
       ),
     );
   }
 
-  hasCrudOneOf(roles, organisaatio) {
+  hasCreateOneOf(roles, organisaatio) {
     return this.hasOneOfFn(
-      rb => (...args) => rb.hasCrud(...args),
+      rb => (...args) => rb.hasCreate(...args),
       roles,
       organisaatio,
     );
   }
 
-  hasCrudAll(roles, organisaatio) {
+  hasCreateAll(roles, organisaatio) {
     return this.hasAllFn(
-      rb => (...args) => rb.hasCrud(...args),
+      rb => (...args) => rb.hasCreate(...args),
       roles,
       organisaatio,
     );

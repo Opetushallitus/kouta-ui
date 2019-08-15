@@ -135,8 +135,8 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
       fi: 'Fi kuvaus',
       sv: 'Sv kuvaus',
     },
-    lukiojaksot: {
-      jakso: { value: 'jakso_1#1' },
+    lukiolinjat: {
+      linja: { value: 'linja_1#1' },
       jaksonKuvaus: {
         fi: 'Fi jakso',
         sv: 'Sv jakso',

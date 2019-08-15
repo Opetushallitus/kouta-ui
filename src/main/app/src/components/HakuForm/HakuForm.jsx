@@ -67,7 +67,9 @@ const HakuForm = ({
 
   const isOphVirkailija = useMemo(
     () =>
-      roleBuilder.hasWrite(HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID).result(),
+      roleBuilder
+        .hasUpdate(HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID)
+        .result(),
     [roleBuilder],
   );
 

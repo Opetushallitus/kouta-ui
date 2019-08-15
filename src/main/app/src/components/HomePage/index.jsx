@@ -14,6 +14,7 @@ import {
   TOTEUTUS_ROLE,
   HAKU_ROLE,
   VALINTAPERUSTE_ROLE,
+  OPH_PAAKAYTTAJA_ROLE,
 } from '../../constants';
 import useTranslation from '../useTranslation';
 import Container from '../Container';
@@ -42,6 +43,7 @@ const getFirstOrganisaatioOidWithRequiredRole = user => {
       [KOULUTUS_ROLE, TOTEUTUS_ROLE, HAKU_ROLE, VALINTAPERUSTE_ROLE]
         .map(
           roleName =>
+            role.startsWith(OPH_PAAKAYTTAJA_ROLE) ||
             role.startsWith(`${roleName}_CRUD`) ||
             role.startsWith(`${roleName}_READ`),
         )

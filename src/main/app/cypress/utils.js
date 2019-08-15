@@ -141,7 +141,9 @@ export const stubKayttoOikeusMeRoute = ({ user = {}, cy }) => {
       firstName: 'John',
       lastName: 'Doe',
       lang: 'fi',
-      roles: JSON.stringify(['APP_TARJONTA_CRUD_1.2.246.562.10.00000000001']),
+      roles: JSON.stringify([
+        'APP_KOUTA_OPHPAAKAYTTAJA_1.2.246.562.10.00000000001',
+      ]),
       ...user,
     },
   });

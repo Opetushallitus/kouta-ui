@@ -2,12 +2,12 @@ import React from 'react';
 import { Field, FieldArray } from 'redux-form';
 
 import Button from '../Button';
-import Spacing from '../Spacing';
 import useKoodistoOptions from '../useKoodistoOptions';
 import useTranslation from '../useTranslation';
 import Flex, { FlexItem } from '../Flex';
 import { getTestIdProps } from '../../utils';
 import DividerHeading from '../DividerHeading';
+import Box from '../Box';
 
 import {
   FormFieldDateTimeInput,
@@ -19,7 +19,7 @@ const renderHakuajatFields = ({ fields, t }) => {
   return (
     <>
       {fields.map((hakuaika, index) => (
-        <Flex key={index} marginBottom={2} alignCenter>
+        <Flex key={index} mb={2} alignCenter>
           <FlexItem grow={1} paddingRight={2} {...getTestIdProps('alkaa')}>
             <Field
               name={`${hakuaika}.alkaa`}
@@ -66,18 +66,18 @@ const ScheduleSection = ({ isOphVirkailija, isYhteishaku, name }) => {
   const { options: kausiOptions } = useKoodistoOptions({ koodisto: 'kausi' });
 
   return (
-    <>
-      <Spacing marginBottom={4} {...getTestIdProps('hakuajat')}>
+    <Box mb={-4}>
+      <Box mb={4} {...getTestIdProps('hakuajat')}>
         <DividerHeading>{t('hakulomake.hakuaika')}</DividerHeading>
         <FieldArray
           name={`${name}.hakuaika`}
           component={renderHakuajatFields}
           t={t}
         />
-      </Spacing>
+      </Box>
 
       {isYhteishaku && isOphVirkailija ? (
-        <Spacing marginBottom={4} {...getTestIdProps('tulevaisuudenaikataulu')}>
+        <Box mb={4} {...getTestIdProps('tulevaisuudenaikataulu')}>
           <DividerHeading>
             {t('hakulomake.aikatauluTulevaisuudesta')}
           </DividerHeading>
@@ -86,27 +86,24 @@ const ScheduleSection = ({ isOphVirkailija, isYhteishaku, name }) => {
             component={renderHakuajatFields}
             t={t}
           />
-        </Spacing>
+        </Box>
       ) : null}
 
-      <Spacing
-        marginBottom={isYhteishaku && isOphVirkailija ? 4 : 0}
-        {...getTestIdProps('alkamiskausi')}
-      >
+      <Box mb={4} {...getTestIdProps('alkamiskausi')}>
         <DividerHeading>
           {t('hakulomake.koulutuksenAlkamiskausi')}
         </DividerHeading>
 
-        <Spacing marginBottom={2} {...getTestIdProps('kausi')}>
+        <Box mb={2} {...getTestIdProps('kausi')}>
           <Field
             name={`${name}.kausi`}
             component={FormFieldRadioGroup}
             options={kausiOptions}
             label={t('yleiset.kausi')}
           />
-        </Spacing>
+        </Box>
 
-        <Spacing>
+        <Box>
           <div {...getTestIdProps('vuosi')}>
             <Field
               name={`${name}.vuosi`}
@@ -114,12 +111,12 @@ const ScheduleSection = ({ isOphVirkailija, isYhteishaku, name }) => {
               label={t('yleiset.vuosi')}
             />
           </div>
-        </Spacing>
-      </Spacing>
+        </Box>
+      </Box>
 
       {isYhteishaku && isOphVirkailija ? (
         <>
-          <Spacing marginBottom={4} {...getTestIdProps('perumisenTakaraja')}>
+          <Box mb={4} {...getTestIdProps('perumisenTakaraja')}>
             <DividerHeading>
               {t('hakulomake.hakukohteenLisaamisenJaPerumisenTakaraja')}
             </DividerHeading>
@@ -128,9 +125,9 @@ const ScheduleSection = ({ isOphVirkailija, isYhteishaku, name }) => {
               component={FormFieldDateTimeInput}
               helperText={t('yleiset.paivamaaraJaKellonaika')}
             />
-          </Spacing>
+          </Box>
 
-          <Spacing marginBottom={4} {...getTestIdProps('muokkauksenTakaraja')}>
+          <Box mb={4} {...getTestIdProps('muokkauksenTakaraja')}>
             <DividerHeading>
               {t('hakulomake.hakukohteenMuokkauksenTakaraja')}
             </DividerHeading>
@@ -139,9 +136,9 @@ const ScheduleSection = ({ isOphVirkailija, isYhteishaku, name }) => {
               component={FormFieldDateTimeInput}
               helperText={t('yleiset.paivamaaraJaKellonaika')}
             />
-          </Spacing>
+          </Box>
 
-          <Spacing {...getTestIdProps('julkaisupaivamaara')}>
+          <Box mb={4} {...getTestIdProps('julkaisupaivamaara')}>
             <DividerHeading>
               {t('hakulomake.ajastettuHaunJulkaisupaivamaara')}
             </DividerHeading>
@@ -150,10 +147,10 @@ const ScheduleSection = ({ isOphVirkailija, isYhteishaku, name }) => {
               component={FormFieldDateTimeInput}
               helperText={t('yleiset.paivamaaraJaKellonaika')}
             />
-          </Spacing>
+          </Box>
         </>
       ) : null}
-    </>
+    </Box>
   );
 };
 

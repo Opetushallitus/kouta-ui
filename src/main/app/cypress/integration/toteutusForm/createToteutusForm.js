@@ -371,7 +371,7 @@ describe('createToteutusForm', () => {
     });
   });
 
-  it('should be able to create lukio toteutus', () => {
+  it.only('should be able to create lukio toteutus', () => {
     cy.route({
       method: 'GET',
       url: `**/koulutus/${koulutusOid}`,

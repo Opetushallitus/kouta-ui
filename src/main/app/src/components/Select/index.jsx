@@ -5,13 +5,13 @@ import ReactAsyncCreatableSelect from 'react-select/lib/AsyncCreatable';
 import ReactAsyncSelect from 'react-select/lib/Async';
 import { withTheme } from 'styled-components';
 import { setLightness } from 'polished';
-import memoize from 'memoizee';
 import get from 'lodash/get';
 
 import { isArray, isObject, isString } from '../../utils';
 import useTranslation from '../useTranslation';
+import memoizeOne from '../../utils/memoizeOne';
 
-const getStyles = memoize((theme, error) => ({
+const getStyles = memoizeOne((theme, error) => ({
   container: provided => ({
     ...provided,
     fontFamily: theme.typography.fontFamily,
@@ -60,7 +60,7 @@ const makeDefaultPlaceholder = t => `${t('yleiset.valitse')}...`;
 
 const defaultLoadingMessage = () => 'Ladataan...';
 
-const getTheme = memoize(theme => {
+const getTheme = memoizeOne(theme => {
   const {
     palette: {
       primary: { main: primaryMain },
@@ -78,7 +78,7 @@ const getTheme = memoize(theme => {
   });
 });
 
-const getDefaultProps = memoize((theme, t, error) => ({
+const getDefaultProps = memoizeOne((theme, t, error) => ({
   formatCreateLabel: makeDefaultFormatCreateLabel(t),
   noOptionsMessage: makeDefaultNoOptionsMessage(t),
   placeholder: makeDefaultPlaceholder(t),
@@ -158,30 +158,30 @@ const Select = ({ theme, value, options, id, error = false, ...props }) => {
   );
 };
 
-const CreatableBase = ({ theme, ...props }) => {
+const CreatableBase = ({ theme, error = false, ...props }) => {
   const { t } = useTranslation();
 
-  return <ReactCreatable {...getDefaultProps(theme, t)} {...props} />;
+  return <ReactCreatable {...getDefaultProps(theme, t, error)} {...props} />;
 };
 
-const AsyncCreatableBase = ({ theme, ...props }) => {
+const AsyncCreatableBase = ({ theme, error = false, ...props }) => {
   const { t } = useTranslation();
 
   return (
     <ReactAsyncCreatableSelect
-      {...getDefaultProps(theme, t)}
+      {...getDefaultProps(theme, t, error)}
       cacheOptions={true}
       {...props}
     />
   );
 };
 
-const AsyncSelectBase = ({ theme, ...props }) => {
+const AsyncSelectBase = ({ theme, error = false, ...props }) => {
   const { t } = useTranslation();
 
   return (
     <ReactAsyncSelect
-      {...getDefaultProps(theme, t)}
+      {...getDefaultProps(theme, t, error)}
       cacheOptions={true}
       {...props}
     />

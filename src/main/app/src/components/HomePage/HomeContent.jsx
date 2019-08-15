@@ -53,7 +53,7 @@ const HomeContent = ({
   );
 
   const hasKoulutusWriteRole = useMemo(() => {
-    return roleBuilder.hasWrite(KOULUTUS_ROLE, organisaatio).result();
+    return roleBuilder.hasCreate(KOULUTUS_ROLE, organisaatio).result();
   }, [roleBuilder, organisaatio]);
 
   const hasKoulutusReadRole = useMemo(() => {
@@ -61,7 +61,7 @@ const HomeContent = ({
   }, [roleBuilder, organisaatio]);
 
   const hasToteutusWriteRole = useMemo(() => {
-    return roleBuilder.hasWrite(TOTEUTUS_ROLE, organisaatio).result();
+    return roleBuilder.hasCreate(TOTEUTUS_ROLE, organisaatio).result();
   }, [roleBuilder, organisaatio]);
 
   const hasToteutusReadRole = useMemo(() => {
@@ -69,7 +69,7 @@ const HomeContent = ({
   }, [roleBuilder, organisaatio]);
 
   const hasHakuWriteRole = useMemo(() => {
-    return roleBuilder.hasWrite(HAKU_ROLE, organisaatio).result();
+    return roleBuilder.hasCreate(HAKU_ROLE, organisaatio).result();
   }, [roleBuilder, organisaatio]);
 
   const hasHakuReadRole = useMemo(() => {
@@ -77,7 +77,7 @@ const HomeContent = ({
   }, [roleBuilder, organisaatio]);
 
   const hasValintaperusteWriteRole = useMemo(() => {
-    return roleBuilder.hasWrite(VALINTAPERUSTE_ROLE, organisaatio).result();
+    return roleBuilder.hasCreate(VALINTAPERUSTE_ROLE, organisaatio).result();
   }, [roleBuilder, organisaatio]);
 
   const hasValintaperusteReadRole = useMemo(() => {

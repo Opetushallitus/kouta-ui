@@ -114,7 +114,9 @@ const baseConfig = {
     },
     lukiolinjat: {
       fields: {
-        linja: true,
+        linja: {
+          validate: eb => eb.validateExistence('lukiolinjat.linja'),
+        },
         kuvaus: true,
       },
     },
@@ -154,7 +156,6 @@ const getToteutusFormConfig = koulutustyyppi => {
       ...commonConfigPaths,
       ...commonJarjestamistiedotPaths,
       'sections.osaamisalaTarkenteet',
-      'sections.jarjestamistiedot',
       'sections.nayttamistiedot',
       'sections.nimi',
     ]);

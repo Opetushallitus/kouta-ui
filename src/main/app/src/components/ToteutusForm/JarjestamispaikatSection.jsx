@@ -22,7 +22,7 @@ const JarjestamispaikatSection = ({ organisaatioOid, name }) => {
 
   const getIsDisabled = useCallback(
     organisaatio => {
-      return !roleBuilder.hasWrite(TOTEUTUS_ROLE, organisaatio).result();
+      return !roleBuilder.hasUpdate(TOTEUTUS_ROLE, organisaatio).result();
     },
     [roleBuilder],
   );

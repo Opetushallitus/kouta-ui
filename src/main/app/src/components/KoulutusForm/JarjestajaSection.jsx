@@ -24,7 +24,7 @@ const OrganizationSection = ({ organisaatioOid, name }) => {
 
   const getIsDisabled = useCallback(
     organisaatio => {
-      return !roleBuilder.hasWrite(KOULUTUS_ROLE, organisaatio).result();
+      return !roleBuilder.hasUpdate(KOULUTUS_ROLE, organisaatio).result();
     },
     [roleBuilder],
   );

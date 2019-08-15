@@ -10,22 +10,26 @@ import Input, { AddonIcon } from '../Input';
 import { isValidDate, formatDate, isNumeric, isString } from '../../utils';
 import { useTranslation } from '../useTranslation';
 
+const monthKeys = [
+  'tammikuu',
+  'helmikuu',
+  'maaliskuu',
+  'huhtikuu',
+  'toukokuu',
+  'kesakuu',
+  'heinakuu',
+  'elokuu',
+  'syyskuu',
+  'lokakuu',
+  'marraskuu',
+  'joulukuu',
+];
+
+const weekdayShortKeys = ['su', 'ma', 'ti', 'ke', 'to', 'pe', 'la'];
+
 const getLocalisationProps = t => ({
-  months: [
-    'tammikuu',
-    'helmikuu',
-    'maaliskuu',
-    'huhtikuu',
-    'toukokuu',
-    'kesakuu',
-    'heinakuu',
-    'elokuu',
-    'syyskuu',
-    'lokakuu',
-    'marraskuu',
-    'joulukuu',
-  ].map(k => t(`yleiset.kuukaudet.${k}`)),
-  weekdaysShort: ['su', 'ma', 'ti', 'ke', 'to', 'pe', 'la'].map(v =>
+  months: monthKeys.map(k => t(`yleiset.kuukaudet.${k}`)),
+  weekdaysShort: weekdayShortKeys.map(v =>
     t(`yleiset.viikonpaivalyhenteet.${v}`),
   ),
 });
@@ -148,9 +152,7 @@ export const DatePickerInput = ({
         selectedDay={value}
         value={value}
         component={Input}
-        dayPickerProps={{
-          ...localisationProps,
-        }}
+        dayPickerProps={localisationProps}
         inputProps={{
           ...inputProps,
           addonAfter: <AddonIcon type="event" />,

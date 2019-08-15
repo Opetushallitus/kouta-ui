@@ -47,10 +47,15 @@ Object {
         "kieli": "sv",
       },
     ],
+    "jaksonKuvaus": Object {
+      "fi": "Fi jakso",
+      "sv": "Sv jakso",
+    },
     "kuvaus": Object {
       "fi": "Fi kuvaus",
       "sv": "Sv kuvaus",
     },
+    "lukiolinjaKoodiUri": "linja_1#1",
     "opetus": Object {
       "A1JaA2Kielivalikoima": Array [
         "kieli_1#1",
@@ -81,7 +86,6 @@ Object {
         "fi": "Fi diplomi",
         "sv": "Sv diplomi",
       },
-      "jaksonKuvaus": Object {},
       "lisatiedot": Array [
         Object {
           "otsikkoKoodiUri": "osio_1#1",
@@ -98,7 +102,6 @@ Object {
           },
         },
       ],
-      "lukiolinjaKoodiUri": null,
       "lukuvuosimaksu": null,
       "maksullisuusKuvaus": Object {
         "fi": "Fi maksullisuuskuvaus",

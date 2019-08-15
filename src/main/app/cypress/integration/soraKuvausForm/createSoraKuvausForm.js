@@ -74,7 +74,7 @@ describe('createSoraKuvausForm', () => {
   it('should be able to create sora-kuvaus', () => {
     cy.route({
       method: 'PUT',
-      url: '**/sora-kuvaus',
+      url: '**/sorakuvaus',
       response: {
         id: soraKuvaus.id,
       },

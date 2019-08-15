@@ -30,7 +30,7 @@ describe('editSoraKuvausForm', () => {
   it('should be able to edit sora-kuvaus', () => {
     cy.route({
       method: 'GET',
-      url: `**/sora-kuvaus/${soraKuvaus.id}`,
+      url: `**/sorakuvaus/${soraKuvaus.id}`,
       response: merge({}, soraKuvaus, {
         organisaatioOid,
       }),
@@ -38,7 +38,7 @@ describe('editSoraKuvausForm', () => {
 
     cy.route({
       method: 'POST',
-      url: '**/sora-kuvaus',
+      url: '**/sorakuvaus',
       response: {
         muokattu: false,
       },

@@ -16,6 +16,7 @@
     "history": "^4.7.2",
     "i18next": "^13.1.5",
     "i18next-xhr-backend": "^2.0.1",
+    "intersection-observer": "^0.7.0",
     "lodash": "^4.17.11",
     "memoizee": "^0.4.14",
     "oph-urls-js": "github:Opetushallitus/oph-urls-js",

@@ -143,9 +143,6 @@ const HomeContent = ({
           </Flex>
         </FlexItem>
       </Flex>
-      <Typography variant="h3" marginBottom={3}>
-        {t('etusivu.koulutuksetJaHaut')}
-      </Typography>
       {organisaatio ? (
         listSections.map((section, index) => (
           <Spacing

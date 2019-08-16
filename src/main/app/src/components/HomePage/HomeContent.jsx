@@ -14,7 +14,6 @@ import OrganisaatioDrawer from './OrganisaatioDrawer';
 import Button from '../Button';
 import Icon from '../Icon';
 import ValintaperusteetSection from './ValintaperusteetSection';
-import useTranslation from '../useTranslation';
 import { useOrganisaatio } from '../useOrganisaatio';
 import { setOrganisaatio } from '../../state/organisaatioSelection';
 import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
@@ -33,7 +32,6 @@ const HomeContent = ({
   onOrganisaatioChange: onOrganisaatioChangeProp = () => {},
 }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const { t } = useTranslation();
   const roleBuilder = useAuthorizedUserRoleBuilder();
 
   const onCloseDrawer = useCallback(() => setDrawerOpen(false), [
@@ -143,9 +141,6 @@ const HomeContent = ({
           </Flex>
         </FlexItem>
       </Flex>
-      <Typography variant="h3" marginBottom={3}>
-        {t('etusivu.koulutuksetJaHaut')}
-      </Typography>
       {organisaatio ? (
         listSections.map((section, index) => (
           <Spacing

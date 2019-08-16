@@ -31,7 +31,7 @@ export const stubValintaperusteFormRoutes = ({ cy, organisaatioOid }) => {
 
   cy.route({
     method: 'GET',
-    url: '**/sora-kuvaus/list**',
+    url: '**/sorakuvaus/list**',
     response: [...new Array(10)].map((v, i) =>
       merge(soraKuvaus(), {
         nimi: { fi: `Sora-kuvaus ${i}` },

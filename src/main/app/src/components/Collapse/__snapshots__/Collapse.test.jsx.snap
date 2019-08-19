@@ -129,25 +129,35 @@ exports[`renders correctly 1`] = `
               icon="expand_more"
               open={true}
             >
-              <styled.i
-                className="material-icons c6"
+              <ForwardRef
+                className="c6"
                 style={
                   Object {
                     "transform": "rotate(180deg)",
                   }
                 }
+                type="expand_more"
               >
-                <i
-                  className="material-icons c6 c7"
+                <styled.i
+                  className="material-icons c6"
                   style={
                     Object {
                       "transform": "rotate(180deg)",
                     }
                   }
                 >
-                  expand_more
-                </i>
-              </styled.i>
+                  <i
+                    className="material-icons c6 c7"
+                    style={
+                      Object {
+                        "transform": "rotate(180deg)",
+                      }
+                    }
+                  >
+                    expand_more
+                  </i>
+                </styled.i>
+              </ForwardRef>
             </Styled(DropdownIcon)>
           </div>
         </styled.div>
@@ -286,25 +296,35 @@ exports[`renders correctly 2`] = `
               icon="expand_more"
               open={true}
             >
-              <styled.i
-                className="material-icons c4"
+              <ForwardRef
+                className="c4"
                 style={
                   Object {
                     "transform": "rotate(180deg)",
                   }
                 }
+                type="expand_more"
               >
-                <i
-                  className="material-icons c4 c5"
+                <styled.i
+                  className="material-icons c4"
                   style={
                     Object {
                       "transform": "rotate(180deg)",
                     }
                   }
                 >
-                  expand_more
-                </i>
-              </styled.i>
+                  <i
+                    className="material-icons c4 c5"
+                    style={
+                      Object {
+                        "transform": "rotate(180deg)",
+                      }
+                    }
+                  >
+                    expand_more
+                  </i>
+                </styled.i>
+              </ForwardRef>
             </Styled(DropdownIcon)>
           </div>
         </styled.div>
@@ -470,25 +490,35 @@ exports[`renders correctly when closed 1`] = `
               icon="expand_more"
               open={false}
             >
-              <styled.i
-                className="material-icons c6"
+              <ForwardRef
+                className="c6"
                 style={
                   Object {
                     "transform": "rotate(0deg)",
                   }
                 }
+                type="expand_more"
               >
-                <i
-                  className="material-icons c6 c7"
+                <styled.i
+                  className="material-icons c6"
                   style={
                     Object {
                       "transform": "rotate(0deg)",
                     }
                   }
                 >
-                  expand_more
-                </i>
-              </styled.i>
+                  <i
+                    className="material-icons c6 c7"
+                    style={
+                      Object {
+                        "transform": "rotate(0deg)",
+                      }
+                    }
+                  >
+                    expand_more
+                  </i>
+                </styled.i>
+              </ForwardRef>
             </Styled(DropdownIcon)>
           </div>
         </styled.div>

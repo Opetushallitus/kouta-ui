@@ -171,21 +171,27 @@ exports[`renders correctly 1`] = `
                 <div
                   className="c4"
                 >
-                  <Styled(Icon)
+                  <Styled(Component)
                     active={false}
                     type="school"
                   >
-                    <styled.i
+                    <ForwardRef
                       active={false}
-                      className="material-icons c5"
+                      className="c5"
+                      type="school"
                     >
-                      <i
-                        className="material-icons c5 c6"
+                      <styled.i
+                        active={false}
+                        className="material-icons c5"
                       >
-                        school
-                      </i>
-                    </styled.i>
-                  </Styled(Icon)>
+                        <i
+                          className="material-icons c5 c6"
+                        >
+                          school
+                        </i>
+                      </styled.i>
+                    </ForwardRef>
+                  </Styled(Component)>
                 </div>
               </styled.div>
               <styled.div
@@ -218,21 +224,27 @@ exports[`renders correctly 1`] = `
                 <div
                   className="c4"
                 >
-                  <Styled(Icon)
+                  <Styled(Component)
                     active={false}
                     type="settings"
                   >
-                    <styled.i
+                    <ForwardRef
                       active={false}
-                      className="material-icons c5"
+                      className="c5"
+                      type="settings"
                     >
-                      <i
-                        className="material-icons c5 c6"
+                      <styled.i
+                        active={false}
+                        className="material-icons c5"
                       >
-                        settings
-                      </i>
-                    </styled.i>
-                  </Styled(Icon)>
+                        <i
+                          className="material-icons c5 c6"
+                        >
+                          settings
+                        </i>
+                      </styled.i>
+                    </ForwardRef>
+                  </Styled(Component)>
                 </div>
               </styled.div>
               <styled.div
@@ -271,21 +283,27 @@ exports[`renders correctly 1`] = `
                 <div
                   className="c4"
                 >
-                  <Styled(Icon)
+                  <Styled(Component)
                     active={false}
                     type="access_time"
                   >
-                    <styled.i
+                    <ForwardRef
                       active={false}
-                      className="material-icons c5"
+                      className="c5"
+                      type="access_time"
                     >
-                      <i
-                        className="material-icons c5 c6"
+                      <styled.i
+                        active={false}
+                        className="material-icons c5"
                       >
-                        access_time
-                      </i>
-                    </styled.i>
-                  </Styled(Icon)>
+                        <i
+                          className="material-icons c5 c6"
+                        >
+                          access_time
+                        </i>
+                      </styled.i>
+                    </ForwardRef>
+                  </Styled(Component)>
                 </div>
               </styled.div>
               <styled.div
@@ -318,21 +336,27 @@ exports[`renders correctly 1`] = `
                 <div
                   className="c8"
                 >
-                  <Styled(Icon)
+                  <Styled(Component)
                     active={true}
                     type="grain"
                   >
-                    <styled.i
+                    <ForwardRef
                       active={true}
-                      className="material-icons c9"
+                      className="c9"
+                      type="grain"
                     >
-                      <i
-                        className="material-icons c9 c6"
+                      <styled.i
+                        active={true}
+                        className="material-icons c9"
                       >
-                        grain
-                      </i>
-                    </styled.i>
-                  </Styled(Icon)>
+                        <i
+                          className="material-icons c9 c6"
+                        >
+                          grain
+                        </i>
+                      </styled.i>
+                    </ForwardRef>
+                  </Styled(Component)>
                 </div>
               </styled.div>
               <styled.div
@@ -371,21 +395,27 @@ exports[`renders correctly 1`] = `
                 <div
                   className="c11"
                 >
-                  <Styled(Icon)
+                  <Styled(Component)
                     active={false}
                     type="select_all"
                   >
-                    <styled.i
+                    <ForwardRef
                       active={false}
-                      className="material-icons c5"
+                      className="c5"
+                      type="select_all"
                     >
-                      <i
-                        className="material-icons c5 c6"
+                      <styled.i
+                        active={false}
+                        className="material-icons c5"
                       >
-                        select_all
-                      </i>
-                    </styled.i>
-                  </Styled(Icon)>
+                        <i
+                          className="material-icons c5 c6"
+                        >
+                          select_all
+                        </i>
+                      </styled.i>
+                    </ForwardRef>
+                  </Styled(Component)>
                 </div>
               </styled.div>
               <styled.div
@@ -418,21 +448,27 @@ exports[`renders correctly 1`] = `
                 <div
                   className="c11"
                 >
-                  <Styled(Icon)
+                  <Styled(Component)
                     active={false}
                     type="subject"
                   >
-                    <styled.i
+                    <ForwardRef
                       active={false}
-                      className="material-icons c5"
+                      className="c5"
+                      type="subject"
                     >
-                      <i
-                        className="material-icons c5 c6"
+                      <styled.i
+                        active={false}
+                        className="material-icons c5"
                       >
-                        subject
-                      </i>
-                    </styled.i>
-                  </Styled(Icon)>
+                        <i
+                          className="material-icons c5 c6"
+                        >
+                          subject
+                        </i>
+                      </styled.i>
+                    </ForwardRef>
+                  </Styled(Component)>
                 </div>
               </styled.div>
               <styled.div

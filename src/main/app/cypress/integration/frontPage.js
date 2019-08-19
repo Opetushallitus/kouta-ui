@@ -2,7 +2,6 @@ import merge from 'lodash/merge';
 
 import organisaatio from '../data/organisaatio';
 import organisaatioHierarkia from '../data/organisaatioHierarkia';
-import { getByTestId } from '../utils';
 
 const koutaIndexItem = () => ({
   modified: '2019-02-20T07:55',
@@ -69,9 +68,22 @@ describe('frontPage', () => {
   });
 
   it('should display organisation hierarchy', () => {
-    getByTestId('selectedOrganisaatio', cy).should('contain', 'Organisaatio_1');
+    cy.getByTestId('selectedOrganisaatio').should('contain', 'Organisaatio_1');
 
-    getByTestId('toggleOrganisaatioDrawer', cy).click();
+    cy.getByTestId('toggleOrganisaatioDrawer').click();
+
+    cy.getByTestId('organisaatioDrawer').should(
+      'contain',
+      'Vaihda organisaatiota',
+    );
+  });
+
+  it('should display navigation links', () => {
+    cy.getByTestId('navigaatio')
+      .should('contain', 'Koulutukset')
+      .should('contain', 'Toteutukset')
+      .should('contain', 'Haut')
+      .should('contain', 'Valintaperusteet');
   });
 
   it('should list koulutukset', () => {
@@ -84,7 +96,9 @@ describe('frontPage', () => {
       },
     });
 
-    getByTestId('koulutuksetTable', cy).should('contain', 'Koulutuksen nimi');
+    cy.get('#koulutukset').scrollIntoView();
+
+    cy.getByTestId('koulutuksetTable').should('contain', 'Koulutuksen nimi');
   });
 
   it('should list toteutukset', () => {
@@ -97,7 +111,9 @@ describe('frontPage', () => {
       },
     });
 
-    getByTestId('toteutuksetTable', cy).should('contain', 'Toteutuksen nimi');
+    cy.get('#toteutukset').scrollIntoView();
+
+    cy.getByTestId('toteutuksetTable').should('contain', 'Toteutuksen nimi');
   });
 
   it('should list haut', () => {
@@ -110,7 +126,9 @@ describe('frontPage', () => {
       },
     });
 
-    getByTestId('hautTable', cy).should('contain', 'Haun nimi');
+    cy.get('#haut').scrollIntoView();
+
+    cy.getByTestId('hautTable').should('contain', 'Haun nimi');
   });
 
   it('should list valintaperusteet', () => {
@@ -125,7 +143,9 @@ describe('frontPage', () => {
       },
     });
 
-    getByTestId('valintaperusteetTable', cy).should(
+    cy.get('#valintaperusteet').scrollIntoView();
+
+    cy.getByTestId('valintaperusteetTable').should(
       'contain',
       'Valintaperusteen nimi',
     );

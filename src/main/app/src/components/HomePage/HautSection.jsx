@@ -11,7 +11,7 @@ import Button from '../Button';
 import Pagination from '../Pagination';
 import Flex from '../Flex';
 import Spacing from '../Spacing';
-import Spin from '../Spin';
+import ListSpin from './ListSpin';
 import useApiAsync from '../useApiAsync';
 import { getIndexParamsByFilters } from './utils';
 import Filters from './Filters';
@@ -21,7 +21,8 @@ import ErrorAlert from '../ErrorAlert';
 import Anchor from '../Anchor';
 import useTranslation from '../useTranslation';
 import getHaut from '../../utils/koutaIndex/getHaut';
-
+import useInView from '../useInView';
+import NavigationAnchor from './NavigationAnchor';
 import { getFirstLanguageValue, getTestIdProps } from '../../utils';
 
 const getHautFn = async ({ httpClient, apiUrls, ...filters }) => {
@@ -36,15 +37,13 @@ const getHautFn = async ({ httpClient, apiUrls, ...filters }) => {
   return { result, pageCount: Math.ceil(totalCount / 10) };
 };
 
+const noopPromiseFn = () => Promise.resolve();
+
 const Actions = ({ organisaatioOid }) => {
   const { t } = useTranslation();
 
   return (
-    <Button
-      as={Link}
-      to={`/organisaatio/${organisaatioOid}/haku`}
-      variant="outlined"
-    >
+    <Button as={Link} to={`/organisaatio/${organisaatioOid}/haku`}>
       {t('etusivu.luoUusiHaku')}
     </Button>
   );
@@ -57,7 +56,7 @@ const makeTableColumns = t => [
     sortable: true,
     render: ({ nimi, oid, language }) => (
       <Anchor as={Link} to={`/haku/${oid}/muokkaus`}>
-        {getFirstLanguageValue(nimi, language)}
+        {getFirstLanguageValue(nimi, language) || t('yleiset.nimeton')}
       </Anchor>
     ),
   },
@@ -75,6 +74,11 @@ const makeTableColumns = t => [
 
 const KoulutuksetSection = ({ organisaatioOid, canCreate }) => {
   const { t } = useTranslation();
+
+  const [ref, inView] = useInView({
+    threshold: 0.25,
+    triggerOnce: true,
+  });
 
   const {
     debouncedNimi,
@@ -101,7 +105,7 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate }) => {
     error,
     reload,
   } = useApiAsync({
-    promiseFn: getHautFn,
+    promiseFn: inView ? getHautFn : noopPromiseFn,
     nimi: debouncedNimi,
     page,
     showArchived,
@@ -118,34 +122,41 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate }) => {
   const tableColumns = useMemo(() => makeTableColumns(t), [t]);
 
   return (
-    <ListCollapse
-      icon="access_time"
-      header={t('yleiset.haut')}
-      actions={canCreate ? <Actions organisaatioOid={organisaatioOid} /> : null}
-      defaultOpen
-    >
-      <Spacing marginBottom={3}>
-        <Filters {...filtersProps} nimiPlaceholder={t('etusivu.haeHakuja')} />
-      </Spacing>
+    <>
+      <NavigationAnchor id="haut" />
+      <ListCollapse
+        icon="access_time"
+        header={t('yleiset.haut')}
+        actions={
+          canCreate ? <Actions organisaatioOid={organisaatioOid} /> : null
+        }
+        defaultOpen
+      >
+        <div ref={ref} />
 
-      {rows ? (
-        <ListTable
-          rows={rows}
-          columns={tableColumns}
-          onSort={setOrderBy}
-          sort={orderBy}
-          {...getTestIdProps('hautTable')}
-        />
-      ) : error ? (
-        <ErrorAlert onReload={reload} center />
-      ) : (
-        <Spin center />
-      )}
+        <Spacing marginBottom={3}>
+          <Filters {...filtersProps} nimiPlaceholder={t('etusivu.haeHakuja')} />
+        </Spacing>
 
-      <Flex marginTop={3} justifyCenter>
-        <Pagination value={page} onChange={setPage} pageCount={pageCount} />
-      </Flex>
-    </ListCollapse>
+        {rows ? (
+          <ListTable
+            rows={rows}
+            columns={tableColumns}
+            onSort={setOrderBy}
+            sort={orderBy}
+            {...getTestIdProps('hautTable')}
+          />
+        ) : error ? (
+          <ErrorAlert onReload={reload} center />
+        ) : (
+          <ListSpin />
+        )}
+
+        <Flex marginTop={3} justifyCenter>
+          <Pagination value={page} onChange={setPage} pageCount={pageCount} />
+        </Flex>
+      </ListCollapse>
+    </>
   );
 };
 

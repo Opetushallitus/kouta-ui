@@ -11,14 +11,14 @@ const IconBase = styled.i`
   ${typography};
 `;
 
-const Icon = ({ type, className = '', ...props }) => {
+const Icon = React.forwardRef(({ type, className = '', ...props }, ref) => {
   const iconClassName = `material-icons ${className}`;
 
   return (
-    <IconBase className={iconClassName} {...props}>
+    <IconBase ref={ref} className={iconClassName} {...props}>
       {type}
     </IconBase>
   );
-};
+});
 
 export default Icon;

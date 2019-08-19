@@ -163,6 +163,8 @@ export default {
     valitseHaunKohdejoukonTarkenne: 'Valitse haun kohdejoukon tarkenne',
     oppilaitos: 'Oppilaitos',
     oppilaitoksenOsa: 'Oppilaitoksen osa',
+    toteutukset: 'Toteutukset',
+    nimeton: 'Nimetön',
   },
   validointivirheet: {
     syotaArvo: 'Syötä kentälle arvo',
@@ -209,7 +211,6 @@ export default {
   etusivu: {
     koulutuksetJaHaut: 'Koulutukset ja haut',
     luoUusiKoulutus: 'Luo uusi koulutus',
-    koulutuksenToteutukset: 'Koulutuksen toteutukset',
     luoUusiHaku: 'Luo uusi haku',
     luoUusiValintaperuste: 'Luo uusi valintaperuste',
     naytaArkistoidut: 'Näytä myös arkistoidut',
@@ -222,6 +223,9 @@ export default {
     eiOikeuksiaVirheilmoitus: 'Käyttöoikeuksissasi on puutteita',
     eiOikeuksiaVirheilmoitusKuvaus:
       'Käyttäjältäsi puuttuu järjestelmän käyttöön vaadittavia rooleja',
+    organisaatioitaEiLoytynyt:
+      'Organisaatioita ei löytynyt. Yritä käyttää pidempää hakusanaa',
+    haeOrganisaatioita: 'Hae organisaatioita',
   },
   koulutuslomake: {
     koulutuksenTiedot: 'Koulutuksen tiedot',

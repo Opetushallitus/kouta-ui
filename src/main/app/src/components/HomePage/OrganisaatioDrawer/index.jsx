@@ -144,7 +144,7 @@ const DrawerContent = ({
   ]);
 
   return (
-    <Container>
+    <Container {...getTestIdProps('organisaatioDrawer')}>
       <HeaderContainer>
         <Flex alignCenter>
           <FlexItem grow={1} paddingRight={2}>
@@ -174,7 +174,7 @@ const DrawerContent = ({
 
       <FilterContainer>
         <Input
-          placeholder="Hae organisaatioita nimellä"
+          placeholder={t('etusivu.haeOrganisaatioita')}
           value={nameFilter}
           onChange={onNameFilterChange}
           addonAfter={
@@ -187,7 +187,7 @@ const DrawerContent = ({
         />
       </FilterContainer>
 
-      <TreeContainer {...getTestIdProps('organisaatioDrawerOrganisaatioList')}>
+      <TreeContainer {...getTestIdProps('organisaatioList')}>
         {items.length > 0 ? (
           <OrganisaatioTreeList
             items={items}
@@ -199,7 +199,7 @@ const DrawerContent = ({
           />
         ) : (
           <Typography variant="secondary">
-            Organisaatioita ei löytynyt. Yritä käyttää pidempää hakusanaa
+            {t('etusivu.organisaatioitaEiLoytynyt')}
           </Typography>
         )}
       </TreeContainer>

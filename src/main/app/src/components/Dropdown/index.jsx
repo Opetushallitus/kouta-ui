@@ -2,19 +2,19 @@ import React, { Component, useRef, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { Manager, Reference, Popper } from 'react-popper';
 import styled from 'styled-components';
-import memoize from 'lodash/memoize';
 import EventListener from 'react-event-listener';
 import { Transition } from 'react-spring';
 
 import { getThemeProp } from '../../theme';
 import { isFunction } from '../../utils';
+import memoizeOne from '../../utils/memoizeOne';
 
 export const DropdownMenu = styled.div`
   width: 100%;
   min-width: 200px;
   border: 1px solid ${getThemeProp('palette.border')};
   border-radius: ${getThemeProp('shape.borderRadius')};
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: ${getThemeProp('shadows[1]')};
   background-color: white;
 `;
 
@@ -24,13 +24,12 @@ export const DropdownMenuItem = styled.div`
   white-space: nowrap;
   font-family: ${getThemeProp('typography.fontFamily')};
   color: ${getThemeProp('palette.text.primary')};
-  padding: 6px 12px;
+  padding: 8px 12px;
   box-sizing: border-box;
   cursor: pointer;
   transition: background-color 0.25s, color 0.25s;
 
   &:hover {
-    color: ${getThemeProp('palette.primary.main')};
     background-color: rgba(0, 0, 0, 0.05);
   }
 `;
@@ -119,14 +118,6 @@ const DropdownDialog = ({
   </Transition>
 );
 
-const createForwardingRef = memoize((targetRef, ref) => {
-  return node => {
-    targetRef.current = node;
-
-    ref(node);
-  };
-});
-
 const Dropdown = ({
   placement: defaultPlacement = 'bottom-start',
   overlay = null,
@@ -146,10 +137,20 @@ const Dropdown = ({
   const targetRef = useRef();
   const wrappedOverlay = overlay ? <div ref={overlayRef}>{overlay}</div> : null;
 
+  const createForwardingRef = useRef(
+    memoizeOne(ref => {
+      return node => {
+        targetRef.current = node;
+
+        ref(node);
+      };
+    }),
+  );
+
   const childrenFn = useCallback(
     ({ ref, ...rest }) => {
       return children({
-        ref: createForwardingRef(targetRef, ref),
+        ref: createForwardingRef.current(ref),
         ...rest,
       });
     },

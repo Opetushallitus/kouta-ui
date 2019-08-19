@@ -10,7 +10,7 @@ import ListTable, {
 import Pagination from '../Pagination';
 import Flex from '../Flex';
 import Spacing from '../Spacing';
-import Spin from '../Spin';
+import ListSpin from './ListSpin';
 import useApiAsync from '../useApiAsync';
 import { getIndexParamsByFilters } from './utils';
 import getValintaperusteet from '../../utils/koutaIndex/getValintaperusteet';
@@ -21,6 +21,10 @@ import Anchor from '../Anchor';
 import Button from '../Button';
 import ErrorAlert from '../ErrorAlert';
 import useTranslation from '../useTranslation';
+import useInView from '../useInView';
+import NavigationAnchor from './NavigationAnchor';
+
+const noopPromiseFn = () => Promise.resolve();
 
 const getValintaperusteetFn = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
@@ -38,11 +42,7 @@ const Actions = ({ organisaatioOid }) => {
   const { t } = useTranslation();
 
   return (
-    <Button
-      variant="outlined"
-      as={Link}
-      to={`/organisaatio/${organisaatioOid}/valintaperusteet`}
-    >
+    <Button as={Link} to={`/organisaatio/${organisaatioOid}/valintaperusteet`}>
       {t('etusivu.luoUusiValintaperuste')}
     </Button>
   );
@@ -55,7 +55,7 @@ const makeTableColumns = t => [
     sortable: true,
     render: ({ nimi, id }) => (
       <Anchor as={Link} to={`/valintaperusteet/${id}/muokkaus`}>
-        {getFirstLanguageValue(nimi)}
+        {getFirstLanguageValue(nimi) || t('yleiset.nimeton')}
       </Anchor>
     ),
   },
@@ -66,6 +66,8 @@ const makeTableColumns = t => [
 
 const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
+
+  const [ref, inView] = useInView({ threshold: 0.25, triggerOnce: true });
 
   const {
     debouncedNimi,
@@ -92,7 +94,7 @@ const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
     error,
     reload,
   } = useApiAsync({
-    promiseFn: getValintaperusteetFn,
+    promiseFn: inView ? getValintaperusteetFn : noopPromiseFn,
     nimi: debouncedNimi,
     page,
     showArchived,
@@ -114,37 +116,44 @@ const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
   const tableColumns = useMemo(() => makeTableColumns(t), [t]);
 
   return (
-    <ListCollapse
-      icon="select_all"
-      header={t('yleiset.valintaperusteet')}
-      actions={canCreate ? <Actions organisaatioOid={organisaatioOid} /> : null}
-      defaultOpen
-    >
-      <Spacing marginBottom={3}>
-        <Filters
-          {...filtersProps}
-          nimiPlaceholder={t('etusivu.haeValintaperusteita')}
-        />
-      </Spacing>
+    <>
+      <NavigationAnchor id="valintaperusteet" />
+      <ListCollapse
+        icon="select_all"
+        header={t('yleiset.valintaperusteet')}
+        actions={
+          canCreate ? <Actions organisaatioOid={organisaatioOid} /> : null
+        }
+        defaultOpen
+      >
+        <div ref={ref} />
 
-      {rows ? (
-        <ListTable
-          rows={rows}
-          columns={tableColumns}
-          onSort={setOrderBy}
-          sort={orderBy}
-          {...getTestIdProps('valintaperusteetTable')}
-        />
-      ) : error ? (
-        <ErrorAlert onReload={reload} center />
-      ) : (
-        <Spin center />
-      )}
+        <Spacing marginBottom={3}>
+          <Filters
+            {...filtersProps}
+            nimiPlaceholder={t('etusivu.haeValintaperusteita')}
+          />
+        </Spacing>
 
-      <Flex marginTop={3} justifyCenter>
-        <Pagination value={page} onChange={setPage} pageCount={pageCount} />
-      </Flex>
-    </ListCollapse>
+        {rows ? (
+          <ListTable
+            rows={rows}
+            columns={tableColumns}
+            onSort={setOrderBy}
+            sort={orderBy}
+            {...getTestIdProps('valintaperusteetTable')}
+          />
+        ) : error ? (
+          <ErrorAlert onReload={reload} center />
+        ) : (
+          <ListSpin />
+        )}
+
+        <Flex marginTop={3} justifyCenter>
+          <Pagination value={page} onChange={setPage} pageCount={pageCount} />
+        </Flex>
+      </ListCollapse>
+    </>
   );
 };
 

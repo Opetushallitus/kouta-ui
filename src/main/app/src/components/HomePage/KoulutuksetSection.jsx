@@ -11,7 +11,7 @@ import Pagination from '../Pagination';
 import Flex from '../Flex';
 import Spacing from '../Spacing';
 import DropdownIcon from '../DropdownIcon';
-import Spin from '../Spin';
+import ListSpin from './ListSpin';
 import useApiAsync from '../useApiAsync';
 import getKoulutukset from '../../utils/koutaIndex/getKoulutukset';
 import { getIndexParamsByFilters } from './utils';
@@ -20,9 +20,9 @@ import Badge from '../Badge';
 import useFilterState from './useFilterState';
 import KoulutusTilaDropdown from './KoulutusTilaDropdown';
 import ErrorAlert from '../ErrorAlert';
-
 import { getFirstLanguageValue, getTestIdProps } from '../../utils';
 import useTranslation from '../useTranslation';
+import NavigationAnchor from './NavigationAnchor';
 
 import {
   UncontrolledDropdown,
@@ -31,6 +31,9 @@ import {
 } from '../Dropdown';
 
 import Anchor from '../Anchor';
+import useInView from '../useInView';
+
+const noopPromiseFn = () => Promise.resolve();
 
 const getKoulutuksetFn = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
@@ -53,13 +56,13 @@ const LuoKoulutusDropdown = ({ organisaatioOid }) => {
         as={Link}
         to={`/organisaatio/${organisaatioOid}/koulutus?johtaaTutkintoon=true`}
       >
-        Tutkintoon johtava koulutus
+        {t('yleiset.tutkintoonJohtavaKoulutus')}
       </DropdownMenuItem>
       <DropdownMenuItem
         as={Link}
         to={`/organisaatio/${organisaatioOid}/koulutus?johtaaTutkintoon=false`}
       >
-        Tutkintoon johtamaton koulutus
+        {t('yleiset.tutkintoonJohtamatonKoulutus')}
       </DropdownMenuItem>
     </DropdownMenu>
   );
@@ -72,7 +75,7 @@ const LuoKoulutusDropdown = ({ organisaatioOid }) => {
     >
       {({ ref, onToggle, visible }) => (
         <div ref={ref} onClick={onToggle}>
-          <Button variant="outlined">
+          <Button>
             {t('etusivu.luoUusiKoulutus')} <DropdownIcon open={visible} />
           </Button>
         </div>
@@ -92,7 +95,7 @@ const makeTableColumns = t => [
     sortable: true,
     render: ({ nimi, oid, language }) => (
       <Anchor as={Link} to={`/koulutus/${oid}/muokkaus`}>
-        {getFirstLanguageValue(nimi, language)}
+        {getFirstLanguageValue(nimi, language) || t('yleiset.nimeton')}
       </Anchor>
     ),
   },
@@ -117,6 +120,8 @@ const makeTableColumns = t => [
 
 const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
+
+  const [ref, inView] = useInView({ threshold: 0.25, triggerOnce: true });
 
   const {
     debouncedNimi,
@@ -143,7 +148,7 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
     error,
     reload,
   } = useApiAsync({
-    promiseFn: getKoulutuksetFn,
+    promiseFn: inView ? getKoulutuksetFn : noopPromiseFn,
     nimi: debouncedNimi,
     page,
     showArchived,
@@ -162,37 +167,44 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   const tableColumns = useMemo(() => makeTableColumns(t), [t]);
 
   return (
-    <ListCollapse
-      icon="school"
-      header={t('yleiset.koulutukset')}
-      actions={canCreate ? <Actions organisaatioOid={organisaatioOid} /> : null}
-      defaultOpen
-    >
-      <Spacing marginBottom={3}>
-        <Filters
-          {...filtersProps}
-          nimiPlaceholder={t('etusivu.haeKoulutuksia')}
-        />
-      </Spacing>
+    <>
+      <NavigationAnchor id="koulutukset" />
+      <ListCollapse
+        icon="school"
+        header={t('yleiset.koulutukset')}
+        actions={
+          canCreate ? <Actions organisaatioOid={organisaatioOid} /> : null
+        }
+        defaultOpen
+      >
+        <div ref={ref} />
 
-      {rows ? (
-        <ListTable
-          rows={rows}
-          columns={tableColumns}
-          onSort={setOrderBy}
-          sort={orderBy}
-          {...getTestIdProps('koulutuksetTable')}
-        />
-      ) : error ? (
-        <ErrorAlert onReload={reload} center />
-      ) : (
-        <Spin center />
-      )}
+        <Spacing marginBottom={3}>
+          <Filters
+            {...filtersProps}
+            nimiPlaceholder={t('etusivu.haeKoulutuksia')}
+          />
+        </Spacing>
 
-      <Flex marginTop={3} justifyCenter>
-        <Pagination value={page} onChange={setPage} pageCount={pageCount} />
-      </Flex>
-    </ListCollapse>
+        {rows ? (
+          <ListTable
+            rows={rows}
+            columns={tableColumns}
+            onSort={setOrderBy}
+            sort={orderBy}
+            {...getTestIdProps('koulutuksetTable')}
+          />
+        ) : error ? (
+          <ErrorAlert onReload={reload} center />
+        ) : (
+          <ListSpin />
+        )}
+
+        <Flex marginTop={3} justifyCenter>
+          <Pagination value={page} onChange={setPage} pageCount={pageCount} />
+        </Flex>
+      </ListCollapse>
+    </>
   );
 };
 

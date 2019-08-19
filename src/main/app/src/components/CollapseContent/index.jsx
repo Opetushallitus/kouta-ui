@@ -21,7 +21,7 @@ export const CollapseContent = ({ open = false, children }) => {
   );
 };
 
-export const UnmountingCollapseContent = ({ open, children }) => {
+export const UnmountingCollapseContent = ({ open = false, children }) => {
   return (
     <Transition
       enter={{ opacity: 1, height: 'auto' }}

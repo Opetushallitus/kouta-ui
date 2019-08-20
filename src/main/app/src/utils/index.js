@@ -52,6 +52,7 @@ export const getFirstLanguageValue = (value, priorityArg) => {
     priority = [priorityArg, ...defaultPriority];
   }
 
+  // eslint-disable-next-line
   for (const p of priority) {
     const v = getLanguageValue(value, p);
 
@@ -129,7 +130,8 @@ export const formatKoutaDateString = (dateString, format) => {
 };
 
 export const createChainedFunction = (...fns) => (...args) => {
-  for (let fn of fns) {
+  // eslint-disable-next-line
+  for (const fn of fns) {
     if (isFunction(fn)) {
       fn(...args);
     }

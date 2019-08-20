@@ -165,6 +165,7 @@ export default {
     oppilaitoksenOsa: 'Oppilaitoksen osa',
     toteutukset: 'Toteutukset',
     nimeton: 'Nimetön',
+    opetushallitus: 'Opetushallitus',
   },
   validointivirheet: {
     syotaArvo: 'Syötä kentälle arvo',

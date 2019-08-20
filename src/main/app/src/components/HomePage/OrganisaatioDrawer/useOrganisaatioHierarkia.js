@@ -4,13 +4,7 @@ import { isString, isArray } from '../../../utils';
 import { getOrganisaatioHierarkia } from '../../../apiUtils';
 import useApiAsync from '../../useApiAsync';
 import useAuthorizedUserRoleBuilder from '../../useAuthorizedUserRoleBuilder';
-
-import {
-  KOULUTUS_ROLE,
-  TOTEUTUS_ROLE,
-  HAKU_ROLE,
-  VALINTAPERUSTE_ROLE,
-} from '../../../constants';
+import { createCanReadSomethingRoleBuilder } from '../utils';
 
 const filterHierarkia = (hierarkia, filterFn) => {
   return hierarkia.flatMap(org => [
@@ -37,12 +31,10 @@ const useOrganisaatioHierarkia = ({ name }) => {
 
   const hasRequiredRoles = useCallback(
     organisaatio => {
-      return roleBuilder
-        .hasReadOneOf(
-          [KOULUTUS_ROLE, TOTEUTUS_ROLE, HAKU_ROLE, VALINTAPERUSTE_ROLE],
-          organisaatio,
-        )
-        .result();
+      return createCanReadSomethingRoleBuilder(
+        roleBuilder,
+        organisaatio,
+      ).result();
     },
     [roleBuilder],
   );

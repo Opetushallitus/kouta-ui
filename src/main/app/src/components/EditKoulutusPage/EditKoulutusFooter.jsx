@@ -25,7 +25,14 @@ const EditKoulutusFooter = ({ koulutus, history }) => {
       await updateKoulutus({
         httpClient,
         apiUrls,
-        koulutus: { ...koulutus, ...getKoulutusByFormValues(values) },
+        koulutus: {
+          ...koulutus,
+          ...getKoulutusByFormValues(values),
+          tila:
+            koulutus.tila === JULKAISUTILA.JULKAISTU
+              ? koulutus.tila
+              : values.tila,
+        },
       });
 
       history.replace({

@@ -174,6 +174,7 @@ const fillYhteystiedotSection = cy => {
 
 describe('createHakuForm', () => {
   const organisaatioOid = '1.1.1.1.1.1';
+  const createdHakuOid = '1.2.3.4.5.6';
 
   beforeEach(() => {
     stubHakuFormRoutes({ cy, organisaatioOid });
@@ -186,7 +187,7 @@ describe('createHakuForm', () => {
       method: 'PUT',
       url: '**/haku',
       response: {
-        oid: '1.2.3.4.5.6',
+        oid: createdHakuOid,
       },
     }).as('createHakuRequest');
 
@@ -205,5 +206,10 @@ describe('createHakuForm', () => {
     cy.wait('@createHakuRequest').then(({ request }) => {
       cy.wrap(request.body).snapshot();
     });
+
+    cy.location('pathname').should(
+      'eq',
+      `/kouta/haku/${createdHakuOid}/muokkaus`,
+    );
   });
 });

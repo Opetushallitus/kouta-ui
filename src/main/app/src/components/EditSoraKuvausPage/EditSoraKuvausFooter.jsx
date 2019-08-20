@@ -25,7 +25,14 @@ const EditSoraKuvausFooter = ({ soraKuvaus, history }) => {
       await updateSoraKuvaus({
         httpClient,
         apiUrls,
-        soraKuvaus: { ...soraKuvaus, ...getSoraKuvausByFormValues(values) },
+        soraKuvaus: {
+          ...soraKuvaus,
+          ...getSoraKuvausByFormValues(values),
+          tila:
+            soraKuvaus.tila === JULKAISUTILA.JULKAISTU
+              ? soraKuvaus.tila
+              : values.tila,
+        },
       });
 
       history.replace({

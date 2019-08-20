@@ -24,7 +24,14 @@ const EditHakukohdeFooter = ({ hakukohde, history }) => {
       await updateHakukohde({
         httpClient,
         apiUrls,
-        hakukohde: { ...hakukohde, ...getHakukohdeByFormValues(values) },
+        hakukohde: {
+          ...hakukohde,
+          ...getHakukohdeByFormValues(values),
+          tila:
+            hakukohde.tila === JULKAISUTILA.JULKAISTU
+              ? hakukohde.tila
+              : values.tila,
+        },
       });
 
       history.replace({

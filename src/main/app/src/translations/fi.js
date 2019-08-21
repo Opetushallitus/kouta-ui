@@ -4,9 +4,6 @@ export default {
     edellinen: 'Edellinen',
     tallenna: 'Tallenna',
     tallennaJaJulkaise: 'Tallenna ja julkaise',
-    tallennettu: 'Tallennettu',
-    julkaistu: 'Julkaistu',
-    arkistoitu: 'Arkistoitu',
     valitse: 'Valitse',
     nimi: 'Nimi',
     muokattuViimeksi: 'Muokattu viimeksi',
@@ -167,6 +164,11 @@ export default {
     nimeton: 'Nimetön',
     opetushallitus: 'Opetushallitus',
   },
+  julkaisutilat: {
+    tallennettu: 'Luonnos',
+    julkaistu: 'Julkaistu',
+    arkistoitu: 'Arkistoitu',
+  },
   validointivirheet: {
     syotaArvo: 'Syötä kentälle arvo',
     syotaArvoKaannoksille: 'Syötä arvo kaikille kentän käännöksille',
@@ -210,7 +212,6 @@ export default {
     muuOsoite: 'Muu osoite',
   },
   etusivu: {
-    koulutuksetJaHaut: 'Koulutukset ja haut',
     luoUusiKoulutus: 'Luo uusi koulutus',
     luoUusiHaku: 'Luo uusi haku',
     luoUusiValintaperuste: 'Luo uusi valintaperuste',

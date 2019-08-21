@@ -41,7 +41,7 @@ const getLabel = ({ children, tila, t }) => {
     return children;
   }
 
-  return t(`yleiset.${tila}`);
+  return t(`julkaisutilat.${tila}`);
 };
 
 const TilaLabel = ({ children, color, tila, ...props }) => {

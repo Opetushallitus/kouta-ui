@@ -8,9 +8,9 @@ import { JULKAISUTILA } from '../../constants';
 import useTranslation from '../useTranslation';
 
 const getDefaultOptions = t => [
-  { value: JULKAISUTILA.JULKAISTU, label: t('yleiset.julkaistu') },
-  { value: JULKAISUTILA.TALLENNETTU, label: t('yleiset.tallennettu') },
-  { value: JULKAISUTILA.ARKISTOITU, label: t('yleiset.arkistoitu') },
+  { value: JULKAISUTILA.JULKAISTU, label: t('julkaisutilat.julkaistu') },
+  { value: JULKAISUTILA.TALLENNETTU, label: t('julkaisutilat.tallennettu') },
+  { value: JULKAISUTILA.ARKISTOITU, label: t('julkaisutilat.arkistoitu') },
 ];
 
 export const Filters = ({

@@ -7,9 +7,9 @@ export const getLabel = ({ status, t }) => {
   }
 
   const labelByStatus = {
-    [JULKAISUTILA.ARKISTOITU]: t('yleiset.arkistoitu'),
-    [JULKAISUTILA.JULKAISTU]: t('yleiset.julkaistu'),
-    [JULKAISUTILA.TALLENNETTU]: t('yleiset.tallennettu'),
+    [JULKAISUTILA.ARKISTOITU]: t('julkaisutilat.arkistoitu'),
+    [JULKAISUTILA.JULKAISTU]: t('julkaisutilat.julkaistu'),
+    [JULKAISUTILA.TALLENNETTU]: t('julkaisutilat.tallennettu'),
   };
 
   return labelByStatus[status] || null;

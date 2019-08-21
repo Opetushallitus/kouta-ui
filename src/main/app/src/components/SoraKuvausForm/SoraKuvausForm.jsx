@@ -88,7 +88,7 @@ const SoraKuvausForm = ({
         header={t('soraKuvausLomake.soraKuvauksenNayttamiseenLiittyvatTiedot')}
         {...getTestIdProps('julkisuusSection')}
       >
-        <JulkisuusSection name="julkisuus" />
+        <JulkisuusSection name="julkinen" />
       </FormCollapse>
     </FormCollapseGroup>
   );

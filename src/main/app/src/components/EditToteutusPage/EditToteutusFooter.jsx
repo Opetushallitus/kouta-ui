@@ -28,6 +28,10 @@ const EditToteutusFooter = ({ toteutus, koulutustyyppi, history }) => {
         toteutus: {
           ...toteutus,
           ...getToteutusByFormValues({ ...values, koulutustyyppi }),
+          tila:
+            toteutus.tila === JULKAISUTILA.JULKAISTU
+              ? toteutus.tila
+              : values.tila,
         },
       });
 

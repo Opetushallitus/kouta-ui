@@ -5,7 +5,7 @@ module.exports = {
       '1': {
         id: '123e4567-e89b-12d3-a456-426655440000',
         tila: 'tallennettu',
-        julkinen: false,
+        julkinen: true,
         muokkaaja: '1.2.246.562.24.62301161440',
         organisaatioOid: '1.1.1.1.1.1',
         kielivalinta: ['fi'],

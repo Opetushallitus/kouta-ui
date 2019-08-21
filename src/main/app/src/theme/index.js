@@ -130,6 +130,7 @@ export const createTheme = () => {
       borderRadius: '4px',
     },
     zIndices: {
+      homeNavigation: 99,
       modal: 999,
     },
     contentMaxWidth: '1200px',
@@ -140,6 +141,7 @@ export const createTheme = () => {
     },
     fontWeights,
     fonts,
+    shadows: ['none', '0 2px 8px rgba(0,0,0,0.15)'],
   };
 
   theme.palette = theme.colors; // Alias to ensure backwards compatibility

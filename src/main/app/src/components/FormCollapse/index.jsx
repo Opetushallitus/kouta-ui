@@ -9,6 +9,7 @@ import LanguageTabs from './LanguageTabs';
 import Typography from '../Typography';
 import FormConfigSectionContext from '../FormConfigSectionContext';
 import Box from '../Box';
+import scrollElementIntoView from '../../utils/scrollElementIntoView';
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -27,11 +28,9 @@ const LanguageTabsWrapper = styled.div`
 `;
 
 const scrollIntoView = el => {
-  try {
-    setTimeout(() => {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }, 500);
-  } catch (e) {}
+  setTimeout(() => {
+    scrollElementIntoView(el);
+  }, 500);
 };
 
 const renderChildren = ({ onContinue, children, language, section }) => {

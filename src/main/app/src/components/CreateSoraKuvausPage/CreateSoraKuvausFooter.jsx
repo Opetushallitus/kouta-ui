@@ -20,13 +20,13 @@ const CreateSoraKuvausFooter = ({ history, organisaatioOid }) => {
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
-      const { oid } = await createSoraKuvaus({
+      const { id } = await createSoraKuvaus({
         httpClient,
         apiUrls,
         soraKuvaus: { ...getSoraKuvausByFormValues(values), organisaatioOid },
       });
 
-      history.push(`/sora-kuvaus/${oid}/muokkaus`);
+      history.push(`/sora-kuvaus/${id}/muokkaus`);
     },
     [organisaatioOid, history],
   );

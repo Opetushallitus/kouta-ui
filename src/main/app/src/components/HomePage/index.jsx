@@ -17,18 +17,13 @@ import {
   OPH_PAAKAYTTAJA_ROLE,
 } from '../../constants';
 import useTranslation from '../useTranslation';
-import Container from '../Container';
-import { spacing, getThemeProp } from '../../theme';
 import getUserRoles from '../../utils/getUserRoles';
 import getRoleOrganisaatioOid from '../../utils/getRoleOrganisaatioOid';
 
 const HomeContainer = styled.div`
-  padding-top: ${spacing(3)}
-  padding-bottom: ${spacing(3)}
   min-height: 100vh;
   width: 100%;
   box-sizing: border-box;
-  background-color: ${getThemeProp('palette.mainBackground')};
 `;
 
 const getFirstOrganisaatioOidWithRequiredRole = user => {
@@ -100,18 +95,16 @@ const HomePage = ({
 }) => {
   const { search } = location;
 
-  const query = queryString.parse(search);
+  const query = useMemo(() => queryString.parse(search), [search]);
   const organisaatioOid = get(query, 'organisaatioOid') || null;
 
   return (
     <HomeContainer>
-      <Container>
-        <HomeRoute
-          kayttajOid={kayttajaOid}
-          organisaatioOid={organisaatioOid}
-          persistedOrganisaatioOid={persistedOrganisaatioOid}
-        />
-      </Container>
+      <HomeRoute
+        kayttajOid={kayttajaOid}
+        organisaatioOid={organisaatioOid}
+        persistedOrganisaatioOid={persistedOrganisaatioOid}
+      />
     </HomeContainer>
   );
 };

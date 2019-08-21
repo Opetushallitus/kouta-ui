@@ -12,7 +12,7 @@ const getSoraKuvausByFormValues = values => {
   const nimi = pick(get(values, 'tiedot.nimi') || {}, kielivalinta);
   const kuvaus = pick(get(values, 'tiedot.kuvaus') || {}, kielivalinta);
   const koulutustyyppi = get(values, 'koulutustyyppi') || null;
-  const julkinen = Boolean(get(values, 'julkisuus'));
+  const julkinen = Boolean(get(values, 'julkinen'));
 
   return {
     tila,

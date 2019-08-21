@@ -1,23 +1,20 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { withRouter } from 'react-router-dom';
-import get from 'lodash/get';
 import { connect } from 'react-redux';
 
-import Flex, { FlexItem } from '../Flex';
-import { getFirstLanguageValue, getTestIdProps, compose } from '../../utils';
-import Typography from '../Typography';
-import Spacing from '../Spacing';
+import { compose } from '../../utils';
 import KoulutuksetSection from './KoulutuksetSection';
 import ToteutuksetSection from './ToteutuksetSection';
 import HautSection from './HautSection';
-import OrganisaatioDrawer from './OrganisaatioDrawer';
-import Button from '../Button';
-import Icon from '../Icon';
 import ValintaperusteetSection from './ValintaperusteetSection';
 import { useOrganisaatio } from '../useOrganisaatio';
 import { setOrganisaatio } from '../../state/organisaatioSelection';
 import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
 import Spin from '../Spin';
+import Navigation from './Navigation';
+import Container from '../Container';
+import Box from '../Box';
+import NavigationProvider from './NavigationProvider';
 
 import {
   KOULUTUS_ROLE,
@@ -31,14 +28,7 @@ const HomeContent = ({
   history,
   onOrganisaatioChange: onOrganisaatioChangeProp = () => {},
 }) => {
-  const [drawerOpen, setDrawerOpen] = useState(false);
   const roleBuilder = useAuthorizedUserRoleBuilder();
-
-  const onCloseDrawer = useCallback(() => setDrawerOpen(false), [
-    setDrawerOpen,
-  ]);
-
-  const onOpenDrawer = useCallback(() => setDrawerOpen(true), [setDrawerOpen]);
 
   const { organisaatio } = useOrganisaatio(organisaatioOid);
 
@@ -107,53 +97,27 @@ const HomeContent = ({
         organisaatioOid={organisaatioOid}
       />
     ),
-  ].filter(Boolean);
+  ]
+    .filter(Boolean)
+    .map((section, index) => (
+      <Box mb={4} key={index}>
+        {section}
+      </Box>
+    ));
 
   return (
-    <>
-      <OrganisaatioDrawer
-        open={drawerOpen}
-        onClose={onCloseDrawer}
-        organisaatioOid={organisaatioOid}
+    <NavigationProvider>
+      <Navigation
         onOrganisaatioChange={onOrganisaatioChange}
+        organisaatio={organisaatio}
+        maxInlineItems={4}
       />
-
-      <Flex marginBottom={3} justifyEnd>
-        <FlexItem>
-          <Flex alignCenter>
-            <FlexItem grow={1} paddingRight={2}>
-              <Typography {...getTestIdProps('selectedOrganisaatio')}>
-                {organisaatio
-                  ? getFirstLanguageValue(get(organisaatio, 'nimi'))
-                  : null}
-              </Typography>
-            </FlexItem>
-            <FlexItem grow={0}>
-              <Button
-                onClick={onOpenDrawer}
-                variant="outlined"
-                title="Vaihda organisaatiota"
-                {...getTestIdProps('toggleOrganisaatioDrawer')}
-              >
-                <Icon type="menu" />
-              </Button>
-            </FlexItem>
-          </Flex>
-        </FlexItem>
-      </Flex>
-      {organisaatio ? (
-        listSections.map((section, index) => (
-          <Spacing
-            marginBottom={index < listSections.length - 1 ? 4 : 0}
-            key={index}
-          >
-            {section}
-          </Spacing>
-        ))
-      ) : (
-        <Spin center />
-      )}
-    </>
+      <Container>
+        <Box py={4}>
+          {organisaatio ? <Box mb={-4}>{listSections}</Box> : <Spin center />}
+        </Box>
+      </Container>
+    </NavigationProvider>
   );
 };
 

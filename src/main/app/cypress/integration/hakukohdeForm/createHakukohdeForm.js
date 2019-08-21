@@ -199,6 +199,7 @@ describe('createHakukohdeForm', () => {
   const koulutusOid = '3.1.1.1.1';
   const hakuOid = '4.1.1.1.1.1';
   const valintaperusteOid = '5.1.1.1.1.1';
+  const createdHakukohdeOid = '1.2.3.4.5.6';
 
   beforeEach(() => {
     cy.server();
@@ -245,7 +246,7 @@ describe('createHakukohdeForm', () => {
       method: 'PUT',
       url: '**/hakukohde',
       response: {
-        oid: '1.2.3.4.5.6',
+        oid: createdHakukohdeOid,
       },
     }).as('createHakukohdeRequest');
 
@@ -262,6 +263,11 @@ describe('createHakukohdeForm', () => {
     cy.wait('@createHakukohdeRequest').then(({ request }) => {
       cy.wrap(request.body).snapshot();
     });
+
+    cy.location('pathname').should(
+      'eq',
+      `/kouta/hakukohde/${createdHakukohdeOid}/muokkaus`,
+    );
   });
 
   it('should be able to create korkeakoulu hakukohde', () => {
@@ -278,7 +284,7 @@ describe('createHakukohdeForm', () => {
       method: 'PUT',
       url: '**/hakukohde',
       response: {
-        oid: '1.2.3.4.5.6',
+        oid: createdHakukohdeOid,
       },
     }).as('createHakukohdeRequest');
 
@@ -295,5 +301,10 @@ describe('createHakukohdeForm', () => {
     cy.wait('@createHakukohdeRequest').then(({ request }) => {
       cy.wrap(request.body).snapshot();
     });
+
+    cy.location('pathname').should(
+      'eq',
+      `/kouta/hakukohde/${createdHakukohdeOid}/muokkaus`,
+    );
   });
 });

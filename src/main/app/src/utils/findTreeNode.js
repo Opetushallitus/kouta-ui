@@ -4,7 +4,8 @@ const findTreeNode = (tree, findFn, options = {}) => {
   const { childrenKey = 'children' } = options;
   const treeArr = isArray(tree) ? tree : [];
 
-  for (let node of treeArr) {
+  // eslint-disable-next-line
+  for (const node of treeArr) {
     if (findFn(node)) {
       return node;
     }

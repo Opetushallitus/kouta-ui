@@ -25,7 +25,11 @@ const EditHakuFooter = ({ haku, history }) => {
       await updateHaku({
         httpClient,
         apiUrls,
-        haku: { ...haku, ...getHakuByFormValues(values) },
+        haku: {
+          ...haku,
+          ...getHakuByFormValues(values),
+          tila: haku.tila === JULKAISUTILA.JULKAISTU ? haku.tila : values.tila,
+        },
       });
 
       history.replace({

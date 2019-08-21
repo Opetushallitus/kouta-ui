@@ -1,5 +1,12 @@
 import { isNumber } from '../../utils';
 
+import {
+  KOULUTUS_ROLE,
+  TOTEUTUS_ROLE,
+  HAKU_ROLE,
+  VALINTAPERUSTE_ROLE,
+} from '../../constants';
+
 export const makeOnSort = ({ name, onSort }) => dir => onSort(`${name}:${dir}`);
 
 export const getSortDirection = ({ sort, name }) => {
@@ -40,4 +47,11 @@ export const getIndexParamsByFilters = ({
     showArchived,
     tila: tila ? tila.value : null,
   };
+};
+
+export const createCanReadSomethingRoleBuilder = (rb, organisaatio) => {
+  return rb.hasReadOneOf(
+    [KOULUTUS_ROLE, TOTEUTUS_ROLE, HAKU_ROLE, VALINTAPERUSTE_ROLE],
+    organisaatio,
+  );
 };

@@ -10,10 +10,12 @@ import Flex, { FlexItem } from '../../Flex';
 import { spacing, getThemeProp } from '../../../theme';
 import Button from '../../Button';
 import Icon from '../../Icon';
+
 import {
   toggleFavourite,
   selectOrganisaatioFavourites,
 } from '../../../state/organisaatioFavourites';
+
 import OrganisaatioTreeList from './OrganisaatioTreeList';
 import OrganisaatioFavouritesList from './OrganisaatioFavouritesList';
 import useTranslation from '../../useTranslation';
@@ -23,6 +25,12 @@ import Input, { AddonIcon } from '../../Input';
 import useDebounceState from '../../useDebounceState';
 import useOrganisaatioHierarkia from './useOrganisaatioHierarkia';
 import Spin from '../../Spin';
+import useAuthorizedUserRoleBuilder from '../../useAuthorizedUserRoleBuilder';
+import { createCanReadSomethingRoleBuilder } from '../utils';
+import { OPETUSHALLITUS_ORGANISAATIO_OID } from '../../../constants';
+import OpetetushallitusOrganisaatioItem from './OpetushallitusOrganisaatioItem';
+import Box from '../../Box';
+import Divider from '../../Divider';
 
 const CloseIcon = styled(Icon).attrs({ type: 'close' })`
   color: ${getThemeProp('palette.text.primary')};
@@ -59,9 +67,7 @@ const HeaderContainer = styled(FlexItem).attrs({ grow: 0 })`
   border-bottom: 1px solid ${getThemeProp('palette.border')};
 `;
 
-const FavouriteListContainer = styled.div`
-  border-bottom: 1px solid ${getThemeProp('palette.border')};
-  padding: ${spacing(2)};
+const FavouriteListContainer = styled(Box)`
   max-height: 200px;
   overflow-y: auto;
 `;
@@ -95,6 +101,22 @@ const DrawerContent = ({
   organisaatioFavourites,
   onToggleFavourite,
 }) => {
+  const roleBuilder = useAuthorizedUserRoleBuilder();
+
+  const hasOphOption = useMemo(
+    () =>
+      createCanReadSomethingRoleBuilder(
+        roleBuilder,
+        OPETUSHALLITUS_ORGANISAATIO_OID,
+      ).result(),
+    [roleBuilder],
+  );
+
+  const ophIsFavourite = useMemo(
+    () => organisaatioFavourites.includes(OPETUSHALLITUS_ORGANISAATIO_OID),
+    [organisaatioFavourites],
+  );
+
   const { t } = useTranslation();
   const language = useLanguage();
   const [openOrganisaatiot, setOpenOrganisaatiot] = useState([]);
@@ -143,8 +165,10 @@ const DrawerContent = ({
     setSelectedOrganisaatio,
   ]);
 
+  const hasFavourites = favourites && favourites.length > 0;
+
   return (
-    <Container>
+    <Container {...getTestIdProps('organisaatioDrawer')}>
       <HeaderContainer>
         <Flex alignCenter>
           <FlexItem grow={1} paddingRight={2}>
@@ -158,23 +182,44 @@ const DrawerContent = ({
         </Flex>
       </HeaderContainer>
 
-      {favourites && favourites.length > 0 ? (
-        <FlexItem grow={0}>
-          <FavouriteListContainer>
-            <OrganisaatioFavouritesList
-              items={favourites}
-              selected={selectedOrganisaatio}
-              onSelect={oid => setSelectedOrganisaatio(oid)}
-              onToggleFavourite={onToggleFavourite}
-              language={language}
-            />
-          </FavouriteListContainer>
-        </FlexItem>
-      ) : null}
+      {(hasFavourites || hasOphOption) && (
+        <Box flexGrow="0">
+          <Box p={2}>
+            {hasOphOption && (
+              <>
+                <Typography variant="secondary" as="div" mb={1}>
+                  {t('yleiset.opetushallitus')}
+                </Typography>
+                <OpetetushallitusOrganisaatioItem
+                  favourite={ophIsFavourite}
+                  selected={
+                    selectedOrganisaatio === OPETUSHALLITUS_ORGANISAATIO_OID
+                  }
+                  onToggleFavourite={onToggleFavourite}
+                  onSelect={onSelect}
+                />
+              </>
+            )}
+
+            {hasFavourites && (
+              <FavouriteListContainer>
+                <OrganisaatioFavouritesList
+                  items={favourites}
+                  selected={selectedOrganisaatio}
+                  onSelect={oid => setSelectedOrganisaatio(oid)}
+                  onToggleFavourite={onToggleFavourite}
+                  language={language}
+                />
+              </FavouriteListContainer>
+            )}
+          </Box>
+          <Divider />
+        </Box>
+      )}
 
       <FilterContainer>
         <Input
-          placeholder="Hae organisaatioita nimellä"
+          placeholder={t('etusivu.haeOrganisaatioita')}
           value={nameFilter}
           onChange={onNameFilterChange}
           addonAfter={
@@ -187,7 +232,7 @@ const DrawerContent = ({
         />
       </FilterContainer>
 
-      <TreeContainer {...getTestIdProps('organisaatioDrawerOrganisaatioList')}>
+      <TreeContainer {...getTestIdProps('organisaatioList')}>
         {items.length > 0 ? (
           <OrganisaatioTreeList
             items={items}
@@ -199,10 +244,11 @@ const DrawerContent = ({
           />
         ) : (
           <Typography variant="secondary">
-            Organisaatioita ei löytynyt. Yritä käyttää pidempää hakusanaa
+            {t('etusivu.organisaatioitaEiLoytynyt')}
           </Typography>
         )}
       </TreeContainer>
+
       <FlexItem grow={0}>
         <FooterContainer>
           <Button onClick={onSubmit} disabled={!selectedOrganisaatio}>

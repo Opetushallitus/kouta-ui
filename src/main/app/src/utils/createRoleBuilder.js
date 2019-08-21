@@ -39,7 +39,8 @@ const resolveOidPath = value => {
 const createRoleLookup = roles => {
   const lookup = {};
 
-  for (let role of roles) {
+  // eslint-disable-next-line
+  for (const role of roles) {
     const organisaatioOid = getRoleOrganisaatioOid(role);
 
     if (!organisaatioOid) {

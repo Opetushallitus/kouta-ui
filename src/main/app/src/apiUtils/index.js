@@ -228,6 +228,7 @@ export const getLocalisation = async ({
 
   let resource = {};
 
+  // eslint-disable-next-line
   for (const translation of data) {
     const lng = translation.locale.toLowerCase();
     const { key, value } = translation;

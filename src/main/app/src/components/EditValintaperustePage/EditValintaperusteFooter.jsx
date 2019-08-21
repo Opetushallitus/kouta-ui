@@ -28,6 +28,10 @@ const EditValintaperusteFooter = ({ valintaperuste, history }) => {
         valintaperuste: {
           ...valintaperuste,
           ...getValintaperusteByFormValues(values),
+          tila:
+            valintaperuste.tila === JULKAISUTILA.JULKAISTU
+              ? valintaperuste.tila
+              : values.tila,
         },
       });
 

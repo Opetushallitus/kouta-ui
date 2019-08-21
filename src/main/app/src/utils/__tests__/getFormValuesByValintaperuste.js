@@ -130,7 +130,7 @@ test('getFormValuesByValintaperuste returns correct form values given valintaper
           valintatapaKoodiUri: 'tapa_1#1',
         },
       ],
-      soraKuvausId: 'sora_1',
+      sorakuvausId: 'sora_1',
     },
     nimi: {
       fi: 'Fi nimi',

@@ -2,10 +2,13 @@ import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
 import ListCollapse from './ListCollapse';
+
 import ListTable, {
   makeModifiedColumn,
   makeMuokkaajaColumn,
+  makeTilaColumn,
 } from './ListTable';
+
 import Button from '../Button';
 import Pagination from '../Pagination';
 import Flex from '../Flex';
@@ -18,7 +21,6 @@ import { getIndexParamsByFilters } from './utils';
 import Filters from './Filters';
 import Badge from '../Badge';
 import useFilterState from './useFilterState';
-import KoulutusTilaDropdown from './KoulutusTilaDropdown';
 import ErrorAlert from '../ErrorAlert';
 import { getFirstLanguageValue, getTestIdProps } from '../../utils';
 import useTranslation from '../useTranslation';
@@ -99,14 +101,7 @@ const makeTableColumns = t => [
       </Anchor>
     ),
   },
-  {
-    title: t('yleiset.tila'),
-    key: 'tila',
-    sortable: true,
-    render: ({ tila, oid }) => (
-      <KoulutusTilaDropdown initialTila={tila} koulutusOid={oid} />
-    ),
-  },
+  makeTilaColumn(t),
   makeModifiedColumn(t),
   makeMuokkaajaColumn(t),
   {

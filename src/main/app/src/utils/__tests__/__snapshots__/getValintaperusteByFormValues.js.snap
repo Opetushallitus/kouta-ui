@@ -17,7 +17,7 @@ Object {
       "sv": "<h1>Sv kuvaus</h1>",
     },
     "osaamistaustaKoodiUrit": Array [],
-    "soraKuvausId": "sora_1",
+    "sorakuvausId": "sora_1",
     "valintatavat": Array [
       Object {
         "enimmaispisteet": 20,

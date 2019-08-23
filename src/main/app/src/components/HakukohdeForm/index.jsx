@@ -1,4 +1,4 @@
-import getYear from 'date-fns/get_year';
+import getYear from 'date-fns/getYear';
 
 export { default } from './HakukohdeForm';
 

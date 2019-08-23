@@ -6,7 +6,7 @@ import Checkbox from '../Checkbox';
 import CheckboxGroup from '../CheckboxGroup';
 import Textarea from '../Textarea';
 import Select from '../Select';
-import DatePicker from '../DatePicker';
+import DatePicker, { DatePickerInput } from '../DatePicker';
 import DateTimeInput from '../DateTimeInput';
 import TimeInput from '../TimeInput';
 import Editor from '../Editor';
@@ -92,17 +92,17 @@ export const FormFieldYearSelect = createComponent(
 
 export const FormFieldFileInput = createComponent(FileInput, simpleMapProps);
 
-export const FormFieldKieliversiotSelect = createFormFieldComponent(
+export const FormFieldKieliversiotSelect = createComponent(
   KieliversiotSelect,
   simpleMapProps,
 );
 
-export const FormFieldKoulutustyyppiSelect = createFormFieldComponent(
+export const FormFieldKoulutustyyppiSelect = createComponent(
   KoulutustyyppiSelect,
   simpleMapProps,
 );
 
-export const FormFieldSoraKuvausSelect = createFormFieldComponent(
+export const FormFieldSoraKuvausSelect = createComponent(
   SoraKuvausSelect,
   ({ meta, input, id, ...props }) => ({
     ...input,
@@ -112,7 +112,12 @@ export const FormFieldSoraKuvausSelect = createFormFieldComponent(
   }),
 );
 
-export const FormFieldLanguageSelect = createFormFieldComponent(
+export const FormFieldLanguageSelect = createComponent(
   LanguageSelect,
   selectMapProps,
+);
+
+export const FormFieldDatePickerInput = createComponent(
+  DatePickerInput,
+  simpleMapProps,
 );

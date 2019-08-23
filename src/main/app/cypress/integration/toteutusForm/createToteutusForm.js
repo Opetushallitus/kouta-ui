@@ -7,6 +7,7 @@ import {
   chooseKieliversiotLanguages,
   selectOption,
   fillTreeSelect,
+  fillDatePickerInput,
 } from '../../utils';
 
 import koulutus from '../../data/koulutus';
@@ -74,14 +75,12 @@ const fillStipendi = () => {
 };
 
 const fillKausi = () => {
-  cy.getByTestId('alkamiskausi').within(() => {
-    getRadio('kausi_0#1', cy).click({ force: true });
+  cy.getByTestId('koulutuksenAlkamispaivamaara').within(() => {
+    fillDatePickerInput('1.1.2019');
+  });
 
-    cy.getByTestId('vuosi').within(() => {
-      selectOption(new Date().getFullYear().toString(), cy);
-    });
-
-    cy.get('textarea').type('kausi kuvaus');
+  cy.getByTestId('koulutuksenPaattymispaivamaara').within(() => {
+    fillDatePickerInput('15.2.2019');
   });
 };
 
@@ -371,7 +370,7 @@ describe('createToteutusForm', () => {
     });
   });
 
-  it.only('should be able to create lukio toteutus', () => {
+  it('should be able to create lukio toteutus', () => {
     cy.route({
       method: 'GET',
       url: `**/koulutus/${koulutusOid}`,

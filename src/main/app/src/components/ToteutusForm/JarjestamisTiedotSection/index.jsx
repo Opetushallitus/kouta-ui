@@ -238,20 +238,9 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
 
       <Spacing marginBottom={4}>
         <DividerHeading>
-          {t('toteutuslomake.koulutuksenAlkamiskausi')}
+          {t('toteutuslomake.koulutuksenAjankohta')}
         </DividerHeading>
-        <Flex {...getTestIdProps('alkamiskausi')}>
-          <FlexItem grow={0} basis="30%">
-            <AlkamiskausiFields name={`${name}.alkamiskausi`} />
-          </FlexItem>
-          <FlexItem grow={1} paddingLeft={4}>
-            <Field
-              name={`${name}.alkamiskausiKuvaus.${language}`}
-              component={FormFieldTextarea}
-              label={t('yleiset.tarkempiKuvaus')}
-            />
-          </FlexItem>
-        </Flex>
+        <AlkamiskausiFields name={name} />
       </Spacing>
 
       <FormConfigField name="kielivalikoima">

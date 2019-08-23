@@ -1,46 +1,39 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
-import Spacing from '../../Spacing';
-import useKoodistoOptions from '../../useKoodistoOptions';
-import YearSelect from '../../YearSelect';
-import { noop, getTestIdProps } from '../../../utils';
+import { getTestIdProps } from '../../../utils';
 import useTranslation from '../../useTranslation';
-import { FormFieldRadioGroup, createFormFieldComponent } from '../../FormFields';
-
-const YearField = createFormFieldComponent(
-  YearSelect,
-  ({ input, ...props }) => ({
-    ...input,
-    onBlur: noop,
-    ...props,
-  }),
-);
+import { FormFieldDatePickerInput } from '../../FormFields';
+import Box from '../../Box';
 
 const AlkamiskausiFields = ({ name }) => {
   const { t } = useTranslation();
-  const { options } = useKoodistoOptions({ koodisto: 'kausi' });
 
   return (
-    <>
-      <Spacing marginBottom={2}>
+    <Box display="flex" m={-1}>
+      <Box
+        flexGrow="1"
+        p={1}
+        {...getTestIdProps('koulutuksenAlkamispaivamaara')}
+      >
         <Field
-          name={`${name}.kausi`}
-          component={FormFieldRadioGroup}
-          label={t('yleiset.kausi')}
-          options={options}
+          name={`${name}.koulutuksenAlkamispaivamaara`}
+          component={FormFieldDatePickerInput}
+          label={t('yleiset.alkaa')}
         />
-      </Spacing>
-      <Spacing>
-        <div {...getTestIdProps('vuosi')}>
-          <Field
-            name={`${name}.vuosi`}
-            component={YearField}
-            label={t('yleiset.vuosi')}
-          />
-        </div>
-      </Spacing>
-    </>
+      </Box>
+      <Box
+        flexGrow="1"
+        p={1}
+        {...getTestIdProps('koulutuksenPaattymispaivamaara')}
+      >
+        <Field
+          name={`${name}.koulutuksenPaattymispaivamaara`}
+          component={FormFieldDatePickerInput}
+          label={t('yleiset.paattyy')}
+        />
+      </Box>
+    </Box>
   );
 };
 

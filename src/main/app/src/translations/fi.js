@@ -162,7 +162,6 @@ export default {
     oppilaitoksenOsa: 'Oppilaitoksen osa',
     toteutukset: 'Toteutukset',
     nimeton: 'Nimetön',
-    opetushallitus: 'Opetushallitus',
   },
   julkaisutilat: {
     tallennettu: 'Luonnos',
@@ -228,6 +227,7 @@ export default {
     organisaatioitaEiLoytynyt:
       'Organisaatioita ei löytynyt. Yritä käyttää pidempää hakusanaa',
     haeOrganisaatioita: 'Hae organisaatioita',
+    rekisterinpitaja: 'Rekisterinpitäjä',
   },
   koulutuslomake: {
     koulutuksenTiedot: 'Koulutuksen tiedot',
@@ -276,7 +276,7 @@ export default {
     onkoOpetusMaksullista: 'Onko opetus maksullista?',
     onkoLukuvuosimaksua: 'Onko lukuvuosimaksua?',
     onkoStipenditKaytossa: 'Onko stipendit käytössä?',
-    koulutuksenAlkamiskausi: 'Koulutuksen alkamiskausi',
+    koulutuksenAjankohta: 'Koulutuksen ajankohta',
     ammattinimikkeet: 'Ammattinimikkeet',
     avainsanat: 'Avainsanat',
     toteutuksenJarjestaja: 'Missä järjestetään?',

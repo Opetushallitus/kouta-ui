@@ -62,9 +62,11 @@ const getFormValuesByValintaperuste = valintaperuste => {
       }),
     ),
     tyyppi: koulutustyyppi,
-    soraKuvaus: {
-      value: sorakuvausId,
-    },
+    soraKuvaus: sorakuvausId
+      ? {
+          value: sorakuvausId,
+        }
+      : null,
   };
 };
 

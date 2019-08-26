@@ -38,7 +38,9 @@ Object {
   ],
   "kohdejoukko": Object {
     "kohdejoukko": "kohdejoukko_1#1",
-    "tarkenne": "tarkenne_1#1",
+    "tarkenne": Object {
+      "value": "tarkenne_1#1",
+    },
   },
   "nimi": Object {
     "fi": "Fi nimi",
@@ -137,7 +139,9 @@ Object {
   ],
   "kohdejoukko": Object {
     "kohdejoukko": "kohdejoukko_1#1",
-    "tarkenne": "tarkenne_1#1",
+    "tarkenne": Object {
+      "value": "tarkenne_1#1",
+    },
   },
   "nimi": Object {
     "fi": "Fi nimi",
@@ -238,7 +242,9 @@ Object {
   ],
   "kohdejoukko": Object {
     "kohdejoukko": "kohdejoukko_1#1",
-    "tarkenne": "tarkenne_1#1",
+    "tarkenne": Object {
+      "value": "tarkenne_1#1",
+    },
   },
   "nimi": Object {
     "fi": "Fi nimi",

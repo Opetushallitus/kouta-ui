@@ -41,8 +41,8 @@ const baseValues = {
   },
   hakutapa: 'hakutapa_1#1',
   kohdejoukko: {
-    kohdejoukko: 'kohde_1#1',
-    tarkenne: 'tarkenne_1#1',
+    kohdejoukko: 'haunkohdejoukko_12',
+    tarkenne: { value: 'tarkenne_1#1' },
   },
   hakulomake: {
     tyyppi: HAKULOMAKETYYPPI.ATARU,

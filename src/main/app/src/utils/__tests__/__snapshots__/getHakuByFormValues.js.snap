@@ -28,7 +28,7 @@ Object {
     "fi",
     "sv",
   ],
-  "kohdejoukkoKoodiUri": "kohde_1#1",
+  "kohdejoukkoKoodiUri": "haunkohdejoukko_12",
   "kohdejoukonTarkenneKoodiUri": "tarkenne_1#1",
   "metadata": Object {
     "tulevaisuudenAikataulu": Array [
@@ -131,7 +131,7 @@ Object {
     "fi",
     "sv",
   ],
-  "kohdejoukkoKoodiUri": "kohde_1#1",
+  "kohdejoukkoKoodiUri": "haunkohdejoukko_12",
   "kohdejoukonTarkenneKoodiUri": "tarkenne_1#1",
   "metadata": Object {
     "tulevaisuudenAikataulu": Array [
@@ -232,7 +232,7 @@ Object {
     "fi",
     "sv",
   ],
-  "kohdejoukkoKoodiUri": "kohde_1#1",
+  "kohdejoukkoKoodiUri": "haunkohdejoukko_12",
   "kohdejoukonTarkenneKoodiUri": "tarkenne_1#1",
   "metadata": Object {
     "tulevaisuudenAikataulu": Array [

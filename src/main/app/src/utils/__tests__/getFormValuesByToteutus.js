@@ -2,6 +2,7 @@ import getFormValuesByToteutus from '../getFormValuesByToteutus';
 
 test('getFormValuesByToteutus returns correct form values given toteutus', () => {
   const values = getFormValuesByToteutus({
+    tila: 'tallennettu',
     kielivalinta: ['fi', 'sv'],
     metadata: {
       alemmanKorkeakoulututkinnonOsaamisalat: [

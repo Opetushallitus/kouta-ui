@@ -69,8 +69,8 @@ export const createTheme = () => {
     },
     primary: {
       light: '#e0f2fd',
-      main: '#2da0c7',
-      dark: '#1e7998',
+      main: '#159ecb',
+      dark: '#2a2a2a',
       contrastText: '#ffffff',
     },
     secondary: {
@@ -94,10 +94,14 @@ export const createTheme = () => {
       contrastText: '#ffffff',
     },
     yellow: {
-      main: '#fdce4c',
+      main: '#ffd024',
       contrastText: '#ffffff',
     },
   };
+
+  colors.julkaistu = colors.success.main;
+  colors.tallennettu = colors.primary.main;
+  colors.arkistoitu = colors.yellow.main;
 
   const radii = [0, 4];
 

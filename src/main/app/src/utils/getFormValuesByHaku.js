@@ -20,11 +20,13 @@ const getFormValuesByHaku = haku => {
     valintakokeet = [],
     nimi = {},
     metadata = {},
+    tila,
   } = haku;
 
   const { tulevaisuudenAikataulu = [], yhteyshenkilot = [] } = metadata;
 
   return {
+    tila,
     nimi,
     kieliversiot: kielivalinta,
     aikataulut: {

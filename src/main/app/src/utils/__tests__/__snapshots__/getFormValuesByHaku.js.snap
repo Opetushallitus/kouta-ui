@@ -46,6 +46,7 @@ Object {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
+  "tila": "tallennettu",
   "valintakoe": Object {
     "tilaisuudet": Object {
       "tyyppi_1#1": Array [
@@ -147,6 +148,7 @@ Object {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
+  "tila": "tallennettu",
   "valintakoe": Object {
     "tilaisuudet": Object {
       "tyyppi_1#1": Array [
@@ -250,6 +252,7 @@ Object {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
+  "tila": "tallennettu",
   "valintakoe": Object {
     "tilaisuudet": Object {
       "tyyppi_1#1": Array [

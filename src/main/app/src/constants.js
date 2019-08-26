@@ -6,6 +6,8 @@ export const JULKAISUTILA = {
   ARKISTOITU: 'arkistoitu',
 };
 
+export const DEFAULT_JULKAISUTILA = JULKAISUTILA.TALLENNETTU;
+
 export const KOULUTUSTYYPPI = {
   AMMATILLINEN_KOULUTUS: 'amm',
   LUKIOKOULUTUS: 'lk',

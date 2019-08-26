@@ -14,14 +14,14 @@ const Badge = styled.div`
   height: 0.8rem;
   border-radius: 3px;
   background-color: ${({ theme, color }) =>
-    get(theme, ['palette', color, 'main']) || theme.primary.main};
+    get(theme, ['colors', color]) || theme.colors.tallennettu};
   margin-right: ${spacing(1)};
 `;
 
 const colorByTila = {
-  [JULKAISUTILA.JULKAISTU]: 'success',
-  [JULKAISUTILA.TALLENNETTU]: 'primary',
-  [JULKAISUTILA.ARKISTOITU]: 'orange',
+  [JULKAISUTILA.JULKAISTU]: 'julkaistu',
+  [JULKAISUTILA.TALLENNETTU]: 'tallennettu',
+  [JULKAISUTILA.ARKISTOITU]: 'arkistoitu',
 };
 
 const getColor = ({ tila, color }) => {
@@ -33,7 +33,7 @@ const getColor = ({ tila, color }) => {
     return colorByTila[tila];
   }
 
-  return 'primary';
+  return 'tallennettu';
 };
 
 const getLabel = ({ children, tila, t }) => {
@@ -41,7 +41,7 @@ const getLabel = ({ children, tila, t }) => {
     return children;
   }
 
-  return t(`yleiset.${tila}`);
+  return t(`julkaisutilat.${tila}`);
 };
 
 const TilaLabel = ({ children, status, color, ...props }) => {

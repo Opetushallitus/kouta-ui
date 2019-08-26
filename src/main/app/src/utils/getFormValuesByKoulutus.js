@@ -7,6 +7,7 @@ export const getFormValuesByKoulutus = koulutus => {
     metadata = {},
     nimi = {},
     julkinen = false,
+    tila,
   } = koulutus;
 
   const {
@@ -31,6 +32,7 @@ export const getFormValuesByKoulutus = koulutus => {
   }, {});
 
   return {
+    tila,
     kieliversiot: kielivalinta,
     tarjoajat,
     information: {

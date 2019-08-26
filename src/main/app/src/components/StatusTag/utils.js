@@ -16,14 +16,14 @@ export const getLabel = ({ status, t }) => {
 };
 
 export const getColor = ({ theme, status }) => {
-  let color = theme.palette.primary.main;
+  let color = theme.colors.tallennettu;
 
   if (status === JULKAISUTILA.TALLENNETTU) {
-    color = theme.palette.primary.main;
+    color = theme.colors.tallennettu;
   } else if (status === JULKAISUTILA.ARKISTOITU) {
-    color = theme.palette.warning.main;
+    color = theme.colors.arkistoitu;
   } else if (status === JULKAISUTILA.JULKAISTU) {
-    color = theme.palette.success.main;
+    color = theme.colors.julkaistu;
   }
 
   return color;

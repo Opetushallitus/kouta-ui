@@ -32,9 +32,11 @@ const getFormValuesByHakukohde = hakukohde => {
     hakulomakeKuvaus,
     hakulomakeLinkki,
     kaytetaanHaunAlkamiskautta,
+    tila,
   } = hakukohde;
 
   return {
+    tila,
     alkamiskausi: {
       eriAlkamiskausi: !kaytetaanHaunAlkamiskautta,
       kausi: alkamiskausiKoodiUri,

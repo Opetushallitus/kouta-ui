@@ -9,11 +9,13 @@ const getFormValuesBySoraKuvaus = soraKuvaus => {
     koulutustyyppi,
     kielivalinta,
     metadata = {},
+    tila,
   } = soraKuvaus;
 
   const { kuvaus } = metadata;
 
   return {
+    tila,
     kieliversiot: kielivalinta || [],
     tiedot: {
       nimi: nimi || {},

@@ -12,7 +12,6 @@ import useAuthorizedUser from '../useAuthorizedUser';
 import HttpContext from '../HttpContext';
 import UrlContext from '../UrlContext';
 import isEmpty from '../../utils/isEmpty';
-import { JULKAISUTILA } from '../../constants';
 
 import {
   openSavingErrorToast,
@@ -53,54 +52,40 @@ const useSaveForm = ({ form, validate, submit }) => {
     [form, dispatch],
   );
 
-  const saveWithTila = useCallback(
-    async tila => {
-      const muokkaaja = get(user, 'oid');
-      const enhancedValues = { muokkaaja, tila, ...values };
+  const save = useCallback(async () => {
+    const muokkaaja = get(user, 'oid');
+    const enhancedValues = { muokkaaja, ...values };
 
-      startSubmit();
+    startSubmit();
 
-      const errors = await validate(enhancedValues);
+    const errors = await validate(enhancedValues);
 
-      if (!isEmpty(errors)) {
-        stopSubmit({ errors, errorToast: true });
-        return;
-      }
+    if (!isEmpty(errors)) {
+      stopSubmit({ errors, errorToast: true });
+      return;
+    }
 
-      try {
-        submit({ values: enhancedValues, httpClient, apiUrls });
-      } catch (e) {
-        stopSubmit({ errorToast: true });
-        return;
-      }
+    try {
+      submit({ values: enhancedValues, httpClient, apiUrls });
+    } catch (e) {
+      stopSubmit({ errorToast: true });
+      return;
+    }
 
-      stopSubmit({ successToast: true });
-    },
-    [
-      user,
-      values,
-      submit,
-      startSubmit,
-      stopSubmit,
-      validate,
-      httpClient,
-      apiUrls,
-    ],
-  );
-
-  const save = useCallback(() => saveWithTila(JULKAISUTILA.TALLENNETTU), [
-    saveWithTila,
+    stopSubmit({ successToast: true });
+  }, [
+    user,
+    values,
+    submit,
+    startSubmit,
+    stopSubmit,
+    validate,
+    httpClient,
+    apiUrls,
   ]);
-
-  const saveAndPublish = useCallback(
-    () => saveWithTila(JULKAISUTILA.JULKAISTU),
-    [saveWithTila],
-  );
 
   return {
     save,
-    saveAndPublish,
-    saveWithTila,
   };
 };
 

@@ -127,9 +127,13 @@ export const RadioGroup = ({
   let children = null;
 
   if (props.children) {
-    const childrenCount = React.Children.count(props.children);
+    const validChildren = React.Children.toArray(props.children).filter(c =>
+      React.isValidElement(c),
+    );
 
-    children = React.Children.map(props.children, (child, index) => {
+    const childrenCount = React.Children.count(validChildren);
+
+    children = React.Children.map(validChildren, (child, index) => {
       const checked = value !== undefined && child.props.value === value;
       const element = React.cloneElement(child, {
         checked,

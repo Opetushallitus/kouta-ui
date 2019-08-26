@@ -35,6 +35,7 @@ const CreateKoulutusPage = props => {
         kopioKoulutusOid={kopioKoulutusOid}
         johtaaTutkintoon={johtaaTutkintoon === 'true'}
         onSelectBase={selectBase}
+        showArkistoituTilaOption={false}
       />
     </FormPage>
   );

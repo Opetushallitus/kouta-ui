@@ -66,6 +66,7 @@ const StatusIcon = styled(Icon)`
 
 const LabelContainer = styled(Typography)`
   font-size: 1rem;
+  color: #313541;
 `;
 
 const LargeStatusTag = ({ status, children = null, ...props }) => {

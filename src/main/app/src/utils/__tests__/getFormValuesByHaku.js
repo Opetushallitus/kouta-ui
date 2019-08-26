@@ -5,6 +5,7 @@ import getFormValuesByHaku from '../getFormValuesByHaku';
 import { HAKULOMAKETYYPPI } from '../../constants';
 
 const baseHaku = {
+  tila: 'tallennettu',
   alkamiskausiKoodiUri: 'kausi_1#1',
   kielivalinta: ['fi', 'sv'],
   hakutapaKoodiUri: 'hakutapa_1#1',

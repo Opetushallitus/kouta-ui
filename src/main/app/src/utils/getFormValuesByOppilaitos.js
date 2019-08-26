@@ -21,10 +21,12 @@ const getFormValuesByOppilaitos = oppilaitos => {
       yksikoita,
       toimipisteita,
       akatemioita,
+      tila,
     },
   } = oppilaitos;
 
   return {
+    tila,
     osat: osat || [],
     esittely: mapValues(esittely || {}, parseEditorState),
     yhteystiedot: {

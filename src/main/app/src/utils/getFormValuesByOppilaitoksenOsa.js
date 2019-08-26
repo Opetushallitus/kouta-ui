@@ -14,10 +14,12 @@ const getFormValuesByOppilaitoksenOsa = oppilaitoksenOsa => {
       puhelinnumero,
       opiskelijoita,
       kampus,
+      tila,
     },
   } = oppilaitoksenOsa;
 
   return {
+    tila,
     esittely: mapValues(esittely || {}, parseEditorState),
     yhteystiedot: {
       osoite: osoite || {},

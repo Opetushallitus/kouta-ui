@@ -1,9 +1,7 @@
 import React, { useCallback } from 'react';
-import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 
 import Button from '../Button';
-import { JULKAISUTILA } from '../../constants';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
 import Flex from '../Flex';
@@ -12,12 +10,7 @@ import updateKoulutus from '../../utils/kouta/updateKoulutus';
 import useSaveForm from '../useSaveForm';
 import validateKoulutusForm from '../../utils/validateKoulutusForm';
 
-const PublishButton = styled(Button)`
-  margin-left: ${({ theme }) => theme.spacing.unit * 2}px;
-`;
-
 const EditKoulutusFooter = ({ koulutus, history }) => {
-  const { tila } = koulutus;
   const { t } = useTranslation();
 
   const submit = useCallback(
@@ -28,10 +21,6 @@ const EditKoulutusFooter = ({ koulutus, history }) => {
         koulutus: {
           ...koulutus,
           ...getKoulutusByFormValues(values),
-          tila:
-            koulutus.tila === JULKAISUTILA.JULKAISTU
-              ? koulutus.tila
-              : values.tila,
         },
       });
 
@@ -44,7 +33,7 @@ const EditKoulutusFooter = ({ koulutus, history }) => {
     [koulutus, history],
   );
 
-  const { save, saveAndPublish } = useSaveForm({
+  const { save } = useSaveForm({
     form: 'editKoulutusForm',
     submit,
     validate: validateKoulutusForm,
@@ -59,14 +48,6 @@ const EditKoulutusFooter = ({ koulutus, history }) => {
       >
         {t('yleiset.tallenna')}
       </Button>
-      {tila !== JULKAISUTILA.JULKAISTU ? (
-        <PublishButton
-          onClick={saveAndPublish}
-          {...getTestIdProps('tallennaJaJulkaiseKoulutusButton')}
-        >
-          {t('yleiset.tallennaJaJulkaise')}
-        </PublishButton>
-      ) : null}
     </Flex>
   );
 };

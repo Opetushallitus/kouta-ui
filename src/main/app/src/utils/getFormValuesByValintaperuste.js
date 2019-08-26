@@ -29,11 +29,13 @@ const getFormValuesByValintaperuste = valintaperuste => {
     metadata = {},
     koulutustyyppi = null,
     onkoJulkinen = false,
+    tila,
   } = valintaperuste;
 
   const { valintatavat = [], kuvaus = {}, sorakuvausId } = metadata;
 
   return {
+    tila,
     kieliversiot: kielivalinta,
     hakutapa: hakutapaKoodiUri,
     kohdejoukko: kohdejoukkoKoodiUri ? { value: kohdejoukkoKoodiUri } : null,

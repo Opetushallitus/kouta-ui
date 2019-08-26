@@ -162,11 +162,18 @@ export default {
     oppilaitoksenOsa: 'Oppilaitoksen osa',
     toteutukset: 'Toteutukset',
     nimeton: 'Nimetön',
+    valitseJulkaisutila: 'Valitse julkaisutila',
   },
   julkaisutilat: {
     tallennettu: 'Luonnos',
     julkaistu: 'Julkaistu',
     arkistoitu: 'Arkistoitu',
+  },
+  julkaisutilojenSelitteet: {
+    tallennettu: 'Luonnoksen tiedot näkyvät vain virkailijalle',
+    julkaistu: 'Julkaisemalla tiedot näytetään Opintopolussa',
+    arkistoitu:
+      'Arkistointi siirtää tiedot pois näkyvistä, mutta ei poista niitä',
   },
   validointivirheet: {
     syotaArvo: 'Syötä kentälle arvo',
@@ -259,6 +266,7 @@ export default {
     lisatiedotInfo:
       'Voit halutessasi lisätä vapaasti täytettäviä osioita, jotka antavat tarkempaa tietoa koulutuksesta.',
     valitseOsaamisala: 'Valitse osaamisala',
+    koulutuksenTila: 'Koulutuksen tila',
   },
   toteutuslomake: {
     toteutuksellaEiHakukohteita:

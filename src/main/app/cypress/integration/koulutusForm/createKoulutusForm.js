@@ -5,12 +5,19 @@ import {
   selectOption,
   fillTreeSelect,
   fillKoulutustyyppiSelect,
+  getRadio,
 } from '../../utils';
 
 import { stubKoulutusFormRoutes } from '../../koulutusFormUtils';
 
 const jatka = () => {
   cy.getByTestId('jatkaButton').click({ force: true });
+};
+
+const fillTilaSection = (tila = 'julkaistu') => {
+  cy.getByTestId('tilaSection').within(() => {
+    getRadio(tila, cy).check({ force: true });
+  });
 };
 
 const fillKoulutustyyppiSection = path => {
@@ -54,16 +61,16 @@ const fillLisatiedotSection = () => {
 };
 
 const tallenna = () => {
-  cy.getByTestId('tallennaJaJulkaiseKoulutusButton').click({ force: true });
+  cy.getByTestId('tallennaKoulutusButton').click({ force: true });
 };
 
-const fillJarjestajaSection = (jatkaArg = false) => {
+const fillJarjestajaSection = () => {
   cy.getByTestId('jarjestajaSection').within(() => {
     cy.getByTestId('jarjestajatSelection').within(() => {
       fillTreeSelect(['4.1.1.1.1.1'], cy);
     });
 
-    jatkaArg && jatka();
+    jatka();
   });
 };
 
@@ -71,6 +78,13 @@ const fillCommon = ({ koulutustyyppiPath }) => {
   fillKoulutustyyppiSection(koulutustyyppiPath);
   fillPohjaSection();
   fillKieliversiotSection();
+};
+
+const fillNakyvyysSection = () => {
+  cy.getByTestId('nakyvyysSection').within(() => {
+    getCheckbox(null, cy).click({ force: true });
+    jatka();
+  });
 };
 
 describe('createKoulutusForm', () => {
@@ -110,6 +124,8 @@ describe('createKoulutusForm', () => {
     fillLisatiedotSection();
 
     fillJarjestajaSection();
+
+    fillTilaSection();
 
     tallenna();
 
@@ -173,11 +189,11 @@ describe('createKoulutusForm', () => {
 
     fillLisatiedotSection();
 
-    fillJarjestajaSection(true);
+    fillJarjestajaSection();
 
-    cy.getByTestId('nakyvyysSection').within(() => {
-      getCheckbox(null, cy).click({ force: true });
-    });
+    fillNakyvyysSection();
+
+    fillTilaSection();
 
     tallenna();
 
@@ -186,7 +202,7 @@ describe('createKoulutusForm', () => {
     });
   });
 
-  it.only('should be able to create lukiokoulutus', () => {
+  it('should be able to create lukiokoulutus', () => {
     cy.route({
       method: 'PUT',
       url: '**/koulutus',
@@ -214,6 +230,8 @@ describe('createKoulutusForm', () => {
     fillLisatiedotSection();
 
     fillJarjestajaSection();
+
+    fillTilaSection();
 
     tallenna();
 

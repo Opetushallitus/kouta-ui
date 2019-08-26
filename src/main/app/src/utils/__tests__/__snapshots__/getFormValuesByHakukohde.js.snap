@@ -111,6 +111,7 @@ Object {
       "value": "vaatimus_2#1",
     },
   ],
+  "tila": "tallennettu",
   "valintakoe": Object {
     "tilaisuudet": Object {
       "tyyppi_1#1": Array [

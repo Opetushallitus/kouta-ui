@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 
 import Button from '../Button';
@@ -10,10 +9,6 @@ import useSaveForm from '../useSaveForm';
 import createKoulutus from '../../utils/kouta/createKoulutus';
 import validateKoulutusForm from '../../utils/validateKoulutusForm';
 import getKoulutusByFormValues from '../../utils/getKoulutusByFormValues';
-
-const SaveButton = styled(Button).attrs({ variant: 'outlined' })`
-  margin-right: ${({ theme }) => theme.spacing.unit * 2}px;
-`;
 
 const CreateKoulutusFooter = ({ organisaatioOid, history }) => {
   const { t } = useTranslation();
@@ -31,7 +26,7 @@ const CreateKoulutusFooter = ({ organisaatioOid, history }) => {
     [organisaatioOid, history],
   );
 
-  const { save, saveAndPublish } = useSaveForm({
+  const { save } = useSaveForm({
     form: 'createKoulutusForm',
     submit,
     validate: validateKoulutusForm,
@@ -39,15 +34,8 @@ const CreateKoulutusFooter = ({ organisaatioOid, history }) => {
 
   return (
     <Flex justifyEnd>
-      <SaveButton onClick={save} {...getTestIdProps('tallennaKoulutusButton')}>
+      <Button onClick={save} {...getTestIdProps('tallennaKoulutusButton')}>
         {t('yleiset.tallenna')}
-      </SaveButton>
-
-      <Button
-        onClick={saveAndPublish}
-        {...getTestIdProps('tallennaJaJulkaiseKoulutusButton')}
-      >
-        {t('yleiset.tallennaJaJulkaise')}
       </Button>
     </Flex>
   );

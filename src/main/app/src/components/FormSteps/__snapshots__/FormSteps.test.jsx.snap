@@ -38,7 +38,7 @@ exports[`renders correctly 1`] = `
   border: 3px solid;
   background-color: white;
   border-color: #cecece;
-  border-color: #2da0c7;
+  border-color: #159ecb;
 }
 
 .c8 {
@@ -60,7 +60,7 @@ exports[`renders correctly 1`] = `
   border: 3px solid;
   background-color: white;
   border-color: #cecece;
-  background-color: #2da0c7;
+  background-color: #159ecb;
   border-color: white;
 }
 
@@ -101,7 +101,7 @@ exports[`renders correctly 1`] = `
   color: #666666;
   font-size: 0.8rem;
   white-space: nowrap;
-  color: #2da0c7;
+  color: #159ecb;
 }
 
 .c5 {

@@ -17,6 +17,7 @@ import Flex from '../Flex';
 import NakyvyysSection from './NakyvyysSection';
 import useTranslation from '../useTranslation';
 import useFieldValue from '../useFieldValue';
+import JulkaisutilaSection from './JulkaisutilaSection';
 
 const PohjaFormCollapse = ({
   children,
@@ -50,6 +51,7 @@ const KoulutusForm = ({
   koulutus: koulutusProp = null,
   canEditKoulutustyyppi = true,
   johtaaTutkintoon = true,
+  showArkistoituTilaOption = true,
   onSelectBase = () => {},
 }) => {
   const { t } = useTranslation();
@@ -146,6 +148,16 @@ const KoulutusForm = ({
         {...getTestIdProps('nakyvyysSection')}
       >
         <NakyvyysSection name="julkinen" />
+      </FormCollapse>
+
+      <FormCollapse
+        header={t('koulutuslomake.koulutuksenTila')}
+        {...getTestIdProps('tilaSection')}
+      >
+        <JulkaisutilaSection
+          name="tila"
+          showArkistoitu={showArkistoituTilaOption}
+        />
       </FormCollapse>
 
       {isFunction(onAttachToteutus) ? (

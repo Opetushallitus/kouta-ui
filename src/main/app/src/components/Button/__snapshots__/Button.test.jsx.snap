@@ -24,20 +24,20 @@ exports[`renders correctly with color 1`] = `
   font-weight: 500;
   -webkit-text-decoration: none;
   text-decoration: none;
-  border-color: #2da0c7;
-  background-color: #2da0c7;
+  border-color: #159ecb;
+  background-color: #159ecb;
   color: #ffffff;
 }
 
 .c0:hover {
-  border-color: #3bacd3;
-  background-color: #3bacd3;
+  border-color: #17b0e2;
+  background-color: #17b0e2;
 }
 
 .c0:active {
-  border-color: #3bacd3;
-  background-color: #3bacd3;
-  box-shadow: 0 0 5px 0 #3bacd3;
+  border-color: #17b0e2;
+  background-color: #17b0e2;
+  box-shadow: 0 0 5px 0 #17b0e2;
 }
 
 <ForwardRef
@@ -142,20 +142,20 @@ exports[`renders correctly with variant 1`] = `
   font-weight: 500;
   -webkit-text-decoration: none;
   text-decoration: none;
-  border-color: #2da0c7;
-  background-color: #2da0c7;
+  border-color: #159ecb;
+  background-color: #159ecb;
   color: #ffffff;
 }
 
 .c0:hover {
-  border-color: #3bacd3;
-  background-color: #3bacd3;
+  border-color: #17b0e2;
+  background-color: #17b0e2;
 }
 
 .c0:active {
-  border-color: #3bacd3;
-  background-color: #3bacd3;
-  box-shadow: 0 0 5px 0 #3bacd3;
+  border-color: #17b0e2;
+  background-color: #17b0e2;
+  box-shadow: 0 0 5px 0 #17b0e2;
 }
 
 <ForwardRef
@@ -202,19 +202,19 @@ exports[`renders correctly with variant 2`] = `
   -webkit-text-decoration: none;
   text-decoration: none;
   background-color: transparent;
-  border-color: #2da0c7;
-  color: #2da0c7;
+  border-color: #159ecb;
+  color: #159ecb;
 }
 
 .c0:hover {
-  border-color: #3bacd3;
-  color: #3bacd3;
+  border-color: #17b0e2;
+  color: #17b0e2;
 }
 
 .c0:active {
-  border-color: #3bacd3;
-  color: #3bacd3;
-  box-shadow: 0 0 5px 0 #3bacd3;
+  border-color: #17b0e2;
+  color: #17b0e2;
+  box-shadow: 0 0 5px 0 #17b0e2;
 }
 
 <ForwardRef

@@ -4,7 +4,8 @@ import filterTree from './filterTree';
 const getOidMap = arr => {
   let map = {};
 
-  for (let value of arr) {
+  // eslint-disable-next-line
+  for (const value of arr) {
     if (isString(value)) {
       map[value] = true;
     }

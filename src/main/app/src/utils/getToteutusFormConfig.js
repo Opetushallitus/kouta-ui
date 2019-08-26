@@ -78,7 +78,14 @@ const baseConfig = {
           ),
         },
         stipendi: true,
-        alkamiskausi: true,
+        koulutuksenAlkamispaivaamara: {
+          validate: validateIfJulkaistu(eb =>
+            eb.validateExistence(
+              'jarjestamistiedot.koulutuksenAlkamispaivamaara',
+            ),
+          ),
+        },
+        koulutuksenPaattymispaivaamara: true,
         osiot: true,
         diplomi: true,
         kielivalikoima: true,
@@ -136,7 +143,8 @@ const commonJarjestamistiedotPaths = [
   'sections.jarjestamistiedot.fields.opetusaika',
   'sections.jarjestamistiedot.fields.maksullisuus',
   'sections.jarjestamistiedot.fields.stipendi',
-  'sections.jarjestamistiedot.fields.alkamiskausi',
+  'sections.jarjestamistiedot.fields.koulutuksenAlkamispaivaamara',
+  'sections.jarjestamistiedot.fields.koulutuksenPaattymispaivaamara',
   'sections.jarjestamistiedot.fields.osiot',
 ];
 

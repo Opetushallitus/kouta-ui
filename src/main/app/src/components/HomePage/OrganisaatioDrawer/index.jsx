@@ -188,7 +188,7 @@ const DrawerContent = ({
             {hasOphOption && (
               <>
                 <Typography variant="secondary" as="div" mb={1}>
-                  {t('yleiset.opetushallitus')}
+                  {t('etusivu.rekisterinpitaja')}
                 </Typography>
                 <OpetetushallitusOrganisaatioItem
                   favourite={ophIsFavourite}

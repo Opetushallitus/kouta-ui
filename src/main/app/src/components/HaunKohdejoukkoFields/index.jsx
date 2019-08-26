@@ -5,7 +5,7 @@ import { Field } from 'redux-form';
 import useKoodistoOptions from '../useKoodistoOptions';
 import useFieldValue from '../useFieldValue';
 import isKorkeakoulutusKohdejoukkoKoodiUri from '../../utils/isKorkeakoulutusKohdejoukkoKoodiUri';
-import { FormFieldRadioGroup } from '../FormFields';
+import { FormFieldRadioGroup, FormFieldSelect } from '../FormFields';
 import useTranslation from '../useTranslation';
 import { getThemeProp, spacing } from '../../theme';
 import { getTestIdProps } from '../../utils';
@@ -63,12 +63,13 @@ const HaunKohdejoukkoFields = ({
         />
       </KohdejoukkoFlexItem>
       {showTarkenteet && (
-        <FlexItem paddingLeft={4} {...getTestIdProps('tarkenne')}>
+        <FlexItem grow={1} paddingLeft={4} {...getTestIdProps('tarkenne')}>
           <Field
             label={tarkenneLabel}
-            component={FormFieldRadioGroup}
+            component={FormFieldSelect}
             options={tarkenneOptions}
             name={`${name}.tarkenne`}
+            isClearable
           />
         </FlexItem>
       )}

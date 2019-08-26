@@ -98,7 +98,7 @@ const getValintaperusteByFormValues = values => {
   );
 
   const koulutustyyppi = get(values, 'tyyppi') || null;
-  const soraKuvausId = get(values, 'soraKuvaus.value') || null;
+  const sorakuvausId = get(values, 'soraKuvaus.value') || null;
   const onkoJulkinen = Boolean(get(values, 'julkinen'));
 
   return {
@@ -116,7 +116,7 @@ const getValintaperusteByFormValues = values => {
       kielitaitovaatimukset: [],
       osaamistaustaKoodiUrit: [],
       kuvaus,
-      soraKuvausId,
+      sorakuvausId,
     },
   };
 };

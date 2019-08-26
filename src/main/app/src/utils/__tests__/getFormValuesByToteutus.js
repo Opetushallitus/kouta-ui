@@ -49,12 +49,8 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
         sv: 'Sv kuvaus',
       },
       opetus: {
-        alkamisaikaKuvaus: {
-          fi: 'Fi kausikuvaus',
-          sv: 'Sv kausikuvaus',
-        },
-        alkamiskausiKoodiUri: 'kausi_1#1',
-        alkamisvuosi: '2020',
+        koulutuksenAlkamispaivamaara: '2019-04-16T00:00:00Z',
+        koulutuksenPaattymispaivamaara: '2019-05-24T00:00:00Z',
         lisatiedot: [
           {
             otsikkoKoodiUri: 'osio_1#1',
@@ -107,6 +103,17 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
           fi: '20e',
           sv: '20kr',
         },
+        diplomiKoodiUrit: ['dipmlomi_1#1'],
+        diplomiKuvaus: {
+          fi: 'Fi diplomi',
+          sv: 'Sv diplomi',
+        },
+        A1JaA2Kielivalikoima: ['kieli_1#1'],
+        B2Kielivalikoima: ['kieli_2#1'],
+        B1Kielivalikoima: ['kieli_3#1'],
+        B3Kielivalikoima: ['kieli_4#1'],
+        aidinkieliKielivalikoima: ['kieli_5#1'],
+        muuKielivalikoima: ['kieli_6#1'],
       },
       osaamisalat: [
         {
@@ -176,17 +183,6 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
           },
         },
       ],
-      diplomiKoodiUrit: ['dipmlomi_1#1'],
-      diplomiKuvaus: {
-        fi: 'Fi diplomi',
-        sv: 'Sv diplomi',
-      },
-      A1JaA2Kielivalikoima: ['kieli_1#1'],
-      B2Kielivalikoima: ['kieli_2#1'],
-      B1Kielivalikoima: ['kieli_3#1'],
-      B3Kielivalikoima: ['kieli_4#1'],
-      aidinkieliKielivalikoima: ['kieli_5#1'],
-      muuKielivalikoima: ['kieli_6#1'],
       lukiolinjaKoodiUri: 'linja_1#1',
       jaksonKuvaus: {
         fi: 'Fi jakso',

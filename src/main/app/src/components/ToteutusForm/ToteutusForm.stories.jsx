@@ -17,7 +17,7 @@ const config = getToteutusFormConfig(KOULUTUSTYYPPI.LUKIOKOULUTUS);
 
 storiesOf('ToteutusForm', module)
   .addDecorator(makeLocalisationDecorator())
-  .addDecorator(makeStoreDecorator())
+  .addDecorator(makeStoreDecorator({ logging: true }))
   .addDecorator(makeApiDecorator())
   .add('Basic', () => (
     <ReduxForm form="toteutus">

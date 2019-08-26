@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import getYear from 'date-fns/get_year';
+import getYear from 'date-fns/getYear';
 
 import Select from '../Select';
 import { isNumeric } from '../../utils';

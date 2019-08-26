@@ -17,6 +17,13 @@ const getFormValuesByToteutus = toteutus => {
     ylemmanKorkeakoulututkinnonOsaamisalat: ylemmanKorkeakoulututkinnonOsaamisalatArg = [],
     alemmanKorkeakoulututkinnonOsaamisalat: alemmanKorkeakoulututkinnonOsaamisalatArg = [],
     yhteyshenkilot = [],
+    lukiolinjaKoodiUri,
+    jaksonKuvaus,
+  } = metadata;
+
+  const {
+    koulutuksenAlkamispaivamaara,
+    koulutuksenPaattymispaivamaara,
     diplomiKoodiUrit,
     diplomiKuvaus,
     A1JaA2Kielivalikoima,
@@ -25,9 +32,7 @@ const getFormValuesByToteutus = toteutus => {
     B2Kielivalikoima,
     B3Kielivalikoima,
     muuKielivalikoima,
-    lukiolinjaKoodiUri,
-    jaksonKuvaus,
-  } = metadata;
+  } = opetus;
 
   const osaamisalat = osaamisalatArg.map(({ koodi }) => koodi);
 
@@ -88,11 +93,6 @@ const getFormValuesByToteutus = toteutus => {
       maksullisuusKuvaus: get(opetus, 'maksullisuusKuvaus') || {},
       osiot,
       osioKuvaukset,
-      alkamiskausi: {
-        kausi: get(opetus, 'alkamiskausiKoodiUri') || '',
-        vuosi: { value: get(opetus, 'alkamisvuosi') || '' },
-      },
-      alkamiskausiKuvaus: get(opetus, 'alkamisaikaKuvaus') || {},
       onkoLukuvuosimaksua: get(opetus, 'onkoLukuvuosimaksua'),
       lukuvuosimaksu: get(opetus, 'lukuvuosimaksu') || {},
       lukuvuosimaksuKuvaus: get(opetus, 'lukuvuosimaksuKuvaus') || {},
@@ -109,6 +109,12 @@ const getFormValuesByToteutus = toteutus => {
       B2Kielet: (B2Kielivalikoima || []).map(value => ({ value })),
       B3Kielet: (B3Kielivalikoima || []).map(value => ({ value })),
       muutKielet: (muuKielivalikoima || []).map(value => ({ value })),
+      koulutuksenAlkamispaivamaara: koulutuksenAlkamispaivamaara
+        ? new Date(koulutuksenAlkamispaivamaara)
+        : '',
+      koulutuksenPaattymispaivamaara: koulutuksenPaattymispaivamaara
+        ? new Date(koulutuksenPaattymispaivamaara)
+        : '',
     },
     nayttamistiedot: {
       ammattinimikkeet: ammattinimikkeet.reduce((acc, curr) => {

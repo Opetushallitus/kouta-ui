@@ -34,7 +34,7 @@ const hasBeenRetried = error => {
 };
 
 const isAuthorizationError = error => {
-  return [401].includes(get(error, 'response.status'));
+  return get(error, 'response.status') === 401;
 };
 
 const withAuthorizationInterceptor = apiUrls => client => {

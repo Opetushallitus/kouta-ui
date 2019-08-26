@@ -4,6 +4,7 @@ import pick from 'lodash/pick';
 import { isNumeric } from './index';
 import getValintakoeFieldsData from './getValintakoeFieldsData';
 import getHakulomakeFieldsData from './getHakulomakeFieldsData';
+import isKorkeakoulutusKohdejoukkoKoodiUri from './isKorkeakoulutusKohdejoukkoKoodiUri';
 
 const getKielivalinta = values => get(values, 'kieliversiot') || [];
 
@@ -44,8 +45,12 @@ const getHakuByFormValues = values => {
   const nimi = pick(get(values, 'nimi'), kielivalinta);
 
   const kohdejoukkoKoodiUri = get(values, 'kohdejoukko.kohdejoukko') || null;
-  const kohdejoukonTarkenneKoodiUri =
-    get(values, 'kohdejoukko.tarkenne') || null;
+
+  const kohdejoukonTarkenneKoodiUri = isKorkeakoulutusKohdejoukkoKoodiUri(
+    kohdejoukkoKoodiUri,
+  )
+    ? get(values, 'kohdejoukko.tarkenne.value') || null
+    : null;
 
   const metadata = {
     tulevaisuudenAikataulu: (get(values, 'aikataulut.aikataulu') || []).map(

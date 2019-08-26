@@ -148,7 +148,7 @@ export const DatePickerInput = ({
       <DatePickerStyle />
       <DayPickerInput
         classNames={datePickerInputClassNames}
-        format="D.M.YYYY"
+        format="d.M.yyyy"
         selectedDay={value}
         value={value}
         component={Input}

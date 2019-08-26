@@ -1,8 +1,7 @@
 import toPairs from 'lodash/toPairs';
-import dateAndTime from 'date-and-time';
 import zipObject from 'lodash/zipObject';
 import pick from 'lodash/pick';
-import _formatDate from 'date-fns/format';
+import dateFnsformatDate from 'date-fns/format';
 import padStart from 'lodash/padStart';
 import memoizee from 'memoizee';
 import flowRight from 'lodash/flowRight';
@@ -20,7 +19,7 @@ export const isArray = value => Array.isArray(value);
 
 export const isValidDate = value => isDate(value) && !isNaN(value);
 
-export const formatDate = _formatDate;
+export const formatDate = dateFnsformatDate;
 
 export const isNumeric = value => {
   if (isNumber(value)) {
@@ -99,11 +98,17 @@ export const getInvalidTranslations = (
     .map(([language]) => language);
 };
 
-export const parseDate = (dateString, dateFormat) => {
-  return dateAndTime.parse(dateString, dateFormat);
-};
+export const getKoutaDateString = dateData => {
+  if (isValidDate(dateData)) {
+    return formatDate(dateData, `yyyy-MM-dd'T'HH:mm`);
+  }
 
-export const getKoutaDateString = ({ year, month, day, hour, minute }) => {
+  if (!isObject(dateData)) {
+    return null;
+  }
+
+  const { year, month, day, hour, minute } = dateData;
+
   return `${year}-${padStart(month, 2, '0')}-${padStart(day, 2, '0')}T${
     isNumeric(hour) ? padStart(hour, 2, '0') : '00'
   }:${isNumeric(minute) ? padStart(minute, 2, '0') : '00'}`;

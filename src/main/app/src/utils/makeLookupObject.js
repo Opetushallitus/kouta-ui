@@ -7,7 +7,8 @@ const makeLookupObject = arr => {
 
   const lookup = {};
 
-  for (let value of arr) {
+  // eslint-disable-next-line
+  for (const value of arr) {
     if (isString(value)) {
       lookup[value] = true;
     }

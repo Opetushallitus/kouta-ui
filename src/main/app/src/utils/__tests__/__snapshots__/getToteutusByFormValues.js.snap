@@ -72,12 +72,6 @@ Object {
       "aidinkieliKielivalikoima": Array [
         "kieli_3#1",
       ],
-      "alkamisaikaKuvaus": Object {
-        "fi": "Fi kausikuvaus",
-        "sv": "Sv kausikuvaus",
-      },
-      "alkamiskausiKoodiUri": "kausi_1#1",
-      "alkamisvuosi": "2020",
       "diplomiKoodiUrit": Array [
         "diplomi_1#1",
         "diplomi_2#1",
@@ -86,6 +80,8 @@ Object {
         "fi": "Fi diplomi",
         "sv": "Sv diplomi",
       },
+      "koulutuksenAlkamispaivamaara": "2019-04-16T00:00",
+      "koulutuksenPaattymispaivamaara": "2019-05-24T00:00",
       "lisatiedot": Array [
         Object {
           "otsikkoKoodiUri": "osio_1#1",

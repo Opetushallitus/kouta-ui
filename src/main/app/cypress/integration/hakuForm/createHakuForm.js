@@ -43,7 +43,7 @@ const fillKohdejoukkoSection = cy => {
     });
 
     cy.getByTestId('tarkenne').within(() => {
-      getRadio('haunkohdejoukontarkenne_0#1', cy).click({ force: true });
+      selectOption('haunkohdejoukontarkenne_0', cy);
     });
 
     jatka(cy);

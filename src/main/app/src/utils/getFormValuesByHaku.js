@@ -49,7 +49,9 @@ const getFormValuesByHaku = haku => {
     hakutapa: hakutapaKoodiUri,
     kohdejoukko: {
       kohdejoukko: kohdejoukkoKoodiUri,
-      tarkenne: kohdejoukonTarkenneKoodiUri,
+      tarkenne: kohdejoukonTarkenneKoodiUri
+        ? { value: kohdejoukonTarkenneKoodiUri }
+        : null,
     },
     hakulomake: getHakulomakeFieldsValues({
       hakulomaketyyppi,

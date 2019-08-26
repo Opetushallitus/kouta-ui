@@ -11,6 +11,8 @@ const getBaseFields = () => ({
       fi: 'Toteutuksen kuvaus',
     },
     opetus: {
+      koulutuksenAlkamispaivamaara: '2019-08-23T00:00',
+      koulutuksenPaattymispaivamaara: '2019-08-26T00:00',
       opetuskieliKoodiUrit: ['oppilaitoksenopetuskieli_1#1'],
       opetuskieletKuvaus: {
         fi: 'Opetuskieli kuvaus',
@@ -135,17 +137,19 @@ const getLukioFields = ({ tyyppi }) =>
   merge(getBaseFields(), {
     metadata: {
       tyyppi,
-      diplomiKoodiUrit: ['lukiodiplomit_1#1'],
-      diplomiKuvaus: {
-        fi: 'Fi diplomi',
-        sv: 'Sv diplomi',
+      opetus: {
+        diplomiKoodiUrit: ['lukiodiplomit_1#1'],
+        diplomiKuvaus: {
+          fi: 'Fi diplomi',
+          sv: 'Sv diplomi',
+        },
+        A1JaA2Kielivalikoima: ['kieli_1#1'],
+        B2Kielivalikoima: ['kieli_2#1'],
+        B1Kielivalikoima: ['kieli_3#1'],
+        B3Kielivalikoima: ['kieli_4#1'],
+        aidinkieliKielivalikoima: ['kieli_4#1'],
+        muuKielivalikoima: ['kieli_4#1'],
       },
-      A1JaA2Kielivalikoima: ['kieli_1#1'],
-      B2Kielivalikoima: ['kieli_2#1'],
-      B1Kielivalikoima: ['kieli_3#1'],
-      B3Kielivalikoima: ['kieli_4#1'],
-      aidinkieliKielivalikoima: ['kieli_4#1'],
-      muuKielivalikoima: ['kieli_4#1'],
       lukiolinjaKoodiUri: 'lukiolinjat_0#1',
       jaksonKuvaus: {
         fi: 'Fi jakso',

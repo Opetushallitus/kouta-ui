@@ -2,7 +2,7 @@ import get from 'lodash/get';
 import toPairs from 'lodash/toPairs';
 import pick from 'lodash/pick';
 
-import { isNumeric } from './index';
+import { isNumeric, getKoutaDateString } from './index';
 
 const getKielivalinta = values => get(values, 'kieliversiot') || [];
 
@@ -84,15 +84,6 @@ const getToteutusByFormValues = values => {
     get(values, 'jarjestamistiedot.maksullisuusKuvaus') || {},
     kielivalinta,
   );
-  const alkamiskausiKuvaus = pick(
-    get(values, 'jarjestamistiedot.alkamiskausiKuvaus') || {},
-    kielivalinta,
-  );
-  const alkamiskausiKoodiUri =
-    get(values, 'jarjestamistiedot.alkamiskausi.kausi') || null;
-
-  const alkamisvuosi =
-    get(values, 'jarjestamistiedot.alkamiskausi.vuosi.value') || null;
 
   const osiot = (get(values, 'jarjestamistiedot.osiot') || []).map(
     ({ value }) => ({
@@ -184,6 +175,14 @@ const getToteutusByFormValues = values => {
     kielivalinta,
   });
 
+  const koulutuksenAlkamispaivamaara = getKoutaDateString(
+    get(values, 'jarjestamistiedot.koulutuksenAlkamispaivamaara'),
+  );
+
+  const koulutuksenPaattymispaivamaara = getKoutaDateString(
+    get(values, 'jarjestamistiedot.koulutuksenPaattymispaivamaara'),
+  );
+
   return {
     nimi,
     tarjoajat,
@@ -202,9 +201,8 @@ const getToteutusByFormValues = values => {
         opetustapaKuvaus,
         opetusaikaKuvaus,
         maksullisuusKuvaus,
-        alkamisaikaKuvaus: alkamiskausiKuvaus,
-        alkamiskausiKoodiUri,
-        alkamisvuosi,
+        koulutuksenAlkamispaivamaara,
+        koulutuksenPaattymispaivamaara,
         onkoLukuvuosimaksua,
         lukuvuosimaksu,
         onkoStipendia,

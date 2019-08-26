@@ -1,17 +1,14 @@
-import { isArray } from './index';
+import { isArray, isObject } from './index';
+import tryParseJson from './tryParseJson';
 
 const getUserRoles = user => {
-  if (!user) {
+  if (!isObject(user) || !user.roles) {
     return [];
   }
 
-  try {
-    const roles = JSON.parse(user.roles);
+  const roles = tryParseJson(user.roles, []);
 
-    return isArray(roles) ? roles : [];
-  } catch (e) {
-    return [];
-  }
+  return isArray(roles) ? roles : [];
 };
 
 export default getUserRoles;

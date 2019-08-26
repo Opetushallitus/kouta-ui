@@ -47,14 +47,8 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
           sv: 'Sv kuvaus2',
         },
       },
-      alkamiskausi: {
-        kausi: 'kausi_1#1',
-        vuosi: { value: '2020' },
-      },
-      alkamiskausiKuvaus: {
-        fi: 'Fi kausikuvaus',
-        sv: 'Sv kausikuvaus',
-      },
+      koulutuksenAlkamispaivamaara: new Date('2019-04-16T00:00'),
+      koulutuksenPaattymispaivamaara: new Date('2019-05-24T00:00'),
       onkoStipendia: true,
       stipendinMaara: { fi: '20e', sv: '20kr' },
       stipendinKuvaus: {

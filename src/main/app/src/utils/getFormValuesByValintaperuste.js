@@ -31,7 +31,7 @@ const getFormValuesByValintaperuste = valintaperuste => {
     onkoJulkinen = false,
   } = valintaperuste;
 
-  const { valintatavat = [], kuvaus = {}, soraKuvausId } = metadata;
+  const { valintatavat = [], kuvaus = {}, sorakuvausId } = metadata;
 
   return {
     kieliversiot: kielivalinta,
@@ -62,9 +62,11 @@ const getFormValuesByValintaperuste = valintaperuste => {
       }),
     ),
     tyyppi: koulutustyyppi,
-    soraKuvaus: {
-      value: soraKuvausId,
-    },
+    soraKuvaus: sorakuvausId
+      ? {
+          value: sorakuvausId,
+        }
+      : null,
   };
 };
 

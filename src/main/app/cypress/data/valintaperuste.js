@@ -41,7 +41,7 @@ export default ({ tyyppi = 'amm' } = {}) => {
         },
       ],
       kielitaitovaatimukset: [],
-      soraKuvausId: '1',
+      sorakuvausId: '1',
       kuvaus: { fi: '<p>Loppukuvaus</p>' },
     },
     organisaatioOid: '1.2.246.562.10.594252633210',

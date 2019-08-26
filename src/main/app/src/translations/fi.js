@@ -4,9 +4,6 @@ export default {
     edellinen: 'Edellinen',
     tallenna: 'Tallenna',
     tallennaJaJulkaise: 'Tallenna ja julkaise',
-    tallennettu: 'Tallennettu',
-    julkaistu: 'Julkaistu',
-    arkistoitu: 'Arkistoitu',
     valitse: 'Valitse',
     nimi: 'Nimi',
     muokattuViimeksi: 'Muokattu viimeksi',
@@ -165,7 +162,11 @@ export default {
     oppilaitoksenOsa: 'Oppilaitoksen osa',
     toteutukset: 'Toteutukset',
     nimeton: 'Nimetön',
-    opetushallitus: 'Opetushallitus',
+  },
+  julkaisutilat: {
+    tallennettu: 'Luonnos',
+    julkaistu: 'Julkaistu',
+    arkistoitu: 'Arkistoitu',
   },
   validointivirheet: {
     syotaArvo: 'Syötä kentälle arvo',
@@ -210,7 +211,6 @@ export default {
     muuOsoite: 'Muu osoite',
   },
   etusivu: {
-    koulutuksetJaHaut: 'Koulutukset ja haut',
     luoUusiKoulutus: 'Luo uusi koulutus',
     luoUusiHaku: 'Luo uusi haku',
     luoUusiValintaperuste: 'Luo uusi valintaperuste',
@@ -227,6 +227,7 @@ export default {
     organisaatioitaEiLoytynyt:
       'Organisaatioita ei löytynyt. Yritä käyttää pidempää hakusanaa',
     haeOrganisaatioita: 'Hae organisaatioita',
+    rekisterinpitaja: 'Rekisterinpitäjä',
   },
   koulutuslomake: {
     koulutuksenTiedot: 'Koulutuksen tiedot',
@@ -275,7 +276,7 @@ export default {
     onkoOpetusMaksullista: 'Onko opetus maksullista?',
     onkoLukuvuosimaksua: 'Onko lukuvuosimaksua?',
     onkoStipenditKaytossa: 'Onko stipendit käytössä?',
-    koulutuksenAlkamiskausi: 'Koulutuksen alkamiskausi',
+    koulutuksenAjankohta: 'Koulutuksen ajankohta',
     ammattinimikkeet: 'Ammattinimikkeet',
     avainsanat: 'Avainsanat',
     toteutuksenJarjestaja: 'Missä järjestetään?',

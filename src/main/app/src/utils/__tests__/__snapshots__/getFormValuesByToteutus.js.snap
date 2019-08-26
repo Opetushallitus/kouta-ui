@@ -52,16 +52,6 @@ Object {
         "value": "kieli_5#1",
       },
     ],
-    "alkamiskausi": Object {
-      "kausi": "kausi_1#1",
-      "vuosi": Object {
-        "value": "2020",
-      },
-    },
-    "alkamiskausiKuvaus": Object {
-      "fi": "Fi kausikuvaus",
-      "sv": "Sv kausikuvaus",
-    },
     "diplomiKuvaus": Object {
       "fi": "Fi diplomi",
       "sv": "Sv diplomi",
@@ -71,6 +61,8 @@ Object {
         "value": "dipmlomi_1#1",
       },
     ],
+    "koulutuksenAlkamispaivamaara": 2019-04-16T00:00:00.000Z,
+    "koulutuksenPaattymispaivamaara": 2019-05-24T00:00:00.000Z,
     "kuvaus": Object {
       "fi": "Fi kuvaus",
       "sv": "Sv kuvaus",

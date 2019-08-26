@@ -64,7 +64,7 @@ const HakukohteetModal = ({
         <FlexItem grow={2}>
           <Spacing marginBottom={2}>
             <Field
-              name="toteutus"
+              name={`${fieldName}.toteutus`}
               options={toteutuksetOptions}
               component={FormFieldSelect}
               menuPortalTarget={document.body}

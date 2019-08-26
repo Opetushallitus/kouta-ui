@@ -192,3 +192,9 @@ export const fillKoulutustyyppiSelect = (path, cy) => {
     getRadio(option, cy).check({ force: true });
   });
 };
+
+export const fillDatePickerInput = value => {
+  cy.get('.DatePickerInput__')
+    .find('input')
+    .type(value, { force: true });
+};

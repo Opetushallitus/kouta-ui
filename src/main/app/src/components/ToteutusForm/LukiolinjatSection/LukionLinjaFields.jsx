@@ -8,6 +8,7 @@ import { getTestIdProps } from '../../../utils';
 
 const LukionLinjaFields = ({ name }) => {
   const { t } = useTranslation();
+
   const { options } = useKoodistoOptions({
     koodisto: 'lukiolinjat',
   });

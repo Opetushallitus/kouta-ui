@@ -49,8 +49,8 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
         sv: 'Sv kuvaus',
       },
       opetus: {
-        koulutuksenAlkamispaivamaara: '2019-04-16T00:00',
-        koulutuksenPaattymispaivamaara: '2019-05-24T00:00',
+        koulutuksenAlkamispaivamaara: '2019-04-16T00:00:00Z',
+        koulutuksenPaattymispaivamaara: '2019-05-24T00:00:00Z',
         lisatiedot: [
           {
             otsikkoKoodiUri: 'osio_1#1',

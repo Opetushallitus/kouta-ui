@@ -127,6 +127,13 @@ const baseConfig = {
         kuvaus: true,
       },
     },
+    julkaisutila: {
+      fields: {
+        julkaisutila: {
+          validate: eb => eb.validateExistence('tila'),
+        },
+      },
+    },
   },
 };
 
@@ -135,6 +142,7 @@ const commonConfigPaths = [
   'sections.kieliversiot',
   'sections.jarjestyspaikka',
   'sections.yhteystiedot',
+  'sections.julkaisutila',
 ];
 
 const commonJarjestamistiedotPaths = [

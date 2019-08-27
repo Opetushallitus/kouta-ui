@@ -82,7 +82,7 @@ const DatePickerStyle = createGlobalStyle`
     display: inline-block !important;
     transform: translateY(${getThemeProp('spacing.unit')}px);
     position: absolute;
-    z-index: 1;
+    z-index: ${getThemeProp('zIndices.datePicker')};
   }
 `;
 

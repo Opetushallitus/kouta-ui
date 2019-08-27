@@ -312,6 +312,7 @@ export default {
     valitseLukioLinja: 'Valitse lukio linja',
     valitseLinjanTarkenne: 'Valitse linjan tarkenne',
     jaksonKuvaus: 'Jakson kuvaus',
+    toteutuksenTila: 'Toteutuksen tila',
   },
   hakulomake: {
     haunNimi: 'Haun nimi',
@@ -334,6 +335,7 @@ export default {
     haullaEiHakukohteita: 'Tähän hakuun ei ole vielä liitetty hakukohteita',
     hakuunOnLiitettyHakukohteet:
       'Tähän hakuun on liitetty seuraavat hakukohteet',
+    haunTila: 'Haun tila',
   },
   hakukohdelomake: {
     toteutukseenLiitettyAlkamiskausi: 'Toteutukseen liitetty alkamiskausi',
@@ -368,6 +370,7 @@ export default {
     hakuunEiOleLiitettyLomaketta: 'Hakuun ei ole liitetty lomaketta',
     hakuunLiitettyLomake: 'Hakuun liitetty lomake',
     avaaLomake: 'Avaa lomake',
+    hakukohteenTila: 'Hakukohteen tila',
   },
   valintaperustelomake: {
     valintaperusteenPerustiedot: 'Valintaperusteen perustiedot',
@@ -403,12 +406,14 @@ export default {
     valintaperusteenNakyminen: 'Valintaperusteen näkyminen muille toimijoille',
     valitseValintaperusteenNakyminen:
       'Valitse näkyykö valintaperuste muille koulutustoimijoille',
+    valintaperusteenTila: 'Valintaperusteen tila',
   },
   soraKuvausLomake: {
     soraKuvauksenTiedot: 'SORA-kuvauksen tiedot',
     soraKuvausOnJulkinen: 'SORA-kuvaus on julkinen',
     soraKuvauksenNayttamiseenLiittyvatTiedot:
       'SORA-kuvauksen näyttämiseen liittyvät tiedot',
+    soraKuvauksenTila: 'SORA-kuvauksen tila',
   },
   oppilaitoslomake: {
     oppilaitoksenPerustiedot: 'Oppilaitoksen perustiedot',
@@ -436,6 +441,7 @@ export default {
     valitseLisattavaOsio: 'Valitse lisättävä osio',
     oppilaitoksenYhteystiedot: 'Oppilaitoksen yhteystiedot',
     yhteystiedotInfo: 'Anna oppilaitokselle tarvittavat yhteystiedot',
+    oppilaitoksenTila: 'Oppilaitoksen tila',
   },
   oppilaitoksenOsaLomake: {
     oppilaitoksenOsanPerustiedot: 'Oppilaitoksen osan perustiedot',
@@ -448,5 +454,6 @@ export default {
     oppilaitoksenOsanEsittely: 'Oppilaitoksen osan esittely',
     oppilaitoksenOsanYhteystiedot: 'Oppilaitoksen osan yhteystiedot',
     yhteystiedotInfo: 'Anna oppilaitokselle tarvittavat yhteystiedot',
+    oppilaitoksenOsanTila: 'Oppilaitoksen osan tila',
   },
 };

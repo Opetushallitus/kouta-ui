@@ -134,8 +134,9 @@ export const createTheme = () => {
       borderRadius: '4px',
     },
     zIndices: {
-      homeNavigation: 99,
-      modal: 999,
+      homeNavigation: 98,
+      modal: 99,
+      datePicker: 97,
     },
     contentMaxWidth: '1200px',
     radii,

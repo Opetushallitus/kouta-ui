@@ -151,6 +151,7 @@ const KoulutusForm = ({
       </FormCollapse>
 
       <FormCollapse
+        section="julkaisutila"
         header={t('koulutuslomake.koulutuksenTila')}
         {...getTestIdProps('tilaSection')}
       >

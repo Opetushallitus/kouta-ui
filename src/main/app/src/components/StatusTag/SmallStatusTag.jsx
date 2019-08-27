@@ -44,7 +44,7 @@ const getLabel = ({ children, tila, t }) => {
   return t(`julkaisutilat.${tila}`);
 };
 
-const TilaLabel = ({ children, status, color, ...props }) => {
+const SmallStatusTag = ({ children, status, color, ...props }) => {
   const { t } = useTranslation();
 
   return (
@@ -55,4 +55,4 @@ const TilaLabel = ({ children, status, color, ...props }) => {
   );
 };
 
-export default TilaLabel;
+export default SmallStatusTag;

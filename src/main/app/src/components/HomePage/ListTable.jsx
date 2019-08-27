@@ -5,7 +5,7 @@ import get from 'lodash/get';
 import Table, { TableHead, TableBody, TableRow, TableCell } from '../Table';
 import { getSortDirection, makeOnSort } from './utils';
 import Icon from '../Icon';
-import TilaLabel from './TilaLabel';
+import StatusTag from '../StatusTag';
 import { formatKoutaDateString, isFunction } from '../../utils';
 import useLanguage from '../useLanguage';
 
@@ -15,7 +15,7 @@ export const makeTilaColumn = t => ({
   title: t('yleiset.tila'),
   key: 'tila',
   sortable: true,
-  render: ({ tila }) => <TilaLabel tila={tila} />,
+  render: ({ tila }) => <StatusTag status={tila} />,
 });
 
 export const makeModifiedColumn = t => ({

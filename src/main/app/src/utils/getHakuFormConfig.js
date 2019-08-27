@@ -99,6 +99,13 @@ const baseConfig = {
         yhteyshenkilot: true,
       },
     },
+    julkaisutila: {
+      fields: {
+        julkaisutila: {
+          validate: eb => eb.validateExistence('tila'),
+        },
+      },
+    },
   },
 };
 

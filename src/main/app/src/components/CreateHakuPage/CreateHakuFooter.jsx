@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 
 import Button from '../Button';
@@ -10,10 +9,6 @@ import useSaveForm from '../useSaveForm';
 import createHaku from '../../utils/kouta/createHaku';
 import validateHakuForm from '../../utils/validateHakuForm';
 import getHakuByFormValues from '../../utils/getHakuByFormValues';
-
-const SaveButton = styled(Button).attrs({ variant: 'outlined' })`
-  margin-right: ${({ theme }) => theme.spacing.unit * 2}px;
-`;
 
 const CreateHakuFooter = ({ organisaatioOid, history }) => {
   const { t } = useTranslation();
@@ -31,7 +26,7 @@ const CreateHakuFooter = ({ organisaatioOid, history }) => {
     [organisaatioOid, history],
   );
 
-  const { save, saveAndPublish } = useSaveForm({
+  const { save } = useSaveForm({
     form: 'createHakuForm',
     submit,
     validate: validateHakuForm,
@@ -39,14 +34,8 @@ const CreateHakuFooter = ({ organisaatioOid, history }) => {
 
   return (
     <Flex justifyEnd>
-      <SaveButton onClick={save} {...getTestIdProps('tallennaHakuButton')}>
+      <Button onClick={save} {...getTestIdProps('tallennaHakuButton')}>
         {t('yleiset.tallenna')}
-      </SaveButton>
-      <Button
-        onClick={saveAndPublish}
-        {...getTestIdProps('tallennaJaJulkaiseHakuButton')}
-      >
-        {t('yleiset.tallennaJaJulkaise')}
       </Button>
     </Flex>
   );

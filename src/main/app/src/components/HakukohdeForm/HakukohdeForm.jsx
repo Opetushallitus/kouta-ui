@@ -13,6 +13,7 @@ import KuvausSection from './KuvausSection';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
 import useFieldValue from '../useFieldValue';
+import JulkaisutilaSection from './JulkaisutilaSection';
 
 const HakukohdeForm = ({
   steps = true,
@@ -21,6 +22,7 @@ const HakukohdeForm = ({
   haku,
   toteutus,
   koulutustyyppi = KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
+  showArkistoituTilaOption = true,
 }) => {
   const { t } = useTranslation();
   const kieliversiot = useFieldValue('kieliversiot');
@@ -101,6 +103,17 @@ const HakukohdeForm = ({
         {...getTestIdProps('liitteetSection')}
       >
         <LiitteetSection name="liitteet" organisaatioOid={organisaatioOid} />
+      </FormCollapse>
+
+      <FormCollapse
+        section="julkaisutila"
+        header={t('hakukohdelomake.hakukohteenTila')}
+        {...getTestIdProps('tilaSection')}
+      >
+        <JulkaisutilaSection
+          name="tila"
+          showArkistoitu={showArkistoituTilaOption}
+        />
       </FormCollapse>
     </FormCollapseGroup>
   );

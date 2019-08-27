@@ -112,6 +112,7 @@ const CreateHakukohdePage = props => {
             haku={data.haku}
             toteutus={data.toteutus}
             koulutustyyppi={koulutustyyppi}
+            showArkistoituTilaOption={false}
           />
         </>
       ) : (

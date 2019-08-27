@@ -191,6 +191,13 @@ const baseConfig = {
         },
       },
     },
+    julkaisutila: {
+      fields: {
+        julkaisutila: {
+          validate: eb => eb.validateExistence('tila'),
+        },
+      },
+    },
   },
 };
 

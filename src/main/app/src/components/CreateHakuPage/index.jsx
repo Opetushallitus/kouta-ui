@@ -33,7 +33,7 @@ const CreateHakuPage = props => {
         organisaatioOid={organisaatioOid}
         kopioHakuOid={kopioHakuOid}
         onSelectBase={selectBase}
-        showArkistoituOption={false}
+        showArkistoituTilaOption={false}
       />
     </FormPage>
   );

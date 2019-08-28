@@ -7,7 +7,7 @@ import { getThemeProp } from '../../theme';
 import { isFunction } from '../../utils';
 
 const Wrapper = styled.div`
-  z-index: ${getThemeProp('zIndices.modal')};
+  z-index: ${getThemeProp('zIndices.drawer')};
   position: fixed;
   top: 0px;
   left: 0px;
@@ -25,7 +25,6 @@ const Overlay = styled.div`
   z-index: 1;
 `;
 
-
 const Content = styled.div`
   height: 100vh;
   position: fixed;
@@ -34,7 +33,8 @@ const Content = styled.div`
   width: ${({ width }) => width};
   overflow-y: auto;
   z-index: 2;
-  box-shadow: 0px 8px 10px -5px rgba(0,0,0,0.2), 0px 16px 24px 2px rgba(0,0,0,0.14), 0px 6px 30px 5px rgba(0,0,0,0.12);
+  box-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.2),
+    0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12);
   background-color: white;
 `;
 
@@ -65,13 +65,7 @@ class DrawerDialog extends Component {
   }
 
   render() {
-    const {
-      children,
-      onClose,
-      overlayStyle,
-      contentStyle,
-      width,
-    } = this.props;
+    const { children, onClose, overlayStyle, contentStyle, width } = this.props;
 
     return createPortal(
       <Wrapper>
@@ -79,12 +73,9 @@ class DrawerDialog extends Component {
           style={overlayStyle}
           onClick={isFunction(onClose) ? onClose : nop}
         />
-          <Content
-            width={width}
-            style={contentStyle}
-          >
-            {children}
-          </Content>
+        <Content width={width} style={contentStyle}>
+          {children}
+        </Content>
       </Wrapper>,
       this.el,
     );

@@ -2,7 +2,11 @@ import React, { useMemo } from 'react';
 import get from 'lodash/get';
 
 import ReduxForm from '../ReduxForm';
-import OppilaitoksenOsaForm from '../OppilaitoksenOsaForm';
+
+import OppilaitoksenOsaForm, {
+  initialValues as formInitialValues,
+} from '../OppilaitoksenOsaForm';
+
 import getFormValuesByOppilaitoksenOsa from '../../utils/getFormValuesByOppilaitoksenOsa';
 import getOrganisaatioContactInfo from '../../utils/getOrganisaatioContactInfo';
 
@@ -15,6 +19,7 @@ const OppilaitoksenOsaPageForm = ({ organisaatio, oppilaitoksenOsa }) => {
 
   const initialValues = useMemo(
     () => ({
+      ...formInitialValues,
       yhteystiedot: {
         osoite: contactInfo.osoite || {},
         postinumero: contactInfo.postinumero || '',
@@ -28,9 +33,18 @@ const OppilaitoksenOsaPageForm = ({ organisaatio, oppilaitoksenOsa }) => {
     [oppilaitoksenOsa, contactInfo],
   );
 
+  const stepsEnabled = !oppilaitoksenOsa;
+  const showArkistoituTilaOption = !!oppilaitoksenOsa;
+
   return (
     <ReduxForm form="oppilaitoksenOsa" initialValues={initialValues}>
-      {() => <OppilaitoksenOsaForm organisaatioOid={organisaatioOid} steps />}
+      {() => (
+        <OppilaitoksenOsaForm
+          organisaatioOid={organisaatioOid}
+          steps={stepsEnabled}
+          showArkistoituTilaOption={showArkistoituTilaOption}
+        />
+      )}
     </ReduxForm>
   );
 };

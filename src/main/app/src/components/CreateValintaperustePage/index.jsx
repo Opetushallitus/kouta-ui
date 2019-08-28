@@ -34,6 +34,7 @@ const CreateValintaperustePage = props => {
         organisaatioOid={oid}
         kopioValintaperusteOid={kopioValintaperusteOid}
         onSelectBase={selectBase}
+        showArkistoituTilaOption={false}
       />
     </FormPage>
   );

@@ -12,6 +12,7 @@ import SoraKuvausSection from './SoraKuvausSection';
 import useFieldValue from '../useFieldValue';
 import PerustiedotSection from './PerustiedotSection';
 import JulkisuusSection from './JulkisuusSection';
+import JulkaisutilaSection from './JulkaisutilaSection';
 
 const PohjaFormCollapse = ({
   children,
@@ -43,6 +44,7 @@ const ValintaperusteForm = ({
   canCopy = true,
   organisaatioOid,
   onSelectBase,
+  showArkistoituTilaOption = true,
 }) => {
   const { t } = useTranslation();
   const kieliversiot = useFieldValue('kieliversiot');
@@ -105,6 +107,17 @@ const ValintaperusteForm = ({
         {...getTestIdProps('julkisuusSection')}
       >
         <JulkisuusSection name="julkinen" />
+      </FormCollapse>
+
+      <FormCollapse
+        section="julkaisutila"
+        header={t('valintaperustelomake.valintaperusteenTila')}
+        {...getTestIdProps('tilaSection')}
+      >
+        <JulkaisutilaSection
+          name="tila"
+          showArkistoitu={showArkistoituTilaOption}
+        />
       </FormCollapse>
     </FormCollapseGroup>
   );

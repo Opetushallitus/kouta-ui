@@ -34,6 +34,7 @@ const CreateSoraKuvausPage = props => {
         organisaatioOid={organisaatioOid}
         kopioSoraKuvausOid={kopioSoraKuvausOid}
         onSelectBase={selectBase}
+        showArkistoituTilaOption={false}
       />
     </FormPage>
   );

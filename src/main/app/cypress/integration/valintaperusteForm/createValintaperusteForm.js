@@ -1,5 +1,4 @@
 import {
-  getByTestId,
   getRadio,
   selectOption,
   typeToEditor,
@@ -11,72 +10,72 @@ import {
 
 import { stubValintaperusteFormRoutes } from '../../valintaperusteFormUtils';
 
-const jatka = cy => {
-  getByTestId('jatkaButton', cy).click({ force: true });
+const jatka = () => {
+  cy.getByTestId('jatkaButton').click({ force: true });
 };
 
-const tallenna = cy => {
-  getByTestId('tallennaJaJulkaiseValintaperusteButton', cy).click({
+const tallenna = () => {
+  cy.getByTestId('tallennaValintaperusteButton').click({
     force: true,
   });
 };
 
-const fillKoulutustyyppiSection = (path, cy) => {
+const fillKoulutustyyppiSection = path => {
   cy.getByTestId('tyyppiSection').within(() => {
     fillKoulutustyyppiSelect(path, cy);
   });
 };
 
-const fillPohjaSection = cy => {
-  getByTestId('pohjaSection', cy).within(() => {
-    jatka(cy);
+const fillPohjaSection = () => {
+  cy.getByTestId('pohjaSection').within(() => {
+    jatka();
   });
 };
 
-const fillKieliversiotSection = cy => {
-  getByTestId('kieliversiotSection', cy).within(() => {
+const fillKieliversiotSection = () => {
+  cy.getByTestId('kieliversiotSection').within(() => {
     chooseKieliversiotLanguages(['fi'], cy);
   });
 };
 
-const fillHakutavanRajausSection = cy => {
-  getByTestId('hakutapaSection', cy).within(() => {
+const fillHakutavanRajausSection = () => {
+  cy.getByTestId('hakutapaSection').within(() => {
     getRadio('hakutapa_0#1', cy).click({ force: true });
   });
 };
 
-const fillKohdejoukonRajausSection = cy => {
-  getByTestId('kohdejoukkoSection', cy).within(() => {
+const fillKohdejoukonRajausSection = () => {
+  cy.getByTestId('kohdejoukkoSection').within(() => {
     selectOption('haunkohdejoukko_0', cy);
   });
 };
 
-const lisaaSisaltoa = (tyyppi, cy) => {
-  getByTestId('sisaltoMenuToggle', cy).click({ force: true });
+const lisaaSisaltoa = tyyppi => {
+  cy.getByTestId('sisaltoMenuToggle').click({ force: true });
 
-  getByTestId('sisaltoMenu', cy)
+  cy.getByTestId('sisaltoMenu')
     .first()
     .within(() => {
       if (tyyppi === 'teksti') {
-        getByTestId('lisaaTekstia', cy).click({ force: true });
+        cy.getByTestId('lisaaTekstia').click({ force: true });
       } else if (tyyppi === 'taulukko') {
-        getByTestId('lisaaTaulukko', cy).click({ force: true });
+        cy.getByTestId('lisaaTaulukko').click({ force: true });
       }
     });
 };
 
-const fillValintatapaSection = cy => {
-  getByTestId('valintatapaSection', cy).within(() => {
-    getByTestId('valintatapalista', cy).within(() => {
-      getByTestId('tapa', cy).within(() => {
+const fillValintatapaSection = () => {
+  cy.getByTestId('valintatapaSection').within(() => {
+    cy.getByTestId('valintatapalista').within(() => {
+      cy.getByTestId('tapa').within(() => {
         selectOption('valintatapajono_0', cy);
       });
 
-      getByTestId('nimi', cy)
+      cy.getByTestId('nimi')
         .find('input')
         .type('Valintatavan nimi', { force: true });
 
-      getByTestId('sisalto', cy).within(() => {
+      cy.getByTestId('sisalto').within(() => {
         lisaaSisaltoa('teksti', cy);
 
         typeToEditor('Sisältötekstiä', cy);
@@ -88,23 +87,23 @@ const fillValintatapaSection = cy => {
           .type('Solu', { force: true });
       });
 
-      getByTestId('kynnysehto', cy)
+      cy.getByTestId('kynnysehto')
         .find('textarea')
         .type('Kynnysehto');
-      getByTestId('enimmaispistemaara', cy)
+      cy.getByTestId('enimmaispistemaara')
         .find('input')
         .type('100');
-      getByTestId('vahimmaispistemaara', cy)
+      cy.getByTestId('vahimmaispistemaara')
         .find('input')
         .type('10');
     });
 
-    jatka(cy);
+    jatka();
   });
 };
 
-const fillKuvausSection = cy => {
-  getByTestId('kuvausSection', cy).within(() => {
+const fillKuvausSection = () => {
+  cy.getByTestId('kuvausSection').within(() => {
     cy.getByTestId('nimi')
       .find('input')
       .type('Valintaperusteen nimi', { force: true });
@@ -113,37 +112,45 @@ const fillKuvausSection = cy => {
       typeToEditor('Kuvaus', cy);
     });
 
-    jatka(cy);
+    jatka();
   });
 };
 
-const fillSoraKuvausSection = cy => {
+const fillSoraKuvausSection = () => {
   cy.getByTestId('soraKuvausSection').within(() => {
     selectOption('Sora-kuvaus 1', cy);
 
-    jatka(cy);
+    jatka();
   });
 };
 
-const fillJulkisuusSection = cy => {
+const fillJulkisuusSection = () => {
   cy.getByTestId('julkisuusSection').within(() => {
     getCheckbox(null, cy).check({ force: true });
+    jatka();
   });
 };
 
-const fillPerustiedotSection = cy => {
+const fillPerustiedotSection = () => {
   cy.getByTestId('perustiedotSection').within(() => {
     fillKoulutustyyppiSection(['amm'], cy);
-    fillKieliversiotSection(cy);
-    fillHakutavanRajausSection(cy);
-    fillKohdejoukonRajausSection(cy);
+    fillKieliversiotSection();
+    fillHakutavanRajausSection();
+    fillKohdejoukonRajausSection();
 
-    jatka(cy);
+    jatka();
+  });
+};
+
+const fillTilaSection = (tila = 'julkaistu') => {
+  cy.getByTestId('tilaSection').within(() => {
+    getRadio(tila, cy).check({ force: true });
   });
 };
 
 describe('createValintaperusteForm', () => {
   const organisaatioOid = '1.1.1.1.1.1';
+  const createdValintaperusteId = '1.2.3.4.5.6';
 
   beforeEach(() => {
     stubValintaperusteFormRoutes({ cy, organisaatioOid });
@@ -156,21 +163,27 @@ describe('createValintaperusteForm', () => {
       method: 'PUT',
       url: '**/valintaperuste',
       response: {
-        oid: '1.2.3.4.5.6',
+        id: createdValintaperusteId,
       },
     }).as('createValintaperusteRequest');
 
-    fillPerustiedotSection(cy);
-    fillPohjaSection(cy);
-    fillKuvausSection(cy);
-    fillValintatapaSection(cy);
-    fillSoraKuvausSection(cy);
-    fillJulkisuusSection(cy);
+    fillPerustiedotSection();
+    fillPohjaSection();
+    fillKuvausSection();
+    fillValintatapaSection();
+    fillSoraKuvausSection();
+    fillJulkisuusSection();
+    fillTilaSection();
 
-    tallenna(cy);
+    tallenna();
 
     cy.wait('@createValintaperusteRequest').then(({ request }) => {
       cy.wrap(request.body).snapshot();
     });
+
+    cy.location('pathname').should(
+      'eq',
+      `/kouta/valintaperusteet/${createdValintaperusteId}/muokkaus`,
+    );
   });
 });

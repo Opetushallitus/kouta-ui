@@ -46,8 +46,6 @@ const KoulutusSelect = ({
     watch: koulutustyyppi,
   });
 
-  console.log(koulutustyyppi);
-
   const options = useMemo(() => {
     return data ? getOptions(data) : [];
   }, [data]);

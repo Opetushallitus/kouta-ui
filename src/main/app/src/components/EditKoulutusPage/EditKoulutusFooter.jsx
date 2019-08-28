@@ -41,11 +41,7 @@ const EditKoulutusFooter = ({ koulutus, history }) => {
 
   return (
     <Flex justifyEnd>
-      <Button
-        variant="outlined"
-        onClick={save}
-        {...getTestIdProps('tallennaKoulutusButton')}
-      >
+      <Button onClick={save} {...getTestIdProps('tallennaKoulutusButton')}>
         {t('yleiset.tallenna')}
       </Button>
     </Flex>

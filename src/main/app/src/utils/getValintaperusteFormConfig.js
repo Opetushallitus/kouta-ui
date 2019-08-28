@@ -71,6 +71,13 @@ const baseConfig = {
         julkisuus: true,
       },
     },
+    julkaisutila: {
+      fields: {
+        julkaisutila: {
+          validate: eb => eb.validateExistence('tila'),
+        },
+      },
+    },
   },
 };
 

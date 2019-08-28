@@ -4,6 +4,7 @@ import SoraKuvausForm, { initialValues } from '../SoraKuvausForm';
 import ReduxForm from '../ReduxForm';
 import { POHJAVALINTA } from '../../constants';
 import useSoraKuvaus from '../useSoraKuvaus';
+import getFormValuesBySoraKuvaus from '../../utils/getFormValuesBySoraKuvaus';
 
 const getCopyValues = soraKuvausId => ({
   pohja: {
@@ -16,6 +17,7 @@ const getInitialValues = soraKuvaus => {
   return soraKuvaus && soraKuvaus.id
     ? {
         ...getCopyValues(soraKuvaus.id),
+        ...getFormValuesBySoraKuvaus(soraKuvaus),
       }
     : initialValues;
 };
@@ -24,7 +26,7 @@ export const CreateSoraKuvausForm = ({ kopioSoraKuvausId, ...props }) => {
   const { soraKuvaus } = useSoraKuvaus(kopioSoraKuvausId);
 
   const initialValues = useMemo(() => {
-    getInitialValues(soraKuvaus);
+    return getInitialValues(soraKuvaus);
   }, [soraKuvaus]);
 
   return (

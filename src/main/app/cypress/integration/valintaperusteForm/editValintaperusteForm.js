@@ -1,17 +1,17 @@
 import merge from 'lodash/merge';
 
-import { getByTestId, chooseKieliversiotLanguages } from '../../utils';
+import { chooseKieliversiotLanguages } from '../../utils';
 import valintaperuste from '../../data/valintaperuste';
 import { stubValintaperusteFormRoutes } from '../../valintaperusteFormUtils';
 
-const fillKieliversiotSection = cy => {
-  getByTestId('kieliversiotSection', cy).within(() => {
+const fillKieliversiotSection = () => {
+  cy.getByTestId('kieliversiotSection').within(() => {
     chooseKieliversiotLanguages(['fi'], cy);
   });
 };
 
-const tallenna = cy => {
-  getByTestId('tallennaValintaperusteButton', cy).click({ force: true });
+const tallenna = () => {
+  cy.getByTestId('tallennaValintaperusteButton').click({ force: true });
 };
 
 describe('editValintaperusteForm', () => {
@@ -46,8 +46,8 @@ describe('editValintaperusteForm', () => {
       ),
     });
 
-    fillKieliversiotSection(cy);
-    tallenna(cy);
+    fillKieliversiotSection();
+    tallenna();
 
     cy.wait('@updateValintaperusteRequest').then(({ request }) => {
       cy.wrap(request.body).snapshot();

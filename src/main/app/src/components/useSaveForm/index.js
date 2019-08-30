@@ -1,5 +1,5 @@
-import { useCallback, useMemo, useContext } from 'react';
-import { useDispatch, useSelector, batch } from 'react-redux';
+import { useCallback, useContext } from 'react';
+import { useDispatch, batch, useStore } from 'react-redux';
 
 import {
   startSubmit as startSubmitAction,
@@ -23,15 +23,7 @@ const useSaveForm = ({ form, validate, submit }) => {
   const user = useAuthorizedUser();
   const httpClient = useContext(HttpContext);
   const apiUrls = useContext(UrlContext);
-
-  const selector = useMemo(
-    () => state => {
-      return get(state, ['form', form, 'values']) || {};
-    },
-    [form],
-  );
-
-  const values = useSelector(selector);
+  const store = useStore();
 
   const startSubmit = useCallback(() => {
     return dispatch(startSubmitAction(form));
@@ -53,6 +45,7 @@ const useSaveForm = ({ form, validate, submit }) => {
   );
 
   const save = useCallback(async () => {
+    const values = get(store.getState(), ['form', form, 'values']) || {};
     const muokkaaja = get(user, 'oid');
     const enhancedValues = { muokkaaja, ...values };
 
@@ -66,7 +59,7 @@ const useSaveForm = ({ form, validate, submit }) => {
     }
 
     try {
-      submit({ values: enhancedValues, httpClient, apiUrls });
+      await submit({ values: enhancedValues, httpClient, apiUrls });
     } catch (e) {
       stopSubmit({ errorToast: true });
       return;
@@ -75,13 +68,14 @@ const useSaveForm = ({ form, validate, submit }) => {
     stopSubmit({ successToast: true });
   }, [
     user,
-    values,
     submit,
     startSubmit,
     stopSubmit,
     validate,
     httpClient,
     apiUrls,
+    store,
+    form,
   ]);
 
   return {

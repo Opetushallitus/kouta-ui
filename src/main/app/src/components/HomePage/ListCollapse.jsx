@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Flex, { FlexItem } from '../Flex';
-import { UncontrolledCollapse } from '../Collapse';
+import Collapse from '../Collapse';
 import Icon from '../Icon';
 import Typography from '../Typography';
 import { getThemeProp, spacing } from '../../theme';
@@ -50,7 +50,7 @@ const ListCollapse = ({
   );
 
   return (
-    <UncontrolledCollapse
+    <Collapse
       toggleOnHeaderClick={toggleOnHeaderClick}
       header={collapseHeader}
       {...props}

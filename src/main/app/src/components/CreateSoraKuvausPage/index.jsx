@@ -7,6 +7,8 @@ import CreateSoraKuvausSteps from './CreateSoraKuvausSteps';
 import CreateSoraKuvausForm from './CreateSoraKuvausForm';
 import CreateSoraKuvausFooter from './CreateSoraKuvausFooter';
 import useSelectBase from '../useSelectBase';
+import Title from '../Title';
+import useTranslation from '../useTranslation';
 
 const CreateSoraKuvausPage = props => {
   const {
@@ -18,25 +20,28 @@ const CreateSoraKuvausPage = props => {
   } = props;
 
   const { kopioSoraKuvausOid = null } = queryString.parse(search);
-
+  const { t } = useTranslation();
   const selectBase = useSelectBase(history, {
     kopioParam: 'kopioSoraKuvausOid',
   });
 
   return (
-    <FormPage
-      header={<CreateSoraKuvausHeader />}
-      steps={<CreateSoraKuvausSteps />}
-      footer={<CreateSoraKuvausFooter organisaatioOid={organisaatioOid} />}
-    >
-      <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-      <CreateSoraKuvausForm
-        organisaatioOid={organisaatioOid}
-        kopioSoraKuvausOid={kopioSoraKuvausOid}
-        onSelectBase={selectBase}
-        showArkistoituTilaOption={false}
-      />
-    </FormPage>
+    <>
+      <Title>{t('sivuTitlet.uusiSoraKuvaus')}</Title>
+      <FormPage
+        header={<CreateSoraKuvausHeader />}
+        steps={<CreateSoraKuvausSteps />}
+        footer={<CreateSoraKuvausFooter organisaatioOid={organisaatioOid} />}
+      >
+        <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+        <CreateSoraKuvausForm
+          organisaatioOid={organisaatioOid}
+          kopioSoraKuvausOid={kopioSoraKuvausOid}
+          onSelectBase={selectBase}
+          showArkistoituTilaOption={false}
+        />
+      </FormPage>
+    </>
   );
 };
 

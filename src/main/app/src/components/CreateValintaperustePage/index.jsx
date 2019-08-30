@@ -7,6 +7,8 @@ import CreateValintaperusteSteps from './CreateValintaperusteSteps';
 import CreateValintaperusteForm from './CreateValintaperusteForm';
 import CreateValintaperusteFooter from './CreateValintaperusteFooter';
 import useSelectBase from '../useSelectBase';
+import Title from '../Title';
+import useTranslation from '../useTranslation';
 
 const CreateValintaperustePage = props => {
   const {
@@ -23,20 +25,25 @@ const CreateValintaperustePage = props => {
     kopioParam: 'kopioValintaperusteOid',
   });
 
+  const { t } = useTranslation();
+
   return (
-    <FormPage
-      header={<CreateValintaperusteHeader />}
-      steps={<CreateValintaperusteSteps />}
-      footer={<CreateValintaperusteFooter organisaatioOid={oid} />}
-    >
-      <OrganisaatioInfo organisaatioOid={oid} />
-      <CreateValintaperusteForm
-        organisaatioOid={oid}
-        kopioValintaperusteOid={kopioValintaperusteOid}
-        onSelectBase={selectBase}
-        showArkistoituTilaOption={false}
-      />
-    </FormPage>
+    <>
+      <Title>{t('sivuTitlet.uusiValintaperuste')}</Title>
+      <FormPage
+        header={<CreateValintaperusteHeader />}
+        steps={<CreateValintaperusteSteps />}
+        footer={<CreateValintaperusteFooter organisaatioOid={oid} />}
+      >
+        <OrganisaatioInfo organisaatioOid={oid} />
+        <CreateValintaperusteForm
+          organisaatioOid={oid}
+          kopioValintaperusteOid={kopioValintaperusteOid}
+          onSelectBase={selectBase}
+          showArkistoituTilaOption={false}
+        />
+      </FormPage>
+    </>
   );
 };
 

@@ -7,6 +7,8 @@ import CreateKoulutusSteps from './CreateKoulutusSteps';
 import CreateKoulutusForm from './CreateKoulutusForm';
 import CreateKoulutusFooter from './CreateKoulutusFooter';
 import useSelectBase from '../useSelectBase';
+import Title from '../Title';
+import useTranslation from '../useTranslation';
 
 const CreateKoulutusPage = props => {
   const {
@@ -18,26 +20,29 @@ const CreateKoulutusPage = props => {
   } = props;
 
   const selectBase = useSelectBase(history, { kopioParam: 'kopioKoulutusOid' });
-
+  const { t } = useTranslation();
   const { kopioKoulutusOid = null, johtaaTutkintoon = 'true' } = qs.parse(
     search,
   );
 
   return (
-    <FormPage
-      header={<CreateKoulutusHeader />}
-      steps={<CreateKoulutusSteps />}
-      footer={<CreateKoulutusFooter organisaatioOid={oid} />}
-    >
-      <OrganisaatioInfo organisaatioOid={oid} />
-      <CreateKoulutusForm
-        organisaatioOid={oid}
-        kopioKoulutusOid={kopioKoulutusOid}
-        johtaaTutkintoon={johtaaTutkintoon === 'true'}
-        onSelectBase={selectBase}
-        showArkistoituTilaOption={false}
-      />
-    </FormPage>
+    <>
+      <Title>{t('sivuTitlet.uusiKoulutus')}</Title>
+      <FormPage
+        header={<CreateKoulutusHeader />}
+        steps={<CreateKoulutusSteps />}
+        footer={<CreateKoulutusFooter organisaatioOid={oid} />}
+      >
+        <OrganisaatioInfo organisaatioOid={oid} />
+        <CreateKoulutusForm
+          organisaatioOid={oid}
+          kopioKoulutusOid={kopioKoulutusOid}
+          johtaaTutkintoon={johtaaTutkintoon === 'true'}
+          onSelectBase={selectBase}
+          showArkistoituTilaOption={false}
+        />
+      </FormPage>
+    </>
   );
 };
 

@@ -33,6 +33,7 @@ const getContainedColorCss = ({ color, theme }) => {
   const fontColor =
     get(theme, ['palette', color, 'contrastText']) ||
     theme.palette.primary.contrastText;
+
   const containColor =
     get(theme, ['palette', color, 'main']) || theme.palette.primary.main;
 

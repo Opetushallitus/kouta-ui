@@ -64,7 +64,6 @@ const OppilaitosForm = ({
       </FormCollapse>
 
       <FormCollapse
-        section="julkaisutila"
         header={t('oppilaitoslomake.oppilaitoksenTila')}
         {...getTestIdProps('tilaSection')}
       >

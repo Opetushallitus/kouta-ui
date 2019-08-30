@@ -9,6 +9,8 @@ import EditKoulutusFooter from './EditKoulutusFooter';
 import useApiAsync from '../useApiAsync';
 import getKoulutusByOid from '../../utils/kouta/getKoulutusByOid';
 import Spin from '../Spin';
+import Title from '../Title';
+import useTranslation from '../useTranslation';
 
 const EditKoulutusPage = props => {
   const {
@@ -29,9 +31,11 @@ const EditKoulutusPage = props => {
   });
 
   const organisaatioOid = koulutus ? koulutus.organisaatioOid : null;
+  const { t } = useTranslation();
 
   return (
     <>
+      <Title>{t('sivuTitlet.koulutuksenMuokkaus')}</Title>
       <FormPage
         header={<EditKoulutusHeader koulutus={koulutus} />}
         steps={<EditKoulutusSteps />}

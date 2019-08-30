@@ -38,7 +38,7 @@ const Content = styled.div`
   background-color: white;
 `;
 
-const nop = () => {};
+const noop = () => {};
 
 class DrawerDialog extends Component {
   static defaultProps = {
@@ -71,7 +71,7 @@ class DrawerDialog extends Component {
       <Wrapper>
         <Overlay
           style={overlayStyle}
-          onClick={isFunction(onClose) ? onClose : nop}
+          onClick={isFunction(onClose) ? onClose : noop}
         />
         <Content width={width} style={contentStyle}>
           {children}

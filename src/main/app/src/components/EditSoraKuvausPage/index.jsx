@@ -10,6 +10,8 @@ import useSoraKuvaus from '../useSoraKuvaus';
 import Spin from '../Spin';
 import { KOULUTUSTYYPPI } from '../../constants';
 import { isFunction } from '../../utils';
+import Title from '../Title';
+import useTranslation from '../useTranslation';
 
 const EditSoraKuvausPage = props => {
   const {
@@ -31,27 +33,32 @@ const EditSoraKuvausPage = props => {
   const koulutustyyppi =
     get(soraKuvaus, 'koulutustyyppi') || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
+  const { t } = useTranslation();
+
   return (
-    <FormPage
-      header={<EditSoraKuvausHeader soraKuvaus={soraKuvaus} />}
-      steps={<EditSoraKuvausSteps />}
-      footer={
-        soraKuvaus ? <EditSoraKuvausFooter soraKuvaus={soraKuvaus} /> : null
-      }
-    >
-      {organisaatioOid ? (
-        <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-      ) : null}
-      {soraKuvaus ? (
-        <EditSoraKuvausForm
-          soraKuvaus={soraKuvaus}
-          organisaatioOid={organisaatioOid}
-          koulutustyyppi={koulutustyyppi}
-        />
-      ) : (
-        <Spin center />
-      )}
-    </FormPage>
+    <>
+      <Title>{t('sivuTitlet.soraKuvauksenMuokkaus')}</Title>
+      <FormPage
+        header={<EditSoraKuvausHeader soraKuvaus={soraKuvaus} />}
+        steps={<EditSoraKuvausSteps />}
+        footer={
+          soraKuvaus ? <EditSoraKuvausFooter soraKuvaus={soraKuvaus} /> : null
+        }
+      >
+        {organisaatioOid ? (
+          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+        ) : null}
+        {soraKuvaus ? (
+          <EditSoraKuvausForm
+            soraKuvaus={soraKuvaus}
+            organisaatioOid={organisaatioOid}
+            koulutustyyppi={koulutustyyppi}
+          />
+        ) : (
+          <Spin center />
+        )}
+      </FormPage>
+    </>
   );
 };
 

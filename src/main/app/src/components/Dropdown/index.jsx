@@ -9,7 +9,7 @@ import { getThemeProp } from '../../theme';
 import { isFunction } from '../../utils';
 import memoizeOne from '../../utils/memoizeOne';
 
-export const DropdownMenu = styled.div`
+export const DropdownMenu = styled.div.attrs({ role: 'menu' })`
   width: 100%;
   min-width: 200px;
   border: 1px solid ${getThemeProp('palette.border')};
@@ -18,7 +18,7 @@ export const DropdownMenu = styled.div`
   background-color: white;
 `;
 
-export const DropdownMenuItem = styled.div`
+export const DropdownMenuItem = styled.div.attrs({ role: 'menuitem' })`
   display: block;
   width: 100%;
   white-space: nowrap;

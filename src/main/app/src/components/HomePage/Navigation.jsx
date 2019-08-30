@@ -162,7 +162,7 @@ const NavigationBase = ({
       <NavigationContainer {...getTestIdProps('navigaatio')}>
         <Container>
           <Box display="flex" justifyContent="space-between">
-            <Box display="flex" alignItems="flex-end">
+            <Box display="flex" alignItems="flex-end" as="nav">
               <NavigationItems
                 items={items}
                 activeItem={activeItem}

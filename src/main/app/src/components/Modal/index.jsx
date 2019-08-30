@@ -5,11 +5,11 @@ import { Transition } from 'react-spring';
 
 import { getThemeProp, spacing } from '../../theme';
 import Typography from '../Typography';
-import { isString, isFunction } from '../../utils';
+import { isString, isFunction, noop } from '../../utils';
 import Icon from '../Icon';
-import Flex, { FlexItem } from '../Flex';
+import Box from '../Box';
 
-const Wrapper = styled.div`
+const Wrapper = styled.div.attrs({ role: 'dialog' })`
   z-index: ${getThemeProp('zIndices.modal')};
   position: fixed;
   top: 0px;
@@ -56,24 +56,12 @@ const Content = styled.div`
     `}
 `;
 
-const HeaderBase = styled.div`
-  background-color: ${getThemeProp('palette.primary.main')};
-
-  ${({ isStringChildren }) =>
-    isStringChildren &&
-    css`
-      padding: ${spacing(2)};
-    `}
-`;
-
-const HeaderTypography = styled(Typography).attrs({
-  variant: 'h5',
-})`
-  color: white;
+const HeaderWrapper = styled(Box)`
+  border-bottom: 1px solid ${getThemeProp('palette.divider')};
 `;
 
 const Footer = styled.div`
-  border-top: 1px solid ${getThemeProp('palette.border')};
+  border-top: 1px solid ${getThemeProp('palette.divider')};
   padding: ${spacing(2)};
 `;
 
@@ -88,37 +76,39 @@ const BodyWrapper = styled.div`
     `}
 `;
 
-const Body = styled.div`
-  padding: ${spacing(2)};
-`;
-
-const CloseIcon = styled(Icon).attrs({ type: 'close' })`
+const CloseIcon = styled(Icon).attrs({ type: 'close', role: 'button' })`
   cursor: pointer;
-  color: white;
-`;
+  color: ${getThemeProp('palette.text.dark')};
+  opacity: 0.8;
+  transition: opacity 0.25s;
 
-const nop = () => {};
+  &:hover {
+    opacity: 1;
+  }
+`;
 
 const Header = ({ children, onClose }) => {
   const isStringChildren = isString(children);
 
   return (
-    <HeaderBase isStringChildren={isStringChildren}>
-      <Flex alignCenter>
-        <FlexItem grow={1}>
-          {isStringChildren ? (
-            <HeaderTypography>{children}</HeaderTypography>
-          ) : (
-            children
-          )}
-        </FlexItem>
-        {isFunction(onClose) ? (
-          <FlexItem grow={0} paddingLeft={2}>
-            <CloseIcon onClick={onClose} />
-          </FlexItem>
-        ) : null}
-      </Flex>
-    </HeaderBase>
+    <HeaderWrapper
+      p={isStringChildren ? 2 : 0}
+      display="flex"
+      alignItems="center"
+    >
+      <Box flexGrow="1">
+        {isStringChildren ? (
+          <Typography variant="h5">{children}</Typography>
+        ) : (
+          children
+        )}
+      </Box>
+      {isFunction(onClose) ? (
+        <Box flexGrow="0" pl={2}>
+          <CloseIcon onClick={onClose} />
+        </Box>
+      ) : null}
+    </HeaderWrapper>
   );
 };
 
@@ -164,7 +154,7 @@ class ModalDialog extends Component {
       <Wrapper>
         <Overlay
           style={overlayStyle}
-          onClick={isFunction(onClose) ? onClose : nop}
+          onClick={isFunction(onClose) ? onClose : noop}
         />
         <ContentWrapper>
           <Content
@@ -175,7 +165,7 @@ class ModalDialog extends Component {
             {header ? <Header onClose={onClose}>{header}</Header> : null}
             {children ? (
               <BodyWrapper minHeight={minHeight}>
-                <Body>{children}</Body>
+                <Box p={2}>{children}</Box>
               </BodyWrapper>
             ) : null}
             {footer ? <Footer>{footer}</Footer> : null}

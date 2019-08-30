@@ -6,7 +6,7 @@ import { Transition } from 'react-spring';
 import { getThemeProp } from '../../theme';
 import { isFunction } from '../../utils';
 
-const Wrapper = styled.div`
+const Wrapper = styled.div.attrs({ role: 'dialog' })`
   z-index: ${getThemeProp('zIndices.drawer')};
   position: fixed;
   top: 0px;

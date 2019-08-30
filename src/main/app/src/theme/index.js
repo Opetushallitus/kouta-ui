@@ -9,6 +9,8 @@ export const media = generateMedia({
   small: breakpoints[0],
 });
 
+const headingScale = [3, 2.5, 2, 1.5, 1.25, 1];
+
 const createHeadingTypography = ({
   sizes,
   fontFamily,
@@ -17,10 +19,12 @@ const createHeadingTypography = ({
   fontWeight,
 }) => {
   return sizes.reduce((acc, curr, index) => {
-    acc[`h${index + 1}`] = {
+    const key = `h${index + 1}`;
+
+    acc[key] = {
       color,
       fontFamily,
-      fontSize: `${curr}rem`,
+      fontSize: sizes[key],
       fontWeight,
       lineHeight,
     };
@@ -49,8 +53,19 @@ export const createTheme = () => {
     main: fontFamily,
   };
 
+  const fontSizes = {
+    body: '1rem',
+    ...headingScale.reduce((acc, curr, index) => {
+      return {
+        [`h${index + 1}`]: `${curr}rem`,
+        ...acc,
+      };
+    }, {}),
+    secondary: '0.85rem',
+  };
+
   const headingTypography = createHeadingTypography({
-    sizes: [3, 2.5, 2, 1.5, 1.25, 1],
+    sizes: fontSizes,
     fontFamily,
     color: textDarkColor,
     lineHeight: 1.2,
@@ -110,15 +125,15 @@ export const createTheme = () => {
     typography: {
       fontFamily,
       lineHeight: 1.5,
-      fontSize: '1rem',
+      fontSize: fontSizes.body,
       body: {
-        fontSize: '1rem',
+        fontSize: fontSizes.body,
         color: textPrimaryColor,
         lineHeight: 1.5,
         fontFamily,
       },
       secondary: {
-        fontSize: '0.85rem',
+        fontSize: fontSizes.secondary,
         color: textSecondaryColor,
         lineHeight: 1.5,
         fontFamily,
@@ -147,6 +162,7 @@ export const createTheme = () => {
     },
     fontWeights,
     fonts,
+    fontSizes,
     shadows: ['none', '0 2px 8px rgba(0,0,0,0.15)'],
   };
 

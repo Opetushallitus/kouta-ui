@@ -32,7 +32,7 @@ import OpetetushallitusOrganisaatioItem from './OpetushallitusOrganisaatioItem';
 import Box from '../../Box';
 import Divider from '../../Divider';
 
-const CloseIcon = styled(Icon).attrs({ type: 'close' })`
+const CloseIcon = styled(Icon).attrs({ type: 'close', role: 'button' })`
   color: ${getThemeProp('palette.text.primary')};
   opacity: 0.75;
   transition: opacity 0.25s;

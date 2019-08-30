@@ -18,11 +18,7 @@ import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
 import { spacing } from '../../theme';
 
-import {
-  UncontrolledDropdown,
-  DropdownMenu,
-  DropdownMenuItem,
-} from '../Dropdown';
+import Dropdown, { DropdownMenu, DropdownMenuItem } from '../Dropdown';
 
 const MoveButton = SortableHandle(props => (
   <div>
@@ -71,8 +67,8 @@ const AddContentDropdown = ({ onAdd }) => {
   );
 
   return (
-    <UncontrolledDropdown overlay={overlay}>
-      {({ onToggle, visible, ref }) => (
+    <Dropdown overlay={overlay}>
+      {({ onToggle, ref }) => (
         <div ref={ref} style={{ display: 'inline-block' }}>
           <Button
             onClick={onToggle}
@@ -85,7 +81,7 @@ const AddContentDropdown = ({ onAdd }) => {
           </Button>
         </div>
       )}
-    </UncontrolledDropdown>
+    </Dropdown>
   );
 };
 

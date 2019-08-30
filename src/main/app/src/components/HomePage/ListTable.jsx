@@ -9,7 +9,7 @@ import StatusTag from '../StatusTag';
 import { formatKoutaDateString, isFunction } from '../../utils';
 import useLanguage from '../useLanguage';
 
-import { UncontrolledDropdown } from '../Dropdown';
+import Dropdown from '../Dropdown';
 
 export const makeTilaColumn = t => ({
   title: t('yleiset.tila'),
@@ -52,17 +52,13 @@ const ActionsIcon = styled(Icon).attrs({ type: 'more_horiz' })`
 
 const ActionsDropdown = ({ actionsMenu }) => {
   return (
-    <UncontrolledDropdown
-      overlay={actionsMenu}
-      portalTarget={document.body}
-      overflow
-    >
-      {({ ref, onToggle, visible }) => (
+    <Dropdown overlay={actionsMenu} portalTarget={document.body} overflow>
+      {({ ref, onToggle, open }) => (
         <div ref={ref} onClick={onToggle} style={{ display: 'inline-block' }}>
-          <ActionsIcon active={visible} />
+          <ActionsIcon active={open} />
         </div>
       )}
-    </UncontrolledDropdown>
+    </Dropdown>
   );
 };
 

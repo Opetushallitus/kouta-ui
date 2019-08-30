@@ -16,11 +16,7 @@ import {
   setColumnFieldValue,
 } from './utils';
 
-import {
-  DropdownMenu,
-  DropdownMenuItem,
-  UncontrolledDropdown,
-} from '../Dropdown';
+import Dropdown, { DropdownMenu, DropdownMenuItem } from '../Dropdown';
 
 import useTranslation from '../useTranslation';
 
@@ -131,7 +127,7 @@ const EditColumn = ({
   );
 
   return (
-    <UncontrolledDropdown
+    <Dropdown
       overlay={overlay}
       portalTarget={document.body}
       overflow={overflow}
@@ -141,7 +137,7 @@ const EditColumn = ({
           <EditColumnBase {...props} />
         </div>
       )}
-    </UncontrolledDropdown>
+    </Dropdown>
   );
 };
 
@@ -178,7 +174,7 @@ const EditRow = ({
   );
 
   return (
-    <UncontrolledDropdown
+    <Dropdown
       overlay={overlay}
       portalTarget={document.body}
       overflow={overflow}
@@ -188,7 +184,7 @@ const EditRow = ({
           <EditRowBase isHeader={isHeader} {...props} />
         </div>
       )}
-    </UncontrolledDropdown>
+    </Dropdown>
   );
 };
 

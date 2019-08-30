@@ -7,11 +7,7 @@ import Button from '../Button';
 import { getKoutaToteutukset } from '../../apiUtils';
 import Flex, { FlexItem } from '../Flex';
 import Select from '../Select';
-import {
-  UncontrolledDropdown,
-  DropdownMenu,
-  DropdownMenuItem,
-} from '../Dropdown';
+import Dropdown, { DropdownMenu, DropdownMenuItem } from '../Dropdown';
 import Icon from '../Icon';
 import { getFirstLanguageValue } from '../../utils';
 import Spacing from '../Spacing';
@@ -27,7 +23,7 @@ const renderBaseDropdownField = ({ input, onSave, t }) => {
   const { onChange } = input;
 
   return (
-    <UncontrolledDropdown
+    <Dropdown
       overlay={
         <DropdownMenu>
           <DropdownMenuItem
@@ -44,15 +40,15 @@ const renderBaseDropdownField = ({ input, onSave, t }) => {
         </DropdownMenu>
       }
     >
-      {({ ref, onToggle, visible }) => (
+      {({ ref, onToggle, open }) => (
         <div ref={ref}>
           <DropdownButton onClick={onToggle} type="button">
             {t('yleiset.valitsePohja')}{' '}
-            <Icon type={visible ? 'arrow_drop_up' : 'arrow_drop_down'} />
+            <Icon type={open ? 'arrow_drop_up' : 'arrow_drop_down'} />
           </DropdownButton>
         </div>
       )}
-    </UncontrolledDropdown>
+    </Dropdown>
   );
 };
 

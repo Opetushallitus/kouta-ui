@@ -26,11 +26,7 @@ import useTranslation from '../useTranslation';
 import { spacing, getThemeProp } from '../../theme';
 import scrollElementIntoView from '../../utils/scrollElementIntoView';
 
-import {
-  UncontrolledDropdown,
-  DropdownMenu,
-  DropdownMenuItem,
-} from '../Dropdown';
+import Dropdown, { DropdownMenu, DropdownMenuItem } from '../Dropdown';
 
 const NavigationContainer = styled.div`
   background-color: white;
@@ -123,11 +119,11 @@ const NavigationItems = ({ items, activeItem, maxInlineItems }) => {
       ))}
       {moreItems.length > 0 && (
         <NavigationItem>
-          <UncontrolledDropdown overlay={moreItemsOverlay} overflow>
+          <Dropdown overlay={moreItemsOverlay} overflow>
             {({ ref, onToggle }) => (
               <Icon type="more_horiz" ref={ref} onClick={onToggle} />
             )}
-          </UncontrolledDropdown>
+          </Dropdown>
         </NavigationItem>
       )}
     </Box>

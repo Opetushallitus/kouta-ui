@@ -18,7 +18,7 @@ const createHeadingTypography = ({
   lineHeight,
   fontWeight,
 }) => {
-  return sizes.reduce((acc, curr, index) => {
+  return headingScale.reduce((acc, curr, index) => {
     const key = `h${index + 1}`;
 
     acc[key] = {

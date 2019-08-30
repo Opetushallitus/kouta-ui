@@ -1,3 +1,5 @@
+import 'draft-js/dist/Draft.css';
+
 import React, {
   useCallback,
   useMemo,
@@ -8,8 +10,6 @@ import React, {
 
 import styled, { css } from 'styled-components';
 import { setLightness } from 'polished';
-
-import 'draft-js/dist/Draft.css';
 
 import {
   Editor as DraftEditor,

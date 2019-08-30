@@ -129,6 +129,9 @@
                             <goal>npm</goal>
                         </goals>
                         <configuration>
+                            <environmentVariables>
+                                <CI>false</CI>
+                            </environmentVariables>
                             <arguments>run build</arguments>
                         </configuration>
                     </execution>

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-.c4 {
+.c3 {
   font-family: 'Roboto',sans-serif;
   color: #666666;
   line-height: 1.5;
@@ -12,10 +12,16 @@ exports[`renders correctly 1`] = `
   font-size: 1.25rem;
   font-weight: 500;
   line-height: 1.2;
+  padding: 24px;
+}
+
+.c6 {
+  font-size: 1.5rem;
 }
 
 .c7 {
-  font-size: 1.5rem;
+  box-sizing: border-box;
+  padding: 24px;
 }
 
 .c0 {
@@ -23,7 +29,7 @@ exports[`renders correctly 1`] = `
   background-color: white;
 }
 
-.c5 {
+.c4 {
   -webkit-flex: 0;
   -ms-flex: 0;
   flex: 0;
@@ -63,23 +69,14 @@ exports[`renders correctly 1`] = `
   cursor: pointer;
 }
 
-.c9 {
+.c8 {
   padding: 24px;
   border-top: 1px solid #cccccc;
 }
 
-.c6 {
-  color: #666666;
-  font-size: 2rem;
-}
-
-.c8 {
-  padding: 24px;
-}
-
-.c3 {
+.c5 {
   color: #2a2a2a;
-  padding: 24px;
+  font-size: 2rem;
 }
 
 <styled.div
@@ -103,34 +100,34 @@ exports[`renders correctly 1`] = `
             className="c2"
             onClick={[Function]}
           >
-            <Styled(Typography)>
-              <styled.span
-                as="h5"
+            <styled.span
+              as="h5"
+              p={3}
+              variant="h5"
+            >
+              <h5
                 className="c3"
-                variant="h5"
               >
-                <h5
-                  className="c3 c4"
-                >
-                  Text header
-                </h5>
-              </styled.span>
-            </Styled(Typography)>
+                Text header
+              </h5>
+            </styled.span>
           </div>
         </styled.div>
         <styled.div
           onClick={[Function]}
         >
           <div
-            className="c5"
+            className="c4"
             onClick={[Function]}
           >
             <Styled(DropdownIcon)
               icon="expand_more"
               open={true}
+              role="button"
             >
               <ForwardRef
-                className="c6"
+                className="c5"
+                role="button"
                 style={
                   Object {
                     "transform": "rotate(180deg)",
@@ -139,7 +136,8 @@ exports[`renders correctly 1`] = `
                 type="expand_more"
               >
                 <styled.i
-                  className="material-icons c6"
+                  className="material-icons c5"
+                  role="button"
                   style={
                     Object {
                       "transform": "rotate(180deg)",
@@ -147,7 +145,8 @@ exports[`renders correctly 1`] = `
                   }
                 >
                   <i
-                    className="material-icons c6 c7"
+                    className="material-icons c5 c6"
+                    role="button"
                     style={
                       Object {
                         "transform": "rotate(180deg)",
@@ -172,9 +171,11 @@ exports[`renders correctly 1`] = `
         }
       }
     >
-      <styled.div>
+      <styled.div
+        p={3}
+      >
         <div
-          className="c8"
+          className="c7"
         >
           <div>
             Collapse children
@@ -183,7 +184,7 @@ exports[`renders correctly 1`] = `
       </styled.div>
       <styled.div>
         <div
-          className="c9"
+          className="c8"
         >
           <button>
             Footer button
@@ -198,6 +199,11 @@ exports[`renders correctly 1`] = `
 exports[`renders correctly 2`] = `
 .c5 {
   font-size: 1.5rem;
+}
+
+.c6 {
+  box-sizing: border-box;
+  padding: 24px;
 }
 
 .c0 {
@@ -251,12 +257,8 @@ exports[`renders correctly 2`] = `
 }
 
 .c4 {
-  color: #666666;
+  color: #2a2a2a;
   font-size: 2rem;
-}
-
-.c6 {
-  padding: 24px;
 }
 
 <styled.div
@@ -295,9 +297,11 @@ exports[`renders correctly 2`] = `
             <Styled(DropdownIcon)
               icon="expand_more"
               open={true}
+              role="button"
             >
               <ForwardRef
                 className="c4"
+                role="button"
                 style={
                   Object {
                     "transform": "rotate(180deg)",
@@ -307,6 +311,7 @@ exports[`renders correctly 2`] = `
               >
                 <styled.i
                   className="material-icons c4"
+                  role="button"
                   style={
                     Object {
                       "transform": "rotate(180deg)",
@@ -315,6 +320,7 @@ exports[`renders correctly 2`] = `
                 >
                   <i
                     className="material-icons c4 c5"
+                    role="button"
                     style={
                       Object {
                         "transform": "rotate(180deg)",
@@ -339,7 +345,9 @@ exports[`renders correctly 2`] = `
         }
       }
     >
-      <styled.div>
+      <styled.div
+        p={3}
+      >
         <div
           className="c6"
         >
@@ -363,7 +371,7 @@ exports[`renders correctly 2`] = `
 `;
 
 exports[`renders correctly when closed 1`] = `
-.c4 {
+.c3 {
   font-family: 'Roboto',sans-serif;
   color: #666666;
   line-height: 1.5;
@@ -374,10 +382,16 @@ exports[`renders correctly when closed 1`] = `
   font-size: 1.25rem;
   font-weight: 500;
   line-height: 1.2;
+  padding: 24px;
+}
+
+.c6 {
+  font-size: 1.5rem;
 }
 
 .c7 {
-  font-size: 1.5rem;
+  box-sizing: border-box;
+  padding: 24px;
 }
 
 .c0 {
@@ -385,7 +399,7 @@ exports[`renders correctly when closed 1`] = `
   background-color: white;
 }
 
-.c5 {
+.c4 {
   -webkit-flex: 0;
   -ms-flex: 0;
   flex: 0;
@@ -424,23 +438,14 @@ exports[`renders correctly when closed 1`] = `
   cursor: pointer;
 }
 
-.c9 {
+.c8 {
   padding: 24px;
   border-top: 1px solid #cccccc;
 }
 
-.c6 {
-  color: #666666;
-  font-size: 2rem;
-}
-
-.c8 {
-  padding: 24px;
-}
-
-.c3 {
+.c5 {
   color: #2a2a2a;
-  padding: 24px;
+  font-size: 2rem;
 }
 
 <styled.div
@@ -464,34 +469,34 @@ exports[`renders correctly when closed 1`] = `
             className="c2"
             onClick={[Function]}
           >
-            <Styled(Typography)>
-              <styled.span
-                as="h5"
+            <styled.span
+              as="h5"
+              p={3}
+              variant="h5"
+            >
+              <h5
                 className="c3"
-                variant="h5"
               >
-                <h5
-                  className="c3 c4"
-                >
-                  Header
-                </h5>
-              </styled.span>
-            </Styled(Typography)>
+                Header
+              </h5>
+            </styled.span>
           </div>
         </styled.div>
         <styled.div
           onClick={[Function]}
         >
           <div
-            className="c5"
+            className="c4"
             onClick={[Function]}
           >
             <Styled(DropdownIcon)
               icon="expand_more"
               open={false}
+              role="button"
             >
               <ForwardRef
-                className="c6"
+                className="c5"
+                role="button"
                 style={
                   Object {
                     "transform": "rotate(0deg)",
@@ -500,7 +505,8 @@ exports[`renders correctly when closed 1`] = `
                 type="expand_more"
               >
                 <styled.i
-                  className="material-icons c6"
+                  className="material-icons c5"
+                  role="button"
                   style={
                     Object {
                       "transform": "rotate(0deg)",
@@ -508,7 +514,8 @@ exports[`renders correctly when closed 1`] = `
                   }
                 >
                   <i
-                    className="material-icons c6 c7"
+                    className="material-icons c5 c6"
+                    role="button"
                     style={
                       Object {
                         "transform": "rotate(0deg)",
@@ -533,9 +540,11 @@ exports[`renders correctly when closed 1`] = `
         }
       }
     >
-      <styled.div>
+      <styled.div
+        p={3}
+      >
         <div
-          className="c8"
+          className="c7"
         >
           <div>
             Hello world!
@@ -544,7 +553,7 @@ exports[`renders correctly when closed 1`] = `
       </styled.div>
       <styled.div>
         <div
-          className="c9"
+          className="c8"
         >
           <div>
             footer

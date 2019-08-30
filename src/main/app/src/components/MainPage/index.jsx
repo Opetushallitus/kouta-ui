@@ -3,22 +3,38 @@ import React from 'react';
 import { Router, Route, Redirect, Switch } from 'react-router-dom';
 
 import { ReduxToaster } from '../Toaster';
-import CreateKoulutusPage from '../CreateKoulutusPage';
-import CreateToteutusPage from '../CreateToteutusPage';
-import CreateHakukohdePage from '../CreateHakukohdePage';
-import CreateValintaperustePage from '../CreateValintaperustePage';
-import EditKoulutusPage from '../EditKoulutusPage';
-import CreateHakuPage from '../CreateHakuPage';
-import EditHakuPage from '../EditHakuPage';
-import HomePage from '../HomePage';
-import EditToteutusPage from '../EditToteutusPage';
-import EditHakukohdePage from '../EditHakukohdePage';
-import EditValintaperustePage from '../EditValintaperustePage';
 import RouterScrollToTop from '../RouterScrollToTop';
-import CreateSoraKuvausPage from '../CreateSoraKuvausPage';
-import EditSoraKuvausPage from '../EditSoraKuvausPage';
-import OppilaitosPage from '../OppilaitosPage';
-import OppilaitoksenOsaPage from '../OppilaitoksenOsaPage';
+
+const HomePage = React.lazy(() => import('../HomePage'));
+const CreateKoulutusPage = React.lazy(() => import('../CreateKoulutusPage'));
+const CreateToteutusPage = React.lazy(() => import('../CreateToteutusPage'));
+const CreateHakukohdePage = React.lazy(() => import('../CreateHakukohdePage'));
+
+const CreateValintaperustePage = React.lazy(() =>
+  import('../CreateValintaperustePage'),
+);
+
+const CreateHakuPage = React.lazy(() => import('../CreateHakuPage'));
+
+const CreateSoraKuvausPage = React.lazy(() =>
+  import('../CreateSoraKuvausPage'),
+);
+
+const EditKoulutusPage = React.lazy(() => import('../EditKoulutusPage'));
+const EditHakuPage = React.lazy(() => import('../EditHakuPage'));
+const EditToteutusPage = React.lazy(() => import('../EditToteutusPage'));
+
+const EditValintaperustePage = React.lazy(() =>
+  import('../EditValintaperustePage'),
+);
+
+const EditHakukohdePage = React.lazy(() => import('../EditHakukohdePage'));
+const EditSoraKuvausPage = React.lazy(() => import('../EditSoraKuvausPage'));
+const OppilaitosPage = React.lazy(() => import('../OppilaitosPage'));
+
+const OppilaitoksenOsaPage = React.lazy(() =>
+  import('../OppilaitoksenOsaPage'),
+);
 
 const MainPage = ({ history }) => {
   return (

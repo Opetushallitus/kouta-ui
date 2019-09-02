@@ -1,3 +1,5 @@
+import 'draft-js/dist/Draft.css';
+
 import React, {
   useCallback,
   useMemo,
@@ -9,8 +11,6 @@ import React, {
 import styled, { css } from 'styled-components';
 import { setLightness } from 'polished';
 
-import 'draft-js/dist/Draft.css';
-
 import {
   Editor as DraftEditor,
   EditorState as DraftEditorState,
@@ -20,7 +20,7 @@ import {
 import { spacing, getThemeProp } from '../../theme';
 import Icon from '../Icon';
 import Select from '../Select';
-import { UncontrolledDropdown, DropdownMenu } from '../Dropdown';
+import Dropdown, { DropdownMenu } from '../Dropdown';
 import Input from '../Input';
 import Flex, { FlexItem } from '../Flex';
 import Button from '../Button';
@@ -260,28 +260,28 @@ const LinkButton = ({ editorState, onChange, editorRef, ...props }) => {
   );
 
   return (
-    <UncontrolledDropdown
+    <Dropdown
       overlay={overlay}
       toggleOnOverlayClick={false}
       portalTarget={document.body}
     >
-      {({ onToggle, ref, visible }) => (
+      {({ onToggle, ref, open }) => (
         <div ref={ref}>
           <StyleButtonBase
             tabIndex="-1"
             onClick={e => {
               e.preventDefault();
-              !visible && setLinkByEditorState();
+              !open && setLinkByEditorState();
               onToggle();
             }}
-            active={visible}
+            active={open}
             {...props}
           >
             <StyleIcon type="insert_link" />
           </StyleButtonBase>
         </div>
       )}
-    </UncontrolledDropdown>
+    </Dropdown>
   );
 };
 

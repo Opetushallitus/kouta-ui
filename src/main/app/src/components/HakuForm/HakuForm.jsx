@@ -23,6 +23,7 @@ import useModal from '../useModal';
 import isYhteishakuHakutapa from '../../utils/isYhteishakuHakutapa';
 import useFieldValue from '../useFieldValue';
 import { HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID } from '../../constants';
+import JulkaisutilaSection from './JulkaisutilaSection';
 
 const PohjaFormCollapse = ({
   children,
@@ -55,6 +56,7 @@ const HakuForm = ({
   steps = false,
   scrollTarget,
   haku: hakuProp = null,
+  showArkistoituTilaOption = true,
   onSelectBase = () => {},
 }) => {
   const { t } = useTranslation();
@@ -173,6 +175,17 @@ const HakuForm = ({
           {...getTestIdProps('yhteystiedotSection')}
         >
           <YhteyshenkilotSection name="yhteyshenkilot" />
+        </FormCollapse>
+
+        <FormCollapse
+          section="julkaisutila"
+          header={t('hakulomake.haunTila')}
+          {...getTestIdProps('tilaSection')}
+        >
+          <JulkaisutilaSection
+            name="tila"
+            showArkistoitu={showArkistoituTilaOption}
+          />
         </FormCollapse>
 
         {isFunction(onAttachHakukohde) ? (

@@ -9,6 +9,8 @@ import EditHakuFooter from './EditHakuFooter';
 import useApiAsync from '../useApiAsync';
 import Spin from '../Spin';
 import { getKoutaHakuByOid } from '../../apiUtils';
+import Title from '../Title';
+import useTranslation from '../useTranslation';
 
 const EditHakuPage = props => {
   const {
@@ -29,26 +31,30 @@ const EditHakuPage = props => {
   });
 
   const organisaatioOid = haku ? haku.organisaatioOid : null;
+  const { t } = useTranslation();
 
   return (
-    <FormPage
-      header={<EditHakuHeader haku={haku} />}
-      steps={<EditHakuSteps />}
-      footer={haku ? <EditHakuFooter haku={haku} /> : null}
-    >
-      {organisaatioOid ? (
-        <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-      ) : null}
-      {haku ? (
-        <EditHakuForm
-          haku={haku}
-          organisaatioOid={organisaatioOid}
-          scrollTarget={scrollTarget}
-        />
-      ) : (
-        <Spin center />
-      )}
-    </FormPage>
+    <>
+      <Title>{t('sivuTitlet.haunMuokkaus')}</Title>
+      <FormPage
+        header={<EditHakuHeader haku={haku} />}
+        steps={<EditHakuSteps />}
+        footer={haku ? <EditHakuFooter haku={haku} /> : null}
+      >
+        {organisaatioOid ? (
+          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+        ) : null}
+        {haku ? (
+          <EditHakuForm
+            haku={haku}
+            organisaatioOid={organisaatioOid}
+            scrollTarget={scrollTarget}
+          />
+        ) : (
+          <Spin center />
+        )}
+      </FormPage>
+    </>
   );
 };
 

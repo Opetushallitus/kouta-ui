@@ -6,6 +6,7 @@ const getFormValuesByToteutus = toteutus => {
     nimi = {},
     tarjoajat = [],
     metadata = {},
+    tila,
   } = toteutus;
 
   const {
@@ -71,7 +72,8 @@ const getFormValuesByToteutus = toteutus => {
     : 'ei';
 
   return {
-    nimi: nimi,
+    tila,
+    nimi,
     kieliversiot: kielivalinta,
     jarjestamispaikat: tarjoajat,
     jarjestamistiedot: {

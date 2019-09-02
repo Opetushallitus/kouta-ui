@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
+import React, { useRef, useState, useCallback } from 'react';
 import styled, { css } from 'styled-components';
 import { setLightness } from 'polished';
 
-import { isString, noop } from '../../utils';
+import { isString, noop, isFunction } from '../../utils';
 import { getThemeProp, spacing } from '../../theme';
 import Typography from '../Typography';
 import DropdownIcon from '../DropdownIcon';
 import CollapseContent from '../CollapseContent';
+import Box from '../Box';
 
 const Container = styled.div`
-  border: 1px solid ${getThemeProp('palette.border')};
+  border: 1px solid ${getThemeProp('palette.divider')};
   background-color: white;
 
   ${({ active }) =>
@@ -36,7 +37,7 @@ const HeaderContainer = styled.div`
   ${({ open }) =>
     open &&
     css`
-      border-bottom: 1px solid ${getThemeProp('palette.border')};
+      border-bottom: 1px solid ${getThemeProp('palette.divider')};
     `}
 `;
 
@@ -55,26 +56,19 @@ const HeaderContent = styled.div`
 
 const FooterContainer = styled.div`
   padding: ${spacing(3)};
-  border-top: 1px solid ${getThemeProp('palette.border')};
+  border-top: 1px solid ${getThemeProp('palette.divider')};
 `;
 
 const ToggleIcon = styled(DropdownIcon)`
-  color: ${getThemeProp('palette.text.primary')};
-  font-size: 2rem;
-`;
-
-const ContentWrapper = styled.div`
-  padding: ${spacing(3)};
-`;
-
-const HeaderTextContent = styled(Typography).attrs({ variant: 'h5' })`
   color: ${getThemeProp('palette.text.dark')};
-  padding: ${spacing(3)};
+  font-size: 2rem;
 `;
 
 const renderHeader = header => {
   return isString(header) ? (
-    <HeaderTextContent>{header}</HeaderTextContent>
+    <Typography variant="h5" p={3}>
+      {header}
+    </Typography>
   ) : (
     header
   );
@@ -84,56 +78,47 @@ const Collapse = ({
   header = null,
   footer = null,
   children = null,
-  open = false,
+  open: openProp,
+  defaultOpen = false,
   active = false,
-  onToggle = () => {},
+  onToggle = noop,
   toggleOnHeaderClick = true,
   ...props
-}) => (
-  <Container active={active} {...props}>
-    <HeaderContainer open={open}>
-      <HeaderContent
-        toggleOnHeaderClick={toggleOnHeaderClick}
-        onClick={toggleOnHeaderClick ? onToggle : noop}
-      >
-        {renderHeader(header)}
-      </HeaderContent>
-      <HeaderToggle onClick={onToggle}>
-        <ToggleIcon icon="expand_more" open={open} />
-      </HeaderToggle>
-    </HeaderContainer>
-    <CollapseContent open={open}>
-      <ContentWrapper>{children}</ContentWrapper>
-      {footer ? <FooterContainer>{footer}</FooterContainer> : null}
-    </CollapseContent>
-  </Container>
-);
+}) => {
+  const [openState, setOpenState] = useState(defaultOpen);
+  const { current: isControlled } = useRef(openProp !== undefined);
 
-export class UncontrolledCollapse extends Component {
-  static defaultProps = {
-    defaultOpen: false,
-  };
+  const open = isControlled ? Boolean(openProp) : openState;
 
-  constructor(props) {
-    super(props);
+  const handleToggle = useCallback(() => {
+    if (!isControlled) {
+      setOpenState(o => !o);
+    }
 
-    this.state = {
-      open: props.defaultOpen,
-    };
-  }
+    if (isFunction(onToggle)) {
+      onToggle();
+    }
+  }, [isControlled, onToggle]);
 
-  onToggle = () => {
-    this.setState(({ open }) => ({
-      open: !open,
-    }));
-  };
-
-  render() {
-    const { defaultOpen, ...props } = this.props;
-    const { open } = this.state;
-
-    return <Collapse open={open} onToggle={this.onToggle} {...props} />;
-  }
-}
+  return (
+    <Container active={active} {...props}>
+      <HeaderContainer open={open}>
+        <HeaderContent
+          toggleOnHeaderClick={toggleOnHeaderClick}
+          onClick={toggleOnHeaderClick ? handleToggle : noop}
+        >
+          {renderHeader(header)}
+        </HeaderContent>
+        <HeaderToggle onClick={handleToggle}>
+          <ToggleIcon icon="expand_more" role="button" open={open} />
+        </HeaderToggle>
+      </HeaderContainer>
+      <CollapseContent open={open}>
+        <Box p={3}>{children}</Box>
+        {footer ? <FooterContainer>{footer}</FooterContainer> : null}
+      </CollapseContent>
+    </Container>
+  );
+};
 
 export default Collapse;

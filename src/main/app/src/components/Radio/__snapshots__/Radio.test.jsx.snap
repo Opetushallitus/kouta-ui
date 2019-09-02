@@ -53,8 +53,8 @@ exports[`renders correctly 1`] = `
 }
 
 .c3:focus + .c5 {
-  border-color: #2da0c7;
-  box-shadow: 0 0 0 1px #2da0c7;
+  border-color: #159ecb;
+  box-shadow: 0 0 0 1px #159ecb;
 }
 
 .c5 .c6 {
@@ -84,13 +84,13 @@ exports[`renders correctly 1`] = `
   -ms-flex-align: center;
   align-items: center;
   line-height: 0;
-  background-color: #2da0c7;
-  border-color: #2da0c7;
+  background-color: #159ecb;
+  border-color: #159ecb;
 }
 
 .c3:focus + .c9 {
-  border-color: #2da0c7;
-  box-shadow: 0 0 0 1px #2da0c7;
+  border-color: #159ecb;
+  box-shadow: 0 0 0 1px #159ecb;
 }
 
 .c9 .c6 {
@@ -126,7 +126,7 @@ exports[`renders correctly 1`] = `
 
 <div>
   <styled.div
-    key=".0"
+    key=".$.0"
     last={false}
   >
     <div
@@ -187,7 +187,7 @@ exports[`renders correctly 1`] = `
     </div>
   </styled.div>
   <styled.div
-    key=".1"
+    key=".$.1"
     last={false}
   >
     <div
@@ -248,7 +248,7 @@ exports[`renders correctly 1`] = `
     </div>
   </styled.div>
   <styled.div
-    key=".2"
+    key=".$.2"
     last={true}
   >
     <div

@@ -17,6 +17,12 @@ const jatka = () => {
   cy.getByTestId('jatkaButton').click({ force: true });
 };
 
+const fillTilaSection = (tila = 'julkaistu') => {
+  cy.getByTestId('tilaSection').within(() => {
+    getRadio(tila, cy).check({ force: true });
+  });
+};
+
 const fillPohjaSection = () => {
   cy.getByTestId('pohjaSection').within(() => {
     jatka();
@@ -134,7 +140,7 @@ const fillNayttamistiedotSection = () => {
 };
 
 const tallenna = () => {
-  cy.getByTestId('tallennaJaJulkaiseToteutusButton').click({ force: true });
+  cy.getByTestId('tallennaToteutusButton').click({ force: true });
 };
 
 const fillJarjestajatSection = () => {
@@ -174,6 +180,8 @@ const fillYhteystiedotSection = () => {
     cy.getByTestId('verkkosivu')
       .find('input')
       .type('verkkosivu', { force: true });
+
+    jatka();
   });
 };
 
@@ -315,6 +323,7 @@ describe('createToteutusForm', () => {
     fillJarjestajatSection();
     fillNimiSection();
     fillYhteystiedotSection();
+    fillTilaSection();
 
     tallenna();
 
@@ -362,6 +371,7 @@ describe('createToteutusForm', () => {
     fillJarjestajatSection();
     fillNimiSection();
     fillYhteystiedotSection();
+    fillTilaSection();
 
     tallenna();
 
@@ -400,6 +410,7 @@ describe('createToteutusForm', () => {
     fillNayttamistiedotSection();
     fillJarjestajatSection();
     fillYhteystiedotSection();
+    fillTilaSection();
 
     tallenna();
 

@@ -5,13 +5,13 @@ import { stubSoraKuvausFormRoutes } from '../../soraKuvausFormUtils';
 
 import createSoraKuvaus from '../../data/soraKuvaus';
 
-const fillKieliversiotSection = cy => {
+const fillKieliversiotSection = () => {
   cy.getByTestId('kieliversiotSection').within(() => {
     chooseKieliversiotLanguages(['fi'], cy);
   });
 };
 
-const tallenna = cy => {
+const tallenna = () => {
   cy.getByTestId('tallennaSoraKuvausButton').click();
 };
 
@@ -44,9 +44,8 @@ describe('editSoraKuvausForm', () => {
       },
     }).as('editSoraKuvausRequest');
 
-    fillKieliversiotSection(cy);
-
-    tallenna(cy);
+    fillKieliversiotSection();
+    tallenna();
 
     cy.wait('@editSoraKuvausRequest').then(({ request }) => {
       cy.wrap(request.body).snapshot();

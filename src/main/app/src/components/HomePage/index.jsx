@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import queryString from 'query-string';
 import get from 'lodash/get';
 import { Redirect } from 'react-router-dom';
@@ -19,6 +19,7 @@ import {
 import useTranslation from '../useTranslation';
 import getUserRoles from '../../utils/getUserRoles';
 import getRoleOrganisaatioOid from '../../utils/getRoleOrganisaatioOid';
+import Title from '../Title';
 
 const HomeContainer = styled.div`
   min-height: 100vh;
@@ -88,27 +89,28 @@ const HomeRoute = ({ organisaatioOid, persistedOrganisaatioOid }) => {
   );
 };
 
-const HomePage = ({
-  kayttajaOid = null,
-  location,
-  persistedOrganisaatioOid,
-}) => {
+const HomePage = ({ kayttajaOid = null, location }) => {
   const { search } = location;
+  const { t } = useTranslation();
+  const persistedOrganisaatioOid = useSelector(state =>
+    selectOrganisaatio(state),
+  );
 
   const query = useMemo(() => queryString.parse(search), [search]);
   const organisaatioOid = get(query, 'organisaatioOid') || null;
 
   return (
-    <HomeContainer>
-      <HomeRoute
-        kayttajOid={kayttajaOid}
-        organisaatioOid={organisaatioOid}
-        persistedOrganisaatioOid={persistedOrganisaatioOid}
-      />
-    </HomeContainer>
+    <>
+      <Title>{t('sivuTitlet.etusivu')}</Title>
+      <HomeContainer>
+        <HomeRoute
+          kayttajOid={kayttajaOid}
+          organisaatioOid={organisaatioOid}
+          persistedOrganisaatioOid={persistedOrganisaatioOid}
+        />
+      </HomeContainer>
+    </>
   );
 };
 
-export default connect(state => ({
-  persistedOrganisaatioOid: selectOrganisaatio(state),
-}))(HomePage);
+export default HomePage;

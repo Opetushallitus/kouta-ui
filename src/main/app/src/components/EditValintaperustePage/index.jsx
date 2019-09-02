@@ -10,6 +10,8 @@ import useApiAsync from '../useApiAsync';
 import { getKoutaValintaperusteByOid } from '../../apiUtils';
 import Spin from '../Spin';
 import { KOULUTUSTYYPPI } from '../../constants';
+import Title from '../Title';
+import useTranslation from '../useTranslation';
 
 const EditValintaperustePage = props => {
   const {
@@ -36,29 +38,34 @@ const EditValintaperustePage = props => {
     get(valintaperuste, 'koulutustyyppi') ||
     KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
+  const { t } = useTranslation();
+
   return (
-    <FormPage
-      header={<EditValintaperusteHeader valintaperuste={valintaperuste} />}
-      steps={<EditValintaperusteSteps />}
-      footer={
-        valintaperuste ? (
-          <EditValintaperusteFooter valintaperuste={valintaperuste} />
-        ) : null
-      }
-    >
-      {organisaatioOid ? (
-        <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-      ) : null}
-      {valintaperuste ? (
-        <EditValintaperusteForm
-          valintaperuste={valintaperuste}
-          organisaatioOid={organisaatioOid}
-          koulutustyyppi={koulutustyyppi}
-        />
-      ) : (
-        <Spin center />
-      )}
-    </FormPage>
+    <>
+      <Title>{t('sivuTitlet.valintaperusteenMuokkaus')}</Title>
+      <FormPage
+        header={<EditValintaperusteHeader valintaperuste={valintaperuste} />}
+        steps={<EditValintaperusteSteps />}
+        footer={
+          valintaperuste ? (
+            <EditValintaperusteFooter valintaperuste={valintaperuste} />
+          ) : null
+        }
+      >
+        {organisaatioOid ? (
+          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+        ) : null}
+        {valintaperuste ? (
+          <EditValintaperusteForm
+            valintaperuste={valintaperuste}
+            organisaatioOid={organisaatioOid}
+            koulutustyyppi={koulutustyyppi}
+          />
+        ) : (
+          <Spin center />
+        )}
+      </FormPage>
+    </>
   );
 };
 

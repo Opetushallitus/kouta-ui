@@ -6,6 +6,8 @@ export const JULKAISUTILA = {
   ARKISTOITU: 'arkistoitu',
 };
 
+export const DEFAULT_JULKAISUTILA = JULKAISUTILA.TALLENNETTU;
+
 export const KOULUTUSTYYPPI = {
   AMMATILLINEN_KOULUTUS: 'amm',
   LUKIOKOULUTUS: 'lk',
@@ -50,6 +52,7 @@ export const TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA = [
       { tyyppi: KOULUTUSTYYPPI.TELMA },
       { tyyppi: KOULUTUSTYYPPI.TUTKINNON_OSA },
       { tyyppi: KOULUTUSTYYPPI.OSAAMISALA },
+      { tyyppi: KOULUTUSTYYPPI.MUUT_KOULUTUKSET },
     ],
   },
   {
@@ -64,8 +67,7 @@ export const TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA = [
     ],
   },
   { tyyppi: KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO },
-  { tyyppi: 'yleissivistava', children: [{ tyyppi: KOULUTUSTYYPPI.LUVA }] },
-  { tyyppi: KOULUTUSTYYPPI.MUUT_KOULUTUKSET },
+  { tyyppi: KOULUTUSTYYPPI.LUVA },
   { tyyppi: KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS },
 ];
 

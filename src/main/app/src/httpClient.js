@@ -16,11 +16,12 @@ const isLomakeEditoriUrl = url => {
   return /lomake-editori/.test(url);
 };
 
-const threeHours = 10800000;
+const oneHour = 3600000;
 
 const cache = setupCache({
-  limit: 200,
-  maxAge: threeHours,
+  limit: 100,
+  maxAge: oneHour,
+  invalidate: null, // Prevent cache invalidation
   exclude: {
     query: false,
     filter: config => {
@@ -37,7 +38,10 @@ const isAuthorizationError = error => {
   return get(error, 'response.status') === 401;
 };
 
-const withAuthorizationInterceptor = apiUrls => client => {
+const withAuthorizationInterceptor = (
+  apiUrls,
+  { redirectAfterForbidden = true },
+) => client => {
   client.interceptors.response.use(
     response => response,
     async error => {
@@ -45,7 +49,7 @@ const withAuthorizationInterceptor = apiUrls => client => {
         return Promise.reject(error);
       }
 
-      if (hasBeenRetried(error)) {
+      if (hasBeenRetried(error) && redirectAfterForbidden) {
         return window.location.replace(apiUrls.url('cas.login'));
       }
 
@@ -91,7 +95,11 @@ const withAuthorizationInterceptor = apiUrls => client => {
   return client;
 };
 
-const createHttpClient = ({ apiUrls, callerId } = {}) => {
+const createHttpClient = ({
+  apiUrls,
+  callerId,
+  redirectAfterForbidden = true,
+} = {}) => {
   let client = axios.create({
     withCredentials: true,
     adapter: cache.adapter,
@@ -102,7 +110,9 @@ const createHttpClient = ({ apiUrls, callerId } = {}) => {
     }),
   });
 
-  client = compose(withAuthorizationInterceptor(apiUrls))(client);
+  client = compose(
+    withAuthorizationInterceptor(apiUrls, { redirectAfterForbidden }),
+  )(client);
 
   return client;
 };

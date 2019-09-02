@@ -1,10 +1,8 @@
 import React, { useCallback } from 'react';
-import get from 'lodash/get';
 import { withRouter } from 'react-router-dom';
 
 import Box from '../Box';
 import Button from '../Button';
-import { JULKAISUTILA } from '../../constants';
 import { getTestIdProps } from '../../utils';
 import useTranslation from '../useTranslation';
 import useSaveForm from '../useSaveForm';
@@ -19,7 +17,6 @@ const OppilaitosPageFooter = ({
   history,
 }) => {
   const { t } = useTranslation();
-  const tila = get(oppilaitos, 'tila');
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
@@ -41,7 +38,7 @@ const OppilaitosPageFooter = ({
     [oppilaitos, organisaatioOid, history],
   );
 
-  const { save, saveAndPublish } = useSaveForm({
+  const { save } = useSaveForm({
     form: 'oppilaitos',
     submit,
     validate: validateOppilaitosForm,
@@ -50,24 +47,12 @@ const OppilaitosPageFooter = ({
   return (
     <Box display="flex" justifyContent="end">
       <Button
-        variant="outlined"
         onClick={save}
         disabled={oppilaitosIsLoading}
         {...getTestIdProps('tallennaOppilaitosButton')}
       >
         {t('yleiset.tallenna')}
       </Button>
-      {tila !== JULKAISUTILA.JULKAISTU ? (
-        <Box ml={2}>
-          <Button
-            onClick={saveAndPublish}
-            disabled={oppilaitosIsLoading}
-            {...getTestIdProps('tallennaJaJulkaiseOppilaitosButton')}
-          >
-            {t('yleiset.tallennaJaJulkaise')}
-          </Button>
-        </Box>
-      ) : null}
     </Box>
   );
 };

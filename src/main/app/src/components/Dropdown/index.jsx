@@ -1,4 +1,5 @@
-import React, { Component, useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useState, useMemo } from 'react';
+
 import { createPortal } from 'react-dom';
 import { Manager, Reference, Popper } from 'react-popper';
 import styled from 'styled-components';
@@ -6,10 +7,10 @@ import EventListener from 'react-event-listener';
 import { Transition } from 'react-spring';
 
 import { getThemeProp } from '../../theme';
-import { isFunction } from '../../utils';
+import { isFunction, noop } from '../../utils';
 import memoizeOne from '../../utils/memoizeOne';
 
-export const DropdownMenu = styled.div`
+export const DropdownMenu = styled.div.attrs({ role: 'menu' })`
   width: 100%;
   min-width: 200px;
   border: 1px solid ${getThemeProp('palette.border')};
@@ -18,7 +19,7 @@ export const DropdownMenu = styled.div`
   background-color: white;
 `;
 
-export const DropdownMenuItem = styled.div`
+export const DropdownMenuItem = styled.div.attrs({ role: 'menuitem' })`
   display: block;
   width: 100%;
   white-space: nowrap;
@@ -68,13 +69,13 @@ const getMarginStyle = placement => {
 
 const DropdownDialog = ({
   overlay,
-  visible,
+  open,
   placement: placementProp,
   modifiers = {},
   ...props
 }) => (
   <Transition
-    items={visible}
+    items={open}
     enter={{
       opacity: 1,
       scale: 1,
@@ -88,8 +89,8 @@ const DropdownDialog = ({
       scale: 0.9,
     }}
   >
-    {visible =>
-      visible &&
+    {open =>
+      open &&
       (({ opacity, scale }) => (
         <Popper placement={placementProp} modifiers={modifiers}>
           {({ ref, style, placement }) => {
@@ -120,18 +121,41 @@ const DropdownDialog = ({
 
 const Dropdown = ({
   placement: defaultPlacement = 'bottom-start',
-  overlay = null,
-  visible = false,
-  children = () => {},
+  overlay: overlayProp = null,
+  open: openProp,
+  children = noop,
   portalTarget,
   overflow,
   onOutsideClick,
   onOverlayClick,
+  toggleOnOverlayClick = true,
+  toggleOnOutsideClick = true,
   ...props
 }) => {
+  const [openState, setOpenState] = useState(false);
+
+  const { current: isControlled } = useRef(openProp !== undefined);
+
   const modifiers = {
     ...(overflow && { preventOverflow: { enabled: false } }),
   };
+
+  const open = isControlled ? Boolean(openProp) : openState;
+
+  const childrenProps = useMemo(() => {
+    return isControlled
+      ? {}
+      : {
+          open,
+          onClose: () => setOpenState(false),
+          onOpen: () => setOpenState(true),
+          onToggle: () => setOpenState(o => !o),
+        };
+  }, [isControlled, open]);
+
+  const overlay = isFunction(overlayProp)
+    ? overlayProp(childrenProps)
+    : overlayProp;
 
   const overlayRef = useRef();
   const targetRef = useRef();
@@ -151,11 +175,32 @@ const Dropdown = ({
     ({ ref, ...rest }) => {
       return children({
         ref: createForwardingRef.current(ref),
+        ...childrenProps,
         ...rest,
       });
     },
-    [children],
+    [children, childrenProps],
   );
+
+  const handleOutsideClick = useCallback(() => {
+    if (!isControlled && toggleOnOutsideClick) {
+      setOpenState(o => !o);
+    }
+
+    if (isFunction(onOutsideClick)) {
+      onOutsideClick();
+    }
+  }, [isControlled, onOutsideClick, toggleOnOutsideClick]);
+
+  const handleOverlayClick = useCallback(() => {
+    if (!isControlled && toggleOnOverlayClick) {
+      setOpenState(o => !o);
+    }
+
+    if (isFunction(onOverlayClick)) {
+      onOverlayClick();
+    }
+  }, [isControlled, onOverlayClick, toggleOnOverlayClick]);
 
   const onWindowClick = useCallback(
     e => {
@@ -169,22 +214,22 @@ const Dropdown = ({
         (overlayRef.current === e.target ||
           overlayRef.current.contains(e.target));
 
-      if (isOverlay && isFunction(onOverlayClick)) {
-        return onOverlayClick();
+      if (isOverlay) {
+        return handleOverlayClick();
       }
 
-      if (!isTriggerElement && isFunction(onOutsideClick) && visible) {
-        return onOutsideClick();
+      if (!isTriggerElement && open) {
+        return handleOutsideClick();
       }
     },
-    [onOverlayClick, onOutsideClick, visible],
+    [handleOverlayClick, handleOutsideClick, open],
   );
 
   const content = (
     <DropdownDialog
       overlay={wrappedOverlay}
       modifiers={modifiers}
-      visible={visible}
+      open={open}
       placement={defaultPlacement}
       {...props}
     />
@@ -192,9 +237,7 @@ const Dropdown = ({
 
   return (
     <>
-      {isFunction(onOutsideClick) || isFunction(onOverlayClick) ? (
-        <EventListener target="window" onClick={onWindowClick} />
-      ) : null}
+      <EventListener target="window" onClick={onWindowClick} />
       <Manager>
         <Reference>{childrenFn}</Reference>
         {portalTarget ? createPortal(content, portalTarget) : content}
@@ -202,77 +245,5 @@ const Dropdown = ({
     </>
   );
 };
-
-export class UncontrolledDropdown extends Component {
-  static defaultProps = {
-    toggleOnOverlayClick: true,
-    overlay: null,
-    defaultVisible: false,
-    toggleOnOutsideClick: true,
-    children: () => null,
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      visible: props.defaultVisible,
-    };
-
-    this.overlayRef = React.createRef();
-    this.triggerElement = null;
-  }
-
-  onToggle = () => {
-    this.setState(state => ({
-      visible: !state.visible,
-    }));
-  };
-
-  renderChildren = ({ ref }) => {
-    return this.props.children({
-      ref,
-      visible: this.state.visible,
-      onToggle: this.onToggle,
-    });
-  };
-
-  renderOverlay() {
-    const { overlay } = this.props;
-
-    if (isFunction(overlay)) {
-      return overlay({ onToggle: this.onToggle });
-    }
-
-    return overlay;
-  }
-
-  render() {
-    const { visible } = this.state;
-
-    const {
-      defaultVisible,
-      children,
-      overlay,
-      toggleOnOverlayClick,
-      toggleOnOutsideClick,
-      ...props
-    } = this.props;
-
-    return (
-      <>
-        <Dropdown
-          visible={visible}
-          overlay={this.renderOverlay()}
-          onOutsideClick={toggleOnOutsideClick ? this.onToggle : null}
-          onOverlayClick={toggleOnOverlayClick ? this.onToggle : null}
-          {...props}
-        >
-          {this.renderChildren}
-        </Dropdown>
-      </>
-    );
-  }
-}
 
 export default Dropdown;

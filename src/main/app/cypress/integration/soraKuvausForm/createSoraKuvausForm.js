@@ -3,35 +3,36 @@ import {
   typeToEditor,
   getCheckbox,
   fillKoulutustyyppiSelect,
+  getRadio,
 } from '../../utils';
 
 import createSoraKuvaus from '../../data/soraKuvaus';
 import { stubSoraKuvausFormRoutes } from '../../soraKuvausFormUtils';
 
-const jatka = cy => {
+const jatka = () => {
   cy.getByTestId('jatkaButton').click({ force: true });
 };
 
-const fillKoulutustyyppiSection = cy => {
+const fillKoulutustyyppiSection = () => {
   cy.getByTestId('tyyppiSection').within(() => {
     fillKoulutustyyppiSelect(['amm'], cy);
   });
 };
 
-const fillPohjaSection = cy => {
+const fillPohjaSection = () => {
   cy.getByTestId('pohjaSection').within(() => {
-    jatka(cy);
+    jatka();
   });
 };
 
-const fillKieliversiotSection = cy => {
+const fillKieliversiotSection = () => {
   cy.getByTestId('kieliversiotSection').within(() => {
     chooseKieliversiotLanguages(['fi'], cy);
-    jatka(cy);
+    jatka();
   });
 };
 
-const fillTiedotSection = cy => {
+const fillTiedotSection = () => {
   cy.getByTestId('tiedotSection').within(() => {
     cy.getByTestId('nimi')
       .find('input')
@@ -41,18 +42,25 @@ const fillTiedotSection = cy => {
       typeToEditor('Kuvaus', cy);
     });
 
-    jatka(cy);
+    jatka();
   });
 };
 
-const fillJulkisuusSection = cy => {
+const fillJulkisuusSection = () => {
   cy.getByTestId('julkisuusSection').within(() => {
     getCheckbox(null, cy).check({ force: true });
+    jatka();
   });
 };
 
-const tallenna = cy => {
-  cy.getByTestId('tallennaJaJulkaiseSoraKuvausButton').click({ force: true });
+const tallenna = () => {
+  cy.getByTestId('tallennaSoraKuvausButton').click({ force: true });
+};
+
+const fillTilaSection = (tila = 'julkaistu') => {
+  cy.getByTestId('tilaSection').within(() => {
+    getRadio(tila, cy).check({ force: true });
+  });
 };
 
 describe('createSoraKuvausForm', () => {
@@ -80,16 +88,22 @@ describe('createSoraKuvausForm', () => {
       },
     }).as('createSoraKuvausRequest');
 
-    fillKoulutustyyppiSection(cy);
-    fillPohjaSection(cy);
-    fillKieliversiotSection(cy);
-    fillTiedotSection(cy);
-    fillJulkisuusSection(cy);
+    fillKoulutustyyppiSection();
+    fillPohjaSection();
+    fillKieliversiotSection();
+    fillTiedotSection();
+    fillJulkisuusSection();
+    fillTilaSection();
 
-    tallenna(cy);
+    tallenna();
 
     cy.wait('@createSoraKuvausRequest').then(({ request }) => {
       cy.wrap(request.body).snapshot();
     });
+
+    cy.location('pathname').should(
+      'eq',
+      `/kouta/sora-kuvaus/${soraKuvaus.id}/muokkaus`,
+    );
   });
 });

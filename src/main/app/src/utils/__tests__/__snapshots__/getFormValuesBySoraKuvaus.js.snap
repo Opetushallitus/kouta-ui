@@ -15,5 +15,6 @@ Object {
       "sv": "Sv nimi",
     },
   },
+  "tila": "tallennettu",
 }
 `;

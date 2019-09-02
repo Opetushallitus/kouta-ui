@@ -23,6 +23,7 @@ import { KOULUTUSTYYPPI } from '../../constants';
 import useFieldValue from '../useFieldValue';
 import useModal from '../useModal';
 import LukiolinjatSection from './LukiolinjatSection';
+import JulkaisutilaSection from './JulkaisutilaSection';
 
 const PohjaFormCollapse = ({
   children,
@@ -57,6 +58,7 @@ const ToteutusForm = ({
   toteutus,
   onAttachHakukohde,
   koulutustyyppi = KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
+  showArkistoituTilaOption = true,
   onSelectBase = () => {},
 }) => {
   const { t } = useTranslation();
@@ -199,6 +201,17 @@ const ToteutusForm = ({
           {...getTestIdProps('yhteystiedotSection')}
         >
           <YhteyshenkilotSection name="yhteyshenkilot" />
+        </FormCollapse>
+
+        <FormCollapse
+          section="julkaisutila"
+          header={t('toteutuslomake.toteutuksenTila')}
+          {...getTestIdProps('tilaSection')}
+        >
+          <JulkaisutilaSection
+            name="tila"
+            showArkistoitu={showArkistoituTilaOption}
+          />
         </FormCollapse>
 
         {isFunction(onAttachHakukohde) ? (

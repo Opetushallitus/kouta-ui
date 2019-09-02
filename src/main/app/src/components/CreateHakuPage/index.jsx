@@ -8,6 +8,8 @@ import CreateHakuSteps from './CreateHakuSteps';
 import CreateHakuForm from './CreateHakuForm';
 import CreateHakuFooter from './CreateHakuFooter';
 import useSelectBase from '../useSelectBase';
+import Title from '../Title';
+import useTranslation from '../useTranslation';
 
 const CreateHakuPage = props => {
   const {
@@ -19,22 +21,26 @@ const CreateHakuPage = props => {
   } = props;
 
   const { kopioHakuOid = null } = queryString.parse(search);
-
+  const { t } = useTranslation();
   const selectBase = useSelectBase(history, { kopioParam: 'kopioHakuOid' });
 
   return (
-    <FormPage
-      header={<CreateHakuHeader />}
-      steps={<CreateHakuSteps />}
-      footer={<CreateHakuFooter organisaatioOid={organisaatioOid} />}
-    >
-      <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-      <CreateHakuForm
-        organisaatioOid={organisaatioOid}
-        kopioHakuOid={kopioHakuOid}
-        onSelectBase={selectBase}
-      />
-    </FormPage>
+    <>
+      <Title>{t('sivuTitlet.uusiHaku')}</Title>
+      <FormPage
+        header={<CreateHakuHeader />}
+        steps={<CreateHakuSteps />}
+        footer={<CreateHakuFooter organisaatioOid={organisaatioOid} />}
+      >
+        <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+        <CreateHakuForm
+          organisaatioOid={organisaatioOid}
+          kopioHakuOid={kopioHakuOid}
+          onSelectBase={selectBase}
+          showArkistoituTilaOption={false}
+        />
+      </FormPage>
+    </>
   );
 };
 

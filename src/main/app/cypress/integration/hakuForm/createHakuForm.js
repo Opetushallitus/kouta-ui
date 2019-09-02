@@ -1,5 +1,4 @@
 import {
-  getByTestId,
   getRadio,
   getSelectOption,
   fillDateTimeInput,
@@ -11,32 +10,38 @@ import {
 
 import { stubHakuFormRoutes } from '../../hakuFormUtils';
 
-const jatka = cy => {
-  getByTestId('jatkaButton', cy).click({ force: true });
+const jatka = () => {
+  cy.getByTestId('jatkaButton').click({ force: true });
 };
 
-const fillPohjaSection = cy => {
-  getByTestId('pohjaSection', cy).within(() => {
-    jatka(cy);
+const fillPohjaSection = () => {
+  cy.getByTestId('pohjaSection').within(() => {
+    jatka();
   });
 };
 
-const fillKieliversiotSection = cy => {
-  getByTestId('kieliversiotSection', cy).within(() => {
+const fillTilaSection = (tila = 'julkaistu') => {
+  cy.getByTestId('tilaSection').within(() => {
+    getRadio(tila, cy).check({ force: true });
+  });
+};
+
+const fillKieliversiotSection = () => {
+  cy.getByTestId('kieliversiotSection').within(() => {
     chooseKieliversiotLanguages(['fi'], cy);
-    jatka(cy);
+    jatka();
   });
 };
 
-const fillNimiSection = cy => {
-  getByTestId('nimiSection', cy).within(() => {
+const fillNimiSection = () => {
+  cy.getByTestId('nimiSection').within(() => {
     cy.get('input').type('haun nimi', { force: true });
 
-    jatka(cy);
+    jatka();
   });
 };
 
-const fillKohdejoukkoSection = cy => {
+const fillKohdejoukkoSection = () => {
   cy.getByTestId('kohdejoukkoSection').within(() => {
     cy.getByTestId('kohdejoukko').within(() => {
       getRadio('haunkohdejoukko_12#1', cy).click({ force: true });
@@ -46,30 +51,30 @@ const fillKohdejoukkoSection = cy => {
       selectOption('haunkohdejoukontarkenne_0', cy);
     });
 
-    jatka(cy);
+    jatka();
   });
 };
 
-const fillHakutapaSection = cy => {
-  getByTestId('hakutapaSection', cy).within(() => {
+const fillHakutapaSection = () => {
+  cy.getByTestId('hakutapaSection').within(() => {
     getRadio('hakutapa_01#1', cy).click({ force: true });
 
-    jatka(cy);
+    jatka();
   });
 };
 
-const lisaa = cy => {
-  getByTestId('lisaaButton', cy).click({ force: true });
+const lisaa = () => {
+  cy.getByTestId('lisaaButton').click({ force: true });
 };
 
 const fillDatetime = ({ date, time, cy }) => {
   fillDateTimeInput({ date, time, cy });
 };
 
-const fillAikatauluSection = cy => {
-  getByTestId('aikatauluSection', cy).within(() => {
-    getByTestId('hakuajat', cy).within(() => {
-      getByTestId('alkaa', cy).within(() => {
+const fillAikatauluSection = () => {
+  cy.getByTestId('aikatauluSection').within(() => {
+    cy.getByTestId('hakuajat').within(() => {
+      cy.getByTestId('alkaa').within(() => {
         fillDatetime({
           date: '02.04.2019',
           time: '10:45',
@@ -77,7 +82,7 @@ const fillAikatauluSection = cy => {
         });
       });
 
-      getByTestId('paattyy', cy).within(() => {
+      cy.getByTestId('paattyy').within(() => {
         fillDatetime({
           date: '25.11.2019',
           time: '23:59',
@@ -86,10 +91,10 @@ const fillAikatauluSection = cy => {
       });
     });
 
-    getByTestId('tulevaisuudenaikataulu', cy).within(() => {
-      lisaa(cy);
+    cy.getByTestId('tulevaisuudenaikataulu').within(() => {
+      lisaa();
 
-      getByTestId('alkaa', cy).within(() => {
+      cy.getByTestId('alkaa').within(() => {
         fillDatetime({
           date: '11.10.2019',
           time: '09:05',
@@ -97,7 +102,7 @@ const fillAikatauluSection = cy => {
         });
       });
 
-      getByTestId('paattyy', cy).within(() => {
+      cy.getByTestId('paattyy').within(() => {
         fillDatetime({
           date: '25.12.2019',
           time: '20:30',
@@ -106,19 +111,19 @@ const fillAikatauluSection = cy => {
       });
     });
 
-    getByTestId('alkamiskausi', cy).within(() => {
+    cy.getByTestId('alkamiskausi').within(() => {
       getRadio('kausi_0#1', cy).click({ force: true });
 
-      getByTestId('vuosi', cy).click();
+      cy.getByTestId('vuosi').click();
 
-      getByTestId('vuosi', cy).within(() => {
+      cy.getByTestId('vuosi').within(() => {
         getSelectOption(new Date().getFullYear().toString(), cy).click({
           force: true,
         });
       });
     });
 
-    getByTestId('perumisenTakaraja', cy).within(() => {
+    cy.getByTestId('perumisenTakaraja').within(() => {
       fillDatetime({
         date: '24.12.2019',
         time: '21:20',
@@ -126,7 +131,7 @@ const fillAikatauluSection = cy => {
       });
     });
 
-    getByTestId('muokkauksenTakaraja', cy).within(() => {
+    cy.getByTestId('muokkauksenTakaraja').within(() => {
       fillDatetime({
         date: '11.12.2019',
         time: '19:15',
@@ -134,7 +139,7 @@ const fillAikatauluSection = cy => {
       });
     });
 
-    getByTestId('julkaisupaivamaara', cy).within(() => {
+    cy.getByTestId('julkaisupaivamaara').within(() => {
       fillDatetime({
         date: '05.12.2019',
         time: '06:45',
@@ -142,33 +147,34 @@ const fillAikatauluSection = cy => {
       });
     });
 
-    jatka(cy);
+    jatka();
   });
 };
 
-const fillHakulomakeSection = cy => {
-  getByTestId('hakulomakeSection', cy).within(() => {
+const fillHakulomakeSection = () => {
+  cy.getByTestId('hakulomakeSection').within(() => {
     getRadio('ataru', cy).click({ force: true });
     selectOption('Lomake 1', cy);
 
-    jatka(cy);
+    jatka();
   });
 };
 
-const tallenna = cy => {
-  getByTestId('tallennaJaJulkaiseHakuButton', cy).click({ force: true });
+const tallenna = () => {
+  cy.getByTestId('tallennaHakuButton').click({ force: true });
 };
 
-const fillValintakoeSection = cy => {
+const fillValintakoeSection = () => {
   cy.getByTestId('valintakoeSection').within(() => {
     fillValintakoeFields({ cy });
-    jatka(cy);
+    jatka();
   });
 };
 
-const fillYhteystiedotSection = cy => {
+const fillYhteystiedotSection = () => {
   cy.getByTestId('yhteystiedotSection').within(() => {
     fillYhteyshenkilotFields({ cy });
+    jatka();
   });
 };
 
@@ -191,17 +197,18 @@ describe('createHakuForm', () => {
       },
     }).as('createHakuRequest');
 
-    fillPohjaSection(cy);
-    fillKieliversiotSection(cy);
-    fillNimiSection(cy);
-    fillKohdejoukkoSection(cy);
-    fillHakutapaSection(cy);
-    fillAikatauluSection(cy);
-    fillHakulomakeSection(cy);
-    fillValintakoeSection(cy);
-    fillYhteystiedotSection(cy);
+    fillPohjaSection();
+    fillKieliversiotSection();
+    fillNimiSection();
+    fillKohdejoukkoSection();
+    fillHakutapaSection();
+    fillAikatauluSection();
+    fillHakulomakeSection();
+    fillValintakoeSection();
+    fillYhteystiedotSection();
+    fillTilaSection();
 
-    tallenna(cy);
+    tallenna();
 
     cy.wait('@createHakuRequest').then(({ request }) => {
       cy.wrap(request.body).snapshot();

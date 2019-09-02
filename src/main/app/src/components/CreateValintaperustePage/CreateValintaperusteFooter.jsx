@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 
 import Button from '../Button';
@@ -11,16 +10,12 @@ import validateValintaperusteForm from '../../utils/validateValintaperusteForm';
 import createValintaperuste from '../../utils/kouta/createValintaperuste';
 import useSaveForm from '../useSaveForm';
 
-const SaveButton = styled(Button).attrs({ variant: 'outlined' })`
-  margin-right: ${({ theme }) => theme.spacing.unit * 2}px;
-`;
-
 const CreateValintaperusteFooter = ({ organisaatioOid, history }) => {
   const { t } = useTranslation();
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
-      const { oid } = await createValintaperuste({
+      const { id } = await createValintaperuste({
         httpClient,
         apiUrls,
         valintaperuste: {
@@ -29,29 +24,23 @@ const CreateValintaperusteFooter = ({ organisaatioOid, history }) => {
         },
       });
 
-      history.push(`/valintaperusteet/${oid}/muokkaus`);
+      history.push(`/valintaperusteet/${id}/muokkaus`);
     },
     [organisaatioOid, history],
   );
 
-  const { save, saveAndPublish } = useSaveForm({
+  const { save } = useSaveForm({
     form: 'createValintaperusteForm',
     submit,
     validate: validateValintaperusteForm,
   });
   return (
     <Flex justifyEnd>
-      <SaveButton
+      <Button
         onClick={save}
         {...getTestIdProps('tallennaValintaperusteButton')}
       >
         {t('yleiset.tallenna')}
-      </SaveButton>
-      <Button
-        onClick={saveAndPublish}
-        {...getTestIdProps('tallennaJaJulkaiseValintaperusteButton')}
-      >
-        {t('yleiset.tallennaJaJulkaise')}
       </Button>
     </Flex>
   );

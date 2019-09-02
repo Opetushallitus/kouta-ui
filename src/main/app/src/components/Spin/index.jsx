@@ -45,12 +45,19 @@ const SpinCircle = styled.div`
   `};
 `;
 
-export const Spin = ({ size = 'medium', center = false, ...props }) => {
+export const Spin = ({
+  size = 'medium',
+  center = false,
+  ariaLabel: ariaLabelProp,
+  ...props
+}) => {
   const spinProps = { size, ...props };
+
+  const ariaLabel = ariaLabelProp || 'Ladataan sisältöä';
 
   return center ? (
     <CenterContainer>
-      <SpinCircle {...spinProps} />
+      <SpinCircle {...spinProps} ariaLabel={ariaLabel} />
     </CenterContainer>
   ) : (
     <SpinCircle {...spinProps} />

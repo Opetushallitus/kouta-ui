@@ -5,7 +5,7 @@ import Checkbox from '../Checkbox';
 import { isArray } from '../../utils';
 
 const CheckboxContainer = styled.div`
-  margin-bottom: 4px;
+  ${({ isLast }) => !isLast && { marginBottom: '4px' }}
 `;
 
 const cleanValue = (value, options) => {
@@ -38,8 +38,8 @@ const CheckboxGroup = ({
   error = false,
   disabled = false,
 }) => {
-  return options.map(({ value: optionValue, label }) => (
-    <CheckboxContainer key={optionValue}>
+  return options.map(({ value: optionValue, label }, index) => (
+    <CheckboxContainer key={optionValue} isLast={index === options.length - 1}>
       <Checkbox
         checked={value.includes(optionValue)}
         onChange={makeOnCheckboxChange({

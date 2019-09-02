@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 
 import Button from '../Button';
@@ -10,10 +9,6 @@ import getToteutusByFormValues from '../../utils/getToteutusByFormValues';
 import createToteutus from '../../utils/kouta/createToteutus';
 import useSaveForm from '../useSaveForm';
 import validateToteutusForm from '../../utils/validateToteutusForm';
-
-const SaveButton = styled(Button).attrs({ variant: 'outlined' })`
-  margin-right: ${({ theme }) => theme.spacing.unit * 2}px;
-`;
 
 const CreateToteutusFooter = ({
   organisaatioOid,
@@ -40,7 +35,7 @@ const CreateToteutusFooter = ({
     [organisaatioOid, history, koulutustyyppi, koulutusOid],
   );
 
-  const { save, saveAndPublish } = useSaveForm({
+  const { save } = useSaveForm({
     form: 'createToteutusForm',
     submit,
     validate: validateToteutusForm,
@@ -48,14 +43,8 @@ const CreateToteutusFooter = ({
 
   return (
     <Flex justifyEnd>
-      <SaveButton onClick={save} {...getTestIdProps('tallennaToteutusButton')}>
+      <Button onClick={save} {...getTestIdProps('tallennaToteutusButton')}>
         {t('yleiset.tallenna')}
-      </SaveButton>
-      <Button
-        onClick={saveAndPublish}
-        {...getTestIdProps('tallennaJaJulkaiseToteutusButton')}
-      >
-        {t('yleiset.tallennaJaJulkaise')}
       </Button>
     </Flex>
   );

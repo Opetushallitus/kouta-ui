@@ -24,6 +24,7 @@ Object {
   "soraKuvaus": Object {
     "value": "sora_1",
   },
+  "tila": "tallennettu",
   "tyyppi": "tyyppi_1#1",
   "valintatavat": Array [
     Object {

@@ -2,6 +2,7 @@ import getFormValuesBySoraKuvaus from '../getFormValuesBySoraKuvaus';
 
 test('getFormValuesBySoraKuvaus returns correct form values given sora-kuvaus', () => {
   const values = getFormValuesBySoraKuvaus({
+    tila: 'tallennettu',
     kieliversiot: ['fi', 'sv'],
     nimi: {
       fi: 'Fi nimi',

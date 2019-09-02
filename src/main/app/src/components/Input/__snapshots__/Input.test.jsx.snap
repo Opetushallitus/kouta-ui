@@ -24,8 +24,8 @@ exports[`renders correctly 1`] = `
 }
 
 .c1:focus {
-  border-color: #2da0c7;
-  box-shadow: 0 0 0 1px #2da0c7;
+  border-color: #159ecb;
+  box-shadow: 0 0 0 1px #159ecb;
 }
 
 <ForwardRef>

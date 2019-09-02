@@ -84,6 +84,13 @@ const baseConfig = {
         julkisuus: true,
       },
     },
+    julkaisutila: {
+      fields: {
+        julkaisutila: {
+          validate: eb => eb.validateExistence('tila'),
+        },
+      },
+    },
   },
 };
 
@@ -92,6 +99,7 @@ const commonConfigPaths = [
   'sections.pohja',
   'sections.kieliversiot',
   'sections.jarjestyspaikka',
+  'sections.julkaisutila',
 ];
 
 const getKoulutusFormConfig = koulutustyyppi => {

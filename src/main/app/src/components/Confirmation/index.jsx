@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { setLightness } from 'polished';
 import styled, { css } from 'styled-components';
 
-import { DropdownMenu, UncontrolledDropdown } from '../Dropdown';
+import Dropdown, { DropdownMenu } from '../Dropdown';
 import { getThemeProp, spacing } from '../../theme';
 import { noop, isString, createChainedFunction } from '../../utils';
 import Typography from '../Typography';
@@ -61,8 +61,15 @@ export const Confirmation = ({
             {isString(content) ? <Typography>{content}</Typography> : content}
           </ContentContainer>
           <Flex>
-            <Action onClick={createChainedFunction(onConfirm, onToggle)} success>Vahvista</Action>
-            <Action onClick={onToggle} danger>Peruuta</Action>
+            <Action
+              onClick={createChainedFunction(onConfirm, onToggle)}
+              success
+            >
+              Vahvista
+            </Action>
+            <Action onClick={onToggle} danger>
+              Peruuta
+            </Action>
           </Flex>
         </Wrapper>
       </DropdownMenu>
@@ -70,13 +77,7 @@ export const Confirmation = ({
     [onConfirm, content],
   );
 
-  return (
-    <UncontrolledDropdown
-      overlay={overlay}
-      toggleOnOverlayClick={false}
-      {...props}
-    />
-  );
+  return <Dropdown overlay={overlay} toggleOnOverlayClick={false} {...props} />;
 };
 
 export default Confirmation;

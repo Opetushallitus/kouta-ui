@@ -10,6 +10,8 @@ import useApiAsync from '../useApiAsync';
 import getToteutusByOid from '../../utils/kouta/getToteutusByOid';
 import getKoulutusByOid from '../../utils/kouta/getKoulutusByOid';
 import Spin from '../Spin';
+import Title from '../Title';
+import useTranslation from '../useTranslation';
 
 const getToteutusAndKoulutus = async ({ httpClient, apiUrls, oid }) => {
   const toteutus = await getToteutusByOid({ httpClient, apiUrls, oid });
@@ -47,35 +49,39 @@ const EditToteutusPage = props => {
 
   const koulutustyyppi = koulutus ? koulutus.koulutustyyppi : null;
   const organisaatioOid = toteutus ? toteutus.organisaatioOid : null;
+  const { t } = useTranslation();
 
   return (
-    <FormPage
-      header={<EditToteutusHeader toteutus={toteutus} />}
-      steps={<EditToteutusSteps />}
-      footer={
-        toteutus ? (
-          <EditToteutusFooter
+    <>
+      <Title>{t('sivuTitlet.toteutuksenMuokkaus')}</Title>
+      <FormPage
+        header={<EditToteutusHeader toteutus={toteutus} />}
+        steps={<EditToteutusSteps />}
+        footer={
+          toteutus ? (
+            <EditToteutusFooter
+              toteutus={toteutus}
+              koulutustyyppi={koulutustyyppi}
+            />
+          ) : null
+        }
+      >
+        {organisaatioOid ? (
+          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+        ) : null}
+        {toteutus ? (
+          <EditToteutusForm
             toteutus={toteutus}
+            organisaatioOid={organisaatioOid}
+            koulutusKoodiUri={koulutus ? koulutus.koulutusKoodiUri : null}
             koulutustyyppi={koulutustyyppi}
+            scrollTarget={scrollTarget}
           />
-        ) : null
-      }
-    >
-      {organisaatioOid ? (
-        <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-      ) : null}
-      {toteutus ? (
-        <EditToteutusForm
-          toteutus={toteutus}
-          organisaatioOid={organisaatioOid}
-          koulutusKoodiUri={koulutus ? koulutus.koulutusKoodiUri : null}
-          koulutustyyppi={koulutustyyppi}
-          scrollTarget={scrollTarget}
-        />
-      ) : (
-        <Spin center />
-      )}
-    </FormPage>
+        ) : (
+          <Spin center />
+        )}
+      </FormPage>
+    </>
   );
 };
 

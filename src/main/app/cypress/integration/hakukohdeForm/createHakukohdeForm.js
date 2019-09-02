@@ -1,7 +1,6 @@
 import merge from 'lodash/merge';
 
 import {
-  getByTestId,
   getRadio,
   selectOption,
   getCheckbox,
@@ -15,63 +14,61 @@ import toteutus from '../../data/toteutus';
 import valintaperuste from '../../data/valintaperuste';
 import { stubHakukohdeFormRoutes } from '../../hakukohdeFormUtils';
 
-const jatka = cy => {
-  getByTestId('jatkaButton', cy).click({ force: true });
+const jatka = () => {
+  cy.getByTestId('jatkaButton').click({ force: true });
 };
 
-const lisaa = cy => {
-  getByTestId('lisaaButton', cy).click({ force: true });
+const lisaa = () => {
+  cy.getByTestId('lisaaButton').click({ force: true });
 };
 
-const tallenna = cy => {
-  getByTestId('tallennaJaJulkaiseHakukohdeButton', cy).click({ force: true });
+const tallenna = () => {
+  cy.getByTestId('tallennaHakukohdeButton').click({ force: true });
 };
 
-const fillKieliversiotSection = cy => {
-  getByTestId('kieliversiotSection', cy).within(() => {
+const fillKieliversiotSection = () => {
+  cy.getByTestId('kieliversiotSection').within(() => {
     chooseKieliversiotLanguages(['fi'], cy);
-    jatka(cy);
+    jatka();
   });
 };
 
-const fillPohjakoulutusvaatimusSection = cy => {
-  getByTestId('pohjakoulutusvaatimusSection', cy).within(() => {
+const fillPohjakoulutusvaatimusSection = () => {
+  cy.getByTestId('pohjakoulutusvaatimusSection').within(() => {
     selectOption('pohjakoulutusvaatimustoinenaste_0', cy);
 
-    jatka(cy);
+    jatka();
   });
 };
 
-const fillDatetime = ({ date, time, cy }) => {
+const fillDatetime = ({ date, time }) => {
   fillDateTimeInput({ date, time, cy });
 };
 
-const fillHakuajatSection = cy => {
-  getByTestId('hakuajatSection', cy).within(() => {
+const fillHakuajatSection = () => {
+  cy.getByTestId('hakuajatSection').within(() => {
     getCheckbox(null, cy).click({ force: true });
-    lisaa(cy);
+    lisaa();
 
-    getByTestId('alkaa', cy).within(() => {
+    cy.getByTestId('alkaa').within(() => {
       fillDatetime({
         date: '02.04.2019',
         time: '10:45',
-        cy,
       });
     });
 
-    getByTestId('paattyy', cy).within(() => {
+    cy.getByTestId('paattyy').within(() => {
       fillDatetime({
         date: '25.11.2019',
         time: '23:59',
-        cy,
       });
     });
   });
 };
 
-const fillPerustiedotSection = (cy, { isKorkeakoulu = false } = {}) => {
-  getByTestId('perustiedotSection', cy).within(() => {
-    getByTestId('hakukohteenNimi', cy)
+const fillPerustiedotSection = ({ isKorkeakoulu = false } = {}) => {
+  cy.getByTestId('perustiedotSection').within(() => {
+    cy.getByTestId('hakukohteenNimi')
       .find('input')
       .type('Hakukohteen nimi', { force: true });
 
@@ -81,17 +78,17 @@ const fillPerustiedotSection = (cy, { isKorkeakoulu = false } = {}) => {
       });
     }
 
-    fillHakuajatSection(cy);
-    fillAlkamiskausiSection(cy);
-    fillLomakeSection(cy);
+    fillHakuajatSection();
+    fillAlkamiskausiSection();
+    fillLomakeSection();
 
-    jatka(cy);
+    jatka();
   });
 };
 
-const fillLomakeSection = cy => {
-  getByTestId('lomakeSection', cy).within(() => {
-    getByTestId('eriHakulomake', cy).within(() => {
+const fillLomakeSection = () => {
+  cy.getByTestId('lomakeSection').within(() => {
+    cy.getByTestId('eriHakulomake').within(() => {
       getCheckbox(null, cy).click({ force: true });
     });
 
@@ -100,8 +97,8 @@ const fillLomakeSection = cy => {
   });
 };
 
-const fillAlkamiskausiSection = cy => {
-  getByTestId('alkamiskausiSection', cy).within(() => {
+const fillAlkamiskausiSection = () => {
+  cy.getByTestId('alkamiskausiSection').within(() => {
     cy.getByTestId('eriAlkamiskausi').within(() => {
       getCheckbox(null, cy).click({ force: true });
     });
@@ -111,8 +108,8 @@ const fillAlkamiskausiSection = cy => {
   });
 };
 
-const fillAloituspaikatSection = (cy, { isKorkeakoulu = false } = {}) => {
-  getByTestId('aloituspaikatSection', cy).within(() => {
+const fillAloituspaikatSection = ({ isKorkeakoulu = false } = {}) => {
+  cy.getByTestId('aloituspaikatSection').within(() => {
     cy.getByTestId('aloituspaikkamaara').within(() => {
       cy.getByTestId('min')
         .find('input')
@@ -133,63 +130,74 @@ const fillAloituspaikatSection = (cy, { isKorkeakoulu = false } = {}) => {
       });
     }
 
-    jatka(cy);
+    jatka();
   });
 };
 
-const fillValintaperusteenKuvausSection = cy => {
-  getByTestId('valintaperusteenKuvausSection', cy).within(() => {
+const fillValintaperusteenKuvausSection = () => {
+  cy.getByTestId('valintaperusteenKuvausSection').within(() => {
     selectOption('Valintaperusteen nimi', cy);
-    jatka(cy);
+    jatka();
   });
 };
 
-const fillValintakoeSection = cy => {
-  getByTestId('valintakoeSection', cy).within(() => {
+const fillValintakoeSection = () => {
+  cy.getByTestId('valintakoeSection').within(() => {
     fillValintakoeFields({ cy });
-    jatka(cy);
+    jatka();
   });
 };
 
-const fillLiitteetSection = cy => {
-  getByTestId('liitteetSection', cy).within(() => {
-    lisaa(cy);
+const fillLiitteetSection = () => {
+  cy.getByTestId('liitteetSection').within(() => {
+    lisaa();
 
-    getByTestId('liitelista', cy).within(() => {
-      getByTestId('tyyppi', cy).within(() => {
+    cy.getByTestId('liitelista').within(() => {
+      cy.getByTestId('tyyppi').within(() => {
         selectOption('liitetyypitamm_0', cy);
       });
 
-      getByTestId('nimi', cy)
+      cy.getByTestId('nimi')
         .find('input')
         .type('Nimi', { force: true });
-      getByTestId('kuvaus', cy)
+
+      cy.getByTestId('kuvaus')
         .find('textarea')
         .type('Kuvaus', { force: true });
 
       fillDatetime({
         date: '25.11.2019',
         time: '23:59',
-        cy,
       });
 
       cy.getByTestId('toimitustapa').within(() => {
         getRadio('osoite', cy).click({ force: true });
       });
 
-      getByTestId('osoite', cy)
+      cy.getByTestId('osoite')
         .find('input')
         .type('Osoite', { force: true });
-      getByTestId('postinumero', cy)
+
+      cy.getByTestId('postinumero')
         .find('input')
         .type('00940', { force: true });
-      getByTestId('postitoimipaikka', cy)
+
+      cy.getByTestId('postitoimipaikka')
         .find('input')
         .type('Helsinki', { force: true });
-      getByTestId('sahkoposti', cy)
+
+      cy.getByTestId('sahkoposti')
         .find('input')
         .type('sahkoposti@email.com', { force: true });
     });
+
+    jatka();
+  });
+};
+
+const fillTilaSection = (tila = 'julkaistu') => {
+  cy.getByTestId('tilaSection').within(() => {
+    getRadio(tila, cy).check({ force: true });
   });
 };
 
@@ -250,15 +258,15 @@ describe('createHakukohdeForm', () => {
       },
     }).as('createHakukohdeRequest');
 
-    fillKieliversiotSection(cy);
-    fillPohjakoulutusvaatimusSection(cy);
-    fillPerustiedotSection(cy);
-    fillAloituspaikatSection(cy);
-    fillValintaperusteenKuvausSection(cy);
-    fillValintakoeSection(cy);
-    fillLiitteetSection(cy);
-
-    tallenna(cy);
+    fillKieliversiotSection();
+    fillPohjakoulutusvaatimusSection();
+    fillPerustiedotSection();
+    fillAloituspaikatSection();
+    fillValintaperusteenKuvausSection();
+    fillValintakoeSection();
+    fillLiitteetSection();
+    fillTilaSection();
+    tallenna();
 
     cy.wait('@createHakukohdeRequest').then(({ request }) => {
       cy.wrap(request.body).snapshot();
@@ -288,15 +296,16 @@ describe('createHakukohdeForm', () => {
       },
     }).as('createHakukohdeRequest');
 
-    fillKieliversiotSection(cy);
-    fillPohjakoulutusvaatimusSection(cy);
-    fillPerustiedotSection(cy, { isKorkeakoulu: true });
-    fillAloituspaikatSection(cy, { isKorkeakoulu: true });
-    fillValintaperusteenKuvausSection(cy);
-    fillValintakoeSection(cy);
-    fillLiitteetSection(cy);
+    fillKieliversiotSection();
+    fillPohjakoulutusvaatimusSection();
+    fillPerustiedotSection({ isKorkeakoulu: true });
+    fillAloituspaikatSection({ isKorkeakoulu: true });
+    fillValintaperusteenKuvausSection();
+    fillValintakoeSection();
+    fillLiitteetSection();
+    fillTilaSection();
 
-    tallenna(cy);
+    tallenna();
 
     cy.wait('@createHakukohdeRequest').then(({ request }) => {
       cy.wrap(request.body).snapshot();

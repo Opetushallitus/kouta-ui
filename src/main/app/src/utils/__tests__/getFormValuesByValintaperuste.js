@@ -2,6 +2,7 @@ import getFormValuesByValintaperuste from '../getFormValuesByValintaperuste';
 
 test('getFormValuesByValintaperuste returns correct form values given valintaperuste', () => {
   const values = getFormValuesByValintaperuste({
+    tila: 'tallennettu',
     hakutapaKoodiUri: 'tapa_1#1',
     kielivalinta: ['fi', 'sv'],
     kohdejoukkoKoodiUri: 'joukko_1#1',

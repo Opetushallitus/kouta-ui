@@ -215,6 +215,7 @@ Object {
       "osaamisala2",
     ],
   },
+  "tila": "tallennettu",
   "yhteyshenkilot": Array [
     Object {
       "nimi": Object {

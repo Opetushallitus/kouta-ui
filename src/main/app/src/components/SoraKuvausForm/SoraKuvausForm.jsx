@@ -11,6 +11,7 @@ import KoulutustyyppiSection from './KoulutustyyppiSection';
 import TiedotSection from './TiedotSection';
 import JulkisuusSection from './JulkisuusSection';
 import useFieldValue from '../useFieldValue';
+import JulkaisutilaSection from './JulkaisutilaSection';
 
 const PohjaFormCollapse = ({
   children,
@@ -42,6 +43,7 @@ const SoraKuvausForm = ({
   canSelectBase = true,
   organisaatioOid,
   onSelectBase = () => {},
+  showArkistoituTilaOption = true,
 }) => {
   const { t } = useTranslation();
   const kieliversiot = useFieldValue('kieliversiot');
@@ -89,6 +91,17 @@ const SoraKuvausForm = ({
         {...getTestIdProps('julkisuusSection')}
       >
         <JulkisuusSection name="julkinen" />
+      </FormCollapse>
+
+      <FormCollapse
+        section="julkaisutila"
+        header={t('soraKuvausLomake.soraKuvauksenTila')}
+        {...getTestIdProps('tilaSection')}
+      >
+        <JulkaisutilaSection
+          name="tila"
+          showArkistoitu={showArkistoituTilaOption}
+        />
       </FormCollapse>
     </FormCollapseGroup>
   );

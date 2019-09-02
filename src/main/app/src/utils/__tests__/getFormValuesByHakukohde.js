@@ -3,6 +3,7 @@ import { HAKULOMAKETYYPPI } from '../../constants';
 
 test('getFormValuesByHakukohde returns correct form values given hakukohde', () => {
   const values = getFormValuesByHakukohde({
+    tila: 'tallennettu',
     alkamiskausiKoodiUri: 'kausi_1#1',
     kaytetaanHaunAikataulua: false,
     kielivalinta: ['fi', 'sv'],

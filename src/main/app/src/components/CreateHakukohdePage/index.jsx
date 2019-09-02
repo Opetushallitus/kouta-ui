@@ -16,6 +16,7 @@ import useApiAsync from '../useApiAsync';
 import Spin from '../Spin';
 import useTranslation from '../useTranslation';
 import getToteutusByOid from '../../utils/kouta/getToteutusByOid';
+import Title from '../Title';
 
 const getHakukohdeData = async ({
   organisaatioOid,
@@ -67,57 +68,61 @@ const CreateHakukohdePage = props => {
     get(data, 'koulutustyyppi') || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
   return (
-    <FormPage
-      header={<CreateHakukohdeHeader />}
-      steps={<CreateHakukohdeSteps />}
-      footer={
-        <CreateHakukohdeFooter
-          organisaatioOid={organisaatioOid}
-          hakuOid={hakuOid}
-          toteutusOid={toteutusOid}
-        />
-      }
-    >
-      {data ? (
-        <>
-          <Flex marginBottom={2} justifyBetween>
-            <FlexItem grow={0} paddingRight={2}>
-              <Typography variant="h6" marginBottom={1}>
-                {t('yleiset.organisaatio')}
-              </Typography>
-              <Typography>
-                {getFirstLanguageValue(get(data, 'organisaatio.nimi'))}
-              </Typography>
-            </FlexItem>
-            <FlexItem grow={0}>
-              <Typography variant="h6" marginBottom={1}>
-                {t('yleiset.haku')}
-              </Typography>
-              <Typography>
-                {getFirstLanguageValue(get(data, 'haku.nimi'))}
-              </Typography>
-            </FlexItem>
-            <FlexItem grow={0}>
-              <Typography variant="h6" marginBottom={1}>
-                {t('yleiset.toteutus')}
-              </Typography>
-              <Typography>
-                {getFirstLanguageValue(get(data, 'toteutus.nimi'))}
-              </Typography>
-            </FlexItem>
-          </Flex>
-          <CreateHakukohdeForm
-            organisaatio={data.organisaatio}
+    <>
+      <Title>{t('sivuTitle.uusiHakukohde')}</Title>
+      <FormPage
+        header={<CreateHakukohdeHeader />}
+        steps={<CreateHakukohdeSteps />}
+        footer={
+          <CreateHakukohdeFooter
             organisaatioOid={organisaatioOid}
-            haku={data.haku}
-            toteutus={data.toteutus}
-            koulutustyyppi={koulutustyyppi}
+            hakuOid={hakuOid}
+            toteutusOid={toteutusOid}
           />
-        </>
-      ) : (
-        <Spin center />
-      )}
-    </FormPage>
+        }
+      >
+        {data ? (
+          <>
+            <Flex marginBottom={2} justifyBetween>
+              <FlexItem grow={0} paddingRight={2}>
+                <Typography variant="h6" marginBottom={1}>
+                  {t('yleiset.organisaatio')}
+                </Typography>
+                <Typography>
+                  {getFirstLanguageValue(get(data, 'organisaatio.nimi'))}
+                </Typography>
+              </FlexItem>
+              <FlexItem grow={0}>
+                <Typography variant="h6" marginBottom={1}>
+                  {t('yleiset.haku')}
+                </Typography>
+                <Typography>
+                  {getFirstLanguageValue(get(data, 'haku.nimi'))}
+                </Typography>
+              </FlexItem>
+              <FlexItem grow={0}>
+                <Typography variant="h6" marginBottom={1}>
+                  {t('yleiset.toteutus')}
+                </Typography>
+                <Typography>
+                  {getFirstLanguageValue(get(data, 'toteutus.nimi'))}
+                </Typography>
+              </FlexItem>
+            </Flex>
+            <CreateHakukohdeForm
+              organisaatio={data.organisaatio}
+              organisaatioOid={organisaatioOid}
+              haku={data.haku}
+              toteutus={data.toteutus}
+              koulutustyyppi={koulutustyyppi}
+              showArkistoituTilaOption={false}
+            />
+          </>
+        ) : (
+          <Spin center />
+        )}
+      </FormPage>
+    </>
   );
 };
 

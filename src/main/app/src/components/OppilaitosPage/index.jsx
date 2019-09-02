@@ -9,6 +9,8 @@ import OppilaitosPageFooter from './OppilaitosPageFooter';
 import useApiAsync from '../useApiAsync';
 import getOppilaitos from '../../utils/kouta/getOppilaitos';
 import Spin from '../Spin';
+import Title from '../Title';
+import useTranslation from '../useTranslation';
 
 const Steps = () => <OppilaitosFormSteps activeStep="oppilaitos" />;
 
@@ -32,28 +34,32 @@ const OppilaitosPage = ({
   });
 
   const oppilaitosIsResolved = !!finishedAt;
+  const { t } = useTranslation();
 
   return (
-    <FormPage
-      steps={<Steps />}
-      header={<OppilaitosPageHeader organisaatio={organisaatio} />}
-      footer={
-        <OppilaitosPageFooter
-          oppilaitos={oppilaitos}
-          oppilaitosIsLoading={oppilaitosIsLoading}
-          organisaatioOid={organisaatioOid}
-        />
-      }
-    >
-      {organisaatio && oppilaitosIsResolved ? (
-        <OppilaitosPageForm
-          organisaatio={organisaatio}
-          oppilaitos={oppilaitos}
-        />
-      ) : (
-        <Spin center />
-      )}
-    </FormPage>
+    <>
+      <Title>{t('sivuTitlet.oppilaitos')}</Title>
+      <FormPage
+        steps={<Steps />}
+        header={<OppilaitosPageHeader organisaatio={organisaatio} />}
+        footer={
+          <OppilaitosPageFooter
+            oppilaitos={oppilaitos}
+            oppilaitosIsLoading={oppilaitosIsLoading}
+            organisaatioOid={organisaatioOid}
+          />
+        }
+      >
+        {organisaatio && oppilaitosIsResolved ? (
+          <OppilaitosPageForm
+            organisaatio={organisaatio}
+            oppilaitos={oppilaitos}
+          />
+        ) : (
+          <Spin center />
+        )}
+      </FormPage>
+    </>
   );
 };
 

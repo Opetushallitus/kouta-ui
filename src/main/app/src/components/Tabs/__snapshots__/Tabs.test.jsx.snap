@@ -21,7 +21,7 @@ exports[`renders correctly 1`] = `
   font-family: 'Roboto',sans-serif;
   line-height: 1.5;
   font-size: 1rem;
-  color: #2da0c7;
+  color: #159ecb;
   border-bottom: 0px none;
   cursor: pointer;
   border: 1px solid transparent;
@@ -31,7 +31,7 @@ exports[`renders correctly 1`] = `
 }
 
 .c2:hover {
-  color: #3bacd3;
+  color: #17b0e2;
 }
 
 .c3 {
@@ -43,7 +43,7 @@ exports[`renders correctly 1`] = `
   font-family: 'Roboto',sans-serif;
   line-height: 1.5;
   font-size: 1rem;
-  color: #2da0c7;
+  color: #159ecb;
   border-bottom: 0px none;
   cursor: pointer;
   border: 1px solid transparent;
@@ -51,7 +51,7 @@ exports[`renders correctly 1`] = `
   -webkit-transition: color 0.25s;
   transition: color 0.25s;
   border: 1px solid #cccccc;
-  border-top: 2px solid #2da0c7;
+  border-top: 2px solid #159ecb;
   border-bottom: 1px solid white;
   color: #666666;
   background-color: white;

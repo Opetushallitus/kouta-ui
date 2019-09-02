@@ -1,9 +1,9 @@
+import 'react-day-picker/lib/style.css';
+
 import React, { useMemo } from 'react';
 import DayPicker from 'react-day-picker';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import { createGlobalStyle } from 'styled-components';
-
-import 'react-day-picker/lib/style.css';
 
 import { getThemeProp } from '../../theme';
 import Input, { AddonIcon } from '../Input';
@@ -82,7 +82,7 @@ const DatePickerStyle = createGlobalStyle`
     display: inline-block !important;
     transform: translateY(${getThemeProp('spacing.unit')}px);
     position: absolute;
-    z-index: 1;
+    z-index: ${getThemeProp('zIndices.datePicker')};
   }
 `;
 

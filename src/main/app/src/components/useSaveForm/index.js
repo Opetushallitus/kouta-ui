@@ -1,5 +1,5 @@
-import { useCallback, useMemo, useContext } from 'react';
-import { useDispatch, useSelector, batch } from 'react-redux';
+import { useCallback, useContext } from 'react';
+import { useDispatch, batch, useStore } from 'react-redux';
 
 import {
   startSubmit as startSubmitAction,
@@ -12,7 +12,6 @@ import useAuthorizedUser from '../useAuthorizedUser';
 import HttpContext from '../HttpContext';
 import UrlContext from '../UrlContext';
 import isEmpty from '../../utils/isEmpty';
-import { JULKAISUTILA } from '../../constants';
 
 import {
   openSavingErrorToast,
@@ -24,15 +23,7 @@ const useSaveForm = ({ form, validate, submit }) => {
   const user = useAuthorizedUser();
   const httpClient = useContext(HttpContext);
   const apiUrls = useContext(UrlContext);
-
-  const selector = useMemo(
-    () => state => {
-      return get(state, ['form', form, 'values']) || {};
-    },
-    [form],
-  );
-
-  const values = useSelector(selector);
+  const store = useStore();
 
   const startSubmit = useCallback(() => {
     return dispatch(startSubmitAction(form));
@@ -53,54 +44,42 @@ const useSaveForm = ({ form, validate, submit }) => {
     [form, dispatch],
   );
 
-  const saveWithTila = useCallback(
-    async tila => {
-      const muokkaaja = get(user, 'oid');
-      const enhancedValues = { muokkaaja, tila, ...values };
+  const save = useCallback(async () => {
+    const values = get(store.getState(), ['form', form, 'values']) || {};
+    const muokkaaja = get(user, 'oid');
+    const enhancedValues = { muokkaaja, ...values };
 
-      startSubmit();
+    startSubmit();
 
-      const errors = await validate(enhancedValues);
+    const errors = await validate(enhancedValues);
 
-      if (!isEmpty(errors)) {
-        stopSubmit({ errors, errorToast: true });
-        return;
-      }
+    if (!isEmpty(errors)) {
+      stopSubmit({ errors, errorToast: true });
+      return;
+    }
 
-      try {
-        submit({ values: enhancedValues, httpClient, apiUrls });
-      } catch (e) {
-        stopSubmit({ errorToast: true });
-        return;
-      }
+    try {
+      await submit({ values: enhancedValues, httpClient, apiUrls });
+    } catch (e) {
+      stopSubmit({ errorToast: true });
+      return;
+    }
 
-      stopSubmit({ successToast: true });
-    },
-    [
-      user,
-      values,
-      submit,
-      startSubmit,
-      stopSubmit,
-      validate,
-      httpClient,
-      apiUrls,
-    ],
-  );
-
-  const save = useCallback(() => saveWithTila(JULKAISUTILA.TALLENNETTU), [
-    saveWithTila,
+    stopSubmit({ successToast: true });
+  }, [
+    user,
+    submit,
+    startSubmit,
+    stopSubmit,
+    validate,
+    httpClient,
+    apiUrls,
+    store,
+    form,
   ]);
-
-  const saveAndPublish = useCallback(
-    () => saveWithTila(JULKAISUTILA.JULKAISTU),
-    [saveWithTila],
-  );
 
   return {
     save,
-    saveAndPublish,
-    saveWithTila,
   };
 };
 

@@ -162,11 +162,36 @@ export default {
     oppilaitoksenOsa: 'Oppilaitoksen osa',
     toteutukset: 'Toteutukset',
     nimeton: 'Nimetön',
+    valitseJulkaisutila: 'Valitse julkaisutila',
+  },
+  sivuTitlet: {
+    etuliite: 'Tarjonta',
+    etusivu: 'Etusivu',
+    uusiKoulutus: 'Uusi koulutus',
+    koulutuksenMuokkaus: 'Koulutuksen muokkaus',
+    uusiToteutus: 'Uusi toteutus',
+    toteutuksenMuokkaus: 'Toteutuksen muokkaus',
+    uusiHaku: 'Uusi haku',
+    haunMuokkaus: 'Haun muokkaus',
+    uusiHakukohde: 'Uusi hakukohde',
+    hakukohteenMuokkaus: 'Hakukohteen muokkaus',
+    uusiValintaperuste: 'Uusi valintaperuste',
+    valintaperusteenMuokkaus: 'Valintaperusteen muokkaus',
+    uusiSoraKuvaus: 'Uusi SORA-kuvaus',
+    soraKuvauksenMuokkaus: 'SORA-kuvauksen muokkaus',
+    oppilaitos: 'Oppilaitos',
+    oppilaitoksenOsa: 'Oppilaitoksen osa',
   },
   julkaisutilat: {
     tallennettu: 'Luonnos',
     julkaistu: 'Julkaistu',
     arkistoitu: 'Arkistoitu',
+  },
+  julkaisutilojenSelitteet: {
+    tallennettu: 'Luonnoksen tiedot näkyvät vain virkailijalle',
+    julkaistu: 'Julkaisemalla tiedot näytetään Opintopolussa',
+    arkistoitu:
+      'Arkistointi siirtää tiedot pois näkyvistä, mutta ei poista niitä',
   },
   validointivirheet: {
     syotaArvo: 'Syötä kentälle arvo',
@@ -182,8 +207,8 @@ export default {
   },
   koulutustyypit: {
     ammatillinen: 'Ammatillinen',
-    valma: 'Valma',
-    telma: 'Telma',
+    valma: 'VALMA',
+    telma: 'TELMA',
     tutkinnonOsa: 'Tutkinnon osa',
     osaamisala: 'Osaamisala',
     korkeakoulutus: 'Korkeakoulutus',
@@ -195,7 +220,7 @@ export default {
     ammatillinenOpettajakoulutus: 'Ammatillinen opettajakoulutus',
     vapaaSivistystyo: 'Vapaa sivistystyö',
     yleissivistava: 'Yleissivistävä',
-    luva: 'LUVA',
+    luva: 'Yleissivistävä (LUVA)',
     muutKoulutukset: 'Muut koulutukset',
     perusopetuksenLisaopetus: 'Perusopetuksen lisäopetus',
     amm: 'Ammatillinen koulutus',
@@ -259,6 +284,7 @@ export default {
     lisatiedotInfo:
       'Voit halutessasi lisätä vapaasti täytettäviä osioita, jotka antavat tarkempaa tietoa koulutuksesta.',
     valitseOsaamisala: 'Valitse osaamisala',
+    koulutuksenTila: 'Koulutuksen tila',
   },
   toteutuslomake: {
     toteutuksellaEiHakukohteita:
@@ -304,6 +330,7 @@ export default {
     valitseLukioLinja: 'Valitse lukio linja',
     valitseLinjanTarkenne: 'Valitse linjan tarkenne',
     jaksonKuvaus: 'Jakson kuvaus',
+    toteutuksenTila: 'Toteutuksen tila',
   },
   hakulomake: {
     haunNimi: 'Haun nimi',
@@ -326,6 +353,7 @@ export default {
     haullaEiHakukohteita: 'Tähän hakuun ei ole vielä liitetty hakukohteita',
     hakuunOnLiitettyHakukohteet:
       'Tähän hakuun on liitetty seuraavat hakukohteet',
+    haunTila: 'Haun tila',
   },
   hakukohdelomake: {
     toteutukseenLiitettyAlkamiskausi: 'Toteutukseen liitetty alkamiskausi',
@@ -360,6 +388,7 @@ export default {
     hakuunEiOleLiitettyLomaketta: 'Hakuun ei ole liitetty lomaketta',
     hakuunLiitettyLomake: 'Hakuun liitetty lomake',
     avaaLomake: 'Avaa lomake',
+    hakukohteenTila: 'Hakukohteen tila',
   },
   valintaperustelomake: {
     valintaperusteenPerustiedot: 'Valintaperusteen perustiedot',
@@ -395,12 +424,14 @@ export default {
     valintaperusteenNakyminen: 'Valintaperusteen näkyminen muille toimijoille',
     valitseValintaperusteenNakyminen:
       'Valitse näkyykö valintaperuste muille koulutustoimijoille',
+    valintaperusteenTila: 'Valintaperusteen tila',
   },
   soraKuvausLomake: {
     soraKuvauksenTiedot: 'SORA-kuvauksen tiedot',
     soraKuvausOnJulkinen: 'SORA-kuvaus on julkinen',
     soraKuvauksenNayttamiseenLiittyvatTiedot:
       'SORA-kuvauksen näyttämiseen liittyvät tiedot',
+    soraKuvauksenTila: 'SORA-kuvauksen tila',
   },
   oppilaitoslomake: {
     oppilaitoksenPerustiedot: 'Oppilaitoksen perustiedot',
@@ -428,6 +459,7 @@ export default {
     valitseLisattavaOsio: 'Valitse lisättävä osio',
     oppilaitoksenYhteystiedot: 'Oppilaitoksen yhteystiedot',
     yhteystiedotInfo: 'Anna oppilaitokselle tarvittavat yhteystiedot',
+    oppilaitoksenTila: 'Oppilaitoksen tila',
   },
   oppilaitoksenOsaLomake: {
     oppilaitoksenOsanPerustiedot: 'Oppilaitoksen osan perustiedot',
@@ -440,5 +472,6 @@ export default {
     oppilaitoksenOsanEsittely: 'Oppilaitoksen osan esittely',
     oppilaitoksenOsanYhteystiedot: 'Oppilaitoksen osan yhteystiedot',
     yhteystiedotInfo: 'Anna oppilaitokselle tarvittavat yhteystiedot',
+    oppilaitoksenOsanTila: 'Oppilaitoksen osan tila',
   },
 };

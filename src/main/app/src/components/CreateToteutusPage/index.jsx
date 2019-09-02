@@ -11,6 +11,8 @@ import useApiAsync from '../useApiAsync';
 import Spin from '../Spin';
 import { KOULUTUSTYYPPI } from '../../constants';
 import useSelectBase from '../useSelectBase';
+import Title from '../Title';
+import useTranslation from '../useTranslation';
 
 const CreateToteutusPage = props => {
   const {
@@ -30,6 +32,7 @@ const CreateToteutusPage = props => {
   });
 
   const selectBase = useSelectBase(history, { kopioParam: 'kopioToteutusOid' });
+  const { t } = useTranslation();
 
   const koulutustyyppi =
     data && data.koulutustyyppi
@@ -37,32 +40,36 @@ const CreateToteutusPage = props => {
       : KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
   return (
-    <FormPage
-      header={<CreateToteutusHeader />}
-      steps={<CreateToteutusSteps />}
-      footer={
-        data ? (
-          <CreateToteutusFooter
-            koulutustyyppi={koulutustyyppi}
+    <>
+      <Title>{t('sivuTitlet.uusiToteutus')}</Title>
+      <FormPage
+        header={<CreateToteutusHeader />}
+        steps={<CreateToteutusSteps />}
+        footer={
+          data ? (
+            <CreateToteutusFooter
+              koulutustyyppi={koulutustyyppi}
+              organisaatioOid={organisaatioOid}
+              koulutusOid={koulutusOid}
+            />
+          ) : null
+        }
+      >
+        <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+        {data ? (
+          <CreateToteutusForm
+            koulutusKoodiUri={data.koulutusKoodiUri}
             organisaatioOid={organisaatioOid}
-            koulutusOid={koulutusOid}
+            koulutustyyppi={koulutustyyppi}
+            kopioToteutusOid={kopioToteutusOid}
+            onSelectBase={selectBase}
+            showArkistoituTilaOption={false}
           />
-        ) : null
-      }
-    >
-      <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-      {data ? (
-        <CreateToteutusForm
-          koulutusKoodiUri={data.koulutusKoodiUri}
-          organisaatioOid={organisaatioOid}
-          koulutustyyppi={koulutustyyppi}
-          kopioToteutusOid={kopioToteutusOid}
-          onSelectBase={selectBase}
-        />
-      ) : (
-        <Spin center />
-      )}
-    </FormPage>
+        ) : (
+          <Spin center />
+        )}
+      </FormPage>
+    </>
   );
 };
 

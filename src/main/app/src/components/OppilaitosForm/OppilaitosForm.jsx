@@ -9,10 +9,15 @@ import EsittelySection from './EsittelySection';
 import OsatSection from './OsatSection';
 import TietoaOpiskelustaSection from './TietoaOpiskelustaSection';
 import YhteystiedotSection from './YhteystiedotSection';
+import JulkaisutilaSection from './JulkaisutilaSection';
 
 const languageTabs = ['fi', 'sv', 'en'];
 
-const OppilaitosForm = ({ steps = false, organisaatioOid }) => {
+const OppilaitosForm = ({
+  steps = false,
+  organisaatioOid,
+  showArkistoituTilaOption = true,
+}) => {
   const { t } = useTranslation();
 
   return (
@@ -56,6 +61,16 @@ const OppilaitosForm = ({ steps = false, organisaatioOid }) => {
         {...getTestIdProps('yhteystiedotSection')}
       >
         <YhteystiedotSection name="yhteystiedot" />
+      </FormCollapse>
+
+      <FormCollapse
+        header={t('oppilaitoslomake.oppilaitoksenTila')}
+        {...getTestIdProps('tilaSection')}
+      >
+        <JulkaisutilaSection
+          name="tila"
+          showArkistoitu={showArkistoituTilaOption}
+        />
       </FormCollapse>
     </FormCollapseGroup>
   );

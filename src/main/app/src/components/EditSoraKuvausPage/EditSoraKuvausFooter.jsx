@@ -1,9 +1,7 @@
 import React, { useCallback } from 'react';
-import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 
 import Button from '../Button';
-import { JULKAISUTILA } from '../../constants';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
 import Flex from '../Flex';
@@ -12,12 +10,7 @@ import updateSoraKuvaus from '../../utils/kouta/updateSoraKuvaus';
 import useSaveForm from '../useSaveForm';
 import validateSoraKuvausForm from '../../utils/validateSoraKuvausForm';
 
-const PublishButton = styled(Button)`
-  margin-left: ${({ theme }) => theme.spacing.unit * 2}px;
-`;
-
 const EditSoraKuvausFooter = ({ soraKuvaus, history }) => {
-  const { tila } = soraKuvaus;
   const { t } = useTranslation();
 
   const submit = useCallback(
@@ -28,10 +21,6 @@ const EditSoraKuvausFooter = ({ soraKuvaus, history }) => {
         soraKuvaus: {
           ...soraKuvaus,
           ...getSoraKuvausByFormValues(values),
-          tila:
-            soraKuvaus.tila === JULKAISUTILA.JULKAISTU
-              ? soraKuvaus.tila
-              : values.tila,
         },
       });
 
@@ -44,7 +33,7 @@ const EditSoraKuvausFooter = ({ soraKuvaus, history }) => {
     [soraKuvaus, history],
   );
 
-  const { save, saveAndPublish } = useSaveForm({
+  const { save } = useSaveForm({
     form: 'editSoraKuvausForm',
     submit,
     validate: validateSoraKuvausForm,
@@ -52,21 +41,9 @@ const EditSoraKuvausFooter = ({ soraKuvaus, history }) => {
 
   return (
     <Flex justifyEnd>
-      <Button
-        variant="outlined"
-        onClick={save}
-        {...getTestIdProps('tallennaSoraKuvausButton')}
-      >
+      <Button onClick={save} {...getTestIdProps('tallennaSoraKuvausButton')}>
         {t('yleiset.tallenna')}
       </Button>
-      {tila !== JULKAISUTILA.JULKAISTU ? (
-        <PublishButton
-          onClick={saveAndPublish}
-          {...getTestIdProps('tallennaJaJulkaiseSoraKuvausButton')}
-        >
-          {t('yleiset.tallennaJaJulkaise')}
-        </PublishButton>
-      ) : null}
     </Flex>
   );
 };

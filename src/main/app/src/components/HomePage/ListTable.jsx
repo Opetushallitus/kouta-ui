@@ -5,17 +5,17 @@ import get from 'lodash/get';
 import Table, { TableHead, TableBody, TableRow, TableCell } from '../Table';
 import { getSortDirection, makeOnSort } from './utils';
 import Icon from '../Icon';
-import TilaLabel from './TilaLabel';
+import StatusTag from '../StatusTag';
 import { formatKoutaDateString, isFunction } from '../../utils';
 import useLanguage from '../useLanguage';
 
-import { UncontrolledDropdown } from '../Dropdown';
+import Dropdown from '../Dropdown';
 
 export const makeTilaColumn = t => ({
   title: t('yleiset.tila'),
   key: 'tila',
   sortable: true,
-  render: ({ tila }) => <TilaLabel tila={tila} />,
+  render: ({ tila }) => <StatusTag status={tila} />,
 });
 
 export const makeModifiedColumn = t => ({
@@ -52,17 +52,13 @@ const ActionsIcon = styled(Icon).attrs({ type: 'more_horiz' })`
 
 const ActionsDropdown = ({ actionsMenu }) => {
   return (
-    <UncontrolledDropdown
-      overlay={actionsMenu}
-      portalTarget={document.body}
-      overflow
-    >
-      {({ ref, onToggle, visible }) => (
+    <Dropdown overlay={actionsMenu} portalTarget={document.body} overflow>
+      {({ ref, onToggle, open }) => (
         <div ref={ref} onClick={onToggle} style={{ display: 'inline-block' }}>
-          <ActionsIcon active={visible} />
+          <ActionsIcon active={open} />
         </div>
       )}
-    </UncontrolledDropdown>
+    </Dropdown>
   );
 };
 

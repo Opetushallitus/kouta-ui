@@ -26,11 +26,7 @@ import { getFirstLanguageValue, getTestIdProps } from '../../utils';
 import useTranslation from '../useTranslation';
 import NavigationAnchor from './NavigationAnchor';
 
-import {
-  UncontrolledDropdown,
-  DropdownMenu,
-  DropdownMenuItem,
-} from '../Dropdown';
+import Dropdown, { DropdownMenu, DropdownMenuItem } from '../Dropdown';
 
 import Anchor from '../Anchor';
 import useInView from '../useInView';
@@ -70,19 +66,15 @@ const LuoKoulutusDropdown = ({ organisaatioOid }) => {
   );
 
   return (
-    <UncontrolledDropdown
-      overlay={overlay}
-      portalTarget={document.body}
-      overflow
-    >
-      {({ ref, onToggle, visible }) => (
+    <Dropdown overlay={overlay} portalTarget={document.body} overflow>
+      {({ ref, onToggle, open }) => (
         <div ref={ref} onClick={onToggle}>
           <Button>
-            {t('etusivu.luoUusiKoulutus')} <DropdownIcon open={visible} />
+            {t('etusivu.luoUusiKoulutus')} <DropdownIcon open={open} />
           </Button>
         </div>
       )}
-    </UncontrolledDropdown>
+    </Dropdown>
   );
 };
 

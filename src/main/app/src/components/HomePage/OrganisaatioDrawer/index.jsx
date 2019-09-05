@@ -21,7 +21,8 @@ import OrganisaatioFavouritesList from './OrganisaatioFavouritesList';
 import useTranslation from '../../useTranslation';
 import useLanguage from '../../useLanguage';
 import { useOrganisaatiot } from '../../useOrganisaatio';
-import Input, { AddonIcon } from '../../Input';
+import Input from '../../Input';
+import InputIcon from '../../InputIcon';
 import useDebounceState from '../../useDebounceState';
 import useOrganisaatioHierarkia from './useOrganisaatioHierarkia';
 import Spin from '../../Spin';
@@ -222,11 +223,11 @@ const DrawerContent = ({
           placeholder={t('etusivu.haeOrganisaatioita')}
           value={nameFilter}
           onChange={onNameFilterChange}
-          addonAfter={
+          suffix={
             loadingHierarkia ? (
               <Spin size="small" />
             ) : (
-              <AddonIcon type="search" />
+              <InputIcon type="search" />
             )
           }
         />

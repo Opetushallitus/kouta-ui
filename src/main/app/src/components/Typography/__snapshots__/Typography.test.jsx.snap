@@ -2,15 +2,12 @@
 
 exports[`renders correctly 1`] = `
 .c0 {
-  font-family: 'Roboto',sans-serif;
-  color: #666666;
+  margin: 0px;
+  padding: 0px;
   line-height: 1.5;
-  margin-bottom: 0px;
-  margin-top: 0px;
+  font-family: 'Roboto',sans-serif;
   font-size: 1rem;
   color: #666666;
-  line-height: 1.5;
-  font-family: 'Roboto',sans-serif;
 }
 
 <styled.span
@@ -28,15 +25,12 @@ exports[`renders correctly 1`] = `
 exports[`renders correctly with variant 1`] = `
 Array [
   .c0 {
-  font-family: 'Roboto',sans-serif;
-  color: #666666;
+  margin: 0px;
+  padding: 0px;
   line-height: 1.5;
-  margin-bottom: 0px;
-  margin-top: 0px;
+  font-family: 'Roboto',sans-serif;
   font-size: 1rem;
   color: #666666;
-  line-height: 1.5;
-  font-family: 'Roboto',sans-serif;
 }
 
 <styled.span
@@ -50,16 +44,13 @@ Array [
     </span>
   </styled.span>,
   .c0 {
-  font-family: 'Roboto',sans-serif;
-  color: #666666;
-  line-height: 1.5;
-  margin-bottom: 0px;
-  margin-top: 0px;
-  color: #2a2a2a;
-  font-family: 'Roboto',sans-serif;
-  font-size: 3rem;
-  font-weight: 500;
+  margin: 0px;
+  padding: 0px;
   line-height: 1.2;
+  font-family: 'Roboto',sans-serif;
+  color: #2a2a2a;
+  font-weight: 500;
+  font-size: 3rem;
 }
 
 <styled.span
@@ -73,16 +64,13 @@ Array [
     </h1>
   </styled.span>,
   .c0 {
-  font-family: 'Roboto',sans-serif;
-  color: #666666;
-  line-height: 1.5;
-  margin-bottom: 0px;
-  margin-top: 0px;
-  color: #2a2a2a;
-  font-family: 'Roboto',sans-serif;
-  font-size: 2.5rem;
-  font-weight: 500;
+  margin: 0px;
+  padding: 0px;
   line-height: 1.2;
+  font-family: 'Roboto',sans-serif;
+  color: #2a2a2a;
+  font-weight: 500;
+  font-size: 2.5rem;
 }
 
 <styled.span
@@ -96,16 +84,13 @@ Array [
     </h2>
   </styled.span>,
   .c0 {
-  font-family: 'Roboto',sans-serif;
-  color: #666666;
-  line-height: 1.5;
-  margin-bottom: 0px;
-  margin-top: 0px;
-  color: #2a2a2a;
-  font-family: 'Roboto',sans-serif;
-  font-size: 2rem;
-  font-weight: 500;
+  margin: 0px;
+  padding: 0px;
   line-height: 1.2;
+  font-family: 'Roboto',sans-serif;
+  color: #2a2a2a;
+  font-weight: 500;
+  font-size: 2rem;
 }
 
 <styled.span
@@ -119,16 +104,13 @@ Array [
     </h3>
   </styled.span>,
   .c0 {
-  font-family: 'Roboto',sans-serif;
-  color: #666666;
-  line-height: 1.5;
-  margin-bottom: 0px;
-  margin-top: 0px;
-  color: #2a2a2a;
-  font-family: 'Roboto',sans-serif;
-  font-size: 1.5rem;
-  font-weight: 500;
+  margin: 0px;
+  padding: 0px;
   line-height: 1.2;
+  font-family: 'Roboto',sans-serif;
+  color: #2a2a2a;
+  font-weight: 500;
+  font-size: 1.5rem;
 }
 
 <styled.span
@@ -142,16 +124,13 @@ Array [
     </h4>
   </styled.span>,
   .c0 {
-  font-family: 'Roboto',sans-serif;
-  color: #666666;
-  line-height: 1.5;
-  margin-bottom: 0px;
-  margin-top: 0px;
-  color: #2a2a2a;
-  font-family: 'Roboto',sans-serif;
-  font-size: 1.25rem;
-  font-weight: 500;
+  margin: 0px;
+  padding: 0px;
   line-height: 1.2;
+  font-family: 'Roboto',sans-serif;
+  color: #2a2a2a;
+  font-weight: 500;
+  font-size: 1.25rem;
 }
 
 <styled.span
@@ -165,16 +144,13 @@ Array [
     </h5>
   </styled.span>,
   .c0 {
-  font-family: 'Roboto',sans-serif;
-  color: #666666;
-  line-height: 1.5;
-  margin-bottom: 0px;
-  margin-top: 0px;
-  color: #2a2a2a;
-  font-family: 'Roboto',sans-serif;
-  font-size: 1rem;
-  font-weight: 500;
+  margin: 0px;
+  padding: 0px;
   line-height: 1.2;
+  font-family: 'Roboto',sans-serif;
+  color: #2a2a2a;
+  font-weight: 500;
+  font-size: 1rem;
 }
 
 <styled.span

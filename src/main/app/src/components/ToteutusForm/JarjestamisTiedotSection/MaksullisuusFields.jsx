@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 import styled from 'styled-components';
 
 import { FormFieldRadioGroup, FormFieldInput } from '../../FormFields';
-import { AddonIcon } from '../../Input';
+import InputIcon from '../../InputIcon';
 import useTranslation from '../../useTranslation';
 import Spacing from '../../Spacing';
 import { getTestIdProps } from '../../../utils';
@@ -22,7 +22,7 @@ export const MaksuField = ({ input: { value }, maksuName, t }) => {
           component={FormFieldInput}
           placeholder={t('yleiset.maara')}
           helperText={t('yleiset.euroa')}
-          addonAfter={<AddonIcon type="euro_symbol" />}
+          suffix={<InputIcon type="euro_symbol" />}
           type="number"
         />
       </MaksuInputWrapper>

@@ -12,6 +12,23 @@ const filterHierarkia = (hierarkia, filterFn) => {
   ]);
 };
 
+const invalidOrganisaatioTypeMap = {
+  organisaatiotyyppi_05: true,
+  organisaatiotyyppi_06: true,
+  organisaatiotyyppi_07: true,
+  organisaatiotyyppi_08: true,
+};
+
+const organisaatioHasCorrectType = organisaatio => {
+  const { organisaatiotyypit } = organisaatio;
+
+  if (!isArray(organisaatiotyypit)) {
+    return true;
+  }
+
+  return !organisaatiotyypit.find(t => Boolean(invalidOrganisaatioTypeMap[t]));
+};
+
 const useOrganisaatioHierarkia = ({ name }) => {
   const roleBuilder = useAuthorizedUserRoleBuilder();
 
@@ -40,7 +57,12 @@ const useOrganisaatioHierarkia = ({ name }) => {
   );
 
   const hierarkia = useMemo(() => {
-    return isArray(data) ? filterHierarkia(data, hasRequiredRoles) : [];
+    return isArray(data)
+      ? filterHierarkia(
+          data,
+          org => hasRequiredRoles(org) && organisaatioHasCorrectType(org),
+        )
+      : [];
   }, [data, hasRequiredRoles]);
 
   return { hierarkia, ...rest };

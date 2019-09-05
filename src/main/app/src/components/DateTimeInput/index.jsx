@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect, useCallback } from 'react';
 
 import FormControl from '../FormControl';
 import FormLabel from '../FormLabel';
-import { DatePickerInput } from '../DatePicker';
+import DatePickerInput from '../DatePickerInput';
 import TimeInput from '../TimeInput';
 import Flex, { FlexItem } from '../Flex';
 

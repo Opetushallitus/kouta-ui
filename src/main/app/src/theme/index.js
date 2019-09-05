@@ -1,5 +1,7 @@
 import get from 'lodash/get';
 import { generateMedia } from 'styled-media-query';
+import createUiTheme from '@opetushallitus/virkailija-ui-components/createTheme';
+import merge from 'lodash/merge';
 
 const breakpoints = ['576px', '768px', '992px'];
 
@@ -9,164 +11,55 @@ export const media = generateMedia({
   small: breakpoints[0],
 });
 
-const headingScale = [3, 2.5, 2, 1.5, 1.25, 1];
-
-const createHeadingTypography = ({
-  sizes,
-  fontFamily,
-  color,
-  lineHeight,
-  fontWeight,
-}) => {
-  return headingScale.reduce((acc, curr, index) => {
-    const key = `h${index + 1}`;
-
-    acc[key] = {
-      color,
-      fontFamily,
-      fontSize: sizes[key],
-      fontWeight,
-      lineHeight,
-    };
-
-    return acc;
-  }, {});
-};
-
 export const getThemeProp = path => props => get(props.theme, path);
 
 export const spacing = (amount = 1) => ({ theme }) =>
   `${theme.spacing.unit * amount}px`;
 
 export const createTheme = () => {
-  const textPrimaryColor = '#666666';
-  const textSecondaryColor = '#a6a6a6';
-  const textDarkColor = '#2a2a2a';
-  const fontFamily = "'Roboto', sans-serif";
+  let theme = createUiTheme();
 
-  const fontWeights = {
-    bold: '500',
-    regular: '400',
-  };
+  theme.breakpoints = breakpoints;
 
-  const fonts = {
-    main: fontFamily,
-  };
-
-  const fontSizes = {
-    body: '1rem',
-    ...headingScale.reduce((acc, curr, index) => {
-      return {
-        [`h${index + 1}`]: `${curr}rem`,
-        ...acc,
-      };
-    }, {}),
-    secondary: '0.85rem',
-  };
-
-  const headingTypography = createHeadingTypography({
-    sizes: fontSizes,
-    fontFamily,
-    color: textDarkColor,
-    lineHeight: 1.2,
-    fontWeight: fontWeights.bold,
-  });
-
-  const colors = {
-    white: '#ffffff',
-    border: '#cccccc',
-    divider: '#cccccc',
-    mainBackground: '#f5f5f5',
-    text: {
-      primary: textPrimaryColor,
-      secondary: textSecondaryColor,
-      dark: textDarkColor,
-    },
-    primary: {
-      light: '#e0f2fd',
-      main: '#159ecb',
-      dark: '#2a2a2a',
-      contrastText: '#ffffff',
-    },
-    secondary: {
-      main: '#999999',
-      contrastText: '#ffffff',
-    },
-    success: {
-      main: '#43a047',
-      contrastText: '#ffffff',
-    },
-    warning: {
-      main: '#de9a06',
-      contrastText: '#ffffff',
-    },
-    danger: {
-      main: '#e05055',
-      contrastText: '#ffffff',
-    },
-    orange: {
-      main: '#e77e22',
-      contrastText: '#ffffff',
-    },
-    yellow: {
-      main: '#ffd024',
-      contrastText: '#ffffff',
-    },
-  };
-
-  colors.julkaistu = colors.success.main;
-  colors.tallennettu = colors.primary.main;
-  colors.arkistoitu = colors.yellow.main;
-
-  const radii = [0, 4];
-
-  const theme = {
-    breakpoints,
-    typography: {
-      fontFamily,
-      lineHeight: 1.5,
-      fontSize: fontSizes.body,
-      body: {
-        fontSize: fontSizes.body,
-        color: textPrimaryColor,
-        lineHeight: 1.5,
-        fontFamily,
+  theme = merge(theme, {
+    colors: {
+      mainBackground: '#f5f5f5',
+      border: theme.colors.divider,
+      text: {
+        dark: theme.colors.text.heading,
       },
-      secondary: {
-        fontSize: fontSizes.secondary,
-        color: textSecondaryColor,
-        lineHeight: 1.5,
-        fontFamily,
+      primary: {
+        light: '#e0f2fd',
       },
-      ...headingTypography,
-    },
-    colors,
-    spacing: {
-      unit: 8,
-    },
-    space: [0, 8, 16, 24, 32, 40, 48, 56, 64],
-    shape: {
-      borderRadius: '4px',
+      orange: {
+        main: '#e77e22',
+        contrastText: '#ffffff',
+      },
+      yellow: {
+        main: '#ffd024',
+        contrastText: '#ffffff',
+      },
     },
     zIndices: {
-      datePicker: 200,
-      homeNavigation: 201,
-      modal: 202,
-      drawer: 202,
+      homeNavigation: 400,
     },
-    contentMaxWidth: '1200px',
-    radii,
-    disabled: {
-      cursor: 'not-allowed',
-      opacity: 0.5,
+    shape: {
+      borderRadius: `${theme.radii[1]}px`,
     },
-    fontWeights,
-    fonts,
-    fontSizes,
-    shadows: ['none', '0 2px 8px rgba(0,0,0,0.15)'],
-  };
+    spacing: {
+      unit: theme.space[1],
+    },
+    typography: {
+      fontFamily: theme.fonts.main,
+      lineHeight: theme.lineHeights.body,
+      fontSize: theme.fontSizes.body,
+    },
+  });
 
-  theme.palette = theme.colors; // Alias to ensure backwards compatibility
+  theme.palette = theme.colors;
+  theme.colors.julkaistu = theme.colors.success.main;
+  theme.colors.tallennettu = theme.colors.primary.main;
+  theme.colors.arkistoitu = theme.colors.yellow.main;
 
   return theme;
 };

@@ -122,7 +122,9 @@ const fillNayttamistiedotSection = () => {
       .type('ammattinimike', { force: true });
 
     cy.getByTestId('ammattinimikkeetSelect').within(() => {
-      getSelectOption('Luo kohde', cy).click({ force: true });
+      cy.get('[role="option"]')
+        .contains('ammattinimike')
+        .click({ force: true });
     });
 
     cy.getByTestId('avainsanatSelect').click();
@@ -132,7 +134,9 @@ const fillNayttamistiedotSection = () => {
       .type('avainsana', { force: true });
 
     cy.getByTestId('avainsanatSelect').within(() => {
-      getSelectOption('Luo kohde', cy).click({ force: true });
+      cy.get('[role="option"]')
+        .contains('avainsana')
+        .click({ force: true });
     });
 
     jatka();

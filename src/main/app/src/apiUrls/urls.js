@@ -5,7 +5,7 @@ export const development = ({ isCypress }) => ({
   'kouta-backend.koulutus': `${koutaBackendDevUrl}/koulutus`,
   'kouta-backend.koulutus-by-oid': `${koutaBackendDevUrl}/koulutus/$1`,
   'kouta-backend.koulutus-list': `https://virkailija.untuvaopintopolku.fi/kouta-backend/koulutus/list`,
-  'kouta-backend.koulutus-toteutukset': `${koutaBackendDevUrl}/koulutus/$1/toteutukset`,
+  'kouta-backend.koulutus-toteutukset': `${koutaBackendDevUrl}/koulutus/$1/toteutukset/list`,
   'kouta-backend.toteutus': `${koutaBackendDevUrl}/toteutus`,
   'kouta-backend.toteutus-by-oid': `${koutaBackendDevUrl}/toteutus/$1`,
   'kouta-backend.toteutus-list': `${koutaBackendDevUrl}/toteutus/list`,

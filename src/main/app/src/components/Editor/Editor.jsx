@@ -34,7 +34,7 @@ import {
 } from './utils';
 
 const Container = styled.div`
-  border: 1px solid ${getThemeProp('palette.border')};
+  border: 1px solid ${getThemeProp('colors.inputBorder')};
   border-radius: ${getThemeProp('shape.borderRadius')};
   background-color: white;
 `;
@@ -51,7 +51,7 @@ const EditorContent = styled.div`
 
 const Toolbar = styled.div`
   padding ${spacing(1)};
-  border-bottom: 1px solid ${getThemeProp('palette.border')};
+  border-bottom: 1px solid ${getThemeProp('colors.inputBorder')};
   display: flex;
   align-items: center;
 `;

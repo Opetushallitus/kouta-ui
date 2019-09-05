@@ -185,9 +185,9 @@ const DrawerContent = ({
 
       {(hasFavourites || hasOphOption) && (
         <Box flexGrow="0">
-          <Box p={2}>
+          <Box p={2} mb={-1}>
             {hasOphOption && (
-              <>
+              <Box mb={1}>
                 <Typography variant="secondary" as="div" mb={1}>
                   {t('etusivu.rekisterinpitaja')}
                 </Typography>
@@ -199,11 +199,11 @@ const DrawerContent = ({
                   onToggleFavourite={onToggleFavourite}
                   onSelect={onSelect}
                 />
-              </>
+              </Box>
             )}
 
             {hasFavourites && (
-              <FavouriteListContainer>
+              <FavouriteListContainer mb={1}>
                 <OrganisaatioFavouritesList
                   items={favourites}
                   selected={selectedOrganisaatio}
@@ -261,10 +261,10 @@ const DrawerContent = ({
   );
 };
 
-export const OrganisaatioDrawer = props => {
+export const OrganisaatioDrawer = ({ open, onClose, ...props }) => {
   return (
-    <Drawer {...props}>
-      <DrawerContent {...props} />
+    <Drawer open={open} onClose={onClose}>
+      <DrawerContent onClose={onClose} {...props} />
     </Drawer>
   );
 };

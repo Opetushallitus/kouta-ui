@@ -121,8 +121,6 @@ export const AsyncCreatableSelect = ({ error = false, ...props }) => {
   const { t } = useTranslation();
   const theme = useContext(ThemeContext);
 
-  console.log(getStyles(theme, error));
-
   return (
     <ReactAsyncCreatableSelect
       {...getDefaultProps(t)}

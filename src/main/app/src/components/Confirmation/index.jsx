@@ -77,7 +77,7 @@ export const Confirmation = ({
     [onConfirm, content],
   );
 
-  return <Dropdown overlay={overlay} toggleOnOverlayClick={false} {...props} />;
+  return <Dropdown overlay={overlay} closeOnOverlayClick={false} {...props} />;
 };
 
 export default Confirmation;

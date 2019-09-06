@@ -30,7 +30,7 @@ export const development = ({ isCypress }) => ({
   'koodisto-service.sisaltyy-alakoodit': 'https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/json/relaatio/sisaltyy-alakoodit/$1?koodiVersio=$2',
   'koodisto-service.sisaltyy-ylakoodit': 'https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/json/relaatio/sisaltyy-ylakoodit/$1',
   'koodisto-service.koodi': 'https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/json/$1/koodi?onlyValidKoodis=true',
-  'koodisto-service.codeelement': 'https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/$1',
+  'koodisto-service.codeelement': 'https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/$1/$2',
   'eperusteet-service.base-url': 'https://virkailija.hahtuvaopintopolku.fi/eperusteet-service',
   'eperusteet-service.perusteet-koulutuskoodilla': 'https://virkailija.hahtuvaopintopolku.fi/eperusteet-service/api/perusteet?tuleva=true&siirtyma=false&voimassaolo=true&poistunut=false&kieli=fi&koulutuskoodi=$1',
   'eperusteet-service.osaamisalakuvaukset': 'https://virkailija.hahtuvaopintopolku.fi/eperusteet-service/api/perusteet/$1/osaamisalakuvaukset',

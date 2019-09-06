@@ -4,7 +4,7 @@
   "homepage": "/kouta",
   "private": true,
   "dependencies": {
-    "@opetushallitus/virkailija-ui-components": "^0.2.3",
+    "@opetushallitus/virkailija-ui-components": "^0.2.5",
     "axios": "^0.18.1",
     "axios-cache-adapter": "^2.3.0",
     "cleave.js": "^1.4.10",

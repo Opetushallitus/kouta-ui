@@ -5,7 +5,5 @@ export {
   layout,
   typography,
   shadow,
-} from 'styled-system';
-
-export const disabledStyle = ({ disabled, theme }) =>
-  disabled && theme.disabled;
+  disabledStyle,
+} from '@opetushallitus/virkailija-ui-components/system';

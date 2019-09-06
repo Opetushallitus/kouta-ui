@@ -82,7 +82,7 @@ module.exports = {
       },
     },
   },
-  __version: '3.2.0',
+  __version: '3.4.1',
   editHakuForm: {
     'should be able to edit haku': {
       '1': {

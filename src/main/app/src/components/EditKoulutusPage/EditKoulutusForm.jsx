@@ -44,6 +44,7 @@ const EditKoulutusForm = ({ onSave, koulutus, history, ...props }) => {
           canEditKoulutustyyppi={false}
           johtaaTutkintoon={Boolean(koulutus.johtaaTutkintoon)}
           onAttachToteutus={onAttachToteutus}
+          koulutus={koulutus}
           {...props}
         />
       )}

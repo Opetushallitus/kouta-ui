@@ -34,9 +34,22 @@ import {
 } from './utils';
 
 const Container = styled.div`
-  border: 1px solid ${getThemeProp('palette.border')};
+  border: 1px solid ${getThemeProp('colors.inputBorder')};
   border-radius: ${getThemeProp('shape.borderRadius')};
   background-color: white;
+  box-shadow 0 0 0 0 transparent;
+  transition: border-color 0.25s, box-shadow 0.25s;
+
+  &:hover {
+    border-color: ${getThemeProp('colors.primary.main')};
+  }
+
+  ${({ hasFocus }) =>
+    hasFocus &&
+    css`
+      border-color: ${getThemeProp('colors.primary.main')};
+      box-shadow: 0 0 0 3px ${getThemeProp('colors.primary.focusOutline')};
+    `}
 `;
 
 const EditorWrapper = styled.div`
@@ -51,7 +64,7 @@ const EditorContent = styled.div`
 
 const Toolbar = styled.div`
   padding ${spacing(1)};
-  border-bottom: 1px solid ${getThemeProp('palette.border')};
+  border-bottom: 1px solid ${getThemeProp('colors.inputBorder')};
   display: flex;
   align-items: center;
 `;
@@ -98,7 +111,7 @@ const LinkDropdownContainer = styled.div`
 
 const focusRef = ref => {
   setTimeout(() => {
-    ref.current && ref.current.focus();
+    ref && ref.current && ref.current.focus();
   }, 100);
 };
 
@@ -182,7 +195,7 @@ const LinkDropdown = ({ value, onChange, onSubmit }) => {
 
   useEffect(() => {
     focusRef(inputRef);
-  });
+  }, []);
 
   return (
     <LinkDropdownContainer>
@@ -231,7 +244,8 @@ const LinkButton = ({ editorState, onChange, editorRef, ...props }) => {
     );
 
     setLink('');
-  }, [onChange, editorState, link]);
+    focusRef(editorRef);
+  }, [onChange, editorState, link, editorRef]);
 
   const onLinkChange = useCallback(
     e => {
@@ -262,8 +276,9 @@ const LinkButton = ({ editorState, onChange, editorRef, ...props }) => {
   return (
     <Dropdown
       overlay={overlay}
-      toggleOnOverlayClick={false}
+      closeOnOverlayClick={false}
       portalTarget={document.body}
+      overflow
     >
       {({ onToggle, ref, open }) => (
         <div ref={ref}>
@@ -289,15 +304,22 @@ const emptyEditorState = createEmptyEditorState();
 
 export const EditorState = DraftEditorState;
 
-export const Editor = ({ value, onChange, inputProps, ...props }) => {
+export const Editor = ({
+  value,
+  onChange,
+  inputProps,
+  onFocus = () => {},
+  onBlur = () => {},
+  ...props
+}) => {
   const editorState = value ? value : emptyEditorState;
-
+  const [hasFocus, setHasFocus] = useState(false);
   const editorRef = useRef();
 
   const styleButtonProps = { editorState, onChange, editorRef };
 
   return (
-    <Container className="Editor__">
+    <Container className="Editor__" hasFocus={hasFocus}>
       <Toolbar>
         <StyleButton
           icon="format_bold"
@@ -340,6 +362,14 @@ export const Editor = ({ value, onChange, inputProps, ...props }) => {
       <EditorWrapper>
         <EditorContent>
           <DraftEditor
+            onFocus={() => {
+              setHasFocus(true);
+              onFocus();
+            }}
+            onBlur={() => {
+              setHasFocus(false);
+              onBlur();
+            }}
             ref={editorRef}
             editorState={editorState}
             onChange={onChange}

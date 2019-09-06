@@ -180,16 +180,16 @@ exports[`renders correctly 1`] = `
                       className="c5"
                       type="school"
                     >
-                      <styled.i
+                      <styled.span
                         active={false}
                         className="material-icons c5"
                       >
-                        <i
+                        <span
                           className="material-icons c5 c6"
                         >
                           school
-                        </i>
-                      </styled.i>
+                        </span>
+                      </styled.span>
                     </ForwardRef>
                   </Styled(Component)>
                 </div>
@@ -233,16 +233,16 @@ exports[`renders correctly 1`] = `
                       className="c5"
                       type="settings"
                     >
-                      <styled.i
+                      <styled.span
                         active={false}
                         className="material-icons c5"
                       >
-                        <i
+                        <span
                           className="material-icons c5 c6"
                         >
                           settings
-                        </i>
-                      </styled.i>
+                        </span>
+                      </styled.span>
                     </ForwardRef>
                   </Styled(Component)>
                 </div>
@@ -292,16 +292,16 @@ exports[`renders correctly 1`] = `
                       className="c5"
                       type="access_time"
                     >
-                      <styled.i
+                      <styled.span
                         active={false}
                         className="material-icons c5"
                       >
-                        <i
+                        <span
                           className="material-icons c5 c6"
                         >
                           access_time
-                        </i>
-                      </styled.i>
+                        </span>
+                      </styled.span>
                     </ForwardRef>
                   </Styled(Component)>
                 </div>
@@ -345,16 +345,16 @@ exports[`renders correctly 1`] = `
                       className="c9"
                       type="grain"
                     >
-                      <styled.i
+                      <styled.span
                         active={true}
                         className="material-icons c9"
                       >
-                        <i
+                        <span
                           className="material-icons c9 c6"
                         >
                           grain
-                        </i>
-                      </styled.i>
+                        </span>
+                      </styled.span>
                     </ForwardRef>
                   </Styled(Component)>
                 </div>
@@ -404,16 +404,16 @@ exports[`renders correctly 1`] = `
                       className="c5"
                       type="select_all"
                     >
-                      <styled.i
+                      <styled.span
                         active={false}
                         className="material-icons c5"
                       >
-                        <i
+                        <span
                           className="material-icons c5 c6"
                         >
                           select_all
-                        </i>
-                      </styled.i>
+                        </span>
+                      </styled.span>
                     </ForwardRef>
                   </Styled(Component)>
                 </div>
@@ -457,16 +457,16 @@ exports[`renders correctly 1`] = `
                       className="c5"
                       type="subject"
                     >
-                      <styled.i
+                      <styled.span
                         active={false}
                         className="material-icons c5"
                       >
-                        <i
+                        <span
                           className="material-icons c5 c6"
                         >
                           subject
-                        </i>
-                      </styled.i>
+                        </span>
+                      </styled.span>
                     </ForwardRef>
                   </Styled(Component)>
                 </div>

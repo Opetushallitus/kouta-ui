@@ -9,7 +9,7 @@ export const getRadio = (value, cy) => {
 };
 
 export const getSelectOption = (value, cy) => {
-  return cy.get('[role="option"]').contains(value);
+  return cy.get('[class*="option"]').contains(value);
 };
 
 export const getCheckbox = (value, cy) => {
@@ -23,7 +23,9 @@ export const getSelect = cy => {
 export const selectOption = (value, cy) => {
   getSelect(cy).click();
 
-  getSelectOption(value, cy).click();
+  getSelect(cy).within(() => {
+    getSelectOption(value, cy).click({ force: true });
+  });
 };
 
 export const stubKoodistoRoute = ({ koodisto: koodistonNimi, cy }) => {

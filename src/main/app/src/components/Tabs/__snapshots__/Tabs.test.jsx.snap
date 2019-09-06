@@ -6,127 +6,153 @@ exports[`renders correctly 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
 }
 
 .c1 {
-  margin-right: 6px;
+  outline: none;
+  background-color: transparent;
+  border: 0px none;
+  cursor: pointer;
+  -webkit-transition: color 0.25s,border-color 0.25s;
+  transition: color 0.25s,border-color 0.25s;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  border-bottom: 3px solid transparent;
+  padding: 6px 20px;
+  line-height: 1.5;
+  font-family: 'Roboto',sans-serif;
+  font-size: 1rem;
+  color: #666666;
+  font-weight: 500;
+}
+
+.c1:hover,
+.c1active {
+  color: #159ecb;
+}
+
+.c1:focus {
+  border-color: rgba(21,158,203,0.3);
 }
 
 .c2 {
-  padding: 6px 16px;
-  position: relative;
-  z-index: 1;
-  white-space: nowrap;
-  bottom: -1px;
-  font-family: 'Roboto',sans-serif;
-  line-height: 1.5;
-  font-size: 1rem;
-  color: #159ecb;
-  border-bottom: 0px none;
+  outline: none;
+  background-color: transparent;
+  border: 0px none;
   cursor: pointer;
-  border: 1px solid transparent;
-  border-top: 2px solid transparent;
-  -webkit-transition: color 0.25s;
-  transition: color 0.25s;
-}
-
-.c2:hover {
-  color: #17b0e2;
-}
-
-.c3 {
-  padding: 6px 16px;
-  position: relative;
-  z-index: 1;
-  white-space: nowrap;
-  bottom: -1px;
-  font-family: 'Roboto',sans-serif;
+  -webkit-transition: color 0.25s,border-color 0.25s;
+  transition: color 0.25s,border-color 0.25s;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  border-bottom: 3px solid transparent;
+  padding: 6px 20px;
   line-height: 1.5;
+  font-family: 'Roboto',sans-serif;
   font-size: 1rem;
-  color: #159ecb;
-  border-bottom: 0px none;
-  cursor: pointer;
-  border: 1px solid transparent;
-  border-top: 2px solid transparent;
-  -webkit-transition: color 0.25s;
-  transition: color 0.25s;
-  border: 1px solid #cccccc;
-  border-top: 2px solid #159ecb;
-  border-bottom: 1px solid white;
   color: #666666;
-  background-color: white;
+  font-weight: 500;
+  color: #159ecb;
 }
 
-<styled.div>
+.c2:hover,
+.c2active {
+  color: #159ecb;
+}
+
+.c2:focus {
+  border-color: rgba(21,158,203,0.3);
+}
+
+.c2,
+.c2:focus {
+  border-color: #159ecb;
+}
+
+<styled.div
+  alignTabs="start"
+  fullWidth={true}
+>
   <div
     className="c0"
+    role="tablist"
   >
-    <styled.div
+    <ForwardRef
+      active={false}
       key=".0"
-      last={false}
+      onClick={[Function]}
+      value="a"
     >
-      <div
-        className="c1"
+      <styled.button
+        active={false}
+        disabled={false}
+        onClick={[Function]}
+        value="a"
       >
-        <styled.div
-          active={false}
+        <button
+          className="c1"
+          disabled={false}
           onClick={[Function]}
+          role="tab"
           value="a"
         >
-          <div
-            className="c2"
-            onClick={[Function]}
-            value="a"
-          >
-            Tab A
-          </div>
-        </styled.div>
-      </div>
-    </styled.div>
-    <styled.div
+          Tab A
+        </button>
+      </styled.button>
+    </ForwardRef>
+    <ForwardRef
+      active={true}
       key=".1"
-      last={false}
+      onClick={[Function]}
+      value="b"
     >
-      <div
-        className="c1"
+      <styled.button
+        active={true}
+        disabled={false}
+        onClick={[Function]}
+        value="b"
       >
-        <styled.div
-          active={true}
+        <button
+          className="c2"
+          disabled={false}
           onClick={[Function]}
+          role="tab"
           value="b"
         >
-          <div
-            className="c3"
-            onClick={[Function]}
-            value="b"
-          >
-            Tab B
-          </div>
-        </styled.div>
-      </div>
-    </styled.div>
-    <styled.div
+          Tab B
+        </button>
+      </styled.button>
+    </ForwardRef>
+    <ForwardRef
+      active={false}
       key=".2"
-      last={true}
+      onClick={[Function]}
+      value="c"
     >
-      <div
-        className=""
+      <styled.button
+        active={false}
+        disabled={false}
+        onClick={[Function]}
+        value="c"
       >
-        <styled.div
-          active={false}
+        <button
+          className="c1"
+          disabled={false}
           onClick={[Function]}
+          role="tab"
           value="c"
         >
-          <div
-            className="c2"
-            onClick={[Function]}
-            value="c"
-          >
-            Tab C
-          </div>
-        </styled.div>
-      </div>
-    </styled.div>
+          Tab C
+        </button>
+      </styled.button>
+    </ForwardRef>
   </div>
 </styled.div>
 `;

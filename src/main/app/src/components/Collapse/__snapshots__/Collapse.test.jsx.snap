@@ -2,16 +2,13 @@
 
 exports[`renders correctly 1`] = `
 .c3 {
-  font-family: 'Roboto',sans-serif;
-  color: #666666;
-  line-height: 1.5;
-  margin-bottom: 0px;
-  margin-top: 0px;
-  color: #2a2a2a;
-  font-family: 'Roboto',sans-serif;
-  font-size: 1.25rem;
-  font-weight: 500;
+  margin: 0px;
+  padding: 0px;
   line-height: 1.2;
+  font-family: 'Roboto',sans-serif;
+  color: #2a2a2a;
+  font-weight: 500;
+  font-size: 1.25rem;
   padding: 24px;
 }
 
@@ -25,7 +22,7 @@ exports[`renders correctly 1`] = `
 }
 
 .c0 {
-  border: 1px solid #cccccc;
+  border: 1px solid rgba(0,0,0,0.15);
   background-color: white;
 }
 
@@ -50,7 +47,7 @@ exports[`renders correctly 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid rgba(0,0,0,0.15);
 }
 
 .c2 {
@@ -71,7 +68,7 @@ exports[`renders correctly 1`] = `
 
 .c8 {
   padding: 24px;
-  border-top: 1px solid #cccccc;
+  border-top: 1px solid rgba(0,0,0,0.15);
 }
 
 .c5 {
@@ -120,44 +117,125 @@ exports[`renders correctly 1`] = `
             className="c4"
             onClick={[Function]}
           >
-            <Styled(DropdownIcon)
+            <Styled(Component)
               icon="expand_more"
               open={true}
               role="button"
             >
               <ForwardRef
-                className="c5"
-                role="button"
                 style={
                   Object {
-                    "transform": "rotate(180deg)",
+                    "display": AnimatedValue {
+                      "animatedStyles": Set {},
+                      "children": Array [
+                        AnimatedStyle {
+                          "attach": [Function],
+                          "children": Array [
+                            AnimatedProps {
+                              "attach": [Function],
+                              "children": Array [],
+                              "detach": [Function],
+                              "payload": Object {
+                                "children": <ForwardRef
+                                  className="c5"
+                                  role="button"
+                                  type="expand_more"
+                                />,
+                                "style": [Circular],
+                              },
+                              "update": [Function],
+                            },
+                          ],
+                          "detach": [Function],
+                          "payload": [Circular],
+                        },
+                      ],
+                      "done": false,
+                      "lastPosition": "inline-flex",
+                      "lastTime": undefined,
+                      "lastVelocity": undefined,
+                      "payload": undefined,
+                      "setValue": [Function],
+                      "startPosition": "inline-flex",
+                      "startTime": 1553161674015,
+                      "value": "inline-flex",
+                    },
+                    "transform": AnimatedInterpolation {
+                      "attach": [Function],
+                      "calc": [Function],
+                      "children": Array [
+                        AnimatedStyle {
+                          "attach": [Function],
+                          "children": Array [
+                            AnimatedProps {
+                              "attach": [Function],
+                              "children": Array [],
+                              "detach": [Function],
+                              "payload": Object {
+                                "children": <ForwardRef
+                                  className="c5"
+                                  role="button"
+                                  type="expand_more"
+                                />,
+                                "style": [Circular],
+                              },
+                              "update": [Function],
+                            },
+                          ],
+                          "detach": [Function],
+                          "payload": [Circular],
+                        },
+                      ],
+                      "detach": [Function],
+                      "payload": Array [
+                        AnimatedValue {
+                          "animatedStyles": Set {},
+                          "children": Array [
+                            [Circular],
+                          ],
+                          "done": false,
+                          "lastPosition": 0,
+                          "lastTime": undefined,
+                          "lastVelocity": undefined,
+                          "payload": undefined,
+                          "setValue": [Function],
+                          "startPosition": 0,
+                          "startTime": 1553161674015,
+                          "value": 0,
+                        },
+                      ],
+                    },
                   }
                 }
-                type="expand_more"
               >
-                <styled.i
-                  className="material-icons c5"
-                  role="button"
+                <span
                   style={
                     Object {
+                      "display": "inline-flex",
                       "transform": "rotate(180deg)",
                     }
                   }
                 >
-                  <i
-                    className="material-icons c5 c6"
+                  <ForwardRef
+                    className="c5"
                     role="button"
-                    style={
-                      Object {
-                        "transform": "rotate(180deg)",
-                      }
-                    }
+                    type="expand_more"
                   >
-                    expand_more
-                  </i>
-                </styled.i>
+                    <styled.span
+                      className="material-icons c5"
+                      role="button"
+                    >
+                      <span
+                        className="material-icons c5 c6"
+                        role="button"
+                      >
+                        expand_more
+                      </span>
+                    </styled.span>
+                  </ForwardRef>
+                </span>
               </ForwardRef>
-            </Styled(DropdownIcon)>
+            </Styled(Component)>
           </div>
         </styled.div>
       </div>
@@ -207,7 +285,7 @@ exports[`renders correctly 2`] = `
 }
 
 .c0 {
-  border: 1px solid #cccccc;
+  border: 1px solid rgba(0,0,0,0.15);
   background-color: white;
 }
 
@@ -232,7 +310,7 @@ exports[`renders correctly 2`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid rgba(0,0,0,0.15);
 }
 
 .c2 {
@@ -253,7 +331,7 @@ exports[`renders correctly 2`] = `
 
 .c7 {
   padding: 24px;
-  border-top: 1px solid #cccccc;
+  border-top: 1px solid rgba(0,0,0,0.15);
 }
 
 .c4 {
@@ -294,44 +372,125 @@ exports[`renders correctly 2`] = `
             className="c3"
             onClick={[Function]}
           >
-            <Styled(DropdownIcon)
+            <Styled(Component)
               icon="expand_more"
               open={true}
               role="button"
             >
               <ForwardRef
-                className="c4"
-                role="button"
                 style={
                   Object {
-                    "transform": "rotate(180deg)",
+                    "display": AnimatedValue {
+                      "animatedStyles": Set {},
+                      "children": Array [
+                        AnimatedStyle {
+                          "attach": [Function],
+                          "children": Array [
+                            AnimatedProps {
+                              "attach": [Function],
+                              "children": Array [],
+                              "detach": [Function],
+                              "payload": Object {
+                                "children": <ForwardRef
+                                  className="c4"
+                                  role="button"
+                                  type="expand_more"
+                                />,
+                                "style": [Circular],
+                              },
+                              "update": [Function],
+                            },
+                          ],
+                          "detach": [Function],
+                          "payload": [Circular],
+                        },
+                      ],
+                      "done": false,
+                      "lastPosition": "inline-flex",
+                      "lastTime": undefined,
+                      "lastVelocity": undefined,
+                      "payload": undefined,
+                      "setValue": [Function],
+                      "startPosition": "inline-flex",
+                      "startTime": 1553161674015,
+                      "value": "inline-flex",
+                    },
+                    "transform": AnimatedInterpolation {
+                      "attach": [Function],
+                      "calc": [Function],
+                      "children": Array [
+                        AnimatedStyle {
+                          "attach": [Function],
+                          "children": Array [
+                            AnimatedProps {
+                              "attach": [Function],
+                              "children": Array [],
+                              "detach": [Function],
+                              "payload": Object {
+                                "children": <ForwardRef
+                                  className="c4"
+                                  role="button"
+                                  type="expand_more"
+                                />,
+                                "style": [Circular],
+                              },
+                              "update": [Function],
+                            },
+                          ],
+                          "detach": [Function],
+                          "payload": [Circular],
+                        },
+                      ],
+                      "detach": [Function],
+                      "payload": Array [
+                        AnimatedValue {
+                          "animatedStyles": Set {},
+                          "children": Array [
+                            [Circular],
+                          ],
+                          "done": false,
+                          "lastPosition": 0,
+                          "lastTime": undefined,
+                          "lastVelocity": undefined,
+                          "payload": undefined,
+                          "setValue": [Function],
+                          "startPosition": 0,
+                          "startTime": 1553161674015,
+                          "value": 0,
+                        },
+                      ],
+                    },
                   }
                 }
-                type="expand_more"
               >
-                <styled.i
-                  className="material-icons c4"
-                  role="button"
+                <span
                   style={
                     Object {
+                      "display": "inline-flex",
                       "transform": "rotate(180deg)",
                     }
                   }
                 >
-                  <i
-                    className="material-icons c4 c5"
+                  <ForwardRef
+                    className="c4"
                     role="button"
-                    style={
-                      Object {
-                        "transform": "rotate(180deg)",
-                      }
-                    }
+                    type="expand_more"
                   >
-                    expand_more
-                  </i>
-                </styled.i>
+                    <styled.span
+                      className="material-icons c4"
+                      role="button"
+                    >
+                      <span
+                        className="material-icons c4 c5"
+                        role="button"
+                      >
+                        expand_more
+                      </span>
+                    </styled.span>
+                  </ForwardRef>
+                </span>
               </ForwardRef>
-            </Styled(DropdownIcon)>
+            </Styled(Component)>
           </div>
         </styled.div>
       </div>
@@ -372,16 +531,13 @@ exports[`renders correctly 2`] = `
 
 exports[`renders correctly when closed 1`] = `
 .c3 {
-  font-family: 'Roboto',sans-serif;
-  color: #666666;
-  line-height: 1.5;
-  margin-bottom: 0px;
-  margin-top: 0px;
-  color: #2a2a2a;
-  font-family: 'Roboto',sans-serif;
-  font-size: 1.25rem;
-  font-weight: 500;
+  margin: 0px;
+  padding: 0px;
   line-height: 1.2;
+  font-family: 'Roboto',sans-serif;
+  color: #2a2a2a;
+  font-weight: 500;
+  font-size: 1.25rem;
   padding: 24px;
 }
 
@@ -395,7 +551,7 @@ exports[`renders correctly when closed 1`] = `
 }
 
 .c0 {
-  border: 1px solid #cccccc;
+  border: 1px solid rgba(0,0,0,0.15);
   background-color: white;
 }
 
@@ -440,7 +596,7 @@ exports[`renders correctly when closed 1`] = `
 
 .c8 {
   padding: 24px;
-  border-top: 1px solid #cccccc;
+  border-top: 1px solid rgba(0,0,0,0.15);
 }
 
 .c5 {
@@ -489,44 +645,125 @@ exports[`renders correctly when closed 1`] = `
             className="c4"
             onClick={[Function]}
           >
-            <Styled(DropdownIcon)
+            <Styled(Component)
               icon="expand_more"
               open={false}
               role="button"
             >
               <ForwardRef
-                className="c5"
-                role="button"
                 style={
                   Object {
-                    "transform": "rotate(0deg)",
+                    "display": AnimatedValue {
+                      "animatedStyles": Set {},
+                      "children": Array [
+                        AnimatedStyle {
+                          "attach": [Function],
+                          "children": Array [
+                            AnimatedProps {
+                              "attach": [Function],
+                              "children": Array [],
+                              "detach": [Function],
+                              "payload": Object {
+                                "children": <ForwardRef
+                                  className="c5"
+                                  role="button"
+                                  type="expand_more"
+                                />,
+                                "style": [Circular],
+                              },
+                              "update": [Function],
+                            },
+                          ],
+                          "detach": [Function],
+                          "payload": [Circular],
+                        },
+                      ],
+                      "done": false,
+                      "lastPosition": "inline-flex",
+                      "lastTime": undefined,
+                      "lastVelocity": undefined,
+                      "payload": undefined,
+                      "setValue": [Function],
+                      "startPosition": "inline-flex",
+                      "startTime": 1553161674015,
+                      "value": "inline-flex",
+                    },
+                    "transform": AnimatedInterpolation {
+                      "attach": [Function],
+                      "calc": [Function],
+                      "children": Array [
+                        AnimatedStyle {
+                          "attach": [Function],
+                          "children": Array [
+                            AnimatedProps {
+                              "attach": [Function],
+                              "children": Array [],
+                              "detach": [Function],
+                              "payload": Object {
+                                "children": <ForwardRef
+                                  className="c5"
+                                  role="button"
+                                  type="expand_more"
+                                />,
+                                "style": [Circular],
+                              },
+                              "update": [Function],
+                            },
+                          ],
+                          "detach": [Function],
+                          "payload": [Circular],
+                        },
+                      ],
+                      "detach": [Function],
+                      "payload": Array [
+                        AnimatedValue {
+                          "animatedStyles": Set {},
+                          "children": Array [
+                            [Circular],
+                          ],
+                          "done": false,
+                          "lastPosition": 0,
+                          "lastTime": undefined,
+                          "lastVelocity": undefined,
+                          "payload": undefined,
+                          "setValue": [Function],
+                          "startPosition": 0,
+                          "startTime": 1553161674015,
+                          "value": 0,
+                        },
+                      ],
+                    },
                   }
                 }
-                type="expand_more"
               >
-                <styled.i
-                  className="material-icons c5"
-                  role="button"
+                <span
                   style={
                     Object {
+                      "display": "inline-flex",
                       "transform": "rotate(0deg)",
                     }
                   }
                 >
-                  <i
-                    className="material-icons c5 c6"
+                  <ForwardRef
+                    className="c5"
                     role="button"
-                    style={
-                      Object {
-                        "transform": "rotate(0deg)",
-                      }
-                    }
+                    type="expand_more"
                   >
-                    expand_more
-                  </i>
-                </styled.i>
+                    <styled.span
+                      className="material-icons c5"
+                      role="button"
+                    >
+                      <span
+                        className="material-icons c5 c6"
+                        role="button"
+                      >
+                        expand_more
+                      </span>
+                    </styled.span>
+                  </ForwardRef>
+                </span>
               </ForwardRef>
-            </Styled(DropdownIcon)>
+            </Styled(Component)>
           </div>
         </styled.div>
       </div>

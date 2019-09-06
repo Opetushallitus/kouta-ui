@@ -1,5 +1,5 @@
 module.exports = {
-  __version: '3.2.0',
+  __version: '3.4.1',
   editSoraKuvausForm: {
     'should be able to edit sora-kuvaus': {
       '1': {

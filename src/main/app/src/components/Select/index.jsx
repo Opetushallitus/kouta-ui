@@ -1,54 +1,19 @@
-import React, { useMemo } from 'react';
-import ReactSelect from 'react-select';
+import React, { useMemo, useContext } from 'react';
 import ReactCreatable from 'react-select/lib/Creatable';
 import ReactAsyncCreatableSelect from 'react-select/lib/AsyncCreatable';
 import ReactAsyncSelect from 'react-select/lib/Async';
-import { withTheme } from 'styled-components';
-import { setLightness } from 'polished';
+import { ThemeContext } from 'styled-components';
+
+import UiSelect, {
+  getStyles,
+  getTheme,
+} from '@opetushallitus/virkailija-ui-components/Select';
+
 import get from 'lodash/get';
 
-import { isArray, isObject, isString } from '../../utils';
-import useTranslation from '../useTranslation';
 import memoizeOne from '../../utils/memoizeOne';
-
-const getStyles = memoizeOne((theme, error) => ({
-  container: provided => ({
-    ...provided,
-    fontFamily: theme.typography.fontFamily,
-  }),
-  menuPortal: provided => {
-    return {
-      ...provided,
-      fontFamily: theme.typography.fontFamily,
-      zIndex: 9999,
-    };
-  },
-  menu: provided => ({
-    ...provided,
-    zIndex: 3,
-  }),
-  control: provided => {
-    const isActive = !!provided.boxShadow;
-
-    return {
-      ...provided,
-      ...(!isActive && {
-        boxShadow: 'inset 0 1px 2px 0 rgba(0, 0, 0, 0.1)',
-        borderColor: error ? theme.palette.danger.main : theme.palette.border,
-      }),
-      borderRadius: '2px',
-    };
-  },
-  option: (provided, state) => ({
-    ...provided,
-    color: state.isSelected ? 'white' : theme.palette.text.primary,
-  }),
-  singleValue: (provided, state) => {
-    const opacity = state.isDisabled ? 0.5 : 1;
-
-    return { ...provided, opacity, color: theme.palette.text.primary };
-  },
-}));
+import { isArray, isString, isObject } from '../../utils';
+import useTranslation from '../useTranslation';
 
 const makeDefaultNoOptionsMessage = t => () =>
   t('yleiset.eiValittaviaKohteita');
@@ -60,31 +25,11 @@ const makeDefaultPlaceholder = t => `${t('yleiset.valitse')}...`;
 
 const defaultLoadingMessage = () => 'Ladataan...';
 
-const getTheme = memoizeOne(theme => {
-  const {
-    palette: {
-      primary: { main: primaryMain },
-    },
-  } = theme;
-
-  return selectTheme => ({
-    ...selectTheme,
-    colors: {
-      ...selectTheme.colors,
-      primary: primaryMain,
-      primary25: setLightness(0.9, primaryMain),
-      primary50: setLightness(0.8, primaryMain),
-    },
-  });
-});
-
-const getDefaultProps = memoizeOne((theme, t, error) => ({
+const getDefaultProps = memoizeOne(t => ({
   formatCreateLabel: makeDefaultFormatCreateLabel(t),
   noOptionsMessage: makeDefaultNoOptionsMessage(t),
   placeholder: makeDefaultPlaceholder(t),
   loadingMessage: defaultLoadingMessage,
-  styles: getStyles(theme, error),
-  theme: getTheme(theme),
   className: 'Select__',
 }));
 
@@ -148,8 +93,8 @@ const Select = ({ theme, value, options, id, error = false, ...props }) => {
   const { t } = useTranslation();
 
   return (
-    <ReactSelect
-      {...getDefaultProps(theme, t, error)}
+    <UiSelect
+      {...getDefaultProps(t)}
       value={resolvedValue}
       options={options}
       inputId={id}
@@ -158,40 +103,48 @@ const Select = ({ theme, value, options, id, error = false, ...props }) => {
   );
 };
 
-const CreatableBase = ({ theme, error = false, ...props }) => {
+export const CreatableSelect = ({ error = false, ...props }) => {
   const { t } = useTranslation();
+  const theme = useContext(ThemeContext);
 
-  return <ReactCreatable {...getDefaultProps(theme, t, error)} {...props} />;
+  return (
+    <ReactCreatable
+      {...getDefaultProps(t)}
+      styles={getStyles(theme, error)}
+      theme={getTheme(theme)}
+      {...props}
+    />
+  );
 };
 
-const AsyncCreatableBase = ({ theme, error = false, ...props }) => {
+export const AsyncCreatableSelect = ({ error = false, ...props }) => {
   const { t } = useTranslation();
+  const theme = useContext(ThemeContext);
 
   return (
     <ReactAsyncCreatableSelect
-      {...getDefaultProps(theme, t, error)}
+      {...getDefaultProps(t)}
+      styles={getStyles(theme, error)}
+      theme={getTheme(theme)}
       cacheOptions={true}
       {...props}
     />
   );
 };
 
-const AsyncSelectBase = ({ theme, error = false, ...props }) => {
+export const AsyncSelect= ({ error = false, ...props }) => {
   const { t } = useTranslation();
+  const theme = useContext(ThemeContext);
 
   return (
     <ReactAsyncSelect
-      {...getDefaultProps(theme, t, error)}
+      {...getDefaultProps(t)}
+      styles={getStyles(theme, error)}
+      theme={getTheme(theme)}
       cacheOptions={true}
       {...props}
     />
   );
 };
 
-export const CreatableSelect = withTheme(CreatableBase);
-
-export const AsyncCreatableSelect = withTheme(AsyncCreatableBase);
-
-export const AsyncSelect = withTheme(AsyncSelectBase);
-
-export default withTheme(Select);
+export default Select;

@@ -66,7 +66,7 @@ module.exports = {
       },
     },
   },
-  __version: '3.2.0',
+  __version: '3.4.1',
   editValintaperusteForm: {
     'should be able to edit valintaperuste': {
       '1': {

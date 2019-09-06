@@ -72,7 +72,7 @@ export const getKoulutusByKoodi = async ({
     httpClient.get(
       apiUrls.url('koodisto-service.sisaltyy-alakoodit', koodi, versio || ''),
     ),
-    httpClient.get(apiUrls.url('koodisto-service.codeelement', koodi)),
+    httpClient.get(apiUrls.url('koodisto-service.codeelement', koodi, '')),
   ]);
 
   const {

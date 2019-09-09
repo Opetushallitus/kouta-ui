@@ -37,7 +37,11 @@ export const HttpErrorNotifier = () => {
     const interceptor = httpClient.interceptors.response.use(
       response => response,
       error => {
-        openToastThrottle(getToastOptions(error, t));
+        const isSilent = Boolean(get(error, 'config.errorNotifier.silent'));
+
+        if (!isSilent) {
+          openToastThrottle(getToastOptions(error, t));
+        }
 
         return Promise.reject(error);
       },

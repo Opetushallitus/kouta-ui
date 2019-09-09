@@ -28,6 +28,18 @@ export const selectOption = (value, cy) => {
   });
 };
 
+export const fillAsyncSelect = value => {
+  getSelect(cy)
+    .find('input[type="text"]')
+    .type(value, { force: true });
+
+  getSelect(cy).within(() => {
+    cy.get('[role="option"]')
+      .contains(value)
+      .click({ force: true });
+  });
+};
+
 export const stubKoodistoRoute = ({ koodisto: koodistonNimi, cy }) => {
   cy.route({
     method: 'GET',
@@ -95,7 +107,7 @@ export const fillYhteyshenkilotFields = ({ cy }) => {
     .type('verkkosivu', { force: true });
 };
 
-export const fillValintakoeFields = ({ cy }) => {
+export const fillValintakoeFields = () => {
   selectOption('valintakokeentyyppi_1', cy);
 
   cy.getByTestId('lisaaTilaisuusButton').click({ force: true });
@@ -104,13 +116,9 @@ export const fillValintakoeFields = ({ cy }) => {
     .find('input')
     .type('osoite', { force: true });
 
-  cy.getByTestId('postinumero')
-    .find('input')
-    .type('00510', { force: true });
-
-  cy.getByTestId('postitoimipaikka')
-    .find('input')
-    .type('postitoimipaikka', { force: true });
+  cy.getByTestId('postinumero').within(() => {
+    fillAsyncSelect('0');
+  });
 
   cy.getByTestId('alkaa').within(() => {
     fillDateTimeInput({
@@ -199,4 +207,14 @@ export const fillDatePickerInput = value => {
   cy.get('.DatePickerInput__')
     .find('input')
     .type(value, { force: true });
+};
+
+export const stubKoodiRoute = koodi => {
+  const { koodiUri, versio } = koodi;
+
+  return cy.route({
+    method: 'GET',
+    url: `/koodisto-service/rest/codeelement/${koodiUri}/${versio}`,
+    response: koodi,
+  });
 };

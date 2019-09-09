@@ -57,10 +57,8 @@ Object {
               "fi": "Fi osoite",
               "sv": "Sv osoite",
             },
-            "postinumero": "00610",
-            "postitoimipaikka": Object {
-              "fi": "Fi postitoimipaikka",
-              "sv": "Sv postitoimipaikka",
+            "postinumero": Object {
+              "value": "posti_1#1",
             },
             "sahkoposti": Object {
               "fi": "Fi sahkoposti",
@@ -81,10 +79,8 @@ Object {
           "fi": "Fi osoite",
           "sv": "Sv osoite",
         },
-        "postinumero": "00940",
-        "postitoimipaikka": Object {
-          "fi": "Fi postitoimipaikka",
-          "sv": "Sv postitoimipaikka",
+        "postinumero": Object {
+          "value": "posti_1#1",
         },
         "sahkoposti": Object {
           "fi": "Fi sahkoposti",
@@ -126,10 +122,8 @@ Object {
             "sv": "sv osoite",
           },
           "paattyy": "2019-04-18T08:44",
-          "postinumero": "00520",
-          "postitoimipaikka": Object {
-            "fi": "fi posititoimipaikka",
-            "sv": "sv posititoimipaikka",
+          "postinumero": Object {
+            "value": "posti_1#1",
           },
         },
       ],

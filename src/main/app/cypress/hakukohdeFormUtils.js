@@ -4,10 +4,12 @@ import {
   stubKoodistoRoute,
   stubHakemuspalveluLomakkeetRoute,
   stubOppijanumerorekisteriHenkiloRoute,
+  stubKoodiRoute,
 } from './utils';
 
 import organisaatio from './data/organisaatio';
 import haku from './data/haku';
+import createKoodi from './data/koodi';
 
 export const stubHakukohdeFormRoutes = ({ cy, organisaatioOid, hakuOid }) => {
   cy.server();
@@ -35,6 +37,7 @@ export const stubHakukohdeFormRoutes = ({ cy, organisaatioOid, hakuOid }) => {
   stubKoodistoRoute({ koodisto: 'valintakokeentyyppi', cy });
   stubKoodistoRoute({ koodisto: 'liitetyypitamm', cy });
   stubKoodistoRoute({ koodisto: 'kausi', cy });
+  stubKoodiRoute(createKoodi({ koodisto: 'posti', versio: 2 }));
 
   cy.route({
     method: 'GET',

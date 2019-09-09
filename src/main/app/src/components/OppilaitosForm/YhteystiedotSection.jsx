@@ -1,10 +1,11 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
-import { FormFieldInput } from '../FormFields';
+import { FormFieldInput, FormFieldPostinumeroSelect } from '../FormFields';
 import useTranslation from '../useTranslation';
 import Typography from '../Typography';
 import Box from '../Box';
+import { getTestIdProps } from '../../utils';
 
 const YhteystiedotSection = ({ name, language }) => {
   const { t } = useTranslation();
@@ -15,7 +16,7 @@ const YhteystiedotSection = ({ name, language }) => {
         {t('oppilaitoslomake.yhteystiedotInfo')}
       </Typography>
 
-      <Box mb={2}>
+      <Box mb={2} {...getTestIdProps('osoite')}>
         <Field
           component={FormFieldInput}
           name={`${name}.osoite.${language}`}
@@ -23,24 +24,15 @@ const YhteystiedotSection = ({ name, language }) => {
         />
       </Box>
 
-      <Box display="flex" mb={2}>
-        <Box flexGrow={1} mr={1}>
-          <Field
-            component={FormFieldInput}
-            name={`${name}.postinumero`}
-            label={t('yleiset.postinumero')}
-          />
-        </Box>
-        <Box flexGrow={1} ml={1}>
-          <Field
-            component={FormFieldInput}
-            name={`${name}.postitoimipaikka.${language}`}
-            label={t('yleiset.postitoimipaikka')}
-          />
-        </Box>
+      <Box mb={2} {...getTestIdProps('postinumero')}>
+        <Field
+          component={FormFieldPostinumeroSelect}
+          name={`${name}.postinumero`}
+          label={t('yleiset.postinumero')}
+        />
       </Box>
 
-      <Box mb={2}>
+      <Box mb={2} {...getTestIdProps('puhelinnumero')}>
         <Field
           component={FormFieldInput}
           name={`${name}.puhelinnumero`}
@@ -48,7 +40,7 @@ const YhteystiedotSection = ({ name, language }) => {
         />
       </Box>
 
-      <Box>
+      <Box {...getTestIdProps('verkkosivu')}>
         <Field
           component={FormFieldInput}
           name={`${name}.verkkosivu`}

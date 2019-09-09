@@ -15,6 +15,7 @@ import {
   FormFieldInput,
   FormFieldTextarea,
   FormFieldDateTimeInput,
+  FormFieldPostinumeroSelect,
 } from '../FormFields';
 
 const TilaisuudetField = ({ fields, language, t }) => (
@@ -30,31 +31,14 @@ const TilaisuudetField = ({ fields, language, t }) => (
             />
           </Spacing>
 
-          <Flex marginBottom={2}>
-            <FlexItem
-              grow={1}
-              paddingRight={1}
-              {...getTestIdProps('postinumero')}
-            >
-              <Field
-                name={`${field}.postinumero`}
-                component={FormFieldInput}
-                label={t('yleiset.postinumero')}
-                type="number"
-              />
-            </FlexItem>
-            <FlexItem
-              grow={1}
-              paddingLeft={1}
-              {...getTestIdProps('postitoimipaikka')}
-            >
-              <Field
-                name={`${field}.postitoimipaikka.${language}`}
-                component={FormFieldInput}
-                label={t('yleiset.postitoimipaikka')}
-              />
-            </FlexItem>
-          </Flex>
+          <Spacing marginBottom={2} {...getTestIdProps('postinumero')}>
+            <Field
+              name={`${field}.postinumero`}
+              component={FormFieldPostinumeroSelect}
+              label={t('yleiset.postinumero')}
+              type="number"
+            />
+          </Spacing>
 
           <Flex marginBottom={2} alignCenter>
             <FlexItem grow={1} paddingRight={1} {...getTestIdProps('alkaa')}>

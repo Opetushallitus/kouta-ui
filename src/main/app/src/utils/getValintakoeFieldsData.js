@@ -5,18 +5,10 @@ const getValintakoeFieldsData = ({ valintakoeValues, kielivalinta }) => {
   return (get(valintakoeValues, 'tyypit') || []).map(({ value }) => ({
     tyyppi: value,
     tilaisuudet: (get(valintakoeValues, ['tilaisuudet', value]) || []).map(
-      ({
-        osoite,
-        postinumero,
-        postitoimipaikka,
-        alkaa,
-        paattyy,
-        lisatietoja,
-      }) => ({
+      ({ osoite, postinumero, alkaa, paattyy, lisatietoja }) => ({
         osoite: {
           osoite: pick(osoite || {}, kielivalinta),
-          postinumero: postinumero || null,
-          postitoimipaikka: pick(postitoimipaikka || {}, kielivalinta),
+          postinumeroKoodiUri: get(postinumero, 'value') || null,
         },
         aika: {
           alkaa: alkaa || null,

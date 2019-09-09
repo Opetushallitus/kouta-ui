@@ -7,8 +7,7 @@ const getFormValuesByOppilaitoksenOsa = oppilaitoksenOsa => {
   const {
     metadata: {
       osoite,
-      postinumero,
-      postitoimipaikka,
+      postinumeroKoodiUri,
       esittely,
       verkkosivu,
       puhelinnumero,
@@ -23,8 +22,7 @@ const getFormValuesByOppilaitoksenOsa = oppilaitoksenOsa => {
     esittely: mapValues(esittely || {}, parseEditorState),
     yhteystiedot: {
       osoite: osoite || {},
-      postinumero: postinumero || '',
-      postitoimipaikka: postitoimipaikka || {},
+      postinumero: postinumeroKoodiUri ? { value: postinumeroKoodiUri } : null,
       verkkosivu: verkkosivu || '',
       puhelinnumero: puhelinnumero || '',
     },

@@ -7,6 +7,7 @@ import {
   fillDateTimeInput,
   chooseKieliversiotLanguages,
   fillValintakoeFields,
+  fillAsyncSelect,
 } from '../../utils';
 
 import koulutus from '../../data/koulutus';
@@ -143,7 +144,7 @@ const fillValintaperusteenKuvausSection = () => {
 
 const fillValintakoeSection = () => {
   cy.getByTestId('valintakoeSection').within(() => {
-    fillValintakoeFields({ cy });
+    fillValintakoeFields();
     jatka();
   });
 };
@@ -178,13 +179,9 @@ const fillLiitteetSection = () => {
         .find('input')
         .type('Osoite', { force: true });
 
-      cy.getByTestId('postinumero')
-        .find('input')
-        .type('00940', { force: true });
-
-      cy.getByTestId('postitoimipaikka')
-        .find('input')
-        .type('Helsinki', { force: true });
+      cy.getByTestId('postinumero').within(() => {
+        fillAsyncSelect('0');
+      });
 
       cy.getByTestId('sahkoposti')
         .find('input')

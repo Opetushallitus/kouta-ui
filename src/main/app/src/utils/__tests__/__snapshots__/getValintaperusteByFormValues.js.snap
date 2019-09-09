@@ -11,13 +11,13 @@ Object {
   "koulutustyyppi": "tyyppi_1#1",
   "metadata": Object {
     "kielitaitovaatimukset": Array [],
-    "koulutustyyppi": "tyyppi_1#1",
     "kuvaus": Object {
       "fi": "<h1>Fi kuvaus</h1>",
       "sv": "<h1>Sv kuvaus</h1>",
     },
     "osaamistaustaKoodiUrit": Array [],
     "sorakuvausId": "sora_1",
+    "tyyppi": "tyyppi_1#1",
     "valintatavat": Array [
       Object {
         "enimmaispisteet": 20,

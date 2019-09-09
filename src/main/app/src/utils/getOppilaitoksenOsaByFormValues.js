@@ -7,21 +7,14 @@ import { isNumeric } from './index';
 const getOppilaitoksenOsaByFormValues = ({ tila, muokkaaja, ...values }) => {
   const { perustiedot, esittely, yhteystiedot } = values;
 
-  const {
-    osoite,
-    postinumero,
-    postitoimipaikka,
-    puhelinnumero,
-    verkkosivu,
-  } = yhteystiedot;
+  const { osoite, postinumero, puhelinnumero, verkkosivu } = yhteystiedot;
 
   return {
     tila,
     muokkaaja,
     metadata: {
       osoite: osoite || {},
-      postinumero: postinumero || null,
-      postitoimipaikka: postitoimipaikka || {},
+      postinumeroKoodiUri: get(postinumero, 'value') || null,
       puhelinnumero: puhelinnumero || null,
       verkkosivu: verkkosivu || null,
       esittely: mapValues(esittely || {}, serializeEditorState),

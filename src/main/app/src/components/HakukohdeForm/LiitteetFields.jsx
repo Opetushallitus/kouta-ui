@@ -4,7 +4,7 @@ import get from 'lodash/get';
 
 import Spacing from '../Spacing';
 import Button from '../Button';
-import Flex, { FlexItem } from '../Flex';
+import Flex from '../Flex';
 import { getTestIdProps, getFirstLanguageValue } from '../../utils';
 import useKoodistoOptions from '../useKoodistoOptions';
 import useTranslation from '../useTranslation';
@@ -21,6 +21,7 @@ import {
   FormFieldTextarea,
   FormFieldCheckbox,
   FormFieldRadioGroup,
+  FormFieldPostinumeroSelect,
 } from '../FormFields';
 
 const ContactInfo = ({
@@ -88,28 +89,13 @@ const ToimituspaikkaFields = ({ name, language }) => {
         />
       </Spacing>
 
-      <Spacing marginBottom={2}>
-        <Flex>
-          <FlexItem grow={0} basis="30%" {...getTestIdProps('postinumero')}>
-            <Field
-              name={`${name}.postinumero`}
-              component={FormFieldInput}
-              type="number"
-              label={t('yleiset.postinumero')}
-            />
-          </FlexItem>
-          <FlexItem
-            grow={1}
-            paddingLeft={2}
-            {...getTestIdProps('postitoimipaikka')}
-          >
-            <Field
-              name={`${name}.postitoimipaikka.${language}`}
-              component={FormFieldInput}
-              label={t('yleiset.postitoimipaikka')}
-            />
-          </FlexItem>
-        </Flex>
+      <Spacing marginBottom={2} {...getTestIdProps('postinumero')}>
+        <Field
+          name={`${name}.postinumero`}
+          component={FormFieldPostinumeroSelect}
+          type="number"
+          label={t('yleiset.postinumero')}
+        />
       </Spacing>
 
       <Spacing {...getTestIdProps('sahkoposti')}>

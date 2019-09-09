@@ -2,11 +2,13 @@ import merge from 'lodash/merge';
 import createKoodisto from './data/koodisto';
 
 import organisaatio from './data/organisaatio';
+import createKoodi from './data/koodi';
 
 import {
   stubKoodistoRoute,
   stubHakemuspalveluLomakkeetRoute,
   stubOppijanumerorekisteriHenkiloRoute,
+  stubKoodiRoute,
 } from './utils';
 
 export const stubHakuFormRoutes = ({ cy, organisaatioOid }) => {
@@ -35,6 +37,8 @@ export const stubHakuFormRoutes = ({ cy, organisaatioOid }) => {
   stubKoodistoRoute({ koodisto: 'opetuspaikkakk', cy });
   stubKoodistoRoute({ koodisto: 'kausi', cy });
   stubKoodistoRoute({ koodisto: 'valintakokeentyyppi', cy });
+  stubKoodistoRoute({ koodisto: 'posti', cy });
+  stubKoodiRoute(createKoodi({ koodisto: 'posti', versio: 2 }));
 
   cy.route({
     method: 'GET',

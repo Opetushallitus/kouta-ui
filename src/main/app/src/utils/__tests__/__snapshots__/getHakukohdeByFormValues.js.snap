@@ -42,11 +42,7 @@ Object {
             "fi": "Fi osoite",
             "sv": "Sv osoite",
           },
-          "postinumero": "00940",
-          "postitoimipaikka": Object {
-            "fi": "Fi postitoimipaikka",
-            "sv": "Sv postitoimipaikka",
-          },
+          "postinumeroKoodiUri": "posti_1#1",
         },
         "sahkoposti": Object {
           "fi": "Fi sahkoposti",
@@ -94,11 +90,7 @@ Object {
               "fi": "fi osoite",
               "sv": "sv osoite",
             },
-            "postinumero": "00520",
-            "postitoimipaikka": Object {
-              "fi": "fi posititoimipaikka",
-              "sv": "sv posititoimipaikka",
-            },
+            "postinumeroKoodiUri": "posti_1#1",
           },
         },
       ],

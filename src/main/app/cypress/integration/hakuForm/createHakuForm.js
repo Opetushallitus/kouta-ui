@@ -166,7 +166,7 @@ const tallenna = () => {
 
 const fillValintakoeSection = () => {
   cy.getByTestId('valintakoeSection').within(() => {
-    fillValintakoeFields({ cy });
+    fillValintakoeFields();
     jatka();
   });
 };

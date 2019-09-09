@@ -60,6 +60,7 @@ const PostinumeroSelect = ({
           apiUrls,
           koodi: koodiStr,
           versio: koodistoVersio,
+          silent: true,
         });
 
         if (koodi) {

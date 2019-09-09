@@ -8,8 +8,9 @@ export const getValintakoeFieldsValues = valintakokeet => {
         ...acc,
         [tyyppi]: (tilaisuudet || []).map(({ osoite, aika, lisatietoja }) => ({
           osoite: get(osoite, 'osoite') || {},
-          postinumero: get(osoite, 'postinumero') || '',
-          postitoimipaikka: get(osoite, 'postitoimipaikka') || {},
+          postinumero: get(osoite, 'postinumeroKoodiUri')
+            ? { value: osoite.postinumeroKoodiUri }
+            : undefined,
           alkaa: get(aika, 'alkaa') || '',
           paattyy: get(aika, 'paattyy') || '',
           lisatietoja: lisatietoja || {},

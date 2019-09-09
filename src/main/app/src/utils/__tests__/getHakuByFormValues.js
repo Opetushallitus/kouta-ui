@@ -68,7 +68,7 @@ const baseValues = {
       'tyyppi_1#1': [
         {
           osoite: { fi: 'fi osoite', sv: 'sv osoite' },
-          postinumero: '00520',
+          postinumero: { value: 'posti_1#1' },
           postitoimipaikka: {
             fi: 'fi posititoimipaikka',
             sv: 'sv posititoimipaikka',

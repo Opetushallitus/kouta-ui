@@ -57,11 +57,7 @@ const validateLiitteet = (errorBuilder, values) => {
       ) {
         enhancedLiitteetEb = enhancedLiitteetEb
           .validateTranslations('toimitustapa.paikka.osoite', kieliversiot)
-          .validateTranslations(
-            'toimitustapa.paikka.postitoimipaikka',
-            kieliversiot,
-          )
-          .validateExistence('toimitustapa.paikka.postinumero')
+          .validateExistence('toimitustapa.paikka.postinumero.value')
           .validateExistence('toimitustapa.paikka.sahkoposti');
       }
 
@@ -88,11 +84,7 @@ const validateLiitteet = (errorBuilder, values) => {
   ) {
     enhancedErrorBuilder = enhancedErrorBuilder
       .validateTranslations('liitteet.toimitustapa.paikka.osoite', kieliversiot)
-      .validateTranslations(
-        'liitteet.toimitustapa.paikka.postitoimipaikka',
-        kieliversiot,
-      )
-      .validateExistence('liitteet.toimitustapa.paikka.postinumero')
+      .validateExistence('liitteet.toimitustapa.paikka.postinumero.value')
       .validateExistence('liitteet.toimitustapa.paikka.sahkoposti');
   }
 
@@ -111,8 +103,7 @@ const validateValintakokeet = (errorBuilder, values) => {
     return acc.validateArray(`valintakoe.tilaisuudet.${tyyppi}`, eb => {
       return eb
         .validateTranslations('osoite', kieliversiot)
-        .validateExistence('postinumero')
-        .validateTranslations('postitoimipaikka', kieliversiot)
+        .validateExistence('postinumero.value')
         .validateExistence('alkaa')
         .validateExistence('paattyy');
     });

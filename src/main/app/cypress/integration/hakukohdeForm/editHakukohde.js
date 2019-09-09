@@ -18,7 +18,7 @@ const tallenna = cy => {
   getByTestId('tallennaHakukohdeButton', cy).click({ force: true });
 };
 
-describe('createHakukohdeForm', () => {
+describe('editHakukohdeForm', () => {
   const organisaatioOid = '1.1.1.1.1.1';
   const toteutusOid = '2.1.1.1.1.1';
   const koulutusOid = '3.1.1.1.1';

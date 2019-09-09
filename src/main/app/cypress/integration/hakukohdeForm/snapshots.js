@@ -2,6 +2,8 @@ module.exports = {
   createHakukohdeForm: {
     'should be able to create ammatillinen hakukohde': {
       '1': {
+        muokkaaja: '1.2.246.562.24.62301161440',
+        tila: 'julkaistu',
         alkamiskausiKoodiUri: 'kausi_0#1',
         kaytetaanHaunAikataulua: false,
         kielivalinta: ['fi'],
@@ -29,10 +31,7 @@ module.exports = {
                 osoite: {
                   fi: 'Osoite',
                 },
-                postinumero: '00940',
-                postitoimipaikka: {
-                  fi: 'Helsinki',
-                },
+                postinumeroKoodiUri: 'posti_0#fi',
               },
               sahkoposti: 'sahkoposti@email.com',
             },
@@ -57,10 +56,7 @@ module.exports = {
                   osoite: {
                     fi: 'osoite',
                   },
-                  postinumero: '00510',
-                  postitoimipaikka: {
-                    fi: 'postitoimipaikka',
-                  },
+                  postinumeroKoodiUri: 'posti_0#fi',
                 },
                 aika: {
                   alkaa: '2019-04-02T10:45',
@@ -84,14 +80,14 @@ module.exports = {
         hakulomakeKuvaus: {},
         kaytetaanHaunAlkamiskautta: false,
         organisaatioOid: '1.1.1.1.1.1',
-        toteutusOid: '2.1.1.1.1.1',
         hakuOid: '4.1.1.1.1.1',
-        tila: 'julkaistu',
-        muokkaaja: '1.2.246.562.24.62301161440',
+        toteutusOid: '2.1.1.1.1.1',
       },
     },
     'should be able to create korkeakoulu hakukohde': {
       '1': {
+        muokkaaja: '1.2.246.562.24.62301161440',
+        tila: 'julkaistu',
         alkamiskausiKoodiUri: 'kausi_0#1',
         kaytetaanHaunAikataulua: false,
         kielivalinta: ['fi'],
@@ -119,10 +115,7 @@ module.exports = {
                 osoite: {
                   fi: 'Osoite',
                 },
-                postinumero: '00940',
-                postitoimipaikka: {
-                  fi: 'Helsinki',
-                },
+                postinumeroKoodiUri: 'posti_0#fi',
               },
               sahkoposti: 'sahkoposti@email.com',
             },
@@ -147,10 +140,7 @@ module.exports = {
                   osoite: {
                     fi: 'osoite',
                   },
-                  postinumero: '00510',
-                  postitoimipaikka: {
-                    fi: 'postitoimipaikka',
-                  },
+                  postinumeroKoodiUri: 'posti_0#fi',
                 },
                 aika: {
                   alkaa: '2019-04-02T10:45',
@@ -174,12 +164,13 @@ module.exports = {
         hakulomakeKuvaus: {},
         kaytetaanHaunAlkamiskautta: false,
         organisaatioOid: '1.1.1.1.1.1',
-        toteutusOid: '2.1.1.1.1.1',
         hakuOid: '4.1.1.1.1.1',
-        tila: 'julkaistu',
-        muokkaaja: '1.2.246.562.24.62301161440',
+        toteutusOid: '2.1.1.1.1.1',
       },
     },
+  },
+  __version: '3.4.1',
+  editHakukohdeForm: {
     'should be able to edit hakukohde': {
       '1': {
         oid: '6.1.1.1.1.1',
@@ -218,10 +209,7 @@ module.exports = {
                 osoite: {
                   fi: 'Osoite',
                 },
-                postinumero: '00940',
-                postitoimipaikka: {
-                  fi: 'Postitoimipaikka',
-                },
+                postinumeroKoodiUri: 'posti_0#2',
               },
               sahkoposti: 'sahkoposti@email.com',
             },
@@ -239,10 +227,7 @@ module.exports = {
                   osoite: {
                     fi: 'Osoite',
                   },
-                  postinumero: '00940',
-                  postitoimipaikka: {
-                    fi: 'Postitoimipaikka',
-                  },
+                  postinumeroKoodiUri: 'posti_0#2',
                 },
                 aika: {
                   alkaa: '2011-11-11T10:30',
@@ -275,5 +260,4 @@ module.exports = {
       },
     },
   },
-  __version: '3.4.1',
 };

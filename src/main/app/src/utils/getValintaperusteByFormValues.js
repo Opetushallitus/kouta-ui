@@ -111,7 +111,7 @@ const getValintaperusteByFormValues = values => {
     koulutustyyppi,
     onkoJulkinen,
     metadata: {
-      koulutustyyppi,
+      tyyppi: koulutustyyppi,
       valintatavat,
       kielitaitovaatimukset: [],
       osaamistaustaKoodiUrit: [],

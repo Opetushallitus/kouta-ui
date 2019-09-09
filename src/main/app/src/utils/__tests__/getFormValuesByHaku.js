@@ -46,7 +46,7 @@ const baseHaku = {
         {
           osoite: {
             osoite: { fi: 'fi osoite', sv: 'sv osoite' },
-            postinumero: '00520',
+            postinumeroKoodiUri: 'posti_1#1',
             postitoimipaikka: {
               fi: 'fi posititoimipaikka',
               sv: 'sv posititoimipaikka',

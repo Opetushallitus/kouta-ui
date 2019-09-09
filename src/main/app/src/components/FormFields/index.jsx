@@ -17,6 +17,7 @@ import KieliversiotSelect from '../KieliversiotSelect';
 import KoulutustyyppiSelect from '../KoulutustyyppiSelect';
 import SoraKuvausSelect from '../SoraKuvausSelect';
 import LanguageSelect from '../LanguageSelect';
+import PostinumeroSelect from '../PostinumeroSelect';
 
 export const simpleMapProps = ({ meta, input, ...props }) => ({
   ...input,
@@ -121,4 +122,9 @@ export const FormFieldLanguageSelect = createComponent(
 export const FormFieldDatePickerInput = createComponent(
   DatePickerInput,
   simpleMapProps,
+);
+
+export const FormFieldPostinumeroSelect = createComponent(
+  PostinumeroSelect,
+  selectMapProps,
 );

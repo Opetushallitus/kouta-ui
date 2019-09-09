@@ -64,12 +64,8 @@ const getHakukohdeByFormValues = values => {
         get(values, 'liitteet.toimitustapa.paikka.osoite') || null,
         kielivalinta,
       ),
-      postinumero:
-        get(values, 'liitteet.toimitustapa.paikka.postinumero') || null,
-      postitoimipaikka: pick(
-        get(values, 'liitteet.toimitustapa.paikka.postitoimipaikka') || null,
-        kielivalinta,
-      ),
+      postinumeroKoodiUri:
+        get(values, 'liitteet.toimitustapa.paikka.postinumero.value') || null,
     },
     sahkoposti: get(values, 'liitteet.toimitustapa.paikka.sahkoposti') || null,
   };
@@ -98,11 +94,8 @@ const getHakukohdeByFormValues = values => {
             get(toimitustapa, 'paikka.osoite') || null,
             kielivalinta,
           ),
-          postinumero: get(toimitustapa, 'paikka.postinumero') || null,
-          postitoimipaikka: pick(
-            get(toimitustapa, 'paikka.postitoimipaikka') || null,
-            kielivalinta,
-          ),
+          postinumeroKoodiUri:
+            get(toimitustapa, 'paikka.postinumero.value') || null,
         },
         sahkoposti: get(toimitustapa, 'paikka.sahkoposti') || null,
       },

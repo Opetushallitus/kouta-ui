@@ -85,10 +85,14 @@ const getFormValuesByHakukohde = hakukohde => {
         paikka: {
           sahkoposti: get(liitteidenToimitusosoite, 'sahkoposti') || '',
           osoite: get(liitteidenToimitusosoite, 'osoite.osoite') || {},
-          postinumero:
-            get(liitteidenToimitusosoite, 'osoite.postinumero') || '',
-          postitoimipaikka:
-            get(liitteidenToimitusosoite, 'osoite.postitoimipaikka') || {},
+          postinumero: get(
+            liitteidenToimitusosoite,
+            'osoite.postinumeroKoodiUri',
+          )
+            ? {
+                value: liitteidenToimitusosoite.osoite.postinumeroKoodiUri,
+              }
+            : undefined,
         },
       },
       yhteinenToimituspaikka: Boolean(liitteetOnkoSamaToimitusosoite),
@@ -112,9 +116,9 @@ const getFormValuesByHakukohde = hakukohde => {
               tapa: toimitustapa || '',
               paikka: {
                 osoite: get(toimitusosoite, 'osoite.osoite') || {},
-                postinumero: get(toimitusosoite, 'osoite.postinumero') || '',
-                postitoimipaikka:
-                  get(toimitusosoite, 'osoite.postitoimipaikka') || {},
+                postinumero: get(toimitusosoite, 'osoite.postinumeroKoodiUri')
+                  ? { value: toimitusosoite.osoite.postinumeroKoodiUri }
+                  : undefined,
                 sahkoposti: get(toimitusosoite, 'sahkoposti') || '',
               },
             },

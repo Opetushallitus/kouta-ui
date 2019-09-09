@@ -52,10 +52,7 @@ export default () => ({
             osoite: {
               fi: 'osoite',
             },
-            postinumero: '00510',
-            postitoimipaikka: {
-              fi: 'postitoimipaikka',
-            },
+            postinumeroKoodiUri: 'posti_0#2',
           },
           aika: {
             alkaa: '2019-04-02T10:45',

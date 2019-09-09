@@ -30,8 +30,7 @@ export default () => ({
       toimitusosoite: {
         osoite: {
           osoite: { fi: 'Osoite' },
-          postinumero: '00940',
-          postitoimipaikka: { fi: 'Postitoimipaikka' },
+          postinumeroKoodiUri: 'posti_0#2',
         },
         sahkoposti: 'sahkoposti@email.com',
       },
@@ -46,8 +45,7 @@ export default () => ({
         {
           osoite: {
             osoite: { fi: 'Osoite' },
-            postinumero: '00940',
-            postitoimipaikka: { fi: 'Postitoimipaikka' },
+            postinumeroKoodiUri: 'posti_0#2',
           },
           aika: { alkaa: '2011-11-11T10:30', paattyy: '2011-11-12T11:45' },
           lisatietoja: { fi: 'Lisätietoja' },

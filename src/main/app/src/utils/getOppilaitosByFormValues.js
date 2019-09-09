@@ -7,13 +7,7 @@ import { isNumeric } from './index';
 const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
   const { osat, perustiedot, esittely, yhteystiedot, tietoa } = values;
 
-  const {
-    osoite,
-    postinumero,
-    postitoimipaikka,
-    puhelinnumero,
-    verkkosivu,
-  } = yhteystiedot;
+  const { osoite, postinumero, puhelinnumero, verkkosivu } = yhteystiedot;
 
   const tietoaOpiskelusta = Object.keys(get(tietoa, 'osiot') || []).map(
     ({ value: otsikkoKoodiUri }) => ({
@@ -27,8 +21,7 @@ const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
     muokkaaja,
     metadata: {
       osoite: osoite || {},
-      postinumero: postinumero || null,
-      postitoimipaikka: postitoimipaikka || {},
+      postinumeroKoodiUri: get(postinumero, 'value') || null,
       puhelinnumero: puhelinnumero || null,
       verkkosivu: verkkosivu || null,
       esittely: mapValues(esittely || {}, serializeEditorState),

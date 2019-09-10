@@ -1,6 +1,6 @@
 import get from 'lodash/get';
 
-import { isString } from './index';
+import { isString, isObject } from './index';
 
 const getSeparator = str => {
   if (str.indexOf('|') >= 0) {
@@ -11,6 +11,10 @@ const getSeparator = str => {
 };
 
 const getOrganisaatioParentOidPath = organisaatio => {
+  if (!isObject(organisaatio)) {
+    return [];
+  }
+
   const pathStr = get(organisaatio, 'parentOidPath');
 
   if (!isString(pathStr)) {
@@ -18,8 +22,9 @@ const getOrganisaatioParentOidPath = organisaatio => {
   }
 
   const separator = getSeparator(pathStr);
+  const path = pathStr.split(separator).filter(v => !!v);
 
-  return pathStr.split(separator).filter(v => !!v);
+  return [...path, organisaatio.oid].filter(v => !!v);
 };
 
 export default getOrganisaatioParentOidPath;

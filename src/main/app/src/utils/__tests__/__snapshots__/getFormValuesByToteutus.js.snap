@@ -147,13 +147,18 @@ Object {
     "sv": "Sv kuvaus",
   },
   "lukiolinjat": Object {
-    "jaksonKuvaus": Object {
-      "fi": "Fi jakso",
-      "sv": "Sv jakso",
-    },
-    "linja": Object {
-      "value": "linja_1#1",
-    },
+    "erityisetKoulutustehtavat": Array [
+      Object {
+        "value": "tehtava_1#1",
+      },
+    ],
+    "lukionLinjanTarkenteet": Array [
+      Object {
+        "value": "linja_1#1",
+      },
+    ],
+    "showErityisetKoulutustehtavat": true,
+    "showLukionLinjanTarkenteet": true,
   },
   "nayttamistiedot": Object {
     "ammattinimikkeet": Object {

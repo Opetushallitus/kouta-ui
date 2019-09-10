@@ -184,11 +184,8 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
           },
         },
       ],
-      lukiolinjaKoodiUri: 'linja_1#1',
-      jaksonKuvaus: {
-        fi: 'Fi jakso',
-        sv: 'Sv jakso',
-      },
+      lukionLinjanTarkenneKoodiUrit: ['linja_1#1'],
+      erityinenKoulutustehtavaKoodiUrit: ['tehtava_1#1'],
     },
     nimi: {
       fi: 'Fi nimi',

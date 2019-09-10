@@ -6,23 +6,24 @@ import useKoodistoOptions from '../../useKoodistoOptions';
 import useTranslation from '../../useTranslation';
 import { getTestIdProps } from '../../../utils';
 
-const LukionLinjaFields = ({ name }) => {
+const ErityisetKoulutustehtavatField = ({ name }) => {
   const { t } = useTranslation();
 
   const { options } = useKoodistoOptions({
-    koodisto: 'lukiolinjat',
+    koodisto: 'lukionerityistehtava',
   });
 
   return (
-    <div {...getTestIdProps('linja')}>
+    <div {...getTestIdProps('erityisetKoulutustehtavat')}>
       <Field
         component={FormFieldSelect}
-        name={`${name}.linja`}
-        label={t('toteutuslomake.valitseLukioLinja')}
+        name={name}
+        label={t('toteutuslomake.valitseErityisetKoulutustehtavat')}
         options={options}
+        isMulti
       />
     </div>
   );
 };
 
-export default LukionLinjaFields;
+export default ErityisetKoulutustehtavatField;

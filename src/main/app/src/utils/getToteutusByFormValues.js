@@ -66,7 +66,21 @@ const getToteutusByFormValues = values => {
     kielivalinta,
   );
 
-  const lukiolinjaKoodiUri = get(values, 'lukiolinjat.linja.value') || null;
+  const lukionLinjanTarkenneKoodiUrit = (
+    get(values, 'lukiolinjat.lukionLinjanTarkenteet') || []
+  ).map(({ value }) => value);
+
+  const erityinenKoulutustehtavaKoodiUrit = (
+    get(values, 'lukiolinjat.erityisetKoulutustehtavat') || []
+  ).map(({ value }) => value);
+
+  const showLukionLinjanTarkenteet = Boolean(
+    get(values, 'lukiolinjat.showLukionLinjanTarkenteet'),
+  );
+
+  const showErityisetKoulutustehtavat = Boolean(
+    get(values, 'lukiolinjat.showErityisetKoulutustehtavat'),
+  );
 
   const opetuskieliKuvaus = pick(
     get(values, 'jarjestamistiedot.opetuskieliKuvaus') || {},
@@ -217,7 +231,12 @@ const getToteutusByFormValues = values => {
         B3Kielivalikoima,
         muuKielivalikoima,
       },
-      lukiolinjaKoodiUri,
+      lukionLinjanTarkenneKoodiUrit: showLukionLinjanTarkenteet
+        ? lukionLinjanTarkenneKoodiUrit
+        : [],
+      erityinenKoulutustehtavaKoodiUrit: showErityisetKoulutustehtavat
+        ? erityinenKoulutustehtavaKoodiUrit
+        : [],
       jaksonKuvaus,
       osaamisalat,
       yhteyshenkilot,

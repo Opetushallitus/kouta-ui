@@ -4,7 +4,7 @@ export const development = ({ isCypress }) => ({
   'kouta-backend.base-url': 'http://localhost:' + process.env.REACT_APP_BACKEND_PORT,
   'kouta-backend.koulutus': `${koutaBackendDevUrl}/koulutus`,
   'kouta-backend.koulutus-by-oid': `${koutaBackendDevUrl}/koulutus/$1`,
-  'kouta-backend.koulutus-list': `https://virkailija.untuvaopintopolku.fi/kouta-backend/koulutus/list`,
+  'kouta-backend.koulutus-list': `${koutaBackendDevUrl}/koulutus/list`,
   'kouta-backend.koulutus-toteutukset': `${koutaBackendDevUrl}/koulutus/$1/toteutukset/list`,
   'kouta-backend.toteutus': `${koutaBackendDevUrl}/toteutus`,
   'kouta-backend.toteutus-by-oid': `${koutaBackendDevUrl}/toteutus/$1`,

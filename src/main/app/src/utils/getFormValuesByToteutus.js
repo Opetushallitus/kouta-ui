@@ -1,5 +1,7 @@
 import get from 'lodash/get';
 
+import isEmpty from './isEmpty';
+
 const getFormValuesByToteutus = toteutus => {
   const {
     kielivalinta = [],
@@ -18,8 +20,8 @@ const getFormValuesByToteutus = toteutus => {
     ylemmanKorkeakoulututkinnonOsaamisalat: ylemmanKorkeakoulututkinnonOsaamisalatArg = [],
     alemmanKorkeakoulututkinnonOsaamisalat: alemmanKorkeakoulututkinnonOsaamisalatArg = [],
     yhteyshenkilot = [],
-    lukiolinjaKoodiUri,
-    jaksonKuvaus,
+    lukionLinjanTarkenneKoodiUrit,
+    erityinenKoulutustehtavaKoodiUrit,
   } = metadata;
 
   const {
@@ -34,6 +36,11 @@ const getFormValuesByToteutus = toteutus => {
     B3Kielivalikoima,
     muuKielivalikoima,
   } = opetus;
+
+  const showLukionLinjanTarkenteet = !isEmpty(lukionLinjanTarkenneKoodiUrit);
+  const showErityisetKoulutustehtavat = !isEmpty(
+    erityinenKoulutustehtavaKoodiUrit,
+  );
 
   const osaamisalat = osaamisalatArg.map(({ koodi }) => koodi);
 
@@ -160,8 +167,14 @@ const getFormValuesByToteutus = toteutus => {
     alemmanKorkeakoulututkinnonOsaamisalat: alemmanKorkeakoulututkinnonOsaamisalatArg,
     kuvaus,
     lukiolinjat: {
-      linja: lukiolinjaKoodiUri ? { value: lukiolinjaKoodiUri } : '',
-      jaksonKuvaus: jaksonKuvaus || {},
+      showErityisetKoulutustehtavat,
+      showLukionLinjanTarkenteet,
+      lukionLinjanTarkenteet: (lukionLinjanTarkenneKoodiUrit || []).map(
+        value => ({ value }),
+      ),
+      erityisetKoulutustehtavat: (erityinenKoulutustehtavaKoodiUrit || []).map(
+        value => ({ value }),
+      ),
     },
   };
 };

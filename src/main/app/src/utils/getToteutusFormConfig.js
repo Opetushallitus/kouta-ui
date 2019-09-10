@@ -121,10 +121,9 @@ const baseConfig = {
     },
     lukiolinjat: {
       fields: {
-        linja: {
-          validate: eb => eb.validateExistence('lukiolinjat.linja'),
-        },
-        kuvaus: true,
+        lisattavatLinjat: true,
+        linjanTarkenne: true,
+        erityisetKoulutustehtavat: true,
       },
     },
     julkaisutila: {

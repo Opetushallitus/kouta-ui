@@ -24,8 +24,9 @@ const OppilaitoksenOsaPageFooter = ({
         httpClient,
         apiUrls,
         oppilaitoksenOsa: {
+          organisaatioOid,
           ...(oppilaitoksenOsa || {}),
-          ...getOppilaitoksenOsaByFormValues({ ...values, organisaatioOid }),
+          ...getOppilaitoksenOsaByFormValues(values),
         },
       });
 

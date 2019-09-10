@@ -86,6 +86,8 @@ const getBaseFields = () => ({
       },
     ],
   },
+  lukionLinjanTarkenneKoodiUrit: ['lukiolinjat2_1#1'],
+  erityinenKoulutustehtavaKoodiUrit: ['lukionerityistehtava_1#1'],
   muokkaaja: '1.2.246.562.24.62301161440',
   organisaatioOid: '1.2.246.562.10.594252633210',
   kielivalinta: ['fi', 'sv'],

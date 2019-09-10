@@ -19,13 +19,14 @@ const OppilaitosPageFooter = ({
   const { t } = useTranslation();
 
   const submit = useCallback(
-    async ({ values, httpClient, apiUrls }) => {
+    async ({ values, httpClient, apiUrls }) => {      
       await createOppilaitos({
         httpClient,
         apiUrls,
         oppilaitos: {
+          organisaatioOid,
           ...(oppilaitos || {}),
-          ...getOppilaitosByFormValues({ ...values, organisaatioOid }),
+          ...getOppilaitosByFormValues(values),
         },
       });
 

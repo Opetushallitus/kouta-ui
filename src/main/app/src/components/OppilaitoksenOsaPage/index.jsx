@@ -7,7 +7,7 @@ import OppilaitosFormSteps from '../OppilaitosFormSteps';
 import OppilaitoksenOsaPageHeader from './OppilaitoksenOsaPageHeader';
 import OppilaitoksenOsaPageFooter from './OppilaitoksenOsaPageFooter';
 import useApiAsync from '../useApiAsync';
-import getOppilaitoksenOsa from '../../utils/kouta/getOppilaitoksenOsa';
+import getOppilaitoksenOsaByOid from '../../utils/kouta/getOppilaitoksenOsaByOid';
 import Spin from '../Spin';
 import Title from '../Title';
 import useTranslation from '../useTranslation';
@@ -28,8 +28,9 @@ const OppilaitoksenOsaPage = ({
     isLoading: oppilaitoksenOsaIsLoading,
     finishedAt,
   } = useApiAsync({
-    promiseFn: getOppilaitoksenOsa,
-    organisaatioOid,
+    promiseFn: getOppilaitoksenOsaByOid,
+    oid: organisaatioOid,
+    silent: true,
     watch: JSON.stringify([organisaatioOid, oppilaitoksenOsaUpdatedAt]),
   });
 

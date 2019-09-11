@@ -5,13 +5,14 @@ import { isNumber } from './index';
 
 const getFormValuesByOppilaitos = oppilaitos => {
   const {
+    kielivalinta,
+    tila,
     metadata: {
       osat,
-      tietoaOpetuksesta,
-      osoite,
-      postinumeroKoodiUri,
+      tietoaOpiskelusta,
+      osoite: { osoite, postinumeroKoodiUri },
       esittely,
-      verkkosivu,
+      wwwSivu,
       puhelinnumero,
       opiskelijoita,
       korkeakouluja,
@@ -20,25 +21,25 @@ const getFormValuesByOppilaitos = oppilaitos => {
       yksikoita,
       toimipisteita,
       akatemioita,
-      tila,
     },
   } = oppilaitos;
 
   return {
+    kieliversiot: kielivalinta || [],
     tila,
     osat: osat || [],
     esittely: mapValues(esittely || {}, parseEditorState),
     yhteystiedot: {
       osoite: osoite || {},
       postinumero: postinumeroKoodiUri ? { value: postinumeroKoodiUri } : null,
-      verkkosivu: verkkosivu || '',
+      verkkosivu: wwwSivu || {},
       puhelinnumero: puhelinnumero || '',
     },
     tietoa: {
-      osiot: (tietoaOpetuksesta || []).map(({ otsikkoKoodiUri }) => ({
+      osiot: (tietoaOpiskelusta || []).map(({ otsikkoKoodiUri }) => ({
         value: otsikkoKoodiUri,
       })),
-      tiedot: (tietoaOpetuksesta || []).reduce(
+      tiedot: (tietoaOpiskelusta || []).reduce(
         (acc, { otsikkoKoodiUri, teksti }) => {
           acc[otsikkoKoodiUri] = teksti || {};
 

@@ -9,6 +9,7 @@ import useSaveForm from '../useSaveForm';
 import validateOppilaitoksenOsaForm from '../../utils/validateOppilaitoksenOsaForm';
 import createOppilaitoksenOsa from '../../utils/kouta/createOppilaitoksenOsa';
 import getOppilaitoksenOsaByFormValues from '../../utils/getOppilaitoksenOsaByFormValues';
+import updateOppilaitoksenOsa from '../../utils/kouta/updateOppilaitoksenOsa';
 
 const OppilaitoksenOsaPageFooter = ({
   oppilaitoksenOsa,
@@ -20,12 +21,17 @@ const OppilaitoksenOsaPageFooter = ({
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
-      await createOppilaitoksenOsa({
+      const fn = oppilaitoksenOsa
+        ? updateOppilaitoksenOsa
+        : createOppilaitoksenOsa;
+
+      await fn({
         httpClient,
         apiUrls,
         oppilaitoksenOsa: {
           organisaatioOid,
           ...(oppilaitoksenOsa || {}),
+          oid: organisaatioOid,
           ...getOppilaitoksenOsaByFormValues(values),
         },
       });

@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getFormValuesByOppilaitos returns correct form values given oppilaitos 1`] = `
+Object {
+  "esittely": Object {
+    "fi":       "<p><em>Fi esittely</em></p>",
+    "sv":       "<p><em>Sv esittely</em></p>",
+  },
+  "kieliversiot": Array [
+    "fi",
+    "sv",
+  ],
+  "osat": Array [
+    "1.1.1.1",
+    "1.1.1.2",
+  ],
+  "perustiedot": Object {
+    "akatemioita": 1,
+    "kampuksia": 3,
+    "korkeakouluja": 5,
+    "opiskelijoita": 100,
+    "tiedekuntia": 4,
+    "toimipisteita": 9,
+    "yksikoita": 2,
+  },
+  "tietoa": Object {
+    "osiot": Array [
+      Object {
+        "value": "osio_1#1",
+      },
+    ],
+    "tiedot": Object {
+      "osio_1#1": Object {
+        "fi": "Fi tiedot",
+        "sv": "Sv tiedot",
+      },
+    },
+  },
+  "tila": "tallennettu",
+  "yhteystiedot": Object {
+    "osoite": Object {
+      "fi": "Fi osoite",
+      "sv": "Sv osoite",
+    },
+    "postinumero": Object {
+      "value": "postinumero_1#1",
+    },
+    "puhelinnumero": "123456",
+    "verkkosivu": Object {
+      "fi": "www.verkkosivu.fi",
+      "sv": "www.verkkosivu.sv",
+    },
+  },
+}
+`;

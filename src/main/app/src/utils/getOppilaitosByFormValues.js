@@ -1,30 +1,47 @@
 import get from 'lodash/get';
+import pick from 'lodash/pick';
 import mapValues from 'lodash/mapValues';
 
 import serializeEditorState from './draft/serializeEditorState';
 import { isNumeric } from './index';
 
 const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
-  const { osat, perustiedot, esittely, yhteystiedot, tietoa } = values;
+  const {
+    osat,
+    perustiedot,
+    esittely,
+    yhteystiedot,
+    tietoa,
+    kieliversiot,
+  } = values;
 
   const { osoite, postinumero, puhelinnumero, verkkosivu } = yhteystiedot;
 
-  const tietoaOpiskelusta = Object.keys(get(tietoa, 'osiot') || []).map(
+  const tietoaOpiskelusta = (get(tietoa, 'osiot') || []).map(
     ({ value: otsikkoKoodiUri }) => ({
       otsikkoKoodiUri,
-      teksti: get(tietoa, ['tiedot', otsikkoKoodiUri]) || {},
+      teksti: pick(
+        get(tietoa, ['tiedot', otsikkoKoodiUri]) || {},
+        kieliversiot,
+      ),
     }),
   );
 
   return {
     tila,
     muokkaaja,
+    kielivalinta: kieliversiot,
     metadata: {
-      osoite: osoite || {},
-      postinumeroKoodiUri: get(postinumero, 'value') || null,
+      osoite: {
+        osoite: pick(osoite || {}, kieliversiot),
+        postinumeroKoodiUri: get(postinumero, 'value') || null,
+      },
       puhelinnumero: puhelinnumero || null,
-      verkkosivu: verkkosivu || null,
-      esittely: mapValues(esittely || {}, serializeEditorState),
+      wwwSivu: pick(verkkosivu || {}, kieliversiot),
+      esittely: mapValues(
+        pick(esittely || {}, kieliversiot),
+        serializeEditorState,
+      ),
       osat: osat || [],
       tietoaOpiskelusta,
       opiskelijoita: isNumeric(get(perustiedot, 'opiskelijoita'))

@@ -98,6 +98,7 @@ const Select = ({ theme, value, options, id, error = false, ...props }) => {
       value={resolvedValue}
       options={options}
       inputId={id}
+      error={error}
       {...props}
     />
   );
@@ -132,7 +133,7 @@ export const AsyncCreatableSelect = ({ error = false, ...props }) => {
   );
 };
 
-export const AsyncSelect= ({ error = false, ...props }) => {
+export const AsyncSelect = ({ error = false, ...props }) => {
   const { t } = useTranslation();
   const theme = useContext(ThemeContext);
 

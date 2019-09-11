@@ -335,7 +335,7 @@ export default {
     valitseLukionLinjanTarkenteet: 'Valitse lukion linjan tarkenteet',
     erityinenKoulutustehtava: 'Erityinen koulutustehtävä',
     valitseErityisetKoulutustehtavat: 'Valitse erityisen koulutustehtävät',
-    valitseLukiolinjat: 'Valitse lukiolinjat',
+    valitseLukionLinjat: 'Valitse lukiolinjat',
   },
   hakulomake: {
     haunNimi: 'Haun nimi',

@@ -12,7 +12,7 @@ import {
 
 storiesOf('OppilaitosForm', module)
   .addDecorator(makeLocalisationDecorator())
-  .addDecorator(makeStoreDecorator())
+  .addDecorator(makeStoreDecorator({ logging: true }))
   .addDecorator(makeApiDecorator())
   .add('Basic', () => (
     <ReduxForm form="oppilaitosForm">

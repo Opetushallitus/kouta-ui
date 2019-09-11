@@ -8,8 +8,8 @@ import PerustiedotSection from './PerustiedotSection';
 import EsittelySection from './EsittelySection';
 import YhteystiedotSection from './YhteystiedotSection';
 import JulkaisutilaSection from './JulkaisutilaSection';
-
-const languageTabs = ['fi', 'sv', 'en'];
+import KieliversiotFields from '../KieliversiotFields';
+import useFieldValue from '../useFieldValue';
 
 const OppilaitoksenOsaForm = ({
   steps = false,
@@ -17,9 +17,17 @@ const OppilaitoksenOsaForm = ({
   showArkistoituTilaOption = true,
 }) => {
   const { t } = useTranslation();
+  const languageTabs = useFieldValue('kieliversiot');
 
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
+      <FormCollapse
+        header={t('yleiset.kieliversiot')}
+        {...getTestIdProps('kieliversiotSection')}
+      >
+        <KieliversiotFields name="kieliversiot" />
+      </FormCollapse>
+
       <FormCollapse
         languages={languageTabs}
         header={t('oppilaitoksenOsaLomake.oppilaitoksenOsanPerustiedot')}

@@ -1,0 +1,43 @@
+export default () => {
+  return {
+    oid: '1.2.246.562.13.00000000000000000072',
+    organisaatioOid: '1.2.246.562.10.594252633210',
+    kielivalinta: ['fi', 'sv'],
+    tila: 'tallennettu',
+    metadata: {
+      akatemioita: 1,
+      esittely: {
+        fi: '<p><em>Fi esittely</em></p>',
+        sv: '<p><em>Sv esittely</em></p>',
+      },
+      kampuksia: 3,
+      korkeakouluja: 5,
+      opiskelijoita: 100,
+      osat: ['1.1.1.1', '1.1.1.2'],
+      osoite: {
+        osoite: {
+          fi: 'Fi osoite',
+          sv: 'Sv osoite',
+        },
+        postinumeroKoodiUri: 'posti_0#2',
+      },
+      puhelinnumero: '123456',
+      tiedekuntia: 4,
+      tietoaOpiskelusta: [
+        {
+          otsikkoKoodiUri: 'koulutuksenlisatiedot_0#1',
+          teksti: {
+            fi: 'Fi tiedot',
+            sv: 'Sv tiedot',
+          },
+        },
+      ],
+      toimipisteita: 9,
+      wwwSivu: {
+        fi: 'www.verkkosivu.fi',
+        sv: 'www.verkkosivu.sv',
+      },
+      yksikoita: 2,
+    },
+  };
+};

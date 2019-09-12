@@ -3,7 +3,7 @@ import get from 'lodash/get';
 
 import { isString, isArray } from '../index';
 import parseKoodiUri from '../parseKoodiUri';
-import { getKoodisto } from '../../apiUtils';
+import getKoodisto from '../koodistoService/getKoodisto';
 import getKoodiNimiTranslation from '../getKoodiNimiTranslation';
 import isEmpty from '../isEmpty';
 

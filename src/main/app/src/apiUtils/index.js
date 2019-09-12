@@ -199,20 +199,6 @@ export const getOsaamisalakuvauksetByPerusteId = async ({
   return get(data, 'reformi') ? data.reformi : {};
 };
 
-export const getKoodisto = async ({
-  koodistoUri,
-  httpClient,
-  apiUrls,
-  koodistoVersio = '',
-}) => {
-  const { data } = await httpClient.get(
-    apiUrls.url('koodisto-service.koodi', koodistoUri),
-    { params: { koodistoVersio } },
-  );
-
-  return data;
-};
-
 export const getLocalisation = async ({
   category = 'kouta',
   locale = '',

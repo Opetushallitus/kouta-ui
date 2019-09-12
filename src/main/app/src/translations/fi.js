@@ -194,10 +194,10 @@ export default {
       'Arkistointi siirtää tiedot pois näkyvistä, mutta ei poista niitä',
   },
   validointivirheet: {
-    syotaArvo: 'Syötä kentälle arvo',
-    syotaArvoKaannoksille: 'Syötä arvo kaikille kentän käännöksille',
-    valitseVahintaanYksi: 'Valitse vähintään yksi',
-    valitseVahintaan: 'Valitse vähintään {{lukumaara}}',
+    pakollinen: 'Syötä kentälle arvo',
+    pakollisetKaannokset: 'Syötä arvo kaikille kentän käännöksille',
+    listaVahintaanYksi: 'Valitse kentälle vähintään yksi arvo',
+    listaVahintaan: 'Valitse kentälle vähintään {{lukumaara}} arvoa',
   },
   hakulomakeValinnat: {
     ataru: 'Käytetään hakemuspalvelun lomaketta',

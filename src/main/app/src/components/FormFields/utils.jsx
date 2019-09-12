@@ -13,20 +13,22 @@ export const createComponent = (Component, mapProps) => {
     const children = createElement(Component, mapProps(props));
 
     return (
-      <FormControl
-        error={showError}
-        helperText={
-          showError
-            ? isArray(meta.error)
-              ? t(...meta.error)
-              : t(meta.error)
-            : helperText
-        }
-        label={label}
-        disabled={disabled}
-      >
-        {children}
-      </FormControl>
+      <div className={showError ? '__formFieldError__' : ''}>
+        <FormControl
+          error={showError}
+          helperText={
+            showError
+              ? isArray(meta.error)
+                ? t(...meta.error)
+                : t(meta.error)
+              : helperText
+          }
+          label={label}
+          disabled={disabled}
+        >
+          {children}
+        </FormControl>
+      </div>
     );
   };
 

@@ -29,7 +29,7 @@ class ErrorBuilder {
   }
 
   validateExistence(path, { message } = {}) {
-    const errorMessage = message || 'validointivirheet.syotaArvo';
+    const errorMessage = message || 'validointivirheet.pakollinen';
 
     if (!exists(this.getValue(path))) {
       this.setError(path, errorMessage);
@@ -39,7 +39,7 @@ class ErrorBuilder {
   }
 
   validate(path, validator, { message } = {}) {
-    const errorMessage = message || 'validointivirheet.syotaArvo';
+    const errorMessage = message || 'validointivirheet.pakollinen';
 
     if (!validator(this.getValue(path))) {
       this.setError(path, errorMessage);
@@ -53,8 +53,8 @@ class ErrorBuilder {
     const errorMessage = message
       ? message
       : min === 1
-      ? 'validointivirheet.valitseVahintaanYksi'
-      : ['validointivirheet.valitseVahintaan', { lukumaara: 1 }];
+      ? 'validointivirheet.listaVahintaanYksi'
+      : ['validointivirheet.listaVahintaan', { lukumaara: 1 }];
 
     if (!isArray(value) || value.length < min) {
       this.setError(isFieldArray ? `${path}._error` : path, errorMessage);
@@ -68,7 +68,7 @@ class ErrorBuilder {
     languages,
     { message, validator = v => exists(v) } = {},
   ) {
-    const errorMessage = message || 'validointivirheet.syotaArvoKaannoksille';
+    const errorMessage = message || 'validointivirheet.pakollisetKannokset';
 
     const invalidTranslations = getInvalidTranslations(
       this.getValue(path),

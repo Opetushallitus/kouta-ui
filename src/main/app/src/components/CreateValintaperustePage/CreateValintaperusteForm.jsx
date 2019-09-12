@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import ValintaperusteForm, { initialValues } from '../ValintaperusteForm';
-import { getKoutaValintaperusteByOid } from '../../apiUtils';
+import getValintaperusteByOid from '../../utils/kouta/getValintaperusteByOid';
 import useApiAsync from '../useApiAsync';
 import { POHJAVALINTA } from '../../constants';
 import ReduxForm from '../ReduxForm';
@@ -33,9 +33,7 @@ export const CreateValintaperusteForm = ({
   kopioValintaperusteOid,
   ...props
 }) => {
-  const promiseFn = kopioValintaperusteOid
-    ? getKoutaValintaperusteByOid
-    : resolveFn;
+  const promiseFn = kopioValintaperusteOid ? getValintaperusteByOid : resolveFn;
 
   const { data: valintaperuste } = useApiAsync({
     promiseFn,

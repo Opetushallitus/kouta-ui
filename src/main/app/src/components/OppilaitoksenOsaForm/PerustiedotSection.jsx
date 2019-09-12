@@ -5,7 +5,7 @@ import { Field } from 'redux-form';
 import { useOrganisaatio } from '../useOrganisaatio';
 import useLanguage from '../useLanguage';
 import useKoodiNimi from '../useKoodiNimi';
-import { getFirstLanguageValue } from '../../utils';
+import { getFirstLanguageValue, getTestIdProps } from '../../utils';
 import useTranslation from '../useTranslation';
 import Typography from '../Typography';
 import Box from '../Box';
@@ -27,7 +27,7 @@ const TiedotSection = ({ name, t, language }) => {
       </Typography>
 
       <Box m={-1} display="flex">
-        <Box m={1} flexGrow="1">
+        <Box m={1} flexGrow="1" {...getTestIdProps('opiskelijoita')}>
           <Field
             component={FormFieldInput}
             name={`${name}.opiskelijoita`}
@@ -35,7 +35,7 @@ const TiedotSection = ({ name, t, language }) => {
             label={t('oppilaitoslomake.opiskelijoita')}
           />
         </Box>
-        <Box m={1} flexGrow="1">
+        <Box m={1} flexGrow="1" {...getTestIdProps('kampus')}>
           <Field
             component={FormFieldInput}
             name={`${name}.kampus.${language}`}

@@ -102,7 +102,7 @@ const ToteutusForm = ({
 
         <FormCollapse
           section="lukiolinjat"
-          header={t('toteutuslomake.valitseLukioLinjat')}
+          header={t('toteutuslomake.valitseLukionLinjat')}
           languages={languages}
           {...getTestIdProps('lukiolinjatSection')}
         >

@@ -199,20 +199,6 @@ export const getOsaamisalakuvauksetByPerusteId = async ({
   return get(data, 'reformi') ? data.reformi : {};
 };
 
-export const getKoodisto = async ({
-  koodistoUri,
-  httpClient,
-  apiUrls,
-  koodistoVersio = '',
-}) => {
-  const { data } = await httpClient.get(
-    apiUrls.url('koodisto-service.koodi', koodistoUri),
-    { params: { koodistoVersio } },
-  );
-
-  return data;
-};
-
 export const getLocalisation = async ({
   category = 'kouta',
   locale = '',
@@ -239,16 +225,6 @@ export const getLocalisation = async ({
   }
 
   return resource;
-};
-
-export const getKoutaHakuByOid = async ({ oid, httpClient, apiUrls }) => {
-  const { data, headers } = await httpClient.get(
-    apiUrls.url('kouta-backend.haku-by-oid', oid),
-  );
-
-  const lastModified = get(headers, 'last-modified') || null;
-
-  return isObject(data) ? { lastModified, ...data } : data;
 };
 
 export const getKoutaHakuHakukohteet = async ({
@@ -370,20 +346,6 @@ export const getKoutaHakukohteet = async ({
 export const getKoutaHakukohdeByOid = async ({ oid, httpClient, apiUrls }) => {
   const { data, headers } = await httpClient.get(
     apiUrls.url('kouta-backend.hakukohde-by-oid', oid),
-  );
-
-  const lastModified = get(headers, 'last-modified') || null;
-
-  return isObject(data) ? { lastModified, ...data } : data;
-};
-
-export const getKoutaValintaperusteByOid = async ({
-  oid,
-  httpClient,
-  apiUrls,
-}) => {
-  const { data, headers } = await httpClient.get(
-    apiUrls.url('kouta-backend.valintaperuste-by-oid', oid),
   );
 
   const lastModified = get(headers, 'last-modified') || null;

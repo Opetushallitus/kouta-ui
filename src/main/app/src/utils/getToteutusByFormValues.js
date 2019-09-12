@@ -133,7 +133,7 @@ const getToteutusByFormValues = values => {
 
   const osaamisalat = (get(values, 'osaamisalat.osaamisalat') || []).map(
     osaamisala => ({
-      koodi: osaamisala,
+      koodiUri: osaamisala,
       linkki: osaamisalaLinkit[osaamisala] || {},
       otsikko: osaamisalaLinkkiOtsikot[osaamisala] || {},
     }),

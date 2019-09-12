@@ -23,7 +23,7 @@ export default () => ({
   liitteet: [
     {
       id: '927ac923-a839-4354-9db4-f95d276d9902',
-      tyyppi: 'liitetyypitamm_0#1',
+      tyyppiKoodiUri: 'liitetyypitamm_0#1',
       nimi: { fi: 'Nimi' },
       kuvaus: { fi: 'Kuvaus' },
       toimitusaika: '2011-11-11T10:30',
@@ -40,7 +40,7 @@ export default () => ({
   valintakokeet: [
     {
       id: 'b9d53560-a7f0-45d3-bd9d-46e67e6049ba',
-      tyyppi: 'valintakokeentyyppi_0#1',
+      tyyppiKoodiUri: 'valintakokeentyyppi_0#1',
       tilaisuudet: [
         {
           osoite: {

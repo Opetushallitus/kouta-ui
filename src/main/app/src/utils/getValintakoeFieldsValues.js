@@ -2,19 +2,23 @@ import get from 'lodash/get';
 
 export const getValintakoeFieldsValues = valintakokeet => {
   return {
-    tyypit: (valintakokeet || []).map(({ tyyppi }) => ({ value: tyyppi })),
+    tyypit: (valintakokeet || []).map(({ tyyppiKoodiUri }) => ({
+      value: tyyppiKoodiUri,
+    })),
     tilaisuudet: (valintakokeet || []).reduce(
-      (acc, { tyyppi, tilaisuudet }) => ({
+      (acc, { tyyppiKoodiUri, tilaisuudet }) => ({
         ...acc,
-        [tyyppi]: (tilaisuudet || []).map(({ osoite, aika, lisatietoja }) => ({
-          osoite: get(osoite, 'osoite') || {},
-          postinumero: get(osoite, 'postinumeroKoodiUri')
-            ? { value: osoite.postinumeroKoodiUri }
-            : undefined,
-          alkaa: get(aika, 'alkaa') || '',
-          paattyy: get(aika, 'paattyy') || '',
-          lisatietoja: lisatietoja || {},
-        })),
+        [tyyppiKoodiUri]: (tilaisuudet || []).map(
+          ({ osoite, aika, lisatietoja }) => ({
+            osoite: get(osoite, 'osoite') || {},
+            postinumero: get(osoite, 'postinumeroKoodiUri')
+              ? { value: osoite.postinumeroKoodiUri }
+              : undefined,
+            alkaa: get(aika, 'alkaa') || '',
+            paattyy: get(aika, 'paattyy') || '',
+            lisatietoja: lisatietoja || {},
+          }),
+        ),
       }),
       {},
     ),

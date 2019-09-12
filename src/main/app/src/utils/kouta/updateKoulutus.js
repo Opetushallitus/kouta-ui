@@ -4,7 +4,7 @@ const updateKoulutus = async ({ koulutus, httpClient, apiUrls }) => {
   const { lastModified = '', ...rest } = koulutus;
 
   const headers = {
-    'If-Unmodified-Since': lastModified,
+    'X-If-Unmodified-Since': lastModified,
   };
 
   const update = produce(rest, draft => {

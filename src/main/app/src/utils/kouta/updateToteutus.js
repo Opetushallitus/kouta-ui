@@ -2,7 +2,7 @@ const updateToteutus = async ({ toteutus, httpClient, apiUrls }) => {
   const { lastModified = '', ...rest } = toteutus;
 
   const headers = {
-    'If-Unmodified-Since': lastModified,
+    'X-If-Unmodified-Since': lastModified,
   };
 
   const { data } = await httpClient.post(

@@ -100,7 +100,7 @@ const getAmmatillinenFields = ({ tyyppi }) =>
       tyyppi,
       osaamisalat: [
         {
-          koodi: 'osaamisala_0',
+          koodiUri: 'osaamisala_0',
           linkki: {
             fi: 'https://www.salpaus.fi/koulutusesittely/elaintenhoitaja/',
           },

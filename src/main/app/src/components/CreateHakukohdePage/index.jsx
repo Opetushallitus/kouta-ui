@@ -2,7 +2,7 @@ import React from 'react';
 import get from 'lodash/get';
 
 import FormPage from '../FormPage';
-import { getOrganisaatioByOid, getKoutaHakuByOid } from '../../apiUtils';
+import { getOrganisaatioByOid } from '../../apiUtils';
 import Flex, { FlexItem } from '../Flex';
 import { getFirstLanguageValue } from '../../utils';
 import getKoulutustyyppiByKoulutusOid from '../../utils/kouta/getKoulutustyyppiByKoulutusOid';
@@ -17,6 +17,7 @@ import Spin from '../Spin';
 import useTranslation from '../useTranslation';
 import getToteutusByOid from '../../utils/kouta/getToteutusByOid';
 import Title from '../Title';
+import getHakuByOid from '../../utils/kouta/getHakuByOid';
 
 const getHakukohdeData = async ({
   organisaatioOid,
@@ -28,7 +29,7 @@ const getHakukohdeData = async ({
   const [organisaatio, toteutus, haku] = await Promise.all([
     getOrganisaatioByOid({ oid: organisaatioOid, httpClient, apiUrls }),
     getToteutusByOid({ oid: toteutusOid, httpClient, apiUrls }),
-    getKoutaHakuByOid({ oid: hakuOid, httpClient, apiUrls }),
+    getHakuByOid({ oid: hakuOid, httpClient, apiUrls }),
   ]);
 
   const koulutustyyppi = await (toteutus && toteutus.koulutusOid

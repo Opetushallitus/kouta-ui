@@ -7,7 +7,7 @@ const getKoulutusByOid = async ({ oid, apiUrls, httpClient }) => {
     apiUrls.url('kouta-backend.koulutus-by-oid', oid),
   );
 
-  const lastModified = get(headers, 'last-modified') || null;
+  const lastModified = get(headers, 'x-last-modified') || null;
 
   return isObject(data) ? { lastModified, ...data } : data;
 };

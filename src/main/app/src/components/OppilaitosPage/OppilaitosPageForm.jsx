@@ -23,7 +23,7 @@ const OppilaitosPageForm = ({ organisaatio, oppilaitos }) => {
       yhteystiedot: {
         osoite: contactInfo.osoite || {},
         postinumero: contactInfo.postinumeroKoodiUri
-          ? { value: contactInfo.postinumerKoodiUri }
+          ? { value: contactInfo.postinumeroKoodiUri }
           : undefined,
         verkkosivu: contactInfo.verkkosivu || '',
         puhelinnumero: contactInfo.puhelinnumero || '',

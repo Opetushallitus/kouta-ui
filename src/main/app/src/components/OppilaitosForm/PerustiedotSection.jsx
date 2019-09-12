@@ -14,6 +14,7 @@ import { FormFieldInput } from '../FormFields';
 import GridRow from '../GridRow';
 import GridColumn from '../GridColumn';
 import useKoodiNimet from '../useKoodiNimet';
+import { getTestIdProps } from '../../utils';
 
 const InfoLabel = props => (
   <Box flexGrow={0} pr={2} flexBasis="30%" {...props} />
@@ -29,7 +30,7 @@ const TiedotSection = ({ name, t }) => {
       </Typography>
 
       <GridRow gutter={2}>
-        <GridColumn md={4}>
+        <GridColumn md={4} {...getTestIdProps('opiskelijoita')}>
           <Field
             component={FormFieldInput}
             name={`${name}.opiskelijoita`}
@@ -37,7 +38,7 @@ const TiedotSection = ({ name, t }) => {
             label={t('oppilaitoslomake.opiskelijoita')}
           />
         </GridColumn>
-        <GridColumn md={4}>
+        <GridColumn md={4} {...getTestIdProps('korkeakouluja')}>
           <Field
             component={FormFieldInput}
             name={`${name}.korkeakouluja`}
@@ -45,7 +46,7 @@ const TiedotSection = ({ name, t }) => {
             label={t('oppilaitoslomake.korkeakouluja')}
           />
         </GridColumn>
-        <GridColumn md={4}>
+        <GridColumn md={4} {...getTestIdProps('tiedekuntia')}>
           <Field
             component={FormFieldInput}
             name={`${name}.tiedekuntia`}
@@ -53,7 +54,7 @@ const TiedotSection = ({ name, t }) => {
             label={t('oppilaitoslomake.tiedekuntia')}
           />
         </GridColumn>
-        <GridColumn md={4}>
+        <GridColumn md={4} {...getTestIdProps('kampuksia')}>
           <Field
             component={FormFieldInput}
             name={`${name}.kampuksia`}
@@ -61,7 +62,7 @@ const TiedotSection = ({ name, t }) => {
             label={t('oppilaitoslomake.kampuksia')}
           />
         </GridColumn>
-        <GridColumn md={4}>
+        <GridColumn md={4} {...getTestIdProps('yksikoita')}>
           <Field
             component={FormFieldInput}
             name={`${name}.yksikoita`}
@@ -69,7 +70,7 @@ const TiedotSection = ({ name, t }) => {
             label={t('oppilaitoslomake.yksikoita')}
           />
         </GridColumn>
-        <GridColumn md={4}>
+        <GridColumn md={4} {...getTestIdProps('toimipisteita')}>
           <Field
             component={FormFieldInput}
             name={`${name}.toimipisteita`}
@@ -77,7 +78,7 @@ const TiedotSection = ({ name, t }) => {
             label={t('oppilaitoslomake.toimipisteita')}
           />
         </GridColumn>
-        <GridColumn md={4}>
+        <GridColumn md={4} {...getTestIdProps('akatemioita')}>
           <Field
             component={FormFieldInput}
             name={`${name}.akatemioita`}

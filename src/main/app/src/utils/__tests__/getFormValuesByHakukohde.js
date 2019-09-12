@@ -40,7 +40,7 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
             sv: 'Sv sahkoposti',
           },
         },
-        tyyppi: 'liitetyyppi_1#1',
+        tyyppiKoodiUri: 'liitetyyppi_1#1',
         toimitustapa: 'muu_osoite',
       },
     ],
@@ -67,7 +67,7 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
     toinenAsteOnkoKaksoistutkinto: true,
     valintakokeet: [
       {
-        tyyppi: 'tyyppi_1#1',
+        tyyppiKoodiUri: 'tyyppi_1#1',
         tilaisuudet: [
           {
             osoite: {

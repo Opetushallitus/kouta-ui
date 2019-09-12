@@ -55,7 +55,7 @@ module.exports = {
         hakulomakeKuvaus: {},
         valintakokeet: [
           {
-            tyyppi: 'valintakokeentyyppi_1#1',
+            tyyppiKoodiUri: 'valintakokeentyyppi_1#1',
             tilaisuudet: [
               {
                 osoite: {
@@ -67,6 +67,82 @@ module.exports = {
                 aika: {
                   alkaa: '2019-04-02T10:45',
                   paattyy: '2019-04-02T19:00',
+                },
+                lisatietoja: {
+                  fi: 'lisatietoja',
+                },
+              },
+            ],
+          },
+        ],
+        organisaatioOid: '1.1.1.1.1.1',
+      },
+      '2': {
+        muokkaaja: '1.2.246.562.24.62301161440',
+        tila: 'julkaistu',
+        alkamiskausiKoodiUri: 'kausi_0#1',
+        kielivalinta: ['fi'],
+        hakutapaKoodiUri: 'hakutapa_01#1',
+        hakuajat: [
+          {
+            alkaa: '2019-04-02T00:00',
+            paattyy: '2019-11-25T00:00',
+          },
+        ],
+        hakukohteenLiittamisenTakaraja: '2019-12-24T00:00',
+        nimi: {
+          fi: 'haun nimi',
+        },
+        kohdejoukkoKoodiUri: 'haunkohdejoukko_12#1',
+        kohdejoukonTarkenneKoodiUri: 'haunkohdejoukontarkenne_0#1',
+        hakulomaketyyppi: 'ataru',
+        metadata: {
+          tulevaisuudenAikataulu: [
+            {
+              alkaa: '2019-10-11T00:00',
+              paattyy: '2019-12-25T00:00',
+            },
+          ],
+          yhteyshenkilot: [
+            {
+              nimi: {
+                fi: 'nimi',
+              },
+              titteli: {
+                fi: 'titteli',
+              },
+              puhelinnumero: {
+                fi: 'puhelin',
+              },
+              wwwSivu: {
+                fi: 'verkkosivu',
+              },
+              sahkoposti: {
+                fi: 'sähkoposti',
+              },
+            },
+          ],
+        },
+        hakukohteenMuokkaamisenTakaraja: '2019-12-11T00:00',
+        ajastettuJulkaisu: '2019-12-05T00:00',
+        alkamisvuosi: 2019,
+        hakulomakeAtaruId: 'lomake_1',
+        hakulomakeLinkki: {},
+        hakulomakeKuvaus: {},
+        valintakokeet: [
+          {
+            tyyppiKoodiUri: 'valintakokeentyyppi_1#1',
+            tilaisuudet: [
+              {
+                osoite: {
+                  osoite: {
+                    fi: 'osoite',
+                  },
+                  postinumeroKoodiUri: 'posti_0#fi',
+                },
+                aika: {
+                  alkaa: '2019-04-02T00:00',
+                  paattyy: '2019-04-02T00:00',
                 },
                 lisatietoja: {
                   fi: 'lisatietoja',
@@ -138,7 +214,7 @@ module.exports = {
         kielivalinta: ['fi'],
         valintakokeet: [
           {
-            tyyppi: 'valintakokeentyyppi_1#1',
+            tyyppiKoodiUri: 'valintakokeentyyppi_1#1',
             tilaisuudet: [
               {
                 osoite: {

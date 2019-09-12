@@ -8,6 +8,7 @@ import useTranslation from '../useTranslation';
 import useSaveForm from '../useSaveForm';
 import validateOppilaitosForm from '../../utils/validateOppilaitosForm';
 import createOppilaitos from '../../utils/kouta/createOppilaitos';
+import updateOppilaitos from '../../utils/kouta/updateOppilaitos';
 import getOppilaitosByFormValues from '../../utils/getOppilaitosByFormValues';
 
 const OppilaitosPageFooter = ({
@@ -19,13 +20,16 @@ const OppilaitosPageFooter = ({
   const { t } = useTranslation();
 
   const submit = useCallback(
-    async ({ values, httpClient, apiUrls }) => {      
-      await createOppilaitos({
+    async ({ values, httpClient, apiUrls }) => {
+      const fn = oppilaitos ? updateOppilaitos : createOppilaitos;
+
+      await fn({
         httpClient,
         apiUrls,
         oppilaitos: {
           organisaatioOid,
           ...(oppilaitos || {}),
+          oid: organisaatioOid,
           ...getOppilaitosByFormValues(values),
         },
       });

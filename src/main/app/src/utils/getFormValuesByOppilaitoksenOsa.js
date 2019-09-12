@@ -5,11 +5,11 @@ import { isNumber } from './index';
 
 const getFormValuesByOppilaitoksenOsa = oppilaitoksenOsa => {
   const {
+    kieliversiot,
     metadata: {
-      osoite,
-      postinumeroKoodiUri,
+      osoite: { osoite, postinumeroKoodiUri },
       esittely,
-      verkkosivu,
+      wwwSivu,
       puhelinnumero,
       opiskelijoita,
       kampus,
@@ -19,11 +19,12 @@ const getFormValuesByOppilaitoksenOsa = oppilaitoksenOsa => {
 
   return {
     tila,
-    esittely: mapValues(esittely || {}, parseEditorState),
+    kielivalinta: kieliversiot,
+    esittely: mapValues(esittely || {}, kieliversiot, parseEditorState),
     yhteystiedot: {
       osoite: osoite || {},
       postinumero: postinumeroKoodiUri ? { value: postinumeroKoodiUri } : null,
-      verkkosivu: verkkosivu || '',
+      verkkosivu: wwwSivu || {},
       puhelinnumero: puhelinnumero || '',
     },
     perustiedot: {

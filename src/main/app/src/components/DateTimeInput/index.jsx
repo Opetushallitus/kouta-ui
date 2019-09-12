@@ -115,11 +115,11 @@ export const DateTimeInput = ({
   }, [timeValue, time]);
 
   const onTimeChange = useCallback(
-    e => {
-      setTime(e.target.value);
+    time => {
+      setTime(time);
 
-      isValidState({ date, time: e.target.value })
-        ? onChange(formatValue({ date, time: e.target.value }))
+      isValidState({ date, time })
+        ? onChange(formatValue({ date, time }))
         : onChange(null);
     },
     [onChange, JSON.stringify(date)], // eslint-disable-line react-hooks/exhaustive-deps

@@ -100,14 +100,17 @@ const createHttpClient = ({
   callerId,
   redirectAfterForbidden = true,
 } = {}) => {
+  const headers = {};
+
   let client = axios.create({
     withCredentials: true,
     adapter: cache.adapter,
-    ...(callerId && {
-      headers: {
+    headers: {
+      ...headers,
+      ...(callerId && {
         'Caller-Id': callerId,
-      },
-    }),
+      }),
+    },
   });
 
   client = compose(

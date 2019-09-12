@@ -10,8 +10,8 @@ import OsatSection from './OsatSection';
 import TietoaOpiskelustaSection from './TietoaOpiskelustaSection';
 import YhteystiedotSection from './YhteystiedotSection';
 import JulkaisutilaSection from './JulkaisutilaSection';
-
-const languageTabs = ['fi', 'sv', 'en'];
+import KieliversiotFields from '../KieliversiotFields';
+import useFieldValue from '../useFieldValue';
 
 const OppilaitosForm = ({
   steps = false,
@@ -19,9 +19,17 @@ const OppilaitosForm = ({
   showArkistoituTilaOption = true,
 }) => {
   const { t } = useTranslation();
+  const languageTabs = useFieldValue('kieliversiot');
 
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
+      <FormCollapse
+        header={t('yleiset.kieliversiot')}
+        {...getTestIdProps('kieliversiotSection')}
+      >
+        <KieliversiotFields name="kieliversiot" />
+      </FormCollapse>
+
       <FormCollapse
         header={t('oppilaitoslomake.oppilaitoksenPerustiedot')}
         {...getTestIdProps('perustiedotSection')}

@@ -58,7 +58,7 @@ const getOrganisaatioContactInfo = organisaatio => {
     ? getPostinumeroByPostinumeroUri(kayntiOsoitteet[0].postinumeroUri)
     : undefined;
 
-  const postinumerKoodiUri = get(kayntiOsoitteet, '[0].postinumeroUri')
+  const postinumeroKoodiUri = get(kayntiOsoitteet, '[0].postinumeroUri')
     ? get(kayntiOsoitteet, '[0].postinumeroUri')
     : null;
 
@@ -79,7 +79,7 @@ const getOrganisaatioContactInfo = organisaatio => {
     sahkoposti,
     puhelinnumero,
     verkkosivu,
-    postinumerKoodiUri,
+    postinumeroKoodiUri,
   };
 };
 

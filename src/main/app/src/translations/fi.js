@@ -327,15 +327,8 @@ export default {
     B3Kielet: 'B3-kielet',
     muutKielet: 'Muut kielet',
     toteutuksenTila: 'Toteutuksen tila',
-    valitseLisattavatLukionLinjat: 'Valitse lisättävät lukion linjat',
-    lisattavaLukionLinjaLukio: 'Lukio',
-    lisattavaLukionLinjaErityinenKoulutustehtava:
-      'Lukio, erityinen koulutustehtävä',
-    lukionLinjanTarkenne: 'Lukion linjan tarkenne',
-    valitseLukionLinjanTarkenteet: 'Valitse lukion linjan tarkenteet',
-    erityinenKoulutustehtava: 'Erityinen koulutustehtävä',
-    valitseErityisetKoulutustehtavat: 'Valitse erityisen koulutustehtävät',
-    valitseLukionLinjat: 'Valitse lukiolinjat',
+    lukionlinja: 'Lukiolinja',
+    valitseLukiolinja: 'Valitse lukiolinja',
   },
   hakulomake: {
     haunNimi: 'Haun nimi',

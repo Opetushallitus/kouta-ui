@@ -42,8 +42,7 @@ export const stubToteutusFormRoutes = ({ cy, organisaatioOid, perusteId }) => {
   stubKoodistoRoute({ koodisto: 'kausi', cy });
   stubKoodistoRoute({ koodisto: 'kieli', cy });
   stubKoodistoRoute({ koodisto: 'lukiodiplomit', cy });
-  stubKoodistoRoute({ koodisto: 'lukiolinjat2', cy });
-  stubKoodistoRoute({ koodisto: 'lukionerityistehtava', cy });
+  stubKoodistoRoute({ koodisto: 'lukiolinjat', cy });
 
   cy.route({
     method: 'GET',

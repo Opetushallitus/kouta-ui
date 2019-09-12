@@ -147,18 +147,9 @@ Object {
     "sv": "Sv kuvaus",
   },
   "lukiolinjat": Object {
-    "erityisetKoulutustehtavat": Array [
-      Object {
-        "value": "tehtava_1#1",
-      },
-    ],
-    "lukionLinjanTarkenteet": Array [
-      Object {
-        "value": "linja_1#1",
-      },
-    ],
-    "showErityisetKoulutustehtavat": true,
-    "showLukionLinjanTarkenteet": true,
+    "lukiolinja": Object {
+      "value": "linja_1#1",
+    },
   },
   "nayttamistiedot": Object {
     "ammattinimikkeet": Object {

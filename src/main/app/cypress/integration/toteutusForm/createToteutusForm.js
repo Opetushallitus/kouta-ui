@@ -214,20 +214,8 @@ const fillKuvausSection = () => {
 
 const fillLukiolinjatSection = () => {
   cy.getByTestId('lukiolinjatSection').within(() => {
-    cy.getByTestId('showLukionLinjanTarkenteet').within(() => {
-      getCheckbox(null, cy).check({ force: true });
-    });
-
-    cy.getByTestId('showErityisetKoulutustehtavat').within(() => {
-      getCheckbox(null, cy).check({ force: true });
-    });
-
-    cy.getByTestId('lukionLinjanTarkenteet').within(() => {
-      selectOption('lukiolinjat2_0', cy);
-    });
-
-    cy.getByTestId('erityisetKoulutustehtavat').within(() => {
-      selectOption('lukionerityistehtava_0', cy);
+    cy.getByTestId('lukiolinja').within(() => {
+      selectOption('lukiolinjat_0', cy);
     });
 
     jatka();

@@ -10,17 +10,16 @@ const LukiolinjatField = ({ name }) => {
   const { t } = useTranslation();
 
   const { options } = useKoodistoOptions({
-    koodisto: 'lukiolinjat2',
+    koodisto: 'lukiolinjat',
   });
 
   return (
-    <div {...getTestIdProps('lukionLinjanTarkenteet')}>
+    <div {...getTestIdProps('lukiolinja')}>
       <Field
         component={FormFieldSelect}
         name={name}
-        label={t('toteutuslomake.valitseLukionLinjanTarkenteet')}
+        label={t('toteutuslomake.valitseLukiolinja')}
         options={options}
-        isMulti
       />
     </div>
   );

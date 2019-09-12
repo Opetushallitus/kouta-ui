@@ -47,17 +47,11 @@ Object {
         "kieli": "sv",
       },
     ],
-    "erityinenKoulutustehtavaKoodiUrit": Array [
-      "tehtava_1#1",
-    ],
-    "jaksonKuvaus": Object {},
     "kuvaus": Object {
       "fi": "Fi kuvaus",
       "sv": "Sv kuvaus",
     },
-    "lukionLinjanTarkenneKoodiUrit": Array [
-      "linja_1#1",
-    ],
+    "lukiolinjaKoodiUri": "linja_1#1",
     "opetus": Object {
       "A1JaA2Kielivalikoima": Array [
         "kieli_1#1",

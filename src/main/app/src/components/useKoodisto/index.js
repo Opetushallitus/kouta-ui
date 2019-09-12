@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import useApiAsync from '../useApiAsync';
 import { isObject } from '../../utils';
 import KoodistoversiotContext from '../KoodistoversiotContext';
-import { getKoodisto } from '../../apiUtils';
+import getKoodisto from '../../utils/koodistoService/getKoodisto';
 
 const noopPromiseFn = () => Promise.resolve();
 
@@ -20,7 +20,7 @@ export const useKoodisto = ({ koodisto, versio: versioProp }) => {
   return useApiAsync({
     promiseFn,
     koodistoUri: koodisto,
-    koodistoVersio: versio,
+    versio,
     watch,
   });
 };

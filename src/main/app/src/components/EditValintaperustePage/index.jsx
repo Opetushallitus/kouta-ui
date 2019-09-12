@@ -7,7 +7,7 @@ import EditValintaperusteSteps from './EditValintaperusteSteps';
 import EditValintaperusteForm from './EditValintaperusteForm';
 import EditValintaperusteFooter from './EditValintaperusteFooter';
 import useApiAsync from '../useApiAsync';
-import { getKoutaValintaperusteByOid } from '../../apiUtils';
+import getValintaperusteByOid from '../../utils/kouta/getValintaperusteByOid';
 import Spin from '../Spin';
 import { KOULUTUSTYYPPI } from '../../constants';
 import Title from '../Title';
@@ -25,7 +25,7 @@ const EditValintaperustePage = props => {
   const watch = JSON.stringify([oid, valintaperusteUpdatedAt]);
 
   const { data: valintaperuste = null } = useApiAsync({
-    promiseFn: getKoutaValintaperusteByOid,
+    promiseFn: getValintaperusteByOid,
     oid,
     watch,
   });

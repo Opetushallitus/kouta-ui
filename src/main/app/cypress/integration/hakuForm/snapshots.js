@@ -55,7 +55,7 @@ module.exports = {
         hakulomakeKuvaus: {},
         valintakokeet: [
           {
-            tyyppi: 'valintakokeentyyppi_1#1',
+            tyyppiKoodiUri: 'valintakokeentyyppi_1#1',
             tilaisuudet: [
               {
                 osoite: {
@@ -138,7 +138,7 @@ module.exports = {
         kielivalinta: ['fi'],
         valintakokeet: [
           {
-            tyyppi: 'valintakokeentyyppi_1#1',
+            tyyppiKoodiUri: 'valintakokeentyyppi_1#1',
             tilaisuudet: [
               {
                 osoite: {

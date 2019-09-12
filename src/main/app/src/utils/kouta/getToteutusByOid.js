@@ -7,7 +7,7 @@ const getToteutusByOid = async ({ oid, httpClient, apiUrls }) => {
     apiUrls.url('kouta-backend.toteutus-by-oid', oid),
   );
 
-  const lastModified = get(headers, 'last-modified') || null;
+  const lastModified = get(headers, 'x-last-modified') || null;
 
   return isObject(data) ? { lastModified, ...data } : data;
 };

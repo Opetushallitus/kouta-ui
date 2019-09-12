@@ -45,7 +45,7 @@ export default () => ({
   modified: '2019-03-29T12:48',
   valintakokeet: [
     {
-      tyyppi: 'valintakokeentyyppi_1#1',
+      tyyppiKoodiUri: 'valintakokeentyyppi_1#1',
       tilaisuudet: [
         {
           osoite: {

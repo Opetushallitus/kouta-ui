@@ -100,7 +100,7 @@ const getFormValuesByHakukohde = hakukohde => {
       toimitusaika: liitteidenToimitusaika || '',
       liitteet: (liitteet || []).map(
         ({
-          tyyppi,
+          tyyppiKoodiUri,
           nimi = {},
           toimitusaika,
           toimitustapa,
@@ -108,7 +108,7 @@ const getFormValuesByHakukohde = hakukohde => {
           kuvaus = {},
         }) => {
           return {
-            tyyppi: { value: tyyppi },
+            tyyppi: { value: tyyppiKoodiUri },
             nimi,
             kuvaus,
             toimitusaika: toimitusaika || '',

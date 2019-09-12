@@ -61,7 +61,7 @@ module.exports = {
           jaksonKuvaus: {},
           osaamisalat: [
             {
-              koodi: 'osaamisala_0',
+              koodiUri: 'osaamisala_0',
               linkki: {
                 fi: 'https://www.salpaus.fi/koulutusesittely/elaintenhoitaja/',
               },
@@ -432,7 +432,7 @@ module.exports = {
           jaksonKuvaus: {},
           osaamisalat: [
             {
-              koodi: 'osaamisala_0',
+              koodiUri: 'osaamisala_0',
               linkki: {
                 fi: 'osaamisala_0 linkki',
               },

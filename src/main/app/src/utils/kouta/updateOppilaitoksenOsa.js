@@ -6,7 +6,7 @@ const updateOppilaitoksenOsa = async ({
   const { lastModified = '', ...rest } = oppilaitoksenOsa;
 
   const headers = {
-    'If-Unmodified-Since': lastModified,
+    'X-If-Unmodified-Since': lastModified,
   };
 
   const { data } = await httpClient.post(

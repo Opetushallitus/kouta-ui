@@ -3,7 +3,7 @@ import get from 'lodash/get';
 
 import { isArray } from '../../utils';
 import parseKoodiUri from '../../utils/parseKoodiUri';
-import { getKoodisto } from '../../apiUtils';
+import getKoodisto from '../../utils/koodistoService/getKoodisto';
 import useApiAsync from '../useApiAsync';
 
 const noopPromiseFn = () => Promise.resolve([]);
@@ -33,7 +33,7 @@ const useKoodit = koodiUris => {
               getKoodisto({
                 ...args,
                 koodistoUri: koodisto,
-                koodistoVersio: versio,
+                versio,
               }).catch(() => undefined),
             ),
           )

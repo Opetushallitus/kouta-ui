@@ -8,7 +8,7 @@ import EditHakuForm from './EditHakuForm';
 import EditHakuFooter from './EditHakuFooter';
 import useApiAsync from '../useApiAsync';
 import Spin from '../Spin';
-import { getKoutaHakuByOid } from '../../apiUtils';
+import getHakuByOid from '../../utils/kouta/getHakuByOid';
 import Title from '../Title';
 import useTranslation from '../useTranslation';
 
@@ -25,7 +25,7 @@ const EditHakuPage = props => {
   const watch = JSON.stringify([oid, hakuUpdatedAt]);
 
   const { data: haku = null } = useApiAsync({
-    promiseFn: getKoutaHakuByOid,
+    promiseFn: getHakuByOid,
     oid,
     watch,
   });

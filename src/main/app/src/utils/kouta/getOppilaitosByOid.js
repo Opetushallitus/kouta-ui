@@ -17,7 +17,7 @@ const getOppilaitosByOid = async ({
     },
   );
 
-  const lastModified = get(headers, 'last-modified') || null;
+  const lastModified = get(headers, 'x-last-modified') || null;
 
   return isObject(data) ? { lastModified, ...data } : data;
 };

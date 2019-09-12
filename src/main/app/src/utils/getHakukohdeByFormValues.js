@@ -85,7 +85,7 @@ const getHakukohdeByFormValues = values => {
   const liitteet = (get(values, 'liitteet.liitteet') || []).map(
     ({ tyyppi, nimi, kuvaus, toimitusaika, toimitustapa }) => ({
       toimitustapa: get(toimitustapa, 'tapa') || null,
-      tyyppi: get(tyyppi, 'value') || null,
+      tyyppiKoodiUri: get(tyyppi, 'value') || null,
       nimi: pick(nimi || null, kielivalinta),
       toimitusaika: !liitteetOnkoSamaToimitusaika ? toimitusaika || null : null,
       toimitusosoite: {

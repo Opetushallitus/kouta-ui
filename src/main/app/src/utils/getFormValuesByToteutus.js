@@ -42,15 +42,15 @@ const getFormValuesByToteutus = toteutus => {
     erityinenKoulutustehtavaKoodiUrit,
   );
 
-  const osaamisalat = osaamisalatArg.map(({ koodi }) => koodi);
+  const osaamisalat = osaamisalatArg.map(({ koodiUri }) => koodiUri);
 
   const { osaamisalaLinkit, osaamisalaLinkkiOtsikot } = osaamisalatArg.reduce(
     (acc, curr) => {
-      const { koodi, linkki = {}, otsikko = {} } = curr;
+      const { koodiUri, linkki = {}, otsikko = {} } = curr;
 
-      if (koodi) {
-        acc.osaamisalaLinkit[koodi] = linkki;
-        acc.osaamisalaLinkkiOtsikot[koodi] = otsikko;
+      if (koodiUri) {
+        acc.osaamisalaLinkit[koodiUri] = linkki;
+        acc.osaamisalaLinkkiOtsikot[koodiUri] = otsikko;
       }
 
       return acc;

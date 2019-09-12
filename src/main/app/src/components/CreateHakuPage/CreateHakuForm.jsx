@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import HakuForm, { initialValues } from '../HakuForm';
-import { getKoutaHakuByOid } from '../../apiUtils';
+import getHakuByOid from '../../utils/kouta/getHakuByOid';
 import useApiAsync from '../useApiAsync';
 import { POHJAVALINTA } from '../../constants';
 import getFormValuesByHaku from '../../utils/getFormValuesByHaku';
@@ -29,7 +29,7 @@ const getInitialValues = haku => {
 const CreateHakuForm = props => {
   const { kopioHakuOid } = props;
 
-  const promiseFn = kopioHakuOid ? getKoutaHakuByOid : resolveFn;
+  const promiseFn = kopioHakuOid ? getHakuByOid : resolveFn;
 
   const { data } = useApiAsync({
     promiseFn,

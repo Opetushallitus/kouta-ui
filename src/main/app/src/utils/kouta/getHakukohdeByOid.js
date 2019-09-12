@@ -1,10 +1,10 @@
 import get from 'lodash/get';
 
-import { isObject } from '../index';
+import { isObject } from '../utils';
 
-export const getSoraKuvausById = async ({ httpClient, apiUrls, id }) => {
+export const getHakukohdeByOid = async ({ oid, httpClient, apiUrls }) => {
   const { data, headers } = await httpClient.get(
-    apiUrls.url('kouta-backend.sora-kuvaus-by-id', id),
+    apiUrls.url('kouta-backend.hakukohde-by-oid', oid),
   );
 
   const lastModified = get(headers, 'x-last-modified') || null;
@@ -12,4 +12,4 @@ export const getSoraKuvausById = async ({ httpClient, apiUrls, id }) => {
   return isObject(data) ? { lastModified, ...data } : data;
 };
 
-export default getSoraKuvausById;
+export default getHakukohdeByOid;

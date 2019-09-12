@@ -2,7 +2,7 @@ const updateSoraKuvaus = async ({ httpClient, apiUrls, soraKuvaus }) => {
   const { lastModified = '', ...rest } = soraKuvaus;
 
   const headers = {
-    'If-Unmodified-Since': lastModified,
+    'X-If-Unmodified-Since': lastModified,
   };
 
   const { data } = await httpClient.post(

@@ -21,7 +21,7 @@ module.exports = {
         liitteet: [
           {
             toimitustapa: 'osoite',
-            tyyppi: 'liitetyypitamm_0#1',
+            tyyppiKoodiUri: 'liitetyypitamm_0#1',
             nimi: {
               fi: 'Nimi',
             },
@@ -49,7 +49,7 @@ module.exports = {
         toinenAsteOnkoKaksoistutkinto: true,
         valintakokeet: [
           {
-            tyyppi: 'valintakokeentyyppi_1#1',
+            tyyppiKoodiUri: 'valintakokeentyyppi_1#1',
             tilaisuudet: [
               {
                 osoite: {
@@ -105,7 +105,7 @@ module.exports = {
         liitteet: [
           {
             toimitustapa: 'osoite',
-            tyyppi: 'liitetyypitamm_0#1',
+            tyyppiKoodiUri: 'liitetyypitamm_0#1',
             nimi: {
               fi: 'Nimi',
             },
@@ -133,7 +133,7 @@ module.exports = {
         toinenAsteOnkoKaksoistutkinto: false,
         valintakokeet: [
           {
-            tyyppi: 'valintakokeentyyppi_1#1',
+            tyyppiKoodiUri: 'valintakokeentyyppi_1#1',
             tilaisuudet: [
               {
                 osoite: {
@@ -199,7 +199,7 @@ module.exports = {
         liitteet: [
           {
             toimitustapa: 'osoite',
-            tyyppi: 'liitetyypitamm_0#1',
+            tyyppiKoodiUri: 'liitetyypitamm_0#1',
             nimi: {
               fi: 'Nimi',
             },
@@ -220,7 +220,7 @@ module.exports = {
         ],
         valintakokeet: [
           {
-            tyyppi: 'valintakokeentyyppi_0#1',
+            tyyppiKoodiUri: 'valintakokeentyyppi_0#1',
             tilaisuudet: [
               {
                 osoite: {

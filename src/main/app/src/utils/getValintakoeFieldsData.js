@@ -3,7 +3,7 @@ import pick from 'lodash/pick';
 
 const getValintakoeFieldsData = ({ valintakoeValues, kielivalinta }) => {
   return (get(valintakoeValues, 'tyypit') || []).map(({ value }) => ({
-    tyyppi: value,
+    tyyppiKoodiUri: value,
     tilaisuudet: (get(valintakoeValues, ['tilaisuudet', value]) || []).map(
       ({ osoite, postinumero, alkaa, paattyy, lisatietoja }) => ({
         osoite: {

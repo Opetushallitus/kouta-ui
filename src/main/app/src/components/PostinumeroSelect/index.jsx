@@ -39,8 +39,6 @@ const PostinumeroSelect = ({
     valueLabel ? undefined : valueKoodiUri,
   );
 
-  console.log(valueProp);
-
   const value = isObject(valueProp)
     ? {
         ...(valueKoodi ? getKoodiOption(valueKoodi, koodistoVersio) : {}),

@@ -32,10 +32,18 @@ const YhteystiedotSection = ({ name, language }) => {
         />
       </Box>
 
+      <Box mb={2} {...getTestIdProps('sahkoposti')}>
+        <Field
+          component={FormFieldInput}
+          name={`${name}.sahkoposti.${language}`}
+          label={t('yleiset.sahkoposti')}
+        />
+      </Box>
+
       <Box mb={2} {...getTestIdProps('puhelinnumero')}>
         <Field
           component={FormFieldInput}
-          name={`${name}.puhelinnumero`}
+          name={`${name}.puhelinnumero.${language}`}
           label={t('yleiset.puhelinnumero')}
         />
       </Box>

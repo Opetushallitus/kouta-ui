@@ -90,6 +90,10 @@ const fillYhteystiedotSection = () => {
       fillAsyncSelect('0');
     });
 
+    cy.getByTestId('sahkoposti')
+      .find('input')
+      .type('sahkoposti@sahkoposti.fi', { force: true });
+
     cy.getByTestId('puhelinnumero')
       .find('input')
       .type('12345', { force: true });

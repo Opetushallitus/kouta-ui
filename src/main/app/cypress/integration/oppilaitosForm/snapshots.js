@@ -1,5 +1,4 @@
 module.exports = {
-  __version: '3.4.1',
   createOppilaitosForm: {
     'should be able to create oppilaitos': {
       '1': {
@@ -9,15 +8,22 @@ module.exports = {
         muokkaaja: '1.2.246.562.24.62301161440',
         kielivalinta: ['fi'],
         metadata: {
-          osoite: {
+          yhteystiedot: {
             osoite: {
-              fi: 'Osoite',
+              osoite: {
+                fi: 'Osoite',
+              },
+              postinumeroKoodiUri: 'posti_0#fi',
             },
-            postinumeroKoodiUri: 'posti_0#fi',
-          },
-          puhelinnumero: '12345',
-          wwwSivu: {
-            fi: 'www.verkkosivu.fi',
+            sahkoposti: {
+              fi: 'sahkoposti@sahkoposti.fi',
+            },
+            puhelinnumero: {
+              fi: '12345',
+            },
+            wwwSivu: {
+              fi: 'www.verkkosivu.fi',
+            },
           },
           esittely: {
             fi: '<p>Esittely</p>',
@@ -42,6 +48,7 @@ module.exports = {
       },
     },
   },
+  __version: '3.4.1',
   editOppilaitosForm: {
     'should be able to edit oppilaitos': {
       '1': {
@@ -50,15 +57,22 @@ module.exports = {
         kielivalinta: ['fi'],
         tila: 'tallennettu',
         metadata: {
-          osoite: {
+          yhteystiedot: {
             osoite: {
-              fi: 'Fi osoite',
+              osoite: {
+                fi: 'Fi osoite',
+              },
+              postinumeroKoodiUri: 'posti_0#2',
             },
-            postinumeroKoodiUri: 'posti_0#2',
-          },
-          puhelinnumero: '123456',
-          wwwSivu: {
-            fi: 'www.verkkosivu.fi',
+            sahkoposti: {
+              fi: 'fi@sahkoposti.fi',
+            },
+            puhelinnumero: {
+              fi: '1234',
+            },
+            wwwSivu: {
+              fi: 'www.verkkosivu.fi',
+            },
           },
           esittely: {
             fi: '<p><em>Fi esittely</em></p>',

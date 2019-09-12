@@ -19,14 +19,6 @@ Object {
       "1.1.1.1",
       "1.1.1.2",
     ],
-    "osoite": Object {
-      "osoite": Object {
-        "fi": "Fi osoite",
-        "sv": "Sv osoite",
-      },
-      "postinumeroKoodiUri": "postinumero_1#1",
-    },
-    "puhelinnumero": "123456",
     "tiedekuntia": 4,
     "tietoaOpiskelusta": Array [
       Object {
@@ -38,9 +30,26 @@ Object {
       },
     ],
     "toimipisteita": 9,
-    "wwwSivu": Object {
-      "fi": "www.verkkosivu.fi",
-      "sv": "www.verkkosivu.sv",
+    "yhteystiedot": Object {
+      "osoite": Object {
+        "osoite": Object {
+          "fi": "Fi osoite",
+          "sv": "Sv osoite",
+        },
+        "postinumeroKoodiUri": "postinumero_1#1",
+      },
+      "puhelinnumero": Object {
+        "fi": "1234",
+        "sv": "5678",
+      },
+      "sahkoposti": Object {
+        "fi": "fi@sahkoposti.fi",
+        "sv": "sv@sahkoposti.sv",
+      },
+      "wwwSivu": Object {
+        "fi": "www.verkkosivu.fi",
+        "sv": "www.verkkosivu.sv",
+      },
     },
     "yksikoita": 2,
   },

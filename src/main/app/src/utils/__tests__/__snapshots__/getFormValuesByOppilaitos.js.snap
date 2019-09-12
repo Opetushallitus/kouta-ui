@@ -45,7 +45,14 @@ Object {
     "postinumero": Object {
       "value": "postinumero_1#1",
     },
-    "puhelinnumero": "123456",
+    "puhelinnumero": Object {
+      "fi": "1234",
+      "sv": "5678",
+    },
+    "sahkoposti": Object {
+      "fi": "fi@sahkoposti.fi",
+      "sv": "sv@sahkoposti.sv",
+    },
     "verkkosivu": Object {
       "fi": "www.verkkosivu.fi",
       "sv": "www.verkkosivu.sv",

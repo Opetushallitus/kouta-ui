@@ -93,7 +93,7 @@ Object {
           },
         },
       ],
-      "tyyppi": "tyyppi_1#1",
+      "tyyppiKoodiUri": "tyyppi_1#1",
     },
   ],
 }
@@ -192,7 +192,7 @@ Object {
           },
         },
       ],
-      "tyyppi": "tyyppi_1#1",
+      "tyyppiKoodiUri": "tyyppi_1#1",
     },
   ],
 }
@@ -289,7 +289,7 @@ Object {
           },
         },
       ],
-      "tyyppi": "tyyppi_1#1",
+      "tyyppiKoodiUri": "tyyppi_1#1",
     },
   ],
 }

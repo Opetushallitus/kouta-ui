@@ -118,7 +118,7 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
       },
       osaamisalat: [
         {
-          koodi: 'osaamisala1',
+          koodiUri: 'osaamisala1',
           linkki: {
             fi: 'Fi linkki1',
             sv: 'Sv linkki1',
@@ -129,7 +129,7 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
           },
         },
         {
-          koodi: 'osaamisala2',
+          koodiUri: 'osaamisala2',
           linkki: {
             fi: 'Fi linkki2',
             sv: 'Sv linkki2',

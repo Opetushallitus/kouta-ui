@@ -41,7 +41,7 @@ const baseHaku = {
   hakulomakeAtaruId: '12345',
   valintakokeet: [
     {
-      tyyppi: 'tyyppi_1#1',
+      tyyppiKoodiUri: 'tyyppi_1#1',
       tilaisuudet: [
         {
           osoite: {

@@ -147,7 +147,7 @@ Object {
     },
     "osaamisalat": Array [
       Object {
-        "koodi": "osaamisala1",
+        "koodiUri": "osaamisala1",
         "linkki": Object {
           "fi": "Fi linkki1",
           "sv": "Sv linkki1",
@@ -158,7 +158,7 @@ Object {
         },
       },
       Object {
-        "koodi": "osaamisala2",
+        "koodiUri": "osaamisala2",
         "linkki": Object {
           "fi": "Fi linkki2",
           "sv": "Sv linkki2",

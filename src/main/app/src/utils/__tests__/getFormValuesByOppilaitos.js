@@ -13,15 +13,27 @@ test('getFormValuesByOppilaitos returns correct form values given oppilaitos', (
       kampuksia: 3,
       korkeakouluja: 5,
       opiskelijoita: 100,
-      osat: ['1.1.1.1', '1.1.1.2'],
-      osoite: {
+      yhteystiedot: {
         osoite: {
-          fi: 'Fi osoite',
-          sv: 'Sv osoite',
+          osoite: {
+            fi: 'Fi osoite',
+            sv: 'Sv osoite',
+          },
+          postinumeroKoodiUri: 'postinumero_1#1',
         },
-        postinumeroKoodiUri: 'postinumero_1#1',
+        puhelinnumero: {
+          fi: '1234',
+          sv: '5678',
+        },
+        sahkoposti: {
+          fi: 'fi@sahkoposti.fi',
+          sv: 'sv@sahkoposti.sv',
+        },
+        wwwSivu: {
+          fi: 'www.verkkosivu.fi',
+          sv: 'www.verkkosivu.sv',
+        },
       },
-      puhelinnumero: '123456',
       tiedekuntia: 4,
       tietoaOpiskelusta: [
         {
@@ -33,10 +45,6 @@ test('getFormValuesByOppilaitos returns correct form values given oppilaitos', (
         },
       ],
       toimipisteita: 9,
-      wwwSivu: {
-        fi: 'www.verkkosivu.fi',
-        sv: 'www.verkkosivu.sv',
-      },
       yksikoita: 2,
     },
   });

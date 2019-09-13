@@ -194,10 +194,10 @@ export default {
       'Arkistointi siirtää tiedot pois näkyvistä, mutta ei poista niitä',
   },
   validointivirheet: {
-    syotaArvo: 'Syötä kentälle arvo',
-    syotaArvoKaannoksille: 'Syötä arvo kaikille kentän käännöksille',
-    valitseVahintaanYksi: 'Valitse vähintään yksi',
-    valitseVahintaan: 'Valitse vähintään {{lukumaara}}',
+    pakollinen: 'Syötä kentälle arvo',
+    pakollisetKaannokset: 'Syötä arvo kaikille kentän käännöksille',
+    listaVahintaanYksi: 'Valitse kentälle vähintään yksi arvo',
+    listaVahintaan: 'Valitse kentälle vähintään {{lukumaara}} arvoa',
   },
   hakulomakeValinnat: {
     ataru: 'Käytetään hakemuspalvelun lomaketta',
@@ -327,15 +327,8 @@ export default {
     B3Kielet: 'B3-kielet',
     muutKielet: 'Muut kielet',
     toteutuksenTila: 'Toteutuksen tila',
-    valitseLisattavatLukionLinjat: 'Valitse lisättävät lukion linjat',
-    lisattavaLukionLinjaLukio: 'Lukio',
-    lisattavaLukionLinjaErityinenKoulutustehtava:
-      'Lukio, erityinen koulutustehtävä',
-    lukionLinjanTarkenne: 'Lukion linjan tarkenne',
-    valitseLukionLinjanTarkenteet: 'Valitse lukion linjan tarkenteet',
-    erityinenKoulutustehtava: 'Erityinen koulutustehtävä',
-    valitseErityisetKoulutustehtavat: 'Valitse erityisen koulutustehtävät',
-    valitseLukionLinjat: 'Valitse lukiolinjat',
+    lukionlinja: 'Lukiolinja',
+    valitseLukiolinja: 'Valitse lukiolinja',
   },
   hakulomake: {
     haunNimi: 'Haun nimi',

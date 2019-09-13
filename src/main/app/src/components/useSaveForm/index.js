@@ -12,13 +12,14 @@ import useAuthorizedUser from '../useAuthorizedUser';
 import HttpContext from '../HttpContext';
 import UrlContext from '../UrlContext';
 import isEmpty from '../../utils/isEmpty';
+import scrollElementIntoView from '../../utils/scrollElementIntoView';
 
 import {
   openSavingErrorToast,
   openSavingSuccessToast,
 } from '../../state/toaster';
 
-const useSaveForm = ({ form, validate, submit }) => {
+const useSaveForm = ({ form, validate, submit, scrollToFirstError = true }) => {
   const dispatch = useDispatch();
   const user = useAuthorizedUser();
   const httpClient = useContext(HttpContext);
@@ -55,6 +56,19 @@ const useSaveForm = ({ form, validate, submit }) => {
 
     if (!isEmpty(errors)) {
       stopSubmit({ errors, errorToast: true });
+
+      if (scrollToFirstError) {
+        setTimeout(() => {
+          const firstErrorElement = document.querySelector(
+            '.__formFieldError__',
+          );
+
+          if (firstErrorElement) {
+            scrollElementIntoView(firstErrorElement);
+          }
+        });
+      }
+
       return;
     }
 
@@ -76,6 +90,7 @@ const useSaveForm = ({ form, validate, submit }) => {
     apiUrls,
     store,
     form,
+    scrollToFirstError,
   ]);
 
   return {

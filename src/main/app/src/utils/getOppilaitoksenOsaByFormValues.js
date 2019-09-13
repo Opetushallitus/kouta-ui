@@ -8,19 +8,28 @@ import { isNumeric } from './index';
 const getOppilaitoksenOsaByFormValues = ({ tila, muokkaaja, ...values }) => {
   const { perustiedot, esittely, yhteystiedot, kieliversiot } = values;
 
-  const { osoite, postinumero, puhelinnumero, verkkosivu } = yhteystiedot;
+  const {
+    osoite,
+    postinumero,
+    puhelinnumero,
+    verkkosivu,
+    sahkoposti,
+  } = yhteystiedot;
 
   return {
     tila,
     muokkaaja,
     kielivalinta: kieliversiot,
     metadata: {
-      osoite: {
-        osoite: pick(osoite || {}, kieliversiot),
-        postinumeroKoodiUri: get(postinumero, 'value') || null,
+      yhteystiedot: {
+        osoite: {
+          osoite: pick(osoite || {}, kieliversiot),
+          postinumeroKoodiUri: get(postinumero, 'value') || null,
+        },
+        sahkoposti: pick(sahkoposti || {}, kieliversiot),
+        puhelinnumero: pick(puhelinnumero || {}, kieliversiot),
+        wwwSivu: pick(verkkosivu || {}, kieliversiot),
       },
-      puhelinnumero: puhelinnumero || null,
-      wwwSivu: pick(verkkosivu || {}, kieliversiot),
       esittely: mapValues(
         pick(esittely || {}, kieliversiot),
         serializeEditorState,

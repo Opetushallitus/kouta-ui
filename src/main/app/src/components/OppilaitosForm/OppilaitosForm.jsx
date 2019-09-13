@@ -6,7 +6,6 @@ import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
 import PerustiedotSection from './PerustiedotSection';
 import EsittelySection from './EsittelySection';
-import OsatSection from './OsatSection';
 import TietoaOpiskelustaSection from './TietoaOpiskelustaSection';
 import YhteystiedotSection from './YhteystiedotSection';
 import JulkaisutilaSection from './JulkaisutilaSection';
@@ -46,13 +45,6 @@ const OppilaitosForm = ({
         {...getTestIdProps('esittelySection')}
       >
         <EsittelySection name="esittely" />
-      </FormCollapse>
-
-      <FormCollapse
-        header={t('oppilaitoslomake.oppilaitoksenOsat')}
-        {...getTestIdProps('osatSection')}
-      >
-        <OsatSection name="osat" organisaatioOid={organisaatioOid} />
       </FormCollapse>
 
       <FormCollapse

@@ -1,4 +1,5 @@
 import mapValues from 'lodash/mapValues';
+import get from 'lodash/get';
 
 import parseEditorState from './draft/parseEditorState';
 import { isNumber } from './index';
@@ -8,12 +9,9 @@ const getFormValuesByOppilaitos = oppilaitos => {
     kielivalinta,
     tila,
     metadata: {
-      osat,
       tietoaOpiskelusta,
-      osoite: { osoite, postinumeroKoodiUri },
+      yhteystiedot,
       esittely,
-      wwwSivu,
-      puhelinnumero,
       opiskelijoita,
       korkeakouluja,
       tiedekuntia,
@@ -27,13 +25,15 @@ const getFormValuesByOppilaitos = oppilaitos => {
   return {
     kieliversiot: kielivalinta || [],
     tila,
-    osat: osat || [],
     esittely: mapValues(esittely || {}, parseEditorState),
     yhteystiedot: {
-      osoite: osoite || {},
-      postinumero: postinumeroKoodiUri ? { value: postinumeroKoodiUri } : null,
-      verkkosivu: wwwSivu || {},
-      puhelinnumero: puhelinnumero || '',
+      osoite: get(yhteystiedot, 'osoite.osoite') || {},
+      postinumero: get(yhteystiedot, 'osoite.postinumeroKoodiUri')
+        ? { value: yhteystiedot.osoite.postinumeroKoodiUri }
+        : null,
+      verkkosivu: get(yhteystiedot, 'wwwSivu') || {},
+      puhelinnumero: get(yhteystiedot, 'puhelinnumero') || {},
+      sahkoposti: get(yhteystiedot, 'sahkoposti') || {},
     },
     tietoa: {
       osiot: (tietoaOpiskelusta || []).map(({ otsikkoKoodiUri }) => ({

@@ -1,4 +1,341 @@
 module.exports = {
+  createToteutusForm: {
+    'should be able to create lukio toteutus': {
+      '1': {
+        nimi: {
+          fi: 'lukiolinjat_0',
+        },
+        tarjoajat: ['4.1.1.1.1.1', '5.1.1.1.1.1'],
+        kielivalinta: ['fi'],
+        tila: 'julkaistu',
+        muokkaaja: '1.2.246.562.24.62301161440',
+        metadata: {
+          opetus: {
+            lisatiedot: [
+              {
+                otsikkoKoodiUri: 'koulutuksenlisatiedot_0#1',
+                teksti: {
+                  fi: 'koulutuksenlisatiedot_0 kuvaus',
+                },
+              },
+            ],
+            opetuskieliKoodiUrit: ['oppilaitoksenopetuskieli_0#1'],
+            onkoMaksullinen: true,
+            maksunMaara: 10,
+            opetustapaKoodiUrit: ['opetuspaikkakk_0#1'],
+            opetusaikaKoodiUrit: ['opetusaikakk_0#1'],
+            opetuskieletKuvaus: {
+              fi: 'opetuskieli kuvaus',
+            },
+            opetustapaKuvaus: {
+              fi: 'opetustapa kuvaus',
+            },
+            opetusaikaKuvaus: {
+              fi: 'opetusaika kuvaus',
+            },
+            maksullisuusKuvaus: {
+              fi: 'maksullisuus kuvaus',
+            },
+            koulutuksenAlkamispaivamaara: '2019-01-01T00:00',
+            koulutuksenPaattymispaivamaara: '2019-02-15T00:00',
+            onkoLukuvuosimaksua: false,
+            lukuvuosimaksu: null,
+            onkoStipendia: true,
+            stipendinKuvaus: {
+              fi: 'stipendi kuvaus',
+            },
+            stipendinMaara: {
+              fi: '20',
+            },
+            diplomiKoodiUrit: ['lukiodiplomit_0#1'],
+            diplomiKuvaus: {
+              fi: 'Diplomi kuvaus',
+            },
+            A1JaA2Kielivalikoima: ['kieli_0#1'],
+            aidinkieliKielivalikoima: ['kieli_2#1'],
+            B1Kielivalikoima: ['kieli_3#1'],
+            B2Kielivalikoima: ['kieli_1#1'],
+            B3Kielivalikoima: ['kieli_4#1'],
+            muuKielivalikoima: ['kieli_4#1'],
+          },
+          lukiolinjaKoodiUri: 'lukiolinjat_0#1',
+          osaamisalat: [],
+          yhteyshenkilot: [
+            {
+              nimi: {
+                fi: 'nimi',
+              },
+              titteli: {
+                fi: 'titteli',
+              },
+              sahkoposti: {
+                fi: 'sähkoposti',
+              },
+              puhelinnumero: {
+                fi: 'puhelin',
+              },
+              wwwSivu: {
+                fi: 'verkkosivu',
+              },
+            },
+          ],
+          ammattinimikkeet: [
+            {
+              kieli: 'fi',
+              arvo: 'ammattinimike',
+            },
+          ],
+          asiasanat: [
+            {
+              kieli: 'fi',
+              arvo: 'avainsana',
+            },
+          ],
+          ylemmanKorkeakoulututkinnonOsaamisalat: [],
+          alemmanKorkeakoulututkinnonOsaamisalat: [],
+          kuvaus: {},
+          tyyppi: 'lk',
+        },
+        organisaatioOid: '1.1.1.1.1.1',
+        koulutusOid: '1.2.1.1.1.1',
+      },
+    },
+    'should be able to create ammatillinen toteutus': {
+      '1': {
+        nimi: {
+          fi: 'toteutuksen nimi',
+        },
+        tarjoajat: ['4.1.1.1.1.1', '5.1.1.1.1.1'],
+        kielivalinta: ['fi'],
+        tila: 'julkaistu',
+        muokkaaja: '1.2.246.562.24.62301161440',
+        metadata: {
+          opetus: {
+            lisatiedot: [
+              {
+                otsikkoKoodiUri: 'koulutuksenlisatiedot_0#1',
+                teksti: {
+                  fi: 'koulutuksenlisatiedot_0 kuvaus',
+                },
+              },
+            ],
+            opetuskieliKoodiUrit: ['oppilaitoksenopetuskieli_0#1'],
+            onkoMaksullinen: true,
+            maksunMaara: 10,
+            opetustapaKoodiUrit: ['opetuspaikkakk_0#1'],
+            opetusaikaKoodiUrit: ['opetusaikakk_0#1'],
+            opetuskieletKuvaus: {
+              fi: 'opetuskieli kuvaus',
+            },
+            opetustapaKuvaus: {
+              fi: 'opetustapa kuvaus',
+            },
+            opetusaikaKuvaus: {
+              fi: 'opetusaika kuvaus',
+            },
+            maksullisuusKuvaus: {
+              fi: 'maksullisuus kuvaus',
+            },
+            koulutuksenAlkamispaivamaara: '2019-01-01T00:00',
+            koulutuksenPaattymispaivamaara: '2019-02-15T00:00',
+            onkoLukuvuosimaksua: false,
+            lukuvuosimaksu: null,
+            onkoStipendia: false,
+            stipendinKuvaus: {},
+            stipendinMaara: {},
+            diplomiKoodiUrit: [],
+            diplomiKuvaus: {},
+            A1JaA2Kielivalikoima: [],
+            aidinkieliKielivalikoima: [],
+            B1Kielivalikoima: [],
+            B2Kielivalikoima: [],
+            B3Kielivalikoima: [],
+            muuKielivalikoima: [],
+          },
+          lukiolinjaKoodiUri: null,
+          osaamisalat: [
+            {
+              koodiUri: 'osaamisala_0',
+              linkki: {
+                fi: 'osaamisala_0 linkki',
+              },
+              otsikko: {
+                fi: 'osaamisala_0 otsikko',
+              },
+            },
+          ],
+          yhteyshenkilot: [
+            {
+              nimi: {
+                fi: 'nimi',
+              },
+              titteli: {
+                fi: 'titteli',
+              },
+              sahkoposti: {
+                fi: 'sähkoposti',
+              },
+              puhelinnumero: {
+                fi: 'puhelin',
+              },
+              wwwSivu: {
+                fi: 'verkkosivu',
+              },
+            },
+          ],
+          ammattinimikkeet: [
+            {
+              kieli: 'fi',
+              arvo: 'ammattinimike',
+            },
+          ],
+          asiasanat: [
+            {
+              kieli: 'fi',
+              arvo: 'avainsana',
+            },
+          ],
+          ylemmanKorkeakoulututkinnonOsaamisalat: [],
+          alemmanKorkeakoulututkinnonOsaamisalat: [],
+          kuvaus: {},
+          tyyppi: 'amm',
+        },
+        organisaatioOid: '1.1.1.1.1.1',
+        koulutusOid: '1.2.1.1.1.1',
+      },
+    },
+    'should be able to create korkeakoulu toteutus': {
+      '1': {
+        nimi: {
+          fi: 'toteutuksen nimi',
+        },
+        tarjoajat: ['4.1.1.1.1.1', '5.1.1.1.1.1'],
+        kielivalinta: ['fi'],
+        tila: 'julkaistu',
+        muokkaaja: '1.2.246.562.24.62301161440',
+        metadata: {
+          opetus: {
+            lisatiedot: [
+              {
+                otsikkoKoodiUri: 'koulutuksenlisatiedot_0#1',
+                teksti: {
+                  fi: 'koulutuksenlisatiedot_0 kuvaus',
+                },
+              },
+            ],
+            opetuskieliKoodiUrit: ['oppilaitoksenopetuskieli_0#1'],
+            onkoMaksullinen: false,
+            maksunMaara: null,
+            opetustapaKoodiUrit: ['opetuspaikkakk_0#1'],
+            opetusaikaKoodiUrit: ['opetusaikakk_0#1'],
+            opetuskieletKuvaus: {
+              fi: 'opetuskieli kuvaus',
+            },
+            opetustapaKuvaus: {
+              fi: 'opetustapa kuvaus',
+            },
+            opetusaikaKuvaus: {
+              fi: 'opetusaika kuvaus',
+            },
+            maksullisuusKuvaus: {
+              fi: 'maksullisuus kuvaus',
+            },
+            koulutuksenAlkamispaivamaara: '2019-01-01T00:00',
+            koulutuksenPaattymispaivamaara: '2019-02-15T00:00',
+            onkoLukuvuosimaksua: true,
+            lukuvuosimaksu: 10,
+            onkoStipendia: true,
+            stipendinKuvaus: {
+              fi: 'stipendi kuvaus',
+            },
+            stipendinMaara: {
+              fi: '20',
+            },
+            diplomiKoodiUrit: [],
+            diplomiKuvaus: {},
+            A1JaA2Kielivalikoima: [],
+            aidinkieliKielivalikoima: [],
+            B1Kielivalikoima: [],
+            B2Kielivalikoima: [],
+            B3Kielivalikoima: [],
+            muuKielivalikoima: [],
+          },
+          lukiolinjaKoodiUri: null,
+          osaamisalat: [],
+          yhteyshenkilot: [
+            {
+              nimi: {
+                fi: 'nimi',
+              },
+              titteli: {
+                fi: 'titteli',
+              },
+              sahkoposti: {
+                fi: 'sähkoposti',
+              },
+              puhelinnumero: {
+                fi: 'puhelin',
+              },
+              wwwSivu: {
+                fi: 'verkkosivu',
+              },
+            },
+          ],
+          ammattinimikkeet: [
+            {
+              kieli: 'fi',
+              arvo: 'ammattinimike',
+            },
+          ],
+          asiasanat: [
+            {
+              kieli: 'fi',
+              arvo: 'avainsana',
+            },
+          ],
+          ylemmanKorkeakoulututkinnonOsaamisalat: [
+            {
+              kuvaus: {
+                fi: 'osaamisalan kuvaus',
+              },
+              nimi: {
+                fi: 'osaamisalan nimi',
+              },
+              linkki: {
+                fi: 'linkki',
+              },
+              otsikko: {
+                fi: 'osaamisalan otsikko',
+              },
+            },
+          ],
+          alemmanKorkeakoulututkinnonOsaamisalat: [
+            {
+              kuvaus: {
+                fi: 'osaamisalan kuvaus',
+              },
+              nimi: {
+                fi: 'osaamisalan nimi',
+              },
+              linkki: {
+                fi: 'linkki',
+              },
+              otsikko: {
+                fi: 'osaamisalan otsikko',
+              },
+            },
+          ],
+          kuvaus: {
+            fi: 'toteutuksen kuvaus',
+          },
+          tyyppi: 'yo',
+        },
+        organisaatioOid: '1.1.1.1.1.1',
+        koulutusOid: '1.2.1.1.1.1',
+      },
+    },
+  },
+  __version: '3.4.1',
   editToteutusForm: {
     'should be able to edit ammatillinen toteutus': {
       '1': {
@@ -56,9 +393,7 @@ module.exports = {
             B3Kielivalikoima: [],
             muuKielivalikoima: [],
           },
-          lukionLinjanTarkenneKoodiUrit: [],
-          erityinenKoulutustehtavaKoodiUrit: [],
-          jaksonKuvaus: {},
+          lukiolinjaKoodiUri: null,
           osaamisalat: [
             {
               koodiUri: 'osaamisala_0',
@@ -176,9 +511,7 @@ module.exports = {
             B3Kielivalikoima: [],
             muuKielivalikoima: [],
           },
-          lukionLinjanTarkenneKoodiUrit: [],
-          erityinenKoulutustehtavaKoodiUrit: [],
-          jaksonKuvaus: {},
+          lukiolinjaKoodiUri: null,
           osaamisalat: [],
           yhteyshenkilot: [
             {
@@ -318,9 +651,7 @@ module.exports = {
             B3Kielivalikoima: ['kieli_4#1'],
             muuKielivalikoima: ['kieli_4#1'],
           },
-          lukionLinjanTarkenneKoodiUrit: [],
-          erityinenKoulutustehtavaKoodiUrit: [],
-          jaksonKuvaus: {},
+          lukiolinjaKoodiUri: 'lukiolinjat_0#1',
           osaamisalat: [],
           yhteyshenkilot: [
             {
@@ -370,347 +701,6 @@ module.exports = {
         organisaatioOid: '1.1.1.1.1.1',
         kielivalinta: ['fi'],
         modified: '2019-03-26T10:19',
-      },
-    },
-  },
-  __version: '3.4.1',
-  createToteutusForm: {
-    'should be able to create ammatillinen toteutus': {
-      '1': {
-        nimi: {
-          fi: 'toteutuksen nimi',
-        },
-        tarjoajat: ['4.1.1.1.1.1', '5.1.1.1.1.1'],
-        kielivalinta: ['fi'],
-        tila: 'julkaistu',
-        muokkaaja: '1.2.246.562.24.62301161440',
-        metadata: {
-          opetus: {
-            lisatiedot: [
-              {
-                otsikkoKoodiUri: 'koulutuksenlisatiedot_0#1',
-                teksti: {
-                  fi: 'koulutuksenlisatiedot_0 kuvaus',
-                },
-              },
-            ],
-            opetuskieliKoodiUrit: ['oppilaitoksenopetuskieli_0#1'],
-            onkoMaksullinen: true,
-            maksunMaara: 10,
-            opetustapaKoodiUrit: ['opetuspaikkakk_0#1'],
-            opetusaikaKoodiUrit: ['opetusaikakk_0#1'],
-            opetuskieletKuvaus: {
-              fi: 'opetuskieli kuvaus',
-            },
-            opetustapaKuvaus: {
-              fi: 'opetustapa kuvaus',
-            },
-            opetusaikaKuvaus: {
-              fi: 'opetusaika kuvaus',
-            },
-            maksullisuusKuvaus: {
-              fi: 'maksullisuus kuvaus',
-            },
-            koulutuksenAlkamispaivamaara: '2019-01-01T00:00',
-            koulutuksenPaattymispaivamaara: '2019-02-15T00:00',
-            onkoLukuvuosimaksua: false,
-            lukuvuosimaksu: null,
-            onkoStipendia: false,
-            stipendinKuvaus: {},
-            stipendinMaara: {},
-            diplomiKoodiUrit: [],
-            diplomiKuvaus: {},
-            A1JaA2Kielivalikoima: [],
-            aidinkieliKielivalikoima: [],
-            B1Kielivalikoima: [],
-            B2Kielivalikoima: [],
-            B3Kielivalikoima: [],
-            muuKielivalikoima: [],
-          },
-          lukionLinjanTarkenneKoodiUrit: [],
-          erityinenKoulutustehtavaKoodiUrit: [],
-          jaksonKuvaus: {},
-          osaamisalat: [
-            {
-              koodiUri: 'osaamisala_0',
-              linkki: {
-                fi: 'osaamisala_0 linkki',
-              },
-              otsikko: {
-                fi: 'osaamisala_0 otsikko',
-              },
-            },
-          ],
-          yhteyshenkilot: [
-            {
-              nimi: {
-                fi: 'nimi',
-              },
-              titteli: {
-                fi: 'titteli',
-              },
-              sahkoposti: {
-                fi: 'sähkoposti',
-              },
-              puhelinnumero: {
-                fi: 'puhelin',
-              },
-              wwwSivu: {
-                fi: 'verkkosivu',
-              },
-            },
-          ],
-          ammattinimikkeet: [
-            {
-              kieli: 'fi',
-              arvo: 'ammattinimike',
-            },
-          ],
-          asiasanat: [
-            {
-              kieli: 'fi',
-              arvo: 'avainsana',
-            },
-          ],
-          ylemmanKorkeakoulututkinnonOsaamisalat: [],
-          alemmanKorkeakoulututkinnonOsaamisalat: [],
-          kuvaus: {},
-          tyyppi: 'amm',
-        },
-        organisaatioOid: '1.1.1.1.1.1',
-        koulutusOid: '1.2.1.1.1.1',
-      },
-    },
-    'should be able to create korkeakoulu toteutus': {
-      '1': {
-        nimi: {
-          fi: 'toteutuksen nimi',
-        },
-        tarjoajat: ['4.1.1.1.1.1', '5.1.1.1.1.1'],
-        kielivalinta: ['fi'],
-        tila: 'julkaistu',
-        muokkaaja: '1.2.246.562.24.62301161440',
-        metadata: {
-          opetus: {
-            lisatiedot: [
-              {
-                otsikkoKoodiUri: 'koulutuksenlisatiedot_0#1',
-                teksti: {
-                  fi: 'koulutuksenlisatiedot_0 kuvaus',
-                },
-              },
-            ],
-            opetuskieliKoodiUrit: ['oppilaitoksenopetuskieli_0#1'],
-            onkoMaksullinen: false,
-            maksunMaara: null,
-            opetustapaKoodiUrit: ['opetuspaikkakk_0#1'],
-            opetusaikaKoodiUrit: ['opetusaikakk_0#1'],
-            opetuskieletKuvaus: {
-              fi: 'opetuskieli kuvaus',
-            },
-            opetustapaKuvaus: {
-              fi: 'opetustapa kuvaus',
-            },
-            opetusaikaKuvaus: {
-              fi: 'opetusaika kuvaus',
-            },
-            maksullisuusKuvaus: {
-              fi: 'maksullisuus kuvaus',
-            },
-            koulutuksenAlkamispaivamaara: '2019-01-01T00:00',
-            koulutuksenPaattymispaivamaara: '2019-02-15T00:00',
-            onkoLukuvuosimaksua: true,
-            lukuvuosimaksu: 10,
-            onkoStipendia: true,
-            stipendinKuvaus: {
-              fi: 'stipendi kuvaus',
-            },
-            stipendinMaara: {
-              fi: '20',
-            },
-            diplomiKoodiUrit: [],
-            diplomiKuvaus: {},
-            A1JaA2Kielivalikoima: [],
-            aidinkieliKielivalikoima: [],
-            B1Kielivalikoima: [],
-            B2Kielivalikoima: [],
-            B3Kielivalikoima: [],
-            muuKielivalikoima: [],
-          },
-          lukionLinjanTarkenneKoodiUrit: [],
-          erityinenKoulutustehtavaKoodiUrit: [],
-          jaksonKuvaus: {},
-          osaamisalat: [],
-          yhteyshenkilot: [
-            {
-              nimi: {
-                fi: 'nimi',
-              },
-              titteli: {
-                fi: 'titteli',
-              },
-              sahkoposti: {
-                fi: 'sähkoposti',
-              },
-              puhelinnumero: {
-                fi: 'puhelin',
-              },
-              wwwSivu: {
-                fi: 'verkkosivu',
-              },
-            },
-          ],
-          ammattinimikkeet: [
-            {
-              kieli: 'fi',
-              arvo: 'ammattinimike',
-            },
-          ],
-          asiasanat: [
-            {
-              kieli: 'fi',
-              arvo: 'avainsana',
-            },
-          ],
-          ylemmanKorkeakoulututkinnonOsaamisalat: [
-            {
-              kuvaus: {
-                fi: 'osaamisalan kuvaus',
-              },
-              nimi: {
-                fi: 'osaamisalan nimi',
-              },
-              linkki: {
-                fi: 'linkki',
-              },
-              otsikko: {
-                fi: 'osaamisalan otsikko',
-              },
-            },
-          ],
-          alemmanKorkeakoulututkinnonOsaamisalat: [
-            {
-              kuvaus: {
-                fi: 'osaamisalan kuvaus',
-              },
-              nimi: {
-                fi: 'osaamisalan nimi',
-              },
-              linkki: {
-                fi: 'linkki',
-              },
-              otsikko: {
-                fi: 'osaamisalan otsikko',
-              },
-            },
-          ],
-          kuvaus: {
-            fi: 'toteutuksen kuvaus',
-          },
-          tyyppi: 'yo',
-        },
-        organisaatioOid: '1.1.1.1.1.1',
-        koulutusOid: '1.2.1.1.1.1',
-      },
-    },
-    'should be able to create lukio toteutus': {
-      '1': {
-        nimi: {},
-        tarjoajat: ['4.1.1.1.1.1', '5.1.1.1.1.1'],
-        kielivalinta: ['fi'],
-        tila: 'julkaistu',
-        muokkaaja: '1.2.246.562.24.62301161440',
-        metadata: {
-          opetus: {
-            lisatiedot: [
-              {
-                otsikkoKoodiUri: 'koulutuksenlisatiedot_0#1',
-                teksti: {
-                  fi: 'koulutuksenlisatiedot_0 kuvaus',
-                },
-              },
-            ],
-            opetuskieliKoodiUrit: ['oppilaitoksenopetuskieli_0#1'],
-            onkoMaksullinen: true,
-            maksunMaara: 10,
-            opetustapaKoodiUrit: ['opetuspaikkakk_0#1'],
-            opetusaikaKoodiUrit: ['opetusaikakk_0#1'],
-            opetuskieletKuvaus: {
-              fi: 'opetuskieli kuvaus',
-            },
-            opetustapaKuvaus: {
-              fi: 'opetustapa kuvaus',
-            },
-            opetusaikaKuvaus: {
-              fi: 'opetusaika kuvaus',
-            },
-            maksullisuusKuvaus: {
-              fi: 'maksullisuus kuvaus',
-            },
-            koulutuksenAlkamispaivamaara: '2019-01-01T00:00',
-            koulutuksenPaattymispaivamaara: '2019-02-15T00:00',
-            onkoLukuvuosimaksua: false,
-            lukuvuosimaksu: null,
-            onkoStipendia: true,
-            stipendinKuvaus: {
-              fi: 'stipendi kuvaus',
-            },
-            stipendinMaara: {
-              fi: '20',
-            },
-            diplomiKoodiUrit: ['lukiodiplomit_0#1'],
-            diplomiKuvaus: {
-              fi: 'Diplomi kuvaus',
-            },
-            A1JaA2Kielivalikoima: ['kieli_0#1'],
-            aidinkieliKielivalikoima: ['kieli_2#1'],
-            B1Kielivalikoima: ['kieli_3#1'],
-            B2Kielivalikoima: ['kieli_1#1'],
-            B3Kielivalikoima: ['kieli_4#1'],
-            muuKielivalikoima: ['kieli_4#1'],
-          },
-          lukionLinjanTarkenneKoodiUrit: ['lukiolinjat2_0#1'],
-          erityinenKoulutustehtavaKoodiUrit: ['lukionerityistehtava_0#1'],
-          jaksonKuvaus: {},
-          osaamisalat: [],
-          yhteyshenkilot: [
-            {
-              nimi: {
-                fi: 'nimi',
-              },
-              titteli: {
-                fi: 'titteli',
-              },
-              sahkoposti: {
-                fi: 'sähkoposti',
-              },
-              puhelinnumero: {
-                fi: 'puhelin',
-              },
-              wwwSivu: {
-                fi: 'verkkosivu',
-              },
-            },
-          ],
-          ammattinimikkeet: [
-            {
-              kieli: 'fi',
-              arvo: 'ammattinimike',
-            },
-          ],
-          asiasanat: [
-            {
-              kieli: 'fi',
-              arvo: 'avainsana',
-            },
-          ],
-          ylemmanKorkeakoulututkinnonOsaamisalat: [],
-          alemmanKorkeakoulututkinnonOsaamisalat: [],
-          kuvaus: {},
-          tyyppi: 'lk',
-        },
-        organisaatioOid: '1.1.1.1.1.1',
-        koulutusOid: '1.2.1.1.1.1',
       },
     },
   },

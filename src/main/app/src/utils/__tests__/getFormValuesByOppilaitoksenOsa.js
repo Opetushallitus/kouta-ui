@@ -1,37 +1,3 @@
-/*
-{
-  "kielivalinta": Array [
-    "fi",
-    "sv",
-  ],
-  "metadata": Object {
-    "esittely": Object {
-      "fi": "<p><em>Fi esittely</em></p>",
-      "sv": "<p><em>Sv esittely</em></p>",
-    },
-    "kampus": Object {
-      "fi": "Fi kampus",
-      "sv": "Sv kampus",
-    },
-    "opiskelijoita": 100,
-    "osoite": Object {
-      "osoite": Object {
-        "fi": "Fi osoite",
-        "sv": "Sv osoite",
-      },
-      "postinumeroKoodiUri": "postinumero_1#1",
-    },
-    "puhelinnumero": "123456",
-    "wwwSivu": Object {
-      "fi": "www.verkkosivu.fi",
-      "sv": "www.verkkosivu.sv",
-    },
-  },
-  "muokkaaja": "1.1.1.1",
-  "tila": "tallennettu",
-}
-*/
-
 import getFormValuesByOppilaitoksenOsa from '../getFormValuesByOppilaitoksenOsa';
 
 test('getFormValuesByOppilaitoksenOsa returns correct form values given oppilaitoksen osa', () => {
@@ -47,17 +13,26 @@ test('getFormValuesByOppilaitoksenOsa returns correct form values given oppilait
         sv: 'Sv kampus',
       },
       opiskelijoita: 100,
-      osoite: {
+      yhteystiedot: {
         osoite: {
-          fi: 'Fi osoite',
-          sv: 'Sv osoite',
+          osoite: {
+            fi: 'Fi osoite',
+            sv: 'Sv osoite',
+          },
+          postinumeroKoodiUri: 'postinumero_1#1',
         },
-        postinumeroKoodiUri: 'postinumero_1#1',
-      },
-      puhelinnumero: '123456',
-      wwwSivu: {
-        fi: 'www.verkkosivu.fi',
-        sv: 'www.verkkosivu.sv',
+        puhelinnumero: {
+          fi: '1234',
+          sv: '5678',
+        },
+        sahkoposti: {
+          fi: 'fi@sahkoposti.fi',
+          sv: 'sv@sahkoposti.sv',
+        },
+        wwwSivu: {
+          fi: 'www.verkkosivu.fi',
+          sv: 'www.verkkosivu.sv',
+        },
       },
     },
     muokkaaja: '1.1.1.1',

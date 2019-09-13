@@ -1,6 +1,5 @@
 import {
   fillAsyncSelect,
-  getCheckbox,
   chooseKieliversiotLanguages,
   selectOption,
   typeToEditor,
@@ -62,14 +61,6 @@ const fillEsittelySection = () => {
   });
 };
 
-const fillOsatSection = () => {
-  cy.getByTestId('osatSection').within(() => {
-    getCheckbox('2.1.1.1.1.1', cy).check({ force: true });
-
-    jatka();
-  });
-};
-
 const fillTietoaOpiskelustaSection = () => {
   cy.getByTestId('tietoaOpiskelustaSection').within(() => {
     selectOption('koulutuksenlisatiedot_0', cy);
@@ -89,6 +80,10 @@ const fillYhteystiedotSection = () => {
     cy.getByTestId('postinumero').within(() => {
       fillAsyncSelect('0');
     });
+
+    cy.getByTestId('sahkoposti')
+      .find('input')
+      .type('sahkoposti@sahkoposti.fi', { force: true });
 
     cy.getByTestId('puhelinnumero')
       .find('input')
@@ -135,8 +130,6 @@ describe('createOppilaitosForm', () => {
     fillPerustiedotSection();
 
     fillEsittelySection();
-
-    fillOsatSection();
 
     fillTietoaOpiskelustaSection();
 

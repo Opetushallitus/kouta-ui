@@ -13,15 +13,27 @@ export default () => {
       kampuksia: 3,
       korkeakouluja: 5,
       opiskelijoita: 100,
-      osat: ['1.1.1.1', '1.1.1.2'],
-      osoite: {
+      yhteystiedot: {
         osoite: {
-          fi: 'Fi osoite',
-          sv: 'Sv osoite',
+          osoite: {
+            fi: 'Fi osoite',
+            sv: 'Sv osoite',
+          },
+          postinumeroKoodiUri: 'posti_0#2',
         },
-        postinumeroKoodiUri: 'posti_0#2',
+        puhelinnumero: {
+          fi: '1234',
+          sv: '5678',
+        },
+        wwwSivu: {
+          fi: 'www.verkkosivu.fi',
+          sv: 'www.verkkosivu.sv',
+        },
+        sahkoposti: {
+          fi: 'fi@sahkoposti.fi',
+          sv: 'sv@sahkoposti.sv',
+        },
       },
-      puhelinnumero: '123456',
       tiedekuntia: 4,
       tietoaOpiskelusta: [
         {
@@ -33,10 +45,6 @@ export default () => {
         },
       ],
       toimipisteita: 9,
-      wwwSivu: {
-        fi: 'www.verkkosivu.fi',
-        sv: 'www.verkkosivu.sv',
-      },
       yksikoita: 2,
     },
   };

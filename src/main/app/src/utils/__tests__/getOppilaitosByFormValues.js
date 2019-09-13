@@ -6,7 +6,6 @@ test('getOppilaitosByFormValues returns correct oppilaitos given form values', (
     tila: 'tallennettu',
     muokkaaja: '1.1.1.1',
     kieliversiot: ['fi', 'sv'],
-    osat: ['1.1.1.1', '1.1.1.2'],
     tietoa: {
       osiot: [{ value: 'osio_1#1' }],
       tiedot: {
@@ -35,7 +34,14 @@ test('getOppilaitosByFormValues returns correct oppilaitos given form values', (
         sv: 'Sv osoite',
       },
       postinumero: { value: 'postinumero_1#1' },
-      puhelinnumero: '123456',
+      puhelinnumero: {
+        fi: '1234',
+        sv: '5678',
+      },
+      sahkoposti: {
+        fi: 'fi@sahkoposti.fi',
+        sv: 'sv@sahkoposti.sv',
+      },
       verkkosivu: {
         fi: 'www.verkkosivu.fi',
         sv: 'www.verkkosivu.sv',

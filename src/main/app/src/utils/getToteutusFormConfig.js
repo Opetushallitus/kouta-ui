@@ -121,9 +121,9 @@ const baseConfig = {
     },
     lukiolinjat: {
       fields: {
-        lisattavatLinjat: true,
-        linjanTarkenne: true,
-        erityisetKoulutustehtavat: true,
+        lukiolinja: {
+          validate: eb => eb.validateExistence('lukiolinjat.lukiolinja'),
+        },
       },
     },
     julkaisutila: {

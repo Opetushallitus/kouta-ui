@@ -61,26 +61,8 @@ const getToteutusByFormValues = values => {
     get(values, 'jarjestamistiedot.muutKielet') || []
   ).map(({ value }) => value);
 
-  const jaksonKuvaus = pick(
-    get(values, 'lukiolinjat.jaksonKuvaus') || {},
-    kielivalinta,
-  );
-
-  const lukionLinjanTarkenneKoodiUrit = (
-    get(values, 'lukiolinjat.lukionLinjanTarkenteet') || []
-  ).map(({ value }) => value);
-
-  const erityinenKoulutustehtavaKoodiUrit = (
-    get(values, 'lukiolinjat.erityisetKoulutustehtavat') || []
-  ).map(({ value }) => value);
-
-  const showLukionLinjanTarkenteet = Boolean(
-    get(values, 'lukiolinjat.showLukionLinjanTarkenteet'),
-  );
-
-  const showErityisetKoulutustehtavat = Boolean(
-    get(values, 'lukiolinjat.showErityisetKoulutustehtavat'),
-  );
+  const lukiolinjaKoodiUri =
+    get(values, 'lukiolinjat.lukiolinja.value') || null;
 
   const opetuskieliKuvaus = pick(
     get(values, 'jarjestamistiedot.opetuskieliKuvaus') || {},
@@ -231,13 +213,7 @@ const getToteutusByFormValues = values => {
         B3Kielivalikoima,
         muuKielivalikoima,
       },
-      lukionLinjanTarkenneKoodiUrit: showLukionLinjanTarkenteet
-        ? lukionLinjanTarkenneKoodiUrit
-        : [],
-      erityinenKoulutustehtavaKoodiUrit: showErityisetKoulutustehtavat
-        ? erityinenKoulutustehtavaKoodiUrit
-        : [],
-      jaksonKuvaus,
+      lukiolinjaKoodiUri,
       osaamisalat,
       yhteyshenkilot,
       ammattinimikkeet,

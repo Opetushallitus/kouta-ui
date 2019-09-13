@@ -130,10 +130,7 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
       sv: 'Sv kuvaus',
     },
     lukiolinjat: {
-      showLukionLinjanTarkenteet: true,
-      showErityisetKoulutustehtavat: true,
-      lukionLinjanTarkenteet: [{ value: 'linja_1#1' }],
-      erityisetKoulutustehtavat: [{ value: 'tehtava_1#1' }],
+      lukiolinja: { value: 'linja_1#1' },
     },
   });
 

@@ -13,7 +13,6 @@ export default () => {
       kampuksia: 3,
       korkeakouluja: 5,
       opiskelijoita: 100,
-      osat: ['1.1.1.1', '1.1.1.2'],
       yhteystiedot: {
         osoite: {
           osoite: {

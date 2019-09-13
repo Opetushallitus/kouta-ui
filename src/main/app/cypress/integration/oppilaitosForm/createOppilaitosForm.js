@@ -1,6 +1,5 @@
 import {
   fillAsyncSelect,
-  getCheckbox,
   chooseKieliversiotLanguages,
   selectOption,
   typeToEditor,
@@ -57,14 +56,6 @@ const fillPerustiedotSection = () => {
 const fillEsittelySection = () => {
   cy.getByTestId('esittelySection').within(() => {
     typeToEditor('Esittely', cy);
-
-    jatka();
-  });
-};
-
-const fillOsatSection = () => {
-  cy.getByTestId('osatSection').within(() => {
-    getCheckbox('2.1.1.1.1.1', cy).check({ force: true });
 
     jatka();
   });
@@ -139,8 +130,6 @@ describe('createOppilaitosForm', () => {
     fillPerustiedotSection();
 
     fillEsittelySection();
-
-    fillOsatSection();
 
     fillTietoaOpiskelustaSection();
 

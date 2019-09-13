@@ -10,10 +10,6 @@ Object {
     "fi",
     "sv",
   ],
-  "osat": Array [
-    "1.1.1.1",
-    "1.1.1.2",
-  ],
   "perustiedot": Object {
     "akatemioita": 1,
     "kampuksia": 3,

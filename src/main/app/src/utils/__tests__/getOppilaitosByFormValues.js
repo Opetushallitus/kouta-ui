@@ -6,7 +6,6 @@ test('getOppilaitosByFormValues returns correct oppilaitos given form values', (
     tila: 'tallennettu',
     muokkaaja: '1.1.1.1',
     kieliversiot: ['fi', 'sv'],
-    osat: ['1.1.1.1', '1.1.1.2'],
     tietoa: {
       osiot: [{ value: 'osio_1#1' }],
       tiedot: {

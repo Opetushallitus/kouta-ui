@@ -15,10 +15,6 @@ Object {
     "kampuksia": 3,
     "korkeakouluja": 5,
     "opiskelijoita": 100,
-    "osat": Array [
-      "1.1.1.1",
-      "1.1.1.2",
-    ],
     "tiedekuntia": 4,
     "tietoaOpiskelusta": Array [
       Object {

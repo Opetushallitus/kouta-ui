@@ -28,7 +28,6 @@ module.exports = {
           esittely: {
             fi: '<p>Esittely</p>',
           },
-          osat: ['2.1.1.1.1.1'],
           tietoaOpiskelusta: [
             {
               otsikkoKoodiUri: 'koulutuksenlisatiedot_0#1',
@@ -77,7 +76,6 @@ module.exports = {
           esittely: {
             fi: '<p><em>Fi esittely</em></p>',
           },
-          osat: ['1.1.1.1', '1.1.1.2'],
           tietoaOpiskelusta: [
             {
               otsikkoKoodiUri: 'koulutuksenlisatiedot_0#1',

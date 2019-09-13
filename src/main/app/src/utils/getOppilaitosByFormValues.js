@@ -6,14 +6,7 @@ import serializeEditorState from './draft/serializeEditorState';
 import { isNumeric } from './index';
 
 const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
-  const {
-    osat,
-    perustiedot,
-    esittely,
-    yhteystiedot,
-    tietoa,
-    kieliversiot,
-  } = values;
+  const { perustiedot, esittely, yhteystiedot, tietoa, kieliversiot } = values;
 
   const {
     osoite,
@@ -51,7 +44,6 @@ const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
         pick(esittely || {}, kieliversiot),
         serializeEditorState,
       ),
-      osat: osat || [],
       tietoaOpiskelusta,
       opiskelijoita: isNumeric(get(perustiedot, 'opiskelijoita'))
         ? parseInt(perustiedot.opiskelijoita)

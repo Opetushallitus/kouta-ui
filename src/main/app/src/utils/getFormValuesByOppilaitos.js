@@ -9,7 +9,6 @@ const getFormValuesByOppilaitos = oppilaitos => {
     kielivalinta,
     tila,
     metadata: {
-      osat,
       tietoaOpiskelusta,
       yhteystiedot,
       esittely,
@@ -26,7 +25,6 @@ const getFormValuesByOppilaitos = oppilaitos => {
   return {
     kieliversiot: kielivalinta || [],
     tila,
-    osat: osat || [],
     esittely: mapValues(esittely || {}, parseEditorState),
     yhteystiedot: {
       osoite: get(yhteystiedot, 'osoite.osoite') || {},

@@ -74,6 +74,8 @@ const fillDatetime = ({ date, time, cy }) => {
 const fillAikatauluSection = () => {
   cy.getByTestId('aikatauluSection').within(() => {
     cy.getByTestId('hakuajat').within(() => {
+      lisaa();
+
       cy.getByTestId('alkaa').within(() => {
         fillDatetime({
           date: '02.04.2019',

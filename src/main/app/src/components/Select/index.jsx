@@ -1,8 +1,10 @@
-import React, { useMemo, useContext } from 'react';
+import React, { useMemo, useContext, useRef } from 'react';
 import ReactCreatable from 'react-select/lib/Creatable';
 import ReactAsyncCreatableSelect from 'react-select/lib/AsyncCreatable';
 import ReactAsyncSelect from 'react-select/lib/Async';
 import { ThemeContext } from 'styled-components';
+import { useAsync } from 'react-async';
+import zipObject from 'lodash/zipObject';
 
 import UiSelect, {
   getStyles,
@@ -12,8 +14,10 @@ import UiSelect, {
 import get from 'lodash/get';
 
 import memoizeOne from '../../utils/memoizeOne';
-import { isArray, isString, isObject } from '../../utils';
+import { isArray, isString, isObject, isFunction } from '../../utils';
 import useTranslation from '../useTranslation';
+
+const noopPromise = () => Promise.resolve();
 
 const makeDefaultNoOptionsMessage = t => () =>
   t('yleiset.eiValittaviaKohteita');
@@ -21,7 +25,7 @@ const makeDefaultNoOptionsMessage = t => () =>
 const makeDefaultFormatCreateLabel = t => value =>
   t('yleiset.luoKohde', { kohde: value });
 
-const makeDefaultPlaceholder = t => `${t('yleiset.valitse')}...`;
+const makeDefaultPlaceholder = t => t('yleiset.valitseVaihtoehdoista');
 
 const defaultLoadingMessage = () => 'Ladataan...';
 
@@ -133,16 +137,69 @@ export const AsyncCreatableSelect = ({ error = false, ...props }) => {
   );
 };
 
-export const AsyncSelect = ({ error = false, ...props }) => {
+export const AsyncSelect = ({
+  error = false,
+  loadLabel,
+  value: valueProp,
+  isLoading,
+  ...props
+}) => {
   const { t } = useTranslation();
   const theme = useContext(ThemeContext);
+  const labelCache = useRef({});
+
+  const valuesWithoutLabel = useMemo(() => {
+    const valueArr = isArray(valueProp) ? valueProp : [valueProp];
+
+    return valueArr
+      .filter(v => !get(v, 'label') && !labelCache.current[get(v, 'value')])
+      .map(v => get(v, 'value'));
+  }, [valueProp]);
+
+  const promiseFn = useMemo(() => {
+    return async () => {
+      const labels = await Promise.all(
+        valuesWithoutLabel.map(v =>
+          (isFunction(loadLabel) ? loadLabel(v) : noopPromise()).catch(
+            () => null,
+          ),
+        ),
+      );
+
+      const valueToLabel = zipObject(valuesWithoutLabel, labels);
+
+      labelCache.current = {
+        ...labelCache.current,
+        ...valueToLabel,
+      };
+
+      return labelCache.current;
+    };
+  }, [valuesWithoutLabel, loadLabel]);
+
+  const { data: valueToLabel, isLoading: labelIsLoading } = useAsync({
+    promiseFn,
+  });
+
+  const value = useMemo(() => {
+    return getValue(
+      valueProp,
+      Object.entries(valueToLabel || {}).map(([k, v]) => ({
+        value: k,
+        label: v,
+      })),
+    );
+  }, [valueToLabel, valueProp]);
 
   return (
     <ReactAsyncSelect
       {...getDefaultProps(t)}
+      placeholder={t('yleiset.kirjoitaHakusana')}
       styles={getStyles(theme, error)}
       theme={getTheme(theme)}
       cacheOptions={true}
+      value={value}
+      isLoading={labelIsLoading || isLoading}
       {...props}
     />
   );

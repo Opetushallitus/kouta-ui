@@ -21,15 +21,19 @@ const CreateKoulutusPage = props => {
 
   const selectBase = useSelectBase(history, { kopioParam: 'kopioKoulutusOid' });
   const { t } = useTranslation();
-  const { kopioKoulutusOid = null, johtaaTutkintoon = 'true' } = qs.parse(
-    search,
-  );
+
+  const {
+    kopioKoulutusOid = null,
+    johtaaTutkintoon: johtaaTutkintoonParam = 'true',
+  } = qs.parse(search);
+
+  const johtaaTutkintoon = johtaaTutkintoonParam === 'true';
 
   return (
     <>
       <Title>{t('sivuTitlet.uusiKoulutus')}</Title>
       <FormPage
-        header={<CreateKoulutusHeader />}
+        header={<CreateKoulutusHeader johtaaTutkintoon={johtaaTutkintoon} />}
         steps={<CreateKoulutusSteps />}
         footer={<CreateKoulutusFooter organisaatioOid={oid} />}
       >
@@ -37,7 +41,7 @@ const CreateKoulutusPage = props => {
         <CreateKoulutusForm
           organisaatioOid={oid}
           kopioKoulutusOid={kopioKoulutusOid}
-          johtaaTutkintoon={johtaaTutkintoon === 'true'}
+          johtaaTutkintoon={johtaaTutkintoon}
           onSelectBase={selectBase}
           showArkistoituTilaOption={false}
         />

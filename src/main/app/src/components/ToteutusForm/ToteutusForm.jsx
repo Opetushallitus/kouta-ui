@@ -4,7 +4,6 @@ import get from 'lodash/get';
 import FormCollapse from '../FormCollapse';
 import KieliversiotFields from '../KieliversiotFields';
 import OsaamisalatSection from './OsaamisalatSection';
-import NimiSection from './NimiSection';
 import PohjaSection from './PohjaSection';
 import JarjestamispaikatSection from './JarjestamispaikatSection';
 import JarjestamisTiedotSection from './JarjestamisTiedotSection';
@@ -24,6 +23,9 @@ import useFieldValue from '../useFieldValue';
 import useModal from '../useModal';
 import LukiolinjatSection from './LukiolinjatSection';
 import JulkaisutilaSection from './JulkaisutilaSection';
+import TiedotSection from './TiedotSection';
+import ToteutusjaksotSection from './ToteutusjaksotSection';
+import TutkinnonOsatSection from './TutkinnonOsatSection';
 
 const PohjaFormCollapse = ({
   children,
@@ -101,6 +103,15 @@ const ToteutusForm = ({
         </FormCollapse>
 
         <FormCollapse
+          section="tiedot"
+          header={t('toteutuslomake.toteutuksenTiedot')}
+          languages={languages}
+          {...getTestIdProps('tiedotSection')}
+        >
+          <TiedotSection name="tiedot" />
+        </FormCollapse>
+
+        <FormCollapse
           section="lukiolinjat"
           header={t('toteutuslomake.lukionlinja')}
           languages={languages}
@@ -116,6 +127,23 @@ const ToteutusForm = ({
           {...getTestIdProps('kuvausSection')}
         >
           <KuvausSection name="kuvaus" />
+        </FormCollapse>
+
+        <FormCollapse
+          section="tutkinnonOsat"
+          header={t('toteutuslomake.koulutukseenLiittyvatTutkinnonOsat')}
+          {...getTestIdProps('tutkinnonOsatSection')}
+        >
+          <TutkinnonOsatSection name="tutkinnonOsat" />
+        </FormCollapse>
+
+        <FormCollapse
+          section="toteutusjaksot"
+          header={t('toteutuslomake.toteutukseenLiittyvatJaksot')}
+          languages={languages}
+          {...getTestIdProps('toteutusjaksotSection')}
+        >
+          <ToteutusjaksotSection name="toteutusjaksot" />
         </FormCollapse>
 
         <FormCollapse
@@ -183,15 +211,6 @@ const ToteutusForm = ({
             name="jarjestamispaikat"
             organisaatioOid={organisaatioOid}
           />
-        </FormCollapse>
-
-        <FormCollapse
-          section="nimi"
-          header={t('toteutuslomake.toteutuksenNimi')}
-          languages={languages}
-          {...getTestIdProps('nimiSection')}
-        >
-          <NimiSection name="nimi" />
         </FormCollapse>
 
         <FormCollapse

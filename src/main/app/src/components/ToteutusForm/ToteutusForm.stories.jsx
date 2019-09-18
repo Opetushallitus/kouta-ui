@@ -13,11 +13,11 @@ import {
 } from '../../storybookUtils';
 import { KOULUTUSTYYPPI } from '../../constants';
 
-const config = getToteutusFormConfig(KOULUTUSTYYPPI.LUKIOKOULUTUS);
+const config = getToteutusFormConfig(KOULUTUSTYYPPI.AVOIN_YO);
 
 storiesOf('ToteutusForm', module)
   .addDecorator(makeLocalisationDecorator())
-  .addDecorator(makeStoreDecorator({ logging: true }))
+  .addDecorator(makeStoreDecorator())
   .addDecorator(makeApiDecorator())
   .add('Basic', () => (
     <ReduxForm form="toteutus">
@@ -27,7 +27,7 @@ storiesOf('ToteutusForm', module)
             koulutusKoodiUri="koulutus_361101#11"
             organisaatioOid="1.2.246.562.10.594252633210"
             steps={false}
-            koulutustyyppi={KOULUTUSTYYPPI.LUKIOKOULUTUS}
+            koulutustyyppi={KOULUTUSTYYPPI.AVOIN_YO}
           />
         </FormConfigContext.Provider>
       )}

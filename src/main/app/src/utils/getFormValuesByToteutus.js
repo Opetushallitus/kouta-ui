@@ -1,4 +1,6 @@
 import get from 'lodash/get';
+import { isNumber } from './index';
+import parseSisaltoField from './parseSisaltoField';
 
 const getFormValuesByToteutus = toteutus => {
   const {
@@ -19,6 +21,13 @@ const getFormValuesByToteutus = toteutus => {
     alemmanKorkeakoulututkinnonOsaamisalat: alemmanKorkeakoulututkinnonOsaamisalatArg = [],
     yhteyshenkilot = [],
     lukiolinjaKoodiUri,
+    laajuus,
+    laajuusyksikkoKoodiUri,
+    ilmoittautumislinkki,
+    aloituspaikat,
+    suunniteltuKesto,
+    toteutusjaksot,
+    tutkinnonOsat: tutkinnonOsatMetadata,
   } = metadata;
 
   const {
@@ -70,9 +79,28 @@ const getFormValuesByToteutus = toteutus => {
     ? 'kylla'
     : 'ei';
 
+  const tutkinnonOsat = (tutkinnonOsatMetadata || []).map(
+    ({ tutkintoKoodiUri, osaamisalaKoodiUri, tutkinnonOsaKoodiUrit }) => ({
+      tutkinto: tutkintoKoodiUri ? { value: tutkintoKoodiUri } : undefined,
+      osaamisalaKoodiUri: osaamisalaKoodiUri
+        ? { value: osaamisalaKoodiUri }
+        : undefined,
+      tutkinnonOsat: (tutkinnonOsaKoodiUrit || []).map(value => ({ value })),
+    }),
+  );
+
   return {
     tila,
-    nimi,
+    tiedot: {
+      nimi,
+      laajuus: isNumber(laajuus) ? laajuus.toString() : '',
+      laajuusyksikko: laajuusyksikkoKoodiUri
+        ? { value: laajuusyksikkoKoodiUri }
+        : undefined,
+      ilmoittautumislinkki: ilmoittautumislinkki || {},
+      aloituspaikat: isNumber(aloituspaikat) ? aloituspaikat.toString() : '',
+      kesto: suunniteltuKesto || {},
+    },
     kieliversiot: kielivalinta,
     jarjestamispaikat: tarjoajat,
     jarjestamistiedot: {
@@ -163,6 +191,17 @@ const getFormValuesByToteutus = toteutus => {
         ? { value: lukiolinjaKoodiUri }
         : undefined,
     },
+    toteutusjaksot: (toteutusjaksot || []).map(
+      ({ nimi, koodi, laajuus, ilmoittautumislinkki, kuvaus, sisalto }) => ({
+        nimi: nimi || {},
+        koodi: koodi || '',
+        laajuus: laajuus || {},
+        ilmoittautumislinkki: ilmoittautumislinkki || {},
+        kuvaus: kuvaus || {},
+        sisalto: parseSisaltoField(sisalto),
+      }),
+    ),
+    tutkinnonOsat,
   };
 };
 

@@ -3,6 +3,7 @@ import toPairs from 'lodash/toPairs';
 import pick from 'lodash/pick';
 
 import { isNumeric, getKoutaDateString } from './index';
+import serializeSisaltoField from './serializeSisaltoField';
 
 const getKielivalinta = values => get(values, 'kieliversiot') || [];
 
@@ -21,7 +22,7 @@ const getToteutusByFormValues = values => {
   const { koulutustyyppi, tila, muokkaaja } = values;
   const kielivalinta = getKielivalinta(values);
   const tarjoajat = get(values, 'jarjestamispaikat') || [];
-  const nimi = pick(get(values, 'nimi') || {}, kielivalinta);
+  const nimi = pick(get(values, 'tiedot.nimi') || {}, kielivalinta);
   const opetuskielet = get(values, 'jarjestamistiedot.opetuskieli') || [];
   const kuvaus = pick(get(values, 'kuvaus') || {}, kielivalinta);
   const osioKuvaukset = get(values, 'jarjestamistiedot.osioKuvaukset') || {};
@@ -179,6 +180,43 @@ const getToteutusByFormValues = values => {
     get(values, 'jarjestamistiedot.koulutuksenPaattymispaivamaara'),
   );
 
+  const ilmoittautumislinkki = pick(
+    get(values, 'tiedot.ilmoittautumislinkki'),
+    kielivalinta,
+  );
+
+  const laajuus = isNumeric(get(values, 'tiedot.laajuus'))
+    ? parseInt(values.tiedot.laajuus)
+    : null;
+
+  const laajuusyksikkoKoodiUri =
+    get(values, 'tiedot.laajuusyksikko.value') || null;
+
+  const aloituspaikat = isNumeric(get(values, 'tiedot.aloituspaikat'))
+    ? parseInt(values.tiedot.aloituspaikat)
+    : null;
+
+  const suunniteltuKesto = pick(get(values, 'tiedot.kesto'), kielivalinta);
+
+  const toteutusjaksot = (get(values, 'toteutusjaksot') || []).map(
+    ({ nimi, koodi, laajuus, ilmoittautumislinkki, kuvaus, sisalto }) => ({
+      nimi: pick(nimi, kielivalinta),
+      koodi: koodi || null,
+      laajuus: pick(laajuus, kielivalinta),
+      ilmoittautumislinkki: pick(ilmoittautumislinkki, kielivalinta),
+      kuvaus: pick(kuvaus, kielivalinta),
+      sisalto: serializeSisaltoField(sisalto, kielivalinta),
+    }),
+  );
+
+  const tutkinnonOsat = (get(values, 'tutkinnonOsat') || []).map(
+    ({ tutkinto, osaamisala, tutkinnonOsat }) => ({
+      tutkintoKoodiUri: get(tutkinto, 'value') || null,
+      osaamisalaKoodiUri: get(osaamisala, 'value') || null,
+      tutkinnonOsaKoodiUrit: (tutkinnonOsat || []).map(({ value }) => value),
+    }),
+  );
+
   return {
     nimi,
     tarjoajat,
@@ -222,6 +260,13 @@ const getToteutusByFormValues = values => {
       alemmanKorkeakoulututkinnonOsaamisalat,
       kuvaus,
       tyyppi: koulutustyyppi,
+      laajuus,
+      laajuusyksikkoKoodiUri,
+      ilmoittautumislinkki,
+      aloituspaikat,
+      suunniteltuKesto,
+      toteutusjaksot,
+      tutkinnonOsat,
     },
   };
 };

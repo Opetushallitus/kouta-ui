@@ -185,6 +185,99 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
         },
       ],
       lukiolinjaKoodiUri: 'linja_1#1',
+      tutkinnonOsat: [
+        {
+          osaamisalaKoodiUri: 'osaamisala_1#1',
+          tutkinnonOsaKoodiUrit: ['tutkinnonosa_1#1'],
+          tutkintoKoodiUri: 'tutkinto_1#1',
+        },
+      ],
+      laajuus: 25,
+      laajuusyksikkoKoodiUri: 'laajuus_1#1',
+      ilmoittautumislinkki: {
+        fi: 'Fi linkki',
+        sv: 'Sv linkki',
+      },
+      aloituspaikat: 251,
+      suunniteltuKesto: {
+        fi: 'Fi kesto',
+        sv: 'Sv kesto',
+      },
+      toteutusjaksot: [
+        {
+          ilmoittautumislinkki: {
+            fi: 'Fi linkki',
+            sv: 'Sv linkki',
+          },
+          koodi: 'koodi 123',
+          kuvaus: {
+            fi: 'Fi kuvaus',
+            sv: 'Sv kuvaus',
+          },
+          laajuus: {
+            fi: 'Fi laajuus',
+            sv: 'Sv laajuus',
+          },
+          nimi: {
+            fi: 'Fi nimi',
+            sv: 'Sv nimi',
+          },
+          sisalto: [
+            {
+              data: {
+                fi: '<h2>Fi sisalto</h2>',
+                sv: '<h2>Sv sisalto</h2>',
+              },
+              tyyppi: 'teksti',
+            },
+            {
+              data: {
+                rows: [
+                  {
+                    columns: [
+                      {
+                        index: 0,
+                        text: {
+                          fi: 'Fi column1',
+                          sv: 'Sv column1',
+                        },
+                      },
+                      {
+                        index: 1,
+                        text: {
+                          fi: 'Fi column2',
+                          sv: 'Sv column2',
+                        },
+                      },
+                    ],
+                    index: 0,
+                  },
+                  {
+                    columns: [
+                      {
+                        index: 0,
+                        text: {
+                          fi: 'Fi column3',
+                          sv: 'Sv column3',
+                        },
+                      },
+                      {
+                        index: 1,
+                        text: {
+                          fi: 'Fi column4',
+                          sv: 'Sv column4',
+                        },
+                      },
+                    ],
+                    index: 1,
+                  },
+                ],
+              },
+              tyyppi: 'taulukko',
+            },
+          ],
+        },
+      ],
     },
     nimi: {
       fi: 'Fi nimi',

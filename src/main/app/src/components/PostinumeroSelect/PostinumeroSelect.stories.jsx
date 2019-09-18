@@ -9,7 +9,7 @@ import {
 } from '../../storybookUtils';
 
 const Story = () => {
-  const [value, setValue] = useState({ value: 'posti_00940' });
+  const [value, setValue] = useState({ value: 'posti_00940#2' });
 
   return <PostinumeroSelect onChange={setValue} value={value} />;
 };

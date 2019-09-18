@@ -1,10 +1,24 @@
 import getToteutusByFormValues from '../getToteutusByFormValues';
+import parseEditorState from '../draft/parseEditorState';
 
 test('getToteutusByFormValues returns correct toteutus given form values', () => {
   const toteutus = getToteutusByFormValues({
-    nimi: {
-      fi: 'Fi nimi',
-      sv: 'Sv nimi',
+    tiedot: {
+      nimi: {
+        fi: 'Fi nimi',
+        sv: 'Sv nimi',
+      },
+      ilmoittautumislinkki: {
+        fi: 'Fi linkki',
+        sv: 'Sv linkki',
+      },
+      aloituspaikat: '56',
+      laajuus: '252',
+      laajuusyksikko: { value: 'laajuus_1#1' },
+      kesto: {
+        fi: 'Fi kesto',
+        sv: 'Sv kesto',
+      },
     },
     kieliversiot: ['fi', 'sv'],
     jarjestamispaikat: ['org1', 'org2'],
@@ -132,6 +146,62 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
     lukiolinjat: {
       lukiolinja: { value: 'linja_1#1' },
     },
+    toteutusjaksot: [
+      {
+        nimi: {
+          fi: 'Fi nimi',
+          sv: 'Sv nimi',
+        },
+        koodi: 'koodi 123',
+        laajuus: {
+          fi: 'Fi laajuus',
+          sv: 'Sv laajuus',
+        },
+        kuvaus: {
+          fi: 'Fi kuvaus',
+          sv: 'Sv kuvaus',
+        },
+        ilmoittautumislinkki: {
+          fi: 'Fi linkki',
+          sv: 'Sv linkki',
+        },
+        sisalto: [
+          {
+            tyyppi: 'teksti',
+            data: {
+              fi: parseEditorState('<h2>Fi sisalto</h2>'),
+              sv: parseEditorState('<h2>Sv sisalto</h2>'),
+            },
+          },
+          {
+            tyyppi: 'taulukko',
+            data: {
+              rows: [
+                {
+                  columns: [
+                    { text: { fi: 'Fi column1', sv: 'Sv column1' } },
+                    { text: { fi: 'Fi column2', sv: 'Sv column2' } },
+                  ],
+                },
+                {
+                  columns: [
+                    { text: { fi: 'Fi column3', sv: 'Sv column3' } },
+                    { text: { fi: 'Fi column4', sv: 'Sv column4' } },
+                  ],
+                },
+              ],
+            },
+          },
+        ],
+      },
+    ],
+    tutkinnonOsat: [
+      {
+        tutkinto: { value: 'tutkinto_1#1' },
+        osaamisala: { value: 'osaamisala_1#1' },
+        tutkinnonOsat: [{ value: 'tutkinnonosa_1#1' }],
+      },
+    ],
   });
 
   expect(toteutus).toMatchSnapshot();

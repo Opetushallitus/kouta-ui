@@ -32,9 +32,10 @@ storiesOf('KoulutusForm', module)
   .addDecorator(makeApiDecorator())
   .add('Basic', () => {
     return (
-      <ReduxForm form="koulutus">
+      <ReduxForm form="koulutus" initialValues={{ koulutustyyppi: 'amm' }}>
         {() => (
           <FormWrapper
+            johtaaTutkintoon={true}
             organisaatioOid="1.2.246.562.10.594252633210"
             steps={false}
           />

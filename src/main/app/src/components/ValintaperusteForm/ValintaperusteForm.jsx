@@ -41,7 +41,7 @@ const PohjaFormCollapse = ({
 const ValintaperusteForm = ({
   steps = true,
   canEditTyyppi = true,
-  canCopy = true,
+  canSelectBase = true,
   organisaatioOid,
   onSelectBase,
   showArkistoituTilaOption = true,
@@ -61,7 +61,7 @@ const ValintaperusteForm = ({
         <PerustiedotSection canEditTyyppi={canEditTyyppi} />
       </FormCollapse>
 
-      {canCopy ? (
+      {canSelectBase ? (
         <PohjaFormCollapse
           section="pohja"
           header={t('yleiset.pohjanValinta')}

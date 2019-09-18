@@ -21,7 +21,7 @@ const EditValintapersuteetForm = ({ valintaperuste, ...props }) => {
             {...props}
             valintaperuste={valintaperuste}
             steps={false}
-            canCopy={false}
+            canSelectBase={false}
             canEditTyyppi={false}
           />
         </FormConfigContext.Provider>

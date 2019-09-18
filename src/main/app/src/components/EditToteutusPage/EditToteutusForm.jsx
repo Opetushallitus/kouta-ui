@@ -46,7 +46,7 @@ const EditToteutusForm = ({ toteutus, history, ...props }) => {
           {...props}
           toteutus={toteutus}
           steps={false}
-          canCopy={false}
+          canSelectBase={false}
           onAttachHakukohde={onAttachHakukohde}
         />
       )}

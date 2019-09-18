@@ -157,9 +157,11 @@ const fillJarjestajatSection = () => {
   });
 };
 
-const fillNimiSection = () => {
-  cy.getByTestId('nimiSection').within(() => {
-    cy.get('input').type('toteutuksen nimi', { force: true });
+const fillTiedotSection = () => {
+  cy.getByTestId('tiedotSection').within(() => {
+    cy.getByTestId('nimi')
+      .find('input')
+      .type('toteutuksen nimi', { force: true });
 
     jatka();
   });
@@ -295,6 +297,7 @@ describe('createToteutusForm', () => {
 
     fillPohjaSection();
     fillKieliversiotSection();
+    fillTiedotSection();
 
     cy.getByTestId('osaamisalatSection').within(() => {
       cy.getByTestId('osaamisalaSelection').within(() => {
@@ -321,7 +324,6 @@ describe('createToteutusForm', () => {
 
     fillNayttamistiedotSection();
     fillJarjestajatSection();
-    fillNimiSection();
     fillYhteystiedotSection();
     fillTilaSection();
 
@@ -349,6 +351,7 @@ describe('createToteutusForm', () => {
 
     fillPohjaSection();
     fillKieliversiotSection();
+    fillTiedotSection();
     fillKuvausSection();
 
     cy.getByTestId('alempiOsaamisalatSection').within(() => {
@@ -369,7 +372,6 @@ describe('createToteutusForm', () => {
 
     fillNayttamistiedotSection();
     fillJarjestajatSection();
-    fillNimiSection();
     fillYhteystiedotSection();
     fillTilaSection();
 

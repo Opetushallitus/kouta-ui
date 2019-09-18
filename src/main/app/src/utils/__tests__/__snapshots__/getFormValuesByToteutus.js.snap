@@ -181,10 +181,6 @@ Object {
       ],
     },
   },
-  "nimi": Object {
-    "fi": "Fi nimi",
-    "sv": "Sv nimi",
-  },
   "osaamisalat": Object {
     "osaamisalaLinkit": Object {
       "osaamisala1": Object {
@@ -211,7 +207,116 @@ Object {
       "osaamisala2",
     ],
   },
+  "tiedot": Object {
+    "aloituspaikat": "251",
+    "ilmoittautumislinkki": Object {
+      "fi": "Fi linkki",
+      "sv": "Sv linkki",
+    },
+    "kesto": Object {
+      "fi": "Fi kesto",
+      "sv": "Sv kesto",
+    },
+    "laajuus": "25",
+    "laajuusyksikko": Object {
+      "value": "laajuus_1#1",
+    },
+    "nimi": Object {
+      "fi": "Fi nimi",
+      "sv": "Sv nimi",
+    },
+  },
   "tila": "tallennettu",
+  "toteutusjaksot": Array [
+    Object {
+      "ilmoittautumislinkki": Object {
+        "fi": "Fi linkki",
+        "sv": "Sv linkki",
+      },
+      "koodi": "koodi 123",
+      "kuvaus": Object {
+        "fi": "Fi kuvaus",
+        "sv": "Sv kuvaus",
+      },
+      "laajuus": Object {
+        "fi": "Fi laajuus",
+        "sv": "Sv laajuus",
+      },
+      "nimi": Object {
+        "fi": "Fi nimi",
+        "sv": "Sv nimi",
+      },
+      "sisalto": Array [
+        Object {
+          "data": Object {
+            "fi":               "<h2>Fi sisalto</h2>",
+            "sv":               "<h2>Sv sisalto</h2>",
+          },
+          "tyyppi": "teksti",
+        },
+        Object {
+          "data": Object {
+            "rows": Array [
+              Object {
+                "columns": Array [
+                  Object {
+                    "index": 0,
+                    "text": Object {
+                      "fi": "Fi column1",
+                      "sv": "Sv column1",
+                    },
+                  },
+                  Object {
+                    "index": 1,
+                    "text": Object {
+                      "fi": "Fi column2",
+                      "sv": "Sv column2",
+                    },
+                  },
+                ],
+                "index": 0,
+              },
+              Object {
+                "columns": Array [
+                  Object {
+                    "index": 0,
+                    "text": Object {
+                      "fi": "Fi column3",
+                      "sv": "Sv column3",
+                    },
+                  },
+                  Object {
+                    "index": 1,
+                    "text": Object {
+                      "fi": "Fi column4",
+                      "sv": "Sv column4",
+                    },
+                  },
+                ],
+                "index": 1,
+              },
+            ],
+          },
+          "tyyppi": "taulukko",
+        },
+      ],
+    },
+  ],
+  "tutkinnonOsat": Array [
+    Object {
+      "osaamisalaKoodiUri": Object {
+        "value": "osaamisala_1#1",
+      },
+      "tutkinnonOsat": Array [
+        Object {
+          "value": "tutkinnonosa_1#1",
+        },
+      ],
+      "tutkinto": Object {
+        "value": "tutkinto_1#1",
+      },
+    },
+  ],
   "yhteyshenkilot": Array [
     Object {
       "nimi": Object {

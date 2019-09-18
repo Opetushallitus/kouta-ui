@@ -163,6 +163,8 @@ export default {
     toteutukset: 'Toteutukset',
     nimeton: 'Nimetön',
     valitseJulkaisutila: 'Valitse julkaisutila',
+    kirjoitaHakusana: 'Kirjoita hakusana',
+    valitseVaihtoehdoista: 'Valitse vaihtoehdoista',
   },
   sivuTitlet: {
     etuliite: 'Tarjonta',
@@ -218,6 +220,8 @@ export default {
     erikoistumiskoulutus: 'Erikoistumiskoulutus',
     valmentavaKoulutus: 'Valmentava koulutus',
     ammatillinenOpettajakoulutus: 'Ammatillinen opettajakoulutus',
+    ammatillinenOpintoOhjaajaKoulutus: 'Ammatillinen opinto-ohjaajakoulutus',
+    ammatillinenErityisopettajaKoulutus: 'Ammatillinen erityisopettajakoulutus',
     vapaaSivistystyo: 'Vapaa sivistystyö',
     yleissivistava: 'Yleissivistävä',
     luva: 'Yleissivistävä (LUVA)',
@@ -287,6 +291,12 @@ export default {
     koulutuksenTila: 'Koulutuksen tila',
   },
   toteutuslomake: {
+    toteutuksenTiedot: 'Toteutuksen tiedot',
+    ilmoittautumislinkki: 'Ilmoittautumislinkki',
+    laajuus: 'Laajuus',
+    laajuusyksikko: 'Laajuusyksikkö',
+    aloituspaikat: 'Aloituspaikat',
+    suunniteltuKesto: 'Sunnitteltu kesto',
     toteutuksellaEiHakukohteita:
       'Tähän toteutuksen ei ole vielä liitetty hakukohteita',
     toteutukseenOnLiitettyHakukohteet:
@@ -329,6 +339,17 @@ export default {
     toteutuksenTila: 'Toteutuksen tila',
     lukionlinja: 'Lukiolinja',
     valitseLukiolinja: 'Valitse lukiolinja',
+    toteutukseenLiittyvatJaksot: 'Toteutukseen liittyvät jaksot',
+    lisaaToteutusjakso: 'Lisää toteutusjakso',
+    toteutusjaksonNimi: 'Jakson nimi',
+    toteutusjaksonKoodi: 'Jakson koodi',
+    toteutusjaksonLaajuus: 'Laajuus',
+    toteutusjaksonKuvaus: 'Jakson kuvaus',
+    koulutukseenLiittyvatTutkinnonOsat: 'Koulutukseen liittyvät tutkinnon osat',
+    valitseTutkinto: 'Valitse tutkinto',
+    valitseOsaamisala: 'Valitse osaamisala',
+    valitseTutkinnonOsat: 'Valitse tutkinnon osat',
+    lisaaTutkinnonOsa: 'Lisää tutkinnon osa',
   },
   hakulomake: {
     haunNimi: 'Haun nimi',

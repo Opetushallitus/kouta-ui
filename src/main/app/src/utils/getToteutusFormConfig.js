@@ -1,9 +1,16 @@
-import pick from 'lodash/pick';
 import get from 'lodash/get';
+import without from 'lodash/without';
 
-import { KOULUTUSTYYPPI, JULKAISUTILA } from '../constants';
-import isKorkeakouluKoulutustyyppi from './isKorkeakouluKoulutustyyppi';
-import isAmmatillinenKoulutustyyppi from './isAmmatillinenKoulutustyyppi';
+import createFormConfigBuilder from './createFormConfigBuilder';
+
+import {
+  KOULUTUSTYYPPI,
+  KOULUTUSTYYPIT,
+  JULKAISUTILA,
+  TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
+  TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
+  TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
+} from '../constants';
 
 const getKielivalinta = values => get(values, 'kieliversiot') || [];
 
@@ -13,179 +20,158 @@ const validateIfJulkaistu = validate => (eb, values, ...rest) => {
   return tila === JULKAISUTILA.JULKAISTU ? validate(eb, values, ...rest) : eb;
 };
 
-const baseConfig = {
-  sections: {
-    pohja: {
-      fields: {
-        pohja: true,
-      },
-    },
-    kieliversiot: {
-      fields: {
-        kieliversiot: {
-          validate: eb => eb.validateArrayMinLength('kieliversiot', 1),
-        },
-      },
-    },
-    kuvaus: {
-      fields: {
-        kuvaus: true,
-      },
-    },
-    osaamisalaTarkenteet: {
-      fields: {
-        osaamisalat: true,
-      },
-    },
-    osaamisalatYlempitutkinto: {
-      fields: {
-        osaamisalat: {
-          validate: validateIfJulkaistu((eb, values) =>
-            eb.validateArray('alemmanKorkeakoulututkinnonOsaamisalat', eb => {
-              return eb.validateTranslations('nimi', getKielivalinta(values));
-            }),
-          ),
-        },
-      },
-    },
-    osaamisalatAlempitutkinto: {
-      fields: {
-        osaamisalat: {
-          validate: validateIfJulkaistu((eb, values) =>
-            eb.validateArray('alemmanKorkeakoulututkinnonOsaamisalat', eb => {
-              return eb.validateTranslations('nimi', getKielivalinta(values));
-            }),
-          ),
-        },
-      },
-    },
-    jarjestamistiedot: {
-      fields: {
-        opetuskieli: {
-          validate: validateIfJulkaistu(eb =>
-            eb.validateArrayMinLength('jarjestamistiedot.opetuskieli', 1),
-          ),
-        },
-        opetusaika: {
-          validate: validateIfJulkaistu(eb =>
-            eb.validateArrayMinLength('jarjestamistiedot.opetusaika', 1),
-          ),
-        },
-        opetustapa: true,
-        maksullisuus: {
-          validate: validateIfJulkaistu(eb =>
-            eb.validateExistence('jarjestamistiedot.maksullisuus.tyyppi'),
-          ),
-        },
-        stipendi: true,
-        koulutuksenAlkamispaivaamara: {
-          validate: validateIfJulkaistu(eb =>
-            eb.validateExistence(
-              'jarjestamistiedot.koulutuksenAlkamispaivamaara',
-            ),
-          ),
-        },
-        koulutuksenPaattymispaivaamara: true,
-        osiot: true,
-        diplomi: true,
-        kielivalikoima: true,
-      },
-    },
-    nayttamistiedot: {
-      fields: {
-        ammattinimikkeet: true,
-        avainsanat: true,
-      },
-    },
-    jarjestyspaikka: {
-      fields: {
-        jarjestyspaikka: {
-          validate: validateIfJulkaistu(eb =>
-            eb.validateArrayMinLength('jarjestamispaikat', 1),
-          ),
-        },
-      },
-    },
-    nimi: {
-      fields: {
-        nimi: {
-          validate: (eb, values) =>
-            eb.valitaTranslations('nimi', getKielivalinta(values)),
-        },
-      },
-    },
-    yhteystiedot: {
-      fields: {
-        yhteyshenkilot: true,
-      },
-    },
-    lukiolinjat: {
-      fields: {
-        lukiolinja: {
-          validate: eb => eb.validateExistence('lukiolinjat.lukiolinja'),
-        },
-      },
-    },
-    julkaisutila: {
-      fields: {
-        julkaisutila: {
-          validate: eb => eb.validateExistence('tila'),
-        },
-      },
-    },
-  },
-};
-
-const commonConfigPaths = [
-  'sections.pohja',
-  'sections.kieliversiot',
-  'sections.jarjestyspaikka',
-  'sections.yhteystiedot',
-  'sections.julkaisutila',
-];
-
-const commonJarjestamistiedotPaths = [
-  'sections.jarjestamistiedot.fields.opetuskieli',
-  'sections.jarjestamistiedot.fields.opetustapa',
-  'sections.jarjestamistiedot.fields.opetusaika',
-  'sections.jarjestamistiedot.fields.maksullisuus',
-  'sections.jarjestamistiedot.fields.stipendi',
-  'sections.jarjestamistiedot.fields.koulutuksenAlkamispaivaamara',
-  'sections.jarjestamistiedot.fields.koulutuksenPaattymispaivaamara',
-  'sections.jarjestamistiedot.fields.osiot',
-];
+const config = createFormConfigBuilder()
+  .registerField('pohja', 'pohja', KOULUTUSTYYPIT)
+  .registerField('kieliversiot', 'kieliversiot', KOULUTUSTYYPIT, eb =>
+    eb.validateArrayMinLength('kieliversiot', 1),
+  )
+  .registerField(
+    'kuvaus',
+    'kuvaus',
+    without(
+      KOULUTUSTYYPIT,
+      ...TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
+      KOULUTUSTYYPPI.LUKIOKOULUTUS,
+    ),
+  )
+  .registerField(
+    'osaamisalaTarkenteet',
+    'osaamisalat',
+    TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
+  )
+  .registerField(
+    'osaamisalatYlempitutkinto',
+    'osaamisalat',
+    TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
+    validateIfJulkaistu((eb, values) =>
+      eb.validateArray('alemmanKorkeakoulututkinnonOsaamisalat', eb => {
+        return eb.validateTranslations('nimi', getKielivalinta(values));
+      }),
+    ),
+  )
+  .registerField(
+    'osaamisalatAlempitutkinto',
+    'osaamisalat',
+    TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
+    validateIfJulkaistu((eb, values) =>
+      eb.validateArray('alemmanKorkeakoulututkinnonOsaamisalat', eb => {
+        return eb.validateTranslations('nimi', getKielivalinta(values));
+      }),
+    ),
+  )
+  .registerField(
+    'tiedot',
+    'nimi',
+    without(
+      KOULUTUSTYYPIT,
+      KOULUTUSTYYPPI.LUKIOKOULUTUS,
+      KOULUTUSTYYPPI.VALMA,
+      KOULUTUSTYYPPI.TELMA,
+      KOULUTUSTYYPPI.LUVA,
+      KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS,
+    ),
+    (eb, values) => eb.valitaTranslations('nimi', getKielivalinta(values)),
+  )
+  .registerField(
+    'tiedot',
+    'ilmoittautumislinkki',
+    TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
+  )
+  .registerField('tiedot', 'laajuus', TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT)
+  .registerField(
+    'tiedot',
+    'aloituspaikat',
+    without(
+      TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
+      KOULUTUSTYYPPI.VALMA,
+      KOULUTUSTYYPPI.TELMA,
+      KOULUTUSTYYPPI.LUVA,
+      KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS,
+    ),
+  )
+  .registerField('tiedot', 'kesto', [
+    KOULUTUSTYYPPI.VALMA,
+    KOULUTUSTYYPPI.TELMA,
+    KOULUTUSTYYPPI.OSAAMISALA,
+    KOULUTUSTYYPPI.LUVA,
+    KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS,
+  ])
+  .registerField(
+    'jarjestamistiedot',
+    'opetuskieli',
+    KOULUTUSTYYPIT,
+    validateIfJulkaistu(eb =>
+      eb.validateArrayMinLength('jarjestamistiedot.opetuskieli', 1),
+    ),
+  )
+  .registerField(
+    'jarjestamistiedot',
+    'opetusaika',
+    KOULUTUSTYYPIT,
+    validateIfJulkaistu(eb =>
+      eb.validateArrayMinLength('jarjestamistiedot.opetusaika', 1),
+    ),
+  )
+  .registerField('jarjestamistiedot', 'opetustapa', KOULUTUSTYYPIT)
+  .registerField(
+    'jarjestamistiedot',
+    'maksullisuus',
+    KOULUTUSTYYPIT,
+    validateIfJulkaistu(eb =>
+      eb.validateExistence('jarjestamistiedot.maksullisuus.tyyppi'),
+    ),
+  )
+  .registerField('jarjestamistiedot', 'stipendi', KOULUTUSTYYPIT)
+  .registerField(
+    'jarjestamistiedot',
+    'koulutuksenAlkamispaivaamara',
+    KOULUTUSTYYPIT,
+    validateIfJulkaistu(eb =>
+      eb.validateExistence('jarjestamistiedot.koulutuksenAlkamispaivamaara'),
+    ),
+  )
+  .registerField(
+    'jarjestamistiedot',
+    'koulutuksenPaattymispaivamaara',
+    KOULUTUSTYYPIT,
+  )
+  .registerField('jarjestamistiedot', 'osiot', KOULUTUSTYYPIT)
+  .registerField('jarjestamistiedot', 'diplomi', [KOULUTUSTYYPPI.LUKIOKOULUTUS])
+  .registerField('jarjestamistiedot', 'kielivalikoima', [
+    KOULUTUSTYYPPI.LUKIOKOULUTUS,
+  ])
+  .registerField('nayttamistiedot', 'ammattinimikkeet', KOULUTUSTYYPIT)
+  .registerField('nayttamistiedot', 'avainsanat', KOULUTUSTYYPIT)
+  .registerField(
+    'jarjestyspaikka',
+    'jarjestyspaikka',
+    KOULUTUSTYYPIT,
+    validateIfJulkaistu(eb =>
+      eb.validateArrayMinLength('jarjestamispaikat', 1),
+    ),
+  )
+  .registerField('yhteystiedot', 'yhteyshenkilot', KOULUTUSTYYPIT)
+  .registerField(
+    'lukiolinjat',
+    'lukiolinja',
+    [KOULUTUSTYYPPI.LUKIOKOULUTUS],
+    eb => eb.validateExistence('lukiolinjat.lukiolinja'),
+  )
+  .registerField('julkaisutila', 'julkaisutila', KOULUTUSTYYPIT, eb =>
+    eb.validateExistence('tila'),
+  )
+  .registerField('toteutusjaksot', 'toteutusjaksot', [
+    KOULUTUSTYYPPI.AVOIN_YO,
+    KOULUTUSTYYPPI.AVOIN_AMK,
+    KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
+    KOULUTUSTYYPPI.TAYDENNYS_KOULUTUS,
+  ])
+  .registerField('tutkinnonOsat', 'tutkinnonOsat', [
+    KOULUTUSTYYPPI.TUTKINNON_OSA,
+  ]);
 
 const getToteutusFormConfig = koulutustyyppi => {
-  if (isKorkeakouluKoulutustyyppi(koulutustyyppi)) {
-    return pick(baseConfig, [
-      ...commonConfigPaths,
-      ...commonJarjestamistiedotPaths,
-      'sections.osaamisalatYlempitutkinto',
-      'sections.osaamisalatAlempitutkinto',
-      'sections.kuvaus',
-      'sections.nayttamistiedot',
-      'sections.nimi',
-    ]);
-  } else if (isAmmatillinenKoulutustyyppi(koulutustyyppi)) {
-    return pick(baseConfig, [
-      ...commonConfigPaths,
-      ...commonJarjestamistiedotPaths,
-      'sections.osaamisalaTarkenteet',
-      'sections.nayttamistiedot',
-      'sections.nimi',
-    ]);
-  } else if (koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS) {
-    return pick(baseConfig, [
-      ...commonConfigPaths,
-      ...commonJarjestamistiedotPaths,
-      'sections.jarjestamistiedot.fields.diplomi',
-      'sections.jarjestamistiedot.fields.kielivalikoima',
-      'sections.nayttamistiedot',
-      'sections.lukiolinjat',
-    ]);
-  }
-
-  return pick(baseConfig, commonConfigPaths);
+  return config.getKoulutustyyppiConfig(koulutustyyppi);
 };
 
 export default getToteutusFormConfig;

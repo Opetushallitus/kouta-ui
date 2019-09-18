@@ -73,6 +73,7 @@ export const fillDateTimeInput = ({ date, time, cy }) => {
       .type(date, { force: true });
     getByTestId('DateTimeInput__Time', cy)
       .find('input')
+      .clear()
       .type(time, { force: true });
   });
 };

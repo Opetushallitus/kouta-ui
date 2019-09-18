@@ -5,7 +5,7 @@ import Radio, { RadioGroup } from '../Radio';
 import Checkbox from '../Checkbox';
 import CheckboxGroup from '../CheckboxGroup';
 import Textarea from '../Textarea';
-import Select from '../Select';
+import Select, { AsyncSelect } from '../Select';
 import DatePicker from '../DatePicker';
 import DatePickerInput from '../DatePickerInput';
 import DateTimeInput from '../DateTimeInput';
@@ -126,5 +126,15 @@ export const FormFieldDatePickerInput = createComponent(
 
 export const FormFieldPostinumeroSelect = createComponent(
   PostinumeroSelect,
+  selectMapProps,
+);
+
+export const FormFieldAsyncSelect = createComponent(
+  AsyncSelect,
+  selectMapProps,
+);
+
+export const FormFieldAsyncKoodistoSelect = createComponent(
+  AsyncSelect,
   selectMapProps,
 );

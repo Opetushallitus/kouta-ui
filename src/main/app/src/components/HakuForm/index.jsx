@@ -6,9 +6,6 @@ export const initialValues = {
   pohja: {
     tapa: POHJAVALINTA.UUSI,
   },
-  aikataulut: {
-    hakuaika: [{}],
-  },
 };
 
 export { default } from './HakuForm';

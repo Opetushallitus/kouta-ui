@@ -47,7 +47,7 @@ const parseValue = value => {
   if (!isString(value)) {
     return {
       date: undefined,
-      time: '',
+      time: '00:00',
     };
   }
 
@@ -57,7 +57,7 @@ const parseValue = value => {
 
   return {
     date: isValidDate(maybeDate) ? maybeDate : undefined,
-    time: timePart ? getTime(timePart) : '',
+    time: timePart ? getTime(timePart) : '00:00',
   };
 };
 

@@ -129,6 +129,7 @@ export const AsyncCreatableSelect = ({ error = false, ...props }) => {
   return (
     <ReactAsyncCreatableSelect
       {...getDefaultProps(t)}
+      placeholder={t('yleiset.kirjoitaHakusana')}
       styles={getStyles(theme, error)}
       theme={getTheme(theme)}
       cacheOptions={true}

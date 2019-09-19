@@ -16,7 +16,7 @@ import {
   FormFieldInput,
   FormFieldSelect,
   FormFieldTextarea,
-} from '../FormFields';
+} from '../formFields';
 
 const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
   <div {...getTestIdProps('valintatapalista')}>

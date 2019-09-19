@@ -9,7 +9,7 @@ import OpintojenlaajuusField from './OpintojenlaajuusField';
 import TutkintonimikeField from './TutkintonimikeField';
 import KoulutusalatField from './KoulutusalatField';
 import useTranslation from '../../useTranslation';
-import { FormFieldInput } from '../../FormFields';
+import { FormFieldInput } from '../../formFields';
 import { getTestIdProps } from '../../../utils';
 
 const TiedotSection = ({ language, koulutustyyppi, koulutuskoodi, name }) => {

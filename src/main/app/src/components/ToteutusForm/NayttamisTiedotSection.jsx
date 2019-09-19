@@ -9,7 +9,7 @@ import getAmmattinimikkeetByTerm from '../../utils/kouta/getAmmattinimikkeetByTe
 import getAvainsanatByTerm from '../../utils/kouta/getAvainsanatByTerm';
 import useTranslation from '../useTranslation';
 import { memoize, getTestIdProps, noop, isArray } from '../../utils';
-import { createFormFieldComponent } from '../FormFields';
+import { createFormFieldComponent } from '../formFields';
 
 const CreatableField = createFormFieldComponent(
   AsyncCreatableSelect,

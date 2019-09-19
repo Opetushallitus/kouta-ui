@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 
 import { getTestIdProps } from '../../../utils';
 import useTranslation from '../../useTranslation';
-import { FormFieldDatePickerInput } from '../../FormFields';
+import { FormFieldDatePickerInput } from '../../formFields';
 import Box from '../../Box';
 
 const AlkamiskausiFields = ({ name }) => {

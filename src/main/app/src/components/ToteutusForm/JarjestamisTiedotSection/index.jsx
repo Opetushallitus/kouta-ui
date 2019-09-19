@@ -26,7 +26,7 @@ import {
   FormFieldSelect,
   FormFieldInput,
   createFormFieldComponent,
-} from '../../FormFields';
+} from '../../formFields';
 
 const makeCountLimitOnChange = (onChange, max) => items =>
   isArray(items) && items.length <= max && onChange(items);

@@ -6,7 +6,7 @@ import Spacing from '../Spacing';
 import useTranslation from '../useTranslation';
 import useKoodistoOptions from '../useKoodistoOptions';
 import { getTestIdProps } from '../../utils';
-import { FormFieldTextarea, FormFieldSelect } from '../FormFields';
+import { FormFieldTextarea, FormFieldSelect } from '../formFields';
 import Typography from '../Typography';
 import useFieldValue from '../useFieldValue';
 

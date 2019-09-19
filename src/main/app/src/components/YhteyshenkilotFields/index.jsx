@@ -3,7 +3,7 @@ import { Field, FieldArray } from 'redux-form';
 
 import FieldArrayList from '../FieldArrayList';
 import Button from '../Button';
-import { FormFieldInput } from '../FormFields';
+import { FormFieldInput } from '../formFields';
 import Flex from '../Flex';
 import Spacing from '../Spacing';
 import useTranslation from '../useTranslation';

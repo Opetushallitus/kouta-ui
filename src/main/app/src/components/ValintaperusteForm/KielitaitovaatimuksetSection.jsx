@@ -19,7 +19,7 @@ import {
   FormFieldInput,
   FormFieldSelect,
   createFormFieldComponent,
-} from '../FormFields';
+} from '../formFields';
 
 const LanguageField = createFormFieldComponent(
   LanguageSelect,

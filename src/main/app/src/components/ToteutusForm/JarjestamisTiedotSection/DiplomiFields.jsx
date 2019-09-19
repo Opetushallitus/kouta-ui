@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 
 import useKoodistoOptions from '../../useKoodistoOptions';
 import useTranslation from '../../useTranslation';
-import { FormFieldTextarea, FormFieldSelect } from '../../FormFields';
+import { FormFieldTextarea, FormFieldSelect } from '../../formFields';
 import Box from '../../Box';
 import DividerHeading from '../../DividerHeading';
 import { getTestIdProps } from '../../../utils';

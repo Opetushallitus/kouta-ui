@@ -2,7 +2,7 @@ import React from 'react';
 import { Field } from 'redux-form';
 
 import useTranslation from '../useTranslation';
-import { FormFieldCheckbox } from '../FormFields';
+import { FormFieldCheckbox } from '../formFields';
 
 export const JulkisuusSection = ({ name }) => {
   const { t } = useTranslation();

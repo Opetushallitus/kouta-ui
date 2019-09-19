@@ -4,7 +4,7 @@ import get from 'lodash/get';
 import difference from 'lodash/difference';
 
 import useOrganisaatioHierarkia from '../useOrganisaatioHierarkia';
-import { FormFieldCheckboxGroup } from '../FormFields';
+import { FormFieldCheckboxGroup } from '../formFields';
 import { getFirstLanguageValue } from '../../utils';
 import useLanguage from '../useLanguage';
 import useTranslation from '../useTranslation';

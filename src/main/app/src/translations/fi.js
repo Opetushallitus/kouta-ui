@@ -165,6 +165,7 @@ export default {
     valitseJulkaisutila: 'Valitse julkaisutila',
     kirjoitaHakusana: 'Kirjoita hakusana',
     valitseVaihtoehdoista: 'Valitse vaihtoehdoista',
+    hakukohteet: 'Hakukohteet',
   },
   sivuTitlet: {
     etuliite: 'Tarjonta',
@@ -257,6 +258,15 @@ export default {
       'Organisaatioita ei löytynyt. Yritä käyttää pidempää hakusanaa',
     haeOrganisaatioita: 'Hae organisaatioita',
     rekisterinpitaja: 'Rekisterinpitäjä',
+    luoUusiToteutus: 'Luo uusi toteutus',
+    toteutuksenKoulutus: 'Toteutukseen liittyvä koulutus',
+    valitseToteutuksenKoulutus:
+      'Valitse, mihin koulutukseen toteutus liitetään',
+    luoUusiHakukohde: 'Luo uusi hakukohde',
+    hakukohteenToteutusJaHaku: 'Hakukohteeseen liittyvä toteutus ja haku',
+    valitseHakukohteenToteutus:
+      'Valitse, mihin toteutuksen hakukohde liitetään',
+    valitseHakukohteenHaku: 'Valitse, mihin hakuun hakukohde liitetään',
   },
   koulutuslomake: {
     koulutuksenTiedot: 'Koulutuksen tiedot',

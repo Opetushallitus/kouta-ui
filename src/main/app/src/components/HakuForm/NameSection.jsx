@@ -2,7 +2,7 @@ import React from 'react';
 import { Field } from 'redux-form';
 
 import useTranslation from '../useTranslation';
-import { FormFieldInput } from '../FormFields';
+import { FormFieldInput } from '../formFields';
 
 const NameSection = ({ language, name, ...props }) => {
   const { t } = useTranslation();

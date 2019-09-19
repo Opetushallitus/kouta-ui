@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
-import { FormFieldInput, FormFieldPostinumeroSelect } from '../FormFields';
+import { FormFieldInput, FormFieldPostinumeroSelect } from '../formFields';
 import useTranslation from '../useTranslation';
 import Typography from '../Typography';
 import Box from '../Box';

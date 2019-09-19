@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 
 import OrganisaatioHierarkiaTreeSelect from '../OrganisaatioHierarkiaTreeSelect';
 import useOrganisaatioHierarkia from '../useOrganisaatioHierarkia';
-import { createFormFieldComponent } from '../FormFields';
+import { createFormFieldComponent } from '../formFields';
 import { getTestIdProps } from '../../utils';
 import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
 import { TOTEUTUS_ROLE } from '../../constants';

@@ -2,7 +2,7 @@ import React from 'react';
 import { Field } from 'redux-form';
 
 import useTranslation from '../useTranslation';
-import { FormFieldTextarea } from '../FormFields';
+import { FormFieldTextarea } from '../formFields';
 
 const KuvausSection = ({ language, name }) => {
   const { t } = useTranslation();

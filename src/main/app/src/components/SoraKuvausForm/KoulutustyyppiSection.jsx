@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
-import { FormFieldKoulutustyyppiSelect } from '../FormFields';
+import { FormFieldKoulutustyyppiSelect } from '../formFields';
 import useTranslation from '../useTranslation';
 
 export const KoulutustyyppiSection = ({ name }) => {

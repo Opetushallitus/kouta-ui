@@ -1,12 +1,21 @@
 import { useMemo } from 'react';
 import debounce from 'debounce-promise';
 
+import { isString } from '../../utils';
+
 const getMatchingOptions = (options, input, maxMatches) => {
   let matches = [];
 
+  if (!isString(input)) {
+    return matches;
+  }
+
   // eslint-disable-next-line no-unused-vars
   for (const opt of options) {
-    if (opt.label && opt.label.indexOf(input) >= 0) {
+    if (
+      isString(opt.label) &&
+      opt.label.toLowerCase().indexOf(input.toLowerCase()) >= 0
+    ) {
       matches.push(opt);
     }
 

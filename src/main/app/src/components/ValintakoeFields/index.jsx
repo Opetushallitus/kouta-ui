@@ -16,7 +16,7 @@ import {
   FormFieldTextarea,
   FormFieldDateTimeInput,
   FormFieldPostinumeroSelect,
-} from '../FormFields';
+} from '../formFields';
 
 const TilaisuudetField = ({ fields, language, t }) => (
   <>

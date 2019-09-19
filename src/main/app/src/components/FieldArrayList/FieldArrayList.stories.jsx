@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { reduxForm, Field, FieldArray } from 'redux-form';
 
 import FieldArrayList from './index';
-import { FormFieldInput } from '../FormFields';
+import { FormFieldInput } from '../formFields';
 import Button from '../Button';
 import Spacing from '../Spacing';
 import Flex from '../Flex';

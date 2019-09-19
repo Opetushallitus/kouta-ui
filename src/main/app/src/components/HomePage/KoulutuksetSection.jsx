@@ -13,7 +13,6 @@ import Button from '../Button';
 import Pagination from '../Pagination';
 import Flex from '../Flex';
 import Spacing from '../Spacing';
-import DropdownIcon from '../DropdownIcon';
 import ListSpin from './ListSpin';
 import useApiAsync from '../useApiAsync';
 import getKoulutukset from '../../utils/koutaIndex/getKoulutukset';
@@ -25,8 +24,6 @@ import ErrorAlert from '../ErrorAlert';
 import { getFirstLanguageValue, getTestIdProps } from '../../utils';
 import useTranslation from '../useTranslation';
 import NavigationAnchor from './NavigationAnchor';
-
-import Dropdown, { DropdownMenu, DropdownMenuItem } from '../Dropdown';
 
 import Anchor from '../Anchor';
 import useInView from '../useInView';
@@ -45,42 +42,15 @@ const getKoulutuksetFn = async ({ httpClient, apiUrls, ...filters }) => {
   return { result, pageCount: Math.ceil(totalCount / 10) };
 };
 
-const LuoKoulutusDropdown = ({ organisaatioOid }) => {
+const Actions = ({ organisaatioOid }) => {
   const { t } = useTranslation();
 
-  const overlay = (
-    <DropdownMenu>
-      <DropdownMenuItem
-        as={Link}
-        to={`/organisaatio/${organisaatioOid}/koulutus?johtaaTutkintoon=true`}
-      >
-        {t('yleiset.tutkintoonJohtavaKoulutus')}
-      </DropdownMenuItem>
-      <DropdownMenuItem
-        as={Link}
-        to={`/organisaatio/${organisaatioOid}/koulutus?johtaaTutkintoon=false`}
-      >
-        {t('yleiset.tutkintoonJohtamatonKoulutus')}
-      </DropdownMenuItem>
-    </DropdownMenu>
-  );
-
   return (
-    <Dropdown overlay={overlay} portalTarget={document.body} overflow>
-      {({ ref, onToggle, open }) => (
-        <div ref={ref} onClick={onToggle}>
-          <Button>
-            {t('etusivu.luoUusiKoulutus')} <DropdownIcon open={open} />
-          </Button>
-        </div>
-      )}
-    </Dropdown>
+    <Button as={Link} to={`/organisaatio/${organisaatioOid}/koulutus`}>
+      {t('etusivu.luoUusiKoulutus')}
+    </Button>
   );
 };
-
-const Actions = ({ organisaatioOid }) => (
-  <LuoKoulutusDropdown organisaatioOid={organisaatioOid} />
-);
 
 const makeTableColumns = t => [
   {

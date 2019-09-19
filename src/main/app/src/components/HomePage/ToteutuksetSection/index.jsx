@@ -1,30 +1,32 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
-import ListCollapse from './ListCollapse';
+import ListCollapse from '../ListCollapse';
 
 import ListTable, {
   makeModifiedColumn,
   makeMuokkaajaColumn,
   makeTilaColumn,
-} from './ListTable';
+} from '../ListTable';
 
-import Pagination from '../Pagination';
-import Flex from '../Flex';
-import Spacing from '../Spacing';
-import ListSpin from './ListSpin';
-import useApiAsync from '../useApiAsync';
-import getToteutukset from '../../utils/koutaIndex/getToteutukset';
-import { getIndexParamsByFilters } from './utils';
-import Filters from './Filters';
-import Badge from '../Badge';
-import useFilterState from './useFilterState';
-import { getFirstLanguageValue, getTestIdProps } from '../../utils';
-import Anchor from '../Anchor';
-import ErrorAlert from '../ErrorAlert';
-import useTranslation from '../useTranslation';
-import useInView from '../useInView';
-import NavigationAnchor from './NavigationAnchor';
+import Pagination from '../../Pagination';
+import Box from '../../Box';
+import ListSpin from '../ListSpin';
+import useApiAsync from '../../useApiAsync';
+import getToteutukset from '../../../utils/koutaIndex/getToteutukset';
+import { getIndexParamsByFilters } from '../utils';
+import Filters from '../Filters';
+import Badge from '../../Badge';
+import useFilterState from '../useFilterState';
+import { getFirstLanguageValue, getTestIdProps } from '../../../utils';
+import Anchor from '../../Anchor';
+import ErrorAlert from '../../ErrorAlert';
+import useTranslation from '../../useTranslation';
+import useInView from '../../useInView';
+import NavigationAnchor from '../NavigationAnchor';
+import Button from '../../Button';
+import useModal from '../../useModal';
+import KoulutusModal from './KoulutusModal';
 
 const noopPromiseFn = () => Promise.resolve();
 
@@ -61,7 +63,23 @@ const makeTableColumns = t => [
   },
 ];
 
-const ToteutuksetSection = ({ organisaatioOid }) => {
+const Actions = ({ organisaatioOid }) => {
+  const { isOpen, close, open } = useModal();
+  const { t } = useTranslation();
+
+  return (
+    <>
+      <KoulutusModal
+        open={isOpen}
+        organisaatioOid={organisaatioOid}
+        onClose={close}
+      />
+      <Button onClick={open}>{t('etusivu.luoUusiToteutus')}</Button>
+    </>
+  );
+};
+
+const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
   const [ref, inView] = useInView({ threshold: 0.25, triggerOnce: true });
@@ -115,16 +133,19 @@ const ToteutuksetSection = ({ organisaatioOid }) => {
       <ListCollapse
         icon="settings"
         header={t('yleiset.toteutukset')}
+        actions={
+          canCreate ? <Actions organisaatioOid={organisaatioOid} /> : null
+        }
         defaultOpen
       >
         <div ref={ref} />
 
-        <Spacing marginBottom={3}>
+        <Box mb={3}>
           <Filters
             {...filtersProps}
             nimiPlaceholder={t('etusivu.haeToteutuksia')}
           />
-        </Spacing>
+        </Box>
 
         {rows ? (
           <ListTable
@@ -140,9 +161,9 @@ const ToteutuksetSection = ({ organisaatioOid }) => {
           <ListSpin />
         )}
 
-        <Flex marginTop={3} justifyCenter>
+        <Box mt={3} display="flex" justifyContent="center">
           <Pagination value={page} onChange={setPage} pageCount={pageCount} />
-        </Flex>
+        </Box>
       </ListCollapse>
     </>
   );

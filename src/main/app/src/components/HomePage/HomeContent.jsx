@@ -15,11 +15,13 @@ import Navigation from './Navigation';
 import Container from '../Container';
 import Box from '../Box';
 import NavigationProvider from './NavigationProvider';
+import HakukohteetSection from './HakukohteetSection';
 
 import {
   KOULUTUS_ROLE,
   TOTEUTUS_ROLE,
   HAKU_ROLE,
+  HAKUKOHDE_ROLE,
   VALINTAPERUSTE_ROLE,
 } from '../../constants';
 
@@ -64,6 +66,14 @@ const HomeContent = ({
     return roleBuilder.hasRead(HAKU_ROLE, organisaatio).result();
   }, [roleBuilder, organisaatio]);
 
+  const hasHakukohdeReadRole = useMemo(() => {
+    return roleBuilder.hasRead(HAKUKOHDE_ROLE, organisaatio).result();
+  }, [roleBuilder, organisaatio]);
+
+  const hasHakukohdeWriteRole = useMemo(() => {
+    return roleBuilder.hasCreate(HAKUKOHDE_ROLE, organisaatio).result();
+  }, [roleBuilder, organisaatio]);
+
   const hasValintaperusteWriteRole = useMemo(() => {
     return roleBuilder.hasCreate(VALINTAPERUSTE_ROLE, organisaatio).result();
   }, [roleBuilder, organisaatio]);
@@ -88,6 +98,12 @@ const HomeContent = ({
     hasHakuReadRole && (
       <HautSection
         canCreate={hasHakuWriteRole}
+        organisaatioOid={organisaatioOid}
+      />
+    ),
+    hasHakukohdeReadRole && (
+      <HakukohteetSection
+        canCreate={hasHakukohdeWriteRole}
         organisaatioOid={organisaatioOid}
       />
     ),

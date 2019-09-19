@@ -1,7 +1,7 @@
 import React, { useMemo, Fragment } from 'react';
 import { Field } from 'redux-form';
 
-import { FormFieldTextarea, FormFieldSelect } from '../FormFields';
+import { FormFieldTextarea, FormFieldSelect } from '../formFields';
 import useTranslation from '../useTranslation';
 import useFieldValue from '../useFieldValue';
 import useKoodistoOptions from '../useKoodistoOptions';

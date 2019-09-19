@@ -6,7 +6,7 @@ import KoulutusSelect from '../KoulutusSelect';
 import { getKoulutusByKoodi } from '../../../apiUtils';
 import { getLanguageValue, getTestIdProps, noop } from '../../../utils';
 import useTranslation from '../../useTranslation';
-import { createFormFieldComponent } from '../../FormFields';
+import { createFormFieldComponent } from '../../formFields';
 import useApiAsync from '../../useApiAsync';
 import Box from '../../Box';
 

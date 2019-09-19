@@ -67,6 +67,7 @@ const getAnchorLabelById = (id, t) => {
     koulutukset: t('yleiset.koulutukset'),
     toteutukset: t('yleiset.toteutukset'),
     haut: t('yleiset.haut'),
+    hakukohteet: t('yleiset.hakukohteet'),
     valintaperusteet: t('yleiset.valintaperusteet'),
   }[id];
 };

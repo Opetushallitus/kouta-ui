@@ -6,7 +6,7 @@ import {
   FormFieldInput,
   FormFieldRadioGroup,
   FormFieldTextarea,
-} from '../FormFields';
+} from '../formFields';
 
 import { HAKULOMAKETYYPPI } from '../../constants';
 import Spacing from '../Spacing';

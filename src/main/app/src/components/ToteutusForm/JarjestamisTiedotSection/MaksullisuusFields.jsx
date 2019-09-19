@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
 
-import { FormFieldRadioGroup, FormFieldInput } from '../../FormFields';
+import { FormFieldRadioGroup, FormFieldInput } from '../../formFields';
 import InputIcon from '../../InputIcon';
 import useTranslation from '../../useTranslation';
 import Spacing from '../../Spacing';

@@ -21,7 +21,7 @@ import AbstractCollapse from '../AbstractCollapse';
 import Icon from '../Icon';
 import { getThemeProp } from '../../theme';
 import useTranslation from '../useTranslation';
-import { FormFieldInput } from '../FormFields';
+import { FormFieldInput } from '../formFields';
 import useFieldValue from '../useFieldValue';
 
 const Container = styled.div`

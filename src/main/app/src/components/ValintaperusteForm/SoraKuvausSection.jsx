@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
-import { FormFieldSoraKuvausSelect } from '../FormFields';
+import { FormFieldSoraKuvausSelect } from '../formFields';
 import useTranslation from '../useTranslation';
 import Spacing from '../Spacing';
 import Button from '../Button';

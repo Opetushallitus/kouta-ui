@@ -4,7 +4,7 @@ import { Field } from 'redux-form';
 import Spacing from '../Spacing';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
-import { FormFieldInput } from '../FormFields';
+import { FormFieldInput } from '../formFields';
 
 const YhteystiedotSection = ({ language }) => {
   const { t } = useTranslation();

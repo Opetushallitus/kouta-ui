@@ -6,7 +6,7 @@ import { getKoutaValintaperusteet } from '../../apiUtils';
 import { getFirstLanguageValue } from '../../utils';
 import useTranslation from '../useTranslation';
 import useApiAsync from '../useApiAsync';
-import { FormFieldSelect } from '../FormFields';
+import { FormFieldSelect } from '../formFields';
 
 const getValintaperusteet = async ({
   httpClient,

@@ -139,10 +139,10 @@ export const KoulutustyyppiSelect = ({ value, onChange, error }) => {
             value="tutkintoon_johtavat"
             onClick={onTutkintoonJohtavatClick}
           >
-            Tutkintoon johtavat
+            {t('koulutustyyppivalikko.tutkintoonJohtavatKoulutustyypit')}
           </SegmentTab>
           <SegmentTab value="muut" onClick={onMuutClick}>
-            Muut
+            {t('koulutustyyppivalikko.muutKoulutustyypit')}
           </SegmentTab>
         </SegmentTabs>
       </Box>

@@ -233,6 +233,10 @@ export default {
     yo: 'Yliopistokoulutus',
     amk: 'AMK',
   },
+  koulutustyyppivalikko: {
+    muutKoulutustyypit: 'Muut',
+    tutkintoonJohtavatKoulutustyypit: 'Tutkintoon johtavat',
+  },
   liitteenToimitustapaValinnat: {
     valitseToimitustapa: 'Valitse liitteen toimitustapa',
     toimitetaanLahettamisenYhteydessa:

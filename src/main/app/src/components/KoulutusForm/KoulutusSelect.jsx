@@ -50,6 +50,8 @@ const KoulutusSelect = ({
     return data ? getOptions(data) : [];
   }, [data]);
 
+  console.log(options);
+
   return <Select {...props} value={value} options={options} />;
 };
 

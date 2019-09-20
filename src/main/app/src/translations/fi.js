@@ -13,6 +13,8 @@ export default {
     tyhjennaTiedot: 'Tyhjennä tiedot',
     etusivulle: 'Etusivulle',
     eiValittaviaKohteita: 'Valittavia kohteita ei löytynyt',
+    eiValittaviaKohteitaHakusanalla:
+      'Hakusanallasi ei löytynyt valittavia kohteita',
     luoKohde: 'Luo kohde "{{kohde}}"',
     yritaUudelleen: 'Yritä uudelleen',
     virheilmoitus: 'Jokin meni vikaan',
@@ -279,7 +281,7 @@ export default {
     koulutuksenJarjestaja: 'Koulutuksen järjestävä organisaatio',
     valitseJarjestajat:
       'Valitse ne organisaatiot, jotka järjestävät koulutusta',
-    valitseKoulutus: 'Valitse koulutus listasta',
+    valitseKoulutus: 'Valitse koulutus',
     valitseKoulutuskoodi: 'Valitse koulutuskoodi',
     valitseTutkintonimike: 'Valitse tutkintonimike',
     valitseOpintojenLaajuus: 'Valitse opintojenlaajuus',

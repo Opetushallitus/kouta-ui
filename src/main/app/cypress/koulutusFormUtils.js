@@ -99,6 +99,7 @@ export const stubKoulutusFormRoutes = ({ cy, organisaatioOid }) => {
   stubKoodistoRoute({ koodisto: 'tutkintonimikekk', cy });
   stubKoodistoRoute({ koodisto: 'opintojenlaajuus', cy });
   stubKoodistoRoute({ koodisto: 'koulutuksenlisatiedot', cy });
+  stubKoodistoRoute({ koodisto: 'koulutus', cy });
 
   stubKoodistoRoute({
     koodisto: 'kansallinenkoulutusluokitus2016koulutusalataso2',

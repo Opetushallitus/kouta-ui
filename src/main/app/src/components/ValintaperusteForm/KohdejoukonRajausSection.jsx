@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 
 import useKoodistoOptions from '../useKoodistoOptions';
 import useTranslation from '../useTranslation';
-import { FormFieldSelect } from '../FormFields';
+import { FormFieldSelect } from '../formFields';
 
 const KohdejoukonRajausSection = ({ name }) => {
   const { options } = useKoodistoOptions({ koodisto: 'haunkohdejoukko' });

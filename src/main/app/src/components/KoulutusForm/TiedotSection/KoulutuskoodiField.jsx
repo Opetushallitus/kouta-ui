@@ -4,7 +4,7 @@ import { Field } from 'redux-form';
 import KoulutusSelect from '../KoulutusSelect';
 import useTranslation from '../../useTranslation';
 import { getTestIdProps } from '../../../utils';
-import { createFormFieldComponent, selectMapProps } from '../../FormFields';
+import { createFormFieldComponent, selectMapProps } from '../../formFields';
 
 const KoulutusField = createFormFieldComponent(KoulutusSelect, selectMapProps);
 

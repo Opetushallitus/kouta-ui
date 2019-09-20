@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
-import { FormFieldEditor } from '../FormFields';
+import { FormFieldEditor } from '../formFields';
 import useTranslation from '../useTranslation';
 
 const EsittelySection = ({ name, language }) => {

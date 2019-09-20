@@ -3,7 +3,7 @@ import { Field, FieldArray } from 'redux-form';
 
 import FieldArrayList from '../FieldArrayList';
 import Button from '../Button';
-import { FormFieldInput, FormFieldTextarea } from '../FormFields';
+import { FormFieldInput, FormFieldTextarea } from '../formFields';
 import Box from '../Box';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';

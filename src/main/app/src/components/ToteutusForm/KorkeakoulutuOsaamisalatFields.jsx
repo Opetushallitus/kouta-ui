@@ -6,7 +6,7 @@ import Spacing from '../Spacing';
 import Flex, { FlexItem } from '../Flex';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
-import { FormFieldInput, FormFieldTextarea } from '../FormFields';
+import { FormFieldInput, FormFieldTextarea } from '../formFields';
 import FieldArrayList from '../FieldArrayList';
 
 const OsaamisalatFieldArray = ({ fields, language, t }) => (

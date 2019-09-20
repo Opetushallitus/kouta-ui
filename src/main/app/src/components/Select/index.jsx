@@ -14,7 +14,7 @@ import UiSelect, {
 import get from 'lodash/get';
 
 import memoizeOne from '../../utils/memoizeOne';
-import { isArray, isString, isObject, isFunction } from '../../utils';
+import { isArray, isObject, isFunction } from '../../utils';
 import useTranslation from '../useTranslation';
 
 const noopPromise = () => Promise.resolve();
@@ -38,6 +38,10 @@ const getDefaultProps = memoizeOne(t => ({
 }));
 
 const getOptionLabelByValue = options => {
+  if (!isArray(options)) {
+    return {};
+  }
+
   return options.reduce((acc, curr) => {
     acc[curr.value || '_'] = curr.label;
 
@@ -48,32 +52,26 @@ const getOptionLabelByValue = options => {
 const getValue = (value, options) => {
   const hasOptions = isArray(options);
 
-  if (isString(value)) {
-    return options.find(option => get(option, 'value') === value) || value;
+  if (isObject(value) && value.value) {
+    return hasOptions
+      ? options.find(option => get(option, 'value') === value.value) || {
+          label: value.value,
+          ...value,
+        }
+      : { label: value.value, ...value };
   }
 
-  if (isObject(value) && value.value && hasOptions) {
-    return !value.label
-      ? options.find(option => get(option, 'value') === value.value) || null
-      : value;
-  }
-
-  if (isArray(value) && hasOptions) {
+  if (isArray(value)) {
     const labelByValue = getOptionLabelByValue(options);
 
     return value
       .map(item => {
-        if (isString(item)) {
-          return {
-            value: item,
-            label: labelByValue[item] || ' ',
-          };
-        } else if (isObject(item)) {
+        if (isObject(item) && item.value) {
           const { value: itemValue, label: itemLabel, ...rest } = item;
 
           return {
             value: itemValue,
-            label: itemLabel || labelByValue[itemValue] || ' ',
+            label: itemLabel || labelByValue[itemValue] || itemValue,
             ...rest,
           };
         }
@@ -129,6 +127,7 @@ export const AsyncCreatableSelect = ({ error = false, ...props }) => {
   return (
     <ReactAsyncCreatableSelect
       {...getDefaultProps(t)}
+      placeholder={t('yleiset.kirjoitaHakusana')}
       styles={getStyles(theme, error)}
       theme={getTheme(theme)}
       cacheOptions={true}

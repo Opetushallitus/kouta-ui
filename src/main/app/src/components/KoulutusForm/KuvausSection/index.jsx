@@ -4,7 +4,7 @@ import { Field } from 'redux-form';
 import FormConfigField from '../../FormConfigField';
 import Box from '../../Box';
 import TekstiKuvausSection from './TekstiKuvausSection';
-import { FormFieldInput, FormFieldTextarea } from '../../FormFields';
+import { FormFieldInput, FormFieldTextarea } from '../../formFields';
 import useTranslation from '../../useTranslation';
 import { getTestIdProps } from '../../../utils';
 

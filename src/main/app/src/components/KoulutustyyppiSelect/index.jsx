@@ -5,16 +5,20 @@ import camelCase from 'lodash/camelCase';
 import {
   TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
   TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
+  TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
+  KOULUTUSTYYPPI,
 } from '../../constants';
 
 import { RadioGroup } from '../Radio';
 import { isArray, getTestIdProps } from '../../utils';
 import isEmpty from '../../utils/isEmpty';
-import Flex, { FlexItem } from '../Flex';
+import Box from '../Box';
 import { spacing, getThemeProp } from '../../theme';
 import useTranslation from '../useTranslation';
+import SegmentTabs from '../SegmentTabs';
+import SegmentTab from '../SegmentTab';
 
-const SecondLevelContainer = styled(FlexItem).attrs({ grow: 0 })`
+const SecondLevelContainer = styled(Box).attrs({ flexGrow: 0 })`
   margin-left: ${spacing(4)};
   padding-left: ${spacing(4)};
   border-left: 1px solid ${getThemeProp('palette.divider')};
@@ -58,12 +62,11 @@ const getFirstLevelValue = (hierarkia, value) => {
   return node ? node.tyyppi : undefined;
 };
 
-export const KoulutustyyppiSelect = ({
-  johtaaTutkintoon = true,
-  value,
-  onChange,
-  error,
-}) => {
+export const KoulutustyyppiSelect = ({ value, onChange, error }) => {
+  const [johtaaTutkintoon, setJohtaaTutkintoon] = useState(
+    TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT.includes(value),
+  );
+
   const [firstLevelValue, setFirstLevelValue] = useState();
   const { t } = useTranslation();
 
@@ -72,6 +75,10 @@ export const KoulutustyyppiSelect = ({
       ? TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA
       : TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA;
   }, [johtaaTutkintoon]);
+
+  useEffect(() => {
+    setJohtaaTutkintoon(TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT.includes(value));
+  }, [value]);
 
   useEffect(() => {
     setFirstLevelValue(getFirstLevelValue(hierarkia, value));
@@ -94,7 +101,9 @@ export const KoulutustyyppiSelect = ({
       setFirstLevelValue(node.tyyppi);
 
       if (isEmpty(node.children)) {
-        onChange(e);
+        onChange(e.target.value);
+      } else {
+        onChange(node.children[0].tyyppi);
       }
     },
     [setFirstLevelValue, onChange, hierarkia],
@@ -102,27 +111,62 @@ export const KoulutustyyppiSelect = ({
 
   const hasSecondLevelOptions = !isEmpty(secondLevelOptions);
 
+  const onTutkintoonJohtavatClick = useCallback(() => {
+    if (!johtaaTutkintoon) {
+      onChange(KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS);
+    }
+
+    setJohtaaTutkintoon(true);
+  }, [onChange, johtaaTutkintoon]);
+
+  const onMuutClick = useCallback(() => {
+    if (johtaaTutkintoon) {
+      onChange(KOULUTUSTYYPPI.VALMA);
+    }
+
+    setJohtaaTutkintoon(false);
+  }, [onChange, johtaaTutkintoon]);
+
+  const onSecondLevelValueChange = useCallback(e => onChange(e.target.value), [
+    onChange,
+  ]);
+
   return (
-    <Flex>
-      <FlexItem grow={0} {...getTestIdProps('koulutustyyppi_taso_1')}>
-        <RadioGroup
-          options={firstLevelOptions}
-          value={firstLevelValue}
-          onChange={onFirstLevelValueChange}
-          error={error}
-        />
-      </FlexItem>
-      {hasSecondLevelOptions && (
-        <SecondLevelContainer {...getTestIdProps('koulutustyyppi_taso_2')}>
+    <>
+      <Box mb={2}>
+        <SegmentTabs value={johtaaTutkintoon ? 'tutkintoon_johtavat' : 'muut'}>
+          <SegmentTab
+            value="tutkintoon_johtavat"
+            onClick={onTutkintoonJohtavatClick}
+          >
+            {t('koulutustyyppivalikko.tutkintoonJohtavatKoulutustyypit')}
+          </SegmentTab>
+          <SegmentTab value="muut" onClick={onMuutClick}>
+            {t('koulutustyyppivalikko.muutKoulutustyypit')}
+          </SegmentTab>
+        </SegmentTabs>
+      </Box>
+      <Box display="flex">
+        <Box flexGrow={0} {...getTestIdProps('koulutustyyppi_taso_1')}>
           <RadioGroup
-            options={secondLevelOptions}
-            value={value}
-            onChange={onChange}
+            options={firstLevelOptions}
+            value={firstLevelValue}
+            onChange={onFirstLevelValueChange}
             error={error}
           />
-        </SecondLevelContainer>
-      )}
-    </Flex>
+        </Box>
+        {hasSecondLevelOptions && (
+          <SecondLevelContainer {...getTestIdProps('koulutustyyppi_taso_2')}>
+            <RadioGroup
+              options={secondLevelOptions}
+              value={value}
+              onChange={onSecondLevelValueChange}
+              error={error}
+            />
+          </SecondLevelContainer>
+        )}
+      </Box>
+    </>
   );
 };
 

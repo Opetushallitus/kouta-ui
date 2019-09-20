@@ -4,7 +4,7 @@ import { setLightness } from 'polished';
 import styled from 'styled-components';
 
 import Radio from '../Radio';
-import { FormFieldRadioGroup } from '../FormFields';
+import { FormFieldRadioGroup } from '../formFields';
 import useTranslation from '../useTranslation';
 import { JULKAISUTILA } from '../../constants';
 import Box from '../Box';

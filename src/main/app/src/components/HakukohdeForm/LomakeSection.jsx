@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 import get from 'lodash/get';
 
 import LomakeFields from '../LomakeFields';
-import { FormFieldCheckbox } from '../FormFields';
+import { FormFieldCheckbox } from '../formFields';
 import useTranslation from '../useTranslation';
 import Spacing from '../Spacing';
 import { getTestIdProps } from '../../utils';

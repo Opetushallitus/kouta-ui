@@ -83,7 +83,7 @@ describe('frontPage', () => {
       .should('contain', 'Koulutukset')
       .should('contain', 'Toteutukset')
       .should('contain', 'Haut')
-      .should('contain', 'Valintaperusteet');
+      .should('contain', 'Hakukohteet');
   });
 
   it('should list koulutukset', () => {

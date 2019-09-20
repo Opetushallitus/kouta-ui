@@ -4,7 +4,7 @@ import { Field } from 'redux-form';
 import useKoodistoOptions from '../useKoodistoOptions';
 import { getTestIdProps } from '../../utils';
 import useTranslation from '../useTranslation';
-import { FormFieldSelect } from '../FormFields';
+import { FormFieldSelect } from '../formFields';
 
 const PohjakoulutusSection = ({ name }) => {
   const { options } = useKoodistoOptions({

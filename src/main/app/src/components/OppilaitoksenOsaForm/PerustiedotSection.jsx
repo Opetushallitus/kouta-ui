@@ -10,7 +10,7 @@ import useTranslation from '../useTranslation';
 import Typography from '../Typography';
 import Box from '../Box';
 import DividerHeading from '../DividerHeading';
-import { FormFieldInput } from '../FormFields';
+import { FormFieldInput } from '../formFields';
 import useKoodiNimet from '../useKoodiNimet';
 
 const InfoLabel = props => (

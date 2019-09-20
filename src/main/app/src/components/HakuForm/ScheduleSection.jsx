@@ -13,7 +13,7 @@ import {
   FormFieldDateTimeInput,
   FormFieldRadioGroup,
   FormFieldYearSelect,
-} from '../FormFields';
+} from '../formFields';
 
 const renderHakuajatFields = ({ fields, t }) => {
   return (

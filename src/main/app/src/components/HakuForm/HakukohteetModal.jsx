@@ -9,7 +9,7 @@ import { getFirstLanguageValue } from '../../utils';
 import Spacing from '../Spacing';
 import useApiAsync from '../useApiAsync';
 import useTranslation from '../useTranslation';
-import { FormFieldSelect } from '../FormFields';
+import { FormFieldSelect } from '../formFields';
 import useFieldValue from '../useFieldValue';
 
 const getToteutusOptions = toteutukset => {

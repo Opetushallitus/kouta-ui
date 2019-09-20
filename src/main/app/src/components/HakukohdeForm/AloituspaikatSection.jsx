@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 
 import Flex, { FlexItem } from '../Flex';
 import useTranslation from '../useTranslation';
-import { FormFieldInput } from '../FormFields';
+import { FormFieldInput } from '../formFields';
 import isKorkeakouluKoulutustyyppi from '../../utils/isKorkeakouluKoulutustyyppi';
 import FormLabel from '../FormLabel';
 import { getTestIdProps } from '../../utils';

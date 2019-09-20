@@ -6,7 +6,7 @@ import useKoodistoOptions from '../../useKoodistoOptions';
 import {
   FormFieldSelect,
   FormFieldAsyncKoodistoSelect,
-} from '../../FormFields';
+} from '../../formFields';
 
 import Box from '../../Box';
 import FieldArrayList from '../../FieldArrayList';

@@ -9,6 +9,7 @@ import OppilaitosForm, {
 
 import getFormValuesByOppilaitos from '../../utils/getFormValuesByOppilaitos';
 import getOrganisaatioContactInfo from '../../utils/getOrganisaatioContactInfo';
+import koodiUriHasVersion from '../../utils/koodiUriHasVersion';
 
 const OppilaitosPageForm = ({ organisaatio, oppilaitos }) => {
   const organisaatioOid = get(organisaatio, 'oid');
@@ -23,7 +24,11 @@ const OppilaitosPageForm = ({ organisaatio, oppilaitos }) => {
       yhteystiedot: {
         osoite: contactInfo.osoite || {},
         postinumero: contactInfo.postinumeroKoodiUri
-          ? { value: contactInfo.postinumeroKoodiUri }
+          ? {
+              value: koodiUriHasVersion(contactInfo.postinumeroKoodiUri)
+                ? contactInfo.postinumeroKoodiUri
+                : `${contactInfo.postinumeroKoodiUri}#2`,
+            }
           : undefined,
         verkkosivu: contactInfo.verkkosivu || '',
         puhelinnumero: contactInfo.puhelinnumero || '',

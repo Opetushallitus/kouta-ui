@@ -2,7 +2,7 @@ import React from 'react';
 import { Field } from 'redux-form';
 
 import { Radio } from '../Radio';
-import { FormFieldSelect } from '../FormFields';
+import { FormFieldSelect } from '../formFields';
 import { POHJAVALINTA } from '../../constants';
 import Spacing from '../Spacing';
 

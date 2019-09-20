@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 
 import useKoodistoOptions from '../useKoodistoOptions';
 import useTranslation from '../useTranslation';
-import { FormFieldSelect } from '../FormFields';
+import { FormFieldSelect } from '../formFields';
 
 const OsaamistaustaSection = ({ name }) => {
   const { options } = useKoodistoOptions({ koodisto: 'osaamistausta' });

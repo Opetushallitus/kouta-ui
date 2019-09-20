@@ -5,7 +5,7 @@ import useKoodistoOptions from '../../useKoodistoOptions';
 import useTranslation from '../../useTranslation';
 import { getTestIdProps } from '../../../utils';
 
-import { FormFieldSelect } from '../../FormFields';
+import { FormFieldSelect } from '../../formFields';
 
 export const OpintojenlaajuusField = ({ name }) => {
   const { options: laajuusOptions } = useKoodistoOptions({

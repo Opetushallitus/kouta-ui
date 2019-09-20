@@ -22,7 +22,7 @@ import {
   FormFieldCheckbox,
   FormFieldRadioGroup,
   FormFieldPostinumeroSelect,
-} from '../FormFields';
+} from '../formFields';
 
 const ContactInfo = ({
   osoite,

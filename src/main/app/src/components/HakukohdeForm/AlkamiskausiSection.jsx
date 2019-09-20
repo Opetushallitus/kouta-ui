@@ -10,7 +10,7 @@ import {
   FormFieldRadioGroup,
   FormFieldYearSelect,
   FormFieldCheckbox,
-} from '../FormFields';
+} from '../formFields';
 
 import useKoodiNimi from '../useKoodiNimi';
 import Typography from '../Typography';

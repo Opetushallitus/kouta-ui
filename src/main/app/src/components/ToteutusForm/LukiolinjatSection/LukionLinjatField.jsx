@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
-import { FormFieldSelect } from '../../FormFields';
+import { FormFieldSelect } from '../../formFields';
 import useKoodistoOptions from '../../useKoodistoOptions';
 import useTranslation from '../../useTranslation';
 import { getTestIdProps } from '../../../utils';

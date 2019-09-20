@@ -5,7 +5,7 @@ import Spacing from '../Spacing';
 import isAmmatillinenKoulutustyyppi from '../../utils/isAmmatillinenKoulutustyyppi';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
-import { FormFieldCheckbox, FormFieldInput } from '../FormFields';
+import { FormFieldCheckbox, FormFieldInput } from '../formFields';
 import Divider from '../Divider';
 import HakuajatSection from './HakuajatSection';
 import AlkamiskausiSection from './AlkamiskausiSection';

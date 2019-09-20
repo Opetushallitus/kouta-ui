@@ -5,7 +5,7 @@ import { Field } from 'redux-form';
 import useKoodistoOptions from '../useKoodistoOptions';
 import useFieldValue from '../useFieldValue';
 import isKorkeakoulutusKohdejoukkoKoodiUri from '../../utils/isKorkeakoulutusKohdejoukkoKoodiUri';
-import { FormFieldRadioGroup, FormFieldSelect } from '../FormFields';
+import { FormFieldRadioGroup, FormFieldSelect } from '../formFields';
 import useTranslation from '../useTranslation';
 import { getThemeProp, spacing } from '../../theme';
 import { getTestIdProps } from '../../utils';

@@ -7,7 +7,7 @@ import Button from '../Button';
 import { isArray, formatKoutaDateString, getTestIdProps } from '../../utils';
 import useTranslation from '../useTranslation';
 import Flex, { FlexItem } from '../Flex';
-import { FormFieldDateTimeInput, FormFieldCheckbox } from '../FormFields';
+import { FormFieldDateTimeInput, FormFieldCheckbox } from '../formFields';
 import useFieldValue from '../useFieldValue';
 
 const HakuaikaInterval = ({ haku }) => {

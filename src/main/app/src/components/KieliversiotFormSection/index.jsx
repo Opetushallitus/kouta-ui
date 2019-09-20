@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { Field } from 'redux-form';
 
-import { FormFieldCheckboxGroup } from '../FormFields';
+import { FormFieldCheckboxGroup } from '../formFields';
 import useTranslation from '../useTranslation';
 
 const getOptions = t => [

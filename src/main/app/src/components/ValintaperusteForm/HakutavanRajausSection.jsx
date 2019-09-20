@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 
 import useTranslation from '../useTranslation';
 import useKoodistoOptions from '../useKoodistoOptions';
-import { FormFieldRadioGroup } from '../FormFields';
+import { FormFieldRadioGroup } from '../formFields';
 
 const HakutavanRajausSection = ({ name }) => {
   const { t } = useTranslation();

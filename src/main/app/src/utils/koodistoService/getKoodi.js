@@ -1,3 +1,5 @@
+const isNullish = value => value === undefined || value === null;
+
 const getKoodi = async ({
   apiUrls,
   httpClient,
@@ -9,7 +11,7 @@ const getKoodi = async ({
     apiUrls.url(
       'koodisto-service.codeelement',
       koodi,
-      versio !== undefined ? versio : '',
+      !isNullish(versio) ? versio : '',
     ),
     {
       errorNotifier: {

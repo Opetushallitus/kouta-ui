@@ -1,12 +1,10 @@
 import React, { useMemo } from 'react';
-import { Field } from 'redux-form';
 
 import Typography from '../../Typography';
-import KoulutusSelect from '../KoulutusSelect';
+import KoulutusField from '../KoulutusField';
 import { getKoulutusByKoodi } from '../../../apiUtils';
-import { getLanguageValue, getTestIdProps, noop } from '../../../utils';
+import { getLanguageValue, getTestIdProps } from '../../../utils';
 import useTranslation from '../../useTranslation';
-import { createFormFieldComponent } from '../../formFields';
 import useApiAsync from '../../useApiAsync';
 import Box from '../../Box';
 
@@ -38,15 +36,6 @@ const InfoRow = ({ title, description }) => {
     </Box>
   );
 };
-
-const KoulutusField = createFormFieldComponent(
-  KoulutusSelect,
-  ({ input, ...props }) => ({
-    ...input,
-    onBlur: noop,
-    ...props,
-  }),
-);
 
 const KoulutusInfo = ({
   koulutusKoodiUri,
@@ -111,7 +100,11 @@ const KoulutusInfo = ({
       {visibleInfoFields.includes('laajuus') && (
         <InfoRow
           title={t('yleiset.laajuus')}
-          description={<>{opintojenlaajuus} {opintojenlaajuusYksikko}</>}
+          description={
+            <>
+              {opintojenlaajuus} {opintojenlaajuusYksikko}
+            </>
+          }
         />
       )}
     </>
@@ -143,7 +136,7 @@ const KoulutuksenTiedotSection = ({
       <Box display="flex">
         <Box flexGrow={1} width={0.4}>
           <div {...getTestIdProps('koulutustyyppiSelect')}>
-            <Field
+            <KoulutusField
               name={`${name}.koulutus`}
               component={KoulutusField}
               koulutustyyppi={koulutustyyppi}

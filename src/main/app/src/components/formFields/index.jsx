@@ -18,6 +18,7 @@ import KoulutustyyppiSelect from '../KoulutustyyppiSelect';
 import SoraKuvausSelect from '../SoraKuvausSelect';
 import LanguageSelect from '../LanguageSelect';
 import PostinumeroSelect from '../PostinumeroSelect';
+import AsyncKoodistoSelect from '../AsyncKoodistoSelect';
 
 export const simpleMapProps = ({ meta, input, ...props }) => ({
   ...input,
@@ -135,6 +136,6 @@ export const FormFieldAsyncSelect = createComponent(
 );
 
 export const FormFieldAsyncKoodistoSelect = createComponent(
-  AsyncSelect,
+  AsyncKoodistoSelect,
   selectMapProps,
 );

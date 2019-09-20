@@ -24,7 +24,7 @@ const AsyncKoodistoSelect = ({ formatLabel: formatLabelProp, ...props }) => {
     async value => {
       const { koodi, versio } = parseKoodiUri(value);
 
-      if (!koodi || !versio) {
+      if (!koodi) {
         return undefined;
       }
 

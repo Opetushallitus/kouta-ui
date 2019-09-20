@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 
 import FormConfigField from '../../FormConfigField';
 import KoulutuksenTiedotSection from './KoulutuksenTiedotSection';
-import KoulutusKoodiField from './KoulutuskoodiField';
+import KoulutusField from '../KoulutusField';
 import Box from '../../Box';
 import OpintojenlaajuusField from './OpintojenlaajuusField';
 import TutkintonimikeField from './TutkintonimikeField';
@@ -42,8 +42,11 @@ const TiedotSection = ({ language, koulutustyyppi, koulutuskoodi, name }) => {
       </FormConfigField>
 
       <FormConfigField name="koulutuskoodi">
-        <Box mb={2}>
-          <KoulutusKoodiField name={name} koulutustyyppi={koulutustyyppi} />
+        <Box mb={2} {...getTestIdProps('koulutuskoodiSelect')}>
+          <KoulutusField
+            name={`${name}.koulutus`}
+            koulutustyyppi={koulutustyyppi}
+          />
         </Box>
       </FormConfigField>
 

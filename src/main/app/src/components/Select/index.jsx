@@ -1,4 +1,4 @@
-import React, { useMemo, useContext, useRef } from 'react';
+import React, { useMemo, useContext, useRef, useCallback } from 'react';
 import ReactCreatable from 'react-select/lib/Creatable';
 import ReactAsyncCreatableSelect from 'react-select/lib/AsyncCreatable';
 import ReactAsyncSelect from 'react-select/lib/Async';
@@ -106,7 +106,7 @@ const Select = ({ theme, value, options, id, error = false, ...props }) => {
   );
 };
 
-export const CreatableSelect = ({ error = false, ...props }) => {
+export const CreatableSelect = ({ error = false, id, ...props }) => {
   const { t } = useTranslation();
   const theme = useContext(ThemeContext);
 
@@ -115,12 +115,13 @@ export const CreatableSelect = ({ error = false, ...props }) => {
       {...getDefaultProps(t)}
       styles={getStyles(theme, error)}
       theme={getTheme(theme)}
+      inputId={id}
       {...props}
     />
   );
 };
 
-export const AsyncCreatableSelect = ({ error = false, ...props }) => {
+export const AsyncCreatableSelect = ({ error = false, id, ...props }) => {
   const { t } = useTranslation();
   const theme = useContext(ThemeContext);
 
@@ -131,6 +132,7 @@ export const AsyncCreatableSelect = ({ error = false, ...props }) => {
       styles={getStyles(theme, error)}
       theme={getTheme(theme)}
       cacheOptions={true}
+      inputId={id}
       {...props}
     />
   );
@@ -141,6 +143,7 @@ export const AsyncSelect = ({
   loadLabel,
   value: valueProp,
   isLoading,
+  id,
   ...props
 }) => {
   const { t } = useTranslation();
@@ -190,15 +193,22 @@ export const AsyncSelect = ({
     );
   }, [valueToLabel, valueProp]);
 
+  const noOptionsMessage = useCallback(
+    () => t('yleiset.eiValittaviaKohteitaHakusanalla'),
+    [t],
+  );
+
   return (
     <ReactAsyncSelect
       {...getDefaultProps(t)}
       placeholder={t('yleiset.kirjoitaHakusana')}
+      noOptionsMessage={noOptionsMessage}
       styles={getStyles(theme, error)}
       theme={getTheme(theme)}
       cacheOptions={true}
       value={value}
       isLoading={labelIsLoading || isLoading}
+      inputId={id}
       {...props}
     />
   );

@@ -86,14 +86,18 @@ const KoulutusInfo = ({
       {visibleInfoFields.includes('osaamisalat') && (
         <InfoRow
           title={t('yleiset.osaamisalat')}
-          description={osaamisalat.join(', ')}
+          description={osaamisalat.map(o => (
+            <div>{o}</div>
+          ))}
         />
       )}
 
       {visibleInfoFields.includes('tutkintonimike') && (
         <InfoRow
           title={t('yleiset.tutkintonimike')}
-          description={nimikkeet.join(', ')}
+          description={nimikkeet.map(n => (
+            <div>{n}</div>
+          ))}
         />
       )}
 

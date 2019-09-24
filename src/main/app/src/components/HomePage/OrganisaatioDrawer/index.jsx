@@ -28,10 +28,16 @@ import useOrganisaatioHierarkia from './useOrganisaatioHierarkia';
 import Spin from '../../Spin';
 import useAuthorizedUserRoleBuilder from '../../useAuthorizedUserRoleBuilder';
 import { createCanReadSomethingRoleBuilder } from '../utils';
-import { OPETUSHALLITUS_ORGANISAATIO_OID } from '../../../constants';
+
+import {
+  OPETUSHALLITUS_ORGANISAATIO_OID,
+  OPPILAITOS_ROLE,
+} from '../../../constants';
+
 import OpetetushallitusOrganisaatioItem from './OpetushallitusOrganisaatioItem';
 import Box from '../../Box';
 import Divider from '../../Divider';
+import organisaatioIsOppilaitos from '../../../utils/organisaatioIsOppilaitos';
 
 const CloseIcon = styled(Icon).attrs({ type: 'close', role: 'button' })`
   color: ${getThemeProp('palette.text.primary')};
@@ -77,7 +83,7 @@ const FilterContainer = styled(FlexItem).attrs({ grow: 0 })`
   padding: ${spacing(2)};
 `;
 
-const getTreeItems = (organisaatiot, favourites, open = []) => {
+const getTreeItems = (organisaatiot, favourites, open, roleBuilder) => {
   const recursiveGetTreeItems = organisaatio => {
     const children = isArray(get(organisaatio, 'children'))
       ? organisaatio.children
@@ -88,7 +94,11 @@ const getTreeItems = (organisaatiot, favourites, open = []) => {
       favourite: favourites.includes(organisaatio.oid),
       key: organisaatio.oid,
       children: children.map(c => recursiveGetTreeItems(c)),
-      open: open.includes(organisaatio.oid),
+      open: (open || []).includes(organisaatio.oid),
+      isOppilaitos: organisaatioIsOppilaitos(organisaatio),
+      showEditOppilaitos: roleBuilder
+        .hasCreate(OPPILAITOS_ROLE, organisaatio)
+        .result(),
     };
   };
 
@@ -131,8 +141,13 @@ const DrawerContent = ({
   });
 
   const items = useMemo(() => {
-    return getTreeItems(hierarkia, organisaatioFavourites, openOrganisaatiot);
-  }, [hierarkia, organisaatioFavourites, openOrganisaatiot]);
+    return getTreeItems(
+      hierarkia,
+      organisaatioFavourites,
+      openOrganisaatiot,
+      roleBuilder,
+    );
+  }, [hierarkia, organisaatioFavourites, openOrganisaatiot, roleBuilder]);
 
   const { organisaatiot: favourites } = useOrganisaatiot(
     organisaatioFavourites,

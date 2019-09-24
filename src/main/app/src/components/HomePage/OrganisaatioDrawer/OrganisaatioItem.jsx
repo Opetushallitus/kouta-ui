@@ -1,9 +1,10 @@
 import React, { useCallback } from 'react';
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import { getFirstLanguageValue, noop } from '../../../utils';
 import isEmpty from '../../../utils/isEmpty';
-import Flex, { FlexItem } from '../../Flex';
+import Box from '../../Box';
 import { getThemeProp } from '../../../theme';
 import Radio from '../../Radio';
 import Icon from '../../Icon';
@@ -36,6 +37,27 @@ const FavouriteIcon = ({ active = false, ...props }) => (
   />
 );
 
+const EditOppilaitosIcon = styled(Icon).attrs({
+  role: 'button',
+  type: 'edit',
+})``;
+
+const Container = styled(Box).attrs({
+  display: 'flex',
+  justifyContent: 'space-between',
+})`
+  ${EditOppilaitosIcon} {
+    transition: opacity 0.25s;
+    opacity: 0;
+  }
+
+  &:hover {
+    ${EditOppilaitosIcon} {
+      opacity: 1;
+    }
+  }
+`;
+
 export const OrganisaatioItem = ({
   selected,
   favourite,
@@ -49,6 +71,8 @@ export const OrganisaatioItem = ({
   children = [],
   language = 'fi',
   disabled = false,
+  showEditOppilaitos = true,
+  isOppilaitos = false,
 }) => {
   const onSelect = useCallback(() => {
     onSelectProp(oid);
@@ -62,29 +86,44 @@ export const OrganisaatioItem = ({
     onToggleOpenProp(oid);
   }, [oid, onToggleOpenProp]);
 
-  return (
-    <Flex>
-      <FlexItem grow={1} paddingRight={2}>
-        <Radio checked={selected} onChange={onSelect} disabled={disabled}>
-          {getFirstLanguageValue(nimi, language)}
-        </Radio>
-      </FlexItem>
-      {collapse && !isEmpty(children) ? (
-        <FlexItem grow={0} paddingRight={2}>
-          <CollapseIcon
-            onClick={onToggleOpen}
-            type={open ? 'arrow_drop_up' : 'arrow_drop_down'}
-          />
-        </FlexItem>
-      ) : null}
+  const oppilaitosLink =
+    isOppilaitos && showEditOppilaitos ? (
+      <Box ml={1}>
+        <Link to={`/organisaatio/${oid}/oppilaitos`}>
+          <EditOppilaitosIcon color="text.secondary" fontSize="1.3rem" />
+        </Link>
+      </Box>
+    ) : null;
 
-      <FavouriteIcon
-        active={favourite}
-        disabled={disabled}
-        title="Lisää suosikkeihin"
-        onClick={disabled ? noop : onToggleFavourite}
-      />
-    </Flex>
+  return (
+    <Container>
+      <Box flexGrow={1} display="flex" pr={2}>
+        <Box flexGrow={0}>
+          <Radio checked={selected} onChange={onSelect} disabled={disabled}>
+            {getFirstLanguageValue(nimi, language)}
+          </Radio>
+        </Box>
+        {oppilaitosLink}
+      </Box>
+
+      <Box display="flex">
+        {collapse && !isEmpty(children) ? (
+          <Box flexGrow={0} pr={2}>
+            <CollapseIcon
+              onClick={onToggleOpen}
+              type={open ? 'arrow_drop_up' : 'arrow_drop_down'}
+            />
+          </Box>
+        ) : null}
+
+        <FavouriteIcon
+          active={favourite}
+          disabled={disabled}
+          title="Lisää suosikkeihin"
+          onClick={disabled ? noop : onToggleFavourite}
+        />
+      </Box>
+    </Container>
   );
 };
 

@@ -32,6 +32,7 @@ import { OPETUSHALLITUS_ORGANISAATIO_OID } from '../../../constants';
 import OpetetushallitusOrganisaatioItem from './OpetushallitusOrganisaatioItem';
 import Box from '../../Box';
 import Divider from '../../Divider';
+import organisaatioIsOppilaitos from '../../../utils/organisaatioIsOppilaitos';
 
 const CloseIcon = styled(Icon).attrs({ type: 'close', role: 'button' })`
   color: ${getThemeProp('palette.text.primary')};
@@ -89,6 +90,7 @@ const getTreeItems = (organisaatiot, favourites, open = []) => {
       key: organisaatio.oid,
       children: children.map(c => recursiveGetTreeItems(c)),
       open: open.includes(organisaatio.oid),
+      isOppilaitos: organisaatioIsOppilaitos(organisaatio),
     };
   };
 

@@ -35,11 +35,13 @@ const Badge = styled.div`
 const Label = ({ tila, t }) => {
   return (
     <Box display="flex" alignItems="center">
-      <Box flexGrow="0">
+      <Box flexGrow={0}>
         <Badge tila={tila}>{t(`julkaisutilat.${tila}`)}</Badge>
       </Box>
-      <Box flexGrow="1" pl={2}>
-        <Typography variant="secondary">{t(`julkaisutilojenSelitteet.${tila}`)}</Typography>
+      <Box flexGrow={1} pl={2}>
+        <Typography variant="secondary">
+          {t(`julkaisutilojenSelitteet.${tila}`)}
+        </Typography>
       </Box>
     </Box>
   );
@@ -59,11 +61,11 @@ const JulkaisutilaField = ({
 
   return (
     <Field name={name} component={FormFieldRadioGroup} label={label}>
-      <Radio value={JULKAISUTILA.JULKAISTU}>
-        <Label tila={JULKAISUTILA.JULKAISTU} t={t} />
-      </Radio>
       <Radio value={JULKAISUTILA.TALLENNETTU}>
         <Label tila={JULKAISUTILA.TALLENNETTU} t={t} />
+      </Radio>
+      <Radio value={JULKAISUTILA.JULKAISTU}>
+        <Label tila={JULKAISUTILA.JULKAISTU} t={t} />
       </Radio>
       {showArkistoitu && (
         <Radio value={JULKAISUTILA.ARKISTOITU}>

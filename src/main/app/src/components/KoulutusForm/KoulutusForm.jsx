@@ -173,7 +173,10 @@ const KoulutusForm = ({
             </Flex>
           }
         >
-          <ToteutuksetSection koulutus={koulutusProp} />
+          <ToteutuksetSection
+            koulutus={koulutusProp}
+            organisaatioOid={organisaatioOid}
+          />
         </FormCollapse>
       ) : null}
     </FormCollapseGroup>

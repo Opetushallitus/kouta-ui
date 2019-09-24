@@ -8,18 +8,26 @@ import { getFirstLanguageValue } from '../../utils';
 import useTranslation from '../useTranslation';
 import Anchor from '../Anchor';
 
-const getToteutukset = async ({ httpClient, apiUrls, oid }) => {
-  return oid ? getKoutaKoulutusToteutukset({ httpClient, apiUrls, oid }) : [];
+const getToteutukset = async ({
+  httpClient,
+  apiUrls,
+  oid,
+  organisaatioOid,
+}) => {
+  return oid
+    ? getKoutaKoulutusToteutukset({ httpClient, apiUrls, oid, organisaatioOid })
+    : [];
 };
 
-const ToteutuksetSection = ({ koulutus }) => {
+const ToteutuksetSection = ({ koulutus, organisaatioOid }) => {
   const { t } = useTranslation();
   const koulutusOid = koulutus ? koulutus.oid : null;
 
   const { data: toteutukset } = useApiAsync({
     promiseFn: getToteutukset,
     oid: koulutusOid,
-    watch: koulutusOid,
+    organisaatioOid,
+    watch: JSON.stringify([koulutusOid, organisaatioOid]),
   });
 
   const toteutusLinks = toteutukset

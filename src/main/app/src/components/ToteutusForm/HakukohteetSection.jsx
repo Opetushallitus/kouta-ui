@@ -8,18 +8,26 @@ import { getFirstLanguageValue } from '../../utils';
 import useTranslation from '../useTranslation';
 import Anchor from '../Anchor';
 
-const getHakukohteet = async ({ httpClient, apiUrls, oid }) => {
-  return oid ? getKoutaToteutusHakukohteet({ httpClient, apiUrls, oid }) : [];
+const getHakukohteet = async ({
+  httpClient,
+  apiUrls,
+  oid,
+  organisaatioOid,
+}) => {
+  return oid
+    ? getKoutaToteutusHakukohteet({ httpClient, apiUrls, oid, organisaatioOid })
+    : [];
 };
 
-const HakukohteetSection = ({ toteutus }) => {
+const HakukohteetSection = ({ toteutus, organisaatioOid }) => {
   const toteutusOid = toteutus ? toteutus.oid : null;
   const { t } = useTranslation();
 
   const { data: hakukohteet } = useApiAsync({
     promiseFn: getHakukohteet,
     oid: toteutusOid,
-    watch: toteutusOid,
+    organisaatioOid,
+    watch: JSON.stringify([toteutusOid, organisaatioOid]),
   });
 
   const hakukohdeLinks = hakukohteet

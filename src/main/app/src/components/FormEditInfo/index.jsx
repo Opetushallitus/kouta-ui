@@ -1,13 +1,12 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import Icon from '../Icon';
 import { getThemeProp } from '../../theme';
-import { formatKoutaDateString, isObject } from '../../utils';
+import { formatKoutaDateString } from '../../utils';
 import Spacing from '../Spacing';
 import Anchor from '../Anchor';
 import useTranslation from '../useTranslation';
-import useHenkilo from '../useHenkilo';
 
 const InfoIcon = styled(Icon).attrs({ type: 'info' })`
   color: ${getThemeProp('palette.primary.main')};
@@ -29,25 +28,8 @@ const Container = styled.div`
   display: flex;
 `;
 
-const getDisplayName = henkilo => {
-  if (!isObject(henkilo)) {
-    return null;
-  }
-
-  const { etunimet, sukunimi } = henkilo;
-
-  if (!etunimet || !sukunimi) {
-    return null;
-  }
-
-  return `${etunimet} ${sukunimi}`;
-};
-
 const Editor = ({ oid }) => {
-  const { henkilo } = useHenkilo(oid);
-  const displayName = useMemo(() => getDisplayName(henkilo), [henkilo]);
-
-  return displayName;
+  return oid;
 };
 
 const FormEditInfo = ({ editorOid, date, historyUrl, ...props }) => {

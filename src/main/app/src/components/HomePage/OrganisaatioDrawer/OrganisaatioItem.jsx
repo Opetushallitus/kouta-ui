@@ -8,6 +8,7 @@ import Box from '../../Box';
 import { getThemeProp } from '../../../theme';
 import Radio from '../../Radio';
 import Icon from '../../Icon';
+import Typography from '../../Typography';
 import { disabledStyle } from '../../../system';
 
 const FavouriteIconBase = styled(Icon)`
@@ -88,11 +89,11 @@ export const OrganisaatioItem = ({
 
   const oppilaitosLink =
     isOppilaitos && showEditOppilaitos ? (
-      <Box ml={1}>
+      <Typography as="div" ml={1}>
         <Link to={`/organisaatio/${oid}/oppilaitos`}>
           <EditOppilaitosIcon color="text.secondary" fontSize="1.3rem" />
         </Link>
-      </Box>
+      </Typography>
     ) : null;
 
   return (

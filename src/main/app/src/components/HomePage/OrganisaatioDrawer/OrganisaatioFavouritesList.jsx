@@ -5,6 +5,8 @@ import Spacing from '../../Spacing';
 import OrganisaatioItem from './OrganisaatioItem';
 import useTranslation from '../../useTranslation';
 import organisaatioIsOppilaitos from '../../../utils/organisaatioIsOppilaitos';
+import useAuthorizedUserRoleBuilder from '../../useAuthorizedUserRoleBuilder';
+import { OPPILAITOS_ROLE } from '../../../constants';
 
 export const OrganisaatioFavouritesList = ({
   items,
@@ -14,6 +16,7 @@ export const OrganisaatioFavouritesList = ({
   language = 'fi',
 }) => {
   const { t } = useTranslation();
+  const roleBuilder = useAuthorizedUserRoleBuilder();
 
   return (
     <>
@@ -34,6 +37,9 @@ export const OrganisaatioFavouritesList = ({
               nimi={nimi}
               language={language}
               isOppilaitos={organisaatioIsOppilaitos(org)}
+              showEditOppilaitos={roleBuilder
+                .hasCreate(OPPILAITOS_ROLE, org)
+                .result()}
             />
           </Spacing>
         );

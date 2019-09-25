@@ -5,6 +5,7 @@ import {
   TOTEUTUS_ROLE,
   HAKU_ROLE,
   VALINTAPERUSTE_ROLE,
+  HAKUKOHDE_ROLE,
 } from '../../constants';
 
 export const makeOnSort = ({ name, onSort }) => dir => onSort(`${name}:${dir}`);
@@ -51,7 +52,13 @@ export const getIndexParamsByFilters = ({
 
 export const createCanReadSomethingRoleBuilder = (rb, organisaatio) => {
   return rb.hasReadOneOf(
-    [KOULUTUS_ROLE, TOTEUTUS_ROLE, HAKU_ROLE, VALINTAPERUSTE_ROLE],
+    [
+      KOULUTUS_ROLE,
+      TOTEUTUS_ROLE,
+      HAKU_ROLE,
+      VALINTAPERUSTE_ROLE,
+      HAKUKOHDE_ROLE,
+    ],
     organisaatio,
   );
 };

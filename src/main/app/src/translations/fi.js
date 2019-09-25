@@ -273,6 +273,8 @@ export default {
     valitseHakukohteenToteutus:
       'Valitse, mihin toteutuksen hakukohde liitetään',
     valitseHakukohteenHaku: 'Valitse, mihin hakuun hakukohde liitetään',
+    kiinnitetytToteutukset: 'Toteutukset',
+    kiinnitetytHakukohteet: 'Hakukohteet',
   },
   koulutuslomake: {
     koulutuksenTiedot: 'Koulutuksen tiedot',

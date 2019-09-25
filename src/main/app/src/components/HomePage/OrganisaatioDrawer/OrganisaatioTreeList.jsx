@@ -12,7 +12,16 @@ export const OrganisaatioTreeList = ({
   language = 'fi',
 }) => (
   <TreeList items={items} defaultOpen={false}>
-    {({ nimi, oid, favourite, children, open, disabled, isOppilaitos }) => (
+    {({
+      nimi,
+      oid,
+      favourite,
+      children,
+      open,
+      disabled,
+      isOppilaitos,
+      showEditOppilaitos,
+    }) => (
       <OrganisaatioItem
         oid={oid}
         favourite={favourite}
@@ -26,6 +35,7 @@ export const OrganisaatioTreeList = ({
         language={language}
         disabled={disabled}
         isOppilaitos={isOppilaitos}
+        showEditOppilaitos={showEditOppilaitos}
         collapse
       />
     )}

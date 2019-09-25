@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import Drawer from '../../Drawer';
 import Typography from '../../Typography';
 import { isArray, getTestIdProps } from '../../../utils';
-import Flex, { FlexItem } from '../../Flex';
 import { spacing, getThemeProp } from '../../../theme';
 import Button from '../../Button';
 import Icon from '../../Icon';
@@ -50,26 +49,34 @@ const CloseIcon = styled(Icon).attrs({ type: 'close', role: 'button' })`
   }
 `;
 
-const Container = styled(Flex).attrs({ column: true })`
+const Container = styled(Box).attrs({
+  display: 'flex',
+  flexDirection: 'column',
+})`
   height: 100vh;
   min-width: 25rem;
+  max-width: 35rem;
 `;
 
-const TreeContainer = styled(FlexItem).attrs({ grow: 1 })`
+const TreeContainer = styled(Box).attrs({ flexGrow: 1 })`
   overflow-y: auto;
   overflow-x: auto;
   max-width: 100vw;
   box-sizing: border-box;
-  padding: ${spacing(2)};
-  padding-top: 0px;
 `;
 
-const FooterContainer = styled(Flex).attrs({ justifyCenter: true })`
+const FooterContainer = styled(Box).attrs({
+  justifyContent: 'center',
+  display: 'flex',
+})`
   border-top: 1px solid ${getThemeProp('palette.border')};
-  padding: ${spacing(2)};
 `;
 
-const HeaderContainer = styled(FlexItem).attrs({ grow: 0 })`
+const HeaderContainer = styled(Box).attrs({
+  flexGrow: 0,
+  display: 'flex',
+  alignItems: 'center',
+})`
   padding: ${spacing(2)};
   border-bottom: 1px solid ${getThemeProp('palette.border')};
 `;
@@ -79,7 +86,7 @@ const FavouriteListContainer = styled(Box)`
   overflow-y: auto;
 `;
 
-const FilterContainer = styled(FlexItem).attrs({ grow: 0 })`
+const FilterContainer = styled(Box).attrs({ flexGrow: 0 })`
   padding: ${spacing(2)};
 `;
 
@@ -136,8 +143,11 @@ const DrawerContent = ({
     500,
   );
 
+  const nameSearchEnabled = hasOphOption;
+
   const { hierarkia, isLoading: loadingHierarkia } = useOrganisaatioHierarkia({
     name: debounceNameFilter,
+    nameSearchEnabled,
   });
 
   const items = useMemo(() => {
@@ -186,20 +196,18 @@ const DrawerContent = ({
   return (
     <Container {...getTestIdProps('organisaatioDrawer')}>
       <HeaderContainer>
-        <Flex alignCenter>
-          <FlexItem grow={1} paddingRight={2}>
-            <Typography variant="h5">
-              {t('etusivu.vaihdaOrganisaatiota')}
-            </Typography>
-          </FlexItem>
-          <FlexItem grow={0}>
-            <CloseIcon onClick={onClose} />
-          </FlexItem>
-        </Flex>
+        <Box flexGrow={1} paddingRight={2}>
+          <Typography variant="h5">
+            {t('etusivu.vaihdaOrganisaatiota')}
+          </Typography>
+        </Box>
+        <Box flexGrow={0}>
+          <CloseIcon onClick={onClose} />
+        </Box>
       </HeaderContainer>
 
       {(hasFavourites || hasOphOption) && (
-        <Box flexGrow="0">
+        <Box flexGrow={0}>
           <Box p={2} mb={-1}>
             {hasOphOption && (
               <Box mb={1}>
@@ -233,22 +241,30 @@ const DrawerContent = ({
         </Box>
       )}
 
-      <FilterContainer>
-        <Input
-          placeholder={t('etusivu.haeOrganisaatioita')}
-          value={nameFilter}
-          onChange={onNameFilterChange}
-          suffix={
-            loadingHierarkia ? (
-              <Spin size="small" />
-            ) : (
-              <InputIcon type="search" />
-            )
-          }
-        />
-      </FilterContainer>
+      {nameSearchEnabled ? (
+        <FilterContainer>
+          <Input
+            placeholder={t('etusivu.haeOrganisaatioita')}
+            value={nameFilter}
+            onChange={onNameFilterChange}
+            suffix={
+              loadingHierarkia ? (
+                <Spin size="small" />
+              ) : (
+                <InputIcon type="search" />
+              )
+            }
+          />
+        </FilterContainer>
+      ) : null}
 
-      <TreeContainer {...getTestIdProps('organisaatioList')}>
+      <TreeContainer
+        {...getTestIdProps('organisaatioList')}
+        p={2}
+        pt={nameSearchEnabled ? 0 : 2}
+      >
+        {loadingHierarkia && !nameSearchEnabled ? <Spin center /> : null}
+
         {items.length > 0 ? (
           <OrganisaatioTreeList
             items={items}
@@ -258,20 +274,22 @@ const DrawerContent = ({
             onToggleOpen={onToggleOpen}
             language={language}
           />
-        ) : (
+        ) : null}
+
+        {items.length === 0 && !loadingHierarkia ? (
           <Typography variant="secondary">
             {t('etusivu.organisaatioitaEiLoytynyt')}
           </Typography>
-        )}
+        ) : null}
       </TreeContainer>
 
-      <FlexItem grow={0}>
-        <FooterContainer>
+      <Box flexGrow={0}>
+        <FooterContainer p={2}>
           <Button onClick={onSubmit} disabled={!selectedOrganisaatio}>
             {t('yleiset.valitse')}
           </Button>
         </FooterContainer>
-      </FlexItem>
+      </Box>
     </Container>
   );
 };

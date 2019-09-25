@@ -26,7 +26,7 @@ const OppilaitosPage = ({
   const {
     data: oppilaitos,
     isLoading: oppilaitosIsLoading,
-    finishedAt,
+    isSettled: oppilaitosIsSettled,
   } = useApiAsync({
     promiseFn: getOppilaitosByOid,
     oid: organisaatioOid,
@@ -34,7 +34,6 @@ const OppilaitosPage = ({
     watch: JSON.stringify([organisaatioOid, oppilaitosUpdatedAt]),
   });
 
-  const oppilaitosIsResolved = !!finishedAt;
   const { t } = useTranslation();
 
   return (
@@ -51,7 +50,7 @@ const OppilaitosPage = ({
           />
         }
       >
-        {organisaatio && oppilaitosIsResolved ? (
+        {organisaatio && oppilaitosIsSettled ? (
           <OppilaitosPageForm
             organisaatio={organisaatio}
             oppilaitos={oppilaitos}

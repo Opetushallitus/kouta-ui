@@ -245,7 +245,10 @@ const ToteutusForm = ({
               </Flex>
             }
           >
-            <HakukohteetSection toteutus={toteutus} />
+            <HakukohteetSection
+              toteutus={toteutus}
+              organisaatioOid={organisaatioOid}
+            />
           </FormCollapse>
         ) : null}
       </FormCollapseGroup>

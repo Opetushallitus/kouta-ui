@@ -136,8 +136,11 @@ const DrawerContent = ({
     500,
   );
 
+  const nameSearchEnabled = hasOphOption;
+
   const { hierarkia, isLoading: loadingHierarkia } = useOrganisaatioHierarkia({
     name: debounceNameFilter,
+    nameSearchEnabled,
   });
 
   const items = useMemo(() => {
@@ -233,22 +236,26 @@ const DrawerContent = ({
         </Box>
       )}
 
-      <FilterContainer>
-        <Input
-          placeholder={t('etusivu.haeOrganisaatioita')}
-          value={nameFilter}
-          onChange={onNameFilterChange}
-          suffix={
-            loadingHierarkia ? (
-              <Spin size="small" />
-            ) : (
-              <InputIcon type="search" />
-            )
-          }
-        />
-      </FilterContainer>
+      {nameSearchEnabled ? (
+        <FilterContainer>
+          <Input
+            placeholder={t('etusivu.haeOrganisaatioita')}
+            value={nameFilter}
+            onChange={onNameFilterChange}
+            suffix={
+              loadingHierarkia ? (
+                <Spin size="small" />
+              ) : (
+                <InputIcon type="search" />
+              )
+            }
+          />
+        </FilterContainer>
+      ) : null}
 
       <TreeContainer {...getTestIdProps('organisaatioList')}>
+        {loadingHierarkia && !nameSearchEnabled ? <Spin center /> : null}
+
         {items.length > 0 ? (
           <OrganisaatioTreeList
             items={items}
@@ -258,11 +265,13 @@ const DrawerContent = ({
             onToggleOpen={onToggleOpen}
             language={language}
           />
-        ) : (
+        ) : null}
+
+        {items.length === 0 && !loadingHierarkia ? (
           <Typography variant="secondary">
             {t('etusivu.organisaatioitaEiLoytynyt')}
           </Typography>
-        )}
+        ) : null}
       </TreeContainer>
 
       <FlexItem grow={0}>

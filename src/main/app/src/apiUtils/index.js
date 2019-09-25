@@ -380,29 +380,6 @@ export const getOrganisaatiotByOids = async ({ oids, httpClient, apiUrls }) => {
   return data;
 };
 
-export const getOrganisaatioHierarkia = async ({
-  searchString = '',
-  aktiiviset = true,
-  suunnitellut = true,
-  lakkautetut = false,
-  apiUrls,
-  httpClient,
-}) => {
-  const params = {
-    searchStr: searchString,
-    aktiiviset: aktiiviset ? 'true' : 'false',
-    suunnitellut: suunnitellut ? 'true' : 'false',
-    lakkautetut: lakkautetut ? 'true' : 'false',
-  };
-
-  const { data } = await httpClient.get(
-    apiUrls.url('organisaatio-service.hierarkia-haku'),
-    { params },
-  );
-
-  return get(data, 'organisaatiot') || [];
-};
-
 export const getHakemuspalveluLomakkeet = async ({ httpClient, apiUrls }) => {
   const { data } = await httpClient.get(
     apiUrls.url('lomake-editori.lomakkeet'),

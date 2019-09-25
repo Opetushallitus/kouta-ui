@@ -19,7 +19,6 @@ const OppilaitosPage = ({
     params: { organisaatioOid },
   },
   location: { state = {} },
-  history,
 }) => {
   const { organisaatio } = useOrganisaatio(organisaatioOid);
   const { oppilaitosUpdatedAt } = state;

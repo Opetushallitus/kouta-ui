@@ -167,7 +167,8 @@ export default {
     tuntematonVirhe:
       'Jokin meni vikaan. Jos virhe aiheuttaa ongelmia, yritä päivittää sivu',
     tallennusOnnistui: 'Tallennus onnistui',
-    tallennusEpaonnistui: 'Talennus epäonnistui. Tarkista lomakkeen tiedot',
+    tallennusEpaonnistui:
+      'Tallennus epäonnistui. Tarkista lomakkeen tiedot ja yritä uudelleen',
     kayttooikeusVirhe: 'Käyttöoikeuksissasi on puutteita',
   },
   sivuTitlet: {
@@ -200,10 +201,12 @@ export default {
       'Arkistointi siirtää tiedot pois näkyvistä, mutta ei poista niitä',
   },
   validointivirheet: {
-    pakollinen: 'Syötä kentälle arvo',
-    pakollisetKaannokset: 'Syötä arvo kaikille kentän käännöksille',
-    listaVahintaanYksi: 'Valitse kentälle vähintään yksi arvo',
-    listaVahintaan: 'Valitse kentälle vähintään {{lukumaara}} arvoa',
+    pakollinen: 'Tämä kenttä on pakollinen',
+    pakollisetKaannokset:
+      'Tämän kentän kaikille käännöksille täytyy syöttää arvo',
+    listaVahintaanYksi: 'Tälle kentälle täytyy valita vähintään yksi arvo',
+    listaVahintaan:
+      'Tälle kentälle täytyy valita vähintään {{lukumaara}} arvoa',
   },
   hakulomakeValinnat: {
     ataru: 'Käytetään hakemuspalvelun lomaketta',

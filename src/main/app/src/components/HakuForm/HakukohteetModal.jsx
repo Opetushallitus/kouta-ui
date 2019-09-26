@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 
 import Modal from '../Modal';
 import Button from '../Button';
-import { getKoutaToteutukset } from '../../apiUtils';
+import getToteutukset from '../../utils/kouta/getToteutukset';
 import Flex, { FlexItem } from '../Flex';
 import { getFirstLanguageValue } from '../../utils';
 import Spacing from '../Spacing';
@@ -30,7 +30,7 @@ const HakukohteetModal = ({
   const toteutus = useFieldValue(`${fieldName}.toteutus`);
 
   const { data: toteutukset } = useApiAsync({
-    promiseFn: getKoutaToteutukset,
+    promiseFn: getToteutukset,
     organisaatioOid,
     watch: organisaatioOid,
   });

@@ -2,35 +2,21 @@ import React, { useMemo } from 'react';
 import { Field } from 'redux-form';
 import get from 'lodash/get';
 
-import { getKoutaValintaperusteet } from '../../apiUtils';
+import getValintaperusteet from '../../utils/kouta/getValintaperusteet';
 import { getFirstLanguageValue } from '../../utils';
 import useTranslation from '../useTranslation';
 import useApiAsync from '../useApiAsync';
 import { FormFieldSelect } from '../formFields';
+import useLanguage from '../useLanguage';
 
-const getValintaperusteet = async ({
-  httpClient,
-  apiUrls,
-  organisaatioOid,
-  hakuOid,
-}) => {
-  const valintaperusteet = await getKoutaValintaperusteet({
-    httpClient,
-    apiUrls,
-    organisaatioOid,
-    hakuOid,
-  });
-
-  return valintaperusteet;
-};
-
-const getValintaperusteetOptions = valintaperusteet =>
+const getValintaperusteetOptions = (valintaperusteet, language) =>
   valintaperusteet.map(({ nimi, id }) => ({
     value: id,
-    label: getFirstLanguageValue(nimi),
+    label: getFirstLanguageValue(nimi, language),
   }));
 
 const KuvausSection = ({ haku, organisaatio, name }) => {
+  const language = useLanguage();
   const hakuOid = get(haku, 'oid');
   const organisaatioOid = get(organisaatio, 'oid');
   const watch = [hakuOid, organisaatioOid].join(',');
@@ -43,7 +29,10 @@ const KuvausSection = ({ haku, organisaatio, name }) => {
     watch,
   });
 
-  const options = useMemo(() => getValintaperusteetOptions(data || []), [data]);
+  const options = useMemo(
+    () => getValintaperusteetOptions(data || [], language),
+    [data, language],
+  );
 
   return (
     <Field

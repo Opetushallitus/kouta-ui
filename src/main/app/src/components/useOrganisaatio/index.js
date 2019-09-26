@@ -5,7 +5,7 @@ import { memoize } from '../../utils';
 import useApiAsync from '../useApiAsync';
 import UrlContext from '../UrlContext';
 import HttpContext from '../HttpContext';
-import { getOrganisaatiotByOids } from '../../apiUtils';
+import getOrganisaatiotByOids from '../../utils/organisaatioService/getOrganisaatiotByOids';
 
 const getOrganisaatioLoader = memoize((httpClient, apiUrls) => {
   return new DataLoader(oids =>

@@ -2,7 +2,7 @@ import React from 'react';
 import get from 'lodash/get';
 
 import FormPage from '../FormPage';
-import { getOrganisaatioByOid } from '../../apiUtils';
+import getOrganisaatioByOid from '../../utils/organisaatioService/getOrganisaatioByOid';
 import Flex, { FlexItem } from '../Flex';
 import { getFirstLanguageValue } from '../../utils';
 import getKoulutustyyppiByKoulutusOid from '../../utils/kouta/getKoulutustyyppiByKoulutusOid';

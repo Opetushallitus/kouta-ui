@@ -368,6 +368,7 @@ export default {
     valitseOsaamisala: 'Valitse osaamisala',
     valitseTutkinnonOsat: 'Valitse tutkinnon osat',
     lisaaTutkinnonOsa: 'Lisää tutkinnon osa',
+    hakukohteenLittaminen: 'Hakukohteen liittäminen toteutukseen',
   },
   hakulomake: {
     haunNimi: 'Haun nimi',

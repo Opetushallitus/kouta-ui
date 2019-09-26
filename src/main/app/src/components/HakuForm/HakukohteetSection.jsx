@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Typography from '../Typography';
-import { getKoutaHakuHakukohteet } from '../../apiUtils';
+import getHaunHakukohteet from '../../utils/kouta/getHaunHakukohteet';
 import useApiAsync from '../useApiAsync';
 import { getFirstLanguageValue } from '../../utils';
 import useTranslation from '../useTranslation';
@@ -15,7 +15,7 @@ const getHakukohteet = async ({
   organisaatioOid,
 }) => {
   return oid
-    ? getKoutaHakuHakukohteet({ httpClient, apiUrls, oid, organisaatioOid })
+    ? getHaunHakukohteet({ httpClient, apiUrls, oid, organisaatioOid })
     : [];
 };
 

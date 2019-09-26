@@ -1,9 +1,9 @@
 import useApiAsync from '../useApiAsync';
-import { getOrganisaatioHierarchyByOid } from '../../apiUtils';
+import getOrganisaatioHierarkiaByOid from '../../utils/organisaatioService/getOrganisaatioHierarkiaByOid';
 
 export const useOrganisaatioHierarkia = (oid, { skipParents = false } = {}) => {
   const { data, ...rest } = useApiAsync({
-    promiseFn: getOrganisaatioHierarchyByOid,
+    promiseFn: getOrganisaatioHierarkiaByOid,
     oid,
     skipParents,
     watch: oid,

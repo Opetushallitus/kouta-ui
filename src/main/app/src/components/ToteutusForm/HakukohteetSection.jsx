@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Typography from '../Typography';
-import { getKoutaToteutusHakukohteet } from '../../apiUtils';
+import getToteutuksenHakukohteet from '../../utils/kouta/getToteutuksenHakukohteet';
 import useApiAsync from '../useApiAsync';
 import { getFirstLanguageValue } from '../../utils';
 import useTranslation from '../useTranslation';
@@ -15,7 +15,7 @@ const getHakukohteet = async ({
   organisaatioOid,
 }) => {
   return oid
-    ? getKoutaToteutusHakukohteet({ httpClient, apiUrls, oid, organisaatioOid })
+    ? getToteutuksenHakukohteet({ httpClient, apiUrls, oid, organisaatioOid })
     : [];
 };
 

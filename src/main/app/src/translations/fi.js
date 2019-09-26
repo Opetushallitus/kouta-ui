@@ -17,7 +17,6 @@ export default {
       'Hakusanallasi ei löytynyt valittavia kohteita',
     luoKohde: 'Luo kohde "{{kohde}}"',
     yritaUudelleen: 'Yritä uudelleen',
-    virheilmoitus: 'Jokin meni vikaan',
     koulutus: 'Koulutus',
     toteutus: 'Toteutus',
     haku: 'Haku',
@@ -140,8 +139,6 @@ export default {
     ladatutTiedostot: 'Ladatut tiedostot',
     varmistaLomakkeenKentat:
       'Varmistathan että olet täyttänyt lomakkeen kaikki pakolliset kentät',
-    virheilmoitusKuvaus:
-      'Jos virhe aiheuttaa ongelmia järjestelmän käytössä, yritä päivittää sivu, tai ota yhteyttä tukeen',
     valitseMitaHakulomakettaKaytetaan: 'Valitse mitä hakulomaketta käytetään',
     valitseKoulutustyyppi: 'Valitse koulutustyyppi',
     luoUusi: 'Luo uusi',
@@ -154,9 +151,6 @@ export default {
     valitseValintakoetyypit: 'Valitse valintakoetyypit',
     lisaaTilaisuus: 'Lisää tilaisuus',
     valintakoe: 'Valintakoe',
-    kayttooikeusVirheilmoitus: 'Käyttöoikeuksissasi on puutteita',
-    kayttooikeusVirheilmoitusKuvaus:
-      'Käyttöoikeuksien tarkistuksessa tapahtui virhe. Tarkistathan, että käyttäjälläsi on tarvittavat käyttöoikeudet',
     avaaLomake: 'Avaa lomake',
     valitseHaunKohdejoukko: 'Valitse haun kohdejoukko',
     valitseHaunKohdejoukonTarkenne: 'Valitse haun kohdejoukon tarkenne',
@@ -168,6 +162,13 @@ export default {
     kirjoitaHakusana: 'Kirjoita hakusana',
     valitseVaihtoehdoista: 'Valitse vaihtoehdoista',
     hakukohteet: 'Hakukohteet',
+  },
+  ilmoitukset: {
+    tuntematonVirhe:
+      'Jokin meni vikaan. Jos virhe aiheuttaa ongelmia, yritä päivittää sivu',
+    tallennusOnnistui: 'Tallennus onnistui',
+    tallennusEpaonnistui: 'Talennus epäonnistui. Tarkista lomakkeen tiedot',
+    kayttooikeusVirhe: 'Käyttöoikeuksissasi on puutteita',
   },
   sivuTitlet: {
     etuliite: 'Tarjonta',

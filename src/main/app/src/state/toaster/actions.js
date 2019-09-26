@@ -11,15 +11,14 @@ export const openToastWithKey = createAction(OPEN_TOAST);
 export const closeToast = createAction(CLOSE_TOAST);
 
 export const openToast = ({
-  title,
-  description,
+  label,
   duration = 5000,
   status,
   key: keyArg,
 } = {}) => dispatch => {
   const key = keyArg || genKey();
 
-  dispatch(openToastWithKey({ title, description, status, key }));
+  dispatch(openToastWithKey({ label, status, key }));
 
   if (isNumber(duration) && duration > 0) {
     setTimeout(() => {
@@ -35,8 +34,7 @@ export const openSavingErrorToast = () => (
 ) => {
   return dispatch(
     openToast({
-      title: localisation.t('yleiset.tallennusEpaonnistui'),
-      description: localisation.t('yleiset.tarkistaLomakkeenTiedot'),
+      label: localisation.t('ilmoitukset.tallennusEpaonnistui'),
       status: 'danger',
     }),
   );
@@ -49,7 +47,7 @@ export const openSavingSuccessToast = () => (
 ) => {
   return dispatch(
     openToast({
-      title: localisation.t('yleiset.tallennusOnnistui'),
+      label: localisation.t('ilmoitukset.tallennusOnnistui'),
       status: 'success',
     }),
   );
@@ -62,8 +60,7 @@ export const openGenericErrorToast = () => (
 ) => {
   return dispatch(
     openToast({
-      title: localisation.t('yleiset.virheilmoitus'),
-      description: localisation.t('yleiset.virheilmoitusKuvaus'),
+      label: localisation.t('ilmoitukset.tuntematonVirhe'),
       status: 'danger',
     }),
   );

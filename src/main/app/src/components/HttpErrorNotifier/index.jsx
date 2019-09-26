@@ -9,18 +9,15 @@ import useToaster from '../useToaster';
 const getToastOptions = (error, t) => {
   const status = get(error, 'response.status');
 
-  let title = t('yleiset.virheilmoitus');
-  let description = t('yleiset.virheilmoitusKuvaus');
+  let label = t('ilmoitukset.tuntematonVirhe');
 
   if (status === 403) {
-    title = t('yleiset.kayttooikeusVirheilmoitus');
-    description = t('yleiset.kayttooikeusVirheilmoitusKuvaus');
+    label = t('ilmoitukset.kayttooikeusVirhe');
   }
 
   return {
     status: 'danger',
-    title,
-    description,
+    label,
   };
 };
 

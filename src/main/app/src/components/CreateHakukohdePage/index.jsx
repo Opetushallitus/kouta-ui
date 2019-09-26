@@ -70,7 +70,7 @@ const CreateHakukohdePage = props => {
 
   return (
     <>
-      <Title>{t('sivuTitle.uusiHakukohde')}</Title>
+      <Title>{t('sivuTitlet.uusiHakukohde')}</Title>
       <FormPage
         header={<CreateHakukohdeHeader />}
         steps={<CreateHakukohdeSteps />}

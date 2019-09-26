@@ -9,13 +9,16 @@ import HomeContent from './HomeContent';
 import Alert from '../Alert';
 import { selectOrganisaatio } from '../../state/organisaatioSelection';
 import useAuthorizedUser from '../useAuthorizedUser';
+
 import {
   KOULUTUS_ROLE,
   TOTEUTUS_ROLE,
   HAKU_ROLE,
   VALINTAPERUSTE_ROLE,
   OPH_PAAKAYTTAJA_ROLE,
+  HAKUKOHDE_ROLE,
 } from '../../constants';
+
 import useTranslation from '../useTranslation';
 import getUserRoles from '../../utils/getUserRoles';
 import getRoleOrganisaatioOid from '../../utils/getRoleOrganisaatioOid';
@@ -36,7 +39,13 @@ const getFirstOrganisaatioOidWithRequiredRole = user => {
 
   const validRole = userRoles.find(role => {
     return (
-      [KOULUTUS_ROLE, TOTEUTUS_ROLE, HAKU_ROLE, VALINTAPERUSTE_ROLE]
+      [
+        KOULUTUS_ROLE,
+        TOTEUTUS_ROLE,
+        HAKU_ROLE,
+        VALINTAPERUSTE_ROLE,
+        HAKUKOHDE_ROLE,
+      ]
         .map(
           roleName =>
             role.startsWith(OPH_PAAKAYTTAJA_ROLE) ||

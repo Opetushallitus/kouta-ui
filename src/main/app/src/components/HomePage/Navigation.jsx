@@ -214,6 +214,7 @@ const getActiveAnchor = items => {
 };
 
 const Navigation = ({ maxInlineItems = 3, ...props }) => {
+  const [hasScrolled, setHasScrolled] = useState(false);
   const [ref, inView] = useInView();
   const anchors = useContext(NavigationStateContext);
   const { t } = useTranslation();
@@ -232,8 +233,13 @@ const Navigation = ({ maxInlineItems = 3, ...props }) => {
   }, [items, setActiveItem]);
 
   const onScroll = useCallback(() => {
-    setActiveItemThrottle.current();
-  }, []);
+    if (!hasScrolled) {
+      setHasScrolled(true);
+    }
+
+    isFunction(setActiveItemThrottle.current) &&
+      setActiveItemThrottle.current();
+  }, [hasScrolled]);
 
   const navigationProps = {
     items,
@@ -248,7 +254,7 @@ const Navigation = ({ maxInlineItems = 3, ...props }) => {
       <div ref={ref}>
         <NavigationBase {...navigationProps} />
       </div>
-      {!inView && (
+      {!inView && hasScrolled && (
         <FixedNavigationWrapper boxShadow={1}>
           <NavigationBase {...navigationProps} />
         </FixedNavigationWrapper>

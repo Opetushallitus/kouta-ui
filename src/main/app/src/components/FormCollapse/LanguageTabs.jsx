@@ -24,6 +24,8 @@ const getLanguageOptions = ({ languages = [], t }) => {
   );
 };
 
+const onTabClick = e => e.stopPropagation();
+
 const LanguageTabs = ({
   languages = [],
   language = 'fi',
@@ -39,7 +41,7 @@ const LanguageTabs = ({
   return (
     <Tabs value={language} onChange={onChange}>
       {options.map(({ label, value }) => (
-        <Tab value={value} key={value}>
+        <Tab value={value} key={value} onClick={onTabClick}>
           {label}
         </Tab>
       ))}

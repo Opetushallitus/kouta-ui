@@ -47,6 +47,24 @@ const stubMyOrganisations = () => {
     url: '**/kayttooikeus-service/organisaatiohenkilo/organisaatioOid**',
     response: [oid],
   });
+
+  cy.route({
+    method: 'GET',
+    url: '/kouta-backend/koulutus/list**',
+    response: [],
+  });
+
+  cy.route({
+    method: 'GET',
+    url: '/kouta-backend/haku/list**',
+    response: [],
+  });
+
+  cy.route({
+    method: 'GET',
+    url: '/kouta-backend/toteutus/list**',
+    response: [],
+  });
 };
 
 describe('frontPage', () => {

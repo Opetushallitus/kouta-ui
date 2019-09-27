@@ -64,7 +64,7 @@
     "format": "./node_modules/.bin/prettier --write \"./src/**/*.{js,jsx}\"",
     "cypress:run": "./node_modules/.bin/cypress run",
     "cypress:open": "./node_modules/.bin/cypress open",
-    "test:e2e": "CYPRESS_RETRIES=2 NODE_ENV=test REACT_APP_CYPRESS=true BROWSER=none ./node_modules/.bin/start-server-and-test start http://localhost:3000 cypress:run",
+    "test:e2e": "CYPRESS_RETRIES=2 NODE_ENV=test REACT_APP_CYPRESS=true ./node_modules/.bin/start-server-and-test start http://localhost:3000 cypress:run",
     "test:ci": "CI=true npm test && npm run test:e2e"
   },
   "eslintConfig": {

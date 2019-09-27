@@ -435,8 +435,7 @@ export default {
     valitseValintaperustekuvaus: 'Valitse valintaperustekuvaus',
     valintaperustekuvaustenListausperuste:
       'Vaihtoehdoissa on lueteltu valintaperustekuvaukset, joiden kohdejoukko on sama kuin haun kohdejoukko',
-    haunKohdejoukkoPuuttuu:
-      'Hakuun ei ole liitetty kohdejoukkoa, joten valintaperustekuvauksia ei ole valittavana',
+    haunKohdejoukkoPuuttuu: 'Hakuun ei ole liitetty kohdejoukkoa',
   },
   valintaperustelomake: {
     valintaperusteenPerustiedot: 'Valintaperusteen perustiedot',

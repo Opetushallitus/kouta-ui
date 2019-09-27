@@ -168,7 +168,7 @@ const FormCollapse = ({
         active={active}
         onToggle={onToggleCollapse}
         open={collapseOpen}
-        toggleOnHeaderClick={false}
+        toggleOnHeaderClick
         {...props}
       >
         {renderChildren({ onContinue, children, language, section })}

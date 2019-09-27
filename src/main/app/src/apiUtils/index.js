@@ -1,5 +1,5 @@
 import { KOULUTUSTYYPPI_TO_KOULUTUSTYYPPI_IDS_MAP } from '../constants';
-import { isArray, isObject } from '../utils';
+import { isArray } from '../utils';
 import parseKoodiUri from '../utils/parseKoodiUri';
 import keyBy from 'lodash/keyBy';
 import mapValues from 'lodash/mapValues';
@@ -149,28 +149,6 @@ export const getKoulutusByKoodi = async ({
   };
 };
 
-export const getOrganisaatioHierarchyByOid = async ({
-  oid,
-  skipParents = false,
-  apiUrls,
-  httpClient,
-}) => {
-  const { data } = await httpClient.get(
-    apiUrls.url('organisaatio-service.hierarkia', oid),
-    { params: { skipParents: skipParents ? 'true' : 'false' } },
-  );
-
-  return get(data, 'organisaatiot') || [];
-};
-
-export const getOrganisaatioByOid = async ({ oid, apiUrls, httpClient }) => {
-  const { data } = await httpClient.get(
-    apiUrls.url('organisaatio-service.organisaatio-by-oid', oid),
-  );
-
-  return data;
-};
-
 export const getOsaamisalatByKoulutusKoodi = async ({
   httpClient,
   apiUrls,
@@ -227,155 +205,8 @@ export const getLocalisation = async ({
   return resource;
 };
 
-export const getKoutaHakuHakukohteet = async ({
-  httpClient,
-  apiUrls,
-  organisaatioOid,
-  oid,
-}) => {
-  const { data } = await httpClient.get(
-    apiUrls.url('kouta-backend.haku-hakukohteet', oid),
-    {
-      params: { organisaatioOid },
-    },
-  );
-
-  return data;
-};
-
-export const getKoutaValintaperusteet = async ({
-  organisaatioOid,
-  hakuOid,
-  httpClient,
-  apiUrls,
-}) => {
-  const { data } = await httpClient.get(
-    apiUrls.url('kouta-backend.valintaperuste-list'),
-    {
-      params: { organisaatioOid, ...(hakuOid && { hakuOid }) },
-    },
-  );
-
-  return data;
-};
-
-export const getKoutaKoulutukset = async ({
-  organisaatioOid,
-  httpClient,
-  apiUrls,
-}) => {
-  const { data } = await httpClient.get(
-    apiUrls.url('kouta-backend.koulutus-list'),
-    {
-      params: { organisaatioOid },
-    },
-  );
-
-  return data;
-};
-
-export const getKoutaToteutukset = async ({
-  organisaatioOid,
-  httpClient,
-  apiUrls,
-}) => {
-  const { data } = await httpClient.get(
-    apiUrls.url('kouta-backend.toteutus-list'),
-    {
-      params: { organisaatioOid },
-    },
-  );
-
-  return data;
-};
-
-export const getKoutaKoulutusToteutukset = async ({
-  httpClient,
-  apiUrls,
-  oid,
-  organisaatioOid,
-}) => {
-  const { data } = await httpClient.get(
-    apiUrls.url('kouta-backend.koulutus-toteutukset', oid),
-    {
-      params: {
-        ...(organisaatioOid && { organisaatioOid }),
-      },
-    },
-  );
-
-  return data;
-};
-
-export const getKoutaHaut = async ({
-  organisaatioOid,
-  httpClient,
-  apiUrls,
-}) => {
-  const { data } = await httpClient.get(
-    apiUrls.url('kouta-backend.haku-list'),
-    {
-      params: { organisaatioOid },
-    },
-  );
-
-  return data;
-};
-
-export const getKoutaToteutusHakukohteet = async ({
-  httpClient,
-  apiUrls,
-  oid,
-  organisaatioOid,
-}) => {
-  const { data } = await httpClient.get(
-    apiUrls.url('kouta-backend.toteutus-hakukohteet', oid),
-    {
-      params: {
-        ...(organisaatioOid && { organisaatioOid }),
-      },
-    },
-  );
-
-  return data;
-};
-
-export const getKoutaHakukohteet = async ({
-  httpClient,
-  apiUrls,
-  organisaatioOid,
-}) => {
-  const { data } = await httpClient.get(
-    apiUrls.url('kouta-backend.hakukohde-list'),
-    {
-      params: { organisaatioOid },
-    },
-  );
-
-  return data;
-};
-
-export const getKoutaHakukohdeByOid = async ({ oid, httpClient, apiUrls }) => {
-  const { data, headers } = await httpClient.get(
-    apiUrls.url('kouta-backend.hakukohde-by-oid', oid),
-  );
-
-  const lastModified = get(headers, 'last-modified') || null;
-
-  return isObject(data) ? { lastModified, ...data } : data;
-};
-
 export const getMe = async ({ httpClient, apiUrls }) => {
   const { data } = await httpClient.get(apiUrls.url('kayttooikeus-service.me'));
-
-  return data;
-};
-
-export const getOrganisaatiotByOids = async ({ oids, httpClient, apiUrls }) => {
-  const { data } = await httpClient.post(
-    apiUrls.url('organisaatio-service.organisaatiot-by-oids'),
-    oids,
-  );
 
   return data;
 };

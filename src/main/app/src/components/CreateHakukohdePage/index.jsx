@@ -2,7 +2,7 @@ import React from 'react';
 import get from 'lodash/get';
 
 import FormPage from '../FormPage';
-import { getOrganisaatioByOid } from '../../apiUtils';
+import getOrganisaatioByOid from '../../utils/organisaatioService/getOrganisaatioByOid';
 import Flex, { FlexItem } from '../Flex';
 import { getFirstLanguageValue } from '../../utils';
 import getKoulutustyyppiByKoulutusOid from '../../utils/kouta/getKoulutustyyppiByKoulutusOid';
@@ -70,7 +70,7 @@ const CreateHakukohdePage = props => {
 
   return (
     <>
-      <Title>{t('sivuTitle.uusiHakukohde')}</Title>
+      <Title>{t('sivuTitlet.uusiHakukohde')}</Title>
       <FormPage
         header={<CreateHakukohdeHeader />}
         steps={<CreateHakukohdeSteps />}

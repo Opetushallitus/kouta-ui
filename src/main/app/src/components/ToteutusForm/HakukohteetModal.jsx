@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 
 import Modal from '../Modal';
 import Button from '../Button';
-import { getKoutaHaut } from '../../apiUtils';
+import getHaut from '../../utils/kouta/getHaut';
 import Flex from '../Flex';
 import { getFirstLanguageValue } from '../../utils';
 import useApiAsync from '../useApiAsync';
@@ -29,7 +29,7 @@ const HakukohteetModal = ({
   const hakuValue = useFieldValue(`${fieldName}.haku`);
 
   const { data: haut } = useApiAsync({
-    promiseFn: getKoutaHaut,
+    promiseFn: getHaut,
     organisaatioOid,
     watch: organisaatioOid,
   });
@@ -45,7 +45,7 @@ const HakukohteetModal = ({
   return (
     <Modal
       minHeight="200px"
-      header="Hakukohteen liittäminen toteutukseen"
+      header={t('toteutuslomake.hakukohteenLiittaminen')}
       footer={
         <Flex justifyBetween>
           <Button onClick={onClose} variant="outlined" type="button">

@@ -25,9 +25,7 @@ const EditKoulutusHeader = ({ koulutus }) => {
         ) : null
       }
     >
-      {Boolean(get(koulutus, 'johtaaTutkintoon'))
-        ? t('yleiset.tutkintoonJohtavaKoulutus')
-        : t('yleiset.tutkintoonJohtamatonKoulutus')}
+      {t('yleiset.koulutus')}
     </FormHeader>
   );
 };

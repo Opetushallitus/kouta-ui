@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Modal from '../Modal';
 import Button from '../Button';
-import { getKoutaToteutukset } from '../../apiUtils';
+import getToteutukset from '../../utils/kouta/getToteutukset';
 import Flex, { FlexItem } from '../Flex';
 import Select from '../Select';
 import Dropdown, { DropdownMenu, DropdownMenuItem } from '../Dropdown';
@@ -84,7 +84,7 @@ const ToteutuksetModal = ({
   const { t } = useTranslation();
 
   const { data: toteutukset } = useApiAsync({
-    promiseFn: getKoutaToteutukset,
+    promiseFn: getToteutukset,
     organisaatioOid,
     watch: organisaatioOid,
   });

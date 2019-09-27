@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import BaseFields from '../BaseFields';
 import FormControl from '../FormControl';
 import FormLabel from '../FormLabel';
-import { getKoutaHaut } from '../../apiUtils';
+import getHaut from '../../utils/kouta/getHaut';
 import { getFirstLanguageValue } from '../../utils';
 import useTranslation from '../useTranslation';
 import useApiAsync from '../useApiAsync';
@@ -19,7 +19,7 @@ const BaseSelectionSection = ({ organisaatioOid, name }) => {
   const { t } = useTranslation();
 
   const { data = [] } = useApiAsync({
-    promiseFn: getKoutaHaut,
+    promiseFn: getHaut,
     organisaatioOid,
     watch: organisaatioOid,
   });

@@ -8,7 +8,7 @@ import EditHakukohdeSteps from './EditHakukohdeSteps';
 import EditHakukohdeForm from './EditHakukohdeForm';
 import EditHakukohdeFooter from './EditHakukohdeFooter';
 import useApiAsync from '../useApiAsync';
-import { getOrganisaatioByOid } from '../../apiUtils';
+import getOrganisaatioByOid from '../../utils/organisaatioService/getOrganisaatioByOid';
 import { getFirstLanguageValue } from '../../utils';
 import Flex, { FlexItem } from '../Flex';
 import Typography from '../Typography';

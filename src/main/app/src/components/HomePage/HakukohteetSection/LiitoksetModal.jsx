@@ -9,7 +9,8 @@ import ModalFooter from '../../ModalFooter';
 import Select from '../../Select';
 import useTranslation from '../../useTranslation';
 import useApiAsync from '../../useApiAsync';
-import { getKoutaHaut, getKoutaToteutukset } from '../../../apiUtils';
+import getToteutukset from '../../../utils/kouta/getToteutukset';
+import getHaut from '../../../utils/kouta/getHaut';
 import FormLabel from '../../FormLabel';
 import Box from '../../Box';
 import { isArray, getFirstLanguageValue } from '../../../utils';
@@ -36,13 +37,13 @@ const LiitoksetModal = ({ onClose, organisaatioOid, history, open }) => {
   const [toteutus, setToteutus] = useState();
 
   const { data: haut } = useApiAsync({
-    promiseFn: getKoutaHaut,
+    promiseFn: getHaut,
     organisaatioOid,
     watch: organisaatioOid,
   });
 
   const { data: toteutukset } = useApiAsync({
-    promiseFn: getKoutaToteutukset,
+    promiseFn: getToteutukset,
     organisaatioOid,
     watch: organisaatioOid,
   });

@@ -159,7 +159,7 @@ const getHakukohdeByFormValues = values => {
     toinenAsteOnkoKaksoistutkinto,
     valintakokeet,
     pohjakoulutusvaatimusKoodiUrit,
-    valintaperuste,
+    valintaperusteId: valintaperuste,
     minEnsikertalaisenAloituspaikat,
     maxEnsikertalaisenAloituspaikat,
     kaytetaanHaunHakulomaketta: !eriHakulomake,

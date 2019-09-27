@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Typography from '../Typography';
-import { getKoutaKoulutusToteutukset } from '../../apiUtils';
+import getKoulutuksenToteutukset from '../../utils/kouta/getKoulutuksenToteutukset';
 import useApiAsync from '../useApiAsync';
 import { getFirstLanguageValue } from '../../utils';
 import useTranslation from '../useTranslation';
@@ -15,7 +15,7 @@ const getToteutukset = async ({
   organisaatioOid,
 }) => {
   return oid
-    ? getKoutaKoulutusToteutukset({ httpClient, apiUrls, oid, organisaatioOid })
+    ? getKoulutuksenToteutukset({ httpClient, apiUrls, oid, organisaatioOid })
     : [];
 };
 

@@ -17,7 +17,6 @@ export default {
       'Hakusanallasi ei löytynyt valittavia kohteita',
     luoKohde: 'Luo kohde "{{kohde}}"',
     yritaUudelleen: 'Yritä uudelleen',
-    virheilmoitus: 'Jokin meni vikaan',
     koulutus: 'Koulutus',
     toteutus: 'Toteutus',
     haku: 'Haku',
@@ -140,8 +139,6 @@ export default {
     ladatutTiedostot: 'Ladatut tiedostot',
     varmistaLomakkeenKentat:
       'Varmistathan että olet täyttänyt lomakkeen kaikki pakolliset kentät',
-    virheilmoitusKuvaus:
-      'Jos virhe aiheuttaa ongelmia järjestelmän käytössä, yritä päivittää sivu, tai ota yhteyttä tukeen',
     valitseMitaHakulomakettaKaytetaan: 'Valitse mitä hakulomaketta käytetään',
     valitseKoulutustyyppi: 'Valitse koulutustyyppi',
     luoUusi: 'Luo uusi',
@@ -154,9 +151,6 @@ export default {
     valitseValintakoetyypit: 'Valitse valintakoetyypit',
     lisaaTilaisuus: 'Lisää tilaisuus',
     valintakoe: 'Valintakoe',
-    kayttooikeusVirheilmoitus: 'Käyttöoikeuksissasi on puutteita',
-    kayttooikeusVirheilmoitusKuvaus:
-      'Käyttöoikeuksien tarkistuksessa tapahtui virhe. Tarkistathan, että käyttäjälläsi on tarvittavat käyttöoikeudet',
     avaaLomake: 'Avaa lomake',
     valitseHaunKohdejoukko: 'Valitse haun kohdejoukko',
     valitseHaunKohdejoukonTarkenne: 'Valitse haun kohdejoukon tarkenne',
@@ -168,6 +162,14 @@ export default {
     kirjoitaHakusana: 'Kirjoita hakusana',
     valitseVaihtoehdoista: 'Valitse vaihtoehdoista',
     hakukohteet: 'Hakukohteet',
+  },
+  ilmoitukset: {
+    tuntematonVirhe:
+      'Jokin meni vikaan. Jos virhe aiheuttaa ongelmia, yritä päivittää sivu',
+    tallennusOnnistui: 'Tallennus onnistui',
+    tallennusEpaonnistui:
+      'Tallennus epäonnistui. Tarkista lomakkeen tiedot ja yritä uudelleen',
+    kayttooikeusVirhe: 'Käyttöoikeuksissasi on puutteita',
   },
   sivuTitlet: {
     etuliite: 'Tarjonta',
@@ -199,10 +201,12 @@ export default {
       'Arkistointi siirtää tiedot pois näkyvistä, mutta ei poista niitä',
   },
   validointivirheet: {
-    pakollinen: 'Syötä kentälle arvo',
-    pakollisetKaannokset: 'Syötä arvo kaikille kentän käännöksille',
-    listaVahintaanYksi: 'Valitse kentälle vähintään yksi arvo',
-    listaVahintaan: 'Valitse kentälle vähintään {{lukumaara}} arvoa',
+    pakollinen: 'Tämä kenttä on pakollinen',
+    pakollisetKaannokset:
+      'Tämän kentän kaikille käännöksille täytyy syöttää arvo',
+    listaVahintaanYksi: 'Tälle kentälle täytyy valita vähintään yksi arvo',
+    listaVahintaan:
+      'Tälle kentälle täytyy valita vähintään {{lukumaara}} arvoa',
   },
   hakulomakeValinnat: {
     ataru: 'Käytetään hakemuspalvelun lomaketta',
@@ -368,6 +372,7 @@ export default {
     valitseOsaamisala: 'Valitse osaamisala',
     valitseTutkinnonOsat: 'Valitse tutkinnon osat',
     lisaaTutkinnonOsa: 'Lisää tutkinnon osa',
+    hakukohteenLittaminen: 'Hakukohteen liittäminen toteutukseen',
   },
   hakulomake: {
     haunNimi: 'Haun nimi',
@@ -426,6 +431,8 @@ export default {
     hakuunLiitettyLomake: 'Hakuun liitetty lomake',
     avaaLomake: 'Avaa lomake',
     hakukohteenTila: 'Hakukohteen tila',
+    luoUusiValintaperustekuvaus: 'Luo uusi valintaperustekuvaus',
+    valitseValintaperustekuvaus: 'Valitse valintaperustekuvaus',
   },
   valintaperustelomake: {
     valintaperusteenPerustiedot: 'Valintaperusteen perustiedot',

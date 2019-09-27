@@ -7,8 +7,9 @@ import get from 'lodash/get';
 import Icon from '../Icon';
 import { getThemeProp } from '../../theme';
 import Typography from '../Typography';
-import { isString, isFunction } from '../../utils';
+import { isFunction } from '../../utils';
 import { closeToast } from '../../state/toaster';
+import Box from '../Box';
 
 const ToasterContainer = styled.div`
   display: flex;
@@ -17,15 +18,41 @@ const ToasterContainer = styled.div`
 
 const ToastContainer = styled.div`
   display: inline-flex;
+  align-items: center;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
   border-radius: ${getThemeProp('shape.borderRadius')};
   overflow: hidden;
   max-width: 450px;
+  background-color: white;
+  color: ${({ theme }) => theme.palette.text.primary};
+  padding: 16px;
+
+  ${({ status }) =>
+    status === 'success' &&
+    css`
+      background-color: ${getThemeProp('palette.success.main')};
+      color: white;
+    `}
+
+  ${({ status }) =>
+    status === 'danger' &&
+    css`
+      background-color: ${getThemeProp('palette.danger.main')};
+      color: white;
+    `}
+  
+  ${({ status }) =>
+    status === 'info' &&
+    css`
+      background-color: ${getThemeProp('palette.primary.main')};
+      color: white;
+    `}
 `;
 
 const CloseIcon = styled(Icon).attrs({ type: 'close' })`
-  color: ${getThemeProp('palette.text.primary')};
-  opacity: 0.8;
+  color: inherit;
+  opacity: 0.6;
+  font-size: 1.25rem;
   transition: opacity 0.25s;
   cursor: pointer;
 
@@ -34,85 +61,28 @@ const CloseIcon = styled(Icon).attrs({ type: 'close' })`
   }
 `;
 
-const CloseContainer = styled.div`
-  flex: 0;
-  margin-left: ${({ theme }) => theme.spacing.unit * 2}px;
-`;
-
-const ToastStatus = styled.div`
-  flex: 0;
-  color: white;
-  padding: ${({ theme }) => theme.spacing.unit * 2}px;
-
-  ${({ status }) =>
-    status === 'success' &&
-    css`
-      background-color: ${getThemeProp('palette.success.main')};
-    `}
-
-  ${({ status }) =>
-    status === 'danger' &&
-    css`
-      background-color: ${getThemeProp('palette.danger.main')};
-    `}
-`;
-
-const ToastIcon = styled(Icon)`
-  font-size: 2rem;
-`;
-
-const ToastContent = styled.div`
-  padding: ${({ theme }) => theme.spacing.unit * 2}px;
-  flex: 1;
-  display: flex;
-  background-color: white;
-`;
-
-const StatusTitle = styled(Typography).attrs({ variant: 'h6' })`
-  ${({ status }) =>
-    status === 'success' &&
-    css`
-      color: ${getThemeProp('palette.success.main')};
-    `}
-
-  ${({ status }) =>
-    status === 'danger' &&
-    css`
-      color: ${getThemeProp('palette.danger.main')};
-    `}
-`;
-
 const iconByStatus = {
   success: 'check_circle_outline',
   danger: 'error_outline',
+  info: 'info',
 };
 
 export const Toast = ({
-  status = 'success',
-  title = null,
+  status = 'info',
   children = null,
   onClose,
   ...props
 }) => (
-  <ToastContainer {...props}>
-    <ToastStatus status={status}>
-      <ToastIcon type={iconByStatus[status] || ''} />
-    </ToastStatus>
-    <ToastContent status={status}>
-      <div>
-        {title ? (
-          <StatusTitle status={status} marginBottom={children ? 1 : 0}>
-            {title}
-          </StatusTitle>
-        ) : null}
-        {isString(children) ? <Typography>{children}</Typography> : children}
-      </div>
-      {isFunction(onClose) ? (
-        <CloseContainer>
-          <CloseIcon onClick={onClose} />
-        </CloseContainer>
-      ) : null}
-    </ToastContent>
+  <ToastContainer status={status} {...props}>
+    <Icon type={iconByStatus[status] || ''} mr={2} />
+    <Box>
+      <Typography color="inherit">{children}</Typography>
+    </Box>
+    {isFunction(onClose) ? (
+      <Box ml={2}>
+        <CloseIcon onClick={onClose} />
+      </Box>
+    ) : null}
   </ToastContainer>
 );
 
@@ -149,7 +119,6 @@ export const Toaster = ({ toasts, onClose, ...props }) => (
         <ToastWrapper last={index === toasts.length - 1}>
           <Toast
             status={item.status}
-            title={item.title}
             style={props}
             {...(isFunction(onClose)
               ? {
@@ -159,7 +128,7 @@ export const Toaster = ({ toasts, onClose, ...props }) => (
                 }
               : {})}
           >
-            {item.description}
+            {item.label}
           </Toast>
         </ToastWrapper>
       )}

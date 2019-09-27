@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 
-import Toaster, { Toast } from './index';
+import Toaster from './index';
 
 const toastsArray = [
   {
-    title: 'Koulutus on tallennettu onnistuneesti',
-    description: 'Jei',
-    status: 'success',
+    label: 'Koulutus on tallennettu onnistuneesti',
+    status: 'info',
     key: '1',
   },
   {
-    title: 'Koulutuksen tallennuksessa ilmeni ongelma',
-    description: 'Ouu',
+    label:
+      'Jokin meni vikaan. Jos virhe aiheuttaa ongelmia, yritä päivittää sivu',
     status: 'danger',
     key: '2',
   },
@@ -58,7 +56,14 @@ storiesOf('Toaster', module).add('Basic', () => (
           style={{ position: 'fixed', top: '16px', right: '16px' }}
           onClose={onClose}
         />
-        <button onClick={() => onAdd({ ...toastsArray[Math.random() < 0.5 ? 0 : 1], key: Math.random() * 1000 })}>
+        <button
+          onClick={() =>
+            onAdd({
+              ...toastsArray[Math.random() < 0.5 ? 0 : 1],
+              key: Math.random() * 1000,
+            })
+          }
+        >
           Add toast
         </button>
       </>

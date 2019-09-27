@@ -8,6 +8,9 @@ import useTranslation from '../useTranslation';
 import useApiAsync from '../useApiAsync';
 import { FormFieldSelect } from '../formFields';
 import useLanguage from '../useLanguage';
+import Divider from '../Divider';
+import Box from '../Box';
+import Button from '../Button';
 
 const getValintaperusteetOptions = (valintaperusteet, language) =>
   valintaperusteet.map(({ nimi, id }) => ({
@@ -35,12 +38,26 @@ const KuvausSection = ({ haku, organisaatio, name }) => {
   );
 
   return (
-    <Field
-      name={name}
-      component={FormFieldSelect}
-      options={options}
-      label={t('yleiset.valitseKuvaus')}
-    />
+    <>
+      <Field
+        name={name}
+        component={FormFieldSelect}
+        options={options}
+        label={t('hakukohdelomake.valitseValintaperustekuvaus')}
+      />
+      <Divider marginTop={4} marginBottom={4} />
+      <Box display="flex" justifyContent="center">
+        <Button
+          variant="outlined"
+          color="primary"
+          as="a"
+          href={`/kouta/organisaatio/${organisaatioOid}/valintaperusteet`}
+          target="_blank"
+        >
+          {t('hakukohdelomake.luoUusiValintaperustekuvaus')}
+        </Button>
+      </Box>
+    </>
   );
 };
 

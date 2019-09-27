@@ -97,6 +97,6 @@ Object {
       "tyyppiKoodiUri": "tyyppi_1#1",
     },
   ],
-  "valintaperuste": "peruste_1#1",
+  "valintaperusteId": "peruste_1#1",
 }
 `;

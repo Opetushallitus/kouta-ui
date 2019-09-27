@@ -431,6 +431,8 @@ export default {
     hakuunLiitettyLomake: 'Hakuun liitetty lomake',
     avaaLomake: 'Avaa lomake',
     hakukohteenTila: 'Hakukohteen tila',
+    luoUusiValintaperustekuvaus: 'Luo uusi valintaperustekuvaus',
+    valitseValintaperustekuvaus: 'Valitse valintaperustekuvaus',
   },
   valintaperustelomake: {
     valintaperusteenPerustiedot: 'Valintaperusteen perustiedot',

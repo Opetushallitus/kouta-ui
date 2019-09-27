@@ -3,27 +3,24 @@ import { Field } from 'redux-form';
 
 import { FormFieldSoraKuvausSelect } from '../formFields';
 import useTranslation from '../useTranslation';
-import Spacing from '../Spacing';
 import Button from '../Button';
 import Divider from '../Divider';
-import Flex from '../Flex';
+import Box from '../Box';
 
 const SoraKuvausSection = ({ name, organisaatioOid }) => {
   const { t } = useTranslation();
 
   return (
     <>
-      <Spacing marginBottom={2}>
-        <Field
-          name={name}
-          component={FormFieldSoraKuvausSelect}
-          label={t('valintaperustelomake.valitseSoraKuvaus')}
-          organisaatioOid={organisaatioOid}
-          reloadOnFocus
-        />
-      </Spacing>
+      <Field
+        name={name}
+        component={FormFieldSoraKuvausSelect}
+        label={t('valintaperustelomake.valitseSoraKuvaus')}
+        organisaatioOid={organisaatioOid}
+        reloadOnFocus
+      />
       <Divider marginTop={4} marginBottom={4} />
-      <Flex justifyCenter>
+      <Box display="flex" justifyContent="center">
         <Button
           variant="outlined"
           color="primary"
@@ -33,7 +30,7 @@ const SoraKuvausSection = ({ name, organisaatioOid }) => {
         >
           {t('yleiset.luoUusiSoraKuvaus')}
         </Button>
-      </Flex>
+      </Box>
     </>
   );
 };

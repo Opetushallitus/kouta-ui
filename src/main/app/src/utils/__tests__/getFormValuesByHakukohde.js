@@ -91,7 +91,7 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
       },
     ],
     pohjakoulutusvaatimusKoodiUrit: ['vaatimus_1#1', 'vaatimus_2#1'],
-    valintaperuste: 'peruste_1#1',
+    valintaperusteId: 'peruste_1#1',
     minEnsikertalaisenAloituspaikat: 39,
     maxEnsikertalaisenAloituspaikat: 49,
     hakulomakeAtaruId: '12345',

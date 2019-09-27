@@ -63,4 +63,5 @@ export default () => ({
   hakulomakeAtaruId: '12345',
   hakulomakeKuvaus: {},
   hakulomakeLinkki: {},
+  valintaperusteId: 'b9d53560-a7f0-45d3-bd9d-46e67e6049ba',
 });

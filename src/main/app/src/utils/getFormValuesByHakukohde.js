@@ -23,7 +23,7 @@ const getFormValuesByHakukohde = hakukohde => {
     toinenAsteOnkoKaksoistutkinto,
     valintakokeet = [],
     pohjakoulutusvaatimusKoodiUrit = [],
-    valintaperuste = '',
+    valintaperusteId,
     minEnsikertalaisenAloituspaikat = '',
     maxEnsikertalaisenAloituspaikat = '',
     kaytetaanHaunHakulomaketta,
@@ -75,9 +75,11 @@ const getFormValuesByHakukohde = hakukohde => {
     pohjakoulutus: (pohjakoulutusvaatimusKoodiUrit || []).map(value => ({
       value,
     })),
-    valintaperusteenKuvaus: {
-      value: valintaperuste,
-    },
+    valintaperusteenKuvaus: valintaperusteId
+      ? {
+          value: valintaperusteId,
+        }
+      : undefined,
     valintakoe: getValintakoeFieldsValues(valintakokeet),
     liitteet: {
       toimitustapa: {

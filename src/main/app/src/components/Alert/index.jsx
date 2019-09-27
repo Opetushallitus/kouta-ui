@@ -5,7 +5,7 @@ import { setLightness } from 'polished';
 import Typography from '../Typography';
 import { spacing, getThemeProp } from '../../theme';
 import Icon from '../Icon';
-import Flex, { FlexItem } from '../Flex';
+import Box from '../Box';
 
 const getIconByVariant = variant => {
   if (variant === 'info') {
@@ -30,7 +30,7 @@ const getVariantColor = ({ variant, theme }) => {
 };
 
 const VariantIcon = styled(Icon)`
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   color: ${getVariantColor};
 `;
 const getVariantCss = ({ variant, theme }) => {
@@ -44,39 +44,42 @@ const getVariantCss = ({ variant, theme }) => {
 
 const AlertBase = styled.div`
   padding: ${spacing(2)};
+  display: flex;
   border-radius: ${getThemeProp('shape.borderRadius')};
   border: 1px solid;
+
+  ${({ hasTitle }) => !hasTitle && 'align-items: center'}
+
   ${getVariantCss}
 `;
 
 const Alert = ({
   variant = 'info',
-  message,
-  description: descriptionProp = null,
+  title = null,
   children = null,
   showIcon = true,
   ...props
 }) => {
   const icon = getIconByVariant(variant);
-  const description = descriptionProp || children;
+  const hasTitle = Boolean(title);
 
   return (
-    <AlertBase variant={variant} {...props}>
-      <Flex>
-        {icon && showIcon ? (
-          <FlexItem grow={0} marginRight={2}>
-            <VariantIcon variant={variant} type={icon} />
-          </FlexItem>
+    <AlertBase variant={variant} hasTitle={hasTitle} {...props}>
+      {icon && showIcon ? (
+        <VariantIcon variant={variant} type={icon} mr={2} />
+      ) : null}
+      <Box flexGrow={1}>
+        {title ? (
+          <Typography mb={children ? 1 : 0} variant="h6">
+            {title}
+          </Typography>
         ) : null}
-        <FlexItem grow={1}>
-          {message ? (
-            <Typography marginBottom={description ? 1 : 0} variant="h6">
-              {message}
-            </Typography>
-          ) : null}
-          {description ? <Typography>{description}</Typography> : null}
-        </FlexItem>
-      </Flex>
+        {children ? (
+          <Typography color={hasTitle ? 'text.primary' : 'text.heading'}>
+            {children}
+          </Typography>
+        ) : null}
+      </Box>
     </AlertBase>
   );
 };

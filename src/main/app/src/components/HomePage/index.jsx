@@ -70,11 +70,9 @@ const HomeRoute = ({ organisaatioOid, persistedOrganisaatioOid }) => {
 
   if (!firstOrganisaatioOid) {
     return (
-      <Alert
-        variant="danger"
-        message={t('etusivu.eiOikeuksiaVirheilmoitus')}
-        description={t('etusivu.eiOikeuksiaVirheilmoitusKuvaus')}
-      />
+      <Alert variant="danger" title={t('etusivu.eiOikeuksiaVirheilmoitus')}>
+        {t('etusivu.eiOikeuksiaVirheilmoitusKuvaus')}
+      </Alert>
     );
   }
 

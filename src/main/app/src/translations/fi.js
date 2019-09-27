@@ -433,6 +433,9 @@ export default {
     hakukohteenTila: 'Hakukohteen tila',
     luoUusiValintaperustekuvaus: 'Luo uusi valintaperustekuvaus',
     valitseValintaperustekuvaus: 'Valitse valintaperustekuvaus',
+    valintaperustekuvaustenListausperuste:
+      'Vaihtoehdoissa on lueteltu valintaperustekuvaukset, joiden kohdejoukko on sama kuin haun kohdejoukko',
+    haunKohdejoukkoPuuttuu: 'Hakuun ei ole liitetty kohdejoukkoa',
   },
   valintaperustelomake: {
     valintaperusteenPerustiedot: 'Valintaperusteen perustiedot',

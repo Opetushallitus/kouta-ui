@@ -18,11 +18,8 @@ storiesOf('Alert', module).add('Basic', () => {
   const showIcon = boolean('Show icon', true);
 
   return (
-    <Alert
-      variant={variant}
-      showIcon={showIcon}
-      message="Alert message"
-      description="Alert description"
-    />
+    <Alert variant={variant} showIcon={showIcon} title="Alert title">
+      Description
+    </Alert>
   );
 });

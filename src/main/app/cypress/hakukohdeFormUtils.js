@@ -45,6 +45,7 @@ export const stubHakukohdeFormRoutes = ({ cy, organisaatioOid, hakuOid }) => {
     response: merge(haku(), {
       oid: hakuOid,
       organisaatioOid: organisaatioOid,
+      hakulomaketyyppi: 'muu',
     }),
   });
 

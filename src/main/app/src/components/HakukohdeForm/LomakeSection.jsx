@@ -94,12 +94,14 @@ const LomakeSection = ({ language, haku }) => {
           {t('hakukohdelomake.eriHakulomake')}
         </Field>
       </div>
-      <Field
-        component={ConditionalLomakeFields}
-        name="hakulomake.eriHakulomake"
-        fieldsName="hakulomake"
-        language={language}
-      />
+      {canSelectHakulomake ? (
+        <Field
+          component={ConditionalLomakeFields}
+          name="hakulomake.eriHakulomake"
+          fieldsName="hakulomake"
+          language={language}
+        />
+      ) : null}
     </>
   );
 };

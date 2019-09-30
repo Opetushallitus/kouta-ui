@@ -431,6 +431,8 @@ export default {
     hakuunLiitettyLomake: 'Hakuun liitetty lomake',
     hakuunLiitettyMuuLomake: 'Muu hakulomake',
     hakuunLiitettyHakemuspalvelunLomake: 'Hakemuspalvelun lomake',
+    hakuunEiLiitettyMuuLomake:
+      'Hakukohteelle voi valita erilisen hakulomakkeen vain, jos haussa on käytössä "muu"-tyyppinen hakulomake',
     avaaLomake: 'Avaa lomake',
     hakukohteenTila: 'Hakukohteen tila',
     luoUusiValintaperustekuvaus: 'Luo uusi valintaperustekuvaus',

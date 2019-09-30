@@ -429,6 +429,8 @@ export default {
     eriHakulomake: 'Hakukohteen hakulomake on eri kuin haun hakulomake',
     hakuunEiOleLiitettyLomaketta: 'Hakuun ei ole liitetty lomaketta',
     hakuunLiitettyLomake: 'Hakuun liitetty lomake',
+    hakuunLiitettyMuuLomake: 'Muu hakulomake',
+    hakuunLiitettyHakemuspalvelunLomake: 'Hakemuspalvelun lomake',
     avaaLomake: 'Avaa lomake',
     hakukohteenTila: 'Hakukohteen tila',
     luoUusiValintaperustekuvaus: 'Luo uusi valintaperustekuvaus',

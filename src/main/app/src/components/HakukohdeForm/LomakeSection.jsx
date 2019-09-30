@@ -12,6 +12,12 @@ import UrlContext from '../UrlContext';
 import Typography from '../Typography';
 import Anchor from '../Anchor';
 
+const hakulomakeTyyppiToLabel = {
+  [HAKULOMAKETYYPPI.MUU]: 'hakukohdelomake.hakuunLiitettyMuuLomake',
+  [HAKULOMAKETYYPPI.ATARU]:
+    'hakukohdelomake.hakuunLiitettyHakemuspalvelunLomake',
+};
+
 const HakulomakeInfo = ({ haku, t }) => {
   const apiUrls = useContext(UrlContext);
   const hakulomaketyyppi = get(haku, 'hakulomaketyyppi');
@@ -26,12 +32,22 @@ const HakulomakeInfo = ({ haku, t }) => {
     link = hakulomakeLinkki;
   }
 
-  return link ? (
+  const label = hakulomaketyyppi
+    ? hakulomakeTyyppiToLabel[hakulomaketyyppi]
+    : undefined;
+
+  return label ? (
     <Typography>
       {t('hakukohdelomake.hakuunLiitettyLomake')}:{' '}
-      <Anchor target="_blank" rel="noopener noreferrer" href={link}>
-        {t('hakukohdelomake.avaaLomake')}
-      </Anchor>
+      <strong>
+        {link ? (
+          <Anchor target="_blank" rel="noopener noreferrer" href={link}>
+            {label}
+          </Anchor>
+        ) : (
+          label
+        )}
+      </strong>
     </Typography>
   ) : (
     <Typography>{t('hakukohdelomake.hakuunEiOleLiitettyLomaketta')}</Typography>
@@ -52,6 +68,7 @@ const ConditionalLomakeFields = ({
 
 const LomakeSection = ({ language, haku }) => {
   const { t } = useTranslation();
+  const haunHakulomaketyyppi = get(haku, 'hakulomaketyyppi');
 
   return (
     <>
@@ -59,7 +76,11 @@ const LomakeSection = ({ language, haku }) => {
         <HakulomakeInfo haku={haku} t={t} />
       </Spacing>
       <div {...getTestIdProps('eriHakulomake')}>
-        <Field name="hakulomake.eriHakulomake" component={FormFieldCheckbox}>
+        <Field
+          name="hakulomake.eriHakulomake"
+          component={FormFieldCheckbox}
+          disabled={haunHakulomaketyyppi !== HAKULOMAKETYYPPI.MUU}
+        >
           {t('hakukohdelomake.eriHakulomake')}
         </Field>
       </div>

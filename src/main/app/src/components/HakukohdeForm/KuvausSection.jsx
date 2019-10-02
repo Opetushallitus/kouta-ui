@@ -12,6 +12,7 @@ import Divider from '../Divider';
 import Box from '../Box';
 import Button from '../Button';
 import Alert from '../Alert';
+import useFieldValue from '../useFieldValue';
 
 const getValintaperusteetOptions = (valintaperusteet, language) =>
   valintaperusteet.map(({ nimi, id }) => ({
@@ -26,6 +27,8 @@ const KuvausSection = ({ haku, organisaatio, name }) => {
   const organisaatioOid = get(organisaatio, 'oid');
   const watch = [hakuOid, organisaatioOid].join(',');
   const { t } = useTranslation();
+  const valintaperuste = useFieldValue(name);
+  const valintaperusteOid = get(valintaperuste, 'value');
 
   const { data, reload } = useApiAsync({
     promiseFn: getValintaperusteet,
@@ -60,6 +63,19 @@ const KuvausSection = ({ haku, organisaatio, name }) => {
         label={t('hakukohdelomake.valitseValintaperustekuvaus')}
         helperText={t('hakukohdelomake.valintaperustekuvaustenListausperuste')}
       />
+      {valintaperusteOid ? (
+        <Box mt={2}>
+          <Button
+            variant="outlined"
+            color="primary"
+            as="a"
+            href={`/kouta/valintaperusteet/${valintaperusteOid}/muokkaus`}
+            target="_blank"
+          >
+            {t('hakukohdelomake.avaaValintaperuste')}
+          </Button>
+        </Box>
+      ) : null}
       <Divider marginTop={4} marginBottom={4} />
       <Box display="flex" justifyContent="center">
         <Button

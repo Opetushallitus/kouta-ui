@@ -1,14 +1,18 @@
 import React from 'react';
 import { Field } from 'redux-form';
+import get from 'lodash/get';
 
 import { FormFieldSoraKuvausSelect } from '../formFields';
 import useTranslation from '../useTranslation';
 import Button from '../Button';
 import Divider from '../Divider';
 import Box from '../Box';
+import useFieldValue from '../useFieldValue';
 
 const SoraKuvausSection = ({ name, organisaatioOid }) => {
   const { t } = useTranslation();
+  const soraKuvaus = useFieldValue(name);
+  const soraKuvausId = get(soraKuvaus, 'value');
 
   return (
     <>
@@ -19,6 +23,19 @@ const SoraKuvausSection = ({ name, organisaatioOid }) => {
         organisaatioOid={organisaatioOid}
         reloadOnFocus
       />
+      {soraKuvausId ? (
+        <Box mt={2}>
+          <Button
+            variant="outlined"
+            color="primary"
+            as="a"
+            href={`/kouta/sora-kuvaus/${soraKuvausId}/muokkaus`}
+            target="_blank"
+          >
+            {t('valintaperustelomake.avaaSoraKuvaus')}
+          </Button>
+        </Box>
+      ) : null}
       <Divider marginTop={4} marginBottom={4} />
       <Box display="flex" justifyContent="center">
         <Button

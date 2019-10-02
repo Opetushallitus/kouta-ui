@@ -477,6 +477,7 @@ export default {
     valitseValintaperusteenNakyminen:
       'Valitse näkyykö valintaperuste muille koulutustoimijoille',
     valintaperusteenTila: 'Valintaperusteen tila',
+    avaaSoraKuvaus: 'Avaa SORA-kuvaus',
   },
   soraKuvausLomake: {
     soraKuvauksenTiedot: 'SORA-kuvauksen tiedot',

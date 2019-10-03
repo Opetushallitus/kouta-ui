@@ -65,6 +65,12 @@ const stubMyOrganisations = () => {
     url: '/kouta-backend/toteutus/list**',
     response: [],
   });
+
+  cy.route({
+    method: 'GET',
+    url: '/kouta-backend/hakukohde/list**',
+    response: [],
+  });
 };
 
 describe('frontPage', () => {
@@ -167,5 +173,20 @@ describe('frontPage', () => {
       'contain',
       'Valintaperusteen nimi',
     );
+  });
+
+  it('should list hakukohteet', () => {
+    cy.route({
+      method: 'GET',
+      url: '**/kouta-index/hakukohde/**',
+      response: {
+        result: [merge(koutaIndexItem(), { nimi: { fi: 'Hakukohteen nimi' } })],
+        totalCount: 1,
+      },
+    });
+
+    cy.get('#hakukohteet').scrollIntoView();
+
+    cy.getByTestId('hakukohteetTable').should('contain', 'Hakukohteen nimi');
   });
 });

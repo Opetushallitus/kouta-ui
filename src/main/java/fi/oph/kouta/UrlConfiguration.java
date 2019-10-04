@@ -73,7 +73,10 @@ public class UrlConfiguration extends OphProperties {
         this.frontProperties.setProperty("kouta-index.toteutus-list", this.require("kouta-index.toteutus-list"));
         this.frontProperties.setProperty("kouta-index.haku-list", this.require("kouta-index.haku-list"));
         this.frontProperties.setProperty("kouta-index.valintaperuste-list", this.require("kouta-index.valintaperuste-list"));
+        this.frontProperties.setProperty("kouta-index.hakukohde-list", this.require("kouta-index.hakukohde-list"));
+    
         this.frontProperties.setProperty("virkailija-raamit.raamitJs", this.require("virkailija-raamit.raamitJs"));
+        
         this.frontProperties.setProperty("kayttooikeus-service.me", this.require("kayttooikeus-service.me"));
         this.frontProperties.setProperty("kayttooikeus-service.kayttajan-organisaatiot", this.require("kayttooikeus-service.kayttajan-organisaatiot"));
 

@@ -48,6 +48,7 @@ export const development = ({ isCypress }) => ({
   'kouta-index.koulutus-list': 'https://virkailija.hahtuvaopintopolku.fi/kouta-index/koulutus/filtered-list',
   'kouta-index.toteutus-list': 'https://virkailija.hahtuvaopintopolku.fi/kouta-index/toteutus/filtered-list',
   'kouta-index.haku-list': 'https://virkailija.hahtuvaopintopolku.fi/kouta-index/haku/filtered-list',
+  'kouta-index.hakukohde-list': 'https://virkailija.hahtuvaopintopolku.fi/kouta-index/hakukohde/filtered-list',
   'kouta-index.valintaperuste-list': 'https://virkailija.hahtuvaopintopolku.fi/kouta-index/valintaperuste/filtered-list',
   'kayttooikeus-service.me': 'https://virkailija.hahtuvaopintopolku.fi/kayttooikeus-service/cas/me',
   'kayttooikeus-service.kayttajan-organisaatiot': 'https://virkailija.hahtuvaopintopolku.fi/kayttooikeus-service/organisaatiohenkilo/organisaatioOid',

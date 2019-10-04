@@ -13,6 +13,9 @@ export default () => ({
   maxEnsikertalaisenAloituspaikat: 49,
   kaytetaanHaunAlkamiskautta: false,
   pohjakoulutusvaatimusKoodiUrit: ['pohjakoulutusvaatimustoinenaste_0#1'],
+  pohjakoulutusvaatimusTarkenne: {
+    fi: '<p>Fi tarkenne</p>',
+  },
   muuPohjakoulutusvaatimus: {},
   toinenAsteOnkoKaksoistutkinto: true,
   kaytetaanHaunAikataulua: false,

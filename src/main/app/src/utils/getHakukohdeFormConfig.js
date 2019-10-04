@@ -128,7 +128,7 @@ const baseConfig = {
       fields: {
         pohjakoulutusvaatimus: {
           validate: validateIfJulkaistu(eb =>
-            eb.validateArrayMinLength('pohjakoulutus', 1),
+            eb.validateArrayMinLength('pohjakoulutus.pohjakoulutusvaatimus', 1),
           ),
         },
       },

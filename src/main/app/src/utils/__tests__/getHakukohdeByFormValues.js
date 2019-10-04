@@ -1,4 +1,5 @@
 import getHakukohdeByFormValues from '../getHakukohdeByFormValues';
+import parseEditorState from '../draft/parseEditorState';
 import { HAKULOMAKETYYPPI } from '../../constants';
 
 test('getHakukohdeByFormValues returns correct hakukohde given form values', () => {
@@ -36,7 +37,16 @@ test('getHakukohdeByFormValues returns correct hakukohde given form values', () 
       nimi: { fi: 'Fi nimi', sv: 'Sv nimi' },
       voiSuorittaaKaksoistutkinnon: true,
     },
-    pohjakoulutus: [{ value: 'vaatimus_1#1' }, { value: 'vaatimus_2#1' }],
+    pohjakoulutus: {
+      pohjakoulutusvaatimus: [
+        { value: 'vaatimus_1#1' },
+        { value: 'vaatimus_2#1' },
+      ],
+      tarkenne: {
+        fi: parseEditorState('<strong>Tarkenne fi</strong>'),
+        sv: parseEditorState('<strong>Tarkenne sv</strong>'),
+      },
+    },
     valintaperusteenKuvaus: {
       value: 'peruste_1#1',
     },

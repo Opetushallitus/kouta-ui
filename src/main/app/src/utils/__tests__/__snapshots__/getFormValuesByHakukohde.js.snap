@@ -99,14 +99,20 @@ Object {
     },
     "voiSuorittaaKaksoistutkinnon": true,
   },
-  "pohjakoulutus": Array [
-    Object {
-      "value": "vaatimus_1#1",
+  "pohjakoulutus": Object {
+    "pohjakoulutusvaatimus": Array [
+      Object {
+        "value": "vaatimus_1#1",
+      },
+      Object {
+        "value": "vaatimus_2#1",
+      },
+    ],
+    "tarkenne": Object {
+      "fi":         "<p><strong>Tarkenne fi</strong></p>",
+      "sv":         "<p><strong>Tarkenne sv</strong></p>",
     },
-    Object {
-      "value": "vaatimus_2#1",
-    },
-  ],
+  },
   "tila": "tallennettu",
   "valintakoe": Object {
     "tilaisuudet": Object {

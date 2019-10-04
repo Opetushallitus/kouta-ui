@@ -70,88 +70,9 @@ module.exports = {
           },
         ],
         pohjakoulutusvaatimusKoodiUrit: ['pohjakoulutusvaatimustoinenaste_0#1'],
-        valintaperusteId: '649adb37-cd4d-4846-91a9-84b58b90f928',
-        minEnsikertalaisenAloituspaikat: null,
-        maxEnsikertalaisenAloituspaikat: null,
-        kaytetaanHaunHakulomaketta: false,
-        hakulomaketyyppi: 'ataru',
-        hakulomakeAtaruId: 'lomake_1',
-        hakulomakeLinkki: {},
-        hakulomakeKuvaus: {},
-        kaytetaanHaunAlkamiskautta: false,
-        organisaatioOid: '1.1.1.1.1.1',
-        hakuOid: '4.1.1.1.1.1',
-        toteutusOid: '2.1.1.1.1.1',
-      },
-      '2': {
-        muokkaaja: '1.2.246.562.24.62301161440',
-        tila: 'julkaistu',
-        alkamiskausiKoodiUri: 'kausi_0#1',
-        kaytetaanHaunAikataulua: false,
-        kielivalinta: ['fi'],
-        minAloituspaikat: 5,
-        maxAloituspaikat: 10,
-        hakuajat: [
-          {
-            alkaa: '2019-04-02T00:00',
-            paattyy: '2019-11-25T00:00',
-          },
-        ],
-        liitteetOnkoSamaToimitusaika: false,
-        liitteetOnkoSamaToimitusosoite: false,
-        liitteidenToimitustapa: null,
-        liitteet: [
-          {
-            toimitustapa: 'osoite',
-            tyyppiKoodiUri: 'liitetyypitamm_0#1',
-            nimi: {
-              fi: 'Nimi',
-            },
-            toimitusaika: '2019-11-25T00:00',
-            toimitusosoite: {
-              osoite: {
-                osoite: {
-                  fi: 'Osoite',
-                },
-                postinumeroKoodiUri: 'posti_0#fi',
-              },
-              sahkoposti: 'sahkoposti@email.com',
-            },
-            kuvaus: {
-              fi: 'Kuvaus',
-            },
-          },
-        ],
-        alkamisvuosi: 2019,
-        liitteidenToimitusosoite: null,
-        liitteidenToimitusaika: null,
-        nimi: {
-          fi: 'Hakukohteen nimi',
+        pohjakoulutusvaatimusTarkenne: {
+          fi: '<p>Tarkenne</p>',
         },
-        toinenAsteOnkoKaksoistutkinto: true,
-        valintakokeet: [
-          {
-            tyyppiKoodiUri: 'valintakokeentyyppi_1#1',
-            tilaisuudet: [
-              {
-                osoite: {
-                  osoite: {
-                    fi: 'osoite',
-                  },
-                  postinumeroKoodiUri: 'posti_0#fi',
-                },
-                aika: {
-                  alkaa: '2019-04-02T00:00',
-                  paattyy: '2019-04-02T00:00',
-                },
-                lisatietoja: {
-                  fi: 'lisatietoja',
-                },
-              },
-            ],
-          },
-        ],
-        pohjakoulutusvaatimusKoodiUrit: ['pohjakoulutusvaatimustoinenaste_0#1'],
         valintaperusteId: '649adb37-cd4d-4846-91a9-84b58b90f928',
         minEnsikertalaisenAloituspaikat: null,
         maxEnsikertalaisenAloituspaikat: null,
@@ -236,88 +157,9 @@ module.exports = {
           },
         ],
         pohjakoulutusvaatimusKoodiUrit: ['pohjakoulutusvaatimustoinenaste_0#1'],
-        valintaperusteId: '649adb37-cd4d-4846-91a9-84b58b90f928',
-        minEnsikertalaisenAloituspaikat: 1,
-        maxEnsikertalaisenAloituspaikat: 5,
-        kaytetaanHaunHakulomaketta: false,
-        hakulomaketyyppi: 'ataru',
-        hakulomakeAtaruId: 'lomake_1',
-        hakulomakeLinkki: {},
-        hakulomakeKuvaus: {},
-        kaytetaanHaunAlkamiskautta: false,
-        organisaatioOid: '1.1.1.1.1.1',
-        hakuOid: '4.1.1.1.1.1',
-        toteutusOid: '2.1.1.1.1.1',
-      },
-      '2': {
-        muokkaaja: '1.2.246.562.24.62301161440',
-        tila: 'julkaistu',
-        alkamiskausiKoodiUri: 'kausi_0#1',
-        kaytetaanHaunAikataulua: false,
-        kielivalinta: ['fi'],
-        minAloituspaikat: 5,
-        maxAloituspaikat: 10,
-        hakuajat: [
-          {
-            alkaa: '2019-04-02T00:00',
-            paattyy: '2019-11-25T00:00',
-          },
-        ],
-        liitteetOnkoSamaToimitusaika: false,
-        liitteetOnkoSamaToimitusosoite: false,
-        liitteidenToimitustapa: null,
-        liitteet: [
-          {
-            toimitustapa: 'osoite',
-            tyyppiKoodiUri: 'liitetyypitamm_0#1',
-            nimi: {
-              fi: 'Nimi',
-            },
-            toimitusaika: '2019-11-25T00:00',
-            toimitusosoite: {
-              osoite: {
-                osoite: {
-                  fi: 'Osoite',
-                },
-                postinumeroKoodiUri: 'posti_0#fi',
-              },
-              sahkoposti: 'sahkoposti@email.com',
-            },
-            kuvaus: {
-              fi: 'Kuvaus',
-            },
-          },
-        ],
-        alkamisvuosi: 2019,
-        liitteidenToimitusosoite: null,
-        liitteidenToimitusaika: null,
-        nimi: {
-          fi: 'Hakukohteen nimi',
+        pohjakoulutusvaatimusTarkenne: {
+          fi: '<p>Tarkenne</p>',
         },
-        toinenAsteOnkoKaksoistutkinto: false,
-        valintakokeet: [
-          {
-            tyyppiKoodiUri: 'valintakokeentyyppi_1#1',
-            tilaisuudet: [
-              {
-                osoite: {
-                  osoite: {
-                    fi: 'osoite',
-                  },
-                  postinumeroKoodiUri: 'posti_0#fi',
-                },
-                aika: {
-                  alkaa: '2019-04-02T00:00',
-                  paattyy: '2019-04-02T00:00',
-                },
-                lisatietoja: {
-                  fi: 'lisatietoja',
-                },
-              },
-            ],
-          },
-        ],
-        pohjakoulutusvaatimusKoodiUrit: ['pohjakoulutusvaatimustoinenaste_0#1'],
         valintaperusteId: '649adb37-cd4d-4846-91a9-84b58b90f928',
         minEnsikertalaisenAloituspaikat: 1,
         maxEnsikertalaisenAloituspaikat: 5,
@@ -353,6 +195,9 @@ module.exports = {
         maxEnsikertalaisenAloituspaikat: 49,
         kaytetaanHaunAlkamiskautta: false,
         pohjakoulutusvaatimusKoodiUrit: ['pohjakoulutusvaatimustoinenaste_0#1'],
+        pohjakoulutusvaatimusTarkenne: {
+          fi: '<p>Fi tarkenne</p>',
+        },
         muuPohjakoulutusvaatimus: {},
         toinenAsteOnkoKaksoistutkinto: true,
         kaytetaanHaunAikataulua: false,

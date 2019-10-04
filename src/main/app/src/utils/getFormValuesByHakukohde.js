@@ -1,8 +1,10 @@
 import get from 'lodash/get';
+import mapValues from 'lodash/mapValues';
 
 import { isNumeric } from './index';
 import getValintakoeFieldsValues from './getValintakoeFieldsValues';
 import getHakulomakeFieldsValues from './getHakulomakeFieldsValues';
+import parseEditorState from './draft/parseEditorState';
 
 const getFormValuesByHakukohde = hakukohde => {
   const {
@@ -33,6 +35,7 @@ const getFormValuesByHakukohde = hakukohde => {
     hakulomakeLinkki,
     kaytetaanHaunAlkamiskautta,
     tila,
+    pohjakoulutusvaatimusTarkenne,
   } = hakukohde;
 
   return {
@@ -72,9 +75,17 @@ const getFormValuesByHakukohde = hakukohde => {
       nimi,
       voiSuorittaaKaksoistutkinnon: !!toinenAsteOnkoKaksoistutkinto,
     },
-    pohjakoulutus: (pohjakoulutusvaatimusKoodiUrit || []).map(value => ({
-      value,
-    })),
+    pohjakoulutus: {
+      pohjakoulutusvaatimus: (pohjakoulutusvaatimusKoodiUrit || []).map(
+        value => ({
+          value,
+        }),
+      ),
+      tarkenne: mapValues(
+        pohjakoulutusvaatimusTarkenne || {},
+        parseEditorState,
+      ),
+    },
     valintaperusteenKuvaus: valintaperusteId
       ? {
           value: valintaperusteId,

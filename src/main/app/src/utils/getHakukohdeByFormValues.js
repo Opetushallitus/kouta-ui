@@ -1,9 +1,11 @@
 import get from 'lodash/get';
 import pick from 'lodash/pick';
+import mapValues from 'lodash/mapValues';
 
 import { isNumeric } from './index';
 import getValintakoeFieldsData from './getValintakoeFieldsData';
 import getHakulomakeFieldsData from './getHakulomakeFieldsData';
+import serializeEditorState from './draft/serializeEditorState';
 import { LIITTEEN_TOIMITUSTAPA } from '../constants';
 
 const getKieliversiot = values => get(values, 'kieliversiot') || [];
@@ -116,8 +118,16 @@ const getHakukohdeByFormValues = values => {
   });
 
   const pohjakoulutusvaatimusKoodiUrit = (
-    get(values, 'pohjakoulutus') || []
+    get(values, 'pohjakoulutus.pohjakoulutusvaatimus') || []
   ).map(({ value }) => value);
+
+  const pohjakoulutusvaatimusTarkenne = pick(
+    mapValues(
+      get(values, 'pohjakoulutus.tarkenne') || {},
+      serializeEditorState,
+    ),
+    kielivalinta,
+  );
 
   const valintaperuste = get(values, 'valintaperusteenKuvaus.value') || null;
 
@@ -159,6 +169,7 @@ const getHakukohdeByFormValues = values => {
     toinenAsteOnkoKaksoistutkinto,
     valintakokeet,
     pohjakoulutusvaatimusKoodiUrit,
+    pohjakoulutusvaatimusTarkenne,
     valintaperusteId: valintaperuste,
     minEnsikertalaisenAloituspaikat,
     maxEnsikertalaisenAloituspaikat,

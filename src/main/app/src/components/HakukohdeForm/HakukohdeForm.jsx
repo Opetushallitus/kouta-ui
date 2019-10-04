@@ -42,6 +42,7 @@ const HakukohdeForm = ({
       <FormCollapse
         section="pohjakoulutusvaatimus"
         header={t('hakukohdelomake.pohjakoulutusvaatimus')}
+        languages={languages}
         {...getTestIdProps('pohjakoulutusvaatimusSection')}
       >
         <PohjakoulutusSection

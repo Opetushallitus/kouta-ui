@@ -71,6 +71,10 @@ Object {
     "vaatimus_1#1",
     "vaatimus_2#1",
   ],
+  "pohjakoulutusvaatimusTarkenne": Object {
+    "fi": "<p><strong>Tarkenne fi</strong></p>",
+    "sv": "<p><strong>Tarkenne sv</strong></p>",
+  },
   "tila": "tallennettu",
   "toinenAsteOnkoKaksoistutkinto": true,
   "valintakokeet": Array [

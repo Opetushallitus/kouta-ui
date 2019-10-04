@@ -8,6 +8,7 @@ import {
   chooseKieliversiotLanguages,
   fillValintakoeFields,
   fillAsyncSelect,
+  typeToEditor,
 } from '../../utils';
 
 import koulutus from '../../data/koulutus';
@@ -36,7 +37,11 @@ const fillKieliversiotSection = () => {
 
 const fillPohjakoulutusvaatimusSection = () => {
   cy.getByTestId('pohjakoulutusvaatimusSection').within(() => {
-    selectOption('pohjakoulutusvaatimustoinenaste_0', cy);
+    cy.getByTestId('pohjakoulutusvaatimusSelect').within(() => {
+      selectOption('pohjakoulutusvaatimustoinenaste_0', cy);
+    });
+
+    typeToEditor('Tarkenne', cy);
 
     jatka();
   });

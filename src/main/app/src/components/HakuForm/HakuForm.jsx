@@ -18,7 +18,6 @@ import Button from '../Button';
 import useTranslation from '../useTranslation';
 import LomakeSection from './LomakeSection';
 import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
-import ValintakoeSection from './ValintakoeSection';
 import useModal from '../useModal';
 import isYhteishakuHakutapa from '../../utils/isYhteishakuHakutapa';
 import useFieldValue from '../useFieldValue';
@@ -157,15 +156,6 @@ const HakuForm = ({
           {...getTestIdProps('hakulomakeSection')}
         >
           <LomakeSection />
-        </FormCollapse>
-
-        <FormCollapse
-          section="valintakoe"
-          header={t('yleiset.valintakoe')}
-          languages={languages}
-          {...getTestIdProps('valintakoeSection')}
-        >
-          <ValintakoeSection name="valintakoe" />
         </FormCollapse>
 
         <FormCollapse

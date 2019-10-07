@@ -480,6 +480,7 @@ export default {
       'Valitse näkyykö valintaperuste muille koulutustoimijoille',
     valintaperusteenTila: 'Valintaperusteen tila',
     avaaSoraKuvaus: 'Avaa SORA-kuvaus',
+    valintakoe: 'Valintakoe',
   },
   soraKuvausLomake: {
     soraKuvauksenTiedot: 'SORA-kuvauksen tiedot',

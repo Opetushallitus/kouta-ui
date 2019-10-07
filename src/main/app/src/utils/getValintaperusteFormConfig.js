@@ -78,6 +78,11 @@ const baseConfig = {
         },
       },
     },
+    valintakoe: {
+      fields: {
+        valintakoe: true,
+      },
+    },
   },
 };
 

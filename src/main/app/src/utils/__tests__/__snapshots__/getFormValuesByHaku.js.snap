@@ -48,30 +48,8 @@ Object {
   },
   "tila": "tallennettu",
   "valintakoe": Object {
-    "tilaisuudet": Object {
-      "tyyppi_1#1": Array [
-        Object {
-          "alkaa": "2019-04-16T08:44",
-          "lisatietoja": Object {
-            "fi": "fi lisatietoja",
-            "sv": "sv lisatietoja",
-          },
-          "osoite": Object {
-            "fi": "fi osoite",
-            "sv": "sv osoite",
-          },
-          "paattyy": "2019-04-18T08:44",
-          "postinumero": Object {
-            "value": "posti_1#1",
-          },
-        },
-      ],
-    },
-    "tyypit": Array [
-      Object {
-        "value": "tyyppi_1#1",
-      },
-    ],
+    "tilaisuudet": Object {},
+    "tyypit": Array [],
   },
   "yhteyshenkilot": Array [
     Object {
@@ -148,30 +126,8 @@ Object {
   },
   "tila": "tallennettu",
   "valintakoe": Object {
-    "tilaisuudet": Object {
-      "tyyppi_1#1": Array [
-        Object {
-          "alkaa": "2019-04-16T08:44",
-          "lisatietoja": Object {
-            "fi": "fi lisatietoja",
-            "sv": "sv lisatietoja",
-          },
-          "osoite": Object {
-            "fi": "fi osoite",
-            "sv": "sv osoite",
-          },
-          "paattyy": "2019-04-18T08:44",
-          "postinumero": Object {
-            "value": "posti_1#1",
-          },
-        },
-      ],
-    },
-    "tyypit": Array [
-      Object {
-        "value": "tyyppi_1#1",
-      },
-    ],
+    "tilaisuudet": Object {},
+    "tyypit": Array [],
   },
   "yhteyshenkilot": Array [
     Object {
@@ -250,30 +206,8 @@ Object {
   },
   "tila": "tallennettu",
   "valintakoe": Object {
-    "tilaisuudet": Object {
-      "tyyppi_1#1": Array [
-        Object {
-          "alkaa": "2019-04-16T08:44",
-          "lisatietoja": Object {
-            "fi": "fi lisatietoja",
-            "sv": "sv lisatietoja",
-          },
-          "osoite": Object {
-            "fi": "fi osoite",
-            "sv": "sv osoite",
-          },
-          "paattyy": "2019-04-18T08:44",
-          "postinumero": Object {
-            "value": "posti_1#1",
-          },
-        },
-      ],
-    },
-    "tyypit": Array [
-      Object {
-        "value": "tyyppi_1#1",
-      },
-    ],
+    "tilaisuudet": Object {},
+    "tyypit": Array [],
   },
   "yhteyshenkilot": Array [
     Object {

@@ -137,6 +137,31 @@ test('getFormValuesByValintaperuste returns correct form values given valintaper
       fi: 'Fi nimi',
       sv: 'Sv nimi',
     },
+    valintakokeet: [
+      {
+        tyyppiKoodiUri: 'tyyppi_1#1',
+        tilaisuudet: [
+          {
+            osoite: {
+              osoite: { fi: 'fi osoite', sv: 'sv osoite' },
+              postinumeroKoodiUri: 'posti_1#1',
+              postitoimipaikka: {
+                fi: 'fi posititoimipaikka',
+                sv: 'sv posititoimipaikka',
+              },
+            },
+            aika: {
+              alkaa: '2019-04-16T08:44',
+              paattyy: '2019-04-18T08:44',
+            },
+            lisatietoja: {
+              fi: 'fi lisatietoja',
+              sv: 'sv lisatietoja',
+            },
+          },
+        ],
+      },
+    ],
   });
 
   expect(values).toMatchSnapshot();

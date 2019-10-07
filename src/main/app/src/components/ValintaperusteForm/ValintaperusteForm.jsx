@@ -13,6 +13,7 @@ import useFieldValue from '../useFieldValue';
 import PerustiedotSection from './PerustiedotSection';
 import JulkisuusSection from './JulkisuusSection';
 import JulkaisutilaSection from './JulkaisutilaSection';
+import ValintakoeSection from './ValintakoeSection';
 
 const PohjaFormCollapse = ({
   children,
@@ -88,6 +89,15 @@ const ValintaperusteForm = ({
         {...getTestIdProps('valintatapaSection')}
       >
         <ValintatapaSection name="valintatavat" />
+      </FormCollapse>
+
+      <FormCollapse
+        section="valintakoe"
+        header={t('valintaperustelomake.valintakoe')}
+        languages={languages}
+        {...getTestIdProps('valintakoeSection')}
+      >
+        <ValintakoeSection name="valintakoe" />
       </FormCollapse>
 
       <FormCollapse

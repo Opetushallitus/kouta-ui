@@ -89,11 +89,6 @@ const baseConfig = {
         hakulomake: true,
       },
     },
-    valintakoe: {
-      fields: {
-        valintakoe: true,
-      },
-    },
     yhteystiedot: {
       fields: {
         yhteyshenkilot: true,

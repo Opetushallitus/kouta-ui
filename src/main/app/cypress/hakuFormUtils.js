@@ -36,7 +36,6 @@ export const stubHakuFormRoutes = ({ cy, organisaatioOid }) => {
   stubKoodistoRoute({ koodisto: 'kausi', cy });
   stubKoodistoRoute({ koodisto: 'opetuspaikkakk', cy });
   stubKoodistoRoute({ koodisto: 'kausi', cy });
-  stubKoodistoRoute({ koodisto: 'valintakokeentyyppi', cy });
   stubKoodistoRoute({ koodisto: 'posti', cy });
   stubKoodiRoute(createKoodi({ koodisto: 'posti', versio: 2 }));
 
@@ -69,6 +68,12 @@ export const stubHakuFormRoutes = ({ cy, organisaatioOid }) => {
   cy.route({
     method: 'GET',
     url: '**/haku/list**',
+    response: [],
+  });
+
+  cy.route({
+    method: 'GET',
+    url: `**/toteutus/list**`,
     response: [],
   });
 

@@ -43,26 +43,4 @@ export default () => ({
   muokkaaja: '1.2.246.562.24.62301161440',
   kielivalinta: ['fi', 'sv'],
   modified: '2019-03-29T12:48',
-  valintakokeet: [
-    {
-      tyyppiKoodiUri: 'valintakokeentyyppi_1#1',
-      tilaisuudet: [
-        {
-          osoite: {
-            osoite: {
-              fi: 'osoite',
-            },
-            postinumeroKoodiUri: 'posti_0#2',
-          },
-          aika: {
-            alkaa: '2019-04-02T10:45',
-            paattyy: '2019-04-02T19:00',
-          },
-          lisatietoja: {
-            fi: 'lisatietoja',
-          },
-        },
-      ],
-    },
-  ],
 });

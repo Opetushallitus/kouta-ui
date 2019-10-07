@@ -2,6 +2,7 @@ import mapValues from 'lodash/mapValues';
 
 import { isObject, isArray } from './index';
 import parseEditorState from './draft/parseEditorState';
+import getValintakoeFieldsValues from './getValintakoeFieldsValues';
 
 const parseSisalto = ({ sisalto }) => {
   if (!isArray(sisalto)) {
@@ -30,6 +31,7 @@ const getFormValuesByValintaperuste = valintaperuste => {
     koulutustyyppi = null,
     onkoJulkinen = false,
     tila,
+    valintakokeet,
   } = valintaperuste;
 
   const { valintatavat = [], kuvaus = {}, sorakuvausId } = metadata;
@@ -69,6 +71,7 @@ const getFormValuesByValintaperuste = valintaperuste => {
           value: sorakuvausId,
         }
       : null,
+    valintakoe: getValintakoeFieldsValues(valintakokeet),
   };
 };
 

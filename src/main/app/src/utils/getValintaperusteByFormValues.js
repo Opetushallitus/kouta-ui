@@ -5,6 +5,7 @@ import mapValues from 'lodash/mapValues';
 
 import { isObject, isArray, isNumeric } from './index';
 import serializeEditorState from './draft/serializeEditorState';
+import getValintakoeFieldsData from './getValintakoeFieldsData';
 
 const serializeTable = ({ table, kielivalinta }) => {
   if (!get(table, 'rows')) {
@@ -97,6 +98,11 @@ const getValintaperusteByFormValues = values => {
     }),
   );
 
+  const valintakokeet = getValintakoeFieldsData({
+    valintakoeValues: get(values, 'valintakoe'),
+    kielivalinta,
+  });
+
   const koulutustyyppi = get(values, 'tyyppi') || null;
   const sorakuvausId = get(values, 'soraKuvaus.value') || null;
   const onkoJulkinen = Boolean(get(values, 'julkinen'));
@@ -110,6 +116,7 @@ const getValintaperusteByFormValues = values => {
     nimi,
     koulutustyyppi,
     onkoJulkinen,
+    valintakokeet,
     metadata: {
       tyyppi: koulutustyyppi,
       valintatavat,

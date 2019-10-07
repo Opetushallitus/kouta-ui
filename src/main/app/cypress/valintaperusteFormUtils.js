@@ -3,10 +3,12 @@ import merge from 'lodash/merge';
 import {
   stubKoodistoRoute,
   stubOppijanumerorekisteriHenkiloRoute,
+  stubKoodiRoute,
 } from './utils';
 
 import organisaatio from './data/organisaatio';
 import soraKuvaus from './data/soraKuvaus';
+import createKoodi from './data/koodi';
 
 export const stubValintaperusteFormRoutes = ({ cy, organisaatioOid }) => {
   cy.server();
@@ -48,5 +50,8 @@ export const stubValintaperusteFormRoutes = ({ cy, organisaatioOid }) => {
   stubKoodistoRoute({ koodisto: 'kielitaitovaatimustyypitkuvaus', cy });
   stubKoodistoRoute({ koodisto: 'kieli', cy });
   stubKoodistoRoute({ koodisto: 'osaamistausta', cy });
+  stubKoodistoRoute({ koodisto: 'valintakokeentyyppi', cy });
+  stubKoodiRoute(createKoodi({ koodisto: 'posti', versio: 2 }));
+
   stubOppijanumerorekisteriHenkiloRoute({ cy });
 };

@@ -72,30 +72,6 @@ Object {
     "sv": "Namn",
   },
   "tila": "tallennettu",
-  "valintakokeet": Array [
-    Object {
-      "tilaisuudet": Array [
-        Object {
-          "aika": Object {
-            "alkaa": "2019-04-16T08:44",
-            "paattyy": "2019-04-18T08:44",
-          },
-          "lisatietoja": Object {
-            "fi": "fi lisatietoja",
-            "sv": "sv lisatietoja",
-          },
-          "osoite": Object {
-            "osoite": Object {
-              "fi": "fi osoite",
-              "sv": "sv osoite",
-            },
-            "postinumeroKoodiUri": "posti_1#1",
-          },
-        },
-      ],
-      "tyyppiKoodiUri": "tyyppi_1#1",
-    },
-  ],
 }
 `;
 
@@ -171,30 +147,6 @@ Object {
     "sv": "Namn",
   },
   "tila": "tallennettu",
-  "valintakokeet": Array [
-    Object {
-      "tilaisuudet": Array [
-        Object {
-          "aika": Object {
-            "alkaa": "2019-04-16T08:44",
-            "paattyy": "2019-04-18T08:44",
-          },
-          "lisatietoja": Object {
-            "fi": "fi lisatietoja",
-            "sv": "sv lisatietoja",
-          },
-          "osoite": Object {
-            "osoite": Object {
-              "fi": "fi osoite",
-              "sv": "sv osoite",
-            },
-            "postinumeroKoodiUri": "posti_1#1",
-          },
-        },
-      ],
-      "tyyppiKoodiUri": "tyyppi_1#1",
-    },
-  ],
 }
 `;
 
@@ -268,29 +220,5 @@ Object {
     "sv": "Namn",
   },
   "tila": "tallennettu",
-  "valintakokeet": Array [
-    Object {
-      "tilaisuudet": Array [
-        Object {
-          "aika": Object {
-            "alkaa": "2019-04-16T08:44",
-            "paattyy": "2019-04-18T08:44",
-          },
-          "lisatietoja": Object {
-            "fi": "fi lisatietoja",
-            "sv": "sv lisatietoja",
-          },
-          "osoite": Object {
-            "osoite": Object {
-              "fi": "fi osoite",
-              "sv": "sv osoite",
-            },
-            "postinumeroKoodiUri": "posti_1#1",
-          },
-        },
-      ],
-      "tyyppiKoodiUri": "tyyppi_1#1",
-    },
-  ],
 }
 `;

@@ -2,7 +2,6 @@ import get from 'lodash/get';
 import pick from 'lodash/pick';
 
 import { isNumeric } from './index';
-import getValintakoeFieldsData from './getValintakoeFieldsData';
 import getHakulomakeFieldsData from './getHakulomakeFieldsData';
 import isKorkeakoulutusKohdejoukkoKoodiUri from './isKorkeakoulutusKohdejoukkoKoodiUri';
 
@@ -70,11 +69,6 @@ const getHakuByFormValues = values => {
     ),
   };
 
-  const valintakokeet = getValintakoeFieldsData({
-    valintakoeValues: get(values, 'valintakoe'),
-    kielivalinta,
-  });
-
   const hakukohteenMuokkaamisenTakaraja =
     get(values, 'aikataulut.muokkauksenTakaraja') || null;
 
@@ -97,7 +91,6 @@ const getHakuByFormValues = values => {
     hakulomakeAtaruId,
     hakulomakeLinkki,
     hakulomakeKuvaus,
-    valintakokeet,
   };
 };
 

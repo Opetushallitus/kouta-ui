@@ -6,6 +6,7 @@ import {
   getCheckbox,
   chooseKieliversiotLanguages,
   fillKoulutustyyppiSelect,
+  fillValintakoeFields,
 } from '../../utils';
 
 import { stubValintaperusteFormRoutes } from '../../valintaperusteFormUtils';
@@ -62,6 +63,13 @@ const lisaaSisaltoa = tyyppi => {
         cy.getByTestId('lisaaTaulukko').click({ force: true });
       }
     });
+};
+
+const fillValintakoeSection = () => {
+  cy.getByTestId('valintakoeSection').within(() => {
+    fillValintakoeFields();
+    jatka();
+  });
 };
 
 const fillValintatapaSection = () => {
@@ -171,6 +179,7 @@ describe('createValintaperusteForm', () => {
     fillPohjaSection();
     fillKuvausSection();
     fillValintatapaSection();
+    fillValintakoeSection();
     fillSoraKuvausSection();
     fillJulkisuusSection();
     fillTilaSection();

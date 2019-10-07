@@ -62,27 +62,6 @@ const baseValues = {
       verkkosivu: { fi: 'Fi verkkosivu', sv: 'Sv verkkosivu' },
     },
   ],
-  valintakoe: {
-    tyypit: [{ value: 'tyyppi_1#1' }],
-    tilaisuudet: {
-      'tyyppi_1#1': [
-        {
-          osoite: { fi: 'fi osoite', sv: 'sv osoite' },
-          postinumero: { value: 'posti_1#1' },
-          postitoimipaikka: {
-            fi: 'fi posititoimipaikka',
-            sv: 'sv posititoimipaikka',
-          },
-          alkaa: '2019-04-16T08:44',
-          paattyy: '2019-04-18T08:44',
-          lisatietoja: {
-            fi: 'fi lisatietoja',
-            sv: 'sv lisatietoja',
-          },
-        },
-      ],
-    },
-  },
 };
 
 test('getHakuByFormValues returns correct haku given form values', () => {

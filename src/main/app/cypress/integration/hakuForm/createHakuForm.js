@@ -4,7 +4,6 @@ import {
   fillDateTimeInput,
   chooseKieliversiotLanguages,
   selectOption,
-  fillValintakoeFields,
   fillYhteyshenkilotFields,
 } from '../../utils';
 
@@ -166,13 +165,6 @@ const tallenna = () => {
   cy.getByTestId('tallennaHakuButton').click({ force: true });
 };
 
-const fillValintakoeSection = () => {
-  cy.getByTestId('valintakoeSection').within(() => {
-    fillValintakoeFields();
-    jatka();
-  });
-};
-
 const fillYhteystiedotSection = () => {
   cy.getByTestId('yhteystiedotSection').within(() => {
     fillYhteyshenkilotFields({ cy });
@@ -206,7 +198,6 @@ describe('createHakuForm', () => {
     fillHakutapaSection();
     fillAikatauluSection();
     fillHakulomakeSection();
-    fillValintakoeSection();
     fillYhteystiedotSection();
     fillTilaSection();
 

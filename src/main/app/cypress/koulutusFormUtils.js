@@ -50,6 +50,12 @@ export const stubKoulutusFormRoutes = ({ cy, organisaatioOid }) => {
 
   cy.route({
     method: 'GET',
+    url: `**/koulutus/*/toteutukset/list**`,
+    response: [],
+  });
+
+  cy.route({
+    method: 'GET',
     url: '**/koodisto-service/rest/codeelement/koulutus_0',
     response: [
       {

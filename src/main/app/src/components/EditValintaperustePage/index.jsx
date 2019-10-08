@@ -16,23 +16,19 @@ import useTranslation from '../useTranslation';
 const EditValintaperustePage = props => {
   const {
     match: {
-      params: { oid },
+      params: { organisaatioOid, id },
     },
     location: { state = {} },
   } = props;
 
   const { valintaperusteUpdatedAt = null } = state;
-  const watch = JSON.stringify([oid, valintaperusteUpdatedAt]);
+  const watch = JSON.stringify([id, valintaperusteUpdatedAt]);
 
   const { data: valintaperuste = null } = useApiAsync({
     promiseFn: getValintaperusteByOid,
-    oid,
+    oid: id,
     watch,
   });
-
-  const organisaatioOid = valintaperuste
-    ? valintaperuste.organisaatioOid
-    : null;
 
   const koulutustyyppi =
     get(valintaperuste, 'koulutustyyppi') ||

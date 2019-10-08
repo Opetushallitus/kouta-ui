@@ -20,11 +20,10 @@ const getValintaperusteetOptions = (valintaperusteet, language) =>
     label: getFirstLanguageValue(nimi, language),
   }));
 
-const KuvausSection = ({ haku, organisaatio, name }) => {
+const KuvausSection = ({ haku, organisaatioOid, name }) => {
   const language = useLanguage();
   const hakuOid = get(haku, 'oid');
   const kohdejoukkoKoodiUri = get(haku, 'kohdejoukkoKoodiUri');
-  const organisaatioOid = get(organisaatio, 'oid');
   const watch = [hakuOid, organisaatioOid].join(',');
   const { t } = useTranslation();
   const valintaperuste = useFieldValue(name);
@@ -69,7 +68,7 @@ const KuvausSection = ({ haku, organisaatio, name }) => {
             variant="outlined"
             color="primary"
             as="a"
-            href={`/kouta/valintaperusteet/${valintaperusteOid}/muokkaus`}
+            href={`/kouta/organisaatio/${organisaatioOid}/valintaperusteet/${valintaperusteOid}/muokkaus`}
             target="_blank"
           >
             {t('hakukohdelomake.avaaValintaperuste')}

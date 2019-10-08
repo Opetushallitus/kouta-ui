@@ -15,7 +15,7 @@ import useTranslation from '../useTranslation';
 const EditKoulutusPage = props => {
   const {
     match: {
-      params: { oid },
+      params: { organisaatioOid, oid },
     },
     location: { search, state = {} },
   } = props;
@@ -30,7 +30,6 @@ const EditKoulutusPage = props => {
     watch,
   });
 
-  const organisaatioOid = koulutus ? koulutus.organisaatioOid : null;
   const { t } = useTranslation();
 
   return (
@@ -39,7 +38,14 @@ const EditKoulutusPage = props => {
       <FormPage
         header={<EditKoulutusHeader koulutus={koulutus} />}
         steps={<EditKoulutusSteps />}
-        footer={koulutus ? <EditKoulutusFooter koulutus={koulutus} /> : null}
+        footer={
+          koulutus ? (
+            <EditKoulutusFooter
+              koulutus={koulutus}
+              organisaatioOid={organisaatioOid}
+            />
+          ) : null
+        }
       >
         {organisaatioOid ? (
           <OrganisaatioInfo organisaatioOid={organisaatioOid} />

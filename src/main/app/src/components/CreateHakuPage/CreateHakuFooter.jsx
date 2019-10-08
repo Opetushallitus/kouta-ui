@@ -21,7 +21,7 @@ const CreateHakuFooter = ({ organisaatioOid, history }) => {
         haku: { ...getHakuByFormValues(values), organisaatioOid },
       });
 
-      history.push(`/haku/${oid}/muokkaus`);
+      history.push(`/organisaatio/${organisaatioOid}/haku/${oid}/muokkaus`);
     },
     [organisaatioOid, history],
   );

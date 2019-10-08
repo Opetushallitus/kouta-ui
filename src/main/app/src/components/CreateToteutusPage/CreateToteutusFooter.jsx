@@ -30,7 +30,7 @@ const CreateToteutusFooter = ({
         },
       });
 
-      history.push(`/toteutus/${oid}/muokkaus`);
+      history.push(`/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`);
     },
     [organisaatioOid, history, koulutustyyppi, koulutusOid],
   );

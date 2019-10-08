@@ -8,7 +8,6 @@ import EditHakukohdeSteps from './EditHakukohdeSteps';
 import EditHakukohdeForm from './EditHakukohdeForm';
 import EditHakukohdeFooter from './EditHakukohdeFooter';
 import useApiAsync from '../useApiAsync';
-import getOrganisaatioByOid from '../../utils/organisaatioService/getOrganisaatioByOid';
 import { getFirstLanguageValue } from '../../utils';
 import Flex, { FlexItem } from '../Flex';
 import Typography from '../Typography';
@@ -20,6 +19,7 @@ import getToteutusByOid from '../../utils/kouta/getToteutusByOid';
 import Title from '../Title';
 import getHakuByOid from '../../utils/kouta/getHakuByOid';
 import getHakukohdeByOid from '../../utils/kouta/getHakukohdeByOid';
+import useOrganisaatio from '../useOrganisaatio';
 
 const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
   const hakukohde = await getHakukohdeByOid({
@@ -28,10 +28,9 @@ const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
     oid: hakukohdeOid,
   });
 
-  const { organisaatioOid, toteutusOid, hakuOid } = hakukohde;
+  const { toteutusOid, hakuOid } = hakukohde;
 
-  const [organisaatio, toteutus, haku] = await Promise.all([
-    getOrganisaatioByOid({ httpClient, apiUrls, oid: organisaatioOid }),
+  const [toteutus, haku] = await Promise.all([
     getToteutusByOid({ httpClient, apiUrls, oid: toteutusOid }),
     getHakuByOid({ httpClient, apiUrls, oid: hakuOid }),
   ]);
@@ -46,7 +45,6 @@ const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
 
   return {
     hakukohde,
-    organisaatio,
     toteutus,
     haku,
     koulutustyyppi,
@@ -56,7 +54,7 @@ const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
 const EditHakukohdePage = props => {
   const {
     match: {
-      params: { oid },
+      params: { organisaatioOid, oid },
     },
     location: { search, state = {} },
   } = props;
@@ -66,13 +64,14 @@ const EditHakukohdePage = props => {
   const watch = JSON.stringify([oid, hakukohdeUpdatedAt]);
 
   const {
-    data: { hakukohde, organisaatio, toteutus, haku, koulutustyyppi } = {},
+    data: { hakukohde, toteutus, haku, koulutustyyppi } = {},
   } = useApiAsync({
     promiseFn: getData,
     oid,
     watch,
   });
 
+  const { organisaatio } = useOrganisaatio(organisaatioOid);
   const { t } = useTranslation();
 
   return (
@@ -114,8 +113,7 @@ const EditHakukohdePage = props => {
               </FlexItem>
             </Flex>
             <EditHakukohdeForm
-              organisaatio={organisaatio}
-              organisaatioOid={get(organisaatio, 'organisaatioOid')}
+              organisaatioOid={organisaatioOid}
               scrollTarget={scrollTarget}
               haku={haku}
               toteutus={toteutus}

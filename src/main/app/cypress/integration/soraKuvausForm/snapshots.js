@@ -40,6 +40,38 @@ module.exports = {
           },
         },
       },
+      '2': {
+        tila: 'julkaistu',
+        muokkaaja: '1.2.246.562.24.62301161440',
+        nimi: {
+          fi: 'Nimi',
+        },
+        julkinen: true,
+        koulutustyyppi: 'amm',
+        kielivalinta: ['fi'],
+        metadata: {
+          kuvaus: {
+            fi: '<p>Kuvaus</p>',
+          },
+        },
+        organisaatioOid: '1.1.1.1.1.1',
+      },
+      '3': {
+        tila: 'julkaistu',
+        muokkaaja: '1.2.246.562.24.62301161440',
+        nimi: {
+          fi: 'Nimi',
+        },
+        julkinen: true,
+        koulutustyyppi: 'amm',
+        kielivalinta: ['fi'],
+        metadata: {
+          kuvaus: {
+            fi: '<p>Kuvaus</p>',
+          },
+        },
+        organisaatioOid: '1.1.1.1.1.1',
+      },
     },
   },
 };

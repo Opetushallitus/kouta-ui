@@ -81,28 +81,31 @@ const MainPage = ({ history }) => {
             exact
           />
           <Route
-            path="/koulutus/:oid/muokkaus"
+            path="/organisaatio/:organisaatioOid/koulutus/:oid/muokkaus"
             component={EditKoulutusPage}
             exact
           />
-          <Route path="/haku/:oid/muokkaus" component={EditHakuPage} />
           <Route
-            path="/toteutus/:oid/muokkaus"
+            path="/organisaatio/:organisaatioOid/haku/:oid/muokkaus"
+            component={EditHakuPage}
+          />
+          <Route
+            path="/organisaatio/:organisaatioOid/toteutus/:oid/muokkaus"
             component={EditToteutusPage}
             exact
           />
           <Route
-            path="/hakukohde/:oid/muokkaus"
+            path="/organisaatio/:organisaatioOid/hakukohde/:oid/muokkaus"
             component={EditHakukohdePage}
             exact
           />
           <Route
-            path="/valintaperusteet/:oid/muokkaus"
+            path="/organisaatio/:organisaatioOid/valintaperusteet/:id/muokkaus"
             component={EditValintaperustePage}
             exact
           />
           <Route
-            path="/sora-kuvaus/:id/muokkaus"
+            path="/organisaatio/:organisaatioOid/sora-kuvaus/:id/muokkaus"
             component={EditSoraKuvausPage}
             exact
           />

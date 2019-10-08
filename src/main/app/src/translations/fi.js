@@ -312,6 +312,8 @@ export default {
       'Voit halutessasi lisätä vapaasti täytettäviä osioita, jotka antavat tarkempaa tietoa koulutuksesta.',
     valitseOsaamisala: 'Valitse osaamisala',
     koulutuksenTila: 'Koulutuksen tila',
+    eiMuokkausOikeutta:
+      'Käyttäjälläsi ei ole oikeuksia muokata tätä koulutusta',
   },
   toteutuslomake: {
     toteutuksenTiedot: 'Toteutuksen tiedot',
@@ -374,6 +376,8 @@ export default {
     valitseTutkinnonOsat: 'Valitse tutkinnon osat',
     lisaaTutkinnonOsa: 'Lisää tutkinnon osa',
     hakukohteenLittaminen: 'Hakukohteen liittäminen toteutukseen',
+    eiMuokkausOikeutta:
+      'Käyttäjälläsi ei ole oikeuksia muokata tätä toteutusta',
   },
   hakulomake: {
     haunNimi: 'Haun nimi',
@@ -397,6 +401,7 @@ export default {
     hakuunOnLiitettyHakukohteet:
       'Tähän hakuun on liitetty seuraavat hakukohteet',
     haunTila: 'Haun tila',
+    eiMuokkausOikeutta: 'Käyttäjälläsi ei ole oikeuksia muokata tätä hakua',
   },
   hakukohdelomake: {
     toteutukseenLiitettyAlkamiskausi: 'Toteutukseen liitetty alkamiskausi',
@@ -443,6 +448,8 @@ export default {
     haunKohdejoukkoPuuttuu: 'Hakuun ei ole liitetty kohdejoukkoa',
     avaaValintaperuste: 'Avaa valintaperustekuvaus',
     pohjakoulutuksenTarkennus: 'Pohjakoulutuksen tarkennus',
+    eiMuokkausOikeutta:
+      'Käyttäjälläsi ei ole oikeuksia muokata tätä hakukohdetta',
   },
   valintaperustelomake: {
     valintaperusteenPerustiedot: 'Valintaperusteen perustiedot',
@@ -481,6 +488,8 @@ export default {
     valintaperusteenTila: 'Valintaperusteen tila',
     avaaSoraKuvaus: 'Avaa SORA-kuvaus',
     valintakoe: 'Valintakoe',
+    eiMuokkausOikeutta:
+      'Käyttäjälläsi ei ole oikeuksia muokata tätä valintaperustekuvausta',
   },
   soraKuvausLomake: {
     soraKuvauksenTiedot: 'SORA-kuvauksen tiedot',

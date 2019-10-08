@@ -276,7 +276,7 @@ describe('createHakukohdeForm', () => {
 
     cy.location('pathname').should(
       'eq',
-      `/kouta/hakukohde/${createdHakukohdeOid}/muokkaus`,
+      `/kouta/organisaatio/${organisaatioOid}/hakukohde/${createdHakukohdeOid}/muokkaus`,
     );
   });
 
@@ -315,7 +315,7 @@ describe('createHakukohdeForm', () => {
 
     cy.location('pathname').should(
       'eq',
-      `/kouta/hakukohde/${createdHakukohdeOid}/muokkaus`,
+      `/kouta/organisaatio/${organisaatioOid}/hakukohde/${createdHakukohdeOid}/muokkaus`,
     );
   });
 });

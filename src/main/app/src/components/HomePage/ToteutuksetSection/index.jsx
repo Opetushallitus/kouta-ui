@@ -42,13 +42,16 @@ const getToteutuksetFn = async ({ httpClient, apiUrls, ...filters }) => {
   return { result, pageCount: Math.ceil(totalCount / 10) };
 };
 
-const makeTableColumns = t => [
+const makeTableColumns = (t, organisaatioOid) => [
   {
     title: t('yleiset.nimi'),
     key: 'nimi',
     sortable: true,
     render: ({ nimi, oid, language }) => (
-      <Anchor as={Link} to={`/toteutus/${oid}/muokkaus`}>
+      <Anchor
+        as={Link}
+        to={`/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`}
+      >
         {getFirstLanguageValue(nimi, language) || t('yleiset.nimeton')}
       </Anchor>
     ),
@@ -127,7 +130,10 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
       : null;
   }, [toteutukset]);
 
-  const tableColumns = useMemo(() => makeTableColumns(t), [t]);
+  const tableColumns = useMemo(() => makeTableColumns(t, organisaatioOid), [
+    t,
+    organisaatioOid,
+  ]);
 
   return (
     <>

@@ -68,7 +68,9 @@ describe('editHakukohdeForm', () => {
       ],
     });
 
-    cy.visit(`/hakukohde/${hakukohdeOid}/muokkaus`);
+    cy.visit(
+      `/organisaatio/${organisaatioOid}/hakukohde/${hakukohdeOid}/muokkaus`,
+    );
   });
 
   it('should be able to edit hakukohde', () => {

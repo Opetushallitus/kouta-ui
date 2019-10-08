@@ -32,7 +32,10 @@ const ToteutuksetSection = ({ koulutus, organisaatioOid }) => {
 
   const toteutusLinks = toteutukset
     ? toteutukset.map(({ nimi, oid }) => (
-        <Anchor as={Link} to={`/toteutus/${oid}/muokkaus`}>
+        <Anchor
+          as={Link}
+          to={`/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`}
+        >
           {getFirstLanguageValue(nimi) || '-'}
         </Anchor>
       ))

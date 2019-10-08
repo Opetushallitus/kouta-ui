@@ -15,7 +15,7 @@ import useTranslation from '../useTranslation';
 const EditHakuPage = props => {
   const {
     match: {
-      params: { oid },
+      params: { organisaatioOid, oid },
     },
     location: { search, state = {} },
   } = props;
@@ -30,7 +30,6 @@ const EditHakuPage = props => {
     watch,
   });
 
-  const organisaatioOid = haku ? haku.organisaatioOid : null;
   const { t } = useTranslation();
 
   return (

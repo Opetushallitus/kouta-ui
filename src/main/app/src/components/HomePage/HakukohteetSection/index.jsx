@@ -40,13 +40,16 @@ const getHakukohteetFn = async ({ httpClient, apiUrls, ...filters }) => {
   return { result, pageCount: Math.ceil(totalCount / 10) };
 };
 
-const makeTableColumns = t => [
+const makeTableColumns = (t, organisaatioOid) => [
   {
     title: t('yleiset.nimi'),
     key: 'nimi',
     sortable: true,
     render: ({ nimi, oid, language }) => (
-      <Anchor as={Link} to={`/hakukohde/${oid}/muokkaus`}>
+      <Anchor
+        as={Link}
+        to={`/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`}
+      >
         {getFirstLanguageValue(nimi, language) || t('yleiset.nimeton')}
       </Anchor>
     ),
@@ -119,7 +122,11 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
     return haut ? haut.map(haku => ({ ...haku, key: haku.oid })) : null;
   }, [haut]);
 
-  const tableColumns = useMemo(() => makeTableColumns(t), [t]);
+  const tableColumns = useMemo(() => makeTableColumns(t, organisaatioOid), [
+    t,
+    organisaatioOid,
+  ]);
+
   return (
     <>
       <NavigationAnchor id="hakukohteet" />

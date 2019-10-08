@@ -36,7 +36,7 @@ describe('editHakuForm', () => {
       response: [],
     });
 
-    cy.visit(`/haku/${hakuOid}/muokkaus`);
+    cy.visit(`/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus`);
   });
 
   it('should be able to edit haku', () => {

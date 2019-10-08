@@ -52,7 +52,9 @@ describe('editToteutusForm', () => {
       response: [],
     });
 
-    cy.visit(`/toteutus/${toteutusOid}/muokkaus`);
+    cy.visit(
+      `/organisaatio/${organisaatioOid}/toteutus/${toteutusOid}/muokkaus`,
+    );
   });
 
   it('should be able to edit ammatillinen toteutus', () => {

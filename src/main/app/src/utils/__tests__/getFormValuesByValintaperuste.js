@@ -8,6 +8,7 @@ test('getFormValuesByValintaperuste returns correct form values given valintaper
     kohdejoukkoKoodiUri: 'joukko_1#1',
     koulutustyyppi: 'tyyppi_1#1',
     onkoJulkinen: true,
+    sorakuvausId: 'sora_1',
     metadata: {
       kielitaitovaatimukset: [
         {
@@ -131,7 +132,6 @@ test('getFormValuesByValintaperuste returns correct form values given valintaper
           valintatapaKoodiUri: 'tapa_1#1',
         },
       ],
-      sorakuvausId: 'sora_1',
     },
     nimi: {
       fi: 'Fi nimi',

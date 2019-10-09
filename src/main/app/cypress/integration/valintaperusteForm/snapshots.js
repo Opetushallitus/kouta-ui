@@ -83,8 +83,8 @@ module.exports = {
           kuvaus: {
             fi: '<p>Kuvaus</p>',
           },
-          sorakuvausId: '1',
         },
+        sorakuvausId: '1',
         organisaatioOid: '1.1.1.1.1.1',
       },
       '2': {
@@ -168,8 +168,8 @@ module.exports = {
           kuvaus: {
             fi: '<p>Kuvaus</p>',
           },
-          sorakuvausId: '1',
         },
+        sorakuvausId: '1',
         organisaatioOid: '1.1.1.1.1.1',
       },
       '3': {
@@ -253,8 +253,8 @@ module.exports = {
           kuvaus: {
             fi: '<p>Kuvaus</p>',
           },
-          sorakuvausId: '1',
         },
+        sorakuvausId: '1',
         organisaatioOid: '1.1.1.1.1.1',
       },
     },
@@ -321,8 +321,8 @@ module.exports = {
           kuvaus: {
             fi: '<p>Loppukuvaus</p>',
           },
-          sorakuvausId: '1',
         },
+        sorakuvausId: '1',
         organisaatioOid: '1.1.1.1.1.1',
         muokkaaja: '1.2.246.562.24.62301161440',
         kielivalinta: ['fi'],

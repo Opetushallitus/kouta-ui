@@ -31,10 +31,11 @@ const getFormValuesByValintaperuste = valintaperuste => {
     koulutustyyppi = null,
     onkoJulkinen = false,
     tila,
+    sorakuvausId,
     valintakokeet,
   } = valintaperuste;
 
-  const { valintatavat = [], kuvaus = {}, sorakuvausId } = metadata;
+  const { valintatavat = [], kuvaus = {} } = metadata;
 
   return {
     tila,

@@ -314,6 +314,8 @@ export default {
     koulutuksenTila: 'Koulutuksen tila',
     eiMuokkausOikeutta:
       'Käyttäjälläsi ei ole oikeuksia muokata tätä koulutusta',
+    tarjoajienLukumaara:
+      'Koulutuksen järjestäjien tämänhetkinen lukumäärä on {{lukumaara}}',
   },
   toteutuslomake: {
     toteutuksenTiedot: 'Toteutuksen tiedot',

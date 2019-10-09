@@ -103,14 +103,16 @@ const OsaamisalaSelection = ({
 }) => (
   <div {...getTestIdProps('osaamisalaSelection')}>
     {options.map(({ value: optionValue, label }) => (
-      <Checkbox
-        key={optionValue}
-        name={optionValue}
-        checked={value.includes(optionValue)}
-        onChange={makeOnCheckboxChange({ value, onChange, optionValue })}
-      >
-        {label}
-      </Checkbox>
+      <div>
+        <Checkbox
+          key={optionValue}
+          name={optionValue}
+          checked={value.includes(optionValue)}
+          onChange={makeOnCheckboxChange({ value, onChange, optionValue })}
+        >
+          {label}
+        </Checkbox>
+      </div>
     ))}
   </div>
 );

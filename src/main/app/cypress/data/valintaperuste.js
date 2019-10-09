@@ -10,7 +10,7 @@ export default ({ tyyppi = 'amm' } = {}) => {
     hakutapaKoodiUri: 'hakutapa_0#1',
     kohdejoukkoKoodiUri: 'haunkohdejoukko_0#1',
     nimi: { fi: 'Valintaperusteen nimi' },
-    onkoJulkinen: false,
+    julkinen: false,
     sorakuvausId: '1',
     metadata: {
       koulutustyyppi: tyyppi,

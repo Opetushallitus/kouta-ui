@@ -24,7 +24,7 @@ const getBaseFields = () => {
         },
       ],
     },
-    julkinen: false,
+    julkinen: true,
     muokkaaja: '1.2.246.562.24.62301161440',
     organisaatioOid: '1.2.246.562.10.594252633210',
     kielivalinta: ['fi', 'sv'],
@@ -62,7 +62,6 @@ const getKorkeakouluFields = ({ tyyppi }) => {
         'kansallinenkoulutusluokitus2016koulutusalataso2_1#1',
       ],
     },
-    julkinen: true,
   });
 };
 

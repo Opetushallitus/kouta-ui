@@ -1,5 +1,4 @@
 import get from 'lodash/get';
-import without from 'lodash/without';
 
 import {
   KOULUTUSTYYPPI,
@@ -101,15 +100,7 @@ const config = createFormConfigBuilder()
     KOULUTUSTYYPIT,
     validateIfJulkaistu(eb => eb.validateArrayMinLength('tarjoajat', 1)),
   )
-  .registerField(
-    'julkisuus',
-    'julkisuus',
-    without(
-      KOULUTUSTYYPIT,
-      ...TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
-      KOULUTUSTYYPPI.LUKIOKOULUTUS,
-    ),
-  )
+  .registerField('julkisuus', 'julkisuus', KOULUTUSTYYPIT)
   .registerField('julkaisutila', 'julkaisutila', KOULUTUSTYYPIT, eb =>
     eb.validateExistence('tila'),
   );

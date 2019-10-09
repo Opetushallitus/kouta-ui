@@ -126,6 +126,8 @@ describe('createKoulutusForm', () => {
 
     fillJarjestajaSection();
 
+    fillNakyvyysSection();
+
     fillTilaSection();
 
     tallenna();
@@ -231,6 +233,8 @@ describe('createKoulutusForm', () => {
     fillLisatiedotSection();
 
     fillJarjestajaSection();
+
+    fillNakyvyysSection();
 
     fillTilaSection();
 

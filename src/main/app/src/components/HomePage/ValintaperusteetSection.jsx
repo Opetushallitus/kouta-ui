@@ -48,13 +48,16 @@ const Actions = ({ organisaatioOid }) => {
   );
 };
 
-const makeTableColumns = t => [
+const makeTableColumns = (t, organisaatioOid) => [
   {
     title: t('yleiset.nimi'),
     key: 'nimi',
     sortable: true,
     render: ({ nimi, id }) => (
-      <Anchor as={Link} to={`/valintaperusteet/${id}/muokkaus`}>
+      <Anchor
+        as={Link}
+        to={`/organisaatio/${organisaatioOid}/valintaperusteet/${id}/muokkaus`}
+      >
         {getFirstLanguageValue(nimi) || t('yleiset.nimeton')}
       </Anchor>
     ),
@@ -113,7 +116,10 @@ const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
       : null;
   }, [valintaperusteet]);
 
-  const tableColumns = useMemo(() => makeTableColumns(t), [t]);
+  const tableColumns = useMemo(() => makeTableColumns(t, organisaatioOid), [
+    t,
+    organisaatioOid,
+  ]);
 
   return (
     <>

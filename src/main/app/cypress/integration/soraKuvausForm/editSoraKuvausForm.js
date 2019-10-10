@@ -24,7 +24,9 @@ describe('editSoraKuvausForm', () => {
 
     stubSoraKuvausFormRoutes({ organisaatioOid, cy });
 
-    cy.visit(`/sora-kuvaus/${soraKuvaus.id}/muokkaus`);
+    cy.visit(
+      `/organisaatio/${organisaatioOid}/sora-kuvaus/${soraKuvaus.id}/muokkaus`,
+    );
   });
 
   it('should be able to edit sora-kuvaus', () => {

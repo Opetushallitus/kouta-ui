@@ -29,7 +29,7 @@ const SoraKuvausSection = ({ name, organisaatioOid }) => {
             variant="outlined"
             color="primary"
             as="a"
-            href={`/kouta/sora-kuvaus/${soraKuvausId}/muokkaus`}
+            href={`/kouta/organisaatio/${organisaatioOid}/sora-kuvaus/${soraKuvausId}/muokkaus`}
             target="_blank"
           >
             {t('valintaperustelomake.avaaSoraKuvaus')}

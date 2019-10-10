@@ -18,7 +18,6 @@ import JulkaisutilaSection from './JulkaisutilaSection';
 const HakukohdeForm = ({
   steps = true,
   organisaatioOid,
-  organisaatio,
   haku,
   toteutus,
   koulutustyyppi = KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
@@ -82,7 +81,7 @@ const HakukohdeForm = ({
         {...getTestIdProps('valintaperusteenKuvausSection')}
       >
         <KuvausSection
-          organisaatio={organisaatio}
+          organisaatioOid={organisaatioOid}
           name="valintaperusteenKuvaus"
           haku={haku}
         />

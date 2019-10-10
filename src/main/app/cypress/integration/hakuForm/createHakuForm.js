@@ -209,7 +209,7 @@ describe('createHakuForm', () => {
 
     cy.location('pathname').should(
       'eq',
-      `/kouta/haku/${createdHakuOid}/muokkaus`,
+      `/kouta/organisaatio/${organisaatioOid}/haku/${createdHakuOid}/muokkaus`,
     );
   });
 });

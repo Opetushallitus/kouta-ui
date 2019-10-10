@@ -32,7 +32,10 @@ const HakukohteetSection = ({ toteutus, organisaatioOid }) => {
 
   const hakukohdeLinks = hakukohteet
     ? hakukohteet.map(({ nimi, oid }) => (
-        <Anchor as={Link} to={`/hakukohde/${oid}/muokkaus`}>
+        <Anchor
+          as={Link}
+          to={`/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`}
+        >
           {getFirstLanguageValue(nimi) || '-'}
         </Anchor>
       ))

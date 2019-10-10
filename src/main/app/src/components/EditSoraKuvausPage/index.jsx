@@ -16,7 +16,7 @@ import useTranslation from '../useTranslation';
 const EditSoraKuvausPage = props => {
   const {
     match: {
-      params: { id },
+      params: { organisaatioOid, id },
     },
     location: { state = {} },
   } = props;
@@ -27,8 +27,6 @@ const EditSoraKuvausPage = props => {
   useEffect(() => {
     soraKuvausUpdatedAt && isFunction(reload) && reload();
   }, [soraKuvausUpdatedAt]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const organisaatioOid = soraKuvaus ? soraKuvaus.organisaatioOid : null;
 
   const koulutustyyppi =
     get(soraKuvaus, 'koulutustyyppi') || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;

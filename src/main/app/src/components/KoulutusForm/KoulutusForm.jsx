@@ -139,7 +139,11 @@ const KoulutusForm = ({
         header={t('koulutuslomake.koulutuksenJarjestaja')}
         {...getTestIdProps('jarjestajaSection')}
       >
-        <JarjestajaSection organisaatioOid={organisaatioOid} name="tarjoajat" />
+        <JarjestajaSection
+          organisaatioOid={organisaatioOid}
+          koulutus={koulutusProp}
+          name="tarjoajat"
+        />
       </FormCollapse>
 
       <FormCollapse

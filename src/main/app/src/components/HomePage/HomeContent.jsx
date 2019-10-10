@@ -126,7 +126,7 @@ const HomeContent = ({
       <Navigation
         onOrganisaatioChange={onOrganisaatioChange}
         organisaatio={organisaatio}
-        maxInlineItems={4}
+        maxInlineItems={5}
       />
       <Container>
         <Box py={4}>

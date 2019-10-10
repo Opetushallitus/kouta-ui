@@ -16,7 +16,6 @@ Object {
       "sv": "<h1>Sv kuvaus</h1>",
     },
     "osaamistaustaKoodiUrit": Array [],
-    "sorakuvausId": "sora_1",
     "tyyppi": "tyyppi_1#1",
     "valintatavat": Array [
       Object {
@@ -99,6 +98,7 @@ Object {
     "sv": "Sv nimi",
   },
   "onkoJulkinen": true,
+  "sorakuvausId": "sora_1",
   "tila": undefined,
   "valintakokeet": Array [
     Object {

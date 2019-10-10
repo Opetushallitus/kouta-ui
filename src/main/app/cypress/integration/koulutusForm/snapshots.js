@@ -12,7 +12,7 @@ module.exports = {
         nimi: {
           fi: 'Nimi',
         },
-        julkinen: false,
+        julkinen: true,
         metadata: {
           tyyppi: 'amm',
           lisatiedot: [
@@ -82,7 +82,7 @@ module.exports = {
         nimi: {
           fi: 'Nimi',
         },
-        julkinen: false,
+        julkinen: true,
         metadata: {
           tyyppi: 'lk',
           lisatiedot: [
@@ -131,7 +131,7 @@ module.exports = {
           kuvauksenNimi: {},
           koulutusalaKoodiUrit: [],
         },
-        julkinen: false,
+        julkinen: true,
         muokkaaja: '1.2.246.562.24.62301161440',
         organisaatioOid: '1.1.1.1.1.1',
         kielivalinta: ['fi'],
@@ -208,7 +208,7 @@ module.exports = {
           kuvauksenNimi: {},
           koulutusalaKoodiUrit: [],
         },
-        julkinen: false,
+        julkinen: true,
         muokkaaja: '1.2.246.562.24.62301161440',
         organisaatioOid: '1.1.1.1.1.1',
         kielivalinta: ['fi'],

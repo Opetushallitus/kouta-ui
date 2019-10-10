@@ -31,7 +31,9 @@ const CreateHakukohdeFooter = ({
         },
       });
 
-      history.push(`/hakukohde/${oid}/muokkaus`);
+      history.push(
+        `/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`,
+      );
     },
     [organisaatioOid, hakuOid, toteutusOid, history],
   );

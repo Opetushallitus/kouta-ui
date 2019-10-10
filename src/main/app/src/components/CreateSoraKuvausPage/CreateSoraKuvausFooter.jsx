@@ -21,7 +21,7 @@ const CreateSoraKuvausFooter = ({ history, organisaatioOid }) => {
         soraKuvaus: { ...getSoraKuvausByFormValues(values), organisaatioOid },
       });
 
-      history.push(`/sora-kuvaus/${id}/muokkaus`);
+      history.push(`/organisaatio/${organisaatioOid}/sora-kuvaus/${id}/muokkaus`);
     },
     [organisaatioOid, history],
   );

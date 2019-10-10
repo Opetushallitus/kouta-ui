@@ -192,7 +192,7 @@ describe('createValintaperusteForm', () => {
 
     cy.location('pathname').should(
       'eq',
-      `/kouta/valintaperusteet/${createdValintaperusteId}/muokkaus`,
+      `/kouta/organisaatio/${organisaatioOid}/valintaperusteet/${createdValintaperusteId}/muokkaus`,
     );
   });
 });

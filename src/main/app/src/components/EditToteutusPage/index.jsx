@@ -32,7 +32,7 @@ const getToteutusAndKoulutus = async ({ httpClient, apiUrls, oid }) => {
 const EditToteutusPage = props => {
   const {
     match: {
-      params: { oid },
+      params: { organisaatioOid, oid },
     },
     location: { search, state = {} },
   } = props;
@@ -48,7 +48,6 @@ const EditToteutusPage = props => {
   });
 
   const koulutustyyppi = koulutus ? koulutus.koulutustyyppi : null;
-  const organisaatioOid = toteutus ? toteutus.organisaatioOid : null;
   const { t } = useTranslation();
 
   return (
@@ -62,6 +61,7 @@ const EditToteutusPage = props => {
             <EditToteutusFooter
               toteutus={toteutus}
               koulutustyyppi={koulutustyyppi}
+              organisaatioOid={organisaatioOid}
             />
           ) : null
         }
@@ -69,7 +69,7 @@ const EditToteutusPage = props => {
         {organisaatioOid ? (
           <OrganisaatioInfo organisaatioOid={organisaatioOid} />
         ) : null}
-        {toteutus ? (
+        {toteutus && koulutus ? (
           <EditToteutusForm
             toteutus={toteutus}
             organisaatioOid={organisaatioOid}

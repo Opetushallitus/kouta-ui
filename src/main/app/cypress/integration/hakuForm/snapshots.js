@@ -55,6 +55,114 @@ module.exports = {
         hakulomakeKuvaus: {},
         organisaatioOid: '1.1.1.1.1.1',
       },
+      '2': {
+        muokkaaja: '1.2.246.562.24.62301161440',
+        tila: 'julkaistu',
+        alkamiskausiKoodiUri: 'kausi_0#1',
+        kielivalinta: ['fi'],
+        hakutapaKoodiUri: 'hakutapa_01#1',
+        hakuajat: [
+          {
+            alkaa: '2019-04-02T10:45',
+            paattyy: '2019-11-25T23:59',
+          },
+        ],
+        hakukohteenLiittamisenTakaraja: '2019-12-24T21:20',
+        nimi: {
+          fi: 'haun nimi',
+        },
+        kohdejoukkoKoodiUri: 'haunkohdejoukko_12#1',
+        kohdejoukonTarkenneKoodiUri: 'haunkohdejoukontarkenne_0#1',
+        hakulomaketyyppi: 'ataru',
+        metadata: {
+          tulevaisuudenAikataulu: [
+            {
+              alkaa: '2019-10-11T09:05',
+              paattyy: '2019-12-25T20:30',
+            },
+          ],
+          yhteyshenkilot: [
+            {
+              nimi: {
+                fi: 'nimi',
+              },
+              titteli: {
+                fi: 'titteli',
+              },
+              puhelinnumero: {
+                fi: 'puhelin',
+              },
+              wwwSivu: {
+                fi: 'verkkosivu',
+              },
+              sahkoposti: {
+                fi: 'sähkoposti',
+              },
+            },
+          ],
+        },
+        hakukohteenMuokkaamisenTakaraja: '2019-12-11T19:15',
+        ajastettuJulkaisu: '2019-12-05T06:45',
+        alkamisvuosi: 2019,
+        hakulomakeAtaruId: 'lomake_1',
+        hakulomakeLinkki: {},
+        hakulomakeKuvaus: {},
+        organisaatioOid: '1.1.1.1.1.1',
+      },
+      '3': {
+        muokkaaja: '1.2.246.562.24.62301161440',
+        tila: 'julkaistu',
+        alkamiskausiKoodiUri: 'kausi_0#1',
+        kielivalinta: ['fi'],
+        hakutapaKoodiUri: 'hakutapa_01#1',
+        hakuajat: [
+          {
+            alkaa: '2019-04-02T10:45',
+            paattyy: '2019-11-25T23:59',
+          },
+        ],
+        hakukohteenLiittamisenTakaraja: '2019-12-24T21:20',
+        nimi: {
+          fi: 'haun nimi',
+        },
+        kohdejoukkoKoodiUri: 'haunkohdejoukko_12#1',
+        kohdejoukonTarkenneKoodiUri: 'haunkohdejoukontarkenne_0#1',
+        hakulomaketyyppi: 'ataru',
+        metadata: {
+          tulevaisuudenAikataulu: [
+            {
+              alkaa: '2019-10-11T09:05',
+              paattyy: '2019-12-25T20:30',
+            },
+          ],
+          yhteyshenkilot: [
+            {
+              nimi: {
+                fi: 'nimi',
+              },
+              titteli: {
+                fi: 'titteli',
+              },
+              puhelinnumero: {
+                fi: 'puhelin',
+              },
+              wwwSivu: {
+                fi: 'verkkosivu',
+              },
+              sahkoposti: {
+                fi: 'sähkoposti',
+              },
+            },
+          ],
+        },
+        hakukohteenMuokkaamisenTakaraja: '2019-12-11T19:15',
+        ajastettuJulkaisu: '2019-12-05T06:45',
+        alkamisvuosi: 2019,
+        hakulomakeAtaruId: 'lomake_1',
+        hakulomakeLinkki: {},
+        hakulomakeKuvaus: {},
+        organisaatioOid: '1.1.1.1.1.1',
+      },
     },
   },
   __version: '3.4.1',

@@ -1,17 +1,26 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import Button from '../Button';
 import { getTestIdProps } from '../../utils';
 import useTranslation from '../useTranslation';
-import Flex from '../Flex';
+import Box from '../Box';
 import getHakuByFormValues from '../../utils/getHakuByFormValues';
 import updateHaku from '../../utils/kouta/updateHaku';
 import useSaveForm from '../useSaveForm';
 import validateHakuForm from '../../utils/validateHakuForm';
+import useOrganisaatio from '../useOrganisaatio';
+import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
+import { HAKU_ROLE } from '../../constants';
 
 const EditHakuFooter = ({ haku, history }) => {
   const { t } = useTranslation();
+  const { organisaatio } = useOrganisaatio(haku.organisaatioOid);
+  const roleBuilder = useAuthorizedUserRoleBuilder();
+
+  const canUpdate = useMemo(() => {
+    return roleBuilder.hasUpdate(HAKU_ROLE, organisaatio);
+  }, [organisaatio, roleBuilder]);
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
@@ -40,11 +49,16 @@ const EditHakuFooter = ({ haku, history }) => {
   });
 
   return (
-    <Flex justifyEnd>
-      <Button onClick={save} {...getTestIdProps('tallennaHakuButton')}>
+    <Box display="flex" justifyContent="flex-end">
+      <Button
+        disabled={!canUpdate}
+        onClick={save}
+        title={!canUpdate ? t('hakulomake.eiMuokkausOikeutta') : undefined}
+        {...getTestIdProps('tallennaHakuButton')}
+      >
         {t('yleiset.tallenna')}
       </Button>
-    </Flex>
+    </Box>
   );
 };
 

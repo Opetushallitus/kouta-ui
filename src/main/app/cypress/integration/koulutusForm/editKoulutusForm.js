@@ -42,7 +42,9 @@ describe('editKoulutusForm', () => {
       response: [],
     });
 
-    cy.visit(`/koulutus/${koulutusOid}/muokkaus`);
+    cy.visit(
+      `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`,
+    );
   });
 
   it('should be able to edit ammatillinen koulutus', () => {

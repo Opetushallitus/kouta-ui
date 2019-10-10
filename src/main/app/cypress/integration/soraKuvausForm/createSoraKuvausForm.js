@@ -103,7 +103,9 @@ describe('createSoraKuvausForm', () => {
 
     cy.location('pathname').should(
       'eq',
-      `/kouta/sora-kuvaus/${soraKuvaus.id}/muokkaus`,
+      `/kouta/organisaatio/${organisaatioOid}/sora-kuvaus/${
+        soraKuvaus.id
+      }/muokkaus`,
     );
   });
 });

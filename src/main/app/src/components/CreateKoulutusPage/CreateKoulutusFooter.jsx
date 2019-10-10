@@ -21,7 +21,7 @@ const CreateKoulutusFooter = ({ organisaatioOid, history }) => {
         koulutus: { ...getKoulutusByFormValues(values), organisaatioOid },
       });
 
-      history.push(`/koulutus/${oid}/muokkaus`);
+      history.push(`/organisaatio/${organisaatioOid}/koulutus/${oid}/muokkaus`);
     },
     [organisaatioOid, history],
   );

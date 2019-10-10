@@ -49,13 +49,16 @@ const Actions = ({ organisaatioOid }) => {
   );
 };
 
-const makeTableColumns = t => [
+const makeTableColumns = (t, organisaatioOid) => [
   {
     title: t('yleiset.nimi'),
     key: 'nimi',
     sortable: true,
     render: ({ nimi, oid, language }) => (
-      <Anchor as={Link} to={`/haku/${oid}/muokkaus`}>
+      <Anchor
+        as={Link}
+        to={`/organisaatio/${organisaatioOid}/haku/${oid}/muokkaus`}
+      >
         {getFirstLanguageValue(nimi, language) || t('yleiset.nimeton')}
       </Anchor>
     ),
@@ -119,7 +122,10 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate }) => {
     return haut ? haut.map(haku => ({ ...haku, key: haku.oid })) : null;
   }, [haut]);
 
-  const tableColumns = useMemo(() => makeTableColumns(t), [t]);
+  const tableColumns = useMemo(() => makeTableColumns(t, organisaatioOid), [
+    t,
+    organisaatioOid,
+  ]);
 
   return (
     <>

@@ -10,7 +10,8 @@ export default ({ tyyppi = 'amm' } = {}) => {
     hakutapaKoodiUri: 'hakutapa_0#1',
     kohdejoukkoKoodiUri: 'haunkohdejoukko_0#1',
     nimi: { fi: 'Valintaperusteen nimi' },
-    onkoJulkinen: false,
+    julkinen: false,
+    sorakuvausId: '1',
     metadata: {
       koulutustyyppi: tyyppi,
       valintatavat: [
@@ -41,7 +42,6 @@ export default ({ tyyppi = 'amm' } = {}) => {
         },
       ],
       kielitaitovaatimukset: [],
-      sorakuvausId: '1',
       kuvaus: { fi: '<p>Loppukuvaus</p>' },
     },
     organisaatioOid: '1.2.246.562.10.594252633210',

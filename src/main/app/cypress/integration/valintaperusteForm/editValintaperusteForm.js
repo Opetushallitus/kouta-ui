@@ -25,7 +25,9 @@ describe('editValintaperusteForm', () => {
   beforeEach(() => {
     stubValintaperusteFormRoutes({ cy, organisaatioOid });
 
-    cy.visit(`/valintaperusteet/${valintaperusteId}/muokkaus`);
+    cy.visit(
+      `/organisaatio/${organisaatioOid}/valintaperusteet/${valintaperusteId}/muokkaus`,
+    );
   });
 
   it('should be able to edit valintaperuste', () => {

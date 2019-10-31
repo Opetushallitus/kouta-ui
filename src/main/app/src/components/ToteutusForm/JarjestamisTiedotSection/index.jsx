@@ -116,7 +116,7 @@ const StipendiFields = ({ language, name }) => {
           <Spacing marginTop={1} {...getTestIdProps('stipendinMaara')}>
             <ExtraField>
               <Field
-                name={`${name}.stipendinMaara.${language}`}
+                name={`${name}.stipendinMaara`}
                 component={FormFieldInput}
                 placeholder={t('yleiset.maara')}
                 helperText="Euroa tai prosenttia"

@@ -157,10 +157,10 @@ const getToteutusByFormValues = values => {
     kielivalinta,
   );
 
-  const stipendinMaara = pick(
-    get(values, 'jarjestamistiedot.stipendinMaara') || {},
-    kielivalinta,
-  );
+  const stipendinMaara =
+    onkoStipendia && isNumeric(get(values, 'jarjestamistiedot.stipendinMaara'))
+      ? parseFloat(values.jarjestamistiedot.stipendinMaara)
+      : null;
 
   const ylemmanKorkeakoulututkinnonOsaamisalat = getOsaamisalatByValues({
     osaamisalat: get(values, 'ylemmanKorkeakoulututkinnonOsaamisalat'),
@@ -239,9 +239,10 @@ const getToteutusByFormValues = values => {
         koulutuksenPaattymispaivamaara,
         onkoLukuvuosimaksua,
         lukuvuosimaksu,
+        lukuvuosimaksuKuvaus,
         onkoStipendia,
         stipendinKuvaus,
-        stipendinMaara,
+        stipendinMara,
         diplomiKoodiUrit,
         diplomiKuvaus,
         A1JaA2Kielivalikoima,

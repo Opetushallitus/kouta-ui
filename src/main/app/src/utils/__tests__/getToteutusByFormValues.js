@@ -64,7 +64,7 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
       koulutuksenAlkamispaivamaara: new Date('2019-04-16T00:00'),
       koulutuksenPaattymispaivamaara: new Date('2019-05-24T00:00'),
       onkoStipendia: true,
-      stipendinMaara: { fi: '20e', sv: '20kr' },
+      stipendinMaara: 20,
       stipendinKuvaus: {
         fi: 'Fi stipendikuvaus',
         sv: 'Sv stipendikuvaus',

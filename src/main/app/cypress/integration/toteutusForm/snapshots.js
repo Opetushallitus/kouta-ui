@@ -44,9 +44,7 @@ module.exports = {
             stipendinKuvaus: {
               fi: 'stipendi kuvaus',
             },
-            stipendinMaara: {
-              fi: '20',
-            },
+            stipendinMaara: 20,
             diplomiKoodiUrit: ['lukiodiplomit_0#1'],
             diplomiKuvaus: {
               fi: 'Diplomi kuvaus',
@@ -142,9 +140,7 @@ module.exports = {
             stipendinKuvaus: {
               fi: 'stipendi kuvaus',
             },
-            stipendinMaara: {
-              fi: '20',
-            },
+            stipendinMaara: 20,
             diplomiKoodiUrit: ['lukiodiplomit_0#1'],
             diplomiKuvaus: {
               fi: 'Diplomi kuvaus',
@@ -247,7 +243,7 @@ module.exports = {
             lukuvuosimaksu: null,
             onkoStipendia: false,
             stipendinKuvaus: {},
-            stipendinMaara: {},
+            stipendinMaara: null,
             diplomiKoodiUrit: [],
             diplomiKuvaus: {},
             A1JaA2Kielivalikoima: [],
@@ -349,7 +345,7 @@ module.exports = {
             lukuvuosimaksu: null,
             onkoStipendia: false,
             stipendinKuvaus: {},
-            stipendinMaara: {},
+            stipendinMaara: null,
             diplomiKoodiUrit: [],
             diplomiKuvaus: {},
             A1JaA2Kielivalikoima: [],
@@ -462,9 +458,7 @@ module.exports = {
             stipendinKuvaus: {
               fi: 'stipendi kuvaus',
             },
-            stipendinMaara: {
-              fi: '20',
-            },
+            stipendinMaara: 20,
             diplomiKoodiUrit: [],
             diplomiKuvaus: {},
             A1JaA2Kielivalikoima: [],
@@ -590,9 +584,7 @@ module.exports = {
             stipendinKuvaus: {
               fi: 'stipendi kuvaus',
             },
-            stipendinMaara: {
-              fi: '20',
-            },
+            stipendinMaara: 20,
             diplomiKoodiUrit: [],
             diplomiKuvaus: {},
             A1JaA2Kielivalikoima: [],
@@ -730,9 +722,7 @@ module.exports = {
             stipendinKuvaus: {
               fi: 'Stipendin kuvaus',
             },
-            stipendinMaara: {
-              fi: '90',
-            },
+            stipendinMaara: 90,
             diplomiKoodiUrit: [],
             diplomiKuvaus: {},
             A1JaA2Kielivalikoima: [],
@@ -851,9 +841,7 @@ module.exports = {
             stipendinKuvaus: {
               fi: 'Stipendin kuvaus',
             },
-            stipendinMaara: {
-              fi: '90',
-            },
+            stipendinMaara: 90,
             diplomiKoodiUrit: [],
             diplomiKuvaus: {},
             A1JaA2Kielivalikoima: [],
@@ -974,9 +962,7 @@ module.exports = {
             stipendinKuvaus: {
               fi: 'Stipendin kuvaus',
             },
-            stipendinMaara: {
-              fi: '90',
-            },
+            stipendinMaara: 90,
             diplomiKoodiUrit: [],
             diplomiKuvaus: {},
             A1JaA2Kielivalikoima: [],
@@ -1115,9 +1101,7 @@ module.exports = {
             stipendinKuvaus: {
               fi: 'Stipendin kuvaus',
             },
-            stipendinMaara: {
-              fi: '90',
-            },
+            stipendinMaara: 90,
             diplomiKoodiUrit: [],
             diplomiKuvaus: {},
             A1JaA2Kielivalikoima: [],
@@ -1258,9 +1242,7 @@ module.exports = {
             stipendinKuvaus: {
               fi: 'Stipendin kuvaus',
             },
-            stipendinMaara: {
-              fi: '90',
-            },
+            stipendinMaara: 90,
             diplomiKoodiUrit: ['lukiodiplomit_1#1'],
             diplomiKuvaus: {
               fi: 'Fi diplomi',
@@ -1371,9 +1353,7 @@ module.exports = {
             stipendinKuvaus: {
               fi: 'Stipendin kuvaus',
             },
-            stipendinMaara: {
-              fi: '90',
-            },
+            stipendinMaara: 90,
             diplomiKoodiUrit: ['lukiodiplomit_1#1'],
             diplomiKuvaus: {
               fi: 'Fi diplomi',

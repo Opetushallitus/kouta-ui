@@ -68,17 +68,14 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
             },
           },
         ],
-        lukuvuosimaksu: 40.5,
-        lukuvuosimaksuKuvaus: {
-          fi: 'Fi maksukuvaus',
-          sv: 'Sv maksukuvaus',
+        maksullisuus: {
+          maksu: ""
         },
+        maksumaara: {},
         maksullisuusKuvaus: {
           fi: 'Fi maksullisuuskuvaus',
           sv: 'Sv maksullisuuskuvaus',
         },
-        maksunMaara: 50.25,
-        onkoLukuvuosimaksua: true,
         onkoMaksullinen: true,
         onkoStipendia: true,
         opetusaikaKoodiUrit: ['opetusaika_1#1'],
@@ -100,10 +97,7 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
           fi: 'Fi stipendikuvaus',
           sv: 'Sv stipendikuvaus',
         },
-        stipendinMaara: {
-          fi: '20e',
-          sv: '20kr',
-        },
+        stipendinMaara: 20,
         diplomiKoodiUrit: ['dipmlomi_1#1'],
         diplomiKuvaus: {
           fi: 'Fi diplomi',

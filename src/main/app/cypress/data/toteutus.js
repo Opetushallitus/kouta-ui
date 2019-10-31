@@ -35,11 +35,6 @@ const getBaseFields = () => ({
       alkamisaikaKuvaus: {
         fi: 'Alkamisaika kuvaus',
       },
-      onkoLukuvuosimaksua: true,
-      lukuvuosimaksu: 30,
-      lukuvuosimaksuKuvaus: {
-        fi: 'Lukuvuosimaksu kuvaus',
-      },
       onkoStipendia: true,
       stipendinMaara: 90,
       stipendinKuvaus: {

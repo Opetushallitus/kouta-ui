@@ -67,26 +67,20 @@ Object {
       "fi": "Fi kuvaus",
       "sv": "Sv kuvaus",
     },
-    "lukuvuosimaksu": 40.5,
-    "lukuvuosimaksuKuvaus": Object {
-      "fi": "Fi maksukuvaus",
-      "sv": "Sv maksukuvaus",
-    },
     "maksullisuus": Object {
-      "maksu": "40.5",
-      "tyyppi": "lukuvuosimaksu",
+      "maksu": "",
+      "tyyppi": "kylla",
     },
     "maksullisuusKuvaus": Object {
       "fi": "Fi maksullisuuskuvaus",
       "sv": "Sv maksullisuuskuvaus",
     },
-    "maksumaara": 50.25,
+    "maksumaara": Object {},
     "muutKielet": Array [
       Object {
         "value": "kieli_6#1",
       },
     ],
-    "onkoLukuvuosimaksua": true,
     "onkoStipendia": true,
     "opetusaika": Array [
       "opetusaika_1#1",
@@ -133,10 +127,7 @@ Object {
       "fi": "Fi stipendikuvaus",
       "sv": "Sv stipendikuvaus",
     },
-    "stipendinMaara": Object {
-      "fi": "20e",
-      "sv": "20kr",
-    },
+    "stipendinMaara": 20,
   },
   "kieliversiot": Array [
     "fi",

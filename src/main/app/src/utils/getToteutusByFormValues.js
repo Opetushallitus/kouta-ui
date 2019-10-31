@@ -96,13 +96,6 @@ const getToteutusByFormValues = values => {
 
   const maksullisuusMaksu = get(values, 'jarjestamistiedot.maksullisuus.maksu');
 
-  const onkoLukuvuosimaksua = maksullisuustyyppi === 'lukuvuosimaksu';
-
-  const lukuvuosimaksu =
-    onkoLukuvuosimaksua && isNumeric(maksullisuusMaksu)
-      ? parseFloat(maksullisuusMaksu)
-      : null;
-
   const onkoMaksullinen = maksullisuustyyppi === 'kylla';
 
   const maksunMaara =
@@ -237,9 +230,6 @@ const getToteutusByFormValues = values => {
         maksullisuusKuvaus,
         koulutuksenAlkamispaivamaara,
         koulutuksenPaattymispaivamaara,
-        onkoLukuvuosimaksua,
-        lukuvuosimaksu,
-        lukuvuosimaksuKuvaus,
         onkoStipendia,
         stipendinKuvaus,
         stipendinMara,

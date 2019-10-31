@@ -232,7 +232,7 @@ const getToteutusByFormValues = values => {
         koulutuksenPaattymispaivamaara,
         onkoStipendia,
         stipendinKuvaus,
-        stipendinMara,
+        stipendinMaara,
         diplomiKoodiUrit,
         diplomiKuvaus,
         A1JaA2Kielivalikoima,

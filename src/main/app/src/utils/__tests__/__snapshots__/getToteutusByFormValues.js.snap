@@ -101,7 +101,6 @@ Object {
           },
         },
       ],
-      "lukuvuosimaksu": null,
       "maksullisuusKuvaus": Object {
         "fi": "Fi maksullisuuskuvaus",
         "sv": "Sv maksullisuuskuvaus",
@@ -110,7 +109,6 @@ Object {
       "muuKielivalikoima": Array [
         "kieli_6#1",
       ],
-      "onkoLukuvuosimaksua": false,
       "onkoMaksullinen": true,
       "onkoStipendia": true,
       "opetusaikaKoodiUrit": Array [
@@ -141,10 +139,7 @@ Object {
         "fi": "Fi stipendikuvaus",
         "sv": "Sv stipendikuvaus",
       },
-      "stipendinMaara": Object {
-        "fi": "20e",
-        "sv": "20kr",
-      },
+      "stipendinMaara": 20,
     },
     "osaamisalat": Array [
       Object {

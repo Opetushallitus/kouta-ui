@@ -96,13 +96,6 @@ const getToteutusByFormValues = values => {
 
   const maksullisuusMaksu = get(values, 'jarjestamistiedot.maksullisuus.maksu');
 
-  const onkoLukuvuosimaksua = maksullisuustyyppi === 'lukuvuosimaksu';
-
-  const lukuvuosimaksu =
-    onkoLukuvuosimaksua && isNumeric(maksullisuusMaksu)
-      ? parseFloat(maksullisuusMaksu)
-      : null;
-
   const onkoMaksullinen = maksullisuustyyppi === 'kylla';
 
   const maksunMaara =
@@ -157,10 +150,10 @@ const getToteutusByFormValues = values => {
     kielivalinta,
   );
 
-  const stipendinMaara = pick(
-    get(values, 'jarjestamistiedot.stipendinMaara') || {},
-    kielivalinta,
-  );
+  const stipendinMaara =
+    onkoStipendia && isNumeric(get(values, 'jarjestamistiedot.stipendinMaara'))
+      ? parseFloat(values.jarjestamistiedot.stipendinMaara)
+      : null;
 
   const ylemmanKorkeakoulututkinnonOsaamisalat = getOsaamisalatByValues({
     osaamisalat: get(values, 'ylemmanKorkeakoulututkinnonOsaamisalat'),
@@ -237,8 +230,6 @@ const getToteutusByFormValues = values => {
         maksullisuusKuvaus,
         koulutuksenAlkamispaivamaara,
         koulutuksenPaattymispaivamaara,
-        onkoLukuvuosimaksua,
-        lukuvuosimaksu,
         onkoStipendia,
         stipendinKuvaus,
         stipendinMaara,

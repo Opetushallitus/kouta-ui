@@ -9,6 +9,7 @@ import OpetusaikaCheckboxGroup from './OpetusaikaCheckboxGroup';
 import OpetuskieliCheckboxGroup from './OpetuskieliCheckboxGroup';
 import OpetustapaCheckboxGroup from './OpetustapaCheckboxGroup';
 import Flex, { FlexItem } from '../../Flex';
+import InputIcon from '../../InputIcon';
 import AlkamiskausiFields from './AlkamiskausiFields';
 import useKoodistoOptions from '../../useKoodistoOptions';
 import { isArray, getTestIdProps } from '../../../utils';
@@ -116,10 +117,12 @@ const StipendiFields = ({ language, name }) => {
           <Spacing marginTop={1} {...getTestIdProps('stipendinMaara')}>
             <ExtraField>
               <Field
-                name={`${name}.stipendinMaara.${language}`}
+                name={`${name}.stipendinMaara`}
                 component={FormFieldInput}
                 placeholder={t('yleiset.maara')}
                 helperText="Euroa tai prosenttia"
+                suffix={<InputIcon type="euro_symbol" />}
+                type="number"
               />
             </ExtraField>
           </Spacing>

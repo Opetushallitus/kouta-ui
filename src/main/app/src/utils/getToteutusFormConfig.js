@@ -30,7 +30,6 @@ const config = createFormConfigBuilder()
     'kuvaus',
     without(
       KOULUTUSTYYPIT,
-      ...TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
       KOULUTUSTYYPPI.LUKIOKOULUTUS,
     ),
   )

@@ -54,16 +54,6 @@ const TiedotSection = ({ language, name }) => {
         </Box>
       </FormConfigField>
 
-      <FormConfigField name="kuvaus">
-        <Box mb={2} {...getTestIdProps('kuvaus')}>
-          <Field
-            name={`${name}.kuvaus.${language}`}
-            component={FormFieldInput}
-            label={t('toteutuslomake.toteutuksenKuvaus')}
-          />
-        </Box>
-      </FormConfigField>
-
       <FormConfigField name="ilmoittautumislinkki">
         <Box mb={2} {...getTestIdProps('ilmoittautumislinkki')}>
           <Field

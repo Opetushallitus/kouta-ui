@@ -163,10 +163,6 @@ const fillTiedotSection = () => {
       .find('input')
       .type('toteutuksen nimi', { force: true });
 
-    cy.getByTestId('kuvaus')
-      .find('input')
-      .type('toteutuksen kuvaus', { force: true });
-
     jatka();
   });
 };

@@ -344,7 +344,6 @@ export default {
     avainsanat: 'Avainsanat',
     toteutuksenJarjestaja: 'Missä järjestetään?',
     toteutuksenNimi: 'Toteutuksen nimi',
-    toteutuksenKuvaus: 'Toteutuksen kuvaus',
     koulutuksenYhteystiedot: 'Koulutuksen yhteystiedot',
     toteutukseenLiitetytHakukohteet: 'Toteutukseen liitetyt hakukohteet',
     valitseOsaamisalat: 'Valitse osaamisalat',

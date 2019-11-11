@@ -93,7 +93,7 @@ const getFormValuesByToteutus = toteutus => {
     tila,
     tiedot: {
       nimi,
-      kuvaus,
+      toteutuksenKuvaus: kuvaus,
       laajuus: isNumber(laajuus) ? laajuus.toString() : '',
       laajuusyksikko: laajuusyksikkoKoodiUri
         ? { value: laajuusyksikkoKoodiUri }

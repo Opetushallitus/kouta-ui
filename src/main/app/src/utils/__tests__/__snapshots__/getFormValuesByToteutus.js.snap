@@ -208,10 +208,6 @@ Object {
       "fi": "Fi kesto",
       "sv": "Sv kesto",
     },
-    "kuvaus": Object {
-      "fi": "Fi toteutuksenkuvaus",
-      "sv": "Sv toteutuksenkuvaus",
-    },
     "laajuus": "25",
     "laajuusyksikko": Object {
       "value": "laajuus_1#1",
@@ -219,6 +215,10 @@ Object {
     "nimi": Object {
       "fi": "Fi nimi",
       "sv": "Sv nimi",
+    },
+    "toteutuksenKuvaus": Object {
+      "fi": "Fi toteutuksenkuvaus",
+      "sv": "Sv toteutuksenkuvaus",
     },
   },
   "tila": "tallennettu",

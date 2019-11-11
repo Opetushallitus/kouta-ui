@@ -53,8 +53,8 @@ Object {
       "sv": "Sv linkki",
     },
     "kuvaus": Object {
-      "fi": "Fi kuvaus",
-      "sv": "Sv kuvaus",
+      "fi": "Fi toteutuksenkuvaus",
+      "sv": "Sv toteutuksenkuvaus",
     },
     "laajuus": 252,
     "laajuusyksikkoKoodiUri": "laajuus_1#1",

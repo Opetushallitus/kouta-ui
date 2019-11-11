@@ -74,6 +74,14 @@ const config = createFormConfigBuilder()
   )
   .registerField(
     'tiedot',
+    'toteutuksenKuvaus',
+    without(
+      KOULUTUSTYYPIT,
+      KOULUTUSTYYPPI.LUKIOKOULUTUS,
+    ),
+  )
+  .registerField(
+    'tiedot',
     'ilmoittautumislinkki',
     TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
   )

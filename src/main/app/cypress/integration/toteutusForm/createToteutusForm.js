@@ -159,9 +159,13 @@ const fillJarjestajatSection = () => {
 
 const fillTiedotSection = () => {
   cy.getByTestId('tiedotSection').within(() => {
-    cy.getByTestId('nimi')
+    cy.getByTestId('toteutuksenNimi')
       .find('input')
       .type('toteutuksen nimi', { force: true });
+
+    cy.getByTestId('toteutuksenKuvaus')
+      .find('input')
+      .type('Toteutuksen kuvaus', { force: true });
 
     jatka();
   });
@@ -205,13 +209,6 @@ const fillKkOsaamisalat = () => {
   cy.getByTestId('osaamisalanOtsikko')
     .find('input')
     .type('osaamisalan otsikko', { force: true });
-};
-
-const fillKuvausSection = () => {
-  cy.getByTestId('kuvausSection').within(() => {
-    cy.get('textarea').type('toteutuksen kuvaus', { force: true });
-    jatka();
-  });
 };
 
 const fillLukiolinjatSection = () => {
@@ -352,7 +349,6 @@ describe('createToteutusForm', () => {
     fillPohjaSection();
     fillKieliversiotSection();
     fillTiedotSection();
-    fillKuvausSection();
 
     cy.getByTestId('alempiOsaamisalatSection').within(() => {
       fillKkOsaamisalat();

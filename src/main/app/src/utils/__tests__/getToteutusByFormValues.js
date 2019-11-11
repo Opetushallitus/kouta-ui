@@ -8,6 +8,10 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
         fi: 'Fi nimi',
         sv: 'Sv nimi',
       },
+      toteutuksenKuvaus: {
+        fi: 'Fi toteutuksenkuvaus',
+        sv: 'Sv toteutuksenkuvaus',
+      },
       ilmoittautumislinkki: {
         fi: 'Fi linkki',
         sv: 'Sv linkki',
@@ -23,10 +27,6 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
     kieliversiot: ['fi', 'sv'],
     tarjoajat: ['org1', 'org2'],
     jarjestamistiedot: {
-      kuvaus: {
-        fi: 'Fi kuvaus',
-        sv: 'Sv kuvaus',
-      },
       maksullisuus: {
         tyyppi: 'kylla',
         maksu: '50.50',
@@ -139,10 +139,6 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
         otsikko: { fi: 'Fi alempiotsikko', sv: 'Sv alempiotsikko' },
       },
     ],
-    kuvaus: {
-      fi: 'Fi kuvaus',
-      sv: 'Sv kuvaus',
-    },
     lukiolinjat: {
       lukiolinja: { value: 'linja_1#1' },
     },

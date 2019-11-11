@@ -60,8 +60,8 @@ Object {
     "koulutuksenAlkamispaivamaara": 2019-04-16T00:00:00.000Z,
     "koulutuksenPaattymispaivamaara": 2019-05-24T00:00:00.000Z,
     "kuvaus": Object {
-      "fi": "Fi kuvaus",
-      "sv": "Sv kuvaus",
+      "fi": "Fi toteutuksenkuvaus",
+      "sv": "Sv toteutuksenkuvaus",
     },
     "maksullisuus": Object {
       "maksu": "",
@@ -130,8 +130,8 @@ Object {
     "sv",
   ],
   "kuvaus": Object {
-    "fi": "Fi kuvaus",
-    "sv": "Sv kuvaus",
+    "fi": "Fi toteutuksenkuvaus",
+    "sv": "Sv toteutuksenkuvaus",
   },
   "lukiolinjat": Object {
     "lukiolinja": Object {
@@ -207,6 +207,10 @@ Object {
     "kesto": Object {
       "fi": "Fi kesto",
       "sv": "Sv kesto",
+    },
+    "kuvaus": Object {
+      "fi": "Fi toteutuksenkuvaus",
+      "sv": "Sv toteutuksenkuvaus",
     },
     "laajuus": "25",
     "laajuusyksikko": Object {

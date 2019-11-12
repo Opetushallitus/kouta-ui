@@ -58,7 +58,7 @@ const TiedotSection = ({ language, name }) => {
         <Box mb={2} {...getTestIdProps('toteutuksenKuvaus')}>
           <Field
             name={`${name}.toteutuksenKuvaus.${language}`}
-            component={FormFieldInput}
+            component={FormFieldTextarea}
             label={t('yleiset.toteutuksenKuvaus')}
           />
         </Box>

@@ -164,7 +164,7 @@ const fillTiedotSection = () => {
       .type('toteutuksen nimi', { force: true });
 
     cy.getByTestId('toteutuksenKuvaus')
-      .find('input')
+      .find('textarea')
       .type('Toteutuksen kuvaus', { force: true });
 
     jatka();

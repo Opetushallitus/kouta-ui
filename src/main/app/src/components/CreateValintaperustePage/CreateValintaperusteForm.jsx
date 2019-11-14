@@ -9,7 +9,6 @@ import getFormValuesByValintaperuste from '../../utils/getFormValuesByValintaper
 import getValintaperusteFormConfig from '../../utils/getValintaperusteFormConfig';
 import FormConfigContext from '../FormConfigContext';
 
-const config = getValintaperusteFormConfig();
 
 const resolveFn = () => Promise.resolve(null);
 
@@ -27,6 +26,23 @@ const getInitialValues = valintaperuste => {
         ...getFormValuesByValintaperuste(valintaperuste),
       }
     : initialValues;
+};
+
+const ValintaperusteFormWrapper = props => {
+  const {
+    tyyppi,
+    koulutustyyppi,
+    steps } = props;
+
+  const config = useMemo(() => getValintaperusteFormConfig(tyyppi), [
+    tyyppi,
+  ]);
+
+  return (
+    <FormConfigContext.Provider value={config}>
+      <ValintaperusteForm {...props} />
+    </FormConfigContext.Provider>
+  );
 };
 
 export const CreateValintaperusteForm = ({
@@ -51,11 +67,7 @@ export const CreateValintaperusteForm = ({
       initialValues={initialValues}
       enableReinitialize
     >
-      {() => (
-        <FormConfigContext.Provider value={config}>
-          <ValintaperusteForm steps {...props} />
-        </FormConfigContext.Provider>
-      )}
+      {() => <ValintaperusteFormWrapper steps {...props} />}
     </ReduxForm>
   );
 };

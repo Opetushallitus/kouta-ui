@@ -6,7 +6,26 @@ import ReduxForm from '../ReduxForm';
 import getValintaperusteFormConfig from '../../utils/getValintaperusteFormConfig';
 import FormConfigContext from '../FormConfigContext';
 
-const config = getValintaperusteFormConfig();
+const ValintaperusteFormWrapper = props => {
+  const {
+    tyyppi,
+    koulutustyyppi,
+    valintaperuste,
+    steps,
+    canSelectBase,
+    canEditTyyppi
+  } = props;
+
+  const config = useMemo(() => getValintaperusteFormConfig(koulutustyyppi), [
+    koulutustyyppi,
+  ]);
+
+  return (
+    <FormConfigContext.Provider value={config}>
+      <ValintaperusteForm {...props} />
+    </FormConfigContext.Provider>
+  );
+};
 
 const EditValintapersuteetForm = ({ valintaperuste, ...props }) => {
   const initialValues = useMemo(() => {
@@ -15,16 +34,12 @@ const EditValintapersuteetForm = ({ valintaperuste, ...props }) => {
 
   return (
     <ReduxForm form="editValintaperusteForm" initialValues={initialValues}>
-      {() => (
-        <FormConfigContext.Provider value={config}>
-          <ValintaperusteForm
-            {...props}
-            valintaperuste={valintaperuste}
-            steps={false}
-            canSelectBase={false}
-            canEditTyyppi={false}
-          />
-        </FormConfigContext.Provider>
+      {() => (<ValintaperusteFormWrapper {...props}
+                                            valintaperuste={valintaperuste}
+                                            steps={false}
+                                            canSelectBase={false}
+                                            canEditTyyppi={false} />
+
       )}
     </ReduxForm>
   );

@@ -1,6 +1,6 @@
 import get from 'lodash/get';
 
-import { JULKAISUTILA } from '../constants';
+import {JULKAISUTILA, KOULUTUSTYYPIT, KOULUTUSTYYPPI} from '../constants';
 
 const getKielivalinta = values => get(values, 'kieliversiot') || [];
 
@@ -10,8 +10,8 @@ const validateIfJulkaistu = validate => (eb, values, ...rest) => {
   return tila === JULKAISUTILA.JULKAISTU ? validate(eb, values, ...rest) : eb;
 };
 
-const baseConfig = {
-  sections: {
+const getValintaperusteFormConfig = koulutustyyppi => {
+  let sections = {
     pohja: {
       fields: {
         pohja: true,
@@ -44,23 +44,6 @@ const baseConfig = {
         tarkenne: true,
       },
     },
-    valintatapa: {
-      fields: {
-        valintatavat: {
-          validate: validateIfJulkaistu((eb, values) =>
-            eb
-              .validateArrayMinLength('valintatavat', 1, {
-                isFieldArray: true,
-              })
-              .validateArray('valintatavat', eb =>
-                eb
-                  .validateExistence('tapa')
-                  .validateTranslations('nimi', getKielivalinta(values)),
-              ),
-          ),
-        },
-      },
-    },
     soraKuvaus: {
       fields: {
         soraKuvaus: true,
@@ -83,10 +66,40 @@ const baseConfig = {
         valintakoe: true,
       },
     },
-  },
-};
+  };
 
-const getValintaperusteFormConfig = () => {
+  const koulutustyypitWithValintatapa = [
+    KOULUTUSTYYPPI.YLIOPISTOKOULUTUS,
+    KOULUTUSTYYPPI.AMKKOULUTUS,
+    KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJAKOULUTUS,
+    KOULUTUSTYYPPI.AMMATILLINEN_OPINTO_OHJAAJA_KOULUTUS,
+    KOULUTUSTYYPPI.AMMATILLINEN_ERITYISOPETTAJA_KOULUTUS,
+  ];
+
+  if (koulutustyyppi === undefined || koulutustyypitWithValintatapa.includes(koulutustyyppi)) {
+    sections.valintatapa = {
+      fields: {
+        valintatavat: {
+          validate: validateIfJulkaistu((eb, values) =>
+            eb
+              .validateArrayMinLength('valintatavat', 1, {
+                isFieldArray: true,
+              })
+              .validateArray('valintatavat', eb =>
+                eb
+                  .validateExistence('tapa')
+                  .validateTranslations('nimi', getKielivalinta(values)),
+              ),
+          ),
+        },
+      },
+    };
+  }
+
+  let baseConfig = {
+    sections: sections,
+  };
+
   return { ...baseConfig };
 };
 

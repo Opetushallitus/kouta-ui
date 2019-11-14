@@ -50,7 +50,6 @@ const TiedotSection = ({ language, name }) => {
             name={`${name}.nimi.${language}`}
             component={FormFieldInput}
             label={t('toteutuslomake.toteutuksenNimi')}
-            setToteutusNimi={setToteutusNimi}
           />
         </Box>
       </FormConfigField>

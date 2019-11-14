@@ -19,10 +19,10 @@ const getCopyValues = toteutusOid => ({
   },
 });
 
-const getInitialValues = toteutus => {
+const getInitialValues = (toteutus, toteutusKieliFi, toteutuskieliSv) => {
   return toteutus
     ? { ...getCopyValues(toteutus.oid), ...getFormValuesByToteutus(toteutus) }
-    : initialValues;
+    : initialValues(toteutusKieliFi, toteutuskieliSv);
 };
 
 const ToteutusFormWrapper = props => {
@@ -41,6 +41,9 @@ const ToteutusFormWrapper = props => {
 
 const CreateToteutusForm = props => {
   const { kopioToteutusOid } = props;
+  const { koulutusNimiFi } = props;
+  const { koulutusNimiSv } = props;
+  const { koulutustyyppi } = props;
 
   const promiseFn = kopioToteutusOid ? getToteutusByOid : resolveFn;
 
@@ -51,7 +54,7 @@ const CreateToteutusForm = props => {
   });
 
   const initialValues = useMemo(() => {
-    return getInitialValues(data);
+    return koulutustyyppi === 'amm' ? getInitialValues(data, koulutusNimiFi, koulutusNimiSv) : getInitialValues(data, "", "");
   }, [data]);
 
   return (

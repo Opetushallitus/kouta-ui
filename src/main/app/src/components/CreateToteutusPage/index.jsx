@@ -13,6 +13,9 @@ import { KOULUTUSTYYPPI } from '../../constants';
 import useSelectBase from '../useSelectBase';
 import Title from '../Title';
 import useTranslation from '../useTranslation';
+import toteutusDefaultNimi, {toteutusDefaultNimiConst} from '../../state/toteutusDefaultNimi';
+import {connect} from "react-redux";
+
 
 const CreateToteutusPage = props => {
   const {
@@ -59,6 +62,7 @@ const CreateToteutusPage = props => {
         {data ? (
           <CreateToteutusForm
             koulutusKoodiUri={data.koulutusKoodiUri}
+            koulutusNimi={data.nimi}
             organisaatioOid={organisaatioOid}
             koulutustyyppi={koulutustyyppi}
             kopioToteutusOid={kopioToteutusOid}
@@ -73,4 +77,13 @@ const CreateToteutusPage = props => {
   );
 };
 
-export default CreateToteutusPage;
+//export const CreateToteutusPage;
+export default connect(
+    state => ({
+        toteutusDefaultNimi: toteutusDefaultNimiConst(state),
+    }),
+    dispatch => ({
+        setToteutusNimi: () => dispatch(toteutusDefaultNimi()),
+    }),
+)(CreateToteutusPage);
+

@@ -8,6 +8,7 @@ import ReduxForm from '../ReduxForm';
 import getFormValuesByValintaperuste from '../../utils/getFormValuesByValintaperuste';
 import getValintaperusteFormConfig from '../../utils/getValintaperusteFormConfig';
 import FormConfigContext from '../FormConfigContext';
+import useFieldValue from "../useFieldValue";
 
 
 const resolveFn = () => Promise.resolve(null);
@@ -29,9 +30,9 @@ const getInitialValues = valintaperuste => {
 };
 
 const ValintaperusteFormWrapper = props => {
-  const {
-    koulutustyyppi,
-    steps } = props;
+  const { steps } = props;
+
+  const koulutustyyppi = useFieldValue('koulutustyyppi');
 
   const config = useMemo(() => getValintaperusteFormConfig(koulutustyyppi), [
     koulutustyyppi,

@@ -54,7 +54,7 @@ const CreateToteutusForm = props => {
 
   const initialValues = useMemo(() => {
     return koulutustyyppi === 'amm' ? getInitialValues(data, koulutusNimi) : getInitialValues(data, null);
-  }, [data]);
+  }, [data, koulutustyyppi, koulutusNimi]);
 
   return (
     <ReduxForm

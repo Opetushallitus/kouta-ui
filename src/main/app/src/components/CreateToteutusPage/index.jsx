@@ -14,7 +14,6 @@ import useSelectBase from '../useSelectBase';
 import Title from '../Title';
 import useTranslation from '../useTranslation';
 
-
 const CreateToteutusPage = props => {
   const {
     match: {
@@ -60,8 +59,7 @@ const CreateToteutusPage = props => {
         {data ? (
           <CreateToteutusForm
             koulutusKoodiUri={data.koulutusKoodiUri}
-            koulutusNimiFi={data.nimi.fi}
-            koulutusNimiSv={data.nimi.sv}
+            koulutusNimi={data.nimi}
             organisaatioOid={organisaatioOid}
             koulutustyyppi={koulutustyyppi}
             kopioToteutusOid={kopioToteutusOid}

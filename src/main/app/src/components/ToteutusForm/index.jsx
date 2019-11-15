@@ -2,14 +2,11 @@ import { POHJAVALINTA, DEFAULT_JULKAISUTILA } from '../../constants';
 
 export { default } from './ToteutusForm';
 
-export const initialValues = (toteutusKieliFi, toteutusKieliSv)=> ({
+export const initialValues = (toteutusNimi)=> ({
   tila: DEFAULT_JULKAISUTILA,
   kieliversiot: ['fi', 'sv'],
   tiedot: {
-    nimi: {
-      fi: toteutusKieliFi,
-      sv: toteutusKieliSv
-    }
+    nimi: toteutusNimi,
   },
   pohja: {
     tapa: POHJAVALINTA.UUSI,

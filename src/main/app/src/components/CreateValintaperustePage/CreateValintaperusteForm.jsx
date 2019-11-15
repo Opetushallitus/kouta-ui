@@ -30,12 +30,11 @@ const getInitialValues = valintaperuste => {
 
 const ValintaperusteFormWrapper = props => {
   const {
-    tyyppi,
     koulutustyyppi,
     steps } = props;
 
-  const config = useMemo(() => getValintaperusteFormConfig(tyyppi), [
-    tyyppi,
+  const config = useMemo(() => getValintaperusteFormConfig(koulutustyyppi), [
+    koulutustyyppi,
   ]);
 
   return (

@@ -8,7 +8,6 @@ import FormConfigContext from '../FormConfigContext';
 
 const ValintaperusteFormWrapper = props => {
   const {
-    tyyppi,
     koulutustyyppi,
     valintaperuste,
     steps,

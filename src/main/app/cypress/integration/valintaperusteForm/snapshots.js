@@ -13,7 +13,7 @@ module.exports = {
         "nimi": {
           "fi": "Valintaperusteen nimi"
         },
-        "koulutustyyppi": "amm",
+        "koulutustyyppi": "yo",
         "onkoJulkinen": true,
         "valintakokeet": [
           {
@@ -38,7 +38,7 @@ module.exports = {
           }
         ],
         "metadata": {
-          "tyyppi": "amm",
+          "tyyppi": "yo",
           "valintatavat": [
             {
               "kuvaus": {},
@@ -100,7 +100,7 @@ module.exports = {
         "nimi": {
           "fi": "Valintaperusteen nimi"
         },
-        "koulutustyyppi": "amm",
+        "koulutustyyppi": "yo",
         "onkoJulkinen": true,
         "valintakokeet": [
           {
@@ -125,7 +125,7 @@ module.exports = {
           }
         ],
         "metadata": {
-          "tyyppi": "amm",
+          "tyyppi": "yo",
           "valintatavat": [
             {
               "kuvaus": {},

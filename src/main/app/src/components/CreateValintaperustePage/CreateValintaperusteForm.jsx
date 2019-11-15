@@ -32,7 +32,7 @@ const getInitialValues = valintaperuste => {
 const ValintaperusteFormWrapper = props => {
   const { steps } = props;
 
-  const koulutustyyppi = useFieldValue('koulutustyyppi');
+  const koulutustyyppi = useFieldValue('tyyppi');
 
   const config = useMemo(() => getValintaperusteFormConfig(koulutustyyppi), [
     koulutustyyppi,

@@ -7,7 +7,7 @@ export { default } from './HakukohdeForm';
 export const initialValues = (toteutusNimi) => ({
   tila: DEFAULT_JULKAISUTILA,
   kieliversiot: ['fi', 'sv'],
-  tiedot: {
+  perustiedot: {
     nimi: toteutusNimi,
   },
   alkamiskausi: {

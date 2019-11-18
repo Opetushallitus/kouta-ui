@@ -161,6 +161,7 @@ const fillTiedotSection = () => {
   cy.getByTestId('tiedotSection').within(() => {
     cy.getByTestId('toteutuksenNimi')
       .find('input')
+      .clear()
       .type('toteutuksen nimi', { force: true });
 
     cy.getByTestId('toteutuksenKuvaus')

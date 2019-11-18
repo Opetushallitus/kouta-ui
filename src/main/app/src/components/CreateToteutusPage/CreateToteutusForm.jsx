@@ -19,10 +19,10 @@ const getCopyValues = toteutusOid => ({
   },
 });
 
-const getInitialValues = (toteutus, koulutusNimi) => {
+const getInitialValues = (toteutus, koulutusNimi, koulutusKielet) => {
   return toteutus
     ? { ...getCopyValues(toteutus.oid), ...getFormValuesByToteutus(toteutus) }
-    : initialValues(koulutusNimi);
+    : initialValues(koulutusNimi, koulutusKielet);
 };
 
 const ToteutusFormWrapper = props => {
@@ -42,6 +42,7 @@ const ToteutusFormWrapper = props => {
 const CreateToteutusForm = props => {
   const { kopioToteutusOid } = props;
   const { koulutusNimi } = props;
+  const { koulutusKielet } = props;
   const { koulutustyyppi } = props;
 
   const promiseFn = kopioToteutusOid ? getToteutusByOid : resolveFn;
@@ -53,8 +54,8 @@ const CreateToteutusForm = props => {
   });
 
   const initialValues = useMemo(() => {
-    return koulutustyyppi === 'amm' ? getInitialValues(data, koulutusNimi) : getInitialValues(data, null);
-  }, [data, koulutustyyppi, koulutusNimi]);
+    return koulutustyyppi === 'amm' ? getInitialValues(data, koulutusNimi, koulutusKielet) : getInitialValues(data, null, koulutusKielet);
+  }, [data, koulutustyyppi, koulutusNimi, koulutusKielet]);
 
   return (
     <ReduxForm

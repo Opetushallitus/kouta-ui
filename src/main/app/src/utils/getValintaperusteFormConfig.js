@@ -1,6 +1,6 @@
 import get from 'lodash/get';
 
-import {JULKAISUTILA, KOULUTUSTYYPIT} from '../constants';
+import {JULKAISUTILA, KOULUTUSTYYPIT, KOULUTUSTYYPPI} from '../constants';
 import createFormConfigBuilder from "./createFormConfigBuilder";
 
 const getKielivalinta = values => get(values, 'kieliversiot') || [];
@@ -10,6 +10,14 @@ const validateIfJulkaistu = validate => (eb, values, ...rest) => {
 
   return tila === JULKAISUTILA.JULKAISTU ? validate(eb, values, ...rest) : eb;
 };
+
+const koulutustyypitWithValintatapa = [
+  KOULUTUSTYYPPI.YLIOPISTOKOULUTUS,
+  KOULUTUSTYYPPI.AMKKOULUTUS,
+  KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJAKOULUTUS,
+  KOULUTUSTYYPPI.AMMATILLINEN_OPINTO_OHJAAJA_KOULUTUS,
+  KOULUTUSTYYPPI.AMMATILLINEN_ERITYISOPETTAJA_KOULUTUS,
+];
 
 const config = createFormConfigBuilder()
   .registerField('pohja', 'pohja', KOULUTUSTYYPIT)
@@ -29,7 +37,7 @@ const config = createFormConfigBuilder()
   .registerField('kuvaus', 'nimi', KOULUTUSTYYPIT, (eb, values) =>
     eb.validateTranslations('kuvaus.nimi', getKielivalinta(values)),
   ).registerField('kuvaus', 'tarkenne', KOULUTUSTYYPIT)
-  .registerField('valintatapa', 'valintatavat', KOULUTUSTYYPIT,
+  .registerField('valintatapa', 'valintatavat', koulutustyypitWithValintatapa,
     validateIfJulkaistu((eb, values) =>
       eb
         .validateArrayMinLength('valintatavat', 1, {

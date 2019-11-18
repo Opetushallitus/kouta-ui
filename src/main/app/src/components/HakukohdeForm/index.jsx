@@ -4,9 +4,9 @@ import { DEFAULT_JULKAISUTILA } from '../../constants';
 
 export { default } from './HakukohdeForm';
 
-export const initialValues = (toteutusNimi) => ({
+export const initialValues = (toteutusNimi, toteutusKielet) => ({
   tila: DEFAULT_JULKAISUTILA,
-  kieliversiot: ['fi', 'sv'],
+  kieliversiot: toteutusKielet,
   perustiedot: {
     nimi: toteutusNimi,
   },

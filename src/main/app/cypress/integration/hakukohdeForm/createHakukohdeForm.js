@@ -76,7 +76,7 @@ const fillPerustiedotSection = ({ isKorkeakoulu = false } = {}) => {
   cy.getByTestId('perustiedotSection').within(() => {
     cy.getByTestId('hakukohteenNimi')
       .find('input')
-      .clear()
+      .clear({ force: true })
       .type('Hakukohteen nimi', { force: true });
 
     if (!isKorkeakoulu) {

@@ -55,11 +55,7 @@ export default ({ tyyppi = 'amm' } = {}) => {
           {
             osoite: {
               osoite: { fi: 'fi osoite', sv: 'sv osoite' },
-              postinumeroKoodiUri: 'posti_1#1',
-              postitoimipaikka: {
-                fi: 'fi posititoimipaikka',
-                sv: 'sv posititoimipaikka',
-              },
+              postinumeroKoodiUri: 'posti_00350#1',
             },
             aika: {
               alkaa: '2019-04-16T08:44',

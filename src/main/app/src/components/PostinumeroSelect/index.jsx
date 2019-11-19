@@ -58,7 +58,7 @@ const PostinumeroSelect = ({ koodistoVersio = 2, ...props }) => {
         });
 
         if (koodi) {
-          return [getKoodiOption(koodi, language)];
+          return [getKoodiOption(koodi, koodistoVersio, language)];
         }
       } catch (e) {
         console.log(e);

@@ -8,13 +8,20 @@ import {
   makeLocalisationDecorator,
 } from '../../storybookUtils';
 
-const Story = () => {
-  const [value, setValue] = useState({ value: 'posti_00940#2' });
+function generateStory(koodi) {
+    return () => {
+        const [value, setValue] = useState({ value: koodi });
 
-  return <PostinumeroSelect onChange={setValue} value={value} />;
-};
+        return <PostinumeroSelect onChange={setValue} value={value} />;
+    };
+}
+
+const Story = generateStory('posti_00940#2');
+
+const StoryWithInvalidKoodistoVersion = generateStory('posti_00940#fi');
 
 storiesOf('PostinumeroSelect', module)
   .addDecorator(makeLocalisationDecorator())
   .addDecorator(makeApiDecorator())
-  .add('Basic', () => <Story />);
+  .add('Basic', () => <Story />)
+  .add('With invalid koodisto version', () => <StoryWithInvalidKoodistoVersion /> );

@@ -76,7 +76,7 @@ const MainPage = ({ history }) => {
             exact
           />
           <Route
-            path="/organisaatio/:organisaatioOid/sora-kuvaus"
+            path="/organisaatio/:organisaatioOid/sora-kuvaus/kielivalinnat/:kieliValinnat"
             component={CreateSoraKuvausPage}
             exact
           />

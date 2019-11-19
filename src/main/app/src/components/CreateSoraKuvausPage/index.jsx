@@ -13,7 +13,7 @@ import useTranslation from '../useTranslation';
 const CreateSoraKuvausPage = props => {
   const {
     match: {
-      params: { organisaatioOid },
+      params: { organisaatioOid, kieliValinnat },
     },
     location: { search },
     history,
@@ -39,6 +39,7 @@ const CreateSoraKuvausPage = props => {
           kopioSoraKuvausOid={kopioSoraKuvausOid}
           onSelectBase={selectBase}
           showArkistoituTilaOption={false}
+          kieliValinnat={kieliValinnat}
         />
       </FormPage>
     </>

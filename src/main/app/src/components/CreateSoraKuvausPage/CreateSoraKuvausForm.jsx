@@ -13,21 +13,23 @@ const getCopyValues = soraKuvausId => ({
   },
 });
 
-const getInitialValues = soraKuvaus => {
+const getInitialValues = (soraKuvaus, kieliValinnat) => {
   return soraKuvaus && soraKuvaus.id
     ? {
         ...getCopyValues(soraKuvaus.id),
         ...getFormValuesBySoraKuvaus(soraKuvaus),
       }
-    : initialValues;
+    : initialValues(kieliValinnat);
 };
 
-export const CreateSoraKuvausForm = ({ kopioSoraKuvausId, ...props }) => {
+export const CreateSoraKuvausForm = ({ kopioSoraKuvausId, kieliValinnat, ...props }) => {
   const { soraKuvaus } = useSoraKuvaus(kopioSoraKuvausId);
 
+  kieliValinnat = kieliValinnat.split(",");
+
   const initialValues = useMemo(() => {
-    return getInitialValues(soraKuvaus);
-  }, [soraKuvaus]);
+    return getInitialValues(soraKuvaus, kieliValinnat);
+  }, [soraKuvaus, kieliValinnat]);
 
   return (
     <ReduxForm

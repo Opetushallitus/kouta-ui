@@ -20,7 +20,7 @@ const getValintaperusteetOptions = (valintaperusteet, language) =>
     label: getFirstLanguageValue(nimi, language),
   }));
 
-const KuvausSection = ({ haku, organisaatioOid, name }) => {
+const KuvausSection = ({ haku, organisaatioOid, name, languages }) => {
   const language = useLanguage();
   const hakuOid = get(haku, 'oid');
   const kohdejoukkoKoodiUri = get(haku, 'kohdejoukkoKoodiUri');
@@ -28,6 +28,7 @@ const KuvausSection = ({ haku, organisaatioOid, name }) => {
   const { t } = useTranslation();
   const valintaperuste = useFieldValue(name);
   const valintaperusteOid = get(valintaperuste, 'value');
+  const kieliValinnat = languages;
 
   const { data, reload } = useApiAsync({
     promiseFn: getValintaperusteet,
@@ -81,7 +82,7 @@ const KuvausSection = ({ haku, organisaatioOid, name }) => {
           variant="outlined"
           color="primary"
           as="a"
-          href={`/kouta/organisaatio/${organisaatioOid}/valintaperusteet`}
+          href={`/kouta/organisaatio/${organisaatioOid}/valintaperusteet/kielivalinnat/${kieliValinnat}`}
           target="_blank"
         >
           {t('hakukohdelomake.luoUusiValintaperustekuvaus')}

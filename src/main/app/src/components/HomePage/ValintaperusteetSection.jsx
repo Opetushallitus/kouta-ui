@@ -42,7 +42,7 @@ const Actions = ({ organisaatioOid }) => {
   const { t } = useTranslation();
 
   return (
-    <Button as={Link} to={`/organisaatio/${organisaatioOid}/valintaperusteet`}>
+    <Button as={Link} to={`/organisaatio/${organisaatioOid}/valintaperusteet/kielivalinnat/`}>
       {t('etusivu.luoUusiValintaperuste')}
     </Button>
   );

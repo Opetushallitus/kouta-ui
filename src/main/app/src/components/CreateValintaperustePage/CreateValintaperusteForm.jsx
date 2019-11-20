@@ -20,13 +20,13 @@ const getCopyValues = valintaperusteOid => ({
   },
 });
 
-const getInitialValues = valintaperuste => {
+const getInitialValues = ( valintaperuste, kieliValinnat ) => {
   return valintaperuste && valintaperuste.oid
     ? {
         ...getCopyValues(valintaperuste.oid),
         ...getFormValuesByValintaperuste(valintaperuste),
       }
-    : initialValues;
+    : initialValues(kieliValinnat);
 };
 
 const ValintaperusteFormWrapper = props => {
@@ -47,6 +47,7 @@ const ValintaperusteFormWrapper = props => {
 
 export const CreateValintaperusteForm = ({
   kopioValintaperusteOid,
+  kieliValinnat,
   ...props
 }) => {
   const promiseFn = kopioValintaperusteOid ? getValintaperusteByOid : resolveFn;
@@ -57,9 +58,11 @@ export const CreateValintaperusteForm = ({
     watch: kopioValintaperusteOid,
   });
 
+  kieliValinnat = kieliValinnat == null ? [] : kieliValinnat.split(",");
+
   const initialValues = useMemo(() => {
-    return getInitialValues(valintaperuste);
-  }, [valintaperuste]);
+    return getInitialValues(valintaperuste, kieliValinnat);
+  }, [valintaperuste, kieliValinnat]);
 
   return (
     <ReduxForm

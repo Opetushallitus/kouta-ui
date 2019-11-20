@@ -76,7 +76,7 @@ describe('createSoraKuvausForm', () => {
       response: soraKuvaus,
     });
 
-    cy.visit(`/organisaatio/${organisaatioOid}/sora-kuvaus`);
+    cy.visit(`/organisaatio/${organisaatioOid}/sora-kuvaus/kielivalinnat/`);
   });
 
   it('should be able to create sora-kuvaus', () => {

@@ -71,12 +71,12 @@ const MainPage = ({ history }) => {
             exact
           />
           <Route
-            path="/organisaatio/:oid/valintaperusteet"
+            path="/organisaatio/:oid/valintaperusteet/kielivalinnat/:kieliValinnat?"
             component={CreateValintaperustePage}
             exact
           />
           <Route
-            path="/organisaatio/:organisaatioOid/sora-kuvaus/kielivalinnat/:kieliValinnat"
+            path="/organisaatio/:organisaatioOid/sora-kuvaus/kielivalinnat/:kieliValinnat?"
             component={CreateSoraKuvausPage}
             exact
           />

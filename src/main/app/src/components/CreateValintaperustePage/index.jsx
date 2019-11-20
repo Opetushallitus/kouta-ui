@@ -13,7 +13,7 @@ import useTranslation from '../useTranslation';
 const CreateValintaperustePage = props => {
   const {
     match: {
-      params: { oid },
+      params: { oid, kieliValinnat },
     },
     location: { search },
     history,
@@ -41,6 +41,7 @@ const CreateValintaperustePage = props => {
           kopioValintaperusteOid={kopioValintaperusteOid}
           onSelectBase={selectBase}
           showArkistoituTilaOption={false}
+          kieliValinnat={kieliValinnat}
         />
       </FormPage>
     </>

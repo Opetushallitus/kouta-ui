@@ -11,7 +11,7 @@ module.exports = {
         nimi: {
           fi: 'Valintaperusteen nimi',
         },
-        koulutustyyppi: 'amm',
+        koulutustyyppi: 'yo',
         onkoJulkinen: true,
         valintakokeet: [
           {
@@ -22,7 +22,7 @@ module.exports = {
                   osoite: {
                     fi: 'osoite',
                   },
-                  postinumeroKoodiUri: 'posti_0#fi',
+                  postinumeroKoodiUri: 'posti_0#2',
                 },
                 aika: {
                   alkaa: '2019-04-02T10:45',
@@ -36,7 +36,7 @@ module.exports = {
           },
         ],
         metadata: {
-          tyyppi: 'amm',
+          tyyppi: 'yo',
           valintatavat: [
             {
               kuvaus: {},
@@ -96,7 +96,7 @@ module.exports = {
         nimi: {
           fi: 'Valintaperusteen nimi',
         },
-        koulutustyyppi: 'amm',
+        koulutustyyppi: 'yo',
         onkoJulkinen: true,
         valintakokeet: [
           {
@@ -121,7 +121,7 @@ module.exports = {
           },
         ],
         metadata: {
-          tyyppi: 'amm',
+          tyyppi: 'yo',
           valintatavat: [
             {
               kuvaus: {},
@@ -270,6 +270,7 @@ module.exports = {
         nimi: {
           fi: 'Valintaperusteen nimi',
         },
+        julkinen: false,
         onkoJulkinen: false,
         metadata: {
           tyyppi: 'amm',
@@ -336,7 +337,7 @@ module.exports = {
                   osoite: {
                     fi: 'fi osoite',
                   },
-                  postinumeroKoodiUri: 'posti_1#1',
+                  postinumeroKoodiUri: 'posti_00350#1',
                 },
                 aika: {
                   alkaa: '2019-04-16T08:44',
@@ -359,7 +360,6 @@ module.exports = {
         nimi: {
           fi: 'Valintaperusteen nimi',
         },
-        julkinen: false,
         sorakuvausId: '1',
         metadata: {
           tyyppi: 'amm',
@@ -425,7 +425,7 @@ module.exports = {
                   osoite: {
                     fi: 'fi osoite',
                   },
-                  postinumeroKoodiUri: 'posti_1#1',
+                  postinumeroKoodiUri: 'posti_00350#1',
                 },
                 aika: {
                   alkaa: '2019-04-16T08:44',

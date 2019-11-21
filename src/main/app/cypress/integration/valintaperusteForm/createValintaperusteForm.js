@@ -141,7 +141,7 @@ const fillJulkisuusSection = () => {
 
 const fillPerustiedotSection = () => {
   cy.getByTestId('perustiedotSection').within(() => {
-    fillKoulutustyyppiSection(['amm'], cy);
+    fillKoulutustyyppiSection(['korkeakoulutus'], cy);
     fillKieliversiotSection();
     fillHakutavanRajausSection();
     fillKohdejoukonRajausSection();

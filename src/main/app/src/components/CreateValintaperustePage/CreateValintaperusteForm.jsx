@@ -8,8 +8,8 @@ import ReduxForm from '../ReduxForm';
 import getFormValuesByValintaperuste from '../../utils/getFormValuesByValintaperuste';
 import getValintaperusteFormConfig from '../../utils/getValintaperusteFormConfig';
 import FormConfigContext from '../FormConfigContext';
+import useFieldValue from "../useFieldValue";
 
-const config = getValintaperusteFormConfig();
 
 const resolveFn = () => Promise.resolve(null);
 
@@ -27,6 +27,22 @@ const getInitialValues = valintaperuste => {
         ...getFormValuesByValintaperuste(valintaperuste),
       }
     : initialValues;
+};
+
+const ValintaperusteFormWrapper = props => {
+  const { steps } = props;
+
+  const koulutustyyppi = useFieldValue('tyyppi');
+
+  const config = useMemo(() => getValintaperusteFormConfig(koulutustyyppi), [
+    koulutustyyppi,
+  ]);
+
+  return (
+    <FormConfigContext.Provider value={config}>
+      <ValintaperusteForm {...props} />
+    </FormConfigContext.Provider>
+  );
 };
 
 export const CreateValintaperusteForm = ({
@@ -51,11 +67,7 @@ export const CreateValintaperusteForm = ({
       initialValues={initialValues}
       enableReinitialize
     >
-      {() => (
-        <FormConfigContext.Provider value={config}>
-          <ValintaperusteForm steps {...props} />
-        </FormConfigContext.Provider>
-      )}
+      {() => <ValintaperusteFormWrapper steps {...props} />}
     </ReduxForm>
   );
 };

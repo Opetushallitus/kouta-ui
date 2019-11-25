@@ -3,7 +3,7 @@ export default ({ koodisto, koodiArvo = '0', versio = 1 }) => {
 
   return {
     koodiUri,
-    resourceUri: `https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/${koodisto}_11`,
+    resourceUri: `https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/${koodisto}_${koodiArvo}/${versio}`,
     version: versio,
     versio: versio,
     koodisto: {

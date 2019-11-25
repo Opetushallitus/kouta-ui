@@ -52,6 +52,9 @@ export const stubValintaperusteFormRoutes = ({ cy, organisaatioOid }) => {
   stubKoodistoRoute({ koodisto: 'osaamistausta', cy });
   stubKoodistoRoute({ koodisto: 'valintakokeentyyppi', cy });
   stubKoodiRoute(createKoodi({ koodisto: 'posti', versio: 2 }));
+  stubKoodiRoute(
+    createKoodi({ koodisto: 'posti', koodiArvo: '00350', versio: 1 }),
+  );
 
   stubOppijanumerorekisteriHenkiloRoute({ cy });
 };

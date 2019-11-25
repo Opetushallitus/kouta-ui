@@ -48,7 +48,7 @@ describe('editValintaperusteForm', () => {
       ),
     });
 
-    cy.getByTestId('postinumero').contains('Helsinki');
+    cy.getByTestId('postinumero').contains('00350');
 
     fillKieliversiotSection();
     tallenna();

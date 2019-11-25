@@ -47,7 +47,7 @@ describe('editValintaperusteForm', () => {
         testValintaperusteFields,
       ),
     });
-
+    
     cy.getByTestId('postinumero').contains('00350');
 
     fillKieliversiotSection();

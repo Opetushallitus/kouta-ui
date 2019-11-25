@@ -43,13 +43,11 @@ const CreateKoulutusForm = props => {
   const { kopioKoulutusOid } = props;
 
   const promiseFn = kopioKoulutusOid ? getKoulutusByOid : resolveFn;
-
   const { data } = useApiAsync({
     promiseFn,
     oid: kopioKoulutusOid,
     watch: kopioKoulutusOid,
   });
-
   const initialValues = useMemo(() => {
     return getInitialValues(data);
   }, [data]);
@@ -58,9 +56,8 @@ const CreateKoulutusForm = props => {
     <ReduxForm
       form="createKoulutusForm"
       initialValues={initialValues}
-      enableReinitialize
-    >
-      {() => <KoulutusFormWrapper steps {...props} />}
+      enableReinitialize>
+      {() => <KoulutusFormWrapper steps createNewKoulutus={true} {...props} />}
     </ReduxForm>
   );
 };

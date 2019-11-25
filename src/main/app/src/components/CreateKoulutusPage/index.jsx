@@ -37,7 +37,6 @@ const CreateKoulutusPage = props => {
           organisaatioOid={oid}
           kopioKoulutusOid={kopioKoulutusOid}
           onSelectBase={selectBase}
-          showArkistoituTilaOption={false}
         />
       </FormPage>
     </>

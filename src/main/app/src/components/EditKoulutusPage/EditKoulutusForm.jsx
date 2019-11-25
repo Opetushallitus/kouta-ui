@@ -40,8 +40,7 @@ const EditKoulutusForm = ({ onSave, koulutus, history, ...props }) => {
       {() => (
         <KoulutusFormWrapper
           steps={false}
-          canSelectBase={false}
-          canEditKoulutustyyppi={false}
+          createNewKoulutus={false}
           johtaaTutkintoon={Boolean(koulutus.johtaaTutkintoon)}
           onAttachToteutus={onAttachToteutus}
           koulutus={koulutus}

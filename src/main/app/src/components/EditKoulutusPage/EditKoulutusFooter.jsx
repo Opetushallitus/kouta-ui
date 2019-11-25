@@ -16,6 +16,7 @@ import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
 import { KOULUTUS_ROLE } from '../../constants';
 import useOrganisaatioHierarkia from '../useOrganisaatioHierarkia';
 import iterateTree from '../../utils/iterateTree';
+import isOphOrganisaatio from "../../utils/isOphOrganisaatio";
 
 const getAvailableTarjoajaOids = hierarkia => {
   const oids = [];
@@ -88,10 +89,12 @@ const EditKoulutusFooter = ({ koulutus, organisaatioOid, history }) => {
     [koulutus, history, availableTarjoajaOids],
   );
 
+  const minTarjoajat = isOphOrganisaatio(koulutus.organisaatioOid) ? 0 : 1;
+
   const { save } = useSaveForm({
     form: 'editKoulutusForm',
     submit,
-    validate: validateKoulutusForm,
+    validate: values => validateKoulutusForm({...values, minTarjoajat}),
   });
 
   return (

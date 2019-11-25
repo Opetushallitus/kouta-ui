@@ -12,6 +12,10 @@ import createFormConfigBuilder from './createFormConfigBuilder';
 
 const getKielivalinta = values => get(values, 'kieliversiot') || [];
 
+const getMinTarjoajat = values => {
+  return get(values, 'minTarjoajat', 1);
+};
+
 const validateIfJulkaistu = validate => (eb, values, ...rest) => {
   const { tila } = values;
 
@@ -98,7 +102,9 @@ const config = createFormConfigBuilder()
     'jarjestyspaikka',
     'jarjestyspaikka',
     KOULUTUSTYYPIT,
-    validateIfJulkaistu(eb => eb.validateArrayMinLength('tarjoajat', 1)),
+    validateIfJulkaistu((eb, values) =>
+      eb.validateArrayMinLength('tarjoajat', getMinTarjoajat(values)),
+    ),
   )
   .registerField('julkisuus', 'julkisuus', KOULUTUSTYYPIT)
   .registerField('julkaisutila', 'julkaisutila', KOULUTUSTYYPIT, eb =>

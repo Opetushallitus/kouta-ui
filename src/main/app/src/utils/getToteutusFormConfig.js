@@ -44,7 +44,7 @@ const config = createFormConfigBuilder()
     'osaamisalat',
     TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
     validateIfJulkaistu((eb, values) =>
-      eb.validateArray('alemmanKorkeakoulututkinnonOsaamisalat', eb => {
+      eb.validateArray('ylemmanKorkeakoulututkinnonOsaamisalat', eb => {
         return eb.validateTranslations('nimi', getKielivalinta(values));
       }),
     ),
@@ -70,7 +70,8 @@ const config = createFormConfigBuilder()
       KOULUTUSTYYPPI.LUVA,
       KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS,
     ),
-    (eb, values) => eb.valitaTranslations('nimi', getKielivalinta(values)),
+    (eb, values) =>
+      eb.validateTranslations('tiedot.nimi', getKielivalinta(values)),
   )
   .registerField(
     'tiedot',

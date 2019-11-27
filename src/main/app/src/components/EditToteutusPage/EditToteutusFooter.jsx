@@ -95,7 +95,7 @@ const EditToteutusFooter = ({
   const { save } = useSaveForm({
     form: 'editToteutusForm',
     submit,
-    validate: validateToteutusForm,
+    validate: values => validateToteutusForm({...values, koulutustyyppi}),
   });
 
   return (

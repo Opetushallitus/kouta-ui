@@ -38,7 +38,7 @@ const CreateToteutusFooter = ({
   const { save } = useSaveForm({
     form: 'createToteutusForm',
     submit,
-    validate: validateToteutusForm,
+    validate: values => validateToteutusForm({...values, koulutustyyppi}),
   });
 
   return (

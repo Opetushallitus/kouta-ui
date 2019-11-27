@@ -21,7 +21,7 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
       },
     },
     kieliversiot: ['fi', 'sv'],
-    jarjestamispaikat: ['org1', 'org2'],
+    tarjoajat: ['org1', 'org2'],
     jarjestamistiedot: {
       kuvaus: {
         fi: 'Fi kuvaus',

@@ -144,12 +144,10 @@ const config = createFormConfigBuilder()
   .registerField('nayttamistiedot', 'ammattinimikkeet', KOULUTUSTYYPIT)
   .registerField('nayttamistiedot', 'avainsanat', KOULUTUSTYYPIT)
   .registerField(
-    'jarjestyspaikka',
-    'jarjestyspaikka',
+    'jarjestamispaikat',
+    'jarjestamispaikat',
     KOULUTUSTYYPIT,
-    validateIfJulkaistu(eb =>
-      eb.validateArrayMinLength('jarjestamispaikat', 1),
-    ),
+    validateIfJulkaistu(eb => eb.validateArrayMinLength('tarjoajat', 1)),
   )
   .registerField('yhteystiedot', 'yhteyshenkilot', KOULUTUSTYYPIT)
   .registerField(

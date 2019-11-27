@@ -22,10 +22,6 @@ Object {
       },
     },
   ],
-  "jarjestamispaikat": Array [
-    "org1",
-    "org2",
-  ],
   "jarjestamistiedot": Object {
     "A1A2Kielet": Array [
       Object {
@@ -198,6 +194,10 @@ Object {
       "osaamisala2",
     ],
   },
+  "tarjoajat": Array [
+    "org1",
+    "org2",
+  ],
   "tiedot": Object {
     "aloituspaikat": "251",
     "ilmoittautumislinkki": Object {

@@ -21,7 +21,7 @@ const getOsaamisalatByValues = ({ osaamisalat, kielivalinta }) => {
 const getToteutusByFormValues = values => {
   const { koulutustyyppi, tila, muokkaaja } = values;
   const kielivalinta = getKielivalinta(values);
-  const tarjoajat = get(values, 'jarjestamispaikat') || [];
+  const tarjoajat = get(values, 'tarjoajat') || [];
   const nimi = pick(get(values, 'tiedot.nimi') || {}, kielivalinta);
   const opetuskielet = get(values, 'jarjestamistiedot.opetuskieli') || [];
   const kuvaus = pick(get(values, 'kuvaus') || {}, kielivalinta);

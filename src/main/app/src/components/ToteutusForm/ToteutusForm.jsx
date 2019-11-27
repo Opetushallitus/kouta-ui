@@ -202,13 +202,13 @@ const ToteutusForm = ({
         </FormCollapse>
 
         <FormCollapse
-          section="jarjestyspaikka"
+          section="jarjestamispaikat"
           header={t('toteutuslomake.toteutuksenJarjestaja')}
           languages={languages}
           {...getTestIdProps('jarjestamispaikatSection')}
         >
           <JarjestamispaikatSection
-            name="jarjestamispaikat"
+            name="tarjoajat"
             organisaatioOid={organisaatioOid}
           />
         </FormCollapse>

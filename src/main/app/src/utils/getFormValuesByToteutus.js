@@ -102,7 +102,7 @@ const getFormValuesByToteutus = toteutus => {
       kesto: suunniteltuKesto || {},
     },
     kieliversiot: kielivalinta,
-    jarjestamispaikat: tarjoajat,
+    tarjoajat,
     jarjestamistiedot: {
       kuvaus,
       maksullisuus: {

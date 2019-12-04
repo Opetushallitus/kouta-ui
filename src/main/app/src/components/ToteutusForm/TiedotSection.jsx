@@ -2,7 +2,7 @@ import React from 'react';
 import { Field } from 'redux-form';
 
 import useTranslation from '../useTranslation';
-import { FormFieldInput, FormFieldSelect } from '../formFields';
+import {FormFieldInput, FormFieldSelect, FormFieldTextarea} from '../formFields';
 import Box from '../Box';
 import FormConfigField from '../FormConfigField';
 import useKoodistoOptions from '../useKoodistoOptions';
@@ -45,11 +45,21 @@ const TiedotSection = ({ language, name }) => {
   return (
     <>
       <FormConfigField name="nimi">
-        <Box mb={2} {...getTestIdProps('nimi')}>
+        <Box mb={2} {...getTestIdProps('toteutuksenNimi')}>
           <Field
             name={`${name}.nimi.${language}`}
             component={FormFieldInput}
             label={t('toteutuslomake.toteutuksenNimi')}
+          />
+        </Box>
+      </FormConfigField>
+
+      <FormConfigField name="toteutuksenKuvaus">
+        <Box mb={2} {...getTestIdProps('toteutuksenKuvaus')}>
+          <Field
+            name={`${name}.toteutuksenKuvaus.${language}`}
+            component={FormFieldTextarea}
+            label={t('yleiset.toteutuksenKuvaus')}
           />
         </Box>
       </FormConfigField>

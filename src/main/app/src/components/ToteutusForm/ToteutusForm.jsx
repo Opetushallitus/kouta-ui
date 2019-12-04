@@ -15,7 +15,6 @@ import HakukohteetModal from './HakukohteetModal';
 import Flex from '../Flex';
 import Button from '../Button';
 import KorkeakouluOsaamisalatSection from './KorkeakouluOsaamisalatSection';
-import KuvausSection from './KuvausSection';
 import useTranslation from '../useTranslation';
 import YhteyshenkilotSection from './YhteyshenkilotSection';
 import { KOULUTUSTYYPPI } from '../../constants';
@@ -118,15 +117,6 @@ const ToteutusForm = ({
           {...getTestIdProps('lukiolinjatSection')}
         >
           <LukiolinjatSection name="lukiolinjat" />
-        </FormCollapse>
-
-        <FormCollapse
-          section="kuvaus"
-          header={t('toteutuslomake.koulutuksenToteutuksenKuvaus')}
-          languages={languages}
-          {...getTestIdProps('kuvausSection')}
-        >
-          <KuvausSection name="kuvaus" />
         </FormCollapse>
 
         <FormCollapse

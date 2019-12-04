@@ -8,7 +8,6 @@ const getBaseFields = () => ({
   nimi: { fi: 'Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja' },
   metadata: {
     kuvaus: {
-      fi: 'Toteutuksen kuvaus',
     },
     opetus: {
       koulutuksenAlkamispaivamaara: '2019-08-23T00:00',

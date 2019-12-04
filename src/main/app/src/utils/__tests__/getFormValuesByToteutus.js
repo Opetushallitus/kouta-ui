@@ -46,8 +46,8 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
         },
       ],
       kuvaus: {
-        fi: 'Fi kuvaus',
-        sv: 'Sv kuvaus',
+        fi: 'Fi toteutuksenkuvaus',
+        sv: 'Sv toteutuksenkuvaus',
       },
       opetus: {
         koulutuksenAlkamispaivamaara: '2019-04-16T00:00:00Z',
@@ -276,6 +276,10 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
     nimi: {
       fi: 'Fi nimi',
       sv: 'Sv nimi',
+    },
+    kuvaus: {
+      fi: 'Fi toteutuksenkuvaus',
+      sv: 'Sv toteutuksenkuvaus',
     },
     tarjoajat: ['org1', 'org2'],
   });

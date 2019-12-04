@@ -30,7 +30,6 @@ const config = createFormConfigBuilder()
     'kuvaus',
     without(
       KOULUTUSTYYPIT,
-      ...TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
       KOULUTUSTYYPPI.LUKIOKOULUTUS,
     ),
   )
@@ -72,6 +71,14 @@ const config = createFormConfigBuilder()
     ),
     (eb, values) =>
       eb.validateTranslations('tiedot.nimi', getKielivalinta(values)),
+  )
+  .registerField(
+    'tiedot',
+    'toteutuksenKuvaus',
+    without(
+      KOULUTUSTYYPIT,
+      KOULUTUSTYYPPI.LUKIOKOULUTUS,
+    ),
   )
   .registerField(
     'tiedot',

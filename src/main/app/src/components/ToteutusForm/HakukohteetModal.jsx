@@ -52,7 +52,7 @@ const HakukohteetModal = ({
             {t('yleiset.sulje')}
           </Button>
           <Button onClick={onSave} type="button" disabled={!hakuValue}>
-            {t('yleiset.liitaHakukohde')}
+            {t('yleiset.lisaaHakukohde')}
           </Button>
         </Flex>
       }

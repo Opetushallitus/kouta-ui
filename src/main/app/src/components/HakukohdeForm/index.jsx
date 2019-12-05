@@ -4,10 +4,13 @@ import { DEFAULT_JULKAISUTILA } from '../../constants';
 
 export { default } from './HakukohdeForm';
 
-export const initialValues = {
+export const initialValues = (toteutusNimi, toteutusKielet) => ({
   tila: DEFAULT_JULKAISUTILA,
-  kieliversiot: ['fi', 'sv'],
+  kieliversiot: toteutusKielet,
+  perustiedot: {
+    nimi: toteutusNimi,
+  },
   alkamiskausi: {
     vuosi: getYear(new Date()).toString(),
   },
-};
+});

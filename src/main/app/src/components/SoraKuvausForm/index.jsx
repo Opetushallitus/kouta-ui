@@ -6,11 +6,11 @@ import {
 
 export { default } from './SoraKuvausForm';
 
-export const initialValues = {
+export const initialValues = (kieliValinnat) => ({
   tila: DEFAULT_JULKAISUTILA,
   koulutustyyppi: KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
   pohja: {
     tapa: POHJAVALINTA.UUSI,
   },
-  kieliversiot: ['fi', 'sv'],
-};
+  kieliversiot: kieliValinnat,
+});

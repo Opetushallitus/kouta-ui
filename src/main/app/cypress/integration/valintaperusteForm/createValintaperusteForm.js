@@ -163,7 +163,7 @@ describe('createValintaperusteForm', () => {
   beforeEach(() => {
     stubValintaperusteFormRoutes({ cy, organisaatioOid });
 
-    cy.visit(`/organisaatio/${organisaatioOid}/valintaperusteet`);
+    cy.visit(`/organisaatio/${organisaatioOid}/valintaperusteet/kielivalinnat`);
   });
 
   it('should be able to create valintaperuste', () => {

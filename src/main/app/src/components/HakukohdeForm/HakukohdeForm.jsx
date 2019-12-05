@@ -84,6 +84,7 @@ const HakukohdeForm = ({
           organisaatioOid={organisaatioOid}
           name="valintaperusteenKuvaus"
           haku={haku}
+          languages={languages}
         />
       </FormCollapse>
 

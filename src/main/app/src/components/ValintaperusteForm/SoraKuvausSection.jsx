@@ -9,10 +9,11 @@ import Divider from '../Divider';
 import Box from '../Box';
 import useFieldValue from '../useFieldValue';
 
-const SoraKuvausSection = ({ name, organisaatioOid }) => {
+const SoraKuvausSection = ({ name, organisaatioOid, languages }) => {
   const { t } = useTranslation();
   const soraKuvaus = useFieldValue(name);
   const soraKuvausId = get(soraKuvaus, 'value');
+  const kieliValinnat = languages;
 
   return (
     <>
@@ -42,7 +43,7 @@ const SoraKuvausSection = ({ name, organisaatioOid }) => {
           variant="outlined"
           color="primary"
           as="a"
-          href={`/kouta/organisaatio/${organisaatioOid}/sora-kuvaus`}
+          href={`/kouta/organisaatio/${organisaatioOid}/sora-kuvaus/kielivalinnat/${kieliValinnat}`}
           target="_blank"
         >
           {t('yleiset.luoUusiSoraKuvaus')}

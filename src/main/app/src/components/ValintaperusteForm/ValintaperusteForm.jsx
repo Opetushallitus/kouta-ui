@@ -108,6 +108,7 @@ const ValintaperusteForm = ({
         <SoraKuvausSection
           name="soraKuvaus"
           organisaatioOid={organisaatioOid}
+          languages={languages}
         />
       </FormCollapse>
 

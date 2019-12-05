@@ -59,6 +59,8 @@ const CreateToteutusPage = props => {
         {data ? (
           <CreateToteutusForm
             koulutusKoodiUri={data.koulutusKoodiUri}
+            koulutusNimi={data.nimi}
+            koulutusKielet={data.kielivalinta}
             organisaatioOid={organisaatioOid}
             koulutustyyppi={koulutustyyppi}
             kopioToteutusOid={kopioToteutusOid}

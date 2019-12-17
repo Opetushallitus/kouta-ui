@@ -25,6 +25,7 @@ const getLocalisationProps = t => ({
   weekdaysShort: weekdayShortKeys.map(v =>
     t(`yleiset.viikonpaivalyhenteet.${v}`),
   ),
+  firstDayOfWeek: 1
 });
 
 const DatePickerInput = ({ dayPickerProps = {}, ...props }) => {

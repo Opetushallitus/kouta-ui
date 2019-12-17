@@ -39,7 +39,7 @@ export const getIndexParamsByFilters = ({
   const [orderField, orderDirection] = parseSort(orderBy);
 
   return {
-    organisaatioOid: [organisaatioOid],
+    organisaatioOid,
     nimi,
     page: isNumber(page) ? page + 1 : 1,
     pageSize: 10,

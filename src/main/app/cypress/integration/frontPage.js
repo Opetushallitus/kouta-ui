@@ -113,7 +113,7 @@ describe('frontPage', () => {
   it('should list koulutukset', () => {
     cy.route({
       method: 'GET',
-      url: '**/kouta-backend/search/koulutus**',
+      url: '**/kouta-backend/search/koulutukset**',
       response: {
         result: [
           merge(koutaSearchItem(), { nimi: { fi: 'Koulutuksen nimi' } }),
@@ -130,7 +130,7 @@ describe('frontPage', () => {
   it('should list toteutukset', () => {
     cy.route({
       method: 'GET',
-      url: '**/kouta-backend/search/toteutus**',
+      url: '**/kouta-backend/search/toteutukset**',
       response: {
         result: [
           merge(koutaSearchItem(), { nimi: { fi: 'Toteutuksen nimi' } }),
@@ -147,7 +147,7 @@ describe('frontPage', () => {
   it('should list haut', () => {
     cy.route({
       method: 'GET',
-      url: '**/kouta-backend/search/haku**',
+      url: '**/kouta-backend/search/haut**',
       response: {
         result: [merge(koutaSearchItem(), { nimi: { fi: 'Haun nimi' } })],
         totalCount: 1,
@@ -162,7 +162,7 @@ describe('frontPage', () => {
   it('should list valintaperusteet', () => {
     cy.route({
       method: 'GET',
-      url: '**/kouta-backend/search/valintaperuste**',
+      url: '**/kouta-backend/search/valintaperusteet**',
       response: {
         result: [
           merge(koutaSearchItem(), { nimi: { fi: 'Valintaperusteen nimi' } }),
@@ -182,7 +182,7 @@ describe('frontPage', () => {
   it('should list hakukohteet', () => {
     cy.route({
       method: 'GET',
-      url: '**/kouta-backend/search/hakukohde**',
+      url: '**/kouta-backend/search/hakukohteet**',
       response: {
         result: [
           merge(koutaSearchItem(), { nimi: { fi: 'Hakukohteen nimi' } }),

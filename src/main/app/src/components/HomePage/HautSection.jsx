@@ -20,7 +20,7 @@ import useFilterState from './useFilterState';
 import ErrorAlert from '../ErrorAlert';
 import Anchor from '../Anchor';
 import useTranslation from '../useTranslation';
-import getHaut from '../../utils/koutaIndex/getHaut';
+import getHaut from '../../utils/koutaSearch/getHaut';
 import useInView from '../useInView';
 import NavigationAnchor from './NavigationAnchor';
 import { getFirstLanguageValue, getTestIdProps } from '../../utils';

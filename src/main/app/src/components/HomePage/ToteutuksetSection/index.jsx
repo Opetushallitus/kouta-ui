@@ -13,7 +13,7 @@ import Pagination from '../../Pagination';
 import Box from '../../Box';
 import ListSpin from '../ListSpin';
 import useApiAsync from '../../useApiAsync';
-import getToteutukset from '../../../utils/koutaIndex/getToteutukset';
+import getToteutukset from '../../../utils/koutaSearch/getToteutukset';
 import { getIndexParamsByFilters } from '../utils';
 import Filters from '../Filters';
 import Badge from '../../Badge';

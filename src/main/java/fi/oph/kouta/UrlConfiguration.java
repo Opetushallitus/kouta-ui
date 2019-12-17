@@ -49,6 +49,11 @@ public class UrlConfiguration extends OphProperties {
         this.frontProperties.setProperty("kouta-backend.oppilaitoksen-osa", this.require("kouta-backend.oppilaitoksen-osa"));
         this.frontProperties.setProperty("kouta-backend.oppilaitoksen-osa-by-oid", this.require("kouta-backend.oppilaitoksen-osa-by-oid"));
 
+        this.frontProperties.setProperty("kouta-backend.search.koulutukset", this.require("kouta-backend.search.koulutukset"));
+        this.frontProperties.setProperty("kouta-backend.search.toteutukset", this.require("kouta-backend.search.toteutukset"));
+        this.frontProperties.setProperty("kouta-backend.search.haut", this.require("kouta-backend.search.haut"));
+        this.frontProperties.setProperty("kouta-backend.search.hakukohteet", this.require("kouta-backend.search.hakukohteet"));
+        this.frontProperties.setProperty("kouta-backend.search.valintaperusteet", this.require("kouta-backend.search.valintaperusteet"));
 
         this.frontProperties.setProperty("koodisto-service.base-url", this.require("koodisto-service.base-url"));
         this.frontProperties.setProperty("koodisto-service.sisaltyy-alakoodit", this.require("koodisto-service.sisaltyy-alakoodit"));
@@ -68,12 +73,6 @@ public class UrlConfiguration extends OphProperties {
         this.frontProperties.setProperty("organisaatio-service.hierarkia-haku", this.require("organisaatio-service.hierarkia-haku"));
 
         this.frontProperties.setProperty("lokalisaatio-service.localisation", this.require("lokalisaatio-service.localisation"));
-
-        this.frontProperties.setProperty("kouta-index.koulutus-list", this.require("kouta-index.koulutus-list"));
-        this.frontProperties.setProperty("kouta-index.toteutus-list", this.require("kouta-index.toteutus-list"));
-        this.frontProperties.setProperty("kouta-index.haku-list", this.require("kouta-index.haku-list"));
-        this.frontProperties.setProperty("kouta-index.valintaperuste-list", this.require("kouta-index.valintaperuste-list"));
-        this.frontProperties.setProperty("kouta-index.hakukohde-list", this.require("kouta-index.hakukohde-list"));
     
         this.frontProperties.setProperty("virkailija-raamit.raamitJs", this.require("virkailija-raamit.raamitJs"));
         

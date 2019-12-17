@@ -1,14 +1,14 @@
 import getQueryParams from './getQueryParams';
 
-const getKoulutukset = async ({ httpClient, apiUrls, ...rest }) => {
+const getToteutukset = async ({ httpClient, apiUrls, ...rest }) => {
   const params = getQueryParams(rest);
 
   const { data } = await httpClient.get(
-    apiUrls.url('kouta-index.koulutus-list'),
+    apiUrls.url('kouta-backend.search.toteutukset'),
     { params },
   );
 
   return data;
 };
 
-export default getKoulutukset;
+export default getToteutukset;

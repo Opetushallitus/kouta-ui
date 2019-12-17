@@ -1,10 +1,10 @@
 import getQueryParams from './getQueryParams';
 
-const getHakukohteet = async ({ httpClient, apiUrls, ...rest }) => {
+const getValintaperusteet = async ({ httpClient, apiUrls, ...rest }) => {
   const params = getQueryParams(rest);
 
   const { data } = await httpClient.get(
-    apiUrls.url('kouta-index.hakukohde-list'),
+    apiUrls.url('kouta-backend.search.valintaperusteet'),
     {
       params,
     },
@@ -13,4 +13,4 @@ const getHakukohteet = async ({ httpClient, apiUrls, ...rest }) => {
   return data;
 };
 
-export default getHakukohteet;
+export default getValintaperusteet;

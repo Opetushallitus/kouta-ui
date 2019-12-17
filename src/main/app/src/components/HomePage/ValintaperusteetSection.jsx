@@ -13,7 +13,7 @@ import Spacing from '../Spacing';
 import ListSpin from './ListSpin';
 import useApiAsync from '../useApiAsync';
 import { getIndexParamsByFilters } from './utils';
-import getValintaperusteet from '../../utils/koutaIndex/getValintaperusteet';
+import getValintaperusteet from '../../utils/koutaSearch/getValintaperusteet';
 import Filters from './Filters';
 import useFilterState from './useFilterState';
 import { getFirstLanguageValue, getTestIdProps } from '../../utils';

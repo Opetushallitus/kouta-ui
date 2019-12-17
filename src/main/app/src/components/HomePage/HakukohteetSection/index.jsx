@@ -17,7 +17,7 @@ import Filters from '../Filters';
 import useFilterState from '../useFilterState';
 import ErrorAlert from '../../ErrorAlert';
 import Anchor from '../../Anchor';
-import getHakukohteet from '../../../utils/koutaIndex/getHakukohteet';
+import getHakukohteet from '../../../utils/koutaSearch/getHakukohteet';
 import { getFirstLanguageValue, getTestIdProps } from '../../../utils';
 
 import ListTable, {

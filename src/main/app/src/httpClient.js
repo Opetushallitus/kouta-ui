@@ -8,10 +8,6 @@ const isKoutaBackendUrl = url => {
   return /kouta-backend/.test(url);
 };
 
-const isKoutaIndexUrl = url => {
-  return /kouta-index/.test(url);
-};
-
 const isLomakeEditoriUrl = url => {
   return /lomake-editori/.test(url);
 };
@@ -25,7 +21,7 @@ const cache = setupCache({
   exclude: {
     query: false,
     filter: config => {
-      return isKoutaBackendUrl(config.url) || isKoutaIndexUrl(config.url);
+      return isKoutaBackendUrl(config.url);
     },
   },
 });

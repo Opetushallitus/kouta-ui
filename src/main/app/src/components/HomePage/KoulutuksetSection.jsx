@@ -15,7 +15,7 @@ import Flex from '../Flex';
 import Spacing from '../Spacing';
 import ListSpin from './ListSpin';
 import useApiAsync from '../useApiAsync';
-import getKoulutukset from '../../utils/koutaIndex/getKoulutukset';
+import getKoulutukset from '../../utils/koutaSearch/getKoulutukset';
 import { getIndexParamsByFilters } from './utils';
 import Filters from './Filters';
 import Badge from '../Badge';

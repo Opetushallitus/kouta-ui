@@ -3,7 +3,7 @@ import merge from 'lodash/merge';
 import organisaatio from '../data/organisaatio';
 import organisaatioHierarkia from '../data/organisaatioHierarkia';
 
-const koutaIndexItem = () => ({
+const koutaSearchItem = () => ({
   modified: '2019-02-20T07:55',
   muokkaaja: { nimi: 'John Doe', oid: '1.2.246.562.24.62301161440' },
   nimi: { fi: 'Nimi' },
@@ -79,7 +79,7 @@ describe('frontPage', () => {
 
     cy.route({
       method: 'GET',
-      url: '**/kouta-index/**',
+      url: '**/kouta-backend/search/**',
       response: {
         result: [],
         totalCount: 0,
@@ -113,9 +113,11 @@ describe('frontPage', () => {
   it('should list koulutukset', () => {
     cy.route({
       method: 'GET',
-      url: '**/kouta-index/koulutus/**',
+      url: '**/kouta-backend/search/koulutus**',
       response: {
-        result: [merge(koutaIndexItem(), { nimi: { fi: 'Koulutuksen nimi' } })],
+        result: [
+          merge(koutaSearchItem(), { nimi: { fi: 'Koulutuksen nimi' } }),
+        ],
         totalCount: 1,
       },
     });
@@ -128,9 +130,11 @@ describe('frontPage', () => {
   it('should list toteutukset', () => {
     cy.route({
       method: 'GET',
-      url: '**/kouta-index/toteutus/**',
+      url: '**/kouta-backend/search/toteutus**',
       response: {
-        result: [merge(koutaIndexItem(), { nimi: { fi: 'Toteutuksen nimi' } })],
+        result: [
+          merge(koutaSearchItem(), { nimi: { fi: 'Toteutuksen nimi' } }),
+        ],
         totalCount: 1,
       },
     });
@@ -143,9 +147,9 @@ describe('frontPage', () => {
   it('should list haut', () => {
     cy.route({
       method: 'GET',
-      url: '**/kouta-index/haku/**',
+      url: '**/kouta-backend/search/haku**',
       response: {
-        result: [merge(koutaIndexItem(), { nimi: { fi: 'Haun nimi' } })],
+        result: [merge(koutaSearchItem(), { nimi: { fi: 'Haun nimi' } })],
         totalCount: 1,
       },
     });
@@ -158,10 +162,10 @@ describe('frontPage', () => {
   it('should list valintaperusteet', () => {
     cy.route({
       method: 'GET',
-      url: '**/kouta-index/valintaperuste/**',
+      url: '**/kouta-backend/search/valintaperuste**',
       response: {
         result: [
-          merge(koutaIndexItem(), { nimi: { fi: 'Valintaperusteen nimi' } }),
+          merge(koutaSearchItem(), { nimi: { fi: 'Valintaperusteen nimi' } }),
         ],
         totalCount: 1,
       },
@@ -178,9 +182,11 @@ describe('frontPage', () => {
   it('should list hakukohteet', () => {
     cy.route({
       method: 'GET',
-      url: '**/kouta-index/hakukohde/**',
+      url: '**/kouta-backend/search/hakukohde**',
       response: {
-        result: [merge(koutaIndexItem(), { nimi: { fi: 'Hakukohteen nimi' } })],
+        result: [
+          merge(koutaSearchItem(), { nimi: { fi: 'Hakukohteen nimi' } }),
+        ],
         totalCount: 1,
       },
     });

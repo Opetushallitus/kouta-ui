@@ -18,6 +18,7 @@ import NakyvyysSection from './NakyvyysSection';
 import useTranslation from '../useTranslation';
 import useFieldValue from '../useFieldValue';
 import JulkaisutilaSection from './JulkaisutilaSection';
+import TeemakuvaSection from './TeemakuvaSection';
 
 const PohjaFormCollapse = ({
   children,
@@ -132,6 +133,14 @@ const KoulutusForm = ({
         {...getTestIdProps('lisatiedotSection')}
       >
         <LisatiedotSection name="lisatiedot" />
+      </FormCollapse>
+
+      <FormCollapse
+        section="teemakuva"
+        header={t('koulutuslomake.koulutuksenTeemakuva')}
+        {...getTestIdProps('teemakuvaSection')}
+      >
+        <TeemakuvaSection name="teemakuva" />
       </FormCollapse>
 
       <FormCollapse

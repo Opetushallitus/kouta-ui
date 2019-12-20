@@ -19,6 +19,7 @@ import useTranslation from '../useTranslation';
 import useFieldValue from '../useFieldValue';
 import JulkaisutilaSection from './JulkaisutilaSection';
 import isOphOrganisaatio from "../../utils/isOphOrganisaatio";
+import TeemakuvaSection from './TeemakuvaSection';
 
 const PohjaFormCollapse = ({
   children,
@@ -135,6 +136,14 @@ const KoulutusForm = ({
         <LisatiedotSection name="lisatiedot" />
       </FormCollapse>
 
+      <FormCollapse
+        section="teemakuva"
+        header={t('koulutuslomake.koulutuksenTeemakuva')}
+        {...getTestIdProps('teemakuvaSection')}
+      >
+        <TeemakuvaSection name="teemakuva" />
+      </FormCollapse>
+      
       {!isNewOphKoulutus ? (
         <FormCollapse
           section="jarjestyspaikka"

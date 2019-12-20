@@ -5,15 +5,9 @@ import { action } from '@storybook/addon-actions';
 import { makeLocalisationDecorator } from '../../storybookUtils';
 import FileInput from './index';
 
-const upload = binaries =>
-  new Promise(resolve => {
+const upload = file => new Promise(resolve => {
     setTimeout(() => {
-      resolve(
-        binaries.map(
-          () =>
-            'https://www.oph.fi/instancedata/prime_product_julkaisu/oph/pics/opetushallitus2.gif',
-        ),
-      );
+      resolve(URL.createObjectURL(file))
     }, 1000);
   });
 

@@ -37,7 +37,7 @@ const Container = styled.div`
   border: 1px solid ${getThemeProp('colors.inputBorder')};
   border-radius: ${getThemeProp('shape.borderRadius')};
   background-color: white;
-  box-shadow 0 0 0 0 transparent;
+  box-shadow: 0 0 0 0 transparent;
   transition: border-color 0.25s, box-shadow 0.25s;
 
   &:hover {
@@ -53,7 +53,7 @@ const Container = styled.div`
 `;
 
 const EditorWrapper = styled.div`
-  padding ${spacing(1)};
+  padding: ${spacing(1)};
   ${getThemeProp('typography.body')};
 `;
 
@@ -63,7 +63,7 @@ const EditorContent = styled.div`
 `;
 
 const Toolbar = styled.div`
-  padding ${spacing(1)};
+  padding: ${spacing(1)};
   border-bottom: 1px solid ${getThemeProp('colors.inputBorder')};
   display: flex;
   align-items: center;

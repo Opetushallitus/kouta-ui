@@ -157,3 +157,21 @@ export const isBoolean = value => typeof value === 'boolean';
 export const getTestIdProps = testId => ({
   'data-testid': testId,
 });
+
+export const getBinary = file => {
+  const reader = new FileReader();
+
+  return new Promise((resolve, reject) => {
+    reader.onabort = () => reject();
+    reader.onerror = () => reject();
+    reader.onload = () => {
+      resolve(reader.result);
+    };
+
+    reader.readAsBinaryString(file);
+  });
+};
+
+export const getBinaries = files => {
+  return Promise.all(files.map(file => getBinary(file)));
+};

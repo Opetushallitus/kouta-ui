@@ -1,18 +1,20 @@
-import React, { useCallback, useState, useMemo, Fragment } from 'react';
+import React, { useCallback, useMemo, Fragment, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import styled, { css } from 'styled-components';
-import { setLightness } from 'polished';
+import { setLightness, rem } from 'polished';
 
 import { getThemeProp, spacing } from '../../theme';
 import useTranslation from '../useTranslation';
 import Typography from '../Typography';
 import Flex, { FlexItem } from '../Flex';
 import Icon from '../Icon';
-import { noop, isArray, isString } from '../../utils';
+import { noop } from '../../utils';
 import Spin from '../Spin';
 import Anchor from '../Anchor';
 import Button from '../Button';
 import { disabledStyle } from '../../system';
+import {Machine, assign} from 'xstate';
+import {useMachine} from '@xstate/react';
 
 const Container = styled.div`
   border: 1px dashed ${getThemeProp('palette.border')};
@@ -22,18 +24,20 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   transition: border-color 0.25s, background-color 0.25s;
-  min-height: 4rem;
-
+  min-height: ${rem(4)};
+  background-repeat: no-repeat;
+  cursor: pointer;
+  &:focus {
+    border-color: ${getThemeProp('palette.primary.main')};
+    outline: none;
+  }
   ${disabledStyle}
-
   ${({ active }) =>
     active &&
     css`
-      border-color: ${getThemeProp('palette.primary.main')};
-      background-color: ${({ theme }) =>
-        setLightness(0.95, theme.palette.primary.main)};
-    `}
-
+      border-color: ${getThemeProp('palette.primary.main')}
+    `
+  }
   ${({ uploadError }) =>
     uploadError &&
     css`
@@ -49,36 +53,6 @@ const Container = styled.div`
     `}
 `;
 
-const getBinary = file => {
-  const reader = new FileReader();
-
-  return new Promise((resolve, reject) => {
-    reader.onabort = () => reject();
-    reader.onerror = () => reject();
-    reader.onload = () => {
-      resolve(reader.result);
-    };
-
-    reader.readAsBinaryString(file);
-  });
-};
-
-const getBinaries = files => {
-  return Promise.all(files.map(file => getBinary(file)));
-};
-
-const getAccept = ({ accept, acceptImages }) => {
-  if (accept) {
-    return accept;
-  }
-
-  if (acceptImages) {
-    return ['image/*'];
-  }
-
-  return undefined;
-};
-
 const DragActiveIcon = styled(Icon).attrs({ type: 'cloud_upload' })`
   color: ${getThemeProp('palette.primary.main')};
   font-size: 2rem;
@@ -93,37 +67,101 @@ const ErrorMessage = styled(Typography)`
   color: ${getThemeProp('palette.danger.main')};
 `;
 
-const getFilename = url => {
-  if (!isString(url)) {
-    return null;
+const getAccept = ({ accept, acceptImages }) => {
+  if (accept) {
+    return accept;
   }
 
-  const parts = url.split('/');
+  if (acceptImages) {
+    return ['image/*'];
+  }
 
-  return parts[parts.length - 1] || null;
+  return undefined;
 };
 
-const ValueContent = ({ value, t, onRemove, message }) => {
-  const links = useMemo(() => {
-    const files = value
-      .map(url => ({ url, filename: getFilename(url) }))
-      .filter(({ filename }) => !!filename);
+const CS = {
+  fileUploaded: 'fileUploaded',
+  empty: 'empty',
+  uploading: 'uploading',
+  error: 'error'
+}
+const AT = {
+  UPLOAD_FILE: 'UPLOAD_FILE',
+  REMOVE_FILE: 'REMOVE_FILE',
+  RESET: 'RESET'
+}
 
-    return files.map(({ url, filename }, index) => (
+const fileUploadMachine = Machine({
+  id: 'teemakuvaUpload',
+  initial: 'empty',
+  context: {
+    files: [],
+    urls: [],
+  },
+  states: {
+    empty: {
+      on: {
+        UPLOAD_FILE: {
+          target: 'uploading',
+          actions: assign({
+            files: (_, e) => e.files
+          })
+        }
+      }
+    },
+    fileUploaded: {
+      on: {
+        REMOVE_FILE: {
+          target: 'empty',
+          actions: assign({
+            files: _ => [],
+            urls: _ => []
+          })
+        }
+      }
+    },
+    uploading: {
+      invoke: {
+        id: 'uploadFile',
+        src: 'upload',
+        onDone: {
+          target: 'fileUploaded',
+          actions: assign({
+            urls: (_, e) => e.data
+          })
+        },
+        onError: {
+          target: 'error',
+          actions: assign({
+            urls: _ => [],
+            files: _ => []
+          })
+        }
+      }
+    },
+    error: {
+      on: {
+        RESET: 'empty',
+        UPLOAD_FILE: 'uploading'
+      }
+    }
+  }
+})
+
+const ValueContent = ({ urls = [], files = [], t, onRemove, message }) => {
+  const links = useMemo(() => {
+    return urls.map((url, index) => (
       <Fragment key={url}>
         <Anchor href={url} rel="nofollow" target="_blank">
-          {filename}
+          {files[index].name}
         </Anchor>
         {index < files.length - 1 ? ', ' : ''}
       </Fragment>
     ));
-  }, [value]);
+  }, [urls, files]);
 
   return (
     <Flex alignCenter column>
-      <FlexItem marginBottom={1}>
-        <Typography>{message}:</Typography>
-      </FlexItem>
       <FlexItem>{links}</FlexItem>
       <FlexItem marginTop={2}>
         <Button
@@ -149,12 +187,22 @@ const DragActiveContent = ({ message }) => {
   );
 };
 
-const PlaceholderContent = ({ message }) => {
-  return <Typography>{message}</Typography>;
-};
-
-const UploadingContent = () => {
-  return <Spin />;
+const PlaceholderContent = ({ message, onDrop, t }) => {
+  return <Flex alignCenter column>
+      <FlexItem marginBottom={1}>
+        <Typography>{message}:</Typography>
+      </FlexItem>
+      <FlexItem marginTop={2}>
+        <Button
+          size="small"
+          color="primary"
+          variant="outlined"
+          type="button"
+        >
+          {t('yleiset.selaaTiedostoja')}
+        </Button>
+      </FlexItem>
+    </Flex>
 };
 
 const ErrorContent = ({ message }) => {
@@ -173,82 +221,75 @@ export const FileInput = props => {
     value,
   } = props;
 
+  const [state, send] = useMachine(fileUploadMachine.withConfig({
+    services: {
+      upload(ctx, e) {
+        return upload(e.files[0]);
+      }
+    }
+  }), {
+    devTools: true
+  });
+
+  const {urls, files} = state.context;
+
   const accept = getAccept(props);
-  const [loading, setLoading] = useState(false);
-  const [uploadError, setUploadError] = useState(false);
   const { t } = useTranslation();
 
   const onDrop = useCallback(
     async files => {
-      setLoading(true);
-      setUploadError(false);
-
-      try {
-        const binaries = await getBinaries(files);
-        const values = await upload(binaries);
-
-        setLoading(false);
-        onChange(values);
-      } catch (e) {
-        setLoading(false);
-        setUploadError(true);
-
-        setTimeout(() => {
-          setUploadError(false);
-        }, 2000);
-      }
+      send({type: AT.UPLOAD_FILE, files})
     },
-    [onChange, upload],
+    []
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
-  const hasValue = isArray(value) && value.length > 0;
-
   const onRemove = useCallback(() => {
-    onChange([]);
-  }, [onChange]);
+    send({type: AT.REMOVE_FILE})
+  }, []);
 
-  let content = hasValue ? (
-    <ValueContent
-      value={value}
+  useEffect(() => onChange(urls), [urls])
+
+  let content;
+  let inputDisabled = false;
+  if (state.value === CS.empty) {
+    content = <PlaceholderContent
+      message={placeholderMessage || t('yleiset.raahaaLiitettavaTiedosto')}
+      onDrop={onDrop}
+      t={t}
+    />
+    inputDisabled = false;
+  } else if (state.value === CS.fileUploaded) {
+    content = <ValueContent
+      urls={urls}
+      files={files}
       onRemove={onRemove}
       t={t}
-      message={t('yleiset.ladatutTiedostot')}
     />
-  ) : (
-    <PlaceholderContent
-      message={placeholderMessage || t('yleiset.raahaaLiitettavaTiedosto')}
+    inputDisabled = true;
+  } else if (isDragActive) {
+    content = <DragActiveContent
+      message={dragActiveMessage || t('yleiset.pudotaTiedostoLadataksesi')}
     />
-  );
-
-  if (isDragActive) {
-    content = (
-      <DragActiveContent
-        message={dragActiveMessage || t('yleiset.pudotaTiedostoLadataksesi')}
-      />
-    );
-  } else if (loading) {
-    content = <UploadingContent />;
-  } else if (uploadError) {
-    content = (
-      <ErrorContent message={t('yleiset.tiedostonLataaminenEpaonnistui')} />
-    );
+    inputDisabled = false;
+  } else if (state.value === CS.uploading) {
+    content = <Spin></Spin>
+    inputDisabled = true;
   }
 
-  const active = isDragActive || loading;
-  const inputDisabled = hasValue || disabled;
+  const active = isDragActive;
 
   return (
     <Container
       {...getRootProps()}
       active={active}
-      uploadError={uploadError}
       error={error}
       disabled={disabled}
+      style={{backgroundImage: `url(${urls[0]})`}}
     >
       <input
-        {...getInputProps({ accept, multiple, disabled: inputDisabled })}
+        {...getInputProps({ accept, multiple, disabled: inputDisabled})}
       />
       {content}
     </Container>

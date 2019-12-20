@@ -139,6 +139,7 @@ export default {
     tiedostonLataaminenEpaonnistui:
       'Tiedoston lataaminen epäonnistui, yritä uudelleen',
     ladatutTiedostot: 'Ladatut tiedostot',
+    selaaTiedostoja: 'Selaa tiedostoja',
     varmistaLomakkeenKentat:
       'Varmistathan että olet täyttänyt lomakkeen kaikki pakolliset kentät',
     valitseMitaHakulomakettaKaytetaan: 'Valitse mitä hakulomaketta käytetään',
@@ -318,6 +319,7 @@ export default {
       'Käyttäjälläsi ei ole oikeuksia muokata tätä koulutusta',
     tarjoajienLukumaara:
       'Koulutuksen järjestäjien tämänhetkinen lukumäärä on {{lukumaara}}',
+    koulutuksenTeemakuva: 'Koulutuksen teemakuva',
   },
   toteutuslomake: {
     toteutuksenTiedot: 'Toteutuksen tiedot',

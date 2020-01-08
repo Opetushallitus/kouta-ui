@@ -1,9 +1,16 @@
 {
-  "extends": "react-app",
+  "extends": [
+    "react-app",
+    "prettier/react"
+  ],
   "plugins": [
+    "prettier",
     "cypress"
   ],
   "env": {
     "cypress/globals": true
+  },
+  "rules": {
+    "prettier/prettier": "warn"
   }
 }

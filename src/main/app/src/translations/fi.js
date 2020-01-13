@@ -134,8 +134,9 @@ export default {
       su: 'Su',
     },
     pudotaTiedostoLadataksesi: 'Pudota tiedosto ladataksesi',
-    raahaaLiitettavaTiedosto:
-      'Raahaa liitetettävä tiedosto, tai klikkaa selataksesi tiedostoja',
+    raahaaLiitettavaTiedosto: 'Raahaa liitetettävä tiedosto',
+    tai: 'tai',
+    latausKaynnissa: 'Lataus käynnissä',
     tiedostonLataaminenEpaonnistui:
       'Tiedoston lataaminen epäonnistui, yritä uudelleen',
     ladatutTiedostot: 'Ladatut tiedostot',
@@ -165,6 +166,12 @@ export default {
     kirjoitaHakusana: 'Kirjoita hakusana',
     valitseVaihtoehdoista: 'Valitse vaihtoehdoista',
     hakukohteet: 'Hakukohteet',
+    kuvanTiedostokokoLiianSuuri: 'Kuvan tiedostokoko on liian suuri.',
+    kuvanResoluutioLiianPieni: 'Kuvan resoluutio on liian pieni.',
+    tuetutTiedostomuodot: 'Tuetut tiedostomuodot',
+    tiedostonMaksimikoko: 'Tiedoston maksimikoko',
+    tiedostonMinimiresoluutio:
+      'Tiedoston minimiresoluutio: {{width}} x {{height}} pikseliä',
   },
   ilmoitukset: {
     tuntematonVirhe:

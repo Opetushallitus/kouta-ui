@@ -1,20 +1,124 @@
-import React, { useCallback, useMemo, Fragment, useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import styled, { css } from 'styled-components';
-import { setLightness, rem } from 'polished';
 
 import { getThemeProp, spacing } from '../../theme';
 import useTranslation from '../useTranslation';
 import Typography from '../Typography';
 import Flex, { FlexItem } from '../Flex';
 import Icon from '../Icon';
-import { noop } from '../../utils';
+import { noop, useMachine, getImageFileDimensions } from '../../utils';
 import Spin from '../Spin';
-import Anchor from '../Anchor';
 import Button from '../Button';
 import { disabledStyle } from '../../system';
-import {Machine, assign} from 'xstate';
-import {useMachine} from '@xstate/react';
+import { Machine, assign } from 'xstate';
+import prettyBytes from 'pretty-bytes';
+
+const CS = {
+  fileUploaded: 'fileUploaded',
+  empty: 'empty',
+  uploading: 'uploading',
+  error: 'error',
+  dragging: 'dragging',
+};
+
+const AT = {
+  UPLOAD_FILE: 'UPLOAD_FILE',
+  REMOVE_FILE: 'REMOVE_FILE',
+  RESET: 'RESET',
+  DRAG_START: 'DRAG_START',
+  DRAG_STOP: 'DRAG_STOP',
+};
+
+const createFileUploadMachine = url => {
+  return Machine({
+    id: 'imageUpload',
+    initial: url ? CS.fileUploaded : CS.empty,
+    context: {
+      file: null,
+      url,
+      error: null,
+    },
+    states: {
+      [CS.empty]: {
+        on: {
+          [AT.UPLOAD_FILE]: CS.uploading,
+          [AT.DRAG_START]: CS.dragging,
+        },
+      },
+      [CS.fileUploaded]: {
+        on: {
+          [AT.REMOVE_FILE]: {
+            target: CS.empty,
+            actions: assign({
+              url: _ => null,
+            }),
+          },
+        },
+      },
+      [CS.uploading]: {
+        entry: assign({
+          file: (_, e) => {
+            return e.files[0];
+          },
+        }),
+        invoke: {
+          id: 'uploadFile',
+          src: 'upload',
+          onDone: {
+            target: CS.fileUploaded,
+            actions: assign({
+              url: (_, e) => e.data,
+            }),
+          },
+          onError: {
+            target: CS.error,
+            actions: assign({
+              file: () => null,
+              url: () => null,
+              error: (ctx, e) => e.data.validationError || '',
+            }),
+          },
+        },
+      },
+      [CS.error]: {
+        on: {
+          [AT.UPLOAD_FILE]: CS.uploading,
+          [AT.DRAG_START]: CS.dragging,
+        },
+        exit: assign({
+          error: () => null,
+        }),
+      },
+      [CS.dragging]: {
+        on: {
+          [AT.DRAG_STOP]: CS.empty,
+          [AT.UPLOAD_FILE]: CS.uploading,
+        },
+      },
+    },
+  });
+};
+
+const DragActiveIcon = styled(Icon).attrs({ type: 'cloud_upload' })`
+  color: ${getThemeProp('palette.primary.main')};
+  font-size: 2rem;
+`;
+
+const PrimaryMessage = styled(Typography)`
+  color: ${getThemeProp('palette.primary.main')};
+  display: block;
+`;
+
+const ErrorMessage = styled(Typography)`
+  color: ${getThemeProp('palette.danger.main')};
+`;
+
+const FileUploadedMessage = styled(Typography)`
+  text-shadow: 0 0 0.5em black;
+  color: white;
+  background: transparent;
+`;
 
 const Container = styled.div`
   border: 1px dashed ${getThemeProp('palette.border')};
@@ -24,9 +128,8 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   transition: border-color 0.25s, background-color 0.25s;
-  min-height: ${rem(4)};
+  min-height: 9rem;
   background-repeat: no-repeat;
-  cursor: pointer;
   &:focus {
     border-color: ${getThemeProp('palette.primary.main')};
     outline: none;
@@ -35,15 +138,7 @@ const Container = styled.div`
   ${({ active }) =>
     active &&
     css`
-      border-color: ${getThemeProp('palette.primary.main')}
-    `
-  }
-  ${({ uploadError }) =>
-    uploadError &&
-    css`
-      border-color: ${getThemeProp('palette.danger.main')};
-      background-color: ${({ theme }) =>
-        setLightness(0.95, theme.palette.danger.main)};
+      border-color: ${getThemeProp('palette.primary.main')};
     `}
   
   ${({ error }) =>
@@ -53,161 +148,67 @@ const Container = styled.div`
     `}
 `;
 
-const DragActiveIcon = styled(Icon).attrs({ type: 'cloud_upload' })`
-  color: ${getThemeProp('palette.primary.main')};
-  font-size: 2rem;
-`;
+const FlexWrapper = ({ children }) => (
+  <Flex alignCenter column>
+    {children.map(c => (
+      <FlexItem marginBottom={1}>{c}</FlexItem>
+    ))}
+  </Flex>
+);
 
-const DragActiveMessage = styled(Typography)`
-  color: ${getThemeProp('palette.primary.main')};
-  display: block;
-`;
-
-const ErrorMessage = styled(Typography)`
-  color: ${getThemeProp('palette.danger.main')};
-`;
-
-const getAccept = ({ accept, acceptImages }) => {
-  if (accept) {
-    return accept;
-  }
-
-  if (acceptImages) {
-    return ['image/*'];
-  }
-
-  return undefined;
-};
-
-const CS = {
-  fileUploaded: 'fileUploaded',
-  empty: 'empty',
-  uploading: 'uploading',
-  error: 'error'
-}
-const AT = {
-  UPLOAD_FILE: 'UPLOAD_FILE',
-  REMOVE_FILE: 'REMOVE_FILE',
-  RESET: 'RESET'
-}
-
-const fileUploadMachine = Machine({
-  id: 'teemakuvaUpload',
-  initial: 'empty',
-  context: {
-    files: [],
-    urls: [],
-  },
-  states: {
-    empty: {
-      on: {
-        UPLOAD_FILE: {
-          target: 'uploading',
-          actions: assign({
-            files: (_, e) => e.files
-          })
-        }
-      }
-    },
-    fileUploaded: {
-      on: {
-        REMOVE_FILE: {
-          target: 'empty',
-          actions: assign({
-            files: _ => [],
-            urls: _ => []
-          })
-        }
-      }
-    },
-    uploading: {
-      invoke: {
-        id: 'uploadFile',
-        src: 'upload',
-        onDone: {
-          target: 'fileUploaded',
-          actions: assign({
-            urls: (_, e) => e.data
-          })
-        },
-        onError: {
-          target: 'error',
-          actions: assign({
-            urls: _ => [],
-            files: _ => []
-          })
-        }
-      }
-    },
-    error: {
-      on: {
-        RESET: 'empty',
-        UPLOAD_FILE: 'uploading'
-      }
-    }
-  }
-})
-
-const ValueContent = ({ urls = [], files = [], t, onRemove, message }) => {
-  const links = useMemo(() => {
-    return urls.map((url, index) => (
-      <Fragment key={url}>
-        <Anchor href={url} rel="nofollow" target="_blank">
-          {files[index].name}
-        </Anchor>
-        {index < files.length - 1 ? ', ' : ''}
-      </Fragment>
-    ));
-  }, [urls, files]);
-
+const ValueContent = ({ file, t, onRemove }) => {
   return (
-    <Flex alignCenter column>
-      <FlexItem>{links}</FlexItem>
-      <FlexItem marginTop={2}>
-        <Button
-          size="small"
-          color="danger"
-          variant="outlined"
-          type="button"
-          onClick={onRemove}
-        >
-          {t('yleiset.poista')}
-        </Button>
-      </FlexItem>
-    </Flex>
+    <FlexWrapper>
+      <FileUploadedMessage>{file ? file.name : ''}</FileUploadedMessage>
+      <Button
+        color="danger"
+        variant="contained"
+        type="button"
+        onClick={onRemove}
+      >
+        {t('yleiset.poista')}
+      </Button>
+    </FlexWrapper>
   );
 };
 
 const DragActiveContent = ({ message }) => {
   return (
-    <Flex alignCenter column>
+    <FlexWrapper>
       <DragActiveIcon />
-      <DragActiveMessage marginTop={1}>{message}</DragActiveMessage>
-    </Flex>
+      <PrimaryMessage>{message}</PrimaryMessage>
+    </FlexWrapper>
   );
 };
 
-const PlaceholderContent = ({ message, onDrop, t }) => {
-  return <Flex alignCenter column>
-      <FlexItem marginBottom={1}>
-        <Typography>{message}:</Typography>
-      </FlexItem>
-      <FlexItem marginTop={2}>
-        <Button
-          size="small"
-          color="primary"
-          variant="outlined"
-          type="button"
-        >
-          {t('yleiset.selaaTiedostoja')}
-        </Button>
-      </FlexItem>
-    </Flex>
+const PlaceholderContent = ({ error, openDialog, t }) => {
+  return (
+    <FlexWrapper>
+      {error && <ErrorMessage>{error}</ErrorMessage>}
+      <Typography>{t('yleiset.raahaaLiitettavaTiedosto')}</Typography>
+      <Typography>{t('yleiset.tai')}</Typography>
+      <Button
+        color="primary"
+        variant="outlined"
+        type="button"
+        onClick={openDialog}
+      >
+        {t('yleiset.selaaTiedostoja')}
+      </Button>
+    </FlexWrapper>
+  );
 };
 
-const ErrorContent = ({ message }) => {
-  return <ErrorMessage>{message}</ErrorMessage>;
-};
+const Loader = ({ message }) => (
+  <FlexWrapper>
+    <Spin></Spin>
+    <PrimaryMessage>{message}</PrimaryMessage>
+  </FlexWrapper>
+);
+
+const InfoText = props => (
+  <Typography variant="secondary" as="div" marginBottom={1} {...props} />
+);
 
 export const FileInput = props => {
   const {
@@ -216,83 +217,130 @@ export const FileInput = props => {
     onChange = noop,
     error = false,
     upload,
-    dragActiveMessage,
-    placeholderMessage,
+    maxSize,
+    minDimensions,
+    accept,
     value,
   } = props;
 
-  const [state, send] = useMachine(fileUploadMachine.withConfig({
+  const { t } = useTranslation();
+
+  const validate = useCallback(
+    async file => {
+      const { size } = file;
+      const dimensions = await getImageFileDimensions(file);
+      return new Promise((resolve, reject) => {
+        if (size > maxSize) {
+          return reject({
+            validationError: t('yleiset.kuvanTiedostokokoLiianSuuri'),
+          });
+        } else if (
+          dimensions.width < minDimensions.width &&
+          dimensions.height < minDimensions.height
+        ) {
+          return reject({
+            validationError: t('yleiset.kuvanResoluutioLiianPieni'),
+          });
+        }
+        return resolve();
+      });
+    },
+    [maxSize, minDimensions, t],
+  );
+
+  const fileUploadMachine = createFileUploadMachine(value);
+  const [state, send] = useMachine(fileUploadMachine, {
     services: {
       upload(ctx, e) {
-        return upload(e.files[0]);
-      }
-    }
-  }), {
-    devTools: true
+        const file = e.files[0];
+        return validate(file).then(() => upload(file));
+      },
+    },
   });
 
-  const {urls, files} = state.context;
-
-  const accept = getAccept(props);
-  const { t } = useTranslation();
+  const { file, url, error: uploadError } = state.context;
 
   const onDrop = useCallback(
     async files => {
-      send({type: AT.UPLOAD_FILE, files})
+      send({ type: AT.UPLOAD_FILE, files });
     },
-    []
+    [send],
   );
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const onDragEnter = useCallback(async () => send({ type: AT.DRAG_START }), [
+    send,
+  ]);
+  const onDragLeave = useCallback(async () => send({ type: AT.DRAG_STOP }), [
+    send,
+  ]);
+
+  const { getRootProps, getInputProps, open } = useDropzone({
+    onDrop,
+    onDragEnter,
+    onDragLeave,
+    noClick: true,
+  });
 
   const onRemove = useCallback(() => {
-    send({type: AT.REMOVE_FILE})
-  }, []);
+    send({ type: AT.REMOVE_FILE });
+  }, [send]);
 
-  useEffect(() => onChange(urls), [urls])
+  useEffect(() => onChange(url), [onChange, url]);
 
   let content;
   let inputDisabled = false;
-  if (state.value === CS.empty) {
-    content = <PlaceholderContent
-      message={placeholderMessage || t('yleiset.raahaaLiitettavaTiedosto')}
-      onDrop={onDrop}
-      t={t}
-    />
-    inputDisabled = false;
-  } else if (state.value === CS.fileUploaded) {
-    content = <ValueContent
-      urls={urls}
-      files={files}
-      onRemove={onRemove}
-      t={t}
-    />
-    inputDisabled = true;
-  } else if (isDragActive) {
-    content = <DragActiveContent
-      message={dragActiveMessage || t('yleiset.pudotaTiedostoLadataksesi')}
-    />
-    inputDisabled = false;
-  } else if (state.value === CS.uploading) {
-    content = <Spin></Spin>
-    inputDisabled = true;
+  switch (state.value) {
+    case CS.empty:
+    case CS.error:
+      content = (
+        <PlaceholderContent t={t} openDialog={open} error={uploadError} />
+      );
+      inputDisabled = false;
+      break;
+    case CS.uploading:
+      content = <Loader message={t('yleiset.latausKaynnissa')} />;
+      inputDisabled = true;
+      break;
+    case CS.dragging:
+      content = (
+        <DragActiveContent message={t('yleiset.pudotaTiedostoLadataksesi')} />
+      );
+      inputDisabled = false;
+      break;
+    case CS.fileUploaded:
+      content = <ValueContent file={file} onRemove={onRemove} t={t} />;
+      inputDisabled = true;
+      break;
+    default:
+      console.error(`FileInput: Unknown control state "${state.value}"`);
   }
 
-  const active = isDragActive;
-
   return (
-    <Container
-      {...getRootProps()}
-      active={active}
-      error={error}
-      disabled={disabled}
-      style={{backgroundImage: `url(${urls[0]})`}}
-    >
-      <input
-        {...getInputProps({ accept, multiple, disabled: inputDisabled})}
-      />
-      {content}
-    </Container>
+    <>
+      <InfoText>
+        {t('yleiset.tuetutTiedostomuodot')}:{' '}
+        {accept ? accept.join(' ') : 'kaikki'}
+      </InfoText>
+      <InfoText>
+        {t('yleiset.tiedostonMaksimikoko')}:{' '}
+        {prettyBytes(maxSize, { locale: 'fi' })}
+      </InfoText>
+      <InfoText>
+        {t('yleiset.tiedostonMinimiresoluutio', minDimensions)}
+      </InfoText>
+      <Container
+        {...getRootProps()}
+        active={state.value === CS.dragging}
+        error={error || uploadError}
+        disabled={disabled}
+        style={{ backgroundImage: `url(${url})` }}
+      >
+        <input
+          {...getInputProps({ accept, multiple, disabled: inputDisabled })}
+        />
+        {content}
+      </Container>
+    </>
   );
 };
 

@@ -1,24 +1,35 @@
-import React from 'react';
+import React, { useContext, useCallback } from 'react';
 import { Field } from 'redux-form';
 
 import useTranslation from '../useTranslation';
 import { FormFieldFileInput } from '../formFields';
-import { getBinary } from '../../utils';
+import HttpContext from '../HttpContext';
+import UrlContext from '../UrlContext';
+import uploadTeemakuva from '../../utils/kouta/uploadTeemakuva';
 
-export const TeemakuvaSection = ({ name }) => {
+export const TeemakuvaSection = props => {
+  const { name } = props;
   const { t } = useTranslation();
+
+  const httpClient = useContext(HttpContext);
+  const apiUrls = useContext(UrlContext);
+
+  const upload = useCallback(
+    async file => {
+      return uploadTeemakuva({ httpClient, image: file, apiUrls });
+    },
+    [httpClient, apiUrls],
+  );
 
   return (
     <Field
       name={name}
       label={'Teemakuva'}
       component={FormFieldFileInput}
-      upload={async (file) => {
-        // TODO: implement real teemakuva upload
-        const binary = await getBinary(file);
-        return Promise.resolve([URL.createObjectURL(file)])
-      }}
-      //accept={'image/jpeg', 'image/png'}
+      upload={upload}
+      maxSize={2000000}
+      minDimensions={{ width: 1260, height: 400 }}
+      accept={['.jpeg', '.jpg', '.png']}
     ></Field>
   );
 };

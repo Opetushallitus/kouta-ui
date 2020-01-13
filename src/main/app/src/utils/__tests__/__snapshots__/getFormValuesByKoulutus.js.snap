@@ -66,6 +66,7 @@ Object {
   "tarjoajat": Array [
     "123.456.789",
   ],
+  "teemakuva": undefined,
   "tila": "tallennettu",
 }
 `;

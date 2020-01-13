@@ -386,38 +386,6 @@ module.exports = {
     },
   },
   createKoulutusForm: {
-    'should be able to create ammatillinen koulutus': {
-      '1': {
-        johtaaTutkintoon: true,
-        muokkaaja: '1.2.246.562.24.62301161440',
-        tila: 'julkaistu',
-        kielivalinta: ['fi'],
-        tarjoajat: ['4.1.1.1.1.1', '5.1.1.1.1.1'],
-        koulutusKoodiUri: 'koulutus_0#1',
-        koulutustyyppi: 'amm',
-        nimi: {
-          fi: 'Nimi',
-        },
-        julkinen: true,
-        metadata: {
-          tyyppi: 'amm',
-          lisatiedot: [
-            {
-              otsikkoKoodiUri: 'koulutuksenlisatiedot_0#1',
-              teksti: {
-                fi: 'koulutuksenlisatiedot_0 kuvaus',
-              },
-            },
-          ],
-          kuvaus: {},
-          opintojenLaajuusKoodiUri: null,
-          tutkintonimikeKoodiUrit: [],
-          kuvauksenNimi: {},
-          koulutusalaKoodiUrit: [],
-        },
-        organisaatioOid: '1.1.1.1.1.1',
-      },
-    },
     'should be able to create korkeakoulu koulutus': {
       '1': {
         johtaaTutkintoon: true,
@@ -425,7 +393,7 @@ module.exports = {
         tila: 'julkaistu',
         kielivalinta: ['fi'],
         tarjoajat: ['4.1.1.1.1.1', '5.1.1.1.1.1'],
-        koulutusKoodiUri: 'koulutus_0#1',
+        koulutusKoodiUri: 'koulutus_2#1',
         koulutustyyppi: 'yo',
         nimi: {
           fi: 'Tiedot nimi',
@@ -452,38 +420,6 @@ module.exports = {
           koulutusalaKoodiUrit: [
             'kansallinenkoulutusluokitus2016koulutusalataso2_0#1',
           ],
-        },
-        organisaatioOid: '1.1.1.1.1.1',
-      },
-    },
-    'should be able to create lukiokoulutus': {
-      '1': {
-        johtaaTutkintoon: true,
-        muokkaaja: '1.2.246.562.24.62301161440',
-        tila: 'julkaistu',
-        kielivalinta: ['fi'],
-        tarjoajat: ['4.1.1.1.1.1', '5.1.1.1.1.1'],
-        koulutusKoodiUri: 'koulutus_0#1',
-        koulutustyyppi: 'lk',
-        nimi: {
-          fi: 'Nimi',
-        },
-        julkinen: true,
-        metadata: {
-          tyyppi: 'lk',
-          lisatiedot: [
-            {
-              otsikkoKoodiUri: 'koulutuksenlisatiedot_0#1',
-              teksti: {
-                fi: 'koulutuksenlisatiedot_0 kuvaus',
-              },
-            },
-          ],
-          kuvaus: {},
-          opintojenLaajuusKoodiUri: null,
-          tutkintonimikeKoodiUrit: [],
-          kuvauksenNimi: {},
-          koulutusalaKoodiUrit: [],
         },
         organisaatioOid: '1.1.1.1.1.1',
       },
@@ -822,12 +758,7 @@ module.exports = {
               },
             },
           ],
-          ammattinimikkeet: [
-            {
-              kieli: 'fi',
-              arvo: 'ammattinimike',
-            },
-          ],
+          ammattinimikkeet: [],
           asiasanat: [
             {
               kieli: 'fi',
@@ -836,7 +767,9 @@ module.exports = {
           ],
           ylemmanKorkeakoulututkinnonOsaamisalat: [],
           alemmanKorkeakoulututkinnonOsaamisalat: [],
-          kuvaus: {},
+          kuvaus: {
+            fi: 'Toteutuksen kuvaus',
+          },
           tyyppi: 'amm',
           laajuus: null,
           laajuusyksikkoKoodiUri: null,
@@ -968,7 +901,7 @@ module.exports = {
             },
           ],
           kuvaus: {
-            fi: 'toteutuksen kuvaus',
+            fi: 'Toteutuksen kuvaus',
           },
           tyyppi: 'yo',
           laajuus: null,
@@ -1093,7 +1026,7 @@ module.exports = {
         oid: '1.3.1.1.1.1',
         koulutusOid: '1.2.1.1.1.1',
         tila: 'tallennettu',
-        tarjoajat: [],
+        tarjoajat: ['5.1.1.1.1.1', '3.1.1.1.1.1'],
         nimi: {
           fi: 'Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja',
         },
@@ -1189,9 +1122,7 @@ module.exports = {
           ],
           ylemmanKorkeakoulututkinnonOsaamisalat: [],
           alemmanKorkeakoulututkinnonOsaamisalat: [],
-          kuvaus: {
-            fi: 'Toteutuksen kuvaus',
-          },
+          kuvaus: {},
           tyyppi: 'amm',
           laajuus: null,
           laajuusyksikkoKoodiUri: null,
@@ -1212,7 +1143,7 @@ module.exports = {
         oid: '1.3.1.1.1.1',
         koulutusOid: '1.2.1.1.1.1',
         tila: 'tallennettu',
-        tarjoajat: [],
+        tarjoajat: ['5.1.1.1.1.1', '3.1.1.1.1.1'],
         nimi: {
           fi: 'Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja',
         },
@@ -1328,9 +1259,7 @@ module.exports = {
               },
             },
           ],
-          kuvaus: {
-            fi: 'Toteutuksen kuvaus',
-          },
+          kuvaus: {},
           tyyppi: 'yo',
           laajuus: null,
           laajuusyksikkoKoodiUri: null,
@@ -1351,7 +1280,7 @@ module.exports = {
         oid: '1.3.1.1.1.1',
         koulutusOid: '1.2.1.1.1.1',
         tila: 'tallennettu',
-        tarjoajat: [],
+        tarjoajat: ['5.1.1.1.1.1', '3.1.1.1.1.1'],
         nimi: {
           fi: 'Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja',
         },
@@ -1439,9 +1368,7 @@ module.exports = {
           ],
           ylemmanKorkeakoulututkinnonOsaamisalat: [],
           alemmanKorkeakoulututkinnonOsaamisalat: [],
-          kuvaus: {
-            fi: 'Toteutuksen kuvaus',
-          },
+          kuvaus: {},
           tyyppi: 'lk',
           laajuus: null,
           laajuusyksikkoKoodiUri: null,

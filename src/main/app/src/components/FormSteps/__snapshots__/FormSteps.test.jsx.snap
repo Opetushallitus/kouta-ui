@@ -162,7 +162,7 @@ exports[`renders correctly 1`] = `
             className="c2"
           >
             <div
-              className="c3 c2"
+              className="c2 c3"
             >
               <styled.div
                 active={false}
@@ -185,7 +185,7 @@ exports[`renders correctly 1`] = `
                         className="material-icons c5"
                       >
                         <span
-                          className="c6 material-icons c5"
+                          className="material-icons c5 c6"
                         >
                           school
                         </span>
@@ -215,7 +215,7 @@ exports[`renders correctly 1`] = `
             className="c2"
           >
             <div
-              className="c3 c2"
+              className="c2 c3"
             >
               <styled.div
                 active={false}
@@ -238,7 +238,7 @@ exports[`renders correctly 1`] = `
                         className="material-icons c5"
                       >
                         <span
-                          className="c6 material-icons c5"
+                          className="material-icons c5 c6"
                         >
                           settings
                         </span>
@@ -274,7 +274,7 @@ exports[`renders correctly 1`] = `
             className="c2"
           >
             <div
-              className="c3 c2"
+              className="c2 c3"
             >
               <styled.div
                 active={false}
@@ -297,7 +297,7 @@ exports[`renders correctly 1`] = `
                         className="material-icons c5"
                       >
                         <span
-                          className="c6 material-icons c5"
+                          className="material-icons c5 c6"
                         >
                           access_time
                         </span>
@@ -327,7 +327,7 @@ exports[`renders correctly 1`] = `
             className="c2"
           >
             <div
-              className="c3 c2"
+              className="c2 c3"
             >
               <styled.div
                 active={true}
@@ -350,7 +350,7 @@ exports[`renders correctly 1`] = `
                         className="material-icons c9"
                       >
                         <span
-                          className="c6 material-icons c9"
+                          className="material-icons c9 c6"
                         >
                           grain
                         </span>
@@ -386,7 +386,7 @@ exports[`renders correctly 1`] = `
             className="c2"
           >
             <div
-              className="c3 c2"
+              className="c2 c3"
             >
               <styled.div
                 active={false}
@@ -409,7 +409,7 @@ exports[`renders correctly 1`] = `
                         className="material-icons c5"
                       >
                         <span
-                          className="c6 material-icons c5"
+                          className="material-icons c5 c6"
                         >
                           select_all
                         </span>
@@ -439,7 +439,7 @@ exports[`renders correctly 1`] = `
             className="c2"
           >
             <div
-              className="c3 c2"
+              className="c2 c3"
             >
               <styled.div
                 active={false}
@@ -462,7 +462,7 @@ exports[`renders correctly 1`] = `
                         className="material-icons c5"
                       >
                         <span
-                          className="c6 material-icons c5"
+                          className="material-icons c5 c6"
                         >
                           subject
                         </span>

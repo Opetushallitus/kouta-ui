@@ -2,7 +2,8 @@ const koutaBackendDevUrl = `https://virkailija.hahtuvaopintopolku.fi/kouta-backe
 const virkailijaDevUrl = `https://virkailija.hahtuvaopintopolku.fi`;
 
 export const development = ({ isCypress }) => ({
-  'kouta-backend.base-url': 'http://localhost:' + process.env.REACT_APP_BACKEND_PORT,
+  'kouta-backend.base-url':
+    'http://localhost:' + process.env.REACT_APP_BACKEND_PORT,
   'kouta-backend.koulutus': `${koutaBackendDevUrl}/koulutus`,
   'kouta-backend.koulutus-by-oid': `${koutaBackendDevUrl}/koulutus/$1`,
   'kouta-backend.koulutus-list': `${koutaBackendDevUrl}/koulutus/list`,
@@ -36,6 +37,7 @@ export const development = ({ isCypress }) => ({
   'kouta-backend.search.haut': `${koutaBackendDevUrl}/search/haut`,
   'kouta-backend.search.hakukohteet': `${koutaBackendDevUrl}/search/hakukohteet`,
   'kouta-backend.search.valintaperusteet': `${koutaBackendDevUrl}/search/valintaperusteet`,
+  'kouta-backend.upload-theme-image': `${koutaBackendDevUrl}/upload/theme-image`,
   'koodisto-service.base-url': `${virkailijaDevUrl}/koodisto-service`,
   'koodisto-service.sisaltyy-alakoodit': `${virkailijaDevUrl}/koodisto-service/rest/json/relaatio/sisaltyy-alakoodit/$1?koodiVersio=$2`,
   'koodisto-service.sisaltyy-ylakoodit': `${virkailijaDevUrl}/koodisto-service/rest/json/relaatio/sisaltyy-ylakoodit/$1`,

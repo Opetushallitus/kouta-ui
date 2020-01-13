@@ -1,7 +1,8 @@
 const koutaBackendDevUrl = `https://virkailija.hahtuvaopintopolku.fi/kouta-backend`;
 
 export const development = ({ isCypress }) => ({
-  'kouta-backend.base-url': 'http://localhost:' + process.env.REACT_APP_BACKEND_PORT,
+  'kouta-backend.base-url':
+    'http://localhost:' + process.env.REACT_APP_BACKEND_PORT,
   'kouta-backend.koulutus': `${koutaBackendDevUrl}/koulutus`,
   'kouta-backend.koulutus-by-oid': `${koutaBackendDevUrl}/koulutus/$1`,
   'kouta-backend.koulutus-list': `${koutaBackendDevUrl}/koulutus/list`,
@@ -30,34 +31,62 @@ export const development = ({ isCypress }) => ({
   'kouta-backend.oppilaitos-by-oid': `${koutaBackendDevUrl}/oppilaitos/$1`,
   'kouta-backend.oppilaitoksen-osa': `${koutaBackendDevUrl}/oppilaitoksen-osa`,
   'kouta-backend.oppilaitoksen-osa-by-oid': `${koutaBackendDevUrl}/oppilaitoksen-osa/$1`,
-  'koodisto-service.base-url': 'https://virkailija.hahtuvaopintopolku.fi/koodisto-service',
-  'koodisto-service.sisaltyy-alakoodit': 'https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/json/relaatio/sisaltyy-alakoodit/$1?koodiVersio=$2',
-  'koodisto-service.sisaltyy-ylakoodit': 'https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/json/relaatio/sisaltyy-ylakoodit/$1',
-  'koodisto-service.koodi': 'https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/json/$1/koodi?onlyValidKoodis=true',
-  'koodisto-service.codeelement': 'https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/$1/$2',
-  'eperusteet-service.base-url': 'https://virkailija.hahtuvaopintopolku.fi/eperusteet-service',
-  'eperusteet-service.perusteet-koulutuskoodilla': 'https://virkailija.hahtuvaopintopolku.fi/eperusteet-service/api/perusteet?tuleva=true&siirtyma=false&voimassaolo=true&poistunut=false&kieli=fi&koulutuskoodi=$1',
-  'eperusteet-service.osaamisalakuvaukset': 'https://virkailija.hahtuvaopintopolku.fi/eperusteet-service/api/perusteet/$1/osaamisalakuvaukset',
-  'organisaatio-service.base-url': 'https://virkailija.hahtuvaopintopolku.fi/organisaatio-service',
-  'organisaatio-service.children': 'https://virkailija.hahtuvaopintopolku.fi/organisaatio-service/rest/organisaatio/v4/$1/children?includeImage=false',
-  'organisaatio-service.hierarkia': 'https://virkailija.hahtuvaopintopolku.fi/organisaatio-service/rest/organisaatio/v4/hierarkia/hae?oid=$1&aktiiviset=true&suunnitellut=true&lakkautetut=false',
-  'organisaatio-service.hierarkia-haku': 'https://virkailija.hahtuvaopintopolku.fi/organisaatio-service/rest/organisaatio/v4/hierarkia/hae',
-  'organisaatio-service.organisaatio-by-oid': 'https://virkailija.hahtuvaopintopolku.fi/organisaatio-service/rest/organisaatio/v4/$1?includeImage=false',
-  'organisaatio-service.organisaatiot-by-oids': 'https://virkailija.hahtuvaopintopolku.fi/organisaatio-service/rest/organisaatio/v4/findbyoids',
-  'lokalisaatio-service.localisation': 'https://virkailija.hahtuvaopintopolku.fi/lokalisointi/cxf/rest/v1/localisation?category=$1',
-  'kouta-index.koulutus-list': 'https://virkailija.hahtuvaopintopolku.fi/kouta-index/koulutus/filtered-list',
-  'kouta-index.toteutus-list': 'https://virkailija.hahtuvaopintopolku.fi/kouta-index/toteutus/filtered-list',
-  'kouta-index.haku-list': 'https://virkailija.hahtuvaopintopolku.fi/kouta-index/haku/filtered-list',
-  'kouta-index.hakukohde-list': 'https://virkailija.hahtuvaopintopolku.fi/kouta-index/hakukohde/filtered-list',
-  'kouta-index.valintaperuste-list': 'https://virkailija.hahtuvaopintopolku.fi/kouta-index/valintaperuste/filtered-list',
-  'kayttooikeus-service.me': 'https://virkailija.hahtuvaopintopolku.fi/kayttooikeus-service/cas/me',
-  'kayttooikeus-service.kayttajan-organisaatiot': 'https://virkailija.hahtuvaopintopolku.fi/kayttooikeus-service/organisaatiohenkilo/organisaatioOid',
+  'kouta-backend.upload-theme-image': `${koutaBackendDevUrl}/upload/theme-image`,
+  'koodisto-service.base-url':
+    'https://virkailija.hahtuvaopintopolku.fi/koodisto-service',
+  'koodisto-service.sisaltyy-alakoodit':
+    'https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/json/relaatio/sisaltyy-alakoodit/$1?koodiVersio=$2',
+  'koodisto-service.sisaltyy-ylakoodit':
+    'https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/json/relaatio/sisaltyy-ylakoodit/$1',
+  'koodisto-service.koodi':
+    'https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/json/$1/koodi?onlyValidKoodis=true',
+  'koodisto-service.codeelement':
+    'https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/$1/$2',
+  'eperusteet-service.base-url':
+    'https://virkailija.hahtuvaopintopolku.fi/eperusteet-service',
+  'eperusteet-service.perusteet-koulutuskoodilla':
+    'https://virkailija.hahtuvaopintopolku.fi/eperusteet-service/api/perusteet?tuleva=true&siirtyma=false&voimassaolo=true&poistunut=false&kieli=fi&koulutuskoodi=$1',
+  'eperusteet-service.osaamisalakuvaukset':
+    'https://virkailija.hahtuvaopintopolku.fi/eperusteet-service/api/perusteet/$1/osaamisalakuvaukset',
+  'organisaatio-service.base-url':
+    'https://virkailija.hahtuvaopintopolku.fi/organisaatio-service',
+  'organisaatio-service.children':
+    'https://virkailija.hahtuvaopintopolku.fi/organisaatio-service/rest/organisaatio/v4/$1/children?includeImage=false',
+  'organisaatio-service.hierarkia':
+    'https://virkailija.hahtuvaopintopolku.fi/organisaatio-service/rest/organisaatio/v4/hierarkia/hae?oid=$1&aktiiviset=true&suunnitellut=true&lakkautetut=false',
+  'organisaatio-service.hierarkia-haku':
+    'https://virkailija.hahtuvaopintopolku.fi/organisaatio-service/rest/organisaatio/v4/hierarkia/hae',
+  'organisaatio-service.organisaatio-by-oid':
+    'https://virkailija.hahtuvaopintopolku.fi/organisaatio-service/rest/organisaatio/v4/$1?includeImage=false',
+  'organisaatio-service.organisaatiot-by-oids':
+    'https://virkailija.hahtuvaopintopolku.fi/organisaatio-service/rest/organisaatio/v4/findbyoids',
+  'lokalisaatio-service.localisation':
+    'https://virkailija.hahtuvaopintopolku.fi/lokalisointi/cxf/rest/v1/localisation?category=$1',
+  'kouta-index.koulutus-list':
+    'https://virkailija.hahtuvaopintopolku.fi/kouta-index/koulutus/filtered-list',
+  'kouta-index.toteutus-list':
+    'https://virkailija.hahtuvaopintopolku.fi/kouta-index/toteutus/filtered-list',
+  'kouta-index.haku-list':
+    'https://virkailija.hahtuvaopintopolku.fi/kouta-index/haku/filtered-list',
+  'kouta-index.hakukohde-list':
+    'https://virkailija.hahtuvaopintopolku.fi/kouta-index/hakukohde/filtered-list',
+  'kouta-index.valintaperuste-list':
+    'https://virkailija.hahtuvaopintopolku.fi/kouta-index/valintaperuste/filtered-list',
+  'kayttooikeus-service.me':
+    'https://virkailija.hahtuvaopintopolku.fi/kayttooikeus-service/cas/me',
+  'kayttooikeus-service.kayttajan-organisaatiot':
+    'https://virkailija.hahtuvaopintopolku.fi/kayttooikeus-service/organisaatiohenkilo/organisaatioOid',
   'cas.login': 'https://virkailija.hahtuvaopintopolku.fi/cas/login',
   ...(!isCypress && {
-    'virkailija-raamit.raamitJs': 'https://virkailija.hahtuvaopintopolku.fi/virkailija-raamit/apply-raamit.js',
+    'virkailija-raamit.raamitJs':
+      'https://virkailija.hahtuvaopintopolku.fi/virkailija-raamit/apply-raamit.js',
   }),
-  'lomake-editori.lomakkeet': 'https://virkailija.hahtuvaopintopolku.fi/lomake-editori/api/forms',
-  'lomake-editori.cas': 'https://virkailija.hahtuvaopintopolku.fi/lomake-editori/auth/cas',
-  'lomake-editori.muokkaus-sivu': 'https://virkailija.hahtuvaopintopolku.fi/lomake-editori/editor/$1',
-  'oppijanumerorekisteri-service.henkilo': 'https://virkailija.hahtuvaopintopolku.fi/oppijanumerorekisteri-service/henkilo/$1',
+  'lomake-editori.lomakkeet':
+    'https://virkailija.hahtuvaopintopolku.fi/lomake-editori/api/forms',
+  'lomake-editori.cas':
+    'https://virkailija.hahtuvaopintopolku.fi/lomake-editori/auth/cas',
+  'lomake-editori.muokkaus-sivu':
+    'https://virkailija.hahtuvaopintopolku.fi/lomake-editori/editor/$1',
+  'oppijanumerorekisteri-service.henkilo':
+    'https://virkailija.hahtuvaopintopolku.fi/oppijanumerorekisteri-service/henkilo/$1',
 });

@@ -186,7 +186,7 @@ const fillLiitteetSection = () => {
         .type('Osoite', { force: true });
 
       cy.getByTestId('postinumero').within(() => {
-        fillAsyncSelect('0');
+        fillAsyncSelect('0', 'Posti_0');
       });
 
       cy.getByTestId('sahkoposti')

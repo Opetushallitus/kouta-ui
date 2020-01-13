@@ -6,6 +6,7 @@ import {
   getCheckbox,
   chooseKieliversiotLanguages,
   selectOption,
+  fillAsyncSelect,
   fillTreeSelect,
   fillDatePickerInput,
 } from '../../utils';
@@ -115,28 +116,12 @@ const fillCommonJarjestamistiedot = ({ maksullisuusTyyppi = 'kylla' } = {}) => {
 
 const fillNayttamistiedotSection = () => {
   cy.getByTestId('nayttamistiedotSection').within(() => {
-    cy.getByTestId('ammattinimikkeetSelect').click();
-
-    cy.getByTestId('ammattinimikkeetSelect')
-      .find('input[type="text"]')
-      .type('ammattinimike', { force: true });
-
     cy.getByTestId('ammattinimikkeetSelect').within(() => {
-      cy.get('[role="option"]')
-        .contains('ammattinimike')
-        .click({ force: true });
+      fillAsyncSelect('ammattinimike', 'Luo kohde');
     });
 
-    cy.getByTestId('avainsanatSelect').click();
-
-    cy.getByTestId('avainsanatSelect')
-      .find('input[type="text"]')
-      .type('avainsana', { force: true });
-
     cy.getByTestId('avainsanatSelect').within(() => {
-      cy.get('[role="option"]')
-        .contains('avainsana')
-        .click({ force: true });
+      fillAsyncSelect('avainsana', 'Luo kohde');
     });
 
     jatka();

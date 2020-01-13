@@ -49,7 +49,7 @@ module.exports = {
         },
         hakukohteenMuokkaamisenTakaraja: '2019-12-11T19:15',
         ajastettuJulkaisu: '2019-12-05T06:45',
-        alkamisvuosi: 2019,
+        alkamisvuosi: 2020,
         hakulomakeAtaruId: 'lomake_1',
         hakulomakeLinkki: {},
         hakulomakeKuvaus: {},
@@ -157,7 +157,7 @@ module.exports = {
             },
           },
         ],
-        alkamisvuosi: 2019,
+        alkamisvuosi: 2020,
         liitteidenToimitusosoite: null,
         liitteidenToimitusaika: null,
         nimi: {
@@ -244,7 +244,7 @@ module.exports = {
             },
           },
         ],
-        alkamisvuosi: 2019,
+        alkamisvuosi: 2020,
         liitteidenToimitusosoite: null,
         liitteidenToimitusaika: null,
         nimi: {
@@ -1641,5 +1641,5 @@ module.exports = {
       },
     },
   },
-  __version: '3.4.1',
+  __version: '3.8.2',
 };

@@ -28,15 +28,15 @@ export const selectOption = (value, cy) => {
   });
 };
 
-export const fillAsyncSelect = value => {
+export const fillAsyncSelect = (input, match) => {
   getSelect(cy)
     .find('input[type="text"]')
-    .type(value, { force: true });
+    .type(input, { force: true });
 
   getSelect(cy).within(() => {
-    cy.get('[role="option"]')
-      .contains(value)
-      .click({ force: true });
+    cy.get(`div:contains(${match})`)
+      .first()
+      .click();
   });
 };
 
@@ -118,7 +118,7 @@ export const fillValintakoeFields = () => {
     .type('osoite', { force: true });
 
   cy.getByTestId('postinumero').within(() => {
-    fillAsyncSelect('0');
+    fillAsyncSelect('0', '0 Posti_0');
   });
 
   cy.getByTestId('alkaa').within(() => {

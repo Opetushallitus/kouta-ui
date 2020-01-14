@@ -172,6 +172,7 @@ export default {
     tiedostonMaksimikoko: 'Tiedoston maksimikoko',
     tiedostonMinimiresoluutio:
       'Tiedoston minimiresoluutio: {{width}} x {{height}} pikseliä',
+    kuvanLahetysVirhe: 'Kuvan lähettäminen epäonnistui.',
   },
   ilmoitukset: {
     tuntematonVirhe:

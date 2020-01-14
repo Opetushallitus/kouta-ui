@@ -173,6 +173,6 @@ export const getImageFileDimensions = imgFile => {
 
 export const useMachine = (machine, options) =>
   useXstateMachine(machine, {
-    devTools: true,
+    devTools: process.env.NODE_ENV === 'development',
     ...options,
   });

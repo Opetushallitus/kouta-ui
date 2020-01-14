@@ -13,6 +13,7 @@ import { disabledStyle } from '../../system';
 import { Machine, assign } from 'xstate';
 import prettyBytes from 'pretty-bytes';
 import get from 'lodash/get';
+import uniqueId from 'lodash/uniqueId';
 
 const CS = {
   fileUploaded: 'fileUploaded',
@@ -160,7 +161,9 @@ const Container = styled.div`
 const FlexWrapper = ({ children }) => (
   <Flex alignCenter column>
     {children.map(c => (
-      <FlexItem marginBottom={1}>{c}</FlexItem>
+      <FlexItem marginBottom={1} key={uniqueId()}>
+        {c}
+      </FlexItem>
     ))}
   </Flex>
 );

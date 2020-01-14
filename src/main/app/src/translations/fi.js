@@ -541,6 +541,7 @@ export default {
     oppilaitoksenYhteystiedot: 'Oppilaitoksen yhteystiedot',
     yhteystiedotInfo: 'Anna oppilaitokselle tarvittavat yhteystiedot',
     oppilaitoksenTila: 'Oppilaitoksen tila',
+    oppilaitoksenTeemakuva: 'Oppilaitoksen teemakuva',
   },
   oppilaitoksenOsaLomake: {
     oppilaitoksenOsanPerustiedot: 'Oppilaitoksen osan perustiedot',

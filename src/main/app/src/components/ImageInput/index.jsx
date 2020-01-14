@@ -58,16 +58,14 @@ const createFileUploadMachine = ({ url, error, t }) => {
           [AT.REMOVE_FILE]: {
             target: CS.empty,
             actions: assign({
-              url: null,
+              url: () => null,
             }),
           },
         },
       },
       [CS.uploading]: {
         entry: assign({
-          file: (_, e) => {
-            return e.files[0];
-          },
+          file: (_, e) => e.files[0],
         }),
         invoke: {
           id: 'uploadFile',
@@ -81,13 +79,12 @@ const createFileUploadMachine = ({ url, error, t }) => {
           onError: {
             target: CS.error,
             actions: assign({
-              file: null,
-              url: null,
-              error: (ctx, e) => {
-                return e.data instanceof Error
+              file: () => null,
+              url: () => null,
+              error: (ctx, e) =>
+                e.data instanceof Error
                   ? t('yleiset.kuvanLahetysVirhe')
-                  : get(e, 'data.message');
-              },
+                  : get(e, 'data.message'),
             }),
           },
         },
@@ -98,7 +95,7 @@ const createFileUploadMachine = ({ url, error, t }) => {
           [AT.DRAG_START]: CS.dragging,
         },
         exit: assign({
-          error: null,
+          error: () => null,
         }),
       },
       [CS.dragging]: {

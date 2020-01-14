@@ -1,11 +1,11 @@
 import React, { useContext, useCallback } from 'react';
 import { Field } from 'redux-form';
 
-import useTranslation from '../useTranslation';
-import { FormFieldImageInput } from '../formFields';
-import HttpContext from '../HttpContext';
-import UrlContext from '../UrlContext';
-import uploadTeemakuva from '../../utils/kouta/uploadTeemakuva';
+import useTranslation from './useTranslation';
+import { FormFieldImageInput } from './formFields';
+import HttpContext from './HttpContext';
+import UrlContext from './UrlContext';
+import uploadTeemakuva from '../utils/kouta/uploadTeemakuva';
 
 export const TeemakuvaSection = props => {
   const { name } = props;

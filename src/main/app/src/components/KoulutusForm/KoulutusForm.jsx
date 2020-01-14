@@ -18,7 +18,7 @@ import NakyvyysSection from './NakyvyysSection';
 import useTranslation from '../useTranslation';
 import useFieldValue from '../useFieldValue';
 import JulkaisutilaSection from './JulkaisutilaSection';
-import TeemakuvaSection from './TeemakuvaSection';
+import TeemakuvaSection from '../TeemakuvaSection';
 
 const PohjaFormCollapse = ({
   children,

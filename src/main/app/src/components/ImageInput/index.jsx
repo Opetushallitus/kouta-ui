@@ -30,7 +30,7 @@ const AT = {
   DRAG_STOP: 'DRAG_STOP',
 };
 
-const createFileUploadMachine = ({ url, error }, t) => {
+const createFileUploadMachine = ({ url, error, t }) => {
   let initial = CS.empty;
   if (url) {
     initial = CS.fileUploaded;
@@ -261,7 +261,7 @@ export const ImageInput = props => {
     [maxSize, minDimensions, t],
   );
 
-  const fileUploadMachine = createFileUploadMachine({ url: value, error }, t);
+  const fileUploadMachine = createFileUploadMachine({ url: value, error, t });
   const [state, send] = useMachine(fileUploadMachine, {
     services: {
       upload(ctx, e) {

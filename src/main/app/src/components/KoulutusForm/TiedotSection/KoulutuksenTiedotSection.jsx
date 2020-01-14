@@ -142,7 +142,6 @@ const KoulutuksenTiedotSection = ({
           <div {...getTestIdProps('koulutustyyppiSelect')}>
             <KoulutusField
               name={`${name}.koulutus`}
-              component={KoulutusField}
               koulutustyyppi={koulutustyyppi}
               label={selectLabel}
             />

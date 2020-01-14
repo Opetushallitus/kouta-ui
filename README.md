@@ -54,7 +54,7 @@ Yksikkötestit voi ajaa komennolla `npm test` ja integraatiotestit komennolla `n
 
 ### Cypress TestRunner, interaktiivisesti
 
-On hauska katsoa korjata cypress testia interaktiivisti Cypress TestRunnerilla: 
+On hauska katsoa ja korjata cypress testia interaktiivisti Cypress TestRunnerilla: 
 
     cd src/main/app
     npm start

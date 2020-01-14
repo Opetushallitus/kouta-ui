@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import styled, { css } from 'styled-components';
-
 import { getThemeProp, spacing } from '../../theme';
 import useTranslation from '../useTranslation';
 import Typography from '../Typography';
@@ -13,6 +12,7 @@ import Button from '../Button';
 import { disabledStyle } from '../../system';
 import { Machine, assign } from 'xstate';
 import prettyBytes from 'pretty-bytes';
+import get from 'lodash/get';
 
 const CS = {
   fileUploaded: 'fileUploaded',
@@ -30,14 +30,21 @@ const AT = {
   DRAG_STOP: 'DRAG_STOP',
 };
 
-const createFileUploadMachine = url => {
+const createFileUploadMachine = ({ url, error }, t) => {
+  let initial = CS.empty;
+  if (url) {
+    initial = CS.fileUploaded;
+  } else if (error) {
+    initial = CS.error;
+  }
+
   return Machine({
     id: 'imageUpload',
-    initial: url ? CS.fileUploaded : CS.empty,
+    initial,
     context: {
       file: null,
       url,
-      error: null,
+      error,
     },
     states: {
       [CS.empty]: {
@@ -51,7 +58,7 @@ const createFileUploadMachine = url => {
           [AT.REMOVE_FILE]: {
             target: CS.empty,
             actions: assign({
-              url: _ => null,
+              url: null,
             }),
           },
         },
@@ -74,9 +81,13 @@ const createFileUploadMachine = url => {
           onError: {
             target: CS.error,
             actions: assign({
-              file: () => null,
-              url: () => null,
-              error: (ctx, e) => e.data.validationError || '',
+              file: null,
+              url: null,
+              error: (ctx, e) => {
+                return e.data instanceof Error
+                  ? t('yleiset.kuvanLahetysVirhe')
+                  : get(e, 'data.message');
+              },
             }),
           },
         },
@@ -87,7 +98,7 @@ const createFileUploadMachine = url => {
           [AT.DRAG_START]: CS.dragging,
         },
         exit: assign({
-          error: () => null,
+          error: null,
         }),
       },
       [CS.dragging]: {
@@ -130,6 +141,7 @@ const Container = styled.div`
   transition: border-color 0.25s, background-color 0.25s;
   min-height: 9rem;
   background-repeat: no-repeat;
+  background-size: cover;
   &:focus {
     border-color: ${getThemeProp('palette.primary.main')};
     outline: none;
@@ -215,7 +227,7 @@ export const FileInput = props => {
     multiple = false,
     disabled = false,
     onChange = noop,
-    error = false,
+    error,
     upload,
     maxSize,
     minDimensions,
@@ -232,14 +244,15 @@ export const FileInput = props => {
       return new Promise((resolve, reject) => {
         if (size > maxSize) {
           return reject({
-            validationError: t('yleiset.kuvanTiedostokokoLiianSuuri'),
+            message: t('yleiset.kuvanTiedostokokoLiianSuuri'),
           });
         } else if (
+          minDimensions &&
           dimensions.width < minDimensions.width &&
           dimensions.height < minDimensions.height
         ) {
           return reject({
-            validationError: t('yleiset.kuvanResoluutioLiianPieni'),
+            message: t('yleiset.kuvanResoluutioLiianPieni'),
           });
         }
         return resolve();
@@ -248,7 +261,7 @@ export const FileInput = props => {
     [maxSize, minDimensions, t],
   );
 
-  const fileUploadMachine = createFileUploadMachine(value);
+  const fileUploadMachine = createFileUploadMachine({ url: value, error }, t);
   const [state, send] = useMachine(fileUploadMachine, {
     services: {
       upload(ctx, e) {
@@ -258,7 +271,7 @@ export const FileInput = props => {
     },
   });
 
-  const { file, url, error: uploadError } = state.context;
+  const { file, url, error: machineError } = state.context;
 
   const onDrop = useCallback(
     async files => {
@@ -266,13 +279,17 @@ export const FileInput = props => {
     },
     [send],
   );
-
   const onDragEnter = useCallback(async () => send({ type: AT.DRAG_START }), [
     send,
   ]);
+
   const onDragLeave = useCallback(async () => send({ type: AT.DRAG_STOP }), [
     send,
   ]);
+
+  const onRemove = useCallback(() => {
+    send({ type: AT.REMOVE_FILE });
+  }, [send]);
 
   const { getRootProps, getInputProps, open } = useDropzone({
     onDrop,
@@ -281,35 +298,26 @@ export const FileInput = props => {
     noClick: true,
   });
 
-  const onRemove = useCallback(() => {
-    send({ type: AT.REMOVE_FILE });
-  }, [send]);
-
   useEffect(() => onChange(url), [onChange, url]);
 
   let content;
-  let inputDisabled = false;
   switch (state.value) {
     case CS.empty:
     case CS.error:
       content = (
-        <PlaceholderContent t={t} openDialog={open} error={uploadError} />
+        <PlaceholderContent t={t} openDialog={open} error={machineError} />
       );
-      inputDisabled = false;
       break;
     case CS.uploading:
       content = <Loader message={t('yleiset.latausKaynnissa')} />;
-      inputDisabled = true;
       break;
     case CS.dragging:
       content = (
         <DragActiveContent message={t('yleiset.pudotaTiedostoLadataksesi')} />
       );
-      inputDisabled = false;
       break;
     case CS.fileUploaded:
       content = <ValueContent file={file} onRemove={onRemove} t={t} />;
-      inputDisabled = true;
       break;
     default:
       console.error(`FileInput: Unknown control state "${state.value}"`);
@@ -317,26 +325,34 @@ export const FileInput = props => {
 
   return (
     <>
-      <InfoText>
-        {t('yleiset.tuetutTiedostomuodot')}:{' '}
-        {accept ? accept.join(' ') : 'kaikki'}
-      </InfoText>
-      <InfoText>
-        {t('yleiset.tiedostonMaksimikoko')}:{' '}
-        {prettyBytes(maxSize, { locale: 'fi' })}
-      </InfoText>
-      <InfoText>
-        {t('yleiset.tiedostonMinimiresoluutio', minDimensions)}
-      </InfoText>
+      {accept && (
+        <InfoText>
+          {t('yleiset.tuetutTiedostomuodot')}: {accept.join(' ')}
+        </InfoText>
+      )}
+      {maxSize && (
+        <InfoText>
+          {t('yleiset.tiedostonMaksimikoko')}: {prettyBytes(maxSize)}
+        </InfoText>
+      )}
+      {minDimensions && (
+        <InfoText>
+          {t('yleiset.tiedostonMinimiresoluutio', minDimensions)}
+        </InfoText>
+      )}
       <Container
         {...getRootProps()}
         active={state.value === CS.dragging}
-        error={error || uploadError}
+        error={machineError}
         disabled={disabled}
         style={{ backgroundImage: `url(${url})` }}
       >
         <input
-          {...getInputProps({ accept, multiple, disabled: inputDisabled })}
+          {...getInputProps({
+            accept,
+            multiple,
+            disabled: disabled,
+          })}
         />
         {content}
       </Container>

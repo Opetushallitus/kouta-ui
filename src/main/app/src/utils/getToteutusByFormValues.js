@@ -24,7 +24,10 @@ const getToteutusByFormValues = values => {
   const tarjoajat = get(values, 'tarjoajat') || [];
   const nimi = pick(get(values, 'tiedot.nimi') || {}, kielivalinta);
   const opetuskielet = get(values, 'jarjestamistiedot.opetuskieli') || [];
-  const kuvaus = pick(get(values, 'tiedot.toteutuksenKuvaus') || {}, kielivalinta);
+  const kuvaus = pick(
+    get(values, 'tiedot.toteutuksenKuvaus') || {},
+    kielivalinta,
+  );
   const osioKuvaukset = get(values, 'jarjestamistiedot.osioKuvaukset') || {};
   const opetustapaKoodiUrit = get(values, 'jarjestamistiedot.opetustapa') || [];
   const opetusaikaKoodiUrit = get(values, 'jarjestamistiedot.opetusaika') || [];
@@ -210,6 +213,8 @@ const getToteutusByFormValues = values => {
     }),
   );
 
+  const teemakuva = get(values, 'teemakuva');
+
   return {
     nimi,
     tarjoajat,
@@ -258,6 +263,7 @@ const getToteutusByFormValues = values => {
       suunniteltuKesto,
       toteutusjaksot,
       tutkinnonOsat,
+      teemakuva,
     },
   };
 };

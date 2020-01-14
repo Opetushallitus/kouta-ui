@@ -1,7 +1,7 @@
 import koodisto from './data/koodisto';
 
 export const getByTestId = (testId, cy) => {
-  return cy.get(`[data-test-id="${testId}"]`);
+  return cy.get(`[data-testid="${testId}"]`);
 };
 
 export const getRadio = (value, cy) => {

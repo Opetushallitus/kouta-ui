@@ -62,7 +62,9 @@ const fillLisatiedotSection = () => {
 };
 
 const tallenna = () => {
-  cy.getByTestId('tallennaKoulutusButton').click({ force: true });
+  cy.getByTestId('tallennaKoulutusButton').within(() => {
+    cy.contains('Tallenna').click({ force: false });
+  });
 };
 
 const fillJarjestajaSection = () => {

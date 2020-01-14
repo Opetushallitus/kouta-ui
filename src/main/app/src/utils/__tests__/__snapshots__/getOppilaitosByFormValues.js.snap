@@ -15,6 +15,7 @@ Object {
     "kampuksia": 3,
     "korkeakouluja": 5,
     "opiskelijoita": 100,
+    "teemakuva": undefined,
     "tiedekuntia": 4,
     "tietoaOpiskelusta": Array [
       Object {

@@ -19,6 +19,7 @@ const getFormValuesByOppilaitos = oppilaitos => {
       yksikoita,
       toimipisteita,
       akatemioita,
+      teemakuva,
     },
   } = oppilaitos;
 
@@ -57,6 +58,7 @@ const getFormValuesByOppilaitos = oppilaitos => {
       toimipisteita: isNumber(toimipisteita) ? toimipisteita : '',
       akatemioita: isNumber(akatemioita) ? akatemioita : '',
     },
+    teemakuva,
   };
 };
 

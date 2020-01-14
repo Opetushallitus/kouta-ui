@@ -6,7 +6,14 @@ import serializeEditorState from './draft/serializeEditorState';
 import { isNumeric } from './index';
 
 const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
-  const { perustiedot, esittely, yhteystiedot, tietoa, kieliversiot } = values;
+  const {
+    perustiedot,
+    esittely,
+    yhteystiedot,
+    tietoa,
+    kieliversiot,
+    teemakuva,
+  } = values;
 
   const {
     osoite,
@@ -66,6 +73,7 @@ const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
       akatemioita: isNumeric(get(perustiedot, 'akatemioita'))
         ? parseInt(perustiedot.akatemioita)
         : null,
+      teemakuva,
     },
   };
 };

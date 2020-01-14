@@ -11,6 +11,7 @@ import YhteystiedotSection from './YhteystiedotSection';
 import JulkaisutilaSection from './JulkaisutilaSection';
 import KieliversiotFields from '../KieliversiotFields';
 import useFieldValue from '../useFieldValue';
+import TeemakuvaSection from '../TeemakuvaSection';
 
 const OppilaitosForm = ({
   steps = false,
@@ -37,6 +38,14 @@ const OppilaitosForm = ({
           name="perustiedot"
           organisaatioOid={organisaatioOid}
         />
+      </FormCollapse>
+
+      <FormCollapse
+        section="teemakuva"
+        header={t('oppilaitoslomake.oppilaitoksenTeemakuva')}
+        {...getTestIdProps('teemakuvaSection')}
+      >
+        <TeemakuvaSection name="teemakuva" />
       </FormCollapse>
 
       <FormCollapse

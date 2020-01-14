@@ -48,7 +48,7 @@ public class UrlConfiguration extends OphProperties {
         this.frontProperties.setProperty("kouta-backend.oppilaitos-by-oid", this.require("kouta-backend.oppilaitos-by-oid"));
         this.frontProperties.setProperty("kouta-backend.oppilaitoksen-osa", this.require("kouta-backend.oppilaitoksen-osa"));
         this.frontProperties.setProperty("kouta-backend.oppilaitoksen-osa-by-oid", this.require("kouta-backend.oppilaitoksen-osa-by-oid"));
-
+        this.frontProperties.setProperty("kouta-backend.upload-theme-image", this.require("kouta-backend.upload-theme-image"));
 
         this.frontProperties.setProperty("koodisto-service.base-url", this.require("koodisto-service.base-url"));
         this.frontProperties.setProperty("koodisto-service.sisaltyy-alakoodit", this.require("koodisto-service.sisaltyy-alakoodit"));

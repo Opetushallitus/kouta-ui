@@ -2,7 +2,7 @@ import React, { useContext, useCallback } from 'react';
 import { Field } from 'redux-form';
 
 import useTranslation from '../useTranslation';
-import { FormFieldFileInput } from '../formFields';
+import { FormFieldImageInput } from '../formFields';
 import HttpContext from '../HttpContext';
 import UrlContext from '../UrlContext';
 import uploadTeemakuva from '../../utils/kouta/uploadTeemakuva';
@@ -25,7 +25,7 @@ export const TeemakuvaSection = props => {
     <Field
       name={name}
       label={'Teemakuva'}
-      component={FormFieldFileInput}
+      component={FormFieldImageInput}
       upload={upload}
       maxSize={2000000}
       minDimensions={{ width: 1260, height: 400 }}

@@ -222,7 +222,7 @@ const InfoText = props => (
   <Typography variant="secondary" as="div" marginBottom={1} {...props} />
 );
 
-export const FileInput = props => {
+export const ImageInput = props => {
   const {
     multiple = false,
     disabled = false,
@@ -320,7 +320,7 @@ export const FileInput = props => {
       content = <ValueContent file={file} onRemove={onRemove} t={t} />;
       break;
     default:
-      console.error(`FileInput: Unknown control state "${state.value}"`);
+      console.error(`ImageInput: Unknown control state "${state.value}"`);
   }
 
   return (
@@ -360,4 +360,4 @@ export const FileInput = props => {
   );
 };
 
-export default FileInput;
+export default ImageInput;

@@ -98,6 +98,7 @@ const config = createFormConfigBuilder()
     KOULUTUSTYYPPI.OSAAMISALA,
   ])
   .registerField('lisatiedot', 'osiot', KOULUTUSTYYPIT)
+  .registerField('teemakuva', 'teemakuva', KOULUTUSTYYPIT)
   .registerField(
     'jarjestyspaikka',
     'jarjestyspaikka',
@@ -109,8 +110,7 @@ const config = createFormConfigBuilder()
   .registerField('julkisuus', 'julkisuus', KOULUTUSTYYPIT)
   .registerField('julkaisutila', 'julkaisutila', KOULUTUSTYYPIT, eb =>
     eb.validateExistence('tila'),
-  )
-  .registerField('teemakuva', 'teemakuva', KOULUTUSTYYPIT);
+  );
 
 const getKoulutusFormConfig = koulutustyyppi => {
   return config.getKoulutustyyppiConfig(koulutustyyppi);

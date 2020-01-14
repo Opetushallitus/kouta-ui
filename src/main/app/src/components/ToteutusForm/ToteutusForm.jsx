@@ -25,6 +25,7 @@ import JulkaisutilaSection from './JulkaisutilaSection';
 import TiedotSection from './TiedotSection';
 import ToteutusjaksotSection from './ToteutusjaksotSection';
 import TutkinnonOsatSection from './TutkinnonOsatSection';
+import TeemakuvaSection from '../TeemakuvaSection';
 
 const PohjaFormCollapse = ({
   children,
@@ -180,6 +181,14 @@ const ToteutusForm = ({
             name="jarjestamistiedot"
             koulutustyyppi={koulutustyyppi}
           />
+        </FormCollapse>
+
+        <FormCollapse
+          section="teemakuva"
+          header={t('toteutuslomake.toteutuksenTeemakuva')}
+          {...getTestIdProps('teemakuvaSection')}
+        >
+          <TeemakuvaSection name="teemakuva" />
         </FormCollapse>
 
         <FormCollapse

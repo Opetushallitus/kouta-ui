@@ -26,6 +26,7 @@ const getFormValuesByToteutus = toteutus => {
     ilmoittautumislinkki,
     aloituspaikat,
     suunniteltuKesto,
+    teemakuva,
     toteutusjaksot,
     tutkinnonOsat: tutkinnonOsatMetadata,
   } = metadata;
@@ -200,6 +201,7 @@ const getFormValuesByToteutus = toteutus => {
       }),
     ),
     tutkinnonOsat,
+    teemakuva,
   };
 };
 

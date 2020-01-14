@@ -28,10 +28,7 @@ const config = createFormConfigBuilder()
   .registerField(
     'kuvaus',
     'kuvaus',
-    without(
-      KOULUTUSTYYPIT,
-      KOULUTUSTYYPPI.LUKIOKOULUTUS,
-    ),
+    without(KOULUTUSTYYPIT, KOULUTUSTYYPPI.LUKIOKOULUTUS),
   )
   .registerField(
     'osaamisalaTarkenteet',
@@ -75,10 +72,7 @@ const config = createFormConfigBuilder()
   .registerField(
     'tiedot',
     'toteutuksenKuvaus',
-    without(
-      KOULUTUSTYYPIT,
-      KOULUTUSTYYPPI.LUKIOKOULUTUS,
-    ),
+    without(KOULUTUSTYYPIT, KOULUTUSTYYPPI.LUKIOKOULUTUS),
   )
   .registerField(
     'tiedot',
@@ -148,6 +142,7 @@ const config = createFormConfigBuilder()
   .registerField('jarjestamistiedot', 'kielivalikoima', [
     KOULUTUSTYYPPI.LUKIOKOULUTUS,
   ])
+  .registerField('teemakuva', 'teemakuva', KOULUTUSTYYPIT)
   .registerField('nayttamistiedot', 'ammattinimikkeet', KOULUTUSTYYPIT)
   .registerField('nayttamistiedot', 'avainsanat', KOULUTUSTYYPIT)
   .registerField(

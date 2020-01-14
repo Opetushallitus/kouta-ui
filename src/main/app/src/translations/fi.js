@@ -393,6 +393,7 @@ export default {
     hakukohteenLittaminen: 'Hakukohteen liittäminen toteutukseen',
     eiMuokkausOikeutta:
       'Käyttäjälläsi ei ole oikeuksia muokata tätä toteutusta',
+    toteutuksenTeemakuva: 'Toteutuksen teemakuva',
   },
   hakulomake: {
     haunNimi: 'Haun nimi',

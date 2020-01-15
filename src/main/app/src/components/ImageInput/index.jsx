@@ -244,6 +244,7 @@ export const ImageInput = props => {
     upload,
     maxSize,
     minDimensions,
+    maxDimensions,
     accept,
     value,
   } = props;
@@ -267,11 +268,19 @@ export const ImageInput = props => {
           return reject({
             message: t('yleiset.kuvanResoluutioLiianPieni'),
           });
+        } else if (
+          maxDimensions &&
+          dimensions.width > maxDimensions.width &&
+          dimensions.height > maxDimensions.height
+        ) {
+          return reject({
+            message: t('yleiset.kuvanResoluutioLiianSuuri'),
+          });
         }
         return resolve();
       });
     },
-    [maxSize, minDimensions, t],
+    [maxSize, minDimensions, maxDimensions, t],
   );
 
   const fileUploadMachine = createFileUploadMachine({ url: value, error, t });
@@ -350,6 +359,11 @@ export const ImageInput = props => {
       {minDimensions && (
         <InfoText>
           {t('yleiset.tiedostonMinimiresoluutio', minDimensions)}
+        </InfoText>
+      )}
+      {maxDimensions && (
+        <InfoText>
+          {t('yleiset.tiedostonMaksimiresoluutio', maxDimensions)}
         </InfoText>
       )}
       <Container

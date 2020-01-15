@@ -19,7 +19,7 @@ const AlkamiskausiFields = ({ name }) => {
       {...getTestIdProps('koulutuksenAlkamiskausi')}
       >
         <Field
-            name={`${name}.kausi`}
+            name={`${name}.koulutuksenAlkamiskausi`}
             component={FormFieldRadioGroup}
             label={t('yleiset.kausi')}
             options={options}

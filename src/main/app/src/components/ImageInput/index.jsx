@@ -159,17 +159,11 @@ const Container = styled.div`
     outline: none;
   }
   ${disabledStyle}
-  ${({ nodrag }) =>
-    nodrag &&
-    css`
-      cursor: not-allowed !important;
-      border-color: ${getThemeProp('palette.danger.main')};
-    `}
-  ${({ error }) =>
-    error &&
+  ${({ nodrag, error }) =>
+    (nodrag || error) &&
     css`
       border-color: ${getThemeProp('palette.danger.main')};
-    `}
+    `};
 `;
 
 const FlexWrapper = ({ children }) => (
@@ -301,13 +295,9 @@ export const ImageInput = props => {
     },
     [send],
   );
-  const onDragEnter = useCallback(async () => send({ type: AT.DRAG_START }), [
-    send,
-  ]);
+  const onDragEnter = useCallback(() => send({ type: AT.DRAG_START }), [send]);
 
-  const onDragLeave = useCallback(async () => send({ type: AT.DRAG_STOP }), [
-    send,
-  ]);
+  const onDragLeave = useCallback(() => send({ type: AT.DRAG_STOP }), [send]);
 
   const onRemove = useCallback(() => {
     send({ type: AT.REMOVE_FILE });
@@ -373,9 +363,7 @@ export const ImageInput = props => {
         error={machineError}
         disabled={disabled}
         style={{ backgroundImage: `url(${url})` }}
-        onDragOver={e => {
-          e.preventDefault();
-        }}
+        {...(state.matches(CS.draggingDisabled) ? { onDragOver: null } : {})}
       >
         <input
           {...getInputProps({

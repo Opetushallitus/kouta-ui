@@ -168,10 +168,13 @@ export default {
     hakukohteet: 'Hakukohteet',
     kuvanTiedostokokoLiianSuuri: 'Kuvan tiedostokoko on liian suuri.',
     kuvanResoluutioLiianPieni: 'Kuvan resoluutio on liian pieni.',
+    kuvanResoluutioLiianSuuri: 'Kuvan resoluutio on liian suuri.',
     tuetutTiedostomuodot: 'Tuetut tiedostomuodot',
     tiedostonMaksimikoko: 'Tiedoston maksimikoko',
     tiedostonMinimiresoluutio:
       'Tiedoston minimiresoluutio: {{width}} x {{height}} pikseliä',
+    tiedostonMaksimiresoluutio:
+      'Tiedoston maksimiresoluutio: {{width}} x {{height}} pikseliä',
     kuvanLahetysVirhe: 'Kuvan lähettäminen epäonnistui.',
   },
   ilmoitukset: {
@@ -542,6 +545,7 @@ export default {
     yhteystiedotInfo: 'Anna oppilaitokselle tarvittavat yhteystiedot',
     oppilaitoksenTila: 'Oppilaitoksen tila',
     oppilaitoksenTeemakuva: 'Oppilaitoksen teemakuva',
+    logo: 'Oppilaitoksen logo',
   },
   oppilaitoksenOsaLomake: {
     oppilaitoksenOsanPerustiedot: 'Oppilaitoksen osan perustiedot',

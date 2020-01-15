@@ -41,19 +41,19 @@ const OppilaitosForm = ({
       </FormCollapse>
 
       <FormCollapse
-        section="teemakuva"
-        header={t('oppilaitoslomake.oppilaitoksenTeemakuva')}
-        {...getTestIdProps('teemakuvaSection')}
-      >
-        <TeemakuvaSection name="teemakuva" />
-      </FormCollapse>
-
-      <FormCollapse
         languages={languageTabs}
         header={t('oppilaitoslomake.oppilaitoksenEsittely')}
         {...getTestIdProps('esittelySection')}
       >
         <EsittelySection name="esittely" />
+      </FormCollapse>
+
+      <FormCollapse
+        section="teemakuva"
+        header={t('oppilaitoslomake.oppilaitoksenTeemakuva')}
+        {...getTestIdProps('teemakuvaSection')}
+      >
+        <TeemakuvaSection name="teemakuva" />
       </FormCollapse>
 
       <FormCollapse

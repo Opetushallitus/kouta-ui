@@ -94,6 +94,7 @@
     "@storybook/addon-knobs": "^5.3.3",
     "@storybook/addon-links": "^5.3.3",
     "@storybook/addons": "^5.3.3",
+    "@storybook/preset-create-react-app": "^1.5.1",
     "@storybook/react": "^5.3.3",
     "babel-loader": "^8.0.4",
     "cypress": "^3.8.2",

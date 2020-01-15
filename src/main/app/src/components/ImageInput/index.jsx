@@ -19,7 +19,8 @@ const CS = {
   empty: 'empty',
   uploading: 'uploading',
   error: 'error',
-  dragging: 'dragging',
+  draggingEnabled: 'dragging.enabled',
+  draggingDisabled: 'dragging.disabled',
 };
 
 const AT = {
@@ -48,12 +49,14 @@ const createFileUploadMachine = ({ url, error, t }) => {
     },
     states: {
       [CS.empty]: {
+        id: 'empty',
         on: {
           [AT.UPLOAD_FILE]: CS.uploading,
-          [AT.DRAG_START]: CS.dragging,
+          [AT.DRAG_START]: CS.draggingEnabled,
         },
       },
       [CS.fileUploaded]: {
+        id: 'fileUploaded',
         on: {
           [AT.REMOVE_FILE]: {
             target: CS.empty,
@@ -61,9 +64,11 @@ const createFileUploadMachine = ({ url, error, t }) => {
               url: () => null,
             }),
           },
+          [AT.DRAG_START]: CS.draggingDisabled,
         },
       },
       [CS.uploading]: {
+        id: 'uploading',
         entry: assign({
           file: (_, e) => e.files[0],
         }),
@@ -98,10 +103,20 @@ const createFileUploadMachine = ({ url, error, t }) => {
           error: () => null,
         }),
       },
-      [CS.dragging]: {
-        on: {
-          [AT.DRAG_STOP]: CS.empty,
-          [AT.UPLOAD_FILE]: CS.uploading,
+      dragging: {
+        states: {
+          enabled: {
+            on: {
+              [AT.DRAG_STOP]: '#empty',
+              [AT.UPLOAD_FILE]: '#uploading',
+            },
+          },
+          disabled: {
+            on: {
+              [AT.DRAG_STOP]: '#fileUploaded',
+              [AT.UPLOAD_FILE]: '#fileUploaded',
+            },
+          },
         },
       },
     },
@@ -144,12 +159,12 @@ const Container = styled.div`
     outline: none;
   }
   ${disabledStyle}
-  ${({ active }) =>
-    active &&
+  ${({ nodrag }) =>
+    nodrag &&
     css`
-      border-color: ${getThemeProp('palette.primary.main')};
+      cursor: not-allowed !important;
+      border-color: ${getThemeProp('palette.danger.main')};
     `}
-  
   ${({ error }) =>
     error &&
     css`
@@ -223,7 +238,6 @@ const InfoText = props => (
 
 export const ImageInput = props => {
   const {
-    multiple = false,
     disabled = false,
     onChange = noop,
     error,
@@ -300,26 +314,25 @@ export const ImageInput = props => {
   useEffect(() => onChange(url), [onChange, url]);
 
   let content;
-  switch (state.value) {
-    case CS.empty:
-    case CS.error:
-      content = (
-        <PlaceholderContent t={t} openDialog={open} error={machineError} />
-      );
-      break;
-    case CS.uploading:
-      content = <Loader message={t('yleiset.latausKaynnissa')} />;
-      break;
-    case CS.dragging:
-      content = (
-        <DragActiveContent message={t('yleiset.pudotaTiedostoLadataksesi')} />
-      );
-      break;
-    case CS.fileUploaded:
-      content = <ValueContent file={file} onRemove={onRemove} t={t} />;
-      break;
-    default:
-      console.error(`ImageInput: Unknown control state "${state.value}"`);
+  if (state.matches(CS.empty) || state.matches(CS.error)) {
+    content = (
+      <PlaceholderContent t={t} openDialog={open} error={machineError} />
+    );
+  } else if (state.matches(CS.uploading)) {
+    content = <Loader message={t('yleiset.latausKaynnissa')} />;
+  } else if (state.matches(CS.draggingEnabled)) {
+    content = (
+      <DragActiveContent message={t('yleiset.pudotaTiedostoLadataksesi')} />
+    );
+  } else if (
+    state.matches(CS.fileUploaded) ||
+    state.matches(CS.draggingDisabled)
+  ) {
+    content = <ValueContent file={file} onRemove={onRemove} t={t} />;
+  } else {
+    console.error(
+      `ImageInput: Unknown control state "${JSON.stringify(state.value)}"`,
+    );
   }
 
   return (
@@ -341,16 +354,20 @@ export const ImageInput = props => {
       )}
       <Container
         {...getRootProps()}
-        active={state.value === CS.dragging}
+        active={state.matches(CS.draggingEnabled)}
+        nodrag={state.matches(CS.draggingDisabled)}
         error={machineError}
         disabled={disabled}
         style={{ backgroundImage: `url(${url})` }}
+        onDragOver={e => {
+          e.preventDefault();
+        }}
       >
         <input
           {...getInputProps({
             accept,
-            multiple,
-            disabled: disabled,
+            multiple: false,
+            disabled,
           })}
         />
         {content}

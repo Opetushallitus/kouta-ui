@@ -12,7 +12,7 @@ const TietoaOpiskelustaSection = ({ name, language }) => {
   const { t } = useTranslation();
 
   const { options } = useKoodistoOptions({
-    koodisto: 'koulutuksenlisatiedot',
+    koodisto: 'organisaationkuvaustiedot',
   });
 
   const osiot = useFieldValue(`${name}.osiot`);

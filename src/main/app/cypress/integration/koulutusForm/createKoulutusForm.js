@@ -114,7 +114,7 @@ describe('createKoulutusForm', () => {
       cy.getByTestId('koulutustyyppiSelect').click();
 
       cy.getByTestId('koulutustyyppiSelect').within(() => {
-        fillAsyncSelect('koulutus', 'koulutus_0');
+        fillAsyncSelect('0', 'koulutus_0');
       });
 
       cy.getByTestId('jatkaButton').click({ force: true });
@@ -154,7 +154,7 @@ describe('createKoulutusForm', () => {
       cy.getByTestId('koulutuskoodiSelect').click();
 
       cy.getByTestId('koulutuskoodiSelect').within(() => {
-        fillAsyncSelect('koulutus', 'koulutus_0');
+        fillAsyncSelect('0', 'koulutus_0');
       });
 
       cy.getByTestId('nimiInput').within(() => {
@@ -222,7 +222,7 @@ describe('createKoulutusForm', () => {
       cy.getByTestId('koulutustyyppiSelect').click();
 
       cy.getByTestId('koulutustyyppiSelect').within(() => {
-        fillAsyncSelect('koulutus', 'koulutus_0');
+        fillAsyncSelect('0', 'koulutus_0');
       });
 
       cy.getByTestId('jatkaButton').click({ force: true });

@@ -5,6 +5,7 @@ jdk:
 services:
   - docker
 addons:
+  chrome: stable
   apt:
     packages:
     - libgconf-2-4

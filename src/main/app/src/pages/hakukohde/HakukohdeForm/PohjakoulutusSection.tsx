@@ -9,7 +9,7 @@ import { Box } from '#/src/components/virkailija';
 
 const PohjakoulutusSection = ({ name, language }) => {
   const { options } = useKoodistoOptions({
-    koodisto: 'pohjakoulutusvaatimustoinenaste',
+    koodisto: 'pohjakoulutuskouta',
   });
 
   const { t } = useTranslation();

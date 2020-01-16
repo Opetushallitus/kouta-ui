@@ -17,6 +17,9 @@ osoittamaan oikeaan ympäristöön. Lisäksi CORSin pystyy kiertämään käynni
 
 `open -a Google\ Chrome --args --disable-web-security --user-data-dir=/tmp/moi`
 
+Kannattaa halutessaan laittaa user-data-dir osoittamaan sopivampaan paikkaan. Jos se on /tmp-hakemistossa, 
+esim. selaimen laajennokset häviävät.
+
 ## Käyttöliittymän kehittäminen
 
 Kehityksen aikana käyttöliittymää kannattaa ajaa pelkästään nodella, jolloin muutokset näkyvät suoraan selaimessa.

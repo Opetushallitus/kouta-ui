@@ -57,7 +57,7 @@ const CreateKoulutusForm = props => {
       form="createKoulutusForm"
       initialValues={initialValues}
       enableReinitialize>
-      {() => <KoulutusFormWrapper steps createNewKoulutus={true} {...props} />}
+      {() => <KoulutusFormWrapper steps isNewKoulutus={true} {...props} />}
     </ReduxForm>
   );
 };

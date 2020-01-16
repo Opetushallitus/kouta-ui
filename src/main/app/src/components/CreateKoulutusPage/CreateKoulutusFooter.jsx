@@ -9,7 +9,6 @@ import useSaveForm from '../useSaveForm';
 import createKoulutus from '../../utils/kouta/createKoulutus';
 import validateKoulutusForm from '../../utils/validateKoulutusForm';
 import getKoulutusByFormValues from '../../utils/getKoulutusByFormValues';
-import isOphOrganisaatio from "../../utils/isOphOrganisaatio";
 
 const CreateKoulutusFooter = ({ organisaatioOid, history }) => {
   const { t } = useTranslation();
@@ -27,13 +26,10 @@ const CreateKoulutusFooter = ({ organisaatioOid, history }) => {
     [organisaatioOid, history],
   );
 
-  const minTarjoajat = isOphOrganisaatio(organisaatioOid) ? 0 : 1;
-
   const { save } = useSaveForm({
     form: 'createKoulutusForm',
     submit,
-    validate: values => validateKoulutusForm({...values, minTarjoajat}),
-
+    validate: values => validateKoulutusForm({...values, organisaatioOid}),
   });
 
   return (

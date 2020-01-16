@@ -38,7 +38,7 @@ const EditKoulutusForm = ({ onSave, koulutus, history, organisaatioOid, ...props
       {() => (
         <KoulutusFormWrapper
           steps={false}
-          createNewKoulutus={false}
+          isNewKoulutus={false}
           johtaaTutkintoon={Boolean(koulutus.johtaaTutkintoon)}
           onAttachToteutus={onAttachToteutus}
           koulutus={koulutus}

@@ -47,7 +47,7 @@ const PohjaFormCollapse = ({
 const KoulutusForm = ({
   organisaatioOid,
   steps = false,
-  createNewKoulutus = false,
+  isNewKoulutus = false,
   koulutus: koulutusProp = null,
   johtaaTutkintoon = true,
   onAttachToteutus,
@@ -59,12 +59,12 @@ const KoulutusForm = ({
   const kieliversiotValue = useFieldValue('kieliversiot');
   const koulutuskoodi = useFieldValue('information.koulutus');
   const languageTabs = kieliversiotValue || [];
-  const disableTarjoajaSection = isOphOrganisaatio(organisaatioOid) && createNewKoulutus;
-  const disableTarjoajaHierarkia = isOphOrganisaatio(organisaatioOid) && !createNewKoulutus;
+  const isNewOphKoulutus = isOphOrganisaatio(organisaatioOid) && isNewKoulutus;
+  const isExistingOphKoulutus = isOphOrganisaatio(organisaatioOid) && !isNewKoulutus;
 
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps} configured>
-      {createNewKoulutus ? (
+      {isNewKoulutus ? (
         <FormCollapse
           section="koulutustyyppi"
           header={t('yleiset.koulutustyyppi')}
@@ -135,7 +135,7 @@ const KoulutusForm = ({
         <LisatiedotSection name="lisatiedot" />
       </FormCollapse>
 
-      {!disableTarjoajaSection ? (
+      {!isNewOphKoulutus ? (
         <FormCollapse
           section="jarjestyspaikka"
           header={t('koulutuslomake.koulutuksenJarjestaja')}
@@ -145,7 +145,7 @@ const KoulutusForm = ({
             organisaatioOid={organisaatioOid}
             koulutus={koulutusProp}
             name="tarjoajat"
-            disableTarjoajaHierarkia={disableTarjoajaHierarkia}
+            disableTarjoajaHierarkia={isExistingOphKoulutus}
           />
         </FormCollapse>) : null}
 
@@ -164,7 +164,7 @@ const KoulutusForm = ({
       >
         <JulkaisutilaSection
           name="tila"
-          showArkistoitu={!createNewKoulutus}
+          showArkistoitu={!isNewKoulutus}
         />
       </FormCollapse>
 

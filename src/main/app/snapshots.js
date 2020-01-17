@@ -186,7 +186,7 @@ module.exports = {
             ],
           },
         ],
-        pohjakoulutusvaatimusKoodiUrit: ['pohjakoulutusvaatimustoinenaste_0#1'],
+        pohjakoulutusvaatimusKoodiUrit: ['pohjakoulutuskouta_0#1'],
         pohjakoulutusvaatimusTarkenne: {
           fi: '<p>Tarkenne</p>',
         },
@@ -273,7 +273,7 @@ module.exports = {
             ],
           },
         ],
-        pohjakoulutusvaatimusKoodiUrit: ['pohjakoulutusvaatimustoinenaste_0#1'],
+        pohjakoulutusvaatimusKoodiUrit: ['pohjakoulutuskouta_0#1'],
         pohjakoulutusvaatimusTarkenne: {
           fi: '<p>Tarkenne</p>',
         },
@@ -310,7 +310,7 @@ module.exports = {
         minEnsikertalaisenAloituspaikat: 39,
         maxEnsikertalaisenAloituspaikat: 49,
         kaytetaanHaunAlkamiskautta: false,
-        pohjakoulutusvaatimusKoodiUrit: ['pohjakoulutusvaatimustoinenaste_0#1'],
+        pohjakoulutusvaatimusKoodiUrit: ['pohjakoulutuskouta_0#1'],
         pohjakoulutusvaatimusTarkenne: {
           fi: '<p>Fi tarkenne</p>',
         },

@@ -32,7 +32,7 @@ export const stubHakukohdeFormRoutes = ({ cy, organisaatioOid, hakuOid }) => {
     ],
   });
 
-  stubKoodistoRoute({ koodisto: 'pohjakoulutusvaatimustoinenaste', cy });
+  stubKoodistoRoute({ koodisto: 'pohjakoulutuskouta', cy });
   stubKoodistoRoute({ koodisto: 'kausi', cy });
   stubKoodistoRoute({ koodisto: 'valintakokeentyyppi', cy });
   stubKoodistoRoute({ koodisto: 'liitetyypitamm', cy });

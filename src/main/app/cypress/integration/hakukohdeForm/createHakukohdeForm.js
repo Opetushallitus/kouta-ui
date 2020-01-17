@@ -38,7 +38,7 @@ const fillKieliversiotSection = () => {
 const fillPohjakoulutusvaatimusSection = () => {
   cy.getByTestId('pohjakoulutusvaatimusSection').within(() => {
     cy.getByTestId('pohjakoulutusvaatimusSelect').within(() => {
-      selectOption('pohjakoulutusvaatimustoinenaste_0', cy);
+      selectOption('pohjakoulutuskouta_0', cy);
     });
 
     typeToEditor('Tarkenne', cy);

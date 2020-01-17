@@ -63,7 +63,7 @@ const fillEsittelySection = () => {
 
 const fillTietoaOpiskelustaSection = () => {
   cy.getByTestId('tietoaOpiskelustaSection').within(() => {
-    selectOption('koulutuksenlisatiedot_0', cy);
+    selectOption('organisaationkuvaustiedot_0', cy);
 
     cy.get('textarea').type('Tietoa', { force: true });
 

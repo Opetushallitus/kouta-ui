@@ -2,17 +2,14 @@ import { merge } from 'lodash';
 import { playMockFile } from 'kto-ui-common/cypress/mockUtils';
 
 import {
-  stubKoodistoRoute,
   stubHakemuspalveluLomakkeetRoute,
   stubOppijanumerorekisteriHenkiloRoute,
-  stubKoodiRoute,
   stubCommonRoutes,
   jatka,
 } from '#/cypress/utils';
 
 import haku from '#/cypress/data/haku';
 import hakukohde from '#/cypress/data/hakukohde';
-import createKoodi from '#/cypress/data/koodi';
 import koulutus from '#/cypress/data/koulutus';
 import toteutus from '#/cypress/data/toteutus';
 import valintaperuste from '#/cypress/data/valintaperuste';
@@ -161,17 +158,6 @@ export const prepareTest = ({
 
 export const stubHakukohdeFormRoutes = ({ organisaatioOid, hakuOid }) => {
   stubCommonRoutes();
-
-  stubKoodistoRoute({ koodisto: 'pohjakoulutusvaatimustoinenaste' });
-  stubKoodistoRoute({ koodisto: 'kausi' });
-  stubKoodistoRoute({ koodisto: 'valintakokeentyyppi' });
-  stubKoodistoRoute({ koodisto: 'liitetyypitamm' });
-  stubKoodistoRoute({ koodisto: 'kausi' });
-  stubKoodiRoute(createKoodi({ koodisto: 'posti', versio: 2 }));
-  stubKoodiRoute(createKoodi({ koodisto: 'posti', versio: 2 }));
-  stubKoodiRoute(
-    createKoodi({ koodisto: 'posti', koodiArvo: '00350', versio: 1 })
-  );
 
   cy.route({
     method: 'GET',

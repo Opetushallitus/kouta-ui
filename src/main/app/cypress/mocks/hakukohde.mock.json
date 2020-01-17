@@ -245,167 +245,89 @@
     }
   },
   {
-    "url": "https://localhost:3000/koodisto-service/rest/json/pohjakoulutusvaatimustoinenaste/koodi?onlyValidKoodis=true&koodistoVersio=",
+    "url": "https://localhost:3000/koodisto-service/rest/json/pohjakoulutuskouta/koodi?onlyValidKoodis=true&koodistoVersio=",
     "response": {
       "body": [
         {
-          "koodiUri": "pohjakoulutusvaatimustoinenaste_yo",
-          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutusvaatimustoinenaste_yo",
-          "version": 565,
+          "koodiUri": "pohjakoulutuskouta_2",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutuskouta_2",
+          "version": 0,
           "versio": 1,
           "koodisto": {
-            "koodistoUri": "pohjakoulutusvaatimustoinenaste",
+            "koodistoUri": "pohjakoulutuskouta",
             "organisaatioOid": "1.2.246.562.10.00000000001",
             "koodistoVersios": [
               1
             ]
           },
-          "koodiArvo": "YO",
-          "paivitysPvm": "2018-01-23",
-          "paivittajaOid": null,
-          "voimassaAlkuPvm": "1992-01-01",
+          "koodiArvo": "2",
+          "paivitysPvm": "2020-01-09",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2007-01-01",
           "voimassaLoppuPvm": null,
           "tila": "LUONNOS",
           "metadata": [
             {
-              "nimi": "Gymnasium och/eller studentexamen",
-              "kuvaus": "Gymnasium och/eller studentexamen",
-              "lyhytNimi": "ST",
-              "kayttoohje": "",
-              "kasite": "",
-              "sisaltaaMerkityksen": "",
-              "eiSisallaMerkitysta": "",
-              "huomioitavaKoodi": "",
-              "sisaltaaKoodiston": "",
+              "nimi": "Delvis individualiserad lärokurs inom den grundläggande utbildningen",
+              "kuvaus": "Delvis individualiserad lärokurs inom den grundläggande utbildningen",
+              "lyhytNimi": "Delvis individualiserad lärokurs inom den grundläggande utbildningen",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
               "kieli": "SV"
             },
             {
-              "nimi": "Lukio ja/tai ylioppilastutkinto",
-              "kuvaus": "Lukio ja/tai ylioppilastutkinto",
-              "lyhytNimi": "YO",
-              "kayttoohje": "",
-              "kasite": "",
-              "sisaltaaMerkityksen": "",
-              "eiSisallaMerkitysta": "",
-              "huomioitavaKoodi": "",
-              "sisaltaaKoodiston": "",
+              "nimi": "Perusopetuksen osittain yksilöllistetty oppimäärä",
+              "kuvaus": "Perusopetuksen osittain yksilöllistetty oppimäärä",
+              "lyhytNimi": "Perusopetuksen osittain yksilöllistetty oppimäärä",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
               "kieli": "FI"
             }
           ]
         },
         {
-          "koodiUri": "pohjakoulutusvaatimustoinenaste_pkyo",
-          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutusvaatimustoinenaste_pkyo",
-          "version": 7,
+          "koodiUri": "pohjakoulutuskouta_102",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutuskouta_102",
+          "version": 0,
           "versio": 1,
           "koodisto": {
-            "koodistoUri": "pohjakoulutusvaatimustoinenaste",
+            "koodistoUri": "pohjakoulutuskouta",
             "organisaatioOid": "1.2.246.562.10.00000000001",
             "koodistoVersios": [
               1
             ]
           },
-          "koodiArvo": "PK/YO",
-          "paivitysPvm": "2015-04-29",
-          "paivittajaOid": null,
-          "voimassaAlkuPvm": "2015-01-27",
+          "koodiArvo": "102",
+          "paivitysPvm": "2020-01-09",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2013-04-05",
           "voimassaLoppuPvm": null,
           "tila": "LUONNOS",
           "metadata": [
             {
-              "nimi": "Peruskoulu / Lukio",
-              "kuvaus": "Peruskoulu / Lukio",
-              "lyhytNimi": "PK/YO",
-              "kayttoohje": "",
-              "kasite": "",
-              "sisaltaaMerkityksen": "",
-              "eiSisallaMerkitysta": "",
-              "huomioitavaKoodi": "",
-              "sisaltaaKoodiston": "",
-              "kieli": "FI"
+              "nimi": "University Bachelor's degree",
+              "kuvaus": "University Bachelor's degree\n",
+              "lyhytNimi": "University Bachelor's degree",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
             },
             {
-              "nimi": "Grundskola / Student",
-              "kuvaus": "Grundskola / Student",
-              "lyhytNimi": "GR/ST",
-              "kayttoohje": "",
-              "kasite": "",
-              "sisaltaaMerkityksen": "",
-              "eiSisallaMerkitysta": "",
-              "huomioitavaKoodi": "",
-              "sisaltaaKoodiston": "",
-              "kieli": "SV"
-            }
-          ]
-        },
-        {
-          "koodiUri": "pohjakoulutusvaatimustoinenaste_er",
-          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutusvaatimustoinenaste_er",
-          "version": 144,
-          "versio": 1,
-          "koodisto": {
-            "koodistoUri": "pohjakoulutusvaatimustoinenaste",
-            "organisaatioOid": "1.2.246.562.10.00000000001",
-            "koodistoVersios": [
-              1
-            ]
-          },
-          "koodiArvo": "ER",
-          "paivitysPvm": "2019-02-21",
-          "paivittajaOid": null,
-          "voimassaAlkuPvm": "1992-01-01",
-          "voimassaLoppuPvm": null,
-          "tila": "LUONNOS",
-          "metadata": [
-            {
-              "nimi": "Grundskola / Individualiserad lärokurs inom den grundläggande utbildningen",
-              "kuvaus": "Individualiserad lärokurs inom den grundläggande utbildningen",
-              "lyhytNimi": "SP",
-              "kayttoohje": "",
-              "kasite": "",
-              "sisaltaaMerkityksen": "",
-              "eiSisallaMerkitysta": "",
-              "huomioitavaKoodi": "",
-              "sisaltaaKoodiston": "",
-              "kieli": "SV"
-            },
-            {
-              "nimi": "Peruskoulu / Yksilöllistetty perusopetus",
-              "kuvaus": "Yksilöllistetty perusopetus",
-              "lyhytNimi": "ER",
-              "kayttoohje": "",
-              "kasite": "",
-              "sisaltaaMerkityksen": "",
-              "eiSisallaMerkitysta": "",
-              "huomioitavaKoodi": "",
-              "sisaltaaKoodiston": "",
-              "kieli": "FI"
-            }
-          ]
-        },
-        {
-          "koodiUri": "pohjakoulutusvaatimustoinenaste_pk",
-          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutusvaatimustoinenaste_pk",
-          "version": 907,
-          "versio": 1,
-          "koodisto": {
-            "koodistoUri": "pohjakoulutusvaatimustoinenaste",
-            "organisaatioOid": "1.2.246.562.10.00000000001",
-            "koodistoVersios": [
-              1
-            ]
-          },
-          "koodiArvo": "PK",
-          "paivitysPvm": "2018-01-23",
-          "paivittajaOid": null,
-          "voimassaAlkuPvm": "1992-01-01",
-          "voimassaLoppuPvm": null,
-          "tila": "LUONNOS",
-          "metadata": [
-            {
-              "nimi": "Peruskoulu",
-              "kuvaus": "Peruskoulu",
-              "lyhytNimi": "PK",
+              "nimi": "Alempi korkeakoulututkinto",
+              "kuvaus": "Alempi korkeakoulututkinto",
+              "lyhytNimi": "Alempi korkeakoulututkinto",
               "kayttoohje": null,
               "kasite": null,
               "sisaltaaMerkityksen": null,
@@ -415,9 +337,9 @@
               "kieli": "FI"
             },
             {
-              "nimi": "Grundskola",
-              "kuvaus": "Grundskola",
-              "lyhytNimi": "GR",
+              "nimi": "Lägre högskoleexamen",
+              "kuvaus": "Lägre högskoleexamen",
+              "lyhytNimi": "Lägre högskoleexamen",
               "kayttoohje": null,
               "kasite": null,
               "sisaltaaMerkityksen": null,
@@ -429,67 +351,1309 @@
           ]
         },
         {
-          "koodiUri": "pohjakoulutusvaatimustoinenaste_xx",
-          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutusvaatimustoinenaste_xx",
-          "version": 1,
+          "koodiUri": "pohjakoulutuskouta_120",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutuskouta_120",
+          "version": 0,
           "versio": 1,
           "koodisto": {
-            "koodistoUri": "pohjakoulutusvaatimustoinenaste",
+            "koodistoUri": "pohjakoulutuskouta",
             "organisaatioOid": "1.2.246.562.10.00000000001",
             "koodistoVersios": [
               1
             ]
           },
-          "koodiArvo": "xx",
-          "paivitysPvm": "2015-01-27",
-          "paivittajaOid": null,
-          "voimassaAlkuPvm": "2014-06-01",
+          "koodiArvo": "120",
+          "paivitysPvm": "2020-01-09",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2013-04-05",
           "voimassaLoppuPvm": null,
           "tila": "LUONNOS",
           "metadata": [
             {
-              "nimi": "Ei pohjakoulutusvaatimusta",
-              "kuvaus": "Ei pohjakoulutusvaatimusta",
-              "lyhytNimi": "Ei pk-vaatimusta",
-              "kayttoohje": "",
-              "kasite": "",
-              "sisaltaaMerkityksen": "",
-              "eiSisallaMerkitysta": "",
-              "huomioitavaKoodi": "",
-              "sisaltaaKoodiston": "",
+              "nimi": "Licentiatexamen",
+              "kuvaus": "Licentiatexamen",
+              "lyhytNimi": "Licentiatexamen",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Licentiate degree",
+              "kuvaus": "Licentiate degree\n",
+              "lyhytNimi": "Licentiate degree",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            },
+            {
+              "nimi": "Lisensiaatin tutkinto",
+              "kuvaus": "Lisensiaatin tutkinto",
+              "lyhytNimi": "Lisensiaatin tutkinto",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
               "kieli": "FI"
             }
           ]
         },
         {
-          "koodiUri": "pohjakoulutusvaatimustoinenaste_yoam",
-          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutusvaatimustoinenaste_yoam",
-          "version": 6,
+          "koodiUri": "pohjakoulutuskouta_0",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutuskouta_0",
+          "version": 0,
           "versio": 1,
           "koodisto": {
-            "koodistoUri": "pohjakoulutusvaatimustoinenaste",
+            "koodistoUri": "pohjakoulutuskouta",
             "organisaatioOid": "1.2.246.562.10.00000000001",
             "koodistoVersios": [
               1
             ]
           },
-          "koodiArvo": "YO/AM",
-          "paivitysPvm": "2018-01-23",
-          "paivittajaOid": null,
-          "voimassaAlkuPvm": "2017-02-06",
+          "koodiArvo": "0",
+          "paivitysPvm": "2020-01-09",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2007-01-01",
           "voimassaLoppuPvm": null,
           "tila": "LUONNOS",
           "metadata": [
             {
-              "nimi": "Lukio/ylioppilas / ammatillinen",
-              "kuvaus": "",
-              "lyhytNimi": "",
-              "kayttoohje": "",
-              "kasite": "",
-              "sisaltaaMerkityksen": "",
-              "eiSisallaMerkitysta": "",
-              "huomioitavaKoodi": "",
-              "sisaltaaKoodiston": "",
+              "nimi": "Utbildning utomlands",
+              "kuvaus": "Utbildning utomlands",
+              "lyhytNimi": "Utbildning utomlands",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Ulkomailla suoritettu koulutus",
+              "kuvaus": "Ulkomailla suoritettu koulutus",
+              "lyhytNimi": "Ulkomailla suoritettu koulutus",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "pohjakoulutuskouta_114",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutuskouta_114",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutuskouta",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "114",
+          "paivitysPvm": "2020-01-09",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2013-04-05",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Utländsk examen av andra graden",
+              "kuvaus": "Utländsk examen av andra graden",
+              "lyhytNimi": "Utländsk examen av andra graden",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Ulkomainen toisen asteen tutkinto",
+              "kuvaus": "Ulkomainen toisen asteen tutkinto",
+              "lyhytNimi": "Ulkomainen toisen asteen tutkinto",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            },
+            {
+              "nimi": "Foreign upper secondary qualification",
+              "kuvaus": "Foreign upper secondary qualification\n",
+              "lyhytNimi": "Foreign upper secondary qualification",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            }
+          ]
+        },
+        {
+          "koodiUri": "pohjakoulutuskouta_122",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutuskouta_122",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutuskouta",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "122",
+          "paivitysPvm": "2020-01-09",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2013-11-26",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Finsk gymnasiets lärokurs eller studentexamen",
+              "kuvaus": "Finsk gymnasiets lärokurs eller studentexamen",
+              "lyhytNimi": "Finsk gymnasiets lärokurs eller studentexamen",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Finnish general upper secondary school syllabus or matriculation examination",
+              "kuvaus": "Finnish general upper secondary school syllabus or matriculation examination",
+              "lyhytNimi": "Finnish general upper secondary school syllabus or matriculation examination",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            },
+            {
+              "nimi": "Suomalaisen lukion oppimäärä tai ylioppilastutkinto",
+              "kuvaus": "Suomalaisen lukion oppimäärä tai ylioppilastutkinto. Ammattikorkeakoulujen pohjakoulutusvaatimus.",
+              "lyhytNimi": "Suomalaisen lukion oppimäärä tai ylioppilastutkinto",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "pohjakoulutuskouta_115",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutuskouta_115",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutuskouta",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "115",
+          "paivitysPvm": "2020-01-09",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2013-04-05",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Studier vid öppna yrkeshögskolan",
+              "kuvaus": "Studier vid öppna yrkeshögskolan",
+              "lyhytNimi": "Studier vid öppna yrkeshögskolan",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Studies at the Open UAS",
+              "kuvaus": "Studies at the Open UAS",
+              "lyhytNimi": "Studies at the Open UAS",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            },
+            {
+              "nimi": "Avoimen ammattikorkeakoulun opinnot",
+              "kuvaus": "Avoimen ammattikorkeakoulun opinnot",
+              "lyhytNimi": "Avoimen ammattikorkeakoulun opinnot",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "pohjakoulutuskouta_117",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutuskouta_117",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutuskouta",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "117",
+          "paivitysPvm": "2020-01-09",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2013-04-05",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Utländsk högskoleexamen (Master)",
+              "kuvaus": "Utländsk högskoleexamen (Master)",
+              "lyhytNimi": "Utländsk högskoleexamen (Master)",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Ulkomainen korkeakoulututkinto (Master)",
+              "kuvaus": "Ulkomainen korkeakoulututkinto (Master)",
+              "lyhytNimi": "Ulkomainen korkeakoulututkinto (Master)",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            },
+            {
+              "nimi": "Foreign Master's degree",
+              "kuvaus": "Foreign Master's degree\n",
+              "lyhytNimi": "Foreign Master's degree",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            }
+          ]
+        },
+        {
+          "koodiUri": "pohjakoulutuskouta_121",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutuskouta_121",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutuskouta",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "121",
+          "paivitysPvm": "2020-01-09",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2013-04-05",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Doktorsexamen",
+              "kuvaus": "Doktorsexamen",
+              "lyhytNimi": "Doktorsexamen",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Tohtorin tutkinto",
+              "kuvaus": "Tohtorin tutkinto",
+              "lyhytNimi": "Tohtorin tutkinto",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            },
+            {
+              "nimi": "Doctoral degree",
+              "kuvaus": "Doctoral degree\n",
+              "lyhytNimi": "Doctoral degree",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            }
+          ]
+        },
+        {
+          "koodiUri": "pohjakoulutuskouta_1",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutuskouta_1",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutuskouta",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "1",
+          "paivitysPvm": "2020-01-09",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2007-01-01",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Den grundläggande utbildningens lärokurs",
+              "kuvaus": "Den grundläggande utbildningens lärokurs",
+              "lyhytNimi": "Den grundläggande utbildningens lärokurs",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Perusopetuksen oppimäärä",
+              "kuvaus": "Perusopetuksen oppimäärä",
+              "lyhytNimi": "Perusopetuksen oppimäärä",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "pohjakoulutuskouta_110",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutuskouta_110",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutuskouta",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "110",
+          "paivitysPvm": "2020-01-09",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2013-04-05",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "European Baccalaureate -examen",
+              "kuvaus": "European Baccalaureate -examen",
+              "lyhytNimi": "European Baccalaureate -examen",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "European Baccalaureate -examination",
+              "kuvaus": "European Baccalaureate -examination\n",
+              "lyhytNimi": "European Baccalaureate -examination",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            },
+            {
+              "nimi": "European baccalaureate -tutkinto",
+              "kuvaus": "European baccalaureate -tutkinto",
+              "lyhytNimi": "European baccalaureate -tutkinto",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "pohjakoulutuskouta_118",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutuskouta_118",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutuskouta",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "118",
+          "paivitysPvm": "2020-01-09",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2013-04-05",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Studies at the Open University",
+              "kuvaus": "Studies at the Open University\n",
+              "lyhytNimi": "Studies at the Open University",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            },
+            {
+              "nimi": "Studier vid öppna universitetet",
+              "kuvaus": "Studier vid öppna universitetet",
+              "lyhytNimi": "Studier vid öppna universitetet",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Avoimen yliopiston opinnot",
+              "kuvaus": "Avoimen yliopiston opinnot",
+              "lyhytNimi": "Avoimen yliopiston opinnot",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "pohjakoulutuskouta_109",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutuskouta_109",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutuskouta",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "109",
+          "paivitysPvm": "2020-01-09",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2013-04-05",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Finsk studentexamen",
+              "kuvaus": "Finsk studentexamen",
+              "lyhytNimi": "Finsk studentexamen",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Finnish Matriculation examination",
+              "kuvaus": "Finnish Matriculation examination",
+              "lyhytNimi": "Finnish Matriculation examination",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            },
+            {
+              "nimi": "Suomalainen ylioppilastutkinto",
+              "kuvaus": "Suomalainen ylioppilastutkinto. Yliopistojen pohjakoulutusvaatimus.",
+              "lyhytNimi": "Suomalainen ylioppilastutkinto",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "pohjakoulutuskouta_101",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutuskouta_101",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutuskouta",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "101",
+          "paivitysPvm": "2020-01-09",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2013-04-05",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Ammattikorkeakoulututkinto",
+              "kuvaus": "Ammattikorkeakoulututkinto",
+              "lyhytNimi": "Ammattikorkeakoulututkinto",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            },
+            {
+              "nimi": "Yrkeshögskoleexamen",
+              "kuvaus": "Yrkeshögskoleexamen",
+              "lyhytNimi": "Yrkeshögskoleexamen",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "UAS Bachelor's degree",
+              "kuvaus": "UAS Bachelor's degree",
+              "lyhytNimi": "UAS Bachelor's degree",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            }
+          ]
+        },
+        {
+          "koodiUri": "pohjakoulutuskouta_112",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutuskouta_112",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutuskouta",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "112",
+          "paivitysPvm": "2020-01-09",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2013-04-05",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "International Baccalaureate -examen",
+              "kuvaus": "International Baccalaureate -examen",
+              "lyhytNimi": "International Baccalaureate -examen",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "International Baccalaureate -examination",
+              "kuvaus": "International Baccalaureate -examination\n",
+              "lyhytNimi": "International Baccalaureate -examination",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            },
+            {
+              "nimi": "International Baccalaureate -tutkinto",
+              "kuvaus": "International Baccalaureate -tutkinto",
+              "lyhytNimi": "International Baccalaureate -tutkinto",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "pohjakoulutuskouta_3",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutuskouta_3",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutuskouta",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "3",
+          "paivitysPvm": "2020-01-09",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2007-01-01",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Perusopetuksen yksilöllistetty oppimäärä, opetus järjestetty toiminta-alueittain",
+              "kuvaus": "Perusopetuksen yksilöllistetty oppimäärä, opetus järjestetty toiminta-alueittain",
+              "lyhytNimi": "Perusopetuksen yksilöllistetty oppimäärä, opetus järjestetty toiminta-alueittain",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            },
+            {
+              "nimi": "Individualiserad lärokurs inom den grundläggande utbildningen, som utgår från verksamhetsområden",
+              "kuvaus": "Individualiserad lärokurs inom den grundläggande utbildningen, som utgår från verksamhetsområden",
+              "lyhytNimi": "Individualiserad lärokurs inom den grundläggande utbildningen, som utgår från verksamhetsområden",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            }
+          ]
+        },
+        {
+          "koodiUri": "pohjakoulutuskouta_105",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutuskouta_105",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutuskouta",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "105",
+          "paivitysPvm": "2020-01-09",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2013-04-05",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Further or specialist vocational qualification ",
+              "kuvaus": "Further or specialist vocational qualification \n",
+              "lyhytNimi": "Further or specialist vocational qualification ",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            },
+            {
+              "nimi": "Yrkes- eller specialyrkesexamen",
+              "kuvaus": "Yrkes- eller specialyrkesexamen",
+              "lyhytNimi": "Yrkes- eller specialyrkesexamen",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Ammatti- tai erikoisammattitutkinto",
+              "kuvaus": "Ammatti- tai erikoisammattitutkinto",
+              "lyhytNimi": "Ammatti- tai erikoisammattitutkinto",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "pohjakoulutuskouta_119",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutuskouta_119",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutuskouta",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "119",
+          "paivitysPvm": "2020-01-09",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2013-04-05",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Högre yrkeshögskoleexamen",
+              "kuvaus": "Högre yrkeshögskoleexamen",
+              "lyhytNimi": "Högre yrkeshögskoleexamen",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Ylempi ammattikorkeakoulututkinto",
+              "kuvaus": "Ylempi ammattikorkeaoulututkinto",
+              "lyhytNimi": "Ylempi ammattikorkeaoulututkinto",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            },
+            {
+              "nimi": "UAS Master's degree",
+              "kuvaus": "UAS Master's degree",
+              "lyhytNimi": "UAS Master's degree",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            }
+          ]
+        },
+        {
+          "koodiUri": "pohjakoulutuskouta_111",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutuskouta_111",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutuskouta",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "111",
+          "paivitysPvm": "2020-01-09",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2013-04-05",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Reifeprüfung-tutkinto",
+              "kuvaus": "Reifeprüfung-tutkinto",
+              "lyhytNimi": "Reifeprüfung-tutkinto",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            },
+            {
+              "nimi": "Reifeprüfung -examination",
+              "kuvaus": "Reifeprüfung -examination\n",
+              "lyhytNimi": "Reifeprüfung -examination",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            },
+            {
+              "nimi": "Reifeprüfung -examen",
+              "kuvaus": "Reifeprüfung -examen",
+              "lyhytNimi": "Reifeprüfung -examen",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            }
+          ]
+        },
+        {
+          "koodiUri": "pohjakoulutuskouta_107",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutuskouta_107",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutuskouta",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "107",
+          "paivitysPvm": "2020-01-09",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2013-04-05",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Studentexamen och yrkesinriktad grundexamen (120 sv)",
+              "kuvaus": "Studentexamen och yrkesinriktad grundexamen (120 sv)",
+              "lyhytNimi": "Studentexamen och yrkesinriktad grundexamen (120 sv)",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Matriculation examination and vocational upper secondary qualification (120 cu)",
+              "kuvaus": "Matriculation examination and vocational upper secondary qualification (120 cu)\n",
+              "lyhytNimi": "Matriculation examination and vocational upper secondary qualification (120 cu)",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            },
+            {
+              "nimi": "Ylioppilastutkinto ja ammatillinen perustutkinto (120 ov)",
+              "kuvaus": "Ylioppilastutkinto ja ammatillinen perustutkinto (120 ov)",
+              "lyhytNimi": "Ylioppilastutkinto ja ammatillinen perustutkinto (120 ov)",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "pohjakoulutuskouta_116",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutuskouta_116",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutuskouta",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "116",
+          "paivitysPvm": "2020-01-09",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2013-04-05",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Ulkomainen korkeakoulututkinto (Bachelor)",
+              "kuvaus": "Ulkomainen korkeakoulututkinto (Bachelor)",
+              "lyhytNimi": "Ulkomainen korkeakoulututkinto (Bachelor)",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            },
+            {
+              "nimi": "Foreign Bachelor's degree",
+              "kuvaus": "Foreign Bachelor's degree\n",
+              "lyhytNimi": "Foreign Bachelor's degree",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            },
+            {
+              "nimi": "Utländsk högskoleexamen (Bachelor)",
+              "kuvaus": "Utländsk högskoleexamen (Bachelor)",
+              "lyhytNimi": "Utländsk högskoleexamen (Bachelor)",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            }
+          ]
+        },
+        {
+          "koodiUri": "pohjakoulutuskouta_104",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutuskouta_104",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutuskouta",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "104",
+          "paivitysPvm": "2020-01-09",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2013-04-05",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Yrkesinriktad grundexamen eller tidigare motsvarande examen",
+              "kuvaus": "Yrkesinriktad grundexamen eller tidigare motsvarande examen",
+              "lyhytNimi": "Yrkesinriktad grundexamen eller tidigare motsvarande examen",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Vocational upper secondary qualification or an earlier corresponding qualification ",
+              "kuvaus": "Vocational upper secondary qualification or an earlier corresponding qualification \n",
+              "lyhytNimi": "Vocational upper secondary qualification or an earlier corresponding qualification ",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            },
+            {
+              "nimi": "Ammatillinen perustutkinto tai vastaava aikaisempi tutkinto",
+              "kuvaus": "Ammatillinen perustutkinto tai vastaava aikaisempi tutkinto",
+              "lyhytNimi": "Ammatillinen perustutkinto tai vastaava aikaisempi tutkinto",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "pohjakoulutuskouta_7",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutuskouta_7",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutuskouta",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "7",
+          "paivitysPvm": "2020-01-09",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2007-01-01",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Ej fullgjord läroplikt (inget avgångsbetyg)",
+              "kuvaus": "Ej fullgjord läroplikt (inget avgångsbetyg)",
+              "lyhytNimi": "Ej fullgjord läroplikt (inget avgångsbetyg)",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Oppivelvollisuuden suorittaminen keskeytynyt (ei päättötodistusta)",
+              "kuvaus": "Oppivelvollisuuden suorittaminen keskeytynyt (ei päättötodistusta)",
+              "lyhytNimi": "Oppivelvollisuuden suorittaminen keskeytynyt (ei päättötodistusta)",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "pohjakoulutuskouta_108",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutuskouta_108",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutuskouta",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "108",
+          "paivitysPvm": "2020-01-09",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2013-04-05",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Post-secondary level or higher vocational level",
+              "kuvaus": "Post-secondary level or higher vocational level",
+              "lyhytNimi": "Post-secondary level or higher vocational level",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            },
+            {
+              "nimi": "Examen på institutsnivå eller yrkesexamen på högre nivå",
+              "kuvaus": "Examen på institutsnivå eller yrkesexamen på högre nivå",
+              "lyhytNimi": "Examen på institutsnivå eller yrkesexamen på högre nivå",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Opisto- tai ammatillisen korkea-asteen tutkinto",
+              "kuvaus": "Opisto- tai ammatillisen korkea-asteen tutkinto",
+              "lyhytNimi": "Opisto- tai ammatillisen korkea-asteen tutkinto",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "pohjakoulutuskouta_6",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutuskouta_6",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutuskouta",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "6",
+          "paivitysPvm": "2020-01-09",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2007-01-01",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Perusopetuksen pääosin tai kokonaan yksilöllistetty oppimäärä",
+              "kuvaus": "Perusopetuksen pääosin tai kokonaan yksilöllistetty oppimäärä",
+              "lyhytNimi": "Perusopetuksen pääosin tai kokonaan yksilöllistetty oppimäärä",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            },
+            {
+              "nimi": "Helt eller i huvudsak individualiserad lärokurs inom den grundläggande utbildningen",
+              "kuvaus": "Helt eller i huvudsak individualiserad lärokurs inom den grundläggande utbildningen",
+              "lyhytNimi": "Helt eller i huvudsak individualiserad lärokurs inom den grundläggande utbildningen",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            }
+          ]
+        },
+        {
+          "koodiUri": "pohjakoulutuskouta_103",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutuskouta_103",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutuskouta",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "103",
+          "paivitysPvm": "2020-01-09",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2013-04-05",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "University Master's degree",
+              "kuvaus": "University Master's degree\n",
+              "lyhytNimi": "University Master's degree",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            },
+            {
+              "nimi": "Högre högskoleexamen",
+              "kuvaus": "Högre högskoleexamen",
+              "lyhytNimi": "Högre högskoleexamen",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Ylempi korkeakoulututkinto",
+              "kuvaus": "Ylempi korkeakoulututkinto",
+              "lyhytNimi": "Ylempi korkeakoulututkinto",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
               "kieli": "FI"
             }
           ]
@@ -543,6 +1707,27 @@
                 "kotipaikkaUri": "kunta_091",
                 "children": [
                   {
+                    "oid": "1.2.246.562.10.20866993056",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.20866993056/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010505",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Kullervonkadun toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
                     "oid": "1.2.246.562.10.55355715099",
                     "alkuPvm": 1356991200000,
                     "parentOid": "1.2.246.562.10.52251087186",
@@ -564,14 +1749,14 @@
                     "status": "AKTIIVINEN"
                   },
                   {
-                    "oid": "1.2.246.562.10.56139411567",
+                    "oid": "1.2.246.562.10.55711304158",
                     "alkuPvm": 1356991200000,
                     "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.56139411567/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010501",
+                    "parentOidPath": "1.2.246.562.10.55711304158/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010519",
                     "match": false,
                     "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Abraham Wetterin tien toimipaikka"
+                      "fi": "Stadin ammatti- ja aikuisopisto, Teollisuuskadun toimipaikka"
                     },
                     "kieletUris": [
                       "oppilaitoksenopetuskieli_1#1"
@@ -606,14 +1791,35 @@
                     "status": "AKTIIVINEN"
                   },
                   {
-                    "oid": "1.2.246.562.10.2013081415065445951365",
-                    "alkuPvm": 1375304400000,
+                    "oid": "1.2.246.562.10.23017513880",
+                    "alkuPvm": 1470603600000,
                     "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.2013081415065445951365/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010514",
+                    "parentOidPath": "1.2.246.562.10.23017513880/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010517",
                     "match": false,
                     "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Pälkäneentien toimipaikka"
+                      "fi": "Stadin ammatti- ja aikuisopisto, Hattulantien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.16538823663",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.16538823663/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010510",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Sturenkadun toimipaikka"
                     },
                     "kieletUris": [
                       "oppilaitoksenopetuskieli_1#1"
@@ -670,98 +1876,14 @@
                     "status": "AKTIIVINEN"
                   },
                   {
-                    "oid": "1.2.246.562.10.55711304158",
-                    "alkuPvm": 1356991200000,
+                    "oid": "1.2.246.562.10.2013081415065445951365",
+                    "alkuPvm": 1375304400000,
                     "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.55711304158/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010519",
+                    "parentOidPath": "1.2.246.562.10.2013081415065445951365/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010514",
                     "match": false,
                     "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Teollisuuskadun toimipaikka"
-                    },
-                    "kieletUris": [
-                      "oppilaitoksenopetuskieli_1#1"
-                    ],
-                    "kotipaikkaUri": "kunta_091",
-                    "children": [],
-                    "aliOrganisaatioMaara": 0,
-                    "organisaatiotyypit": [
-                      "organisaatiotyyppi_03"
-                    ],
-                    "status": "AKTIIVINEN"
-                  },
-                  {
-                    "oid": "1.2.246.562.10.60465978314",
-                    "alkuPvm": 1356991200000,
-                    "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.60465978314/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010503",
-                    "match": false,
-                    "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Holkkitien toimipaikka"
-                    },
-                    "kieletUris": [
-                      "oppilaitoksenopetuskieli_1#1"
-                    ],
-                    "kotipaikkaUri": "kunta_091",
-                    "children": [],
-                    "aliOrganisaatioMaara": 0,
-                    "organisaatiotyypit": [
-                      "organisaatiotyyppi_03"
-                    ],
-                    "status": "AKTIIVINEN"
-                  },
-                  {
-                    "oid": "1.2.246.562.10.16538823663",
-                    "alkuPvm": 1356991200000,
-                    "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.16538823663/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010510",
-                    "match": false,
-                    "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Sturenkadun toimipaikka"
-                    },
-                    "kieletUris": [
-                      "oppilaitoksenopetuskieli_1#1"
-                    ],
-                    "kotipaikkaUri": "kunta_091",
-                    "children": [],
-                    "aliOrganisaatioMaara": 0,
-                    "organisaatiotyypit": [
-                      "organisaatiotyyppi_03"
-                    ],
-                    "status": "AKTIIVINEN"
-                  },
-                  {
-                    "oid": "1.2.246.562.10.656909794910",
-                    "alkuPvm": 1356991200000,
-                    "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.656909794910/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010508",
-                    "match": false,
-                    "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Prinsessantien toimipaikka"
-                    },
-                    "kieletUris": [
-                      "oppilaitoksenopetuskieli_1#1"
-                    ],
-                    "kotipaikkaUri": "kunta_091",
-                    "children": [],
-                    "aliOrganisaatioMaara": 0,
-                    "organisaatiotyypit": [
-                      "organisaatiotyyppi_03"
-                    ],
-                    "status": "AKTIIVINEN"
-                  },
-                  {
-                    "oid": "1.2.246.562.10.20866993056",
-                    "alkuPvm": 1356991200000,
-                    "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.20866993056/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010505",
-                    "match": false,
-                    "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Kullervonkadun toimipaikka"
+                      "fi": "Stadin ammatti- ja aikuisopisto, Pälkäneentien toimipaikka"
                     },
                     "kieletUris": [
                       "oppilaitoksenopetuskieli_1#1"
@@ -796,14 +1918,14 @@
                     "status": "AKTIIVINEN"
                   },
                   {
-                    "oid": "1.2.246.562.10.45854578546",
-                    "alkuPvm": 1413234000000,
+                    "oid": "1.2.246.562.10.60465978314",
+                    "alkuPvm": 1356991200000,
                     "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.45854578546/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010516",
+                    "parentOidPath": "1.2.246.562.10.60465978314/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010503",
                     "match": false,
                     "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Myllypuron toimipaikka"
+                      "fi": "Stadin ammatti- ja aikuisopisto, Holkkitien toimipaikka"
                     },
                     "kieletUris": [
                       "oppilaitoksenopetuskieli_1#1"
@@ -817,14 +1939,56 @@
                     "status": "AKTIIVINEN"
                   },
                   {
-                    "oid": "1.2.246.562.10.23017513880",
-                    "alkuPvm": 1470603600000,
+                    "oid": "1.2.246.562.10.56139411567",
+                    "alkuPvm": 1356991200000,
                     "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.23017513880/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010517",
+                    "parentOidPath": "1.2.246.562.10.56139411567/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010501",
                     "match": false,
                     "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Hattulantien toimipaikka"
+                      "fi": "Stadin ammatti- ja aikuisopisto, Abraham Wetterin tien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.656909794910",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.656909794910/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010508",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Prinsessantien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.45854578546",
+                    "alkuPvm": 1413234000000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.45854578546/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010516",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Myllypuron toimipaikka"
                     },
                     "kieletUris": [
                       "oppilaitoksenopetuskieli_1#1"
@@ -1718,13 +2882,6 @@
     }
   },
   {
-    "url": "https://localhost:3000/koodisto-service/rest/codeelement/posti_0/2",
-    "response": {
-      "body": "error.codeelement.not.found",
-      "status": 500
-    }
-  },
-  {
     "url": "https://localhost:3000/organisaatio-service/rest/organisaatio/v4/1.2.246.562.10.52251087186?includeImage=false",
     "response": {
       "body": {
@@ -2014,48 +3171,6 @@
                 "kotipaikkaUri": "kunta_091",
                 "children": [
                   {
-                    "oid": "1.2.246.562.10.20866993056",
-                    "alkuPvm": 1356991200000,
-                    "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.20866993056/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010505",
-                    "match": false,
-                    "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Kullervonkadun toimipaikka"
-                    },
-                    "kieletUris": [
-                      "oppilaitoksenopetuskieli_1#1"
-                    ],
-                    "kotipaikkaUri": "kunta_091",
-                    "children": [],
-                    "aliOrganisaatioMaara": 0,
-                    "organisaatiotyypit": [
-                      "organisaatiotyyppi_03"
-                    ],
-                    "status": "AKTIIVINEN"
-                  },
-                  {
-                    "oid": "1.2.246.562.10.60465978314",
-                    "alkuPvm": 1356991200000,
-                    "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.60465978314/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010503",
-                    "match": false,
-                    "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Holkkitien toimipaikka"
-                    },
-                    "kieletUris": [
-                      "oppilaitoksenopetuskieli_1#1"
-                    ],
-                    "kotipaikkaUri": "kunta_091",
-                    "children": [],
-                    "aliOrganisaatioMaara": 0,
-                    "organisaatiotyypit": [
-                      "organisaatiotyyppi_03"
-                    ],
-                    "status": "AKTIIVINEN"
-                  },
-                  {
                     "oid": "1.2.246.562.10.45854578546",
                     "alkuPvm": 1413234000000,
                     "parentOid": "1.2.246.562.10.52251087186",
@@ -2064,111 +3179,6 @@
                     "match": false,
                     "nimi": {
                       "fi": "Stadin ammatti- ja aikuisopisto, Myllypuron toimipaikka"
-                    },
-                    "kieletUris": [
-                      "oppilaitoksenopetuskieli_1#1"
-                    ],
-                    "kotipaikkaUri": "kunta_091",
-                    "children": [],
-                    "aliOrganisaatioMaara": 0,
-                    "organisaatiotyypit": [
-                      "organisaatiotyyppi_03"
-                    ],
-                    "status": "AKTIIVINEN"
-                  },
-                  {
-                    "oid": "1.2.246.562.10.2013081415065445951365",
-                    "alkuPvm": 1375304400000,
-                    "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.2013081415065445951365/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010514",
-                    "match": false,
-                    "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Pälkäneentien toimipaikka"
-                    },
-                    "kieletUris": [
-                      "oppilaitoksenopetuskieli_1#1"
-                    ],
-                    "kotipaikkaUri": "kunta_091",
-                    "children": [],
-                    "aliOrganisaatioMaara": 0,
-                    "organisaatiotyypit": [
-                      "organisaatiotyyppi_03"
-                    ],
-                    "status": "AKTIIVINEN"
-                  },
-                  {
-                    "oid": "1.2.246.562.10.78321186062",
-                    "alkuPvm": 1356991200000,
-                    "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.78321186062/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010509",
-                    "match": false,
-                    "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Savonkadun toimipaikka"
-                    },
-                    "kieletUris": [
-                      "oppilaitoksenopetuskieli_1#1"
-                    ],
-                    "kotipaikkaUri": "kunta_091",
-                    "children": [],
-                    "aliOrganisaatioMaara": 0,
-                    "organisaatiotyypit": [
-                      "organisaatiotyyppi_03"
-                    ],
-                    "status": "AKTIIVINEN"
-                  },
-                  {
-                    "oid": "1.2.246.562.10.56139411567",
-                    "alkuPvm": 1356991200000,
-                    "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.56139411567/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010501",
-                    "match": false,
-                    "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Abraham Wetterin tien toimipaikka"
-                    },
-                    "kieletUris": [
-                      "oppilaitoksenopetuskieli_1#1"
-                    ],
-                    "kotipaikkaUri": "kunta_091",
-                    "children": [],
-                    "aliOrganisaatioMaara": 0,
-                    "organisaatiotyypit": [
-                      "organisaatiotyyppi_03"
-                    ],
-                    "status": "AKTIIVINEN"
-                  },
-                  {
-                    "oid": "1.2.246.562.10.20485193278",
-                    "alkuPvm": 1356991200000,
-                    "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.20485193278/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010502",
-                    "match": false,
-                    "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Vilppulantien toimipaikka"
-                    },
-                    "kieletUris": [
-                      "oppilaitoksenopetuskieli_1#1"
-                    ],
-                    "kotipaikkaUri": "kunta_091",
-                    "children": [],
-                    "aliOrganisaatioMaara": 0,
-                    "organisaatiotyypit": [
-                      "organisaatiotyyppi_03"
-                    ],
-                    "status": "AKTIIVINEN"
-                  },
-                  {
-                    "oid": "1.2.246.562.10.93115250668",
-                    "alkuPvm": 1413234000000,
-                    "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.93115250668/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010515",
-                    "match": false,
-                    "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Meritalon toimipaikka"
                     },
                     "kieletUris": [
                       "oppilaitoksenopetuskieli_1#1"
@@ -2203,14 +3213,14 @@
                     "status": "AKTIIVINEN"
                   },
                   {
-                    "oid": "1.2.246.562.10.55355715099",
+                    "oid": "1.2.246.562.10.656909794910",
                     "alkuPvm": 1356991200000,
                     "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.55355715099/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010504",
+                    "parentOidPath": "1.2.246.562.10.656909794910/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010508",
                     "match": false,
                     "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Ilkantien toimipaikka"
+                      "fi": "Stadin ammatti- ja aikuisopisto, Prinsessantien toimipaikka"
                     },
                     "kieletUris": [
                       "oppilaitoksenopetuskieli_1#1"
@@ -2224,14 +3234,35 @@
                     "status": "AKTIIVINEN"
                   },
                   {
-                    "oid": "1.2.246.562.10.656909794910",
+                    "oid": "1.2.246.562.10.20866993056",
                     "alkuPvm": 1356991200000,
                     "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.656909794910/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010508",
+                    "parentOidPath": "1.2.246.562.10.20866993056/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010505",
                     "match": false,
                     "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Prinsessantien toimipaikka"
+                      "fi": "Stadin ammatti- ja aikuisopisto, Kullervonkadun toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.78321186062",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.78321186062/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010509",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Savonkadun toimipaikka"
                     },
                     "kieletUris": [
                       "oppilaitoksenopetuskieli_1#1"
@@ -2267,14 +3298,14 @@
                     "status": "AKTIIVINEN"
                   },
                   {
-                    "oid": "1.2.246.562.10.16538823663",
+                    "oid": "1.2.246.562.10.60465978314",
                     "alkuPvm": 1356991200000,
                     "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.16538823663/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010510",
+                    "parentOidPath": "1.2.246.562.10.60465978314/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010503",
                     "match": false,
                     "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Sturenkadun toimipaikka"
+                      "fi": "Stadin ammatti- ja aikuisopisto, Holkkitien toimipaikka"
                     },
                     "kieletUris": [
                       "oppilaitoksenopetuskieli_1#1"
@@ -2296,6 +3327,132 @@
                     "match": false,
                     "nimi": {
                       "fi": "Stadin ammatti- ja aikuisopisto, Teollisuuskadun toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.55355715099",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.55355715099/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010504",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Ilkantien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.20485193278",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.20485193278/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010502",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Vilppulantien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.56139411567",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.56139411567/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010501",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Abraham Wetterin tien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.93115250668",
+                    "alkuPvm": 1413234000000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.93115250668/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010515",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Meritalon toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.16538823663",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.16538823663/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010510",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Sturenkadun toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.2013081415065445951365",
+                    "alkuPvm": 1375304400000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.2013081415065445951365/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010514",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Pälkäneentien toimipaikka"
                     },
                     "kieletUris": [
                       "oppilaitoksenopetuskieli_1#1"
@@ -2329,7 +3486,7 @@
     }
   },
   {
-    "url": "https://localhost:3000/koodisto-service/rest/codeelement/posti_00350/1",
+    "url": "https://localhost:3000/koodisto-service/rest/codeelement/posti_00350/2",
     "response": {
       "body": {
         "koodiUri": "posti_00350",

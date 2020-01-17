@@ -1,6 +1,6 @@
 exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] =
 {
-  "alkamiskausiKoodiUri": "kausi_0#1",
+  "alkamiskausiKoodiUri": "kausi_k#1",
   "alkamisvuosi": 2035,
   "aloituspaikat": 10,
   "ensikertalaisenAloituspaikat": null,
@@ -36,12 +36,12 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
           "osoite": {
             "fi": "Osoite"
           },
-          "postinumeroKoodiUri": "posti_0#2"
+          "postinumeroKoodiUri": "posti_00350#2"
         },
         "sahkoposti": "sahkoposti@email.com"
       },
       "toimitustapa": "osoite",
-      "tyyppiKoodiUri": "liitetyypitamm_0#1"
+      "tyyppiKoodiUri": "liitetyypitamm_4#1"
     }
   ],
   "liitteetOnkoSamaToimitusaika": false,
@@ -60,7 +60,7 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
   },
   "organisaatioOid": "1.2.246.562.10.52251087186",
   "pohjakoulutusvaatimusKoodiUrit": [
-    "pohjakoulutusvaatimustoinenaste_0#1"
+    "pohjakoulutuskouta_103#1"
   ],
   "pohjakoulutusvaatimusTarkenne": {
     "fi": "<p>Tarkenne</p>"
@@ -102,11 +102,11 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
             "osoite": {
               "fi": "osoite"
             },
-            "postinumeroKoodiUri": "posti_0#2"
+            "postinumeroKoodiUri": "posti_00350#2"
           }
         }
       ],
-      "tyyppiKoodiUri": "valintakokeentyyppi_1#1"
+      "tyyppiKoodiUri": "valintakokeentyyppi_8#1"
     }
   ],
   "valintaperusteId": "649adb37-cd4d-4846-91a9-84b58b90f928"
@@ -114,7 +114,7 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
 
 exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
 {
-  "alkamiskausiKoodiUri": "kausi_0#1",
+  "alkamiskausiKoodiUri": "kausi_k#1",
   "alkamisvuosi": 2035,
   "aloituspaikat": 10,
   "ensikertalaisenAloituspaikat": 5,
@@ -150,12 +150,12 @@ exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
           "osoite": {
             "fi": "Osoite"
           },
-          "postinumeroKoodiUri": "posti_0#2"
+          "postinumeroKoodiUri": "posti_00350#2"
         },
         "sahkoposti": "sahkoposti@email.com"
       },
       "toimitustapa": "osoite",
-      "tyyppiKoodiUri": "liitetyypitamm_0#1"
+      "tyyppiKoodiUri": "liitetyypitamm_4#1"
     }
   ],
   "liitteetOnkoSamaToimitusaika": false,
@@ -174,7 +174,7 @@ exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
   },
   "organisaatioOid": "1.2.246.562.10.52251087186",
   "pohjakoulutusvaatimusKoodiUrit": [
-    "pohjakoulutusvaatimustoinenaste_0#1"
+    "pohjakoulutuskouta_103#1"
   ],
   "pohjakoulutusvaatimusTarkenne": {
     "fi": "<p>Tarkenne</p>"
@@ -216,11 +216,11 @@ exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
             "osoite": {
               "fi": "osoite"
             },
-            "postinumeroKoodiUri": "posti_0#2"
+            "postinumeroKoodiUri": "posti_00350#2"
           }
         }
       ],
-      "tyyppiKoodiUri": "valintakokeentyyppi_1#1"
+      "tyyppiKoodiUri": "valintakokeentyyppi_8#1"
     }
   ],
   "valintaperusteId": "649adb37-cd4d-4846-91a9-84b58b90f928"
@@ -228,7 +228,7 @@ exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
 
 exports[`editHakukohde > should be able to edit hakukohde #0`] =
 {
-  "alkamiskausiKoodiUri": "kausi_0#1",
+  "alkamiskausiKoodiUri": "kausi_k#1",
   "alkamisvuosi": 2024,
   "aloituspaikat": 150,
   "ensikertalaisenAloituspaikat": 49,
@@ -265,12 +265,12 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
           "osoite": {
             "fi": "Osoite"
           },
-          "postinumeroKoodiUri": "posti_0#2"
+          "postinumeroKoodiUri": "posti_00350#2"
         },
         "sahkoposti": "sahkoposti@email.com"
       },
       "toimitustapa": "osoite",
-      "tyyppiKoodiUri": "liitetyypitamm_0#1"
+      "tyyppiKoodiUri": "liitetyypitamm_4#1"
     }
   ],
   "liitteetOnkoSamaToimitusaika": false,
@@ -292,7 +292,7 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
   "oid": "6.1.1.1.1.1",
   "organisaatioOid": "1.2.246.562.10.52251087186",
   "pohjakoulutusvaatimusKoodiUrit": [
-    "pohjakoulutusvaatimustoinenaste_0#1"
+    "pohjakoulutuskouta_0#1"
   ],
   "pohjakoulutusvaatimusTarkenne": {
     "fi": "<p>Fi tarkenne</p>"
@@ -379,7 +379,7 @@ exports[`createHakukohde > should be able to create hakukohde with muu hakulomak
   },
   "organisaatioOid": "1.2.246.562.10.52251087186",
   "pohjakoulutusvaatimusKoodiUrit": [
-    "pohjakoulutusvaatimustoinenaste_0#1"
+    "pohjakoulutuskouta_103#1"
   ],
   "pohjakoulutusvaatimusTarkenne": {
     "fi": "<p>Tarkenne</p>"
@@ -425,7 +425,7 @@ exports[`createHakukohde > should be able to create hakukohde with "ei sähköis
   },
   "organisaatioOid": "1.2.246.562.10.52251087186",
   "pohjakoulutusvaatimusKoodiUrit": [
-    "pohjakoulutusvaatimustoinenaste_0#1"
+    "pohjakoulutuskouta_103#1"
   ],
   "pohjakoulutusvaatimusTarkenne": {
     "fi": "<p>Tarkenne</p>"

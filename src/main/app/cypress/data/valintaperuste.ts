@@ -2,13 +2,13 @@ import { merge } from 'lodash';
 
 const withKorkeakouluFields = valintaperuste => merge({}, valintaperuste, {});
 
-export default ({ tyyppi = 'amm' } = {}) => {
+const valintaperuste = ({ tyyppi = 'amm' } = {}) => {
   const baseFields = {
     koulutustyyppi: tyyppi,
     id: '649adb37-cd4d-4846-91a9-84b58b90f928',
     tila: 'tallennettu',
-    hakutapaKoodiUri: 'hakutapa_0#1',
-    kohdejoukkoKoodiUri: 'haunkohdejoukko_0#1',
+    hakutapaKoodiUri: 'hakutapa_01#1',
+    kohdejoukkoKoodiUri: 'haunkohdejoukko_12#1',
     nimi: { fi: 'Valintaperusteen nimi' },
     julkinen: false,
     sorakuvausId: '1',
@@ -16,7 +16,7 @@ export default ({ tyyppi = 'amm' } = {}) => {
       koulutustyyppi: tyyppi,
       valintatavat: [
         {
-          valintatapaKoodiUri: 'valintatapajono_0#1',
+          valintatapaKoodiUri: 'valintatapajono_tv#1',
           kuvaus: {},
           nimi: { fi: 'Valintatavan nimi' },
           sisalto: [
@@ -75,7 +75,7 @@ export default ({ tyyppi = 'amm' } = {}) => {
           {
             osoite: {
               osoite: { fi: 'fi osoite' },
-              postinumeroKoodiUri: 'posti_00350#1',
+              postinumeroKoodiUri: 'posti_00350#2',
             },
             aika: {
               alkaa: '2019-04-16T08:44',
@@ -101,3 +101,5 @@ export default ({ tyyppi = 'amm' } = {}) => {
 
   return baseFields;
 };
+
+export default valintaperuste;

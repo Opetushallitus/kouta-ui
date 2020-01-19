@@ -52,6 +52,17 @@ Yksikkötestit löytyvät testattavan moduulin `*.test.jsx?` (esim. `components/
 
 Yksikkötestit voi ajaa komennolla `npm test` ja integraatiotestit komennolla `npm run test:e2e`. Kaikki testit pystyy ajamaan komennolla `npm run test:ci`.
 
+### Cypress TestRunner, interaktiivisesti
+
+On hauska katsoa ja korjata cypress testia interaktiivisti Cypress TestRunnerilla: 
+
+    cd src/main/app
+    npm start
+    
+Ja sitten samassa kansiossa, mutta toisessa shellissa: 
+
+    npx cypress open
+
 ## Storybook
 
 [Storybookin](https://github.com/storybooks/storybook) voi käynnistää komennolla `npm run storybook`. Käynnistymisen jälkeen Storybook löytyy osoitteesta [http://localhost:9009](http://localhost:9009). Komponenttien mahdolliset storyt löytyvät komponentin oman kansion `*.stories.jsx` (esim. `components/Alert/Alert.stories.jsx`) tiedostosta. Hyödyllisiä story [dekoraattoreita](https://storybook.js.org/docs/addons/introduction/#1-decorators) (esim. lokalisaatio- ja api-dekoraattorit) löytyy `storybookUtils.js` tiedostosta.

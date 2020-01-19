@@ -62,7 +62,9 @@ const fillLisatiedotSection = () => {
 };
 
 const tallenna = () => {
-  cy.getByTestId('tallennaKoulutusButton').click({ force: true });
+  cy.getByTestId('tallennaKoulutusButton').within(() => {
+    cy.contains('Tallenna').click({ force: false });
+  });
 };
 
 const fillJarjestajaSection = () => {
@@ -112,7 +114,7 @@ describe('createKoulutusForm', () => {
       cy.getByTestId('koulutustyyppiSelect').click();
 
       cy.getByTestId('koulutustyyppiSelect').within(() => {
-        fillAsyncSelect('koulutus_0');
+        fillAsyncSelect('0', 'koulutus_0');
       });
 
       cy.getByTestId('jatkaButton').click({ force: true });
@@ -152,7 +154,7 @@ describe('createKoulutusForm', () => {
       cy.getByTestId('koulutuskoodiSelect').click();
 
       cy.getByTestId('koulutuskoodiSelect').within(() => {
-        fillAsyncSelect('koulutus_0');
+        fillAsyncSelect('0', 'koulutus_0');
       });
 
       cy.getByTestId('nimiInput').within(() => {
@@ -220,7 +222,7 @@ describe('createKoulutusForm', () => {
       cy.getByTestId('koulutustyyppiSelect').click();
 
       cy.getByTestId('koulutustyyppiSelect').within(() => {
-        fillAsyncSelect('koulutus_0');
+        fillAsyncSelect('0', 'koulutus_0');
       });
 
       cy.getByTestId('jatkaButton').click({ force: true });

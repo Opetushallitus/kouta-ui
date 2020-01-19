@@ -156,7 +156,7 @@ export const noop = () => {};
 export const isBoolean = value => typeof value === 'boolean';
 
 export const getTestIdProps = testId => ({
-  'data-test-id': testId,
+  'data-testid': testId,
 });
 
 export const getImageFileDimensions = imgFile => {

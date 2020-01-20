@@ -7,7 +7,8 @@ import ListTable, {
   makeModifiedColumn,
   makeTilaColumn,
 } from './HomePage/ListTable';
-import { map, sortBy, compose } from 'lodash/fp';
+import ListSpin from './HomePage/ListSpin';
+import { map, sortBy, compose, isNil } from 'lodash/fp';
 
 export default function({
   entity,
@@ -19,10 +20,7 @@ export default function({
   const { oid = null } = entity;
   const { t, i18n } = useTranslation();
 
-  const getSafeData = useCallback(
-    params => (params.oid ? getData(params) : []),
-    [getData],
-  );
+  const getSafeData = useCallback(getData, [getData]);
 
   const { data: results } = useApiAsync({
     promiseFn: getSafeData,
@@ -32,12 +30,13 @@ export default function({
   });
 
   const rows = useMemo(() => {
-    return results
-      ? compose(
-          sortBy(e => e.nimi[i18n.language]),
-          map(entity => ({ ...entity, key: entity.oid })),
-        )(results)
-      : [];
+    return (
+      results &&
+      compose(
+        sortBy(e => e.nimi[i18n.language]),
+        map(entity => ({ ...entity, key: entity.oid })),
+      )(results)
+    );
   }, [results, i18n.language]);
 
   const tableColumns = useMemo(
@@ -53,11 +52,15 @@ export default function({
 
   return (
     <>
-      {rows.length === 0 ? (
-        <Typography>{noResultsMessage}</Typography>
+      {isNil(rows) ? (
+        <ListSpin />
       ) : (
         <>
-          <ListTable rows={rows} columns={tableColumns} />
+          {rows.length === 0 ? (
+            <Typography>{noResultsMessage}</Typography>
+          ) : (
+            <ListTable rows={rows} columns={tableColumns} />
+          )}
         </>
       )}
     </>

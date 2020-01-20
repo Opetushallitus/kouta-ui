@@ -109,18 +109,12 @@
                         </goals>
                     </execution>
                     <execution>
-                        <id>Run tests</id>
-                        <phase>test</phase>
+                        <id>Build storybook</id>
                         <goals>
                             <goal>npm</goal>
                         </goals>
                         <configuration>
-                            <environmentVariables>
-                                <PORT>3000</PORT>
-                                <BACKEND_PORT>${browser.test.http.backend.port}</BACKEND_PORT>
-                                <CI>true</CI>
-                            </environmentVariables>
-                            <arguments>run test:ci</arguments>
+                            <arguments>run build-storybook</arguments>
                         </configuration>
                     </execution>
                     <execution>
@@ -133,15 +127,6 @@
                                 <CI>false</CI>
                             </environmentVariables>
                             <arguments>run build</arguments>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>Build storybook</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>run build-storybook</arguments>
                         </configuration>
                     </execution>
                 </executions>

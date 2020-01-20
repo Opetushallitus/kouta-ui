@@ -309,6 +309,10 @@ describe('createToteutusForm', () => {
       jatka();
     });
 
+    cy.getByTestId('teemakuvaSection').within(() => {
+      jatka();
+    });
+
     fillNayttamistiedotSection();
     fillJarjestajatSection();
     fillYhteystiedotSection();

@@ -61,6 +61,12 @@ const fillEsittelySection = () => {
   });
 };
 
+const fillTeemakuvaSection = () => {
+  cy.getByTestId('teemakuvaSection').within(() => {
+    jatka();
+  });
+};
+
 const fillTietoaOpiskelustaSection = () => {
   cy.getByTestId('tietoaOpiskelustaSection').within(() => {
     selectOption('koulutuksenlisatiedot_0', cy);
@@ -130,6 +136,8 @@ describe('createOppilaitosForm', () => {
     fillPerustiedotSection();
 
     fillEsittelySection();
+
+    fillTeemakuvaSection();
 
     fillTietoaOpiskelustaSection();
 

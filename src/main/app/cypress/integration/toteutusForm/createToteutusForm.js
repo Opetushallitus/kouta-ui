@@ -118,6 +118,12 @@ const fillCommonJarjestamistiedot = ({ maksullisuusTyyppi = 'kylla' } = {}) => {
   fillOsiot();
 };
 
+const fillTeemakuvaSection = () => {
+  cy.getByTestId('teemakuvaSection').within(() => {
+    jatka();
+  });
+};
+
 const fillNayttamistiedotSection = () => {
   cy.getByTestId('nayttamistiedotSection').within(() => {
     cy.getByTestId('ammattinimikkeetSelect').within(() => {
@@ -309,10 +315,7 @@ describe('createToteutusForm', () => {
       jatka();
     });
 
-    cy.getByTestId('teemakuvaSection').within(() => {
-      jatka();
-    });
-
+    fillTeemakuvaSection();
     fillNayttamistiedotSection();
     fillJarjestajatSection();
     fillYhteystiedotSection();
@@ -360,6 +363,7 @@ describe('createToteutusForm', () => {
       jatka();
     });
 
+    fillTeemakuvaSection();
     fillNayttamistiedotSection();
     fillJarjestajatSection();
     fillYhteystiedotSection();
@@ -399,6 +403,7 @@ describe('createToteutusForm', () => {
       jatka();
     });
 
+    fillTeemakuvaSection();
     fillNayttamistiedotSection();
     fillJarjestajatSection();
     fillYhteystiedotSection();

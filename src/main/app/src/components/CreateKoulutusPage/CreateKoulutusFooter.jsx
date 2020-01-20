@@ -29,7 +29,7 @@ const CreateKoulutusFooter = ({ organisaatioOid, history }) => {
   const { save } = useSaveForm({
     form: 'createKoulutusForm',
     submit,
-    validate: validateKoulutusForm,
+    validate: values => validateKoulutusForm({...values, organisaatioOid}),
   });
 
   return (

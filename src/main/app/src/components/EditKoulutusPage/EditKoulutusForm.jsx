@@ -22,16 +22,14 @@ const KoulutusFormWrapper = props => {
   );
 };
 
-const EditKoulutusForm = ({ onSave, koulutus, history, ...props }) => {
+const EditKoulutusForm = ({ onSave, koulutus, history, organisaatioOid, ...props }) => {
   const initialValues = useMemo(() => {
     return getFormValuesByKoulutus(koulutus);
   }, [koulutus]);
 
   const onAttachToteutus = useCallback(() => {
     history.push(
-      `/organisaatio/${koulutus.organisaatioOid}/koulutus/${
-        koulutus.oid
-      }/toteutus`,
+      `/organisaatio/${organisaatioOid}/koulutus/${koulutus.oid}/toteutus`,
     );
   }, [history, koulutus]);
 
@@ -40,11 +38,11 @@ const EditKoulutusForm = ({ onSave, koulutus, history, ...props }) => {
       {() => (
         <KoulutusFormWrapper
           steps={false}
-          canSelectBase={false}
-          canEditKoulutustyyppi={false}
+          isNewKoulutus={false}
           johtaaTutkintoon={Boolean(koulutus.johtaaTutkintoon)}
           onAttachToteutus={onAttachToteutus}
           koulutus={koulutus}
+          organisaatioOid={organisaatioOid}
           {...props}
         />
       )}

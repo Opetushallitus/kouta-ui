@@ -91,7 +91,7 @@ const EditKoulutusFooter = ({ koulutus, organisaatioOid, history }) => {
   const { save } = useSaveForm({
     form: 'editKoulutusForm',
     submit,
-    validate: validateKoulutusForm,
+    validate: values => validateKoulutusForm({organisaatioOid: koulutus.organisaatioOid, ...values }),
   });
 
   return (

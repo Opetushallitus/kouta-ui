@@ -9,7 +9,7 @@ import FormConfigContext from '../FormConfigContext';
 
 const config = getHakuFormConfig();
 
-const EditHakuForm = ({ onSave, haku, history, ...props }) => {
+const EditHakuForm = ({ onSave, haku, history, organisaatioOid, ...props }) => {
   const initialValues = useMemo(() => {
     return getFormValuesByHaku(haku);
   }, [haku]);
@@ -18,7 +18,7 @@ const EditHakuForm = ({ onSave, haku, history, ...props }) => {
     ({ toteutusOid }) => {
       if (toteutusOid) {
         history.push(
-          `/organisaatio/${haku.organisaatioOid}/toteutus/${toteutusOid}/haku/${
+          `/organisaatio/${organisaatioOid}/toteutus/${toteutusOid}/haku/${
             haku.oid
           }/hakukohde`,
         );
@@ -37,6 +37,7 @@ const EditHakuForm = ({ onSave, haku, history, ...props }) => {
             haku={haku}
             onAttachHakukohde={onAttachHakukohde}
             canSelectBase={false}
+            organisaatioOid={organisaatioOid}
             {...props}
           />
         </FormConfigContext.Provider>

@@ -20,7 +20,7 @@ const JarjestajatField = createFormFieldComponent(
   }),
 );
 
-const OrganizationSection = ({ organisaatioOid, name, koulutus }) => {
+const OrganizationSection = ({ organisaatioOid, name, koulutus, disableTarjoajaHierarkia }) => {
   const { t } = useTranslation();
   const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid);
   const roleBuilder = useAuthorizedUserRoleBuilder();
@@ -35,7 +35,7 @@ const OrganizationSection = ({ organisaatioOid, name, koulutus }) => {
 
   return (
     <div {...getTestIdProps('jarjestajatSelection')}>
-      {tarjoajat.length > 0 ? (
+      {tarjoajat.length > 0 || disableTarjoajaHierarkia ? (
         <Box mb={2}>
           <Alert variant="info">
             {t('koulutuslomake.tarjoajienLukumaara', {
@@ -45,13 +45,15 @@ const OrganizationSection = ({ organisaatioOid, name, koulutus }) => {
         </Box>
       ) : null}
 
-      <Field
-        name={name}
-        hierarkia={hierarkia}
-        getIsDisabled={getIsDisabled}
-        component={JarjestajatField}
-        label={t('koulutuslomake.valitseJarjestajat')}
-      />
+      {!disableTarjoajaHierarkia ? (
+        <Field
+          name={name}
+          hierarkia={hierarkia}
+          getIsDisabled={getIsDisabled}
+          component={JarjestajatField}
+          label={t('koulutuslomake.valitseJarjestajat')}
+        />
+      ) : null}
     </div>
   );
 };

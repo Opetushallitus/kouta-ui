@@ -3,9 +3,12 @@ import getQueryParams from './getQueryParams';
 const getHaut = async ({ httpClient, apiUrls, ...rest }) => {
   const params = getQueryParams(rest);
 
-  const { data } = await httpClient.get(apiUrls.url('kouta-index.haku-list'), {
-    params,
-  });
+  const { data } = await httpClient.get(
+    apiUrls.url('kouta-backend.search.haut'),
+    {
+      params,
+    },
+  );
 
   return data;
 };

@@ -1,5 +1,5 @@
 const getQueryParams = ({
-  organisaatioOid: organisaatioOidArg = [],
+  organisaatioOid,
   nimi = '',
   language = 'fi',
   pageSize = 10,
@@ -9,15 +9,13 @@ const getQueryParams = ({
   orderDirection,
   tila,
 }) => {
-  const organisaatio = organisaatioOidArg.join(',');
-
   const params = {
     ...(nimi && { nimi }),
     ...(orderField && { 'order-by': orderField }),
     ...(orderDirection && { order: orderDirection }),
     ...(tila && { tila }),
-    organisaatio,
-    language,
+    organisaatioOid,
+    lng: language,
     size: pageSize,
     arkistoidut: showArchived,
     page,

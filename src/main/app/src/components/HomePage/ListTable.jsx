@@ -97,7 +97,7 @@ export const ListTable = ({
     row: defaultCollapsedRow,
     column: defaultCollapsedColumn,
   });
-  const isTableSortable = sort && isFunction(onSort);
+  const isTableSortable = isFunction(onSort);
 
   const language = useLanguage();
 

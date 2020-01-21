@@ -8,8 +8,21 @@ import Icon from '../Icon';
 import StatusTag from '../StatusTag';
 import { formatKoutaDateString, isFunction } from '../../utils';
 import useLanguage from '../useLanguage';
-
+import Anchor from '../Anchor';
 import Dropdown from '../Dropdown';
+import { Link } from 'react-router-dom';
+import { getFirstLanguageValue } from '../../utils';
+
+export const makeNimiColumn = (t, { getLinkUrl }) => ({
+  title: t('yleiset.nimi'),
+  key: 'nimi',
+  sortable: true,
+  render: item => (
+    <Anchor as={Link} to={getLinkUrl(item)}>
+      {getFirstLanguageValue(item.nimi, item.language) || t('yleiset.nimeton')}
+    </Anchor>
+  ),
+});
 
 export const makeTilaColumn = t => ({
   title: t('yleiset.tila'),
@@ -84,6 +97,7 @@ export const ListTable = ({
     row: defaultCollapsedRow,
     column: defaultCollapsedColumn,
   });
+  const isTableSortable = isFunction(onSort);
 
   const language = useLanguage();
 
@@ -96,8 +110,8 @@ export const ListTable = ({
       <TableHead>
         <TableRow>
           {columns.map(columnProps => {
-            const { key, title, sortable = false } = columnProps;
-
+            const { key, title, sortable: isColumnSortable } = columnProps;
+            const sortable = isTableSortable && isColumnSortable;
             return (
               <TableCell
                 key={key}

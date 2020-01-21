@@ -300,7 +300,7 @@ export default {
     koulutukseenLiitetytToteutukset: 'Koulutukseen liitetyt toteutukset',
     liitaToteutus: 'Liitä toteutus',
     koulutuksellaEiToteutuksia:
-      'Tähän koulutukseen ei ole vielä liitetty totutuksia',
+      'Tähän koulutukseen ei ole vielä liitetty toteutuksia',
     koulutusOnJulkinen: 'Koulutus on julkinen',
     koulutukseenOnLiitettyToteutukset:
       'Tähän koulutukseen on liitetty seuraavat toteutukset',

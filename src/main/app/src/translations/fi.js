@@ -141,6 +141,9 @@ export default {
       'Tiedoston lataaminen epäonnistui, yritä uudelleen',
     ladatutTiedostot: 'Ladatut tiedostot',
     selaaTiedostoja: 'Selaa tiedostoja',
+    kiellettyTiedostopaate: 'Tiedostopääte "{{extension}}" ei ole sallittu.',
+    kuvanResoluutioTuntematon:
+      'Kuvatiedoston resoluutiota ei pystytty tunnistamaan.',
     varmistaLomakkeenKentat:
       'Varmistathan että olet täyttänyt lomakkeen kaikki pakolliset kentät',
     valitseMitaHakulomakettaKaytetaan: 'Valitse mitä hakulomaketta käytetään',

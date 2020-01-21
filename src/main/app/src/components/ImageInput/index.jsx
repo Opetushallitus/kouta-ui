@@ -6,7 +6,12 @@ import useTranslation from '../useTranslation';
 import Typography from '../Typography';
 import Flex, { FlexItem } from '../Flex';
 import Icon from '../Icon';
-import { noop, useMachine, getImageFileDimensions } from '../../utils';
+import {
+  noop,
+  useMachine,
+  getFileExtension,
+  getImageFileDimensions,
+} from '../../utils';
 import Spin from '../Spin';
 import Button from '../Button';
 import { disabledStyle } from '../../system';
@@ -241,6 +246,7 @@ export const ImageInput = props => {
     maxDimensions,
     accept,
     value,
+    noDimensionCheckForExtensions = [],
   } = props;
 
   const { t } = useTranslation();
@@ -248,33 +254,64 @@ export const ImageInput = props => {
   const validate = useCallback(
     async file => {
       const { size } = file;
-      const dimensions = await getImageFileDimensions(file);
+      const extension = getFileExtension(file);
+      let dimensions;
+
+      if (accept && !accept.includes(`.${extension}`)) {
+        return Promise.reject({
+          message: t('yleiset.kiellettyTiedostopaate', { extension }),
+        });
+      } else if (maxSize && size > maxSize) {
+        return Promise.reject({
+          message: t('yleiset.kuvanTiedostokokoLiianSuuri'),
+        });
+      }
+
+      if (
+        !noDimensionCheckForExtensions.includes(extension) &&
+        (minDimensions || maxDimensions)
+      ) {
+        try {
+          dimensions = await getImageFileDimensions(file);
+        } catch (e) {
+          console.error(e);
+          return Promise.reject({
+            message: t('yleiset.kuvanResoluutioTuntematon'),
+          });
+        }
+      }
+
       return new Promise((resolve, reject) => {
-        if (size > maxSize) {
-          return reject({
-            message: t('yleiset.kuvanTiedostokokoLiianSuuri'),
-          });
-        } else if (
-          minDimensions &&
-          dimensions.width < minDimensions.width &&
-          dimensions.height < minDimensions.height
-        ) {
-          return reject({
-            message: t('yleiset.kuvanResoluutioLiianPieni'),
-          });
-        } else if (
-          maxDimensions &&
-          dimensions.width > maxDimensions.width &&
-          dimensions.height > maxDimensions.height
-        ) {
-          return reject({
-            message: t('yleiset.kuvanResoluutioLiianSuuri'),
-          });
+        if (dimensions) {
+          if (
+            minDimensions &&
+            dimensions.width < minDimensions.width &&
+            dimensions.height < minDimensions.height
+          ) {
+            return reject({
+              message: t('yleiset.kuvanResoluutioLiianPieni'),
+            });
+          } else if (
+            maxDimensions &&
+            dimensions.width > maxDimensions.width &&
+            dimensions.height > maxDimensions.height
+          ) {
+            return reject({
+              message: t('yleiset.kuvanResoluutioLiianSuuri'),
+            });
+          }
         }
         return resolve();
       });
     },
-    [maxSize, minDimensions, maxDimensions, t],
+    [
+      accept,
+      maxSize,
+      minDimensions,
+      maxDimensions,
+      noDimensionCheckForExtensions,
+      t,
+    ],
   );
 
   const fileUploadMachine = createFileUploadMachine({ url: value, error, t });

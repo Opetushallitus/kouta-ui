@@ -5,6 +5,7 @@ import dateFnsformatDate from 'date-fns/format';
 import padStart from 'lodash/padStart';
 import memoizee from 'memoizee';
 import flowRight from 'lodash/flowRight';
+import last from 'lodash/last';
 import { useMachine as useXstateMachine } from '@xstate/react';
 
 export const isString = value => typeof value === 'string';
@@ -169,6 +170,11 @@ export const getImageFileDimensions = imgFile => {
   });
   result.finally(() => URL.revokeObjectURL(objectURL));
   return result;
+};
+
+export const getFileExtension = file => {
+  const parts = file.name.split('.');
+  return parts.length > 1 ? last(parts) : '';
 };
 
 export const useMachine = (machine, options) =>

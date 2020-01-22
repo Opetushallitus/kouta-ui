@@ -252,7 +252,15 @@ export const ImageInput = props => {
   const { t } = useTranslation();
 
   const validate = useCallback(
-    async file => {
+    async files => {
+      if (files.length !== 1) {
+        return Promise.reject({
+          message: t('yleiset.liitaVainYksiTiedosto'),
+        });
+      }
+
+      const file = files[0];
+
       const { size } = file;
       const extension = getFileExtension(file);
       let dimensions;
@@ -318,8 +326,7 @@ export const ImageInput = props => {
   const [state, send] = useMachine(fileUploadMachine, {
     services: {
       upload(ctx, e) {
-        const file = e.files[0];
-        return validate(file).then(() => upload(file));
+        return validate(e.files).then(() => upload(e.files[0]));
       },
     },
   });

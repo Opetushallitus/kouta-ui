@@ -102,7 +102,7 @@ const createFileUploadMachine = ({ url, error, t }) => {
       [CS.error]: {
         on: {
           [AT.UPLOAD_FILE]: CS.uploading,
-          [AT.DRAG_START]: CS.dragging,
+          [AT.DRAG_START]: CS.draggingEnabled,
         },
         exit: assign({
           error: () => null,

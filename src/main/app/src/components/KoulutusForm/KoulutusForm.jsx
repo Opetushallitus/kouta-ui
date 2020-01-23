@@ -1,5 +1,4 @@
-import React, { useCallback } from 'react';
-import get from 'lodash/get';
+import React from 'react';
 
 import TypeSection from './TypeSection';
 import BaseSelectionSection from './BaseSelectionSection';
@@ -20,30 +19,7 @@ import useFieldValue from '../useFieldValue';
 import JulkaisutilaSection from './JulkaisutilaSection';
 import isOphOrganisaatio from '../../utils/isOphOrganisaatio';
 import TeemakuvaSection from '../TeemakuvaSection';
-
-const PohjaFormCollapse = ({
-  children,
-  onSelectBase,
-  onContinue,
-  ...props
-}) => {
-  const tapa = useFieldValue('pohja.tapa');
-  const valinta = useFieldValue('pohja.valinta');
-
-  const onPohjaContinue = useCallback(() => {
-    onContinue();
-    onSelectBase({
-      tapa,
-      valinta: get(valinta, 'value'),
-    });
-  }, [onSelectBase, tapa, valinta, onContinue]);
-
-  return (
-    <FormCollapse onContinue={onPohjaContinue} {...props}>
-      {children}
-    </FormCollapse>
-  );
-};
+import PohjaFormCollapse from '../PohjaFormCollapse';
 
 const KoulutusForm = ({
   organisaatioOid,

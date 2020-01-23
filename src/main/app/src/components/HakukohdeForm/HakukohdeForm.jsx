@@ -1,5 +1,4 @@
 import React from 'react';
-
 import FormCollapse from '../FormCollapse';
 import KieliversiotFields from '../KieliversiotFields';
 import { KOULUTUSTYYPPI } from '../../constants';

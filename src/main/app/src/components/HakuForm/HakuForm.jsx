@@ -1,5 +1,4 @@
-import React, { useMemo, useCallback } from 'react';
-import { get } from 'lodash';
+import React, { useMemo } from 'react';
 import BaseSelectionSection from './BaseSelectionSection';
 import KieliversiotFields from '../KieliversiotFields';
 import NameSection from './NameSection';
@@ -22,30 +21,7 @@ import isYhteishakuHakutapa from '../../utils/isYhteishakuHakutapa';
 import useFieldValue from '../useFieldValue';
 import { HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID } from '../../constants';
 import JulkaisutilaSection from './JulkaisutilaSection';
-
-const PohjaFormCollapse = ({
-  children,
-  onContinue,
-  onSelectBase,
-  ...props
-}) => {
-  const tapa = useFieldValue('pohja.tapa');
-  const valinta = useFieldValue('pohja.valinta');
-
-  const onPohjaContinue = useCallback(() => {
-    onContinue();
-    onSelectBase({
-      tapa,
-      valinta: get(valinta, 'value'),
-    });
-  }, [onSelectBase, tapa, valinta, onContinue]);
-
-  return (
-    <FormCollapse onContinue={onPohjaContinue} {...props}>
-      {children}
-    </FormCollapse>
-  );
-};
+import PohjaFormCollapse from '../PohjaFormCollapse';
 
 const HakuForm = ({
   organisaatioOid,

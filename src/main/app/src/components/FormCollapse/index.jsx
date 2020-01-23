@@ -30,7 +30,7 @@ const LanguageTabsWrapper = styled.div`
 const scrollIntoView = el => {
   setTimeout(() => {
     scrollElementIntoView(el);
-  }, 500);
+  }, 300);
 };
 
 const renderChildren = ({ onContinue, children, language, section }) => {
@@ -119,6 +119,7 @@ const FormCollapse = ({
   defaultOpen = false,
   scrollOnActive = true,
   section,
+  isSubmitting,
   ...props
 }) => {
   const { t } = useTranslation();
@@ -131,11 +132,11 @@ const FormCollapse = ({
   }, [setCollapseOpen]);
 
   useEffect(() => {
-    if (active && !collapseOpen) {
+    if (active && !isSubmitting) {
       scrollOnActive && scrollIntoView(containerRef.current);
       setCollapseOpen(true);
     }
-  }, [active]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [active, isSubmitting, scrollOnActive]);
 
   useEffect(() => {
     if (languages.length > 0 && !languages.find(lng => lng === language)) {

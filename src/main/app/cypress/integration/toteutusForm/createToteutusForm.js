@@ -82,12 +82,16 @@ const fillStipendi = () => {
 };
 
 const fillKausi = () => {
+  cy.getByTestId('koulutuksenTarkkaAlkamisaika').within(() => {
+    cy.get('[type="checkbox"]').check({ force: true });
+  });
+
   cy.getByTestId('koulutuksenAlkamispaivamaara').within(() => {
     fillDatePickerInput('1.1.2019');
   });
 
   cy.getByTestId('koulutuksenPaattymispaivamaara').within(() => {
-    fillDatePickerInput('15.2.2019');
+    fillDatePickerInput('15.2.2019{esc}');
   });
 };
 

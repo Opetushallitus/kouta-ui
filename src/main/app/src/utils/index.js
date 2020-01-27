@@ -174,7 +174,7 @@ export const getImageFileDimensions = imgFile => {
 
 export const getFileExtension = file => {
   const parts = file.name.split('.');
-  return parts.length > 1 ? last(parts) : '';
+  return parts.length > 1 ? last(parts).toLowerCase() : '';
 };
 
 export const useMachine = (machine, options) =>

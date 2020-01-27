@@ -178,6 +178,10 @@ const getToteutusByFormValues = values => {
 
   const koulutuksenAlkamiskausi =
     get(values, 'jarjestamistiedot.koulutuksenAlkamiskausi') || null;
+  const koulutuksenAlkamisvuosi =
+    get(values, 'jarjestamistiedot.koulutuksenAlkamisvuosi') || null;
+  const koulutuksenTarkkaAlkamisaika =
+    get(values, 'jarjestamistiedot.koulutuksenTarkkaAlkamisaika') || false;
 
   const ilmoittautumislinkki = pick(
     get(values, 'tiedot.ilmoittautumislinkki'),
@@ -236,7 +240,9 @@ const getToteutusByFormValues = values => {
         maksullisuusKuvaus,
         koulutuksenAlkamispaivamaara,
         koulutuksenPaattymispaivamaara,
+        koulutuksenTarkkaAlkamisaika: koulutuksenTarkkaAlkamisaika,
         koulutuksenAlkamiskausi: koulutuksenAlkamiskausi,
+        koulutuksenAlkamisvuosi: koulutuksenAlkamisvuosi,
         onkoStipendia,
         stipendinKuvaus,
         stipendinMaara,

@@ -15,118 +15,12 @@ import {
 import Spin from '../Spin';
 import Button from '../Button';
 import { disabledStyle } from '../../system';
-import { Machine, assign } from 'xstate';
 import prettyBytes from 'pretty-bytes';
-import get from 'lodash/get';
-
-const CS = {
-  fileUploaded: 'fileUploaded',
-  empty: 'empty',
-  uploading: 'uploading',
-  error: 'error',
-  draggingEnabled: 'dragging.enabled',
-  draggingDisabled: 'dragging.disabled',
-};
-
-const AT = {
-  UPLOAD_FILE: 'UPLOAD_FILE',
-  REMOVE_FILE: 'REMOVE_FILE',
-  RESET: 'RESET',
-  DRAG_START: 'DRAG_START',
-  DRAG_STOP: 'DRAG_STOP',
-};
-
-const createFileUploadMachine = ({ url, error, t }) => {
-  let initial = CS.empty;
-  if (url) {
-    initial = CS.fileUploaded;
-  } else if (error) {
-    initial = CS.error;
-  }
-
-  return Machine({
-    id: 'imageUpload',
-    initial,
-    context: {
-      file: null,
-      url,
-      error,
-    },
-    states: {
-      [CS.empty]: {
-        id: 'empty',
-        on: {
-          [AT.UPLOAD_FILE]: CS.uploading,
-          [AT.DRAG_START]: CS.draggingEnabled,
-        },
-      },
-      [CS.fileUploaded]: {
-        id: 'fileUploaded',
-        on: {
-          [AT.REMOVE_FILE]: {
-            target: CS.empty,
-            actions: assign({
-              url: () => null,
-            }),
-          },
-          [AT.DRAG_START]: CS.draggingDisabled,
-        },
-      },
-      [CS.uploading]: {
-        id: 'uploading',
-        entry: assign({
-          file: (_, e) => e.files[0],
-        }),
-        invoke: {
-          id: 'uploadFile',
-          src: 'upload',
-          onDone: {
-            target: CS.fileUploaded,
-            actions: assign({
-              url: (_, e) => e.data,
-            }),
-          },
-          onError: {
-            target: CS.error,
-            actions: assign({
-              file: () => null,
-              url: () => null,
-              error: (ctx, e) =>
-                e.data instanceof Error
-                  ? t('yleiset.kuvanLahetysVirhe')
-                  : get(e, 'data.message'),
-            }),
-          },
-        },
-      },
-      [CS.error]: {
-        on: {
-          [AT.UPLOAD_FILE]: CS.uploading,
-          [AT.DRAG_START]: CS.draggingEnabled,
-        },
-        exit: assign({
-          error: () => null,
-        }),
-      },
-      dragging: {
-        states: {
-          enabled: {
-            on: {
-              [AT.DRAG_STOP]: '#empty',
-              [AT.UPLOAD_FILE]: '#uploading',
-            },
-          },
-          disabled: {
-            on: {
-              [AT.DRAG_STOP]: '#fileUploaded',
-              [AT.UPLOAD_FILE]: '#fileUploaded',
-            },
-          },
-        },
-      },
-    },
-  });
-};
+import {
+  createImageUploadMachine,
+  actionTypes as AT,
+  controlStates as CS,
+} from './imageUploadMachine';
 
 const DragActiveIcon = styled(Icon).attrs({ type: 'cloud_upload' })`
   color: ${getThemeProp('palette.primary.main')};
@@ -322,7 +216,7 @@ export const ImageInput = props => {
     ],
   );
 
-  const fileUploadMachine = createFileUploadMachine({ url: value, error, t });
+  const fileUploadMachine = createImageUploadMachine({ url: value, error, t });
   const [state, send] = useMachine(fileUploadMachine, {
     services: {
       upload(ctx, e) {

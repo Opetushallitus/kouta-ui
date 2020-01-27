@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { useDropzone } from 'react-dropzone';
 import styled, { css } from 'styled-components';
 import { getThemeProp, spacing } from '../../theme';
@@ -129,6 +129,74 @@ const InfoText = props => (
   <Typography variant="secondary" as="div" marginBottom={1} {...props} />
 );
 
+const validateInput = async (
+  files,
+  {
+    accept,
+    maxSize,
+    minDimensions,
+    maxDimensions,
+    noDimensionCheckForExtensions = [],
+    t,
+  },
+) => {
+  if (files.length !== 1) {
+    return Promise.reject({
+      message: t('yleiset.liitaVainYksiTiedosto'),
+    });
+  }
+
+  const file = files[0];
+
+  const { size } = file;
+  const extension = getFileExtension(file);
+  let dimensions;
+
+  if (accept && !accept.includes(`.${extension}`)) {
+    return Promise.reject({
+      message: t('yleiset.kiellettyTiedostopaate', { extension }),
+    });
+  } else if (maxSize && size > maxSize) {
+    return Promise.reject({
+      message: t('yleiset.kuvanTiedostokokoLiianSuuri'),
+    });
+  }
+
+  if (
+    !noDimensionCheckForExtensions.includes(extension) &&
+    (minDimensions || maxDimensions)
+  ) {
+    try {
+      dimensions = await getImageFileDimensions(file);
+    } catch (e) {
+      console.error(e);
+      return Promise.reject({
+        message: t('yleiset.kuvanResoluutioTuntematon'),
+      });
+    }
+  }
+  return new Promise((resolve, reject) => {
+    let error = null;
+    if (dimensions) {
+      if (maxDimensions) {
+        if (dimensions.width > maxDimensions.width) {
+          error = t('yleiset.kuvanLeveysLiianSuuri', dimensions);
+        } else if (dimensions.height > maxDimensions.height) {
+          error = t('yleiset.kuvanKorkeusLiianSuuri', dimensions);
+        }
+      }
+      if (minDimensions) {
+        if (dimensions.width < minDimensions.width) {
+          error = t('yleiset.kuvanLeveysLiianPieni', dimensions);
+        } else if (dimensions.height < minDimensions.height) {
+          error = t('yleiset.kuvanKorkeusLiianPieni', dimensions);
+        }
+      }
+    }
+    return error ? reject({ message: error }) : resolve();
+  });
+};
+
 export const ImageInput = props => {
   const {
     disabled = false,
@@ -140,87 +208,19 @@ export const ImageInput = props => {
     maxDimensions,
     accept,
     value,
-    noDimensionCheckForExtensions = [],
   } = props;
-
   const { t } = useTranslation();
-
-  const validate = useCallback(
-    async files => {
-      if (files.length !== 1) {
-        return Promise.reject({
-          message: t('yleiset.liitaVainYksiTiedosto'),
-        });
-      }
-
-      const file = files[0];
-
-      const { size } = file;
-      const extension = getFileExtension(file);
-      let dimensions;
-
-      if (accept && !accept.includes(`.${extension}`)) {
-        return Promise.reject({
-          message: t('yleiset.kiellettyTiedostopaate', { extension }),
-        });
-      } else if (maxSize && size > maxSize) {
-        return Promise.reject({
-          message: t('yleiset.kuvanTiedostokokoLiianSuuri'),
-        });
-      }
-
-      if (
-        !noDimensionCheckForExtensions.includes(extension) &&
-        (minDimensions || maxDimensions)
-      ) {
-        try {
-          dimensions = await getImageFileDimensions(file);
-        } catch (e) {
-          console.error(e);
-          return Promise.reject({
-            message: t('yleiset.kuvanResoluutioTuntematon'),
-          });
-        }
-      }
-
-      return new Promise((resolve, reject) => {
-        if (dimensions) {
-          if (
-            minDimensions &&
-            dimensions.width < minDimensions.width &&
-            dimensions.height < minDimensions.height
-          ) {
-            return reject({
-              message: t('yleiset.kuvanResoluutioLiianPieni'),
-            });
-          } else if (
-            maxDimensions &&
-            dimensions.width > maxDimensions.width &&
-            dimensions.height > maxDimensions.height
-          ) {
-            return reject({
-              message: t('yleiset.kuvanResoluutioLiianSuuri'),
-            });
-          }
-        }
-        return resolve();
-      });
-    },
-    [
-      accept,
-      maxSize,
-      minDimensions,
-      maxDimensions,
-      noDimensionCheckForExtensions,
-      t,
-    ],
-  );
 
   const fileUploadMachine = createImageUploadMachine({ url: value, error, t });
   const [state, send] = useMachine(fileUploadMachine, {
     services: {
       upload(ctx, e) {
-        return validate(e.files).then(() => upload(e.files[0]));
+        const p = validateInput(e.files, { ...props, t }).then(() =>
+          upload(e.files[0]),
+        );
+        // Log uncaught errors in validation/upload for easier debugging
+        p.catch(console.error);
+        return p;
       },
     },
   });

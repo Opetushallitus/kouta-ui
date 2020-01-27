@@ -171,8 +171,10 @@ export default {
     valitseVaihtoehdoista: 'Valitse vaihtoehdoista',
     hakukohteet: 'Hakukohteet',
     kuvanTiedostokokoLiianSuuri: 'Kuvan tiedostokoko on liian suuri.',
-    kuvanResoluutioLiianPieni: 'Kuvan resoluutio on liian pieni.',
-    kuvanResoluutioLiianSuuri: 'Kuvan resoluutio on liian suuri.',
+    kuvanKorkeusLiianPieni: 'Kuva on liian matala ({{height}} pikseliä).',
+    kuvanKorkeusLiianSuuri: 'Kuva on liian korkea ({{height}} pikseliä).',
+    kuvanLeveysLiianPieni: 'Kuva on liian kapea ({{width}} pikseliä).',
+    kuvanLeveysLiianSuuri: 'Kuva on liian leveä ({{width}} pikseliä).',
     tuetutTiedostomuodot: 'Tuetut tiedostomuodot',
     tiedostonMaksimikoko: 'Tiedoston maksimikoko',
     tiedostonMinimiresoluutio:

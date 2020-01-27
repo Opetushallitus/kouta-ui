@@ -176,10 +176,14 @@ const getToteutusByFormValues = values => {
     get(values, 'jarjestamistiedot.koulutuksenPaattymispaivamaara'),
   );
 
-  const koulutuksenAlkamiskausi =
-    get(values, 'jarjestamistiedot.koulutuksenAlkamiskausi') || null;
-  const koulutuksenAlkamisvuosi =
-    get(values, 'jarjestamistiedot.koulutuksenAlkamisvuosi') || null;
+  const koulutuksenAlkamiskausi = get(
+    values,
+    'jarjestamistiedot.koulutuksenAlkamiskausi',
+  );
+  const koulutuksenAlkamisvuosi = get(
+    values,
+    'jarjestamistiedot.koulutuksenAlkamisvuosi',
+  );
   const koulutuksenTarkkaAlkamisaika =
     get(values, 'jarjestamistiedot.koulutuksenTarkkaAlkamisaika') || false;
 
@@ -240,9 +244,9 @@ const getToteutusByFormValues = values => {
         maksullisuusKuvaus,
         koulutuksenAlkamispaivamaara,
         koulutuksenPaattymispaivamaara,
-        koulutuksenTarkkaAlkamisaika: koulutuksenTarkkaAlkamisaika,
-        koulutuksenAlkamiskausi: koulutuksenAlkamiskausi,
-        koulutuksenAlkamisvuosi: koulutuksenAlkamisvuosi,
+        koulutuksenTarkkaAlkamisaika,
+        koulutuksenAlkamiskausi,
+        koulutuksenAlkamisvuosi,
         onkoStipendia,
         stipendinKuvaus,
         stipendinMaara,

@@ -9,6 +9,8 @@ export const actionTypes = {
   DRAG_STOP: 'DRAG_STOP',
 };
 
+const { UPLOAD_FILE, REMOVE_FILE, DRAG_START, DRAG_STOP } = actionTypes;
+
 export const controlStates = {
   fileUploaded: 'fileUploaded',
   empty: 'empty',
@@ -18,12 +20,66 @@ export const controlStates = {
   draggingDisabled: 'dragging.disabled',
 };
 
-export const createImageUploadMachine = ({ url, error, t }) => {
-  let initial = controlStates.empty;
+const {
+  fileUploaded,
+  empty,
+  uploading,
+  error,
+  draggingEnabled,
+  draggingDisabled,
+} = controlStates;
+
+const createUploadingState = t => ({
+  id: uploading,
+  entry: assign({
+    file: (_, e) => e.files[0],
+  }),
+  invoke: {
+    id: 'uploadFile',
+    src: 'upload',
+    onDone: {
+      target: fileUploaded,
+      actions: assign({
+        url: (_, e) => e.data,
+      }),
+    },
+    onError: {
+      target: error,
+      actions: assign({
+        file: () => null,
+        url: () => null,
+        error: (_, e) =>
+          e.data instanceof Error
+            ? t('yleiset.kuvanLahetysVirhe')
+            : get(e, 'data.message'),
+      }),
+    },
+  },
+});
+
+const draggingStates = {
+  states: {
+    enabled: {
+      on: {
+        [DRAG_STOP]: `#${empty}`,
+        [UPLOAD_FILE]: `#${uploading}`,
+      },
+    },
+    disabled: {
+      on: {
+        [DRAG_STOP]: `#${fileUploaded}`,
+        [UPLOAD_FILE]: `#${fileUploaded}`,
+      },
+    },
+  },
+};
+
+export function createImageUploadMachine({ url, externalError, t }) {
+  let initial = empty;
   if (url) {
-    initial = controlStates.fileUploaded;
-  } else if (error) {
-    initial = controlStates.error;
+    initial = fileUploaded;
+  } else if (externalError) {
+    initial = error;
   }
 
   return Machine({
@@ -32,80 +88,38 @@ export const createImageUploadMachine = ({ url, error, t }) => {
     context: {
       file: null,
       url,
-      error,
+      error: externalError,
     },
     states: {
-      [controlStates.empty]: {
-        id: 'empty',
-        on: {
-          [actionTypes.UPLOAD_FILE]: controlStates.uploading,
-          [actionTypes.DRAG_START]: controlStates.draggingEnabled,
-        },
-      },
-      [controlStates.fileUploaded]: {
-        id: 'fileUploaded',
-        on: {
-          [actionTypes.REMOVE_FILE]: {
-            target: controlStates.empty,
-            actions: assign({
-              url: () => null,
-            }),
-          },
-          [actionTypes.DRAG_START]: controlStates.draggingDisabled,
-        },
-      },
-      [controlStates.uploading]: {
-        id: 'uploading',
+      [empty]: {
+        id: empty,
         entry: assign({
-          file: (_, e) => e.files[0],
+          url: () => null,
+          file: () => null,
         }),
-        invoke: {
-          id: 'uploadFile',
-          src: 'upload',
-          onDone: {
-            target: controlStates.fileUploaded,
-            actions: assign({
-              url: (_, e) => e.data,
-            }),
-          },
-          onError: {
-            target: controlStates.error,
-            actions: assign({
-              file: () => null,
-              url: () => null,
-              error: (ctx, e) =>
-                e.data instanceof Error
-                  ? t('yleiset.kuvanLahetysVirhe')
-                  : get(e, 'data.message'),
-            }),
-          },
+        on: {
+          [UPLOAD_FILE]: uploading,
+          [DRAG_START]: draggingEnabled,
         },
       },
-      [controlStates.error]: {
+      [fileUploaded]: {
+        id: fileUploaded,
         on: {
-          [actionTypes.UPLOAD_FILE]: controlStates.uploading,
-          [actionTypes.DRAG_START]: controlStates.draggingEnabled,
+          [REMOVE_FILE]: empty,
+          [DRAG_START]: draggingDisabled,
+        },
+      },
+      [uploading]: createUploadingState(t),
+      [error]: {
+        on: {
+          [UPLOAD_FILE]: uploading,
+          [DRAG_START]: draggingEnabled,
         },
         exit: assign({
           error: () => null,
         }),
       },
-      dragging: {
-        states: {
-          enabled: {
-            on: {
-              [actionTypes.DRAG_STOP]: '#empty',
-              [actionTypes.UPLOAD_FILE]: '#uploading',
-            },
-          },
-          disabled: {
-            on: {
-              [actionTypes.DRAG_STOP]: '#fileUploaded',
-              [actionTypes.UPLOAD_FILE]: '#fileUploaded',
-            },
-          },
-        },
-      },
+      dragging: draggingStates,
     },
   });
-};
+}

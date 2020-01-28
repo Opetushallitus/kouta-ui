@@ -182,6 +182,7 @@ export default {
     tiedostonMaksimiresoluutio:
       'Tiedoston maksimiresoluutio: {{width}} x {{height}} pikseliä',
     kuvanLahetysVirhe: 'Kuvan lähettäminen epäonnistui.',
+    teemakuva: 'Teemakuva',
   },
   ilmoitukset: {
     tuntematonVirhe:

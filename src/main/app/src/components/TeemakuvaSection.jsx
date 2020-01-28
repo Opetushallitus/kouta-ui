@@ -24,12 +24,12 @@ export const TeemakuvaSection = props => {
   return (
     <Field
       name={name}
-      label={'Teemakuva'}
+      label={t('yleiset.teemakuva')}
       component={FormFieldImageInput}
       upload={upload}
       maxSize={2000000}
       minDimensions={{ width: 1260, height: 400 }}
-      accept={['.jpeg', '.jpg', '.png']}
+      acceptedFileFormats={['.jpeg', '.jpg', '.png']}
     ></Field>
   );
 };

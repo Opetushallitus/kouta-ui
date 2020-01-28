@@ -1,6 +1,7 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import styled, { css } from 'styled-components';
+import { cond, constant } from 'lodash';
 import { getThemeProp, spacing } from '../../theme';
 import useTranslation from '../useTranslation';
 import Typography from '../Typography';
@@ -21,6 +22,130 @@ import {
   actionTypes as AT,
   controlStates as CS,
 } from './imageUploadMachine';
+
+async function validateImageDimensions({
+  dimensions,
+  maxDimensions,
+  minDimensions,
+  t,
+}) {
+  return new Promise((resolve, reject) => {
+    let error = null;
+    if (dimensions) {
+      if (maxDimensions) {
+        if (dimensions.width > maxDimensions.width) {
+          error = t('yleiset.kuvanLeveysLiianSuuri', dimensions);
+        } else if (dimensions.height > maxDimensions.height) {
+          error = t('yleiset.kuvanKorkeusLiianSuuri', dimensions);
+        }
+      }
+      if (minDimensions) {
+        if (dimensions.width < minDimensions.width) {
+          error = t('yleiset.kuvanLeveysLiianPieni', dimensions);
+        } else if (dimensions.height < minDimensions.height) {
+          error = t('yleiset.kuvanKorkeusLiianPieni', dimensions);
+        }
+      }
+    }
+    return error ? reject({ message: error }) : resolve();
+  });
+}
+
+function validateFileExtension({ acceptedFileFormats, extension, t }) {
+  return new Promise((resolve, reject) => {
+    return acceptedFileFormats && !acceptedFileFormats.includes(`.${extension}`)
+      ? reject({
+          message: t('yleiset.kiellettyTiedostopaate', { extension }),
+        })
+      : resolve();
+  });
+}
+
+function validateFileSize({ size, maxSize, t }) {
+  return new Promise((resolve, reject) => {
+    return maxSize && size > maxSize
+      ? reject({
+          message: t('yleiset.kuvanTiedostokokoLiianSuuri'),
+        })
+      : resolve();
+  });
+}
+
+async function validateInput(
+  files,
+  {
+    acceptedFileFormats,
+    maxSize,
+    minDimensions,
+    maxDimensions,
+    noDimensionCheckForExtensions = [],
+    t,
+  },
+) {
+  if (files.length !== 1) {
+    return Promise.reject({
+      message: t('yleiset.liitaVainYksiTiedosto'),
+    });
+  }
+
+  const file = files[0];
+  const { size } = file;
+  const extension = getFileExtension(file);
+  let dimensions;
+
+  await validateFileExtension({ acceptedFileFormats, extension, t });
+  await validateFileSize({ maxSize, size });
+
+  if (
+    !noDimensionCheckForExtensions.includes(extension) &&
+    (minDimensions || maxDimensions)
+  ) {
+    try {
+      dimensions = await getImageFileDimensions(file);
+    } catch (e) {
+      console.error(e);
+      return Promise.reject({
+        message: t('yleiset.kuvanResoluutioTuntematon'),
+      });
+    }
+  }
+
+  await validateImageDimensions({
+    dimensions,
+    minDimensions,
+    maxDimensions,
+    t,
+  });
+}
+
+const useMachineDropZone = ({ send }) => {
+  const onDrop = useCallback(
+    async files => {
+      send({ type: AT.UPLOAD_FILE, files });
+    },
+    [send],
+  );
+  const onDragEnter = useCallback(() => send({ type: AT.DRAG_START }), [send]);
+  const onDragLeave = useCallback(() => send({ type: AT.DRAG_STOP }), [send]);
+  const onRemove = useCallback(() => send({ type: AT.REMOVE_FILE }), [send]);
+
+  const { getRootProps, getInputProps, open } = useDropzone({
+    onDrop,
+    onDragEnter,
+    onDragLeave,
+    noClick: true,
+  });
+
+  return {
+    getRootProps,
+    getInputProps,
+    onDrop,
+    onDragEnter,
+    onDragLeave,
+    onRemove,
+    open,
+  };
+};
 
 const DragActiveIcon = styled(Icon).attrs({ type: 'cloud_upload' })`
   color: ${getThemeProp('palette.primary.main')};
@@ -75,48 +200,37 @@ const FlexWrapper = ({ children }) => (
   </Flex>
 );
 
-const ValueContent = ({ file, t, onRemove }) => {
-  return (
-    <FlexWrapper>
-      <FileUploadedMessage>{file ? file.name : ''}</FileUploadedMessage>
-      <Button
-        color="danger"
-        variant="contained"
-        type="button"
-        onClick={onRemove}
-      >
-        {t('yleiset.poista')}
-      </Button>
-    </FlexWrapper>
-  );
-};
+const ValueContent = ({ file, t, onRemove }) => (
+  <FlexWrapper>
+    <FileUploadedMessage>{file ? file.name : ''}</FileUploadedMessage>
+    <Button color="danger" variant="contained" type="button" onClick={onRemove}>
+      {t('yleiset.poista')}
+    </Button>
+  </FlexWrapper>
+);
 
-const DragActiveContent = ({ message }) => {
-  return (
-    <FlexWrapper>
-      <DragActiveIcon />
-      <PrimaryMessage>{message}</PrimaryMessage>
-    </FlexWrapper>
-  );
-};
+const DragActiveContent = ({ message }) => (
+  <FlexWrapper>
+    <DragActiveIcon />
+    <PrimaryMessage>{message}</PrimaryMessage>
+  </FlexWrapper>
+);
 
-const PlaceholderContent = ({ error, openDialog, t }) => {
-  return (
-    <FlexWrapper>
-      {error && <ErrorMessage>{error}</ErrorMessage>}
-      <Typography>{t('yleiset.raahaaLiitettavaTiedosto')}</Typography>
-      <Typography>{t('yleiset.tai')}</Typography>
-      <Button
-        color="primary"
-        variant="outlined"
-        type="button"
-        onClick={openDialog}
-      >
-        {t('yleiset.selaaTiedostoja')}
-      </Button>
-    </FlexWrapper>
-  );
-};
+const PlaceholderContent = ({ error, openDialog, t }) => (
+  <FlexWrapper>
+    {error && <ErrorMessage>{error}</ErrorMessage>}
+    <Typography>{t('yleiset.raahaaLiitettavaTiedosto')}</Typography>
+    <Typography>{t('yleiset.tai')}</Typography>
+    <Button
+      color="primary"
+      variant="outlined"
+      type="button"
+      onClick={openDialog}
+    >
+      {t('yleiset.selaaTiedostoja')}
+    </Button>
+  </FlexWrapper>
+);
 
 const Loader = ({ message }) => (
   <FlexWrapper>
@@ -129,89 +243,92 @@ const InfoText = props => (
   <Typography variant="secondary" as="div" marginBottom={1} {...props} />
 );
 
-const validateInput = async (
-  files,
-  {
-    accept,
-    maxSize,
-    minDimensions,
-    maxDimensions,
-    noDimensionCheckForExtensions = [],
-    t,
-  },
-) => {
-  if (files.length !== 1) {
-    return Promise.reject({
-      message: t('yleiset.liitaVainYksiTiedosto'),
-    });
-  }
+const ImageConstraints = ({
+  acceptedFileFormats,
+  maxSize,
+  minDimensions,
+  maxDimensions,
+  t,
+}) => (
+  <>
+    {acceptedFileFormats && (
+      <InfoText>
+        {t('yleiset.tuetutTiedostomuodot')}: {acceptedFileFormats.join(' ')}
+      </InfoText>
+    )}
+    {maxSize && (
+      <InfoText>
+        {t('yleiset.tiedostonMaksimikoko')}: {prettyBytes(maxSize)}
+      </InfoText>
+    )}
+    {minDimensions && (
+      <InfoText>
+        {t('yleiset.tiedostonMinimiresoluutio', minDimensions)}
+      </InfoText>
+    )}
+    {maxDimensions && (
+      <InfoText>
+        {t('yleiset.tiedostonMaksimiresoluutio', maxDimensions)}
+      </InfoText>
+    )}
+  </>
+);
 
-  const file = files[0];
-
-  const { size } = file;
-  const extension = getFileExtension(file);
-  let dimensions;
-
-  if (accept && !accept.includes(`.${extension}`)) {
-    return Promise.reject({
-      message: t('yleiset.kiellettyTiedostopaate', { extension }),
-    });
-  } else if (maxSize && size > maxSize) {
-    return Promise.reject({
-      message: t('yleiset.kuvanTiedostokokoLiianSuuri'),
-    });
-  }
-
-  if (
-    !noDimensionCheckForExtensions.includes(extension) &&
-    (minDimensions || maxDimensions)
-  ) {
-    try {
-      dimensions = await getImageFileDimensions(file);
-    } catch (e) {
-      console.error(e);
-      return Promise.reject({
-        message: t('yleiset.kuvanResoluutioTuntematon'),
-      });
-    }
-  }
-  return new Promise((resolve, reject) => {
-    let error = null;
-    if (dimensions) {
-      if (maxDimensions) {
-        if (dimensions.width > maxDimensions.width) {
-          error = t('yleiset.kuvanLeveysLiianSuuri', dimensions);
-        } else if (dimensions.height > maxDimensions.height) {
-          error = t('yleiset.kuvanKorkeusLiianSuuri', dimensions);
-        }
-      }
-      if (minDimensions) {
-        if (dimensions.width < minDimensions.width) {
-          error = t('yleiset.kuvanLeveysLiianPieni', dimensions);
-        } else if (dimensions.height < minDimensions.height) {
-          error = t('yleiset.kuvanKorkeusLiianPieni', dimensions);
-        }
-      }
-    }
-    return error ? reject({ message: error }) : resolve();
-  });
-};
+const c = constant;
+const InputAreaContent = ({ file, machineError, state, open, onRemove, t }) => (
+  <>
+    {cond([
+      [
+        c([CS.empty, CS.error].some(state.matches)),
+        c(<PlaceholderContent t={t} openDialog={open} error={machineError} />),
+      ],
+      [
+        c(state.matches(CS.uploading)),
+        c(<Loader message={t('yleiset.latausKaynnissa')} />),
+      ],
+      [
+        c(state.matches(CS.draggingEnabled)),
+        c(
+          <DragActiveContent
+            message={t('yleiset.pudotaTiedostoLadataksesi')}
+          />,
+        ),
+      ],
+      [
+        c([CS.fileUploaded, CS.draggingDisabled].some(state.matches)),
+        c(<ValueContent file={file} onRemove={onRemove} t={t} />),
+      ],
+      [
+        c(true),
+        () => {
+          console.error(
+            `ImageInput: Unknown control state ${JSON.stringify(state.value)}`,
+          );
+        },
+      ],
+    ])()}
+  </>
+);
 
 export const ImageInput = props => {
   const {
     disabled = false,
     onChange = noop,
-    error,
+    error: externalError,
     upload,
     maxSize,
     minDimensions,
     maxDimensions,
-    accept,
+    acceptedFileFormats,
     value,
   } = props;
   const { t } = useTranslation();
 
-  const fileUploadMachine = createImageUploadMachine({ url: value, error, t });
+  const fileUploadMachine = createImageUploadMachine({
+    url: value,
+    externalError,
+    t,
+  });
   const [state, send] = useMachine(fileUploadMachine, {
     services: {
       upload(ctx, e) {
@@ -226,74 +343,23 @@ export const ImageInput = props => {
   });
 
   const { file, url, error: machineError } = state.context;
-
-  const onDrop = useCallback(
-    async files => {
-      send({ type: AT.UPLOAD_FILE, files });
-    },
-    [send],
-  );
-  const onDragEnter = useCallback(() => send({ type: AT.DRAG_START }), [send]);
-
-  const onDragLeave = useCallback(() => send({ type: AT.DRAG_STOP }), [send]);
-
-  const onRemove = useCallback(() => {
-    send({ type: AT.REMOVE_FILE });
-  }, [send]);
-
-  const { getRootProps, getInputProps, open } = useDropzone({
-    onDrop,
-    onDragEnter,
-    onDragLeave,
-    noClick: true,
+  const { getInputProps, getRootProps, onRemove, open } = useMachineDropZone({
+    send,
   });
 
   useEffect(() => onChange(url), [onChange, url]);
 
-  let content;
-  if (state.matches(CS.empty) || state.matches(CS.error)) {
-    content = (
-      <PlaceholderContent t={t} openDialog={open} error={machineError} />
-    );
-  } else if (state.matches(CS.uploading)) {
-    content = <Loader message={t('yleiset.latausKaynnissa')} />;
-  } else if (state.matches(CS.draggingEnabled)) {
-    content = (
-      <DragActiveContent message={t('yleiset.pudotaTiedostoLadataksesi')} />
-    );
-  } else if (
-    state.matches(CS.fileUploaded) ||
-    state.matches(CS.draggingDisabled)
-  ) {
-    content = <ValueContent file={file} onRemove={onRemove} t={t} />;
-  } else {
-    console.error(
-      `ImageInput: Unknown control state "${JSON.stringify(state.value)}"`,
-    );
-  }
-
   return (
     <>
-      {accept && (
-        <InfoText>
-          {t('yleiset.tuetutTiedostomuodot')}: {accept.join(' ')}
-        </InfoText>
-      )}
-      {maxSize && (
-        <InfoText>
-          {t('yleiset.tiedostonMaksimikoko')}: {prettyBytes(maxSize)}
-        </InfoText>
-      )}
-      {minDimensions && (
-        <InfoText>
-          {t('yleiset.tiedostonMinimiresoluutio', minDimensions)}
-        </InfoText>
-      )}
-      {maxDimensions && (
-        <InfoText>
-          {t('yleiset.tiedostonMaksimiresoluutio', maxDimensions)}
-        </InfoText>
-      )}
+      <ImageConstraints
+        {...{
+          minDimensions,
+          maxDimensions,
+          maxSize,
+          acceptedFileFormats,
+          t,
+        }}
+      />
       <Container
         {...getRootProps()}
         active={state.matches(CS.draggingEnabled)}
@@ -305,12 +371,14 @@ export const ImageInput = props => {
       >
         <input
           {...getInputProps({
-            accept,
+            accept: acceptedFileFormats,
             multiple: false,
             disabled,
           })}
         />
-        {content}
+        <InputAreaContent
+          {...{ file, open, onRemove, state, machineError, t }}
+        />
       </Container>
     </>
   );

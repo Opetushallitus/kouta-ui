@@ -170,3 +170,7 @@ export const LIITTEEN_TOIMITUSTAPA = {
   JARJESTAJAN_OSOITE: 'hakijapalvelu',
   MUU_OSOITE: 'osoite',
 };
+
+export const TEEMAKUVA_ACCEPTED_FORMATS = ['.jpg', '.jpeg', '.png'];
+export const TEEMAKUVA_MAX_SIZE = 2000000;
+export const TEEMAKUVA_MIN_DIMENSIONS = { width: 1260, height: 400 };

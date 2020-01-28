@@ -2,8 +2,7 @@ const koutaBackendDevUrl = `https://virkailija.hahtuvaopintopolku.fi/kouta-backe
 const virkailijaDevUrl = `https://virkailija.hahtuvaopintopolku.fi`;
 
 export const development = ({ isCypress }) => ({
-  'kouta-backend.base-url':
-    'http://localhost:' + process.env.REACT_APP_BACKEND_PORT,
+  'kouta-backend.base-url': 'http://localhost:' + process.env.REACT_APP_BACKEND_PORT,
   'kouta-backend.koulutus': `${koutaBackendDevUrl}/koulutus`,
   'kouta-backend.koulutus-by-oid': `${koutaBackendDevUrl}/koulutus/$1`,
   'kouta-backend.koulutus-list': `${koutaBackendDevUrl}/koulutus/list`,

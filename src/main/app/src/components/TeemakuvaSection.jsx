@@ -6,6 +6,11 @@ import { FormFieldImageInput } from './formFields';
 import HttpContext from './HttpContext';
 import UrlContext from './UrlContext';
 import uploadTeemakuva from '../utils/kouta/uploadTeemakuva';
+import {
+  TEEMAKUVA_ACCEPTED_FORMATS,
+  TEEMAKUVA_MAX_SIZE,
+  TEEMAKUVA_MIN_DIMENSIONS,
+} from '../constants';
 
 export const TeemakuvaSection = props => {
   const { name } = props;
@@ -27,9 +32,9 @@ export const TeemakuvaSection = props => {
       label={t('yleiset.teemakuva')}
       component={FormFieldImageInput}
       upload={upload}
-      maxSize={2000000}
-      minDimensions={{ width: 1260, height: 400 }}
-      acceptedFileFormats={['.jpeg', '.jpg', '.png']}
+      maxSize={TEEMAKUVA_MAX_SIZE}
+      minDimensions={TEEMAKUVA_MIN_DIMENSIONS}
+      acceptedFileFormats={TEEMAKUVA_ACCEPTED_FORMATS}
     ></Field>
   );
 };

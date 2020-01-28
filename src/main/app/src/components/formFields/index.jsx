@@ -93,7 +93,14 @@ export const FormFieldYearSelect = createComponent(
   }),
 );
 
-export const FormFieldImageInput = createComponent(ImageInput, simpleMapProps);
+export const FormFieldImageInput = createComponent(
+  ImageInput,
+  ({ input, ...props }) => ({
+    ...input,
+    imageUploadUrl: input.value,
+    ...props,
+  }),
+);
 
 export const FormFieldKieliversiotSelect = createComponent(
   KieliversiotSelect,

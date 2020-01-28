@@ -134,7 +134,7 @@ export default {
       su: 'Su',
     },
     pudotaTiedostoLadataksesi: 'Pudota tiedosto ladataksesi',
-    raahaaLiitettavaTiedosto: 'Raahaa liitetettävä tiedosto',
+    raahaaLiitettavaTiedosto: 'Raahaa liitettävä tiedosto',
     tai: 'tai',
     latausKaynnissa: 'Lataus käynnissä',
     tiedostonLataaminenEpaonnistui:
@@ -440,7 +440,7 @@ export default {
     valitsePohjakoulutusvaatimus: 'Valitse pohjakoulutusvaatimus',
     hakukohteenPerustiedot: 'Hakukohteen perustiedot',
     hakuajat: 'Hakuajat',
-    hakuunLiitetytHakuajat: 'Hakuun liitetetyt hakuajat',
+    hakuunLiitetytHakuajat: 'Hakuun liitetyt hakuajat',
     haullaEiHakuaikaa: 'Hakuun ei ole liitetty hakuaikoja',
     hakukohteellaEriHakuaika: 'Hakukohteella on erillinen hakuaika',
     aloituspaikkojenLukumaara: 'Aloituspaikkojen lukumäärä',

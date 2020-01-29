@@ -8,7 +8,7 @@ import { stubKoodiRoute, stubKoodistoRoute } from './utils';
 export const stubOppilaitosFormRoutes = ({ organisaatioOid }) => {
   stubKoodiRoute(createKoodi({ koodisto: 'posti', versio: 2 }));
 
-  stubKoodistoRoute({ koodisto: 'koulutuksenlisatiedot', cy });
+  stubKoodistoRoute({ koodisto: 'organisaationkuvaustiedot', cy });
 
   cy.route({
     method: 'POST',

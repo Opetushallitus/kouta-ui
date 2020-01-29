@@ -56,7 +56,7 @@ const EditKoulutusFooter = ({ koulutus, organisaatioOid, history }) => {
     return roleBuilder.hasUpdate(KOULUTUS_ROLE, organisaatio);
   }, [organisaatio, roleBuilder]);
 
-  const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid);
+  const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid, {excludeToimipiste: true});
 
   const availableTarjoajaOids = useMemo(
     () => getAvailableTarjoajaOids(hierarkia),

@@ -1,22 +1,17 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import styled, { css } from 'styled-components';
-import { cond, constant } from 'lodash';
+import { cond, noop } from 'lodash';
+import prettyBytes from 'pretty-bytes';
 import { getThemeProp, spacing } from '../../theme';
 import useTranslation from '../useTranslation';
 import Typography from '../Typography';
 import Flex, { FlexItem } from '../Flex';
 import Icon from '../Icon';
-import {
-  noop,
-  useMachine,
-  getFileExtension,
-  getImageFileDimensions,
-} from '../../utils';
+import { useMachine, ifAny, otherwise } from '../../utils';
 import Spin from '../Spin';
 import Button from '../Button';
 import { disabledStyle } from '../../system';
-import prettyBytes from 'pretty-bytes';
 import {
   createImageUploadMachine,
   actionTypes as AT,
@@ -180,39 +175,38 @@ const ImageConstraints = ({
   </>
 );
 
-const c = constant;
 const InputAreaContent = ({ file, machineError, state, open, onRemove, t }) => (
   <>
     {cond([
       [
-        c([CS.empty, CS.error].some(state.matches)),
-        c(<PlaceholderContent t={t} openDialog={open} error={machineError} />),
-      ],
-      [
-        c(state.matches(CS.uploading)),
-        c(<Loader message={t('yleiset.latausKaynnissa')} />),
-      ],
-      [
-        c(state.matches(CS.draggingEnabled)),
-        c(
-          <DragActiveContent
-            message={t('yleiset.pudotaTiedostoLadataksesi')}
-          />,
+        ifAny([CS.empty, CS.error]),
+        () => (
+          <PlaceholderContent t={t} openDialog={open} error={machineError} />
         ),
       ],
       [
-        c([CS.fileUploaded, CS.draggingDisabled].some(state.matches)),
-        c(<ValueContent file={file} onRemove={onRemove} t={t} />),
+        ifAny(CS.uploading),
+        () => <Loader message={t('yleiset.latausKaynnissa')} />,
       ],
       [
-        c(true),
+        ifAny(CS.draggingEnabled),
+        () => (
+          <DragActiveContent message={t('yleiset.pudotaTiedostoLadataksesi')} />
+        ),
+      ],
+      [
+        ifAny([CS.fileUploaded, CS.draggingDisabled]),
+        () => <ValueContent file={file} onRemove={onRemove} t={t} />,
+      ],
+      [
+        otherwise,
         () => {
           console.error(
             `ImageInput: Unknown control state ${JSON.stringify(state.value)}`,
           );
         },
       ],
-    ])()}
+    ])(state.matches)}
   </>
 );
 

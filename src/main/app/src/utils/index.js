@@ -1,11 +1,6 @@
-import toPairs from 'lodash/toPairs';
-import zipObject from 'lodash/zipObject';
-import pick from 'lodash/pick';
 import dateFnsformatDate from 'date-fns/format';
-import padStart from 'lodash/padStart';
 import memoizee from 'memoizee';
-import flowRight from 'lodash/flowRight';
-import last from 'lodash/last';
+import { flowRight, last, padStart, pick, toPairs, zipObject } from 'lodash';
 import { useMachine as useXstateMachine } from '@xstate/react';
 
 export const isString = value => typeof value === 'string';
@@ -182,3 +177,14 @@ export const useMachine = (machine, options) =>
     devTools: process.env.NODE_ENV === 'development',
     ...options,
   });
+
+/**
+ * Check that given predicate returns truthy for a value or any value in an array
+ * Can be used with lodash.cond() to improve readability
+ * @param {*} value A single value or an array of values to check
+ * @param {*} predicate A function returning truthy for a single matching value
+ */
+export const ifAny = value => predicate =>
+  isArray(value) ? value.some(predicate) : predicate(value);
+
+export const otherwise = () => true;

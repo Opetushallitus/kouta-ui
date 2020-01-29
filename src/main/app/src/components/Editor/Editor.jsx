@@ -159,9 +159,8 @@ const StyleButton = ({
 
 const HEADER_OPTIONS = [
   { value: 'unstyled', label: 'Normaali teksti' },
-  { value: 'header-one', label: 'Otsikko 1' },
-  { value: 'header-two', label: 'Otsikko 2' },
-  { value: 'header-three', label: 'Otsikko 3' },
+  { value: 'header-three', label: 'Otsikko 1' },
+  { value: 'header-four', label: 'Otsikko 2' },
 ];
 
 const HeaderSelect = ({ editorState, onChange, editorRef }) => {

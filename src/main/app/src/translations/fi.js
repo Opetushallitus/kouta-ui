@@ -144,7 +144,7 @@ export default {
     kiellettyTiedostopaate: 'Tiedostopääte "{{extension}}" ei ole sallittu.',
     kuvanResoluutioTuntematon:
       'Kuvatiedoston resoluutiota ei pystytty tunnistamaan.',
-    liitaVainYksiKuva: 'Vain yhden kuvan liittäminen on sallittua.',
+    liitaVainYksiTiedosto: 'Vain yhden kuvan liittäminen on sallittua.',
     varmistaLomakkeenKentat:
       'Varmistathan että olet täyttänyt lomakkeen kaikki pakolliset kentät',
     valitseMitaHakulomakettaKaytetaan: 'Valitse mitä hakulomaketta käytetään',

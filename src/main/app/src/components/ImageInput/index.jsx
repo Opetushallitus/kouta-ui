@@ -220,12 +220,12 @@ export const ImageInput = props => {
     minDimensions,
     maxDimensions,
     acceptedFileFormats,
-    imageUploadUrl,
+    uploadedImageUrl,
   } = props;
   const { t } = useTranslation();
 
   const fileUploadMachine = createImageUploadMachine({
-    url: imageUploadUrl,
+    url: uploadedImageUrl,
     externalError,
     t,
   });

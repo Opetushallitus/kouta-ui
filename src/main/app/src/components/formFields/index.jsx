@@ -97,7 +97,7 @@ export const FormFieldImageInput = createComponent(
   ImageInput,
   ({ input, ...props }) => ({
     ...input,
-    imageUploadUrl: input.value,
+    uploadedImageUrl: input.value,
     ...props,
   }),
 );

@@ -1,13 +1,29 @@
-import get from 'lodash/get';
-import set from 'lodash/set';
-
+import {
+  cond,
+  every,
+  get,
+  isEmpty,
+  isNil,
+  isPlainObject,
+  isString,
+  set,
+  stubTrue,
+  stubFalse,
+} from 'lodash';
 import { isArray, getInvalidTranslations } from './index';
-import isEmpty from './isEmpty';
+
+const allFuncs = (...fns) => value => every(fns, fn => fn(value));
 
 const clone = value => JSON.parse(JSON.stringify(value));
 
 const exists = value => {
-  return value !== undefined && value !== '' && value !== null;
+  return cond([
+    [isNil, stubFalse],
+    [allFuncs(isArray, isString, v => v && v.length === 0), stubFalse],
+    [allFuncs(isPlainObject, isEmpty), stubFalse],
+    [allFuncs(isPlainObject, v => v.value === ''), stubFalse],
+    [stubTrue, stubTrue],
+  ])(value);
 };
 
 class ErrorBuilder {

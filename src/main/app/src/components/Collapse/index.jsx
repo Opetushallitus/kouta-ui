@@ -1,8 +1,8 @@
-import React, { useRef, useState, useCallback } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import { setLightness } from 'polished';
 
-import { isString, noop, isFunction } from '../../utils';
+import { isString, noop } from '../../utils';
 import { getThemeProp, spacing } from '../../theme';
 import Typography from '../Typography';
 import DropdownIcon from '../DropdownIcon';
@@ -78,38 +78,22 @@ const Collapse = ({
   header = null,
   footer = null,
   children = null,
-  open: openProp,
-  defaultOpen = false,
+  open,
   active = false,
   onToggle = noop,
   toggleOnHeaderClick = true,
   ...props
 }) => {
-  const [openState, setOpenState] = useState(defaultOpen);
-  const { current: isControlled } = useRef(openProp !== undefined);
-
-  const open = isControlled ? Boolean(openProp) : openState;
-
-  const handleToggle = useCallback(() => {
-    if (!isControlled) {
-      setOpenState(o => !o);
-    }
-
-    if (isFunction(onToggle)) {
-      onToggle();
-    }
-  }, [isControlled, onToggle]);
-
   return (
     <Container active={active} {...props}>
       <HeaderContainer open={open}>
         <HeaderContent
           toggleOnHeaderClick={toggleOnHeaderClick}
-          onClick={toggleOnHeaderClick ? handleToggle : noop}
+          onClick={toggleOnHeaderClick ? onToggle : noop}
         >
           {renderHeader(header)}
         </HeaderContent>
-        <HeaderToggle onClick={handleToggle}>
+        <HeaderToggle onClick={onToggle}>
           <ToggleIcon icon="expand_more" role="button" open={open} />
         </HeaderToggle>
       </HeaderContainer>

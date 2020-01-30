@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import Flex, { FlexItem } from '../Flex';
@@ -31,8 +31,11 @@ const ListCollapse = ({
   header = null,
   icon = null,
   toggleOnHeaderClick = false,
+  defaultOpen = true,
   ...props
 }) => {
+  const [isOpen, setOpen] = useState(() => defaultOpen);
+
   const collapseHeader = (
     <HeaderWrapper>
       <Flex justifyBetween alignCenter>
@@ -53,6 +56,8 @@ const ListCollapse = ({
     <Collapse
       toggleOnHeaderClick={toggleOnHeaderClick}
       header={collapseHeader}
+      open={isOpen}
+      onToggle={() => setOpen(open => !open)}
       {...props}
     />
   );

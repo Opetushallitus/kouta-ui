@@ -1,7 +1,9 @@
-const scrollElementIntoView = element => {
-  try {
-    element.scrollIntoView({ behavior: 'smooth' });
-  } catch (e) {}
+const scrollElementIntoView = (element, delay = 0) => {
+  setTimeout(() => {
+    try {
+      element.scrollIntoView({ behavior: 'smooth' });
+    } catch (e) {}
+  }, delay);
 };
 
 export default scrollElementIntoView;

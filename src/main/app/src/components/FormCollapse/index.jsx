@@ -131,6 +131,7 @@ const FormCollapse = ({
     languages,
     onLanguageChange: setLanguage,
     index,
+    collapseOpen: isOpen,
   });
 
   return (

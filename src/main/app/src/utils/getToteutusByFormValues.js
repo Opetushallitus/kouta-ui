@@ -224,6 +224,8 @@ const getToteutusByFormValues = values => {
     }),
   );
 
+  const teemakuva = get(values, 'teemakuva');
+
   return {
     nimi,
     tarjoajat,
@@ -275,6 +277,7 @@ const getToteutusByFormValues = values => {
       suunniteltuKesto,
       toteutusjaksot,
       tutkinnonOsat,
+      teemakuva,
     },
   };
 };

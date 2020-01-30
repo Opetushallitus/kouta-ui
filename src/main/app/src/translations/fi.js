@@ -134,11 +134,17 @@ export default {
       su: 'Su',
     },
     pudotaTiedostoLadataksesi: 'Pudota tiedosto ladataksesi',
-    raahaaLiitettavaTiedosto:
-      'Raahaa liitetettävä tiedosto, tai klikkaa selataksesi tiedostoja',
+    raahaaLiitettavaTiedosto: 'Raahaa liitettävä tiedosto',
+    tai: 'tai',
+    latausKaynnissa: 'Lataus käynnissä',
     tiedostonLataaminenEpaonnistui:
       'Tiedoston lataaminen epäonnistui, yritä uudelleen',
     ladatutTiedostot: 'Ladatut tiedostot',
+    selaaTiedostoja: 'Selaa tiedostoja',
+    kiellettyTiedostopaate: 'Tiedostopääte "{{extension}}" ei ole sallittu.',
+    kuvanResoluutioTuntematon:
+      'Kuvatiedoston resoluutiota ei pystytty tunnistamaan.',
+    liitaVainYksiTiedosto: 'Vain yhden kuvan liittäminen on sallittua.',
     varmistaLomakkeenKentat:
       'Varmistathan että olet täyttänyt lomakkeen kaikki pakolliset kentät',
     valitseMitaHakulomakettaKaytetaan: 'Valitse mitä hakulomaketta käytetään',
@@ -164,6 +170,19 @@ export default {
     kirjoitaHakusana: 'Kirjoita hakusana',
     valitseVaihtoehdoista: 'Valitse vaihtoehdoista',
     hakukohteet: 'Hakukohteet',
+    kuvanTiedostokokoLiianSuuri: 'Kuvan tiedostokoko on liian suuri.',
+    kuvanKorkeusLiianPieni: 'Kuva on liian matala ({{height}} pikseliä).',
+    kuvanKorkeusLiianSuuri: 'Kuva on liian korkea ({{height}} pikseliä).',
+    kuvanLeveysLiianPieni: 'Kuva on liian kapea ({{width}} pikseliä).',
+    kuvanLeveysLiianSuuri: 'Kuva on liian leveä ({{width}} pikseliä).',
+    tuetutTiedostomuodot: 'Tuetut tiedostomuodot',
+    tiedostonMaksimikoko: 'Tiedoston maksimikoko',
+    tiedostonMinimiresoluutio:
+      'Tiedoston minimiresoluutio: {{width}} x {{height}} pikseliä',
+    tiedostonMaksimiresoluutio:
+      'Tiedoston maksimiresoluutio: {{width}} x {{height}} pikseliä',
+    kuvanLahetysVirhe: 'Kuvan lähettäminen epäonnistui.',
+    teemakuva: 'Teemakuva',
   },
   ilmoitukset: {
     tuntematonVirhe:
@@ -318,6 +337,7 @@ export default {
       'Käyttäjälläsi ei ole oikeuksia muokata tätä koulutusta',
     tarjoajienLukumaara:
       'Koulutuksen järjestäjien tämänhetkinen lukumäärä on {{lukumaara}}',
+    koulutuksenTeemakuva: 'Koulutuksen teemakuva',
   },
   toteutuslomake: {
     toteutuksenTiedot: 'Toteutuksen tiedot',
@@ -386,6 +406,7 @@ export default {
     hakukohteenLittaminen: 'Hakukohteen liittäminen toteutukseen',
     eiMuokkausOikeutta:
       'Käyttäjälläsi ei ole oikeuksia muokata tätä toteutusta',
+    toteutuksenTeemakuva: 'Toteutuksen teemakuva',
   },
   hakulomake: {
     haunNimi: 'Haun nimi',
@@ -420,7 +441,7 @@ export default {
     valitsePohjakoulutusvaatimus: 'Valitse pohjakoulutusvaatimus',
     hakukohteenPerustiedot: 'Hakukohteen perustiedot',
     hakuajat: 'Hakuajat',
-    hakuunLiitetytHakuajat: 'Hakuun liitetetyt hakuajat',
+    hakuunLiitetytHakuajat: 'Hakuun liitetyt hakuajat',
     haullaEiHakuaikaa: 'Hakuun ei ole liitetty hakuaikoja',
     hakukohteellaEriHakuaika: 'Hakukohteella on erillinen hakuaika',
     aloituspaikkojenLukumaara: 'Aloituspaikkojen lukumäärä',
@@ -533,6 +554,8 @@ export default {
     oppilaitoksenYhteystiedot: 'Oppilaitoksen yhteystiedot',
     yhteystiedotInfo: 'Anna oppilaitokselle tarvittavat yhteystiedot',
     oppilaitoksenTila: 'Oppilaitoksen tila',
+    oppilaitoksenTeemakuva: 'Oppilaitoksen teemakuva',
+    logo: 'Oppilaitoksen logo',
   },
   oppilaitoksenOsaLomake: {
     oppilaitoksenOsanPerustiedot: 'Oppilaitoksen osan perustiedot',

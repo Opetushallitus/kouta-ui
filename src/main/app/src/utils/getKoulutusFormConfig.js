@@ -98,6 +98,7 @@ const config = createFormConfigBuilder()
     KOULUTUSTYYPPI.OSAAMISALA,
   ])
   .registerField('lisatiedot', 'osiot', KOULUTUSTYYPIT)
+  .registerField('teemakuva', 'teemakuva', KOULUTUSTYYPIT)
   .registerField(
     'jarjestyspaikka',
     'jarjestyspaikka',

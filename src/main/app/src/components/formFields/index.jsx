@@ -12,7 +12,7 @@ import DateTimeInput from '../DateTimeInput';
 import TimeInput from '../TimeInput';
 import Editor from '../Editor';
 import YearSelect from '../YearSelect';
-import FileInput from '../FileInput';
+import ImageInput from '../ImageInput';
 import KieliversiotSelect from '../KieliversiotSelect';
 import KoulutustyyppiSelect from '../KoulutustyyppiSelect';
 import SoraKuvausSelect from '../SoraKuvausSelect';
@@ -93,7 +93,14 @@ export const FormFieldYearSelect = createComponent(
   }),
 );
 
-export const FormFieldFileInput = createComponent(FileInput, simpleMapProps);
+export const FormFieldImageInput = createComponent(
+  ImageInput,
+  ({ input, ...props }) => ({
+    ...input,
+    uploadedImageUrl: input.value,
+    ...props,
+  }),
+);
 
 export const FormFieldKieliversiotSelect = createComponent(
   KieliversiotSelect,

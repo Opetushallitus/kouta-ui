@@ -36,6 +36,7 @@ export const development = ({ isCypress }) => ({
   'kouta-backend.search.haut': `${koutaBackendDevUrl}/search/haut`,
   'kouta-backend.search.hakukohteet': `${koutaBackendDevUrl}/search/hakukohteet`,
   'kouta-backend.search.valintaperusteet': `${koutaBackendDevUrl}/search/valintaperusteet`,
+  'kouta-backend.upload-theme-image': `${koutaBackendDevUrl}/upload/theme-image`,
   'koodisto-service.base-url': `${virkailijaDevUrl}/koodisto-service`,
   'koodisto-service.sisaltyy-alakoodit': `${virkailijaDevUrl}/koodisto-service/rest/json/relaatio/sisaltyy-alakoodit/$1?koodiVersio=$2`,
   'koodisto-service.sisaltyy-ylakoodit': `${virkailijaDevUrl}/koodisto-service/rest/json/relaatio/sisaltyy-ylakoodit/$1`,

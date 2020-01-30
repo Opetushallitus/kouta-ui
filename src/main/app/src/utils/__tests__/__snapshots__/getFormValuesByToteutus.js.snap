@@ -198,6 +198,7 @@ Object {
     "org1",
     "org2",
   ],
+  "teemakuva": undefined,
   "tiedot": Object {
     "aloituspaikat": "251",
     "ilmoittautumislinkki": Object {

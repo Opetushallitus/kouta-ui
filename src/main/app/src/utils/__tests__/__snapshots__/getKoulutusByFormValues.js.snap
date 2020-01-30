@@ -37,6 +37,7 @@ Object {
       },
     ],
     "opintojenLaajuusKoodiUri": "laajuus_1#1",
+    "teemakuva": undefined,
     "tutkintonimikeKoodiUrit": Array [
       "nimike_1#1",
       "nimike_2#1",

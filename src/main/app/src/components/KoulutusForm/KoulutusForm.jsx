@@ -18,7 +18,8 @@ import NakyvyysSection from './NakyvyysSection';
 import useTranslation from '../useTranslation';
 import useFieldValue from '../useFieldValue';
 import JulkaisutilaSection from './JulkaisutilaSection';
-import isOphOrganisaatio from "../../utils/isOphOrganisaatio";
+import isOphOrganisaatio from '../../utils/isOphOrganisaatio';
+import TeemakuvaSection from '../TeemakuvaSection';
 
 const PohjaFormCollapse = ({
   children,
@@ -60,7 +61,8 @@ const KoulutusForm = ({
   const koulutuskoodi = useFieldValue('information.koulutus');
   const languageTabs = kieliversiotValue || [];
   const isNewOphKoulutus = isOphOrganisaatio(organisaatioOid) && isNewKoulutus;
-  const isExistingOphKoulutus = isOphOrganisaatio(organisaatioOid) && !isNewKoulutus;
+  const isExistingOphKoulutus =
+    isOphOrganisaatio(organisaatioOid) && !isNewKoulutus;
 
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps} configured>
@@ -135,6 +137,14 @@ const KoulutusForm = ({
         <LisatiedotSection name="lisatiedot" />
       </FormCollapse>
 
+      <FormCollapse
+        section="teemakuva"
+        header={t('koulutuslomake.koulutuksenTeemakuva')}
+        {...getTestIdProps('teemakuvaSection')}
+      >
+        <TeemakuvaSection name="teemakuva" />
+      </FormCollapse>
+
       {!isNewOphKoulutus ? (
         <FormCollapse
           section="jarjestyspaikka"
@@ -147,7 +157,8 @@ const KoulutusForm = ({
             name="tarjoajat"
             disableTarjoajaHierarkia={isExistingOphKoulutus}
           />
-        </FormCollapse>) : null}
+        </FormCollapse>
+      ) : null}
 
       <FormCollapse
         section="julkisuus"
@@ -162,10 +173,7 @@ const KoulutusForm = ({
         header={t('koulutuslomake.koulutuksenTila')}
         {...getTestIdProps('tilaSection')}
       >
-        <JulkaisutilaSection
-          name="tila"
-          showArkistoitu={!isNewKoulutus}
-        />
+        <JulkaisutilaSection name="tila" showArkistoitu={!isNewKoulutus} />
       </FormCollapse>
 
       {isFunction(onAttachToteutus) ? (

@@ -35,6 +35,8 @@ const getKoulutusByFormValues = values => {
     kielivalinta,
   );
 
+  const teemakuva = get(values, 'teemakuva');
+
   const julkinen = Boolean(get(values, 'julkinen'));
 
   return {
@@ -55,6 +57,7 @@ const getKoulutusByFormValues = values => {
       tutkintonimikeKoodiUrit,
       kuvauksenNimi,
       koulutusalaKoodiUrit,
+      teemakuva,
     },
   };
 };

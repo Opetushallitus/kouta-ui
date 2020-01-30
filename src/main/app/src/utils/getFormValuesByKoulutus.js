@@ -56,6 +56,7 @@ export const getFormValuesByKoulutus = koulutus => {
       nimi: kuvauksenNimi,
     },
     julkinen,
+    teemakuva: metadata.teemakuva,
   };
 };
 

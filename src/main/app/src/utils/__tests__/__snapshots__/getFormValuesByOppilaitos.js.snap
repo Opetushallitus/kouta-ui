@@ -19,6 +19,7 @@ Object {
     "toimipisteita": 9,
     "yksikoita": 2,
   },
+  "teemakuva": undefined,
   "tietoa": Object {
     "osiot": Array [
       Object {

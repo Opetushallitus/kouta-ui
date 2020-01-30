@@ -61,6 +61,12 @@ const fillLisatiedotSection = () => {
   });
 };
 
+const fillTeemakuvaSection = () => {
+  cy.getByTestId('teemakuvaSection').within(() => {
+    cy.getByTestId('jatkaButton').click({ force: true });
+  });
+};
+
 const tallenna = () => {
   cy.getByTestId('tallennaKoulutusButton').within(() => {
     cy.contains('Tallenna').click({ force: false });
@@ -193,6 +199,8 @@ describe('createKoulutusForm', () => {
     });
 
     fillLisatiedotSection();
+
+    fillTeemakuvaSection();
 
     fillJarjestajaSection();
 

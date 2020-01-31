@@ -36,9 +36,10 @@ module.exports = {
             maksullisuusKuvaus: {
               fi: 'maksullisuus kuvaus',
             },
-            koulutuksenAlkamispaivamaara: '2019-01-01T00:00',
-            koulutuksenPaattymispaivamaara: '2019-02-15T00:00',
-            koulutuksenAlkamiskausi: null,
+            koulutuksenAlkamispaivamaara: null,
+            koulutuksenPaattymispaivamaara: null,
+            koulutuksenTarkkaAlkamisaika: false,
+            koulutuksenAlkamisvuosi: '2020',
             onkoStipendia: false,
             stipendinKuvaus: {},
             stipendinMaara: null,
@@ -148,9 +149,10 @@ module.exports = {
             maksullisuusKuvaus: {
               fi: 'maksullisuus kuvaus',
             },
-            koulutuksenAlkamispaivamaara: '2019-01-01T00:00',
-            koulutuksenPaattymispaivamaara: '2019-02-15T00:00',
-            koulutuksenAlkamiskausi: null,
+            koulutuksenAlkamispaivamaara: null,
+            koulutuksenPaattymispaivamaara: null,
+            koulutuksenTarkkaAlkamisaika: false,
+            koulutuksenAlkamisvuosi: '2020',
             onkoStipendia: true,
             stipendinKuvaus: {
               fi: 'stipendi kuvaus',
@@ -282,9 +284,10 @@ module.exports = {
             maksullisuusKuvaus: {
               fi: 'maksullisuus kuvaus',
             },
-            koulutuksenAlkamispaivamaara: '2019-01-01T00:00',
-            koulutuksenPaattymispaivamaara: '2019-02-15T00:00',
-            koulutuksenAlkamiskausi: null,
+            koulutuksenAlkamispaivamaara: null,
+            koulutuksenPaattymispaivamaara: null,
+            koulutuksenTarkkaAlkamisaika: false,
+            koulutuksenAlkamisvuosi: '2020',
             onkoStipendia: true,
             stipendinKuvaus: {
               fi: 'stipendi kuvaus',
@@ -389,9 +392,9 @@ module.exports = {
             maksullisuusKuvaus: {
               fi: 'Maksullisuus kuvaus',
             },
-            koulutuksenAlkamispaivamaara: '2019-08-23T00:00',
-            koulutuksenPaattymispaivamaara: '2019-08-26T00:00',
-            koulutuksenAlkamiskausi: null,
+            koulutuksenAlkamispaivamaara: null,
+            koulutuksenPaattymispaivamaara: null,
+            koulutuksenTarkkaAlkamisaika: false,
             onkoStipendia: true,
             stipendinKuvaus: {
               fi: 'Stipendin kuvaus',
@@ -507,9 +510,9 @@ module.exports = {
             maksullisuusKuvaus: {
               fi: 'Maksullisuus kuvaus',
             },
-            koulutuksenAlkamispaivamaara: '2019-08-23T00:00',
-            koulutuksenPaattymispaivamaara: '2019-08-26T00:00',
-            koulutuksenAlkamiskausi: null,
+            koulutuksenAlkamispaivamaara: null,
+            koulutuksenPaattymispaivamaara: null,
+            koulutuksenTarkkaAlkamisaika: false,
             onkoStipendia: true,
             stipendinKuvaus: {
               fi: 'Stipendin kuvaus',
@@ -645,9 +648,9 @@ module.exports = {
             maksullisuusKuvaus: {
               fi: 'Maksullisuus kuvaus',
             },
-            koulutuksenAlkamispaivamaara: '2019-08-23T00:00',
-            koulutuksenPaattymispaivamaara: '2019-08-26T00:00',
-            koulutuksenAlkamiskausi: null,
+            koulutuksenAlkamispaivamaara: null,
+            koulutuksenPaattymispaivamaara: null,
+            koulutuksenTarkkaAlkamisaika: false,
             onkoStipendia: true,
             stipendinKuvaus: {
               fi: 'Stipendin kuvaus',

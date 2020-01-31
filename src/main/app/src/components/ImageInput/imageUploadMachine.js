@@ -86,7 +86,7 @@ export function createImageUploadMachine({ url, externalError, t }) {
     id: 'imageUpload',
     initial,
     context: {
-      file: null,
+      file: undefined,
       url,
       error: externalError,
     },
@@ -94,8 +94,8 @@ export function createImageUploadMachine({ url, externalError, t }) {
       [empty]: {
         id: empty,
         entry: assign({
-          url: () => null,
-          file: () => null,
+          url: () => undefined,
+          file: () => undefined,
         }),
         on: {
           [UPLOAD_FILE]: uploading,
@@ -116,7 +116,7 @@ export function createImageUploadMachine({ url, externalError, t }) {
           [DRAG_START]: draggingEnabled,
         },
         exit: assign({
-          error: () => null,
+          error: () => undefined,
         }),
       },
       dragging: draggingStates,

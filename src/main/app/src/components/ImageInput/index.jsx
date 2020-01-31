@@ -231,7 +231,7 @@ export const ImageInput = props => {
   });
   const [state, send] = useMachine(fileUploadMachine, {
     services: {
-      upload(ctx, e) {
+      upload(_, e) {
         const p = validateInput(e.files, { ...props, t }).then(() =>
           upload(e.files[0]),
         );
@@ -266,7 +266,7 @@ export const ImageInput = props => {
         nodrag={state.matches(CS.draggingDisabled)}
         error={machineError}
         disabled={disabled}
-        style={{ backgroundImage: `url(${url})` }}
+        style={{ backgroundImage: url ? `url(${url})` : 'none' }}
         {...(state.matches(CS.draggingDisabled) ? { onDragOver: null } : {})}
       >
         <input

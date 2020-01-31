@@ -2,6 +2,7 @@ import {
   cond,
   every,
   get,
+  isArray,
   isEmpty,
   isNil,
   isPlainObject,
@@ -10,21 +11,25 @@ import {
   stubTrue,
   stubFalse,
 } from 'lodash';
-import { isArray, getInvalidTranslations } from './index';
+import { getInvalidTranslations, otherwise } from './index';
 
 const allFuncs = (...fns) => value => every(fns, fn => fn(value));
-
 const clone = value => JSON.parse(JSON.stringify(value));
 
-const exists = value => {
-  return cond([
+const exists = value =>
+  cond([
     [isNil, stubFalse],
-    [allFuncs(isArray, isString, v => v && v.length === 0), stubFalse],
+    [
+      allFuncs(
+        v => isArray(v) || isString(v),
+        v => v.length === 0,
+      ),
+      stubFalse,
+    ],
     [allFuncs(isPlainObject, isEmpty), stubFalse],
     [allFuncs(isPlainObject, v => v.value === ''), stubFalse],
-    [stubTrue, stubTrue],
+    [otherwise, stubTrue],
   ])(value);
-};
 
 class ErrorBuilder {
   constructor(values, errors = {}) {
@@ -91,6 +96,7 @@ class ErrorBuilder {
       languages,
       validator,
     );
+    console.log(path, invalidTranslations);
 
     if (invalidTranslations.length > 0) {
       languages.forEach(l => this.setError(`${path}.${l}`, errorMessage));

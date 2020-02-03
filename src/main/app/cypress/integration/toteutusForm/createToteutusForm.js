@@ -82,16 +82,11 @@ const fillStipendi = () => {
 };
 
 const fillKausi = () => {
-  cy.getByTestId('koulutuksenTarkkaAlkamisaika').within(() => {
-    cy.get('[type="checkbox"]').check({ force: true });
+  cy.getByTestId('koulutuksenAlkamisvuosi').within(() => {
+    selectOption('2020', cy);
   });
-
-  cy.getByTestId('koulutuksenAlkamispaivamaara').within(() => {
-    fillDatePickerInput('1.1.2019');
-  });
-
-  cy.getByTestId('koulutuksenPaattymispaivamaara').within(() => {
-    fillDatePickerInput('15.2.2019{esc}');
+  cy.getByTestId('koulutuksenAlkamiskausi').within(() => {
+    getRadio('kausi_0#1', cy).check({ force: true });
   });
 };
 

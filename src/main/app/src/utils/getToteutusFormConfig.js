@@ -129,13 +129,42 @@ const config = createFormConfigBuilder()
     'koulutuksenAlkamispaivaamara',
     KOULUTUSTYYPIT,
     validateIfJulkaistu(eb =>
-      eb.validateExistence('jarjestamistiedot.koulutuksenAlkamispaivamaara'),
+      eb.getValue('jarjestamistiedot.koulutuksenTarkkaAlkamisaika')
+        ? eb.validateExistence('jarjestamistiedot.koulutuksenAlkamispaivamaara')
+        : eb,
     ),
   )
   .registerField(
     'jarjestamistiedot',
     'koulutuksenPaattymispaivamaara',
     KOULUTUSTYYPIT,
+    validateIfJulkaistu(eb =>
+      eb.getValue('jarjestamistiedot.koulutuksenTarkkaAlkamisaika')
+        ? eb.validateExistence(
+            'jarjestamistiedot.koulutuksenPaattymispaivamaara',
+          )
+        : eb,
+    ),
+  )
+  .registerField(
+    'jarjestamistiedot',
+    'koulutuksenAlkamiskausi',
+    KOULUTUSTYYPIT,
+    validateIfJulkaistu(eb =>
+      !eb.getValue('jarjestamistiedot.koulutuksenTarkkaAlkamisaika')
+        ? eb.validateExistence('jarjestamistiedot.koulutuksenAlkamiskausi')
+        : eb,
+    ),
+  )
+  .registerField(
+    'jarjestamistiedot',
+    'koulutuksenAlkamisvuosi',
+    KOULUTUSTYYPIT,
+    validateIfJulkaistu(eb =>
+      !eb.getValue('jarjestamistiedot.koulutuksenTarkkaAlkamisaika')
+        ? eb.validateExistence('jarjestamistiedot.koulutuksenAlkamisvuosi')
+        : eb,
+    ),
   )
   .registerField('jarjestamistiedot', 'osiot', KOULUTUSTYYPIT)
   .registerField('jarjestamistiedot', 'diplomi', [KOULUTUSTYYPPI.LUKIOKOULUTUS])

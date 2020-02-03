@@ -168,24 +168,24 @@ const getToteutusByFormValues = values => {
     kielivalinta,
   });
 
-  const koulutuksenAlkamispaivamaara = getKoutaDateString(
-    get(values, 'jarjestamistiedot.koulutuksenAlkamispaivamaara'),
-  );
-
-  const koulutuksenPaattymispaivamaara = getKoutaDateString(
-    get(values, 'jarjestamistiedot.koulutuksenPaattymispaivamaara'),
-  );
-
-  const koulutuksenAlkamiskausi = get(
-    values,
-    'jarjestamistiedot.koulutuksenAlkamiskausi',
-  );
-  const koulutuksenAlkamisvuosi = get(
-    values,
-    'jarjestamistiedot.koulutuksenAlkamisvuosi',
-  );
   const koulutuksenTarkkaAlkamisaika =
     get(values, 'jarjestamistiedot.koulutuksenTarkkaAlkamisaika') || false;
+  const koulutuksenAlkamiskausi = !koulutuksenTarkkaAlkamisaika
+    ? get(values, 'jarjestamistiedot.koulutuksenAlkamiskausi') || {}
+    : null;
+  const koulutuksenAlkamisvuosi = !koulutuksenTarkkaAlkamisaika
+    ? (get(values, 'jarjestamistiedot.koulutuksenAlkamisvuosi') || {}).value
+    : null;
+  const koulutuksenAlkamispaivamaara = koulutuksenTarkkaAlkamisaika
+    ? getKoutaDateString(
+        get(values, 'jarjestamistiedot.koulutuksenAlkamispaivamaara'),
+      )
+    : null;
+  const koulutuksenPaattymispaivamaara = koulutuksenTarkkaAlkamisaika
+    ? getKoutaDateString(
+        get(values, 'jarjestamistiedot.koulutuksenPaattymispaivamaara'),
+      )
+    : null;
 
   const ilmoittautumislinkki = pick(
     get(values, 'tiedot.ilmoittautumislinkki'),

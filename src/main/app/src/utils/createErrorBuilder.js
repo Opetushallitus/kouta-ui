@@ -96,7 +96,6 @@ class ErrorBuilder {
       languages,
       validator,
     );
-    console.log(path, invalidTranslations);
 
     if (invalidTranslations.length > 0) {
       languages.forEach(l => this.setError(`${path}.${l}`, errorMessage));

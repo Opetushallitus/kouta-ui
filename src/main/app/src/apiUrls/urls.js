@@ -24,6 +24,7 @@ export const development = ({ isCypress }) => ({
   'kouta-backend.ammattinimike-search': `${koutaBackendDevUrl}/ammattinimike/search/$1`,
   'kouta-backend.asiasana-search': `${koutaBackendDevUrl}/asiasana/search/$1`,
   'kouta-backend.login': `${koutaBackendDevUrl}/auth/login`,
+  'kouta-backend.session': `${koutaBackendDevUrl}/auth/session`,
   'kouta-backend.sora-kuvaus': `${koutaBackendDevUrl}/sorakuvaus`,
   'kouta-backend.sora-kuvaus-by-id': `${koutaBackendDevUrl}/sorakuvaus/$1`,
   'kouta-backend.sora-kuvaus-list': `${koutaBackendDevUrl}/sorakuvaus/list`,
@@ -53,6 +54,7 @@ export const development = ({ isCypress }) => ({
   'organisaatio-service.organisaatiot-by-oids': `${virkailijaDevUrl}/organisaatio-service/rest/organisaatio/v4/findbyoids`,
   'lokalisaatio-service.localisation': `${virkailijaDevUrl}/lokalisointi/cxf/rest/v1/localisation?category=$1`,
   'kayttooikeus-service.me': `${virkailijaDevUrl}/kayttooikeus-service/cas/me`,
+  'kayttooikeus-service.omattiedot': `${virkailijaDevUrl}/kayttooikeus-service/henkilo/current/omattiedot`,
   'kayttooikeus-service.kayttajan-organisaatiot': `${virkailijaDevUrl}/kayttooikeus-service/organisaatiohenkilo/organisaatioOid`,
   'cas.login': `${virkailijaDevUrl}/cas/login`,
   ...(!isCypress && {

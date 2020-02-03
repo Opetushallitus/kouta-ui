@@ -183,6 +183,8 @@ export default {
       'Tiedoston maksimiresoluutio: {{width}} x {{height}} pikseliä',
     kuvanLahetysVirhe: 'Kuvan lähettäminen epäonnistui.',
     teemakuva: 'Teemakuva',
+    meneLoginSivulle: 'Kirjaudu sisään',
+    suljeVaroitus: 'Sulje varoitus',
   },
   ilmoitukset: {
     tuntematonVirhe:
@@ -191,6 +193,16 @@ export default {
     tallennusEpaonnistui:
       'Tallennus epäonnistui. Tarkista lomakkeen tiedot ja yritä uudelleen',
     kayttooikeusVirhe: 'Käyttöoikeuksissasi on puutteita',
+    istuntoVirhe: {
+      otsikko: 'Istuntoa ei löytynyt',
+      viesti:
+        'Et ole enää kirjautuneena sisään palveluun. Ole hyvä ja kirjaudu uudelleen.',
+    },
+    yhteysVirhe: {
+      otsikko: 'Istunnon varmentaminen epäonnistui',
+      viesti:
+        'Istunnon voimassaoloa ei pystytty varmentamaan. Verkkoyhteytesi saattaa olla katkennut.',
+    },
   },
   sivuTitlet: {
     etuliite: 'Tarjonta',

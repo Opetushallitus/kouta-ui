@@ -42,6 +42,7 @@
     "react-simple-timefield": "^2.0.3",
     "react-sortable-hoc": "^1.6.1",
     "react-spring": "^7.2.10",
+    "react-use": "^13.21.0",
     "redux": "^4.0.1",
     "redux-actions": "^2.6.4",
     "redux-create-reducer": "^1.1.3",

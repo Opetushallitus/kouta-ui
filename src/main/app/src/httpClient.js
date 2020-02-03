@@ -2,8 +2,6 @@ import axios from 'axios';
 import get from 'lodash/get';
 import { setupCache } from 'axios-cache-adapter';
 
-import { compose } from './utils';
-
 const isKoutaBackendUrl = url => {
   return /kouta-backend/.test(url);
 };
@@ -34,10 +32,7 @@ const isAuthorizationError = error => {
   return get(error, 'response.status') === 401;
 };
 
-const withAuthorizationInterceptor = (
-  apiUrls,
-  { redirectAfterForbidden = true },
-) => client => {
+const withAuthorizationInterceptor = apiUrls => client => {
   client.interceptors.response.use(
     response => response,
     async error => {
@@ -45,8 +40,8 @@ const withAuthorizationInterceptor = (
         return Promise.reject(error);
       }
 
-      if (hasBeenRetried(error) && redirectAfterForbidden) {
-        return window.location.replace(apiUrls.url('cas.login'));
+      if (hasBeenRetried(error)) {
+        return Promise.reject(error);
       }
 
       error.config.__retried = true;
@@ -55,12 +50,12 @@ const withAuthorizationInterceptor = (
 
       if (isKoutaBackendUrl(responseUrl) && apiUrls) {
         try {
+          // In test environments redirects to cas.login and returns HTML
           await client.get(apiUrls.url('kouta-backend.login'), {
             cache: {
               ignoreCache: true,
             },
           });
-
           return client(error.config);
         } catch (e) {
           return Promise.reject(error);
@@ -91,11 +86,7 @@ const withAuthorizationInterceptor = (
   return client;
 };
 
-const createHttpClient = ({
-  apiUrls,
-  callerId,
-  redirectAfterForbidden = true,
-} = {}) => {
+const createHttpClient = ({ apiUrls, callerId } = {}) => {
   const headers = {};
 
   let client = axios.create({
@@ -109,9 +100,7 @@ const createHttpClient = ({
     },
   });
 
-  client = compose(
-    withAuthorizationInterceptor(apiUrls, { redirectAfterForbidden }),
-  )(client);
+  client = withAuthorizationInterceptor(apiUrls)(client);
 
   return client;
 };

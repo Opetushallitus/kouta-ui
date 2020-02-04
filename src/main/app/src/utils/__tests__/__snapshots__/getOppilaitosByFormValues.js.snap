@@ -15,7 +15,6 @@ Object {
     "kampuksia": 3,
     "korkeakouluja": 5,
     "opiskelijoita": 100,
-    "teemakuva": undefined,
     "tiedekuntia": 4,
     "tietoaOpiskelusta": Array [
       Object {
@@ -51,6 +50,7 @@ Object {
     "yksikoita": 2,
   },
   "muokkaaja": "1.1.1.1",
+  "teemakuva": undefined,
   "tila": "tallennettu",
 }
 `;

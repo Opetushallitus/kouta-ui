@@ -8,6 +8,7 @@ const getFormValuesByOppilaitos = oppilaitos => {
   const {
     kielivalinta,
     tila,
+    teemakuva,
     metadata: {
       tietoaOpiskelusta,
       yhteystiedot,
@@ -19,7 +20,6 @@ const getFormValuesByOppilaitos = oppilaitos => {
       yksikoita,
       toimipisteita,
       akatemioita,
-      teemakuva,
     },
   } = oppilaitos;
 

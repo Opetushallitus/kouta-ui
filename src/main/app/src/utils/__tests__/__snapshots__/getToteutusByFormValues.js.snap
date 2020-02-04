@@ -169,7 +169,6 @@ Object {
       "fi": "Fi kesto",
       "sv": "Sv kesto",
     },
-    "teemakuva": undefined,
     "toteutusjaksot": Array [
       Object {
         "ilmoittautumislinkki": Object {
@@ -309,6 +308,7 @@ Object {
     "org1",
     "org2",
   ],
+  "teemakuva": undefined,
   "tila": undefined,
 }
 `;

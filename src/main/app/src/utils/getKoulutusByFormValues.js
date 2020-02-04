@@ -49,6 +49,7 @@ const getKoulutusByFormValues = values => {
     koulutustyyppi,
     nimi,
     julkinen,
+    teemakuva,
     metadata: {
       tyyppi: koulutustyyppi,
       lisatiedot: osiotWithKuvaukset,
@@ -57,7 +58,6 @@ const getKoulutusByFormValues = values => {
       tutkintonimikeKoodiUrit,
       kuvauksenNimi,
       koulutusalaKoodiUrit,
-      teemakuva,
     },
   };
 };

@@ -37,6 +37,7 @@ const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
     tila,
     muokkaaja,
     kielivalinta: kieliversiot,
+    teemakuva,
     metadata: {
       yhteystiedot: {
         osoite: {
@@ -73,7 +74,6 @@ const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
       akatemioita: isNumeric(get(perustiedot, 'akatemioita'))
         ? parseInt(perustiedot.akatemioita)
         : null,
-      teemakuva,
     },
   };
 };

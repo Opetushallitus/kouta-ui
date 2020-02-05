@@ -171,7 +171,7 @@ const getToteutusByFormValues = values => {
   const koulutuksenTarkkaAlkamisaika =
     get(values, 'jarjestamistiedot.koulutuksenTarkkaAlkamisaika') || false;
   const koulutuksenAlkamiskausi = !koulutuksenTarkkaAlkamisaika
-    ? get(values, 'jarjestamistiedot.koulutuksenAlkamiskausi') || {}
+    ? get(values, 'jarjestamistiedot.koulutuksenAlkamiskausi')
     : null;
   const koulutuksenAlkamisvuosi = !koulutuksenTarkkaAlkamisaika
     ? parseInt(

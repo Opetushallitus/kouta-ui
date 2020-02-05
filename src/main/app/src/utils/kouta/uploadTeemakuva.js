@@ -1,6 +1,6 @@
 export default async function({ image, httpClient, apiUrls }) {
   const { data } = await httpClient.post(
-    apiUrls.url('kouta-backend.upload-theme-image'),
+    apiUrls.url('kouta-backend.upload-teemakuva'),
     image,
     {
       headers: {

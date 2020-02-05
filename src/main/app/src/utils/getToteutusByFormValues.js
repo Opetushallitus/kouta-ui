@@ -232,6 +232,7 @@ const getToteutusByFormValues = values => {
     kielivalinta,
     tila,
     muokkaaja,
+    teemakuva,
     metadata: {
       opetus: {
         lisatiedot: osiot,
@@ -277,7 +278,6 @@ const getToteutusByFormValues = values => {
       suunniteltuKesto,
       toteutusjaksot,
       tutkinnonOsat,
-      teemakuva,
     },
   };
 };

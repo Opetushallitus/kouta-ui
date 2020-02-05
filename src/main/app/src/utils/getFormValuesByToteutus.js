@@ -9,6 +9,7 @@ const getFormValuesByToteutus = toteutus => {
     tarjoajat = [],
     metadata = {},
     tila,
+    teemakuva,
   } = toteutus;
 
   const {
@@ -26,7 +27,6 @@ const getFormValuesByToteutus = toteutus => {
     ilmoittautumislinkki,
     aloituspaikat,
     suunniteltuKesto,
-    teemakuva,
     toteutusjaksot,
     tutkinnonOsat: tutkinnonOsatMetadata,
   } = metadata;

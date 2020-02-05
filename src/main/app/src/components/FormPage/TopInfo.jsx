@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-
+import Anchor from '../Anchor';
 import Typography from '../Typography';
 import { isObject, getFirstLanguageValue } from '../../utils';
 
@@ -42,7 +41,7 @@ export function TopInfo({
               as="div"
               marginBottom={0.5}
             >
-              {link ? <Link to={link}>{name}</Link> : name}
+              {link ? <Anchor href={link}>{name}</Anchor> : name}
             </Typography>
           </>
         )}

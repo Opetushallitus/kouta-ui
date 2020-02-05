@@ -1,8 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
 import Anchor from '../Anchor';
 import Typography from '../Typography';
 import { isObject, getFirstLanguageValue } from '../../utils';
+import Flex, { FlexItem } from '../Flex';
 
 const getEntityName = entity => {
   return entity && isObject(entity.nimi)
@@ -10,11 +10,11 @@ const getEntityName = entity => {
     : null;
 };
 
-export const TopInfoContainer = styled.div`
-  margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
-  display: flex;
-  justify-content: space-between;
-`;
+export const TopInfoContainer = ({ children }) => (
+  <Flex marginBottom={2} justifyBetween>
+    {children}
+  </Flex>
+);
 
 const ContainerIf = ({ children, condition }) => {
   return condition ? <TopInfoContainer>{children}</TopInfoContainer> : children;
@@ -29,23 +29,15 @@ export function TopInfo({
   const name = entity ? getEntityName(entity) || '' : '';
   return (
     <ContainerIf condition={!disableContainer}>
-      {!disableContainer && <div></div>}
-      <div>
-        {entity && (
-          <>
-            <Typography as="div" marginBottom={0.5}>
-              {title}:
-            </Typography>
-            <Typography
-              style={{ fontWeight: 'bold' }}
-              as="div"
-              marginBottom={0.5}
-            >
-              {link ? <Anchor href={link}>{name}</Anchor> : name}
-            </Typography>
-          </>
-        )}
-      </div>
+      {!disableContainer && <FlexItem grow={1} />}
+      <FlexItem grow={0}>
+        <Typography variant="h6" marginBottom={1}>
+          {title}
+        </Typography>
+        <Typography>
+          {link ? <Anchor href={link}>{name}</Anchor> : name}
+        </Typography>
+      </FlexItem>
     </ContainerIf>
   );
 }

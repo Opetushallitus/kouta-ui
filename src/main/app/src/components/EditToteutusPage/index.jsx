@@ -1,7 +1,11 @@
 import React from 'react';
 import queryString from 'query-string';
 
-import FormPage, { OrganisaatioInfo } from '../FormPage';
+import FormPage, {
+  OrganisaatioInfo,
+  KoulutusInfo,
+  TopInfoContainer,
+} from '../FormPage';
 import EditToteutusHeader from './EditToteutusHeader';
 import EditToteutusSteps from './EditToteutusSteps';
 import EditToteutusForm from './EditToteutusForm';
@@ -66,9 +70,17 @@ const EditToteutusPage = props => {
           ) : null
         }
       >
-        {organisaatioOid ? (
-          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-        ) : null}
+        <TopInfoContainer>
+          <KoulutusInfo
+            organisaatioOid={organisaatioOid}
+            koulutus={koulutus}
+            disableContainer={true}
+          />
+          <OrganisaatioInfo
+            organisaatioOid={organisaatioOid}
+            disableContainer={true}
+          />
+        </TopInfoContainer>
         {toteutus && koulutus ? (
           <EditToteutusForm
             toteutus={toteutus}

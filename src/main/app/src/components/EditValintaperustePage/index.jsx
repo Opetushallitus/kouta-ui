@@ -1,7 +1,7 @@
 import React from 'react';
 import get from 'lodash/get';
 
-import FormPage, { OrganisaatioInfo } from '../FormPage';
+import FormPage, { OrganisaatioInfo, TopInfoContainer } from '../FormPage';
 import EditValintaperusteHeader from './EditValintaperusteHeader';
 import EditValintaperusteSteps from './EditValintaperusteSteps';
 import EditValintaperusteForm from './EditValintaperusteForm';
@@ -48,9 +48,9 @@ const EditValintaperustePage = props => {
           ) : null
         }
       >
-        {organisaatioOid ? (
+        <TopInfoContainer>
           <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-        ) : null}
+        </TopInfoContainer>
         {valintaperuste ? (
           <EditValintaperusteForm
             valintaperuste={valintaperuste}

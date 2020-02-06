@@ -1,7 +1,11 @@
 import React from 'react';
 import queryString from 'query-string';
 
-import FormPage, { OrganisaatioInfo } from '../FormPage';
+import FormPage, {
+  OrganisaatioInfo,
+  KoulutusInfo,
+  TopInfoContainer,
+} from '../FormPage';
 import getKoulutusByOid from '../../utils/kouta/getKoulutusByOid';
 import CreateToteutusHeader from './CreateToteutusHeader';
 import CreateToteutusSteps from './CreateToteutusSteps';
@@ -25,7 +29,7 @@ const CreateToteutusPage = props => {
 
   const { kopioToteutusOid = null } = queryString.parse(search);
 
-  const { data } = useApiAsync({
+  const { data: koulutus } = useApiAsync({
     promiseFn: getKoulutusByOid,
     oid: koulutusOid,
     watch: koulutusOid,
@@ -35,8 +39,8 @@ const CreateToteutusPage = props => {
   const { t } = useTranslation();
 
   const koulutustyyppi =
-    data && data.koulutustyyppi
-      ? data.koulutustyyppi
+    koulutus && koulutus.koulutustyyppi
+      ? koulutus.koulutustyyppi
       : KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
   return (
@@ -46,7 +50,7 @@ const CreateToteutusPage = props => {
         header={<CreateToteutusHeader />}
         steps={<CreateToteutusSteps />}
         footer={
-          data ? (
+          koulutus ? (
             <CreateToteutusFooter
               koulutustyyppi={koulutustyyppi}
               organisaatioOid={organisaatioOid}
@@ -55,12 +59,15 @@ const CreateToteutusPage = props => {
           ) : null
         }
       >
-        <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-        {data ? (
+        <TopInfoContainer>
+          <KoulutusInfo organisaatioOid={organisaatioOid} koulutus={koulutus} />
+          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+        </TopInfoContainer>
+        {koulutus ? (
           <CreateToteutusForm
-            koulutusKoodiUri={data.koulutusKoodiUri}
-            koulutusNimi={data.nimi}
-            koulutusKielet={data.kielivalinta}
+            koulutusKoodiUri={koulutus.koulutusKoodiUri}
+            koulutusNimi={koulutus.nimi}
+            koulutusKielet={koulutus.kielivalinta}
             organisaatioOid={organisaatioOid}
             koulutustyyppi={koulutustyyppi}
             kopioToteutusOid={kopioToteutusOid}

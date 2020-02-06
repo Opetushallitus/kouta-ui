@@ -1,7 +1,7 @@
 import React from 'react';
 import queryString from 'query-string';
 
-import FormPage, { OrganisaatioInfo } from '../FormPage';
+import FormPage, { OrganisaatioInfo, TopInfoContainer } from '../FormPage';
 import EditKoulutusHeader from './EditKoulutusHeader';
 import EditKoulutusSteps from './EditKoulutusSteps';
 import EditKoulutusForm from './EditKoulutusForm';
@@ -47,9 +47,9 @@ const EditKoulutusPage = props => {
           ) : null
         }
       >
-        {organisaatioOid ? (
+        <TopInfoContainer>
           <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-        ) : null}
+        </TopInfoContainer>
         {koulutus ? (
           <EditKoulutusForm
             koulutus={koulutus}

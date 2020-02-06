@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import get from 'lodash/get';
 
-import FormPage, { OrganisaatioInfo } from '../FormPage';
+import FormPage, { OrganisaatioInfo, TopInfoContainer } from '../FormPage';
 import EditSoraKuvausHeader from './EditSoraKuvausHeader';
 import EditSoraKuvausSteps from './EditSoraKuvausSteps';
 import EditSoraKuvausForm from './EditSoraKuvausForm';
@@ -43,9 +43,9 @@ const EditSoraKuvausPage = props => {
           soraKuvaus ? <EditSoraKuvausFooter soraKuvaus={soraKuvaus} /> : null
         }
       >
-        {organisaatioOid ? (
+        <TopInfoContainer>
           <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-        ) : null}
+        </TopInfoContainer>
         {soraKuvaus ? (
           <EditSoraKuvausForm
             soraKuvaus={soraKuvaus}

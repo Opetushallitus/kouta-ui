@@ -1,7 +1,7 @@
 import React from 'react';
 import queryString from 'query-string';
 
-import FormPage, { OrganisaatioInfo } from '../FormPage';
+import FormPage, { OrganisaatioInfo, TopInfoContainer } from '../FormPage';
 
 import CreateHakuHeader from './CreateHakuHeader';
 import CreateHakuSteps from './CreateHakuSteps';
@@ -32,7 +32,9 @@ const CreateHakuPage = props => {
         steps={<CreateHakuSteps />}
         footer={<CreateHakuFooter organisaatioOid={organisaatioOid} />}
       >
-        <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+        <TopInfoContainer>
+          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+        </TopInfoContainer>
         <CreateHakuForm
           organisaatioOid={organisaatioOid}
           kopioHakuOid={kopioHakuOid}

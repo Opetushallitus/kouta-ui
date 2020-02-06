@@ -1,7 +1,7 @@
 import React from 'react';
 import queryString from 'query-string';
 
-import FormPage, { OrganisaatioInfo } from '../FormPage';
+import FormPage, { OrganisaatioInfo, TopInfoContainer } from '../FormPage';
 import EditHakuHeader from './EditHakuHeader';
 import EditHakuSteps from './EditHakuSteps';
 import EditHakuForm from './EditHakuForm';
@@ -40,9 +40,9 @@ const EditHakuPage = props => {
         steps={<EditHakuSteps />}
         footer={haku ? <EditHakuFooter haku={haku} /> : null}
       >
-        {organisaatioOid ? (
+        <TopInfoContainer>
           <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-        ) : null}
+        </TopInfoContainer>
         {haku ? (
           <EditHakuForm
             haku={haku}

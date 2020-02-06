@@ -1,7 +1,7 @@
 import React from 'react';
 import queryString from 'query-string';
 
-import FormPage, { OrganisaatioInfo } from '../FormPage';
+import FormPage, { OrganisaatioInfo, TopInfoContainer } from '../FormPage';
 import CreateSoraKuvausHeader from './CreateSoraKuvausHeader';
 import CreateSoraKuvausSteps from './CreateSoraKuvausSteps';
 import CreateSoraKuvausForm from './CreateSoraKuvausForm';
@@ -33,7 +33,9 @@ const CreateSoraKuvausPage = props => {
         steps={<CreateSoraKuvausSteps />}
         footer={<CreateSoraKuvausFooter organisaatioOid={organisaatioOid} />}
       >
-        <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+        <TopInfoContainer>
+          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+        </TopInfoContainer>
         <CreateSoraKuvausForm
           organisaatioOid={organisaatioOid}
           kopioSoraKuvausOid={kopioSoraKuvausOid}

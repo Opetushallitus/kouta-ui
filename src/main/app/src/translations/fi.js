@@ -105,7 +105,6 @@ export default {
     merkitseOtsikkoriviksi: 'Merkitse otsikkoriviksi',
     merkitseTavalliseksiRiviksi: 'Merkitse tavalliseksi riviksi',
     linkinOtsikko: 'Linkin otsikko',
-    toteutuksenKoulutus: 'Toteutuksen koulutus',
     valittuOrganisaatio: 'Valittu organisaatio',
     lahde: 'Lähde',
     ePerusteet: 'ePerusteet',

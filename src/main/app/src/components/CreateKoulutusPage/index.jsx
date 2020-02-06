@@ -1,7 +1,7 @@
 import React from 'react';
 import qs from 'query-string';
 
-import FormPage, { OrganisaatioInfo } from '../FormPage';
+import FormPage, { OrganisaatioInfo, TopInfoContainer } from '../FormPage';
 import CreateKoulutusHeader from './CreateKoulutusHeader';
 import CreateKoulutusSteps from './CreateKoulutusSteps';
 import CreateKoulutusForm from './CreateKoulutusForm';
@@ -32,7 +32,9 @@ const CreateKoulutusPage = props => {
         steps={<CreateKoulutusSteps />}
         footer={<CreateKoulutusFooter organisaatioOid={oid} />}
       >
-        <OrganisaatioInfo organisaatioOid={oid} />
+        <TopInfoContainer>
+          <OrganisaatioInfo organisaatioOid={oid} />
+        </TopInfoContainer>
         <CreateKoulutusForm
           organisaatioOid={oid}
           kopioKoulutusOid={kopioKoulutusOid}

@@ -71,15 +71,8 @@ const EditToteutusPage = props => {
         }
       >
         <TopInfoContainer>
-          <KoulutusInfo
-            organisaatioOid={organisaatioOid}
-            koulutus={koulutus}
-            disableContainer={true}
-          />
-          <OrganisaatioInfo
-            organisaatioOid={organisaatioOid}
-            disableContainer={true}
-          />
+          <KoulutusInfo organisaatioOid={organisaatioOid} koulutus={koulutus} />
+          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
         </TopInfoContainer>
         {toteutus && koulutus ? (
           <EditToteutusForm

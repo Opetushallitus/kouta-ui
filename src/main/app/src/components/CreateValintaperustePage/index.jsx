@@ -1,7 +1,7 @@
 import React from 'react';
 import queryString from 'query-string';
 
-import FormPage, { OrganisaatioInfo } from '../FormPage';
+import FormPage, { OrganisaatioInfo, TopInfoContainer } from '../FormPage';
 import CreateValintaperusteHeader from './CreateValintaperusteHeader';
 import CreateValintaperusteSteps from './CreateValintaperusteSteps';
 import CreateValintaperusteForm from './CreateValintaperusteForm';
@@ -35,7 +35,9 @@ const CreateValintaperustePage = props => {
         steps={<CreateValintaperusteSteps />}
         footer={<CreateValintaperusteFooter organisaatioOid={oid} />}
       >
-        <OrganisaatioInfo organisaatioOid={oid} />
+        <TopInfoContainer>
+          <OrganisaatioInfo organisaatioOid={oid} />
+        </TopInfoContainer>
         <CreateValintaperusteForm
           organisaatioOid={oid}
           kopioValintaperusteOid={kopioValintaperusteOid}

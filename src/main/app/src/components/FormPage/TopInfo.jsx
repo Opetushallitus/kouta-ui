@@ -10,34 +10,32 @@ const getEntityName = entity => {
     : null;
 };
 
-export const TopInfoContainer = ({ children }) => (
-  <Flex marginBottom={2} justifyBetween>
-    {children}
-  </Flex>
-);
-
-const ContainerIf = ({ children, condition }) => {
-  return condition ? <TopInfoContainer>{children}</TopInfoContainer> : children;
+export const TopInfoContainer = ({ children }) => {
+  const justify =
+    React.Children.toArray(children).length === 1
+      ? { justifyEnd: true }
+      : { justifyBetween: true };
+  return (
+    <Flex marginBottom={2} {...justify}>
+      {children}
+    </Flex>
+  );
 };
 
-export function TopInfo({
-  title = '',
-  entity,
-  link,
-  disableContainer = false,
-}) {
-  const name = entity ? getEntityName(entity) || '' : '';
+export function TopInfo({ title = '', entity, link }) {
+  const name = getEntityName(entity) || '';
   return (
-    <ContainerIf condition={!disableContainer}>
-      {!disableContainer && <FlexItem grow={1} />}
-      <FlexItem grow={0}>
-        <Typography variant="h6" marginBottom={1}>
-          {title}
-        </Typography>
-        <Typography>
-          {link ? <Anchor href={link}>{name}</Anchor> : name}
-        </Typography>
-      </FlexItem>
-    </ContainerIf>
+    <FlexItem grow={0}>
+      {entity && (
+        <>
+          <Typography variant="h6" marginBottom={1}>
+            {title}
+          </Typography>
+          <Typography>
+            {link ? <Anchor href={link}>{name}</Anchor> : name}
+          </Typography>
+        </>
+      )}
+    </FlexItem>
   );
 }

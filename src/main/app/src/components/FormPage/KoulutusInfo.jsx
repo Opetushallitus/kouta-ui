@@ -8,7 +8,7 @@ const KoulutusInfo = ({ organisaatioOid, koulutus }) => {
     <TopInfo
       title={t('yleiset.koulutus')}
       entity={koulutus}
-      link={
+      linkUrl={
         koulutus &&
         `/organisaatio/${organisaatioOid}/koulutus/${koulutus.oid}/muokkaus`
       }

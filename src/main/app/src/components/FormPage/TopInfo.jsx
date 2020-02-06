@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Anchor from '../Anchor';
 import Typography from '../Typography';
 import { isObject, getFirstLanguageValue } from '../../utils';
@@ -22,7 +23,7 @@ export const TopInfoContainer = ({ children }) => {
   );
 };
 
-export function TopInfo({ title = '', entity, link }) {
+export function TopInfo({ title = '', entity, linkUrl }) {
   const name = getEntityName(entity) || '';
   return (
     <FlexItem grow={0}>
@@ -32,7 +33,13 @@ export function TopInfo({ title = '', entity, link }) {
             {title}
           </Typography>
           <Typography>
-            {link ? <Anchor href={link}>{name}</Anchor> : name}
+            {linkUrl ? (
+              <Anchor as={Link} to={linkUrl}>
+                {name}
+              </Anchor>
+            ) : (
+              name
+            )}
           </Typography>
         </>
       )}

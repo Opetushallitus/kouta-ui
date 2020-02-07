@@ -63,7 +63,7 @@ const fillMaksullisuus = tyyppi => {
     getRadio(tyyppi, cy).click({ force: true });
     cy.getByTestId('maksu')
       .find('input')
-      .type('10');
+      .type('10', { force: true });
 
     cy.getByTestId('maksullisuusKuvaus').within(() => {
       cy.get('textarea').type('maksullisuus kuvaus', { force: true });

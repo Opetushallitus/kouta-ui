@@ -515,7 +515,7 @@ module.exports = {
       },
     },
   },
-  __version: '3.8.2',
+  __version: '4.0.0',
   editHakukohdeForm: {
     'should be able to edit hakukohde': {
       '1': {

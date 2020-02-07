@@ -13,6 +13,7 @@ module.exports = {
           fi: 'Nimi',
         },
         julkinen: true,
+        teemakuva: null,
         metadata: {
           tyyppi: 'amm',
           lisatiedot: [
@@ -45,6 +46,7 @@ module.exports = {
           fi: 'Tiedot nimi',
         },
         julkinen: true,
+        teemakuva: null,
         metadata: {
           tyyppi: 'yo',
           lisatiedot: [
@@ -83,6 +85,7 @@ module.exports = {
           fi: 'Nimi',
         },
         julkinen: true,
+        teemakuva: null,
         metadata: {
           tyyppi: 'lk',
           lisatiedot: [
@@ -103,7 +106,7 @@ module.exports = {
       },
     },
   },
-  __version: '3.8.2',
+  __version: '4.0.0',
   editKoulutusForm: {
     'should be able to edit ammatillinen koulutus': {
       '1': {
@@ -115,6 +118,7 @@ module.exports = {
         nimi: {
           fi: 'Maatalousalan perustutkinto',
         },
+        teemakuva: null,
         metadata: {
           tyyppi: 'amm',
           lisatiedot: [
@@ -149,6 +153,7 @@ module.exports = {
         nimi: {
           fi: 'Fi nimi',
         },
+        teemakuva: null,
         metadata: {
           tyyppi: 'yo',
           lisatiedot: [
@@ -192,6 +197,7 @@ module.exports = {
         nimi: {
           fi: 'Maatalousalan perustutkinto',
         },
+        teemakuva: null,
         metadata: {
           tyyppi: 'lk',
           lisatiedot: [

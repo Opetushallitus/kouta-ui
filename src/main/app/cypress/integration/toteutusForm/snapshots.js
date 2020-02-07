@@ -9,6 +9,7 @@ module.exports = {
         kielivalinta: ['fi'],
         tila: 'julkaistu',
         muokkaaja: '1.2.246.562.24.62301161440',
+        teemakuva: null,
         metadata: {
           opetus: {
             lisatiedot: [
@@ -39,7 +40,8 @@ module.exports = {
             koulutuksenAlkamispaivamaara: null,
             koulutuksenPaattymispaivamaara: null,
             koulutuksenTarkkaAlkamisaika: false,
-            koulutuksenAlkamisvuosi: '2020',
+            koulutuksenAlkamisvuosi: 2020,
+            koulutuksenAlkamiskausi: 'kausi_0#1',
             onkoStipendia: false,
             stipendinKuvaus: {},
             stipendinMaara: null,
@@ -122,6 +124,7 @@ module.exports = {
         kielivalinta: ['fi'],
         tila: 'julkaistu',
         muokkaaja: '1.2.246.562.24.62301161440',
+        teemakuva: null,
         metadata: {
           opetus: {
             lisatiedot: [
@@ -152,7 +155,8 @@ module.exports = {
             koulutuksenAlkamispaivamaara: null,
             koulutuksenPaattymispaivamaara: null,
             koulutuksenTarkkaAlkamisaika: false,
-            koulutuksenAlkamisvuosi: '2020',
+            koulutuksenAlkamisvuosi: 2020,
+            koulutuksenAlkamiskausi: 'kausi_0#1',
             onkoStipendia: true,
             stipendinKuvaus: {
               fi: 'stipendi kuvaus',
@@ -257,6 +261,7 @@ module.exports = {
         kielivalinta: ['fi'],
         tila: 'julkaistu',
         muokkaaja: '1.2.246.562.24.62301161440',
+        teemakuva: null,
         metadata: {
           opetus: {
             lisatiedot: [
@@ -287,7 +292,8 @@ module.exports = {
             koulutuksenAlkamispaivamaara: null,
             koulutuksenPaattymispaivamaara: null,
             koulutuksenTarkkaAlkamisaika: false,
-            koulutuksenAlkamisvuosi: '2020',
+            koulutuksenAlkamisvuosi: 2020,
+            koulutuksenAlkamiskausi: 'kausi_0#1',
             onkoStipendia: true,
             stipendinKuvaus: {
               fi: 'stipendi kuvaus',
@@ -354,7 +360,7 @@ module.exports = {
       },
     },
   },
-  __version: '3.8.2',
+  __version: '4.0.0',
   editToteutusForm: {
     'should be able to edit ammatillinen toteutus': {
       '1': {
@@ -365,6 +371,7 @@ module.exports = {
         nimi: {
           fi: 'Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja',
         },
+        teemakuva: null,
         metadata: {
           opetus: {
             lisatiedot: [
@@ -483,6 +490,7 @@ module.exports = {
         nimi: {
           fi: 'Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja',
         },
+        teemakuva: null,
         metadata: {
           opetus: {
             lisatiedot: [
@@ -621,6 +629,7 @@ module.exports = {
         nimi: {
           fi: 'Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja',
         },
+        teemakuva: null,
         metadata: {
           opetus: {
             lisatiedot: [

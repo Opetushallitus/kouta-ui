@@ -94,7 +94,7 @@
     "@storybook/addon-links": "^4.1.4",
     "@storybook/addons": "^4.1.4",
     "@storybook/react": "^4.1.4",
-    "cypress": "^3.8.3",
+    "cypress": "^4.0.0",
     "cypress-plugin-retries": "^1.5.2",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",

@@ -1,23 +1,25 @@
 import React, { useContext, useCallback } from 'react';
 import { Field } from 'redux-form';
-
-import useTranslation from './useTranslation';
 import { FormFieldImageInput } from './formFields';
 import HttpContext from './HttpContext';
 import UrlContext from './UrlContext';
 import uploadLogo from '../utils/kouta/uploadLogo';
+import {
+  LOGO_ACCEPTED_FORMATS,
+  LOGO_MAX_DIMENSIONS,
+  LOGO_MAX_SIZE,
+  LOGO_NO_DIMENSION_CHECK_FOR_FORMATS,
+} from '../constants';
 
-export const LogoSection = ({ name, label }) => {
-  const { t } = useTranslation();
-
+export const LogoSection = ({ name, label = '' }) => {
   const httpClient = useContext(HttpContext);
   const apiUrls = useContext(UrlContext);
 
-  const upload = useCallback(async file => {
+  const upload = useCallback(file => {
     // TODO: Use real upload API after the backend is available
     return Promise.resolve(URL.createObjectURL(file));
     //return uploadLogo({ httpClient, image: file, apiUrls });
-  }, [httpClient, apiUrls, upload]);
+  }, [apiUrls, httpClient, uploadLogo]);
 
   return (
     <Field
@@ -25,9 +27,10 @@ export const LogoSection = ({ name, label }) => {
       label={label}
       component={FormFieldImageInput}
       upload={upload}
-      maxSize={100000}
-      maxDimensions={{ width: 180, height: 120 }}
-      accept={['.jpeg', '.jpg', '.png', '.svg']}
+      maxSize={LOGO_MAX_SIZE}
+      maxDimensions={LOGO_MAX_DIMENSIONS}
+      acceptedFileFormats={LOGO_ACCEPTED_FORMATS}
+      noDimensionCheckForFormats={LOGO_NO_DIMENSION_CHECK_FOR_FORMATS}
     ></Field>
   );
 };

@@ -168,6 +168,14 @@ export const stubKoutaBackendLoginRoute = ({ cy }) => {
   });
 };
 
+export const stubKoutaBackendSessionRoute = ({ cy }) => {
+  cy.route({
+    method: 'GET',
+    url: '**/kouta-backend/auth/session',
+    response: {},
+  });
+};
+
 export const stubHakemuspalveluLomakkeetRoute = ({
   cy,
   lomakkeet = [{ name: { fi: 'Lomake 1' }, key: 'lomake_1' }],

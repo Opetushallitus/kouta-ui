@@ -2,6 +2,8 @@ import axios from 'axios';
 import get from 'lodash/get';
 import { setupCache } from 'axios-cache-adapter';
 
+let loggingInPromise = null;
+
 const isKoutaBackendUrl = url => {
   return /kouta-backend/.test(url);
 };
@@ -50,15 +52,20 @@ const withAuthorizationInterceptor = apiUrls => client => {
 
       if (isKoutaBackendUrl(responseUrl) && apiUrls) {
         try {
-          // In test environments redirects to cas.login and returns HTML
-          await client.get(apiUrls.url('kouta-backend.login'), {
-            cache: {
-              ignoreCache: true,
-            },
-          });
+          if (!loggingInPromise) {
+            // In test environments redirects to cas.login and returns HTML
+            loggingInPromise = client.get(apiUrls.url('kouta-backend.login'), {
+              cache: {
+                ignoreCache: true,
+              },
+            });
+          }
+          await loggingInPromise;
           return client(error.config);
         } catch (e) {
           return Promise.reject(error);
+        } finally {
+          loggingInPromise = null;
         }
       }
 

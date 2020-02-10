@@ -7,6 +7,7 @@ module.exports = {
         tila: 'julkaistu',
         muokkaaja: '1.2.246.562.24.62301161440',
         kielivalinta: ['fi'],
+        teemakuva: null,
         metadata: {
           yhteystiedot: {
             osoite: {
@@ -30,7 +31,7 @@ module.exports = {
           },
           tietoaOpiskelusta: [
             {
-              otsikkoKoodiUri: 'koulutuksenlisatiedot_0#1',
+              otsikkoKoodiUri: 'organisaationkuvaustiedot_0#1',
               teksti: {
                 fi: 'Tietoa',
               },
@@ -47,7 +48,7 @@ module.exports = {
       },
     },
   },
-  __version: '3.8.2',
+  __version: '4.0.0',
   editOppilaitosForm: {
     'should be able to edit oppilaitos': {
       '1': {
@@ -55,6 +56,7 @@ module.exports = {
         oid: '1.1.1.1.1.1',
         kielivalinta: ['fi'],
         tila: 'tallennettu',
+        teemakuva: null,
         metadata: {
           yhteystiedot: {
             osoite: {
@@ -78,7 +80,7 @@ module.exports = {
           },
           tietoaOpiskelusta: [
             {
-              otsikkoKoodiUri: 'koulutuksenlisatiedot_0#1',
+              otsikkoKoodiUri: 'organisaationkuvaustiedot_0#1',
               teksti: {
                 fi: 'Fi tiedot',
               },

@@ -37,7 +37,7 @@ export default () => {
       tiedekuntia: 4,
       tietoaOpiskelusta: [
         {
-          otsikkoKoodiUri: 'koulutuksenlisatiedot_0#1',
+          otsikkoKoodiUri: 'organisaationkuvaustiedot_0#1',
           teksti: {
             fi: 'Fi tiedot',
             sv: 'Sv tiedot',

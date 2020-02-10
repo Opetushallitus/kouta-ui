@@ -1,4 +1,3 @@
-sudo: required
 env:
   global:
     # AWS_ACCESS_KEY_ID
@@ -6,20 +5,18 @@ env:
     # AWS_SECRET_ACCESS_KEY
     - secure: "I2p7VvO4PiJ7mQe9BOjbAmy637sjyKJUgqSpGo94I7BQI00YFHvjWZisRXywh+0eFAKEqYb3PZURhWr1GRUJSEGIPh/0TZW+84RhPLy5iI+X6cGZw6VuKJ5RiSUwrEldoz/UMIzBKPA9nY6H8CgU33DKhNlxP0MPUwyQCBnmUDzh4smsQfw76jxENFptUWXKt9qnRFNzPIVUphUUfB2NrQ7wSY93gBM7lHg8Ut7wEySTA7k/hAQl4NjW6rcrXa+e7uDlZwgax8p1R7gRNj+ULZAGQ16iqbyT4VL5zf2REKH+oBv+CVGuy4V24QGVxdFU0z1oFkjZwD5kk0bVotPa6e30ubh1lQnXW86vb5dEGAuoMjkgIMjnhva3iWisbd2CpmhArKB1xflvg0XfIuFTVjIUvGaUbwoirEwmGOJ7xhWBNtXjJAUJJcY/Oh0ayGAUKoldXamLMEtOHy+6k1M6uGxIzujYAgU8hVWqV2IDaghhJ5pjyJf5o1qF0VpVxxD5SczoKby4VLEq8ZsASPxchcuUS3BqvARPuqKGxmImHQLKLBzPN9z/ryIdmuJv73JUP3OnEKsQ51QM1zYlaWZSxUpw/tAzCH+8nU7dIswM5p3N7SBdwxu9tN15xLxt5ecCU+KXWDo9U2YbWf4xbyCGkKu5DHlpLAhlwAYeZbvdhO8="
 
-matrix:
+jobs:
   include:
   - stage: test
     language: node_js
-    node_js:
-      - "10"
+    node_js: 10
     addons:
       chrome: stable
     cache:
       directories:
-      - $HOME/.m2
-      - ~/.cache
+        - $HOME/.m2
+        - ~/.cache
       npm: true
-
     before_install:
       - cd src/main/app
     script:
@@ -27,8 +24,7 @@ matrix:
 
   - stage: test
     language: java
-    jdk:
-      - openjdk11
+    jdk: openjdk11
     services:
       - docker
     addons:
@@ -64,5 +60,3 @@ matrix:
       - export ARTIFACT_NAME="kouta-ui"
       - export BASE_IMAGE="baseimage-fatjar:master"
       - ./ci-tools/build/upload-image.sh $ARTIFACT_NAME --dynamo-write
-
-

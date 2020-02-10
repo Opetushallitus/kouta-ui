@@ -183,7 +183,7 @@ export default {
       'Tiedoston maksimiresoluutio: {{width}} x {{height}} pikseliä',
     kuvanLahetysVirhe: 'Kuvan lähettäminen epäonnistui.',
     teemakuva: 'Teemakuva',
-    meneLoginSivulle: 'Kirjaudu sisään',
+    meneLoginSivulle: 'Mene sisäänkirjautumissivulle',
     suljeVaroitus: 'Sulje varoitus',
   },
   ilmoitukset: {
@@ -199,9 +199,9 @@ export default {
         'Et ole enää kirjautuneena sisään palveluun. Ole hyvä ja kirjaudu uudelleen.',
     },
     yhteysVirhe: {
-      otsikko: 'Istunnon varmentaminen epäonnistui',
+      otsikko: 'Verkkoyhteysongelma',
       viesti:
-        'Istunnon voimassaoloa ei pystytty varmentamaan. Verkkoyhteytesi saattaa olla katkennut.',
+        'Yhteys palvelimeen on katkennut. Ole hyvä ja tarkista verkkoyhteytesi.',
     },
   },
   sivuTitlet: {

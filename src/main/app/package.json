@@ -15,6 +15,7 @@
     "draft-convert": "^2.1.4",
     "draft-js": "^0.10.5",
     "history": "^4.7.2",
+    "http-status-codes": "^1.4.0",
     "i18next": "^13.1.5",
     "i18next-xhr-backend": "^2.0.1",
     "intersection-observer": "^0.7.0",

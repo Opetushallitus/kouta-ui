@@ -174,3 +174,6 @@ export const LIITTEEN_TOIMITUSTAPA = {
 export const TEEMAKUVA_ACCEPTED_FORMATS = ['.jpg', '.jpeg', '.png'];
 export const TEEMAKUVA_MAX_SIZE = 2000000;
 export const TEEMAKUVA_MIN_DIMENSIONS = { width: 1260, height: 400 };
+
+export const IDLE_TIMEOUT = 30e3; // 30 seconds
+export const ERROR_INTERNET_DISCONNECTED = 'ERROR_INTERNET_DISCONNECTED';

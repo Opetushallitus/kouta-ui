@@ -402,6 +402,8 @@ module.exports = {
             koulutuksenAlkamispaivamaara: null,
             koulutuksenPaattymispaivamaara: null,
             koulutuksenTarkkaAlkamisaika: false,
+            koulutuksenAlkamiskausi: 'kausi_0#1',
+            koulutuksenAlkamisvuosi: 2020,
             onkoStipendia: true,
             stipendinKuvaus: {
               fi: 'Stipendin kuvaus',
@@ -521,6 +523,8 @@ module.exports = {
             koulutuksenAlkamispaivamaara: null,
             koulutuksenPaattymispaivamaara: null,
             koulutuksenTarkkaAlkamisaika: false,
+            koulutuksenAlkamiskausi: 'kausi_0#1',
+            koulutuksenAlkamisvuosi: 2020,
             onkoStipendia: true,
             stipendinKuvaus: {
               fi: 'Stipendin kuvaus',
@@ -660,6 +664,8 @@ module.exports = {
             koulutuksenAlkamispaivamaara: null,
             koulutuksenPaattymispaivamaara: null,
             koulutuksenTarkkaAlkamisaika: false,
+            koulutuksenAlkamiskausi: 'kausi_0#1',
+            koulutuksenAlkamisvuosi: 2020,
             onkoStipendia: true,
             stipendinKuvaus: {
               fi: 'Stipendin kuvaus',

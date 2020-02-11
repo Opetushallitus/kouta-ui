@@ -75,9 +75,6 @@ const KausiJaVuosiFields = ({name}) => {
 const AlkamiskausiFields = ({name}) => {
   const {t} = useTranslation();
   const koulutuksenTarkkaAlkamisaika = useFieldValue(`${name}.koulutuksenTarkkaAlkamisaika`);
-  const vuosi = useFieldValue(`${name}.koulutuksenAlkamisvuosi`);
-  console.log('----------' + `${name}.koulutuksenAlkamisvuosi`)
-  console.log(vuosi)
   return (
     <Box display="flex" m={-1}>
       <Spacing>

@@ -360,7 +360,7 @@ module.exports = {
       },
     },
   },
-  __version: '4.0.0',
+  __version: '4.0.1',
   editToteutusForm: {
     'should be able to edit ammatillinen toteutus': {
       '1': {
@@ -402,6 +402,8 @@ module.exports = {
             koulutuksenAlkamispaivamaara: null,
             koulutuksenPaattymispaivamaara: null,
             koulutuksenTarkkaAlkamisaika: false,
+            koulutuksenAlkamiskausi: 'kausi_0#1',
+            koulutuksenAlkamisvuosi: 2020,
             onkoStipendia: true,
             stipendinKuvaus: {
               fi: 'Stipendin kuvaus',
@@ -521,6 +523,8 @@ module.exports = {
             koulutuksenAlkamispaivamaara: null,
             koulutuksenPaattymispaivamaara: null,
             koulutuksenTarkkaAlkamisaika: false,
+            koulutuksenAlkamiskausi: 'kausi_0#1',
+            koulutuksenAlkamisvuosi: 2020,
             onkoStipendia: true,
             stipendinKuvaus: {
               fi: 'Stipendin kuvaus',
@@ -660,6 +664,8 @@ module.exports = {
             koulutuksenAlkamispaivamaara: null,
             koulutuksenPaattymispaivamaara: null,
             koulutuksenTarkkaAlkamisaika: false,
+            koulutuksenAlkamiskausi: 'kausi_0#1',
+            koulutuksenAlkamisvuosi: 2020,
             onkoStipendia: true,
             stipendinKuvaus: {
               fi: 'Stipendin kuvaus',

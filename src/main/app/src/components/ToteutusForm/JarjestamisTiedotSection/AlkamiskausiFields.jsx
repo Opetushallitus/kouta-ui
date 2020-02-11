@@ -66,7 +66,6 @@ const KausiJaVuosiFields = ({name}) => {
       <Field
         name={`${name}.koulutuksenAlkamisvuosi`}
         component={FormFieldYearSelect}
-        isClearable
         placeholder={t('toteutuslomake.koulutuksenAlkamisvuosi')}
       />
     </Box>

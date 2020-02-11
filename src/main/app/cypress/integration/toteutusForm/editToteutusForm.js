@@ -33,6 +33,13 @@ describe('editToteutusForm', () => {
     tarjoajat: ['5.1.1.1.1.1', '3.1.1.1.1.1'],
     organisaatioOid: organisaatioOid,
     koulutusOid: koulutusOid,
+    metadata: {
+      opetus: {
+        koulutuksenTarkkaAlkamisaika: false,
+        koulutuksenAlkamiskausi: 'kausi_0#1',
+        koulutuksenAlkamisvuosi: 2020,
+      },
+    },
   };
 
   beforeEach(() => {

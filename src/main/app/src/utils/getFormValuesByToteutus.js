@@ -35,6 +35,8 @@ const getFormValuesByToteutus = toteutus => {
     koulutuksenAlkamispaivamaara,
     koulutuksenPaattymispaivamaara,
     koulutuksenAlkamiskausi,
+    koulutuksenAlkamisvuosi,
+    koulutuksenTarkkaAlkamiskausi,
     diplomiKoodiUrit,
     diplomiKuvaus,
     A1JaA2Kielivalikoima,
@@ -144,7 +146,11 @@ const getFormValuesByToteutus = toteutus => {
       koulutuksenPaattymispaivamaara: koulutuksenPaattymispaivamaara
         ? new Date(koulutuksenPaattymispaivamaara)
         : '',
+      koulutuksenTarkkaAlkamiskausi: koulutuksenTarkkaAlkamiskausi,
       koulutuksenAlkamiskausi: koulutuksenAlkamiskausi,
+      koulutuksenAlkamisvuosi: koulutuksenAlkamisvuosi
+        ? { value: koulutuksenAlkamisvuosi }
+        : undefined,
     },
     nayttamistiedot: {
       ammattinimikkeet: ammattinimikkeet.reduce((acc, curr) => {

@@ -36,7 +36,7 @@ const getFormValuesByToteutus = toteutus => {
     koulutuksenPaattymispaivamaara,
     koulutuksenAlkamiskausi,
     koulutuksenAlkamisvuosi,
-    koulutuksenTarkkaAlkamiskausi,
+    koulutuksenTarkkaAlkamisaika,
     diplomiKoodiUrit,
     diplomiKuvaus,
     A1JaA2Kielivalikoima,
@@ -146,7 +146,7 @@ const getFormValuesByToteutus = toteutus => {
       koulutuksenPaattymispaivamaara: koulutuksenPaattymispaivamaara
         ? new Date(koulutuksenPaattymispaivamaara)
         : '',
-      koulutuksenTarkkaAlkamiskausi: koulutuksenTarkkaAlkamiskausi,
+      koulutuksenTarkkaAlkamisaika: koulutuksenTarkkaAlkamisaika,
       koulutuksenAlkamiskausi: koulutuksenAlkamiskausi,
       koulutuksenAlkamisvuosi: koulutuksenAlkamisvuosi
         ? { value: koulutuksenAlkamisvuosi }

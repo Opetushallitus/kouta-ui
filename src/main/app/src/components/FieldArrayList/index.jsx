@@ -1,10 +1,11 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-
+import { get, isArray, isNil } from 'lodash';
 import useTranslation from '../useTranslation';
 import { spacing, getThemeProp } from '../../theme';
 import Flex, { FlexItem } from '../Flex';
 import Button from '../Button';
+import FormControl from '../FormControl';
 
 const Item = styled.div`
   ${({ isFirst }) =>
@@ -36,6 +37,7 @@ const ItemFlex = styled(FlexItem)`
 
 export const FieldArrayList = ({
   fields,
+  meta,
   hasDivider = true,
   hasRemoveButton = true,
   removeButtonText: removeButtonTextProp,
@@ -43,6 +45,7 @@ export const FieldArrayList = ({
 }) => {
   const { t } = useTranslation();
   const removeButtonText = removeButtonTextProp || t('yleiset.poista');
+  const error = get(meta, 'error');
 
   const fieldsContent = fields.map((field, index, f) => {
     const isLast = index === fields.length - 1;
@@ -75,7 +78,14 @@ export const FieldArrayList = ({
     );
   });
 
-  return fieldsContent;
+  return (
+    <FormControl
+      error={!isNil(error)}
+      helperText={error && isArray(error) ? t(...error) : t(error)}
+    >
+      {fieldsContent}
+    </FormControl>
+  );
 };
 
 export default FieldArrayList;

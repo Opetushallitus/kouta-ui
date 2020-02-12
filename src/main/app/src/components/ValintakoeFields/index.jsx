@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { Field, FieldArray } from 'redux-form';
+import { isArray } from 'lodash';
 
 import useKoodistoOptions from '../useKoodistoOptions';
 import Spacing from '../Spacing';
@@ -8,7 +9,7 @@ import FieldArrayList from '../FieldArrayList';
 import Button from '../Button';
 import useTranslation from '../useTranslation';
 import DividerHeading from '../DividerHeading';
-import { isArray, getTestIdProps } from '../../utils';
+import { getTestIdProps } from '../../utils';
 
 import {
   FormFieldSelect,
@@ -18,9 +19,9 @@ import {
   FormFieldPostinumeroSelect,
 } from '../formFields';
 
-const TilaisuudetField = ({ fields, language, t }) => (
+const TilaisuudetField = ({ fields, language, t, meta }) => (
   <>
-    <FieldArrayList fields={fields}>
+    <FieldArrayList fields={fields} meta={meta}>
       {({ field }) => (
         <>
           <Spacing marginBottom={2} {...getTestIdProps('osoite')}>
@@ -84,7 +85,6 @@ const TilaisuudetField = ({ fields, language, t }) => (
 
 const TyypitListField = ({ input: { value }, baseName, language, t }) => {
   const tyypit = isArray(value) ? value : [];
-
   return (
     <>
       <Spacing marginTop={tyypit.length > 0 ? 4 : 0}>

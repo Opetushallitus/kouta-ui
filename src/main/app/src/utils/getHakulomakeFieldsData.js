@@ -6,9 +6,10 @@ import { HAKULOMAKETYYPPI } from '../constants';
 const getHakulomakeFieldsData = ({ hakulomakeValues, kielivalinta }) => {
   const hakulomaketyyppi = get(hakulomakeValues, 'tyyppi') || null;
 
-  const hakulomakeId = [HAKULOMAKETYYPPI.ATARU].includes(hakulomaketyyppi)
-    ? get(hakulomakeValues, ['lomake', hakulomaketyyppi, 'value']) || null
-    : null;
+  const hakulomakeAtaruId =
+    hakulomaketyyppi === HAKULOMAKETYYPPI.ATARU
+      ? get(hakulomakeValues, ['lomake', 'value']) || null
+      : null;
 
   const hakulomakeLinkki =
     hakulomaketyyppi === HAKULOMAKETYYPPI.MUU
@@ -22,7 +23,7 @@ const getHakulomakeFieldsData = ({ hakulomakeValues, kielivalinta }) => {
 
   return {
     hakulomaketyyppi,
-    hakulomakeAtaruId: hakulomakeId,
+    hakulomakeAtaruId,
     hakulomakeLinkki,
     hakulomakeKuvaus,
   };

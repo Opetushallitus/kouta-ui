@@ -1,6 +1,5 @@
 import React, { useMemo, useCallback } from 'react';
-import get from 'lodash/get';
-
+import { get } from 'lodash';
 import BaseSelectionSection from './BaseSelectionSection';
 import KieliversiotFields from '../KieliversiotFields';
 import NameSection from './NameSection';
@@ -16,7 +15,7 @@ import { isFunction, getTestIdProps } from '../../utils';
 import Flex from '../Flex';
 import Button from '../Button';
 import useTranslation from '../useTranslation';
-import LomakeSection from './LomakeSection';
+import LomakeFields from '../LomakeFields';
 import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
 import useModal from '../useModal';
 import isYhteishakuHakutapa from '../../utils/isYhteishakuHakutapa';
@@ -155,7 +154,7 @@ const HakuForm = ({
           languages={languages}
           {...getTestIdProps('hakulomakeSection')}
         >
-          <LomakeSection />
+          <LomakeFields name="hakulomake" />
         </FormCollapse>
 
         <FormCollapse

@@ -23,26 +23,6 @@ import {
   useLomakeOptions,
 } from './utils';
 
-const MuuFields = ({ baseName, t, language }) => {
-  return (
-    <Field
-      name={`${baseName}.linkki.${language}`}
-      component={FormFieldInput}
-      label={t('yleiset.linkki')}
-    />
-  );
-};
-
-const EiHakuaFields = ({ baseName, t, language }) => {
-  return (
-    <Field
-      name={`${baseName}.kuvaus.${language}`}
-      component={FormFieldTextarea}
-      label={t('yleiset.kuvaus')}
-    />
-  );
-};
-
 const LomakeSelect = ({
   input: { value, onBlur, ...restInput },
   getShowUrl,
@@ -74,7 +54,6 @@ const LomakeSelect = ({
 const AdditionalTyyppiFields = ({
   input: { value },
   baseName,
-  lomakeName,
   ataruOptions,
   getTyyppiShowUrl,
   apiUrls,
@@ -85,28 +64,37 @@ const AdditionalTyyppiFields = ({
     return option => getTyyppiShowUrl({ option, apiUrls, tyyppi: value });
   }, [getTyyppiShowUrl, apiUrls, value]);
 
-  if (value === HAKULOMAKETYYPPI.MUU) {
-    return <MuuFields baseName={baseName} t={t} language={language} />;
+  switch (value) {
+    case HAKULOMAKETYYPPI.ATARU:
+      return (
+        <Field
+          name={`${baseName}.lomake`}
+          component={LomakeSelect}
+          options={ataruOptions}
+          label={t('yleiset.valitseHakulomake')}
+          getShowUrl={getShowUrl}
+          t={t}
+        />
+      );
+    case HAKULOMAKETYYPPI.MUU:
+      return (
+        <Field
+          name={`${baseName}.linkki.${language}`}
+          component={FormFieldInput}
+          label={t('yleiset.linkki')}
+        />
+      );
+    case HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA:
+      return (
+        <Field
+          name={`${baseName}.kuvaus.${language}`}
+          component={FormFieldTextarea}
+          label={t('yleiset.kuvaus')}
+        />
+      );
+    default:
+      return null;
   }
-
-  if (value === HAKULOMAKETYYPPI.ATARU) {
-    return (
-      <Field
-        name={`${lomakeName}.${value}`}
-        component={LomakeSelect}
-        options={ataruOptions}
-        label={t('yleiset.valitseHakulomake')}
-        getShowUrl={getShowUrl}
-        t={t}
-      />
-    );
-  }
-
-  if (value === HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA) {
-    return <EiHakuaFields baseName={baseName} t={t} language={language} />;
-  }
-
-  return null;
 };
 
 const defaultTyypit = [
@@ -126,7 +114,6 @@ export const LomakeFields = ({
 }) => {
   const { t } = useTranslation();
   const tyyppiName = `${name}.tyyppi`;
-  const lomakeName = `${name}.lomake`;
 
   const optionsLabel =
     optionsLabelProp === undefined
@@ -170,7 +157,6 @@ export const LomakeFields = ({
       <FlexItem grow={1} paddingLeft={3}>
         <Field
           baseName={name}
-          lomakeName={lomakeName}
           ataruOptions={ataruOptions}
           name={tyyppiName}
           getTyyppiShowUrl={enhancedGetTyyppiShowUrl}

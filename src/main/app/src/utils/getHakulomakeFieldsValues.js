@@ -8,11 +8,10 @@ const getHakulomakeFieldsValues = ({
 }) => {
   return {
     tyyppi: hakulomaketyyppi,
-    lomake: [HAKULOMAKETYYPPI.ATARU].includes(hakulomaketyyppi)
-      ? {
-          [hakulomaketyyppi]: { value: hakulomakeAtaruId || '' },
-        }
-      : {},
+    lomake:
+      hakulomaketyyppi === HAKULOMAKETYYPPI.ATARU
+        ? { value: hakulomakeAtaruId || '' }
+        : {},
     linkki: hakulomakeLinkki || {},
     kuvaus: hakulomakeKuvaus || {},
   };

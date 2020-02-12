@@ -1,5 +1,4 @@
-import get from 'lodash/get';
-import pick from 'lodash/pick';
+import { get, reduce } from 'lodash';
 
 import { JULKAISUTILA, LIITTEEN_TOIMITUSTAPA } from '../constants';
 
@@ -16,9 +15,6 @@ const getLiitteillaYhteinenToimitusaika = values =>
 
 const getLiitteillaYhteinenToimitusosoite = values =>
   !!get(values, 'liitteet.yhteinenToimituspaikka');
-
-const getKaytetaanHaunAikataulua = values =>
-  !get(values, 'hakuajat.eriHakuaika');
 
 const validateLiitteet = (errorBuilder, values) => {
   const kieliversiot = getKielivalinta(values);
@@ -92,22 +88,25 @@ const validateLiitteet = (errorBuilder, values) => {
 };
 
 const validateValintakokeet = (errorBuilder, values) => {
-  const valintakokeet = pick(
-    get(values, 'valintakoe.tilaisuudet'),
-    get(values, 'valintakoe.tyypit'),
-  );
-
+  const valintakoeTyypit = get(values, 'valintakoe.tyypit');
   const kieliversiot = getKielivalinta(values);
 
-  return Object.keys(valintakokeet).reduce((acc, tyyppi) => {
-    return acc.validateArray(`valintakoe.tilaisuudet.${tyyppi}`, eb => {
-      return eb
-        .validateTranslations('osoite', kieliversiot)
-        .validateExistence('postinumero.value')
-        .validateExistence('alkaa')
-        .validateExistence('paattyy');
-    });
-  }, errorBuilder);
+  return reduce(
+    valintakoeTyypit,
+    (ebAcc, { value: tyyppi }) =>
+      ebAcc
+        .validateArrayMinLength(`valintakoe.tilaisuudet.${tyyppi}`, 1, {
+          isFieldArray: true,
+        })
+        .validateArray(`valintakoe.tilaisuudet.${tyyppi}`, eb =>
+          eb
+            .validateTranslations('osoite', kieliversiot)
+            .validateExistence('postinumero')
+            .validateExistence('alkaa')
+            .validateExistence('paattyy'),
+        ),
+    errorBuilder,
+  );
 };
 
 const baseConfig = {
@@ -143,13 +142,17 @@ const baseConfig = {
             ),
         },
         hakuaika: {
-          validate: validateIfJulkaistu((eb, values) => {
-            return !getKaytetaanHaunAikataulua(values)
-              ? eb.validateArray('hakuajat.hakuajat', eb => {
-                  return eb.validateExistence('alkaa');
-                })
-              : eb;
-          }),
+          validate: validateIfJulkaistu((eb, values) =>
+            get(values, 'hakuajat.eriHakuaika')
+              ? eb
+                  .validateArrayMinLength('hakuajat.hakuajat', 1, {
+                    isFieldArray: true,
+                  })
+                  .validateArray('hakuajat.hakuajat', eb =>
+                    eb.validateExistence('alkaa'),
+                  )
+              : eb,
+          ),
         },
         alkamiskausi: true,
         hakulomake: true,
@@ -168,9 +171,12 @@ const baseConfig = {
     },
     valintakoe: {
       fields: {
-        valintakokeet: validateIfJulkaistu((eb, values) =>
-          validateValintakokeet(eb, values),
-        ),
+        tyypit: {
+          validate: validateIfJulkaistu((eb, values) =>
+            validateValintakokeet(eb, values),
+          ),
+        },
+        tilaisuudet: true,
       },
     },
     liitteet: {

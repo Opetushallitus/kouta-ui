@@ -49,7 +49,6 @@ const loadLocalisation = async ({
   const httpClient = createHttpClient({
     apiUrls,
     callerId: process.env.REACT_APP_CALLER_ID,
-    redirectAfterForbidden: !isDev,
   });
 
   const localisationInstance = createLocalisation({

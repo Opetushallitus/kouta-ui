@@ -3,6 +3,8 @@ import memoizee from 'memoizee';
 import { flowRight, last, padStart, pick, toPairs, zipObject } from 'lodash';
 import { useMachine as useXstateMachine } from '@xstate/react';
 
+export const isDev = process.env.NODE_ENV === 'development';
+
 export const isString = value => typeof value === 'string';
 
 export const isNumber = value => typeof value === 'number';
@@ -174,7 +176,7 @@ export const getFileExtension = file => {
 
 export const useMachine = (machine, options) =>
   useXstateMachine(machine, {
-    devTools: process.env.NODE_ENV === 'development',
+    devTools: isDev,
     ...options,
   });
 

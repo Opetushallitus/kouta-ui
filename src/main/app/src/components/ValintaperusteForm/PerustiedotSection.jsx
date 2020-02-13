@@ -7,25 +7,25 @@ import KieliversiotFields from '../KieliversiotFields';
 import Divider from '../Divider';
 import { getTestIdProps } from '../../utils';
 
-const PerustiedotSection = ({ canEditTyyppi = true }) => {
+const PerustiedotSection = ({ name, canEditTyyppi = true }) => {
   return (
     <>
       {canEditTyyppi ? (
         <div {...getTestIdProps('tyyppiSection')}>
-          <TyyppiSection name="tyyppi" />
+          <TyyppiSection name={`${name}.tyyppi`} />
           <Divider marginTop={3} marginBottom={3} />
         </div>
       ) : null}
       <div {...getTestIdProps('kieliversiotSection')}>
-        <KieliversiotFields name="kieliversiot" />
+        <KieliversiotFields name={`${name}.kieliversiot`} />
       </div>
       <Divider marginTop={3} marginBottom={3} />
       <div {...getTestIdProps('hakutapaSection')}>
-        <HakutavanRajausSection name="hakutapa" />
+        <HakutavanRajausSection name={`${name}.hakutapa`} />
       </div>
       <Divider marginTop={3} marginBottom={3} />
       <div {...getTestIdProps('kohdejoukkoSection')}>
-        <KohdejoukonRajausSection name="kohdejoukko" />
+        <KohdejoukonRajausSection name={`${name}.kohdejoukko`} />
       </div>
     </>
   );

@@ -59,7 +59,7 @@ const ValintaperusteForm = ({
         scrollOnActive={false}
         {...getTestIdProps('perustiedotSection')}
       >
-        <PerustiedotSection canEditTyyppi={canEditTyyppi} />
+        <PerustiedotSection canEditTyyppi={canEditTyyppi} name="perustiedot" />
       </FormCollapse>
 
       {canSelectBase ? (

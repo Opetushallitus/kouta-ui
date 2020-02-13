@@ -1,8 +1,13 @@
-import getValintaperusteFormConfig from "./getValintaperusteFormConfig";
+import { get } from 'lodash';
+import getValintaperusteFormConfig from './getValintaperusteFormConfig';
 import getErrorBuilderByFormConfig from './getErrorBuilderByFormConfig';
 
 const validateValintaperusteForm = values => {
-  return getErrorBuilderByFormConfig(getValintaperusteFormConfig(), values).getErrors();
+  const koulutustyyppi = get(values, 'perustiedot.tyyppi');
+  return getErrorBuilderByFormConfig(
+    getValintaperusteFormConfig(koulutustyyppi),
+    values,
+  ).getErrors();
 };
 
 export default validateValintaperusteForm;

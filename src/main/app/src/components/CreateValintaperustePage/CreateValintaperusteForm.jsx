@@ -8,8 +8,7 @@ import ReduxForm from '../ReduxForm';
 import getFormValuesByValintaperuste from '../../utils/getFormValuesByValintaperuste';
 import getValintaperusteFormConfig from '../../utils/getValintaperusteFormConfig';
 import FormConfigContext from '../FormConfigContext';
-import useFieldValue from "../useFieldValue";
-
+import useFieldValue from '../useFieldValue';
 
 const resolveFn = () => Promise.resolve(null);
 
@@ -20,7 +19,7 @@ const getCopyValues = valintaperusteOid => ({
   },
 });
 
-const getInitialValues = ( valintaperuste, kieliValinnat ) => {
+const getInitialValues = (valintaperuste, kieliValinnat) => {
   return valintaperuste && valintaperuste.oid
     ? {
         ...getCopyValues(valintaperuste.oid),
@@ -30,8 +29,6 @@ const getInitialValues = ( valintaperuste, kieliValinnat ) => {
 };
 
 const ValintaperusteFormWrapper = props => {
-  const { steps } = props;
-
   const koulutustyyppi = useFieldValue('tyyppi');
 
   const config = useMemo(() => getValintaperusteFormConfig(koulutustyyppi), [
@@ -58,7 +55,7 @@ export const CreateValintaperusteForm = ({
     watch: kopioValintaperusteOid,
   });
 
-  kieliValinnat = kieliValinnat == null ? [] : kieliValinnat.split(",");
+  kieliValinnat = kieliValinnat == null ? [] : kieliValinnat.split(',');
 
   const initialValues = useMemo(() => {
     return getInitialValues(valintaperuste, kieliValinnat);

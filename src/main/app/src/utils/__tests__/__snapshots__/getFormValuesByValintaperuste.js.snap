@@ -2,15 +2,7 @@
 
 exports[`getFormValuesByValintaperuste returns correct form values given valintaperuste 1`] = `
 Object {
-  "hakutapa": "tapa_1#1",
   "julkinen": true,
-  "kieliversiot": Array [
-    "fi",
-    "sv",
-  ],
-  "kohdejoukko": Object {
-    "value": "joukko_1#1",
-  },
   "kuvaus": Object {
     "kuvaus": Object {
       "fi":         "<h1>Fi kuvaus</h1>",
@@ -21,11 +13,21 @@ Object {
       "sv": "Sv nimi",
     },
   },
+  "perustiedot": Object {
+    "hakutapa": "tapa_1#1",
+    "kieliversiot": Array [
+      "fi",
+      "sv",
+    ],
+    "kohdejoukko": Object {
+      "value": "joukko_1#1",
+    },
+    "tyyppi": "tyyppi_1#1",
+  },
   "soraKuvaus": Object {
     "value": "sora_1",
   },
   "tila": "tallennettu",
-  "tyyppi": "tyyppi_1#1",
   "valintakoe": Object {
     "tilaisuudet": Object {
       "tyyppi_1#1": Array [

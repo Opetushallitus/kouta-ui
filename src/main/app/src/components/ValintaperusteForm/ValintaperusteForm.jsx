@@ -48,7 +48,7 @@ const ValintaperusteForm = ({
   showArkistoituTilaOption = true,
 }) => {
   const { t } = useTranslation();
-  const kieliversiot = useFieldValue('kieliversiot');
+  const kieliversiot = useFieldValue('perustiedot.kieliversiot');
   const languages = kieliversiot || [];
 
   return (
@@ -59,7 +59,7 @@ const ValintaperusteForm = ({
         scrollOnActive={false}
         {...getTestIdProps('perustiedotSection')}
       >
-        <PerustiedotSection canEditTyyppi={canEditTyyppi} />
+        <PerustiedotSection canEditTyyppi={canEditTyyppi} name="perustiedot" />
       </FormCollapse>
 
       {canSelectBase ? (

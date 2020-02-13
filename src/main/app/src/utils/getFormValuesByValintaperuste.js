@@ -1,6 +1,4 @@
-import mapValues from 'lodash/mapValues';
-
-import { isObject, isArray } from './index';
+import { isArray, isObject, mapValues } from 'lodash';
 import parseEditorState from './draft/parseEditorState';
 import getValintakoeFieldsValues from './getValintakoeFieldsValues';
 
@@ -39,9 +37,12 @@ const getFormValuesByValintaperuste = valintaperuste => {
 
   return {
     tila,
-    kieliversiot: kielivalinta,
-    hakutapa: hakutapaKoodiUri,
-    kohdejoukko: kohdejoukkoKoodiUri ? { value: kohdejoukkoKoodiUri } : null,
+    perustiedot: {
+      tyyppi: koulutustyyppi,
+      kieliversiot: kielivalinta,
+      hakutapa: hakutapaKoodiUri,
+      kohdejoukko: kohdejoukkoKoodiUri ? { value: kohdejoukkoKoodiUri } : null,
+    },
     julkinen: onkoJulkinen,
     kuvaus: {
       nimi,
@@ -66,7 +67,6 @@ const getFormValuesByValintaperuste = valintaperuste => {
         sisalto: parseSisalto({ sisalto }),
       }),
     ),
-    tyyppi: koulutustyyppi,
     soraKuvaus: sorakuvausId
       ? {
           value: sorakuvausId,

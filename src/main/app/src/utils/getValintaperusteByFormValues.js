@@ -1,9 +1,6 @@
-import get from 'lodash/get';
+import { get, isObject, isArray, mapValues, pick } from 'lodash';
 import produce from 'immer';
-import pick from 'lodash/pick';
-import mapValues from 'lodash/mapValues';
-
-import { isObject, isArray, isNumeric } from './index';
+import { isNumeric } from './index';
 import serializeEditorState from './draft/serializeEditorState';
 import getValintakoeFieldsData from './getValintakoeFieldsData';
 
@@ -58,13 +55,13 @@ const serializeSisalto = ({ sisalto, kielivalinta = [] }) => {
 };
 
 const getValintaperusteByFormValues = values => {
-  const { tila, muokkaaja } = values;
+  const { tila, muokkaaja, perustiedot } = values;
 
-  const hakutapaKoodiUri = get(values, 'hakutapa');
+  const hakutapaKoodiUri = get(perustiedot, 'hakutapa');
 
-  const kielivalinta = get(values, 'kieliversiot') || [];
+  const kielivalinta = get(perustiedot, 'kieliversiot') || [];
 
-  const kohdejoukkoKoodiUri = get(values, 'kohdejoukko.value') || null;
+  const kohdejoukkoKoodiUri = get(perustiedot, 'kohdejoukko.value') || null;
 
   const nimi = pick(get(values, 'kuvaus.nimi'), kielivalinta);
 
@@ -103,7 +100,7 @@ const getValintaperusteByFormValues = values => {
     kielivalinta,
   });
 
-  const koulutustyyppi = get(values, 'tyyppi') || null;
+  const koulutustyyppi = get(perustiedot, 'tyyppi') || null;
   const sorakuvausId = get(values, 'soraKuvaus.value') || null;
   const onkoJulkinen = Boolean(get(values, 'julkinen'));
 

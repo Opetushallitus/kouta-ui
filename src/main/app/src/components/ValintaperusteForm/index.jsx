@@ -1,3 +1,4 @@
+import { isEmpty } from 'lodash';
 import {
   KOULUTUSTYYPPI,
   POHJAVALINTA,
@@ -6,12 +7,14 @@ import {
 
 export { default } from './ValintaperusteForm';
 
-export const initialValues = (kieliValinnat) => ({
+export const initialValues = kieliValinnat => ({
   tila: DEFAULT_JULKAISUTILA,
-  tyyppi: KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
-  kieliversiot: kieliValinnat,
   pohja: {
     tapa: POHJAVALINTA.UUSI,
+  },
+  perustiedot: {
+    tyyppi: KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
+    kieliversiot: isEmpty(kieliValinnat) ? ['fi'] : kieliValinnat,
   },
   valintatavat: [{}],
 });

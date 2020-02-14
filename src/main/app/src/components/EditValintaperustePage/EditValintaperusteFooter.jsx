@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 import { withRouter } from 'react-router-dom';
 
-import Button from '../Button';
+import Submit from '../Submit';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
 import Box from '../Box';
@@ -50,7 +50,7 @@ const EditValintaperusteFooter = ({ valintaperuste, history }) => {
 
   return (
     <Box display="flex" justifyContent="flex-end">
-      <Button
+      <Submit
         onClick={save}
         disabled={!canUpdate}
         title={
@@ -59,7 +59,7 @@ const EditValintaperusteFooter = ({ valintaperuste, history }) => {
         {...getTestIdProps('tallennaValintaperusteButton')}
       >
         {t('yleiset.tallenna')}
-      </Button>
+      </Submit>
     </Box>
   );
 };

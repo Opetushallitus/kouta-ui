@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { withRouter } from 'react-router-dom';
 
-import Button from '../Button';
+import Submit from '../Submit';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
 import Flex from '../Flex';
@@ -41,9 +41,9 @@ const EditSoraKuvausFooter = ({ soraKuvaus, history }) => {
 
   return (
     <Flex justifyEnd>
-      <Button onClick={save} {...getTestIdProps('tallennaSoraKuvausButton')}>
+      <Submit onClick={save} {...getTestIdProps('tallennaSoraKuvausButton')}>
         {t('yleiset.tallenna')}
-      </Button>
+      </Submit>
     </Flex>
   );
 };

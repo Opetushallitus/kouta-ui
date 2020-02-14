@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { withRouter } from 'react-router-dom';
 
-import Button from '../Button';
+import Submit from '../Submit';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
 import Flex from '../Flex';
@@ -46,9 +46,9 @@ const CreateHakukohdeFooter = ({
 
   return (
     <Flex justifyEnd>
-      <Button onClick={save} {...getTestIdProps('tallennaHakukohdeButton')}>
+      <Submit onClick={save} {...getTestIdProps('tallennaHakukohdeButton')}>
         {t('yleiset.tallenna')}
-      </Button>
+      </Submit>
     </Flex>
   );
 };

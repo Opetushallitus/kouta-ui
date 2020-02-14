@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import Box from '../Box';
-import Button from '../Button';
+import Submit from '../Submit';
 import { getTestIdProps } from '../../utils';
 import useTranslation from '../useTranslation';
 import useSaveForm from '../useSaveForm';
@@ -53,13 +53,13 @@ const OppilaitoksenOsaPageFooter = ({
 
   return (
     <Box display="flex" justifyContent="end">
-      <Button
+      <Submit
         onClick={save}
         disabled={oppilaitoksenOsaIsLoading}
         {...getTestIdProps('tallennaOppilaitoksenOsaButton')}
       >
         {t('yleiset.tallenna')}
-      </Button>
+      </Submit>
     </Box>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { withRouter } from 'react-router-dom';
 
-import Button from '../Button';
+import Submit from '../Submit';
 import useTranslation from '../useTranslation';
 import { getTestIdProps } from '../../utils';
 import Flex from '../Flex';
@@ -36,12 +36,12 @@ const CreateValintaperusteFooter = ({ organisaatioOid, history }) => {
   });
   return (
     <Flex justifyEnd>
-      <Button
+      <Submit
         onClick={save}
         {...getTestIdProps('tallennaValintaperusteButton')}
       >
         {t('yleiset.tallenna')}
-      </Button>
+      </Submit>
     </Flex>
   );
 };

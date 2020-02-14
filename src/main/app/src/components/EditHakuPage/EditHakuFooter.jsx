@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 import { withRouter } from 'react-router-dom';
 
-import Button from '../Button';
+import Submit from '../Submit';
 import { getTestIdProps } from '../../utils';
 import useTranslation from '../useTranslation';
 import Box from '../Box';
@@ -50,14 +50,14 @@ const EditHakuFooter = ({ haku, history }) => {
 
   return (
     <Box display="flex" justifyContent="flex-end">
-      <Button
+      <Submit
         disabled={!canUpdate}
         onClick={save}
         title={!canUpdate ? t('hakulomake.eiMuokkausOikeutta') : undefined}
         {...getTestIdProps('tallennaHakuButton')}
       >
         {t('yleiset.tallenna')}
-      </Button>
+      </Submit>
     </Box>
   );
 };

@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import without from 'lodash/without';
 import uniq from 'lodash/uniq';
 
-import Button from '../Button';
+import Submit from '../Submit';
 import useTranslation from '../useTranslation';
 import { getTestIdProps, isArray } from '../../utils';
 import Box from '../Box';
@@ -100,14 +100,14 @@ const EditToteutusFooter = ({
 
   return (
     <Box display="flex" justifyContent="flex-end">
-      <Button
+      <Submit
         disabled={!canUpdate}
         onClick={save}
         title={!canUpdate ? t('toteutuslomake.eiMuokkausOikeutta') : undefined}
         {...getTestIdProps('tallennaToteutusButton')}
       >
         {t('yleiset.tallenna')}
-      </Button>
+      </Submit>
     </Box>
   );
 };

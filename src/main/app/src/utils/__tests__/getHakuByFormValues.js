@@ -46,9 +46,7 @@ const baseValues = {
   },
   hakulomake: {
     tyyppi: HAKULOMAKETYYPPI.ATARU,
-    lomake: {
-      [HAKULOMAKETYYPPI.ATARU]: { value: '12345' },
-    },
+    lomake: { value: '12345' },
   },
   yhteyshenkilot: [
     {

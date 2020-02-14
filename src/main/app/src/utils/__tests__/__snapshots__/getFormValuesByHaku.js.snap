@@ -183,9 +183,7 @@ Object {
     "kuvaus": Object {},
     "linkki": Object {},
     "lomake": Object {
-      "ataru": Object {
-        "value": "12345",
-      },
+      "value": "12345",
     },
     "tyyppi": "ataru",
   },

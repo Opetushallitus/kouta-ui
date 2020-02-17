@@ -1,14 +1,11 @@
-import React, { useState, useContext, useEffect, useRef, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { get } from 'lodash';
 import { produce } from 'immer';
 import Box from '../Box';
 import { isFunction } from '../../utils';
 import useFormConfig from '../useFormConfig';
-import FormNameContext from '../FormNameContext';
+import useForm from '../useForm';
 import scrollElementIntoView from '../../utils/scrollElementIntoView';
-
-const useFormName = () => useContext(FormNameContext);
 
 const getVisibleChildren = (children, config, configured) => {
   return React.Children.toArray(children).filter(c => {
@@ -38,16 +35,14 @@ const FormCollapseGroup = ({
   const [sectionNeedsFocus, setSectionNeedsFocus] = useState(null);
   const [errorsNeedAttention, setErrorsNeedAttention] = useState(false);
 
-  const config = useFormConfig();
-  const formName = useFormName();
   const activeRef = useRef();
+  const config = useFormConfig();
 
-  const formData = useSelector(s => get(s, ['form', formName]));
   const {
     submitFailed,
     submitErrors: formErrors,
     submitting: isSubmitting,
-  } = formData;
+  } = useForm();
 
   const visibleChildren = useMemo(
     () => getVisibleChildren(children, config, configured),

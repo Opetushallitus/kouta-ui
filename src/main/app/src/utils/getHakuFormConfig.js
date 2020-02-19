@@ -1,4 +1,4 @@
-import { cond, get } from 'lodash';
+import { cond, flow, get } from 'lodash';
 import { ifAny, otherwise } from '../utils';
 import { JULKAISUTILA, HAKULOMAKETYYPPI } from '../constants';
 import isYhteishakuHakutapa from './isYhteishakuHakutapa';
@@ -55,28 +55,39 @@ const baseConfig = {
     aikataulu: {
       fields: {
         hakuaika: {
-          validate: validateIfJulkaistu(eb =>
-            eb
+          validate: validateIfJulkaistu((errorBoundary, values) =>
+            errorBoundary
               .validateArrayMinLength('aikataulut.hakuaika', 1, {
                 isFieldArray: true,
               })
-              .validateArray('aikataulut.hakuaika', (eb, values) => {
+              .validateArray('aikataulut.hakuaika', eb => {
                 const hakutapa = getHakutapa(values);
                 const isErillishaku = isErillishakuHakutapa(hakutapa);
                 const isYhteishaku = isYhteishakuHakutapa(hakutapa);
 
-                if (isErillishaku || isYhteishaku) {
-                  return eb
-                    .validateExistence('alkaa')
-                    .validateExistence('paattyy');
-                }
-
-                return eb.validateExistence('alkaa');
+                return flow([
+                  eb => eb.validateExistence('alkaa'),
+                  eb =>
+                    isYhteishaku || isErillishaku
+                      ? eb.validateExistence('paattyy')
+                      : eb,
+                ])(eb);
               }),
           ),
         },
         tulevaisuudenaikataulu: true,
-        alkamiskausi: true,
+        alkamiskausi: {
+          validate: validateIfJulkaistu((eb, values) => {
+            const hakutapa = getHakutapa(values);
+            const isYhteishaku = isYhteishakuHakutapa(hakutapa);
+
+            return isYhteishaku
+              ? eb
+                  .validateExistence('aikataulut.kausi')
+                  .validateExistence('aikataulut.vuosi')
+              : eb;
+          }),
+        },
         lisaamisenTakaraja: true,
         muokkauksenTakaraja: true,
         ajastettuJulkaisu: true,

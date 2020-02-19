@@ -86,12 +86,8 @@ const config = createFormConfigBuilder()
       KOULUTUSTYYPPI.AMMATILLINEN_ERITYISOPETTAJA_KOULUTUS,
       KOULUTUSTYYPPI.AMMATILLINEN_OPINTO_OHJAAJA_KOULUTUS,
     ],
-    // Disabling validation for now, because copying information.koulutus to
-    // information.nimi in koulutus form doesn't work yet.
-    /*
     (eb, values) =>
       eb.validateTranslations('information.nimi', getKielivalinta(values)),
-    */
   )
   .registerField(
     'kuvaus',

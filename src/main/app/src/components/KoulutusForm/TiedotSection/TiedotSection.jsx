@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Field, change } from 'redux-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { Field, change, isDirty as formIsDirty } from 'redux-form';
 import { get, each, find, toLower } from 'lodash';
 
 import FormConfigField from '../../FormConfigField';
@@ -24,10 +24,12 @@ const useLocalizedKoulutus = ({ fieldName, language, koulutusValue }) => {
   const [changedKoulutus, setChangedKoulutus] = useState(null);
   const koulutusKoodi = useKoodi(get(koulutusValue, 'value'));
   const koodi = get(koulutusKoodi, 'koodi');
+  const isDirty = useSelector(formIsDirty(formName));
 
   // When language changes, change the selected 'koulutus' label accordingly
+  // if the form is dirty (don't override initial values)
   useEffect(() => {
-    if (koodi) {
+    if (koodi && isDirty) {
       const { metadata } = koodi;
       const localizedNimi = get(
         find(metadata, ({ kieli }) => toLower(kieli) === language),
@@ -39,16 +41,17 @@ const useLocalizedKoulutus = ({ fieldName, language, koulutusValue }) => {
         );
       }
     }
-  }, [language, koodi, dispatch, formName, fieldName]);
+  }, [language, koodi, dispatch, formName, fieldName, isDirty]);
 
   useEffect(() => {
-    if (koulutusValue) {
+    if (koulutusValue && isDirty) {
       setChangedKoulutus(koulutusValue.value);
     }
-  }, [koulutusValue, language]);
+  }, [formName, isDirty, koulutusValue, language]);
 
   // When koulutus field has changed to a defined value and got its 'koodi'
-  // change the language versioned 'nimi' fields accordingly.
+  // change the language versioned 'nimi' fields accordingly
+  // if the form is dirty (don't override initial values)
   useEffect(() => {
     if (changedKoulutus && koodi) {
       each(get(koodi, 'metadata'), ({ kieli, nimi }) => {

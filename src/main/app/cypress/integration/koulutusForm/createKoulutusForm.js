@@ -164,7 +164,9 @@ describe('createKoulutusForm', () => {
       });
 
       cy.getByTestId('nimiInput').within(() => {
-        cy.get('input').type('Tiedot nimi', { force: true });
+        cy.get('input')
+          .clear()
+          .type('Tiedot nimi', { force: true });
       });
 
       cy.getByTestId('tutkintonimikeSelect').click();

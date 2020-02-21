@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import Collapse from '../Collapse';
@@ -9,7 +9,6 @@ import LanguageTabs from './LanguageTabs';
 import Typography from '../Typography';
 import FormConfigSectionContext from '../FormConfigSectionContext';
 import Box from '../Box';
-import scrollElementIntoView from '../../utils/scrollElementIntoView';
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -26,12 +25,6 @@ const LanguageTabsWrapper = styled.div`
   display: flex;
   padding-left: ${({ theme }) => theme.spacing.unit * 3}px;
 `;
-
-const scrollIntoView = el => {
-  setTimeout(() => {
-    scrollElementIntoView(el);
-  }, 500);
-};
 
 const renderChildren = ({ onContinue, children, language, section }) => {
   const childrenProps = {
@@ -116,26 +109,13 @@ const FormCollapse = ({
   showLanguageTabs = false,
   languages = [],
   active = false,
-  defaultOpen = false,
-  scrollOnActive = true,
   section,
+  isOpen,
+  onToggle,
   ...props
 }) => {
   const { t } = useTranslation();
   const [language, setLanguage] = useState(defaultLanguage);
-  const [collapseOpen, setCollapseOpen] = useState(defaultOpen);
-  const containerRef = useRef();
-
-  const onToggleCollapse = useCallback(() => {
-    setCollapseOpen(open => !open);
-  }, [setCollapseOpen]);
-
-  useEffect(() => {
-    if (active && !collapseOpen) {
-      scrollOnActive && scrollIntoView(containerRef.current);
-      setCollapseOpen(true);
-    }
-  }, [active]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (languages.length > 0 && !languages.find(lng => lng === language)) {
@@ -151,29 +131,27 @@ const FormCollapse = ({
     languages,
     onLanguageChange: setLanguage,
     index,
-    collapseOpen,
+    collapseOpen: isOpen,
   });
 
   return (
-    <div {...id && { id }} ref={containerRef}>
-      <Collapse
-        header={header}
-        footer={
-          actions && (
-            <Box display="flex" justifyContent="center">
-              {actions}
-            </Box>
-          )
-        }
-        active={active}
-        onToggle={onToggleCollapse}
-        open={collapseOpen}
-        toggleOnHeaderClick
-        {...props}
-      >
-        {renderChildren({ onContinue, children, language, section })}
-      </Collapse>
-    </div>
+    <Collapse
+      header={header}
+      footer={
+        actions && (
+          <Box display="flex" justifyContent="center">
+            {actions}
+          </Box>
+        )
+      }
+      active={active}
+      onToggle={onToggle}
+      open={isOpen}
+      toggleOnHeaderClick
+      {...props}
+    >
+      {renderChildren({ onContinue, children, language, section })}
+    </Collapse>
   );
 };
 

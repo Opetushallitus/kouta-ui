@@ -1,5 +1,4 @@
-import get from 'lodash/get';
-import without from 'lodash/without';
+import { get, without } from 'lodash';
 
 import createFormConfigBuilder from './createFormConfigBuilder';
 
@@ -7,6 +6,7 @@ import {
   KOULUTUSTYYPPI,
   KOULUTUSTYYPIT,
   JULKAISUTILA,
+  POHJAVALINTA,
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
@@ -21,7 +21,11 @@ const validateIfJulkaistu = validate => (eb, values, ...rest) => {
 };
 
 const config = createFormConfigBuilder()
-  .registerField('pohja', 'pohja', KOULUTUSTYYPIT)
+  .registerField('pohja', 'pohja', KOULUTUSTYYPIT, (eb, values) =>
+    get(values, 'pohja.tapa') === POHJAVALINTA.KOPIO
+      ? eb.validateExistence('pohja.valinta')
+      : eb,
+  )
   .registerField('kieliversiot', 'kieliversiot', KOULUTUSTYYPIT, eb =>
     eb.validateArrayMinLength('kieliversiot', 1),
   )
@@ -40,9 +44,9 @@ const config = createFormConfigBuilder()
     'osaamisalat',
     TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
     validateIfJulkaistu((eb, values) =>
-      eb.validateArray('ylemmanKorkeakoulututkinnonOsaamisalat', eb => {
-        return eb.validateTranslations('nimi', getKielivalinta(values));
-      }),
+      eb.validateArray('ylemmanKorkeakoulututkinnonOsaamisalat', eb =>
+        eb.validateTranslations('nimi', getKielivalinta(values)),
+      ),
     ),
   )
   .registerField(
@@ -50,9 +54,9 @@ const config = createFormConfigBuilder()
     'osaamisalat',
     TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
     validateIfJulkaistu((eb, values) =>
-      eb.validateArray('alemmanKorkeakoulututkinnonOsaamisalat', eb => {
-        return eb.validateTranslations('nimi', getKielivalinta(values));
-      }),
+      eb.validateArray('alemmanKorkeakoulututkinnonOsaamisalat', eb =>
+        eb.validateTranslations('nimi', getKielivalinta(values)),
+      ),
     ),
   )
   .registerField(
@@ -114,7 +118,14 @@ const config = createFormConfigBuilder()
       eb.validateArrayMinLength('jarjestamistiedot.opetusaika', 1),
     ),
   )
-  .registerField('jarjestamistiedot', 'opetustapa', KOULUTUSTYYPIT)
+  .registerField(
+    'jarjestamistiedot',
+    'opetustapa',
+    KOULUTUSTYYPIT,
+    validateIfJulkaistu(eb =>
+      eb.validateExistence('jarjestamistiedot.opetustapa'),
+    ),
+  )
   .registerField(
     'jarjestamistiedot',
     'maksullisuus',

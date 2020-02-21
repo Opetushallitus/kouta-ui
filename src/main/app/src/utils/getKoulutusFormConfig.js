@@ -4,6 +4,7 @@ import {
   KOULUTUSTYYPPI,
   KOULUTUSTYYPIT,
   JULKAISUTILA,
+  POHJAVALINTA,
   TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
 } from '../constants';
@@ -18,7 +19,6 @@ const getMinTarjoajat = values => {
 
 const validateIfJulkaistu = validate => (eb, values, ...rest) => {
   const { tila } = values;
-
   return tila === JULKAISUTILA.JULKAISTU ? validate(eb, values, ...rest) : eb;
 };
 
@@ -26,7 +26,11 @@ const config = createFormConfigBuilder()
   .registerField('koulutustyyppi', 'koulutustyyppi', KOULUTUSTYYPIT, eb =>
     eb.validateExistence('koulutustyyppi'),
   )
-  .registerField('pohja', 'pohja', KOULUTUSTYYPIT)
+  .registerField('pohja', 'pohja', KOULUTUSTYYPIT, (eb, values) =>
+    get(values, 'pohja.tapa') === POHJAVALINTA.KOPIO
+      ? eb.validateExistence('pohja.valinta')
+      : eb,
+  )
   .registerField('kieliversiot', 'kieliversiot', KOULUTUSTYYPIT, eb =>
     eb.validateArrayMinLength('kieliversiot', 1),
   )
@@ -69,28 +73,38 @@ const config = createFormConfigBuilder()
     'koulutusalat',
     TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
   )
-  .registerField('tiedot', 'nimi', [
-    ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
-    KOULUTUSTYYPPI.AVOIN_YO,
-    KOULUTUSTYYPPI.AVOIN_AMK,
-    KOULUTUSTYYPPI.TAYDENNYS_KOULUTUS,
-    KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
-    KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJAKOULUTUS,
-    KOULUTUSTYYPPI.AMMATILLINEN_ERITYISOPETTAJA_KOULUTUS,
-    KOULUTUSTYYPPI.AMMATILLINEN_OPINTO_OHJAAJA_KOULUTUS,
-  ])
+  .registerField(
+    'tiedot',
+    'nimi',
+    [
+      ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
+      KOULUTUSTYYPPI.AVOIN_YO,
+      KOULUTUSTYYPPI.AVOIN_AMK,
+      KOULUTUSTYYPPI.TAYDENNYS_KOULUTUS,
+      KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
+      KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJAKOULUTUS,
+      KOULUTUSTYYPPI.AMMATILLINEN_ERITYISOPETTAJA_KOULUTUS,
+      KOULUTUSTYYPPI.AMMATILLINEN_OPINTO_OHJAAJA_KOULUTUS,
+    ],
+    // Disabling validation for now, because copying information.koulutus to
+    // information.nimi in koulutus form doesn't work yet.
+    /*
+    (eb, values) =>
+      eb.validateTranslations('information.nimi', getKielivalinta(values)),
+    */
+  )
   .registerField(
     'kuvaus',
     'nimi',
     TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
+    validateIfJulkaistu((eb, values) =>
+      eb.validateTranslations('description.nimi', getKielivalinta(values)),
+    ),
   )
   .registerField(
     'kuvaus',
     'kuvaus',
     TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
-    validateIfJulkaistu((eb, values) =>
-      eb.validateTranslations('description.kuvaus', getKielivalinta(values)),
-    ),
   )
   .registerField('kuvaus', 'tekstiKuvaus', [
     ...TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,

@@ -1,6 +1,6 @@
-import get from 'lodash/get';
-
-import { JULKAISUTILA } from '../constants';
+import { cond, flow, get } from 'lodash';
+import { ifAny, otherwise } from '../utils';
+import { JULKAISUTILA, HAKULOMAKETYYPPI } from '../constants';
 import isYhteishakuHakutapa from './isYhteishakuHakutapa';
 import isErillishakuHakutapa from './isErillishakuHakutapa';
 
@@ -48,37 +48,46 @@ const baseConfig = {
     hakutapa: {
       fields: {
         hakutapa: {
-          validate: validateIfJulkaistu(eb =>
-            eb.validateExistence('kohdejoukko.kohdejoukko'),
-          ),
+          validate: validateIfJulkaistu(eb => eb.validateExistence('hakutapa')),
         },
       },
     },
     aikataulu: {
       fields: {
         hakuaika: {
-          validate: validateIfJulkaistu(eb =>
-            eb
+          validate: validateIfJulkaistu((errorBoundary, values) =>
+            errorBoundary
               .validateArrayMinLength('aikataulut.hakuaika', 1, {
                 isFieldArray: true,
               })
-              .validateArray('aikataulut.hakuaika', (eb, values) => {
+              .validateArray('aikataulut.hakuaika', eb => {
                 const hakutapa = getHakutapa(values);
                 const isErillishaku = isErillishakuHakutapa(hakutapa);
                 const isYhteishaku = isYhteishakuHakutapa(hakutapa);
 
-                if (isErillishaku || isYhteishaku) {
-                  return eb
-                    .validateExistence('alkaa')
-                    .validateExistence('paattyy');
-                }
-
-                return eb.validateExistence('alkaa');
+                return flow([
+                  eb => eb.validateExistence('alkaa'),
+                  eb =>
+                    isYhteishaku || isErillishaku
+                      ? eb.validateExistence('paattyy')
+                      : eb,
+                ])(eb);
               }),
           ),
         },
         tulevaisuudenaikataulu: true,
-        alkamiskausi: true,
+        alkamiskausi: {
+          validate: validateIfJulkaistu((eb, values) => {
+            const hakutapa = getHakutapa(values);
+            const isYhteishaku = isYhteishakuHakutapa(hakutapa);
+
+            return isYhteishaku
+              ? eb
+                  .validateExistence('aikataulut.kausi')
+                  .validateExistence('aikataulut.vuosi')
+              : eb;
+          }),
+        },
         lisaamisenTakaraja: true,
         muokkauksenTakaraja: true,
         ajastettuJulkaisu: true,
@@ -86,7 +95,35 @@ const baseConfig = {
     },
     hakulomake: {
       fields: {
-        hakulomake: true,
+        hakulomake: {
+          validate: validateIfJulkaistu(
+            (eb, values) =>
+              eb.validateExistence('hakulomake.tyyppi') &&
+              cond([
+                [
+                  ifAny(HAKULOMAKETYYPPI.ATARU),
+                  () => eb.validateExistence('hakulomake.lomake'),
+                ],
+                [
+                  ifAny(HAKULOMAKETYYPPI.MUU),
+                  () =>
+                    eb.validateTranslations(
+                      'hakulomake.linkki',
+                      getKielivalinta(values),
+                    ),
+                ],
+                [
+                  ifAny(HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA),
+                  () =>
+                    eb.validateTranslations(
+                      'hakulomake.kuvaus',
+                      getKielivalinta(values),
+                    ),
+                ],
+                [otherwise, () => eb],
+              ])(tyyppi => get(values, 'hakulomake.tyyppi') === tyyppi),
+          ),
+        },
       },
     },
     yhteystiedot: {

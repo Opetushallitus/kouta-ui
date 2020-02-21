@@ -3,9 +3,12 @@ import getValintaperusteByFormValues from '../getValintaperusteByFormValues';
 
 test('getValintaperusteByFormValues returns correct valintaperuste given form values', () => {
   const valintaperuste = getValintaperusteByFormValues({
-    kieliversiot: ['fi', 'sv'],
-    hakutapa: 'tapa_1#1',
-    kohdejoukko: { value: 'joukko_1#1' },
+    perustiedot: {
+      tyyppi: 'tyyppi_1#1',
+      kieliversiot: ['fi', 'sv'],
+      hakutapa: 'tapa_1#1',
+      kohdejoukko: { value: 'joukko_1#1' },
+    },
     kuvaus: {
       nimi: {
         fi: 'Fi nimi',
@@ -97,7 +100,6 @@ test('getValintaperusteByFormValues returns correct valintaperuste given form va
         ],
       },
     ],
-    tyyppi: 'tyyppi_1#1',
     soraKuvaus: {
       value: 'sora_1',
     },

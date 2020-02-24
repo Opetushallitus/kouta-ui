@@ -29,6 +29,8 @@ const EditValintaperustePage = React.lazy(() =>
 );
 
 const EditHakukohdePage = React.lazy(() => import('../EditHakukohdePage'));
+const RedirectHakukohdePage = React.lazy(() => import('../EditHakukohdePage/RedirectHakukohdePage'));
+
 const EditSoraKuvausPage = React.lazy(() => import('../EditSoraKuvausPage'));
 const OppilaitosPage = React.lazy(() => import('../OppilaitosPage'));
 
@@ -97,6 +99,11 @@ const MainPage = ({ history }) => {
           <Route
             path="/organisaatio/:organisaatioOid/hakukohde/:oid/muokkaus"
             component={EditHakukohdePage}
+            exact
+          />
+          <Route
+            path="/hakukohde/:oid"
+            component={RedirectHakukohdePage}
             exact
           />
           <Route

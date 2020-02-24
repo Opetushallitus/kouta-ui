@@ -144,6 +144,7 @@ const KoulutuksenTiedotSection = ({
               name={`${name}.koulutus`}
               koulutustyyppi={koulutustyyppi}
               label={selectLabel}
+              language={language}
             />
           </div>
         </Box>

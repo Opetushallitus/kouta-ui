@@ -9,10 +9,15 @@ import getKoodiNimiTranslation from '../../utils/getKoodiNimiTranslation';
 import parseKoodiUri from '../../utils/parseKoodiUri';
 import { isFunction } from '../../utils';
 
-const AsyncKoodistoSelect = ({ formatLabel: formatLabelProp, ...props }) => {
+const AsyncKoodistoSelect = ({
+  formatLabel: formatLabelProp,
+  language: selectedLanguage,
+  ...props
+}) => {
   const httpClient = useContext(HttpContext);
   const apiUrls = useContext(UrlContext);
-  const language = useLanguage();
+  const userLanguage = useLanguage();
+  const language = selectedLanguage || userLanguage;
 
   const formatLabel = useMemo(() => {
     return isFunction(formatLabelProp)

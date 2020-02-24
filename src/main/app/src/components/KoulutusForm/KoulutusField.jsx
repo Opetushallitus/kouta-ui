@@ -7,7 +7,8 @@ import useLoadOptions from '../useLoadOptions';
 import useTranslation from '../useTranslation';
 
 const KoulutusField = props => {
-  const { options } = useKoodistoOptions({ koodisto: 'koulutus' });
+  const { language } = props;
+  const { options } = useKoodistoOptions({ koodisto: 'koulutus', language });
   const loadOptions = useLoadOptions(options);
   const { t } = useTranslation();
 

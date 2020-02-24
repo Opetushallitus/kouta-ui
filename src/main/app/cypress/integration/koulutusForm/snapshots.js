@@ -10,7 +10,7 @@ module.exports = {
         koulutusKoodiUri: 'koulutus_0#1',
         koulutustyyppi: 'amm',
         nimi: {
-          fi: 'Nimi',
+          fi: 'koulutus_0',
         },
         julkinen: true,
         teemakuva: null,
@@ -82,7 +82,7 @@ module.exports = {
         koulutusKoodiUri: 'koulutus_0#1',
         koulutustyyppi: 'lk',
         nimi: {
-          fi: 'Nimi',
+          fi: 'koulutus_0',
         },
         julkinen: true,
         teemakuva: null,
@@ -106,7 +106,7 @@ module.exports = {
       },
     },
   },
-  __version: '4.0.0',
+  __version: '4.0.2',
   editKoulutusForm: {
     'should be able to edit ammatillinen koulutus': {
       '1': {
@@ -141,6 +141,39 @@ module.exports = {
         kielivalinta: ['fi'],
         modified: '2019-04-01T13:01',
         johtaaTutkintoon: true,
+      },
+      '2': {
+        oid: '1.2.3.4.5.6',
+        koulutustyyppi: 'amm',
+        koulutusKoodiUri: 'koulutus_0#1',
+        tila: 'tallennettu',
+        tarjoajat: ['4.1.1.1.1.1', '2.1.1.1.1.1'],
+        nimi: {
+          fi: 'koulutus_0',
+        },
+        metadata: {
+          tyyppi: 'amm',
+          lisatiedot: [
+            {
+              otsikkoKoodiUri: 'koulutuksenlisatiedot_0#1',
+              teksti: {
+                fi: 'koulutuksenlisatiedot_0 kuvaus',
+              },
+            },
+          ],
+          kuvaus: {},
+          opintojenLaajuusKoodiUri: null,
+          tutkintonimikeKoodiUrit: [],
+          kuvauksenNimi: {},
+          koulutusalaKoodiUrit: [],
+        },
+        julkinen: true,
+        muokkaaja: '1.2.246.562.24.62301161440',
+        organisaatioOid: '1.1.1.1.1.1',
+        kielivalinta: ['fi'],
+        modified: '2019-04-01T13:01',
+        johtaaTutkintoon: true,
+        teemakuva: null,
       },
     },
     'should be able to edit korkeakoulu koulutus': {
@@ -186,6 +219,48 @@ module.exports = {
         modified: '2019-04-01T13:01',
         johtaaTutkintoon: true,
       },
+      '2': {
+        oid: '1.2.3.4.5.6',
+        koulutustyyppi: 'yo',
+        koulutusKoodiUri: 'koulutus_0#1',
+        tila: 'tallennettu',
+        tarjoajat: ['4.1.1.1.1.1', '2.1.1.1.1.1'],
+        nimi: {
+          fi: 'koulutus_0',
+        },
+        metadata: {
+          tyyppi: 'yo',
+          lisatiedot: [
+            {
+              otsikkoKoodiUri: 'koulutuksenlisatiedot_0#1',
+              teksti: {
+                fi: 'koulutuksenlisatiedot_0 kuvaus',
+              },
+            },
+          ],
+          kuvaus: {
+            fi: 'Fi kuvaus',
+          },
+          opintojenLaajuusKoodiUri: 'opintojenlaajuus_1#1',
+          tutkintonimikeKoodiUrit: [
+            'tutkintonimikekk_1#1',
+            'tutkintonimikekk_2#1',
+          ],
+          kuvauksenNimi: {
+            fi: 'Fi kuvauksen nimi',
+          },
+          koulutusalaKoodiUrit: [
+            'kansallinenkoulutusluokitus2016koulutusalataso2_1#1',
+          ],
+        },
+        julkinen: true,
+        muokkaaja: '1.2.246.562.24.62301161440',
+        organisaatioOid: '1.1.1.1.1.1',
+        kielivalinta: ['fi'],
+        modified: '2019-04-01T13:01',
+        johtaaTutkintoon: true,
+        teemakuva: null,
+      },
     },
     'should be able to edit lukiokoulutus': {
       '1': {
@@ -220,6 +295,39 @@ module.exports = {
         kielivalinta: ['fi'],
         modified: '2019-04-01T13:01',
         johtaaTutkintoon: true,
+      },
+      '2': {
+        oid: '1.2.3.4.5.6',
+        koulutustyyppi: 'lk',
+        koulutusKoodiUri: 'koulutus_0#1',
+        tila: 'tallennettu',
+        tarjoajat: ['4.1.1.1.1.1', '2.1.1.1.1.1'],
+        nimi: {
+          fi: 'koulutus_0',
+        },
+        metadata: {
+          tyyppi: 'lk',
+          lisatiedot: [
+            {
+              otsikkoKoodiUri: 'koulutuksenlisatiedot_0#1',
+              teksti: {
+                fi: 'koulutuksenlisatiedot_0 kuvaus',
+              },
+            },
+          ],
+          kuvaus: {},
+          opintojenLaajuusKoodiUri: null,
+          tutkintonimikeKoodiUrit: [],
+          kuvauksenNimi: {},
+          koulutusalaKoodiUrit: [],
+        },
+        julkinen: true,
+        muokkaaja: '1.2.246.562.24.62301161440',
+        organisaatioOid: '1.1.1.1.1.1',
+        kielivalinta: ['fi'],
+        modified: '2019-04-01T13:01',
+        johtaaTutkintoon: true,
+        teemakuva: null,
       },
     },
   },

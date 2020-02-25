@@ -138,6 +138,7 @@ export const getKoulutusByKoodi = async ({
   return {
     koodiUri: koodi,
     perusteId,
+    perusteet: perusteetData,
     kuvaus,
     osaamisalat,
     tutkintonimikeKoodit,

@@ -11,6 +11,8 @@ const getKoulutusByFormValues = values => {
   const osiot = get(values, 'lisatiedot.osiot') || [];
   const osioKuvaukset = get(values, 'lisatiedot.osioKuvaukset') || {};
 
+  const ePerusteId = get(values, 'information.peruste.value');
+
   const osiotWithKuvaukset = osiot.map(({ value }) => ({
     otsikkoKoodiUri: value,
     teksti: pick(osioKuvaukset[value] || {}, kielivalinta),
@@ -50,6 +52,7 @@ const getKoulutusByFormValues = values => {
     nimi,
     julkinen,
     esikatselu,
+    ePerusteId,
     teemakuva,
     metadata: {
       tyyppi: koulutustyyppi,

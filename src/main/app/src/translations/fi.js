@@ -187,6 +187,9 @@ export default {
     teemakuva: 'Teemakuva',
     meneLoginSivulle: 'Mene sisäänkirjautumissivulle',
     suljeVaroitus: 'Sulje varoitus',
+    ePerusteenTiedot: 'ePerusteen tiedot',
+    diaarinumero: 'Diaarinumero',
+    voimaantulo: 'Voimaantulo',
   },
   ilmoitukset: {
     tallentamattomiaMuutoksia: {
@@ -331,6 +334,7 @@ export default {
     valitseJarjestajat:
       'Valitse ne organisaatiot, jotka järjestävät koulutusta',
     valitseKoulutus: 'Valitse koulutus',
+    valitseKaytettavaEperuste: 'Valitse käytettävä ePeruste',
     valitseKoulutuskoodi: 'Valitse koulutuskoodi',
     valitseTutkintonimike: 'Valitse tutkintonimike',
     valitseOpintojenLaajuus: 'Valitse opintojenlaajuus',

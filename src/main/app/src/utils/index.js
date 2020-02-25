@@ -97,6 +97,14 @@ export const getInvalidTranslations = (
     .map(([language]) => language);
 };
 
+export const getReadableDateTime = dateData => {
+  try {
+    return formatDate(dateData, 'd.M.yyyy HH:mm');
+  } catch {
+    return '-';
+  }
+};
+
 export const getKoutaDateString = dateData => {
   if (isValidDate(dateData)) {
     return formatDate(dateData, `yyyy-MM-dd'T'HH:mm`);

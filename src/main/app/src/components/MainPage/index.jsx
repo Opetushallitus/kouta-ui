@@ -29,7 +29,9 @@ const EditValintaperustePage = React.lazy(() =>
 );
 
 const EditHakukohdePage = React.lazy(() => import('../EditHakukohdePage'));
-const RedirectHakukohdePage = React.lazy(() => import('../EditHakukohdePage/RedirectHakukohdePage'));
+const RedirectHakukohdePage = React.lazy(() =>
+  import('../EditHakukohdePage/RedirectHakukohdePage'),
+);
 
 const EditSoraKuvausPage = React.lazy(() => import('../EditSoraKuvausPage'));
 const OppilaitosPage = React.lazy(() => import('../OppilaitosPage'));

@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect } from 'react';
+import React, { useMemo, useEffect, useContext } from 'react';
 import { find, isEmpty, isNil, get, map } from 'lodash';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
@@ -11,6 +11,7 @@ import { getLanguageValue, getTestIdProps } from '../../../utils';
 import useTranslation from '../../useTranslation';
 import useApiAsync from '../../useApiAsync';
 import Box from '../../Box';
+import UrlContext from '../../UrlContext';
 import {
   useBoundFormActions,
   useBoundFormSelectors,
@@ -18,6 +19,7 @@ import {
 import useFieldValue from '../../useFieldValue';
 import { getReadableDateTime } from '../../../utils';
 import { getThemeProp } from '../../../theme';
+import Anchor from '../../Anchor';
 
 const getPerusteetOptions = (perusteet, language) => {
   return map(perusteet, ({ id, nimi, diaarinumero }) => ({
@@ -105,6 +107,7 @@ const KoulutusInfo = ({
     }),
     [koulutus, peruste, language],
   );
+  const apiUrls = useContext(UrlContext);
 
   return koulutus ? (
     <div className={className}>
@@ -143,7 +146,18 @@ const KoulutusInfo = ({
               <Grid columns={'auto minmax(0, 1fr)'} columnGap="20px">
                 <InfoRow
                   title={t('yleiset.diaarinumero')}
-                  description={get(peruste, 'diaarinumero')}
+                  description={
+                    <Anchor
+                      href={apiUrls.url(
+                        'eperusteet.kooste',
+                        language,
+                        get(peruste, 'id'),
+                      )}
+                      target="_blank"
+                    >
+                      {get(peruste, 'diaarinumero')}
+                    </Anchor>
+                  }
                 />
                 <InfoRow
                   title={t('yleiset.voimaantulo')}

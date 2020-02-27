@@ -2,6 +2,7 @@ const { REACT_APP_DEV_SERVER_URL, REACT_APP_KOUTA_BACKEND_URL } = process.env;
 
 const koutaBackendDevUrl = REACT_APP_KOUTA_BACKEND_URL || `${REACT_APP_DEV_SERVER_URL}/kouta-backend`;
 const virkailijaDevUrl = REACT_APP_DEV_SERVER_URL;
+const ePerusteetDevUrl = `https://eperusteet.hahtuvaopintopolku.fi`;
 
 export const development = ({ isCypress }) => ({
   'konfo-ui.koulutus': 'https://beta.hahtuvaopintopolku.fi/konfo/koulutus/$1',
@@ -68,4 +69,5 @@ export const development = ({ isCypress }) => ({
   'lomake-editori.cas': `${virkailijaDevUrl}/lomake-editori/auth/cas`,
   'lomake-editori.muokkaus-sivu': `${virkailijaDevUrl}/lomake-editori/editor/$1`,
   'oppijanumerorekisteri-service.henkilo': `${virkailijaDevUrl}/oppijanumerorekisteri-service/henkilo/$1`,
+  'eperusteet.kooste': `${ePerusteetDevUrl}/#/$1/kooste/$2`,
 });

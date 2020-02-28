@@ -236,11 +236,13 @@ const KoulutuksenTiedotSection = ({
   const { change } = useBoundFormActions();
   const { isDirty } = useBoundFormSelectors();
 
+  const koodiUri = get(koulutus, 'koodiUri');
+
   useEffect(() => {
     if (isDirty()) {
       change(`${name}.peruste`, null);
     }
-  }, [change, koulutus, isDirty, name]);
+  }, [change, koodiUri, isDirty, name]);
 
   const selectLabel = selectLabelProp || t('koulutuslomake.valitseKoulutus');
 

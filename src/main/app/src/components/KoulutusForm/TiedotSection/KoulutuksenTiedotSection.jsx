@@ -1,7 +1,7 @@
 import React, { useMemo, useEffect, useContext } from 'react';
-import { find, isEmpty, isNil, get, map } from 'lodash';
+import { capitalize, find, isEmpty, isNil, get, map } from 'lodash';
 import { Field } from 'redux-form';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Grid, Cell } from 'styled-css-grid';
 import { FormFieldSelect } from '../../formFields';
 import Typography from '../../Typography';
@@ -12,6 +12,7 @@ import useTranslation from '../../useTranslation';
 import useApiAsync from '../../useApiAsync';
 import Box from '../../Box';
 import UrlContext from '../../UrlContext';
+import { setLightness } from 'polished';
 import {
   useBoundFormActions,
   useBoundFormSelectors,
@@ -21,11 +22,57 @@ import { getReadableDateTime } from '../../../utils';
 import { getThemeProp } from '../../../theme';
 import Anchor from '../../Anchor';
 
+const TULEVA = 'tuleva';
+const VOIMASSA = 'voimassa';
+
+const getStatusColors = ({ status, theme }) => {
+  switch (status) {
+    case TULEVA:
+      return {
+        backgroundColor: setLightness(0.9, theme.palette.success.main),
+        color: theme.palette.success.main,
+      };
+    case VOIMASSA:
+      return {
+        backgroundColor: setLightness(0.9, theme.palette.primary.main),
+        color: theme.palette.primary.main,
+      };
+    default:
+      return {
+        backgroundColor: 'inherit',
+        color: 'inherit',
+      };
+  }
+};
+
+const getStatusCss = ({ status, theme }) => {
+  const { backgroundColor, color } = getStatusColors({ status, theme });
+  return css`
+    background-color: ${backgroundColor};
+    color: ${color};
+  `;
+};
+
 const getPerusteetOptions = (perusteet, language) => {
   return map(perusteet, ({ id, nimi, diaarinumero }) => ({
     label: `${getLanguageValue(nimi, language)} (${diaarinumero})`,
     value: id,
   }));
+};
+
+const getStatus = (perusteet, language) => {
+  const { voimassaoloAlkaa, voimassaoloLoppuu } = perusteet;
+  const now = Date.now();
+
+  if (
+    voimassaoloAlkaa &&
+    voimassaoloAlkaa < now &&
+    (isNil(voimassaoloLoppuu) || voimassaoloLoppuu > now)
+  ) {
+    return VOIMASSA;
+  } else if (voimassaoloAlkaa > now) {
+    return TULEVA;
+  }
 };
 
 const getTutkintonimikkeet = ({ peruste = {}, language }) => {
@@ -76,6 +123,26 @@ const InfoRow = ({ title, description }) => {
   );
 };
 
+const TilaBadge = ({ status = '', className }) => {
+  return <div className={className}>{capitalize(status)}</div>;
+};
+
+const StyledTilaBadge = styled(TilaBadge)`
+  display: inline-block;
+  padding: 1px 10px;
+  font-weight: bold;
+  ${getStatusCss}
+`;
+
+const InfoGrid = props => (
+  <Grid
+    columns={'auto minmax(0, 1fr)'}
+    columnGap="20px"
+    rowGap="25px"
+    {...props}
+  />
+);
+
 const KoulutusInfo = ({
   koulutus,
   language = 'fi',
@@ -114,24 +181,25 @@ const KoulutusInfo = ({
       <Typography variant="h6" mb={2}>
         {t('koulutuslomake.koulutuksenTiedot')}
       </Typography>
-      <Grid
-        columns={'auto minmax(0, 1fr)'}
-        style={{ marginBottom: '25px' }}
-        columnGap="20px"
-      >
+      <InfoGrid style={{ marginBottom: '40px' }}>
         {visibleInfoFields.includes('koulutus') && (
           <InfoRow title={t('yleiset.koulutus')} description={nimi} />
         )}
 
-      {visibleInfoFields.includes('osaamisalat') && (
-        <InfoRow
-          title={t('yleiset.osaamisalat')}
-          description={osaamisalat.map((o, i) => (
-            <div key={`osaamisala_${o}-${i}`}>{o}</div>
-          ))}
-        />
-      )}
-
+        {visibleInfoFields.includes('koulutusala') && (
+          <InfoRow title={t('yleiset.koulutusala')} description={koulutusala} />
+        )}
+        {visibleInfoFields.includes('laajuus') && (
+          <InfoRow
+            title={t('yleiset.laajuus')}
+            description={
+              <>
+                {opintojenlaajuus} {opintojenlaajuusYksikko}
+              </>
+            }
+          />
+        )}
+      </InfoGrid>
       {visibleInfoFields.includes('tutkintonimike') && (
         <InfoRow
           title={t('yleiset.tutkintonimike')}
@@ -140,59 +208,57 @@ const KoulutusInfo = ({
           ))}
         />
       )}
-
-          <Grid columns={2}>
-            <Cell>
-              <Grid columns={'auto minmax(0, 1fr)'} columnGap="20px">
-                <InfoRow
-                  title={t('yleiset.diaarinumero')}
-                  description={
-                    <Anchor
-                      href={apiUrls.url(
-                        'eperusteet.kooste',
-                        language,
-                        get(peruste, 'id'),
-                      )}
-                      target="_blank"
-                    >
-                      {get(peruste, 'diaarinumero')}
-                    </Anchor>
-                  }
-                />
-                <InfoRow
-                  title={t('yleiset.voimaantulo')}
-                  description={getReadableDateTime(
-                    get(peruste, 'voimassaoloAlkaa'),
+      <Grid columns="minmax(300px, 40%) auto">
+        <Cell>
+          <InfoGrid>
+            <InfoRow
+              title={t('yleiset.diaarinumero')}
+              description={
+                <Anchor
+                  href={apiUrls.url(
+                    'eperusteet.kooste',
+                    language,
+                    get(peruste, 'id'),
                   )}
-                />
-                <InfoRow
-                  title={t('yleiset.tila')}
-                  description={get(peruste, 'tila')}
-                />
-                {visibleInfoFields.includes('tutkintonimike') && (
-                  <InfoRow
-                    title={t('yleiset.tutkintonimike')}
-                    description={nimikkeet.map(n => (
-                      <div>{n}</div>
-                    ))}
-                  />
-                )}
-              </Grid>
-            </Cell>
-            <Cell>
-              <Grid columns={'auto minmax(0, 1fr)'} columnGap="20px">
-                {visibleInfoFields.includes('osaamisalat') && (
-                  <InfoRow
-                    title={t('yleiset.osaamisalat')}
-                    description={osaamisalat.map(o => (
-                      <div>{o}</div>
-                    ))}
-                  />
-                )}
-              </Grid>
-            </Cell>
-          </Grid>
-        </>
+                  target="_blank"
+                >
+                  {get(peruste, 'diaarinumero')}
+                </Anchor>
+              }
+            />
+            <InfoRow
+              title={t('yleiset.voimaantulo')}
+              description={getReadableDateTime(
+                get(peruste, 'voimassaoloAlkaa'),
+              )}
+            />
+            <InfoRow
+              title={t('yleiset.tila')}
+              description={<StyledTilaBadge status={getStatus(peruste)} />}
+            />
+            {visibleInfoFields.includes('tutkintonimike') && (
+              <InfoRow
+                title={t('yleiset.tutkintonimike')}
+                description={nimikkeet.map(n => (
+                  <div>{n}</div>
+                ))}
+              />
+            )}
+          </InfoGrid>
+        </Cell>
+        <Cell>
+          <InfoGrid>
+            {visibleInfoFields.includes('osaamisalat') && (
+              <InfoRow
+                title={t('yleiset.osaamisalat')}
+                description={osaamisalat.map(o => (
+                  <div>{o}</div>
+                ))}
+              />
+            )}
+          </InfoGrid>
+        </Cell>
+      </Grid>
       )}
     </div>
   ) : null;
@@ -201,6 +267,7 @@ const KoulutusInfo = ({
 const StyledKoulutusInfo = styled(KoulutusInfo)`
   background-color: ${getThemeProp('colors.secondaryBackground')};
   padding: ${({ theme }) => theme.spacing.unit * 4}px;
+  line-height: 23px;
 `;
 
 const defaultVisibleInfoFields = [

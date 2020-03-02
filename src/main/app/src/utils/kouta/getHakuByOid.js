@@ -1,6 +1,4 @@
-import get from 'lodash/get';
-
-import { isObject } from '../index';
+import { get, isObject } from 'lodash';
 
 export const getHakuByOid = async ({ oid, httpClient, apiUrls }) => {
   const { data, headers } = await httpClient.get(

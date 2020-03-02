@@ -1,11 +1,10 @@
 import React, { useCallback, useMemo } from 'react';
 import { withRouter } from 'react-router-dom';
-import without from 'lodash/without';
-import uniq from 'lodash/uniq';
+import { isArray, uniq, without } from 'lodash';
 
 import Submit from '../Submit';
 import useTranslation from '../useTranslation';
-import { getTestIdProps, isArray } from '../../utils';
+import { getTestIdProps } from '../../utils';
 import Box from '../Box';
 import getKoulutusByFormValues from '../../utils/getKoulutusByFormValues';
 import updateKoulutus from '../../utils/kouta/updateKoulutus';
@@ -91,7 +90,11 @@ const EditKoulutusFooter = ({ koulutus, organisaatioOid, history }) => {
   const { save } = useSaveForm({
     form: 'editKoulutusForm',
     submit,
-    validate: values => validateKoulutusForm({organisaatioOid: koulutus.organisaatioOid, ...values }),
+    validate: values =>
+      validateKoulutusForm({
+        organisaatioOid: koulutus.organisaatioOid,
+        ...values,
+      }),
   });
 
   return (

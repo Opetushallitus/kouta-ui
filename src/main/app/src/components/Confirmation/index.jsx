@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react';
 import { setLightness } from 'polished';
 import styled, { css } from 'styled-components';
-
+import { noop, isString } from 'lodash';
 import Dropdown, { DropdownMenu } from '../Dropdown';
 import { getThemeProp, spacing } from '../../theme';
-import { noop, isString, createChainedFunction } from '../../utils';
+import { createChainedFunction } from '../../utils';
 import Typography from '../Typography';
 import Flex, { FlexItem } from '../Flex';
 

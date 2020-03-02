@@ -1,5 +1,4 @@
-import get from 'lodash/get';
-import mapValues from 'lodash/mapValues';
+import { get, mapValues } from 'lodash';
 
 import { getFirstLanguageValue, arrayToTranslationObject } from './index';
 

@@ -1,6 +1,5 @@
 import { useEffect, useContext, useMemo } from 'react';
-import throttle from 'lodash/throttle';
-import get from 'lodash/get';
+import { get, throttle } from 'lodash';
 
 import HttpContext from '../HttpContext';
 import useTranslation from '../useTranslation';

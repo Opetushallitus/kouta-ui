@@ -1,5 +1,4 @@
-import get from 'lodash/get';
-import { isNumber } from './index';
+import { get, isNumber } from 'lodash';
 import parseSisaltoField from './parseSisaltoField';
 
 const getFormValuesByToteutus = toteutus => {

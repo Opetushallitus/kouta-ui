@@ -1,6 +1,4 @@
-import get from 'lodash/get';
-import pick from 'lodash/pick';
-import mapValues from 'lodash/mapValues';
+import { get, mapValues, pick } from 'lodash';
 
 import { isNumeric } from './index';
 import getValintakoeFieldsData from './getValintakoeFieldsData';

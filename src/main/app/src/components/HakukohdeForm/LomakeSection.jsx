@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Field } from 'redux-form';
-import get from 'lodash/get';
+import { get } from 'lodash';
 
 import LomakeFields from '../LomakeFields';
 import { FormFieldCheckbox } from '../formFields';

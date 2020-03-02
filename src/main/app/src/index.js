@@ -4,8 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 import { urls as ophUrls } from 'oph-urls-js';
-import get from 'lodash/get';
-import merge from 'lodash/merge';
+import { get, merge } from 'lodash';
 
 import App from './components/App';
 import createStore from './state';

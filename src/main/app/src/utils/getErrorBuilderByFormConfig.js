@@ -1,4 +1,4 @@
-import get from 'lodash/get';
+import { get } from 'lodash';
 
 import { isFunction } from './index';
 import createErrorBuilder from './createErrorBuilder';

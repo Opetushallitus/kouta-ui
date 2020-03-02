@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 import { Field, FieldArray } from 'redux-form';
-
+import { isArray } from 'lodash';
 import Typography from '../Typography';
 import Spacing from '../Spacing';
-import { isArray, formatKoutaDateString } from '../../utils';
+import { formatKoutaDateString } from '../../utils';
 import useTranslation from '../useTranslation';
 import { FormFieldCheckbox } from '../formFields';
 import useFieldValue from '../useFieldValue';

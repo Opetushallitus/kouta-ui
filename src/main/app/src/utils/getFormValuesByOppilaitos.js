@@ -1,8 +1,5 @@
-import mapValues from 'lodash/mapValues';
-import get from 'lodash/get';
-
+import { get, isNumber, mapValues } from 'lodash';
 import parseEditorState from './draft/parseEditorState';
-import { isNumber } from './index';
 
 const getFormValuesByOppilaitos = oppilaitos => {
   const {

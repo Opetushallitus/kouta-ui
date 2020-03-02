@@ -1,4 +1,4 @@
-import get from 'lodash/get';
+import { get } from 'lodash';
 
 const organisaatioIsOppilaitos = organisaatio => {
   const tyypit =

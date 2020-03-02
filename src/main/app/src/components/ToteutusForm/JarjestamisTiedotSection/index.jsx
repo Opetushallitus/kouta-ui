@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
-import get from 'lodash/get';
+import { get, isArray } from 'lodash';
 
 import useTranslation from '../../useTranslation';
 import Spacing from '../../Spacing';
@@ -12,7 +12,7 @@ import Flex, { FlexItem } from '../../Flex';
 import InputIcon from '../../InputIcon';
 import AlkamiskausiFields from './AlkamiskausiFields';
 import useKoodistoOptions from '../../useKoodistoOptions';
-import { isArray, getTestIdProps } from '../../../utils';
+import { getTestIdProps } from '../../../utils';
 import NoYesRadioGroup from '../../NoYesRadioGroup';
 import DividerHeading from '../../DividerHeading';
 import MaksullisuusFields from './MaksullisuusFields';
@@ -76,8 +76,10 @@ const OsiotFields = ({ language, osiotOptions, name }) => {
       value,
       label: label
         ? label
-        : get(osiotOptions.find(({ value: v }) => v === value), 'label') ||
-          null,
+        : get(
+            osiotOptions.find(({ value: v }) => v === value),
+            'label',
+          ) || null,
     }));
   }, [osiotArr, osiotOptions]);
 

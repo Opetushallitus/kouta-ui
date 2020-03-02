@@ -1,4 +1,4 @@
-import merge from 'lodash/merge';
+import { merge } from 'lodash';
 
 import { chooseKieliversiotLanguages } from '../../utils';
 import koulutus from '../../data/koulutus';

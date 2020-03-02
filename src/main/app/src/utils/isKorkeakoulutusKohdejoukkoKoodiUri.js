@@ -1,4 +1,4 @@
-import { isString } from './index';
+import { isString } from 'lodash';
 
 const koodiUriRegExp = /^haunkohdejoukko_12/;
 

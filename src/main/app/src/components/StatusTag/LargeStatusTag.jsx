@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { setLightness } from 'polished';
-
-import { isString } from '../../utils';
+import { isString } from 'lodash';
 import { getThemeProp } from '../../theme';
 import Icon from '../Icon';
 import Typography from '../Typography';

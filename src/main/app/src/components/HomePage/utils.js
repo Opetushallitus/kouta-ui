@@ -1,4 +1,4 @@
-import { isNumber } from '../../utils';
+import { isNumber } from 'lodash';
 
 import {
   KOULUTUS_ROLE,

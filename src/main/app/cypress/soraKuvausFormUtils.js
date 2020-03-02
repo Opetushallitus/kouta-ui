@@ -1,4 +1,4 @@
-import merge from 'lodash/merge';
+import { merge } from 'lodash';
 
 import organisaatio from './data/organisaatio';
 import { stubOppijanumerorekisteriHenkiloRoute } from './utils';

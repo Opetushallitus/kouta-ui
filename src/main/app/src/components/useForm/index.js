@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { useSelector } from 'react-redux';
-import get from 'lodash/get';
+import { get } from 'lodash';
 
 import FormNameContext from '../FormNameContext';
 

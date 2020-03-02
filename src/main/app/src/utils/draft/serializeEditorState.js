@@ -1,9 +1,6 @@
 import React from 'react';
-
+import { get, isObject, isFunction } from 'lodash';
 import { convertToHTML as makeConvertToHTML } from 'draft-convert';
-
-import get from 'lodash/get';
-import { isObject, isFunction } from '../index';
 
 const convertToHTML = makeConvertToHTML({
   entityToHTML: (entity, originalText) => {

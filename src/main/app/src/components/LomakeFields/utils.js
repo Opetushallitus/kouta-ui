@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-
-import { isFunction, isString, getFirstLanguageValue } from '../../utils';
+import { isFunction, isString } from 'lodash';
+import { getFirstLanguageValue } from '../../utils';
 import { HAKULOMAKETYYPPI } from '../../constants';
 import { getHakemuspalveluLomakkeet } from '../../apiUtils';
 import useApiAsync from '../useApiAsync';

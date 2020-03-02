@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import queryString from 'query-string';
-import get from 'lodash/get';
+import { get } from 'lodash';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 

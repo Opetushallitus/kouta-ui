@@ -1,6 +1,5 @@
 import produce from 'immer';
-import pick from 'lodash/pick';
-import set from 'lodash/set';
+import { pick, set } from 'lodash';
 
 class FormConfigBuilder {
   constructor(config = {}, koulutustyypiLookup = {}) {

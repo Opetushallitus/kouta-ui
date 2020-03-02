@@ -1,6 +1,4 @@
-import get from 'lodash/get';
-import toPairs from 'lodash/toPairs';
-import pick from 'lodash/pick';
+import { get, pick, toPairs } from 'lodash';
 
 import { isNumeric, getKoutaDateString } from './index';
 import serializeSisaltoField from './serializeSisaltoField';

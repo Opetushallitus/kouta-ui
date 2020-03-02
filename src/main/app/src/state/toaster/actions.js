@@ -1,6 +1,5 @@
 import { createAction } from 'redux-actions';
-
-import { isNumber } from '../../utils';
+import { isNumber } from 'lodash';
 
 export const OPEN_TOAST = 'toaster/OPEN_TOAST';
 export const CLOSE_TOAST = 'toaster/CLOSE_TOAST';

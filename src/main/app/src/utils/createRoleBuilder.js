@@ -1,9 +1,8 @@
-import set from 'lodash/set';
+import { isString, isObject, isArray, set } from 'lodash';
 
 import getOrganisaatioParentOidPath from './getOrganisaatioParentOidPath';
 import getRoleOrganisaatioOid from './getRoleOrganisaatioOid';
 import isOid from './isOid';
-import { isString, isObject, isArray } from './index';
 import { OPH_PAAKAYTTAJA_ROLE } from '../constants';
 
 const READ_ROLES = ['READ', 'READ_UPDATE', 'CRUD'];

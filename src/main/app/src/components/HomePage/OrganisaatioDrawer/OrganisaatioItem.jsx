@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
+import { isEmpty, noop } from 'lodash';
 
-import { getFirstLanguageValue, noop } from '../../../utils';
-import isEmpty from '../../../utils/isEmpty';
+import { getFirstLanguageValue } from '../../../utils';
 import Box from '../../Box';
 import { getThemeProp } from '../../../theme';
 import Radio from '../../Radio';

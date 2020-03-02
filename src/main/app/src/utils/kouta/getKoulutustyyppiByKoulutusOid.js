@@ -1,4 +1,4 @@
-import get from 'lodash/get';
+import { get } from 'lodash';
 
 import { memoizePromise } from '../index';
 import getKoulutusByOid from './getKoulutusByOid';

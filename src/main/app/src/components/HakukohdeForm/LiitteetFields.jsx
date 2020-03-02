@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Field, FieldArray, Fields } from 'redux-form';
-import get from 'lodash/get';
+import { get } from 'lodash';
 
 import Spacing from '../Spacing';
 import Button from '../Button';

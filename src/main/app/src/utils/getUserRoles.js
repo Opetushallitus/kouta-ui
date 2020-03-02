@@ -1,4 +1,4 @@
-import { isArray, isObject } from './index';
+import { isArray, isObject } from 'lodash';
 import tryParseJson from './tryParseJson';
 
 const getUserRoles = user => {

@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import sortBy from 'lodash/sortBy';
+import { sortBy } from 'lodash';
 
 import useTranslation from '../useTranslation';
 import Tabs, { Tab } from '../Tabs';

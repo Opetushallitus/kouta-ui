@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { Field } from 'redux-form';
-import get from 'lodash/get';
+import { get } from 'lodash';
 
 import OrganisaatioHierarkiaTreeSelect from '../OrganisaatioHierarkiaTreeSelect';
 import useTranslation from '../useTranslation';

@@ -1,4 +1,4 @@
-import merge from 'lodash/merge';
+import { merge } from 'lodash';
 
 import createKoodi from './data/koodi';
 import createOrganisaatio from './data/organisaatio';

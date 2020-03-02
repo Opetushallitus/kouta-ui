@@ -1,4 +1,5 @@
 import React, { useMemo, useCallback } from 'react';
+import { map, sortBy, compose, isNil } from 'lodash/fp';
 import Typography from './Typography';
 import useApiAsync from './useApiAsync';
 import useTranslation from './useTranslation';
@@ -8,7 +9,6 @@ import ListTable, {
   makeTilaColumn,
 } from './HomePage/ListTable';
 import ListSpin from './HomePage/ListSpin';
-import { map, sortBy, compose, isNil } from 'lodash/fp';
 
 export default function({
   entity,

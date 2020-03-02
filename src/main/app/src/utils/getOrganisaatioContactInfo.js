@@ -1,11 +1,12 @@
-import upperFirst from 'lodash/upperFirst';
-import groupBy from 'lodash/groupBy';
-import mapValues from 'lodash/mapValues';
-import omit from 'lodash/omit';
-import pickBy from 'lodash/pickBy';
-import get from 'lodash/get';
-
-import { isString } from './index';
+import {
+  get,
+  groupBy,
+  isString,
+  mapValues,
+  omit,
+  pickBy,
+  upperFirst,
+} from 'lodash';
 
 const kieliUriRegExp = /^kieli_([a-z]+)#.+$/;
 

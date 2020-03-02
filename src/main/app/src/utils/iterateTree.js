@@ -1,4 +1,4 @@
-import { isArray } from './index';
+import { isArray } from 'lodash';
 
 const iterateTree = (tree, fn, options = {}) => {
   const { childrenKey = 'children' } = options;

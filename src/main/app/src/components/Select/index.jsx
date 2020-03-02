@@ -4,17 +4,14 @@ import ReactAsyncCreatableSelect from 'react-select/lib/AsyncCreatable';
 import ReactAsyncSelect from 'react-select/lib/Async';
 import { ThemeContext } from 'styled-components';
 import { useAsync } from 'react-async';
-import zipObject from 'lodash/zipObject';
+import { get, isArray, isObject, isFunction, zipObject } from 'lodash';
 
 import UiSelect, {
   getStyles,
   getTheme,
 } from '@opetushallitus/virkailija-ui-components/Select';
 
-import get from 'lodash/get';
-
 import memoizeOne from '../../utils/memoizeOne';
-import { isArray, isObject, isFunction } from '../../utils';
 import useTranslation from '../useTranslation';
 
 const noopPromise = () => Promise.resolve();

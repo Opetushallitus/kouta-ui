@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { setLightness } from 'polished';
-import get from 'lodash/get';
+import { get } from 'lodash';
 
 const getColorCss = ({ color, theme }) => {
   const baseColor = get(theme, ['palette', color, 'main']) || theme.palette.primary.main;

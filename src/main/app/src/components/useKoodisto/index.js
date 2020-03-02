@@ -1,7 +1,6 @@
 import { useContext } from 'react';
-
+import { isObject } from 'lodash';
 import useApiAsync from '../useApiAsync';
-import { isObject } from '../../utils';
 import KoodistoversiotContext from '../KoodistoversiotContext';
 import getKoodisto from '../../utils/koodistoService/getKoodisto';
 

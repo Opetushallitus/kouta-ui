@@ -1,8 +1,5 @@
 import produce from 'immer';
-import get from 'lodash/get';
-import set from 'lodash/set';
-
-import { isArray } from '../../utils';
+import { get, isArray, set } from 'lodash';
 
 export const getNumberOfColumns = rows => {
   return isArray(rows)

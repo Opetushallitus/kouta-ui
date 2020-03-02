@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import styled, { css } from 'styled-components';
-import get from 'lodash/get';
+import { get } from 'lodash';
 
 import Table, { TableHead, TableBody, TableRow, TableCell } from '../Table';
 import { getSortDirection, makeOnSort } from './utils';

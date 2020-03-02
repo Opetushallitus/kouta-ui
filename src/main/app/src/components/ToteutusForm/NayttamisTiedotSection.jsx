@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Field } from 'redux-form';
-
+import { noop, isArray } from 'lodash';
 import UrlContext from '../UrlContext';
 import HttpContext from '../HttpContext';
 import { AsyncCreatableSelect } from '../Select';
@@ -8,7 +8,7 @@ import Spacing from '../Spacing';
 import getAmmattinimikkeetByTerm from '../../utils/kouta/getAmmattinimikkeetByTerm';
 import getAvainsanatByTerm from '../../utils/kouta/getAvainsanatByTerm';
 import useTranslation from '../useTranslation';
-import { memoize, getTestIdProps, noop, isArray } from '../../utils';
+import { memoize, getTestIdProps } from '../../utils';
 import { createFormFieldComponent } from '../formFields';
 
 const CreatableField = createFormFieldComponent(

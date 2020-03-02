@@ -1,10 +1,9 @@
 import React, { useCallback, useContext } from 'react';
-import upperFirst from 'lodash/upperFirst';
+import { isString, upperFirst } from 'lodash';
 
 import UrlContext from '../UrlContext';
 import HttpContext from '../HttpContext';
 import AsyncKoodistoSelect from '../AsyncKoodistoSelect';
-import { isString } from '../../utils';
 import useLanguage from '../useLanguage';
 import getKoodi from '../../utils/koodistoService/getKoodi';
 import getKoodiNimiTranslation from '../../utils/getKoodiNimiTranslation';

@@ -1,17 +1,15 @@
 import { useCallback, useContext } from 'react';
 import { useDispatch, batch, useStore } from 'react-redux';
+import { get, isEmpty } from 'lodash';
 
 import {
   startSubmit as startSubmitAction,
   stopSubmit as stopSubmitAction,
 } from 'redux-form';
 
-import get from 'lodash/get';
-
 import useAuthorizedUser from '../useAuthorizedUser';
 import HttpContext from '../HttpContext';
 import UrlContext from '../UrlContext';
-import isEmpty from '../../utils/isEmpty';
 
 import {
   openSavingErrorToast,

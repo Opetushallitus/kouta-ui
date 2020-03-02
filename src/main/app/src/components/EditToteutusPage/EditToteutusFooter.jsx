@@ -1,11 +1,9 @@
 import React, { useCallback, useMemo } from 'react';
 import { withRouter } from 'react-router-dom';
-import without from 'lodash/without';
-import uniq from 'lodash/uniq';
-
+import { isArray, uniq, without } from 'lodash';
 import Submit from '../Submit';
 import useTranslation from '../useTranslation';
-import { getTestIdProps, isArray } from '../../utils';
+import { getTestIdProps } from '../../utils';
 import Box from '../Box';
 import getToteutusByFormValues from '../../utils/getToteutusByFormValues';
 import validateToteutusForm from '../../utils/validateToteutusForm';
@@ -95,7 +93,7 @@ const EditToteutusFooter = ({
   const { save } = useSaveForm({
     form: 'editToteutusForm',
     submit,
-    validate: values => validateToteutusForm({...values, koulutustyyppi}),
+    validate: values => validateToteutusForm({ ...values, koulutustyyppi }),
   });
 
   return (

@@ -1,4 +1,4 @@
-import { isString } from './index';
+import { isString } from 'lodash';
 
 const koodiUriRegExp = /^\w+_\w+(#[0-9]+)?$/;
 

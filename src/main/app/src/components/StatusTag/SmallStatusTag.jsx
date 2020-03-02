@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import get from 'lodash/get';
+import { get } from 'lodash';
 
 import Flex from '../Flex';
 import { spacing } from '../../theme';

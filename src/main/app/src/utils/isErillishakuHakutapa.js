@@ -1,4 +1,4 @@
-import { isString } from './index';
+import { isString } from 'lodash';
 
 const erillishakuRegExp = /^hakutapa_02/;
 

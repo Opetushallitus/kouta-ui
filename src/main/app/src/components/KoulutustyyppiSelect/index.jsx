@@ -1,6 +1,6 @@
 import React, { useMemo, useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import camelCase from 'lodash/camelCase';
+import { camelCase, isArray, isEmpty } from 'lodash';
 
 import {
   TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
@@ -10,8 +10,7 @@ import {
 } from '../../constants';
 
 import { RadioGroup } from '../Radio';
-import { isArray, getTestIdProps } from '../../utils';
-import isEmpty from '../../utils/isEmpty';
+import { getTestIdProps } from '../../utils';
 import Box from '../Box';
 import { spacing, getThemeProp } from '../../theme';
 import useTranslation from '../useTranslation';

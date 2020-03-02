@@ -1,5 +1,5 @@
 import { createComponent } from './utils';
-import { noop } from '../../utils';
+import { noop } from 'lodash';
 import Input from '../Input';
 import Radio, { RadioGroup } from '../Radio';
 import Checkbox from '../Checkbox';

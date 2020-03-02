@@ -1,5 +1,5 @@
 import isOid from './isOid';
-import { isString } from './index';
+import { isString } from 'lodash';
 
 const getRoleOrganisaatioOid = role => {
   if (!isString(role)) {

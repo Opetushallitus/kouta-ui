@@ -2,7 +2,7 @@ import 'core-js/es';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import createBrowserHistory from 'history/createBrowserHistory';
+import { createBrowserHistory } from 'history';
 import { urls as ophUrls } from 'oph-urls-js';
 import { get, merge } from 'lodash';
 

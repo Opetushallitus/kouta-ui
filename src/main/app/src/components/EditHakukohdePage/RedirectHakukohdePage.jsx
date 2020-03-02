@@ -1,15 +1,10 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import useApiAsync from '../useApiAsync';
-import getHakukohdeByOid from '../../utils/kouta/getHakukohdeByOid';
-import useOrganisaatioHierarkia from '../useOrganisaatioHierarkia';
-import useAuthorizedUser from '../useAuthorizedUser';
-import getUserRoles from '../../utils/getUserRoles';
-import getUserOrganisaatiotWithRoles from '../../utils/getUserOrganisaatiotWithRoles';
-import uniqBy from 'lodash/uniqBy';
-import first from 'lodash/first';
+import { usePreferredOrganisaatio } from '../useOrganisaatio';
 import Spin from '@opetushallitus/virkailija-ui-components/Spin';
 import Flex, { FlexItem } from '../Flex';
+import getHakukohdeByOid from '../../utils/kouta/getHakukohdeByOid';
 
 const Loader = () => (
   <Flex alignCenter column>
@@ -19,9 +14,18 @@ const Loader = () => (
   </Flex>
 );
 
-const isParent = parentOid => org => org.parentOidPath.includes(parentOid);
-const isChild = childOid => org =>
-  org.oid === childOid || first(org.children.filter(isChild(childOid)));
+const Hakukohde = ({ hakukohde }) => {
+  const { preferredOrganisaatio } = usePreferredOrganisaatio(
+    hakukohde.organisaatioOid,
+  );
+  return preferredOrganisaatio ? (
+    <Redirect
+      to={`/organisaatio/${preferredOrganisaatio}/hakukohde/${hakukohde.oid}/muokkaus`}
+    />
+  ) : (
+    <Loader />
+  );
+};
 
 const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
   const hakukohde = await getHakukohdeByOid({
@@ -30,40 +34,6 @@ const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
     oid: hakukohdeOid,
   });
   return { hakukohde };
-};
-
-const Hierarkia = ({ hakukohde, hierarkia }) => {
-  const user = useAuthorizedUser();
-  const roles = getUserRoles(user);
-  const orgs = uniqBy(getUserOrganisaatiotWithRoles(user, roles));
-  const firstChildOrganisation = first(
-    orgs.filter(org => hierarkia.filter(isChild(org))),
-  );
-  const firstParentOrganisation = first(
-    orgs.filter(org => hierarkia.filter(isParent(org))),
-  );
-
-  const preferredOrganisation =
-    firstChildOrganisation ||
-    firstParentOrganisation ||
-    hakukohde.organisaatioOid;
-
-  return (
-    <Redirect
-      to={`/organisaatio/${preferredOrganisation}/hakukohde/${hakukohde.oid}/muokkaus`}
-    />
-  );
-};
-
-const Hakukohde = ({ hakukohde }) => {
-  const { hierarkia } = useOrganisaatioHierarkia(hakukohde.organisaatioOid, {
-    skipParents: false,
-  });
-  return hierarkia ? (
-    <Hierarkia hakukohde={hakukohde} hierarkia={hierarkia} />
-  ) : (
-    <Loader />
-  );
 };
 
 const RedirectHakukohdeFooter = props => {

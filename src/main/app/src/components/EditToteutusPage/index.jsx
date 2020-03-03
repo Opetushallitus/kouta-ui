@@ -108,6 +108,7 @@ const EditToteutusPage = props => {
                 organisaatioOid={organisaatioOid}
                 koulutusKoodiUri={koulutus ? koulutus.koulutusKoodiUri : null}
                 koulutustyyppi={koulutustyyppi}
+                ePerusteId={koulutus ? koulutus.ePerusteId : null}
                 scrollTarget={scrollTarget}
               />
             ) : (

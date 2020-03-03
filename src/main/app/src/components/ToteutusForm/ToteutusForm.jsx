@@ -28,6 +28,7 @@ import PohjaFormCollapse from '../PohjaFormCollapse';
 
 const ToteutusForm = ({
   koulutusKoodiUri,
+  ePerusteId,
   organisaatioOid,
   steps = false,
   canSelectBase = true,
@@ -143,6 +144,7 @@ const ToteutusForm = ({
           <OsaamisalatSection
             name="osaamisalat"
             koulutusKoodiUri={koulutusKoodiUri}
+            ePerusteId={ePerusteId}
           />
         </FormCollapse>
 

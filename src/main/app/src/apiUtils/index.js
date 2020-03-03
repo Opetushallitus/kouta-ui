@@ -56,6 +56,13 @@ export const getKoulutuksetByKoulutusTyyppi = async ({
   );
 };
 
+export const getPerusteById = async ({ httpClient, apiUrls, perusteId }) => {
+  const { data } = await httpClient.get(
+    apiUrls.url('eperusteet-service.peruste-by-id', perusteId),
+  );
+  return data;
+};
+
 export const getKoulutusByKoodi = async ({
   httpClient,
   apiUrls,
@@ -150,22 +157,6 @@ export const getKoulutusByKoodi = async ({
     ),
     nimi: mapValues(nimi, ({ nimi: nimiField }) => nimiField || null),
   };
-};
-
-export const getOsaamisalatByKoulutusKoodi = async ({
-  httpClient,
-  apiUrls,
-  koodiUri: argKoodiUri,
-}) => {
-  const { koodi } = parseKoodiUri(argKoodiUri);
-
-  const { data } = await httpClient.get(
-    apiUrls.url('eperusteet-service.perusteet-koulutuskoodilla', koodi),
-  );
-
-  const { osaamisalat = [] } = data.data[0] || {};
-
-  return osaamisalat;
 };
 
 export const getOsaamisalakuvauksetByPerusteId = async ({

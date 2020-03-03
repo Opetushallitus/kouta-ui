@@ -72,6 +72,7 @@ public class UrlConfiguration extends OphProperties {
         this.frontProperties.setProperty("eperusteet.kooste", this.require("eperusteet.kooste"));
 
         this.frontProperties.setProperty("eperusteet-service.base-url", this.require("eperusteet-service.base-url"));
+        this.frontProperties.setProperty("eperusteet-service.peruste-by-id", this.require("eperusteet-service.peruste-by-id"));
         this.frontProperties.setProperty("eperusteet-service.perusteet-koulutuskoodilla", this.require("eperusteet-service.perusteet-koulutuskoodilla"));
         this.frontProperties.setProperty("eperusteet-service.osaamisalakuvaukset", this.require("eperusteet-service.osaamisalakuvaukset"));
 

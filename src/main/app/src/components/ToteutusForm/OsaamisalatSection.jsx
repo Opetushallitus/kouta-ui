@@ -6,8 +6,8 @@ import { get, isString, mapValues } from 'lodash';
 import useApiAsync from '../useApiAsync';
 
 import {
-  getKoulutusByKoodi,
   getOsaamisalakuvauksetByPerusteId,
+  getPerusteById,
 } from '../../apiUtils';
 
 import Checkbox from '../Checkbox';
@@ -63,21 +63,23 @@ const makeOnCheckboxChange = ({ value, onChange, optionValue }) => e => {
   }
 };
 
-const getOsaamisalat = async ({ httpClient, apiUrls, koodiUri }) => {
-  const koulutus = await getKoulutusByKoodi({ httpClient, apiUrls, koodiUri });
-  const { osaamisalat = [] } = koulutus;
-
-  if (!koulutus.perusteId) {
-    return {
-      koulutus,
-      osaamisalat,
-    };
+const getExtendedPeruste = async ({ httpClient, apiUrls, perusteId }) => {
+  if (!perusteId) {
+    return null;
   }
+
+  const peruste = await getPerusteById({
+    httpClient,
+    apiUrls,
+    perusteId,
+  });
+
+  const { osaamisalat } = peruste;
 
   const osaamisalakuvaukset = await getOsaamisalakuvauksetByPerusteId({
     httpClient,
     apiUrls,
-    perusteId: koulutus.perusteId,
+    perusteId,
   });
 
   const osaamisalatWithDescriptions = osaamisalat.map(osaamisala => ({
@@ -89,7 +91,7 @@ const getOsaamisalat = async ({ httpClient, apiUrls, koodiUri }) => {
   }));
 
   return {
-    koulutus,
+    ...peruste,
     osaamisalat: osaamisalatWithDescriptions,
   };
 };
@@ -194,16 +196,16 @@ const OsaamisalatInfoFields = ({
   });
 };
 
-const OsaamisalatContainer = ({ osaamisalat, koulutus, language, name }) => {
-  const { nimi } = koulutus;
+const OsaamisalatContainer = ({ peruste, language, name }) => {
+  const { nimi, osaamisalat } = peruste;
 
   const osaamisalaOptions = useMemo(
     () =>
       osaamisalat.map(({ nimi, uri }) => ({
-        label: nimi.fi,
+        label: getLanguageValue(nimi, language),
         value: uri,
       })),
-    [osaamisalat],
+    [osaamisalat, language],
   );
 
   const osaamisalatValue = useFieldValue(`${name}.osaamisalat`);
@@ -232,19 +234,18 @@ const OsaamisalatContainer = ({ osaamisalat, koulutus, language, name }) => {
   );
 };
 
-const OsaamisalatSection = ({ language, koulutusKoodiUri, name }) => {
-  const { data } = useApiAsync({
-    promiseFn: getOsaamisalat,
-    koodiUri: koulutusKoodiUri,
-    watch: koulutusKoodiUri,
+const OsaamisalatSection = ({ language, ePerusteId, name }) => {
+  const { data: peruste } = useApiAsync({
+    promiseFn: getExtendedPeruste,
+    perusteId: ePerusteId,
+    watch: ePerusteId,
   });
 
   return (
     <Container>
-      {data ? (
+      {peruste ? (
         <OsaamisalatContainer
-          osaamisalat={data.osaamisalat}
-          koulutus={data.koulutus}
+          peruste={peruste}
           language={language}
           name={name}
         />

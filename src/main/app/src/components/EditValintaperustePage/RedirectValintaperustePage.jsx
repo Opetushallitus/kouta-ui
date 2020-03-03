@@ -51,7 +51,11 @@ const RedirectValintaperusteFooter = props => {
     watch,
   });
 
-  return valintaperuste ? <Valintaperuste valintaperuste={valintaperuste} /> : <Loader />;
+  return valintaperuste ? (
+    <Valintaperuste valintaperuste={valintaperuste} />
+  ) : (
+    <Loader />
+  );
 };
 
 export default RedirectValintaperusteFooter;

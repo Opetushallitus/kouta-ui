@@ -100,29 +100,18 @@ const MainPage = ({ history }) => {
             component={EditKoulutusPage}
             exact
           />
-          <Route
-            path="/koulutus/:oid"
-            component={RedirectKoulutusPage}
-            exact
-          />
+          <Route path="/koulutus/:oid" component={RedirectKoulutusPage} exact />
           <Route
             path="/organisaatio/:organisaatioOid/haku/:oid/muokkaus"
             component={EditHakuPage}
           />
-          <Route
-            path="/haku/:oid"
-            component={RedirectHakuPage}
-          />
+          <Route path="/haku/:oid" component={RedirectHakuPage} />
           <Route
             path="/organisaatio/:organisaatioOid/toteutus/:oid/muokkaus"
             component={EditToteutusPage}
             exact
           />
-          <Route
-            path="/toteutus/:oid"
-            component={RedirectToteutusPage}
-            exact
-          />
+          <Route path="/toteutus/:oid" component={RedirectToteutusPage} exact />
           <Route
             path="/organisaatio/:organisaatioOid/hakukohde/:oid/muokkaus"
             component={EditHakukohdePage}

@@ -123,6 +123,10 @@ describe('createKoulutusForm', () => {
         fillAsyncSelect('0', 'koulutus_0');
       });
 
+      cy.getByTestId('ePerusteSelect').within(() => {
+        fillAsyncSelect('1', 'koulutus_0');
+      });
+
       cy.getByTestId('jatkaButton').click({ force: true });
     });
 

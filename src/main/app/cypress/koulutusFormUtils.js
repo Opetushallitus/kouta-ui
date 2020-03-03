@@ -3,6 +3,7 @@ import { merge } from 'lodash';
 import {
   stubKoodistoRoute,
   stubOppijanumerorekisteriHenkiloRoute,
+  stubEPerusteetByKoulutuskoodiRoute,
 } from './utils';
 import organisaatioHierarkia from './data/organisaatioHierarkia';
 import organisaatio from './data/organisaatio';
@@ -66,21 +67,7 @@ export const stubKoulutusFormRoutes = ({ cy, organisaatioOid }) => {
     ],
   });
 
-  cy.route({
-    method: 'GET',
-    url:
-      '**/eperusteet-service/api/perusteet?tuleva=true&siirtyma=false&voimassaolo=true&poistunut=false&kieli=fi&koulutuskoodi=koulutus_0',
-    response: {
-      data: [
-        {
-          kuvaus: { fi: 'koulutus_0 kuvaus' },
-          osaamisalat: [],
-          tutkintonimikeKoodiUri: 'nimike_1#1',
-          id: '1',
-        },
-      ],
-    },
-  });
+  stubEPerusteetByKoulutuskoodiRoute();
 
   cy.route({
     method: 'GET',

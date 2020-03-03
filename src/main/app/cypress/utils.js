@@ -227,3 +227,24 @@ export const stubKoodiRoute = koodi => {
     response: koodi,
   });
 };
+
+export const stubEPerusteetByKoulutuskoodiRoute = () => {
+  cy.route({
+    method: 'GET',
+    url:
+      '**/eperusteet-service/api/perusteet?tuleva=true&siirtyma=false&voimassaolo=true&poistunut=false&kieli=fi&koulutuskoodi=koulutus_0',
+    response: {
+      data: [
+        {
+          nimi: { fi: 'koulutus_0' },
+          kuvaus: { fi: 'koulutus_0 kuvaus' },
+          osaamisalat: [
+            { uri: 'osaamisala_0', nimi: { fi: 'osaamisala_0 nimi' } },
+          ],
+          tutkintonimikeKoodiUri: 'nimike_1#1',
+          id: 1,
+        },
+      ],
+    },
+  });
+};

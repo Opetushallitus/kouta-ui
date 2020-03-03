@@ -316,18 +316,16 @@ const KoulutuksenTiedotSection = ({
   return (
     <Box display="flex" flexDirection="column">
       <Box flexDirection="row" display="flex" mb={3}>
-        <Box width={0.5} mr={2}>
-          <div display {...getTestIdProps('koulutustyyppiSelect')}>
-            <KoulutusField
-              disabled={disabled}
-              name={`${name}.koulutus`}
-              koulutustyyppi={koulutustyyppi}
-              label={selectLabel}
-              language={language}
-            />
-          </div>
+        <Box width={0.5} mr={2} {...getTestIdProps('koulutustyyppiSelect')}>
+          <KoulutusField
+            disabled={disabled}
+            name={`${name}.koulutus`}
+            koulutustyyppi={koulutustyyppi}
+            label={selectLabel}
+            language={language}
+          />
         </Box>
-        <Box width={0.5} ml={2}>
+        <Box width={0.5} ml={2} {...getTestIdProps('ePerusteSelect')}>
           <PerusteField
             name={`${name}.peruste`}
             perusteet={perusteet}

@@ -42,6 +42,7 @@ const getAmmatillinenFields = ({ tyyppi }) => {
       fi: 'Maatalousalan perustutkinto',
       sv: 'Grundexamen inom lantbruksbranschen',
     },
+    ePerusteId: 1,
     metadata: { tyyppi },
   });
 };

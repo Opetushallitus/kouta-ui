@@ -35,7 +35,7 @@ const useSaveForm = ({ form, validate, submit }) => {
         dispatch(stopSubmitAction(form, errors));
 
         if (errorToast) {
-          dispatch(openSavingErrorToast());
+          errors && dispatch(openSavingErrorToast());
         } else if (successToast) {
           dispatch(openSavingSuccessToast());
         }

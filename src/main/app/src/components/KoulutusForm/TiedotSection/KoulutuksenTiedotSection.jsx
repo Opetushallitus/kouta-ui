@@ -86,8 +86,8 @@ const KoulutusInfo = ({
       {visibleInfoFields.includes('osaamisalat') && (
         <InfoRow
           title={t('yleiset.osaamisalat')}
-          description={osaamisalat.map(o => (
-            <div>{o}</div>
+          description={osaamisalat.map((o, i) => (
+            <div key={`osaamisala_${o}-${i}`}>{o}</div>
           ))}
         />
       )}
@@ -95,8 +95,8 @@ const KoulutusInfo = ({
       {visibleInfoFields.includes('tutkintonimike') && (
         <InfoRow
           title={t('yleiset.tutkintonimike')}
-          description={nimikkeet.map(n => (
-            <div>{n}</div>
+          description={nimikkeet.map((n, i) => (
+            <div key={`nimikkeet${n}-${i}`}>{n}</div>
           ))}
         />
       )}

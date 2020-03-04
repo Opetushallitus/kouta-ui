@@ -1,0 +1,4 @@
+---
+exclude_paths:
+  - '**/cypress/**/snapshots.js'
+  - '**/config-overrides.js'

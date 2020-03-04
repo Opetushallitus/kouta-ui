@@ -4,7 +4,7 @@ import useApiAsync from '../useApiAsync';
 import { usePreferredOrganisaatio } from '../useOrganisaatio';
 import Spin from '@opetushallitus/virkailija-ui-components/Spin';
 import Flex, { FlexItem } from '../Flex';
-import getHakukohdeByOid from '../../utils/kouta/getHakukohdeByOid';
+import getKoulutusByOid from '../../utils/kouta/getKoulutusByOid';
 
 const Loader = () => (
   <Flex alignCenter column>
@@ -14,29 +14,29 @@ const Loader = () => (
   </Flex>
 );
 
-const Hakukohde = ({ hakukohde }) => {
+const Koulutus = ({ koulutus }) => {
   const { preferredOrganisaatio } = usePreferredOrganisaatio(
-    hakukohde.organisaatioOid,
+    koulutus.organisaatioOid,
   );
   return preferredOrganisaatio ? (
     <Redirect
-      to={`/organisaatio/${preferredOrganisaatio}/hakukohde/${hakukohde.oid}/muokkaus`}
+      to={`/organisaatio/${preferredOrganisaatio}/koulutus/${koulutus.oid}/muokkaus`}
     />
   ) : (
     <Loader />
   );
 };
 
-const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
-  const hakukohde = await getHakukohdeByOid({
+const getData = async ({ httpClient, apiUrls, oid: koulutusOid }) => {
+  const koulutus = await getKoulutusByOid({
     httpClient,
     apiUrls,
-    oid: hakukohdeOid,
+    oid: koulutusOid,
   });
-  return { hakukohde };
+  return { koulutus };
 };
 
-const RedirectHakukohdeFooter = props => {
+const RedirectKoulutusFooter = props => {
   const {
     match: {
       params: { oid },
@@ -45,13 +45,13 @@ const RedirectHakukohdeFooter = props => {
 
   const watch = JSON.stringify([oid]);
 
-  const { data: { hakukohde } = {} } = useApiAsync({
+  const { data: { koulutus } = {} } = useApiAsync({
     promiseFn: getData,
     oid,
     watch,
   });
 
-  return hakukohde ? <Hakukohde hakukohde={hakukohde} /> : <Loader />;
+  return koulutus ? <Koulutus koulutus={koulutus} /> : <Loader />;
 };
 
-export default RedirectHakukohdeFooter;
+export default RedirectKoulutusFooter;

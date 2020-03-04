@@ -4,7 +4,7 @@ import useApiAsync from '../useApiAsync';
 import { usePreferredOrganisaatio } from '../useOrganisaatio';
 import Spin from '@opetushallitus/virkailija-ui-components/Spin';
 import Flex, { FlexItem } from '../Flex';
-import getHakukohdeByOid from '../../utils/kouta/getHakukohdeByOid';
+import getValintaperusteByOid from '../../utils/kouta/getValintaperusteByOid';
 
 const Loader = () => (
   <Flex alignCenter column>
@@ -14,29 +14,29 @@ const Loader = () => (
   </Flex>
 );
 
-const Hakukohde = ({ hakukohde }) => {
+const Valintaperuste = ({ valintaperuste }) => {
   const { preferredOrganisaatio } = usePreferredOrganisaatio(
-    hakukohde.organisaatioOid,
+    valintaperuste.organisaatioOid,
   );
   return preferredOrganisaatio ? (
     <Redirect
-      to={`/organisaatio/${preferredOrganisaatio}/hakukohde/${hakukohde.oid}/muokkaus`}
+      to={`/organisaatio/${preferredOrganisaatio}/valintaperusteet/${valintaperuste.oid}/muokkaus`}
     />
   ) : (
     <Loader />
   );
 };
 
-const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
-  const hakukohde = await getHakukohdeByOid({
+const getData = async ({ httpClient, apiUrls, oid: valintaperusteOid }) => {
+  const valintaperuste = await getValintaperusteByOid({
     httpClient,
     apiUrls,
-    oid: hakukohdeOid,
+    oid: valintaperusteOid,
   });
-  return { hakukohde };
+  return { valintaperuste };
 };
 
-const RedirectHakukohdeFooter = props => {
+const RedirectValintaperusteFooter = props => {
   const {
     match: {
       params: { oid },
@@ -45,13 +45,17 @@ const RedirectHakukohdeFooter = props => {
 
   const watch = JSON.stringify([oid]);
 
-  const { data: { hakukohde } = {} } = useApiAsync({
+  const { data: { valintaperuste } = {} } = useApiAsync({
     promiseFn: getData,
     oid,
     watch,
   });
 
-  return hakukohde ? <Hakukohde hakukohde={hakukohde} /> : <Loader />;
+  return valintaperuste ? (
+    <Valintaperuste valintaperuste={valintaperuste} />
+  ) : (
+    <Loader />
+  );
 };
 
-export default RedirectHakukohdeFooter;
+export default RedirectValintaperusteFooter;

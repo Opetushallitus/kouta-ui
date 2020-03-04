@@ -95,9 +95,7 @@ const oppilaitostyyppiToKoulutustyyppi = o =>
 const isParent = parentOid => org => org.parentOidPath.includes(parentOid);
 const isChild = childOid => org =>
   org.oid === childOid || first(org.children.filter(isChild(childOid)));
-//const findOrganisation = oid => org => org.oid ===
 const isSameKoulutustyyppi = koulutustyyppi => org =>
-  //(console.log(org) && false) ||
   oppilaitostyyppiToKoulutustyyppi(org) === koulutustyyppi ||
   first(org.children.filter(isSameKoulutustyyppi(koulutustyyppi)));
 
@@ -141,7 +139,6 @@ export const usePreferredOrganisaatio = creatorOrganisaatioOid => {
       firstParentOrganisation ||
       creatorOrganisaatioOid);
 
-  console.log(preferredOrganisaatio);
   return { preferredOrganisaatio };
 };
 

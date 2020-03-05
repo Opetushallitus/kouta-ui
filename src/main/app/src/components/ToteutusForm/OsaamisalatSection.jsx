@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
 import stripTags from 'striptags';
-import { get, isString, mapValues } from 'lodash';
+import { get, isEmpty, isString, mapValues } from 'lodash';
 import useApiAsync from '../useApiAsync';
 
 import {
@@ -21,6 +21,8 @@ import { getThemeProp } from '../../theme';
 import useTranslation from '../useTranslation';
 import { FormFieldInput } from '../formFields';
 import useFieldValue from '../useFieldValue';
+
+import Spin from '../Spin';
 
 const Container = styled.div`
   display: flex;
@@ -199,6 +201,8 @@ const OsaamisalatInfoFields = ({
 const OsaamisalatContainer = ({ peruste, language, name }) => {
   const { nimi, osaamisalat } = peruste;
 
+  const { t } = useTranslation();
+
   const osaamisalaOptions = useMemo(
     () =>
       osaamisalat.map(({ nimi, uri }) => ({
@@ -210,7 +214,9 @@ const OsaamisalatContainer = ({ peruste, language, name }) => {
 
   const osaamisalatValue = useFieldValue(`${name}.osaamisalat`);
 
-  return (
+  return isEmpty(osaamisalat) ? (
+    <Typography>{t('toteutuslomake.eiOsaamisaloja')}</Typography>
+  ) : (
     <>
       <SelectionContainer>
         <Typography variant="h6" marginBottom={1}>
@@ -235,7 +241,8 @@ const OsaamisalatContainer = ({ peruste, language, name }) => {
 };
 
 const OsaamisalatSection = ({ language, ePerusteId, name }) => {
-  const { data: peruste } = useApiAsync({
+  const { t } = useTranslation();
+  const { data: peruste, isLoading } = useApiAsync({
     promiseFn: getExtendedPeruste,
     perusteId: ePerusteId,
     watch: ePerusteId,
@@ -243,13 +250,19 @@ const OsaamisalatSection = ({ language, ePerusteId, name }) => {
 
   return (
     <Container>
-      {peruste ? (
+      {isLoading ? (
+        <Spin />
+      ) : peruste ? (
         <OsaamisalatContainer
           peruste={peruste}
           language={language}
           name={name}
         />
-      ) : null}
+      ) : (
+        <Typography>
+          {t('toteutuslomake.koulutuksellaEiEPerustetta')}
+        </Typography>
+      )}
     </Container>
   );
 };

@@ -432,6 +432,10 @@ export default {
     eiMuokkausOikeutta:
       'Käyttäjälläsi ei ole oikeuksia muokata tätä toteutusta',
     toteutuksenTeemakuva: 'Toteutuksen teemakuva',
+    eiOsaamisaloja:
+      'Valittuun koulutukseen liitetyllä ePerusteella ei ole osaamisaloja.',
+    koulutuksellaEiEPerustetta:
+      'Valittuun koulutukseen ei ole liitetty ePerustetta.',
   },
   hakulomake: {
     haunNimi: 'Haun nimi',

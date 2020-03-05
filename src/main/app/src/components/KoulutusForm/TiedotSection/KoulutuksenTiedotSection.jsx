@@ -183,7 +183,10 @@ const KoulutusInfo = ({
       </Typography>
       <InfoGrid style={{ marginBottom: '40px' }}>
         {visibleInfoFields.includes('koulutus') && (
-          <InfoRow title={t('yleiset.koulutus')} description={nimi} />
+          <InfoRow
+            title={t('yleiset.koulutus')}
+            description={`${nimi} (${koulutus.koodiArvo})`}
+          />
         )}
 
         {visibleInfoFields.includes('koulutusala') && (

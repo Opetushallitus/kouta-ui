@@ -135,6 +135,8 @@ export const getKoulutusByKoodi = async ({
         )
       : null;
 
+  const { koodiArvo } = latestKoodi;
+
   const {
     kuvaus = null,
     osaamisalat = [],
@@ -143,6 +145,7 @@ export const getKoulutusByKoodi = async ({
   } = perusteetData[0] || {};
 
   return {
+    koodiArvo,
     koodiUri: koodi,
     perusteId,
     perusteet: perusteetData,

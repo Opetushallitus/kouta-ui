@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import debounce from 'lodash/debounce';
+import { debounce } from 'lodash';
 
 export const useDebounceState = (initialValue = null, wait = 0) => {
   const [value, setValue] = useState(initialValue);

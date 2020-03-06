@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import get from 'lodash/get';
+import { get } from 'lodash';
 
 import FormConfigSectionContext from '../FormConfigSectionContext';
 import useFormConfig from '../useFormConfig';

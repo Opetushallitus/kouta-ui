@@ -1,6 +1,6 @@
 import React from 'react';
 import stripTags from 'striptags';
-import get from 'lodash/get';
+import { get } from 'lodash';
 
 import { getKoulutusByKoodi } from '../../../apiUtils';
 import Typography from '../../Typography';

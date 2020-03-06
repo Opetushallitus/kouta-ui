@@ -1,5 +1,5 @@
 import { getKoulutusByKoodi } from '../../apiUtils';
-import isEmpty from '../isEmpty';
+import { isEmpty } from 'lodash';
 import produce from 'immer';
 
 const createKoulutus = async ({

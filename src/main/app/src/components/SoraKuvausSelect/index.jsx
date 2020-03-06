@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
-
-import { createChainedFunction, noop } from '../../utils';
+import { noop } from 'lodash';
+import { createChainedFunction } from '../../utils';
 import useSoraKuvausOptions from '../useSoraKuvausOptions';
 import Select from '../Select';
 

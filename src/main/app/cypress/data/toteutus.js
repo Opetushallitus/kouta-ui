@@ -1,4 +1,4 @@
-import merge from 'lodash/merge';
+import { merge } from 'lodash';
 
 const getBaseFields = () => ({
   oid: '1.2.246.562.17.00000000000000000026',
@@ -7,8 +7,7 @@ const getBaseFields = () => ({
   tarjoajat: ['1.2.246.562.10.74534804344'],
   nimi: { fi: 'Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja' },
   metadata: {
-    kuvaus: {
-    },
+    kuvaus: {},
     opetus: {
       koulutuksenAlkamispaivamaara: '2019-08-23T00:00',
       koulutuksenPaattymispaivamaara: '2019-08-26T00:00',

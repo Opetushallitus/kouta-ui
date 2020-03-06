@@ -50,8 +50,11 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
         sv: 'Sv toteutuksenkuvaus',
       },
       opetus: {
-        koulutuksenAlkamispaivamaara: '2019-04-16T00:00:00Z',
-        koulutuksenPaattymispaivamaara: '2019-05-24T00:00:00Z',
+        koulutuksenAlkamispaivamaara: null,
+        koulutuksenPaattymispaivamaara: null,
+        koulutuksenTarkkaAlkamisaika: false,
+        koulutuksenAlkamisvuosi: 2020,
+        koulutuksenAlkamiskausi: 'kausi_0#1',
         lisatiedot: [
           {
             otsikkoKoodiUri: 'osio_1#1',
@@ -69,7 +72,7 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
           },
         ],
         maksullisuus: {
-          maksu: ""
+          maksu: '',
         },
         maksumaara: {},
         maksullisuusKuvaus: {

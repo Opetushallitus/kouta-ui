@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
-
+import { isArray } from 'lodash';
 import useSoraKuvaukset from '../useSoraKuvaukset';
 import useLanguage from '../useLanguage';
-import { getFirstLanguageValue, isArray } from '../../utils';
+import { getFirstLanguageValue } from '../../utils';
 
 export const useSoraKuvausOptions = args => {
   const { soraKuvaukset, ...rest } = useSoraKuvaukset(args);

@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useCallback } from 'react';
 import { withRouter } from 'react-router-dom';
-
+import { isArray } from 'lodash';
 import Button from '../../Button';
 import Modal from '../../Modal';
 import ModalHeader from '../../ModalHeader';
@@ -12,7 +12,7 @@ import useApiAsync from '../../useApiAsync';
 import getKoulutukset from '../../../utils/kouta/getKoulutukset';
 import FormLabel from '../../FormLabel';
 import Box from '../../Box';
-import { isArray, getFirstLanguageValue } from '../../../utils';
+import { getFirstLanguageValue } from '../../../utils';
 import useLanguage from '../../useLanguage';
 
 const KoulutusModal = ({ onClose, organisaatioOid, history, open }) => {

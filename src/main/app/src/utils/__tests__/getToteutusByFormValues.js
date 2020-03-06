@@ -61,8 +61,13 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
           sv: 'Sv kuvaus2',
         },
       },
-      koulutuksenAlkamispaivamaara: new Date('2019-04-16T00:00'),
-      koulutuksenPaattymispaivamaara: new Date('2019-05-24T00:00'),
+      koulutuksenAlkamispaivamaara: null,
+      koulutuksenPaattymispaivamaara: null,
+      koulutuksenTarkkaAlkamisaika: false,
+      koulutuksenAlkamisvuosi: {
+        value: '2020',
+      },
+      koulutuksenAlkamiskausi: 'kausi_0#1',
       onkoStipendia: true,
       stipendinMaara: 20,
       stipendinKuvaus: {

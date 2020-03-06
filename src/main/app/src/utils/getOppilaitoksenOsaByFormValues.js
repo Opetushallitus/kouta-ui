@@ -1,6 +1,4 @@
-import get from 'lodash/get';
-import pick from 'lodash/pick';
-import mapValues from 'lodash/mapValues';
+import { get, mapValues, pick } from 'lodash';
 
 import serializeEditorState from './draft/serializeEditorState';
 import { isNumeric } from './index';

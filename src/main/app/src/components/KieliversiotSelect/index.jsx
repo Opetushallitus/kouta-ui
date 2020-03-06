@@ -1,8 +1,7 @@
 import React, { useMemo } from 'react';
-
+import { isArray } from 'lodash';
 import CheckboxGroup from '../CheckboxGroup';
 import useTranslation from '../useTranslation';
-import { isArray } from '../../utils';
 
 const getOptions = t => [
   { value: 'fi', label: t('yleiset.suomi') },

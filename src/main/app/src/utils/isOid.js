@@ -1,4 +1,4 @@
-import { isString } from './index';
+import { isString } from 'lodash';
 
 const oidRegExp = /^[0-9]+(\.[0-9]+)+$/;
 

@@ -7,11 +7,9 @@ import React, {
   useRef,
 } from 'react';
 
-import get from 'lodash/get';
 import styled, { css } from 'styled-components';
 import EventListener from 'react-event-listener';
-import throttle from 'lodash/throttle';
-import minBy from 'lodash/minBy';
+import { get, minBy, throttle } from 'lodash';
 
 import OrganisaatioDrawer from './OrganisaatioDrawer';
 import Box from '../Box';

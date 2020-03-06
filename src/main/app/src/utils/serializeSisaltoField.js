@@ -1,9 +1,5 @@
-import get from 'lodash/get';
 import produce from 'immer';
-import pick from 'lodash/pick';
-import mapValues from 'lodash/mapValues';
-
-import { isObject, isArray } from './index';
+import { isObject, isArray, get, pick, mapValues } from 'lodash';
 import serializeEditorState from './draft/serializeEditorState';
 
 const serializeTable = ({ table, kielivalinta }) => {

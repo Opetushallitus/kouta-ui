@@ -1,4 +1,4 @@
-import merge from 'lodash/merge';
+import { merge } from 'lodash';
 
 import { chooseKieliversiotLanguages } from '../../utils';
 import valintaperuste from '../../data/valintaperuste';
@@ -47,7 +47,7 @@ describe('editValintaperusteForm', () => {
         testValintaperusteFields,
       ),
     });
-    
+
     cy.getByTestId('postinumero').contains('00350');
 
     fillKieliversiotSection();

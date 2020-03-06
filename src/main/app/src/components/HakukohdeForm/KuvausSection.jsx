@@ -1,6 +1,6 @@
 import React, { useMemo, useCallback } from 'react';
 import { Field } from 'redux-form';
-import get from 'lodash/get';
+import { get } from 'lodash';
 
 import getValintaperusteet from '../../utils/kouta/getValintaperusteet';
 import { getFirstLanguageValue } from '../../utils';

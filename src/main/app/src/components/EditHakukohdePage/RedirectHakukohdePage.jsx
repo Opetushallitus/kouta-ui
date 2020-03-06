@@ -2,9 +2,9 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import useApiAsync from '../useApiAsync';
 import { usePreferredOrganisaatio } from '../useOrganisaatio';
+import getHakukohdeByOid from '../../utils/kouta/getHakukohdeByOid';
 import Spin from '@opetushallitus/virkailija-ui-components/Spin';
 import Flex, { FlexItem } from '../Flex';
-import getHakukohdeByOid from '../../utils/kouta/getHakukohdeByOid';
 
 const Loader = () => (
   <Flex alignCenter column>

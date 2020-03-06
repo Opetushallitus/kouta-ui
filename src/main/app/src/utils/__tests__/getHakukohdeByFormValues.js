@@ -130,7 +130,7 @@ test('getHakukohdeByFormValues returns correct hakukohde given form values', () 
       eriHakulomake: true,
       tyyppi: HAKULOMAKETYYPPI.ATARU,
       lomake: {
-        [HAKULOMAKETYYPPI.ATARU]: { value: '12345' },
+        value: '12345',
       },
     },
   });

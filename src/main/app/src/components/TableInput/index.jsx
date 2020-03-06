@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
-import get from 'lodash/get';
 
-import { isArray, isObject, isFunction } from '../../utils';
+import { get, isArray, isObject, isFunction } from 'lodash';
 import Flex, { FlexItem } from '../Flex';
 import { getThemeProp, spacing } from '../../theme';
 

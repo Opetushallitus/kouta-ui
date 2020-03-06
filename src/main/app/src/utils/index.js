@@ -1,20 +1,20 @@
 import dateFnsformatDate from 'date-fns/format';
 import memoizee from 'memoizee';
-import { flowRight, last, padStart, pick, toPairs, zipObject } from 'lodash';
+import {
+  last,
+  padStart,
+  pick,
+  toPairs,
+  zipObject,
+  isDate,
+  isNumber,
+  isString,
+  isObject,
+  isArray,
+} from 'lodash';
 import { useMachine as useXstateMachine } from '@xstate/react';
 
 export const isDev = process.env.NODE_ENV === 'development';
-
-export const isString = value => typeof value === 'string';
-
-export const isNumber = value => typeof value === 'number';
-
-export const isDate = value => value instanceof Date;
-
-export const isObject = value =>
-  Object.prototype.toString.call(value) === '[object Object]';
-
-export const isArray = value => Array.isArray(value);
 
 export const isValidDate = value => isDate(value) && !isNaN(value);
 
@@ -146,12 +146,6 @@ export const memoize = (fn, opts = {}) => memoizee(fn, { max: 100, ...opts });
 
 export const memoizePromise = (fn, opts = {}) =>
   memoize(fn, { promise: true, ...opts });
-
-export const compose = flowRight;
-
-export const noop = () => {};
-
-export const isBoolean = value => typeof value === 'boolean';
 
 export const getTestIdProps = testId => ({
   'data-testid': testId,

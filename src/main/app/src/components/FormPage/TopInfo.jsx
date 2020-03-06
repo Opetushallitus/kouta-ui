@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { isObject } from 'lodash';
 import Anchor from '../Anchor';
 import Typography from '../Typography';
-import { isObject, getFirstLanguageValue } from '../../utils';
+import { getFirstLanguageValue } from '../../utils';
 import Flex, { FlexItem } from '../Flex';
 
 const getEntityName = entity => {

@@ -1,6 +1,4 @@
-import get from 'lodash/get';
-
-import { isString, isObject } from './index';
+import { get, isString, isObject } from 'lodash';
 
 const getSeparator = str => {
   if (str.indexOf('|') >= 0) {

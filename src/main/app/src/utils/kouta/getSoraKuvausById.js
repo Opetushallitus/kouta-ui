@@ -1,6 +1,4 @@
-import get from 'lodash/get';
-
-import { isObject } from '../index';
+import { get, isObject } from 'lodash';
 
 export const getSoraKuvausById = async ({ httpClient, apiUrls, id }) => {
   const { data, headers } = await httpClient.get(

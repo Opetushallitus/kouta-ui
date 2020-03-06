@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field } from 'redux-form';
-import get from 'lodash/get';
+import { get } from 'lodash';
 
 import { FormFieldSoraKuvausSelect } from '../formFields';
 import useTranslation from '../useTranslation';

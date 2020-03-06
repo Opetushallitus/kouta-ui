@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-
+import { isFunction, isString, isArray } from 'lodash';
 import Collapse from '../Collapse';
 import Button from '../Button';
-import { isFunction, isString, getTestIdProps, isArray } from '../../utils';
+import { getTestIdProps } from '../../utils';
 import useTranslation from '../useTranslation';
 import LanguageTabs from './LanguageTabs';
 import Typography from '../Typography';

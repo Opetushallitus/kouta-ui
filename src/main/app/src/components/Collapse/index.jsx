@@ -1,8 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { setLightness } from 'polished';
-
-import { isString, noop } from '../../utils';
+import { isString, noop } from 'lodash';
 import { getThemeProp, spacing } from '../../theme';
 import Typography from '../Typography';
 import DropdownIcon from '../DropdownIcon';

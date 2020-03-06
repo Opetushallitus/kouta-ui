@@ -1,6 +1,4 @@
-import React, { useCallback } from 'react';
-import get from 'lodash/get';
-
+import React from 'react';
 import FormCollapse from '../FormCollapse';
 import FormCollapseGroup from '../FormCollapseGroup';
 import ValintatapaSection from './ValintatapaSection';
@@ -14,30 +12,7 @@ import PerustiedotSection from './PerustiedotSection';
 import JulkisuusSection from './JulkisuusSection';
 import JulkaisutilaSection from './JulkaisutilaSection';
 import ValintakoeSection from './ValintakoeSection';
-
-const PohjaFormCollapse = ({
-  children,
-  onContinue,
-  onSelectBase,
-  ...props
-}) => {
-  const tapa = useFieldValue('pohja.tapa');
-  const valinta = useFieldValue('pohja.valinta');
-
-  const onPohjaContinue = useCallback(() => {
-    onContinue();
-    onSelectBase({
-      tapa,
-      valinta: get(valinta, 'value'),
-    });
-  }, [onSelectBase, tapa, valinta, onContinue]);
-
-  return (
-    <FormCollapse onContinue={onPohjaContinue} {...props}>
-      {children}
-    </FormCollapse>
-  );
-};
+import PohjaFormCollapse from '../PohjaFormCollapse';
 
 const ValintaperusteForm = ({
   steps = true,

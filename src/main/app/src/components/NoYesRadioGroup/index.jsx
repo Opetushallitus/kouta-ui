@@ -1,7 +1,6 @@
 import React, { useMemo, useCallback } from 'react';
-
+import { isBoolean, noop } from 'lodash';
 import { RadioGroup } from '../Radio';
-import { isBoolean, noop } from '../../utils';
 import useTranslation from '../useTranslation';
 
 const getRadioValue = value => {

@@ -2,12 +2,10 @@ import 'core-js/es';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import createBrowserHistory from 'history/createBrowserHistory';
+import { createBrowserHistory } from 'history';
 import { urls as ophUrls } from 'oph-urls-js';
-import get from 'lodash/get';
-import merge from 'lodash/merge';
+import { get, merge } from 'lodash';
 
-import * as serviceWorker from './serviceWorker';
 import App from './components/App';
 import createStore from './state';
 import defaultTheme from './theme';
@@ -18,8 +16,6 @@ import getTranslations from './translations';
 import createHttpClient from './httpClient';
 
 const history = createBrowserHistory({ basename: 'kouta' });
-
-serviceWorker.register();
 
 const isDev = process.env.NODE_ENV === 'development';
 

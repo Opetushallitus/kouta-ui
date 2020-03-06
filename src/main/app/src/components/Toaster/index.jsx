@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { Transition } from 'react-spring';
 import { connect } from 'react-redux';
-import get from 'lodash/get';
+import { get } from 'lodash';
 
 import Icon from '../Icon';
 import { getThemeProp } from '../../theme';

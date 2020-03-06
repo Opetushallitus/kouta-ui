@@ -1,6 +1,4 @@
-import React, { useCallback } from 'react';
-import get from 'lodash/get';
-
+import React from 'react';
 import PohjaSection from './PohjaSection';
 import FormCollapseGroup from '../FormCollapseGroup';
 import FormCollapse from '../FormCollapse';
@@ -12,30 +10,7 @@ import TiedotSection from './TiedotSection';
 import JulkisuusSection from './JulkisuusSection';
 import useFieldValue from '../useFieldValue';
 import JulkaisutilaSection from './JulkaisutilaSection';
-
-const PohjaFormCollapse = ({
-  children,
-  onContinue,
-  onSelectBase,
-  ...props
-}) => {
-  const tapa = useFieldValue('pohja.tapa');
-  const valinta = useFieldValue('pohja.valinta');
-
-  const onPohjaContinue = useCallback(() => {
-    onContinue();
-    onSelectBase({
-      tapa,
-      valinta: get(valinta, 'value'),
-    });
-  }, [onSelectBase, tapa, valinta, onContinue]);
-
-  return (
-    <FormCollapse onContinue={onPohjaContinue} {...props}>
-      {children}
-    </FormCollapse>
-  );
-};
+import PohjaFormCollapse from '../PohjaFormCollapse';
 
 const SoraKuvausForm = ({
   steps = false,

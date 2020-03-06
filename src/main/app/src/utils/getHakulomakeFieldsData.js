@@ -1,5 +1,4 @@
-import get from 'lodash/get';
-import pick from 'lodash/pick';
+import { get, pick } from 'lodash';
 
 import { HAKULOMAKETYYPPI } from '../constants';
 

@@ -1,6 +1,4 @@
-import get from 'lodash/get';
-
-import { isObject } from '../index';
+import { get, isObject } from 'lodash';
 
 const getKoulutusByOid = async ({ oid, apiUrls, httpClient }) => {
   const { data, headers } = await httpClient.get(

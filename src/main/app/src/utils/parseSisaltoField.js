@@ -1,6 +1,4 @@
-import mapValues from 'lodash/mapValues';
-
-import { isObject, isArray } from './index';
+import { isObject, isArray, mapValues } from 'lodash';
 import parseEditorState from './draft/parseEditorState';
 
 const parseSisaltoField = sisalto => {

@@ -1,11 +1,11 @@
 import React, { useMemo, useState, useCallback } from 'react';
-import get from 'lodash/get';
+import { get, isArray } from 'lodash';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
 import Drawer from '../../Drawer';
 import Typography from '../../Typography';
-import { isArray, getTestIdProps } from '../../../utils';
+import { getTestIdProps } from '../../../utils';
 import { spacing, getThemeProp } from '../../../theme';
 import Button from '../../Button';
 import Icon from '../../Icon';

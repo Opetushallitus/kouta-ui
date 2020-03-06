@@ -1,5 +1,5 @@
 import React from 'react';
-import get from 'lodash/get';
+import { get } from 'lodash';
 
 import FormPage from '../FormPage';
 import getOrganisaatioByOid from '../../utils/organisaatioService/getOrganisaatioByOid';

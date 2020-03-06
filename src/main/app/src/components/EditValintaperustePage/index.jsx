@@ -1,5 +1,5 @@
 import React from 'react';
-import get from 'lodash/get';
+import { get } from 'lodash';
 
 import FormPage, { OrganisaatioInfo, TopInfoContainer } from '../FormPage';
 import EditValintaperusteHeader from './EditValintaperusteHeader';

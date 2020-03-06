@@ -1,5 +1,5 @@
 import { HAKUTAPA_YHTEISHAKU_KOODI_URI } from '../constants';
-import { isString } from './index';
+import { isString } from 'lodash';
 
 const yhteishakuRegExp = new RegExp(HAKUTAPA_YHTEISHAKU_KOODI_URI);
 

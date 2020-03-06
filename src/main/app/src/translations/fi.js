@@ -88,7 +88,7 @@ export default {
     hakulomakkeenValinta: 'Hakulomakkeen valinta',
     valitseHakulomake: 'Valitse hakulomake',
     luoUusiHakukohde: 'Luo uusi hakukohde',
-    lisaaHakuaika: 'Lisaa hakuaika',
+    lisaaHakuaika: 'Lisää hakuaika',
     tyyppi: 'Tyyppi',
     lisatietoja: 'Lisätietoja',
     valitseTyyppi: 'Valitse tyyppi',
@@ -237,9 +237,9 @@ export default {
     pakollinen: 'Tämä kenttä on pakollinen',
     pakollisetKaannokset:
       'Tämän kentän kaikille käännöksille täytyy syöttää arvo',
-    listaVahintaanYksi: 'Tälle kentälle täytyy valita vähintään yksi arvo',
+    listaVahintaanYksi: 'Tälle kentälle täytyy syöttää vähintään yksi arvo',
     listaVahintaan:
-      'Tälle kentälle täytyy valita vähintään {{lukumaara}} arvoa',
+      'Tälle kentälle täytyy syöttää vähintään {{lukumaara}} arvoa',
   },
   hakulomakeValinnat: {
     ataru: 'Käytetään hakemuspalvelun lomaketta',

@@ -1,5 +1,5 @@
 import { Machine, assign } from 'xstate';
-import get from 'lodash/get';
+import { get } from 'lodash';
 
 export const actionTypes = {
   UPLOAD_FILE: 'UPLOAD_FILE',

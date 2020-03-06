@@ -83,8 +83,11 @@ Object {
         "fi": "Fi diplomi",
         "sv": "Sv diplomi",
       },
-      "koulutuksenAlkamispaivamaara": "2019-04-16T00:00",
-      "koulutuksenPaattymispaivamaara": "2019-05-24T00:00",
+      "koulutuksenAlkamiskausi": "kausi_0#1",
+      "koulutuksenAlkamispaivamaara": null,
+      "koulutuksenAlkamisvuosi": 2020,
+      "koulutuksenPaattymispaivamaara": null,
+      "koulutuksenTarkkaAlkamisaika": false,
       "lisatiedot": Array [
         Object {
           "otsikkoKoodiUri": "osio_1#1",

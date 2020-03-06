@@ -1,5 +1,4 @@
-import get from 'lodash/get';
-import pick from 'lodash/pick';
+import { get, pick } from 'lodash';
 
 const getKielivalinta = values => get(values, 'kieliversiot') || [];
 

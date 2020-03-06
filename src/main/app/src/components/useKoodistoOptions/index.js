@@ -1,12 +1,7 @@
 import { useMemo } from 'react';
-import mapValues from 'lodash/mapValues';
-import sortBy from 'lodash/sortBy';
+import { isArray, mapValues, sortBy } from 'lodash';
 
-import {
-  isArray,
-  arrayToTranslationObject,
-  getFirstLanguageValue,
-} from '../../utils';
+import { arrayToTranslationObject, getFirstLanguageValue } from '../../utils';
 
 import useKoodisto from '../useKoodisto';
 import useLanguage from '../useLanguage';

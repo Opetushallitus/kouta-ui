@@ -1,7 +1,6 @@
 import { convertFromHTML } from 'draft-convert';
 import { EditorState } from 'draft-js';
-
-import { isString } from '../index';
+import { isString } from 'lodash';
 import linkDecorator from './linkDecorator';
 import createEmptyEditorState from './createEmptyEditorState';
 

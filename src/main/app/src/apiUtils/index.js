@@ -1,13 +1,15 @@
 import { KOULUTUSTYYPPI_TO_KOULUTUSTYYPPI_IDS_MAP } from '../constants';
-import { isArray } from '../utils';
 import parseKoodiUri from '../utils/parseKoodiUri';
-import keyBy from 'lodash/keyBy';
-import mapValues from 'lodash/mapValues';
-import get from 'lodash/get';
-import groupBy from 'lodash/groupBy';
-import toPairs from 'lodash/toPairs';
-import maxBy from 'lodash/maxBy';
-import set from 'lodash/set';
+import {
+  get,
+  groupBy,
+  isArray,
+  keyBy,
+  mapValues,
+  maxBy,
+  set,
+  toPairs,
+} from 'lodash';
 
 export const getKoulutuksetByKoulutusTyyppi = async ({
   httpClient,

@@ -2,9 +2,7 @@ import React, { useMemo } from 'react';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
 import stripTags from 'striptags';
-import mapValues from 'lodash/mapValues';
-import get from 'lodash/get';
-
+import { get, isString, mapValues } from 'lodash';
 import useApiAsync from '../useApiAsync';
 
 import {
@@ -14,7 +12,7 @@ import {
 
 import Checkbox from '../Checkbox';
 import Typography from '../Typography';
-import { getLanguageValue, isString, getTestIdProps } from '../../utils';
+import { getLanguageValue, getTestIdProps } from '../../utils';
 import Spacing from '../Spacing';
 import Divider from '../Divider';
 import AbstractCollapse from '../AbstractCollapse';

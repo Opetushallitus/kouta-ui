@@ -1,8 +1,5 @@
 import { useMemo, useCallback } from 'react';
-import uniq from 'lodash/uniq';
-import get from 'lodash/get';
-
-import { isString, isArray } from '../../../utils';
+import { get, isString, isArray, uniq } from 'lodash';
 import getOrganisaatioHierarkia from '../../../utils/organisaatioService/getOrganisaatioHierarkia';
 import useApiAsync from '../../useApiAsync';
 import useAuthorizedUserRoleBuilder from '../../useAuthorizedUserRoleBuilder';

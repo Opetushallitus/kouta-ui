@@ -1,8 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-
-import { compose } from '../../utils';
+import { compose } from 'lodash/fp';
 import KoulutuksetSection from './KoulutuksetSection';
 import ToteutuksetSection from './ToteutuksetSection';
 import HautSection from './HautSection';
@@ -138,11 +137,8 @@ const HomeContent = ({
 };
 
 export default compose(
-  connect(
-    null,
-    dispatch => ({
-      onOrganisaatioChange: oid => dispatch(setOrganisaatio(oid)),
-    }),
-  ),
+  connect(null, dispatch => ({
+    onOrganisaatioChange: oid => dispatch(setOrganisaatio(oid)),
+  })),
   withRouter,
 )(HomeContent);

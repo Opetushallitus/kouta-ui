@@ -1,4 +1,4 @@
-import without from 'lodash/without';
+import { without } from 'lodash';
 
 export const LANGUAGE = 'fi';
 

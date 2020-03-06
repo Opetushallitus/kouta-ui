@@ -20,8 +20,6 @@ exports[`renders correctly 1`] = `
   border: 0;
   -webkit-clip: rect(0 0 0 0);
   clip: rect(0 0 0 0);
-  -webkit-clip-path: inset(50%);
-  clip-path: inset(50%);
   height: 1px;
   margin: -1px;
   overflow: hidden;
@@ -84,7 +82,9 @@ exports[`renders correctly 1`] = `
   margin-left: 9px;
 }
 
-<ForwardRef>
+<ForwardRef
+  onChange={[Function]}
+>
   <styled.label
     disabled={false}
     error={false}
@@ -100,11 +100,13 @@ exports[`renders correctly 1`] = `
           <styled.input
             checked={false}
             disabled={false}
+            onChange={[Function]}
           >
             <input
               checked={false}
               className="c2 c3"
               disabled={false}
+              onChange={[Function]}
               type="checkbox"
             />
           </styled.input>

@@ -1,4 +1,6 @@
-const path = require('path');
+const alias = require('./webpack-alias');
+const isDev = process.env.NODE_ENV === 'development';
+
 const {
   override,
   disableEsLint,
@@ -7,9 +9,7 @@ const {
 } = require('customize-cra');
 
 module.exports = override(
-  disableEsLint(),
+  !isDev && disableEsLint(),
   useBabelRc(),
-  addWebpackAlias({
-    '#': path.resolve(__dirname),
-  }),
+  addWebpackAlias(alias),
 );

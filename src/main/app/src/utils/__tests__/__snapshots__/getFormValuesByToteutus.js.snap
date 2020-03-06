@@ -57,8 +57,13 @@ Object {
         "value": "dipmlomi_1#1",
       },
     ],
-    "koulutuksenAlkamispaivamaara": 2019-04-16T00:00:00.000Z,
-    "koulutuksenPaattymispaivamaara": 2019-05-24T00:00:00.000Z,
+    "koulutuksenAlkamiskausi": "kausi_0#1",
+    "koulutuksenAlkamispaivamaara": "",
+    "koulutuksenAlkamisvuosi": Object {
+      "value": 2020,
+    },
+    "koulutuksenPaattymispaivamaara": "",
+    "koulutuksenTarkkaAlkamisaika": false,
     "kuvaus": Object {
       "fi": "Fi toteutuksenkuvaus",
       "sv": "Sv toteutuksenkuvaus",

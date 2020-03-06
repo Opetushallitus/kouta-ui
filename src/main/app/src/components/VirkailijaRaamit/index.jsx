@@ -13,11 +13,11 @@ const getScriptUrl = urls => {
   return scriptUrl;
 };
 
-const VirkalijaRaamit = () => {
+const VirkailijaRaamit = () => {
   const urls = useContext(UrlContext);
   const scriptUrl = getScriptUrl(urls);
 
   return <UiVirkailijaRaamit scriptUrl={scriptUrl} />;
 };
 
-export default VirkalijaRaamit;
+export default VirkailijaRaamit;

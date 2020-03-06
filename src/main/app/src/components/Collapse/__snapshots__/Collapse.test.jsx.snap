@@ -226,7 +226,7 @@ exports[`renders correctly 1`] = `
                       role="button"
                     >
                       <span
-                        className="material-icons c5 c6"
+                        className="c6 material-icons c5"
                         role="button"
                       >
                         expand_more
@@ -481,7 +481,7 @@ exports[`renders correctly 2`] = `
                       role="button"
                     >
                       <span
-                        className="material-icons c4 c5"
+                        className="c5 material-icons c4"
                         role="button"
                       >
                         expand_more
@@ -754,7 +754,7 @@ exports[`renders correctly when closed 1`] = `
                       role="button"
                     >
                       <span
-                        className="material-icons c5 c6"
+                        className="c6 material-icons c5"
                         role="button"
                       >
                         expand_more

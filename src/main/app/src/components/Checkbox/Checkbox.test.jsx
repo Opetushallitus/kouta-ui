@@ -4,5 +4,7 @@ import Checkbox from './index';
 import { mountWithTheme } from '../../testUtils';
 
 test('renders correctly', () => {
-  expect(mountWithTheme(<Checkbox>Checkbox</Checkbox>)).toMatchSnapshot();
+  expect(
+    mountWithTheme(<Checkbox onChange={() => {}}>Checkbox</Checkbox>),
+  ).toMatchSnapshot();
 });

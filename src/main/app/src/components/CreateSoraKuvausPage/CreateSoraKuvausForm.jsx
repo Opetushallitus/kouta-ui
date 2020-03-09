@@ -22,9 +22,13 @@ const getInitialValues = (soraKuvaus, kieliValinnat) => {
     : initialValues(kieliValinnat);
 };
 
-export const CreateSoraKuvausForm = ({ kopioSoraKuvausId, kieliValinnat, ...props }) => {
+export const CreateSoraKuvausForm = ({
+  kopioSoraKuvausId,
+  kieliValinnat,
+  ...props
+}) => {
   const { soraKuvaus } = useSoraKuvaus(kopioSoraKuvausId);
-  kieliValinnat = kieliValinnat == null ? [] : kieliValinnat.split(",");
+  kieliValinnat = kieliValinnat == null ? [] : kieliValinnat.split(',');
 
   const initialValues = useMemo(() => {
     return getInitialValues(soraKuvaus, kieliValinnat);

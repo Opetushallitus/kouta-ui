@@ -6,7 +6,7 @@ import Select from '../../Select';
 export const TutkintonimikeSelect = props => {
   const { options } = useKoodistoOptions({ koodisto: 'tutkintonimikekk' });
 
-  return <Select options={options} isMulti {...props} />
+  return <Select options={options} isMulti {...props} />;
 };
 
 export default TutkintonimikeSelect;

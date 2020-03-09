@@ -10,7 +10,7 @@ import { FormFieldTextarea, FormFieldSelect } from '../formFields';
 import Typography from '../Typography';
 import useFieldValue from '../useFieldValue';
 
-const OsiotFields = ({ language, osiotOptions, name }) => {
+const OsiotFields = ({ disabled, language, osiotOptions, name }) => {
   const osiot = useFieldValue(`${name}.osiot`);
   const osiotArr = osiot || [];
 
@@ -19,8 +19,10 @@ const OsiotFields = ({ language, osiotOptions, name }) => {
       value,
       label: label
         ? label
-        : get(osiotOptions.find(({ value: v }) => v === value), 'label') ||
-          null,
+        : get(
+            osiotOptions.find(({ value: v }) => v === value),
+            'label',
+          ) || null,
     }));
   }, [osiotArr, osiotOptions]);
 
@@ -31,6 +33,7 @@ const OsiotFields = ({ language, osiotOptions, name }) => {
       {...getTestIdProps(`osioKuvaus.${value}`)}
     >
       <Field
+        disabled={disabled}
         name={`${name}.osioKuvaukset.${value}.${language}`}
         component={FormFieldTextarea}
         label={label}
@@ -39,7 +42,7 @@ const OsiotFields = ({ language, osiotOptions, name }) => {
   ));
 };
 
-const LisatiedotSection = ({ language, name }) => {
+const LisatiedotSection = ({ disabled, language, name }) => {
   const { t } = useTranslation();
 
   const { options: osiotOptions } = useKoodistoOptions({
@@ -54,6 +57,7 @@ const LisatiedotSection = ({ language, name }) => {
       <Spacing marginBottom={2}>
         <div {...getTestIdProps('osiotSelect')}>
           <Field
+            disabled={disabled}
             name={`${name}.osiot`}
             component={FormFieldSelect}
             options={osiotOptions}
@@ -63,6 +67,7 @@ const LisatiedotSection = ({ language, name }) => {
         </div>
       </Spacing>
       <OsiotFields
+        disabled={disabled}
         name={name}
         language={language}
         osiotOptions={osiotOptions}

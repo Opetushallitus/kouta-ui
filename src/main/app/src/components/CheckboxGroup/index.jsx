@@ -1,3 +1,1 @@
-export {
-  default,
-} from '@opetushallitus/virkailija-ui-components/CheckboxGroup';
+export { default } from '@opetushallitus/virkailija-ui-components/CheckboxGroup';

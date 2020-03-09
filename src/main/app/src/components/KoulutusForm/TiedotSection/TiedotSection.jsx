@@ -63,7 +63,13 @@ const useLocalizedKoulutus = ({ fieldName, language, koulutusValue }) => {
   }, [changedKoulutus, dispatch, fieldName, formName, koodi, language]);
 };
 
-const TiedotSection = ({ language, koulutustyyppi, koulutuskoodi, name }) => {
+const TiedotSection = ({
+  disabled,
+  language,
+  koulutustyyppi,
+  koulutuskoodi,
+  name,
+}) => {
   const { t } = useTranslation();
 
   useLocalizedKoulutus({
@@ -77,6 +83,7 @@ const TiedotSection = ({ language, koulutustyyppi, koulutuskoodi, name }) => {
       <FormConfigField name="koulutuskoodiTiedoilla">
         <Box mb={2}>
           <KoulutuksenTiedotSection
+            disabled={disabled}
             language={language}
             koulutuskoodi={koulutuskoodi}
             koulutustyyppi={koulutustyyppi}
@@ -88,6 +95,7 @@ const TiedotSection = ({ language, koulutustyyppi, koulutuskoodi, name }) => {
       <FormConfigField name="osaamisala">
         <Box mb={2}>
           <KoulutuksenTiedotSection
+            disabled={disabled}
             language={language}
             koulutuskoodi={koulutuskoodi}
             koulutustyyppi={koulutustyyppi}
@@ -101,6 +109,7 @@ const TiedotSection = ({ language, koulutustyyppi, koulutuskoodi, name }) => {
       <FormConfigField name="koulutuskoodi">
         <Box mb={2} {...getTestIdProps('koulutuskoodiSelect')}>
           <KoulutusField
+            disabled={disabled}
             name={`${name}.koulutus`}
             koulutustyyppi={koulutustyyppi}
             language={language}
@@ -110,25 +119,26 @@ const TiedotSection = ({ language, koulutustyyppi, koulutuskoodi, name }) => {
 
       <FormConfigField name="opintojenlaajuus">
         <Box mb={2}>
-          <OpintojenlaajuusField name={name} />
+          <OpintojenlaajuusField disabled={disabled} name={name} />
         </Box>
       </FormConfigField>
 
       <FormConfigField name="tutkintonimike">
         <Box mb={2}>
-          <TutkintonimikeField name={name} />
+          <TutkintonimikeField disabled={disabled} name={name} />
         </Box>
       </FormConfigField>
 
       <FormConfigField name="koulutusalat">
         <Box mb={2}>
-          <KoulutusalatField name={name} />
+          <KoulutusalatField disabled={disabled} name={name} />
         </Box>
       </FormConfigField>
 
       <FormConfigField name="nimi">
         <Box mb={2} {...getTestIdProps('nimiInput')}>
           <Field
+            disabled={disabled}
             name={`${name}.nimi.${language}`}
             component={FormFieldInput}
             label={t('koulutuslomake.muokkaaKoulutuksenNimea')}

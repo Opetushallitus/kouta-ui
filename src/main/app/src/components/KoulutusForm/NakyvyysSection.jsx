@@ -4,11 +4,11 @@ import { Field } from 'redux-form';
 import useTranslation from '../useTranslation';
 import { FormFieldCheckbox } from '../formFields';
 
-export const NakyvyysSection = ({ name }) => {
+export const NakyvyysSection = ({ disabled, name }) => {
   const { t } = useTranslation();
 
   return (
-    <Field name={name} component={FormFieldCheckbox}>
+    <Field disabled={disabled} name={name} component={FormFieldCheckbox}>
       {t('koulutuslomake.koulutusOnJulkinen')}
     </Field>
   );

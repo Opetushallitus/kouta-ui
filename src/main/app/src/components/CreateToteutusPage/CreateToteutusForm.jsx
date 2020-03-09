@@ -54,7 +54,9 @@ const CreateToteutusForm = props => {
   });
 
   const initialValues = useMemo(() => {
-    return koulutustyyppi === 'amm' ? getInitialValues(data, koulutusNimi, koulutusKielet) : getInitialValues(data, null, koulutusKielet);
+    return koulutustyyppi === 'amm'
+      ? getInitialValues(data, koulutusNimi, koulutusKielet)
+      : getInitialValues(data, null, koulutusKielet);
   }, [data, koulutustyyppi, koulutusNimi, koulutusKielet]);
 
   return (

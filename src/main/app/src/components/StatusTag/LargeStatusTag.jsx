@@ -79,6 +79,6 @@ const LargeStatusTag = ({ status, children = null, ...props }) => {
       <LabelContainer>{children || getLabel({ status, t })}</LabelContainer>
     </Container>
   );
-}
+};
 
 export default LargeStatusTag;

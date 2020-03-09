@@ -11,8 +11,8 @@ class AbstractCollapse extends Component {
     defaultOpen: false,
     children: () => null,
     content: null,
-    unmount: false
-  }
+    unmount: false,
+  };
 
   constructor(props) {
     super(props);
@@ -23,8 +23,8 @@ class AbstractCollapse extends Component {
   }
 
   onToggle = () => {
-    this.setState(({ open }) => ({ open: !open }))
-  }
+    this.setState(({ open }) => ({ open: !open }));
+  };
 
   renderContent() {
     const { unmount, content } = this.props;
@@ -35,11 +35,7 @@ class AbstractCollapse extends Component {
     } else if (unmount) {
       return null;
     } else {
-      return (
-        <Hidden>
-          {content}
-        </Hidden>
-      )
+      return <Hidden>{content}</Hidden>;
     }
   }
 
@@ -52,7 +48,7 @@ class AbstractCollapse extends Component {
         {children({ open, onToggle: this.onToggle })}
         {this.renderContent()}
       </>
-    )
+    );
   }
 }
 

@@ -124,6 +124,7 @@ const defaultVisibleInfoFields = [
 ];
 
 const KoulutuksenTiedotSection = ({
+  disabled,
   koulutustyyppi,
   language,
   koulutuskoodi,
@@ -141,6 +142,7 @@ const KoulutuksenTiedotSection = ({
         <Box flexGrow={1} width={0.4}>
           <div {...getTestIdProps('koulutustyyppiSelect')}>
             <KoulutusField
+              disabled={disabled}
               name={`${name}.koulutus`}
               koulutustyyppi={koulutustyyppi}
               label={selectLabel}
@@ -151,6 +153,7 @@ const KoulutuksenTiedotSection = ({
         <Box flexGrow={1} pl={3} width={0.6}>
           {koulutuskoodi ? (
             <KoulutusInfo
+              disabled={disabled}
               koulutusKoodiUri={koulutuskoodi.value}
               language={language}
               visibleInfoFields={visibleInfoFields}

@@ -12,7 +12,7 @@ const getInitialValues = (toteutusNimi, toteutusKielet) => {
 };
 
 const CreateHakukohdeForm = props => {
-  const {toteutus} = props;
+  const { toteutus } = props;
   const toteutusNimi = toteutus.nimi;
   const toteutusKielet = toteutus.kielivalinta;
 
@@ -21,15 +21,17 @@ const CreateHakukohdeForm = props => {
   }, [toteutusNimi, toteutusKielet]);
 
   return (
-      <ReduxForm form="createHakukohdeForm"
-                 initialValues={initialValues}
-                 enableReinitialize
-      >
-        {() => (<FormConfigContext.Provider value={config}>
-              <HakukohdeForm steps {...props} />
-            </FormConfigContext.Provider>
-        )}
-      </ReduxForm>
+    <ReduxForm
+      form="createHakukohdeForm"
+      initialValues={initialValues}
+      enableReinitialize
+    >
+      {() => (
+        <FormConfigContext.Provider value={config}>
+          <HakukohdeForm steps {...props} />
+        </FormConfigContext.Provider>
+      )}
+    </ReduxForm>
   );
 };
 

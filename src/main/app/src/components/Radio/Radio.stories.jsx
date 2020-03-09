@@ -7,13 +7,23 @@ import Radio, { RadioGroup } from './index';
 storiesOf('Radio', module)
   .add('Basic', () => (
     <>
-    <Radio value="radioA" onChange={action('change')}>Radio A</Radio>
-    <Radio value="radioB" onChange={action('change')}>Radio B</Radio>
+      <Radio value="radioA" onChange={action('change')}>
+        Radio A
+      </Radio>
+      <Radio value="radioB" onChange={action('change')}>
+        Radio B
+      </Radio>
     </>
   ))
-  .add('With disabled', () => <Radio checked={true} disabled>Radio</Radio>)
+  .add('With disabled', () => (
+    <Radio checked={true} disabled>
+      Radio
+    </Radio>
+  ))
   .add('With error', () => (
-      <Radio value="a" error>Radio A</Radio>
+    <Radio value="a" error>
+      Radio A
+    </Radio>
   ))
   .add('With radio group', () => (
     <RadioGroup value="b" onChange={action('change')}>

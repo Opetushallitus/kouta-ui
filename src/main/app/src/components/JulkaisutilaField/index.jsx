@@ -48,6 +48,7 @@ const Label = ({ tila, t }) => {
 };
 
 const JulkaisutilaField = ({
+  disabled,
   name,
   label: labelProp,
   showArkistoitu = true,
@@ -58,9 +59,14 @@ const JulkaisutilaField = ({
   const label = showLabel
     ? labelProp || t('yleiset.valitseJulkaisutila')
     : null;
-
+  console.log(disabled);
   return (
-    <Field name={name} component={FormFieldRadioGroup} label={label}>
+    <Field
+      disabled={disabled}
+      name={name}
+      component={FormFieldRadioGroup}
+      label={label}
+    >
       <Radio value={JULKAISUTILA.TALLENNETTU}>
         <Label tila={JULKAISUTILA.TALLENNETTU} t={t} />
       </Radio>

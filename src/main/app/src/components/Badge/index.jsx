@@ -3,7 +3,8 @@ import { setLightness } from 'polished';
 import { get } from 'lodash';
 
 const getColorCss = ({ color, theme }) => {
-  const baseColor = get(theme, ['palette', color, 'main']) || theme.palette.primary.main;
+  const baseColor =
+    get(theme, ['palette', color, 'main']) || theme.palette.primary.main;
 
   return {
     backgroundColor: setLightness(0.92, baseColor),

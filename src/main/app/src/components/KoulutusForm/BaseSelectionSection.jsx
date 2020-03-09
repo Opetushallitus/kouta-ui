@@ -16,7 +16,7 @@ const getKoulutusOptions = koulutukset => {
   }));
 };
 
-const BaseSelectionSection = ({ organisaatioOid, name }) => {
+const BaseSelectionSection = ({ disabled, organisaatioOid, name }) => {
   const { t } = useTranslation();
 
   const { data = [] } = useApiAsync({
@@ -35,6 +35,7 @@ const BaseSelectionSection = ({ organisaatioOid, name }) => {
       <FormControl>
         <FormLabel>{t('yleiset.valitseLomakkeenPohja')}</FormLabel>
         <BaseFields
+          disabled={disabled}
           name={name}
           createLabel={t('koulutuslomake.luoUusiKoulutus')}
           copyLabel={t('koulutuslomake.kopioiPohjaksiKoulutus')}

@@ -17,9 +17,6 @@ class ErrorBoundaryNotifier extends Component {
   }
 }
 
-export default connect(
-  null,
-  dispatch => ({
-    onError: () => dispatch(openGenericErrorToast()),
-  }),
-)(ErrorBoundaryNotifier);
+export default connect(null, dispatch => ({
+  onError: () => dispatch(openGenericErrorToast()),
+}))(ErrorBoundaryNotifier);

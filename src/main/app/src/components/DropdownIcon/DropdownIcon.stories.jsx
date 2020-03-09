@@ -6,9 +6,7 @@ import DropdownIcon from './index';
 const StoryContainer = () => {
   const [open, setOpen] = useState(false);
 
-  return <DropdownIcon open={open} onClick={() => setOpen(open => !open)} />
-}
+  return <DropdownIcon open={open} onClick={() => setOpen(open => !open)} />;
+};
 
-storiesOf('DropdownIcon', module).add('Basic', () => (
-  <StoryContainer />
-));
+storiesOf('DropdownIcon', module).add('Basic', () => <StoryContainer />);

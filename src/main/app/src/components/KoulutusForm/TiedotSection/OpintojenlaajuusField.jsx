@@ -7,7 +7,7 @@ import { getTestIdProps } from '../../../utils';
 
 import { FormFieldSelect } from '../../formFields';
 
-export const OpintojenlaajuusField = ({ name }) => {
+export const OpintojenlaajuusField = ({ disabled, name }) => {
   const { options: laajuusOptions } = useKoodistoOptions({
     koodisto: 'opintojenlaajuus',
   });
@@ -17,6 +17,7 @@ export const OpintojenlaajuusField = ({ name }) => {
   return (
     <div {...getTestIdProps('opintojenLaajuusSelect')}>
       <Field
+        disabled={disabled}
         name={`${name}.opintojenLaajuus`}
         component={FormFieldSelect}
         options={laajuusOptions}

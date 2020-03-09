@@ -64,7 +64,7 @@ export const FormFieldTextarea = createComponent(Textarea, simpleMapProps);
 
 export const FormFieldSelect = createComponent(
   Select,
-  ({ meta, input, id, ...props }) => ({
+  ({ disabled, meta, input, id, ...props }) => ({
     ...input,
     onBlur: noop,
     ...props,

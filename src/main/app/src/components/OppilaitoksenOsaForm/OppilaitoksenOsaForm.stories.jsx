@@ -16,6 +16,8 @@ storiesOf('OppilaitoksenOsaForm', module)
   .addDecorator(makeApiDecorator())
   .add('Basic', () => (
     <ReduxForm form="oppilaitoksenOsaForm">
-      {() => <OppilaitoksenOsaForm organisaatioOid="1.2.246.562.10.94639300915" />}
+      {() => (
+        <OppilaitoksenOsaForm organisaatioOid="1.2.246.562.10.94639300915" />
+      )}
     </ReduxForm>
   ));

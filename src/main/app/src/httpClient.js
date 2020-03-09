@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { get } from 'lodash';
+import _ from 'lodash';
+import fp from 'lodash/fp';
 import { setupCache } from 'axios-cache-adapter';
 
 let loggingInPromise = null;
@@ -27,11 +28,11 @@ const cache = setupCache({
 });
 
 const hasBeenRetried = error => {
-  return Boolean(get(error, 'config.__retried'));
+  return Boolean(_.get(error, 'config.__retried'));
 };
 
 const isAuthorizationError = error => {
-  return get(error, 'response.status') === 401;
+  return _.get(error, 'response.status') === 401;
 };
 
 const withAuthorizationInterceptor = apiUrls => client => {
@@ -48,7 +49,7 @@ const withAuthorizationInterceptor = apiUrls => client => {
 
       error.config.__retried = true;
 
-      const responseUrl = get(error, 'request.responseURL');
+      const responseUrl = _.get(error, 'request.responseURL');
 
       if (isKoutaBackendUrl(responseUrl) && apiUrls) {
         try {
@@ -93,21 +94,41 @@ const withAuthorizationInterceptor = apiUrls => client => {
   return client;
 };
 
-const createHttpClient = ({ apiUrls, callerId } = {}) => {
-  const headers = {};
+const getCookie = name =>
+  fp.compose(
+    fp.prop(name),
+    fp.fromPairs,
+    fp.map(keyVal => keyVal.split('=')),
+    fp.split(';'),
+  )(document.cookie);
 
+const withCSRF = client => {
+  client.interceptors.request.use(request => {
+    const { method } = request;
+    if (['post', 'put', 'patch', 'delete'].includes(method)) {
+      const csrfCookie = getCookie('CSRF');
+      if (csrfCookie) {
+        request.headers.CSRF = csrfCookie;
+      }
+    }
+    return request;
+  });
+
+  return client;
+};
+
+const createHttpClient = ({ apiUrls, callerId } = {}) => {
   let client = axios.create({
     withCredentials: true,
     adapter: cache.adapter,
     headers: {
-      ...headers,
       ...(callerId && {
         'Caller-Id': callerId,
       }),
     },
   });
 
-  client = withAuthorizationInterceptor(apiUrls)(client);
+  client = fp.compose(withCSRF, withAuthorizationInterceptor(apiUrls))(client);
 
   return client;
 };

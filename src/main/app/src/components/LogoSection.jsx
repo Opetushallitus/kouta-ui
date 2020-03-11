@@ -15,11 +15,14 @@ export const LogoSection = ({ name, label = '' }) => {
   const httpClient = useContext(HttpContext);
   const apiUrls = useContext(UrlContext);
 
-  const upload = useCallback(file => {
-    // TODO: Use real upload API after the backend is available
-    return Promise.resolve(URL.createObjectURL(file));
-    //return uploadLogo({ httpClient, image: file, apiUrls });
-  }, [apiUrls, httpClient, uploadLogo]);
+  const upload = useCallback(
+    file => {
+      // TODO: Use real upload API after the backend is available
+      return Promise.resolve(URL.createObjectURL(file));
+      //return uploadLogo({ httpClient, image: file, apiUrls });
+    },
+    [apiUrls, httpClient, uploadLogo],
+  );
 
   return (
     <Field
@@ -31,6 +34,7 @@ export const LogoSection = ({ name, label = '' }) => {
       maxDimensions={LOGO_MAX_DIMENSIONS}
       acceptedFileFormats={LOGO_ACCEPTED_FORMATS}
       noDimensionCheckForFormats={LOGO_NO_DIMENSION_CHECK_FOR_FORMATS}
+      backgroundSize="contain"
     ></Field>
   );
 };

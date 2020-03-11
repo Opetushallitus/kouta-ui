@@ -106,7 +106,8 @@ export const isSameKoulutustyyppiWithOrganisaatio = (
   const koulutustyyppi = oppilaitostyyppiToKoulutustyyppi(organisaatio);
 
   return (
-    koulutustyyppi && hierarkia.filter(isSameKoulutustyyppi(koulutustyyppi))
+    koulutustyyppi &&
+    first(hierarkia.filter(isSameKoulutustyyppi(koulutustyyppi)))
   );
 };
 

@@ -20,35 +20,16 @@ import JulkaisutilaSection from './JulkaisutilaSection';
 import isOphOrganisaatio from '../../utils/isOphOrganisaatio';
 import TeemakuvaSection from '../TeemakuvaSection';
 import PohjaFormCollapse from '../PohjaFormCollapse';
+import first from 'lodash/first';
 import {
   isSameKoulutustyyppiWithOrganisaatio,
   useOrganisaatio,
 } from '../useOrganisaatio';
 import useOrganisaatioHierarkia from '../useOrganisaatioHierarkia';
 
-const PohjaFormCollapse = ({
-  children,
-  onSelectBase,
-  onContinue,
-  ...props
-}) => {
-  const tapa = useFieldValue('pohja.tapa');
-  const valinta = useFieldValue('pohja.valinta');
-
-  const onPohjaContinue = useCallback(() => {
-    onContinue();
-    onSelectBase({
-      tapa,
-      valinta: get(valinta, 'value'),
-    });
-  }, [onSelectBase, tapa, valinta, onContinue]);
-
-  return (
-    <FormCollapse onContinue={onPohjaContinue} {...props}>
-      {children}
-    </FormCollapse>
-  );
-};
+const isInHierarkia = org => hierarkia =>
+  hierarkia.organisaatioOid === org.organisaatioOid ||
+  first(hierarkia.children.filter(isInHierarkia(org)));
 
 const KoulutusForm = ({
   organisaatioOid,
@@ -74,9 +55,11 @@ const KoulutusForm = ({
   const { hierarkia = [] } = useOrganisaatioHierarkia(koulutusOrganisaatioOid);
 
   const onlyTarjoajaRights =
+    !isNewKoulutus &&
     organisaatio &&
     hierarkia &&
     !isOphOrganisaatio(organisaatioOid) &&
+    !isInHierarkia(organisaatio)(hierarkia) &&
     isSameKoulutustyyppiWithOrganisaatio(organisaatio, hierarkia)
       ? 'disabled'
       : null;

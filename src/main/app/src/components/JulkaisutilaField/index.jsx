@@ -59,7 +59,6 @@ const JulkaisutilaField = ({
   const label = showLabel
     ? labelProp || t('yleiset.valitseJulkaisutila')
     : null;
-  console.log(disabled);
   return (
     <Field
       disabled={disabled}

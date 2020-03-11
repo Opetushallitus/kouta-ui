@@ -50,6 +50,7 @@ export const development = ({ isCypress }) => ({
   'koodisto-service.codeelement': `${virkailijaDevUrl}/koodisto-service/rest/codeelement/$1/$2`,
   'eperusteet-service.base-url': `${virkailijaDevUrl}/eperusteet-service`,
   'eperusteet-service.peruste-by-id': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/$1`,
+  'eperusteet-service.peruste-rakenne': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/$1/suoritustavat/reformi/rakenne`,
   'eperusteet-service.perusteet-koulutuskoodilla': `${virkailijaDevUrl}/eperusteet-service/api/perusteet?tuleva=true&siirtyma=false&voimassaolo=true&poistunut=false&kieli=fi&koulutuskoodi=$1`,
   'eperusteet-service.osaamisalakuvaukset': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/$1/osaamisalakuvaukset`,
   'organisaatio-service.base-url': `${virkailijaDevUrl}/organisaatio-service`,

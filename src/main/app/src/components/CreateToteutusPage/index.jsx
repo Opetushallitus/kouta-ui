@@ -111,6 +111,7 @@ const CreateToteutusPage = props => {
             {koulutus ? (
               <ToteutusFormWrapper
                 steps
+                koulutus={koulutus}
                 ePerusteId={koulutus.ePerusteId}
                 koulutusKoodiUri={koulutus.koulutusKoodiUri}
                 koulutusNimi={koulutus.nimi}

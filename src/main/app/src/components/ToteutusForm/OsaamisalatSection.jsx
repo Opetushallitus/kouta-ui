@@ -3,6 +3,7 @@ import { Field } from 'redux-form';
 import styled from 'styled-components';
 import stripTags from 'striptags';
 import { get, isEmpty, isString, mapValues } from 'lodash';
+import { Trans } from 'react-i18next';
 import useApiAsync from '../useApiAsync';
 
 import {
@@ -21,8 +22,11 @@ import { getThemeProp } from '../../theme';
 import useTranslation from '../useTranslation';
 import { FormFieldInput } from '../formFields';
 import useFieldValue from '../useFieldValue';
-
+import LocalLink from '../LocalLink';
+import { useURLs } from '../../hooks/context';
+import Anchor from '../Anchor';
 import Spin from '../Spin';
+import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 
 const Container = styled.div`
   display: flex;
@@ -198,10 +202,15 @@ const OsaamisalatInfoFields = ({
   });
 };
 
-const OsaamisalatContainer = ({ peruste, language, name }) => {
-  const { nimi, osaamisalat } = peruste;
-
-  const { t } = useTranslation();
+const OsaamisalatContainer = ({
+  peruste,
+  koulutus,
+  organisaatioOid,
+  language,
+  name,
+}) => {
+  const { nimi, osaamisalat, id } = peruste;
+  const urls = useURLs();
 
   const osaamisalaOptions = useMemo(
     () =>
@@ -211,11 +220,32 @@ const OsaamisalatContainer = ({ peruste, language, name }) => {
       })),
     [osaamisalat, language],
   );
+  const { koodiArvo } = parseKoodiUri(get(koulutus, 'koulutusKoodiUri'));
 
   const osaamisalatValue = useFieldValue(`${name}.osaamisalat`);
+  const koulutusLinkText = `${getLanguageValue(
+    get(koulutus, 'nimi'),
+    language,
+  )} (${koodiArvo})`;
 
+  const ePerusteLinkText = `${getLanguageValue(nimi, language)} (${id})`;
   return isEmpty(osaamisalat) ? (
-    <Typography>{t('toteutuslomake.eiOsaamisaloja')}</Typography>
+    <Typography>
+      <Trans
+        i18nKey="toteutuslomake.eiOsaamisaloja"
+        values={{ koulutusLinkText, ePerusteLinkText }}
+        components={[
+          <LocalLink
+            to={`/organisaatio/${organisaatioOid}/koulutus/${koulutus.oid}/muokkaus`}
+          >
+            {koulutusLinkText}
+          </LocalLink>,
+          <Anchor href={urls.url('eperusteet.kooste', language, id)}>
+            {ePerusteLinkText}
+          </Anchor>,
+        ]}
+      />
+    </Typography>
   ) : (
     <>
       <SelectionContainer>
@@ -240,8 +270,9 @@ const OsaamisalatContainer = ({ peruste, language, name }) => {
   );
 };
 
-const OsaamisalatSection = ({ language, ePerusteId, name }) => {
+const OsaamisalatSection = ({ language, koulutus, organisaatioOid, name }) => {
   const { t } = useTranslation();
+  const { ePerusteId } = koulutus;
   const { data: peruste, isLoading } = useApiAsync({
     promiseFn: getExtendedPeruste,
     perusteId: ePerusteId,
@@ -255,8 +286,10 @@ const OsaamisalatSection = ({ language, ePerusteId, name }) => {
       ) : peruste ? (
         <OsaamisalatContainer
           peruste={peruste}
+          koulutus={koulutus}
           language={language}
           name={name}
+          organisaatioOid={organisaatioOid}
         />
       ) : (
         <Typography>

@@ -2,14 +2,15 @@ import isKoodiUri from './isKoodiUri';
 
 const parseKoodiUri = value => {
   if (!isKoodiUri(value)) {
-    return { koodisto: null, koodi: null, versio: null };
+    return { koodiArvo: null, koodisto: null, koodi: null, versio: null };
   }
 
   const [koodi, versio] = value.split('#');
 
-  const [koodisto] = koodi.split('_');
+  const [koodisto, koodiArvo] = koodi.split('_');
 
   return {
+    koodiArvo,
     koodisto,
     koodi,
     versio,

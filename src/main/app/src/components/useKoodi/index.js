@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { isArray } from 'lodash';
 
 import useKoodisto from '../useKoodisto';
-import parseKoodiUri from '../../utils/parseKoodiUri';
+import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 
 const useKoodi = koodiUri => {
   const { koodisto, versio, koodi } = useMemo(() => parseKoodiUri(koodiUri), [

@@ -1,5 +1,5 @@
 import { KOULUTUSTYYPPI_TO_KOULUTUSTYYPPI_IDS_MAP } from '../constants';
-import parseKoodiUri from '../utils/parseKoodiUri';
+import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 import {
   get,
   groupBy,
@@ -57,10 +57,12 @@ export const getKoulutuksetByKoulutusTyyppi = async ({
 };
 
 export const getPerusteById = async ({ httpClient, apiUrls, perusteId }) => {
-  const { data } = await httpClient.get(
-    apiUrls.url('eperusteet-service.peruste-by-id', perusteId),
-  );
-  return data;
+  if (perusteId) {
+    const { data } = await httpClient.get(
+      apiUrls.url('eperusteet-service.peruste-by-id', perusteId),
+    );
+    return data;
+  }
 };
 
 export const getKoulutusByKoodi = async ({
@@ -70,23 +72,30 @@ export const getKoulutusByKoodi = async ({
 }) => {
   const { koodi, versio } = parseKoodiUri(argKoodiUri);
 
-  const [
-    perusteetResponse,
-    alakooditResponse,
-    koodiResponse,
-  ] = await Promise.all([
-    httpClient.get(
-      apiUrls.url('eperusteet-service.perusteet-koulutuskoodilla', koodi),
-    ),
+  const [perusteetData, alakooditResponse, koodiResponse] = await Promise.all([
+    httpClient
+      .get(apiUrls.url('eperusteet-service.perusteet-koulutuskoodilla', koodi))
+      .then(({ data: { data: perusteetData } }) =>
+        Promise.all(
+          perusteetData.map(peruste =>
+            httpClient
+              .get(
+                apiUrls.url('eperusteet-service.peruste-rakenne', peruste.id),
+              )
+              .then(({ data: rakenne }) => ({
+                ...peruste,
+                laajuus: get(rakenne, 'muodostumisSaanto.laajuus.minimi'),
+              })),
+          ),
+        ),
+      ),
     httpClient.get(
       apiUrls.url('koodisto-service.sisaltyy-alakoodit', koodi, versio || ''),
     ),
-    httpClient.get(apiUrls.url('koodisto-service.codeelement', koodi, '')),
+    httpClient.get(
+      apiUrls.url('koodisto-service.codeelement', koodi, versio || ''),
+    ),
   ]);
-
-  const {
-    data: { data: perusteetData },
-  } = perusteetResponse;
 
   const { data: koodiData } = koodiResponse;
 
@@ -126,7 +135,7 @@ export const getKoulutusByKoodi = async ({
 
   const latestKoodi = isArray(koodiData)
     ? maxBy(koodiData, ({ versio }) => versio)
-    : null;
+    : koodiData;
 
   const nimi =
     latestKoodi && isArray(latestKoodi.metadata)
@@ -137,17 +146,12 @@ export const getKoulutusByKoodi = async ({
 
   const { koodiArvo } = latestKoodi;
 
-  const {
-    kuvaus = null,
-    osaamisalat = [],
-    tutkintonimikeKoodit = [],
-    id: perusteId,
-  } = perusteetData[0] || {};
+  const { kuvaus = null, osaamisalat = [], tutkintonimikeKoodit = [] } =
+    perusteetData[0] || {};
 
   return {
     koodiArvo,
     koodiUri: koodi,
-    perusteId,
     perusteet: perusteetData,
     kuvaus,
     osaamisalat,

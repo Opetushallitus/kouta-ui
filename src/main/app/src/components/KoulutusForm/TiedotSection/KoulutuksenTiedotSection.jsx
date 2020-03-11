@@ -296,6 +296,7 @@ const KoulutuksenTiedotSection = ({
     koodiUri: get(koulutuskoodi, 'value'),
     watch: koulutuskoodi,
   });
+
   const perusteFieldValue = useFieldValue(`${name}.peruste`);
   const perusteet = get(koulutus, 'perusteet');
   const selectedPeruste = find(

@@ -190,6 +190,11 @@ export default {
     ePerusteenTiedot: 'ePerusteen tiedot',
     diaarinumero: 'Diaarinumero',
     voimaantulo: 'Voimaantulo',
+    osaamispistetta: 'osaamispistettä',
+    ePerusteStatus: {
+      voimassa: 'Voimassa',
+      tuleva: 'Tuleva',
+    },
   },
   ilmoitukset: {
     tallentamattomiaMuutoksia: {
@@ -433,7 +438,7 @@ export default {
       'Käyttäjälläsi ei ole oikeuksia muokata tätä toteutusta',
     toteutuksenTeemakuva: 'Toteutuksen teemakuva',
     eiOsaamisaloja:
-      'Valittuun koulutukseen liitetyllä ePerusteella ei ole osaamisaloja.',
+      'Valittuun koulutukseen <0>{{koulutusLinkText}}</0> liitetyllä ePerusteella <1>{{ePerusteLinkText}}</1> ei ole osaamisaloja.',
     koulutuksellaEiEPerustetta:
       'Valittuun koulutukseen ei ole liitetty ePerustetta.',
   },

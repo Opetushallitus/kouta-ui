@@ -8,7 +8,7 @@ import { FormFieldInput, FormFieldTextarea } from '../../formFields';
 import useTranslation from '../../useTranslation';
 import { getTestIdProps } from '../../../utils';
 
-const KuvausSection = ({ disabled, language, koulutuskoodi, name }) => {
+const KuvausSection = ({ disabled, language, perusteId, name }) => {
   const { t } = useTranslation();
 
   return (
@@ -19,7 +19,7 @@ const KuvausSection = ({ disabled, language, koulutuskoodi, name }) => {
             disabled={disabled}
             name={name}
             language={language}
-            koulutuskoodi={koulutuskoodi}
+            perusteId={perusteId}
           />
         </Box>
       </FormConfigField>

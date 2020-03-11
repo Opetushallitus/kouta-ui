@@ -2,12 +2,13 @@ import React from 'react';
 import stripTags from 'striptags';
 import { get } from 'lodash';
 
-import { getKoulutusByKoodi } from '../../../apiUtils';
+import { getPerusteById } from '../../../apiUtils';
 import Typography from '../../Typography';
 import { getLanguageValue } from '../../../utils';
 import useTranslation from '../../useTranslation';
 import useApiAsync from '../../useApiAsync';
 import FormLabel from '../../FormLabel';
+import useFieldValue from '../../useFieldValue';
 
 const getKuvaus = (koulutus, language) => {
   const kuvaus = koulutus ? getLanguageValue(koulutus.kuvaus, language) : null;
@@ -15,17 +16,15 @@ const getKuvaus = (koulutus, language) => {
   return kuvaus ? stripTags(kuvaus) : null;
 };
 
-const getKoulutus = ({ koodiUri, ...args }) =>
-  koodiUri ? getKoulutusByKoodi({ koodiUri, ...args }) : Promise.resolve(null);
-
-const TekstiKuvausSection = ({ koulutuskoodi, language }) => {
+const TekstiKuvausSection = ({ language }) => {
+  const perusteField = useFieldValue('information.peruste');
+  const perusteId = get(perusteField, 'value');
   const { t } = useTranslation();
-  const koodiUri = get(koulutuskoodi, 'value');
 
   const { data } = useApiAsync({
-    promiseFn: getKoulutus,
-    koodiUri,
-    watch: koodiUri,
+    promiseFn: getPerusteById,
+    perusteId,
+    watch: perusteId,
   });
 
   const kuvaus = getKuvaus(data, language);

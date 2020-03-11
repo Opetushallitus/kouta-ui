@@ -78,13 +78,16 @@ export const fillDateTimeInput = ({ date, time, cy }) => {
   });
 };
 
-export const chooseKieliversiotLanguages = (languages, cy) => {
-  cy.get('input[name=sv]').uncheck({ force: true });
-  cy.get('input[name=fi]').uncheck({ force: true });
-  cy.get('input[name=en]').uncheck({ force: true });
+export const chooseKieliversiotLanguages = (selectedLanguages, cy) => {
+  const languages = ['en', 'fi', 'sv'];
+  languages.forEach(lang => {
+    cy.get(`input[name=${lang}]`).as('checkbox');
 
-  languages.forEach(language => {
-    cy.get(`input[name=${language}]`).check({ force: true });
+    if (selectedLanguages.includes(lang)) {
+      cy.get('@checkbox').check({ force: true });
+    } else {
+      cy.get('@checkbox').uncheck({ force: true });
+    }
   });
 };
 

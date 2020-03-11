@@ -57,14 +57,45 @@ export const stubKoulutusFormRoutes = ({ cy, organisaatioOid }) => {
 
   cy.route({
     method: 'GET',
-    url: '**/koodisto-service/rest/codeelement/koulutus_0',
-    response: [
-      {
-        koodiUri: 'koulutus_0',
-        versio: 1,
-        metadata: [{ kieli: 'fi', nimi: 'Nimi' }],
+    url: 'koodisto-service/rest/codeelement/koulutus_0/1',
+    response: {
+      koodiArvo: '0',
+      koodiUri: 'koulutus_0',
+      versio: 1,
+      metadata: [{ kieli: 'fi', nimi: 'koulutus_0' }],
+    },
+  });
+
+  cy.route({
+    method: 'GET',
+    url: '**/eperusteet-service/api/perusteet/1/suoritustavat/reformi/rakenne',
+    response: {
+      muodostumisSaanto: {
+        laajuus: {
+          minimi: 180,
+        },
       },
-    ],
+    },
+  });
+
+  cy.route({
+    method: 'GET',
+    url: '**/eperusteet-service/api/perusteet/1',
+    response: {
+      id: 1,
+      nimi: {
+        fi: 'koulutus_0',
+      },
+      kuvaus: {
+        fi: 'koulutus_0 kuvaus',
+      },
+      koulutukset: [
+        {
+          nimi: 'koulutus_0',
+          koulutuskoodiArvo: '1',
+        },
+      ],
+    },
   });
 
   stubEPerusteetByKoulutuskoodiRoute();

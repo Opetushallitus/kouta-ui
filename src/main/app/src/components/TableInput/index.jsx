@@ -9,6 +9,7 @@ import {
   addColumnToIndex,
   removeColumn,
   addRowToIndex,
+  setTable,
   getNumberOfColumns,
   removeRow,
   setRowHeaderStatus,
@@ -277,11 +278,28 @@ class TableInput extends Component {
     return get(column, path) || '';
   };
 
+  handlePasteEvent = event => {
+    const paste = (event.clipboardData || window.clipboardData).getData('Text');
+    const rows = paste.split(/\r/);
+    const table = rows.map(cell => cell.split(/\t/));
+    const { language } = this.props;
+
+    const isTable =
+      table.length > 1 || Math.max(...table.map(row => (row || []).length)) > 1;
+    if (isTable) {
+      this.props.onChange(
+        setTable({ value: this.getValue(), language, table }),
+      );
+      event.preventDefault();
+    }
+  };
+
   renderColumn = ({ column, columnIndex, rowIndex }) => {
     return (
       <Column key={`${rowIndex}.${columnIndex}`} grow={0}>
         <ColumnInput
           value={this.getColumnTextFieldValue(column)}
+          onPaste={this.handlePasteEvent}
           onChange={this.makeOnColumnTextFieldChange({
             rowIndex,
             columnIndex,

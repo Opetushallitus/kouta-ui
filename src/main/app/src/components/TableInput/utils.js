@@ -15,6 +15,45 @@ export const getEmptyRow = numColumns => {
   };
 };
 
+export const setTable = ({ value, language, table }) => {
+  return produce(value, draft => {
+    const rows = get(draft, 'rows') || [];
+    const columns = Math.max(...table.map(row => (row || []).length));
+    const numberOfColumns = getNumberOfColumns(rows);
+
+    const extraRows = table.length - rows.length;
+    if (extraRows > 0) {
+      const newRows = [...new Array(extraRows)].map(() =>
+        getEmptyRow(numberOfColumns),
+      );
+      draft.rows = [...rows, ...newRows];
+    }
+
+    const extraColumns = columns - numberOfColumns;
+    if (extraColumns > 0) {
+      draft.rows.forEach((row, rowIndex) => {
+        const columns = get(row, 'columns') || [];
+
+        row.columns = [
+          ...columns,
+          ...[...new Array(extraColumns)].map(getEmptyColumn),
+        ];
+      });
+    }
+
+    table.forEach((tableRow, tableRowIndex) => {
+      const row = draft.rows[tableRowIndex];
+      tableRow.forEach((cell, columnIndex) => {
+        let path = ['columns', columnIndex, 'text'];
+        if (language) {
+          path = [...path, language];
+        }
+        set(row, path, cell);
+      });
+    });
+  });
+};
+
 export const addColumnToIndex = ({ value, columnIndex }) => {
   return produce(value, draft => {
     const rows = get(draft, 'rows') || [];

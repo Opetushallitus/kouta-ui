@@ -7,6 +7,10 @@ export const getNumberOfColumns = rows => {
     : 0;
 };
 
+export const getMaxColumnLength = rows => {
+  return isArray(rows) ? Math.max(...rows.map(row => (row || []).length)) : 0;
+};
+
 export const getEmptyColumn = () => ({ text: '' });
 
 export const getEmptyRow = numColumns => {
@@ -16,11 +20,9 @@ export const getEmptyRow = numColumns => {
 };
 
 export const setTable = ({ value, language, table }) => {
-  return produce(value, draft => {
+  const addExtraRowsIfNeeded = draft => {
     const rows = get(draft, 'rows') || [];
-    const columns = Math.max(...table.map(row => (row || []).length));
     const numberOfColumns = getNumberOfColumns(rows);
-
     const extraRows = table.length - rows.length;
     if (extraRows > 0) {
       const newRows = [...new Array(extraRows)].map(() =>
@@ -28,8 +30,12 @@ export const setTable = ({ value, language, table }) => {
       );
       draft.rows = [...rows, ...newRows];
     }
-
-    const extraColumns = columns - numberOfColumns;
+  };
+  const addExtraColumnsIfNeeded = draft => {
+    const numberOfTableColumns = getMaxColumnLength(table);
+    const rows = get(draft, 'rows') || [];
+    const numberOfRowColumns = getNumberOfColumns(rows);
+    const extraColumns = numberOfTableColumns - numberOfRowColumns;
     if (extraColumns > 0) {
       draft.rows.forEach((row, rowIndex) => {
         const columns = get(row, 'columns') || [];
@@ -40,6 +46,11 @@ export const setTable = ({ value, language, table }) => {
         ];
       });
     }
+  };
+
+  return produce(value, draft => {
+    addExtraRowsIfNeeded(draft);
+    addExtraColumnsIfNeeded(draft);
 
     table.forEach((tableRow, tableRowIndex) => {
       const row = draft.rows[tableRowIndex];

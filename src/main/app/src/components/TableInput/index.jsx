@@ -9,6 +9,7 @@ import {
   addColumnToIndex,
   removeColumn,
   addRowToIndex,
+  getMaxColumnLength,
   setTable,
   getNumberOfColumns,
   removeRow,
@@ -284,8 +285,7 @@ class TableInput extends Component {
     const table = rows.map(cell => cell.split(/\t/));
     const { language } = this.props;
 
-    const isTable =
-      table.length > 1 || Math.max(...table.map(row => (row || []).length)) > 1;
+    const isTable = table.length > 1 || getMaxColumnLength(table) > 1;
     if (isTable) {
       this.props.onChange(
         setTable({ value: this.getValue(), language, table }),

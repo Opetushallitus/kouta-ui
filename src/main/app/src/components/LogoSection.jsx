@@ -16,12 +16,8 @@ export const LogoSection = ({ name, label = '' }) => {
   const apiUrls = useContext(UrlContext);
 
   const upload = useCallback(
-    file => {
-      // TODO: Use real upload API after the backend is available
-      return Promise.resolve(URL.createObjectURL(file));
-      //return uploadLogo({ httpClient, image: file, apiUrls });
-    },
-    [apiUrls, httpClient, uploadLogo],
+    file => uploadLogo({ httpClient, image: file, apiUrls }),
+    [apiUrls, httpClient],
   );
 
   return (

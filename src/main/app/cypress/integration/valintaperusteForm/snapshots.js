@@ -1,95 +1,4 @@
 module.exports = {
-  "createValintaperusteForm": {
-    "should be able to create valintaperuste": {
-      "1": {
-        "tila": "julkaistu",
-        "muokkaaja": "1.2.246.562.24.62301161440",
-        "kielivalinta": [
-          "fi"
-        ],
-        "hakutapaKoodiUri": "hakutapa_0#1",
-        "kohdejoukkoKoodiUri": "haunkohdejoukko_0#1",
-        "nimi": {
-          "fi": "Valintaperusteen nimi"
-        },
-        "koulutustyyppi": "yo",
-        "onkoJulkinen": true,
-        "valintakokeet": [
-          {
-            "tyyppiKoodiUri": "valintakokeentyyppi_1#1",
-            "tilaisuudet": [
-              {
-                "osoite": {
-                  "osoite": {
-                    "fi": "osoite"
-                  },
-                  "postinumeroKoodiUri": "posti_0#2"
-                },
-                "aika": {
-                  "alkaa": "2019-04-02T10:45",
-                  "paattyy": "2019-04-02T19:00"
-                },
-                "lisatietoja": {
-                  "fi": "lisatietoja"
-                }
-              }
-            ]
-          }
-        ],
-        "sorakuvausId": "1",
-        "metadata": {
-          "tyyppi": "yo",
-          "valintatavat": [
-            {
-              "kuvaus": {},
-              "nimi": {
-                "fi": "Valintatavan nimi"
-              },
-              "valintatapaKoodiUri": "valintatapajono_0#1",
-              "sisalto": [
-                {
-                  "tyyppi": "teksti",
-                  "data": {
-                    "fi": "<p>Sisältötekstiä</p>"
-                  }
-                },
-                {
-                  "tyyppi": "taulukko",
-                  "data": {
-                    "rows": [
-                      {
-                        "columns": [
-                          {
-                            "text": {
-                              "fi": "Solu"
-                            },
-                            "index": 0
-                          }
-                        ],
-                        "index": 0
-                      }
-                    ]
-                  }
-                }
-              ],
-              "kaytaMuuntotaulukkoa": false,
-              "kynnysehto": {
-                "fi": "Kynnysehto"
-              },
-              "enimmaispisteet": 100,
-              "vahimmaispisteet": 10
-            }
-          ],
-          "kielitaitovaatimukset": [],
-          "osaamistaustaKoodiUrit": [],
-          "kuvaus": {
-            "fi": "<p>Kuvaus</p>"
-          }
-        },
-        "organisaatioOid": "1.1.1.1.1.1"
-      }
-    }
-  },
   "__version": "4.1.0",
   "editValintaperusteForm": {
     "should be able to edit valintaperuste": {
@@ -184,6 +93,120 @@ module.exports = {
           }
         ],
         "onkoJulkinen": false
+      }
+    }
+  },
+  "createValintaperusteForm": {
+    "should be able to create valintaperuste": {
+      "1": {
+        "tila": "julkaistu",
+        "muokkaaja": "1.2.246.562.24.62301161440",
+        "kielivalinta": [
+          "fi"
+        ],
+        "hakutapaKoodiUri": "hakutapa_0#1",
+        "kohdejoukkoKoodiUri": "haunkohdejoukko_0#1",
+        "nimi": {
+          "fi": "Valintaperusteen nimi"
+        },
+        "koulutustyyppi": "yo",
+        "onkoJulkinen": true,
+        "valintakokeet": [
+          {
+            "tyyppiKoodiUri": "valintakokeentyyppi_1#1",
+            "tilaisuudet": [
+              {
+                "osoite": {
+                  "osoite": {
+                    "fi": "osoite"
+                  },
+                  "postinumeroKoodiUri": "posti_0#2"
+                },
+                "aika": {
+                  "alkaa": "2019-04-02T10:45",
+                  "paattyy": "2019-04-02T19:00"
+                },
+                "lisatietoja": {
+                  "fi": "lisatietoja"
+                }
+              }
+            ]
+          }
+        ],
+        "sorakuvausId": "1",
+        "metadata": {
+          "tyyppi": "yo",
+          "valintatavat": [
+            {
+              "kuvaus": {},
+              "nimi": {
+                "fi": "Valintatavan nimi"
+              },
+              "valintatapaKoodiUri": "valintatapajono_0#1",
+              "sisalto": [
+                {
+                  "tyyppi": "teksti",
+                  "data": {
+                    "fi": "<p>Sisältötekstiä</p>"
+                  }
+                },
+                {
+                  "tyyppi": "taulukko",
+                  "data": {
+                    "rows": [
+                      {
+                        "columns": [
+                          {
+                            "text": {
+                              "fi": "solu1.1"
+                            },
+                            "index": 0
+                          },
+                          {
+                            "text": {
+                              "fi": "solu1.2"
+                            },
+                            "index": 1
+                          }
+                        ],
+                        "index": 0
+                      },
+                      {
+                        "columns": [
+                          {
+                            "text": {
+                              "fi": "solu2.1"
+                            },
+                            "index": 0
+                          },
+                          {
+                            "text": {
+                              "fi": "solu2.2"
+                            },
+                            "index": 1
+                          }
+                        ],
+                        "index": 1
+                      }
+                    ]
+                  }
+                }
+              ],
+              "kaytaMuuntotaulukkoa": false,
+              "kynnysehto": {
+                "fi": "Kynnysehto"
+              },
+              "enimmaispisteet": 100,
+              "vahimmaispisteet": 10
+            }
+          ],
+          "kielitaitovaatimukset": [],
+          "osaamistaustaKoodiUrit": [],
+          "kuvaus": {
+            "fi": "<p>Kuvaus</p>"
+          }
+        },
+        "organisaatioOid": "1.1.1.1.1.1"
       }
     }
   }

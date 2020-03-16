@@ -92,7 +92,12 @@ const fillValintatapaSection = () => {
 
         getTableInput(cy)
           .find('textarea')
-          .type('Solu', { force: true });
+          .invoke('val', '')
+          .trigger('paste', {
+            clipboardData: {
+              getData: () => 'solu1.1\tsolu1.2\rsolu2.1\tsolu2.2',
+            },
+          });
       });
 
       cy.getByTestId('kynnysehto')

@@ -7,12 +7,62 @@ export const getNumberOfColumns = rows => {
     : 0;
 };
 
+export const getMaxColumnLength = rows => {
+  return isArray(rows) ? Math.max(...rows.map(row => (row || []).length)) : 0;
+};
+
 export const getEmptyColumn = () => ({ text: '' });
 
 export const getEmptyRow = numColumns => {
   return {
     columns: [...new Array(numColumns)].map(getEmptyColumn),
   };
+};
+
+export const setTable = ({ value, language, table }) => {
+  const addExtraRowsIfNeeded = draft => {
+    const rows = get(draft, 'rows') || [];
+    const numberOfColumns = getNumberOfColumns(rows);
+    const extraRows = table.length - rows.length;
+    if (extraRows > 0) {
+      const newRows = [...new Array(extraRows)].map(() =>
+        getEmptyRow(numberOfColumns),
+      );
+      draft.rows = [...rows, ...newRows];
+    }
+  };
+  const addExtraColumnsIfNeeded = draft => {
+    const numberOfTableColumns = getMaxColumnLength(table);
+    const rows = get(draft, 'rows') || [];
+    const numberOfRowColumns = getNumberOfColumns(rows);
+    const extraColumns = numberOfTableColumns - numberOfRowColumns;
+    if (extraColumns > 0) {
+      draft.rows.forEach((row, rowIndex) => {
+        const columns = get(row, 'columns') || [];
+
+        row.columns = [
+          ...columns,
+          ...[...new Array(extraColumns)].map(getEmptyColumn),
+        ];
+      });
+    }
+  };
+
+  return produce(value, draft => {
+    addExtraRowsIfNeeded(draft);
+    addExtraColumnsIfNeeded(draft);
+
+    table.forEach((tableRow, tableRowIndex) => {
+      const row = draft.rows[tableRowIndex];
+      tableRow.forEach((cell, columnIndex) => {
+        let path = ['columns', columnIndex, 'text'];
+        if (language) {
+          path = [...path, language];
+        }
+        set(row, path, cell);
+      });
+    });
+  });
 };
 
 export const addColumnToIndex = ({ value, columnIndex }) => {

@@ -10,6 +10,7 @@ module.exports = {
           "fi"
         ],
         "teemakuva": null,
+        "logo": null,
         "metadata": {
           "yhteystiedot": {
             "osoite": {
@@ -61,6 +62,7 @@ module.exports = {
         ],
         "tila": "tallennettu",
         "teemakuva": null,
+        "logo": null,
         "metadata": {
           "yhteystiedot": {
             "osoite": {

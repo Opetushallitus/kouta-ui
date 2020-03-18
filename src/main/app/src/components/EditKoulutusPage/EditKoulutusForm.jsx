@@ -22,7 +22,14 @@ const KoulutusFormWrapper = props => {
   );
 };
 
-const EditKoulutusForm = ({ onSave, koulutus, history, organisaatioOid, ...props }) => {
+const EditKoulutusForm = ({
+  onSave,
+  koulutus,
+  history,
+  organisaatioOid,
+  ...props
+}) => {
+  const koulutusOrganisaatioOid = koulutus.organisaatioOid;
   const initialValues = useMemo(() => {
     return getFormValuesByKoulutus(koulutus);
   }, [koulutus]);
@@ -42,6 +49,7 @@ const EditKoulutusForm = ({ onSave, koulutus, history, organisaatioOid, ...props
           johtaaTutkintoon={Boolean(koulutus.johtaaTutkintoon)}
           onAttachToteutus={onAttachToteutus}
           koulutus={koulutus}
+          koulutusOrganisaatioOid={koulutusOrganisaatioOid}
           organisaatioOid={organisaatioOid}
           {...props}
         />

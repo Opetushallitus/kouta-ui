@@ -10,6 +10,7 @@ import parseKoodiUri from '../../utils/parseKoodiUri';
 import { isFunction } from '../../utils';
 
 const AsyncKoodistoSelect = ({
+  disabled,
   formatLabel: formatLabelProp,
   language: selectedLanguage,
   ...props
@@ -50,7 +51,7 @@ const AsyncKoodistoSelect = ({
     [httpClient, apiUrls, formatLabel],
   );
 
-  return <AsyncSelect loadLabel={loadLabel} {...props} />;
+  return <AsyncSelect disabled={disabled} loadLabel={loadLabel} {...props} />;
 };
 
 export default AsyncKoodistoSelect;

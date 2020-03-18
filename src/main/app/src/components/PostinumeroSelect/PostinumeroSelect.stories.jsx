@@ -9,11 +9,11 @@ import {
 } from '../../storybookUtils';
 
 function generateStory(koodi) {
-    return () => {
-        const [value, setValue] = useState({ value: koodi });
+  return () => {
+    const [value, setValue] = useState({ value: koodi });
 
-        return <PostinumeroSelect onChange={setValue} value={value} />;
-    };
+    return <PostinumeroSelect onChange={setValue} value={value} />;
+  };
 }
 
 const Story = generateStory('posti_00940#2');
@@ -24,4 +24,6 @@ storiesOf('PostinumeroSelect', module)
   .addDecorator(makeLocalisationDecorator())
   .addDecorator(makeApiDecorator())
   .add('Basic', () => <Story />)
-  .add('With invalid koodisto version', () => <StoryWithInvalidKoodistoVersion /> );
+  .add('With invalid koodisto version', () => (
+    <StoryWithInvalidKoodistoVersion />
+  ));

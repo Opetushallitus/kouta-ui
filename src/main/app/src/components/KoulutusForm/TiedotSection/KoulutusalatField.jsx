@@ -11,12 +11,13 @@ const KoulutusalatFieldComponent = createFormFieldComponent(
   selectMapProps,
 );
 
-export const KoulutusalatField = ({ name }) => {
+export const KoulutusalatField = ({ disabled, name }) => {
   const { t } = useTranslation();
 
   return (
     <div {...getTestIdProps('koulutusalatSelect')}>
       <Field
+        disabled={disabled}
         name={`${name}.koulutusalat`}
         component={KoulutusalatFieldComponent}
         label={t('koulutuslomake.valitseKoulutusalat')}

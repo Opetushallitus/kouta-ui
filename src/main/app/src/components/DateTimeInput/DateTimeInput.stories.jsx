@@ -19,4 +19,6 @@ const Story = () => {
   );
 };
 
-storiesOf('DateTimeInput', module).addDecorator(makeLocalisationDecorator()).add('Basic', () => <Story />);
+storiesOf('DateTimeInput', module)
+  .addDecorator(makeLocalisationDecorator())
+  .add('Basic', () => <Story />);

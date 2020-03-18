@@ -30,9 +30,7 @@ const EditToteutusForm = ({ toteutus, history, ...props }) => {
     ({ hakuOid }) => {
       if (hakuOid) {
         history.push(
-          `/organisaatio/${toteutus.organisaatioOid}/toteutus/${
-            toteutus.oid
-          }/haku/${hakuOid}/hakukohde`,
+          `/organisaatio/${toteutus.organisaatioOid}/toteutus/${toteutus.oid}/haku/${hakuOid}/hakukohde`,
         );
       }
     },

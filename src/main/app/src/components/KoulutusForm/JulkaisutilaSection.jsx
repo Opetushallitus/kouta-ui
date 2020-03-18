@@ -2,8 +2,14 @@ import React from 'react';
 
 import JulkaisutilaField from '../JulkaisutilaField';
 
-const JulkaisutilaSection = ({ name, showArkistoitu }) => {
-  return <JulkaisutilaField name={name} showArkistoitu={showArkistoitu} />;
+const JulkaisutilaSection = ({ disabled, name, showArkistoitu }) => {
+  return (
+    <JulkaisutilaField
+      disabled={disabled}
+      name={name}
+      showArkistoitu={showArkistoitu}
+    />
+  );
 };
 
 export default JulkaisutilaSection;

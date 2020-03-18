@@ -6,4 +6,4 @@ import { makeLocalisationDecorator } from '../../storybookUtils';
 
 storiesOf('DatePicker', module)
   .addDecorator(makeLocalisationDecorator())
-  .add('Basic', () => <DatePicker value={new Date()} />)
+  .add('Basic', () => <DatePicker value={new Date()} />);

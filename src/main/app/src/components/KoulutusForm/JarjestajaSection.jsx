@@ -20,7 +20,12 @@ const JarjestajatField = createFormFieldComponent(
   }),
 );
 
-const OrganizationSection = ({ organisaatioOid, name, koulutus, disableTarjoajaHierarkia }) => {
+const OrganizationSection = ({
+  organisaatioOid,
+  name,
+  koulutus,
+  disableTarjoajaHierarkia,
+}) => {
   const { t } = useTranslation();
   const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid);
   const roleBuilder = useAuthorizedUserRoleBuilder();

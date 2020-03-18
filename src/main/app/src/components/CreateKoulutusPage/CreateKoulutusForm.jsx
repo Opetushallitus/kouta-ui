@@ -56,7 +56,8 @@ const CreateKoulutusForm = props => {
     <ReduxForm
       form="createKoulutusForm"
       initialValues={initialValues}
-      enableReinitialize>
+      enableReinitialize
+    >
       {() => <KoulutusFormWrapper steps isNewKoulutus={true} {...props} />}
     </ReduxForm>
   );

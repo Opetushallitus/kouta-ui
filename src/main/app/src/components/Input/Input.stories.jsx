@@ -8,6 +8,4 @@ storiesOf('Input', module)
   .add('Basic', () => <Input />)
   .add('With disabled', () => <Input disabled />)
   .add('With error', () => <Input error />)
-  .add('With addon', () => (
-    <Input suffix={<InputIcon type="access_time" />} />
-  ));
+  .add('With addon', () => <Input suffix={<InputIcon type="access_time" />} />);

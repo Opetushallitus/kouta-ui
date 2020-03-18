@@ -20,9 +20,20 @@ import JulkaisutilaSection from './JulkaisutilaSection';
 import isOphOrganisaatio from '../../utils/isOphOrganisaatio';
 import TeemakuvaSection from '../TeemakuvaSection';
 import PohjaFormCollapse from '../PohjaFormCollapse';
+import first from 'lodash/first';
+import {
+  isSameKoulutustyyppiWithOrganisaatio,
+  useOrganisaatio,
+} from '../useOrganisaatio';
+import useOrganisaatioHierarkia from '../useOrganisaatioHierarkia';
+
+const isInHierarkia = org => hierarkia =>
+  hierarkia.organisaatioOid === org.organisaatioOid ||
+  first(hierarkia.children.filter(isInHierarkia(org)));
 
 const KoulutusForm = ({
   organisaatioOid,
+  koulutusOrganisaatioOid,
   steps = false,
   isNewKoulutus = false,
   koulutus: koulutusProp = null,
@@ -40,6 +51,19 @@ const KoulutusForm = ({
   const isExistingOphKoulutus =
     isOphOrganisaatio(organisaatioOid) && !isNewKoulutus;
 
+  const { organisaatio } = useOrganisaatio(organisaatioOid);
+  const { hierarkia = [] } = useOrganisaatioHierarkia(koulutusOrganisaatioOid);
+
+  const onlyTarjoajaRights =
+    !isNewKoulutus &&
+    organisaatio &&
+    hierarkia &&
+    !isOphOrganisaatio(organisaatioOid) &&
+    !isInHierarkia(organisaatio)(hierarkia) &&
+    isSameKoulutustyyppiWithOrganisaatio(organisaatio, hierarkia)
+      ? 'disabled'
+      : null;
+
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps} configured>
       {isNewKoulutus ? (
@@ -50,6 +74,7 @@ const KoulutusForm = ({
           {...getTestIdProps('tyyppiSection')}
         >
           <TypeSection
+            disabled={onlyTarjoajaRights}
             name="koulutustyyppi"
             johtaaTutkintoon={johtaaTutkintoon}
           />
@@ -64,6 +89,7 @@ const KoulutusForm = ({
           {...getTestIdProps('pohjaSection')}
         >
           <BaseSelectionSection
+            disabled={onlyTarjoajaRights}
             name="pohja"
             organisaatioOid={organisaatioOid}
           />
@@ -75,7 +101,7 @@ const KoulutusForm = ({
         header={t('yleiset.kieliversiot')}
         {...getTestIdProps('kieliversiotSection')}
       >
-        <KieliversiotFields name="kieliversiot" />
+        <KieliversiotFields disabled={onlyTarjoajaRights} name="kieliversiot" />
       </FormCollapse>
 
       <FormCollapse
@@ -85,6 +111,7 @@ const KoulutusForm = ({
         {...getTestIdProps('tiedotSection')}
       >
         <TiedotSection
+          disabled={onlyTarjoajaRights}
           koulutustyyppi={koulutustyyppi}
           koulutuskoodi={koulutuskoodi}
           name="information"
@@ -98,6 +125,7 @@ const KoulutusForm = ({
         {...getTestIdProps('kuvausSection')}
       >
         <KuvausSection
+          disabled={onlyTarjoajaRights}
           koulutustyyppi={koulutustyyppi}
           koulutuskoodi={koulutuskoodi}
           name="description"
@@ -110,7 +138,7 @@ const KoulutusForm = ({
         languages={languageTabs}
         {...getTestIdProps('lisatiedotSection')}
       >
-        <LisatiedotSection name="lisatiedot" />
+        <LisatiedotSection disabled={onlyTarjoajaRights} name="lisatiedot" />
       </FormCollapse>
 
       <FormCollapse
@@ -118,7 +146,7 @@ const KoulutusForm = ({
         header={t('koulutuslomake.koulutuksenTeemakuva')}
         {...getTestIdProps('teemakuvaSection')}
       >
-        <TeemakuvaSection name="teemakuva" />
+        <TeemakuvaSection disabled={onlyTarjoajaRights} name="teemakuva" />
       </FormCollapse>
 
       {!isNewOphKoulutus ? (
@@ -141,7 +169,7 @@ const KoulutusForm = ({
         header="Koulutuksen näkyminen muille koulutustoimijoille"
         {...getTestIdProps('nakyvyysSection')}
       >
-        <NakyvyysSection name="julkinen" />
+        <NakyvyysSection disabled={onlyTarjoajaRights} name="julkinen" />
       </FormCollapse>
 
       <FormCollapse
@@ -149,7 +177,11 @@ const KoulutusForm = ({
         header={t('koulutuslomake.koulutuksenTila')}
         {...getTestIdProps('tilaSection')}
       >
-        <JulkaisutilaSection name="tila" showArkistoitu={!isNewKoulutus} />
+        <JulkaisutilaSection
+          disabled={onlyTarjoajaRights}
+          name="tila"
+          showArkistoitu={!isNewKoulutus}
+        />
       </FormCollapse>
 
       {isFunction(onAttachToteutus) ? (
@@ -158,13 +190,19 @@ const KoulutusForm = ({
           id="koulutukseen-liitetetyt-toteutukset"
           actions={
             <Flex justifyCenter>
-              <Button color="primary" onClick={onAttachToteutus} type="button">
+              <Button
+                disabled={onlyTarjoajaRights}
+                color="primary"
+                onClick={onAttachToteutus}
+                type="button"
+              >
                 {t('koulutuslomake.liitaToteutus')}
               </Button>
             </Flex>
           }
         >
           <ToteutuksetSection
+            disabled={onlyTarjoajaRights}
             koulutus={koulutusProp}
             organisaatioOid={organisaatioOid}
           />

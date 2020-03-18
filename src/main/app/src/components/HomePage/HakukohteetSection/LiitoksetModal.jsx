@@ -56,9 +56,7 @@ const LiitoksetModal = ({ onClose, organisaatioOid, history, open }) => {
   const onSubmit = useCallback(() => {
     if (!disabled) {
       history.push(
-        `/organisaatio/${organisaatioOid}/toteutus/${toteutus.value}/haku/${
-          haku.value
-        }/hakukohde`,
+        `/organisaatio/${organisaatioOid}/toteutus/${toteutus.value}/haku/${haku.value}/hakukohde`,
       );
     }
   }, [history, haku, toteutus, disabled, organisaatioOid]);

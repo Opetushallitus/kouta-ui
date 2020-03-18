@@ -83,7 +83,15 @@ const getValue = (value, options) => {
   return value;
 };
 
-const Select = ({ theme, value, options, id, error = false, ...props }) => {
+const Select = ({
+  disabled,
+  theme,
+  value,
+  options,
+  id,
+  error = false,
+  ...props
+}) => {
   const resolvedValue = useMemo(() => getValue(value, options), [
     value,
     options,
@@ -94,6 +102,7 @@ const Select = ({ theme, value, options, id, error = false, ...props }) => {
   return (
     <UiSelect
       {...getDefaultProps(t)}
+      isDisabled={disabled}
       value={resolvedValue}
       options={options}
       inputId={id}
@@ -136,6 +145,7 @@ export const AsyncCreatableSelect = ({ error = false, id, ...props }) => {
 };
 
 export const AsyncSelect = ({
+  disabled,
   error = false,
   loadLabel,
   value: valueProp,
@@ -198,6 +208,7 @@ export const AsyncSelect = ({
   return (
     <ReactAsyncSelect
       {...getDefaultProps(t)}
+      isDisabled={disabled}
       placeholder={t('yleiset.kirjoitaHakusana')}
       noOptionsMessage={noOptionsMessage}
       styles={getStyles(theme, error)}

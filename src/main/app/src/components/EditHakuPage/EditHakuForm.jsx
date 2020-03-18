@@ -18,9 +18,7 @@ const EditHakuForm = ({ onSave, haku, history, organisaatioOid, ...props }) => {
     ({ toteutusOid }) => {
       if (toteutusOid) {
         history.push(
-          `/organisaatio/${organisaatioOid}/toteutus/${toteutusOid}/haku/${
-            haku.oid
-          }/hakukohde`,
+          `/organisaatio/${organisaatioOid}/toteutus/${toteutusOid}/haku/${haku.oid}/hakukohde`,
         );
       }
     },

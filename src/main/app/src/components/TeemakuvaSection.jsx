@@ -13,7 +13,7 @@ import {
 } from '../constants';
 
 export const TeemakuvaSection = props => {
-  const { name } = props;
+  const { name, disabled } = props;
   const { t } = useTranslation();
 
   const httpClient = useContext(HttpContext);
@@ -28,6 +28,7 @@ export const TeemakuvaSection = props => {
 
   return (
     <Field
+      disabled={disabled}
       name={name}
       label={t('yleiset.teemakuva')}
       component={FormFieldImageInput}

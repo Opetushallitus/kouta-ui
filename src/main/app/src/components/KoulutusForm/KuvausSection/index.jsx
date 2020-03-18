@@ -8,7 +8,7 @@ import { FormFieldInput, FormFieldTextarea } from '../../formFields';
 import useTranslation from '../../useTranslation';
 import { getTestIdProps } from '../../../utils';
 
-const KuvausSection = ({ language, koulutuskoodi, name }) => {
+const KuvausSection = ({ disabled, language, koulutuskoodi, name }) => {
   const { t } = useTranslation();
 
   return (
@@ -16,6 +16,7 @@ const KuvausSection = ({ language, koulutuskoodi, name }) => {
       <FormConfigField name="tekstiKuvaus">
         <Box mb={2}>
           <TekstiKuvausSection
+            disabled={disabled}
             name={name}
             language={language}
             koulutuskoodi={koulutuskoodi}
@@ -26,6 +27,7 @@ const KuvausSection = ({ language, koulutuskoodi, name }) => {
       <FormConfigField name="nimi">
         <Box mb={2} {...getTestIdProps('kuvauksenNimiInput')}>
           <Field
+            disabled={disabled}
             name={`${name}.nimi.${language}`}
             component={FormFieldInput}
             label={t('yleiset.kuvauksenNimi')}
@@ -36,6 +38,7 @@ const KuvausSection = ({ language, koulutuskoodi, name }) => {
       <FormConfigField name="kuvaus">
         <Box mb={2} {...getTestIdProps('kuvausInput')}>
           <Field
+            disabled={disabled}
             name={`${name}.kuvaus.${language}`}
             component={FormFieldTextarea}
             label={t('yleiset.kuvaus')}

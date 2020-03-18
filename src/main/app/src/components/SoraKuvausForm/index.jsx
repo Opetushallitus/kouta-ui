@@ -6,7 +6,7 @@ import {
 
 export { default } from './SoraKuvausForm';
 
-export const initialValues = (kieliValinnat) => ({
+export const initialValues = kieliValinnat => ({
   tila: DEFAULT_JULKAISUTILA,
   koulutustyyppi: KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
   pohja: {

@@ -24,7 +24,9 @@ const CreateValintaperusteFooter = ({ organisaatioOid, history }) => {
         },
       });
 
-      history.push(`/organisaatio/${organisaatioOid}/valintaperusteet/${id}/muokkaus`);
+      history.push(
+        `/organisaatio/${organisaatioOid}/valintaperusteet/${id}/muokkaus`,
+      );
     },
     [organisaatioOid, history],
   );

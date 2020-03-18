@@ -99,6 +99,18 @@ const isSameKoulutustyyppi = koulutustyyppi => org =>
   oppilaitostyyppiToKoulutustyyppi(org) === koulutustyyppi ||
   first(org.children.filter(isSameKoulutustyyppi(koulutustyyppi)));
 
+export const isSameKoulutustyyppiWithOrganisaatio = (
+  organisaatio,
+  hierarkia,
+) => {
+  const koulutustyyppi = oppilaitostyyppiToKoulutustyyppi(organisaatio);
+
+  return (
+    koulutustyyppi &&
+    first(hierarkia.filter(isSameKoulutustyyppi(koulutustyyppi)))
+  );
+};
+
 export const usePreferredOrganisaatio = creatorOrganisaatioOid => {
   const user = useAuthorizedUser();
   const roles = getUserRoles(user);
@@ -112,14 +124,7 @@ export const usePreferredOrganisaatio = creatorOrganisaatioOid => {
     hierarkia &&
     first(
       organisaatiot
-        .filter(org => {
-          const koulutustyyppi = oppilaitostyyppiToKoulutustyyppi(org);
-
-          return (
-            koulutustyyppi &&
-            hierarkia.filter(isSameKoulutustyyppi(koulutustyyppi))
-          );
-        })
+        .filter(org => isSameKoulutustyyppiWithOrganisaatio(org, hierarkia))
         .map(_ => _.oid),
     );
   const firstChildOrganisation =

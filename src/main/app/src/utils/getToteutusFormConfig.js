@@ -120,6 +120,17 @@ const config = createFormConfigBuilder()
   )
   .registerField(
     'jarjestamistiedot',
+    'opetusaikaKuvaus',
+    KOULUTUSTYYPIT,
+    validateIfJulkaistu((eb, values) =>
+      eb.validateTranslations(
+        'jarjestamistiedot.opetusaikaKuvaus',
+        getKielivalinta(values),
+      ),
+    ),
+  )
+  .registerField(
+    'jarjestamistiedot',
     'opetustapa',
     KOULUTUSTYYPIT,
     validateIfJulkaistu(eb =>

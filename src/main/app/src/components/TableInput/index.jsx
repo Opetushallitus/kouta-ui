@@ -297,7 +297,7 @@ class TableInput extends Component {
 
   handlePasteEvent = event => {
     const paste = (event.clipboardData || window.clipboardData).getData('Text');
-    const rows = paste.split(/\r/);
+    const rows = paste.replace(/[\r\n]+/gm, '\r').split(/\r/);
     const table = rows.map(cell => cell.split(/\t/));
     const { language } = this.props;
 

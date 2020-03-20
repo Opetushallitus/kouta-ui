@@ -12,6 +12,8 @@ Lokaalia ajoa varten Kouta-backendin pitää vastata osoitteessa:
 
 http://localhost:8099
 
+ja ympäristömuuttuja `REACT_APP_KOUTA_BACKEND_URL` täytyy asettaa (esimerkiksi `.env`-tiedostossa) yllä olevaan arvoon.
+
 Jos projektia halutaan ajaa pilviympäristöä vasten, tiedostoon `koutaui-dev.yml` pitää vaihtaa `host-virkailija` 
 osoittamaan oikeaan ympäristöön. Lisäksi CORSin pystyy kiertämään käynnistämällä Chrome (macissa) komennolla:
 
@@ -28,13 +30,11 @@ Kehityksen aikana käyttöliittymää kannattaa ajaa pelkästään nodella, joll
 
 `npm start`
 
-Käyttöliittymä aukeaa osoitteeseen:
+Hetken kuluttua käyttöliittymä on käytettävissä osoitteessa (selainta ei avata automaattisesti):
 
-http://localhost:3000/
+https://localhost:3000
 
-Portteja voi vaihtaa ajamalla:
-
-`PORT=5555 BACKEND_PORT=5556 npm start`
+**Huom! HTTPS-protokolla käytössä.** Webpack-dev-serverin proxy on konfiguroitu oletuksena ohjaamaan kaikki muut polut paitsi `/`, `/kouta` ja `/kouta/*` osoitteeseen `https://virkailija.hahtuvaopintopolku.fi`. Tällöin CORS-rajoituksia ei tarvitse kiertää selaimessa. Virkailija-osoitetta, johon proxytaan voi vaihtaa asettamalla ympäristömuuttujan `DEV_VIRKAILIJA_URL` eri arvoon (esim. `.env.local`-tiedostossa).
 
 ## Buildaus ja käynnistys
 
@@ -52,7 +52,7 @@ tai komennolla:
 
 Sovellus aukeaa osoitteeseen:
 
-http://localhost:8080/
+http://localhost:8080
 
 ## Testit
 

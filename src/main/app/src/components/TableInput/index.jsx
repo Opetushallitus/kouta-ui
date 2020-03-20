@@ -75,8 +75,6 @@ const RowContainer = styled.div``;
 const Container = styled.div`
   max-height: 80vh;
   overflow: scroll;
-  overflow: -moz-scrollbars-vertical;
-  overflow-y: scroll;
   ::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 7px;

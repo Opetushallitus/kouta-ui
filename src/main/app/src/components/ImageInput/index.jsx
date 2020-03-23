@@ -89,11 +89,6 @@ const Container = styled.div`
     css`
       border-color: ${getThemeProp('palette.danger.main')};
     `};
-  ${({ backgroundSize }) =>
-    backgroundSize &&
-    css`
-      background-size: ${backgroundSize || 'cover'};
-    `};
   ${({ url }) =>
     css`
       background-image: ${url ? `url(${url})` : 'none'};
@@ -229,7 +224,7 @@ export const ImageInput = props => {
     minDimensions,
     maxDimensions,
     acceptedFileFormats,
-    backgroundSize,
+    dropzoneStyle,
     uploadedImageUrl,
   } = props;
   const { t } = useTranslation();
@@ -277,7 +272,7 @@ export const ImageInput = props => {
         error={machineError}
         disabled={disabled}
         url={url}
-        backgroundSize={backgroundSize}
+        style={dropzoneStyle}
         {...(state.matches(CS.draggingDisabled) ? { onDragOver: null } : {})}
       >
         <input

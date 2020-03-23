@@ -30,7 +30,7 @@ export const LogoSection = ({ name, label = '' }) => {
       maxDimensions={LOGO_MAX_DIMENSIONS}
       acceptedFileFormats={LOGO_ACCEPTED_FORMATS}
       noDimensionCheckForFormats={LOGO_NO_DIMENSION_CHECK_FOR_FORMATS}
-      backgroundSize="contain"
+      dropzoneStyle={{ backgroundSize: 'contain' }}
     ></Field>
   );
 };

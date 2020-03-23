@@ -4,6 +4,7 @@ import { Field } from 'redux-form';
 import styled, { css } from 'styled-components';
 import { Grid, Cell } from 'styled-css-grid';
 import { FormFieldSelect } from '../../formFields';
+import Spin from '../../Spin';
 import Typography from '../../Typography';
 import KoulutusField from '../KoulutusField';
 import { getKoulutusByKoodi } from '../../../apiUtils';
@@ -61,7 +62,7 @@ const getPerusteetOptions = (perusteet, language) => {
   }));
 };
 
-const getStatus = perusteet => {
+const getPerusteStatus = perusteet => {
   if (perusteet) {
     const { voimassaoloAlkaa, voimassaoloLoppuu } = perusteet;
     const now = Date.now();
@@ -93,7 +94,7 @@ const getOsaamisalat = ({ peruste = {}, language }) => {
     .filter(name => !!name);
 };
 
-const PerusteField = props => {
+const PerusteField = ({ isLoading, ...props }) => {
   const { perusteet, language } = props;
   const { t } = useTranslation();
   const perusteetOptions = useMemo(
@@ -106,7 +107,7 @@ const PerusteField = props => {
       component={FormFieldSelect}
       label={t('koulutuslomake.valitseKaytettavaEperuste')}
       options={perusteetOptions}
-      isDisabled={isNil(perusteet) || isEmpty(perusteet)}
+      isDisabled={isLoading || isNil(perusteet) || isEmpty(perusteet)}
       {...props}
     />
   );
@@ -162,7 +163,13 @@ const InfoGrid = ({ rows, ...props }) => (
   </Grid>
 );
 
-const KoulutusInfo = ({ koulutus, language = 'fi', peruste, className }) => {
+const KoulutusInfo = ({
+  koulutus,
+  language = 'fi',
+  peruste,
+  className,
+  isLoading,
+}) => {
   const { t } = useTranslation();
 
   const {
@@ -185,83 +192,91 @@ const KoulutusInfo = ({ koulutus, language = 'fi', peruste, className }) => {
   );
   const apiUrls = useContext(UrlContext);
 
-  return koulutus ? (
+  return koulutus || isLoading ? (
     <div className={className}>
-      <Typography variant="h6" mb={2}>
-        {t('koulutuslomake.koulutuksenTiedot')}
-      </Typography>
-      <InfoGrid
-        style={{ marginBottom: '40px' }}
-        rows={[
-          {
-            title: t('yleiset.koulutus'),
-            description: `${nimi} (${koulutus.koodiArvo})`,
-          },
-          {
-            title: t('yleiset.koulutusala'),
-            description: koulutusala,
-          },
-        ]}
-      />
-      {peruste && (
+      {isLoading ? (
+        <Spin center />
+      ) : (
         <>
           <Typography variant="h6" mb={2}>
-            {t('yleiset.ePerusteenTiedot')}
+            {t('koulutuslomake.koulutuksenTiedot')}
           </Typography>
-          <Grid columns="minmax(300px, 40%) auto">
-            <Cell key="eperusteen-tiedot-1">
-              <InfoGrid
-                rows={[
-                  {
-                    title: t('yleiset.diaarinumero'),
-                    description: (
-                      <Anchor
-                        href={apiUrls.url(
-                          'eperusteet.kooste',
-                          language,
-                          get(peruste, 'id'),
-                        )}
-                        target="_blank"
-                      >
-                        {get(peruste, 'diaarinumero')}
-                      </Anchor>
-                    ),
-                  },
-                  {
-                    title: t('yleiset.voimaantulo'),
-                    description: getReadableDateTime(
-                      get(peruste, 'voimassaoloAlkaa'),
-                    ),
-                  },
-                  {
-                    title: t('yleiset.tila'),
-                    description: (
-                      <StyledTilaBadge status={getStatus(peruste)} />
-                    ),
-                  },
-                  {
-                    title: t('yleiset.laajuus'),
-                    description: opintojenlaajuus,
-                    suffix: t('yleiset.osaamispistetta'),
-                  },
-                  {
-                    title: t('yleiset.tutkintonimike'),
-                    description: nimikkeet.map(n => <div key={n}>{n}</div>),
-                  },
-                ]}
-              />
-            </Cell>
-            <Cell key="eperusteen-tiedot-2">
-              <InfoGrid
-                rows={[
-                  {
-                    title: t('yleiset.osaamisalat'),
-                    description: osaamisalat.map(o => <div key={o}>{o}</div>),
-                  },
-                ]}
-              />
-            </Cell>
-          </Grid>
+          <InfoGrid
+            style={{ marginBottom: '40px' }}
+            rows={[
+              {
+                title: t('yleiset.koulutus'),
+                description: `${nimi} (${koulutus.koodiArvo})`,
+              },
+              {
+                title: t('yleiset.koulutusala'),
+                description: koulutusala,
+              },
+            ]}
+          />
+          {peruste && (
+            <>
+              <Typography variant="h6" mb={2}>
+                {t('yleiset.ePerusteenTiedot')}
+              </Typography>
+              <Grid columns="minmax(300px, 40%) auto">
+                <Cell key="eperusteen-tiedot-1">
+                  <InfoGrid
+                    rows={[
+                      {
+                        title: t('yleiset.diaarinumero'),
+                        description: (
+                          <Anchor
+                            href={apiUrls.url(
+                              'eperusteet.kooste',
+                              language,
+                              get(peruste, 'id'),
+                            )}
+                            target="_blank"
+                          >
+                            {get(peruste, 'diaarinumero')}
+                          </Anchor>
+                        ),
+                      },
+                      {
+                        title: t('yleiset.voimaantulo'),
+                        description: getReadableDateTime(
+                          get(peruste, 'voimassaoloAlkaa'),
+                        ),
+                      },
+                      {
+                        title: t('yleiset.tila'),
+                        description: (
+                          <StyledTilaBadge status={getPerusteStatus(peruste)} />
+                        ),
+                      },
+                      {
+                        title: t('yleiset.laajuus'),
+                        description: opintojenlaajuus,
+                        suffix: t('yleiset.osaamispistetta'),
+                      },
+                      {
+                        title: t('yleiset.tutkintonimike'),
+                        description: nimikkeet.map(n => <div key={n}>{n}</div>),
+                      },
+                    ]}
+                  />
+                </Cell>
+                <Cell key="eperusteen-tiedot-2">
+                  <InfoGrid
+                    rows={[
+                      {
+                        title: t('yleiset.osaamisalat'),
+                        description: osaamisalat.map(o => (
+                          <div key={o}>{o}</div>
+                        )),
+                      },
+                    ]}
+                  />
+                </Cell>
+              </Grid>
+            </>
+          )}
         </>
       )}
     </div>
@@ -285,7 +300,7 @@ const KoulutuksenTiedotSection = ({
   const { t } = useTranslation();
   const koulutusFieldValue = get(koulutuskoodi, 'value');
 
-  const { data: koulutus } = useApiAsync({
+  const { data: koulutus, isLoading } = useApiAsync({
     promiseFn: getKoulutusByKoodi,
     koodiUri: koulutusFieldValue,
     watch: koulutusFieldValue,
@@ -324,6 +339,7 @@ const KoulutuksenTiedotSection = ({
         </Box>
         <Box width={0.5} ml={2} {...getTestIdProps('ePerusteSelect')}>
           <PerusteField
+            isLoading={isLoading}
             name={`${name}.peruste`}
             perusteet={perusteet}
             language={language}
@@ -332,14 +348,13 @@ const KoulutuksenTiedotSection = ({
       </Box>
       <Box flexDirection="row" width={1} display="flex" mr={2}>
         <Box width={1}>
-          {koulutuskoodi ? (
-            <StyledKoulutusInfo
-              disabled={disabled}
-              peruste={selectedPeruste}
-              koulutus={koulutus}
-              language={language}
-            />
-          ) : null}
+          <StyledKoulutusInfo
+            disabled={disabled}
+            peruste={selectedPeruste}
+            koulutus={koulutus}
+            language={language}
+            isLoading={isLoading}
+          />
         </Box>
       </Box>
     </Box>

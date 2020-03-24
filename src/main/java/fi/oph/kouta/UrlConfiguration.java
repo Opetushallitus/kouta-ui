@@ -12,6 +12,7 @@ public class UrlConfiguration extends OphProperties {
     public UrlConfiguration(Environment environment) {
         addFiles("/kouta-ui-oph.properties");
         this.addOverride("host-virkailija", environment.getRequiredProperty("host.host-virkailija"));
+        this.addOverride("host-oppija", environment.getRequiredProperty("host.host-oppija"));
 
         this.frontProperties.setProperty("kouta-backend.base-url", this.require("kouta-backend.base-url"));
 

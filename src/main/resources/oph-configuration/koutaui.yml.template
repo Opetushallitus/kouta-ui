@@ -3,3 +3,4 @@ server:
     context-path: /kouta
 host:
   host-virkailija: {{host_virkailija}}
+  host-oppija: https://{{host_beta}}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import queryString from 'query-string';
 
 import FormPage, { OrganisaatioInfo, TopInfoContainer } from '../FormPage';
@@ -11,6 +11,33 @@ import getKoulutusByOid from '../../utils/kouta/getKoulutusByOid';
 import Spin from '../Spin';
 import Title from '../Title';
 import useTranslation from '../useTranslation';
+import Button from '@opetushallitus/virkailija-ui-components/Button';
+import UrlContext from '#/src/components/UrlContext';
+import styled from 'styled-components';
+
+const Separator = styled.div`
+  padding-left: 15px;
+`;
+
+const Link = props => <a {...props}>{props.children}</a>;
+
+const Draft = ({ oid }) => {
+  const apiUrls = useContext(UrlContext);
+
+  return (
+    <Separator>
+      <Button
+        as={Link}
+        href={apiUrls.url('konfo-ui.koulutus', oid) + '?draft=true'}
+        color="primary"
+        variant="outlined"
+        target="_blank"
+      >
+        Esikatsele
+      </Button>
+    </Separator>
+  );
+};
 
 const EditKoulutusPage = props => {
   const {
@@ -38,6 +65,7 @@ const EditKoulutusPage = props => {
       <FormPage
         header={<EditKoulutusHeader koulutus={koulutus} />}
         steps={<EditKoulutusSteps />}
+        draft={<Draft oid={oid} />}
         footer={
           koulutus ? (
             <EditKoulutusFooter

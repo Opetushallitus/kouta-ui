@@ -46,6 +46,11 @@ const FooterWrapper = styled.div`
     `}
 `;
 
+const Buttons = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const FooterActions = styled.div``;
 
 const FormPage = ({
@@ -53,6 +58,7 @@ const FormPage = ({
   steps = null,
   children = null,
   footer = null,
+  draft = null,
   hasFooterHomeLink = true,
 }) => {
   const { t } = useTranslation();
@@ -71,11 +77,14 @@ const FormPage = ({
       <FooterContainer>
         <Container>
           <FooterWrapper hasFooterHomeLink={hasFooterHomeLink}>
-            {hasFooterHomeLink ? (
-              <Button as={Link} to="/" color="primary" variant="outlined">
-                {t('yleiset.etusivulle')}
-              </Button>
-            ) : null}
+            <Buttons>
+              {hasFooterHomeLink ? (
+                <Button as={Link} to="/" color="primary" variant="outlined">
+                  {t('yleiset.etusivulle')}
+                </Button>
+              ) : null}
+              {draft}
+            </Buttons>
             <FooterActions>{footer}</FooterActions>
           </FooterWrapper>
         </Container>

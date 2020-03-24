@@ -16,6 +16,7 @@ public class UrlConfiguration extends OphProperties {
 
         this.frontProperties.setProperty("kouta-backend.base-url", this.require("kouta-backend.base-url"));
 
+        this.frontProperties.setProperty("konfo-ui.koulutus", this.require("konfo-ui.koulutus"));
         this.frontProperties.setProperty("kouta-backend.koulutus", this.require("kouta-backend.koulutus"));
         this.frontProperties.setProperty("kouta-backend.koulutus-by-oid", this.require("kouta-backend.koulutus-by-oid"));
         this.frontProperties.setProperty("kouta-backend.koulutus-list", this.require("kouta-backend.koulutus-list"));

@@ -23,6 +23,7 @@ const Link = props => <a {...props}>{props.children}</a>;
 
 const Draft = ({ oid }) => {
   const apiUrls = useContext(UrlContext);
+  const { t } = useTranslation();
 
   return (
     <Separator>
@@ -33,7 +34,7 @@ const Draft = ({ oid }) => {
         variant="outlined"
         target="_blank"
       >
-        Esikatsele
+        {t('yleiset.esikatselu')}
       </Button>
     </Separator>
   );

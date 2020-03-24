@@ -89,6 +89,10 @@ const Container = styled.div`
     css`
       border-color: ${getThemeProp('palette.danger.main')};
     `};
+  ${({ url }) =>
+    css`
+      background-image: ${url ? `url(${url})` : 'none'};
+    `};
 `;
 
 const FlexWrapper = ({ children }) => (
@@ -220,6 +224,7 @@ export const ImageInput = props => {
     minDimensions,
     maxDimensions,
     acceptedFileFormats,
+    dropzoneStyle,
     uploadedImageUrl,
   } = props;
   const { t } = useTranslation();
@@ -266,7 +271,8 @@ export const ImageInput = props => {
         nodrag={state.matches(CS.draggingDisabled)}
         error={machineError}
         disabled={disabled}
-        style={{ backgroundImage: url ? `url(${url})` : 'none' }}
+        url={url}
+        style={dropzoneStyle}
         {...(state.matches(CS.draggingDisabled) ? { onDragOver: null } : {})}
       >
         <input

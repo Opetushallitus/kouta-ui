@@ -6,6 +6,7 @@ Object {
     "fi",
     "sv",
   ],
+  "logo": undefined,
   "metadata": Object {
     "akatemioita": 1,
     "esittely": Object {

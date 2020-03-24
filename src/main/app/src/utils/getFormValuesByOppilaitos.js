@@ -5,6 +5,7 @@ const getFormValuesByOppilaitos = oppilaitos => {
   const {
     kielivalinta,
     tila,
+    logo,
     teemakuva,
     metadata: {
       tietoaOpiskelusta,
@@ -54,6 +55,7 @@ const getFormValuesByOppilaitos = oppilaitos => {
       yksikoita: isNumber(yksikoita) ? yksikoita : '',
       toimipisteita: isNumber(toimipisteita) ? toimipisteita : '',
       akatemioita: isNumber(akatemioita) ? akatemioita : '',
+      logo,
     },
     teemakuva,
   };

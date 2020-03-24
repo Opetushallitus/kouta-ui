@@ -15,6 +15,7 @@ import GridRow from '../GridRow';
 import GridColumn from '../GridColumn';
 import useKoodiNimet from '../useKoodiNimet';
 import { getTestIdProps } from '../../utils';
+import LogoSection from '../LogoSection';
 
 const InfoLabel = props => (
   <Box flexGrow={0} pr={2} flexBasis="30%" {...props} />
@@ -84,6 +85,12 @@ const TiedotSection = ({ name, t }) => {
             name={`${name}.akatemioita`}
             type="number"
             label={t('oppilaitoslomake.akatemioita')}
+          />
+        </GridColumn>
+        <GridColumn md={12} {...getTestIdProps('logo')}>
+          <LogoSection
+            name={`${name}.logo`}
+            label={t('oppilaitoslomake.logo')}
           />
         </GridColumn>
       </GridRow>

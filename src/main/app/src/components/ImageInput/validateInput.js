@@ -37,11 +37,11 @@ const maybeReadImageDimensions = async ({
   file,
   minDimensions,
   maxDimensions,
-  noDimensionCheckForExtensions,
+  noDimensionCheckForFormats,
   t,
 }) => {
   if (
-    !noDimensionCheckForExtensions.includes(extension) &&
+    !noDimensionCheckForFormats.includes(`.${extension}`) &&
     (minDimensions || maxDimensions)
   ) {
     try {
@@ -89,7 +89,7 @@ export default async function validateInput(
     maxSize,
     minDimensions,
     maxDimensions,
-    noDimensionCheckForExtensions = [],
+    noDimensionCheckForFormats = [],
     t,
   },
 ) {
@@ -107,7 +107,7 @@ export default async function validateInput(
     file,
     minDimensions,
     maxDimensions,
-    noDimensionCheckForExtensions,
+    noDimensionCheckForFormats,
     t,
   });
 

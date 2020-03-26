@@ -4,6 +4,7 @@ const koutaBackendDevUrl = REACT_APP_KOUTA_BACKEND_URL || `${REACT_APP_DEV_SERVE
 const virkailijaDevUrl = REACT_APP_DEV_SERVER_URL;
 
 export const development = ({ isCypress }) => ({
+  'konfo-ui.koulutus': 'https://beta.hahtuvaopintopolku.fi/konfo/koulutus/$1',
   'kouta-backend.base-url': koutaBackendDevUrl,
   'kouta-backend.koulutus': `${koutaBackendDevUrl}/koulutus`,
   'kouta-backend.koulutus-by-oid': `${koutaBackendDevUrl}/koulutus/$1`,

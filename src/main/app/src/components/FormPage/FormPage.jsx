@@ -46,13 +46,42 @@ const FooterWrapper = styled.div`
     `}
 `;
 
+const Buttons = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const FooterActions = styled.div``;
+
+const Separator = styled.div`
+  padding-left: 15px;
+`;
+
+const Draft = ({ url }) => {
+  const Link = props => <a {...props}>{props.children}</a>;
+  const { t } = useTranslation();
+
+  return (
+    <Separator>
+      <Button
+        as={Link}
+        href={url}
+        color="primary"
+        variant="outlined"
+        target="_blank"
+      >
+        {t('yleiset.esikatselu')}
+      </Button>
+    </Separator>
+  );
+};
 
 const FormPage = ({
   header = null,
   steps = null,
   children = null,
   footer = null,
+  draftUrl = null,
   hasFooterHomeLink = true,
 }) => {
   const { t } = useTranslation();
@@ -71,11 +100,14 @@ const FormPage = ({
       <FooterContainer>
         <Container>
           <FooterWrapper hasFooterHomeLink={hasFooterHomeLink}>
-            {hasFooterHomeLink ? (
-              <Button as={Link} to="/" color="primary" variant="outlined">
-                {t('yleiset.etusivulle')}
-              </Button>
-            ) : null}
+            <Buttons>
+              {hasFooterHomeLink ? (
+                <Button as={Link} to="/" color="primary" variant="outlined">
+                  {t('yleiset.etusivulle')}
+                </Button>
+              ) : null}
+              {draftUrl ? <Draft url={draftUrl} /> : null}
+            </Buttons>
             <FooterActions>{footer}</FooterActions>
           </FooterWrapper>
         </Container>

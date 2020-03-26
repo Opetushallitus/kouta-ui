@@ -12,9 +12,11 @@ public class UrlConfiguration extends OphProperties {
     public UrlConfiguration(Environment environment) {
         addFiles("/kouta-ui-oph.properties");
         this.addOverride("host-virkailija", environment.getRequiredProperty("host.host-virkailija"));
+        this.addOverride("host-oppija", environment.getRequiredProperty("host.host-oppija"));
 
         this.frontProperties.setProperty("kouta-backend.base-url", this.require("kouta-backend.base-url"));
 
+        this.frontProperties.setProperty("konfo-ui.koulutus", this.require("konfo-ui.koulutus"));
         this.frontProperties.setProperty("kouta-backend.koulutus", this.require("kouta-backend.koulutus"));
         this.frontProperties.setProperty("kouta-backend.koulutus-by-oid", this.require("kouta-backend.koulutus-by-oid"));
         this.frontProperties.setProperty("kouta-backend.koulutus-list", this.require("kouta-backend.koulutus-list"));

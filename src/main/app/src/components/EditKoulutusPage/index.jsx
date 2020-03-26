@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import queryString from 'query-string';
 
 import FormPage, { OrganisaatioInfo, TopInfoContainer } from '../FormPage';
@@ -11,6 +11,7 @@ import getKoulutusByOid from '../../utils/kouta/getKoulutusByOid';
 import Spin from '../Spin';
 import Title from '../Title';
 import useTranslation from '../useTranslation';
+import UrlContext from '#/src/components/UrlContext';
 
 const EditKoulutusPage = props => {
   const {
@@ -31,6 +32,7 @@ const EditKoulutusPage = props => {
   });
 
   const { t } = useTranslation();
+  const apiUrls = useContext(UrlContext);
 
   return (
     <>
@@ -38,6 +40,7 @@ const EditKoulutusPage = props => {
       <FormPage
         header={<EditKoulutusHeader koulutus={koulutus} />}
         steps={<EditKoulutusSteps />}
+        draftUrl={apiUrls.url('konfo-ui.koulutus', oid) + '?draft=true'}
         footer={
           koulutus ? (
             <EditKoulutusFooter

@@ -129,12 +129,8 @@ const getHakukohdeByFormValues = values => {
 
   const valintaperuste = get(values, 'valintaperusteenKuvaus.value') || null;
 
-  const minEnsikertalaisenAloituspaikat = getAsNumberOrNull(
-    get(values, 'aloituspaikat.minEnsikertalaismaara'),
-  );
-
-  const maxEnsikertalaisenAloituspaikat = getAsNumberOrNull(
-    get(values, 'aloituspaikat.maxEnsikertalaismaara'),
+  const ensikertalaisenAloituspaikat = getAsNumberOrNull(
+    get(values, 'aloituspaikat.ensikertalaismaara'),
   );
 
   const eriAlkamiskausi = Boolean(get(values, 'alkamiskausi.eriAlkamiskausi'));
@@ -169,8 +165,7 @@ const getHakukohdeByFormValues = values => {
     pohjakoulutusvaatimusKoodiUrit,
     pohjakoulutusvaatimusTarkenne,
     valintaperusteId: valintaperuste,
-    minEnsikertalaisenAloituspaikat,
-    maxEnsikertalaisenAloituspaikat,
+    ensikertalaisenAloituspaikat,
     kaytetaanHaunHakulomaketta: !eriHakulomake,
     hakulomaketyyppi,
     hakulomakeAtaruId,

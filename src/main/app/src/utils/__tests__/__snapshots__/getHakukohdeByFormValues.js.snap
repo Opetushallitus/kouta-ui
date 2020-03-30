@@ -59,9 +59,8 @@ Object {
   "liitteidenToimitusosoite": null,
   "liitteidenToimitustapa": null,
   "maxAloituspaikat": 45,
-  "maxEnsikertalaisenAloituspaikat": 49,
   "minAloituspaikat": 25,
-  "minEnsikertalaisenAloituspaikat": 29,
+  "ensikertalaisenAloituspaikat": 29,
   "muokkaaja": "1.1.1.1",
   "nimi": Object {
     "fi": "Fi nimi",

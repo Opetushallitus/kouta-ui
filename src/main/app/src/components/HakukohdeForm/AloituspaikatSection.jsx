@@ -50,18 +50,19 @@ const AloituspaikatSection = ({ koulutustyyppi, name }) => {
     </>
   );
 
-  const minEnsikertalaismaaraName = `${name}.minEnsikertalaismaara`;
+  const ensikertalaismaaraName = `${name}.ensikertalaismaara`;
 
   const ensikertalaisetField = (
     <>
-      <FormLabel htmlFor={minEnsikertalaismaaraName}>
+      <FormLabel htmlFor={ensikertalaismaaraName}>
         {t('hakukohdelomake.ensikertalaistenAloituspaikkojenLukumaara')}
       </FormLabel>
 
-      <MinMaxFields
-        minId={minEnsikertalaismaaraName}
-        minName={minEnsikertalaismaaraName}
-        maxName={`${name}.maxEnsikertalaismaara`}
+      <Field
+        id={ensikertalaismaaraName}
+        name={ensikertalaismaaraName}
+        component={FormFieldInput}
+        type="number"
         {...getTestIdProps('ensikertalaismaara')}
       />
     </>

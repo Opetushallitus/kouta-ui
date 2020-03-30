@@ -25,8 +25,7 @@ const getFormValuesByHakukohde = hakukohde => {
     valintakokeet = [],
     pohjakoulutusvaatimusKoodiUrit = [],
     valintaperusteId,
-    minEnsikertalaisenAloituspaikat = '',
-    maxEnsikertalaisenAloituspaikat = '',
+    ensikertalaisenAloituspaikat = '',
     kaytetaanHaunHakulomaketta,
     hakulomaketyyppi,
     hakulomakeAtaruId,
@@ -54,11 +53,8 @@ const getFormValuesByHakukohde = hakukohde => {
       maxAloituspaikkamaara: isNumeric(maxAloituspaikat)
         ? maxAloituspaikat.toString()
         : '',
-      minEnsikertalaismaara: isNumeric(minEnsikertalaisenAloituspaikat)
-        ? minEnsikertalaisenAloituspaikat.toString()
-        : '',
-      maxEnsikertalaismaara: isNumeric(maxEnsikertalaisenAloituspaikat)
-        ? maxEnsikertalaisenAloituspaikat.toString()
+      ensikertalaismaara: isNumeric(ensikertalaisenAloituspaikat)
+        ? ensikertalaisenAloituspaikat.toString()
         : '',
     },
     hakuajat: {

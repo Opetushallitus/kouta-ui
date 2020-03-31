@@ -15,8 +15,7 @@ test('getHakukohdeByFormValues returns correct hakukohde given form values', () 
     },
     kieliversiot: ['fi', 'sv'],
     aloituspaikat: {
-      minAloituspaikkamaara: '25',
-      maxAloituspaikkamaara: '45',
+      aloituspaikkamaara: '45',
       ensikertalaismaara: '29',
     },
     hakuajat: {

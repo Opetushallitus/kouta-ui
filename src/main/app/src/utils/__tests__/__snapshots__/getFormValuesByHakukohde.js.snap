@@ -10,8 +10,7 @@ Object {
     },
   },
   "aloituspaikat": Object {
-    "maxAloituspaikkamaara": "35",
-    "minAloituspaikkamaara": "25",
+    "aloituspaikkamaara": "35",
     "ensikertalaismaara": "39",
   },
   "hakuajat": Object {

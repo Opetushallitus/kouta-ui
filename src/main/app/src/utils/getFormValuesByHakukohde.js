@@ -10,8 +10,7 @@ const getFormValuesByHakukohde = hakukohde => {
     alkamiskausiKoodiUri = '',
     kaytetaanHaunAikataulua,
     kielivalinta = [],
-    minAloituspaikat = '',
-    maxAloituspaikat = '',
+    aloituspaikat = '',
     hakuajat = [],
     liitteetOnkoSamaToimitusaika,
     liitteetOnkoSamaToimitusosoite,
@@ -47,11 +46,8 @@ const getFormValuesByHakukohde = hakukohde => {
     },
     kieliversiot: kielivalinta,
     aloituspaikat: {
-      minAloituspaikkamaara: isNumeric(minAloituspaikat)
-        ? minAloituspaikat.toString()
-        : '',
-      maxAloituspaikkamaara: isNumeric(maxAloituspaikat)
-        ? maxAloituspaikat.toString()
+      aloituspaikkamaara: isNumeric(aloituspaikat)
+        ? aloituspaikat.toString()
         : '',
       ensikertalaismaara: isNumeric(ensikertalaisenAloituspaikat)
         ? ensikertalaisenAloituspaikat.toString()

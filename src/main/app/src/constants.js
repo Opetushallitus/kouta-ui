@@ -147,6 +147,12 @@ export const POHJAVALINTA = {
   AIEMPI: 'aiempi',
 };
 
+export const ORGANISAATIOTYYPPI = {
+  KOULUTUSTOIMIJA: 'organisaatiotyyppi_01',
+  OPPILAITOS: 'organisaatiotyyppi_02',
+  TOIMIPISTE: 'organisaatiotyyppi_03',
+};
+
 export const OPETUSHALLITUS_ORGANISAATIO_OID = '1.2.246.562.10.00000000001';
 
 export const KOULUTUS_ROLE = 'APP_KOUTA_KOULUTUS';

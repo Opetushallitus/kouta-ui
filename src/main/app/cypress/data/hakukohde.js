@@ -9,8 +9,7 @@ export default () => ({
   hakulomake: {},
   minAloituspaikat: 100,
   maxAloituspaikat: 150,
-  minEnsikertalaisenAloituspaikat: 39,
-  maxEnsikertalaisenAloituspaikat: 49,
+  ensikertalaisenAloituspaikat: 49,
   kaytetaanHaunAlkamiskautta: false,
   pohjakoulutusvaatimusKoodiUrit: ['pohjakoulutusvaatimustoinenaste_0#1'],
   pohjakoulutusvaatimusTarkenne: {

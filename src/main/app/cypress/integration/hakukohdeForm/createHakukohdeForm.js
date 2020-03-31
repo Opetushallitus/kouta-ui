@@ -127,14 +127,7 @@ const fillAloituspaikatSection = ({ isKorkeakoulu = false } = {}) => {
     });
 
     if (isKorkeakoulu) {
-      cy.getByTestId('ensikertalaismaara').within(() => {
-        cy.getByTestId('min')
-          .find('input')
-          .type('1', { force: true });
-        cy.getByTestId('max')
-          .find('input')
-          .type('5', { force: true });
-      });
+      cy.getByTestId('ensikertalaismaara').type('5', { force: true });
     }
 
     jatka();

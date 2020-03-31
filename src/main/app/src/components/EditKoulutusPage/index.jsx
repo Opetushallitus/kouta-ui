@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import queryString from 'query-string';
+import ReduxForm from '../ReduxForm';
 
 import FormPage, { OrganisaatioInfo, TopInfoContainer } from '../FormPage';
 import EditKoulutusHeader from './EditKoulutusHeader';
@@ -35,35 +36,39 @@ const EditKoulutusPage = props => {
   const apiUrls = useContext(UrlContext);
 
   return (
-    <>
-      <Title>{t('sivuTitlet.koulutuksenMuokkaus')}</Title>
-      <FormPage
-        header={<EditKoulutusHeader koulutus={koulutus} />}
-        steps={<EditKoulutusSteps />}
-        draftUrl={apiUrls.url('konfo-ui.koulutus', oid) + '?draft=true'}
-        footer={
-          koulutus ? (
-            <EditKoulutusFooter
-              koulutus={koulutus}
-              organisaatioOid={organisaatioOid}
-            />
-          ) : null
-        }
-      >
-        <TopInfoContainer>
-          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-        </TopInfoContainer>
-        {koulutus ? (
-          <EditKoulutusForm
-            koulutus={koulutus}
-            organisaatioOid={organisaatioOid}
-            scrollTarget={scrollTarget}
-          />
-        ) : (
-          <Spin center />
-        )}
-      </FormPage>
-    </>
+    <ReduxForm form="editKoulutusForm">
+      {() => (
+        <>
+          <Title>{t('sivuTitlet.koulutuksenMuokkaus')}</Title>
+          <FormPage
+            header={<EditKoulutusHeader koulutus={koulutus} />}
+            steps={<EditKoulutusSteps />}
+            draftUrl={apiUrls.url('konfo-ui.koulutus', oid) + '?draft=true'}
+            footer={
+              koulutus ? (
+                <EditKoulutusFooter
+                  koulutus={koulutus}
+                  organisaatioOid={organisaatioOid}
+                />
+              ) : null
+            }
+          >
+            <TopInfoContainer>
+              <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+            </TopInfoContainer>
+            {koulutus ? (
+              <EditKoulutusForm
+                koulutus={koulutus}
+                organisaatioOid={organisaatioOid}
+                scrollTarget={scrollTarget}
+              />
+            ) : (
+              <Spin center />
+            )}
+          </FormPage>
+        </>
+      )}
+    </ReduxForm>
   );
 };
 

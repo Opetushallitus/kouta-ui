@@ -117,9 +117,7 @@ const fillAlkamiskausiSection = () => {
 
 const fillAloituspaikatSection = ({ isKorkeakoulu = false } = {}) => {
   cy.getByTestId('aloituspaikatSection').within(() => {
-    cy.getByTestId('aloituspaikkamaara')
-      .find('input')
-      .type('10', { force: true });
+    cy.getByTestId('aloituspaikkamaara').type('10', { force: true });
 
     if (isKorkeakoulu) {
       cy.getByTestId('ensikertalaismaara').type('5', { force: true });

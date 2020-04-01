@@ -6,8 +6,7 @@ module.exports = {
           "fi": "toteutuksen nimi"
         },
         "tarjoajat": [
-          "4.1.1.1.1.1",
-          "5.1.1.1.1.1"
+          "1.2.2.1.1.1"
         ],
         "kielivalinta": [
           "fi"
@@ -51,8 +50,8 @@ module.exports = {
             "koulutuksenAlkamispaivamaara": null,
             "koulutuksenPaattymispaivamaara": null,
             "koulutuksenTarkkaAlkamisaika": false,
-            "koulutuksenAlkamisvuosi": 2020,
             "koulutuksenAlkamiskausi": "kausi_0#1",
+            "koulutuksenAlkamisvuosi": 2020,
             "onkoStipendia": false,
             "stipendinKuvaus": {},
             "stipendinMaara": null,
@@ -132,8 +131,7 @@ module.exports = {
           "fi": "toteutuksen nimi"
         },
         "tarjoajat": [
-          "4.1.1.1.1.1",
-          "5.1.1.1.1.1"
+          "1.2.2.1.1.1"
         ],
         "kielivalinta": [
           "fi"
@@ -177,8 +175,8 @@ module.exports = {
             "koulutuksenAlkamispaivamaara": null,
             "koulutuksenPaattymispaivamaara": null,
             "koulutuksenTarkkaAlkamisaika": false,
-            "koulutuksenAlkamisvuosi": 2020,
             "koulutuksenAlkamiskausi": "kausi_0#1",
+            "koulutuksenAlkamisvuosi": 2020,
             "onkoStipendia": true,
             "stipendinKuvaus": {
               "fi": "stipendi kuvaus"
@@ -280,8 +278,7 @@ module.exports = {
           "fi": "lukiolinjat_0"
         },
         "tarjoajat": [
-          "4.1.1.1.1.1",
-          "5.1.1.1.1.1"
+          "1.2.2.1.1.1"
         ],
         "kielivalinta": [
           "fi"
@@ -325,8 +322,8 @@ module.exports = {
             "koulutuksenAlkamispaivamaara": null,
             "koulutuksenPaattymispaivamaara": null,
             "koulutuksenTarkkaAlkamisaika": false,
-            "koulutuksenAlkamisvuosi": 2020,
             "koulutuksenAlkamiskausi": "kausi_0#1",
+            "koulutuksenAlkamisvuosi": 2020,
             "onkoStipendia": true,
             "stipendinKuvaus": {
               "fi": "stipendi kuvaus"
@@ -421,7 +418,6 @@ module.exports = {
         "nimi": {
           "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
         },
-        "teemakuva": null,
         "metadata": {
           "opetus": {
             "lisatiedot": [
@@ -538,7 +534,8 @@ module.exports = {
         "kielivalinta": [
           "fi"
         ],
-        "modified": "2019-03-26T10:19"
+        "modified": "2019-03-26T10:19",
+        "teemakuva": null
       }
     },
     "should be able to edit korkeakoulu toteutus": {
@@ -553,7 +550,6 @@ module.exports = {
         "nimi": {
           "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
         },
-        "teemakuva": null,
         "metadata": {
           "opetus": {
             "lisatiedot": [
@@ -690,7 +686,8 @@ module.exports = {
         "kielivalinta": [
           "fi"
         ],
-        "modified": "2019-03-26T10:19"
+        "modified": "2019-03-26T10:19",
+        "teemakuva": null
       }
     },
     "should be able to edit lukio toteutus": {
@@ -705,7 +702,6 @@ module.exports = {
         "nimi": {
           "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
         },
-        "teemakuva": null,
         "metadata": {
           "opetus": {
             "lisatiedot": [
@@ -828,7 +824,8 @@ module.exports = {
         "kielivalinta": [
           "fi"
         ],
-        "modified": "2019-03-26T10:19"
+        "modified": "2019-03-26T10:19",
+        "teemakuva": null
       }
     }
   }

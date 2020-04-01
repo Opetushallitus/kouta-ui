@@ -140,7 +140,7 @@ const tallenna = () => {
 const fillJarjestajatSection = () => {
   cy.getByTestId('jarjestamispaikatSection').within(() => {
     cy.getByTestId('jarjestamispaikatSelection').within(() => {
-      fillTreeSelect(['4.1.1.1.1.1'], cy);
+      fillTreeSelect(['1.2.2.1.1.1'], cy);
     });
 
     jatka();
@@ -257,7 +257,7 @@ describe('createToteutusForm', () => {
     oid: koulutusOid,
     organisaatioOid: organisaatioOid,
     koulutusKoodiUri: 'koulutus_0#1',
-    tarjoajat: ['4.1.1.1.1.1', '2.1.1.1.1.1'],
+    tarjoajat: ['1.2.2.1.1.1'],
   };
 
   beforeEach(() => {

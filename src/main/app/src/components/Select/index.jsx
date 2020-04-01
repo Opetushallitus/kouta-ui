@@ -27,6 +27,7 @@ const makeDefaultPlaceholder = t => t('yleiset.valitseVaihtoehdoista');
 const defaultLoadingMessage = () => 'Ladataan...';
 
 const getDefaultProps = memoizeOne(t => ({
+  isClearable: true,
   formatCreateLabel: makeDefaultFormatCreateLabel(t),
   noOptionsMessage: makeDefaultNoOptionsMessage(t),
   placeholder: makeDefaultPlaceholder(t),

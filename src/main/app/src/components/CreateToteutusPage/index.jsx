@@ -65,6 +65,7 @@ const CreateToteutusPage = props => {
         </TopInfoContainer>
         {koulutus ? (
           <CreateToteutusForm
+            koulutus={koulutus}
             koulutusKoodiUri={koulutus.koulutusKoodiUri}
             koulutusNimi={koulutus.nimi}
             koulutusKielet={koulutus.kielivalinta}

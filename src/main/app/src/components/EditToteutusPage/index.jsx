@@ -77,6 +77,7 @@ const EditToteutusPage = props => {
         {toteutus && koulutus ? (
           <EditToteutusForm
             toteutus={toteutus}
+            koulutus={koulutus}
             organisaatioOid={organisaatioOid}
             koulutusKoodiUri={koulutus ? koulutus.koulutusKoodiUri : null}
             koulutustyyppi={koulutustyyppi}

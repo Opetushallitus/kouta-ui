@@ -27,6 +27,7 @@ import TeemakuvaSection from '../TeemakuvaSection';
 import PohjaFormCollapse from '../PohjaFormCollapse';
 
 const ToteutusForm = ({
+  koulutus,
   koulutusKoodiUri,
   organisaatioOid,
   steps = false,
@@ -184,6 +185,7 @@ const ToteutusForm = ({
           <JarjestamispaikatSection
             name="tarjoajat"
             organisaatioOid={organisaatioOid}
+            koulutus={koulutus}
           />
         </FormCollapse>
 

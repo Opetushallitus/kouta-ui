@@ -117,24 +117,10 @@ const fillAlkamiskausiSection = () => {
 
 const fillAloituspaikatSection = ({ isKorkeakoulu = false } = {}) => {
   cy.getByTestId('aloituspaikatSection').within(() => {
-    cy.getByTestId('aloituspaikkamaara').within(() => {
-      cy.getByTestId('min')
-        .find('input')
-        .type('5', { force: true });
-      cy.getByTestId('max')
-        .find('input')
-        .type('10', { force: true });
-    });
+    cy.getByTestId('aloituspaikkamaara').type('10', { force: true });
 
     if (isKorkeakoulu) {
-      cy.getByTestId('ensikertalaismaara').within(() => {
-        cy.getByTestId('min')
-          .find('input')
-          .type('1', { force: true });
-        cy.getByTestId('max')
-          .find('input')
-          .type('5', { force: true });
-      });
+      cy.getByTestId('ensikertalaismaara').type('5', { force: true });
     }
 
     jatka();

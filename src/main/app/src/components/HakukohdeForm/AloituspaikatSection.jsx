@@ -8,60 +8,41 @@ import isKorkeakouluKoulutustyyppi from '../../utils/isKorkeakouluKoulutustyyppi
 import FormLabel from '../FormLabel';
 import { getTestIdProps } from '../../utils';
 
-const MinMaxFields = ({ minName, maxName, minId, ...props }) => {
-  return (
-    <Flex alignCenter {...props}>
-      <FlexItem grow={1} {...getTestIdProps('min')}>
-        <Field
-          id={minId}
-          name={minName}
-          component={FormFieldInput}
-          type="number"
-        />
-      </FlexItem>
-      <FlexItem grow={0} paddingLeft={2} paddingRight={2}>
-        -
-      </FlexItem>
-      <FlexItem grow={1} {...getTestIdProps('max')}>
-        <Field name={maxName} component={FormFieldInput} type="number" />
-      </FlexItem>
-    </Flex>
-  );
-};
-
 const AloituspaikatSection = ({ koulutustyyppi, name }) => {
   const isKorkeakoulu = isKorkeakouluKoulutustyyppi(koulutustyyppi);
   const { t } = useTranslation();
 
-  const minAloituspaikkamaaraName = `${name}.minAloituspaikkamaara`;
+  const aloituspaikkamaaraName = `${name}.aloituspaikkamaara`;
 
   const aloituspaikatField = (
     <>
-      <FormLabel htmlFor={minAloituspaikkamaaraName}>
+      <FormLabel htmlFor={aloituspaikkamaaraName}>
         {t('hakukohdelomake.aloituspaikkojenLukumaara')}
       </FormLabel>
 
-      <MinMaxFields
-        minId={minAloituspaikkamaaraName}
-        minName={minAloituspaikkamaaraName}
-        maxName={`${name}.maxAloituspaikkamaara`}
+      <Field
+        id={aloituspaikkamaaraName}
+        name={aloituspaikkamaaraName}
+        component={FormFieldInput}
+        type="number"
         {...getTestIdProps('aloituspaikkamaara')}
       />
     </>
   );
 
-  const minEnsikertalaismaaraName = `${name}.minEnsikertalaismaara`;
+  const ensikertalaismaaraName = `${name}.ensikertalaismaara`;
 
   const ensikertalaisetField = (
     <>
-      <FormLabel htmlFor={minEnsikertalaismaaraName}>
+      <FormLabel htmlFor={ensikertalaismaaraName}>
         {t('hakukohdelomake.ensikertalaistenAloituspaikkojenLukumaara')}
       </FormLabel>
 
-      <MinMaxFields
-        minId={minEnsikertalaismaaraName}
-        minName={minEnsikertalaismaaraName}
-        maxName={`${name}.maxEnsikertalaismaara`}
+      <Field
+        id={ensikertalaismaaraName}
+        name={ensikertalaismaaraName}
+        component={FormFieldInput}
+        type="number"
         {...getTestIdProps('ensikertalaismaara')}
       />
     </>

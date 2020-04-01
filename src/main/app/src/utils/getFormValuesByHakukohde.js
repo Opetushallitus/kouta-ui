@@ -10,8 +10,7 @@ const getFormValuesByHakukohde = hakukohde => {
     alkamiskausiKoodiUri = '',
     kaytetaanHaunAikataulua,
     kielivalinta = [],
-    minAloituspaikat = '',
-    maxAloituspaikat = '',
+    aloituspaikat = '',
     hakuajat = [],
     liitteetOnkoSamaToimitusaika,
     liitteetOnkoSamaToimitusosoite,
@@ -25,8 +24,7 @@ const getFormValuesByHakukohde = hakukohde => {
     valintakokeet = [],
     pohjakoulutusvaatimusKoodiUrit = [],
     valintaperusteId,
-    minEnsikertalaisenAloituspaikat = '',
-    maxEnsikertalaisenAloituspaikat = '',
+    ensikertalaisenAloituspaikat = '',
     kaytetaanHaunHakulomaketta,
     hakulomaketyyppi,
     hakulomakeAtaruId,
@@ -48,17 +46,11 @@ const getFormValuesByHakukohde = hakukohde => {
     },
     kieliversiot: kielivalinta,
     aloituspaikat: {
-      minAloituspaikkamaara: isNumeric(minAloituspaikat)
-        ? minAloituspaikat.toString()
+      aloituspaikkamaara: isNumeric(aloituspaikat)
+        ? aloituspaikat.toString()
         : '',
-      maxAloituspaikkamaara: isNumeric(maxAloituspaikat)
-        ? maxAloituspaikat.toString()
-        : '',
-      minEnsikertalaismaara: isNumeric(minEnsikertalaisenAloituspaikat)
-        ? minEnsikertalaisenAloituspaikat.toString()
-        : '',
-      maxEnsikertalaismaara: isNumeric(maxEnsikertalaisenAloituspaikat)
-        ? maxEnsikertalaisenAloituspaikat.toString()
+      ensikertalaismaara: isNumeric(ensikertalaisenAloituspaikat)
+        ? ensikertalaisenAloituspaikat.toString()
         : '',
     },
     hakuajat: {

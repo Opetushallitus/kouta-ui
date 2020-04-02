@@ -13,6 +13,8 @@ import {
   isArray,
 } from 'lodash';
 import { useMachine as useXstateMachine } from '@xstate/react';
+import stripTags from 'striptags';
+import { ALLOWED_HTML_TAGS } from '#/src/constants';
 
 export const isDev = process.env.NODE_ENV === 'development';
 
@@ -192,3 +194,5 @@ export const ifAny = value => predicate =>
   isArray(value) ? value.some(predicate) : predicate(value);
 
 export const otherwise = () => true;
+
+export const sanitizeHTML = html => stripTags(html, ALLOWED_HTML_TAGS);

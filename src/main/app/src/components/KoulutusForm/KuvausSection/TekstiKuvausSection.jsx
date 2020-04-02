@@ -1,5 +1,4 @@
 import React from 'react';
-import stripTags from 'striptags';
 import { get } from 'lodash';
 
 import { getEPerusteById } from '../../../apiUtils';
@@ -7,13 +6,13 @@ import Typography from '../../Typography';
 import { getLanguageValue } from '../../../utils';
 import { useTranslation } from 'react-i18next';
 import useApiAsync from '../../useApiAsync';
-import FormLabel from '../../FormLabel';
 import useFieldValue from '../../useFieldValue';
+import { sanitizeHTML } from '#/src/utils';
 
 const getKuvaus = (koulutus, language) => {
   const kuvaus = koulutus ? getLanguageValue(koulutus.kuvaus, language) : null;
 
-  return kuvaus ? stripTags(kuvaus) : null;
+  return kuvaus ? sanitizeHTML(kuvaus) : null;
 };
 
 const TekstiKuvausSection = ({ language }) => {
@@ -31,10 +30,14 @@ const TekstiKuvausSection = ({ language }) => {
 
   return (
     <>
-      <FormLabel>{t('yleiset.kuvaus')}</FormLabel>
       {kuvaus ? (
         <>
-          <Typography as="div">{kuvaus}</Typography>
+          <Typography
+            as="div"
+            dangerouslySetInnerHTML={{
+              __html: kuvaus,
+            }}
+          ></Typography>
           <Typography variant="secondary" as="div" marginTop={1}>
             ({t('yleiset.lahde')}: {t('yleiset.ePerusteet')})
           </Typography>

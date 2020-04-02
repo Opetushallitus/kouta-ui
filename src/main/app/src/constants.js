@@ -191,3 +191,29 @@ export const LOGO_NO_DIMENSION_CHECK_FOR_FORMATS = ['.svg'];
 
 export const EPERUSTE_STATUS_TULEVA = 'tuleva';
 export const EPERUSTE_STATUS_VOIMASSA = 'voimassa';
+
+export const ALLOWED_HTML_TAGS = [
+  'b',
+  'blockquote',
+  'br',
+  'code',
+  'em',
+  'h1',
+  'h2',
+  'h3',
+  'h4',
+  'h5',
+  'h6',
+  'hr',
+  'i',
+  'li',
+  'ol',
+  'p',
+  'pre',
+  's',
+  'sup',
+  'sub',
+  'strong',
+  'strike',
+  'ul',
+];

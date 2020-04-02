@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
-import stripTags from 'striptags';
 import { get, isEmpty, isString, mapValues } from 'lodash';
 import { Trans, useTranslation } from 'react-i18next';
 import FieldGroup from '#/src/components/FieldGroup';
@@ -13,6 +12,7 @@ import {
 import { getThemeProp } from '#/src/theme';
 import { getLanguageValue, getTestIdProps } from '#/src/utils';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
+import { sanitizeHTML } from '#/src/utils';
 
 import {
   FormFieldInput,
@@ -87,7 +87,7 @@ const getExtendedEPeruste = async ({ httpClient, apiUrls, ePerusteId }) => {
     ...osaamisala,
     kuvaus: mapValues(
       get(osaamisalakuvaukset, [osaamisala.uri, 0, 'teksti']) || {},
-      v => (isString(v) ? stripTags(v) : v),
+      v => (isString(v) ? sanitizeHTML(v) : v),
     ),
   }));
 

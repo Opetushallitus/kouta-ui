@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
-
 import Button from '../Button';
+import useDirty from '#/src/components/useDirty';
+import { withRouter } from 'react-router-dom';
+import useTranslation from '#/src/components/useTranslation';
+import NavigationPrompt from 'react-router-navigation-prompt';
+import UnsavedChangesDialog from '../UnsavedChangesDialog';
 
 export const Submit = ({
   disabled = false,
@@ -9,18 +13,24 @@ export const Submit = ({
   onClick,
   ...props
 }) => {
-  const [wait, setWait] = useState(null);
-  const release = () => setWait(null);
+  const [saving, setSaving] = useState(null);
+  const release = () => setSaving(null);
+  const isDirty = useDirty();
   return (
-    <Button
-      disabled={disabled || wait}
-      onClick={() => setWait(true) || onClick().then(release, release)}
-      title={title}
-      {...props}
-    >
-      {children}
-    </Button>
+    <>
+      <NavigationPrompt when={!saving && isDirty}>
+        {props => <UnsavedChangesDialog {...props} />}
+      </NavigationPrompt>
+      <Button
+        disabled={disabled || saving}
+        onClick={() => setSaving(true) || onClick().then(release, release)}
+        title={title}
+        {...props}
+      >
+        {children}
+      </Button>
+    </>
   );
 };
 
-export default Submit;
+export default withRouter(Submit);

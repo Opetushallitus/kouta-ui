@@ -189,6 +189,13 @@ export default {
     suljeVaroitus: 'Sulje varoitus',
   },
   ilmoitukset: {
+    tallentamattomiaMuutoksia: {
+      otsikko: 'Tallentamattomia muutoksia',
+      viesti:
+        'Lomakkeella on tallentamattomia muutoksia. Haluatko varmasti jatkaa?',
+      jatka: 'Jatka',
+      peruuta: 'Peruuta',
+    },
     tuntematonVirhe:
       'Jokin meni vikaan. Jos virhe aiheuttaa ongelmia, yritä päivittää sivu',
     tallennusOnnistui: 'Tallennus onnistui',

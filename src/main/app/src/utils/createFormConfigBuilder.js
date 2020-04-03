@@ -2,31 +2,44 @@ import produce from 'immer';
 import { pick, set } from 'lodash';
 
 class FormConfigBuilder {
-  constructor(config = {}, koulutustyypiLookup = {}) {
+  constructor(config = {}, koulutustyyppiLookup = {}) {
     this.config = config;
-    this.koulutustyypiLookup = koulutustyypiLookup;
+    this.koulutustyyppiLookup = koulutustyyppiLookup;
   }
 
   registerField(section, field, koulutustyypit, validate, meta = {}) {
     koulutustyypit.forEach(t => {
-      this.koulutustyypiLookup[t] = this.koulutustyypiLookup[t] || {};
-      this.koulutustyypiLookup[t][`sections.${section}.fields.${field}`] = true;
+      this.koulutustyyppiLookup[t] = this.koulutustyyppiLookup[t] || {};
+      this.koulutustyyppiLookup[t][
+        `sections.${section}.fields.${field}`
+      ] = true;
     });
 
-    return new FormConfigBuilder(
-      produce(this.config, draft => {
-        set(draft, ['sections', section, 'fields', field], {
-          koulutustyypit,
-          validate,
-          meta,
-        });
-      }),
-      this.koulutustyypiLookup,
+    this.config = produce(this.config, draft => {
+      set(draft, ['sections', section, 'fields', field], {
+        koulutustyypit,
+        validate,
+        meta,
+      });
+    });
+    return this;
+  }
+
+  registerFieldTree(fieldsTree) {
+    fieldsTree.forEach(
+      ({ section, field, fields, koulutustyypit, validate, meta }) =>
+        [
+          ...(fields || []),
+          ...(field ? [{ name: field, koulutustyypit, validate, meta }] : []),
+        ].forEach(({ name, koulutustyypit, validate, meta }) =>
+          this.registerField(section, name, koulutustyypit, validate, meta),
+        ),
     );
+    return this;
   }
 
   getKoulutustyyppiConfig(koulutustyyppi) {
-    const paths = Object.keys(this.koulutustyypiLookup[koulutustyyppi] || {});
+    const paths = Object.keys(this.koulutustyyppiLookup[koulutustyyppi] || {});
 
     return pick(this.config, paths);
   }

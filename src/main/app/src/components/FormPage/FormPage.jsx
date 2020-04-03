@@ -6,6 +6,7 @@ import { getThemeProp } from '../../theme';
 import Button from '../Button';
 import useTranslation from '../useTranslation';
 import Container from '../Container';
+import useFieldValue from '#/src/components/useFieldValue';
 
 const HeaderContainer = styled.div`
   background-color: white;
@@ -87,6 +88,7 @@ const FormPage = ({
   hasFooterHomeLink = true,
 }) => {
   const { t } = useTranslation();
+  const esikatselu = useFieldValue('esikatselu');
 
   return (
     <>
@@ -108,7 +110,9 @@ const FormPage = ({
                   {t('yleiset.etusivulle')}
                 </Button>
               ) : null}
-              {draftUrl ? <Draft url={draftUrl} /> : null}
+              {draftUrl && esikatselu === true ? (
+                <Draft url={draftUrl} />
+              ) : null}
               {toggleDraft ? <Separator>{toggleDraft}</Separator> : null}
             </Buttons>
             <FooterActions>{footer}</FooterActions>

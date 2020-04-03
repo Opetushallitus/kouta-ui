@@ -49,6 +49,7 @@ const FooterWrapper = styled.div`
 const Buttons = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const FooterActions = styled.div``;
@@ -82,6 +83,7 @@ const FormPage = ({
   children = null,
   footer = null,
   draftUrl = null,
+  toggleDraft = null,
   hasFooterHomeLink = true,
 }) => {
   const { t } = useTranslation();
@@ -107,6 +109,7 @@ const FormPage = ({
                 </Button>
               ) : null}
               {draftUrl ? <Draft url={draftUrl} /> : null}
+              {toggleDraft ? <Separator>{toggleDraft}</Separator> : null}
             </Buttons>
             <FooterActions>{footer}</FooterActions>
           </FooterWrapper>

@@ -118,6 +118,7 @@ const config = createFormConfigBuilder()
     ),
   )
   .registerField('julkisuus', 'julkisuus', KOULUTUSTYYPIT)
+  .registerField('esikatselu', 'esikatselu', KOULUTUSTYYPIT)
   .registerField('julkaisutila', 'julkaisutila', KOULUTUSTYYPIT, eb =>
     eb.validateExistence('tila'),
   );

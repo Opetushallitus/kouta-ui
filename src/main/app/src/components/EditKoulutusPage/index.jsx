@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import queryString from 'query-string';
 import ReduxForm from '../ReduxForm';
 
@@ -13,6 +13,32 @@ import Spin from '../Spin';
 import Title from '../Title';
 import useTranslation from '../useTranslation';
 import UrlContext from '#/src/components/UrlContext';
+import useAuthorizedUserRoleBuilder from '#/src/components/useAuthorizedUserRoleBuilder';
+import { HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
+import useFieldValue from '#/src/components/useFieldValue';
+import FormNameContext from '#/src/components/FormNameContext';
+import { Field } from 'redux-form';
+import { FormFieldCheckbox } from '../formFields';
+
+const ToggleDraft = () => {
+  const { t } = useTranslation();
+  const roleBuilder = useAuthorizedUserRoleBuilder();
+
+  const isOphVirkailija = useMemo(
+    () =>
+      roleBuilder
+        .hasUpdate(HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID)
+        .result(),
+    [roleBuilder],
+  );
+  const esikatselu = useFieldValue('esikatselu');
+
+  return esikatselu !== undefined && isOphVirkailija ? (
+    <Field name={'esikatselu'} component={FormFieldCheckbox}>
+      {t('yleiset.salliEsikatselu')}
+    </Field>
+  ) : null;
+};
 
 const EditKoulutusPage = props => {
   const {
@@ -44,6 +70,11 @@ const EditKoulutusPage = props => {
             header={<EditKoulutusHeader koulutus={koulutus} />}
             steps={<EditKoulutusSteps />}
             draftUrl={apiUrls.url('konfo-ui.koulutus', oid) + '?draft=true'}
+            toggleDraft={
+              <FormNameContext.Provider value={'editKoulutusForm'}>
+                <ToggleDraft />
+              </FormNameContext.Provider>
+            }
             footer={
               koulutus ? (
                 <EditKoulutusFooter

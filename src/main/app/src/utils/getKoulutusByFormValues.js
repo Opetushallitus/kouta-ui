@@ -35,6 +35,7 @@ const getKoulutusByFormValues = values => {
   );
 
   const teemakuva = get(values, 'teemakuva');
+  const esikatselu = get(values, 'esikatselu');
 
   const julkinen = Boolean(get(values, 'julkinen'));
 
@@ -48,6 +49,7 @@ const getKoulutusByFormValues = values => {
     koulutustyyppi,
     nimi,
     julkinen,
+    esikatselu,
     teemakuva,
     metadata: {
       tyyppi: koulutustyyppi,

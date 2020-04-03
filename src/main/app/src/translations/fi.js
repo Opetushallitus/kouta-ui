@@ -1,6 +1,7 @@
 export default {
   yleiset: {
-    esikatselu: 'Esikatselu',
+    esikatselu: 'Esikatsele',
+    salliEsikatselu: 'Esikatselu käytössä',
     seuraava: 'Seuraava',
     edellinen: 'Edellinen',
     tallenna: 'Tallenna',

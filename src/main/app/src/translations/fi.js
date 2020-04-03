@@ -459,7 +459,7 @@ export default {
     hakukohteellaEriHakuaika: 'Hakukohteella on erillinen hakuaika',
     aloituspaikkojenLukumaara: 'Aloituspaikkojen lukumäärä',
     ensikertalaistenAloituspaikkojenLukumaara:
-      'Ensikertalaisten aloituspaikkojen lukumäärä',
+      'Joista ensikertalaisten aloituspaikkojen lukumäärä',
     valintakoe: 'Valintakoe',
     valitseValintakokeenTyyppi: 'Valitse valintakokeen tyyppi',
     tarvittavatLiitteet: 'Tarvittavat liitteet',

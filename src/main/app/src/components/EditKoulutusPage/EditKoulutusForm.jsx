@@ -1,12 +1,23 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useMemo, useCallback, useEffect, useContext } from 'react';
+import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { initialize } from 'redux-form';
 
-import ReduxForm from '../ReduxForm';
 import KoulutusForm from '../KoulutusForm';
 import FormConfigContext from '../FormConfigContext';
 import getFormValuesByKoulutus from '../../utils/getFormValuesByKoulutus';
 import useFieldValue from '../useFieldValue';
 import getKoulutusFormConfig from '../../utils/getKoulutusFormConfig';
+import FormNameContext from '../FormNameContext';
+const useFormName = () => useContext(FormNameContext);
+
+const useInitialValues = initialValues => {
+  const dispatch = useDispatch();
+  const name = useFormName();
+  useEffect(() => {
+    dispatch(initialize(name, initialValues));
+  }, [dispatch, initialValues, name]);
+};
 
 const KoulutusFormWrapper = props => {
   const koulutustyyppi = useFieldValue('koulutustyyppi');
@@ -34,6 +45,8 @@ const EditKoulutusForm = ({
     return getFormValuesByKoulutus(koulutus);
   }, [koulutus]);
 
+  useInitialValues(initialValues);
+
   const onAttachToteutus = useCallback(() => {
     history.push(
       `/organisaatio/${organisaatioOid}/koulutus/${koulutus.oid}/toteutus`,
@@ -41,20 +54,16 @@ const EditKoulutusForm = ({
   }, [history, koulutus]);
 
   return (
-    <ReduxForm form="editKoulutusForm" initialValues={initialValues}>
-      {() => (
-        <KoulutusFormWrapper
-          steps={false}
-          isNewKoulutus={false}
-          johtaaTutkintoon={Boolean(koulutus.johtaaTutkintoon)}
-          onAttachToteutus={onAttachToteutus}
-          koulutus={koulutus}
-          koulutusOrganisaatioOid={koulutusOrganisaatioOid}
-          organisaatioOid={organisaatioOid}
-          {...props}
-        />
-      )}
-    </ReduxForm>
+    <KoulutusFormWrapper
+      steps={false}
+      isNewKoulutus={false}
+      johtaaTutkintoon={Boolean(koulutus.johtaaTutkintoon)}
+      onAttachToteutus={onAttachToteutus}
+      koulutus={koulutus}
+      koulutusOrganisaatioOid={koulutusOrganisaatioOid}
+      organisaatioOid={organisaatioOid}
+      {...props}
+    />
   );
 };
 

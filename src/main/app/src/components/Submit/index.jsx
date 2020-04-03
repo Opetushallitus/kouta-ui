@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Button from '../Button';
 import useDirty from '#/src/components/useDirty';
 import { withRouter } from 'react-router-dom';
-import useTranslation from '#/src/components/useTranslation';
 import NavigationPrompt from 'react-router-navigation-prompt';
 import UnsavedChangesDialog from '../UnsavedChangesDialog';
 

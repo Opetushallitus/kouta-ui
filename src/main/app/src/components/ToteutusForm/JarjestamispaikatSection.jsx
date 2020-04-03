@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { Field } from 'redux-form';
-import { get, includes, some } from 'lodash';
+import { isEmpty, get, includes, some } from 'lodash';
+import { useTranslation } from 'react-i18next';
 
 import { TOTEUTUS_ROLE } from '#/src/constants';
 import { getTestIdProps } from '#/src/utils';
@@ -9,6 +10,7 @@ import { createFormFieldComponent } from '#/src/components/formFields';
 import OrganisaatioHierarkiaTreeSelect from '#/src/components/OrganisaatioHierarkiaTreeSelect';
 import useOrganisaatioHierarkia from '#/src/components/useOrganisaatioHierarkia';
 import useAuthorizedUserRoleBuilder from '#/src/components/useAuthorizedUserRoleBuilder';
+import Typography from '#/src/components/Typography';
 
 const JarjestajatField = createFormFieldComponent(
   OrganisaatioHierarkiaTreeSelect,
@@ -19,6 +21,7 @@ const JarjestajatField = createFormFieldComponent(
 );
 
 const JarjestamispaikatSection = ({ organisaatioOid, name, koulutus }) => {
+  const { t } = useTranslation();
   const koulutusTarjoajat = get(koulutus, 'tarjoajat');
 
   const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid, {
@@ -39,12 +42,18 @@ const JarjestamispaikatSection = ({ organisaatioOid, name, koulutus }) => {
 
   return (
     <div {...getTestIdProps('jarjestamispaikatSelection')}>
-      <Field
-        name={name}
-        hierarkia={hierarkia}
-        getIsDisabled={getIsDisabled}
-        component={JarjestajatField}
-      />
+      {isEmpty(koulutusTarjoajat) ? (
+        <Typography>
+          {t('toteutuslomake.koulutuksellaEiOrganisaatioita')}
+        </Typography>
+      ) : (
+        <Field
+          name={name}
+          hierarkia={hierarkia}
+          getIsDisabled={getIsDisabled}
+          component={JarjestajatField}
+        />
+      )}
     </div>
   );
 };

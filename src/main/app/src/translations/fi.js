@@ -420,6 +420,8 @@ export default {
     eiMuokkausOikeutta:
       'Käyttäjälläsi ei ole oikeuksia muokata tätä toteutusta',
     toteutuksenTeemakuva: 'Toteutuksen teemakuva',
+    koulutuksellaEiOrganisaatioita:
+      'Valittuun koulutukseen ei ole liitetty yhtään järjestävää organisaatiota.',
   },
   hakulomake: {
     haunNimi: 'Haun nimi',

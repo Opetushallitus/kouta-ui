@@ -20,6 +20,7 @@ import Title from '../Title';
 import getHakuByOid from '../../utils/kouta/getHakuByOid';
 import getHakukohdeByOid from '../../utils/kouta/getHakukohdeByOid';
 import useOrganisaatio from '../useOrganisaatio';
+import ReduxForm from '#/src/components/ReduxForm';
 
 const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
   const hakukohde = await getHakukohdeByOid({
@@ -75,59 +76,63 @@ const EditHakukohdePage = props => {
   const { t } = useTranslation();
 
   return (
-    <>
-      <Title>{t('sivuTitlet.hakukohteenMuokkaus')}</Title>
-      <FormPage
-        header={<EditHakukohdeHeader hakukohde={hakukohde} />}
-        steps={<EditHakukohdeSteps />}
-        footer={
-          hakukohde ? <EditHakukohdeFooter hakukohde={hakukohde} /> : null
-        }
-      >
-        {hakukohde ? (
-          <>
-            <Flex marginBottom={2} justifyBetween>
-              <FlexItem grow={0} paddingRight={2}>
-                <Typography variant="h6" marginBottom={1}>
-                  {t('yleiset.organisaatio')}
-                </Typography>
-                <Typography>
-                  {getFirstLanguageValue(get(organisaatio, 'nimi'))}
-                </Typography>
-              </FlexItem>
-              <FlexItem grow={0}>
-                <Typography variant="h6" marginBottom={1}>
-                  {t('yleiset.haku')}
-                </Typography>
-                <Typography>
-                  {getFirstLanguageValue(get(haku, 'nimi'))}
-                </Typography>
-              </FlexItem>
-              <FlexItem grow={0}>
-                <Typography variant="h6" marginBottom={1}>
-                  {t('yleiset.toteutus')}
-                </Typography>
-                <Typography>
-                  {getFirstLanguageValue(get(toteutus, 'nimi'))}
-                </Typography>
-              </FlexItem>
-            </Flex>
-            <EditHakukohdeForm
-              organisaatioOid={organisaatioOid}
-              scrollTarget={scrollTarget}
-              haku={haku}
-              toteutus={toteutus}
-              hakukohde={hakukohde}
-              koulutustyyppi={
-                koulutustyyppi || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
-              }
-            />
-          </>
-        ) : (
-          <Spin center />
-        )}
-      </FormPage>
-    </>
+    <ReduxForm form="editHakukohdeForm">
+      {() => (
+        <>
+          <Title>{t('sivuTitlet.hakukohteenMuokkaus')}</Title>
+          <FormPage
+            header={<EditHakukohdeHeader hakukohde={hakukohde} />}
+            steps={<EditHakukohdeSteps />}
+            footer={
+              hakukohde ? <EditHakukohdeFooter hakukohde={hakukohde} /> : null
+            }
+          >
+            {hakukohde ? (
+              <>
+                <Flex marginBottom={2} justifyBetween>
+                  <FlexItem grow={0} paddingRight={2}>
+                    <Typography variant="h6" marginBottom={1}>
+                      {t('yleiset.organisaatio')}
+                    </Typography>
+                    <Typography>
+                      {getFirstLanguageValue(get(organisaatio, 'nimi'))}
+                    </Typography>
+                  </FlexItem>
+                  <FlexItem grow={0}>
+                    <Typography variant="h6" marginBottom={1}>
+                      {t('yleiset.haku')}
+                    </Typography>
+                    <Typography>
+                      {getFirstLanguageValue(get(haku, 'nimi'))}
+                    </Typography>
+                  </FlexItem>
+                  <FlexItem grow={0}>
+                    <Typography variant="h6" marginBottom={1}>
+                      {t('yleiset.toteutus')}
+                    </Typography>
+                    <Typography>
+                      {getFirstLanguageValue(get(toteutus, 'nimi'))}
+                    </Typography>
+                  </FlexItem>
+                </Flex>
+                <EditHakukohdeForm
+                  organisaatioOid={organisaatioOid}
+                  scrollTarget={scrollTarget}
+                  haku={haku}
+                  toteutus={toteutus}
+                  hakukohde={hakukohde}
+                  koulutustyyppi={
+                    koulutustyyppi || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
+                  }
+                />
+              </>
+            ) : (
+              <Spin center />
+            )}
+          </FormPage>
+        </>
+      )}
+    </ReduxForm>
   );
 };
 

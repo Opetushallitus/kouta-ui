@@ -11,6 +11,7 @@ import Spin from '../Spin';
 import getHakuByOid from '../../utils/kouta/getHakuByOid';
 import Title from '../Title';
 import useTranslation from '../useTranslation';
+import ReduxForm from '#/src/components/ReduxForm';
 
 const EditHakuPage = props => {
   const {
@@ -33,27 +34,31 @@ const EditHakuPage = props => {
   const { t } = useTranslation();
 
   return (
-    <>
-      <Title>{t('sivuTitlet.haunMuokkaus')}</Title>
-      <FormPage
-        header={<EditHakuHeader haku={haku} />}
-        steps={<EditHakuSteps />}
-        footer={haku ? <EditHakuFooter haku={haku} /> : null}
-      >
-        <TopInfoContainer>
-          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-        </TopInfoContainer>
-        {haku ? (
-          <EditHakuForm
-            haku={haku}
-            organisaatioOid={organisaatioOid}
-            scrollTarget={scrollTarget}
-          />
-        ) : (
-          <Spin center />
-        )}
-      </FormPage>
-    </>
+    <ReduxForm form="editHakuForm">
+      {() => (
+        <>
+          <Title>{t('sivuTitlet.haunMuokkaus')}</Title>
+          <FormPage
+            header={<EditHakuHeader haku={haku} />}
+            steps={<EditHakuSteps />}
+            footer={haku ? <EditHakuFooter haku={haku} /> : null}
+          >
+            <TopInfoContainer>
+              <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+            </TopInfoContainer>
+            {haku ? (
+              <EditHakuForm
+                haku={haku}
+                organisaatioOid={organisaatioOid}
+                scrollTarget={scrollTarget}
+              />
+            ) : (
+              <Spin center />
+            )}
+          </FormPage>
+        </>
+      )}
+    </ReduxForm>
   );
 };
 

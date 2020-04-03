@@ -12,6 +12,7 @@ import Spin from '../Spin';
 import { KOULUTUSTYYPPI } from '../../constants';
 import Title from '../Title';
 import useTranslation from '../useTranslation';
+import ReduxForm from '#/src/components/ReduxForm';
 
 const EditValintaperustePage = props => {
   const {
@@ -37,31 +38,37 @@ const EditValintaperustePage = props => {
   const { t } = useTranslation();
 
   return (
-    <>
-      <Title>{t('sivuTitlet.valintaperusteenMuokkaus')}</Title>
-      <FormPage
-        header={<EditValintaperusteHeader valintaperuste={valintaperuste} />}
-        steps={<EditValintaperusteSteps />}
-        footer={
-          valintaperuste ? (
-            <EditValintaperusteFooter valintaperuste={valintaperuste} />
-          ) : null
-        }
-      >
-        <TopInfoContainer>
-          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-        </TopInfoContainer>
-        {valintaperuste ? (
-          <EditValintaperusteForm
-            valintaperuste={valintaperuste}
-            organisaatioOid={organisaatioOid}
-            koulutustyyppi={koulutustyyppi}
-          />
-        ) : (
-          <Spin center />
-        )}
-      </FormPage>
-    </>
+    <ReduxForm form="editValintaperusteForm">
+      {() => (
+        <>
+          <Title>{t('sivuTitlet.valintaperusteenMuokkaus')}</Title>
+          <FormPage
+            header={
+              <EditValintaperusteHeader valintaperuste={valintaperuste} />
+            }
+            steps={<EditValintaperusteSteps />}
+            footer={
+              valintaperuste ? (
+                <EditValintaperusteFooter valintaperuste={valintaperuste} />
+              ) : null
+            }
+          >
+            <TopInfoContainer>
+              <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+            </TopInfoContainer>
+            {valintaperuste ? (
+              <EditValintaperusteForm
+                valintaperuste={valintaperuste}
+                organisaatioOid={organisaatioOid}
+                koulutustyyppi={koulutustyyppi}
+              />
+            ) : (
+              <Spin center />
+            )}
+          </FormPage>
+        </>
+      )}
+    </ReduxForm>
   );
 };
 

@@ -1,23 +1,12 @@
-import React, { useMemo, useCallback, useEffect, useContext } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useMemo, useCallback } from 'react';
 import { withRouter } from 'react-router-dom';
-import { initialize } from 'redux-form';
 
 import KoulutusForm from '../KoulutusForm';
 import FormConfigContext from '../FormConfigContext';
 import getFormValuesByKoulutus from '../../utils/getFormValuesByKoulutus';
 import useFieldValue from '../useFieldValue';
 import getKoulutusFormConfig from '../../utils/getKoulutusFormConfig';
-import FormNameContext from '../FormNameContext';
-const useFormName = () => useContext(FormNameContext);
-
-const useInitialValues = initialValues => {
-  const dispatch = useDispatch();
-  const name = useFormName();
-  useEffect(() => {
-    dispatch(initialize(name, initialValues));
-  }, [dispatch, initialValues, name]);
-};
+import useInitialValues from '#/src/components/useInitialValues';
 
 const KoulutusFormWrapper = props => {
   const koulutustyyppi = useFieldValue('koulutustyyppi');

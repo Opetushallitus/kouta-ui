@@ -16,6 +16,7 @@ import getKoulutusByOid from '../../utils/kouta/getKoulutusByOid';
 import Spin from '../Spin';
 import Title from '../Title';
 import useTranslation from '../useTranslation';
+import ReduxForm from '#/src/components/ReduxForm';
 
 const getToteutusAndKoulutus = async ({ httpClient, apiUrls, oid }) => {
   const toteutus = await getToteutusByOid({ httpClient, apiUrls, oid });
@@ -55,38 +56,45 @@ const EditToteutusPage = props => {
   const { t } = useTranslation();
 
   return (
-    <>
-      <Title>{t('sivuTitlet.toteutuksenMuokkaus')}</Title>
-      <FormPage
-        header={<EditToteutusHeader toteutus={toteutus} />}
-        steps={<EditToteutusSteps />}
-        footer={
-          toteutus ? (
-            <EditToteutusFooter
-              toteutus={toteutus}
-              koulutustyyppi={koulutustyyppi}
-              organisaatioOid={organisaatioOid}
-            />
-          ) : null
-        }
-      >
-        <TopInfoContainer>
-          <KoulutusInfo organisaatioOid={organisaatioOid} koulutus={koulutus} />
-          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-        </TopInfoContainer>
-        {toteutus && koulutus ? (
-          <EditToteutusForm
-            toteutus={toteutus}
-            organisaatioOid={organisaatioOid}
-            koulutusKoodiUri={koulutus ? koulutus.koulutusKoodiUri : null}
-            koulutustyyppi={koulutustyyppi}
-            scrollTarget={scrollTarget}
-          />
-        ) : (
-          <Spin center />
-        )}
-      </FormPage>
-    </>
+    <ReduxForm form="editToteutusForm">
+      {() => (
+        <>
+          <Title>{t('sivuTitlet.toteutuksenMuokkaus')}</Title>
+          <FormPage
+            header={<EditToteutusHeader toteutus={toteutus} />}
+            steps={<EditToteutusSteps />}
+            footer={
+              toteutus ? (
+                <EditToteutusFooter
+                  toteutus={toteutus}
+                  koulutustyyppi={koulutustyyppi}
+                  organisaatioOid={organisaatioOid}
+                />
+              ) : null
+            }
+          >
+            <TopInfoContainer>
+              <KoulutusInfo
+                organisaatioOid={organisaatioOid}
+                koulutus={koulutus}
+              />
+              <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+            </TopInfoContainer>
+            {toteutus && koulutus ? (
+              <EditToteutusForm
+                toteutus={toteutus}
+                organisaatioOid={organisaatioOid}
+                koulutusKoodiUri={koulutus ? koulutus.koulutusKoodiUri : null}
+                koulutustyyppi={koulutustyyppi}
+                scrollTarget={scrollTarget}
+              />
+            ) : (
+              <Spin center />
+            )}
+          </FormPage>
+        </>
+      )}
+    </ReduxForm>
   );
 };
 

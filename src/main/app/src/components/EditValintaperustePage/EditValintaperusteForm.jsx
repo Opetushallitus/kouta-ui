@@ -2,9 +2,9 @@ import React, { useMemo } from 'react';
 
 import ValintaperusteForm from '../ValintaperusteForm';
 import getFormValuesByValintaperuste from '../../utils/getFormValuesByValintaperuste';
-import ReduxForm from '../ReduxForm';
 import getValintaperusteFormConfig from '../../utils/getValintaperusteFormConfig';
 import FormConfigContext from '../FormConfigContext';
+import useInitialValues from '#/src/components/useInitialValues';
 
 const ValintaperusteFormWrapper = props => {
   const { koulutustyyppi } = props;
@@ -25,18 +25,16 @@ const EditValintaperusteForm = ({ valintaperuste, ...props }) => {
     return getFormValuesByValintaperuste(valintaperuste);
   }, [valintaperuste]);
 
+  useInitialValues(initialValues);
+
   return (
-    <ReduxForm form="editValintaperusteForm" initialValues={initialValues}>
-      {() => (
-        <ValintaperusteFormWrapper
-          {...props}
-          valintaperuste={valintaperuste}
-          steps={false}
-          canSelectBase={false}
-          canEditTyyppi={false}
-        />
-      )}
-    </ReduxForm>
+    <ValintaperusteFormWrapper
+      {...props}
+      valintaperuste={valintaperuste}
+      steps={false}
+      canSelectBase={false}
+      canEditTyyppi={false}
+    />
   );
 };
 

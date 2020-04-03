@@ -3,9 +3,9 @@ import { withRouter } from 'react-router-dom';
 
 import ToteutusForm from '../ToteutusForm';
 import getFormValuesByToteutus from '../../utils/getFormValuesByToteutus';
-import ReduxForm from '../ReduxForm';
 import FormConfigContext from '../FormConfigContext';
 import getToteutusFormConfig from '../../utils/getToteutusFormConfig';
+import useInitialValues from '#/src/components/useInitialValues';
 
 const ToteutusFormWrapper = props => {
   const { koulutustyyppi } = props;
@@ -37,18 +37,16 @@ const EditToteutusForm = ({ toteutus, history, ...props }) => {
     [history, toteutus],
   );
 
+  useInitialValues(initialValues);
+
   return (
-    <ReduxForm form="editToteutusForm" initialValues={initialValues}>
-      {() => (
-        <ToteutusFormWrapper
-          {...props}
-          toteutus={toteutus}
-          steps={false}
-          canSelectBase={false}
-          onAttachHakukohde={onAttachHakukohde}
-        />
-      )}
-    </ReduxForm>
+    <ToteutusFormWrapper
+      {...props}
+      toteutus={toteutus}
+      steps={false}
+      canSelectBase={false}
+      onAttachHakukohde={onAttachHakukohde}
+    />
   );
 };
 

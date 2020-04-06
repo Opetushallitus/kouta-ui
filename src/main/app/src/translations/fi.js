@@ -617,4 +617,9 @@ export default {
     yhteystiedotInfo: 'Anna oppilaitokselle tarvittavat yhteystiedot',
     oppilaitoksenOsanTila: 'Oppilaitoksen osan tila',
   },
+  eperuste: {
+    suorittaneenOsaaminen: 'Tutkinnon suorittaneen osaaminen',
+    tyotehtavatJoissaVoiToimia:
+      'Työtehtäviä, joissa tutkinnon suorittanut voi toimia',
+  },
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import stripTags from 'striptags';
 import { get } from 'lodash';
 
-import { getPerusteById } from '../../../apiUtils';
+import { getEPerusteById } from '../../../apiUtils';
 import Typography from '../../Typography';
 import { getLanguageValue } from '../../../utils';
 import useTranslation from '../../useTranslation';
@@ -17,14 +17,14 @@ const getKuvaus = (koulutus, language) => {
 };
 
 const TekstiKuvausSection = ({ language }) => {
-  const perusteField = useFieldValue('information.peruste');
-  const perusteId = get(perusteField, 'value');
+  const ePerusteField = useFieldValue('information.eperuste');
+  const ePerusteId = get(ePerusteField, 'value');
   const { t } = useTranslation();
 
   const { data } = useApiAsync({
-    promiseFn: getPerusteById,
-    perusteId,
-    watch: perusteId,
+    promiseFn: getEPerusteById,
+    ePerusteId,
+    watch: ePerusteId,
   });
 
   const kuvaus = getKuvaus(data, language);

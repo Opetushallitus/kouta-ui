@@ -1,113 +1,56 @@
 import React, { useMemo, useEffect, useContext } from 'react';
 import { find, isEmpty, isNil, get, map } from 'lodash';
 import { Field } from 'redux-form';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Grid, Cell } from 'styled-css-grid';
-import { FormFieldSelect } from '../../formFields';
-import Spin from '../../Spin';
-import Typography from '../../Typography';
+import { getKoulutusByKoodi } from '#/src/apiUtils';
+import { getThemeProp } from '#/src/theme';
+import {
+  getReadableDateTime,
+  getLanguageValue,
+  getTestIdProps,
+} from '#/src/utils';
+import {
+  getEPerusteStatus,
+  getEPerusteStatusCss,
+} from '#/src/utils/ePeruste/ePerusteStatus';
+import { useBoundFormActions, useBoundFormSelectors } from '#/src/hooks/form';
+import Anchor from '#/src/components/Anchor';
+import Box from '#/src/components/Box';
+import { FormFieldSelect } from '#/src/components/formFields';
+import Spin from '#/src/components/Spin';
+import Typography from '#/src/components/Typography';
+import useTranslation from '#/src/components/useTranslation';
+import useApiAsync from '#/src/components/useApiAsync';
+import UrlContext from '#/src/components/UrlContext';
+import useFieldValue from '#/src/components/useFieldValue';
 import KoulutusField from '../KoulutusField';
-import { getKoulutusByKoodi } from '../../../apiUtils';
-import { getLanguageValue, getTestIdProps } from '../../../utils';
-import useTranslation from '../../useTranslation';
-import useApiAsync from '../../useApiAsync';
-import Box from '../../Box';
-import UrlContext from '../../UrlContext';
-import { setLightness } from 'polished';
-import {
-  useBoundFormActions,
-  useBoundFormSelectors,
-} from '../../../hooks/form';
-import useFieldValue from '../../useFieldValue';
-import { getReadableDateTime } from '../../../utils';
-import { getThemeProp } from '../../../theme';
-import Anchor from '../../Anchor';
-import {
-  EPERUSTE_STATUS_TULEVA,
-  EPERUSTE_STATUS_VOIMASSA,
-} from '../../../constants';
 
-const getStatusColors = ({ status, theme }) => {
-  switch (status) {
-    case EPERUSTE_STATUS_TULEVA:
-      return {
-        backgroundColor: setLightness(0.9, theme.palette.success.main),
-        color: theme.palette.success.main,
-      };
-    case EPERUSTE_STATUS_VOIMASSA:
-      return {
-        backgroundColor: setLightness(0.9, theme.palette.primary.main),
-        color: theme.palette.primary.main,
-      };
-    default:
-      return {
-        backgroundColor: 'inherit',
-        color: 'inherit',
-      };
-  }
-};
+const getListNimiLanguageValues = (list = [], language) =>
+  list
+    .map(({ nimi }) => getLanguageValue(nimi, language))
+    .filter(name => !!name);
 
-const getStatusCss = ({ status, theme }) => {
-  const { backgroundColor, color } = getStatusColors({ status, theme });
-  return css`
-    background-color: ${backgroundColor};
-    color: ${color};
-  `;
-};
-
-const getPerusteetOptions = (perusteet, language) => {
-  return map(perusteet, ({ id, nimi, diaarinumero }) => ({
+const getEPerusteetOptions = (ePerusteet, language) =>
+  map(ePerusteet, ({ id, nimi, diaarinumero }) => ({
     label: `${getLanguageValue(nimi, language)} (${diaarinumero})`,
     value: id,
   }));
-};
 
-const getPerusteStatus = perusteet => {
-  if (perusteet) {
-    const { voimassaoloAlkaa, voimassaoloLoppuu } = perusteet;
-    const now = Date.now();
-    if (
-      voimassaoloAlkaa &&
-      voimassaoloAlkaa < now &&
-      (isNil(voimassaoloLoppuu) || voimassaoloLoppuu > now)
-    ) {
-      return EPERUSTE_STATUS_VOIMASSA;
-    } else if (voimassaoloAlkaa > now) {
-      return EPERUSTE_STATUS_TULEVA;
-    }
-  }
-};
-
-const getTutkintonimikkeet = ({ peruste = {}, language }) => {
-  const { tutkintonimikeKoodit = [] } = peruste;
-
-  return tutkintonimikeKoodit
-    .map(({ nimi }) => getLanguageValue(nimi, language))
-    .filter(name => !!name);
-};
-
-const getOsaamisalat = ({ peruste = {}, language }) => {
-  const { osaamisalat = [] } = peruste;
-
-  return osaamisalat
-    .map(({ nimi }) => getLanguageValue(nimi, language))
-    .filter(name => !!name);
-};
-
-const PerusteField = ({ isLoading, ...props }) => {
-  const { perusteet, language } = props;
+const EPerusteField = ({ isLoading, ...props }) => {
+  const { ePerusteet, language } = props;
   const { t } = useTranslation();
-  const perusteetOptions = useMemo(
-    () => getPerusteetOptions(perusteet, language),
-    [perusteet, language],
+  const ePerusteOptions = useMemo(
+    () => getEPerusteetOptions(ePerusteet, language),
+    [ePerusteet, language],
   );
 
   return (
     <Field
       component={FormFieldSelect}
       label={t('koulutuslomake.valitseKaytettavaEperuste')}
-      options={perusteetOptions}
-      isDisabled={isLoading || isNil(perusteet) || isEmpty(perusteet)}
+      options={ePerusteOptions}
+      isDisabled={isLoading || isNil(ePerusteet) || isEmpty(ePerusteet)}
       {...props}
     />
   );
@@ -142,7 +85,7 @@ const StyledTilaBadge = styled(TilaBadge)`
   display: inline-block;
   padding: 1px 10px;
   font-weight: bold;
-  ${getStatusCss}
+  ${getEPerusteStatusCss}
 `;
 
 const InfoGrid = ({ rows, ...props }) => (
@@ -166,7 +109,7 @@ const InfoGrid = ({ rows, ...props }) => (
 const KoulutusInfo = ({
   koulutus,
   language = 'fi',
-  peruste,
+  ePeruste,
   className,
   isLoading,
 }) => {
@@ -184,11 +127,15 @@ const KoulutusInfo = ({
       koulutusala: koulutus
         ? getLanguageValue(koulutus.koulutusala, language)
         : undefined,
-      opintojenlaajuus: get(peruste, 'laajuus'),
-      nimikkeet: peruste ? getTutkintonimikkeet({ peruste, language }) : [],
-      osaamisalat: peruste ? getOsaamisalat({ peruste, language }) : [],
+      opintojenlaajuus: get(ePeruste, 'laajuus'),
+      nimikkeet: ePeruste
+        ? getListNimiLanguageValues(ePeruste.tutkintonimikeKoodit, language)
+        : [],
+      osaamisalat: ePeruste
+        ? getListNimiLanguageValues(ePeruste.osaamisalat, language)
+        : [],
     }),
-    [koulutus, peruste, language],
+    [koulutus, ePeruste, language],
   );
   const apiUrls = useContext(UrlContext);
 
@@ -214,7 +161,7 @@ const KoulutusInfo = ({
               },
             ]}
           />
-          {peruste && (
+          {ePeruste && (
             <>
               <Typography variant="h6" mb={2}>
                 {t('yleiset.ePerusteenTiedot')}
@@ -230,24 +177,26 @@ const KoulutusInfo = ({
                             href={apiUrls.url(
                               'eperusteet.kooste',
                               language,
-                              get(peruste, 'id'),
+                              get(ePeruste, 'id'),
                             )}
                             target="_blank"
                           >
-                            {get(peruste, 'diaarinumero')}
+                            {get(ePeruste, 'diaarinumero')}
                           </Anchor>
                         ),
                       },
                       {
                         title: t('yleiset.voimaantulo'),
                         description: getReadableDateTime(
-                          get(peruste, 'voimassaoloAlkaa'),
+                          get(ePeruste, 'voimassaoloAlkaa'),
                         ),
                       },
                       {
                         title: t('yleiset.tila'),
                         description: (
-                          <StyledTilaBadge status={getPerusteStatus(peruste)} />
+                          <StyledTilaBadge
+                            status={getEPerusteStatus(ePeruste)}
+                          />
                         ),
                       },
                       {
@@ -306,12 +255,12 @@ const KoulutuksenTiedotSection = ({
     watch: koulutusFieldValue,
   });
 
-  const perusteFieldValue = useFieldValue(`${name}.peruste`);
-  const perusteet = get(koulutus, 'perusteet');
+  const ePerusteFieldValue = useFieldValue(`${name}.eperuste`);
+  const ePerusteet = get(koulutus, 'ePerusteet');
 
   const selectedPeruste = find(
-    perusteet,
-    peruste => peruste.id === get(perusteFieldValue, 'value'),
+    ePerusteet,
+    ePeruste => ePeruste.id === get(ePerusteFieldValue, 'value'),
   );
 
   const { change } = useBoundFormActions();
@@ -319,7 +268,7 @@ const KoulutuksenTiedotSection = ({
 
   useEffect(() => {
     if (isDirty()) {
-      change(`${name}.peruste`, null);
+      change(`${name}.eperuste`, null);
     }
   }, [change, koulutusFieldValue, isDirty, name]);
 
@@ -338,10 +287,10 @@ const KoulutuksenTiedotSection = ({
           />
         </Box>
         <Box width={0.5} ml={2} {...getTestIdProps('ePerusteSelect')}>
-          <PerusteField
+          <EPerusteField
             isLoading={isLoading}
-            name={`${name}.peruste`}
-            perusteet={perusteet}
+            name={`${name}.eperuste`}
+            ePerusteet={ePerusteet}
             language={language}
           />
         </Box>
@@ -350,7 +299,7 @@ const KoulutuksenTiedotSection = ({
         <Box width={1}>
           <StyledKoulutusInfo
             disabled={disabled}
-            peruste={selectedPeruste}
+            ePeruste={selectedPeruste}
             koulutus={koulutus}
             language={language}
             isLoading={isLoading}

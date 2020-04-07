@@ -4,6 +4,7 @@ import {
   get,
   groupBy,
   isArray,
+  isNil,
   keyBy,
   mapValues,
   maxBy,
@@ -56,10 +57,10 @@ export const getKoulutuksetByKoulutusTyyppi = async ({
   );
 };
 
-export const getPerusteById = async ({ httpClient, apiUrls, perusteId }) => {
-  if (perusteId) {
+export const getEPerusteById = async ({ httpClient, apiUrls, ePerusteId }) => {
+  if (ePerusteId) {
     const { data } = await httpClient.get(
-      apiUrls.url('eperusteet-service.peruste-by-id', perusteId),
+      apiUrls.url('eperusteet-service.peruste-by-id', ePerusteId),
     );
     return data;
   }
@@ -71,19 +72,22 @@ export const getKoulutusByKoodi = async ({
   koodiUri: argKoodiUri,
 }) => {
   const { koodi, versio } = parseKoodiUri(argKoodiUri);
+  if (isNil(koodi)) {
+    return null;
+  }
 
-  const [perusteetData, alakooditResponse, koodiResponse] = await Promise.all([
+  const [ePerusteetData, alakooditResponse, koodiResponse] = await Promise.all([
     httpClient
       .get(apiUrls.url('eperusteet-service.perusteet-koulutuskoodilla', koodi))
-      .then(({ data: { data: perusteetData } }) =>
+      .then(({ data: { data: ePerusteet } }) =>
         Promise.all(
-          perusteetData.map(peruste =>
+          ePerusteet.map(ePeruste =>
             httpClient
               .get(
-                apiUrls.url('eperusteet-service.peruste-rakenne', peruste.id),
+                apiUrls.url('eperusteet-service.peruste-rakenne', ePeruste.id),
               )
               .then(({ data: rakenne }) => ({
-                ...peruste,
+                ...ePeruste,
                 laajuus: get(rakenne, 'muodostumisSaanto.laajuus.minimi'),
               })),
           ),
@@ -147,12 +151,12 @@ export const getKoulutusByKoodi = async ({
   const { koodiArvo } = latestKoodi;
 
   const { kuvaus = null, osaamisalat = [], tutkintonimikeKoodit = [] } =
-    perusteetData[0] || {};
+    ePerusteetData[0] || {};
 
   return {
     koodiArvo,
     koodiUri: koodi,
-    perusteet: perusteetData,
+    ePerusteet: ePerusteetData,
     kuvaus,
     osaamisalat,
     tutkintonimikeKoodit,
@@ -169,13 +173,13 @@ export const getKoulutusByKoodi = async ({
 export const getOsaamisalakuvauksetByPerusteId = async ({
   httpClient,
   apiUrls,
-  perusteId,
+  ePerusteId,
 }) => {
   const { data } = await httpClient.get(
-    apiUrls.url('eperusteet-service.osaamisalakuvaukset', perusteId),
+    apiUrls.url('eperusteet-service.osaamisalakuvaukset', ePerusteId),
   );
 
-  return get(data, 'reformi') ? data.reformi : {};
+  return get(data, 'reformi') || {};
 };
 
 export const getLocalisation = async ({

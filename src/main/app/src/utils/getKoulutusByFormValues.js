@@ -11,7 +11,7 @@ const getKoulutusByFormValues = values => {
   const osiot = get(values, 'lisatiedot.osiot') || [];
   const osioKuvaukset = get(values, 'lisatiedot.osioKuvaukset') || {};
 
-  const ePerusteId = get(values, 'information.peruste.value');
+  const ePerusteId = get(values, 'information.eperuste.value');
 
   const osiotWithKuvaukset = osiot.map(({ value }) => ({
     otsikkoKoodiUri: value,

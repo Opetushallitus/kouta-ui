@@ -4,29 +4,29 @@ import styled from 'styled-components';
 import stripTags from 'striptags';
 import { get, isEmpty, isString, mapValues } from 'lodash';
 import { Trans } from 'react-i18next';
-import useApiAsync from '../useApiAsync';
-
 import {
   getOsaamisalakuvauksetByPerusteId,
-  getPerusteById,
-} from '../../apiUtils';
-
-import Checkbox from '../Checkbox';
-import Typography from '../Typography';
-import { getLanguageValue, getTestIdProps } from '../../utils';
-import Spacing from '../Spacing';
-import Divider from '../Divider';
-import AbstractCollapse from '../AbstractCollapse';
-import Icon from '../Icon';
-import { getThemeProp } from '../../theme';
-import useTranslation from '../useTranslation';
-import { FormFieldInput } from '../formFields';
-import useFieldValue from '../useFieldValue';
-import LocalLink from '../LocalLink';
-import { useURLs } from '../../hooks/context';
-import Anchor from '../Anchor';
-import Spin from '../Spin';
+  getEPerusteById,
+} from '#/src/apiUtils';
+import { getThemeProp } from '#/src/theme';
+import { getLanguageValue, getTestIdProps } from '#/src/utils';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
+
+import Anchor from '#/src/components/Anchor';
+import AbstractCollapse from '#/src/components/AbstractCollapse';
+import Checkbox from '#/src/components/Checkbox';
+import Divider from '#/src/components/Divider';
+import { FormFieldInput } from '#/src/components/formFields';
+import Icon from '#/src/components/Icon';
+import LocalLink from '#/src/components/LocalLink';
+import Spacing from '#/src/components/Spacing';
+import Spin from '#/src/components/Spin';
+import Typography from '#/src/components/Typography';
+
+import { useURLs } from '#/src/hooks/context';
+import useTranslation from '#/src/components/useTranslation';
+import useFieldValue from '#/src/components/useFieldValue';
+import useApiAsync from '#/src/components/useApiAsync';
 
 const Container = styled.div`
   display: flex;
@@ -69,23 +69,23 @@ const makeOnCheckboxChange = ({ value, onChange, optionValue }) => e => {
   }
 };
 
-const getExtendedPeruste = async ({ httpClient, apiUrls, perusteId }) => {
-  if (!perusteId) {
+const getExtendedEPeruste = async ({ httpClient, apiUrls, ePerusteId }) => {
+  if (!ePerusteId) {
     return null;
   }
 
-  const peruste = await getPerusteById({
+  const ePeruste = await getEPerusteById({
     httpClient,
     apiUrls,
-    perusteId,
+    ePerusteId,
   });
 
-  const { osaamisalat } = peruste;
+  const { osaamisalat } = ePeruste;
 
   const osaamisalakuvaukset = await getOsaamisalakuvauksetByPerusteId({
     httpClient,
     apiUrls,
-    perusteId,
+    ePerusteId,
   });
 
   const osaamisalatWithDescriptions = osaamisalat.map(osaamisala => ({
@@ -97,7 +97,7 @@ const getExtendedPeruste = async ({ httpClient, apiUrls, perusteId }) => {
   }));
 
   return {
-    ...peruste,
+    ...ePeruste,
     osaamisalat: osaamisalatWithDescriptions,
   };
 };
@@ -273,9 +273,9 @@ const OsaamisalatContainer = ({
 const OsaamisalatSection = ({ language, koulutus, organisaatioOid, name }) => {
   const { t } = useTranslation();
   const { ePerusteId } = koulutus;
-  const { data: peruste, isLoading } = useApiAsync({
-    promiseFn: getExtendedPeruste,
-    perusteId: ePerusteId,
+  const { data: ePeruste, isLoading } = useApiAsync({
+    promiseFn: getExtendedEPeruste,
+    ePerusteId,
     watch: ePerusteId,
   });
 
@@ -283,9 +283,9 @@ const OsaamisalatSection = ({ language, koulutus, organisaatioOid, name }) => {
     <Container>
       {isLoading ? (
         <Spin />
-      ) : peruste ? (
+      ) : ePeruste ? (
         <OsaamisalatContainer
-          peruste={peruste}
+          peruste={ePeruste}
           koulutus={koulutus}
           language={language}
           name={name}

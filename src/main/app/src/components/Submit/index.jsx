@@ -20,11 +20,8 @@ export const Submit = ({
       <NavigationPrompt
         when={(currentLoc, nextLoc) => {
           const samePath = nextLoc.pathname === currentLoc.pathname;
-          const sameSearch = nextLoc.search === currentLoc.search;
           const considerPreventReload = !saving && isDirty;
-          return (
-            considerPreventReload && ((samePath && sameSearch) || !samePath)
-          );
+          return considerPreventReload && !samePath;
         }}
       >
         {props => {

@@ -17,8 +17,19 @@ export const Submit = ({
   const isDirty = useDirty();
   return (
     <>
-      <NavigationPrompt when={!saving && isDirty}>
-        {props => <UnsavedChangesDialog {...props} />}
+      <NavigationPrompt
+        when={(currentLoc, nextLoc) => {
+          const samePath = nextLoc.pathname === currentLoc.pathname;
+          const sameSearch = nextLoc.search === currentLoc.search;
+          const considerPreventReload = !saving && isDirty;
+          return (
+            considerPreventReload && ((samePath && sameSearch) || !samePath)
+          );
+        }}
+      >
+        {props => {
+          return <UnsavedChangesDialog {...props} />;
+        }}
       </NavigationPrompt>
       <Button
         disabled={disabled || saving}

@@ -5,10 +5,10 @@ import getFormValuesByKoulutus from '../../utils/getFormValuesByKoulutus';
 import getKoulutusByOid from '../../utils/kouta/getKoulutusByOid';
 import useApiAsync from '../useApiAsync';
 import { POHJAVALINTA } from '../../constants';
-import ReduxForm from '../ReduxForm';
 import useFieldValue from '../useFieldValue';
 import getKoulutusFormConfig from '../../utils/getKoulutusFormConfig';
 import FormConfigContext from '../FormConfigContext';
+import useInitialValues from '#/src/components/useInitialValues';
 
 const resolveFn = () => Promise.resolve();
 
@@ -52,15 +52,8 @@ const CreateKoulutusForm = props => {
     return getInitialValues(data);
   }, [data]);
 
-  return (
-    <ReduxForm
-      form="createKoulutusForm"
-      initialValues={initialValues}
-      enableReinitialize
-    >
-      {() => <KoulutusFormWrapper steps isNewKoulutus={true} {...props} />}
-    </ReduxForm>
-  );
+  useInitialValues(initialValues);
+  return <KoulutusFormWrapper steps isNewKoulutus={true} {...props} />;
 };
 
 export default CreateKoulutusForm;

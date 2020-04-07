@@ -9,6 +9,7 @@ import CreateKoulutusFooter from './CreateKoulutusFooter';
 import useSelectBase from '../useSelectBase';
 import Title from '../Title';
 import useTranslation from '../useTranslation';
+import ReduxForm from '#/src/components/ReduxForm';
 
 const CreateKoulutusPage = props => {
   const {
@@ -25,23 +26,27 @@ const CreateKoulutusPage = props => {
   const { kopioKoulutusOid = null } = qs.parse(search);
 
   return (
-    <>
-      <Title>{t('sivuTitlet.uusiKoulutus')}</Title>
-      <FormPage
-        header={<CreateKoulutusHeader />}
-        steps={<CreateKoulutusSteps />}
-        footer={<CreateKoulutusFooter organisaatioOid={oid} />}
-      >
-        <TopInfoContainer>
-          <OrganisaatioInfo organisaatioOid={oid} />
-        </TopInfoContainer>
-        <CreateKoulutusForm
-          organisaatioOid={oid}
-          kopioKoulutusOid={kopioKoulutusOid}
-          onSelectBase={selectBase}
-        />
-      </FormPage>
-    </>
+    <ReduxForm form="createKoulutusForm" enableReinitialize>
+      {() => (
+        <>
+          <Title>{t('sivuTitlet.uusiKoulutus')}</Title>
+          <FormPage
+            header={<CreateKoulutusHeader />}
+            steps={<CreateKoulutusSteps />}
+            footer={<CreateKoulutusFooter organisaatioOid={oid} />}
+          >
+            <TopInfoContainer>
+              <OrganisaatioInfo organisaatioOid={oid} />
+            </TopInfoContainer>
+            <CreateKoulutusForm
+              organisaatioOid={oid}
+              kopioKoulutusOid={kopioKoulutusOid}
+              onSelectBase={selectBase}
+            />
+          </FormPage>
+        </>
+      )}
+    </ReduxForm>
   );
 };
 

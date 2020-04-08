@@ -5,12 +5,17 @@ import FormPage, { OrganisaatioInfo, TopInfoContainer } from '../FormPage';
 
 import CreateHakuHeader from './CreateHakuHeader';
 import CreateHakuSteps from './CreateHakuSteps';
-import CreateHakuForm from './CreateHakuForm';
+import useCreateHakuFormInitialValues from './useCreateHakuFormInitialValues';
 import CreateHakuFooter from './CreateHakuFooter';
 import useSelectBase from '../useSelectBase';
 import Title from '../Title';
 import useTranslation from '../useTranslation';
 import ReduxForm from '#/src/components/ReduxForm';
+import FormConfigContext from '#/src/components/FormConfigContext';
+import getHakuFormConfig from '#/src/utils/getHakuFormConfig';
+import HakuForm from '#/src/components/HakuForm';
+
+const config = getHakuFormConfig();
 
 const CreateHakuPage = props => {
   const {
@@ -25,10 +30,11 @@ const CreateHakuPage = props => {
   const { t } = useTranslation();
   const selectBase = useSelectBase(history, { kopioParam: 'kopioHakuOid' });
 
+  useCreateHakuFormInitialValues({ kopioHakuOid });
   return (
     <ReduxForm form="createHakuForm" enableReinitialize>
       {() => (
-        <>
+        <FormConfigContext.Provider value={config}>
           <Title>{t('sivuTitlet.uusiHaku')}</Title>
           <FormPage
             header={<CreateHakuHeader />}
@@ -38,14 +44,15 @@ const CreateHakuPage = props => {
             <TopInfoContainer>
               <OrganisaatioInfo organisaatioOid={organisaatioOid} />
             </TopInfoContainer>
-            <CreateHakuForm
+            <HakuForm
+              steps
               organisaatioOid={organisaatioOid}
               kopioHakuOid={kopioHakuOid}
               onSelectBase={selectBase}
               showArkistoituTilaOption={false}
             />
           </FormPage>
-        </>
+        </FormConfigContext.Provider>
       )}
     </ReduxForm>
   );

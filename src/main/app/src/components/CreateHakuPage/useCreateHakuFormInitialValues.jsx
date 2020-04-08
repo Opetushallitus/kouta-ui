@@ -5,11 +5,7 @@ import getHakuByOid from '../../utils/kouta/getHakuByOid';
 import useApiAsync from '../useApiAsync';
 import { POHJAVALINTA } from '../../constants';
 import getFormValuesByHaku from '../../utils/getFormValuesByHaku';
-import getHakuFormConfig from '../../utils/getHakuFormConfig';
-import FormConfigContext from '../FormConfigContext';
 import useInitialValues from '#/src/components/useInitialValues';
-
-const config = getHakuFormConfig();
 
 const resolveFn = () => Promise.resolve();
 
@@ -26,9 +22,8 @@ const getInitialValues = haku => {
     : initialValues;
 };
 
-const CreateHakuForm = props => {
+const useCreateHakuFormInitialValues = props => {
   const { kopioHakuOid } = props;
-
   const promiseFn = kopioHakuOid ? getHakuByOid : resolveFn;
 
   const { data } = useApiAsync({
@@ -42,11 +37,6 @@ const CreateHakuForm = props => {
   }, [data]);
 
   useInitialValues(initialValues);
-  return (
-    <FormConfigContext.Provider value={config}>
-      <HakuForm steps {...props} />
-    </FormConfigContext.Provider>
-  );
 };
 
-export default CreateHakuForm;
+export default useCreateHakuFormInitialValues;

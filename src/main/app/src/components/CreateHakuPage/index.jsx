@@ -30,9 +30,13 @@ const CreateHakuPage = props => {
   const { t } = useTranslation();
   const selectBase = useSelectBase(history, { kopioParam: 'kopioHakuOid' });
 
-  useCreateHakuFormInitialValues({ kopioHakuOid });
+  const initialValues = useCreateHakuFormInitialValues({ kopioHakuOid });
   return (
-    <ReduxForm form="createHakuForm" enableReinitialize>
+    <ReduxForm
+      form="createHakuForm"
+      enableReinitialize
+      initialValues={initialValues}
+    >
       {() => (
         <FormConfigContext.Provider value={config}>
           <Title>{t('sivuTitlet.uusiHaku')}</Title>

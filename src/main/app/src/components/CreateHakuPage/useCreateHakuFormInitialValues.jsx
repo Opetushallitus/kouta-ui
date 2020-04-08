@@ -1,11 +1,10 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
-import HakuForm, { initialValues } from '../HakuForm';
+import { initialValues } from '../HakuForm';
 import getHakuByOid from '../../utils/kouta/getHakuByOid';
 import useApiAsync from '../useApiAsync';
 import { POHJAVALINTA } from '../../constants';
 import getFormValuesByHaku from '../../utils/getFormValuesByHaku';
-import useInitialValues from '#/src/components/useInitialValues';
 
 const resolveFn = () => Promise.resolve();
 
@@ -32,11 +31,9 @@ const useCreateHakuFormInitialValues = props => {
     watch: kopioHakuOid,
   });
 
-  const initialValues = useMemo(() => {
+  return useMemo(() => {
     return getInitialValues(data);
   }, [data]);
-
-  useInitialValues(initialValues);
 };
 
 export default useCreateHakuFormInitialValues;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import queryString from 'query-string';
 
 import FormPage, {
@@ -8,7 +8,7 @@ import FormPage, {
 } from '../FormPage';
 import EditToteutusHeader from './EditToteutusHeader';
 import EditToteutusSteps from './EditToteutusSteps';
-import EditToteutusForm from './EditToteutusForm';
+import ToteutusFormWrapper from './ToteutusFormWrapper';
 import EditToteutusFooter from './EditToteutusFooter';
 import useApiAsync from '../useApiAsync';
 import getToteutusByOid from '../../utils/kouta/getToteutusByOid';
@@ -17,6 +17,7 @@ import Spin from '../Spin';
 import Title from '../Title';
 import useTranslation from '../useTranslation';
 import ReduxForm from '#/src/components/ReduxForm';
+import getFormValuesByToteutus from '#/src/utils/getFormValuesByToteutus';
 
 const getToteutusAndKoulutus = async ({ httpClient, apiUrls, oid }) => {
   const toteutus = await getToteutusByOid({ httpClient, apiUrls, oid });
@@ -36,6 +37,7 @@ const getToteutusAndKoulutus = async ({ httpClient, apiUrls, oid }) => {
 
 const EditToteutusPage = props => {
   const {
+    history,
     match: {
       params: { organisaatioOid, oid },
     },
@@ -55,8 +57,23 @@ const EditToteutusPage = props => {
   const koulutustyyppi = koulutus ? koulutus.koulutustyyppi : null;
   const { t } = useTranslation();
 
+  const initialValues = useMemo(() => {
+    return getFormValuesByToteutus(toteutus);
+  }, [toteutus]);
+
+  const onAttachHakukohde = useCallback(
+    ({ hakuOid }) => {
+      if (hakuOid) {
+        history.push(
+          `/organisaatio/${toteutus.organisaatioOid}/toteutus/${toteutus.oid}/haku/${hakuOid}/hakukohde`,
+        );
+      }
+    },
+    [history, toteutus],
+  );
+
   return (
-    <ReduxForm form="editToteutusForm">
+    <ReduxForm form="editToteutusForm" initialValues={initialValues}>
       {() => (
         <>
           <Title>{t('sivuTitlet.toteutuksenMuokkaus')}</Title>
@@ -81,8 +98,11 @@ const EditToteutusPage = props => {
               <OrganisaatioInfo organisaatioOid={organisaatioOid} />
             </TopInfoContainer>
             {toteutus && koulutus ? (
-              <EditToteutusForm
+              <ToteutusFormWrapper
                 toteutus={toteutus}
+                steps={false}
+                canSelectBase={false}
+                onAttachHakukohde={onAttachHakukohde}
                 organisaatioOid={organisaatioOid}
                 koulutusKoodiUri={koulutus ? koulutus.koulutusKoodiUri : null}
                 koulutustyyppi={koulutustyyppi}

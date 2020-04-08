@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { get } from 'lodash';
 
 import FormPage, { OrganisaatioInfo, TopInfoContainer } from '../FormPage';
 import EditValintaperusteHeader from './EditValintaperusteHeader';
 import EditValintaperusteSteps from './EditValintaperusteSteps';
-import EditValintaperusteForm from './EditValintaperusteForm';
+import ValintaperusteFormWrapper from './ValintaperusteFormWrapper';
 import EditValintaperusteFooter from './EditValintaperusteFooter';
 import useApiAsync from '../useApiAsync';
 import getValintaperusteByOid from '../../utils/kouta/getValintaperusteByOid';
@@ -13,6 +13,7 @@ import { KOULUTUSTYYPPI } from '../../constants';
 import Title from '../Title';
 import useTranslation from '../useTranslation';
 import ReduxForm from '#/src/components/ReduxForm';
+import getFormValuesByValintaperuste from '#/src/utils/getFormValuesByValintaperuste';
 
 const EditValintaperustePage = props => {
   const {
@@ -37,8 +38,12 @@ const EditValintaperustePage = props => {
 
   const { t } = useTranslation();
 
+  const initialValues = useMemo(() => {
+    return getFormValuesByValintaperuste(valintaperuste);
+  }, [valintaperuste]);
+
   return (
-    <ReduxForm form="editValintaperusteForm">
+    <ReduxForm form="editValintaperusteForm" initialValues={initialValues}>
       {() => (
         <>
           <Title>{t('sivuTitlet.valintaperusteenMuokkaus')}</Title>
@@ -57,8 +62,11 @@ const EditValintaperustePage = props => {
               <OrganisaatioInfo organisaatioOid={organisaatioOid} />
             </TopInfoContainer>
             {valintaperuste ? (
-              <EditValintaperusteForm
+              <ValintaperusteFormWrapper
                 valintaperuste={valintaperuste}
+                steps={false}
+                canSelectBase={false}
+                canEditTyyppi={false}
                 organisaatioOid={organisaatioOid}
                 koulutustyyppi={koulutustyyppi}
               />

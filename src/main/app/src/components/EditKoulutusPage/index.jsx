@@ -1,11 +1,11 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useCallback, useContext, useMemo } from 'react';
 import queryString from 'query-string';
 import ReduxForm from '../ReduxForm';
 
 import FormPage, { OrganisaatioInfo, TopInfoContainer } from '../FormPage';
 import EditKoulutusHeader from './EditKoulutusHeader';
 import EditKoulutusSteps from './EditKoulutusSteps';
-import EditKoulutusForm from './EditKoulutusForm';
+import KoulutusFormWrapper from './KoulutusFormWrapper';
 import EditKoulutusFooter from './EditKoulutusFooter';
 import useApiAsync from '../useApiAsync';
 import getKoulutusByOid from '../../utils/kouta/getKoulutusByOid';
@@ -19,6 +19,7 @@ import useFieldValue from '#/src/components/useFieldValue';
 import FormNameContext from '#/src/components/FormNameContext';
 import { Field } from 'redux-form';
 import { FormFieldCheckbox } from '../formFields';
+import getFormValuesByKoulutus from '#/src/utils/getFormValuesByKoulutus';
 
 const ToggleDraft = () => {
   const { t } = useTranslation();
@@ -42,6 +43,7 @@ const ToggleDraft = () => {
 
 const EditKoulutusPage = props => {
   const {
+    history,
     match: {
       params: { organisaatioOid, oid },
     },
@@ -60,9 +62,19 @@ const EditKoulutusPage = props => {
 
   const { t } = useTranslation();
   const apiUrls = useContext(UrlContext);
+  const koulutusOrganisaatioOid = koulutus.organisaatioOid;
+  const initialValues = useMemo(() => {
+    return getFormValuesByKoulutus(koulutus);
+  }, [koulutus]);
+
+  const onAttachToteutus = useCallback(() => {
+    history.push(
+      `/organisaatio/${organisaatioOid}/koulutus/${koulutus.oid}/toteutus`,
+    );
+  }, [history, koulutus, organisaatioOid]);
 
   return (
-    <ReduxForm form="editKoulutusForm">
+    <ReduxForm form="editKoulutusForm" initialValues={initialValues}>
       {() => (
         <>
           <Title>{t('sivuTitlet.koulutuksenMuokkaus')}</Title>
@@ -88,8 +100,13 @@ const EditKoulutusPage = props => {
               <OrganisaatioInfo organisaatioOid={organisaatioOid} />
             </TopInfoContainer>
             {koulutus ? (
-              <EditKoulutusForm
+              <KoulutusFormWrapper
+                steps={false}
+                isNewKoulutus={false}
+                johtaaTutkintoon={Boolean(koulutus.johtaaTutkintoon)}
+                onAttachToteutus={onAttachToteutus}
                 koulutus={koulutus}
+                koulutusOrganisaatioOid={koulutusOrganisaatioOid}
                 organisaatioOid={organisaatioOid}
                 scrollTarget={scrollTarget}
               />

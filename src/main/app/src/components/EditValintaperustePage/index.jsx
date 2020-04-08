@@ -32,17 +32,15 @@ const EditValintaperustePage = props => {
     watch,
   });
 
-  const koulutustyyppi =
-    get(valintaperuste, 'koulutustyyppi') ||
-    KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
-
   const { t } = useTranslation();
 
   const initialValues = useMemo(() => {
-    return getFormValuesByValintaperuste(valintaperuste);
+    return valintaperuste && getFormValuesByValintaperuste(valintaperuste);
   }, [valintaperuste]);
 
-  return (
+  return !valintaperuste ? (
+    <Spin center />
+  ) : (
     <ReduxForm form="editValintaperusteForm" initialValues={initialValues}>
       {() => (
         <>
@@ -68,7 +66,10 @@ const EditValintaperustePage = props => {
                 canSelectBase={false}
                 canEditTyyppi={false}
                 organisaatioOid={organisaatioOid}
-                koulutustyyppi={koulutustyyppi}
+                koulutustyyppi={
+                  get(valintaperuste, 'koulutustyyppi') ||
+                  KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
+                }
               />
             ) : (
               <Spin center />

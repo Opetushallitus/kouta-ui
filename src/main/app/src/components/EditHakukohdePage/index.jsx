@@ -81,9 +81,11 @@ const EditHakukohdePage = props => {
   const { t } = useTranslation();
 
   const initialValues = useMemo(() => {
-    return getFormValuesByHakukohde(hakukohde);
+    return hakukohde && getFormValuesByHakukohde(hakukohde);
   }, [hakukohde]);
-  return (
+  return !hakukohde ? (
+    <Spin center />
+  ) : (
     <ReduxForm form="editHakukohdeForm" initialValues={initialValues}>
       {() => (
         <>

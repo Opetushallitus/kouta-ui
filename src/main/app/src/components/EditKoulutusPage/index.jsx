@@ -62,18 +62,21 @@ const EditKoulutusPage = props => {
 
   const { t } = useTranslation();
   const apiUrls = useContext(UrlContext);
-  const koulutusOrganisaatioOid = koulutus.organisaatioOid;
   const initialValues = useMemo(() => {
-    return getFormValuesByKoulutus(koulutus);
+    return koulutus && getFormValuesByKoulutus(koulutus);
   }, [koulutus]);
 
   const onAttachToteutus = useCallback(() => {
-    history.push(
-      `/organisaatio/${organisaatioOid}/koulutus/${koulutus.oid}/toteutus`,
-    );
+    organisaatioOid &&
+      koulutus &&
+      history.push(
+        `/organisaatio/${organisaatioOid}/koulutus/${koulutus.oid}/toteutus`,
+      );
   }, [history, koulutus, organisaatioOid]);
 
-  return (
+  return !koulutus ? (
+    <Spin center />
+  ) : (
     <ReduxForm form="editKoulutusForm" initialValues={initialValues}>
       {() => (
         <>
@@ -106,7 +109,7 @@ const EditKoulutusPage = props => {
                 johtaaTutkintoon={Boolean(koulutus.johtaaTutkintoon)}
                 onAttachToteutus={onAttachToteutus}
                 koulutus={koulutus}
-                koulutusOrganisaatioOid={koulutusOrganisaatioOid}
+                koulutusOrganisaatioOid={koulutus.organisaatioOid}
                 organisaatioOid={organisaatioOid}
                 scrollTarget={scrollTarget}
               />

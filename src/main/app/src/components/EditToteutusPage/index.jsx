@@ -58,12 +58,12 @@ const EditToteutusPage = props => {
   const { t } = useTranslation();
 
   const initialValues = useMemo(() => {
-    return getFormValuesByToteutus(toteutus);
+    return toteutus && getFormValuesByToteutus(toteutus);
   }, [toteutus]);
 
   const onAttachHakukohde = useCallback(
     ({ hakuOid }) => {
-      if (hakuOid) {
+      if (hakuOid && toteutus) {
         history.push(
           `/organisaatio/${toteutus.organisaatioOid}/toteutus/${toteutus.oid}/haku/${hakuOid}/hakukohde`,
         );
@@ -72,7 +72,9 @@ const EditToteutusPage = props => {
     [history, toteutus],
   );
 
-  return (
+  return !toteutus ? (
+    <Spin center />
+  ) : (
     <ReduxForm form="editToteutusForm" initialValues={initialValues}>
       {() => (
         <>

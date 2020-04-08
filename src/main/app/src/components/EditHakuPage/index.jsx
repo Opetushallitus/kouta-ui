@@ -39,7 +39,7 @@ const EditHakuPage = props => {
 
   const { t } = useTranslation();
   const initialValues = useMemo(() => {
-    return getFormValuesByHaku(haku);
+    return haku && getFormValuesByHaku(haku);
   }, [haku]);
 
   const onAttachHakukohde = useCallback(
@@ -76,7 +76,6 @@ const EditHakuPage = props => {
                   initialValues={initialValues}
                   onAttachHakukohde={onAttachHakukohde}
                   canSelectBase={false}
-                  {...props}
                 />
               </FormConfigContext.Provider>
             ) : (

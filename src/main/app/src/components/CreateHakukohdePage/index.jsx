@@ -73,14 +73,12 @@ const CreateHakukohdePage = props => {
     watch: [organisaatioOid, toteutusOid, hakuOid].join(','),
   });
 
-  const koulutustyyppi =
-    get(data, 'koulutustyyppi') || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
-
-  const { toteutus } = data || { toteutus: {} };
-
   const initialValues = useMemo(() => {
-    return getInitialValues(toteutus.toteutusNimi, toteutus.toteutusKielet);
-  }, [toteutus]);
+    return (
+      data &&
+      getInitialValues(data.toteutus.toteutusNimi, data.toteutus.toteutusKielet)
+    );
+  }, [data]);
 
   return (
     <ReduxForm
@@ -137,7 +135,10 @@ const CreateHakukohdePage = props => {
                     organisaatioOid={organisaatioOid}
                     haku={data.haku}
                     toteutus={data.toteutus}
-                    koulutustyyppi={koulutustyyppi}
+                    koulutustyyppi={
+                      get(data, 'koulutustyyppi') ||
+                      KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
+                    }
                     showArkistoituTilaOption={false}
                   />
                 </FormConfigContext.Provider>

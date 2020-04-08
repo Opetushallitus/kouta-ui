@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { get } from 'lodash';
 
 import FormPage from '../FormPage';
@@ -8,7 +8,6 @@ import { getFirstLanguageValue } from '../../utils';
 import getKoulutustyyppiByKoulutusOid from '../../utils/kouta/getKoulutustyyppiByKoulutusOid';
 import CreateHakukohdeHeader from './CreateHakukohdeHeader';
 import CreateHakukohdeSteps from './CreateHakukohdeSteps';
-import CreateHakukohdeForm from './CreateHakukohdeForm';
 import CreateHakukohdeFooter from './CreateHakukohdeFooter';
 import Typography from '../Typography';
 import { KOULUTUSTYYPPI } from '../../constants';
@@ -19,6 +18,9 @@ import getToteutusByOid from '../../utils/kouta/getToteutusByOid';
 import Title from '../Title';
 import getHakuByOid from '../../utils/kouta/getHakuByOid';
 import ReduxForm from '#/src/components/ReduxForm';
+import HakukohdeForm, { initialValues } from '#/src/components/HakukohdeForm';
+import getHakukohdeFormConfig from '#/src/utils/getHakukohdeFormConfig';
+import FormConfigContext from '#/src/components/FormConfigContext';
 
 const getHakukohdeData = async ({
   organisaatioOid,
@@ -49,6 +51,11 @@ const getHakukohdeData = async ({
   };
 };
 
+const getInitialValues = (toteutusNimi, toteutusKielet) => {
+  return initialValues(toteutusNimi, toteutusKielet);
+};
+const config = getHakukohdeFormConfig();
+
 const CreateHakukohdePage = props => {
   const {
     match: {
@@ -69,8 +76,18 @@ const CreateHakukohdePage = props => {
   const koulutustyyppi =
     get(data, 'koulutustyyppi') || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
+  const { toteutus } = data || { toteutus: {} };
+
+  const initialValues = useMemo(() => {
+    return getInitialValues(toteutus.toteutusNimi, toteutus.toteutusKielet);
+  }, [toteutus]);
+
   return (
-    <ReduxForm form="createHakukohdeForm" enableReinitialize>
+    <ReduxForm
+      form="createHakukohdeForm"
+      enableReinitialize
+      initialValues={initialValues}
+    >
       {() => (
         <>
           <Title>{t('sivuTitlet.uusiHakukohde')}</Title>
@@ -113,14 +130,17 @@ const CreateHakukohdePage = props => {
                     </Typography>
                   </FlexItem>
                 </Flex>
-                <CreateHakukohdeForm
-                  organisaatio={data.organisaatio}
-                  organisaatioOid={organisaatioOid}
-                  haku={data.haku}
-                  toteutus={data.toteutus}
-                  koulutustyyppi={koulutustyyppi}
-                  showArkistoituTilaOption={false}
-                />
+                <FormConfigContext.Provider value={config}>
+                  <HakukohdeForm
+                    steps
+                    organisaatio={data.organisaatio}
+                    organisaatioOid={organisaatioOid}
+                    haku={data.haku}
+                    toteutus={data.toteutus}
+                    koulutustyyppi={koulutustyyppi}
+                    showArkistoituTilaOption={false}
+                  />
+                </FormConfigContext.Provider>
               </>
             ) : (
               <Spin center />

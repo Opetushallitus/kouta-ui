@@ -1,15 +1,38 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import queryString from 'query-string';
 
 import FormPage, { OrganisaatioInfo, TopInfoContainer } from '../FormPage';
 import CreateValintaperusteHeader from './CreateValintaperusteHeader';
 import CreateValintaperusteSteps from './CreateValintaperusteSteps';
-import CreateValintaperusteForm from './CreateValintaperusteForm';
+import ValintaperusteFormWrapper from './ValintaperusteFormWrapper';
 import CreateValintaperusteFooter from './CreateValintaperusteFooter';
 import useSelectBase from '../useSelectBase';
 import Title from '../Title';
 import useTranslation from '../useTranslation';
 import ReduxForm from '#/src/components/ReduxForm';
+import { POHJAVALINTA } from '#/src/constants';
+import getFormValuesByValintaperuste from '#/src/utils/getFormValuesByValintaperuste';
+import { initialValues } from '#/src/components/ValintaperusteForm';
+import getValintaperusteByOid from '#/src/utils/kouta/getValintaperusteByOid';
+import useApiAsync from '#/src/components/useApiAsync';
+
+const resolveFn = () => Promise.resolve(null);
+
+const getCopyValues = valintaperusteOid => ({
+  pohja: {
+    tapa: POHJAVALINTA.KOPIO,
+    valinta: { value: valintaperusteOid },
+  },
+});
+
+const getInitialValues = (valintaperuste, kieliValinnat) => {
+  return valintaperuste && valintaperuste.oid
+    ? {
+        ...getCopyValues(valintaperuste.oid),
+        ...getFormValuesByValintaperuste(valintaperuste),
+      }
+    : initialValues(kieliValinnat);
+};
 
 const CreateValintaperustePage = props => {
   const {
@@ -27,9 +50,27 @@ const CreateValintaperustePage = props => {
   });
 
   const { t } = useTranslation();
+  const promiseFn = kopioValintaperusteOid ? getValintaperusteByOid : resolveFn;
+
+  const { data: valintaperuste } = useApiAsync({
+    promiseFn,
+    oid: kopioValintaperusteOid,
+    watch: kopioValintaperusteOid,
+  });
+
+  const kieliValinnatLista =
+    kieliValinnat == null ? [] : kieliValinnat.split(',');
+
+  const initialValues = useMemo(() => {
+    return getInitialValues(valintaperuste, kieliValinnatLista);
+  }, [valintaperuste, kieliValinnatLista]);
 
   return (
-    <ReduxForm form="createToteutusForm" enableReinitialize>
+    <ReduxForm
+      form="createValintaperusteForm"
+      enableReinitialize
+      initialValues={initialValues}
+    >
       {() => (
         <>
           <Title>{t('sivuTitlet.uusiValintaperuste')}</Title>
@@ -41,12 +82,13 @@ const CreateValintaperustePage = props => {
             <TopInfoContainer>
               <OrganisaatioInfo organisaatioOid={oid} />
             </TopInfoContainer>
-            <CreateValintaperusteForm
+            <ValintaperusteFormWrapper
+              steps
               organisaatioOid={oid}
               kopioValintaperusteOid={kopioValintaperusteOid}
               onSelectBase={selectBase}
               showArkistoituTilaOption={false}
-              kieliValinnat={kieliValinnat}
+              kieliValinnat={kieliValinnatLista}
             />
           </FormPage>
         </>

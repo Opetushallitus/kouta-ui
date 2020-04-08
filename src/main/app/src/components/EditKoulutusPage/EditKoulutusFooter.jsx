@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 import { withRouter } from 'react-router-dom';
-import { isArray, uniq, without } from 'lodash';
+import { isArray, uniq, without, negate } from 'lodash';
 
 import Submit from '../Submit';
 import useTranslation from '../useTranslation';
@@ -12,9 +12,10 @@ import useSaveForm from '../useSaveForm';
 import validateKoulutusForm from '../../utils/validateKoulutusForm';
 import useOrganisaatio from '../useOrganisaatio';
 import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
-import { KOULUTUS_ROLE } from '../../constants';
+import { KOULUTUS_ROLE, ORGANISAATIOTYYPPI } from '#/src/constants';
 import useOrganisaatioHierarkia from '../useOrganisaatioHierarkia';
 import iterateTree from '../../utils/iterateTree';
+import organisaatioMatchesTyyppi from '#/src/utils/organisaatioService/organisaatioMatchesTyyppi';
 
 const getAvailableTarjoajaOids = hierarkia => {
   const oids = [];
@@ -55,7 +56,9 @@ const EditKoulutusFooter = ({ koulutus, organisaatioOid, history }) => {
     return roleBuilder.hasUpdate(KOULUTUS_ROLE, organisaatio);
   }, [organisaatio, roleBuilder]);
 
-  const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid);
+  const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid, {
+    filter: negate(organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)),
+  });
 
   const availableTarjoajaOids = useMemo(
     () => getAvailableTarjoajaOids(hierarkia),

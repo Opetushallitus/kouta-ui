@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { Field } from 'redux-form';
-import { get } from 'lodash';
+import { get, negate } from 'lodash';
 
 import OrganisaatioHierarkiaTreeSelect from '../OrganisaatioHierarkiaTreeSelect';
 import useTranslation from '../useTranslation';
@@ -29,8 +29,7 @@ const OrganizationSection = ({
 }) => {
   const { t } = useTranslation();
   const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid, {
-    filter: org =>
-      !organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)(org),
+    filter: negate(organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)),
   });
 
   const roleBuilder = useAuthorizedUserRoleBuilder();

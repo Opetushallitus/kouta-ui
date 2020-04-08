@@ -19,7 +19,9 @@ export const Submit = ({
     <>
       <NavigationPrompt
         when={(currentLoc, nextLoc) => {
-          const samePath = nextLoc.pathname === currentLoc.pathname;
+          const samePath =
+            (nextLoc && nextLoc.pathname) ===
+            (currentLoc && currentLoc.pathname);
           const considerPreventReload = !saving && isDirty;
           return considerPreventReload && !samePath;
         }}

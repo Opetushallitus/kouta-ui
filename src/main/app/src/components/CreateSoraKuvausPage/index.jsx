@@ -9,7 +9,6 @@ import CreateSoraKuvausFooter from './CreateSoraKuvausFooter';
 import useSelectBase from '../useSelectBase';
 import Title from '../Title';
 import useTranslation from '../useTranslation';
-import ReduxForm from '#/src/components/ReduxForm';
 
 const CreateSoraKuvausPage = props => {
   const {
@@ -27,31 +26,25 @@ const CreateSoraKuvausPage = props => {
   });
 
   return (
-    <ReduxForm form="createSoraKuvausForm" enableReinitialize>
-      {() => (
-        <>
-          <Title>{t('sivuTitlet.uusiSoraKuvaus')}</Title>
-          <FormPage
-            header={<CreateSoraKuvausHeader />}
-            steps={<CreateSoraKuvausSteps />}
-            footer={
-              <CreateSoraKuvausFooter organisaatioOid={organisaatioOid} />
-            }
-          >
-            <TopInfoContainer>
-              <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-            </TopInfoContainer>
-            <CreateSoraKuvausForm
-              organisaatioOid={organisaatioOid}
-              kopioSoraKuvausOid={kopioSoraKuvausOid}
-              onSelectBase={selectBase}
-              showArkistoituTilaOption={false}
-              kieliValinnat={kieliValinnat}
-            />
-          </FormPage>
-        </>
-      )}
-    </ReduxForm>
+    <>
+      <Title>{t('sivuTitlet.uusiSoraKuvaus')}</Title>
+      <FormPage
+        header={<CreateSoraKuvausHeader />}
+        steps={<CreateSoraKuvausSteps />}
+        footer={<CreateSoraKuvausFooter organisaatioOid={organisaatioOid} />}
+      >
+        <TopInfoContainer>
+          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+        </TopInfoContainer>
+        <CreateSoraKuvausForm
+          organisaatioOid={organisaatioOid}
+          kopioSoraKuvausOid={kopioSoraKuvausOid}
+          onSelectBase={selectBase}
+          showArkistoituTilaOption={false}
+          kieliValinnat={kieliValinnat}
+        />
+      </FormPage>
+    </>
   );
 };
 

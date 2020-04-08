@@ -51,7 +51,7 @@ const EditKoulutusForm = ({
     history.push(
       `/organisaatio/${organisaatioOid}/koulutus/${koulutus.oid}/toteutus`,
     );
-  }, [history, koulutus]);
+  }, [history, koulutus, organisaatioOid]);
 
   return (
     <KoulutusFormWrapper

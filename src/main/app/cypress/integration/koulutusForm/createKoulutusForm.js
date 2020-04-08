@@ -76,7 +76,7 @@ const tallenna = () => {
 const fillJarjestajaSection = () => {
   cy.getByTestId('jarjestajaSection').within(() => {
     cy.getByTestId('jarjestajatSelection').within(() => {
-      fillTreeSelect(['4.1.1.1.1.1'], cy);
+      fillTreeSelect(['1.2.1.1.1.1'], cy);
     });
 
     jatka();

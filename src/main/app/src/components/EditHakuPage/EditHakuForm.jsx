@@ -22,7 +22,7 @@ const EditHakuForm = ({ onSave, haku, history, organisaatioOid, ...props }) => {
         );
       }
     },
-    [history, haku],
+    [history, organisaatioOid, haku],
   );
 
   return (

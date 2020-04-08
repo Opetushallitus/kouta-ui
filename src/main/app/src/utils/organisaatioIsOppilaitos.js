@@ -1,12 +1,8 @@
-import { get } from 'lodash';
+import { ORGANISAATIOTYYPPI } from '#/src/constants';
+import organisaatioMachesTyyppi from './organisaatioService/organisaatioMatchesTyyppi';
 
-const organisaatioIsOppilaitos = organisaatio => {
-  const tyypit =
-    get(organisaatio, 'organisaatiotyypit') ||
-    get(organisaatio, 'tyypit') ||
-    [];
-
-  return tyypit.includes('organisaatiotyyppi_02');
-};
+const organisaatioIsOppilaitos = organisaatioMachesTyyppi(
+  ORGANISAATIOTYYPPI.OPPILAITOS,
+);
 
 export default organisaatioIsOppilaitos;

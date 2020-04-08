@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { Field } from 'redux-form';
-import { get } from 'lodash';
+import { get, negate } from 'lodash';
 
 import OrganisaatioHierarkiaTreeSelect from '../OrganisaatioHierarkiaTreeSelect';
 import useTranslation from '../useTranslation';
@@ -8,9 +8,10 @@ import useOrganisaatioHierarkia from '../useOrganisaatioHierarkia';
 import { createFormFieldComponent } from '../formFields';
 import { getTestIdProps } from '../../utils';
 import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
-import { KOULUTUS_ROLE } from '../../constants';
+import { KOULUTUS_ROLE, ORGANISAATIOTYYPPI } from '../../constants';
 import Alert from '../Alert';
 import Box from '../Box';
+import organisaatioMatchesTyyppi from '#/src/utils/organisaatioService/organisaatioMatchesTyyppi';
 
 const JarjestajatField = createFormFieldComponent(
   OrganisaatioHierarkiaTreeSelect,
@@ -27,7 +28,10 @@ const OrganizationSection = ({
   disableTarjoajaHierarkia,
 }) => {
   const { t } = useTranslation();
-  const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid);
+  const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid, {
+    filter: negate(organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)),
+  });
+
   const roleBuilder = useAuthorizedUserRoleBuilder();
   const tarjoajat = get(koulutus, 'tarjoajat') || [];
 

@@ -5,9 +5,9 @@ import getHakuByOid from '../../utils/kouta/getHakuByOid';
 import useApiAsync from '../useApiAsync';
 import { POHJAVALINTA } from '../../constants';
 import getFormValuesByHaku from '../../utils/getFormValuesByHaku';
-import ReduxForm from '../ReduxForm';
 import getHakuFormConfig from '../../utils/getHakuFormConfig';
 import FormConfigContext from '../FormConfigContext';
+import useInitialValues from '#/src/components/useInitialValues';
 
 const config = getHakuFormConfig();
 
@@ -41,18 +41,11 @@ const CreateHakuForm = props => {
     return getInitialValues(data);
   }, [data]);
 
+  useInitialValues(initialValues);
   return (
-    <ReduxForm
-      form="createHakuForm"
-      initialValues={initialValues}
-      enableReinitialize
-    >
-      {() => (
-        <FormConfigContext.Provider value={config}>
-          <HakuForm steps {...props} />
-        </FormConfigContext.Provider>
-      )}
-    </ReduxForm>
+    <FormConfigContext.Provider value={config}>
+      <HakuForm steps {...props} />
+    </FormConfigContext.Provider>
   );
 };
 

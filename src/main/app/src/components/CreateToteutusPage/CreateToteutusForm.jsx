@@ -5,10 +5,10 @@ import ToteutusForm, { initialValues } from '../ToteutusForm';
 import getFormValuesByToteutus from '../../utils/getFormValuesByToteutus';
 import useApiAsync from '../useApiAsync';
 import { POHJAVALINTA } from '../../constants';
-import ReduxForm from '../ReduxForm';
 import getToteutusByOid from '../../utils/kouta/getToteutusByOid';
 import getToteutusFormConfig from '../../utils/getToteutusFormConfig';
 import FormConfigContext from '../FormConfigContext';
+import useInitialValues from '#/src/components/useInitialValues';
 
 const resolveFn = () => Promise.resolve();
 
@@ -59,15 +59,8 @@ const CreateToteutusForm = props => {
       : getInitialValues(data, null, koulutusKielet);
   }, [data, koulutustyyppi, koulutusNimi, koulutusKielet]);
 
-  return (
-    <ReduxForm
-      form="createToteutusForm"
-      initialValues={initialValues}
-      enableReinitialize
-    >
-      {() => <ToteutusFormWrapper steps {...props} />}
-    </ReduxForm>
-  );
+  useInitialValues(initialValues);
+  return <ToteutusFormWrapper steps {...props} />;
 };
 
 export default CreateToteutusForm;

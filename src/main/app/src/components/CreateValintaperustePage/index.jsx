@@ -9,6 +9,7 @@ import CreateValintaperusteFooter from './CreateValintaperusteFooter';
 import useSelectBase from '../useSelectBase';
 import Title from '../Title';
 import useTranslation from '../useTranslation';
+import ReduxForm from '#/src/components/ReduxForm';
 
 const CreateValintaperustePage = props => {
   const {
@@ -28,25 +29,29 @@ const CreateValintaperustePage = props => {
   const { t } = useTranslation();
 
   return (
-    <>
-      <Title>{t('sivuTitlet.uusiValintaperuste')}</Title>
-      <FormPage
-        header={<CreateValintaperusteHeader />}
-        steps={<CreateValintaperusteSteps />}
-        footer={<CreateValintaperusteFooter organisaatioOid={oid} />}
-      >
-        <TopInfoContainer>
-          <OrganisaatioInfo organisaatioOid={oid} />
-        </TopInfoContainer>
-        <CreateValintaperusteForm
-          organisaatioOid={oid}
-          kopioValintaperusteOid={kopioValintaperusteOid}
-          onSelectBase={selectBase}
-          showArkistoituTilaOption={false}
-          kieliValinnat={kieliValinnat}
-        />
-      </FormPage>
-    </>
+    <ReduxForm form="createToteutusForm" enableReinitialize>
+      {() => (
+        <>
+          <Title>{t('sivuTitlet.uusiValintaperuste')}</Title>
+          <FormPage
+            header={<CreateValintaperusteHeader />}
+            steps={<CreateValintaperusteSteps />}
+            footer={<CreateValintaperusteFooter organisaatioOid={oid} />}
+          >
+            <TopInfoContainer>
+              <OrganisaatioInfo organisaatioOid={oid} />
+            </TopInfoContainer>
+            <CreateValintaperusteForm
+              organisaatioOid={oid}
+              kopioValintaperusteOid={kopioValintaperusteOid}
+              onSelectBase={selectBase}
+              showArkistoituTilaOption={false}
+              kieliValinnat={kieliValinnat}
+            />
+          </FormPage>
+        </>
+      )}
+    </ReduxForm>
   );
 };
 

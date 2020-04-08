@@ -10,6 +10,7 @@ import CreateHakuFooter from './CreateHakuFooter';
 import useSelectBase from '../useSelectBase';
 import Title from '../Title';
 import useTranslation from '../useTranslation';
+import ReduxForm from '#/src/components/ReduxForm';
 
 const CreateHakuPage = props => {
   const {
@@ -25,24 +26,28 @@ const CreateHakuPage = props => {
   const selectBase = useSelectBase(history, { kopioParam: 'kopioHakuOid' });
 
   return (
-    <>
-      <Title>{t('sivuTitlet.uusiHaku')}</Title>
-      <FormPage
-        header={<CreateHakuHeader />}
-        steps={<CreateHakuSteps />}
-        footer={<CreateHakuFooter organisaatioOid={organisaatioOid} />}
-      >
-        <TopInfoContainer>
-          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-        </TopInfoContainer>
-        <CreateHakuForm
-          organisaatioOid={organisaatioOid}
-          kopioHakuOid={kopioHakuOid}
-          onSelectBase={selectBase}
-          showArkistoituTilaOption={false}
-        />
-      </FormPage>
-    </>
+    <ReduxForm form="createHakuForm" enableReinitialize>
+      {() => (
+        <>
+          <Title>{t('sivuTitlet.uusiHaku')}</Title>
+          <FormPage
+            header={<CreateHakuHeader />}
+            steps={<CreateHakuSteps />}
+            footer={<CreateHakuFooter organisaatioOid={organisaatioOid} />}
+          >
+            <TopInfoContainer>
+              <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+            </TopInfoContainer>
+            <CreateHakuForm
+              organisaatioOid={organisaatioOid}
+              kopioHakuOid={kopioHakuOid}
+              onSelectBase={selectBase}
+              showArkistoituTilaOption={false}
+            />
+          </FormPage>
+        </>
+      )}
+    </ReduxForm>
   );
 };
 

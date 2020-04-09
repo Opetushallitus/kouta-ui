@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import queryString from 'query-string';
 import { get } from 'lodash';
 
 import FormPage from '../FormPage';
 import EditHakukohdeHeader from './EditHakukohdeHeader';
 import EditHakukohdeSteps from './EditHakukohdeSteps';
-import EditHakukohdeForm from './EditHakukohdeForm';
 import EditHakukohdeFooter from './EditHakukohdeFooter';
 import useApiAsync from '../useApiAsync';
 import { getFirstLanguageValue } from '../../utils';
@@ -20,6 +19,11 @@ import Title from '../Title';
 import getHakuByOid from '../../utils/kouta/getHakuByOid';
 import getHakukohdeByOid from '../../utils/kouta/getHakukohdeByOid';
 import useOrganisaatio from '../useOrganisaatio';
+import ReduxForm from '#/src/components/ReduxForm';
+import getHakukohdeFormConfig from '#/src/utils/getHakukohdeFormConfig';
+import getFormValuesByHakukohde from '#/src/utils/getFormValuesByHakukohde';
+import FormConfigContext from '#/src/components/FormConfigContext';
+import HakukohdeForm from '#/src/components/HakukohdeForm';
 
 const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
   const hakukohde = await getHakukohdeByOid({
@@ -51,6 +55,8 @@ const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
   };
 };
 
+const config = getHakukohdeFormConfig();
+
 const EditHakukohdePage = props => {
   const {
     match: {
@@ -74,60 +80,72 @@ const EditHakukohdePage = props => {
   const { organisaatio } = useOrganisaatio(organisaatioOid);
   const { t } = useTranslation();
 
-  return (
-    <>
-      <Title>{t('sivuTitlet.hakukohteenMuokkaus')}</Title>
-      <FormPage
-        header={<EditHakukohdeHeader hakukohde={hakukohde} />}
-        steps={<EditHakukohdeSteps />}
-        footer={
-          hakukohde ? <EditHakukohdeFooter hakukohde={hakukohde} /> : null
-        }
-      >
-        {hakukohde ? (
-          <>
-            <Flex marginBottom={2} justifyBetween>
-              <FlexItem grow={0} paddingRight={2}>
-                <Typography variant="h6" marginBottom={1}>
-                  {t('yleiset.organisaatio')}
-                </Typography>
-                <Typography>
-                  {getFirstLanguageValue(get(organisaatio, 'nimi'))}
-                </Typography>
-              </FlexItem>
-              <FlexItem grow={0}>
-                <Typography variant="h6" marginBottom={1}>
-                  {t('yleiset.haku')}
-                </Typography>
-                <Typography>
-                  {getFirstLanguageValue(get(haku, 'nimi'))}
-                </Typography>
-              </FlexItem>
-              <FlexItem grow={0}>
-                <Typography variant="h6" marginBottom={1}>
-                  {t('yleiset.toteutus')}
-                </Typography>
-                <Typography>
-                  {getFirstLanguageValue(get(toteutus, 'nimi'))}
-                </Typography>
-              </FlexItem>
-            </Flex>
-            <EditHakukohdeForm
-              organisaatioOid={organisaatioOid}
-              scrollTarget={scrollTarget}
-              haku={haku}
-              toteutus={toteutus}
-              hakukohde={hakukohde}
-              koulutustyyppi={
-                koulutustyyppi || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
-              }
-            />
-          </>
-        ) : (
-          <Spin center />
-        )}
-      </FormPage>
-    </>
+  const initialValues = useMemo(() => {
+    return hakukohde && getFormValuesByHakukohde(hakukohde);
+  }, [hakukohde]);
+  return !hakukohde ? (
+    <Spin center />
+  ) : (
+    <ReduxForm form="editHakukohdeForm" initialValues={initialValues}>
+      {() => (
+        <>
+          <Title>{t('sivuTitlet.hakukohteenMuokkaus')}</Title>
+          <FormPage
+            header={<EditHakukohdeHeader hakukohde={hakukohde} />}
+            steps={<EditHakukohdeSteps />}
+            footer={
+              hakukohde ? <EditHakukohdeFooter hakukohde={hakukohde} /> : null
+            }
+          >
+            {hakukohde ? (
+              <>
+                <Flex marginBottom={2} justifyBetween>
+                  <FlexItem grow={0} paddingRight={2}>
+                    <Typography variant="h6" marginBottom={1}>
+                      {t('yleiset.organisaatio')}
+                    </Typography>
+                    <Typography>
+                      {getFirstLanguageValue(get(organisaatio, 'nimi'))}
+                    </Typography>
+                  </FlexItem>
+                  <FlexItem grow={0}>
+                    <Typography variant="h6" marginBottom={1}>
+                      {t('yleiset.haku')}
+                    </Typography>
+                    <Typography>
+                      {getFirstLanguageValue(get(haku, 'nimi'))}
+                    </Typography>
+                  </FlexItem>
+                  <FlexItem grow={0}>
+                    <Typography variant="h6" marginBottom={1}>
+                      {t('yleiset.toteutus')}
+                    </Typography>
+                    <Typography>
+                      {getFirstLanguageValue(get(toteutus, 'nimi'))}
+                    </Typography>
+                  </FlexItem>
+                </Flex>
+                <FormConfigContext.Provider value={config}>
+                  <HakukohdeForm
+                    steps={false}
+                    organisaatioOid={organisaatioOid}
+                    scrollTarget={scrollTarget}
+                    haku={haku}
+                    toteutus={toteutus}
+                    hakukohde={hakukohde}
+                    koulutustyyppi={
+                      koulutustyyppi || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
+                    }
+                  />
+                </FormConfigContext.Provider>
+              </>
+            ) : (
+              <Spin center />
+            )}
+          </FormPage>
+        </>
+      )}
+    </ReduxForm>
   );
 };
 

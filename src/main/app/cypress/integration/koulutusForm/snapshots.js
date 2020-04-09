@@ -159,6 +159,7 @@ module.exports = {
         ],
         "modified": "2019-04-01T13:01",
         "johtaaTutkintoon": true,
+        "esikatselu": true,
         "teemakuva": null
       }
     },
@@ -208,6 +209,7 @@ module.exports = {
         ],
         "modified": "2019-04-01T13:01",
         "johtaaTutkintoon": true,
+        "esikatselu": true,
         "teemakuva": null
       }
     },
@@ -248,6 +250,7 @@ module.exports = {
         ],
         "modified": "2019-04-01T13:01",
         "johtaaTutkintoon": true,
+        "esikatselu": true,
         "teemakuva": null
       }
     }

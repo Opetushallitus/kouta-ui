@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import queryString from 'query-string';
 
 import FormPage, {
@@ -9,14 +9,33 @@ import FormPage, {
 import getKoulutusByOid from '../../utils/kouta/getKoulutusByOid';
 import CreateToteutusHeader from './CreateToteutusHeader';
 import CreateToteutusSteps from './CreateToteutusSteps';
-import CreateToteutusForm from './CreateToteutusForm';
+import ToteutusFormWrapper from './ToteutusFormWrapper';
 import CreateToteutusFooter from './CreateToteutusFooter';
 import useApiAsync from '../useApiAsync';
 import Spin from '../Spin';
-import { KOULUTUSTYYPPI } from '../../constants';
+import { KOULUTUSTYYPPI, POHJAVALINTA } from '../../constants';
 import useSelectBase from '../useSelectBase';
 import Title from '../Title';
+import getToteutusByOid from '../../utils/kouta/getToteutusByOid';
 import useTranslation from '../useTranslation';
+import ReduxForm from '#/src/components/ReduxForm';
+import getFormValuesByToteutus from '#/src/utils/getFormValuesByToteutus';
+import { initialValues } from '#/src/components/ToteutusForm';
+
+const resolveFn = () => Promise.resolve();
+
+const getCopyValues = toteutusOid => ({
+  pohja: {
+    tapa: POHJAVALINTA.KOPIO,
+    valinta: { value: toteutusOid },
+  },
+});
+
+const getInitialValues = (toteutus, koulutusNimi, koulutusKielet) => {
+  return toteutus
+    ? { ...getCopyValues(toteutus.oid), ...getFormValuesByToteutus(toteutus) }
+    : initialValues(koulutusNimi, koulutusKielet);
+};
 
 const CreateToteutusPage = props => {
   const {
@@ -43,42 +62,71 @@ const CreateToteutusPage = props => {
       ? koulutus.koulutustyyppi
       : KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
+  const { koulutusNimi } = props;
+  const { koulutusKielet } = props;
+
+  const promiseFn = kopioToteutusOid ? getToteutusByOid : resolveFn;
+
+  const { data } = useApiAsync({
+    promiseFn,
+    oid: kopioToteutusOid,
+    watch: kopioToteutusOid,
+  });
+
+  const initialValues = useMemo(() => {
+    return koulutustyyppi === 'amm'
+      ? getInitialValues(data, koulutusNimi, koulutusKielet)
+      : getInitialValues(data, null, koulutusKielet);
+  }, [data, koulutustyyppi, koulutusNimi, koulutusKielet]);
+
   return (
-    <>
-      <Title>{t('sivuTitlet.uusiToteutus')}</Title>
-      <FormPage
-        header={<CreateToteutusHeader />}
-        steps={<CreateToteutusSteps />}
-        footer={
-          koulutus ? (
-            <CreateToteutusFooter
-              koulutustyyppi={koulutustyyppi}
-              organisaatioOid={organisaatioOid}
-              koulutusOid={koulutusOid}
-            />
-          ) : null
-        }
-      >
-        <TopInfoContainer>
-          <KoulutusInfo organisaatioOid={organisaatioOid} koulutus={koulutus} />
-          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-        </TopInfoContainer>
-        {koulutus ? (
-          <CreateToteutusForm
-            koulutusKoodiUri={koulutus.koulutusKoodiUri}
-            koulutusNimi={koulutus.nimi}
-            koulutusKielet={koulutus.kielivalinta}
-            organisaatioOid={organisaatioOid}
-            koulutustyyppi={koulutustyyppi}
-            kopioToteutusOid={kopioToteutusOid}
-            onSelectBase={selectBase}
-            showArkistoituTilaOption={false}
-          />
-        ) : (
-          <Spin center />
-        )}
-      </FormPage>
-    </>
+    <ReduxForm
+      form="createToteutusForm"
+      enableReinitialize
+      initialValues={initialValues}
+    >
+      {() => (
+        <>
+          <Title>{t('sivuTitlet.uusiToteutus')}</Title>
+          <FormPage
+            header={<CreateToteutusHeader />}
+            steps={<CreateToteutusSteps />}
+            footer={
+              koulutus ? (
+                <CreateToteutusFooter
+                  koulutustyyppi={koulutustyyppi}
+                  organisaatioOid={organisaatioOid}
+                  koulutusOid={koulutusOid}
+                />
+              ) : null
+            }
+          >
+            <TopInfoContainer>
+              <KoulutusInfo
+                organisaatioOid={organisaatioOid}
+                koulutus={koulutus}
+              />
+              <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+            </TopInfoContainer>
+            {koulutus ? (
+              <ToteutusFormWrapper
+                steps
+                koulutusKoodiUri={koulutus.koulutusKoodiUri}
+                koulutusNimi={koulutus.nimi}
+                koulutusKielet={koulutus.kielivalinta}
+                organisaatioOid={organisaatioOid}
+                koulutustyyppi={koulutustyyppi}
+                kopioToteutusOid={kopioToteutusOid}
+                onSelectBase={selectBase}
+                showArkistoituTilaOption={false}
+              />
+            ) : (
+              <Spin center />
+            )}
+          </FormPage>
+        </>
+      )}
+    </ReduxForm>
   );
 };
 

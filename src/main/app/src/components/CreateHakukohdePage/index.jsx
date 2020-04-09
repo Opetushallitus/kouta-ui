@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { get } from 'lodash';
 
 import FormPage from '../FormPage';
@@ -8,7 +8,6 @@ import { getFirstLanguageValue } from '../../utils';
 import getKoulutustyyppiByKoulutusOid from '../../utils/kouta/getKoulutustyyppiByKoulutusOid';
 import CreateHakukohdeHeader from './CreateHakukohdeHeader';
 import CreateHakukohdeSteps from './CreateHakukohdeSteps';
-import CreateHakukohdeForm from './CreateHakukohdeForm';
 import CreateHakukohdeFooter from './CreateHakukohdeFooter';
 import Typography from '../Typography';
 import { KOULUTUSTYYPPI } from '../../constants';
@@ -18,6 +17,10 @@ import useTranslation from '../useTranslation';
 import getToteutusByOid from '../../utils/kouta/getToteutusByOid';
 import Title from '../Title';
 import getHakuByOid from '../../utils/kouta/getHakuByOid';
+import ReduxForm from '#/src/components/ReduxForm';
+import HakukohdeForm, { initialValues } from '#/src/components/HakukohdeForm';
+import getHakukohdeFormConfig from '#/src/utils/getHakukohdeFormConfig';
+import FormConfigContext from '#/src/components/FormConfigContext';
 
 const getHakukohdeData = async ({
   organisaatioOid,
@@ -48,6 +51,11 @@ const getHakukohdeData = async ({
   };
 };
 
+const getInitialValues = (toteutusNimi, toteutusKielet) => {
+  return initialValues(toteutusNimi, toteutusKielet);
+};
+const config = getHakukohdeFormConfig();
+
 const CreateHakukohdePage = props => {
   const {
     match: {
@@ -65,65 +73,83 @@ const CreateHakukohdePage = props => {
     watch: [organisaatioOid, toteutusOid, hakuOid].join(','),
   });
 
-  const koulutustyyppi =
-    get(data, 'koulutustyyppi') || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
+  const initialValues = useMemo(() => {
+    return (
+      data &&
+      getInitialValues(data.toteutus.toteutusNimi, data.toteutus.toteutusKielet)
+    );
+  }, [data]);
 
   return (
-    <>
-      <Title>{t('sivuTitlet.uusiHakukohde')}</Title>
-      <FormPage
-        header={<CreateHakukohdeHeader />}
-        steps={<CreateHakukohdeSteps />}
-        footer={
-          <CreateHakukohdeFooter
-            organisaatioOid={organisaatioOid}
-            hakuOid={hakuOid}
-            toteutusOid={toteutusOid}
-          />
-        }
-      >
-        {data ? (
-          <>
-            <Flex marginBottom={2} justifyBetween>
-              <FlexItem grow={0} paddingRight={2}>
-                <Typography variant="h6" marginBottom={1}>
-                  {t('yleiset.organisaatio')}
-                </Typography>
-                <Typography>
-                  {getFirstLanguageValue(get(data, 'organisaatio.nimi'))}
-                </Typography>
-              </FlexItem>
-              <FlexItem grow={0}>
-                <Typography variant="h6" marginBottom={1}>
-                  {t('yleiset.haku')}
-                </Typography>
-                <Typography>
-                  {getFirstLanguageValue(get(data, 'haku.nimi'))}
-                </Typography>
-              </FlexItem>
-              <FlexItem grow={0}>
-                <Typography variant="h6" marginBottom={1}>
-                  {t('yleiset.toteutus')}
-                </Typography>
-                <Typography>
-                  {getFirstLanguageValue(get(data, 'toteutus.nimi'))}
-                </Typography>
-              </FlexItem>
-            </Flex>
-            <CreateHakukohdeForm
-              organisaatio={data.organisaatio}
-              organisaatioOid={organisaatioOid}
-              haku={data.haku}
-              toteutus={data.toteutus}
-              koulutustyyppi={koulutustyyppi}
-              showArkistoituTilaOption={false}
-            />
-          </>
-        ) : (
-          <Spin center />
-        )}
-      </FormPage>
-    </>
+    <ReduxForm
+      form="createHakukohdeForm"
+      enableReinitialize
+      initialValues={initialValues}
+    >
+      {() => (
+        <>
+          <Title>{t('sivuTitlet.uusiHakukohde')}</Title>
+          <FormPage
+            header={<CreateHakukohdeHeader />}
+            steps={<CreateHakukohdeSteps />}
+            footer={
+              <CreateHakukohdeFooter
+                organisaatioOid={organisaatioOid}
+                hakuOid={hakuOid}
+                toteutusOid={toteutusOid}
+              />
+            }
+          >
+            {data ? (
+              <>
+                <Flex marginBottom={2} justifyBetween>
+                  <FlexItem grow={0} paddingRight={2}>
+                    <Typography variant="h6" marginBottom={1}>
+                      {t('yleiset.organisaatio')}
+                    </Typography>
+                    <Typography>
+                      {getFirstLanguageValue(get(data, 'organisaatio.nimi'))}
+                    </Typography>
+                  </FlexItem>
+                  <FlexItem grow={0}>
+                    <Typography variant="h6" marginBottom={1}>
+                      {t('yleiset.haku')}
+                    </Typography>
+                    <Typography>
+                      {getFirstLanguageValue(get(data, 'haku.nimi'))}
+                    </Typography>
+                  </FlexItem>
+                  <FlexItem grow={0}>
+                    <Typography variant="h6" marginBottom={1}>
+                      {t('yleiset.toteutus')}
+                    </Typography>
+                    <Typography>
+                      {getFirstLanguageValue(get(data, 'toteutus.nimi'))}
+                    </Typography>
+                  </FlexItem>
+                </Flex>
+                <FormConfigContext.Provider value={config}>
+                  <HakukohdeForm
+                    steps
+                    organisaatio={data.organisaatio}
+                    organisaatioOid={organisaatioOid}
+                    haku={data.haku}
+                    toteutus={data.toteutus}
+                    koulutustyyppi={
+                      get(data, 'koulutustyyppi') ||
+                      KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
+                    }
+                    showArkistoituTilaOption={false}
+                  />
+                </FormConfigContext.Provider>
+              </>
+            ) : (
+              <Spin center />
+            )}
+          </FormPage>
+        </>
+      )}
+    </ReduxForm>
   );
 };
 

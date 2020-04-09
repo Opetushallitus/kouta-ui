@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import Submit from '../Submit';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import { getTestIdProps } from '../../utils';
 import Box from '../Box';
 import updateValintaperuste from '../../utils/kouta/updateValintaperuste';

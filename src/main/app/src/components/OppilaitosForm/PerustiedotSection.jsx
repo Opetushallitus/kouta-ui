@@ -6,7 +6,7 @@ import { useOrganisaatio } from '../useOrganisaatio';
 import useLanguage from '../useLanguage';
 import useKoodiNimi from '../useKoodiNimi';
 import { getFirstLanguageValue } from '../../utils';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import Typography from '../Typography';
 import Box from '../Box';
 import DividerHeading from '../DividerHeading';

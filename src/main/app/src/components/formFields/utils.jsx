@@ -1,7 +1,7 @@
 import React, { createElement } from 'react';
 import { isArray, isNil } from 'lodash';
+import { useTranslation } from 'react-i18next';
 import FormControl from '../FormControl';
-import useTranslation from '../useTranslation';
 
 export const createComponent = (Component, mapProps) => {
   const InputComponent = props => {

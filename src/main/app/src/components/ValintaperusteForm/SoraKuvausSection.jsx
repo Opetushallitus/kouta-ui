@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 import { get } from 'lodash';
 
 import { FormFieldSoraKuvausSelect } from '../formFields';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import Button from '../Button';
 import Divider from '../Divider';
 import Box from '../Box';

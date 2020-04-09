@@ -4,7 +4,7 @@ import { isFunction, isString, isArray } from 'lodash';
 import Collapse from '../Collapse';
 import Button from '../Button';
 import { getTestIdProps } from '../../utils';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import LanguageTabs from './LanguageTabs';
 import Typography from '../Typography';
 import FormConfigSectionContext from '../FormConfigSectionContext';

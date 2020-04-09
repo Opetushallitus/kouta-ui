@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { isArray, uniq, without, negate } from 'lodash';
 
 import Submit from '../Submit';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import { getTestIdProps } from '../../utils';
 import Box from '../Box';
 import getKoulutusByFormValues from '../../utils/getKoulutusByFormValues';

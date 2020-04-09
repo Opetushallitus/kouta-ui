@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, FieldArray } from 'redux-form';
 import useKoodistoOptions from '../useKoodistoOptions';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import { getTestIdProps } from '../../utils';
 import DividerHeading from '../DividerHeading';
 import Box from '../Box';

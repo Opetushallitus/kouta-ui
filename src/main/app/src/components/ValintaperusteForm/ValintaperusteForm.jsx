@@ -4,7 +4,7 @@ import FormCollapseGroup from '../FormCollapseGroup';
 import ValintatapaSection from './ValintatapaSection';
 import PohjaSection from './PohjaSection';
 import KuvausSection from './KuvausSection';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import { getTestIdProps } from '../../utils';
 import SoraKuvausSection from './SoraKuvausSection';
 import useFieldValue from '../useFieldValue';

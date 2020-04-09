@@ -4,7 +4,7 @@ import { Field } from 'redux-form';
 import { FormFieldAsyncKoodistoSelect } from '../formFields';
 import useKoodistoOptions from '../useKoodistoOptions';
 import useLoadOptions from '../useLoadOptions';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 
 const KoulutusField = props => {
   const { language, disabled } = props;

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import FormHeader from '../FormHeader';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 
 const CreateSoraKuvausHeader = () => {
   const { t } = useTranslation();

@@ -10,7 +10,7 @@ import useApiAsync from '../useApiAsync';
 import getOppilaitoksenOsaByOid from '../../utils/kouta/getOppilaitoksenOsaByOid';
 import Spin from '../Spin';
 import Title from '../Title';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 
 const Steps = () => <OppilaitosFormSteps activeStep="oppilaitoksenOsa" />;
 

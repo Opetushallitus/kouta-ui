@@ -9,7 +9,7 @@ import ValintakoeSection from './ValintakoeSection';
 import LiitteetSection from './LiitteetSection';
 import FormCollapseGroup from '../FormCollapseGroup';
 import KuvausSection from './KuvausSection';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import { getTestIdProps } from '../../utils';
 import useFieldValue from '../useFieldValue';
 import JulkaisutilaSection from './JulkaisutilaSection';

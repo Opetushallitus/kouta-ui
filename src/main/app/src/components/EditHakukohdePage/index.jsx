@@ -12,7 +12,7 @@ import Flex, { FlexItem } from '../Flex';
 import Typography from '../Typography';
 import Spin from '../Spin';
 import { KOULUTUSTYYPPI } from '../../constants';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import getKoulutustyyppiByKoulutusOid from '../../utils/kouta/getKoulutustyyppiByKoulutusOid';
 import getToteutusByOid from '../../utils/kouta/getToteutusByOid';
 import Title from '../Title';

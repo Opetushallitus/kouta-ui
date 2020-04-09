@@ -13,7 +13,7 @@ import HakukohteetSection from './HakukohteetSection';
 import { isFunction, getTestIdProps } from '../../utils';
 import Flex from '../Flex';
 import Button from '../Button';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import LomakeFields from '../LomakeFields';
 import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
 import useModal from '../useModal';

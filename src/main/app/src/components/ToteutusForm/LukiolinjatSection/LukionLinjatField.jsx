@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 
 import { FormFieldSelect } from '../../formFields';
 import useKoodistoOptions from '../../useKoodistoOptions';
-import useTranslation from '../../useTranslation';
+import { useTranslation } from 'react-i18next';
 import { getTestIdProps } from '../../../utils';
 
 const LukiolinjatField = ({ name }) => {

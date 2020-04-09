@@ -2,7 +2,7 @@ import React from 'react';
 import { Field } from 'redux-form';
 
 import useKoodistoOptions from '../useKoodistoOptions';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import { FormFieldSelect } from '../formFields';
 
 const OsaamistaustaSection = ({ name }) => {

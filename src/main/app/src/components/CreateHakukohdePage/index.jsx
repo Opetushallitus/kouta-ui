@@ -13,7 +13,7 @@ import Typography from '../Typography';
 import { KOULUTUSTYYPPI } from '../../constants';
 import useApiAsync from '../useApiAsync';
 import Spin from '../Spin';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import getToteutusByOid from '../../utils/kouta/getToteutusByOid';
 import Title from '../Title';
 import getHakuByOid from '../../utils/kouta/getHakuByOid';

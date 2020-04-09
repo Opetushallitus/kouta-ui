@@ -15,7 +15,7 @@ import getToteutusByOid from '../../utils/kouta/getToteutusByOid';
 import getKoulutusByOid from '../../utils/kouta/getKoulutusByOid';
 import Spin from '../Spin';
 import Title from '../Title';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import ReduxForm from '#/src/components/ReduxForm';
 import getFormValuesByToteutus from '#/src/utils/getFormValuesByToteutus';
 

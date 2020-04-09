@@ -6,7 +6,7 @@ import { IDLE_TIMEOUT, ERROR_INTERNET_DISCONNECTED } from '../../constants';
 import { getMe } from '../../apiUtils';
 import { isDev } from '../../utils';
 import useApiAsync from '../useApiAsync';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import AuthorizedUserContext from '../AuthorizedUserContext';
 import UrlContext from '../UrlContext';
 import HttpContext from '../HttpContext';

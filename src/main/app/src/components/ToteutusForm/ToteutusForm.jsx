@@ -13,7 +13,7 @@ import HakukohteetModal from './HakukohteetModal';
 import Flex from '../Flex';
 import Button from '../Button';
 import KorkeakouluOsaamisalatSection from './KorkeakouluOsaamisalatSection';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import YhteyshenkilotSection from './YhteyshenkilotSection';
 import { KOULUTUSTYYPPI } from '../../constants';
 import useFieldValue from '../useFieldValue';

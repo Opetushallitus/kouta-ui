@@ -19,7 +19,7 @@ import Badge from '../Badge';
 import useFilterState from './useFilterState';
 import ErrorAlert from '../ErrorAlert';
 import Anchor from '../Anchor';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import getHaut from '../../utils/koutaSearch/getHaut';
 import useInView from '../useInView';
 import NavigationAnchor from './NavigationAnchor';

@@ -6,7 +6,7 @@ import Button from '../Button';
 import { FormFieldInput } from '../formFields';
 import Flex from '../Flex';
 import Spacing from '../Spacing';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import { getTestIdProps } from '../../utils';
 
 const YhteyshenkilotField = ({ fields, language, t }) => {

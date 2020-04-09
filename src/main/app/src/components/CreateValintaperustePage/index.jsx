@@ -8,7 +8,7 @@ import ValintaperusteFormWrapper from './ValintaperusteFormWrapper';
 import CreateValintaperusteFooter from './CreateValintaperusteFooter';
 import useSelectBase from '../useSelectBase';
 import Title from '../Title';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import ReduxForm from '#/src/components/ReduxForm';
 import { POHJAVALINTA } from '#/src/constants';
 import getFormValuesByValintaperuste from '#/src/utils/getFormValuesByValintaperuste';

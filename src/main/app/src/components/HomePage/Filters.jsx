@@ -6,7 +6,7 @@ import InputIcon from '../InputIcon';
 import Checkbox from '../Checkbox';
 import Select from '../Select';
 import { JULKAISUTILA } from '../../constants';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 
 const getDefaultOptions = t => [
   { value: JULKAISUTILA.JULKAISTU, label: t('julkaisutilat.julkaistu') },

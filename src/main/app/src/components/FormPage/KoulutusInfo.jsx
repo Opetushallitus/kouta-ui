@@ -1,5 +1,5 @@
 import React from 'react';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import { TopInfo } from '../FormPage/TopInfo';
 
 const KoulutusInfo = ({ organisaatioOid, koulutus }) => {

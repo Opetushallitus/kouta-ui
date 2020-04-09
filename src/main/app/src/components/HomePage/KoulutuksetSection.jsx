@@ -22,7 +22,7 @@ import Badge from '../Badge';
 import useFilterState from './useFilterState';
 import ErrorAlert from '../ErrorAlert';
 import { getFirstLanguageValue, getTestIdProps } from '../../utils';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import NavigationAnchor from './NavigationAnchor';
 
 import Anchor from '../Anchor';

@@ -8,7 +8,7 @@ import KoulutusFormWrapper from './KoulutusFormWrapper';
 import CreateKoulutusFooter from './CreateKoulutusFooter';
 import useSelectBase from '../useSelectBase';
 import Title from '../Title';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import ReduxForm from '#/src/components/ReduxForm';
 import { POHJAVALINTA } from '#/src/constants';
 import getFormValuesByKoulutus from '#/src/utils/getFormValuesByKoulutus';

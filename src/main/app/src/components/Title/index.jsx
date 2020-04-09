@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Helmet } from 'react-helmet';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 
 const Title = ({ children, showPrefix = true }) => {
   const { t } = useTranslation();

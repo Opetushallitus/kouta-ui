@@ -10,7 +10,7 @@ import {
 
 import { HAKULOMAKETYYPPI } from '../../constants';
 import Spacing from '../Spacing';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import useLanguage from '../useLanguage';
 import Flex, { FlexItem } from '../Flex';
 import UrlContext from '../UrlContext';

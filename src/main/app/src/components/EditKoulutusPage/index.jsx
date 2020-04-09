@@ -11,7 +11,7 @@ import useApiAsync from '../useApiAsync';
 import getKoulutusByOid from '../../utils/kouta/getKoulutusByOid';
 import Spin from '../Spin';
 import Title from '../Title';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import UrlContext from '#/src/components/UrlContext';
 import useAuthorizedUserRoleBuilder from '#/src/components/useAuthorizedUserRoleBuilder';
 import { HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';

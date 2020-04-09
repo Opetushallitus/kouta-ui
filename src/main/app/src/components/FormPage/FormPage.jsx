@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { getThemeProp } from '../../theme';
 import Button from '../Button';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import Container from '../Container';
 import useFieldValue from '#/src/components/useFieldValue';
 

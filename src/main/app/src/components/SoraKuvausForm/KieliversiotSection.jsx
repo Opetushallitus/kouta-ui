@@ -2,7 +2,7 @@ import React from 'react';
 import { Field } from 'redux-form';
 
 import { FormFieldKieliversiotSelect } from '../formFields';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 
 export const KieliversiotSection = ({ name }) => {
   const { t } = useTranslation();

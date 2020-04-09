@@ -4,7 +4,7 @@ import { get } from 'lodash';
 
 import getValintaperusteet from '../../utils/kouta/getValintaperusteet';
 import { getFirstLanguageValue } from '../../utils';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import useApiAsync from '../useApiAsync';
 import { FormFieldSelect } from '../formFields';
 import useLanguage from '../useLanguage';

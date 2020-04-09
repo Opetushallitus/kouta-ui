@@ -10,7 +10,7 @@ import Box from '../../Box';
 import OpintojenlaajuusField from './OpintojenlaajuusField';
 import TutkintonimikeField from './TutkintonimikeField';
 import KoulutusalatField from './KoulutusalatField';
-import useTranslation from '../../useTranslation';
+import { useTranslation } from 'react-i18next';
 import { FormFieldInput } from '../../formFields';
 import { getTestIdProps } from '../../../utils';
 import FormNameContext from '../../FormNameContext';

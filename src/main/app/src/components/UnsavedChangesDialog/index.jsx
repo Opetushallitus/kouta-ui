@@ -4,7 +4,7 @@ import ModalBody from '@opetushallitus/virkailija-ui-components/ModalBody';
 import ModalFooter from '@opetushallitus/virkailija-ui-components/ModalFooter';
 import Flex from '#/src/components/Flex';
 import React from 'react';
-import useTranslation from '#/src/components/useTranslation';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import Button from '@opetushallitus/virkailija-ui-components/Button';
 

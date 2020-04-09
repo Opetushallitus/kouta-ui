@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { FormFieldRadioGroup, FormFieldInput } from '../../formFields';
 import InputIcon from '../../InputIcon';
-import useTranslation from '../../useTranslation';
+import { useTranslation } from 'react-i18next';
 import Spacing from '../../Spacing';
 import { getTestIdProps } from '../../../utils';
 

@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 import styled from 'styled-components';
 import { get, isArray } from 'lodash';
 
-import useTranslation from '../../useTranslation';
+import { useTranslation } from 'react-i18next';
 import Spacing from '../../Spacing';
 import OpetusaikaCheckboxGroup from './OpetusaikaCheckboxGroup';
 import OpetuskieliCheckboxGroup from './OpetuskieliCheckboxGroup';

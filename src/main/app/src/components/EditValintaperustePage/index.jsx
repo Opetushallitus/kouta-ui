@@ -11,7 +11,7 @@ import getValintaperusteByOid from '../../utils/kouta/getValintaperusteByOid';
 import Spin from '../Spin';
 import { KOULUTUSTYYPPI } from '../../constants';
 import Title from '../Title';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import ReduxForm from '#/src/components/ReduxForm';
 import getFormValuesByValintaperuste from '#/src/utils/getFormValuesByValintaperuste';
 

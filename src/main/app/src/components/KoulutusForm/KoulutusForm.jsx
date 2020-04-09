@@ -14,7 +14,7 @@ import { isFunction, getTestIdProps } from '../../utils';
 import LisatiedotSection from './LisatiedotSection';
 import Flex from '../Flex';
 import NakyvyysSection from './NakyvyysSection';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import useFieldValue from '../useFieldValue';
 import JulkaisutilaSection from './JulkaisutilaSection';
 import isOphOrganisaatio from '../../utils/isOphOrganisaatio';

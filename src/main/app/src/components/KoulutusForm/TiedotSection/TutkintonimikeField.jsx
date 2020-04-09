@@ -2,7 +2,7 @@ import React from 'react';
 import { Field } from 'redux-form';
 
 import TutkintonimikeSelect from './TutkintonimikeSelect';
-import useTranslation from '../../useTranslation';
+import { useTranslation } from 'react-i18next';
 import { getTestIdProps } from '../../../utils';
 import { createFormFieldComponent, selectMapProps } from '../../formFields';
 

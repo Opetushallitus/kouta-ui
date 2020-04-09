@@ -12,7 +12,7 @@ import UiSelect, {
 } from '@opetushallitus/virkailija-ui-components/Select';
 
 import memoizeOne from '../../utils/memoizeOne';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 
 const noopPromise = () => Promise.resolve();
 

@@ -8,7 +8,7 @@ import {
 
 import Button from '../Button';
 import useLanguage from './index';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 
 const Story = () => {
   const language = useLanguage();

@@ -9,7 +9,7 @@ import Flex, { FlexItem } from '../Flex';
 import Checkbox from '../Checkbox';
 import { noop, getTestIdProps } from '../../utils';
 import useKoodistoOptions from '../useKoodistoOptions';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import FieldArrayList from '../FieldArrayList';
 import DividerHeading from '../DividerHeading';
 import FormLabel from '../FormLabel';

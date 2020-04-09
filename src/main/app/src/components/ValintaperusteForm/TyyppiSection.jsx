@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 
 import KoulutustyyppiSelect from '../KoulutustyyppiSelect';
 import { createFormFieldComponent } from '../formFields';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 
 const TyyppiField = createFormFieldComponent(
   KoulutustyyppiSelect,

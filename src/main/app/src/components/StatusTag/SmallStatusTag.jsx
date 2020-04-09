@@ -7,7 +7,7 @@ import { spacing } from '../../theme';
 import Typography from '../Typography';
 import { JULKAISUTILA } from '../../constants';
 
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 
 const Badge = styled.div`
   width: 0.8rem;

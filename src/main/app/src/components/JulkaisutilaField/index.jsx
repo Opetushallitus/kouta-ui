@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import Radio from '../Radio';
 import { FormFieldRadioGroup } from '../formFields';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import { JULKAISUTILA } from '../../constants';
 import Box from '../Box';
 import Typography from '../Typography';

@@ -1,7 +1,7 @@
 import React, { useContext, useCallback } from 'react';
 import { Field } from 'redux-form';
 
-import useTranslation from './useTranslation';
+import { useTranslation } from 'react-i18next';
 import { FormFieldImageInput } from './formFields';
 import HttpContext from './HttpContext';
 import UrlContext from './UrlContext';

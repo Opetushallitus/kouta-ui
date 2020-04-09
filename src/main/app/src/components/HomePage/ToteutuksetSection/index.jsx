@@ -21,7 +21,7 @@ import useFilterState from '../useFilterState';
 import { getFirstLanguageValue, getTestIdProps } from '../../../utils';
 import Anchor from '../../Anchor';
 import ErrorAlert from '../../ErrorAlert';
-import useTranslation from '../../useTranslation';
+import { useTranslation } from 'react-i18next';
 import useInView from '../../useInView';
 import NavigationAnchor from '../NavigationAnchor';
 import Button from '../../Button';

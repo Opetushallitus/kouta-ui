@@ -19,7 +19,7 @@ import {
 
 import Dropdown, { DropdownMenu, DropdownMenuItem } from '../Dropdown';
 
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 
 const ColumnInput = styled.textarea.attrs({ rows: 2 })`
   width: 100%;

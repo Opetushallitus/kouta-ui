@@ -11,7 +11,7 @@ import Spin from '../Spin';
 import { KOULUTUSTYYPPI } from '../../constants';
 import { isFunction } from '../../utils';
 import Title from '../Title';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 
 const EditSoraKuvausPage = props => {
   const {

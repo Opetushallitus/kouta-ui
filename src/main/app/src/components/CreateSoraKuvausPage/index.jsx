@@ -7,7 +7,7 @@ import CreateSoraKuvausSteps from './CreateSoraKuvausSteps';
 import CreateSoraKuvausFooter from './CreateSoraKuvausFooter';
 import useSelectBase from '../useSelectBase';
 import Title from '../Title';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import { POHJAVALINTA } from '#/src/constants';
 import getFormValuesBySoraKuvaus from '#/src/utils/getFormValuesBySoraKuvaus';
 import SoraKuvausForm, { initialValues } from '#/src/components/SoraKuvausForm';

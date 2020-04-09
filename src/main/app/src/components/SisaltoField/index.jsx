@@ -14,7 +14,7 @@ import Button from '../Button';
 import Icon from '../Icon';
 import Spacing from '../Spacing';
 import Flex, { FlexItem } from '../Flex';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import { getTestIdProps } from '../../utils';
 import { spacing } from '../../theme';
 

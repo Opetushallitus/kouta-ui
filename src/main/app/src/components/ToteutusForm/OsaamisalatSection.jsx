@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 import styled from 'styled-components';
 import stripTags from 'striptags';
 import { get, isEmpty, isString, mapValues } from 'lodash';
-import { Trans } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import {
   getOsaamisalakuvauksetByPerusteId,
   getEPerusteById,
@@ -24,7 +24,6 @@ import Spin from '#/src/components/Spin';
 import Typography from '#/src/components/Typography';
 
 import { useURLs } from '#/src/hooks/context';
-import useTranslation from '#/src/components/useTranslation';
 import useFieldValue from '#/src/components/useFieldValue';
 import useApiAsync from '#/src/components/useApiAsync';
 

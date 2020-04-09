@@ -5,7 +5,7 @@ import FormConfigField from '../../FormConfigField';
 import Box from '../../Box';
 import TekstiKuvausSection from './TekstiKuvausSection';
 import { FormFieldInput, FormFieldTextarea } from '../../formFields';
-import useTranslation from '../../useTranslation';
+import { useTranslation } from 'react-i18next';
 import { getTestIdProps } from '../../../utils';
 
 const KuvausSection = ({ disabled, language, name }) => {

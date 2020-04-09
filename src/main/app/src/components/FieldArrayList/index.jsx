@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { get, isArray, isNil } from 'lodash';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import { spacing, getThemeProp } from '../../theme';
 import Flex, { FlexItem } from '../Flex';
 import Button from '../Button';

@@ -5,7 +5,7 @@ import FormControl from '../FormControl';
 import FormLabel from '../FormLabel';
 import getKoulutukset from '../../utils/kouta/getKoulutukset';
 import { getFirstLanguageValue } from '../../utils';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import useApiAsync from '../useApiAsync';
 import Typography from '../Typography';
 

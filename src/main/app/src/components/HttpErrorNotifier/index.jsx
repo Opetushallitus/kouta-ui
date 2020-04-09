@@ -2,7 +2,7 @@ import { useEffect, useContext, useMemo } from 'react';
 import { get, throttle } from 'lodash';
 
 import HttpContext from '../HttpContext';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import useToaster from '../useToaster';
 
 const getToastOptions = (error, t) => {

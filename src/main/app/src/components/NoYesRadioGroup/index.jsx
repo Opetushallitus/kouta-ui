@@ -1,7 +1,7 @@
 import React, { useMemo, useCallback } from 'react';
 import { isBoolean, noop } from 'lodash';
 import { RadioGroup } from '../Radio';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 
 const getRadioValue = value => {
   if (!isBoolean(value)) {

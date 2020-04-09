@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Box from '../../Box';
 import ListCollapse from '../ListCollapse';
-import useTranslation from '../../useTranslation';
+import { useTranslation } from 'react-i18next';
 import useInView from '../../useInView';
 import NavigationAnchor from '../NavigationAnchor';
 import Button from '../../Button';

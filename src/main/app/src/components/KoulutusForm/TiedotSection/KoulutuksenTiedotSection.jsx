@@ -3,6 +3,7 @@ import { find, isEmpty, isNil, get, map } from 'lodash';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
 import { Grid, Cell } from 'styled-css-grid';
+import { useTranslation } from 'react-i18next';
 import { getKoulutusByKoodi } from '#/src/apiUtils';
 import { getThemeProp } from '#/src/theme';
 import {
@@ -20,7 +21,6 @@ import Box from '#/src/components/Box';
 import { FormFieldSelect } from '#/src/components/formFields';
 import Spin from '#/src/components/Spin';
 import Typography from '#/src/components/Typography';
-import useTranslation from '#/src/components/useTranslation';
 import useApiAsync from '#/src/components/useApiAsync';
 import UrlContext from '#/src/components/UrlContext';
 import useFieldValue from '#/src/components/useFieldValue';

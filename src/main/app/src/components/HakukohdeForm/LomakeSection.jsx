@@ -4,7 +4,7 @@ import { get } from 'lodash';
 
 import LomakeFields from '../LomakeFields';
 import { FormFieldCheckbox } from '../formFields';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import Spacing from '../Spacing';
 import { getTestIdProps, getFirstLanguageValue } from '../../utils';
 import { HAKULOMAKETYYPPI } from '../../constants';

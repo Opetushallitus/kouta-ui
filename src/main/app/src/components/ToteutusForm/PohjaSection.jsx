@@ -5,7 +5,7 @@ import FormControl from '../FormControl';
 import FormLabel from '../FormLabel';
 import getToteutukset from '../../utils/kouta/getToteutukset';
 import { getFirstLanguageValue } from '../../utils';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import useApiAsync from '../useApiAsync';
 
 const getToteutusOptions = toteutukset => {

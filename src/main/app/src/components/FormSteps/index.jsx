@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import FormStepIcon from '../FormStepIcon';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 
 const GroupContainer = styled.div`
   display: flex;

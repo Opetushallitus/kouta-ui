@@ -9,7 +9,7 @@ import useApiAsync from '../useApiAsync';
 import Spin from '../Spin';
 import getHakuByOid from '../../utils/kouta/getHakuByOid';
 import Title from '../Title';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import ReduxForm from '#/src/components/ReduxForm';
 import getHakuFormConfig from '#/src/utils/getHakuFormConfig';
 import getFormValuesByHaku from '#/src/utils/getFormValuesByHaku';

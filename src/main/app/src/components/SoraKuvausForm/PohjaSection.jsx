@@ -1,7 +1,7 @@
 import React from 'react';
 
 import BaseFields from '../BaseFields';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import FormLabel from '../FormLabel';
 import useSoraKuvausOptions from '../useSoraKuvausOptions';
 

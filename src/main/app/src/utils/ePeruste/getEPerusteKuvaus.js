@@ -1,18 +1,18 @@
 import _ from 'lodash';
+import { LANGUAGES } from '#/src/constants';
 import { sanitizeHTML } from '#/src/utils';
 import { getDefaultLocalisation } from '#/src/localisation';
 
-const addSection = (heading, content) =>
-  sanitizeHTML(`<h3>${heading}</h3>${content}`);
+const addSection = (heading, content) => `<h6>${heading}</h6>${content}`;
 
 export default function getEPerusteKuvaus(ePeruste) {
   const i18next = getDefaultLocalisation();
 
-  const TRANSLATORS = {
-    fi: i18next.getFixedT('fi'),
-    sv: i18next.getFixedT('sv'),
-    en: i18next.getFixedT('en'),
-  };
+  const TRANSLATORS = _.transform(
+    LANGUAGES,
+    (result, lang) => (result[lang] = i18next.getFixedT(lang)),
+    {},
+  );
 
   const {
     kuvaus,
@@ -21,17 +21,17 @@ export default function getEPerusteKuvaus(ePeruste) {
   } = ePeruste;
 
   if (tyotehtavatJoissaVoiToimia && suorittaneenOsaaminen) {
-    return _.mapValues(
-      TRANSLATORS,
-      (t, lang) =>
+    return _.mapValues(TRANSLATORS, (t, lang) => {
+      return sanitizeHTML(
         `${addSection(
           t('eperuste.suorittaneenOsaaminen'),
-          _.get(suorittaneenOsaaminen, lang),
+          _.get(suorittaneenOsaaminen, lang) || '-',
         )}${addSection(
           t('eperuste.tyotehtavatJoissaVoiToimia'),
-          _.get(tyotehtavatJoissaVoiToimia, lang),
+          _.get(tyotehtavatJoissaVoiToimia, lang) || '-',
         )}`,
-    );
+      );
+    });
   } else {
     return _.mapValues(kuvaus, sanitizeHTML);
   }

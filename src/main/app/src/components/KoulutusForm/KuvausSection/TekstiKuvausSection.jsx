@@ -1,43 +1,58 @@
 import React from 'react';
-import { get } from 'lodash';
-
-import { getEPerusteById } from '../../../apiUtils';
-import Typography from '../../Typography';
-import { getLanguageValue } from '../../../utils';
+import _fp from 'lodash/fp';
+import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import useApiAsync from '../../useApiAsync';
-import useFieldValue from '../../useFieldValue';
-import { sanitizeHTML } from '#/src/utils';
+import { getLanguageValue } from '#/src/utils';
+import { getEPerusteById } from '#/src/apiUtils';
+import Typography from '#/src/components/Typography';
+import useApiAsync from '#/src/components/useApiAsync';
+import useFieldValue from '#/src/components/useFieldValue';
 
-const getKuvaus = (koulutus, language) => {
-  const kuvaus = koulutus ? getLanguageValue(koulutus.kuvaus, language) : null;
-
-  return kuvaus ? sanitizeHTML(kuvaus) : null;
-};
+const StyledKuvaus = styled.div(({ theme }) => ({
+  ..._fp.compose(
+    _fp.mapValues(headingStyle => ({
+      ...headingStyle,
+      marginBottom: 0,
+      marginTop: '20px',
+    })),
+    _fp.pick(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']),
+    _fp.get('typography'),
+  )(theme),
+  ..._fp.get(theme, 'typography.body'),
+  maxWidth: '750px',
+}));
 
 const TekstiKuvausSection = ({ language }) => {
   const ePerusteField = useFieldValue('information.eperuste');
-  const ePerusteId = get(ePerusteField, 'value');
+  const ePerusteId = _fp.get('value', ePerusteField);
   const { t } = useTranslation();
 
-  const { data } = useApiAsync({
+  const { data = {} } = useApiAsync({
     promiseFn: getEPerusteById,
     ePerusteId,
     watch: ePerusteId,
   });
 
-  const kuvaus = getKuvaus(data, language);
+  const { kuvaus, nimi, diaarinumero } = data;
+
+  const translatedKuvaus = getLanguageValue(kuvaus, language);
+  const translatedNimi = getLanguageValue(nimi, language);
 
   return (
     <>
       {kuvaus ? (
         <>
-          <Typography
-            as="div"
+          <Typography variant="h5" marginBottom="20px">
+            {translatedNimi}{' '}
+            <Typography as="span" variant="body">
+              ({diaarinumero})
+            </Typography>
+          </Typography>
+          <StyledKuvaus
             dangerouslySetInnerHTML={{
-              __html: kuvaus,
+              __html: translatedKuvaus,
             }}
-          ></Typography>
+          ></StyledKuvaus>
           <Typography variant="secondary" as="div" marginTop={1}>
             ({t('yleiset.lahde')}: {t('yleiset.ePerusteet')})
           </Typography>

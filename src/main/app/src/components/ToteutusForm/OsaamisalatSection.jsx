@@ -54,11 +54,14 @@ const OsaamisalaDetailsToggleContainer = styled.div`
 `;
 
 const OsaamisalaDetailsToggle = ({ open, onToggle, ...props }) => {
+  const { t } = useTranslation();
   return (
     <OsaamisalaDetailsToggleContainer onClick={onToggle} {...props}>
       <Icon type={open ? 'arrow_drop_down' : 'arrow_right'} />
       <Typography>
-        {open ? 'Sulje tarkempi kuvaus' : 'Tarkenna kuvausta'}
+        {open
+          ? t('toteutuslomake.suljeTarkempiKuvaus')
+          : t('toteutuslomake.tarkennaKuvausta')}
       </Typography>
     </OsaamisalaDetailsToggleContainer>
   );

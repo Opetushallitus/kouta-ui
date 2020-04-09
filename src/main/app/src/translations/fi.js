@@ -411,6 +411,8 @@ export default {
     toteutuksenOsaamisalat: 'Toteutuksen osaamisalat',
     valitseOsaamisalat: 'Valitse osaamisalat',
     lisaaOsaamisala: 'Lisää osaamisala',
+    suljeTarkempiKuvaus: 'Sulje tarkempi kuvaus',
+    tarkennaKuvausta: 'Tarkenna kuvausta',
     koulutuksenNayttamiseenLiittyvatTiedot:
       'Koulutuksen näyttämiseen liittyvät tiedot',
     linkinOtsikko: 'Linkin otsikko',

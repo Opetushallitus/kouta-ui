@@ -3,6 +3,7 @@ import XHR from 'i18next-xhr-backend';
 import _ from 'lodash';
 import { getLocalisation } from './apiUtils';
 import getTranslations from './translations';
+import { LANGUAGES } from '#/src/constants';
 
 const formatMap = {
   toLower: _.toLower,
@@ -32,6 +33,7 @@ const createLocalisation = ({
     fallbackLng,
     debug,
     defaultNS,
+    preload: LANGUAGES,
     lng: language,
     ns,
     ...(loadLocalisation && {

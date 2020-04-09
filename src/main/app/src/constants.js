@@ -1,6 +1,6 @@
-import { without } from 'lodash';
+import _ from 'lodash';
 
-export const LANGUAGE = 'fi';
+export const LANGUAGES = ['fi', 'sv', 'en'];
 
 export const JULKAISUTILA = {
   TALLENNETTU: 'tallennettu',
@@ -51,7 +51,7 @@ export const TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT = [
   KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
 ];
 
-export const TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT = without(
+export const TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT = _.without(
   KOULUTUSTYYPIT,
   ...TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
 );

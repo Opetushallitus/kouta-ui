@@ -26,7 +26,14 @@ const LanguageTabsWrapper = styled.div`
   padding-left: ${({ theme }) => theme.spacing.unit * 3}px;
 `;
 
-const renderChildren = ({ onContinue, children, language, section }) => {
+const renderChildren = ({
+  Component,
+  onContinue,
+  children,
+  language,
+  section,
+  childProps,
+}) => {
   const childrenProps = {
     onContinue,
     language,
@@ -38,6 +45,15 @@ const renderChildren = ({ onContinue, children, language, section }) => {
     renderedChildren = children(childrenProps);
   } else if (React.isValidElement(children)) {
     renderedChildren = React.cloneElement(children, childrenProps);
+  } else if (Component) {
+    renderedChildren = (
+      <Component
+        name={section}
+        language={language}
+        {...getTestIdProps(`${section}Section`)}
+        {...childProps}
+      />
+    );
   }
 
   return section ? (
@@ -112,6 +128,7 @@ const FormCollapse = ({
   section,
   isOpen,
   onToggle,
+  Component,
   ...props
 }) => {
   const { t } = useTranslation();
@@ -150,7 +167,14 @@ const FormCollapse = ({
       toggleOnHeaderClick
       {...props}
     >
-      {renderChildren({ onContinue, children, language, section })}
+      {renderChildren({
+        Component,
+        childProps: props,
+        onContinue,
+        children,
+        language,
+        section,
+      })}
     </Collapse>
   );
 };

@@ -1,7 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
 import TypeSection from './TypeSection';
-import BaseSelectionSection from './BaseSelectionSection';
 import TiedotSection from './TiedotSection/TiedotSection';
 import KuvausSection from './KuvausSection';
 import JarjestajaSection from './JarjestajaSection';
@@ -19,6 +18,7 @@ import JulkaisutilaSection from './JulkaisutilaSection';
 import isOphOrganisaatio from '../../utils/isOphOrganisaatio';
 import TeemakuvaSection from '../TeemakuvaSection';
 import PohjaFormCollapse from '../PohjaFormCollapse';
+import getKoulutukset from '#/src/utils/kouta/getKoulutukset';
 import {
   isSameKoulutustyyppiWithOrganisaatio,
   useOrganisaatio,
@@ -76,16 +76,14 @@ const KoulutusForm = ({
       )}
       {_.isFunction(onSelectBase) && (
         <PohjaFormCollapse
-          section="pohja"
-          header={t('yleiset.pohjanValinta')}
           onSelectBase={onSelectBase}
-        >
-          <BaseSelectionSection
-            disabled={onlyTarjoajaRights}
-            name="pohja"
-            organisaatioOid={organisaatioOid}
-          />
-        </PohjaFormCollapse>
+          organisaatioOid={organisaatioOid}
+          disabled={onlyTarjoajaRights}
+          getCopyEntities={getKoulutukset}
+          infoText={t('koulutuslomake.pohjavalintaInfo')}
+          createLabel={t('koulutuslomake.luoUusiKoulutus')}
+          copyLabel={t('koulutuslomake.kopioiPohjaksiKoulutus')}
+        />
       )}
 
       <FormCollapse

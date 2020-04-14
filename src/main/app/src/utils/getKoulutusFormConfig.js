@@ -33,6 +33,7 @@ const config = createFormConfigBuilder().registerFieldTree([
   {
     section: 'pohja',
     field: 'pohja',
+    formFieldName: 'pohja.tapa',
     koulutustyypit: KOULUTUSTYYPIT,
     validate: (eb, values) =>
       get(values, 'pohja.tapa') === POHJAVALINTA.KOPIO

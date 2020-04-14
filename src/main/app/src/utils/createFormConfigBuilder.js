@@ -1,5 +1,5 @@
 import produce from 'immer';
-import { pick, set } from 'lodash';
+import _ from 'lodash';
 
 class FormConfigBuilder {
   constructor(config = {}, koulutustyyppiLookup = {}) {
@@ -7,33 +7,60 @@ class FormConfigBuilder {
     this.koulutustyyppiLookup = koulutustyyppiLookup;
   }
 
-  registerField(section, field, koulutustyypit, validate, meta = {}) {
+  registerField(
+    section,
+    field,
+    koulutustyypit,
+    validate,
+    meta = {},
+    formFieldName,
+    required,
+  ) {
     koulutustyypit.forEach(t => {
-      this.koulutustyyppiLookup[t] = this.koulutustyyppiLookup[t] || {};
-      this.koulutustyyppiLookup[t][
-        `sections.${section}.fields.${field}`
-      ] = true;
+      console.assert(
+        _.get(this.koulutustyyppiLookup, [
+          t,
+          `sections.${section}.fields.${field}`,
+        ]) == null,
+        `Overwriting form configuration (koulutustyyppi: "${t}") for field "${section}.${field}"`,
+      );
+
+      _.set(
+        this.koulutustyyppiLookup,
+        [t, `sections.${section}.fields.${field}`],
+        true,
+      );
     });
 
     this.config = produce(this.config, draft => {
-      set(draft, ['sections', section, 'fields', field], {
+      _.set(draft, ['sections', section, 'fields', field], {
         koulutustyypit,
         validate,
         meta,
+        formFieldName: formFieldName || field,
+        required,
       });
     });
     return this;
   }
 
   registerFieldTree(fieldsTree) {
-    fieldsTree.forEach(
-      ({ section, field, fields, koulutustyypit, validate, meta }) =>
-        [
-          ...(fields || []),
-          ...(field ? [{ name: field, koulutustyypit, validate, meta }] : []),
-        ].forEach(({ name, koulutustyypit, validate, meta }) =>
-          this.registerField(section, name, koulutustyypit, validate, meta),
-        ),
+    fieldsTree.forEach(({ section, field, fields, ...rest }) =>
+      [
+        ...(fields || []),
+        ...(field ? [{ name: field, ...rest }] : []),
+      ].forEach(
+        ({ name, koulutustyypit, formFieldName, validate, meta, required }) =>
+          this.registerField(
+            section,
+            name,
+            koulutustyypit,
+            validate,
+            meta,
+            formFieldName,
+            required,
+          ),
+      ),
     );
     return this;
   }
@@ -41,7 +68,7 @@ class FormConfigBuilder {
   getKoulutustyyppiConfig(koulutustyyppi) {
     const paths = Object.keys(this.koulutustyyppiLookup[koulutustyyppi] || {});
 
-    return pick(this.config, paths);
+    return _.pick(this.config, paths);
   }
 
   getConfig() {

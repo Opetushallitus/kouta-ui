@@ -71,7 +71,7 @@ const fillDatetime = ({ date, time, cy }) => {
 };
 
 const fillAikatauluSection = () => {
-  cy.getByTestId('aikatauluSection').within(() => {
+  cy.getByTestId('aikataulutSection').within(() => {
     cy.getByTestId('hakuajat').within(() => {
       lisaa();
 
@@ -166,7 +166,7 @@ const tallenna = () => {
 };
 
 const fillYhteystiedotSection = () => {
-  cy.getByTestId('yhteystiedotSection').within(() => {
+  cy.getByTestId('yhteyshenkilotSection').within(() => {
     fillYhteyshenkilotFields({ cy });
     jatka();
   });

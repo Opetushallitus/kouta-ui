@@ -23,17 +23,13 @@ import {
   useLomakeOptions,
 } from './utils';
 
-const LomakeSelect = ({
-  input: { value, onBlur, ...restInput },
-  getShowUrl,
-  t,
-  ...props
-}) => {
+const LomakeSelect = ({ input, getShowUrl, t, ...props }) => {
+  const { value } = input;
   const url = isFunction(getShowUrl) ? getShowUrl(value) : null;
 
   return (
     <>
-      <FormFieldSelect value={value} {...restInput} {...props} />
+      <FormFieldSelect value={value} {...props} input={input} />
       {url ? (
         <Spacing marginTop={2}>
           <Button

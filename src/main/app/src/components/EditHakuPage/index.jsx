@@ -55,35 +55,31 @@ const EditHakuPage = props => {
 
   return (
     <ReduxForm form="editHakuForm" initialValues={initialValues}>
-      {() => (
-        <>
-          <Title>{t('sivuTitlet.haunMuokkaus')}</Title>
-          <FormPage
-            header={<EditHakuHeader haku={haku} />}
-            steps={<EditHakuSteps />}
-            footer={haku ? <EditHakuFooter haku={haku} /> : null}
-          >
-            <TopInfoContainer>
-              <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-            </TopInfoContainer>
-            {haku ? (
-              <FormConfigContext.Provider value={config}>
-                <HakuForm
-                  haku={haku}
-                  organisaatioOid={organisaatioOid}
-                  scrollTarget={scrollTarget}
-                  steps={false}
-                  initialValues={initialValues}
-                  onAttachHakukohde={onAttachHakukohde}
-                  canSelectBase={false}
-                />
-              </FormConfigContext.Provider>
-            ) : (
-              <Spin center />
-            )}
-          </FormPage>
-        </>
-      )}
+      <Title>{t('sivuTitlet.haunMuokkaus')}</Title>
+      <FormPage
+        header={<EditHakuHeader haku={haku} />}
+        steps={<EditHakuSteps />}
+        footer={haku ? <EditHakuFooter haku={haku} /> : null}
+      >
+        <TopInfoContainer>
+          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+        </TopInfoContainer>
+        {haku ? (
+          <FormConfigContext.Provider value={config}>
+            <HakuForm
+              haku={haku}
+              organisaatioOid={organisaatioOid}
+              scrollTarget={scrollTarget}
+              steps={false}
+              initialValues={initialValues}
+              onAttachHakukohde={onAttachHakukohde}
+              canSelectBase={false}
+            />
+          </FormConfigContext.Provider>
+        ) : (
+          <Spin center />
+        )}
+      </FormPage>
     </ReduxForm>
   );
 };

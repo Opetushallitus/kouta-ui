@@ -64,29 +64,25 @@ const CreateHakuPage = props => {
       enableReinitialize
       initialValues={initialValues}
     >
-      {() => (
-        <>
-          <Title>{t('sivuTitlet.uusiHaku')}</Title>
-          <FormPage
-            header={<CreateHakuHeader />}
-            steps={<CreateHakuSteps />}
-            footer={<CreateHakuFooter organisaatioOid={organisaatioOid} />}
-          >
-            <TopInfoContainer>
-              <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-            </TopInfoContainer>
-            <FormConfigContext.Provider value={config}>
-              <HakuForm
-                steps
-                organisaatioOid={organisaatioOid}
-                kopioHakuOid={kopioHakuOid}
-                onSelectBase={selectBase}
-                showArkistoituTilaOption={false}
-              />
-            </FormConfigContext.Provider>
-          </FormPage>
-        </>
-      )}
+      <Title>{t('sivuTitlet.uusiHaku')}</Title>
+      <FormPage
+        header={<CreateHakuHeader />}
+        steps={<CreateHakuSteps />}
+        footer={<CreateHakuFooter organisaatioOid={organisaatioOid} />}
+      >
+        <TopInfoContainer>
+          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+        </TopInfoContainer>
+        <FormConfigContext.Provider value={config}>
+          <HakuForm
+            steps
+            organisaatioOid={organisaatioOid}
+            kopioHakuOid={kopioHakuOid}
+            onSelectBase={selectBase}
+            showArkistoituTilaOption={false}
+          />
+        </FormConfigContext.Provider>
+      </FormPage>
     </ReduxForm>
   );
 };

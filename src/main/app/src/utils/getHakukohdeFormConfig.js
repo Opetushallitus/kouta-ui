@@ -1,6 +1,12 @@
 import { get, reduce } from 'lodash';
 
-import { JULKAISUTILA, LIITTEEN_TOIMITUSTAPA } from '../constants';
+import {
+  JULKAISUTILA,
+  LIITTEEN_TOIMITUSTAPA,
+  POHJAVALINTA,
+} from '#/src/constants';
+
+import createFormConfigBuilder from './createFormConfigBuilder';
 
 const getKielivalinta = values => get(values, 'kieliversiot') || [];
 
@@ -109,97 +115,118 @@ const validateValintakokeet = (errorBuilder, values) => {
   );
 };
 
-const baseConfig = {
-  sections: {
-    pohja: {
-      fields: {
-        pohja: true,
+const config = createFormConfigBuilder().registerSections([
+  {
+    section: 'pohja',
+    parts: [
+      {
+        field: '.tapa',
+        required: true,
       },
-    },
-    kieliversiot: {
-      fields: {
-        kieliversiot: {
-          validate: eb => eb.validateArrayMinLength('kieliversiot', 1),
-        },
+      {
+        field: '.valinta',
+        validate: (eb, values) =>
+          get(values, 'pohja.tapa') === POHJAVALINTA.KOPIO
+            ? eb.validateExistence('pohja.valinta')
+            : eb,
       },
-    },
-    pohjakoulutusvaatimus: {
-      fields: {
-        pohjakoulutusvaatimus: {
-          validate: validateIfJulkaistu(eb =>
-            eb.validateArrayMinLength('pohjakoulutus.pohjakoulutusvaatimus', 1),
-          ),
-        },
-      },
-    },
-    perustiedot: {
-      fields: {
-        nimi: {
-          validate: (eb, values) =>
-            eb.validateTranslations(
-              'perustiedot.nimi',
-              getKielivalinta(values),
-            ),
-        },
-        hakuaika: {
-          validate: validateIfJulkaistu((eb, values) =>
-            get(values, 'hakuajat.eriHakuaika')
-              ? eb
-                  .validateArrayMinLength('hakuajat.hakuajat', 1, {
-                    isFieldArray: true,
-                  })
-                  .validateArray('hakuajat.hakuajat', eb =>
-                    eb.validateExistence('alkaa'),
-                  )
-              : eb,
-          ),
-        },
-        alkamiskausi: true,
-        hakulomake: true,
-      },
-    },
-    aloituspaikat: {
-      fields: {
-        aloituspaikat: true,
-        ensikertalaistenAloituspaikat: true,
-      },
-    },
-    valintaperusteenKuvaus: {
-      fields: {
-        kuvaus: true,
-      },
-    },
-    valintakoe: {
-      fields: {
-        tyypit: {
-          validate: validateIfJulkaistu((eb, values) =>
-            validateValintakokeet(eb, values),
-          ),
-        },
-        tilaisuudet: true,
-      },
-    },
-    liitteet: {
-      fields: {
-        liitteet: {
-          validate: validateIfJulkaistu((eb, values) =>
-            validateLiitteet(eb, values),
-          ),
-        },
-      },
-    },
-    julkaisutila: {
-      fields: {
-        julkaisutila: {
-          validate: eb => eb.validateExistence('tila'),
-        },
-      },
-    },
+    ],
   },
-};
+  {
+    section: 'kieliversiot',
+    field: 'kieliversiot',
+    validate: eb => eb.validateArrayMinLength('kieliversiot', 1),
+    required: true,
+  },
+  {
+    section: 'pohjakoulutus',
+    field: 'pohjakoulutus',
+    parts: [
+      {
+        field: '.pohjakoulutusvaatimus',
+        validate: validateIfJulkaistu(eb =>
+          eb.validateArrayMinLength('pohjakoulutus.pohjakoulutusvaatimus', 1),
+        ),
+      },
+    ],
+  },
+  {
+    section: 'perustiedot',
+    field: 'perustiedot',
+    parts: [
+      {
+        field: '.nimi',
+        validate: (eb, values) =>
+          eb.validateTranslations('perustiedot.nimi', getKielivalinta(values)),
+      },
+      {
+        field: 'hakuajat',
+        validate: validateIfJulkaistu((eb, values) =>
+          get(values, 'hakuajat.eriHakuaika')
+            ? eb
+                .validateArrayMinLength('hakuajat.hakuajat', 1, {
+                  isFieldArray: true,
+                })
+                .validateArray('hakuajat.hakuajat', eb =>
+                  eb.validateExistence('alkaa'),
+                )
+            : eb,
+        ),
+      },
 
-const getHakukohdeFormConfig = () => {
-  return { ...baseConfig };
-};
+      {
+        field: 'alkamiskausi',
+      },
+      {
+        field: 'hakulomake',
+      },
+    ],
+  },
+  {
+    section: 'hakuajat',
+    field: 'hakuajat',
+  },
+  {
+    section: 'aloituspaikat',
+    parts: [
+      {
+        field: 'aloituspaikat',
+      },
+      {
+        field: 'ensikertalaistenAloituspaikat',
+      },
+    ],
+  },
+  {
+    section: 'valintaperusteenKuvaus',
+    field: 'valintaperusteenKuvaus',
+  },
+  {
+    section: 'valintakoe',
+    parts: [
+      {
+        field: '.tyypit',
+        validate: validateIfJulkaistu((eb, values) =>
+          validateValintakokeet(eb, values),
+        ),
+      },
+      {
+        field: '.tilaisuudet',
+      },
+    ],
+  },
+  {
+    section: 'liitteet',
+    field: 'liitteet',
+    validate: validateIfJulkaistu((eb, values) => validateLiitteet(eb, values)),
+  },
+  {
+    section: 'tila',
+    field: 'tila',
+    validate: eb => eb.validateExistence('tila'),
+  },
+]);
+
+const getHakukohdeFormConfig = () => config.getConfig();
 
 export default getHakukohdeFormConfig;

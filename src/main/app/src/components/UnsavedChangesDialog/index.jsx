@@ -23,7 +23,7 @@ const UnsavedChangesDialog = ({ onConfirm, onCancel }) => {
       <ModalBody>{t('ilmoitukset.tallentamattomiaMuutoksia.viesti')}</ModalBody>
       <ModalFooter>
         <Flex justifyCenter>
-          <ModalButton marginLeft={1} color="danger" onClick={onConfirm}>
+          <ModalButton color="danger" onClick={onConfirm}>
             {t('ilmoitukset.tallentamattomiaMuutoksia.jatka')}
           </ModalButton>
           <ModalButton onClick={onCancel}>

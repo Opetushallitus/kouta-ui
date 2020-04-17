@@ -1,6 +1,6 @@
 import { development as developmentUrls } from './urls';
 
-export const configure = async urls => {
+export const configure = async (urls, httpClient) => {
   const { NODE_ENV, REACT_APP_CYPRESS } = process.env;
 
   const isCypress = !!REACT_APP_CYPRESS;
@@ -8,7 +8,8 @@ export const configure = async urls => {
   if (['development', 'test'].includes(NODE_ENV)) {
     urls.addProperties(developmentUrls({ isCypress }));
   } else {
-    await urls.load({ overrides: '/kouta/rest/config/frontProperties' });
+    const { data } = await httpClient.get('/kouta/rest/config/frontProperties');
+    urls.addProperties(data);
   }
 
   return urls;

@@ -44,7 +44,12 @@ export default function SessionErrorModal({
             <ModalButton
               onClick={() =>
                 isDev
-                  ? window.open(apiUrls.url('cas.login'))
+                  ? window.open(
+                      apiUrls.url('cas.login') +
+                        `?service=${encodeURIComponent(
+                          'https://localhost:3000/kouta',
+                        )}`,
+                    )
                   : window.location.replace(apiUrls.url('cas.login'))
               }
             >

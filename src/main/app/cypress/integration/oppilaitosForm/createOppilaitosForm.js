@@ -68,7 +68,7 @@ const fillTeemakuvaSection = () => {
 };
 
 const fillTietoaOpiskelustaSection = () => {
-  cy.getByTestId('tietoaOpiskelustaSection').within(() => {
+  cy.getByTestId('tietoaSection').within(() => {
     selectOption('organisaationkuvaustiedot_0', cy);
 
     cy.get('textarea').paste('Tietoa', { force: true });

@@ -77,7 +77,7 @@ const fillPerustiedotSection = ({ isKorkeakoulu = false } = {}) => {
     cy.getByTestId('hakukohteenNimi')
       .find('input')
       .clear({ force: true })
-      .type('Hakukohteen nimi', { force: true });
+      .paste('Hakukohteen nimi');
 
     if (!isKorkeakoulu) {
       cy.getByTestId('voiSuorittaaKaksoistutkinnon').within(() => {
@@ -117,10 +117,10 @@ const fillAlkamiskausiSection = () => {
 
 const fillAloituspaikatSection = ({ isKorkeakoulu = false } = {}) => {
   cy.getByTestId('aloituspaikatSection').within(() => {
-    cy.getByTestId('aloituspaikkamaara').type('10', { force: true });
+    cy.getByTestId('aloituspaikkamaara').paste('10');
 
     if (isKorkeakoulu) {
-      cy.getByTestId('ensikertalaismaara').type('5', { force: true });
+      cy.getByTestId('ensikertalaismaara').paste('5');
     }
 
     jatka();
@@ -152,11 +152,11 @@ const fillLiitteetSection = () => {
 
       cy.getByTestId('nimi')
         .find('input')
-        .type('Nimi', { force: true });
+        .paste('Nimi');
 
       cy.getByTestId('kuvaus')
         .find('textarea')
-        .type('Kuvaus', { force: true });
+        .paste('Kuvaus');
 
       fillDatetime({
         date: '25.11.2019',
@@ -169,7 +169,7 @@ const fillLiitteetSection = () => {
 
       cy.getByTestId('osoite')
         .find('input')
-        .type('Osoite', { force: true });
+        .paste('Osoite');
 
       cy.getByTestId('postinumero').within(() => {
         fillAsyncSelect('0', 'Posti_0');
@@ -177,7 +177,7 @@ const fillLiitteetSection = () => {
 
       cy.getByTestId('sahkoposti')
         .find('input')
-        .type('sahkoposti@email.com', { force: true });
+        .paste('sahkoposti@email.com');
     });
 
     jatka();

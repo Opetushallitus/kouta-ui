@@ -36,7 +36,7 @@ const fillTiedotSection = () => {
   cy.getByTestId('tiedotSection').within(() => {
     cy.getByTestId('nimi')
       .find('input')
-      .type('Nimi', { force: true });
+      .paste('Nimi', { force: true });
 
     cy.getByTestId('kuvaus').within(() => {
       typeToEditor('Kuvaus', cy);
@@ -103,9 +103,7 @@ describe('createSoraKuvausForm', () => {
 
     cy.location('pathname').should(
       'eq',
-      `/kouta/organisaatio/${organisaatioOid}/sora-kuvaus/${
-        soraKuvaus.id
-      }/muokkaus`,
+      `/kouta/organisaatio/${organisaatioOid}/sora-kuvaus/${soraKuvaus.id}/muokkaus`,
     );
   });
 });

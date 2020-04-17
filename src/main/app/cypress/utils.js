@@ -58,7 +58,7 @@ export const stubLokalisaatioRoute = ({ cy }) => {
 
 export const typeToEditor = (value, cy) => {
   cy.get('.Editor__').within(() => {
-    cy.get('[contenteditable="true"]').type(value, { force: true });
+    cy.get('[contenteditable="true"]').type(value);
   });
 };
 
@@ -70,11 +70,11 @@ export const fillDateTimeInput = ({ date, time, cy }) => {
   getByTestId('DateTimeInput', cy).within(() => {
     getByTestId('DateTimeInput__Date', cy)
       .find('input')
-      .type(date, { force: true });
+      .type(date);
     getByTestId('DateTimeInput__Time', cy)
       .find('input')
       .clear()
-      .type(time, { force: true });
+      .type(time);
   });
 };
 
@@ -96,19 +96,19 @@ export const fillYhteyshenkilotFields = ({ cy }) => {
 
   cy.getByTestId('nimi')
     .find('input')
-    .type('nimi', { force: true });
+    .paste('nimi');
   cy.getByTestId('titteli')
     .find('input')
-    .type('titteli', { force: true });
+    .paste('titteli');
   cy.getByTestId('sahkoposti')
     .find('input')
-    .type('sähkoposti', { force: true });
+    .paste('sähkoposti');
   cy.getByTestId('puhelinnumero')
     .find('input')
-    .type('puhelin', { force: true });
+    .paste('puhelin');
   cy.getByTestId('verkkosivu')
     .find('input')
-    .type('verkkosivu', { force: true });
+    .paste('verkkosivu');
 };
 
 export const fillValintakoeFields = () => {
@@ -118,7 +118,7 @@ export const fillValintakoeFields = () => {
 
   cy.getByTestId('osoite')
     .find('input')
-    .type('osoite', { force: true });
+    .paste('osoite');
 
   cy.getByTestId('postinumero').within(() => {
     fillAsyncSelect('0', '0 Posti_0');
@@ -142,7 +142,7 @@ export const fillValintakoeFields = () => {
 
   cy.getByTestId('lisatietoja')
     .find('textarea')
-    .type('lisatietoja', { force: true });
+    .paste('lisatietoja');
 };
 
 export const stubKayttoOikeusMeRoute = ({ user = {}, cy }) => {

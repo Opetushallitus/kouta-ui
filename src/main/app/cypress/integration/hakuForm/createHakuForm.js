@@ -34,7 +34,7 @@ const fillKieliversiotSection = () => {
 
 const fillNimiSection = () => {
   cy.getByTestId('nimiSection').within(() => {
-    cy.get('input').type('haun nimi', { force: true });
+    cy.get('input').paste('haun nimi');
 
     jatka();
   });

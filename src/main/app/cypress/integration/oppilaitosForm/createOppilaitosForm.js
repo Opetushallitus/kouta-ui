@@ -29,25 +29,25 @@ const fillPerustiedotSection = () => {
   cy.getByTestId('perustiedotSection').within(() => {
     cy.getByTestId('opiskelijoita')
       .find('input')
-      .type('1', { force: true });
+      .paste('1', { force: true });
     cy.getByTestId('korkeakouluja')
       .find('input')
-      .type('2', { force: true });
+      .paste('2', { force: true });
     cy.getByTestId('tiedekuntia')
       .find('input')
-      .type('3', { force: true });
+      .paste('3', { force: true });
     cy.getByTestId('kampuksia')
       .find('input')
-      .type('4', { force: true });
+      .paste('4', { force: true });
     cy.getByTestId('yksikoita')
       .find('input')
-      .type('5', { force: true });
+      .paste('5', { force: true });
     cy.getByTestId('toimipisteita')
       .find('input')
-      .type('6', { force: true });
+      .paste('6', { force: true });
     cy.getByTestId('akatemioita')
       .find('input')
-      .type('7', { force: true });
+      .paste('7', { force: true });
 
     jatka();
   });
@@ -71,7 +71,7 @@ const fillTietoaOpiskelustaSection = () => {
   cy.getByTestId('tietoaOpiskelustaSection').within(() => {
     selectOption('organisaationkuvaustiedot_0', cy);
 
-    cy.get('textarea').type('Tietoa', { force: true });
+    cy.get('textarea').paste('Tietoa', { force: true });
 
     jatka();
   });
@@ -81,7 +81,7 @@ const fillYhteystiedotSection = () => {
   cy.getByTestId('yhteystiedotSection').within(() => {
     cy.getByTestId('osoite')
       .find('input')
-      .type('Osoite', { force: true });
+      .paste('Osoite', { force: true });
 
     cy.getByTestId('postinumero').within(() => {
       fillAsyncSelect('0', 'Posti_0');
@@ -89,15 +89,15 @@ const fillYhteystiedotSection = () => {
 
     cy.getByTestId('sahkoposti')
       .find('input')
-      .type('sahkoposti@sahkoposti.fi', { force: true });
+      .paste('sahkoposti@sahkoposti.fi', { force: true });
 
     cy.getByTestId('puhelinnumero')
       .find('input')
-      .type('12345', { force: true });
+      .paste('12345', { force: true });
 
     cy.getByTestId('verkkosivu')
       .find('input')
-      .type('www.verkkosivu.fi', { force: true });
+      .paste('www.verkkosivu.fi', { force: true });
 
     jatka();
   });

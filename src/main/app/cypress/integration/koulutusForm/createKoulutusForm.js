@@ -52,9 +52,7 @@ const fillLisatiedotSection = () => {
     });
 
     cy.getByTestId('osioKuvaus.koulutuksenlisatiedot_0#1').within(() => {
-      cy.get('textarea').type('koulutuksenlisatiedot_0 kuvaus', {
-        force: true,
-      });
+      cy.get('textarea').paste('koulutuksenlisatiedot_0 kuvaus');
     });
 
     cy.getByTestId('jatkaButton').click({ force: true });
@@ -170,7 +168,7 @@ describe('createKoulutusForm', () => {
       cy.getByTestId('nimiInput').within(() => {
         cy.get('input')
           .clear()
-          .type('Tiedot nimi', { force: true });
+          .paste('Tiedot nimi');
       });
 
       cy.getByTestId('tutkintonimikeSelect').click();
@@ -194,11 +192,11 @@ describe('createKoulutusForm', () => {
 
     cy.getByTestId('kuvausSection').within(() => {
       cy.getByTestId('kuvauksenNimiInput').within(() => {
-        cy.get('input').type('Kuvauksen nimi', { force: true });
+        cy.get('input').paste('Kuvauksen nimi');
       });
 
       cy.getByTestId('kuvausInput').within(() => {
-        cy.get('textarea').type('Kuvaus', { force: true });
+        cy.get('textarea').paste('Kuvaus');
       });
 
       jatka();

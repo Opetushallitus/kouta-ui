@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { get } from 'lodash';
+import { get, isFunction } from 'lodash';
 import { produce } from 'immer';
 import Box from '../Box';
-import { isFunction } from '../../utils';
 import useFormConfig from '../useFormConfig';
 import useForm from '../useForm';
 import scrollElementIntoView from '../../utils/scrollElementIntoView';
@@ -52,12 +51,9 @@ const FormCollapseGroup = ({
   const sectionErrors = useMemo(
     () =>
       React.Children.map(visibleChildren, child => {
-        // Get the name of the *Section component which should be the only child of *FormCollapse component
+        // Get the 'section'-prop of the FormCollapse component
         // TODO: Enforce prop types
-        const firstSection = get(
-          React.Children.toArray(get(child, 'props.children')),
-          '0.props.name',
-        );
+        const firstSection = get(child, 'props.section');
         return get(formErrors, firstSection) != null;
       }),
     [formErrors, visibleChildren],

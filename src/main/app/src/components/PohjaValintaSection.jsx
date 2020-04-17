@@ -11,11 +11,12 @@ import FormControl from '#/src/components/FormControl';
 import Spacing from '#/src/components/Spacing';
 import Typography from '#/src/components/Typography';
 import useApiAsync from '#/src/components/useApiAsync';
+import useLanguage from '#/src/components/useLanguage';
 
-const getCopyOptions = koulutukset => {
-  return koulutukset.map(({ nimi, oid }) => ({
-    value: oid,
-    label: getFirstLanguageValue(nimi),
+const getCopyOptions = (entities, language) => {
+  return entities.map(({ nimi, oid, id }) => ({
+    value: oid || id,
+    label: getFirstLanguageValue(nimi, language),
   }));
 };
 
@@ -36,6 +37,8 @@ export default function PohjaValintaSection({
   copyLabel,
   createLabel,
 }) {
+  const language = useLanguage();
+
   const { t } = useTranslation();
 
   const { data = [] } = useApiAsync({
@@ -58,7 +61,10 @@ export default function PohjaValintaSection({
     },
   ];
 
-  const copyOptions = useMemo(() => getCopyOptions(data), [data]);
+  const copyOptions = useMemo(() => getCopyOptions(data, language), [
+    data,
+    language,
+  ]);
 
   return (
     <>

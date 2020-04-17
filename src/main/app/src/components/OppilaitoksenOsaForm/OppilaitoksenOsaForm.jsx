@@ -7,7 +7,7 @@ import { getTestIdProps } from '../../utils';
 import PerustiedotSection from './PerustiedotSection';
 import EsittelySection from './EsittelySection';
 import YhteystiedotSection from './YhteystiedotSection';
-import JulkaisutilaSection from './JulkaisutilaSection';
+import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import KieliversiotFields from '../KieliversiotFields';
 import useFieldValue from '../useFieldValue';
 
@@ -59,7 +59,7 @@ const OppilaitoksenOsaForm = ({
         header={t('oppilaitoksenOsaLomake.oppilaitoksenOsanTila')}
         {...getTestIdProps('tilaSection')}
       >
-        <JulkaisutilaSection
+        <JulkaisutilaField
           name="tila"
           showArkistoitu={showArkistoituTilaOption}
         />

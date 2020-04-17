@@ -1,9 +1,11 @@
-import createErrorBuilder from './createErrorBuilder';
+import getOppilaitosFormConfig from './getOppilaitosFormConfig';
+import getErrorBuilderByFormConfig from './getErrorBuilderByFormConfig';
 
 const validateOppilaitosForm = values => {
-  const eb = createErrorBuilder(values);
-
-  return eb.validateArrayMinLength('kieliversiot', 1).getErrors();
+  return getErrorBuilderByFormConfig(
+    getOppilaitosFormConfig(),
+    values,
+  ).getErrors();
 };
 
 export default validateOppilaitosForm;

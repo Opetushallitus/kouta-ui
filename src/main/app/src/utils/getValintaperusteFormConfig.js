@@ -1,6 +1,11 @@
 import { get, reduce } from 'lodash';
 
-import { JULKAISUTILA, KOULUTUSTYYPIT, KOULUTUSTYYPPI } from '../constants';
+import {
+  JULKAISUTILA,
+  KOULUTUSTYYPIT,
+  KOULUTUSTYYPPI,
+  POHJAVALINTA,
+} from '../constants';
 import createFormConfigBuilder from './createFormConfigBuilder';
 
 const getKielivalinta = values => get(values, 'perustiedot.kieliversiot') || [];
@@ -41,30 +46,67 @@ const validateValintakokeet = (errorBuilder, values) => {
   );
 };
 
-const config = createFormConfigBuilder()
-  .registerField('pohja', 'pohja', KOULUTUSTYYPIT)
-  .registerField('perustiedot', 'tyyppi', KOULUTUSTYYPIT, eb =>
-    eb.validateExistence('perustiedot.tyyppi'),
-  )
-  .registerField('perustiedot', 'kieliversiot', KOULUTUSTYYPIT, eb =>
-    eb.validateArrayMinLength('perustiedot.kieliversiot', 1),
-  )
-  .registerField(
-    'perustiedot',
-    'hakutapa',
-    KOULUTUSTYYPIT,
-    validateIfJulkaistu(eb => eb.validateExistence('perustiedot.hakutapa')),
-  )
-  .registerField('perustiedot', 'haunkohdejoukko', KOULUTUSTYYPIT)
-  .registerField('kuvaus', 'nimi', KOULUTUSTYYPIT, (eb, values) =>
-    eb.validateTranslations('kuvaus.nimi', getKielivalinta(values)),
-  )
-  .registerField('kuvaus', 'tarkenne', KOULUTUSTYYPIT)
-  .registerField(
-    'valintatapa',
-    'valintatavat',
-    koulutustyypitWithValintatapa,
-    validateIfJulkaistu((eb, values) =>
+const config = createFormConfigBuilder().registerSections([
+  {
+    section: 'pohja',
+    koulutustyypit: KOULUTUSTYYPIT,
+    parts: [
+      {
+        field: '.tapa',
+        required: true,
+      },
+      {
+        field: '.valinta',
+        validate: (eb, values) =>
+          get(values, 'pohja.tapa') === POHJAVALINTA.KOPIO
+            ? eb.validateExistence('pohja.valinta')
+            : eb,
+      },
+    ],
+  },
+  {
+    section: 'perustiedot',
+    koulutustyypit: KOULUTUSTYYPIT,
+    parts: [
+      {
+        field: '.tyyppi',
+        validate: eb => eb.validateExistence('perustiedot.tyyppi'),
+      },
+      {
+        field: '.kieliversiot',
+        validate: eb =>
+          eb.validateArrayMinLength('perustiedot.kieliversiot', 1),
+      },
+      {
+        field: '.hakutapa',
+        validate: validateIfJulkaistu(eb =>
+          eb.validateExistence('perustiedot.hakutapa'),
+        ),
+      },
+      {
+        field: '.kohdejoukko',
+      },
+    ],
+  },
+  {
+    section: 'kuvaus',
+    koulutustyypit: KOULUTUSTYYPIT,
+    parts: [
+      {
+        field: '.nimi',
+        validate: (eb, values) =>
+          eb.validateTranslations('kuvaus.nimi', getKielivalinta(values)),
+      },
+      {
+        field: '.kuvaus',
+      },
+    ],
+  },
+  {
+    section: 'valintatavat',
+    koulutustyypit: koulutustyypitWithValintatapa,
+    field: 'valintatavat',
+    validate: validateIfJulkaistu((eb, values) =>
       eb
         .validateArrayMinLength('valintatavat', 1, {
           isFieldArray: true,
@@ -75,18 +117,32 @@ const config = createFormConfigBuilder()
             .validateTranslations('nimi', getKielivalinta(values)),
         ),
     ),
-  )
-  .registerField('soraKuvaus', 'soraKuvaus', KOULUTUSTYYPIT)
-  .registerField('julkisuus', 'julkisuus', KOULUTUSTYYPIT)
-  .registerField('julkaisutila', 'julkaisutila', KOULUTUSTYYPIT, eb =>
-    eb.validateExistence('tila'),
-  )
-  .registerField(
-    'valintakoe',
-    'tyypit',
-    KOULUTUSTYYPIT,
-    validateIfJulkaistu((eb, values) => validateValintakokeet(eb, values)),
-  );
+  },
+  {
+    section: 'soraKuvaus',
+    koulutustyypit: KOULUTUSTYYPIT,
+    field: 'soraKuvaus',
+  },
+  {
+    section: 'julkinen',
+    koulutustyypit: KOULUTUSTYYPIT,
+    field: 'julkinen',
+  },
+  {
+    section: 'tila',
+    koulutustyypit: KOULUTUSTYYPIT,
+    field: 'tila',
+    validate: eb => eb.validateExistence('tila'),
+  },
+  {
+    section: 'valintakoe',
+    field: 'valintakoe',
+    koulutustyypit: KOULUTUSTYYPIT,
+    validate: validateIfJulkaistu((eb, values) =>
+      validateValintakokeet(eb, values),
+    ),
+  },
+]);
 
 const getValintaperusteFormConfig = koulutustyyppi => {
   return config.getKoulutustyyppiConfig(koulutustyyppi);

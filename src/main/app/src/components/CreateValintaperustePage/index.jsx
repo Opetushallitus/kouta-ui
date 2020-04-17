@@ -71,28 +71,24 @@ const CreateValintaperustePage = props => {
       enableReinitialize
       initialValues={initialValues}
     >
-      {() => (
-        <>
-          <Title>{t('sivuTitlet.uusiValintaperuste')}</Title>
-          <FormPage
-            header={<CreateValintaperusteHeader />}
-            steps={<CreateValintaperusteSteps />}
-            footer={<CreateValintaperusteFooter organisaatioOid={oid} />}
-          >
-            <TopInfoContainer>
-              <OrganisaatioInfo organisaatioOid={oid} />
-            </TopInfoContainer>
-            <ValintaperusteFormWrapper
-              steps
-              organisaatioOid={oid}
-              kopioValintaperusteOid={kopioValintaperusteOid}
-              onSelectBase={selectBase}
-              showArkistoituTilaOption={false}
-              kieliValinnat={kieliValinnatLista}
-            />
-          </FormPage>
-        </>
-      )}
+      <Title>{t('sivuTitlet.uusiValintaperuste')}</Title>
+      <FormPage
+        header={<CreateValintaperusteHeader />}
+        steps={<CreateValintaperusteSteps />}
+        footer={<CreateValintaperusteFooter organisaatioOid={oid} />}
+      >
+        <TopInfoContainer>
+          <OrganisaatioInfo organisaatioOid={oid} />
+        </TopInfoContainer>
+        <ValintaperusteFormWrapper
+          steps
+          organisaatioOid={oid}
+          kopioValintaperusteOid={kopioValintaperusteOid}
+          onSelectBase={selectBase}
+          showArkistoituTilaOption={false}
+          kieliValinnat={kieliValinnatLista}
+        />
+      </FormPage>
     </ReduxForm>
   );
 };

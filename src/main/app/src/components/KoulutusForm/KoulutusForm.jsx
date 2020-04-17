@@ -14,7 +14,7 @@ import Flex from '../Flex';
 import NakyvyysSection from './NakyvyysSection';
 import { useTranslation } from 'react-i18next';
 import useFieldValue from '../useFieldValue';
-import JulkaisutilaSection from './JulkaisutilaSection';
+import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import isOphOrganisaatio from '../../utils/isOphOrganisaatio';
 import TeemakuvaSection from '../TeemakuvaSection';
 import PohjaFormCollapse from '../PohjaFormCollapse';
@@ -81,8 +81,10 @@ const KoulutusForm = ({
           disabled={onlyTarjoajaRights}
           getCopyEntities={getKoulutukset}
           infoText={t('koulutuslomake.pohjavalintaInfo')}
-          createLabel={t('koulutuslomake.luoUusiKoulutus')}
-          copyLabel={t('koulutuslomake.kopioiPohjaksiKoulutus')}
+          createLabel={t('yleiset.luoUusi', { entity: t('yleiset.koulutus') })}
+          copyLabel={t('yleiset.kopioiPohjaksi', {
+            entity: t('yleiset.koulutus'),
+          })}
         />
       )}
 
@@ -149,7 +151,7 @@ const KoulutusForm = ({
       <FormCollapse
         section="tila"
         header={t('koulutuslomake.koulutuksenTila')}
-        Component={JulkaisutilaSection}
+        Component={JulkaisutilaField}
         disabled={onlyTarjoajaRights}
         showArkistoitu={!isNewKoulutus}
       />

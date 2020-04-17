@@ -23,27 +23,23 @@ const KuvausSection = ({ disabled, language, name }) => {
         </Box>
       </FormConfigField>
 
-      <FormConfigField name="nimi">
-        <Box mb={2} {...getTestIdProps('kuvauksenNimiInput')}>
-          <Field
-            disabled={disabled}
-            name={`${name}.nimi.${language}`}
-            component={FormFieldInput}
-            label={t('yleiset.kuvauksenNimi')}
-          />
-        </Box>
-      </FormConfigField>
+      <Box mb={2} {...getTestIdProps('kuvauksenNimiInput')}>
+        <Field
+          disabled={disabled}
+          name={`${name}.nimi.${language}`}
+          component={FormFieldInput}
+          label={t('yleiset.kuvauksenNimi')}
+        />
+      </Box>
 
-      <FormConfigField name="kuvaus">
-        <Box mb={2} {...getTestIdProps('kuvausInput')}>
-          <Field
-            disabled={disabled}
-            name={`${name}.kuvaus.${language}`}
-            component={FormFieldTextarea}
-            label={t('yleiset.kuvaus')}
-          />
-        </Box>
-      </FormConfigField>
+      <Box mb={2} {...getTestIdProps('kuvausInput')}>
+        <Field
+          disabled={disabled}
+          name={`${name}.kuvaus.${language}`}
+          component={FormFieldTextarea}
+          label={t('yleiset.kuvaus')}
+        />
+      </Box>
     </Box>
   );
 };

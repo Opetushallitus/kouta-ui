@@ -12,6 +12,7 @@ Object {
       "sv": "Sv nimi",
     },
   },
+  "esikatselu": true,
   "information": Object {
     "koulutus": Object {
       "value": "koulutuskoodi_1#1",

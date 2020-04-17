@@ -7,7 +7,7 @@ import {
   POHJAVALINTA,
   TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
-} from '../constants';
+} from '#/src/constants';
 
 import createFormConfigBuilder from './createFormConfigBuilder';
 
@@ -22,7 +22,7 @@ const validateIfJulkaistu = validate => (eb, values, ...rest) => {
   return tila === JULKAISUTILA.JULKAISTU ? validate(eb, values, ...rest) : eb;
 };
 
-const config = createFormConfigBuilder().registerFieldTree([
+const config = createFormConfigBuilder().registerSections([
   {
     section: 'koulutustyyppi',
     field: 'koulutustyyppi',
@@ -32,14 +32,20 @@ const config = createFormConfigBuilder().registerFieldTree([
   },
   {
     section: 'pohja',
-    field: 'pohja',
-    formFieldName: 'pohja.tapa',
     koulutustyypit: KOULUTUSTYYPIT,
-    validate: (eb, values) =>
-      get(values, 'pohja.tapa') === POHJAVALINTA.KOPIO
-        ? eb.validateExistence('pohja.valinta')
-        : eb,
-    required: true,
+    parts: [
+      {
+        field: '.tapa',
+        required: true,
+      },
+      {
+        field: '.valinta',
+        validate: (eb, values) =>
+          get(values, 'pohja.tapa') === POHJAVALINTA.KOPIO
+            ? eb.validateExistence('pohja.valinta')
+            : eb,
+      },
+    ],
   },
   {
     section: 'kieliversiot',
@@ -50,17 +56,25 @@ const config = createFormConfigBuilder().registerFieldTree([
   },
   {
     section: 'information',
-    fields: [
+    parts: [
       {
-        name: 'koulutuskoodiTiedoilla', // id of the form config
-        formFieldName: 'information.koulutus', // name of the form field (redux-form)
+        field: '.koulutus',
+        fragment: 'koulutuskoodiTiedoilla',
         koulutustyypit: TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
         validate: eb => eb.validateExistence('information.koulutus'),
         required: true,
       },
       {
-        name: 'koulutuskoodi',
-        formFieldName: 'information.koulutus',
+        field: '.eperuste',
+        koulutustyypit: TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
+        validate: validateIfJulkaistu(eb =>
+          eb.validateExistence('information.eperuste'),
+        ),
+        required: true,
+      },
+      {
+        field: '.koulutus',
+        fragment: 'koulutuskoodi',
         koulutustyypit: [
           ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
           KOULUTUSTYYPPI.VALMA,
@@ -72,8 +86,17 @@ const config = createFormConfigBuilder().registerFieldTree([
         required: true,
       },
       {
-        name: 'nimi',
-        formFieldName: 'information.nimi',
+        field: '.koulutus',
+        fragment: 'osaamisala',
+        koulutustyypit: [
+          KOULUTUSTYYPPI.LUKIOKOULUTUS,
+          KOULUTUSTYYPPI.OSAAMISALA,
+        ],
+        validate: eb => eb.validateExistence('information.koulutus'),
+        required: true,
+      },
+      {
+        field: '.nimi',
         koulutustyypit: [
           ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
           KOULUTUSTYYPPI.AVOIN_YO,
@@ -89,47 +112,36 @@ const config = createFormConfigBuilder().registerFieldTree([
         required: true,
       },
       {
-        name: 'osaamisala',
-        formFieldName: 'information.koulutus',
-        koulutustyypit: [
-          KOULUTUSTYYPPI.LUKIOKOULUTUS,
-          KOULUTUSTYYPPI.OSAAMISALA,
-        ],
-        validate: eb => eb.validateExistence('information.koulutus'),
-        required: true,
-      },
-      {
-        name: 'opintojenlaajuus',
+        field: '.opintojenLaajuus',
         koulutustyypit: TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
       },
       {
-        name: 'tutkintonimike',
+        field: '.tutkintonimike',
         koulutustyypit: TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
       },
       {
-        name: 'koulutusalat',
+        field: '.koulutusalat',
         koulutustyypit: TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
       },
     ],
   },
   {
     section: 'description',
-    fields: [
+    parts: [
       {
-        name: 'nimi',
-        formFieldName: 'description.nimi',
+        field: '.nimi',
         koulutustyypit: TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
+        required: true,
         validate: validateIfJulkaistu((eb, values) =>
           eb.validateTranslations('description.nimi', getKielivalinta(values)),
         ),
-        required: true,
       },
       {
-        name: 'kuvaus',
+        field: '.kuvaus',
         koulutustyypit: TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
       },
       {
-        name: 'tekstiKuvaus',
+        fragment: 'tekstiKuvaus',
         koulutustyypit: [
           ...TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
           KOULUTUSTYYPPI.LUKIOKOULUTUS,
@@ -140,8 +152,15 @@ const config = createFormConfigBuilder().registerFieldTree([
   },
   {
     section: 'lisatiedot',
-    field: 'osiot',
     koulutustyypit: KOULUTUSTYYPIT,
+    parts: [
+      {
+        field: '.osiot',
+      },
+      {
+        field: '.osioKuvaukset',
+      },
+    ],
   },
   {
     section: 'teemakuva',
@@ -160,11 +179,6 @@ const config = createFormConfigBuilder().registerFieldTree([
   {
     section: 'julkinen',
     field: 'julkinen',
-    koulutustyypit: KOULUTUSTYYPIT,
-  },
-  {
-    section: 'esikatselu',
-    field: 'esikatselu',
     koulutustyypit: KOULUTUSTYYPIT,
   },
   {

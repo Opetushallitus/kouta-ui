@@ -61,27 +61,23 @@ const CreateKoulutusPage = props => {
       enableReinitialize
       initialValues={initialValues}
     >
-      {() => (
-        <>
-          <Title>{t('sivuTitlet.uusiKoulutus')}</Title>
-          <FormPage
-            header={<CreateKoulutusHeader />}
-            steps={<CreateKoulutusSteps />}
-            footer={<CreateKoulutusFooter organisaatioOid={oid} />}
-          >
-            <TopInfoContainer>
-              <OrganisaatioInfo organisaatioOid={oid} />
-            </TopInfoContainer>
-            <KoulutusFormWrapper
-              steps
-              isNewKoulutus={true}
-              organisaatioOid={oid}
-              kopioKoulutusOid={kopioKoulutusOid}
-              onSelectBase={selectBase}
-            />
-          </FormPage>
-        </>
-      )}
+      <Title>{t('sivuTitlet.uusiKoulutus')}</Title>
+      <FormPage
+        header={<CreateKoulutusHeader />}
+        steps={<CreateKoulutusSteps />}
+        footer={<CreateKoulutusFooter organisaatioOid={oid} />}
+      >
+        <TopInfoContainer>
+          <OrganisaatioInfo organisaatioOid={oid} />
+        </TopInfoContainer>
+        <KoulutusFormWrapper
+          steps
+          isNewKoulutus={true}
+          organisaatioOid={oid}
+          kopioKoulutusOid={kopioKoulutusOid}
+          onSelectBase={selectBase}
+        />
+      </FormPage>
     </ReduxForm>
   );
 };

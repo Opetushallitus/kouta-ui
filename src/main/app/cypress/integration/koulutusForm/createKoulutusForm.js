@@ -22,7 +22,7 @@ const fillTilaSection = (tila = 'julkaistu') => {
 };
 
 const fillKoulutustyyppiSection = path => {
-  cy.getByTestId('tyyppiSection').within(() => {
+  cy.getByTestId('koulutustyyppiSection').within(() => {
     fillKoulutustyyppiSelect(path, cy);
     jatka();
   });
@@ -72,7 +72,7 @@ const tallenna = () => {
 };
 
 const fillJarjestajaSection = () => {
-  cy.getByTestId('jarjestajaSection').within(() => {
+  cy.getByTestId('tarjoajatSection').within(() => {
     cy.getByTestId('jarjestajatSelection').within(() => {
       fillTreeSelect(['1.2.1.1.1.1'], cy);
     });
@@ -88,7 +88,7 @@ const fillCommon = ({ koulutustyyppiPath }) => {
 };
 
 const fillNakyvyysSection = () => {
-  cy.getByTestId('nakyvyysSection').within(() => {
+  cy.getByTestId('julkinenSection').within(() => {
     getCheckbox(null, cy).click({ force: true });
     jatka();
   });
@@ -114,7 +114,7 @@ describe('createKoulutusForm', () => {
 
     fillCommon({ koulutustyyppiPath: ['amm'] });
 
-    cy.getByTestId('tiedotSection').within(() => {
+    cy.getByTestId('informationSection').within(() => {
       cy.getByTestId('koulutustyyppiSelect').click();
 
       cy.getByTestId('koulutustyyppiSelect').within(() => {
@@ -128,7 +128,7 @@ describe('createKoulutusForm', () => {
       cy.getByTestId('jatkaButton').click({ force: true });
     });
 
-    cy.getByTestId('kuvausSection').within(() => {
+    cy.getByTestId('descriptionSection').within(() => {
       cy.getByTestId('jatkaButton').click({ force: true });
     });
 
@@ -158,7 +158,7 @@ describe('createKoulutusForm', () => {
 
     fillCommon({ koulutustyyppiPath: ['korkeakoulutus', 'yo'] });
 
-    cy.getByTestId('tiedotSection').within(() => {
+    cy.getByTestId('informationSection').within(() => {
       cy.getByTestId('koulutuskoodiSelect').click();
 
       cy.getByTestId('koulutuskoodiSelect').within(() => {
@@ -190,7 +190,7 @@ describe('createKoulutusForm', () => {
       jatka();
     });
 
-    cy.getByTestId('kuvausSection').within(() => {
+    cy.getByTestId('descriptionSection').within(() => {
       cy.getByTestId('kuvauksenNimiInput').within(() => {
         cy.get('input').paste('Kuvauksen nimi');
       });
@@ -230,7 +230,7 @@ describe('createKoulutusForm', () => {
 
     fillCommon({ koulutustyyppiPath: ['lk'] });
 
-    cy.getByTestId('tiedotSection').within(() => {
+    cy.getByTestId('informationSection').within(() => {
       cy.getByTestId('koulutustyyppiSelect').click();
 
       cy.getByTestId('koulutustyyppiSelect').within(() => {
@@ -240,7 +240,7 @@ describe('createKoulutusForm', () => {
       cy.getByTestId('jatkaButton').click({ force: true });
     });
 
-    cy.getByTestId('kuvausSection').within(() => {
+    cy.getByTestId('descriptionSection').within(() => {
       cy.getByTestId('jatkaButton').click({ force: true });
     });
 

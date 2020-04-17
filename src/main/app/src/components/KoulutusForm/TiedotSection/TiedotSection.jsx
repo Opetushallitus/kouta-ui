@@ -117,34 +117,26 @@ const TiedotSection = ({
         </Box>
       </FormConfigField>
 
-      <FormConfigField name="opintojenlaajuus">
-        <Box mb={2}>
-          <OpintojenlaajuusField disabled={disabled} name={name} />
-        </Box>
-      </FormConfigField>
+      <Box mb={2}>
+        <OpintojenlaajuusField disabled={disabled} name={name} />
+      </Box>
 
-      <FormConfigField name="tutkintonimike">
-        <Box mb={2}>
-          <TutkintonimikeField disabled={disabled} name={name} />
-        </Box>
-      </FormConfigField>
+      <Box mb={2}>
+        <TutkintonimikeField disabled={disabled} name={name} />
+      </Box>
 
-      <FormConfigField name="koulutusalat">
-        <Box mb={2}>
-          <KoulutusalatField disabled={disabled} name={name} />
-        </Box>
-      </FormConfigField>
+      <Box mb={2}>
+        <KoulutusalatField disabled={disabled} name={name} />
+      </Box>
 
-      <FormConfigField name="nimi">
-        <Box mb={2} {...getTestIdProps('nimiInput')}>
-          <Field
-            disabled={disabled}
-            name={`${name}.nimi.${language}`}
-            component={FormFieldInput}
-            label={t('koulutuslomake.muokkaaKoulutuksenNimea')}
-          />
-        </Box>
-      </FormConfigField>
+      <Box mb={2} {...getTestIdProps('nimiInput')}>
+        <Field
+          disabled={disabled}
+          name={`${name}.nimi.${language}`}
+          component={FormFieldInput}
+          label={t('koulutuslomake.muokkaaKoulutuksenNimea')}
+        />
+      </Box>
     </Box>
   );
 };

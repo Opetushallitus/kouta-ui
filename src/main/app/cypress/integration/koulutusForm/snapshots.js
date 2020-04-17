@@ -266,7 +266,6 @@ module.exports = {
         "nimi": {
           "fi": "koulutus_0"
         },
-        "ePerusteId": 1,
         "teemakuva": null,
         "metadata": {
           "tyyppi": "lk",

@@ -5,12 +5,18 @@ import FormConfigSectionContext from '#/src/components/FormConfigSectionContext'
 import FormControl from '#/src/components/FormControl';
 import useFormConfig from '#/src/components/useFormConfig';
 
-const withoutLang = name => {
-  const parts = _.split(name, '.');
-  if (['fi', 'sv', 'en'].includes(_.last(parts))) {
-    return _.dropRight(parts, 1).join('.');
-  }
-  return name;
+const findFieldConfig = (fieldConfigs = [], name) => {
+  const trimmedFieldName = name.replace(/\[\d\]/, '');
+  const fieldNameParts = _.split(trimmedFieldName, '.');
+  let configFound = null;
+  let nameCandidate = null;
+  _.forEach(fieldNameParts, value => {
+    nameCandidate = nameCandidate ? `${nameCandidate}.${value}` : value;
+    if (fieldConfigs[nameCandidate]) {
+      configFound = fieldConfigs[nameCandidate];
+    }
+  });
+  return configFound;
 };
 
 export const createComponent = (Component, mapProps) => {
@@ -29,16 +35,12 @@ export const createComponent = (Component, mapProps) => {
 
     const formConfig = useFormConfig();
     const section = useContext(FormConfigSectionContext);
+    const sectionFields = _.get(formConfig, `sections.${section}.fields`);
 
-    const sectionFields = _.get(formConfig, `sections[${section}].fields`);
-
-    const fieldConfig = _.find(
-      sectionFields,
-      f => f.formFieldName === withoutLang(name),
-    );
+    const fieldConfig = findFieldConfig(sectionFields, name);
     const required = _.get(fieldConfig, 'required');
 
-    return (
+    return fieldConfig ? (
       <FormControl
         error={!_.isNil(error)}
         helperText={
@@ -49,6 +51,8 @@ export const createComponent = (Component, mapProps) => {
       >
         {children}
       </FormControl>
+    ) : (
+      <div></div>
     );
   };
 

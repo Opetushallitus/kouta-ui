@@ -8,7 +8,9 @@ const FormConfigField = ({ name, children }) => {
   const config = useFormConfig();
   const section = useContext(FormConfigSectionContext);
 
-  const isVisible = Boolean(get(config, ['sections', section, 'fields', name]));
+  const isVisible = Boolean(
+    get(config, ['sections', section, 'fragments', name]),
+  );
 
   return isVisible ? children : null;
 };

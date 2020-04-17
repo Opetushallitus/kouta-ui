@@ -47,12 +47,7 @@ const renderChildren = ({
     renderedChildren = React.cloneElement(children, childrenProps);
   } else if (Component) {
     renderedChildren = (
-      <Component
-        name={section}
-        language={language}
-        {...getTestIdProps(`${section}Section`)}
-        {...childProps}
-      />
+      <Component name={section} language={language} {...childProps} />
     );
   }
 
@@ -165,6 +160,7 @@ const FormCollapse = ({
       onToggle={onToggle}
       open={isOpen}
       toggleOnHeaderClick
+      {...(section ? getTestIdProps(`${section}Section`) : {})}
       {...props}
     >
       {renderChildren({

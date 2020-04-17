@@ -1,78 +1,110 @@
-import produce from 'immer';
 import _ from 'lodash';
 
 class FormConfigBuilder {
-  constructor(config = {}, koulutustyyppiLookup = {}) {
+  constructor(config = {}) {
     this.config = config;
-    this.koulutustyyppiLookup = koulutustyyppiLookup;
   }
 
-  registerField(
-    section,
-    field,
-    koulutustyypit,
-    validate,
-    meta = {},
-    formFieldName,
-    required,
-  ) {
+  registerItem(type = 'field', section, options) {
+    const { koulutustyypit = ['default'], name, noOverwrite } = options;
+
     koulutustyypit.forEach(t => {
-      console.assert(
-        _.get(this.koulutustyyppiLookup, [
-          t,
-          `sections.${section}.fields.${field}`,
-        ]) == null,
-        `Overwriting form configuration (koulutustyyppi: "${t}") for field "${section}.${field}"`,
-      );
+      const exists =
+        _.get(this.config, [t, 'sections', section, `${type}s`, name]) == null;
 
-      _.set(
-        this.koulutustyyppiLookup,
-        [t, `sections.${section}.fields.${field}`],
-        true,
-      );
+      if (noOverwrite) {
+        if (!exists) {
+          _.set(
+            this.config,
+            [t, 'sections', section, `${type}s`, name],
+            options,
+          );
+        }
+      } else {
+        console.assert(
+          exists,
+          `Overwriting form config (koulutustyyppi: "${t}") for ${type} "${section}.${name}"`,
+        );
+        _.set(this.config, [t, 'sections', section, `${type}s`, name], options);
+      }
     });
 
-    this.config = produce(this.config, draft => {
-      _.set(draft, ['sections', section, 'fields', field], {
-        koulutustyypit,
-        validate,
-        meta,
-        formFieldName: formFieldName || field,
-        required,
-      });
-    });
     return this;
   }
 
-  registerFieldTree(fieldsTree) {
-    fieldsTree.forEach(({ section, field, fields, ...rest }) =>
-      [
-        ...(fields || []),
-        ...(field ? [{ name: field, ...rest }] : []),
-      ].forEach(
-        ({ name, koulutustyypit, formFieldName, validate, meta, required }) =>
-          this.registerField(
-            section,
-            name,
-            koulutustyypit,
+  registerFragment({ section, name, field, koulutustyypit }) {
+    if (!field) {
+      // When registering a fragment without field, allow the section-field
+      // so that fragment is shown even when the field is not added to config
+      this.registerItem('field', section, {
+        name: section,
+        koulutustyypit,
+        noOverwrite: true,
+      });
+    }
+    return this.registerItem('fragment', section, { name, koulutustyypit });
+  }
+
+  registerField(section, field, koulutustyypit, validate, meta = {}, required) {
+    // Prefix field name with section, if it starts with a dot.
+    const name = _.first(field) === '.' ? `${section}${field}` : field;
+    return this.registerItem('field', section, {
+      name,
+      koulutustyypit,
+      validate,
+      meta,
+      required,
+    });
+  }
+
+  registerSections(sectionTree) {
+    sectionTree.forEach(
+      ({
+        section,
+        field,
+        fragment,
+        koulutustyypit: parentKTs,
+        parts = [],
+        ...rest
+      }) => {
+        [...parts, ...[{ field, fragment, ...rest }]].forEach(
+          ({
+            field,
+            fragment,
+            koulutustyypit = parentKTs,
             validate,
             meta,
-            formFieldName,
             required,
-          ),
-      ),
+          }) => {
+            fragment &&
+              this.registerFragment({
+                section,
+                name: fragment,
+                field,
+                koulutustyypit,
+              });
+            field &&
+              this.registerField(
+                section,
+                field,
+                koulutustyypit,
+                validate,
+                meta,
+                required,
+              );
+          },
+        );
+      },
     );
     return this;
   }
 
-  getKoulutustyyppiConfig(koulutustyyppi) {
-    const paths = Object.keys(this.koulutustyyppiLookup[koulutustyyppi] || {});
-
-    return _.pick(this.config, paths);
+  getKoulutustyyppiConfig(koulutustyyppi = 'default') {
+    return _.get(this.config, koulutustyyppi);
   }
 
-  getConfig() {
-    return this.config;
+  getConfig(koulutustyyppi = 'default') {
+    return _.get(this.config, koulutustyyppi);
   }
 }
 

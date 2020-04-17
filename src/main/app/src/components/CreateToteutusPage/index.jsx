@@ -85,49 +85,42 @@ const CreateToteutusPage = props => {
       enableReinitialize
       initialValues={initialValues}
     >
-      {() => (
-        <>
-          <Title>{t('sivuTitlet.uusiToteutus')}</Title>
-          <FormPage
-            header={<CreateToteutusHeader />}
-            steps={<CreateToteutusSteps />}
-            footer={
-              koulutus ? (
-                <CreateToteutusFooter
-                  koulutustyyppi={koulutustyyppi}
-                  organisaatioOid={organisaatioOid}
-                  koulutusOid={koulutusOid}
-                />
-              ) : null
-            }
-          >
-            <TopInfoContainer>
-              <KoulutusInfo
-                organisaatioOid={organisaatioOid}
-                koulutus={koulutus}
-              />
-              <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-            </TopInfoContainer>
-            {koulutus ? (
-              <ToteutusFormWrapper
-                steps
-                koulutus={koulutus}
-                ePerusteId={koulutus.ePerusteId}
-                koulutusKoodiUri={koulutus.koulutusKoodiUri}
-                koulutusNimi={koulutus.nimi}
-                koulutusKielet={koulutus.kielivalinta}
-                organisaatioOid={organisaatioOid}
-                koulutustyyppi={koulutustyyppi}
-                kopioToteutusOid={kopioToteutusOid}
-                onSelectBase={selectBase}
-                showArkistoituTilaOption={false}
-              />
-            ) : (
-              <Spin center />
-            )}
-          </FormPage>
-        </>
-      )}
+      <Title>{t('sivuTitlet.uusiToteutus')}</Title>
+      <FormPage
+        header={<CreateToteutusHeader />}
+        steps={<CreateToteutusSteps />}
+        footer={
+          koulutus ? (
+            <CreateToteutusFooter
+              koulutustyyppi={koulutustyyppi}
+              organisaatioOid={organisaatioOid}
+              koulutusOid={koulutusOid}
+            />
+          ) : null
+        }
+      >
+        <TopInfoContainer>
+          <KoulutusInfo organisaatioOid={organisaatioOid} koulutus={koulutus} />
+          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+        </TopInfoContainer>
+        {koulutus ? (
+          <ToteutusFormWrapper
+            steps
+            koulutus={koulutus}
+            ePerusteId={koulutus.ePerusteId}
+            koulutusKoodiUri={koulutus.koulutusKoodiUri}
+            koulutusNimi={koulutus.nimi}
+            koulutusKielet={koulutus.kielivalinta}
+            organisaatioOid={organisaatioOid}
+            koulutustyyppi={koulutustyyppi}
+            kopioToteutusOid={kopioToteutusOid}
+            onSelectBase={selectBase}
+            showArkistoituTilaOption={false}
+          />
+        ) : (
+          <Spin center />
+        )}
+      </FormPage>
     </ReduxForm>
   );
 };

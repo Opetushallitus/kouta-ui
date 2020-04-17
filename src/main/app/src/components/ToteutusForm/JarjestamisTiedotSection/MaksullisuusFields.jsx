@@ -30,7 +30,7 @@ export const MaksuField = ({ input: { value }, maksuName, t }) => {
   ) : null;
 };
 
-export const MaksullisuusFields = ({ name, isKorkeakoulu }) => {
+export const MaksullisuusFields = ({ name, isKorkeakoulu, label }) => {
   const { t } = useTranslation();
 
   const options = useMemo(() => {
@@ -57,6 +57,7 @@ export const MaksullisuusFields = ({ name, isKorkeakoulu }) => {
           name={tyyppiName}
           component={FormFieldRadioGroup}
           options={options}
+          label={label}
         />
       </div>
       <Field

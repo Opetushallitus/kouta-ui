@@ -53,12 +53,6 @@ describe('editToteutusForm', () => {
       response: [],
     });
 
-    cy.route({
-      method: 'GET',
-      url: `**/haku/list**`,
-      response: [],
-    });
-
     cy.visit(
       `/organisaatio/${organisaatioOid}/toteutus/${toteutusOid}/muokkaus`,
     );

@@ -138,7 +138,7 @@ const tallenna = () => {
 };
 
 const fillJarjestajatSection = () => {
-  cy.getByTestId('jarjestamispaikatSection').within(() => {
+  cy.getByTestId('tarjoajatSection').within(() => {
     cy.getByTestId('jarjestamispaikatSelection').within(() => {
       fillTreeSelect(['1.2.2.1.1.1'], cy);
     });
@@ -163,7 +163,7 @@ const fillTiedotSection = () => {
 };
 
 const fillYhteystiedotSection = () => {
-  cy.getByTestId('yhteystiedotSection').within(() => {
+  cy.getByTestId('yhteyshenkilotSection').within(() => {
     cy.getByTestId('lisaaYhteyshenkiloButton').click({ force: true });
 
     cy.getByTestId('nimi')
@@ -342,15 +342,19 @@ describe('createToteutusForm', () => {
     fillKieliversiotSection();
     fillTiedotSection();
 
-    cy.getByTestId('alempiOsaamisalatSection').within(() => {
-      fillKkOsaamisalat();
-      jatka();
-    });
+    cy.getByTestId('alemmanKorkeakoulututkinnonOsaamisalatSection').within(
+      () => {
+        fillKkOsaamisalat();
+        jatka();
+      },
+    );
 
-    cy.getByTestId('ylempiOsaamisalatSection').within(() => {
-      fillKkOsaamisalat();
-      jatka();
-    });
+    cy.getByTestId('ylemmanKorkeakoulututkinnonOsaamisalatSection').within(
+      () => {
+        fillKkOsaamisalat();
+        jatka();
+      },
+    );
 
     cy.getByTestId('jarjestamistiedotSection').within(() => {
       fillCommonJarjestamistiedot({ maksullisuusTyyppi: 'lukuvuosimaksu' });

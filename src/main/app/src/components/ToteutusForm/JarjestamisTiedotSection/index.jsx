@@ -156,7 +156,11 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
         <DividerHeading>{t('yleiset.opetuskieli')}</DividerHeading>
         <Flex {...getTestIdProps('opetuskieli')}>
           <FlexItem grow={0} basis="30%">
-            <Field name={`${name}.opetuskieli`} component={OpetuskieliField} />
+            <Field
+              name={`${name}.opetuskieli`}
+              component={OpetuskieliField}
+              label={t('toteutuslomake.valitsePaaasiallinenOpetuskieli')}
+            />
           </FlexItem>
           <FlexItem grow={1} paddingLeft={4}>
             <Field
@@ -169,14 +173,13 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
       </Spacing>
 
       <Spacing marginBottom={4}>
-        <DividerHeading>
-          {t('toteutuslomake.paaasiallinenOpetusaika')}
-        </DividerHeading>
+        <DividerHeading>{t('toteutuslomake.opetusaika')}</DividerHeading>
         <Flex {...getTestIdProps('opetusaika')}>
           <FlexItem grow={0} basis="30%">
             <Field
               name={`${name}.opetusaika`}
               component={OpetusaikaField}
+              label={t('toteutuslomake.valitsePaaasiallinenOpetusaika')}
               helperText={t('yleiset.voitValitaEnintaan', { lukumaara: 2 })}
             />
           </FlexItem>
@@ -196,7 +199,11 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
         </DividerHeading>
         <Flex {...getTestIdProps('opetustapa')}>
           <FlexItem grow={0} basis="30%">
-            <Field name={`${name}.opetustapa`} component={OpetustapaField} />
+            <Field
+              name={`${name}.opetustapa`}
+              component={OpetustapaField}
+              label={t('toteutuslomake.valitsePaaasiallinenOpetustapa')}
+            />
           </FlexItem>
           <FlexItem grow={1} paddingLeft={4}>
             <Field
@@ -210,7 +217,7 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
 
       <Spacing marginBottom={4}>
         <DividerHeading>
-          {t('toteutuslomake.onkoOpetusMaksullista')}
+          {t('toteutuslomake.opetuksenMaksullisuus')}
         </DividerHeading>
         <Flex {...getTestIdProps('maksullisuus')}>
           <FlexItem grow={0} basis="30%">
@@ -218,6 +225,7 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
               isKorkeakoulu={isKorkeakoulu}
               name={`${name}.maksullisuus`}
               language={language}
+              label={t('toteutuslomake.onkoOpetusMaksullista')}
             />
           </FlexItem>
           <FlexItem

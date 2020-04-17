@@ -13,6 +13,8 @@ import getFormValuesBySoraKuvaus from '#/src/utils/getFormValuesBySoraKuvaus';
 import SoraKuvausForm, { initialValues } from '#/src/components/SoraKuvausForm';
 import useSoraKuvaus from '#/src/components/useSoraKuvaus';
 import ReduxForm from '#/src/components/ReduxForm';
+import getSoraKuvausFormConfig from '#/src/utils/getSoraKuvausFormConfig';
+import FormConfigContext from '../FormConfigContext';
 
 const getCopyValues = soraKuvausId => ({
   pohja: {
@@ -39,6 +41,8 @@ const CreateSoraKuvausPage = props => {
     history,
   } = props;
 
+  const config = useMemo(getSoraKuvausFormConfig, []);
+
   const { kopioSoraKuvausOid = null } = queryString.parse(search);
   const { t } = useTranslation();
   const selectBase = useSelectBase(history, {
@@ -54,36 +58,32 @@ const CreateSoraKuvausPage = props => {
   }, [soraKuvaus, kieliValinnatLista]);
 
   return (
-    <ReduxForm
-      form="createSoraKuvausForm"
-      initialValues={initialValues}
-      enableReinitialize
-    >
-      {() => (
-        <>
-          <Title>{t('sivuTitlet.uusiSoraKuvaus')}</Title>
-          <FormPage
-            header={<CreateSoraKuvausHeader />}
-            steps={<CreateSoraKuvausSteps />}
-            footer={
-              <CreateSoraKuvausFooter organisaatioOid={organisaatioOid} />
-            }
-          >
-            <TopInfoContainer>
-              <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-            </TopInfoContainer>
-            <SoraKuvausForm
-              steps
-              organisaatioOid={organisaatioOid}
-              kopioSoraKuvausOid={kopioSoraKuvausOid}
-              onSelectBase={selectBase}
-              showArkistoituTilaOption={false}
-              kieliValinnat={kieliValinnatLista}
-            />
-          </FormPage>
-        </>
-      )}
-    </ReduxForm>
+    <FormConfigContext.Provider value={config}>
+      <ReduxForm
+        form="createSoraKuvausForm"
+        initialValues={initialValues}
+        enableReinitialize
+      >
+        <Title>{t('sivuTitlet.uusiSoraKuvaus')}</Title>
+        <FormPage
+          header={<CreateSoraKuvausHeader />}
+          steps={<CreateSoraKuvausSteps />}
+          footer={<CreateSoraKuvausFooter organisaatioOid={organisaatioOid} />}
+        >
+          <TopInfoContainer>
+            <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+          </TopInfoContainer>
+          <SoraKuvausForm
+            steps
+            organisaatioOid={organisaatioOid}
+            kopioSoraKuvausOid={kopioSoraKuvausOid}
+            onSelectBase={selectBase}
+            showArkistoituTilaOption={false}
+            kieliValinnat={kieliValinnatLista}
+          />
+        </FormPage>
+      </ReduxForm>
+    </FormConfigContext.Provider>
   );
 };
 

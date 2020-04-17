@@ -14,7 +14,7 @@ const jatka = () => {
 };
 
 const fillKoulutustyyppiSection = () => {
-  cy.getByTestId('tyyppiSection').within(() => {
+  cy.getByTestId('koulutustyyppiSection').within(() => {
     fillKoulutustyyppiSelect(['amm'], cy);
   });
 };
@@ -47,7 +47,7 @@ const fillTiedotSection = () => {
 };
 
 const fillJulkisuusSection = () => {
-  cy.getByTestId('julkisuusSection').within(() => {
+  cy.getByTestId('julkinenSection').within(() => {
     getCheckbox(null, cy).check({ force: true });
     jatka();
   });

@@ -8,7 +8,9 @@ import useForm from '#/src/components/useForm';
 
 const findFieldConfig = (fieldConfigs = [], name) => {
   const trimmedFieldName = name.replace(/\[\d\]/, '');
-  const fieldNameParts = _.split(trimmedFieldName, '.');
+  const fieldNameParts = _.split(trimmedFieldName, '.').filter(
+    part => !/#\d+$/.test(part),
+  );
   let configFound = null;
   let nameCandidate = null;
   _.forEach(fieldNameParts, value => {

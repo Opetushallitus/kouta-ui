@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import FormConfigSectionContext from '#/src/components/FormConfigSectionContext';
 import FormControl from '#/src/components/FormControl';
 import useFormConfig from '#/src/components/useFormConfig';
+import useForm from '#/src/components/useForm';
 
 const findFieldConfig = (fieldConfigs = [], name) => {
   const trimmedFieldName = name.replace(/\[\d\]/, '');
@@ -37,8 +38,13 @@ export const createComponent = (Component, mapProps) => {
     const section = useContext(FormConfigSectionContext);
     const sectionFields = _.get(formConfig, `sections.${section}.fields`);
 
+    const form = useForm();
+
     const fieldConfig = findFieldConfig(sectionFields, name);
     const required = _.get(fieldConfig, 'required');
+    const requiredValue = _.isFunction(required)
+      ? required(_.get(form, 'values'))
+      : required;
 
     return fieldConfig ? (
       <FormControl
@@ -46,7 +52,7 @@ export const createComponent = (Component, mapProps) => {
         helperText={
           error ? (_.isArray(error) ? t(...error) : t(error)) : helperText
         }
-        label={`${label}${required ? ' *' : ''}`}
+        label={`${label}${requiredValue ? ' *' : ''}`}
         disabled={disabled}
       >
         {children}

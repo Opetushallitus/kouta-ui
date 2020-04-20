@@ -1,7 +1,23 @@
+// @ts-check
+
 import _ from 'lodash';
 
 const KOULUTUSTYYPPI_DEFAULT = 'default';
 
+/**
+ * Class for creating different form configurations based on 'koulutustyyppi'. A form
+ * config consists of sections that can be configured to contain fields and fragments.
+ * Fragments are used for toggling parts of the form that don't necessarily contain
+ * fields. Fragments are toggled using the FormConfigFragment-component. Input field
+ * visibility can be configured by using the same name for form input component and
+ * field config. Field config for visibility is ignored, if both field and fragment
+ * are specified for a part's config. Registered field with a name starting with a dot
+ * will be prefixed with the section name. Enabling complete sections can be done by
+ * registering a field with the same name as the section. A section without any
+ * registered fields will be hidden from the form. See get**FormConfig.js files for
+ * examples and formFields/utils.jsx to see how field configurations are used for
+ * individual input components.
+ **/
 class FormConfigBuilder {
   constructor(config = {}) {
     this.config = config;

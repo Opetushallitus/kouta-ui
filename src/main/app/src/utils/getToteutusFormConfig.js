@@ -5,54 +5,25 @@ import createFormConfigBuilder from './createFormConfigBuilder';
 import {
   KOULUTUSTYYPPI,
   KOULUTUSTYYPIT,
-  JULKAISUTILA,
-  POHJAVALINTA,
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
 } from '../constants';
 
-const getKielivalinta = values => get(values, 'kieliversiot') || [];
-
-const validateIfJulkaistu = validate => (eb, values, ...rest) => {
-  const { tila } = values;
-
-  return tila === JULKAISUTILA.JULKAISTU ? validate(eb, values, ...rest) : eb;
-};
+import {
+  validateIfJulkaistu,
+  getKielivalinta,
+  kieliversiotSectionConfig,
+  pohjaValintaSectionConfig,
+  tilaSectionConfig,
+} from '#/src/utils/formConfigUtils';
 
 const config = createFormConfigBuilder().registerSections([
+  pohjaValintaSectionConfig,
+  kieliversiotSectionConfig,
   {
-    section: 'pohja',
-    koulutustyypit: KOULUTUSTYYPIT,
-    parts: [
-      {
-        field: '.tapa',
-        required: true,
-      },
-      {
-        field: '.valinta',
-        validate: (eb, values) =>
-          get(values, 'pohja.tapa') === POHJAVALINTA.KOPIO
-            ? eb.validateExistence('pohja.valinta')
-            : eb,
-      },
-    ],
-  },
-  {
-    section: 'kieliversiot',
-    field: 'kieliversiot',
-    koulutustyypit: KOULUTUSTYYPIT,
-    validate: eb => eb.validateArrayMinLength('kieliversiot', 1),
-    required: true,
-  },
-  {
-    // Section is a container of fragments and fields.
     section: 'tiedot',
-    // Fragments are parts of component tree that are enabled via this config.
-    // Use <FormConfigField> to enable these
-    // Fragments can contain fields, but don't have to
     fragments: [],
-    // Form fields
     parts: [
       {
         fragment: 'nimi',
@@ -290,13 +261,7 @@ const config = createFormConfigBuilder().registerSections([
     field: 'yhteyshenkilot',
     koulutustyypit: KOULUTUSTYYPIT,
   },
-  {
-    section: 'tila',
-    field: 'tila',
-    koulutustyypit: KOULUTUSTYYPIT,
-    validate: eb => eb.validateExistence('tila'),
-    required: true,
-  },
+  tilaSectionConfig,
 ]);
 
 const getToteutusFormConfig = koulutustyyppi => {

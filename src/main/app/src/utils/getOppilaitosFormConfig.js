@@ -1,12 +1,11 @@
 import createFormConfigBuilder from './createFormConfigBuilder';
+import {
+  kieliversiotSectionConfig,
+  tilaSectionConfig,
+} from '#/src/utils/formConfigUtils';
 
 const config = createFormConfigBuilder().registerSections([
-  {
-    section: 'kieliversiot',
-    field: 'kieliversiot',
-    validate: eb => eb.validateArrayMinLength('kieliversiot', 1),
-    required: true,
-  },
+  kieliversiotSectionConfig,
   {
     section: 'perustiedot',
     field: 'perustiedot',
@@ -27,10 +26,7 @@ const config = createFormConfigBuilder().registerSections([
     section: 'yhteystiedot',
     field: 'yhteystiedot',
   },
-  {
-    section: 'tila',
-    field: 'tila',
-  },
+  tilaSectionConfig,
 ]);
 
 const getOppilaitosFormConfig = () => config.getConfig();

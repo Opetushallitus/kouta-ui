@@ -1,20 +1,15 @@
 import { get, reduce } from 'lodash';
 
-import {
-  JULKAISUTILA,
-  KOULUTUSTYYPIT,
-  KOULUTUSTYYPPI,
-  POHJAVALINTA,
-} from '../constants';
+import { KOULUTUSTYYPIT, KOULUTUSTYYPPI } from '../constants';
 import createFormConfigBuilder from './createFormConfigBuilder';
 
-const getKielivalinta = values => get(values, 'perustiedot.kieliversiot') || [];
-
-const validateIfJulkaistu = validate => (eb, values, ...rest) => {
-  const { tila } = values;
-
-  return tila === JULKAISUTILA.JULKAISTU ? validate(eb, values, ...rest) : eb;
-};
+import {
+  validateIfJulkaistu,
+  getKielivalinta,
+  pohjaValintaSectionConfig,
+  tilaSectionConfig,
+  julkinenSectionConfig,
+} from '#/src/utils/formConfigUtils';
 
 const koulutustyypitWithValintatapa = [
   KOULUTUSTYYPPI.YLIOPISTOKOULUTUS,
@@ -47,23 +42,7 @@ const validateValintakokeet = (errorBuilder, values) => {
 };
 
 const config = createFormConfigBuilder().registerSections([
-  {
-    section: 'pohja',
-    koulutustyypit: KOULUTUSTYYPIT,
-    parts: [
-      {
-        field: '.tapa',
-        required: true,
-      },
-      {
-        field: '.valinta',
-        validate: (eb, values) =>
-          get(values, 'pohja.tapa') === POHJAVALINTA.KOPIO
-            ? eb.validateExistence('pohja.valinta')
-            : eb,
-      },
-    ],
-  },
+  pohjaValintaSectionConfig,
   {
     section: 'perustiedot',
     koulutustyypit: KOULUTUSTYYPIT,
@@ -123,17 +102,8 @@ const config = createFormConfigBuilder().registerSections([
     koulutustyypit: KOULUTUSTYYPIT,
     field: 'soraKuvaus',
   },
-  {
-    section: 'julkinen',
-    koulutustyypit: KOULUTUSTYYPIT,
-    field: 'julkinen',
-  },
-  {
-    section: 'tila',
-    koulutustyypit: KOULUTUSTYYPIT,
-    field: 'tila',
-    validate: eb => eb.validateExistence('tila'),
-  },
+  julkinenSectionConfig,
+  tilaSectionConfig,
   {
     section: 'valintakoe',
     field: 'valintakoe',

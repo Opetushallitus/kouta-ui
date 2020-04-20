@@ -1,20 +1,16 @@
 import { get, reduce } from 'lodash';
 
-import {
-  JULKAISUTILA,
-  LIITTEEN_TOIMITUSTAPA,
-  POHJAVALINTA,
-} from '#/src/constants';
+import { LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
 
 import createFormConfigBuilder from './createFormConfigBuilder';
 
-const getKielivalinta = values => get(values, 'kieliversiot') || [];
-
-const validateIfJulkaistu = validate => (eb, values, ...rest) => {
-  const { tila } = values;
-
-  return tila === JULKAISUTILA.JULKAISTU ? validate(eb, values, ...rest) : eb;
-};
+import {
+  validateIfJulkaistu,
+  getKielivalinta,
+  kieliversiotSectionConfig,
+  pohjaValintaSectionConfig,
+  tilaSectionConfig,
+} from '#/src/utils/formConfigUtils';
 
 const getLiitteillaYhteinenToimitusaika = values =>
   !!get(values, 'liitteet.yhteinenToimitusaika');
@@ -116,28 +112,8 @@ const validateValintakokeet = (errorBuilder, values) => {
 };
 
 const config = createFormConfigBuilder().registerSections([
-  {
-    section: 'pohja',
-    parts: [
-      {
-        field: '.tapa',
-        required: true,
-      },
-      {
-        field: '.valinta',
-        validate: (eb, values) =>
-          get(values, 'pohja.tapa') === POHJAVALINTA.KOPIO
-            ? eb.validateExistence('pohja.valinta')
-            : eb,
-      },
-    ],
-  },
-  {
-    section: 'kieliversiot',
-    field: 'kieliversiot',
-    validate: eb => eb.validateArrayMinLength('kieliversiot', 1),
-    required: true,
-  },
+  pohjaValintaSectionConfig,
+  kieliversiotSectionConfig,
   {
     section: 'pohjakoulutus',
     field: 'pohjakoulutus',
@@ -220,11 +196,7 @@ const config = createFormConfigBuilder().registerSections([
     field: 'liitteet',
     validate: validateIfJulkaistu((eb, values) => validateLiitteet(eb, values)),
   },
-  {
-    section: 'tila',
-    field: 'tila',
-    validate: eb => eb.validateExistence('tila'),
-  },
+  tilaSectionConfig,
 ]);
 
 const getHakukohdeFormConfig = () => config.getConfig();

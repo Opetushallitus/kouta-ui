@@ -1,43 +1,22 @@
 import { cond, flow, get } from 'lodash';
 import { ifAny, otherwise } from '../utils';
-import { JULKAISUTILA, HAKULOMAKETYYPPI, POHJAVALINTA } from '../constants';
+import { HAKULOMAKETYYPPI } from '../constants';
 import isYhteishakuHakutapa from './isYhteishakuHakutapa';
 import isErillishakuHakutapa from './isErillishakuHakutapa';
 import createFormConfigBuilder from './createFormConfigBuilder';
-
-const getKielivalinta = values => get(values, 'kieliversiot') || [];
+import {
+  validateIfJulkaistu,
+  getKielivalinta,
+  kieliversiotSectionConfig,
+  pohjaValintaSectionConfig,
+  tilaSectionConfig,
+} from '#/src/utils/formConfigUtils';
 
 const getHakutapa = values => get(values, 'hakutapa');
 
-const validateIfJulkaistu = validate => (eb, values, ...rest) => {
-  const { tila } = values;
-
-  return tila === JULKAISUTILA.JULKAISTU ? validate(eb, values, ...rest) : eb;
-};
-
 const config = createFormConfigBuilder().registerSections([
-  {
-    section: 'kieliversiot',
-    field: 'kieliversiot',
-    validate: eb => eb.validateArrayMinLength('kieliversiot', 1),
-    required: true,
-  },
-  {
-    section: 'pohja',
-    parts: [
-      {
-        field: '.tapa',
-        required: true,
-      },
-      {
-        field: '.valinta',
-        validate: (eb, values) =>
-          get(values, 'pohja.tapa') === POHJAVALINTA.KOPIO
-            ? eb.validateExistence('pohja.valinta')
-            : eb,
-      },
-    ],
-  },
+  kieliversiotSectionConfig,
+  pohjaValintaSectionConfig,
   {
     section: 'nimi',
     parts: [
@@ -181,12 +160,7 @@ const config = createFormConfigBuilder().registerSections([
     section: 'yhteyshenkilot',
     field: 'yhteyshenkilot',
   },
-  {
-    section: 'tila',
-    field: 'tila',
-    required: true,
-    validate: eb => eb.validateExistence('tila'),
-  },
+  tilaSectionConfig,
 ]);
 
 const getHakuFormConfig = () => {

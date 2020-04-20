@@ -1,45 +1,19 @@
-import { get } from 'lodash';
-
-import { JULKAISUTILA, POHJAVALINTA } from '#/src/constants';
-
 import createFormConfigBuilder from './createFormConfigBuilder';
 
-const getKielivalinta = values => get(values, 'kieliversiot') || [];
-
-const validateIfJulkaistu = validate => (eb, values, ...rest) => {
-  const { tila } = values;
-  return tila === JULKAISUTILA.JULKAISTU ? validate(eb, values, ...rest) : eb;
-};
+import {
+  validateIfJulkaistu,
+  getKielivalinta,
+  koulutustyyppiSectionConfig,
+  kieliversiotSectionConfig,
+  pohjaValintaSectionConfig,
+  tilaSectionConfig,
+  julkinenSectionConfig,
+} from '#/src/utils/formConfigUtils';
 
 const config = createFormConfigBuilder().registerSections([
-  {
-    section: 'koulutustyyppi',
-    field: 'koulutustyyppi',
-    validate: eb => eb.validateExistence('koulutustyyppi'),
-    required: true,
-  },
-  {
-    section: 'pohja',
-    parts: [
-      {
-        field: '.tapa',
-        required: true,
-      },
-      {
-        field: '.valinta',
-        validate: (eb, values) =>
-          get(values, 'pohja.tapa') === POHJAVALINTA.KOPIO
-            ? eb.validateExistence('pohja.valinta')
-            : eb,
-      },
-    ],
-  },
-  {
-    section: 'kieliversiot',
-    field: 'kieliversiot',
-    validate: eb => eb.validateArrayMinLength('kieliversiot', 1),
-    required: true,
-  },
+  koulutustyyppiSectionConfig,
+  pohjaValintaSectionConfig,
+  kieliversiotSectionConfig,
   {
     section: 'tiedot',
     parts: [
@@ -57,16 +31,8 @@ const config = createFormConfigBuilder().registerSections([
       },
     ],
   },
-  {
-    section: 'julkinen',
-    field: 'julkinen',
-  },
-  {
-    section: 'tila',
-    field: 'tila',
-    validate: eb => eb.validateExistence('tila'),
-    required: true,
-  },
+  julkinenSectionConfig,
+  tilaSectionConfig,
 ]);
 
 const getSoraKuvausFormConfig = () => config.getConfig();

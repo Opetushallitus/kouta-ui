@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Field, change, isDirty as formIsDirty } from 'redux-form';
 import { get, each, find, toLower } from 'lodash';
 
-import FormConfigField from '../../FormConfigField';
+import FormConfigFragment from '../../FormConfigFragment';
 import KoulutuksenTiedotSection from './KoulutuksenTiedotSection';
 import KoulutusField from '../KoulutusField';
 import Box from '../../Box';
@@ -80,7 +80,7 @@ const TiedotSection = ({
 
   return (
     <Box mb={-2}>
-      <FormConfigField name="koulutuskoodiTiedoilla">
+      <FormConfigFragment name="koulutuskoodiTiedoilla">
         <Box mb={2}>
           <KoulutuksenTiedotSection
             disabled={disabled}
@@ -90,9 +90,9 @@ const TiedotSection = ({
             name={name}
           />
         </Box>
-      </FormConfigField>
+      </FormConfigFragment>
 
-      <FormConfigField name="osaamisala">
+      <FormConfigFragment name="osaamisala">
         <Box mb={2}>
           <KoulutuksenTiedotSection
             disabled={disabled}
@@ -104,9 +104,9 @@ const TiedotSection = ({
             name={name}
           />
         </Box>
-      </FormConfigField>
+      </FormConfigFragment>
 
-      <FormConfigField name="koulutuskoodi">
+      <FormConfigFragment name="koulutuskoodi">
         <Box mb={2} {...getTestIdProps('koulutuskoodiSelect')}>
           <KoulutusField
             disabled={disabled}
@@ -115,7 +115,7 @@ const TiedotSection = ({
             language={language}
           />
         </Box>
-      </FormConfigField>
+      </FormConfigFragment>
 
       <Box mb={2}>
         <OpintojenlaajuusField disabled={disabled} name={name} />

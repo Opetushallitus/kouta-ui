@@ -18,7 +18,7 @@ import DividerHeading from '../../DividerHeading';
 import MaksullisuusFields from './MaksullisuusFields';
 import isKorkeakouluKoulutustyyppi from '../../../utils/isKorkeakouluKoulutustyyppi';
 import useFieldValue from '../../useFieldValue';
-import FormConfigField from '../../FormConfigField';
+import FormConfigFragment from '../../FormConfigFragment';
 import DiplomiFields from './DiplomiFields';
 import KielivalikoimaFields from './KielivalikoimaFields';
 
@@ -256,17 +256,17 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
         <AlkamiskausiFields name={name} />
       </Spacing>
 
-      <FormConfigField name="kielivalikoima">
+      <FormConfigFragment name="kielivalikoima">
         <Spacing marginBottom={4}>
           <KielivalikoimaFields name={name} />
         </Spacing>
-      </FormConfigField>
+      </FormConfigFragment>
 
-      <FormConfigField name="diplomi">
+      <FormConfigFragment name="diplomi">
         <Spacing marginBottom={4}>
           <DiplomiFields name={name} language={language} />
         </Spacing>
-      </FormConfigField>
+      </FormConfigFragment>
 
       <Spacing marginBottom={4}>
         <DividerHeading>{t('yleiset.valitseLisattavaOsio')}</DividerHeading>

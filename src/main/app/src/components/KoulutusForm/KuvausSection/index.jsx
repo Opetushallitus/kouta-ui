@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
-import FormConfigField from '../../FormConfigField';
+import FormConfigFragment from '../../FormConfigFragment';
 import Box from '../../Box';
 import TekstiKuvausSection from './TekstiKuvausSection';
 import { FormFieldInput, FormFieldTextarea } from '../../formFields';
@@ -13,7 +13,7 @@ const KuvausSection = ({ disabled, language, name }) => {
 
   return (
     <Box mb={-2}>
-      <FormConfigField name="tekstiKuvaus">
+      <FormConfigFragment name="tekstiKuvaus">
         <Box mb={2}>
           <TekstiKuvausSection
             disabled={disabled}
@@ -21,7 +21,7 @@ const KuvausSection = ({ disabled, language, name }) => {
             language={language}
           />
         </Box>
-      </FormConfigField>
+      </FormConfigFragment>
 
       <Box mb={2} {...getTestIdProps('kuvauksenNimiInput')}>
         <Field

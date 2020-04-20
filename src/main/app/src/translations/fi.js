@@ -444,6 +444,7 @@ export default {
       'Valittuun koulutukseen <0>{{koulutusLinkText}}</0> liitetyllä ePerusteella <1>{{ePerusteLinkText}}</1> ei ole osaamisaloja.',
     koulutuksellaEiEPerustetta:
       'Valittuun koulutukseen ei ole liitetty ePerustetta.',
+    valitseMissaJarjestetaan: 'Valitse missä toteutus järjestetään',
   },
   hakulomake: {
     haunNimi: 'Haun nimi',

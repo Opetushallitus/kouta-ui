@@ -12,7 +12,7 @@ Cypress.Commands.add(
   (subject, text, options = { force: true }) =>
     cy
       .get(subject)
-      .click()
+      .click({ force: true })
       .invoke('val', text)
       .trigger('change', options),
 );

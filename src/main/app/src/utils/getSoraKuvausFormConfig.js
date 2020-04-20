@@ -22,12 +22,14 @@ const config = createFormConfigBuilder().registerSections([
         validate: validateIfJulkaistu((eb, values) =>
           eb.validateTranslations('tiedot.nimi', getKielivalinta(values)),
         ),
+        required: true,
       },
       {
         field: '.kuvaus',
         validate: validateIfJulkaistu((eb, values) =>
           eb.validateTranslations('tiedot.kuvaus', getKielivalinta(values)),
         ),
+        required: true,
       },
     ],
   },

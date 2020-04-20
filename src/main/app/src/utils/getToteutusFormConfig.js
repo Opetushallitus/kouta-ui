@@ -150,13 +150,6 @@ const config = createFormConfigBuilder().registerSections([
       },
       {
         field: '.opetusaikaKuvaus',
-        validate: validateIfJulkaistu((eb, values) =>
-          eb.validateTranslations(
-            'jarjestamistiedot.opetusaikaKuvaus',
-            getKielivalinta(values),
-          ),
-        ),
-        required: true,
       },
       {
         field: '.opetustapa',
@@ -255,6 +248,7 @@ const config = createFormConfigBuilder().registerSections([
     validate: validateIfJulkaistu(eb =>
       eb.validateArrayMinLength('tarjoajat', 1),
     ),
+    required: true,
   },
   {
     section: 'yhteyshenkilot',

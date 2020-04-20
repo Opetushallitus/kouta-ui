@@ -50,17 +50,20 @@ const config = createFormConfigBuilder().registerSections([
       {
         field: '.tyyppi',
         validate: eb => eb.validateExistence('perustiedot.tyyppi'),
+        required: true,
       },
       {
         field: '.kieliversiot',
         validate: eb =>
           eb.validateArrayMinLength('perustiedot.kieliversiot', 1),
+        required: true,
       },
       {
         field: '.hakutapa',
         validate: validateIfJulkaistu(eb =>
           eb.validateExistence('perustiedot.hakutapa'),
         ),
+        required: true,
       },
       {
         field: '.kohdejoukko',
@@ -75,6 +78,7 @@ const config = createFormConfigBuilder().registerSections([
         field: '.nimi',
         validate: (eb, values) =>
           eb.validateTranslations('kuvaus.nimi', getKielivalinta(values)),
+        required: true,
       },
       {
         field: '.kuvaus',
@@ -96,11 +100,25 @@ const config = createFormConfigBuilder().registerSections([
             .validateTranslations('nimi', getKielivalinta(values)),
         ),
     ),
+    parts: [
+      {
+        field: '.tapa',
+        required: true,
+      },
+      {
+        field: '.nimi',
+        required: true,
+      },
+    ],
   },
   {
     section: 'soraKuvaus',
     koulutustyypit: KOULUTUSTYYPIT,
     field: 'soraKuvaus',
+    validate: validateIfJulkaistu(eb =>
+      eb.validateExistence('perustiedot.hakutapa'),
+    ),
+    required: true,
   },
   julkinenSectionConfig,
   tilaSectionConfig,

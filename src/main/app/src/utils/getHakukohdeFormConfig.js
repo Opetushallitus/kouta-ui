@@ -123,6 +123,7 @@ const config = createFormConfigBuilder().registerSections([
         validate: validateIfJulkaistu(eb =>
           eb.validateArrayMinLength('pohjakoulutus.pohjakoulutusvaatimus', 1),
         ),
+        required: true,
       },
     ],
   },
@@ -134,6 +135,7 @@ const config = createFormConfigBuilder().registerSections([
         field: '.nimi',
         validate: (eb, values) =>
           eb.validateTranslations('perustiedot.nimi', getKielivalinta(values)),
+        required: true,
       },
       {
         field: 'hakuajat',
@@ -149,9 +151,16 @@ const config = createFormConfigBuilder().registerSections([
             : eb,
         ),
       },
-
+      {
+        field: 'hakuajat.hakuajat.alkaa',
+        required: true,
+      },
       {
         field: 'alkamiskausi',
+      },
+      {
+        field: 'alkamiskausi.kausi',
+        required: true,
       },
       {
         field: 'hakulomake',
@@ -188,6 +197,22 @@ const config = createFormConfigBuilder().registerSections([
       },
       {
         field: '.tilaisuudet',
+      },
+      {
+        field: '.tilaisuudet.osoite',
+        required: true,
+      },
+      {
+        field: '.tilaisuudet.postinumero',
+        required: true,
+      },
+      {
+        field: '.tilaisuudet.alkaa',
+        required: true,
+      },
+      {
+        field: '.tilaisuudet.paattyy',
+        required: true,
       },
     ],
   },

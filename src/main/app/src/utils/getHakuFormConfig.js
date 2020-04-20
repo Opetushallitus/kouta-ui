@@ -80,6 +80,15 @@ const config = createFormConfigBuilder().registerSections([
         required: true,
       },
       {
+        field: '.hakuaika.paattyy',
+        required: values => {
+          const hakutapa = getHakutapa(values);
+          return (
+            isYhteishakuHakutapa(hakutapa) || isErillishakuHakutapa(hakutapa)
+          );
+        },
+      },
+      {
         field: '.aikataulu',
       },
       {
@@ -94,9 +103,11 @@ const config = createFormConfigBuilder().registerSections([
                 .validateExistence('aikataulut.vuosi')
             : eb;
         }),
+        required: values => isYhteishakuHakutapa(getHakutapa(values)),
       },
       {
         field: '.vuosi',
+        required: values => isYhteishakuHakutapa(getHakutapa(values)),
       },
       {
         field: '.lisaamisenTakaraja',

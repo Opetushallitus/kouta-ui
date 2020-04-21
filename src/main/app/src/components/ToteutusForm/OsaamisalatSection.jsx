@@ -30,6 +30,7 @@ import Typography from '#/src/components/Typography';
 import { useURLs } from '#/src/hooks/context';
 import useFieldValue from '#/src/components/useFieldValue';
 import useApiAsync from '#/src/components/useApiAsync';
+import StyledSectionHTML from '#/src/components/StyledSectionHTML';
 
 const Container = styled.div`
   display: flex;
@@ -146,7 +147,7 @@ const OsaamisalatInfoFields = ({
             <Typography variant="h6" marginBottom={1}>
               {getLanguageValue(nimi, language)}
             </Typography>
-            <Typography>{getLanguageValue(kuvaus, language)}</Typography>
+            <StyledSectionHTML html={getLanguageValue(kuvaus, language)} />
           </Spacing>
 
           <AbstractCollapse

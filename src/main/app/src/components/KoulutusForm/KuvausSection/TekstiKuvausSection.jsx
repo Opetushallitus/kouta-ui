@@ -1,30 +1,16 @@
 import React from 'react';
-import _fp from 'lodash/fp';
-import styled from 'styled-components';
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { getLanguageValue } from '#/src/utils';
 import { getEPerusteById } from '#/src/apiUtils';
 import Typography from '#/src/components/Typography';
 import useApiAsync from '#/src/components/useApiAsync';
 import useFieldValue from '#/src/components/useFieldValue';
-
-const StyledKuvaus = styled.div(({ theme }) => ({
-  ..._fp.compose(
-    _fp.mapValues(headingStyle => ({
-      ...headingStyle,
-      marginBottom: 0,
-      marginTop: '20px',
-    })),
-    _fp.pick(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']),
-    _fp.get('typography'),
-  )(theme),
-  ..._fp.get(theme, 'typography.body'),
-  maxWidth: '750px',
-}));
+import StyledSectionHTML from '#/src/components/StyledSectionHTML';
 
 const TekstiKuvausSection = ({ language }) => {
   const ePerusteField = useFieldValue('information.eperuste');
-  const ePerusteId = _fp.get('value', ePerusteField);
+  const ePerusteId = _.get(ePerusteField, 'value');
   const { t } = useTranslation();
 
   const { data = {} } = useApiAsync({
@@ -48,11 +34,7 @@ const TekstiKuvausSection = ({ language }) => {
               ({diaarinumero})
             </Typography>
           </Typography>
-          <StyledKuvaus
-            dangerouslySetInnerHTML={{
-              __html: translatedKuvaus,
-            }}
-          ></StyledKuvaus>
+          <StyledSectionHTML html={translatedKuvaus} />
           <Typography variant="secondary" as="div" marginTop={1}>
             ({t('yleiset.lahde')}: {t('yleiset.ePerusteet')})
           </Typography>

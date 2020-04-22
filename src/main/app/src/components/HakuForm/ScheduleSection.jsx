@@ -3,9 +3,9 @@ import { Field, FieldArray } from 'redux-form';
 import useKoodistoOptions from '../useKoodistoOptions';
 import { useTranslation } from 'react-i18next';
 import { getTestIdProps } from '../../utils';
-import DividerHeading from '../DividerHeading';
 import Box from '../Box';
 import HakuajatFields from '../HakuajatFields';
+import FieldGroup from '#/src/components/FieldGroup';
 
 import {
   FormFieldDateTimeInput,
@@ -19,33 +19,35 @@ const ScheduleSection = ({ isOphVirkailija, isYhteishaku, name }) => {
 
   return (
     <Box mb={-4}>
-      <Box mb={4} {...getTestIdProps('hakuajat')}>
-        <DividerHeading>{t('hakulomake.hakuaika')}</DividerHeading>
+      <FieldGroup
+        title={t('hakulomake.hakuaika')}
+        name={`${name}.hakuaikaGroup`}
+        {...getTestIdProps('hakuajat')}
+      >
         <FieldArray
           name={`${name}.hakuaika`}
           component={HakuajatFields}
           t={t}
         />
-      </Box>
+      </FieldGroup>
 
       {isYhteishaku && isOphVirkailija ? (
-        <Box mb={4} {...getTestIdProps('tulevaisuudenaikataulu')}>
-          <DividerHeading>
-            {t('hakulomake.aikatauluTulevaisuudesta')}
-          </DividerHeading>
+        <FieldGroup
+          title={t('hakulomake.aikatauluTulevaisuudesta')}
+          {...getTestIdProps('tulevaisuudenaikataulu')}
+        >
           <FieldArray
             name={`${name}.aikataulu`}
             component={HakuajatFields}
             t={t}
           />
-        </Box>
+        </FieldGroup>
       ) : null}
 
-      <Box mb={4} {...getTestIdProps('alkamiskausi')}>
-        <DividerHeading>
-          {t('hakulomake.koulutuksenAlkamiskausi')}
-        </DividerHeading>
-
+      <FieldGroup
+        title={t('hakulomake.koulutuksenAlkamiskausi')}
+        {...getTestIdProps('alkamiskausi')}
+      >
         <Box mb={2} {...getTestIdProps('kausi')}>
           <Field
             name={`${name}.kausi`}
@@ -55,51 +57,49 @@ const ScheduleSection = ({ isOphVirkailija, isYhteishaku, name }) => {
           />
         </Box>
 
-        <Box>
-          <div {...getTestIdProps('vuosi')}>
-            <Field
-              name={`${name}.vuosi`}
-              component={FormFieldYearSelect}
-              label={t('yleiset.vuosi')}
-            />
-          </div>
+        <Box {...getTestIdProps('vuosi')}>
+          <Field
+            name={`${name}.vuosi`}
+            component={FormFieldYearSelect}
+            label={t('yleiset.vuosi')}
+          />
         </Box>
-      </Box>
+      </FieldGroup>
 
       {isYhteishaku && isOphVirkailija ? (
         <>
-          <Box mb={4} {...getTestIdProps('perumisenTakaraja')}>
-            <DividerHeading>
-              {t('hakulomake.hakukohteenLisaamisenJaPerumisenTakaraja')}
-            </DividerHeading>
+          <FieldGroup
+            title={t('hakulomake.hakukohteenLisaamisenJaPerumisenTakaraja')}
+            {...getTestIdProps('perumisenTakaraja')}
+          >
             <Field
               name={`${name}.lisaamisenTakaraja`}
               component={FormFieldDateTimeInput}
               helperText={t('yleiset.paivamaaraJaKellonaika')}
             />
-          </Box>
+          </FieldGroup>
 
-          <Box mb={4} {...getTestIdProps('muokkauksenTakaraja')}>
-            <DividerHeading>
-              {t('hakulomake.hakukohteenMuokkauksenTakaraja')}
-            </DividerHeading>
+          <FieldGroup
+            title={t('hakulomake.hakukohteenMuokkauksenTakaraja')}
+            {...getTestIdProps('muokkauksenTakaraja')}
+          >
             <Field
               name={`${name}.muokkauksenTakaraja`}
               component={FormFieldDateTimeInput}
               helperText={t('yleiset.paivamaaraJaKellonaika')}
             />
-          </Box>
+          </FieldGroup>
 
-          <Box mb={4} {...getTestIdProps('julkaisupaivamaara')}>
-            <DividerHeading>
-              {t('hakulomake.ajastettuHaunJulkaisupaivamaara')}
-            </DividerHeading>
+          <FieldGroup
+            title={t('hakulomake.ajastettuHaunJulkaisupaivamaara')}
+            {...getTestIdProps('julkaisupaivamaara')}
+          >
             <Field
               name={`${name}.ajastettuJulkaisu`}
               component={FormFieldDateTimeInput}
               helperText={t('yleiset.paivamaaraJaKellonaika')}
             />
-          </Box>
+          </FieldGroup>
         </>
       ) : null}
     </Box>

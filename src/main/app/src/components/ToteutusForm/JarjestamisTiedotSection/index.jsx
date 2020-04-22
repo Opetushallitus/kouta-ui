@@ -14,13 +14,13 @@ import AlkamiskausiFields from './AlkamiskausiFields';
 import useKoodistoOptions from '../../useKoodistoOptions';
 import { getTestIdProps } from '../../../utils';
 import NoYesRadioGroup from '../../NoYesRadioGroup';
-import DividerHeading from '../../DividerHeading';
 import MaksullisuusFields from './MaksullisuusFields';
 import isKorkeakouluKoulutustyyppi from '../../../utils/isKorkeakouluKoulutustyyppi';
 import useFieldValue from '../../useFieldValue';
 import FormConfigFragment from '../../FormConfigFragment';
 import DiplomiFields from './DiplomiFields';
 import KielivalikoimaFields from './KielivalikoimaFields';
+import FieldGroup from '#/src/components/FieldGroup';
 
 import {
   FormFieldTextarea,
@@ -114,7 +114,22 @@ const StipendiFields = ({ language, name }) => {
   return (
     <Flex {...getTestIdProps('stipendi')}>
       <FlexItem grow={0} basis="30%">
-        <Field name={`${name}.onkoStipendia`} component={NoYesField} />
+        {/* TODO: Use FormFieldRadioGroup instead of NoYesField */}
+        <Field
+          label={t('toteutuslomake.valitseKaytettavaApurahoitus')}
+          name={`${name}.onkoStipendia`}
+          component={NoYesField}
+          options={[
+            {
+              label: t('toteutuslomake.stipendi'),
+              value: 'kylla',
+            },
+            {
+              label: t('toteutuslomake.eiKaytossa'),
+              value: 'ei',
+            },
+          ]}
+        />
         {onkoStipendia ? (
           <Spacing marginTop={1} {...getTestIdProps('stipendinMaara')}>
             <ExtraField>
@@ -152,8 +167,7 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
 
   return (
     <>
-      <Spacing marginBottom={4}>
-        <DividerHeading>{t('yleiset.opetuskieli')}</DividerHeading>
+      <FieldGroup title={t('yleiset.opetuskieli')}>
         <Flex {...getTestIdProps('opetuskieli')}>
           <FlexItem grow={0} basis="30%">
             <Field
@@ -170,10 +184,9 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
             />
           </FlexItem>
         </Flex>
-      </Spacing>
+      </FieldGroup>
 
-      <Spacing marginBottom={4}>
-        <DividerHeading>{t('toteutuslomake.opetusaika')}</DividerHeading>
+      <FieldGroup title={t('toteutuslomake.opetusaika')}>
         <Flex {...getTestIdProps('opetusaika')}>
           <FlexItem grow={0} basis="30%">
             <Field
@@ -191,12 +204,9 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
             />
           </FlexItem>
         </Flex>
-      </Spacing>
+      </FieldGroup>
 
-      <Spacing marginBottom={4}>
-        <DividerHeading>
-          {t('toteutuslomake.paaasiallinenOpetustapa')}
-        </DividerHeading>
+      <FieldGroup title={t('toteutuslomake.paaasiallinenOpetustapa')}>
         <Flex {...getTestIdProps('opetustapa')}>
           <FlexItem grow={0} basis="30%">
             <Field
@@ -213,12 +223,9 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
             />
           </FlexItem>
         </Flex>
-      </Spacing>
+      </FieldGroup>
 
-      <Spacing marginBottom={4}>
-        <DividerHeading>
-          {t('toteutuslomake.opetuksenMaksullisuus')}
-        </DividerHeading>
+      <FieldGroup title={t('toteutuslomake.opetuksenMaksullisuus')}>
         <Flex {...getTestIdProps('maksullisuus')}>
           <FlexItem grow={0} basis="30%">
             <MaksullisuusFields
@@ -240,21 +247,18 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
             />
           </FlexItem>
         </Flex>
-      </Spacing>
+      </FieldGroup>
 
-      <Spacing marginBottom={4}>
-        <DividerHeading>
-          {t('toteutuslomake.onkoStipenditKaytossa')}
-        </DividerHeading>
+      <FieldGroup
+        name={`${name}.apurahaGroup`}
+        title={t('toteutuslomake.apuraha')}
+      >
         <StipendiFields language={language} name={name} />
-      </Spacing>
+      </FieldGroup>
 
-      <Spacing marginBottom={4}>
-        <DividerHeading>
-          {t('toteutuslomake.koulutuksenAjankohta')}
-        </DividerHeading>
+      <FieldGroup title={t('toteutuslomake.koulutuksenAjankohta')}>
         <AlkamiskausiFields name={name} />
-      </Spacing>
+      </FieldGroup>
 
       <FormConfigFragment name="kielivalikoima">
         <Spacing marginBottom={4}>
@@ -268,8 +272,7 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
         </Spacing>
       </FormConfigFragment>
 
-      <Spacing marginBottom={4}>
-        <DividerHeading>{t('yleiset.valitseLisattavaOsio')}</DividerHeading>
+      <FieldGroup title={t('yleiset.valitseLisattavaOsio')}>
         <div {...getTestIdProps('osiotSelect')}>
           <Field
             name={`${name}.osiot`}
@@ -278,7 +281,8 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
             isMulti
           />
         </div>
-      </Spacing>
+      </FieldGroup>
+
       <OsiotFields
         language={language}
         osiotOptions={osiotOptions}

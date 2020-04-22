@@ -24,10 +24,14 @@ export const NoYesRadioGroup = ({
   value,
   onChange = noop,
   onBlur,
+  options: optionsProp,
   ...props
 }) => {
   const { t } = useTranslation();
-  const options = useMemo(() => getOptions(t), [t]);
+  const options = useMemo(() => (optionsProp ? optionsProp : getOptions(t)), [
+    optionsProp,
+    t,
+  ]);
 
   const onRadioGroupChange = useCallback(
     e => {

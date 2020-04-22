@@ -1,26 +1,11 @@
-import React, { createElement, useContext } from 'react';
+import React, { createElement } from 'react';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
-import FormConfigSectionContext from '#/src/components/FormConfigSectionContext';
 import FormControl from '#/src/components/FormControl';
-import useFormConfig from '#/src/components/useFormConfig';
-import useForm from '#/src/components/useForm';
-
-const findFieldConfig = (fieldConfigs = [], name) => {
-  const trimmedFieldName = name.replace(/\[\d\]/, '');
-  const fieldNameParts = _.split(trimmedFieldName, '.').filter(
-    part => !/#\d+$/.test(part),
-  );
-  let configFound = null;
-  let nameCandidate = null;
-  _.forEach(fieldNameParts, value => {
-    nameCandidate = nameCandidate ? `${nameCandidate}.${value}` : value;
-    if (fieldConfigs[nameCandidate]) {
-      configFound = fieldConfigs[nameCandidate];
-    }
-  });
-  return configFound;
-};
+import {
+  useFieldConfig,
+  useFieldIsRequired,
+} from '#/src/hooks/fieldConfigHooks';
 
 export const createComponent = (Component, mapProps) => {
   const InputComponent = props => {
@@ -36,17 +21,8 @@ export const createComponent = (Component, mapProps) => {
     const { t } = useTranslation();
     const children = createElement(Component, mapProps(props));
 
-    const formConfig = useFormConfig();
-    const section = useContext(FormConfigSectionContext);
-    const sectionFields = _.get(formConfig, `sections.${section}.fields`);
-
-    const form = useForm();
-
-    const fieldConfig = findFieldConfig(sectionFields, name);
-    const required = _.get(fieldConfig, 'required');
-    const requiredValue = _.isFunction(required)
-      ? required(_.get(form, 'values'))
-      : required;
+    const fieldConfig = useFieldConfig(name);
+    const required = useFieldIsRequired(fieldConfig);
 
     return fieldConfig ? (
       <FormControl
@@ -54,7 +30,7 @@ export const createComponent = (Component, mapProps) => {
         helperText={
           error ? (_.isArray(error) ? t(...error) : t(error)) : helperText
         }
-        label={`${label}${requiredValue ? ' *' : ''}`}
+        label={`${label}${required ? ' *' : ''}`}
         disabled={disabled}
       >
         {children}

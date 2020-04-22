@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import queryString from 'query-string';
+import _ from 'lodash';
 
 import FormPage, {
   OrganisaatioInfo,
@@ -62,8 +63,8 @@ const CreateToteutusPage = props => {
       ? koulutus.koulutustyyppi
       : KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
-  const { koulutusNimi } = props;
-  const { koulutusKielet } = props;
+  const koulutusNimi = _.get(koulutus, 'nimi');
+  const koulutusKielet = _.get(koulutus, 'kielivalinta');
 
   const promiseFn = kopioToteutusOid ? getToteutusByOid : resolveFn;
 
@@ -72,7 +73,6 @@ const CreateToteutusPage = props => {
     oid: kopioToteutusOid,
     watch: kopioToteutusOid,
   });
-
   const initialValues = useMemo(() => {
     return koulutustyyppi === 'amm'
       ? getInitialValues(data, koulutusNimi, koulutusKielet)

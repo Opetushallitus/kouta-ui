@@ -76,7 +76,10 @@ const CreateHakukohdePage = props => {
   const initialValues = useMemo(() => {
     return (
       data &&
-      getInitialValues(data.toteutus.toteutusNimi, data.toteutus.toteutusKielet)
+      getInitialValues(
+        get(data, 'toteutus.nimi'),
+        get(data, 'toteutus.kielivalinta'),
+      )
     );
   }, [data]);
 

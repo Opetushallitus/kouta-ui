@@ -121,7 +121,7 @@ module.exports = {
       }
     }
   },
-  "__version": "4.1.0",
+  "__version": "4.4.1",
   "editKoulutusForm": {
     "should be able to edit ammatillinen koulutus": {
       "1": {

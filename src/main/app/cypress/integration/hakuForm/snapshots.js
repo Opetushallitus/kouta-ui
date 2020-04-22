@@ -171,7 +171,7 @@ module.exports = {
       }
     }
   },
-  "__version": "4.1.0",
+  "__version": "4.4.1",
   "editHakuForm": {
     "should be able to edit haku": {
       "1": {

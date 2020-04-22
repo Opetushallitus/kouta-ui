@@ -1,3 +1,5 @@
+import { fireEvent } from '@testing-library/react';
+
 require('@cypress/snapshot').register();
 
 Cypress.Commands.add('getByTestId', (testId, options = {}) => {
@@ -9,12 +11,10 @@ Cypress.Commands.add(
   {
     prevSubject: true,
   },
-  (subject, text, options = { force: true }) =>
-    cy
-      .get(subject)
-      .click({ force: true })
-      .invoke('val', text)
-      .trigger('change', options),
+  (element, value) => {
+    element.focus();
+    fireEvent.change(element[0], { target: { value } });
+  },
 );
 
 Cypress.Commands.overwrite(

@@ -1,5 +1,5 @@
 module.exports = {
-  "__version": "4.1.0",
+  "__version": "4.4.1",
   "editValintaperusteForm": {
     "should be able to edit valintaperuste": {
       "1": {

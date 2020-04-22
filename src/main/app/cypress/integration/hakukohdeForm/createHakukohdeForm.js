@@ -214,6 +214,12 @@ describe('createHakukohdeForm', () => {
       ],
     });
 
+    cy.visit(
+      `/organisaatio/${organisaatioOid}/toteutus/${toteutusOid}/haku/${hakuOid}/hakukohde`,
+    );
+  });
+
+  it('should be able to create ammatillinen hakukohde', () => {
     cy.route({
       method: 'GET',
       url: `**/toteutus/${toteutusOid}`,
@@ -233,12 +239,6 @@ describe('createHakukohdeForm', () => {
       }),
     });
 
-    cy.visit(
-      `/organisaatio/${organisaatioOid}/toteutus/${toteutusOid}/haku/${hakuOid}/hakukohde`,
-    );
-  });
-
-  it('should be able to create ammatillinen hakukohde', () => {
     cy.route({
       method: 'PUT',
       url: '**/hakukohde',
@@ -268,6 +268,25 @@ describe('createHakukohdeForm', () => {
   });
 
   it('should be able to create korkeakoulu hakukohde', () => {
+    cy.route({
+      method: 'GET',
+      url: `**/koulutus/${koulutusOid}`,
+      response: merge(koulutus({ tyyppi: 'yo' }), {
+        oid: koulutusOid,
+        organisaatioOid: organisaatioOid,
+      }),
+    });
+
+    cy.route({
+      method: 'GET',
+      url: `**/toteutus/${toteutusOid}`,
+      response: merge(toteutus({ tyyppi: 'yo' }), {
+        oid: toteutusOid,
+        organisaatioOid: organisaatioOid,
+        koulutusOid: koulutusOid,
+      }),
+    });
+
     cy.route({
       method: 'GET',
       url: `**/koulutus/${koulutusOid}`,

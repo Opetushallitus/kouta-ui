@@ -248,7 +248,7 @@ const fillKielivalikoima = () => {
   });
 };
 
-describe('createToteutusForm', () => {
+const prepareTest = tyyppi => {
   const organisaatioOid = '1.1.1.1.1.1';
   const koulutusOid = '1.2.1.1.1.1';
   const perusteId = '1';
@@ -260,20 +260,18 @@ describe('createToteutusForm', () => {
     tarjoajat: ['1.2.2.1.1.1'],
   };
 
-  beforeEach(() => {
-    stubToteutusFormRoutes({ cy, perusteId, organisaatioOid });
-
-    cy.visit(
-      `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/toteutus`,
-    );
+  stubToteutusFormRoutes({ cy, perusteId, organisaatioOid });
+  cy.route({
+    method: 'GET',
+    url: `**/koulutus/${koulutusOid}`,
+    response: merge(koulutus({ tyyppi }), testKoulutusFields),
   });
+  cy.visit(`/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/toteutus`);
+};
 
+describe('createToteutusForm', () => {
   it('should be able to create ammatillinen toteutus', () => {
-    cy.route({
-      method: 'GET',
-      url: `**/koulutus/${koulutusOid}`,
-      response: merge(koulutus({ tyyppi: 'amm' }), testKoulutusFields),
-    });
+    prepareTest('amm');
 
     cy.route({
       method: 'PUT',
@@ -324,11 +322,7 @@ describe('createToteutusForm', () => {
   });
 
   it('should be able to create korkeakoulu toteutus', () => {
-    cy.route({
-      method: 'GET',
-      url: `**/koulutus/${koulutusOid}`,
-      response: merge(koulutus({ tyyppi: 'yo' }), testKoulutusFields),
-    });
+    prepareTest('yo');
 
     cy.route({
       method: 'PUT',
@@ -376,11 +370,7 @@ describe('createToteutusForm', () => {
   });
 
   it('should be able to create lukio toteutus', () => {
-    cy.route({
-      method: 'GET',
-      url: `**/koulutus/${koulutusOid}`,
-      response: merge(koulutus({ tyyppi: 'lk' }), testKoulutusFields),
-    });
+    prepareTest('lk');
 
     cy.route({
       method: 'PUT',

@@ -84,7 +84,7 @@ const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
     setOrderBy,
     tila,
     filtersProps,
-  } = useFilterState();
+  } = useFilterState({ paginationName: 'valintaperusteet' });
 
   const watch = JSON.stringify([
     page,

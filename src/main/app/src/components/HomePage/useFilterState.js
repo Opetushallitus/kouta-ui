@@ -1,8 +1,12 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 
 import useDebounceState from '../useDebounceState';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { getPage, setPageAction } from '#/src/state/pagination';
+
 export const useFilterState = ({
+  paginationName,
   initialNimi = '',
   initialTila = null,
   initialOrderBy = null,
@@ -11,7 +15,15 @@ export const useFilterState = ({
 } = {}) => {
   const [nimi, setNimi, debouncedNimi] = useDebounceState(initialNimi, 500);
 
-  const [page, setPage] = useState(initialPage);
+  const page = useSelector(getPage(paginationName));
+  const dispatch = useDispatch();
+  const setPage = useCallback(
+    page => {
+      return dispatch(setPageAction({ page: page, name: paginationName }));
+    },
+    [dispatch, paginationName],
+  );
+
   const [showArchived, setShowArchived] = useState(initialShowArchived);
   const [orderBy, setOrderBy] = useState(initialOrderBy);
   const [tila, setTila] = useState(initialTila);

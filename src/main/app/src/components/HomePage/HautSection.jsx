@@ -92,7 +92,7 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate }) => {
     setOrderBy,
     tila,
     filtersProps,
-  } = useFilterState();
+  } = useFilterState({ paginationName: 'haut' });
 
   const watch = JSON.stringify([
     page,

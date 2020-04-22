@@ -98,7 +98,7 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
     setOrderBy,
     tila,
     filtersProps,
-  } = useFilterState();
+  } = useFilterState({ paginationName: 'toteutukset' });
 
   const watch = JSON.stringify([
     page,

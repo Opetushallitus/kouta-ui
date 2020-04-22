@@ -54,6 +54,10 @@ const config = createFormConfigBuilder().registerSections([
     section: 'aikataulut',
     parts: [
       {
+        field: '.hakuaikaGroup',
+        required: true,
+      },
+      {
         field: '.hakuaika',
         validate: validateIfJulkaistu((errorBoundary, values) =>
           errorBoundary
@@ -142,25 +146,17 @@ const config = createFormConfigBuilder().registerSections([
                     getKielivalinta(values),
                   ),
               ],
-              [
-                ifAny(HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA),
-                () =>
-                  eb.validateTranslations(
-                    'hakulomake.kuvaus',
-                    getKielivalinta(values),
-                  ),
-              ],
               [otherwise, () => eb],
             ])(tyyppi => get(values, 'hakulomake.tyyppi') === tyyppi),
         ),
       },
       {
-        required: true,
         field: '.lomake',
+        required: true,
       },
       {
-        required: true,
         field: '.linkki',
+        required: true,
       },
       {
         field: '.kuvaus',

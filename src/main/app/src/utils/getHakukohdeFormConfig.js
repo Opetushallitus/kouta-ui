@@ -173,14 +173,7 @@ const config = createFormConfigBuilder().registerSections([
   },
   {
     section: 'aloituspaikat',
-    parts: [
-      {
-        field: 'aloituspaikat',
-      },
-      {
-        field: 'ensikertalaistenAloituspaikat',
-      },
-    ],
+    field: 'aloituspaikat',
   },
   {
     section: 'valintaperusteenKuvaus',
@@ -220,6 +213,7 @@ const config = createFormConfigBuilder().registerSections([
     section: 'liitteet',
     field: 'liitteet',
     validate: validateIfJulkaistu((eb, values) => validateLiitteet(eb, values)),
+    parts: [{}],
   },
   tilaSectionConfig,
 ]);

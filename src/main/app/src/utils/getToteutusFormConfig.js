@@ -126,8 +126,17 @@ const config = createFormConfigBuilder().registerSections([
   },
   {
     section: 'osaamisalat',
-    field: 'osaamisalat',
     koulutustyypit: TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
+    field: 'osaamisalat',
+    parts: [
+      {
+        field: '.osaamisalatGroup',
+        required: true,
+      },
+      {
+        field: '.osaamisalat',
+      },
+    ],
   },
   {
     section: 'jarjestamistiedot',
@@ -159,13 +168,6 @@ const config = createFormConfigBuilder().registerSections([
         required: true,
       },
       {
-        field: '.opetustapa',
-        validate: validateIfJulkaistu(eb =>
-          eb.validateExistence('jarjestamistiedot.opetustapa'),
-        ),
-        required: true,
-      },
-      {
         field: '.maksullisuus.tyyppi',
         validate: validateIfJulkaistu(eb =>
           eb.validateExistence('jarjestamistiedot.maksullisuus.tyyppi'),
@@ -181,7 +183,8 @@ const config = createFormConfigBuilder().registerSections([
         ),
       },
       {
-        fragment: 'stipendi',
+        field: '.onkoStipendia',
+        required: true,
       },
       {
         field: '.koulutuksenAlkamispaivaamara',

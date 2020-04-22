@@ -126,7 +126,7 @@ const ToteutusForm = ({
 
         <FormCollapse
           section="osaamisalat"
-          header={t('toteutuslomake.valitseOsaamisalat')}
+          header={t('toteutuslomake.toteutuksenOsaamisalat')}
           languages={languages}
           Component={OsaamisalatSection}
           koulutus={koulutus}

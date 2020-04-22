@@ -1,1 +1,2 @@
-export const getPage = name => state => state.pagination[name] || 0;
+export const getPagination = name => state =>
+  state.pagination[name] || { page: 0 };

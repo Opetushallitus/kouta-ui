@@ -1,13 +1,5 @@
 import { createAction } from 'redux-actions';
 
-export const SET_PAGE = 'pagination/SET_PAGE';
+export const SET_PAGINATION = 'pagination/SET_PAGINATION';
 
-export const setPageAction = createAction(SET_PAGE);
-
-/*
-export const setPage = page => (dispatch, getState) => {
-  const { pagination = {} } = getState();
-
-  return dispatch(setPageAction(page));
-};
-*/
+export const setPaginationAction = createAction(SET_PAGINATION);

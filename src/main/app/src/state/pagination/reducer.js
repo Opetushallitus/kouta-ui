@@ -1,14 +1,14 @@
 import { createReducer } from 'redux-create-reducer';
 
-import { SET_PAGE } from './actions';
+import { SET_PAGINATION } from './actions';
 
 const initialState = {};
 
 export default createReducer(initialState, {
-  [SET_PAGE]: (state, { payload: { name, page } }) => {
+  [SET_PAGINATION]: (state, { payload: { name, ...pagination } }) => {
     return {
       ...state,
-      [name]: page,
+      [name]: { ...state[name], ...pagination },
     };
   },
 });

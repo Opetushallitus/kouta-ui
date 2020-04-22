@@ -31,7 +31,7 @@ export const selectOption = (value, cy) => {
 export const fillAsyncSelect = (input, match) => {
   getSelect(cy)
     .find('input[type="text"]')
-    .type(input, { force: true });
+    .paste(input);
 
   getSelect(cy).within(() => {
     cy.get(`div:contains(${match})`)
@@ -70,11 +70,11 @@ export const fillDateTimeInput = ({ date, time, cy }) => {
   getByTestId('DateTimeInput', cy).within(() => {
     getByTestId('DateTimeInput__Date', cy)
       .find('input')
-      .type(date);
+      .paste(date);
     getByTestId('DateTimeInput__Time', cy)
       .find('input')
       .clear()
-      .type(time);
+      .paste(time);
   });
 };
 
@@ -218,7 +218,7 @@ export const fillKoulutustyyppiSelect = (path, cy) => {
 export const fillDatePickerInput = value => {
   cy.get('.DatePickerInput__')
     .find('input')
-    .type(value, { force: true });
+    .paste(value);
 };
 
 export const stubKoodiRoute = koodi => {

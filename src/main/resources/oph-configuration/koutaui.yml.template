@@ -4,3 +4,4 @@ server:
 host:
   host-virkailija: {{host_virkailija}}
   host-oppija: {{host_beta}}
+  host-eperusteet: {{host_eperusteet}}

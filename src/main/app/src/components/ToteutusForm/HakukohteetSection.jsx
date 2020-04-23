@@ -14,7 +14,7 @@ export default function({ toteutus, organisaatioOid }) {
         getData: getToteutuksenHakukohteet,
         getLinkUrl: ({ oid }) =>
           `/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`,
-        noResultsMessage: t('hakulomake.toteutuksellaEiHakukohteita'),
+        noResultsMessage: t('toteutuslomake.toteutuksellaEiHakukohteita'),
       }}
     />
   );

@@ -13,7 +13,9 @@ public class UrlConfiguration extends OphProperties {
         addFiles("/kouta-ui-oph.properties");
         this.addOverride("host-virkailija", environment.getRequiredProperty("host.host-virkailija"));
         this.addOverride("host-oppija", environment.getRequiredProperty("host.host-oppija"));
+        this.addOverride("host-eperusteet", environment.getRequiredProperty("host.host-eperusteet"));
 
+        this.frontProperties.setProperty("eperusteet.base-url", this.require("eperusteet.base-url"));
         this.frontProperties.setProperty("kouta-backend.base-url", this.require("kouta-backend.base-url"));
 
         this.frontProperties.setProperty("konfo-ui.koulutus", this.require("konfo-ui.koulutus"));
@@ -67,9 +69,13 @@ public class UrlConfiguration extends OphProperties {
         this.frontProperties.setProperty("koodisto-service.koodi", this.require("koodisto-service.koodi"));
         this.frontProperties.setProperty("koodisto-service.codeelement", this.require("koodisto-service.codeelement"));
 
+        this.frontProperties.setProperty("eperusteet.kooste", this.require("eperusteet.kooste"));
+
         this.frontProperties.setProperty("eperusteet-service.base-url", this.require("eperusteet-service.base-url"));
+        this.frontProperties.setProperty("eperusteet-service.peruste-by-id", this.require("eperusteet-service.peruste-by-id"));
         this.frontProperties.setProperty("eperusteet-service.perusteet-koulutuskoodilla", this.require("eperusteet-service.perusteet-koulutuskoodilla"));
         this.frontProperties.setProperty("eperusteet-service.osaamisalakuvaukset", this.require("eperusteet-service.osaamisalakuvaukset"));
+        this.frontProperties.setProperty("eperusteet-service.peruste-rakenne", this.require("eperusteet-service.peruste-rakenne"));
 
         this.frontProperties.setProperty("organisaatio-service.base-url", this.require("organisaatio-service.base-url"));
         this.frontProperties.setProperty("organisaatio-service.children", this.require("organisaatio-service.children"));

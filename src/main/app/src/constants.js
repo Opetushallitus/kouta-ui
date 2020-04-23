@@ -188,3 +188,6 @@ export const LOGO_ACCEPTED_FORMATS = ['.jpg', '.jpeg', '.png', '.svg'];
 export const LOGO_MAX_DIMENSIONS = { width: 150, height: 120 };
 export const LOGO_MAX_SIZE = 100000;
 export const LOGO_NO_DIMENSION_CHECK_FOR_FORMATS = ['.svg'];
+
+export const EPERUSTE_STATUS_TULEVA = 'tuleva';
+export const EPERUSTE_STATUS_VOIMASSA = 'voimassa';

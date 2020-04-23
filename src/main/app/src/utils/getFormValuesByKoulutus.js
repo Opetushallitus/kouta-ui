@@ -10,6 +10,7 @@ export const getFormValuesByKoulutus = koulutus => {
     esikatselu = true,
     tila,
     teemakuva,
+    ePerusteId,
   } = koulutus;
 
   const {
@@ -39,6 +40,9 @@ export const getFormValuesByKoulutus = koulutus => {
     tarjoajat,
     information: {
       nimi,
+      eperuste: {
+        value: ePerusteId,
+      },
       koulutus: {
         value: koulutusKoodiUri,
       },

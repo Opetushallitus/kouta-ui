@@ -27,7 +27,7 @@ import TeemakuvaSection from '../TeemakuvaSection';
 import PohjaFormCollapse from '../PohjaFormCollapse';
 
 const ToteutusForm = ({
-  koulutusKoodiUri,
+  koulutus,
   organisaatioOid,
   steps = false,
   canSelectBase = true,
@@ -142,7 +142,8 @@ const ToteutusForm = ({
         >
           <OsaamisalatSection
             name="osaamisalat"
-            koulutusKoodiUri={koulutusKoodiUri}
+            koulutus={koulutus}
+            organisaatioOid={organisaatioOid}
           />
         </FormCollapse>
 

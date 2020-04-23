@@ -3,6 +3,7 @@ import { merge } from 'lodash';
 import {
   stubKoodistoRoute,
   stubOppijanumerorekisteriHenkiloRoute,
+  stubEPerusteetByKoulutuskoodiRoute,
 } from './utils';
 import organisaatioHierarkia from './data/organisaatioHierarkia';
 import organisaatio from './data/organisaatio';
@@ -56,31 +57,48 @@ export const stubKoulutusFormRoutes = ({ cy, organisaatioOid }) => {
 
   cy.route({
     method: 'GET',
-    url: '**/koodisto-service/rest/codeelement/koulutus_0',
-    response: [
-      {
-        koodiUri: 'koulutus_0',
-        versio: 1,
-        metadata: [{ kieli: 'fi', nimi: 'Nimi' }],
-      },
-    ],
+    url: 'koodisto-service/rest/codeelement/koulutus_0/1',
+    response: {
+      koodiArvo: '0',
+      koodiUri: 'koulutus_0',
+      versio: 1,
+      metadata: [{ kieli: 'fi', nimi: 'koulutus_0' }],
+    },
   });
 
   cy.route({
     method: 'GET',
-    url:
-      '**/eperusteet-service/api/perusteet?tuleva=true&siirtyma=false&voimassaolo=true&poistunut=false&kieli=fi&koulutuskoodi=koulutus_0',
+    url: '**/eperusteet-service/api/perusteet/1/suoritustavat/reformi/rakenne',
     response: {
-      data: [
+      muodostumisSaanto: {
+        laajuus: {
+          minimi: 180,
+        },
+      },
+    },
+  });
+
+  cy.route({
+    method: 'GET',
+    url: '**/eperusteet-service/api/perusteet/1',
+    response: {
+      id: 1,
+      nimi: {
+        fi: 'koulutus_0',
+      },
+      kuvaus: {
+        fi: 'koulutus_0 kuvaus',
+      },
+      koulutukset: [
         {
-          kuvaus: { fi: 'koulutus_0 kuvaus' },
-          osaamisalat: [],
-          tutkintonimikeKoodiUri: 'nimike_1#1',
-          id: '1',
+          nimi: 'koulutus_0',
+          koulutuskoodiArvo: '1',
         },
       ],
     },
   });
+
+  stubEPerusteetByKoulutuskoodiRoute();
 
   cy.route({
     method: 'GET',

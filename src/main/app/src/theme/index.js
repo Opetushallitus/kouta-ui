@@ -24,6 +24,7 @@ export const createTheme = () => {
   theme = merge(theme, {
     colors: {
       mainBackground: '#f5f5f5',
+      secondaryBackground: '#fafafa',
       border: theme.colors.divider,
       text: {
         dark: theme.colors.text.heading,

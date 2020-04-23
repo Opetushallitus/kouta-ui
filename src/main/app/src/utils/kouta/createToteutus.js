@@ -1,5 +1,5 @@
 import { get, isString, isArray, isEmpty, zipObject } from 'lodash';
-import parseKoodiUri from '../parseKoodiUri';
+import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 import getKoodisto from '../koodistoService/getKoodisto';
 import getKoodiNimiTranslation from '../getKoodiNimiTranslation';
 

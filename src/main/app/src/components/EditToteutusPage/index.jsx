@@ -102,12 +102,14 @@ const EditToteutusPage = props => {
             {toteutus && koulutus ? (
               <ToteutusFormWrapper
                 toteutus={toteutus}
+                koulutus={koulutus}
                 steps={false}
                 canSelectBase={false}
                 onAttachHakukohde={onAttachHakukohde}
                 organisaatioOid={organisaatioOid}
                 koulutusKoodiUri={koulutus ? koulutus.koulutusKoodiUri : null}
                 koulutustyyppi={koulutustyyppi}
+                ePerusteId={koulutus ? koulutus.ePerusteId : null}
                 scrollTarget={scrollTarget}
               />
             ) : (

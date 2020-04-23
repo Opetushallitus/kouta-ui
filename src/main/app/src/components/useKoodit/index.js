@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { get, isArray } from 'lodash';
-import parseKoodiUri from '../../utils/parseKoodiUri';
+import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 import getKoodisto from '../../utils/koodistoService/getKoodisto';
 import useApiAsync from '../useApiAsync';
 

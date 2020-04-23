@@ -187,6 +187,14 @@ export default {
     teemakuva: 'Teemakuva',
     meneLoginSivulle: 'Mene sisäänkirjautumissivulle',
     suljeVaroitus: 'Sulje varoitus',
+    ePerusteenTiedot: 'ePerusteen tiedot',
+    diaarinumero: 'Diaarinumero',
+    voimaantulo: 'Voimaantulo',
+    osaamispistetta: 'osaamispistettä',
+    ePerusteStatus: {
+      voimassa: 'Voimassa',
+      tuleva: 'Tuleva',
+    },
   },
   ilmoitukset: {
     tallentamattomiaMuutoksia: {
@@ -331,6 +339,7 @@ export default {
     valitseJarjestajat:
       'Valitse ne organisaatiot, jotka järjestävät koulutusta',
     valitseKoulutus: 'Valitse koulutus',
+    valitseKaytettavaEperuste: 'Valitse käytettävä ePeruste',
     valitseKoulutuskoodi: 'Valitse koulutuskoodi',
     valitseTutkintonimike: 'Valitse tutkintonimike',
     valitseOpintojenLaajuus: 'Valitse opintojenlaajuus',
@@ -428,6 +437,10 @@ export default {
     eiMuokkausOikeutta:
       'Käyttäjälläsi ei ole oikeuksia muokata tätä toteutusta',
     toteutuksenTeemakuva: 'Toteutuksen teemakuva',
+    eiOsaamisaloja:
+      'Valittuun koulutukseen <0>{{koulutusLinkText}}</0> liitetyllä ePerusteella <1>{{ePerusteLinkText}}</1> ei ole osaamisaloja.',
+    koulutuksellaEiEPerustetta:
+      'Valittuun koulutukseen ei ole liitetty ePerustetta.',
   },
   hakulomake: {
     haunNimi: 'Haun nimi',

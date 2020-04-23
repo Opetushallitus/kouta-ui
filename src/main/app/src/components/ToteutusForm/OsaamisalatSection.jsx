@@ -2,25 +2,31 @@ import React, { useMemo } from 'react';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
 import stripTags from 'striptags';
-import { get, isString, mapValues } from 'lodash';
-import useApiAsync from '../useApiAsync';
-
+import { get, isEmpty, isString, mapValues } from 'lodash';
+import { Trans } from 'react-i18next';
 import {
-  getKoulutusByKoodi,
   getOsaamisalakuvauksetByPerusteId,
-} from '../../apiUtils';
+  getEPerusteById,
+} from '#/src/apiUtils';
+import { getThemeProp } from '#/src/theme';
+import { getLanguageValue, getTestIdProps } from '#/src/utils';
+import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 
-import Checkbox from '../Checkbox';
-import Typography from '../Typography';
-import { getLanguageValue, getTestIdProps } from '../../utils';
-import Spacing from '../Spacing';
-import Divider from '../Divider';
-import AbstractCollapse from '../AbstractCollapse';
-import Icon from '../Icon';
-import { getThemeProp } from '../../theme';
-import useTranslation from '../useTranslation';
-import { FormFieldInput } from '../formFields';
-import useFieldValue from '../useFieldValue';
+import Anchor from '#/src/components/Anchor';
+import AbstractCollapse from '#/src/components/AbstractCollapse';
+import Checkbox from '#/src/components/Checkbox';
+import Divider from '#/src/components/Divider';
+import { FormFieldInput } from '#/src/components/formFields';
+import Icon from '#/src/components/Icon';
+import LocalLink from '#/src/components/LocalLink';
+import Spacing from '#/src/components/Spacing';
+import Spin from '#/src/components/Spin';
+import Typography from '#/src/components/Typography';
+
+import { useURLs } from '#/src/hooks/context';
+import useTranslation from '#/src/components/useTranslation';
+import useFieldValue from '#/src/components/useFieldValue';
+import useApiAsync from '#/src/components/useApiAsync';
 
 const Container = styled.div`
   display: flex;
@@ -63,21 +69,23 @@ const makeOnCheckboxChange = ({ value, onChange, optionValue }) => e => {
   }
 };
 
-const getOsaamisalat = async ({ httpClient, apiUrls, koodiUri }) => {
-  const koulutus = await getKoulutusByKoodi({ httpClient, apiUrls, koodiUri });
-  const { osaamisalat = [] } = koulutus;
-
-  if (!koulutus.perusteId) {
-    return {
-      koulutus,
-      osaamisalat,
-    };
+const getExtendedEPeruste = async ({ httpClient, apiUrls, ePerusteId }) => {
+  if (!ePerusteId) {
+    return null;
   }
+
+  const ePeruste = await getEPerusteById({
+    httpClient,
+    apiUrls,
+    ePerusteId,
+  });
+
+  const { osaamisalat } = ePeruste;
 
   const osaamisalakuvaukset = await getOsaamisalakuvauksetByPerusteId({
     httpClient,
     apiUrls,
-    perusteId: koulutus.perusteId,
+    ePerusteId,
   });
 
   const osaamisalatWithDescriptions = osaamisalat.map(osaamisala => ({
@@ -89,7 +97,7 @@ const getOsaamisalat = async ({ httpClient, apiUrls, koodiUri }) => {
   }));
 
   return {
-    koulutus,
+    ...ePeruste,
     osaamisalat: osaamisalatWithDescriptions,
   };
 };
@@ -194,21 +202,51 @@ const OsaamisalatInfoFields = ({
   });
 };
 
-const OsaamisalatContainer = ({ osaamisalat, koulutus, language, name }) => {
-  const { nimi } = koulutus;
+const OsaamisalatContainer = ({
+  peruste,
+  koulutus,
+  organisaatioOid,
+  language,
+  name,
+}) => {
+  const { nimi, osaamisalat, id } = peruste;
+  const urls = useURLs();
 
   const osaamisalaOptions = useMemo(
     () =>
       osaamisalat.map(({ nimi, uri }) => ({
-        label: nimi.fi,
+        label: getLanguageValue(nimi, language),
         value: uri,
       })),
-    [osaamisalat],
+    [osaamisalat, language],
   );
+  const { koodiArvo } = parseKoodiUri(get(koulutus, 'koulutusKoodiUri'));
 
   const osaamisalatValue = useFieldValue(`${name}.osaamisalat`);
+  const koulutusLinkText = `${getLanguageValue(
+    get(koulutus, 'nimi'),
+    language,
+  )} (${koodiArvo})`;
 
-  return (
+  const ePerusteLinkText = `${getLanguageValue(nimi, language)} (${id})`;
+  return isEmpty(osaamisalat) ? (
+    <Typography>
+      <Trans
+        i18nKey="toteutuslomake.eiOsaamisaloja"
+        values={{ koulutusLinkText, ePerusteLinkText }}
+        components={[
+          <LocalLink
+            to={`/organisaatio/${organisaatioOid}/koulutus/${koulutus.oid}/muokkaus`}
+          >
+            {koulutusLinkText}
+          </LocalLink>,
+          <Anchor href={urls.url('eperusteet.kooste', language, id)}>
+            {ePerusteLinkText}
+          </Anchor>,
+        ]}
+      />
+    </Typography>
+  ) : (
     <>
       <SelectionContainer>
         <Typography variant="h6" marginBottom={1}>
@@ -232,23 +270,32 @@ const OsaamisalatContainer = ({ osaamisalat, koulutus, language, name }) => {
   );
 };
 
-const OsaamisalatSection = ({ language, koulutusKoodiUri, name }) => {
-  const { data } = useApiAsync({
-    promiseFn: getOsaamisalat,
-    koodiUri: koulutusKoodiUri,
-    watch: koulutusKoodiUri,
+const OsaamisalatSection = ({ language, koulutus, organisaatioOid, name }) => {
+  const { t } = useTranslation();
+  const { ePerusteId } = koulutus;
+  const { data: ePeruste, isLoading } = useApiAsync({
+    promiseFn: getExtendedEPeruste,
+    ePerusteId,
+    watch: ePerusteId,
   });
 
   return (
     <Container>
-      {data ? (
+      {isLoading ? (
+        <Spin />
+      ) : ePeruste ? (
         <OsaamisalatContainer
-          osaamisalat={data.osaamisalat}
-          koulutus={data.koulutus}
+          peruste={ePeruste}
+          koulutus={koulutus}
           language={language}
           name={name}
+          organisaatioOid={organisaatioOid}
         />
-      ) : null}
+      ) : (
+        <Typography>
+          {t('toteutuslomake.koulutuksellaEiEPerustetta')}
+        </Typography>
+      )}
     </Container>
   );
 };

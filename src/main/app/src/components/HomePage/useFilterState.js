@@ -1,10 +1,9 @@
 import { useCallback } from 'react';
-import { debounce } from 'lodash';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getPagination, setPaginationAction } from '#/src/state/pagination';
 
-export const useFilterState = ({ paginationName, initialNimi = '' } = {}) => {
+export const useFilterState = ({ paginationName } = {}) => {
   const { nimi, page, showArchived, orderBy, tila } = useSelector(
     getPagination(paginationName),
   );
@@ -17,7 +16,7 @@ export const useFilterState = ({ paginationName, initialNimi = '' } = {}) => {
     },
     [dispatch, paginationName],
   );
-  const setNimi = debounce(nimi => setPagination({ nimi }), 500);
+  const setNimi = nimi => setPagination({ nimi });
   const setPage = page => setPagination({ page });
   const setOrderBy = orderBy => setPagination({ orderBy });
   const setTila = tila => setPagination({ tila });
@@ -31,9 +30,9 @@ export const useFilterState = ({ paginationName, initialNimi = '' } = {}) => {
   );
   const onNimiChange = useCallback(
     e => {
-      setNimi(e.target.value);
+      setPagination({ nimi: e.target.value });
     },
-    [setNimi],
+    [setPagination],
   );
   return {
     setNimi,

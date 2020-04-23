@@ -23,13 +23,15 @@ import ErrorAlert from '../ErrorAlert';
 import { useTranslation } from 'react-i18next';
 import useInView from '../useInView';
 import NavigationAnchor from './NavigationAnchor';
+import debounce from 'debounce-promise';
 
+const debounceValintaperusteet = debounce(getValintaperusteet, 300);
 const noopPromiseFn = () => Promise.resolve();
 
 const getValintaperusteetFn = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
 
-  const { result, totalCount } = await getValintaperusteet({
+  const { result, totalCount } = await debounceValintaperusteet({
     httpClient,
     apiUrls,
     ...params,

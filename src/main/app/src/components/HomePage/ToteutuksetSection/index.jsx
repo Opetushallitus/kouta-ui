@@ -27,13 +27,15 @@ import NavigationAnchor from '../NavigationAnchor';
 import Button from '../../Button';
 import useModal from '../../useModal';
 import KoulutusModal from './KoulutusModal';
+import debounce from 'debounce-promise';
 
+const debounceToteutukset = debounce(getToteutukset, 300);
 const noopPromiseFn = () => Promise.resolve();
 
 const getToteutuksetFn = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
 
-  const { result, totalCount } = await getToteutukset({
+  const { result, totalCount } = await debounceToteutukset({
     httpClient,
     apiUrls,
     ...params,

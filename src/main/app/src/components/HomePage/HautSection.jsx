@@ -24,11 +24,14 @@ import getHaut from '../../utils/koutaSearch/getHaut';
 import useInView from '../useInView';
 import NavigationAnchor from './NavigationAnchor';
 import { getFirstLanguageValue, getTestIdProps } from '../../utils';
+import debounce from 'debounce-promise';
+
+const debounceHaut = debounce(getHaut, 300);
 
 const getHautFn = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
 
-  const { result, totalCount } = await getHaut({
+  const { result, totalCount } = await debounceHaut({
     httpClient,
     apiUrls,
     ...params,

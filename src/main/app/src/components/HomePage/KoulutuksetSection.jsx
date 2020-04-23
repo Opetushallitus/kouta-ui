@@ -24,16 +24,19 @@ import ErrorAlert from '../ErrorAlert';
 import { getFirstLanguageValue, getTestIdProps } from '../../utils';
 import { useTranslation } from 'react-i18next';
 import NavigationAnchor from './NavigationAnchor';
+import debounce from 'debounce-promise';
 
 import Anchor from '../Anchor';
 import useInView from '../useInView';
 
 const noopPromiseFn = () => Promise.resolve();
 
+const debounceKoulutukset = debounce(getKoulutukset, 300);
+
 const getKoulutuksetFn = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
 
-  const { result, totalCount } = await getKoulutukset({
+  const { result, totalCount } = await debounceKoulutukset({
     httpClient,
     apiUrls,
     ...params,

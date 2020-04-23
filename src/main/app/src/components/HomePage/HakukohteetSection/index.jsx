@@ -19,6 +19,7 @@ import ErrorAlert from '../../ErrorAlert';
 import Anchor from '../../Anchor';
 import getHakukohteet from '../../../utils/koutaSearch/getHakukohteet';
 import { getFirstLanguageValue, getTestIdProps } from '../../../utils';
+import debounce from 'debounce-promise';
 
 import ListTable, {
   makeModifiedColumn,
@@ -26,12 +27,14 @@ import ListTable, {
   makeTilaColumn,
 } from '../ListTable';
 
+const debounceHakukohteet = debounce(getHakukohteet, 300);
+
 const noopPromiseFn = () => Promise.resolve();
 
 const getHakukohteetFn = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
 
-  const { result, totalCount } = await getHakukohteet({
+  const { result, totalCount } = await debounceHakukohteet({
     httpClient,
     apiUrls,
     ...params,

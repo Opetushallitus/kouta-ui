@@ -21,15 +21,15 @@ import Anchor from '../Anchor';
 import Button from '../Button';
 import ErrorAlert from '../ErrorAlert';
 import { useTranslation } from 'react-i18next';
-import useInView from '../useInView';
 import NavigationAnchor from './NavigationAnchor';
+import debounce from 'debounce-promise';
 
-const noopPromiseFn = () => Promise.resolve();
+const debounceValintaperusteet = debounce(getValintaperusteet, 300);
 
 const getValintaperusteetFn = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
 
-  const { result, totalCount } = await getValintaperusteet({
+  const { result, totalCount } = await debounceValintaperusteet({
     httpClient,
     apiUrls,
     ...params,
@@ -73,8 +73,6 @@ const makeTableColumns = (t, organisaatioOid) => [
 const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
-  const [ref, inView] = useInView({ threshold: 0.25, triggerOnce: true });
-
   const {
     debouncedNimi,
     showArchived,
@@ -84,7 +82,7 @@ const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
     setOrderBy,
     tila,
     filtersProps,
-  } = useFilterState();
+  } = useFilterState({ paginationName: 'valintaperusteet' });
 
   const watch = JSON.stringify([
     page,
@@ -100,7 +98,7 @@ const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
     error,
     reload,
   } = useApiAsync({
-    promiseFn: inView ? getValintaperusteetFn : noopPromiseFn,
+    promiseFn: getValintaperusteetFn,
     nimi: debouncedNimi,
     page,
     showArchived,
@@ -135,8 +133,6 @@ const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
         }
         defaultOpen
       >
-        <div ref={ref} />
-
         <Spacing marginBottom={3}>
           <Filters
             {...filtersProps}

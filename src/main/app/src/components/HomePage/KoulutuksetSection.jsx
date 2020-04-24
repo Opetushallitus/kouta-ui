@@ -24,16 +24,16 @@ import ErrorAlert from '../ErrorAlert';
 import { getFirstLanguageValue, getTestIdProps } from '../../utils';
 import { useTranslation } from 'react-i18next';
 import NavigationAnchor from './NavigationAnchor';
+import debounce from 'debounce-promise';
 
 import Anchor from '../Anchor';
-import useInView from '../useInView';
 
-const noopPromiseFn = () => Promise.resolve();
+const debounceKoulutukset = debounce(getKoulutukset, 300);
 
 const getKoulutuksetFn = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
 
-  const { result, totalCount } = await getKoulutukset({
+  const { result, totalCount } = await debounceKoulutukset({
     httpClient,
     apiUrls,
     ...params,
@@ -81,8 +81,6 @@ const makeTableColumns = (t, organisaatioOid) => [
 const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
-  const [ref, inView] = useInView({ threshold: 0.25, triggerOnce: true });
-
   const {
     debouncedNimi,
     showArchived,
@@ -92,7 +90,7 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
     setOrderBy,
     tila,
     filtersProps,
-  } = useFilterState();
+  } = useFilterState({ paginationName: 'koulutukset' });
 
   const watch = JSON.stringify([
     page,
@@ -108,7 +106,7 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
     error,
     reload,
   } = useApiAsync({
-    promiseFn: inView ? getKoulutuksetFn : noopPromiseFn,
+    promiseFn: getKoulutuksetFn,
     nimi: debouncedNimi,
     page,
     showArchived,
@@ -140,8 +138,6 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
         }
         defaultOpen
       >
-        <div ref={ref} />
-
         <Spacing marginBottom={3}>
           <Filters
             {...filtersProps}

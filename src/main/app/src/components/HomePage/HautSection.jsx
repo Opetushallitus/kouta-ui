@@ -21,14 +21,16 @@ import ErrorAlert from '../ErrorAlert';
 import Anchor from '../Anchor';
 import { useTranslation } from 'react-i18next';
 import getHaut from '../../utils/koutaSearch/getHaut';
-import useInView from '../useInView';
 import NavigationAnchor from './NavigationAnchor';
 import { getFirstLanguageValue, getTestIdProps } from '../../utils';
+import debounce from 'debounce-promise';
+
+const debounceHaut = debounce(getHaut, 300);
 
 const getHautFn = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
 
-  const { result, totalCount } = await getHaut({
+  const { result, totalCount } = await debounceHaut({
     httpClient,
     apiUrls,
     ...params,
@@ -78,11 +80,6 @@ const makeTableColumns = (t, organisaatioOid) => [
 const KoulutuksetSection = ({ organisaatioOid, canCreate }) => {
   const { t } = useTranslation();
 
-  const [ref, inView] = useInView({
-    threshold: 0.25,
-    triggerOnce: true,
-  });
-
   const {
     debouncedNimi,
     showArchived,
@@ -92,7 +89,7 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate }) => {
     setOrderBy,
     tila,
     filtersProps,
-  } = useFilterState();
+  } = useFilterState({ paginationName: 'haut' });
 
   const watch = JSON.stringify([
     page,
@@ -108,7 +105,7 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate }) => {
     error,
     reload,
   } = useApiAsync({
-    promiseFn: inView ? getHautFn : noopPromiseFn,
+    promiseFn: getHautFn,
     nimi: debouncedNimi,
     page,
     showArchived,
@@ -138,8 +135,6 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate }) => {
         }
         defaultOpen
       >
-        <div ref={ref} />
-
         <Spacing marginBottom={3}>
           <Filters {...filtersProps} nimiPlaceholder={t('etusivu.haeHakuja')} />
         </Spacing>

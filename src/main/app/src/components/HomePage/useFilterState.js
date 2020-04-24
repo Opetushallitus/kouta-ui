@@ -1,39 +1,43 @@
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
 
-import useDebounceState from '../useDebounceState';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPagination, setPaginationAction } from '#/src/state/pagination';
 
-export const useFilterState = ({
-  initialNimi = '',
-  initialTila = null,
-  initialOrderBy = null,
-  initialShowArchived = false,
-  initialPage = 0,
-} = {}) => {
-  const [nimi, setNimi, debouncedNimi] = useDebounceState(initialNimi, 500);
-
-  const [page, setPage] = useState(initialPage);
-  const [showArchived, setShowArchived] = useState(initialShowArchived);
-  const [orderBy, setOrderBy] = useState(initialOrderBy);
-  const [tila, setTila] = useState(initialTila);
-
-  const onNimiChange = useCallback(
-    e => {
-      setNimi(e.target.value);
-    },
-    [setNimi],
+export const useFilterState = ({ paginationName } = {}) => {
+  const { nimi, page, showArchived, orderBy, tila } = useSelector(
+    getPagination(paginationName),
   );
+  const dispatch = useDispatch();
+  const setPagination = useCallback(
+    pagination => {
+      return dispatch(
+        setPaginationAction({ name: paginationName, ...pagination }),
+      );
+    },
+    [dispatch, paginationName],
+  );
+  const setNimi = nimi => setPagination({ nimi });
+  const setPage = page => setPagination({ page });
+  const setOrderBy = orderBy => setPagination({ orderBy });
+  const setTila = tila => setPagination({ tila });
+  const setShowArchived = showArchived => setPagination({ showArchived });
 
   const onShowArchivedChange = useCallback(
     e => {
-      setShowArchived(e.target.checked);
+      setPagination({ showArchived: e.target.checked });
     },
-    [setShowArchived],
+    [setPagination],
   );
-
+  const onNimiChange = useCallback(
+    e => {
+      setPagination({ nimi: e.target.value });
+    },
+    [setPagination],
+  );
   return {
     setNimi,
     nimi,
-    debouncedNimi,
+    debouncedNimi: nimi,
     page,
     setPage,
     orderBy,

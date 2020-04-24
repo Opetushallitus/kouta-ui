@@ -22,18 +22,18 @@ import { getFirstLanguageValue, getTestIdProps } from '../../../utils';
 import Anchor from '../../Anchor';
 import ErrorAlert from '../../ErrorAlert';
 import { useTranslation } from 'react-i18next';
-import useInView from '../../useInView';
 import NavigationAnchor from '../NavigationAnchor';
 import Button from '../../Button';
 import useModal from '../../useModal';
 import KoulutusModal from './KoulutusModal';
+import debounce from 'debounce-promise';
 
-const noopPromiseFn = () => Promise.resolve();
+const debounceToteutukset = debounce(getToteutukset, 300);
 
 const getToteutuksetFn = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
 
-  const { result, totalCount } = await getToteutukset({
+  const { result, totalCount } = await debounceToteutukset({
     httpClient,
     apiUrls,
     ...params,
@@ -87,8 +87,6 @@ const Actions = ({ organisaatioOid }) => {
 const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
-  const [ref, inView] = useInView({ threshold: 0.25, triggerOnce: true });
-
   const {
     debouncedNimi,
     showArchived,
@@ -98,7 +96,7 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
     setOrderBy,
     tila,
     filtersProps,
-  } = useFilterState();
+  } = useFilterState({ paginationName: 'toteutukset' });
 
   const watch = JSON.stringify([
     page,
@@ -114,7 +112,7 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
     error,
     reload,
   } = useApiAsync({
-    promiseFn: inView ? getToteutuksetFn : noopPromiseFn,
+    promiseFn: getToteutuksetFn,
     nimi: debouncedNimi,
     page,
     showArchived,
@@ -146,8 +144,6 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
         }
         defaultOpen
       >
-        <div ref={ref} />
-
         <Box mb={3}>
           <Filters
             {...filtersProps}

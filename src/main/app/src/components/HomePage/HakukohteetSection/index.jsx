@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import Box from '../../Box';
 import ListCollapse from '../ListCollapse';
 import { useTranslation } from 'react-i18next';
-import useInView from '../../useInView';
 import NavigationAnchor from '../NavigationAnchor';
 import Button from '../../Button';
 import useModal from '../../useModal';
@@ -19,6 +18,7 @@ import ErrorAlert from '../../ErrorAlert';
 import Anchor from '../../Anchor';
 import getHakukohteet from '../../../utils/koutaSearch/getHakukohteet';
 import { getFirstLanguageValue, getTestIdProps } from '../../../utils';
+import debounce from 'debounce-promise';
 
 import ListTable, {
   makeModifiedColumn,
@@ -26,12 +26,12 @@ import ListTable, {
   makeTilaColumn,
 } from '../ListTable';
 
-const noopPromiseFn = () => Promise.resolve();
+const debounceHakukohteet = debounce(getHakukohteet, 300);
 
 const getHakukohteetFn = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
 
-  const { result, totalCount } = await getHakukohteet({
+  const { result, totalCount } = await debounceHakukohteet({
     httpClient,
     apiUrls,
     ...params,
@@ -78,11 +78,6 @@ const Actions = ({ organisaatioOid }) => {
 const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
-  const [ref, inView] = useInView({
-    threshold: 0.25,
-    triggerOnce: true,
-  });
-
   const {
     debouncedNimi,
     showArchived,
@@ -92,7 +87,7 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
     setOrderBy,
     tila,
     filtersProps,
-  } = useFilterState();
+  } = useFilterState({ paginationName: 'hakukohteet' });
 
   const watch = JSON.stringify([
     page,
@@ -108,7 +103,7 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
     error,
     reload,
   } = useApiAsync({
-    promiseFn: inView ? getHakukohteetFn : noopPromiseFn,
+    promiseFn: getHakukohteetFn,
     nimi: debouncedNimi,
     page,
     showArchived,
@@ -138,8 +133,6 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
         }
         defaultOpen
       >
-        <div ref={ref} />
-
         <Box mb={3}>
           <Filters
             {...filtersProps}

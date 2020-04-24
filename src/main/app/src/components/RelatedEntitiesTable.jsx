@@ -2,7 +2,7 @@ import React, { useMemo, useCallback } from 'react';
 import { map, sortBy, compose, isNil } from 'lodash/fp';
 import Typography from './Typography';
 import useApiAsync from './useApiAsync';
-import useTranslation from './useTranslation';
+import { useTranslation } from 'react-i18next';
 import ListTable, {
   makeNimiColumn,
   makeModifiedColumn,

@@ -7,7 +7,7 @@ import ModalHeader from '../../ModalHeader';
 import ModalBody from '../../ModalBody';
 import ModalFooter from '../../ModalFooter';
 import Select from '../../Select';
-import useTranslation from '../../useTranslation';
+import { useTranslation } from 'react-i18next';
 import useApiAsync from '../../useApiAsync';
 import getToteutukset from '../../../utils/kouta/getToteutukset';
 import getHaut from '../../../utils/kouta/getHaut';

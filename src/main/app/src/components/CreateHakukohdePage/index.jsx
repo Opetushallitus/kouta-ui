@@ -13,7 +13,7 @@ import Typography from '../Typography';
 import { KOULUTUSTYYPPI } from '../../constants';
 import useApiAsync from '../useApiAsync';
 import Spin from '../Spin';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import getToteutusByOid from '../../utils/kouta/getToteutusByOid';
 import Title from '../Title';
 import getHakuByOid from '../../utils/kouta/getHakuByOid';
@@ -76,7 +76,10 @@ const CreateHakukohdePage = props => {
   const initialValues = useMemo(() => {
     return (
       data &&
-      getInitialValues(data.toteutus.toteutusNimi, data.toteutus.toteutusKielet)
+      getInitialValues(
+        get(data, 'toteutus.nimi'),
+        get(data, 'toteutus.kielivalinta'),
+      )
     );
   }, [data]);
 
@@ -86,69 +89,65 @@ const CreateHakukohdePage = props => {
       enableReinitialize
       initialValues={initialValues}
     >
-      {() => (
-        <>
-          <Title>{t('sivuTitlet.uusiHakukohde')}</Title>
-          <FormPage
-            header={<CreateHakukohdeHeader />}
-            steps={<CreateHakukohdeSteps />}
-            footer={
-              <CreateHakukohdeFooter
+      <Title>{t('sivuTitlet.uusiHakukohde')}</Title>
+      <FormPage
+        header={<CreateHakukohdeHeader />}
+        steps={<CreateHakukohdeSteps />}
+        footer={
+          <CreateHakukohdeFooter
+            organisaatioOid={organisaatioOid}
+            hakuOid={hakuOid}
+            toteutusOid={toteutusOid}
+          />
+        }
+      >
+        {data ? (
+          <>
+            <Flex marginBottom={2} justifyBetween>
+              <FlexItem grow={0} paddingRight={2}>
+                <Typography variant="h6" marginBottom={1}>
+                  {t('yleiset.organisaatio')}
+                </Typography>
+                <Typography>
+                  {getFirstLanguageValue(get(data, 'organisaatio.nimi'))}
+                </Typography>
+              </FlexItem>
+              <FlexItem grow={0}>
+                <Typography variant="h6" marginBottom={1}>
+                  {t('yleiset.haku')}
+                </Typography>
+                <Typography>
+                  {getFirstLanguageValue(get(data, 'haku.nimi'))}
+                </Typography>
+              </FlexItem>
+              <FlexItem grow={0}>
+                <Typography variant="h6" marginBottom={1}>
+                  {t('yleiset.toteutus')}
+                </Typography>
+                <Typography>
+                  {getFirstLanguageValue(get(data, 'toteutus.nimi'))}
+                </Typography>
+              </FlexItem>
+            </Flex>
+            <FormConfigContext.Provider value={config}>
+              <HakukohdeForm
+                steps
+                organisaatio={data.organisaatio}
                 organisaatioOid={organisaatioOid}
-                hakuOid={hakuOid}
-                toteutusOid={toteutusOid}
+                haku={data.haku}
+                toteutus={data.toteutus}
+                koulutustyyppi={
+                  get(data, 'koulutustyyppi') ||
+                  KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
+                }
+                showArkistoituTilaOption={false}
               />
-            }
-          >
-            {data ? (
-              <>
-                <Flex marginBottom={2} justifyBetween>
-                  <FlexItem grow={0} paddingRight={2}>
-                    <Typography variant="h6" marginBottom={1}>
-                      {t('yleiset.organisaatio')}
-                    </Typography>
-                    <Typography>
-                      {getFirstLanguageValue(get(data, 'organisaatio.nimi'))}
-                    </Typography>
-                  </FlexItem>
-                  <FlexItem grow={0}>
-                    <Typography variant="h6" marginBottom={1}>
-                      {t('yleiset.haku')}
-                    </Typography>
-                    <Typography>
-                      {getFirstLanguageValue(get(data, 'haku.nimi'))}
-                    </Typography>
-                  </FlexItem>
-                  <FlexItem grow={0}>
-                    <Typography variant="h6" marginBottom={1}>
-                      {t('yleiset.toteutus')}
-                    </Typography>
-                    <Typography>
-                      {getFirstLanguageValue(get(data, 'toteutus.nimi'))}
-                    </Typography>
-                  </FlexItem>
-                </Flex>
-                <FormConfigContext.Provider value={config}>
-                  <HakukohdeForm
-                    steps
-                    organisaatio={data.organisaatio}
-                    organisaatioOid={organisaatioOid}
-                    haku={data.haku}
-                    toteutus={data.toteutus}
-                    koulutustyyppi={
-                      get(data, 'koulutustyyppi') ||
-                      KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
-                    }
-                    showArkistoituTilaOption={false}
-                  />
-                </FormConfigContext.Provider>
-              </>
-            ) : (
-              <Spin center />
-            )}
-          </FormPage>
-        </>
-      )}
+            </FormConfigContext.Provider>
+          </>
+        ) : (
+          <Spin center />
+        )}
+      </FormPage>
     </ReduxForm>
   );
 };

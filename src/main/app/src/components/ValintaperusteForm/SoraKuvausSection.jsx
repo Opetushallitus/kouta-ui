@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 import { get } from 'lodash';
 
 import { FormFieldSoraKuvausSelect } from '../formFields';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import Button from '../Button';
 import Divider from '../Divider';
 import Box from '../Box';
@@ -46,7 +46,7 @@ const SoraKuvausSection = ({ name, organisaatioOid, languages }) => {
           href={`/kouta/organisaatio/${organisaatioOid}/sora-kuvaus/kielivalinnat/${kieliValinnat}`}
           target="_blank"
         >
-          {t('yleiset.luoUusiSoraKuvaus')}
+          {t('yleiset.luoUusi', { entity: t('yleiset.soraKuvaus') })}
         </Button>
       </Box>
     </>

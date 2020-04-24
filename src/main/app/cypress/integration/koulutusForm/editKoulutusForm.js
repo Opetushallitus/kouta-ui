@@ -14,7 +14,7 @@ const tallenna = () => {
   cy.getByTestId('tallennaKoulutusButton').click();
 };
 
-describe('editKoulutusForm', () => {
+const prepareTest = tyyppi => {
   const organisaatioOid = '1.1.1.1.1.1';
   const koulutusOid = '1.2.3.4.5.6';
 
@@ -25,29 +25,34 @@ describe('editKoulutusForm', () => {
     tarjoajat: ['4.1.1.1.1.1', '2.1.1.1.1.1'],
   };
 
-  beforeEach(() => {
-    cy.server();
+  cy.server();
 
-    stubKoulutusFormRoutes({ cy, organisaatioOid });
+  stubKoulutusFormRoutes({ cy, organisaatioOid });
 
-    cy.route({
-      method: 'GET',
-      url: `**/koulutus/${koulutusOid}/toteutukset`,
-      response: [],
-    });
-
-    cy.route({
-      method: 'GET',
-      url: `**/toteutus/list**`,
-      response: [],
-    });
-
-    cy.visit(
-      `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`,
-    );
+  cy.route({
+    method: 'GET',
+    url: `**/koulutus/${koulutusOid}/toteutukset`,
+    response: [],
   });
 
+  cy.route({
+    method: 'GET',
+    url: `**/toteutus/list**`,
+    response: [],
+  });
+
+  cy.route({
+    method: 'GET',
+    url: `**/koulutus/${koulutusOid}`,
+    response: merge(koulutus({ tyyppi }), testKoulutusFields),
+  });
+
+  cy.visit(`/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`);
+};
+
+describe('editKoulutusForm', () => {
   it('should be able to edit ammatillinen koulutus', () => {
+    prepareTest('amm');
     cy.route({
       method: 'POST',
       url: '**/koulutus',
@@ -55,14 +60,6 @@ describe('editKoulutusForm', () => {
         oid: '1.2.3.4.5.6',
       },
     }).as('updateAmmKoulutusResponse');
-
-    const testKoulutus = merge(koulutus({ tyyppi: 'amm' }), testKoulutusFields);
-
-    cy.route({
-      method: 'GET',
-      url: `**/koulutus/${koulutusOid}`,
-      response: testKoulutus,
-    });
 
     fillKieliversiotSection();
     tallenna();
@@ -73,6 +70,7 @@ describe('editKoulutusForm', () => {
   });
 
   it('should be able to edit korkeakoulu koulutus', () => {
+    prepareTest('yo');
     cy.route({
       method: 'POST',
       url: '**/koulutus',
@@ -80,12 +78,6 @@ describe('editKoulutusForm', () => {
         muokattu: false,
       },
     }).as('updateYoKoulutusResponse');
-
-    cy.route({
-      method: 'GET',
-      url: `**/koulutus/${koulutusOid}`,
-      response: merge(koulutus({ tyyppi: 'yo' }), testKoulutusFields),
-    });
 
     fillKieliversiotSection();
     tallenna();
@@ -96,6 +88,7 @@ describe('editKoulutusForm', () => {
   });
 
   it('should be able to edit lukiokoulutus', () => {
+    prepareTest('lk');
     cy.route({
       method: 'POST',
       url: '**/koulutus',
@@ -103,12 +96,6 @@ describe('editKoulutusForm', () => {
         muokattu: false,
       },
     }).as('updateLkKoulutusResponse');
-
-    cy.route({
-      method: 'GET',
-      url: `**/koulutus/${koulutusOid}`,
-      response: merge(koulutus({ tyyppi: 'lk' }), testKoulutusFields),
-    });
 
     fillKieliversiotSection();
     tallenna();

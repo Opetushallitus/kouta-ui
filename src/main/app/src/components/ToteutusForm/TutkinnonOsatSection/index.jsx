@@ -12,7 +12,7 @@ import Box from '../../Box';
 import FieldArrayList from '../../FieldArrayList';
 import { getTestIdProps } from '../../../utils';
 import Button from '../../Button';
-import useTranslation from '../../useTranslation';
+import { useTranslation } from 'react-i18next';
 import useLoadOptions from '../../useLoadOptions';
 
 const TutkintoField = ({ options, ...props }) => {

@@ -8,7 +8,7 @@ import KoulutusFormWrapper from './KoulutusFormWrapper';
 import CreateKoulutusFooter from './CreateKoulutusFooter';
 import useSelectBase from '../useSelectBase';
 import Title from '../Title';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import ReduxForm from '#/src/components/ReduxForm';
 import { POHJAVALINTA } from '#/src/constants';
 import getFormValuesByKoulutus from '#/src/utils/getFormValuesByKoulutus';
@@ -61,27 +61,23 @@ const CreateKoulutusPage = props => {
       enableReinitialize
       initialValues={initialValues}
     >
-      {() => (
-        <>
-          <Title>{t('sivuTitlet.uusiKoulutus')}</Title>
-          <FormPage
-            header={<CreateKoulutusHeader />}
-            steps={<CreateKoulutusSteps />}
-            footer={<CreateKoulutusFooter organisaatioOid={oid} />}
-          >
-            <TopInfoContainer>
-              <OrganisaatioInfo organisaatioOid={oid} />
-            </TopInfoContainer>
-            <KoulutusFormWrapper
-              steps
-              isNewKoulutus={true}
-              organisaatioOid={oid}
-              kopioKoulutusOid={kopioKoulutusOid}
-              onSelectBase={selectBase}
-            />
-          </FormPage>
-        </>
-      )}
+      <Title>{t('sivuTitlet.uusiKoulutus')}</Title>
+      <FormPage
+        header={<CreateKoulutusHeader />}
+        steps={<CreateKoulutusSteps />}
+        footer={<CreateKoulutusFooter organisaatioOid={oid} />}
+      >
+        <TopInfoContainer>
+          <OrganisaatioInfo organisaatioOid={oid} />
+        </TopInfoContainer>
+        <KoulutusFormWrapper
+          steps
+          isNewKoulutus={true}
+          organisaatioOid={oid}
+          kopioKoulutusOid={kopioKoulutusOid}
+          onSelectBase={selectBase}
+        />
+      </FormPage>
     </ReduxForm>
   );
 };

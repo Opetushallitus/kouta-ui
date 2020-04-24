@@ -8,7 +8,7 @@ import CreateHakuSteps from './CreateHakuSteps';
 import CreateHakuFooter from './CreateHakuFooter';
 import useSelectBase from '../useSelectBase';
 import Title from '../Title';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import ReduxForm from '#/src/components/ReduxForm';
 import FormConfigContext from '#/src/components/FormConfigContext';
 import getHakuFormConfig from '#/src/utils/getHakuFormConfig';
@@ -64,29 +64,25 @@ const CreateHakuPage = props => {
       enableReinitialize
       initialValues={initialValues}
     >
-      {() => (
-        <>
-          <Title>{t('sivuTitlet.uusiHaku')}</Title>
-          <FormPage
-            header={<CreateHakuHeader />}
-            steps={<CreateHakuSteps />}
-            footer={<CreateHakuFooter organisaatioOid={organisaatioOid} />}
-          >
-            <TopInfoContainer>
-              <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-            </TopInfoContainer>
-            <FormConfigContext.Provider value={config}>
-              <HakuForm
-                steps
-                organisaatioOid={organisaatioOid}
-                kopioHakuOid={kopioHakuOid}
-                onSelectBase={selectBase}
-                showArkistoituTilaOption={false}
-              />
-            </FormConfigContext.Provider>
-          </FormPage>
-        </>
-      )}
+      <Title>{t('sivuTitlet.uusiHaku')}</Title>
+      <FormPage
+        header={<CreateHakuHeader />}
+        steps={<CreateHakuSteps />}
+        footer={<CreateHakuFooter organisaatioOid={organisaatioOid} />}
+      >
+        <TopInfoContainer>
+          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+        </TopInfoContainer>
+        <FormConfigContext.Provider value={config}>
+          <HakuForm
+            steps
+            organisaatioOid={organisaatioOid}
+            kopioHakuOid={kopioHakuOid}
+            onSelectBase={selectBase}
+            showArkistoituTilaOption={false}
+          />
+        </FormConfigContext.Provider>
+      </FormPage>
     </ReduxForm>
   );
 };

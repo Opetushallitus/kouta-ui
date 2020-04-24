@@ -7,7 +7,7 @@ import Button from '../Button';
 import Icon from '../Icon';
 import { spacing } from '../../theme';
 import Typography from '../Typography';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 
 const ButtonIcon = styled(Icon)`
   font-size: 1.2rem;

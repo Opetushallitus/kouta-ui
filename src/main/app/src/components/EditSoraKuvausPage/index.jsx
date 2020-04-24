@@ -1,17 +1,20 @@
-import React, { useEffect } from 'react';
-import { get } from 'lodash';
+import React, { useEffect, useMemo } from 'react';
+import { get, isFunction } from 'lodash';
+import { useTranslation } from 'react-i18next';
 
 import FormPage, { OrganisaatioInfo, TopInfoContainer } from '../FormPage';
 import EditSoraKuvausHeader from './EditSoraKuvausHeader';
 import EditSoraKuvausSteps from './EditSoraKuvausSteps';
-import EditSoraKuvausForm from './EditSoraKuvausForm';
 import EditSoraKuvausFooter from './EditSoraKuvausFooter';
 import useSoraKuvaus from '../useSoraKuvaus';
 import Spin from '../Spin';
 import { KOULUTUSTYYPPI } from '../../constants';
-import { isFunction } from '../../utils';
 import Title from '../Title';
-import useTranslation from '../useTranslation';
+import ReduxForm from '#/src/components/ReduxForm';
+import getFormValuesBySoraKuvaus from '#/src/utils/getFormValuesBySoraKuvaus';
+import SoraKuvausForm from '#/src/components/SoraKuvausForm';
+import getSoraKuvausFormConfig from '#/src/utils/getSoraKuvausFormConfig';
+import FormConfigContext from '../FormConfigContext';
 
 const EditSoraKuvausPage = props => {
   const {
@@ -24,6 +27,8 @@ const EditSoraKuvausPage = props => {
   const { soraKuvausUpdatedAt = null } = state;
   const { soraKuvaus, reload } = useSoraKuvaus(id);
 
+  const config = useMemo(getSoraKuvausFormConfig, []);
+
   useEffect(() => {
     soraKuvausUpdatedAt && isFunction(reload) && reload();
   }, [soraKuvausUpdatedAt]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -33,30 +38,44 @@ const EditSoraKuvausPage = props => {
 
   const { t } = useTranslation();
 
+  const initialValues = useMemo(() => {
+    return soraKuvaus ? getFormValuesBySoraKuvaus(soraKuvaus) : {};
+  }, [soraKuvaus]);
+
   return (
-    <>
-      <Title>{t('sivuTitlet.soraKuvauksenMuokkaus')}</Title>
-      <FormPage
-        header={<EditSoraKuvausHeader soraKuvaus={soraKuvaus} />}
-        steps={<EditSoraKuvausSteps />}
-        footer={
-          soraKuvaus ? <EditSoraKuvausFooter soraKuvaus={soraKuvaus} /> : null
-        }
+    <FormConfigContext.Provider value={config}>
+      <ReduxForm
+        form="editSoraKuvausForm"
+        initialValues={initialValues}
+        enableReinitialize
       >
-        <TopInfoContainer>
-          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-        </TopInfoContainer>
-        {soraKuvaus ? (
-          <EditSoraKuvausForm
-            soraKuvaus={soraKuvaus}
-            organisaatioOid={organisaatioOid}
-            koulutustyyppi={koulutustyyppi}
-          />
-        ) : (
-          <Spin center />
-        )}
-      </FormPage>
-    </>
+        <Title>{t('sivuTitlet.soraKuvauksenMuokkaus')}</Title>
+        <FormPage
+          header={<EditSoraKuvausHeader soraKuvaus={soraKuvaus} />}
+          steps={<EditSoraKuvausSteps />}
+          footer={
+            soraKuvaus ? <EditSoraKuvausFooter soraKuvaus={soraKuvaus} /> : null
+          }
+        >
+          <TopInfoContainer>
+            <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+          </TopInfoContainer>
+          {soraKuvaus ? (
+            <SoraKuvausForm
+              {...props}
+              organisaatioOid={organisaatioOid}
+              koulutustyyppi={koulutustyyppi}
+              soraKuvaus={soraKuvaus}
+              steps={false}
+              canSelectBase={false}
+              canEditKoulutustyyppi={false}
+            />
+          ) : (
+            <Spin center />
+          )}
+        </FormPage>
+      </ReduxForm>
+    </FormConfigContext.Provider>
   );
 };
 

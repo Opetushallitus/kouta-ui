@@ -2,7 +2,7 @@ import React from 'react';
 import { Field } from 'redux-form';
 
 import { FormFieldInput, FormFieldPostinumeroSelect } from '../formFields';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import Typography from '../Typography';
 import Box from '../Box';
 import { getTestIdProps } from '../../utils';

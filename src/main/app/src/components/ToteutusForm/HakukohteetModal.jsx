@@ -7,7 +7,7 @@ import getHaut from '../../utils/kouta/getHaut';
 import Flex from '../Flex';
 import { getFirstLanguageValue } from '../../utils';
 import useApiAsync from '../useApiAsync';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import { FormFieldSelect } from '../formFields';
 import useFieldValue from '../useFieldValue';
 

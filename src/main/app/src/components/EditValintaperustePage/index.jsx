@@ -11,7 +11,7 @@ import getValintaperusteByOid from '../../utils/kouta/getValintaperusteByOid';
 import Spin from '../Spin';
 import { KOULUTUSTYYPPI } from '../../constants';
 import Title from '../Title';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import ReduxForm from '#/src/components/ReduxForm';
 import getFormValuesByValintaperuste from '#/src/utils/getFormValuesByValintaperuste';
 
@@ -42,41 +42,35 @@ const EditValintaperustePage = props => {
     <Spin center />
   ) : (
     <ReduxForm form="editValintaperusteForm" initialValues={initialValues}>
-      {() => (
-        <>
-          <Title>{t('sivuTitlet.valintaperusteenMuokkaus')}</Title>
-          <FormPage
-            header={
-              <EditValintaperusteHeader valintaperuste={valintaperuste} />
+      <Title>{t('sivuTitlet.valintaperusteenMuokkaus')}</Title>
+      <FormPage
+        header={<EditValintaperusteHeader valintaperuste={valintaperuste} />}
+        steps={<EditValintaperusteSteps />}
+        footer={
+          valintaperuste ? (
+            <EditValintaperusteFooter valintaperuste={valintaperuste} />
+          ) : null
+        }
+      >
+        <TopInfoContainer>
+          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+        </TopInfoContainer>
+        {valintaperuste ? (
+          <ValintaperusteFormWrapper
+            valintaperuste={valintaperuste}
+            steps={false}
+            canSelectBase={false}
+            canEditTyyppi={false}
+            organisaatioOid={organisaatioOid}
+            koulutustyyppi={
+              get(valintaperuste, 'koulutustyyppi') ||
+              KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
             }
-            steps={<EditValintaperusteSteps />}
-            footer={
-              valintaperuste ? (
-                <EditValintaperusteFooter valintaperuste={valintaperuste} />
-              ) : null
-            }
-          >
-            <TopInfoContainer>
-              <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-            </TopInfoContainer>
-            {valintaperuste ? (
-              <ValintaperusteFormWrapper
-                valintaperuste={valintaperuste}
-                steps={false}
-                canSelectBase={false}
-                canEditTyyppi={false}
-                organisaatioOid={organisaatioOid}
-                koulutustyyppi={
-                  get(valintaperuste, 'koulutustyyppi') ||
-                  KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
-                }
-              />
-            ) : (
-              <Spin center />
-            )}
-          </FormPage>
-        </>
-      )}
+          />
+        ) : (
+          <Spin center />
+        )}
+      </FormPage>
     </ReduxForm>
   );
 };

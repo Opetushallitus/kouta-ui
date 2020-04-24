@@ -1,7 +1,6 @@
 import React from 'react';
-
+import _ from 'lodash';
 import TypeSection from './TypeSection';
-import BaseSelectionSection from './BaseSelectionSection';
 import TiedotSection from './TiedotSection/TiedotSection';
 import KuvausSection from './KuvausSection';
 import JarjestajaSection from './JarjestajaSection';
@@ -10,17 +9,16 @@ import FormCollapse from '../FormCollapse';
 import KieliversiotFields from '../KieliversiotFields';
 import ToteutuksetSection from './ToteutuksetSection';
 import Button from '../Button';
-import { isFunction, getTestIdProps } from '../../utils';
 import LisatiedotSection from './LisatiedotSection';
 import Flex from '../Flex';
 import NakyvyysSection from './NakyvyysSection';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import useFieldValue from '../useFieldValue';
-import JulkaisutilaSection from './JulkaisutilaSection';
+import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import isOphOrganisaatio from '../../utils/isOphOrganisaatio';
 import TeemakuvaSection from '../TeemakuvaSection';
 import PohjaFormCollapse from '../PohjaFormCollapse';
-import first from 'lodash/first';
+import getKoulutukset from '#/src/utils/kouta/getKoulutukset';
 import {
   isSameKoulutustyyppiWithOrganisaatio,
   useOrganisaatio,
@@ -29,7 +27,7 @@ import useOrganisaatioHierarkia from '../useOrganisaatioHierarkia';
 
 const isInHierarkia = org => hierarkia =>
   hierarkia.organisaatioOid === org.organisaatioOid ||
-  first(hierarkia.children.filter(isInHierarkia(org)));
+  _.first(hierarkia.children.filter(isInHierarkia(org)));
 
 const KoulutusForm = ({
   organisaatioOid,
@@ -66,125 +64,99 @@ const KoulutusForm = ({
 
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps} configured>
-      {isNewKoulutus ? (
+      {isNewKoulutus && (
         <FormCollapse
           section="koulutustyyppi"
           header={t('yleiset.koulutustyyppi')}
           scrollOnActive={false}
-          {...getTestIdProps('tyyppiSection')}
-        >
-          <TypeSection
-            disabled={onlyTarjoajaRights}
-            name="koulutustyyppi"
-            johtaaTutkintoon={johtaaTutkintoon}
-          />
-        </FormCollapse>
-      ) : null}
-
-      {isFunction(onSelectBase) ? (
+          Component={TypeSection}
+          johtaaTutkintoon={johtaaTutkintoon}
+          disabled={onlyTarjoajaRights}
+        />
+      )}
+      {_.isFunction(onSelectBase) && (
         <PohjaFormCollapse
-          section="pohja"
-          header={t('yleiset.pohjanValinta')}
           onSelectBase={onSelectBase}
-          {...getTestIdProps('pohjaSection')}
-        >
-          <BaseSelectionSection
-            disabled={onlyTarjoajaRights}
-            name="pohja"
-            organisaatioOid={organisaatioOid}
-          />
-        </PohjaFormCollapse>
-      ) : null}
+          organisaatioOid={organisaatioOid}
+          disabled={onlyTarjoajaRights}
+          getCopyEntities={getKoulutukset}
+          infoText={t('koulutuslomake.pohjavalintaInfo')}
+          createLabel={t('yleiset.luoUusi', { entity: t('yleiset.koulutus') })}
+          copyLabel={t('yleiset.kopioiPohjaksi', {
+            entity: t('yleiset.koulutus'),
+          })}
+        />
+      )}
 
       <FormCollapse
         section="kieliversiot"
         header={t('yleiset.kieliversiot')}
-        {...getTestIdProps('kieliversiotSection')}
-      >
-        <KieliversiotFields disabled={onlyTarjoajaRights} name="kieliversiot" />
-      </FormCollapse>
+        Component={KieliversiotFields}
+        disabled={onlyTarjoajaRights}
+      />
 
       <FormCollapse
-        section="tiedot"
+        section="information"
         header={t('koulutuslomake.koulutuksenTiedot')}
+        Component={TiedotSection}
         languages={languageTabs}
-        {...getTestIdProps('tiedotSection')}
-      >
-        <TiedotSection
-          disabled={onlyTarjoajaRights}
-          koulutustyyppi={koulutustyyppi}
-          koulutuskoodi={koulutuskoodi}
-          name="information"
-        />
-      </FormCollapse>
+        disabled={onlyTarjoajaRights}
+        koulutustyyppi={koulutustyyppi}
+        koulutuskoodi={koulutuskoodi}
+      />
 
       <FormCollapse
-        section="kuvaus"
+        section="description"
         header={t('koulutuslomake.koulutuksenKuvaus')}
+        Component={KuvausSection}
         languages={languageTabs}
-        {...getTestIdProps('kuvausSection')}
-      >
-        <KuvausSection
-          disabled={onlyTarjoajaRights}
-          koulutustyyppi={koulutustyyppi}
-          koulutuskoodi={koulutuskoodi}
-          name="description"
-        />
-      </FormCollapse>
+        disabled={onlyTarjoajaRights}
+        koulutustyyppi={koulutustyyppi}
+        koulutuskoodi={koulutuskoodi}
+      />
 
       <FormCollapse
         section="lisatiedot"
         header={t('koulutuslomake.koulutuksenLisatiedot')}
+        Component={LisatiedotSection}
         languages={languageTabs}
-        {...getTestIdProps('lisatiedotSection')}
-      >
-        <LisatiedotSection disabled={onlyTarjoajaRights} name="lisatiedot" />
-      </FormCollapse>
+        disabled={onlyTarjoajaRights}
+      />
 
       <FormCollapse
         section="teemakuva"
         header={t('koulutuslomake.koulutuksenTeemakuva')}
-        {...getTestIdProps('teemakuvaSection')}
-      >
-        <TeemakuvaSection disabled={onlyTarjoajaRights} name="teemakuva" />
-      </FormCollapse>
+        Component={TeemakuvaSection}
+        disabled={onlyTarjoajaRights}
+      />
 
-      {!isNewOphKoulutus ? (
+      {!isNewOphKoulutus && (
         <FormCollapse
-          section="jarjestyspaikka"
+          section="tarjoajat"
           header={t('koulutuslomake.koulutuksenJarjestaja')}
-          {...getTestIdProps('jarjestajaSection')}
-        >
-          <JarjestajaSection
-            organisaatioOid={organisaatioOid}
-            koulutus={koulutusProp}
-            name="tarjoajat"
-            disableTarjoajaHierarkia={isExistingOphKoulutus}
-          />
-        </FormCollapse>
-      ) : null}
-
-      <FormCollapse
-        section="julkisuus"
-        header="Koulutuksen näkyminen muille koulutustoimijoille"
-        {...getTestIdProps('nakyvyysSection')}
-      >
-        <NakyvyysSection disabled={onlyTarjoajaRights} name="julkinen" />
-      </FormCollapse>
-
-      <FormCollapse
-        section="julkaisutila"
-        header={t('koulutuslomake.koulutuksenTila')}
-        {...getTestIdProps('tilaSection')}
-      >
-        <JulkaisutilaSection
-          disabled={onlyTarjoajaRights}
-          name="tila"
-          showArkistoitu={!isNewKoulutus}
+          Component={JarjestajaSection}
+          organisaatioOid={organisaatioOid}
+          koulutus={koulutusProp}
+          disableTarjoajaHierarkia={isExistingOphKoulutus}
         />
-      </FormCollapse>
+      )}
 
-      {isFunction(onAttachToteutus) ? (
+      <FormCollapse
+        section="julkinen"
+        header="Koulutuksen näkyminen muille koulutustoimijoille"
+        disabled={onlyTarjoajaRights}
+        Component={NakyvyysSection}
+      />
+
+      <FormCollapse
+        section="tila"
+        header={t('koulutuslomake.koulutuksenTila')}
+        Component={JulkaisutilaField}
+        disabled={onlyTarjoajaRights}
+        showArkistoitu={!isNewKoulutus}
+      />
+
+      {_.isFunction(onAttachToteutus) && (
         <FormCollapse
           header={t('koulutuslomake.koulutukseenLiitetytToteutukset')}
           id="koulutukseen-liitetetyt-toteutukset"
@@ -200,14 +172,12 @@ const KoulutusForm = ({
               </Button>
             </Flex>
           }
-        >
-          <ToteutuksetSection
-            disabled={onlyTarjoajaRights}
-            koulutus={koulutusProp}
-            organisaatioOid={organisaatioOid}
-          />
-        </FormCollapse>
-      ) : null}
+          Component={ToteutuksetSection}
+          koulutus={koulutusProp}
+          organisaatioOid={organisaatioOid}
+          disabled={onlyTarjoajaRights}
+        />
+      )}
     </FormCollapseGroup>
   );
 };

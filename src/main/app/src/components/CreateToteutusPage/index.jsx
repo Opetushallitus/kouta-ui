@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import queryString from 'query-string';
+import _ from 'lodash';
 
 import FormPage, {
   OrganisaatioInfo,
@@ -17,7 +18,7 @@ import { KOULUTUSTYYPPI, POHJAVALINTA } from '../../constants';
 import useSelectBase from '../useSelectBase';
 import Title from '../Title';
 import getToteutusByOid from '../../utils/kouta/getToteutusByOid';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import ReduxForm from '#/src/components/ReduxForm';
 import getFormValuesByToteutus from '#/src/utils/getFormValuesByToteutus';
 import { initialValues } from '#/src/components/ToteutusForm';
@@ -62,8 +63,8 @@ const CreateToteutusPage = props => {
       ? koulutus.koulutustyyppi
       : KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
-  const { koulutusNimi } = props;
-  const { koulutusKielet } = props;
+  const koulutusNimi = _.get(koulutus, 'nimi');
+  const koulutusKielet = _.get(koulutus, 'kielivalinta');
 
   const promiseFn = kopioToteutusOid ? getToteutusByOid : resolveFn;
 
@@ -72,7 +73,6 @@ const CreateToteutusPage = props => {
     oid: kopioToteutusOid,
     watch: kopioToteutusOid,
   });
-
   const initialValues = useMemo(() => {
     return koulutustyyppi === 'amm'
       ? getInitialValues(data, koulutusNimi, koulutusKielet)
@@ -85,49 +85,42 @@ const CreateToteutusPage = props => {
       enableReinitialize
       initialValues={initialValues}
     >
-      {() => (
-        <>
-          <Title>{t('sivuTitlet.uusiToteutus')}</Title>
-          <FormPage
-            header={<CreateToteutusHeader />}
-            steps={<CreateToteutusSteps />}
-            footer={
-              koulutus ? (
-                <CreateToteutusFooter
-                  koulutustyyppi={koulutustyyppi}
-                  organisaatioOid={organisaatioOid}
-                  koulutusOid={koulutusOid}
-                />
-              ) : null
-            }
-          >
-            <TopInfoContainer>
-              <KoulutusInfo
-                organisaatioOid={organisaatioOid}
-                koulutus={koulutus}
-              />
-              <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-            </TopInfoContainer>
-            {koulutus ? (
-              <ToteutusFormWrapper
-                steps
-                koulutus={koulutus}
-                ePerusteId={koulutus.ePerusteId}
-                koulutusKoodiUri={koulutus.koulutusKoodiUri}
-                koulutusNimi={koulutus.nimi}
-                koulutusKielet={koulutus.kielivalinta}
-                organisaatioOid={organisaatioOid}
-                koulutustyyppi={koulutustyyppi}
-                kopioToteutusOid={kopioToteutusOid}
-                onSelectBase={selectBase}
-                showArkistoituTilaOption={false}
-              />
-            ) : (
-              <Spin center />
-            )}
-          </FormPage>
-        </>
-      )}
+      <Title>{t('sivuTitlet.uusiToteutus')}</Title>
+      <FormPage
+        header={<CreateToteutusHeader />}
+        steps={<CreateToteutusSteps />}
+        footer={
+          koulutus ? (
+            <CreateToteutusFooter
+              koulutustyyppi={koulutustyyppi}
+              organisaatioOid={organisaatioOid}
+              koulutusOid={koulutusOid}
+            />
+          ) : null
+        }
+      >
+        <TopInfoContainer>
+          <KoulutusInfo organisaatioOid={organisaatioOid} koulutus={koulutus} />
+          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+        </TopInfoContainer>
+        {koulutus ? (
+          <ToteutusFormWrapper
+            steps
+            koulutus={koulutus}
+            ePerusteId={koulutus.ePerusteId}
+            koulutusKoodiUri={koulutus.koulutusKoodiUri}
+            koulutusNimi={koulutus.nimi}
+            koulutusKielet={koulutus.kielivalinta}
+            organisaatioOid={organisaatioOid}
+            koulutustyyppi={koulutustyyppi}
+            kopioToteutusOid={kopioToteutusOid}
+            onSelectBase={selectBase}
+            showArkistoituTilaOption={false}
+          />
+        ) : (
+          <Spin center />
+        )}
+      </FormPage>
     </ReduxForm>
   );
 };

@@ -6,7 +6,7 @@ import { getThemeProp } from '../../theme';
 import Icon from '../Icon';
 import Typography from '../Typography';
 import { JULKAISUTILA } from '../../constants';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import { getColor, getLabel } from './utils';
 
 const statusByIcon = {

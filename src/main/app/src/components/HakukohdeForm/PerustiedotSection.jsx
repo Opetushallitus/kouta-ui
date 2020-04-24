@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 
 import Spacing from '../Spacing';
 import isAmmatillinenKoulutustyyppi from '../../utils/isAmmatillinenKoulutustyyppi';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import { getTestIdProps } from '../../utils';
 import { FormFieldCheckbox, FormFieldInput } from '../formFields';
 import Divider from '../Divider';

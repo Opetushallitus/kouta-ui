@@ -7,7 +7,7 @@ import Flex from '../Flex';
 import ValintatapaContentFields from '../ValintatapaContentFields';
 import useKoodistoOptions from '../useKoodistoOptions';
 import { getTestIdProps } from '../../utils';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import FieldArrayList from '../FieldArrayList';
 import GridRow from '../GridRow';
 import GridColumn from '../GridColumn';

@@ -3,7 +3,9 @@ import { Field } from 'redux-form';
 import styled from 'styled-components';
 import stripTags from 'striptags';
 import { get, isEmpty, isString, mapValues } from 'lodash';
-import { Trans } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
+import FieldGroup from '#/src/components/FieldGroup';
+
 import {
   getOsaamisalakuvauksetByPerusteId,
   getEPerusteById,
@@ -12,11 +14,13 @@ import { getThemeProp } from '#/src/theme';
 import { getLanguageValue, getTestIdProps } from '#/src/utils';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 
+import {
+  FormFieldInput,
+  FormFieldCheckboxGroup,
+} from '#/src/components/formFields';
 import Anchor from '#/src/components/Anchor';
 import AbstractCollapse from '#/src/components/AbstractCollapse';
-import Checkbox from '#/src/components/Checkbox';
 import Divider from '#/src/components/Divider';
-import { FormFieldInput } from '#/src/components/formFields';
 import Icon from '#/src/components/Icon';
 import LocalLink from '#/src/components/LocalLink';
 import Spacing from '#/src/components/Spacing';
@@ -24,7 +28,6 @@ import Spin from '#/src/components/Spin';
 import Typography from '#/src/components/Typography';
 
 import { useURLs } from '#/src/hooks/context';
-import useTranslation from '#/src/components/useTranslation';
 import useFieldValue from '#/src/components/useFieldValue';
 import useApiAsync from '#/src/components/useApiAsync';
 
@@ -61,14 +64,6 @@ const OsaamisalaDetailsToggle = ({ open, onToggle, ...props }) => {
   );
 };
 
-const makeOnCheckboxChange = ({ value, onChange, optionValue }) => e => {
-  if (e.target.checked) {
-    onChange([...value, optionValue]);
-  } else {
-    onChange(value.filter(v => v !== optionValue));
-  }
-};
-
 const getExtendedEPeruste = async ({ httpClient, apiUrls, ePerusteId }) => {
   if (!ePerusteId) {
     return null;
@@ -100,31 +95,6 @@ const getExtendedEPeruste = async ({ httpClient, apiUrls, ePerusteId }) => {
     ...ePeruste,
     osaamisalat: osaamisalatWithDescriptions,
   };
-};
-
-const OsaamisalaSelection = ({
-  options = [],
-  onChange = () => {},
-  value = [],
-}) => (
-  <div {...getTestIdProps('osaamisalaSelection')}>
-    {options.map(({ value: optionValue, label }) => (
-      <div>
-        <Checkbox
-          key={optionValue}
-          name={optionValue}
-          checked={value.includes(optionValue)}
-          onChange={makeOnCheckboxChange({ value, onChange, optionValue })}
-        >
-          {label}
-        </Checkbox>
-      </div>
-    ))}
-  </div>
-);
-
-const renderOsaamisalaSelectionField = ({ input, options }) => {
-  return <OsaamisalaSelection {...input} options={options} />;
 };
 
 const OsaamisalaDetails = ({ osaamisala, language, name }) => {
@@ -210,6 +180,7 @@ const OsaamisalatContainer = ({
   name,
 }) => {
   const { nimi, osaamisalat, id } = peruste;
+  const { t } = useTranslation();
   const urls = useURLs();
 
   const osaamisalaOptions = useMemo(
@@ -249,14 +220,19 @@ const OsaamisalatContainer = ({
   ) : (
     <>
       <SelectionContainer>
-        <Typography variant="h6" marginBottom={1}>
-          {getLanguageValue(nimi, language)}
-        </Typography>
-        <Field
-          name={`${name}.osaamisalat`}
-          component={renderOsaamisalaSelectionField}
-          options={osaamisalaOptions}
-        />
+        <Typography variant="h6" marginBottom={1}></Typography>
+        <FieldGroup
+          title={t('toteutuslomake.valitseOsaamisalat')}
+          name={`${name}.osaamisalatGroup`}
+          {...getTestIdProps('osaamisalaSelection')}
+        >
+          <Field
+            name={`${name}.osaamisalat`}
+            component={FormFieldCheckboxGroup}
+            options={osaamisalaOptions}
+            label={getLanguageValue(nimi, language)}
+          />
+        </FieldGroup>
       </SelectionContainer>
       <InfoContainer>
         <OsaamisalatInfoFields

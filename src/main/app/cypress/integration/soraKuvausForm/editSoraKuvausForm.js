@@ -24,12 +24,6 @@ describe('editSoraKuvausForm', () => {
 
     stubSoraKuvausFormRoutes({ organisaatioOid, cy });
 
-    cy.visit(
-      `/organisaatio/${organisaatioOid}/sora-kuvaus/${soraKuvaus.id}/muokkaus`,
-    );
-  });
-
-  it('should be able to edit sora-kuvaus', () => {
     cy.route({
       method: 'GET',
       url: `**/sorakuvaus/${soraKuvaus.id}`,
@@ -38,6 +32,12 @@ describe('editSoraKuvausForm', () => {
       }),
     });
 
+    cy.visit(
+      `/organisaatio/${organisaatioOid}/sora-kuvaus/${soraKuvaus.id}/muokkaus`,
+    );
+  });
+
+  it('should be able to edit sora-kuvaus', () => {
     cy.route({
       method: 'POST',
       url: '**/sorakuvaus',

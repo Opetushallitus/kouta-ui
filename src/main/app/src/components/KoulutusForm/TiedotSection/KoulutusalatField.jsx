@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
-import useTranslation from '../../useTranslation';
+import { useTranslation } from 'react-i18next';
 import KoulutusalatSelect from './KoulutusalatSelect';
 import { createFormFieldComponent, selectMapProps } from '../../formFields';
 import { getTestIdProps } from '../../../utils';

@@ -6,7 +6,7 @@ import useKoodistoOptions from '../useKoodistoOptions';
 import useFieldValue from '../useFieldValue';
 import isKorkeakoulutusKohdejoukkoKoodiUri from '../../utils/isKorkeakoulutusKohdejoukkoKoodiUri';
 import { FormFieldRadioGroup, FormFieldSelect } from '../formFields';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import { getThemeProp, spacing } from '../../theme';
 import { getTestIdProps } from '../../utils';
 

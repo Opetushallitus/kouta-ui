@@ -7,7 +7,7 @@ import { AsyncCreatableSelect } from '../Select';
 import Spacing from '../Spacing';
 import getAmmattinimikkeetByTerm from '../../utils/kouta/getAmmattinimikkeetByTerm';
 import getAvainsanatByTerm from '../../utils/kouta/getAvainsanatByTerm';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import { memoize, getTestIdProps } from '../../utils';
 import { createFormFieldComponent } from '../formFields';
 

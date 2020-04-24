@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { FormFieldRadioGroup, FormFieldInput } from '../../formFields';
 import InputIcon from '../../InputIcon';
-import useTranslation from '../../useTranslation';
+import { useTranslation } from 'react-i18next';
 import Spacing from '../../Spacing';
 import { getTestIdProps } from '../../../utils';
 
@@ -30,7 +30,7 @@ export const MaksuField = ({ input: { value }, maksuName, t }) => {
   ) : null;
 };
 
-export const MaksullisuusFields = ({ name, isKorkeakoulu }) => {
+export const MaksullisuusFields = ({ name, isKorkeakoulu, label }) => {
   const { t } = useTranslation();
 
   const options = useMemo(() => {
@@ -57,6 +57,7 @@ export const MaksullisuusFields = ({ name, isKorkeakoulu }) => {
           name={tyyppiName}
           component={FormFieldRadioGroup}
           options={options}
+          label={label}
         />
       </div>
       <Field

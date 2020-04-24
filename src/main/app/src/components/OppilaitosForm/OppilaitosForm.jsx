@@ -2,13 +2,12 @@ import React from 'react';
 
 import FormCollapseGroup from '../FormCollapseGroup';
 import FormCollapse from '../FormCollapse';
-import useTranslation from '../useTranslation';
-import { getTestIdProps } from '../../utils';
+import { useTranslation } from 'react-i18next';
 import PerustiedotSection from './PerustiedotSection';
 import EsittelySection from './EsittelySection';
 import TietoaOpiskelustaSection from './TietoaOpiskelustaSection';
 import YhteystiedotSection from './YhteystiedotSection';
-import JulkaisutilaSection from './JulkaisutilaSection';
+import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import KieliversiotFields from '../KieliversiotFields';
 import useFieldValue from '../useFieldValue';
 import TeemakuvaSection from '../TeemakuvaSection';
@@ -24,63 +23,51 @@ const OppilaitosForm = ({
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
       <FormCollapse
+        section="kieliversiot"
         header={t('yleiset.kieliversiot')}
-        {...getTestIdProps('kieliversiotSection')}
-      >
-        <KieliversiotFields name="kieliversiot" />
-      </FormCollapse>
+        Component={KieliversiotFields}
+      />
 
       <FormCollapse
+        section="perustiedot"
         header={t('oppilaitoslomake.oppilaitoksenPerustiedot')}
-        {...getTestIdProps('perustiedotSection')}
-      >
-        <PerustiedotSection
-          name="perustiedot"
-          organisaatioOid={organisaatioOid}
-        />
-      </FormCollapse>
+        Component={PerustiedotSection}
+        organisaatioOid={organisaatioOid}
+      />
 
       <FormCollapse
+        section="esittely"
         languages={languageTabs}
         header={t('oppilaitoslomake.oppilaitoksenEsittely')}
-        {...getTestIdProps('esittelySection')}
-      >
-        <EsittelySection name="esittely" />
-      </FormCollapse>
+        Component={EsittelySection}
+      />
 
       <FormCollapse
         section="teemakuva"
         header={t('oppilaitoslomake.oppilaitoksenTeemakuva')}
-        {...getTestIdProps('teemakuvaSection')}
-      >
-        <TeemakuvaSection name="teemakuva" />
-      </FormCollapse>
+        Component={TeemakuvaSection}
+      />
 
       <FormCollapse
+        section="tietoa"
         languages={languageTabs}
         header={t('oppilaitoslomake.tietoaOpiskelusta')}
-        {...getTestIdProps('tietoaOpiskelustaSection')}
-      >
-        <TietoaOpiskelustaSection name="tietoa" />
-      </FormCollapse>
+        Component={TietoaOpiskelustaSection}
+      />
 
       <FormCollapse
+        section="yhteystiedot"
         languages={languageTabs}
         header={t('oppilaitoslomake.oppilaitoksenYhteystiedot')}
-        {...getTestIdProps('yhteystiedotSection')}
-      >
-        <YhteystiedotSection name="yhteystiedot" />
-      </FormCollapse>
+        Component={YhteystiedotSection}
+      />
 
       <FormCollapse
+        section="tila"
         header={t('oppilaitoslomake.oppilaitoksenTila')}
-        {...getTestIdProps('tilaSection')}
-      >
-        <JulkaisutilaSection
-          name="tila"
-          showArkistoitu={showArkistoituTilaOption}
-        />
-      </FormCollapse>
+        Component={JulkaisutilaField}
+        showArkistoitu={showArkistoituTilaOption}
+      />
     </FormCollapseGroup>
   );
 };

@@ -7,7 +7,7 @@ import Spacing from '../Spacing';
 import Flex, { FlexItem } from '../Flex';
 import FieldArrayList from '../FieldArrayList';
 import Button from '../Button';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import DividerHeading from '../DividerHeading';
 import { getTestIdProps } from '../../utils';
 

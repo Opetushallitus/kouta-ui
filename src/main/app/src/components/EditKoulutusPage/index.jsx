@@ -11,7 +11,7 @@ import useApiAsync from '../useApiAsync';
 import getKoulutusByOid from '../../utils/kouta/getKoulutusByOid';
 import Spin from '../Spin';
 import Title from '../Title';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import UrlContext from '#/src/components/UrlContext';
 import useAuthorizedUserRoleBuilder from '#/src/components/useAuthorizedUserRoleBuilder';
 import { HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
@@ -78,47 +78,43 @@ const EditKoulutusPage = props => {
     <Spin center />
   ) : (
     <ReduxForm form="editKoulutusForm" initialValues={initialValues}>
-      {() => (
-        <>
-          <Title>{t('sivuTitlet.koulutuksenMuokkaus')}</Title>
-          <FormPage
-            header={<EditKoulutusHeader koulutus={koulutus} />}
-            steps={<EditKoulutusSteps />}
-            draftUrl={apiUrls.url('konfo-ui.koulutus', oid) + '?draft=true'}
-            toggleDraft={
-              <FormNameContext.Provider value={'editKoulutusForm'}>
-                <ToggleDraft />
-              </FormNameContext.Provider>
-            }
-            footer={
-              koulutus ? (
-                <EditKoulutusFooter
-                  koulutus={koulutus}
-                  organisaatioOid={organisaatioOid}
-                />
-              ) : null
-            }
-          >
-            <TopInfoContainer>
-              <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-            </TopInfoContainer>
-            {koulutus ? (
-              <KoulutusFormWrapper
-                steps={false}
-                isNewKoulutus={false}
-                johtaaTutkintoon={Boolean(koulutus.johtaaTutkintoon)}
-                onAttachToteutus={onAttachToteutus}
-                koulutus={koulutus}
-                koulutusOrganisaatioOid={koulutus.organisaatioOid}
-                organisaatioOid={organisaatioOid}
-                scrollTarget={scrollTarget}
-              />
-            ) : (
-              <Spin center />
-            )}
-          </FormPage>
-        </>
-      )}
+      <Title>{t('sivuTitlet.koulutuksenMuokkaus')}</Title>
+      <FormPage
+        header={<EditKoulutusHeader koulutus={koulutus} />}
+        steps={<EditKoulutusSteps />}
+        draftUrl={apiUrls.url('konfo-ui.koulutus', oid) + '?draft=true'}
+        toggleDraft={
+          <FormNameContext.Provider value={'editKoulutusForm'}>
+            <ToggleDraft />
+          </FormNameContext.Provider>
+        }
+        footer={
+          koulutus ? (
+            <EditKoulutusFooter
+              koulutus={koulutus}
+              organisaatioOid={organisaatioOid}
+            />
+          ) : null
+        }
+      >
+        <TopInfoContainer>
+          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
+        </TopInfoContainer>
+        {koulutus ? (
+          <KoulutusFormWrapper
+            steps={false}
+            isNewKoulutus={false}
+            johtaaTutkintoon={Boolean(koulutus.johtaaTutkintoon)}
+            onAttachToteutus={onAttachToteutus}
+            koulutus={koulutus}
+            koulutusOrganisaatioOid={koulutus.organisaatioOid}
+            organisaatioOid={organisaatioOid}
+            scrollTarget={scrollTarget}
+          />
+        ) : (
+          <Spin center />
+        )}
+      </FormPage>
     </ReduxForm>
   );
 };

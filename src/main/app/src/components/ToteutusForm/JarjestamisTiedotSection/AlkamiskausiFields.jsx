@@ -2,7 +2,7 @@ import React from 'react';
 import { Field } from 'redux-form';
 
 import { getTestIdProps } from '../../../utils';
-import useTranslation from '../../useTranslation';
+import { useTranslation } from 'react-i18next';
 import {
   FormFieldCheckbox,
   FormFieldDatePickerInput,

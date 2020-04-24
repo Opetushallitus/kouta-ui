@@ -1,5 +1,16 @@
 import i18n from 'i18next';
 import XHR from 'i18next-xhr-backend';
+import { get, capitalize, toLower, isFunction } from 'lodash';
+
+const formatMap = {
+  toLower,
+  capitalize,
+  unCapitalize: value => {
+    const low = toLower(value);
+    // if second character changes, return original value
+    return get(value, 1) === get(low, 1) ? low : value;
+  },
+};
 
 const createLocalisation = ({
   loadLocalisation,
@@ -36,6 +47,11 @@ const createLocalisation = ({
         parse: data => data,
       },
     }),
+    interpolation: {
+      format(value, format, lng) {
+        return isFunction(formatMap[format]) ? formatMap[format](value) : value;
+      },
+    },
   });
 
   return instance;

@@ -1,9 +1,17 @@
 import React, { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { get } from 'lodash';
 import FormCollapse from './FormCollapse';
 import useFieldValue from './useFieldValue';
+import PohjaValintaSection from '#/src/components/PohjaValintaSection';
 
-export default function({ children, onContinue, onSelectBase, ...props }) {
+export default function PohjaFormCollapse({
+  children,
+  onContinue,
+  onSelectBase,
+  ...props
+}) {
+  const { t } = useTranslation();
   const tapa = useFieldValue('pohja.tapa');
   const valinta = useFieldValue('pohja.valinta');
 
@@ -16,7 +24,13 @@ export default function({ children, onContinue, onSelectBase, ...props }) {
   }, [onSelectBase, tapa, valinta, onContinue]);
 
   return (
-    <FormCollapse onContinue={onPohjaContinue} {...props}>
+    <FormCollapse
+      section="pohja"
+      header={t('yleiset.pohjanValinta')}
+      onContinue={onPohjaContinue}
+      Component={PohjaValintaSection}
+      {...props}
+    >
       {children}
     </FormCollapse>
   );

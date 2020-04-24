@@ -1,7 +1,7 @@
 import React from 'react';
 
 import getKoulutuksenToteutukset from '../../utils/kouta/getKoulutuksenToteutukset';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import RelatedEntitiesTable from '../RelatedEntitiesTable';
 
 export default function({ koulutus, organisaatioOid }) {

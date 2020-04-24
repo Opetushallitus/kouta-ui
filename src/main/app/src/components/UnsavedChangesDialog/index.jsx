@@ -4,7 +4,7 @@ import ModalBody from '@opetushallitus/virkailija-ui-components/ModalBody';
 import ModalFooter from '@opetushallitus/virkailija-ui-components/ModalFooter';
 import Flex from '#/src/components/Flex';
 import React from 'react';
-import useTranslation from '#/src/components/useTranslation';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import Button from '@opetushallitus/virkailija-ui-components/Button';
 
@@ -23,7 +23,7 @@ const UnsavedChangesDialog = ({ onConfirm, onCancel }) => {
       <ModalBody>{t('ilmoitukset.tallentamattomiaMuutoksia.viesti')}</ModalBody>
       <ModalFooter>
         <Flex justifyCenter>
-          <ModalButton marginLeft={1} color="danger" onClick={onConfirm}>
+          <ModalButton color="danger" onClick={onConfirm}>
             {t('ilmoitukset.tallentamattomiaMuutoksia.jatka')}
           </ModalButton>
           <ModalButton onClick={onCancel}>

@@ -14,7 +14,7 @@ const jatka = () => {
 };
 
 const fillKoulutustyyppiSection = () => {
-  cy.getByTestId('tyyppiSection').within(() => {
+  cy.getByTestId('koulutustyyppiSection').within(() => {
     fillKoulutustyyppiSelect(['amm'], cy);
   });
 };
@@ -36,7 +36,7 @@ const fillTiedotSection = () => {
   cy.getByTestId('tiedotSection').within(() => {
     cy.getByTestId('nimi')
       .find('input')
-      .type('Nimi', { force: true });
+      .paste('Nimi', { force: true });
 
     cy.getByTestId('kuvaus').within(() => {
       typeToEditor('Kuvaus', cy);
@@ -47,7 +47,7 @@ const fillTiedotSection = () => {
 };
 
 const fillJulkisuusSection = () => {
-  cy.getByTestId('julkisuusSection').within(() => {
+  cy.getByTestId('julkinenSection').within(() => {
     getCheckbox(null, cy).check({ force: true });
     jatka();
   });
@@ -103,9 +103,7 @@ describe('createSoraKuvausForm', () => {
 
     cy.location('pathname').should(
       'eq',
-      `/kouta/organisaatio/${organisaatioOid}/sora-kuvaus/${
-        soraKuvaus.id
-      }/muokkaus`,
+      `/kouta/organisaatio/${organisaatioOid}/sora-kuvaus/${soraKuvaus.id}/muokkaus`,
     );
   });
 });

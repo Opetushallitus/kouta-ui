@@ -121,7 +121,7 @@ module.exports = {
       }
     }
   },
-  "__version": "4.1.0",
+  "__version": "4.4.1",
   "editKoulutusForm": {
     "should be able to edit ammatillinen koulutus": {
       "1": {
@@ -136,68 +136,30 @@ module.exports = {
         "nimi": {
           "fi": "koulutus_0"
         },
+        "metadata": {
+          "tyyppi": "amm",
+          "lisatiedot": [
+            {
+              "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+              "teksti": {
+                "fi": "koulutuksenlisatiedot_0 kuvaus"
+              }
+            }
+          ],
+          "kuvaus": {},
+          "opintojenLaajuusKoodiUri": null,
+          "tutkintonimikeKoodiUrit": [],
+          "kuvauksenNimi": {},
+          "koulutusalaKoodiUrit": []
+        },
+        "julkinen": true,
+        "muokkaaja": "1.2.246.562.24.62301161440",
+        "organisaatioOid": "1.1.1.1.1.1",
+        "kielivalinta": [
+          "fi"
+        ],
+        "modified": "2019-04-01T13:01",
         "ePerusteId": 1,
-        "teemakuva": null,
-        "metadata": {
-          "tyyppi": "amm",
-          "lisatiedot": [
-            {
-              "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
-              "teksti": {
-                "fi": "koulutuksenlisatiedot_0 kuvaus"
-              }
-            }
-          ],
-          "kuvaus": {},
-          "opintojenLaajuusKoodiUri": null,
-          "tutkintonimikeKoodiUrit": [],
-          "kuvauksenNimi": {},
-          "koulutusalaKoodiUrit": []
-        },
-        "julkinen": true,
-        "muokkaaja": "1.2.246.562.24.62301161440",
-        "organisaatioOid": "1.1.1.1.1.1",
-        "kielivalinta": [
-          "fi"
-        ],
-        "modified": "2019-04-01T13:01",
-        "johtaaTutkintoon": true
-      },
-      "2": {
-        "oid": "1.2.3.4.5.6",
-        "koulutustyyppi": "amm",
-        "koulutusKoodiUri": "koulutus_0#1",
-        "tila": "tallennettu",
-        "tarjoajat": [
-          "4.1.1.1.1.1",
-          "2.1.1.1.1.1"
-        ],
-        "nimi": {
-          "fi": "koulutus_0"
-        },
-        "metadata": {
-          "tyyppi": "amm",
-          "lisatiedot": [
-            {
-              "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
-              "teksti": {
-                "fi": "koulutuksenlisatiedot_0 kuvaus"
-              }
-            }
-          ],
-          "kuvaus": {},
-          "opintojenLaajuusKoodiUri": null,
-          "tutkintonimikeKoodiUrit": [],
-          "kuvauksenNimi": {},
-          "koulutusalaKoodiUrit": []
-        },
-        "julkinen": true,
-        "muokkaaja": "1.2.246.562.24.62301161440",
-        "organisaatioOid": "1.1.1.1.1.1",
-        "kielivalinta": [
-          "fi"
-        ],
-        "modified": "2019-04-01T13:01",
         "johtaaTutkintoon": true,
         "esikatselu": true,
         "teemakuva": null
@@ -255,45 +217,6 @@ module.exports = {
     },
     "should be able to edit lukiokoulutus": {
       "1": {
-        "oid": "1.2.3.4.5.6",
-        "koulutustyyppi": "lk",
-        "koulutusKoodiUri": "koulutus_0#1",
-        "tila": "tallennettu",
-        "tarjoajat": [
-          "4.1.1.1.1.1",
-          "2.1.1.1.1.1"
-        ],
-        "nimi": {
-          "fi": "koulutus_0"
-        },
-        "ePerusteId": 1,
-        "teemakuva": null,
-        "metadata": {
-          "tyyppi": "lk",
-          "lisatiedot": [
-            {
-              "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
-              "teksti": {
-                "fi": "koulutuksenlisatiedot_0 kuvaus"
-              }
-            }
-          ],
-          "kuvaus": {},
-          "opintojenLaajuusKoodiUri": null,
-          "tutkintonimikeKoodiUrit": [],
-          "kuvauksenNimi": {},
-          "koulutusalaKoodiUrit": []
-        },
-        "julkinen": true,
-        "muokkaaja": "1.2.246.562.24.62301161440",
-        "organisaatioOid": "1.1.1.1.1.1",
-        "kielivalinta": [
-          "fi"
-        ],
-        "modified": "2019-04-01T13:01",
-        "johtaaTutkintoon": true
-      },
-      "2": {
         "oid": "1.2.3.4.5.6",
         "koulutustyyppi": "lk",
         "koulutusKoodiUri": "koulutus_0#1",

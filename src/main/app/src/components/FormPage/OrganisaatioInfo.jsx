@@ -1,5 +1,5 @@
 import React from 'react';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import { useOrganisaatio } from '../useOrganisaatio';
 import { TopInfo } from '../FormPage/TopInfo';
 

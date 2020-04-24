@@ -1,15 +1,15 @@
 import { get, reduce } from 'lodash';
 
-import { JULKAISUTILA, KOULUTUSTYYPIT, KOULUTUSTYYPPI } from '../constants';
+import { KOULUTUSTYYPIT, KOULUTUSTYYPPI } from '../constants';
 import createFormConfigBuilder from './createFormConfigBuilder';
 
-const getKielivalinta = values => get(values, 'perustiedot.kieliversiot') || [];
-
-const validateIfJulkaistu = validate => (eb, values, ...rest) => {
-  const { tila } = values;
-
-  return tila === JULKAISUTILA.JULKAISTU ? validate(eb, values, ...rest) : eb;
-};
+import {
+  validateIfJulkaistu,
+  getKielivalinta,
+  pohjaValintaSectionConfig,
+  tilaSectionConfig,
+  julkinenSectionConfig,
+} from '#/src/utils/formConfigUtils';
 
 const koulutustyypitWithValintatapa = [
   KOULUTUSTYYPPI.YLIOPISTOKOULUTUS,
@@ -41,30 +41,55 @@ const validateValintakokeet = (errorBuilder, values) => {
   );
 };
 
-const config = createFormConfigBuilder()
-  .registerField('pohja', 'pohja', KOULUTUSTYYPIT)
-  .registerField('perustiedot', 'tyyppi', KOULUTUSTYYPIT, eb =>
-    eb.validateExistence('perustiedot.tyyppi'),
-  )
-  .registerField('perustiedot', 'kieliversiot', KOULUTUSTYYPIT, eb =>
-    eb.validateArrayMinLength('perustiedot.kieliversiot', 1),
-  )
-  .registerField(
-    'perustiedot',
-    'hakutapa',
-    KOULUTUSTYYPIT,
-    validateIfJulkaistu(eb => eb.validateExistence('perustiedot.hakutapa')),
-  )
-  .registerField('perustiedot', 'haunkohdejoukko', KOULUTUSTYYPIT)
-  .registerField('kuvaus', 'nimi', KOULUTUSTYYPIT, (eb, values) =>
-    eb.validateTranslations('kuvaus.nimi', getKielivalinta(values)),
-  )
-  .registerField('kuvaus', 'tarkenne', KOULUTUSTYYPIT)
-  .registerField(
-    'valintatapa',
-    'valintatavat',
-    koulutustyypitWithValintatapa,
-    validateIfJulkaistu((eb, values) =>
+const config = createFormConfigBuilder().registerSections([
+  pohjaValintaSectionConfig,
+  {
+    section: 'perustiedot',
+    koulutustyypit: KOULUTUSTYYPIT,
+    parts: [
+      {
+        field: '.tyyppi',
+        validate: eb => eb.validateExistence('perustiedot.tyyppi'),
+        required: true,
+      },
+      {
+        field: '.kieliversiot',
+        validate: eb =>
+          eb.validateArrayMinLength('perustiedot.kieliversiot', 1),
+        required: true,
+      },
+      {
+        field: '.hakutapa',
+        validate: validateIfJulkaistu(eb =>
+          eb.validateExistence('perustiedot.hakutapa'),
+        ),
+        required: true,
+      },
+      {
+        field: '.kohdejoukko',
+      },
+    ],
+  },
+  {
+    section: 'kuvaus',
+    koulutustyypit: KOULUTUSTYYPIT,
+    parts: [
+      {
+        field: '.nimi',
+        validate: (eb, values) =>
+          eb.validateTranslations('kuvaus.nimi', getKielivalinta(values)),
+        required: true,
+      },
+      {
+        field: '.kuvaus',
+      },
+    ],
+  },
+  {
+    section: 'valintatavat',
+    koulutustyypit: koulutustyypitWithValintatapa,
+    field: 'valintatavat',
+    validate: validateIfJulkaistu((eb, values) =>
       eb
         .validateArrayMinLength('valintatavat', 1, {
           isFieldArray: true,
@@ -75,18 +100,37 @@ const config = createFormConfigBuilder()
             .validateTranslations('nimi', getKielivalinta(values)),
         ),
     ),
-  )
-  .registerField('soraKuvaus', 'soraKuvaus', KOULUTUSTYYPIT)
-  .registerField('julkisuus', 'julkisuus', KOULUTUSTYYPIT)
-  .registerField('julkaisutila', 'julkaisutila', KOULUTUSTYYPIT, eb =>
-    eb.validateExistence('tila'),
-  )
-  .registerField(
-    'valintakoe',
-    'tyypit',
-    KOULUTUSTYYPIT,
-    validateIfJulkaistu((eb, values) => validateValintakokeet(eb, values)),
-  );
+    parts: [
+      {
+        field: '.tapa',
+        required: true,
+      },
+      {
+        field: '.nimi',
+        required: true,
+      },
+    ],
+  },
+  {
+    section: 'soraKuvaus',
+    koulutustyypit: KOULUTUSTYYPIT,
+    field: 'soraKuvaus',
+    validate: validateIfJulkaistu(eb =>
+      eb.validateExistence('perustiedot.hakutapa'),
+    ),
+    required: true,
+  },
+  julkinenSectionConfig,
+  tilaSectionConfig,
+  {
+    section: 'valintakoe',
+    field: 'valintakoe',
+    koulutustyypit: KOULUTUSTYYPIT,
+    validate: validateIfJulkaistu((eb, values) =>
+      validateValintakokeet(eb, values),
+    ),
+  },
+]);
 
 const getValintaperusteFormConfig = koulutustyyppi => {
   return config.getKoulutustyyppiConfig(koulutustyyppi);

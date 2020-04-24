@@ -1,16 +1,15 @@
 import React from 'react';
-import PohjaSection from './PohjaSection';
 import FormCollapseGroup from '../FormCollapseGroup';
 import FormCollapse from '../FormCollapse';
 import KieliversiotSection from './KieliversiotSection';
-import useTranslation from '../useTranslation';
-import { getTestIdProps } from '../../utils';
+import { useTranslation } from 'react-i18next';
 import KoulutustyyppiSection from './KoulutustyyppiSection';
 import TiedotSection from './TiedotSection';
 import JulkisuusSection from './JulkisuusSection';
 import useFieldValue from '../useFieldValue';
-import JulkaisutilaSection from './JulkaisutilaSection';
+import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import PohjaFormCollapse from '../PohjaFormCollapse';
+import getSoraKuvaukset from '#/src/utils/kouta/getSoraKuvaukset';
 
 const SoraKuvausForm = ({
   steps = false,
@@ -28,56 +27,53 @@ const SoraKuvausForm = ({
     <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
       {canEditKoulutustyyppi ? (
         <FormCollapse
+          section="koulutustyyppi"
           header={t('yleiset.koulutustyyppi')}
           scrollOnActive={false}
-          {...getTestIdProps('tyyppiSection')}
-        >
-          <KoulutustyyppiSection name="koulutustyyppi" />
-        </FormCollapse>
+          Component={KoulutustyyppiSection}
+        />
       ) : null}
 
       {canSelectBase ? (
         <PohjaFormCollapse
-          header={t('yleiset.pohjanValinta')}
           onSelectBase={onSelectBase}
-          {...getTestIdProps('pohjaSection')}
-        >
-          <PohjaSection name="pohja" organisaatioOid={organisaatioOid} />
-        </PohjaFormCollapse>
+          organisaatioOid={organisaatioOid}
+          getCopyEntities={getSoraKuvaukset}
+          infoText={t('soraKuvausLomake.pohjavalintaInfo')}
+          createLabel={t('yleiset.luoUusi', {
+            entity: t('yleiset.soraKuvaus'),
+          })}
+          copyLabel={t('yleiset.kopioiPohjaksi', {
+            entity: t('yleiset.soraKuvaus'),
+          })}
+        />
       ) : null}
 
       <FormCollapse
+        section="kieliversiot"
         header={t('yleiset.kieliversiot')}
-        {...getTestIdProps('kieliversiotSection')}
-      >
-        <KieliversiotSection name="kieliversiot" />
-      </FormCollapse>
+        Component={KieliversiotSection}
+      />
 
       <FormCollapse
+        section="tiedot"
         header={t('soraKuvausLomake.soraKuvauksenTiedot')}
         languages={languageTabs}
-        {...getTestIdProps('tiedotSection')}
-      >
-        <TiedotSection name="tiedot" />
-      </FormCollapse>
+        Component={TiedotSection}
+      />
 
       <FormCollapse
+        section="julkinen"
         header={t('soraKuvausLomake.soraKuvauksenNayttamiseenLiittyvatTiedot')}
-        {...getTestIdProps('julkisuusSection')}
-      >
-        <JulkisuusSection name="julkinen" />
-      </FormCollapse>
+        Component={JulkisuusSection}
+      />
 
       <FormCollapse
-        section="julkaisutila"
+        section="tila"
         header={t('soraKuvausLomake.soraKuvauksenTila')}
-        {...getTestIdProps('tilaSection')}
-      >
-        <JulkaisutilaSection
-          name="tila"
-          showArkistoitu={showArkistoituTilaOption}
-        />
-      </FormCollapse>
+        Component={JulkaisutilaField}
+        showArkistoitu={showArkistoituTilaOption}
+      />
     </FormCollapseGroup>
   );
 };

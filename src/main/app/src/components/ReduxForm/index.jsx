@@ -7,7 +7,9 @@ const ReduxForm = reduxForm({ initialValues: {} })(
   ({ children, form, ...props }) => {
     return (
       <FormNameContext.Provider value={form}>
-        {children({ form, ...props })}
+        {React.isValidElement(children) || React.Children.count(children) > 1
+          ? children
+          : children({ form, ...props })}
       </FormNameContext.Provider>
     );
   },

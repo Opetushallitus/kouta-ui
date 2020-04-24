@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 import { get, negate } from 'lodash';
 
 import OrganisaatioHierarkiaTreeSelect from '../OrganisaatioHierarkiaTreeSelect';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import useOrganisaatioHierarkia from '../useOrganisaatioHierarkia';
 import { createFormFieldComponent } from '../formFields';
 import { getTestIdProps } from '../../utils';

@@ -23,6 +23,7 @@ export default {
     toteutus: 'Toteutus',
     haku: 'Haku',
     hakukohde: 'Hakukohde',
+    valintaperuste: 'Valintaperuste',
     valintaperusteet: 'Valintaperusteet',
     pohjanValinta: 'Pohjan valinta',
     valitsePohja: 'Valitse pohja',
@@ -80,7 +81,6 @@ export default {
     poista: 'Poista',
     siirra: 'Siirrä',
     luoUusiToteutus: 'Luo uusi toteutus',
-    kopioiPohjaksiToteutus: 'Kopioi pohjaksi aiemmin luotu toteutus',
     koulutuksenToteutus: 'Koulutuksen toteutus',
     haut: 'Haut',
     koulutukset: 'Koulutukset',
@@ -151,10 +151,10 @@ export default {
       'Varmistathan että olet täyttänyt lomakkeen kaikki pakolliset kentät',
     valitseMitaHakulomakettaKaytetaan: 'Valitse mitä hakulomaketta käytetään',
     valitseKoulutustyyppi: 'Valitse koulutustyyppi',
-    luoUusi: 'Luo uusi',
+    luoUusi: 'Luo uusi {{entity, unCapitalize}}',
+    kopioiPohjaksi: 'Kopioi pohjaksi aiemmin luotu {{ entity, unCapitalize}}',
     kopioiTiedot: 'Kopioi tiedot',
     soraKuvaus: 'SORA-kuvaus',
-    luoUusiSoraKuvaus: 'Luo uusi SORA-kuvaus',
     lukiokoulutus: 'Lukiokoulutus',
     lisaaYhteyshenkilo: 'Lisää yhteyshenkilö',
     puhelinnumero: 'Puhelinnumero',
@@ -342,10 +342,9 @@ export default {
     valitseKaytettavaEperuste: 'Valitse käytettävä ePeruste',
     valitseKoulutuskoodi: 'Valitse koulutuskoodi',
     valitseTutkintonimike: 'Valitse tutkintonimike',
-    valitseOpintojenLaajuus: 'Valitse opintojenlaajuus',
+    valitseOpintojenLaajuus: 'Valitse opintojen laajuus',
     muokkaaKoulutuksenNimea: 'Muokkaa koulutuksen nimeä',
     luoUusiKoulutus: 'Luo uusi koulutus',
-    kopioiPohjaksiKoulutus: 'Kopioi pohjaksi aiemmin luotu koulutus',
     koulutukseenLiitetytToteutukset: 'Koulutukseen liitetyt toteutukset',
     liitaToteutus: 'Liitä toteutus',
     koulutuksellaEiToteutuksia:
@@ -358,7 +357,7 @@ export default {
     valitseKoulutustyyppi: 'Valitse koulutustyyppi',
     valitseKoulutusalat: 'Valitse koulutusalat',
     pohjavalintaInfo:
-      'Voit halutessasi käyttää aiemmin luotuja koulutuksia uuden lomakkeen esitäytettynä pohjana tai kopioida vanhan koulutuksen tiedot.',
+      'Voit halutessasi käyttää aiemmin luotuja koulutuksia uuden lomakkeen esitäytettynä pohjana.',
     lisatiedotInfo:
       'Voit halutessasi lisätä vapaasti täytettäviä osioita, jotka antavat tarkempaa tietoa koulutuksesta.',
     valitseOsaamisala: 'Valitse osaamisala',
@@ -386,11 +385,18 @@ export default {
     ylemmanKorkeakoulututkinnonErikoistumisalanKuvaus:
       'Ylemmän korkeakoulututkinnon erikoistumisalan, opintosuunnan, pääaineen tms. tarkempi kuvaus',
     toteutuksenJarjestamistiedot: 'Toteutuksen järjestämistiedot',
-    paaasiallinenOpetusaika: 'Pääasiallinen opetusaika',
+    valitsePaaasiallinenOpetuskieli: 'Valitse pääasiallinen opetuskieli',
+    opetusaika: 'Opetusaika',
+    valitsePaaasiallinenOpetusaika: 'Valitse pääasiallinen opetusaika',
     paaasiallinenOpetustapa: 'Pääasiallinen opetustapa',
+    valitsePaaasiallinenOpetustapa: 'Valitse pääasiallinen opetustapa',
+    opetuksenMaksullisuus: 'Opetuksen maksullisuus',
     onkoOpetusMaksullista: 'Onko opetus maksullista?',
     onkoLukuvuosimaksua: 'Onko lukuvuosimaksua?',
-    onkoStipenditKaytossa: 'Onko stipendit käytössä?',
+    apuraha: 'Apuraha',
+    valitseKaytettavaApurahoitus: 'Valitse kaytettava apurahoitus',
+    stipendi: 'Stipendi',
+    eiKaytossa: 'Ei käytössä',
     koulutuksenAjankohta: 'Koulutuksen ajankohta',
     koulutuksenAlkamiskausi: 'Valitse alkamiskausi',
     koulutuksenAlkamisvuosi: 'Valitse vuosi',
@@ -402,6 +408,7 @@ export default {
     koulutuksenYhteystiedot: 'Koulutuksen yhteystiedot',
     toteutukseenLiitetytHakukohteet: 'Toteutukseen liitetyt hakukohteet',
     hakukohteenLiittaminen: 'Liitettävän hakukohteen luonti',
+    toteutuksenOsaamisalat: 'Toteutuksen osaamisalat',
     valitseOsaamisalat: 'Valitse osaamisalat',
     lisaaOsaamisala: 'Lisää osaamisala',
     koulutuksenNayttamiseenLiittyvatTiedot:
@@ -441,6 +448,7 @@ export default {
       'Valittuun koulutukseen <0>{{koulutusLinkText}}</0> liitetyllä ePerusteella <1>{{ePerusteLinkText}}</1> ei ole osaamisaloja.',
     koulutuksellaEiEPerustetta:
       'Valittuun koulutukseen ei ole liitetty ePerustetta.',
+    valitseMissaJarjestetaan: 'Valitse missä toteutus järjestetään',
   },
   hakulomake: {
     haunNimi: 'Haun nimi',
@@ -455,7 +463,6 @@ export default {
     ajastettuHaunJulkaisupaivamaara: 'Ajastettu haun julkaisupäivämäärä',
     haunYhteystiedot: 'Haun yhteystiedot',
     luoUusiHaku: 'Luo uusi haku',
-    kopioiPohjaksiHaku: 'Kopioi pohjaksi aiemmin luotu haku',
     liitetytHakukohteet: 'Liitetyt hakukohteet',
     hakuaika: 'Hakuaika',
     aikatauluTulevaisuudesta:
@@ -465,6 +472,8 @@ export default {
       'Tähän hakuun on liitetty seuraavat hakukohteet',
     haunTila: 'Haun tila',
     eiMuokkausOikeutta: 'Käyttäjälläsi ei ole oikeuksia muokata tätä hakua',
+    pohjavalintaInfo:
+      'Voit halutessasi käyttää aiemmin luotuja hakuja uuden lomakkeen esitäytettynä pohjana.',
   },
   hakukohdelomake: {
     toteutukseenLiitettyAlkamiskausi: 'Toteutukseen liitetty alkamiskausi',
@@ -515,6 +524,8 @@ export default {
       'Käyttäjälläsi ei ole oikeuksia muokata tätä hakukohdetta',
   },
   valintaperustelomake: {
+    valintaperuste: 'valintaperuste',
+    valintaperusteen: 'valintaperusteen',
     valintaperusteenPerustiedot: 'Valintaperusteen perustiedot',
     valintaperusteenNimi: 'Valintaperusteen nimi',
     valitseHakutapa: 'Valitse hakutapa',
@@ -536,8 +547,6 @@ export default {
     lisaaEhto: 'Lisää ehto',
     valintaperusteenKuvaus: 'Valintaperusteen kuvaus',
     luoUusiValintaperuste: 'Luo uusi valintaperuste',
-    kopioiPohjaksiValintaperuste:
-      'Kopioi pohjaksi aiemmin luotu valintaperuste',
     valitseTapa: 'Valitse tapa',
     valintatapajononNimi: 'Valintatapajonon nimi',
     valitseKoulutustyyppi: 'Valitse koulutustyyppi',
@@ -553,6 +562,8 @@ export default {
     valintakoe: 'Valintakoe',
     eiMuokkausOikeutta:
       'Käyttäjälläsi ei ole oikeuksia muokata tätä valintaperustekuvausta',
+    pohjavalintaInfo:
+      'Voit halutessasi käyttää aiemmin luotuja valintaperusteita uuden lomakkeen esitäytettynä pohjana.',
   },
   soraKuvausLomake: {
     soraKuvauksenTiedot: 'SORA-kuvauksen tiedot',
@@ -560,6 +571,8 @@ export default {
     soraKuvauksenNayttamiseenLiittyvatTiedot:
       'SORA-kuvauksen näyttämiseen liittyvät tiedot',
     soraKuvauksenTila: 'SORA-kuvauksen tila',
+    pohjavalintaInfo:
+      'Voit halutessasi käyttää aiemmin luotuja SORA-kuvauksia uuden lomakkeen esitäytettynä pohjana.',
   },
   oppilaitoslomake: {
     oppilaitoksenPerustiedot: 'Oppilaitoksen perustiedot',

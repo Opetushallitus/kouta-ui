@@ -68,18 +68,18 @@ describe('editHakukohdeForm', () => {
       ],
     });
 
-    cy.visit(
-      `/organisaatio/${organisaatioOid}/hakukohde/${hakukohdeOid}/muokkaus`,
-    );
-  });
-
-  it('should be able to edit hakukohde', () => {
     cy.route({
       method: 'GET',
       url: `**/hakukohde/${hakukohdeOid}`,
       response: merge(hakukohde(), testHakukohdeFields),
     });
 
+    cy.visit(
+      `/organisaatio/${organisaatioOid}/hakukohde/${hakukohdeOid}/muokkaus`,
+    );
+  });
+
+  it('should be able to edit hakukohde', () => {
     cy.route({
       method: 'POST',
       url: '**/hakukohde',

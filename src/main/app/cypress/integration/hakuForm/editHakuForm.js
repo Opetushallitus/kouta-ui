@@ -36,10 +36,6 @@ describe('editHakuForm', () => {
       response: [],
     });
 
-    cy.visit(`/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus`);
-  });
-
-  it('should be able to edit haku', () => {
     cy.route({
       method: 'GET',
       url: `**/haku/${hakuOid}`,
@@ -49,6 +45,10 @@ describe('editHakuForm', () => {
       }),
     });
 
+    cy.visit(`/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus`);
+  });
+
+  it('should be able to edit haku', () => {
     cy.route({
       method: 'POST',
       url: '**/haku',

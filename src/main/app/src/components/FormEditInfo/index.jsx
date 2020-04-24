@@ -6,7 +6,7 @@ import { getThemeProp } from '../../theme';
 import { formatKoutaDateString } from '../../utils';
 import Spacing from '../Spacing';
 import Anchor from '../Anchor';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 
 const InfoIcon = styled(Icon).attrs({ type: 'info' })`
   color: ${getThemeProp('palette.primary.main')};

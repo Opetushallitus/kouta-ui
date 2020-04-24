@@ -1,40 +1,11 @@
-import { get } from 'lodash';
-
-import { JULKAISUTILA } from '../constants';
-import createErrorBuilder from './createErrorBuilder';
-
-const getKielivalinta = values => get(values, 'kieliversiot') || [];
-
-const validateEssentials = ({ values, errorBuilder }) => {
-  const kielivalinta = getKielivalinta(values);
-
-  return errorBuilder
-    .validateArrayMinLength('kieliversiot', 1)
-    .validateTranslations('tiedot.nimi', kielivalinta);
-};
-
-const validateCommon = ({ values, errorBuilder }) => {
-  const kielivalinta = getKielivalinta(values);
-
-  return errorBuilder
-    .validateTranslations('tiedot.kuvaus', kielivalinta)
-    .validateExistence('koulutustyyppi');
-};
+import getSoraKuvausFormConfig from './getSoraKuvausFormConfig';
+import getErrorBuilderByFormConfig from './getErrorBuilderByFormConfig';
 
 const validateSoraKuvausForm = values => {
-  const { tila } = values;
-
-  let errorBuilder = createErrorBuilder(values);
-
-  errorBuilder = validateEssentials({ values, errorBuilder });
-
-  if (tila === JULKAISUTILA.TALLENNETTU) {
-    return errorBuilder.getErrors();
-  }
-
-  errorBuilder = validateCommon({ values, errorBuilder });
-
-  return errorBuilder.getErrors();
+  return getErrorBuilderByFormConfig(
+    getSoraKuvausFormConfig(),
+    values,
+  ).getErrors();
 };
 
 export default validateSoraKuvausForm;

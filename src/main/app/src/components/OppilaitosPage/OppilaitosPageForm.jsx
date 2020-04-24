@@ -7,12 +7,16 @@ import OppilaitosForm, {
   initialValues as formInitialValues,
 } from '../OppilaitosForm';
 
-import getFormValuesByOppilaitos from '../../utils/getFormValuesByOppilaitos';
-import getOrganisaatioContactInfo from '../../utils/getOrganisaatioContactInfo';
-import koodiUriHasVersion from '../../utils/koodiUriHasVersion';
+import getOppilaitosFormConfig from '#/src/utils/getOppilaitosFormConfig';
+import getFormValuesByOppilaitos from '#/src/utils/getFormValuesByOppilaitos';
+import getOrganisaatioContactInfo from '#/src/utils/getOrganisaatioContactInfo';
+import koodiUriHasVersion from '#/src/utils/koodiUriHasVersion';
+import FormConfigContext from '../FormConfigContext';
 
 const OppilaitosPageForm = ({ organisaatio, oppilaitos }) => {
   const organisaatioOid = get(organisaatio, 'oid');
+
+  const config = useMemo(() => getOppilaitosFormConfig(), []);
 
   const contactInfo = useMemo(() => getOrganisaatioContactInfo(organisaatio), [
     organisaatio,
@@ -42,15 +46,15 @@ const OppilaitosPageForm = ({ organisaatio, oppilaitos }) => {
   const showArkistoituTilaOption = !!oppilaitos;
 
   return (
-    <ReduxForm form="oppilaitos" initialValues={initialValues}>
-      {() => (
+    <FormConfigContext.Provider value={config}>
+      <ReduxForm form="oppilaitos" initialValues={initialValues}>
         <OppilaitosForm
           organisaatioOid={organisaatioOid}
           steps={stepsEnabled}
           showArkistoituTilaOption={showArkistoituTilaOption}
         />
-      )}
-    </ReduxForm>
+      </ReduxForm>
+    </FormConfigContext.Provider>
   );
 };
 

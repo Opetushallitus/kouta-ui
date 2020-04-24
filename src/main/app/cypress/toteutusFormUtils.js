@@ -14,6 +14,12 @@ export const stubToteutusFormRoutes = ({ cy, organisaatioOid, perusteId }) => {
 
   cy.route({
     method: 'GET',
+    url: `**/haku/list**`,
+    response: [],
+  });
+
+  cy.route({
+    method: 'GET',
     url: `**/organisaatio-service/rest/organisaatio/v4/hierarkia/hae?oid=${organisaatioOid}**`,
     response: organisaatioHierarkia({ rootOid: organisaatioOid }),
   });

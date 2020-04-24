@@ -4,7 +4,7 @@ import { isFunction, isString, isArray } from 'lodash';
 import Collapse from '../Collapse';
 import Button from '../Button';
 import { getTestIdProps } from '../../utils';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import LanguageTabs from './LanguageTabs';
 import Typography from '../Typography';
 import FormConfigSectionContext from '../FormConfigSectionContext';
@@ -26,7 +26,14 @@ const LanguageTabsWrapper = styled.div`
   padding-left: ${({ theme }) => theme.spacing.unit * 3}px;
 `;
 
-const renderChildren = ({ onContinue, children, language, section }) => {
+const renderChildren = ({
+  Component,
+  onContinue,
+  children,
+  language,
+  section,
+  childProps,
+}) => {
   const childrenProps = {
     onContinue,
     language,
@@ -38,6 +45,10 @@ const renderChildren = ({ onContinue, children, language, section }) => {
     renderedChildren = children(childrenProps);
   } else if (React.isValidElement(children)) {
     renderedChildren = React.cloneElement(children, childrenProps);
+  } else if (Component) {
+    renderedChildren = (
+      <Component name={section} language={language} {...childProps} />
+    );
   }
 
   return section ? (
@@ -112,6 +123,7 @@ const FormCollapse = ({
   section,
   isOpen,
   onToggle,
+  Component,
   ...props
 }) => {
   const { t } = useTranslation();
@@ -148,9 +160,17 @@ const FormCollapse = ({
       onToggle={onToggle}
       open={isOpen}
       toggleOnHeaderClick
+      {...(section ? getTestIdProps(`${section}Section`) : {})}
       {...props}
     >
-      {renderChildren({ onContinue, children, language, section })}
+      {renderChildren({
+        Component,
+        childProps: props,
+        onContinue,
+        children,
+        language,
+        section,
+      })}
     </Collapse>
   );
 };

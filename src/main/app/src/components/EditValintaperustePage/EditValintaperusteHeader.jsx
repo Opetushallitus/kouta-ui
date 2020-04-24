@@ -4,7 +4,7 @@ import { get } from 'lodash';
 import FormHeader from '../FormHeader';
 import StatusTag from '../StatusTag';
 import FormEditInfo from '../FormEditInfo';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 
 const EditValintaperusteHeader = ({ valintaperuste }) => {
   const { t } = useTranslation();

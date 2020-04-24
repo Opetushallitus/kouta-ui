@@ -17,7 +17,7 @@ import {
 
 import OrganisaatioTreeList from './OrganisaatioTreeList';
 import OrganisaatioFavouritesList from './OrganisaatioFavouritesList';
-import useTranslation from '../../useTranslation';
+import { useTranslation } from 'react-i18next';
 import useLanguage from '../../useLanguage';
 import { useOrganisaatiot } from '../../useOrganisaatio';
 import Input from '../../Input';

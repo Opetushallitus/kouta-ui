@@ -5,222 +5,261 @@ import createFormConfigBuilder from './createFormConfigBuilder';
 import {
   KOULUTUSTYYPPI,
   KOULUTUSTYYPIT,
-  JULKAISUTILA,
-  POHJAVALINTA,
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
 } from '../constants';
 
-const getKielivalinta = values => get(values, 'kieliversiot') || [];
+import {
+  validateIfJulkaistu,
+  getKielivalinta,
+  kieliversiotSectionConfig,
+  pohjaValintaSectionConfig,
+  tilaSectionConfig,
+} from '#/src/utils/formConfigUtils';
 
-const validateIfJulkaistu = validate => (eb, values, ...rest) => {
-  const { tila } = values;
-
-  return tila === JULKAISUTILA.JULKAISTU ? validate(eb, values, ...rest) : eb;
-};
-
-const config = createFormConfigBuilder()
-  .registerField('pohja', 'pohja', KOULUTUSTYYPIT, (eb, values) =>
-    get(values, 'pohja.tapa') === POHJAVALINTA.KOPIO
-      ? eb.validateExistence('pohja.valinta')
-      : eb,
-  )
-  .registerField('kieliversiot', 'kieliversiot', KOULUTUSTYYPIT, eb =>
-    eb.validateArrayMinLength('kieliversiot', 1),
-  )
-  .registerField(
-    'kuvaus',
-    'kuvaus',
-    without(KOULUTUSTYYPIT, KOULUTUSTYYPPI.LUKIOKOULUTUS),
-  )
-  .registerField(
-    'osaamisalaTarkenteet',
-    'osaamisalat',
-    TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
-  )
-  .registerField(
-    'osaamisalatYlempitutkinto',
-    'osaamisalat',
-    TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
-    validateIfJulkaistu((eb, values) =>
+const config = createFormConfigBuilder().registerSections([
+  pohjaValintaSectionConfig,
+  kieliversiotSectionConfig,
+  {
+    section: 'tiedot',
+    fragments: [],
+    parts: [
+      {
+        fragment: 'nimi',
+        field: '.nimi',
+        koulutustyypit: without(
+          KOULUTUSTYYPIT,
+          KOULUTUSTYYPPI.LUKIOKOULUTUS,
+          KOULUTUSTYYPPI.VALMA,
+          KOULUTUSTYYPPI.TELMA,
+          KOULUTUSTYYPPI.LUVA,
+          KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS,
+        ),
+        required: true,
+        validate: (eb, values) =>
+          eb.validateTranslations('tiedot.nimi', getKielivalinta(values)),
+      },
+      {
+        field: '.toteutuksenKuvaus',
+        koulutustyypit: without(KOULUTUSTYYPIT, KOULUTUSTYYPPI.LUKIOKOULUTUS),
+      },
+      {
+        field: '.ilmoittautumislinkki',
+        koulutustyypit: TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
+      },
+      {
+        field: '.laajuus',
+        koulutustyypit: TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
+      },
+      {
+        field: '.aloituspaikat',
+        koulutustyypit: without(
+          TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
+          KOULUTUSTYYPPI.VALMA,
+          KOULUTUSTYYPPI.TELMA,
+          KOULUTUSTYYPPI.LUVA,
+          KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS,
+        ),
+      },
+      {
+        field: '.kesto',
+        koulutustyypit: [
+          KOULUTUSTYYPPI.VALMA,
+          KOULUTUSTYYPPI.TELMA,
+          KOULUTUSTYYPPI.OSAAMISALA,
+          KOULUTUSTYYPPI.LUVA,
+          KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS,
+        ],
+      },
+    ],
+  },
+  {
+    section: 'lukiolinjat',
+    field: '.lukiolinja',
+    koulutustyypit: [KOULUTUSTYYPPI.LUKIOKOULUTUS],
+    validate: eb => eb.validateExistence('lukiolinjat.lukiolinja'),
+  },
+  {
+    section: 'tutkinnonOsat',
+    field: 'tutkinnonOsat',
+    koulutustyypit: [KOULUTUSTYYPPI.TUTKINNON_OSA],
+  },
+  {
+    section: 'toteutusjaksot',
+    field: 'toteutusjaksot',
+    koulutustyypit: [
+      KOULUTUSTYYPPI.AVOIN_YO,
+      KOULUTUSTYYPPI.AVOIN_AMK,
+      KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
+      KOULUTUSTYYPPI.TAYDENNYS_KOULUTUS,
+    ],
+  },
+  {
+    section: 'alemmanKorkeakoulututkinnonOsaamisalat',
+    koulutustyypit: TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
+    parts: [
+      {
+        field: 'alemmanKorkeakoulututkinnonOsaamisalat',
+        validate: validateIfJulkaistu((eb, values) =>
+          eb.validateArray('alemmanKorkeakoulututkinnonOsaamisalat', eb =>
+            eb.validateTranslations('nimi', getKielivalinta(values)),
+          ),
+        ),
+      },
+      {
+        field: '.nimi',
+        required: true,
+      },
+    ],
+  },
+  {
+    section: 'ylemmanKorkeakoulututkinnonOsaamisalat',
+    field: 'ylemmanKorkeakoulututkinnonOsaamisalat',
+    koulutustyypit: TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
+    validate: validateIfJulkaistu((eb, values) =>
       eb.validateArray('ylemmanKorkeakoulututkinnonOsaamisalat', eb =>
         eb.validateTranslations('nimi', getKielivalinta(values)),
       ),
     ),
-  )
-  .registerField(
-    'osaamisalatAlempitutkinto',
-    'osaamisalat',
-    TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
-    validateIfJulkaistu((eb, values) =>
-      eb.validateArray('alemmanKorkeakoulututkinnonOsaamisalat', eb =>
-        eb.validateTranslations('nimi', getKielivalinta(values)),
-      ),
+    required: true,
+  },
+  {
+    section: 'osaamisalat',
+    koulutustyypit: TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
+    field: 'osaamisalat',
+    parts: [
+      {
+        field: '.osaamisalatGroup',
+        required: true,
+      },
+      {
+        field: '.osaamisalat',
+      },
+    ],
+  },
+  {
+    section: 'jarjestamistiedot',
+    koulutustyypit: KOULUTUSTYYPIT,
+    field: 'jarjestamistiedot',
+    parts: [
+      {
+        field: '.opetuskieli',
+        validate: validateIfJulkaistu(eb =>
+          eb.validateArrayMinLength('jarjestamistiedot.opetuskieli', 1),
+        ),
+        required: true,
+      },
+      {
+        field: '.opetusaika',
+        validate: validateIfJulkaistu(eb =>
+          eb.validateArrayMinLength('jarjestamistiedot.opetusaika', 1),
+        ),
+        required: true,
+      },
+      {
+        field: '.opetusaikaKuvaus',
+      },
+      {
+        field: '.opetustapa',
+        validate: validateIfJulkaistu(eb =>
+          eb.validateExistence('jarjestamistiedot.opetustapa'),
+        ),
+        required: true,
+      },
+      {
+        field: '.maksullisuus.tyyppi',
+        validate: validateIfJulkaistu(eb =>
+          eb.validateExistence('jarjestamistiedot.maksullisuus.tyyppi'),
+        ),
+        required: true,
+      },
+      {
+        field: '.maksullisuus.maksu',
+        validate: validateIfJulkaistu((eb, values) =>
+          get(values, 'jarjestamistiedot.maksullisuus.tyyppi') === 'kylla'
+            ? eb.validateExistence('jarjestamistiedot.maksullisuus.maksu')
+            : eb,
+        ),
+      },
+      {
+        field: '.onkoStipendia',
+        required: true,
+      },
+      {
+        field: '.koulutuksenAlkamispaivaamara',
+        validate: validateIfJulkaistu(eb =>
+          eb.getValue('jarjestamistiedot.koulutuksenTarkkaAlkamisaika')
+            ? eb.validateExistence(
+                'jarjestamistiedot.koulutuksenAlkamispaivamaara',
+              )
+            : eb,
+        ),
+      },
+      {
+        field: '.koulutuksenPaattymispaivamaara',
+        validate: validateIfJulkaistu(eb =>
+          eb.getValue('jarjestamistiedot.koulutuksenTarkkaAlkamisaika')
+            ? eb.validateExistence(
+                'jarjestamistiedot.koulutuksenPaattymispaivamaara',
+              )
+            : eb,
+        ),
+        required: true,
+      },
+      {
+        field: '.koulutuksenAlkamiskausi',
+        validate: validateIfJulkaistu(eb =>
+          !eb.getValue('jarjestamistiedot.koulutuksenTarkkaAlkamisaika')
+            ? eb.validateExistence('jarjestamistiedot.koulutuksenAlkamiskausi')
+            : eb,
+        ),
+        required: true,
+      },
+      {
+        field: '.koulutuksenAlkamisvuosi',
+        validate: validateIfJulkaistu(eb =>
+          !eb.getValue('jarjestamistiedot.koulutuksenTarkkaAlkamisaika')
+            ? eb.validateExistence('jarjestamistiedot.koulutuksenAlkamisvuosi')
+            : eb,
+        ),
+      },
+      {
+        fragment: 'diplomi',
+        koulutustyypit: [KOULUTUSTYYPPI.LUKIOKOULUTUS],
+      },
+      {
+        fragment: 'kielivalikoima',
+        koulutustyypit: [KOULUTUSTYYPPI.LUKIOKOULUTUS],
+      },
+    ],
+  },
+  {
+    section: 'teemakuva',
+    field: 'teemakuva',
+    koulutustyypit: KOULUTUSTYYPIT,
+  },
+  {
+    section: 'nayttamistiedot',
+    koulutustyypit: KOULUTUSTYYPIT,
+    field: 'nayttamistiedot',
+  },
+  {
+    section: 'tarjoajat',
+    field: 'tarjoajat',
+    koulutustyypit: KOULUTUSTYYPIT,
+    validate: validateIfJulkaistu(eb =>
+      eb.validateArrayMinLength('tarjoajat', 1),
     ),
-  )
-  .registerField(
-    'tiedot',
-    'nimi',
-    without(
-      KOULUTUSTYYPIT,
-      KOULUTUSTYYPPI.LUKIOKOULUTUS,
-      KOULUTUSTYYPPI.VALMA,
-      KOULUTUSTYYPPI.TELMA,
-      KOULUTUSTYYPPI.LUVA,
-      KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS,
-    ),
-    (eb, values) =>
-      eb.validateTranslations('tiedot.nimi', getKielivalinta(values)),
-  )
-  .registerField(
-    'tiedot',
-    'toteutuksenKuvaus',
-    without(KOULUTUSTYYPIT, KOULUTUSTYYPPI.LUKIOKOULUTUS),
-  )
-  .registerField(
-    'tiedot',
-    'ilmoittautumislinkki',
-    TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
-  )
-  .registerField('tiedot', 'laajuus', TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT)
-  .registerField(
-    'tiedot',
-    'aloituspaikat',
-    without(
-      TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
-      KOULUTUSTYYPPI.VALMA,
-      KOULUTUSTYYPPI.TELMA,
-      KOULUTUSTYYPPI.LUVA,
-      KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS,
-    ),
-  )
-  .registerField('tiedot', 'kesto', [
-    KOULUTUSTYYPPI.VALMA,
-    KOULUTUSTYYPPI.TELMA,
-    KOULUTUSTYYPPI.OSAAMISALA,
-    KOULUTUSTYYPPI.LUVA,
-    KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS,
-  ])
-  .registerField(
-    'jarjestamistiedot',
-    'opetuskieli',
-    KOULUTUSTYYPIT,
-    validateIfJulkaistu(eb =>
-      eb.validateArrayMinLength('jarjestamistiedot.opetuskieli', 1),
-    ),
-  )
-  .registerField(
-    'jarjestamistiedot',
-    'opetusaika',
-    KOULUTUSTYYPIT,
-    validateIfJulkaistu(eb =>
-      eb.validateArrayMinLength('jarjestamistiedot.opetusaika', 1),
-    ),
-  )
-  .registerField(
-    'jarjestamistiedot',
-    'opetusaikaKuvaus',
-    KOULUTUSTYYPIT,
-    validateIfJulkaistu((eb, values) =>
-      eb.validateTranslations(
-        'jarjestamistiedot.opetusaikaKuvaus',
-        getKielivalinta(values),
-      ),
-    ),
-  )
-  .registerField(
-    'jarjestamistiedot',
-    'opetustapa',
-    KOULUTUSTYYPIT,
-    validateIfJulkaistu(eb =>
-      eb.validateExistence('jarjestamistiedot.opetustapa'),
-    ),
-  )
-  .registerField(
-    'jarjestamistiedot',
-    'maksullisuus',
-    KOULUTUSTYYPIT,
-    validateIfJulkaistu(eb =>
-      eb.validateExistence('jarjestamistiedot.maksullisuus.tyyppi'),
-    ),
-  )
-  .registerField('jarjestamistiedot', 'stipendi', KOULUTUSTYYPIT)
-  .registerField(
-    'jarjestamistiedot',
-    'koulutuksenAlkamispaivaamara',
-    KOULUTUSTYYPIT,
-    validateIfJulkaistu(eb =>
-      eb.getValue('jarjestamistiedot.koulutuksenTarkkaAlkamisaika')
-        ? eb.validateExistence('jarjestamistiedot.koulutuksenAlkamispaivamaara')
-        : eb,
-    ),
-  )
-  .registerField(
-    'jarjestamistiedot',
-    'koulutuksenPaattymispaivamaara',
-    KOULUTUSTYYPIT,
-    validateIfJulkaistu(eb =>
-      eb.getValue('jarjestamistiedot.koulutuksenTarkkaAlkamisaika')
-        ? eb.validateExistence(
-            'jarjestamistiedot.koulutuksenPaattymispaivamaara',
-          )
-        : eb,
-    ),
-  )
-  .registerField(
-    'jarjestamistiedot',
-    'koulutuksenAlkamiskausi',
-    KOULUTUSTYYPIT,
-    validateIfJulkaistu(eb =>
-      !eb.getValue('jarjestamistiedot.koulutuksenTarkkaAlkamisaika')
-        ? eb.validateExistence('jarjestamistiedot.koulutuksenAlkamiskausi')
-        : eb,
-    ),
-  )
-  .registerField(
-    'jarjestamistiedot',
-    'koulutuksenAlkamisvuosi',
-    KOULUTUSTYYPIT,
-    validateIfJulkaistu(eb =>
-      !eb.getValue('jarjestamistiedot.koulutuksenTarkkaAlkamisaika')
-        ? eb.validateExistence('jarjestamistiedot.koulutuksenAlkamisvuosi')
-        : eb,
-    ),
-  )
-  .registerField('jarjestamistiedot', 'osiot', KOULUTUSTYYPIT)
-  .registerField('jarjestamistiedot', 'diplomi', [KOULUTUSTYYPPI.LUKIOKOULUTUS])
-  .registerField('jarjestamistiedot', 'kielivalikoima', [
-    KOULUTUSTYYPPI.LUKIOKOULUTUS,
-  ])
-  .registerField('teemakuva', 'teemakuva', KOULUTUSTYYPIT)
-  .registerField('nayttamistiedot', 'ammattinimikkeet', KOULUTUSTYYPIT)
-  .registerField('nayttamistiedot', 'avainsanat', KOULUTUSTYYPIT)
-  .registerField(
-    'jarjestamispaikat',
-    'jarjestamispaikat',
-    KOULUTUSTYYPIT,
-    validateIfJulkaistu(eb => eb.validateArrayMinLength('tarjoajat', 1)),
-  )
-  .registerField('yhteystiedot', 'yhteyshenkilot', KOULUTUSTYYPIT)
-  .registerField(
-    'lukiolinjat',
-    'lukiolinja',
-    [KOULUTUSTYYPPI.LUKIOKOULUTUS],
-    eb => eb.validateExistence('lukiolinjat.lukiolinja'),
-  )
-  .registerField('julkaisutila', 'julkaisutila', KOULUTUSTYYPIT, eb =>
-    eb.validateExistence('tila'),
-  )
-  .registerField('toteutusjaksot', 'toteutusjaksot', [
-    KOULUTUSTYYPPI.AVOIN_YO,
-    KOULUTUSTYYPPI.AVOIN_AMK,
-    KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
-    KOULUTUSTYYPPI.TAYDENNYS_KOULUTUS,
-  ])
-  .registerField('tutkinnonOsat', 'tutkinnonOsat', [
-    KOULUTUSTYYPPI.TUTKINNON_OSA,
-  ]);
+    required: true,
+  },
+  {
+    section: 'yhteyshenkilot',
+    field: 'yhteyshenkilot',
+    koulutustyypit: KOULUTUSTYYPIT,
+  },
+  tilaSectionConfig,
+]);
 
 const getToteutusFormConfig = koulutustyyppi => {
   return config.getKoulutustyyppiConfig(koulutustyyppi);

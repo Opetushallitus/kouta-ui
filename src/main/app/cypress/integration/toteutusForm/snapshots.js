@@ -404,7 +404,7 @@ module.exports = {
       }
     }
   },
-  "__version": "4.1.0",
+  "__version": "4.4.1",
   "editToteutusForm": {
     "should be able to edit ammatillinen toteutus": {
       "1": {

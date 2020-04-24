@@ -2,17 +2,16 @@ import React from 'react';
 import FormCollapse from '../FormCollapse';
 import FormCollapseGroup from '../FormCollapseGroup';
 import ValintatapaSection from './ValintatapaSection';
-import PohjaSection from './PohjaSection';
 import KuvausSection from './KuvausSection';
-import useTranslation from '../useTranslation';
-import { getTestIdProps } from '../../utils';
+import { useTranslation } from 'react-i18next';
 import SoraKuvausSection from './SoraKuvausSection';
 import useFieldValue from '../useFieldValue';
 import PerustiedotSection from './PerustiedotSection';
 import JulkisuusSection from './JulkisuusSection';
-import JulkaisutilaSection from './JulkaisutilaSection';
+import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import ValintakoeSection from './ValintakoeSection';
 import PohjaFormCollapse from '../PohjaFormCollapse';
+import getValintaperusteet from '#/src/utils/kouta/getValintaperusteet';
 
 const ValintaperusteForm = ({
   steps = true,
@@ -32,79 +31,66 @@ const ValintaperusteForm = ({
         section="perustiedot"
         header={t('valintaperustelomake.valintaperusteenPerustiedot')}
         scrollOnActive={false}
-        {...getTestIdProps('perustiedotSection')}
-      >
-        <PerustiedotSection canEditTyyppi={canEditTyyppi} name="perustiedot" />
-      </FormCollapse>
+        Component={PerustiedotSection}
+        canEditTyyppi={canEditTyyppi}
+      />
 
       {canSelectBase ? (
         <PohjaFormCollapse
-          section="pohja"
-          header={t('yleiset.pohjanValinta')}
           onSelectBase={onSelectBase}
-          {...getTestIdProps('pohjaSection')}
-        >
-          <PohjaSection organisaatioOid={organisaatioOid} name="pohja" />
-        </PohjaFormCollapse>
+          organisaatioOid={organisaatioOid}
+          getCopyEntities={getValintaperusteet}
+          infoText={t('valintaperustelomake.pohjavalintaInfo')}
+          createLabel={t('yleiset.luoUusi', {
+            entity: t('yleiset.valintaperuste'),
+          })}
+          copyLabel={t('yleiset.kopioiPohjaksi', {
+            entity: t('yleiset.valintaperuste'),
+          })}
+        />
       ) : null}
 
       <FormCollapse
         section="kuvaus"
         header={t('valintaperustelomake.valintaperusteenKuvaus')}
         languages={languages}
-        {...getTestIdProps('kuvausSection')}
-      >
-        <KuvausSection name="kuvaus" />
-      </FormCollapse>
+        Component={KuvausSection}
+      />
 
       <FormCollapse
-        section="valintatapa"
+        section="valintatavat"
         header={t('valintaperustelomake.valintatapa')}
         languages={languages}
-        {...getTestIdProps('valintatapaSection')}
-      >
-        <ValintatapaSection name="valintatavat" />
-      </FormCollapse>
+        Component={ValintatapaSection}
+      />
 
       <FormCollapse
         section="valintakoe"
         header={t('valintaperustelomake.valintakoe')}
         languages={languages}
-        {...getTestIdProps('valintakoeSection')}
-      >
-        <ValintakoeSection name="valintakoe" />
-      </FormCollapse>
+        Component={ValintakoeSection}
+      />
 
       <FormCollapse
         section="soraKuvaus"
         header={t('yleiset.soraKuvaus')}
-        {...getTestIdProps('soraKuvausSection')}
-      >
-        <SoraKuvausSection
-          name="soraKuvaus"
-          organisaatioOid={organisaatioOid}
-          languages={languages}
-        />
-      </FormCollapse>
+        Component={SoraKuvausSection}
+        organisaatioOid={organisaatioOid}
+        languages={languages}
+      />
 
       <FormCollapse
-        section="julkisuus"
+        section="julkinen"
         header={t('valintaperustelomake.valintaperusteenNakyminen')}
-        {...getTestIdProps('julkisuusSection')}
-      >
-        <JulkisuusSection name="julkinen" />
-      </FormCollapse>
+        Component={JulkisuusSection}
+      />
 
       <FormCollapse
-        section="julkaisutila"
+        section="tila"
         header={t('valintaperustelomake.valintaperusteenTila')}
-        {...getTestIdProps('tilaSection')}
-      >
-        <JulkaisutilaSection
-          name="tila"
-          showArkistoitu={showArkistoituTilaOption}
-        />
-      </FormCollapse>
+        Component={JulkaisutilaField}
+        showArkistoitu={showArkistoituTilaOption}
+      />
     </FormCollapseGroup>
   );
 };

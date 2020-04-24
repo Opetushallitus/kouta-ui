@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 import { get } from 'lodash';
 
 import Spacing from '../Spacing';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import useKoodistoOptions from '../useKoodistoOptions';
 import { getTestIdProps } from '../../utils';
 import { FormFieldTextarea, FormFieldSelect } from '../formFields';

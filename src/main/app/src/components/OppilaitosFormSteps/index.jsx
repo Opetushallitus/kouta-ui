@@ -2,7 +2,7 @@ import React from 'react';
 
 import Box from '../Box';
 import FormStepIcon from '../FormStepIcon';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 
 const OppilaitosFormSteps = ({ activeStep = 'oppilaitos' }) => {
   const { t } = useTranslation();

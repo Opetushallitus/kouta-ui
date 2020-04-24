@@ -40,21 +40,21 @@ const fillKieliversiotSection = () => {
 const fillOpetuskieli = () => {
   cy.getByTestId('opetuskieli').within(() => {
     getCheckbox('oppilaitoksenopetuskieli_0#1', cy).click({ force: true });
-    cy.get('textarea').type('opetuskieli kuvaus', { force: true });
+    cy.get('textarea').paste('opetuskieli kuvaus');
   });
 };
 
 const fillOpetusaika = () => {
   cy.getByTestId('opetusaika').within(() => {
     getCheckbox('opetusaikakk_0#1', cy).click({ force: true });
-    cy.get('textarea').type('opetusaika kuvaus', { force: true });
+    cy.get('textarea').paste('opetusaika kuvaus');
   });
 };
 
 const fillOpetustapa = () => {
   cy.getByTestId('opetustapa').within(() => {
     getCheckbox('opetuspaikkakk_0#1', cy).click({ force: true });
-    cy.get('textarea').type('opetustapa kuvaus', { force: true });
+    cy.get('textarea').paste('opetustapa kuvaus');
   });
 };
 
@@ -63,10 +63,10 @@ const fillMaksullisuus = tyyppi => {
     getRadio(tyyppi, cy).click({ force: true });
     cy.getByTestId('maksu')
       .find('input')
-      .type('10', { force: true });
+      .paste('10');
 
     cy.getByTestId('maksullisuusKuvaus').within(() => {
-      cy.get('textarea').type('maksullisuus kuvaus', { force: true });
+      cy.get('textarea').paste('maksullisuus kuvaus');
     });
   });
 };
@@ -76,8 +76,8 @@ const fillStipendi = () => {
     getRadio('kylla', cy).click({ force: true });
     cy.getByTestId('stipendinMaara')
       .find('input')
-      .type('20');
-    cy.get('textarea').type('stipendi kuvaus', { force: true });
+      .paste('20');
+    cy.get('textarea').paste('stipendi kuvaus');
   });
 };
 
@@ -101,7 +101,7 @@ const fillOsiot = () => {
 
   cy.getByTestId('osioKuvaus.koulutuksenlisatiedot_0#1')
     .find('textarea')
-    .type('koulutuksenlisatiedot_0 kuvaus', { force: true });
+    .paste('koulutuksenlisatiedot_0 kuvaus');
 };
 
 const fillCommonJarjestamistiedot = ({ maksullisuusTyyppi = 'kylla' } = {}) => {
@@ -138,7 +138,7 @@ const tallenna = () => {
 };
 
 const fillJarjestajatSection = () => {
-  cy.getByTestId('jarjestamispaikatSection').within(() => {
+  cy.getByTestId('tarjoajatSection').within(() => {
     cy.getByTestId('jarjestamispaikatSelection').within(() => {
       fillTreeSelect(['1.2.2.1.1.1'], cy);
     });
@@ -152,35 +152,35 @@ const fillTiedotSection = () => {
     cy.getByTestId('toteutuksenNimi')
       .find('input')
       .clear({ force: true })
-      .type('toteutuksen nimi', { force: true });
+      .paste('toteutuksen nimi');
 
     cy.getByTestId('toteutuksenKuvaus')
       .find('textarea')
-      .type('Toteutuksen kuvaus', { force: true });
+      .paste('Toteutuksen kuvaus');
 
     jatka();
   });
 };
 
 const fillYhteystiedotSection = () => {
-  cy.getByTestId('yhteystiedotSection').within(() => {
+  cy.getByTestId('yhteyshenkilotSection').within(() => {
     cy.getByTestId('lisaaYhteyshenkiloButton').click({ force: true });
 
     cy.getByTestId('nimi')
       .find('input')
-      .type('nimi', { force: true });
+      .paste('nimi');
     cy.getByTestId('titteli')
       .find('input')
-      .type('titteli', { force: true });
+      .paste('titteli');
     cy.getByTestId('sahkoposti')
       .find('input')
-      .type('sähkoposti', { force: true });
+      .paste('sähkoposti');
     cy.getByTestId('puhelinnumero')
       .find('input')
-      .type('puhelin', { force: true });
+      .paste('puhelin');
     cy.getByTestId('verkkosivu')
       .find('input')
-      .type('verkkosivu', { force: true });
+      .paste('verkkosivu');
 
     jatka();
   });
@@ -190,16 +190,16 @@ const fillKkOsaamisalat = () => {
   cy.getByTestId('lisaaOsaamisalaButton').click({ force: true });
   cy.getByTestId('osaamisalanNimi')
     .find('input')
-    .type('osaamisalan nimi', { force: true });
+    .paste('osaamisalan nimi');
   cy.getByTestId('osaamisalanKuvaus')
     .find('textarea')
-    .type('osaamisalan kuvaus', { force: true });
+    .paste('osaamisalan kuvaus');
   cy.getByTestId('osaamisalanLinkki')
     .find('input')
-    .type('linkki', { force: true });
+    .paste('linkki');
   cy.getByTestId('osaamisalanOtsikko')
     .find('input')
-    .type('osaamisalan otsikko', { force: true });
+    .paste('osaamisalan otsikko');
 };
 
 const fillLukiolinjatSection = () => {
@@ -219,7 +219,7 @@ const fillDiplomi = () => {
 
   cy.getByTestId('diplomiKuvaus')
     .find('textarea')
-    .type('Diplomi kuvaus', { force: true });
+    .paste('Diplomi kuvaus');
 };
 
 const fillKielivalikoima = () => {
@@ -248,7 +248,7 @@ const fillKielivalikoima = () => {
   });
 };
 
-describe('createToteutusForm', () => {
+const prepareTest = tyyppi => {
   const organisaatioOid = '1.1.1.1.1.1';
   const koulutusOid = '1.2.1.1.1.1';
   const perusteId = '1';
@@ -260,20 +260,18 @@ describe('createToteutusForm', () => {
     tarjoajat: ['1.2.2.1.1.1'],
   };
 
-  beforeEach(() => {
-    stubToteutusFormRoutes({ cy, perusteId, organisaatioOid });
-
-    cy.visit(
-      `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/toteutus`,
-    );
+  stubToteutusFormRoutes({ cy, perusteId, organisaatioOid });
+  cy.route({
+    method: 'GET',
+    url: `**/koulutus/${koulutusOid}`,
+    response: merge(koulutus({ tyyppi }), testKoulutusFields),
   });
+  cy.visit(`/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/toteutus`);
+};
 
+describe('createToteutusForm', () => {
   it('should be able to create ammatillinen toteutus', () => {
-    cy.route({
-      method: 'GET',
-      url: `**/koulutus/${koulutusOid}`,
-      response: merge(koulutus({ tyyppi: 'amm' }), testKoulutusFields),
-    });
+    prepareTest('amm');
 
     cy.route({
       method: 'PUT',
@@ -296,11 +294,11 @@ describe('createToteutusForm', () => {
 
       cy.getByTestId('osaamisalaLinkki.osaamisala_0')
         .find('input')
-        .type('osaamisala_0 linkki', { force: true });
+        .paste('osaamisala_0 linkki');
 
       cy.getByTestId('osaamisalaOtsikko.osaamisala_0')
         .find('input')
-        .type('osaamisala_0 otsikko', { force: true });
+        .paste('osaamisala_0 otsikko');
 
       jatka();
     });
@@ -324,11 +322,7 @@ describe('createToteutusForm', () => {
   });
 
   it('should be able to create korkeakoulu toteutus', () => {
-    cy.route({
-      method: 'GET',
-      url: `**/koulutus/${koulutusOid}`,
-      response: merge(koulutus({ tyyppi: 'yo' }), testKoulutusFields),
-    });
+    prepareTest('yo');
 
     cy.route({
       method: 'PUT',
@@ -342,15 +336,19 @@ describe('createToteutusForm', () => {
     fillKieliversiotSection();
     fillTiedotSection();
 
-    cy.getByTestId('alempiOsaamisalatSection').within(() => {
-      fillKkOsaamisalat();
-      jatka();
-    });
+    cy.getByTestId('alemmanKorkeakoulututkinnonOsaamisalatSection').within(
+      () => {
+        fillKkOsaamisalat();
+        jatka();
+      },
+    );
 
-    cy.getByTestId('ylempiOsaamisalatSection').within(() => {
-      fillKkOsaamisalat();
-      jatka();
-    });
+    cy.getByTestId('ylemmanKorkeakoulututkinnonOsaamisalatSection').within(
+      () => {
+        fillKkOsaamisalat();
+        jatka();
+      },
+    );
 
     cy.getByTestId('jarjestamistiedotSection').within(() => {
       fillCommonJarjestamistiedot({ maksullisuusTyyppi: 'lukuvuosimaksu' });
@@ -372,11 +370,7 @@ describe('createToteutusForm', () => {
   });
 
   it('should be able to create lukio toteutus', () => {
-    cy.route({
-      method: 'GET',
-      url: `**/koulutus/${koulutusOid}`,
-      response: merge(koulutus({ tyyppi: 'lk' }), testKoulutusFields),
-    });
+    prepareTest('lk');
 
     cy.route({
       method: 'PUT',

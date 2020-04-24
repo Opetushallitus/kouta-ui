@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { cond, noop } from 'lodash';
 import prettyBytes from 'pretty-bytes';
 import { getThemeProp, spacing } from '../../theme';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import Typography from '../Typography';
 import Flex, { FlexItem } from '../Flex';
 import Icon from '../Icon';

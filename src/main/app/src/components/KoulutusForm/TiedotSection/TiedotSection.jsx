@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Field, change, isDirty as formIsDirty } from 'redux-form';
 import { get, each, find, toLower } from 'lodash';
 
-import FormConfigField from '../../FormConfigField';
+import FormConfigFragment from '../../FormConfigFragment';
 import KoulutuksenTiedotSection from './KoulutuksenTiedotSection';
 import KoulutusField from '../KoulutusField';
 import Box from '../../Box';
 import OpintojenlaajuusField from './OpintojenlaajuusField';
 import TutkintonimikeField from './TutkintonimikeField';
 import KoulutusalatField from './KoulutusalatField';
-import useTranslation from '../../useTranslation';
+import { useTranslation } from 'react-i18next';
 import { FormFieldInput } from '../../formFields';
 import { getTestIdProps } from '../../../utils';
 import FormNameContext from '../../FormNameContext';
@@ -80,7 +80,7 @@ const TiedotSection = ({
 
   return (
     <Box mb={-2}>
-      <FormConfigField name="koulutuskoodiTiedoilla">
+      <FormConfigFragment name="koulutuskoodiTiedoilla">
         <Box mb={2}>
           <KoulutuksenTiedotSection
             disabled={disabled}
@@ -90,9 +90,9 @@ const TiedotSection = ({
             name={name}
           />
         </Box>
-      </FormConfigField>
+      </FormConfigFragment>
 
-      <FormConfigField name="osaamisala">
+      <FormConfigFragment name="osaamisala">
         <Box mb={2}>
           <KoulutuksenTiedotSection
             disabled={disabled}
@@ -104,9 +104,9 @@ const TiedotSection = ({
             name={name}
           />
         </Box>
-      </FormConfigField>
+      </FormConfigFragment>
 
-      <FormConfigField name="koulutuskoodi">
+      <FormConfigFragment name="koulutuskoodi">
         <Box mb={2} {...getTestIdProps('koulutuskoodiSelect')}>
           <KoulutusField
             disabled={disabled}
@@ -115,36 +115,28 @@ const TiedotSection = ({
             language={language}
           />
         </Box>
-      </FormConfigField>
+      </FormConfigFragment>
 
-      <FormConfigField name="opintojenlaajuus">
-        <Box mb={2}>
-          <OpintojenlaajuusField disabled={disabled} name={name} />
-        </Box>
-      </FormConfigField>
+      <Box mb={2}>
+        <OpintojenlaajuusField disabled={disabled} name={name} />
+      </Box>
 
-      <FormConfigField name="tutkintonimike">
-        <Box mb={2}>
-          <TutkintonimikeField disabled={disabled} name={name} />
-        </Box>
-      </FormConfigField>
+      <Box mb={2}>
+        <TutkintonimikeField disabled={disabled} name={name} />
+      </Box>
 
-      <FormConfigField name="koulutusalat">
-        <Box mb={2}>
-          <KoulutusalatField disabled={disabled} name={name} />
-        </Box>
-      </FormConfigField>
+      <Box mb={2}>
+        <KoulutusalatField disabled={disabled} name={name} />
+      </Box>
 
-      <FormConfigField name="nimi">
-        <Box mb={2} {...getTestIdProps('nimiInput')}>
-          <Field
-            disabled={disabled}
-            name={`${name}.nimi.${language}`}
-            component={FormFieldInput}
-            label={t('koulutuslomake.muokkaaKoulutuksenNimea')}
-          />
-        </Box>
-      </FormConfigField>
+      <Box mb={2} {...getTestIdProps('nimiInput')}>
+        <Field
+          disabled={disabled}
+          name={`${name}.nimi.${language}`}
+          component={FormFieldInput}
+          label={t('koulutuslomake.muokkaaKoulutuksenNimea')}
+        />
+      </Box>
     </Box>
   );
 };

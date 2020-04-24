@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { sortBy } from 'lodash';
 
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import Tabs, { Tab } from '../Tabs';
 
 const sortOrder = ['fi', 'sv', 'en'];

@@ -8,7 +8,7 @@ import ValintaperusteFormWrapper from './ValintaperusteFormWrapper';
 import CreateValintaperusteFooter from './CreateValintaperusteFooter';
 import useSelectBase from '../useSelectBase';
 import Title from '../Title';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import ReduxForm from '#/src/components/ReduxForm';
 import { POHJAVALINTA } from '#/src/constants';
 import getFormValuesByValintaperuste from '#/src/utils/getFormValuesByValintaperuste';
@@ -71,28 +71,24 @@ const CreateValintaperustePage = props => {
       enableReinitialize
       initialValues={initialValues}
     >
-      {() => (
-        <>
-          <Title>{t('sivuTitlet.uusiValintaperuste')}</Title>
-          <FormPage
-            header={<CreateValintaperusteHeader />}
-            steps={<CreateValintaperusteSteps />}
-            footer={<CreateValintaperusteFooter organisaatioOid={oid} />}
-          >
-            <TopInfoContainer>
-              <OrganisaatioInfo organisaatioOid={oid} />
-            </TopInfoContainer>
-            <ValintaperusteFormWrapper
-              steps
-              organisaatioOid={oid}
-              kopioValintaperusteOid={kopioValintaperusteOid}
-              onSelectBase={selectBase}
-              showArkistoituTilaOption={false}
-              kieliValinnat={kieliValinnatLista}
-            />
-          </FormPage>
-        </>
-      )}
+      <Title>{t('sivuTitlet.uusiValintaperuste')}</Title>
+      <FormPage
+        header={<CreateValintaperusteHeader />}
+        steps={<CreateValintaperusteSteps />}
+        footer={<CreateValintaperusteFooter organisaatioOid={oid} />}
+      >
+        <TopInfoContainer>
+          <OrganisaatioInfo organisaatioOid={oid} />
+        </TopInfoContainer>
+        <ValintaperusteFormWrapper
+          steps
+          organisaatioOid={oid}
+          kopioValintaperusteOid={kopioValintaperusteOid}
+          onSelectBase={selectBase}
+          showArkistoituTilaOption={false}
+          kieliValinnat={kieliValinnatLista}
+        />
+      </FormPage>
     </ReduxForm>
   );
 };

@@ -4,7 +4,7 @@ import { isArray } from 'lodash';
 import Typography from '../Typography';
 import Spacing from '../Spacing';
 import { formatKoutaDateString } from '../../utils';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import { FormFieldCheckbox } from '../formFields';
 import useFieldValue from '../useFieldValue';
 import HakuajatFields from '../HakuajatFields';

@@ -9,10 +9,9 @@ import ValintakoeSection from './ValintakoeSection';
 import LiitteetSection from './LiitteetSection';
 import FormCollapseGroup from '../FormCollapseGroup';
 import KuvausSection from './KuvausSection';
-import useTranslation from '../useTranslation';
-import { getTestIdProps } from '../../utils';
+import { useTranslation } from 'react-i18next';
 import useFieldValue from '../useFieldValue';
-import JulkaisutilaSection from './JulkaisutilaSection';
+import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 
 const HakukohdeForm = ({
   steps = true,
@@ -32,89 +31,64 @@ const HakukohdeForm = ({
         section="kieliversiot"
         header={t('yleiset.kieliversiot')}
         scrollOnActive={false}
-        {...getTestIdProps('kieliversiotSection')}
-      >
-        <KieliversiotFields name="kieliversiot" />
-      </FormCollapse>
+        Component={KieliversiotFields}
+      />
 
       <FormCollapse
-        section="pohjakoulutusvaatimus"
+        section="pohjakoulutus"
         header={t('hakukohdelomake.pohjakoulutusvaatimus')}
         languages={languages}
-        {...getTestIdProps('pohjakoulutusvaatimusSection')}
-      >
-        <PohjakoulutusSection
-          name="pohjakoulutus"
-          koulutustyyppi={koulutustyyppi}
-        />
-      </FormCollapse>
+        Component={PohjakoulutusSection}
+        koulutustyyppi={koulutustyyppi}
+      />
 
       <FormCollapse
         section="perustiedot"
         header={t('hakukohdelomake.hakukohteenPerustiedot')}
         languages={languages}
-        {...getTestIdProps('perustiedotSection')}
-      >
-        <PerustiedotSection
-          name="perustiedot"
-          koulutustyyppi={koulutustyyppi}
-          haku={haku}
-          toteutus={toteutus}
-        />
-      </FormCollapse>
+        Component={PerustiedotSection}
+        koulutustyyppi={koulutustyyppi}
+        haku={haku}
+        toteutus={toteutus}
+      />
 
       <FormCollapse
         section="aloituspaikat"
         header={t('hakukohdelomake.aloituspaikat')}
-        {...getTestIdProps('aloituspaikatSection')}
-      >
-        <AloituspaikatSection
-          name="aloituspaikat"
-          koulutustyyppi={koulutustyyppi}
-        />
-      </FormCollapse>
+        Component={AloituspaikatSection}
+        koulutustyyppi={koulutustyyppi}
+      />
 
       <FormCollapse
         section="valintaperusteenKuvaus"
         header={t('hakukohdelomake.valintaperusteenKuvaus')}
-        {...getTestIdProps('valintaperusteenKuvausSection')}
-      >
-        <KuvausSection
-          organisaatioOid={organisaatioOid}
-          name="valintaperusteenKuvaus"
-          haku={haku}
-          languages={languages}
-        />
-      </FormCollapse>
+        Component={KuvausSection}
+        organisaatioOid={organisaatioOid}
+        haku={haku}
+        languages={languages}
+      />
 
       <FormCollapse
         section="valintakoe"
         header={t('hakukohdelomake.valintakoe')}
         languages={languages}
-        {...getTestIdProps('valintakoeSection')}
-      >
-        <ValintakoeSection name="valintakoe" />
-      </FormCollapse>
+        Component={ValintakoeSection}
+      />
 
       <FormCollapse
         section="liitteet"
         header={t('hakukohdelomake.tarvittavatLiitteet')}
         languages={languages}
-        {...getTestIdProps('liitteetSection')}
-      >
-        <LiitteetSection name="liitteet" organisaatioOid={organisaatioOid} />
-      </FormCollapse>
+        Component={LiitteetSection}
+        organisaatioOid={organisaatioOid}
+      />
 
       <FormCollapse
-        section="julkaisutila"
+        section="tila"
         header={t('hakukohdelomake.hakukohteenTila')}
-        {...getTestIdProps('tilaSection')}
-      >
-        <JulkaisutilaSection
-          name="tila"
-          showArkistoitu={showArkistoituTilaOption}
-        />
-      </FormCollapse>
+        Component={JulkaisutilaField}
+        showArkistoitu={showArkistoituTilaOption}
+      />
     </FormCollapseGroup>
   );
 };

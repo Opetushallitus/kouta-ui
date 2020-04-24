@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import UiDatePickerInput from '@opetushallitus/virkailija-ui-components/DatePickerInput';
 
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 
 const monthKeys = [
   'tammikuu',

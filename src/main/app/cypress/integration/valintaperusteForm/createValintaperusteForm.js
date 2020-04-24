@@ -73,7 +73,7 @@ const fillValintakoeSection = () => {
 };
 
 const fillValintatapaSection = () => {
-  cy.getByTestId('valintatapaSection').within(() => {
+  cy.getByTestId('valintatavatSection').within(() => {
     cy.getByTestId('valintatapalista').within(() => {
       cy.getByTestId('tapa').within(() => {
         selectOption('valintatapajono_0', cy);
@@ -81,7 +81,7 @@ const fillValintatapaSection = () => {
 
       cy.getByTestId('nimi')
         .find('input')
-        .type('Valintatavan nimi', { force: true });
+        .paste('Valintatavan nimi', { force: true });
 
       cy.getByTestId('sisalto').within(() => {
         lisaaSisaltoa('teksti', cy);
@@ -102,13 +102,13 @@ const fillValintatapaSection = () => {
 
       cy.getByTestId('kynnysehto')
         .find('textarea')
-        .type('Kynnysehto');
+        .paste('Kynnysehto');
       cy.getByTestId('enimmaispistemaara')
         .find('input')
-        .type('100');
+        .paste('100');
       cy.getByTestId('vahimmaispistemaara')
         .find('input')
-        .type('10');
+        .paste('10');
     });
 
     jatka();
@@ -119,7 +119,7 @@ const fillKuvausSection = () => {
   cy.getByTestId('kuvausSection').within(() => {
     cy.getByTestId('nimi')
       .find('input')
-      .type('Valintaperusteen nimi', { force: true });
+      .paste('Valintaperusteen nimi', { force: true });
 
     cy.getByTestId('kuvaus').within(() => {
       typeToEditor('Kuvaus', cy);
@@ -138,7 +138,7 @@ const fillSoraKuvausSection = () => {
 };
 
 const fillJulkisuusSection = () => {
-  cy.getByTestId('julkisuusSection').within(() => {
+  cy.getByTestId('julkinenSection').within(() => {
     getCheckbox(null, cy).check({ force: true });
     jatka();
   });

@@ -5,7 +5,7 @@ import { get } from 'lodash';
 import { getEPerusteById } from '../../../apiUtils';
 import Typography from '../../Typography';
 import { getLanguageValue } from '../../../utils';
-import useTranslation from '../../useTranslation';
+import { useTranslation } from 'react-i18next';
 import useApiAsync from '../../useApiAsync';
 import FormLabel from '../../FormLabel';
 import useFieldValue from '../../useFieldValue';

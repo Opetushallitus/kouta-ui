@@ -19,7 +19,7 @@ import {
   HAKUKOHDE_ROLE,
 } from '../../constants';
 
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import getUserRoles from '../../utils/getUserRoles';
 import getRoleOrganisaatioOid from '../../utils/getRoleOrganisaatioOid';
 import Title from '../Title';

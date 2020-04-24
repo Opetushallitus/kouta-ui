@@ -1,14 +1,13 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import {
   FormFieldInput,
   FormFieldSelect,
   FormFieldTextarea,
 } from '../formFields';
 import Box from '../Box';
-import FormConfigField from '../FormConfigField';
 import useKoodistoOptions from '../useKoodistoOptions';
 import { getTestIdProps } from '../../utils';
 
@@ -48,62 +47,50 @@ const TiedotSection = ({ language, name }) => {
 
   return (
     <>
-      <FormConfigField name="nimi">
-        <Box mb={2} {...getTestIdProps('toteutuksenNimi')}>
-          <Field
-            name={`${name}.nimi.${language}`}
-            component={FormFieldInput}
-            label={t('toteutuslomake.toteutuksenNimi')}
-          />
-        </Box>
-      </FormConfigField>
+      <Box mb={2} {...getTestIdProps('toteutuksenNimi')}>
+        <Field
+          name={`${name}.nimi.${language}`}
+          component={FormFieldInput}
+          label={t('toteutuslomake.toteutuksenNimi')}
+        />
+      </Box>
 
-      <FormConfigField name="toteutuksenKuvaus">
-        <Box mb={2} {...getTestIdProps('toteutuksenKuvaus')}>
-          <Field
-            name={`${name}.toteutuksenKuvaus.${language}`}
-            component={FormFieldTextarea}
-            label={t('yleiset.toteutuksenKuvaus')}
-          />
-        </Box>
-      </FormConfigField>
+      <Box mb={2} {...getTestIdProps('toteutuksenKuvaus')}>
+        <Field
+          name={`${name}.toteutuksenKuvaus.${language}`}
+          component={FormFieldTextarea}
+          label={t('yleiset.toteutuksenKuvaus')}
+        />
+      </Box>
 
-      <FormConfigField name="ilmoittautumislinkki">
-        <Box mb={2} {...getTestIdProps('ilmoittautumislinkki')}>
-          <Field
-            name={`${name}.ilmoittautumislinkki.${language}`}
-            component={FormFieldInput}
-            label={t('toteutuslomake.ilmoittautumislinkki')}
-          />
-        </Box>
-      </FormConfigField>
+      <Box mb={2} {...getTestIdProps('ilmoittautumislinkki')}>
+        <Field
+          name={`${name}.ilmoittautumislinkki.${language}`}
+          component={FormFieldInput}
+          label={t('toteutuslomake.ilmoittautumislinkki')}
+        />
+      </Box>
 
-      <FormConfigField name="laajuus">
-        <Box mb={2}>
-          <LaajuusFields name={name} />
-        </Box>
-      </FormConfigField>
+      <Box mb={2}>
+        <LaajuusFields name={name} />
+      </Box>
 
-      <FormConfigField name="aloituspaikat">
-        <Box mb={2} {...getTestIdProps('aloituspaikat')}>
-          <Field
-            name={`${name}.aloituspaikat`}
-            component={FormFieldInput}
-            label={t('toteutuslomake.aloituspaikat')}
-            type="number"
-          />
-        </Box>
-      </FormConfigField>
+      <Box mb={2} {...getTestIdProps('aloituspaikat')}>
+        <Field
+          name={`${name}.aloituspaikat`}
+          component={FormFieldInput}
+          label={t('toteutuslomake.aloituspaikat')}
+          type="number"
+        />
+      </Box>
 
-      <FormConfigField name="kesto">
-        <Box mb={2} {...getTestIdProps('kesto')}>
-          <Field
-            name={`${name}.kesto.${language}`}
-            component={FormFieldInput}
-            label={t('toteutuslomake.suunniteltuKesto')}
-          />
-        </Box>
-      </FormConfigField>
+      <Box mb={2} {...getTestIdProps('kesto')}>
+        <Field
+          name={`${name}.kesto.${language}`}
+          component={FormFieldInput}
+          label={t('toteutuslomake.suunniteltuKesto')}
+        />
+      </Box>
     </>
   );
 };

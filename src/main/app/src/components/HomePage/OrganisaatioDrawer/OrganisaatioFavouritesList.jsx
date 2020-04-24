@@ -3,7 +3,7 @@ import React from 'react';
 import Typography from '../../Typography';
 import Spacing from '../../Spacing';
 import OrganisaatioItem from './OrganisaatioItem';
-import useTranslation from '../../useTranslation';
+import { useTranslation } from 'react-i18next';
 import organisaatioIsOppilaitos from '../../../utils/organisaatioIsOppilaitos';
 import useAuthorizedUserRoleBuilder from '../../useAuthorizedUserRoleBuilder';
 import { OPPILAITOS_ROLE } from '../../../constants';

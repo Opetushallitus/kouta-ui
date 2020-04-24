@@ -9,7 +9,7 @@ import { isFunction } from '../../utils';
 import Spacing from '../Spacing';
 import Typography from '../Typography';
 import { getThemeProp, spacing } from '../../theme';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 
 const ErrorIcon = styled(Icon).attrs({ type: 'error_outline' })`
   color: ${({ theme }) => theme.palette.danger.main};

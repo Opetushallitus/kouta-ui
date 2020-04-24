@@ -7,7 +7,7 @@ import Button from '../Button';
 import Flex from '../Flex';
 import { getTestIdProps, getFirstLanguageValue } from '../../utils';
 import useKoodistoOptions from '../useKoodistoOptions';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import FieldArrayList from '../FieldArrayList';
 import { LIITTEEN_TOIMITUSTAPA } from '../../constants';
 import useOrganisaatio from '../useOrganisaatio';

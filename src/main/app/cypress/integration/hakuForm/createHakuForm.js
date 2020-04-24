@@ -34,7 +34,7 @@ const fillKieliversiotSection = () => {
 
 const fillNimiSection = () => {
   cy.getByTestId('nimiSection').within(() => {
-    cy.get('input').type('haun nimi', { force: true });
+    cy.get('input').paste('haun nimi');
 
     jatka();
   });
@@ -71,7 +71,7 @@ const fillDatetime = ({ date, time, cy }) => {
 };
 
 const fillAikatauluSection = () => {
-  cy.getByTestId('aikatauluSection').within(() => {
+  cy.getByTestId('aikataulutSection').within(() => {
     cy.getByTestId('hakuajat').within(() => {
       lisaa();
 
@@ -166,7 +166,7 @@ const tallenna = () => {
 };
 
 const fillYhteystiedotSection = () => {
-  cy.getByTestId('yhteystiedotSection').within(() => {
+  cy.getByTestId('yhteyshenkilotSection').within(() => {
     fillYhteyshenkilotFields({ cy });
     jatka();
   });

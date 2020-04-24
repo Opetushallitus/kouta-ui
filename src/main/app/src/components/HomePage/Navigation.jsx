@@ -20,7 +20,7 @@ import Icon from '../Icon';
 import Container from '../Container';
 import useInView from '../useInView';
 import { NavigationStateContext } from './NavigationProvider';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import { spacing, getThemeProp } from '../../theme';
 import scrollElementIntoView from '../../utils/scrollElementIntoView';
 

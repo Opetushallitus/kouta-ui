@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 
 import Submit from '../Submit';
 import { getTestIdProps } from '../../utils';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import Box from '../Box';
 import getHakuByFormValues from '../../utils/getHakuByFormValues';
 import updateHaku from '../../utils/kouta/updateHaku';

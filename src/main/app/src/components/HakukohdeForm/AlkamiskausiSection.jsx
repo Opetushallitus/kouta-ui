@@ -4,7 +4,7 @@ import { get } from 'lodash';
 
 import Spacing from '../Spacing';
 import useKoodistoOptions from '../useKoodistoOptions';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 
 import {
   FormFieldRadioGroup,

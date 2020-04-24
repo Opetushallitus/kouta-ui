@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import Box from '../Box';
 import Submit from '../Submit';
 import { getTestIdProps } from '../../utils';
-import useTranslation from '../useTranslation';
+import { useTranslation } from 'react-i18next';
 import useSaveForm from '../useSaveForm';
 import validateOppilaitoksenOsaForm from '../../utils/validateOppilaitoksenOsaForm';
 import createOppilaitoksenOsa from '../../utils/kouta/createOppilaitoksenOsa';

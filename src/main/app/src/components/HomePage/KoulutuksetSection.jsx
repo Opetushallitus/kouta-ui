@@ -27,9 +27,6 @@ import NavigationAnchor from './NavigationAnchor';
 import debounce from 'debounce-promise';
 
 import Anchor from '../Anchor';
-import useInView from '../useInView';
-
-const noopPromiseFn = () => Promise.resolve();
 
 const debounceKoulutukset = debounce(getKoulutukset, 300);
 
@@ -84,8 +81,6 @@ const makeTableColumns = (t, organisaatioOid) => [
 const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
-  const [ref, inView] = useInView({ threshold: 0.25, triggerOnce: true });
-
   const {
     debouncedNimi,
     showArchived,
@@ -111,7 +106,7 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
     error,
     reload,
   } = useApiAsync({
-    promiseFn: inView ? getKoulutuksetFn : noopPromiseFn,
+    promiseFn: getKoulutuksetFn,
     nimi: debouncedNimi,
     page,
     showArchived,

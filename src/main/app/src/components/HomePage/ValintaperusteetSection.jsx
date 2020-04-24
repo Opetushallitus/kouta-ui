@@ -21,12 +21,10 @@ import Anchor from '../Anchor';
 import Button from '../Button';
 import ErrorAlert from '../ErrorAlert';
 import { useTranslation } from 'react-i18next';
-import useInView from '../useInView';
 import NavigationAnchor from './NavigationAnchor';
 import debounce from 'debounce-promise';
 
 const debounceValintaperusteet = debounce(getValintaperusteet, 300);
-const noopPromiseFn = () => Promise.resolve();
 
 const getValintaperusteetFn = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
@@ -75,8 +73,6 @@ const makeTableColumns = (t, organisaatioOid) => [
 const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
-  const [ref, inView] = useInView({ threshold: 0.25, triggerOnce: true });
-
   const {
     debouncedNimi,
     showArchived,
@@ -102,7 +98,7 @@ const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
     error,
     reload,
   } = useApiAsync({
-    promiseFn: inView ? getValintaperusteetFn : noopPromiseFn,
+    promiseFn: getValintaperusteetFn,
     nimi: debouncedNimi,
     page,
     showArchived,

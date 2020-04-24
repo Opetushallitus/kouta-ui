@@ -21,7 +21,6 @@ import ErrorAlert from '../ErrorAlert';
 import Anchor from '../Anchor';
 import { useTranslation } from 'react-i18next';
 import getHaut from '../../utils/koutaSearch/getHaut';
-import useInView from '../useInView';
 import NavigationAnchor from './NavigationAnchor';
 import { getFirstLanguageValue, getTestIdProps } from '../../utils';
 import debounce from 'debounce-promise';
@@ -81,11 +80,6 @@ const makeTableColumns = (t, organisaatioOid) => [
 const KoulutuksetSection = ({ organisaatioOid, canCreate }) => {
   const { t } = useTranslation();
 
-  const [ref, inView] = useInView({
-    threshold: 0.25,
-    triggerOnce: true,
-  });
-
   const {
     debouncedNimi,
     showArchived,
@@ -111,7 +105,7 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate }) => {
     error,
     reload,
   } = useApiAsync({
-    promiseFn: inView ? getHautFn : noopPromiseFn,
+    promiseFn: getHautFn,
     nimi: debouncedNimi,
     page,
     showArchived,

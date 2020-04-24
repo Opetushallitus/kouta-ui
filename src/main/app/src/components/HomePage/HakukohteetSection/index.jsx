@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import Box from '../../Box';
 import ListCollapse from '../ListCollapse';
 import { useTranslation } from 'react-i18next';
-import useInView from '../../useInView';
 import NavigationAnchor from '../NavigationAnchor';
 import Button from '../../Button';
 import useModal from '../../useModal';
@@ -28,8 +27,6 @@ import ListTable, {
 } from '../ListTable';
 
 const debounceHakukohteet = debounce(getHakukohteet, 300);
-
-const noopPromiseFn = () => Promise.resolve();
 
 const getHakukohteetFn = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
@@ -81,11 +78,6 @@ const Actions = ({ organisaatioOid }) => {
 const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
-  const [ref, inView] = useInView({
-    threshold: 0.25,
-    triggerOnce: true,
-  });
-
   const {
     debouncedNimi,
     showArchived,
@@ -111,7 +103,7 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
     error,
     reload,
   } = useApiAsync({
-    promiseFn: inView ? getHakukohteetFn : noopPromiseFn,
+    promiseFn: getHakukohteetFn,
     nimi: debouncedNimi,
     page,
     showArchived,

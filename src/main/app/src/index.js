@@ -4,40 +4,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createBrowserHistory } from 'history';
 import { urls as ophUrls } from 'oph-urls-js';
-import { get, merge } from 'lodash';
+
+import { createDefaultLocalisation } from './localisation';
 
 import App from './components/App';
 import createStore from './state';
 import defaultTheme from './theme';
 import configureUrls from './apiUrls';
-import createLocalisation from './localisation';
-import { getLocalisation } from './apiUtils';
-import getTranslations from './translations';
+
 import createHttpClient from './httpClient';
 
 const history = createBrowserHistory({ basename: 'kouta' });
-
-const isDev = process.env.NODE_ENV === 'development';
-
-const loadLocalisation = async ({
-  namespace,
-  language,
-  httpClient,
-  apiUrls,
-}) => {
-  const localisation = await getLocalisation({
-    category: namespace,
-    locale: language,
-    httpClient,
-    apiUrls,
-  });
-
-  const translations = getTranslations();
-
-  return get(translations, [language, namespace])
-    ? merge({}, translations[language][namespace], localisation || {})
-    : localisation;
-};
 
 (async () => {
   let apiUrls = ophUrls;
@@ -49,13 +26,10 @@ const loadLocalisation = async ({
 
   apiUrls = await configureUrls(ophUrls, httpClient);
 
-  const localisationInstance = createLocalisation({
-    debug: isDev,
-    loadLocalisation: ({ namespace, language }) =>
-      loadLocalisation({ namespace, language, httpClient, apiUrls }),
+  const localisationInstance = createDefaultLocalisation({
+    httpClient,
+    apiUrls,
   });
-
-  window.__i18n__ = localisationInstance;
 
   const { store, persistor } = createStore({
     apiUrls,

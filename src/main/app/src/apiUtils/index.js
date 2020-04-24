@@ -1,5 +1,3 @@
-import { KOULUTUSTYYPPI_TO_KOULUTUSTYYPPI_IDS_MAP } from '../constants';
-import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 import {
   get,
   groupBy,
@@ -11,6 +9,9 @@ import {
   set,
   toPairs,
 } from 'lodash';
+import { KOULUTUSTYYPPI_TO_KOULUTUSTYYPPI_IDS_MAP } from '#/src/constants';
+import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
+import getEPerusteKuvaus from '#/src/utils/ePeruste/getEPerusteKuvaus';
 
 export const getKoulutuksetByKoulutusTyyppi = async ({
   httpClient,
@@ -62,7 +63,9 @@ export const getEPerusteById = async ({ httpClient, apiUrls, ePerusteId }) => {
     const { data } = await httpClient.get(
       apiUrls.url('eperusteet-service.peruste-by-id', ePerusteId),
     );
-    return data;
+
+    const kuvaus = getEPerusteKuvaus(data);
+    return data && { ...data, kuvaus };
   }
 };
 
@@ -85,11 +88,19 @@ export const getKoulutusByKoodi = async ({
             httpClient
               .get(
                 apiUrls.url('eperusteet-service.peruste-rakenne', ePeruste.id),
+                {
+                  errorNotifier: {
+                    silent: true,
+                  },
+                },
               )
-              .then(({ data: rakenne }) => ({
-                ...ePeruste,
-                laajuus: get(rakenne, 'muodostumisSaanto.laajuus.minimi'),
-              })),
+              .then(
+                ({ data: rakenne }) => ({
+                  ...ePeruste,
+                  laajuus: get(rakenne, 'muodostumisSaanto.laajuus.minimi'),
+                }),
+                () => ePeruste,
+              ),
           ),
         ),
       ),

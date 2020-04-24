@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
-import stripTags from 'striptags';
 import { get, isEmpty, isString, mapValues } from 'lodash';
 import { Trans, useTranslation } from 'react-i18next';
 import FieldGroup from '#/src/components/FieldGroup';
@@ -13,6 +12,7 @@ import {
 import { getThemeProp } from '#/src/theme';
 import { getLanguageValue, getTestIdProps } from '#/src/utils';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
+import { sanitizeHTML } from '#/src/utils';
 
 import {
   FormFieldInput,
@@ -30,6 +30,7 @@ import Typography from '#/src/components/Typography';
 import { useURLs } from '#/src/hooks/context';
 import useFieldValue from '#/src/components/useFieldValue';
 import useApiAsync from '#/src/components/useApiAsync';
+import StyledSectionHTML from '#/src/components/StyledSectionHTML';
 
 const Container = styled.div`
   display: flex;
@@ -54,11 +55,14 @@ const OsaamisalaDetailsToggleContainer = styled.div`
 `;
 
 const OsaamisalaDetailsToggle = ({ open, onToggle, ...props }) => {
+  const { t } = useTranslation();
   return (
     <OsaamisalaDetailsToggleContainer onClick={onToggle} {...props}>
       <Icon type={open ? 'arrow_drop_down' : 'arrow_right'} />
       <Typography>
-        {open ? 'Sulje tarkempi kuvaus' : 'Tarkenna kuvausta'}
+        {open
+          ? t('toteutuslomake.suljeTarkempiKuvaus')
+          : t('toteutuslomake.tarkennaKuvausta')}
       </Typography>
     </OsaamisalaDetailsToggleContainer>
   );
@@ -87,7 +91,7 @@ const getExtendedEPeruste = async ({ httpClient, apiUrls, ePerusteId }) => {
     ...osaamisala,
     kuvaus: mapValues(
       get(osaamisalakuvaukset, [osaamisala.uri, 0, 'teksti']) || {},
-      v => (isString(v) ? stripTags(v) : v),
+      v => (isString(v) ? sanitizeHTML(v) : v),
     ),
   }));
 
@@ -143,7 +147,7 @@ const OsaamisalatInfoFields = ({
             <Typography variant="h6" marginBottom={1}>
               {getLanguageValue(nimi, language)}
             </Typography>
-            <Typography>{getLanguageValue(kuvaus, language)}</Typography>
+            <StyledSectionHTML html={getLanguageValue(kuvaus, language)} />
           </Spacing>
 
           <AbstractCollapse

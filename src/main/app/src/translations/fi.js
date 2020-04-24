@@ -411,6 +411,8 @@ export default {
     toteutuksenOsaamisalat: 'Toteutuksen osaamisalat',
     valitseOsaamisalat: 'Valitse osaamisalat',
     lisaaOsaamisala: 'Lisää osaamisala',
+    suljeTarkempiKuvaus: 'Sulje tarkempi kuvaus',
+    tarkennaKuvausta: 'Tarkenna kuvausta',
     koulutuksenNayttamiseenLiittyvatTiedot:
       'Koulutuksen näyttämiseen liittyvät tiedot',
     linkinOtsikko: 'Linkin otsikko',
@@ -616,5 +618,10 @@ export default {
     oppilaitoksenOsanYhteystiedot: 'Oppilaitoksen osan yhteystiedot',
     yhteystiedotInfo: 'Anna oppilaitokselle tarvittavat yhteystiedot',
     oppilaitoksenOsanTila: 'Oppilaitoksen osan tila',
+  },
+  eperuste: {
+    suorittaneenOsaaminen: 'Tutkinnon suorittaneen osaaminen',
+    tyotehtavatJoissaVoiToimia:
+      'Työtehtäviä, joissa tutkinnon suorittanut voi toimia',
   },
 };

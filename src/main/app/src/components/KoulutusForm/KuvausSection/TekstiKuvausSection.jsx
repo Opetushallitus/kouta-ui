@@ -1,40 +1,40 @@
 import React from 'react';
-import stripTags from 'striptags';
-import { get } from 'lodash';
-
-import { getEPerusteById } from '../../../apiUtils';
-import Typography from '../../Typography';
-import { getLanguageValue } from '../../../utils';
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
-import useApiAsync from '../../useApiAsync';
-import FormLabel from '../../FormLabel';
-import useFieldValue from '../../useFieldValue';
-
-const getKuvaus = (koulutus, language) => {
-  const kuvaus = koulutus ? getLanguageValue(koulutus.kuvaus, language) : null;
-
-  return kuvaus ? stripTags(kuvaus) : null;
-};
+import { getLanguageValue } from '#/src/utils';
+import { getEPerusteById } from '#/src/apiUtils';
+import Typography from '#/src/components/Typography';
+import useApiAsync from '#/src/components/useApiAsync';
+import useFieldValue from '#/src/components/useFieldValue';
+import StyledSectionHTML from '#/src/components/StyledSectionHTML';
 
 const TekstiKuvausSection = ({ language }) => {
   const ePerusteField = useFieldValue('information.eperuste');
-  const ePerusteId = get(ePerusteField, 'value');
+  const ePerusteId = _.get(ePerusteField, 'value');
   const { t } = useTranslation();
 
-  const { data } = useApiAsync({
+  const { data = {} } = useApiAsync({
     promiseFn: getEPerusteById,
     ePerusteId,
     watch: ePerusteId,
   });
 
-  const kuvaus = getKuvaus(data, language);
+  const { kuvaus, nimi, diaarinumero } = data;
+
+  const translatedKuvaus = getLanguageValue(kuvaus, language);
+  const translatedNimi = getLanguageValue(nimi, language);
 
   return (
     <>
-      <FormLabel>{t('yleiset.kuvaus')}</FormLabel>
       {kuvaus ? (
         <>
-          <Typography as="div">{kuvaus}</Typography>
+          <Typography variant="h5" marginBottom="20px">
+            {translatedNimi}{' '}
+            <Typography as="span" variant="body">
+              ({diaarinumero})
+            </Typography>
+          </Typography>
+          <StyledSectionHTML html={translatedKuvaus} />
           <Typography variant="secondary" as="div" marginTop={1}>
             ({t('yleiset.lahde')}: {t('yleiset.ePerusteet')})
           </Typography>

@@ -1,7 +1,6 @@
-import { get } from 'lodash';
+import _ from 'lodash';
 import { generateMedia } from 'styled-media-query';
 import createUiTheme from '@opetushallitus/virkailija-ui-components/createTheme';
-import { merge } from 'lodash';
 
 const breakpoints = ['576px', '768px', '992px'];
 
@@ -11,7 +10,7 @@ export const media = generateMedia({
   small: breakpoints[0],
 });
 
-export const getThemeProp = path => props => get(props.theme, path);
+export const getThemeProp = path => props => _.get(props.theme, path);
 
 export const spacing = (amount = 1) => ({ theme }) =>
   `${theme.spacing.unit * amount}px`;
@@ -21,7 +20,7 @@ export const createTheme = () => {
 
   theme.breakpoints = breakpoints;
 
-  theme = merge(theme, {
+  theme = _.merge(theme, {
     colors: {
       mainBackground: '#f5f5f5',
       secondaryBackground: '#fafafa',

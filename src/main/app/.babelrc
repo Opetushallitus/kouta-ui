@@ -1,3 +1,11 @@
 {
-    "plugins": ["lodash"]
-  }
+  "plugins": [
+    "lodash",
+    [
+      "styled-components",
+      {
+        "pure": true
+      }
+    ]
+  ]
+}

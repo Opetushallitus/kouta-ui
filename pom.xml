@@ -109,15 +109,6 @@
                         </goals>
                     </execution>
                     <execution>
-                        <id>Build storybook</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>run build-storybook</arguments>
-                        </configuration>
-                    </execution>
-                    <execution>
                         <id>Build frontend</id>
                         <goals>
                             <goal>npm</goal>

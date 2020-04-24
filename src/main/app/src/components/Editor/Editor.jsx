@@ -185,6 +185,7 @@ const HeaderSelect = ({ editorState, onChange, editorRef }) => {
         value={{ value }}
         onChange={onSelect}
         menuPortalTarget={document.body}
+        isClearable={false}
       />
     </HeaderSelectContainer>
   );

@@ -62,6 +62,7 @@ const Pagination = ({ value = 0, onChange = () => {}, pageCount = 0 }) => {
             value={pageValue}
             menuPlacement="auto"
             onChange={onSelectChange}
+            isClearable={false}
           />
         </SelectWrapper>
       </FlexItem>

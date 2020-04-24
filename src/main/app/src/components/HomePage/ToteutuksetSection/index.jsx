@@ -144,8 +144,6 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
         }
         defaultOpen
       >
-        <div ref={ref} />
-
         <Box mb={3}>
           <Filters
             {...filtersProps}

@@ -133,8 +133,6 @@ const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
         }
         defaultOpen
       >
-        <div ref={ref} />
-
         <Spacing marginBottom={3}>
           <Filters
             {...filtersProps}

@@ -135,8 +135,6 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate }) => {
         }
         defaultOpen
       >
-        <div ref={ref} />
-
         <Spacing marginBottom={3}>
           <Filters {...filtersProps} nimiPlaceholder={t('etusivu.haeHakuja')} />
         </Spacing>

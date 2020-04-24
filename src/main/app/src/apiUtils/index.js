@@ -88,11 +88,19 @@ export const getKoulutusByKoodi = async ({
             httpClient
               .get(
                 apiUrls.url('eperusteet-service.peruste-rakenne', ePeruste.id),
+                {
+                  errorNotifier: {
+                    silent: true,
+                  },
+                },
               )
-              .then(({ data: rakenne }) => ({
-                ...ePeruste,
-                laajuus: get(rakenne, 'muodostumisSaanto.laajuus.minimi'),
-              })),
+              .then(
+                ({ data: rakenne }) => ({
+                  ...ePeruste,
+                  laajuus: get(rakenne, 'muodostumisSaanto.laajuus.minimi'),
+                }),
+                () => ePeruste,
+              ),
           ),
         ),
       ),

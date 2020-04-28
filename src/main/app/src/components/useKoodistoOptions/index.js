@@ -19,7 +19,7 @@ const getOptions = ({ koodisto, language, sort = true }) => {
     label: getFirstLanguageValue(nimi, language),
   }));
 
-  return sort ? sortBy(options, ({ value }) => value) : options;
+  return sort ? sortBy(options, ({ label }) => label) : options;
 };
 
 export const useKoodistoOptions = ({

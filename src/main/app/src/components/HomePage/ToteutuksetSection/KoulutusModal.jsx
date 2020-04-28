@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useCallback } from 'react';
 import { withRouter } from 'react-router-dom';
-import { isArray } from 'lodash';
+import { isArray, sortBy } from 'lodash';
 import Button from '../../Button';
 import Modal from '../../Modal';
 import ModalHeader from '../../ModalHeader';
@@ -29,10 +29,13 @@ const KoulutusModal = ({ onClose, organisaatioOid, history, open }) => {
   const options = useMemo(
     () =>
       isArray(data)
-        ? data.map(({ nimi, oid }) => ({
-            value: oid,
-            label: getFirstLanguageValue(nimi, language),
-          }))
+        ? sortBy(
+            data.map(({ nimi, oid }) => ({
+              value: oid,
+              label: getFirstLanguageValue(nimi, language),
+            })),
+            ({ label }) => label,
+          )
         : [],
     [data, language],
   );

@@ -1,7 +1,10 @@
 import React, { useMemo } from 'react';
 import { get } from 'lodash';
 
-import FormPage, { OrganisaatioInfo, TopInfoContainer } from '../FormPage';
+import FormPage, {
+  OrganisaatioRelation,
+  RelationInfoContainer,
+} from '../FormPage';
 import EditValintaperusteHeader from './EditValintaperusteHeader';
 import EditValintaperusteSteps from './EditValintaperusteSteps';
 import ValintaperusteFormWrapper from './ValintaperusteFormWrapper';
@@ -52,9 +55,9 @@ const EditValintaperustePage = props => {
           ) : null
         }
       >
-        <TopInfoContainer>
-          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-        </TopInfoContainer>
+        <RelationInfoContainer>
+          <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+        </RelationInfoContainer>
         {valintaperuste ? (
           <ValintaperusteFormWrapper
             valintaperuste={valintaperuste}

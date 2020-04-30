@@ -1,7 +1,10 @@
 import React, { useMemo } from 'react';
 import queryString from 'query-string';
 
-import FormPage, { OrganisaatioInfo, TopInfoContainer } from '../FormPage';
+import FormPage, {
+  OrganisaatioRelation,
+  RelationInfoContainer,
+} from '../FormPage';
 import CreateValintaperusteHeader from './CreateValintaperusteHeader';
 import CreateValintaperusteSteps from './CreateValintaperusteSteps';
 import ValintaperusteFormWrapper from './ValintaperusteFormWrapper';
@@ -77,9 +80,9 @@ const CreateValintaperustePage = props => {
         steps={<CreateValintaperusteSteps />}
         footer={<CreateValintaperusteFooter organisaatioOid={oid} />}
       >
-        <TopInfoContainer>
-          <OrganisaatioInfo organisaatioOid={oid} />
-        </TopInfoContainer>
+        <RelationInfoContainer>
+          <OrganisaatioRelation organisaatioOid={oid} />
+        </RelationInfoContainer>
         <ValintaperusteFormWrapper
           steps
           organisaatioOid={oid}

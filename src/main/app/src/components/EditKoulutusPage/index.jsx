@@ -2,7 +2,10 @@ import React, { useCallback, useContext, useMemo } from 'react';
 import queryString from 'query-string';
 import ReduxForm from '../ReduxForm';
 
-import FormPage, { OrganisaatioInfo, TopInfoContainer } from '../FormPage';
+import FormPage, {
+  OrganisaatioRelation,
+  RelationInfoContainer,
+} from '../FormPage';
 import EditKoulutusHeader from './EditKoulutusHeader';
 import EditKoulutusSteps from './EditKoulutusSteps';
 import KoulutusFormWrapper from './KoulutusFormWrapper';
@@ -16,7 +19,6 @@ import UrlContext from '#/src/components/UrlContext';
 import useAuthorizedUserRoleBuilder from '#/src/components/useAuthorizedUserRoleBuilder';
 import { HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 import useFieldValue from '#/src/components/useFieldValue';
-import FormNameContext from '#/src/components/FormNameContext';
 import { Field } from 'redux-form';
 import { FormFieldCheckbox } from '../formFields';
 import getFormValuesByKoulutus from '#/src/utils/getFormValuesByKoulutus';
@@ -83,11 +85,7 @@ const EditKoulutusPage = props => {
         header={<EditKoulutusHeader koulutus={koulutus} />}
         steps={<EditKoulutusSteps />}
         draftUrl={apiUrls.url('konfo-ui.koulutus', oid) + '?draft=true'}
-        toggleDraft={
-          <FormNameContext.Provider value={'editKoulutusForm'}>
-            <ToggleDraft />
-          </FormNameContext.Provider>
-        }
+        toggleDraft={<ToggleDraft />}
         footer={
           koulutus ? (
             <EditKoulutusFooter
@@ -97,9 +95,9 @@ const EditKoulutusPage = props => {
           ) : null
         }
       >
-        <TopInfoContainer>
-          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-        </TopInfoContainer>
+        <RelationInfoContainer>
+          <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+        </RelationInfoContainer>
         {koulutus ? (
           <KoulutusFormWrapper
             steps={false}

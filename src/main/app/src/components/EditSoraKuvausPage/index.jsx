@@ -2,7 +2,10 @@ import React, { useEffect, useMemo } from 'react';
 import { get, isFunction } from 'lodash';
 import { useTranslation } from 'react-i18next';
 
-import FormPage, { OrganisaatioInfo, TopInfoContainer } from '../FormPage';
+import FormPage, {
+  OrganisaatioRelation,
+  RelationInfoContainer,
+} from '../FormPage';
 import EditSoraKuvausHeader from './EditSoraKuvausHeader';
 import EditSoraKuvausSteps from './EditSoraKuvausSteps';
 import EditSoraKuvausFooter from './EditSoraKuvausFooter';
@@ -57,9 +60,9 @@ const EditSoraKuvausPage = props => {
             soraKuvaus ? <EditSoraKuvausFooter soraKuvaus={soraKuvaus} /> : null
           }
         >
-          <TopInfoContainer>
-            <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-          </TopInfoContainer>
+          <RelationInfoContainer>
+            <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+          </RelationInfoContainer>
           {soraKuvaus ? (
             <SoraKuvausForm
               {...props}

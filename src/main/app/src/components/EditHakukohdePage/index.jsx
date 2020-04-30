@@ -1,15 +1,11 @@
 import React, { useMemo } from 'react';
 import queryString from 'query-string';
-import { get } from 'lodash';
 
 import FormPage from '../FormPage';
 import EditHakukohdeHeader from './EditHakukohdeHeader';
 import EditHakukohdeSteps from './EditHakukohdeSteps';
 import EditHakukohdeFooter from './EditHakukohdeFooter';
 import useApiAsync from '../useApiAsync';
-import { getFirstLanguageValue } from '../../utils';
-import Flex, { FlexItem } from '../Flex';
-import Typography from '../Typography';
 import Spin from '../Spin';
 import { KOULUTUSTYYPPI } from '../../constants';
 import { useTranslation } from 'react-i18next';
@@ -18,12 +14,17 @@ import getToteutusByOid from '../../utils/kouta/getToteutusByOid';
 import Title from '../Title';
 import getHakuByOid from '../../utils/kouta/getHakuByOid';
 import getHakukohdeByOid from '../../utils/kouta/getHakukohdeByOid';
-import useOrganisaatio from '../useOrganisaatio';
 import ReduxForm from '#/src/components/ReduxForm';
 import getHakukohdeFormConfig from '#/src/utils/getHakukohdeFormConfig';
 import getFormValuesByHakukohde from '#/src/utils/getFormValuesByHakukohde';
 import FormConfigContext from '#/src/components/FormConfigContext';
 import HakukohdeForm from '#/src/components/HakukohdeForm';
+import {
+  RelationInfoContainer,
+  OrganisaatioRelation,
+  HakuRelation,
+  ToteutusRelation,
+} from '#/src/components/FormPage';
 
 const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
   const hakukohde = await getHakukohdeByOid({
@@ -75,7 +76,6 @@ const EditHakukohdePage = props => {
     watch,
   });
 
-  const { organisaatio } = useOrganisaatio(organisaatioOid);
   const { t } = useTranslation();
 
   const initialValues = useMemo(() => {
@@ -104,32 +104,14 @@ const EditHakukohdePage = props => {
       >
         {hakukohde ? (
           <>
-            <Flex marginBottom={2} justifyBetween>
-              <FlexItem grow={0} paddingRight={2}>
-                <Typography variant="h6" marginBottom={1}>
-                  {t('yleiset.organisaatio')}
-                </Typography>
-                <Typography>
-                  {getFirstLanguageValue(get(organisaatio, 'nimi'))}
-                </Typography>
-              </FlexItem>
-              <FlexItem grow={0}>
-                <Typography variant="h6" marginBottom={1}>
-                  {t('yleiset.haku')}
-                </Typography>
-                <Typography>
-                  {getFirstLanguageValue(get(haku, 'nimi'))}
-                </Typography>
-              </FlexItem>
-              <FlexItem grow={0}>
-                <Typography variant="h6" marginBottom={1}>
-                  {t('yleiset.toteutus')}
-                </Typography>
-                <Typography>
-                  {getFirstLanguageValue(get(toteutus, 'nimi'))}
-                </Typography>
-              </FlexItem>
-            </Flex>
+            <RelationInfoContainer>
+              <HakuRelation organisaatioOid={organisaatioOid} haku={haku} />
+              <ToteutusRelation
+                organisaatioOid={organisaatioOid}
+                toteutus={toteutus}
+              />
+              <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+            </RelationInfoContainer>
             <FormConfigContext.Provider value={config}>
               <HakukohdeForm
                 steps={false}

@@ -54,7 +54,6 @@ const getHakukohdeData = async ({
 const getInitialValues = (toteutusNimi, toteutusKielet) => {
   return initialValues(toteutusNimi, toteutusKielet);
 };
-const config = getHakukohdeFormConfig();
 
 const CreateHakukohdePage = props => {
   const {
@@ -73,6 +72,9 @@ const CreateHakukohdePage = props => {
     watch: [organisaatioOid, toteutusOid, hakuOid].join(','),
   });
 
+  const haku = get(data, 'haku');
+  const toteutus = get(data, 'toteutus');
+
   const initialValues = useMemo(() => {
     return (
       data &&
@@ -82,6 +84,8 @@ const CreateHakukohdePage = props => {
       )
     );
   }, [data]);
+
+  const config = useMemo(getHakukohdeFormConfig, []);
 
   return (
     <ReduxForm
@@ -98,6 +102,8 @@ const CreateHakukohdePage = props => {
             organisaatioOid={organisaatioOid}
             hakuOid={hakuOid}
             toteutusOid={toteutusOid}
+            haku={haku}
+            toteutus={toteutus}
           />
         }
       >
@@ -134,8 +140,8 @@ const CreateHakukohdePage = props => {
                 steps
                 organisaatio={data.organisaatio}
                 organisaatioOid={organisaatioOid}
-                haku={data.haku}
-                toteutus={data.toteutus}
+                haku={haku}
+                toteutus={toteutus}
                 koulutustyyppi={
                   get(data, 'koulutustyyppi') ||
                   KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS

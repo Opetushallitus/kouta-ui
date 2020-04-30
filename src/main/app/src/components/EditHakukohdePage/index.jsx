@@ -55,8 +55,6 @@ const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
   };
 };
 
-const config = getHakukohdeFormConfig();
-
 const EditHakukohdePage = props => {
   const {
     match: {
@@ -83,6 +81,9 @@ const EditHakukohdePage = props => {
   const initialValues = useMemo(() => {
     return hakukohde && getFormValuesByHakukohde(hakukohde);
   }, [hakukohde]);
+
+  const config = useMemo(getHakukohdeFormConfig, []);
+
   return !hakukohde ? (
     <Spin center />
   ) : (
@@ -92,7 +93,13 @@ const EditHakukohdePage = props => {
         header={<EditHakukohdeHeader hakukohde={hakukohde} />}
         steps={<EditHakukohdeSteps />}
         footer={
-          hakukohde ? <EditHakukohdeFooter hakukohde={hakukohde} /> : null
+          hakukohde ? (
+            <EditHakukohdeFooter
+              hakukohde={hakukohde}
+              toteutus={toteutus}
+              haku={haku}
+            />
+          ) : null
         }
       >
         {hakukohde ? (

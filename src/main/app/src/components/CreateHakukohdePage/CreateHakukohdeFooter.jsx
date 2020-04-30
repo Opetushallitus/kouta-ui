@@ -15,6 +15,8 @@ const CreateHakukohdeFooter = ({
   hakuOid,
   toteutusOid,
   history,
+  toteutus,
+  haku,
 }) => {
   const { t } = useTranslation();
 
@@ -41,7 +43,7 @@ const CreateHakukohdeFooter = ({
   const { save } = useSaveForm({
     form: 'createHakukohdeForm',
     submit,
-    validate: validateHakukohdeForm,
+    validate: values => validateHakukohdeForm({ ...values, toteutus, haku }),
   });
 
   return (

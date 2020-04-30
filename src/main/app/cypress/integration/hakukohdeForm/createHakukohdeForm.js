@@ -1,5 +1,3 @@
-import { merge } from 'lodash';
-
 import {
   getRadio,
   selectOption,
@@ -9,12 +7,8 @@ import {
   fillValintakoeFields,
   fillAsyncSelect,
   typeToEditor,
-} from '../../utils';
-
-import koulutus from '../../data/koulutus';
-import toteutus from '../../data/toteutus';
-import valintaperuste from '../../data/valintaperuste';
-import { stubHakukohdeFormRoutes } from '../../hakukohdeFormUtils';
+} from '#/cypress/utils';
+import { prepareTest } from '#/cypress/hakukohdeFormUtils';
 
 const jatka = () => {
   cy.getByTestId('jatkaButton').click({ force: true });
@@ -192,60 +186,15 @@ const fillTilaSection = (tila = 'julkaistu') => {
 
 describe('createHakukohdeForm', () => {
   const organisaatioOid = '1.1.1.1.1.1';
-  const toteutusOid = '2.1.1.1.1.1';
-  const koulutusOid = '3.1.1.1.1';
   const hakuOid = '4.1.1.1.1.1';
-  const valintaperusteOid = '5.1.1.1.1.1';
-  const createdHakukohdeOid = '1.2.3.4.5.6';
-
-  beforeEach(() => {
-    cy.server();
-
-    stubHakukohdeFormRoutes({ cy, organisaatioOid, hakuOid });
-
-    cy.route({
-      method: 'GET',
-      url: '**/valintaperuste/list**',
-      response: [
-        merge(valintaperuste(), {
-          oid: valintaperusteOid,
-          nimi: { fi: 'Valintaperusteen nimi' },
-        }),
-      ],
-    });
-
-    cy.visit(
-      `/organisaatio/${organisaatioOid}/toteutus/${toteutusOid}/haku/${hakuOid}/hakukohde`,
-    );
-  });
-
+  const hakukohdeOid = '1.2.3.4.5.6';
   it('should be able to create ammatillinen hakukohde', () => {
-    cy.route({
-      method: 'GET',
-      url: `**/toteutus/${toteutusOid}`,
-      response: merge(toteutus({ tyyppi: 'amm' }), {
-        oid: toteutusOid,
-        organisaatioOid: organisaatioOid,
-        koulutusOid: koulutusOid,
-      }),
+    prepareTest({
+      tyyppi: 'amm',
+      hakuOid,
+      hakukohdeOid,
+      organisaatioOid,
     });
-
-    cy.route({
-      method: 'GET',
-      url: `**/koulutus/${koulutusOid}`,
-      response: merge(koulutus({ tyyppi: 'amm' }), {
-        oid: koulutusOid,
-        organisaatioOid: organisaatioOid,
-      }),
-    });
-
-    cy.route({
-      method: 'PUT',
-      url: '**/hakukohde',
-      response: {
-        oid: createdHakukohdeOid,
-      },
-    }).as('createHakukohdeRequest');
 
     fillKieliversiotSection();
     fillPohjakoulutusvaatimusSection();
@@ -263,46 +212,17 @@ describe('createHakukohdeForm', () => {
 
     cy.location('pathname').should(
       'eq',
-      `/kouta/organisaatio/${organisaatioOid}/hakukohde/${createdHakukohdeOid}/muokkaus`,
+      `/kouta/organisaatio/${organisaatioOid}/hakukohde/${hakukohdeOid}/muokkaus`,
     );
   });
 
   it('should be able to create korkeakoulu hakukohde', () => {
-    cy.route({
-      method: 'GET',
-      url: `**/koulutus/${koulutusOid}`,
-      response: merge(koulutus({ tyyppi: 'yo' }), {
-        oid: koulutusOid,
-        organisaatioOid: organisaatioOid,
-      }),
+    prepareTest({
+      tyyppi: 'yo',
+      hakuOid,
+      hakukohdeOid,
+      organisaatioOid,
     });
-
-    cy.route({
-      method: 'GET',
-      url: `**/toteutus/${toteutusOid}`,
-      response: merge(toteutus({ tyyppi: 'yo' }), {
-        oid: toteutusOid,
-        organisaatioOid: organisaatioOid,
-        koulutusOid: koulutusOid,
-      }),
-    });
-
-    cy.route({
-      method: 'GET',
-      url: `**/koulutus/${koulutusOid}`,
-      response: merge(koulutus({ tyyppi: 'yo' }), {
-        oid: koulutusOid,
-        organisaatioOid: organisaatioOid,
-      }),
-    });
-
-    cy.route({
-      method: 'PUT',
-      url: '**/hakukohde',
-      response: {
-        oid: createdHakukohdeOid,
-      },
-    }).as('createHakukohdeRequest');
 
     fillKieliversiotSection();
     fillPohjakoulutusvaatimusSection();
@@ -321,7 +241,7 @@ describe('createHakukohdeForm', () => {
 
     cy.location('pathname').should(
       'eq',
-      `/kouta/organisaatio/${organisaatioOid}/hakukohde/${createdHakukohdeOid}/muokkaus`,
+      `/kouta/organisaatio/${organisaatioOid}/hakukohde/${hakukohdeOid}/muokkaus`,
     );
   });
 });

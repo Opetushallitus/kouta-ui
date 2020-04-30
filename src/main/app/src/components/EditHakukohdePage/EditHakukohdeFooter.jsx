@@ -13,7 +13,7 @@ import useOrganisaatio from '../useOrganisaatio';
 import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
 import { HAKUKOHDE_ROLE } from '../../constants';
 
-const EditHakukohdeFooter = ({ hakukohde, history }) => {
+const EditHakukohdeFooter = ({ hakukohde, history, haku, toteutus }) => {
   const { organisaatio } = useOrganisaatio(hakukohde.organisaatioOid);
   const roleBuilder = useAuthorizedUserRoleBuilder();
 
@@ -44,7 +44,7 @@ const EditHakukohdeFooter = ({ hakukohde, history }) => {
   const { save } = useSaveForm({
     form: 'editHakukohdeForm',
     submit,
-    validate: validateHakukohdeForm,
+    validate: values => validateHakukohdeForm({ ...values, haku, toteutus }),
   });
 
   const { t } = useTranslation();

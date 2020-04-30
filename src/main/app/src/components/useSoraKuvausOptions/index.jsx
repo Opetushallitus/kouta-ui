@@ -10,8 +10,9 @@ export const useSoraKuvausOptions = args => {
 
   const options = useMemo(() => {
     return isArray(soraKuvaukset)
-      ? soraKuvaukset.map(({ id, nimi }) => ({
+      ? soraKuvaukset.map(({ id, tila, nimi }) => ({
           value: id,
+          tila,
           label: getFirstLanguageValue(nimi, language),
         }))
       : [];

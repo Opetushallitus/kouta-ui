@@ -33,11 +33,18 @@ export const stubValintaperusteFormRoutes = ({ cy, organisaatioOid }) => {
 
   cy.route({
     method: 'GET',
+    url: '**/valintaperuste/list**',
+    response: [],
+  });
+
+  cy.route({
+    method: 'GET',
     url: '**/sorakuvaus/list**',
     response: [...new Array(10)].map((v, i) =>
       merge(soraKuvaus(), {
         nimi: { fi: `Sora-kuvaus ${i}` },
         id: i.toString(),
+        tila: 'julkaistu',
       }),
     ),
   });

@@ -1,3 +1,4 @@
+import { merge } from 'lodash';
 import {
   getRadio,
   selectOption,
@@ -7,9 +8,10 @@ import {
   chooseKieliversiotLanguages,
   fillKoulutustyyppiSelect,
   fillValintakoeFields,
-} from '../../utils';
+} from '#/cypress/utils';
 
-import { stubValintaperusteFormRoutes } from '../../valintaperusteFormUtils';
+import valintaperuste from '#/cypress/data/valintaperuste';
+import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils';
 
 const jatka = () => {
   cy.getByTestId('jatkaButton').click({ force: true });
@@ -172,6 +174,16 @@ describe('createValintaperusteForm', () => {
   });
 
   it('should be able to create valintaperuste', () => {
+    cy.route({
+      method: 'GET',
+      url: `**/valintaperuste/${createdValintaperusteId}`,
+      response: [
+        merge(valintaperuste(), {
+          oid: createdValintaperusteId,
+        }),
+      ],
+    });
+
     cy.route({
       method: 'PUT',
       url: '**/valintaperuste',

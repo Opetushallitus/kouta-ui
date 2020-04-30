@@ -84,6 +84,7 @@ const EditToteutusPage = props => {
           toteutus ? (
             <EditToteutusFooter
               toteutus={toteutus}
+              koulutus={koulutus}
               koulutustyyppi={koulutustyyppi}
               organisaatioOid={organisaatioOid}
             />

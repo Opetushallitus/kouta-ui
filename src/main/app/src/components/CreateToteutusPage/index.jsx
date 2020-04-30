@@ -95,6 +95,7 @@ const CreateToteutusPage = props => {
               koulutustyyppi={koulutustyyppi}
               organisaatioOid={organisaatioOid}
               koulutusOid={koulutusOid}
+              koulutus={koulutus}
             />
           ) : null
         }

@@ -60,3 +60,28 @@ export const julkinenSectionConfig = {
   section: 'julkinen',
   field: 'julkinen',
 };
+
+export const validateRelations = specs => (eb, values) => {
+  const { errors, isValid } = specs.reduce(
+    (acc, { key, t: translationKey }) => {
+      const { tila } = values;
+      const ref = _.get(values, key);
+      if (
+        !_.isNil(ref) &&
+        tila === JULKAISUTILA.JULKAISTU &&
+        _.get(ref, 'tila') !== JULKAISUTILA.JULKAISTU
+      ) {
+        acc.isValid = false;
+        acc.errors.push(t =>
+          t('yleiset.riippuvuusEiJulkaistu', {
+            entity: t(translationKey),
+          }),
+        );
+      }
+      return acc;
+    },
+    { isValid: true, errors: [] },
+  );
+
+  return eb.validate('tila', () => isValid, { message: errors });
+};

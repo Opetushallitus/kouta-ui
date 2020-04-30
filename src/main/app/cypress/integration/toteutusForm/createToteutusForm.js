@@ -8,7 +8,6 @@ import {
   selectOption,
   fillAsyncSelect,
   fillTreeSelect,
-  fillDatePickerInput,
 } from '../../utils';
 
 import koulutus from '../../data/koulutus';
@@ -258,6 +257,7 @@ const prepareTest = tyyppi => {
     organisaatioOid: organisaatioOid,
     koulutusKoodiUri: 'koulutus_0#1',
     tarjoajat: ['1.2.2.1.1.1'],
+    tila: 'julkaistu',
   };
 
   stubToteutusFormRoutes({ cy, perusteId, organisaatioOid });

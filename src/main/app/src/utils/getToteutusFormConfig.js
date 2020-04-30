@@ -1,4 +1,4 @@
-import { get, without } from 'lodash';
+import _ from 'lodash';
 
 import createFormConfigBuilder from './createFormConfigBuilder';
 
@@ -15,7 +15,7 @@ import {
   getKielivalinta,
   kieliversiotSectionConfig,
   pohjaValintaSectionConfig,
-  tilaSectionConfig,
+  validateRelations,
 } from '#/src/utils/formConfigUtils';
 
 const config = createFormConfigBuilder().registerSections([
@@ -28,7 +28,7 @@ const config = createFormConfigBuilder().registerSections([
       {
         fragment: 'nimi',
         field: '.nimi',
-        koulutustyypit: without(
+        koulutustyypit: _.without(
           KOULUTUSTYYPIT,
           KOULUTUSTYYPPI.LUKIOKOULUTUS,
           KOULUTUSTYYPPI.VALMA,
@@ -42,7 +42,7 @@ const config = createFormConfigBuilder().registerSections([
       },
       {
         field: '.toteutuksenKuvaus',
-        koulutustyypit: without(KOULUTUSTYYPIT, KOULUTUSTYYPPI.LUKIOKOULUTUS),
+        koulutustyypit: _.without(KOULUTUSTYYPIT, KOULUTUSTYYPPI.LUKIOKOULUTUS),
       },
       {
         field: '.ilmoittautumislinkki',
@@ -54,7 +54,7 @@ const config = createFormConfigBuilder().registerSections([
       },
       {
         field: '.aloituspaikat',
-        koulutustyypit: without(
+        koulutustyypit: _.without(
           TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
           KOULUTUSTYYPPI.VALMA,
           KOULUTUSTYYPPI.TELMA,
@@ -177,7 +177,7 @@ const config = createFormConfigBuilder().registerSections([
       {
         field: '.maksullisuus.maksu',
         validate: validateIfJulkaistu((eb, values) =>
-          get(values, 'jarjestamistiedot.maksullisuus.tyyppi') === 'kylla'
+          _.get(values, 'jarjestamistiedot.maksullisuus.tyyppi') === 'kylla'
             ? eb.validateExistence('jarjestamistiedot.maksullisuus.maksu')
             : eb,
         ),
@@ -258,7 +258,19 @@ const config = createFormConfigBuilder().registerSections([
     field: 'yhteyshenkilot',
     koulutustyypit: KOULUTUSTYYPIT,
   },
-  tilaSectionConfig,
+  {
+    koulutustyypit: KOULUTUSTYYPIT,
+    section: 'tila',
+    field: 'tila',
+    required: true,
+    validate: (eb, values) =>
+      validateRelations([
+        {
+          key: 'koulutus',
+          t: 'yleiset.koulutus',
+        },
+      ])(eb.validateExistence('tila'), values),
+  },
 ]);
 
 const getToteutusFormConfig = koulutustyyppi => {

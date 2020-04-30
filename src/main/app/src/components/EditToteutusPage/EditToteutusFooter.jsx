@@ -50,6 +50,7 @@ const EditToteutusFooter = ({
   koulutustyyppi,
   organisaatioOid,
   history,
+  koulutus,
 }) => {
   const { t } = useTranslation();
   const { organisaatio } = useOrganisaatio(toteutus.organisaatioOid);
@@ -93,7 +94,8 @@ const EditToteutusFooter = ({
   const { save } = useSaveForm({
     form: 'editToteutusForm',
     submit,
-    validate: values => validateToteutusForm({ ...values, koulutustyyppi }),
+    validate: values =>
+      validateToteutusForm({ ...values, koulutustyyppi, koulutus }),
   });
 
   return (

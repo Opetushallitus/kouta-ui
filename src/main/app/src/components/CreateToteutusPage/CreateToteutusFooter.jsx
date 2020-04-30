@@ -15,6 +15,7 @@ const CreateToteutusFooter = ({
   koulutustyyppi,
   history,
   koulutusOid,
+  koulutus,
 }) => {
   const { t } = useTranslation();
 
@@ -38,7 +39,8 @@ const CreateToteutusFooter = ({
   const { save } = useSaveForm({
     form: 'createToteutusForm',
     submit,
-    validate: values => validateToteutusForm({ ...values, koulutustyyppi }),
+    validate: values =>
+      validateToteutusForm({ ...values, koulutustyyppi, koulutus }),
   });
 
   return (

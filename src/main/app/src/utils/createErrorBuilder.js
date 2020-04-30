@@ -75,7 +75,7 @@ class ErrorBuilder {
       ? message
       : min === 1
       ? 'validointivirheet.listaVahintaanYksi'
-      : ['validointivirheet.listaVahintaan', { lukumaara: 1 }];
+      : t => t('validointivirheet.listaVahintaan', { lukumaara: 1 });
 
     if (!isArray(value) || value.length < min) {
       this.setError(isFieldArray ? `${path}._error` : path, errorMessage);

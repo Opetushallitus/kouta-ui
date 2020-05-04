@@ -1,25 +1,32 @@
-import { get, isObject, isArray, mapValues, pick } from 'lodash';
+import _ from 'lodash';
 import produce from 'immer';
 import { isNumeric } from './index';
 import serializeEditorState from './draft/serializeEditorState';
 import getValintakoeFieldsData from './getValintakoeFieldsData';
 
+const getArrayValue = (values, key) => {
+  const valueCandidate = _.get(values, key);
+  return _.isEmpty(valueCandidate) || _.isEmpty(_.first(valueCandidate))
+    ? []
+    : valueCandidate;
+};
+
 const serializeTable = ({ table, kielivalinta }) => {
-  if (!get(table, 'rows')) {
+  if (!_.get(table, 'rows')) {
     return { rows: [] };
   }
 
   return produce(table, draft => {
     (draft.rows || []).forEach((row, rowIndex) => {
-      if (isObject(row)) {
+      if (_.isObject(row)) {
         row.index = rowIndex;
 
         (row.columns || []).forEach((column, columnIndex) => {
-          if (isObject(column)) {
+          if (_.isObject(column)) {
             column.index = columnIndex;
 
-            if (isObject(column.text)) {
-              column.text = pick(column.text, kielivalinta);
+            if (_.isObject(column.text)) {
+              column.text = _.pick(column.text, kielivalinta);
             }
           }
         });
@@ -29,7 +36,7 @@ const serializeTable = ({ table, kielivalinta }) => {
 };
 
 const serializeSisalto = ({ sisalto, kielivalinta = [] }) => {
-  if (!isArray(sisalto)) {
+  if (!_.isArray(sisalto)) {
     return [];
   }
 
@@ -37,8 +44,8 @@ const serializeSisalto = ({ sisalto, kielivalinta = [] }) => {
     let serializedData = {};
 
     if (tyyppi === 'teksti') {
-      serializedData = pick(
-        isObject(data) ? mapValues(data, serializeEditorState) : {},
+      serializedData = _.pick(
+        _.isObject(data) ? _.mapValues(data, serializeEditorState) : {},
         kielivalinta,
       );
     }
@@ -57,20 +64,20 @@ const serializeSisalto = ({ sisalto, kielivalinta = [] }) => {
 const getValintaperusteByFormValues = values => {
   const { tila, muokkaaja, perustiedot } = values;
 
-  const hakutapaKoodiUri = get(perustiedot, 'hakutapa');
+  const hakutapaKoodiUri = _.get(perustiedot, 'hakutapa');
 
-  const kielivalinta = get(perustiedot, 'kieliversiot') || [];
+  const kielivalinta = _.get(perustiedot, 'kieliversiot') || [];
 
-  const kohdejoukkoKoodiUri = get(perustiedot, 'kohdejoukko.value') || null;
+  const kohdejoukkoKoodiUri = _.get(perustiedot, 'kohdejoukko.value') || null;
 
-  const nimi = pick(get(values, 'kuvaus.nimi'), kielivalinta);
+  const nimi = _.pick(_.get(values, 'kuvaus.nimi'), kielivalinta);
 
-  const kuvaus = pick(
-    mapValues(get(values, 'kuvaus.kuvaus') || {}, serializeEditorState),
+  const kuvaus = _.pick(
+    _.mapValues(_.get(values, 'kuvaus.kuvaus') || {}, serializeEditorState),
     kielivalinta,
   );
 
-  const valintatavat = (get(values, 'valintatavat') || []).map(
+  const valintatavat = getArrayValue(values, 'valintatavat').map(
     ({
       tapa,
       kuvaus,
@@ -80,12 +87,12 @@ const getValintaperusteByFormValues = values => {
       vahimmaispistemaara,
       sisalto,
     }) => ({
-      kuvaus: pick(kuvaus || {}, kielivalinta),
-      nimi: pick(nimi || {}, kielivalinta),
-      valintatapaKoodiUri: get(tapa, 'value') || null,
+      kuvaus: _.pick(kuvaus || {}, kielivalinta),
+      nimi: _.pick(nimi || {}, kielivalinta),
+      valintatapaKoodiUri: _.get(tapa, 'value') || null,
       sisalto: serializeSisalto({ sisalto, kielivalinta }),
       kaytaMuuntotaulukkoa: false,
-      kynnysehto: pick(kynnysehto || {}, kielivalinta),
+      kynnysehto: _.pick(kynnysehto || {}, kielivalinta),
       enimmaispisteet: isNumeric(enimmaispistemaara)
         ? parseFloat(enimmaispistemaara)
         : null,
@@ -96,13 +103,13 @@ const getValintaperusteByFormValues = values => {
   );
 
   const valintakokeet = getValintakoeFieldsData({
-    valintakoeValues: get(values, 'valintakoe'),
+    valintakoeValues: _.get(values, 'valintakoe'),
     kielivalinta,
   });
 
-  const koulutustyyppi = get(perustiedot, 'tyyppi') || null;
-  const sorakuvausId = get(values, 'soraKuvaus.value') || null;
-  const onkoJulkinen = Boolean(get(values, 'julkinen'));
+  const koulutustyyppi = _.get(perustiedot, 'tyyppi') || null;
+  const sorakuvausId = _.get(values, 'soraKuvaus.value') || null;
+  const onkoJulkinen = Boolean(_.get(values, 'julkinen'));
 
   return {
     tila,

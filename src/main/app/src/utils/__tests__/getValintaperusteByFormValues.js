@@ -1,7 +1,7 @@
 import parseEditorState from '../draft/parseEditorState';
 import getValintaperusteByFormValues from '../getValintaperusteByFormValues';
 
-test('getValintaperusteByFormValues returns correct valintaperuste given form values', () => {
+test('Should convert valintaperuste form with valintatapa', () => {
   const valintaperuste = getValintaperusteByFormValues({
     perustiedot: {
       tyyppi: 'tyyppi_1#1',
@@ -125,6 +125,91 @@ test('getValintaperusteByFormValues returns correct valintaperuste given form va
         ],
       },
     },
+    tila: 'julkaistu',
+  });
+
+  expect(valintaperuste).toMatchSnapshot();
+});
+
+test('Should convert valintaperuste form without valintatapa', () => {
+  const valintaperuste = getValintaperusteByFormValues({
+    perustiedot: {
+      tyyppi: 'tyyppi_1#1',
+      kieliversiot: ['fi', 'sv'],
+      hakutapa: 'tapa_1#1',
+      kohdejoukko: { value: 'joukko_1#1' },
+    },
+    kuvaus: {
+      nimi: {
+        fi: 'Fi nimi',
+        sv: 'Sv nimi',
+      },
+      kuvaus: {
+        fi: parseEditorState('<h1>Fi kuvaus</h1>'),
+        sv: parseEditorState('<h1>Sv kuvaus</h2>'),
+      },
+    },
+    osaamistausta: [{ value: 'tausta_1#1' }, { value: 'tausta_2#1' }],
+    kielitaitovaatimukset: [
+      {
+        kieli: { value: 'kieli_1#1' },
+        tyyppi: {
+          'tyyppi_1#1': true,
+          'tyyppi_2#1': true,
+          'tyyppi_3#1': false,
+        },
+        kuvaukset: {
+          'tyyppi_1#1': [
+            {
+              kuvaus: { value: 'kuvaus_1#1' },
+              taso: 'erinomainen',
+            },
+          ],
+          'tyyppi_2#1': [
+            {
+              kuvaus: { value: 'kuvaus_2#1' },
+              taso: 'ok',
+            },
+          ],
+        },
+        osoitustavat: ['osoitustapa_1#1', 'osoitustapa_2#1'],
+        muutOsoitustavat: [
+          {
+            kuvaus: {
+              fi: 'Fi kuvaus',
+              sv: 'Sv kuvaus',
+            },
+          },
+        ],
+      },
+    ],
+    valintatavat: [{}],
+    soraKuvaus: {
+      value: 'sora_1',
+    },
+    julkinen: true,
+    valintakoe: {
+      tyypit: [{ value: 'tyyppi_1#1' }],
+      tilaisuudet: {
+        'tyyppi_1#1': [
+          {
+            osoite: { fi: 'fi osoite', sv: 'sv osoite' },
+            postinumero: { value: 'posti_1#1' },
+            postitoimipaikka: {
+              fi: 'fi posititoimipaikka',
+              sv: 'sv posititoimipaikka',
+            },
+            alkaa: '2019-04-16T08:44',
+            paattyy: '2019-04-18T08:44',
+            lisatietoja: {
+              fi: 'fi lisatietoja',
+              sv: 'sv lisatietoja',
+            },
+          },
+        ],
+      },
+    },
+    tila: 'julkaistu',
   });
 
   expect(valintaperuste).toMatchSnapshot();

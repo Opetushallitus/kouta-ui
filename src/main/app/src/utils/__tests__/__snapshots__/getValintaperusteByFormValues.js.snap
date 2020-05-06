@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`getValintaperusteByFormValues returns correct valintaperuste given form values 1`] = `
+exports[`Should convert valintaperuste form with valintatapa 1`] = `
 Object {
   "hakutapaKoodiUri": "tapa_1#1",
   "kielivalinta": Array [
@@ -99,7 +99,61 @@ Object {
   },
   "onkoJulkinen": true,
   "sorakuvausId": "sora_1",
-  "tila": undefined,
+  "tila": "julkaistu",
+  "valintakokeet": Array [
+    Object {
+      "tilaisuudet": Array [
+        Object {
+          "aika": Object {
+            "alkaa": "2019-04-16T08:44",
+            "paattyy": "2019-04-18T08:44",
+          },
+          "lisatietoja": Object {
+            "fi": "fi lisatietoja",
+            "sv": "sv lisatietoja",
+          },
+          "osoite": Object {
+            "osoite": Object {
+              "fi": "fi osoite",
+              "sv": "sv osoite",
+            },
+            "postinumeroKoodiUri": "posti_1#1",
+          },
+        },
+      ],
+      "tyyppiKoodiUri": "tyyppi_1#1",
+    },
+  ],
+}
+`;
+
+exports[`Should convert valintaperuste form without valintatapa 1`] = `
+Object {
+  "hakutapaKoodiUri": "tapa_1#1",
+  "kielivalinta": Array [
+    "fi",
+    "sv",
+  ],
+  "kohdejoukkoKoodiUri": "joukko_1#1",
+  "koulutustyyppi": "tyyppi_1#1",
+  "metadata": Object {
+    "kielitaitovaatimukset": Array [],
+    "kuvaus": Object {
+      "fi": "<h1>Fi kuvaus</h1>",
+      "sv": "<h1>Sv kuvaus</h1>",
+    },
+    "osaamistaustaKoodiUrit": Array [],
+    "tyyppi": "tyyppi_1#1",
+    "valintatavat": Array [],
+  },
+  "muokkaaja": undefined,
+  "nimi": Object {
+    "fi": "Fi nimi",
+    "sv": "Sv nimi",
+  },
+  "onkoJulkinen": true,
+  "sorakuvausId": "sora_1",
+  "tila": "julkaistu",
   "valintakokeet": Array [
     Object {
       "tilaisuudet": Array [

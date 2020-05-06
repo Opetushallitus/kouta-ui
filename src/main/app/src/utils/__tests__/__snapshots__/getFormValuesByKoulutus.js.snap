@@ -14,6 +14,9 @@ Object {
   },
   "esikatselu": true,
   "information": Object {
+    "eperuste": Object {
+      "value": undefined,
+    },
     "koulutus": Object {
       "value": "koulutuskoodi_1#1",
     },

@@ -145,33 +145,33 @@ exports[`renders correctly 1`] = `
   justify-content: space-between;
 }
 
-<styled.div>
+<FormSteps__Wrapper>
   <div
     className="c0"
   >
-    <styled.div>
+    <FormSteps__GroupContainer>
       <div
         className="c1"
       >
-        <Styled(FormStepIcon)
+        <FormSteps__StepsIcon
           active={false}
           done={true}
           icon="school"
         >
-          <styled.div
+          <FormStepIcon__Container
             className="c2"
           >
             <div
               className="c3 c2"
             >
-              <styled.div
+              <FormStepIcon__IconContainer
                 active={false}
                 done={true}
               >
                 <div
                   className="c4"
                 >
-                  <Styled(Component)
+                  <FormStepIcon__IconBase
                     active={false}
                     type="school"
                   >
@@ -191,10 +191,10 @@ exports[`renders correctly 1`] = `
                         </span>
                       </styled.span>
                     </ForwardRef>
-                  </Styled(Component)>
+                  </FormStepIcon__IconBase>
                 </div>
-              </styled.div>
-              <styled.div
+              </FormStepIcon__IconContainer>
+              <FormStepIcon__LabelContainer
                 active={false}
               >
                 <div
@@ -202,29 +202,29 @@ exports[`renders correctly 1`] = `
                 >
                   yleiset.koulutus
                 </div>
-              </styled.div>
+              </FormStepIcon__LabelContainer>
             </div>
-          </styled.div>
-        </Styled(FormStepIcon)>
-        <Styled(FormStepIcon)
+          </FormStepIcon__Container>
+        </FormSteps__StepsIcon>
+        <FormSteps__StepsIcon
           active={false}
           done={true}
           icon="settings"
         >
-          <styled.div
+          <FormStepIcon__Container
             className="c2"
           >
             <div
               className="c3 c2"
             >
-              <styled.div
+              <FormStepIcon__IconContainer
                 active={false}
                 done={true}
               >
                 <div
                   className="c4"
                 >
-                  <Styled(Component)
+                  <FormStepIcon__IconBase
                     active={false}
                     type="settings"
                   >
@@ -244,10 +244,10 @@ exports[`renders correctly 1`] = `
                         </span>
                       </styled.span>
                     </ForwardRef>
-                  </Styled(Component)>
+                  </FormStepIcon__IconBase>
                 </div>
-              </styled.div>
-              <styled.div
+              </FormStepIcon__IconContainer>
+              <FormStepIcon__LabelContainer
                 active={false}
               >
                 <div
@@ -255,35 +255,35 @@ exports[`renders correctly 1`] = `
                 >
                   yleiset.toteutus
                 </div>
-              </styled.div>
+              </FormStepIcon__LabelContainer>
             </div>
-          </styled.div>
-        </Styled(FormStepIcon)>
+          </FormStepIcon__Container>
+        </FormSteps__StepsIcon>
       </div>
-    </styled.div>
-    <styled.div>
+    </FormSteps__GroupContainer>
+    <FormSteps__GroupContainer>
       <div
         className="c1"
       >
-        <Styled(FormStepIcon)
+        <FormSteps__StepsIcon
           active={false}
           done={true}
           icon="access_time"
         >
-          <styled.div
+          <FormStepIcon__Container
             className="c2"
           >
             <div
               className="c3 c2"
             >
-              <styled.div
+              <FormStepIcon__IconContainer
                 active={false}
                 done={true}
               >
                 <div
                   className="c4"
                 >
-                  <Styled(Component)
+                  <FormStepIcon__IconBase
                     active={false}
                     type="access_time"
                   >
@@ -303,10 +303,10 @@ exports[`renders correctly 1`] = `
                         </span>
                       </styled.span>
                     </ForwardRef>
-                  </Styled(Component)>
+                  </FormStepIcon__IconBase>
                 </div>
-              </styled.div>
-              <styled.div
+              </FormStepIcon__IconContainer>
+              <FormStepIcon__LabelContainer
                 active={false}
               >
                 <div
@@ -314,29 +314,29 @@ exports[`renders correctly 1`] = `
                 >
                   yleiset.haku
                 </div>
-              </styled.div>
+              </FormStepIcon__LabelContainer>
             </div>
-          </styled.div>
-        </Styled(FormStepIcon)>
-        <Styled(FormStepIcon)
+          </FormStepIcon__Container>
+        </FormSteps__StepsIcon>
+        <FormSteps__StepsIcon
           active={true}
           done={false}
           icon="grain"
         >
-          <styled.div
+          <FormStepIcon__Container
             className="c2"
           >
             <div
               className="c3 c2"
             >
-              <styled.div
+              <FormStepIcon__IconContainer
                 active={true}
                 done={false}
               >
                 <div
                   className="c8"
                 >
-                  <Styled(Component)
+                  <FormStepIcon__IconBase
                     active={true}
                     type="grain"
                   >
@@ -356,10 +356,10 @@ exports[`renders correctly 1`] = `
                         </span>
                       </styled.span>
                     </ForwardRef>
-                  </Styled(Component)>
+                  </FormStepIcon__IconBase>
                 </div>
-              </styled.div>
-              <styled.div
+              </FormStepIcon__IconContainer>
+              <FormStepIcon__LabelContainer
                 active={true}
               >
                 <div
@@ -367,35 +367,35 @@ exports[`renders correctly 1`] = `
                 >
                   yleiset.hakukohde
                 </div>
-              </styled.div>
+              </FormStepIcon__LabelContainer>
             </div>
-          </styled.div>
-        </Styled(FormStepIcon)>
+          </FormStepIcon__Container>
+        </FormSteps__StepsIcon>
       </div>
-    </styled.div>
-    <styled.div>
+    </FormSteps__GroupContainer>
+    <FormSteps__GroupContainer>
       <div
         className="c1"
       >
-        <Styled(FormStepIcon)
+        <FormSteps__StepsIcon
           active={false}
           done={false}
           icon="select_all"
         >
-          <styled.div
+          <FormStepIcon__Container
             className="c2"
           >
             <div
               className="c3 c2"
             >
-              <styled.div
+              <FormStepIcon__IconContainer
                 active={false}
                 done={false}
               >
                 <div
                   className="c11"
                 >
-                  <Styled(Component)
+                  <FormStepIcon__IconBase
                     active={false}
                     type="select_all"
                   >
@@ -415,10 +415,10 @@ exports[`renders correctly 1`] = `
                         </span>
                       </styled.span>
                     </ForwardRef>
-                  </Styled(Component)>
+                  </FormStepIcon__IconBase>
                 </div>
-              </styled.div>
-              <styled.div
+              </FormStepIcon__IconContainer>
+              <FormStepIcon__LabelContainer
                 active={false}
               >
                 <div
@@ -426,29 +426,29 @@ exports[`renders correctly 1`] = `
                 >
                   yleiset.valintaperusteet
                 </div>
-              </styled.div>
+              </FormStepIcon__LabelContainer>
             </div>
-          </styled.div>
-        </Styled(FormStepIcon)>
-        <Styled(FormStepIcon)
+          </FormStepIcon__Container>
+        </FormSteps__StepsIcon>
+        <FormSteps__StepsIcon
           active={false}
           done={false}
           icon="subject"
         >
-          <styled.div
+          <FormStepIcon__Container
             className="c2"
           >
             <div
               className="c3 c2"
             >
-              <styled.div
+              <FormStepIcon__IconContainer
                 active={false}
                 done={false}
               >
                 <div
                   className="c11"
                 >
-                  <Styled(Component)
+                  <FormStepIcon__IconBase
                     active={false}
                     type="subject"
                   >
@@ -468,10 +468,10 @@ exports[`renders correctly 1`] = `
                         </span>
                       </styled.span>
                     </ForwardRef>
-                  </Styled(Component)>
+                  </FormStepIcon__IconBase>
                 </div>
-              </styled.div>
-              <styled.div
+              </FormStepIcon__IconContainer>
+              <FormStepIcon__LabelContainer
                 active={false}
               >
                 <div
@@ -479,12 +479,12 @@ exports[`renders correctly 1`] = `
                 >
                   yleiset.soraKuvaus
                 </div>
-              </styled.div>
+              </FormStepIcon__LabelContainer>
             </div>
-          </styled.div>
-        </Styled(FormStepIcon)>
+          </FormStepIcon__Container>
+        </FormSteps__StepsIcon>
       </div>
-    </styled.div>
+    </FormSteps__GroupContainer>
   </div>
-</styled.div>
+</FormSteps__Wrapper>
 `;

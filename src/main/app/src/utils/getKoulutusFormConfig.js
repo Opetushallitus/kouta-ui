@@ -1,4 +1,4 @@
-import { get } from 'lodash';
+import _ from 'lodash';
 
 import {
   KOULUTUSTYYPPI,
@@ -17,10 +17,11 @@ import {
   pohjaValintaSectionConfig,
   tilaSectionConfig,
   julkinenSectionConfig,
+  createOptionalTranslatedFieldConfig,
 } from '#/src/utils/formConfigUtils';
 
 const getMinTarjoajat = values => {
-  return get(values, 'minTarjoajat', 1);
+  return _.get(values, 'minTarjoajat', 1);
 };
 
 const config = createFormConfigBuilder().registerSections([
@@ -109,10 +110,10 @@ const config = createFormConfigBuilder().registerSections([
           eb.validateTranslations('description.nimi', getKielivalinta(values)),
         ),
       },
-      {
-        field: '.kuvaus',
+      createOptionalTranslatedFieldConfig({
+        name: 'description.kuvaus',
         koulutustyypit: TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
-      },
+      }),
       {
         fragment: 'tekstiKuvaus',
         koulutustyypit: [

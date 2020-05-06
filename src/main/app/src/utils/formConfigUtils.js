@@ -85,3 +85,14 @@ export const validateRelations = specs => (eb, values) => {
 
   return eb.validate('tila', () => isValid, { message: errors });
 };
+
+export const createOptionalTranslatedFieldConfig = ({
+  name,
+  koulutustyypit,
+}) => ({
+  field: name,
+  koulutustyypit,
+  validate: validateIfJulkaistu((eb, values) =>
+    eb.validateTranslations(name, getKielivalinta(values), { optional: true }),
+  ),
+});

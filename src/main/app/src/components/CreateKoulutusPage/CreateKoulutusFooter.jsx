@@ -1,17 +1,18 @@
 import React, { useCallback } from 'react';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import Submit from '../Submit';
 import { useTranslation } from 'react-i18next';
 import { getTestIdProps } from '../../utils';
 import Flex from '../Flex';
-import useSaveForm from '../useSaveForm';
+import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import createKoulutus from '../../utils/kouta/createKoulutus';
 import validateKoulutusForm from '../../utils/validateKoulutusForm';
 import getKoulutusByFormValues from '../../utils/getKoulutusByFormValues';
 
-const CreateKoulutusFooter = ({ organisaatioOid, history }) => {
+const CreateKoulutusFooter = ({ organisaatioOid }) => {
   const { t } = useTranslation();
+  const history = useHistory();
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
@@ -41,4 +42,4 @@ const CreateKoulutusFooter = ({ organisaatioOid, history }) => {
   );
 };
 
-export default withRouter(CreateKoulutusFooter);
+export default CreateKoulutusFooter;

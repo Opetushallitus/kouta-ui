@@ -229,7 +229,7 @@ const config = createFormConfigBuilder().registerSections([
           t: 'yleiset.toteutus',
         },
         {
-          key: 'valintaperusteenKuvaus',
+          key: 'valintaperuste',
           t: 'yleiset.valintaperuste',
         },
       ])(eb.validateExistence('tila'), values),

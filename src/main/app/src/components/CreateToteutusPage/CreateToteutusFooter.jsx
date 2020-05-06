@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import Submit from '../Submit';
 import { useTranslation } from 'react-i18next';
@@ -7,17 +7,16 @@ import { getTestIdProps } from '../../utils';
 import Flex from '../Flex';
 import getToteutusByFormValues from '../../utils/getToteutusByFormValues';
 import createToteutus from '../../utils/kouta/createToteutus';
-import useSaveForm from '../useSaveForm';
-import validateToteutusForm from '../../utils/validateToteutusForm';
+import { useSaveToteutus } from '#/src/hooks/formSaveHooks';
 
 const CreateToteutusFooter = ({
   organisaatioOid,
   koulutustyyppi,
-  history,
   koulutusOid,
   koulutus,
 }) => {
   const { t } = useTranslation();
+  const history = useHistory();
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
@@ -36,12 +35,7 @@ const CreateToteutusFooter = ({
     [organisaatioOid, history, koulutustyyppi, koulutusOid],
   );
 
-  const { save } = useSaveForm({
-    form: 'createToteutusForm',
-    submit,
-    validate: values =>
-      validateToteutusForm({ ...values, koulutustyyppi, koulutus }),
-  });
+  const save = useSaveToteutus(submit, { koulutustyyppi, koulutus });
 
   return (
     <Flex justifyEnd>
@@ -52,4 +46,4 @@ const CreateToteutusFooter = ({
   );
 };
 
-export default withRouter(CreateToteutusFooter);
+export default CreateToteutusFooter;

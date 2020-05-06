@@ -1,17 +1,18 @@
 import React, { useCallback } from 'react';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import Submit from '../Submit';
 import { useTranslation } from 'react-i18next';
 import { getTestIdProps } from '../../utils';
 import Flex from '../Flex';
-import useSaveForm from '../useSaveForm';
+import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import createSoraKuvaus from '../../utils/kouta/createSoraKuvaus';
 import validateSoraKuvausForm from '../../utils/validateSoraKuvausForm';
 import getSoraKuvausByFormValues from '../../utils/getSoraKuvausByFormValues';
 
-const CreateSoraKuvausFooter = ({ history, organisaatioOid }) => {
+const CreateSoraKuvausFooter = ({ organisaatioOid }) => {
   const { t } = useTranslation();
+  const history = useHistory();
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
@@ -25,7 +26,7 @@ const CreateSoraKuvausFooter = ({ history, organisaatioOid }) => {
         `/organisaatio/${organisaatioOid}/sora-kuvaus/${id}/muokkaus`,
       );
     },
-    [organisaatioOid, history],
+    [history, organisaatioOid],
   );
 
   const { save } = useSaveForm({
@@ -43,4 +44,4 @@ const CreateSoraKuvausFooter = ({ history, organisaatioOid }) => {
   );
 };
 
-export default withRouter(CreateSoraKuvausFooter);
+export default CreateSoraKuvausFooter;

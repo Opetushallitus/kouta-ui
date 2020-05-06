@@ -17,7 +17,6 @@ import useFieldValue from '../useFieldValue';
 const getValintaperusteetOptions = (valintaperusteet, language) =>
   valintaperusteet.map(({ nimi, id, tila }) => ({
     value: id,
-    tila,
     label: getFirstLanguageValue(nimi, language),
   }));
 

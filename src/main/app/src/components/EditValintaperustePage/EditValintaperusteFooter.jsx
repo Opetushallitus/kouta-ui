@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import Submit from '../Submit';
 import { useTranslation } from 'react-i18next';
@@ -7,13 +7,13 @@ import { getTestIdProps } from '../../utils';
 import Box from '../Box';
 import updateValintaperuste from '../../utils/kouta/updateValintaperuste';
 import getValintaperusteByFormValues from '../../utils/getValintaperusteByFormValues';
-import validateValintaperusteForm from '../../utils/validateValintaperusteForm';
-import useSaveForm from '../useSaveForm';
 import useOrganisaatio from '../useOrganisaatio';
 import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
 import { VALINTAPERUSTE_ROLE } from '../../constants';
+import { useSaveValintaperuste } from '#/src/hooks/formSaveHooks';
 
-const EditValintaperusteFooter = ({ valintaperuste, history }) => {
+const EditValintaperusteFooter = ({ valintaperuste }) => {
+  const history = useHistory();
   const { t } = useTranslation();
   const { organisaatio } = useOrganisaatio(valintaperuste.organisaatioOid);
   const roleBuilder = useAuthorizedUserRoleBuilder();
@@ -42,11 +42,7 @@ const EditValintaperusteFooter = ({ valintaperuste, history }) => {
     [valintaperuste, history],
   );
 
-  const { save } = useSaveForm({
-    form: 'editValintaperusteForm',
-    submit,
-    validate: validateValintaperusteForm,
-  });
+  const save = useSaveValintaperuste(submit);
 
   return (
     <Box display="flex" justifyContent="flex-end">
@@ -64,4 +60,4 @@ const EditValintaperusteFooter = ({ valintaperuste, history }) => {
   );
 };
 
-export default withRouter(EditValintaperusteFooter);
+export default EditValintaperusteFooter;

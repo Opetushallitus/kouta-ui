@@ -1,19 +1,18 @@
 import React, { useCallback, useMemo } from 'react';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { isArray, uniq, without } from 'lodash';
 import Submit from '../Submit';
 import { useTranslation } from 'react-i18next';
 import { getTestIdProps } from '../../utils';
 import Box from '../Box';
 import getToteutusByFormValues from '../../utils/getToteutusByFormValues';
-import validateToteutusForm from '../../utils/validateToteutusForm';
-import useSaveForm from '../useSaveForm';
 import updateToteutus from '../../utils/kouta/updateToteutus';
 import useOrganisaatio from '../useOrganisaatio';
 import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
 import { TOTEUTUS_ROLE } from '../../constants';
 import iterateTree from '../../utils/iterateTree';
 import useOrganisaatioHierarkia from '../useOrganisaatioHierarkia';
+import { useSaveToteutus } from '#/src/hooks/formSaveHooks';
 
 const getAvailableTarjoajaOids = hierarkia => {
   const oids = [];
@@ -49,9 +48,9 @@ const EditToteutusFooter = ({
   toteutus,
   koulutustyyppi,
   organisaatioOid,
-  history,
   koulutus,
 }) => {
+  const history = useHistory();
   const { t } = useTranslation();
   const { organisaatio } = useOrganisaatio(toteutus.organisaatioOid);
   const roleBuilder = useAuthorizedUserRoleBuilder();
@@ -91,12 +90,7 @@ const EditToteutusFooter = ({
     [toteutus, history, koulutustyyppi, availableTarjoajaOids],
   );
 
-  const { save } = useSaveForm({
-    form: 'editToteutusForm',
-    submit,
-    validate: values =>
-      validateToteutusForm({ ...values, koulutustyyppi, koulutus }),
-  });
+  const save = useSaveToteutus(submit, { koulutustyyppi, koulutus });
 
   return (
     <Box display="flex" justifyContent="flex-end">
@@ -112,4 +106,4 @@ const EditToteutusFooter = ({
   );
 };
 
-export default withRouter(EditToteutusFooter);
+export default EditToteutusFooter;

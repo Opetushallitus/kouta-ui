@@ -82,7 +82,7 @@ class ErrorBuilder {
   validateTranslations(
     path,
     languages,
-    { message, validator = v => exists(v) } = {},
+    { optional, message, validator = v => exists(v) } = {},
   ) {
     const errorMessage = message || 'validointivirheet.pakollisetKaannokset';
 
@@ -90,6 +90,7 @@ class ErrorBuilder {
       this.getValue(path),
       languages,
       validator,
+      optional,
     );
 
     if (invalidTranslations.length > 0) {

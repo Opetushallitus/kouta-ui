@@ -51,7 +51,7 @@ Object {
           "sv": "Sv sahkoposti",
         },
       },
-      "toimitustapa": "muu_osoite",
+      "toimitustapa": "osoite",
       "tyyppiKoodiUri": "liitetyyppi_1#1",
     },
   ],

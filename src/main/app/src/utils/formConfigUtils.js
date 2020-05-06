@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { KOULUTUSTYYPIT, JULKAISUTILA, POHJAVALINTA } from '../constants';
+import { KOULUTUSTYYPIT, JULKAISUTILA, POHJAVALINTA } from '#/src/constants';
 
 export const validateIfJulkaistu = validate => (eb, values, ...rest) => {
   const { tila } = values;
@@ -93,6 +93,9 @@ export const createOptionalTranslatedFieldConfig = ({
   field: name,
   koulutustyypit,
   validate: validateIfJulkaistu((eb, values) =>
-    eb.validateTranslations(name, getKielivalinta(values), { optional: true }),
+    eb.validateTranslations(name, getKielivalinta(values), {
+      optional: true,
+      message: 'validointivirheet.kaikkiKaannoksetJosAinakinYksi',
+    }),
   ),
 });

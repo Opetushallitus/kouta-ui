@@ -256,6 +256,8 @@ export default {
     pakollinen: 'Tämä kenttä on pakollinen',
     pakollisetKaannokset:
       'Tämän kentän kaikille käännöksille täytyy syöttää arvo',
+    kaikkiKaannoksetJosAinakinYksi:
+      'Kentän kaikille käännöksille täytyy syöttää arvo, jos vähintään yhdelle käännökselle on syötetty arvo.',
     listaVahintaanYksi: 'Tälle kentälle täytyy syöttää vähintään yksi arvo',
     listaVahintaan:
       'Tälle kentälle täytyy syöttää vähintään {{lukumaara}} arvoa',

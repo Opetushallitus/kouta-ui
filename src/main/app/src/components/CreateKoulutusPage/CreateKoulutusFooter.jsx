@@ -1,17 +1,14 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import Submit from '../Submit';
-import { useTranslation } from 'react-i18next';
-import { getTestIdProps } from '../../utils';
-import Flex from '../Flex';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import createKoulutus from '../../utils/kouta/createKoulutus';
 import validateKoulutusForm from '../../utils/validateKoulutusForm';
 import getKoulutusByFormValues from '../../utils/getKoulutusByFormValues';
+import { FormFooter } from '#/src/components/FormPage';
+import { ENTITY } from '#/src/constants';
 
 const CreateKoulutusFooter = ({ organisaatioOid }) => {
-  const { t } = useTranslation();
   const history = useHistory();
 
   const submit = useCallback(
@@ -33,13 +30,7 @@ const CreateKoulutusFooter = ({ organisaatioOid }) => {
     validate: values => validateKoulutusForm({ ...values, organisaatioOid }),
   });
 
-  return (
-    <Flex justifyEnd>
-      <Submit onClick={save} {...getTestIdProps('tallennaKoulutusButton')}>
-        {t('yleiset.tallenna')}
-      </Submit>
-    </Flex>
-  );
+  return <FormFooter entity={ENTITY.KOULUTUS} save={save} />;
 };
 
 export default CreateKoulutusFooter;

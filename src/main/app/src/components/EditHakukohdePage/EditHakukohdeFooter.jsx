@@ -1,19 +1,15 @@
 import React, { useMemo, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import Submit from '../Submit';
-import { useTranslation } from 'react-i18next';
-import { getTestIdProps } from '../../utils';
-import Box from '../Box';
 import { useSaveHakukohde } from '#/src/hooks/formSaveHooks';
 import getHakukohdeByFormValues from '../../utils/getHakukohdeByFormValues';
 import updateHakukohde from '../../utils/kouta/updateHakukohde';
 import useOrganisaatio from '../useOrganisaatio';
 import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
-import { HAKUKOHDE_ROLE } from '../../constants';
+import { HAKUKOHDE_ROLE, ENTITY } from '#/src/constants';
+import { FormFooter } from '#/src/components/FormPage';
 
 const EditHakukohdeFooter = ({ hakukohde, haku, toteutus }) => {
-  const { t } = useTranslation();
   const history = useHistory();
 
   const { organisaatio } = useOrganisaatio(hakukohde.organisaatioOid);
@@ -46,16 +42,7 @@ const EditHakukohdeFooter = ({ hakukohde, haku, toteutus }) => {
   const save = useSaveHakukohde(submit, { haku, toteutus });
 
   return (
-    <Box display="flex" justifyContent="flex-end">
-      <Submit
-        disabled={!canUpdate}
-        onClick={save}
-        title={!canUpdate ? t('hakukohdelomake.eiMuokkausOikeutta') : undefined}
-        {...getTestIdProps('tallennaHakukohdeButton')}
-      >
-        {t('yleiset.tallenna')}
-      </Submit>
-    </Box>
+    <FormFooter entity={ENTITY.HAKUKOHDE} save={save} canUpdate={canUpdate} />
   );
 };
 

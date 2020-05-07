@@ -1,17 +1,14 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import Submit from '../Submit';
-import { useTranslation } from 'react-i18next';
-import { getTestIdProps } from '../../utils';
-import Flex from '../Flex';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import createHaku from '../../utils/kouta/createHaku';
 import validateHakuForm from '../../utils/validateHakuForm';
 import getHakuByFormValues from '../../utils/getHakuByFormValues';
+import { FormFooter } from '#/src/components/FormPage';
+import { ENTITY } from '#/src/constants';
 
 const CreateHakuFooter = ({ organisaatioOid }) => {
-  const { t } = useTranslation();
   const history = useHistory();
 
   const submit = useCallback(
@@ -33,13 +30,7 @@ const CreateHakuFooter = ({ organisaatioOid }) => {
     validate: validateHakuForm,
   });
 
-  return (
-    <Flex justifyEnd>
-      <Submit onClick={save} {...getTestIdProps('tallennaHakuButton')}>
-        {t('yleiset.tallenna')}
-      </Submit>
-    </Flex>
-  );
+  return <FormFooter entity={ENTITY.HAKU} save={save} />;
 };
 
 export default CreateHakuFooter;

@@ -1,13 +1,11 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import Submit from '../Submit';
-import { useTranslation } from 'react-i18next';
-import { getTestIdProps } from '../../utils';
-import Flex from '../Flex';
 import { useSaveHakukohde } from '#/src/hooks/formSaveHooks';
 import getHakukohdeByFormValues from '../../utils/getHakukohdeByFormValues';
 import createHakukohde from '../../utils/kouta/createHakukohde';
+import { FormFooter } from '#/src/components/FormPage';
+import { ENTITY } from '#/src/constants';
 
 const CreateHakukohdeFooter = ({
   organisaatioOid,
@@ -16,7 +14,6 @@ const CreateHakukohdeFooter = ({
   toteutus,
   haku,
 }) => {
-  const { t } = useTranslation();
   const history = useHistory();
 
   const submit = useCallback(
@@ -41,13 +38,7 @@ const CreateHakukohdeFooter = ({
 
   const save = useSaveHakukohde(submit, { haku, toteutus });
 
-  return (
-    <Flex justifyEnd>
-      <Submit onClick={save} {...getTestIdProps('tallennaHakukohdeButton')}>
-        {t('yleiset.tallenna')}
-      </Submit>
-    </Flex>
-  );
+  return <FormFooter entity={ENTITY.HAKUKOHDE} save={save} />;
 };
 
 export default CreateHakukohdeFooter;

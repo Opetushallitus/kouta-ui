@@ -1,17 +1,14 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import Submit from '../Submit';
-import { useTranslation } from 'react-i18next';
-import { getTestIdProps } from '../../utils';
-import Flex from '../Flex';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import createSoraKuvaus from '../../utils/kouta/createSoraKuvaus';
 import validateSoraKuvausForm from '../../utils/validateSoraKuvausForm';
 import getSoraKuvausByFormValues from '../../utils/getSoraKuvausByFormValues';
+import { FormFooter } from '#/src/components/FormPage';
+import { ENTITY } from '#/src/constants';
 
 const CreateSoraKuvausFooter = ({ organisaatioOid }) => {
-  const { t } = useTranslation();
   const history = useHistory();
 
   const submit = useCallback(
@@ -35,13 +32,7 @@ const CreateSoraKuvausFooter = ({ organisaatioOid }) => {
     validate: validateSoraKuvausForm,
   });
 
-  return (
-    <Flex justifyEnd>
-      <Submit onClick={save} {...getTestIdProps('tallennaSoraKuvausButton')}>
-        {t('yleiset.tallenna')}
-      </Submit>
-    </Flex>
-  );
+  return <FormFooter entity={ENTITY.SORA_KUVAUS} save={save} />;
 };
 
 export default CreateSoraKuvausFooter;

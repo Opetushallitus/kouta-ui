@@ -1,22 +1,19 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import Box from '../Box';
-import Submit from '../Submit';
-import { getTestIdProps } from '../../utils';
-import { useTranslation } from 'react-i18next';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import validateOppilaitoksenOsaForm from '../../utils/validateOppilaitoksenOsaForm';
 import createOppilaitoksenOsa from '../../utils/kouta/createOppilaitoksenOsa';
 import getOppilaitoksenOsaByFormValues from '../../utils/getOppilaitoksenOsaByFormValues';
 import updateOppilaitoksenOsa from '../../utils/kouta/updateOppilaitoksenOsa';
+import { ENTITY } from '#/src/constants';
+import { FormFooter } from '#/src/components/FormPage';
 
 const OppilaitoksenOsaPageFooter = ({
   oppilaitoksenOsa,
   organisaatioOid,
   oppilaitoksenOsaIsLoading = false,
 }) => {
-  const { t } = useTranslation();
   const history = useHistory();
 
   const submit = useCallback(
@@ -52,15 +49,11 @@ const OppilaitoksenOsaPageFooter = ({
   });
 
   return (
-    <Box display="flex" justifyContent="end">
-      <Submit
-        onClick={save}
-        disabled={oppilaitoksenOsaIsLoading}
-        {...getTestIdProps('tallennaOppilaitoksenOsaButton')}
-      >
-        {t('yleiset.tallenna')}
-      </Submit>
-    </Box>
+    <FormFooter
+      entity={ENTITY.OPPILAITOKSEN_OSA}
+      save={save}
+      submitProps={{ disabled: oppilaitoksenOsaIsLoading }}
+    />
   );
 };
 

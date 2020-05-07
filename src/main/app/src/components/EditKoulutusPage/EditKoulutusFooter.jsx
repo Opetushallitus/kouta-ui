@@ -2,20 +2,17 @@ import React, { useCallback, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import { isArray, uniq, without, negate } from 'lodash';
 
-import Submit from '../Submit';
-import { useTranslation } from 'react-i18next';
-import { getTestIdProps } from '../../utils';
-import Box from '../Box';
 import getKoulutusByFormValues from '../../utils/getKoulutusByFormValues';
 import updateKoulutus from '../../utils/kouta/updateKoulutus';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import validateKoulutusForm from '../../utils/validateKoulutusForm';
 import useOrganisaatio from '../useOrganisaatio';
 import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
-import { KOULUTUS_ROLE, ORGANISAATIOTYYPPI } from '#/src/constants';
+import { KOULUTUS_ROLE, ORGANISAATIOTYYPPI, ENTITY } from '#/src/constants';
 import useOrganisaatioHierarkia from '../useOrganisaatioHierarkia';
 import iterateTree from '../../utils/iterateTree';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatioService/organisaatioMatchesTyyppi';
+import { FormFooter } from '#/src/components/FormPage';
 
 const getAvailableTarjoajaOids = hierarkia => {
   const oids = [];
@@ -49,7 +46,6 @@ const mergeTarjoajat = (koulutusOids, valueOids, availableOids) => {
 
 const EditKoulutusFooter = ({ koulutus, organisaatioOid }) => {
   const history = useHistory();
-  const { t } = useTranslation();
   const { organisaatio } = useOrganisaatio(koulutus.organisaatioOid);
   const roleBuilder = useAuthorizedUserRoleBuilder();
 
@@ -102,20 +98,7 @@ const EditKoulutusFooter = ({ koulutus, organisaatioOid }) => {
   });
 
   return (
-    <Box display="flex" justifyContent="flex-end">
-      <Box>
-        <Submit
-          disabled={!canUpdate}
-          onClick={save}
-          title={
-            !canUpdate ? t('koulutuslomake.eiMuokkausOikeutta') : undefined
-          }
-          {...getTestIdProps('tallennaKoulutusButton')}
-        >
-          {t('yleiset.tallenna')}
-        </Submit>
-      </Box>
-    </Box>
+    <FormFooter entity={ENTITY.KOULUTUS} save={save} canUpdate={canUpdate} />
   );
 };
 

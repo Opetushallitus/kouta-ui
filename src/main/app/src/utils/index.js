@@ -1,7 +1,6 @@
 import dateFnsformatDate from 'date-fns/format';
 import memoizee from 'memoizee';
 import _ from 'lodash';
-import { useMachine as useXstateMachine } from '@xstate/react';
 import stripTags from 'striptags';
 import { ALLOWED_HTML_TAGS } from '#/src/constants';
 
@@ -171,12 +170,6 @@ export const getFileExtension = file => {
   const parts = file.name.split('.');
   return parts.length > 1 ? _.last(parts).toLowerCase() : '';
 };
-
-export const useMachine = (machine, options) =>
-  useXstateMachine(machine, {
-    devTools: isDev,
-    ...options,
-  });
 
 /**
  * Check that given predicate returns truthy for a value or any value in an array

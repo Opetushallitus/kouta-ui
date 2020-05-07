@@ -12,7 +12,7 @@ import Divider from '../Divider';
 import Box from '../Box';
 import Button from '../Button';
 import Alert from '../Alert';
-import useFieldValue from '../useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 
 const getValintaperusteetOptions = (valintaperusteet, language) =>
   valintaperusteet.map(({ nimi, id, tila }) => ({

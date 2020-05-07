@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 
 import KoulutusForm from '../KoulutusForm';
 import FormConfigContext from '../FormConfigContext';
-import useFieldValue from '../useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 import getKoulutusFormConfig from '../../utils/getKoulutusFormConfig';
 
 const KoulutusFormWrapper = props => {

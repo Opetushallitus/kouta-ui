@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import ValintaperusteForm from '../ValintaperusteForm';
 import getValintaperusteFormConfig from '../../utils/getValintaperusteFormConfig';
 import FormConfigContext from '../FormConfigContext';
-import useFieldValue from '../useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 
 const ValintaperusteFormWrapper = props => {
   const koulutustyyppi = useFieldValue('perustiedot.tyyppi');

@@ -9,7 +9,7 @@ import { getFirstLanguageValue } from '../../utils';
 import useApiAsync from '../useApiAsync';
 import { useTranslation } from 'react-i18next';
 import { FormFieldSelect } from '../formFields';
-import useFieldValue from '../useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 
 const getOptions = items => {
   return items.map(({ nimi, oid }) => ({

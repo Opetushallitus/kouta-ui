@@ -6,7 +6,7 @@ import { getThemeProp } from '../../theme';
 import Button from '../Button';
 import { useTranslation } from 'react-i18next';
 import Container from '../Container';
-import useFieldValue from '#/src/components/useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 
 const HeaderContainer = styled.div`
   background-color: white;

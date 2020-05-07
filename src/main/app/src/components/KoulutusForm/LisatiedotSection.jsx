@@ -8,7 +8,7 @@ import useKoodistoOptions from '../useKoodistoOptions';
 import { getTestIdProps } from '../../utils';
 import { FormFieldTextarea, FormFieldSelect } from '../formFields';
 import Typography from '../Typography';
-import useFieldValue from '../useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 
 const OsiotFields = ({ disabled, language, osiotOptions, name }) => {
   const osiot = useFieldValue(`${name}.osiot`);

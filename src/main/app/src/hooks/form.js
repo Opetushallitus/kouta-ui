@@ -1,9 +1,9 @@
-import { useContext, useMemo } from 'react';
-import { useStore } from 'react-redux';
-import { mapValues } from 'lodash';
+import { useContext, useMemo, useCallback } from 'react';
+import { useStore, useSelector } from 'react-redux';
+import _ from 'lodash';
 import formActions from 'redux-form/lib/actions';
+import FormNameContext from '#/src/components/FormNameContext';
 import * as formSelectors from './reduxFormSelectors';
-import FormNameContext from '../components/FormNameContext';
 import { useActions } from './redux';
 
 export const useFormName = () => useContext(FormNameContext);
@@ -12,7 +12,7 @@ export function useBoundFormActions() {
   const formName = useFormName();
   const boundFormActions = useMemo(
     () =>
-      mapValues(formActions, action => (...args) =>
+      _.mapValues(formActions, action => (...args) =>
         action.apply(null, [formName, ...args]),
       ),
     [formName],
@@ -25,9 +25,20 @@ export function useBoundFormSelectors() {
   const store = useStore();
   return useMemo(
     () =>
-      mapValues(formSelectors, selector => () =>
+      _.mapValues(formSelectors, selector => () =>
         selector(formName)(store.getState()),
       ),
     [formName, store],
   );
+}
+
+export function useFieldValue(name) {
+  const formName = useContext(FormNameContext);
+
+  const selector = useCallback(
+    state => _.get(state, `form.${formName}.values.${name}`),
+    [formName, name],
+  );
+
+  return useSelector(selector);
 }

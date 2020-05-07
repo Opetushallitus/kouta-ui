@@ -23,7 +23,7 @@ import Spin from '#/src/components/Spin';
 import Typography from '#/src/components/Typography';
 import useApiAsync from '#/src/components/useApiAsync';
 import UrlContext from '#/src/components/UrlContext';
-import useFieldValue from '#/src/components/useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 import KoulutusField from '../KoulutusField';
 
 const getListNimiLanguageValues = (list = [], language) =>

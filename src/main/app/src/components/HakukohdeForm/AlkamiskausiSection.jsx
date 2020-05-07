@@ -15,7 +15,7 @@ import {
 import useKoodiNimi from '../useKoodiNimi';
 import Typography from '../Typography';
 import { getTestIdProps } from '../../utils';
-import useFieldValue from '../useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 
 const EriAlkamiskausiFields = ({ name, options, t }) => (
   <>

@@ -5,7 +5,7 @@ import KoulutusForm from './index';
 import ReduxForm from '../ReduxForm';
 import getKoulutusFormConfig from '../../utils/getKoulutusFormConfig';
 import FormConfigContext from '../FormConfigContext';
-import useFieldValue from '../useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 
 import {
   makeStoreDecorator,

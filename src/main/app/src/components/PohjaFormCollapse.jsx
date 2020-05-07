@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { get } from 'lodash';
 import FormCollapse from './FormCollapse';
-import useFieldValue from './useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 import PohjaValintaSection from '#/src/components/PohjaValintaSection';
 
 export default function PohjaFormCollapse({

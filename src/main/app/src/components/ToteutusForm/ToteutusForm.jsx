@@ -16,7 +16,7 @@ import Button from '../Button';
 import KorkeakouluOsaamisalatSection from './KorkeakouluOsaamisalatSection';
 import YhteyshenkilotSection from './YhteyshenkilotSection';
 import { KOULUTUSTYYPPI } from '../../constants';
-import useFieldValue from '../useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 import useModal from '../useModal';
 import LukiolinjatSection from './LukiolinjatSection';
 import JulkaisutilaField from '#/src/components/JulkaisutilaField';

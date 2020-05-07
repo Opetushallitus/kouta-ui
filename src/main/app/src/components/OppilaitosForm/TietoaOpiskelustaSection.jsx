@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 
 import { FormFieldTextarea, FormFieldSelect } from '../formFields';
 import { useTranslation } from 'react-i18next';
-import useFieldValue from '../useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 import useKoodistoOptions from '../useKoodistoOptions';
 import DividerHeading from '../DividerHeading';
 import Typography from '../Typography';

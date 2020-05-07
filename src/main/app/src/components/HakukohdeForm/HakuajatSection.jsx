@@ -6,7 +6,7 @@ import Spacing from '../Spacing';
 import { formatKoutaDateString } from '../../utils';
 import { useTranslation } from 'react-i18next';
 import { FormFieldCheckbox } from '../formFields';
-import useFieldValue from '../useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 import HakuajatFields from '../HakuajatFields';
 
 const HakuaikaInterval = ({ haku }) => {

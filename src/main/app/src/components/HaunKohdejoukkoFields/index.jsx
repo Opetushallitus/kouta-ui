@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { Field } from 'redux-form';
 
 import useKoodistoOptions from '../useKoodistoOptions';
-import useFieldValue from '../useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 import isKorkeakoulutusKohdejoukkoKoodiUri from '../../utils/isKorkeakoulutusKohdejoukkoKoodiUri';
 import { FormFieldRadioGroup, FormFieldSelect } from '../formFields';
 import { useTranslation } from 'react-i18next';

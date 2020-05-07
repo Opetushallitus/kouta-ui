@@ -9,7 +9,7 @@ import TietoaOpiskelustaSection from './TietoaOpiskelustaSection';
 import YhteystiedotSection from './YhteystiedotSection';
 import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import KieliversiotFields from '../KieliversiotFields';
-import useFieldValue from '../useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 import TeemakuvaSection from '../TeemakuvaSection';
 
 const OppilaitosForm = ({

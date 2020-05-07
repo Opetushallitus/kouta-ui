@@ -16,7 +16,7 @@ import { getTestIdProps } from '../../../utils';
 import NoYesRadioGroup from '../../NoYesRadioGroup';
 import MaksullisuusFields from './MaksullisuusFields';
 import isKorkeakouluKoulutustyyppi from '../../../utils/isKorkeakouluKoulutustyyppi';
-import useFieldValue from '../../useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 import FormConfigFragment from '../../FormConfigFragment';
 import DiplomiFields from './DiplomiFields';
 import KielivalikoimaFields from './KielivalikoimaFields';

@@ -13,7 +13,7 @@ import LisatiedotSection from './LisatiedotSection';
 import Flex from '../Flex';
 import NakyvyysSection from './NakyvyysSection';
 import { useTranslation } from 'react-i18next';
-import useFieldValue from '../useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import isOphOrganisaatio from '../../utils/isOphOrganisaatio';
 import TeemakuvaSection from '../TeemakuvaSection';

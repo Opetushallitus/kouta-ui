@@ -1,53 +1,47 @@
-import React, { useEffect, useContext, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Field, change, isDirty as formIsDirty } from 'redux-form';
+import React, { useEffect, useState } from 'react';
 import { get, each, find, toLower } from 'lodash';
+import { Field } from 'redux-form';
+import { useTranslation } from 'react-i18next';
 
-import FormConfigFragment from '../../FormConfigFragment';
-import KoulutuksenTiedotSection from './KoulutuksenTiedotSection';
+import { useBoundFormActions, useBoundFormSelectors } from '#/src/hooks/form';
+import FormConfigFragment from '#/src/components/FormConfigFragment';
+import { FormFieldInput } from '#/src/components/formFields';
+import { getTestIdProps } from '#/src/utils';
+import Box from '#/src/components/Box';
+import useKoodi from '#/src/components/useKoodi';
+import KoulutusalatField from './KoulutusalatField';
 import KoulutusField from '../KoulutusField';
-import Box from '../../Box';
+import KoulutuksenTiedotSection from './KoulutuksenTiedotSection';
 import OpintojenlaajuusField from './OpintojenlaajuusField';
 import TutkintonimikeField from './TutkintonimikeField';
-import KoulutusalatField from './KoulutusalatField';
-import { useTranslation } from 'react-i18next';
-import { FormFieldInput } from '../../formFields';
-import { getTestIdProps } from '../../../utils';
-import FormNameContext from '../../FormNameContext';
-import useKoodi from '../../useKoodi';
-
-const useFormName = () => useContext(FormNameContext);
 
 const useLocalizedKoulutus = ({ fieldName, language, koulutusValue }) => {
-  const dispatch = useDispatch();
-  const formName = useFormName();
   const [changedKoulutus, setChangedKoulutus] = useState(null);
   const koulutusKoodi = useKoodi(get(koulutusValue, 'value'));
   const koodi = get(koulutusKoodi, 'koodi');
-  const isDirty = useSelector(formIsDirty(formName));
+  const { isDirty } = useBoundFormSelectors();
+  const { change } = useBoundFormActions();
 
   // When language changes, change the selected 'koulutus' label accordingly
   // if the form is dirty (don't override initial values)
   useEffect(() => {
-    if (koodi && isDirty) {
+    if (koodi && isDirty()) {
       const { metadata } = koodi;
       const localizedNimi = get(
         find(metadata, ({ kieli }) => toLower(kieli) === language),
         'nimi',
       );
       if (localizedNimi) {
-        dispatch(
-          change(formName, `${fieldName}.koulutus.label`, localizedNimi),
-        );
+        change(`${fieldName}.koulutus.label`, localizedNimi);
       }
     }
-  }, [language, koodi, dispatch, formName, fieldName, isDirty]);
+  }, [language, koodi, fieldName, isDirty, change]);
 
   useEffect(() => {
-    if (koulutusValue && isDirty) {
+    if (koulutusValue && isDirty()) {
       setChangedKoulutus(koulutusValue.value);
     }
-  }, [formName, isDirty, koulutusValue, language]);
+  }, [isDirty, koulutusValue, language]);
 
   // When koulutus field has changed to a defined value and got its 'koodi'
   // change the language versioned 'nimi' fields accordingly
@@ -56,11 +50,11 @@ const useLocalizedKoulutus = ({ fieldName, language, koulutusValue }) => {
     if (changedKoulutus && koodi) {
       each(get(koodi, 'metadata'), ({ kieli, nimi }) => {
         const lang = toLower(kieli);
-        dispatch(change(formName, `${fieldName}.nimi.${lang}`, nimi));
+        change(`${fieldName}.nimi.${lang}`, nimi);
       });
       setChangedKoulutus(null);
     }
-  }, [changedKoulutus, dispatch, fieldName, formName, koodi, language]);
+  }, [change, changedKoulutus, fieldName, koodi, language]);
 };
 
 const TiedotSection = ({

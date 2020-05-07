@@ -3,10 +3,16 @@ import { useStore, useSelector } from 'react-redux';
 import _ from 'lodash';
 import formActions from 'redux-form/lib/actions';
 import FormNameContext from '#/src/components/FormNameContext';
+import FormConfigContext from '#/src/components/FormConfigContext';
 import * as formSelectors from './reduxFormSelectors';
 import { useActions } from './redux';
 
 export const useFormName = () => useContext(FormNameContext);
+
+export const useForm = () => {
+  const formName = useFormName();
+  return useSelector(state => _.get(state, `form.${formName}`));
+};
 
 export function useBoundFormActions() {
   const formName = useFormName();
@@ -42,3 +48,14 @@ export function useFieldValue(name) {
 
   return useSelector(selector);
 }
+
+export const useFormConfig = () => {
+  const contextConfig = useContext(FormConfigContext);
+
+  return useMemo(() => {
+    return {
+      sections: {},
+      ...(contextConfig || {}),
+    };
+  }, [contextConfig]);
+};

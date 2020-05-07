@@ -1,8 +1,7 @@
 import { useContext } from 'react';
 import _ from 'lodash';
 import FormConfigSectionContext from '#/src/components/FormConfigSectionContext';
-import useFormConfig from '#/src/components/useFormConfig';
-import useForm from '#/src/components/useForm';
+import { useFormConfig, useForm } from '#/src/hooks/form';
 
 const findFieldConfig = (fieldConfigs = [], name = '') => {
   const trimmedFieldName = name.replace(/\[\d\]/, '');

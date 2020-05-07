@@ -39,8 +39,6 @@ const getHautFn = async ({ httpClient, apiUrls, ...filters }) => {
   return { result, pageCount: Math.ceil(totalCount / 10) };
 };
 
-const noopPromiseFn = () => Promise.resolve();
-
 const Actions = ({ organisaatioOid }) => {
   const { t } = useTranslation();
 

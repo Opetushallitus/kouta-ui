@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { get, isFunction } from 'lodash';
 import { produce } from 'immer';
-import Box from '../Box';
-import useFormConfig from '../useFormConfig';
-import useForm from '../useForm';
-import scrollElementIntoView from '../../utils/scrollElementIntoView';
+import Box from '#/src/components/Box';
+import { useFormConfig, useForm } from '#/src/hooks/form';
+import scrollElementIntoView from '#/src/utils/scrollElementIntoView';
 
 const getVisibleChildren = (children, config, configured) => {
   return React.Children.toArray(children).filter(c => {

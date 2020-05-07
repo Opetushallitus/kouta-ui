@@ -153,7 +153,7 @@ const config = createFormConfigBuilder().registerSections([
       {
         field: '.opetusaika',
         validate: validateIfJulkaistu(eb =>
-          eb.validateArrayMinLength('jarjestamistiedot.opetusaika', 1),
+          eb.validateExistence('jarjestamistiedot.opetusaika'),
         ),
         required: true,
       },

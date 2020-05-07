@@ -26,9 +26,12 @@ const getToteutusByFormValues = values => {
     get(values, 'tiedot.toteutuksenKuvaus') || {},
     kielivalinta,
   );
+
+  const opetusaika = get(values, 'jarjestamistiedot.opetusaika');
+
   const osioKuvaukset = get(values, 'jarjestamistiedot.osioKuvaukset') || {};
   const opetustapaKoodiUrit = get(values, 'jarjestamistiedot.opetustapa') || [];
-  const opetusaikaKoodiUrit = get(values, 'jarjestamistiedot.opetusaika') || [];
+  const opetusaikaKoodiUrit = opetusaika ? [opetusaika] : [];
 
   const diplomiKoodiUrit = (
     get(values, 'jarjestamistiedot.diplomiTyypit') || []

@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
-import { get, isArray } from 'lodash';
+import { get } from 'lodash';
 
 import { useTranslation } from 'react-i18next';
 import Spacing from '../../Spacing';
-import OpetusaikaCheckboxGroup from './OpetusaikaCheckboxGroup';
+import OpetusaikaRadioGroup from './OpetusaikaRadioGroup';
 import OpetuskieliCheckboxGroup from './OpetuskieliCheckboxGroup';
 import OpetustapaCheckboxGroup from './OpetustapaCheckboxGroup';
 import Flex, { FlexItem } from '../../Flex';
@@ -27,10 +27,8 @@ import {
   FormFieldSelect,
   FormFieldInput,
   createFormFieldComponent,
+  simpleMapProps,
 } from '../../formFields';
-
-const makeCountLimitOnChange = (onChange, max) => items =>
-  isArray(items) && items.length <= max && onChange(items);
 
 const NoYesField = createFormFieldComponent(
   NoYesRadioGroup,
@@ -41,13 +39,8 @@ const NoYesField = createFormFieldComponent(
 );
 
 const OpetusaikaField = createFormFieldComponent(
-  OpetusaikaCheckboxGroup,
-  ({ input: { value, onChange, ...input }, ...props }) => ({
-    ...input,
-    value: value || [],
-    onChange: makeCountLimitOnChange(onChange, 2),
-    ...props,
-  }),
+  OpetusaikaRadioGroup,
+  simpleMapProps,
 );
 
 const OpetuskieliField = createFormFieldComponent(
@@ -193,7 +186,6 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
               name={`${name}.opetusaika`}
               component={OpetusaikaField}
               label={t('toteutuslomake.valitsePaaasiallinenOpetusaika')}
-              helperText={t('yleiset.voitValitaEnintaan', { lukumaara: 2 })}
             />
           </FlexItem>
           <FlexItem grow={1} paddingLeft={4}>

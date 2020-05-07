@@ -46,7 +46,7 @@ const fillOpetuskieli = () => {
 
 const fillOpetusaika = () => {
   cy.getByTestId('opetusaika').within(() => {
-    getCheckbox('opetusaikakk_0#1', cy).click({ force: true });
+    getRadio('opetusaikakk_0#1', cy).click({ force: true });
     cy.get('textarea').paste('opetusaika kuvaus');
   });
 };

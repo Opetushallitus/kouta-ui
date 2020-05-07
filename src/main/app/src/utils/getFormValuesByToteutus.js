@@ -118,7 +118,7 @@ const getFormValuesByToteutus = toteutus => {
       },
       maksumaara: get(opetus, 'maksunMaara') || {},
       opetustapa: get(opetus, 'opetustapaKoodiUrit') || [],
-      opetusaika: get(opetus, 'opetusaikaKoodiUrit') || [],
+      opetusaika: get(get(opetus, 'opetusaikaKoodiUrit') || [], 0), // TODO: Should get all opetusaika values and show them in the radio button group
       opetuskieli: get(opetus, 'opetuskieliKoodiUrit') || [],
       opetusaikaKuvaus: get(opetus, 'opetusaikaKuvaus') || {},
       opetustapaKuvaus: get(opetus, 'opetustapaKuvaus') || {},

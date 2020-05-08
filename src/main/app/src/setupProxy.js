@@ -1,25 +1,45 @@
 // This file is used by react-scripts to customize webpack-dev-server proxy
 // https://create-react-app.dev/docs/proxying-api-requests-in-development
 const { createProxyMiddleware } = require('http-proxy-middleware');
+const {
+  DEV_VIRKAILIJA_URL,
+  REACT_APP_DEV_SERVER_URL,
+  KOUTA_BACKEND_URL,
+} = process.env;
 
-const { DEV_VIRKAILIJA_URL, REACT_APP_DEV_SERVER_URL } = process.env;
+const DevServerURL = new URL(REACT_APP_DEV_SERVER_URL);
 
-const devProxyMiddleware = createProxyMiddleware({
-  autoRewrite: true,
-  headers: {
-    'Access-Control-Allow-Origin': DEV_VIRKAILIJA_URL,
-  },
-  changeOrigin: true,
-  cookieDomainRewrite: REACT_APP_DEV_SERVER_URL,
-  secure: false,
-  target: DEV_VIRKAILIJA_URL,
-});
+const createKoutaProxyMiddleware = targetUrl =>
+  createProxyMiddleware({
+    autoRewrite: true,
+    headers: {
+      'Access-Control-Allow-Origin': targetUrl,
+    },
+    changeOrigin: true,
+    cookieDomainRewrite: DevServerURL.hostname,
+    secure: false,
+    target: targetUrl,
+  });
+
+const devProxyMiddleware = createKoutaProxyMiddleware(DEV_VIRKAILIJA_URL);
+
+const koutaBackendProxyMiddleware =
+  KOUTA_BACKEND_URL && createKoutaProxyMiddleware(KOUTA_BACKEND_URL);
 
 module.exports = function (app) {
   app.use('*', function (req, res, next) {
-    return ['/', '/kouta'].includes(req.originalUrl) ||
+    if (
+      ['/', '/kouta'].includes(req.originalUrl) ||
       req.originalUrl.startsWith('/kouta/')
-      ? next()
-      : devProxyMiddleware(req, res, next);
+    ) {
+      next();
+    } else if (
+      KOUTA_BACKEND_URL &&
+      req.originalUrl.startsWith('/kouta-backend')
+    ) {
+      koutaBackendProxyMiddleware(req, res, next);
+    } else {
+      devProxyMiddleware(req, res, next);
+    }
   });
 };

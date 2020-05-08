@@ -1,6 +1,6 @@
-const { REACT_APP_DEV_SERVER_URL, REACT_APP_KOUTA_BACKEND_URL } = process.env;
+const { REACT_APP_DEV_SERVER_URL } = process.env;
 
-const koutaBackendDevUrl = REACT_APP_KOUTA_BACKEND_URL || `${REACT_APP_DEV_SERVER_URL}/kouta-backend`;
+const koutaBackendDevUrl = `${REACT_APP_DEV_SERVER_URL}/kouta-backend`;
 const virkailijaDevUrl = REACT_APP_DEV_SERVER_URL;
 const ePerusteetDevUrl = `https://eperusteet.hahtuvaopintopolku.fi`;
 

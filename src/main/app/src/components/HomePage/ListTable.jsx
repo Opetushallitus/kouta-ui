@@ -1,17 +1,16 @@
 import React, { Fragment, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { get } from 'lodash';
+import { get, isFunction } from 'lodash';
 
 import Table, { TableHead, TableBody, TableRow, TableCell } from '../Table';
 import { getSortDirection, makeOnSort } from './utils';
 import Icon from '../Icon';
 import StatusTag from '../StatusTag';
-import { formatKoutaDateString, isFunction } from '../../utils';
 import useLanguage from '../useLanguage';
 import Anchor from '../Anchor';
 import Dropdown from '../Dropdown';
 import { Link } from 'react-router-dom';
-import { getFirstLanguageValue } from '../../utils';
+import { getFirstLanguageValue, formatKoutaDateString } from '../../utils';
 
 export const makeNimiColumn = (t, { getLinkUrl }) => ({
   title: t('yleiset.nimi'),

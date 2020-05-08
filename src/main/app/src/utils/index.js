@@ -25,8 +25,6 @@ export const isNumeric = value => {
 export const getLanguageValue = (value, language = 'fi') =>
   _.isObject(value) ? value[language] || null : null;
 
-export const isFunction = value => typeof value === 'function';
-
 export const getFirstLanguageValue = (value, priorityArg) => {
   const defaultPriority = ['fi', 'en', 'sv'];
 

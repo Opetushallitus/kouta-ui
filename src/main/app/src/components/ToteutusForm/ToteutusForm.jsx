@@ -1,4 +1,5 @@
 import React from 'react';
+import { isFunction } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import getToteutukset from '#/src/utils/kouta/getToteutukset';
 import FormCollapse from '../FormCollapse';
@@ -9,7 +10,7 @@ import JarjestamisTiedotSection from './JarjestamisTiedotSection';
 import NayttamisTiedotSection from './NayttamisTiedotSection';
 import FormCollapseGroup from '../FormCollapseGroup';
 import HakukohteetSection from './HakukohteetSection';
-import { isFunction, getTestIdProps } from '../../utils';
+import { getTestIdProps } from '../../utils';
 import HakukohteetModal from './HakukohteetModal';
 import Flex from '../Flex';
 import Button from '../Button';

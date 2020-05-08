@@ -9,13 +9,13 @@ import React, {
 
 import styled, { css } from 'styled-components';
 import EventListener from 'react-event-listener';
-import { get, minBy, throttle } from 'lodash';
+import { get, minBy, throttle, isFunction } from 'lodash';
 
 import OrganisaatioDrawer from './OrganisaatioDrawer';
 import Box from '../Box';
 import Typography from '../Typography';
 import Button from '../Button';
-import { getTestIdProps, getFirstLanguageValue, isFunction } from '../../utils';
+import { getTestIdProps, getFirstLanguageValue } from '../../utils';
 import Icon from '../Icon';
 import Container from '../Container';
 import useInView from '../useInView';

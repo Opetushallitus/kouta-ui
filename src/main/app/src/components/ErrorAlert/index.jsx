@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import { isFunction } from 'lodash';
 import { setLightness } from 'polished';
 
 import Anchor from '../Anchor';
 import Icon from '../Icon';
 import Flex, { FlexItem } from '../Flex';
-import { isFunction } from '../../utils';
 import Spacing from '../Spacing';
 import Typography from '../Typography';
 import { getThemeProp, spacing } from '../../theme';

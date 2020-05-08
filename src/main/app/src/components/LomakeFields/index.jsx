@@ -1,5 +1,6 @@
 import React, { useMemo, useContext } from 'react';
 import { Field } from 'redux-form';
+import { isFunction } from 'lodash';
 
 import {
   FormFieldSelect,
@@ -15,7 +16,6 @@ import useLanguage from '../useLanguage';
 import Flex, { FlexItem } from '../Flex';
 import UrlContext from '../UrlContext';
 import Button from '../Button';
-import { isFunction } from '../../utils';
 
 import {
   createEnhancedGetTyyppiLabel,

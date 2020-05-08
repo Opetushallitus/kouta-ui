@@ -1,12 +1,12 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { isFunction } from 'lodash';
 
 import { getThemeProp, spacing } from '../../theme';
 import Dropdown from '../Dropdown';
 import Flex, { FlexItem } from '../Flex';
 import Icon from '../Icon';
 import Typography from '../Typography';
-import { isFunction } from '../../utils';
 
 const Header = styled.div`
   ${({ status }) =>

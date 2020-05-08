@@ -8,7 +8,7 @@ import {
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
-} from '../constants';
+} from '#/src/constants';
 
 import {
   validateIfJulkaistu,
@@ -16,6 +16,7 @@ import {
   kieliversiotSectionConfig,
   pohjaValintaSectionConfig,
   validateRelations,
+  createOptionalTranslatedFieldConfig,
 } from '#/src/utils/formConfigUtils';
 
 const config = createFormConfigBuilder().registerSections([
@@ -40,10 +41,10 @@ const config = createFormConfigBuilder().registerSections([
         validate: (eb, values) =>
           eb.validateTranslations('tiedot.nimi', getKielivalinta(values)),
       },
-      {
-        field: '.toteutuksenKuvaus',
+      createOptionalTranslatedFieldConfig({
+        name: 'tiedot.toteutuksenKuvaus',
         koulutustyypit: _.without(KOULUTUSTYYPIT, KOULUTUSTYYPPI.LUKIOKOULUTUS),
-      },
+      }),
       {
         field: '.ilmoittautumislinkki',
         koulutustyypit: TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
@@ -115,14 +116,21 @@ const config = createFormConfigBuilder().registerSections([
   },
   {
     section: 'ylemmanKorkeakoulututkinnonOsaamisalat',
-    field: 'ylemmanKorkeakoulututkinnonOsaamisalat',
     koulutustyypit: TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
-    validate: validateIfJulkaistu((eb, values) =>
-      eb.validateArray('ylemmanKorkeakoulututkinnonOsaamisalat', eb =>
-        eb.validateTranslations('nimi', getKielivalinta(values)),
-      ),
-    ),
-    required: true,
+    parts: [
+      {
+        field: 'ylemmanKorkeakoulututkinnonOsaamisalat',
+        validate: validateIfJulkaistu((eb, values) =>
+          eb.validateArray('ylemmanKorkeakoulututkinnonOsaamisalat', eb =>
+            eb.validateTranslations('nimi', getKielivalinta(values)),
+          ),
+        ),
+      },
+      {
+        field: '.nimi',
+        required: true,
+      },
+    ],
   },
   {
     section: 'osaamisalat',
@@ -150,6 +158,9 @@ const config = createFormConfigBuilder().registerSections([
         ),
         required: true,
       },
+      createOptionalTranslatedFieldConfig({
+        name: 'jarjestamistiedot.opetuskieliKuvaus',
+      }),
       {
         field: '.opetusaika',
         validate: validateIfJulkaistu(eb =>
@@ -157,9 +168,9 @@ const config = createFormConfigBuilder().registerSections([
         ),
         required: true,
       },
-      {
-        field: '.opetusaikaKuvaus',
-      },
+      createOptionalTranslatedFieldConfig({
+        name: 'jarjestamistiedot.opetusaikaKuvaus',
+      }),
       {
         field: '.opetustapa',
         validate: validateIfJulkaistu(eb =>
@@ -167,6 +178,9 @@ const config = createFormConfigBuilder().registerSections([
         ),
         required: true,
       },
+      createOptionalTranslatedFieldConfig({
+        name: 'jarjestamistiedot.opetustapaKuvaus',
+      }),
       {
         field: '.maksullisuus.tyyppi',
         validate: validateIfJulkaistu(eb =>
@@ -182,10 +196,16 @@ const config = createFormConfigBuilder().registerSections([
             : eb,
         ),
       },
+      createOptionalTranslatedFieldConfig({
+        name: 'jarjestamistiedot.maksullisuusKuvaus',
+      }),
       {
         field: '.onkoStipendia',
         required: true,
       },
+      createOptionalTranslatedFieldConfig({
+        name: 'jarjestamistiedot.stipendinKuvaus',
+      }),
       {
         field: '.koulutuksenAlkamispaivaamara',
         validate: validateIfJulkaistu(eb =>

@@ -1,33 +1,21 @@
-import {
-  cond,
-  every,
-  get,
-  isArray,
-  isEmpty,
-  isNil,
-  isPlainObject,
-  isString,
-  set,
-  stubTrue,
-  stubFalse,
-} from 'lodash';
+import _ from 'lodash';
 import { getInvalidTranslations, otherwise } from './index';
 
-const allFuncs = (...fns) => value => every(fns, fn => fn(value));
+const allFuncs = (...fns) => value => _.every(fns, fn => fn(value));
 
 const exists = value =>
-  cond([
-    [isNil, stubFalse],
+  _.cond([
+    [_.isNil, _.stubFalse],
     [
       allFuncs(
-        v => isArray(v) || isString(v),
+        v => _.isArray(v) || _.isString(v),
         v => v.length === 0,
       ),
-      stubFalse,
+      _.stubFalse,
     ],
-    [allFuncs(isPlainObject, isEmpty), stubFalse],
-    [allFuncs(isPlainObject, v => v.value === ''), stubFalse],
-    [otherwise, stubTrue],
+    [allFuncs(_.isPlainObject, _.isEmpty), _.stubFalse],
+    [allFuncs(_.isPlainObject, v => v.value === ''), _.stubFalse],
+    [otherwise, _.stubTrue],
   ])(value);
 
 class ErrorBuilder {
@@ -37,11 +25,11 @@ class ErrorBuilder {
   }
 
   getValue(path) {
-    return get(this.values, path);
+    return _.get(this.values, path);
   }
 
   setError(path, value) {
-    set(this.errors, path, value);
+    _.set(this.errors, path, value ? _.castArray(value) : null);
   }
 
   validateExistence(path, { message } = {}) {
@@ -72,7 +60,7 @@ class ErrorBuilder {
       ? 'validointivirheet.listaVahintaanYksi'
       : t => t('validointivirheet.listaVahintaan', { lukumaara: 1 });
 
-    if (!isArray(value) || value.length < min) {
+    if (!_.isArray(value) || value.length < min) {
       this.setError(isFieldArray ? `${path}._error` : path, errorMessage);
     }
 
@@ -82,7 +70,7 @@ class ErrorBuilder {
   validateTranslations(
     path,
     languages,
-    { message, validator = v => exists(v) } = {},
+    { optional, message, validator = v => exists(v) } = {},
   ) {
     const errorMessage = message || 'validointivirheet.pakollisetKaannokset';
 
@@ -90,6 +78,7 @@ class ErrorBuilder {
       this.getValue(path),
       languages,
       validator,
+      optional,
     );
 
     if (invalidTranslations.length > 0) {
@@ -102,12 +91,12 @@ class ErrorBuilder {
   validateArray(path, makeBuilder) {
     const value = this.getValue(path);
 
-    if (isArray(value)) {
+    if (_.isArray(value)) {
       const errors = value.map(v => {
         return makeBuilder(new ErrorBuilder(v), v).getErrors();
       });
 
-      if (errors.find(e => !isEmpty(e))) {
+      if (errors.find(e => !_.isEmpty(e))) {
         this.setError(path, errors);
       }
     }

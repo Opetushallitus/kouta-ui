@@ -4,7 +4,7 @@ import { isNumeric } from './index';
 import getValintakoeFieldsData from './getValintakoeFieldsData';
 import getHakulomakeFieldsData from './getHakulomakeFieldsData';
 import serializeEditorState from './draft/serializeEditorState';
-import { LIITTEEN_TOIMITUSTAPA } from '../constants';
+import { LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
 
 const getKieliversiot = values => get(values, 'kieliversiot') || [];
 
@@ -79,24 +79,32 @@ const getHakukohdeByFormValues = values => {
   );
 
   const liitteet = (get(values, 'liitteet.liitteet') || []).map(
-    ({ tyyppi, nimi, kuvaus, toimitusaika, toimitustapa }) => ({
-      toimitustapa: get(toimitustapa, 'tapa') || null,
-      tyyppiKoodiUri: get(tyyppi, 'value') || null,
-      nimi: pick(nimi || null, kielivalinta),
-      toimitusaika: !liitteetOnkoSamaToimitusaika ? toimitusaika || null : null,
-      toimitusosoite: {
-        osoite: {
-          osoite: pick(
-            get(toimitustapa, 'paikka.osoite') || null,
-            kielivalinta,
-          ),
-          postinumeroKoodiUri:
-            get(toimitustapa, 'paikka.postinumero.value') || null,
-        },
-        sahkoposti: get(toimitustapa, 'paikka.sahkoposti') || null,
-      },
-      kuvaus: pick(kuvaus || {}, kielivalinta),
-    }),
+    ({ tyyppi, nimi, kuvaus, toimitusaika, toimitustapa }) => {
+      const tapa = get(toimitustapa, 'tapa') || null;
+      return {
+        toimitustapa: tapa,
+        tyyppiKoodiUri: get(tyyppi, 'value') || null,
+        nimi: pick(nimi || null, kielivalinta),
+        toimitusaika: !liitteetOnkoSamaToimitusaika
+          ? toimitusaika || null
+          : null,
+        toimitusosoite:
+          tapa === LIITTEEN_TOIMITUSTAPA.MUU_OSOITE
+            ? {
+                osoite: {
+                  osoite: pick(
+                    get(toimitustapa, 'paikka.osoite') || null,
+                    kielivalinta,
+                  ),
+                  postinumeroKoodiUri:
+                    get(toimitustapa, 'paikka.postinumero.value') || null,
+                },
+                sahkoposti: get(toimitustapa, 'paikka.sahkoposti') || null,
+              }
+            : null,
+        kuvaus: pick(kuvaus || {}, kielivalinta),
+      };
+    },
   );
 
   const nimi = pick(get(values, 'perustiedot.nimi') || null, kielivalinta);

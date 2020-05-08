@@ -1,41 +1,30 @@
 import dateFnsformatDate from 'date-fns/format';
 import memoizee from 'memoizee';
-import {
-  last,
-  padStart,
-  pick,
-  toPairs,
-  zipObject,
-  isDate,
-  isNumber,
-  isString,
-  isObject,
-  isArray,
-} from 'lodash';
+import _ from 'lodash';
 import { useMachine as useXstateMachine } from '@xstate/react';
 import stripTags from 'striptags';
 import { ALLOWED_HTML_TAGS } from '#/src/constants';
 
 export const isDev = process.env.NODE_ENV === 'development';
 
-export const isValidDate = value => isDate(value) && !isNaN(value);
+export const isValidDate = value => _.isDate(value) && !_.isNaN(value);
 
 export const formatDate = dateFnsformatDate;
 
 export const isNumeric = value => {
-  if (isNumber(value)) {
+  if (_.isNumber(value)) {
     return true;
   }
 
-  if (isString(value)) {
-    return !isNaN(parseFloat(value));
+  if (_.isString(value)) {
+    return !_.isNaN(parseFloat(value));
   }
 
   return false;
 };
 
 export const getLanguageValue = (value, language = 'fi') =>
-  isObject(value) ? value[language] || null : null;
+  _.isObject(value) ? value[language] || null : null;
 
 export const isFunction = value => typeof value === 'function';
 
@@ -44,11 +33,11 @@ export const getFirstLanguageValue = (value, priorityArg) => {
 
   let priority = defaultPriority;
 
-  if (isArray(priorityArg)) {
+  if (_.isArray(priorityArg)) {
     priority = [...priorityArg, ...defaultPriority];
   }
 
-  if (isString(priorityArg)) {
+  if (_.isString(priorityArg)) {
     priority = [priorityArg, ...defaultPriority];
   }
 
@@ -65,10 +54,10 @@ export const getFirstLanguageValue = (value, priorityArg) => {
 };
 
 export const arrayToTranslationObject = (arr, languageField = 'kieli') => {
-  return isArray(arr)
+  return _.isArray(arr)
     ? arr.reduce((acc, curr) => {
         acc[
-          isString(curr[languageField])
+          _.isString(curr[languageField])
             ? curr[languageField].toLowerCase()
             : '_'
         ] = curr;
@@ -82,17 +71,22 @@ export const getInvalidTranslations = (
   obj,
   languages = [],
   validate = v => !!v,
+  optional,
 ) => {
-  if (!isObject(obj)) {
+  if (optional && _.isEmpty(obj)) {
+    return [];
+  }
+
+  if (!_.isObject(obj)) {
     return languages;
   }
 
   const translationObj = {
-    ...zipObject(languages),
-    ...pick(obj, languages),
+    ..._.zipObject(languages),
+    ..._.pick(obj, languages),
   };
 
-  const pairs = toPairs(translationObj);
+  const pairs = _.toPairs(translationObj);
 
   return pairs
     .filter(([, value]) => !validate(value))
@@ -112,19 +106,19 @@ export const getKoutaDateString = dateData => {
     return formatDate(dateData, `yyyy-MM-dd'T'HH:mm`);
   }
 
-  if (!isObject(dateData)) {
+  if (!_.isObject(dateData)) {
     return null;
   }
 
   const { year, month, day, hour, minute } = dateData;
 
-  return `${year}-${padStart(month, 2, '0')}-${padStart(day, 2, '0')}T${
-    isNumeric(hour) ? padStart(hour, 2, '0') : '00'
-  }:${isNumeric(minute) ? padStart(minute, 2, '0') : '00'}`;
+  return `${year}-${_.padStart(month, 2, '0')}-${_.padStart(day, 2, '0')}T${
+    isNumeric(hour) ? _.padStart(hour, 2, '0') : '00'
+  }:${isNumeric(minute) ? _.padStart(minute, 2, '0') : '00'}`;
 };
 
 export const formatKoutaDateString = (dateString, format) => {
-  if (!isString(dateString)) {
+  if (!_.isString(dateString)) {
     return '';
   }
 
@@ -134,11 +128,11 @@ export const formatKoutaDateString = (dateString, format) => {
 
   let formattedDate = format;
 
-  formattedDate = formattedDate.replace(/DD/g, padStart(day, 2, '0'));
-  formattedDate = formattedDate.replace(/MM/g, padStart(month, 2, '0'));
+  formattedDate = formattedDate.replace(/DD/g, _.padStart(day, 2, '0'));
+  formattedDate = formattedDate.replace(/MM/g, _.padStart(month, 2, '0'));
   formattedDate = formattedDate.replace(/YYYY/g, year);
-  formattedDate = formattedDate.replace(/HH/g, padStart(hour, 2, '0'));
-  formattedDate = formattedDate.replace(/mm/g, padStart(minute, 2, '0'));
+  formattedDate = formattedDate.replace(/HH/g, _.padStart(hour, 2, '0'));
+  formattedDate = formattedDate.replace(/mm/g, _.padStart(minute, 2, '0'));
 
   return formattedDate;
 };
@@ -146,7 +140,7 @@ export const formatKoutaDateString = (dateString, format) => {
 export const createChainedFunction = (...fns) => (...args) => {
   // eslint-disable-next-line
   for (const fn of fns) {
-    if (isFunction(fn)) {
+    if (_.isFunction(fn)) {
       fn(...args);
     }
   }
@@ -175,7 +169,7 @@ export const getImageFileDimensions = imgFile => {
 
 export const getFileExtension = file => {
   const parts = file.name.split('.');
-  return parts.length > 1 ? last(parts).toLowerCase() : '';
+  return parts.length > 1 ? _.last(parts).toLowerCase() : '';
 };
 
 export const useMachine = (machine, options) =>
@@ -191,7 +185,7 @@ export const useMachine = (machine, options) =>
  * @param {*} predicate A function returning truthy for a single matching value
  */
 export const ifAny = value => predicate =>
-  isArray(value) ? value.some(predicate) : predicate(value);
+  _.isArray(value) ? value.some(predicate) : predicate(value);
 
 export const otherwise = () => true;
 

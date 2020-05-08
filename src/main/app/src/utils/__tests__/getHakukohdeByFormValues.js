@@ -1,6 +1,6 @@
 import getHakukohdeByFormValues from '../getHakukohdeByFormValues';
 import parseEditorState from '../draft/parseEditorState';
-import { HAKULOMAKETYYPPI } from '../../constants';
+import { HAKULOMAKETYYPPI, LIITTEEN_TOIMITUSTAPA } from '../../constants';
 
 test('getHakukohdeByFormValues returns correct hakukohde given form values', () => {
   const hakukohde = getHakukohdeByFormValues({
@@ -71,7 +71,7 @@ test('getHakukohdeByFormValues returns correct hakukohde given form values', () 
     },
     liitteet: {
       toimitustapa: {
-        tapa: 'muu_osoite',
+        tapa: LIITTEEN_TOIMITUSTAPA.MUU_OSOITE,
         paikka: {
           osoite: {
             fi: 'Fi osoite',
@@ -104,7 +104,7 @@ test('getHakukohdeByFormValues returns correct hakukohde given form values', () 
           },
           toimitusaika: '2019-08-17T05:52',
           toimitustapa: {
-            tapa: 'muu_osoite',
+            tapa: LIITTEEN_TOIMITUSTAPA.MUU_OSOITE,
             paikka: {
               osoite: {
                 fi: 'Fi osoite',

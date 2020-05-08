@@ -93,7 +93,6 @@ const ToimituspaikkaFields = ({ name, language }) => {
         <Field
           name={`${name}.postinumero`}
           component={FormFieldPostinumeroSelect}
-          type="number"
           label={t('yleiset.postinumero')}
         />
       </Spacing>
@@ -102,7 +101,6 @@ const ToimituspaikkaFields = ({ name, language }) => {
         <Field
           name={`${name}.sahkoposti`}
           component={FormFieldInput}
-          type="email"
           label={t('yleiset.sahkoposti')}
         />
       </Spacing>

@@ -1,5 +1,5 @@
 import getFormValuesByHakukohde from '../getFormValuesByHakukohde';
-import { HAKULOMAKETYYPPI } from '../../constants';
+import { HAKULOMAKETYYPPI, LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
 
 test('getFormValuesByHakukohde returns correct form values given hakukohde', () => {
   const values = getFormValuesByHakukohde({
@@ -40,7 +40,7 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
           },
         },
         tyyppiKoodiUri: 'liitetyyppi_1#1',
-        toimitustapa: 'muu_osoite',
+        toimitustapa: LIITTEEN_TOIMITUSTAPA.MUU_OSOITE,
       },
     ],
     alkamisvuosi: 2015,

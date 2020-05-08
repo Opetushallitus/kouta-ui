@@ -55,7 +55,7 @@ const validateLiitteet = (errorBuilder, values) => {
       ) {
         enhancedLiitteetEb = enhancedLiitteetEb
           .validateTranslations('toimitustapa.paikka.osoite', kieliversiot)
-          .validateExistence('toimitustapa.paikka.postinumero.value')
+          .validateExistence('toimitustapa.paikka.postinumero')
           .validateExistence('toimitustapa.paikka.sahkoposti');
       }
 
@@ -82,7 +82,7 @@ const validateLiitteet = (errorBuilder, values) => {
   ) {
     enhancedErrorBuilder = enhancedErrorBuilder
       .validateTranslations('liitteet.toimitustapa.paikka.osoite', kieliversiot)
-      .validateExistence('liitteet.toimitustapa.paikka.postinumero.value')
+      .validateExistence('liitteet.toimitustapa.paikka.postinumero')
       .validateExistence('liitteet.toimitustapa.paikka.sahkoposti');
   }
 

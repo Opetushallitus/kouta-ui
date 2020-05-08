@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useCallback } from 'react';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { isArray, sortBy } from 'lodash';
 import Button from '../../Button';
 import Modal from '../../Modal';
@@ -15,8 +15,9 @@ import Box from '../../Box';
 import { getFirstLanguageValue } from '../../../utils';
 import useLanguage from '../../useLanguage';
 
-const KoulutusModal = ({ onClose, organisaatioOid, history, open }) => {
+const KoulutusModal = ({ onClose, organisaatioOid, open }) => {
   const { t } = useTranslation();
+  const history = useHistory();
   const language = useLanguage();
   const [koulutus, setKoulutus] = useState();
 
@@ -82,4 +83,4 @@ const KoulutusModal = ({ onClose, organisaatioOid, history, open }) => {
   );
 };
 
-export default withRouter(KoulutusModal);
+export default KoulutusModal;

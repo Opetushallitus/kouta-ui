@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useCallback } from 'react';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { isArray } from 'lodash';
 import Button from '../../Button';
 import Modal from '../../Modal';
@@ -31,8 +31,9 @@ const useOptions = data => {
   );
 };
 
-const LiitoksetModal = ({ onClose, organisaatioOid, history, open }) => {
+const LiitoksetModal = ({ onClose, organisaatioOid, open }) => {
   const { t } = useTranslation();
+  const history = useHistory();
   const [haku, setHaku] = useState();
   const [toteutus, setToteutus] = useState();
 
@@ -108,4 +109,4 @@ const LiitoksetModal = ({ onClose, organisaatioOid, history, open }) => {
   );
 };
 
-export default withRouter(LiitoksetModal);
+export default LiitoksetModal;

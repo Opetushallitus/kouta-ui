@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import { withRouter } from 'react-router-dom';
 
 import KoulutusForm from '../KoulutusForm';
 import FormConfigContext from '../FormConfigContext';
@@ -20,4 +19,4 @@ const KoulutusFormWrapper = props => {
   );
 };
 
-export default withRouter(KoulutusFormWrapper);
+export default KoulutusFormWrapper;

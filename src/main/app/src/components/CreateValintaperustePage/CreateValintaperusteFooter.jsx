@@ -1,17 +1,17 @@
 import React, { useCallback } from 'react';
-import { withRouter } from 'react-router-dom';
-
-import Submit from '../Submit';
+import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { getTestIdProps } from '../../utils';
-import Flex from '../Flex';
-import getValintaperusteByFormValues from '../../utils/getValintaperusteByFormValues';
-import validateValintaperusteForm from '../../utils/validateValintaperusteForm';
-import createValintaperuste from '../../utils/kouta/createValintaperuste';
-import useSaveForm from '../useSaveForm';
 
-const CreateValintaperusteFooter = ({ organisaatioOid, history }) => {
+import { getTestIdProps } from '#/src/utils';
+import getValintaperusteByFormValues from '#/src/utils/getValintaperusteByFormValues';
+import createValintaperuste from '#/src/utils/kouta/createValintaperuste';
+import Flex from '#/src/components/Flex';
+import Submit from '#/src/components/Submit';
+import { useSaveValintaperuste } from '#/src/hooks/formSaveHooks';
+
+const CreateValintaperusteFooter = ({ organisaatioOid }) => {
   const { t } = useTranslation();
+  const history = useHistory();
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
@@ -31,11 +31,8 @@ const CreateValintaperusteFooter = ({ organisaatioOid, history }) => {
     [organisaatioOid, history],
   );
 
-  const { save } = useSaveForm({
-    form: 'createValintaperusteForm',
-    submit,
-    validate: validateValintaperusteForm,
-  });
+  const save = useSaveValintaperuste(submit);
+
   return (
     <Flex justifyEnd>
       <Submit
@@ -48,4 +45,4 @@ const CreateValintaperusteFooter = ({ organisaatioOid, history }) => {
   );
 };
 
-export default withRouter(CreateValintaperusteFooter);
+export default CreateValintaperusteFooter;

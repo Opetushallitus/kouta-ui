@@ -2,9 +2,9 @@ import React, { useCallback, useMemo } from 'react';
 import queryString from 'query-string';
 
 import FormPage, {
-  OrganisaatioInfo,
-  KoulutusInfo,
-  TopInfoContainer,
+  OrganisaatioRelation,
+  KoulutusRelation,
+  RelationInfoContainer,
 } from '../FormPage';
 import EditToteutusHeader from './EditToteutusHeader';
 import EditToteutusSteps from './EditToteutusSteps';
@@ -84,16 +84,20 @@ const EditToteutusPage = props => {
           toteutus ? (
             <EditToteutusFooter
               toteutus={toteutus}
+              koulutus={koulutus}
               koulutustyyppi={koulutustyyppi}
               organisaatioOid={organisaatioOid}
             />
           ) : null
         }
       >
-        <TopInfoContainer>
-          <KoulutusInfo organisaatioOid={organisaatioOid} koulutus={koulutus} />
-          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-        </TopInfoContainer>
+        <RelationInfoContainer>
+          <KoulutusRelation
+            organisaatioOid={organisaatioOid}
+            koulutus={koulutus}
+          />
+          <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+        </RelationInfoContainer>
         {toteutus && koulutus ? (
           <ToteutusFormWrapper
             toteutus={toteutus}

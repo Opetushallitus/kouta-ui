@@ -22,8 +22,7 @@ const HakukohdeForm = ({
   showArkistoituTilaOption = true,
 }) => {
   const { t } = useTranslation();
-  const kieliversiot = useFieldValue('kieliversiot');
-  const languages = kieliversiot || [];
+  const languages = useFieldValue('kieliversiot') || [];
 
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps} configured>

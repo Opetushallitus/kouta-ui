@@ -4,18 +4,18 @@ import { isArray } from 'lodash';
 
 import useKoodistoOptions from '../useKoodistoOptions';
 import Spacing from '../Spacing';
-import Flex, { FlexItem } from '../Flex';
+import Flex from '../Flex';
 import FieldArrayList from '../FieldArrayList';
 import Button from '../Button';
 import { useTranslation } from 'react-i18next';
 import DividerHeading from '../DividerHeading';
 import { getTestIdProps } from '../../utils';
+import DateTimeRange from '#/src/components/DateTimeRange';
 
 import {
   FormFieldSelect,
   FormFieldInput,
   FormFieldTextarea,
-  FormFieldDateTimeInput,
   FormFieldPostinumeroSelect,
 } from '../formFields';
 
@@ -41,25 +41,10 @@ const TilaisuudetField = ({ fields, language, t, meta }) => (
             />
           </Spacing>
 
-          <Flex marginBottom={2} alignCenter>
-            <FlexItem grow={1} paddingRight={1} {...getTestIdProps('alkaa')}>
-              <Field
-                name={`${field}.alkaa`}
-                component={FormFieldDateTimeInput}
-                label={t('yleiset.alkaa')}
-                helperText={t('yleiset.paivamaaraJaKellonaika')}
-              />
-            </FlexItem>
-            <FlexItem grow={1} paddingLeft={1} {...getTestIdProps('paattyy')}>
-              <Field
-                name={`${field}.paattyy`}
-                component={FormFieldDateTimeInput}
-                label={t('yleiset.paattyy')}
-                helperText={t('yleiset.paivamaaraJaKellonaika')}
-              />
-            </FlexItem>
-          </Flex>
-
+          <DateTimeRange
+            startProps={{ name: `${field}.alkaa` }}
+            endProps={{ name: `${field}.paattyy` }}
+          />
           <div {...getTestIdProps('lisatietoja')}>
             <Field
               name={`${field}.lisatietoja.${language}`}

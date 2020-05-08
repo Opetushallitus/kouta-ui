@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { isArray, uniq, without, negate } from 'lodash';
 
 import Submit from '../Submit';
@@ -8,7 +8,7 @@ import { getTestIdProps } from '../../utils';
 import Box from '../Box';
 import getKoulutusByFormValues from '../../utils/getKoulutusByFormValues';
 import updateKoulutus from '../../utils/kouta/updateKoulutus';
-import useSaveForm from '../useSaveForm';
+import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import validateKoulutusForm from '../../utils/validateKoulutusForm';
 import useOrganisaatio from '../useOrganisaatio';
 import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
@@ -47,7 +47,8 @@ const mergeTarjoajat = (koulutusOids, valueOids, availableOids) => {
   return uniq(without([...(koulutusOids || []), ...inserted], ...deleted));
 };
 
-const EditKoulutusFooter = ({ koulutus, organisaatioOid, history }) => {
+const EditKoulutusFooter = ({ koulutus, organisaatioOid }) => {
+  const history = useHistory();
   const { t } = useTranslation();
   const { organisaatio } = useOrganisaatio(koulutus.organisaatioOid);
   const roleBuilder = useAuthorizedUserRoleBuilder();
@@ -118,4 +119,4 @@ const EditKoulutusFooter = ({ koulutus, organisaatioOid, history }) => {
   );
 };
 
-export default withRouter(EditKoulutusFooter);
+export default EditKoulutusFooter;

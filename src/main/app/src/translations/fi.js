@@ -195,6 +195,8 @@ export default {
       voimassa: 'Voimassa',
       tuleva: 'Tuleva',
     },
+    riippuvuusEiJulkaistu:
+      'Liitetty {{entity, unCapitalize}} ei ole "Julkaistu"-tilassa.',
   },
   ilmoitukset: {
     tallentamattomiaMuutoksia: {

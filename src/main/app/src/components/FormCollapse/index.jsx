@@ -165,7 +165,7 @@ const FormCollapse = ({
     >
       {renderChildren({
         Component,
-        childProps: props,
+        childProps: { ...props, languages },
         onContinue,
         children,
         language,

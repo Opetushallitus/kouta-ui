@@ -1,22 +1,23 @@
 import React, { useCallback } from 'react';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import Submit from '../Submit';
 import { useTranslation } from 'react-i18next';
 import { getTestIdProps } from '../../utils';
 import Flex from '../Flex';
-import useSaveForm from '../useSaveForm';
+import { useSaveHakukohde } from '#/src/hooks/formSaveHooks';
 import getHakukohdeByFormValues from '../../utils/getHakukohdeByFormValues';
 import createHakukohde from '../../utils/kouta/createHakukohde';
-import validateHakukohdeForm from '../../utils/validateHakukohdeForm';
 
 const CreateHakukohdeFooter = ({
   organisaatioOid,
   hakuOid,
   toteutusOid,
-  history,
+  toteutus,
+  haku,
 }) => {
   const { t } = useTranslation();
+  const history = useHistory();
 
   const submit = useCallback(
     async ({ httpClient, apiUrls, values }) => {
@@ -38,11 +39,7 @@ const CreateHakukohdeFooter = ({
     [organisaatioOid, hakuOid, toteutusOid, history],
   );
 
-  const { save } = useSaveForm({
-    form: 'createHakukohdeForm',
-    submit,
-    validate: validateHakukohdeForm,
-  });
+  const save = useSaveHakukohde(submit, { haku, toteutus });
 
   return (
     <Flex justifyEnd>
@@ -53,4 +50,4 @@ const CreateHakukohdeFooter = ({
   );
 };
 
-export default withRouter(CreateHakukohdeFooter);
+export default CreateHakukohdeFooter;

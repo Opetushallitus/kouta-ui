@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import Box from '../Box';
 import Submit from '../Submit';
 import { getTestIdProps } from '../../utils';
 import { useTranslation } from 'react-i18next';
-import useSaveForm from '../useSaveForm';
+import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import validateOppilaitoksenOsaForm from '../../utils/validateOppilaitoksenOsaForm';
 import createOppilaitoksenOsa from '../../utils/kouta/createOppilaitoksenOsa';
 import getOppilaitoksenOsaByFormValues from '../../utils/getOppilaitoksenOsaByFormValues';
@@ -15,9 +15,9 @@ const OppilaitoksenOsaPageFooter = ({
   oppilaitoksenOsa,
   organisaatioOid,
   oppilaitoksenOsaIsLoading = false,
-  history,
 }) => {
   const { t } = useTranslation();
+  const history = useHistory();
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
@@ -64,4 +64,4 @@ const OppilaitoksenOsaPageFooter = ({
   );
 };
 
-export default withRouter(OppilaitoksenOsaPageFooter);
+export default OppilaitoksenOsaPageFooter;

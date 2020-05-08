@@ -76,20 +76,20 @@ exports[`renders correctly 1`] = `
   font-size: 2rem;
 }
 
-<styled.div
+<Collapse__Container
   active={false}
 >
   <div
     className="c0"
   >
-    <styled.div
+    <Collapse__HeaderContainer
       open={true}
     >
       <div
         className="c1"
         open={true}
       >
-        <styled.div
+        <Collapse__HeaderContent
           onClick={[Function]}
           toggleOnHeaderClick={true}
         >
@@ -109,15 +109,15 @@ exports[`renders correctly 1`] = `
               </h5>
             </styled.span>
           </div>
-        </styled.div>
-        <styled.div
+        </Collapse__HeaderContent>
+        <Collapse__HeaderToggle
           onClick={[Function]}
         >
           <div
             className="c4"
             onClick={[Function]}
           >
-            <Styled(Component)
+            <Collapse__ToggleIcon
               icon="expand_more"
               open={true}
               role="button"
@@ -235,11 +235,11 @@ exports[`renders correctly 1`] = `
                   </ForwardRef>
                 </span>
               </ForwardRef>
-            </Styled(Component)>
+            </Collapse__ToggleIcon>
           </div>
-        </styled.div>
+        </Collapse__HeaderToggle>
       </div>
-    </styled.div>
+    </Collapse__HeaderContainer>
     <div
       style={
         Object {
@@ -260,7 +260,7 @@ exports[`renders correctly 1`] = `
           </div>
         </div>
       </styled.div>
-      <styled.div>
+      <Collapse__FooterContainer>
         <div
           className="c8"
         >
@@ -268,10 +268,10 @@ exports[`renders correctly 1`] = `
             Footer button
           </button>
         </div>
-      </styled.div>
+      </Collapse__FooterContainer>
     </div>
   </div>
-</styled.div>
+</Collapse__Container>
 `;
 
 exports[`renders correctly 2`] = `
@@ -339,20 +339,20 @@ exports[`renders correctly 2`] = `
   font-size: 2rem;
 }
 
-<styled.div
+<Collapse__Container
   active={false}
 >
   <div
     className="c0"
   >
-    <styled.div
+    <Collapse__HeaderContainer
       open={true}
     >
       <div
         className="c1"
         open={true}
       >
-        <styled.div
+        <Collapse__HeaderContent
           onClick={[Function]}
           toggleOnHeaderClick={true}
         >
@@ -364,15 +364,15 @@ exports[`renders correctly 2`] = `
               Element header
             </div>
           </div>
-        </styled.div>
-        <styled.div
+        </Collapse__HeaderContent>
+        <Collapse__HeaderToggle
           onClick={[Function]}
         >
           <div
             className="c3"
             onClick={[Function]}
           >
-            <Styled(Component)
+            <Collapse__ToggleIcon
               icon="expand_more"
               open={true}
               role="button"
@@ -490,11 +490,11 @@ exports[`renders correctly 2`] = `
                   </ForwardRef>
                 </span>
               </ForwardRef>
-            </Styled(Component)>
+            </Collapse__ToggleIcon>
           </div>
-        </styled.div>
+        </Collapse__HeaderToggle>
       </div>
-    </styled.div>
+    </Collapse__HeaderContainer>
     <div
       style={
         Object {
@@ -515,7 +515,7 @@ exports[`renders correctly 2`] = `
           </div>
         </div>
       </styled.div>
-      <styled.div>
+      <Collapse__FooterContainer>
         <div
           className="c7"
         >
@@ -523,10 +523,10 @@ exports[`renders correctly 2`] = `
             Footer button
           </button>
         </div>
-      </styled.div>
+      </Collapse__FooterContainer>
     </div>
   </div>
-</styled.div>
+</Collapse__Container>
 `;
 
 exports[`renders correctly when closed 1`] = `
@@ -604,20 +604,20 @@ exports[`renders correctly when closed 1`] = `
   font-size: 2rem;
 }
 
-<styled.div
+<Collapse__Container
   active={false}
 >
   <div
     className="c0"
   >
-    <styled.div
+    <Collapse__HeaderContainer
       open={false}
     >
       <div
         className="c1"
         open={false}
       >
-        <styled.div
+        <Collapse__HeaderContent
           onClick={[Function]}
           toggleOnHeaderClick={true}
         >
@@ -637,15 +637,15 @@ exports[`renders correctly when closed 1`] = `
               </h5>
             </styled.span>
           </div>
-        </styled.div>
-        <styled.div
+        </Collapse__HeaderContent>
+        <Collapse__HeaderToggle
           onClick={[Function]}
         >
           <div
             className="c4"
             onClick={[Function]}
           >
-            <Styled(Component)
+            <Collapse__ToggleIcon
               icon="expand_more"
               open={false}
               role="button"
@@ -763,11 +763,11 @@ exports[`renders correctly when closed 1`] = `
                   </ForwardRef>
                 </span>
               </ForwardRef>
-            </Styled(Component)>
+            </Collapse__ToggleIcon>
           </div>
-        </styled.div>
+        </Collapse__HeaderToggle>
       </div>
-    </styled.div>
+    </Collapse__HeaderContainer>
     <div
       style={
         Object {
@@ -788,7 +788,7 @@ exports[`renders correctly when closed 1`] = `
           </div>
         </div>
       </styled.div>
-      <styled.div>
+      <Collapse__FooterContainer>
         <div
           className="c8"
         >
@@ -796,8 +796,8 @@ exports[`renders correctly when closed 1`] = `
             footer
           </div>
         </div>
-      </styled.div>
+      </Collapse__FooterContainer>
     </div>
   </div>
-</styled.div>
+</Collapse__Container>
 `;

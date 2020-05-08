@@ -3,13 +3,10 @@ import { get } from 'lodash';
 
 import FormPage from '../FormPage';
 import getOrganisaatioByOid from '../../utils/organisaatioService/getOrganisaatioByOid';
-import Flex, { FlexItem } from '../Flex';
-import { getFirstLanguageValue } from '../../utils';
 import getKoulutustyyppiByKoulutusOid from '../../utils/kouta/getKoulutustyyppiByKoulutusOid';
 import CreateHakukohdeHeader from './CreateHakukohdeHeader';
 import CreateHakukohdeSteps from './CreateHakukohdeSteps';
 import CreateHakukohdeFooter from './CreateHakukohdeFooter';
-import Typography from '../Typography';
 import { KOULUTUSTYYPPI } from '../../constants';
 import useApiAsync from '../useApiAsync';
 import Spin from '../Spin';
@@ -21,6 +18,12 @@ import ReduxForm from '#/src/components/ReduxForm';
 import HakukohdeForm, { initialValues } from '#/src/components/HakukohdeForm';
 import getHakukohdeFormConfig from '#/src/utils/getHakukohdeFormConfig';
 import FormConfigContext from '#/src/components/FormConfigContext';
+import {
+  RelationInfoContainer,
+  OrganisaatioRelation,
+  HakuRelation,
+  ToteutusRelation,
+} from '#/src/components/FormPage';
 
 const getHakukohdeData = async ({
   organisaatioOid,
@@ -54,7 +57,6 @@ const getHakukohdeData = async ({
 const getInitialValues = (toteutusNimi, toteutusKielet) => {
   return initialValues(toteutusNimi, toteutusKielet);
 };
-const config = getHakukohdeFormConfig();
 
 const CreateHakukohdePage = props => {
   const {
@@ -73,6 +75,9 @@ const CreateHakukohdePage = props => {
     watch: [organisaatioOid, toteutusOid, hakuOid].join(','),
   });
 
+  const haku = get(data, 'haku');
+  const toteutus = get(data, 'toteutus');
+
   const initialValues = useMemo(() => {
     return (
       data &&
@@ -82,6 +87,8 @@ const CreateHakukohdePage = props => {
       )
     );
   }, [data]);
+
+  const config = useMemo(getHakukohdeFormConfig, []);
 
   return (
     <ReduxForm
@@ -98,44 +105,28 @@ const CreateHakukohdePage = props => {
             organisaatioOid={organisaatioOid}
             hakuOid={hakuOid}
             toteutusOid={toteutusOid}
+            haku={haku}
+            toteutus={toteutus}
           />
         }
       >
         {data ? (
           <>
-            <Flex marginBottom={2} justifyBetween>
-              <FlexItem grow={0} paddingRight={2}>
-                <Typography variant="h6" marginBottom={1}>
-                  {t('yleiset.organisaatio')}
-                </Typography>
-                <Typography>
-                  {getFirstLanguageValue(get(data, 'organisaatio.nimi'))}
-                </Typography>
-              </FlexItem>
-              <FlexItem grow={0}>
-                <Typography variant="h6" marginBottom={1}>
-                  {t('yleiset.haku')}
-                </Typography>
-                <Typography>
-                  {getFirstLanguageValue(get(data, 'haku.nimi'))}
-                </Typography>
-              </FlexItem>
-              <FlexItem grow={0}>
-                <Typography variant="h6" marginBottom={1}>
-                  {t('yleiset.toteutus')}
-                </Typography>
-                <Typography>
-                  {getFirstLanguageValue(get(data, 'toteutus.nimi'))}
-                </Typography>
-              </FlexItem>
-            </Flex>
+            <RelationInfoContainer>
+              <HakuRelation organisaatioOid={organisaatioOid} haku={haku} />
+              <ToteutusRelation
+                organisaatioOid={organisaatioOid}
+                toteutus={toteutus}
+              />
+              <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+            </RelationInfoContainer>
             <FormConfigContext.Provider value={config}>
               <HakukohdeForm
                 steps
                 organisaatio={data.organisaatio}
                 organisaatioOid={organisaatioOid}
-                haku={data.haku}
-                toteutus={data.toteutus}
+                haku={haku}
+                toteutus={toteutus}
                 koulutustyyppi={
                   get(data, 'koulutustyyppi') ||
                   KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS

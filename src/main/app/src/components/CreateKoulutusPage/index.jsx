@@ -1,7 +1,10 @@
 import React, { useMemo } from 'react';
 import qs from 'query-string';
 
-import FormPage, { OrganisaatioInfo, TopInfoContainer } from '../FormPage';
+import FormPage, {
+  OrganisaatioRelation,
+  RelationInfoContainer,
+} from '../FormPage';
 import CreateKoulutusHeader from './CreateKoulutusHeader';
 import CreateKoulutusSteps from './CreateKoulutusSteps';
 import KoulutusFormWrapper from './KoulutusFormWrapper';
@@ -67,9 +70,9 @@ const CreateKoulutusPage = props => {
         steps={<CreateKoulutusSteps />}
         footer={<CreateKoulutusFooter organisaatioOid={oid} />}
       >
-        <TopInfoContainer>
-          <OrganisaatioInfo organisaatioOid={oid} />
-        </TopInfoContainer>
+        <RelationInfoContainer>
+          <OrganisaatioRelation organisaatioOid={oid} />
+        </RelationInfoContainer>
         <KoulutusFormWrapper
           steps
           isNewKoulutus={true}

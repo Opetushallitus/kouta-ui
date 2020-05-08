@@ -1,7 +1,10 @@
 import React, { useCallback, useMemo } from 'react';
 import queryString from 'query-string';
 
-import FormPage, { OrganisaatioInfo, TopInfoContainer } from '../FormPage';
+import FormPage, {
+  OrganisaatioRelation,
+  RelationInfoContainer,
+} from '../FormPage';
 import EditHakuHeader from './EditHakuHeader';
 import EditHakuSteps from './EditHakuSteps';
 import EditHakuFooter from './EditHakuFooter';
@@ -61,9 +64,9 @@ const EditHakuPage = props => {
         steps={<EditHakuSteps />}
         footer={haku ? <EditHakuFooter haku={haku} /> : null}
       >
-        <TopInfoContainer>
-          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-        </TopInfoContainer>
+        <RelationInfoContainer>
+          <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+        </RelationInfoContainer>
         {haku ? (
           <FormConfigContext.Provider value={config}>
             <HakuForm

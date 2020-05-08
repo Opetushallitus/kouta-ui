@@ -1,4 +1,4 @@
-import { get, reduce } from 'lodash';
+import _ from 'lodash';
 
 import { LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
 
@@ -9,14 +9,14 @@ import {
   getKielivalinta,
   kieliversiotSectionConfig,
   pohjaValintaSectionConfig,
-  tilaSectionConfig,
+  validateRelations,
 } from '#/src/utils/formConfigUtils';
 
 const getLiitteillaYhteinenToimitusaika = values =>
-  !!get(values, 'liitteet.yhteinenToimitusaika');
+  !!_.get(values, 'liitteet.yhteinenToimitusaika');
 
 const getLiitteillaYhteinenToimitusosoite = values =>
-  !!get(values, 'liitteet.yhteinenToimituspaikka');
+  !!_.get(values, 'liitteet.yhteinenToimituspaikka');
 
 const validateLiitteet = (errorBuilder, values) => {
   const kieliversiot = getKielivalinta(values);
@@ -51,7 +51,7 @@ const validateLiitteet = (errorBuilder, values) => {
 
       if (
         !liitteillaYhteinenToimitusosoite &&
-        get(liite, 'toimitustapa.tapa') === LIITTEEN_TOIMITUSTAPA.MUU_OSOITE
+        _.get(liite, 'toimitustapa.tapa') === LIITTEEN_TOIMITUSTAPA.MUU_OSOITE
       ) {
         enhancedLiitteetEb = enhancedLiitteetEb
           .validateTranslations('toimitustapa.paikka.osoite', kieliversiot)
@@ -77,7 +77,7 @@ const validateLiitteet = (errorBuilder, values) => {
 
   if (
     liitteillaYhteinenToimitusosoite &&
-    get(values, 'liitteet.toimitustapa.tapa') ===
+    _.get(values, 'liitteet.toimitustapa.tapa') ===
       LIITTEEN_TOIMITUSTAPA.MUU_OSOITE
   ) {
     enhancedErrorBuilder = enhancedErrorBuilder
@@ -90,10 +90,10 @@ const validateLiitteet = (errorBuilder, values) => {
 };
 
 const validateValintakokeet = (errorBuilder, values) => {
-  const valintakoeTyypit = get(values, 'valintakoe.tyypit');
+  const valintakoeTyypit = _.get(values, 'valintakoe.tyypit');
   const kieliversiot = getKielivalinta(values);
 
-  return reduce(
+  return _.reduce(
     valintakoeTyypit,
     (ebAcc, { value: tyyppi }) =>
       ebAcc
@@ -140,7 +140,7 @@ const config = createFormConfigBuilder().registerSections([
       {
         field: 'hakuajat',
         validate: validateIfJulkaistu((eb, values) =>
-          get(values, 'hakuajat.eriHakuaika')
+          _.get(values, 'hakuajat.eriHakuaika')
             ? eb
                 .validateArrayMinLength('hakuajat.hakuajat', 1, {
                   isFieldArray: true,
@@ -213,9 +213,27 @@ const config = createFormConfigBuilder().registerSections([
     section: 'liitteet',
     field: 'liitteet',
     validate: validateIfJulkaistu((eb, values) => validateLiitteet(eb, values)),
-    parts: [{}],
   },
-  tilaSectionConfig,
+  {
+    section: 'tila',
+    field: 'tila',
+    required: true,
+    validate: (eb, values) =>
+      validateRelations([
+        {
+          key: 'haku',
+          t: 'yleiset.haku',
+        },
+        {
+          key: 'toteutus',
+          t: 'yleiset.toteutus',
+        },
+        {
+          key: 'valintaperuste',
+          t: 'yleiset.valintaperuste',
+        },
+      ])(eb.validateExistence('tila'), values),
+  },
 ]);
 
 const getHakukohdeFormConfig = () => config.getConfig();

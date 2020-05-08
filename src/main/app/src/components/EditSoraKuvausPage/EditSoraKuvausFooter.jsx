@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import Submit from '../Submit';
 import { useTranslation } from 'react-i18next';
@@ -7,11 +7,12 @@ import { getTestIdProps } from '../../utils';
 import Flex from '../Flex';
 import getSoraKuvausByFormValues from '../../utils/getSoraKuvausByFormValues';
 import updateSoraKuvaus from '../../utils/kouta/updateSoraKuvaus';
-import useSaveForm from '../useSaveForm';
+import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import validateSoraKuvausForm from '../../utils/validateSoraKuvausForm';
 
-const EditSoraKuvausFooter = ({ soraKuvaus, history }) => {
+const EditSoraKuvausFooter = ({ soraKuvaus }) => {
   const { t } = useTranslation();
+  const history = useHistory();
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
@@ -48,4 +49,4 @@ const EditSoraKuvausFooter = ({ soraKuvaus, history }) => {
   );
 };
 
-export default withRouter(EditSoraKuvausFooter);
+export default EditSoraKuvausFooter;

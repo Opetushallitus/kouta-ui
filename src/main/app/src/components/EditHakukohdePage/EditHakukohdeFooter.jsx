@@ -1,19 +1,21 @@
 import React, { useMemo, useCallback } from 'react';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import Submit from '../Submit';
 import { useTranslation } from 'react-i18next';
 import { getTestIdProps } from '../../utils';
 import Box from '../Box';
-import useSaveForm from '../useSaveForm';
+import { useSaveHakukohde } from '#/src/hooks/formSaveHooks';
 import getHakukohdeByFormValues from '../../utils/getHakukohdeByFormValues';
 import updateHakukohde from '../../utils/kouta/updateHakukohde';
-import validateHakukohdeForm from '../../utils/validateHakukohdeForm';
 import useOrganisaatio from '../useOrganisaatio';
 import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
 import { HAKUKOHDE_ROLE } from '../../constants';
 
-const EditHakukohdeFooter = ({ hakukohde, history }) => {
+const EditHakukohdeFooter = ({ hakukohde, haku, toteutus }) => {
+  const { t } = useTranslation();
+  const history = useHistory();
+
   const { organisaatio } = useOrganisaatio(hakukohde.organisaatioOid);
   const roleBuilder = useAuthorizedUserRoleBuilder();
 
@@ -41,13 +43,7 @@ const EditHakukohdeFooter = ({ hakukohde, history }) => {
     [hakukohde, history],
   );
 
-  const { save } = useSaveForm({
-    form: 'editHakukohdeForm',
-    submit,
-    validate: validateHakukohdeForm,
-  });
-
-  const { t } = useTranslation();
+  const save = useSaveHakukohde(submit, { haku, toteutus });
 
   return (
     <Box display="flex" justifyContent="flex-end">
@@ -63,4 +59,4 @@ const EditHakukohdeFooter = ({ hakukohde, history }) => {
   );
 };
 
-export default withRouter(EditHakukohdeFooter);
+export default EditHakukohdeFooter;

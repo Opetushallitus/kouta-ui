@@ -9,7 +9,7 @@ Array [
   margin-top: 32px;
 }
 
-<styled.div
+<Spacing
     marginBottom={3}
     marginLeft={1}
     marginRight={2}
@@ -20,7 +20,7 @@ Array [
     >
       With margins
     </div>
-  </styled.div>,
+  </Spacing>,
   .c0 {
   padding-left: 8px;
   padding-right: 16px;
@@ -28,7 +28,7 @@ Array [
   padding-top: 32px;
 }
 
-<styled.div
+<Spacing
     paddingBottom={3}
     paddingLeft={1}
     paddingRight={2}
@@ -39,6 +39,6 @@ Array [
     >
       With paddings
     </div>
-  </styled.div>,
+  </Spacing>,
 ]
 `;

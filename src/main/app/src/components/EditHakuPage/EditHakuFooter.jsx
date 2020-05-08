@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import Submit from '../Submit';
 import { getTestIdProps } from '../../utils';
@@ -7,14 +7,15 @@ import { useTranslation } from 'react-i18next';
 import Box from '../Box';
 import getHakuByFormValues from '../../utils/getHakuByFormValues';
 import updateHaku from '../../utils/kouta/updateHaku';
-import useSaveForm from '../useSaveForm';
+import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import validateHakuForm from '../../utils/validateHakuForm';
 import useOrganisaatio from '../useOrganisaatio';
 import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
 import { HAKU_ROLE } from '../../constants';
 
-const EditHakuFooter = ({ haku, history }) => {
+const EditHakuFooter = ({ haku }) => {
   const { t } = useTranslation();
+  const history = useHistory();
   const { organisaatio } = useOrganisaatio(haku.organisaatioOid);
   const roleBuilder = useAuthorizedUserRoleBuilder();
 
@@ -62,4 +63,4 @@ const EditHakuFooter = ({ haku, history }) => {
   );
 };
 
-export default withRouter(EditHakuFooter);
+export default EditHakuFooter;

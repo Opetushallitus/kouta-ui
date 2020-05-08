@@ -39,7 +39,7 @@ const getAmmatillinenFields = ({ tyyppi }) => {
     tila: 'tallennettu',
     nimi: {
       en: 'Vocational qualification in Agriculture',
-      fi: 'Maatalousalan perustutkinto',
+      fi: 'koulutus_0',
       sv: 'Grundexamen inom lantbruksbranschen',
     },
     ...(tyyppi === 'amm' ? { ePerusteId: 1 } : {}),
@@ -52,7 +52,7 @@ const getKorkeakouluFields = ({ tyyppi }) => {
     johtaaTutkintoon: true,
     koulutustyyppi: tyyppi,
     koulutusKoodiUri: 'koulutus_0#1',
-    nimi: { fi: 'Fi nimi', sv: 'Sv nimi' },
+    nimi: { fi: 'koulutus_0' },
     metadata: {
       tyyppi,
       kuvaus: { fi: 'Fi kuvaus', sv: 'Sv kuvaus' },

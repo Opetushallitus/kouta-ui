@@ -3,9 +3,9 @@ import queryString from 'query-string';
 import _ from 'lodash';
 
 import FormPage, {
-  OrganisaatioInfo,
-  KoulutusInfo,
-  TopInfoContainer,
+  OrganisaatioRelation,
+  KoulutusRelation,
+  RelationInfoContainer,
 } from '../FormPage';
 import getKoulutusByOid from '../../utils/kouta/getKoulutusByOid';
 import CreateToteutusHeader from './CreateToteutusHeader';
@@ -95,14 +95,18 @@ const CreateToteutusPage = props => {
               koulutustyyppi={koulutustyyppi}
               organisaatioOid={organisaatioOid}
               koulutusOid={koulutusOid}
+              koulutus={koulutus}
             />
           ) : null
         }
       >
-        <TopInfoContainer>
-          <KoulutusInfo organisaatioOid={organisaatioOid} koulutus={koulutus} />
-          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-        </TopInfoContainer>
+        <RelationInfoContainer>
+          <KoulutusRelation
+            organisaatioOid={organisaatioOid}
+            koulutus={koulutus}
+          />
+          <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+        </RelationInfoContainer>
         {koulutus ? (
           <ToteutusFormWrapper
             steps

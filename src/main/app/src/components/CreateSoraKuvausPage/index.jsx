@@ -1,7 +1,10 @@
 import React, { useMemo } from 'react';
 import queryString from 'query-string';
 
-import FormPage, { OrganisaatioInfo, TopInfoContainer } from '../FormPage';
+import FormPage, {
+  OrganisaatioRelation,
+  RelationInfoContainer,
+} from '../FormPage';
 import CreateSoraKuvausHeader from './CreateSoraKuvausHeader';
 import CreateSoraKuvausSteps from './CreateSoraKuvausSteps';
 import CreateSoraKuvausFooter from './CreateSoraKuvausFooter';
@@ -70,9 +73,9 @@ const CreateSoraKuvausPage = props => {
           steps={<CreateSoraKuvausSteps />}
           footer={<CreateSoraKuvausFooter organisaatioOid={organisaatioOid} />}
         >
-          <TopInfoContainer>
-            <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-          </TopInfoContainer>
+          <RelationInfoContainer>
+            <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+          </RelationInfoContainer>
           <SoraKuvausForm
             steps
             organisaatioOid={organisaatioOid}

@@ -1,17 +1,18 @@
 import React, { useCallback } from 'react';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import Submit from '../Submit';
 import { useTranslation } from 'react-i18next';
 import { getTestIdProps } from '../../utils';
 import Flex from '../Flex';
-import useSaveForm from '../useSaveForm';
+import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import createHaku from '../../utils/kouta/createHaku';
 import validateHakuForm from '../../utils/validateHakuForm';
 import getHakuByFormValues from '../../utils/getHakuByFormValues';
 
-const CreateHakuFooter = ({ organisaatioOid, history }) => {
+const CreateHakuFooter = ({ organisaatioOid }) => {
   const { t } = useTranslation();
+  const history = useHistory();
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
@@ -41,4 +42,4 @@ const CreateHakuFooter = ({ organisaatioOid, history }) => {
   );
 };
 
-export default withRouter(CreateHakuFooter);
+export default CreateHakuFooter;

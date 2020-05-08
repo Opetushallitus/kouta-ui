@@ -1,7 +1,10 @@
 import React, { useMemo } from 'react';
 import queryString from 'query-string';
 
-import FormPage, { OrganisaatioInfo, TopInfoContainer } from '../FormPage';
+import FormPage, {
+  OrganisaatioRelation,
+  RelationInfoContainer,
+} from '../FormPage';
 
 import CreateHakuHeader from './CreateHakuHeader';
 import CreateHakuSteps from './CreateHakuSteps';
@@ -70,9 +73,9 @@ const CreateHakuPage = props => {
         steps={<CreateHakuSteps />}
         footer={<CreateHakuFooter organisaatioOid={organisaatioOid} />}
       >
-        <TopInfoContainer>
-          <OrganisaatioInfo organisaatioOid={organisaatioOid} />
-        </TopInfoContainer>
+        <RelationInfoContainer>
+          <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+        </RelationInfoContainer>
         <FormConfigContext.Provider value={config}>
           <HakuForm
             steps

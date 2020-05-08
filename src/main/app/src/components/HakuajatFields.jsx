@@ -1,47 +1,24 @@
 import React from 'react';
-import { Field } from 'redux-form';
-import { isArray, isNil } from 'lodash';
+import _ from 'lodash';
 import Button from './Button';
-import Flex, { FlexItem } from './Flex';
-import { getTestIdProps } from './../utils';
+import { getTestIdProps } from '#/src/utils';
 import Box from './Box';
 import FormControl from './FormControl';
-import { FormFieldDateTimeInput } from './formFields';
+import DateTimeRange from '#/src/components/DateTimeRange';
 
 export default ({ fields, t, meta: { error } }) => (
   <>
     <FormControl
-      error={!isNil(error)}
-      helperText={error && isArray(error) ? t(...error) : t(error)}
+      error={!_.isNil(error)}
+      helperText={error && _.isArray(error) ? t(...error) : t(error)}
     >
       {fields.map((hakuaika, index) => (
-        <Flex key={index} mb={2} alignCenter>
-          <FlexItem grow={1} paddingRight={2} {...getTestIdProps('alkaa')}>
-            <Field
-              name={`${hakuaika}.alkaa`}
-              component={FormFieldDateTimeInput}
-              label={t('yleiset.alkaa')}
-              helperText={t('yleiset.paivamaaraJaKellonaika')}
-            />
-          </FlexItem>
-          <FlexItem grow={1} paddingLeft={2} {...getTestIdProps('paattyy')}>
-            <Field
-              name={`${hakuaika}.paattyy`}
-              component={FormFieldDateTimeInput}
-              label={t('yleiset.paattyy')}
-              helperText={t('yleiset.paivamaaraJaKellonaika')}
-            />
-          </FlexItem>
-          <FlexItem grow={0} paddingLeft={2}>
-            <Button
-              onClick={() => fields.remove(index)}
-              variant="outlined"
-              color="secondary"
-            >
-              {t('yleiset.poista')}
-            </Button>
-          </FlexItem>
-        </Flex>
+        <DateTimeRange
+          key={index}
+          startProps={{ name: `${hakuaika}.alkaa` }}
+          endProps={{ name: `${hakuaika}.paattyy` }}
+          onRemove={() => fields.remove(index)}
+        />
       ))}
     </FormControl>
     <Box marginTop={2}>

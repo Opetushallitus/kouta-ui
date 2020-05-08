@@ -1,9 +1,10 @@
 import React from 'react';
-import { Spring, Transition } from 'react-spring';
+import { Spring, Transition, config } from 'react-spring';
 
 export const CollapseContent = ({ open = false, children }) => {
   return (
     <Spring
+      config={{ ...config.gentle, clamp: true }}
       to={open ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
     >
       {({ opacity, height }) => (

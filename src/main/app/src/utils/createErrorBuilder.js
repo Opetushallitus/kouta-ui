@@ -14,7 +14,6 @@ import {
 import { getInvalidTranslations, otherwise } from './index';
 
 const allFuncs = (...fns) => value => every(fns, fn => fn(value));
-const clone = value => JSON.parse(JSON.stringify(value));
 
 const exists = value =>
   cond([
@@ -45,10 +44,6 @@ class ErrorBuilder {
     set(this.errors, path, value);
   }
 
-  clone() {
-    return new ErrorBuilder(this.values, clone(this.errors));
-  }
-
   validateExistence(path, { message } = {}) {
     const errorMessage = message || 'validointivirheet.pakollinen';
 
@@ -56,7 +51,7 @@ class ErrorBuilder {
       this.setError(path, errorMessage);
     }
 
-    return this.clone();
+    return this;
   }
 
   validate(path, validator, { message } = {}) {
@@ -66,7 +61,7 @@ class ErrorBuilder {
       this.setError(path, errorMessage);
     }
 
-    return this.clone();
+    return this;
   }
 
   validateArrayMinLength(path, min, { message, isFieldArray = false } = {}) {
@@ -75,13 +70,13 @@ class ErrorBuilder {
       ? message
       : min === 1
       ? 'validointivirheet.listaVahintaanYksi'
-      : ['validointivirheet.listaVahintaan', { lukumaara: 1 }];
+      : t => t('validointivirheet.listaVahintaan', { lukumaara: 1 });
 
     if (!isArray(value) || value.length < min) {
       this.setError(isFieldArray ? `${path}._error` : path, errorMessage);
     }
 
-    return this.clone();
+    return this;
   }
 
   validateTranslations(
@@ -101,7 +96,7 @@ class ErrorBuilder {
       languages.forEach(l => this.setError(`${path}.${l}`, errorMessage));
     }
 
-    return this.clone();
+    return this;
   }
 
   validateArray(path, makeBuilder) {
@@ -117,7 +112,7 @@ class ErrorBuilder {
       }
     }
 
-    return this.clone();
+    return this;
   }
 
   getErrors() {

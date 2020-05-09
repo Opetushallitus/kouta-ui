@@ -8,7 +8,7 @@ import { getTestIdProps } from '../../../utils';
 
 const KoulutusalatFieldComponent = createFormFieldComponent(
   KoulutusalatSelect,
-  selectMapProps,
+  selectMapProps
 );
 
 export const KoulutusalatField = ({ disabled, name }) => {

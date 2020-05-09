@@ -88,7 +88,7 @@ const withAuthorizationInterceptor = apiUrls => client => {
       }
 
       return Promise.reject(error);
-    },
+    }
   );
 
   return client;
@@ -99,7 +99,7 @@ const getCookie = name =>
     fp.prop(name),
     fp.fromPairs,
     fp.map(keyVal => keyVal.split('=')),
-    fp.split(';'),
+    fp.split(';')
   )(document.cookie);
 
 const withCSRF = client => {

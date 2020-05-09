@@ -65,7 +65,7 @@ const getFormValuesByValintaperuste = valintaperuste => {
         enimmaispistemaara: enimmaispisteet || '',
         vahimmaispistemaara: vahimmaispisteet || '',
         sisalto: parseSisalto({ sisalto }),
-      }),
+      })
     ),
     soraKuvaus: sorakuvausId
       ? {

@@ -10,7 +10,7 @@ const StyledKuvaus = styled.div(({ theme }) => ({
       marginTop: '20px',
     })),
     _fp.pick(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']),
-    _fp.get('typography'),
+    _fp.get('typography')
   )(theme),
   ..._fp.get('typography.body', theme),
   maxWidth: '750px',

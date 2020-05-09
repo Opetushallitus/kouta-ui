@@ -10,7 +10,7 @@ import serializeEditorState from '../../utils/draft/serializeEditorState';
 const convertToHTMLAction = action('convertToHTML');
 
 const initialValue = parseEditorState(
-  'Klikkaa tätä linkkiä: <a href="https://www.oph.fi/">Opetushallitus</a>',
+  'Klikkaa tätä linkkiä: <a href="https://www.oph.fi/">Opetushallitus</a>'
 );
 
 const StoryEditor = () => {

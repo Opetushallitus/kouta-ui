@@ -23,7 +23,7 @@ const createKoulutus = async ({
 
   const { data } = await httpClient.put(
     apiUrls.url('kouta-backend.koulutus'),
-    koulutus,
+    koulutus
   );
 
   return data;

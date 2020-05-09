@@ -36,7 +36,7 @@ const EditHakuFooter = ({ haku }) => {
         },
       });
     },
-    [haku, history],
+    [haku, history]
   );
 
   const { save } = useSaveForm({

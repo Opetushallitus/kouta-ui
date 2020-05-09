@@ -36,7 +36,7 @@ const OppilaitosPageFooter = ({
         },
       });
     },
-    [oppilaitos, organisaatioOid, history],
+    [oppilaitos, organisaatioOid, history]
   );
 
   const { save } = useSaveForm({

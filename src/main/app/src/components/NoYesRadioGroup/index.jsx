@@ -37,7 +37,7 @@ export const NoYesRadioGroup = ({
     e => {
       onChange(getValue(e.target.value));
     },
-    [onChange],
+    [onChange]
   );
 
   return (

@@ -125,14 +125,14 @@ const DrawerContent = ({
     () =>
       createCanReadSomethingRoleBuilder(
         roleBuilder,
-        OPETUSHALLITUS_ORGANISAATIO_OID,
+        OPETUSHALLITUS_ORGANISAATIO_OID
       ).result(),
-    [roleBuilder],
+    [roleBuilder]
   );
 
   const ophIsFavourite = useMemo(
     () => organisaatioFavourites.includes(OPETUSHALLITUS_ORGANISAATIO_OID),
-    [organisaatioFavourites],
+    [organisaatioFavourites]
   );
 
   const { t } = useTranslation();
@@ -140,7 +140,7 @@ const DrawerContent = ({
   const [openOrganisaatiot, setOpenOrganisaatiot] = useState([]);
   const [nameFilter, setNameFilter, debounceNameFilter] = useDebounceState(
     '',
-    500,
+    500
   );
 
   const nameSearchEnabled = hasOphOption;
@@ -155,12 +155,12 @@ const DrawerContent = ({
       hierarkia,
       organisaatioFavourites,
       openOrganisaatiot,
-      roleBuilder,
+      roleBuilder
     );
   }, [hierarkia, organisaatioFavourites, openOrganisaatiot, roleBuilder]);
 
   const { organisaatiot: favourites } = useOrganisaatiot(
-    organisaatioFavourites,
+    organisaatioFavourites
   );
 
   const onNameFilterChange = useCallback(e => setNameFilter(e.target.value), [
@@ -168,7 +168,7 @@ const DrawerContent = ({
   ]);
 
   const [selectedOrganisaatio, setSelectedOrganisaatio] = useState(
-    organisaatioOid,
+    organisaatioOid
   );
 
   const onSubmit = useCallback(() => {
@@ -184,7 +184,7 @@ const DrawerContent = ({
         setOpenOrganisaatiot([...openOrganisaatiot, oid]);
       }
     },
-    [openOrganisaatiot, setOpenOrganisaatiot],
+    [openOrganisaatiot, setOpenOrganisaatiot]
   );
 
   const onSelect = useCallback(oid => setSelectedOrganisaatio(oid), [
@@ -308,5 +308,5 @@ export default connect(
   }),
   dispatch => ({
     onToggleFavourite: oid => dispatch(toggleFavourite(oid)),
-  }),
+  })
 )(OrganisaatioDrawer);

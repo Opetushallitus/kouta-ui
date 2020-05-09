@@ -144,13 +144,9 @@ const fillLiitteetSection = () => {
         selectOption('liitetyypitamm_0', cy);
       });
 
-      cy.getByTestId('nimi')
-        .find('input')
-        .paste('Nimi');
+      cy.getByTestId('nimi').find('input').paste('Nimi');
 
-      cy.getByTestId('kuvaus')
-        .find('textarea')
-        .paste('Kuvaus');
+      cy.getByTestId('kuvaus').find('textarea').paste('Kuvaus');
 
       fillDatetime({
         date: '25.11.2019',
@@ -161,17 +157,13 @@ const fillLiitteetSection = () => {
         getRadio('osoite', cy).click({ force: true });
       });
 
-      cy.getByTestId('osoite')
-        .find('input')
-        .paste('Osoite');
+      cy.getByTestId('osoite').find('input').paste('Osoite');
 
       cy.getByTestId('postinumero').within(() => {
         fillAsyncSelect('0', 'Posti_0');
       });
 
-      cy.getByTestId('sahkoposti')
-        .find('input')
-        .paste('sahkoposti@email.com');
+      cy.getByTestId('sahkoposti').find('input').paste('sahkoposti@email.com');
     });
 
     jatka();
@@ -212,7 +204,7 @@ describe('createHakukohdeForm', () => {
 
     cy.location('pathname').should(
       'eq',
-      `/kouta/organisaatio/${organisaatioOid}/hakukohde/${hakukohdeOid}/muokkaus`,
+      `/kouta/organisaatio/${organisaatioOid}/hakukohde/${hakukohdeOid}/muokkaus`
     );
   });
 
@@ -241,7 +233,7 @@ describe('createHakukohdeForm', () => {
 
     cy.location('pathname').should(
       'eq',
-      `/kouta/organisaatio/${organisaatioOid}/hakukohde/${hakukohdeOid}/muokkaus`,
+      `/kouta/organisaatio/${organisaatioOid}/hakukohde/${hakukohdeOid}/muokkaus`
     );
   });
 });

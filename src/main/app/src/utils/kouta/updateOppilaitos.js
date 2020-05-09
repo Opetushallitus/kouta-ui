@@ -8,7 +8,7 @@ const updateOppilaitos = async ({ oppilaitos, httpClient, apiUrls }) => {
   const { data } = await httpClient.post(
     apiUrls.url('kouta-backend.oppilaitos'),
     rest,
-    { headers },
+    { headers }
   );
 
   return data;

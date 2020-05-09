@@ -29,14 +29,10 @@ export const selectOption = (value, cy) => {
 };
 
 export const fillAsyncSelect = (input, match) => {
-  getSelect(cy)
-    .find('input[type="text"]')
-    .paste(input);
+  getSelect(cy).find('input[type="text"]').paste(input);
 
   getSelect(cy).within(() => {
-    cy.get(`div:contains(${match})`)
-      .first()
-      .click();
+    cy.get(`div:contains(${match})`).first().click();
   });
 };
 
@@ -68,13 +64,8 @@ export const getTableInput = cy => {
 
 export const fillDateTimeInput = ({ date, time, cy }) => {
   getByTestId('DateTimeInput', cy).within(() => {
-    getByTestId('DateTimeInput__Date', cy)
-      .find('input')
-      .paste(date);
-    getByTestId('DateTimeInput__Time', cy)
-      .find('input')
-      .clear()
-      .paste(time);
+    getByTestId('DateTimeInput__Date', cy).find('input').paste(date);
+    getByTestId('DateTimeInput__Time', cy).find('input').clear().paste(time);
   });
 };
 
@@ -94,21 +85,11 @@ export const chooseKieliversiotLanguages = (selectedLanguages, cy) => {
 export const fillYhteyshenkilotFields = ({ cy }) => {
   cy.getByTestId('lisaaYhteyshenkiloButton').click({ force: true });
 
-  cy.getByTestId('nimi')
-    .find('input')
-    .paste('nimi');
-  cy.getByTestId('titteli')
-    .find('input')
-    .paste('titteli');
-  cy.getByTestId('sahkoposti')
-    .find('input')
-    .paste('sähkoposti');
-  cy.getByTestId('puhelinnumero')
-    .find('input')
-    .paste('puhelin');
-  cy.getByTestId('verkkosivu')
-    .find('input')
-    .paste('verkkosivu');
+  cy.getByTestId('nimi').find('input').paste('nimi');
+  cy.getByTestId('titteli').find('input').paste('titteli');
+  cy.getByTestId('sahkoposti').find('input').paste('sähkoposti');
+  cy.getByTestId('puhelinnumero').find('input').paste('puhelin');
+  cy.getByTestId('verkkosivu').find('input').paste('verkkosivu');
 };
 
 export const fillValintakoeFields = () => {
@@ -116,9 +97,7 @@ export const fillValintakoeFields = () => {
 
   cy.getByTestId('lisaaTilaisuusButton').click({ force: true });
 
-  cy.getByTestId('osoite')
-    .find('input')
-    .paste('osoite');
+  cy.getByTestId('osoite').find('input').paste('osoite');
 
   cy.getByTestId('postinumero').within(() => {
     fillAsyncSelect('0', '0 Posti_0');
@@ -140,9 +119,7 @@ export const fillValintakoeFields = () => {
     });
   });
 
-  cy.getByTestId('lisatietoja')
-    .find('textarea')
-    .paste('lisatietoja');
+  cy.getByTestId('lisatietoja').find('textarea').paste('lisatietoja');
 };
 
 export const stubKayttoOikeusMeRoute = ({ user = {}, cy }) => {
@@ -216,9 +193,7 @@ export const fillKoulutustyyppiSelect = (path, cy) => {
 };
 
 export const fillDatePickerInput = value => {
-  cy.get('.DatePickerInput__')
-    .find('input')
-    .paste(value);
+  cy.get('.DatePickerInput__').find('input').paste(value);
 };
 
 export const stubKoodiRoute = koodi => {

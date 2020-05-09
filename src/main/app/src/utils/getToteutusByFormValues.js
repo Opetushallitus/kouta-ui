@@ -12,7 +12,7 @@ const getOsaamisalatByValues = ({ osaamisalat, kielivalinta }) => {
       nimi: pick(nimi, kielivalinta),
       linkki: pick(linkki, kielivalinta),
       otsikko: pick(otsikko, kielivalinta),
-    }),
+    })
   );
 };
 
@@ -24,7 +24,7 @@ const getToteutusByFormValues = values => {
   const opetuskielet = get(values, 'jarjestamistiedot.opetuskieli') || [];
   const kuvaus = pick(
     get(values, 'tiedot.toteutuksenKuvaus') || {},
-    kielivalinta,
+    kielivalinta
   );
   const osioKuvaukset = get(values, 'jarjestamistiedot.osioKuvaukset') || {};
   const opetustapaKoodiUrit = get(values, 'jarjestamistiedot.opetustapa') || [];
@@ -36,7 +36,7 @@ const getToteutusByFormValues = values => {
 
   const diplomiKuvaus = pick(
     get(values, 'jarjestamistiedot.diplomiKuvaus') || {},
-    kielivalinta,
+    kielivalinta
   );
 
   const A1JaA2Kielivalikoima = (
@@ -68,31 +68,31 @@ const getToteutusByFormValues = values => {
 
   const opetuskieliKuvaus = pick(
     get(values, 'jarjestamistiedot.opetuskieliKuvaus') || {},
-    kielivalinta,
+    kielivalinta
   );
   const opetusaikaKuvaus = pick(
     get(values, 'jarjestamistiedot.opetusaikaKuvaus') || {},
-    kielivalinta,
+    kielivalinta
   );
   const opetustapaKuvaus = pick(
     get(values, 'jarjestamistiedot.opetustapaKuvaus') || {},
-    kielivalinta,
+    kielivalinta
   );
   const maksullisuusKuvaus = pick(
     get(values, 'jarjestamistiedot.maksullisuusKuvaus') || {},
-    kielivalinta,
+    kielivalinta
   );
 
   const osiot = (get(values, 'jarjestamistiedot.osiot') || []).map(
     ({ value }) => ({
       otsikkoKoodiUri: value,
       teksti: pick(osioKuvaukset[value] || {}, kielivalinta),
-    }),
+    })
   );
 
   const maksullisuustyyppi = get(
     values,
-    'jarjestamistiedot.maksullisuus.tyyppi',
+    'jarjestamistiedot.maksullisuus.tyyppi'
   );
 
   const maksullisuusMaksu = get(values, 'jarjestamistiedot.maksullisuus.maksu');
@@ -113,7 +113,7 @@ const getToteutusByFormValues = values => {
       koodiUri: osaamisala,
       linkki: osaamisalaLinkit[osaamisala] || {},
       otsikko: osaamisalaLinkkiOtsikot[osaamisala] || {},
-    }),
+    })
   );
 
   const yhteyshenkilot = (get(values, 'yhteyshenkilot') || []).map(
@@ -123,11 +123,11 @@ const getToteutusByFormValues = values => {
       sahkoposti: pick(sahkoposti || {}, kielivalinta),
       puhelinnumero: pick(puhelinnumero || {}, kielivalinta),
       wwwSivu: pick(verkkosivu || {}, kielivalinta),
-    }),
+    })
   );
 
   const ammattinimikkeet = toPairs(
-    pick(get(values, 'nayttamistiedot.ammattinimikkeet') || {}, kielivalinta),
+    pick(get(values, 'nayttamistiedot.ammattinimikkeet') || {}, kielivalinta)
   ).flatMap(([language, nimikkeet]) => {
     return (nimikkeet || []).map(({ value }) => ({
       kieli: language,
@@ -136,7 +136,7 @@ const getToteutusByFormValues = values => {
   });
 
   const asiasanat = toPairs(
-    pick(get(values, 'nayttamistiedot.avainsanat') || {}, kielivalinta),
+    pick(get(values, 'nayttamistiedot.avainsanat') || {}, kielivalinta)
   ).flatMap(([language, sanat]) => {
     return (sanat || []).map(({ value }) => ({
       kieli: language,
@@ -148,7 +148,7 @@ const getToteutusByFormValues = values => {
 
   const stipendinKuvaus = pick(
     get(values, 'jarjestamistiedot.stipendinKuvaus') || {},
-    kielivalinta,
+    kielivalinta
   );
 
   const stipendinMaara =
@@ -173,23 +173,23 @@ const getToteutusByFormValues = values => {
     : null;
   const koulutuksenAlkamisvuosi = !koulutuksenTarkkaAlkamisaika
     ? parseInt(
-        (get(values, 'jarjestamistiedot.koulutuksenAlkamisvuosi') || {}).value,
+        (get(values, 'jarjestamistiedot.koulutuksenAlkamisvuosi') || {}).value
       )
     : null;
   const koulutuksenAlkamispaivamaara = koulutuksenTarkkaAlkamisaika
     ? getKoutaDateString(
-        get(values, 'jarjestamistiedot.koulutuksenAlkamispaivamaara'),
+        get(values, 'jarjestamistiedot.koulutuksenAlkamispaivamaara')
       )
     : null;
   const koulutuksenPaattymispaivamaara = koulutuksenTarkkaAlkamisaika
     ? getKoutaDateString(
-        get(values, 'jarjestamistiedot.koulutuksenPaattymispaivamaara'),
+        get(values, 'jarjestamistiedot.koulutuksenPaattymispaivamaara')
       )
     : null;
 
   const ilmoittautumislinkki = pick(
     get(values, 'tiedot.ilmoittautumislinkki'),
-    kielivalinta,
+    kielivalinta
   );
 
   const laajuus = isNumeric(get(values, 'tiedot.laajuus'))
@@ -213,7 +213,7 @@ const getToteutusByFormValues = values => {
       ilmoittautumislinkki: pick(ilmoittautumislinkki, kielivalinta),
       kuvaus: pick(kuvaus, kielivalinta),
       sisalto: serializeSisaltoField(sisalto, kielivalinta),
-    }),
+    })
   );
 
   const tutkinnonOsat = (get(values, 'tutkinnonOsat') || []).map(
@@ -221,7 +221,7 @@ const getToteutusByFormValues = values => {
       tutkintoKoodiUri: get(tutkinto, 'value') || null,
       osaamisalaKoodiUri: get(osaamisala, 'value') || null,
       tutkinnonOsaKoodiUrit: (tutkinnonOsat || []).map(({ value }) => value),
-    }),
+    })
   );
 
   const teemakuva = get(values, 'teemakuva');

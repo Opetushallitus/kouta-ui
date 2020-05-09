@@ -8,7 +8,7 @@ const getOrganisaatioHierarkiaByOid = async ({
 }) => {
   const { data } = await httpClient.get(
     apiUrls.url('organisaatio-service.hierarkia', oid),
-    { params: { skipParents: skipParents ? 'true' : 'false' } },
+    { params: { skipParents: skipParents ? 'true' : 'false' } }
   );
 
   return get(data, 'organisaatiot') || [];

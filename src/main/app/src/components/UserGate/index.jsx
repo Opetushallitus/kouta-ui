@@ -55,7 +55,7 @@ const UserGate = ({ fallback = null, children = null }) => {
       } catch (e) {
         console.log(get(e, 'response.status'));
         setSessionErrorCode(
-          get(e, 'response.status') || ERROR_INTERNET_DISCONNECTED,
+          get(e, 'response.status') || ERROR_INTERNET_DISCONNECTED
         );
       }
     }

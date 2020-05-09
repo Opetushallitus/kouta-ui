@@ -90,17 +90,17 @@ const useOrganisaatioHierarkia = ({
     organisaatio => {
       return createCanReadSomethingRoleBuilder(
         roleBuilder,
-        organisaatio,
+        organisaatio
       ).result();
     },
-    [roleBuilder],
+    [roleBuilder]
   );
 
   const roleHierarkia = useMemo(() => {
     return isArray(data)
       ? filterHierarkia(
           data,
-          org => hasRequiredRoles(org) && organisaatioHasCorrectType(org),
+          org => hasRequiredRoles(org) && organisaatioHasCorrectType(org)
         )
       : [];
   }, [data, hasRequiredRoles]);

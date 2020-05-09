@@ -4,7 +4,7 @@ import getErrorBuilderByFormConfig from './getErrorBuilderByFormConfig';
 const validateOppilaitosForm = values => {
   return getErrorBuilderByFormConfig(
     getOppilaitosFormConfig(),
-    values,
+    values
   ).getErrors();
 };
 

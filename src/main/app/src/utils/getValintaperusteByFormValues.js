@@ -46,7 +46,7 @@ const serializeSisalto = ({ sisalto, kielivalinta = [] }) => {
     if (tyyppi === 'teksti') {
       serializedData = _.pick(
         _.isObject(data) ? _.mapValues(data, serializeEditorState) : {},
-        kielivalinta,
+        kielivalinta
       );
     }
 
@@ -74,7 +74,7 @@ const getValintaperusteByFormValues = values => {
 
   const kuvaus = _.pick(
     _.mapValues(_.get(values, 'kuvaus.kuvaus') || {}, serializeEditorState),
-    kielivalinta,
+    kielivalinta
   );
 
   const valintatavat = getArrayValue(values, 'valintatavat').map(
@@ -99,7 +99,7 @@ const getValintaperusteByFormValues = values => {
       vahimmaispisteet: isNumeric(vahimmaispistemaara)
         ? parseFloat(vahimmaispistemaara)
         : null,
-    }),
+    })
   );
 
   const valintakokeet = getValintakoeFieldsData({

@@ -5,6 +5,6 @@ import { mountWithTheme } from '../../testUtils';
 
 test('renders correctly', () => {
   expect(
-    mountWithTheme(<Checkbox onChange={() => {}}>Checkbox</Checkbox>),
+    mountWithTheme(<Checkbox onChange={() => {}}>Checkbox</Checkbox>)
   ).toMatchSnapshot();
 });

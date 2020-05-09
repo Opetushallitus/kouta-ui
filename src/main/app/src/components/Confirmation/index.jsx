@@ -74,7 +74,7 @@ export const Confirmation = ({
         </Wrapper>
       </DropdownMenu>
     ),
-    [onConfirm, content],
+    [onConfirm, content]
   );
 
   return <Dropdown overlay={overlay} closeOnOverlayClick={false} {...props} />;

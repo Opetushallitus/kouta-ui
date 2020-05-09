@@ -9,7 +9,7 @@ const GridRowBase = styled.div`
 
 const GridRow = ({ gutter = 2, children }) => {
   const wrappedChildren = React.Children.map(children, child =>
-    React.cloneElement(child, { gutter }),
+    React.cloneElement(child, { gutter })
   );
 
   return <GridRowBase gutter={gutter}>{wrappedChildren}</GridRowBase>;

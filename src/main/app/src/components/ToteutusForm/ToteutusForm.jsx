@@ -110,7 +110,7 @@ const ToteutusForm = ({
         <FormCollapse
           section="alemmanKorkeakoulututkinnonOsaamisalat"
           header={t(
-            'toteutuslomake.alemmanKorkeakoulututkinnonErikoistumisalanKuvaus',
+            'toteutuslomake.alemmanKorkeakoulututkinnonErikoistumisalanKuvaus'
           )}
           Component={KorkeakouluOsaamisalatSection}
           languages={languages}
@@ -119,7 +119,7 @@ const ToteutusForm = ({
         <FormCollapse
           section="ylemmanKorkeakoulututkinnonOsaamisalat"
           header={t(
-            'toteutuslomake.ylemmanKorkeakoulututkinnonErikoistumisalanKuvaus',
+            'toteutuslomake.ylemmanKorkeakoulututkinnonErikoistumisalanKuvaus'
           )}
           Component={KorkeakouluOsaamisalatSection}
           languages={languages}

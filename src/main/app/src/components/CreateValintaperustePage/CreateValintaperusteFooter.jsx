@@ -22,10 +22,10 @@ const CreateValintaperusteFooter = ({ organisaatioOid }) => {
       });
 
       history.push(
-        `/organisaatio/${organisaatioOid}/valintaperusteet/${id}/muokkaus`,
+        `/organisaatio/${organisaatioOid}/valintaperusteet/${id}/muokkaus`
       );
     },
-    [organisaatioOid, history],
+    [organisaatioOid, history]
   );
 
   const save = useSaveValintaperuste(submit);

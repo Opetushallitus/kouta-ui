@@ -25,7 +25,7 @@ const useMachineDropZone = ({ send }) => {
     async files => {
       send({ type: AT.UPLOAD_FILE, files });
     },
-    [send],
+    [send]
   );
   const onDragEnter = useCallback(() => send({ type: AT.DRAG_START }), [send]);
   const onDragLeave = useCallback(() => send({ type: AT.DRAG_STOP }), [send]);
@@ -207,7 +207,7 @@ const InputAreaContent = ({ file, machineError, state, open, onRemove, t }) => (
         otherwise,
         () => {
           console.error(
-            `ImageInput: Unknown control state ${JSON.stringify(state.value)}`,
+            `ImageInput: Unknown control state ${JSON.stringify(state.value)}`
           );
         },
       ],
@@ -239,7 +239,7 @@ export const ImageInput = props => {
     services: {
       upload(_, e) {
         const p = validateInput(e.files, { ...props, t }).then(() =>
-          upload(e.files[0]),
+          upload(e.files[0])
         );
         // Log uncaught errors in validation/upload for easier debugging
         p.catch(console.error);

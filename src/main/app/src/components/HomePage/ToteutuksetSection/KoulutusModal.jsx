@@ -35,16 +35,16 @@ const KoulutusModal = ({ onClose, organisaatioOid, open }) => {
               value: oid,
               label: getFirstLanguageValue(nimi, language),
             })),
-            ({ label }) => label,
+            ({ label }) => label
           )
         : [],
-    [data, language],
+    [data, language]
   );
 
   const onSubmit = useCallback(() => {
     if (koulutus) {
       history.push(
-        `/organisaatio/${organisaatioOid}/koulutus/${koulutus.value}/toteutus`,
+        `/organisaatio/${organisaatioOid}/koulutus/${koulutus.value}/toteutus`
       );
     }
   }, [history, koulutus, organisaatioOid]);

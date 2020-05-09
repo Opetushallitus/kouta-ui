@@ -12,7 +12,7 @@ const OppilaitosPageHeader = ({ oppilaitos, organisaatio }) => {
 
   const organisaatioNimi = getFirstLanguageValue(
     get(organisaatio, 'nimi'),
-    language,
+    language
   );
 
   return (

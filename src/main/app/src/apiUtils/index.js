@@ -26,8 +26,8 @@ export const getKoulutuksetByKoulutusTyyppi = async ({
 
   const responses = await Promise.all(
     ids.map(id =>
-      httpClient.get(apiUrls.url('koodisto-service.sisaltyy-ylakoodit', id)),
-    ),
+      httpClient.get(apiUrls.url('koodisto-service.sisaltyy-ylakoodit', id))
+    )
   );
 
   const koulutukset = responses.reduce((acc, response) => {
@@ -50,18 +50,18 @@ export const getKoulutuksetByKoulutusTyyppi = async ({
   }, []);
 
   const latestKoulutukset = toPairs(
-    groupBy(koulutukset, ({ koodiUri }) => koodiUri),
+    groupBy(koulutukset, ({ koodiUri }) => koodiUri)
   ).map(([, versiot]) => maxBy(versiot, ({ versio }) => versio));
 
   return latestKoulutukset.filter(({ koodiUri }) =>
-    /^koulutus_/.test(koodiUri),
+    /^koulutus_/.test(koodiUri)
   );
 };
 
 export const getEPerusteById = async ({ httpClient, apiUrls, ePerusteId }) => {
   if (ePerusteId) {
     const { data } = await httpClient.get(
-      apiUrls.url('eperusteet-service.peruste-by-id', ePerusteId),
+      apiUrls.url('eperusteet-service.peruste-by-id', ePerusteId)
     );
 
     const kuvaus = getEPerusteKuvaus(data);
@@ -92,23 +92,23 @@ export const getKoulutusByKoodi = async ({
                   errorNotifier: {
                     silent: true,
                   },
-                },
+                }
               )
               .then(
                 ({ data: rakenne }) => ({
                   ...ePeruste,
                   laajuus: get(rakenne, 'muodostumisSaanto.laajuus.minimi'),
                 }),
-                () => ePeruste,
-              ),
-          ),
-        ),
+                () => ePeruste
+              )
+          )
+        )
       ),
     httpClient.get(
-      apiUrls.url('koodisto-service.sisaltyy-alakoodit', koodi, versio || ''),
+      apiUrls.url('koodisto-service.sisaltyy-alakoodit', koodi, versio || '')
     ),
     httpClient.get(
-      apiUrls.url('koodisto-service.codeelement', koodi, versio || ''),
+      apiUrls.url('koodisto-service.codeelement', koodi, versio || '')
     ),
   ]);
 
@@ -117,21 +117,21 @@ export const getKoulutusByKoodi = async ({
   const { data: alakooditData = [] } = alakooditResponse;
 
   const koulutusalaKoodi = alakooditData.find(
-    ({ koodiUri }) => koodiUri && /^okmohjauksenala_/.test(koodiUri),
+    ({ koodiUri }) => koodiUri && /^okmohjauksenala_/.test(koodiUri)
   );
 
   const opintojenlaajuusKoodi = alakooditData.find(
-    ({ koodiUri }) => koodiUri && /^opintojenlaajuus_/.test(koodiUri),
+    ({ koodiUri }) => koodiUri && /^opintojenlaajuus_/.test(koodiUri)
   );
 
   const opintojenlaajuusYksikkoKoodi = alakooditData.find(
-    ({ koodiUri }) => koodiUri && /^opintojenlaajuusyksikko_/.test(koodiUri),
+    ({ koodiUri }) => koodiUri && /^opintojenlaajuusyksikko_/.test(koodiUri)
   );
 
   const koulutusala =
     koulutusalaKoodi && isArray(koulutusalaKoodi.metadata)
       ? keyBy(koulutusalaKoodi.metadata, ({ kieli }) =>
-          kieli ? kieli.toLowerCase() : '_',
+          kieli ? kieli.toLowerCase() : '_'
         )
       : null;
 
@@ -144,7 +144,7 @@ export const getKoulutusByKoodi = async ({
     opintojenlaajuusYksikkoKoodi &&
     isArray(opintojenlaajuusYksikkoKoodi.metadata)
       ? keyBy(opintojenlaajuusYksikkoKoodi.metadata, ({ kieli }) =>
-          kieli ? kieli.toLowerCase() : '_',
+          kieli ? kieli.toLowerCase() : '_'
         )
       : null;
 
@@ -155,7 +155,7 @@ export const getKoulutusByKoodi = async ({
   const nimi =
     latestKoodi && isArray(latestKoodi.metadata)
       ? keyBy(latestKoodi.metadata, ({ kieli }) =>
-          kieli ? kieli.toLowerCase() : '_',
+          kieli ? kieli.toLowerCase() : '_'
         )
       : null;
 
@@ -175,7 +175,7 @@ export const getKoulutusByKoodi = async ({
     opintojenlaajuus,
     opintojenlaajuusYksikko: mapValues(
       opintojenlaajuusYksikko,
-      ({ nimi }) => nimi || null,
+      ({ nimi }) => nimi || null
     ),
     nimi: mapValues(nimi, ({ nimi: nimiField }) => nimiField || null),
   };
@@ -187,7 +187,7 @@ export const getOsaamisalakuvauksetByPerusteId = async ({
   ePerusteId,
 }) => {
   const { data } = await httpClient.get(
-    apiUrls.url('eperusteet-service.osaamisalakuvaukset', ePerusteId),
+    apiUrls.url('eperusteet-service.osaamisalakuvaukset', ePerusteId)
   );
 
   return get(data, 'reformi') || {};
@@ -203,7 +203,7 @@ export const getLocalisation = async ({
     apiUrls.url('lokalisaatio-service.localisation', category),
     {
       params: { locale },
-    },
+    }
   );
 
   let resource = {};
@@ -229,7 +229,7 @@ export const getMe = async ({ httpClient, apiUrls }) => {
 
 export const getHakemuspalveluLomakkeet = async ({ httpClient, apiUrls }) => {
   const { data } = await httpClient.get(
-    apiUrls.url('lomake-editori.lomakkeet'),
+    apiUrls.url('lomake-editori.lomakkeet')
   );
 
   return get(data, 'forms') || [];
@@ -241,7 +241,7 @@ export const getOppijanumerorekisteriHenkilo = async ({
   oid,
 }) => {
   const { data } = await httpClient.get(
-    apiUrls.url('oppijanumerorekisteri-service.henkilo', oid),
+    apiUrls.url('oppijanumerorekisteri-service.henkilo', oid)
   );
 
   return data;

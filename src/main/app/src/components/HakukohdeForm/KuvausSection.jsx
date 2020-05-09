@@ -43,7 +43,7 @@ const KuvausSection = ({ haku, organisaatioOid, name, languages }) => {
 
   const options = useMemo(
     () => getValintaperusteetOptions(data || [], language),
-    [data, language],
+    [data, language]
   );
 
   return (

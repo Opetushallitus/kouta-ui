@@ -28,7 +28,7 @@ const getMatchingOptions = (options, input, maxMatches) => {
 
 const useLoadOptions = (
   options = [],
-  { debounce: debounceTime = 500, maxOptions = 100 } = {},
+  { debounce: debounceTime = 500, maxOptions = 100 } = {}
 ) => {
   return useMemo(() => {
     const loadDebounce = debounce(inputValue => {

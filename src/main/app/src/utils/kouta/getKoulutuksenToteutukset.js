@@ -10,7 +10,7 @@ const getKoulutuksenToteutukset = async ({
       params: {
         ...(organisaatioOid && { organisaatioOid }),
       },
-    },
+    }
   );
 
   return data;

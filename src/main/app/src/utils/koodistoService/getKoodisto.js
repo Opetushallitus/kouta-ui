@@ -6,7 +6,7 @@ const getKoodisto = async ({
 }) => {
   const { data } = await httpClient.get(
     apiUrls.url('koodisto-service.koodi', koodistoUri),
-    { params: { koodistoVersio: versio } },
+    { params: { koodistoVersio: versio } }
   );
 
   return data;

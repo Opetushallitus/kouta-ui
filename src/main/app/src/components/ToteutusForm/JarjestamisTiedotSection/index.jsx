@@ -37,7 +37,7 @@ const NoYesField = createFormFieldComponent(
   ({ input, ...props }) => ({
     ...input,
     ...props,
-  }),
+  })
 );
 
 const OpetusaikaField = createFormFieldComponent(
@@ -47,7 +47,7 @@ const OpetusaikaField = createFormFieldComponent(
     value: value || [],
     onChange: makeCountLimitOnChange(onChange, 2),
     ...props,
-  }),
+  })
 );
 
 const OpetuskieliField = createFormFieldComponent(
@@ -55,7 +55,7 @@ const OpetuskieliField = createFormFieldComponent(
   ({ input, ...props }) => ({
     ...input,
     ...props,
-  }),
+  })
 );
 
 const OpetustapaField = createFormFieldComponent(
@@ -64,7 +64,7 @@ const OpetustapaField = createFormFieldComponent(
     ...input,
     value: value || [],
     ...props,
-  }),
+  })
 );
 
 const OsiotFields = ({ language, osiotOptions, name }) => {
@@ -78,7 +78,7 @@ const OsiotFields = ({ language, osiotOptions, name }) => {
         ? label
         : get(
             osiotOptions.find(({ value: v }) => v === value),
-            'label',
+            'label'
           ) || null,
     }));
   }, [osiotArr, osiotOptions]);

@@ -47,7 +47,7 @@ const HakuForm = ({
       roleBuilder
         .hasUpdate(HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID)
         .result(),
-    [roleBuilder],
+    [roleBuilder]
   );
 
   return (

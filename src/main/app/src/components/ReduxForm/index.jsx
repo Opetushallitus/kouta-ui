@@ -12,7 +12,7 @@ const ReduxForm = reduxForm({ initialValues: {} })(
           : children({ form, ...props })}
       </FormNameContext.Provider>
     );
-  },
+  }
 );
 
 export default ReduxForm;

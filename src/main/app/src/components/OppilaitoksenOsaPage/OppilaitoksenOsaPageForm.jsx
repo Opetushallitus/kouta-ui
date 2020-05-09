@@ -36,7 +36,7 @@ const OppilaitoksenOsaPageForm = ({ organisaatio, oppilaitoksenOsa }) => {
       ...(oppilaitoksenOsa &&
         getFormValuesByOppilaitoksenOsa(oppilaitoksenOsa)),
     }),
-    [oppilaitoksenOsa, contactInfo],
+    [oppilaitoksenOsa, contactInfo]
   );
 
   const stepsEnabled = !oppilaitoksenOsa;

@@ -27,8 +27,8 @@ test('renders correctly', () => {
         onToggle={() => {}}
       >
         {children}
-      </Collapse>,
-    ),
+      </Collapse>
+    )
   ).toMatchSnapshot();
 
   expect(
@@ -40,8 +40,8 @@ test('renders correctly', () => {
         onToggle={() => {}}
       >
         {children}
-      </Collapse>,
-    ),
+      </Collapse>
+    )
   ).toMatchSnapshot();
 });
 
@@ -55,8 +55,8 @@ test('renders correctly when closed', () => {
         onToggle={() => {}}
       >
         <div>Hello world!</div>
-      </Collapse>,
-    ),
+      </Collapse>
+    )
   ).toMatchSnapshot();
 });
 

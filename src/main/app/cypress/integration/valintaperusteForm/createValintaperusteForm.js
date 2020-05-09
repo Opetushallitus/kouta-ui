@@ -102,15 +102,9 @@ const fillValintatapaSection = () => {
           });
       });
 
-      cy.getByTestId('kynnysehto')
-        .find('textarea')
-        .paste('Kynnysehto');
-      cy.getByTestId('enimmaispistemaara')
-        .find('input')
-        .paste('100');
-      cy.getByTestId('vahimmaispistemaara')
-        .find('input')
-        .paste('10');
+      cy.getByTestId('kynnysehto').find('textarea').paste('Kynnysehto');
+      cy.getByTestId('enimmaispistemaara').find('input').paste('100');
+      cy.getByTestId('vahimmaispistemaara').find('input').paste('10');
     });
 
     jatka();
@@ -209,7 +203,7 @@ describe('createValintaperusteForm', () => {
 
     cy.location('pathname').should(
       'eq',
-      `/kouta/organisaatio/${organisaatioOid}/valintaperusteet/${createdValintaperusteId}/muokkaus`,
+      `/kouta/organisaatio/${organisaatioOid}/valintaperusteet/${createdValintaperusteId}/muokkaus`
     );
   });
 });

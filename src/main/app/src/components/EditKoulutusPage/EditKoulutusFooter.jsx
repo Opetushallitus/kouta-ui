@@ -29,7 +29,7 @@ const getTarjoajaOperations = (availableOids, oids) => {
   const normalizedAvailableOids = isArray(availableOids) ? availableOids : [];
 
   const inserted = normalizedOids.filter(o =>
-    normalizedAvailableOids.includes(o),
+    normalizedAvailableOids.includes(o)
   );
 
   return {
@@ -59,7 +59,7 @@ const EditKoulutusFooter = ({ koulutus, organisaatioOid }) => {
 
   const availableTarjoajaOids = useMemo(
     () => getAvailableTarjoajaOids(hierarkia),
-    [hierarkia],
+    [hierarkia]
   );
 
   const submit = useCallback(
@@ -73,7 +73,7 @@ const EditKoulutusFooter = ({ koulutus, organisaatioOid }) => {
           tarjoajat: mergeTarjoajat(
             koulutus.tarjoajat,
             values.tarjoajat,
-            availableTarjoajaOids,
+            availableTarjoajaOids
           ),
         },
       });
@@ -84,7 +84,7 @@ const EditKoulutusFooter = ({ koulutus, organisaatioOid }) => {
         },
       });
     },
-    [koulutus, history, availableTarjoajaOids],
+    [koulutus, history, availableTarjoajaOids]
   );
 
   const { save } = useSaveForm({

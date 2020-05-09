@@ -48,7 +48,7 @@ export const stubHakuFormRoutes = ({ cy, organisaatioOid }) => {
             ...v,
             koodiUri: 'haunkohdejoukko_12',
           }
-        : v,
+        : v
     ),
   });
 
@@ -61,7 +61,7 @@ export const stubHakuFormRoutes = ({ cy, organisaatioOid }) => {
             ...v,
             koodiUri: 'hakutapa_01',
           }
-        : v,
+        : v
     ),
   });
 

@@ -6,7 +6,7 @@ const sortTreeBy = (tree = [], sortOpt) => {
       ...item,
       children: sortTreeBy(item.children, sortOpt),
     })),
-    sortOpt,
+    sortOpt
   );
 };
 export default sortTreeBy;

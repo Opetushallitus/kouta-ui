@@ -23,17 +23,17 @@ const useSelectBase = (history, { kopioParam = 'kopio' } = {}) => {
         return setNewSearch(
           assignQueryString(search, {
             [kopioParam]: valinta,
-          }),
+          })
         );
       }
 
       return setNewSearch(
         assignQueryString(search, {
           [kopioParam]: undefined,
-        }),
+        })
       );
     },
-    [kopioParam, history],
+    [kopioParam, history]
   );
 };
 

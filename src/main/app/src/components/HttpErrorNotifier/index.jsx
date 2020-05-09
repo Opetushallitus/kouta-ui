@@ -40,7 +40,7 @@ export const HttpErrorNotifier = () => {
         }
 
         return Promise.reject(error);
-      },
+      }
     );
 
     return () => {

@@ -8,7 +8,7 @@ const updateToteutus = async ({ toteutus, httpClient, apiUrls }) => {
   const { data } = await httpClient.post(
     apiUrls.url('kouta-backend.toteutus'),
     rest,
-    { headers },
+    { headers }
   );
 
   return data;

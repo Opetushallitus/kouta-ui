@@ -44,7 +44,7 @@ const FormCollapseGroup = ({
 
   const visibleChildren = useMemo(
     () => getVisibleChildren(children, config, configured),
-    [children, config, configured],
+    [children, config, configured]
   );
 
   const sectionErrors = useMemo(
@@ -55,20 +55,20 @@ const FormCollapseGroup = ({
         const firstSection = get(child, 'props.section');
         return get(formErrors, firstSection) != null;
       }),
-    [formErrors, visibleChildren],
+    [formErrors, visibleChildren]
   );
 
   // initialize the collapse components' open/closed state so that the initial
   // active collapse is open and others closed
   const [collapsesOpen, setCollapsesOpen] = useState(() =>
-    sectionErrors.map((_, i) => defaultOpen || defaultActiveStep === i),
+    sectionErrors.map((_, i) => defaultOpen || defaultActiveStep === i)
   );
 
   const setCollapseOpen = (collapseIndex, value) => {
     setCollapsesOpen(collapses =>
       produce(collapses, draft => {
         draft[collapseIndex] = value;
-      }),
+      })
     );
   };
 
@@ -81,7 +81,7 @@ const FormCollapseGroup = ({
   useEffect(() => {
     if (errorsNeedAttention) {
       setCollapsesOpen(collapses =>
-        sectionErrors.map((error, i) => error || collapses[i]),
+        sectionErrors.map((error, i) => error || collapses[i])
       );
       const firstErrorIndex = sectionErrors.indexOf(true);
       firstErrorIndex !== -1 && setSectionNeedsFocus(firstErrorIndex);

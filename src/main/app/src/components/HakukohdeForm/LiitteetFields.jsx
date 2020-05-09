@@ -34,7 +34,7 @@ const ContactInfo = ({
   const translatedOsoite = getFirstLanguageValue(osoite, language);
   const translatedPostitoimipaikka = getFirstLanguageValue(
     postitoimipaikka,
-    language,
+    language
   );
 
   return translatedOsoite &&
@@ -140,7 +140,7 @@ const ToimitustapaFields = ({ name, t, language, contactInfo }) => {
       {
         value: LIITTEEN_TOIMITUSTAPA.TOIMITETAAN_LAHETTAMISEN_YHTEYDESSA,
         label: t(
-          'liitteenToimitustapaValinnat.toimitetaanLahettamisenYhteydessa',
+          'liitteenToimitustapaValinnat.toimitetaanLahettamisenYhteydessa'
         ),
       },
       {
@@ -269,11 +269,11 @@ const LiitteetField = ({
   ...props
 }) => {
   const yhteinenToimitusaika = Boolean(
-    get(props, [baseName, 'yhteinenToimitusaika', 'input', 'value']),
+    get(props, [baseName, 'yhteinenToimitusaika', 'input', 'value'])
   );
 
   const yhteinenToimituspaikka = Boolean(
-    get(props, [baseName, 'yhteinenToimituspaikka', 'input', 'value']),
+    get(props, [baseName, 'yhteinenToimituspaikka', 'input', 'value'])
   );
 
   return (

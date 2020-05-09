@@ -37,7 +37,7 @@ const HomeContent = ({
       history.push(`/?organisaatioOid=${value}`);
       onOrganisaatioChangeProp(value);
     },
-    [history, onOrganisaatioChangeProp],
+    [history, onOrganisaatioChangeProp]
   );
 
   const hasKoulutusWriteRole = useMemo(() => {

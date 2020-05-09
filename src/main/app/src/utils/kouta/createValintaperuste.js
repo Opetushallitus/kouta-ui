@@ -5,7 +5,7 @@ const createValintaperuste = async ({
 }) => {
   const { data } = await httpClient.put(
     apiUrls.url('kouta-backend.valintaperuste'),
-    valintaperuste,
+    valintaperuste
   );
 
   return data;

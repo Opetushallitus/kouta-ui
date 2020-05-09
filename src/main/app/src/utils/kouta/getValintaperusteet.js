@@ -8,7 +8,7 @@ const getValintaperusteet = async ({
     apiUrls.url('kouta-backend.valintaperuste-list'),
     {
       params: { organisaatioOid, ...(hakuOid && { hakuOid }) },
-    },
+    }
   );
 
   return data;

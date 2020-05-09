@@ -171,9 +171,9 @@ export const AsyncSelect = ({
       const labels = await Promise.all(
         valuesWithoutLabel.map(v =>
           (isFunction(loadLabel) ? loadLabel(v) : noopPromise()).catch(
-            () => null,
-          ),
-        ),
+            () => null
+          )
+        )
       );
 
       const valueToLabel = zipObject(valuesWithoutLabel, labels);
@@ -197,13 +197,13 @@ export const AsyncSelect = ({
       Object.entries(valueToLabel || {}).map(([k, v]) => ({
         value: k,
         label: v,
-      })),
+      }))
     );
   }, [valueToLabel, valueProp]);
 
   const noOptionsMessage = useCallback(
     () => t('yleiset.eiValittaviaKohteitaHakusanalla'),
-    [t],
+    [t]
   );
 
   return (

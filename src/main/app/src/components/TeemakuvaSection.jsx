@@ -23,7 +23,7 @@ export const TeemakuvaSection = props => {
     async file => {
       return uploadTeemakuva({ httpClient, image: file, apiUrls });
     },
-    [httpClient, apiUrls],
+    [httpClient, apiUrls]
   );
 
   return (

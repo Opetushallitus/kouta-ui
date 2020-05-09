@@ -42,7 +42,7 @@ const config = createFormConfigBuilder().registerSections([
         field: '.eperuste',
         koulutustyypit: TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
         validate: validateIfJulkaistu(eb =>
-          eb.validateExistence('information.eperuste'),
+          eb.validateExistence('information.eperuste')
         ),
         required: true,
       },
@@ -107,7 +107,7 @@ const config = createFormConfigBuilder().registerSections([
         koulutustyypit: TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
         required: true,
         validate: validateIfJulkaistu((eb, values) =>
-          eb.validateTranslations('description.nimi', getKielivalinta(values)),
+          eb.validateTranslations('description.nimi', getKielivalinta(values))
         ),
       },
       createOptionalTranslatedFieldConfig({
@@ -146,7 +146,7 @@ const config = createFormConfigBuilder().registerSections([
     field: 'tarjoajat',
     koulutustyypit: KOULUTUSTYYPIT,
     validate: validateIfJulkaistu((eb, values) =>
-      eb.validateArrayMinLength('tarjoajat', getMinTarjoajat(values)),
+      eb.validateArrayMinLength('tarjoajat', getMinTarjoajat(values))
     ),
     required: true,
   },

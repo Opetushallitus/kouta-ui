@@ -21,7 +21,7 @@ const CreateKoulutusFooter = ({ organisaatioOid }) => {
 
       history.push(`/organisaatio/${organisaatioOid}/koulutus/${oid}/muokkaus`);
     },
-    [organisaatioOid, history],
+    [organisaatioOid, history]
   );
 
   const { save } = useSaveForm({

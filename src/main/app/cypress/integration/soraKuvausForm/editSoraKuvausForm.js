@@ -33,7 +33,7 @@ describe('editSoraKuvausForm', () => {
     });
 
     cy.visit(
-      `/organisaatio/${organisaatioOid}/sora-kuvaus/${soraKuvaus.id}/muokkaus`,
+      `/organisaatio/${organisaatioOid}/sora-kuvaus/${soraKuvaus.id}/muokkaus`
     );
   });
 

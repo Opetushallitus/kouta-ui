@@ -20,10 +20,10 @@ const CreateSoraKuvausFooter = ({ organisaatioOid }) => {
       });
 
       history.push(
-        `/organisaatio/${organisaatioOid}/sora-kuvaus/${id}/muokkaus`,
+        `/organisaatio/${organisaatioOid}/sora-kuvaus/${id}/muokkaus`
       );
     },
-    [history, organisaatioOid],
+    [history, organisaatioOid]
   );
 
   const { save } = useSaveForm({

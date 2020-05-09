@@ -44,12 +44,12 @@ const AlkamiskausiSection = ({ name, toteutus }) => {
 
   const toteutusAlkamiskausiKoodiUri = get(
     toteutus,
-    'metadata.opetus.koulutuksenAlkamiskausi',
+    'metadata.opetus.koulutuksenAlkamiskausi'
   );
 
   const toteutusAlkamisvuosi = get(
     toteutus,
-    'metadata.opetus.koulutuksenAlkamisvuosi',
+    'metadata.opetus.koulutuksenAlkamisvuosi'
   );
   const { nimi: kausiKoodiNimi } = useKoodiNimi(toteutusAlkamiskausiKoodiUri);
 

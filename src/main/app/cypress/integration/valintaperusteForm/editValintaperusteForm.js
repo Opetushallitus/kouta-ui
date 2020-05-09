@@ -31,7 +31,7 @@ const prepareTest = tyyppi => {
   });
 
   cy.visit(
-    `/organisaatio/${organisaatioOid}/valintaperusteet/${valintaperusteId}/muokkaus`,
+    `/organisaatio/${organisaatioOid}/valintaperusteet/${valintaperusteId}/muokkaus`
   );
 };
 

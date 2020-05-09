@@ -29,7 +29,7 @@ const CreateToteutusFooter = ({
 
       history.push(`/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`);
     },
-    [organisaatioOid, history, koulutustyyppi, koulutusOid],
+    [organisaatioOid, history, koulutustyyppi, koulutusOid]
   );
 
   const save = useSaveToteutus(submit, { koulutustyyppi, koulutus });

@@ -12,7 +12,7 @@ storiesOf('Alert', module).add('Basic', () => {
       Success: 'success',
       Danger: 'danger',
     },
-    'info',
+    'info'
   );
 
   const showIcon = boolean('Show icon', true);

@@ -26,7 +26,7 @@ const getTarjoajaOperations = (availableOids, oids) => {
   const normalizedAvailableOids = isArray(availableOids) ? availableOids : [];
 
   const inserted = normalizedOids.filter(o =>
-    normalizedAvailableOids.includes(o),
+    normalizedAvailableOids.includes(o)
   );
 
   return {
@@ -54,7 +54,7 @@ const EditToteutusFooter = ({
 
   const availableTarjoajaOids = useMemo(
     () => getAvailableTarjoajaOids(hierarkia),
-    [hierarkia],
+    [hierarkia]
   );
 
   const canUpdate = useMemo(() => {
@@ -72,7 +72,7 @@ const EditToteutusFooter = ({
           tarjoajat: mergeTarjoajat(
             toteutus.tarjoajat,
             values.tarjoajat,
-            availableTarjoajaOids,
+            availableTarjoajaOids
           ),
         },
       });
@@ -83,7 +83,7 @@ const EditToteutusFooter = ({
         },
       });
     },
-    [toteutus, history, koulutustyyppi, availableTarjoajaOids],
+    [toteutus, history, koulutustyyppi, availableTarjoajaOids]
   );
 
   const save = useSaveToteutus(submit, { koulutustyyppi, koulutus });

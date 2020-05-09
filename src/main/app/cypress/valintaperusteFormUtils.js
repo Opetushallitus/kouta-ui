@@ -45,7 +45,7 @@ export const stubValintaperusteFormRoutes = ({ cy, organisaatioOid }) => {
         nimi: { fi: `Sora-kuvaus ${i}` },
         id: i.toString(),
         tila: 'julkaistu',
-      }),
+      })
     ),
   });
 
@@ -60,7 +60,7 @@ export const stubValintaperusteFormRoutes = ({ cy, organisaatioOid }) => {
   stubKoodistoRoute({ koodisto: 'valintakokeentyyppi', cy });
   stubKoodiRoute(createKoodi({ koodisto: 'posti', versio: 2 }));
   stubKoodiRoute(
-    createKoodi({ koodisto: 'posti', koodiArvo: '00350', versio: 1 }),
+    createKoodi({ koodisto: 'posti', koodiArvo: '00350', versio: 1 })
   );
 
   stubOppijanumerorekisteriHenkiloRoute({ cy });

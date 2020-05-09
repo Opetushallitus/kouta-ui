@@ -30,10 +30,10 @@ const CreateHakukohdeFooter = ({
       });
 
       history.push(
-        `/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`,
+        `/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`
       );
     },
-    [organisaatioOid, hakuOid, toteutusOid, history],
+    [organisaatioOid, hakuOid, toteutusOid, history]
   );
 
   const save = useSaveHakukohde(submit, { haku, toteutus });

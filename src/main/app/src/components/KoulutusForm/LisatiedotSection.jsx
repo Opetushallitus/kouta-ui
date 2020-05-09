@@ -21,7 +21,7 @@ const OsiotFields = ({ disabled, language, osiotOptions, name }) => {
         ? label
         : get(
             osiotOptions.find(({ value: v }) => v === value),
-            'label',
+            'label'
           ) || null,
     }));
   }, [osiotArr, osiotOptions]);

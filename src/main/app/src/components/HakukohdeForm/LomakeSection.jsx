@@ -25,7 +25,7 @@ const HakulomakeInfo = ({ haku, t }) => {
 
   const hakulomakeLinkki = getFirstLanguageValue(
     get(haku, 'hakulomakeLinkki'),
-    'fi',
+    'fi'
   );
 
   let link;

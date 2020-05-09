@@ -48,7 +48,7 @@ const AsyncKoodistoSelect = ({
         return undefined;
       }
     },
-    [httpClient, apiUrls, formatLabel],
+    [httpClient, apiUrls, formatLabel]
   );
 
   return <AsyncSelect disabled={disabled} loadLabel={loadLabel} {...props} />;

@@ -19,9 +19,9 @@ export function useBoundFormActions() {
   const boundFormActions = useMemo(
     () =>
       _.mapValues(formActions, action => (...args) =>
-        action.apply(null, [formName, ...args]),
+        action.apply(null, [formName, ...args])
       ),
-    [formName],
+    [formName]
   );
   return useActions(boundFormActions);
 }
@@ -32,9 +32,9 @@ export function useBoundFormSelectors() {
   return useMemo(
     () =>
       _.mapValues(formSelectors, selector => () =>
-        selector(formName)(store.getState()),
+        selector(formName)(store.getState())
       ),
-    [formName, store],
+    [formName, store]
   );
 }
 
@@ -43,7 +43,7 @@ export function useFieldValue(name) {
 
   const selector = useCallback(
     state => _.get(state, `form.${formName}.values.${name}`),
-    [formName, name],
+    [formName, name]
   );
 
   return useSelector(selector);

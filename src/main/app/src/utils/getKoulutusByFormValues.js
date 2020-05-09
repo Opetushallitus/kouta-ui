@@ -33,7 +33,7 @@ const getKoulutusByFormValues = values => {
 
   const kuvauksenNimi = pick(
     get(values, 'description.nimi') || {},
-    kielivalinta,
+    kielivalinta
   );
 
   const teemakuva = get(values, 'teemakuva');

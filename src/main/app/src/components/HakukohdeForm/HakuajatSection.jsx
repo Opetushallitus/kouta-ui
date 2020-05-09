@@ -22,12 +22,12 @@ const HakuaikaInterval = ({ haku }) => {
         formatKoutaDateString(alkaa, dateFormat),
         formatKoutaDateString(paattyy, dateFormat),
       ]),
-    [haku],
+    [haku]
   );
 
   const hakuajatContent = useMemo(
     () => hakuajat.map(([start, end]) => `${start} - ${end}`).join(', '),
-    [hakuajat],
+    [hakuajat]
   );
 
   return hakuajat.length === 0 ? (

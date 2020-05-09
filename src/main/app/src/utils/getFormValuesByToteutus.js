@@ -59,7 +59,7 @@ const getFormValuesByToteutus = toteutus => {
 
       return acc;
     },
-    { osaamisalaLinkit: {}, osaamisalaLinkkiOtsikot: {} },
+    { osaamisalaLinkit: {}, osaamisalaLinkkiOtsikot: {} }
   );
 
   const { lisatiedot = [] } = opetus;
@@ -89,7 +89,7 @@ const getFormValuesByToteutus = toteutus => {
         ? { value: osaamisalaKoodiUri }
         : undefined,
       tutkinnonOsat: (tutkinnonOsaKoodiUrit || []).map(value => ({ value })),
-    }),
+    })
   );
 
   return {
@@ -182,7 +182,7 @@ const getFormValuesByToteutus = toteutus => {
         sahkoposti: sahkoposti || {},
         verkkosivu: wwwSivu || {},
         puhelinnumero: puhelinnumero || {},
-      }),
+      })
     ),
     osaamisalat: {
       osaamisalat,
@@ -205,7 +205,7 @@ const getFormValuesByToteutus = toteutus => {
         ilmoittautumislinkki: ilmoittautumislinkki || {},
         kuvaus: kuvaus || {},
         sisalto: parseSisaltoField(sisalto),
-      }),
+      })
     ),
     tutkinnonOsat,
     teemakuva,

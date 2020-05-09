@@ -143,7 +143,7 @@ export const ReduxToaster = connect(
     onClose: key => {
       dispatch(closeToast(key));
     },
-  }),
+  })
 )(Toaster);
 
 export default Toaster;

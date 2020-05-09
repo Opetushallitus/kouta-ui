@@ -22,11 +22,11 @@ const validateLiitteet = (errorBuilder, values) => {
   const kieliversiot = getKielivalinta(values);
 
   const liitteillaYhteinenToimitusaika = getLiitteillaYhteinenToimitusaika(
-    values,
+    values
   );
 
   const liitteillaYhteinenToimitusosoite = getLiitteillaYhteinenToimitusosoite(
-    values,
+    values
   );
 
   let enhancedErrorBuilder = errorBuilder.validateArray(
@@ -39,13 +39,13 @@ const validateLiitteet = (errorBuilder, values) => {
 
       if (!liitteillaYhteinenToimitusaika) {
         enhancedLiitteetEb = enhancedLiitteetEb.validateExistence(
-          'toimitusaika',
+          'toimitusaika'
         );
       }
 
       if (!liitteillaYhteinenToimitusosoite) {
         enhancedLiitteetEb = enhancedLiitteetEb.validateExistence(
-          'toimitustapa.tapa',
+          'toimitustapa.tapa'
         );
       }
 
@@ -60,18 +60,18 @@ const validateLiitteet = (errorBuilder, values) => {
       }
 
       return enhancedLiitteetEb;
-    },
+    }
   );
 
   if (liitteillaYhteinenToimitusaika) {
     enhancedErrorBuilder = enhancedErrorBuilder.validateExistence(
-      'liitteet.toimitusaika',
+      'liitteet.toimitusaika'
     );
   }
 
   if (liitteillaYhteinenToimitusosoite) {
     enhancedErrorBuilder = enhancedErrorBuilder.validateExistence(
-      'liitteet.toimitustapa.tapa',
+      'liitteet.toimitustapa.tapa'
     );
   }
 
@@ -105,9 +105,9 @@ const validateValintakokeet = (errorBuilder, values) => {
             .validateTranslations('osoite', kieliversiot)
             .validateExistence('postinumero')
             .validateExistence('alkaa')
-            .validateExistence('paattyy'),
+            .validateExistence('paattyy')
         ),
-    errorBuilder,
+    errorBuilder
   );
 };
 
@@ -121,7 +121,7 @@ const config = createFormConfigBuilder().registerSections([
       {
         field: '.pohjakoulutusvaatimus',
         validate: validateIfJulkaistu(eb =>
-          eb.validateArrayMinLength('pohjakoulutus.pohjakoulutusvaatimus', 1),
+          eb.validateArrayMinLength('pohjakoulutus.pohjakoulutusvaatimus', 1)
         ),
         required: true,
       },
@@ -146,9 +146,9 @@ const config = createFormConfigBuilder().registerSections([
                   isFieldArray: true,
                 })
                 .validateArray('hakuajat.hakuajat', eb =>
-                  eb.validateExistence('alkaa'),
+                  eb.validateExistence('alkaa')
                 )
-            : eb,
+            : eb
         ),
       },
       {
@@ -185,7 +185,7 @@ const config = createFormConfigBuilder().registerSections([
       {
         field: '.tyypit',
         validate: validateIfJulkaistu((eb, values) =>
-          validateValintakokeet(eb, values),
+          validateValintakokeet(eb, values)
         ),
       },
       {

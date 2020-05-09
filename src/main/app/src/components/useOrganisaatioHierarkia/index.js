@@ -4,7 +4,7 @@ import filterTree from '#/src/utils/filterTree';
 
 export const useOrganisaatioHierarkia = (
   oid,
-  { skipParents = false, filter } = {},
+  { skipParents = false, filter } = {}
 ) => {
   const { data, ...rest } = useApiAsync({
     promiseFn: getOrganisaatioHierarkiaByOid,

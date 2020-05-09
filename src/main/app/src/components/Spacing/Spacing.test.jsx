@@ -18,7 +18,7 @@ test('renders correctly', () => {
         >
           With paddings
         </Spacing>
-      </>,
-    ),
+      </>
+    )
   ).toMatchSnapshot();
 });

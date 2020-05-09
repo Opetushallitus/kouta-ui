@@ -68,7 +68,7 @@ const getFormValuesByHaku = haku => {
         puhelinnumero: puhelinnumero || {},
         sahkoposti: sahkoposti || {},
         verkkosivu: wwwSivu || {},
-      }),
+      })
     ),
     valintakoe: getValintakoeFieldsValues(valintakokeet),
   };

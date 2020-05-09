@@ -17,10 +17,10 @@ test('hasUpdate works correctly', () => {
   });
 
   expect(rb1.hasUpdate('TEST', makeOrganisaatio(['1.1.1'])).result()).toBe(
-    true,
+    true
   );
   expect(rb1.hasUpdate('TEST', makeOrganisaatio(['1.1.3'])).result()).toBe(
-    false,
+    false
   );
 });
 
@@ -30,9 +30,9 @@ test('hasCreate works correctly', () => {
   });
 
   expect(rb1.hasCreate('TEST', makeOrganisaatio(['1.1.1'])).result()).toBe(
-    true,
+    true
   );
   expect(rb1.hasCreate('TEST', makeOrganisaatio(['1.1.3'])).result()).toBe(
-    false,
+    false
   );
 });

@@ -8,7 +8,7 @@ const updateHaku = async ({ haku, httpClient, apiUrls }) => {
   const { data } = await httpClient.post(
     apiUrls.url('kouta-backend.haku'),
     rest,
-    { headers },
+    { headers }
   );
 
   return data;

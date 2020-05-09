@@ -149,7 +149,7 @@ export const ListTable = ({
                                 setCollapsed(
                                   columnIsCollapsed
                                     ? {}
-                                    : { row: key, column: columnKey },
+                                    : { row: key, column: columnKey }
                                 );
                               }
                             : null
@@ -158,7 +158,7 @@ export const ListTable = ({
                         {render({ ...rowProps, language })}
                       </Cell>
                     );
-                  },
+                  }
                 )}
                 {renderActionsMenu ? (
                   <TableCell textCenter>

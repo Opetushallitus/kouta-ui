@@ -39,7 +39,7 @@ const OppilaitoksenOsaPageFooter = ({
         },
       });
     },
-    [oppilaitoksenOsa, organisaatioOid, history],
+    [oppilaitoksenOsa, organisaatioOid, history]
   );
 
   const { save } = useSaveForm({

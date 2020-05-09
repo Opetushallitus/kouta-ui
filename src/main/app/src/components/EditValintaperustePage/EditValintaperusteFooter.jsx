@@ -35,7 +35,7 @@ const EditValintaperusteFooter = ({ valintaperuste }) => {
         },
       });
     },
-    [valintaperuste, history],
+    [valintaperuste, history]
   );
 
   const save = useSaveValintaperuste(submit);

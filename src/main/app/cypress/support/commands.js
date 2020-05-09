@@ -14,13 +14,13 @@ Cypress.Commands.add(
   (element, value) => {
     element.focus();
     fireEvent.change(element[0], { target: { value } });
-  },
+  }
 );
 
 Cypress.Commands.overwrite(
   'type',
   (originalFn, subject, text = '', options = {}) =>
-    originalFn(subject, text, { force: true, delay: 0, ...options }),
+    originalFn(subject, text, { force: true, delay: 0, ...options })
 );
 
 // Workaround for broken cypress snapshot updates caused by this change:
@@ -30,5 +30,5 @@ Cypress.Commands.overwrite(
 Cypress.Commands.overwrite(
   'writeFile',
   (originalFn, filePath, contents, options) =>
-    originalFn(filePath, contents, options).then(() => contents),
+    originalFn(filePath, contents, options).then(() => contents)
 );

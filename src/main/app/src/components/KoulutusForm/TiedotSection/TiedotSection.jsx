@@ -29,7 +29,7 @@ const useLocalizedKoulutus = ({ fieldName, language, koulutusValue }) => {
       const { metadata } = koodi;
       const localizedNimi = get(
         find(metadata, ({ kieli }) => toLower(kieli) === language),
-        'nimi',
+        'nimi'
       );
       if (localizedNimi) {
         change(`${fieldName}.koulutus.label`, localizedNimi);

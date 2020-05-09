@@ -68,7 +68,7 @@ export const getInvalidTranslations = (
   obj,
   languages = [],
   validate = v => !!v,
-  optional,
+  optional
 ) => {
   if (optional && _.isEmpty(obj)) {
     return [];

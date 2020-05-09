@@ -259,7 +259,7 @@ class TableInput extends Component {
         value,
         rowIndex,
         status: !currentStatus,
-      }),
+      })
     );
   };
 
@@ -281,7 +281,7 @@ class TableInput extends Component {
         columnIndex,
         field: 'text',
         fieldValue: e.target.value,
-      }),
+      })
     );
   };
 
@@ -302,7 +302,7 @@ class TableInput extends Component {
     const isTable = table.length > 1 || getMaxColumnLength(table) > 1;
     if (isTable) {
       this.props.onChange(
-        setTable({ value: this.getValue(), language, table }),
+        setTable({ value: this.getValue(), language, table })
       );
       event.preventDefault();
     }
@@ -345,7 +345,7 @@ class TableInput extends Component {
           </EditRow>
           {isArray(row.columns)
             ? row.columns.map((column, columnIndex) =>
-                this.renderColumn({ column, columnIndex, rowIndex }),
+                this.renderColumn({ column, columnIndex, rowIndex })
               )
             : null}
         </Row>
@@ -393,7 +393,7 @@ class TableInput extends Component {
             index,
             isLast: index === rows.length - 1,
             numRows: rows.length,
-          }),
+          })
         )}
       </Container>
     );

@@ -75,12 +75,12 @@ export const validateRelations = specs => (eb, values) => {
         acc.errors.push(t =>
           t('yleiset.riippuvuusEiJulkaistu', {
             entity: t(translationKey),
-          }),
+          })
         );
       }
       return acc;
     },
-    { isValid: true, errors: [] },
+    { isValid: true, errors: [] }
   );
 
   return eb.validate('tila', () => isValid, { message: errors });
@@ -96,6 +96,6 @@ export const createOptionalTranslatedFieldConfig = ({
     eb.validateTranslations(name, getKielivalinta(values), {
       optional: true,
       message: 'validointivirheet.kaikkiKaannoksetJosAinakinYksi',
-    }),
+    })
   ),
 });

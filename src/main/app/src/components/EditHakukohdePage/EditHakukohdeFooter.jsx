@@ -36,7 +36,7 @@ const EditHakukohdeFooter = ({ hakukohde, haku, toteutus }) => {
         },
       });
     },
-    [hakukohde, history],
+    [hakukohde, history]
   );
 
   const save = useSaveHakukohde(submit, { haku, toteutus });

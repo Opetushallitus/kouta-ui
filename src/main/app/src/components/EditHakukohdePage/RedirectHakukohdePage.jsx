@@ -16,7 +16,7 @@ const Loader = () => (
 
 const Hakukohde = ({ hakukohde }) => {
   const { preferredOrganisaatio } = usePreferredOrganisaatio(
-    hakukohde.organisaatioOid,
+    hakukohde.organisaatioOid
   );
   return preferredOrganisaatio ? (
     <Redirect

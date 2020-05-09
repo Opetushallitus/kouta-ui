@@ -21,7 +21,7 @@ const CreateHakuFooter = ({ organisaatioOid }) => {
 
       history.push(`/organisaatio/${organisaatioOid}/haku/${oid}/muokkaus`);
     },
-    [organisaatioOid, history],
+    [organisaatioOid, history]
   );
 
   const { save } = useSaveForm({

@@ -17,7 +17,7 @@ const filterTree = (tree, filterFn, options = {}) => {
       [childrenKey]: filterTree(branch[childrenKey], filterFn, options),
     }))
     .filter(item =>
-      filterChildren || isEmpty(item[childrenKey]) ? filterFn(item) : true,
+      filterChildren || isEmpty(item[childrenKey]) ? filterFn(item) : true
     );
 };
 

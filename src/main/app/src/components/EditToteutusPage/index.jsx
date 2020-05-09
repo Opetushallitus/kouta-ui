@@ -65,11 +65,11 @@ const EditToteutusPage = props => {
     ({ hakuOid }) => {
       if (hakuOid && toteutus) {
         history.push(
-          `/organisaatio/${toteutus.organisaatioOid}/toteutus/${toteutus.oid}/haku/${hakuOid}/hakukohde`,
+          `/organisaatio/${toteutus.organisaatioOid}/toteutus/${toteutus.oid}/haku/${hakuOid}/hakukohde`
         );
       }
     },
-    [history, toteutus],
+    [history, toteutus]
   );
 
   return !toteutus ? (

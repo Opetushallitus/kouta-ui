@@ -27,7 +27,7 @@ const LanguageField = createFormFieldComponent(
     ...input,
     onBlur: noop,
     ...props,
-  }),
+  })
 );
 
 const renderVaatimustyyppiField = ({
@@ -247,8 +247,8 @@ const KielitaitovaatimuksetSection = ({ language, name }) => {
     return fullOsoitusOptions.filter(
       ({ value }) =>
         !new RegExp(
-          `^${VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI}`,
-        ).test(value),
+          `^${VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI}`
+        ).test(value)
     );
   }, [fullOsoitusOptions]);
 

@@ -15,8 +15,8 @@ const devProxyMiddleware = createProxyMiddleware({
   target: DEV_VIRKAILIJA_URL,
 });
 
-module.exports = function(app) {
-  app.use('*', function(req, res, next) {
+module.exports = function (app) {
+  app.use('*', function (req, res, next) {
     return ['/', '/kouta'].includes(req.originalUrl) ||
       req.originalUrl.startsWith('/kouta/')
       ? next()

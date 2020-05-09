@@ -27,7 +27,7 @@ const useOptions = data => {
             label: getFirstLanguageValue(nimi, language),
           }))
         : [],
-    [data, language],
+    [data, language]
   );
 };
 
@@ -57,7 +57,7 @@ const LiitoksetModal = ({ onClose, organisaatioOid, open }) => {
   const onSubmit = useCallback(() => {
     if (!disabled) {
       history.push(
-        `/organisaatio/${organisaatioOid}/toteutus/${toteutus.value}/haku/${haku.value}/hakukohde`,
+        `/organisaatio/${organisaatioOid}/toteutus/${toteutus.value}/haku/${haku.value}/hakukohde`
       );
     }
   }, [history, haku, toteutus, disabled, organisaatioOid]);

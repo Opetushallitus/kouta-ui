@@ -3,7 +3,7 @@ const getToteutukset = async ({ organisaatioOid, httpClient, apiUrls }) => {
     apiUrls.url('kouta-backend.toteutus-list'),
     {
       params: { organisaatioOid },
-    },
+    }
   );
 
   return data;

@@ -28,7 +28,7 @@ const EditSoraKuvausFooter = ({ soraKuvaus }) => {
         },
       });
     },
-    [soraKuvaus, history],
+    [soraKuvaus, history]
   );
 
   const { save } = useSaveForm({

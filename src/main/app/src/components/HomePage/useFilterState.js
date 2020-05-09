@@ -5,16 +5,16 @@ import { getPagination, setPaginationAction } from '#/src/state/pagination';
 
 export const useFilterState = ({ paginationName } = {}) => {
   const { nimi, page, showArchived, orderBy, tila } = useSelector(
-    getPagination(paginationName),
+    getPagination(paginationName)
   );
   const dispatch = useDispatch();
   const setPagination = useCallback(
     pagination => {
       return dispatch(
-        setPaginationAction({ name: paginationName, ...pagination }),
+        setPaginationAction({ name: paginationName, ...pagination })
       );
     },
-    [dispatch, paginationName],
+    [dispatch, paginationName]
   );
   const setNimi = nimi => setPagination({ nimi });
   const setPage = page => setPagination({ page });
@@ -26,13 +26,13 @@ export const useFilterState = ({ paginationName } = {}) => {
     e => {
       setPagination({ showArchived: e.target.checked });
     },
-    [setPagination],
+    [setPagination]
   );
   const onNimiChange = useCallback(
     e => {
       setPagination({ nimi: e.target.value });
     },
-    [setPagination],
+    [setPagination]
   );
   return {
     setNimi,

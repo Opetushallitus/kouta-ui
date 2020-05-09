@@ -42,7 +42,7 @@ class FormConfigBuilder {
           _.set(
             this.config,
             [t, 'sections', section, `${type}s`, name],
-            options,
+            options
           );
         }
       } else {
@@ -111,11 +111,11 @@ class FormConfigBuilder {
                 koulutustyypit,
                 validate,
                 meta,
-                required,
+                required
               );
-          },
+          }
         );
-      },
+      }
     );
     return this;
   }

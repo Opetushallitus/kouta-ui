@@ -35,9 +35,9 @@ const validateValintakokeet = (errorBuilder, values) => {
             .validateTranslations('osoite', kieliversiot)
             .validateExistence('postinumero')
             .validateExistence('alkaa')
-            .validateExistence('paattyy'),
+            .validateExistence('paattyy')
         ),
-    errorBuilder,
+    errorBuilder
   );
 };
 
@@ -61,7 +61,7 @@ const config = createFormConfigBuilder().registerSections([
       {
         field: '.hakutapa',
         validate: validateIfJulkaistu(eb =>
-          eb.validateExistence('perustiedot.hakutapa'),
+          eb.validateExistence('perustiedot.hakutapa')
         ),
         required: true,
       },
@@ -97,8 +97,8 @@ const config = createFormConfigBuilder().registerSections([
         .validateArray('valintatavat', eb =>
           eb
             .validateExistence('tapa')
-            .validateTranslations('nimi', getKielivalinta(values)),
-        ),
+            .validateTranslations('nimi', getKielivalinta(values))
+        )
     ),
     parts: [
       {
@@ -116,7 +116,7 @@ const config = createFormConfigBuilder().registerSections([
     koulutustyypit: KOULUTUSTYYPIT,
     field: 'soraKuvaus',
     validate: validateIfJulkaistu(eb =>
-      eb.validateExistence('perustiedot.hakutapa'),
+      eb.validateExistence('perustiedot.hakutapa')
     ),
     required: true,
   },
@@ -139,7 +139,7 @@ const config = createFormConfigBuilder().registerSections([
     field: 'valintakoe',
     koulutustyypit: KOULUTUSTYYPIT,
     validate: validateIfJulkaistu((eb, values) =>
-      validateValintakokeet(eb, values),
+      validateValintakokeet(eb, values)
     ),
   },
 ]);

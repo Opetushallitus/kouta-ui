@@ -32,7 +32,7 @@ const ToggleDraft = () => {
       roleBuilder
         .hasUpdate(HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID)
         .result(),
-    [roleBuilder],
+    [roleBuilder]
   );
   const esikatselu = useFieldValue('esikatselu');
 
@@ -72,7 +72,7 @@ const EditKoulutusPage = props => {
     organisaatioOid &&
       koulutus &&
       history.push(
-        `/organisaatio/${organisaatioOid}/koulutus/${koulutus.oid}/toteutus`,
+        `/organisaatio/${organisaatioOid}/koulutus/${koulutus.oid}/toteutus`
       );
   }, [history, koulutus, organisaatioOid]);
 

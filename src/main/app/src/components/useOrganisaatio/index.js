@@ -19,11 +19,10 @@ const getOrganisaatioLoader = memoize((httpClient, apiUrls) => {
     getOrganisaatiotByOids({ oids, httpClient, apiUrls }).then(
       organisaatiot => {
         return oids.map(
-          oid =>
-            organisaatiot.find(({ oid: orgOid }) => orgOid === oid) || null,
+          oid => organisaatiot.find(({ oid: orgOid }) => orgOid === oid) || null
         );
-      },
-    ),
+      }
+    )
   );
 });
 
@@ -41,7 +40,7 @@ export const useOrganisaatio = oid => {
     ({ oid }) => {
       return oid ? organisaatioLoader.load(oid) : Promise.resolve(null);
     },
-    [organisaatioLoader],
+    [organisaatioLoader]
   );
 
   const { data: organisaatio, ...rest } = useApiAsync({
@@ -60,7 +59,7 @@ export const useOrganisaatiot = oids => {
     ({ oids }) => {
       return organisaatioLoader.loadMany(oids);
     },
-    [organisaatioLoader],
+    [organisaatioLoader]
   );
 
   const { data: organisaatiot, ...rest } = useApiAsync({
@@ -101,7 +100,7 @@ const isSameKoulutustyyppi = koulutustyyppi => org =>
 
 export const isSameKoulutustyyppiWithOrganisaatio = (
   organisaatio,
-  hierarkia,
+  hierarkia
 ) => {
   const koulutustyyppi = oppilaitostyyppiToKoulutustyyppi(organisaatio);
 
@@ -125,7 +124,7 @@ export const usePreferredOrganisaatio = creatorOrganisaatioOid => {
     first(
       organisaatiot
         .filter(org => isSameKoulutustyyppiWithOrganisaatio(org, hierarkia))
-        .map(_ => _.oid),
+        .map(_ => _.oid)
     );
   const firstChildOrganisation =
     organisaatiot &&

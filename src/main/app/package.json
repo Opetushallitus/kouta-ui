@@ -64,7 +64,7 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -c .storybook -o build/storybook",
-    "format": "prettier --write \"./src/**/*.{js,jsx}\"",
+    "format": "prettier --write './src/**/*.{js,jsx}' './cypress/**/*.{js,jsx}'",
     "cypress:run": "cypress run -b chrome",
     "cypress:open": "cypress open -b chrome",
     "test:e2e": "START_SERVER_AND_TEST_INSECURE=1 CYPRESS_RETRIES=2 NODE_ENV=test REACT_APP_CYPRESS=true start-server-and-test start https://localhost:3000 cypress:run",

@@ -10,7 +10,7 @@ import ListTable, {
 } from './HomePage/ListTable';
 import ListSpin from './HomePage/ListSpin';
 
-export default function({
+export default function ({
   entity,
   organisaatioOid,
   getData,
@@ -34,7 +34,7 @@ export default function({
       results &&
       compose(
         sortBy(e => e.nimi[i18n.language]),
-        map(entity => ({ ...entity, key: entity.oid })),
+        map(entity => ({ ...entity, key: entity.oid }))
       )(results)
     );
   }, [results, i18n.language]);
@@ -47,7 +47,7 @@ export default function({
       makeTilaColumn(t),
       makeModifiedColumn(t),
     ],
-    [t, getLinkUrl],
+    [t, getLinkUrl]
   );
 
   return (

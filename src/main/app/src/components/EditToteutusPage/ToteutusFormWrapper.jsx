@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import { withRouter } from 'react-router-dom';
 
 import ToteutusForm from '../ToteutusForm';
 import FormConfigContext from '../FormConfigContext';
@@ -19,4 +18,4 @@ const ToteutusFormWrapper = props => {
   );
 };
 
-export default withRouter(ToteutusFormWrapper);
+export default ToteutusFormWrapper;

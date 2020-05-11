@@ -16,7 +16,7 @@ const Loader = () => (
 
 const Koulutus = ({ koulutus }) => {
   const { preferredOrganisaatio } = usePreferredOrganisaatio(
-    koulutus.organisaatioOid,
+    koulutus.organisaatioOid
   );
   return preferredOrganisaatio ? (
     <Redirect

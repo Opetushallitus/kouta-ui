@@ -10,7 +10,7 @@ import LiitteetSection from './LiitteetSection';
 import FormCollapseGroup from '../FormCollapseGroup';
 import KuvausSection from './KuvausSection';
 import { useTranslation } from 'react-i18next';
-import useFieldValue from '../useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 
 const HakukohdeForm = ({

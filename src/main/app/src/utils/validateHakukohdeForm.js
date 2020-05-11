@@ -4,7 +4,7 @@ import getErrorBuilderByFormConfig from './getErrorBuilderByFormConfig';
 const validateHakukohdeForm = values => {
   return getErrorBuilderByFormConfig(
     getHakukohdeFormConfig(),
-    values,
+    values
   ).getErrors();
 };
 

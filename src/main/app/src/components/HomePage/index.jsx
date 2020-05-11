@@ -50,7 +50,7 @@ const getFirstOrganisaatioOidWithRequiredRole = user => {
           roleName =>
             role.startsWith(OPH_PAAKAYTTAJA_ROLE) ||
             role.startsWith(`${roleName}_CRUD`) ||
-            role.startsWith(`${roleName}_READ`),
+            role.startsWith(`${roleName}_READ`)
         )
         .some(Boolean) && getRoleOrganisaatioOid(role)
     );
@@ -65,7 +65,7 @@ const HomeRoute = ({ organisaatioOid, persistedOrganisaatioOid }) => {
 
   const firstOrganisaatioOid = useMemo(
     () => getFirstOrganisaatioOidWithRequiredRole(user),
-    [user],
+    [user]
   );
 
   if (!firstOrganisaatioOid) {
@@ -100,7 +100,7 @@ const HomePage = ({ kayttajaOid = null, location }) => {
   const { search } = location;
   const { t } = useTranslation();
   const persistedOrganisaatioOid = useSelector(state =>
-    selectOrganisaatio(state),
+    selectOrganisaatio(state)
   );
 
   const query = useMemo(() => queryString.parse(search), [search]);

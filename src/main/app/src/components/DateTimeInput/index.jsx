@@ -121,7 +121,7 @@ export const DateTimeInput = ({
         ? onChange(formatValue({ date, time }))
         : onChange(null);
     },
-    [onChange, JSON.stringify(date)], // eslint-disable-line react-hooks/exhaustive-deps
+    [onChange, JSON.stringify(date)] // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   const onDateChange = useCallback(
@@ -132,7 +132,7 @@ export const DateTimeInput = ({
         ? onChange(formatValue({ date: d, time }))
         : onChange(null);
     },
-    [onChange, time],
+    [onChange, time]
   );
 
   return (

@@ -11,7 +11,7 @@ export default function getEPerusteKuvaus(ePeruste) {
   const TRANSLATORS = _.transform(
     LANGUAGES,
     (result, lang) => (result[lang] = i18next.getFixedT(lang)),
-    {},
+    {}
   );
 
   const {
@@ -25,11 +25,11 @@ export default function getEPerusteKuvaus(ePeruste) {
       return sanitizeHTML(
         `${addSection(
           t('eperuste.suorittaneenOsaaminen'),
-          _.get(suorittaneenOsaaminen, lang) || '-',
+          _.get(suorittaneenOsaaminen, lang) || '-'
         )}${addSection(
           t('eperuste.tyotehtavatJoissaVoiToimia'),
-          _.get(tyotehtavatJoissaVoiToimia, lang) || '-',
-        )}`,
+          _.get(tyotehtavatJoissaVoiToimia, lang) || '-'
+        )}`
       );
     });
   } else {

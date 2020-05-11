@@ -11,13 +11,13 @@ const getKoodi = async ({
     apiUrls.url(
       'koodisto-service.codeelement',
       koodi,
-      !isNullish(versio) ? versio : '',
+      !isNullish(versio) ? versio : ''
     ),
     {
       errorNotifier: {
         silent,
       },
-    },
+    }
   );
 
   return data;

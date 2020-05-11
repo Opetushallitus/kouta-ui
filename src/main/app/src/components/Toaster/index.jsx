@@ -2,12 +2,11 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { Transition } from 'react-spring';
 import { connect } from 'react-redux';
-import { get } from 'lodash';
+import { get, isFunction } from 'lodash';
 
 import Icon from '../Icon';
 import { getThemeProp } from '../../theme';
 import Typography from '../Typography';
-import { isFunction } from '../../utils';
 import { closeToast } from '../../state/toaster';
 import Box from '../Box';
 
@@ -144,7 +143,7 @@ export const ReduxToaster = connect(
     onClose: key => {
       dispatch(closeToast(key));
     },
-  }),
+  })
 )(Toaster);
 
 export default Toaster;

@@ -54,7 +54,7 @@ test('getFormValuesByHaku returns correct form values given different hakulomake
       hakulomakeLinkki: {
         fi: 'https://google.fi',
       },
-    }),
+    })
   );
 
   const valuesEiHakua = getFormValuesByHaku(
@@ -63,7 +63,7 @@ test('getFormValuesByHaku returns correct form values given different hakulomake
       hakulomakeKuvaus: {
         fi: 'kuvaus',
       },
-    }),
+    })
   );
 
   expect(valuesMuu).toMatchSnapshot();

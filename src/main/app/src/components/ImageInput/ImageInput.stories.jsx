@@ -14,12 +14,12 @@ const upload = file =>
 
 const errorUpload = () =>
   new Promise((resolve, reject) =>
-    setTimeout(() => reject(new Error('Upload Failed')), 1000),
+    setTimeout(() => reject(new Error('Upload Failed')), 1000)
   );
 
 const Story = () => {
   const [value, setValue] = useState(
-    'https://www.oph.fi/sites/default/files/styles/hero/public/2019-02/design_factory_9729.jpg',
+    'https://www.oph.fi/sites/default/files/styles/hero/public/2019-02/design_factory_9729.jpg'
   );
 
   return (

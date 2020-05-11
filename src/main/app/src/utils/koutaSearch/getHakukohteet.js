@@ -7,7 +7,7 @@ const getHakukohteet = async ({ httpClient, apiUrls, ...rest }) => {
     apiUrls.url('kouta-backend.search.hakukohteet'),
     {
       params,
-    },
+    }
   );
 
   return data;

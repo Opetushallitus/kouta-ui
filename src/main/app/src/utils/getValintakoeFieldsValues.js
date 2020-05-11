@@ -17,10 +17,10 @@ export const getValintakoeFieldsValues = valintakokeet => {
             alkaa: get(aika, 'alkaa') || '',
             paattyy: get(aika, 'paattyy') || '',
             lisatietoja: lisatietoja || {},
-          }),
+          })
         ),
       }),
-      {},
+      {}
     ),
   };
 };

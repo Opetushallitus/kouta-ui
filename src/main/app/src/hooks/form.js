@@ -1,21 +1,27 @@
-import { useContext, useMemo } from 'react';
-import { useStore } from 'react-redux';
-import { mapValues } from 'lodash';
+import { useContext, useMemo, useCallback } from 'react';
+import { useStore, useSelector } from 'react-redux';
+import _ from 'lodash';
 import formActions from 'redux-form/lib/actions';
+import FormNameContext from '#/src/components/FormNameContext';
+import FormConfigContext from '#/src/components/FormConfigContext';
 import * as formSelectors from './reduxFormSelectors';
-import FormNameContext from '../components/FormNameContext';
 import { useActions } from './redux';
 
 export const useFormName = () => useContext(FormNameContext);
+
+export const useForm = () => {
+  const formName = useFormName();
+  return useSelector(state => _.get(state, `form.${formName}`));
+};
 
 export function useBoundFormActions() {
   const formName = useFormName();
   const boundFormActions = useMemo(
     () =>
-      mapValues(formActions, action => (...args) =>
-        action.apply(null, [formName, ...args]),
+      _.mapValues(formActions, action => (...args) =>
+        action.apply(null, [formName, ...args])
       ),
-    [formName],
+    [formName]
   );
   return useActions(boundFormActions);
 }
@@ -25,9 +31,31 @@ export function useBoundFormSelectors() {
   const store = useStore();
   return useMemo(
     () =>
-      mapValues(formSelectors, selector => () =>
-        selector(formName)(store.getState()),
+      _.mapValues(formSelectors, selector => () =>
+        selector(formName)(store.getState())
       ),
-    [formName, store],
+    [formName, store]
   );
 }
+
+export function useFieldValue(name) {
+  const formName = useContext(FormNameContext);
+
+  const selector = useCallback(
+    state => _.get(state, `form.${formName}.values.${name}`),
+    [formName, name]
+  );
+
+  return useSelector(selector);
+}
+
+export const useFormConfig = () => {
+  const contextConfig = useContext(FormConfigContext);
+
+  return useMemo(() => {
+    return {
+      sections: {},
+      ...(contextConfig || {}),
+    };
+  }, [contextConfig]);
+};

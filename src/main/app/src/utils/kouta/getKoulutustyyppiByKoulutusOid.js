@@ -8,7 +8,7 @@ const memoizedGetKoulutustyyppiByKoulutusOid = memoizePromise(
     const koulutus = await getKoulutusByOid({ oid, httpClient, apiUrls });
 
     return get(koulutus, 'koulutustyyppi') || null;
-  },
+  }
 );
 
 const getKoulutustyyppiByKoulutusOid = ({ oid, httpClient, apiUrls }) => {

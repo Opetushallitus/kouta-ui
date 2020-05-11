@@ -23,7 +23,7 @@ const weekdayShortKeys = ['su', 'ma', 'ti', 'ke', 'to', 'pe', 'la'];
 const getLocalisationProps = t => ({
   months: monthKeys.map(k => t(`yleiset.kuukaudet.${k}`)),
   weekdaysShort: weekdayShortKeys.map(v =>
-    t(`yleiset.viikonpaivalyhenteet.${v}`),
+    t(`yleiset.viikonpaivalyhenteet.${v}`)
   ),
   firstDayOfWeek: 1,
 });

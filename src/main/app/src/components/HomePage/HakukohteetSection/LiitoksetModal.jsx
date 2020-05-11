@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useCallback } from 'react';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { isArray } from 'lodash';
 import Button from '../../Button';
 import Modal from '../../Modal';
@@ -27,12 +27,13 @@ const useOptions = data => {
             label: getFirstLanguageValue(nimi, language),
           }))
         : [],
-    [data, language],
+    [data, language]
   );
 };
 
-const LiitoksetModal = ({ onClose, organisaatioOid, history, open }) => {
+const LiitoksetModal = ({ onClose, organisaatioOid, open }) => {
   const { t } = useTranslation();
+  const history = useHistory();
   const [haku, setHaku] = useState();
   const [toteutus, setToteutus] = useState();
 
@@ -56,7 +57,7 @@ const LiitoksetModal = ({ onClose, organisaatioOid, history, open }) => {
   const onSubmit = useCallback(() => {
     if (!disabled) {
       history.push(
-        `/organisaatio/${organisaatioOid}/toteutus/${toteutus.value}/haku/${haku.value}/hakukohde`,
+        `/organisaatio/${organisaatioOid}/toteutus/${toteutus.value}/haku/${haku.value}/hakukohde`
       );
     }
   }, [history, haku, toteutus, disabled, organisaatioOid]);
@@ -108,4 +109,4 @@ const LiitoksetModal = ({ onClose, organisaatioOid, history, open }) => {
   );
 };
 
-export default withRouter(LiitoksetModal);
+export default LiitoksetModal;

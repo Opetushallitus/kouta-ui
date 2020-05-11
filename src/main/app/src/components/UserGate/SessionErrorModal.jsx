@@ -47,8 +47,8 @@ export default function SessionErrorModal({
                   ? window.open(
                       apiUrls.url('cas.login') +
                         `?service=${encodeURIComponent(
-                          'https://localhost:3000/kouta',
-                        )}`,
+                          'https://localhost:3000/kouta'
+                        )}`
                     )
                   : window.location.replace(apiUrls.url('cas.login'))
               }

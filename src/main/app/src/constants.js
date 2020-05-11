@@ -53,7 +53,7 @@ export const TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT = [
 
 export const TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT = _.without(
   KOULUTUSTYYPIT,
-  ...TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
+  ...TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT
 );
 
 export const TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA = [
@@ -217,3 +217,14 @@ export const ALLOWED_HTML_TAGS = [
   'strike',
   'ul',
 ];
+
+export const ENTITY = {
+  KOULUTUS: 'koulutus',
+  TOTEUTUS: 'toteutus',
+  HAKU: 'haku',
+  HAKUKOHDE: 'hakukohde',
+  VALINTAPERUSTE: 'valintaperuste',
+  SORA_KUVAUS: 'soraKuvaus',
+  OPPILAITOS: 'oppilaitos',
+  OPPILAITOKSEN_OSA: 'oppilaitoksenOsa',
+};

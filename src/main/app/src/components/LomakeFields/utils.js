@@ -78,7 +78,7 @@ const noopPromise = () => Promise.resolve([]);
 export const useLomakeOptions = ({ getTyyppiLomakkeet, tyypit, language }) => {
   const enhancedGetTyyppiLomakkeet = useMemo(
     () => createEnhancedGetTyyppiLomakkeet(getTyyppiLomakkeet),
-    [getTyyppiLomakkeet],
+    [getTyyppiLomakkeet]
   );
 
   const { data: ataruLomakkeet } = useApiAsync({
@@ -90,7 +90,7 @@ export const useLomakeOptions = ({ getTyyppiLomakkeet, tyypit, language }) => {
 
   const ataruOptions = useMemo(
     () => getOptions(ataruLomakkeet || [], language),
-    [ataruLomakkeet, language],
+    [ataruLomakkeet, language]
   );
 
   return { ataruOptions };

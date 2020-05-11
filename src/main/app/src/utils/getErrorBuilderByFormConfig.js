@@ -1,6 +1,5 @@
-import { get } from 'lodash';
+import { get, isFunction } from 'lodash';
 
-import { isFunction } from './index';
 import createErrorBuilder from './createErrorBuilder';
 
 const getErrorBuilderByFormConfig = (config, values) => {

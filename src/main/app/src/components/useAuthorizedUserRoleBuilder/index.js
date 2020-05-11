@@ -9,7 +9,7 @@ export const useAuthorizedUserRoleBuilder = () => {
 
   const roleBuilder = useMemo(
     () => createRoleBuilder({ roles: getUserRoles(user) }),
-    [user],
+    [user]
   );
 
   return roleBuilder;

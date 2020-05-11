@@ -3,7 +3,7 @@ import getHaunHakukohteet from '../../utils/kouta/getHaunHakukohteet';
 import RelatedEntitiesTable from '../RelatedEntitiesTable';
 import { useTranslation } from 'react-i18next';
 
-export default function({ haku, organisaatioOid }) {
+export default function ({ haku, organisaatioOid }) {
   const { t } = useTranslation();
 
   return (

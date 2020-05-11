@@ -5,6 +5,6 @@ import { mountWithTheme } from '../../testUtils';
 
 test('renders correctly', () => {
   expect(
-    mountWithTheme(<FormSteps activeStep="hakukohde" />),
+    mountWithTheme(<FormSteps activeStep="hakukohde" />)
   ).toMatchSnapshot();
 });

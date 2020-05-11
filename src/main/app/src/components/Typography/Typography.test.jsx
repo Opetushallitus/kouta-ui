@@ -5,7 +5,7 @@ import { mountWithTheme } from '../../testUtils';
 
 test('renders correctly', () => {
   expect(
-    mountWithTheme(<Typography>Hello world!</Typography>),
+    mountWithTheme(<Typography>Hello world!</Typography>)
   ).toMatchSnapshot();
 });
 
@@ -20,7 +20,7 @@ test('renders correctly with variant', () => {
         <Typography variant="h4">Heading 4</Typography>
         <Typography variant="h5">Heading 5</Typography>
         <Typography variant="h6">Heading 6</Typography>
-      </>,
-    ),
+      </>
+    )
   ).toMatchSnapshot();
 });

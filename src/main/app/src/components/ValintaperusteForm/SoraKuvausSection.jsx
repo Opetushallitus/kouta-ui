@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import Button from '../Button';
 import Divider from '../Divider';
 import Box from '../Box';
-import useFieldValue from '../useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 
 const SoraKuvausSection = ({ name, organisaatioOid, languages }) => {
   const { t } = useTranslation();

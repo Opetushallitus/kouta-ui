@@ -17,7 +17,7 @@ import LomakeFields from '../LomakeFields';
 import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
 import useModal from '../useModal';
 import isYhteishakuHakutapa from '../../utils/isYhteishakuHakutapa';
-import useFieldValue from '../useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 import { HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID } from '../../constants';
 import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import PohjaFormCollapse from '../PohjaFormCollapse';
@@ -47,7 +47,7 @@ const HakuForm = ({
       roleBuilder
         .hasUpdate(HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID)
         .result(),
-    [roleBuilder],
+    [roleBuilder]
   );
 
   return (

@@ -6,7 +6,7 @@ const validateValintaperusteForm = values => {
   const koulutustyyppi = get(values, 'perustiedot.tyyppi');
   return getErrorBuilderByFormConfig(
     getValintaperusteFormConfig(koulutustyyppi),
-    values,
+    values
   ).getErrors();
 };
 

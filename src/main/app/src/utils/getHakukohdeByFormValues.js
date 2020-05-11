@@ -25,12 +25,12 @@ const getHakukohdeByFormValues = values => {
   const { muokkaaja, tila } = values;
   const alkamiskausiKoodiUri = get(values, 'alkamiskausi.kausi') || null;
   const alkamisvuosi = getAsNumberOrNull(
-    get(values, 'alkamiskausi.vuosi.value'),
+    get(values, 'alkamiskausi.vuosi.value')
   );
   const kielivalinta = getKieliversiot(values);
 
   const aloituspaikat = getAsNumberOrNull(
-    get(values, 'aloituspaikat.aloituspaikkamaara'),
+    get(values, 'aloituspaikat.aloituspaikkamaara')
   );
 
   const eriHakulomake = Boolean(get(values, 'hakulomake.eriHakulomake'));
@@ -58,7 +58,7 @@ const getHakukohdeByFormValues = values => {
     osoite: {
       osoite: pick(
         get(values, 'liitteet.toimitustapa.paikka.osoite') || null,
-        kielivalinta,
+        kielivalinta
       ),
       postinumeroKoodiUri:
         get(values, 'liitteet.toimitustapa.paikka.postinumero.value') || null,
@@ -71,11 +71,11 @@ const getHakukohdeByFormValues = values => {
   const liitteidenToimitusaika = get(values, 'liitteet.toimitusaika') || null;
 
   const liitteetOnkoSamaToimitusosoite = getLiitteillaYhteinenToimitusosoite(
-    values,
+    values
   );
 
   const liitteetOnkoSamaToimitusaika = getLiitteillaYhteinenToimitusaika(
-    values,
+    values
   );
 
   const liitteet = (get(values, 'liitteet.liitteet') || []).map(
@@ -94,7 +94,7 @@ const getHakukohdeByFormValues = values => {
                 osoite: {
                   osoite: pick(
                     get(toimitustapa, 'paikka.osoite') || null,
-                    kielivalinta,
+                    kielivalinta
                   ),
                   postinumeroKoodiUri:
                     get(toimitustapa, 'paikka.postinumero.value') || null,
@@ -104,14 +104,14 @@ const getHakukohdeByFormValues = values => {
             : null,
         kuvaus: pick(kuvaus || {}, kielivalinta),
       };
-    },
+    }
   );
 
   const nimi = pick(get(values, 'perustiedot.nimi') || null, kielivalinta);
 
   const toinenAsteOnkoKaksoistutkinto = !!get(
     values,
-    'perustiedot.voiSuorittaaKaksoistutkinnon',
+    'perustiedot.voiSuorittaaKaksoistutkinnon'
   );
 
   const valintakokeet = getValintakoeFieldsData({
@@ -126,15 +126,15 @@ const getHakukohdeByFormValues = values => {
   const pohjakoulutusvaatimusTarkenne = pick(
     mapValues(
       get(values, 'pohjakoulutus.tarkenne') || {},
-      serializeEditorState,
+      serializeEditorState
     ),
-    kielivalinta,
+    kielivalinta
   );
 
   const valintaperuste = get(values, 'valintaperusteenKuvaus.value') || null;
 
   const ensikertalaisenAloituspaikat = getAsNumberOrNull(
-    get(values, 'aloituspaikat.ensikertalaismaara'),
+    get(values, 'aloituspaikat.ensikertalaismaara')
   );
 
   const eriAlkamiskausi = Boolean(get(values, 'alkamiskausi.eriAlkamiskausi'));

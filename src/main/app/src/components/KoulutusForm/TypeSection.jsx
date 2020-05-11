@@ -12,7 +12,7 @@ const TyyppiField = createFormFieldComponent(
       ...input,
       ...props,
     };
-  },
+  }
 );
 
 const TypeSection = ({ johtaaTutkintoon, name }) => {

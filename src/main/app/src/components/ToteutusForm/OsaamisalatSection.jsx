@@ -28,7 +28,7 @@ import Spin from '#/src/components/Spin';
 import Typography from '#/src/components/Typography';
 
 import { useURLs } from '#/src/hooks/context';
-import useFieldValue from '#/src/components/useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 import useApiAsync from '#/src/components/useApiAsync';
 import StyledSectionHTML from '#/src/components/StyledSectionHTML';
 
@@ -91,7 +91,7 @@ const getExtendedEPeruste = async ({ httpClient, apiUrls, ePerusteId }) => {
     ...osaamisala,
     kuvaus: mapValues(
       get(osaamisalakuvaukset, [osaamisala.uri, 0, 'teksti']) || {},
-      v => (isString(v) ? sanitizeHTML(v) : v),
+      v => (isString(v) ? sanitizeHTML(v) : v)
     ),
   }));
 
@@ -134,7 +134,7 @@ const OsaamisalatInfoFields = ({
   name,
 }) => {
   const activeOsaamisalat = osaamisalat.filter(({ uri }) =>
-    osaamisalatValue.includes(uri),
+    osaamisalatValue.includes(uri)
   );
 
   return activeOsaamisalat.map((osaamisala, index) => {
@@ -193,14 +193,14 @@ const OsaamisalatContainer = ({
         label: getLanguageValue(nimi, language),
         value: uri,
       })),
-    [osaamisalat, language],
+    [osaamisalat, language]
   );
   const { koodiArvo } = parseKoodiUri(get(koulutus, 'koulutusKoodiUri'));
 
   const osaamisalatValue = useFieldValue(`${name}.osaamisalat`);
   const koulutusLinkText = `${getLanguageValue(
     get(koulutus, 'nimi'),
-    language,
+    language
   )} (${koodiArvo})`;
 
   const ePerusteLinkText = `${getLanguageValue(nimi, language)} (${id})`;

@@ -99,7 +99,7 @@ export const prepareTest = ({
   cy.visit(
     edit
       ? `/organisaatio/${organisaatioOid}/hakukohde/${hakukohdeOid}/muokkaus`
-      : `/organisaatio/${organisaatioOid}/toteutus/${toteutusOid}/haku/${hakuOid}/hakukohde`,
+      : `/organisaatio/${organisaatioOid}/toteutus/${toteutusOid}/haku/${hakuOid}/hakukohde`
   );
 };
 

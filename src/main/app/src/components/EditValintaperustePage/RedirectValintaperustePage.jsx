@@ -16,7 +16,7 @@ const Loader = () => (
 
 const Valintaperuste = ({ valintaperuste }) => {
   const { preferredOrganisaatio } = usePreferredOrganisaatio(
-    valintaperuste.organisaatioOid,
+    valintaperuste.organisaatioOid
   );
   return preferredOrganisaatio ? (
     <Redirect

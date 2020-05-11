@@ -23,7 +23,7 @@ import Spin from '#/src/components/Spin';
 import Typography from '#/src/components/Typography';
 import useApiAsync from '#/src/components/useApiAsync';
 import UrlContext from '#/src/components/UrlContext';
-import useFieldValue from '#/src/components/useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 import KoulutusField from '../KoulutusField';
 
 const getListNimiLanguageValues = (list = [], language) =>
@@ -42,7 +42,7 @@ const EPerusteField = ({ isLoading, ...props }) => {
   const { t } = useTranslation();
   const ePerusteOptions = useMemo(
     () => getEPerusteetOptions(ePerusteet, language),
-    [ePerusteet, language],
+    [ePerusteet, language]
   );
 
   return (
@@ -135,7 +135,7 @@ const KoulutusInfo = ({
         ? getListNimiLanguageValues(ePeruste.osaamisalat, language)
         : [],
     }),
-    [koulutus, ePeruste, language],
+    [koulutus, ePeruste, language]
   );
   const apiUrls = useContext(UrlContext);
 
@@ -177,7 +177,7 @@ const KoulutusInfo = ({
                             href={apiUrls.url(
                               'eperusteet.kooste',
                               language,
-                              get(ePeruste, 'id'),
+                              get(ePeruste, 'id')
                             )}
                             target="_blank"
                           >
@@ -188,7 +188,7 @@ const KoulutusInfo = ({
                       {
                         title: t('yleiset.voimaantulo'),
                         description: getReadableDateTime(
-                          get(ePeruste, 'voimassaoloAlkaa'),
+                          get(ePeruste, 'voimassaoloAlkaa')
                         ),
                       },
                       {
@@ -260,7 +260,7 @@ const KoulutuksenTiedotSection = ({
 
   const selectedPeruste = find(
     ePerusteet,
-    ePeruste => ePeruste.id === get(ePerusteFieldValue, 'value'),
+    ePeruste => ePeruste.id === get(ePerusteFieldValue, 'value')
   );
 
   const { change } = useBoundFormActions();

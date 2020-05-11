@@ -26,7 +26,7 @@ export const setTable = ({ value, language, table }) => {
     const extraRows = table.length - rows.length;
     if (extraRows > 0) {
       const newRows = [...new Array(extraRows)].map(() =>
-        getEmptyRow(numberOfColumns),
+        getEmptyRow(numberOfColumns)
       );
       draft.rows = [...rows, ...newRows];
     }

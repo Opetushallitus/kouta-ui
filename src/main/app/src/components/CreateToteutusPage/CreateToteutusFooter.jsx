@@ -1,13 +1,11 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import Submit from '../Submit';
-import { useTranslation } from 'react-i18next';
-import { getTestIdProps } from '../../utils';
-import Flex from '../Flex';
 import getToteutusByFormValues from '../../utils/getToteutusByFormValues';
 import createToteutus from '../../utils/kouta/createToteutus';
 import { useSaveToteutus } from '#/src/hooks/formSaveHooks';
+import { FormFooter } from '#/src/components/FormPage';
+import { ENTITY } from '#/src/constants';
 
 const CreateToteutusFooter = ({
   organisaatioOid,
@@ -15,7 +13,6 @@ const CreateToteutusFooter = ({
   koulutusOid,
   koulutus,
 }) => {
-  const { t } = useTranslation();
   const history = useHistory();
 
   const submit = useCallback(
@@ -32,18 +29,12 @@ const CreateToteutusFooter = ({
 
       history.push(`/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`);
     },
-    [organisaatioOid, history, koulutustyyppi, koulutusOid],
+    [organisaatioOid, history, koulutustyyppi, koulutusOid]
   );
 
   const save = useSaveToteutus(submit, { koulutustyyppi, koulutus });
 
-  return (
-    <Flex justifyEnd>
-      <Submit onClick={save} {...getTestIdProps('tallennaToteutusButton')}>
-        {t('yleiset.tallenna')}
-      </Submit>
-    </Flex>
-  );
+  return <FormFooter entity={ENTITY.TOTEUTUS} save={save} />;
 };
 
 export default CreateToteutusFooter;

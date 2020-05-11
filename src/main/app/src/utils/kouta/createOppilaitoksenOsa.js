@@ -5,7 +5,7 @@ const createOppilaitoksenOsa = async ({
 }) => {
   const { data } = await httpClient.put(
     apiUrls.url('kouta-backend.oppilaitoksen-osa'),
-    oppilaitoksenOsa,
+    oppilaitoksenOsa
   );
 
   return data;

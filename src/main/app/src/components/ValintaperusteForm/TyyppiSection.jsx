@@ -10,7 +10,7 @@ const TyyppiField = createFormFieldComponent(
   ({ input, meta, ...props }) => ({
     ...input,
     ...props,
-  }),
+  })
 );
 
 const TyyppiSection = ({ name }) => {

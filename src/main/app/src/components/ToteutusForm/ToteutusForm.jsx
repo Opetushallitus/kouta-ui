@@ -1,4 +1,5 @@
 import React from 'react';
+import { isFunction } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import getToteutukset from '#/src/utils/kouta/getToteutukset';
 import FormCollapse from '../FormCollapse';
@@ -9,14 +10,14 @@ import JarjestamisTiedotSection from './JarjestamisTiedotSection';
 import NayttamisTiedotSection from './NayttamisTiedotSection';
 import FormCollapseGroup from '../FormCollapseGroup';
 import HakukohteetSection from './HakukohteetSection';
-import { isFunction, getTestIdProps } from '../../utils';
+import { getTestIdProps } from '../../utils';
 import HakukohteetModal from './HakukohteetModal';
 import Flex from '../Flex';
 import Button from '../Button';
 import KorkeakouluOsaamisalatSection from './KorkeakouluOsaamisalatSection';
 import YhteyshenkilotSection from './YhteyshenkilotSection';
 import { KOULUTUSTYYPPI } from '../../constants';
-import useFieldValue from '../useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 import useModal from '../useModal';
 import LukiolinjatSection from './LukiolinjatSection';
 import JulkaisutilaField from '#/src/components/JulkaisutilaField';
@@ -109,7 +110,7 @@ const ToteutusForm = ({
         <FormCollapse
           section="alemmanKorkeakoulututkinnonOsaamisalat"
           header={t(
-            'toteutuslomake.alemmanKorkeakoulututkinnonErikoistumisalanKuvaus',
+            'toteutuslomake.alemmanKorkeakoulututkinnonErikoistumisalanKuvaus'
           )}
           Component={KorkeakouluOsaamisalatSection}
           languages={languages}
@@ -118,7 +119,7 @@ const ToteutusForm = ({
         <FormCollapse
           section="ylemmanKorkeakoulututkinnonOsaamisalat"
           header={t(
-            'toteutuslomake.ylemmanKorkeakoulututkinnonErikoistumisalanKuvaus',
+            'toteutuslomake.ylemmanKorkeakoulututkinnonErikoistumisalanKuvaus'
           )}
           Component={KorkeakouluOsaamisalatSection}
           languages={languages}

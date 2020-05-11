@@ -8,7 +8,7 @@ const getHaunHakukohteet = async ({
     apiUrls.url('kouta-backend.haku-hakukohteet', oid),
     {
       params: { organisaatioOid },
-    },
+    }
   );
 
   return data;

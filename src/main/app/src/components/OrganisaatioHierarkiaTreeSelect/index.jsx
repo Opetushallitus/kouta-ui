@@ -11,7 +11,7 @@ const OrganisaatioHierarkiaTreeSelect = ({ hierarkia, ...props }) => {
 
   const getLabel = useCallback(
     ({ nimi }) => getFirstLanguageValue(nimi, language),
-    [language],
+    [language]
   );
 
   const sortedHierarkia = useMemo(() => sortTreeBy(hierarkia, getLabel), [

@@ -59,6 +59,6 @@ export const createCanReadSomethingRoleBuilder = (rb, organisaatio) => {
       VALINTAPERUSTE_ROLE,
       HAKUKOHDE_ROLE,
     ],
-    organisaatio,
+    organisaatio
   );
 };

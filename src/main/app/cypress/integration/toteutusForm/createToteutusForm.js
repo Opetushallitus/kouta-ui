@@ -60,9 +60,7 @@ const fillOpetustapa = () => {
 const fillMaksullisuus = tyyppi => {
   cy.getByTestId('maksullisuus').within(() => {
     getRadio(tyyppi, cy).click({ force: true });
-    cy.getByTestId('maksu')
-      .find('input')
-      .paste('10');
+    cy.getByTestId('maksu').find('input').paste('10');
 
     cy.getByTestId('maksullisuusKuvaus').within(() => {
       cy.get('textarea').paste('maksullisuus kuvaus');
@@ -73,9 +71,7 @@ const fillMaksullisuus = tyyppi => {
 const fillStipendi = () => {
   cy.getByTestId('stipendi').within(() => {
     getRadio('kylla', cy).click({ force: true });
-    cy.getByTestId('stipendinMaara')
-      .find('input')
-      .paste('20');
+    cy.getByTestId('stipendinMaara').find('input').paste('20');
     cy.get('textarea').paste('stipendi kuvaus');
   });
 };
@@ -165,21 +161,11 @@ const fillYhteystiedotSection = () => {
   cy.getByTestId('yhteyshenkilotSection').within(() => {
     cy.getByTestId('lisaaYhteyshenkiloButton').click({ force: true });
 
-    cy.getByTestId('nimi')
-      .find('input')
-      .paste('nimi');
-    cy.getByTestId('titteli')
-      .find('input')
-      .paste('titteli');
-    cy.getByTestId('sahkoposti')
-      .find('input')
-      .paste('sähkoposti');
-    cy.getByTestId('puhelinnumero')
-      .find('input')
-      .paste('puhelin');
-    cy.getByTestId('verkkosivu')
-      .find('input')
-      .paste('verkkosivu');
+    cy.getByTestId('nimi').find('input').paste('nimi');
+    cy.getByTestId('titteli').find('input').paste('titteli');
+    cy.getByTestId('sahkoposti').find('input').paste('sähkoposti');
+    cy.getByTestId('puhelinnumero').find('input').paste('puhelin');
+    cy.getByTestId('verkkosivu').find('input').paste('verkkosivu');
 
     jatka();
   });
@@ -187,15 +173,11 @@ const fillYhteystiedotSection = () => {
 
 const fillKkOsaamisalat = () => {
   cy.getByTestId('lisaaOsaamisalaButton').click({ force: true });
-  cy.getByTestId('osaamisalanNimi')
-    .find('input')
-    .paste('osaamisalan nimi');
+  cy.getByTestId('osaamisalanNimi').find('input').paste('osaamisalan nimi');
   cy.getByTestId('osaamisalanKuvaus')
     .find('textarea')
     .paste('osaamisalan kuvaus');
-  cy.getByTestId('osaamisalanLinkki')
-    .find('input')
-    .paste('linkki');
+  cy.getByTestId('osaamisalanLinkki').find('input').paste('linkki');
   cy.getByTestId('osaamisalanOtsikko')
     .find('input')
     .paste('osaamisalan otsikko');
@@ -216,9 +198,7 @@ const fillDiplomi = () => {
     selectOption('lukiodiplomit_0', cy);
   });
 
-  cy.getByTestId('diplomiKuvaus')
-    .find('textarea')
-    .paste('Diplomi kuvaus');
+  cy.getByTestId('diplomiKuvaus').find('textarea').paste('Diplomi kuvaus');
 };
 
 const fillKielivalikoima = () => {
@@ -340,14 +320,14 @@ describe('createToteutusForm', () => {
       () => {
         fillKkOsaamisalat();
         jatka();
-      },
+      }
     );
 
     cy.getByTestId('ylemmanKorkeakoulututkinnonOsaamisalatSection').within(
       () => {
         fillKkOsaamisalat();
         jatka();
-      },
+      }
     );
 
     cy.getByTestId('jarjestamistiedotSection').within(() => {

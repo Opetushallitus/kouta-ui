@@ -29,38 +29,38 @@ export const openToast = ({
 export const openSavingErrorToast = () => (
   dispatch,
   getState,
-  { localisation },
+  { localisation }
 ) => {
   return dispatch(
     openToast({
       label: localisation.t('ilmoitukset.tallennusEpaonnistui'),
       status: 'danger',
-    }),
+    })
   );
 };
 
 export const openSavingSuccessToast = () => (
   dispatch,
   getState,
-  { localisation },
+  { localisation }
 ) => {
   return dispatch(
     openToast({
       label: localisation.t('ilmoitukset.tallennusOnnistui'),
       status: 'success',
-    }),
+    })
   );
 };
 
 export const openGenericErrorToast = () => (
   dispatch,
   getState,
-  { localisation },
+  { localisation }
 ) => {
   return dispatch(
     openToast({
       label: localisation.t('ilmoitukset.tuntematonVirhe'),
       status: 'danger',
-    }),
+    })
   );
 };

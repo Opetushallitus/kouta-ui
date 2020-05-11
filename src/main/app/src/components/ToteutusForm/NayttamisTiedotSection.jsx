@@ -19,7 +19,7 @@ const CreatableField = createFormFieldComponent(
     onChange: v => isArray(v) && v.length <= maxItems && onChange(v),
     maxItems,
     ...props,
-  }),
+  })
 );
 
 const MAX_ITEMS = 5;
@@ -35,9 +35,9 @@ const makeLoadAmmattinimikkeet = memoize(
       result.map(r => ({
         value: r,
         label: r,
-      })),
+      }))
     );
-  },
+  }
 );
 
 const makeLoadAvainsanat = memoize(
@@ -51,9 +51,9 @@ const makeLoadAvainsanat = memoize(
       result.map(r => ({
         value: r,
         label: r,
-      })),
+      }))
     );
-  },
+  }
 );
 
 const NayttamisTiedotSection = ({ language, name }) => {
@@ -73,7 +73,7 @@ const NayttamisTiedotSection = ({ language, name }) => {
             loadOptions={makeLoadAmmattinimikkeet(
               httpClient,
               apiUrls,
-              language,
+              language
             )}
             label={t('toteutuslomake.ammattinimikkeet')}
             helperText={t('yleiset.voitValitaEnintaan', {

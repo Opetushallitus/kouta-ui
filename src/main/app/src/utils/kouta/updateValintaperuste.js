@@ -12,7 +12,7 @@ const updateValintaperuste = async ({
   const { data } = await httpClient.post(
     apiUrls.url('kouta-backend.valintaperuste'),
     rest,
-    { headers },
+    { headers }
   );
 
   return data;

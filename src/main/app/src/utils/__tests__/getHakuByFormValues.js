@@ -75,7 +75,7 @@ test('getHakuByFormValues returns correct haku given different hakulomake variat
         tyyppi: HAKULOMAKETYYPPI.MUU,
         linkki: { fi: 'https://google.fi' },
       },
-    }),
+    })
   );
 
   const hakuEiHakua = getHakuByFormValues(
@@ -84,7 +84,7 @@ test('getHakuByFormValues returns correct haku given different hakulomake variat
         tyyppi: HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA,
         kuvaus: { fi: 'kuvaus' },
       },
-    }),
+    })
   );
 
   expect(hakuMuu).toMatchSnapshot();

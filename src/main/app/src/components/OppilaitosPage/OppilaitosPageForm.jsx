@@ -39,7 +39,7 @@ const OppilaitosPageForm = ({ organisaatio, oppilaitos }) => {
       },
       ...(oppilaitos && getFormValuesByOppilaitos(oppilaitos)),
     }),
-    [oppilaitos, contactInfo],
+    [oppilaitos, contactInfo]
   );
 
   const stepsEnabled = !oppilaitos;

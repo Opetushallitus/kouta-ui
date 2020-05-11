@@ -35,7 +35,7 @@ const config = createFormConfigBuilder().registerSections([
           KOULUTUSTYYPPI.VALMA,
           KOULUTUSTYYPPI.TELMA,
           KOULUTUSTYYPPI.LUVA,
-          KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS,
+          KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS
         ),
         required: true,
         validate: (eb, values) =>
@@ -60,7 +60,7 @@ const config = createFormConfigBuilder().registerSections([
           KOULUTUSTYYPPI.VALMA,
           KOULUTUSTYYPPI.TELMA,
           KOULUTUSTYYPPI.LUVA,
-          KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS,
+          KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS
         ),
       },
       {
@@ -104,8 +104,8 @@ const config = createFormConfigBuilder().registerSections([
         field: 'alemmanKorkeakoulututkinnonOsaamisalat',
         validate: validateIfJulkaistu((eb, values) =>
           eb.validateArray('alemmanKorkeakoulututkinnonOsaamisalat', eb =>
-            eb.validateTranslations('nimi', getKielivalinta(values)),
-          ),
+            eb.validateTranslations('nimi', getKielivalinta(values))
+          )
         ),
       },
       {
@@ -122,8 +122,8 @@ const config = createFormConfigBuilder().registerSections([
         field: 'ylemmanKorkeakoulututkinnonOsaamisalat',
         validate: validateIfJulkaistu((eb, values) =>
           eb.validateArray('ylemmanKorkeakoulututkinnonOsaamisalat', eb =>
-            eb.validateTranslations('nimi', getKielivalinta(values)),
-          ),
+            eb.validateTranslations('nimi', getKielivalinta(values))
+          )
         ),
       },
       {
@@ -154,7 +154,7 @@ const config = createFormConfigBuilder().registerSections([
       {
         field: '.opetuskieli',
         validate: validateIfJulkaistu(eb =>
-          eb.validateArrayMinLength('jarjestamistiedot.opetuskieli', 1),
+          eb.validateArrayMinLength('jarjestamistiedot.opetuskieli', 1)
         ),
         required: true,
       },
@@ -164,7 +164,7 @@ const config = createFormConfigBuilder().registerSections([
       {
         field: '.opetusaika',
         validate: validateIfJulkaistu(eb =>
-          eb.validateArrayMinLength('jarjestamistiedot.opetusaika', 1),
+          eb.validateArrayMinLength('jarjestamistiedot.opetusaika', 1)
         ),
         required: true,
       },
@@ -174,7 +174,7 @@ const config = createFormConfigBuilder().registerSections([
       {
         field: '.opetustapa',
         validate: validateIfJulkaistu(eb =>
-          eb.validateExistence('jarjestamistiedot.opetustapa'),
+          eb.validateExistence('jarjestamistiedot.opetustapa')
         ),
         required: true,
       },
@@ -184,7 +184,7 @@ const config = createFormConfigBuilder().registerSections([
       {
         field: '.maksullisuus.tyyppi',
         validate: validateIfJulkaistu(eb =>
-          eb.validateExistence('jarjestamistiedot.maksullisuus.tyyppi'),
+          eb.validateExistence('jarjestamistiedot.maksullisuus.tyyppi')
         ),
         required: true,
       },
@@ -193,7 +193,7 @@ const config = createFormConfigBuilder().registerSections([
         validate: validateIfJulkaistu((eb, values) =>
           _.get(values, 'jarjestamistiedot.maksullisuus.tyyppi') === 'kylla'
             ? eb.validateExistence('jarjestamistiedot.maksullisuus.maksu')
-            : eb,
+            : eb
         ),
       },
       createOptionalTranslatedFieldConfig({
@@ -211,9 +211,9 @@ const config = createFormConfigBuilder().registerSections([
         validate: validateIfJulkaistu(eb =>
           eb.getValue('jarjestamistiedot.koulutuksenTarkkaAlkamisaika')
             ? eb.validateExistence(
-                'jarjestamistiedot.koulutuksenAlkamispaivamaara',
+                'jarjestamistiedot.koulutuksenAlkamispaivamaara'
               )
-            : eb,
+            : eb
         ),
       },
       {
@@ -221,9 +221,9 @@ const config = createFormConfigBuilder().registerSections([
         validate: validateIfJulkaistu(eb =>
           eb.getValue('jarjestamistiedot.koulutuksenTarkkaAlkamisaika')
             ? eb.validateExistence(
-                'jarjestamistiedot.koulutuksenPaattymispaivamaara',
+                'jarjestamistiedot.koulutuksenPaattymispaivamaara'
               )
-            : eb,
+            : eb
         ),
         required: true,
       },
@@ -232,7 +232,7 @@ const config = createFormConfigBuilder().registerSections([
         validate: validateIfJulkaistu(eb =>
           !eb.getValue('jarjestamistiedot.koulutuksenTarkkaAlkamisaika')
             ? eb.validateExistence('jarjestamistiedot.koulutuksenAlkamiskausi')
-            : eb,
+            : eb
         ),
         required: true,
       },
@@ -241,7 +241,7 @@ const config = createFormConfigBuilder().registerSections([
         validate: validateIfJulkaistu(eb =>
           !eb.getValue('jarjestamistiedot.koulutuksenTarkkaAlkamisaika')
             ? eb.validateExistence('jarjestamistiedot.koulutuksenAlkamisvuosi')
-            : eb,
+            : eb
         ),
       },
       {
@@ -269,7 +269,7 @@ const config = createFormConfigBuilder().registerSections([
     field: 'tarjoajat',
     koulutustyypit: KOULUTUSTYYPIT,
     validate: validateIfJulkaistu(eb =>
-      eb.validateArrayMinLength('tarjoajat', 1),
+      eb.validateArrayMinLength('tarjoajat', 1)
     ),
     required: true,
   },

@@ -20,7 +20,7 @@ export const useDebounceState = (initialValue = null, wait = 0) => {
       setValue(newValue);
       debounceRef.current(newValue);
     },
-    [setValue],
+    [setValue]
   );
 
   return [value, setValueFn, debouncedValue];

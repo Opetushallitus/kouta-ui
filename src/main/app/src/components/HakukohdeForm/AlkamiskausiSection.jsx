@@ -15,7 +15,7 @@ import {
 import useKoodiNimi from '../useKoodiNimi';
 import Typography from '../Typography';
 import { getTestIdProps } from '../../utils';
-import useFieldValue from '../useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 
 const EriAlkamiskausiFields = ({ name, options, t }) => (
   <>
@@ -44,12 +44,12 @@ const AlkamiskausiSection = ({ name, toteutus }) => {
 
   const toteutusAlkamiskausiKoodiUri = get(
     toteutus,
-    'metadata.opetus.koulutuksenAlkamiskausi',
+    'metadata.opetus.koulutuksenAlkamiskausi'
   );
 
   const toteutusAlkamisvuosi = get(
     toteutus,
-    'metadata.opetus.koulutuksenAlkamisvuosi',
+    'metadata.opetus.koulutuksenAlkamisvuosi'
   );
   const { nimi: kausiKoodiNimi } = useKoodiNimi(toteutusAlkamiskausiKoodiUri);
 

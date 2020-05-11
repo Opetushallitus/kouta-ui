@@ -5,7 +5,7 @@ import { getLanguageValue } from '#/src/utils';
 import { getEPerusteById } from '#/src/apiUtils';
 import Typography from '#/src/components/Typography';
 import useApiAsync from '#/src/components/useApiAsync';
-import useFieldValue from '#/src/components/useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 import StyledSectionHTML from '#/src/components/StyledSectionHTML';
 
 const TekstiKuvausSection = ({ language }) => {

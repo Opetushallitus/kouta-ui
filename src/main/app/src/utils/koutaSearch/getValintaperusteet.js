@@ -7,7 +7,7 @@ const getValintaperusteet = async ({ httpClient, apiUrls, ...rest }) => {
     apiUrls.url('kouta-backend.search.valintaperusteet'),
     {
       params,
-    },
+    }
   );
 
   return data;

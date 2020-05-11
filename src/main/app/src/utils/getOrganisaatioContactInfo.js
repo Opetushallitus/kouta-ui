@@ -38,18 +38,18 @@ const getOrganisaatioContactInfo = organisaatio => {
   const yhteystiedot = get(organisaatio, 'yhteystiedot') || [];
 
   const kayntiOsoitteet = yhteystiedot.filter(
-    y => get(y, 'osoiteTyyppi') === 'kaynti',
+    y => get(y, 'osoiteTyyppi') === 'kaynti'
   );
 
   const kayntiOsoitteetByKieli = groupBy(
     kayntiOsoitteet,
-    ({ kieli }) => getKieliByKieliUri(kieli) || '_',
+    ({ kieli }) => getKieliByKieliUri(kieli) || '_'
   );
 
   const verkkosivut = yhteystiedot.filter(y => isString(get(y, 'www')));
   const sahkopostit = yhteystiedot.filter(y => isString(get(y, 'email')));
   const puhelinnumerot = yhteystiedot.filter(
-    y => get(y, 'tyyppi') === 'puhelin' && isString(get(y, 'numero')),
+    y => get(y, 'tyyppi') === 'puhelin' && isString(get(y, 'numero'))
   );
 
   const verkkosivu = get(verkkosivut, '[0].www');

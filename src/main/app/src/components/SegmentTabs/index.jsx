@@ -9,7 +9,7 @@ const SegmentTabsBase = styled.div`
 
 const SegmentTabs = ({ fullWidth = false, value, children, ...props }) => {
   const validChildren = React.Children.toArray(children).filter(c =>
-    React.isValidElement(c),
+    React.isValidElement(c)
   );
 
   return (

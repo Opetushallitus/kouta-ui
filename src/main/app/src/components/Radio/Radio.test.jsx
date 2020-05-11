@@ -10,7 +10,7 @@ test('renders correctly', () => {
         <Radio value="a">Radio A</Radio>
         <Radio value="b">Radio B</Radio>
         <Radio value="c">Radio C</Radio>
-      </RadioGroup>,
-    ),
+      </RadioGroup>
+    )
   ).toMatchSnapshot();
 });

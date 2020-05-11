@@ -4,7 +4,7 @@ import getErrorBuilderByFormConfig from './getErrorBuilderByFormConfig';
 const validateSoraKuvausForm = values => {
   return getErrorBuilderByFormConfig(
     getSoraKuvausFormConfig(),
-    values,
+    values
   ).getErrors();
 };
 

@@ -30,7 +30,7 @@ const getOppilaitoksenOsaByFormValues = ({ tila, muokkaaja, ...values }) => {
       },
       esittely: mapValues(
         pick(esittely || {}, kieliversiot),
-        serializeEditorState,
+        serializeEditorState
       ),
       opiskelijoita: isNumeric(get(perustiedot, 'opiskelijoita'))
         ? parseInt(perustiedot.opiskelijoita)

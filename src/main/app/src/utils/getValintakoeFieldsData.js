@@ -14,7 +14,7 @@ const getValintakoeFieldsData = ({ valintakoeValues, kielivalinta }) => {
           paattyy: paattyy || null,
         },
         lisatietoja: pick(lisatietoja || {}, kielivalinta),
-      }),
+      })
     ),
   }));
 };

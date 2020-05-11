@@ -20,7 +20,7 @@ const getLanguageOptions = ({ languages = [], t }) => {
         value: item,
       };
     }),
-    ({ value }) => sortOrder.indexOf(value),
+    ({ value }) => sortOrder.indexOf(value)
   );
 };
 

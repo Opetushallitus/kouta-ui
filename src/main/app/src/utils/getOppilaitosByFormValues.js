@@ -26,9 +26,9 @@ const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
       otsikkoKoodiUri,
       teksti: pick(
         get(tietoa, ['tiedot', otsikkoKoodiUri]) || {},
-        kieliversiot,
+        kieliversiot
       ),
-    }),
+    })
   );
 
   return {
@@ -49,7 +49,7 @@ const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
       },
       esittely: mapValues(
         pick(esittely || {}, kieliversiot),
-        serializeEditorState,
+        serializeEditorState
       ),
       tietoaOpiskelusta,
       opiskelijoita: isNumeric(get(perustiedot, 'opiskelijoita'))

@@ -12,7 +12,7 @@ import Divider from '../Divider';
 import Box from '../Box';
 import Button from '../Button';
 import Alert from '../Alert';
-import useFieldValue from '../useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 
 const getValintaperusteetOptions = (valintaperusteet, language) =>
   valintaperusteet.map(({ nimi, id, tila }) => ({
@@ -43,7 +43,7 @@ const KuvausSection = ({ haku, organisaatioOid, name, languages }) => {
 
   const options = useMemo(
     () => getValintaperusteetOptions(data || [], language),
-    [data, language],
+    [data, language]
   );
 
   return (

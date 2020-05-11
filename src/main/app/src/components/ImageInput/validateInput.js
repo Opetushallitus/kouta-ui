@@ -11,7 +11,7 @@ const validateFileCount = ({ files, t }) =>
     () =>
       files.length !== 1 && {
         message: t('yleiset.liitaVainYksiTiedosto'),
-      },
+      }
   );
 
 const validateFileExtension = ({ acceptedFileFormats, extension, t }) =>
@@ -20,7 +20,7 @@ const validateFileExtension = ({ acceptedFileFormats, extension, t }) =>
       acceptedFileFormats &&
       !acceptedFileFormats.includes(`.${extension}`) && {
         message: t('yleiset.kiellettyTiedostopaate', { extension }),
-      },
+      }
   );
 
 const validateFileSize = ({ maxSize, size, t }) =>
@@ -29,7 +29,7 @@ const validateFileSize = ({ maxSize, size, t }) =>
       maxSize &&
       size > maxSize && {
         message: t('yleiset.kuvanTiedostokokoLiianSuuri'),
-      },
+      }
   );
 
 const maybeReadImageDimensions = async ({
@@ -91,7 +91,7 @@ export default async function validateInput(
     maxDimensions,
     noDimensionCheckForFormats = [],
     t,
-  },
+  }
 ) {
   await validateFileCount({ files, t });
 

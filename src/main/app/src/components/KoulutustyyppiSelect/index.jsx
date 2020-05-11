@@ -55,7 +55,7 @@ const getFirstLevelValue = (hierarkia, value) => {
   }
 
   node = hierarkia.find(({ children }) =>
-    Boolean((children || []).find(({ tyyppi }) => tyyppi === value)),
+    Boolean((children || []).find(({ tyyppi }) => tyyppi === value))
   );
 
   return node ? node.tyyppi : undefined;
@@ -63,7 +63,7 @@ const getFirstLevelValue = (hierarkia, value) => {
 
 export const KoulutustyyppiSelect = ({ value, onChange, error }) => {
   const [johtaaTutkintoon, setJohtaaTutkintoon] = useState(
-    TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT.includes(value),
+    TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT.includes(value)
   );
 
   const [firstLevelValue, setFirstLevelValue] = useState();
@@ -90,7 +90,7 @@ export const KoulutustyyppiSelect = ({ value, onChange, error }) => {
 
   const secondLevelOptions = useMemo(
     () => getSecondLevelOptions(hierarkia, firstLevelValue, t),
-    [hierarkia, firstLevelValue, t],
+    [hierarkia, firstLevelValue, t]
   );
 
   const onFirstLevelValueChange = useCallback(
@@ -105,7 +105,7 @@ export const KoulutustyyppiSelect = ({ value, onChange, error }) => {
         onChange(node.children[0].tyyppi);
       }
     },
-    [setFirstLevelValue, onChange, hierarkia],
+    [setFirstLevelValue, onChange, hierarkia]
   );
 
   const hasSecondLevelOptions = !isEmpty(secondLevelOptions);

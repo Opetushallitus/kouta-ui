@@ -5,7 +5,7 @@ import { getFirstLanguageValue, arrayToTranslationObject } from './index';
 const getKoodiNimiTranslation = (koodi, priority) => {
   const translationObject = mapValues(
     arrayToTranslationObject(get(koodi, 'metadata')),
-    ({ nimi }) => nimi,
+    ({ nimi }) => nimi
   );
 
   return getFirstLanguageValue(translationObject, priority);

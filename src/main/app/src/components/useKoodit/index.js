@@ -32,8 +32,8 @@ const useKoodit = koodiUris => {
                 ...args,
                 koodistoUri: koodisto,
                 versio,
-              }).catch(() => undefined),
-            ),
+              }).catch(() => undefined)
+            )
           )
       : noopPromiseFn;
   }, [versiot]);
@@ -50,7 +50,7 @@ const useKoodit = koodiUris => {
         ? data.find(
             k =>
               get(k, '[0].koodisto.koodistoUri') === koodisto &&
-              `${get(k, '[0].versio')}` === versio,
+              `${get(k, '[0].versio')}` === versio
           )
         : undefined;
 
@@ -59,7 +59,7 @@ const useKoodit = koodiUris => {
       }
 
       return dataKoodisto.find(
-        ({ koodiUri, versio }) => `${koodiUri}#${versio}` === uri,
+        ({ koodiUri, versio }) => `${koodiUri}#${versio}` === uri
       );
     });
   }, [data, koodiUris]);

@@ -1,4 +1,5 @@
 import React, { useContext, useCallback, useMemo } from 'react';
+import { isFunction } from 'lodash';
 
 import { AsyncSelect } from '../Select';
 import getKoodi from '../../utils/koodistoService/getKoodi';
@@ -7,7 +8,6 @@ import UrlContext from '../UrlContext';
 import useLanguage from '../useLanguage';
 import getKoodiNimiTranslation from '../../utils/getKoodiNimiTranslation';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
-import { isFunction } from '../../utils';
 
 const AsyncKoodistoSelect = ({
   disabled,
@@ -48,7 +48,7 @@ const AsyncKoodistoSelect = ({
         return undefined;
       }
     },
-    [httpClient, apiUrls, formatLabel],
+    [httpClient, apiUrls, formatLabel]
   );
 
   return <AsyncSelect disabled={disabled} loadLabel={loadLabel} {...props} />;

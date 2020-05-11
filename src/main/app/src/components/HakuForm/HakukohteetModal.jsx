@@ -10,7 +10,7 @@ import Spacing from '../Spacing';
 import useApiAsync from '../useApiAsync';
 import { useTranslation } from 'react-i18next';
 import { FormFieldSelect } from '../formFields';
-import useFieldValue from '../useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 
 const getToteutusOptions = toteutukset => {
   return toteutukset.map(({ nimi, oid }) => ({

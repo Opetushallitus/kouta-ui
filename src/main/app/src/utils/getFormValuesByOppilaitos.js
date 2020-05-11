@@ -44,7 +44,7 @@ const getFormValuesByOppilaitos = oppilaitos => {
 
           return acc;
         },
-        {},
+        {}
       ),
     },
     perustiedot: {

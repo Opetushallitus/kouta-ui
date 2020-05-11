@@ -27,27 +27,13 @@ const fillKieliversiotSection = () => {
 
 const fillPerustiedotSection = () => {
   cy.getByTestId('perustiedotSection').within(() => {
-    cy.getByTestId('opiskelijoita')
-      .find('input')
-      .paste('1', { force: true });
-    cy.getByTestId('korkeakouluja')
-      .find('input')
-      .paste('2', { force: true });
-    cy.getByTestId('tiedekuntia')
-      .find('input')
-      .paste('3', { force: true });
-    cy.getByTestId('kampuksia')
-      .find('input')
-      .paste('4', { force: true });
-    cy.getByTestId('yksikoita')
-      .find('input')
-      .paste('5', { force: true });
-    cy.getByTestId('toimipisteita')
-      .find('input')
-      .paste('6', { force: true });
-    cy.getByTestId('akatemioita')
-      .find('input')
-      .paste('7', { force: true });
+    cy.getByTestId('opiskelijoita').find('input').paste('1', { force: true });
+    cy.getByTestId('korkeakouluja').find('input').paste('2', { force: true });
+    cy.getByTestId('tiedekuntia').find('input').paste('3', { force: true });
+    cy.getByTestId('kampuksia').find('input').paste('4', { force: true });
+    cy.getByTestId('yksikoita').find('input').paste('5', { force: true });
+    cy.getByTestId('toimipisteita').find('input').paste('6', { force: true });
+    cy.getByTestId('akatemioita').find('input').paste('7', { force: true });
 
     jatka();
   });
@@ -79,9 +65,7 @@ const fillTietoaOpiskelustaSection = () => {
 
 const fillYhteystiedotSection = () => {
   cy.getByTestId('yhteystiedotSection').within(() => {
-    cy.getByTestId('osoite')
-      .find('input')
-      .paste('Osoite', { force: true });
+    cy.getByTestId('osoite').find('input').paste('Osoite', { force: true });
 
     cy.getByTestId('postinumero').within(() => {
       fillAsyncSelect('0', 'Posti_0');

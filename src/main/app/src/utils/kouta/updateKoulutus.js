@@ -14,7 +14,7 @@ const updateKoulutus = async ({ koulutus, httpClient, apiUrls }) => {
   const { data } = await httpClient.post(
     apiUrls.url('kouta-backend.koulutus'),
     update,
-    { headers },
+    { headers }
   );
 
   return data;

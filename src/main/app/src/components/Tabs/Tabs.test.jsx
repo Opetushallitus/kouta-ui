@@ -10,7 +10,7 @@ test('renders correctly', () => {
         <Tab value="a">Tab A</Tab>
         <Tab value="b">Tab B</Tab>
         <Tab value="c">Tab C</Tab>
-      </Tabs>,
-    ),
+      </Tabs>
+    )
   ).toMatchSnapshot();
 });

@@ -25,7 +25,7 @@ const getLocalisationInstance = () => {
     'fi',
     'kouta',
     getTranslations().fi.kouta,
-    true,
+    true
   );
 
   return localisationInstance;

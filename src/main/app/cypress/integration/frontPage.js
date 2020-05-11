@@ -98,7 +98,7 @@ describe('frontPage', () => {
 
     cy.getByTestId('organisaatioDrawer').should(
       'contain',
-      'Vaihda organisaatiota',
+      'Vaihda organisaatiota'
     );
   });
 
@@ -175,7 +175,7 @@ describe('frontPage', () => {
 
     cy.getByTestId('valintaperusteetTable').should(
       'contain',
-      'Valintaperusteen nimi',
+      'Valintaperusteen nimi'
     );
   });
 

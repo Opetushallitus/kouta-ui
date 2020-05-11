@@ -1,7 +1,7 @@
 import React, { useMemo, useContext, useRef, useCallback } from 'react';
-import ReactCreatable from 'react-select/lib/Creatable';
-import ReactAsyncCreatableSelect from 'react-select/lib/AsyncCreatable';
-import ReactAsyncSelect from 'react-select/lib/Async';
+import ReactCreatable from 'react-select/creatable';
+import ReactAsyncCreatableSelect from 'react-select/async-creatable';
+import ReactAsyncSelect from 'react-select/async';
 import { ThemeContext } from 'styled-components';
 import { useAsync } from 'react-async';
 import { get, isArray, isObject, isFunction, zipObject } from 'lodash';
@@ -171,9 +171,9 @@ export const AsyncSelect = ({
       const labels = await Promise.all(
         valuesWithoutLabel.map(v =>
           (isFunction(loadLabel) ? loadLabel(v) : noopPromise()).catch(
-            () => null,
-          ),
-        ),
+            () => null
+          )
+        )
       );
 
       const valueToLabel = zipObject(valuesWithoutLabel, labels);
@@ -197,13 +197,13 @@ export const AsyncSelect = ({
       Object.entries(valueToLabel || {}).map(([k, v]) => ({
         value: k,
         label: v,
-      })),
+      }))
     );
   }, [valueToLabel, valueProp]);
 
   const noOptionsMessage = useCallback(
     () => t('yleiset.eiValittaviaKohteitaHakusanalla'),
-    [t],
+    [t]
   );
 
   return (

@@ -5,7 +5,7 @@ const getToteutukset = async ({ httpClient, apiUrls, ...rest }) => {
 
   const { data } = await httpClient.get(
     apiUrls.url('kouta-backend.search.toteutukset'),
-    { params },
+    { params }
   );
 
   return data;

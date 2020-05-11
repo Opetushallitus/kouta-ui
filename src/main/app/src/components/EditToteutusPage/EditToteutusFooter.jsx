@@ -1,18 +1,15 @@
 import React, { useCallback, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import { isArray, uniq, without } from 'lodash';
-import Submit from '../Submit';
-import { useTranslation } from 'react-i18next';
-import { getTestIdProps } from '../../utils';
-import Box from '../Box';
 import getToteutusByFormValues from '../../utils/getToteutusByFormValues';
 import updateToteutus from '../../utils/kouta/updateToteutus';
 import useOrganisaatio from '../useOrganisaatio';
 import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
-import { TOTEUTUS_ROLE } from '../../constants';
+import { TOTEUTUS_ROLE, ENTITY } from '../../constants';
 import iterateTree from '../../utils/iterateTree';
 import useOrganisaatioHierarkia from '../useOrganisaatioHierarkia';
 import { useSaveToteutus } from '#/src/hooks/formSaveHooks';
+import { FormFooter } from '#/src/components/FormPage';
 
 const getAvailableTarjoajaOids = hierarkia => {
   const oids = [];
@@ -29,7 +26,7 @@ const getTarjoajaOperations = (availableOids, oids) => {
   const normalizedAvailableOids = isArray(availableOids) ? availableOids : [];
 
   const inserted = normalizedOids.filter(o =>
-    normalizedAvailableOids.includes(o),
+    normalizedAvailableOids.includes(o)
   );
 
   return {
@@ -51,14 +48,13 @@ const EditToteutusFooter = ({
   koulutus,
 }) => {
   const history = useHistory();
-  const { t } = useTranslation();
   const { organisaatio } = useOrganisaatio(toteutus.organisaatioOid);
   const roleBuilder = useAuthorizedUserRoleBuilder();
   const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid);
 
   const availableTarjoajaOids = useMemo(
     () => getAvailableTarjoajaOids(hierarkia),
-    [hierarkia],
+    [hierarkia]
   );
 
   const canUpdate = useMemo(() => {
@@ -76,7 +72,7 @@ const EditToteutusFooter = ({
           tarjoajat: mergeTarjoajat(
             toteutus.tarjoajat,
             values.tarjoajat,
-            availableTarjoajaOids,
+            availableTarjoajaOids
           ),
         },
       });
@@ -87,22 +83,13 @@ const EditToteutusFooter = ({
         },
       });
     },
-    [toteutus, history, koulutustyyppi, availableTarjoajaOids],
+    [toteutus, history, koulutustyyppi, availableTarjoajaOids]
   );
 
   const save = useSaveToteutus(submit, { koulutustyyppi, koulutus });
 
   return (
-    <Box display="flex" justifyContent="flex-end">
-      <Submit
-        disabled={!canUpdate}
-        onClick={save}
-        title={!canUpdate ? t('toteutuslomake.eiMuokkausOikeutta') : undefined}
-        {...getTestIdProps('tallennaToteutusButton')}
-      >
-        {t('yleiset.tallenna')}
-      </Submit>
-    </Box>
+    <FormFooter entity={ENTITY.TOTEUTUS} save={save} canUpdate={canUpdate} />
   );
 };
 

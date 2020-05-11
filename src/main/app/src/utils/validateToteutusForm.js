@@ -6,7 +6,7 @@ const validateToteutusForm = values => {
 
   return getErrorBuilderByFormConfig(
     getToteutusFormConfig(koulutustyyppi),
-    values,
+    values
   ).getErrors();
 };
 

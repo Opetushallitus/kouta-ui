@@ -11,13 +11,13 @@ const CreateToteutusPage = React.lazy(() => import('../CreateToteutusPage'));
 const CreateHakukohdePage = React.lazy(() => import('../CreateHakukohdePage'));
 
 const CreateValintaperustePage = React.lazy(() =>
-  import('../CreateValintaperustePage'),
+  import('../CreateValintaperustePage')
 );
 
 const CreateHakuPage = React.lazy(() => import('../CreateHakuPage'));
 
 const CreateSoraKuvausPage = React.lazy(() =>
-  import('../CreateSoraKuvausPage'),
+  import('../CreateSoraKuvausPage')
 );
 
 const EditKoulutusPage = React.lazy(() => import('../EditKoulutusPage'));
@@ -25,30 +25,30 @@ const EditHakuPage = React.lazy(() => import('../EditHakuPage'));
 const EditToteutusPage = React.lazy(() => import('../EditToteutusPage'));
 
 const EditValintaperustePage = React.lazy(() =>
-  import('../EditValintaperustePage'),
+  import('../EditValintaperustePage')
 );
 
 const EditHakukohdePage = React.lazy(() => import('../EditHakukohdePage'));
 const RedirectHakukohdePage = React.lazy(() =>
-  import('../EditHakukohdePage/RedirectHakukohdePage'),
+  import('../EditHakukohdePage/RedirectHakukohdePage')
 );
 const RedirectToteutusPage = React.lazy(() =>
-  import('../EditToteutusPage/RedirectToteutusPage'),
+  import('../EditToteutusPage/RedirectToteutusPage')
 );
 const RedirectHakuPage = React.lazy(() =>
-  import('../EditHakuPage/RedirectHakuPage'),
+  import('../EditHakuPage/RedirectHakuPage')
 );
 const RedirectValintaperustePage = React.lazy(() =>
-  import('../EditValintaperustePage/RedirectValintaperustePage'),
+  import('../EditValintaperustePage/RedirectValintaperustePage')
 );
 const RedirectKoulutusPage = React.lazy(() =>
-  import('../EditKoulutusPage/RedirectKoulutusPage'),
+  import('../EditKoulutusPage/RedirectKoulutusPage')
 );
 const EditSoraKuvausPage = React.lazy(() => import('../EditSoraKuvausPage'));
 const OppilaitosPage = React.lazy(() => import('../OppilaitosPage'));
 
 const OppilaitoksenOsaPage = React.lazy(() =>
-  import('../OppilaitoksenOsaPage'),
+  import('../OppilaitoksenOsaPage')
 );
 
 const MainPage = ({ history }) => {

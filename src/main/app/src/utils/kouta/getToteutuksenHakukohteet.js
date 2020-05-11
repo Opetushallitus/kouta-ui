@@ -10,7 +10,7 @@ export const getToteutuksenHakukohteet = async ({
       params: {
         ...(organisaatioOid && { organisaatioOid }),
       },
-    },
+    }
   );
 
   return data;

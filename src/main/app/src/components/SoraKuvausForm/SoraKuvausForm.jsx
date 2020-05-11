@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import KoulutustyyppiSection from './KoulutustyyppiSection';
 import TiedotSection from './TiedotSection';
 import JulkisuusSection from './JulkisuusSection';
-import useFieldValue from '../useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import PohjaFormCollapse from '../PohjaFormCollapse';
 import getSoraKuvaukset from '#/src/utils/kouta/getSoraKuvaukset';

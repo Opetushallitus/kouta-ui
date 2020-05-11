@@ -5,7 +5,7 @@ import ValintatapaSection from './ValintatapaSection';
 import KuvausSection from './KuvausSection';
 import { useTranslation } from 'react-i18next';
 import SoraKuvausSection from './SoraKuvausSection';
-import useFieldValue from '../useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 import PerustiedotSection from './PerustiedotSection';
 import JulkisuusSection from './JulkisuusSection';
 import JulkaisutilaField from '#/src/components/JulkaisutilaField';

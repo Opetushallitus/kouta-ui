@@ -76,7 +76,7 @@ const config = createFormConfigBuilder().registerSections([
                     ? eb.validateExistence('paattyy')
                     : eb,
               ])(eb);
-            }),
+            })
         ),
       },
       {
@@ -143,11 +143,11 @@ const config = createFormConfigBuilder().registerSections([
                 () =>
                   eb.validateTranslations(
                     'hakulomake.linkki',
-                    getKielivalinta(values),
+                    getKielivalinta(values)
                   ),
               ],
               [otherwise, () => eb],
-            ])(tyyppi => get(values, 'hakulomake.tyyppi') === tyyppi),
+            ])(tyyppi => get(values, 'hakulomake.tyyppi') === tyyppi)
         ),
       },
       {

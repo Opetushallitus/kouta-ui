@@ -70,11 +70,11 @@ const getFormValuesByHakukohde = hakukohde => {
       pohjakoulutusvaatimus: (pohjakoulutusvaatimusKoodiUrit || []).map(
         value => ({
           value,
-        }),
+        })
       ),
       tarkenne: mapValues(
         pohjakoulutusvaatimusTarkenne || {},
-        parseEditorState,
+        parseEditorState
       ),
     },
     valintaperusteenKuvaus: valintaperusteId
@@ -91,7 +91,7 @@ const getFormValuesByHakukohde = hakukohde => {
           osoite: get(liitteidenToimitusosoite, 'osoite.osoite') || {},
           postinumero: get(
             liitteidenToimitusosoite,
-            'osoite.postinumeroKoodiUri',
+            'osoite.postinumeroKoodiUri'
           )
             ? {
                 value: liitteidenToimitusosoite.osoite.postinumeroKoodiUri,
@@ -127,7 +127,7 @@ const getFormValuesByHakukohde = hakukohde => {
               },
             },
           };
-        },
+        }
       ),
     },
     hakulomake: {

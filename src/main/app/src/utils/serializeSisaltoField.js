@@ -37,7 +37,7 @@ const serializeSisaltoField = (sisalto, kielivalinta) => {
     if (tyyppi === 'teksti') {
       serializedData = pick(
         isObject(data) ? mapValues(data, serializeEditorState) : {},
-        kielivalinta,
+        kielivalinta
       );
     }
 

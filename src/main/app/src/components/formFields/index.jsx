@@ -41,7 +41,7 @@ export const FormFieldRadio = createComponent(
     ...input,
     checked: !!value,
     ...props,
-  }),
+  })
 );
 
 export const FormFieldRadioGroup = createComponent(RadioGroup, simpleMapProps);
@@ -52,12 +52,12 @@ export const FormFieldCheckbox = createComponent(
     ...input,
     checked: !!value,
     ...props,
-  }),
+  })
 );
 
 export const FormFieldCheckboxGroup = createComponent(
   CheckboxGroup,
-  simpleMapProps,
+  simpleMapProps
 );
 
 export const FormFieldTextarea = createComponent(Textarea, simpleMapProps);
@@ -69,7 +69,7 @@ export const FormFieldSelect = createComponent(
     onBlur: noop,
     ...props,
     id,
-  }),
+  })
 );
 
 export const FormFieldDatePicker = createComponent(DatePicker, simpleMapProps);
@@ -78,7 +78,7 @@ export const FormFieldTimeInput = createComponent(TimeInput, simpleMapProps);
 
 export const FormFieldDateTimeInput = createComponent(
   DateTimeInput,
-  simpleMapProps,
+  simpleMapProps
 );
 
 export const FormFieldEditor = createComponent(Editor, simpleMapProps);
@@ -90,7 +90,7 @@ export const FormFieldYearSelect = createComponent(
     onBlur: noop,
     ...props,
     id,
-  }),
+  })
 );
 
 export const FormFieldImageInput = createComponent(
@@ -99,17 +99,17 @@ export const FormFieldImageInput = createComponent(
     ...input,
     uploadedImageUrl: input.value,
     ...props,
-  }),
+  })
 );
 
 export const FormFieldKieliversiotSelect = createComponent(
   KieliversiotSelect,
-  simpleMapProps,
+  simpleMapProps
 );
 
 export const FormFieldKoulutustyyppiSelect = createComponent(
   KoulutustyyppiSelect,
-  simpleMapProps,
+  simpleMapProps
 );
 
 export const FormFieldSoraKuvausSelect = createComponent(
@@ -119,30 +119,30 @@ export const FormFieldSoraKuvausSelect = createComponent(
     onBlur: noop,
     ...props,
     id,
-  }),
+  })
 );
 
 export const FormFieldLanguageSelect = createComponent(
   LanguageSelect,
-  selectMapProps,
+  selectMapProps
 );
 
 export const FormFieldDatePickerInput = createComponent(
   DatePickerInput,
-  simpleMapProps,
+  simpleMapProps
 );
 
 export const FormFieldPostinumeroSelect = createComponent(
   PostinumeroSelect,
-  selectMapProps,
+  selectMapProps
 );
 
 export const FormFieldAsyncSelect = createComponent(
   AsyncSelect,
-  selectMapProps,
+  selectMapProps
 );
 
 export const FormFieldAsyncKoodistoSelect = createComponent(
   AsyncKoodistoSelect,
-  selectMapProps,
+  selectMapProps
 );

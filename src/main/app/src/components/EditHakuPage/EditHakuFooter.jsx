@@ -1,20 +1,16 @@
 import React, { useCallback, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import Submit from '../Submit';
-import { getTestIdProps } from '../../utils';
-import { useTranslation } from 'react-i18next';
-import Box from '../Box';
 import getHakuByFormValues from '../../utils/getHakuByFormValues';
 import updateHaku from '../../utils/kouta/updateHaku';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import validateHakuForm from '../../utils/validateHakuForm';
 import useOrganisaatio from '../useOrganisaatio';
 import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
-import { HAKU_ROLE } from '../../constants';
+import { HAKU_ROLE, ENTITY } from '../../constants';
+import { FormFooter } from '#/src/components/FormPage';
 
 const EditHakuFooter = ({ haku }) => {
-  const { t } = useTranslation();
   const history = useHistory();
   const { organisaatio } = useOrganisaatio(haku.organisaatioOid);
   const roleBuilder = useAuthorizedUserRoleBuilder();
@@ -40,7 +36,7 @@ const EditHakuFooter = ({ haku }) => {
         },
       });
     },
-    [haku, history],
+    [haku, history]
   );
 
   const { save } = useSaveForm({
@@ -49,18 +45,7 @@ const EditHakuFooter = ({ haku }) => {
     validate: validateHakuForm,
   });
 
-  return (
-    <Box display="flex" justifyContent="flex-end">
-      <Submit
-        disabled={!canUpdate}
-        onClick={save}
-        title={!canUpdate ? t('hakulomake.eiMuokkausOikeutta') : undefined}
-        {...getTestIdProps('tallennaHakuButton')}
-      >
-        {t('yleiset.tallenna')}
-      </Submit>
-    </Box>
-  );
+  return <FormFooter entity={ENTITY.HAKU} save={save} canUpdate={canUpdate} />;
 };
 
 export default EditHakuFooter;

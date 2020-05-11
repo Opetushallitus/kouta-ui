@@ -17,7 +17,7 @@ export const LogoSection = ({ name, label = '' }) => {
 
   const upload = useCallback(
     file => uploadLogo({ httpClient, image: file, apiUrls }),
-    [apiUrls, httpClient],
+    [apiUrls, httpClient]
   );
 
   return (

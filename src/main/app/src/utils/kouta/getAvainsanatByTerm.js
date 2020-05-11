@@ -7,7 +7,7 @@ const getAvainsanatByTerm = async ({
 }) => {
   const { data } = await httpClient.get(
     apiUrls.url('kouta-backend.asiasana-search', term),
-    { params: { limit, kieli: language } },
+    { params: { limit, kieli: language } }
   );
 
   return data;

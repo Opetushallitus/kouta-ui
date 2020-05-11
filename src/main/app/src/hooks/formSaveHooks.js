@@ -45,7 +45,7 @@ export const useSaveForm = ({ form, validate, submit }) => {
         }
       });
     },
-    [form, dispatch],
+    [form, dispatch]
   );
 
   const save = useCallback(async () => {
@@ -95,7 +95,7 @@ export const useSaveForm = ({ form, validate, submit }) => {
 
 export const useSaveToteutus = (
   submit,
-  { koulutustyyppi, koulutus: oldKoulutus },
+  { koulutustyyppi, koulutus: oldKoulutus }
 ) => {
   const httpClient = useHttpClient();
   const apiUrls = useURLs();
@@ -124,7 +124,7 @@ export const useSaveToteutus = (
 
 export const useSaveHakukohde = (
   submit,
-  { haku: oldHaku, toteutus: oldToteutus },
+  { haku: oldHaku, toteutus: oldToteutus }
 ) => {
   const httpClient = useHttpClient();
   const apiUrls = useURLs();

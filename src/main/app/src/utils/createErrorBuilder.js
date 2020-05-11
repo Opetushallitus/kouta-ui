@@ -9,7 +9,7 @@ const exists = value =>
     [
       allFuncs(
         v => _.isArray(v) || _.isString(v),
-        v => v.length === 0,
+        v => v.length === 0
       ),
       _.stubFalse,
     ],
@@ -70,7 +70,7 @@ class ErrorBuilder {
   validateTranslations(
     path,
     languages,
-    { optional, message, validator = v => exists(v) } = {},
+    { optional, message, validator = v => exists(v) } = {}
   ) {
     const errorMessage = message || 'validointivirheet.pakollisetKaannokset';
 
@@ -78,7 +78,7 @@ class ErrorBuilder {
       this.getValue(path),
       languages,
       validator,
-      optional,
+      optional
     );
 
     if (invalidTranslations.length > 0) {

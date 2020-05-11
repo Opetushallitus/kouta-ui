@@ -23,7 +23,7 @@ const getOrganisaatioHierarkia = async ({
     {
       params,
       paramsSerializer: queryString.stringify,
-    },
+    }
   );
 
   return get(data, 'organisaatiot') || [];

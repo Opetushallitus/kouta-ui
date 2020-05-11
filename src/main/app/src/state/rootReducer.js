@@ -19,7 +19,7 @@ export default (reducers = {}) =>
         stateReconciler: hardSet,
         version: 1,
       },
-      organisaatioFavourites,
+      organisaatioFavourites
     ),
     organisaatioSelection: persistReducer(
       {
@@ -28,7 +28,7 @@ export default (reducers = {}) =>
         stateReconciler: hardSet,
         version: 1,
       },
-      organisaatioSelection,
+      organisaatioSelection
     ),
     ...reducers,
   });

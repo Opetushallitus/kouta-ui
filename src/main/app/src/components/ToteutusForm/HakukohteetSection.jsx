@@ -3,7 +3,7 @@ import getToteutuksenHakukohteet from '../../utils/kouta/getToteutuksenHakukohte
 import RelatedEntitiesTable from '../RelatedEntitiesTable';
 import { useTranslation } from 'react-i18next';
 
-export default function({ toteutus, organisaatioOid }) {
+export default function ({ toteutus, organisaatioOid }) {
   const { t } = useTranslation();
 
   return (

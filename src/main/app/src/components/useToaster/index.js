@@ -13,14 +13,14 @@ const useToaster = () => {
     options => {
       return dispatch(openToasterToast(options));
     },
-    [dispatch],
+    [dispatch]
   );
 
   const closeToast = useCallback(
     key => {
       dispatch(closeToasterToast(key));
     },
-    [dispatch],
+    [dispatch]
   );
 
   return {

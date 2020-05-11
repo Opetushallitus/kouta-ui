@@ -22,7 +22,7 @@ const getHakuByFormValues = values => {
     ({ alkaa, paattyy }) => ({
       alkaa: alkaa || null,
       paattyy: paattyy || null,
-    }),
+    })
   );
 
   const {
@@ -45,7 +45,7 @@ const getHakuByFormValues = values => {
   const kohdejoukkoKoodiUri = get(values, 'kohdejoukko.kohdejoukko') || null;
 
   const kohdejoukonTarkenneKoodiUri = isKorkeakoulutusKohdejoukkoKoodiUri(
-    kohdejoukkoKoodiUri,
+    kohdejoukkoKoodiUri
   )
     ? get(values, 'kohdejoukko.tarkenne.value') || null
     : null;
@@ -55,7 +55,7 @@ const getHakuByFormValues = values => {
       ({ alkaa, paattyy }) => ({
         alkaa: alkaa || null,
         paattyy: paattyy || null,
-      }),
+      })
     ),
     yhteyshenkilot: (get(values, 'yhteyshenkilot') || []).map(
       ({ nimi, titteli, puhelinnumero, sahkoposti, verkkosivu }) => ({
@@ -64,7 +64,7 @@ const getHakuByFormValues = values => {
         puhelinnumero: pick(puhelinnumero || {}, kielivalinta),
         wwwSivu: pick(verkkosivu || {}, kielivalinta),
         sahkoposti: pick(sahkoposti || {}, kielivalinta),
-      }),
+      })
     ),
   };
 

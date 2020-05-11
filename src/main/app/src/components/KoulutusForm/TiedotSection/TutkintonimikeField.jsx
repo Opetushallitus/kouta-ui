@@ -8,7 +8,7 @@ import { createFormFieldComponent, selectMapProps } from '../../formFields';
 
 const TutkintonimikeFieldComponent = createFormFieldComponent(
   TutkintonimikeSelect,
-  selectMapProps,
+  selectMapProps
 );
 
 export const TutkintonimikeField = ({ disabled, name }) => {

@@ -14,7 +14,7 @@ const getKoodiLabel = (koodi, language) => {
   const [, postinumero] = koodiUri.split('_');
 
   return `${postinumero} ${upperFirst(
-    getKoodiNimiTranslation(koodi, language).toLowerCase(),
+    getKoodiNimiTranslation(koodi, language).toLowerCase()
   )}`;
 };
 
@@ -36,7 +36,7 @@ const PostinumeroSelect = ({ koodistoVersio = 2, ...props }) => {
     koodi => {
       return getKoodiLabel(koodi, language);
     },
-    [language],
+    [language]
   );
 
   const loadOptions = useCallback(
@@ -65,7 +65,7 @@ const PostinumeroSelect = ({ koodistoVersio = 2, ...props }) => {
 
       return [];
     },
-    [httpClient, apiUrls, language, koodistoVersio],
+    [httpClient, apiUrls, language, koodistoVersio]
   );
 
   return (

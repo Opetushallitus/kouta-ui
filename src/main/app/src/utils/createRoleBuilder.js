@@ -90,11 +90,11 @@ class RoleBuilder {
           return (
             this.hasOrganisaatioRole(OPH_PAAKAYTTAJA_ROLE, oid) ||
             READ_ROLES.map(r =>
-              this.hasOrganisaatioRole(`${role}_${r}`, oid),
+              this.hasOrganisaatioRole(`${role}_${r}`, oid)
             ).some(Boolean)
           );
-        }),
-      ),
+        })
+      )
     );
   }
 
@@ -102,7 +102,7 @@ class RoleBuilder {
     return this.hasOneOfFn(
       rb => (...args) => rb.hasRead(...args),
       roles,
-      organisaatio,
+      organisaatio
     );
   }
 
@@ -110,7 +110,7 @@ class RoleBuilder {
     return this.hasAllFn(
       rb => (...args) => rb.hasRead(...args),
       roles,
-      organisaatio,
+      organisaatio
     );
   }
 
@@ -121,11 +121,11 @@ class RoleBuilder {
           return (
             this.hasOrganisaatioRole(OPH_PAAKAYTTAJA_ROLE, oid) ||
             UPDATE_ROLES.map(r =>
-              this.hasOrganisaatioRole(`${role}_${r}`, oid),
+              this.hasOrganisaatioRole(`${role}_${r}`, oid)
             ).some(Boolean)
           );
-        }),
-      ),
+        })
+      )
     );
   }
 
@@ -133,7 +133,7 @@ class RoleBuilder {
     return this.hasOneOfFn(
       rb => (...args) => rb.hasUpdate(...args),
       roles,
-      organisaatio,
+      organisaatio
     );
   }
 
@@ -141,7 +141,7 @@ class RoleBuilder {
     return this.hasAllFn(
       rb => (...args) => rb.hasUpdate(...args),
       roles,
-      organisaatio,
+      organisaatio
     );
   }
 
@@ -152,11 +152,11 @@ class RoleBuilder {
           return (
             this.hasOrganisaatioRole(OPH_PAAKAYTTAJA_ROLE, oid) ||
             CREATE_ROLES.map(r =>
-              this.hasOrganisaatioRole(`${role}_${r}`, oid),
+              this.hasOrganisaatioRole(`${role}_${r}`, oid)
             ).some(Boolean)
           );
-        }),
-      ),
+        })
+      )
     );
   }
 
@@ -164,7 +164,7 @@ class RoleBuilder {
     return this.hasOneOfFn(
       rb => (...args) => rb.hasCreate(...args),
       roles,
-      organisaatio,
+      organisaatio
     );
   }
 
@@ -172,7 +172,7 @@ class RoleBuilder {
     return this.hasAllFn(
       rb => (...args) => rb.hasCreate(...args),
       roles,
-      organisaatio,
+      organisaatio
     );
   }
 

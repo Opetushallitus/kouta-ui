@@ -170,7 +170,7 @@ const HeaderSelect = ({ editorState, onChange, editorRef }) => {
       onChange(RichUtils.toggleBlockType(editorState, value));
       focusRef(editorRef);
     },
-    [onChange, editorState, editorRef],
+    [onChange, editorState, editorRef]
   );
 
   const value = useMemo(() => {
@@ -227,7 +227,7 @@ const LinkButton = ({ editorState, onChange, editorRef, ...props }) => {
     const contentStateWithEntity = contentState.createEntity(
       'LINK',
       'MUTABLE',
-      { url: link },
+      { url: link }
     );
 
     const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
@@ -240,8 +240,8 @@ const LinkButton = ({ editorState, onChange, editorRef, ...props }) => {
       RichUtils.toggleLink(
         newEditorState,
         newEditorState.getSelection(),
-        entityKey,
-      ),
+        entityKey
+      )
     );
 
     setLink('');
@@ -252,7 +252,7 @@ const LinkButton = ({ editorState, onChange, editorRef, ...props }) => {
     e => {
       setLink(e.target.value);
     },
-    [setLink],
+    [setLink]
   );
 
   const setLinkByEditorState = useCallback(() => {

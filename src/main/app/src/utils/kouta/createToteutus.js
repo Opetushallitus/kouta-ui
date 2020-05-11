@@ -28,7 +28,7 @@ const resolveToteutusNimi = async ({ httpClient, apiUrls, toteutus }) => {
     return targetKoodi
       ? zipObject(
           kielivalinta,
-          kielivalinta.map(k => getKoodiNimiTranslation(targetKoodi, k)),
+          kielivalinta.map(k => getKoodiNimiTranslation(targetKoodi, k))
         )
       : {};
   }
@@ -45,7 +45,7 @@ const createToteutus = async ({ httpClient, apiUrls, toteutus }) => {
 
   const { data } = await httpClient.put(
     apiUrls.url('kouta-backend.toteutus'),
-    toteutusData,
+    toteutusData
   );
 
   return data;

@@ -1,9 +1,9 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { isFunction } from 'lodash';
 
 import { getThemeProp, spacing } from '../../theme';
 import Icon from '../Icon';
-import { isFunction } from '../../utils';
 
 export const TableBase = styled.table`
   width: 100%;
@@ -73,7 +73,7 @@ export const TableHead = ({ children, ...props }) => {
       ? React.cloneElement(child, {
           isTableHead: true,
         })
-      : null,
+      : null
   );
 
   return <TableHeadBase children={childrenProp} {...props} />;
@@ -110,7 +110,7 @@ export const TableRow = ({ children, isTableHead = false, ...props }) => {
           isTableHead,
           ...(isTableHead ? { as: 'th' } : {}),
         })
-      : null,
+      : null
   );
 
   return (

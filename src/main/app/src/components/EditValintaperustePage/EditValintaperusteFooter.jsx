@@ -1,20 +1,16 @@
 import React, { useCallback, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import Submit from '../Submit';
-import { useTranslation } from 'react-i18next';
-import { getTestIdProps } from '../../utils';
-import Box from '../Box';
 import updateValintaperuste from '../../utils/kouta/updateValintaperuste';
 import getValintaperusteByFormValues from '../../utils/getValintaperusteByFormValues';
 import useOrganisaatio from '../useOrganisaatio';
 import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
-import { VALINTAPERUSTE_ROLE } from '../../constants';
+import { VALINTAPERUSTE_ROLE, ENTITY } from '../../constants';
 import { useSaveValintaperuste } from '#/src/hooks/formSaveHooks';
+import { FormFooter } from '#/src/components/FormPage';
 
 const EditValintaperusteFooter = ({ valintaperuste }) => {
   const history = useHistory();
-  const { t } = useTranslation();
   const { organisaatio } = useOrganisaatio(valintaperuste.organisaatioOid);
   const roleBuilder = useAuthorizedUserRoleBuilder();
 
@@ -39,24 +35,17 @@ const EditValintaperusteFooter = ({ valintaperuste }) => {
         },
       });
     },
-    [valintaperuste, history],
+    [valintaperuste, history]
   );
 
   const save = useSaveValintaperuste(submit);
 
   return (
-    <Box display="flex" justifyContent="flex-end">
-      <Submit
-        onClick={save}
-        disabled={!canUpdate}
-        title={
-          !canUpdate ? t('valintaperustelomake.eiMuokkausOikeutta') : undefined
-        }
-        {...getTestIdProps('tallennaValintaperusteButton')}
-      >
-        {t('yleiset.tallenna')}
-      </Submit>
-    </Box>
+    <FormFooter
+      entity={ENTITY.VALINTAPERUSTE}
+      save={save}
+      canUpdate={canUpdate}
+    />
   );
 };
 

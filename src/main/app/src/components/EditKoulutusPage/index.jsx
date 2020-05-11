@@ -18,7 +18,7 @@ import { useTranslation } from 'react-i18next';
 import UrlContext from '#/src/components/UrlContext';
 import useAuthorizedUserRoleBuilder from '#/src/components/useAuthorizedUserRoleBuilder';
 import { HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
-import useFieldValue from '#/src/components/useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 import { Field } from 'redux-form';
 import { FormFieldCheckbox } from '../formFields';
 import getFormValuesByKoulutus from '#/src/utils/getFormValuesByKoulutus';
@@ -32,7 +32,7 @@ const ToggleDraft = () => {
       roleBuilder
         .hasUpdate(HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID)
         .result(),
-    [roleBuilder],
+    [roleBuilder]
   );
   const esikatselu = useFieldValue('esikatselu');
 
@@ -72,7 +72,7 @@ const EditKoulutusPage = props => {
     organisaatioOid &&
       koulutus &&
       history.push(
-        `/organisaatio/${organisaatioOid}/koulutus/${koulutus.oid}/toteutus`,
+        `/organisaatio/${organisaatioOid}/koulutus/${koulutus.oid}/toteutus`
       );
   }, [history, koulutus, organisaatioOid]);
 

@@ -4,3 +4,4 @@ export { default as OrganisaatioRelation } from './OrganisaatioRelation';
 export { default as ToteutusRelation } from './ToteutusRelation';
 export { default as HakuRelation } from './HakuRelation';
 export { RelationInfo, RelationInfoContainer } from './RelationInfo';
+export { default as FormFooter } from './FormFooter';

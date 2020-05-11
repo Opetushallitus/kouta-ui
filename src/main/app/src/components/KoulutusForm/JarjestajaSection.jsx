@@ -18,7 +18,7 @@ const JarjestajatField = createFormFieldComponent(
   ({ input, ...props }) => ({
     ...input,
     ...props,
-  }),
+  })
 );
 
 const OrganizationSection = ({
@@ -39,7 +39,7 @@ const OrganizationSection = ({
     organisaatio => {
       return !roleBuilder.hasUpdate(KOULUTUS_ROLE, organisaatio).result();
     },
-    [roleBuilder],
+    [roleBuilder]
   );
 
   return (

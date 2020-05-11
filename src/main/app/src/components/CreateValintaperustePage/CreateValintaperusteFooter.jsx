@@ -1,16 +1,13 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 
-import { getTestIdProps } from '#/src/utils';
 import getValintaperusteByFormValues from '#/src/utils/getValintaperusteByFormValues';
 import createValintaperuste from '#/src/utils/kouta/createValintaperuste';
-import Flex from '#/src/components/Flex';
-import Submit from '#/src/components/Submit';
 import { useSaveValintaperuste } from '#/src/hooks/formSaveHooks';
+import { FormFooter } from '#/src/components/FormPage';
+import { ENTITY } from '#/src/constants';
 
 const CreateValintaperusteFooter = ({ organisaatioOid }) => {
-  const { t } = useTranslation();
   const history = useHistory();
 
   const submit = useCallback(
@@ -25,24 +22,15 @@ const CreateValintaperusteFooter = ({ organisaatioOid }) => {
       });
 
       history.push(
-        `/organisaatio/${organisaatioOid}/valintaperusteet/${id}/muokkaus`,
+        `/organisaatio/${organisaatioOid}/valintaperusteet/${id}/muokkaus`
       );
     },
-    [organisaatioOid, history],
+    [organisaatioOid, history]
   );
 
   const save = useSaveValintaperuste(submit);
 
-  return (
-    <Flex justifyEnd>
-      <Submit
-        onClick={save}
-        {...getTestIdProps('tallennaValintaperusteButton')}
-      >
-        {t('yleiset.tallenna')}
-      </Submit>
-    </Flex>
-  );
+  return <FormFooter entity={ENTITY.VALINTAPERUSTE} save={save} />;
 };
 
 export default CreateValintaperusteFooter;

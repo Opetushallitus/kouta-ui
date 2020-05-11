@@ -49,11 +49,11 @@ const EditHakuPage = props => {
     ({ toteutusOid }) => {
       if (toteutusOid) {
         history.push(
-          `/organisaatio/${organisaatioOid}/toteutus/${toteutusOid}/haku/${haku.oid}/hakukohde`,
+          `/organisaatio/${organisaatioOid}/toteutus/${toteutusOid}/haku/${haku.oid}/hakukohde`
         );
       }
     },
-    [history, organisaatioOid, haku],
+    [history, organisaatioOid, haku]
   );
 
   return (

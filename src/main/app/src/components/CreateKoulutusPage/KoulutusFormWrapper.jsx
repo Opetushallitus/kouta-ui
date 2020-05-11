@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import KoulutusForm from '../KoulutusForm';
-import useFieldValue from '../useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 import getKoulutusFormConfig from '../../utils/getKoulutusFormConfig';
 import FormConfigContext from '../FormConfigContext';
 

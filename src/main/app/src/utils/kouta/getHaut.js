@@ -3,7 +3,7 @@ const getHaut = async ({ organisaatioOid, httpClient, apiUrls }) => {
     apiUrls.url('kouta-backend.haku-list'),
     {
       params: { organisaatioOid },
-    },
+    }
   );
 
   return data;

@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { get, isFunction } from 'lodash';
 import { produce } from 'immer';
-import Box from '../Box';
-import useFormConfig from '../useFormConfig';
-import useForm from '../useForm';
-import scrollElementIntoView from '../../utils/scrollElementIntoView';
+import Box from '#/src/components/Box';
+import { useFormConfig, useForm } from '#/src/hooks/form';
+import scrollElementIntoView from '#/src/utils/scrollElementIntoView';
 
 const getVisibleChildren = (children, config, configured) => {
   return React.Children.toArray(children).filter(c => {
@@ -45,7 +44,7 @@ const FormCollapseGroup = ({
 
   const visibleChildren = useMemo(
     () => getVisibleChildren(children, config, configured),
-    [children, config, configured],
+    [children, config, configured]
   );
 
   const sectionErrors = useMemo(
@@ -56,20 +55,20 @@ const FormCollapseGroup = ({
         const firstSection = get(child, 'props.section');
         return get(formErrors, firstSection) != null;
       }),
-    [formErrors, visibleChildren],
+    [formErrors, visibleChildren]
   );
 
   // initialize the collapse components' open/closed state so that the initial
   // active collapse is open and others closed
   const [collapsesOpen, setCollapsesOpen] = useState(() =>
-    sectionErrors.map((_, i) => defaultOpen || defaultActiveStep === i),
+    sectionErrors.map((_, i) => defaultOpen || defaultActiveStep === i)
   );
 
   const setCollapseOpen = (collapseIndex, value) => {
     setCollapsesOpen(collapses =>
       produce(collapses, draft => {
         draft[collapseIndex] = value;
-      }),
+      })
     );
   };
 
@@ -82,7 +81,7 @@ const FormCollapseGroup = ({
   useEffect(() => {
     if (errorsNeedAttention) {
       setCollapsesOpen(collapses =>
-        sectionErrors.map((error, i) => error || collapses[i]),
+        sectionErrors.map((error, i) => error || collapses[i])
       );
       const firstErrorIndex = sectionErrors.indexOf(true);
       firstErrorIndex !== -1 && setSectionNeedsFocus(firstErrorIndex);

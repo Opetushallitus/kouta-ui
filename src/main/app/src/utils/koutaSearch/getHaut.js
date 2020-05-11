@@ -7,7 +7,7 @@ const getHaut = async ({ httpClient, apiUrls, ...rest }) => {
     apiUrls.url('kouta-backend.search.haut'),
     {
       params,
-    },
+    }
   );
 
   return data;

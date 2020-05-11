@@ -29,7 +29,7 @@ export const Filters = ({
     value => {
       onTilaChangeArg(value);
     },
-    [onTilaChangeArg],
+    [onTilaChangeArg]
   );
 
   const tilaOptions = useMemo(() => tilaOptionsProp || getDefaultOptions(t), [

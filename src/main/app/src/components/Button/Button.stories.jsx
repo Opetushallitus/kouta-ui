@@ -12,7 +12,7 @@ storiesOf('Button', module).add('Basic', () => {
       Outlined: 'outlined',
       Text: 'text',
     },
-    'contained',
+    'contained'
   );
 
   const color = select(
@@ -23,7 +23,7 @@ storiesOf('Button', module).add('Basic', () => {
       Success: 'success',
       Danger: 'danger',
     },
-    'primary',
+    'primary'
   );
 
   const size = select(
@@ -32,7 +32,7 @@ storiesOf('Button', module).add('Basic', () => {
       Small: 'small',
       Medium: 'medium',
     },
-    'medium',
+    'medium'
   );
 
   const disabled = boolean('Disabled', false);

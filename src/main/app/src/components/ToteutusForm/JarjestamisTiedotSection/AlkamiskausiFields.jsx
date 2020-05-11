@@ -12,7 +12,7 @@ import {
 import Box from '../../Box';
 import useKoodistoOptions from '../../useKoodistoOptions';
 import Spacing from '../../Spacing';
-import useFieldValue from '../../useFieldValue';
+import { useFieldValue } from '#/src/hooks/form';
 
 const TarkkaAlkamiskausiFields = ({ name }) => {
   const { t } = useTranslation();
@@ -71,7 +71,7 @@ const KausiJaVuosiFields = ({ name }) => {
 const AlkamiskausiFields = ({ name }) => {
   const { t } = useTranslation();
   const koulutuksenTarkkaAlkamisaika = useFieldValue(
-    `${name}.koulutuksenTarkkaAlkamisaika`,
+    `${name}.koulutuksenTarkkaAlkamisaika`
   );
   return (
     <Box display="flex" m={-1}>

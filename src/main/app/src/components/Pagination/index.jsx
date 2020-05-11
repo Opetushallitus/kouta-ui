@@ -61,6 +61,7 @@ const Pagination = ({ value = 0, onChange = () => {}, pageCount = 0 }) => {
             options={options}
             value={pageValue}
             menuPlacement="auto"
+            placeholder="0"
             onChange={onSelectChange}
             isClearable={false}
           />

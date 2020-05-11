@@ -50,6 +50,6 @@ const history = createBrowserHistory({ basename: 'kouta' });
       localisation={localisationInstance}
       persistor={persistor}
     />,
-    document.getElementById('root'),
+    document.getElementById('root')
   );
 })();

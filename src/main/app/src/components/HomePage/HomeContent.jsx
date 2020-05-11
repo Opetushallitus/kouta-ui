@@ -1,7 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { compose } from 'lodash/fp';
 import KoulutuksetSection from './KoulutuksetSection';
 import ToteutuksetSection from './ToteutuksetSection';
 import HautSection from './HautSection';
@@ -26,9 +25,9 @@ import {
 
 const HomeContent = ({
   organisaatioOid,
-  history,
   onOrganisaatioChange: onOrganisaatioChangeProp = () => {},
 }) => {
+  const history = useHistory();
   const roleBuilder = useAuthorizedUserRoleBuilder();
 
   const { organisaatio } = useOrganisaatio(organisaatioOid);
@@ -38,7 +37,7 @@ const HomeContent = ({
       history.push(`/?organisaatioOid=${value}`);
       onOrganisaatioChangeProp(value);
     },
-    [history, onOrganisaatioChangeProp],
+    [history, onOrganisaatioChangeProp]
   );
 
   const hasKoulutusWriteRole = useMemo(() => {
@@ -136,9 +135,6 @@ const HomeContent = ({
   );
 };
 
-export default compose(
-  connect(null, dispatch => ({
-    onOrganisaatioChange: oid => dispatch(setOrganisaatio(oid)),
-  })),
-  withRouter,
-)(HomeContent);
+export default connect(null, dispatch => ({
+  onOrganisaatioChange: oid => dispatch(setOrganisaatio(oid)),
+}))(HomeContent);

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import Button from '../Button';
-import useDirty from '#/src/components/useDirty';
-import { withRouter } from 'react-router-dom';
 import NavigationPrompt from 'react-router-navigation-prompt';
-import UnsavedChangesDialog from '../UnsavedChangesDialog';
+import { useBoundFormSelectors } from '#/src/hooks/form';
+import Button from '#/src/components/Button';
+import UnsavedChangesDialog from '#/src/components/UnsavedChangesDialog';
 
 export const Submit = ({
   disabled = false,
@@ -14,7 +13,7 @@ export const Submit = ({
 }) => {
   const [saving, setSaving] = useState(null);
   const release = () => setSaving(null);
-  const isDirty = useDirty();
+  const { isDirty } = useBoundFormSelectors();
   return (
     <>
       <NavigationPrompt
@@ -42,4 +41,4 @@ export const Submit = ({
   );
 };
 
-export default withRouter(Submit);
+export default Submit;

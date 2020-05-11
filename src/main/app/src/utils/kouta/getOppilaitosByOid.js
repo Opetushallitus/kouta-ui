@@ -12,7 +12,7 @@ const getOppilaitosByOid = async ({
       errorNotifier: {
         silent,
       },
-    },
+    }
   );
 
   const lastModified = get(headers, 'x-last-modified') || null;

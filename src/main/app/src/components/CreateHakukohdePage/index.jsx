@@ -83,7 +83,7 @@ const CreateHakukohdePage = props => {
       data &&
       getInitialValues(
         get(data, 'toteutus.nimi'),
-        get(data, 'toteutus.kielivalinta'),
+        get(data, 'toteutus.kielivalinta')
       )
     );
   }, [data]);

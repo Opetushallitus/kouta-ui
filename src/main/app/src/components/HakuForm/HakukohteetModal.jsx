@@ -70,6 +70,7 @@ const HakukohteetModal = ({
               menuPortalTarget={document.body}
               menuPosition="fixed"
               label={t('yleiset.valitseToteutus')}
+              configurable={false}
             />
           </Spacing>
         </FlexItem>

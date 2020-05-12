@@ -66,6 +66,7 @@ const HakukohteetModal = ({
         menuPortalTarget={document.body}
         menuPosition="fixed"
         label={t('yleiset.valitseHaku')}
+        configurable={false}
       />
     </Modal>
   );

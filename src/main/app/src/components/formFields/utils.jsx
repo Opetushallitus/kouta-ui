@@ -17,6 +17,7 @@ export const createComponent = (Component, mapProps) => {
       helperText: helperTextProp,
       meta,
       input: { name },
+      configurable = true,
     } = props;
 
     const { t } = useTranslation();
@@ -45,7 +46,7 @@ export const createComponent = (Component, mapProps) => {
       </>
     );
 
-    return fieldConfig ? (
+    return fieldConfig || !configurable ? (
       <FormControl
         error={isError}
         helperText={<HelperText />}

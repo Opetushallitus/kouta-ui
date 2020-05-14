@@ -1,29 +1,29 @@
 import React, { useCallback } from 'react';
 import { FieldArray, Field } from 'redux-form';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
+import { getTestIdProps } from '#/src/utils';
+import Button from '@opetushallitus/virkailija-ui-components/Button';
+import Icon from '@opetushallitus/virkailija-ui-components/Icon';
 import {
   SortableContainer,
   SortableElement,
   SortableHandle,
-} from '../Sortable';
-
-import TableInput from '../TableInput';
-import Editor from '../Editor';
-import Button from '../Button';
-import Icon from '../Icon';
-import Spacing from '../Spacing';
-import Flex, { FlexItem } from '../Flex';
-import { useTranslation } from 'react-i18next';
-import { getTestIdProps } from '../../utils';
-import { spacing } from '../../theme';
-
-import Dropdown, { DropdownMenu, DropdownMenuItem } from '../Dropdown';
+} from '#/src/components/Sortable';
+import TableInput from '#/src/components/TableInput';
+import Editor from '#/src/components/Editor';
+import Spacing from '#/src/components/Spacing';
+import Flex, { FlexItem } from '#/src/components/Flex';
+import Dropdown, {
+  DropdownMenu,
+  DropdownMenuItem,
+} from '#/src/components/Dropdown';
+import RemoveButton from '#/src/components/RemoveButton';
+import IconButton from '#/src/components/IconButton';
 
 const MoveButton = SortableHandle(props => (
-  <div>
-    <Button as="div" style={{ cursor: 'grab' }} {...props} />
-  </div>
+  <Button as="div" style={{ cursor: 'grab', width: '100%' }} {...props} />
 ));
 
 const InputContainer = styled(FlexItem)`
@@ -34,11 +34,6 @@ const InputContainer = styled(FlexItem)`
 const InputWrapper = styled.div`
   overflow-x: auto;
   overflow-y: hidden;
-`;
-
-const AddIcon = styled(Icon).attrs({ type: 'add' })`
-  font-size: 1rem;
-  margin-left: ${spacing(0.5)};
 `;
 
 const AddContentDropdown = ({ onAdd }) => {
@@ -70,15 +65,15 @@ const AddContentDropdown = ({ onAdd }) => {
     <Dropdown overlay={overlay}>
       {({ onToggle, ref }) => (
         <div ref={ref} style={{ display: 'inline-block' }}>
-          <Button
-            onClick={onToggle}
-            type="button"
+          <IconButton
+            iconType="add"
             color="primary"
             variant="text"
+            onClick={onToggle}
             {...getTestIdProps('sisaltoMenuToggle')}
           >
-            {t('valintaperustelomake.lisaaSisaltoa')} <AddIcon />
-          </Button>
+            {t('valintaperustelomake.lisaaSisaltoa')}
+          </IconButton>
         </div>
       )}
     </Dropdown>
@@ -136,24 +131,11 @@ const FieldsSortableContainer = SortableContainer(({ fields, language, t }) => {
               </InputContainer>
               <FlexItem grow={0} paddingLeft={2}>
                 <Spacing marginBottom={2}>
-                  <MoveButton
-                    variant="outlined"
-                    color="primary"
-                    type="button"
-                    fullWidth
-                  >
+                  <MoveButton variant="outlined" color="primary" type="button">
                     <Icon type="drag_indicator" /> {t('yleiset.siirra')}
                   </MoveButton>
                 </Spacing>
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  type="button"
-                  fullWidth
-                  onClick={() => fields.remove(index)}
-                >
-                  {t('yleiset.poista')}
-                </Button>
+                <RemoveButton onClick={() => fields.remove(index)} />
               </FlexItem>
             </Flex>
           </FieldSortableElement>

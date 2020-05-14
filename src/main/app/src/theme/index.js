@@ -24,7 +24,6 @@ export const createTheme = () => {
     colors: {
       mainBackground: '#f5f5f5',
       grayLighten6: '#f0f3f7',
-      secondaryBackground: '#fafafa',
       border: theme.colors.divider,
       text: {
         dark: theme.colors.text.heading,

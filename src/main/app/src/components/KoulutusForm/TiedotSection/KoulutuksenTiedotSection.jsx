@@ -234,7 +234,7 @@ const KoulutusInfo = ({
 };
 
 const StyledKoulutusInfo = styled(KoulutusInfo)`
-  background-color: ${getThemeProp('colors.secondaryBackground')};
+  background-color: ${getThemeProp('colors.grayLighten6')};
   padding: ${({ theme }) => theme.spacing.unit * 4}px;
   line-height: 23px;
 `;

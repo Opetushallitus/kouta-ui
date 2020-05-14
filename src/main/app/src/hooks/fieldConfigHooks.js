@@ -3,19 +3,21 @@ import _ from 'lodash';
 import FormConfigSectionContext from '#/src/components/FormConfigSectionContext';
 import { useFormConfig, useForm } from '#/src/hooks/form';
 
-const findFieldConfig = (fieldConfigs = [], name = '') => {
-  const trimmedFieldName = name.replace(/\[\d\]/, '');
-  const fieldNameParts = _.split(trimmedFieldName, '.').filter(
-    part => !/#\d+$/.test(part)
-  );
+const findFieldConfig = (fieldConfigs = [], name) => {
   let configFound = null;
-  let nameCandidate = null;
-  _.forEach(fieldNameParts, value => {
-    nameCandidate = nameCandidate ? `${nameCandidate}.${value}` : value;
-    if (fieldConfigs[nameCandidate]) {
-      configFound = fieldConfigs[nameCandidate];
-    }
-  });
+  if (name) {
+    const trimmedFieldName = name.replace(/\[\d\]/, '');
+    const fieldNameParts = _.split(trimmedFieldName, '.').filter(
+      part => !/#\d+$/.test(part)
+    );
+    let nameCandidate = null;
+    _.forEach(fieldNameParts, value => {
+      nameCandidate = nameCandidate ? `${nameCandidate}.${value}` : value;
+      if (fieldConfigs[nameCandidate]) {
+        configFound = fieldConfigs[nameCandidate];
+      }
+    });
+  }
   return configFound;
 };
 

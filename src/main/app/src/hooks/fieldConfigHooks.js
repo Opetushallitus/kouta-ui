@@ -6,7 +6,7 @@ import { useFormConfig, useForm } from '#/src/hooks/form';
 const findFieldConfig = (fieldConfigs = [], name) => {
   let configFound = null;
   if (name) {
-    const trimmedFieldName = name.replace(/\[\d\]/, '');
+    const trimmedFieldName = name.replace(/\[\d\]/gi, '');
     const fieldNameParts = _.split(trimmedFieldName, '.').filter(
       part => !/#\d+$/.test(part)
     );

@@ -4,6 +4,18 @@ import _ from 'lodash';
 
 const KOULUTUSTYYPPI_DEFAULT = 'default';
 
+const prefixIfDotField = (field = '', prefix = '') =>
+  _.first(field) === '.' ? `${prefix}${field}` : field;
+
+const fieldsToParts = (fields = {}) =>
+  _.transform(
+    fields,
+    (result, value, key) => {
+      result.push({ ...value, field: key });
+    },
+    []
+  );
+
 /**
  * Class for creating different form configurations based on 'koulutustyyppi'. A form
  * config consists of sections that can be configured to contain fields and fragments.
@@ -68,7 +80,7 @@ class FormConfigBuilder {
 
   registerField(section, field, koulutustyypit, validate, meta = {}, required) {
     // Prefix field name with section, if it starts with a dot.
-    const name = _.first(field) === '.' ? `${section}${field}` : field;
+    const name = prefixIfDotField(field, section);
     return this.registerPart('field', section, {
       name,
       koulutustyypit,
@@ -77,46 +89,54 @@ class FormConfigBuilder {
       required,
     });
   }
+  registerSection({
+    section,
+    koulutustyypit: parentKTs,
+    parts = [],
+    fields: fieldsProp = {},
+    fragment,
+    field: fieldProp,
+    validate,
+    meta,
+    required,
+    isRoot = true,
+  }) {
+    const fields = fieldsToParts(fieldsProp);
 
-  registerSections(sectionTree) {
-    sectionTree.forEach(
-      ({
+    fragment &&
+      this.registerFragment({
         section,
-        field,
-        fragment,
+        name: fragment,
+        field: fieldProp,
         koulutustyypit: parentKTs,
-        parts = [],
-        ...rest
-      }) => {
-        [...parts, ...[{ field, fragment, ...rest }]].forEach(
-          ({
-            field,
-            fragment,
-            koulutustyypit = parentKTs,
-            validate,
-            meta,
-            required,
-          }) => {
-            fragment &&
-              this.registerFragment({
-                section,
-                name: fragment,
-                field,
-                koulutustyypit,
-              });
-            field &&
-              this.registerField(
-                section,
-                field,
-                koulutustyypit,
-                validate,
-                meta,
-                required
-              );
-          }
-        );
+      });
+
+    if (isRoot || (_.isEmpty(fields) && _.isEmpty(parts) && fieldProp)) {
+      this.registerField(
+        section,
+        fieldProp,
+        parentKTs,
+        validate,
+        meta,
+        required
+      );
+    }
+
+    [...parts, ...fields].forEach(
+      ({ koulutustyypit = parentKTs, field, ...rest }) => {
+        this.registerSection({
+          section,
+          koulutustyypit,
+          field: isRoot ? field : `${fieldProp || ''}${field || ''}`,
+          isRoot: false,
+          ...rest,
+        });
       }
     );
+  }
+
+  registerSections(sectionTree) {
+    sectionTree.forEach(props => this.registerSection(props));
     return this;
   }
 

@@ -73,43 +73,39 @@ const config = createFormConfigBuilder().registerSections([
   {
     section: 'kuvaus',
     koulutustyypit: KOULUTUSTYYPIT,
-    parts: [
-      {
-        field: '.nimi',
+    fields: {
+      '.nimi': {
         validate: (eb, values) =>
           eb.validateTranslations('kuvaus.nimi', getKielivalinta(values)),
         required: true,
       },
-      {
-        field: '.kuvaus',
-      },
-    ],
+      '.kuvaus': true,
+    },
   },
   {
     section: 'valintatavat',
     koulutustyypit: koulutustyypitWithValintatapa,
-    field: 'valintatavat',
-    validate: validateIfJulkaistu((eb, values) =>
-      eb
-        .validateArrayMinLength('valintatavat', 1, {
-          isFieldArray: true,
-        })
-        .validateArray('valintatavat', eb =>
+    fields: {
+      valintatavat: {
+        validate: validateIfJulkaistu((eb, values) =>
           eb
-            .validateExistence('tapa')
-            .validateTranslations('nimi', getKielivalinta(values))
-        )
-    ),
-    parts: [
-      {
-        field: '.tapa',
+            .validateArrayMinLength('valintatavat', 1, {
+              isFieldArray: true,
+            })
+            .validateArray('valintatavat', eb =>
+              eb
+                .validateExistence('tapa')
+                .validateTranslations('nimi', getKielivalinta(values))
+            )
+        ),
+      },
+      '.tapa': {
         required: true,
       },
-      {
-        field: '.nimi',
+      '.nimi': {
         required: true,
       },
-    ],
+    },
   },
   {
     section: 'soraKuvaus',
@@ -136,11 +132,39 @@ const config = createFormConfigBuilder().registerSections([
   },
   {
     section: 'valintakoe',
-    field: 'valintakoe',
     koulutustyypit: KOULUTUSTYYPIT,
     validate: validateIfJulkaistu((eb, values) =>
       validateValintakokeet(eb, values)
     ),
+    fields: {
+      valintakoe: true,
+      '.kokeetTaiLisanaytot': {
+        fields: {
+          '.tyyppi': {
+            required: true,
+          },
+          '.ohjeetEnnakkovalmistautumiseen': {
+            required: true,
+          },
+          '.tilaisuudet': {
+            fields: {
+              '.alkaa': {
+                required: true,
+              },
+              '.paattyy': {
+                required: true,
+              },
+              '.osoite': {
+                required: true,
+              },
+              '.postinumero': {
+                required: true,
+              },
+            },
+          },
+        },
+      },
+    },
   },
 ]);
 

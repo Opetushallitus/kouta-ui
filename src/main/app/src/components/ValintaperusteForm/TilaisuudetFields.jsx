@@ -4,7 +4,6 @@ import { Field } from 'redux-form';
 import { useTranslation } from 'react-i18next';
 import Box from '@opetushallitus/virkailija-ui-components/Box';
 import { getTestIdProps } from '#/src/utils';
-import Flex, { FlexItem } from '#/src/components/Flex';
 import FieldArrayList from '#/src/components/FieldArrayList';
 import DateTimeRange from '#/src/components/DateTimeRange';
 import { spacing } from '#/src/theme';
@@ -32,24 +31,21 @@ export const TilaisuusFields = ({ field, language, index, removeSelf }) => {
         {t('valintaperustelomake.tilaisuusTitle', { index: index + 1 })}
       </Heading>
       <SubSectionBox>
-        <Flex justifyBetween>
-          <FlexItem maxWidth="500px">
-            <DateTimeRange
-              startProps={{
-                name: `${field}.alkaa`,
-                label: t('valintaperustelomake.tilaisuusAlkaa'),
-              }}
-              endProps={{
-                name: `${field}.paattyy`,
-                label: t('valintaperustelomake.tilaisuusPaattyy'),
-              }}
-            />
-          </FlexItem>
-          <FlexItem marginLeft={2}>
+        <Box display="flex" justifyContent="between">
+          <DateTimeRange
+            startProps={{
+              name: `${field}.alkaa`,
+              label: t('valintaperustelomake.tilaisuusAlkaa'),
+            }}
+            endProps={{
+              name: `${field}.paattyy`,
+              label: t('valintaperustelomake.tilaisuusPaattyy'),
+            }}
+          />
+          <Box mt={4} ml={4}>
             <RemoveButton onClick={removeSelf} />
-          </FlexItem>
-        </Flex>
-
+          </Box>
+        </Box>
         <Box mb={2} {...getTestIdProps('jarjestamispaikka')}>
           <Field
             name={`${field}.jarjestamispaikka`}
@@ -71,14 +67,13 @@ export const TilaisuusFields = ({ field, language, index, removeSelf }) => {
             label={t('yleiset.postinumero')}
           />
         </Box>
-
-        <div {...getTestIdProps('tilaisuudenLisatiedot')}>
+        <Box {...getTestIdProps('tilaisuudenLisatiedot')}>
           <Field
             name={`${field}.lisatiedot.${language}`}
             component={FormFieldTextarea}
             label={t('valintaperustelomake.tilaisuudenLisatiedot')}
           />
-        </div>
+        </Box>
       </SubSectionBox>
     </>
   );
@@ -101,7 +96,7 @@ export const TilaisuudetFields = ({ fields, language, t, meta }) => (
         />
       )}
     </FieldArrayList>
-    <Box marginTop={4}>
+    <Box mt={4} mb={4}>
       <IconButton
         variant="outlined"
         type="button"

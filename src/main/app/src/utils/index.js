@@ -1,6 +1,7 @@
 import dateFnsformatDate from 'date-fns/format';
 import memoizee from 'memoizee';
 import _ from 'lodash';
+import _fp from 'lodash/fp';
 import stripTags from 'striptags';
 import { ALLOWED_HTML_TAGS } from '#/src/constants';
 
@@ -181,3 +182,13 @@ export const ifAny = value => predicate =>
 export const otherwise = () => true;
 
 export const sanitizeHTML = html => stripTags(html, ALLOWED_HTML_TAGS);
+
+export const parseKeyVal = memoize(
+  _fp.compose(
+    _fp.fromPairs,
+    _fp.map(keyVal => keyVal.split('=')),
+    _fp.split(';')
+  )
+);
+
+export const getCookie = name => _.get(parseKeyVal(document.cookie), name);

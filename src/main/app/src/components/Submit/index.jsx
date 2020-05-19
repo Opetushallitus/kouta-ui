@@ -21,7 +21,14 @@ export const Submit = ({
           const samePath =
             (nextLoc && nextLoc.pathname) ===
             (currentLoc && currentLoc.pathname);
-          const considerPreventReload = !saving && isDirty();
+          const dirty = isDirty();
+          const considerPreventReload = !saving && dirty;
+          if (dirty) {
+            console.log('Reloading because is dirty!');
+          }
+          if (!samePath) {
+            console.log('Reloading because is path is about to change!');
+          }
           return considerPreventReload && !samePath;
         }}
       >

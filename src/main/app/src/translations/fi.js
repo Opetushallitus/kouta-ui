@@ -571,12 +571,33 @@ export default {
     valintaperusteenTila: 'Valintaperusteen tila',
     avaaSoraKuvaus: 'Avaa SORA-kuvaus',
     valintakoe: 'Valintakoe',
+    kokeetTaiLisanaytot: 'Kokeet ja lisänäytöt',
     eiMuokkausOikeutta:
       'Käyttäjälläsi ei ole oikeuksia muokata tätä valintaperustekuvausta',
     pohjavalintaInfo:
       'Voit halutessasi käyttää aiemmin luotuja valintaperusteita uuden lomakkeen esitäytettynä pohjana.',
     julkisuusKuvaus:
       'Valitse näkyykö valintaperuste muille koulutustoimijoille. Jos valintaperuste on julkinen, muut koulutustoimijat voivat käyttää sitä pohjana luodessaan uusia.',
+    koeTaiLisanaytto: {
+      title: 'Koe tai lisänäyttö {{index}}',
+      yleisKuvaus: 'Yleiskuvaus kokeista ja lisänäytöistä',
+      tyyppi: 'Kokeen tai lisänäytön tyyppi',
+      hakijalleNakyvaNimi: 'Hakijalle näkyvä nimi',
+      tietoaHakijalle: 'Tietoa kokeesta tai lisänäytöstä hakijalle',
+      liittyyEnnakkovalmistautumista:
+        'Kokeeseen tai lisänäyttöön liittyy ennakkovalmistautumista',
+      materiaaliJaValmistautumisohjeet:
+        'Materiaali- ja valmistautumisohjeet hakijalle',
+      erityisjarjestelytMahdollisia:
+        'Kokeeseen tai lisänäyttöön on mahdollista ilmoittaa erityisjärjestelyn tarpeesta',
+      ohjeetErityisjarjestelyihin: 'Ohjeet yksilöllisiin erityisjärjestelyihin',
+      lisaa: 'Lisää koe tai lisänäyttö',
+    },
+    tilaisuudenLisatiedot: 'Tilaisuuden lisätiedot',
+    jarjestamispaikka: 'Järjestämispaikka',
+    tilaisuusTitle: 'Tilaisuus {{index}}',
+    tilaisuusAlkaa: 'Tilaisuus alkaa',
+    tilaisuusPaattyy: 'Tilaisuus päättyy',
   },
   soraKuvauslomake: {
     soraKuvauksenTiedot: 'SORA-kuvauksen tiedot',

@@ -12,7 +12,7 @@ import ValintatapaSection from './ValintatapaSection';
 import KuvausSection from './KuvausSection';
 import SoraKuvausSection from './SoraKuvausSection';
 import PerustiedotSection from './PerustiedotSection';
-import ValintakoeSection from './ValintakoeSection';
+import KokeetTaiLisanaytotSection from './KokeetTaiLisanaytotSection';
 
 const ValintaperusteForm = ({
   steps = true,
@@ -67,9 +67,9 @@ const ValintaperusteForm = ({
 
       <FormCollapse
         section="valintakoe"
-        header={t('valintaperustelomake.valintakoe')}
+        header={t('valintaperustelomake.kokeetTaiLisanaytot')}
         languages={languages}
-        Component={ValintakoeSection}
+        Component={KokeetTaiLisanaytotSection}
       />
 
       <FormCollapse

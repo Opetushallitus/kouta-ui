@@ -9,13 +9,7 @@ import FormHelperTextMulti from '#/src/components/FormHelperTextMulti';
 import RemoveButton from '../RemoveButton';
 
 const Item = styled.div`
-  ${({ isFirst }) =>
-    !isFirst &&
-    css`
-      padding-top: ${spacing(4)};
-    `}
-
-  padding-bottom: ${spacing(4)}; 
+  padding-bottom: ${spacing(4)};
 
   ${({ isLast, hasDivider }) =>
     isLast &&

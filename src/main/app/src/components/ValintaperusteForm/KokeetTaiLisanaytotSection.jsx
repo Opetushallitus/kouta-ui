@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { FormFieldEditor } from '#/src/components/formFields';
 import FieldGroup from '#/src/components/FieldGroup';
 import KokeetTaiLisanaytotFields from './KokeetTaiLisanaytotFields';
+import { getTestIdProps } from '#/src/utils';
+import Box from '#/src/components/Box';
 
 const TRANSLATION_BASE = 'valintaperustelomake.koeTaiLisanaytto';
 
@@ -15,7 +17,9 @@ export const KokeetTaiLisanaytotSection = ({
   return (
     <>
       <FieldGroup title={t(`${TRANSLATION_BASE}.yleisKuvaus`)}>
-        <Field name={`${name}.yleisKuvaus`} component={FormFieldEditor} />
+        <Box ml={12} mr={12} {...getTestIdProps('yleisKuvaus')}>
+          <Field name={`${name}.yleisKuvaus`} component={FormFieldEditor} />
+        </Box>
       </FieldGroup>
       <FieldArray
         name={`${name}.kokeetTaiLisanaytot`}

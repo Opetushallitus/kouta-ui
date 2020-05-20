@@ -32,10 +32,10 @@ export const KoeTaiLisanayttoFields = ({
   const { t } = useTranslation();
   const { options } = useKoodistoOptions({ koodisto: 'valintakokeentyyppi' });
 
-  const liittyyEnnakkoValmistautumista = useFieldValue(
+  const liittyyEnnakkovalmistautumista = useFieldValue(
     `${field}.liittyyEnnakkovalmistautumista`
   );
-  const erityisjarjestelyMahdollisia = useFieldValue(
+  const erityisjarjestelytMahdollisia = useFieldValue(
     `${field}.erityisjarjestelytMahdollisia`
   );
 
@@ -58,7 +58,7 @@ export const KoeTaiLisanayttoFields = ({
               </Box>
             </FlexItem>
             <FlexItem grow={1} ml={4}>
-              <Box>
+              <Box {...getTestIdProps('hakijalleNakyvaNimi')}>
                 <Field
                   name={`${field}.nimi`}
                   component={FormFieldInput}
@@ -67,14 +67,14 @@ export const KoeTaiLisanayttoFields = ({
               </Box>
             </FlexItem>
           </Flex>
-          <Box mb={2}>
+          <Box mb={2} {...getTestIdProps('tietoaHakijalle')}>
             <Field
-              name={`${field}.tietoaKokeestaHakijalle`}
+              name={`${field}.tietoaHakijalle`}
               component={FormFieldEditor}
               label={t(`${translationBase}.tietoaHakijalle`)}
             />
           </Box>
-          <Box mb={2}>
+          <Box mb={2} {...getTestIdProps('liittyyEnnakkovalmistautumista')}>
             <Field
               name={`${field}.liittyyEnnakkovalmistautumista`}
               component={FormFieldCheckbox}
@@ -82,16 +82,16 @@ export const KoeTaiLisanayttoFields = ({
               {t(`${translationBase}.liittyyEnnakkovalmistautumista`)}
             </Field>
           </Box>
-          <Box mb={2}>
-            {liittyyEnnakkoValmistautumista && (
+          {liittyyEnnakkovalmistautumista && (
+            <Box mb={2} {...getTestIdProps('ohjeetEnnakkovalmistautumiseen')}>
               <Field
                 name={`${field}.ohjeetEnnakkovalmistautumiseen`}
                 component={FormFieldEditor}
                 label={t(`${translationBase}.materiaaliJaValmistautumisohjeet`)}
               />
-            )}
-          </Box>
-          <Box mb={2}>
+            </Box>
+          )}
+          <Box mb={2} {...getTestIdProps('erityisjarjestelytMahdollisia')}>
             <Field
               name={`${field}.erityisjarjestelytMahdollisia`}
               component={FormFieldCheckbox}
@@ -99,15 +99,15 @@ export const KoeTaiLisanayttoFields = ({
               {t(`${translationBase}.erityisjarjestelytMahdollisia`)}
             </Field>
           </Box>
-          <Box mb={2}>
-            {erityisjarjestelyMahdollisia && (
+          {erityisjarjestelytMahdollisia && (
+            <Box mb={2} {...getTestIdProps('ohjeetErityisjarjestelyihin')}>
               <Field
                 name={`${field}.ohjeetErityisjarjestelyihin`}
                 component={FormFieldEditor}
                 label={t(`${translationBase}.ohjeetErityisjarjestelyihin`)}
               />
-            )}
-          </Box>
+            </Box>
+          )}
           <FieldArray
             name={`${field}.tilaisuudet`}
             component={TilaisuudetFields}
@@ -131,7 +131,7 @@ const KokeetTaiLisanaytotFields = ({
   translationBase,
 }) => {
   return (
-    <>
+    <div {...getTestIdProps('kokeetTaiLisanaytot')}>
       <FieldArrayList
         fields={fields}
         meta={meta}
@@ -161,7 +161,7 @@ const KokeetTaiLisanaytotFields = ({
           {t(`${translationBase}.lisaa`)}
         </IconButton>
       </Flex>
-    </>
+    </div>
   );
 };
 

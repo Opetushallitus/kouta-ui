@@ -67,7 +67,7 @@ export const TilaisuusFields = ({ field, language, index, removeSelf }) => {
             label={t('yleiset.postinumero')}
           />
         </Box>
-        <Box {...getTestIdProps('tilaisuudenLisatiedot')}>
+        <Box {...getTestIdProps('lisatiedot')}>
           <Field
             name={`${field}.lisatiedot.${language}`}
             component={FormFieldTextarea}

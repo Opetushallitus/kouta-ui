@@ -1,9 +1,9 @@
-import { isArray, isObject, mapValues } from 'lodash';
+import _ from 'lodash';
 import parseEditorState from './draft/parseEditorState';
-import getValintakoeFieldsValues from './getValintakoeFieldsValues';
+import getKokeetTaiLisanaytotValues from './getKokeetTaiLisanaytotValues';
 
 const parseSisalto = ({ sisalto }) => {
-  if (!isArray(sisalto)) {
+  if (!_.isArray(sisalto)) {
     return [];
   }
 
@@ -11,7 +11,7 @@ const parseSisalto = ({ sisalto }) => {
     if (tyyppi === 'teksti') {
       return {
         tyyppi,
-        data: isObject(data) ? mapValues(data, parseEditorState) : {},
+        data: _.isObject(data) ? _.mapValues(data, parseEditorState) : {},
       };
     }
 
@@ -46,7 +46,7 @@ const getFormValuesByValintaperuste = valintaperuste => {
     julkinen: onkoJulkinen,
     kuvaus: {
       nimi,
-      kuvaus: mapValues(kuvaus || {}, parseEditorState),
+      kuvaus: _.mapValues(kuvaus || {}, parseEditorState),
     },
     valintatavat: (valintatavat || []).map(
       ({
@@ -72,7 +72,10 @@ const getFormValuesByValintaperuste = valintaperuste => {
           value: sorakuvausId,
         }
       : null,
-    valintakoe: getValintakoeFieldsValues(valintakokeet),
+    valintakokeidenYleiskuvaus: parseEditorState(
+      _.get(valintakokeet, 'yleisKuvaus')
+    ),
+    valintakokeet: getKokeetTaiLisanaytotValues(valintakokeet),
   };
 };
 

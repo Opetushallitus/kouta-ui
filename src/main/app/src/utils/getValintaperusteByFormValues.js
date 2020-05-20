@@ -2,7 +2,7 @@ import _ from 'lodash';
 import produce from 'immer';
 import { isNumeric } from './index';
 import serializeEditorState from './draft/serializeEditorState';
-import getValintakoeFieldsData from './getValintakoeFieldsData';
+import getKokeetTaiLisanaytotData from './getKokeetTaiLisanaytotData';
 
 const getArrayValue = (values, key) => {
   const valueCandidate = _.get(values, key);
@@ -102,8 +102,12 @@ const getValintaperusteByFormValues = values => {
     })
   );
 
-  const valintakokeet = getValintakoeFieldsData({
-    valintakoeValues: _.get(values, 'valintakoe'),
+  const valintakokeidenYleiskuvaus = serializeEditorState(
+    _.get(values, 'valintakokeet.yleisKuvaus')
+  );
+
+  const valintakokeet = getKokeetTaiLisanaytotData({
+    valintakoeValues: _.get(values, 'valintakokeet'),
     kielivalinta,
   });
 
@@ -120,6 +124,7 @@ const getValintaperusteByFormValues = values => {
     nimi,
     koulutustyyppi,
     onkoJulkinen,
+    valintakokeidenYleiskuvaus,
     valintakokeet,
     sorakuvausId,
     metadata: {

@@ -20,23 +20,20 @@ const koulutustyypitWithValintatapa = [
 ];
 
 const validateValintakokeet = (errorBuilder, values) => {
-  const valintakoeTyypit = get(values, 'valintakoe.tyypit');
+  const valintakokeet = get(values, 'valintakokeet.kokeetTaiLisanaytot');
   const kieliversiot = getKielivalinta(values);
-
   return reduce(
-    valintakoeTyypit,
-    (ebAcc, { value: tyyppi }) =>
-      ebAcc
-        .validateArrayMinLength(`valintakoe.tilaisuudet.${tyyppi}`, 1, {
-          isFieldArray: true,
-        })
-        .validateArray(`valintakoe.tilaisuudet.${tyyppi}`, eb =>
+    valintakokeet,
+    (ebAcc, value, index) =>
+      ebAcc.validateArray(
+        `valintakokeet.kokeetTaiLisanaytot[${index}].tilaisuudet`,
+        eb =>
           eb
             .validateTranslations('osoite', kieliversiot)
             .validateExistence('postinumero')
             .validateExistence('alkaa')
             .validateExistence('paattyy')
-        ),
+      ),
     errorBuilder
   );
 };
@@ -131,13 +128,13 @@ const config = createFormConfigBuilder().registerSections([
       ])(eb.validateExistence('tila'), values),
   },
   {
-    section: 'valintakoe',
+    section: 'valintakokeet',
+    field: 'valintakokeet',
     koulutustyypit: KOULUTUSTYYPIT,
     validate: validateIfJulkaistu((eb, values) =>
       validateValintakokeet(eb, values)
     ),
     fields: {
-      valintakoe: true,
       '.kokeetTaiLisanaytot': {
         fields: {
           '.tyyppi': {

@@ -88,14 +88,21 @@ exports[`createValintaperusteForm > should be able to create valintaperuste #0`]
   "tila": "julkaistu",
   "valintakokeet": [
     {
+      "erityisjarjestelytMahdollisia": true,
+      "liittyyEnnakkovalmistautumista": true,
+      "nimi":  "nimi",
+      "ohjeetEnnakkovalmistautumiseen": "<p>ohjeet ennakkovalmistautumiseen</p>",
+      "ohjeetErityisjarjestelyihin": "<p>ohjeet erityisjärjestelyihin</p>",
+      "tietoja": "<p>Tietoa hakijalle</p>",
       "tilaisuudet": [
         {
           "aika": {
             "alkaa": "2019-04-02T10:45",
             "paattyy": "2019-04-02T19:00"
           },
+          "jarjestamispaikka": "paikka",
           "lisatietoja": {
-            "fi": "lisatietoja"
+            "fi": "lisatiedot"
           },
           "osoite": {
             "osoite": {
@@ -107,5 +114,6 @@ exports[`createValintaperusteForm > should be able to create valintaperuste #0`]
       ],
       "tyyppiKoodiUri": "valintakokeentyyppi_1#1"
     }
-  ]
+  ],
+  "valintakokeidenYleiskuvaus": "<p>Valintakokeiden kuvaus</p>"
 };

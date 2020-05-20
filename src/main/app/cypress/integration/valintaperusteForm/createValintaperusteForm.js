@@ -7,10 +7,11 @@ import {
   getCheckbox,
   chooseKieliversiotLanguages,
   fillKoulutustyyppiSelect,
-  fillValintakoeFields,
   jatka,
   getByTestId,
   paste,
+  fillAsyncSelect,
+  fillDateTimeInput,
 } from '#/cypress/utils';
 import valintaperuste from '#/cypress/data/valintaperuste';
 import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils';
@@ -66,45 +67,45 @@ const lisaaSisaltoa = tyyppi => {
 };
 
 const fillValintakokeetSection = () => {
-  cy.getByTestId('valintakokeetSection').within(() => {
-    cy.getByTestId('yleisKuvaus').within(() => {
+  getByTestId('valintakokeetSection').within(() => {
+    getByTestId('yleisKuvaus').within(() => {
       typeToEditor('Valintakokeiden kuvaus', cy);
     });
 
-    cy.getByTestId('kokeetTaiLisanaytot').within(() => {
-      cy.getByTestId('lisaaKoeTaiLisanayttoButton').click({ force: true });
-      cy.getByTestId('kokeenTaiLisanaytonTyyppi').within(() => {
+    getByTestId('kokeetTaiLisanaytot').within(() => {
+      getByTestId('lisaaKoeTaiLisanayttoButton').click({ force: true });
+      getByTestId('kokeenTaiLisanaytonTyyppi').within(() => {
         selectOption('valintakokeentyyppi_1', cy);
       });
-      cy.getByTestId('hakijalleNakyvaNimi').find('input').paste('nimi');
+      getByTestId('hakijalleNakyvaNimi').find('input').pipe(paste('nimi'));
 
-      cy.getByTestId('tietoaHakijalle').within(() => {
+      getByTestId('tietoaHakijalle').within(() => {
         typeToEditor('Tietoa hakijalle', cy);
       });
 
-      cy.getByTestId('liittyyEnnakkovalmistautumista').within(() => {
+      getByTestId('liittyyEnnakkovalmistautumista').within(() => {
         getCheckbox(null, cy).check({ force: true });
       });
 
-      cy.getByTestId('ohjeetEnnakkovalmistautumiseen').within(() => {
+      getByTestId('ohjeetEnnakkovalmistautumiseen').within(() => {
         typeToEditor('ohjeet ennakkovalmistautumiseen', cy);
       });
 
-      cy.getByTestId('erityisjarjestelytMahdollisia').within(() => {
+      getByTestId('erityisjarjestelytMahdollisia').within(() => {
         getCheckbox(null, cy).check({ force: true });
       });
 
-      cy.getByTestId('ohjeetErityisjarjestelyihin').within(() => {
+      getByTestId('ohjeetErityisjarjestelyihin').within(() => {
         typeToEditor('ohjeet erityisjärjestelyihin', cy);
       });
 
-      cy.getByTestId('tietoaHakijalle').find('input').paste('tietoa');
-      cy.getByTestId('lisaaTilaisuusButton').click({ force: true });
-      cy.getByTestId('osoite').find('input').paste('osoite');
-      cy.getByTestId('postinumero').within(() => {
+      getByTestId('tietoaHakijalle').find('input').pipe(paste('tietoa'));
+      getByTestId('lisaaTilaisuusButton').click({ force: true });
+      getByTestId('osoite').find('input').pipe(paste('osoite'));
+      getByTestId('postinumero').within(() => {
         fillAsyncSelect('0', '0 Posti_0');
       });
-      cy.getByTestId('alkaa').within(() => {
+      getByTestId('alkaa').within(() => {
         fillDateTimeInput({
           date: '02.04.2019',
           time: '10:45',
@@ -112,7 +113,7 @@ const fillValintakokeetSection = () => {
         });
       });
 
-      cy.getByTestId('paattyy').within(() => {
+      getByTestId('paattyy').within(() => {
         fillDateTimeInput({
           date: '02.04.2019',
           time: '19:00',
@@ -120,8 +121,8 @@ const fillValintakokeetSection = () => {
         });
       });
 
-      cy.getByTestId('jarjestamispaikka').find('input').paste('paikka');
-      cy.getByTestId('lisatiedot').find('textarea').paste('lisatiedot');
+      getByTestId('jarjestamispaikka').find('input').pipe(paste('paikka'));
+      getByTestId('lisatiedot').find('textarea').pipe(paste('lisatiedot'));
     });
     jatka();
   });

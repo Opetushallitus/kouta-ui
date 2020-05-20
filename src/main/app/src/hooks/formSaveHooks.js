@@ -55,26 +55,20 @@ export const useSaveForm = ({ form, validate, submit }) => {
     startSubmit();
 
     let errors = null;
+
     try {
       errors = await validate(enhancedValues);
+      if (_.isEmpty(errors)) {
+        await submit({ values: enhancedValues, httpClient, apiUrls }).then(() =>
+          stopSubmit({ successToast: true })
+        );
+      } else {
+        stopSubmit({ errors, errorToast: true });
+      }
     } catch (e) {
       console.error(e);
-    }
-
-    if (!_.isEmpty(errors)) {
-      stopSubmit({ errors, errorToast: true });
-
-      return;
-    }
-
-    try {
-      await submit({ values: enhancedValues, httpClient, apiUrls });
-    } catch (e) {
       stopSubmit({ errorToast: true });
-      return;
     }
-
-    stopSubmit({ successToast: true });
   }, [
     store,
     form,

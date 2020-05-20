@@ -59,6 +59,17 @@ export const stubValintaperusteFormRoutes = ({ organisaatioOid }) => {
   stubKoodistoRoute({ koodisto: 'kieli' });
   stubKoodistoRoute({ koodisto: 'osaamistausta' });
   stubKoodistoRoute({ koodisto: 'valintakokeentyyppi' });
+
+  cy.route({
+    method: 'GET',
+    url: '**/sorakuvaus/1',
+    response: merge(soraKuvaus(), {
+      nimi: { fi: `Sora-kuvaus 1` },
+      id: 1,
+      tila: 'julkaistu',
+    }),
+  });
+
   stubKoodiRoute(createKoodi({ koodisto: 'posti', versio: 2 }));
   stubKoodiRoute(
     createKoodi({ koodisto: 'posti', koodiArvo: '00350', versio: 1 })

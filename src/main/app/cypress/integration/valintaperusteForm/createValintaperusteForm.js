@@ -65,9 +65,64 @@ const lisaaSisaltoa = tyyppi => {
     });
 };
 
-const fillValintakoeSection = () => {
-  getByTestId('valintakoeSection').within(() => {
-    fillValintakoeFields();
+const fillValintakokeetSection = () => {
+  cy.getByTestId('valintakokeetSection').within(() => {
+    cy.getByTestId('yleisKuvaus').within(() => {
+      typeToEditor('Valintakokeiden kuvaus', cy);
+    });
+
+    cy.getByTestId('kokeetTaiLisanaytot').within(() => {
+      cy.getByTestId('lisaaKoeTaiLisanayttoButton').click({ force: true });
+      cy.getByTestId('kokeenTaiLisanaytonTyyppi').within(() => {
+        selectOption('valintakokeentyyppi_1', cy);
+      });
+      cy.getByTestId('hakijalleNakyvaNimi').find('input').paste('nimi');
+
+      cy.getByTestId('tietoaHakijalle').within(() => {
+        typeToEditor('Tietoa hakijalle', cy);
+      });
+
+      cy.getByTestId('liittyyEnnakkovalmistautumista').within(() => {
+        getCheckbox(null, cy).check({ force: true });
+      });
+
+      cy.getByTestId('ohjeetEnnakkovalmistautumiseen').within(() => {
+        typeToEditor('ohjeet ennakkovalmistautumiseen', cy);
+      });
+
+      cy.getByTestId('erityisjarjestelytMahdollisia').within(() => {
+        getCheckbox(null, cy).check({ force: true });
+      });
+
+      cy.getByTestId('ohjeetErityisjarjestelyihin').within(() => {
+        typeToEditor('ohjeet erityisjärjestelyihin', cy);
+      });
+
+      cy.getByTestId('tietoaHakijalle').find('input').paste('tietoa');
+      cy.getByTestId('lisaaTilaisuusButton').click({ force: true });
+      cy.getByTestId('osoite').find('input').paste('osoite');
+      cy.getByTestId('postinumero').within(() => {
+        fillAsyncSelect('0', '0 Posti_0');
+      });
+      cy.getByTestId('alkaa').within(() => {
+        fillDateTimeInput({
+          date: '02.04.2019',
+          time: '10:45',
+          cy,
+        });
+      });
+
+      cy.getByTestId('paattyy').within(() => {
+        fillDateTimeInput({
+          date: '02.04.2019',
+          time: '19:00',
+          cy,
+        });
+      });
+
+      cy.getByTestId('jarjestamispaikka').find('input').paste('paikka');
+      cy.getByTestId('lisatiedot').find('textarea').paste('lisatiedot');
+    });
     jatka();
   });
 };
@@ -185,7 +240,7 @@ describe('createValintaperusteForm', () => {
     fillPohjaSection();
     fillKuvausSection();
     fillValintatapaSection();
-    fillValintakoeSection();
+    fillValintakokeetSection();
     fillSoraKuvausSection();
     fillJulkisuusSection();
     fillTilaSection();

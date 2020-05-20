@@ -48,8 +48,16 @@ export default ({ tyyppi = 'amm' } = {}) => {
     muokkaaja: '1.2.246.562.24.62301161440',
     kielivalinta: ['fi', 'sv'],
     modified: '2019-04-03T13:56',
+    valintakokeidenYleiskuvaus: 'Valintakokeiden kuvaus',
     valintakokeet: [
       {
+        nimi: 'Kokeen nimi',
+        tietoa: 'Tietoa kokeesta',
+        liittyyEnnakkovalmistautumista: true,
+        ohjeetEnnakkovalmistautumiseen:
+          '<p>Ohjeet ennakkovalmistautumiseen</p>',
+        erityisjarjestelytMahdollisia: true,
+        ohjeetErityisjarjestelyihin: '<p>Ohjeet erityisjärjestelyihin</p>',
         tyyppiKoodiUri: 'tyyppi_1#1',
         tilaisuudet: [
           {
@@ -65,6 +73,7 @@ export default ({ tyyppi = 'amm' } = {}) => {
               fi: 'fi lisatietoja',
               sv: 'sv lisatietoja',
             },
+            jarjestamispaikka: 'Auditorio A1',
           },
         ],
       },

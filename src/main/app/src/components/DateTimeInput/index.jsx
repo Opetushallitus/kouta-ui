@@ -138,6 +138,8 @@ export const DateTimeInput = ({
   return (
     <Flex {...getTestIdProps('DateTimeInput')}>
       <FlexItem
+        basis="280px"
+        shrink={0}
         grow={1}
         paddingRight={1}
         {...getTestIdProps('DateTimeInput__Date')}
@@ -155,6 +157,8 @@ export const DateTimeInput = ({
         </FormControl>
       </FlexItem>
       <FlexItem
+        basis="178px"
+        shrink={0}
         grow={1}
         paddingLeft={1}
         {...getTestIdProps('DateTimeInput__Time')}

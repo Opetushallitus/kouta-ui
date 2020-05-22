@@ -1,7 +1,7 @@
 import { merge } from 'lodash';
 
-import organisaatio from './data/organisaatio';
-import { stubOppijanumerorekisteriHenkiloRoute } from './utils';
+import organisaatio from '#/cypress/data/organisaatio';
+import { stubOppijanumerorekisteriHenkiloRoute } from '#/cypress/utils';
 
 export const stubSoraKuvausFormRoutes = ({ cy, organisaatioOid }) => {
   cy.server();

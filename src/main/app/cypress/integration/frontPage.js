@@ -1,7 +1,7 @@
 import { merge } from 'lodash';
 
-import organisaatio from '../data/organisaatio';
-import organisaatioHierarkia from '../data/organisaatioHierarkia';
+import organisaatio from '#/cypress/data/organisaatio';
+import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
 
 const koutaSearchItem = () => ({
   modified: '2019-02-20T07:55',

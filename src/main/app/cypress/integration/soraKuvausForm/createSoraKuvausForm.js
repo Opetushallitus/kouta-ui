@@ -4,14 +4,11 @@ import {
   getCheckbox,
   fillKoulutustyyppiSelect,
   getRadio,
-} from '../../utils';
+  jatka,
+} from '#/cypress/utils';
 
-import createSoraKuvaus from '../../data/soraKuvaus';
-import { stubSoraKuvausFormRoutes } from '../../soraKuvausFormUtils';
-
-const jatka = () => {
-  cy.getByTestId('jatkaButton').click({ force: true });
-};
+import createSoraKuvaus from '#/cypress/data/soraKuvaus';
+import { stubSoraKuvausFormRoutes } from '#/cypress/soraKuvausFormUtils';
 
 const fillKoulutustyyppiSection = () => {
   cy.getByTestId('koulutustyyppiSection').within(() => {

@@ -7,13 +7,10 @@ import {
   fillKoulutustyyppiSelect,
   getRadio,
   fillAsyncSelect,
-} from '../../utils';
+  jatka,
+} from '#/cypress/utils';
 
-import { stubKoulutusFormRoutes } from '../../koulutusFormUtils';
-
-const jatka = () => {
-  cy.getByTestId('jatkaButton').click({ force: true });
-};
+import { stubKoulutusFormRoutes } from '#/cypress/koulutusFormUtils';
 
 const fillTilaSection = (tila = 'julkaistu') => {
   cy.getByTestId('tilaSection').within(() => {
@@ -30,14 +27,14 @@ const fillKoulutustyyppiSection = path => {
 
 const fillPohjaSection = () => {
   cy.getByTestId('pohjaSection').within(() => {
-    cy.getByTestId('jatkaButton').click({ force: true });
+    jatka();
   });
 };
 
 const fillKieliversiotSection = () => {
   cy.getByTestId('kieliversiotSection').within(() => {
     chooseKieliversiotLanguages(['fi'], cy);
-    cy.getByTestId('jatkaButton').click({ force: true });
+    jatka();
   });
 };
 
@@ -55,13 +52,13 @@ const fillLisatiedotSection = () => {
       cy.get('textarea').paste('koulutuksenlisatiedot_0 kuvaus');
     });
 
-    cy.getByTestId('jatkaButton').click({ force: true });
+    jatka();
   });
 };
 
 const fillTeemakuvaSection = () => {
   cy.getByTestId('teemakuvaSection').within(() => {
-    cy.getByTestId('jatkaButton').click({ force: true });
+    jatka();
   });
 };
 
@@ -125,11 +122,11 @@ describe('createKoulutusForm', () => {
         fillAsyncSelect('1', 'koulutus_0');
       });
 
-      cy.getByTestId('jatkaButton').click({ force: true });
+      jatka();
     });
 
     cy.getByTestId('descriptionSection').within(() => {
-      cy.getByTestId('jatkaButton').click({ force: true });
+      jatka();
     });
 
     fillLisatiedotSection();
@@ -235,11 +232,11 @@ describe('createKoulutusForm', () => {
         fillAsyncSelect('0', 'koulutus_0');
       });
 
-      cy.getByTestId('jatkaButton').click({ force: true });
+      jatka();
     });
 
     cy.getByTestId('descriptionSection').within(() => {
-      cy.getByTestId('jatkaButton').click({ force: true });
+      jatka();
     });
 
     fillLisatiedotSection();

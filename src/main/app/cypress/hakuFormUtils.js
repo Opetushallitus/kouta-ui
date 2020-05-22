@@ -1,8 +1,8 @@
 import { merge } from 'lodash';
-import createKoodisto from './data/koodisto';
+import createKoodisto from '#/cypress/data/koodisto';
 
-import organisaatio from './data/organisaatio';
-import createKoodi from './data/koodi';
+import organisaatio from '#/cypress/data/organisaatio';
+import createKoodi from '#/cypress/data/koodi';
 
 import {
   stubKoodistoRoute,

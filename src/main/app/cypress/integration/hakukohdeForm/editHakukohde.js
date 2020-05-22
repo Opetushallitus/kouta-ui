@@ -1,5 +1,4 @@
 import { getByTestId, chooseKieliversiotLanguages } from '#/cypress/utils';
-
 import { prepareTest } from '#/cypress/hakukohdeFormUtils';
 
 const fillKieliversiotSection = cy => {

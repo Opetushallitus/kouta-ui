@@ -4,10 +4,10 @@ import {
   stubKoodistoRoute,
   stubOppijanumerorekisteriHenkiloRoute,
   stubEPerusteetByKoulutuskoodiRoute,
-} from './utils';
-import organisaatioHierarkia from './data/organisaatioHierarkia';
-import organisaatio from './data/organisaatio';
-import koodisto from './data/koodisto';
+} from '#/cypress/utils';
+import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
+import organisaatio from '#/cypress/data/organisaatio';
+import koodisto from '#/cypress/data/koodisto';
 
 export const stubKoulutusFormRoutes = ({ cy, organisaatioOid }) => {
   cy.server();

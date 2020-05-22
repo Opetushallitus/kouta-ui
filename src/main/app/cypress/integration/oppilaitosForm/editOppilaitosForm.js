@@ -1,6 +1,6 @@
-import createOppilaitos from '../../data/oppilaitos';
-import { chooseKieliversiotLanguages } from '../../utils';
-import { stubOppilaitosFormRoutes } from '../../oppilaitosFormUtils';
+import createOppilaitos from '#/cypress/data/oppilaitos';
+import { chooseKieliversiotLanguages } from '#/cypress/utils';
+import { stubOppilaitosFormRoutes } from '#/cypress/oppilaitosFormUtils';
 
 const fillKieliversiotSection = () => {
   cy.getByTestId('kieliversiotSection').within(() => {

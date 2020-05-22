@@ -5,15 +5,15 @@ import {
   stubHakemuspalveluLomakkeetRoute,
   stubOppijanumerorekisteriHenkiloRoute,
   stubKoodiRoute,
-} from './utils';
+} from '#/cypress/utils';
 
-import organisaatio from './data/organisaatio';
-import haku from './data/haku';
-import hakukohde from './data/hakukohde';
-import createKoodi from './data/koodi';
-import koulutus from './data/koulutus';
-import toteutus from './data/toteutus';
-import valintaperuste from './data/valintaperuste';
+import organisaatio from '#/cypress/data/organisaatio';
+import haku from '#/cypress/data/haku';
+import hakukohde from '#/cypress/data/hakukohde';
+import createKoodi from '#/cypress/data/koodi';
+import koulutus from '#/cypress/data/koulutus';
+import toteutus from '#/cypress/data/toteutus';
+import valintaperuste from '#/cypress/data/valintaperuste';
 
 export const prepareTest = ({
   tyyppi,

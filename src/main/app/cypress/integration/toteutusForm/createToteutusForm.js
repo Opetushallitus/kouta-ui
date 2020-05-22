@@ -8,14 +8,11 @@ import {
   selectOption,
   fillAsyncSelect,
   fillTreeSelect,
-} from '../../utils';
+  jatka,
+} from '#/cypress/utils';
 
-import koulutus from '../../data/koulutus';
-import { stubToteutusFormRoutes } from '../../toteutusFormUtils';
-
-const jatka = () => {
-  cy.getByTestId('jatkaButton').click({ force: true });
-};
+import koulutus from '#/cypress/data/koulutus';
+import { stubToteutusFormRoutes } from '#/cypress/toteutusFormUtils';
 
 const fillTilaSection = (tila = 'julkaistu') => {
   cy.getByTestId('tilaSection').within(() => {

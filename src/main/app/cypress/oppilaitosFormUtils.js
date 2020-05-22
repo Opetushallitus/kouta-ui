@@ -1,9 +1,9 @@
 import { merge } from 'lodash';
 
-import createKoodi from './data/koodi';
-import createOrganisaatio from './data/organisaatio';
-import createOrganisaatioHierarkia from './data/organisaatioHierarkia';
-import { stubKoodiRoute, stubKoodistoRoute } from './utils';
+import createKoodi from '#/cypress/data/koodi';
+import createOrganisaatio from '#/cypress/data/organisaatio';
+import createOrganisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
+import { stubKoodiRoute, stubKoodistoRoute } from '#/cypress/utils';
 
 export const stubOppilaitosFormRoutes = ({ organisaatioOid }) => {
   stubKoodiRoute(createKoodi({ koodisto: 'posti', versio: 2 }));

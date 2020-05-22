@@ -1,9 +1,9 @@
 import { merge } from 'lodash';
 
-import { chooseKieliversiotLanguages } from '../../utils';
-import { stubSoraKuvausFormRoutes } from '../../soraKuvausFormUtils';
+import { chooseKieliversiotLanguages } from '#/cypress/utils';
+import { stubSoraKuvausFormRoutes } from '#/cypress/soraKuvausFormUtils';
 
-import createSoraKuvaus from '../../data/soraKuvaus';
+import createSoraKuvaus from '#/cypress/data/soraKuvaus';
 
 const fillKieliversiotSection = () => {
   cy.getByTestId('kieliversiotSection').within(() => {

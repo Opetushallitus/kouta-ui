@@ -7,12 +7,10 @@ import {
   fillValintakoeFields,
   fillAsyncSelect,
   typeToEditor,
+  jatka,
 } from '#/cypress/utils';
-import { prepareTest } from '#/cypress/hakukohdeFormUtils';
 
-const jatka = () => {
-  cy.getByTestId('jatkaButton').click({ force: true });
-};
+import { prepareTest } from '#/cypress/hakukohdeFormUtils';
 
 const lisaa = () => {
   cy.getByTestId('lisaaButton').click({ force: true });

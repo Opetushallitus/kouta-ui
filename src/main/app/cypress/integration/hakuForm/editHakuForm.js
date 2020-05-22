@@ -1,9 +1,7 @@
 import { merge } from 'lodash';
-
-import { getByTestId, chooseKieliversiotLanguages } from '../../utils';
-import { stubHakuFormRoutes } from '../../hakuFormUtils';
-
-import haku from '../../data/haku';
+import { getByTestId, chooseKieliversiotLanguages } from '#/cypress/utils';
+import { stubHakuFormRoutes } from '#/cypress/hakuFormUtils';
+import haku from '#/cypress/data/haku';
 
 const fillKieliversiotSection = cy => {
   getByTestId('kieliversiotSection', cy).within(() => {

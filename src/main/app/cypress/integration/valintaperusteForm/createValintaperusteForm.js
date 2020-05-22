@@ -8,14 +8,10 @@ import {
   chooseKieliversiotLanguages,
   fillKoulutustyyppiSelect,
   fillValintakoeFields,
+  jatka,
 } from '#/cypress/utils';
-
 import valintaperuste from '#/cypress/data/valintaperuste';
 import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils';
-
-const jatka = () => {
-  cy.getByTestId('jatkaButton').click({ force: true });
-};
 
 const tallenna = () => {
   cy.getByTestId('tallennaValintaperusteButton').click({

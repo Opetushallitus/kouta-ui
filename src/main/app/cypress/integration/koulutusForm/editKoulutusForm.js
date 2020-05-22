@@ -1,8 +1,8 @@
 import { merge } from 'lodash';
 
-import { chooseKieliversiotLanguages } from '../../utils';
-import koulutus from '../../data/koulutus';
-import { stubKoulutusFormRoutes } from '../../koulutusFormUtils';
+import { chooseKieliversiotLanguages } from '#/cypress/utils';
+import koulutus from '#/cypress/data/koulutus';
+import { stubKoulutusFormRoutes } from '#/cypress/koulutusFormUtils';
 
 const fillKieliversiotSection = () => {
   cy.getByTestId('kieliversiotSection').within(() => {

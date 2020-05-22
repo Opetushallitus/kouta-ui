@@ -1,4 +1,4 @@
-import koodisto from './data/koodisto';
+import koodisto from '#/cypress/data/koodisto';
 
 export const getByTestId = (testId, cy) => {
   return cy.get(`[data-testid="${testId}"]`);
@@ -233,3 +233,10 @@ export const stubCommonRoutes = () => {
   stubKoutaBackendLoginRoute({ cy });
   stubKoutaBackendSessionRoute({ cy });
 };
+
+export const jatka = () => cy.getByTestId('jatkaButton').click({ force: true });
+
+export const OPH_TEST_ORGANISAATIO_OID = '1.2.246.562.10.48587687889';
+
+export const isStubbed =
+  !process.env.CYPRESS_BACKEND || process.env.CYPRESS_BACKEND === 'stubs';

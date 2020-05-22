@@ -1,8 +1,8 @@
 import { merge } from 'lodash';
 
-import { chooseKieliversiotLanguages } from '../../utils';
-import valintaperuste from '../../data/valintaperuste';
-import { stubValintaperusteFormRoutes } from '../../valintaperusteFormUtils';
+import { chooseKieliversiotLanguages } from '#/cypress/utils';
+import valintaperuste from '#/cypress/data/valintaperuste';
+import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils';
 
 const fillKieliversiotSection = () => {
   cy.getByTestId('kieliversiotSection').within(() => {

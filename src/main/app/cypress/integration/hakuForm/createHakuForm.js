@@ -5,13 +5,10 @@ import {
   chooseKieliversiotLanguages,
   selectOption,
   fillYhteyshenkilotFields,
-} from '../../utils';
+  jatka,
+} from '#/cypress/utils';
 
-import { stubHakuFormRoutes } from '../../hakuFormUtils';
-
-const jatka = () => {
-  cy.getByTestId('jatkaButton').click({ force: true });
-};
+import { stubHakuFormRoutes } from '#/cypress/hakuFormUtils';
 
 const fillPohjaSection = () => {
   cy.getByTestId('pohjaSection').within(() => {

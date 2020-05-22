@@ -4,13 +4,10 @@ import {
   selectOption,
   typeToEditor,
   getRadio,
-} from '../../utils';
+  jatka,
+} from '#/cypress/utils';
 
-import { stubOppilaitosFormRoutes } from '../../oppilaitosFormUtils';
-
-const jatka = () => {
-  cy.getByTestId('jatkaButton').click({ force: true });
-};
+import { stubOppilaitosFormRoutes } from '#/cypress/oppilaitosFormUtils';
 
 const fillTilaSection = (tila = 'julkaistu') => {
   cy.getByTestId('tilaSection').within(() => {
@@ -21,7 +18,7 @@ const fillTilaSection = (tila = 'julkaistu') => {
 const fillKieliversiotSection = () => {
   cy.getByTestId('kieliversiotSection').within(() => {
     chooseKieliversiotLanguages(['fi'], cy);
-    cy.getByTestId('jatkaButton').click({ force: true });
+    jatka();
   });
 };
 

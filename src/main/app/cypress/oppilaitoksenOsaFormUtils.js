@@ -1,8 +1,8 @@
 import { merge } from 'lodash';
 
-import createKoodi from './data/koodi';
-import createOrganisaatio from './data/organisaatio';
-import { stubKoodiRoute } from './utils';
+import createKoodi from '#/cypress/data/koodi';
+import createOrganisaatio from '#/cypress/data/organisaatio';
+import { stubKoodiRoute } from '#/cypress/utils';
 
 export const stubOppilaitosFormRoutes = ({ organisaatioOid }) => {
   stubKoodiRoute(createKoodi({ koodisto: 'posti', versio: 2 }));

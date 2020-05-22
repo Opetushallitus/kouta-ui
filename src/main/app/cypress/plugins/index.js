@@ -4,13 +4,8 @@ const alias = require('../../webpack-alias');
 
 module.exports = on => {
   on('task', {
-    readFileMaybe(filename) {
-      if (fs.existsSync(filename)) {
-        return fs.readFileSync(filename, 'utf8');
-      }
-
-      return null;
-    },
+    readFileMaybe: filename =>
+      fs.existsSync(filename) ? fs.readFileSync(filename, 'utf8') : null,
   });
   on(
     'file:preprocessor',

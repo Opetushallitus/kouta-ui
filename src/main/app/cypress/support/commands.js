@@ -13,7 +13,21 @@ Cypress.Commands.add(
   },
   (element, value) => {
     element.focus();
-    fireEvent.change(element[0], { target: { value } });
+    try {
+      fireEvent.change(element[0], { target: { value } });
+    } catch (e) {
+      cy.get(element).then($destination => {
+        const pasteEvent = Object.assign(
+          new Event('paste', { bubbles: true, cancelable: true }),
+          {
+            clipboardData: {
+              getData: (type = 'text') => value,
+            },
+          }
+        );
+        $destination[0].dispatchEvent(pasteEvent);
+      });
+    }
   }
 );
 

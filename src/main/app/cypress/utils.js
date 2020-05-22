@@ -54,7 +54,7 @@ export const stubLokalisaatioRoute = ({ cy }) => {
 
 export const typeToEditor = (value, cy) => {
   cy.get('.Editor__').within(() => {
-    cy.get('[contenteditable="true"]').type(value);
+    cy.get('[contenteditable="true"]').paste(value);
   });
 };
 
@@ -225,4 +225,11 @@ export const stubEPerusteetByKoulutuskoodiRoute = () => {
       ],
     },
   });
+};
+
+export const stubCommonRoutes = () => {
+  stubLokalisaatioRoute({ cy });
+  stubKayttoOikeusMeRoute({ cy });
+  stubKoutaBackendLoginRoute({ cy });
+  stubKoutaBackendSessionRoute({ cy });
 };

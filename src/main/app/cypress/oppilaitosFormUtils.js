@@ -3,12 +3,17 @@ import { merge } from 'lodash';
 import createKoodi from '#/cypress/data/koodi';
 import createOrganisaatio from '#/cypress/data/organisaatio';
 import createOrganisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
-import { stubKoodiRoute, stubKoodistoRoute } from '#/cypress/utils';
+import {
+  stubKoodiRoute,
+  stubKoodistoRoute,
+  stubCommonRoutes,
+} from '#/cypress/utils';
 
 export const stubOppilaitosFormRoutes = ({ organisaatioOid }) => {
+  stubCommonRoutes();
   stubKoodiRoute(createKoodi({ koodisto: 'posti', versio: 2 }));
 
-  stubKoodistoRoute({ koodisto: 'organisaationkuvaustiedot', cy });
+  stubKoodistoRoute({ koodisto: 'organisaationkuvaustiedot' });
 
   cy.route({
     method: 'POST',

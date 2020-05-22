@@ -5,14 +5,14 @@ import koulutus from '#/cypress/data/koulutus';
 import toteutus from '#/cypress/data/toteutus';
 import { stubToteutusFormRoutes } from '#/cypress/toteutusFormUtils';
 
-const fillKieliversiotSection = cy => {
-  getByTestId('kieliversiotSection', cy).within(() => {
-    chooseKieliversiotLanguages(['fi'], cy);
+const fillKieliversiotSection = () => {
+  getByTestId('kieliversiotSection').within(() => {
+    chooseKieliversiotLanguages(['fi']);
   });
 };
 
-const tallenna = cy => {
-  getByTestId('tallennaToteutusButton', cy).click();
+const tallenna = () => {
+  getByTestId('tallennaToteutusButton').click();
 };
 
 const prepareTest = tyyppi => {
@@ -44,7 +44,7 @@ const prepareTest = tyyppi => {
 
   cy.server();
 
-  stubToteutusFormRoutes({ cy, organisaatioOid, perusteId });
+  stubToteutusFormRoutes({ organisaatioOid, perusteId });
 
   cy.route({
     method: 'GET',
@@ -78,8 +78,8 @@ describe('editToteutusForm', () => {
       },
     }).as('updateAmmToteutusResponse');
 
-    fillKieliversiotSection(cy);
-    tallenna(cy);
+    fillKieliversiotSection();
+    tallenna();
 
     cy.wait('@updateAmmToteutusResponse').then(({ request }) => {
       cy.wrap(request.body).snapshot();
@@ -97,8 +97,8 @@ describe('editToteutusForm', () => {
       },
     }).as('updateYoToteutusResponse');
 
-    fillKieliversiotSection(cy);
-    tallenna(cy);
+    fillKieliversiotSection();
+    tallenna();
 
     cy.wait('@updateYoToteutusResponse').then(({ request }) => {
       cy.wrap(request.body).snapshot();
@@ -116,8 +116,8 @@ describe('editToteutusForm', () => {
       },
     }).as('updateLkToteutusResponse');
 
-    fillKieliversiotSection(cy);
-    tallenna(cy);
+    fillKieliversiotSection();
+    tallenna();
 
     cy.wait('@updateLkToteutusResponse').then(({ request }) => {
       cy.wrap(request.body).snapshot();

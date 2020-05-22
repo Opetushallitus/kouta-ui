@@ -1,18 +1,18 @@
 import { merge } from 'lodash';
 
-import { chooseKieliversiotLanguages } from '#/cypress/utils';
+import { chooseKieliversiotLanguages, getByTestId } from '#/cypress/utils';
 import { stubSoraKuvausFormRoutes } from '#/cypress/soraKuvausFormUtils';
 
 import createSoraKuvaus from '#/cypress/data/soraKuvaus';
 
 const fillKieliversiotSection = () => {
-  cy.getByTestId('kieliversiotSection').within(() => {
-    chooseKieliversiotLanguages(['fi'], cy);
+  getByTestId('kieliversiotSection').within(() => {
+    chooseKieliversiotLanguages(['fi']);
   });
 };
 
 const tallenna = () => {
-  cy.getByTestId('tallennaSoraKuvausButton').click();
+  getByTestId('tallennaSoraKuvausButton').click();
 };
 
 describe('editSoraKuvausForm', () => {
@@ -21,8 +21,7 @@ describe('editSoraKuvausForm', () => {
 
   beforeEach(() => {
     cy.server();
-
-    stubSoraKuvausFormRoutes({ organisaatioOid, cy });
+    stubSoraKuvausFormRoutes({ organisaatioOid });
 
     cy.route({
       method: 'GET',

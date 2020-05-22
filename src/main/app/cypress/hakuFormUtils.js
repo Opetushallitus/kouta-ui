@@ -9,10 +9,11 @@ import {
   stubHakemuspalveluLomakkeetRoute,
   stubOppijanumerorekisteriHenkiloRoute,
   stubKoodiRoute,
+  stubCommonRoutes,
 } from './utils';
 
-export const stubHakuFormRoutes = ({ cy, organisaatioOid }) => {
-  cy.server();
+export const stubHakuFormRoutes = ({ organisaatioOid }) => {
+  stubCommonRoutes();
 
   cy.route({
     method: 'GET',
@@ -32,11 +33,11 @@ export const stubHakuFormRoutes = ({ cy, organisaatioOid }) => {
     ],
   });
 
-  stubKoodistoRoute({ koodisto: 'haunkohdejoukontarkenne', cy });
-  stubKoodistoRoute({ koodisto: 'kausi', cy });
-  stubKoodistoRoute({ koodisto: 'opetuspaikkakk', cy });
-  stubKoodistoRoute({ koodisto: 'kausi', cy });
-  stubKoodistoRoute({ koodisto: 'posti', cy });
+  stubKoodistoRoute({ koodisto: 'haunkohdejoukontarkenne' });
+  stubKoodistoRoute({ koodisto: 'kausi' });
+  stubKoodistoRoute({ koodisto: 'opetuspaikkakk' });
+  stubKoodistoRoute({ koodisto: 'kausi' });
+  stubKoodistoRoute({ koodisto: 'posti' });
   stubKoodiRoute(createKoodi({ koodisto: 'posti', versio: 2 }));
 
   cy.route({
@@ -77,6 +78,6 @@ export const stubHakuFormRoutes = ({ cy, organisaatioOid }) => {
     response: [],
   });
 
-  stubHakemuspalveluLomakkeetRoute({ cy });
-  stubOppijanumerorekisteriHenkiloRoute({ cy });
+  stubHakemuspalveluLomakkeetRoute();
+  stubOppijanumerorekisteriHenkiloRoute();
 };

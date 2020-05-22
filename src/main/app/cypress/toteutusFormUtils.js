@@ -4,13 +4,14 @@ import {
   stubKoodistoRoute,
   stubOppijanumerorekisteriHenkiloRoute,
   stubEPerusteetByKoulutuskoodiRoute,
+  stubCommonRoutes,
 } from '#/cypress/utils';
 import organisaatio from '#/cypress/data/organisaatio';
 import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
 import koodisto from '#/cypress/data/koodisto';
 
-export const stubToteutusFormRoutes = ({ cy, organisaatioOid, perusteId }) => {
-  cy.server();
+export const stubToteutusFormRoutes = ({ organisaatioOid, perusteId }) => {
+  stubCommonRoutes();
 
   cy.route({
     method: 'GET',
@@ -42,14 +43,14 @@ export const stubToteutusFormRoutes = ({ cy, organisaatioOid, perusteId }) => {
     ],
   });
 
-  stubKoodistoRoute({ koodisto: 'koulutuksenlisatiedot', cy });
-  stubKoodistoRoute({ koodisto: 'oppilaitoksenopetuskieli', cy });
-  stubKoodistoRoute({ koodisto: 'opetusaikakk', cy });
-  stubKoodistoRoute({ koodisto: 'opetuspaikkakk', cy });
-  stubKoodistoRoute({ koodisto: 'kausi', cy });
-  stubKoodistoRoute({ koodisto: 'kieli', cy });
-  stubKoodistoRoute({ koodisto: 'lukiodiplomit', cy });
-  stubKoodistoRoute({ koodisto: 'lukiolinjat', cy });
+  stubKoodistoRoute({ koodisto: 'koulutuksenlisatiedot' });
+  stubKoodistoRoute({ koodisto: 'oppilaitoksenopetuskieli' });
+  stubKoodistoRoute({ koodisto: 'opetusaikakk' });
+  stubKoodistoRoute({ koodisto: 'opetuspaikkakk' });
+  stubKoodistoRoute({ koodisto: 'kausi' });
+  stubKoodistoRoute({ koodisto: 'kieli' });
+  stubKoodistoRoute({ koodisto: 'lukiodiplomit' });
+  stubKoodistoRoute({ koodisto: 'lukiolinjat' });
 
   cy.route({
     method: 'GET',
@@ -131,5 +132,5 @@ export const stubToteutusFormRoutes = ({ cy, organisaatioOid, perusteId }) => {
     response: [],
   });
 
-  stubOppijanumerorekisteriHenkiloRoute({ cy });
+  stubOppijanumerorekisteriHenkiloRoute();
 };

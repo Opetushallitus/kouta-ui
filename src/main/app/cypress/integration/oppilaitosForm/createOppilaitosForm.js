@@ -4,94 +4,90 @@ import {
   selectOption,
   typeToEditor,
   getRadio,
+  getByTestId,
   jatka,
 } from '#/cypress/utils';
 
 import { stubOppilaitosFormRoutes } from '#/cypress/oppilaitosFormUtils';
 
 const fillTilaSection = (tila = 'julkaistu') => {
-  cy.getByTestId('tilaSection').within(() => {
-    getRadio(tila, cy).check({ force: true });
+  getByTestId('tilaSection').within(() => {
+    getRadio(tila).check({ force: true });
   });
 };
 
 const fillKieliversiotSection = () => {
-  cy.getByTestId('kieliversiotSection').within(() => {
-    chooseKieliversiotLanguages(['fi'], cy);
+  getByTestId('kieliversiotSection').within(() => {
+    chooseKieliversiotLanguages(['fi']);
     jatka();
   });
 };
 
 const fillPerustiedotSection = () => {
-  cy.getByTestId('perustiedotSection').within(() => {
-    cy.getByTestId('opiskelijoita').find('input').paste('1', { force: true });
-    cy.getByTestId('korkeakouluja').find('input').paste('2', { force: true });
-    cy.getByTestId('tiedekuntia').find('input').paste('3', { force: true });
-    cy.getByTestId('kampuksia').find('input').paste('4', { force: true });
-    cy.getByTestId('yksikoita').find('input').paste('5', { force: true });
-    cy.getByTestId('toimipisteita').find('input').paste('6', { force: true });
-    cy.getByTestId('akatemioita').find('input').paste('7', { force: true });
+  getByTestId('perustiedotSection').within(() => {
+    getByTestId('opiskelijoita').find('input').paste('1');
+    getByTestId('korkeakouluja').find('input').paste('2');
+    getByTestId('tiedekuntia').find('input').paste('3');
+    getByTestId('kampuksia').find('input').paste('4');
+    getByTestId('yksikoita').find('input').paste('5');
+    getByTestId('toimipisteita').find('input').paste('6');
+    getByTestId('akatemioita').find('input').paste('7');
 
     jatka();
   });
 };
 
 const fillEsittelySection = () => {
-  cy.getByTestId('esittelySection').within(() => {
-    typeToEditor('Esittely', cy);
+  getByTestId('esittelySection').within(() => {
+    typeToEditor('Esittely');
 
     jatka();
   });
 };
 
 const fillTeemakuvaSection = () => {
-  cy.getByTestId('teemakuvaSection').within(() => {
+  getByTestId('teemakuvaSection').within(() => {
     jatka();
   });
 };
 
 const fillTietoaOpiskelustaSection = () => {
-  cy.getByTestId('tietoaSection').within(() => {
-    selectOption('organisaationkuvaustiedot_0', cy);
+  getByTestId('tietoaSection').within(() => {
+    selectOption('organisaationkuvaustiedot_0');
 
-    cy.get('textarea').paste('Tietoa', { force: true });
+    cy.get('textarea').paste('Tietoa');
 
     jatka();
   });
 };
 
 const fillYhteystiedotSection = () => {
-  cy.getByTestId('yhteystiedotSection').within(() => {
-    cy.getByTestId('osoite').find('input').paste('Osoite', { force: true });
+  getByTestId('yhteystiedotSection').within(() => {
+    getByTestId('osoite').find('input').paste('Osoite');
 
-    cy.getByTestId('postinumero').within(() => {
+    getByTestId('postinumero').within(() => {
       fillAsyncSelect('0', 'Posti_0');
     });
 
-    cy.getByTestId('sahkoposti')
-      .find('input')
-      .paste('sahkoposti@sahkoposti.fi', { force: true });
+    getByTestId('sahkoposti').find('input').paste('sahkoposti@sahkoposti.fi');
 
-    cy.getByTestId('puhelinnumero')
-      .find('input')
-      .paste('12345', { force: true });
+    getByTestId('puhelinnumero').find('input').paste('12345');
 
-    cy.getByTestId('verkkosivu')
-      .find('input')
-      .paste('www.verkkosivu.fi', { force: true });
+    getByTestId('verkkosivu').find('input').paste('www.verkkosivu.fi');
 
     jatka();
   });
 };
 
 const tallenna = () => {
-  cy.getByTestId('tallennaOppilaitosButton').click({ force: true });
+  getByTestId('tallennaOppilaitosButton').click();
 };
 
 describe('createOppilaitosForm', () => {
   const organisaatioOid = '1.1.1.1.1.1';
 
   beforeEach(() => {
+    cy.server();
     stubOppilaitosFormRoutes({ organisaatioOid });
 
     cy.route({

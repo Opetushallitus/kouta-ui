@@ -1,17 +1,17 @@
 import { merge } from 'lodash';
 
-import { chooseKieliversiotLanguages } from '#/cypress/utils';
+import { chooseKieliversiotLanguages, getByTestId } from '#/cypress/utils';
 import koulutus from '#/cypress/data/koulutus';
 import { stubKoulutusFormRoutes } from '#/cypress/koulutusFormUtils';
 
 const fillKieliversiotSection = () => {
-  cy.getByTestId('kieliversiotSection').within(() => {
-    chooseKieliversiotLanguages(['fi'], cy);
+  getByTestId('kieliversiotSection').within(() => {
+    chooseKieliversiotLanguages(['fi']);
   });
 };
 
 const tallenna = () => {
-  cy.getByTestId('tallennaKoulutusButton').click();
+  getByTestId('tallennaKoulutusButton').click();
 };
 
 const prepareTest = tyyppi => {
@@ -27,7 +27,7 @@ const prepareTest = tyyppi => {
 
   cy.server();
 
-  stubKoulutusFormRoutes({ cy, organisaatioOid });
+  stubKoulutusFormRoutes({ organisaatioOid });
 
   cy.route({
     method: 'GET',

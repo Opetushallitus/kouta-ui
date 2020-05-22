@@ -2,10 +2,6 @@ import { fireEvent } from '@testing-library/react';
 
 require('@cypress/snapshot').register();
 
-Cypress.Commands.add('getByTestId', (testId, options = {}) => {
-  return cy.get(`[data-testid="${testId}"]`, options);
-});
-
 Cypress.Commands.add(
   'paste',
   {
@@ -28,6 +24,7 @@ Cypress.Commands.add(
         $destination[0].dispatchEvent(pasteEvent);
       });
     }
+    return cy.wrap(element);
   }
 );
 

@@ -5,6 +5,7 @@ import {
   stubHakemuspalveluLomakkeetRoute,
   stubOppijanumerorekisteriHenkiloRoute,
   stubKoodiRoute,
+  stubCommonRoutes,
 } from '#/cypress/utils';
 
 import organisaatio from '#/cypress/data/organisaatio';
@@ -35,7 +36,7 @@ export const prepareTest = ({
 
   cy.server();
 
-  stubHakukohdeFormRoutes({ cy, organisaatioOid, hakuOid });
+  stubHakukohdeFormRoutes({ organisaatioOid, hakuOid });
 
   cy.route({
     method: 'GET',
@@ -103,8 +104,8 @@ export const prepareTest = ({
   );
 };
 
-export const stubHakukohdeFormRoutes = ({ cy, organisaatioOid, hakuOid }) => {
-  cy.server();
+export const stubHakukohdeFormRoutes = ({ organisaatioOid, hakuOid }) => {
+  stubCommonRoutes();
 
   cy.route({
     method: 'GET',
@@ -124,11 +125,11 @@ export const stubHakukohdeFormRoutes = ({ cy, organisaatioOid, hakuOid }) => {
     ],
   });
 
-  stubKoodistoRoute({ koodisto: 'pohjakoulutusvaatimustoinenaste', cy });
-  stubKoodistoRoute({ koodisto: 'kausi', cy });
-  stubKoodistoRoute({ koodisto: 'valintakokeentyyppi', cy });
-  stubKoodistoRoute({ koodisto: 'liitetyypitamm', cy });
-  stubKoodistoRoute({ koodisto: 'kausi', cy });
+  stubKoodistoRoute({ koodisto: 'pohjakoulutusvaatimustoinenaste' });
+  stubKoodistoRoute({ koodisto: 'kausi' });
+  stubKoodistoRoute({ koodisto: 'valintakokeentyyppi' });
+  stubKoodistoRoute({ koodisto: 'liitetyypitamm' });
+  stubKoodistoRoute({ koodisto: 'kausi' });
   stubKoodiRoute(createKoodi({ koodisto: 'posti', versio: 2 }));
 
   cy.route({
@@ -148,6 +149,6 @@ export const stubHakukohdeFormRoutes = ({ cy, organisaatioOid, hakuOid }) => {
     response: [],
   });
 
-  stubHakemuspalveluLomakkeetRoute({ cy });
-  stubOppijanumerorekisteriHenkiloRoute({ cy });
+  stubHakemuspalveluLomakkeetRoute();
+  stubOppijanumerorekisteriHenkiloRoute();
 };

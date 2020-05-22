@@ -1,17 +1,17 @@
 import { merge } from 'lodash';
 
-import { chooseKieliversiotLanguages } from '#/cypress/utils';
+import { chooseKieliversiotLanguages, getByTestId } from '#/cypress/utils';
 import valintaperuste from '#/cypress/data/valintaperuste';
 import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils';
 
 const fillKieliversiotSection = () => {
-  cy.getByTestId('kieliversiotSection').within(() => {
-    chooseKieliversiotLanguages(['fi'], cy);
+  getByTestId('kieliversiotSection').within(() => {
+    chooseKieliversiotLanguages(['fi']);
   });
 };
 
 const tallenna = () => {
-  cy.getByTestId('tallennaValintaperusteButton').click({ force: true });
+  getByTestId('tallennaValintaperusteButton').click({ force: true });
 };
 
 const prepareTest = tyyppi => {
@@ -22,7 +22,9 @@ const prepareTest = tyyppi => {
     organisaatioOid,
   };
 
-  stubValintaperusteFormRoutes({ cy, organisaatioOid });
+  cy.server();
+
+  stubValintaperusteFormRoutes({ organisaatioOid });
 
   cy.route({
     method: 'GET',
@@ -46,7 +48,7 @@ describe('editValintaperusteForm', () => {
       },
     }).as('updateValintaperusteRequest');
 
-    cy.getByTestId('postinumero').contains('00350');
+    getByTestId('postinumero').contains('00350');
 
     fillKieliversiotSection();
     tallenna();

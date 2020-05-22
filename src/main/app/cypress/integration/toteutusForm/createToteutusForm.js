@@ -10,6 +10,7 @@ import {
   fillTreeSelect,
   jatka,
   getByTestId,
+  paste,
 } from '#/cypress/utils';
 
 import koulutus from '#/cypress/data/koulutus';
@@ -37,31 +38,31 @@ const fillKieliversiotSection = () => {
 const fillOpetuskieli = () => {
   getByTestId('opetuskieli').within(() => {
     getCheckbox('oppilaitoksenopetuskieli_0#1').click({ force: true });
-    cy.get('textarea').paste('opetuskieli kuvaus');
+    cy.get('textarea').pipe(paste('opetuskieli kuvaus'));
   });
 };
 
 const fillOpetusaika = () => {
   getByTestId('opetusaika').within(() => {
     getCheckbox('opetusaikakk_0#1').click({ force: true });
-    cy.get('textarea').paste('opetusaika kuvaus');
+    cy.get('textarea').pipe(paste('opetusaika kuvaus'));
   });
 };
 
 const fillOpetustapa = () => {
   getByTestId('opetustapa').within(() => {
     getCheckbox('opetuspaikkakk_0#1').click({ force: true });
-    cy.get('textarea').paste('opetustapa kuvaus');
+    cy.get('textarea').pipe(paste('opetustapa kuvaus'));
   });
 };
 
 const fillMaksullisuus = tyyppi => {
   getByTestId('maksullisuus').within(() => {
     getRadio(tyyppi).click({ force: true });
-    getByTestId('maksu').find('input').paste('10');
+    getByTestId('maksu').find('input').pipe(paste('10'));
 
     getByTestId('maksullisuusKuvaus').within(() => {
-      cy.get('textarea').paste('maksullisuus kuvaus');
+      cy.get('textarea').pipe(paste('maksullisuus kuvaus'));
     });
   });
 };
@@ -69,8 +70,8 @@ const fillMaksullisuus = tyyppi => {
 const fillStipendi = () => {
   getByTestId('stipendi').within(() => {
     getRadio('kylla').click({ force: true });
-    getByTestId('stipendinMaara').find('input').paste('20');
-    cy.get('textarea').paste('stipendi kuvaus');
+    getByTestId('stipendinMaara').find('input').pipe(paste('20'));
+    cy.get('textarea').pipe(paste('stipendi kuvaus'));
   });
 };
 
@@ -94,7 +95,7 @@ const fillOsiot = () => {
 
   getByTestId('osioKuvaus.koulutuksenlisatiedot_0#1')
     .find('textarea')
-    .paste('koulutuksenlisatiedot_0 kuvaus');
+    .pipe(paste('koulutuksenlisatiedot_0 kuvaus'));
 };
 
 const fillCommonJarjestamistiedot = ({ maksullisuusTyyppi = 'kylla' } = {}) => {
@@ -145,11 +146,11 @@ const fillTiedotSection = () => {
     getByTestId('toteutuksenNimi')
       .find('input')
       .clear({ force: true })
-      .paste('toteutuksen nimi');
+      .pipe(paste('toteutuksen nimi'));
 
     getByTestId('toteutuksenKuvaus')
       .find('textarea')
-      .paste('Toteutuksen kuvaus');
+      .pipe(paste('Toteutuksen kuvaus'));
 
     jatka();
   });
@@ -159,11 +160,11 @@ const fillYhteystiedotSection = () => {
   getByTestId('yhteyshenkilotSection').within(() => {
     getByTestId('lisaaYhteyshenkiloButton').click({ force: true });
 
-    getByTestId('nimi').find('input').paste('nimi');
-    getByTestId('titteli').find('input').paste('titteli');
-    getByTestId('sahkoposti').find('input').paste('sähkoposti');
-    getByTestId('puhelinnumero').find('input').paste('puhelin');
-    getByTestId('verkkosivu').find('input').paste('verkkosivu');
+    getByTestId('nimi').find('input').pipe(paste('nimi'));
+    getByTestId('titteli').find('input').pipe(paste('titteli'));
+    getByTestId('sahkoposti').find('input').pipe(paste('sähkoposti'));
+    getByTestId('puhelinnumero').find('input').pipe(paste('puhelin'));
+    getByTestId('verkkosivu').find('input').pipe(paste('verkkosivu'));
 
     jatka();
   });
@@ -171,10 +172,14 @@ const fillYhteystiedotSection = () => {
 
 const fillKkOsaamisalat = () => {
   getByTestId('lisaaOsaamisalaButton').click({ force: true });
-  getByTestId('osaamisalanNimi').find('input').paste('osaamisalan nimi');
-  getByTestId('osaamisalanKuvaus').find('textarea').paste('osaamisalan kuvaus');
-  getByTestId('osaamisalanLinkki').find('input').paste('linkki');
-  getByTestId('osaamisalanOtsikko').find('input').paste('osaamisalan otsikko');
+  getByTestId('osaamisalanNimi').find('input').pipe(paste('osaamisalan nimi'));
+  getByTestId('osaamisalanKuvaus')
+    .find('textarea')
+    .pipe(paste('osaamisalan kuvaus'));
+  getByTestId('osaamisalanLinkki').find('input').pipe(paste('linkki'));
+  getByTestId('osaamisalanOtsikko')
+    .find('input')
+    .pipe(paste('osaamisalan otsikko'));
 };
 
 const fillLukiolinjatSection = () => {
@@ -192,7 +197,7 @@ const fillDiplomi = () => {
     selectOption('lukiodiplomit_0');
   });
 
-  getByTestId('diplomiKuvaus').find('textarea').paste('Diplomi kuvaus');
+  getByTestId('diplomiKuvaus').find('textarea').pipe(paste('Diplomi kuvaus'));
 };
 
 const fillKielivalikoima = () => {
@@ -270,11 +275,11 @@ describe('createToteutusForm', () => {
 
       getByTestId('osaamisalaLinkki.osaamisala_0')
         .find('input')
-        .paste('osaamisala_0 linkki');
+        .pipe(paste('osaamisala_0 linkki'));
 
       getByTestId('osaamisalaOtsikko.osaamisala_0')
         .find('input')
-        .paste('osaamisala_0 otsikko');
+        .pipe(paste('osaamisala_0 otsikko'));
 
       jatka();
     });

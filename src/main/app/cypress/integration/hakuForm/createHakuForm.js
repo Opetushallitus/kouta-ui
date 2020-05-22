@@ -7,6 +7,7 @@ import {
   fillYhteyshenkilotFields,
   getByTestId,
   jatka,
+  paste,
 } from '#/cypress/utils';
 
 import { stubHakuFormRoutes } from '#/cypress/hakuFormUtils';
@@ -32,7 +33,7 @@ const fillKieliversiotSection = () => {
 
 const fillNimiSection = () => {
   getByTestId('nimiSection').within(() => {
-    cy.get('input').paste('haun nimi');
+    cy.get('input').pipe(paste('haun nimi'));
 
     jatka();
   });

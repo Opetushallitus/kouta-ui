@@ -1,4 +1,25 @@
+import { fireEvent } from '@testing-library/react';
 import koodisto from '#/cypress/data/koodisto';
+
+export const paste = value => $element => {
+  $element.focus();
+  try {
+    fireEvent.change($element[0], { target: { value } });
+  } catch (e) {
+    cy.wrap($element).then($destination => {
+      const pasteEvent = Object.assign(
+        new Event('paste', { bubbles: true, cancelable: true }),
+        {
+          clipboardData: {
+            getData: (type = 'text') => value,
+          },
+        }
+      );
+      $destination[0].dispatchEvent(pasteEvent);
+    });
+  }
+  return cy.wrap($element);
+};
 
 export const getByTestId = testId => cy.get(`[data-testid="${testId}"]`);
 
@@ -23,7 +44,7 @@ export const selectOption = value => {
 
 export const fillAsyncSelect = (input, match) => {
   getSelect().within(() => {
-    cy.get('input[type="text"]').paste(input);
+    cy.get('input[type="text"]').pipe(paste(input));
     cy.get(`div:contains(${match})`).first().click();
   });
 };
@@ -46,7 +67,7 @@ export const stubLokalisaatioRoute = () => {
 
 export const typeToEditor = value => {
   cy.get('.Editor__').within(() => {
-    cy.get('[contenteditable="true"]').paste(value);
+    cy.get('[contenteditable="true"]').pipe(paste(value));
   });
 };
 
@@ -56,8 +77,8 @@ export const getTableInput = () => {
 
 export const fillDateTimeInput = ({ date, time }) => {
   getByTestId('DateTimeInput').within(() => {
-    getByTestId('DateTimeInput__Date').find('input').clear().paste(date);
-    getByTestId('DateTimeInput__Time').find('input').clear().paste(time);
+    getByTestId('DateTimeInput__Date').find('input').clear().pipe(paste(date));
+    getByTestId('DateTimeInput__Time').find('input').clear().pipe(paste(time));
   });
 };
 
@@ -75,11 +96,11 @@ export const chooseKieliversiotLanguages = (selectedLanguages = []) => {
 export const fillYhteyshenkilotFields = () => {
   getByTestId('lisaaYhteyshenkiloButton').click({ force: true });
 
-  getByTestId('nimi').find('input').paste('nimi');
-  getByTestId('titteli').find('input').paste('titteli');
-  getByTestId('sahkoposti').find('input').paste('sähkoposti');
-  getByTestId('puhelinnumero').find('input').paste('puhelin');
-  getByTestId('verkkosivu').find('input').paste('verkkosivu');
+  getByTestId('nimi').find('input').pipe(paste('nimi'));
+  getByTestId('titteli').find('input').pipe(paste('titteli'));
+  getByTestId('sahkoposti').find('input').pipe(paste('sähkoposti'));
+  getByTestId('puhelinnumero').find('input').pipe(paste('puhelin'));
+  getByTestId('verkkosivu').find('input').pipe(paste('verkkosivu'));
 };
 
 export const fillValintakoeFields = () => {
@@ -87,7 +108,7 @@ export const fillValintakoeFields = () => {
 
   getByTestId('lisaaTilaisuusButton').click({ force: true });
 
-  getByTestId('osoite').find('input').paste('osoite');
+  getByTestId('osoite').find('input').pipe(paste('osoite'));
 
   getByTestId('postinumero').within(() => {
     fillAsyncSelect('0', '0 Posti_0');
@@ -107,7 +128,7 @@ export const fillValintakoeFields = () => {
     });
   });
 
-  getByTestId('lisatietoja').find('textarea').paste('lisatietoja');
+  getByTestId('lisatietoja').find('textarea').pipe(paste('lisatietoja'));
 };
 
 export const stubKayttoOikeusMeRoute = ({ user = {} } = {}) => {
@@ -179,7 +200,7 @@ export const fillKoulutustyyppiSelect = path => {
 };
 
 export const fillDatePickerInput = value => {
-  cy.get('.DatePickerInput__').find('input').paste(value);
+  cy.get('.DatePickerInput__').find('input').pipe(paste(value));
 };
 
 export const stubKoodiRoute = koodi => {

@@ -6,6 +6,7 @@ import {
   getRadio,
   getByTestId,
   jatka,
+  paste,
 } from '#/cypress/utils';
 
 import createSoraKuvaus from '#/cypress/data/soraKuvaus';
@@ -32,7 +33,7 @@ const fillKieliversiotSection = () => {
 
 const fillTiedotSection = () => {
   getByTestId('tiedotSection').within(() => {
-    getByTestId('nimi').find('input').paste('Nimi');
+    getByTestId('nimi').find('input').pipe(paste('Nimi'));
 
     getByTestId('kuvaus').within(() => {
       typeToEditor('Kuvaus');

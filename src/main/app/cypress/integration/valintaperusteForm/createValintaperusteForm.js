@@ -10,6 +10,7 @@ import {
   fillValintakoeFields,
   jatka,
   getByTestId,
+  paste,
 } from '#/cypress/utils';
 import valintaperuste from '#/cypress/data/valintaperuste';
 import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils';
@@ -78,9 +79,7 @@ const fillValintatapaSection = () => {
         selectOption('valintatapajono_0');
       });
 
-      getByTestId('nimi')
-        .find('input')
-        .paste('Valintatavan nimi', { force: true });
+      getByTestId('nimi').find('input').pipe(paste('Valintatavan nimi'));
 
       getByTestId('sisalto').within(() => {
         lisaaSisaltoa('teksti');
@@ -99,9 +98,9 @@ const fillValintatapaSection = () => {
           });
       });
 
-      getByTestId('kynnysehto').find('textarea').paste('Kynnysehto');
-      getByTestId('enimmaispistemaara').find('input').paste('100');
-      getByTestId('vahimmaispistemaara').find('input').paste('10');
+      getByTestId('kynnysehto').find('textarea').pipe(paste('Kynnysehto'));
+      getByTestId('enimmaispistemaara').find('input').pipe(paste('100'));
+      getByTestId('vahimmaispistemaara').find('input').pipe(paste('10'));
     });
 
     jatka();
@@ -110,9 +109,7 @@ const fillValintatapaSection = () => {
 
 const fillKuvausSection = () => {
   getByTestId('kuvausSection').within(() => {
-    getByTestId('nimi')
-      .find('input')
-      .paste('Valintaperusteen nimi', { force: true });
+    getByTestId('nimi').find('input').pipe(paste('Valintaperusteen nimi'));
 
     getByTestId('kuvaus').within(() => {
       typeToEditor('Kuvaus');

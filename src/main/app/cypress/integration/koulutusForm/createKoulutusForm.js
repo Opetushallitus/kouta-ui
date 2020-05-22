@@ -9,6 +9,7 @@ import {
   fillAsyncSelect,
   getByTestId,
   jatka,
+  paste,
 } from '#/cypress/utils';
 
 import { stubKoulutusFormRoutes } from '#/cypress/koulutusFormUtils';
@@ -50,7 +51,7 @@ const fillLisatiedotSection = () => {
     });
 
     getByTestId('osioKuvaus.koulutuksenlisatiedot_0#1').within(() => {
-      cy.get('textarea').paste('koulutuksenlisatiedot_0 kuvaus');
+      cy.get('textarea').pipe(paste('koulutuksenlisatiedot_0 kuvaus'));
     });
 
     jatka();
@@ -165,7 +166,7 @@ describe('createKoulutusForm', () => {
       });
 
       getByTestId('nimiInput').within(() => {
-        cy.get('input').clear().paste('Tiedot nimi');
+        cy.get('input').clear().pipe(paste('Tiedot nimi'));
       });
 
       getByTestId('tutkintonimikeSelect').click();
@@ -189,11 +190,11 @@ describe('createKoulutusForm', () => {
 
     getByTestId('descriptionSection').within(() => {
       getByTestId('kuvauksenNimiInput').within(() => {
-        cy.get('input').paste('Kuvauksen nimi');
+        cy.get('input').pipe(paste('Kuvauksen nimi'));
       });
 
       getByTestId('kuvausInput').within(() => {
-        cy.get('textarea').paste('Kuvaus');
+        cy.get('textarea').pipe(paste('Kuvaus'));
       });
 
       jatka();

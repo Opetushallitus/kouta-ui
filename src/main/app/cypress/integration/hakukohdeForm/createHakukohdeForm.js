@@ -9,6 +9,7 @@ import {
   typeToEditor,
   jatka,
   getByTestId,
+  paste,
 } from '#/cypress/utils';
 
 import { prepareTest } from '#/cypress/hakukohdeFormUtils';
@@ -70,7 +71,7 @@ const fillPerustiedotSection = ({ isKorkeakoulu = false } = {}) => {
     getByTestId('hakukohteenNimi')
       .find('input')
       .clear({ force: true })
-      .paste('Hakukohteen nimi');
+      .pipe(paste('Hakukohteen nimi'));
 
     if (!isKorkeakoulu) {
       getByTestId('voiSuorittaaKaksoistutkinnon').within(() => {
@@ -110,10 +111,10 @@ const fillAlkamiskausiSection = () => {
 
 const fillAloituspaikatSection = ({ isKorkeakoulu = false } = {}) => {
   getByTestId('aloituspaikatSection').within(() => {
-    getByTestId('aloituspaikkamaara').paste('10');
+    getByTestId('aloituspaikkamaara').pipe(paste('10'));
 
     if (isKorkeakoulu) {
-      getByTestId('ensikertalaismaara').paste('5');
+      getByTestId('ensikertalaismaara').pipe(paste('5'));
     }
 
     jatka();
@@ -143,9 +144,9 @@ const fillLiitteetSection = () => {
         selectOption('liitetyypitamm_0');
       });
 
-      getByTestId('nimi').find('input').paste('Nimi');
+      getByTestId('nimi').find('input').pipe(paste('Nimi'));
 
-      getByTestId('kuvaus').find('textarea').paste('Kuvaus');
+      getByTestId('kuvaus').find('textarea').pipe(paste('Kuvaus'));
 
       fillDatetime({
         date: '25.11.2019',
@@ -156,13 +157,15 @@ const fillLiitteetSection = () => {
         getRadio('osoite').click({ force: true });
       });
 
-      getByTestId('osoite').find('input').paste('Osoite');
+      getByTestId('osoite').find('input').pipe(paste('Osoite'));
 
       getByTestId('postinumero').within(() => {
         fillAsyncSelect('0', 'Posti_0');
       });
 
-      getByTestId('sahkoposti').find('input').paste('sahkoposti@email.com');
+      getByTestId('sahkoposti')
+        .find('input')
+        .pipe(paste('sahkoposti@email.com'));
     });
 
     jatka();

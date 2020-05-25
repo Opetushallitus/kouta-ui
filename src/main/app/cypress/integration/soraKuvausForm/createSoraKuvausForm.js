@@ -96,7 +96,7 @@ describe('createSoraKuvausForm', () => {
     tallenna();
 
     cy.wait('@createSoraKuvausRequest').then(({ request }) => {
-      cy.wrap(request.body).snapshot();
+      cy.wrap(request.body).toMatchSnapshot();
     });
 
     cy.location('pathname').should(

@@ -1,0 +1,92 @@
+exports[`editHakukohdeForm > should be able to edit hakukohde #0`] =
+{
+  "alkamiskausiKoodiUri": "kausi_0#1",
+  "alkamisvuosi": 2024,
+  "aloituspaikat": 150,
+  "ensikertalaisenAloituspaikat": 49,
+  "hakuOid": "4.1.1.1.1.1",
+  "hakuajat": [
+    {
+      "alkaa": "2011-11-11T10:30",
+      "paattyy": "2011-11-12T11:45"
+    }
+  ],
+  "hakulomake": {},
+  "hakulomakeAtaruId": "12345",
+  "hakulomakeKuvaus": {},
+  "hakulomakeLinkki": {},
+  "hakulomaketyyppi": "ataru",
+  "kaytetaanHaunAikataulua": false,
+  "kaytetaanHaunAlkamiskautta": false,
+  "kaytetaanHaunHakulomaketta": false,
+  "kielivalinta": [
+    "fi"
+  ],
+  "liitteet": [
+    {
+      "kuvaus": {
+        "fi": "Kuvaus"
+      },
+      "nimi": {
+        "fi": "Nimi"
+      },
+      "toimitusaika": "2011-11-11T10:30",
+      "toimitusosoite": {
+        "osoite": {
+          "osoite": {
+            "fi": "Osoite"
+          },
+          "postinumeroKoodiUri": "posti_0#2"
+        },
+        "sahkoposti": "sahkoposti@email.com"
+      },
+      "toimitustapa": "osoite",
+      "tyyppiKoodiUri": "liitetyypitamm_0#1"
+    }
+  ],
+  "liitteetOnkoSamaToimitusaika": false,
+  "liitteetOnkoSamaToimitusosoite": false,
+  "liitteidenToimitusaika": null,
+  "liitteidenToimitusosoite": null,
+  "liitteidenToimitustapa": null,
+  "modified": "2019-04-04T08:28",
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "muuPohjakoulutusvaatimus": {},
+  "nimi": {
+    "fi": "Hakukohteen nimi"
+  },
+  "oid": "6.1.1.1.1.1",
+  "organisaatioOid": "1.1.1.1.1.1",
+  "pohjakoulutusvaatimusKoodiUrit": [
+    "pohjakoulutusvaatimustoinenaste_0#1"
+  ],
+  "pohjakoulutusvaatimusTarkenne": {
+    "fi": "<p>Fi tarkenne</p>"
+  },
+  "tila": "tallennettu",
+  "toinenAsteOnkoKaksoistutkinto": true,
+  "toteutusOid": "2.1.1.1.1.1",
+  "valintakokeet": [
+    {
+      "tilaisuudet": [
+        {
+          "aika": {
+            "alkaa": "2011-11-11T10:30",
+            "paattyy": "2011-11-12T11:45"
+          },
+          "lisatietoja": {
+            "fi": "Lisätietoja"
+          },
+          "osoite": {
+            "osoite": {
+              "fi": "Osoite"
+            },
+            "postinumeroKoodiUri": "posti_0#2"
+          }
+        }
+      ],
+      "tyyppiKoodiUri": "valintakokeentyyppi_0#1"
+    }
+  ],
+  "valintaperusteId": "b9d53560-a7f0-45d3-bd9d-46e67e6049ba"
+};

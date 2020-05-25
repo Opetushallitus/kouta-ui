@@ -46,7 +46,7 @@ const getDefaultProps = memoizeOne(t => ({
   components: {
     Option: addTestId(
       components.Option,
-      ({ value }) => `react-select-option_${value}`,
+      ({ value }) => `react-select-option_${value}`
     ),
   },
 }));

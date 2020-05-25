@@ -49,7 +49,7 @@ describe('editSoraKuvausForm', () => {
     tallenna();
 
     cy.wait('@editSoraKuvausRequest').then(({ request }) => {
-      cy.wrap(request.body).snapshot();
+      cy.wrap(request.body).toMatchSnapshot();
     });
   });
 });

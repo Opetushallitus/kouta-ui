@@ -143,7 +143,7 @@ describe('createKoulutusForm', () => {
     tallenna();
 
     cy.wait('@createAmmKoulutusResponse').then(({ request }) => {
-      cy.wrap(request.body).snapshot();
+      cy.wrap(request.body).toMatchSnapshot();
     });
   });
 
@@ -213,7 +213,7 @@ describe('createKoulutusForm', () => {
     tallenna();
 
     cy.wait('@createYoKoulutusResponse').then(({ request }) => {
-      cy.wrap(request.body).snapshot();
+      cy.wrap(request.body).toMatchSnapshot();
     });
   });
 
@@ -253,7 +253,7 @@ describe('createKoulutusForm', () => {
     tallenna();
 
     cy.wait('@createLkKoulutusResponse').then(({ request }) => {
-      cy.wrap(request.body).snapshot();
+      cy.wrap(request.body).toMatchSnapshot();
     });
   });
 });

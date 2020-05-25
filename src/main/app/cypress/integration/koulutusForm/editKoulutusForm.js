@@ -65,7 +65,7 @@ describe('editKoulutusForm', () => {
     tallenna();
 
     cy.wait('@updateAmmKoulutusResponse').then(({ request }) => {
-      cy.wrap(request.body).snapshot();
+      cy.wrap(request.body).toMatchSnapshot();
     });
   });
 
@@ -83,7 +83,7 @@ describe('editKoulutusForm', () => {
     tallenna();
 
     cy.wait('@updateYoKoulutusResponse').then(({ request }) => {
-      cy.wrap(request.body).snapshot();
+      cy.wrap(request.body).toMatchSnapshot();
     });
   });
 
@@ -101,7 +101,7 @@ describe('editKoulutusForm', () => {
     tallenna();
 
     cy.wait('@updateLkKoulutusResponse').then(({ request }) => {
-      cy.wrap(request.body).snapshot();
+      cy.wrap(request.body).toMatchSnapshot();
     });
   });
 });

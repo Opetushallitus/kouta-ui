@@ -1,0 +1,402 @@
+exports[`createToteutusForm > should be able to create ammatillinen toteutus #0`] =
+{
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutusOid": "1.2.1.1.1.1",
+  "metadata": {
+    "alemmanKorkeakoulututkinnonOsaamisalat": [],
+    "aloituspaikat": null,
+    "ammattinimikkeet": [
+      {
+        "arvo": "ammattinimike",
+        "kieli": "fi"
+      }
+    ],
+    "asiasanat": [
+      {
+        "arvo": "avainsana",
+        "kieli": "fi"
+      }
+    ],
+    "ilmoittautumislinkki": {},
+    "kuvaus": {
+      "fi": "Toteutuksen kuvaus"
+    },
+    "laajuus": null,
+    "laajuusyksikkoKoodiUri": null,
+    "lukiolinjaKoodiUri": null,
+    "opetus": {
+      "A1JaA2Kielivalikoima": [],
+      "B1Kielivalikoima": [],
+      "B2Kielivalikoima": [],
+      "B3Kielivalikoima": [],
+      "aidinkieliKielivalikoima": [],
+      "diplomiKoodiUrit": [],
+      "diplomiKuvaus": {},
+      "koulutuksenAlkamiskausi": "kausi_0#1",
+      "koulutuksenAlkamispaivamaara": null,
+      "koulutuksenAlkamisvuosi": 2020,
+      "koulutuksenPaattymispaivamaara": null,
+      "koulutuksenTarkkaAlkamisaika": false,
+      "lisatiedot": [
+        {
+          "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+          "teksti": {
+            "fi": "koulutuksenlisatiedot_0 kuvaus"
+          }
+        }
+      ],
+      "maksullisuusKuvaus": {
+        "fi": "maksullisuus kuvaus"
+      },
+      "maksunMaara": 10,
+      "muuKielivalikoima": [],
+      "onkoMaksullinen": true,
+      "onkoStipendia": false,
+      "opetusaikaKoodiUrit": [
+        "opetusaikakk_0#1"
+      ],
+      "opetusaikaKuvaus": {
+        "fi": "opetusaika kuvaus"
+      },
+      "opetuskieletKuvaus": {
+        "fi": "opetuskieli kuvaus"
+      },
+      "opetuskieliKoodiUrit": [
+        "oppilaitoksenopetuskieli_0#1"
+      ],
+      "opetustapaKoodiUrit": [
+        "opetuspaikkakk_0#1"
+      ],
+      "opetustapaKuvaus": {
+        "fi": "opetustapa kuvaus"
+      },
+      "stipendinKuvaus": {},
+      "stipendinMaara": null
+    },
+    "osaamisalat": [
+      {
+        "koodiUri": "osaamisala_0",
+        "linkki": {
+          "fi": "osaamisala_0 linkki"
+        },
+        "otsikko": {
+          "fi": "osaamisala_0 otsikko"
+        }
+      }
+    ],
+    "suunniteltuKesto": {},
+    "toteutusjaksot": [],
+    "tutkinnonOsat": [],
+    "tyyppi": "amm",
+    "yhteyshenkilot": [
+      {
+        "nimi": {
+          "fi": "nimi"
+        },
+        "puhelinnumero": {
+          "fi": "puhelin"
+        },
+        "sahkoposti": {
+          "fi": "sähkoposti"
+        },
+        "titteli": {
+          "fi": "titteli"
+        },
+        "wwwSivu": {
+          "fi": "verkkosivu"
+        }
+      }
+    ],
+    "ylemmanKorkeakoulututkinnonOsaamisalat": []
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "toteutuksen nimi"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "tarjoajat": [
+    "1.2.2.1.1.1"
+  ],
+  "teemakuva": null,
+  "tila": "julkaistu"
+};
+
+exports[`createToteutusForm > should be able to create korkeakoulu toteutus #0`] =
+{
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutusOid": "1.2.1.1.1.1",
+  "metadata": {
+    "alemmanKorkeakoulututkinnonOsaamisalat": [
+      {
+        "kuvaus": {
+          "fi": "osaamisalan kuvaus"
+        },
+        "linkki": {
+          "fi": "linkki"
+        },
+        "nimi": {
+          "fi": "osaamisalan nimi"
+        },
+        "otsikko": {
+          "fi": "osaamisalan otsikko"
+        }
+      }
+    ],
+    "aloituspaikat": null,
+    "ammattinimikkeet": [
+      {
+        "arvo": "ammattinimike",
+        "kieli": "fi"
+      }
+    ],
+    "asiasanat": [
+      {
+        "arvo": "avainsana",
+        "kieli": "fi"
+      }
+    ],
+    "ilmoittautumislinkki": {},
+    "kuvaus": {
+      "fi": "Toteutuksen kuvaus"
+    },
+    "laajuus": null,
+    "laajuusyksikkoKoodiUri": null,
+    "lukiolinjaKoodiUri": null,
+    "opetus": {
+      "A1JaA2Kielivalikoima": [],
+      "B1Kielivalikoima": [],
+      "B2Kielivalikoima": [],
+      "B3Kielivalikoima": [],
+      "aidinkieliKielivalikoima": [],
+      "diplomiKoodiUrit": [],
+      "diplomiKuvaus": {},
+      "koulutuksenAlkamiskausi": "kausi_0#1",
+      "koulutuksenAlkamispaivamaara": null,
+      "koulutuksenAlkamisvuosi": 2020,
+      "koulutuksenPaattymispaivamaara": null,
+      "koulutuksenTarkkaAlkamisaika": false,
+      "lisatiedot": [
+        {
+          "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+          "teksti": {
+            "fi": "koulutuksenlisatiedot_0 kuvaus"
+          }
+        }
+      ],
+      "maksullisuusKuvaus": {
+        "fi": "maksullisuus kuvaus"
+      },
+      "maksunMaara": null,
+      "muuKielivalikoima": [],
+      "onkoMaksullinen": false,
+      "onkoStipendia": true,
+      "opetusaikaKoodiUrit": [
+        "opetusaikakk_0#1"
+      ],
+      "opetusaikaKuvaus": {
+        "fi": "opetusaika kuvaus"
+      },
+      "opetuskieletKuvaus": {
+        "fi": "opetuskieli kuvaus"
+      },
+      "opetuskieliKoodiUrit": [
+        "oppilaitoksenopetuskieli_0#1"
+      ],
+      "opetustapaKoodiUrit": [
+        "opetuspaikkakk_0#1"
+      ],
+      "opetustapaKuvaus": {
+        "fi": "opetustapa kuvaus"
+      },
+      "stipendinKuvaus": {
+        "fi": "stipendi kuvaus"
+      },
+      "stipendinMaara": 20
+    },
+    "osaamisalat": [],
+    "suunniteltuKesto": {},
+    "toteutusjaksot": [],
+    "tutkinnonOsat": [],
+    "tyyppi": "yo",
+    "yhteyshenkilot": [
+      {
+        "nimi": {
+          "fi": "nimi"
+        },
+        "puhelinnumero": {
+          "fi": "puhelin"
+        },
+        "sahkoposti": {
+          "fi": "sähkoposti"
+        },
+        "titteli": {
+          "fi": "titteli"
+        },
+        "wwwSivu": {
+          "fi": "verkkosivu"
+        }
+      }
+    ],
+    "ylemmanKorkeakoulututkinnonOsaamisalat": [
+      {
+        "kuvaus": {
+          "fi": "osaamisalan kuvaus"
+        },
+        "linkki": {
+          "fi": "linkki"
+        },
+        "nimi": {
+          "fi": "osaamisalan nimi"
+        },
+        "otsikko": {
+          "fi": "osaamisalan otsikko"
+        }
+      }
+    ]
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "toteutuksen nimi"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "tarjoajat": [
+    "1.2.2.1.1.1"
+  ],
+  "teemakuva": null,
+  "tila": "julkaistu"
+};
+
+exports[`createToteutusForm > should be able to create lukio toteutus #0`] =
+{
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutusOid": "1.2.1.1.1.1",
+  "metadata": {
+    "alemmanKorkeakoulututkinnonOsaamisalat": [],
+    "aloituspaikat": null,
+    "ammattinimikkeet": [
+      {
+        "arvo": "ammattinimike",
+        "kieli": "fi"
+      }
+    ],
+    "asiasanat": [
+      {
+        "arvo": "avainsana",
+        "kieli": "fi"
+      }
+    ],
+    "ilmoittautumislinkki": {},
+    "kuvaus": {},
+    "laajuus": null,
+    "laajuusyksikkoKoodiUri": null,
+    "lukiolinjaKoodiUri": "lukiolinjat_0#1",
+    "opetus": {
+      "A1JaA2Kielivalikoima": [
+        "kieli_0#1"
+      ],
+      "B1Kielivalikoima": [
+        "kieli_3#1"
+      ],
+      "B2Kielivalikoima": [
+        "kieli_1#1"
+      ],
+      "B3Kielivalikoima": [
+        "kieli_4#1"
+      ],
+      "aidinkieliKielivalikoima": [
+        "kieli_2#1"
+      ],
+      "diplomiKoodiUrit": [
+        "lukiodiplomit_0#1"
+      ],
+      "diplomiKuvaus": {
+        "fi": "Diplomi kuvaus"
+      },
+      "koulutuksenAlkamiskausi": "kausi_0#1",
+      "koulutuksenAlkamispaivamaara": null,
+      "koulutuksenAlkamisvuosi": 2020,
+      "koulutuksenPaattymispaivamaara": null,
+      "koulutuksenTarkkaAlkamisaika": false,
+      "lisatiedot": [
+        {
+          "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+          "teksti": {
+            "fi": "koulutuksenlisatiedot_0 kuvaus"
+          }
+        }
+      ],
+      "maksullisuusKuvaus": {
+        "fi": "maksullisuus kuvaus"
+      },
+      "maksunMaara": 10,
+      "muuKielivalikoima": [
+        "kieli_4#1"
+      ],
+      "onkoMaksullinen": true,
+      "onkoStipendia": true,
+      "opetusaikaKoodiUrit": [
+        "opetusaikakk_0#1"
+      ],
+      "opetusaikaKuvaus": {
+        "fi": "opetusaika kuvaus"
+      },
+      "opetuskieletKuvaus": {
+        "fi": "opetuskieli kuvaus"
+      },
+      "opetuskieliKoodiUrit": [
+        "oppilaitoksenopetuskieli_0#1"
+      ],
+      "opetustapaKoodiUrit": [
+        "opetuspaikkakk_0#1"
+      ],
+      "opetustapaKuvaus": {
+        "fi": "opetustapa kuvaus"
+      },
+      "stipendinKuvaus": {
+        "fi": "stipendi kuvaus"
+      },
+      "stipendinMaara": 20
+    },
+    "osaamisalat": [],
+    "suunniteltuKesto": {},
+    "toteutusjaksot": [],
+    "tutkinnonOsat": [],
+    "tyyppi": "lk",
+    "yhteyshenkilot": [
+      {
+        "nimi": {
+          "fi": "nimi"
+        },
+        "puhelinnumero": {
+          "fi": "puhelin"
+        },
+        "sahkoposti": {
+          "fi": "sähkoposti"
+        },
+        "titteli": {
+          "fi": "titteli"
+        },
+        "wwwSivu": {
+          "fi": "verkkosivu"
+        }
+      }
+    ],
+    "ylemmanKorkeakoulututkinnonOsaamisalat": []
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "lukiolinjat_0"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "tarjoajat": [
+    "1.2.2.1.1.1"
+  ],
+  "teemakuva": null,
+  "tila": "julkaistu"
+};

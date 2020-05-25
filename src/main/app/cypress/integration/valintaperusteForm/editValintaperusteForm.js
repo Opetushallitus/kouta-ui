@@ -54,7 +54,7 @@ describe('editValintaperusteForm', () => {
     tallenna();
 
     cy.wait('@updateValintaperusteRequest').then(({ request }) => {
-      cy.wrap(request.body).snapshot();
+      cy.wrap(request.body).toMatchSnapshot();
     });
   });
 });

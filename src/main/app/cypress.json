@@ -1,9 +1,14 @@
 {
   "baseUrl": "https://localhost:3000/kouta",
   "env": {
-    "NODE_ENV": "production"
+    "NODE_ENV": "production",
+    "cypress-plugin-snapshots": {
+      "serverEnabled": true,
+      "serverHost": "localhost",
+      "serverPort": 2123
+    }
   },
   "video": false,
   "useRelativeSnapshots": true,
-  "ignoreTestFiles": "snapshots.js"
+  "ignoreTestFiles": "**/__snapshots__/*"
 }

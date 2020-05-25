@@ -298,7 +298,7 @@ describe('createToteutusForm', () => {
     tallenna();
 
     cy.wait('@createAmmToteutusResponse').then(({ request }) => {
-      cy.wrap(request.body).snapshot();
+      cy.wrap(request.body).toMatchSnapshot();
     });
   });
 
@@ -342,7 +342,7 @@ describe('createToteutusForm', () => {
     tallenna();
 
     cy.wait('@createYoToteutusResponse').then(({ request }) => {
-      cy.wrap(request.body).snapshot();
+      cy.wrap(request.body).toMatchSnapshot();
     });
   });
 
@@ -378,7 +378,7 @@ describe('createToteutusForm', () => {
     tallenna();
 
     cy.wait('@createLkToteutusResponse').then(({ request }) => {
-      cy.wrap(request.body).snapshot();
+      cy.wrap(request.body).toMatchSnapshot();
     });
   });
 });

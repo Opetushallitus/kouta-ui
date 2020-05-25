@@ -59,7 +59,7 @@ describe('editHakuForm', () => {
     tallenna();
 
     cy.wait('@editHakuRequest').then(({ request }) => {
-      cy.wrap(request.body).snapshot();
+      cy.wrap(request.body).toMatchSnapshot();
     });
   });
 });

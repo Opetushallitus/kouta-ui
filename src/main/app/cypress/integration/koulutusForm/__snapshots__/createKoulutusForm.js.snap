@@ -1,0 +1,119 @@
+exports[`createKoulutusForm > should be able to create ammatillinen koulutus #0`] =
+{
+  "ePerusteId": 1,
+  "johtaaTutkintoon": true,
+  "julkinen": true,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutusKoodiUri": "koulutus_0#1",
+  "koulutustyyppi": "amm",
+  "metadata": {
+    "koulutusalaKoodiUrit": [],
+    "kuvauksenNimi": {},
+    "kuvaus": {},
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "teksti": {
+          "fi": "koulutuksenlisatiedot_0 kuvaus"
+        }
+      }
+    ],
+    "opintojenLaajuusKoodiUri": null,
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "amm"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "koulutus_0"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "teemakuva": null,
+  "tila": "julkaistu"
+};
+
+exports[`createKoulutusForm > should be able to create korkeakoulu koulutus #0`] =
+{
+  "johtaaTutkintoon": true,
+  "julkinen": true,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutusKoodiUri": "koulutus_0#1",
+  "koulutustyyppi": "yo",
+  "metadata": {
+    "koulutusalaKoodiUrit": [
+      "kansallinenkoulutusluokitus2016koulutusalataso2_0#1"
+    ],
+    "kuvauksenNimi": {
+      "fi": "Kuvauksen nimi"
+    },
+    "kuvaus": {
+      "fi": "Kuvaus"
+    },
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "teksti": {
+          "fi": "koulutuksenlisatiedot_0 kuvaus"
+        }
+      }
+    ],
+    "opintojenLaajuusKoodiUri": "opintojenlaajuus_0#1",
+    "tutkintonimikeKoodiUrit": [
+      "tutkintonimikekk_0#1"
+    ],
+    "tyyppi": "yo"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "Tiedot nimi"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "teemakuva": null,
+  "tila": "julkaistu"
+};
+
+exports[`createKoulutusForm > should be able to create lukiokoulutus #0`] =
+{
+  "johtaaTutkintoon": true,
+  "julkinen": true,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutusKoodiUri": "koulutus_0#1",
+  "koulutustyyppi": "lk",
+  "metadata": {
+    "koulutusalaKoodiUrit": [],
+    "kuvauksenNimi": {},
+    "kuvaus": {},
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "teksti": {
+          "fi": "koulutuksenlisatiedot_0 kuvaus"
+        }
+      }
+    ],
+    "opintojenLaajuusKoodiUri": null,
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "lk"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "koulutus_0"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "teemakuva": null,
+  "tila": "julkaistu"
+};

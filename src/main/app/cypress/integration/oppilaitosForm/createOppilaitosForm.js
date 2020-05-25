@@ -128,7 +128,7 @@ describe('createOppilaitosForm', () => {
     tallenna();
 
     cy.wait('@createOppilaitosResponse').then(({ request }) => {
-      cy.wrap(request.body).snapshot();
+      cy.wrap(request.body).toMatchSnapshot();
     });
   });
 });

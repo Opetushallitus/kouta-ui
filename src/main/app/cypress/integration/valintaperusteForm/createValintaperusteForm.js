@@ -193,7 +193,7 @@ describe('createValintaperusteForm', () => {
     tallenna();
 
     cy.wait('@createValintaperusteRequest').then(({ request }) => {
-      cy.wrap(request.body).snapshot();
+      cy.wrap(request.body).toMatchSnapshot();
     });
 
     cy.location('pathname').should(

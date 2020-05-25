@@ -1,0 +1,111 @@
+exports[`createValintaperusteForm > should be able to create valintaperuste #0`] =
+{
+  "hakutapaKoodiUri": "hakutapa_0#1",
+  "kielivalinta": [
+    "fi"
+  ],
+  "kohdejoukkoKoodiUri": "haunkohdejoukko_0#1",
+  "koulutustyyppi": "yo",
+  "metadata": {
+    "kielitaitovaatimukset": [],
+    "kuvaus": {
+      "fi": "<p>Kuvaus</p>"
+    },
+    "osaamistaustaKoodiUrit": [],
+    "tyyppi": "yo",
+    "valintatavat": [
+      {
+        "enimmaispisteet": 100,
+        "kaytaMuuntotaulukkoa": false,
+        "kuvaus": {},
+        "kynnysehto": {
+          "fi": "Kynnysehto"
+        },
+        "nimi": {
+          "fi": "Valintatavan nimi"
+        },
+        "sisalto": [
+          {
+            "data": {
+              "fi": "<p>Sisältötekstiä</p>"
+            },
+            "tyyppi": "teksti"
+          },
+          {
+            "data": {
+              "rows": [
+                {
+                  "columns": [
+                    {
+                      "index": 0,
+                      "text": {
+                        "fi": "solu1.1"
+                      }
+                    },
+                    {
+                      "index": 1,
+                      "text": {
+                        "fi": "solu1.2"
+                      }
+                    }
+                  ],
+                  "index": 0
+                },
+                {
+                  "columns": [
+                    {
+                      "index": 0,
+                      "text": {
+                        "fi": "solu2.1"
+                      }
+                    },
+                    {
+                      "index": 1,
+                      "text": {
+                        "fi": "solu2.2"
+                      }
+                    }
+                  ],
+                  "index": 1
+                }
+              ]
+            },
+            "tyyppi": "taulukko"
+          }
+        ],
+        "vahimmaispisteet": 10,
+        "valintatapaKoodiUri": "valintatapajono_0#1"
+      }
+    ]
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "Valintaperusteen nimi"
+  },
+  "onkoJulkinen": true,
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": "1",
+  "tila": "julkaistu",
+  "valintakokeet": [
+    {
+      "tilaisuudet": [
+        {
+          "aika": {
+            "alkaa": "2019-04-02T10:45",
+            "paattyy": "2019-04-02T19:00"
+          },
+          "lisatietoja": {
+            "fi": "lisatietoja"
+          },
+          "osoite": {
+            "osoite": {
+              "fi": "osoite"
+            },
+            "postinumeroKoodiUri": "posti_0#2"
+          }
+        }
+      ],
+      "tyyppiKoodiUri": "valintakokeentyyppi_1#1"
+    }
+  ]
+};

@@ -7,7 +7,7 @@ import { LANGUAGES } from '#/src/constants';
 
 const formatMap = {
   toLower: _.toLower,
-  capitalize: _.capitalize,
+  upperFirst: _.upperFirst,
   unCapitalize: value => {
     const low = _.toLower(value);
     // if second character changes, return original value

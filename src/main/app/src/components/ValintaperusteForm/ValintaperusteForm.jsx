@@ -1,17 +1,18 @@
 import React from 'react';
-import FormCollapse from '../FormCollapse';
-import FormCollapseGroup from '../FormCollapseGroup';
+import { useTranslation } from 'react-i18next';
+import { ENTITY } from '#/src/constants';
+import { useFieldValue } from '#/src/hooks/form';
+import getValintaperusteet from '#/src/utils/kouta/getValintaperusteet';
+import FormCollapseGroup from '#/src/components/FormCollapseGroup';
+import FormCollapse from '#/src/components/FormCollapse';
+import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
+import JulkaisutilaField from '#/src/components/JulkaisutilaField';
+import JulkisuusSection from '#/src/components/JulkisuusSection';
 import ValintatapaSection from './ValintatapaSection';
 import KuvausSection from './KuvausSection';
-import { useTranslation } from 'react-i18next';
 import SoraKuvausSection from './SoraKuvausSection';
-import { useFieldValue } from '#/src/hooks/form';
 import PerustiedotSection from './PerustiedotSection';
-import JulkisuusSection from './JulkisuusSection';
-import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import ValintakoeSection from './ValintakoeSection';
-import PohjaFormCollapse from '../PohjaFormCollapse';
-import getValintaperusteet from '#/src/utils/kouta/getValintaperusteet';
 
 const ValintaperusteForm = ({
   steps = true,
@@ -81,8 +82,9 @@ const ValintaperusteForm = ({
 
       <FormCollapse
         section="julkinen"
-        header={t('valintaperustelomake.valintaperusteenNakyminen')}
+        header={t('valintaperustelomake.nakyminenMuilleToimijoille')}
         Component={JulkisuusSection}
+        entity={ENTITY.VALINTAPERUSTE}
       />
 
       <FormCollapse

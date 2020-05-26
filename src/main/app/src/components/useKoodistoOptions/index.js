@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { isArray, mapValues, sortBy } from 'lodash';
+import { isArray, mapValues, first, orderBy } from 'lodash';
 
 import { arrayToTranslationObject, getFirstLanguageValue } from '../../utils';
 
@@ -19,7 +19,11 @@ const getOptions = ({ koodisto, language, sort = true }) => {
     label: getFirstLanguageValue(nimi, language),
   }));
 
-  return sort ? sortBy(options, ({ label }) => label) : options;
+  const byLabel = ({ label }) => label;
+  const byFirstNumber = ({ label }) =>
+    /^\d/.test(label) && parseInt(first(label.match(/(\d+)/)));
+
+  return sort ? orderBy(options, [byFirstNumber, byLabel]) : options;
 };
 
 export const useKoodistoOptions = ({

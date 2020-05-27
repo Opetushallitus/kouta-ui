@@ -1,42 +1,55 @@
-import koodisto from './data/koodisto';
+import { fireEvent } from '@testing-library/react';
+import koodisto from '#/cypress/data/koodisto';
 
-export const getByTestId = (testId, cy) => {
-  return cy.get(`[data-testid="${testId}"]`);
+export const paste = value => $element => {
+  $element.focus();
+  try {
+    fireEvent.change($element[0], { target: { value } });
+  } catch (e) {
+    cy.wrap($element).then($destination => {
+      const pasteEvent = Object.assign(
+        new Event('paste', { bubbles: true, cancelable: true }),
+        {
+          clipboardData: {
+            getData: (type = 'text') => value,
+          },
+        }
+      );
+      $destination[0].dispatchEvent(pasteEvent);
+    });
+  }
+  return cy.wrap($element);
 };
 
-export const getRadio = (value, cy) => {
-  return cy.get(`input[type="radio"][value="${value}"]`);
-};
+export const getByTestId = testId => cy.get(`[data-testid="${testId}"]`);
 
-export const getSelectOption = (value, cy) => {
-  return cy.get('[class*="option"]').contains(value);
-};
+export const getRadio = value =>
+  cy.get(`input[type="radio"][value="${value}"]`);
 
-export const getCheckbox = (value, cy) => {
-  return cy.get(`input[type="checkbox"]${value ? `[name="${value}"]` : ''}`);
-};
+export const getSelectOption = value =>
+  cy.get('[class*="option"]').contains(value);
 
-export const getSelect = cy => {
-  return cy.get('.Select__');
-};
+export const getCheckbox = value =>
+  cy.get(`input[type="checkbox"]${value ? `[name="${value}"]` : ''}`);
 
-export const selectOption = (value, cy) => {
-  getSelect(cy).click();
+export const getSelect = () => cy.get('.Select__');
 
-  getSelect(cy).within(() => {
-    getSelectOption(value, cy).click({ force: true });
-  });
+export const selectOption = value => {
+  getSelect()
+    .click()
+    .within(() => {
+      getSelectOption(value).click({ force: true });
+    });
 };
 
 export const fillAsyncSelect = (input, match) => {
-  getSelect(cy).find('input[type="text"]').paste(input);
-
-  getSelect(cy).within(() => {
+  getSelect().within(() => {
+    cy.get('input[type="text"]').pipe(paste(input));
     cy.get(`div:contains(${match})`).first().click();
   });
 };
 
-export const stubKoodistoRoute = ({ koodisto: koodistonNimi, cy }) => {
+export const stubKoodistoRoute = ({ koodisto: koodistonNimi }) => {
   cy.route({
     method: 'GET',
     url: `**/koodisto-service/rest/json/${koodistonNimi}/koodi**`,
@@ -44,7 +57,7 @@ export const stubKoodistoRoute = ({ koodisto: koodistonNimi, cy }) => {
   });
 };
 
-export const stubLokalisaatioRoute = ({ cy }) => {
+export const stubLokalisaatioRoute = () => {
   cy.route({
     method: 'GET',
     url: '**/lokalisointi/cxf/rest/v1/localisation**',
@@ -52,77 +65,73 @@ export const stubLokalisaatioRoute = ({ cy }) => {
   });
 };
 
-export const typeToEditor = (value, cy) => {
+export const typeToEditor = value => {
   cy.get('.Editor__').within(() => {
-    cy.get('[contenteditable="true"]').type(value);
+    cy.get('[contenteditable="true"]').pipe(paste(value));
   });
 };
 
-export const getTableInput = cy => {
+export const getTableInput = () => {
   return cy.get('.TableInput__');
 };
 
-export const fillDateTimeInput = ({ date, time, cy }) => {
-  getByTestId('DateTimeInput', cy).within(() => {
-    getByTestId('DateTimeInput__Date', cy).find('input').paste(date);
-    getByTestId('DateTimeInput__Time', cy).find('input').clear().paste(time);
+export const fillDateTimeInput = ({ date, time }) => {
+  getByTestId('DateTimeInput').within(() => {
+    getByTestId('DateTimeInput__Date').find('input').clear().pipe(paste(date));
+    getByTestId('DateTimeInput__Time').find('input').clear().pipe(paste(time));
   });
 };
 
-export const chooseKieliversiotLanguages = (selectedLanguages, cy) => {
+export const chooseKieliversiotLanguages = (selectedLanguages = []) => {
   const languages = ['en', 'fi', 'sv'];
   languages.forEach(lang => {
-    cy.get(`input[name=${lang}]`).as('checkbox');
-
-    if (selectedLanguages.includes(lang)) {
-      cy.get('@checkbox').check({ force: true });
-    } else {
-      cy.get('@checkbox').uncheck({ force: true });
-    }
+    cy.get(`input[name=${lang}]`).then($checkbox => {
+      return selectedLanguages.includes(lang)
+        ? cy.wrap($checkbox).check({ force: true })
+        : cy.wrap($checkbox).uncheck({ force: true });
+    });
   });
 };
 
-export const fillYhteyshenkilotFields = ({ cy }) => {
-  cy.getByTestId('lisaaYhteyshenkiloButton').click({ force: true });
+export const fillYhteyshenkilotFields = () => {
+  getByTestId('lisaaYhteyshenkiloButton').click({ force: true });
 
-  cy.getByTestId('nimi').find('input').paste('nimi');
-  cy.getByTestId('titteli').find('input').paste('titteli');
-  cy.getByTestId('sahkoposti').find('input').paste('sähkoposti');
-  cy.getByTestId('puhelinnumero').find('input').paste('puhelin');
-  cy.getByTestId('verkkosivu').find('input').paste('verkkosivu');
+  getByTestId('nimi').find('input').pipe(paste('nimi'));
+  getByTestId('titteli').find('input').pipe(paste('titteli'));
+  getByTestId('sahkoposti').find('input').pipe(paste('sähkoposti'));
+  getByTestId('puhelinnumero').find('input').pipe(paste('puhelin'));
+  getByTestId('verkkosivu').find('input').pipe(paste('verkkosivu'));
 };
 
 export const fillValintakoeFields = () => {
-  selectOption('valintakokeentyyppi_1', cy);
+  selectOption('valintakokeentyyppi_1');
 
-  cy.getByTestId('lisaaTilaisuusButton').click({ force: true });
+  getByTestId('lisaaTilaisuusButton').click({ force: true });
 
-  cy.getByTestId('osoite').find('input').paste('osoite');
+  getByTestId('osoite').find('input').pipe(paste('osoite'));
 
-  cy.getByTestId('postinumero').within(() => {
+  getByTestId('postinumero').within(() => {
     fillAsyncSelect('0', '0 Posti_0');
   });
 
-  cy.getByTestId('alkaa').within(() => {
+  getByTestId('alkaa').within(() => {
     fillDateTimeInput({
       date: '02.04.2019',
       time: '10:45',
-      cy,
     });
   });
 
-  cy.getByTestId('paattyy').within(() => {
+  getByTestId('paattyy').within(() => {
     fillDateTimeInput({
       date: '02.04.2019',
       time: '19:00',
-      cy,
     });
   });
 
-  cy.getByTestId('lisatietoja').find('textarea').paste('lisatietoja');
+  getByTestId('lisatietoja').find('textarea').pipe(paste('lisatietoja'));
 };
 
-export const stubKayttoOikeusMeRoute = ({ user = {}, cy }) => {
+export const stubKayttoOikeusMeRoute = ({ user = {} } = {}) => {
   cy.route({
     method: 'GET',
     url: '**/kayttooikeus-service/cas/me',
@@ -140,7 +149,7 @@ export const stubKayttoOikeusMeRoute = ({ user = {}, cy }) => {
   });
 };
 
-export const stubKoutaBackendLoginRoute = ({ cy }) => {
+export const stubKoutaBackendLoginRoute = () => {
   cy.route({
     method: 'GET',
     url: '**/kouta-backend/auth/login',
@@ -148,7 +157,7 @@ export const stubKoutaBackendLoginRoute = ({ cy }) => {
   });
 };
 
-export const stubKoutaBackendSessionRoute = ({ cy }) => {
+export const stubKoutaBackendSessionRoute = () => {
   cy.route({
     method: 'GET',
     url: '**/kouta-backend/auth/session',
@@ -157,9 +166,8 @@ export const stubKoutaBackendSessionRoute = ({ cy }) => {
 };
 
 export const stubHakemuspalveluLomakkeetRoute = ({
-  cy,
   lomakkeet = [{ name: { fi: 'Lomake 1' }, key: 'lomake_1' }],
-}) => {
+} = {}) => {
   cy.route({
     method: 'GET',
     url: '**/lomake-editori/api/forms',
@@ -170,9 +178,8 @@ export const stubHakemuspalveluLomakkeetRoute = ({
 };
 
 export const stubOppijanumerorekisteriHenkiloRoute = ({
-  cy,
   henkilo = { etunimet: 'John', sukunimi: 'Doe' },
-}) => {
+} = {}) => {
   cy.route({
     method: 'GET',
     url: '**/oppijanumerorekisteri-service/henkilo/**',
@@ -180,20 +187,20 @@ export const stubOppijanumerorekisteriHenkiloRoute = ({
   });
 };
 
-export const fillTreeSelect = (value, cy) => {
+export const fillTreeSelect = value => {
   value.forEach(val => {
     cy.get(`input[type="checkbox"][name="${val}"]`).check({ force: true });
   });
 };
 
-export const fillKoulutustyyppiSelect = (path, cy) => {
+export const fillKoulutustyyppiSelect = path => {
   path.forEach(option => {
-    getRadio(option, cy).check({ force: true });
+    getRadio(option).check({ force: true });
   });
 };
 
 export const fillDatePickerInput = value => {
-  cy.get('.DatePickerInput__').find('input').paste(value);
+  cy.get('.DatePickerInput__').find('input').pipe(paste(value));
 };
 
 export const stubKoodiRoute = koodi => {
@@ -226,3 +233,17 @@ export const stubEPerusteetByKoulutuskoodiRoute = () => {
     },
   });
 };
+
+export const stubCommonRoutes = () => {
+  stubLokalisaatioRoute();
+  stubKayttoOikeusMeRoute();
+  stubKoutaBackendLoginRoute();
+  stubKoutaBackendSessionRoute();
+};
+
+export const jatka = () => getByTestId('jatkaButton').click({ force: true });
+
+export const OPH_TEST_ORGANISAATIO_OID = '1.2.246.562.10.48587687889';
+
+export const isStubbed =
+  !process.env.CYPRESS_BACKEND || process.env.CYPRESS_BACKEND === 'stubs';

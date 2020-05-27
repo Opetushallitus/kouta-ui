@@ -7,57 +7,57 @@ import {
   fillValintakoeFields,
   fillAsyncSelect,
   typeToEditor,
+  jatka,
+  getByTestId,
+  paste,
 } from '#/cypress/utils';
+
 import { prepareTest } from '#/cypress/hakukohdeFormUtils';
 
-const jatka = () => {
-  cy.getByTestId('jatkaButton').click({ force: true });
-};
-
 const lisaa = () => {
-  cy.getByTestId('lisaaButton').click({ force: true });
+  getByTestId('lisaaButton').click({ force: true });
 };
 
 const tallenna = () => {
-  cy.getByTestId('tallennaHakukohdeButton').click({ force: true });
+  getByTestId('tallennaHakukohdeButton').click({ force: true });
 };
 
 const fillKieliversiotSection = () => {
-  cy.getByTestId('kieliversiotSection').within(() => {
-    chooseKieliversiotLanguages(['fi'], cy);
+  getByTestId('kieliversiotSection').within(() => {
+    chooseKieliversiotLanguages(['fi']);
     jatka();
   });
 };
 
 const fillPohjakoulutusvaatimusSection = () => {
-  cy.getByTestId('pohjakoulutusSection').within(() => {
-    cy.getByTestId('pohjakoulutusvaatimusSelect').within(() => {
-      selectOption('pohjakoulutusvaatimustoinenaste_0', cy);
+  getByTestId('pohjakoulutusSection').within(() => {
+    getByTestId('pohjakoulutusvaatimusSelect').within(() => {
+      selectOption('pohjakoulutusvaatimustoinenaste_0');
     });
 
-    typeToEditor('Tarkenne', cy);
+    typeToEditor('Tarkenne');
 
     jatka();
   });
 };
 
 const fillDatetime = ({ date, time }) => {
-  fillDateTimeInput({ date, time, cy });
+  fillDateTimeInput({ date, time });
 };
 
 const fillHakuajatSection = () => {
-  cy.getByTestId('hakuajatSection').within(() => {
-    getCheckbox(null, cy).click({ force: true });
+  getByTestId('hakuajatSection').within(() => {
+    getCheckbox(null).click({ force: true });
     lisaa();
 
-    cy.getByTestId('alkaa').within(() => {
+    getByTestId('alkaa').within(() => {
       fillDatetime({
         date: '02.04.2019',
         time: '10:45',
       });
     });
 
-    cy.getByTestId('paattyy').within(() => {
+    getByTestId('paattyy').within(() => {
       fillDatetime({
         date: '25.11.2019',
         time: '23:59',
@@ -67,15 +67,15 @@ const fillHakuajatSection = () => {
 };
 
 const fillPerustiedotSection = ({ isKorkeakoulu = false } = {}) => {
-  cy.getByTestId('perustiedotSection').within(() => {
-    cy.getByTestId('hakukohteenNimi')
+  getByTestId('perustiedotSection').within(() => {
+    getByTestId('hakukohteenNimi')
       .find('input')
       .clear({ force: true })
-      .paste('Hakukohteen nimi');
+      .pipe(paste('Hakukohteen nimi'));
 
     if (!isKorkeakoulu) {
-      cy.getByTestId('voiSuorittaaKaksoistutkinnon').within(() => {
-        getCheckbox(null, cy).click({ force: true });
+      getByTestId('voiSuorittaaKaksoistutkinnon').within(() => {
+        getCheckbox(null).click({ force: true });
       });
     }
 
@@ -88,33 +88,33 @@ const fillPerustiedotSection = ({ isKorkeakoulu = false } = {}) => {
 };
 
 const fillLomakeSection = () => {
-  cy.getByTestId('lomakeSection').within(() => {
-    cy.getByTestId('eriHakulomake').within(() => {
-      getCheckbox(null, cy).click({ force: true });
+  getByTestId('lomakeSection').within(() => {
+    getByTestId('eriHakulomake').within(() => {
+      getCheckbox(null).click({ force: true });
     });
 
-    getRadio('ataru', cy).click({ force: true });
-    selectOption('Lomake 1', cy);
+    getRadio('ataru').click({ force: true });
+    selectOption('Lomake 1');
   });
 };
 
 const fillAlkamiskausiSection = () => {
-  cy.getByTestId('alkamiskausiSection').within(() => {
-    cy.getByTestId('eriAlkamiskausi').within(() => {
-      getCheckbox(null, cy).click({ force: true });
+  getByTestId('alkamiskausiSection').within(() => {
+    getByTestId('eriAlkamiskausi').within(() => {
+      getCheckbox(null).click({ force: true });
     });
 
-    getRadio('kausi_0#1', cy).click({ force: true });
-    selectOption(new Date().getFullYear().toString(), cy);
+    getRadio('kausi_0#1').click({ force: true });
+    selectOption(new Date().getFullYear().toString());
   });
 };
 
 const fillAloituspaikatSection = ({ isKorkeakoulu = false } = {}) => {
-  cy.getByTestId('aloituspaikatSection').within(() => {
-    cy.getByTestId('aloituspaikkamaara').paste('10');
+  getByTestId('aloituspaikatSection').within(() => {
+    getByTestId('aloituspaikkamaara').pipe(paste('10'));
 
     if (isKorkeakoulu) {
-      cy.getByTestId('ensikertalaismaara').paste('5');
+      getByTestId('ensikertalaismaara').pipe(paste('5'));
     }
 
     jatka();
@@ -122,48 +122,50 @@ const fillAloituspaikatSection = ({ isKorkeakoulu = false } = {}) => {
 };
 
 const fillValintaperusteenKuvausSection = () => {
-  cy.getByTestId('valintaperusteenKuvausSection').within(() => {
-    selectOption('Valintaperusteen nimi', cy);
+  getByTestId('valintaperusteenKuvausSection').within(() => {
+    selectOption('Valintaperusteen nimi');
     jatka();
   });
 };
 
 const fillValintakoeSection = () => {
-  cy.getByTestId('valintakoeSection').within(() => {
+  getByTestId('valintakoeSection').within(() => {
     fillValintakoeFields();
     jatka();
   });
 };
 
 const fillLiitteetSection = () => {
-  cy.getByTestId('liitteetSection').within(() => {
+  getByTestId('liitteetSection').within(() => {
     lisaa();
 
-    cy.getByTestId('liitelista').within(() => {
-      cy.getByTestId('tyyppi').within(() => {
-        selectOption('liitetyypitamm_0', cy);
+    getByTestId('liitelista').within(() => {
+      getByTestId('tyyppi').within(() => {
+        selectOption('liitetyypitamm_0');
       });
 
-      cy.getByTestId('nimi').find('input').paste('Nimi');
+      getByTestId('nimi').find('input').pipe(paste('Nimi'));
 
-      cy.getByTestId('kuvaus').find('textarea').paste('Kuvaus');
+      getByTestId('kuvaus').find('textarea').pipe(paste('Kuvaus'));
 
       fillDatetime({
         date: '25.11.2019',
         time: '23:59',
       });
 
-      cy.getByTestId('toimitustapa').within(() => {
-        getRadio('osoite', cy).click({ force: true });
+      getByTestId('toimitustapa').within(() => {
+        getRadio('osoite').click({ force: true });
       });
 
-      cy.getByTestId('osoite').find('input').paste('Osoite');
+      getByTestId('osoite').find('input').pipe(paste('Osoite'));
 
-      cy.getByTestId('postinumero').within(() => {
+      getByTestId('postinumero').within(() => {
         fillAsyncSelect('0', 'Posti_0');
       });
 
-      cy.getByTestId('sahkoposti').find('input').paste('sahkoposti@email.com');
+      getByTestId('sahkoposti')
+        .find('input')
+        .pipe(paste('sahkoposti@email.com'));
     });
 
     jatka();
@@ -171,8 +173,8 @@ const fillLiitteetSection = () => {
 };
 
 const fillTilaSection = (tila = 'julkaistu') => {
-  cy.getByTestId('tilaSection').within(() => {
-    getRadio(tila, cy).check({ force: true });
+  getByTestId('tilaSection').within(() => {
+    getRadio(tila).check({ force: true });
   });
 };
 
@@ -199,7 +201,7 @@ describe('createHakukohdeForm', () => {
     tallenna();
 
     cy.wait('@createHakukohdeRequest').then(({ request }) => {
-      cy.wrap(request.body).snapshot();
+      cy.wrap(request.body).toMatchSnapshot();
     });
 
     cy.location('pathname').should(
@@ -228,7 +230,7 @@ describe('createHakukohdeForm', () => {
     tallenna();
 
     cy.wait('@createHakukohdeRequest').then(({ request }) => {
-      cy.wrap(request.body).snapshot();
+      cy.wrap(request.body).toMatchSnapshot();
     });
 
     cy.location('pathname').should(

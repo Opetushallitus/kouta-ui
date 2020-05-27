@@ -4,14 +4,15 @@ import {
   stubKoodistoRoute,
   stubOppijanumerorekisteriHenkiloRoute,
   stubKoodiRoute,
+  stubCommonRoutes,
 } from './utils';
 
 import organisaatio from './data/organisaatio';
 import soraKuvaus from './data/soraKuvaus';
 import createKoodi from './data/koodi';
 
-export const stubValintaperusteFormRoutes = ({ cy, organisaatioOid }) => {
-  cy.server();
+export const stubValintaperusteFormRoutes = ({ organisaatioOid }) => {
+  stubCommonRoutes();
 
   cy.route({
     method: 'GET',
@@ -49,19 +50,19 @@ export const stubValintaperusteFormRoutes = ({ cy, organisaatioOid }) => {
     ),
   });
 
-  stubKoodistoRoute({ koodisto: 'hakutapa', cy });
-  stubKoodistoRoute({ koodisto: 'haunkohdejoukko', cy });
-  stubKoodistoRoute({ koodisto: 'valintatapajono', cy });
-  stubKoodistoRoute({ koodisto: 'kielitaidonosoittaminen', cy });
-  stubKoodistoRoute({ koodisto: 'kielitaitovaatimustyypit', cy });
-  stubKoodistoRoute({ koodisto: 'kielitaitovaatimustyypitkuvaus', cy });
-  stubKoodistoRoute({ koodisto: 'kieli', cy });
-  stubKoodistoRoute({ koodisto: 'osaamistausta', cy });
-  stubKoodistoRoute({ koodisto: 'valintakokeentyyppi', cy });
+  stubKoodistoRoute({ koodisto: 'hakutapa' });
+  stubKoodistoRoute({ koodisto: 'haunkohdejoukko' });
+  stubKoodistoRoute({ koodisto: 'valintatapajono' });
+  stubKoodistoRoute({ koodisto: 'kielitaidonosoittaminen' });
+  stubKoodistoRoute({ koodisto: 'kielitaitovaatimustyypit' });
+  stubKoodistoRoute({ koodisto: 'kielitaitovaatimustyypitkuvaus' });
+  stubKoodistoRoute({ koodisto: 'kieli' });
+  stubKoodistoRoute({ koodisto: 'osaamistausta' });
+  stubKoodistoRoute({ koodisto: 'valintakokeentyyppi' });
   stubKoodiRoute(createKoodi({ koodisto: 'posti', versio: 2 }));
   stubKoodiRoute(
     createKoodi({ koodisto: 'posti', koodiArvo: '00350', versio: 1 })
   );
 
-  stubOppijanumerorekisteriHenkiloRoute({ cy });
+  stubOppijanumerorekisteriHenkiloRoute();
 };

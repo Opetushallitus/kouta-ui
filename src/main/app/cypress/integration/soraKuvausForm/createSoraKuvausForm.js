@@ -4,40 +4,39 @@ import {
   getCheckbox,
   fillKoulutustyyppiSelect,
   getRadio,
-} from '../../utils';
+  getByTestId,
+  jatka,
+  paste,
+} from '#/cypress/utils';
 
-import createSoraKuvaus from '../../data/soraKuvaus';
-import { stubSoraKuvausFormRoutes } from '../../soraKuvausFormUtils';
-
-const jatka = () => {
-  cy.getByTestId('jatkaButton').click({ force: true });
-};
+import createSoraKuvaus from '#/cypress/data/soraKuvaus';
+import { stubSoraKuvausFormRoutes } from '#/cypress/soraKuvausFormUtils';
 
 const fillKoulutustyyppiSection = () => {
-  cy.getByTestId('koulutustyyppiSection').within(() => {
-    fillKoulutustyyppiSelect(['amm'], cy);
+  getByTestId('koulutustyyppiSection').within(() => {
+    fillKoulutustyyppiSelect(['amm']);
   });
 };
 
 const fillPohjaSection = () => {
-  cy.getByTestId('pohjaSection').within(() => {
+  getByTestId('pohjaSection').within(() => {
     jatka();
   });
 };
 
 const fillKieliversiotSection = () => {
-  cy.getByTestId('kieliversiotSection').within(() => {
-    chooseKieliversiotLanguages(['fi'], cy);
+  getByTestId('kieliversiotSection').within(() => {
+    chooseKieliversiotLanguages(['fi']);
     jatka();
   });
 };
 
 const fillTiedotSection = () => {
-  cy.getByTestId('tiedotSection').within(() => {
-    cy.getByTestId('nimi').find('input').paste('Nimi', { force: true });
+  getByTestId('tiedotSection').within(() => {
+    getByTestId('nimi').find('input').pipe(paste('Nimi'));
 
-    cy.getByTestId('kuvaus').within(() => {
-      typeToEditor('Kuvaus', cy);
+    getByTestId('kuvaus').within(() => {
+      typeToEditor('Kuvaus');
     });
 
     jatka();
@@ -45,19 +44,19 @@ const fillTiedotSection = () => {
 };
 
 const fillJulkisuusSection = () => {
-  cy.getByTestId('julkinenSection').within(() => {
-    getCheckbox(null, cy).check({ force: true });
+  getByTestId('julkinenSection').within(() => {
+    getCheckbox(null).check({ force: true });
     jatka();
   });
 };
 
 const tallenna = () => {
-  cy.getByTestId('tallennaSoraKuvausButton').click({ force: true });
+  getByTestId('tallennaSoraKuvausButton').click({ force: true });
 };
 
 const fillTilaSection = (tila = 'julkaistu') => {
-  cy.getByTestId('tilaSection').within(() => {
-    getRadio(tila, cy).check({ force: true });
+  getByTestId('tilaSection').within(() => {
+    getRadio(tila).check({ force: true });
   });
 };
 
@@ -66,7 +65,8 @@ describe('createSoraKuvausForm', () => {
   const soraKuvaus = createSoraKuvaus();
 
   beforeEach(() => {
-    stubSoraKuvausFormRoutes({ cy, organisaatioOid });
+    cy.server();
+    stubSoraKuvausFormRoutes({ organisaatioOid });
 
     cy.route({
       method: 'GET',
@@ -96,7 +96,7 @@ describe('createSoraKuvausForm', () => {
     tallenna();
 
     cy.wait('@createSoraKuvausRequest').then(({ request }) => {
-      cy.wrap(request.body).snapshot();
+      cy.wrap(request.body).toMatchSnapshot();
     });
 
     cy.location('pathname').should(

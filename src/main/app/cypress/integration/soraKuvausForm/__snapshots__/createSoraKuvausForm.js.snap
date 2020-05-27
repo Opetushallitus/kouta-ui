@@ -1,0 +1,19 @@
+exports[`createSoraKuvausForm > should be able to create sora-kuvaus #0`] =
+{
+  "julkinen": true,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutustyyppi": "amm",
+  "metadata": {
+    "kuvaus": {
+      "fi": "<p>Kuvaus</p>"
+    }
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "Nimi"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "tila": "julkaistu"
+};

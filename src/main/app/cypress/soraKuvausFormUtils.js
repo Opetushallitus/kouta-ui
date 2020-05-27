@@ -1,10 +1,13 @@
 import { merge } from 'lodash';
 
-import organisaatio from './data/organisaatio';
-import { stubOppijanumerorekisteriHenkiloRoute } from './utils';
+import organisaatio from '#/cypress/data/organisaatio';
+import {
+  stubOppijanumerorekisteriHenkiloRoute,
+  stubCommonRoutes,
+} from '#/cypress/utils';
 
-export const stubSoraKuvausFormRoutes = ({ cy, organisaatioOid }) => {
-  cy.server();
+export const stubSoraKuvausFormRoutes = ({ organisaatioOid }) => {
+  stubCommonRoutes();
 
   cy.route({
     method: 'POST',
@@ -22,5 +25,5 @@ export const stubSoraKuvausFormRoutes = ({ cy, organisaatioOid }) => {
     response: [],
   });
 
-  stubOppijanumerorekisteriHenkiloRoute({ cy });
+  stubOppijanumerorekisteriHenkiloRoute();
 };

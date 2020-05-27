@@ -1,7 +1,8 @@
 import { merge } from 'lodash';
 
-import organisaatio from '../data/organisaatio';
-import organisaatioHierarkia from '../data/organisaatioHierarkia';
+import organisaatio from '#/cypress/data/organisaatio';
+import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
+import { stubCommonRoutes, getByTestId } from '#/cypress/utils';
 
 const koutaSearchItem = () => ({
   modified: '2019-02-20T07:55',
@@ -74,8 +75,9 @@ const stubMyOrganisations = () => {
 };
 
 describe('frontPage', () => {
-  beforeEach(() => {
+  before(() => {
     cy.server();
+    stubCommonRoutes();
 
     cy.route({
       method: 'GET',
@@ -86,31 +88,6 @@ describe('frontPage', () => {
       },
     });
 
-    stubMyOrganisations();
-
-    cy.visit('/');
-  });
-
-  it('should display organisation hierarchy', () => {
-    cy.getByTestId('selectedOrganisaatio').should('contain', 'Organisaatio_1');
-
-    cy.getByTestId('toggleOrganisaatioDrawer').click();
-
-    cy.getByTestId('organisaatioDrawer').should(
-      'contain',
-      'Vaihda organisaatiota'
-    );
-  });
-
-  it('should display navigation links', () => {
-    cy.getByTestId('navigaatio')
-      .should('contain', 'Koulutukset')
-      .should('contain', 'Toteutukset')
-      .should('contain', 'Haut')
-      .should('contain', 'Hakukohteet');
-  });
-
-  it('should list koulutukset', () => {
     cy.route({
       method: 'GET',
       url: '**/kouta-backend/search/koulutukset**',
@@ -122,12 +99,6 @@ describe('frontPage', () => {
       },
     });
 
-    cy.get('#koulutukset').scrollIntoView();
-
-    cy.getByTestId('koulutuksetTable').should('contain', 'Koulutuksen nimi');
-  });
-
-  it('should list toteutukset', () => {
     cy.route({
       method: 'GET',
       url: '**/kouta-backend/search/toteutukset**',
@@ -139,12 +110,6 @@ describe('frontPage', () => {
       },
     });
 
-    cy.get('#toteutukset').scrollIntoView();
-
-    cy.getByTestId('toteutuksetTable').should('contain', 'Toteutuksen nimi');
-  });
-
-  it('should list haut', () => {
     cy.route({
       method: 'GET',
       url: '**/kouta-backend/search/haut**',
@@ -154,12 +119,6 @@ describe('frontPage', () => {
       },
     });
 
-    cy.get('#haut').scrollIntoView();
-
-    cy.getByTestId('hautTable').should('contain', 'Haun nimi');
-  });
-
-  it('should list valintaperusteet', () => {
     cy.route({
       method: 'GET',
       url: '**/kouta-backend/search/valintaperusteet**',
@@ -171,15 +130,6 @@ describe('frontPage', () => {
       },
     });
 
-    cy.get('#valintaperusteet').scrollIntoView();
-
-    cy.getByTestId('valintaperusteetTable').should(
-      'contain',
-      'Valintaperusteen nimi'
-    );
-  });
-
-  it('should list hakukohteet', () => {
     cy.route({
       method: 'GET',
       url: '**/kouta-backend/search/hakukohteet**',
@@ -191,8 +141,60 @@ describe('frontPage', () => {
       },
     });
 
+    stubMyOrganisations();
+
+    cy.visit('/');
+  });
+
+  it('should display organisation hierarchy', () => {
+    getByTestId('selectedOrganisaatio').should('contain', 'Organisaatio_1');
+
+    getByTestId('toggleOrganisaatioDrawer').click();
+
+    getByTestId('organisaatioDrawer').should(
+      'contain',
+      'Vaihda organisaatiota'
+    );
+  });
+
+  it('should display navigation links', () => {
+    getByTestId('navigaatio')
+      .should('contain', 'Koulutukset')
+      .should('contain', 'Toteutukset')
+      .should('contain', 'Haut')
+      .should('contain', 'Hakukohteet');
+  });
+
+  it('should list koulutukset', () => {
+    cy.get('#koulutukset').scrollIntoView();
+
+    getByTestId('koulutuksetTable').should('contain', 'Koulutuksen nimi');
+  });
+
+  it('should list toteutukset', () => {
+    cy.get('#toteutukset').scrollIntoView();
+
+    getByTestId('toteutuksetTable').should('contain', 'Toteutuksen nimi');
+  });
+
+  it('should list haut', () => {
+    cy.get('#haut').scrollIntoView();
+
+    getByTestId('hautTable').should('contain', 'Haun nimi');
+  });
+
+  it('should list valintaperusteet', () => {
+    cy.get('#valintaperusteet').scrollIntoView();
+
+    getByTestId('valintaperusteetTable').should(
+      'contain',
+      'Valintaperusteen nimi'
+    );
+  });
+
+  it('should list hakukohteet', () => {
     cy.get('#hakukohteet').scrollIntoView();
 
-    cy.getByTestId('hakukohteetTable').should('contain', 'Hakukohteen nimi');
+    getByTestId('hakukohteetTable').should('contain', 'Hakukohteen nimi');
   });
 });

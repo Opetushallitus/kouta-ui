@@ -1,16 +1,12 @@
 const fs = require('fs');
 const wp = require('@cypress/webpack-preprocessor');
+const { initPlugin } = require('cypress-plugin-snapshots/plugin');
 const alias = require('../../webpack-alias');
 
-module.exports = on => {
+module.exports = (on, config) => {
   on('task', {
-    readFileMaybe(filename) {
-      if (fs.existsSync(filename)) {
-        return fs.readFileSync(filename, 'utf8');
-      }
-
-      return null;
-    },
+    readFileMaybe: filename =>
+      fs.existsSync(filename) ? fs.readFileSync(filename, 'utf8') : null,
   });
   on(
     'file:preprocessor',
@@ -22,4 +18,6 @@ module.exports = on => {
       },
     })
   );
+  initPlugin(on, config);
+  return config;
 };

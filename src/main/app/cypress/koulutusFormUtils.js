@@ -4,13 +4,14 @@ import {
   stubKoodistoRoute,
   stubOppijanumerorekisteriHenkiloRoute,
   stubEPerusteetByKoulutuskoodiRoute,
-} from './utils';
-import organisaatioHierarkia from './data/organisaatioHierarkia';
-import organisaatio from './data/organisaatio';
-import koodisto from './data/koodisto';
+  stubCommonRoutes,
+} from '#/cypress/utils';
+import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
+import organisaatio from '#/cypress/data/organisaatio';
+import koodisto from '#/cypress/data/koodisto';
 
-export const stubKoulutusFormRoutes = ({ cy, organisaatioOid }) => {
-  cy.server();
+export const stubKoulutusFormRoutes = ({ organisaatioOid }) => {
+  stubCommonRoutes();
 
   cy.route({
     method: 'GET',
@@ -120,15 +121,14 @@ export const stubKoulutusFormRoutes = ({ cy, organisaatioOid }) => {
     ],
   });
 
-  stubKoodistoRoute({ koodisto: 'tutkintonimikekk', cy });
-  stubKoodistoRoute({ koodisto: 'opintojenlaajuus', cy });
-  stubKoodistoRoute({ koodisto: 'koulutuksenlisatiedot', cy });
-  stubKoodistoRoute({ koodisto: 'koulutus', cy });
+  stubKoodistoRoute({ koodisto: 'tutkintonimikekk' });
+  stubKoodistoRoute({ koodisto: 'opintojenlaajuus' });
+  stubKoodistoRoute({ koodisto: 'koulutuksenlisatiedot' });
+  stubKoodistoRoute({ koodisto: 'koulutus' });
 
   stubKoodistoRoute({
     koodisto: 'kansallinenkoulutusluokitus2016koulutusalataso2',
-    cy,
   });
 
-  stubOppijanumerorekisteriHenkiloRoute({ cy });
+  stubOppijanumerorekisteriHenkiloRoute();
 };

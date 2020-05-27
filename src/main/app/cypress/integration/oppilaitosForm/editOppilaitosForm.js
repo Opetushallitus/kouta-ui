@@ -1,15 +1,15 @@
-import createOppilaitos from '../../data/oppilaitos';
-import { chooseKieliversiotLanguages } from '../../utils';
-import { stubOppilaitosFormRoutes } from '../../oppilaitosFormUtils';
+import createOppilaitos from '#/cypress/data/oppilaitos';
+import { chooseKieliversiotLanguages, getByTestId } from '#/cypress/utils';
+import { stubOppilaitosFormRoutes } from '#/cypress/oppilaitosFormUtils';
 
 const fillKieliversiotSection = () => {
-  cy.getByTestId('kieliversiotSection').within(() => {
-    chooseKieliversiotLanguages(['fi'], cy);
+  getByTestId('kieliversiotSection').within(() => {
+    chooseKieliversiotLanguages(['fi']);
   });
 };
 
 const tallenna = () => {
-  cy.getByTestId('tallennaOppilaitosButton').click({ force: true });
+  getByTestId('tallennaOppilaitosButton').click({ force: true });
 };
 
 describe('editOppilaitosForm', () => {
@@ -22,6 +22,7 @@ describe('editOppilaitosForm', () => {
   };
 
   beforeEach(() => {
+    cy.server();
     stubOppilaitosFormRoutes({ organisaatioOid });
 
     cy.route({
@@ -45,7 +46,7 @@ describe('editOppilaitosForm', () => {
     tallenna();
 
     cy.wait('@editOppilaitosResponse').then(({ request }) => {
-      cy.wrap(request.body).snapshot();
+      cy.wrap(request.body).toMatchSnapshot();
     });
   });
 });

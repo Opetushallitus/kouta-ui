@@ -1,4 +1,5 @@
 import React, { useMemo, useContext, useRef, useCallback } from 'react';
+import { components } from 'react-select';
 import ReactCreatable from 'react-select/creatable';
 import ReactAsyncCreatableSelect from 'react-select/async-creatable';
 import ReactAsyncSelect from 'react-select/async';
@@ -13,6 +14,15 @@ import UiSelect, {
 
 import memoizeOne from '../../utils/memoizeOne';
 import { useTranslation } from 'react-i18next';
+
+const addTestId = (Component, getTestId) => props => (
+  <Component
+    {...props}
+    innerProps={Object.assign({}, props.innerProps, {
+      'data-testid': getTestId(props),
+    })}
+  />
+);
 
 const noopPromise = () => Promise.resolve();
 
@@ -33,6 +43,12 @@ const getDefaultProps = memoizeOne(t => ({
   placeholder: makeDefaultPlaceholder(t),
   loadingMessage: defaultLoadingMessage,
   className: 'Select__',
+  components: {
+    Option: addTestId(
+      components.Option,
+      ({ value }) => `react-select-option_${value}`
+    ),
+  },
 }));
 
 const getOptionLabelByValue = options => {

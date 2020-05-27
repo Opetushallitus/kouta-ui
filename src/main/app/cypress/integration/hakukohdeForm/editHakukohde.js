@@ -1,15 +1,14 @@
 import { getByTestId, chooseKieliversiotLanguages } from '#/cypress/utils';
-
 import { prepareTest } from '#/cypress/hakukohdeFormUtils';
 
-const fillKieliversiotSection = cy => {
-  getByTestId('kieliversiotSection', cy).within(() => {
-    chooseKieliversiotLanguages(['fi'], cy);
+const fillKieliversiotSection = () => {
+  getByTestId('kieliversiotSection').within(() => {
+    chooseKieliversiotLanguages(['fi']);
   });
 };
 
-const tallenna = cy => {
-  getByTestId('tallennaHakukohdeButton', cy).click({ force: true });
+const tallenna = () => {
+  getByTestId('tallennaHakukohdeButton').click({ force: true });
 };
 
 describe('editHakukohdeForm', () => {
@@ -26,11 +25,11 @@ describe('editHakukohdeForm', () => {
       edit: true,
     });
 
-    fillKieliversiotSection(cy);
-    tallenna(cy);
+    fillKieliversiotSection();
+    tallenna();
 
     cy.wait('@updateHakukohdeRequest').then(({ request }) => {
-      cy.wrap(request.body).snapshot();
+      cy.wrap(request.body).toMatchSnapshot();
     });
   });
 });

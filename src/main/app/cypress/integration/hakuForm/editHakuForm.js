@@ -1,18 +1,16 @@
 import { merge } from 'lodash';
+import { getByTestId, chooseKieliversiotLanguages } from '#/cypress/utils';
+import { stubHakuFormRoutes } from '#/cypress/hakuFormUtils';
+import haku from '#/cypress/data/haku';
 
-import { getByTestId, chooseKieliversiotLanguages } from '../../utils';
-import { stubHakuFormRoutes } from '../../hakuFormUtils';
-
-import haku from '../../data/haku';
-
-const fillKieliversiotSection = cy => {
-  getByTestId('kieliversiotSection', cy).within(() => {
-    chooseKieliversiotLanguages(['fi'], cy);
+const fillKieliversiotSection = () => {
+  getByTestId('kieliversiotSection').within(() => {
+    chooseKieliversiotLanguages(['fi']);
   });
 };
 
-const tallenna = cy => {
-  getByTestId('tallennaHakuButton', cy).click();
+const tallenna = () => {
+  getByTestId('tallennaHakuButton').click();
 };
 
 describe('editHakuForm', () => {
@@ -21,8 +19,7 @@ describe('editHakuForm', () => {
 
   beforeEach(() => {
     cy.server();
-
-    stubHakuFormRoutes({ organisaatioOid, cy });
+    stubHakuFormRoutes({ organisaatioOid });
 
     cy.route({
       method: 'GET',
@@ -57,12 +54,12 @@ describe('editHakuForm', () => {
       },
     }).as('editHakuRequest');
 
-    fillKieliversiotSection(cy);
+    fillKieliversiotSection();
 
-    tallenna(cy);
+    tallenna();
 
     cy.wait('@editHakuRequest').then(({ request }) => {
-      cy.wrap(request.body).snapshot();
+      cy.wrap(request.body).toMatchSnapshot();
     });
   });
 });

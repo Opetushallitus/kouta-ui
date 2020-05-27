@@ -1,18 +1,18 @@
 import { merge } from 'lodash';
 
-import { chooseKieliversiotLanguages } from '../../utils';
-import { stubSoraKuvausFormRoutes } from '../../soraKuvausFormUtils';
+import { chooseKieliversiotLanguages, getByTestId } from '#/cypress/utils';
+import { stubSoraKuvausFormRoutes } from '#/cypress/soraKuvausFormUtils';
 
-import createSoraKuvaus from '../../data/soraKuvaus';
+import createSoraKuvaus from '#/cypress/data/soraKuvaus';
 
 const fillKieliversiotSection = () => {
-  cy.getByTestId('kieliversiotSection').within(() => {
-    chooseKieliversiotLanguages(['fi'], cy);
+  getByTestId('kieliversiotSection').within(() => {
+    chooseKieliversiotLanguages(['fi']);
   });
 };
 
 const tallenna = () => {
-  cy.getByTestId('tallennaSoraKuvausButton').click();
+  getByTestId('tallennaSoraKuvausButton').click();
 };
 
 describe('editSoraKuvausForm', () => {
@@ -21,8 +21,7 @@ describe('editSoraKuvausForm', () => {
 
   beforeEach(() => {
     cy.server();
-
-    stubSoraKuvausFormRoutes({ organisaatioOid, cy });
+    stubSoraKuvausFormRoutes({ organisaatioOid });
 
     cy.route({
       method: 'GET',
@@ -50,7 +49,7 @@ describe('editSoraKuvausForm', () => {
     tallenna();
 
     cy.wait('@editSoraKuvausRequest').then(({ request }) => {
-      cy.wrap(request.body).snapshot();
+      cy.wrap(request.body).toMatchSnapshot();
     });
   });
 });

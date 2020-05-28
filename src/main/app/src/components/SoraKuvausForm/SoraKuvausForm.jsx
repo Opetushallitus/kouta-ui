@@ -1,15 +1,16 @@
 import React from 'react';
-import FormCollapseGroup from '../FormCollapseGroup';
-import FormCollapse from '../FormCollapse';
-import KieliversiotSection from './KieliversiotSection';
 import { useTranslation } from 'react-i18next';
+import { ENTITY } from '#/src/constants';
+import { useFieldValue } from '#/src/hooks/form';
+import getSoraKuvaukset from '#/src/utils/kouta/getSoraKuvaukset';
+import FormCollapseGroup from '#/src/components/FormCollapseGroup';
+import FormCollapse from '#/src/components/FormCollapse';
+import JulkisuusSection from '#/src/components/JulkisuusSection';
+import JulkaisutilaField from '#/src/components/JulkaisutilaField';
+import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import KoulutustyyppiSection from './KoulutustyyppiSection';
 import TiedotSection from './TiedotSection';
-import JulkisuusSection from './JulkisuusSection';
-import { useFieldValue } from '#/src/hooks/form';
-import JulkaisutilaField from '#/src/components/JulkaisutilaField';
-import PohjaFormCollapse from '../PohjaFormCollapse';
-import getSoraKuvaukset from '#/src/utils/kouta/getSoraKuvaukset';
+import KieliversiotSection from './KieliversiotSection';
 
 const SoraKuvausForm = ({
   steps = false,
@@ -39,7 +40,7 @@ const SoraKuvausForm = ({
           onSelectBase={onSelectBase}
           organisaatioOid={organisaatioOid}
           getCopyEntities={getSoraKuvaukset}
-          infoText={t('soraKuvausLomake.pohjavalintaInfo')}
+          infoText={t('soraKuvauslomake.pohjavalintaInfo')}
           createLabel={t('yleiset.luoUusi', {
             entity: t('yleiset.soraKuvaus'),
           })}
@@ -57,20 +58,21 @@ const SoraKuvausForm = ({
 
       <FormCollapse
         section="tiedot"
-        header={t('soraKuvausLomake.soraKuvauksenTiedot')}
+        header={t('soraKuvauslomake.soraKuvauksenTiedot')}
         languages={languageTabs}
         Component={TiedotSection}
       />
 
       <FormCollapse
         section="julkinen"
-        header={t('soraKuvausLomake.soraKuvauksenNayttamiseenLiittyvatTiedot')}
+        header={t('soraKuvauslomake.nakyminenMuilleToimijoille')}
         Component={JulkisuusSection}
+        entity={ENTITY.SORA_KUVAUS}
       />
 
       <FormCollapse
         section="tila"
-        header={t('soraKuvausLomake.soraKuvauksenTila')}
+        header={t('soraKuvauslomake.soraKuvauksenTila')}
         Component={JulkaisutilaField}
         showArkistoitu={showArkistoituTilaOption}
       />

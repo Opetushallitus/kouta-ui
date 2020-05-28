@@ -1,29 +1,30 @@
 import React from 'react';
 import _ from 'lodash';
-import TypeSection from './TypeSection';
-import TiedotSection from './TiedotSection/TiedotSection';
-import KuvausSection from './KuvausSection';
-import JarjestajaSection from './JarjestajaSection';
-import FormCollapseGroup from '../FormCollapseGroup';
-import FormCollapse from '../FormCollapse';
-import KieliversiotFields from '../KieliversiotFields';
-import ToteutuksetSection from './ToteutuksetSection';
-import Button from '../Button';
-import LisatiedotSection from './LisatiedotSection';
-import Flex from '../Flex';
-import NakyvyysSection from './NakyvyysSection';
 import { useTranslation } from 'react-i18next';
-import { useFieldValue } from '#/src/hooks/form';
-import JulkaisutilaField from '#/src/components/JulkaisutilaField';
-import isOphOrganisaatio from '../../utils/isOphOrganisaatio';
-import TeemakuvaSection from '../TeemakuvaSection';
-import PohjaFormCollapse from '../PohjaFormCollapse';
+import { ENTITY } from '#/src/constants';
+import isOphOrganisaatio from '#/src/utils/isOphOrganisaatio';
 import getKoulutukset from '#/src/utils/kouta/getKoulutukset';
+import { useFieldValue } from '#/src/hooks/form';
 import {
   isSameKoulutustyyppiWithOrganisaatio,
   useOrganisaatio,
-} from '../useOrganisaatio';
-import useOrganisaatioHierarkia from '../useOrganisaatioHierarkia';
+} from '#/src/components/useOrganisaatio';
+import useOrganisaatioHierarkia from '#/src/components/useOrganisaatioHierarkia';
+import Flex from '#/src/components/Flex';
+import Button from '#/src/components/Button';
+import FormCollapseGroup from '#/src/components/FormCollapseGroup';
+import FormCollapse from '#/src/components/FormCollapse';
+import KieliversiotFields from '#/src/components/KieliversiotFields';
+import JulkisuusSection from '#/src/components/JulkisuusSection';
+import JulkaisutilaField from '#/src/components/JulkaisutilaField';
+import TeemakuvaSection from '#/src/components/TeemakuvaSection';
+import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
+import TypeSection from './TypeSection';
+import TiedotSection from './TiedotSection';
+import KuvausSection from './KuvausSection';
+import JarjestajaSection from './JarjestajaSection';
+import LisatiedotSection from './LisatiedotSection';
+import ToteutuksetSection from './ToteutuksetSection';
 
 const isInHierarkia = org => hierarkia =>
   hierarkia.organisaatioOid === org.organisaatioOid ||
@@ -143,9 +144,10 @@ const KoulutusForm = ({
 
       <FormCollapse
         section="julkinen"
-        header="Koulutuksen näkyminen muille koulutustoimijoille"
+        header={t('koulutuslomake.nakyminenMuilleToimijoille')}
         disabled={onlyTarjoajaRights}
-        Component={NakyvyysSection}
+        Component={JulkisuusSection}
+        entity={ENTITY.KOULUTUS}
       />
 
       <FormCollapse

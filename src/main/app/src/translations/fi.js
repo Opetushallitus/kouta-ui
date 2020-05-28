@@ -197,6 +197,7 @@ export default {
     },
     riippuvuusEiJulkaistu:
       'Liitetty {{entity, unCapitalize}} ei ole "Julkaistu"-tilassa.',
+    onJulkinen: '{{entity}} on julkinen',
   },
   ilmoitukset: {
     tallentamattomiaMuutoksia: {
@@ -329,7 +330,7 @@ export default {
     luoUusiHakukohde: 'Luo uusi hakukohde',
     hakukohteenToteutusJaHaku: 'Hakukohteeseen liittyvä toteutus ja haku',
     valitseHakukohteenToteutus:
-      'Valitse, mihin toteutuksen hakukohde liitetään',
+      'Valitse, mihin toteutukseen hakukohde liitetään',
     valitseHakukohteenHaku: 'Valitse, mihin hakuun hakukohde liitetään',
     kiinnitetytToteutukset: 'Toteutukset',
     kiinnitetytHakukohteet: 'Hakukohteet',
@@ -353,7 +354,6 @@ export default {
     liitaToteutus: 'Liitä toteutus',
     koulutuksellaEiToteutuksia:
       'Tähän koulutukseen ei ole vielä liitetty toteutuksia',
-    koulutusOnJulkinen: 'Koulutus on julkinen',
     koulutukseenOnLiitettyToteutukset:
       'Tähän koulutukseen on liitetty seuraavat toteutukset',
     toteutuksenLiittaminenKoulutukseen: 'Toteutuksen liittäminen koulutukseen',
@@ -371,6 +371,10 @@ export default {
     tarjoajienLukumaara:
       'Koulutuksen järjestäjien tämänhetkinen lukumäärä on {{lukumaara}}',
     koulutuksenTeemakuva: 'Koulutuksen teemakuva',
+    nakyminenMuilleToimijoille:
+      'Koulutuksen näkyminen muille koulutustoimijoille',
+    julkisuusKuvaus:
+      'Valitse näkyykö koulutus muille koulutustoimijoille. Jos koulutus on julkinen, muut koulutustoimijat voivat käyttää sitä pohjana luodessaan uusia.',
   },
   toteutuslomake: {
     toteutuksenTiedot: 'Toteutuksen tiedot',
@@ -378,7 +382,7 @@ export default {
     laajuus: 'Laajuus',
     laajuusyksikko: 'Laajuusyksikkö',
     aloituspaikat: 'Aloituspaikat',
-    suunniteltuKesto: 'Sunnitteltu kesto',
+    suunniteltuKesto: 'Suunniteltu kesto',
     toteutuksellaEiHakukohteita:
       'Tähän toteutuksen ei ole vielä liitetty hakukohteita',
     toteutukseenOnLiitettyHakukohteet:
@@ -559,10 +563,8 @@ export default {
     valitseSoraKuvaus: 'Valitse käytettävä SORA-kuvaus',
     kuvauksenNimi: 'Valintaperusteen kuvauksen nimi',
     kuvauksenTarkenne: 'Kuvauksen tarkenne',
-    valintaperusteOnJulkinen: 'Valintaperuste on julkinen',
-    valintaperusteenNakyminen: 'Valintaperusteen näkyminen muille toimijoille',
-    valitseValintaperusteenNakyminen:
-      'Valitse näkyykö valintaperuste muille koulutustoimijoille',
+    nakyminenMuilleToimijoille:
+      'Valintaperusteen näkyminen muille koulutustoimijoille',
     valintaperusteenTila: 'Valintaperusteen tila',
     avaaSoraKuvaus: 'Avaa SORA-kuvaus',
     valintakoe: 'Valintakoe',
@@ -570,15 +572,18 @@ export default {
       'Käyttäjälläsi ei ole oikeuksia muokata tätä valintaperustekuvausta',
     pohjavalintaInfo:
       'Voit halutessasi käyttää aiemmin luotuja valintaperusteita uuden lomakkeen esitäytettynä pohjana.',
+    julkisuusKuvaus:
+      'Valitse näkyykö valintaperuste muille koulutustoimijoille. Jos valintaperuste on julkinen, muut koulutustoimijat voivat käyttää sitä pohjana luodessaan uusia.',
   },
-  soraKuvausLomake: {
+  soraKuvauslomake: {
     soraKuvauksenTiedot: 'SORA-kuvauksen tiedot',
-    soraKuvausOnJulkinen: 'SORA-kuvaus on julkinen',
-    soraKuvauksenNayttamiseenLiittyvatTiedot:
-      'SORA-kuvauksen näyttämiseen liittyvät tiedot',
     soraKuvauksenTila: 'SORA-kuvauksen tila',
     pohjavalintaInfo:
       'Voit halutessasi käyttää aiemmin luotuja SORA-kuvauksia uuden lomakkeen esitäytettynä pohjana.',
+    nakyminenMuilleToimijoille:
+      'SORA-kuvauksen näkyminen muille koulutustoimijoille',
+    julkisuusKuvaus:
+      'Valitse näkyykö SORA-kuvaus muille koulutustoimijoille. Jos SORA-kuvaus on julkinen, muut koulutustoimijat voivat käyttää sitä pohjana luodessaan uusia.',
   },
   oppilaitoslomake: {
     oppilaitoksenPerustiedot: 'Oppilaitoksen perustiedot',

@@ -1,7 +1,8 @@
+import { loggable } from 'cypress-pipe';
 import { fireEvent } from '@testing-library/react';
 import koodisto from '#/cypress/data/koodisto';
 
-export const paste = value => $element => {
+export const paste = loggable('paste', value => $element => {
   $element.focus();
   try {
     fireEvent.change($element[0], { target: { value } });
@@ -19,7 +20,7 @@ export const paste = value => $element => {
     });
   }
   return cy.wrap($element);
-};
+});
 
 export const getByTestId = testId => cy.get(`[data-testid="${testId}"]`);
 

@@ -7,7 +7,7 @@ CURRENT_PATH=$(pwd)
 cd src/main/app
 
 echo "Building Storybook"
-npm install
+npm ci --no-audit --prefer-offline
 npm run build-storybook
 
 echo "Copying Storybook files to AWS S3 buildnumber (ci-$TRAVIS_BUILD_NUMBER) directory"

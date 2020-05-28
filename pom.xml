@@ -103,10 +103,13 @@
                         </goals>
                     </execution>
                     <execution>
-                        <id>npm install</id>
+                        <id>npm ci</id>
                         <goals>
                             <goal>npm</goal>
                         </goals>
+                        <configuration>
+                            <arguments>ci --no-audit --prefer-offline</arguments>
+                        </configuration>
                     </execution>
                     <execution>
                         <id>Build frontend</id>

@@ -1,22 +1,6 @@
 import _ from 'lodash';
-import { getInvalidTranslations, otherwise } from './index';
-
-const allFuncs = (...fns) => value => _.every(fns, fn => fn(value));
-
-const exists = value =>
-  _.cond([
-    [_.isNil, _.stubFalse],
-    [
-      allFuncs(
-        v => _.isArray(v) || _.isString(v),
-        v => v.length === 0
-      ),
-      _.stubFalse,
-    ],
-    [allFuncs(_.isPlainObject, _.isEmpty), _.stubFalse],
-    [allFuncs(_.isPlainObject, v => v.value === ''), _.stubFalse],
-    [otherwise, _.stubTrue],
-  ])(value);
+import { getInvalidTranslations } from './index';
+import { formValueExists as exists } from '#/src/utils';
 
 class ErrorBuilder {
   constructor(values, errors = {}) {

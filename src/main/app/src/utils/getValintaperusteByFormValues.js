@@ -1,14 +1,12 @@
 import _ from 'lodash';
 import produce from 'immer';
-import { isNumeric } from './index';
+import { isNumeric, isDeepEmptyFormValues } from '#/src/utils';
 import serializeEditorState from './draft/serializeEditorState';
 import getKokeetTaiLisanaytotData from './getKokeetTaiLisanaytotData';
 
 const getArrayValue = (values, key) => {
   const valueCandidate = _.get(values, key);
-  return _.isEmpty(valueCandidate) || _.isEmpty(_.first(valueCandidate))
-    ? []
-    : valueCandidate;
+  return isDeepEmptyFormValues(valueCandidate) ? [] : valueCandidate;
 };
 
 const serializeTable = ({ table, kielivalinta }) => {
@@ -89,7 +87,7 @@ const getValintaperusteByFormValues = values => {
     }) => ({
       kuvaus: _.pick(kuvaus || {}, kielivalinta),
       nimi: _.pick(nimi || {}, kielivalinta),
-      valintatapaKoodiUri: _.get(tapa, 'value') || null,
+      valintatapaKoodiUri: _.get(tapa, 'value'),
       sisalto: serializeSisalto({ sisalto, kielivalinta }),
       kaytaMuuntotaulukkoa: false,
       kynnysehto: _.pick(kynnysehto || {}, kielivalinta),

@@ -192,3 +192,24 @@ export const parseKeyVal = memoize(
 );
 
 export const getCookie = name => _.get(parseKeyVal(document.cookie), name);
+
+const allFuncs = (...fns) => value => _.every(fns, fn => fn(value));
+
+export const formValueExists = value =>
+  _.cond([
+    [_.isNil, _.stubFalse],
+    [
+      allFuncs(
+        v => _.isArray(v) || _.isString(v),
+        v => v.length === 0
+      ),
+      _.stubFalse,
+    ],
+    [allFuncs(_.isPlainObject, _.isEmpty), _.stubFalse],
+    [allFuncs(_.isPlainObject, v => v.value === ''), _.stubFalse],
+    [otherwise, _.stubTrue],
+  ])(value);
+
+export const isDeepEmptyFormValues = value =>
+  !formValueExists(value) ||
+  (_.isObjectLike(value) && _.every(value, isDeepEmptyFormValues));

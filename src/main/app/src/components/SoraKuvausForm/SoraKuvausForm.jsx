@@ -40,7 +40,7 @@ const SoraKuvausForm = ({
           onSelectBase={onSelectBase}
           organisaatioOid={organisaatioOid}
           getCopyEntities={getSoraKuvaukset}
-          infoText={t('soraKuvausLomake.pohjavalintaInfo')}
+          infoText={t('soraKuvauslomake.pohjavalintaInfo')}
           createLabel={t('yleiset.luoUusi', {
             entity: t('yleiset.soraKuvaus'),
           })}
@@ -58,21 +58,21 @@ const SoraKuvausForm = ({
 
       <FormCollapse
         section="tiedot"
-        header={t('soraKuvausLomake.soraKuvauksenTiedot')}
+        header={t('soraKuvauslomake.soraKuvauksenTiedot')}
         languages={languageTabs}
         Component={TiedotSection}
       />
 
       <FormCollapse
         section="julkinen"
-        header={t('soraKuvausLomake.nakyminenMuilleToimijoille')}
+        header={t('soraKuvauslomake.nakyminenMuilleToimijoille')}
         Component={JulkisuusSection}
         entity={ENTITY.SORA_KUVAUS}
       />
 
       <FormCollapse
         section="tila"
-        header={t('soraKuvausLomake.soraKuvauksenTila')}
+        header={t('soraKuvauslomake.soraKuvauksenTila')}
         Component={JulkaisutilaField}
         showArkistoitu={showArkistoituTilaOption}
       />

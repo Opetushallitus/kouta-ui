@@ -198,8 +198,6 @@ export default {
     riippuvuusEiJulkaistu:
       'Liitetty {{entity, unCapitalize}} ei ole "Julkaistu"-tilassa.',
     onJulkinen: '{{entity}} on julkinen',
-    julkisuusKuvaus:
-      'Valitse näkyykö {{entity, unCapitalize}} muille koulutustoimijoille. Jos {{entity, unCapitalize}} on julkinen, muut koulutustoimijat voivat käyttää sitä pohjana luodessaan uusia.',
   },
   ilmoitukset: {
     tallentamattomiaMuutoksia: {
@@ -375,6 +373,8 @@ export default {
     koulutuksenTeemakuva: 'Koulutuksen teemakuva',
     nakyminenMuilleToimijoille:
       'Koulutuksen näkyminen muille koulutustoimijoille',
+    julkisuusKuvaus:
+      'Valitse näkyykö koulutus muille koulutustoimijoille. Jos koulutus on julkinen, muut koulutustoimijat voivat käyttää sitä pohjana luodessaan uusia.',
   },
   toteutuslomake: {
     toteutuksenTiedot: 'Toteutuksen tiedot',
@@ -572,14 +572,18 @@ export default {
       'Käyttäjälläsi ei ole oikeuksia muokata tätä valintaperustekuvausta',
     pohjavalintaInfo:
       'Voit halutessasi käyttää aiemmin luotuja valintaperusteita uuden lomakkeen esitäytettynä pohjana.',
+    julkisuusKuvaus:
+      'Valitse näkyykö valintaperuste muille koulutustoimijoille. Jos valintaperuste on julkinen, muut koulutustoimijat voivat käyttää sitä pohjana luodessaan uusia.',
   },
-  soraKuvausLomake: {
+  soraKuvauslomake: {
     soraKuvauksenTiedot: 'SORA-kuvauksen tiedot',
     soraKuvauksenTila: 'SORA-kuvauksen tila',
     pohjavalintaInfo:
       'Voit halutessasi käyttää aiemmin luotuja SORA-kuvauksia uuden lomakkeen esitäytettynä pohjana.',
     nakyminenMuilleToimijoille:
       'SORA-kuvauksen näkyminen muille koulutustoimijoille',
+    julkisuusKuvaus:
+      'Valitse näkyykö SORA-kuvaus muille koulutustoimijoille. Jos SORA-kuvaus on julkinen, muut koulutustoimijat voivat käyttää sitä pohjana luodessaan uusia.',
   },
   oppilaitoslomake: {
     oppilaitoksenPerustiedot: 'Oppilaitoksen perustiedot',

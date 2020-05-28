@@ -10,7 +10,7 @@ export const JulkisuusSection = ({ entity, name }) => {
     <Field
       name={name}
       component={FormFieldCheckbox}
-      label={t(`yleiset.julkisuusKuvaus`, { entity: entityName })}
+      label={t(`${entity}lomake.julkisuusKuvaus`)}
     >
       {t(`yleiset.onJulkinen`, { entity: entityName })}
     </Field>

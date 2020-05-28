@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-export const LANGUAGES = ['fi', 'sv', 'en'];
+export const LANGUAGES = ['fi', 'sv', 'en', 'muu'];
 
 export const JULKAISUTILA = {
   TALLENNETTU: 'tallennettu',

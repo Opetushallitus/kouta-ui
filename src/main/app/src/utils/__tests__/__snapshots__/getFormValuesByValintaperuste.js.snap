@@ -28,31 +28,57 @@ Object {
     "value": "sora_1",
   },
   "tila": "tallennettu",
-  "valintakoe": Object {
-    "tilaisuudet": Object {
-      "tyyppi_1#1": Array [
-        Object {
-          "alkaa": "2019-04-16T08:44",
-          "lisatietoja": Object {
-            "fi": "fi lisatietoja",
-            "sv": "sv lisatietoja",
-          },
-          "osoite": Object {
-            "fi": "fi osoite",
-            "sv": "sv osoite",
-          },
-          "paattyy": "2019-04-18T08:44",
-          "postinumero": Object {
-            "value": "posti_1#1",
-          },
-        },
-      ],
-    },
-    "tyypit": Array [
+  "valintakokeet": Object {
+    "kokeetTaiLisanaytot": Array [
       Object {
-        "value": "tyyppi_1#1",
+        "erityisjarjestelytMahdollisia": true,
+        "liittyyEnnakkovalmistautumista": true,
+        "nimi": Object {
+          "fi": "valintakokeen nimi - fi",
+          "sv": "valintakokeen nimi - sv",
+        },
+        "ohjeetEnnakkovalmistautumiseen": Object {
+          "fi":             "<p>Ohjeet ennakkovalmistautumiseen - fi</p>",
+          "sv":             "<p>ohjeet ennakkovalmistautumiseen - sv</p>",
+        },
+        "ohjeetErityisjarjestelyihin": Object {
+          "fi":             "<p>Ohjeet erityisjärjestelyihin - fi</p>",
+          "sv":             "<p>Ohjeet erityisjärjestelyihin - sv</p>",
+        },
+        "tietoaHakijalle": Object {
+          "fi":             "<p>Tietoa hakijalle - fi</p>",
+          "sv":             "<p>Tietoa hakijalle - sv</p>",
+        },
+        "tilaisuudet": Array [
+          Object {
+            "alkaa": "2019-04-16T08:44",
+            "jarjestamispaikka": Object {
+              "fi": "jarjestamispaikka - fi",
+              "sv": "jarjestamispaikka - sv",
+            },
+            "lisatietoja": Object {
+              "fi": "fi lisatietoja",
+              "sv": "sv lisatietoja",
+            },
+            "osoite": Object {
+              "fi": "fi osoite",
+              "sv": "sv osoite",
+            },
+            "paattyy": "2019-04-18T08:44",
+            "postinumero": Object {
+              "value": "posti_1#1",
+            },
+          },
+        ],
+        "tyyppi": Object {
+          "value": "tyyppi_1#1",
+        },
       },
     ],
+    "yleisKuvaus": Object {
+      "fi":         "<p>Yleiskuvaus - fi</p>",
+      "sv":         "<p>Yleiskuvaus - sv</p>",
+    },
   },
   "valintatavat": Array [
     Object {

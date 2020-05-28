@@ -49,29 +49,29 @@ export default ({ tyyppi = 'amm' } = {}) => {
     kielivalinta: ['fi', 'sv'],
     modified: '2019-04-03T13:56',
     valintakokeidenYleiskuvaus: {
-      fi: '<p>Valintakokeiden kuvaus</p>',
+      fi: '<p>Valintakokeiden kuvaus - fi</p>',
     },
     valintakokeet: [
       {
         nimi: {
-          fi: 'Kokeen nimi',
+          fi: 'Kokeen nimi - fi',
         },
         tietoja: {
-          fi: '<p>Tietoa kokeesta</p>',
+          fi: '<p>Tietoa kokeesta - fi</p>',
         },
         liittyyEnnakkovalmistautumista: true,
         ohjeetEnnakkovalmistautumiseen: {
-          fi: '<p>Ohjeet ennakkovalmistautumiseen</p>',
+          fi: '<p>Ohjeet ennakkovalmistautumiseen - fi</p>',
         },
         erityisjarjestelytMahdollisia: true,
         ohjeetErityisjarjestelyihin: {
-          fi: '<p>Ohjeet erityisjärjestelyihin</p>',
+          fi: '<p>Ohjeet erityisjärjestelyihin - fi</p>',
         },
         tyyppiKoodiUri: 'tyyppi_1#1',
         tilaisuudet: [
           {
             osoite: {
-              osoite: { fi: 'fi osoite', sv: 'sv osoite' },
+              osoite: { fi: 'fi osoite' },
               postinumeroKoodiUri: 'posti_00350#1',
             },
             aika: {
@@ -80,10 +80,9 @@ export default ({ tyyppi = 'amm' } = {}) => {
             },
             lisatietoja: {
               fi: 'fi lisatietoja',
-              sv: 'sv lisatietoja',
             },
             jarjestamispaikka: {
-              fi: 'Auditorio A1',
+              fi: 'Jarjestamispaikka - fi',
             },
           },
         ],

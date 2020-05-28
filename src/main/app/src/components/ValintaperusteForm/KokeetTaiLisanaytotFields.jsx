@@ -60,7 +60,7 @@ export const KoeTaiLisanayttoFields = ({
             <FlexItem grow={1} ml={4}>
               <Box {...getTestIdProps('hakijalleNakyvaNimi')}>
                 <Field
-                  name={`${field}.nimi`}
+                  name={`${field}.nimi.${language}`}
                   component={FormFieldInput}
                   label={t(`${translationBase}.hakijalleNakyvaNimi`)}
                 />
@@ -69,7 +69,7 @@ export const KoeTaiLisanayttoFields = ({
           </Flex>
           <Box mb={2} {...getTestIdProps('tietoaHakijalle')}>
             <Field
-              name={`${field}.tietoaHakijalle`}
+              name={`${field}.tietoaHakijalle.${language}`}
               component={FormFieldEditor}
               label={t(`${translationBase}.tietoaHakijalle`)}
             />
@@ -85,7 +85,7 @@ export const KoeTaiLisanayttoFields = ({
           {liittyyEnnakkovalmistautumista && (
             <Box mb={2} {...getTestIdProps('ohjeetEnnakkovalmistautumiseen')}>
               <Field
-                name={`${field}.ohjeetEnnakkovalmistautumiseen`}
+                name={`${field}.ohjeetEnnakkovalmistautumiseen.${language}`}
                 component={FormFieldEditor}
                 label={t(`${translationBase}.materiaaliJaValmistautumisohjeet`)}
               />
@@ -102,7 +102,7 @@ export const KoeTaiLisanayttoFields = ({
           {erityisjarjestelytMahdollisia && (
             <Box mb={2} {...getTestIdProps('ohjeetErityisjarjestelyihin')}>
               <Field
-                name={`${field}.ohjeetErityisjarjestelyihin`}
+                name={`${field}.ohjeetErityisjarjestelyihin.${language}`}
                 component={FormFieldEditor}
                 label={t(`${translationBase}.ohjeetErityisjarjestelyihin`)}
               />

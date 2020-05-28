@@ -48,7 +48,7 @@ export const TilaisuusFields = ({ field, language, index, removeSelf }) => {
         </Box>
         <Box mb={2} {...getTestIdProps('jarjestamispaikka')}>
           <Field
-            name={`${field}.jarjestamispaikka`}
+            name={`${field}.jarjestamispaikka.${language}`}
             component={FormFieldInput}
             label={t('valintaperustelomake.jarjestamispaikka')}
           />
@@ -67,9 +67,9 @@ export const TilaisuusFields = ({ field, language, index, removeSelf }) => {
             label={t('yleiset.postinumero')}
           />
         </Box>
-        <Box {...getTestIdProps('lisatiedot')}>
+        <Box {...getTestIdProps('lisatietoja')}>
           <Field
-            name={`${field}.lisatiedot.${language}`}
+            name={`${field}.lisatietoja.${language}`}
             component={FormFieldTextarea}
             label={t('valintaperustelomake.tilaisuudenLisatiedot')}
           />

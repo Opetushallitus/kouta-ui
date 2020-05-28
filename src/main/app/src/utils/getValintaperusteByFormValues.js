@@ -102,8 +102,9 @@ const getValintaperusteByFormValues = values => {
     })
   );
 
-  const valintakokeidenYleiskuvaus = serializeEditorState(
-    _.get(values, 'valintakokeet.yleisKuvaus')
+  const valintakokeidenYleiskuvaus = _.mapValues(
+    _.get(values, 'valintakokeet.yleisKuvaus'),
+    kuvaus => serializeEditorState(kuvaus)
   );
 
   const valintakokeet = getKokeetTaiLisanaytotData({

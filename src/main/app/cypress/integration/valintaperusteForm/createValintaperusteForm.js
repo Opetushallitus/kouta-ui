@@ -122,7 +122,7 @@ const fillValintakokeetSection = () => {
       });
 
       getByTestId('jarjestamispaikka').find('input').pipe(paste('paikka'));
-      getByTestId('lisatiedot').find('textarea').pipe(paste('lisatiedot'));
+      getByTestId('lisatietoja').find('textarea').pipe(paste('lisatietoja'));
     });
     jatka();
   });

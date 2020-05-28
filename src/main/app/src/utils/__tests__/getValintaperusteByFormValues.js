@@ -1,58 +1,116 @@
 import parseEditorState from '../draft/parseEditorState';
 import getValintaperusteByFormValues from '../getValintaperusteByFormValues';
 
-test('Should convert valintaperuste form with valintatapa', () => {
-  const valintaperuste = getValintaperusteByFormValues({
-    perustiedot: {
-      tyyppi: 'tyyppi_1#1',
-      kieliversiot: ['fi', 'sv'],
-      hakutapa: 'tapa_1#1',
-      kohdejoukko: { value: 'joukko_1#1' },
+const BASE_VALINTAPERUSTE_FORM_DATA = {
+  perustiedot: {
+    tyyppi: 'tyyppi_1#1',
+    kieliversiot: ['fi', 'sv'],
+    hakutapa: 'tapa_1#1',
+    kohdejoukko: { value: 'joukko_1#1' },
+  },
+  kuvaus: {
+    nimi: {
+      fi: 'Fi nimi',
+      sv: 'Sv nimi',
     },
     kuvaus: {
-      nimi: {
-        fi: 'Fi nimi',
-        sv: 'Sv nimi',
-      },
-      kuvaus: {
-        fi: parseEditorState('<h1>Fi kuvaus</h1>'),
-        sv: parseEditorState('<h1>Sv kuvaus</h2>'),
-      },
+      fi: parseEditorState('<h1>Fi kuvaus</h1>'),
+      sv: parseEditorState('<h1>Sv kuvaus</h2>'),
     },
-    osaamistausta: [{ value: 'tausta_1#1' }, { value: 'tausta_2#1' }],
-    kielitaitovaatimukset: [
-      {
-        kieli: { value: 'kieli_1#1' },
-        tyyppi: {
-          'tyyppi_1#1': true,
-          'tyyppi_2#1': true,
-          'tyyppi_3#1': false,
-        },
-        kuvaukset: {
-          'tyyppi_1#1': [
-            {
-              kuvaus: { value: 'kuvaus_1#1' },
-              taso: 'erinomainen',
-            },
-          ],
-          'tyyppi_2#1': [
-            {
-              kuvaus: { value: 'kuvaus_2#1' },
-              taso: 'ok',
-            },
-          ],
-        },
-        osoitustavat: ['osoitustapa_1#1', 'osoitustapa_2#1'],
-        muutOsoitustavat: [
+  },
+  osaamistausta: [{ value: 'tausta_1#1' }, { value: 'tausta_2#1' }],
+  kielitaitovaatimukset: [
+    {
+      kieli: { value: 'kieli_1#1' },
+      tyyppi: {
+        'tyyppi_1#1': true,
+        'tyyppi_2#1': true,
+        'tyyppi_3#1': false,
+      },
+      kuvaukset: {
+        'tyyppi_1#1': [
           {
-            kuvaus: {
-              fi: 'Fi kuvaus',
-              sv: 'Sv kuvaus',
+            kuvaus: { value: 'kuvaus_1#1' },
+            taso: 'erinomainen',
+          },
+        ],
+        'tyyppi_2#1': [
+          {
+            kuvaus: { value: 'kuvaus_2#1' },
+            taso: 'ok',
+          },
+        ],
+      },
+      osoitustavat: ['osoitustapa_1#1', 'osoitustapa_2#1'],
+      muutOsoitustavat: [
+        {
+          kuvaus: {
+            fi: 'Fi kuvaus',
+            sv: 'Sv kuvaus',
+          },
+        },
+      ],
+    },
+  ],
+  valintatavat: [{}],
+  soraKuvaus: {
+    value: 'sora_1',
+  },
+  julkinen: true,
+  valintakokeet: {
+    yleisKuvaus: {
+      fi: parseEditorState('<p>Yleiskuvaus - fi</p>'),
+      sv: parseEditorState('<p>Yleiskuvaus - sv</p>'),
+    },
+    kokeetTaiLisanaytot: [
+      {
+        nimi: { fi: 'nimi - fi', sv: 'nimi - sv' },
+        tyyppi: {
+          value: 'tyyppi_1#1',
+        },
+        tietoaHakijalle: {
+          fi: parseEditorState('<p>Tietoa hakijalle - fi</p>'),
+          sv: parseEditorState('<p>Tietoa hakijalle - sv</p>'),
+        },
+        liittyyEnnakkovalmistautumista: true,
+        ohjeetEnnakkovalmistautumiseen: {
+          fi: parseEditorState('<p>Ohjeet ennakkovalmistautumiseen - fi</p>'),
+          sv: parseEditorState('<p>ohjeet ennakkovalmistautumiseen - sv</p>'),
+        },
+        erityisjarjestelytMahdollisia: true,
+        ohjeetErityisjarjestelyihin: {
+          fi: parseEditorState('<p>Ohjeet erityisjärjestelyihin - fi</p>'),
+          sv: parseEditorState('<p>Ohjeet erityisjärjestelyihin - sv</p>'),
+        },
+        tilaisuudet: [
+          {
+            osoite: { fi: 'fi osoite', sv: 'sv osoite' },
+            postinumero: { value: 'posti_1#1' },
+            postitoimipaikka: {
+              fi: 'fi posititoimipaikka',
+              sv: 'sv posititoimipaikka',
+            },
+            alkaa: '2019-04-16T08:44',
+            paattyy: '2019-04-18T08:44',
+            lisatietoja: {
+              fi: 'fi lisatietoja',
+              sv: 'sv lisatietoja',
+            },
+            jarjestamispaikka: {
+              fi: 'jarjestamispaikka - fi',
+              sv: 'jarjestamispaikka - sv',
             },
           },
         ],
       },
     ],
+  },
+  tila: 'julkaistu',
+};
+
+test('Should convert valintaperuste form with valintatapa', () => {
+  const data = {
+    ...BASE_VALINTAPERUSTE_FORM_DATA,
     valintatavat: [
       {
         kuvaus: {
@@ -100,116 +158,17 @@ test('Should convert valintaperuste form with valintatapa', () => {
         ],
       },
     ],
-    soraKuvaus: {
-      value: 'sora_1',
-    },
-    julkinen: true,
-    valintakoe: {
-      tyypit: [{ value: 'tyyppi_1#1' }],
-      tilaisuudet: {
-        'tyyppi_1#1': [
-          {
-            osoite: { fi: 'fi osoite', sv: 'sv osoite' },
-            postinumero: { value: 'posti_1#1' },
-            postitoimipaikka: {
-              fi: 'fi posititoimipaikka',
-              sv: 'sv posititoimipaikka',
-            },
-            alkaa: '2019-04-16T08:44',
-            paattyy: '2019-04-18T08:44',
-            lisatietoja: {
-              fi: 'fi lisatietoja',
-              sv: 'sv lisatietoja',
-            },
-          },
-        ],
-      },
-    },
-    tila: 'julkaistu',
-  });
+  };
+
+  const valintaperuste = getValintaperusteByFormValues(data);
 
   expect(valintaperuste).toMatchSnapshot();
 });
 
 test('Should convert valintaperuste form without valintatapa', () => {
   const valintaperuste = getValintaperusteByFormValues({
-    perustiedot: {
-      tyyppi: 'tyyppi_1#1',
-      kieliversiot: ['fi', 'sv'],
-      hakutapa: 'tapa_1#1',
-      kohdejoukko: { value: 'joukko_1#1' },
-    },
-    kuvaus: {
-      nimi: {
-        fi: 'Fi nimi',
-        sv: 'Sv nimi',
-      },
-      kuvaus: {
-        fi: parseEditorState('<h1>Fi kuvaus</h1>'),
-        sv: parseEditorState('<h1>Sv kuvaus</h2>'),
-      },
-    },
-    osaamistausta: [{ value: 'tausta_1#1' }, { value: 'tausta_2#1' }],
-    kielitaitovaatimukset: [
-      {
-        kieli: { value: 'kieli_1#1' },
-        tyyppi: {
-          'tyyppi_1#1': true,
-          'tyyppi_2#1': true,
-          'tyyppi_3#1': false,
-        },
-        kuvaukset: {
-          'tyyppi_1#1': [
-            {
-              kuvaus: { value: 'kuvaus_1#1' },
-              taso: 'erinomainen',
-            },
-          ],
-          'tyyppi_2#1': [
-            {
-              kuvaus: { value: 'kuvaus_2#1' },
-              taso: 'ok',
-            },
-          ],
-        },
-        osoitustavat: ['osoitustapa_1#1', 'osoitustapa_2#1'],
-        muutOsoitustavat: [
-          {
-            kuvaus: {
-              fi: 'Fi kuvaus',
-              sv: 'Sv kuvaus',
-            },
-          },
-        ],
-      },
-    ],
+    ...BASE_VALINTAPERUSTE_FORM_DATA,
     valintatavat: [{}],
-    soraKuvaus: {
-      value: 'sora_1',
-    },
-    julkinen: true,
-    valintakoe: {
-      tyypit: [{ value: 'tyyppi_1#1' }],
-      tilaisuudet: {
-        'tyyppi_1#1': [
-          {
-            osoite: { fi: 'fi osoite', sv: 'sv osoite' },
-            postinumero: { value: 'posti_1#1' },
-            postitoimipaikka: {
-              fi: 'fi posititoimipaikka',
-              sv: 'sv posititoimipaikka',
-            },
-            alkaa: '2019-04-16T08:44',
-            paattyy: '2019-04-18T08:44',
-            lisatietoja: {
-              fi: 'fi lisatietoja',
-              sv: 'sv lisatietoja',
-            },
-          },
-        ],
-      },
-    },
-    tila: 'julkaistu',
   });
 
   expect(valintaperuste).toMatchSnapshot();

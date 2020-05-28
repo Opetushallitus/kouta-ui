@@ -70,11 +70,28 @@ exports[`editValintaperusteForm > should be able to edit valintaperuste #0`] =
   "tila": "tallennettu",
   "valintakokeet": [
     {
+      "erityisjarjestelytMahdollisia": true,
+      "liittyyEnnakkovalmistautumista": true,
+      "nimi": {
+        "fi": "Kokeen nimi - fi"
+      },
+      "ohjeetEnnakkovalmistautumiseen": {
+        "fi": "<p>Ohjeet ennakkovalmistautumiseen - fi</p>"
+      },
+      "ohjeetErityisjarjestelyihin": {
+        "fi": "<p>Ohjeet erityisjärjestelyihin - fi</p>"
+      },
+      "tietoja": {
+        "fi": "<p>Tietoa kokeesta - fi</p>"
+      },
       "tilaisuudet": [
         {
           "aika": {
             "alkaa": "2019-04-16T08:44",
             "paattyy": "2019-04-18T08:44"
+          },
+          "jarjestamispaikka": {
+            "fi": "Jarjestamispaikka - fi"
           },
           "lisatietoja": {
             "fi": "fi lisatietoja"
@@ -89,5 +106,8 @@ exports[`editValintaperusteForm > should be able to edit valintaperuste #0`] =
       ],
       "tyyppiKoodiUri": "tyyppi_1#1"
     }
-  ]
+  ],
+  "valintakokeidenYleiskuvaus": {
+    "fi": "<p>Valintakokeiden kuvaus - fi</p>"
+  }
 };

@@ -90,19 +90,29 @@ exports[`createValintaperusteForm > should be able to create valintaperuste #0`]
     {
       "erityisjarjestelytMahdollisia": true,
       "liittyyEnnakkovalmistautumista": true,
-      "nimi":  "nimi",
-      "ohjeetEnnakkovalmistautumiseen": "<p>ohjeet ennakkovalmistautumiseen</p>",
-      "ohjeetErityisjarjestelyihin": "<p>ohjeet erityisjärjestelyihin</p>",
-      "tietoja": "<p>Tietoa hakijalle</p>",
+      "nimi": {
+        "fi": "nimi"
+      },
+      "ohjeetEnnakkovalmistautumiseen": {
+        "fi": "<p>ohjeet ennakkovalmistautumiseen</p>"
+      },
+      "ohjeetErityisjarjestelyihin": {
+        "fi": "<p>ohjeet erityisjärjestelyihin</p>"
+      },
+      "tietoja": {
+        "fi": "<p>Tietoa hakijalle</p>"
+      },
       "tilaisuudet": [
         {
           "aika": {
             "alkaa": "2019-04-02T10:45",
             "paattyy": "2019-04-02T19:00"
           },
-          "jarjestamispaikka": "paikka",
+          "jarjestamispaikka": {
+            "fi": "paikka"
+          },
           "lisatietoja": {
-            "fi": "lisatiedot"
+            "fi": "lisatietoja"
           },
           "osoite": {
             "osoite": {
@@ -115,5 +125,7 @@ exports[`createValintaperusteForm > should be able to create valintaperuste #0`]
       "tyyppiKoodiUri": "valintakokeentyyppi_1#1"
     }
   ],
-  "valintakokeidenYleiskuvaus": "<p>Valintakokeiden kuvaus</p>"
+  "valintakokeidenYleiskuvaus": {
+    "fi": "<p>Valintakokeiden kuvaus</p>"
+  }
 };

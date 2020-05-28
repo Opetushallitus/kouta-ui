@@ -102,11 +102,33 @@ Object {
   "tila": "julkaistu",
   "valintakokeet": Array [
     Object {
+      "erityisjarjestelytMahdollisia": true,
+      "liittyyEnnakkovalmistautumista": true,
+      "nimi": Object {
+        "fi": "nimi - fi",
+        "sv": "nimi - sv",
+      },
+      "ohjeetEnnakkovalmistautumiseen": Object {
+        "fi": "<p>Ohjeet ennakkovalmistautumiseen - fi</p>",
+        "sv": "<p>ohjeet ennakkovalmistautumiseen - sv</p>",
+      },
+      "ohjeetErityisjarjestelyihin": Object {
+        "fi": "<p>Ohjeet erityisjärjestelyihin - fi</p>",
+        "sv": "<p>Ohjeet erityisjärjestelyihin - sv</p>",
+      },
+      "tietoja": Object {
+        "fi": "<p>Tietoa hakijalle - fi</p>",
+        "sv": "<p>Tietoa hakijalle - sv</p>",
+      },
       "tilaisuudet": Array [
         Object {
           "aika": Object {
             "alkaa": "2019-04-16T08:44",
             "paattyy": "2019-04-18T08:44",
+          },
+          "jarjestamispaikka": Object {
+            "fi": "jarjestamispaikka - fi",
+            "sv": "jarjestamispaikka - sv",
           },
           "lisatietoja": Object {
             "fi": "fi lisatietoja",
@@ -124,6 +146,10 @@ Object {
       "tyyppiKoodiUri": "tyyppi_1#1",
     },
   ],
+  "valintakokeidenYleiskuvaus": Object {
+    "fi": "<p>Yleiskuvaus - fi</p>",
+    "sv": "<p>Yleiskuvaus - sv</p>",
+  },
 }
 `;
 
@@ -156,11 +182,33 @@ Object {
   "tila": "julkaistu",
   "valintakokeet": Array [
     Object {
+      "erityisjarjestelytMahdollisia": true,
+      "liittyyEnnakkovalmistautumista": true,
+      "nimi": Object {
+        "fi": "nimi - fi",
+        "sv": "nimi - sv",
+      },
+      "ohjeetEnnakkovalmistautumiseen": Object {
+        "fi": "<p>Ohjeet ennakkovalmistautumiseen - fi</p>",
+        "sv": "<p>ohjeet ennakkovalmistautumiseen - sv</p>",
+      },
+      "ohjeetErityisjarjestelyihin": Object {
+        "fi": "<p>Ohjeet erityisjärjestelyihin - fi</p>",
+        "sv": "<p>Ohjeet erityisjärjestelyihin - sv</p>",
+      },
+      "tietoja": Object {
+        "fi": "<p>Tietoa hakijalle - fi</p>",
+        "sv": "<p>Tietoa hakijalle - sv</p>",
+      },
       "tilaisuudet": Array [
         Object {
           "aika": Object {
             "alkaa": "2019-04-16T08:44",
             "paattyy": "2019-04-18T08:44",
+          },
+          "jarjestamispaikka": Object {
+            "fi": "jarjestamispaikka - fi",
+            "sv": "jarjestamispaikka - sv",
           },
           "lisatietoja": Object {
             "fi": "fi lisatietoja",
@@ -178,5 +226,9 @@ Object {
       "tyyppiKoodiUri": "tyyppi_1#1",
     },
   ],
+  "valintakokeidenYleiskuvaus": Object {
+    "fi": "<p>Yleiskuvaus - fi</p>",
+    "sv": "<p>Yleiskuvaus - sv</p>",
+  },
 }
 `;

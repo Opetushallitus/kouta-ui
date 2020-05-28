@@ -30,6 +30,7 @@ const getFormValuesByValintaperuste = valintaperuste => {
     onkoJulkinen = false,
     tila,
     sorakuvausId,
+    valintakokeidenYleiskuvaus,
     valintakokeet,
   } = valintaperuste;
 
@@ -72,10 +73,10 @@ const getFormValuesByValintaperuste = valintaperuste => {
           value: sorakuvausId,
         }
       : null,
-    valintakokeidenYleiskuvaus: parseEditorState(
-      _.get(valintakokeet, 'yleisKuvaus')
+    valintakokeet: getKokeetTaiLisanaytotValues(
+      valintakokeet,
+      valintakokeidenYleiskuvaus
     ),
-    valintakokeet: getKokeetTaiLisanaytotValues(valintakokeet),
   };
 };
 

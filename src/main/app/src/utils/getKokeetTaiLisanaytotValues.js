@@ -1,15 +1,18 @@
-import { get } from 'lodash';
+import _ from 'lodash';
 import parseEditorState from './draft/parseEditorState';
 
-export const getKokeetTaiLisanaytotValues = (valintakokeet = [], kuvaus) => {
+export const getKokeetTaiLisanaytotValues = (
+  valintakokeet = [],
+  yleisKuvaus
+) => {
   return {
-    kuvaus,
+    yleisKuvaus: _.mapValues(yleisKuvaus, kuvaus => parseEditorState(kuvaus)),
     kokeetTaiLisanaytot: valintakokeet.map(
       ({
         tyyppiKoodiUri,
         tilaisuudet,
         nimi,
-        tietoa,
+        tietoja,
         liittyyEnnakkovalmistautumista,
         ohjeetEnnakkovalmistautumiseen,
         erityisjarjestelytMahdollisia,
@@ -18,23 +21,28 @@ export const getKokeetTaiLisanaytotValues = (valintakokeet = [], kuvaus) => {
         tyyppi: { value: tyyppiKoodiUri },
         nimi,
         liittyyEnnakkovalmistautumista,
-        ohjeetEnnakkovalmistautumiseen: parseEditorState(
-          ohjeetEnnakkovalmistautumiseen
+        ohjeetEnnakkovalmistautumiseen: _.mapValues(
+          ohjeetEnnakkovalmistautumiseen,
+          parseEditorState
         ),
         erityisjarjestelytMahdollisia,
-        ohjeetErityisjarjestelyihin: parseEditorState(
-          ohjeetErityisjarjestelyihin
+        ohjeetErityisjarjestelyihin: _.mapValues(
+          ohjeetErityisjarjestelyihin,
+          parseEditorState
         ),
-        tietoaHakijalle: parseEditorState(tietoa),
-        tilaisuudet: tilaisuudet.map(({ osoite, aika, lisatietoja }) => ({
-          osoite: get(osoite, 'osoite') || {},
-          postinumero: get(osoite, 'postinumeroKoodiUri')
-            ? { value: osoite.postinumeroKoodiUri }
-            : undefined,
-          alkaa: get(aika, 'alkaa') || '',
-          paattyy: get(aika, 'paattyy') || '',
-          lisatietoja: lisatietoja || {},
-        })),
+        tietoaHakijalle: _.mapValues(tietoja, parseEditorState),
+        tilaisuudet: tilaisuudet.map(
+          ({ osoite, aika, lisatietoja, jarjestamispaikka }) => ({
+            osoite: _.get(osoite, 'osoite') || {},
+            postinumero: _.get(osoite, 'postinumeroKoodiUri')
+              ? { value: osoite.postinumeroKoodiUri }
+              : undefined,
+            alkaa: _.get(aika, 'alkaa') || '',
+            paattyy: _.get(aika, 'paattyy') || '',
+            lisatietoja: lisatietoja || {},
+            jarjestamispaikka,
+          })
+        ),
       })
     ),
   };

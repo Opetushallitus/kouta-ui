@@ -18,7 +18,10 @@ export const KokeetTaiLisanaytotSection = ({
     <>
       <FieldGroup title={t(`${TRANSLATION_BASE}.yleisKuvaus`)}>
         <Box ml={12} mr={12} {...getTestIdProps('yleisKuvaus')}>
-          <Field name={`${name}.yleisKuvaus`} component={FormFieldEditor} />
+          <Field
+            name={`${name}.yleisKuvaus.${language}`}
+            component={FormFieldEditor}
+          />
         </Box>
       </FieldGroup>
       <FieldArray

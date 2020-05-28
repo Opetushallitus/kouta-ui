@@ -2,11 +2,13 @@ import _ from 'lodash';
 import serializeEditorState from './draft/serializeEditorState';
 
 const getKokeetTaiLisanaytotData = ({
-  valintakoeValues = [],
+  valintakoeValues = {},
   kielivalinta,
 }) => {
   const kokeetTaiLisanaytot = _.get(valintakoeValues, 'kokeetTaiLisanaytot');
-
+  if (_.isEmpty(kokeetTaiLisanaytot)) {
+    return undefined;
+  }
   return (kokeetTaiLisanaytot || []).map(
     ({
       tyyppi,
@@ -20,14 +22,16 @@ const getKokeetTaiLisanaytotData = ({
     }) => ({
       tyyppiKoodiUri: _.get(tyyppi, 'value'),
       nimi: nimi,
-      tietoa: serializeEditorState(tietoaHakijalle),
+      tietoja: _.mapValues(tietoaHakijalle, serializeEditorState),
       liittyyEnnakkovalmistautumista,
-      ohjeetEnnakkovalmistautumiseen: serializeEditorState(
-        ohjeetEnnakkovalmistautumiseen
+      ohjeetEnnakkovalmistautumiseen: _.mapValues(
+        ohjeetEnnakkovalmistautumiseen,
+        serializeEditorState
       ),
       erityisjarjestelytMahdollisia,
-      ohjeetErityisjarjestelyihin: serializeEditorState(
-        ohjeetErityisjarjestelyihin
+      ohjeetErityisjarjestelyihin: _.mapValues(
+        ohjeetErityisjarjestelyihin,
+        serializeEditorState
       ),
       tilaisuudet: tilaisuudet.map(
         ({
@@ -35,7 +39,7 @@ const getKokeetTaiLisanaytotData = ({
           postinumero,
           alkaa,
           paattyy,
-          lisatiedot,
+          lisatietoja,
           jarjestamispaikka,
         }) => ({
           osoite: {
@@ -46,7 +50,7 @@ const getKokeetTaiLisanaytotData = ({
             alkaa: alkaa,
             paattyy: paattyy,
           },
-          lisatietoja: _.pick(lisatiedot || {}, kielivalinta),
+          lisatietoja: _.pick(lisatietoja || {}, kielivalinta),
           jarjestamispaikka,
         })
       ),

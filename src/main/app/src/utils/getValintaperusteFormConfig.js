@@ -1,4 +1,4 @@
-import { get, reduce } from 'lodash';
+import _ from 'lodash';
 
 import { KOULUTUSTYYPIT, KOULUTUSTYYPPI } from '../constants';
 import createFormConfigBuilder from './createFormConfigBuilder';
@@ -9,6 +9,7 @@ import {
   pohjaValintaSectionConfig,
   julkinenSectionConfig,
   validateRelations,
+  valintakokeetSection,
 } from '#/src/utils/formConfigUtils';
 
 const koulutustyypitWithValintatapa = [
@@ -18,25 +19,6 @@ const koulutustyypitWithValintatapa = [
   KOULUTUSTYYPPI.AMMATILLINEN_OPINTO_OHJAAJA_KOULUTUS,
   KOULUTUSTYYPPI.AMMATILLINEN_ERITYISOPETTAJA_KOULUTUS,
 ];
-
-const validateValintakokeet = (errorBuilder, values) => {
-  const valintakokeet = get(values, 'valintakokeet.kokeetTaiLisanaytot');
-  const kieliversiot = getKielivalinta(values);
-  return reduce(
-    valintakokeet,
-    (ebAcc, value, index) =>
-      ebAcc.validateArray(
-        `valintakokeet.kokeetTaiLisanaytot[${index}].tilaisuudet`,
-        eb =>
-          eb
-            .validateTranslations('osoite', kieliversiot)
-            .validateExistence('postinumero')
-            .validateExistence('alkaa')
-            .validateExistence('paattyy')
-      ),
-    errorBuilder
-  );
-};
 
 const config = createFormConfigBuilder().registerSections([
   pohjaValintaSectionConfig,
@@ -127,42 +109,7 @@ const config = createFormConfigBuilder().registerSections([
         },
       ])(eb.validateExistence('tila'), values),
   },
-  {
-    section: 'valintakokeet',
-    field: 'valintakokeet',
-    koulutustyypit: KOULUTUSTYYPIT,
-    validate: validateIfJulkaistu((eb, values) =>
-      validateValintakokeet(eb, values)
-    ),
-    fields: {
-      '.kokeetTaiLisanaytot': {
-        fields: {
-          '.tyyppi': {
-            required: true,
-          },
-          '.ohjeetEnnakkovalmistautumiseen': {
-            required: true,
-          },
-          '.tilaisuudet': {
-            fields: {
-              '.alkaa': {
-                required: true,
-              },
-              '.paattyy': {
-                required: true,
-              },
-              '.osoite': {
-                required: true,
-              },
-              '.postinumero': {
-                required: true,
-              },
-            },
-          },
-        },
-      },
-    },
-  },
+  valintakokeetSection,
 ]);
 
 const getValintaperusteFormConfig = koulutustyyppi => {

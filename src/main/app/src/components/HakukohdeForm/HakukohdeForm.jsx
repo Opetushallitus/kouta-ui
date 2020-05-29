@@ -1,17 +1,17 @@
 import React from 'react';
-import FormCollapse from '../FormCollapse';
-import KieliversiotFields from '../KieliversiotFields';
-import { KOULUTUSTYYPPI } from '../../constants';
-import PohjakoulutusSection from './PohjakoulutusSection';
-import PerustiedotSection from './PerustiedotSection';
-import AloituspaikatSection from './AloituspaikatSection';
-import KokeetTaiLisanaytotSection from '#/src/components/KokeetTaiLisanaytotSection';
-import LiitteetSection from './LiitteetSection';
-import FormCollapseGroup from '../FormCollapseGroup';
-import KuvausSection from './KuvausSection';
 import { useTranslation } from 'react-i18next';
+import { KOULUTUSTYYPPI } from '#/src/constants';
+import FormCollapse from '#/src/components/FormCollapse';
+import KieliversiotFields from '#/src/components/KieliversiotFields';
+import KokeetTaiLisanaytotSection from '#/src/components/KokeetTaiLisanaytotSection';
+import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import { useFieldValue } from '#/src/hooks/form';
 import JulkaisutilaField from '#/src/components/JulkaisutilaField';
+import PerustiedotSection from './PerustiedotSection';
+import PohjakoulutusSection from './PohjakoulutusSection';
+import AloituspaikatSection from './AloituspaikatSection';
+import LiitteetSection from './LiitteetSection';
+import KuvausSection from './KuvausSection';
 
 const HakukohdeForm = ({
   steps = true,
@@ -68,8 +68,8 @@ const HakukohdeForm = ({
       />
 
       <FormCollapse
-        section="valintakoe"
-        header={t('hakukohdelomake.valintakoe')}
+        section="valintakokeet"
+        header={t('yleiset.kokeetTaiLisanaytot')}
         languages={languages}
         Component={KokeetTaiLisanaytotSection}
       />

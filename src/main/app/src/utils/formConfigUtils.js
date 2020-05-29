@@ -8,6 +8,25 @@ export const validateIfJulkaistu = validate => (eb, values, ...rest) => {
   return tila === JULKAISUTILA.JULKAISTU ? validate(eb, values, ...rest) : eb;
 };
 
+export const validateValintakokeet = (errorBuilder, values) => {
+  const valintakokeet = _.get(values, 'valintakokeet.kokeetTaiLisanaytot');
+  const kieliversiot = getKielivalinta(values);
+  return _.reduce(
+    valintakokeet,
+    (ebAcc, value, index) =>
+      ebAcc.validateArray(
+        `valintakokeet.kokeetTaiLisanaytot[${index}].tilaisuudet`,
+        eb =>
+          eb
+            .validateTranslations('osoite', kieliversiot)
+            .validateExistence('postinumero')
+            .validateExistence('alkaa')
+            .validateExistence('paattyy')
+      ),
+    errorBuilder
+  );
+};
+
 export const kieliversiotSectionConfig = {
   section: 'kieliversiot',
   koulutustyypit: KOULUTUSTYYPIT,
@@ -99,3 +118,40 @@ export const createOptionalTranslatedFieldConfig = ({
     })
   ),
 });
+
+export const valintakokeetSection = {
+  section: 'valintakokeet',
+  field: 'valintakokeet',
+  koulutustyypit: KOULUTUSTYYPIT,
+  validate: validateIfJulkaistu((eb, values) =>
+    validateValintakokeet(eb, values)
+  ),
+  fields: {
+    '.kokeetTaiLisanaytot': {
+      fields: {
+        '.tyyppi': {
+          required: true,
+        },
+        '.ohjeetEnnakkovalmistautumiseen': {
+          required: true,
+        },
+        '.tilaisuudet': {
+          fields: {
+            '.alkaa': {
+              required: true,
+            },
+            '.paattyy': {
+              required: true,
+            },
+            '.osoite': {
+              required: true,
+            },
+            '.postinumero': {
+              required: true,
+            },
+          },
+        },
+      },
+    },
+  },
+};

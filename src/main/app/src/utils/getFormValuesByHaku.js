@@ -1,4 +1,3 @@
-import getValintakoeFieldsValues from './getValintakoeFieldsValues';
 import getHakulomakeFieldsValues from './getHakulomakeFieldsValues';
 
 const getFormValuesByHaku = haku => {
@@ -17,7 +16,6 @@ const getFormValuesByHaku = haku => {
     hakukohteenMuokkaamisenTakaraja,
     ajastettuJulkaisu,
     kielivalinta = [],
-    valintakokeet = [],
     nimi = {},
     metadata = {},
     tila,
@@ -70,7 +68,6 @@ const getFormValuesByHaku = haku => {
         verkkosivu: wwwSivu || {},
       })
     ),
-    valintakoe: getValintakoeFieldsValues(valintakokeet),
   };
 };
 

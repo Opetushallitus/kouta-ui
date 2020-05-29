@@ -10,6 +10,7 @@ import {
   kieliversiotSectionConfig,
   pohjaValintaSectionConfig,
   validateRelations,
+  valintakokeetSection,
 } from '#/src/utils/formConfigUtils';
 
 const getLiitteillaYhteinenToimitusaika = values =>
@@ -89,28 +90,6 @@ const validateLiitteet = (errorBuilder, values) => {
   return enhancedErrorBuilder;
 };
 
-const validateValintakokeet = (errorBuilder, values) => {
-  const valintakoeTyypit = _.get(values, 'valintakoe.tyypit');
-  const kieliversiot = getKielivalinta(values);
-
-  return _.reduce(
-    valintakoeTyypit,
-    (ebAcc, { value: tyyppi }) =>
-      ebAcc
-        .validateArrayMinLength(`valintakoe.tilaisuudet.${tyyppi}`, 1, {
-          isFieldArray: true,
-        })
-        .validateArray(`valintakoe.tilaisuudet.${tyyppi}`, eb =>
-          eb
-            .validateTranslations('osoite', kieliversiot)
-            .validateExistence('postinumero')
-            .validateExistence('alkaa')
-            .validateExistence('paattyy')
-        ),
-    errorBuilder
-  );
-};
-
 const config = createFormConfigBuilder().registerSections([
   pohjaValintaSectionConfig,
   kieliversiotSectionConfig,
@@ -179,36 +158,7 @@ const config = createFormConfigBuilder().registerSections([
     section: 'valintaperusteenKuvaus',
     field: 'valintaperusteenKuvaus',
   },
-  {
-    section: 'valintakoe',
-    parts: [
-      {
-        field: '.tyypit',
-        validate: validateIfJulkaistu((eb, values) =>
-          validateValintakokeet(eb, values)
-        ),
-      },
-      {
-        field: '.tilaisuudet',
-      },
-      {
-        field: '.tilaisuudet.osoite',
-        required: true,
-      },
-      {
-        field: '.tilaisuudet.postinumero',
-        required: true,
-      },
-      {
-        field: '.tilaisuudet.alkaa',
-        required: true,
-      },
-      {
-        field: '.tilaisuudet.paattyy',
-        required: true,
-      },
-    ],
-  },
+  valintakokeetSection,
   {
     section: 'liitteet',
     field: 'liitteet',

@@ -30,11 +30,14 @@ const getFormValuesByValintaperuste = valintaperuste => {
     onkoJulkinen = false,
     tila,
     sorakuvausId,
-    valintakokeidenYleiskuvaus,
     valintakokeet,
   } = valintaperuste;
 
-  const { valintatavat = [], kuvaus = {} } = metadata;
+  const {
+    valintatavat = [],
+    kuvaus = {},
+    valintakokeidenYleiskuvaus,
+  } = metadata;
 
   return {
     tila,

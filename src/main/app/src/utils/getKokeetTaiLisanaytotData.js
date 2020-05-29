@@ -11,6 +11,7 @@ const getKokeetTaiLisanaytotData = ({
   }
   return (kokeetTaiLisanaytot || []).map(
     ({
+      id,
       tyyppi,
       nimi,
       tietoaHakijalle,
@@ -20,19 +21,22 @@ const getKokeetTaiLisanaytotData = ({
       ohjeetErityisjarjestelyihin,
       tilaisuudet = [],
     }) => ({
+      id,
       tyyppiKoodiUri: _.get(tyyppi, 'value'),
       nimi: nimi,
-      tietoja: _.mapValues(tietoaHakijalle, serializeEditorState),
-      liittyyEnnakkovalmistautumista,
-      ohjeetEnnakkovalmistautumiseen: _.mapValues(
-        ohjeetEnnakkovalmistautumiseen,
-        serializeEditorState
-      ),
-      erityisjarjestelytMahdollisia,
-      ohjeetErityisjarjestelyihin: _.mapValues(
-        ohjeetErityisjarjestelyihin,
-        serializeEditorState
-      ),
+      metadata: {
+        tietoja: _.mapValues(tietoaHakijalle, serializeEditorState),
+        liittyyEnnakkovalmistautumista,
+        ohjeetEnnakkovalmistautumiseen: _.mapValues(
+          ohjeetEnnakkovalmistautumiseen,
+          serializeEditorState
+        ),
+        erityisjarjestelytMahdollisia,
+        ohjeetErityisjarjestelyihin: _.mapValues(
+          ohjeetErityisjarjestelyihin,
+          serializeEditorState
+        ),
+      },
       tilaisuudet: tilaisuudet.map(
         ({
           osoite,

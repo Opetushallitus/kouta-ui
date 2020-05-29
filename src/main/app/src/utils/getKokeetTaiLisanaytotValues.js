@@ -9,15 +9,19 @@ export const getKokeetTaiLisanaytotValues = (
     yleisKuvaus: _.mapValues(yleisKuvaus, kuvaus => parseEditorState(kuvaus)),
     kokeetTaiLisanaytot: valintakokeet.map(
       ({
+        id,
         tyyppiKoodiUri,
         tilaisuudet,
         nimi,
-        tietoja,
-        liittyyEnnakkovalmistautumista,
-        ohjeetEnnakkovalmistautumiseen,
-        erityisjarjestelytMahdollisia,
-        ohjeetErityisjarjestelyihin,
+        metadata: {
+          tietoja,
+          liittyyEnnakkovalmistautumista,
+          ohjeetEnnakkovalmistautumiseen,
+          erityisjarjestelytMahdollisia,
+          ohjeetErityisjarjestelyihin,
+        } = {},
       }) => ({
+        id,
         tyyppi: { value: tyyppiKoodiUri },
         nimi,
         liittyyEnnakkovalmistautumista,

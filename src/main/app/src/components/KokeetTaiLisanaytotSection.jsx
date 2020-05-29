@@ -9,10 +9,7 @@ import Box from '#/src/components/Box';
 
 const TRANSLATION_BASE = 'valintaperustelomake.koeTaiLisanaytto';
 
-export const KokeetTaiLisanaytotSection = ({
-  name = 'valintakoe',
-  language,
-}) => {
+export const KokeetTaiLisanaytotSection = ({ name, language }) => {
   const { t } = useTranslation();
   return (
     <>

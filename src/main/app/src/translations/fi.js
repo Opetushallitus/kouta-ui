@@ -162,7 +162,6 @@ export default {
     puhelinnumero: 'Puhelinnumero',
     valitseValintakoetyypit: 'Valitse valintakoetyypit',
     lisaaTilaisuus: 'Lisää tilaisuus',
-    valintakoe: 'Valintakoe',
     avaaLomake: 'Avaa lomake',
     valitseHaunKohdejoukko: 'Valitse haun kohdejoukko',
     valitseHaunKohdejoukonTarkenne: 'Valitse haun kohdejoukon tarkenne',
@@ -200,6 +199,7 @@ export default {
     riippuvuusEiJulkaistu:
       'Liitetty {{entity, unCapitalize}} ei ole "Julkaistu"-tilassa.',
     onJulkinen: '{{entity}} on julkinen',
+    kokeetTaiLisanaytot: 'Kokeet tai lisänäytöt',
   },
   ilmoitukset: {
     tallentamattomiaMuutoksia: {
@@ -503,7 +503,6 @@ export default {
     aloituspaikkojenLukumaara: 'Aloituspaikkojen lukumäärä',
     ensikertalaistenAloituspaikkojenLukumaara:
       'Joista ensikertalaisten aloituspaikkojen lukumäärä',
-    valintakoe: 'Valintakoe',
     valitseValintakokeenTyyppi: 'Valitse valintakokeen tyyppi',
     tarvittavatLiitteet: 'Tarvittavat liitteet',
     lisaaLiite: 'Lisää liite',
@@ -570,8 +569,6 @@ export default {
       'Valintaperusteen näkyminen muille koulutustoimijoille',
     valintaperusteenTila: 'Valintaperusteen tila',
     avaaSoraKuvaus: 'Avaa SORA-kuvaus',
-    valintakoe: 'Valintakoe',
-    kokeetTaiLisanaytot: 'Kokeet ja lisänäytöt',
     eiMuokkausOikeutta:
       'Käyttäjälläsi ei ole oikeuksia muokata tätä valintaperustekuvausta',
     pohjavalintaInfo:

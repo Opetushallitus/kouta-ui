@@ -67,7 +67,7 @@ const ValintaperusteForm = ({
 
       <FormCollapse
         section="valintakokeet"
-        header={t('valintaperustelomake.kokeetTaiLisanaytot')}
+        header={t('yleiset.kokeetTaiLisanaytot')}
         languages={languages}
         Component={KokeetTaiLisanaytotSection}
       />

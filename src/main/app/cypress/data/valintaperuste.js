@@ -43,29 +43,32 @@ export default ({ tyyppi = 'amm' } = {}) => {
       ],
       kielitaitovaatimukset: [],
       kuvaus: { fi: '<p>Loppukuvaus</p>' },
+      valintakokeidenYleiskuvaus: {
+        fi: '<p>Valintakokeiden kuvaus - fi</p>',
+      },
     },
     organisaatioOid: '1.2.246.562.10.594252633210',
     muokkaaja: '1.2.246.562.24.62301161440',
     kielivalinta: ['fi', 'sv'],
     modified: '2019-04-03T13:56',
-    valintakokeidenYleiskuvaus: {
-      fi: '<p>Valintakokeiden kuvaus - fi</p>',
-    },
+
     valintakokeet: [
       {
         nimi: {
           fi: 'Kokeen nimi - fi',
         },
-        tietoja: {
-          fi: '<p>Tietoa kokeesta - fi</p>',
-        },
-        liittyyEnnakkovalmistautumista: true,
-        ohjeetEnnakkovalmistautumiseen: {
-          fi: '<p>Ohjeet ennakkovalmistautumiseen - fi</p>',
-        },
-        erityisjarjestelytMahdollisia: true,
-        ohjeetErityisjarjestelyihin: {
-          fi: '<p>Ohjeet erityisjärjestelyihin - fi</p>',
+        metadata: {
+          tietoja: {
+            fi: '<p>Tietoa kokeesta - fi</p>',
+          },
+          liittyyEnnakkovalmistautumista: true,
+          ohjeetEnnakkovalmistautumiseen: {
+            fi: '<p>Ohjeet ennakkovalmistautumiseen - fi</p>',
+          },
+          erityisjarjestelytMahdollisia: true,
+          ohjeetErityisjarjestelyihin: {
+            fi: '<p>Ohjeet erityisjärjestelyihin - fi</p>',
+          },
         },
         tyyppiKoodiUri: 'tyyppi_1#1',
         tilaisuudet: [

@@ -123,7 +123,6 @@ const getValintaperusteByFormValues = values => {
     nimi,
     koulutustyyppi,
     onkoJulkinen,
-    valintakokeidenYleiskuvaus,
     valintakokeet,
     sorakuvausId,
     metadata: {
@@ -132,6 +131,7 @@ const getValintaperusteByFormValues = values => {
       kielitaitovaatimukset: [],
       osaamistaustaKoodiUrit: [],
       kuvaus,
+      valintakokeidenYleiskuvaus,
     },
   };
 };

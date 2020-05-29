@@ -12,7 +12,7 @@ import ValintatapaSection from './ValintatapaSection';
 import KuvausSection from './KuvausSection';
 import SoraKuvausSection from './SoraKuvausSection';
 import PerustiedotSection from './PerustiedotSection';
-import KokeetTaiLisanaytotSection from './KokeetTaiLisanaytotSection';
+import KokeetTaiLisanaytotSection from '#/src/components/KokeetTaiLisanaytotSection';
 
 const ValintaperusteForm = ({
   steps = true,

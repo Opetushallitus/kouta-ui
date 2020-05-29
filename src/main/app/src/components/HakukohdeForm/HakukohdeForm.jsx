@@ -5,7 +5,7 @@ import { KOULUTUSTYYPPI } from '../../constants';
 import PohjakoulutusSection from './PohjakoulutusSection';
 import PerustiedotSection from './PerustiedotSection';
 import AloituspaikatSection from './AloituspaikatSection';
-import ValintakoeSection from './ValintakoeSection';
+import KokeetTaiLisanaytotSection from '#/src/components/KokeetTaiLisanaytotSection';
 import LiitteetSection from './LiitteetSection';
 import FormCollapseGroup from '../FormCollapseGroup';
 import KuvausSection from './KuvausSection';
@@ -71,7 +71,7 @@ const HakukohdeForm = ({
         section="valintakoe"
         header={t('hakukohdelomake.valintakoe')}
         languages={languages}
-        Component={ValintakoeSection}
+        Component={KokeetTaiLisanaytotSection}
       />
 
       <FormCollapse

@@ -10,8 +10,7 @@ import {
   jatka,
   getByTestId,
   paste,
-  fillAsyncSelect,
-  fillDateTimeInput,
+  fillValintakokeetSection,
 } from '#/cypress/utils';
 import valintaperuste from '#/cypress/data/valintaperuste';
 import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils';
@@ -64,68 +63,6 @@ const lisaaSisaltoa = tyyppi => {
         getByTestId('lisaaTaulukko').click({ force: true });
       }
     });
-};
-
-const fillValintakokeetSection = () => {
-  getByTestId('valintakokeetSection').within(() => {
-    getByTestId('yleisKuvaus').within(() => {
-      typeToEditor('Valintakokeiden kuvaus', cy);
-    });
-
-    getByTestId('kokeetTaiLisanaytot').within(() => {
-      getByTestId('lisaaKoeTaiLisanayttoButton').click({ force: true });
-      getByTestId('kokeenTaiLisanaytonTyyppi').within(() => {
-        selectOption('valintakokeentyyppi_1', cy);
-      });
-      getByTestId('hakijalleNakyvaNimi').find('input').pipe(paste('nimi'));
-
-      getByTestId('tietoaHakijalle').within(() => {
-        typeToEditor('Tietoa hakijalle', cy);
-      });
-
-      getByTestId('liittyyEnnakkovalmistautumista').within(() => {
-        getCheckbox(null, cy).check({ force: true });
-      });
-
-      getByTestId('ohjeetEnnakkovalmistautumiseen').within(() => {
-        typeToEditor('ohjeet ennakkovalmistautumiseen', cy);
-      });
-
-      getByTestId('erityisjarjestelytMahdollisia').within(() => {
-        getCheckbox(null, cy).check({ force: true });
-      });
-
-      getByTestId('ohjeetErityisjarjestelyihin').within(() => {
-        typeToEditor('ohjeet erityisjärjestelyihin', cy);
-      });
-
-      getByTestId('tietoaHakijalle').find('input').pipe(paste('tietoa'));
-      getByTestId('lisaaTilaisuusButton').click({ force: true });
-      getByTestId('osoite').find('input').pipe(paste('osoite'));
-      getByTestId('postinumero').within(() => {
-        fillAsyncSelect('0', '0 Posti_0');
-      });
-      getByTestId('alkaa').within(() => {
-        fillDateTimeInput({
-          date: '02.04.2019',
-          time: '10:45',
-          cy,
-        });
-      });
-
-      getByTestId('paattyy').within(() => {
-        fillDateTimeInput({
-          date: '02.04.2019',
-          time: '19:00',
-          cy,
-        });
-      });
-
-      getByTestId('jarjestamispaikka').find('input').pipe(paste('paikka'));
-      getByTestId('lisatietoja').find('textarea').pipe(paste('lisatietoja'));
-    });
-    jatka();
-  });
 };
 
 const fillValintatapaSection = () => {

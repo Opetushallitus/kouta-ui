@@ -15,6 +15,9 @@ exports[`editValintaperusteForm > should be able to edit valintaperuste #0`] =
     },
     "osaamistaustaKoodiUrit": [],
     "tyyppi": "amm",
+    "valintakokeidenYleiskuvaus": {
+      "fi": "<p>Valintakokeiden kuvaus - fi</p>"
+    },
     "valintatavat": [
       {
         "enimmaispisteet": 100,
@@ -70,19 +73,21 @@ exports[`editValintaperusteForm > should be able to edit valintaperuste #0`] =
   "tila": "tallennettu",
   "valintakokeet": [
     {
-      "erityisjarjestelytMahdollisia": true,
-      "liittyyEnnakkovalmistautumista": true,
+      "metadata": {
+        "erityisjarjestelytMahdollisia": true,
+        "liittyyEnnakkovalmistautumista": true,
+        "ohjeetEnnakkovalmistautumiseen": {
+          "fi": "<p>Ohjeet ennakkovalmistautumiseen - fi</p>"
+        },
+        "ohjeetErityisjarjestelyihin": {
+          "fi": "<p>Ohjeet erityisjärjestelyihin - fi</p>"
+        },
+        "tietoja": {
+          "fi": "<p>Tietoa kokeesta - fi</p>"
+        }
+      },
       "nimi": {
         "fi": "Kokeen nimi - fi"
-      },
-      "ohjeetEnnakkovalmistautumiseen": {
-        "fi": "<p>Ohjeet ennakkovalmistautumiseen - fi</p>"
-      },
-      "ohjeetErityisjarjestelyihin": {
-        "fi": "<p>Ohjeet erityisjärjestelyihin - fi</p>"
-      },
-      "tietoja": {
-        "fi": "<p>Tietoa kokeesta - fi</p>"
       },
       "tilaisuudet": [
         {
@@ -106,8 +111,5 @@ exports[`editValintaperusteForm > should be able to edit valintaperuste #0`] =
       ],
       "tyyppiKoodiUri": "tyyppi_1#1"
     }
-  ],
-  "valintakokeidenYleiskuvaus": {
-    "fi": "<p>Valintakokeiden kuvaus - fi</p>"
-  }
+  ]
 };

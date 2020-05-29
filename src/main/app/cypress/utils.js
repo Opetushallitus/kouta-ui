@@ -104,34 +104,6 @@ export const fillYhteyshenkilotFields = () => {
   getByTestId('verkkosivu').find('input').pipe(paste('verkkosivu'));
 };
 
-export const fillValintakoeFields = () => {
-  selectOption('valintakokeentyyppi_1');
-
-  getByTestId('lisaaTilaisuusButton').click({ force: true });
-
-  getByTestId('osoite').find('input').pipe(paste('osoite'));
-
-  getByTestId('postinumero').within(() => {
-    fillAsyncSelect('0', '0 Posti_0');
-  });
-
-  getByTestId('alkaa').within(() => {
-    fillDateTimeInput({
-      date: '02.04.2019',
-      time: '10:45',
-    });
-  });
-
-  getByTestId('paattyy').within(() => {
-    fillDateTimeInput({
-      date: '02.04.2019',
-      time: '19:00',
-    });
-  });
-
-  getByTestId('lisatietoja').find('textarea').pipe(paste('lisatietoja'));
-};
-
 export const stubKayttoOikeusMeRoute = ({ user = {} } = {}) => {
   cy.route({
     method: 'GET',
@@ -248,3 +220,65 @@ export const OPH_TEST_ORGANISAATIO_OID = '1.2.246.562.10.48587687889';
 
 export const isStubbed =
   !process.env.CYPRESS_BACKEND || process.env.CYPRESS_BACKEND === 'stubs';
+
+export const fillValintakokeetSection = () => {
+  getByTestId('valintakokeetSection').within(() => {
+    getByTestId('yleisKuvaus').within(() => {
+      typeToEditor('Valintakokeiden kuvaus', cy);
+    });
+
+    getByTestId('kokeetTaiLisanaytot').within(() => {
+      getByTestId('lisaaKoeTaiLisanayttoButton').click({ force: true });
+      getByTestId('kokeenTaiLisanaytonTyyppi').within(() => {
+        selectOption('valintakokeentyyppi_1', cy);
+      });
+      getByTestId('hakijalleNakyvaNimi').find('input').pipe(paste('nimi'));
+
+      getByTestId('tietoaHakijalle').within(() => {
+        typeToEditor('Tietoa hakijalle', cy);
+      });
+
+      getByTestId('liittyyEnnakkovalmistautumista').within(() => {
+        getCheckbox(null, cy).check({ force: true });
+      });
+
+      getByTestId('ohjeetEnnakkovalmistautumiseen').within(() => {
+        typeToEditor('ohjeet ennakkovalmistautumiseen', cy);
+      });
+
+      getByTestId('erityisjarjestelytMahdollisia').within(() => {
+        getCheckbox(null, cy).check({ force: true });
+      });
+
+      getByTestId('ohjeetErityisjarjestelyihin').within(() => {
+        typeToEditor('ohjeet erityisjärjestelyihin', cy);
+      });
+
+      getByTestId('tietoaHakijalle').find('input').pipe(paste('tietoa'));
+      getByTestId('lisaaTilaisuusButton').click({ force: true });
+      getByTestId('osoite').find('input').pipe(paste('osoite'));
+      getByTestId('postinumero').within(() => {
+        fillAsyncSelect('0', '0 Posti_0');
+      });
+      getByTestId('alkaa').within(() => {
+        fillDateTimeInput({
+          date: '02.04.2019',
+          time: '10:45',
+          cy,
+        });
+      });
+
+      getByTestId('paattyy').within(() => {
+        fillDateTimeInput({
+          date: '02.04.2019',
+          time: '19:00',
+          cy,
+        });
+      });
+
+      getByTestId('jarjestamispaikka').find('input').pipe(paste('paikka'));
+      getByTestId('lisatietoja').find('textarea').pipe(paste('lisatietoja'));
+    });
+    jatka();
+  });
+};

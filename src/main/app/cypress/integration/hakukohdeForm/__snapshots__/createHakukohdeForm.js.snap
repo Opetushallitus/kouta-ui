@@ -48,6 +48,11 @@ exports[`createHakukohdeForm > should be able to create ammatillinen hakukohde #
   "liitteidenToimitusaika": null,
   "liitteidenToimitusosoite": null,
   "liitteidenToimitustapa": null,
+  "metadata": {
+    "valintakokeidenYleiskuvaus": {
+      "fi": "<p>Valintakokeiden kuvaus</p>"
+    }
+  },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Hakukohteen nimi"
@@ -64,11 +69,30 @@ exports[`createHakukohdeForm > should be able to create ammatillinen hakukohde #
   "toteutusOid": "2.1.1.1.1.1",
   "valintakokeet": [
     {
+      "metadata": {
+        "erityisjarjestelytMahdollisia": true,
+        "liittyyEnnakkovalmistautumista": true,
+        "ohjeetEnnakkovalmistautumiseen": {
+          "fi": "<p>ohjeet ennakkovalmistautumiseen</p>"
+        },
+        "ohjeetErityisjarjestelyihin": {
+          "fi": "<p>ohjeet erityisjärjestelyihin</p>"
+        },
+        "tietoja": {
+          "fi": "<p>Tietoa hakijalle</p>"
+        }
+      },
+      "nimi": {
+        "fi": "nimi"
+      },
       "tilaisuudet": [
         {
           "aika": {
             "alkaa": "2019-04-02T10:45",
             "paattyy": "2019-04-02T19:00"
+          },
+          "jarjestamispaikka": {
+            "fi": "paikka"
           },
           "lisatietoja": {
             "fi": "lisatietoja"
@@ -137,6 +161,11 @@ exports[`createHakukohdeForm > should be able to create korkeakoulu hakukohde #0
   "liitteidenToimitusaika": null,
   "liitteidenToimitusosoite": null,
   "liitteidenToimitustapa": null,
+  "metadata": {
+    "valintakokeidenYleiskuvaus": {
+      "fi": "<p>Valintakokeiden kuvaus</p>"
+    }
+  },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Hakukohteen nimi"
@@ -153,11 +182,30 @@ exports[`createHakukohdeForm > should be able to create korkeakoulu hakukohde #0
   "toteutusOid": "2.1.1.1.1.1",
   "valintakokeet": [
     {
+      "metadata": {
+        "erityisjarjestelytMahdollisia": true,
+        "liittyyEnnakkovalmistautumista": true,
+        "ohjeetEnnakkovalmistautumiseen": {
+          "fi": "<p>ohjeet ennakkovalmistautumiseen</p>"
+        },
+        "ohjeetErityisjarjestelyihin": {
+          "fi": "<p>ohjeet erityisjärjestelyihin</p>"
+        },
+        "tietoja": {
+          "fi": "<p>Tietoa hakijalle</p>"
+        }
+      },
+      "nimi": {
+        "fi": "nimi"
+      },
       "tilaisuudet": [
         {
           "aika": {
             "alkaa": "2019-04-02T10:45",
             "paattyy": "2019-04-02T19:00"
+          },
+          "jarjestamispaikka": {
+            "fi": "paikka"
           },
           "lisatietoja": {
             "fi": "lisatietoja"

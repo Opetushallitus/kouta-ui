@@ -38,18 +38,46 @@ export default () => ({
       toimitustapa: 'osoite',
     },
   ],
+  metadata: {
+    valintakokeidenYleiskuvaus: {
+      fi: '<p>Valintakokeiden kuvaus - fi</p>',
+    },
+  },
   valintakokeet: [
     {
-      id: 'b9d53560-a7f0-45d3-bd9d-46e67e6049ba',
-      tyyppiKoodiUri: 'valintakokeentyyppi_0#1',
+      nimi: {
+        fi: 'Kokeen nimi - fi',
+      },
+      metadata: {
+        tietoja: {
+          fi: '<p>Tietoa kokeesta - fi</p>',
+        },
+        liittyyEnnakkovalmistautumista: true,
+        ohjeetEnnakkovalmistautumiseen: {
+          fi: '<p>Ohjeet ennakkovalmistautumiseen - fi</p>',
+        },
+        erityisjarjestelytMahdollisia: true,
+        ohjeetErityisjarjestelyihin: {
+          fi: '<p>Ohjeet erityisjärjestelyihin - fi</p>',
+        },
+      },
+      tyyppiKoodiUri: 'tyyppi_1#1',
       tilaisuudet: [
         {
           osoite: {
-            osoite: { fi: 'Osoite' },
-            postinumeroKoodiUri: 'posti_0#2',
+            osoite: { fi: 'fi osoite' },
+            postinumeroKoodiUri: 'posti_00350#1',
           },
-          aika: { alkaa: '2011-11-11T10:30', paattyy: '2011-11-12T11:45' },
-          lisatietoja: { fi: 'Lisätietoja' },
+          aika: {
+            alkaa: '2019-04-16T08:44',
+            paattyy: '2019-04-18T08:44',
+          },
+          lisatietoja: {
+            fi: 'fi lisatietoja',
+          },
+          jarjestamispaikka: {
+            fi: 'Jarjestamispaikka - fi',
+          },
         },
       ],
     },

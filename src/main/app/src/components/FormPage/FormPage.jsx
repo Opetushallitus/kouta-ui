@@ -1,12 +1,14 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { Link } from 'react-router-dom';
-
-import { getThemeProp } from '../../theme';
-import Button from '../Button';
 import { useTranslation } from 'react-i18next';
-import Container from '../Container';
-import { useFieldValue } from '#/src/hooks/form';
+import { Link } from 'react-router-dom';
+import NavigationPrompt from 'react-router-navigation-prompt';
+
+import { getThemeProp } from '#/src/theme';
+import Button from '#/src/components/Button';
+import Container from '#/src/components/Container';
+import { useFieldValue, useIsDirty, useIsSubmitting } from '#/src/hooks/form';
+import UnsavedChangesDialog from '#/src/components/UnsavedChangesDialog';
 
 const HeaderContainer = styled.div`
   background-color: white;
@@ -89,9 +91,21 @@ const FormPage = ({
 }) => {
   const { t } = useTranslation();
   const esikatselu = useFieldValue('esikatselu');
+  const isSubmitting = useIsSubmitting();
+  const isDirty = useIsDirty();
 
   return (
     <>
+      <NavigationPrompt
+        when={(currentLoc, nextLoc) => {
+          const samePath =
+            (nextLoc && nextLoc.pathname) ===
+            (currentLoc && currentLoc.pathname);
+          return !samePath && !isSubmitting && isDirty;
+        }}
+      >
+        {props => <UnsavedChangesDialog {...props} />}
+      </NavigationPrompt>
       <HeaderContainer>
         <Container>{header}</Container>
       </HeaderContainer>

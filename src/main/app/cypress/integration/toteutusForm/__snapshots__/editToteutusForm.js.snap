@@ -143,7 +143,7 @@ exports[`editToteutusForm > should be able to edit korkeakoulu toteutus #0`] =
           "fi": "osaamisalan kuvaus"
         },
         "linkki": {
-          "fi": "linkki"
+          "fi": "http://linkki.com"
         },
         "nimi": {
           "fi": "osaamisalan nimi"
@@ -256,7 +256,7 @@ exports[`editToteutusForm > should be able to edit korkeakoulu toteutus #0`] =
           "fi": "osaamisalan kuvaus"
         },
         "linkki": {
-          "fi": "linkki"
+          "fi": "http://linkki.com"
         },
         "nimi": {
           "fi": "osaamisalan nimi"

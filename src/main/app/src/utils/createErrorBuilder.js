@@ -42,6 +42,32 @@ class ErrorBuilder {
     return this;
   }
 
+  validateUrl(path, { message } = {}) {
+    const errorMessage = message || 'validointivirheet.epakelpoUrl';
+    const value = this.getValue(path);
+    const validURL = str => {
+      const allowedSchemas = ['http:', 'https:'];
+      try {
+        if (allowedSchemas.find(schema => str.startsWith(schema))) {
+          new URL(str);
+        } else {
+          return false;
+        }
+      } catch (_) {
+        return false;
+      }
+
+      return true;
+    };
+    Object.entries(value || {}).forEach(([lang, value]) => {
+      if (!validURL(value)) {
+        this.setError(`${path}.${lang}`, errorMessage);
+      }
+    });
+
+    return this;
+  }
+
   validate(path, validator, { message } = {}) {
     const errorMessage = message || 'validointivirheet.pakollinen';
 

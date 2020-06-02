@@ -256,6 +256,7 @@ export default {
       'Arkistointi siirtää tiedot pois näkyvistä, mutta ei poista niitä',
   },
   validointivirheet: {
+    epakelpoUrl: 'Linkki on virheellinen',
     pakollinen: 'Tämä kenttä on pakollinen',
     pakollisetKaannokset:
       'Tämän kentän kaikille käännöksille täytyy syöttää arvo',

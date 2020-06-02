@@ -1,26 +1,30 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import qs from 'query-string';
+import { useTranslation } from 'react-i18next';
+
+import { POHJAVALINTA, ENTITY } from '#/src/constants';
+import { useSaveForm } from '#/src/hooks/formSaveHooks';
+import validateKoulutusForm from '#/src/utils/validateKoulutusForm';
+import getFormValuesByKoulutus from '#/src/utils/getFormValuesByKoulutus';
+import getKoulutusByFormValues from '#/src/utils/getKoulutusByFormValues';
+import getKoulutusByOid from '#/src/utils/kouta/getKoulutusByOid';
+import createKoulutus from '#/src/utils/kouta/createKoulutus';
 
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
-} from '../FormPage';
-import CreateKoulutusHeader from './CreateKoulutusHeader';
-import CreateKoulutusSteps from './CreateKoulutusSteps';
-import KoulutusFormWrapper from './KoulutusFormWrapper';
-import CreateKoulutusFooter from './CreateKoulutusFooter';
-import useSelectBase from '../useSelectBase';
-import Title from '../Title';
-import { useTranslation } from 'react-i18next';
+  FormFooter,
+} from '#/src/components/FormPage';
 import ReduxForm from '#/src/components/ReduxForm';
-import { POHJAVALINTA } from '#/src/constants';
-import getFormValuesByKoulutus from '#/src/utils/getFormValuesByKoulutus';
+import FormHeader from '#/src/components/FormHeader';
+import Title from '#/src/components/Title';
 import { initialValues } from '#/src/components/KoulutusForm';
-import getKoulutusByOid from '../../utils/kouta/getKoulutusByOid';
-import useApiAsync from '../useApiAsync';
+import FormSteps from '#/src/components/FormSteps';
+import useSelectBase from '#/src/components/useSelectBase';
+import useApiAsync from '#/src/components/useApiAsync';
+import KoulutusFormWrapper from './KoulutusFormWrapper';
 
 const resolveFn = () => Promise.resolve();
-
 const getCopyValues = koulutusOid => ({
   pohja: {
     tapa: POHJAVALINTA.KOPIO,
@@ -37,7 +41,7 @@ const getInitialValues = koulutus => {
 const CreateKoulutusPage = props => {
   const {
     match: {
-      params: { oid },
+      params: { oid: luojaOrganisaatioOid },
     },
     location: { search },
     history,
@@ -58,25 +62,56 @@ const CreateKoulutusPage = props => {
     return getInitialValues(data);
   }, [data]);
 
+  const submit = useCallback(
+    async ({ values, httpClient, apiUrls }) => {
+      const { oid } = await createKoulutus({
+        httpClient,
+        apiUrls,
+        koulutus: {
+          ...getKoulutusByFormValues(values),
+          organisaatioOid: luojaOrganisaatioOid,
+        },
+      });
+
+      history.push(
+        `/organisaatio/${luojaOrganisaatioOid}/koulutus/${oid}/muokkaus`
+      );
+    },
+    [history, luojaOrganisaatioOid]
+  );
+
+  const FORM_NAME = 'createKoulutusForm';
+
+  const { save } = useSaveForm({
+    form: 'createKoulutusForm',
+    submit,
+    validate: values =>
+      validateKoulutusForm({
+        ...values,
+        organisaatioOid: luojaOrganisaatioOid,
+      }),
+    formName: FORM_NAME,
+  });
+
   return (
     <ReduxForm
-      form="createKoulutusForm"
+      form={FORM_NAME}
       enableReinitialize
       initialValues={initialValues}
     >
       <Title>{t('sivuTitlet.uusiKoulutus')}</Title>
       <FormPage
-        header={<CreateKoulutusHeader />}
-        steps={<CreateKoulutusSteps />}
-        footer={<CreateKoulutusFooter organisaatioOid={oid} />}
+        header={<FormHeader>{t('yleiset.koulutus')}</FormHeader>}
+        steps={<FormSteps activeStep={ENTITY.KOULUTUS} />}
+        footer={<FormFooter entity={ENTITY.KOULUTUS} save={save} />}
       >
         <RelationInfoContainer>
-          <OrganisaatioRelation organisaatioOid={oid} />
+          <OrganisaatioRelation organisaatioOid={luojaOrganisaatioOid} />
         </RelationInfoContainer>
         <KoulutusFormWrapper
           steps
           isNewKoulutus={true}
-          organisaatioOid={oid}
+          organisaatioOid={luojaOrganisaatioOid}
           kopioKoulutusOid={kopioKoulutusOid}
           onSelectBase={selectBase}
         />

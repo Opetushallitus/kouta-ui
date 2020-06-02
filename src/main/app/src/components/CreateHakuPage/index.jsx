@@ -1,25 +1,29 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import queryString from 'query-string';
+import { useTranslation } from 'react-i18next';
 
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
-} from '../FormPage';
+  FormFooter,
+} from '#/src/components/FormPage';
 
-import CreateHakuHeader from './CreateHakuHeader';
-import CreateHakuSteps from './CreateHakuSteps';
-import CreateHakuFooter from './CreateHakuFooter';
-import useSelectBase from '../useSelectBase';
-import Title from '../Title';
-import { useTranslation } from 'react-i18next';
+import useSelectBase from '#/src/components/useSelectBase';
+import Title from '#/src/components/Title';
 import ReduxForm from '#/src/components/ReduxForm';
 import FormConfigContext from '#/src/components/FormConfigContext';
 import getHakuFormConfig from '#/src/utils/getHakuFormConfig';
 import HakuForm, { initialValues } from '#/src/components/HakuForm';
 import getHakuByOid from '#/src/utils/kouta/getHakuByOid';
 import useApiAsync from '#/src/components/useApiAsync';
-import { POHJAVALINTA } from '#/src/constants';
+import { POHJAVALINTA, ENTITY } from '#/src/constants';
 import getFormValuesByHaku from '#/src/utils/getFormValuesByHaku';
+import createHaku from '#/src/utils/kouta/createHaku';
+import getHakuByFormValues from '#/src/utils/getHakuByFormValues';
+import { useSaveForm } from '#/src/hooks/formSaveHooks';
+import validateHakuForm from '#/src/utils/validateHakuForm';
+import FormSteps from '#/src/components/FormSteps';
+import FormHeader from '#/src/components/FormHeader';
 
 const config = getHakuFormConfig();
 const resolveFn = () => Promise.resolve();
@@ -61,6 +65,25 @@ const CreateHakuPage = props => {
     return getInitialValues(data);
   }, [data]);
 
+  const submit = useCallback(
+    async ({ values, httpClient, apiUrls }) => {
+      const { oid } = await createHaku({
+        httpClient,
+        apiUrls,
+        haku: { ...getHakuByFormValues(values), organisaatioOid },
+      });
+
+      history.push(`/organisaatio/${organisaatioOid}/haku/${oid}/muokkaus`);
+    },
+    [organisaatioOid, history]
+  );
+
+  const { save } = useSaveForm({
+    form: 'createHakuForm',
+    submit,
+    validate: validateHakuForm,
+  });
+
   return (
     <ReduxForm
       form="createHakuForm"
@@ -69,9 +92,9 @@ const CreateHakuPage = props => {
     >
       <Title>{t('sivuTitlet.uusiHaku')}</Title>
       <FormPage
-        header={<CreateHakuHeader />}
-        steps={<CreateHakuSteps />}
-        footer={<CreateHakuFooter organisaatioOid={organisaatioOid} />}
+        header={<FormHeader>{t('yleiset.haku')}</FormHeader>}
+        steps={<FormSteps activeStep={ENTITY.HAKU} />}
+        footer={<FormFooter entity={ENTITY.HAKU} save={save} />}
       >
         <RelationInfoContainer>
           <OrganisaatioRelation organisaatioOid={organisaatioOid} />

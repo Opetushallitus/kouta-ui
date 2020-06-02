@@ -1,8 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import FormStepIcon from '../FormStepIcon';
 import { useTranslation } from 'react-i18next';
+import { ENTITY } from '#/src/constants';
+import FormStepIcon from '#/src/components/FormStepIcon';
+
+const {
+  KOULUTUS,
+  TOTEUTUS,
+  HAKU,
+  HAKUKOHDE,
+  VALINTAPERUSTE,
+  SORA_KUVAUS,
+} = ENTITY;
 
 const GroupContainer = styled.div`
   display: flex;
@@ -24,12 +34,12 @@ const Wrapper = styled.div`
 `;
 
 const stepOrder = [
-  'koulutus',
-  'toteutus',
-  'haku',
-  'hakukohde',
-  'valintaperusteet',
-  'sora',
+  KOULUTUS,
+  TOTEUTUS,
+  HAKU,
+  HAKUKOHDE,
+  VALINTAPERUSTE,
+  SORA_KUVAUS,
 ];
 
 const stepIsActive = (step, activeStep) => {
@@ -43,7 +53,7 @@ const stepIsDone = (step, activeStep) => {
   return stepIndex < activeStepIndex;
 };
 
-const FormSteps = ({ activeStep = 'koulutus', ...props }) => {
+const FormSteps = ({ activeStep = KOULUTUS, ...props }) => {
   const { t } = useTranslation();
 
   return (
@@ -51,15 +61,15 @@ const FormSteps = ({ activeStep = 'koulutus', ...props }) => {
       <GroupContainer>
         <StepsIcon
           icon="school"
-          active={stepIsActive('koulutus', activeStep)}
-          done={stepIsDone('koulutus', activeStep)}
+          active={stepIsActive(KOULUTUS, activeStep)}
+          done={stepIsDone(KOULUTUS, activeStep)}
         >
           {t('yleiset.koulutus')}
         </StepsIcon>
         <StepsIcon
           icon="settings"
-          active={stepIsActive('toteutus', activeStep)}
-          done={stepIsDone('toteutus', activeStep)}
+          active={stepIsActive(TOTEUTUS, activeStep)}
+          done={stepIsDone(TOTEUTUS, activeStep)}
         >
           {t('yleiset.toteutus')}
         </StepsIcon>
@@ -67,15 +77,15 @@ const FormSteps = ({ activeStep = 'koulutus', ...props }) => {
       <GroupContainer>
         <StepsIcon
           icon="access_time"
-          active={stepIsActive('haku', activeStep)}
-          done={stepIsDone('haku', activeStep)}
+          active={stepIsActive(HAKU, activeStep)}
+          done={stepIsDone(HAKU, activeStep)}
         >
           {t('yleiset.haku')}
         </StepsIcon>
         <StepsIcon
           icon="grain"
-          active={stepIsActive('hakukohde', activeStep)}
-          done={stepIsDone('hakukohde', activeStep)}
+          active={stepIsActive(HAKUKOHDE, activeStep)}
+          done={stepIsDone(HAKUKOHDE, activeStep)}
         >
           {t('yleiset.hakukohde')}
         </StepsIcon>
@@ -83,15 +93,15 @@ const FormSteps = ({ activeStep = 'koulutus', ...props }) => {
       <GroupContainer>
         <StepsIcon
           icon="select_all"
-          active={stepIsActive('valintaperusteet', activeStep)}
-          done={stepIsDone('valintaperusteet', activeStep)}
+          active={stepIsActive(VALINTAPERUSTE, activeStep)}
+          done={stepIsDone(VALINTAPERUSTE, activeStep)}
         >
           {t('yleiset.valintaperusteet')}
         </StepsIcon>
         <StepsIcon
           icon="subject"
-          active={stepIsActive('sora', activeStep)}
-          done={stepIsDone('sora', activeStep)}
+          active={stepIsActive(SORA_KUVAUS, activeStep)}
+          done={stepIsDone(SORA_KUVAUS, activeStep)}
         >
           {t('yleiset.soraKuvaus')}
         </StepsIcon>

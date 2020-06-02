@@ -11,7 +11,6 @@ import {
   openSavingSuccessToast,
 } from '#/src/state/toaster';
 import { useHttpClient, useURLs } from '#/src/hooks/context';
-import { useFormName } from '#/src/hooks/form';
 import useAuthorizedUser from '#/src/components/useAuthorizedUser';
 import getKoulutusByOid from '#/src/utils/kouta/getKoulutusByOid';
 import getToteutusByOid from '#/src/utils/kouta/getToteutusByOid';
@@ -77,15 +76,15 @@ export const useSaveForm = ({ form, validate, submit }) => {
 
     stopSubmit({ successToast: true });
   }, [
+    store,
+    form,
     user,
-    submit,
     startSubmit,
     stopSubmit,
     validate,
+    submit,
     httpClient,
     apiUrls,
-    store,
-    form,
   ]);
 
   return {
@@ -93,16 +92,17 @@ export const useSaveForm = ({ form, validate, submit }) => {
   };
 };
 
-export const useSaveToteutus = (
+export const useSaveToteutus = ({
+  formName,
   submit,
-  { koulutustyyppi, koulutus: oldKoulutus }
-) => {
+  koulutustyyppi,
+  koulutus: oldKoulutus,
+}) => {
   const httpClient = useHttpClient();
   const apiUrls = useURLs();
-  const form = useFormName();
 
   const { save } = useSaveForm({
-    form,
+    form: formName,
     submit,
     validate: async values => {
       const koulutus = oldKoulutus
@@ -122,16 +122,17 @@ export const useSaveToteutus = (
   return save;
 };
 
-export const useSaveHakukohde = (
+export const useSaveHakukohde = ({
+  formName,
   submit,
-  { haku: oldHaku, toteutus: oldToteutus }
-) => {
+  haku: oldHaku,
+  toteutus: oldToteutus,
+}) => {
   const httpClient = useHttpClient();
   const apiUrls = useURLs();
-  const form = useFormName();
 
   const { save } = useSaveForm({
-    form,
+    form: formName,
     submit,
     validate: async values => {
       const valintaperusteId = _.get(values, 'valintaperusteenKuvaus.value');
@@ -146,6 +147,7 @@ export const useSaveHakukohde = (
             })
           : Promise.resolve(),
       ]);
+      console.log(values);
       return validateHakukohdeForm({
         ...values,
         haku,
@@ -158,13 +160,12 @@ export const useSaveHakukohde = (
   return save;
 };
 
-export const useSaveValintaperuste = submit => {
+export const useSaveValintaperuste = ({ submit, formName }) => {
   const httpClient = useHttpClient();
   const apiUrls = useURLs();
-  const form = useFormName();
 
   const { save } = useSaveForm({
-    form,
+    form: formName,
     submit,
     validate: async values => {
       const soraKuvausId = _.get(values, 'soraKuvaus.value');

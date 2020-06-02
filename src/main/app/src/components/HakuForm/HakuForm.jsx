@@ -29,7 +29,6 @@ const HakuForm = ({
   canSelectBase = true,
   onAttachHakukohde,
   steps = false,
-  scrollTarget,
   haku: hakuProp = null,
   showArkistoituTilaOption = true,
   onSelectBase = () => {},
@@ -59,12 +58,7 @@ const HakuForm = ({
         organisaatioOid={organisaatioOid}
         onSave={onAttachHakukohde}
       />
-      <FormCollapseGroup
-        enabled={steps}
-        scrollTarget={scrollTarget}
-        defaultOpen={!steps}
-        configured
-      >
+      <FormCollapseGroup enabled={steps} defaultOpen={!steps} configured>
         {canSelectBase ? (
           <PohjaFormCollapse
             section="pohja"

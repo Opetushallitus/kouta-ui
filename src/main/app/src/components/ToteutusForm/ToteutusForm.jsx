@@ -32,7 +32,6 @@ const ToteutusForm = ({
   organisaatioOid,
   steps = false,
   canSelectBase = true,
-  scrollTarget,
   toteutus,
   onAttachHakukohde,
   koulutustyyppi = KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
@@ -52,12 +51,7 @@ const ToteutusForm = ({
         organisaatioOid={organisaatioOid}
         onSave={onAttachHakukohde}
       />
-      <FormCollapseGroup
-        enabled={steps}
-        scrollTarget={scrollTarget}
-        defaultOpen={!steps}
-        configured
-      >
+      <FormCollapseGroup enabled={steps} defaultOpen={!steps} configured>
         {canSelectBase && (
           <PohjaFormCollapse
             onSelectBase={onSelectBase}

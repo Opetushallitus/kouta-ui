@@ -79,7 +79,7 @@ exports[`createToteutusForm > should be able to create ammatillinen toteutus #0`
       {
         "koodiUri": "osaamisala_0",
         "linkki": {
-          "fi": "osaamisala_0 linkki"
+          "fi": "http://linkki.com"
         },
         "otsikko": {
           "fi": "osaamisala_0 otsikko"
@@ -136,7 +136,7 @@ exports[`createToteutusForm > should be able to create korkeakoulu toteutus #0`]
           "fi": "osaamisalan kuvaus"
         },
         "linkki": {
-          "fi": "linkki"
+          "fi": "http://linkki.com"
         },
         "nimi": {
           "fi": "osaamisalan nimi"
@@ -247,7 +247,7 @@ exports[`createToteutusForm > should be able to create korkeakoulu toteutus #0`]
           "fi": "osaamisalan kuvaus"
         },
         "linkki": {
-          "fi": "linkki"
+          "fi": "http://linkki.com"
         },
         "nimi": {
           "fi": "osaamisalan nimi"

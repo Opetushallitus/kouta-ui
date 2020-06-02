@@ -109,7 +109,7 @@ const getKorkeakouluFields = ({ tyyppi }) =>
         {
           kuvaus: { fi: 'osaamisalan kuvaus' },
           nimi: { fi: 'osaamisalan nimi' },
-          linkki: { fi: 'linkki' },
+          linkki: { fi: 'http://linkki.com' },
           otsikko: { fi: 'osaamisalan otsikko' },
         },
       ],
@@ -117,7 +117,7 @@ const getKorkeakouluFields = ({ tyyppi }) =>
         {
           kuvaus: { fi: 'osaamisalan kuvaus' },
           nimi: { fi: 'osaamisalan nimi' },
-          linkki: { fi: 'linkki' },
+          linkki: { fi: 'http://linkki.com' },
           otsikko: { fi: 'osaamisalan otsikko' },
         },
       ],

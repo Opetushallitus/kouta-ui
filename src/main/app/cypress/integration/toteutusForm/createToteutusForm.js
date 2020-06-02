@@ -176,7 +176,9 @@ const fillKkOsaamisalat = () => {
   getByTestId('osaamisalanKuvaus')
     .find('textarea')
     .pipe(paste('osaamisalan kuvaus'));
-  getByTestId('osaamisalanLinkki').find('input').pipe(paste('linkki'));
+  getByTestId('osaamisalanLinkki')
+    .find('input')
+    .pipe(paste('http://linkki.com'));
   getByTestId('osaamisalanOtsikko')
     .find('input')
     .pipe(paste('osaamisalan otsikko'));
@@ -275,7 +277,7 @@ describe('createToteutusForm', () => {
 
       getByTestId('osaamisalaLinkki.osaamisala_0')
         .find('input')
-        .pipe(paste('osaamisala_0 linkki'));
+        .pipe(paste('http://linkki.com'));
 
       getByTestId('osaamisalaOtsikko.osaamisala_0')
         .find('input')

@@ -8,6 +8,7 @@ import {
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
+  JULKAISUTILA,
 } from '#/src/constants';
 
 import {
@@ -102,11 +103,15 @@ const config = createFormConfigBuilder().registerSections([
     parts: [
       {
         field: 'alemmanKorkeakoulututkinnonOsaamisalat',
-        validate: validateIfJulkaistu((eb, values) =>
-          eb.validateArray('alemmanKorkeakoulututkinnonOsaamisalat', eb =>
-            eb.validateTranslations('nimi', getKielivalinta(values))
-          )
-        ),
+        validate: (eb, values) =>
+          eb.validateArray('alemmanKorkeakoulututkinnonOsaamisalat', eb => {
+            const { tila } = values;
+            const e = eb.validateUrl('linkki');
+
+            return tila === JULKAISUTILA.JULKAISTU
+              ? e.validateTranslations('nimi', getKielivalinta(values))
+              : e;
+          }),
       },
       {
         field: '.nimi',
@@ -120,11 +125,15 @@ const config = createFormConfigBuilder().registerSections([
     parts: [
       {
         field: 'ylemmanKorkeakoulututkinnonOsaamisalat',
-        validate: validateIfJulkaistu((eb, values) =>
-          eb.validateArray('ylemmanKorkeakoulututkinnonOsaamisalat', eb =>
-            eb.validateTranslations('nimi', getKielivalinta(values))
-          )
-        ),
+        validate: (eb, values) =>
+          eb.validateArray('ylemmanKorkeakoulututkinnonOsaamisalat', eb => {
+            const { tila } = values;
+            const e = eb.validateUrl('linkki');
+
+            return tila === JULKAISUTILA.JULKAISTU
+              ? e.validateTranslations('nimi', getKielivalinta(values))
+              : e;
+          }),
       },
       {
         field: '.nimi',

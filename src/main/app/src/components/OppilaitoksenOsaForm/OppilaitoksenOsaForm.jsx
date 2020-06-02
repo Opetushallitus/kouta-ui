@@ -1,15 +1,14 @@
 import React from 'react';
-
-import FormCollapseGroup from '../FormCollapseGroup';
-import FormCollapse from '../FormCollapse';
 import { useTranslation } from 'react-i18next';
-import { getTestIdProps } from '../../utils';
+
+import FormCollapseGroup from '#/src/components/FormCollapseGroup';
+import FormCollapse from '#/src/components/FormCollapse';
+import JulkaisutilaField from '#/src/components/JulkaisutilaField';
+import KieliversiotFields from '#/src/components/KieliversiotFields';
+import { useFieldValue } from '#/src/hooks/form';
 import PerustiedotSection from './PerustiedotSection';
 import EsittelySection from './EsittelySection';
 import YhteystiedotSection from './YhteystiedotSection';
-import JulkaisutilaField from '#/src/components/JulkaisutilaField';
-import KieliversiotFields from '../KieliversiotFields';
-import { useFieldValue } from '#/src/hooks/form';
 
 const OppilaitoksenOsaForm = ({
   steps = false,
@@ -23,47 +22,38 @@ const OppilaitoksenOsaForm = ({
     <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
       <FormCollapse
         header={t('yleiset.kieliversiot')}
-        {...getTestIdProps('kieliversiotSection')}
-      >
-        <KieliversiotFields name="kieliversiot" />
-      </FormCollapse>
+        section="kieliversiot"
+        Component={KieliversiotFields}
+      />
 
       <FormCollapse
         languages={languageTabs}
         header={t('oppilaitoksenOsaLomake.oppilaitoksenOsanPerustiedot')}
-        {...getTestIdProps('perustiedotSection')}
-      >
-        <PerustiedotSection
-          name="perustiedot"
-          organisaatioOid={organisaatioOid}
-        />
-      </FormCollapse>
+        section="perustiedot"
+        Component={PerustiedotSection}
+        organisaatioOid={organisaatioOid}
+      />
 
       <FormCollapse
         languages={languageTabs}
         header={t('oppilaitoksenOsaLomake.oppilaitoksenOsanEsittely')}
-        {...getTestIdProps('esittelySection')}
-      >
-        <EsittelySection name="esittely" />
-      </FormCollapse>
+        section="esittely"
+        Component={EsittelySection}
+      />
 
       <FormCollapse
         languages={languageTabs}
         header={t('oppilaitoksenOsaLomake.oppilaitoksenOsanYhteystiedot')}
-        {...getTestIdProps('yhteystiedotSection')}
-      >
-        <YhteystiedotSection name="yhteystiedot" />
-      </FormCollapse>
+        section="yhteystiedot"
+        Component={YhteystiedotSection}
+      />
 
       <FormCollapse
         header={t('oppilaitoksenOsaLomake.oppilaitoksenOsanTila')}
-        {...getTestIdProps('tilaSection')}
-      >
-        <JulkaisutilaField
-          name="tila"
-          showArkistoitu={showArkistoituTilaOption}
-        />
-      </FormCollapse>
+        section="tila"
+        Component={JulkaisutilaField}
+        showArkistoitu={showArkistoituTilaOption}
+      />
     </FormCollapseGroup>
   );
 };

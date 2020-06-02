@@ -46,20 +46,14 @@ class ErrorBuilder {
     const errorMessage = message || 'validointivirheet.epakelpoUrl';
     const value = this.getValue(path);
     const validURL = str => {
-      const allowedSchemas = ['http:', 'https:'];
       try {
-        if (allowedSchemas.find(schema => str.startsWith(schema))) {
-          new URL(str);
-        } else {
-          return false;
-        }
+        const url = new URL(str);
+        return _.includes(['http:', 'https:'], url.protocol);
       } catch (_) {
         return false;
       }
-
-      return true;
     };
-    Object.entries(value || {}).forEach(([lang, value]) => {
+    _.each(Object.entries(value || {}), ([lang, value]) => {
       if (!validURL(value)) {
         this.setError(`${path}.${lang}`, errorMessage);
       }

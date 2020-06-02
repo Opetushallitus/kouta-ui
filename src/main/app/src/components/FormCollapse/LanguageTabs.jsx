@@ -4,13 +4,14 @@ import { sortBy } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import Tabs, { Tab } from '../Tabs';
 
-const sortOrder = ['fi', 'sv', 'en'];
+const sortOrder = ['fi', 'sv', 'en', 'muu'];
 
 const getLanguageOptions = ({ languages = [], t }) => {
   const labelByValue = {
     fi: t('yleiset.suomeksi'),
     sv: t('yleiset.ruotsiksi'),
     en: t('yleiset.englanniksi'),
+    muu: t('yleiset.muuksi'),
   };
 
   return sortBy(

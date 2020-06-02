@@ -52,8 +52,10 @@ export default {
     valitseKieliversiot:
       'Valitse ne kielet, joilla tiedot julkaistaan Opintopolussa',
     englanti: 'Englanti',
+    muu: 'Muu',
     suomi: 'Suomi',
     ruotsi: 'Ruotsi',
+    muuksi: 'Muu',
     suomeksi: 'Suomeksi',
     ruotsiksi: 'Ruotsiksi',
     englanniksi: 'Englanniksi',

@@ -1,23 +1,23 @@
 import React, { useCallback, useMemo } from 'react';
-import queryString from 'query-string';
+import { useTranslation } from 'react-i18next';
 
 import FormPage, {
   OrganisaatioRelation,
   KoulutusRelation,
   RelationInfoContainer,
-} from '../FormPage';
-import EditToteutusHeader from './EditToteutusHeader';
-import EditToteutusSteps from './EditToteutusSteps';
+} from '#/src/components/FormPage';
+import getFormValuesByToteutus from '#/src/utils/getFormValuesByToteutus';
+import getToteutusByOid from '#/src/utils/kouta/getToteutusByOid';
+import getKoulutusByOid from '#/src/utils/kouta/getKoulutusByOid';
+import ReduxForm from '#/src/components/ReduxForm';
+import useApiAsync from '#/src/components/useApiAsync';
+import Spin from '#/src/components/Spin';
+import Title from '#/src/components/Title';
+import FormSteps from '#/src/components/FormSteps';
 import ToteutusFormWrapper from './ToteutusFormWrapper';
 import EditToteutusFooter from './EditToteutusFooter';
-import useApiAsync from '../useApiAsync';
-import getToteutusByOid from '../../utils/kouta/getToteutusByOid';
-import getKoulutusByOid from '../../utils/kouta/getKoulutusByOid';
-import Spin from '../Spin';
-import Title from '../Title';
-import { useTranslation } from 'react-i18next';
-import ReduxForm from '#/src/components/ReduxForm';
-import getFormValuesByToteutus from '#/src/utils/getFormValuesByToteutus';
+import { ENTITY } from '#/src/constants';
+import EntityFormHeader from '../EntityFormHeader';
 
 const getToteutusAndKoulutus = async ({ httpClient, apiUrls, oid }) => {
   const toteutus = await getToteutusByOid({ httpClient, apiUrls, oid });
@@ -41,11 +41,10 @@ const EditToteutusPage = props => {
     match: {
       params: { organisaatioOid, oid },
     },
-    location: { search, state = {} },
+    location: { state = {} },
   } = props;
 
   const { toteutusUpdatedAt = null } = state;
-  const { scrollTarget = null } = queryString.parse(search);
   const watch = JSON.stringify([oid, toteutusUpdatedAt]);
 
   const { data: { toteutus = null, koulutus = null } = {} } = useApiAsync({
@@ -78,8 +77,10 @@ const EditToteutusPage = props => {
     <ReduxForm form="editToteutusForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.toteutuksenMuokkaus')}</Title>
       <FormPage
-        header={<EditToteutusHeader toteutus={toteutus} />}
-        steps={<EditToteutusSteps />}
+        header={
+          <EntityFormHeader entityType={ENTITY.TOTEUTUS} entity={toteutus} />
+        }
+        steps={<FormSteps activeStep={ENTITY.TOTEUTUS} />}
         footer={
           toteutus ? (
             <EditToteutusFooter
@@ -109,7 +110,6 @@ const EditToteutusPage = props => {
             koulutusKoodiUri={koulutus ? koulutus.koulutusKoodiUri : null}
             koulutustyyppi={koulutustyyppi}
             ePerusteId={koulutus ? koulutus.ePerusteId : null}
-            scrollTarget={scrollTarget}
           />
         ) : (
           <Spin center />

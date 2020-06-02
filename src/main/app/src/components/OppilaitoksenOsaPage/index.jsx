@@ -1,18 +1,17 @@
 import React from 'react';
-
-import useOrganisaatio from '../useOrganisaatio';
-import FormPage from '../FormPage';
-import OppilaitoksenOsaPageForm from './OppilaitoksenOsaPageForm';
-import OppilaitosFormSteps from '../OppilaitosFormSteps';
-import OppilaitoksenOsaPageHeader from './OppilaitoksenOsaPageHeader';
-import OppilaitoksenOsaPageFooter from './OppilaitoksenOsaPageFooter';
-import useApiAsync from '../useApiAsync';
-import getOppilaitoksenOsaByOid from '../../utils/kouta/getOppilaitoksenOsaByOid';
-import Spin from '../Spin';
-import Title from '../Title';
 import { useTranslation } from 'react-i18next';
 
-const Steps = () => <OppilaitosFormSteps activeStep="oppilaitoksenOsa" />;
+import useOrganisaatio from '#/src/components/useOrganisaatio';
+import FormPage from '#/src/components/FormPage';
+import OppilaitosFormSteps from '#/src/components/OppilaitosFormSteps';
+import OppilaitoksenOsaPageFooter from './OppilaitoksenOsaPageFooter';
+import useApiAsync from '#/src/components/useApiAsync';
+import getOppilaitoksenOsaByOid from '#/src/utils/kouta/getOppilaitoksenOsaByOid';
+import Spin from '#/src/components/Spin';
+import Title from '#/src/components/Title';
+import EntityFormHeader from '#/src/components/EntityFormHeader';
+import { ENTITY } from '#/src/constants';
+import OppilaitoksenOsaPageForm from './OppilaitoksenOsaPageForm';
 
 const OppilaitoksenOsaPage = ({
   match: {
@@ -41,8 +40,13 @@ const OppilaitoksenOsaPage = ({
     <>
       <Title>{t('sivuTitlet.oppilaitoksenOsa')}</Title>
       <FormPage
-        steps={<Steps />}
-        header={<OppilaitoksenOsaPageHeader organisaatio={organisaatio} />}
+        steps={<OppilaitosFormSteps activeStep={ENTITY.OPPILAITOKSEN_OSA} />}
+        header={
+          <EntityFormHeader
+            entityType={ENTITY.OPPILAITOKSEN_OSA}
+            entity={oppilaitoksenOsa}
+          />
+        }
         footer={
           <OppilaitoksenOsaPageFooter
             oppilaitoksenOsa={oppilaitoksenOsa}

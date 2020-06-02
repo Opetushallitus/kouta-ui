@@ -1,30 +1,27 @@
 import React, { useMemo } from 'react';
-import queryString from 'query-string';
-
-import FormPage from '../FormPage';
-import EditHakukohdeHeader from './EditHakukohdeHeader';
-import EditHakukohdeSteps from './EditHakukohdeSteps';
-import EditHakukohdeFooter from './EditHakukohdeFooter';
-import useApiAsync from '../useApiAsync';
-import Spin from '../Spin';
-import { KOULUTUSTYYPPI } from '../../constants';
 import { useTranslation } from 'react-i18next';
-import getKoulutustyyppiByKoulutusOid from '../../utils/kouta/getKoulutustyyppiByKoulutusOid';
-import getToteutusByOid from '../../utils/kouta/getToteutusByOid';
-import Title from '../Title';
-import getHakuByOid from '../../utils/kouta/getHakuByOid';
-import getHakukohdeByOid from '../../utils/kouta/getHakukohdeByOid';
+import { KOULUTUSTYYPPI, ENTITY } from '#/src/constants';
+import getKoulutustyyppiByKoulutusOid from '#/src/utils/kouta/getKoulutustyyppiByKoulutusOid';
+import getHakukohdeByOid from '#/src/utils/kouta/getHakukohdeByOid';
+import useApiAsync from '#/src/components/useApiAsync';
+import Spin from '#/src/components/Spin';
+import getToteutusByOid from '#/src/utils/kouta/getToteutusByOid';
+import Title from '#/src/components/Title';
+import getHakuByOid from '#/src/utils/kouta/getHakuByOid';
 import ReduxForm from '#/src/components/ReduxForm';
 import getHakukohdeFormConfig from '#/src/utils/getHakukohdeFormConfig';
 import getFormValuesByHakukohde from '#/src/utils/getFormValuesByHakukohde';
 import FormConfigContext from '#/src/components/FormConfigContext';
 import HakukohdeForm from '#/src/components/HakukohdeForm';
-import {
+import EditHakukohdeFooter from './EditHakukohdeFooter';
+import FormPage, {
   RelationInfoContainer,
   OrganisaatioRelation,
   HakuRelation,
   ToteutusRelation,
 } from '#/src/components/FormPage';
+import EntityFormHeader from '#/src/components/EntityFormHeader';
+import FormSteps from '#/src/components/FormSteps';
 
 const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
   const hakukohde = await getHakukohdeByOid({
@@ -61,11 +58,10 @@ const EditHakukohdePage = props => {
     match: {
       params: { organisaatioOid, oid },
     },
-    location: { search, state = {} },
+    location: { state = {} },
   } = props;
 
   const { hakukohdeUpdatedAt = null } = state;
-  const { scrollTarget = null } = queryString.parse(search);
   const watch = JSON.stringify([oid, hakukohdeUpdatedAt]);
 
   const {
@@ -90,8 +86,10 @@ const EditHakukohdePage = props => {
     <ReduxForm form="editHakukohdeForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.hakukohteenMuokkaus')}</Title>
       <FormPage
-        header={<EditHakukohdeHeader hakukohde={hakukohde} />}
-        steps={<EditHakukohdeSteps />}
+        header={
+          <EntityFormHeader entityType={ENTITY.HAKUKOHDE} entity={hakukohde} />
+        }
+        steps={<FormSteps activeStep={ENTITY.HAKUKOHDE} />}
         footer={
           hakukohde ? (
             <EditHakukohdeFooter
@@ -116,7 +114,6 @@ const EditHakukohdePage = props => {
               <HakukohdeForm
                 steps={false}
                 organisaatioOid={organisaatioOid}
-                scrollTarget={scrollTarget}
                 haku={haku}
                 toteutus={toteutus}
                 hakukohde={hakukohde}

@@ -1,18 +1,17 @@
 import React from 'react';
-
-import useOrganisaatio from '../useOrganisaatio';
-import FormPage from '../FormPage';
-import OppilaitosPageForm from './OppilaitosPageForm';
-import OppilaitosFormSteps from '../OppilaitosFormSteps';
-import OppilaitosPageHeader from './OppilaitosPageHeader';
-import OppilaitosPageFooter from './OppilaitosPageFooter';
-import useApiAsync from '../useApiAsync';
-import getOppilaitosByOid from '../../utils/kouta/getOppilaitosByOid';
-import Spin from '../Spin';
-import Title from '../Title';
 import { useTranslation } from 'react-i18next';
 
-const Steps = () => <OppilaitosFormSteps activeStep="oppilaitos" />;
+import useOrganisaatio from '#/src/components/useOrganisaatio';
+import FormPage from '#/src/components/FormPage';
+import OppilaitosFormSteps from '#/src/components/OppilaitosFormSteps';
+import useApiAsync from '#/src/components/useApiAsync';
+import getOppilaitosByOid from '#/src/utils/kouta/getOppilaitosByOid';
+import Spin from '#/src/components/Spin';
+import Title from '#/src/components/Title';
+import { ENTITY } from '#/src/constants';
+import OppilaitosPageForm from './OppilaitosPageForm';
+import OppilaitosPageFooter from './OppilaitosPageFooter';
+import OppilaitosPageHeader from './OppilaitosPageHeader';
 
 const OppilaitosPage = ({
   match: {
@@ -40,7 +39,7 @@ const OppilaitosPage = ({
     <>
       <Title>{t('sivuTitlet.oppilaitos')}</Title>
       <FormPage
-        steps={<Steps />}
+        steps={<OppilaitosFormSteps activeStep={ENTITY.OPPILAITOS} />}
         header={<OppilaitosPageHeader organisaatio={organisaatio} />}
         footer={
           <OppilaitosPageFooter

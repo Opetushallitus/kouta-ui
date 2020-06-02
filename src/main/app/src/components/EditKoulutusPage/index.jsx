@@ -1,47 +1,23 @@
 import React, { useCallback, useContext, useMemo } from 'react';
-import queryString from 'query-string';
-import ReduxForm from '../ReduxForm';
+import { useTranslation } from 'react-i18next';
 
+import ReduxForm from '#/src/components/ReduxForm';
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
-} from '../FormPage';
-import EditKoulutusHeader from './EditKoulutusHeader';
-import EditKoulutusSteps from './EditKoulutusSteps';
+} from '#/src/components/FormPage';
 import KoulutusFormWrapper from './KoulutusFormWrapper';
 import EditKoulutusFooter from './EditKoulutusFooter';
-import useApiAsync from '../useApiAsync';
-import getKoulutusByOid from '../../utils/kouta/getKoulutusByOid';
-import Spin from '../Spin';
-import Title from '../Title';
-import { useTranslation } from 'react-i18next';
+import useApiAsync from '#/src/components/useApiAsync';
+import getKoulutusByOid from '#/src/utils/kouta/getKoulutusByOid';
+import Spin from '#/src/components/Spin';
+import Title from '#/src/components/Title';
 import UrlContext from '#/src/components/UrlContext';
-import useAuthorizedUserRoleBuilder from '#/src/components/useAuthorizedUserRoleBuilder';
-import { HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
-import { useFieldValue } from '#/src/hooks/form';
-import { Field } from 'redux-form';
-import { FormFieldCheckbox } from '../formFields';
 import getFormValuesByKoulutus from '#/src/utils/getFormValuesByKoulutus';
-
-const ToggleDraft = () => {
-  const { t } = useTranslation();
-  const roleBuilder = useAuthorizedUserRoleBuilder();
-
-  const isOphVirkailija = useMemo(
-    () =>
-      roleBuilder
-        .hasUpdate(HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID)
-        .result(),
-    [roleBuilder]
-  );
-  const esikatselu = useFieldValue('esikatselu');
-
-  return esikatselu !== undefined && isOphVirkailija ? (
-    <Field name={'esikatselu'} component={FormFieldCheckbox}>
-      {t('yleiset.salliEsikatselu')}
-    </Field>
-  ) : null;
-};
+import EntityFormHeader from '#/src/components/EntityFormHeader';
+import { ENTITY } from '#/src/constants';
+import FormSteps from '#/src/components/FormSteps';
+import ToggleDraft from '#/src/components/ToggleDraft';
 
 const EditKoulutusPage = props => {
   const {
@@ -49,11 +25,10 @@ const EditKoulutusPage = props => {
     match: {
       params: { organisaatioOid, oid },
     },
-    location: { search, state = {} },
+    location: { state = {} },
   } = props;
 
   const { koulutusUpdatedAt = null } = state;
-  const { scrollTarget = null } = queryString.parse(search);
   const watch = JSON.stringify([oid, koulutusUpdatedAt]);
 
   const { data: koulutus = null } = useApiAsync({
@@ -82,8 +57,10 @@ const EditKoulutusPage = props => {
     <ReduxForm form="editKoulutusForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.koulutuksenMuokkaus')}</Title>
       <FormPage
-        header={<EditKoulutusHeader koulutus={koulutus} />}
-        steps={<EditKoulutusSteps />}
+        header={
+          <EntityFormHeader entityType={ENTITY.KOULUTUS} entity={koulutus} />
+        }
+        steps={<FormSteps activeStep={ENTITY.KOULUTUS} />}
         draftUrl={apiUrls.url('konfo-ui.koulutus', oid) + '?draft=true'}
         toggleDraft={<ToggleDraft />}
         footer={
@@ -107,7 +84,6 @@ const EditKoulutusPage = props => {
             koulutus={koulutus}
             koulutusOrganisaatioOid={koulutus.organisaatioOid}
             organisaatioOid={organisaatioOid}
-            scrollTarget={scrollTarget}
           />
         ) : (
           <Spin center />

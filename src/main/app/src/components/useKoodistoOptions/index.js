@@ -14,22 +14,24 @@ const getOptions = ({ koodisto, language, sort = true }) => {
       }))
     : [];
 
-  const options = nimet.map(({ nimi, koodiUri }) => ({
+  return nimet.map(({ nimi, koodiUri }) => ({
     value: koodiUri,
     label: getFirstLanguageValue(nimi, language),
   }));
+};
 
+const defaultSort = options => {
   const byLabel = ({ label }) => label;
   const byFirstNumber = ({ label }) =>
     /^\d/.test(label) && parseInt(first(label.match(/(\d+)/)));
-
-  return sort ? orderBy(options, [byFirstNumber, byLabel]) : options;
+  return orderBy(options, [byFirstNumber, byLabel]);
 };
 
 export const useKoodistoOptions = ({
   koodisto,
   versio,
   language: languageProp,
+  sortFn = defaultSort,
   sort = true,
 }) => {
   const translationLanguage = useLanguage();
@@ -37,9 +39,13 @@ export const useKoodistoOptions = ({
 
   const { data, ...rest } = useKoodisto({ koodisto, versio });
 
+  const identity = i => i;
+
   const options = useMemo(() => {
-    return data ? getOptions({ koodisto: data, language, sort }) : [];
-  }, [data, language, sort]);
+    return data
+      ? (sort ? sortFn : identity)(getOptions({ koodisto: data, language }))
+      : [];
+  }, [data, language, sort, sortFn]);
 
   return { ...rest, options };
 };

@@ -8,6 +8,7 @@ import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
 import { VALINTAPERUSTE_ROLE, ENTITY } from '../../constants';
 import { useSaveValintaperuste } from '#/src/hooks/formSaveHooks';
 import { FormFooter } from '#/src/components/FormPage';
+import { useFormName } from '#/src/hooks/form';
 
 const EditValintaperusteFooter = ({ valintaperuste }) => {
   const history = useHistory();
@@ -38,7 +39,8 @@ const EditValintaperusteFooter = ({ valintaperuste }) => {
     [valintaperuste, history]
   );
 
-  const save = useSaveValintaperuste(submit);
+  const formName = useFormName();
+  const save = useSaveValintaperuste({ submit, formName });
 
   return (
     <FormFooter

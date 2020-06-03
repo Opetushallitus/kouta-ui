@@ -1,9 +1,10 @@
 import React, { useMemo, useEffect, useContext } from 'react';
-import { find, isEmpty, isNil, get, map } from 'lodash';
+import _ from 'lodash';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
 import { Grid, Cell } from 'styled-css-grid';
 import { useTranslation } from 'react-i18next';
+import { usePrevious } from 'react-use';
 import { getKoulutusByKoodi } from '#/src/apiUtils';
 import { getThemeProp } from '#/src/theme';
 import {
@@ -15,7 +16,7 @@ import {
   getEPerusteStatus,
   getEPerusteStatusCss,
 } from '#/src/utils/ePeruste/ePerusteStatus';
-import { useBoundFormActions, useBoundFormSelectors } from '#/src/hooks/form';
+import { useBoundFormActions, useIsDirty } from '#/src/hooks/form';
 import Anchor from '#/src/components/Anchor';
 import Box from '#/src/components/Box';
 import { FormFieldSelect } from '#/src/components/formFields';
@@ -32,7 +33,7 @@ const getListNimiLanguageValues = (list = [], language) =>
     .filter(name => !!name);
 
 const getEPerusteetOptions = (ePerusteet, language) =>
-  map(ePerusteet, ({ id, nimi, diaarinumero }) => ({
+  _.map(ePerusteet, ({ id, nimi, diaarinumero }) => ({
     label: `${getLanguageValue(nimi, language)} (${diaarinumero})`,
     value: id,
   }));
@@ -50,7 +51,7 @@ const EPerusteField = ({ isLoading, ...props }) => {
       component={FormFieldSelect}
       label={t('koulutuslomake.valitseKaytettavaEperuste')}
       options={ePerusteOptions}
-      isDisabled={isLoading || isNil(ePerusteet) || isEmpty(ePerusteet)}
+      isDisabled={isLoading || _.isNil(ePerusteet) || _.isEmpty(ePerusteet)}
       {...props}
     />
   );
@@ -64,7 +65,7 @@ const InfoRow = ({ title, description, suffix }) => {
       </Cell>
       <Cell key="description-cell">
         <Typography>
-          {isNil(description) || get(description, 'length') === 0
+          {_.isNil(description) || _.get(description, 'length') === 0
             ? '-'
             : description}
           {description && suffix ? ` ${suffix}` : ''}
@@ -127,7 +128,7 @@ const KoulutusInfo = ({
       koulutusala: koulutus
         ? getLanguageValue(koulutus.koulutusala, language)
         : undefined,
-      opintojenlaajuus: get(ePeruste, 'laajuus'),
+      opintojenlaajuus: _.get(ePeruste, 'laajuus'),
       nimikkeet: ePeruste
         ? getListNimiLanguageValues(ePeruste.tutkintonimikeKoodit, language)
         : [],
@@ -177,18 +178,18 @@ const KoulutusInfo = ({
                             href={apiUrls.url(
                               'eperusteet.kooste',
                               language,
-                              get(ePeruste, 'id')
+                              _.get(ePeruste, 'id')
                             )}
                             target="_blank"
                           >
-                            {get(ePeruste, 'diaarinumero')}
+                            {_.get(ePeruste, 'diaarinumero')}
                           </Anchor>
                         ),
                       },
                       {
                         title: t('yleiset.voimaantulo'),
                         description: getReadableDateTime(
-                          get(ePeruste, 'voimassaoloAlkaa')
+                          _.get(ePeruste, 'voimassaoloAlkaa')
                         ),
                       },
                       {
@@ -247,7 +248,7 @@ const KoulutuksenTiedotSection = ({
   selectLabel: selectLabelProp,
 }) => {
   const { t } = useTranslation();
-  const koulutusFieldValue = get(koulutuskoodi, 'value');
+  const koulutusFieldValue = _.get(koulutuskoodi, 'value');
 
   const { data: koulutus, isLoading } = useApiAsync({
     promiseFn: getKoulutusByKoodi,
@@ -256,21 +257,23 @@ const KoulutuksenTiedotSection = ({
   });
 
   const ePerusteFieldValue = useFieldValue(`${name}.eperuste`);
-  const ePerusteet = get(koulutus, 'ePerusteet');
+  const ePerusteet = _.get(koulutus, 'ePerusteet');
 
-  const selectedPeruste = find(
+  const selectedPeruste = _.find(
     ePerusteet,
-    ePeruste => ePeruste.id === get(ePerusteFieldValue, 'value')
+    ePeruste => ePeruste.id === _.get(ePerusteFieldValue, 'value')
   );
 
   const { change } = useBoundFormActions();
-  const { isDirty } = useBoundFormSelectors();
+  const isDirty = useIsDirty();
+
+  const previousKoulutus = usePrevious(koulutusFieldValue);
 
   useEffect(() => {
-    if (isDirty()) {
+    if (isDirty && previousKoulutus !== koulutusFieldValue) {
       change(`${name}.eperuste`, null);
     }
-  }, [change, koulutusFieldValue, isDirty, name]);
+  }, [change, koulutusFieldValue, isDirty, name, previousKoulutus]);
 
   const selectLabel = selectLabelProp || t('koulutuslomake.valitseKoulutus');
 

@@ -1,10 +1,10 @@
 import { useContext, useMemo, useCallback } from 'react';
-import { useStore, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import _ from 'lodash';
+import { isDirty, isSubmitting } from 'redux-form';
 import formActions from 'redux-form/lib/actions';
 import FormNameContext from '#/src/components/FormNameContext';
 import FormConfigContext from '#/src/components/FormConfigContext';
-import * as formSelectors from './reduxFormSelectors';
 import { useActions } from './redux';
 
 export const useFormName = () => useContext(FormNameContext);
@@ -26,16 +26,13 @@ export function useBoundFormActions() {
   return useActions(boundFormActions);
 }
 
-export function useBoundFormSelectors() {
+export function useIsDirty() {
   const formName = useFormName();
-  const store = useStore();
-  return useMemo(
-    () =>
-      _.mapValues(formSelectors, selector => () =>
-        selector(formName)(store.getState())
-      ),
-    [formName, store]
-  );
+  return useSelector(isDirty(formName));
+}
+export function useIsSubmitting() {
+  const formName = useFormName();
+  return useSelector(isSubmitting(formName));
 }
 
 export function useFieldValue(name) {

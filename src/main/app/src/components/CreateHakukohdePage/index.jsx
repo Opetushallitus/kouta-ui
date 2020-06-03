@@ -1,19 +1,16 @@
-import React, { useMemo } from 'react';
-import { get } from 'lodash';
-
-import FormPage from '../FormPage';
-import getOrganisaatioByOid from '../../utils/organisaatioService/getOrganisaatioByOid';
-import getKoulutustyyppiByKoulutusOid from '../../utils/kouta/getKoulutustyyppiByKoulutusOid';
-import CreateHakukohdeHeader from './CreateHakukohdeHeader';
-import CreateHakukohdeSteps from './CreateHakukohdeSteps';
-import CreateHakukohdeFooter from './CreateHakukohdeFooter';
-import { KOULUTUSTYYPPI } from '../../constants';
-import useApiAsync from '../useApiAsync';
-import Spin from '../Spin';
+import React, { useMemo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import getToteutusByOid from '../../utils/kouta/getToteutusByOid';
-import Title from '../Title';
-import getHakuByOid from '../../utils/kouta/getHakuByOid';
+import _ from 'lodash';
+
+import FormPage, { FormFooter } from '#/src/components/FormPage';
+import getOrganisaatioByOid from '#/src/utils/organisaatioService/getOrganisaatioByOid';
+import getKoulutustyyppiByKoulutusOid from '#/src/utils/kouta/getKoulutustyyppiByKoulutusOid';
+import { KOULUTUSTYYPPI, ENTITY } from '#/src/constants';
+import useApiAsync from '#/src/components/useApiAsync';
+import Spin from '#/src/components/Spin';
+import getToteutusByOid from '#/src/utils/kouta/getToteutusByOid';
+import Title from '#/src/components/Title';
+import getHakuByOid from '#/src/utils/kouta/getHakuByOid';
 import ReduxForm from '#/src/components/ReduxForm';
 import HakukohdeForm, { initialValues } from '#/src/components/HakukohdeForm';
 import getHakukohdeFormConfig from '#/src/utils/getHakukohdeFormConfig';
@@ -24,6 +21,12 @@ import {
   HakuRelation,
   ToteutusRelation,
 } from '#/src/components/FormPage';
+import FormHeader from '#/src/components/FormHeader';
+import FormSteps from '#/src/components/FormSteps';
+import { useHistory } from 'react-router-dom';
+import createHakukohde from '#/src/utils/kouta/createHakukohde';
+import getHakukohdeByFormValues from '#/src/utils/getHakukohdeByFormValues';
+import { useSaveHakukohde } from '#/src/hooks/formSaveHooks';
 
 const getHakukohdeData = async ({
   organisaatioOid,
@@ -66,6 +69,7 @@ const CreateHakukohdePage = props => {
   } = props;
 
   const { t } = useTranslation();
+  const history = useHistory();
 
   const { data } = useApiAsync({
     promiseFn: getHakukohdeData,
@@ -75,20 +79,49 @@ const CreateHakukohdePage = props => {
     watch: [organisaatioOid, toteutusOid, hakuOid].join(','),
   });
 
-  const haku = get(data, 'haku');
-  const toteutus = get(data, 'toteutus');
+  const haku = _.get(data, 'haku');
+  const toteutus = _.get(data, 'toteutus');
 
   const initialValues = useMemo(() => {
     return (
       data &&
       getInitialValues(
-        get(data, 'toteutus.nimi'),
-        get(data, 'toteutus.kielivalinta')
+        _.get(data, 'toteutus.nimi'),
+        _.get(data, 'toteutus.kielivalinta')
       )
     );
   }, [data]);
 
   const config = useMemo(getHakukohdeFormConfig, []);
+
+  const submit = useCallback(
+    async ({ httpClient, apiUrls, values }) => {
+      const { oid } = await createHakukohde({
+        httpClient,
+        apiUrls,
+        hakukohde: {
+          ...getHakukohdeByFormValues(values),
+          organisaatioOid,
+          hakuOid,
+          toteutusOid,
+        },
+      });
+
+      history.push(
+        `/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`
+      );
+    },
+    [organisaatioOid, hakuOid, toteutusOid, history]
+  );
+
+  const FORM_NAME = 'createHakukohdeForm';
+
+  const save = useSaveHakukohde({
+    submit,
+    haku,
+    toteutus,
+    formName: FORM_NAME,
+  });
 
   return (
     <ReduxForm
@@ -98,17 +131,9 @@ const CreateHakukohdePage = props => {
     >
       <Title>{t('sivuTitlet.uusiHakukohde')}</Title>
       <FormPage
-        header={<CreateHakukohdeHeader />}
-        steps={<CreateHakukohdeSteps />}
-        footer={
-          <CreateHakukohdeFooter
-            organisaatioOid={organisaatioOid}
-            hakuOid={hakuOid}
-            toteutusOid={toteutusOid}
-            haku={haku}
-            toteutus={toteutus}
-          />
-        }
+        header={<FormHeader>{t('yleiset.hakukohde')}</FormHeader>}
+        steps={<FormSteps activeStep={ENTITY.HAKUKOHDE} {...props} />}
+        footer={<FormFooter entity={ENTITY.HAKUKOHDE} save={save} />}
       >
         {data ? (
           <>
@@ -128,7 +153,7 @@ const CreateHakukohdePage = props => {
                 haku={haku}
                 toteutus={toteutus}
                 koulutustyyppi={
-                  get(data, 'koulutustyyppi') ||
+                  _.get(data, 'koulutustyyppi') ||
                   KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
                 }
                 showArkistoituTilaOption={false}

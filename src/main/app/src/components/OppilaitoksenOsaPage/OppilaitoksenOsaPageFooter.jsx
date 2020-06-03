@@ -9,11 +9,7 @@ import updateOppilaitoksenOsa from '../../utils/kouta/updateOppilaitoksenOsa';
 import { ENTITY } from '#/src/constants';
 import { FormFooter } from '#/src/components/FormPage';
 
-const OppilaitoksenOsaPageFooter = ({
-  oppilaitoksenOsa,
-  organisaatioOid,
-  oppilaitoksenOsaIsLoading = false,
-}) => {
+const OppilaitoksenOsaPageFooter = ({ oppilaitoksenOsa, organisaatioOid }) => {
   const history = useHistory();
 
   const submit = useCallback(
@@ -48,13 +44,7 @@ const OppilaitoksenOsaPageFooter = ({
     validate: validateOppilaitoksenOsaForm,
   });
 
-  return (
-    <FormFooter
-      entity={ENTITY.OPPILAITOKSEN_OSA}
-      save={save}
-      submitProps={{ disabled: oppilaitoksenOsaIsLoading }}
-    />
-  );
+  return <FormFooter entity={ENTITY.OPPILAITOKSEN_OSA} save={save} />;
 };
 
 export default OppilaitoksenOsaPageFooter;

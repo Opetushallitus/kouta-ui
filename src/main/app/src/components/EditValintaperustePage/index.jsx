@@ -1,22 +1,22 @@
 import React, { useMemo } from 'react';
-import { get } from 'lodash';
+import { useTranslation } from 'react-i18next';
+import _ from 'lodash';
 
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
-} from '../FormPage';
-import EditValintaperusteHeader from './EditValintaperusteHeader';
-import EditValintaperusteSteps from './EditValintaperusteSteps';
+} from '#/src/components/FormPage';
 import ValintaperusteFormWrapper from './ValintaperusteFormWrapper';
 import EditValintaperusteFooter from './EditValintaperusteFooter';
-import useApiAsync from '../useApiAsync';
-import getValintaperusteByOid from '../../utils/kouta/getValintaperusteByOid';
-import Spin from '../Spin';
-import { KOULUTUSTYYPPI } from '../../constants';
-import Title from '../Title';
-import { useTranslation } from 'react-i18next';
+import useApiAsync from '#/src/components/useApiAsync';
+import getValintaperusteByOid from '#/src/utils/kouta/getValintaperusteByOid';
+import Spin from '#/src/components/Spin';
+import { KOULUTUSTYYPPI, ENTITY } from '#/src/constants';
+import Title from '#/src/components/Title';
 import ReduxForm from '#/src/components/ReduxForm';
 import getFormValuesByValintaperuste from '#/src/utils/getFormValuesByValintaperuste';
+import EntityFormHeader from '#/src/components/EntityFormHeader';
+import FormSteps from '#/src/components/FormSteps';
 
 const EditValintaperustePage = props => {
   const {
@@ -47,8 +47,13 @@ const EditValintaperustePage = props => {
     <ReduxForm form="editValintaperusteForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.valintaperusteenMuokkaus')}</Title>
       <FormPage
-        header={<EditValintaperusteHeader valintaperuste={valintaperuste} />}
-        steps={<EditValintaperusteSteps />}
+        header={
+          <EntityFormHeader
+            entityType={ENTITY.VALINTAPERUSTE}
+            entity={valintaperuste}
+          />
+        }
+        steps={<FormSteps activeStep={ENTITY.VALINTAPERUSTE} />}
         footer={
           valintaperuste ? (
             <EditValintaperusteFooter valintaperuste={valintaperuste} />
@@ -66,7 +71,7 @@ const EditValintaperustePage = props => {
             canEditTyyppi={false}
             organisaatioOid={organisaatioOid}
             koulutustyyppi={
-              get(valintaperuste, 'koulutustyyppi') ||
+              _.get(valintaperuste, 'koulutustyyppi') ||
               KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
             }
           />

@@ -1,23 +1,27 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import queryString from 'query-string';
+import { useTranslation } from 'react-i18next';
 
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
-} from '../FormPage';
-import CreateSoraKuvausHeader from './CreateSoraKuvausHeader';
-import CreateSoraKuvausSteps from './CreateSoraKuvausSteps';
-import CreateSoraKuvausFooter from './CreateSoraKuvausFooter';
-import useSelectBase from '../useSelectBase';
-import Title from '../Title';
-import { useTranslation } from 'react-i18next';
-import { POHJAVALINTA } from '#/src/constants';
+  FormFooter,
+} from '#/src/components/FormPage';
+import useSelectBase from '#/src/components/useSelectBase';
+import Title from '#/src/components/Title';
+import { POHJAVALINTA, ENTITY } from '#/src/constants';
 import getFormValuesBySoraKuvaus from '#/src/utils/getFormValuesBySoraKuvaus';
 import SoraKuvausForm, { initialValues } from '#/src/components/SoraKuvausForm';
 import useSoraKuvaus from '#/src/components/useSoraKuvaus';
 import ReduxForm from '#/src/components/ReduxForm';
 import getSoraKuvausFormConfig from '#/src/utils/getSoraKuvausFormConfig';
-import FormConfigContext from '../FormConfigContext';
+import FormConfigContext from '#/src/components/FormConfigContext';
+import FormHeader from '#/src/components/FormHeader';
+import FormSteps from '#/src/components/FormSteps';
+import createSoraKuvaus from '#/src/utils/kouta/createSoraKuvaus';
+import getSoraKuvausByFormValues from '#/src/utils/getSoraKuvausByFormValues';
+import { useSaveForm } from '#/src/hooks/formSaveHooks';
+import validateSoraKuvausForm from '#/src/utils/validateSoraKuvausForm';
 
 const getCopyValues = soraKuvausId => ({
   pohja: {
@@ -60,6 +64,27 @@ const CreateSoraKuvausPage = props => {
     return getInitialValues(soraKuvaus, kieliValinnatLista);
   }, [soraKuvaus, kieliValinnatLista]);
 
+  const submit = useCallback(
+    async ({ values, httpClient, apiUrls }) => {
+      const { id } = await createSoraKuvaus({
+        httpClient,
+        apiUrls,
+        soraKuvaus: { ...getSoraKuvausByFormValues(values), organisaatioOid },
+      });
+
+      history.push(
+        `/organisaatio/${organisaatioOid}/sora-kuvaus/${id}/muokkaus`
+      );
+    },
+    [history, organisaatioOid]
+  );
+
+  const { save } = useSaveForm({
+    form: 'createSoraKuvausForm',
+    submit,
+    validate: validateSoraKuvausForm,
+  });
+
   return (
     <FormConfigContext.Provider value={config}>
       <ReduxForm
@@ -69,9 +94,9 @@ const CreateSoraKuvausPage = props => {
       >
         <Title>{t('sivuTitlet.uusiSoraKuvaus')}</Title>
         <FormPage
-          header={<CreateSoraKuvausHeader />}
-          steps={<CreateSoraKuvausSteps />}
-          footer={<CreateSoraKuvausFooter organisaatioOid={organisaatioOid} />}
+          header={<FormHeader>{ENTITY.SORA_KUVAUS}</FormHeader>}
+          steps={<FormSteps activeStep={ENTITY.SORA_KUVAUS} />}
+          footer={<FormFooter entity={ENTITY.SORA_KUVAUS} save={save} />}
         >
           <RelationInfoContainer>
             <OrganisaatioRelation organisaatioOid={organisaatioOid} />

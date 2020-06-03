@@ -1,23 +1,26 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import queryString from 'query-string';
+import { useTranslation } from 'react-i18next';
 
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
-} from '../FormPage';
-import CreateValintaperusteHeader from './CreateValintaperusteHeader';
-import CreateValintaperusteSteps from './CreateValintaperusteSteps';
+  FormFooter,
+} from '#/src/components/FormPage';
 import ValintaperusteFormWrapper from './ValintaperusteFormWrapper';
-import CreateValintaperusteFooter from './CreateValintaperusteFooter';
-import useSelectBase from '../useSelectBase';
-import Title from '../Title';
-import { useTranslation } from 'react-i18next';
+import useSelectBase from '#/src/components/useSelectBase';
+import Title from '#/src/components/Title';
 import ReduxForm from '#/src/components/ReduxForm';
-import { POHJAVALINTA } from '#/src/constants';
+import { POHJAVALINTA, ENTITY } from '#/src/constants';
 import getFormValuesByValintaperuste from '#/src/utils/getFormValuesByValintaperuste';
 import { initialValues } from '#/src/components/ValintaperusteForm';
 import getValintaperusteByOid from '#/src/utils/kouta/getValintaperusteByOid';
 import useApiAsync from '#/src/components/useApiAsync';
+import FormHeader from '#/src/components/FormHeader';
+import FormSteps from '#/src/components/FormSteps';
+import createValintaperuste from '#/src/utils/kouta/createValintaperuste';
+import getValintaperusteByFormValues from '#/src/utils/getValintaperusteByFormValues';
+import { useSaveValintaperuste } from '#/src/hooks/formSaveHooks';
 
 const resolveFn = () => Promise.resolve(null);
 
@@ -40,7 +43,7 @@ const getInitialValues = (valintaperuste, kieliValinnat) => {
 const CreateValintaperustePage = props => {
   const {
     match: {
-      params: { oid, kieliValinnat },
+      params: { oid: luojaOrganisaatioOid, kieliValinnat },
     },
     location: { search },
     history,
@@ -68,24 +71,46 @@ const CreateValintaperustePage = props => {
     return getInitialValues(valintaperuste, kieliValinnatLista);
   }, [valintaperuste, kieliValinnatLista]);
 
+  const submit = useCallback(
+    async ({ values, httpClient, apiUrls }) => {
+      const { id } = await createValintaperuste({
+        httpClient,
+        apiUrls,
+        valintaperuste: {
+          ...getValintaperusteByFormValues(values),
+          organisaatioOid: luojaOrganisaatioOid,
+        },
+      });
+
+      history.push(
+        `/organisaatio/${luojaOrganisaatioOid}/valintaperusteet/${id}/muokkaus`
+      );
+    },
+    [luojaOrganisaatioOid, history]
+  );
+
+  const FORM_NAME = 'createValintaperusteForm';
+
+  const save = useSaveValintaperuste({ submit, formName: FORM_NAME });
+
   return (
     <ReduxForm
-      form="createValintaperusteForm"
+      form={FORM_NAME}
       enableReinitialize
       initialValues={initialValues}
     >
       <Title>{t('sivuTitlet.uusiValintaperuste')}</Title>
       <FormPage
-        header={<CreateValintaperusteHeader />}
-        steps={<CreateValintaperusteSteps />}
-        footer={<CreateValintaperusteFooter organisaatioOid={oid} />}
+        header={<FormHeader>{t('yleiset.valintaperusteet')}</FormHeader>}
+        steps={<FormSteps activeStep={ENTITY.VALINTAPERUSTE} />}
+        footer={<FormFooter entity={ENTITY.VALINTAPERUSTE} save={save} />}
       >
         <RelationInfoContainer>
-          <OrganisaatioRelation organisaatioOid={oid} />
+          <OrganisaatioRelation organisaatioOid={luojaOrganisaatioOid} />
         </RelationInfoContainer>
         <ValintaperusteFormWrapper
           steps
-          organisaatioOid={oid}
+          organisaatioOid={luojaOrganisaatioOid}
           kopioValintaperusteOid={kopioValintaperusteOid}
           onSelectBase={selectBase}
           showArkistoituTilaOption={false}

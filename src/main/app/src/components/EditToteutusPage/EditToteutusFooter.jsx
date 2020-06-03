@@ -10,6 +10,7 @@ import iterateTree from '../../utils/iterateTree';
 import useOrganisaatioHierarkia from '../useOrganisaatioHierarkia';
 import { useSaveToteutus } from '#/src/hooks/formSaveHooks';
 import { FormFooter } from '#/src/components/FormPage';
+import { useFormName } from '#/src/hooks/form';
 
 const getAvailableTarjoajaOids = hierarkia => {
   const oids = [];
@@ -86,7 +87,9 @@ const EditToteutusFooter = ({
     [toteutus, history, koulutustyyppi, availableTarjoajaOids]
   );
 
-  const save = useSaveToteutus(submit, { koulutustyyppi, koulutus });
+  const formName = useFormName();
+
+  const save = useSaveToteutus({ submit, koulutustyyppi, koulutus, formName });
 
   return (
     <FormFooter entity={ENTITY.TOTEUTUS} save={save} canUpdate={canUpdate} />

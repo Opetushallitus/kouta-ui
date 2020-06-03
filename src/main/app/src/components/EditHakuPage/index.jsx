@@ -1,23 +1,23 @@
 import React, { useCallback, useMemo } from 'react';
-import queryString from 'query-string';
+import { useTranslation } from 'react-i18next';
 
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
-} from '../FormPage';
-import EditHakuHeader from './EditHakuHeader';
-import EditHakuSteps from './EditHakuSteps';
-import EditHakuFooter from './EditHakuFooter';
-import useApiAsync from '../useApiAsync';
-import Spin from '../Spin';
-import getHakuByOid from '../../utils/kouta/getHakuByOid';
-import Title from '../Title';
-import { useTranslation } from 'react-i18next';
+} from '#/src/components/FormPage';
+import useApiAsync from '#/src/components/useApiAsync';
+import Spin from '#/src/components/Spin';
+import getHakuByOid from '#/src/utils/kouta/getHakuByOid';
+import Title from '#/src/components/Title';
 import ReduxForm from '#/src/components/ReduxForm';
 import getHakuFormConfig from '#/src/utils/getHakuFormConfig';
 import getFormValuesByHaku from '#/src/utils/getFormValuesByHaku';
 import HakuForm from '#/src/components/HakuForm';
 import FormConfigContext from '#/src/components/FormConfigContext';
+import { ENTITY } from '#/src/constants';
+import EntityFormHeader from '#/src/components/EntityFormHeader';
+import FormSteps from '#/src/components/FormSteps';
+import EditHakuFooter from './EditHakuFooter';
 
 const config = getHakuFormConfig();
 
@@ -27,11 +27,10 @@ const EditHakuPage = props => {
     match: {
       params: { organisaatioOid, oid },
     },
-    location: { search, state = {} },
+    location: { state = {} },
   } = props;
 
   const { hakuUpdatedAt = null } = state;
-  const { scrollTarget = null } = queryString.parse(search);
   const watch = JSON.stringify([oid, hakuUpdatedAt]);
 
   const { data: haku = null } = useApiAsync({
@@ -60,8 +59,8 @@ const EditHakuPage = props => {
     <ReduxForm form="editHakuForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.haunMuokkaus')}</Title>
       <FormPage
-        header={<EditHakuHeader haku={haku} />}
-        steps={<EditHakuSteps />}
+        header={<EntityFormHeader entityType={ENTITY.HAKU} entity={haku} />}
+        steps={<FormSteps activeStep={ENTITY.HAKU} />}
         footer={haku ? <EditHakuFooter haku={haku} /> : null}
       >
         <RelationInfoContainer>
@@ -72,7 +71,6 @@ const EditHakuPage = props => {
             <HakuForm
               haku={haku}
               organisaatioOid={organisaatioOid}
-              scrollTarget={scrollTarget}
               steps={false}
               initialValues={initialValues}
               onAttachHakukohde={onAttachHakukohde}

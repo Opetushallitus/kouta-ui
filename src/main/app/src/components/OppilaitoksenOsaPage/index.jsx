@@ -1,18 +1,26 @@
-import React from 'react';
-
-import useOrganisaatio from '../useOrganisaatio';
-import FormPage from '../FormPage';
-import OppilaitoksenOsaPageForm from './OppilaitoksenOsaPageForm';
-import OppilaitosFormSteps from '../OppilaitosFormSteps';
-import OppilaitoksenOsaPageHeader from './OppilaitoksenOsaPageHeader';
-import OppilaitoksenOsaPageFooter from './OppilaitoksenOsaPageFooter';
-import useApiAsync from '../useApiAsync';
-import getOppilaitoksenOsaByOid from '../../utils/kouta/getOppilaitoksenOsaByOid';
-import Spin from '../Spin';
-import Title from '../Title';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import useOrganisaatio from '#/src/components/useOrganisaatio';
+import FormPage from '#/src/components/FormPage';
+import OppilaitosFormSteps from '#/src/components/OppilaitosFormSteps';
+import OppilaitoksenOsaPageFooter from './OppilaitoksenOsaPageFooter';
+import useApiAsync from '#/src/components/useApiAsync';
+import getOppilaitoksenOsaByOid from '#/src/utils/kouta/getOppilaitoksenOsaByOid';
+import Spin from '#/src/components/Spin';
+import Title from '#/src/components/Title';
+import EntityFormHeader from '#/src/components/EntityFormHeader';
+import { ENTITY } from '#/src/constants';
+import getOrganisaatioContactInfo from '#/src/utils/getOrganisaatioContactInfo';
 
-const Steps = () => <OppilaitosFormSteps activeStep="oppilaitoksenOsa" />;
+import OppilaitoksenOsaForm, {
+  initialValues as formInitialValues,
+} from '#/src/components/OppilaitoksenOsaForm';
+import koodiUriHasVersion from '#/src/utils/koodiUriHasVersion';
+import getFormValuesByOppilaitoksenOsa from '#/src/utils/getFormValuesByOppilaitoksenOsa';
+import getOppilaitoksenOsaFormConfig from '#/src/utils/getOppilaitoksenOsaFormConfig';
+
+import ReduxForm from '#/src/components/ReduxForm';
+import FormConfigContext from '../FormConfigContext';
 
 const OppilaitoksenOsaPage = ({
   match: {
@@ -37,30 +45,67 @@ const OppilaitoksenOsaPage = ({
   const { t } = useTranslation();
   const oppilaitoksenOsaIsResolved = !!finishedAt;
 
+  const stepsEnabled = !oppilaitoksenOsa;
+  const showArkistoituTilaOption = !!oppilaitoksenOsa;
+  const contactInfo = useMemo(() => getOrganisaatioContactInfo(organisaatio), [
+    organisaatio,
+  ]);
+
+  const initialValues = useMemo(
+    () => ({
+      ...formInitialValues,
+      yhteystiedot: {
+        osoite: contactInfo.osoite || {},
+        postinumero: contactInfo.postinumeroKoodiUri
+          ? {
+              value: koodiUriHasVersion(contactInfo.postinumeroKoodiUri)
+                ? contactInfo.postinumeroKoodiUri
+                : `${contactInfo.postinumeroKoodiUri}#2`,
+            }
+          : undefined,
+        verkkosivu: contactInfo.verkkosivu || '',
+        puhelinnumero: contactInfo.puhelinnumero || '',
+      },
+      ...(oppilaitoksenOsa &&
+        getFormValuesByOppilaitoksenOsa(oppilaitoksenOsa)),
+    }),
+    [oppilaitoksenOsa, contactInfo]
+  );
+
+  const config = getOppilaitoksenOsaFormConfig();
+
   return (
-    <>
-      <Title>{t('sivuTitlet.oppilaitoksenOsa')}</Title>
-      <FormPage
-        steps={<Steps />}
-        header={<OppilaitoksenOsaPageHeader organisaatio={organisaatio} />}
-        footer={
-          <OppilaitoksenOsaPageFooter
-            oppilaitoksenOsa={oppilaitoksenOsa}
-            oppilaitoksenOsaIsLoading={oppilaitoksenOsaIsLoading}
-            organisaatioOid={organisaatioOid}
-          />
-        }
-      >
-        {organisaatio && oppilaitoksenOsaIsResolved ? (
-          <OppilaitoksenOsaPageForm
-            organisaatio={organisaatio}
-            oppilaitoksenOsa={oppilaitoksenOsa}
-          />
-        ) : (
-          <Spin center />
-        )}
-      </FormPage>
-    </>
+    <ReduxForm form="oppilaitoksenOsa" initialValues={initialValues}>
+      <FormConfigContext.Provider value={config}>
+        <Title>{t('sivuTitlet.oppilaitoksenOsa')}</Title>
+        <FormPage
+          steps={<OppilaitosFormSteps activeStep={ENTITY.OPPILAITOKSEN_OSA} />}
+          header={
+            <EntityFormHeader
+              entityType={ENTITY.OPPILAITOKSEN_OSA}
+              entity={oppilaitoksenOsa}
+            />
+          }
+          footer={
+            <OppilaitoksenOsaPageFooter
+              oppilaitoksenOsa={oppilaitoksenOsa}
+              oppilaitoksenOsaIsLoading={oppilaitoksenOsaIsLoading}
+              organisaatioOid={organisaatioOid}
+            />
+          }
+        >
+          {organisaatio && oppilaitoksenOsaIsResolved ? (
+            <OppilaitoksenOsaForm
+              organisaatioOid={organisaatioOid}
+              steps={stepsEnabled}
+              showArkistoituTilaOption={showArkistoituTilaOption}
+            />
+          ) : (
+            <Spin center />
+          )}
+        </FormPage>
+      </FormConfigContext.Provider>
+    </ReduxForm>
   );
 };
 

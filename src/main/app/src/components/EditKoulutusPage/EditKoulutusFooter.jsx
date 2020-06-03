@@ -13,6 +13,7 @@ import useOrganisaatioHierarkia from '../useOrganisaatioHierarkia';
 import iterateTree from '../../utils/iterateTree';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatioService/organisaatioMatchesTyyppi';
 import { FormFooter } from '#/src/components/FormPage';
+import { useFormName } from '#/src/hooks/form';
 
 const getAvailableTarjoajaOids = hierarkia => {
   const oids = [];
@@ -87,8 +88,9 @@ const EditKoulutusFooter = ({ koulutus, organisaatioOid }) => {
     [koulutus, history, availableTarjoajaOids]
   );
 
+  const formName = useFormName();
   const { save } = useSaveForm({
-    form: 'editKoulutusForm',
+    form: formName,
     submit,
     validate: values =>
       validateKoulutusForm({

@@ -8,6 +8,7 @@ import useOrganisaatio from '../useOrganisaatio';
 import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
 import { HAKUKOHDE_ROLE, ENTITY } from '#/src/constants';
 import { FormFooter } from '#/src/components/FormPage';
+import { useFormName } from '#/src/hooks/form';
 
 const EditHakukohdeFooter = ({ hakukohde, haku, toteutus }) => {
   const history = useHistory();
@@ -39,7 +40,9 @@ const EditHakukohdeFooter = ({ hakukohde, haku, toteutus }) => {
     [hakukohde, history]
   );
 
-  const save = useSaveHakukohde(submit, { haku, toteutus });
+  const formName = useFormName();
+
+  const save = useSaveHakukohde({ submit, haku, toteutus, formName });
 
   return (
     <FormFooter entity={ENTITY.HAKUKOHDE} save={save} canUpdate={canUpdate} />

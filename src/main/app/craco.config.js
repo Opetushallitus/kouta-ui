@@ -1,9 +1,10 @@
-const { whenDev, ESLINT_MODES } = require('@craco/craco');
+const { ESLINT_MODES } = require('@craco/craco');
 const alias = require('./webpack-alias');
+const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
   eslint: {
-    enable: whenDev(() => true),
+    enable: isDev,
     mode: ESLINT_MODES.file,
   },
   babel: {
@@ -21,6 +22,6 @@ module.exports = {
     alias,
   },
   typescript: {
-    enableTypeChecking: false,
+    enableTypeChecking: isDev,
   },
 };

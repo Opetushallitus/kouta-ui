@@ -1,6 +1,5 @@
 import React from 'react';
 import { configure, addDecorator } from '@storybook/react';
-import '@storybook/addon-actions/register';
 import { ThemeProvider } from 'styled-components';
 import { withKnobs } from '@storybook/addon-knobs';
 
@@ -20,7 +19,7 @@ function requireAll(requireContext) {
 }
 
 function loadStories() {
-  requireAll(require.context('../src', true, /stories\.jsx?$/));
+  requireAll(require.context('../src', true, /stories\.[jt]sx?$/));
 }
 
 configure(loadStories, module);

@@ -18,5 +18,5 @@
     "noImplicitAny": false,
     "strict": true
   },
-  "include": ["./src", "./cypress"]
+  "include": ["./src"]
 }

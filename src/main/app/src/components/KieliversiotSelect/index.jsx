@@ -7,7 +7,6 @@ const getOptions = t => [
   { value: 'fi', label: t('yleiset.suomi') },
   { value: 'sv', label: t('yleiset.ruotsi') },
   { value: 'en', label: t('yleiset.englanti') },
-  { value: 'muu', label: t('yleiset.muu') },
 ];
 
 const KieliversiotSelection = ({ value, ...props }) => {

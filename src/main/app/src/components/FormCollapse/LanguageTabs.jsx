@@ -11,7 +11,6 @@ const getLanguageOptions = ({ languages = [], t }) => {
     fi: t('yleiset.suomeksi'),
     sv: t('yleiset.ruotsiksi'),
     en: t('yleiset.englanniksi'),
-    muu: t('yleiset.muuksi'),
   };
 
   return sortBy(

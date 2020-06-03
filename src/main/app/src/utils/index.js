@@ -26,7 +26,7 @@ export const getLanguageValue = (value, language = 'fi') =>
   _.isObject(value) ? value[language] || null : null;
 
 export const getFirstLanguageValue = (value, priorityArg) => {
-  const defaultPriority = ['fi', 'en', 'sv', 'muu'];
+  const defaultPriority = ['fi', 'en', 'sv'];
 
   let priority = defaultPriority;
 

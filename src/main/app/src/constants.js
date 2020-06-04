@@ -228,3 +228,14 @@ export const ENTITY = {
   OPPILAITOS: 'oppilaitos',
   OPPILAITOKSEN_OSA: 'oppilaitoksenOsa',
 };
+
+export const ICONS = {
+  koulutus: 'school',
+  toteutus: 'flag',
+  haku: 'access_time',
+  hakukohde: 'list_alt',
+  valintaperuste: 'filter_list',
+  soraKuvaus: 'subject',
+  oppilaitos: 'account_balance',
+  oppilaitoksenOsa: 'home_work',
+};

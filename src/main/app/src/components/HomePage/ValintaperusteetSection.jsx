@@ -1,28 +1,31 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import debounce from 'debounce-promise';
+import { useTranslation } from 'react-i18next';
 
+import { ENTITY, ICONS } from '#/src/constants';
+import { getFirstLanguageValue, getTestIdProps } from '#/src/utils';
+import getValintaperusteet from '#/src/utils/koutaSearch/getValintaperusteet';
+import Pagination from '#/src/components/Pagination';
+import Flex from '#/src/components/Flex';
+import Spacing from '#/src/components/Spacing';
+import useApiAsync from '#/src/components/useApiAsync';
+import Anchor from '#/src/components/Anchor';
+import Button from '#/src/components/Button';
+import ErrorAlert from '#/src/components/ErrorAlert';
+import { getIndexParamsByFilters } from './utils';
+import Filters from './Filters';
+import useFilterState from './useFilterState';
+import ListSpin from './ListSpin';
+import NavigationAnchor from './NavigationAnchor';
 import ListCollapse from './ListCollapse';
 import ListTable, {
   makeModifiedColumn,
   makeMuokkaajaColumn,
   makeTilaColumn,
 } from './ListTable';
-import Pagination from '../Pagination';
-import Flex from '../Flex';
-import Spacing from '../Spacing';
-import ListSpin from './ListSpin';
-import useApiAsync from '../useApiAsync';
-import { getIndexParamsByFilters } from './utils';
-import getValintaperusteet from '../../utils/koutaSearch/getValintaperusteet';
-import Filters from './Filters';
-import useFilterState from './useFilterState';
-import { getFirstLanguageValue, getTestIdProps } from '../../utils';
-import Anchor from '../Anchor';
-import Button from '../Button';
-import ErrorAlert from '../ErrorAlert';
-import { useTranslation } from 'react-i18next';
-import NavigationAnchor from './NavigationAnchor';
-import debounce from 'debounce-promise';
+
+const { VALINTAPERUSTE } = ENTITY;
 
 const debounceValintaperusteet = debounce(getValintaperusteet, 300);
 
@@ -126,7 +129,7 @@ const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
     <>
       <NavigationAnchor id="valintaperusteet" />
       <ListCollapse
-        icon="select_all"
+        icon={ICONS[VALINTAPERUSTE]}
         header={t('yleiset.valintaperusteet')}
         actions={
           canCreate ? <Actions organisaatioOid={organisaatioOid} /> : null

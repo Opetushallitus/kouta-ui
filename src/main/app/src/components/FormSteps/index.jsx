@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import { useTranslation } from 'react-i18next';
-import { ENTITY } from '#/src/constants';
+
+import { ENTITY, ICONS } from '#/src/constants';
 import FormStepIcon from '#/src/components/FormStepIcon';
 
 const {
@@ -60,14 +60,14 @@ const FormSteps = ({ activeStep = KOULUTUS, ...props }) => {
     <Wrapper {...props}>
       <GroupContainer>
         <StepsIcon
-          icon="school"
+          icon={ICONS[KOULUTUS]}
           active={stepIsActive(KOULUTUS, activeStep)}
           done={stepIsDone(KOULUTUS, activeStep)}
         >
           {t('yleiset.koulutus')}
         </StepsIcon>
         <StepsIcon
-          icon="settings"
+          icon={ICONS[TOTEUTUS]}
           active={stepIsActive(TOTEUTUS, activeStep)}
           done={stepIsDone(TOTEUTUS, activeStep)}
         >
@@ -76,14 +76,14 @@ const FormSteps = ({ activeStep = KOULUTUS, ...props }) => {
       </GroupContainer>
       <GroupContainer>
         <StepsIcon
-          icon="access_time"
+          icon={ICONS[HAKU]}
           active={stepIsActive(HAKU, activeStep)}
           done={stepIsDone(HAKU, activeStep)}
         >
           {t('yleiset.haku')}
         </StepsIcon>
         <StepsIcon
-          icon="grain"
+          icon={ICONS[HAKUKOHDE]}
           active={stepIsActive(HAKUKOHDE, activeStep)}
           done={stepIsDone(HAKUKOHDE, activeStep)}
         >
@@ -92,14 +92,14 @@ const FormSteps = ({ activeStep = KOULUTUS, ...props }) => {
       </GroupContainer>
       <GroupContainer>
         <StepsIcon
-          icon="select_all"
+          icon={ICONS[VALINTAPERUSTE]}
           active={stepIsActive(VALINTAPERUSTE, activeStep)}
           done={stepIsDone(VALINTAPERUSTE, activeStep)}
         >
           {t('yleiset.valintaperusteet')}
         </StepsIcon>
         <StepsIcon
-          icon="subject"
+          icon={ICONS[SORA_KUVAUS]}
           active={stepIsActive(SORA_KUVAUS, activeStep)}
           done={stepIsDone(SORA_KUVAUS, activeStep)}
         >

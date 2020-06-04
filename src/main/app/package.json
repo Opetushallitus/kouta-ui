@@ -58,13 +58,13 @@
     "xstate": "^4.7.8"
   },
   "scripts": {
-    "start": "BROWSER=none HTTPS=true EXTEND_ESLINT=true react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
-    "eject": "react-scripts eject",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -c .storybook -o build/storybook --quiet",
-    "format": "prettier --write './src/**/*.{js,jsx}' './cypress/**/*.{js,jsx}'",
+    "format": "prettier --write './src/**/*.{js,jsx,ts,tsx}' './cypress/**/*.{js,jsx,ts,tsx}'",
     "cypress:run": "cypress run -b chrome",
     "cypress:open": "cypress open -b chrome",
     "test:e2e": "START_SERVER_AND_TEST_INSECURE=1 CYPRESS_RETRIES=2 NODE_ENV=test REACT_APP_CYPRESS=true start-server-and-test start https://localhost:3000 'npm run cypress:run -- --headless'",
@@ -82,21 +82,19 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,json,css,md}": [
+    "*.{js,jsx,ts,tsx,json,css,md}": [
       "./node_modules/.bin/prettier --write",
       "git add"
     ]
   },
   "jest": {
-    "setupFilesAfterEnv": [
-      "<rootDir>src/setupTests.js"
-    ],
     "moduleNameMapper": {
       "^#(.*)$": "<rootDir>$1"
     }
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
+    "@craco/craco": "^5.6.4",
     "@cypress/webpack-preprocessor": "^4.1.5",
     "@storybook/addon-actions": "^5.3.14",
     "@storybook/addon-knobs": "^5.3.14",
@@ -105,10 +103,10 @@
     "@storybook/preset-create-react-app": "^1.5.2",
     "@storybook/react": "^5.3.14",
     "@testing-library/react": "^10.0.3",
+    "@types/jest": "^25.2.3",
     "babel-loader": "^8.0.6",
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-styled-components": "^1.10.7",
-    "customize-cra": "^0.9.1",
     "cypress": "^4.4.1",
     "cypress-pipe": "^1.7.0",
     "cypress-plugin-retries": "^1.5.2",
@@ -126,8 +124,8 @@
     "jest-styled-components": "^6.3.4",
     "lint-staged": "^8.2.1",
     "prettier": "^2.0.5",
-    "react-app-rewired": "^2.1.6",
     "react-scripts": "^3.4.1",
-    "start-server-and-test": "^1.10.8"
+    "start-server-and-test": "^1.10.8",
+    "typescript": "^3.9.3"
   }
 }

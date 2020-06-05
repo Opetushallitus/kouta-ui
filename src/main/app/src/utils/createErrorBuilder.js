@@ -76,7 +76,10 @@ class ErrorBuilder {
     languages,
     { optional, message, validator = v => exists(v) } = {}
   ) {
-    const errorMessage = message || 'validointivirheet.pakollisetKaannokset';
+    const errorMessage =
+      message || optional
+        ? 'validointivirheet.kaikkiKaannoksetJosAinakinYksi'
+        : 'validointivirheet.pakollisetKaannokset';
 
     const invalidTranslations = getInvalidTranslations(
       this.getValue(path),
@@ -112,6 +115,16 @@ class ErrorBuilder {
     return this.errors;
   }
 }
+
+const bindValidator = name => (...props) => eb =>
+  ErrorBuilder.prototype[name].call(eb, ...props);
+
+export const validate = bindValidator('validate');
+export const validateArray = bindValidator('validateArray');
+export const validateArrayMinLength = bindValidator('validateArrayMinLength');
+export const validateExistence = bindValidator('validateExistence');
+export const validateTranslations = bindValidator('validateTranslations');
+export const validateUrl = bindValidator('validateUrl');
 
 const createErrorBuilder = values => new ErrorBuilder(values);
 

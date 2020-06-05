@@ -10,6 +10,7 @@ import {
   julkinenSectionConfig,
   validateRelations,
   valintakokeetSection,
+  validateOptionalTranslatedField,
 } from '#/src/utils/formConfigUtils';
 
 const koulutustyypitWithValintatapa = [
@@ -58,7 +59,9 @@ const config = createFormConfigBuilder().registerSections([
           eb.validateTranslations('kuvaus.nimi', getKielivalinta(values)),
         required: true,
       },
-      '.kuvaus': true,
+      '.kuvaus': {
+        validate: validateOptionalTranslatedField('kuvaus.kuvaus'),
+      },
     },
   },
   {

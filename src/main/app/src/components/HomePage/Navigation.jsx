@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 
 import styled, { css } from 'styled-components';
-import EventListener from 'react-event-listener';
+import { useEvent } from 'react-use';
 import { get, minBy, throttle, isFunction } from 'lodash';
 
 import OrganisaatioDrawer from './OrganisaatioDrawer';
@@ -239,6 +239,8 @@ const Navigation = ({ maxInlineItems = 3, ...props }) => {
       setActiveItemThrottle.current();
   }, [hasScrolled]);
 
+  useEvent('scroll', onScroll, window);
+
   const navigationProps = {
     items,
     activeItem,
@@ -248,7 +250,6 @@ const Navigation = ({ maxInlineItems = 3, ...props }) => {
 
   return (
     <>
-      <EventListener target="window" onScroll={onScroll} />
       <div ref={ref}>
         <NavigationBase {...navigationProps} />
       </div>

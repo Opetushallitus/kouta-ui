@@ -22,7 +22,7 @@
     "lodash": "^4.17.15",
     "memoizee": "^0.4.14",
     "oph-urls-js": "github:Opetushallitus/oph-urls-js",
-    "polished": "^2.3.3",
+    "polished": "^3.6.4",
     "query-string": "^6.13.0",
     "react": "^16.13.1",
     "react-async": "^10.0.1",

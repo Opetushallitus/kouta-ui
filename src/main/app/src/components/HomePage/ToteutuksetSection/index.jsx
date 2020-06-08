@@ -1,6 +1,26 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import debounce from 'debounce-promise';
+import { useTranslation } from 'react-i18next';
 
+import { ENTITY, ICONS } from '#/src/constants';
+
+import { getFirstLanguageValue, getTestIdProps } from '#/src/utils';
+import getToteutukset from '#/src/utils/koutaSearch/getToteutukset';
+import Anchor from '#/src/components/Anchor';
+import ErrorAlert from '#/src/components/ErrorAlert';
+import Button from '#/src/components/Button';
+import useModal from '#/src/components/useModal';
+import Pagination from '#/src/components/Pagination';
+import Box from '#/src/components/Box';
+import Badge from '#/src/components/Badge';
+import useApiAsync from '#/src/components/useApiAsync';
+import { getIndexParamsByFilters } from '../utils';
+import Filters from '../Filters';
+import useFilterState from '../useFilterState';
+import ListSpin from '../ListSpin';
+import NavigationAnchor from '../NavigationAnchor';
+import KoulutusModal from './KoulutusModal';
 import ListCollapse from '../ListCollapse';
 
 import ListTable, {
@@ -9,24 +29,7 @@ import ListTable, {
   makeTilaColumn,
 } from '../ListTable';
 
-import Pagination from '../../Pagination';
-import Box from '../../Box';
-import ListSpin from '../ListSpin';
-import useApiAsync from '../../useApiAsync';
-import getToteutukset from '../../../utils/koutaSearch/getToteutukset';
-import { getIndexParamsByFilters } from '../utils';
-import Filters from '../Filters';
-import Badge from '../../Badge';
-import useFilterState from '../useFilterState';
-import { getFirstLanguageValue, getTestIdProps } from '../../../utils';
-import Anchor from '../../Anchor';
-import ErrorAlert from '../../ErrorAlert';
-import { useTranslation } from 'react-i18next';
-import NavigationAnchor from '../NavigationAnchor';
-import Button from '../../Button';
-import useModal from '../../useModal';
-import KoulutusModal from './KoulutusModal';
-import debounce from 'debounce-promise';
+const { TOTEUTUS } = ENTITY;
 
 const debounceToteutukset = debounce(getToteutukset, 300);
 
@@ -137,7 +140,7 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
     <>
       <NavigationAnchor id="toteutukset" />
       <ListCollapse
-        icon="settings"
+        icon={ICONS[TOTEUTUS]}
         header={t('yleiset.toteutukset')}
         actions={
           canCreate ? <Actions organisaatioOid={organisaatioOid} /> : null

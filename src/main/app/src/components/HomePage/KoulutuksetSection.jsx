@@ -1,32 +1,32 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import debounce from 'debounce-promise';
 
+import { ENTITY, ICONS } from '#/src/constants';
+import { getFirstLanguageValue, getTestIdProps } from '#/src/utils';
+import getKoulutukset from '#/src/utils/koutaSearch/getKoulutukset';
+import Anchor from '#/src/components/Anchor';
+import Button from '#/src/components/Button';
+import Pagination from '#/src/components/Pagination';
+import Flex from '#/src/components/Flex';
+import Spacing from '#/src/components/Spacing';
+import useApiAsync from '#/src/components/useApiAsync';
+import Badge from '#/src/components/Badge';
+import ErrorAlert from '#/src/components/ErrorAlert';
+import { getIndexParamsByFilters } from './utils';
+import ListSpin from './ListSpin';
+import Filters from './Filters';
+import NavigationAnchor from './NavigationAnchor';
 import ListCollapse from './ListCollapse';
-
+import useFilterState from './useFilterState';
 import ListTable, {
   makeModifiedColumn,
   makeMuokkaajaColumn,
   makeTilaColumn,
 } from './ListTable';
 
-import Button from '../Button';
-import Pagination from '../Pagination';
-import Flex from '../Flex';
-import Spacing from '../Spacing';
-import ListSpin from './ListSpin';
-import useApiAsync from '../useApiAsync';
-import getKoulutukset from '../../utils/koutaSearch/getKoulutukset';
-import { getIndexParamsByFilters } from './utils';
-import Filters from './Filters';
-import Badge from '../Badge';
-import useFilterState from './useFilterState';
-import ErrorAlert from '../ErrorAlert';
-import { getFirstLanguageValue, getTestIdProps } from '../../utils';
-import { useTranslation } from 'react-i18next';
-import NavigationAnchor from './NavigationAnchor';
-import debounce from 'debounce-promise';
-
-import Anchor from '../Anchor';
+const { KOULUTUS } = ENTITY;
 
 const debounceKoulutukset = debounce(getKoulutukset, 300);
 
@@ -131,7 +131,7 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
     <>
       <NavigationAnchor id="koulutukset" />
       <ListCollapse
-        icon="school"
+        icon={ICONS[KOULUTUS]}
         header={t('yleiset.koulutukset')}
         actions={
           canCreate ? <Actions organisaatioOid={organisaatioOid} /> : null

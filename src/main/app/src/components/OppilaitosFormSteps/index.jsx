@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import Box from '#/src/components/Box';
 import FormStepIcon from '#/src/components/FormStepIcon';
-import { ENTITY } from '#/src/constants';
+import { ENTITY, ICONS } from '#/src/constants';
 
 const { OPPILAITOS, OPPILAITOKSEN_OSA } = ENTITY;
 
@@ -15,7 +15,7 @@ const OppilaitosFormSteps = ({ activeStep = 'oppilaitos' }) => {
       <Box mx={-4} display="flex">
         <Box mx={2}>
           <FormStepIcon
-            icon="account_balance"
+            icon={ICONS[OPPILAITOS]}
             active={activeStep === OPPILAITOS}
           >
             {t('yleiset.oppilaitos')}
@@ -23,7 +23,7 @@ const OppilaitosFormSteps = ({ activeStep = 'oppilaitos' }) => {
         </Box>
         <Box mx={2}>
           <FormStepIcon
-            icon="add_circle_outline"
+            icon={ICONS[OPPILAITOKSEN_OSA]}
             active={activeStep === OPPILAITOKSEN_OSA}
           >
             {t('yleiset.oppilaitoksenOsa')}

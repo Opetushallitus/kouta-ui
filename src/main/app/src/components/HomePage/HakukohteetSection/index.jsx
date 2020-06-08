@@ -1,30 +1,33 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-
-import Box from '../../Box';
-import ListCollapse from '../ListCollapse';
-import { useTranslation } from 'react-i18next';
-import NavigationAnchor from '../NavigationAnchor';
-import Button from '../../Button';
-import useModal from '../../useModal';
-import LiitoksetModal from './LiitoksetModal';
-import Pagination from '../../Pagination';
-import ListSpin from '../ListSpin';
-import useApiAsync from '../../useApiAsync';
-import { getIndexParamsByFilters } from '../utils';
-import Filters from '../Filters';
-import useFilterState from '../useFilterState';
-import ErrorAlert from '../../ErrorAlert';
-import Anchor from '../../Anchor';
-import getHakukohteet from '../../../utils/koutaSearch/getHakukohteet';
-import { getFirstLanguageValue, getTestIdProps } from '../../../utils';
 import debounce from 'debounce-promise';
+import { useTranslation } from 'react-i18next';
+
+import { ENTITY, ICONS } from '#/src/constants';
+import { getFirstLanguageValue, getTestIdProps } from '#/src/utils';
+import getHakukohteet from '#/src/utils/koutaSearch/getHakukohteet';
+import Anchor from '#/src/components/Anchor';
+import Box from '#/src/components/Box';
+import Button from '#/src/components/Button';
+import useModal from '#/src/components/useModal';
+import ErrorAlert from '#/src/components/ErrorAlert';
+import Pagination from '#/src/components/Pagination';
+import useApiAsync from '#/src/components/useApiAsync';
+import { getIndexParamsByFilters } from '../utils';
+import ListSpin from '../ListSpin';
+import Filters from '../Filters';
+import NavigationAnchor from '../NavigationAnchor';
+import useFilterState from '../useFilterState';
+import ListCollapse from '../ListCollapse';
+import LiitoksetModal from './LiitoksetModal';
 
 import ListTable, {
   makeModifiedColumn,
   makeMuokkaajaColumn,
   makeTilaColumn,
 } from '../ListTable';
+
+const { HAKUKOHDE } = ENTITY;
 
 const debounceHakukohteet = debounce(getHakukohteet, 300);
 
@@ -126,7 +129,7 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
     <>
       <NavigationAnchor id="hakukohteet" />
       <ListCollapse
-        icon="grain"
+        icon={ICONS[HAKUKOHDE]}
         header={t('yleiset.hakukohteet')}
         actions={
           canCreate ? <Actions organisaatioOid={organisaatioOid} /> : null

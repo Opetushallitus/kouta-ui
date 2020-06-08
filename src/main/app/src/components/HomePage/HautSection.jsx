@@ -1,29 +1,33 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import debounce from 'debounce-promise';
+import { useTranslation } from 'react-i18next';
 
+import { ENTITY, ICONS } from '#/src/constants';
+
+import { getFirstLanguageValue, getTestIdProps } from '#/src/utils';
+import getHaut from '#/src/utils/koutaSearch/getHaut';
+import Button from '#/src/components/Button';
+import Pagination from '#/src/components/Pagination';
+import Flex from '#/src/components/Flex';
+import Spacing from '#/src/components/Spacing';
+import useApiAsync from '#/src/components/useApiAsync';
+import Badge from '#/src/components/Badge';
+import ErrorAlert from '#/src/components/ErrorAlert';
+import Anchor from '#/src/components/Anchor';
+import NavigationAnchor from './NavigationAnchor';
+import Filters from './Filters';
+import ListSpin from './ListSpin';
 import ListCollapse from './ListCollapse';
 import ListTable, {
   makeModifiedColumn,
   makeMuokkaajaColumn,
   makeTilaColumn,
 } from './ListTable';
-import Button from '../Button';
-import Pagination from '../Pagination';
-import Flex from '../Flex';
-import Spacing from '../Spacing';
-import ListSpin from './ListSpin';
-import useApiAsync from '../useApiAsync';
 import { getIndexParamsByFilters } from './utils';
-import Filters from './Filters';
-import Badge from '../Badge';
 import useFilterState from './useFilterState';
-import ErrorAlert from '../ErrorAlert';
-import Anchor from '../Anchor';
-import { useTranslation } from 'react-i18next';
-import getHaut from '../../utils/koutaSearch/getHaut';
-import NavigationAnchor from './NavigationAnchor';
-import { getFirstLanguageValue, getTestIdProps } from '../../utils';
-import debounce from 'debounce-promise';
+
+const { HAKU } = ENTITY;
 
 const debounceHaut = debounce(getHaut, 300);
 
@@ -126,7 +130,7 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate }) => {
     <>
       <NavigationAnchor id="haut" />
       <ListCollapse
-        icon="access_time"
+        icon={ICONS[HAKU]}
         header={t('yleiset.haut')}
         actions={
           canCreate ? <Actions organisaatioOid={organisaatioOid} /> : null

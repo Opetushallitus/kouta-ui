@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { Spring } from 'react-spring';
+import { Spring } from 'react-spring/renderprops';
 
 import { getThemeProp } from '../../theme';
 import { disabledStyle } from '../../system';

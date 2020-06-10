@@ -45,6 +45,10 @@ const config = createFormConfigBuilder().registerSections([
       },
       {
         field: '.kohdejoukko',
+        validate: validateIfJulkaistu(eb =>
+          eb.validateExistence('perustiedot.kohdejoukko')
+        ),
+        required: true,
       },
     ],
   },
@@ -91,9 +95,7 @@ const config = createFormConfigBuilder().registerSections([
     section: 'soraKuvaus',
     koulutustyypit: KOULUTUSTYYPIT,
     field: 'soraKuvaus',
-    validate: validateIfJulkaistu(eb =>
-      eb.validateExistence('perustiedot.hakutapa')
-    ),
+    validate: validateIfJulkaistu(eb => eb.validateExistence('soraKuvaus')),
     required: true,
   },
   julkinenSectionConfig,

@@ -1,6 +1,4 @@
-import _ from 'lodash';
-
-import { KOULUTUSTYYPIT, KOULUTUSTYYPPI } from '../constants';
+import { KOULUTUSTYYPIT, KOULUTUSTYYPPI } from '#/src/constants';
 import createFormConfigBuilder from './createFormConfigBuilder';
 
 import {

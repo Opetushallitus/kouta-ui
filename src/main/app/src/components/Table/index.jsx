@@ -86,7 +86,7 @@ const TableRowBase = styled.tr`
     !isTableHead &&
     css`
       &:nth-child(even) {
-        background-color: #f5f5f5;
+        background-color: ${getThemeProp('palette.mainBackground')};
       }
 
       &:hover {

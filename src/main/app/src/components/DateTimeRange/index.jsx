@@ -2,9 +2,9 @@ import React from 'react';
 import { Field } from 'redux-form';
 import { useTranslation } from 'react-i18next';
 import { getTestIdProps } from '#/src/utils';
-import Button from '#/src/components/Button';
 import { FormFieldDateTimeInput } from '#/src/components/formFields';
 import Flex, { FlexItem } from '#/src/components/Flex';
+import RemoveButton from '#/src/components/RemoveButton';
 
 export const DateTimeRange = ({ startProps, endProps, onRemove, ...props }) => {
   const { t } = useTranslation();
@@ -28,9 +28,7 @@ export const DateTimeRange = ({ startProps, endProps, onRemove, ...props }) => {
       </FlexItem>
       {onRemove && (
         <FlexItem grow={0} marginTop={4} paddingLeft={2}>
-          <Button onClick={onRemove} variant="outlined" color="secondary">
-            {t('yleiset.poista')}
-          </Button>
+          <RemoveButton onClick={onRemove} />
         </FlexItem>
       )}
     </Flex>

@@ -1,7 +1,7 @@
-import { get, mapValues } from 'lodash';
+import _ from 'lodash';
 
 import { isNumeric } from './index';
-import getValintakoeFieldsValues from './getValintakoeFieldsValues';
+import getKokeetTaiLisanaytotValues from './getKokeetTaiLisanaytotValues';
 import getHakulomakeFieldsValues from './getHakulomakeFieldsValues';
 import parseEditorState from './draft/parseEditorState';
 
@@ -72,7 +72,7 @@ const getFormValuesByHakukohde = hakukohde => {
           value,
         })
       ),
-      tarkenne: mapValues(
+      tarkenne: _.mapValues(
         pohjakoulutusvaatimusTarkenne || {},
         parseEditorState
       ),
@@ -82,14 +82,14 @@ const getFormValuesByHakukohde = hakukohde => {
           value: valintaperusteId,
         }
       : undefined,
-    valintakoe: getValintakoeFieldsValues(valintakokeet),
+    valintakokeet: getKokeetTaiLisanaytotValues(valintakokeet),
     liitteet: {
       toimitustapa: {
         tapa: liitteidenToimitustapa || '',
         paikka: {
-          sahkoposti: get(liitteidenToimitusosoite, 'sahkoposti') || '',
-          osoite: get(liitteidenToimitusosoite, 'osoite.osoite') || {},
-          postinumero: get(
+          sahkoposti: _.get(liitteidenToimitusosoite, 'sahkoposti') || '',
+          osoite: _.get(liitteidenToimitusosoite, 'osoite.osoite') || {},
+          postinumero: _.get(
             liitteidenToimitusosoite,
             'osoite.postinumeroKoodiUri'
           )
@@ -119,11 +119,11 @@ const getFormValuesByHakukohde = hakukohde => {
             toimitustapa: {
               tapa: toimitustapa || '',
               paikka: {
-                osoite: get(toimitusosoite, 'osoite.osoite') || {},
-                postinumero: get(toimitusosoite, 'osoite.postinumeroKoodiUri')
+                osoite: _.get(toimitusosoite, 'osoite.osoite') || {},
+                postinumero: _.get(toimitusosoite, 'osoite.postinumeroKoodiUri')
                   ? { value: toimitusosoite.osoite.postinumeroKoodiUri }
                   : undefined,
-                sahkoposti: get(toimitusosoite, 'sahkoposti') || '',
+                sahkoposti: _.get(toimitusosoite, 'sahkoposti') || '',
               },
             },
           };

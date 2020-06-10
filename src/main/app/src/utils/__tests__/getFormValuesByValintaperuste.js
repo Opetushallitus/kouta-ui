@@ -137,9 +137,31 @@ test('getFormValuesByValintaperuste returns correct form values given valintaper
       fi: 'Fi nimi',
       sv: 'Sv nimi',
     },
+    valintakokeidenYleiskuvaus: {
+      fi: '<p>Yleiskuvaus - fi</p>',
+      sv: '<p>Yleiskuvaus - sv</p>',
+    },
     valintakokeet: [
       {
+        nimi: {
+          fi: 'valintakokeen nimi - fi',
+          sv: 'valintakokeen nimi - sv',
+        },
         tyyppiKoodiUri: 'tyyppi_1#1',
+        tietoja: {
+          fi: '<p>Tietoa hakijalle - fi</p>',
+          sv: '<p>Tietoa hakijalle - sv</p>',
+        },
+        liittyyEnnakkovalmistautumista: true,
+        ohjeetEnnakkovalmistautumiseen: {
+          fi: '<p>Ohjeet ennakkovalmistautumiseen - fi</p>',
+          sv: '<p>ohjeet ennakkovalmistautumiseen - sv</p>',
+        },
+        erityisjarjestelytMahdollisia: true,
+        ohjeetErityisjarjestelyihin: {
+          fi: '<p>Ohjeet erityisjärjestelyihin - fi</p>',
+          sv: '<p>Ohjeet erityisjärjestelyihin - sv</p>',
+        },
         tilaisuudet: [
           {
             osoite: {
@@ -157,6 +179,10 @@ test('getFormValuesByValintaperuste returns correct form values given valintaper
             lisatietoja: {
               fi: 'fi lisatietoja',
               sv: 'sv lisatietoja',
+            },
+            jarjestamispaikka: {
+              fi: 'jarjestamispaikka - fi',
+              sv: 'jarjestamispaikka - sv',
             },
           },
         ],

@@ -1,14 +1,12 @@
 import _ from 'lodash';
 import produce from 'immer';
-import { isNumeric } from './index';
+import { isNumeric, isDeepEmptyFormValues } from '#/src/utils';
 import serializeEditorState from './draft/serializeEditorState';
-import getValintakoeFieldsData from './getValintakoeFieldsData';
+import getKokeetTaiLisanaytotData from './getKokeetTaiLisanaytotData';
 
 const getArrayValue = (values, key) => {
   const valueCandidate = _.get(values, key);
-  return _.isEmpty(valueCandidate) || _.isEmpty(_.first(valueCandidate))
-    ? []
-    : valueCandidate;
+  return isDeepEmptyFormValues(valueCandidate) ? [] : valueCandidate;
 };
 
 const serializeTable = ({ table, kielivalinta }) => {
@@ -89,7 +87,7 @@ const getValintaperusteByFormValues = values => {
     }) => ({
       kuvaus: _.pick(kuvaus || {}, kielivalinta),
       nimi: _.pick(nimi || {}, kielivalinta),
-      valintatapaKoodiUri: _.get(tapa, 'value') || null,
+      valintatapaKoodiUri: _.get(tapa, 'value'),
       sisalto: serializeSisalto({ sisalto, kielivalinta }),
       kaytaMuuntotaulukkoa: false,
       kynnysehto: _.pick(kynnysehto || {}, kielivalinta),
@@ -102,8 +100,13 @@ const getValintaperusteByFormValues = values => {
     })
   );
 
-  const valintakokeet = getValintakoeFieldsData({
-    valintakoeValues: _.get(values, 'valintakoe'),
+  const valintakokeidenYleiskuvaus = _.mapValues(
+    _.get(values, 'valintakokeet.yleisKuvaus'),
+    kuvaus => serializeEditorState(kuvaus)
+  );
+
+  const valintakokeet = getKokeetTaiLisanaytotData({
+    valintakoeValues: _.get(values, 'valintakokeet'),
     kielivalinta,
   });
 
@@ -128,6 +131,7 @@ const getValintaperusteByFormValues = values => {
       kielitaitovaatimukset: [],
       osaamistaustaKoodiUrit: [],
       kuvaus,
+      valintakokeidenYleiskuvaus,
     },
   };
 };

@@ -18,12 +18,12 @@ export const spacing = (amount = 1) => ({ theme }) =>
 export const createTheme = () => {
   let theme = createUiTheme();
 
-  theme.breakpoints = breakpoints;
-
   theme = _.merge(theme, {
+    breakpoints,
+    space: _.range(0, 256, 8),
     colors: {
       mainBackground: '#f5f5f5',
-      secondaryBackground: '#fafafa',
+      grayLighten6: '#f0f3f7',
       border: theme.colors.divider,
       text: {
         dark: theme.colors.text.heading,

@@ -4,7 +4,7 @@ import {
   getCheckbox,
   fillDateTimeInput,
   chooseKieliversiotLanguages,
-  fillValintakoeFields,
+  fillValintakokeetSection,
   fillAsyncSelect,
   typeToEditor,
   jatka,
@@ -128,13 +128,6 @@ const fillValintaperusteenKuvausSection = () => {
   });
 };
 
-const fillValintakoeSection = () => {
-  getByTestId('valintakoeSection').within(() => {
-    fillValintakoeFields();
-    jatka();
-  });
-};
-
 const fillLiitteetSection = () => {
   getByTestId('liitteetSection').within(() => {
     lisaa();
@@ -195,7 +188,7 @@ describe('createHakukohdeForm', () => {
     fillPerustiedotSection();
     fillAloituspaikatSection();
     fillValintaperusteenKuvausSection();
-    fillValintakoeSection();
+    fillValintakokeetSection();
     fillLiitteetSection();
     fillTilaSection();
     tallenna();
@@ -223,7 +216,7 @@ describe('createHakukohdeForm', () => {
     fillPerustiedotSection({ isKorkeakoulu: true });
     fillAloituspaikatSection({ isKorkeakoulu: true });
     fillValintaperusteenKuvausSection();
-    fillValintakoeSection();
+    fillValintakokeetSection();
     fillLiitteetSection();
     fillTilaSection();
 

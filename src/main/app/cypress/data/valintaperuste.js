@@ -43,18 +43,38 @@ export default ({ tyyppi = 'amm' } = {}) => {
       ],
       kielitaitovaatimukset: [],
       kuvaus: { fi: '<p>Loppukuvaus</p>' },
+      valintakokeidenYleiskuvaus: {
+        fi: '<p>Valintakokeiden kuvaus - fi</p>',
+      },
     },
     organisaatioOid: '1.2.246.562.10.594252633210',
     muokkaaja: '1.2.246.562.24.62301161440',
     kielivalinta: ['fi', 'sv'],
     modified: '2019-04-03T13:56',
+
     valintakokeet: [
       {
+        nimi: {
+          fi: 'Kokeen nimi - fi',
+        },
+        metadata: {
+          tietoja: {
+            fi: '<p>Tietoa kokeesta - fi</p>',
+          },
+          liittyyEnnakkovalmistautumista: true,
+          ohjeetEnnakkovalmistautumiseen: {
+            fi: '<p>Ohjeet ennakkovalmistautumiseen - fi</p>',
+          },
+          erityisjarjestelytMahdollisia: true,
+          ohjeetErityisjarjestelyihin: {
+            fi: '<p>Ohjeet erityisjärjestelyihin - fi</p>',
+          },
+        },
         tyyppiKoodiUri: 'tyyppi_1#1',
         tilaisuudet: [
           {
             osoite: {
-              osoite: { fi: 'fi osoite', sv: 'sv osoite' },
+              osoite: { fi: 'fi osoite' },
               postinumeroKoodiUri: 'posti_00350#1',
             },
             aika: {
@@ -63,7 +83,9 @@ export default ({ tyyppi = 'amm' } = {}) => {
             },
             lisatietoja: {
               fi: 'fi lisatietoja',
-              sv: 'sv lisatietoja',
+            },
+            jarjestamispaikka: {
+              fi: 'Jarjestamispaikka - fi',
             },
           },
         ],

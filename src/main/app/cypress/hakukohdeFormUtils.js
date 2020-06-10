@@ -25,13 +25,14 @@ export const prepareTest = ({
 }) => {
   const toteutusOid = '2.1.1.1.1.1';
   const koulutusOid = '3.1.1.1.1';
-  const valintaperusteOid = '5.1.1.1.1.1';
+  const valintaperusteId = '649adb37-cd4d-4846-91a9-84b58b90f928';
 
   const testHakukohdeFields = {
     toteutusOid,
     hakuOid,
     organisaatioOid,
     oid: hakukohdeOid,
+    valintaperusteId,
   };
 
   cy.server();
@@ -64,11 +65,21 @@ export const prepareTest = ({
     url: '**/valintaperuste/list**',
     response: [
       merge(valintaperuste(), {
-        oid: valintaperusteOid,
+        id: valintaperusteId,
         nimi: { fi: 'Valintaperusteen nimi' },
         tila: 'julkaistu',
       }),
     ],
+  });
+
+  cy.route({
+    method: 'GET',
+    url: `**/valintaperuste/${valintaperusteId}`,
+    response: merge(valintaperuste(), {
+      id: valintaperusteId,
+      nimi: { fi: 'Valintaperusteen nimi' },
+      tila: 'julkaistu',
+    }),
   });
 
   cy.route({

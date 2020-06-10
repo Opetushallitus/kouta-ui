@@ -89,7 +89,7 @@ const Container = styled.div`
 `;
 
 const EditRowBase = styled(FlexItem)`
-  background-color: #f5f5f5;
+  background-color: ${getThemeProp('palette.mainBackground')};
   width: 2rem;
   text-align: center;
   padding: ${spacing(1)};
@@ -109,7 +109,7 @@ const EditRowPlaceholder = styled(EditRowBase)`
 `;
 
 const EditColumnBase = styled(Column)`
-  background-color: #f5f5f5;
+  background-color: ${getThemeProp('palette.mainBackground')};
   ${getThemeProp('typography.body')};
   cursor: pointer;
   text-align: center;

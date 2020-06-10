@@ -1,21 +1,21 @@
-import { get, mapValues, pick } from 'lodash';
+import _ from 'lodash';
 
 import { isNumeric } from './index';
-import getValintakoeFieldsData from './getValintakoeFieldsData';
+import getKokeetTaiLisanaytotData from './getKokeetTaiLisanaytotData';
 import getHakulomakeFieldsData from './getHakulomakeFieldsData';
 import serializeEditorState from './draft/serializeEditorState';
 import { LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
 
-const getKieliversiot = values => get(values, 'kieliversiot') || [];
+const getKieliversiot = values => _.get(values, 'kieliversiot') || [];
 
 const getLiitteillaYhteinenToimitusaika = values =>
-  !!get(values, 'liitteet.yhteinenToimitusaika');
+  !!_.get(values, 'liitteet.yhteinenToimitusaika');
 
 const getLiitteillaYhteinenToimitusosoite = values =>
-  !!get(values, 'liitteet.yhteinenToimituspaikka');
+  !!_.get(values, 'liitteet.yhteinenToimituspaikka');
 
 const getKaytetaanHaunAikataulua = values =>
-  !get(values, 'hakuajat.eriHakuaika');
+  !_.get(values, 'hakuajat.eriHakuaika');
 
 const getAsNumberOrNull = value => {
   return isNumeric(value) ? parseInt(value) : null;
@@ -23,17 +23,17 @@ const getAsNumberOrNull = value => {
 
 const getHakukohdeByFormValues = values => {
   const { muokkaaja, tila } = values;
-  const alkamiskausiKoodiUri = get(values, 'alkamiskausi.kausi') || null;
+  const alkamiskausiKoodiUri = _.get(values, 'alkamiskausi.kausi') || null;
   const alkamisvuosi = getAsNumberOrNull(
-    get(values, 'alkamiskausi.vuosi.value')
+    _.get(values, 'alkamiskausi.vuosi.value')
   );
   const kielivalinta = getKieliversiot(values);
 
   const aloituspaikat = getAsNumberOrNull(
-    get(values, 'aloituspaikat.aloituspaikkamaara')
+    _.get(values, 'aloituspaikat.aloituspaikkamaara')
   );
 
-  const eriHakulomake = Boolean(get(values, 'hakulomake.eriHakulomake'));
+  const eriHakulomake = Boolean(_.get(values, 'hakulomake.eriHakulomake'));
 
   const {
     hakulomakeAtaruId,
@@ -41,7 +41,7 @@ const getHakukohdeByFormValues = values => {
     hakulomakeLinkki,
     hakulomaketyyppi,
   } = getHakulomakeFieldsData({
-    hakulomakeValues: get(values, 'hakulomake'),
+    hakulomakeValues: _.get(values, 'hakulomake'),
     kielivalinta,
   });
 
@@ -49,26 +49,27 @@ const getHakukohdeByFormValues = values => {
 
   const hakuajat = kaytetaanHaunAikataulua
     ? []
-    : (get(values, 'hakuajat.hakuajat') || []).map(({ alkaa, paattyy }) => ({
+    : (_.get(values, 'hakuajat.hakuajat') || []).map(({ alkaa, paattyy }) => ({
         alkaa: alkaa || null,
         paattyy: paattyy || null,
       }));
 
   const liitteidenToimitusosoite = {
     osoite: {
-      osoite: pick(
-        get(values, 'liitteet.toimitustapa.paikka.osoite') || null,
+      osoite: _.pick(
+        _.get(values, 'liitteet.toimitustapa.paikka.osoite') || null,
         kielivalinta
       ),
       postinumeroKoodiUri:
-        get(values, 'liitteet.toimitustapa.paikka.postinumero.value') || null,
+        _.get(values, 'liitteet.toimitustapa.paikka.postinumero.value') || null,
     },
-    sahkoposti: get(values, 'liitteet.toimitustapa.paikka.sahkoposti') || null,
+    sahkoposti:
+      _.get(values, 'liitteet.toimitustapa.paikka.sahkoposti') || null,
   };
 
-  const liitteidenToimitustapa = get(values, 'liitteet.toimitustapa.tapa');
+  const liitteidenToimitustapa = _.get(values, 'liitteet.toimitustapa.tapa');
 
-  const liitteidenToimitusaika = get(values, 'liitteet.toimitusaika') || null;
+  const liitteidenToimitusaika = _.get(values, 'liitteet.toimitusaika') || null;
 
   const liitteetOnkoSamaToimitusosoite = getLiitteillaYhteinenToimitusosoite(
     values
@@ -78,13 +79,13 @@ const getHakukohdeByFormValues = values => {
     values
   );
 
-  const liitteet = (get(values, 'liitteet.liitteet') || []).map(
+  const liitteet = (_.get(values, 'liitteet.liitteet') || []).map(
     ({ tyyppi, nimi, kuvaus, toimitusaika, toimitustapa }) => {
-      const tapa = get(toimitustapa, 'tapa') || null;
+      const tapa = _.get(toimitustapa, 'tapa') || null;
       return {
         toimitustapa: tapa,
-        tyyppiKoodiUri: get(tyyppi, 'value') || null,
-        nimi: pick(nimi || null, kielivalinta),
+        tyyppiKoodiUri: _.get(tyyppi, 'value') || null,
+        nimi: _.pick(nimi || null, kielivalinta),
         toimitusaika: !liitteetOnkoSamaToimitusaika
           ? toimitusaika || null
           : null,
@@ -92,52 +93,59 @@ const getHakukohdeByFormValues = values => {
           tapa === LIITTEEN_TOIMITUSTAPA.MUU_OSOITE
             ? {
                 osoite: {
-                  osoite: pick(
-                    get(toimitustapa, 'paikka.osoite') || null,
+                  osoite: _.pick(
+                    _.get(toimitustapa, 'paikka.osoite') || null,
                     kielivalinta
                   ),
                   postinumeroKoodiUri:
-                    get(toimitustapa, 'paikka.postinumero.value') || null,
+                    _.get(toimitustapa, 'paikka.postinumero.value') || null,
                 },
-                sahkoposti: get(toimitustapa, 'paikka.sahkoposti') || null,
+                sahkoposti: _.get(toimitustapa, 'paikka.sahkoposti') || null,
               }
             : null,
-        kuvaus: pick(kuvaus || {}, kielivalinta),
+        kuvaus: _.pick(kuvaus || {}, kielivalinta),
       };
     }
   );
 
-  const nimi = pick(get(values, 'perustiedot.nimi') || null, kielivalinta);
+  const nimi = _.pick(_.get(values, 'perustiedot.nimi') || null, kielivalinta);
 
-  const toinenAsteOnkoKaksoistutkinto = !!get(
+  const toinenAsteOnkoKaksoistutkinto = !!_.get(
     values,
     'perustiedot.voiSuorittaaKaksoistutkinnon'
   );
 
-  const valintakokeet = getValintakoeFieldsData({
-    valintakoeValues: get(values, 'valintakoe'),
+  const valintakokeet = getKokeetTaiLisanaytotData({
+    valintakoeValues: _.get(values, 'valintakokeet'),
     kielivalinta,
   });
 
   const pohjakoulutusvaatimusKoodiUrit = (
-    get(values, 'pohjakoulutus.pohjakoulutusvaatimus') || []
+    _.get(values, 'pohjakoulutus.pohjakoulutusvaatimus') || []
   ).map(({ value }) => value);
 
-  const pohjakoulutusvaatimusTarkenne = pick(
-    mapValues(
-      get(values, 'pohjakoulutus.tarkenne') || {},
+  const pohjakoulutusvaatimusTarkenne = _.pick(
+    _.mapValues(
+      _.get(values, 'pohjakoulutus.tarkenne') || {},
       serializeEditorState
     ),
     kielivalinta
   );
 
-  const valintaperuste = get(values, 'valintaperusteenKuvaus.value') || null;
+  const valintaperuste = _.get(values, 'valintaperusteenKuvaus.value') || null;
 
-  const ensikertalaisenAloituspaikat = getAsNumberOrNull(
-    get(values, 'aloituspaikat.ensikertalaismaara')
+  const valintakokeidenYleiskuvaus = _.mapValues(
+    _.get(values, 'valintakokeet.yleisKuvaus'),
+    kuvaus => serializeEditorState(kuvaus)
   );
 
-  const eriAlkamiskausi = Boolean(get(values, 'alkamiskausi.eriAlkamiskausi'));
+  const ensikertalaisenAloituspaikat = getAsNumberOrNull(
+    _.get(values, 'aloituspaikat.ensikertalaismaara')
+  );
+
+  const eriAlkamiskausi = Boolean(
+    _.get(values, 'alkamiskausi.eriAlkamiskausi')
+  );
 
   return {
     muokkaaja,
@@ -175,6 +183,9 @@ const getHakukohdeByFormValues = values => {
     hakulomakeLinkki,
     hakulomakeKuvaus,
     kaytetaanHaunAlkamiskautta: !eriAlkamiskausi,
+    metadata: {
+      valintakokeidenYleiskuvaus,
+    },
   };
 };
 

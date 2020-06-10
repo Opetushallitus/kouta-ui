@@ -2,6 +2,7 @@ import axios from 'axios';
 import _ from 'lodash';
 import fp from 'lodash/fp';
 import { setupCache } from 'axios-cache-adapter';
+import { getCookie } from '#/src/utils';
 
 let loggingInPromise = null;
 
@@ -93,14 +94,6 @@ const withAuthorizationInterceptor = apiUrls => client => {
 
   return client;
 };
-
-const getCookie = name =>
-  fp.compose(
-    fp.prop(name),
-    fp.fromPairs,
-    fp.map(keyVal => keyVal.split('=')),
-    fp.split(';')
-  )(document.cookie);
 
 const withCSRF = client => {
   client.interceptors.request.use(request => {

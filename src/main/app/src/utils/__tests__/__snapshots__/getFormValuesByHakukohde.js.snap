@@ -61,7 +61,7 @@ Object {
               "sv": "Sv sahkoposti",
             },
           },
-          "tapa": "muu_osoite",
+          "tapa": "osoite",
         },
         "tyyppi": Object {
           "value": "liitetyyppi_1#1",

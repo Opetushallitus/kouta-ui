@@ -13,6 +13,9 @@ exports[`createValintaperusteForm > should be able to create valintaperuste #0`]
     },
     "osaamistaustaKoodiUrit": [],
     "tyyppi": "yo",
+    "valintakokeidenYleiskuvaus": {
+      "fi": "<p>Valintakokeiden kuvaus</p>"
+    },
     "valintatavat": [
       {
         "enimmaispisteet": 100,
@@ -88,11 +91,30 @@ exports[`createValintaperusteForm > should be able to create valintaperuste #0`]
   "tila": "julkaistu",
   "valintakokeet": [
     {
+      "metadata": {
+        "erityisjarjestelytMahdollisia": true,
+        "liittyyEnnakkovalmistautumista": true,
+        "ohjeetEnnakkovalmistautumiseen": {
+          "fi": "<p>ohjeet ennakkovalmistautumiseen</p>"
+        },
+        "ohjeetErityisjarjestelyihin": {
+          "fi": "<p>ohjeet erityisjärjestelyihin</p>"
+        },
+        "tietoja": {
+          "fi": "<p>Tietoa hakijalle</p>"
+        }
+      },
+      "nimi": {
+        "fi": "nimi"
+      },
       "tilaisuudet": [
         {
           "aika": {
             "alkaa": "2019-04-02T10:45",
             "paattyy": "2019-04-02T19:00"
+          },
+          "jarjestamispaikka": {
+            "fi": "paikka"
           },
           "lisatietoja": {
             "fi": "lisatietoja"

@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { Field, FieldArray } from 'redux-form';
+import { noop } from 'lodash';
 
 import LanguageSelect from '../LanguageSelect';
 import Spacing from '../Spacing';
@@ -7,7 +8,7 @@ import Button from '../Button';
 import { VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI } from '../../constants';
 import Flex, { FlexItem } from '../Flex';
 import Checkbox from '../Checkbox';
-import { noop, getTestIdProps } from '../../utils';
+import { getTestIdProps } from '../../utils';
 import useKoodistoOptions from '../useKoodistoOptions';
 import { useTranslation } from 'react-i18next';
 import FieldArrayList from '../FieldArrayList';
@@ -20,6 +21,7 @@ import {
   FormFieldSelect,
   createFormFieldComponent,
 } from '../formFields';
+import RemoveButton from '../RemoveButton';
 
 const LanguageField = createFormFieldComponent(
   LanguageSelect,
@@ -81,16 +83,7 @@ const renderKuvauksetField = ({ fields, kuvausOptions, t }) => {
             />
           </FlexItem>
           <FlexItem grow={0} paddingLeft={2}>
-            <Button
-              type="button"
-              variant="outlined"
-              color="secondary"
-              onClick={() => {
-                fields.remove(index);
-              }}
-            >
-              {t('yleiset.poista')}
-            </Button>
+            <RemoveButton onClick={() => fields.remove(index)} />
           </FlexItem>
         </Flex>
       ))}
@@ -201,16 +194,7 @@ const renderMuutOsoitustavatField = ({ fields, language, t }) => {
             />
           </FlexItem>
           <FlexItem grow={0} paddingLeft={2}>
-            <Button
-              type="button"
-              variant="outlined"
-              color="secondary"
-              onClick={() => {
-                fields.remove(index);
-              }}
-            >
-              {t('yleiset.poista')}
-            </Button>
+            <RemoveButton onClick={() => fields.remove(index)} />
           </FlexItem>
         </Flex>
       ))}

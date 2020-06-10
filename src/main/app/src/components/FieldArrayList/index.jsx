@@ -1,20 +1,15 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { get, isArray, isNil } from 'lodash';
+import { get, isNil } from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { spacing, getThemeProp } from '../../theme';
-import Flex, { FlexItem } from '../Flex';
-import Button from '../Button';
-import FormControl from '../FormControl';
+import { spacing, getThemeProp } from '#/src/theme';
+import Flex, { FlexItem } from '#/src/components/Flex';
+import FormControl from '#/src/components/FormControl';
+import FormHelperTextMulti from '#/src/components/FormHelperTextMulti';
+import RemoveButton from '../RemoveButton';
 
 const Item = styled.div`
-  ${({ isFirst }) =>
-    !isFirst &&
-    css`
-      padding-top: ${spacing(4)};
-    `}
-
-  padding-bottom: ${spacing(4)}; 
+  padding-bottom: ${spacing(4)};
 
   ${({ isLast, hasDivider }) =>
     isLast &&
@@ -48,29 +43,20 @@ export const FieldArrayList = ({
   const error = get(meta, 'error');
 
   const fieldsContent = fields.map((field, index, f) => {
-    const isLast = index === fields.length - 1;
-    const isFirst = index === 0;
-    const itemHasDivider = hasDivider;
-
     return (
       <Item
-        isLast={isLast}
-        isFirst={isFirst}
+        isFirst={index === 0}
+        isLast={index === fields.length - 1}
         key={index}
-        hasDivider={itemHasDivider}
+        hasDivider={hasDivider}
       >
         <Flex>
           <ItemFlex grow={1}>{children({ field, index, fields: f })}</ItemFlex>
           {hasRemoveButton ? (
-            <FlexItem grow={0} paddingLeft={4}>
-              <Button
-                type="button"
-                variant="outlined"
-                color="secondary"
-                onClick={() => fields.remove(index)}
-              >
+            <FlexItem grow={0} paddingLeft={4} marginTop={4}>
+              <RemoveButton onClick={() => fields.remove(index)}>
                 {removeButtonText}
-              </Button>
+              </RemoveButton>
             </FlexItem>
           ) : null}
         </Flex>
@@ -81,7 +67,7 @@ export const FieldArrayList = ({
   return (
     <FormControl
       error={!isNil(error)}
-      helperText={error && isArray(error) ? t(...error) : t(error)}
+      helperText={<FormHelperTextMulti errorMessage={error} />}
     >
       {fieldsContent}
     </FormControl>

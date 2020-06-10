@@ -162,7 +162,6 @@ export default {
     puhelinnumero: 'Puhelinnumero',
     valitseValintakoetyypit: 'Valitse valintakoetyypit',
     lisaaTilaisuus: 'Lisää tilaisuus',
-    valintakoe: 'Valintakoe',
     avaaLomake: 'Avaa lomake',
     valitseHaunKohdejoukko: 'Valitse haun kohdejoukko',
     valitseHaunKohdejoukonTarkenne: 'Valitse haun kohdejoukon tarkenne',
@@ -200,6 +199,7 @@ export default {
     riippuvuusEiJulkaistu:
       'Liitetty {{entity, unCapitalize}} ei ole "Julkaistu"-tilassa.',
     onJulkinen: '{{entity}} on julkinen',
+    kokeetTaiLisanaytot: 'Kokeet tai lisänäytöt',
   },
   ilmoitukset: {
     tallentamattomiaMuutoksia: {
@@ -503,7 +503,6 @@ export default {
     aloituspaikkojenLukumaara: 'Aloituspaikkojen lukumäärä',
     ensikertalaistenAloituspaikkojenLukumaara:
       'Joista ensikertalaisten aloituspaikkojen lukumäärä',
-    valintakoe: 'Valintakoe',
     valitseValintakokeenTyyppi: 'Valitse valintakokeen tyyppi',
     tarvittavatLiitteet: 'Tarvittavat liitteet',
     lisaaLiite: 'Lisää liite',
@@ -570,13 +569,32 @@ export default {
       'Valintaperusteen näkyminen muille koulutustoimijoille',
     valintaperusteenTila: 'Valintaperusteen tila',
     avaaSoraKuvaus: 'Avaa SORA-kuvaus',
-    valintakoe: 'Valintakoe',
     eiMuokkausOikeutta:
       'Käyttäjälläsi ei ole oikeuksia muokata tätä valintaperustekuvausta',
     pohjavalintaInfo:
       'Voit halutessasi käyttää aiemmin luotuja valintaperusteita uuden lomakkeen esitäytettynä pohjana.',
     julkisuusKuvaus:
       'Valitse näkyykö valintaperuste muille koulutustoimijoille. Jos valintaperuste on julkinen, muut koulutustoimijat voivat käyttää sitä pohjana luodessaan uusia.',
+    koeTaiLisanaytto: {
+      title: 'Koe tai lisänäyttö {{index}}',
+      yleisKuvaus: 'Yleiskuvaus kokeista ja lisänäytöistä',
+      tyyppi: 'Kokeen tai lisänäytön tyyppi',
+      hakijalleNakyvaNimi: 'Hakijalle näkyvä nimi',
+      tietoaHakijalle: 'Tietoa kokeesta tai lisänäytöstä hakijalle',
+      liittyyEnnakkovalmistautumista:
+        'Kokeeseen tai lisänäyttöön liittyy ennakkovalmistautumista',
+      materiaaliJaValmistautumisohjeet:
+        'Materiaali- ja valmistautumisohjeet hakijalle',
+      erityisjarjestelytMahdollisia:
+        'Kokeeseen tai lisänäyttöön on mahdollista ilmoittaa erityisjärjestelyn tarpeesta',
+      ohjeetErityisjarjestelyihin: 'Ohjeet yksilöllisiin erityisjärjestelyihin',
+      lisaa: 'Lisää koe tai lisänäyttö',
+    },
+    tilaisuudenLisatiedot: 'Tilaisuuden lisätiedot',
+    jarjestamispaikka: 'Järjestämispaikka',
+    tilaisuusTitle: 'Tilaisuus {{index}}',
+    tilaisuusAlkaa: 'Tilaisuus alkaa',
+    tilaisuusPaattyy: 'Tilaisuus päättyy',
   },
   soraKuvauslomake: {
     soraKuvauksenTiedot: 'SORA-kuvauksen tiedot',

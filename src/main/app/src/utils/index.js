@@ -1,6 +1,7 @@
 import dateFnsformatDate from 'date-fns/format';
 import memoizee from 'memoizee';
 import _ from 'lodash';
+import _fp from 'lodash/fp';
 import stripTags from 'striptags';
 import { ALLOWED_HTML_TAGS } from '#/src/constants';
 
@@ -181,3 +182,34 @@ export const ifAny = value => predicate =>
 export const otherwise = () => true;
 
 export const sanitizeHTML = html => stripTags(html, ALLOWED_HTML_TAGS);
+
+export const parseKeyVal = memoize(
+  _fp.compose(
+    _fp.fromPairs,
+    _fp.map(keyVal => keyVal.split('=')),
+    _fp.split(';')
+  )
+);
+
+export const getCookie = name => _.get(parseKeyVal(document.cookie), name);
+
+const allFuncs = (...fns) => value => _.every(fns, fn => fn(value));
+
+export const formValueExists = value =>
+  _.cond([
+    [_.isNil, _.stubFalse],
+    [
+      allFuncs(
+        v => _.isArray(v) || _.isString(v),
+        v => v.length === 0
+      ),
+      _.stubFalse,
+    ],
+    [allFuncs(_.isPlainObject, _.isEmpty), _.stubFalse],
+    [allFuncs(_.isPlainObject, v => v.value === ''), _.stubFalse],
+    [otherwise, _.stubTrue],
+  ])(value);
+
+export const isDeepEmptyFormValues = value =>
+  !formValueExists(value) ||
+  (_.isObjectLike(value) && _.every(value, isDeepEmptyFormValues));

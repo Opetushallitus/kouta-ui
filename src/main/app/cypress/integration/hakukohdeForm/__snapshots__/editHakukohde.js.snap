@@ -49,6 +49,9 @@ exports[`editHakukohdeForm > should be able to edit hakukohde #0`] =
   "liitteidenToimitusaika": null,
   "liitteidenToimitusosoite": null,
   "liitteidenToimitustapa": null,
+  "metadata": {
+    "valintakokeidenYleiskuvaus": {}
+  },
   "modified": "2019-04-04T08:28",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "muuPohjakoulutusvaatimus": {},
@@ -68,25 +71,44 @@ exports[`editHakukohdeForm > should be able to edit hakukohde #0`] =
   "toteutusOid": "2.1.1.1.1.1",
   "valintakokeet": [
     {
+      "metadata": {
+        "erityisjarjestelytMahdollisia": true,
+        "liittyyEnnakkovalmistautumista": true,
+        "ohjeetEnnakkovalmistautumiseen": {
+          "fi": "<p>Ohjeet ennakkovalmistautumiseen - fi</p>"
+        },
+        "ohjeetErityisjarjestelyihin": {
+          "fi": "<p>Ohjeet erityisjärjestelyihin - fi</p>"
+        },
+        "tietoja": {
+          "fi": "<p>Tietoa kokeesta - fi</p>"
+        }
+      },
+      "nimi": {
+        "fi": "Kokeen nimi - fi"
+      },
       "tilaisuudet": [
         {
           "aika": {
-            "alkaa": "2011-11-11T10:30",
-            "paattyy": "2011-11-12T11:45"
+            "alkaa": "2019-04-16T08:44",
+            "paattyy": "2019-04-18T08:44"
+          },
+          "jarjestamispaikka": {
+            "fi": "Jarjestamispaikka - fi"
           },
           "lisatietoja": {
-            "fi": "Lisätietoja"
+            "fi": "fi lisatietoja"
           },
           "osoite": {
             "osoite": {
-              "fi": "Osoite"
+              "fi": "fi osoite"
             },
-            "postinumeroKoodiUri": "posti_0#2"
+            "postinumeroKoodiUri": "posti_00350#1"
           }
         }
       ],
-      "tyyppiKoodiUri": "valintakokeentyyppi_0#1"
+      "tyyppiKoodiUri": "tyyppi_1#1"
     }
   ],
-  "valintaperusteId": "b9d53560-a7f0-45d3-bd9d-46e67e6049ba"
+  "valintaperusteId": "649adb37-cd4d-4846-91a9-84b58b90f928"
 };

@@ -7,10 +7,10 @@ import {
   getCheckbox,
   chooseKieliversiotLanguages,
   fillKoulutustyyppiSelect,
-  fillValintakoeFields,
   jatka,
   getByTestId,
   paste,
+  fillValintakokeetSection,
 } from '#/cypress/utils';
 import valintaperuste from '#/cypress/data/valintaperuste';
 import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils';
@@ -63,13 +63,6 @@ const lisaaSisaltoa = tyyppi => {
         getByTestId('lisaaTaulukko').click({ force: true });
       }
     });
-};
-
-const fillValintakoeSection = () => {
-  getByTestId('valintakoeSection').within(() => {
-    fillValintakoeFields();
-    jatka();
-  });
 };
 
 const fillValintatapaSection = () => {
@@ -185,7 +178,7 @@ describe('createValintaperusteForm', () => {
     fillPohjaSection();
     fillKuvausSection();
     fillValintatapaSection();
-    fillValintakoeSection();
+    fillValintakokeetSection();
     fillSoraKuvausSection();
     fillJulkisuusSection();
     fillTilaSection();

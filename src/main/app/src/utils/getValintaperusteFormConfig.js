@@ -1,6 +1,4 @@
-import _ from 'lodash';
-
-import { KOULUTUSTYYPIT, KOULUTUSTYYPPI } from '../constants';
+import { KOULUTUSTYYPIT, KOULUTUSTYYPPI } from '#/src/constants';
 import createFormConfigBuilder from './createFormConfigBuilder';
 
 import {
@@ -10,6 +8,7 @@ import {
   julkinenSectionConfig,
   validateRelations,
   valintakokeetSection,
+  validateOptionalTranslatedField,
 } from '#/src/utils/formConfigUtils';
 
 const koulutustyypitWithValintatapa = [
@@ -46,6 +45,10 @@ const config = createFormConfigBuilder().registerSections([
       },
       {
         field: '.kohdejoukko',
+        validate: validateIfJulkaistu(eb =>
+          eb.validateExistence('perustiedot.kohdejoukko')
+        ),
+        required: true,
       },
     ],
   },
@@ -58,7 +61,9 @@ const config = createFormConfigBuilder().registerSections([
           eb.validateTranslations('kuvaus.nimi', getKielivalinta(values)),
         required: true,
       },
-      '.kuvaus': true,
+      '.kuvaus': {
+        validate: validateOptionalTranslatedField('kuvaus.kuvaus'),
+      },
     },
   },
   {
@@ -90,9 +95,7 @@ const config = createFormConfigBuilder().registerSections([
     section: 'soraKuvaus',
     koulutustyypit: KOULUTUSTYYPIT,
     field: 'soraKuvaus',
-    validate: validateIfJulkaistu(eb =>
-      eb.validateExistence('perustiedot.hakutapa')
-    ),
+    validate: validateIfJulkaistu(eb => eb.validateExistence('soraKuvaus')),
     required: true,
   },
   julkinenSectionConfig,

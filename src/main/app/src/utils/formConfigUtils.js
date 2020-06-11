@@ -1,5 +1,9 @@
-import _ from 'lodash';
-
+import _ from 'lodash/fp';
+import {
+  validateArray,
+  validateExistence,
+  validateTranslations,
+} from '#/src/utils/createErrorBuilder';
 import { KOULUTUSTYYPIT, JULKAISUTILA, POHJAVALINTA } from '#/src/constants';
 
 export const validateIfJulkaistu = validate => (eb, values, ...rest) => {
@@ -8,23 +12,52 @@ export const validateIfJulkaistu = validate => (eb, values, ...rest) => {
   return tila === JULKAISUTILA.JULKAISTU ? validate(eb, values, ...rest) : eb;
 };
 
+export const validateIf = (condition, validate) => eb =>
+  condition ? validate(eb) : eb;
+
 export const validateValintakokeet = (errorBuilder, values) => {
-  const valintakokeet = _.get(values, 'valintakokeet.kokeetTaiLisanaytot');
   const kieliversiot = getKielivalinta(values);
-  return _.reduce(
-    valintakokeet,
-    (ebAcc, value, index) =>
-      ebAcc.validateArray(
-        `valintakokeet.kokeetTaiLisanaytot[${index}].tilaisuudet`,
-        eb =>
-          eb
-            .validateTranslations('osoite', kieliversiot)
-            .validateExistence('postinumero')
-            .validateExistence('alkaa')
-            .validateExistence('paattyy')
-      ),
-    errorBuilder
-  );
+  return _.compose(
+    validateTranslations('valintakokeet.yleisKuvaus', kieliversiot, {
+      optional: true,
+    }),
+    validateArray(
+      'valintakokeet.kokeetTaiLisanaytot',
+      (eb, { liittyyEnnakkovalmistautumista, erityisjarjestelytMahdollisia }) =>
+        _.compose(
+          validateExistence('tyyppi'),
+          validateIf(
+            liittyyEnnakkovalmistautumista,
+            validateTranslations('ohjeetEnnakkovalmistautumiseen', kieliversiot)
+          ),
+          validateIf(
+            erityisjarjestelytMahdollisia,
+            validateTranslations('ohjeetErityisjarjestelyihin', kieliversiot, {
+              optional: true,
+            })
+          ),
+          validateTranslations('nimi', kieliversiot, { optional: true }),
+          validateTranslations('tietoaHakijalle', kieliversiot, {
+            optional: true,
+          }),
+          validateArray(
+            'tilaisuudet',
+            _.compose(
+              validateTranslations('osoite', kieliversiot),
+              validateExistence('postinumero'),
+              validateExistence('alkaa'),
+              validateExistence('paattyy'),
+              validateTranslations('jarjestamispaikka', kieliversiot, {
+                optional: true,
+              }),
+              validateTranslations('lisatietoja', kieliversiot, {
+                optional: true,
+              })
+            )
+          )
+        )(eb)
+    )
+  )(errorBuilder);
 };
 
 export const kieliversiotSectionConfig = {
@@ -36,8 +69,8 @@ export const kieliversiotSectionConfig = {
 };
 
 export const getKielivalinta = values =>
-  _.get(values, 'kieliversiot') ||
-  _.get(values, 'perustiedot.kieliversiot') ||
+  _.get('kieliversiot', values) ||
+  _.get('perustiedot.kieliversiot', values) ||
   [];
 
 export const pohjaValintaSectionConfig = {
@@ -51,7 +84,7 @@ export const pohjaValintaSectionConfig = {
     {
       field: '.valinta',
       validate: (eb, values) =>
-        _.get(values, 'pohja.tapa') === POHJAVALINTA.KOPIO
+        _.get('pohja.tapa', values) === POHJAVALINTA.KOPIO
           ? eb.validateExistence('pohja.valinta')
           : eb,
     },
@@ -62,7 +95,7 @@ export const koulutustyyppiSectionConfig = {
   koulutustyypit: KOULUTUSTYYPIT,
   section: 'koulutustyyppi',
   field: 'koulutustyyppi',
-  validate: eb => eb.validateExistence('koulutustyyppi'),
+  validate: validateExistence('koulutustyyppi'),
   required: true,
 };
 
@@ -71,7 +104,7 @@ export const tilaSectionConfig = {
   section: 'tila',
   field: 'tila',
   required: true,
-  validate: eb => eb.validateExistence('tila'),
+  validate: validateExistence('tila'),
 };
 
 export const julkinenSectionConfig = {
@@ -84,11 +117,11 @@ export const validateRelations = specs => (eb, values) => {
   const { errors, isValid } = specs.reduce(
     (acc, { key, t: translationKey }) => {
       const { tila } = values;
-      const ref = _.get(values, key);
+      const ref = _.get(key, values);
       if (
         !_.isNil(ref) &&
         tila === JULKAISUTILA.JULKAISTU &&
-        _.get(ref, 'tila') !== JULKAISUTILA.JULKAISTU
+        _.get('tila', ref) !== JULKAISUTILA.JULKAISTU
       ) {
         acc.isValid = false;
         acc.errors.push(t =>
@@ -111,21 +144,21 @@ export const createOptionalTranslatedFieldConfig = ({
 }) => ({
   field: name,
   koulutustyypit,
-  validate: validateIfJulkaistu((eb, values) =>
+  validate: validateOptionalTranslatedField(name),
+});
+
+export const validateOptionalTranslatedField = name =>
+  validateIfJulkaistu((eb, values) =>
     eb.validateTranslations(name, getKielivalinta(values), {
       optional: true,
-      message: 'validointivirheet.kaikkiKaannoksetJosAinakinYksi',
     })
-  ),
-});
+  );
 
 export const valintakokeetSection = {
   section: 'valintakokeet',
   field: 'valintakokeet',
   koulutustyypit: KOULUTUSTYYPIT,
-  validate: validateIfJulkaistu((eb, values) =>
-    validateValintakokeet(eb, values)
-  ),
+  validate: validateIfJulkaistu(validateValintakokeet),
   fields: {
     '.kokeetTaiLisanaytot': {
       fields: {

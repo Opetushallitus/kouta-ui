@@ -111,14 +111,13 @@ export const KOULUTUSTYYPPI_TO_KOULUTUSTYYPPI_IDS_MAP = {
     'koulutustyyppi_19',
     'koulutustyyppi_26',
   ],
-  [KOULUTUSTYYPPI.KORKEAKOULUKOULUTUS]: ['koulutustyyppi_3'],
   [KOULUTUSTYYPPI.LUKIOKOULUTUS]: [
     'koulutustyyppi_2',
     'koulutustyyppi_9',
     'koulutustyyppi_14',
     'koulutustyyppi_23',
   ],
-  [KOULUTUSTYYPPI.MUU_KOULUTUS]: [
+  [KOULUTUSTYYPPI.MUUT_KOULUTUKSET]: [
     'koulutustyyppi_6',
     'koulutustyyppi_10',
     'koulutustyyppi_15',
@@ -238,4 +237,19 @@ export const ICONS = {
   soraKuvaus: 'subject',
   oppilaitos: 'account_balance',
   oppilaitoksenOsa: 'home_work',
+};
+
+export const ENTITY_ROLES = {
+  koulutus: KOULUTUS_ROLE,
+  toteutus: TOTEUTUS_ROLE,
+  haku: HAKU_ROLE,
+  hakukohde: HAKUKOHDE_ROLE,
+  valintaperuste: VALINTAPERUSTE_ROLE,
+  oppilaitos: OPPILAITOS_ROLE,
+};
+
+export const CRUD_ROLES = {
+  READ: 'read',
+  UPDATE: 'update',
+  CREATE: 'create',
 };

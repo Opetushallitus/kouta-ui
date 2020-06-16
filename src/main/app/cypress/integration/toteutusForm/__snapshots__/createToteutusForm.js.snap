@@ -117,6 +117,7 @@ exports[`createToteutusForm > should be able to create ammatillinen toteutus #0`
   },
   "organisaatioOid": "1.1.1.1.1.1",
   "tarjoajat": [
+    "1.2.1.1.1.1",
     "1.2.2.1.1.1"
   ],
   "teemakuva": null,
@@ -264,6 +265,7 @@ exports[`createToteutusForm > should be able to create korkeakoulu toteutus #0`]
   },
   "organisaatioOid": "1.1.1.1.1.1",
   "tarjoajat": [
+    "1.2.1.1.1.1",
     "1.2.2.1.1.1"
   ],
   "teemakuva": null,
@@ -395,6 +397,7 @@ exports[`createToteutusForm > should be able to create lukio toteutus #0`] =
   },
   "organisaatioOid": "1.1.1.1.1.1",
   "tarjoajat": [
+    "1.2.1.1.1.1",
     "1.2.2.1.1.1"
   ],
   "teemakuva": null,

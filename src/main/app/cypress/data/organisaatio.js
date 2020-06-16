@@ -1,5 +1,5 @@
-export default () => ({
-  oid: '1.2.246.562.10.594252633210',
+export default ({ oid = '1.2.246.562.10.594252633210' } = {}) => ({
+  oid,
   nimi: { fi: 'Organisaatio' },
   metadata: {
     nimi: {},
@@ -16,6 +16,7 @@ export default () => ({
   kayntiosoite: {},
   ryhmatyypit: [],
   kayttoryhmat: [],
+  parentOidPath: `|1.2.246.562.10.00000000001|`,
   parentOid: '1.2.246.562.10.00000000001',
   status: 'AKTIIVINEN',
 });

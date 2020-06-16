@@ -115,6 +115,8 @@ export const stubKayttoOikeusMeRoute = ({ user = {} } = {}) => {
       lastName: 'Doe',
       lang: 'fi',
       roles: JSON.stringify([
+        'APP_KOUTA',
+        'APP_KOUTA_OPHPAAKAYTTAJA',
         'APP_KOUTA_OPHPAAKAYTTAJA_1.2.246.562.10.00000000001',
       ]),
       ...user,
@@ -224,34 +226,34 @@ export const isStubbed =
 export const fillValintakokeetSection = () => {
   getByTestId('valintakokeetSection').within(() => {
     getByTestId('yleisKuvaus').within(() => {
-      typeToEditor('Valintakokeiden kuvaus', cy);
+      typeToEditor('Valintakokeiden kuvaus');
     });
 
     getByTestId('kokeetTaiLisanaytot').within(() => {
       getByTestId('lisaaKoeTaiLisanayttoButton').click({ force: true });
       getByTestId('kokeenTaiLisanaytonTyyppi').within(() => {
-        selectOption('valintakokeentyyppi_1', cy);
+        selectOption('valintakokeentyyppi_1');
       });
       getByTestId('hakijalleNakyvaNimi').find('input').pipe(paste('nimi'));
 
       getByTestId('tietoaHakijalle').within(() => {
-        typeToEditor('Tietoa hakijalle', cy);
+        typeToEditor('Tietoa hakijalle');
       });
 
       getByTestId('liittyyEnnakkovalmistautumista').within(() => {
-        getCheckbox(null, cy).check({ force: true });
+        getCheckbox(null).check({ force: true });
       });
 
       getByTestId('ohjeetEnnakkovalmistautumiseen').within(() => {
-        typeToEditor('ohjeet ennakkovalmistautumiseen', cy);
+        typeToEditor('ohjeet ennakkovalmistautumiseen');
       });
 
       getByTestId('erityisjarjestelytMahdollisia').within(() => {
-        getCheckbox(null, cy).check({ force: true });
+        getCheckbox(null).check({ force: true });
       });
 
       getByTestId('ohjeetErityisjarjestelyihin').within(() => {
-        typeToEditor('ohjeet erityisjärjestelyihin', cy);
+        typeToEditor('ohjeet erityisjärjestelyihin');
       });
 
       getByTestId('tietoaHakijalle').find('input').pipe(paste('tietoa'));
@@ -264,7 +266,6 @@ export const fillValintakokeetSection = () => {
         fillDateTimeInput({
           date: '02.04.2019',
           time: '10:45',
-          cy,
         });
       });
 
@@ -272,7 +273,6 @@ export const fillValintakokeetSection = () => {
         fillDateTimeInput({
           date: '02.04.2019',
           time: '19:00',
-          cy,
         });
       });
 

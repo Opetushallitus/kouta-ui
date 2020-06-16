@@ -1,4 +1,3 @@
-import { merge } from 'lodash';
 import createKoodisto from '#/cypress/data/koodisto';
 
 import organisaatio from '#/cypress/data/organisaatio';
@@ -18,7 +17,7 @@ export const stubHakuFormRoutes = ({ organisaatioOid }) => {
   cy.route({
     method: 'GET',
     url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
-    response: merge(organisaatio(), {
+    response: organisaatio({
       oid: organisaatioOid,
     }),
   });
@@ -27,7 +26,7 @@ export const stubHakuFormRoutes = ({ organisaatioOid }) => {
     method: 'POST',
     url: '**/organisaatio-service/rest/organisaatio/v4/findbyoids',
     response: [
-      merge(organisaatio(), {
+      organisaatio({
         oid: organisaatioOid,
       }),
     ],

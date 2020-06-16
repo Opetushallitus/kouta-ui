@@ -1,19 +1,12 @@
 import React from 'react';
-
-import { Helmet } from 'react-helmet';
+import { useTitle } from 'react-use';
 import { useTranslation } from 'react-i18next';
 
 const Title = ({ children, showPrefix = true }) => {
   const { t } = useTranslation();
-
-  return (
-    <Helmet>
-      <title>
-        {showPrefix ? `${t('sivuTitlet.etuliite')} | ` : ''}
-        {children}
-      </title>
-    </Helmet>
-  );
+  const prefix = showPrefix ? `${t('sivuTitlet.etuliite')} | ` : '';
+  useTitle(`${prefix}${children}`);
+  return <></>;
 };
 
 export default Title;

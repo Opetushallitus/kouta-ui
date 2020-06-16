@@ -1,8 +1,8 @@
 import React from 'react';
-
-import Input from '../Input';
-import InputIcon from '../InputIcon';
 import TimeField from 'react-simple-timefield';
+
+import Input from '#/src/components/Input';
+import InputIcon from '#/src/components/InputIcon';
 
 export const TimeInput = ({
   colon = ':',
@@ -11,6 +11,7 @@ export const TimeInput = ({
   disabled = false,
   id,
   inputProps = {},
+  onChange,
   ...props
 }) => {
   return (
@@ -25,6 +26,7 @@ export const TimeInput = ({
       }
       colon={colon}
       showSeconds={showSeconds}
+      onChange={(e, value) => onChange(value)}
       {...props}
     />
   );

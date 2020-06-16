@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { Transition } from 'react-spring';
+import { Transition } from 'react-spring/renderprops';
 import { connect } from 'react-redux';
 import { get, isFunction } from 'lodash';
 

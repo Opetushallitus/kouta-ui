@@ -1,5 +1,5 @@
 import React from 'react';
-import { Spring, Transition, config } from 'react-spring';
+import { Spring, Transition, config } from 'react-spring/renderprops';
 
 export const CollapseContent = ({ open = false, children }) => {
   return (

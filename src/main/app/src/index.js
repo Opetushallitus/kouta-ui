@@ -14,16 +14,6 @@ import configureUrls from './apiUrls';
 
 import createHttpClient from './httpClient';
 
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.ready
-    .then(registration => {
-      registration.unregister();
-    })
-    .catch(error => {
-      console.error(error.message);
-    });
-}
-
 const history = createBrowserHistory({ basename: 'kouta' });
 
 (async () => {

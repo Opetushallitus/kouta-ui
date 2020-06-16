@@ -86,13 +86,9 @@ const CreateSoraKuvausPage = props => {
   });
 
   return (
-    <FormConfigContext.Provider value={config}>
-      <ReduxForm
-        form="createSoraKuvausForm"
-        initialValues={initialValues}
-        enableReinitialize
-      >
-        <Title>{t('sivuTitlet.uusiSoraKuvaus')}</Title>
+    <ReduxForm form="createSoraKuvausForm" initialValues={initialValues}>
+      <Title>{t('sivuTitlet.uusiSoraKuvaus')}</Title>
+      <FormConfigContext.Provider value={config}>
         <FormPage
           header={<FormHeader>{ENTITY.SORA_KUVAUS}</FormHeader>}
           steps={<FormSteps activeStep={ENTITY.SORA_KUVAUS} />}
@@ -104,14 +100,12 @@ const CreateSoraKuvausPage = props => {
           <SoraKuvausForm
             steps
             organisaatioOid={organisaatioOid}
-            kopioSoraKuvausOid={kopioSoraKuvausOid}
             onSelectBase={selectBase}
             showArkistoituTilaOption={false}
-            kieliValinnat={kieliValinnatLista}
           />
         </FormPage>
-      </ReduxForm>
-    </FormConfigContext.Provider>
+      </FormConfigContext.Provider>
+    </ReduxForm>
   );
 };
 

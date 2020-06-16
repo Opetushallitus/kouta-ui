@@ -125,11 +125,7 @@ const CreateHakukohdePage = props => {
   });
 
   return (
-    <ReduxForm
-      form="createHakukohdeForm"
-      enableReinitialize
-      initialValues={initialValues}
-    >
+    <ReduxForm form="createHakukohdeForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.uusiHakukohde')}</Title>
       <FormPage
         header={<FormHeader>{t('yleiset.hakukohde')}</FormHeader>}
@@ -149,7 +145,6 @@ const CreateHakukohdePage = props => {
             <FormConfigContext.Provider value={config}>
               <HakukohdeForm
                 steps
-                organisaatio={data.organisaatio}
                 organisaatioOid={organisaatioOid}
                 haku={haku}
                 toteutus={toteutus}

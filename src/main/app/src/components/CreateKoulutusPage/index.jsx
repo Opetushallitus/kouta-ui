@@ -90,15 +90,10 @@ const CreateKoulutusPage = props => {
         ...values,
         organisaatioOid: luojaOrganisaatioOid,
       }),
-    formName: FORM_NAME,
   });
 
   return (
-    <ReduxForm
-      form={FORM_NAME}
-      enableReinitialize
-      initialValues={initialValues}
-    >
+    <ReduxForm form={FORM_NAME} initialValues={initialValues}>
       <Title>{t('sivuTitlet.uusiKoulutus')}</Title>
       <FormPage
         header={<FormHeader>{t('yleiset.koulutus')}</FormHeader>}

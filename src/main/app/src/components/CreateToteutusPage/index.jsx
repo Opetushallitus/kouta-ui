@@ -110,11 +110,7 @@ const CreateToteutusPage = props => {
   });
 
   return (
-    <ReduxForm
-      form={FORM_NAME}
-      enableReinitialize
-      initialValues={initialValues}
-    >
+    <ReduxForm form={FORM_NAME} initialValues={initialValues}>
       <Title>{t('sivuTitlet.uusiToteutus')}</Title>
       <FormPage
         header={<FormHeader>{t('yleiset.toteutus')}</FormHeader>}

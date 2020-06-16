@@ -85,11 +85,7 @@ const CreateHakuPage = props => {
   });
 
   return (
-    <ReduxForm
-      form="createHakuForm"
-      enableReinitialize
-      initialValues={initialValues}
-    >
+    <ReduxForm form="createHakuForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.uusiHaku')}</Title>
       <FormPage
         header={<FormHeader>{t('yleiset.haku')}</FormHeader>}
@@ -103,7 +99,6 @@ const CreateHakuPage = props => {
           <HakuForm
             steps
             organisaatioOid={organisaatioOid}
-            kopioHakuOid={kopioHakuOid}
             onSelectBase={selectBase}
             showArkistoituTilaOption={false}
           />

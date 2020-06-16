@@ -94,11 +94,7 @@ const CreateValintaperustePage = props => {
   const save = useSaveValintaperuste({ submit, formName: FORM_NAME });
 
   return (
-    <ReduxForm
-      form={FORM_NAME}
-      enableReinitialize
-      initialValues={initialValues}
-    >
+    <ReduxForm form={FORM_NAME} initialValues={initialValues}>
       <Title>{t('sivuTitlet.uusiValintaperuste')}</Title>
       <FormPage
         header={<FormHeader>{t('yleiset.valintaperusteet')}</FormHeader>}

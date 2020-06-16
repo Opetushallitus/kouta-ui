@@ -1,23 +1,15 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import getHakuByFormValues from '../../utils/getHakuByFormValues';
-import updateHaku from '../../utils/kouta/updateHaku';
+import getHakuByFormValues from '#/src/utils/getHakuByFormValues';
+import updateHaku from '#/src/utils/kouta/updateHaku';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
-import validateHakuForm from '../../utils/validateHakuForm';
-import useOrganisaatio from '../useOrganisaatio';
-import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
-import { HAKU_ROLE, ENTITY } from '../../constants';
+import validateHakuForm from '#/src/utils/validateHakuForm';
 import { FormFooter } from '#/src/components/FormPage';
+import { ENTITY } from '#/src/constants';
 
-const EditHakuFooter = ({ haku }) => {
+const EditHakuFooter = ({ haku, canUpdate }) => {
   const history = useHistory();
-  const { organisaatio } = useOrganisaatio(haku.organisaatioOid);
-  const roleBuilder = useAuthorizedUserRoleBuilder();
-
-  const canUpdate = useMemo(() => {
-    return roleBuilder.hasUpdate(HAKU_ROLE, organisaatio);
-  }, [organisaatio, roleBuilder]);
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {

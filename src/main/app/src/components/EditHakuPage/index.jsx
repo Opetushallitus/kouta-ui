@@ -10,16 +10,15 @@ import Spin from '#/src/components/Spin';
 import getHakuByOid from '#/src/utils/kouta/getHakuByOid';
 import Title from '#/src/components/Title';
 import ReduxForm from '#/src/components/ReduxForm';
-import getHakuFormConfig from '#/src/utils/getHakuFormConfig';
 import getFormValuesByHaku from '#/src/utils/getFormValuesByHaku';
 import HakuForm from '#/src/components/HakuForm';
 import FormConfigContext from '#/src/components/FormConfigContext';
-import { ENTITY } from '#/src/constants';
+import { ENTITY, CRUD_ROLES } from '#/src/constants';
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormSteps from '#/src/components/FormSteps';
+import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
+import { useEntityFormConfig } from '#/src/hooks/form';
 import EditHakuFooter from './EditHakuFooter';
-
-const config = getHakuFormConfig();
 
 const EditHakuPage = props => {
   const {
@@ -55,32 +54,42 @@ const EditHakuPage = props => {
     [history, organisaatioOid, haku]
   );
 
+  const canUpdate = useCurrentUserHasRole(
+    ENTITY.HAKU,
+    CRUD_ROLES.UPDATE,
+    haku?.organisaatioOid
+  );
+
+  const config = useEntityFormConfig(ENTITY.HAKU);
+
   return (
     <ReduxForm form="editHakuForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.haunMuokkaus')}</Title>
-      <FormPage
-        header={<EntityFormHeader entityType={ENTITY.HAKU} entity={haku} />}
-        steps={<FormSteps activeStep={ENTITY.HAKU} />}
-        footer={haku ? <EditHakuFooter haku={haku} /> : null}
-      >
-        <RelationInfoContainer>
-          <OrganisaatioRelation organisaatioOid={organisaatioOid} />
-        </RelationInfoContainer>
-        {haku ? (
-          <FormConfigContext.Provider value={config}>
+      <FormConfigContext.Provider value={config}>
+        <FormPage
+          readOnly={!canUpdate}
+          header={<EntityFormHeader entityType={ENTITY.HAKU} entity={haku} />}
+          steps={<FormSteps activeStep={ENTITY.HAKU} />}
+          footer={
+            haku ? <EditHakuFooter haku={haku} canUpdate={canUpdate} /> : null
+          }
+        >
+          <RelationInfoContainer>
+            <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+          </RelationInfoContainer>
+          {haku ? (
             <HakuForm
               haku={haku}
               organisaatioOid={organisaatioOid}
               steps={false}
-              initialValues={initialValues}
               onAttachHakukohde={onAttachHakukohde}
               canSelectBase={false}
             />
-          </FormConfigContext.Provider>
-        ) : (
-          <Spin center />
-        )}
-      </FormPage>
+          ) : (
+            <Spin center />
+          )}
+        </FormPage>
+      </FormConfigContext.Provider>
     </ReduxForm>
   );
 };

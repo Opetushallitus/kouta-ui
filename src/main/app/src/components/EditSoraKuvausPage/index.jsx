@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 
-import { KOULUTUSTYYPPI, ENTITY } from '#/src/constants';
+import { KOULUTUSTYYPPI, ENTITY, CRUD_ROLES } from '#/src/constants';
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
@@ -13,11 +13,12 @@ import Title from '#/src/components/Title';
 import ReduxForm from '#/src/components/ReduxForm';
 import getFormValuesBySoraKuvaus from '#/src/utils/getFormValuesBySoraKuvaus';
 import SoraKuvausForm from '#/src/components/SoraKuvausForm';
-import getSoraKuvausFormConfig from '#/src/utils/getSoraKuvausFormConfig';
 import FormConfigContext from '#/src/components/FormConfigContext';
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormSteps from '#/src/components/FormSteps';
 import EditSoraKuvausFooter from './EditSoraKuvausFooter';
+import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
+import { useEntityFormConfig } from '#/src/hooks/form';
 
 const EditSoraKuvausPage = props => {
   const {
@@ -30,14 +31,12 @@ const EditSoraKuvausPage = props => {
   const { soraKuvausUpdatedAt = null } = state;
   const { soraKuvaus, reload } = useSoraKuvaus(id);
 
-  const config = useMemo(getSoraKuvausFormConfig, []);
-
   useEffect(() => {
     soraKuvausUpdatedAt && _.isFunction(reload) && reload();
   }, [soraKuvausUpdatedAt]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const koulutustyyppi =
-    _.get(soraKuvaus, 'koulutustyyppi') || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
+    soraKuvaus?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
   const { t } = useTranslation();
 
@@ -45,15 +44,24 @@ const EditSoraKuvausPage = props => {
     return soraKuvaus ? getFormValuesBySoraKuvaus(soraKuvaus) : {};
   }, [soraKuvaus]);
 
+  // SORA-kuvaus rights are the same as valintaperuste rights
+  const canUpdate = useCurrentUserHasRole(
+    ENTITY.VALINTAPERUSTE,
+    CRUD_ROLES.UPDATE,
+    soraKuvaus?.organisaatioOid
+  );
+
+  const config = useEntityFormConfig(
+    ENTITY.SORA_KUVAUS,
+    soraKuvaus?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
+  );
+
   return (
-    <FormConfigContext.Provider value={config}>
-      <ReduxForm
-        form="editSoraKuvausForm"
-        initialValues={initialValues}
-        enableReinitialize
-      >
-        <Title>{t('sivuTitlet.soraKuvauksenMuokkaus')}</Title>
+    <ReduxForm form="editSoraKuvausForm" initialValues={initialValues}>
+      <Title>{t('sivuTitlet.soraKuvauksenMuokkaus')}</Title>
+      <FormConfigContext.Provider value={config}>
         <FormPage
+          readOnly={!canUpdate}
           header={
             <EntityFormHeader
               entityType={ENTITY.SORA_KUVAUS}
@@ -61,9 +69,7 @@ const EditSoraKuvausPage = props => {
             />
           }
           steps={<FormSteps activeStep={ENTITY.SORA_KUVAUS} />}
-          footer={
-            soraKuvaus ? <EditSoraKuvausFooter soraKuvaus={soraKuvaus} /> : null
-          }
+          footer={<EditSoraKuvausFooter soraKuvaus={soraKuvaus} />}
         >
           <RelationInfoContainer>
             <OrganisaatioRelation organisaatioOid={organisaatioOid} />
@@ -82,8 +88,8 @@ const EditSoraKuvausPage = props => {
             <Spin center />
           )}
         </FormPage>
-      </ReduxForm>
-    </FormConfigContext.Provider>
+      </FormConfigContext.Provider>
+    </ReduxForm>
   );
 };
 

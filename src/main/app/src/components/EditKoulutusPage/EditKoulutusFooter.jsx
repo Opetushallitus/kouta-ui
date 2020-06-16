@@ -6,9 +6,7 @@ import getKoulutusByFormValues from '../../utils/getKoulutusByFormValues';
 import updateKoulutus from '../../utils/kouta/updateKoulutus';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import validateKoulutusForm from '../../utils/validateKoulutusForm';
-import useOrganisaatio from '../useOrganisaatio';
-import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
-import { KOULUTUS_ROLE, ORGANISAATIOTYYPPI, ENTITY } from '#/src/constants';
+import { ORGANISAATIOTYYPPI, ENTITY } from '#/src/constants';
 import useOrganisaatioHierarkia from '../useOrganisaatioHierarkia';
 import iterateTree from '../../utils/iterateTree';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatioService/organisaatioMatchesTyyppi';
@@ -45,14 +43,8 @@ const mergeTarjoajat = (koulutusOids, valueOids, availableOids) => {
   return uniq(without([...(koulutusOids || []), ...inserted], ...deleted));
 };
 
-const EditKoulutusFooter = ({ koulutus, organisaatioOid }) => {
+const EditKoulutusFooter = ({ koulutus, organisaatioOid, canUpdate }) => {
   const history = useHistory();
-  const { organisaatio } = useOrganisaatio(koulutus.organisaatioOid);
-  const roleBuilder = useAuthorizedUserRoleBuilder();
-
-  const canUpdate = useMemo(() => {
-    return roleBuilder.hasUpdate(KOULUTUS_ROLE, organisaatio);
-  }, [organisaatio, roleBuilder]);
 
   const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid, {
     filter: negate(organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)),

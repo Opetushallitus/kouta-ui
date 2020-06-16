@@ -1,19 +1,17 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { KOULUTUSTYYPPI, ENTITY } from '#/src/constants';
+import { KOULUTUSTYYPPI, ENTITY, CRUD_ROLES } from '#/src/constants';
 import getKoulutustyyppiByKoulutusOid from '#/src/utils/kouta/getKoulutustyyppiByKoulutusOid';
 import getHakukohdeByOid from '#/src/utils/kouta/getHakukohdeByOid';
 import useApiAsync from '#/src/components/useApiAsync';
-import Spin from '#/src/components/Spin';
+import FullSpin from '#/src/components/FullSpin';
 import getToteutusByOid from '#/src/utils/kouta/getToteutusByOid';
 import Title from '#/src/components/Title';
 import getHakuByOid from '#/src/utils/kouta/getHakuByOid';
 import ReduxForm from '#/src/components/ReduxForm';
-import getHakukohdeFormConfig from '#/src/utils/getHakukohdeFormConfig';
 import getFormValuesByHakukohde from '#/src/utils/getFormValuesByHakukohde';
 import FormConfigContext from '#/src/components/FormConfigContext';
 import HakukohdeForm from '#/src/components/HakukohdeForm';
-import EditHakukohdeFooter from './EditHakukohdeFooter';
 import FormPage, {
   RelationInfoContainer,
   OrganisaatioRelation,
@@ -22,6 +20,9 @@ import FormPage, {
 } from '#/src/components/FormPage';
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormSteps from '#/src/components/FormSteps';
+import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
+import { useEntityFormConfig } from '#/src/hooks/form';
+import EditHakukohdeFooter from './EditHakukohdeFooter';
 
 const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
   const hakukohde = await getHakukohdeByOid({
@@ -79,29 +80,38 @@ const EditHakukohdePage = props => {
     return hakukohde && getFormValuesByHakukohde(hakukohde);
   }, [hakukohde]);
 
-  const config = useMemo(getHakukohdeFormConfig, []);
+  const canUpdate = useCurrentUserHasRole(
+    ENTITY.HAKUKOHDE,
+    CRUD_ROLES.UPDATE,
+    hakukohde?.organisaatioOid
+  );
+
+  const config = useEntityFormConfig(ENTITY.HAKUKOHDE);
 
   return !hakukohde ? (
-    <Spin center />
+    <FullSpin />
   ) : (
     <ReduxForm form="editHakukohdeForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.hakukohteenMuokkaus')}</Title>
-      <FormPage
-        header={
-          <EntityFormHeader entityType={ENTITY.HAKUKOHDE} entity={hakukohde} />
-        }
-        steps={<FormSteps activeStep={ENTITY.HAKUKOHDE} />}
-        footer={
-          hakukohde ? (
+      <FormConfigContext.Provider value={config}>
+        <FormPage
+          readOnly={!canUpdate}
+          header={
+            <EntityFormHeader
+              entityType={ENTITY.HAKUKOHDE}
+              entity={hakukohde}
+            />
+          }
+          steps={<FormSteps activeStep={ENTITY.HAKUKOHDE} />}
+          footer={
             <EditHakukohdeFooter
               hakukohde={hakukohde}
               toteutus={toteutus}
               haku={haku}
+              canUpdate={canUpdate}
             />
-          ) : null
-        }
-      >
-        {hakukohde ? (
+          }
+        >
           <>
             <RelationInfoContainer>
               <HakuRelation organisaatioOid={organisaatioOid} haku={haku} />
@@ -111,24 +121,20 @@ const EditHakukohdePage = props => {
               />
               <OrganisaatioRelation organisaatioOid={organisaatioOid} />
             </RelationInfoContainer>
-            <FormConfigContext.Provider value={config}>
-              <HakukohdeForm
-                steps={false}
-                organisaatioOid={organisaatioOid}
-                haku={haku}
-                toteutus={toteutus}
-                tarjoajat={tarjoajat}
-                hakukohde={hakukohde}
-                koulutustyyppi={
-                  koulutustyyppi || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
-                }
-              />
-            </FormConfigContext.Provider>
+            <HakukohdeForm
+              steps={false}
+              organisaatioOid={organisaatioOid}
+              haku={haku}
+              toteutus={toteutus}
+              tarjoajat={tarjoajat}
+              koulutustyyppi={
+                koulutustyyppi || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
+              }
+            />
           </>
-        ) : (
-          <Spin center />
-        )}
-      </FormPage>
+          )
+        </FormPage>
+      </FormConfigContext.Provider>
     </ReduxForm>
   );
 };

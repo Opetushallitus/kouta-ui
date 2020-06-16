@@ -14,10 +14,14 @@ import useApiAsync from '#/src/components/useApiAsync';
 import Spin from '#/src/components/Spin';
 import Title from '#/src/components/Title';
 import FormSteps from '#/src/components/FormSteps';
-import ToteutusFormWrapper from './ToteutusFormWrapper';
 import EditToteutusFooter from './EditToteutusFooter';
-import { ENTITY } from '#/src/constants';
+import { ENTITY, CRUD_ROLES } from '#/src/constants';
 import EntityFormHeader from '../EntityFormHeader';
+import { useEntityFormConfig } from '#/src/hooks/form';
+import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
+import ToteutusForm from '../ToteutusForm';
+import FormConfigContext from '../FormConfigContext';
+import FullSpin from '../FullSpin';
 
 const getToteutusAndKoulutus = async ({ httpClient, apiUrls, oid }) => {
   const toteutus = await getToteutusByOid({ httpClient, apiUrls, oid });
@@ -71,50 +75,66 @@ const EditToteutusPage = props => {
     [history, toteutus]
   );
 
+  const FORM_NAME = 'editToteutusForm';
+
+  const canUpdate = useCurrentUserHasRole(
+    ENTITY.TOTEUTUS,
+    CRUD_ROLES.UPDATE,
+    toteutus?.organisaatioOid
+  );
+
+  const config = useEntityFormConfig(ENTITY.TOTEUTUS, koulutustyyppi);
+
   return !toteutus ? (
-    <Spin center />
+    <FullSpin />
   ) : (
-    <ReduxForm form="editToteutusForm" initialValues={initialValues}>
+    <ReduxForm form={FORM_NAME} initialValues={initialValues}>
       <Title>{t('sivuTitlet.toteutuksenMuokkaus')}</Title>
-      <FormPage
-        header={
-          <EntityFormHeader entityType={ENTITY.TOTEUTUS} entity={toteutus} />
-        }
-        steps={<FormSteps activeStep={ENTITY.TOTEUTUS} />}
-        footer={
-          toteutus ? (
-            <EditToteutusFooter
+      <FormConfigContext.Provider value={config}>
+        <FormPage
+          readOnly={!canUpdate}
+          header={
+            <EntityFormHeader
+              entityType={ENTITY.TOTEUTUS}
+              entity={toteutus}
+              canUpdate={canUpdate}
+            />
+          }
+          steps={<FormSteps activeStep={ENTITY.TOTEUTUS} />}
+          footer={
+            toteutus ? (
+              <EditToteutusFooter
+                toteutus={toteutus}
+                koulutus={koulutus}
+                koulutustyyppi={koulutustyyppi}
+                organisaatioOid={organisaatioOid}
+                canUpdate={canUpdate}
+              />
+            ) : null
+          }
+        >
+          <RelationInfoContainer>
+            <KoulutusRelation
+              organisaatioOid={organisaatioOid}
+              koulutus={koulutus}
+            />
+            <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+          </RelationInfoContainer>
+          {toteutus && koulutus ? (
+            <ToteutusForm
               toteutus={toteutus}
               koulutus={koulutus}
-              koulutustyyppi={koulutustyyppi}
+              steps={false}
+              canSelectBase={false}
+              onAttachHakukohde={onAttachHakukohde}
               organisaatioOid={organisaatioOid}
+              koulutustyyppi={koulutustyyppi}
             />
-          ) : null
-        }
-      >
-        <RelationInfoContainer>
-          <KoulutusRelation
-            organisaatioOid={organisaatioOid}
-            koulutus={koulutus}
-          />
-          <OrganisaatioRelation organisaatioOid={organisaatioOid} />
-        </RelationInfoContainer>
-        {toteutus && koulutus ? (
-          <ToteutusFormWrapper
-            toteutus={toteutus}
-            koulutus={koulutus}
-            steps={false}
-            canSelectBase={false}
-            onAttachHakukohde={onAttachHakukohde}
-            organisaatioOid={organisaatioOid}
-            koulutusKoodiUri={koulutus ? koulutus.koulutusKoodiUri : null}
-            koulutustyyppi={koulutustyyppi}
-            ePerusteId={koulutus ? koulutus.ePerusteId : null}
-          />
-        ) : (
-          <Spin center />
-        )}
-      </FormPage>
+          ) : (
+            <Spin center />
+          )}
+        </FormPage>
+      </FormConfigContext.Provider>
     </ReduxForm>
   );
 };

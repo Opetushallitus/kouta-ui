@@ -9,7 +9,7 @@ import getOppilaitoksenOsaByOid from '#/src/utils/kouta/getOppilaitoksenOsaByOid
 import Spin from '#/src/components/Spin';
 import Title from '#/src/components/Title';
 import EntityFormHeader from '#/src/components/EntityFormHeader';
-import { ENTITY } from '#/src/constants';
+import { ENTITY, CRUD_ROLES } from '#/src/constants';
 import getOrganisaatioContactInfo from '#/src/utils/getOrganisaatioContactInfo';
 
 import OppilaitoksenOsaForm, {
@@ -21,6 +21,7 @@ import getOppilaitoksenOsaFormConfig from '#/src/utils/getOppilaitoksenOsaFormCo
 
 import ReduxForm from '#/src/components/ReduxForm';
 import FormConfigContext from '../FormConfigContext';
+import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 
 const OppilaitoksenOsaPage = ({
   match: {
@@ -31,11 +32,7 @@ const OppilaitoksenOsaPage = ({
   const { organisaatio } = useOrganisaatio(organisaatioOid);
   const { oppilaitoksenOsaUpdatedAt } = state;
 
-  const {
-    data: oppilaitoksenOsa,
-    isLoading: oppilaitoksenOsaIsLoading,
-    finishedAt,
-  } = useApiAsync({
+  const { data: oppilaitoksenOsa, finishedAt } = useApiAsync({
     promiseFn: getOppilaitoksenOsaByOid,
     oid: organisaatioOid,
     silent: true,
@@ -50,6 +47,20 @@ const OppilaitoksenOsaPage = ({
   const contactInfo = useMemo(() => getOrganisaatioContactInfo(organisaatio), [
     organisaatio,
   ]);
+
+  const canUpdate = useCurrentUserHasRole(
+    ENTITY.OPPILAITOS,
+    CRUD_ROLES.UPDATE,
+    oppilaitoksenOsa?.organisaatioOid
+  );
+
+  const canCreate = useCurrentUserHasRole(
+    ENTITY.OPPILAITOS,
+    CRUD_ROLES.CREATE,
+    organisaatioOid
+  );
+
+  const readOnly = oppilaitoksenOsa ? !canUpdate : !canCreate;
 
   const initialValues = useMemo(
     () => ({
@@ -79,6 +90,7 @@ const OppilaitoksenOsaPage = ({
       <FormConfigContext.Provider value={config}>
         <Title>{t('sivuTitlet.oppilaitoksenOsa')}</Title>
         <FormPage
+          readOnly={readOnly}
           steps={<OppilaitosFormSteps activeStep={ENTITY.OPPILAITOKSEN_OSA} />}
           header={
             <EntityFormHeader
@@ -89,8 +101,8 @@ const OppilaitoksenOsaPage = ({
           footer={
             <OppilaitoksenOsaPageFooter
               oppilaitoksenOsa={oppilaitoksenOsa}
-              oppilaitoksenOsaIsLoading={oppilaitoksenOsaIsLoading}
               organisaatioOid={organisaatioOid}
+              readOnly={readOnly}
             />
           }
         >

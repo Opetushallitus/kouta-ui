@@ -97,8 +97,10 @@ const Collapse = ({
         </HeaderToggle>
       </HeaderContainer>
       <CollapseContent open={open}>
-        <Box p={3}>{children}</Box>
-        {footer ? <FooterContainer>{footer}</FooterContainer> : null}
+        <div className="CollapseContent">
+          <Box p={3}>{children}</Box>
+          {footer ? <FooterContainer>{footer}</FooterContainer> : null}
+        </div>
       </CollapseContent>
     </Container>
   );

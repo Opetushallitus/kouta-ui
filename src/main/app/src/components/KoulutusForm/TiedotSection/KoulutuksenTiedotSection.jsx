@@ -51,7 +51,7 @@ const EPerusteField = ({ isLoading, ...props }) => {
       component={FormFieldSelect}
       label={t('koulutuslomake.valitseKaytettavaEperuste')}
       options={ePerusteOptions}
-      isDisabled={isLoading || _.isNil(ePerusteet) || _.isEmpty(ePerusteet)}
+      disabled={isLoading || _.isNil(ePerusteet) || _.isEmpty(ePerusteet)}
       {...props}
     />
   );

@@ -59,7 +59,7 @@ const createRoleLookup = roles => {
 };
 
 class RoleBuilder {
-  constructor({ roles = [], roleLookup, result = true } = {}) {
+  constructor({ roles = [], roleLookup = undefined, result = true } = {}) {
     this.currentResult = result;
     this.roleLookup = roleLookup ? roleLookup : createRoleLookup(roles);
   }

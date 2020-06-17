@@ -19,6 +19,10 @@ const getLiitteillaYhteinenToimitusaika = values =>
 const getLiitteillaYhteinenToimitusosoite = values =>
   !!_.get(values, 'liitteet.yhteinenToimituspaikka');
 
+const validatejarjestyspaikkaOid = (errorBuilder, values) => {
+  return errorBuilder;
+};
+
 const validateLiitteet = (errorBuilder, values) => {
   const kieliversiot = getKielivalinta(values);
 
@@ -163,6 +167,11 @@ const config = createFormConfigBuilder().registerSections([
     section: 'liitteet',
     field: 'liitteet',
     validate: validateIfJulkaistu((eb, values) => validateLiitteet(eb, values)),
+  },
+  {
+    section: 'jarjestyspaikkaOid',
+    field: 'jarjestyspaikkaOid',
+    validate: validateIfJulkaistu(validatejarjestyspaikkaOid),
   },
   {
     section: 'tila',

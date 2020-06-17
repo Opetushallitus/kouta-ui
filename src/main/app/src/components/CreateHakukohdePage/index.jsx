@@ -41,7 +41,7 @@ const getHakukohdeData = async ({
     getHakuByOid({ oid: hakuOid, httpClient, apiUrls }),
   ]);
 
-  const koulutustyyppi = await (toteutus && toteutus.koulutusOid
+  const { koulutustyyppi, tarjoajat } = await (toteutus && toteutus.koulutusOid
     ? getKoulutustyyppiByKoulutusOid({
         oid: toteutus.koulutusOid,
         httpClient,
@@ -54,6 +54,7 @@ const getHakukohdeData = async ({
     toteutus,
     haku,
     koulutustyyppi,
+    tarjoajat,
   };
 };
 
@@ -152,6 +153,7 @@ const CreateHakukohdePage = props => {
                 organisaatioOid={organisaatioOid}
                 haku={haku}
                 toteutus={toteutus}
+                tarjoajat={data.tarjoajat}
                 koulutustyyppi={
                   _.get(data, 'koulutustyyppi') ||
                   KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS

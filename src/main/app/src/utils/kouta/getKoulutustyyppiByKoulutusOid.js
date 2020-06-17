@@ -1,18 +1,14 @@
-import { get } from 'lodash';
-
 import { memoizePromise } from '../index';
 import getKoulutusByOid from './getKoulutusByOid';
 
-const memoizedGetKoulutustyyppiByKoulutusOid = memoizePromise(
+const memoizedGetKoulutusByKoulutusOid = memoizePromise(
   async (oid, httpClient, apiUrls) => {
-    const koulutus = await getKoulutusByOid({ oid, httpClient, apiUrls });
-
-    return get(koulutus, 'koulutustyyppi') || null;
+    return await getKoulutusByOid({ oid, httpClient, apiUrls });
   }
 );
 
-const getKoulutustyyppiByKoulutusOid = ({ oid, httpClient, apiUrls }) => {
-  return memoizedGetKoulutustyyppiByKoulutusOid(oid, httpClient, apiUrls);
+const getKoulutusByKoulutusOid = ({ oid, httpClient, apiUrls }) => {
+  return memoizedGetKoulutusByKoulutusOid(oid, httpClient, apiUrls);
 };
 
-export default getKoulutustyyppiByKoulutusOid;
+export default getKoulutusByKoulutusOid;

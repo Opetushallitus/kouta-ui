@@ -22,7 +22,7 @@ const getAsNumberOrNull = value => {
 };
 
 const getHakukohdeByFormValues = values => {
-  const { muokkaaja, tila } = values;
+  const { muokkaaja, tila, jarjestyspaikkaOid } = values;
   const alkamiskausiKoodiUri = _.get(values, 'alkamiskausi.kausi') || null;
   const alkamisvuosi = getAsNumberOrNull(
     _.get(values, 'alkamiskausi.vuosi.value')
@@ -150,6 +150,7 @@ const getHakukohdeByFormValues = values => {
   return {
     muokkaaja,
     tila,
+    jarjestyspaikkaOid,
     alkamiskausiKoodiUri,
     kaytetaanHaunAikataulua,
     kielivalinta,

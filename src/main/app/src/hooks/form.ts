@@ -38,7 +38,6 @@ export function useBoundFormActions() {
 
 export function useIsDirty() {
   const formName = useFormName();
-  console.log(formName);
   return useSelector(isDirty(formName));
 }
 export function useIsSubmitting() {

@@ -14,14 +14,14 @@ import useApiAsync from '#/src/components/useApiAsync';
 import Spin from '#/src/components/Spin';
 import Title from '#/src/components/Title';
 import FormSteps from '#/src/components/FormSteps';
-import EditToteutusFooter from './EditToteutusFooter';
 import { ENTITY, CRUD_ROLES } from '#/src/constants';
-import EntityFormHeader from '../EntityFormHeader';
+import EntityFormHeader from '#/src/components/EntityFormHeader';
 import { useEntityFormConfig } from '#/src/hooks/form';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
-import ToteutusForm from '../ToteutusForm';
-import FormConfigContext from '../FormConfigContext';
-import FullSpin from '../FullSpin';
+import ToteutusForm from '#/src/components/ToteutusForm';
+import FormConfigContext from '#/src/components/FormConfigContext';
+import FullSpin from '#/src/components/FullSpin';
+import EditToteutusFooter from './EditToteutusFooter';
 
 const getToteutusAndKoulutus = async ({ httpClient, apiUrls, oid }) => {
   const toteutus = await getToteutusByOid({ httpClient, apiUrls, oid });
@@ -90,7 +90,7 @@ const EditToteutusPage = props => {
   ) : (
     <ReduxForm form={FORM_NAME} initialValues={initialValues}>
       <Title>{t('sivuTitlet.toteutuksenMuokkaus')}</Title>
-      <FormConfigContext.Provider value={config}>
+      <FormConfigContext.Provider value={{ ...config, readOnly: !canUpdate }}>
         <FormPage
           readOnly={!canUpdate}
           header={

@@ -5,7 +5,6 @@ import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
 } from '#/src/components/FormPage';
-import EditValintaperusteFooter from './EditValintaperusteFooter';
 import useApiAsync from '#/src/components/useApiAsync';
 import getValintaperusteByOid from '#/src/utils/kouta/getValintaperusteByOid';
 import { KOULUTUSTYYPPI, ENTITY, CRUD_ROLES } from '#/src/constants';
@@ -19,6 +18,7 @@ import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import FormConfigContext from '#/src/components/FormConfigContext';
 import ValintaperusteForm from '#/src/components/ValintaperusteForm';
 import FullSpin from '#/src/components/FullSpin';
+import EditValintaperusteFooter from './EditValintaperusteFooter';
 
 const EditValintaperustePage = props => {
   const {
@@ -59,7 +59,7 @@ const EditValintaperustePage = props => {
   ) : (
     <ReduxForm form="editValintaperusteForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.valintaperusteenMuokkaus')}</Title>
-      <FormConfigContext.Provider value={config}>
+      <FormConfigContext.Provider value={{ ...config, readOnly: !canUpdate }}>
         <FormPage
           readOnly={!canUpdate}
           header={

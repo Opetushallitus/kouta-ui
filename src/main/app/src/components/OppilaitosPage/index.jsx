@@ -88,7 +88,7 @@ const OppilaitosPage = ({
     <>
       <Title>{t('sivuTitlet.oppilaitos')}</Title>
       <ReduxForm form={ENTITY.OPPILAITOS} initialValues={initialValues}>
-        <FormConfigContext.Provider value={config}>
+        <FormConfigContext.Provider value={{ ...config, readOnly }}>
           <FormPage
             readOnly={readOnly}
             steps={<OppilaitosFormSteps activeStep={ENTITY.OPPILAITOS} />}

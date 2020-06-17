@@ -6,6 +6,7 @@ import {
   useFieldIsRequired,
 } from '#/src/hooks/fieldConfigHooks';
 import FormHelperTextMulti from '#/src/components/FormHelperTextMulti';
+import { useFormConfig } from '#/src/hooks/form';
 
 export const createComponent = (Component, mapProps) => {
   const InputComponent = props => {
@@ -23,6 +24,7 @@ export const createComponent = (Component, mapProps) => {
     const children = createElement(Component, mapProps(props));
 
     const fieldConfig = useFieldConfig(name);
+    const { readOnly } = useFormConfig();
     const required = useFieldIsRequired(fieldConfig);
 
     return fieldConfig || !configurable ? (
@@ -32,12 +34,12 @@ export const createComponent = (Component, mapProps) => {
           <FormHelperTextMulti errorMessage={error} helperText={helperText} />
         }
         label={`${label}${required ? ' *' : ''}`}
-        disabled={disabled}
+        disabled={disabled || readOnly}
       >
         {children}
       </FormControl>
     ) : (
-      <div></div>
+      <></>
     );
   };
 

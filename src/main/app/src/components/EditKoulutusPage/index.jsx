@@ -7,7 +7,6 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import KoulutusForm from '#/src/components/KoulutusForm';
-import EditKoulutusFooter from './EditKoulutusFooter';
 import useApiAsync from '#/src/components/useApiAsync';
 import getKoulutusByOid from '#/src/utils/kouta/getKoulutusByOid';
 import Spin from '#/src/components/Spin';
@@ -22,6 +21,7 @@ import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { useFieldValue, useEntityFormConfig } from '#/src/hooks/form';
 import FormConfigContext from '#/src/components/FormConfigContext';
 import FullSpin from '#/src/components/FullSpin';
+import EditKoulutusFooter from './EditKoulutusFooter';
 
 const EditKoulutusPage = props => {
   const {
@@ -72,7 +72,7 @@ const EditKoulutusPage = props => {
   ) : (
     <ReduxForm form={FORM_NAME} initialValues={initialValues}>
       <Title>{t('sivuTitlet.koulutuksenMuokkaus')}</Title>
-      <FormConfigContext.Provider value={config}>
+      <FormConfigContext.Provider value={{ ...config, readOnly: !canUpdate }}>
         <FormPage
           readOnly={!canUpdate}
           header={
@@ -101,7 +101,6 @@ const EditKoulutusPage = props => {
               johtaaTutkintoon={Boolean(koulutus.johtaaTutkintoon)}
               onAttachToteutus={onAttachToteutus}
               koulutus={koulutus}
-              koulutusOrganisaatioOid={koulutus.organisaatioOid}
               organisaatioOid={organisaatioOid}
             />
           ) : (

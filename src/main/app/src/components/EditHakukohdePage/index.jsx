@@ -93,7 +93,7 @@ const EditHakukohdePage = props => {
   ) : (
     <ReduxForm form="editHakukohdeForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.hakukohteenMuokkaus')}</Title>
-      <FormConfigContext.Provider value={config}>
+      <FormConfigContext.Provider value={{ ...config, readOnly: !canUpdate }}>
         <FormPage
           readOnly={!canUpdate}
           header={
@@ -132,7 +132,6 @@ const EditHakukohdePage = props => {
               }
             />
           </>
-          )
         </FormPage>
       </FormConfigContext.Provider>
     </ReduxForm>

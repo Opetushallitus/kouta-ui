@@ -16,9 +16,9 @@ import SoraKuvausForm from '#/src/components/SoraKuvausForm';
 import FormConfigContext from '#/src/components/FormConfigContext';
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormSteps from '#/src/components/FormSteps';
-import EditSoraKuvausFooter from './EditSoraKuvausFooter';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { useEntityFormConfig } from '#/src/hooks/form';
+import EditSoraKuvausFooter from './EditSoraKuvausFooter';
 
 const EditSoraKuvausPage = props => {
   const {
@@ -59,7 +59,7 @@ const EditSoraKuvausPage = props => {
   return (
     <ReduxForm form="editSoraKuvausForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.soraKuvauksenMuokkaus')}</Title>
-      <FormConfigContext.Provider value={config}>
+      <FormConfigContext.Provider value={{ ...config, readOnly: !canUpdate }}>
         <FormPage
           readOnly={!canUpdate}
           header={
@@ -69,7 +69,12 @@ const EditSoraKuvausPage = props => {
             />
           }
           steps={<FormSteps activeStep={ENTITY.SORA_KUVAUS} />}
-          footer={<EditSoraKuvausFooter soraKuvaus={soraKuvaus} />}
+          footer={
+            <EditSoraKuvausFooter
+              soraKuvaus={soraKuvaus}
+              canUpdate={canUpdate}
+            />
+          }
         >
           <RelationInfoContainer>
             <OrganisaatioRelation organisaatioOid={organisaatioOid} />

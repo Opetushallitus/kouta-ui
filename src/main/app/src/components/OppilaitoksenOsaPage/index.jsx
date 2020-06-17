@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import useOrganisaatio from '#/src/components/useOrganisaatio';
 import FormPage from '#/src/components/FormPage';
 import OppilaitosFormSteps from '#/src/components/OppilaitosFormSteps';
-import OppilaitoksenOsaPageFooter from './OppilaitoksenOsaPageFooter';
 import useApiAsync from '#/src/components/useApiAsync';
 import getOppilaitoksenOsaByOid from '#/src/utils/kouta/getOppilaitoksenOsaByOid';
 import Spin from '#/src/components/Spin';
@@ -11,17 +10,16 @@ import Title from '#/src/components/Title';
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import { ENTITY, CRUD_ROLES } from '#/src/constants';
 import getOrganisaatioContactInfo from '#/src/utils/getOrganisaatioContactInfo';
-
 import OppilaitoksenOsaForm, {
   initialValues as formInitialValues,
 } from '#/src/components/OppilaitoksenOsaForm';
 import koodiUriHasVersion from '#/src/utils/koodiUriHasVersion';
 import getFormValuesByOppilaitoksenOsa from '#/src/utils/getFormValuesByOppilaitoksenOsa';
 import getOppilaitoksenOsaFormConfig from '#/src/utils/getOppilaitoksenOsaFormConfig';
-
 import ReduxForm from '#/src/components/ReduxForm';
-import FormConfigContext from '../FormConfigContext';
+import FormConfigContext from '#/src/components/FormConfigContext';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
+import OppilaitoksenOsaPageFooter from './OppilaitoksenOsaPageFooter';
 
 const OppilaitoksenOsaPage = ({
   match: {
@@ -87,7 +85,7 @@ const OppilaitoksenOsaPage = ({
 
   return (
     <ReduxForm form="oppilaitoksenOsa" initialValues={initialValues}>
-      <FormConfigContext.Provider value={config}>
+      <FormConfigContext.Provider value={{ ...config, readOnly }}>
         <Title>{t('sivuTitlet.oppilaitoksenOsa')}</Title>
         <FormPage
           readOnly={readOnly}

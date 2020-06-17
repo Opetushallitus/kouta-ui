@@ -65,7 +65,7 @@ const EditHakuPage = props => {
   return (
     <ReduxForm form="editHakuForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.haunMuokkaus')}</Title>
-      <FormConfigContext.Provider value={config}>
+      <FormConfigContext.Provider value={{ ...config, readOnly: !canUpdate }}>
         <FormPage
           readOnly={!canUpdate}
           header={<EntityFormHeader entityType={ENTITY.HAKU} entity={haku} />}

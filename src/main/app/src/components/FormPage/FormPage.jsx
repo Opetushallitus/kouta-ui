@@ -88,10 +88,12 @@ const Wrapper = styled.div`
     readOnly &&
     css`
       & .CollapseContent {
-        cursor: not-allowed;
-        opacity: 0.8;
-        & * {
-          pointer-events: none;
+        .ButtonWrapper {
+          opacity: 0.7;
+          cursor: not-allowed;
+          & * {
+            pointer-events: none;
+          }
         }
       }
     `}

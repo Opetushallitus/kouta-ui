@@ -50,6 +50,16 @@ const Container = styled.div`
       border-color: ${getThemeProp('colors.primary.main')};
       box-shadow: 0 0 0 3px ${getThemeProp('colors.primary.focusOutline')};
     `}
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      cursor: not-allowed;
+      & * {
+        background-color: hsl(0, 0%, 95%);
+        pointer-events: none;
+      }
+    `}
 `;
 
 const EditorWrapper = styled.div`
@@ -310,6 +320,7 @@ export const Editor = ({
   inputProps,
   onFocus = () => {},
   onBlur = () => {},
+  disabled,
   ...props
 }) => {
   const editorState = value ? value : emptyEditorState;
@@ -318,8 +329,9 @@ export const Editor = ({
 
   const styleButtonProps = { editorState, onChange, editorRef };
 
+  // TODO: Read toolbar titles  etc. from translations
   return (
-    <Container className="Editor__" hasFocus={hasFocus}>
+    <Container className="Editor__" hasFocus={hasFocus} disabled={disabled}>
       <Toolbar>
         <StyleButton
           icon="format_bold"
@@ -373,6 +385,7 @@ export const Editor = ({
             ref={editorRef}
             editorState={editorState}
             onChange={onChange}
+            readOnly={disabled}
             {...props}
           />
         </EditorContent>

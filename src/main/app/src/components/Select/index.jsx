@@ -129,7 +129,7 @@ const Select = ({
   );
 };
 
-export const CreatableSelect = ({ error = false, id, ...props }) => {
+export const CreatableSelect = ({ error = false, id, disabled, ...props }) => {
   const { t } = useTranslation();
   const theme = useContext(ThemeContext);
 
@@ -139,12 +139,18 @@ export const CreatableSelect = ({ error = false, id, ...props }) => {
       styles={getStyles(theme, error)}
       theme={getTheme(theme)}
       inputId={id}
+      isDisabled={disabled}
       {...props}
     />
   );
 };
 
-export const AsyncCreatableSelect = ({ error = false, id, ...props }) => {
+export const AsyncCreatableSelect = ({
+  error = false,
+  id,
+  disabled,
+  ...props
+}) => {
   const { t } = useTranslation();
   const theme = useContext(ThemeContext);
 
@@ -156,6 +162,7 @@ export const AsyncCreatableSelect = ({ error = false, id, ...props }) => {
       theme={getTheme(theme)}
       cacheOptions={true}
       inputId={id}
+      isDisabled={disabled}
       {...props}
     />
   );

@@ -141,7 +141,6 @@ export const useSaveHakukohde = ({
             })
           : Promise.resolve(),
       ]);
-      console.log(values);
       return validateHakukohdeForm({
         ...values,
         haku,

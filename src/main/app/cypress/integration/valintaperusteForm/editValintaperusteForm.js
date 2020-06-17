@@ -11,7 +11,7 @@ const fillKieliversiotSection = () => {
 };
 
 const tallenna = () => {
-  getByTestId('tallennaValintaperusteButton').click({ force: true });
+  getByTestId('tallennaValintaperusteButton').click();
 };
 
 const prepareTest = tyyppi => {

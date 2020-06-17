@@ -9,7 +9,7 @@ const fillKieliversiotSection = () => {
 };
 
 const tallenna = () => {
-  getByTestId('tallennaOppilaitosButton').click({ force: true });
+  getByTestId('tallennaOppilaitosButton').click();
 };
 
 describe('editOppilaitosForm', () => {

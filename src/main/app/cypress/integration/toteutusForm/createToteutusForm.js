@@ -128,7 +128,7 @@ const fillNayttamistiedotSection = () => {
 };
 
 const tallenna = () => {
-  getByTestId('tallennaToteutusButton').click({ force: true });
+  getByTestId('tallennaToteutusButton').click();
 };
 
 const fillJarjestajatSection = () => {

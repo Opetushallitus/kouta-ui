@@ -51,7 +51,7 @@ const fillJulkisuusSection = () => {
 };
 
 const tallenna = () => {
-  getByTestId('tallennaSoraKuvausButton').click({ force: true });
+  getByTestId('tallennaSoraKuvausButton').click();
 };
 
 const fillTilaSection = (tila = 'julkaistu') => {

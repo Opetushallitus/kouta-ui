@@ -37,7 +37,7 @@ const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
     getHakuByOid({ httpClient, apiUrls, oid: hakuOid }),
   ]);
 
-  const koulutustyyppi = await (toteutus && toteutus.koulutusOid
+  const { koulutustyyppi, tarjoajat } = await (toteutus && toteutus.koulutusOid
     ? getKoulutustyyppiByKoulutusOid({
         oid: toteutus.koulutusOid,
         httpClient,
@@ -50,6 +50,7 @@ const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
     toteutus,
     haku,
     koulutustyyppi,
+    tarjoajat,
   };
 };
 
@@ -65,7 +66,7 @@ const EditHakukohdePage = props => {
   const watch = JSON.stringify([oid, hakukohdeUpdatedAt]);
 
   const {
-    data: { hakukohde, toteutus, haku, koulutustyyppi } = {},
+    data: { hakukohde, toteutus, haku, koulutustyyppi, tarjoajat } = {},
   } = useApiAsync({
     promiseFn: getData,
     oid,
@@ -116,6 +117,7 @@ const EditHakukohdePage = props => {
                 organisaatioOid={organisaatioOid}
                 haku={haku}
                 toteutus={toteutus}
+                tarjoajat={tarjoajat}
                 hakukohde={hakukohde}
                 koulutustyyppi={
                   koulutustyyppi || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS

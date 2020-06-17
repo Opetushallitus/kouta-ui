@@ -31,6 +31,7 @@ const getFormValuesByHakukohde = hakukohde => {
     hakulomakeKuvaus,
     hakulomakeLinkki,
     kaytetaanHaunAlkamiskautta,
+    jarjestyspaikkaOid,
     tila,
     pohjakoulutusvaatimusTarkenne,
   } = hakukohde;
@@ -83,6 +84,7 @@ const getFormValuesByHakukohde = hakukohde => {
         }
       : undefined,
     valintakokeet: getKokeetTaiLisanaytotValues(valintakokeet),
+    jarjestyspaikkaOid,
     liitteet: {
       toimitustapa: {
         tapa: liitteidenToimitustapa || '',

@@ -505,6 +505,8 @@ export default {
       'Joista ensikertalaisten aloituspaikkojen lukumäärä',
     valitseValintakokeenTyyppi: 'Valitse valintakokeen tyyppi',
     tarvittavatLiitteet: 'Tarvittavat liitteet',
+    hakukohteenJarjestyspaikka: 'Hakukohteen järjestyspaikka',
+    valitseJarjestyspaikka: 'Valitse missä hakukohde järjestetään',
     lisaaLiite: 'Lisää liite',
     toimitusaika: 'Toimitusaika',
     kaytaLiitteilleYhteistaToimitusaikaa:

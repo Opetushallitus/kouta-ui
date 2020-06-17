@@ -1,28 +1,36 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import { KOULUTUSTYYPPI } from '#/src/constants';
 import FormCollapse from '#/src/components/FormCollapse';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
 import KokeetTaiLisanaytotSection from '#/src/components/KokeetTaiLisanaytotSection';
 import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import { useFieldValue } from '#/src/hooks/form';
-import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import PerustiedotSection from './PerustiedotSection';
 import PohjakoulutusSection from './PohjakoulutusSection';
 import AloituspaikatSection from './AloituspaikatSection';
 import LiitteetSection from './LiitteetSection';
 import KuvausSection from './KuvausSection';
+import { useTranslation } from 'react-i18next';
+import { useFieldValue } from '#/src/hooks/form';
+import JulkaisutilaField from '#/src/components/JulkaisutilaField';
+import JarjestyspaikkaSection from './JarjestyspaikkaSection';
 
 const HakukohdeForm = ({
   steps = true,
   organisaatioOid,
   haku,
   toteutus,
+  tarjoajat,
   koulutustyyppi = KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
   showArkistoituTilaOption = true,
 }) => {
   const { t } = useTranslation();
   const languages = useFieldValue('kieliversiot') || [];
+  const {
+    metadata: {
+      opetus: { opetustapaKoodiUrit },
+    },
+  } = toteutus;
 
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps} configured>
@@ -80,6 +88,14 @@ const HakukohdeForm = ({
         languages={languages}
         Component={LiitteetSection}
         organisaatioOid={organisaatioOid}
+      />
+
+      <FormCollapse
+        section="jarjestyspaikkaOid"
+        header={t('hakukohdelomake.hakukohteenJarjestyspaikka')}
+        tarjoajat={tarjoajat}
+        opetustapaKoodiUrit={opetustapaKoodiUrit}
+        Component={JarjestyspaikkaSection}
       />
 
       <FormCollapse

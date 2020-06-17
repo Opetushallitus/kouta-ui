@@ -11,7 +11,6 @@ import AloituspaikatSection from './AloituspaikatSection';
 import LiitteetSection from './LiitteetSection';
 import KuvausSection from './KuvausSection';
 import { useTranslation } from 'react-i18next';
-import { useFieldValue } from '#/src/hooks/form';
 import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import JarjestyspaikkaSection from './JarjestyspaikkaSection';
 

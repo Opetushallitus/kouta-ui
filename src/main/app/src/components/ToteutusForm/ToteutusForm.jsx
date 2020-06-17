@@ -32,11 +32,11 @@ const ToteutusForm = ({
   organisaatioOid,
   steps = false,
   canSelectBase = true,
-  toteutus,
-  onAttachHakukohde,
+  toteutus = undefined,
+  onAttachHakukohde = undefined,
   koulutustyyppi = KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
   showArkistoituTilaOption = true,
-  onSelectBase = () => {},
+  onSelectBase = undefined,
 }) => {
   const { t } = useTranslation();
   const kieliversiot = useFieldValue('kieliversiot');

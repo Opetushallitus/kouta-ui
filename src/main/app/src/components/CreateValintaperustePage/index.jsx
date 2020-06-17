@@ -7,13 +7,14 @@ import FormPage, {
   RelationInfoContainer,
   FormFooter,
 } from '#/src/components/FormPage';
-import ValintaperusteFormWrapper from './ValintaperusteFormWrapper';
 import useSelectBase from '#/src/components/useSelectBase';
 import Title from '#/src/components/Title';
 import ReduxForm from '#/src/components/ReduxForm';
 import { POHJAVALINTA, ENTITY } from '#/src/constants';
 import getFormValuesByValintaperuste from '#/src/utils/getFormValuesByValintaperuste';
-import { initialValues } from '#/src/components/ValintaperusteForm';
+import ValintaperusteForm, {
+  initialValues,
+} from '#/src/components/ValintaperusteForm';
 import getValintaperusteByOid from '#/src/utils/kouta/getValintaperusteByOid';
 import useApiAsync from '#/src/components/useApiAsync';
 import FormHeader from '#/src/components/FormHeader';
@@ -21,6 +22,8 @@ import FormSteps from '#/src/components/FormSteps';
 import createValintaperuste from '#/src/utils/kouta/createValintaperuste';
 import getValintaperusteByFormValues from '#/src/utils/getValintaperusteByFormValues';
 import { useSaveValintaperuste } from '#/src/hooks/formSaveHooks';
+import FormConfigContext from '#/src/components/FormConfigContext';
+import { useEntityFormConfig, useFieldValue } from '#/src/hooks/form';
 
 const resolveFn = () => Promise.resolve(null);
 
@@ -93,26 +96,30 @@ const CreateValintaperustePage = props => {
 
   const save = useSaveValintaperuste({ submit, formName: FORM_NAME });
 
+  const koulutustyyppi = useFieldValue('perustiedot.tyyppi', FORM_NAME);
+
+  const config = useEntityFormConfig(ENTITY.VALINTAPERUSTE, koulutustyyppi);
+
   return (
     <ReduxForm form={FORM_NAME} initialValues={initialValues}>
       <Title>{t('sivuTitlet.uusiValintaperuste')}</Title>
-      <FormPage
-        header={<FormHeader>{t('yleiset.valintaperusteet')}</FormHeader>}
-        steps={<FormSteps activeStep={ENTITY.VALINTAPERUSTE} />}
-        footer={<FormFooter entity={ENTITY.VALINTAPERUSTE} save={save} />}
-      >
-        <RelationInfoContainer>
-          <OrganisaatioRelation organisaatioOid={luojaOrganisaatioOid} />
-        </RelationInfoContainer>
-        <ValintaperusteFormWrapper
-          steps
-          organisaatioOid={luojaOrganisaatioOid}
-          kopioValintaperusteOid={kopioValintaperusteOid}
-          onSelectBase={selectBase}
-          showArkistoituTilaOption={false}
-          kieliValinnat={kieliValinnatLista}
-        />
-      </FormPage>
+      <FormConfigContext.Provider value={config}>
+        <FormPage
+          header={<FormHeader>{t('yleiset.valintaperusteet')}</FormHeader>}
+          steps={<FormSteps activeStep={ENTITY.VALINTAPERUSTE} />}
+          footer={<FormFooter entity={ENTITY.VALINTAPERUSTE} save={save} />}
+        >
+          <RelationInfoContainer>
+            <OrganisaatioRelation organisaatioOid={luojaOrganisaatioOid} />
+          </RelationInfoContainer>
+          <ValintaperusteForm
+            steps
+            organisaatioOid={luojaOrganisaatioOid}
+            onSelectBase={selectBase}
+            showArkistoituTilaOption={false}
+          />
+        </FormPage>
+      </FormConfigContext.Provider>
     </ReduxForm>
   );
 };

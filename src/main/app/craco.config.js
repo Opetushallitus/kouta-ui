@@ -1,4 +1,3 @@
-const _ = require('lodash');
 const { ESLINT_MODES } = require('@craco/craco');
 const alias = require('./webpack-alias');
 const isDev = process.env.NODE_ENV === 'development';
@@ -6,7 +5,7 @@ const isDev = process.env.NODE_ENV === 'development';
 const deletePlugins = (plugins = []) => config => ({
   ...config,
   plugins: config.plugins.filter(
-    plugin => !plugins.includes(_.get(plugin, 'constructor.name'))
+    plugin => !plugins.includes(plugin.constructor.name)
   ),
 });
 
@@ -18,12 +17,7 @@ module.exports = {
   babel: {
     plugins: [
       'lodash',
-      [
-        'styled-components',
-        {
-          pure: true,
-        },
-      ],
+      ['styled-components', { displayName: isDev, pure: true }],
     ],
   },
   webpack: {

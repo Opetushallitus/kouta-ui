@@ -143,6 +143,12 @@ Object {
         "sv": "Sv stipendikuvaus",
       },
       "stipendinMaara": 20,
+      "suunniteltuKestoKuukaudet": 6,
+      "suunniteltuKestoKuvaus": Object {
+        "fi": "Fi aikakuvaus",
+        "sv": "Sv aikakuvaus",
+      },
+      "suunniteltuKestoVuodet": 2,
     },
     "osaamisalat": Array [
       Object {
@@ -168,10 +174,6 @@ Object {
         },
       },
     ],
-    "suunniteltuKesto": Object {
-      "fi": "Fi kesto",
-      "sv": "Sv kesto",
-    },
     "toteutusjaksot": Array [
       Object {
         "ilmoittautumislinkki": Object {

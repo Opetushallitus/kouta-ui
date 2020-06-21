@@ -15,6 +15,12 @@ const getBaseFields = () => ({
       opetuskieletKuvaus: {
         fi: 'Opetuskieli kuvaus',
       },
+      suunniteltuKestoKuvaus: {
+        fi: 'Fi suunniteltuKestoKuvaus',
+        sv: 'Sv suunniteltuKestoKuvaus',
+      },
+      suunniteltuKestoVuodet: 2,
+      suunniteltuKestoKuukaudet: 6,
       opetusaikaKoodiUrit: ['opetusaikakk_1#1'],
       opetusaikaKuvaus: {
         fi: 'Opetusaika kuvaus',

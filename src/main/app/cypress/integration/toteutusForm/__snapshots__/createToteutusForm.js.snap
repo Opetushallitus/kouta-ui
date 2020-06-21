@@ -73,7 +73,12 @@ exports[`createToteutusForm > should be able to create ammatillinen toteutus #0`
         "fi": "opetustapa kuvaus"
       },
       "stipendinKuvaus": {},
-      "stipendinMaara": null
+      "stipendinMaara": null,
+      "suunniteltuKestoKuukaudet": 6,
+      "suunniteltuKestoKuvaus": {
+        "fi": "suunniteltu kesto kuvaus"
+      },
+      "suunniteltuKestoVuodet": 2
     },
     "osaamisalat": [
       {
@@ -86,7 +91,6 @@ exports[`createToteutusForm > should be able to create ammatillinen toteutus #0`
         }
       }
     ],
-    "suunniteltuKesto": {},
     "toteutusjaksot": [],
     "tutkinnonOsat": [],
     "tyyppi": "amm",
@@ -216,10 +220,14 @@ exports[`createToteutusForm > should be able to create korkeakoulu toteutus #0`]
       "stipendinKuvaus": {
         "fi": "stipendi kuvaus"
       },
-      "stipendinMaara": 20
+      "stipendinMaara": 20,
+      "suunniteltuKestoKuukaudet": 6,
+      "suunniteltuKestoKuvaus": {
+        "fi": "suunniteltu kesto kuvaus"
+      },
+      "suunniteltuKestoVuodet": 2
     },
     "osaamisalat": [],
-    "suunniteltuKesto": {},
     "toteutusjaksot": [],
     "tutkinnonOsat": [],
     "tyyppi": "yo",
@@ -363,10 +371,14 @@ exports[`createToteutusForm > should be able to create lukio toteutus #0`] =
       "stipendinKuvaus": {
         "fi": "stipendi kuvaus"
       },
-      "stipendinMaara": 20
+      "stipendinMaara": 20,
+      "suunniteltuKestoKuukaudet": 6,
+      "suunniteltuKestoKuvaus": {
+        "fi": "suunniteltu kesto kuvaus"
+      },
+      "suunniteltuKestoVuodet": 2
     },
     "osaamisalat": [],
-    "suunniteltuKesto": {},
     "toteutusjaksot": [],
     "tutkinnonOsat": [],
     "tyyppi": "lk",

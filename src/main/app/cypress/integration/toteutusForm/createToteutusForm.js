@@ -42,6 +42,16 @@ const fillOpetuskieli = () => {
   });
 };
 
+const fillSuunniteltuKesto = () => {
+  getByTestId('suunniteltuKesto').within(() => {
+    getByTestId('suunniteltuKestoVuotta').type('2');
+    getByTestId('suunniteltuKestoKuukautta').type('6');
+    getByTestId('suunniteltuKestoKuvaus').pipe(
+      paste('suunniteltu kesto kuvaus')
+    );
+  });
+};
+
 const fillOpetusaika = () => {
   getByTestId('opetusaika').within(() => {
     getCheckbox('opetusaikakk_0#1').click({ force: true });
@@ -100,6 +110,7 @@ const fillOsiot = () => {
 
 const fillCommonJarjestamistiedot = ({ maksullisuusTyyppi = 'kylla' } = {}) => {
   fillOpetuskieli();
+  fillSuunniteltuKesto();
   fillOpetusaika();
   fillOpetustapa();
   fillMaksullisuus(maksullisuusTyyppi);
@@ -228,6 +239,8 @@ const fillKielivalikoima = () => {
   });
 };
 
+const toteutusOid = '1.2.3.4.5.6';
+
 const prepareTest = tyyppi => {
   const organisaatioOid = '1.1.1.1.1.1';
   const koulutusOid = '1.2.1.1.1.1';
@@ -249,6 +262,13 @@ const prepareTest = tyyppi => {
     url: `**/koulutus/${koulutusOid}`,
     response: merge(koulutus({ tyyppi }), testKoulutusFields),
   });
+
+  cy.route({
+    method: 'GET',
+    url: `**/toteutus/${toteutusOid}`,
+    response: [],
+  });
+
   cy.visit(`/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/toteutus`);
 };
 
@@ -260,7 +280,7 @@ describe('createToteutusForm', () => {
       method: 'PUT',
       url: '**/toteutus',
       response: {
-        oid: '1.2.3.4.5.6',
+        oid: toteutusOid,
       },
     }).as('createAmmToteutusResponse');
 
@@ -311,7 +331,7 @@ describe('createToteutusForm', () => {
       method: 'PUT',
       url: '**/toteutus',
       response: {
-        oid: '1.2.3.4.5.6',
+        oid: toteutusOid,
       },
     }).as('createYoToteutusResponse');
 
@@ -355,7 +375,7 @@ describe('createToteutusForm', () => {
       method: 'PUT',
       url: '**/toteutus',
       response: {
-        oid: '1.2.3.4.5.6',
+        oid: toteutusOid,
       },
     }).as('createLkToteutusResponse');
 

@@ -77,7 +77,12 @@ exports[`editToteutusForm > should be able to edit ammatillinen toteutus #0`] =
       "stipendinKuvaus": {
         "fi": "Stipendin kuvaus"
       },
-      "stipendinMaara": 90
+      "stipendinMaara": 90,
+      "suunniteltuKestoKuukaudet": 6,
+      "suunniteltuKestoKuvaus": {
+        "fi": "Fi suunniteltuKestoKuvaus"
+      },
+      "suunniteltuKestoVuodet": 2
     },
     "osaamisalat": [
       {
@@ -90,7 +95,6 @@ exports[`editToteutusForm > should be able to edit ammatillinen toteutus #0`] =
         }
       }
     ],
-    "suunniteltuKesto": {},
     "toteutusjaksot": [],
     "tutkinnonOsat": [],
     "tyyppi": "amm",
@@ -224,10 +228,14 @@ exports[`editToteutusForm > should be able to edit korkeakoulu toteutus #0`] =
       "stipendinKuvaus": {
         "fi": "Stipendin kuvaus"
       },
-      "stipendinMaara": 90
+      "stipendinMaara": 90,
+      "suunniteltuKestoKuukaudet": 6,
+      "suunniteltuKestoKuvaus": {
+        "fi": "Fi suunniteltuKestoKuvaus"
+      },
+      "suunniteltuKestoVuodet": 2
     },
     "osaamisalat": [],
-    "suunniteltuKesto": {},
     "toteutusjaksot": [],
     "tutkinnonOsat": [],
     "tyyppi": "yo",
@@ -377,10 +385,14 @@ exports[`editToteutusForm > should be able to edit lukio toteutus #0`] =
       "stipendinKuvaus": {
         "fi": "Stipendin kuvaus"
       },
-      "stipendinMaara": 90
+      "stipendinMaara": 90,
+      "suunniteltuKestoKuukaudet": 6,
+      "suunniteltuKestoKuvaus": {
+        "fi": "Fi suunniteltuKestoKuvaus"
+      },
+      "suunniteltuKestoVuodet": 2
     },
     "osaamisalat": [],
-    "suunniteltuKesto": {},
     "toteutusjaksot": [],
     "tutkinnonOsat": [],
     "tyyppi": "lk",

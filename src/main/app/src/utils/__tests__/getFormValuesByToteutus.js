@@ -81,6 +81,12 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
         },
         onkoMaksullinen: true,
         onkoStipendia: true,
+        suunniteltuKestoKuvaus: {
+          fi: 'Fi suunniteltuKestoKuvaus',
+          sv: 'Sv suunniteltuKestoKuvaus',
+        },
+        suunniteltuKestoVuodet: 2,
+        suunniteltuKestoKuukaudet: 6,
         opetusaikaKoodiUrit: ['opetusaika_1#1'],
         opetusaikaKuvaus: {
           fi: 'Fi aikakuvaus',

@@ -129,6 +129,14 @@ Object {
       "sv": "Sv stipendikuvaus",
     },
     "stipendinMaara": 20,
+    "suunniteltuKesto": Object {
+      "kuukautta": 6,
+      "vuotta": 2,
+    },
+    "suunniteltuKestoKuvaus": Object {
+      "fi": "Fi suunniteltuKestoKuvaus",
+      "sv": "Sv suunniteltuKestoKuvaus",
+    },
   },
   "kieliversiot": Array [
     "fi",
@@ -209,10 +217,6 @@ Object {
     "ilmoittautumislinkki": Object {
       "fi": "Fi linkki",
       "sv": "Sv linkki",
-    },
-    "kesto": Object {
-      "fi": "Fi kesto",
-      "sv": "Sv kesto",
     },
     "laajuus": "25",
     "laajuusyksikko": Object {

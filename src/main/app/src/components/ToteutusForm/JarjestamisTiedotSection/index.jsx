@@ -2,43 +2,36 @@ import React, { useMemo } from 'react';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
 import { get, isArray } from 'lodash';
-
 import { useTranslation } from 'react-i18next';
-import Spacing from '../../Spacing';
-import OpetusaikaCheckboxGroup from './OpetusaikaCheckboxGroup';
-import OpetuskieliCheckboxGroup from './OpetuskieliCheckboxGroup';
-import OpetustapaCheckboxGroup from './OpetustapaCheckboxGroup';
-import Flex, { FlexItem } from '../../Flex';
-import InputIcon from '../../InputIcon';
-import AlkamiskausiFields from './AlkamiskausiFields';
-import useKoodistoOptions from '../../useKoodistoOptions';
-import { getTestIdProps } from '../../../utils';
-import NoYesRadioGroup from '../../NoYesRadioGroup';
-import MaksullisuusFields from './MaksullisuusFields';
-import isKorkeakouluKoulutustyyppi from '../../../utils/isKorkeakouluKoulutustyyppi';
-import { useFieldValue } from '#/src/hooks/form';
-import FormConfigFragment from '../../FormConfigFragment';
-import DiplomiFields from './DiplomiFields';
-import KielivalikoimaFields from './KielivalikoimaFields';
-import FieldGroup from '#/src/components/FieldGroup';
 
+import Spacing from '#/src/components/Spacing';
+import Flex, { FlexItem } from '#/src/components/Flex';
+import InputIcon from '#/src/components/InputIcon';
+import useKoodistoOptions from '#/src/components/useKoodistoOptions';
+import { getTestIdProps } from '#/src/utils';
+import isKorkeakouluKoulutustyyppi from '#/src/utils/isKorkeakouluKoulutustyyppi';
+import { useFieldValue } from '#/src/hooks/form';
+import FormConfigFragment from '#/src/components/FormConfigFragment';
+import FieldGroup from '#/src/components/FieldGroup';
 import {
   FormFieldTextarea,
   FormFieldSelect,
   FormFieldInput,
   createFormFieldComponent,
-} from '../../formFields';
+  FormFieldRadioGroup,
+} from '#/src/components/formFields';
+import FormLabel from '#/src/components/FormLabel';
+
+import MaksullisuusFields from './MaksullisuusFields';
+import AlkamiskausiFields from './AlkamiskausiFields';
+import DiplomiFields from './DiplomiFields';
+import KielivalikoimaFields from './KielivalikoimaFields';
+import OpetusaikaCheckboxGroup from './OpetusaikaCheckboxGroup';
+import OpetuskieliCheckboxGroup from './OpetuskieliCheckboxGroup';
+import OpetustapaCheckboxGroup from './OpetustapaCheckboxGroup';
 
 const makeCountLimitOnChange = (onChange, max) => items =>
   isArray(items) && items.length <= max && onChange(items);
-
-const NoYesField = createFormFieldComponent(
-  NoYesRadioGroup,
-  ({ input, ...props }) => ({
-    ...input,
-    ...props,
-  })
-);
 
 const OpetusaikaField = createFormFieldComponent(
   OpetusaikaCheckboxGroup,
@@ -114,11 +107,10 @@ const StipendiFields = ({ language, name }) => {
   return (
     <Flex {...getTestIdProps('stipendi')}>
       <FlexItem grow={0} basis="30%">
-        {/* TODO: Use FormFieldRadioGroup instead of NoYesField */}
         <Field
           label={t('toteutuslomake.valitseKaytettavaApurahoitus')}
           name={`${name}.onkoStipendia`}
-          component={NoYesField}
+          component={FormFieldRadioGroup}
           options={[
             {
               label: t('toteutuslomake.stipendi'),

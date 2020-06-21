@@ -214,8 +214,6 @@ const getToteutusByFormValues = values => {
     ? parseInt(values.tiedot.aloituspaikat)
     : null;
 
-  const suunniteltuKesto = pick(get(values, 'tiedot.kesto'), kielivalinta);
-
   const toteutusjaksot = (get(values, 'toteutusjaksot') || []).map(
     ({ nimi, koodi, laajuus, ilmoittautumislinkki, kuvaus, sisalto }) => ({
       nimi: pick(nimi, kielivalinta),
@@ -289,7 +287,6 @@ const getToteutusByFormValues = values => {
       laajuusyksikkoKoodiUri,
       ilmoittautumislinkki,
       aloituspaikat,
-      suunniteltuKesto,
       toteutusjaksot,
       tutkinnonOsat,
     },

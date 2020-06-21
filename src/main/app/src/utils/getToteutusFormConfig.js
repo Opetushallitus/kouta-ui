@@ -64,16 +64,6 @@ const config = createFormConfigBuilder().registerSections([
           KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS
         ),
       },
-      {
-        field: '.kesto',
-        koulutustyypit: [
-          KOULUTUSTYYPPI.VALMA,
-          KOULUTUSTYYPPI.TELMA,
-          KOULUTUSTYYPPI.OSAAMISALA,
-          KOULUTUSTYYPPI.LUVA,
-          KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS,
-        ],
-      },
     ],
   },
   {

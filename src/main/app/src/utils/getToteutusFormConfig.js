@@ -171,6 +171,28 @@ const config = createFormConfigBuilder().registerSections([
         name: 'jarjestamistiedot.opetuskieliKuvaus',
       }),
       {
+        field: '.suunniteltuKesto',
+        validate: validateIfJulkaistu(
+          eb =>
+            eb.validateExistence(
+              'jarjestamistiedot.suunniteltuKesto.kuukautta'
+            ) &&
+            eb.validateExistence('jarjestamistiedot.suunniteltuKesto.vuotta')
+        ),
+        required: true,
+      },
+      {
+        field: '.suunniteltuKesto.vuotta',
+        required: false,
+      },
+      {
+        field: '.suunniteltuKesto.kuukautta',
+        required: false,
+      },
+      createOptionalTranslatedFieldConfig({
+        name: 'jarjestamistiedot.suunniteltuKestoKuvaus',
+      }),
+      {
         field: '.opetusaika',
         validate: validateIfJulkaistu(eb =>
           eb.validateArrayMinLength('jarjestamistiedot.opetusaika', 1)

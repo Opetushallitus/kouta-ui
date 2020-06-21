@@ -407,6 +407,7 @@ export default {
     apuraha: 'Apuraha',
     valitseKaytettavaApurahoitus: 'Valitse kaytettava apurahoitus',
     stipendi: 'Stipendi',
+    stipendinMaaraHelperText: 'Euroa tai prosenttia',
     eiKaytossa: 'Ei käytössä',
     koulutuksenAjankohta: 'Koulutuksen ajankohta',
     koulutuksenAlkamiskausi: 'Valitse alkamiskausi',
@@ -462,6 +463,8 @@ export default {
     koulutuksellaEiEPerustetta:
       'Valittuun koulutukseen ei ole liitetty ePerustetta.',
     valitseMissaJarjestetaan: 'Valitse missä toteutus järjestetään',
+    vuotta: 'Vuotta',
+    kuukautta: 'Kuukautta',
   },
   hakulomake: {
     haunNimi: 'Haun nimi',

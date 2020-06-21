@@ -72,23 +72,27 @@ const OsiotFields = ({ language, osiotOptions, name }) => {
         : get(
             osiotOptions.find(({ value: v }) => v === value),
             'label'
-          ) || null,
+          ) || null, // TODO: Use something else than null as a label, when not found
     }));
   }, [osiotArr, osiotOptions]);
 
-  return osiotArrWithLabels.map(({ value, label }, index) => (
-    <Spacing
-      marginBottom={index !== osiot.length - 1 ? 2 : 0}
-      key={value}
-      {...getTestIdProps(`osioKuvaus.${value}`)}
-    >
-      <Field
-        name={`${name}.osioKuvaukset.${value}.${language}`}
-        component={FormFieldTextarea}
-        label={label}
-      />
-    </Spacing>
-  ));
+  return (
+    <>
+      {osiotArrWithLabels.map(({ value, label }, index) => (
+        <Spacing
+          marginBottom={index !== osiot.length - 1 ? 2 : 0}
+          key={value}
+          {...getTestIdProps(`osioKuvaus.${value}`)}
+        >
+          <Field
+            name={`${name}.osioKuvaukset.${value}.${language}`}
+            component={FormFieldTextarea}
+            label={label}
+          />
+        </Spacing>
+      ))}
+    </>
+  );
 };
 
 const ExtraFieldWrapper = styled.div`
@@ -129,7 +133,7 @@ const StipendiFields = ({ language, name }) => {
                 name={`${name}.stipendinMaara`}
                 component={FormFieldInput}
                 placeholder={t('yleiset.maara')}
-                helperText="Euroa tai prosenttia"
+                helperText={t('toteutuslomake.stipendinMaaraHelperText')}
                 suffix={<InputIcon type="euro_symbol" />}
                 type="number"
               />
@@ -145,6 +149,38 @@ const StipendiFields = ({ language, name }) => {
         />
       </FlexItem>
     </Flex>
+  );
+};
+
+const SuunniteltuKestoFields = ({ name }) => {
+  const { t } = useTranslation();
+  return (
+    <FieldGroup
+      name={`${name}.suunniteltuKesto`}
+      title="Opintojen suunniteltu kesto"
+      HeadingComponent={FormLabel}
+    >
+      <Flex>
+        <FlexItem>
+          <Field
+            name={`${name}.suunniteltuKesto.vuotta`}
+            component={FormFieldInput}
+            placeholder={t('toteutuslomake.vuotta')}
+            type="number"
+            {...getTestIdProps('suunniteltuKestoVuotta')}
+          />
+        </FlexItem>
+        <FlexItem ml={2}>
+          <Field
+            name={`${name}.suunniteltuKesto.kuukautta`}
+            component={FormFieldInput}
+            placeholder={t('toteutuslomake.kuukautta')}
+            type="number"
+            {...getTestIdProps('suunniteltuKestoKuukautta')}
+          />
+        </FlexItem>
+      </Flex>
+    </FieldGroup>
   );
 };
 
@@ -173,6 +209,21 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
               name={`${name}.opetuskieliKuvaus.${language}`}
               component={FormFieldTextarea}
               label={t('yleiset.tarkempiKuvaus')}
+            />
+          </FlexItem>
+        </Flex>
+      </FieldGroup>
+      <FieldGroup title={t('toteutuslomake.suunniteltuKesto')}>
+        <Flex {...getTestIdProps('suunniteltuKesto')}>
+          <FlexItem grow={0} basis="30%">
+            <SuunniteltuKestoFields name={name} />
+          </FlexItem>
+          <FlexItem grow={1} paddingLeft={4}>
+            <Field
+              name={`${name}.suunniteltuKestoKuvaus.${language}`}
+              component={FormFieldTextarea}
+              label={t('yleiset.tarkempiKuvaus')}
+              {...getTestIdProps('suunniteltuKestoKuvaus')}
             />
           </FlexItem>
         </Flex>
@@ -223,7 +274,6 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
             <MaksullisuusFields
               isKorkeakoulu={isKorkeakoulu}
               name={`${name}.maksullisuus`}
-              language={language}
               label={t('toteutuslomake.onkoOpetusMaksullista')}
             />
           </FlexItem>

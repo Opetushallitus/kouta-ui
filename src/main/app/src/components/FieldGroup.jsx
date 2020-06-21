@@ -6,15 +6,21 @@ import {
   useFieldIsRequired,
 } from '#/src/hooks/fieldConfigHooks';
 
-export const FieldGroup = ({ title, children, name = undefined, ...props }) => {
+export const FieldGroup = ({
+  title,
+  children,
+  HeadingComponent = DividerHeading,
+  name = undefined,
+  ...props
+}) => {
   const fieldConfig = useFieldConfig(name);
   const required = useFieldIsRequired(fieldConfig);
 
   return !name || fieldConfig ? (
     <Box marginBottom={4} {...props}>
-      <DividerHeading>
+      <HeadingComponent>
         {title} {required ? '*' : ''}
-      </DividerHeading>
+      </HeadingComponent>
       {children}
     </Box>
   ) : (

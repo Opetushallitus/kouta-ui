@@ -17,7 +17,8 @@ const getOsaamisalatByValues = ({ osaamisalat, kielivalinta }) => {
 };
 
 const getToteutusByFormValues = values => {
-  const { koulutustyyppi, tila, muokkaaja } = values;
+  const { koulutustyyppi, tila, muokkaaja, jarjestamistiedot } = values;
+
   const kielivalinta = getKielivalinta(values);
   const tarjoajat = get(values, 'tarjoajat') || [];
   const nimi = pick(get(values, 'tiedot.nimi') || {}, kielivalinta);
@@ -70,6 +71,16 @@ const getToteutusByFormValues = values => {
     get(values, 'jarjestamistiedot.opetuskieliKuvaus') || {},
     kielivalinta
   );
+
+  const suunniteltuKestoVuodet = jarjestamistiedot?.suunniteltuKesto?.vuotta;
+  const suunniteltuKestoKuukaudet =
+    jarjestamistiedot?.suunniteltuKesto?.kuukautta;
+
+  const suunniteltuKestoKuvaus = pick(
+    jarjestamistiedot?.suunniteltuKestoKuvaus || {},
+    kielivalinta
+  );
+
   const opetusaikaKuvaus = pick(
     get(values, 'jarjestamistiedot.opetusaikaKuvaus') || {},
     kielivalinta
@@ -261,6 +272,9 @@ const getToteutusByFormValues = values => {
         B2Kielivalikoima,
         B3Kielivalikoima,
         muuKielivalikoima,
+        suunniteltuKestoVuodet,
+        suunniteltuKestoKuukaudet,
+        suunniteltuKestoKuvaus,
       },
       lukiolinjaKoodiUri,
       osaamisalat,

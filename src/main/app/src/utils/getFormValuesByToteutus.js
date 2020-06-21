@@ -120,6 +120,11 @@ const getFormValuesByToteutus = toteutus => {
       opetustapa: get(opetus, 'opetustapaKoodiUrit') || [],
       opetusaika: get(opetus, 'opetusaikaKoodiUrit') || [],
       opetuskieli: get(opetus, 'opetuskieliKoodiUrit') || [],
+      suunniteltuKestoKuvaus: opetus?.suunniteltuKestoKuvaus || {},
+      suunniteltuKesto: {
+        vuotta: opetus?.suunniteltuKestoVuodet,
+        kuukautta: opetus?.suunniteltuKestoKuukaudet,
+      },
       opetusaikaKuvaus: get(opetus, 'opetusaikaKuvaus') || {},
       opetustapaKuvaus: get(opetus, 'opetustapaKuvaus') || {},
       opetuskieliKuvaus: get(opetus, 'opetuskieletKuvaus') || {},

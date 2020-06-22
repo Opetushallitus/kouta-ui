@@ -111,6 +111,22 @@ class ErrorBuilder {
     return this;
   }
 
+  validateInteger(path, { min, max, optional }, message = undefined) {
+    const errorMessage = message || 'validointivirheet.kokonaislukuValilta';
+    const value = this.getValue(path);
+
+    if (optional && (_.isNil(value) || value === '')) {
+      return this;
+    }
+
+    const integerValue = _.parseInt(value);
+    if (_.isNaN(integerValue) || integerValue < min || integerValue > max) {
+      this.setError(path, t => t(errorMessage, { min, max }));
+    }
+
+    return this;
+  }
+
   getErrors() {
     return this.errors;
   }
@@ -125,6 +141,7 @@ export const validateArrayMinLength = bindValidator('validateArrayMinLength');
 export const validateExistence = bindValidator('validateExistence');
 export const validateTranslations = bindValidator('validateTranslations');
 export const validateUrl = bindValidator('validateUrl');
+export const validateInteger = bindValidator('validateInteger');
 
 const createErrorBuilder = values => new ErrorBuilder(values);
 

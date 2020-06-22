@@ -1,4 +1,4 @@
-import { get, pick, toPairs } from 'lodash';
+import { get, pick, toPairs, parseInt, isNaN } from 'lodash';
 
 import { isNumeric, getKoutaDateString } from './index';
 import serializeSisaltoField from './serializeSisaltoField';
@@ -14,6 +14,14 @@ const getOsaamisalatByValues = ({ osaamisalat, kielivalinta }) => {
       otsikko: pick(otsikko, kielivalinta),
     })
   );
+};
+
+const toOptionalInteger = value => {
+  const integerValue = parseInt(value);
+  if (value === '') {
+    return null;
+  }
+  return isNaN(integerValue) ? value : integerValue;
 };
 
 const getToteutusByFormValues = values => {
@@ -72,9 +80,12 @@ const getToteutusByFormValues = values => {
     kielivalinta
   );
 
-  const suunniteltuKestoVuodet = jarjestamistiedot?.suunniteltuKesto?.vuotta;
-  const suunniteltuKestoKuukaudet =
-    jarjestamistiedot?.suunniteltuKesto?.kuukautta;
+  const suunniteltuKestoVuodet = toOptionalInteger(
+    jarjestamistiedot?.suunniteltuKesto?.vuotta
+  );
+  const suunniteltuKestoKuukaudet = toOptionalInteger(
+    jarjestamistiedot?.suunniteltuKesto?.kuukautta
+  );
 
   const suunniteltuKestoKuvaus = pick(
     jarjestamistiedot?.suunniteltuKestoKuvaus || {},

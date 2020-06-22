@@ -3,6 +3,11 @@ import _ from 'lodash';
 import createFormConfigBuilder from './createFormConfigBuilder';
 
 import {
+  validateExistence,
+  validateInteger,
+} from '#/src/utils/createErrorBuilder';
+
+import {
   KOULUTUSTYYPPI,
   KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
@@ -162,22 +167,37 @@ const config = createFormConfigBuilder().registerSections([
       }),
       {
         field: '.suunniteltuKesto',
-        validate: validateIfJulkaistu(
-          eb =>
-            eb.validateExistence(
-              'jarjestamistiedot.suunniteltuKesto.kuukautta'
-            ) &&
-            eb.validateExistence('jarjestamistiedot.suunniteltuKesto.vuotta')
-        ),
         required: true,
       },
       {
         field: '.suunniteltuKesto.vuotta',
         required: false,
+        validate: validateIfJulkaistu(
+          _.compose(
+            validateInteger('jarjestamistiedot.suunniteltuKesto.vuotta', {
+              min: 0,
+              max: 99,
+              optional: true,
+            }),
+            validateIfJulkaistu(
+              validateExistence('jarjestamistiedot.suunniteltuKesto.vuotta')
+            )
+          )
+        ),
       },
       {
         field: '.suunniteltuKesto.kuukautta',
         required: false,
+        validate: _.compose(
+          validateInteger('jarjestamistiedot.suunniteltuKesto.kuukautta', {
+            min: 0,
+            max: 11,
+            optional: true,
+          }),
+          validateIfJulkaistu(
+            validateExistence('jarjestamistiedot.suunniteltuKesto.kuukautta')
+          )
+        ),
       },
       createOptionalTranslatedFieldConfig({
         name: 'jarjestamistiedot.suunniteltuKestoKuvaus',

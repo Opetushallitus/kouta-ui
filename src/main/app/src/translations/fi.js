@@ -265,6 +265,7 @@ export default {
     listaVahintaanYksi: 'Tälle kentälle täytyy syöttää vähintään yksi arvo',
     listaVahintaan:
       'Tälle kentälle täytyy syöttää vähintään {{lukumaara}} arvoa',
+    kokonaislukuValilta: 'Syötä kokonaisluku väliltä {{min}} - {{max}}',
   },
   hakulomakeValinnat: {
     ataru: 'Käytetään hakemuspalvelun lomaketta',

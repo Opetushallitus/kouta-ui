@@ -8,18 +8,18 @@ import FormCollapse from '#/src/components/FormCollapse';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import JulkisuusSection from '#/src/components/JulkisuusSection';
+import KokeetTaiLisanaytotSection from '#/src/components/KokeetTaiLisanaytotSection';
 import ValintatapaSection from './ValintatapaSection';
 import KuvausSection from './KuvausSection';
 import SoraKuvausSection from './SoraKuvausSection';
 import PerustiedotSection from './PerustiedotSection';
-import KokeetTaiLisanaytotSection from '#/src/components/KokeetTaiLisanaytotSection';
 
 const ValintaperusteForm = ({
   steps = true,
   canEditTyyppi = true,
   canSelectBase = true,
   organisaatioOid,
-  onSelectBase,
+  onSelectBase = undefined,
   showArkistoituTilaOption = true,
 }) => {
   const { t } = useTranslation();

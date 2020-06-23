@@ -27,7 +27,7 @@ const stubMyOrganisations = () => {
   cy.route({
     method: 'GET',
     url: `**/organisaatio-service/rest/organisaatio/v4/hierarkia/hae?oid=${oid}**`,
-    response: organisaatioHierarkia({ rootOid: oid }),
+    response: organisaatioHierarkia(),
   });
 
   cy.route({

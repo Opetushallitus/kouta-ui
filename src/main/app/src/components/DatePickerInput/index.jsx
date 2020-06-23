@@ -28,15 +28,19 @@ const getLocalisationProps = t => ({
   firstDayOfWeek: 1,
 });
 
-const DatePickerInput = ({ dayPickerProps = {}, ...props }) => {
+const DatePickerInput = ({ dayPickerProps = {}, disabled, ...props }) => {
   const { t } = useTranslation();
 
   const localisationProps = useMemo(() => getLocalisationProps(t), [t]);
 
   return (
     <UiDatePickerInput
-      dayPickerProps={{ ...localisationProps, ...dayPickerProps }}
+      dayPickerProps={{
+        ...localisationProps,
+        ...dayPickerProps,
+      }}
       {...props}
+      inputProps={{ ...(props?.inputProps ?? {}), disabled }}
     />
   );
 };

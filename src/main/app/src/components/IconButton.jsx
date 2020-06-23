@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from '@opetushallitus/virkailija-ui-components/Button';
+import Button from '#/src/components/Button';
 import Icon from '@opetushallitus/virkailija-ui-components/Icon';
 
 const SizedIcon = styled(Icon)`

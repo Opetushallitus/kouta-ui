@@ -32,12 +32,11 @@ const isInHierarkia = org => hierarkia =>
 
 const KoulutusForm = ({
   organisaatioOid,
-  koulutusOrganisaatioOid,
   steps = false,
   isNewKoulutus = false,
   koulutus: koulutusProp = null,
   johtaaTutkintoon = true,
-  onAttachToteutus,
+  onAttachToteutus = undefined,
   onSelectBase,
 }) => {
   const { t } = useTranslation();
@@ -51,7 +50,9 @@ const KoulutusForm = ({
     isOphOrganisaatio(organisaatioOid) && !isNewKoulutus;
 
   const { organisaatio } = useOrganisaatio(organisaatioOid);
-  const { hierarkia = [] } = useOrganisaatioHierarkia(koulutusOrganisaatioOid);
+  const { hierarkia = [] } = useOrganisaatioHierarkia(
+    koulutusProp?.organisaatioOid
+  );
 
   const onlyTarjoajaRights =
     !isNewKoulutus &&

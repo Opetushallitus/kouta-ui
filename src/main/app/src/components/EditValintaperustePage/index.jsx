@@ -1,22 +1,24 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import _ from 'lodash';
 
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
 } from '#/src/components/FormPage';
-import ValintaperusteFormWrapper from './ValintaperusteFormWrapper';
-import EditValintaperusteFooter from './EditValintaperusteFooter';
 import useApiAsync from '#/src/components/useApiAsync';
 import getValintaperusteByOid from '#/src/utils/kouta/getValintaperusteByOid';
-import Spin from '#/src/components/Spin';
-import { KOULUTUSTYYPPI, ENTITY } from '#/src/constants';
+import { KOULUTUSTYYPPI, ENTITY, CRUD_ROLES } from '#/src/constants';
 import Title from '#/src/components/Title';
 import ReduxForm from '#/src/components/ReduxForm';
 import getFormValuesByValintaperuste from '#/src/utils/getFormValuesByValintaperuste';
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormSteps from '#/src/components/FormSteps';
+import { useEntityFormConfig } from '#/src/hooks/form';
+import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
+import FormConfigContext from '#/src/components/FormConfigContext';
+import ValintaperusteForm from '#/src/components/ValintaperusteForm';
+import FullSpin from '#/src/components/FullSpin';
+import EditValintaperusteFooter from './EditValintaperusteFooter';
 
 const EditValintaperustePage = props => {
   const {
@@ -29,7 +31,7 @@ const EditValintaperustePage = props => {
   const { valintaperusteUpdatedAt = null } = state;
   const watch = JSON.stringify([id, valintaperusteUpdatedAt]);
 
-  const { data: valintaperuste = null } = useApiAsync({
+  const { data: valintaperuste, isLoading } = useApiAsync({
     promiseFn: getValintaperusteByOid,
     oid: id,
     watch,
@@ -41,44 +43,54 @@ const EditValintaperustePage = props => {
     return valintaperuste && getFormValuesByValintaperuste(valintaperuste);
   }, [valintaperuste]);
 
-  return !valintaperuste ? (
-    <Spin center />
+  const canUpdate = useCurrentUserHasRole(
+    ENTITY.VALINTAPERUSTE,
+    CRUD_ROLES.UPDATE,
+    valintaperuste?.organisaatioOid
+  );
+
+  const config = useEntityFormConfig(
+    ENTITY.VALINTAPERUSTE,
+    valintaperuste?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
+  );
+
+  return isLoading ? (
+    <FullSpin />
   ) : (
     <ReduxForm form="editValintaperusteForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.valintaperusteenMuokkaus')}</Title>
-      <FormPage
-        header={
-          <EntityFormHeader
-            entityType={ENTITY.VALINTAPERUSTE}
-            entity={valintaperuste}
-          />
-        }
-        steps={<FormSteps activeStep={ENTITY.VALINTAPERUSTE} />}
-        footer={
-          valintaperuste ? (
-            <EditValintaperusteFooter valintaperuste={valintaperuste} />
-          ) : null
-        }
-      >
-        <RelationInfoContainer>
-          <OrganisaatioRelation organisaatioOid={organisaatioOid} />
-        </RelationInfoContainer>
-        {valintaperuste ? (
-          <ValintaperusteFormWrapper
-            valintaperuste={valintaperuste}
-            steps={false}
-            canSelectBase={false}
-            canEditTyyppi={false}
-            organisaatioOid={organisaatioOid}
-            koulutustyyppi={
-              _.get(valintaperuste, 'koulutustyyppi') ||
-              KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
-            }
-          />
-        ) : (
-          <Spin center />
-        )}
-      </FormPage>
+      <FormConfigContext.Provider value={{ ...config, readOnly: !canUpdate }}>
+        <FormPage
+          readOnly={!canUpdate}
+          header={
+            <EntityFormHeader
+              entityType={ENTITY.VALINTAPERUSTE}
+              entity={valintaperuste}
+            />
+          }
+          steps={<FormSteps activeStep={ENTITY.VALINTAPERUSTE} />}
+          footer={
+            valintaperuste ? (
+              <EditValintaperusteFooter
+                valintaperuste={valintaperuste}
+                canUpdate={canUpdate}
+              />
+            ) : null
+          }
+        >
+          <RelationInfoContainer>
+            <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+          </RelationInfoContainer>
+          {valintaperuste && (
+            <ValintaperusteForm
+              steps={false}
+              canSelectBase={false}
+              canEditTyyppi={false}
+              organisaatioOid={organisaatioOid}
+            />
+          )}
+        </FormPage>
+      </FormConfigContext.Provider>
     </ReduxForm>
   );
 };

@@ -19,7 +19,7 @@ const lisaa = () => {
 };
 
 const tallenna = () => {
-  getByTestId('tallennaHakukohdeButton').click({ force: true });
+  getByTestId('tallennaHakukohdeButton').click();
 };
 
 const fillKieliversiotSection = () => {

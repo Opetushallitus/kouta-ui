@@ -7,12 +7,9 @@ import createOppilaitos from '../../utils/kouta/createOppilaitos';
 import updateOppilaitos from '../../utils/kouta/updateOppilaitos';
 import getOppilaitosByFormValues from '../../utils/getOppilaitosByFormValues';
 import { FormFooter } from '#/src/components/FormPage';
+import { ENTITY } from '#/src/constants';
 
-const OppilaitosPageFooter = ({
-  oppilaitos,
-  organisaatioOid,
-  oppilaitosIsLoading = false,
-}) => {
+const OppilaitosPageFooter = ({ oppilaitos, organisaatioOid, readOnly }) => {
   const history = useHistory();
 
   const submit = useCallback(
@@ -46,11 +43,7 @@ const OppilaitosPageFooter = ({
   });
 
   return (
-    <FormFooter
-      entity="oppilaitos"
-      save={save}
-      submitProps={{ disabled: oppilaitosIsLoading }}
-    />
+    <FormFooter entity={ENTITY.OPPILAITOS} save={save} canUpdate={!readOnly} />
   );
 };
 

@@ -8,7 +8,7 @@ import validateSoraKuvausForm from '../../utils/validateSoraKuvausForm';
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY } from '#/src/constants';
 
-const EditSoraKuvausFooter = ({ soraKuvaus }) => {
+const EditSoraKuvausFooter = ({ soraKuvaus, canUpdate }) => {
   const history = useHistory();
 
   const submit = useCallback(
@@ -37,7 +37,9 @@ const EditSoraKuvausFooter = ({ soraKuvaus }) => {
     validate: validateSoraKuvausForm,
   });
 
-  return <FormFooter entity={ENTITY.SORA_KUVAUS} save={save} />;
+  return (
+    <FormFooter entity={ENTITY.SORA_KUVAUS} save={save} canUpdate={canUpdate} />
+  );
 };
 
 export default EditSoraKuvausFooter;

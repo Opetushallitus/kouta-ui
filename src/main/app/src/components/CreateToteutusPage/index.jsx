@@ -17,15 +17,16 @@ import FormPage, {
   FormFooter,
 } from '#/src/components/FormPage';
 import ReduxForm from '#/src/components/ReduxForm';
-import { initialValues } from '#/src/components/ToteutusForm';
+import ToteutusForm, { initialValues } from '#/src/components/ToteutusForm';
 import Spin from '#/src/components/Spin';
 import Title from '#/src/components/Title';
 import { useSaveToteutus } from '#/src/hooks/formSaveHooks';
 import useApiAsync from '#/src/components/useApiAsync';
 import useSelectBase from '#/src/components/useSelectBase';
-import ToteutusFormWrapper from './ToteutusFormWrapper';
 import FormHeader from '#/src/components/FormHeader';
 import FormSteps from '#/src/components/FormSteps';
+import { useEntityFormConfig } from '#/src/hooks/form';
+import FormConfigContext from '#/src/components/FormConfigContext';
 
 const resolveFn = () => Promise.resolve();
 
@@ -63,9 +64,7 @@ const CreateToteutusPage = props => {
   const { t } = useTranslation();
 
   const koulutustyyppi =
-    koulutus && koulutus.koulutustyyppi
-      ? koulutus.koulutustyyppi
-      : KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
+    koulutus?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
   const koulutusNimi = _.get(koulutus, 'nimi');
   const koulutusKielet = _.get(koulutus, 'kielivalinta');
@@ -77,11 +76,14 @@ const CreateToteutusPage = props => {
     oid: kopioToteutusOid,
     watch: kopioToteutusOid,
   });
+
   const initialValues = useMemo(() => {
     return koulutustyyppi === 'amm'
       ? getInitialValues(data, koulutusNimi, koulutusKielet)
       : getInitialValues(data, null, koulutusKielet);
   }, [data, koulutustyyppi, koulutusNimi, koulutusKielet]);
+
+  const config = useEntityFormConfig(ENTITY.TOTEUTUS, koulutustyyppi);
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
@@ -110,44 +112,39 @@ const CreateToteutusPage = props => {
   });
 
   return (
-    <ReduxForm
-      form={FORM_NAME}
-      enableReinitialize
-      initialValues={initialValues}
-    >
+    <ReduxForm form={FORM_NAME} initialValues={initialValues}>
       <Title>{t('sivuTitlet.uusiToteutus')}</Title>
-      <FormPage
-        header={<FormHeader>{t('yleiset.toteutus')}</FormHeader>}
-        steps={<FormSteps activeStep={ENTITY.TOTEUTUS} />}
-        footer={
-          koulutus ? <FormFooter entity={ENTITY.TOTEUTUS} save={save} /> : null
-        }
-      >
-        <RelationInfoContainer>
-          <KoulutusRelation
-            organisaatioOid={organisaatioOid}
-            koulutus={koulutus}
-          />
-          <OrganisaatioRelation organisaatioOid={organisaatioOid} />
-        </RelationInfoContainer>
-        {koulutus ? (
-          <ToteutusFormWrapper
-            steps
-            koulutus={koulutus}
-            ePerusteId={koulutus.ePerusteId}
-            koulutusKoodiUri={koulutus.koulutusKoodiUri}
-            koulutusNimi={koulutus.nimi}
-            koulutusKielet={koulutus.kielivalinta}
-            organisaatioOid={organisaatioOid}
-            koulutustyyppi={koulutustyyppi}
-            kopioToteutusOid={kopioToteutusOid}
-            onSelectBase={selectBase}
-            showArkistoituTilaOption={false}
-          />
-        ) : (
-          <Spin center />
-        )}
-      </FormPage>
+      <FormConfigContext.Provider value={config}>
+        <FormPage
+          header={<FormHeader>{t('yleiset.toteutus')}</FormHeader>}
+          steps={<FormSteps activeStep={ENTITY.TOTEUTUS} />}
+          footer={
+            koulutus ? (
+              <FormFooter entity={ENTITY.TOTEUTUS} save={save} />
+            ) : null
+          }
+        >
+          <RelationInfoContainer>
+            <KoulutusRelation
+              organisaatioOid={organisaatioOid}
+              koulutus={koulutus}
+            />
+            <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+          </RelationInfoContainer>
+          {koulutus ? (
+            <ToteutusForm
+              steps
+              koulutus={koulutus}
+              organisaatioOid={organisaatioOid}
+              koulutustyyppi={koulutustyyppi}
+              onSelectBase={selectBase}
+              showArkistoituTilaOption={false}
+            />
+          ) : (
+            <Spin center />
+          )}
+        </FormPage>
+      </FormConfigContext.Provider>
     </ReduxForm>
   );
 };

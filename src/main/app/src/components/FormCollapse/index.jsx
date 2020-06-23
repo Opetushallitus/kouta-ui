@@ -26,40 +26,6 @@ const LanguageTabsWrapper = styled.div`
   padding-left: ${({ theme }) => theme.spacing.unit * 3}px;
 `;
 
-const renderChildren = ({
-  Component,
-  onContinue,
-  children,
-  language,
-  section,
-  childProps,
-}) => {
-  const childrenProps = {
-    onContinue,
-    language,
-  };
-
-  let renderedChildren = children;
-
-  if (isFunction(children)) {
-    renderedChildren = children(childrenProps);
-  } else if (React.isValidElement(children)) {
-    renderedChildren = React.cloneElement(children, childrenProps);
-  } else if (Component) {
-    renderedChildren = (
-      <Component name={section} language={language} {...childProps} />
-    );
-  }
-
-  return section ? (
-    <FormConfigSectionContext.Provider value={section}>
-      {renderedChildren}
-    </FormConfigSectionContext.Provider>
-  ) : (
-    renderedChildren
-  );
-};
-
 const renderActions = ({ actions, onContinue, t }) => {
   return actions ? (
     actions
@@ -111,7 +77,6 @@ const renderHeader = ({
 
 const FormCollapse = ({
   onContinue,
-  children = null,
   actions: actionsProp = null,
   index,
   header: headerProp = null,
@@ -136,6 +101,7 @@ const FormCollapse = ({
   }, [languages]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const actions = renderActions({ actions: actionsProp, t, onContinue });
+  const childProps = { ...props, language, languages, onContinue };
 
   const header = renderHeader({
     header: headerProp,
@@ -163,14 +129,13 @@ const FormCollapse = ({
       {...(section ? getTestIdProps(`${section}Section`) : {})}
       {...props}
     >
-      {renderChildren({
-        Component,
-        childProps: { ...props, languages },
-        onContinue,
-        children,
-        language,
-        section,
-      })}
+      {section ? (
+        <FormConfigSectionContext.Provider value={section}>
+          <Component name={section} {...childProps} />
+        </FormConfigSectionContext.Provider>
+      ) : (
+        <Component name={section} {...childProps} />
+      )}
     </Collapse>
   );
 };

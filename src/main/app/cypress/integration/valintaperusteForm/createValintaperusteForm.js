@@ -16,9 +16,7 @@ import valintaperuste from '#/cypress/data/valintaperuste';
 import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils';
 
 const tallenna = () => {
-  getByTestId('tallennaValintaperusteButton').click({
-    force: true,
-  });
+  getByTestId('tallennaValintaperusteButton').click();
 };
 
 const fillKoulutustyyppiSection = path => {

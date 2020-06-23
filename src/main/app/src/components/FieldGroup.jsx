@@ -6,7 +6,7 @@ import {
   useFieldIsRequired,
 } from '#/src/hooks/fieldConfigHooks';
 
-export const FieldGroup = ({ title, children, name, ...props }) => {
+export const FieldGroup = ({ title, children, name = undefined, ...props }) => {
   const fieldConfig = useFieldConfig(name);
   const required = useFieldIsRequired(fieldConfig);
 

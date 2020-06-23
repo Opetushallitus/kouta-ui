@@ -80,6 +80,25 @@ const Draft = ({ url }) => {
   );
 };
 
+const Wrapper = styled.div`
+  border: 0;
+  padding: 0;
+  margin: 0;
+  ${({ readOnly }) =>
+    readOnly &&
+    css`
+      & .CollapseContent {
+        .ButtonWrapper {
+          opacity: 0.7;
+          cursor: not-allowed;
+          & * {
+            pointer-events: none;
+          }
+        }
+      }
+    `}
+`;
+
 const FormPage = ({
   header = null,
   steps = null,
@@ -88,6 +107,7 @@ const FormPage = ({
   draftUrl = null,
   toggleDraft = null,
   hasFooterHomeLink = true,
+  readOnly = false,
 }) => {
   const { t } = useTranslation();
   const esikatselu = useFieldValue('esikatselu');
@@ -106,33 +126,35 @@ const FormPage = ({
       >
         {props => <UnsavedChangesDialog {...props} />}
       </NavigationPrompt>
-      <HeaderContainer>
-        <Container>{header}</Container>
-      </HeaderContainer>
-      <StepsContainer>
-        <Container>{steps}</Container>
-      </StepsContainer>
-      <FormContent hasFooter={!!footer}>
-        <Container>{children}</Container>
-      </FormContent>
-      <FooterContainer>
-        <Container>
-          <FooterWrapper hasFooterHomeLink={hasFooterHomeLink}>
-            <Buttons>
-              {hasFooterHomeLink ? (
-                <Button as={Link} to="/" color="primary" variant="outlined">
-                  {t('yleiset.etusivulle')}
-                </Button>
-              ) : null}
-              {draftUrl && esikatselu === true ? (
-                <Draft url={draftUrl} />
-              ) : null}
-              {toggleDraft ? <Separator>{toggleDraft}</Separator> : null}
-            </Buttons>
-            <FooterActions>{footer}</FooterActions>
-          </FooterWrapper>
-        </Container>
-      </FooterContainer>
+      <Wrapper readOnly={readOnly}>
+        <HeaderContainer>
+          <Container>{header}</Container>
+        </HeaderContainer>
+        <StepsContainer>
+          <Container>{steps}</Container>
+        </StepsContainer>
+        <FormContent hasFooter={!!footer}>
+          <Container>{children}</Container>
+        </FormContent>
+        <FooterContainer>
+          <Container>
+            <FooterWrapper hasFooterHomeLink={hasFooterHomeLink}>
+              <Buttons>
+                {hasFooterHomeLink ? (
+                  <Button as={Link} to="/" color="primary" variant="outlined">
+                    {t('yleiset.etusivulle')}
+                  </Button>
+                ) : null}
+                {draftUrl && esikatselu === true ? (
+                  <Draft url={draftUrl} />
+                ) : null}
+                {toggleDraft ? <Separator>{toggleDraft}</Separator> : null}
+              </Buttons>
+              <FooterActions>{footer}</FooterActions>
+            </FooterWrapper>
+          </Container>
+        </FooterContainer>
+      </Wrapper>
     </>
   );
 };

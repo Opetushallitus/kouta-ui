@@ -213,3 +213,5 @@ export const formValueExists = value =>
 export const isDeepEmptyFormValues = value =>
   !formValueExists(value) ||
   (_.isObjectLike(value) && _.every(value, isDeepEmptyFormValues));
+
+export const assert = console.assert;

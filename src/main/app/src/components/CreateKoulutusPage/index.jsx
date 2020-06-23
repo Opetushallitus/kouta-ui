@@ -18,11 +18,12 @@ import FormPage, {
 import ReduxForm from '#/src/components/ReduxForm';
 import FormHeader from '#/src/components/FormHeader';
 import Title from '#/src/components/Title';
-import { initialValues } from '#/src/components/KoulutusForm';
+import KoulutusForm, { initialValues } from '#/src/components/KoulutusForm';
 import FormSteps from '#/src/components/FormSteps';
 import useSelectBase from '#/src/components/useSelectBase';
 import useApiAsync from '#/src/components/useApiAsync';
-import KoulutusFormWrapper from './KoulutusFormWrapper';
+import FormConfigContext from '#/src/components/FormConfigContext';
+import { useFieldValue, useEntityFormConfig } from '#/src/hooks/form';
 
 const resolveFn = () => Promise.resolve();
 const getCopyValues = koulutusOid => ({
@@ -41,7 +42,7 @@ const getInitialValues = koulutus => {
 const CreateKoulutusPage = props => {
   const {
     match: {
-      params: { oid: luojaOrganisaatioOid },
+      params: { oid: valittuOrganisaatioOid },
     },
     location: { search },
     history,
@@ -69,15 +70,15 @@ const CreateKoulutusPage = props => {
         apiUrls,
         koulutus: {
           ...getKoulutusByFormValues(values),
-          organisaatioOid: luojaOrganisaatioOid,
+          organisaatioOid: valittuOrganisaatioOid,
         },
       });
 
       history.push(
-        `/organisaatio/${luojaOrganisaatioOid}/koulutus/${oid}/muokkaus`
+        `/organisaatio/${valittuOrganisaatioOid}/koulutus/${oid}/muokkaus`
       );
     },
-    [history, luojaOrganisaatioOid]
+    [history, valittuOrganisaatioOid]
   );
 
   const FORM_NAME = 'createKoulutusForm';
@@ -88,34 +89,34 @@ const CreateKoulutusPage = props => {
     validate: values =>
       validateKoulutusForm({
         ...values,
-        organisaatioOid: luojaOrganisaatioOid,
+        organisaatioOid: valittuOrganisaatioOid,
       }),
-    formName: FORM_NAME,
   });
 
+  const koulutustyyppi = useFieldValue('koulutustyyppi', FORM_NAME);
+
+  const config = useEntityFormConfig(ENTITY.KOULUTUS, koulutustyyppi);
+
   return (
-    <ReduxForm
-      form={FORM_NAME}
-      enableReinitialize
-      initialValues={initialValues}
-    >
+    <ReduxForm form={FORM_NAME} initialValues={initialValues}>
       <Title>{t('sivuTitlet.uusiKoulutus')}</Title>
-      <FormPage
-        header={<FormHeader>{t('yleiset.koulutus')}</FormHeader>}
-        steps={<FormSteps activeStep={ENTITY.KOULUTUS} />}
-        footer={<FormFooter entity={ENTITY.KOULUTUS} save={save} />}
-      >
-        <RelationInfoContainer>
-          <OrganisaatioRelation organisaatioOid={luojaOrganisaatioOid} />
-        </RelationInfoContainer>
-        <KoulutusFormWrapper
-          steps
-          isNewKoulutus={true}
-          organisaatioOid={luojaOrganisaatioOid}
-          kopioKoulutusOid={kopioKoulutusOid}
-          onSelectBase={selectBase}
-        />
-      </FormPage>
+      <FormConfigContext.Provider value={config}>
+        <FormPage
+          header={<FormHeader>{t('yleiset.koulutus')}</FormHeader>}
+          steps={<FormSteps activeStep={ENTITY.KOULUTUS} />}
+          footer={<FormFooter entity={ENTITY.KOULUTUS} save={save} />}
+        >
+          <RelationInfoContainer>
+            <OrganisaatioRelation organisaatioOid={valittuOrganisaatioOid} />
+          </RelationInfoContainer>
+          <KoulutusForm
+            steps
+            isNewKoulutus={true}
+            organisaatioOid={valittuOrganisaatioOid}
+            onSelectBase={selectBase}
+          />
+        </FormPage>
+      </FormConfigContext.Provider>
     </ReduxForm>
   );
 };

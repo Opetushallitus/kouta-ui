@@ -36,9 +36,9 @@ const TitleContainer = styled.div`
 `;
 
 const FormHeader = ({
-  status,
-  children = null,
-  editInfo = null,
+  status = undefined,
+  children = undefined,
+  editInfo = undefined,
   hasHomeLink = true,
   ...props
 }) => {
@@ -46,16 +46,16 @@ const FormHeader = ({
 
   return (
     <Container {...props}>
-      {children ? (
+      {children && (
         <TitleContainer>
           <IconContainer {...homeIconProps}>
             <HomeIcon />
           </IconContainer>
           <Typography variant="h4">{children}</Typography>
         </TitleContainer>
-      ) : null}
-      {status ? <div>{status}</div> : null}
-      {editInfo ? <div>{editInfo}</div> : null}
+      )}
+      {status && <div>{status}</div>}
+      {editInfo && <div>{editInfo}</div>}
     </Container>
   );
 };

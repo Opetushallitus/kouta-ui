@@ -154,7 +154,7 @@ const fillHakulomakeSection = () => {
 };
 
 const tallenna = () => {
-  getByTestId('tallennaHakuButton').click({ force: true });
+  getByTestId('tallennaHakuButton').click();
 };
 
 const fillYhteystiedotSection = () => {

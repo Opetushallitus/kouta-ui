@@ -3,14 +3,12 @@ import { useHistory } from 'react-router-dom';
 import { isArray, uniq, without } from 'lodash';
 import getToteutusByFormValues from '../../utils/getToteutusByFormValues';
 import updateToteutus from '../../utils/kouta/updateToteutus';
-import useOrganisaatio from '../useOrganisaatio';
-import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
-import { TOTEUTUS_ROLE, ENTITY } from '../../constants';
 import iterateTree from '../../utils/iterateTree';
 import useOrganisaatioHierarkia from '../useOrganisaatioHierarkia';
 import { useSaveToteutus } from '#/src/hooks/formSaveHooks';
 import { FormFooter } from '#/src/components/FormPage';
 import { useFormName } from '#/src/hooks/form';
+import { ENTITY } from '#/src/constants';
 
 const getAvailableTarjoajaOids = hierarkia => {
   const oids = [];
@@ -47,20 +45,15 @@ const EditToteutusFooter = ({
   koulutustyyppi,
   organisaatioOid,
   koulutus,
+  canUpdate,
 }) => {
   const history = useHistory();
-  const { organisaatio } = useOrganisaatio(toteutus.organisaatioOid);
-  const roleBuilder = useAuthorizedUserRoleBuilder();
   const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid);
 
   const availableTarjoajaOids = useMemo(
     () => getAvailableTarjoajaOids(hierarkia),
     [hierarkia]
   );
-
-  const canUpdate = useMemo(() => {
-    return roleBuilder.hasUpdate(TOTEUTUS_ROLE, organisaatio);
-  }, [organisaatio, roleBuilder]);
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {

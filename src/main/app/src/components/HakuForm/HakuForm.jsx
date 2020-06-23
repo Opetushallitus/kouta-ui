@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import _ from 'lodash';
+import { useTranslation } from 'react-i18next';
 import KieliversiotFields from '../KieliversiotFields';
 import NameSection from './NameSection';
 import TargetGroupSection from './TargetGroupSection';
@@ -12,7 +13,6 @@ import HakukohteetModal from './HakukohteetModal';
 import HakukohteetSection from './HakukohteetSection';
 import Flex from '../Flex';
 import Button from '../Button';
-import { useTranslation } from 'react-i18next';
 import LomakeFields from '../LomakeFields';
 import useAuthorizedUserRoleBuilder from '../useAuthorizedUserRoleBuilder';
 import useModal from '../useModal';
@@ -27,7 +27,7 @@ import getHaut from '#/src/utils/kouta/getHaut';
 const HakuForm = ({
   organisaatioOid,
   canSelectBase = true,
-  onAttachHakukohde,
+  onAttachHakukohde = undefined,
   steps = false,
   haku: hakuProp = null,
   showArkistoituTilaOption = true,

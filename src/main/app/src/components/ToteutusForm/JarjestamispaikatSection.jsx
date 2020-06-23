@@ -22,9 +22,9 @@ const JarjestamispaikatSection = ({ organisaatioOid, name }) => {
   const roleBuilder = useAuthorizedUserRoleBuilder();
 
   const getIsDisabled = useCallback(
-    organisaatio => {
-      return !roleBuilder.hasUpdate(TOTEUTUS_ROLE, organisaatio).result();
-    },
+    organisaatio =>
+      !roleBuilder.hasUpdate(TOTEUTUS_ROLE, organisaatio).result(),
+
     [roleBuilder]
   );
 

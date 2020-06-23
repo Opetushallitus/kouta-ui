@@ -67,6 +67,8 @@ const EditKoulutusPage = props => {
 
   const config = useEntityFormConfig(ENTITY.KOULUTUS, selectedKoulutustyyppi);
 
+  const isJulkinen = useFieldValue('julkinen', FORM_NAME);
+
   return !koulutus ? (
     <FullSpin />
   ) : (
@@ -86,7 +88,7 @@ const EditKoulutusPage = props => {
               <EditKoulutusFooter
                 koulutus={koulutus}
                 organisaatioOid={organisaatioOid}
-                canUpdate={canUpdate}
+                canUpdate={canUpdate || isJulkinen}
               />
             ) : null
           }

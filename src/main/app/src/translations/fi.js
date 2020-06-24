@@ -265,6 +265,7 @@ export default {
     listaVahintaanYksi: 'Tälle kentälle täytyy syöttää vähintään yksi arvo',
     listaVahintaan:
       'Tälle kentälle täytyy syöttää vähintään {{lukumaara}} arvoa',
+    kokonaislukuValilta: 'Syötä kokonaisluku väliltä {{min}} - {{max}}',
   },
   hakulomakeValinnat: {
     ataru: 'Käytetään hakemuspalvelun lomaketta',
@@ -407,6 +408,7 @@ export default {
     apuraha: 'Apuraha',
     valitseKaytettavaApurahoitus: 'Valitse kaytettava apurahoitus',
     stipendi: 'Stipendi',
+    stipendinMaaraHelperText: 'Euroa tai prosenttia',
     eiKaytossa: 'Ei käytössä',
     koulutuksenAjankohta: 'Koulutuksen ajankohta',
     koulutuksenAlkamiskausi: 'Valitse alkamiskausi',
@@ -462,6 +464,8 @@ export default {
     koulutuksellaEiEPerustetta:
       'Valittuun koulutukseen ei ole liitetty ePerustetta.',
     valitseMissaJarjestetaan: 'Valitse missä toteutus järjestetään',
+    vuotta: 'Vuotta',
+    kuukautta: 'Kuukautta',
   },
   hakulomake: {
     haunNimi: 'Haun nimi',

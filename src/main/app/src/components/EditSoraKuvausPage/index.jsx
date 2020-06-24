@@ -51,10 +51,7 @@ const EditSoraKuvausPage = props => {
     soraKuvaus?.organisaatioOid
   );
 
-  const config = useEntityFormConfig(
-    ENTITY.SORA_KUVAUS,
-    soraKuvaus?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
-  );
+  const config = useEntityFormConfig(ENTITY.SORA_KUVAUS, koulutustyyppi);
 
   return (
     <ReduxForm form="editSoraKuvausForm" initialValues={initialValues}>

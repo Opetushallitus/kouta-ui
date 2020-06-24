@@ -1,4 +1,4 @@
-import { get, pick, toPairs } from 'lodash';
+import { get, pick, toPairs, parseInt, isNaN } from 'lodash';
 
 import { isNumeric, getKoutaDateString } from './index';
 import serializeSisaltoField from './serializeSisaltoField';
@@ -16,8 +16,17 @@ const getOsaamisalatByValues = ({ osaamisalat, kielivalinta }) => {
   );
 };
 
+const toOptionalInteger = value => {
+  const integerValue = parseInt(value);
+  if (value === '') {
+    return null;
+  }
+  return isNaN(integerValue) ? value : integerValue;
+};
+
 const getToteutusByFormValues = values => {
-  const { koulutustyyppi, tila, muokkaaja } = values;
+  const { koulutustyyppi, tila, muokkaaja, jarjestamistiedot } = values;
+
   const kielivalinta = getKielivalinta(values);
   const tarjoajat = get(values, 'tarjoajat') || [];
   const nimi = pick(get(values, 'tiedot.nimi') || {}, kielivalinta);
@@ -70,6 +79,19 @@ const getToteutusByFormValues = values => {
     get(values, 'jarjestamistiedot.opetuskieliKuvaus') || {},
     kielivalinta
   );
+
+  const suunniteltuKestoVuodet = toOptionalInteger(
+    jarjestamistiedot?.suunniteltuKesto?.vuotta
+  );
+  const suunniteltuKestoKuukaudet = toOptionalInteger(
+    jarjestamistiedot?.suunniteltuKesto?.kuukautta
+  );
+
+  const suunniteltuKestoKuvaus = pick(
+    jarjestamistiedot?.suunniteltuKestoKuvaus || {},
+    kielivalinta
+  );
+
   const opetusaikaKuvaus = pick(
     get(values, 'jarjestamistiedot.opetusaikaKuvaus') || {},
     kielivalinta
@@ -203,8 +225,6 @@ const getToteutusByFormValues = values => {
     ? parseInt(values.tiedot.aloituspaikat)
     : null;
 
-  const suunniteltuKesto = pick(get(values, 'tiedot.kesto'), kielivalinta);
-
   const toteutusjaksot = (get(values, 'toteutusjaksot') || []).map(
     ({ nimi, koodi, laajuus, ilmoittautumislinkki, kuvaus, sisalto }) => ({
       nimi: pick(nimi, kielivalinta),
@@ -261,6 +281,9 @@ const getToteutusByFormValues = values => {
         B2Kielivalikoima,
         B3Kielivalikoima,
         muuKielivalikoima,
+        suunniteltuKestoVuodet,
+        suunniteltuKestoKuukaudet,
+        suunniteltuKestoKuvaus,
       },
       lukiolinjaKoodiUri,
       osaamisalat,
@@ -275,7 +298,6 @@ const getToteutusByFormValues = values => {
       laajuusyksikkoKoodiUri,
       ilmoittautumislinkki,
       aloituspaikat,
-      suunniteltuKesto,
       toteutusjaksot,
       tutkinnonOsat,
     },

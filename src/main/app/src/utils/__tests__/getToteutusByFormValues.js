@@ -19,10 +19,6 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
       aloituspaikat: '56',
       laajuus: '252',
       laajuusyksikko: { value: 'laajuus_1#1' },
-      kesto: {
-        fi: 'Fi kesto',
-        sv: 'Sv kesto',
-      },
     },
     kieliversiot: ['fi', 'sv'],
     tarjoajat: ['org1', 'org2'],
@@ -34,6 +30,14 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
       opetustapa: ['opetustapa_1#1', 'opetustapa_2#1'],
       opetusaika: ['opetusaika_1#1', 'opetusaika_2#1'],
       opetuskieli: ['opetuskieli_1#1', 'opetuskieli_2#1'],
+      suunniteltuKesto: {
+        vuotta: 2,
+        kuukautta: 6,
+      },
+      suunniteltuKestoKuvaus: {
+        fi: 'Fi aikakuvaus',
+        sv: 'Sv aikakuvaus',
+      },
       opetusaikaKuvaus: {
         fi: 'Fi aikakuvaus',
         sv: 'Sv aikakuvaus',

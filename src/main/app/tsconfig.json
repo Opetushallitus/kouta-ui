@@ -25,5 +25,10 @@
   "include": [
     "./src",
     "./cypress"
+  ],
+  "exclude": [
+    "**/*.test.js",
+    "**/*.test.ts",
+    "**/__tests__/**"
   ]
 }

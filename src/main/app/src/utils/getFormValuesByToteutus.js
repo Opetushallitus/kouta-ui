@@ -25,7 +25,6 @@ const getFormValuesByToteutus = toteutus => {
     laajuusyksikkoKoodiUri,
     ilmoittautumislinkki,
     aloituspaikat,
-    suunniteltuKesto,
     toteutusjaksot,
     tutkinnonOsat: tutkinnonOsatMetadata,
   } = metadata;
@@ -103,7 +102,6 @@ const getFormValuesByToteutus = toteutus => {
         : undefined,
       ilmoittautumislinkki: ilmoittautumislinkki || {},
       aloituspaikat: isNumber(aloituspaikat) ? aloituspaikat.toString() : '',
-      kesto: suunniteltuKesto || {},
     },
     kieliversiot: kielivalinta,
     tarjoajat,
@@ -120,6 +118,11 @@ const getFormValuesByToteutus = toteutus => {
       opetustapa: get(opetus, 'opetustapaKoodiUrit') || [],
       opetusaika: get(opetus, 'opetusaikaKoodiUrit') || [],
       opetuskieli: get(opetus, 'opetuskieliKoodiUrit') || [],
+      suunniteltuKestoKuvaus: opetus?.suunniteltuKestoKuvaus || {},
+      suunniteltuKesto: {
+        vuotta: opetus?.suunniteltuKestoVuodet,
+        kuukautta: opetus?.suunniteltuKestoKuukaudet,
+      },
       opetusaikaKuvaus: get(opetus, 'opetusaikaKuvaus') || {},
       opetustapaKuvaus: get(opetus, 'opetustapaKuvaus') || {},
       opetuskieliKuvaus: get(opetus, 'opetuskieletKuvaus') || {},

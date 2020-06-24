@@ -2,43 +2,36 @@ import React, { useMemo } from 'react';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
 import { get, isArray } from 'lodash';
-
 import { useTranslation } from 'react-i18next';
-import Spacing from '../../Spacing';
-import OpetusaikaCheckboxGroup from './OpetusaikaCheckboxGroup';
-import OpetuskieliCheckboxGroup from './OpetuskieliCheckboxGroup';
-import OpetustapaCheckboxGroup from './OpetustapaCheckboxGroup';
-import Flex, { FlexItem } from '../../Flex';
-import InputIcon from '../../InputIcon';
-import AlkamiskausiFields from './AlkamiskausiFields';
-import useKoodistoOptions from '../../useKoodistoOptions';
-import { getTestIdProps } from '../../../utils';
-import NoYesRadioGroup from '../../NoYesRadioGroup';
-import MaksullisuusFields from './MaksullisuusFields';
-import isKorkeakouluKoulutustyyppi from '../../../utils/isKorkeakouluKoulutustyyppi';
-import { useFieldValue } from '#/src/hooks/form';
-import FormConfigFragment from '../../FormConfigFragment';
-import DiplomiFields from './DiplomiFields';
-import KielivalikoimaFields from './KielivalikoimaFields';
-import FieldGroup from '#/src/components/FieldGroup';
 
+import Spacing from '#/src/components/Spacing';
+import Flex, { FlexItem } from '#/src/components/Flex';
+import InputIcon from '#/src/components/InputIcon';
+import useKoodistoOptions from '#/src/components/useKoodistoOptions';
+import { getTestIdProps } from '#/src/utils';
+import isKorkeakouluKoulutustyyppi from '#/src/utils/isKorkeakouluKoulutustyyppi';
+import { useFieldValue } from '#/src/hooks/form';
+import FormConfigFragment from '#/src/components/FormConfigFragment';
+import FieldGroup from '#/src/components/FieldGroup';
 import {
   FormFieldTextarea,
   FormFieldSelect,
   FormFieldInput,
   createFormFieldComponent,
-} from '../../formFields';
+  FormFieldRadioGroup,
+} from '#/src/components/formFields';
+import FormLabel from '#/src/components/FormLabel';
+
+import MaksullisuusFields from './MaksullisuusFields';
+import AlkamiskausiFields from './AlkamiskausiFields';
+import DiplomiFields from './DiplomiFields';
+import KielivalikoimaFields from './KielivalikoimaFields';
+import OpetusaikaCheckboxGroup from './OpetusaikaCheckboxGroup';
+import OpetuskieliCheckboxGroup from './OpetuskieliCheckboxGroup';
+import OpetustapaCheckboxGroup from './OpetustapaCheckboxGroup';
 
 const makeCountLimitOnChange = (onChange, max) => items =>
   isArray(items) && items.length <= max && onChange(items);
-
-const NoYesField = createFormFieldComponent(
-  NoYesRadioGroup,
-  ({ input, ...props }) => ({
-    ...input,
-    ...props,
-  })
-);
 
 const OpetusaikaField = createFormFieldComponent(
   OpetusaikaCheckboxGroup,
@@ -79,23 +72,27 @@ const OsiotFields = ({ language, osiotOptions, name }) => {
         : get(
             osiotOptions.find(({ value: v }) => v === value),
             'label'
-          ) || null,
+          ) || null, // TODO: Use something else than null as a label, when not found
     }));
   }, [osiotArr, osiotOptions]);
 
-  return osiotArrWithLabels.map(({ value, label }, index) => (
-    <Spacing
-      marginBottom={index !== osiot.length - 1 ? 2 : 0}
-      key={value}
-      {...getTestIdProps(`osioKuvaus.${value}`)}
-    >
-      <Field
-        name={`${name}.osioKuvaukset.${value}.${language}`}
-        component={FormFieldTextarea}
-        label={label}
-      />
-    </Spacing>
-  ));
+  return (
+    <>
+      {osiotArrWithLabels.map(({ value, label }, index) => (
+        <Spacing
+          marginBottom={index !== osiot.length - 1 ? 2 : 0}
+          key={value}
+          {...getTestIdProps(`osioKuvaus.${value}`)}
+        >
+          <Field
+            name={`${name}.osioKuvaukset.${value}.${language}`}
+            component={FormFieldTextarea}
+            label={label}
+          />
+        </Spacing>
+      ))}
+    </>
+  );
 };
 
 const ExtraFieldWrapper = styled.div`
@@ -114,11 +111,10 @@ const StipendiFields = ({ language, name }) => {
   return (
     <Flex {...getTestIdProps('stipendi')}>
       <FlexItem grow={0} basis="30%">
-        {/* TODO: Use FormFieldRadioGroup instead of NoYesField */}
         <Field
           label={t('toteutuslomake.valitseKaytettavaApurahoitus')}
           name={`${name}.onkoStipendia`}
-          component={NoYesField}
+          component={FormFieldRadioGroup}
           options={[
             {
               label: t('toteutuslomake.stipendi'),
@@ -137,7 +133,7 @@ const StipendiFields = ({ language, name }) => {
                 name={`${name}.stipendinMaara`}
                 component={FormFieldInput}
                 placeholder={t('yleiset.maara')}
-                helperText="Euroa tai prosenttia"
+                helperText={t('toteutuslomake.stipendinMaaraHelperText')}
                 suffix={<InputIcon type="euro_symbol" />}
                 type="number"
               />
@@ -153,6 +149,38 @@ const StipendiFields = ({ language, name }) => {
         />
       </FlexItem>
     </Flex>
+  );
+};
+
+const SuunniteltuKestoFields = ({ name }) => {
+  const { t } = useTranslation();
+  return (
+    <FieldGroup
+      name={`${name}.suunniteltuKesto`}
+      title="Opintojen suunniteltu kesto"
+      HeadingComponent={FormLabel}
+    >
+      <Flex>
+        <FlexItem>
+          <Field
+            name={`${name}.suunniteltuKesto.vuotta`}
+            component={FormFieldInput}
+            placeholder={t('toteutuslomake.vuotta')}
+            type="number"
+            {...getTestIdProps('suunniteltuKestoVuotta')}
+          />
+        </FlexItem>
+        <FlexItem ml={2}>
+          <Field
+            name={`${name}.suunniteltuKesto.kuukautta`}
+            component={FormFieldInput}
+            placeholder={t('toteutuslomake.kuukautta')}
+            type="number"
+            {...getTestIdProps('suunniteltuKestoKuukautta')}
+          />
+        </FlexItem>
+      </Flex>
+    </FieldGroup>
   );
 };
 
@@ -181,6 +209,21 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
               name={`${name}.opetuskieliKuvaus.${language}`}
               component={FormFieldTextarea}
               label={t('yleiset.tarkempiKuvaus')}
+            />
+          </FlexItem>
+        </Flex>
+      </FieldGroup>
+      <FieldGroup title={t('toteutuslomake.suunniteltuKesto')}>
+        <Flex {...getTestIdProps('suunniteltuKesto')}>
+          <FlexItem grow={0} basis="30%">
+            <SuunniteltuKestoFields name={name} />
+          </FlexItem>
+          <FlexItem grow={1} paddingLeft={4}>
+            <Field
+              name={`${name}.suunniteltuKestoKuvaus.${language}`}
+              component={FormFieldTextarea}
+              label={t('yleiset.tarkempiKuvaus')}
+              {...getTestIdProps('suunniteltuKestoKuvaus')}
             />
           </FlexItem>
         </Flex>
@@ -231,7 +274,6 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
             <MaksullisuusFields
               isKorkeakoulu={isKorkeakoulu}
               name={`${name}.maksullisuus`}
-              language={language}
               label={t('toteutuslomake.onkoOpetusMaksullista')}
             />
           </FlexItem>

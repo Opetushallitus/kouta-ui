@@ -29,8 +29,8 @@ const defaultSort = options => {
 
 export const useKoodistoOptions = ({
   koodisto,
-  versio,
-  language: languageProp,
+  versio = undefined,
+  language: languageProp = undefined,
   sortFn = defaultSort,
   sort = true,
 }) => {

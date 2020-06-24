@@ -140,7 +140,7 @@ export const validateRelations = specs => (eb, values) => {
 
 export const createOptionalTranslatedFieldConfig = ({
   name,
-  koulutustyypit,
+  koulutustyypit = undefined,
 }) => ({
   field: name,
   koulutustyypit,

@@ -83,14 +83,6 @@ const TiedotSection = ({ language, name }) => {
           type="number"
         />
       </Box>
-
-      <Box mb={2} {...getTestIdProps('kesto')}>
-        <Field
-          name={`${name}.kesto.${language}`}
-          component={FormFieldInput}
-          label={t('toteutuslomake.suunniteltuKesto')}
-        />
-      </Box>
     </>
   );
 };

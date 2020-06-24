@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from 'lodash/fp';
 
 import createFormConfigBuilder from './createFormConfigBuilder';
 
@@ -36,12 +36,14 @@ const config = createFormConfigBuilder().registerSections([
         fragment: 'nimi',
         field: '.nimi',
         koulutustyypit: _.without(
-          KOULUTUSTYYPIT,
-          KOULUTUSTYYPPI.LUKIOKOULUTUS,
-          KOULUTUSTYYPPI.VALMA,
-          KOULUTUSTYYPPI.TELMA,
-          KOULUTUSTYYPPI.LUVA,
-          KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS
+          [
+            KOULUTUSTYYPPI.LUKIOKOULUTUS,
+            KOULUTUSTYYPPI.VALMA,
+            KOULUTUSTYYPPI.TELMA,
+            KOULUTUSTYYPPI.LUVA,
+            KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS,
+          ],
+          KOULUTUSTYYPIT
         ),
         required: true,
         validate: (eb, values) =>
@@ -49,7 +51,10 @@ const config = createFormConfigBuilder().registerSections([
       },
       createOptionalTranslatedFieldConfig({
         name: 'tiedot.toteutuksenKuvaus',
-        koulutustyypit: _.without(KOULUTUSTYYPIT, KOULUTUSTYYPPI.LUKIOKOULUTUS),
+        koulutustyypit: _.without(
+          [KOULUTUSTYYPPI.LUKIOKOULUTUS],
+          KOULUTUSTYYPIT
+        ),
       }),
       {
         field: '.ilmoittautumislinkki',
@@ -62,11 +67,13 @@ const config = createFormConfigBuilder().registerSections([
       {
         field: '.aloituspaikat',
         koulutustyypit: _.without(
-          TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
-          KOULUTUSTYYPPI.VALMA,
-          KOULUTUSTYYPPI.TELMA,
-          KOULUTUSTYYPPI.LUVA,
-          KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS
+          [
+            KOULUTUSTYYPPI.VALMA,
+            KOULUTUSTYYPPI.TELMA,
+            KOULUTUSTYYPPI.LUVA,
+            KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS,
+          ],
+          TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT
         ),
       },
     ],
@@ -232,7 +239,7 @@ const config = createFormConfigBuilder().registerSections([
       {
         field: '.maksullisuus.maksu',
         validate: validateIfJulkaistu((eb, values) =>
-          _.get(values, 'jarjestamistiedot.maksullisuus.tyyppi') === 'kylla'
+          values?.jarjestamistiedot?.maksullisuus?.tyyppi === 'kylla'
             ? eb.validateExistence('jarjestamistiedot.maksullisuus.maksu')
             : eb
         ),

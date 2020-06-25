@@ -59,8 +59,8 @@ const config = createFormConfigBuilder().registerSections([
       },
       {
         field: '.hakuaika',
-        validate: validateIfJulkaistu((errorBoundary, values) =>
-          errorBoundary
+        validate: validateIfJulkaistu((errorBuilder, values) =>
+          errorBuilder
             .validateArrayMinLength('aikataulut.hakuaika', 1, {
               isFieldArray: true,
             })

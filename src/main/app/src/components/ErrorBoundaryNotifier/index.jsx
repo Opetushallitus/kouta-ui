@@ -1,7 +1,5 @@
-import { Component } from 'react';
-import { connect } from 'react-redux';
-
-import { openGenericErrorToast } from '../../state/toaster';
+import React, { Component } from 'react';
+import useToaster from '#/src/components/useToaster';
 
 class ErrorBoundaryNotifier extends Component {
   static defaultProps = {
@@ -17,6 +15,11 @@ class ErrorBoundaryNotifier extends Component {
   }
 }
 
-export default connect(null, dispatch => ({
-  onError: () => dispatch(openGenericErrorToast()),
-}))(ErrorBoundaryNotifier);
+export default ({ children }) => {
+  const { openGenericErrorToast } = useToaster();
+  return (
+    <ErrorBoundaryNotifier onError={openGenericErrorToast}>
+      {children}
+    </ErrorBoundaryNotifier>
+  );
+};

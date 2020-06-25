@@ -6,10 +6,6 @@ import {
   stopSubmit as stopSubmitAction,
 } from 'redux-form';
 
-import {
-  openSavingErrorToast,
-  openSavingSuccessToast,
-} from '#/src/state/toaster';
 import { useHttpClient, useURLs } from '#/src/hooks/context';
 import useAuthorizedUser from '#/src/components/useAuthorizedUser';
 import getKoulutusByOid from '#/src/utils/kouta/getKoulutusByOid';
@@ -20,6 +16,7 @@ import getSoraKuvausById from '#/src/utils/kouta/getSoraKuvausById';
 import validateToteutusForm from '#/src/utils/validateToteutusForm';
 import validateHakukohdeForm from '#/src/utils/validateHakukohdeForm';
 import validateValintaperusteForm from '#/src/utils/validateValintaperusteForm';
+import useToaster from '#/src/components/useToaster';
 
 export const useSaveForm = ({ form, validate, submit }) => {
   const dispatch = useDispatch();
@@ -27,6 +24,7 @@ export const useSaveForm = ({ form, validate, submit }) => {
   const httpClient = useHttpClient();
   const apiUrls = useURLs();
   const store = useStore();
+  const { openSavingSuccessToast, openSavingErrorToast } = useToaster();
 
   const startSubmit = useCallback(() => {
     return dispatch(startSubmitAction(form));
@@ -38,13 +36,13 @@ export const useSaveForm = ({ form, validate, submit }) => {
         dispatch(stopSubmitAction(form, errors));
 
         if (errorToast) {
-          errors && dispatch(openSavingErrorToast());
+          errors && openSavingErrorToast();
         } else if (successToast) {
-          dispatch(openSavingSuccessToast());
+          openSavingSuccessToast();
         }
       });
     },
-    [form, dispatch]
+    [form, dispatch, openSavingSuccessToast, openSavingErrorToast]
   );
 
   const save = useCallback(async () => {

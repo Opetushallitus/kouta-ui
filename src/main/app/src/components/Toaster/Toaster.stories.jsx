@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { storiesOf } from '@storybook/react';
+import _ from 'lodash/fp';
 
 import Toaster from './index';
+import useToaster from '#/src/components/useToaster';
 
 const toastsArray = [
   {
@@ -17,56 +19,22 @@ const toastsArray = [
   },
 ];
 
-class StatefulToaster extends Component {
-  constructor() {
-    super();
+storiesOf('Toaster', module).add('Basic', () => {
+  const { openToast } = useToaster();
 
-    this.state = {
-      toasts: [],
-    };
-  }
-
-  onClose = key => {
-    this.setState(({ toasts }) => ({
-      toasts: [...toasts.filter(({ key: k }) => k !== key)],
-    }));
-  };
-
-  onAdd = toast => {
-    this.setState(({ toasts }) => ({
-      toasts: [toast, ...toasts],
-    }));
-  };
-
-  render() {
-    return this.props.children({
-      toasts: this.state.toasts,
-      onClose: this.onClose,
-      onAdd: this.onAdd,
-    });
-  }
-}
-
-storiesOf('Toaster', module).add('Basic', () => (
-  <StatefulToaster>
-    {({ toasts, onClose, onAdd }) => (
-      <>
-        <Toaster
-          toasts={toasts}
-          style={{ position: 'fixed', top: '16px', right: '16px' }}
-          onClose={onClose}
-        />
-        <button
-          onClick={() =>
-            onAdd({
-              ...toastsArray[Math.random() < 0.5 ? 0 : 1],
-              key: Math.random() * 1000,
-            })
-          }
-        >
-          Add toast
-        </button>
-      </>
-    )}
-  </StatefulToaster>
-));
+  return (
+    <>
+      <Toaster style={{ position: 'fixed', top: '16px', right: '16px' }} />
+      <button
+        onClick={() =>
+          openToast({
+            ...toastsArray[_.random(0, 1)],
+            key: _.uniqueId('toast_'),
+          })
+        }
+      >
+        Add toast
+      </button>
+    </>
+  );
+});

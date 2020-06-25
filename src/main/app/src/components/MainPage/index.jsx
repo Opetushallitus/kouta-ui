@@ -1,61 +1,78 @@
 import React from 'react';
-
 import { Router, Route, Redirect, Switch } from 'react-router-dom';
 
-import { ReduxToaster } from '../Toaster';
-import RouterScrollToTop from '../RouterScrollToTop';
+import Toaster from '#/src/components/Toaster';
+import RouterScrollToTop from '#/src/components/RouterScrollToTop';
 
-const HomePage = React.lazy(() => import('../HomePage'));
-const CreateKoulutusPage = React.lazy(() => import('../CreateKoulutusPage'));
-const CreateToteutusPage = React.lazy(() => import('../CreateToteutusPage'));
-const CreateHakukohdePage = React.lazy(() => import('../CreateHakukohdePage'));
+const HomePage = React.lazy(() => import('#/src/components/HomePage'));
+const CreateKoulutusPage = React.lazy(() =>
+  import('#/src/components/CreateKoulutusPage')
+);
+const CreateToteutusPage = React.lazy(() =>
+  import('#/src/components/CreateToteutusPage')
+);
+const CreateHakukohdePage = React.lazy(() =>
+  import('#/src/components/CreateHakukohdePage')
+);
 
 const CreateValintaperustePage = React.lazy(() =>
-  import('../CreateValintaperustePage')
+  import('#/src/components/CreateValintaperustePage')
 );
 
-const CreateHakuPage = React.lazy(() => import('../CreateHakuPage'));
+const CreateHakuPage = React.lazy(() =>
+  import('#/src/components/CreateHakuPage')
+);
 
 const CreateSoraKuvausPage = React.lazy(() =>
-  import('../CreateSoraKuvausPage')
+  import('#/src/components/CreateSoraKuvausPage')
 );
 
-const EditKoulutusPage = React.lazy(() => import('../EditKoulutusPage'));
-const EditHakuPage = React.lazy(() => import('../EditHakuPage'));
-const EditToteutusPage = React.lazy(() => import('../EditToteutusPage'));
+const EditKoulutusPage = React.lazy(() =>
+  import('#/src/components/EditKoulutusPage')
+);
+const EditHakuPage = React.lazy(() => import('#/src/components/EditHakuPage'));
+const EditToteutusPage = React.lazy(() =>
+  import('#/src/components/EditToteutusPage')
+);
 
 const EditValintaperustePage = React.lazy(() =>
-  import('../EditValintaperustePage')
+  import('#/src/components/EditValintaperustePage')
 );
 
-const EditHakukohdePage = React.lazy(() => import('../EditHakukohdePage'));
+const EditHakukohdePage = React.lazy(() =>
+  import('#/src/components/EditHakukohdePage')
+);
 const RedirectHakukohdePage = React.lazy(() =>
-  import('../EditHakukohdePage/RedirectHakukohdePage')
+  import('#/src/components/EditHakukohdePage/RedirectHakukohdePage')
 );
 const RedirectToteutusPage = React.lazy(() =>
-  import('../EditToteutusPage/RedirectToteutusPage')
+  import('#/src/components/EditToteutusPage/RedirectToteutusPage')
 );
 const RedirectHakuPage = React.lazy(() =>
-  import('../EditHakuPage/RedirectHakuPage')
+  import('#/src/components/EditHakuPage/RedirectHakuPage')
 );
 const RedirectValintaperustePage = React.lazy(() =>
-  import('../EditValintaperustePage/RedirectValintaperustePage')
+  import('#/src/components/EditValintaperustePage/RedirectValintaperustePage')
 );
 const RedirectKoulutusPage = React.lazy(() =>
-  import('../EditKoulutusPage/RedirectKoulutusPage')
+  import('#/src/components/EditKoulutusPage/RedirectKoulutusPage')
 );
-const EditSoraKuvausPage = React.lazy(() => import('../EditSoraKuvausPage'));
-const OppilaitosPage = React.lazy(() => import('../OppilaitosPage'));
+const EditSoraKuvausPage = React.lazy(() =>
+  import('#/src/components/EditSoraKuvausPage')
+);
+const OppilaitosPage = React.lazy(() =>
+  import('#/src/components/OppilaitosPage')
+);
 
 const OppilaitoksenOsaPage = React.lazy(() =>
-  import('../OppilaitoksenOsaPage')
+  import('#/src/components/OppilaitoksenOsaPage')
 );
 
 const MainPage = ({ history }) => {
   return (
     <Router history={history}>
       <RouterScrollToTop>
-        <ReduxToaster
+        <Toaster
           style={{
             position: 'fixed',
             top: '16px',

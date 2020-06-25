@@ -1,14 +1,13 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { Transition } from 'react-spring/renderprops';
-import { connect } from 'react-redux';
-import { get, isFunction } from 'lodash';
+import _ from 'lodash/fp';
 
-import Icon from '../Icon';
-import { getThemeProp } from '../../theme';
-import Typography from '../Typography';
-import { closeToast } from '../../state/toaster';
-import Box from '../Box';
+import { getThemeProp } from '#/src/theme';
+import Icon from '#/src/components/Icon';
+import Typography from '#/src/components/Typography';
+import Box from '#/src/components/Box';
+import useToaster from '#/src/components/useToaster';
 
 const ToasterContainer = styled.div`
   display: flex;
@@ -77,7 +76,7 @@ export const Toast = ({
     <Box>
       <Typography color="inherit">{children}</Typography>
     </Box>
-    {isFunction(onClose) ? (
+    {_.isFunction(onClose) ? (
       <Box ml={2}>
         <CloseIcon onClick={onClose} />
       </Box>
@@ -96,54 +95,42 @@ const ToastWrapper = styled.div`
     `};
 `;
 
-export const Toaster = ({ toasts, onClose, ...props }) => (
-  <ToasterContainer {...props}>
-    <Transition
-      items={toasts}
-      keys={item => item.key}
-      enter={{
-        opacity: 1,
-        transform: 'scale(1)',
-      }}
-      leave={{
-        opacity: 0,
-        transform: 'scale(0.5)',
-      }}
-      from={{
-        opacity: 0,
-        transform: 'scale(0.5)',
-      }}
-    >
-      {(item, state, index) => props => (
-        <ToastWrapper last={index === toasts.length - 1}>
-          <Toast
-            status={item.status}
-            style={props}
-            {...(isFunction(onClose)
-              ? {
-                  onClose: () => {
-                    onClose(item.key);
-                  },
-                }
-              : {})}
-          >
-            {item.label}
-          </Toast>
-        </ToastWrapper>
-      )}
-    </Transition>
-  </ToasterContainer>
-);
+export const Toaster = ({ ...props }) => {
+  const { toasts, closeToast } = useToaster();
 
-export const ReduxToaster = connect(
-  state => ({
-    toasts: get(state, 'toaster.toasts') || [],
-  }),
-  dispatch => ({
-    onClose: key => {
-      dispatch(closeToast(key));
-    },
-  })
-)(Toaster);
+  return (
+    <ToasterContainer {...props}>
+      <Transition
+        items={toasts}
+        keys={item => item.key}
+        enter={{
+          opacity: 1,
+          transform: 'scale(1)',
+        }}
+        leave={{
+          opacity: 0,
+          transform: 'scale(0.5)',
+        }}
+        from={{
+          opacity: 0,
+          transform: 'scale(0.5)',
+        }}
+      >
+        {(item, state, index) => props => (
+          <ToastWrapper last={index === toasts.length - 1}>
+            <Toast
+              key={item.key}
+              status={item.status}
+              style={props}
+              onClose={() => closeToast(item.key)}
+            >
+              {item.label}
+            </Toast>
+          </ToastWrapper>
+        )}
+      </Transition>
+    </ToasterContainer>
+  );
+};
 
 export default Toaster;

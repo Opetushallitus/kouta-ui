@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
-import { isArray, uniq, without, negate } from 'lodash';
+import { isArray, uniq, without, negate, omit } from 'lodash';
 
 import getKoulutusByFormValues from '../../utils/getKoulutusByFormValues';
 import updateKoulutus from '../../utils/kouta/updateKoulutus';
@@ -60,15 +60,18 @@ const EditKoulutusFooter = ({ koulutus, organisaatioOid, canUpdate }) => {
       await updateKoulutus({
         httpClient,
         apiUrls,
-        koulutus: {
-          ...koulutus,
-          ...getKoulutusByFormValues(values),
-          tarjoajat: mergeTarjoajat(
-            koulutus.tarjoajat,
-            values.tarjoajat,
-            availableTarjoajaOids
-          ),
-        },
+        koulutus: omit(
+          {
+            ...koulutus,
+            ...getKoulutusByFormValues(values),
+            tarjoajat: mergeTarjoajat(
+              koulutus.tarjoajat,
+              values.tarjoajat,
+              availableTarjoajaOids
+            ),
+          },
+          'modified'
+        ),
       });
 
       history.replace({

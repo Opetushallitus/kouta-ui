@@ -32,6 +32,7 @@ Object {
     "kokeetTaiLisanaytot": Array [
       Object {
         "erityisjarjestelytMahdollisia": true,
+        "id": undefined,
         "liittyyEnnakkovalmistautumista": true,
         "nimi": Object {
           "fi": "valintakokeen nimi - fi",

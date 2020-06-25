@@ -82,66 +82,38 @@ exports[`renders correctly 1`] = `
   margin-left: 9px;
 }
 
-<ForwardRef
-  onChange={[Function]}
+<label
+  className="c0"
+  disabled={false}
 >
-  <styled.label
-    disabled={false}
-    error={false}
+  <div
+    className="c1"
   >
-    <label
-      className="c0"
+    <input
+      checked={false}
+      className="c2 c3"
       disabled={false}
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <div
+      checked={false}
+      className="c4 c5"
     >
-      <styled.div>
-        <div
-          className="c1"
-        >
-          <styled.input
-            checked={false}
-            disabled={false}
-            onChange={[Function]}
-          >
-            <input
-              checked={false}
-              className="c2 c3"
-              disabled={false}
-              onChange={[Function]}
-              type="checkbox"
-            />
-          </styled.input>
-          <styled.div
-            checked={false}
-            error={false}
-          >
-            <div
-              checked={false}
-              className="c4 c5"
-            >
-              <styled.svg
-                viewBox="0 0 24 24"
-              >
-                <svg
-                  className="c6 c7"
-                  viewBox="0 0 24 24"
-                >
-                  <polyline
-                    points="20 6 9 17 4 12"
-                  />
-                </svg>
-              </styled.svg>
-            </div>
-          </styled.div>
-        </div>
-      </styled.div>
-      <styled.div>
-        <div
-          className="c8"
-        >
-          Checkbox
-        </div>
-      </styled.div>
-    </label>
-  </styled.label>
-</ForwardRef>
+      <svg
+        className="c6 c7"
+        viewBox="0 0 24 24"
+      >
+        <polyline
+          points="20 6 9 17 4 12"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    className="c8"
+  >
+    Checkbox
+  </div>
+</label>
 `;

@@ -52,7 +52,6 @@ test('getFormValuesByValintaperuste returns correct form values given valintaper
           ],
         },
       ],
-      koulutustyyppi: 'tyyppi_1#1',
       kuvaus: {
         fi: '<h1>Fi kuvaus</h1>',
         sv: '<h1>Sv kuvaus</h1>',
@@ -132,14 +131,14 @@ test('getFormValuesByValintaperuste returns correct form values given valintaper
           valintatapaKoodiUri: 'tapa_1#1',
         },
       ],
+      valintakokeidenYleiskuvaus: {
+        fi: '<p>Yleiskuvaus - fi</p>',
+        sv: '<p>Yleiskuvaus - sv</p>',
+      },
     },
     nimi: {
       fi: 'Fi nimi',
       sv: 'Sv nimi',
-    },
-    valintakokeidenYleiskuvaus: {
-      fi: '<p>Yleiskuvaus - fi</p>',
-      sv: '<p>Yleiskuvaus - sv</p>',
     },
     valintakokeet: [
       {
@@ -148,19 +147,21 @@ test('getFormValuesByValintaperuste returns correct form values given valintaper
           sv: 'valintakokeen nimi - sv',
         },
         tyyppiKoodiUri: 'tyyppi_1#1',
-        tietoja: {
-          fi: '<p>Tietoa hakijalle - fi</p>',
-          sv: '<p>Tietoa hakijalle - sv</p>',
-        },
-        liittyyEnnakkovalmistautumista: true,
-        ohjeetEnnakkovalmistautumiseen: {
-          fi: '<p>Ohjeet ennakkovalmistautumiseen - fi</p>',
-          sv: '<p>ohjeet ennakkovalmistautumiseen - sv</p>',
-        },
-        erityisjarjestelytMahdollisia: true,
-        ohjeetErityisjarjestelyihin: {
-          fi: '<p>Ohjeet erityisjärjestelyihin - fi</p>',
-          sv: '<p>Ohjeet erityisjärjestelyihin - sv</p>',
+        metadata: {
+          tietoja: {
+            fi: '<p>Tietoa hakijalle - fi</p>',
+            sv: '<p>Tietoa hakijalle - sv</p>',
+          },
+          liittyyEnnakkovalmistautumista: true,
+          ohjeetEnnakkovalmistautumiseen: {
+            fi: '<p>Ohjeet ennakkovalmistautumiseen - fi</p>',
+            sv: '<p>ohjeet ennakkovalmistautumiseen - sv</p>',
+          },
+          erityisjarjestelytMahdollisia: true,
+          ohjeetErityisjarjestelyihin: {
+            fi: '<p>Ohjeet erityisjärjestelyihin - fi</p>',
+            sv: '<p>Ohjeet erityisjärjestelyihin - sv</p>',
+          },
         },
         tilaisuudet: [
           {

@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-.c6 {
+.c5 {
   font-size: 1.5rem;
 }
 
-.c3 {
+.c2 {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -104,7 +104,7 @@ exports[`renders correctly 1`] = `
   color: #159ecb;
 }
 
-.c5 {
+.c6 {
   font-size: 2rem;
   color: #666666;
 }
@@ -122,14 +122,14 @@ exports[`renders correctly 1`] = `
   display: flex;
 }
 
-.c2 {
+.c3 {
   -webkit-flex: 0;
   -ms-flex: 0;
   flex: 0;
   margin-right: 24px;
 }
 
-.c2:last-child {
+.c3:last-child {
   margin-right: 0px;
 }
 
@@ -145,346 +145,128 @@ exports[`renders correctly 1`] = `
   justify-content: space-between;
 }
 
-<FormSteps__Wrapper>
+<div
+  className="c0"
+>
   <div
-    className="c0"
+    className="c1"
   >
-    <FormSteps__GroupContainer>
+    <div
+      className="c2 c3"
+    >
       <div
-        className="c1"
+        className="c4"
       >
-        <FormSteps__StepsIcon
-          active={false}
-          done={true}
-          icon="school"
+        <span
+          className="c5 material-icons c6"
         >
-          <FormStepIcon__Container
-            className="c2"
-          >
-            <div
-              className="c3 c2"
-            >
-              <FormStepIcon__IconContainer
-                active={false}
-                done={true}
-              >
-                <div
-                  className="c4"
-                >
-                  <FormStepIcon__IconBase
-                    active={false}
-                    type="school"
-                  >
-                    <ForwardRef
-                      active={false}
-                      className="c5"
-                      type="school"
-                    >
-                      <styled.span
-                        active={false}
-                        className="material-icons c5"
-                      >
-                        <span
-                          className="c6 material-icons c5"
-                        >
-                          school
-                        </span>
-                      </styled.span>
-                    </ForwardRef>
-                  </FormStepIcon__IconBase>
-                </div>
-              </FormStepIcon__IconContainer>
-              <FormStepIcon__LabelContainer
-                active={false}
-              >
-                <div
-                  className="c7"
-                >
-                  yleiset.koulutus
-                </div>
-              </FormStepIcon__LabelContainer>
-            </div>
-          </FormStepIcon__Container>
-        </FormSteps__StepsIcon>
-        <FormSteps__StepsIcon
-          active={false}
-          done={true}
-          icon="settings"
-        >
-          <FormStepIcon__Container
-            className="c2"
-          >
-            <div
-              className="c3 c2"
-            >
-              <FormStepIcon__IconContainer
-                active={false}
-                done={true}
-              >
-                <div
-                  className="c4"
-                >
-                  <FormStepIcon__IconBase
-                    active={false}
-                    type="settings"
-                  >
-                    <ForwardRef
-                      active={false}
-                      className="c5"
-                      type="settings"
-                    >
-                      <styled.span
-                        active={false}
-                        className="material-icons c5"
-                      >
-                        <span
-                          className="c6 material-icons c5"
-                        >
-                          settings
-                        </span>
-                      </styled.span>
-                    </ForwardRef>
-                  </FormStepIcon__IconBase>
-                </div>
-              </FormStepIcon__IconContainer>
-              <FormStepIcon__LabelContainer
-                active={false}
-              >
-                <div
-                  className="c7"
-                >
-                  yleiset.toteutus
-                </div>
-              </FormStepIcon__LabelContainer>
-            </div>
-          </FormStepIcon__Container>
-        </FormSteps__StepsIcon>
+          school
+        </span>
       </div>
-    </FormSteps__GroupContainer>
-    <FormSteps__GroupContainer>
       <div
-        className="c1"
+        className="c7"
       >
-        <FormSteps__StepsIcon
-          active={false}
-          done={true}
-          icon="access_time"
-        >
-          <FormStepIcon__Container
-            className="c2"
-          >
-            <div
-              className="c3 c2"
-            >
-              <FormStepIcon__IconContainer
-                active={false}
-                done={true}
-              >
-                <div
-                  className="c4"
-                >
-                  <FormStepIcon__IconBase
-                    active={false}
-                    type="access_time"
-                  >
-                    <ForwardRef
-                      active={false}
-                      className="c5"
-                      type="access_time"
-                    >
-                      <styled.span
-                        active={false}
-                        className="material-icons c5"
-                      >
-                        <span
-                          className="c6 material-icons c5"
-                        >
-                          access_time
-                        </span>
-                      </styled.span>
-                    </ForwardRef>
-                  </FormStepIcon__IconBase>
-                </div>
-              </FormStepIcon__IconContainer>
-              <FormStepIcon__LabelContainer
-                active={false}
-              >
-                <div
-                  className="c7"
-                >
-                  yleiset.haku
-                </div>
-              </FormStepIcon__LabelContainer>
-            </div>
-          </FormStepIcon__Container>
-        </FormSteps__StepsIcon>
-        <FormSteps__StepsIcon
-          active={true}
-          done={false}
-          icon="grain"
-        >
-          <FormStepIcon__Container
-            className="c2"
-          >
-            <div
-              className="c3 c2"
-            >
-              <FormStepIcon__IconContainer
-                active={true}
-                done={false}
-              >
-                <div
-                  className="c8"
-                >
-                  <FormStepIcon__IconBase
-                    active={true}
-                    type="grain"
-                  >
-                    <ForwardRef
-                      active={true}
-                      className="c9"
-                      type="grain"
-                    >
-                      <styled.span
-                        active={true}
-                        className="material-icons c9"
-                      >
-                        <span
-                          className="c6 material-icons c9"
-                        >
-                          grain
-                        </span>
-                      </styled.span>
-                    </ForwardRef>
-                  </FormStepIcon__IconBase>
-                </div>
-              </FormStepIcon__IconContainer>
-              <FormStepIcon__LabelContainer
-                active={true}
-              >
-                <div
-                  className="c10"
-                >
-                  yleiset.hakukohde
-                </div>
-              </FormStepIcon__LabelContainer>
-            </div>
-          </FormStepIcon__Container>
-        </FormSteps__StepsIcon>
+        yleiset.koulutus
       </div>
-    </FormSteps__GroupContainer>
-    <FormSteps__GroupContainer>
+    </div>
+    <div
+      className="c2 c3"
+    >
       <div
-        className="c1"
+        className="c4"
       >
-        <FormSteps__StepsIcon
-          active={false}
-          done={false}
-          icon="select_all"
+        <span
+          className="c5 material-icons c6"
         >
-          <FormStepIcon__Container
-            className="c2"
-          >
-            <div
-              className="c3 c2"
-            >
-              <FormStepIcon__IconContainer
-                active={false}
-                done={false}
-              >
-                <div
-                  className="c11"
-                >
-                  <FormStepIcon__IconBase
-                    active={false}
-                    type="select_all"
-                  >
-                    <ForwardRef
-                      active={false}
-                      className="c5"
-                      type="select_all"
-                    >
-                      <styled.span
-                        active={false}
-                        className="material-icons c5"
-                      >
-                        <span
-                          className="c6 material-icons c5"
-                        >
-                          select_all
-                        </span>
-                      </styled.span>
-                    </ForwardRef>
-                  </FormStepIcon__IconBase>
-                </div>
-              </FormStepIcon__IconContainer>
-              <FormStepIcon__LabelContainer
-                active={false}
-              >
-                <div
-                  className="c7"
-                >
-                  yleiset.valintaperusteet
-                </div>
-              </FormStepIcon__LabelContainer>
-            </div>
-          </FormStepIcon__Container>
-        </FormSteps__StepsIcon>
-        <FormSteps__StepsIcon
-          active={false}
-          done={false}
-          icon="subject"
-        >
-          <FormStepIcon__Container
-            className="c2"
-          >
-            <div
-              className="c3 c2"
-            >
-              <FormStepIcon__IconContainer
-                active={false}
-                done={false}
-              >
-                <div
-                  className="c11"
-                >
-                  <FormStepIcon__IconBase
-                    active={false}
-                    type="subject"
-                  >
-                    <ForwardRef
-                      active={false}
-                      className="c5"
-                      type="subject"
-                    >
-                      <styled.span
-                        active={false}
-                        className="material-icons c5"
-                      >
-                        <span
-                          className="c6 material-icons c5"
-                        >
-                          subject
-                        </span>
-                      </styled.span>
-                    </ForwardRef>
-                  </FormStepIcon__IconBase>
-                </div>
-              </FormStepIcon__IconContainer>
-              <FormStepIcon__LabelContainer
-                active={false}
-              >
-                <div
-                  className="c7"
-                >
-                  yleiset.soraKuvaus
-                </div>
-              </FormStepIcon__LabelContainer>
-            </div>
-          </FormStepIcon__Container>
-        </FormSteps__StepsIcon>
+          flag
+        </span>
       </div>
-    </FormSteps__GroupContainer>
+      <div
+        className="c7"
+      >
+        yleiset.toteutus
+      </div>
+    </div>
   </div>
-</FormSteps__Wrapper>
+  <div
+    className="c1"
+  >
+    <div
+      className="c2 c3"
+    >
+      <div
+        className="c4"
+      >
+        <span
+          className="c5 material-icons c6"
+        >
+          access_time
+        </span>
+      </div>
+      <div
+        className="c7"
+      >
+        yleiset.haku
+      </div>
+    </div>
+    <div
+      className="c2 c3"
+    >
+      <div
+        className="c8"
+      >
+        <span
+          className="c5 material-icons c9"
+        >
+          list_alt
+        </span>
+      </div>
+      <div
+        className="c10"
+      >
+        yleiset.hakukohde
+      </div>
+    </div>
+  </div>
+  <div
+    className="c1"
+  >
+    <div
+      className="c2 c3"
+    >
+      <div
+        className="c11"
+      >
+        <span
+          className="c5 material-icons c6"
+        >
+          filter_list
+        </span>
+      </div>
+      <div
+        className="c7"
+      >
+        yleiset.valintaperusteet
+      </div>
+    </div>
+    <div
+      className="c2 c3"
+    >
+      <div
+        className="c11"
+      >
+        <span
+          className="c5 material-icons c6"
+        >
+          subject
+        </span>
+      </div>
+      <div
+        className="c7"
+      >
+        yleiset.soraKuvaus
+      </div>
+    </div>
+  </div>
+</div>
 `;

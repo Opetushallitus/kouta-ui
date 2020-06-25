@@ -28,16 +28,10 @@ exports[`renders correctly 1`] = `
   box-shadow: 0 0 0 3px rgba(21,158,203,0.3);
 }
 
-<styled.textarea
+<textarea
+  className="c0"
   disabled={false}
-  error={false}
   rows={3}
->
-  <textarea
-    className="c0"
-    disabled={false}
-    rows={3}
-    type="text"
-  />
-</styled.textarea>
+  type="text"
+/>
 `;

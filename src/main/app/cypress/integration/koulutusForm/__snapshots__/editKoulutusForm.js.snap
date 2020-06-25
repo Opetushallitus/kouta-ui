@@ -25,7 +25,6 @@ exports[`editKoulutusForm > should be able to edit ammatillinen koulutus #0`] =
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "amm"
   },
-  "modified": "2019-04-01T13:01",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "koulutus_0"
@@ -75,7 +74,6 @@ exports[`editKoulutusForm > should be able to edit korkeakoulu koulutus #0`] =
     ],
     "tyyppi": "yo"
   },
-  "modified": "2019-04-01T13:01",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "koulutus_0"
@@ -116,7 +114,6 @@ exports[`editKoulutusForm > should be able to edit lukiokoulutus #0`] =
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "lk"
   },
-  "modified": "2019-04-01T13:01",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "koulutus_0"

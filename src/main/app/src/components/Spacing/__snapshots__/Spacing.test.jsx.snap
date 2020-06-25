@@ -9,18 +9,11 @@ Array [
   margin-top: 32px;
 }
 
-<Spacing
-    marginBottom={3}
-    marginLeft={1}
-    marginRight={2}
-    marginTop={4}
+<div
+    className="c0"
   >
-    <div
-      className="c0"
-    >
-      With margins
-    </div>
-  </Spacing>,
+    With margins
+  </div>,
   .c0 {
   padding-left: 8px;
   padding-right: 16px;
@@ -28,17 +21,10 @@ Array [
   padding-top: 32px;
 }
 
-<Spacing
-    paddingBottom={3}
-    paddingLeft={1}
-    paddingRight={2}
-    paddingTop={4}
+<div
+    className="c0"
   >
-    <div
-      className="c0"
-    >
-      With paddings
-    </div>
-  </Spacing>,
+    With paddings
+  </div>,
 ]
 `;

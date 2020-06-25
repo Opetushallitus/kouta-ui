@@ -64,9 +64,36 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
     liitteidenToimitusaika: '2011-12-20T10:30',
     nimi: { fi: 'Fi nimi', sv: 'Sv nimi' },
     toinenAsteOnkoKaksoistutkinto: true,
+    metadata: {
+      valintakokeidenYleiskuvaus: {
+        fi: '<p>Yleiskuvaus - fi</p>',
+        sv: '<p>Yleiskuvaus - sv</p>',
+      },
+    },
+    jarjestyspaikkaOid: '2.2.2.2.2',
     valintakokeet: [
       {
+        nimi: {
+          fi: 'valintakokeen nimi - fi',
+          sv: 'valintakokeen nimi - sv',
+        },
         tyyppiKoodiUri: 'tyyppi_1#1',
+        metadata: {
+          tietoja: {
+            fi: '<p>Tietoa hakijalle - fi</p>',
+            sv: '<p>Tietoa hakijalle - sv</p>',
+          },
+          liittyyEnnakkovalmistautumista: true,
+          ohjeetEnnakkovalmistautumiseen: {
+            fi: '<p>Ohjeet ennakkovalmistautumiseen - fi</p>',
+            sv: '<p>ohjeet ennakkovalmistautumiseen - sv</p>',
+          },
+          erityisjarjestelytMahdollisia: true,
+          ohjeetErityisjarjestelyihin: {
+            fi: '<p>Ohjeet erityisjärjestelyihin - fi</p>',
+            sv: '<p>Ohjeet erityisjärjestelyihin - sv</p>',
+          },
+        },
         tilaisuudet: [
           {
             osoite: {

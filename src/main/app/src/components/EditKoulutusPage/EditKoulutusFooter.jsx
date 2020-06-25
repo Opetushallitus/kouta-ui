@@ -69,7 +69,12 @@ const EditKoulutusFooter = ({ koulutus, organisaatioOid, canUpdate }) => {
               values.tarjoajat,
               availableTarjoajaOids
             ),
+            // This is a workaround for updating tarjoajat. Muokkaaja-field shouldn't be needed anymore
+            // but backend requires it when creating new ones.
+            // TODO: Remove this when backend works without muokkaaja
+            muokkaaja: koulutus?.muokkaaja,
           },
+          // modified-field also prevented updating tarjoajat, this is a workaround. See above.
           'modified'
         ),
       });

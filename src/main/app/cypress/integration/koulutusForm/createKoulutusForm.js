@@ -95,10 +95,17 @@ const fillNakyvyysSection = () => {
 
 describe('createKoulutusForm', () => {
   const organisaatioOid = '1.1.1.1.1.1';
+  const koulutusOid = '1.2.3.4.5';
 
   beforeEach(() => {
     cy.server();
     stubKoulutusFormRoutes({ organisaatioOid });
+
+    cy.route({
+      method: 'GET',
+      url: `**/koulutus/${koulutusOid}`,
+      response: [],
+    });
 
     cy.visit(`/organisaatio/${organisaatioOid}/koulutus?johtaaTutkintoon=true`);
   });
@@ -108,7 +115,7 @@ describe('createKoulutusForm', () => {
       method: 'PUT',
       url: '**/koulutus',
       response: {
-        oid: '1.2.3.4.5.6',
+        oid: koulutusOid,
       },
     }).as('createAmmKoulutusResponse');
 
@@ -152,7 +159,7 @@ describe('createKoulutusForm', () => {
       method: 'PUT',
       url: '**/koulutus',
       response: {
-        oid: '1.2.3.4.5.6',
+        oid: koulutusOid,
       },
     }).as('createYoKoulutusResponse');
 
@@ -222,7 +229,7 @@ describe('createKoulutusForm', () => {
       method: 'PUT',
       url: '**/koulutus',
       response: {
-        oid: '1.2.3.4.5.6',
+        oid: koulutusOid,
       },
     }).as('createLkKoulutusResponse');
 

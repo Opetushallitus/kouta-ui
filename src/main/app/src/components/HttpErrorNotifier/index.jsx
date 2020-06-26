@@ -1,22 +1,25 @@
-import { useEffect, useContext, useMemo } from 'react';
-import { get, throttle } from 'lodash';
-
-import HttpContext from '../HttpContext';
+import { useEffect, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import useToaster from '../useToaster';
+import _ from 'lodash/fp';
+
+import HttpContext from '#/src/components/HttpContext';
+import useToaster from '#/src/components/useToaster';
+import { otherwise } from '#/src/utils';
 
 const getToastOptions = (error, t) => {
-  const status = get(error, 'response.status');
+  const { response } = error;
+  const status = response?.status;
+  const data = response?.data;
 
-  let label = t('ilmoitukset.tuntematonVirhe');
-
-  if (status === 403) {
-    label = t('ilmoitukset.kayttooikeusVirhe');
-  }
+  const label = _.cond([
+    [_.equals(403), () => t('ilmoitukset.kayttooikeusVirhe')],
+    [otherwise, () => t('ilmoitukset.tuntematonVirhe')],
+  ])(status);
 
   return {
     status: 'danger',
     label,
+    error: status >= 400 && data,
   };
 };
 
@@ -42,7 +45,7 @@ export const HttpErrorNotifier = () => {
     return () => {
       httpClient.interceptors.response.eject(interceptor);
     };
-  }, [openToastThrottle, httpClient, t]);
+  }, [openToast, httpClient, t]);
 
   return null;
 };

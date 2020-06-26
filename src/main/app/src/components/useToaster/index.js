@@ -1,7 +1,7 @@
 import { Machine, interpret, assign, spawn, forwardTo } from 'xstate';
 import { useService } from '@xstate/react';
 import { useTranslation } from 'react-i18next';
-import _ from 'lodash';
+import _ from 'lodash/fp';
 import { isDev } from '#/src/utils';
 
 const DEFAULT_TOAST_DURATION = 5000;
@@ -20,10 +20,10 @@ const createToastActor = (key, duration = DEFAULT_TOAST_DURATION) => (
 ) => {
   let id = setToastTimer(key, duration, callback);
 
-  onReceive(event => {
-    if (event.type === TOAST_MOUSEENTER) {
+  onReceive(({ type }) => {
+    if (type === TOAST_MOUSEENTER) {
       clearTimeout(id);
-    } else if (event.type === TOAST_MOUSELEAVE) {
+    } else if (type === TOAST_MOUSELEAVE) {
       id = setToastTimer(key, duration, callback);
     }
   });
@@ -71,22 +71,30 @@ export const toastService = interpret(
     },
     {
       actions: {
-        forwardToToastActor: forwardTo((context, event) => event.key),
+        forwardToToastActor: forwardTo((context, { key }) => key),
         removeToast: assign({
-          toasts: (context, event) =>
-            _.filter(context.toasts, toast => toast.key !== event.key),
+          toasts: (context, { key }) => _.reject({ key }, context.toasts),
         }),
         addToast: assign({
-          toasts: (context, event) => {
-            const key = event?.toast?.key ?? _.uniqueId('toast_');
-            const toast = {
-              ...event.toast,
-              key,
-              ref: spawn(createToastActor(key, event?.toast?.duration), {
-                name: key,
-              }),
-            };
-            return [...context.toasts, toast];
+          toasts: (context, { toast }) => {
+            const key = toast?.key ?? _.uniqueId('toast_');
+            const ownToastProps = _.omit(['ref', 'key']);
+
+            return [
+              // Hide all existing toasts, that are visually equal to the new one
+              ..._.reject(
+                oldToast =>
+                  _.isEqual(ownToastProps(oldToast), ownToastProps(toast)),
+                context.toasts
+              ),
+              {
+                ...toast,
+                key,
+                ref: spawn(createToastActor(key, toast?.duration), {
+                  name: key,
+                }),
+              },
+            ];
           },
         }),
       },

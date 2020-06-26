@@ -25,18 +25,14 @@ export const HttpErrorNotifier = () => {
   const httpClient = useContext(HttpContext);
   const { t } = useTranslation();
 
-  const openToastThrottle = useMemo(() => {
-    return throttle(openToast, 3000, { trailing: false });
-  }, [openToast]);
-
   useEffect(() => {
     const interceptor = httpClient.interceptors.response.use(
       response => response,
       error => {
-        const isSilent = Boolean(get(error, 'config.errorNotifier.silent'));
+        const isSilent = error?.config?.errorNotifier?.silent;
 
         if (!isSilent) {
-          openToastThrottle(getToastOptions(error, t));
+          openToast(getToastOptions(error, t));
         }
 
         return Promise.reject(error);

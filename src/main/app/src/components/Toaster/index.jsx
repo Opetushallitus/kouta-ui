@@ -96,7 +96,7 @@ const ToastWrapper = styled.div`
 `;
 
 export const Toaster = ({ ...props }) => {
-  const { toasts, closeToast } = useToaster();
+  const { toasts, closeToast, toastMouseEnter, toastMouseLeave } = useToaster();
 
   return (
     <ToasterContainer {...props}>
@@ -123,6 +123,8 @@ export const Toaster = ({ ...props }) => {
               status={item.status}
               style={props}
               onClose={() => closeToast(item.key)}
+              onMouseEnter={() => toastMouseEnter(item.key)}
+              onMouseLeave={() => toastMouseLeave(item.key)}
             >
               {item.label}
             </Toast>

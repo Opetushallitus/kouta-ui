@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import UiDatePickerInput from '@opetushallitus/virkailija-ui-components/DatePickerInput';
-
+import { isValid } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 
 const monthKeys = [
@@ -28,7 +28,12 @@ const getLocalisationProps = t => ({
   firstDayOfWeek: 1,
 });
 
-const DatePickerInput = ({ dayPickerProps = {}, disabled, ...props }) => {
+const DatePickerInput = ({
+  dayPickerProps = {},
+  disabled,
+  value,
+  ...props
+}) => {
   const { t } = useTranslation();
 
   const localisationProps = useMemo(() => getLocalisationProps(t), [t]);
@@ -40,6 +45,7 @@ const DatePickerInput = ({ dayPickerProps = {}, disabled, ...props }) => {
         ...dayPickerProps,
       }}
       {...props}
+      value={isValid(value) ? value : undefined}
       inputProps={{ ...(props?.inputProps ?? {}), disabled }}
     />
   );

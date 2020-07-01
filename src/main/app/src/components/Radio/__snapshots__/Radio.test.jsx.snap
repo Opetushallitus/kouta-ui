@@ -114,77 +114,40 @@ Array [
   margin-bottom: 4px;
 }
 
-<styled.div
-    isLast={false}
-    key=".$.0"
+<div
+    className="c0"
   >
-    <div
-      className="c0"
+    <label
+      className="c1"
+      disabled={false}
     >
-      <ForwardRef
-        checked={false}
-        disabled={false}
-        error={false}
-        key=".0"
-        onChange={[Function]}
-        value="a"
+      <div
+        className="c2"
       >
-        <styled.label
+        <input
+          checked={false}
+          className="c3 c4"
           disabled={false}
-          error={false}
+          onChange={[Function]}
+          type="radio"
+          value="a"
+        />
+        <div
+          checked={false}
+          className="c5 c6"
         >
-          <label
-            className="c1"
-            disabled={false}
-          >
-            <styled.div>
-              <div
-                className="c2"
-              >
-                <styled.input
-                  checked={false}
-                  disabled={false}
-                  onChange={[Function]}
-                  value="a"
-                >
-                  <input
-                    checked={false}
-                    className="c3 c4"
-                    disabled={false}
-                    onChange={[Function]}
-                    type="radio"
-                    value="a"
-                  />
-                </styled.input>
-                <styled.div
-                  checked={false}
-                  error={false}
-                >
-                  <div
-                    checked={false}
-                    className="c5 c6"
-                  >
-                    <styled.svg>
-                      <svg
-                        className="c7 c8"
-                      />
-                    </styled.svg>
-                  </div>
-                </styled.div>
-              </div>
-            </styled.div>
-            <styled.div>
-              <div
-                className="c9"
-              >
-                Radio A
-              </div>
-            </styled.div>
-          </label>
-        </styled.label>
-      </ForwardRef>
-    </div>
-  </styled.div>,
+          <svg
+            className="c7 c8"
+          />
+        </div>
+      </div>
+      <div
+        className="c9"
+      >
+        Radio A
+      </div>
+    </label>
+  </div>,
   .c2 {
   position: relative;
   -webkit-flex: 0;
@@ -299,77 +262,40 @@ Array [
   margin-bottom: 4px;
 }
 
-<styled.div
-    isLast={false}
-    key=".$.1"
+<div
+    className="c0"
   >
-    <div
-      className="c0"
+    <label
+      className="c1"
+      disabled={false}
     >
-      <ForwardRef
-        checked={true}
-        disabled={false}
-        error={false}
-        key=".1"
-        onChange={[Function]}
-        value="b"
+      <div
+        className="c2"
       >
-        <styled.label
+        <input
+          checked={true}
+          className="c3 c4"
           disabled={false}
-          error={false}
+          onChange={[Function]}
+          type="radio"
+          value="b"
+        />
+        <div
+          checked={true}
+          className="c5 c6"
         >
-          <label
-            className="c1"
-            disabled={false}
-          >
-            <styled.div>
-              <div
-                className="c2"
-              >
-                <styled.input
-                  checked={true}
-                  disabled={false}
-                  onChange={[Function]}
-                  value="b"
-                >
-                  <input
-                    checked={true}
-                    className="c3 c4"
-                    disabled={false}
-                    onChange={[Function]}
-                    type="radio"
-                    value="b"
-                  />
-                </styled.input>
-                <styled.div
-                  checked={true}
-                  error={false}
-                >
-                  <div
-                    checked={true}
-                    className="c5 c6"
-                  >
-                    <styled.svg>
-                      <svg
-                        className="c7 c8"
-                      />
-                    </styled.svg>
-                  </div>
-                </styled.div>
-              </div>
-            </styled.div>
-            <styled.div>
-              <div
-                className="c9"
-              >
-                Radio B
-              </div>
-            </styled.div>
-          </label>
-        </styled.label>
-      </ForwardRef>
-    </div>
-  </styled.div>,
+          <svg
+            className="c7 c8"
+          />
+        </div>
+      </div>
+      <div
+        className="c9"
+      >
+        Radio B
+      </div>
+    </label>
+  </div>,
   .c1 {
   position: relative;
   -webkit-flex: 0;
@@ -478,76 +404,39 @@ Array [
   margin-left: 9px;
 }
 
-<styled.div
-    isLast={true}
-    key=".$.2"
+<div
+    className=""
   >
-    <div
-      className=""
+    <label
+      className="c0"
+      disabled={false}
     >
-      <ForwardRef
-        checked={false}
-        disabled={false}
-        error={false}
-        key=".2"
-        onChange={[Function]}
-        value="c"
+      <div
+        className="c1"
       >
-        <styled.label
+        <input
+          checked={false}
+          className="c2 c3"
           disabled={false}
-          error={false}
+          onChange={[Function]}
+          type="radio"
+          value="c"
+        />
+        <div
+          checked={false}
+          className="c4 c5"
         >
-          <label
-            className="c0"
-            disabled={false}
-          >
-            <styled.div>
-              <div
-                className="c1"
-              >
-                <styled.input
-                  checked={false}
-                  disabled={false}
-                  onChange={[Function]}
-                  value="c"
-                >
-                  <input
-                    checked={false}
-                    className="c2 c3"
-                    disabled={false}
-                    onChange={[Function]}
-                    type="radio"
-                    value="c"
-                  />
-                </styled.input>
-                <styled.div
-                  checked={false}
-                  error={false}
-                >
-                  <div
-                    checked={false}
-                    className="c4 c5"
-                  >
-                    <styled.svg>
-                      <svg
-                        className="c6 c7"
-                      />
-                    </styled.svg>
-                  </div>
-                </styled.div>
-              </div>
-            </styled.div>
-            <styled.div>
-              <div
-                className="c8"
-              >
-                Radio C
-              </div>
-            </styled.div>
-          </label>
-        </styled.label>
-      </ForwardRef>
-    </div>
-  </styled.div>,
+          <svg
+            className="c6 c7"
+          />
+        </div>
+      </div>
+      <div
+        className="c8"
+      >
+        Radio C
+      </div>
+    </label>
+  </div>,
 ]
 `;

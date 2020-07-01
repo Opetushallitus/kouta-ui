@@ -48,26 +48,54 @@ test('getHakukohdeByFormValues returns correct hakukohde given form values', () 
     valintaperusteenKuvaus: {
       value: 'peruste_1#1',
     },
-    valintakoe: {
-      tyypit: [{ value: 'tyyppi_1#1' }],
-      tilaisuudet: {
-        'tyyppi_1#1': [
-          {
-            osoite: { fi: 'fi osoite', sv: 'sv osoite' },
-            postinumero: { value: 'posti_1#1' },
-            postitoimipaikka: {
-              fi: 'fi posititoimipaikka',
-              sv: 'sv posititoimipaikka',
-            },
-            alkaa: '2019-04-16T08:44',
-            paattyy: '2019-04-18T08:44',
-            lisatietoja: {
-              fi: 'fi lisatietoja',
-              sv: 'sv lisatietoja',
-            },
-          },
-        ],
+    jarjestyspaikkaOid: '2.2.2.2.2',
+    valintakokeet: {
+      yleisKuvaus: {
+        fi: parseEditorState('<p>Yleiskuvaus - fi</p>'),
+        sv: parseEditorState('<p>Yleiskuvaus - sv</p>'),
       },
+      kokeetTaiLisanaytot: [
+        {
+          nimi: { fi: 'nimi - fi', sv: 'nimi - sv' },
+          tyyppi: {
+            value: 'tyyppi_1#1',
+          },
+          tietoaHakijalle: {
+            fi: parseEditorState('<p>Tietoa hakijalle - fi</p>'),
+            sv: parseEditorState('<p>Tietoa hakijalle - sv</p>'),
+          },
+          liittyyEnnakkovalmistautumista: true,
+          ohjeetEnnakkovalmistautumiseen: {
+            fi: parseEditorState('<p>Ohjeet ennakkovalmistautumiseen - fi</p>'),
+            sv: parseEditorState('<p>ohjeet ennakkovalmistautumiseen - sv</p>'),
+          },
+          erityisjarjestelytMahdollisia: true,
+          ohjeetErityisjarjestelyihin: {
+            fi: parseEditorState('<p>Ohjeet erityisjärjestelyihin - fi</p>'),
+            sv: parseEditorState('<p>Ohjeet erityisjärjestelyihin - sv</p>'),
+          },
+          tilaisuudet: [
+            {
+              osoite: { fi: 'fi osoite', sv: 'sv osoite' },
+              postinumero: { value: 'posti_1#1' },
+              postitoimipaikka: {
+                fi: 'fi posititoimipaikka',
+                sv: 'sv posititoimipaikka',
+              },
+              alkaa: '2019-04-16T08:44',
+              paattyy: '2019-04-18T08:44',
+              lisatietoja: {
+                fi: 'fi lisatietoja',
+                sv: 'sv lisatietoja',
+              },
+              jarjestamispaikka: {
+                fi: 'jarjestamispaikka - fi',
+                sv: 'jarjestamispaikka - sv',
+              },
+            },
+          ],
+        },
+      ],
     },
     liitteet: {
       toimitustapa: {

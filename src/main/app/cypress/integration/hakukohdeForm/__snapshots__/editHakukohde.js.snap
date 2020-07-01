@@ -50,7 +50,9 @@ exports[`editHakukohdeForm > should be able to edit hakukohde #0`] =
   "liitteidenToimitusosoite": null,
   "liitteidenToimitustapa": null,
   "metadata": {
-    "valintakokeidenYleiskuvaus": {}
+    "valintakokeidenYleiskuvaus": {
+      "fi": "<p>Valintakokeiden kuvaus - fi</p>"
+    }
   },
   "modified": "2019-04-04T08:28",
   "muokkaaja": "1.2.246.562.24.62301161440",

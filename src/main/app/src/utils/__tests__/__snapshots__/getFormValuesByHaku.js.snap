@@ -47,10 +47,6 @@ Object {
     "sv": "Sv nimi",
   },
   "tila": "tallennettu",
-  "valintakoe": Object {
-    "tilaisuudet": Object {},
-    "tyypit": Array [],
-  },
   "yhteyshenkilot": Array [
     Object {
       "nimi": Object {
@@ -125,10 +121,6 @@ Object {
     "sv": "Sv nimi",
   },
   "tila": "tallennettu",
-  "valintakoe": Object {
-    "tilaisuudet": Object {},
-    "tyypit": Array [],
-  },
   "yhteyshenkilot": Array [
     Object {
       "nimi": Object {
@@ -203,10 +195,6 @@ Object {
     "sv": "Sv nimi",
   },
   "tila": "tallennettu",
-  "valintakoe": Object {
-    "tilaisuudet": Object {},
-    "tyypit": Array [],
-  },
   "yhteyshenkilot": Array [
     Object {
       "nimi": Object {

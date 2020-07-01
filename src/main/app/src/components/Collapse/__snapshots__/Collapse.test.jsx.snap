@@ -12,7 +12,7 @@ exports[`renders correctly 1`] = `
   padding: 24px;
 }
 
-.c6 {
+.c5 {
   font-size: 1.5rem;
 }
 
@@ -71,211 +71,82 @@ exports[`renders correctly 1`] = `
   border-top: 1px solid rgba(0,0,0,0.15);
 }
 
-.c5 {
+.c6 {
   color: #2a2a2a;
   font-size: 2rem;
 }
 
-<Collapse__Container
-  active={false}
+<div
+  className="c0"
 >
   <div
-    className="c0"
+    className="c1"
+    open={true}
   >
-    <Collapse__HeaderContainer
-      open={true}
-    >
-      <div
-        className="c1"
-        open={true}
-      >
-        <Collapse__HeaderContent
-          onClick={[Function]}
-          toggleOnHeaderClick={true}
-        >
-          <div
-            className="c2"
-            onClick={[Function]}
-          >
-            <styled.span
-              as="h5"
-              p={3}
-              variant="h5"
-            >
-              <h5
-                className="c3"
-              >
-                Text header
-              </h5>
-            </styled.span>
-          </div>
-        </Collapse__HeaderContent>
-        <Collapse__HeaderToggle
-          onClick={[Function]}
-        >
-          <div
-            className="c4"
-            onClick={[Function]}
-          >
-            <Collapse__ToggleIcon
-              icon="expand_more"
-              open={true}
-              role="button"
-            >
-              <ForwardRef
-                style={
-                  Object {
-                    "display": AnimatedValue {
-                      "animatedStyles": Set {},
-                      "children": Array [
-                        AnimatedStyle {
-                          "attach": [Function],
-                          "children": Array [
-                            AnimatedProps {
-                              "attach": [Function],
-                              "children": Array [],
-                              "detach": [Function],
-                              "payload": Object {
-                                "children": <ForwardRef
-                                  className="c5"
-                                  role="button"
-                                  type="expand_more"
-                                />,
-                                "style": [Circular],
-                              },
-                              "update": [Function],
-                            },
-                          ],
-                          "detach": [Function],
-                          "payload": [Circular],
-                        },
-                      ],
-                      "done": false,
-                      "lastPosition": "inline-flex",
-                      "lastTime": undefined,
-                      "lastVelocity": undefined,
-                      "payload": undefined,
-                      "setValue": [Function],
-                      "startPosition": "inline-flex",
-                      "startTime": 1553161674015,
-                      "value": "inline-flex",
-                    },
-                    "transform": AnimatedInterpolation {
-                      "attach": [Function],
-                      "calc": [Function],
-                      "children": Array [
-                        AnimatedStyle {
-                          "attach": [Function],
-                          "children": Array [
-                            AnimatedProps {
-                              "attach": [Function],
-                              "children": Array [],
-                              "detach": [Function],
-                              "payload": Object {
-                                "children": <ForwardRef
-                                  className="c5"
-                                  role="button"
-                                  type="expand_more"
-                                />,
-                                "style": [Circular],
-                              },
-                              "update": [Function],
-                            },
-                          ],
-                          "detach": [Function],
-                          "payload": [Circular],
-                        },
-                      ],
-                      "detach": [Function],
-                      "payload": Array [
-                        AnimatedValue {
-                          "animatedStyles": Set {},
-                          "children": Array [
-                            [Circular],
-                          ],
-                          "done": false,
-                          "lastPosition": 0,
-                          "lastTime": undefined,
-                          "lastVelocity": undefined,
-                          "payload": undefined,
-                          "setValue": [Function],
-                          "startPosition": 0,
-                          "startTime": 1553161674015,
-                          "value": 0,
-                        },
-                      ],
-                    },
-                  }
-                }
-              >
-                <span
-                  style={
-                    Object {
-                      "display": "inline-flex",
-                      "transform": "rotate(180deg)",
-                    }
-                  }
-                >
-                  <ForwardRef
-                    className="c5"
-                    role="button"
-                    type="expand_more"
-                  >
-                    <styled.span
-                      className="material-icons c5"
-                      role="button"
-                    >
-                      <span
-                        className="c6 material-icons c5"
-                        role="button"
-                      >
-                        expand_more
-                      </span>
-                    </styled.span>
-                  </ForwardRef>
-                </span>
-              </ForwardRef>
-            </Collapse__ToggleIcon>
-          </div>
-        </Collapse__HeaderToggle>
-      </div>
-    </Collapse__HeaderContainer>
     <div
-      style={
-        Object {
-          "height": 0,
-          "opacity": 1,
-          "overflow": "visible",
-        }
-      }
+      className="c2"
+      onClick={[Function]}
     >
-      <styled.div
-        p={3}
+      <h5
+        className="c3"
       >
-        <div
-          className="c7"
+        Text header
+      </h5>
+    </div>
+    <div
+      className="c4"
+      onClick={[Function]}
+    >
+      <span
+        style={
+          Object {
+            "display": "inline-flex",
+            "transform": "rotate(180deg)",
+          }
+        }
+      >
+        <span
+          className="c5 material-icons c6"
+          role="button"
         >
-          <div>
-            Collapse children
-          </div>
-        </div>
-      </styled.div>
-      <Collapse__FooterContainer>
-        <div
-          className="c8"
-        >
-          <button>
-            Footer button
-          </button>
-        </div>
-      </Collapse__FooterContainer>
+          expand_more
+        </span>
+      </span>
     </div>
   </div>
-</Collapse__Container>
+  <div
+    style={
+      Object {
+        "height": 0,
+        "opacity": 1,
+        "overflow": "visible",
+      }
+    }
+  >
+    <div
+      className="CollapseContent"
+    >
+      <div
+        className="c7"
+      >
+        <div>
+          Collapse children
+        </div>
+      </div>
+      <div
+        className="c8"
+      >
+        <button>
+          Footer button
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`renders correctly 2`] = `
-.c5 {
+.c4 {
   font-size: 1.5rem;
 }
 
@@ -334,199 +205,76 @@ exports[`renders correctly 2`] = `
   border-top: 1px solid rgba(0,0,0,0.15);
 }
 
-.c4 {
+.c5 {
   color: #2a2a2a;
   font-size: 2rem;
 }
 
-<Collapse__Container
-  active={false}
+<div
+  className="c0"
 >
   <div
-    className="c0"
+    className="c1"
+    open={true}
   >
-    <Collapse__HeaderContainer
-      open={true}
-    >
-      <div
-        className="c1"
-        open={true}
-      >
-        <Collapse__HeaderContent
-          onClick={[Function]}
-          toggleOnHeaderClick={true}
-        >
-          <div
-            className="c2"
-            onClick={[Function]}
-          >
-            <div>
-              Element header
-            </div>
-          </div>
-        </Collapse__HeaderContent>
-        <Collapse__HeaderToggle
-          onClick={[Function]}
-        >
-          <div
-            className="c3"
-            onClick={[Function]}
-          >
-            <Collapse__ToggleIcon
-              icon="expand_more"
-              open={true}
-              role="button"
-            >
-              <ForwardRef
-                style={
-                  Object {
-                    "display": AnimatedValue {
-                      "animatedStyles": Set {},
-                      "children": Array [
-                        AnimatedStyle {
-                          "attach": [Function],
-                          "children": Array [
-                            AnimatedProps {
-                              "attach": [Function],
-                              "children": Array [],
-                              "detach": [Function],
-                              "payload": Object {
-                                "children": <ForwardRef
-                                  className="c4"
-                                  role="button"
-                                  type="expand_more"
-                                />,
-                                "style": [Circular],
-                              },
-                              "update": [Function],
-                            },
-                          ],
-                          "detach": [Function],
-                          "payload": [Circular],
-                        },
-                      ],
-                      "done": false,
-                      "lastPosition": "inline-flex",
-                      "lastTime": undefined,
-                      "lastVelocity": undefined,
-                      "payload": undefined,
-                      "setValue": [Function],
-                      "startPosition": "inline-flex",
-                      "startTime": 1553161674015,
-                      "value": "inline-flex",
-                    },
-                    "transform": AnimatedInterpolation {
-                      "attach": [Function],
-                      "calc": [Function],
-                      "children": Array [
-                        AnimatedStyle {
-                          "attach": [Function],
-                          "children": Array [
-                            AnimatedProps {
-                              "attach": [Function],
-                              "children": Array [],
-                              "detach": [Function],
-                              "payload": Object {
-                                "children": <ForwardRef
-                                  className="c4"
-                                  role="button"
-                                  type="expand_more"
-                                />,
-                                "style": [Circular],
-                              },
-                              "update": [Function],
-                            },
-                          ],
-                          "detach": [Function],
-                          "payload": [Circular],
-                        },
-                      ],
-                      "detach": [Function],
-                      "payload": Array [
-                        AnimatedValue {
-                          "animatedStyles": Set {},
-                          "children": Array [
-                            [Circular],
-                          ],
-                          "done": false,
-                          "lastPosition": 0,
-                          "lastTime": undefined,
-                          "lastVelocity": undefined,
-                          "payload": undefined,
-                          "setValue": [Function],
-                          "startPosition": 0,
-                          "startTime": 1553161674015,
-                          "value": 0,
-                        },
-                      ],
-                    },
-                  }
-                }
-              >
-                <span
-                  style={
-                    Object {
-                      "display": "inline-flex",
-                      "transform": "rotate(180deg)",
-                    }
-                  }
-                >
-                  <ForwardRef
-                    className="c4"
-                    role="button"
-                    type="expand_more"
-                  >
-                    <styled.span
-                      className="material-icons c4"
-                      role="button"
-                    >
-                      <span
-                        className="c5 material-icons c4"
-                        role="button"
-                      >
-                        expand_more
-                      </span>
-                    </styled.span>
-                  </ForwardRef>
-                </span>
-              </ForwardRef>
-            </Collapse__ToggleIcon>
-          </div>
-        </Collapse__HeaderToggle>
-      </div>
-    </Collapse__HeaderContainer>
     <div
-      style={
-        Object {
-          "height": 0,
-          "opacity": 1,
-          "overflow": "visible",
-        }
-      }
+      className="c2"
+      onClick={[Function]}
     >
-      <styled.div
-        p={3}
+      <div>
+        Element header
+      </div>
+    </div>
+    <div
+      className="c3"
+      onClick={[Function]}
+    >
+      <span
+        style={
+          Object {
+            "display": "inline-flex",
+            "transform": "rotate(180deg)",
+          }
+        }
       >
-        <div
-          className="c6"
+        <span
+          className="c4 material-icons c5"
+          role="button"
         >
-          <div>
-            Collapse children
-          </div>
-        </div>
-      </styled.div>
-      <Collapse__FooterContainer>
-        <div
-          className="c7"
-        >
-          <button>
-            Footer button
-          </button>
-        </div>
-      </Collapse__FooterContainer>
+          expand_more
+        </span>
+      </span>
     </div>
   </div>
-</Collapse__Container>
+  <div
+    style={
+      Object {
+        "height": 0,
+        "opacity": 1,
+        "overflow": "visible",
+      }
+    }
+  >
+    <div
+      className="CollapseContent"
+    >
+      <div
+        className="c6"
+      >
+        <div>
+          Collapse children
+        </div>
+      </div>
+      <div
+        className="c7"
+      >
+        <button>
+          Footer button
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`renders correctly when closed 1`] = `
@@ -541,7 +289,7 @@ exports[`renders correctly when closed 1`] = `
   padding: 24px;
 }
 
-.c6 {
+.c5 {
   font-size: 1.5rem;
 }
 
@@ -599,205 +347,76 @@ exports[`renders correctly when closed 1`] = `
   border-top: 1px solid rgba(0,0,0,0.15);
 }
 
-.c5 {
+.c6 {
   color: #2a2a2a;
   font-size: 2rem;
 }
 
-<Collapse__Container
-  active={false}
+<div
+  className="c0"
 >
   <div
-    className="c0"
+    className="c1"
+    open={false}
   >
-    <Collapse__HeaderContainer
-      open={false}
-    >
-      <div
-        className="c1"
-        open={false}
-      >
-        <Collapse__HeaderContent
-          onClick={[Function]}
-          toggleOnHeaderClick={true}
-        >
-          <div
-            className="c2"
-            onClick={[Function]}
-          >
-            <styled.span
-              as="h5"
-              p={3}
-              variant="h5"
-            >
-              <h5
-                className="c3"
-              >
-                Header
-              </h5>
-            </styled.span>
-          </div>
-        </Collapse__HeaderContent>
-        <Collapse__HeaderToggle
-          onClick={[Function]}
-        >
-          <div
-            className="c4"
-            onClick={[Function]}
-          >
-            <Collapse__ToggleIcon
-              icon="expand_more"
-              open={false}
-              role="button"
-            >
-              <ForwardRef
-                style={
-                  Object {
-                    "display": AnimatedValue {
-                      "animatedStyles": Set {},
-                      "children": Array [
-                        AnimatedStyle {
-                          "attach": [Function],
-                          "children": Array [
-                            AnimatedProps {
-                              "attach": [Function],
-                              "children": Array [],
-                              "detach": [Function],
-                              "payload": Object {
-                                "children": <ForwardRef
-                                  className="c5"
-                                  role="button"
-                                  type="expand_more"
-                                />,
-                                "style": [Circular],
-                              },
-                              "update": [Function],
-                            },
-                          ],
-                          "detach": [Function],
-                          "payload": [Circular],
-                        },
-                      ],
-                      "done": false,
-                      "lastPosition": "inline-flex",
-                      "lastTime": undefined,
-                      "lastVelocity": undefined,
-                      "payload": undefined,
-                      "setValue": [Function],
-                      "startPosition": "inline-flex",
-                      "startTime": 1553161674015,
-                      "value": "inline-flex",
-                    },
-                    "transform": AnimatedInterpolation {
-                      "attach": [Function],
-                      "calc": [Function],
-                      "children": Array [
-                        AnimatedStyle {
-                          "attach": [Function],
-                          "children": Array [
-                            AnimatedProps {
-                              "attach": [Function],
-                              "children": Array [],
-                              "detach": [Function],
-                              "payload": Object {
-                                "children": <ForwardRef
-                                  className="c5"
-                                  role="button"
-                                  type="expand_more"
-                                />,
-                                "style": [Circular],
-                              },
-                              "update": [Function],
-                            },
-                          ],
-                          "detach": [Function],
-                          "payload": [Circular],
-                        },
-                      ],
-                      "detach": [Function],
-                      "payload": Array [
-                        AnimatedValue {
-                          "animatedStyles": Set {},
-                          "children": Array [
-                            [Circular],
-                          ],
-                          "done": false,
-                          "lastPosition": 0,
-                          "lastTime": undefined,
-                          "lastVelocity": undefined,
-                          "payload": undefined,
-                          "setValue": [Function],
-                          "startPosition": 0,
-                          "startTime": 1553161674015,
-                          "value": 0,
-                        },
-                      ],
-                    },
-                  }
-                }
-              >
-                <span
-                  style={
-                    Object {
-                      "display": "inline-flex",
-                      "transform": "rotate(0deg)",
-                    }
-                  }
-                >
-                  <ForwardRef
-                    className="c5"
-                    role="button"
-                    type="expand_more"
-                  >
-                    <styled.span
-                      className="material-icons c5"
-                      role="button"
-                    >
-                      <span
-                        className="c6 material-icons c5"
-                        role="button"
-                      >
-                        expand_more
-                      </span>
-                    </styled.span>
-                  </ForwardRef>
-                </span>
-              </ForwardRef>
-            </Collapse__ToggleIcon>
-          </div>
-        </Collapse__HeaderToggle>
-      </div>
-    </Collapse__HeaderContainer>
     <div
-      style={
-        Object {
-          "height": 0,
-          "opacity": 0,
-          "overflow": "hidden",
-        }
-      }
+      className="c2"
+      onClick={[Function]}
     >
-      <styled.div
-        p={3}
+      <h5
+        className="c3"
       >
-        <div
-          className="c7"
+        Header
+      </h5>
+    </div>
+    <div
+      className="c4"
+      onClick={[Function]}
+    >
+      <span
+        style={
+          Object {
+            "display": "inline-flex",
+            "transform": "rotate(0deg)",
+          }
+        }
+      >
+        <span
+          className="c5 material-icons c6"
+          role="button"
         >
-          <div>
-            Hello world!
-          </div>
-        </div>
-      </styled.div>
-      <Collapse__FooterContainer>
-        <div
-          className="c8"
-        >
-          <div>
-            footer
-          </div>
-        </div>
-      </Collapse__FooterContainer>
+          expand_more
+        </span>
+      </span>
     </div>
   </div>
-</Collapse__Container>
+  <div
+    style={
+      Object {
+        "height": 0,
+        "opacity": 0,
+        "overflow": "hidden",
+      }
+    }
+  >
+    <div
+      className="CollapseContent"
+    >
+      <div
+        className="c7"
+      >
+        <div>
+          Hello world!
+        </div>
+      </div>
+      <div
+        className="c8"
+      >
+        <div>
+          footer
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 `;

@@ -37,7 +37,7 @@ const KoulutusForm = ({
   koulutus: koulutusProp = null,
   johtaaTutkintoon = true,
   onAttachToteutus = undefined,
-  onSelectBase,
+  onSelectBase = undefined,
 }) => {
   const { t } = useTranslation();
 

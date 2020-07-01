@@ -17,6 +17,10 @@ Object {
     },
     "osaamistaustaKoodiUrit": Array [],
     "tyyppi": "tyyppi_1#1",
+    "valintakokeidenYleiskuvaus": Object {
+      "fi": "<p>Yleiskuvaus - fi</p>",
+      "sv": "<p>Yleiskuvaus - sv</p>",
+    },
     "valintatavat": Array [
       Object {
         "enimmaispisteet": 20,
@@ -102,23 +106,26 @@ Object {
   "tila": "julkaistu",
   "valintakokeet": Array [
     Object {
-      "erityisjarjestelytMahdollisia": true,
-      "liittyyEnnakkovalmistautumista": true,
+      "id": undefined,
+      "metadata": Object {
+        "erityisjarjestelytMahdollisia": true,
+        "liittyyEnnakkovalmistautumista": true,
+        "ohjeetEnnakkovalmistautumiseen": Object {
+          "fi": "<p>Ohjeet ennakkovalmistautumiseen - fi</p>",
+          "sv": "<p>ohjeet ennakkovalmistautumiseen - sv</p>",
+        },
+        "ohjeetErityisjarjestelyihin": Object {
+          "fi": "<p>Ohjeet erityisjärjestelyihin - fi</p>",
+          "sv": "<p>Ohjeet erityisjärjestelyihin - sv</p>",
+        },
+        "tietoja": Object {
+          "fi": "<p>Tietoa hakijalle - fi</p>",
+          "sv": "<p>Tietoa hakijalle - sv</p>",
+        },
+      },
       "nimi": Object {
         "fi": "nimi - fi",
         "sv": "nimi - sv",
-      },
-      "ohjeetEnnakkovalmistautumiseen": Object {
-        "fi": "<p>Ohjeet ennakkovalmistautumiseen - fi</p>",
-        "sv": "<p>ohjeet ennakkovalmistautumiseen - sv</p>",
-      },
-      "ohjeetErityisjarjestelyihin": Object {
-        "fi": "<p>Ohjeet erityisjärjestelyihin - fi</p>",
-        "sv": "<p>Ohjeet erityisjärjestelyihin - sv</p>",
-      },
-      "tietoja": Object {
-        "fi": "<p>Tietoa hakijalle - fi</p>",
-        "sv": "<p>Tietoa hakijalle - sv</p>",
       },
       "tilaisuudet": Array [
         Object {
@@ -146,10 +153,6 @@ Object {
       "tyyppiKoodiUri": "tyyppi_1#1",
     },
   ],
-  "valintakokeidenYleiskuvaus": Object {
-    "fi": "<p>Yleiskuvaus - fi</p>",
-    "sv": "<p>Yleiskuvaus - sv</p>",
-  },
 }
 `;
 
@@ -170,6 +173,10 @@ Object {
     },
     "osaamistaustaKoodiUrit": Array [],
     "tyyppi": "tyyppi_1#1",
+    "valintakokeidenYleiskuvaus": Object {
+      "fi": "<p>Yleiskuvaus - fi</p>",
+      "sv": "<p>Yleiskuvaus - sv</p>",
+    },
     "valintatavat": Array [],
   },
   "muokkaaja": undefined,
@@ -182,23 +189,26 @@ Object {
   "tila": "julkaistu",
   "valintakokeet": Array [
     Object {
-      "erityisjarjestelytMahdollisia": true,
-      "liittyyEnnakkovalmistautumista": true,
+      "id": undefined,
+      "metadata": Object {
+        "erityisjarjestelytMahdollisia": true,
+        "liittyyEnnakkovalmistautumista": true,
+        "ohjeetEnnakkovalmistautumiseen": Object {
+          "fi": "<p>Ohjeet ennakkovalmistautumiseen - fi</p>",
+          "sv": "<p>ohjeet ennakkovalmistautumiseen - sv</p>",
+        },
+        "ohjeetErityisjarjestelyihin": Object {
+          "fi": "<p>Ohjeet erityisjärjestelyihin - fi</p>",
+          "sv": "<p>Ohjeet erityisjärjestelyihin - sv</p>",
+        },
+        "tietoja": Object {
+          "fi": "<p>Tietoa hakijalle - fi</p>",
+          "sv": "<p>Tietoa hakijalle - sv</p>",
+        },
+      },
       "nimi": Object {
         "fi": "nimi - fi",
         "sv": "nimi - sv",
-      },
-      "ohjeetEnnakkovalmistautumiseen": Object {
-        "fi": "<p>Ohjeet ennakkovalmistautumiseen - fi</p>",
-        "sv": "<p>ohjeet ennakkovalmistautumiseen - sv</p>",
-      },
-      "ohjeetErityisjarjestelyihin": Object {
-        "fi": "<p>Ohjeet erityisjärjestelyihin - fi</p>",
-        "sv": "<p>Ohjeet erityisjärjestelyihin - sv</p>",
-      },
-      "tietoja": Object {
-        "fi": "<p>Tietoa hakijalle - fi</p>",
-        "sv": "<p>Tietoa hakijalle - sv</p>",
       },
       "tilaisuudet": Array [
         Object {
@@ -226,9 +236,5 @@ Object {
       "tyyppiKoodiUri": "tyyppi_1#1",
     },
   ],
-  "valintakokeidenYleiskuvaus": Object {
-    "fi": "<p>Yleiskuvaus - fi</p>",
-    "sv": "<p>Yleiskuvaus - sv</p>",
-  },
 }
 `;

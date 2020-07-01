@@ -43,44 +43,21 @@ exports[`renders correctly with color 1`] = `
   box-shadow: 0 0 0 3px rgba(21,158,203,0.3);
 }
 
-<ForwardRef
-  color="primary"
+<div
+  className="ButtonWrapper"
 >
-  <styled.button
-    as={
-      Object {
-        "$$typeof": Symbol(react.forward_ref),
-        "render": [Function],
-      }
-    }
+  <button
+    className="c0"
     color="primary"
     disabled={false}
     fullWidth={false}
     size="medium"
+    type="button"
     variant="contained"
   >
-    <ForwardRef
-      className="c0"
-      color="primary"
-      disabled={false}
-      fullWidth={false}
-      size="medium"
-      variant="contained"
-    >
-      <button
-        className="c0"
-        color="primary"
-        disabled={false}
-        fullWidth={false}
-        size="medium"
-        type="button"
-        variant="contained"
-      >
-        Primary button
-      </button>
-    </ForwardRef>
-  </styled.button>
-</ForwardRef>
+    Primary button
+  </button>
+</div>
 `;
 
 exports[`renders correctly with color 2`] = `
@@ -126,44 +103,21 @@ exports[`renders correctly with color 2`] = `
   box-shadow: 0 0 0 3px rgba(153,153,153,0.3);
 }
 
-<ForwardRef
-  color="secondary"
+<div
+  className="ButtonWrapper"
 >
-  <styled.button
-    as={
-      Object {
-        "$$typeof": Symbol(react.forward_ref),
-        "render": [Function],
-      }
-    }
+  <button
+    className="c0"
     color="secondary"
     disabled={false}
     fullWidth={false}
     size="medium"
+    type="button"
     variant="contained"
   >
-    <ForwardRef
-      className="c0"
-      color="secondary"
-      disabled={false}
-      fullWidth={false}
-      size="medium"
-      variant="contained"
-    >
-      <button
-        className="c0"
-        color="secondary"
-        disabled={false}
-        fullWidth={false}
-        size="medium"
-        type="button"
-        variant="contained"
-      >
-        Secondary button
-      </button>
-    </ForwardRef>
-  </styled.button>
-</ForwardRef>
+    Secondary button
+  </button>
+</div>
 `;
 
 exports[`renders correctly with variant 1`] = `
@@ -209,44 +163,21 @@ exports[`renders correctly with variant 1`] = `
   box-shadow: 0 0 0 3px rgba(21,158,203,0.3);
 }
 
-<ForwardRef
-  variant="contained"
+<div
+  className="ButtonWrapper"
 >
-  <styled.button
-    as={
-      Object {
-        "$$typeof": Symbol(react.forward_ref),
-        "render": [Function],
-      }
-    }
+  <button
+    className="c0"
     color="primary"
     disabled={false}
     fullWidth={false}
     size="medium"
+    type="button"
     variant="contained"
   >
-    <ForwardRef
-      className="c0"
-      color="primary"
-      disabled={false}
-      fullWidth={false}
-      size="medium"
-      variant="contained"
-    >
-      <button
-        className="c0"
-        color="primary"
-        disabled={false}
-        fullWidth={false}
-        size="medium"
-        type="button"
-        variant="contained"
-      >
-        Contained button
-      </button>
-    </ForwardRef>
-  </styled.button>
-</ForwardRef>
+    Contained button
+  </button>
+</div>
 `;
 
 exports[`renders correctly with variant 2`] = `
@@ -293,42 +224,19 @@ exports[`renders correctly with variant 2`] = `
   box-shadow: 0 0 0 3px rgba(21,158,203,0.3);
 }
 
-<ForwardRef
-  variant="outlined"
+<div
+  className="ButtonWrapper"
 >
-  <styled.button
-    as={
-      Object {
-        "$$typeof": Symbol(react.forward_ref),
-        "render": [Function],
-      }
-    }
+  <button
+    className="c0"
     color="primary"
     disabled={false}
     fullWidth={false}
     size="medium"
+    type="button"
     variant="outlined"
   >
-    <ForwardRef
-      className="c0"
-      color="primary"
-      disabled={false}
-      fullWidth={false}
-      size="medium"
-      variant="outlined"
-    >
-      <button
-        className="c0"
-        color="primary"
-        disabled={false}
-        fullWidth={false}
-        size="medium"
-        type="button"
-        variant="outlined"
-      >
-        Outlined button
-      </button>
-    </ForwardRef>
-  </styled.button>
-</ForwardRef>
+    Outlined button
+  </button>
+</div>
 `;

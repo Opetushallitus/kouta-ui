@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
-import { isArray, uniq, without, negate } from 'lodash';
+import { isArray, uniq, without, negate, omit } from 'lodash';
 
 import getKoulutusByFormValues from '../../utils/getKoulutusByFormValues';
 import updateKoulutus from '../../utils/kouta/updateKoulutus';
@@ -60,15 +60,23 @@ const EditKoulutusFooter = ({ koulutus, organisaatioOid, canUpdate }) => {
       await updateKoulutus({
         httpClient,
         apiUrls,
-        koulutus: {
-          ...koulutus,
-          ...getKoulutusByFormValues(values),
-          tarjoajat: mergeTarjoajat(
-            koulutus.tarjoajat,
-            values.tarjoajat,
-            availableTarjoajaOids
-          ),
-        },
+        koulutus: omit(
+          {
+            ...koulutus,
+            ...getKoulutusByFormValues(values),
+            tarjoajat: mergeTarjoajat(
+              koulutus.tarjoajat,
+              values.tarjoajat,
+              availableTarjoajaOids
+            ),
+            // This is a workaround for updating tarjoajat. Muokkaaja-field shouldn't be needed anymore
+            // but backend requires it when creating new ones.
+            // TODO: Remove this when backend works without muokkaaja
+            muokkaaja: koulutus?.muokkaaja,
+          },
+          // modified-field also prevented updating tarjoajat, this is a workaround. See above.
+          'modified'
+        ),
       });
 
       history.replace({

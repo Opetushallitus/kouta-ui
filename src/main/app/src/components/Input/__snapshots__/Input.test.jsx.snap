@@ -32,24 +32,13 @@ exports[`renders correctly 1`] = `
   position: relative;
 }
 
-<ForwardRef>
-  <styled.div>
-    <div
-      className="c0"
-    >
-      <styled.input
-        disabled={false}
-        error={false}
-        hasPrefix={false}
-        hasSuffix={false}
-      >
-        <input
-          className="c1"
-          disabled={false}
-          type="text"
-        />
-      </styled.input>
-    </div>
-  </styled.div>
-</ForwardRef>
+<div
+  className="c0"
+>
+  <input
+    className="c1"
+    disabled={false}
+    type="text"
+  />
+</div>
 `;

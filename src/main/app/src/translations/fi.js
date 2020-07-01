@@ -225,6 +225,8 @@ export default {
       viesti:
         'Yhteys palvelimeen on katkennut. Ole hyvä ja tarkista verkkoyhteytesi.',
     },
+    naytaVirhe: 'Näytä virhe',
+    piilotaVirhe: 'Piilota virhe',
   },
   sivuTitlet: {
     etuliite: 'Tarjonta',

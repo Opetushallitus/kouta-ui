@@ -1,14 +1,15 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { Transition } from 'react-spring/renderprops';
-import { connect } from 'react-redux';
-import { get, isFunction } from 'lodash';
+import _ from 'lodash/fp';
 
-import Icon from '../Icon';
-import { getThemeProp } from '../../theme';
-import Typography from '../Typography';
-import { closeToast } from '../../state/toaster';
-import Box from '../Box';
+import { getThemeProp } from '#/src/theme';
+import Icon from '#/src/components/Icon';
+import Typography from '#/src/components/Typography';
+import Box from '#/src/components/Box';
+import useToaster from '#/src/components/useToaster';
+import AbstractCollapse from '#/src/components/AbstractCollapse';
+import { useTranslation } from 'react-i18next';
 
 const ToasterContainer = styled.div`
   display: flex;
@@ -17,11 +18,11 @@ const ToasterContainer = styled.div`
 
 const ToastContainer = styled.div`
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
   border-radius: ${getThemeProp('shape.borderRadius')};
   overflow: hidden;
-  max-width: 450px;
+  max-width: 800px;
   background-color: white;
   color: ${({ theme }) => theme.palette.text.primary};
   padding: 16px;
@@ -48,9 +49,20 @@ const ToastContainer = styled.div`
     `}
 `;
 
-const CloseIcon = styled(Icon).attrs({ type: 'close' })`
+const ToastWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+
+  ${({ last }) =>
+    !last &&
+    css`
+      margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
+    `};
+`;
+
+const hoverHighlightStyle = css`
   color: inherit;
-  opacity: 0.6;
+  opacity: 0.7;
   font-size: 1.25rem;
   transition: opacity 0.25s;
   cursor: pointer;
@@ -59,6 +71,25 @@ const CloseIcon = styled(Icon).attrs({ type: 'close' })`
     opacity: 1;
   }
 `;
+
+const CloseIcon = styled(Icon).attrs({ type: 'close' })(hoverHighlightStyle);
+
+const ErrorContainer = styled.div`
+  display: flex;
+  ${hoverHighlightStyle}
+`;
+
+const ErrorToggle = ({ open, onToggle, ...props }) => {
+  const { t } = useTranslation();
+  return (
+    <ErrorContainer onClick={onToggle} {...props}>
+      <Icon type={open ? 'arrow_drop_down' : 'arrow_right'} />
+      <Typography color="inherit">
+        {open ? t('ilmoitukset.piilotaVirhe') : t('ilmoitukset.naytaVirhe')}
+      </Typography>
+    </ErrorContainer>
+  );
+};
 
 const iconByStatus = {
   success: 'check_circle_outline',
@@ -74,10 +105,8 @@ export const Toast = ({
 }) => (
   <ToastContainer status={status} {...props}>
     <Icon type={iconByStatus[status] || ''} mr={2} />
-    <Box>
-      <Typography color="inherit">{children}</Typography>
-    </Box>
-    {isFunction(onClose) ? (
+    <Typography color="inherit">{children}</Typography>
+    {_.isFunction(onClose) ? (
       <Box ml={2}>
         <CloseIcon onClick={onClose} />
       </Box>
@@ -85,65 +114,63 @@ export const Toast = ({
   </ToastContainer>
 );
 
-const ToastWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-
-  ${({ last }) =>
-    !last &&
-    css`
-      margin-bottom: ${({ theme }) => theme.spacing.unit * 2}px;
-    `};
+const FormattedError = styled.pre`
+  font-size: 13px;
+  white-space: pre-wrap;
+  word-break: keep-all;
 `;
 
-export const Toaster = ({ toasts, onClose, ...props }) => (
-  <ToasterContainer {...props}>
-    <Transition
-      items={toasts}
-      keys={item => item.key}
-      enter={{
-        opacity: 1,
-        transform: 'scale(1)',
-      }}
-      leave={{
-        opacity: 0,
-        transform: 'scale(0.5)',
-      }}
-      from={{
-        opacity: 0,
-        transform: 'scale(0.5)',
-      }}
-    >
-      {(item, state, index) => props => (
-        <ToastWrapper last={index === toasts.length - 1}>
-          <Toast
-            status={item.status}
-            style={props}
-            {...(isFunction(onClose)
-              ? {
-                  onClose: () => {
-                    onClose(item.key);
-                  },
-                }
-              : {})}
-          >
-            {item.label}
-          </Toast>
-        </ToastWrapper>
-      )}
-    </Transition>
-  </ToasterContainer>
-);
+export const Toaster = ({ ...props }) => {
+  const { toasts, closeToast, toastMouseEnter, toastMouseLeave } = useToaster();
 
-export const ReduxToaster = connect(
-  state => ({
-    toasts: get(state, 'toaster.toasts') || [],
-  }),
-  dispatch => ({
-    onClose: key => {
-      dispatch(closeToast(key));
-    },
-  })
-)(Toaster);
+  return (
+    <ToasterContainer {...props}>
+      <Transition
+        items={toasts}
+        keys={item => item.key}
+        enter={{
+          opacity: 1,
+          transform: 'scale(1)',
+        }}
+        leave={{
+          opacity: 0,
+          transform: 'scale(0.5)',
+        }}
+        from={{
+          opacity: 0,
+          transform: 'scale(0.5)',
+        }}
+      >
+        {(item, state, index) => props => (
+          <ToastWrapper last={index === toasts.length - 1}>
+            <Toast
+              key={item.key}
+              status={item.status}
+              style={props}
+              onClose={() => closeToast(item.key)}
+              onMouseEnter={() => toastMouseEnter(item.key)}
+              onMouseLeave={() => toastMouseLeave(item.key)}
+            >
+              <Box mb={1}>{item.label}</Box>
+              {item.error && (
+                <AbstractCollapse
+                  content={
+                    <FormattedError>
+                      {JSON.stringify(item.error, null, 2)}
+                    </FormattedError>
+                  }
+                >
+                  {({ open, onToggle }) => (
+                    <ErrorToggle open={open} onToggle={onToggle} />
+                  )}
+                </AbstractCollapse>
+              )}
+            </Toast>
+          </ToastWrapper>
+        )}
+      </Transition>
+    </ToasterContainer>
+  );
+};
 
 export default Toaster;

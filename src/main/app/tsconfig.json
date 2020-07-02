@@ -1,6 +1,9 @@
 {
   "extends": "./tsconfig.paths.json",
   "compilerOptions": {
+    "types": [
+      "jest"
+    ],
     "allowJs": true,
     "checkJs": true,
     "esModuleInterop": true,
@@ -23,12 +26,12 @@
     "strict": true
   },
   "include": [
-    "./src",
-    "./cypress"
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.jsx",
+    "src/**/*.js"
   ],
   "exclude": [
-    "**/*.test.js",
-    "**/*.test.ts",
-    "**/__tests__/**"
+    "node_modules"
   ]
 }

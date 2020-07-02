@@ -1,6 +1,5 @@
-const merge = require('lodash/merge');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const alias = require('../webpack-alias.js');
+const { compose } = require('lodash/fp');
+const { withoutPlugins, withImportAlias } = require('../webpack-utils');
 
 module.exports = {
   stories: ['../src/**/*.stories.[tj]s?(x)'],
@@ -10,13 +9,5 @@ module.exports = {
     '@storybook/addon-links/register',
     '@storybook/addon-knobs/register',
   ],
-  webpackFinal: async config => ({
-    ...config,
-    plugins: config.plugins.filter(
-      plugin => !(plugin instanceof ForkTsCheckerWebpackPlugin)
-    ),
-    resolve: merge(config.resolve, {
-      alias,
-    }),
-  }),
+  webpackFinal: compose(withoutPlugins(['ForkTsCheckerWebpackPlugin']), withImportAlias),
 };

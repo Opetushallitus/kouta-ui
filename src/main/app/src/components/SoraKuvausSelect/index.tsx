@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 import { noop } from 'lodash';
-import { createChainedFunction } from '../../utils';
-import useSoraKuvausOptions from '../useSoraKuvausOptions';
-import Select from '../Select';
+import { createChainedFunction } from '#/src/utils';
+import useSoraKuvausOptions from '#/src/hooks/useSoraKuvausOptions';
+import Select from '#/src/components/Select';
 
 export const SoraKuvausSelect = ({
   reloadOnFocus = false,

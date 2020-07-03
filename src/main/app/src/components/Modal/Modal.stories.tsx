@@ -4,8 +4,8 @@ import { action } from '@storybook/addon-actions';
 
 import Modal from './index';
 
-import Button from '../Button';
-import Typography from '../Typography';
+import Button from '#/src/components/Button';
+import Typography from '#/src/components/Typography';
 
 const header = 'Lorem ipsum';
 

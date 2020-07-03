@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Radio, { RadioGroup } from './index';
-import { mountWithTheme } from '../../testUtils';
+import { mountWithTheme } from '#/src/testUtils';
 
 test('renders correctly', () => {
   expect(

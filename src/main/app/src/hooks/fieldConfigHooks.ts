@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import _ from 'lodash';
-import FormConfigSectionContext from '#/src/components/FormConfigSectionContext';
+import FormConfigSectionContext from '#/src/contexts/FormConfigSectionContext';
 import { useFormConfig, useForm } from '#/src/hooks/form';
 
 const findFieldConfig = (fieldConfigs = [], name) => {

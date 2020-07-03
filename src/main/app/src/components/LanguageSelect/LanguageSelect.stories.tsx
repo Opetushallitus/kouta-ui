@@ -5,11 +5,11 @@ import { action } from '@storybook/addon-actions';
 import LanguageSelect from './index';
 import {
   makeApiDecorator,
-  makeLocalisationDecorator,
-} from '../../storybookUtils';
+  makeLocalizationDecorator,
+} from '#/src/storybookUtils';
 
 storiesOf('LanguageSelect', module)
-  .addDecorator(makeLocalisationDecorator())
+  .addDecorator(makeLocalizationDecorator())
   .addDecorator(makeApiDecorator())
   .add('Basic', () => <LanguageSelect onChange={action('change')} />)
   .add('With translation', () => (

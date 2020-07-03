@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import _ from 'lodash/fp';
 
 import Toaster from './index';
-import useToaster from '#/src/components/useToaster';
+import useToaster from '#/src/hooks/useToaster';
 
 const toastsArray = [
   {

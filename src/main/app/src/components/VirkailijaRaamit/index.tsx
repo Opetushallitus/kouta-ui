@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import UiVirkailijaRaamit from '@opetushallitus/virkailija-ui-components/VirkailijaRaamit';
-
-import UrlContext from '../UrlContext';
+import { useUrls } from '#/src/contexts/contextHooks';
 
 const getScriptUrl = urls => {
   let scriptUrl = null;
@@ -14,7 +13,7 @@ const getScriptUrl = urls => {
 };
 
 const VirkailijaRaamit = () => {
-  const urls = useContext(UrlContext);
+  const urls = useUrls();
   const scriptUrl = getScriptUrl(urls);
 
   return <UiVirkailijaRaamit scriptUrl={scriptUrl} />;

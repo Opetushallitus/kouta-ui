@@ -12,7 +12,7 @@ import UiSelect, {
   getTheme,
 } from '@opetushallitus/virkailija-ui-components/Select';
 
-import memoizeOne from '../../utils/memoizeOne';
+import { memoizeOne } from '#/src/utils/memoize';
 import { useTranslation } from 'react-i18next';
 
 const addTestId = (Component, getTestId) => props => (

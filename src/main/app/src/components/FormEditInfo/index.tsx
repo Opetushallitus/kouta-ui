@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Icon from '../Icon';
-import { getThemeProp } from '../../theme';
-import { formatKoutaDateString } from '../../utils';
-import Spacing from '../Spacing';
-import Anchor from '../Anchor';
+import Icon from '#/src/components/Icon';
+import { getThemeProp } from '#/src/theme';
+import { formatKoutaDateString } from '#/src/utils';
+import Spacing from '#/src/components/Spacing';
+import Anchor from '#/src/components/Anchor';
 import { useTranslation } from 'react-i18next';
 
 const InfoIcon = styled(Icon).attrs({ type: 'info' })`

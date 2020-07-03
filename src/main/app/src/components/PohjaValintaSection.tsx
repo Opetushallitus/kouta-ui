@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
-import { getFirstLanguageValue } from '#/src/utils';
+import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import { POHJAVALINTA } from '#/src/constants';
 import {
   FormFieldSelect,
@@ -10,8 +10,8 @@ import {
 import FormControl from '#/src/components/FormControl';
 import Spacing from '#/src/components/Spacing';
 import Typography from '#/src/components/Typography';
-import useApiAsync from '#/src/components/useApiAsync';
-import useLanguage from '#/src/components/useLanguage';
+import useApiAsync from '#/src/hooks/useApiAsync';
+import useLanguage from '#/src/hooks/useLanguage';
 
 const getCopyOptions = (entities, language) => {
   return entities.map(({ nimi, oid, id }) => ({

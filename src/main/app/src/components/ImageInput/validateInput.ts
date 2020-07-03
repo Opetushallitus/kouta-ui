@@ -1,4 +1,4 @@
-import { getFileExtension, getImageFileDimensions } from '../../utils';
+import { getFileExtension, getImageFileDimensions } from '#/src/utils';
 
 const promisifyValidate = validate =>
   new Promise((resolve, reject) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Button from './index';
-import { mountWithTheme } from '../../testUtils';
+import { mountWithTheme } from '#/src/testUtils';
 
 test('renders correctly with variant', () => {
   expect(

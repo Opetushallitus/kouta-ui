@@ -1,13 +1,12 @@
-import React, { useContext, useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { isFunction } from 'lodash';
 
-import { AsyncSelect } from '../Select';
-import getKoodi from '../../utils/koodistoService/getKoodi';
-import HttpContext from '../HttpContext';
-import UrlContext from '../UrlContext';
-import useLanguage from '../useLanguage';
-import getKoodiNimiTranslation from '../../utils/getKoodiNimiTranslation';
+import { AsyncSelect } from '#/src/components/Select';
+import getKoodi from '#/src/utils/koodi/getKoodi';
+import useLanguage from '#/src/hooks/useLanguage';
+import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
+import { useUrls, useHttpClient } from '#/src/contexts/contextHooks';
 
 const AsyncKoodistoSelect = ({
   disabled,
@@ -15,8 +14,8 @@ const AsyncKoodistoSelect = ({
   language: selectedLanguage,
   ...props
 }) => {
-  const httpClient = useContext(HttpContext);
-  const apiUrls = useContext(UrlContext);
+  const httpClient = useHttpClient();
+  const apiUrls = useUrls();
   const userLanguage = useLanguage();
   const language = selectedLanguage || userLanguage;
 

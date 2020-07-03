@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 
 import { get, isArray, isObject, isFunction } from 'lodash';
-import Flex, { FlexItem } from '../Flex';
-import { getThemeProp, spacing } from '../../theme';
+import Flex, { FlexItem } from '#/src/components/Flex';
+import { getThemeProp, spacing } from '#/src/theme';
 
 import {
   addColumnToIndex,
@@ -17,7 +17,10 @@ import {
   setColumnFieldValue,
 } from './utils';
 
-import Dropdown, { DropdownMenu, DropdownMenuItem } from '../Dropdown';
+import Dropdown, {
+  DropdownMenu,
+  DropdownMenuItem,
+} from '#/src/components/Dropdown';
 
 import { useTranslation } from 'react-i18next';
 

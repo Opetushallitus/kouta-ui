@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import DateTimeInput from './index';
-import { makeLocalisationDecorator } from '../../storybookUtils';
+import { makeLocalizationDecorator } from '#/src/storybookUtils';
 
 const Story = () => {
   const [date, setDate] = useState('2019-04-11T09:17');
@@ -20,5 +20,5 @@ const Story = () => {
 };
 
 storiesOf('DateTimeInput', module)
-  .addDecorator(makeLocalisationDecorator())
+  .addDecorator(makeLocalizationDecorator())
   .add('Basic', () => <Story />);

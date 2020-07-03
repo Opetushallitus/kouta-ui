@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import Button from '../Button';
+import Button from '#/src/components/Button';
 import TableInput from './index';
-import { makeLocalisationDecorator } from '../../storybookUtils';
+import { makeLocalizationDecorator } from '#/src/storybookUtils';
 
 const columns = [{ text: { fi: 'Hello' } }, { text: { fi: 'World' } }];
 const changeAction = action('change');
@@ -61,5 +61,5 @@ class StatefulTableInput extends Component {
 }
 
 storiesOf('TableInput', module)
-  .addDecorator(makeLocalisationDecorator())
+  .addDecorator(makeLocalizationDecorator())
   .add('Basic', () => <StatefulTableInput />);

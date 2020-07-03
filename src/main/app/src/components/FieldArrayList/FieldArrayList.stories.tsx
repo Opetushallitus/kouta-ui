@@ -2,16 +2,16 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { reduxForm, Field, FieldArray } from 'redux-form';
 
+import { FormFieldInput } from '#/src/components/formFields';
+import Button from '#/src/components/Button';
+import Spacing from '#/src/components/Spacing';
+import Flex from '#/src/components/Flex';
 import FieldArrayList from './index';
-import { FormFieldInput } from '../formFields';
-import Button from '../Button';
-import Spacing from '../Spacing';
-import Flex from '../Flex';
 
 import {
   makeStoreDecorator,
-  makeLocalisationDecorator,
-} from '../../storybookUtils';
+  makeLocalizationDecorator,
+} from '#/src/storybookUtils';
 
 const StoryForm = reduxForm({
   form: 'storyForm',
@@ -43,7 +43,7 @@ const StoryFieldArrayList = ({ fields }) => (
 
 storiesOf('FieldArrayList', module)
   .addDecorator(makeStoreDecorator())
-  .addDecorator(makeLocalisationDecorator())
+  .addDecorator(makeLocalizationDecorator())
   .add('Basic', () => (
     <StoryForm>
       <FieldArray name="fields" component={StoryFieldArrayList} />

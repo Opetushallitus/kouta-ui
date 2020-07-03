@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 
 import CollapseContent, { UnmountingCollapseContent } from './index';
-import Typography from '../Typography';
-import Button from '../Button';
+import Typography from '#/src/components/Typography';
+import Button from '#/src/components/Button';
 
 const Story = ({ component: Component = CollapseContent }) => {
   const [open, setOpen] = useState(false);

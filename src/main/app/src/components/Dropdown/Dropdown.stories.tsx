@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 
 import Dropdown, { DropdownMenu, DropdownMenuItem } from './index';
 
-import Button from '../Button';
+import Button from '#/src/components/Button';
 
 const menu = (
   <DropdownMenu>

@@ -6,7 +6,7 @@ import { spacing, getThemeProp } from '#/src/theme';
 import Flex, { FlexItem } from '#/src/components/Flex';
 import FormControl from '#/src/components/FormControl';
 import FormHelperTextMulti from '#/src/components/FormHelperTextMulti';
-import RemoveButton from '../RemoveButton';
+import RemoveButton from '#/src/components/RemoveButton';
 
 const Item = styled.div`
   padding-bottom: ${spacing(4)};

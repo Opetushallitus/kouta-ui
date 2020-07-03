@@ -1,17 +1,17 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { isString } from 'lodash';
-import FormControl from '../FormControl';
-import FormLabel from '../FormLabel';
-import DatePickerInput from '../DatePickerInput';
-import TimeInput from '../TimeInput';
-import Flex, { FlexItem } from '../Flex';
+import FormControl from '#/src/components/FormControl';
+import FormLabel from '#/src/components/FormLabel';
+import DatePickerInput from '#/src/components/DatePickerInput';
+import TimeInput from '#/src/components/TimeInput';
+import Flex, { FlexItem } from '#/src/components/Flex';
 
 import {
   getKoutaDateString,
   isValidDate,
   isNumeric,
   getTestIdProps,
-} from '../../utils';
+} from '#/src/utils';
 
 const generateId = () =>
   `DateTimeInput__${Math.round(Math.random() * 10000).toString()}`;

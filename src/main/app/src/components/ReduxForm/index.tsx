@@ -1,6 +1,6 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
-import FormNameContext from '../FormNameContext';
+import FormNameContext from '#/src/contexts/FormNameContext';
 
 const ReduxForm = reduxForm({ initialValues: {}, enableReinitialize: true })(
   ({ children, form }) => {

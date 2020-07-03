@@ -1,24 +1,24 @@
 import { createComponent } from './utils';
 import { noop } from 'lodash';
-import Input from '../Input';
-import Radio, { RadioGroup } from '../Radio';
-import Checkbox from '../Checkbox';
-import CheckboxGroup from '../CheckboxGroup';
-import Textarea from '../Textarea';
-import Select, { AsyncSelect } from '../Select';
-import DatePicker from '../DatePicker';
-import DatePickerInput from '../DatePickerInput';
-import DateTimeInput from '../DateTimeInput';
-import TimeInput from '../TimeInput';
-import Editor from '../Editor';
-import YearSelect from '../YearSelect';
-import ImageInput from '../ImageInput';
-import KieliversiotSelect from '../KieliversiotSelect';
-import KoulutustyyppiSelect from '../KoulutustyyppiSelect';
-import SoraKuvausSelect from '../SoraKuvausSelect';
-import LanguageSelect from '../LanguageSelect';
-import PostinumeroSelect from '../PostinumeroSelect';
-import AsyncKoodistoSelect from '../AsyncKoodistoSelect';
+import Input from '#/src/components/Input';
+import Radio, { RadioGroup } from '#/src/components/Radio';
+import Checkbox from '#/src/components/Checkbox';
+import CheckboxGroup from '#/src/components/CheckboxGroup';
+import Textarea from '#/src/components/Textarea';
+import Select, { AsyncSelect } from '#/src/components/Select';
+import DatePicker from '#/src/components/DatePicker';
+import DatePickerInput from '#/src/components/DatePickerInput';
+import DateTimeInput from '#/src/components/DateTimeInput';
+import TimeInput from '#/src/components/TimeInput';
+import Editor from '#/src/components/Editor';
+import YearSelect from '#/src/components/YearSelect';
+import ImageInput from '#/src/components/ImageInput';
+import KieliversiotSelect from '#/src/components/KieliversiotSelect';
+import KoulutustyyppiSelect from '#/src/components/KoulutustyyppiSelect';
+import SoraKuvausSelect from '#/src/components/SoraKuvausSelect';
+import LanguageSelect from '#/src/components/LanguageSelect';
+import PostinumeroSelect from '#/src/components/PostinumeroSelect';
+import AsyncKoodistoSelect from '#/src/components/AsyncKoodistoSelect';
 
 export const simpleMapProps = ({ meta, input, ...props }) => ({
   ...input,

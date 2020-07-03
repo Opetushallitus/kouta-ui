@@ -1,0 +1,28 @@
+import { get, mapValues, pick } from 'lodash';
+
+import { serializeEditorState } from '#/src/components/Editor/utils';
+
+const getKielivalinta = values => get(values, 'kieliversiot') || [];
+
+const getSoraKuvausByFormValues = values => {
+  const { tila, muokkaaja } = values;
+  const kielivalinta = getKielivalinta(values);
+  const nimi = pick(get(values, 'tiedot.nimi') || {}, kielivalinta);
+  const kuvaus = pick(get(values, 'tiedot.kuvaus') || {}, kielivalinta);
+  const koulutustyyppi = get(values, 'koulutustyyppi') || null;
+  const julkinen = Boolean(get(values, 'julkinen'));
+
+  return {
+    tila,
+    muokkaaja,
+    nimi,
+    julkinen,
+    koulutustyyppi,
+    kielivalinta,
+    metadata: {
+      kuvaus: mapValues(kuvaus, serializeEditorState),
+    },
+  };
+};
+
+export default getSoraKuvausByFormValues;

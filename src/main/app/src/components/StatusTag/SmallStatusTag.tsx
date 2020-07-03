@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { get } from 'lodash';
 
-import Flex from '../Flex';
-import { spacing } from '../../theme';
-import Typography from '../Typography';
-import { JULKAISUTILA } from '../../constants';
+import Flex from '#/src/components/Flex';
+import { spacing } from '#/src/theme';
+import Typography from '#/src/components/Typography';
+import { JULKAISUTILA } from '#/src/constants';
 
 import { useTranslation } from 'react-i18next';
 

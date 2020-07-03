@@ -2,11 +2,11 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { isFunction } from 'lodash';
 
-import { getThemeProp, spacing } from '../../theme';
-import Dropdown from '../Dropdown';
-import Flex, { FlexItem } from '../Flex';
-import Icon from '../Icon';
-import Typography from '../Typography';
+import { getThemeProp, spacing } from '#/src/theme';
+import Dropdown from '#/src/components/Dropdown';
+import Flex, { FlexItem } from '#/src/components/Flex';
+import Icon from '#/src/components/Icon';
+import Typography from '#/src/components/Typography';
 
 const Header = styled.div`
   ${({ status }) =>

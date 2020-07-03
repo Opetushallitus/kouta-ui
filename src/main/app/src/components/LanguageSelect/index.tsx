@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Select from '../Select';
-import useKoodistoOptions from '../useKoodistoOptions';
+import Select from '#/src/components/Select';
+import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 
 const LanguageSelect = props => {
   const { options } = useKoodistoOptions({ koodisto: 'kieli' });

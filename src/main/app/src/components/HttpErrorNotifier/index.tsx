@@ -1,10 +1,10 @@
-import { useEffect, useContext } from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import _ from 'lodash/fp';
 
-import HttpContext from '#/src/components/HttpContext';
-import useToaster from '#/src/components/useToaster';
+import { useToaster } from '#/src/hooks/useToaster';
 import { otherwise } from '#/src/utils';
+import { useHttpClient } from '#/src/contexts/contextHooks';
 
 const getToastOptions = (error, t) => {
   const { response } = error;
@@ -25,7 +25,7 @@ const getToastOptions = (error, t) => {
 
 export const HttpErrorNotifier = () => {
   const { openToast } = useToaster();
-  const httpClient = useContext(HttpContext);
+  const httpClient = useHttpClient();
   const { t } = useTranslation();
 
   useEffect(() => {

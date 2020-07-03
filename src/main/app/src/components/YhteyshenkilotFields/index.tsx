@@ -1,13 +1,13 @@
 import React, { useCallback } from 'react';
 import { Field, FieldArray } from 'redux-form';
-
-import FieldArrayList from '../FieldArrayList';
-import Button from '../Button';
-import { FormFieldInput } from '../formFields';
-import Flex from '../Flex';
-import Spacing from '../Spacing';
 import { useTranslation } from 'react-i18next';
-import { getTestIdProps } from '../../utils';
+
+import FieldArrayList from '#/src/components/FieldArrayList';
+import Button from '#/src/components/Button';
+import { FormFieldInput } from '#/src/components/formFields';
+import Flex from '#/src/components/Flex';
+import Spacing from '#/src/components/Spacing';
+import { getTestIdProps } from '#/src/utils';
 
 const YhteyshenkilotField = ({ fields, language, t }) => {
   const onAddField = useCallback(() => {

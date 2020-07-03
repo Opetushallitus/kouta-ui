@@ -7,7 +7,7 @@ import { getThemeProp } from '#/src/theme';
 import Icon from '#/src/components/Icon';
 import Typography from '#/src/components/Typography';
 import Box from '#/src/components/Box';
-import useToaster from '#/src/components/useToaster';
+import useToaster from '#/src/hooks/useToaster';
 import AbstractCollapse from '#/src/components/AbstractCollapse';
 import { useTranslation } from 'react-i18next';
 

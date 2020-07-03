@@ -6,7 +6,7 @@ import Box from '@opetushallitus/virkailija-ui-components/Box';
 import { getTestIdProps } from '#/src/utils';
 import Flex, { FlexItem } from '#/src/components/Flex';
 import FieldArrayList from '#/src/components/FieldArrayList';
-import useKoodistoOptions from '#/src/components/useKoodistoOptions';
+import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 
 import {
   FormFieldSelect,

@@ -1,8 +1,8 @@
 import React from 'react';
 import { isObject } from 'lodash';
-import Typography from '../Typography';
-import { getFirstLanguageValue } from '../../utils';
-import Flex, { FlexItem } from '../Flex';
+import Typography from '#/src/components/Typography';
+import { getFirstLanguageValue } from '#/src/utils/languageUtils';
+import Flex, { FlexItem } from '#/src/components/Flex';
 import LocalLink from '#/src/components/LocalLink';
 
 const getEntityName = entity => {
@@ -23,7 +23,7 @@ export const RelationInfoContainer = ({ children }) => {
   );
 };
 
-export function RelationInfo({ title = '', entity, linkUrl }) {
+export function RelationInfo({ title = '', entity, linkUrl = undefined }) {
   const name = getEntityName(entity) || '';
   return (
     <FlexItem grow={0}>

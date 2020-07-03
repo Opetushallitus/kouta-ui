@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { space } from '../../system';
+import { space } from '#/src/system';
 
 const Spacing = styled.div`
   ${space}

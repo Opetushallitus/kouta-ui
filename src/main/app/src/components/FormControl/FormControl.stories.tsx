@@ -2,9 +2,9 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import FormControl from './index';
-import FormLabel from '../FormLabel';
-import Input from '../Input';
-import FormHelperText from '../FormHelperText';
+import FormLabel from '#/src/components/FormLabel';
+import Input from '#/src/components/Input';
+import FormHelperText from '#/src/components/FormHelperText';
 
 storiesOf('FormControl', module)
   .add('Basic', () => (

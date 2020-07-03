@@ -3,8 +3,8 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import StatusPopover from './index';
-import Button from '../Button';
-import Typography from '../Typography';
+import Button from '#/src/components/Button';
+import Typography from '#/src/components/Typography';
 
 storiesOf('StatusPopover', module)
   .add('Basic', () => (

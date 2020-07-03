@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import useAuthorizedUserRoleBuilder from './useAuthorizedUserRoleBuilder';
-import { HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID } from '../constants';
-import { useFieldValue } from '../hooks/form';
+import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
+import { HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
+import { useFieldValue } from '#/src/hooks/form';
 import { FormFieldCheckbox } from './formFields';
 import { Field } from 'redux-form';
 

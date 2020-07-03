@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { makeLocalisationDecorator } from '../../storybookUtils';
+import { makeLocalizationDecorator } from '#/src/storybookUtils';
 import ImageInput from './index';
 
 const upload = file =>
@@ -38,7 +38,7 @@ const Story = () => {
 };
 
 storiesOf('ImageInput', module)
-  .addDecorator(makeLocalisationDecorator())
+  .addDecorator(makeLocalizationDecorator())
   .add('With external value', () => <Story />)
   .add('With disabled', () => (
     <ImageInput onChange={v => action('change')} disabled />

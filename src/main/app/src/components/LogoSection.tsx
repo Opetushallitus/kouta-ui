@@ -1,19 +1,18 @@
-import React, { useContext, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { Field } from 'redux-form';
-import { FormFieldImageInput } from './formFields';
-import HttpContext from './HttpContext';
-import UrlContext from './UrlContext';
-import uploadLogo from '../utils/kouta/uploadLogo';
+import { FormFieldImageInput } from '#/src/components/formFields';
+import uploadLogo from '#/src/utils/api/uploadLogo';
 import {
   LOGO_ACCEPTED_FORMATS,
   LOGO_MAX_DIMENSIONS,
   LOGO_MAX_SIZE,
   LOGO_NO_DIMENSION_CHECK_FOR_FORMATS,
-} from '../constants';
+} from '#/src/constants';
+import { useHttpClient, useUrls } from '#/src/contexts/contextHooks';
 
 export const LogoSection = ({ name, label = '' }) => {
-  const httpClient = useContext(HttpContext);
-  const apiUrls = useContext(UrlContext);
+  const httpClient = useHttpClient();
+  const apiUrls = useUrls();
 
   const upload = useCallback(
     file => uploadLogo({ httpClient, image: file, apiUrls }),

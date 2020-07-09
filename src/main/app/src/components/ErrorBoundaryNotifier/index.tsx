@@ -16,11 +16,12 @@ class ErrorBoundaryNotifier extends Component {
   }
 
   componentDidCatch(error, info) {
-    this.props.onError(error);
+    // Call onError only once
+    !this.state.hasError && this.props.onError(error);
   }
 
   render() {
-    return this.props.children;
+    return this.state.hasError ? <></> : this.props.children;
   }
 }
 

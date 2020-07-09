@@ -13,6 +13,7 @@ import UserGate from '#/src/pages/UserGate';
 import HttpErrorNotifier from '#/src/components/HttpErrorNotifier';
 import ErrorBoundaryNotifier from '#/src/components/ErrorBoundaryNotifier';
 import Routes from './Routes';
+import Toaster from '#/src/components/Toaster';
 
 const App = ({
   store,
@@ -35,6 +36,14 @@ const App = ({
               <UrlContext.Provider value={urls}>
                 <GlobalStyle />
                 <Suspense fallback={<FullSpin size="large" />}>
+                  <Toaster
+                    style={{
+                      position: 'fixed',
+                      top: '16px',
+                      right: '16px',
+                      zIndex: '9999',
+                    }}
+                  />
                   <ErrorBoundaryNotifier>
                     <VirkailijaRaamit />
                     <UserGate fallback={<FullSpin size="large" />}>

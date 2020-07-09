@@ -66,14 +66,6 @@ const Routes = ({ history }) => {
   return (
     <Router history={history}>
       <RouterScrollToTop>
-        <Toaster
-          style={{
-            position: 'fixed',
-            top: '16px',
-            right: '16px',
-            zIndex: '9999',
-          }}
-        />
         <Switch>
           <Route path="/" exact component={HomePage} />
           <Route

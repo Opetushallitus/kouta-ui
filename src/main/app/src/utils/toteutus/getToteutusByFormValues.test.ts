@@ -72,7 +72,7 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
         value: '2020',
       },
       koulutuksenAlkamiskausi: 'kausi_0#1',
-      onkoStipendia: true,
+      onkoStipendia: 'kylla',
       stipendinMaara: 20,
       stipendinKuvaus: {
         fi: 'Fi stipendikuvaus',

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import useToaster from '#/src/hooks/useToaster';
+import { withTranslation } from 'react-i18next';
 
 class ErrorBoundaryNotifier extends Component {
   static defaultProps = {
@@ -8,27 +8,24 @@ class ErrorBoundaryNotifier extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { hasError: false };
+    this.state = { error: null, info: '' };
   }
 
-  static getDerivedStateFromError() {
-    return { hasError: true };
-  }
-
-  componentDidCatch(error, info) {
-    this.props.onError(error);
+  static getDerivedStateFromError(error, info) {
+    return { error, info };
   }
 
   render() {
-    return this.props.children;
+    const { t } = this.props;
+    return this.state.error ? (
+      <div style={{ margin: '15px' }}>
+        <p>{t('ilmoitukset.tuntematonVirhe')}</p>
+        <pre>{this.state.error?.stack ?? ''}</pre>
+      </div>
+    ) : (
+      this.props.children
+    );
   }
 }
 
-export default ({ children }) => {
-  const { openGenericErrorToast } = useToaster();
-  return (
-    <ErrorBoundaryNotifier onError={openGenericErrorToast}>
-      {children}
-    </ErrorBoundaryNotifier>
-  );
-};
+export default withTranslation()(ErrorBoundaryNotifier);

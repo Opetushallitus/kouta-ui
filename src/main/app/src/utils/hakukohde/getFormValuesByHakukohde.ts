@@ -34,8 +34,10 @@ const getFormValuesByHakukohde = hakukohde => {
     jarjestyspaikkaOid,
     tila,
     pohjakoulutusvaatimusTarkenne,
-    metadata: { valintakokeidenYleiskuvaus },
+    metadata = {},
   } = hakukohde;
+
+  const { valintakokeidenYleiskuvaus } = metadata;
 
   return {
     tila,

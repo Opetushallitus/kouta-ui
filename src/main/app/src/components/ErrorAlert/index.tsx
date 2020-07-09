@@ -2,14 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { isFunction } from 'lodash';
 import { setLightness } from 'polished';
-
-import Anchor from '../Anchor';
-import Icon from '../Icon';
-import Flex, { FlexItem } from '../Flex';
-import Spacing from '../Spacing';
-import Typography from '../Typography';
-import { getThemeProp, spacing } from '../../theme';
 import { useTranslation } from 'react-i18next';
+
+import Anchor from '#/src/components/Anchor';
+import Icon from '#/src/components/Icon';
+import Flex, { FlexItem } from '#/src/components/Flex';
+import Spacing from '#/src/components/Spacing';
+import Typography from '#/src/components/Typography';
+import { getThemeProp, spacing } from '#/src/theme';
 
 const ErrorIcon = styled(Icon).attrs({ type: 'error_outline' })`
   color: ${({ theme }) => theme.palette.danger.main};

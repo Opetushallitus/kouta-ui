@@ -1,12 +1,12 @@
 import _ from 'lodash';
 import { LANGUAGES } from '#/src/constants';
 import { sanitizeHTML } from '#/src/utils';
-import { getDefaultLocalisation } from '#/src/localisation';
+import { getDefaultLocalization } from '#/src/localization';
 
 const addSection = (heading, content) => `<h6>${heading}</h6>${content}`;
 
 export default function getEPerusteKuvaus(ePeruste) {
-  const i18next = getDefaultLocalisation();
+  const i18next = getDefaultLocalization();
 
   const TRANSLATORS = _.transform(
     LANGUAGES,

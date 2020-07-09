@@ -1,11 +1,11 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import { makeLocalisationDecorator } from '../../storybookUtils';
+import { makeLocalizationDecorator } from '#/src/storybookUtils';
 import FormEditInfo from './index';
 
 storiesOf('FormEditInfo', module)
-  .addDecorator(makeLocalisationDecorator())
+  .addDecorator(makeLocalizationDecorator())
   .add('Basic', () => (
     <FormEditInfo
       editorOid={null}

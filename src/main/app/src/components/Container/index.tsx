@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { spacing } from '../../theme';
+import { spacing } from '#/src/theme';
 
 const Container = styled.div`
   width: 100%;

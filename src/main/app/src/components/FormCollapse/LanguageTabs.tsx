@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 import { sortBy } from 'lodash';
-
 import { useTranslation } from 'react-i18next';
-import Tabs, { Tab } from '../Tabs';
+
+import Tabs, { Tab } from '#/src/components/Tabs';
 
 const sortOrder = ['fi', 'sv', 'en', 'muu'];
 

@@ -4,31 +4,31 @@ import { action } from '@storybook/addon-actions';
 import Async from 'react-async';
 import { urls as ophUrls } from 'oph-urls-js';
 import axios from 'axios';
+import { I18nextProvider } from 'react-i18next';
 
 import createStore from './state/store';
-import configureUrls from './apiUrls';
-import HttpContext from './components/HttpContext';
-import UrlContext from './components/UrlContext';
-import LocalisationProvider from './components/LocalisationProvider';
-import createLocalisation from './localisation';
+import { configure as configureUrls } from './urls';
+import HttpContext from './contexts/HttpClientContext';
+import UrlContext from '#/src/contexts/UrlContext';
+import createLocalization from './localization';
 import getTranslations from './translations';
 
 const defaultHttpClient = axios.create({});
-const configureOphUrls = () => configureUrls(ophUrls);
+const configureOphUrls = () => configureUrls(ophUrls, defaultHttpClient);
 
-const getLocalisationInstance = () => {
-  const localisationInstance = createLocalisation({
+const getLocalizationInstance = () => {
+  const localizationInstance = createLocalization({
     debug: true,
   });
 
-  localisationInstance.addResourceBundle(
+  localizationInstance.addResourceBundle(
     'fi',
     'kouta',
     getTranslations().fi.kouta,
     true
   );
 
-  return localisationInstance;
+  return localizationInstance;
 };
 
 export const makeApiDecorator = ({
@@ -60,12 +60,12 @@ export const makeStoreDecorator = ({ logging = false } = {}) => storyFn => {
   return <Provider store={store}>{storyFn()}</Provider>;
 };
 
-export const makeLocalisationDecorator = () => storyFn => {
-  const instance = getLocalisationInstance();
+export const makeLocalizationDecorator = () => storyFn => {
+  const instance = getLocalizationInstance();
 
   return (
     <Suspense fallback={null}>
-      <LocalisationProvider i18n={instance}>{storyFn()}</LocalisationProvider>
+      <I18nextProvider i18n={instance}>{storyFn()}</I18nextProvider>
     </Suspense>
   );
 };

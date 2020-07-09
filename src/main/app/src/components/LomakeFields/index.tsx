@@ -1,27 +1,27 @@
-import React, { useMemo, useContext } from 'react';
+import React, { useMemo } from 'react';
 import { Field } from 'redux-form';
 import { isFunction } from 'lodash';
+import { useTranslation } from 'react-i18next';
 
 import {
   FormFieldSelect,
   FormFieldInput,
   FormFieldRadioGroup,
   FormFieldTextarea,
-} from '../formFields';
+} from '#/src/components/formFields';
 
-import { HAKULOMAKETYYPPI } from '../../constants';
-import Spacing from '../Spacing';
-import { useTranslation } from 'react-i18next';
-import useLanguage from '../useLanguage';
-import Flex, { FlexItem } from '../Flex';
-import UrlContext from '../UrlContext';
-import Button from '../Button';
+import { HAKULOMAKETYYPPI } from '#/src/constants';
+import Spacing from '#/src/components/Spacing';
+import useLanguage from '#/src/hooks/useLanguage';
+import Flex, { FlexItem } from '#/src/components/Flex';
+import Button from '#/src/components/Button';
 
 import {
   createEnhancedGetTyyppiLabel,
   createEnhancedGetTyyppiShowUrl,
   useLomakeOptions,
 } from './utils';
+import { useUrls } from '#/src/contexts/contextHooks';
 
 const LomakeSelect = ({ input, getShowUrl, t, ...props }) => {
   const { value } = input;
@@ -117,7 +117,7 @@ export const LomakeFields = ({
       : optionsLabelProp;
 
   const language = useLanguage();
-  const apiUrls = useContext(UrlContext);
+  const apiUrls = useUrls();
 
   const enhancedGetTyyppiLabel = useMemo(() => {
     return createEnhancedGetTyyppiLabel(getTyyppiLabel, t);

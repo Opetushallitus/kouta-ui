@@ -1,12 +1,11 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback } from 'react';
 import { isString, upperFirst } from 'lodash';
 
-import UrlContext from '../UrlContext';
-import HttpContext from '../HttpContext';
-import AsyncKoodistoSelect from '../AsyncKoodistoSelect';
-import useLanguage from '../useLanguage';
-import getKoodi from '../../utils/koodistoService/getKoodi';
-import getKoodiNimiTranslation from '../../utils/getKoodiNimiTranslation';
+import AsyncKoodistoSelect from '#/src/components/AsyncKoodistoSelect';
+import useLanguage from '#/src/hooks/useLanguage';
+import getKoodi from '#/src/utils/koodi/getKoodi';
+import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
+import { useUrls, useHttpClient } from '#/src/contexts/contextHooks';
 
 const getKoodiLabel = (koodi, language) => {
   const { koodiUri } = koodi;
@@ -28,8 +27,8 @@ const getKoodiOption = (koodi, versio, language) => {
 };
 
 const PostinumeroSelect = ({ koodistoVersio = 2, ...props }) => {
-  const httpClient = useContext(HttpContext);
-  const apiUrls = useContext(UrlContext);
+  const httpClient = useHttpClient();
+  const apiUrls = useUrls();
   const language = useLanguage();
 
   const formatLabel = useCallback(

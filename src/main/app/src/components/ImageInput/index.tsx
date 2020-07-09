@@ -2,17 +2,18 @@ import React, { useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import styled, { css } from 'styled-components';
 import { cond, noop } from 'lodash';
-import { useMachine } from '#/src/hooks/xstateHooks';
-import prettyBytes from 'pretty-bytes';
-import { getThemeProp, spacing } from '../../theme';
 import { useTranslation } from 'react-i18next';
-import Typography from '../Typography';
-import Flex, { FlexItem } from '../Flex';
-import Icon from '../Icon';
-import { ifAny, otherwise } from '../../utils';
-import Spin from '../Spin';
-import Button from '../Button';
-import { disabledStyle } from '../../system';
+import prettyBytes from 'pretty-bytes';
+
+import { getThemeProp, spacing } from '#/src/theme';
+import { ifAny, otherwise } from '#/src/utils';
+import { useMachine } from '#/src/hooks/useMachine';
+import Typography from '#/src/components/Typography';
+import Flex, { FlexItem } from '#/src/components/Flex';
+import Icon from '#/src/components/Icon';
+import Spin from '#/src/components/Spin';
+import Button from '#/src/components/Button';
+import { disabledStyle } from '#/src/system';
 import {
   createImageUploadMachine,
   actionTypes as AT,

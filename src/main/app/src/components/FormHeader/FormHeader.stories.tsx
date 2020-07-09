@@ -2,8 +2,8 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import FormHeader from './index';
-import StatusTag from '../StatusTag';
-import FormEditInfo from '../FormEditInfo';
+import StatusTag from '#/src/components/StatusTag';
+import FormEditInfo from '#/src/components/FormEditInfo';
 
 storiesOf('FormHeader', module).add('Basic', () => (
   <FormHeader

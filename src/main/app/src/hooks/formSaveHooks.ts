@@ -6,23 +6,23 @@ import {
   stopSubmit as stopSubmitAction,
 } from 'redux-form';
 
-import { useHttpClient, useURLs } from '#/src/hooks/context';
-import useAuthorizedUser from '#/src/components/useAuthorizedUser';
-import getKoulutusByOid from '#/src/utils/kouta/getKoulutusByOid';
-import getToteutusByOid from '#/src/utils/kouta/getToteutusByOid';
-import getHakuByOid from '#/src/utils/kouta/getHakuByOid';
-import getValintaperusteByOid from '#/src/utils/kouta/getValintaperusteByOid';
-import getSoraKuvausById from '#/src/utils/kouta/getSoraKuvausById';
-import validateToteutusForm from '#/src/utils/validateToteutusForm';
-import validateHakukohdeForm from '#/src/utils/validateHakukohdeForm';
-import validateValintaperusteForm from '#/src/utils/validateValintaperusteForm';
-import useToaster from '#/src/components/useToaster';
+import { useHttpClient, useUrls } from '#/src/contexts/contextHooks';
+import useAuthorizedUser from '#/src/hooks/useAuthorizedUser';
+import getKoulutusByOid from '#/src/utils/koulutus/getKoulutusByOid';
+import getToteutusByOid from '#/src/utils/toteutus/getToteutusByOid';
+import getHakuByOid from '#/src/utils/haku/getHakuByOid';
+import getValintaperusteByOid from '#/src/utils/valintaperuste/getValintaperusteByOid';
+import getSoraKuvausById from '#/src/utils/soraKuvaus/getSoraKuvausById';
+import validateToteutusForm from '#/src/utils/toteutus/validateToteutusForm';
+import validateHakukohdeForm from '#/src/utils/hakukohde/validateHakukohdeForm';
+import validateValintaperusteForm from '#/src/utils/valintaperuste/validateValintaperusteForm';
+import useToaster from '#/src/hooks/useToaster';
 
 export const useSaveForm = ({ form, validate, submit }) => {
   const dispatch = useDispatch();
   const user = useAuthorizedUser();
   const httpClient = useHttpClient();
-  const apiUrls = useURLs();
+  const apiUrls = useUrls();
   const store = useStore();
   const { openSavingSuccessToast, openSavingErrorToast } = useToaster();
 
@@ -91,7 +91,7 @@ export const useSaveToteutus = ({
   koulutus: oldKoulutus,
 }) => {
   const httpClient = useHttpClient();
-  const apiUrls = useURLs();
+  const apiUrls = useUrls();
 
   const { save } = useSaveForm({
     form: formName,
@@ -121,7 +121,7 @@ export const useSaveHakukohde = ({
   toteutus: oldToteutus,
 }) => {
   const httpClient = useHttpClient();
-  const apiUrls = useURLs();
+  const apiUrls = useUrls();
 
   const { save } = useSaveForm({
     form: formName,
@@ -153,7 +153,7 @@ export const useSaveHakukohde = ({
 
 export const useSaveValintaperuste = ({ submit, formName }) => {
   const httpClient = useHttpClient();
-  const apiUrls = useURLs();
+  const apiUrls = useUrls();
 
   const { save } = useSaveForm({
     form: formName,

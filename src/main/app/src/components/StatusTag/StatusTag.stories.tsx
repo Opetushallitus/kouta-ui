@@ -1,11 +1,11 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import { makeLocalisationDecorator } from '../../storybookUtils';
+import { makeLocalizationDecorator } from '#/src/storybookUtils';
 import StatusTag from './index';
 
 storiesOf('StatusTag', module)
-  .addDecorator(makeLocalisationDecorator())
+  .addDecorator(makeLocalizationDecorator())
   .add('Basic', () => <StatusTag status="julkaistu" />)
   .add('With status', () => (
     <>

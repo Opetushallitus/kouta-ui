@@ -1,8 +1,8 @@
 import React, { useCallback, useMemo } from 'react';
-import useLanguage from '../useLanguage';
-import { getFirstLanguageValue } from '#/src/utils';
+import useLanguage from '#/src/hooks/useLanguage';
+import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import sortTreeBy from '#/src/utils/sortTreeBy';
-import TreeSelect from '../TreeSelect';
+import TreeSelect from '#/src/components/TreeSelect';
 
 const getValue = ({ oid }) => oid;
 

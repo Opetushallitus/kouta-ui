@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 
 import Drawer from './index';
-import Button from '../Button';
+import Button from '#/src/components/Button';
 
 const StoryDrawer = () => {
   const [open, setOpen] = useState(false);

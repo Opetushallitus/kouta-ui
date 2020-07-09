@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-import { media } from '../../theme';
+import { media } from '#/src/theme';
 
 const getWidth = prop => css`
   flex-basis: ${props => (props[prop] / 12) * 100}%;

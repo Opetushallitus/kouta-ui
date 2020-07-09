@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { reduxForm } from 'redux-form';
 
 import ValintatapaContentFields from './index';
-import { makeStoreDecorator } from '../../storybookUtils';
+import { makeStoreDecorator } from '#/src/storybookUtils';
 
 const StoryForm = reduxForm({
   form: 'storyForm',

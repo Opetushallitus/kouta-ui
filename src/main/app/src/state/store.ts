@@ -3,10 +3,10 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { reducer as formReducer } from 'redux-form';
 import { persistStore } from 'redux-persist';
-import { isDev } from '../utils';
+import { isDev } from '#/src/utils';
 import createRootReducer from './rootReducer';
 
-export default ({ apiUrls, httpClient, history, localisation }) => {
+export default ({ apiUrls, httpClient, history, localization }) => {
   const rootReducer = createRootReducer({
     form: formReducer,
   });
@@ -15,7 +15,7 @@ export default ({ apiUrls, httpClient, history, localisation }) => {
     httpClient,
     apiUrls,
     history,
-    localisation,
+    localization,
   };
 
   const middleware = applyMiddleware(thunk.withExtraArgument(context));

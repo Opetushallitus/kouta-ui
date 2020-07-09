@@ -17,20 +17,20 @@ import {
   RichUtils,
 } from 'draft-js';
 
-import { spacing, getThemeProp } from '../../theme';
-import Icon from '../Icon';
-import Select from '../Select';
-import Dropdown, { DropdownMenu } from '../Dropdown';
-import Input from '../Input';
-import Flex, { FlexItem } from '../Flex';
-import Button from '../Button';
-import createEmptyEditorState from '../../utils/draft/createEmptyEditorState';
+import { spacing, getThemeProp } from '#/src/theme';
+import Icon from '#/src/components/Icon';
+import Select from '#/src/components/Select';
+import Dropdown, { DropdownMenu } from '#/src/components/Dropdown';
+import Input from '#/src/components/Input';
+import Flex, { FlexItem } from '#/src/components/Flex';
+import Button from '#/src/components/Button';
 
 import {
   getBlockType,
   inlineIsActive,
   blockIsActive,
   getSelectionLinkUrl,
+  createEmptyEditorState,
 } from './utils';
 
 const Container = styled.div`

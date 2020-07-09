@@ -1,5 +1,5 @@
 import { isString } from 'lodash';
-import { JULKAISUTILA } from '../../constants';
+import { JULKAISUTILA } from '#/src/constants';
 
 export const getLabel = ({ status, t }) => {
   if (!isString(status)) {

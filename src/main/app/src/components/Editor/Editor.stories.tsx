@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
+import Button from '#/src/components/Button';
 import Editor from './index';
-import Button from '../Button';
-import parseEditorState from '../../utils/draft/parseEditorState';
-import serializeEditorState from '../../utils/draft/serializeEditorState';
+import { parseEditorState, serializeEditorState } from './utils';
 
 const convertToHTMLAction = action('convertToHTML');
 

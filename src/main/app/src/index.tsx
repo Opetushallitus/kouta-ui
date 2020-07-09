@@ -5,12 +5,12 @@ import ReactDOM from 'react-dom';
 import { createBrowserHistory } from 'history';
 import { urls as ophUrls } from 'oph-urls-js';
 
-import { createDefaultLocalisation } from './localisation';
+import { createDefaultLocalization } from './localization';
 
-import App from './components/App';
+import App from './pages/App';
 import createStore from './state';
 import defaultTheme from './theme';
-import configureUrls from './apiUrls';
+import { configure as configureUrls } from './urls';
 
 import createHttpClient from './httpClient';
 
@@ -24,9 +24,9 @@ const history = createBrowserHistory({ basename: 'kouta' });
     callerId: process.env.REACT_APP_CALLER_ID,
   });
 
-  apiUrls = await configureUrls(ophUrls, httpClient);
+  apiUrls = await configureUrls(apiUrls, httpClient);
 
-  const localisationInstance = createDefaultLocalisation({
+  const localizationInstance = createDefaultLocalization({
     httpClient,
     apiUrls,
   });
@@ -35,10 +35,8 @@ const history = createBrowserHistory({ basename: 'kouta' });
     apiUrls,
     httpClient,
     history,
-    localisation: localisationInstance,
+    localization: localizationInstance,
   });
-
-  window.__store__ = store;
 
   ReactDOM.render(
     <App
@@ -47,7 +45,7 @@ const history = createBrowserHistory({ basename: 'kouta' });
       urls={apiUrls}
       httpClient={httpClient}
       history={history}
-      localisation={localisationInstance}
+      localization={localizationInstance}
       persistor={persistor}
     />,
     document.getElementById('root')

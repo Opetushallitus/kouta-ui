@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 import getYear from 'date-fns/getYear';
 
-import Select from '../Select';
-import { isNumeric } from '../../utils';
+import Select from '#/src/components/Select';
+import { isNumeric } from '#/src/utils';
 
 const currentYear = getYear(new Date());
 

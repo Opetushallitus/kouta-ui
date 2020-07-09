@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import SFlex, { FlexItem as SFlexItem } from 'styled-flex-component';
 
-import { space } from '../../system';
+import { space } from '#/src/system';
 
 const Flex = styled(SFlex)`
   ${space};

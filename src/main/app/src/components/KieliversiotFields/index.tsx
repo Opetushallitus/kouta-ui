@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 import { Field } from 'redux-form';
-
-import { FormFieldCheckboxGroup } from '../formFields';
 import { useTranslation } from 'react-i18next';
+
+import { FormFieldCheckboxGroup } from '#/src/components/formFields';
 
 const getOptions = t => [
   { value: 'fi', label: t('yleiset.suomi') },

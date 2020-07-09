@@ -1,1 +1,1 @@
-export { default } from '../SisaltoField';
+export { default } from '#/src/components/SisaltoField';

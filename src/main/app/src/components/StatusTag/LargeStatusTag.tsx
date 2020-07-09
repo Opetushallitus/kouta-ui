@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { setLightness } from 'polished';
 import { isString } from 'lodash';
-import { getThemeProp } from '../../theme';
-import Icon from '../Icon';
-import Typography from '../Typography';
-import { JULKAISUTILA } from '../../constants';
+import { getThemeProp } from '#/src/theme';
+import Icon from '#/src/components/Icon';
+import Typography from '#/src/components/Typography';
+import { JULKAISUTILA } from '#/src/constants';
 import { useTranslation } from 'react-i18next';
 import { getColor, getLabel } from './utils';
 

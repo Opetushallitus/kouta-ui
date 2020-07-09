@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
-import UiDatePickerInput from '@opetushallitus/virkailija-ui-components/DatePickerInput';
 import { isValid } from 'date-fns';
 import { useTranslation } from 'react-i18next';
+import UiDatePickerInput from '@opetushallitus/virkailija-ui-components/DatePickerInput';
 
 const monthKeys = [
   'tammikuu',
@@ -20,7 +20,7 @@ const monthKeys = [
 
 const weekdayShortKeys = ['su', 'ma', 'ti', 'ke', 'to', 'pe', 'la'];
 
-const getLocalisationProps = t => ({
+const getLocalizationProps = t => ({
   months: monthKeys.map(k => t(`yleiset.kuukaudet.${k}`)),
   weekdaysShort: weekdayShortKeys.map(v =>
     t(`yleiset.viikonpaivalyhenteet.${v}`)
@@ -36,12 +36,12 @@ const DatePickerInput = ({
 }) => {
   const { t } = useTranslation();
 
-  const localisationProps = useMemo(() => getLocalisationProps(t), [t]);
+  const localizationProps = useMemo(() => getLocalizationProps(t), [t]);
 
   return (
     <UiDatePickerInput
       dayPickerProps={{
-        ...localisationProps,
+        ...localizationProps,
         ...dayPickerProps,
       }}
       {...props}

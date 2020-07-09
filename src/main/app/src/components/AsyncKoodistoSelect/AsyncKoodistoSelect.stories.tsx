@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 
 import AsyncKoodistoSelect from './index';
-import useKoodistoOptions from '../useKoodistoOptions';
-import useLoadOptions from '../useLoadOptions';
+import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
+import useLoadOptions from '#/src/hooks/useLoadOptions';
 
 import {
   makeApiDecorator,
-  makeLocalisationDecorator,
-} from '../../storybookUtils';
+  makeLocalizationDecorator,
+} from '#/src/storybookUtils';
 
 const Story = () => {
   const { options } = useKoodistoOptions({ koodisto: 'posti', versio: 2 });
@@ -31,6 +31,6 @@ const Story = () => {
 };
 
 storiesOf('AsyncKoodistoSelect', module)
-  .addDecorator(makeLocalisationDecorator())
+  .addDecorator(makeLocalizationDecorator())
   .addDecorator(makeApiDecorator())
   .add('Basic', () => <Story />);

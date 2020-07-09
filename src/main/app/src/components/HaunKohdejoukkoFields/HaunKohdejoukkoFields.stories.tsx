@@ -2,17 +2,17 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import HaunKohdejoukkoFields from './index';
-import ReduxForm from '../ReduxForm';
+import ReduxForm from '#/src/components/ReduxForm';
 
 import {
   makeApiDecorator,
-  makeLocalisationDecorator,
+  makeLocalizationDecorator,
   makeStoreDecorator,
-} from '../../storybookUtils';
+} from '#/src/storybookUtils';
 
 storiesOf('HaunKohdejoukkoFields', module)
   .addDecorator(makeStoreDecorator())
-  .addDecorator(makeLocalisationDecorator())
+  .addDecorator(makeLocalizationDecorator())
   .addDecorator(makeApiDecorator())
   .add('Basic', () => (
     <ReduxForm form="form">

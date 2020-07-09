@@ -6,8 +6,8 @@ import LomakeFields from './index';
 import {
   makeStoreDecorator,
   makeApiDecorator,
-  makeLocalisationDecorator,
-} from '../../storybookUtils';
+  makeLocalizationDecorator,
+} from '#/src/storybookUtils';
 
 const StoryForm = reduxForm({
   form: 'storyForm',
@@ -16,7 +16,7 @@ const StoryForm = reduxForm({
 storiesOf('LomakeFields', module)
   .addDecorator(makeStoreDecorator())
   .addDecorator(makeApiDecorator())
-  .addDecorator(makeLocalisationDecorator())
+  .addDecorator(makeLocalizationDecorator())
   .add('Basic', () => (
     <StoryForm>
       <LomakeFields name="lomake" />

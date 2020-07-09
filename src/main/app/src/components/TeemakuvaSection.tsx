@@ -1,23 +1,22 @@
-import React, { useContext, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { Field } from 'redux-form';
-
 import { useTranslation } from 'react-i18next';
+
 import { FormFieldImageInput } from './formFields';
-import HttpContext from './HttpContext';
-import UrlContext from './UrlContext';
-import uploadTeemakuva from '../utils/kouta/uploadTeemakuva';
+import uploadTeemakuva from '#/src/utils/api/uploadTeemakuva';
 import {
   TEEMAKUVA_ACCEPTED_FORMATS,
   TEEMAKUVA_MAX_SIZE,
   TEEMAKUVA_MIN_DIMENSIONS,
-} from '../constants';
+} from '#/src/constants';
+import { useHttpClient, useUrls } from '#/src/contexts/contextHooks';
 
 export const TeemakuvaSection = props => {
   const { name, disabled } = props;
   const { t } = useTranslation();
 
-  const httpClient = useContext(HttpContext);
-  const apiUrls = useContext(UrlContext);
+  const httpClient = useHttpClient();
+  const apiUrls = useUrls();
 
   const upload = useCallback(
     async file => {

@@ -3,8 +3,8 @@ import { configure, addDecorator } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
 import { withKnobs } from '@storybook/addon-knobs';
 
-import defaultTheme from '../src/theme';
-import { makeLocalisationDecorator } from '../src/storybookUtils';
+import defaultTheme from '#/src/theme';
+import { makeLocalizationDecorator } from '#/src/storybookUtils';
 
 const themeDecorator = storyFn => (
   <ThemeProvider theme={defaultTheme}>{storyFn()}</ThemeProvider>
@@ -12,7 +12,7 @@ const themeDecorator = storyFn => (
 
 addDecorator(withKnobs);
 addDecorator(themeDecorator);
-addDecorator(makeLocalisationDecorator());
+addDecorator(makeLocalizationDecorator());
 
 function requireAll(requireContext) {
   return requireContext.keys().map(requireContext);

@@ -2,8 +2,8 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { Spring } from 'react-spring/renderprops';
 
-import { getThemeProp } from '../../theme';
-import { disabledStyle } from '../../system';
+import { getThemeProp } from '#/src/theme';
+import { disabledStyle } from '#/src/system';
 
 const SwitchContainer = styled.div`
   display: inline-block;

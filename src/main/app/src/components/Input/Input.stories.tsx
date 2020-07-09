@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import Input from './index';
-import InputIcon from '../InputIcon';
+import InputIcon from '#/src/components/InputIcon';
 
 storiesOf('Input', module)
   .add('Basic', () => <Input />)

@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import { useMemo } from 'react';
-import useOrganisaatio from '../components/useOrganisaatio';
-import useAuthorizedUserRoleBuilder from '../components/useAuthorizedUserRoleBuilder';
-import { ENTITY_ROLES, CRUD_ROLES } from '../constants';
+import useOrganisaatio from '#/src/hooks/useOrganisaatio';
+import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
+import { ENTITY_ROLES, CRUD_ROLES } from '#/src/constants';
 
 export const useCurrentUserHasRole = (
   entity,

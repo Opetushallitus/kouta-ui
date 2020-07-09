@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { get } from 'lodash';
 
-import FormConfigSectionContext from '../FormConfigSectionContext';
+import FormConfigSectionContext from '#/src/contexts/FormConfigSectionContext';
 import { useFormConfig } from '#/src/hooks/form';
 
 const FormConfigFragment = ({ name, children }) => {

@@ -3,16 +3,16 @@ import { storiesOf } from '@storybook/react';
 import { boolean } from '@storybook/addon-knobs';
 
 import JulkaisutilaField from './index';
-import ReduxForm from '../ReduxForm';
+import ReduxForm from '#/src/components/ReduxForm';
 
 import {
-  makeLocalisationDecorator,
+  makeLocalizationDecorator,
   makeStoreDecorator,
-} from '../../storybookUtils';
+} from '#/src/storybookUtils';
 
 storiesOf('JulkaisutilaField', module)
   .addDecorator(makeStoreDecorator())
-  .addDecorator(makeLocalisationDecorator())
+  .addDecorator(makeLocalizationDecorator())
   .add('Basic', () => {
     const showArkistoitu = boolean('showArkistoitu', true);
 

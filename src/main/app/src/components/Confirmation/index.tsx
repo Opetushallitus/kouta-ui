@@ -2,11 +2,11 @@ import React, { useCallback } from 'react';
 import { setLightness } from 'polished';
 import styled, { css } from 'styled-components';
 import { noop, isString } from 'lodash';
-import Dropdown, { DropdownMenu } from '../Dropdown';
-import { getThemeProp, spacing } from '../../theme';
-import { createChainedFunction } from '../../utils';
-import Typography from '../Typography';
-import Flex, { FlexItem } from '../Flex';
+import Dropdown, { DropdownMenu } from '#/src/components/Dropdown';
+import { getThemeProp, spacing } from '#/src/theme';
+import { createChainedFunction } from '#/src/utils';
+import Typography from '#/src/components/Typography';
+import Flex, { FlexItem } from '#/src/components/Flex';
 
 const Wrapper = styled.div`
   overflow: hidden;

@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { makeLocalisationDecorator } from '../../storybookUtils';
+import { makeLocalizationDecorator } from '#/src/storybookUtils';
 import Select, { CreatableSelect } from './index';
 
 const options = [
@@ -11,7 +11,7 @@ const options = [
 ];
 
 storiesOf('Select', module)
-  .addDecorator(makeLocalisationDecorator())
+  .addDecorator(makeLocalizationDecorator())
   .add('Basic', () => <Select options={options} onChange={action('change')} />)
   .add('With error', () => (
     <Select options={options} onChange={action('change')} error />

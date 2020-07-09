@@ -2,11 +2,11 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { setLightness } from 'polished';
 import { isString, noop } from 'lodash';
-import { getThemeProp, spacing } from '../../theme';
-import Typography from '../Typography';
-import DropdownIcon from '../DropdownIcon';
-import CollapseContent from '../CollapseContent';
-import Box from '../Box';
+import { getThemeProp, spacing } from '#/src/theme';
+import Typography from '#/src/components/Typography';
+import DropdownIcon from '#/src/components/DropdownIcon';
+import CollapseContent from '#/src/components/CollapseContent';
+import Box from '#/src/components/Box';
 
 const Container = styled.div`
   border: 1px solid ${getThemeProp('palette.divider')};

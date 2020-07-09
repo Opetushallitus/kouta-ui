@@ -1,8 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-import Icon from '../Icon';
-import { getThemeProp } from '../../theme';
+import Icon from '#/src/components/Icon';
+import { getThemeProp } from '#/src/theme';
 
 const Container = styled.div`
   display: inline-flex;

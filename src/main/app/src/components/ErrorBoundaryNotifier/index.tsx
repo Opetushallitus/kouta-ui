@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import useToaster from '#/src/components/useToaster';
+import useToaster from '#/src/hooks/useToaster';
 
 class ErrorBoundaryNotifier extends Component {
   static defaultProps = {

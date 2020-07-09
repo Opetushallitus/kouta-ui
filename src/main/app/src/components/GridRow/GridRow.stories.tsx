@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import GridRow from './index';
-import GridColumn from '../GridColumn';
+import GridColumn from '#/src/components/GridColumn';
 
 storiesOf('GridRow', module).add('Basic', () => (
   <GridRow gutter={2}>

@@ -1,14 +1,14 @@
 import React, { useMemo, useCallback } from 'react';
 import { map, sortBy, compose, isNil } from 'lodash/fp';
-import Typography from './Typography';
-import useApiAsync from './useApiAsync';
 import { useTranslation } from 'react-i18next';
+import Typography from '#/src/components/Typography';
+import useApiAsync from '#/src/hooks/useApiAsync';
 import ListTable, {
   makeNimiColumn,
   makeModifiedColumn,
   makeTilaColumn,
-} from './HomePage/ListTable';
-import ListSpin from './HomePage/ListSpin';
+} from '#/src/pages/HomePage/ListTable';
+import ListSpin from '#/src/pages/HomePage/ListSpin';
 
 export default function ({
   entity,

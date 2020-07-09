@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { isArray } from 'lodash';
-import CheckboxGroup from '../CheckboxGroup';
+import CheckboxGroup from '#/src/components/CheckboxGroup';
 import { useTranslation } from 'react-i18next';
 
 const getOptions = t => [

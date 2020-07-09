@@ -5,8 +5,8 @@ import PostinumeroSelect from './index';
 
 import {
   makeApiDecorator,
-  makeLocalisationDecorator,
-} from '../../storybookUtils';
+  makeLocalizationDecorator,
+} from '#/src/storybookUtils';
 
 function generateStory(koodi) {
   return () => {
@@ -21,7 +21,7 @@ const Story = generateStory('posti_00940#2');
 const StoryWithInvalidKoodistoVersion = generateStory('posti_00940#fi');
 
 storiesOf('PostinumeroSelect', module)
-  .addDecorator(makeLocalisationDecorator())
+  .addDecorator(makeLocalizationDecorator())
   .addDecorator(makeApiDecorator())
   .add('Basic', () => <Story />)
   .add('With invalid koodisto version', () => (

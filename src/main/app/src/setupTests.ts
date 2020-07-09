@@ -3,8 +3,10 @@ import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { createSerializer } from 'enzyme-to-json';
 
-import isEditorState from './utils/draft/isEditorState';
-import serializeEditorState from './utils/draft/serializeEditorState';
+import {
+  isEditorState,
+  serializeEditorState,
+} from '#/src/components/Editor/utils';
 
 import 'jest-styled-components';
 

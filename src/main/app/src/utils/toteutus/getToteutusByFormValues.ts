@@ -166,7 +166,7 @@ const getToteutusByFormValues = values => {
     }));
   });
 
-  const onkoStipendia = Boolean(get(values, 'jarjestamistiedot.onkoStipendia'));
+  const onkoStipendia = values?.jarjestamistiedot?.onkoStipendia === 'kylla';
 
   const stipendinKuvaus = pick(
     get(values, 'jarjestamistiedot.stipendinKuvaus') || {},

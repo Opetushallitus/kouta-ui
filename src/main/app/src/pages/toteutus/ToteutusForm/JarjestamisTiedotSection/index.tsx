@@ -126,7 +126,7 @@ const StipendiFields = ({ language, name }) => {
             },
           ]}
         />
-        {onkoStipendia ? (
+        {onkoStipendia === 'kylla' ? (
           <Spacing marginTop={1} {...getTestIdProps('stipendinMaara')}>
             <ExtraField>
               <Field

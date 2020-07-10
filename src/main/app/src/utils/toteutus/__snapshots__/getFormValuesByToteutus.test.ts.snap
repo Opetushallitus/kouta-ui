@@ -82,7 +82,7 @@ Object {
         "value": "kieli_6#1",
       },
     ],
-    "onkoStipendia": true,
+    "onkoStipendia": "kylla",
     "opetusaika": Array [
       "opetusaika_1#1",
     ],

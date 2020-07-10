@@ -19,8 +19,6 @@ class ErrorBuilder {
   validateExistence(path, { message } = {}) {
     const errorMessage = message || 'validointivirheet.pakollinen';
 
-    console.log(this.getValue(path));
-
     if (!exists(this.getValue(path))) {
       this.setError(path, errorMessage);
     }

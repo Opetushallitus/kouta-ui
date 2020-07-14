@@ -1,6 +1,6 @@
 import { get, pick } from 'lodash';
 
-import { isNumeric } from '#/src/utils';
+import { isNumeric, isPartialDate } from '#/src/utils';
 import getHakulomakeFieldsData from '#/src/utils/form/getHakulomakeFieldsData';
 import isKorkeakoulutusKohdejoukkoKoodiUri from '#/src/utils/isKorkeakoulutusKohdejoukkoKoodiUri';
 
@@ -20,8 +20,8 @@ const getHakuByFormValues = values => {
 
   const hakuajat = (get(values, 'aikataulut.hakuaika') || []).map(
     ({ alkaa, paattyy }) => ({
-      alkaa: alkaa || null,
-      paattyy: paattyy || null,
+      alkaa: isPartialDate(alkaa) ? null : alkaa,
+      paattyy: isPartialDate(paattyy) ? null : paattyy,
     })
   );
 

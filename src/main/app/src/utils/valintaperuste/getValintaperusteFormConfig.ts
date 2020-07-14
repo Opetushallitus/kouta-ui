@@ -6,9 +6,9 @@ import {
   getKielivalinta,
   pohjaValintaSectionConfig,
   julkinenSectionConfig,
-  validateRelations,
   valintakokeetSection,
   validateOptionalTranslatedField,
+  validateRelations,
 } from '#/src/utils/form/formConfigUtils';
 
 const koulutustyypitWithValintatapa = [
@@ -95,8 +95,6 @@ const config = createFormConfigBuilder().registerSections([
     section: 'soraKuvaus',
     koulutustyypit: KOULUTUSTYYPIT,
     field: 'soraKuvaus',
-    validate: validateIfJulkaistu(eb => eb.validateExistence('soraKuvaus')),
-    required: true,
   },
   julkinenSectionConfig,
   {

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { getInvalidTranslations } from '#/src/utils/languageUtils';
-import { formValueExists as exists } from '#/src/utils';
+import { formValueExists as exists, isPartialDate } from '#/src/utils';
 
 class ErrorBuilder {
   constructor(values, errors = {}) {
@@ -14,6 +14,16 @@ class ErrorBuilder {
 
   setError(path, value) {
     _.set(this.errors, path, value ? _.castArray(value) : null);
+  }
+
+  validateExistenceOfDate(path, { message } = {}) {
+    const errorMessage = message || 'validointivirheet.pakollinen';
+    const value = this.getValue(path);
+    if (!exists(value) || isPartialDate(value)) {
+      this.setError(path, errorMessage);
+    }
+
+    return this;
   }
 
   validateExistence(path, { message } = {}) {

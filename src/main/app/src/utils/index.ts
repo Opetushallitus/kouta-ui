@@ -9,6 +9,15 @@ export const isDev = process.env.NODE_ENV === 'development';
 
 export const isValidDate = value => _.isDate(value) && !_.isNaN(value);
 
+export const isPartialDate = dateString => {
+  if (dateString) {
+    const [date] = dateString.split('T');
+    return date === 'NaN-NaN-NaN';
+  } else {
+    return false;
+  }
+};
+
 export const formatDate = dateFnsformatDate;
 
 export const isNumeric = value => {

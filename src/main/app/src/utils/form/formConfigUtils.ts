@@ -6,10 +6,15 @@ import {
 } from '#/src/utils/form/createErrorBuilder';
 import { KOULUTUSTYYPIT, JULKAISUTILA, POHJAVALINTA } from '#/src/constants';
 
-export const validateIfJulkaistu = validate => (eb, values, ...rest) => {
+export const validateIfJulkaistu = (
+  validate,
+  optionalNotJulkaistuValidator = (eb, ..._) => eb
+) => (eb, values, ...rest) => {
   const { tila } = values;
 
-  return tila === JULKAISUTILA.JULKAISTU ? validate(eb, values, ...rest) : eb;
+  return tila === JULKAISUTILA.JULKAISTU
+    ? validate(eb, values, ...rest)
+    : optionalNotJulkaistuValidator(eb, values, ...rest);
 };
 
 export const validateIf = (condition, validate) => eb =>

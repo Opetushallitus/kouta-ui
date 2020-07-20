@@ -75,7 +75,7 @@ const OrganizationSection = ({
           ) : null}
           {tarjoajatFromPohja && kaytaPohjanJarjestajaa ? null : (
             <Field
-              name={`tarjoajat.zarjoajat`}
+              name={`tarjoajat.tarjoajat`}
               hierarkia={hierarkia}
               getIsDisabled={getIsDisabled}
               component={JarjestajatField}

@@ -146,11 +146,11 @@ const config = createFormConfigBuilder().registerSections([
     koulutustyypit: KOULUTUSTYYPIT,
     parts: [
       {
-        field: '.zarjoajat',
+        field: '.tarjoajat',
         koulutustyypit: KOULUTUSTYYPIT,
         validate: validateIfJulkaistu((eb, values) =>
           eb.validateArrayMinLength(
-            'tarjoajat.zarjoajat',
+            'tarjoajat.tarjoajat',
             getMinTarjoajat(values)
           )
         ),

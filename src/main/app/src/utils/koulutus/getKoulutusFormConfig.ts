@@ -143,12 +143,24 @@ const config = createFormConfigBuilder().registerSections([
   },
   {
     section: 'tarjoajat',
-    field: 'tarjoajat',
     koulutustyypit: KOULUTUSTYYPIT,
-    validate: validateIfJulkaistu((eb, values) =>
-      eb.validateArrayMinLength('tarjoajat', getMinTarjoajat(values))
-    ),
-    required: true,
+    parts: [
+      {
+        field: '.zarjoajat',
+        koulutustyypit: KOULUTUSTYYPIT,
+        validate: validateIfJulkaistu((eb, values) =>
+          eb.validateArrayMinLength(
+            'tarjoajat.zarjoajat',
+            getMinTarjoajat(values)
+          )
+        ),
+        required: true,
+      },
+      {
+        field: '.kaytaPohjanJarjestajaa',
+        required: false,
+      },
+    ],
   },
   julkinenSectionConfig,
   tilaSectionConfig,

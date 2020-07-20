@@ -5,7 +5,14 @@ const getKielivalinta = values => get(values, 'kieliversiot') || [];
 const getKoulutusByFormValues = values => {
   const { muokkaaja, tila } = values;
   const kielivalinta = getKielivalinta(values);
-  const tarjoajat = get(values, 'tarjoajat') || [];
+  const pohjanTarjoajat = get(values, 'pohja.tarjoajat');
+  const kaytaPohjanJarjestajaa =
+    get(values, 'tarjoajat.kaytaPohjanJarjestajaa') || false;
+  const tarjoajat =
+    pohjanTarjoajat && kaytaPohjanJarjestajaa
+      ? pohjanTarjoajat
+      : get(values, 'tarjoajat.tarjoajat') || [];
+
   const koulutusKoodiUri = get(values, 'information.koulutus.value') || null;
   const koulutustyyppi = get(values, 'koulutustyyppi') || null;
   const osiot = get(values, 'lisatiedot.osiot') || [];

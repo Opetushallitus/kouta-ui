@@ -13,5 +13,5 @@ export const initialValues = {
     tapa: POHJAVALINTA.UUSI,
   },
   kieliversiot: ['fi', 'sv'],
-  tarjoajat: [],
+  tarjoajat: { tarjoajat: [], kaytaPohjanJarjestajaa: true },
 };

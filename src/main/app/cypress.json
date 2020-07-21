@@ -1,5 +1,6 @@
 {
   "baseUrl": "https://localhost:3000/kouta",
+  "nodeVersion": "system",
   "env": {
     "cypress-plugin-snapshots": {
       "serverEnabled": false

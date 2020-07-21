@@ -51,7 +51,7 @@ const OrganizationSection = ({
   );
 
   return (
-    <div {...getTestIdProps('jarjestajatSelection')}>
+    <>
       {tarjoajat.length > 0 || disableTarjoajaHierarkia ? (
         <Box mb={2}>
           <Alert variant="info">
@@ -74,17 +74,19 @@ const OrganizationSection = ({
             </Spacing>
           ) : null}
           {tarjoajatFromPohja && kaytaPohjanJarjestajaa ? null : (
-            <Field
-              name={`tarjoajat.tarjoajat`}
-              hierarkia={hierarkia}
-              getIsDisabled={getIsDisabled}
-              component={JarjestajatField}
-              label={t('koulutuslomake.valitseJarjestajat')}
-            />
+            <div {...getTestIdProps('jarjestajatSelection')}>
+              <Field
+                name={`tarjoajat.tarjoajat`}
+                hierarkia={hierarkia}
+                getIsDisabled={getIsDisabled}
+                component={JarjestajatField}
+                label={t('koulutuslomake.valitseJarjestajat')}
+              />
+            </div>
           )}
         </>
       ) : null}
-    </div>
+    </>
   );
 };
 

@@ -4,7 +4,7 @@ import { get, isNil } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { spacing, getThemeProp } from '#/src/theme';
 import Flex, { FlexItem } from '#/src/components/Flex';
-import FormControl from '#/src/components/FormControl';
+import { FormControl } from '#/src/components/virkailija';
 import FormHelperTextMulti from '#/src/components/FormHelperTextMulti';
 import RemoveButton from '#/src/components/RemoveButton';
 

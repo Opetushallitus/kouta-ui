@@ -7,7 +7,7 @@ import { KOULUTUS_ROLE, ORGANISAATIOTYYPPI } from '#/src/constants';
 import { getTestIdProps } from '#/src/utils';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 import Alert from '#/src/components/Alert';
-import Box from '#/src/components/Box';
+import { Box } from '#/src/components/virkailija';
 import OrganisaatioHierarkiaTreeSelect from '#/src/components/OrganisaatioHierarkiaTreeSelect';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import {

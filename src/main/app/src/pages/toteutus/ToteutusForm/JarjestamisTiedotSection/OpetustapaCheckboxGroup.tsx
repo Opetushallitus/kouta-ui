@@ -1,6 +1,6 @@
 import React from 'react';
 
-import CheckboxGroup from '#/src/components/CheckboxGroup';
+import { CheckboxGroup } from '#/src/components/virkailija';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 
 const OpetustapaCheckboxGroup = props => {

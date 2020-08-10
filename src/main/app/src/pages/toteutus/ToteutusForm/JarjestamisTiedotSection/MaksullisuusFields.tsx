@@ -7,7 +7,7 @@ import {
   FormFieldRadioGroup,
   FormFieldInput,
 } from '#/src/components/formFields';
-import InputIcon from '#/src/components/InputIcon';
+import { InputIcon } from '#/src/components/virkailija';
 import Spacing from '#/src/components/Spacing';
 import { getTestIdProps } from '#/src/utils';
 

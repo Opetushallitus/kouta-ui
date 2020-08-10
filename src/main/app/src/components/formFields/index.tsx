@@ -1,12 +1,15 @@
 import { createComponent } from './utils';
 import { noop } from 'lodash';
-import Input from '#/src/components/Input';
-import Radio, { RadioGroup } from '#/src/components/Radio';
-import Checkbox from '#/src/components/Checkbox';
-import CheckboxGroup from '#/src/components/CheckboxGroup';
-import Textarea from '#/src/components/Textarea';
+import {
+  DatePicker,
+  Checkbox,
+  CheckboxGroup,
+  Input,
+  Radio,
+  RadioGroup,
+  Textarea,
+} from '#/src/components/virkailija';
 import Select, { AsyncSelect } from '#/src/components/Select';
-import DatePicker from '#/src/components/DatePicker';
 import DatePickerInput from '#/src/components/DatePickerInput';
 import DateTimeInput from '#/src/components/DateTimeInput';
 import TimeInput from '#/src/components/TimeInput';

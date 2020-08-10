@@ -3,7 +3,7 @@ import { Field, FieldArray } from 'redux-form';
 import { isArray } from 'lodash';
 import { useTranslation } from 'react-i18next';
 
-import Typography from '#/src/components/Typography';
+import { Typography } from '#/src/components/virkailija';
 import Spacing from '#/src/components/Spacing';
 import { formatKoutaDateString } from '#/src/utils';
 import { FormFieldCheckbox } from '#/src/components/formFields';

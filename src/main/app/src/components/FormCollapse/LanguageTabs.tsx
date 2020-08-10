@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { sortBy } from 'lodash';
 import { useTranslation } from 'react-i18next';
 
-import Tabs, { Tab } from '#/src/components/Tabs';
+import { Tab, Tabs } from '#/src/components/virkailija';
 
 const sortOrder = ['fi', 'sv', 'en', 'muu'];
 

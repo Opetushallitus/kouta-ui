@@ -13,7 +13,7 @@ import {
 } from '#/src/components/formFields';
 
 import useKoodiNimi from '#/src/hooks/useKoodiNimi';
-import Typography from '#/src/components/Typography';
+import { Typography } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 import { useFieldValue } from '#/src/hooks/form';
 

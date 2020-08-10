@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Field } from 'redux-form';
 import { useTranslation } from 'react-i18next';
-import Box from '@opetushallitus/virkailija-ui-components/Box';
+import { Box } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 import FieldArrayList from '#/src/components/FieldArrayList';
 import DateTimeRange from '#/src/components/DateTimeRange';

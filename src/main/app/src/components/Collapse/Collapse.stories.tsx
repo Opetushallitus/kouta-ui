@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import Collapse from './index';
-import Typography from '#/src/components/Typography';
+import { Typography } from '#/src/components/virkailija';
 import Button from '#/src/components/Button';
 
 const header = '1 Koulutustyyppi';

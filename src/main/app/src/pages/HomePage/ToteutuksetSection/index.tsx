@@ -13,7 +13,7 @@ import ErrorAlert from '#/src/components/ErrorAlert';
 import Button from '#/src/components/Button';
 import useModal from '#/src/hooks/useModal';
 import Pagination from '#/src/components/Pagination';
-import Box from '#/src/components/Box';
+import { Box } from '#/src/components/virkailija';
 import Badge from '#/src/components/Badge';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import { getIndexParamsByFilters } from '../utils';

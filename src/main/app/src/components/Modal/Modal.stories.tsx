@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import Modal from './index';
 
 import Button from '#/src/components/Button';
-import Typography from '#/src/components/Typography';
+import { Typography } from '#/src/components/virkailija';
 
 const header = 'Lorem ipsum';
 

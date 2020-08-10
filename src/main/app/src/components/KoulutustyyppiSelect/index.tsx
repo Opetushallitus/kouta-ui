@@ -10,9 +10,8 @@ import {
   KOULUTUSTYYPPI,
 } from '#/src/constants';
 
-import { RadioGroup } from '#/src/components/Radio';
 import { getTestIdProps } from '#/src/utils';
-import Box from '#/src/components/Box';
+import { Box, RadioGroup } from '#/src/components/virkailija';
 import { spacing, getThemeProp } from '#/src/theme';
 import SegmentTabs from '#/src/components/SegmentTabs';
 import SegmentTab from '#/src/components/SegmentTab';

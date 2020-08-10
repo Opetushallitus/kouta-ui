@@ -9,7 +9,7 @@ import Spacing from '#/src/components/Spacing';
 import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import { HAKULOMAKETYYPPI } from '#/src/constants';
-import Typography from '#/src/components/Typography';
+import { Typography } from '#/src/components/virkailija';
 import Anchor from '#/src/components/Anchor';
 import { useUrls } from '#/src/contexts/contextHooks';
 

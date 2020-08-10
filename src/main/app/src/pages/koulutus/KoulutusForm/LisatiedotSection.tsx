@@ -10,7 +10,7 @@ import {
   FormFieldTextarea,
   FormFieldSelect,
 } from '#/src/components/formFields';
-import Typography from '#/src/components/Typography';
+import { Typography } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
 
 const OsiotFields = ({ disabled, language, osiotOptions, name }) => {

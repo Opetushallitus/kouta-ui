@@ -6,8 +6,7 @@ import {
   FormFieldInput,
   FormFieldPostinumeroSelect,
 } from '#/src/components/formFields';
-import Typography from '#/src/components/Typography';
-import Box from '#/src/components/Box';
+import { Box, Typography } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 
 const YhteystiedotSection = ({ name, language }) => {

@@ -9,11 +9,10 @@ import Table, {
   TableCell,
 } from '#/src/components/Table';
 import { getSortDirection, makeOnSort } from './utils';
-import Icon from '#/src/components/Icon';
+import { Icon, Dropdown } from '#/src/components/virkailija';
 import StatusTag from '#/src/components/StatusTag';
 import useLanguage from '#/src/hooks/useLanguage';
 import Anchor from '#/src/components/Anchor';
-import Dropdown from '#/src/components/Dropdown';
 import { Link } from 'react-router-dom';
 import { formatKoutaDateString } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';

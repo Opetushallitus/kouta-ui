@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 import Spacing from '#/src/components/Spacing';
 import Flex, { FlexItem } from '#/src/components/Flex';
-import InputIcon from '#/src/components/InputIcon';
+import { FormLabel, InputIcon } from '#/src/components/virkailija';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
 import isKorkeakouluKoulutustyyppi from '#/src/utils/koulutus/isKorkeakouluKoulutustyyppi';
@@ -20,7 +20,6 @@ import {
   createFormFieldComponent,
   FormFieldRadioGroup,
 } from '#/src/components/formFields';
-import FormLabel from '#/src/components/FormLabel';
 
 import MaksullisuusFields from './MaksullisuusFields';
 import AlkamiskausiFields from './AlkamiskausiFields';

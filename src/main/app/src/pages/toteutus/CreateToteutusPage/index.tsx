@@ -17,7 +17,7 @@ import FormPage, {
   FormFooter,
 } from '#/src/components/FormPage';
 import ReduxForm from '#/src/components/ReduxForm';
-import Spin from '#/src/components/Spin';
+import { Spin } from '#/src/components/virkailija';
 import Title from '#/src/components/Title';
 import { useSaveToteutus } from '#/src/hooks/formSaveHooks';
 import useApiAsync from '#/src/hooks/useApiAsync';

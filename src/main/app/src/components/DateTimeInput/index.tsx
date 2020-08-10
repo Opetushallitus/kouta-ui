@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { isString } from 'lodash';
-import FormControl from '#/src/components/FormControl';
-import FormLabel from '#/src/components/FormLabel';
+import { FormControl, FormLabel } from '#/src/components/virkailija';
 import DatePickerInput from '#/src/components/DatePickerInput';
 import TimeInput from '#/src/components/TimeInput';
 import Flex, { FlexItem } from '#/src/components/Flex';

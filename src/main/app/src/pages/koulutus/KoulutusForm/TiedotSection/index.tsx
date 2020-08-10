@@ -7,7 +7,7 @@ import { useBoundFormActions, useIsDirty } from '#/src/hooks/form';
 import FormConfigFragment from '#/src/components/FormConfigFragment';
 import { FormFieldInput } from '#/src/components/formFields';
 import { getTestIdProps } from '#/src/utils';
-import Box from '#/src/components/Box';
+import { Box } from '#/src/components/virkailija';
 import useKoodi from '#/src/hooks/useKoodi';
 import KoulutusField from '../KoulutusField';
 import KoulutusalatField from './KoulutusalatField';

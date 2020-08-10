@@ -5,9 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { getTestIdProps } from '#/src/utils';
 import Collapse from '#/src/components/Collapse';
 import Button from '#/src/components/Button';
-import Typography from '#/src/components/Typography';
+import { Box, Typography } from '#/src/components/virkailija';
 import FormConfigSectionContext from '#/src/contexts/FormConfigSectionContext';
-import Box from '#/src/components/Box';
 import LanguageTabs from './LanguageTabs';
 
 const HeaderWrapper = styled.div`

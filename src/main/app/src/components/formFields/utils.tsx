@@ -1,6 +1,6 @@
 import React, { createElement } from 'react';
 import _ from 'lodash';
-import FormControl from '#/src/components/FormControl';
+import { FormControl } from '#/src/components/virkailija';
 import {
   useFieldConfig,
   useFieldIsRequired,

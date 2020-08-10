@@ -4,12 +4,19 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-import Drawer from '#/src/components/Drawer';
-import Typography from '#/src/components/Typography';
+import {
+  Drawer,
+  Typography,
+  Icon,
+  Input,
+  InputIcon,
+  Box,
+  Divider,
+  Spin,
+} from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 import { spacing, getThemeProp } from '#/src/theme';
 import Button from '#/src/components/Button';
-import Icon from '#/src/components/Icon';
 
 import {
   toggleFavourite,
@@ -20,11 +27,8 @@ import OrganisaatioTreeList from './OrganisaatioTreeList';
 import OrganisaatioFavouritesList from './OrganisaatioFavouritesList';
 import useLanguage from '#/src/hooks/useLanguage';
 import { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
-import Input from '#/src/components/Input';
-import InputIcon from '#/src/components/InputIcon';
 import useDebounceState from '#/src/hooks/useDebounceState';
 import useOrganisaatioHierarkia from './useOrganisaatioHierarkia';
-import Spin from '#/src/components/Spin';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
 import { createCanReadSomethingRoleBuilder } from '../utils';
 
@@ -34,8 +38,6 @@ import {
 } from '#/src/constants';
 
 import OpetetushallitusOrganisaatioItem from './OpetushallitusOrganisaatioItem';
-import Box from '#/src/components/Box';
-import Divider from '#/src/components/Divider';
 import organisaatioIsOppilaitos from '#/src/utils/organisaatio/organisaatioIsOppilaitos';
 
 const CloseIcon = styled(Icon).attrs({ type: 'close', role: 'button' })`

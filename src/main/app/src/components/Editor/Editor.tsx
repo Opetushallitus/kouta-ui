@@ -18,10 +18,13 @@ import {
 } from 'draft-js';
 
 import { spacing, getThemeProp } from '#/src/theme';
-import Icon from '#/src/components/Icon';
+import {
+  Icon,
+  Input,
+  Dropdown,
+  DropdownMenu,
+} from '#/src/components/virkailija';
 import Select from '#/src/components/Select';
-import Dropdown, { DropdownMenu } from '#/src/components/Dropdown';
-import Input from '#/src/components/Input';
 import Flex, { FlexItem } from '#/src/components/Flex';
 import Button from '#/src/components/Button';
 

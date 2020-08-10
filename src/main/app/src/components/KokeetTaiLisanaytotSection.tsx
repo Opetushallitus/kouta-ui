@@ -5,7 +5,7 @@ import { FormFieldEditor } from '#/src/components/formFields';
 import FieldGroup from '#/src/components/FieldGroup';
 import KokeetTaiLisanaytotFields from './KokeetTaiLisanaytotFields';
 import { getTestIdProps } from '#/src/utils';
-import Box from '#/src/components/Box';
+import { Box } from '#/src/components/virkailija';
 
 const TRANSLATION_BASE = 'valintaperustelomake.koeTaiLisanaytto';
 

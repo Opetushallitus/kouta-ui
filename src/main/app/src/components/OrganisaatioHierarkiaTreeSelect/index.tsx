@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from 'react';
 import useLanguage from '#/src/hooks/useLanguage';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import sortTreeBy from '#/src/utils/sortTreeBy';
-import TreeSelect from '#/src/components/TreeSelect';
+import { TreeSelect } from '#/src/components/virkailija';
 
 const getValue = ({ oid }) => oid;
 

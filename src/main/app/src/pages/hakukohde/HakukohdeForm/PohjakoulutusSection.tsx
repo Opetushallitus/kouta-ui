@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
 import { FormFieldSelect, FormFieldEditor } from '#/src/components/formFields';
-import Box from '#/src/components/Box';
+import { Box } from '#/src/components/virkailija';
 
 const PohjakoulutusSection = ({ name, language }) => {
   const { options } = useKoodistoOptions({

@@ -9,7 +9,7 @@ import FormPage, {
 import KoulutusForm from '../KoulutusForm';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import getKoulutusByOid from '#/src/utils/koulutus/getKoulutusByOid';
-import Spin from '#/src/components/Spin';
+import { Spin } from '#/src/components/virkailija';
 import Title from '#/src/components/Title';
 import getFormValuesByKoulutus from '#/src/utils/koulutus/getFormValuesByKoulutus';
 import EntityFormHeader from '#/src/components/EntityFormHeader';

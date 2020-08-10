@@ -1,10 +1,8 @@
 import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { Checkbox, Input, InputIcon } from '#/src/components/virkailija';
 import Flex, { FlexItem } from '#/src/components/Flex';
-import Input from '#/src/components/Input';
-import InputIcon from '#/src/components/InputIcon';
-import Checkbox from '#/src/components/Checkbox';
 import Select from '#/src/components/Select';
 import { JULKAISUTILA } from '#/src/constants';
 

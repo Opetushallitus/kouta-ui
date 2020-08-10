@@ -5,8 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { FormFieldSoraKuvausSelect } from '#/src/components/formFields';
 import Button from '#/src/components/Button';
-import Divider from '#/src/components/Divider';
-import Box from '#/src/components/Box';
+import { Box, Divider } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
 
 const SoraKuvausSection = ({ name, organisaatioOid, languages }) => {

@@ -6,7 +6,7 @@ import Spacing from '#/src/components/Spacing';
 import isAmmatillinenKoulutustyyppi from '#/src/utils/koulutus/isAmmatillinenKoulutustyyppi';
 import { getTestIdProps } from '#/src/utils';
 import { FormFieldCheckbox, FormFieldInput } from '#/src/components/formFields';
-import Divider from '#/src/components/Divider';
+import { Divider } from '#/src/components/virkailija';
 import HakuajatSection from './HakuajatSection';
 import AlkamiskausiSection from './AlkamiskausiSection';
 import LomakeSection from './LomakeSection';

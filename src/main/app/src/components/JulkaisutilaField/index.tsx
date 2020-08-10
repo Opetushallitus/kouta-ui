@@ -4,11 +4,9 @@ import { setLightness } from 'polished';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
-import Radio from '#/src/components/Radio';
 import { FormFieldRadioGroup } from '#/src/components/formFields';
 import { JULKAISUTILA } from '#/src/constants';
-import Box from '#/src/components/Box';
-import Typography from '#/src/components/Typography';
+import { Box, Radio, Typography } from '#/src/components/virkailija';
 
 const tilaCss = ({ theme, tila }) => {
   const color = theme.colors[tila] || theme.colors.tallennettu;

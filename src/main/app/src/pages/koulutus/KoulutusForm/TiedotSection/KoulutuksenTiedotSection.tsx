@@ -16,10 +16,8 @@ import {
 } from '#/src/utils/ePeruste/ePerusteStatus';
 import { useBoundFormActions, useIsDirty } from '#/src/hooks/form';
 import Anchor from '#/src/components/Anchor';
-import Box from '#/src/components/Box';
+import { Box, Typography, Spin } from '#/src/components/virkailija';
 import { FormFieldSelect } from '#/src/components/formFields';
-import Spin from '#/src/components/Spin';
-import Typography from '#/src/components/Typography';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import { useFieldValue } from '#/src/hooks/form';
 import KoulutusField from '../KoulutusField';

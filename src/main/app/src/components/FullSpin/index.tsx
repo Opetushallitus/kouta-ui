@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Spin from '#/src/components/Spin';
+import { Spin } from '#/src/components/virkailija';
 
 const SpinContainer = styled.div`
   height: 100vh;

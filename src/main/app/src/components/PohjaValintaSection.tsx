@@ -7,9 +7,8 @@ import {
   FormFieldSelect,
   FormFieldRadioGroup,
 } from '#/src/components/formFields';
-import FormControl from '#/src/components/FormControl';
+import { FormControl, Typography } from '#/src/components/virkailija';
 import Spacing from '#/src/components/Spacing';
-import Typography from '#/src/components/Typography';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import useLanguage from '#/src/hooks/useLanguage';
 

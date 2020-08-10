@@ -1,8 +1,7 @@
 import React from 'react';
 import TimeField from 'react-simple-timefield';
 
-import Input from '#/src/components/Input';
-import InputIcon from '#/src/components/InputIcon';
+import { Input, InputIcon } from '#/src/components/virkailija';
 
 export const TimeInput = ({
   colon = ':',

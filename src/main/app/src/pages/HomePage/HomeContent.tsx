@@ -8,10 +8,9 @@ import ValintaperusteetSection from './ValintaperusteetSection';
 import { useOrganisaatio } from '#/src/hooks/useOrganisaatio';
 import { setOrganisaatio } from '#/src/state/organisaatioSelection';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
-import Spin from '#/src/components/Spin';
+import { Box, Spin } from '#/src/components/virkailija';
 import Navigation from './Navigation';
 import Container from '#/src/components/Container';
-import Box from '#/src/components/Box';
 import NavigationProvider from './NavigationProvider';
 import HakukohteetSection from './HakukohteetSection';
 

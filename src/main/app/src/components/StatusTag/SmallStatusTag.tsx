@@ -4,7 +4,7 @@ import { get } from 'lodash';
 
 import Flex from '#/src/components/Flex';
 import { spacing } from '#/src/theme';
-import Typography from '#/src/components/Typography';
+import { Typography } from '#/src/components/virkailija';
 import { JULKAISUTILA } from '#/src/constants';
 
 import { useTranslation } from 'react-i18next';

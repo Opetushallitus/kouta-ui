@@ -1,7 +1,7 @@
 import React, { useMemo, useCallback } from 'react';
 import { map, sortBy, compose, isNil } from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
-import Typography from '#/src/components/Typography';
+import { Typography } from '#/src/components/virkailija';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import ListTable, {
   makeNimiColumn,

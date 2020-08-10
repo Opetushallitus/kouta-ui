@@ -7,7 +7,7 @@ import {
   FormFieldSelect,
   FormFieldAsyncKoodistoSelect,
 } from '#/src/components/formFields';
-import Box from '#/src/components/Box';
+import { Box } from '#/src/components/virkailija';
 import FieldArrayList from '#/src/components/FieldArrayList';
 import { getTestIdProps } from '#/src/utils';
 import Button from '#/src/components/Button';

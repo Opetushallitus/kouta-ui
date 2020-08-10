@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 
 import CollapseContent, { UnmountingCollapseContent } from './index';
-import Typography from '#/src/components/Typography';
+import { Typography } from '#/src/components/virkailija';
 import Button from '#/src/components/Button';
 
 const Story = ({ component: Component = CollapseContent }) => {

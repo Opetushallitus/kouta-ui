@@ -18,12 +18,9 @@ import {
 } from '#/src/components/formFields';
 import Anchor from '#/src/components/Anchor';
 import AbstractCollapse from '#/src/components/AbstractCollapse';
-import Divider from '#/src/components/Divider';
-import Icon from '#/src/components/Icon';
+import { Divider, Icon, Typography, Spin } from '#/src/components/virkailija';
 import LocalLink from '#/src/components/LocalLink';
 import Spacing from '#/src/components/Spacing';
-import Spin from '#/src/components/Spin';
-import Typography from '#/src/components/Typography';
 import { useUrls } from '#/src/contexts/contextHooks';
 import { useFieldValue } from '#/src/hooks/form';
 import useApiAsync from '#/src/hooks/useApiAsync';

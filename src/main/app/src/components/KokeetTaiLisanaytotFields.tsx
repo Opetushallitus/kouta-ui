@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import { Field, FieldArray } from 'redux-form';
 import { useTranslation } from 'react-i18next';
-import Box from '@opetushallitus/virkailija-ui-components/Box';
+import { Box, Divider } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 import Flex, { FlexItem } from '#/src/components/Flex';
 import FieldArrayList from '#/src/components/FieldArrayList';
@@ -17,7 +17,6 @@ import {
 import IconButton from '#/src/components/IconButton';
 import { useFieldValue } from '#/src/hooks/form';
 import TilaisuudetFields from './TilaisuudetFields';
-import Divider from '#/src/components/Divider';
 import RemoveButton from '#/src/components/RemoveButton';
 import Heading from '#/src/components/Heading';
 

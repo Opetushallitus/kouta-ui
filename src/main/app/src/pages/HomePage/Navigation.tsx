@@ -12,23 +12,23 @@ import { get, minBy, throttle, isFunction } from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import OrganisaatioDrawer from './OrganisaatioDrawer';
-import Box from '#/src/components/Box';
-import Typography from '#/src/components/Typography';
+import {
+  Box,
+  Typography,
+  Icon,
+  Dropdown,
+  DropdownMenu,
+  DropdownMenuItem,
+} from '#/src/components/virkailija';
 import Button from '#/src/components/Button';
 import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
-import Icon from '#/src/components/Icon';
 import Container from '#/src/components/Container';
 import useInView from '#/src/hooks/useInView';
 import { NavigationStateContext } from './NavigationProvider';
 import { spacing, getThemeProp } from '#/src/theme';
 import scrollElementIntoView from '#/src/utils/scrollElementIntoView';
-
-import Dropdown, {
-  DropdownMenu,
-  DropdownMenuItem,
-} from '#/src/components/Dropdown';
 
 const NavigationContainer = styled.div`
   background-color: white;

@@ -7,7 +7,7 @@ import {
   FormFieldTextarea,
   FormFieldSelect,
 } from '#/src/components/formFields';
-import Box from '#/src/components/Box';
+import { Box } from '#/src/components/virkailija';
 import DividerHeading from '#/src/components/DividerHeading';
 import { getTestIdProps } from '#/src/utils';
 

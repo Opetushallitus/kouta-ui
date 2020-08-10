@@ -8,7 +8,7 @@ import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import searchHakukohteet from '#/src/utils/hakukohde/searchHakukohteet';
 import Anchor from '#/src/components/Anchor';
-import Box from '#/src/components/Box';
+import { Box } from '#/src/components/virkailija';
 import Button from '#/src/components/Button';
 import useModal from '#/src/hooks/useModal';
 import ErrorAlert from '#/src/components/ErrorAlert';

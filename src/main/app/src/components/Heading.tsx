@@ -1,6 +1,5 @@
 import React from 'react';
-import Typography from '@opetushallitus/virkailija-ui-components/Typography';
-import Divider from '@opetushallitus/virkailija-ui-components/Divider';
+import { Divider, Typography } from '#/src/components/virkailija';
 
 export const Heading = ({
   children = null,

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { getLanguageValue } from '#/src/utils/languageUtils';
 import { getEPerusteById } from '#/src/utils/ePeruste/getEPerusteById';
-import Typography from '#/src/components/Typography';
+import { Typography } from '#/src/components/virkailija';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import { useFieldValue } from '#/src/hooks/form';
 import StyledSectionHTML from '#/src/components/StyledSectionHTML';

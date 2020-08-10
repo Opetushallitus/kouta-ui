@@ -9,7 +9,7 @@ import {
   FormFieldRadioGroup,
   FormFieldYearSelect,
 } from '#/src/components/formFields';
-import Box from '#/src/components/Box';
+import { Box } from '#/src/components/virkailija';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import Spacing from '#/src/components/Spacing';
 import { useFieldValue } from '#/src/hooks/form';

@@ -4,11 +4,8 @@ import { Link } from 'react-router-dom';
 import { isEmpty, noop } from 'lodash';
 
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-import Box from '#/src/components/Box';
+import { Box, Radio, Icon, Typography } from '#/src/components/virkailija';
 import { getThemeProp } from '#/src/theme';
-import Radio from '#/src/components/Radio';
-import Icon from '#/src/components/Icon';
-import Typography from '#/src/components/Typography';
 import { disabledStyle } from '#/src/system';
 
 const FavouriteIconBase = styled(Icon)`

@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { isEmpty, noop } from 'lodash';
+import { useTranslation } from 'react-i18next';
 
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import { Box, Radio, Icon, Typography } from '#/src/components/virkailija';
@@ -72,6 +73,8 @@ export const OrganisaatioItem = ({
   showEditOppilaitos = true,
   isOppilaitos = false,
 }) => {
+  const { t } = useTranslation();
+
   const onSelect = useCallback(() => {
     onSelectProp(oid);
   }, [oid, onSelectProp]);
@@ -117,7 +120,7 @@ export const OrganisaatioItem = ({
         <FavouriteIcon
           active={favourite}
           disabled={disabled}
-          title="Lisää suosikkeihin"
+          title={t('etusivu.lisaaSuosikkeihin')}
           onClick={disabled ? noop : onToggleFavourite}
         />
       </Box>

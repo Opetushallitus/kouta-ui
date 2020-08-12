@@ -318,6 +318,7 @@ export default {
     naytaArkistoidut: 'Näytä myös arkistoidut',
     vaihdaOrganisaatiota: 'Vaihda organisaatiota',
     suosikit: 'Suosikit',
+    lisaaSuosikkeihin: 'Lisää suosikkeihin',
     haeKoulutuksia: 'Hae koulutuksia',
     haeHakuja: 'Hae hakuja',
     haeToteutuksia: 'Hae toteutuksia',

@@ -349,6 +349,7 @@ export default {
     koulutuksenJarjestaja: 'Koulutuksen järjestävä organisaatio',
     valitseJarjestajat:
       'Valitse ne organisaatiot, jotka järjestävät koulutusta',
+    kaytaPohjanJarjestajaa: 'Käytä pohjaksi kopioidun koulutuksen järjestäjää',
     valitseKoulutus: 'Valitse koulutus',
     valitseKaytettavaEperuste: 'Valitse käytettävä ePeruste',
     valitseKoulutuskoodi: 'Valitse koulutuskoodi',

@@ -24,18 +24,23 @@ import useSelectBase from '#/src/hooks/useSelectBase';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useFieldValue, useEntityFormConfig } from '#/src/hooks/form';
+import _ from 'lodash';
 
 const resolveFn = () => Promise.resolve();
-const getCopyValues = koulutusOid => ({
+const getCopyValues = koulutus => ({
   pohja: {
+    tarjoajat: koulutus.tarjoajat,
     tapa: POHJAVALINTA.KOPIO,
-    valinta: { value: koulutusOid },
+    valinta: { value: koulutus.oid },
   },
 });
 
 const getInitialValues = koulutus => {
   return koulutus
-    ? { ...getCopyValues(koulutus.oid), ...getFormValuesByKoulutus(koulutus) }
+    ? {
+        ...getFormValuesByKoulutus(_.omit(koulutus, ['tarjoajat'])),
+        ...getCopyValues(koulutus),
+      }
     : initialValues;
 };
 

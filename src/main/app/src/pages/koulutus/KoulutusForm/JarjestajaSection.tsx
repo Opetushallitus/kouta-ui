@@ -10,8 +10,13 @@ import Alert from '#/src/components/Alert';
 import Box from '#/src/components/Box';
 import OrganisaatioHierarkiaTreeSelect from '#/src/components/OrganisaatioHierarkiaTreeSelect';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
-import { createFormFieldComponent } from '#/src/components/formFields';
+import {
+  createFormFieldComponent,
+  FormFieldCheckbox,
+} from '#/src/components/formFields';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
+import { useFieldValue } from '#/src/hooks/form';
+import Spacing from '#/src/components/Spacing';
 
 const JarjestajatField = createFormFieldComponent(
   OrganisaatioHierarkiaTreeSelect,
@@ -22,8 +27,8 @@ const JarjestajatField = createFormFieldComponent(
 );
 
 const OrganizationSection = ({
-  organisaatioOid,
   name,
+  organisaatioOid,
   koulutus,
   disableTarjoajaHierarkia,
 }) => {
@@ -34,6 +39,10 @@ const OrganizationSection = ({
 
   const roleBuilder = useAuthorizedUserRoleBuilder();
   const tarjoajat = get(koulutus, 'tarjoajat') || [];
+  const tarjoajatFromPohja = useFieldValue('pohja.tarjoajat');
+  const kaytaPohjanJarjestajaa = useFieldValue(
+    'tarjoajat.kaytaPohjanJarjestajaa'
+  );
 
   const getIsDisabled = useCallback(
     organisaatio =>
@@ -42,7 +51,7 @@ const OrganizationSection = ({
   );
 
   return (
-    <div {...getTestIdProps('jarjestajatSelection')}>
+    <>
       {tarjoajat.length > 0 || disableTarjoajaHierarkia ? (
         <Box mb={2}>
           <Alert variant="info">
@@ -52,17 +61,32 @@ const OrganizationSection = ({
           </Alert>
         </Box>
       ) : null}
-
       {!disableTarjoajaHierarkia ? (
-        <Field
-          name={name}
-          hierarkia={hierarkia}
-          getIsDisabled={getIsDisabled}
-          component={JarjestajatField}
-          label={t('koulutuslomake.valitseJarjestajat')}
-        />
+        <>
+          {tarjoajatFromPohja ? (
+            <Spacing marginBottom={2}>
+              <Field
+                name={`tarjoajat.kaytaPohjanJarjestajaa`}
+                component={FormFieldCheckbox}
+              >
+                {t('koulutuslomake.kaytaPohjanJarjestajaa')}
+              </Field>
+            </Spacing>
+          ) : null}
+          {tarjoajatFromPohja && kaytaPohjanJarjestajaa ? null : (
+            <div {...getTestIdProps('jarjestajatSelection')}>
+              <Field
+                name={`tarjoajat.tarjoajat`}
+                hierarkia={hierarkia}
+                getIsDisabled={getIsDisabled}
+                component={JarjestajatField}
+                label={t('koulutuslomake.valitseJarjestajat')}
+              />
+            </div>
+          )}
+        </>
       ) : null}
-    </div>
+    </>
   );
 };
 

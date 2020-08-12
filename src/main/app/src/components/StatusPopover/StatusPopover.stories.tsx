@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 
 import StatusPopover from './index';
 import Button from '#/src/components/Button';
-import Typography from '#/src/components/Typography';
+import { Typography } from '#/src/components/virkailija';
 
 storiesOf('StatusPopover', module)
   .add('Basic', () => (

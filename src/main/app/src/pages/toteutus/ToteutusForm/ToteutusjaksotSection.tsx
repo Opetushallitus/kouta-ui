@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import FieldArrayList from '#/src/components/FieldArrayList';
 import Button from '#/src/components/Button';
 import { FormFieldInput, FormFieldTextarea } from '#/src/components/formFields';
-import Box from '#/src/components/Box';
+import { Box } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 import SisaltoField from '#/src/components/SisaltoField';
 

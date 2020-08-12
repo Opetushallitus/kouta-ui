@@ -4,7 +4,7 @@ import TyyppiSection from './TyyppiSection';
 import HakutavanRajausSection from './HakutavanRajausSection';
 import KohdejoukonRajausSection from './KohdejoukonRajausSection';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
-import Divider from '#/src/components/Divider';
+import { Divider } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 
 const PerustiedotSection = ({ name, canEditTyyppi = true }) => {

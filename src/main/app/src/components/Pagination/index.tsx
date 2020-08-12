@@ -4,9 +4,8 @@ import styled, { css } from 'styled-components';
 import Select from '#/src/components/Select';
 import Flex, { FlexItem } from '#/src/components/Flex';
 import Button from '#/src/components/Button';
-import Icon from '#/src/components/Icon';
+import { Icon, Typography } from '#/src/components/virkailija';
 import { spacing } from '#/src/theme';
-import Typography from '#/src/components/Typography';
 import { useTranslation } from 'react-i18next';
 
 const ButtonIcon = styled(Icon)`

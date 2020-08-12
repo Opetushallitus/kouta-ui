@@ -7,7 +7,7 @@ import {
   FormFieldSelect,
   FormFieldTextarea,
 } from '#/src/components/formFields';
-import Box from '#/src/components/Box';
+import { Box } from '#/src/components/virkailija';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
 

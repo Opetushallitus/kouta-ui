@@ -1,7 +1,6 @@
 import React from 'react';
 
-import Spin from '#/src/components/Spin';
-import Box from '#/src/components/Box';
+import { Box, Spin } from '#/src/components/virkailija';
 
 const ListSpin = props => (
   <Box

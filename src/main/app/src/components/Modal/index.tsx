@@ -1,9 +1,11 @@
 import React from 'react';
 
 import UiModal from '@opetushallitus/virkailija-ui-components/Modal';
-import ModalHeader from '@opetushallitus/virkailija-ui-components/ModalHeader';
-import ModalBody from '@opetushallitus/virkailija-ui-components/ModalBody';
-import ModalFooter from '@opetushallitus/virkailija-ui-components/ModalFooter';
+import {
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from '#/src/components/virkailija';
 
 const Modal = ({ footer, header, children, onClose, minHeight, ...props }) => {
   const wrapBody = !!(footer || header); // For legacy modal

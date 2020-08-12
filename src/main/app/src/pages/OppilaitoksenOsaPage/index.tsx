@@ -6,7 +6,7 @@ import FormPage from '#/src/components/FormPage';
 import OppilaitosFormSteps from '#/src/components/OppilaitosFormSteps';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import getOppilaitoksenOsaByOid from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaByOid';
-import Spin from '#/src/components/Spin';
+import { Spin } from '#/src/components/virkailija';
 import Title from '#/src/components/Title';
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import { ENTITY, CRUD_ROLES } from '#/src/constants';

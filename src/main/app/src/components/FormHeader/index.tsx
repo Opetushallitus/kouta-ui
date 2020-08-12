@@ -2,9 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import Typography from '#/src/components/Typography';
+import { Icon, Typography } from '#/src/components/virkailija';
 import { getThemeProp } from '#/src/theme';
-import Icon from '#/src/components/Icon';
 
 const HomeIcon = styled(Icon).attrs({ type: 'home' })`
   color: ${getThemeProp('palette.text.dark')};

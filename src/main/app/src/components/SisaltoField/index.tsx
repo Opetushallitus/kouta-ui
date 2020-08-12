@@ -4,8 +4,7 @@ import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
 import { getTestIdProps } from '#/src/utils';
-import Button from '@opetushallitus/virkailija-ui-components/Button';
-import Icon from '@opetushallitus/virkailija-ui-components/Icon';
+import Button from '#/src/components/Button';
 import {
   SortableContainer,
   SortableElement,
@@ -15,10 +14,12 @@ import TableInput from '#/src/components/TableInput';
 import Editor from '#/src/components/Editor';
 import Spacing from '#/src/components/Spacing';
 import Flex, { FlexItem } from '#/src/components/Flex';
-import Dropdown, {
+import {
+  Dropdown,
   DropdownMenu,
   DropdownMenuItem,
-} from '#/src/components/Dropdown';
+  Icon,
+} from '#/src/components/virkailija';
 import RemoveButton from '#/src/components/RemoveButton';
 import IconButton from '#/src/components/IconButton';
 

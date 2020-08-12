@@ -2,9 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { UNAUTHORIZED } from 'http-status-codes';
 import Modal from '#/src/components/Modal';
-import ModalHeader from '#/src/components/ModalHeader';
-import ModalBody from '#/src/components/ModalBody';
-import ModalFooter from '#/src/components/ModalFooter';
+import {
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from '#/src/components/virkailija';
 import Button from '#/src/components/Button';
 import Flex from '#/src/components/Flex';
 import { isDev } from '#/src/utils';

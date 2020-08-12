@@ -1,9 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
-import Button from './Button';
 import { getTestIdProps } from '#/src/utils';
-import Box from './Box';
-import FormControl from './FormControl';
+import { Box, FormControl } from '#/src/components/virkailija';
+import Button from '#/src/components/Button';
 import DateTimeRange from '#/src/components/DateTimeRange';
 
 export default ({ fields, t, meta: { error } }) => (

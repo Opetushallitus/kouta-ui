@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Typography from '#/src/components/Typography';
+import { Typography } from '#/src/components/virkailija';
 import Spacing from '#/src/components/Spacing';
 import OrganisaatioItem from './OrganisaatioItem';
 import { useTranslation } from 'react-i18next';

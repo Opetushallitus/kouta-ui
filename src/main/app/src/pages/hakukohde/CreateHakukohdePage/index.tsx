@@ -7,7 +7,7 @@ import getOrganisaatioByOid from '#/src/utils/organisaatio/getOrganisaatioByOid'
 import getKoulutustyyppiByKoulutusOid from '#/src/utils/koulutus/getKoulutustyyppiByKoulutusOid';
 import { KOULUTUSTYYPPI, ENTITY } from '#/src/constants';
 import useApiAsync from '#/src/hooks/useApiAsync';
-import Spin from '#/src/components/Spin';
+import { Spin } from '#/src/components/virkailija';
 import getToteutusByOid from '#/src/utils/toteutus/getToteutusByOid';
 import Title from '#/src/components/Title';
 import getHakuByOid from '#/src/utils/haku/getHakuByOid';

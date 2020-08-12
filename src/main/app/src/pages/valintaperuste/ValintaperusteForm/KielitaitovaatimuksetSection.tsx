@@ -8,12 +8,11 @@ import Spacing from '#/src/components/Spacing';
 import Button from '#/src/components/Button';
 import { VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI } from '#/src/constants';
 import Flex, { FlexItem } from '#/src/components/Flex';
-import Checkbox from '#/src/components/Checkbox';
+import { Checkbox, FormLabel } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import FieldArrayList from '#/src/components/FieldArrayList';
 import DividerHeading from '#/src/components/DividerHeading';
-import FormLabel from '#/src/components/FormLabel';
 
 import {
   FormFieldCheckboxGroup,

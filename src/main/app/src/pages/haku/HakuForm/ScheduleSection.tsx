@@ -3,7 +3,7 @@ import { Field, FieldArray } from 'redux-form';
 import { useTranslation } from 'react-i18next';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
-import Box from '#/src/components/Box';
+import { Box } from '#/src/components/virkailija';
 import HakuajatFields from '#/src/components/HakuajatFields';
 import FieldGroup from '#/src/components/FieldGroup';
 

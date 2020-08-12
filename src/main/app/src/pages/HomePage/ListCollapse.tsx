@@ -3,8 +3,7 @@ import styled from 'styled-components';
 
 import Flex, { FlexItem } from '#/src/components/Flex';
 import Collapse from '#/src/components/Collapse';
-import Icon from '#/src/components/Icon';
-import Typography from '#/src/components/Typography';
+import { Icon, Typography } from '#/src/components/virkailija';
 import { getThemeProp, spacing } from '#/src/theme';
 
 const HeaderIcon = styled(Icon)`

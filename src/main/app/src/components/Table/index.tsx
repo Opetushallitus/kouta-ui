@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { isFunction } from 'lodash';
 
 import { getThemeProp, spacing } from '#/src/theme';
-import Icon from '#/src/components/Icon';
+import { Icon } from '#/src/components/virkailija';
 
 export const TableBase = styled.table`
   width: 100%;

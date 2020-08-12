@@ -9,7 +9,7 @@ import {
 import { useFieldValue } from '#/src/hooks/form';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import DividerHeading from '#/src/components/DividerHeading';
-import Typography from '#/src/components/Typography';
+import { Typography } from '#/src/components/virkailija';
 
 const TietoaOpiskelustaSection = ({ name, language }) => {
   const { t } = useTranslation();

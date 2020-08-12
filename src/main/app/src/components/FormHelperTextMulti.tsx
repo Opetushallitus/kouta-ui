@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
-import FormHelperText from '@opetushallitus/virkailija-ui-components/FormHelperText';
+import { FormHelperText } from '#/src/components/virkailija';
 import { otherwise } from '#/src/utils';
 
 /**

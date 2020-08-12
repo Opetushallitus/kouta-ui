@@ -6,7 +6,7 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import useApiAsync from '#/src/hooks/useApiAsync';
-import Spin from '#/src/components/Spin';
+import { Spin } from '#/src/components/virkailija';
 import getHakuByOid from '#/src/utils/haku/getHakuByOid';
 import Title from '#/src/components/Title';
 import ReduxForm from '#/src/components/ReduxForm';

@@ -11,7 +11,7 @@ import getToteutusByOid from '#/src/utils/toteutus/getToteutusByOid';
 import getKoulutusByOid from '#/src/utils/koulutus/getKoulutusByOid';
 import ReduxForm from '#/src/components/ReduxForm';
 import useApiAsync from '#/src/hooks/useApiAsync';
-import Spin from '#/src/components/Spin';
+import { Spin } from '#/src/components/virkailija';
 import Title from '#/src/components/Title';
 import FormSteps from '#/src/components/FormSteps';
 import { ENTITY, CRUD_ROLES } from '#/src/constants';

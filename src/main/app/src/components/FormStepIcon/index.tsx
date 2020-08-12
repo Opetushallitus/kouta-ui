@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-import Icon from '#/src/components/Icon';
+import { Icon } from '#/src/components/virkailija';
 import { getThemeProp } from '#/src/theme';
 
 const Container = styled.div`

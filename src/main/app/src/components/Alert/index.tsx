@@ -2,10 +2,8 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { setLightness } from 'polished';
 
-import Typography from '#/src/components/Typography';
+import { Typography, Icon, Box } from '#/src/components/virkailija';
 import { spacing, getThemeProp } from '#/src/theme';
-import Icon from '#/src/components/Icon';
-import Box from '#/src/components/Box';
 
 const getIconByVariant = variant => {
   if (variant === 'info') {

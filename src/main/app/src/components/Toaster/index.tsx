@@ -4,9 +4,7 @@ import { Transition } from 'react-spring/renderprops';
 import _ from 'lodash/fp';
 
 import { getThemeProp } from '#/src/theme';
-import Icon from '#/src/components/Icon';
-import Typography from '#/src/components/Typography';
-import Box from '#/src/components/Box';
+import { Box, Icon, Typography } from '#/src/components/virkailija';
 import useToaster from '#/src/hooks/useToaster';
 import AbstractCollapse from '#/src/components/AbstractCollapse';
 import { useTranslation } from 'react-i18next';

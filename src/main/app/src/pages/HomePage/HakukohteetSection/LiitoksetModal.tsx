@@ -5,15 +5,17 @@ import { useTranslation } from 'react-i18next';
 
 import Button from '#/src/components/Button';
 import Modal from '#/src/components/Modal';
-import ModalHeader from '#/src/components/ModalHeader';
-import ModalBody from '#/src/components/ModalBody';
-import ModalFooter from '#/src/components/ModalFooter';
 import Select from '#/src/components/Select';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import getToteutukset from '#/src/utils/toteutus/getToteutukset';
 import getHaut from '#/src/utils/haku/getHaut';
-import FormLabel from '#/src/components/FormLabel';
-import Box from '#/src/components/Box';
+import {
+  Box,
+  FormLabel,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from '#/src/components/virkailija';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import useLanguage from '#/src/hooks/useLanguage';
 

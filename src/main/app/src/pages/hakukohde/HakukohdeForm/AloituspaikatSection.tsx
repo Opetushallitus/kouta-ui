@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import Flex, { FlexItem } from '#/src/components/Flex';
 import { FormFieldInput } from '#/src/components/formFields';
 import isKorkeakouluKoulutustyyppi from '#/src/utils/koulutus/isKorkeakouluKoulutustyyppi';
-import FormLabel from '#/src/components/FormLabel';
+import { FormLabel } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 
 const AloituspaikatSection = ({ koulutustyyppi, name }) => {

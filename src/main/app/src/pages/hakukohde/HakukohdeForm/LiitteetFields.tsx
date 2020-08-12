@@ -13,7 +13,7 @@ import FieldArrayList from '#/src/components/FieldArrayList';
 import { LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
 import useOrganisaatio from '#/src/hooks/useOrganisaatio';
 import getOrganisaatioContactInfo from '#/src/utils/organisaatio/getOrganisaatioContactInfo';
-import Typography from '#/src/components/Typography';
+import { Typography } from '#/src/components/virkailija';
 
 import {
   FormFieldDateTimeInput,

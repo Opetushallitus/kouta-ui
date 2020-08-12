@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { FormFieldSelect } from '#/src/components/formFields';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
-import Box from '#/src/components/Box';
+import { Box } from '#/src/components/virkailija';
 import DividerHeading from '#/src/components/DividerHeading';
 import { getTestIdProps } from '#/src/utils';
 

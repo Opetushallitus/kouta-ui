@@ -17,10 +17,11 @@ import {
   setColumnFieldValue,
 } from './utils';
 
-import Dropdown, {
+import {
+  Dropdown,
   DropdownMenu,
   DropdownMenuItem,
-} from '#/src/components/Dropdown';
+} from '#/src/components/virkailija';
 
 import { useTranslation } from 'react-i18next';
 

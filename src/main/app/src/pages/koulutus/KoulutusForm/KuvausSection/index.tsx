@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 import { useTranslation } from 'react-i18next';
 
 import FormConfigFragment from '#/src/components/FormConfigFragment';
-import Box from '#/src/components/Box';
+import { Box } from '#/src/components/virkailija';
 import TekstiKuvausSection from './TekstiKuvausSection';
 import { FormFieldInput, FormFieldTextarea } from '#/src/components/formFields';
 import { getTestIdProps } from '#/src/utils';

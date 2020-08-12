@@ -8,7 +8,7 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import useSoraKuvaus from '#/src/hooks/useSoraKuvaus';
-import Spin from '#/src/components/Spin';
+import { Spin } from '#/src/components/virkailija';
 import Title from '#/src/components/Title';
 import ReduxForm from '#/src/components/ReduxForm';
 import getFormValuesBySoraKuvaus from '#/src/utils/soraKuvaus/getFormValuesBySoraKuvaus';

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { get, isFunction } from 'lodash';
 import { produce } from 'immer';
-import Box from '#/src/components/Box';
+import { Box } from '#/src/components/virkailija';
 import { useFormConfig, useForm } from '#/src/hooks/form';
 import scrollElementIntoView from '#/src/utils/scrollElementIntoView';
 

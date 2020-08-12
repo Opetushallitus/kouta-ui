@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import Box from '#/src/components/Box';
+import { Box } from '#/src/components/virkailija';
 import FormStepIcon from '#/src/components/FormStepIcon';
 import { ENTITY, ICONS } from '#/src/constants';
 

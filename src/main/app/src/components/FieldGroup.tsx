@@ -1,5 +1,5 @@
 import React from 'react';
-import Box from '#/src/components/Box';
+import { Box } from '#/src/components/virkailija';
 import DividerHeading from '#/src/components/DividerHeading';
 import {
   useFieldConfig,

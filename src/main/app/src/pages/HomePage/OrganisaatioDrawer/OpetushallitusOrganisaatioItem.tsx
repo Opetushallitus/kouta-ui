@@ -1,5 +1,4 @@
 import React from 'react';
-import { get } from 'lodash';
 
 import useOrganisaatio from '#/src/hooks/useOrganisaatio';
 import OrganisaatioItem from './OrganisaatioItem';
@@ -13,7 +12,7 @@ const OpetetushallitusOrganisaatioItem = props => {
   return (
     <OrganisaatioItem
       oid={OPETUSHALLITUS_ORGANISAATIO_OID}
-      nimi={get(organisaatio, 'nimi')}
+      nimi={organisaatio?.nimi}
       language={language}
       {...props}
     />

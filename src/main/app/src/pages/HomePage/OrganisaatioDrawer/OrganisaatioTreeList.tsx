@@ -12,31 +12,15 @@ export const OrganisaatioTreeList = ({
   language = 'fi',
 }) => (
   <TreeList items={items} defaultOpen={false}>
-    {({
-      nimi,
-      oid,
-      favourite,
-      children,
-      open,
-      disabled,
-      isOppilaitos,
-      showEditOppilaitos,
-    }) => (
+    {itemProps => (
       <OrganisaatioItem
-        oid={oid}
-        favourite={favourite}
-        selected={oid === selected}
+        selected={itemProps.oid === selected}
         onToggleFavourite={onToggleFavourite}
         onSelect={onSelect}
-        nimi={nimi}
         onToggleOpen={onToggleOpen}
-        children={children}
-        open={open}
         language={language}
-        disabled={disabled}
-        isOppilaitos={isOppilaitos}
-        showEditOppilaitos={showEditOppilaitos}
         collapse
+        {...itemProps}
       />
     )}
   </TreeList>

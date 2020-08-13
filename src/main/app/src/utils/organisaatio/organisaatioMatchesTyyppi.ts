@@ -1,12 +1,11 @@
-import { get } from 'lodash';
+import _ from 'lodash/fp';
 
-const organisaatioMatchesTyyppi = tyyppi => organisaatio => {
-  const tyypit =
-    get(organisaatio, 'organisaatiotyypit') ||
-    get(organisaatio, 'tyypit') ||
-    [];
+export const getOrganisaatioTyypit = organisaatio =>
+  organisaatio?.organisaatiotyypit ?? organisaatio.tyypit ?? [];
 
+export const organisaatioMatchesTyyppi = _.curry((tyyppi, organisaatio) => {
+  const tyypit = getOrganisaatioTyypit(organisaatio);
   return tyypit.includes(tyyppi);
-};
+});
 
 export default organisaatioMatchesTyyppi;

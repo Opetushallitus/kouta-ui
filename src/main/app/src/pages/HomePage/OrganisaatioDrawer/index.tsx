@@ -1,7 +1,6 @@
 import React, { useMemo, useState, useCallback } from 'react';
-import { get, isArray } from 'lodash';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -30,15 +29,17 @@ import { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
 import useDebounceState from '#/src/hooks/useDebounceState';
 import useOrganisaatioHierarkia from './useOrganisaatioHierarkia';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
-import { createCanReadSomethingRoleBuilder } from '../utils';
 
 import {
-  OPETUSHALLITUS_ORGANISAATIO_OID,
-  OPPILAITOS_ROLE,
-} from '#/src/constants';
+  createCanReadSomethingRoleBuilder,
+  getEditLinkURL,
+  isEditable,
+} from '../utils';
 
-import OpetetushallitusOrganisaatioItem from './OpetushallitusOrganisaatioItem';
-import organisaatioIsOppilaitos from '#/src/utils/organisaatio/organisaatioIsOppilaitos';
+import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
+
+import OpetushallitusOrganisaatioItem from './OpetushallitusOrganisaatioItem';
+import { useActions } from '#/src/hooks/useActions';
 
 const CloseIcon = styled(Icon).attrs({ type: 'close', role: 'button' })`
   color: ${getThemeProp('palette.text.primary')};
@@ -93,34 +94,38 @@ const FilterContainer = styled(Box).attrs({ flexGrow: 0 })`
 `;
 
 const getTreeItems = (organisaatiot, favourites, open, roleBuilder) => {
-  const recursiveGetTreeItems = organisaatio => {
-    const children = isArray(get(organisaatio, 'children'))
-      ? organisaatio.children
-      : [];
-
-    return {
-      ...organisaatio,
-      favourite: favourites.includes(organisaatio.oid),
-      key: organisaatio.oid,
-      children: children.map(c => recursiveGetTreeItems(c)),
-      open: (open || []).includes(organisaatio.oid),
-      isOppilaitos: organisaatioIsOppilaitos(organisaatio),
-      showEditOppilaitos: roleBuilder
-        .hasCreate(OPPILAITOS_ROLE, organisaatio)
-        .result(),
-    };
-  };
+  const recursiveGetTreeItems = organisaatio => ({
+    ...organisaatio,
+    favourite: favourites.includes(organisaatio.oid),
+    key: organisaatio.oid,
+    children: organisaatio?.children?.map?.(recursiveGetTreeItems) ?? [],
+    open: (open || []).includes(organisaatio.oid),
+    isEditable: isEditable(roleBuilder, organisaatio),
+    editLinkURL: getEditLinkURL(organisaatio),
+  });
 
   return organisaatiot.map(recursiveGetTreeItems);
 };
 
-const DrawerContent = ({
-  organisaatioOid,
-  onOrganisaatioChange,
-  onClose,
-  organisaatioFavourites,
-  onToggleFavourite,
-}) => {
+const getFavouriteItems = (favourites, roleBuilder) =>
+  favourites?.map(organisaatio => ({
+    ...organisaatio,
+    favourite: true,
+    isEditable: isEditable(roleBuilder, organisaatio),
+    editLinkURL: getEditLinkURL(organisaatio),
+  })) ?? [];
+
+const useFavouriteItems = (oids, roleBuilder) => {
+  const { organisaatiot: favourites } = useOrganisaatiot(oids);
+  return useMemo(() => getFavouriteItems(favourites, roleBuilder), [
+    favourites,
+    roleBuilder,
+  ]);
+};
+
+const DrawerContent = ({ organisaatioOid, onOrganisaatioChange, onClose }) => {
+  const organisaatioFavourites = useSelector(selectOrganisaatioFavourites);
+  const [onToggleFavourite] = useActions([toggleFavourite]);
   const roleBuilder = useAuthorizedUserRoleBuilder();
 
   const hasOphOption = useMemo(
@@ -131,6 +136,8 @@ const DrawerContent = ({
       ).result(),
     [roleBuilder]
   );
+
+  const nameSearchEnabled = hasOphOption;
 
   const ophIsFavourite = useMemo(
     () => organisaatioFavourites.includes(OPETUSHALLITUS_ORGANISAATIO_OID),
@@ -145,25 +152,24 @@ const DrawerContent = ({
     500
   );
 
-  const nameSearchEnabled = hasOphOption;
-
   const { hierarkia, isLoading: loadingHierarkia } = useOrganisaatioHierarkia({
     name: debounceNameFilter,
     nameSearchEnabled,
   });
 
-  const items = useMemo(() => {
-    return getTreeItems(
-      hierarkia,
-      organisaatioFavourites,
-      openOrganisaatiot,
-      roleBuilder
-    );
-  }, [hierarkia, organisaatioFavourites, openOrganisaatiot, roleBuilder]);
-
-  const { organisaatiot: favourites } = useOrganisaatiot(
-    organisaatioFavourites
+  const items = useMemo(
+    () =>
+      getTreeItems(
+        hierarkia,
+        organisaatioFavourites,
+        openOrganisaatiot,
+        roleBuilder
+      ),
+    [hierarkia, organisaatioFavourites, openOrganisaatiot, roleBuilder]
   );
+
+  const favouriteItems = useFavouriteItems(organisaatioFavourites, roleBuilder);
+  const hasFavourites = favouriteItems?.length > 0;
 
   const onNameFilterChange = useCallback(e => setNameFilter(e.target.value), [
     setNameFilter,
@@ -189,12 +195,6 @@ const DrawerContent = ({
     [openOrganisaatiot, setOpenOrganisaatiot]
   );
 
-  const onSelect = useCallback(oid => setSelectedOrganisaatio(oid), [
-    setSelectedOrganisaatio,
-  ]);
-
-  const hasFavourites = favourites && favourites.length > 0;
-
   return (
     <Container {...getTestIdProps('organisaatioDrawer')}>
       <HeaderContainer>
@@ -216,13 +216,13 @@ const DrawerContent = ({
                 <Typography variant="secondary" as="div" mb={1}>
                   {t('etusivu.rekisterinpitaja')}
                 </Typography>
-                <OpetetushallitusOrganisaatioItem
+                <OpetushallitusOrganisaatioItem
                   favourite={ophIsFavourite}
                   selected={
                     selectedOrganisaatio === OPETUSHALLITUS_ORGANISAATIO_OID
                   }
                   onToggleFavourite={onToggleFavourite}
-                  onSelect={onSelect}
+                  onSelect={setSelectedOrganisaatio}
                 />
               </Box>
             )}
@@ -230,9 +230,9 @@ const DrawerContent = ({
             {hasFavourites && (
               <FavouriteListContainer mb={1}>
                 <OrganisaatioFavouritesList
-                  items={favourites}
+                  items={favouriteItems}
                   selected={selectedOrganisaatio}
-                  onSelect={oid => setSelectedOrganisaatio(oid)}
+                  onSelect={setSelectedOrganisaatio}
                   onToggleFavourite={onToggleFavourite}
                   language={language}
                 />
@@ -271,7 +271,7 @@ const DrawerContent = ({
           <OrganisaatioTreeList
             items={items}
             selected={selectedOrganisaatio}
-            onSelect={onSelect}
+            onSelect={setSelectedOrganisaatio}
             onToggleFavourite={onToggleFavourite}
             onToggleOpen={onToggleOpen}
             language={language}
@@ -304,11 +304,4 @@ export const OrganisaatioDrawer = ({ open, onClose, ...props }) => {
   );
 };
 
-export default connect(
-  state => ({
-    organisaatioFavourites: selectOrganisaatioFavourites(state),
-  }),
-  dispatch => ({
-    onToggleFavourite: oid => dispatch(toggleFavourite(oid)),
-  })
-)(OrganisaatioDrawer);
+export default OrganisaatioDrawer;

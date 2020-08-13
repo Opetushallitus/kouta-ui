@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { isEmpty, noop } from 'lodash';
@@ -36,7 +36,7 @@ const FavouriteIcon = ({ active = false, ...props }) => (
   />
 );
 
-const EditOppilaitosIcon = styled(Icon).attrs({
+const EditIcon = styled(Icon).attrs({
   role: 'button',
   type: 'edit',
 })``;
@@ -45,13 +45,13 @@ const Container = styled(Box).attrs({
   display: 'flex',
   justifyContent: 'space-between',
 })`
-  ${EditOppilaitosIcon} {
+  ${EditIcon} {
     transition: opacity 0.25s;
     opacity: 0;
   }
 
   &:hover {
-    ${EditOppilaitosIcon} {
+    ${EditIcon} {
       opacity: 1;
     }
   }
@@ -66,35 +66,18 @@ export const OrganisaatioItem = ({
   nimi,
   open = false,
   collapse = false,
-  onToggleOpen: onToggleOpenProp = () => {},
+  onToggleOpen: onToggleOpenProp = oid => {},
   children = [],
   language = 'fi',
   disabled = false,
-  showEditOppilaitos = true,
-  isOppilaitos = false,
+  isEditable = false,
+  editLinkURL,
 }) => {
   const { t } = useTranslation();
 
-  const onSelect = useCallback(() => {
-    onSelectProp(oid);
-  }, [oid, onSelectProp]);
-
-  const onToggleFavourite = useCallback(() => {
-    onToggleFavouriteProp(oid);
-  }, [oid, onToggleFavouriteProp]);
-
-  const onToggleOpen = useCallback(() => {
-    onToggleOpenProp(oid);
-  }, [oid, onToggleOpenProp]);
-
-  const oppilaitosLink =
-    isOppilaitos && showEditOppilaitos ? (
-      <Typography as="div" ml={1}>
-        <Link to={`/organisaatio/${oid}/oppilaitos`}>
-          <EditOppilaitosIcon color="text.secondary" fontSize="1.3rem" />
-        </Link>
-      </Typography>
-    ) : null;
+  const onSelect = () => onSelectProp(oid);
+  const onToggleFavourite = () => onToggleFavouriteProp(oid);
+  const onToggleOpen = () => onToggleOpenProp(oid);
 
   return (
     <Container>
@@ -104,7 +87,13 @@ export const OrganisaatioItem = ({
             {getFirstLanguageValue(nimi, language)}
           </Radio>
         </Box>
-        {oppilaitosLink}
+        {isEditable && editLinkURL ? (
+          <Typography as="div" ml={1}>
+            <Link to={editLinkURL}>
+              <EditIcon color="text.secondary" fontSize="1.3rem" />
+            </Link>
+          </Typography>
+        ) : null}
       </Box>
 
       <Box display="flex">

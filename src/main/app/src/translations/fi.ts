@@ -658,6 +658,7 @@ export default {
     oppilaitoksenOsanYhteystiedot: 'Oppilaitoksen osan yhteystiedot',
     yhteystiedotInfo: 'Anna oppilaitokselle tarvittavat yhteystiedot',
     oppilaitoksenOsanTila: 'Oppilaitoksen osan tila',
+    oppilaitoksenOsanTeemakuva: 'Oppilaitoksen osan teemakuva',
   },
   eperuste: {
     suorittaneenOsaaminen: 'Tutkinnon suorittaneen osaaminen',

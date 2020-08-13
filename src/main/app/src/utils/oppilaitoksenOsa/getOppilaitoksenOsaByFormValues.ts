@@ -1,10 +1,17 @@
-import { get, mapValues, pick } from 'lodash';
+import { mapValues, pick } from 'lodash';
 
 import { serializeEditorState } from '#/src/components/Editor/utils';
 import { isNumeric } from '#/src/utils';
 
 const getOppilaitoksenOsaByFormValues = ({ tila, muokkaaja, ...values }) => {
-  const { perustiedot, esittely, yhteystiedot, kieliversiot } = values;
+  const {
+    oppilaitosOid,
+    perustiedot,
+    esittely,
+    yhteystiedot,
+    kieliversiot,
+    teemakuva,
+  } = values;
 
   const {
     osoite,
@@ -15,14 +22,16 @@ const getOppilaitoksenOsaByFormValues = ({ tila, muokkaaja, ...values }) => {
   } = yhteystiedot;
 
   return {
+    oppilaitosOid,
     tila,
     muokkaaja,
     kielivalinta: kieliversiot,
+    teemakuva: teemakuva,
     metadata: {
       yhteystiedot: {
         osoite: {
           osoite: pick(osoite || {}, kieliversiot),
-          postinumeroKoodiUri: get(postinumero, 'value') || null,
+          postinumeroKoodiUri: postinumero?.value ?? null,
         },
         sahkoposti: pick(sahkoposti || {}, kieliversiot),
         puhelinnumero: pick(puhelinnumero || {}, kieliversiot),
@@ -32,10 +41,10 @@ const getOppilaitoksenOsaByFormValues = ({ tila, muokkaaja, ...values }) => {
         pick(esittely || {}, kieliversiot),
         serializeEditorState
       ),
-      opiskelijoita: isNumeric(get(perustiedot, 'opiskelijoita'))
+      opiskelijoita: isNumeric(perustiedot?.opiskelijoita)
         ? parseInt(perustiedot.opiskelijoita)
         : null,
-      kampus: pick(get(perustiedot, 'kampus') || {}, kieliversiot),
+      kampus: pick(perustiedot?.kampus || {}, kieliversiot),
     },
   };
 };

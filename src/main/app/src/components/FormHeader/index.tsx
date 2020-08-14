@@ -50,7 +50,7 @@ const FormHeader = ({
           <IconContainer {...homeIconProps}>
             <HomeIcon />
           </IconContainer>
-          <Typography variant="h4">{children}</Typography>
+          <Typography variant="h5">{children}</Typography>
         </TitleContainer>
       )}
       {status && <div>{status}</div>}

@@ -3,11 +3,12 @@ import { useTranslation } from 'react-i18next';
 import FormHeader from '#/src/components/FormHeader';
 import StatusTag from '#/src/components/StatusTag';
 import FormEditInfo from '#/src/components/FormEditInfo';
+import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 export default function EntityFormHeader({ entityType, entity, ...props }) {
-  const { t } = useTranslation();
-  const { modified, muokkaaja, tila } = entity || {};
-
+  const { i18n } = useTranslation();
+  const { modified, muokkaaja, tila, nimi } = entity || {};
+  const translatedNimi = getFirstLanguageValue(nimi, [i18n.language]);
   return (
     <FormHeader
       status={tila ? <StatusTag status={tila} large /> : null}
@@ -16,7 +17,7 @@ export default function EntityFormHeader({ entityType, entity, ...props }) {
       }
       {...props}
     >
-      {t(`yleiset.${entityType}`)}
+      {translatedNimi}
     </FormHeader>
   );
 }

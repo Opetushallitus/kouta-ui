@@ -50,7 +50,6 @@ const OppilaitoksenOsaPage = ({
   });
 
   const oppilaitosOid = useOppilaitosOid(organisaatio);
-  console.log(oppilaitosOid);
 
   const { t } = useTranslation();
   const oppilaitoksenOsaIsResolved = !!finishedAt;
@@ -109,7 +108,7 @@ const OppilaitoksenOsaPage = ({
           header={
             <EntityFormHeader
               entityType={ENTITY.OPPILAITOKSEN_OSA}
-              entity={oppilaitoksenOsa}
+              entity={{ ...(organisaatio ?? {}), ...(oppilaitoksenOsa ?? {}) }}
             />
           }
           footer={

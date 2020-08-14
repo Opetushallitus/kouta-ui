@@ -5,7 +5,8 @@ const getFormValuesByOppilaitoksenOsa = oppilaitoksenOsa => {
   const {
     kieliversiot,
     teemakuva,
-    metadata: { yhteystiedot, esittely, opiskelijoita, kampus, tila },
+    tila,
+    metadata: { yhteystiedot, esittely, opiskelijoita, kampus },
     oppilaitosOid,
   } = oppilaitoksenOsa;
 

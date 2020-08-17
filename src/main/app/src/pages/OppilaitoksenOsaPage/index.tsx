@@ -49,6 +49,7 @@ const OppilaitoksenOsaPage = ({
     watch: JSON.stringify([organisaatioOid, oppilaitoksenOsaUpdatedAt]),
   });
 
+  // TODO: Setting oppilaitosOid should be done in backend. https://jira.oph.ware.fi/jira/browse/KTO-819
   const oppilaitosOid = useOppilaitosOid(organisaatio);
 
   const { t } = useTranslation();

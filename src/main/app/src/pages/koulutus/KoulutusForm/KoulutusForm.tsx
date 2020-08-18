@@ -26,6 +26,7 @@ import KuvausSection from './KuvausSection';
 import JarjestajaSection from './JarjestajaSection';
 import LisatiedotSection from './LisatiedotSection';
 import ToteutuksetSection from './ToteutuksetSection';
+import { TutkinnonOsatSection } from './TiedotSection';
 
 const isInHierarkia = org => hierarkia =>
   hierarkia.organisaatioOid === org.organisaatioOid ||
@@ -106,6 +107,16 @@ const KoulutusForm = ({
         disabled={onlyTarjoajaRights}
         koulutustyyppi={koulutustyyppi}
         koulutuskoodi={koulutuskoodi}
+      />
+
+      <FormCollapse
+        section="tutkinnonosat"
+        header={t('koulutuslomake.tutkinnonOsat')}
+        Component={TutkinnonOsatSection}
+        name={'tutkinnonosat.osat'}
+        languages={languageTabs}
+        disabled={onlyTarjoajaRights}
+        koulutustyyppi={koulutustyyppi}
       />
 
       <FormCollapse

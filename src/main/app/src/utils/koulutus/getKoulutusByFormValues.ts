@@ -48,6 +48,19 @@ const getKoulutusByFormValues = values => {
 
   const julkinen = Boolean(get(values, 'julkinen'));
 
+  const tutkinnonOsat = (get(values, 'tutkinnonosat.osat') || []).map(
+    ({
+      eperuste: { value: eperusteId },
+      koulutus: { value: koulutusId },
+      tutkinnonosat: { value: tutkinnonosatId },
+    }) => ({
+      eperuste: eperusteId,
+      tutkinnonosat: tutkinnonosatId,
+      koulutus: koulutusId,
+    })
+  );
+  console.log(tutkinnonOsat);
+
   return {
     johtaaTutkintoon: true,
     muokkaaja,
@@ -62,6 +75,7 @@ const getKoulutusByFormValues = values => {
     ePerusteId,
     teemakuva,
     metadata: {
+      tutkinnonOsat: tutkinnonOsat,
       tyyppi: koulutustyyppi,
       lisatiedot: osiotWithKuvaukset,
       kuvaus,

@@ -5,6 +5,7 @@ import {
   KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
+  TUTKINTOON_JOHTAVA_AMMATILLINEN_TAI_TUTKINNON_OSA_KOULUTUSTYYPIT,
 } from '#/src/constants';
 
 import createFormConfigBuilder from '#/src/utils/form/createFormConfigBuilder';
@@ -28,6 +29,26 @@ const config = createFormConfigBuilder().registerSections([
   koulutustyyppiSectionConfig,
   pohjaValintaSectionConfig,
   kieliversiotSectionConfig,
+  {
+    section: 'tutkinnonosat',
+    koulutustyypit: [KOULUTUSTYYPPI.TUTKINNON_OSA],
+    parts: [
+      {
+        field: '.osat',
+        fragment: 'osat',
+        koulutustyypit: [KOULUTUSTYYPPI.TUTKINNON_OSA],
+        validate: eb =>
+          eb.validateArray('tutkinnonosat.osat', eb => {
+            return _.flow([
+              eb => eb.validateExistence('eperuste'),
+              eb => eb.validateExistence('koulutus'),
+              eb => eb.validateExistence('tutkinnonosat'),
+            ])(eb);
+          }),
+        required: true,
+      },
+    ],
+  },
   {
     section: 'information',
     parts: [

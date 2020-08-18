@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { get, each, find, toLower } from 'lodash';
-import { Field } from 'redux-form';
+import { Field, FieldArray } from 'redux-form';
 import { useTranslation } from 'react-i18next';
-
-import { useBoundFormActions, useIsDirty } from '#/src/hooks/form';
+import {
+  useBoundFormActions,
+  useFieldValue,
+  useIsDirty,
+} from '#/src/hooks/form';
 import FormConfigFragment from '#/src/components/FormConfigFragment';
 import { FormFieldInput } from '#/src/components/formFields';
 import { getTestIdProps } from '#/src/utils';
@@ -14,6 +17,8 @@ import KoulutusalatField from './KoulutusalatField';
 import KoulutuksenTiedotSection from './KoulutuksenTiedotSection';
 import OpintojenlaajuusField from './OpintojenlaajuusField';
 import TutkintonimikeField from './TutkintonimikeField';
+import FieldArrayList from '#/src/components/FieldArrayList';
+import Button from '#/src/components/Button';
 
 const useLocalizedKoulutus = ({ fieldName, language, koulutusValue }) => {
   const [changedKoulutus, setChangedKoulutus] = useState(null);
@@ -55,6 +60,95 @@ const useLocalizedKoulutus = ({ fieldName, language, koulutusValue }) => {
       setChangedKoulutus(null);
     }
   }, [change, changedKoulutus, fieldName, koodi, language]);
+};
+
+const TutkinnonOsatField = ({ disabled, language, koulutustyyppi, name }) => {
+  const { t } = useTranslation();
+  const koulutuskoodi = useFieldValue(`${name}.koulutus`);
+  useLocalizedKoulutus({
+    fieldName: name,
+    koulutusValue: koulutuskoodi,
+    language,
+  });
+  return (
+    <KoulutuksenTiedotSection
+      disabled={disabled}
+      language={language}
+      koulutuskoodi={koulutuskoodi}
+      koulutustyyppi={koulutustyyppi}
+      name={name}
+      selectLabel={t('koulutuslomake.valitseKoulutus')}
+    />
+  );
+};
+
+const TutkinnonOsatFields = ({
+  disabled,
+  language,
+  koulutustyyppi,
+  fields,
+}) => {
+  const { t } = useTranslation();
+  const onAddField = useCallback(() => {
+    console.log(fields);
+    fields.push({});
+  }, [fields]);
+
+  return (
+    <>
+      <FieldArrayList fields={fields}>
+        {({ field }) => (
+          <TutkinnonOsatField
+            disabled={disabled}
+            language={language}
+            koulutustyyppi={koulutustyyppi}
+            name={field}
+          />
+        )}
+      </FieldArrayList>
+      <Box
+        display="flex"
+        justifyContent="center"
+        mt={fields.length > 0 ? 4 : 0}
+      >
+        <Button
+          variant="outlined"
+          color="primary"
+          type="button"
+          onClick={onAddField}
+          {...getTestIdProps('lisaaKoulutusButton')}
+        >
+          {t('toteutuslomake.lisaaKoulutus')}
+        </Button>
+      </Box>
+    </>
+  );
+};
+
+export const TutkinnonOsatSection = ({
+  disabled,
+  language,
+  koulutustyyppi,
+  name,
+}) => {
+  const { t } = useTranslation();
+
+  return (
+    <Box mb={-2}>
+      <FormConfigFragment name="osat">
+        <Box mb={2}>
+          <FieldArray
+            disabled={disabled}
+            koulutustyyppi={koulutustyyppi}
+            name={name}
+            component={TutkinnonOsatFields}
+            t={t}
+            language={language}
+          />
+        </Box>
+      </FormConfigFragment>
+    </Box>
+  );
 };
 
 const TiedotSection = ({

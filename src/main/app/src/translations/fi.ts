@@ -189,9 +189,11 @@ export default {
     meneLoginSivulle: 'Mene sisäänkirjautumissivulle',
     suljeVaroitus: 'Sulje varoitus',
     ePerusteenTiedot: 'ePerusteen tiedot',
+    koodi: 'Koodi',
     diaarinumero: 'Diaarinumero',
     voimaantulo: 'Voimaantulo',
     osaamispistetta: 'osaamispistettä',
+    ePerusteenTutkinnonOsat: 'Valitse tutkinnon osat',
     ePerusteStatus: {
       voimassa: 'Voimassa',
       tuleva: 'Tuleva',
@@ -344,6 +346,7 @@ export default {
     haeHakukohteita: 'Hae hakukohteita',
   },
   koulutuslomake: {
+    tutkinnonOsat: 'Valitse tutkinnon osat',
     koulutuksenTiedot: 'Koulutuksen tiedot',
     koulutuksenKuvaus: 'Valitun koulutuksen kuvaus',
     koulutuksenLisatiedot: 'Koulutuksen lisätiedot',
@@ -353,6 +356,7 @@ export default {
     kaytaPohjanJarjestajaa: 'Käytä pohjaksi kopioidun koulutuksen järjestäjää',
     valitseKoulutus: 'Valitse koulutus',
     valitseKaytettavaEperuste: 'Valitse käytettävä ePeruste',
+    valitseKaytettavaTutkinnonOsa: 'Valitse tutkinnon osat',
     valitseKoulutuskoodi: 'Valitse koulutuskoodi',
     valitseTutkintonimike: 'Valitse tutkintonimike',
     valitseOpintojenLaajuus: 'Valitse opintojen laajuus',
@@ -385,6 +389,7 @@ export default {
       'Valitse näkyykö koulutus muille koulutustoimijoille. Jos koulutus on julkinen, muut koulutustoimijat voivat käyttää sitä pohjana luodessaan uusia.',
   },
   toteutuslomake: {
+    lisaaKoulutus: 'Lisää uusi koulutus',
     toteutuksenTiedot: 'Toteutuksen tiedot',
     ilmoittautumislinkki: 'Ilmoittautumislinkki',
     laajuus: 'Laajuus',

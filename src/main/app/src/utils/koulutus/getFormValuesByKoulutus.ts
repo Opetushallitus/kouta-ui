@@ -28,10 +28,10 @@ export const getFormValuesByKoulutus = koulutus => {
     .map(({ otsikkoKoodiUri }) => ({ value: otsikkoKoodiUri }));
 
   const tutkinnonosat = tutkinnonOsat.map(
-    ({ eperuste, koulutus, tutkinnonosat }) => ({
-      eperuste: { value: eperuste },
-      koulutus: { value: koulutus },
-      tutkinnonosat: { value: tutkinnonosat },
+    ({ eperusteId, koulutusId, tutkinnonosatId }) => ({
+      eperuste: { value: eperusteId },
+      koulutus: { value: koulutusId },
+      tutkinnonosat: { value: tutkinnonosatId },
     })
   );
 

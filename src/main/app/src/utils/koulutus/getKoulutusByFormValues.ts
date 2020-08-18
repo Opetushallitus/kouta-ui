@@ -54,12 +54,11 @@ const getKoulutusByFormValues = values => {
       koulutus: { value: koulutusId },
       tutkinnonosat: { value: tutkinnonosatId },
     }) => ({
-      eperuste: eperusteId,
-      tutkinnonosat: tutkinnonosatId,
-      koulutus: koulutusId,
+      eperusteId: eperusteId,
+      tutkinnonosatId: tutkinnonosatId,
+      koulutusId: koulutusId,
     })
   );
-  console.log(tutkinnonOsat);
 
   return {
     johtaaTutkintoon: true,

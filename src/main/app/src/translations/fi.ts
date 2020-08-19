@@ -484,6 +484,28 @@ export default {
     valitseMissaJarjestetaan: 'Valitse missä toteutus järjestetään',
     vuotta: 'Vuotta',
     kuukautta: 'Kuukautta',
+    hakeutumisTaiIlmoittautumistapa: 'Hakeutumis- tai ilmoittautumistapa',
+    valitseHakutapa: 'Valitse oppijalle näkyvä hakutapa',
+    hakuTapa: {
+      hakeutuminen: 'Hakeutuminen',
+      ilmoittautuminen: 'Ilmoittautuminen',
+    },
+    hakeutuminen: {
+      valitseTapa: 'Valitse hakeutumistapa',
+      linkki: 'Hakeutumislinkki',
+      lisatiedot: 'Lisätiedot hakeutumiselle',
+    },
+    ilmoittautuminen: {
+      valitseTapa: 'Valitse ilmoittautumistapa',
+      linkki: 'Ilmoittautumislinkki',
+      lisatiedot: 'Lisätiedot ilmoittautumiselle',
+    },
+    muuHakulomake: 'Muu hakulomake',
+    hakemuspalvelu: 'Hakemuspalvelu',
+    eiSahkoistaHakua: 'Ei sähköistä hakua',
+    hakuaikaAlkaa: 'Hakuaika alkaa',
+    hakuaikaPaattyy: 'Hakuaika päättyy',
+    lisatiedotValintaperusteista: 'Lisätiedot valintaperusteista',
   },
   hakulomake: {
     haunNimi: 'Haun nimi',

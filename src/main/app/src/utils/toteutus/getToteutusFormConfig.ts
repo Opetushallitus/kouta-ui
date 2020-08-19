@@ -308,6 +308,11 @@ const config = createFormConfigBuilder().registerSections([
     koulutustyypit: KOULUTUSTYYPIT,
   },
   {
+    section: 'hakeutumisTaiIlmoittautumistapa',
+    koulutustyypit: KOULUTUSTYYPIT,
+    field: 'hakeutumisTaiIlmoittautumistapa',
+  },
+  {
     section: 'nayttamistiedot',
     koulutustyypit: KOULUTUSTYYPIT,
     field: 'nayttamistiedot',

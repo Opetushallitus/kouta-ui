@@ -74,6 +74,7 @@ export const development = ({ isCypress }) => ({
   'lomake-editori.muokkaus-sivu': `${virkailijaDevUrl}/lomake-editori/editor/$1`,
   'oppijanumerorekisteri-service.henkilo': `${virkailijaDevUrl}/oppijanumerorekisteri-service/henkilo/$1`,
   'eperusteet.kooste': `${ePerusteetDevUrl}/#/$1/kooste/$2`,
+  'eperusteet.tutkinnonosat': `${ePerusteetDevUrl}/#/$1/esitys/$2/reformi/tutkinnonosat/$3`,
 });
 
 export const configure = async (urls, httpClient) => {

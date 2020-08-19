@@ -289,8 +289,9 @@ const KoulutusInfo = ({
                   description: (
                     <Anchor
                       href={apiUrls.url(
-                        'eperusteet.kooste',
+                        'eperusteet.tutkinnonosat',
                         language,
+                        _.get(ePeruste, 'id'),
                         _.get(selectedTutkinnonosat, 'id')
                       )}
                       target="_blank"

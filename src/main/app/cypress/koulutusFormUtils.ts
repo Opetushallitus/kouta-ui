@@ -81,6 +81,13 @@ export const stubKoulutusFormRoutes = ({ organisaatioOid }) => {
 
   cy.route({
     method: 'GET',
+    url:
+      '**/eperusteet-service/api/perusteet/1/suoritustavat/reformi/tutkinnonosat',
+    response: [],
+  });
+
+  cy.route({
+    method: 'GET',
     url: '**/eperusteet-service/api/perusteet/1',
     response: {
       id: 1,

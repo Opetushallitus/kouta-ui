@@ -72,6 +72,7 @@ const EditorWrapper = styled.div`
 
 const EditorContent = styled.div`
   max-height: 250px;
+  min-height: 100px;
   overflow-y: auto;
 `;
 

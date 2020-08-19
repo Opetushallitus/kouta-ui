@@ -10,8 +10,13 @@ import createStore from './state/store';
 import { configure as configureUrls } from './urls';
 import HttpContext from './contexts/HttpClientContext';
 import UrlContext from '#/src/contexts/UrlContext';
+import { getFormConfigByEntity } from '#/src/hooks/form';
 import createLocalization from './localization';
 import getTranslations from './translations';
+import FormConfigContext from './contexts/FormConfigContext';
+import ReduxForm from './components/ReduxForm';
+import { KOULUTUSTYYPPI } from './constants';
+import FormConfigSectionContext from './contexts/FormConfigSectionContext';
 
 const defaultHttpClient = axios.create({});
 const configureOphUrls = () => configureUrls(ophUrls, defaultHttpClient);
@@ -69,3 +74,24 @@ export const makeLocalizationDecorator = () => storyFn => {
     </Suspense>
   );
 };
+
+export const makeFormDecorator = (
+  entityType,
+  koulutustyyppi = KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
+) => storyFn => {
+  const content = storyFn();
+  const config = getFormConfigByEntity(entityType, koulutustyyppi);
+  return (
+    <ReduxForm form={entityType}>
+      <FormConfigContext.Provider value={config}>
+        {content}
+      </FormConfigContext.Provider>
+    </ReduxForm>
+  );
+};
+
+export const makeFormSectionDecorator = sectionName => storyFn => (
+  <FormConfigSectionContext.Provider value={sectionName}>
+    {storyFn()}
+  </FormConfigSectionContext.Provider>
+);

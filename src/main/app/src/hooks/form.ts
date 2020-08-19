@@ -70,14 +70,14 @@ const formConfigsGettersByEntity = {
   [ENTITY.OPPILAITOKSEN_OSA]: getOppilaitoksenOsaFormConfig,
 };
 
-const getFormConfigByEntity = (entityName, options) => {
-  return formConfigsGettersByEntity[entityName](...options);
+export const getFormConfigByEntity = (entityName, koulutustyyppi) => {
+  return formConfigsGettersByEntity[entityName](koulutustyyppi);
 };
 
-export const useEntityFormConfig = (entityName, ...options) => {
-  return useMemo(() => getFormConfigByEntity(entityName, options), [
+export const useEntityFormConfig = (entityName, koulutustyyppi) => {
+  return useMemo(() => getFormConfigByEntity(entityName, koulutustyyppi), [
     entityName,
-    options,
+    koulutustyyppi,
   ]);
 };
 

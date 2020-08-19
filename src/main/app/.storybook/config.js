@@ -4,7 +4,11 @@ import { ThemeProvider } from 'styled-components';
 import { withKnobs } from '@storybook/addon-knobs';
 
 import defaultTheme from '#/src/theme';
-import { makeLocalizationDecorator } from '#/src/storybookUtils';
+import {
+  makeLocalizationDecorator,
+  makeStoreDecorator,
+  makeApiDecorator,
+} from '#/src/storybookUtils';
 
 const themeDecorator = storyFn => (
   <ThemeProvider theme={defaultTheme}>{storyFn()}</ThemeProvider>
@@ -13,6 +17,8 @@ const themeDecorator = storyFn => (
 addDecorator(withKnobs);
 addDecorator(themeDecorator);
 addDecorator(makeLocalizationDecorator());
+addDecorator(makeStoreDecorator());
+addDecorator(makeApiDecorator());
 
 function requireAll(requireContext) {
   return requireContext.keys().map(requireContext);

@@ -46,6 +46,10 @@ const ToteutusForm = ({
   const languages = kieliversiot || [];
   const { isOpen, open, close } = useModal();
 
+  const ilmoittautumisTapa = useFieldValue(
+    'hakeutumisTaiIlmoittautumistapa.ilmoittautumisTapa'
+  );
+
   return (
     <>
       <HakukohteetModal
@@ -166,14 +170,15 @@ const ToteutusForm = ({
           Component={HakeutumisTaiIlmoittautumistapaSection}
           languages={languages}
         />
-
-        <FormCollapse
-          section="soraKuvaus"
-          header={t('yleiset.soraKuvaus')}
-          Component={SoraKuvausSection}
-          organisaatioOid={organisaatioOid}
-          languages={languages}
-        />
+        {ilmoittautumisTapa === 'muuHakulomake' && (
+          <FormCollapse
+            section="soraKuvaus"
+            header={t('yleiset.soraKuvaus')}
+            Component={SoraKuvausSection}
+            organisaatioOid={organisaatioOid}
+            languages={languages}
+          />
+        )}
 
         <FormCollapse
           section="yhteyshenkilot"

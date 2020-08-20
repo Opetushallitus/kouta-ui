@@ -9,6 +9,7 @@ import { useFieldValue } from '#/src/hooks/form';
 import PerustiedotSection from './PerustiedotSection';
 import EsittelySection from './EsittelySection';
 import YhteystiedotSection from './YhteystiedotSection';
+import TeemakuvaSection from '#/src/components/TeemakuvaSection';
 
 const OppilaitoksenOsaForm = ({
   steps = false,
@@ -39,6 +40,11 @@ const OppilaitoksenOsaForm = ({
         header={t('oppilaitoksenOsaLomake.oppilaitoksenOsanEsittely')}
         section="esittely"
         Component={EsittelySection}
+      />
+      <FormCollapse
+        section="teemakuva"
+        header={t('oppilaitoksenOsaLomake.oppilaitoksenOsanTeemakuva')}
+        Component={TeemakuvaSection}
       />
 
       <FormCollapse

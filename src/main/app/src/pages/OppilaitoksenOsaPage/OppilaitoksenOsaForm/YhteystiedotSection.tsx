@@ -53,7 +53,7 @@ const YhteystiedotSection = ({ name, language }) => {
       <Box {...getTestIdProps('verkkosivu')}>
         <Field
           component={FormFieldInput}
-          name={`${name}.verkkosivu`}
+          name={`${name}.verkkosivu.${language}`}
           label={t('yleiset.verkkosivu')}
         />
       </Box>

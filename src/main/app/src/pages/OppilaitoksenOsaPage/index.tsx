@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import useOrganisaatio from '#/src/hooks/useOrganisaatio';
+import useOrganisaatio, { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
 import FormPage from '#/src/components/FormPage';
 import OppilaitosFormSteps from '#/src/components/OppilaitosFormSteps';
 import useApiAsync from '#/src/hooks/useApiAsync';
@@ -9,11 +9,8 @@ import getOppilaitoksenOsaByOid from '#/src/utils/oppilaitoksenOsa/getOppilaitok
 import { Spin } from '#/src/components/virkailija';
 import Title from '#/src/components/Title';
 import EntityFormHeader from '#/src/components/EntityFormHeader';
-import { ENTITY, CRUD_ROLES } from '#/src/constants';
+import { ENTITY, CRUD_ROLES, ORGANISAATIOTYYPPI } from '#/src/constants';
 import getOrganisaatioContactInfo from '#/src/utils/organisaatio/getOrganisaatioContactInfo';
-import OppilaitoksenOsaForm, {
-  initialValues as formInitialValues,
-} from './OppilaitoksenOsaForm';
 import koodiUriHasVersion from '#/src/utils/koodi/koodiUriHasVersion';
 import getFormValuesByOppilaitoksenOsa from '#/src/utils/oppilaitoksenOsa/getFormValuesByOppilaitoksenOsa';
 import getOppilaitoksenOsaFormConfig from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaFormConfig';
@@ -21,6 +18,20 @@ import ReduxForm from '#/src/components/ReduxForm';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import OppilaitoksenOsaPageFooter from './OppilaitoksenOsaPageFooter';
+import OppilaitoksenOsaForm, {
+  initialValues as formInitialValues,
+} from './OppilaitoksenOsaForm';
+import getOrganisaatioParentOidPath from '#/src/utils/organisaatio/getOrganisaatioParentOidPath';
+import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
+
+const useOppilaitosOid = oppilaitoksenOsaOrganisaatio => {
+  const parentOids = getOrganisaatioParentOidPath(oppilaitoksenOsaOrganisaatio);
+  const { organisaatiot } = useOrganisaatiot(parentOids);
+  const oppilaitos = organisaatiot?.find?.(
+    organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.OPPILAITOS)
+  );
+  return oppilaitos?.oid;
+};
 
 const OppilaitoksenOsaPage = ({
   match: {
@@ -37,6 +48,9 @@ const OppilaitoksenOsaPage = ({
     silent: true,
     watch: JSON.stringify([organisaatioOid, oppilaitoksenOsaUpdatedAt]),
   });
+
+  // TODO: Setting oppilaitosOid should be done in backend. https://jira.oph.ware.fi/jira/browse/KTO-819
+  const oppilaitosOid = useOppilaitosOid(organisaatio);
 
   const { t } = useTranslation();
   const oppilaitoksenOsaIsResolved = !!finishedAt;
@@ -64,6 +78,7 @@ const OppilaitoksenOsaPage = ({
   const initialValues = useMemo(
     () => ({
       ...formInitialValues,
+      oppilaitosOid,
       yhteystiedot: {
         osoite: contactInfo.osoite || {},
         postinumero: contactInfo.postinumeroKoodiUri
@@ -79,7 +94,7 @@ const OppilaitoksenOsaPage = ({
       ...(oppilaitoksenOsa &&
         getFormValuesByOppilaitoksenOsa(oppilaitoksenOsa)),
     }),
-    [oppilaitoksenOsa, contactInfo]
+    [oppilaitoksenOsa, contactInfo, oppilaitosOid]
   );
 
   const config = getOppilaitoksenOsaFormConfig();
@@ -94,7 +109,7 @@ const OppilaitoksenOsaPage = ({
           header={
             <EntityFormHeader
               entityType={ENTITY.OPPILAITOKSEN_OSA}
-              entity={oppilaitoksenOsa}
+              entity={{ ...(organisaatio ?? {}), ...(oppilaitoksenOsa ?? {}) }}
             />
           }
           footer={

@@ -15,6 +15,10 @@ const config = createFormConfigBuilder().registerSections([
     field: 'esittely',
   },
   {
+    section: 'teemakuva',
+    field: 'teemakuva',
+  },
+  {
     section: 'tietoa',
     field: 'tietoa',
   },

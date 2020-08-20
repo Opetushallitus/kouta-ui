@@ -19,8 +19,9 @@ import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { useEntityFormConfig } from '#/src/hooks/form';
 import FullSpin from '#/src/components/FullSpin';
-import OppilaitosPageHeader from './OppilaitosPageHeader';
 import OppilaitosPageFooter from './OppilaitosPageFooter';
+import EntityFormHeader from '#/src/components/EntityFormHeader';
+
 const OppilaitosPage = ({
   match: {
     params: { organisaatioOid },
@@ -93,9 +94,9 @@ const OppilaitosPage = ({
             readOnly={readOnly}
             steps={<OppilaitosFormSteps activeStep={ENTITY.OPPILAITOS} />}
             header={
-              <OppilaitosPageHeader
-                oppilaitos={oppilaitos}
-                organisaatio={organisaatio}
+              <EntityFormHeader
+                entityType={ENTITY.OPPILAITOS}
+                entity={{ ...(organisaatio ?? {}), ...(oppilaitos ?? {}) }}
               />
             }
             footer={

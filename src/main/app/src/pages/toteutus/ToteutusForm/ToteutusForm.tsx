@@ -28,6 +28,7 @@ import TutkinnonOsatSection from './TutkinnonOsatSection';
 import TeemakuvaSection from '#/src/components/TeemakuvaSection';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import HakeutumisTaiIlmoittautumistapaSection from './HakeutumisTaiIlmoittautumistapaSection';
+import SoraKuvausSection from '#/src/components/SoraKuvausSection';
 
 const ToteutusForm = ({
   koulutus,
@@ -163,6 +164,14 @@ const ToteutusForm = ({
           section="hakeutumisTaiIlmoittautumistapa"
           header={t('toteutuslomake.hakeutumisTaiIlmoittautumistapa')}
           Component={HakeutumisTaiIlmoittautumistapaSection}
+          languages={languages}
+        />
+
+        <FormCollapse
+          section="soraKuvaus"
+          header={t('yleiset.soraKuvaus')}
+          Component={SoraKuvausSection}
+          organisaatioOid={organisaatioOid}
           languages={languages}
         />
 

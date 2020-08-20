@@ -309,8 +309,13 @@ const config = createFormConfigBuilder().registerSections([
   },
   {
     section: 'hakeutumisTaiIlmoittautumistapa',
-    koulutustyypit: KOULUTUSTYYPIT,
+    koulutustyypit: [KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA],
     field: 'hakeutumisTaiIlmoittautumistapa',
+  },
+  {
+    section: 'soraKuvaus',
+    koulutustyypit: [KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA],
+    field: 'soraKuvaus',
   },
   {
     section: 'nayttamistiedot',

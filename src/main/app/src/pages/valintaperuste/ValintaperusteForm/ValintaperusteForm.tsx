@@ -10,9 +10,9 @@ import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import JulkisuusSection from '#/src/components/JulkisuusSection';
 import KokeetTaiLisanaytotSection from '#/src/components/KokeetTaiLisanaytotSection';
+import SoraKuvausSection from '#/src/components/SoraKuvausSection';
 import ValintatapaSection from './ValintatapaSection';
 import KuvausSection from './KuvausSection';
-import SoraKuvausSection from './SoraKuvausSection';
 import PerustiedotSection from './PerustiedotSection';
 
 const ValintaperusteForm = ({

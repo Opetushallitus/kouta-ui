@@ -21,7 +21,10 @@ import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import TeemakuvaSection from '#/src/components/TeemakuvaSection';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import TypeSection from './TypeSection';
-import TiedotSection from './TiedotSection';
+import TiedotSection, {
+  KoulutuksenNimiSection,
+  TutkinnonOsienKuvausSection,
+} from './TiedotSection';
 import KuvausSection from './KuvausSection';
 import JarjestajaSection from './JarjestajaSection';
 import LisatiedotSection from './LisatiedotSection';
@@ -114,6 +117,24 @@ const KoulutusForm = ({
         header={t('koulutuslomake.tutkinnonOsat')}
         Component={TutkinnonOsatSection}
         name={'tutkinnonosat.osat'}
+        languages={languageTabs}
+        disabled={onlyTarjoajaRights}
+        koulutustyyppi={koulutustyyppi}
+      />
+
+      <FormCollapse
+        section="tutkinnonosat"
+        header={t('koulutuslomake.koulutuksenNimi')}
+        Component={KoulutuksenNimiSection}
+        languages={languageTabs}
+        disabled={onlyTarjoajaRights}
+        koulutustyyppi={koulutustyyppi}
+      />
+
+      <FormCollapse
+        section="tutkinnonosat"
+        header={t('koulutuslomake.tutkinnonOsienKuvaus')}
+        Component={TutkinnonOsienKuvausSection}
         languages={languageTabs}
         disabled={onlyTarjoajaRights}
         koulutustyyppi={koulutustyyppi}

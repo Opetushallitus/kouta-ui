@@ -26,16 +26,14 @@ export const getKoulutusByKoodi = async ({
       config
     );
 
-    return Promise.all([fetchRakenne, fetchTutkinnonosat])
-      .then(
-        ([{ data: rakenne }, { data: tutkinnonosat }]) => ({
-          ...ePeruste,
-          laajuus: rakenne?.muodostumisSaanto?.laajuus?.minimi,
-          tutkinnonosat: tutkinnonosat,
-        }),
-        () => ePeruste
-      )
-      .then();
+    return Promise.all([fetchRakenne, fetchTutkinnonosat]).then(
+      ([{ data: rakenne }, { data: tutkinnonosat }]) => ({
+        ...ePeruste,
+        laajuus: rakenne?.muodostumisSaanto?.laajuus?.minimi,
+        tutkinnonosat: tutkinnonosat,
+      }),
+      () => ePeruste
+    );
   };
 
   const [ePerusteetData, alakooditResponse, koodiResponse] = await Promise.all([

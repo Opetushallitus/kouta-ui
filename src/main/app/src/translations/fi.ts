@@ -347,7 +347,13 @@ export default {
   },
   koulutuslomake: {
     tutkinnonOsat: 'Valitse tutkinnon osat',
+    koulutuksenNimi: 'Koulutuksen nimi',
+    lisaaKoulutuksenNimi: 'Lisää koulutuksen nimi',
+    tutkinnonOsienKuvaus: 'Tutkinnon osien kuvaus',
+    eiTutkinnonOsia: 'Ei valittuja tutkinnon osia',
     koulutuksenTiedot: 'Koulutuksen tiedot',
+    ammattitaitovaatimukset: 'Ammattitaitovaatimukset',
+    ammattitaidonOsoittamistavat: 'Ammattitaidon osoittamistavat',
     koulutuksenKuvaus: 'Valitun koulutuksen kuvaus',
     koulutuksenLisatiedot: 'Koulutuksen lisätiedot',
     koulutuksenJarjestaja: 'Koulutuksen järjestävä organisaatio',

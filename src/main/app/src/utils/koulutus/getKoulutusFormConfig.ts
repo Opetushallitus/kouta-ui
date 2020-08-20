@@ -25,6 +25,9 @@ const getMinTarjoajat = values => {
   return _.get(values, 'minTarjoajat', 1);
 };
 
+const oneAndOnlyOneTutkinnonOsa = values =>
+  _.get(values, 'tutkinnonosat.osat')?.length === 1;
+
 const config = createFormConfigBuilder().registerSections([
   koulutustyyppiSectionConfig,
   pohjaValintaSectionConfig,
@@ -45,6 +48,18 @@ const config = createFormConfigBuilder().registerSections([
               eb => eb.validateExistence('tutkinnonosat'),
             ])(eb);
           }),
+        required: true,
+      },
+      {
+        field: '.nimi',
+        koulutustyypit: [KOULUTUSTYYPPI.TUTKINNON_OSA],
+        validate: (eb, values) =>
+          oneAndOnlyOneTutkinnonOsa(values)
+            ? eb
+            : eb.validateTranslations(
+                'tutkinnonosat.nimi',
+                getKielivalinta(values)
+              ),
         required: true,
       },
     ],

@@ -29,10 +29,13 @@ const getListNimiLanguageValues = (list = [], language) =>
     .filter(name => !!name);
 
 const getTutkinnonosatOptions = (selectedPeruste, language) =>
-  _.map(selectedPeruste?.tutkinnonosat ?? [], ({ id, nimi, laajuus }) => ({
-    label: `${getLanguageValue(nimi, language)}, ${laajuus} osp`,
-    value: id,
-  }));
+  _.map(
+    selectedPeruste?.tutkinnonosat ?? [],
+    ({ _tutkinnonOsa, nimi, laajuus }) => ({
+      label: `${getLanguageValue(nimi, language)}, ${laajuus} osp`,
+      value: _tutkinnonOsa,
+    })
+  );
 
 const getEPerusteetOptions = (ePerusteet, language) =>
   _.map(ePerusteet, ({ id, nimi, diaarinumero }) => ({
@@ -168,8 +171,14 @@ const KoulutusInfo = ({
   const tutkinnonosatFieldValue = useFieldValue(`${name}.tutkinnonosat`);
   const selectedTutkinnonosat = _.find(
     ePeruste?.tutkinnonosat,
-    t => t.id === _.get(tutkinnonosatFieldValue, 'value')
+    t => t._tutkinnonOsa === _.get(tutkinnonosatFieldValue, 'value')
   );
+
+  const { change } = useBoundFormActions();
+  useEffect(() => {
+    change(`${name}.selectedTutkinnonosat`, selectedTutkinnonosat);
+  }, [selectedTutkinnonosat, change]);
+
   return koulutus || isLoading ? (
     <div className={className}>
       {isLoading ? (

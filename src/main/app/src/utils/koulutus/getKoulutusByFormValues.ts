@@ -1,6 +1,14 @@
 import { get, pick } from 'lodash';
+import { KOULUTUSTYYPPI } from '#/src/constants';
 
 const getKielivalinta = values => get(values, 'kieliversiot') || [];
+
+const pickNimiFromSelectedTutkinnonOsat = (values, kielivalinta) => {
+  const osat = get(values, 'tutkinnonosat.osat', []);
+  return osat.length === 1
+    ? pick(osat[0].selectedTutkinnonosat?.nimi, kielivalinta)
+    : null;
+};
 
 const getKoulutusByFormValues = values => {
   const { muokkaaja, tila } = values;
@@ -26,7 +34,12 @@ const getKoulutusByFormValues = values => {
   }));
 
   const kuvaus = pick(get(values, 'description.kuvaus') || {}, kielivalinta);
-  const nimi = pick(get(values, 'information.nimi') || {}, kielivalinta);
+  const nimi =
+    koulutustyyppi === KOULUTUSTYYPPI.TUTKINNON_OSA
+      ? pickNimiFromSelectedTutkinnonOsat(values, kielivalinta) ||
+        pick(get(values, 'tutkinnonosat.nimi') || {}, kielivalinta)
+      : pick(get(values, 'information.nimi') || {}, kielivalinta);
+
   const opintojenLaajuusKoodiUri =
     get(values, 'information.opintojenLaajuus.value') || null;
 

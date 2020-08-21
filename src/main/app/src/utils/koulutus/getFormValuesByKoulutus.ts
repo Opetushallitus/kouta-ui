@@ -68,6 +68,7 @@ export const getFormValuesByKoulutus = koulutus => {
     },
     tutkinnonosat: {
       osat: tutkinnonosat,
+      nimi: nimi,
     },
     description: {
       kuvaus,

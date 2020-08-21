@@ -50,6 +50,11 @@ const ToteutusForm = ({
     'hakeutumisTaiIlmoittautumistapa.ilmoittautumisTapa'
   );
 
+  const kaytetaanHakemuspalvelua = ![
+    'muuHakulomake',
+    'eiSahkoistaHakua',
+  ].includes(ilmoittautumisTapa);
+
   return (
     <>
       <HakukohteetModal
@@ -170,6 +175,7 @@ const ToteutusForm = ({
           Component={HakeutumisTaiIlmoittautumistapaSection}
           languages={languages}
         />
+
         {ilmoittautumisTapa === 'muuHakulomake' && (
           <FormCollapse
             section="soraKuvaus"
@@ -195,7 +201,7 @@ const ToteutusForm = ({
           showArkistoitu={showArkistoituTilaOption}
         />
 
-        {isFunction(onAttachHakukohde) ? (
+        {isFunction(onAttachHakukohde) && kaytetaanHakemuspalvelua ? (
           <FormCollapse
             header={t('toteutuslomake.toteutukseenLiitetytHakukohteet')}
             id="toteutukseen-liitetetyt-hakukohteet"

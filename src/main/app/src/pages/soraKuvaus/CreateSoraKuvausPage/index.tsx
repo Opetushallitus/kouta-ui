@@ -90,7 +90,7 @@ const CreateSoraKuvausPage = props => {
       <Title>{t('sivuTitlet.uusiSoraKuvaus')}</Title>
       <FormConfigContext.Provider value={config}>
         <FormPage
-          header={<FormHeader>{ENTITY.SORA_KUVAUS}</FormHeader>}
+          header={<FormHeader>{t('yleiset.soraKuvaus')}</FormHeader>}
           steps={<FormSteps activeStep={ENTITY.SORA_KUVAUS} />}
           footer={<FormFooter entity={ENTITY.SORA_KUVAUS} save={save} />}
         >

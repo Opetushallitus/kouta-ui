@@ -11,7 +11,7 @@ import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import KoulutustyyppiSection from './KoulutustyyppiSection';
 import TiedotSection from './TiedotSection';
-import KieliversiotSection from './KieliversiotSection';
+import KieliversiotFields from '#/src/components/KieliversiotFields';
 
 const SoraKuvausForm = ({
   steps = false,
@@ -35,7 +35,6 @@ const SoraKuvausForm = ({
           Component={KoulutustyyppiSection}
         />
       ) : null}
-
       {canSelectBase ? (
         <PohjaFormCollapse
           onSelectBase={onSelectBase}
@@ -50,27 +49,23 @@ const SoraKuvausForm = ({
           })}
         />
       ) : null}
-
       <FormCollapse
         section="kieliversiot"
         header={t('yleiset.kieliversiot')}
-        Component={KieliversiotSection}
+        Component={KieliversiotFields}
       />
-
       <FormCollapse
         section="tiedot"
         header={t('soraKuvauslomake.soraKuvauksenTiedot')}
         languages={languageTabs}
         Component={TiedotSection}
       />
-
       <FormCollapse
         section="julkinen"
         header={t('soraKuvauslomake.nakyminenMuilleToimijoille')}
         Component={JulkisuusSection}
         entity={ENTITY.SORA_KUVAUS}
       />
-
       <FormCollapse
         section="tila"
         header={t('soraKuvauslomake.soraKuvauksenTila')}

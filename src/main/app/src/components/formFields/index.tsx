@@ -16,7 +16,6 @@ import TimeInput from '#/src/components/TimeInput';
 import Editor from '#/src/components/Editor';
 import YearSelect from '#/src/components/YearSelect';
 import ImageInput from '#/src/components/ImageInput';
-import KieliversiotSelect from '#/src/components/KieliversiotSelect';
 import KoulutustyyppiSelect from '#/src/components/KoulutustyyppiSelect';
 import SoraKuvausSelect from '#/src/components/SoraKuvausSelect';
 import LanguageSelect from '#/src/components/LanguageSelect';
@@ -113,11 +112,6 @@ export const FormFieldImageInput = createComponent(
     uploadedImageUrl: input.value,
     ...props,
   })
-);
-
-export const FormFieldKieliversiotSelect = createComponent(
-  KieliversiotSelect,
-  simpleMapProps
 );
 
 export const FormFieldKoulutustyyppiSelect = createComponent(

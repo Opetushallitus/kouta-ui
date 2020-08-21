@@ -99,6 +99,15 @@ const HakeutumisTaiIlmoittautusmistapaFields = createFormFieldComponent(
         >
           {t('toteutuslomake.eiSahkoistaHakua')}
         </StyledGrayRadio>
+        {value === 'eiSahkoistaHakua' && (
+          <StyledBlueBox>
+            <Field
+              component={FormFieldEditor}
+              label={t(`toteutuslomake.${hakuTapa}.lisatiedot`)}
+              name={`${section}.lisatiedot`}
+            />
+          </StyledBlueBox>
+        )}
       </Flex>
     ) : (
       <div />

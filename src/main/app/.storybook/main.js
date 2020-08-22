@@ -5,9 +5,11 @@ module.exports = {
   stories: ['../src/**/*.stories.[tj]s?(x)'],
   addons: [
     '@storybook/preset-create-react-app',
-    '@storybook/addon-actions/register',
-    '@storybook/addon-links/register',
-    '@storybook/addon-knobs/register',
+    '@storybook/addon-essentials',
+    '@storybook/addon-links/preset',
   ],
-  webpackFinal: compose(withoutPlugins(['ForkTsCheckerWebpackPlugin']), withImportAlias),
+  webpackFinal: compose(
+    withoutPlugins(['ForkTsCheckerWebpackPlugin']),
+    withImportAlias
+  ),
 };

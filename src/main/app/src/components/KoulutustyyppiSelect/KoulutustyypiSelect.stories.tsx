@@ -1,29 +1,15 @@
-import React, { useState } from 'react';
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { boolean } from '@storybook/addon-knobs';
+import React from 'react';
 
 import KoulutustyyppiSelect from './index';
 
-const change = action('change');
-
-const Story = props => {
-  const [value, setValue] = useState();
-
-  return (
-    <KoulutustyyppiSelect
-      {...props}
-      value={value}
-      onChange={e => {
-        setValue(e ? e.target.value : undefined);
-        change(e);
-      }}
-    />
-  );
+export default {
+  title: 'KoulutustyyppiSelect',
+  argTypes: {
+    onChange: { action: 'changed' },
+  },
 };
 
-storiesOf('KoulutustyyppiSelect', module).add('Basic', () => {
-  const johtaaTutkintoon = boolean('Johtaa tutkintoon', true);
-
-  return <Story johtaaTutkintoon={johtaaTutkintoon} />;
-});
+export const Basic = props =>
+  React.createElement(() => {
+    return <KoulutustyyppiSelect {...props} />;
+  });

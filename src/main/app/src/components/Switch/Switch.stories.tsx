@@ -1,17 +1,17 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { boolean } from '@storybook/addon-knobs';
+import { Switch } from './index';
 
-import Switch from './index';
+const Template = args => <Switch {...args} />;
 
-storiesOf('Switch', module).add('Basic', () => (
-  <Switch
-    onChange={action('change')}
-    checked={boolean('Checked', false)}
-    disabled={boolean('Disabled', false)}
-    error={boolean('Error', false)}
-  >
-    Switch
-  </Switch>
-));
+export default {
+  title: 'Switch',
+  parameters: { actions: { argTypesRegex: '^on.*' } },
+  argTypes: {
+    onChange: { action: 'changed' },
+    checked: { control: 'boolean' },
+    disabled: { control: 'boolean' },
+    error: { control: 'boolean' },
+  },
+};
+
+export const Basic = Template.bind({});

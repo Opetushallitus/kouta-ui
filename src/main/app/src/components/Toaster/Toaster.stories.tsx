@@ -19,22 +19,24 @@ const toastsArray = [
   },
 ];
 
-storiesOf('Toaster', module).add('Basic', () => {
-  const { openToast } = useToaster();
+storiesOf('Toaster', module).add('Basic', () =>
+  React.createElement(() => {
+    const { openToast } = useToaster();
 
-  return (
-    <>
-      <Toaster style={{ position: 'fixed', top: '16px', right: '16px' }} />
-      <button
-        onClick={() =>
-          openToast({
-            ...toastsArray[_.random(0, 1)],
-            key: _.uniqueId('toast_'),
-          })
-        }
-      >
-        Add toast
-      </button>
-    </>
-  );
-});
+    return (
+      <>
+        <Toaster style={{ position: 'fixed', top: '16px', right: '16px' }} />
+        <button
+          onClick={() =>
+            openToast({
+              ...toastsArray[_.random(0, 1)],
+              key: _.uniqueId('toast_'),
+            })
+          }
+        >
+          Add toast
+        </button>
+      </>
+    );
+  })
+);

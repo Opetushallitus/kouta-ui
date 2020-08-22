@@ -1,35 +1,33 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
-import ValintaperusteForm from './index';
-import getValintaperusteFormConfig from '#/src/utils/valintaperuste/getValintaperusteFormConfig';
+import ValintaperusteForm, { initialValues } from './index';
 import ReduxForm from '#/src/components/ReduxForm';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
+import { useEntityFormConfig } from '#/src/hooks/form';
 
-import {
-  makeStoreDecorator,
-  makeApiDecorator,
-  makeLocalizationDecorator,
-} from '#/src/storybookUtils';
+import { ENTITY } from '#/src/constants';
+import { makeStoreDecorator } from '#/src/storybookUtils';
+import { useFieldConfig } from '#/src/hooks/fieldConfigHooks';
 
-import { KOULUTUSTYYPPI } from '#/src/constants';
+export default {
+  title: 'ValintaperusteForm',
+  decorators: [makeStoreDecorator()],
+};
 
-const config = getValintaperusteFormConfig(KOULUTUSTYYPPI.YLIOPISTOKOULUTUS);
-
-storiesOf('ValintaperusteForm', module)
-  .addDecorator(makeLocalizationDecorator())
-  .addDecorator(makeStoreDecorator())
-  .addDecorator(makeApiDecorator())
-  .add('Basic', () => (
-    <ReduxForm form="valintaperuste">
-      {() => (
-        <FormConfigContext.Provider value={config}>
-          <ValintaperusteForm
-            steps={false}
-            organisaatioOid="1.2.246.562.10.594252633210"
-            koulutustyyppi={KOULUTUSTYYPPI.YLIOPISTOKOULUTUS}
-          />
-        </FormConfigContext.Provider>
-      )}
+const Wrapper = () => {
+  const koulutustyyppi = useFieldConfig('perustiedot.tyyppi');
+  const initial = initialValues(['fi']);
+  const config = useEntityFormConfig(
+    ENTITY.VALINTAPERUSTE,
+    koulutustyyppi || initial?.perustiedot?.tyyppi
+  );
+  return (
+    <ReduxForm form="hakukohde" initialValues={initial}>
+      <FormConfigContext.Provider value={config}>
+        <ValintaperusteForm organisaatioOid="1.2.246.562.10.594252633210" />
+      </FormConfigContext.Provider>
     </ReduxForm>
-  ));
+  );
+};
+
+export const basic = ({ koulutustyyppi }) => <Wrapper />;

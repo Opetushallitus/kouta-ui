@@ -1,34 +1,54 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
-import HakukohdeForm from './index';
+import HakukohdeForm, { initialValues } from './index';
 import ReduxForm from '#/src/components/ReduxForm';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
-import getHakukohdeFormConfig from '#/src/utils/hakukohde/getHakukohdeFormConfig';
+import { useEntityFormConfig } from '#/src/hooks/form';
 
-import {
-  makeStoreDecorator,
-  makeApiDecorator,
-  makeLocalizationDecorator,
-} from '#/src/storybookUtils';
-import { KOULUTUSTYYPPI } from '#/src/constants';
+import { KOULUTUSTYYPIT, ENTITY } from '#/src/constants';
+import { makeStoreDecorator } from '#/src/storybookUtils';
 
-const config = getHakukohdeFormConfig(KOULUTUSTYYPPI.YLIOPISTOKOULUTUS);
+export default {
+  title: 'HakukohdeForm',
+  decorators: [makeStoreDecorator()],
+  argTypes: {
+    koulutustyyppi: {
+      control: {
+        type: 'select',
+        options: KOULUTUSTYYPIT,
+      },
+    },
+  },
+};
 
-storiesOf('HakukohdeForm', module)
-  .addDecorator(makeLocalizationDecorator())
-  .addDecorator(makeStoreDecorator({ logging: true }))
-  .addDecorator(makeApiDecorator())
-  .add('Basic', () => (
-    <ReduxForm form="hakukohde">
-      {() => (
-        <FormConfigContext.Provider value={config}>
-          <HakukohdeForm
-            steps={false}
-            organisaatioOid="1.2.246.562.10.594252633210"
-            koulutustyyppi={KOULUTUSTYYPPI.YLIOPISTOKOULUTUS}
-          />
-        </FormConfigContext.Provider>
-      )}
+const Wrapper = ({ koulutustyyppi = 'amm' }) => {
+  const config = useEntityFormConfig(ENTITY.HAKUKOHDE, koulutustyyppi);
+  return (
+    <ReduxForm
+      form="hakukohde"
+      initialValues={initialValues('toteutuksen nimi', ['fi'])}
+    >
+      <FormConfigContext.Provider value={config}>
+        <HakukohdeForm
+          organisaatioOid="1.2.246.562.10.594252633210"
+          steps={false}
+          haku={{}}
+          tarjoajat={[]}
+          toteutus={{
+            metadata: {
+              opetus: {},
+            },
+          }}
+          koulutustyyppi={koulutustyyppi}
+        />
+      </FormConfigContext.Provider>
     </ReduxForm>
-  ));
+  );
+};
+Wrapper.args = {
+  koulutustyyppi: 'amm',
+};
+
+export const basic = ({ koulutustyyppi }) => (
+  <Wrapper koulutustyyppi={koulutustyyppi} />
+);

@@ -5,18 +5,15 @@ import Async from 'react-async';
 import { urls as ophUrls } from 'oph-urls-js';
 import axios from 'axios';
 import { I18nextProvider } from 'react-i18next';
+import { ThemeProvider } from 'styled-components';
 
 import createStore from './state/store';
 import { configure as configureUrls } from './urls';
 import HttpContext from './contexts/HttpClientContext';
 import UrlContext from '#/src/contexts/UrlContext';
-import { getFormConfigByEntity } from '#/src/hooks/form';
 import createLocalization from './localization';
 import getTranslations from './translations';
-import FormConfigContext from './contexts/FormConfigContext';
-import ReduxForm from './components/ReduxForm';
-import { KOULUTUSTYYPPI } from './constants';
-import FormConfigSectionContext from './contexts/FormConfigSectionContext';
+import defaultTheme from '#/src/theme';
 
 const defaultHttpClient = axios.create({});
 const configureOphUrls = () => configureUrls(ophUrls, defaultHttpClient);
@@ -52,7 +49,7 @@ export const makeApiDecorator = ({
   );
 };
 
-export const makeStoreDecorator = ({ logging = false } = {}) => storyFn => {
+export const makeStoreDecorator = ({ logging = false } = {}) => {
   const { store } = createStore({});
   const storeAction = action('change');
 
@@ -61,8 +58,7 @@ export const makeStoreDecorator = ({ logging = false } = {}) => storyFn => {
       storeAction(store.getState());
     });
   }
-
-  return <Provider store={store}>{storyFn()}</Provider>;
+  return storyFn => <Provider store={store}>{storyFn()}</Provider>;
 };
 
 export const makeLocalizationDecorator = () => storyFn => {
@@ -75,23 +71,6 @@ export const makeLocalizationDecorator = () => storyFn => {
   );
 };
 
-export const makeFormDecorator = (
-  entityType,
-  koulutustyyppi = KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
-) => storyFn => {
-  const content = storyFn();
-  const config = getFormConfigByEntity(entityType, koulutustyyppi);
-  return (
-    <ReduxForm form={entityType}>
-      <FormConfigContext.Provider value={config}>
-        {content}
-      </FormConfigContext.Provider>
-    </ReduxForm>
-  );
-};
-
-export const makeFormSectionDecorator = sectionName => storyFn => (
-  <FormConfigSectionContext.Provider value={sectionName}>
-    {storyFn()}
-  </FormConfigSectionContext.Provider>
+export const themeDecorator = storyFn => (
+  <ThemeProvider theme={defaultTheme}>{storyFn()}</ThemeProvider>
 );

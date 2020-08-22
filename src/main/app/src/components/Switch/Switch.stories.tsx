@@ -1,11 +1,10 @@
 import React from 'react';
-import { Switch } from './index';
+import Switch from './index';
 
 const Template = args => <Switch {...args} />;
 
 export default {
   title: 'Switch',
-  parameters: { actions: { argTypesRegex: '^on.*' } },
   argTypes: {
     onChange: { action: 'changed' },
     checked: { control: 'boolean' },

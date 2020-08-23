@@ -16,7 +16,6 @@ import FormConfigContext from '#/src/contexts/FormConfigContext';
 import useSelectBase from '#/src/hooks/useSelectBase';
 import getFormValuesBySoraKuvaus from '#/src/utils/soraKuvaus/getFormValuesBySoraKuvaus';
 import { useSoraKuvausById } from '#/src/utils/soraKuvaus/getSoraKuvausById';
-import getSoraKuvausFormConfig from '#/src/utils/soraKuvaus/getSoraKuvausFormConfig';
 
 import { SoraKuvausFooter } from './SoraKuvausFooter';
 import SoraKuvausForm, { initialValues } from './SoraKuvausForm';
@@ -48,8 +47,6 @@ const CreateSoraKuvausPage = props => {
     history,
   } = props;
 
-  const config = useMemo(getSoraKuvausFormConfig, []);
-
   const { kopioSoraKuvausOid = null } = queryString.parse(search);
   const { t } = useTranslation();
   const selectBase = useSelectBase(history, {
@@ -65,7 +62,7 @@ const CreateSoraKuvausPage = props => {
   return (
     <ReduxForm form="soraKuvausForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.uusiSoraKuvaus')}</Title>
-      <FormConfigContext.Provider value={config}>
+      <FormConfigContext.Provider value={{ noFieldConfigs: true }}>
         <FormPage
           header={<FormHeader>{t('yleiset.soraKuvaus')}</FormHeader>}
           steps={<FormSteps activeStep={ENTITY.SORA_KUVAUS} />}

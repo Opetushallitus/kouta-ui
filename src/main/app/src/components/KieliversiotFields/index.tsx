@@ -21,6 +21,7 @@ const KieliversiotFields = ({ name = 'kieliversiot', ...props }) => {
       component={FormFieldCheckboxGroup}
       options={options}
       label={t('yleiset.valitseKieliversiot')}
+      required={true}
       {...props}
     />
   );

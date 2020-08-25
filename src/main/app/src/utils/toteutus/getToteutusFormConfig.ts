@@ -58,10 +58,17 @@ const config = createFormConfigBuilder().registerSections([
       }),
       {
         field: '.ilmoittautumislinkki',
-        koulutustyypit: TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
+        koulutustyypit: _.without(
+          [KOULUTUSTYYPPI.OSAAMISALA, KOULUTUSTYYPPI.TUTKINNON_OSA],
+          TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT
+        ),
       },
       {
         field: '.laajuus',
+        koulutustyypit: TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
+      },
+      {
+        field: '.laajuusyksikko',
         koulutustyypit: TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
       },
       {

@@ -71,7 +71,6 @@ const getFormValuesByToteutus = toteutus => {
     tila,
     tiedot: {
       nimi,
-      toteutuksenKuvaus: kuvaus,
       laajuus: _.isNumber(laajuus) ? laajuus.toString() : '',
       laajuusyksikko: laajuusyksikkoKoodiUri
         ? { value: laajuusyksikkoKoodiUri }
@@ -79,10 +78,10 @@ const getFormValuesByToteutus = toteutus => {
       ilmoittautumislinkki: ilmoittautumislinkki || {},
       aloituspaikat: _.isNumber(aloituspaikat) ? aloituspaikat.toString() : '',
     },
+    kuvaus: _.mapValues(parseEditorState, kuvaus || {}),
     kieliversiot: kielivalinta,
     tarjoajat,
     jarjestamistiedot: {
-      kuvaus,
       maksullisuus: {
         tyyppi: maksullisuustyyppi,
         maksu: (maksullisuustyyppi === 'lukuvuosimaksu'
@@ -177,7 +176,6 @@ const getFormValuesByToteutus = toteutus => {
     },
     ylemmanKorkeakoulututkinnonOsaamisalat: ylemmanKorkeakoulututkinnonOsaamisalatArg,
     alemmanKorkeakoulututkinnonOsaamisalat: alemmanKorkeakoulututkinnonOsaamisalatArg,
-    kuvaus,
     lukiolinjat: {
       lukiolinja: lukiolinjaKoodiUri
         ? { value: lukiolinjaKoodiUri }

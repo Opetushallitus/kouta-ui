@@ -86,6 +86,11 @@ const config = createFormConfigBuilder().registerSections([
     ],
   },
   {
+    section: 'kuvaus',
+    field: 'kuvaus',
+    koulutustyypit: KOULUTUSTYYPIT,
+  },
+  {
     section: 'lukiolinjat',
     field: '.lukiolinja',
     koulutustyypit: [KOULUTUSTYYPPI.LUKIOKOULUTUS],

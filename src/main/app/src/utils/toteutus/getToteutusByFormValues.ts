@@ -187,7 +187,10 @@ const getToteutusByFormValues = values => {
         osaamisalat: values?.alemmanKorkeakoulututkinnonOsaamisalat,
         pickTranslations,
       }),
-      kuvaus: pickTranslations(values?.tiedot?.toteutuksenKuvaus || {}),
+      kuvaus: _.pipe(
+        pickTranslations,
+        _.mapValues(serializeEditorState)
+      )(values?.kuvaus || {}),
       tyyppi: koulutustyyppi,
       laajuus: isNumeric(values?.tiedot?.laajuus)
         ? _.parseInt(values.tiedot.laajuus)

@@ -29,6 +29,7 @@ import TeemakuvaSection from '#/src/components/TeemakuvaSection';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import HakeutumisTaiIlmoittautumistapaSection from './HakeutumisTaiIlmoittautumistapaSection';
 import SoraKuvausSection from '#/src/components/SoraKuvausSection';
+import KuvausSection from './KuvausSection';
 
 const { ATARU, MUU } = HAKULOMAKETYYPPI;
 
@@ -89,6 +90,14 @@ const ToteutusForm = ({
           header={t('toteutuslomake.toteutuksenTiedot')}
           languages={languages}
           Component={TiedotSection}
+          koulutustyyppi={koulutustyyppi}
+        />
+
+        <FormCollapse
+          section="kuvaus"
+          header={t('toteutuslomake.toteutuksenKuvaus')}
+          languages={languages}
+          Component={KuvausSection}
           koulutustyyppi={koulutustyyppi}
         />
 

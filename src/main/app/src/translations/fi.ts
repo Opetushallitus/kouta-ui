@@ -400,6 +400,8 @@ export default {
   toteutuslomake: {
     lisaaKoulutus: 'Lisää uusi koulutus',
     toteutuksenTiedot: 'Toteutuksen tiedot',
+    toteutuksenKuvaus: 'Toteutuksen kuvaus',
+    toteutuksenYleinenKuvaus: 'Toteutuksen yleinen kuvaus',
     ilmoittautumislinkki: 'Ilmoittautumislinkki',
     laajuus: 'Laajuus',
     laajuusyksikko: 'Laajuusyksikkö',

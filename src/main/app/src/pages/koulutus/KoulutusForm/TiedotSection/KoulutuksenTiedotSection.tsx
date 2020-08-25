@@ -346,7 +346,9 @@ const KoulutuksenTiedotSection = ({
 
   const selectedPeruste = _.find(
     ePerusteet,
-    ePeruste => ePeruste.id === _.get(ePerusteFieldValue, 'value')
+    ePeruste =>
+      ePeruste.id.toString() ===
+      _.get(ePerusteFieldValue, 'value', '').toString()
   );
 
   const { change } = useBoundFormActions();

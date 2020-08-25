@@ -17,7 +17,10 @@ import Flex from '#/src/components/Flex';
 import Button from '#/src/components/Button';
 import KorkeakouluOsaamisalatSection from './KorkeakouluOsaamisalatSection';
 import YhteyshenkilotSection from './YhteyshenkilotSection';
-import { KOULUTUSTYYPPI } from '#/src/constants';
+import {
+  KOULUTUSTYYPPI,
+  HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA,
+} from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import useModal from '#/src/hooks/useModal';
 import LukiolinjatSection from './LukiolinjatSection';
@@ -29,6 +32,11 @@ import TeemakuvaSection from '#/src/components/TeemakuvaSection';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import HakeutumisTaiIlmoittautumistapaSection from './HakeutumisTaiIlmoittautumistapaSection';
 import SoraKuvausSection from '#/src/components/SoraKuvausSection';
+
+const {
+  MUU_HAKULOMAKE,
+  EI_SAHKOISTA_HAKUA,
+} = HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA;
 
 const ToteutusForm = ({
   koulutus,
@@ -46,14 +54,14 @@ const ToteutusForm = ({
   const languages = kieliversiot || [];
   const { isOpen, open, close } = useModal();
 
-  const ilmoittautumisTapa = useFieldValue(
-    'hakeutumisTaiIlmoittautumistapa.ilmoittautumisTapa'
+  const hakeutumisTaiIlmoittautumistapa = useFieldValue(
+    'hakeutumisTaiIlmoittautumistapa.hakeutumisTaiIlmoittautumistapa'
   );
 
   const kaytetaanHakemuspalvelua = ![
-    'muuHakulomake',
-    'eiSahkoistaHakua',
-  ].includes(ilmoittautumisTapa);
+    MUU_HAKULOMAKE,
+    EI_SAHKOISTA_HAKUA,
+  ].includes(hakeutumisTaiIlmoittautumistapa);
 
   return (
     <>
@@ -90,6 +98,7 @@ const ToteutusForm = ({
           header={t('toteutuslomake.toteutuksenTiedot')}
           languages={languages}
           Component={TiedotSection}
+          koulutustyyppi={koulutustyyppi}
         />
 
         <FormCollapse
@@ -176,7 +185,7 @@ const ToteutusForm = ({
           languages={languages}
         />
 
-        {ilmoittautumisTapa === 'muuHakulomake' && (
+        {hakeutumisTaiIlmoittautumistapa === 'muuHakulomake' && (
           <FormCollapse
             section="soraKuvaus"
             header={t('yleiset.soraKuvaus')}

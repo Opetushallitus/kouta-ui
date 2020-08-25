@@ -13,6 +13,17 @@ import DateTimeRange from '#/src/components/DateTimeRange';
 import { Flex, FlexItem } from '#/src/components/Flex';
 import { createFormFieldComponent } from '#/src/components/formFields';
 import { useFieldValue } from '#/src/hooks/form';
+import {
+  HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA,
+  HAKEUTUMINEN,
+  ILMOITTAUTUMINEN,
+} from '#/src/constants';
+
+const {
+  MUU_HAKULOMAKE,
+  HAKEMUSPALVELU,
+  EI_SAHKOISTA_HAKUA,
+} = HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA;
 
 const StyledGrayRadio = styled(Radio)`
   background-color: ${getThemeProp('colors.grayLighten6', transparentize(0.5))};
@@ -26,8 +37,9 @@ const StyledBlueBox = styled(Box)`
   margin-bottom: 20px;
 `;
 
-const MuuHakulomakeBox = ({ tapa, section, ...props }) => {
+const MuuHakulomakeBox = ({ tapa, section, language, ...props }) => {
   const { t } = useTranslation();
+
   return (
     <StyledBlueBox {...props}>
       <Flex column>
@@ -35,32 +47,32 @@ const MuuHakulomakeBox = ({ tapa, section, ...props }) => {
           <Field
             component={FormFieldInput}
             label={t(`toteutuslomake.${tapa}.linkki`)}
-            name={`${section}.linkki`}
+            name={`${section}.linkki.${language}`}
           />
         </FlexItem>
         <FlexItem mb="20px">
           <Field
             component={FormFieldEditor}
             label={t(`toteutuslomake.${tapa}.lisatiedot`)}
-            name={`${section}.lisatiedot`}
+            name={`${section}.lisatiedot.${language}`}
           />
         </FlexItem>
         <FlexItem mb="20px">
           <Field
             component={FormFieldEditor}
             label={t('toteutuslomake.lisatiedotValintaperusteista')}
-            name={`${section}.lisatiedotValintaperusteista`}
+            name={`${section}.lisatiedotValintaperusteista.${language}`}
           />
         </FlexItem>
         <FlexItem mb="20px">
           <DateTimeRange
             startProps={{
               label: t('toteutuslomake.hakuaikaAlkaa'),
-              name: `${section}.hakuaikaAlkaa`,
+              name: `${section}.hakuaikaAlkaa.${language}`,
             }}
             endProps={{
               label: t('toteutuslomake.hakuaikaPaattyy'),
-              name: `${section}.hakuaikaPaattyy`,
+              name: `${section}.hakuaikaPaattyy.${language}`,
             }}
           />
         </FlexItem>
@@ -70,41 +82,45 @@ const MuuHakulomakeBox = ({ tapa, section, ...props }) => {
 };
 
 const HakeutumisTaiIlmoittautusmistapaFields = createFormFieldComponent(
-  ({ hakuTapa, section, onChange, value }) => {
+  ({ hakuTapa, section, onChange, value, language }) => {
     const { t } = useTranslation();
 
     return hakuTapa ? (
       <Flex column>
         <StyledGrayRadio
-          checked={value === 'muuHakulomake'}
-          value="muuHakulomake"
+          checked={value === MUU_HAKULOMAKE}
+          value={MUU_HAKULOMAKE}
           onChange={onChange}
         >
           {t('toteutuslomake.muuHakulomake')}
         </StyledGrayRadio>
-        {value === 'muuHakulomake' && (
-          <MuuHakulomakeBox tapa={hakuTapa} section={section} />
+        {value === MUU_HAKULOMAKE && (
+          <MuuHakulomakeBox
+            tapa={hakuTapa}
+            section={section}
+            language={language}
+          />
         )}
         <StyledGrayRadio
-          checked={value === 'hakemuspalvelu'}
-          value="hakemuspalvelu"
+          checked={value === HAKEMUSPALVELU}
+          value={HAKEMUSPALVELU}
           onChange={onChange}
         >
           {t('toteutuslomake.hakemuspalvelu')}
         </StyledGrayRadio>
         <StyledGrayRadio
-          checked={value === 'eiSahkoistaHakua'}
-          value="eiSahkoistaHakua"
+          checked={value === EI_SAHKOISTA_HAKUA}
+          value={EI_SAHKOISTA_HAKUA}
           onChange={onChange}
         >
           {t('toteutuslomake.eiSahkoistaHakua')}
         </StyledGrayRadio>
-        {value === 'eiSahkoistaHakua' && (
+        {value === EI_SAHKOISTA_HAKUA && (
           <StyledBlueBox>
             <Field
               component={FormFieldEditor}
               label={t(`toteutuslomake.${hakuTapa}.lisatiedot`)}
-              name={`${section}.lisatiedot`}
+              name={`${section}.lisatiedot.${language}`}
             />
           </StyledBlueBox>
         )}
@@ -119,10 +135,10 @@ const HakutapaFormField = createFormFieldComponent(({ onChange, value }) => {
   const { t } = useTranslation();
   return (
     <SegmentTabs value={value}>
-      <SegmentTab value="hakeutuminen" onClick={onChange}>
+      <SegmentTab value={HAKEUTUMINEN} onClick={onChange}>
         {t('toteutuslomake.hakuTapa.hakeutuminen')}
       </SegmentTab>
-      <SegmentTab value="ilmoittautuminen" onClick={onChange}>
+      <SegmentTab value={ILMOITTAUTUMINEN} onClick={onChange}>
         {t('toteutuslomake.hakuTapa.ilmoittautuminen')}
       </SegmentTab>
     </SegmentTabs>
@@ -131,6 +147,7 @@ const HakutapaFormField = createFormFieldComponent(({ onChange, value }) => {
 
 export const HakeutumisTaiIlmoittautumistapaSection = ({
   name = 'hakeutumisTaiIlmoittautumistapa',
+  language,
 }) => {
   const { t } = useTranslation();
   const hakuTapa = useFieldValue(`${name}.hakuTapa`);
@@ -148,9 +165,10 @@ export const HakeutumisTaiIlmoittautumistapaSection = ({
         <Field
           label={hakuTapa && t(`toteutuslomake.${hakuTapa}.valitseTapa`)}
           component={HakeutumisTaiIlmoittautusmistapaFields}
-          name={`${name}.ilmoittautumisTapa`}
+          name={`${name}.hakeutumisTaiIlmoittautumistapa.${language}`}
           section={name}
           hakuTapa={hakuTapa}
+          language={language}
         />
       </FlexItem>
     </Flex>

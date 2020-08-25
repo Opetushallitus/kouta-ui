@@ -48,12 +48,10 @@ const LaajuusFields = ({ name, disabled }) => {
 const TiedotSection = ({ language, name, koulutustyyppi }) => {
   const { t } = useTranslation();
 
-  const fieldsFromKoulutus = [
+  const disableFieldsCopiedFromKoulutus = [
     KOULUTUSTYYPPI.OSAAMISALA,
     KOULUTUSTYYPPI.TUTKINNON_OSA,
   ].includes(koulutustyyppi);
-
-  console.log(fieldsFromKoulutus);
 
   return (
     <>
@@ -61,7 +59,7 @@ const TiedotSection = ({ language, name, koulutustyyppi }) => {
         <Field
           name={`${name}.nimi.${language}`}
           component={FormFieldInput}
-          disabled={fieldsFromKoulutus}
+          disabled={disableFieldsCopiedFromKoulutus}
           label={t('toteutuslomake.toteutuksenNimi')}
         />
       </Box>
@@ -83,7 +81,7 @@ const TiedotSection = ({ language, name, koulutustyyppi }) => {
       </Box>
 
       <Box mb={2}>
-        <LaajuusFields name={name} disabled={fieldsFromKoulutus} />
+        <LaajuusFields name={name} disabled={disableFieldsCopiedFromKoulutus} />
       </Box>
 
       <Box mb={2} {...getTestIdProps('aloituspaikat')}>

@@ -17,7 +17,7 @@ export const KOULUTUSTYYPPI = {
   AMKKOULUTUS: 'amk',
   VALMA: 'valma',
   TELMA: 'telma',
-  TUTKINNON_OSA: 'tutkinnon_osa',
+  TUTKINNON_OSA: 'tutkinnon-osa',
   OSAAMISALA: 'osaamisala',
   AVOIN_YO: 'avoin_yo',
   AVOIN_AMK: 'avoin_amk',

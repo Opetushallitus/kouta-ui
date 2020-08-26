@@ -82,6 +82,12 @@ const fillYhteystiedotSection = () => {
   });
 };
 
+const passOsatSection = () => {
+  getByTestId('oppilaitoksenOsatSection').within(() => {
+    jatka();
+  });
+};
+
 const tallenna = () => {
   getByTestId('tallennaOppilaitosButton').click();
 };
@@ -118,6 +124,8 @@ describe('createOppilaitosForm', () => {
     fillEsittelySection();
 
     fillTeemakuvaSection();
+
+    passOsatSection();
 
     fillTietoaOpiskelustaSection();
 

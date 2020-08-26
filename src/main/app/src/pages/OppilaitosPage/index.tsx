@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import OppilaitosForm, {
   initialValues as formInitialValues,
 } from './OppilaitosForm';
-import useOrganisaatio from '#/src/hooks/useOrganisaatio';
 import FormPage from '#/src/components/FormPage';
 import OppilaitosFormSteps from '#/src/components/OppilaitosFormSteps';
 import useApiAsync from '#/src/hooks/useApiAsync';
@@ -21,6 +20,7 @@ import { useEntityFormConfig } from '#/src/hooks/form';
 import FullSpin from '#/src/components/FullSpin';
 import OppilaitosPageFooter from './OppilaitosPageFooter';
 import EntityFormHeader from '#/src/components/EntityFormHeader';
+import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 
 const OppilaitosPage = ({
   match: {
@@ -28,7 +28,12 @@ const OppilaitosPage = ({
   },
   location: { state = {} },
 }) => {
-  const { organisaatio } = useOrganisaatio(organisaatioOid);
+  const { hierarkia } = useOrganisaatioHierarkia(organisaatioOid, {
+    skipParents: true,
+  });
+
+  const organisaatio = hierarkia?.[0];
+
   const { oppilaitosUpdatedAt } = state;
 
   const { data: oppilaitos, isLoading } = useApiAsync({
@@ -110,6 +115,7 @@ const OppilaitosPage = ({
             {organisaatio && (
               <OppilaitosForm
                 organisaatioOid={organisaatioOid}
+                organisaatio={organisaatio}
                 steps={stepsEnabled}
                 showArkistoituTilaOption={showArkistoituTilaOption}
               />

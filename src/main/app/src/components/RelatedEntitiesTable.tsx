@@ -7,8 +7,8 @@ import ListTable, {
   makeNimiColumn,
   makeModifiedColumn,
   makeTilaColumn,
-} from '#/src/pages/HomePage/ListTable';
-import ListSpin from '#/src/pages/HomePage/ListSpin';
+} from '#/src/components/ListTable';
+import ListSpin from '#/src/components/ListSpin';
 
 export default function ({
   entity,

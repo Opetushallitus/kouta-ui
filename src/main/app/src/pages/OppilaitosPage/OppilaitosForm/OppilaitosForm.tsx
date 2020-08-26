@@ -11,10 +11,12 @@ import EsittelySection from './EsittelySection';
 import PerustiedotSection from './PerustiedotSection';
 import YhteystiedotSection from './YhteystiedotSection';
 import TietoaOpiskelustaSection from './TietoaOpiskelustaSection';
+import OppilaitoksenOsatSection from './OppilaitoksenOsatSection';
 
 const OppilaitosForm = ({
   steps = false,
   organisaatioOid,
+  organisaatio,
   showArkistoituTilaOption = true,
 }) => {
   const { t } = useTranslation();
@@ -46,6 +48,13 @@ const OppilaitosForm = ({
         section="teemakuva"
         header={t('oppilaitoslomake.oppilaitoksenTeemakuva')}
         Component={TeemakuvaSection}
+      />
+
+      <FormCollapse
+        section="oppilaitoksenOsat"
+        header={t('oppilaitoslomake.oppilaitoksenOsat')}
+        Component={OppilaitoksenOsatSection}
+        organisaatio={organisaatio}
       />
 
       <FormCollapse

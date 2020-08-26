@@ -8,7 +8,6 @@ import Table, {
   TableRow,
   TableCell,
 } from '#/src/components/Table';
-import { getSortDirection, makeOnSort } from './utils';
 import { Icon, Dropdown } from '#/src/components/virkailija';
 import StatusTag from '#/src/components/StatusTag';
 import useLanguage from '#/src/hooks/useLanguage';
@@ -16,6 +15,22 @@ import Anchor from '#/src/components/Anchor';
 import { Link } from 'react-router-dom';
 import { formatKoutaDateString } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
+
+export const makeOnSort = ({ name, onSort }) => dir => onSort(`${name}:${dir}`);
+
+export const getSortDirection = ({ sort, name }) => {
+  if (!sort) {
+    return null;
+  }
+
+  const [sortName, dir] = sort.split(':');
+
+  if (!dir) {
+    return null;
+  }
+
+  return sortName === name ? dir : null;
+};
 
 export const makeNimiColumn = (t, { getLinkUrl }) => ({
   title: t('yleiset.nimi'),

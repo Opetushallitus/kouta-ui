@@ -14,19 +14,18 @@ import useModal from '#/src/hooks/useModal';
 import ErrorAlert from '#/src/components/ErrorAlert';
 import Pagination from '#/src/components/Pagination';
 import useApiAsync from '#/src/hooks/useApiAsync';
+import ListTable, {
+  makeModifiedColumn,
+  makeMuokkaajaColumn,
+  makeTilaColumn,
+} from '#/src/components/ListTable';
+import ListSpin from '#/src/components/ListSpin';
 import { getIndexParamsByFilters } from '../utils';
-import ListSpin from '../ListSpin';
 import Filters from '../Filters';
 import NavigationAnchor from '../NavigationAnchor';
 import useFilterState from '../useFilterState';
 import ListCollapse from '../ListCollapse';
 import LiitoksetModal from './LiitoksetModal';
-
-import ListTable, {
-  makeModifiedColumn,
-  makeMuokkaajaColumn,
-  makeTilaColumn,
-} from '../ListTable';
 
 const { HAKUKOHDE } = ENTITY;
 

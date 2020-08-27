@@ -16,19 +16,18 @@ import Pagination from '#/src/components/Pagination';
 import { Box } from '#/src/components/virkailija';
 import Badge from '#/src/components/Badge';
 import useApiAsync from '#/src/hooks/useApiAsync';
-import { getIndexParamsByFilters } from '../utils';
-import Filters from '../Filters';
-import useFilterState from '../useFilterState';
-import ListSpin from '../ListSpin';
-import NavigationAnchor from '../NavigationAnchor';
-import KoulutusModal from './KoulutusModal';
-import ListCollapse from '../ListCollapse';
-
 import ListTable, {
   makeModifiedColumn,
   makeMuokkaajaColumn,
   makeTilaColumn,
-} from '../ListTable';
+} from '#/src/components/ListTable';
+import ListSpin from '#/src/components/ListSpin';
+import { getIndexParamsByFilters } from '../utils';
+import Filters from '../Filters';
+import useFilterState from '../useFilterState';
+import NavigationAnchor from '../NavigationAnchor';
+import KoulutusModal from './KoulutusModal';
+import ListCollapse from '../ListCollapse';
 
 const { TOTEUTUS } = ENTITY;
 

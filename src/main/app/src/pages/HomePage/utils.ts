@@ -11,22 +11,6 @@ import {
 } from '#/src/constants';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
-export const makeOnSort = ({ name, onSort }) => dir => onSort(`${name}:${dir}`);
-
-export const getSortDirection = ({ sort, name }) => {
-  if (!sort) {
-    return null;
-  }
-
-  const [sortName, dir] = sort.split(':');
-
-  if (!dir) {
-    return null;
-  }
-
-  return sortName === name ? dir : null;
-};
-
 export const parseSort = sort => {
   return (sort || '').split(':');
 };

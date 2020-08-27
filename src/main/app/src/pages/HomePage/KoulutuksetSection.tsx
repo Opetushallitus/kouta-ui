@@ -16,17 +16,17 @@ import Spacing from '#/src/components/Spacing';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import Badge from '#/src/components/Badge';
 import ErrorAlert from '#/src/components/ErrorAlert';
-import { getIndexParamsByFilters } from './utils';
-import ListSpin from './ListSpin';
-import Filters from './Filters';
-import NavigationAnchor from './NavigationAnchor';
-import ListCollapse from './ListCollapse';
-import useFilterState from './useFilterState';
 import ListTable, {
   makeModifiedColumn,
   makeMuokkaajaColumn,
   makeTilaColumn,
-} from './ListTable';
+} from '#/src/components/ListTable';
+import ListSpin from '#/src/components/ListSpin';
+import { getIndexParamsByFilters } from './utils';
+import Filters from './Filters';
+import NavigationAnchor from './NavigationAnchor';
+import ListCollapse from './ListCollapse';
+import useFilterState from './useFilterState';
 
 const { KOULUTUS } = ENTITY;
 

@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from 'react';
-import { get, isString, isArray, uniq } from 'lodash';
+import { isString, isArray, uniq } from 'lodash';
 import getOrganisaatioHierarkia from '#/src/utils/organisaatio/getOrganisaatioHierarkia';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
@@ -8,31 +8,10 @@ import useAuthorizedUser from '#/src/hooks/useAuthorizedUser';
 import getUserRoles from '#/src/utils/getUserRoles';
 import getRoleOrganisaatioOid from '#/src/utils/getRoleOrganisaatioOid';
 import useLanguage from '#/src/hooks/useLanguage';
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-
-const filterHierarkia = (hierarkia, filterFn) => {
-  return hierarkia.flatMap(org => [
-    ...(filterFn(org) ? [org] : filterHierarkia(org.children || [], filterFn)),
-  ]);
-};
-
-const filterByName = (hierarkia, name, language) => {
-  return hierarkia.flatMap(org => {
-    const orgName = getFirstLanguageValue(get(org, 'nimi'), language);
-
-    const isMatch = isString(orgName)
-      ? orgName.toLowerCase().indexOf(name) >= 0
-      : false;
-
-    const matchingChildren = filterByName(org.children || [], name, language);
-
-    if (isMatch || matchingChildren.length > 0) {
-      return [org];
-    }
-
-    return [];
-  });
-};
+import {
+  filterByName,
+  filterHierarkia,
+} from '#/src/utils/organisaatio/hierarkiaHelpers';
 
 const getRolesOrganisaatioOids = roles => {
   return uniq(roles.map(getRoleOrganisaatioOid).filter(Boolean));

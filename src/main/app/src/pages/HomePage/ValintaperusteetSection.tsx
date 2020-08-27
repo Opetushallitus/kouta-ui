@@ -14,17 +14,17 @@ import useApiAsync from '#/src/hooks/useApiAsync';
 import Anchor from '#/src/components/Anchor';
 import Button from '#/src/components/Button';
 import ErrorAlert from '#/src/components/ErrorAlert';
-import { getIndexParamsByFilters } from './utils';
-import Filters from './Filters';
-import useFilterState from './useFilterState';
-import ListSpin from './ListSpin';
-import NavigationAnchor from './NavigationAnchor';
-import ListCollapse from './ListCollapse';
 import ListTable, {
   makeModifiedColumn,
   makeMuokkaajaColumn,
   makeTilaColumn,
-} from './ListTable';
+} from '#/src/components/ListTable';
+import ListSpin from '#/src/components/ListSpin';
+import { getIndexParamsByFilters } from './utils';
+import Filters from './Filters';
+import useFilterState from './useFilterState';
+import NavigationAnchor from './NavigationAnchor';
+import ListCollapse from './ListCollapse';
 
 const { VALINTAPERUSTE } = ENTITY;
 

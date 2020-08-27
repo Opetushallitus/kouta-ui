@@ -17,15 +17,15 @@ import useApiAsync from '#/src/hooks/useApiAsync';
 import Badge from '#/src/components/Badge';
 import ErrorAlert from '#/src/components/ErrorAlert';
 import Anchor from '#/src/components/Anchor';
-import NavigationAnchor from './NavigationAnchor';
-import Filters from './Filters';
-import ListSpin from './ListSpin';
-import ListCollapse from './ListCollapse';
+import ListSpin from '#/src/components/ListSpin';
 import ListTable, {
   makeModifiedColumn,
   makeMuokkaajaColumn,
   makeTilaColumn,
-} from './ListTable';
+} from '#/src/components/ListTable';
+import NavigationAnchor from './NavigationAnchor';
+import Filters from './Filters';
+import ListCollapse from './ListCollapse';
 import { getIndexParamsByFilters } from './utils';
 import useFilterState from './useFilterState';
 

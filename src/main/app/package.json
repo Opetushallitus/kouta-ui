@@ -59,7 +59,7 @@
     "test": "craco test",
     "eject": "craco eject",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -c .storybook -o build/storybook --quiet",
+    "build-storybook": "NODE_ENV=development build-storybook -c .storybook -o build/storybook --quiet",
     "format": "prettier --write './src/**/*.{js,jsx,ts,tsx}' './cypress/**/*.{js,jsx,ts,tsx}'",
     "cypress:run": "cypress run -b chrome",
     "cypress:open": "cypress open -b chrome",

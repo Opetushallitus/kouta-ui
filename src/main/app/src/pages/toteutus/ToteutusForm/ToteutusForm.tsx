@@ -185,7 +185,7 @@ const ToteutusForm = ({
           languages={languages}
         />
 
-        {hakeutumisTaiIlmoittautumistapa === 'muuHakulomake' && (
+        {hakeutumisTaiIlmoittautumistapa === MUU_HAKULOMAKE && (
           <FormCollapse
             section="soraKuvaus"
             header={t('yleiset.soraKuvaus')}

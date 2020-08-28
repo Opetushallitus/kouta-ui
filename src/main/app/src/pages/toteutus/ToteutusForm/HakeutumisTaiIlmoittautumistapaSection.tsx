@@ -165,7 +165,7 @@ export const HakeutumisTaiIlmoittautumistapaSection = ({
         <Field
           label={hakuTapa && t(`toteutuslomake.${hakuTapa}.valitseTapa`)}
           component={HakeutumisTaiIlmoittautusmistapaFields}
-          name={`${name}.hakeutumisTaiIlmoittautumistapa.${language}`}
+          name={`${name}.hakeutumisTaiIlmoittautumistapa`}
           section={name}
           hakuTapa={hakuTapa}
           language={language}

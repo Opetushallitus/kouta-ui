@@ -10,7 +10,6 @@ import {
   Input,
   InputIcon,
   Box,
-  Divider,
   Spin,
 } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
@@ -22,12 +21,9 @@ import {
   selectOrganisaatioFavourites,
 } from '#/src/state/organisaatioFavourites';
 
-import OrganisaatioTreeList from './OrganisaatioTreeList';
-import OrganisaatioFavouritesList from './OrganisaatioFavouritesList';
 import useLanguage from '#/src/hooks/useLanguage';
 import { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
 import useDebounceState from '#/src/hooks/useDebounceState';
-import useOrganisaatioHierarkia from './useOrganisaatioHierarkia';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
 
 import {
@@ -38,8 +34,12 @@ import {
 
 import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
-import OpetushallitusOrganisaatioItem from './OpetushallitusOrganisaatioItem';
 import { useActions } from '#/src/hooks/useActions';
+import Heading from '#/src/components/Heading';
+import OrganisaatioTreeList from './OrganisaatioTreeList';
+import useOrganisaatioHierarkia from './useOrganisaatioHierarkia';
+import { PikavalinnatCollapse } from './PikavalinnatCollapse';
+import { CurrentOrganisaatioBox } from './SelectedOrganisaatioBox';
 
 const CloseIcon = styled(Icon).attrs({ type: 'close', role: 'button' })`
   color: ${getThemeProp('palette.text.primary')};
@@ -56,16 +56,14 @@ const Container = styled(Box).attrs({
   display: 'flex',
   flexDirection: 'column',
 })`
-  height: 100vh;
-  min-width: 25rem;
-  max-width: 35rem;
+  height: 100%;
+  min-width: 500px;
+  max-width: 600px;
 `;
 
 const TreeContainer = styled(Box).attrs({ flexGrow: 1 })`
-  overflow-y: auto;
-  overflow-x: auto;
-  max-width: 100vw;
   box-sizing: border-box;
+  flex: 1 1 auto;
 `;
 
 const FooterContainer = styled(Box).attrs({
@@ -76,7 +74,6 @@ const FooterContainer = styled(Box).attrs({
 `;
 
 const HeaderContainer = styled(Box).attrs({
-  flexGrow: 0,
   display: 'flex',
   alignItems: 'center',
 })`
@@ -84,13 +81,13 @@ const HeaderContainer = styled(Box).attrs({
   border-bottom: 1px solid ${getThemeProp('palette.border')};
 `;
 
-const FavouriteListContainer = styled(Box)`
-  max-height: 200px;
-  overflow-y: auto;
-`;
-
-const FilterContainer = styled(Box).attrs({ flexGrow: 0 })`
-  padding: ${spacing(2)};
+const Content = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  overflow: auto;
+  padding: 15px;
+  width: 100%;
 `;
 
 const getTreeItems = (organisaatiot, favourites, open, roleBuilder) => {
@@ -138,11 +135,6 @@ const DrawerContent = ({ organisaatioOid, onOrganisaatioChange, onClose }) => {
   );
 
   const nameSearchEnabled = hasOphOption;
-
-  const ophIsFavourite = useMemo(
-    () => organisaatioFavourites.includes(OPETUSHALLITUS_ORGANISAATIO_OID),
-    [organisaatioFavourites]
-  );
 
   const { t } = useTranslation();
   const language = useLanguage();
@@ -207,85 +199,62 @@ const DrawerContent = ({ organisaatioOid, onOrganisaatioChange, onClose }) => {
           <CloseIcon onClick={onClose} />
         </Box>
       </HeaderContainer>
+      <Content>
+        <CurrentOrganisaatioBox organisaatioOid={selectedOrganisaatio} />
+        {(hasFavourites || hasOphOption) && (
+          <PikavalinnatCollapse
+            {...{
+              hasOphOption,
+              hasFavourites,
+              organisaatioFavourites,
+              onToggleFavourite,
+              selectedOrganisaatio,
+              setSelectedOrganisaatio,
+              favouriteItems,
+              language,
+            }}
+          />
+        )}
 
-      {(hasFavourites || hasOphOption) && (
-        <Box flexGrow={0}>
-          <Box p={2} mb={-1}>
-            {hasOphOption && (
-              <Box mb={1}>
-                <Typography variant="secondary" as="div" mb={1}>
-                  {t('etusivu.rekisterinpitaja')}
-                </Typography>
-                <OpetushallitusOrganisaatioItem
-                  favourite={ophIsFavourite}
-                  selected={
-                    selectedOrganisaatio === OPETUSHALLITUS_ORGANISAATIO_OID
-                  }
-                  onToggleFavourite={onToggleFavourite}
-                  onSelect={setSelectedOrganisaatio}
-                />
-              </Box>
-            )}
-
-            {hasFavourites && (
-              <FavouriteListContainer mb={1}>
-                <OrganisaatioFavouritesList
-                  items={favouriteItems}
-                  selected={selectedOrganisaatio}
-                  onSelect={setSelectedOrganisaatio}
-                  onToggleFavourite={onToggleFavourite}
-                  language={language}
-                />
-              </FavouriteListContainer>
-            )}
+        {nameSearchEnabled ? (
+          <Box flexGrow={0}>
+            <Heading>{t('etusivu.haeOrganisaatioita')}</Heading>
+            <Input
+              value={nameFilter}
+              onChange={onNameFilterChange}
+              suffix={
+                loadingHierarkia ? (
+                  <Spin size="small" />
+                ) : (
+                  <InputIcon type="search" />
+                )
+              }
+            />
           </Box>
-          <Divider />
-        </Box>
-      )}
-
-      {nameSearchEnabled ? (
-        <FilterContainer>
-          <Input
-            placeholder={t('etusivu.haeOrganisaatioita')}
-            value={nameFilter}
-            onChange={onNameFilterChange}
-            suffix={
-              loadingHierarkia ? (
-                <Spin size="small" />
-              ) : (
-                <InputIcon type="search" />
-              )
-            }
-          />
-        </FilterContainer>
-      ) : null}
-
-      <TreeContainer
-        {...getTestIdProps('organisaatioList')}
-        p={2}
-        pt={nameSearchEnabled ? 0 : 2}
-      >
-        {loadingHierarkia && !nameSearchEnabled ? <Spin center /> : null}
-
-        {items.length > 0 ? (
-          <OrganisaatioTreeList
-            items={items}
-            selected={selectedOrganisaatio}
-            onSelect={setSelectedOrganisaatio}
-            onToggleFavourite={onToggleFavourite}
-            onToggleOpen={onToggleOpen}
-            language={language}
-          />
         ) : null}
 
-        {items.length === 0 && !loadingHierarkia ? (
-          <Typography variant="secondary">
-            {t('etusivu.organisaatioitaEiLoytynyt')}
-          </Typography>
-        ) : null}
-      </TreeContainer>
+        <TreeContainer {...getTestIdProps('organisaatioList')} pt={2}>
+          {loadingHierarkia && !nameSearchEnabled ? <Spin center /> : null}
+          {items.length > 0 ? (
+            <OrganisaatioTreeList
+              items={items}
+              selected={selectedOrganisaatio}
+              onSelect={setSelectedOrganisaatio}
+              onToggleFavourite={onToggleFavourite}
+              onToggleOpen={onToggleOpen}
+              language={language}
+            />
+          ) : null}
 
-      <Box flexGrow={0}>
+          {items.length === 0 && !loadingHierarkia ? (
+            <Typography variant="secondary">
+              {t('etusivu.organisaatioitaEiLoytynyt')}
+            </Typography>
+          ) : null}
+        </TreeContainer>
+      </Content>
+
+      <Box>
         <FooterContainer p={2}>
           <Button onClick={onSubmit} disabled={!selectedOrganisaatio}>
             {t('yleiset.valitse')}

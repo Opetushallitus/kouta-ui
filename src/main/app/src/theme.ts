@@ -10,7 +10,8 @@ export const media = generateMedia({
   small: breakpoints[0],
 });
 
-export const getThemeProp = path => props => _.get(props.theme, path);
+export const getThemeProp = (path, modifier = x => x) => props =>
+  modifier(_.get(props.theme, path));
 
 export const spacing = (amount = 1) => ({ theme }) =>
   `${theme.spacing.unit * amount}px`;
@@ -24,6 +25,7 @@ export const createTheme = () => {
     colors: {
       mainBackground: '#f5f5f5',
       grayLighten6: '#f0f3f7',
+      blueLighten4: '#def2ff',
       border: theme.colors.divider,
       text: {
         dark: theme.colors.text.heading,

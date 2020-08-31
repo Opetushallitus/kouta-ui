@@ -66,7 +66,7 @@ const fillTeemakuvaSection = () => {
 
 const tallenna = () => {
   getByTestId('tallennaKoulutusButton').within(() => {
-    cy.contains('Tallenna').click();
+    cy.contains('yleiset.tallenna').click();
   });
 };
 

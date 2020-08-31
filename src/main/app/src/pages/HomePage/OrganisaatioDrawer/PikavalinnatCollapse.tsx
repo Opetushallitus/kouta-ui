@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import _ from 'lodash';
-import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 import { SimpleCollapse } from '#/src/components/SimpleCollapse';

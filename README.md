@@ -58,7 +58,7 @@ http://localhost:8080
 
 Yksikkötestit löytyvät testattavan moduulin `*.test.jsx?` (esim. `components/Input/Input.test.jsx`) tiedostosta, tai sen `__tests__` kansiosta. Integraatiotestit löytyvät `cypress/integration` kansiosta.
 
-Yksikkötestit voi ajaa komennolla `npm test` ja integraatiotestit komennolla `npm run test:e2e`. Kaikki testit pystyy ajamaan komennolla `npm run test:ci`.
+Yksikkötestit voi ajaa komennolla `npm test` ja integraatiotestit komennolla `npm run test:integration`. Kaikki testit pystyy ajamaan komennolla `npm run test:ci`.
 
 ### Cypress TestRunner, interaktiivisesti
 

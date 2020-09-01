@@ -154,7 +154,7 @@ export const KoulutuksenNimiSection = ({ language, name }) => {
         getLanguageValue(oneSelectedTutkinnonOsa, language)
       );
     }
-  }, [isDirty, oneSelectedTutkinnonOsa, language]);
+  }, [change, name, isDirty, oneSelectedTutkinnonOsa, language]);
 
   return (
     <Box mb={2} {...getTestIdProps('koulutuksenNimi')}>
@@ -220,7 +220,7 @@ export const TutkinnonOsienKuvausSection = ({ disabled, language, name }) => {
       .sort();
   }, [tutkinnonosat]);
 
-  const { data: kuvaukset, isLoading } = useApiAsync({
+  const { data: kuvaukset } = useApiAsync({
     promiseFn: getTutkinnonOsanKuvaus,
     tutkinnonOsat: selectedTutkinnonOsat,
     watch: selectedTutkinnonOsat,

@@ -177,7 +177,7 @@ const KoulutusInfo = ({
   const { change } = useBoundFormActions();
   useEffect(() => {
     change(`${name}.selectedTutkinnonosat`, selectedTutkinnonosat);
-  }, [selectedTutkinnonosat, change]);
+  }, [name, selectedTutkinnonosat, change]);
 
   return koulutus || isLoading ? (
     <div className={className}>

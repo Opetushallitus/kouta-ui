@@ -28,6 +28,15 @@ const getListNimiLanguageValues = (list = [], language) =>
     .map(({ nimi }) => getLanguageValue(nimi, language))
     .filter(name => !!name);
 
+const getTutkinnonosatOptions = (selectedPeruste, language) =>
+  _.map(
+    selectedPeruste?.tutkinnonosat ?? [],
+    ({ _tutkinnonOsa, nimi, laajuus }) => ({
+      label: `${getLanguageValue(nimi, language)}, ${laajuus} osp`,
+      value: _tutkinnonOsa,
+    })
+  );
+
 const getEPerusteetOptions = (ePerusteet, language) =>
   _.map(ePerusteet, ({ id, nimi, diaarinumero }) => ({
     label: `${getLanguageValue(nimi, language)} (${diaarinumero})`,
@@ -48,6 +57,28 @@ const EPerusteField = ({ isLoading, ...props }) => {
       label={t('koulutuslomake.valitseKaytettavaEperuste')}
       options={ePerusteOptions}
       disabled={isLoading || _.isNil(ePerusteet) || _.isEmpty(ePerusteet)}
+      {...props}
+    />
+  );
+};
+
+const TutkinnonOsatField = ({ isLoading, ...props }) => {
+  const { selectedPeruste, language } = props;
+  const { t } = useTranslation();
+
+  const tutkinnonosatOptions = useMemo(
+    () => getTutkinnonosatOptions(selectedPeruste, language),
+    [selectedPeruste, language]
+  );
+
+  return (
+    <Field
+      component={FormFieldSelect}
+      label={t('koulutuslomake.valitseKaytettavaTutkinnonOsa')}
+      options={tutkinnonosatOptions}
+      disabled={
+        isLoading || _.isNil(selectedPeruste) || _.isEmpty(selectedPeruste)
+      }
       {...props}
     />
   );
@@ -109,6 +140,7 @@ const KoulutusInfo = ({
   ePeruste,
   className,
   isLoading,
+  name,
 }) => {
   const { t } = useTranslation();
 
@@ -135,6 +167,17 @@ const KoulutusInfo = ({
     [koulutus, ePeruste, language]
   );
   const apiUrls = useUrls();
+
+  const tutkinnonosatFieldValue = useFieldValue(`${name}.tutkinnonosat`);
+  const selectedTutkinnonosat = _.find(
+    ePeruste?.tutkinnonosat,
+    t => t._tutkinnonOsa === _.get(tutkinnonosatFieldValue, 'value')
+  );
+
+  const { change } = useBoundFormActions();
+  useEffect(() => {
+    change(`${name}.selectedTutkinnonosat`, selectedTutkinnonosat);
+  }, [name, selectedTutkinnonosat, change]);
 
   return koulutus || isLoading ? (
     <div className={className}>
@@ -223,6 +266,52 @@ const KoulutusInfo = ({
               </Grid>
             </>
           )}
+          {ePeruste?.tutkinnonosat && (
+            <Box
+              width={0.5}
+              mr={2}
+              mt={5}
+              mb={5}
+              {...getTestIdProps('tutkinnonOsatSelect')}
+            >
+              <TutkinnonOsatField
+                isLoading={isLoading}
+                name={`${name}.tutkinnonosat`}
+                selectedPeruste={ePeruste}
+                language={language}
+              />
+            </Box>
+          )}
+          {selectedTutkinnonosat && (
+            <InfoGrid
+              style={{ marginBottom: '40px' }}
+              rows={[
+                {
+                  title: t('yleiset.nimi'),
+                  description: `${getLanguageValue(
+                    selectedTutkinnonosat.nimi,
+                    language
+                  )}`,
+                },
+                {
+                  title: t('yleiset.koodi'),
+                  description: (
+                    <Anchor
+                      href={apiUrls.url(
+                        'eperusteet.tutkinnonosat',
+                        language,
+                        _.get(ePeruste, 'id'),
+                        _.get(selectedTutkinnonosat, 'id')
+                      )}
+                      target="_blank"
+                    >
+                      {_.get(selectedTutkinnonosat, 'id')}
+                    </Anchor>
+                  ),
+                },
+              ]}
+            />
+          )}
         </>
       )}
     </div>
@@ -257,7 +346,9 @@ const KoulutuksenTiedotSection = ({
 
   const selectedPeruste = _.find(
     ePerusteet,
-    ePeruste => ePeruste.id === _.get(ePerusteFieldValue, 'value')
+    ePeruste =>
+      ePeruste.id.toString() ===
+      _.get(ePerusteFieldValue, 'value', '').toString()
   );
 
   const { change } = useBoundFormActions();
@@ -302,6 +393,7 @@ const KoulutuksenTiedotSection = ({
             koulutus={koulutus}
             language={language}
             isLoading={isLoading}
+            name={name}
           />
         </Box>
       </Box>

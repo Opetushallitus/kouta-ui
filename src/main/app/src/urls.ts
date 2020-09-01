@@ -51,8 +51,10 @@ export const development = ({ isCypress }) => ({
   'koodisto-service.codeelement': `${virkailijaDevUrl}/koodisto-service/rest/codeelement/$1/$2`,
   'eperusteet-service.base-url': `${virkailijaDevUrl}/eperusteet-service`,
   'eperusteet-service.peruste-by-id': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/$1`,
+  'eperusteet-service.tutkinnonosankuvaukset': `${virkailijaDevUrl}/eperusteet-service/api/perusteenosat/$1`,
+  'eperusteet-service.peruste-tutkinnonosat': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/$1/suoritustavat/reformi/tutkinnonosat`,
   'eperusteet-service.peruste-rakenne': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/$1/suoritustavat/reformi/rakenne`,
-  'eperusteet-service.perusteet-koulutuskoodilla': `${virkailijaDevUrl}/eperusteet-service/api/perusteet?tuleva=true&siirtyma=false&voimassaolo=true&poistunut=false&kieli=fi&koulutuskoodi=$1`,
+  'eperusteet-service.perusteet-koulutuskoodilla': `${virkailijaDevUrl}/eperusteet-service/api/perusteet?tuleva=true&siirtyma=false&voimassaolo=true&poistunut=false&kieli=fi&koulutuskoodi=$1&tutkinnonosat=true`,
   'eperusteet-service.osaamisalakuvaukset': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/$1/osaamisalakuvaukset`,
   'organisaatio-service.base-url': `${virkailijaDevUrl}/organisaatio-service`,
   'organisaatio-service.children': `${virkailijaDevUrl}/organisaatio-service/rest/organisaatio/v4/$1/children?includeImage=false`,
@@ -73,6 +75,7 @@ export const development = ({ isCypress }) => ({
   'lomake-editori.muokkaus-sivu': `${virkailijaDevUrl}/lomake-editori/editor/$1`,
   'oppijanumerorekisteri-service.henkilo': `${virkailijaDevUrl}/oppijanumerorekisteri-service/henkilo/$1`,
   'eperusteet.kooste': `${ePerusteetDevUrl}/#/$1/kooste/$2`,
+  'eperusteet.tutkinnonosat': `${ePerusteetDevUrl}/#/$1/esitys/$2/reformi/tutkinnonosat/$3`,
 });
 
 export const configure = async (urls, httpClient) => {

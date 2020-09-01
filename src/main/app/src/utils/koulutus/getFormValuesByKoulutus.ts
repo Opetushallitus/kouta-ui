@@ -16,6 +16,7 @@ export const getFormValuesByKoulutus = koulutus => {
   const {
     lisatiedot = [],
     kuvaus = {},
+    tutkinnonOsat = [],
     opintojenLaajuusKoodiUri = '',
     tutkintonimikeKoodiUrit = [],
     kuvauksenNimi = {},
@@ -25,6 +26,14 @@ export const getFormValuesByKoulutus = koulutus => {
   const osiot = lisatiedot
     .filter(({ otsikkoKoodiUri }) => !!otsikkoKoodiUri)
     .map(({ otsikkoKoodiUri }) => ({ value: otsikkoKoodiUri }));
+
+  const tutkinnonosat = tutkinnonOsat.map(
+    ({ eperusteId, koulutusId, tutkinnonosatId }) => ({
+      eperuste: { value: eperusteId },
+      koulutus: { value: koulutusId },
+      tutkinnonosat: { value: tutkinnonosatId },
+    })
+  );
 
   const osioKuvaukset = lisatiedot.reduce((acc, curr) => {
     if (curr.otsikkoKoodiUri) {
@@ -56,6 +65,10 @@ export const getFormValuesByKoulutus = koulutus => {
     lisatiedot: {
       osioKuvaukset,
       osiot,
+    },
+    tutkinnonosat: {
+      osat: tutkinnonosat,
+      nimi: nimi,
     },
     description: {
       kuvaus,

@@ -11,30 +11,36 @@ export const getKoulutusByKoodi = async ({
     return null;
   }
 
+  const fetchRakenneAndTutkinnonOsat = ePeruste => {
+    const config = {
+      errorNotifier: {
+        silent: true,
+      },
+    };
+    const fetchRakenne = httpClient.get(
+      apiUrls.url('eperusteet-service.peruste-rakenne', ePeruste.id),
+      config
+    );
+    const fetchTutkinnonosat = httpClient.get(
+      apiUrls.url('eperusteet-service.peruste-tutkinnonosat', ePeruste.id),
+      config
+    );
+
+    return Promise.all([fetchRakenne, fetchTutkinnonosat]).then(
+      ([{ data: rakenne }, { data: tutkinnonosat }]) => ({
+        ...ePeruste,
+        laajuus: rakenne?.muodostumisSaanto?.laajuus?.minimi,
+        tutkinnonosat: tutkinnonosat,
+      }),
+      () => ePeruste
+    );
+  };
+
   const [ePerusteetData, alakooditResponse, koodiResponse] = await Promise.all([
     httpClient
       .get(apiUrls.url('eperusteet-service.perusteet-koulutuskoodilla', koodi))
       .then(({ data: { data: ePerusteet } }) =>
-        Promise.all(
-          ePerusteet.map(ePeruste =>
-            httpClient
-              .get(
-                apiUrls.url('eperusteet-service.peruste-rakenne', ePeruste.id),
-                {
-                  errorNotifier: {
-                    silent: true,
-                  },
-                }
-              )
-              .then(
-                ({ data: rakenne }) => ({
-                  ...ePeruste,
-                  laajuus: rakenne?.muodostumisSaanto?.laajuus?.minimi,
-                }),
-                () => ePeruste
-              )
-          )
-        )
+        Promise.all(ePerusteet.map(fetchRakenneAndTutkinnonOsat))
       ),
     httpClient.get(
       apiUrls.url('koodisto-service.sisaltyy-alakoodit', koodi, versio || '')

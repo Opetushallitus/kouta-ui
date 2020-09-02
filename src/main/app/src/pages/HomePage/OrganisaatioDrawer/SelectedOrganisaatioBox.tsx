@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { transparentize } from 'polished';
 import { Link } from 'react-router-dom';
+import _ from 'lodash/fp';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import useOrganisaatio from '#/src/hooks/useOrganisaatio';
 import { getOrganisaatioTyypit } from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
@@ -10,6 +11,7 @@ import { getThemeProp } from '#/src/theme';
 import { Typography, Box } from '#/src/components/virkailija';
 import EditButton from '#/src/components/EditButton';
 import { useTranslation } from 'react-i18next';
+import { otherwise } from '#/src/utils';
 
 const StyledBlueBox = styled(Box)`
   background-color: ${getThemeProp('colors.blueLighten4', transparentize(0.7))};
@@ -18,16 +20,18 @@ const StyledBlueBox = styled(Box)`
   flex: 0 0 auto;
 `;
 
-export const CurrentOrganisaatioBox = ({ organisaatioOid }) => {
+export const SelectedOrganisaatioBox = ({ organisaatioOid }) => {
   const { t } = useTranslation();
   const { organisaatio } = useOrganisaatio(organisaatioOid);
   const nimi = getFirstLanguageValue(organisaatio?.nimi);
 
   const tyypit = getOrganisaatioTyypit(organisaatio);
 
-  const orgEntityType = tyypit.includes(ORGANISAATIOTYYPPI.OPPILAITOS)
-    ? 'oppilaitos'
-    : 'oppilaitoksen-osa';
+  const orgEntityType = _.cond([
+    [_.includes(ORGANISAATIOTYYPPI.OPPILAITOS), () => 'oppilaitos'],
+    [_.includes(ORGANISAATIOTYYPPI.TOIMIPISTE), () => 'oppilaitoksen-osa'],
+    [otherwise, () => undefined],
+  ])(tyypit);
 
   return (
     <StyledBlueBox>
@@ -38,12 +42,14 @@ export const CurrentOrganisaatioBox = ({ organisaatioOid }) => {
           </Typography>
           <Typography as="div">{nimi}</Typography>
         </Box>
-        <Box>
-          <EditButton
-            as={Link}
-            to={`/organisaatio/${organisaatioOid}/${orgEntityType}`}
-          />
-        </Box>
+        {orgEntityType && (
+          <Box>
+            <EditButton
+              as={Link}
+              to={`/organisaatio/${organisaatioOid}/${orgEntityType}`}
+            />
+          </Box>
+        )}
       </Box>
     </StyledBlueBox>
   );

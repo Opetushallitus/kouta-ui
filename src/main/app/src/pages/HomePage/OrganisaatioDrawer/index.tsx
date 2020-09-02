@@ -39,7 +39,7 @@ import Heading from '#/src/components/Heading';
 import OrganisaatioTreeList from './OrganisaatioTreeList';
 import useOrganisaatioHierarkia from './useOrganisaatioHierarkia';
 import { PikavalinnatCollapse } from './PikavalinnatCollapse';
-import { CurrentOrganisaatioBox } from './SelectedOrganisaatioBox';
+import { SelectedOrganisaatioBox } from './SelectedOrganisaatioBox';
 
 const CloseIcon = styled(Icon).attrs({ type: 'close', role: 'button' })`
   color: ${getThemeProp('palette.text.primary')};
@@ -200,7 +200,7 @@ const DrawerContent = ({ organisaatioOid, onOrganisaatioChange, onClose }) => {
         </Box>
       </HeaderContainer>
       <Content>
-        <CurrentOrganisaatioBox organisaatioOid={selectedOrganisaatio} />
+        <SelectedOrganisaatioBox organisaatioOid={selectedOrganisaatio} />
         {(hasFavourites || hasOphOption) && (
           <PikavalinnatCollapse
             {...{

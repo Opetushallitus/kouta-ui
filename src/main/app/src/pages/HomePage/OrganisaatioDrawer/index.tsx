@@ -25,6 +25,7 @@ import useLanguage from '#/src/hooks/useLanguage';
 import { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
 import useDebounceState from '#/src/hooks/useDebounceState';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
+import DividerHeading from '#/src/components/DividerHeading';
 
 import {
   createCanReadSomethingRoleBuilder,
@@ -215,9 +216,8 @@ const DrawerContent = ({ organisaatioOid, onOrganisaatioChange, onClose }) => {
             }}
           />
         )}
-
         {nameSearchEnabled ? (
-          <Box flexGrow={0}>
+          <Box flexGrow={0} mb={2}>
             <Heading>{t('etusivu.haeOrganisaatioita')}</Heading>
             <Input
               value={nameFilter}
@@ -231,9 +231,11 @@ const DrawerContent = ({ organisaatioOid, onOrganisaatioChange, onClose }) => {
               }
             />
           </Box>
-        ) : null}
+        ) : (
+          <DividerHeading>{t('yleiset.organisaatiot')}</DividerHeading>
+        )}
 
-        <TreeContainer {...getTestIdProps('organisaatioList')} pt={2}>
+        <TreeContainer {...getTestIdProps('organisaatioList')}>
           {loadingHierarkia && !nameSearchEnabled ? <Spin center /> : null}
           {items.length > 0 ? (
             <OrganisaatioTreeList

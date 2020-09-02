@@ -201,6 +201,7 @@ export default {
       'Liitetty {{entity, unCapitalize}} ei ole "Julkaistu"-tilassa.',
     onJulkinen: '{{entity}} on julkinen',
     kokeetTaiLisanaytot: 'Kokeet tai lisänäytöt',
+    organisaatiot: 'Organisaatiot',
   },
   ilmoitukset: {
     tallentamattomiaMuutoksia: {

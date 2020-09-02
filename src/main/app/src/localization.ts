@@ -5,6 +5,8 @@ import { getLocalization } from '#/src/utils/api/getLocalization';
 import getTranslations from '#/src/translations';
 import { LANGUAGES } from '#/src/constants';
 
+const { REACT_APP_LANG } = process.env;
+
 const formatMap = {
   toLower: _.toLower,
   upperFirst: _.upperFirst,
@@ -26,7 +28,7 @@ const createLocalization = ({
 }) => {
   let instance = i18n.createInstance();
 
-  if (loadLocalization) {
+  if (!REACT_APP_LANG && loadLocalization) {
     instance = instance.use(XHR);
   }
 
@@ -35,23 +37,24 @@ const createLocalization = ({
     debug,
     defaultNS,
     preload: LANGUAGES,
-    lng: language,
+    lng: REACT_APP_LANG ?? language,
     ns,
-    ...(loadLocalization && {
-      backend: {
-        loadPath: '{{ns}}:{{lng}}',
-        ajax: (url, options, callback) => {
-          const [namespace, language] = url.split(':');
+    ...(!REACT_APP_LANG &&
+      loadLocalization && {
+        backend: {
+          loadPath: '{{ns}}:{{lng}}',
+          ajax: (url, options, callback) => {
+            const [namespace, language] = url.split(':');
 
-          loadLocalization({ namespace, language })
-            .then(data => {
-              callback(data, { status: '200' });
-            })
-            .catch(() => callback(null, { status: '404' }));
+            loadLocalization({ namespace, language })
+              .then(data => {
+                callback(data, { status: '200' });
+              })
+              .catch(() => callback(null, { status: '404' }));
+          },
+          parse: data => data,
         },
-        parse: data => data,
-      },
-    }),
+      }),
     interpolation: {
       format(value, format = 'default', lng) {
         return _.isFunction(formatMap[format])

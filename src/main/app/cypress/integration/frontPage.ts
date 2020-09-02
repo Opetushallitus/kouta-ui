@@ -153,16 +153,16 @@ describe('frontPage', () => {
 
     getByTestId('organisaatioDrawer').should(
       'contain',
-      'Vaihda organisaatiota'
+      'etusivu.vaihdaOrganisaatiota'
     );
   });
 
   it('should display navigation links', () => {
     getByTestId('navigaatio')
-      .should('contain', 'Koulutukset')
-      .should('contain', 'Toteutukset')
-      .should('contain', 'Haut')
-      .should('contain', 'Hakukohteet');
+      .should('contain', 'yleiset.koulutukset')
+      .should('contain', 'yleiset.toteutukset')
+      .should('contain', 'yleiset.haut')
+      .should('contain', 'yleiset.hakukohteet');
   });
 
   it('should list koulutukset', () => {

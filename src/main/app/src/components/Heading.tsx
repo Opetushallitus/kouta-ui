@@ -1,16 +1,21 @@
 import React from 'react';
+import styled from 'styled-components';
 import { Divider, Typography } from '#/src/components/virkailija';
+
+const StyledTypography = styled(Typography)`
+  width: 100%;
+`;
 
 export const Heading = ({
   children = null,
   variant = 'h6',
-  hasDivider,
+  hasDivider = false,
   ...props
 }) => (
-  <Typography variant={variant} marginBottom={2} {...props}>
+  <StyledTypography variant={variant} marginBottom={2} {...props}>
     {children}
     {hasDivider && <Divider />}
-  </Typography>
+  </StyledTypography>
 );
 
 export default Heading;

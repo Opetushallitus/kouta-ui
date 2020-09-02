@@ -10,6 +10,7 @@ export default {
     nimi: 'Nimi',
     muokattuViimeksi: 'Muokattu viimeksi',
     muokkaaja: 'Muokkaaja',
+    muokkaa: 'Muokkaa',
     tila: 'Tila',
     jatka: 'Jatka',
     tyhjennaTiedot: 'Tyhjennä tiedot',
@@ -202,6 +203,7 @@ export default {
       'Liitetty {{entity, unCapitalize}} ei ole "Julkaistu"-tilassa.',
     onJulkinen: '{{entity}} on julkinen',
     kokeetTaiLisanaytot: 'Kokeet tai lisänäytöt',
+    organisaatiot: 'Organisaatiot',
   },
   ilmoitukset: {
     tallentamattomiaMuutoksia: {
@@ -318,7 +320,7 @@ export default {
     luoUusiHaku: 'Luo uusi haku',
     luoUusiValintaperuste: 'Luo uusi valintaperuste',
     naytaArkistoidut: 'Näytä myös arkistoidut',
-    vaihdaOrganisaatiota: 'Vaihda organisaatiota',
+    vaihdaOrganisaatiota: 'Valitse organisaatio',
     suosikit: 'Suosikit',
     lisaaSuosikkeihin: 'Lisää suosikkeihin',
     haeKoulutuksia: 'Hae koulutuksia',
@@ -330,6 +332,7 @@ export default {
       'Käyttäjältäsi puuttuu järjestelmän käyttöön vaadittavia rooleja',
     organisaatioitaEiLoytynyt:
       'Organisaatioita ei löytynyt. Yritä käyttää pidempää hakusanaa',
+    pikavalinnat: 'Pikavalinnat ({{count}})',
     haeOrganisaatioita: 'Hae organisaatioita',
     rekisterinpitaja: 'Rekisterinpitäjä',
     luoUusiToteutus: 'Luo uusi toteutus',

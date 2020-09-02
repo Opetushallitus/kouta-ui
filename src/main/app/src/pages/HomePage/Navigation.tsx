@@ -5,6 +5,7 @@ import React, {
   useMemo,
   useEffect,
   useRef,
+  useLayoutEffect,
 } from 'react';
 import styled, { css } from 'styled-components';
 import { useEvent } from 'react-use';
@@ -140,12 +141,17 @@ const NavigationBase = ({
   activeItem,
   maxInlineItems,
 }) => {
+  const { t } = useTranslation();
   const organisaatioOid = get(organisaatio, 'oid');
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const onCloseDrawer = useCallback(() => setDrawerOpen(false), [
     setDrawerOpen,
   ]);
+
+  useLayoutEffect(() => {
+    document.documentElement.style.overflowY = drawerOpen ? 'hidden' : 'auto';
+  }, [drawerOpen]);
 
   const onOpenDrawer = useCallback(() => setDrawerOpen(true), [setDrawerOpen]);
 
@@ -182,7 +188,7 @@ const NavigationBase = ({
                     disabled={!organisaatio}
                     onClick={onOpenDrawer}
                     variant="outlined"
-                    title="Vaihda organisaatiota"
+                    title={t('etusivu.vaihdaOrganisaatiota')}
                     {...getTestIdProps('toggleOrganisaatioDrawer')}
                   >
                     <Icon type="menu" />

@@ -4,7 +4,7 @@ import { normalize } from 'polished';
 const GlobalStyle = createGlobalStyle`
 ${normalize()};
 
-body {
+#root {
   background-color: ${({ theme }) => theme.colors.mainBackground};
   font-family: ${({ theme }) => theme.fonts.main};
 }

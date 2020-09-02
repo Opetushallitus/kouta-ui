@@ -127,11 +127,11 @@ const fillTeemakuvaSection = () => {
 const fillNayttamistiedotSection = () => {
   getByTestId('nayttamistiedotSection').within(() => {
     getByTestId('ammattinimikkeetSelect').within(() => {
-      fillAsyncSelect('ammattinimike', 'Luo kohde');
+      fillAsyncSelect('ammattinimike', 'yleiset.luoKohde');
     });
 
     getByTestId('avainsanatSelect').within(() => {
-      fillAsyncSelect('avainsana', 'Luo kohde');
+      fillAsyncSelect('avainsana', 'yleiset.luoKohde');
     });
 
     jatka();

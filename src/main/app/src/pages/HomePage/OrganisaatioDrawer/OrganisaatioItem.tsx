@@ -39,23 +39,23 @@ const FavouriteIcon = ({ active = false, ...props }) => (
 const EditIcon = styled(Icon).attrs({
   role: 'button',
   type: 'edit',
-})``;
+})`
+  margin-top: 2px;
+  font-size: 18px;
+  border-radius: 20px;
+  padding: 4px;
+  color: ${getThemeProp('colors.text.secondary')};
+  &:hover {
+    background-color: ${getThemeProp('colors.grayLighten5')};
+    color: ${getThemeProp('colors.text.primary')};
+  }
+`;
 
 const Container = styled(Box).attrs({
   display: 'flex',
   justifyContent: 'space-between',
-})`
-  ${EditIcon} {
-    transition: opacity 0.25s;
-    opacity: 0;
-  }
-
-  &:hover {
-    ${EditIcon} {
-      opacity: 1;
-    }
-  }
-`;
+  alignItems: 'center',
+})``;
 
 export const OrganisaatioItem = ({
   selected,
@@ -82,21 +82,11 @@ export const OrganisaatioItem = ({
   return (
     <Container>
       <Box flexGrow={1} display="flex" pr={2}>
-        <Box flexGrow={0}>
+        <Box flexGrow={0} mr={1}>
           <Radio checked={selected} onChange={onSelect} disabled={disabled}>
             {getFirstLanguageValue(nimi, language)}
           </Radio>
         </Box>
-        {isEditable && editLinkURL ? (
-          <Typography as="div" ml={1}>
-            <Link to={editLinkURL}>
-              <EditIcon color="text.secondary" fontSize="1.3rem" />
-            </Link>
-          </Typography>
-        ) : null}
-      </Box>
-
-      <Box display="flex">
         {collapse && !isEmpty(children) ? (
           <Box flexGrow={0} pr={2}>
             <CollapseIcon
@@ -105,13 +95,22 @@ export const OrganisaatioItem = ({
             />
           </Box>
         ) : null}
+      </Box>
 
+      <Box display="flex" alignItems="center">
         <FavouriteIcon
           active={favourite}
           disabled={disabled}
           title={t('etusivu.lisaaSuosikkeihin')}
           onClick={disabled ? noop : onToggleFavourite}
         />
+        {isEditable && editLinkURL ? (
+          <Typography as="div" ml={2}>
+            <Link to={editLinkURL}>
+              <EditIcon />
+            </Link>
+          </Typography>
+        ) : null}
       </Box>
     </Container>
   );

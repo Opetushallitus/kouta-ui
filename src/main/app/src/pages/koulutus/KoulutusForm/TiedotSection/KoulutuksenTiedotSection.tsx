@@ -168,7 +168,7 @@ const KoulutusInfo = ({
   );
   const apiUrls = useUrls();
 
-  const tutkinnonosatFieldValue = useFieldValue(`${name}.tutkinnonosat`);
+  const tutkinnonosatFieldValue = useFieldValue(`${name}.tutkinnonosa`);
   const selectedTutkinnonosat = _.find(
     ePeruste?.tutkinnonosat,
     t => t._tutkinnonOsa === _.get(tutkinnonosatFieldValue, 'value')
@@ -178,6 +178,10 @@ const KoulutusInfo = ({
   useEffect(() => {
     change(`${name}.selectedTutkinnonosat`, selectedTutkinnonosat);
   }, [name, selectedTutkinnonosat, change]);
+
+  useEffect(() => {
+    change(`${name}.tutkinnonosaviite`, _.get(selectedTutkinnonosat, 'id'));
+  }, [name, tutkinnonosatFieldValue, change]);
 
   return koulutus || isLoading ? (
     <div className={className}>
@@ -276,7 +280,7 @@ const KoulutusInfo = ({
             >
               <TutkinnonOsatField
                 isLoading={isLoading}
-                name={`${name}.tutkinnonosat`}
+                name={`${name}.tutkinnonosa`}
                 selectedPeruste={ePeruste}
                 language={language}
               />

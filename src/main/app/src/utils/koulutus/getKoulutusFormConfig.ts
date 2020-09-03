@@ -44,7 +44,8 @@ const config = createFormConfigBuilder().registerSections([
             return _.flow([
               eb => eb.validateExistence('eperuste'),
               eb => eb.validateExistence('koulutus'),
-              eb => eb.validateExistence('tutkinnonosat'),
+              eb => eb.validateExistence('tutkinnonosa'),
+              eb => eb.validateExistence('tutkinnonosaviite'),
             ])(eb);
           }),
         required: true,

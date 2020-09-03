@@ -60,16 +60,17 @@ const getKoulutusByFormValues = values => {
   const esikatselu = get(values, 'esikatselu');
 
   const julkinen = Boolean(get(values, 'julkinen'));
-
   const tutkinnonOsat = (get(values, 'tutkinnonosat.osat') || []).map(
     ({
       eperuste: { value: eperusteId },
       koulutus: { value: koulutusId },
-      tutkinnonosat: { value: tutkinnonosatId },
+      tutkinnonosa: { value: tutkinnonosaId },
+      tutkinnonosaviite: tutkinnonosaviite,
     }) => ({
       eperusteId: eperusteId,
-      tutkinnonosatId: tutkinnonosatId,
+      tutkinnonosaId: tutkinnonosaId,
       koulutusId: koulutusId,
+      tutkinnonosaViite: tutkinnonosaviite,
     })
   );
 

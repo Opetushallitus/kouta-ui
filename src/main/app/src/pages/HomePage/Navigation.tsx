@@ -151,6 +151,7 @@ const NavigationBase = ({
 
   useLayoutEffect(() => {
     document.documentElement.style.overflowY = drawerOpen ? 'hidden' : 'auto';
+    return () => (document.documentElement.style.overflowY = 'auto');
   }, [drawerOpen]);
 
   const onOpenDrawer = useCallback(() => setDrawerOpen(true), [setDrawerOpen]);

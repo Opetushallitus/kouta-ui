@@ -181,7 +181,7 @@ const KoulutusInfo = ({
 
   useEffect(() => {
     change(`${name}.tutkinnonosaviite`, _.get(selectedTutkinnonosat, 'id'));
-  }, [name, tutkinnonosatFieldValue, change]);
+  }, [name, tutkinnonosatFieldValue, change, selectedTutkinnonosat]);
 
   return koulutus || isLoading ? (
     <div className={className}>

@@ -65,7 +65,7 @@ const getKoulutusByFormValues = values => {
       eperuste: { value: eperusteId },
       koulutus: { value: koulutusId },
       tutkinnonosa: { value: tutkinnonosaId },
-      tutkinnonosaviite: tutkinnonosaviite,
+      tutkinnonosaviite,
     }) => ({
       eperusteId: eperusteId,
       tutkinnonosaId: tutkinnonosaId,

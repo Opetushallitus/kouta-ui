@@ -35,7 +35,7 @@ export const TeemakuvaSection = props => {
       maxSize={TEEMAKUVA_MAX_SIZE}
       minDimensions={TEEMAKUVA_MIN_DIMENSIONS}
       acceptedFileFormats={TEEMAKUVA_ACCEPTED_FORMATS}
-    ></Field>
+    />
   );
 };
 

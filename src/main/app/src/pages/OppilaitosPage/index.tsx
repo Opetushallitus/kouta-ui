@@ -9,6 +9,7 @@ import OppilaitosFormSteps from '#/src/components/OppilaitosFormSteps';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { ENTITY, CRUD_ROLES } from '#/src/constants';
+import { useUrls } from '#/src/contexts/contextHooks';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useEntityFormConfig } from '#/src/hooks/form';
 import useApiAsync from '#/src/hooks/useApiAsync';
@@ -90,6 +91,8 @@ const OppilaitosPage = ({
   const stepsEnabled = !oppilaitos;
   const showArkistoituTilaOption = !!oppilaitos;
 
+  const apiUrls = useUrls();
+
   return isLoading ? (
     <FullSpin />
   ) : (
@@ -112,6 +115,10 @@ const OppilaitosPage = ({
                 organisaatioOid={organisaatioOid}
                 readOnly={readOnly}
               />
+            }
+            draftUrl={
+              apiUrls.url('konfo-ui.oppilaitos', organisaatioOid) +
+              '?draft=true'
             }
           >
             {organisaatio && (

@@ -9,6 +9,7 @@ import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
 import { ENTITY, CRUD_ROLES, ORGANISAATIOTYYPPI } from '#/src/constants';
+import { useUrls } from '#/src/contexts/contextHooks';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
@@ -101,6 +102,8 @@ const OppilaitoksenOsaPage = ({
 
   const config = getOppilaitoksenOsaFormConfig();
 
+  const apiUrls = useUrls();
+
   return (
     <ReduxForm form="oppilaitoksenOsa" initialValues={initialValues}>
       <FormConfigContext.Provider value={{ ...config, readOnly }}>
@@ -120,6 +123,10 @@ const OppilaitoksenOsaPage = ({
               organisaatioOid={organisaatioOid}
               readOnly={readOnly}
             />
+          }
+          draftUrl={
+            apiUrls.url('konfo-ui.oppilaitoksenOsa', organisaatioOid) +
+            '?draft=true'
           }
         >
           {organisaatio && oppilaitoksenOsaIsResolved ? (

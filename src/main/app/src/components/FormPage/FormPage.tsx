@@ -7,6 +7,7 @@ import styled, { css } from 'styled-components';
 
 import Button from '#/src/components/Button';
 import Container from '#/src/components/Container';
+import { ToggleDraft } from '#/src/components/ToggleDraft';
 import UnsavedChangesDialog from '#/src/components/UnsavedChangesDialog';
 import { useFieldValue, useIsDirty, useIsSubmitting } from '#/src/hooks/form';
 import { getThemeProp } from '#/src/theme';
@@ -105,7 +106,6 @@ type FormPageProps = {
   steps?: React.ReactNode;
   footer?: React.ReactNode;
   draftUrl?: string;
-  toggleDraft?: React.ReactNode;
   hasFooterHomeLink?: boolean;
   readOnly?: boolean;
 };
@@ -116,7 +116,6 @@ const FormPage: React.FC<FormPageProps> = ({
   children = null,
   footer = null,
   draftUrl = null,
-  toggleDraft = null,
   hasFooterHomeLink = true,
   readOnly = false,
 }) => {
@@ -159,7 +158,11 @@ const FormPage: React.FC<FormPageProps> = ({
                 {draftUrl && esikatselu === true ? (
                   <Draft url={draftUrl} />
                 ) : null}
-                {toggleDraft ? <Separator>{toggleDraft}</Separator> : null}
+                {draftUrl ? (
+                  <Separator>
+                    <ToggleDraft />
+                  </Separator>
+                ) : null}
               </Buttons>
               <FooterActions>{footer}</FooterActions>
             </FooterWrapper>

@@ -14,6 +14,7 @@ import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
+import { useUrls } from '#/src/contexts/contextHooks';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useEntityFormConfig } from '#/src/hooks/form';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
@@ -31,6 +32,7 @@ const EditToteutusPage = props => {
       params: { organisaatioOid, oid },
     },
   } = props;
+  const apiUrls = useUrls();
 
   const { data: toteutus, isFetching: isToteutusFetching } = useToteutusByOid(
     oid
@@ -84,6 +86,7 @@ const EditToteutusPage = props => {
               canUpdate={canUpdate}
             />
           }
+          draftUrl={apiUrls.url('konfo-ui.toteutus', oid) + '?draft=true'}
           steps={<FormSteps activeStep={ENTITY.TOTEUTUS} />}
           footer={
             toteutus ? (

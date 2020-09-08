@@ -1,34 +1,34 @@
 import _fp from 'lodash/fp';
 
 import {
-  KOULUTUSTYYPPI,
+  Alkamiskausityyppi,
+  HAKULOMAKETYYPPI,
+  JULKAISUTILA,
   KOULUTUSTYYPIT,
+  KOULUTUSTYYPPI,
+  TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
-  TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
-  JULKAISUTILA,
-  HAKULOMAKETYYPPI,
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
-  Alkamiskausityyppi,
 } from '#/src/constants';
 import { ToteutusFormValues } from '#/src/types/toteutusTypes';
 import {
-  validateExistence,
-  validateInteger,
-  validateExistenceOfDate,
   validate,
+  validateExistence,
+  validateExistenceOfDate,
+  validateInteger,
   validateTranslations,
   validateUrl,
 } from '#/src/utils/form/createErrorBuilder';
 import createFormConfigBuilder from '#/src/utils/form/createFormConfigBuilder';
 import {
-  validateIfJulkaistu,
+  createOptionalTranslatedFieldConfig,
   getKielivalinta,
   kieliversiotSectionConfig,
   pohjaValintaSectionConfig,
-  validateRelations,
-  createOptionalTranslatedFieldConfig,
   validateIf,
+  validateIfJulkaistu,
+  validateRelations,
 } from '#/src/utils/form/formConfigUtils';
 
 const validateDateTimeRange = (alkaaFieldName, paattyyFieldName) => (
@@ -482,6 +482,11 @@ const config = createFormConfigBuilder().registerSections([
     koulutustyypit: KOULUTUSTYYPIT,
   },
   {
+    section: 'esikatselu',
+    field: 'esikatselu',
+    koulutustyypit: KOULUTUSTYYPIT,
+  },
+  {
     koulutustyypit: KOULUTUSTYYPIT,
     section: 'tila',
     field: 'tila',
@@ -497,6 +502,11 @@ const config = createFormConfigBuilder().registerSections([
           t: 'yleiset.soraKuvaus',
         },
       ])(eb.validateExistence('tila'), values),
+  },
+  {
+    section: 'esikatselu',
+    field: 'esikatselu',
+    koulutustyypit: KOULUTUSTYYPIT,
   },
 ]);
 

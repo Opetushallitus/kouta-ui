@@ -30,6 +30,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     tila,
     teemakuva,
     sorakuvausId,
+    esikatselu = false,
   } = toteutus;
 
   const {
@@ -233,6 +234,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       hakuaikaPaattyy: metadata?.hakuaika?.paattyy,
     },
     soraKuvaus: toSelectValue(sorakuvausId),
+    esikatselu,
   };
 };
 

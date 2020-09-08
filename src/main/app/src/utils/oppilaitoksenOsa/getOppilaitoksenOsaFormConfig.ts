@@ -27,6 +27,10 @@ const config = createFormConfigBuilder().registerSections([
     field: 'yhteystiedot',
   },
   tilaSectionConfig,
+  {
+    section: 'esikatselu',
+    field: 'esikatselu',
+  },
 ]);
 
 const getOppilaitoksenOsaFormConfig = () => config.getConfig();

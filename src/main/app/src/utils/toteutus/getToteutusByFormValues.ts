@@ -53,6 +53,8 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
 
   const ajankohta = values?.jarjestamistiedot?.ajankohta;
 
+  const esikatselu = values?.esikatselu;
+
   return {
     nimi: pickTranslations(values?.tiedot?.nimi || {}),
     tarjoajat: values?.tarjoajat || [],
@@ -61,6 +63,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
     muokkaaja,
     teemakuva: values?.teemakuva,
     sorakuvausId: values?.soraKuvaus?.value || null,
+    esikatselu,
     metadata: {
       opetus: {
         lisatiedot: (values?.jarjestamistiedot?.osiot || []).map(

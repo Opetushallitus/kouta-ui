@@ -12,14 +12,15 @@ import FullSpin from '#/src/components/FullSpin';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { KOULUTUSTYYPPI, ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
+import { useUrls } from '#/src/contexts/contextHooks';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useEntityFormConfig } from '#/src/hooks/form';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { getFormValuesByValintaperuste } from '#/src/utils/valintaperuste/getFormValuesByValintaperuste';
 import { useValintaperusteById } from '#/src/utils/valintaperuste/getValintaperusteById';
 
+import ValintaperusteForm from '../ValintaperusteForm';
 import { ValintaperusteFooter } from './ValintaperusteFooter';
-import ValintaperusteForm from './ValintaperusteForm';
 
 const EditValintaperustePage = props => {
   const {
@@ -47,6 +48,8 @@ const EditValintaperustePage = props => {
     valintaperuste?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
   );
 
+  const apiUrls = useUrls();
+
   return isLoading ? (
     <FullSpin />
   ) : (
@@ -72,6 +75,7 @@ const EditValintaperustePage = props => {
               />
             ) : null
           }
+          draftUrl={apiUrls.url('konfo-ui.valintaperuste', id) + '?draft=true'}
         >
           <RelationInfoContainer>
             <OrganisaatioRelation organisaatioOid={organisaatioOid} />

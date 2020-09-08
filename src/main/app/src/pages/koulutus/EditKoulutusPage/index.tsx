@@ -11,7 +11,7 @@ import FormSteps from '#/src/components/FormSteps';
 import FullSpin from '#/src/components/FullSpin';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
-import ToggleDraft from '#/src/components/ToggleDraft';
+import { ToggleDraft } from '#/src/components/ToggleDraft';
 import { Spin } from '#/src/components/virkailija';
 import { ENTITY, CRUD_ROLES } from '#/src/constants';
 import { useUrls } from '#/src/contexts/contextHooks';

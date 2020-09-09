@@ -9,7 +9,7 @@ const SwitchContainer = styled.div`
   display: inline-block;
 `;
 
-const HiddenSwitch = styled.input.attrs({ type: 'Switch' })`
+const HiddenSwitch = styled.input.attrs({ type: 'checkbox' })`
   border: 0;
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
@@ -49,6 +49,7 @@ const Label = styled.label`
   line-height: 1.5;
   color: ${getThemeProp('palette.text.primary')};
   align-items: center;
+  cursor: pointer;
 
   ${disabledStyle}
 `;
@@ -77,29 +78,52 @@ const SwitchBall = styled.div`
   transition: box-shadow 0.25s;
 `;
 
-const Switch = ({
-  className,
-  checked,
-  children,
-  error = false,
-  disabled = false,
-  ...props
-}) => (
-  <Label disabled={disabled}>
-    <SwitchWrapper>
-      <SwitchContainer className={className}>
-        <HiddenSwitch checked={checked} disabled={disabled} {...props} />
-        <StyledSwitch checked={checked} error={error}>
-          <Spring to={{ left: checked ? '1.3em' : '0.1em' }}>
-            {({ left }) => (
-              <SwitchBall error={error} checked={checked} style={{ left }} />
-            )}
-          </Spring>
-        </StyledSwitch>
-      </SwitchContainer>
-    </SwitchWrapper>
-    {children ? <LabelWrapper>{children}</LabelWrapper> : null}
-  </Label>
+type CheckboxBaseProps = {
+  disabled?: boolean;
+  checked?: boolean;
+  children?: React.ReactNode;
+  error?: boolean;
+  className?: string;
+  indeterminate?: boolean;
+  fullWidth?: boolean;
+};
+
+export type SwitchProps = CheckboxBaseProps &
+  Omit<React.ComponentProps<typeof HiddenSwitch>, keyof CheckboxBaseProps>;
+
+const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
+  (
+    {
+      className,
+      checked = false,
+      children,
+      error = false,
+      disabled = false,
+      ...props
+    },
+    ref
+  ) => (
+    <Label disabled={disabled}>
+      <SwitchWrapper>
+        <SwitchContainer className={className}>
+          <HiddenSwitch
+            checked={checked}
+            disabled={disabled}
+            ref={ref}
+            {...props}
+          />
+          <StyledSwitch checked={checked} error={error}>
+            <Spring to={{ left: checked ? '1.3em' : '0.1em' }}>
+              {({ left }) => (
+                <SwitchBall error={error} checked={checked} style={{ left }} />
+              )}
+            </Spring>
+          </StyledSwitch>
+        </SwitchContainer>
+      </SwitchWrapper>
+      {children ? <LabelWrapper>{children}</LabelWrapper> : null}
+    </Label>
+  )
 );
 
 export default Switch;

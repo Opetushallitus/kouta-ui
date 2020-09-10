@@ -259,6 +259,7 @@ const Navigation = ({ maxInlineItems = 3, ...props }) => {
     ...props,
   };
 
+  // TODO: This somehow causes rendering the navigation bar twice during tests. Should be fixed.
   return (
     <>
       <div ref={ref}>

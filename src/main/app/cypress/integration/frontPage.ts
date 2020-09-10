@@ -158,7 +158,7 @@ describe('frontPage', () => {
   });
 
   it('should display navigation links', () => {
-    getByTestId('navigaatio')
+    cy.findAllByTestId('navigaatio')
       .should('contain', 'yleiset.koulutukset')
       .should('contain', 'yleiset.toteutukset')
       .should('contain', 'yleiset.haut')

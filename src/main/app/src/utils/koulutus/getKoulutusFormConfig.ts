@@ -21,11 +21,11 @@ import {
 } from '#/src/utils/form/formConfigUtils';
 
 const getMinTarjoajat = values => {
-  return _.get(values, 'minTarjoajat', 1);
+  return values?.minTarjoajat ?? 1;
 };
 
 const oneAndOnlyOneTutkinnonOsa = values =>
-  _.get(values, 'tutkinnonosat.osat')?.length === 1;
+  values?.tutkinnonosat?.osat?.length === 1;
 
 const config = createFormConfigBuilder().registerSections([
   koulutustyyppiSectionConfig,

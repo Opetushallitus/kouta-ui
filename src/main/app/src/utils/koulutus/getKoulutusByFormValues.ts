@@ -1,101 +1,77 @@
-import { get, pick } from 'lodash';
+import _ from 'lodash/fp';
 import { KOULUTUSTYYPPI } from '#/src/constants';
 
-const getKielivalinta = values => get(values, 'kieliversiot') || [];
-
 const pickNimiFromSelectedTutkinnonOsat = (values, kielivalinta) => {
-  const osat = get(values, 'tutkinnonosat.osat', []);
+  const osat = values?.tutkinnonosat?.osat ?? [];
   return osat.length === 1
-    ? pick(osat[0].selectedTutkinnonosat?.nimi, kielivalinta)
+    ? _.pick(kielivalinta, osat[0].selectedTutkinnonosat?.nimi)
     : null;
 };
 
 const getKoulutusByFormValues = values => {
   const { muokkaaja, tila } = values;
-  const kielivalinta = getKielivalinta(values);
-  const pohjanTarjoajat = get(values, 'pohja.tarjoajat');
+  const kielivalinta = values?.kieliversiot ?? [];
+  const pickTranslations = _.pick(kielivalinta);
+
+  const pohjanTarjoajat = values?.pohja?.tarjoajat;
   const kaytaPohjanJarjestajaa =
-    get(values, 'tarjoajat.kaytaPohjanJarjestajaa') || false;
-  const tarjoajat =
-    pohjanTarjoajat && kaytaPohjanJarjestajaa
-      ? pohjanTarjoajat
-      : get(values, 'tarjoajat.tarjoajat') || [];
+    values?.tarjoajat?.kaytaPohjanJarjestajaa ?? false;
 
-  const koulutusKoodiUri = get(values, 'information.koulutus.value') || null;
-  const koulutustyyppi = get(values, 'koulutustyyppi') || null;
-  const osiot = get(values, 'lisatiedot.osiot') || [];
-  const osioKuvaukset = get(values, 'lisatiedot.osioKuvaukset') || {};
-
-  const ePerusteId = get(values, 'information.eperuste.value');
-
-  const osiotWithKuvaukset = osiot.map(({ value }) => ({
-    otsikkoKoodiUri: value,
-    teksti: pick(osioKuvaukset[value] || {}, kielivalinta),
-  }));
-
-  const kuvaus = pick(get(values, 'description.kuvaus') || {}, kielivalinta);
-  const nimi =
-    koulutustyyppi === KOULUTUSTYYPPI.TUTKINNON_OSA
-      ? pickNimiFromSelectedTutkinnonOsat(values, kielivalinta) ||
-        pick(get(values, 'tutkinnonosat.nimi') || {}, kielivalinta)
-      : pick(get(values, 'information.nimi') || {}, kielivalinta);
-
-  const opintojenLaajuusKoodiUri =
-    get(values, 'information.opintojenLaajuus.value') || null;
-
-  const tutkintonimikeKoodiUrit = (
-    get(values, 'information.tutkintonimike') || []
-  ).map(({ value }) => value);
-
-  const koulutusalaKoodiUrit = (
-    get(values, 'information.koulutusalat') || []
-  ).map(({ value }) => value);
-
-  const kuvauksenNimi = pick(
-    get(values, 'description.nimi') || {},
-    kielivalinta
-  );
-
-  const teemakuva = get(values, 'teemakuva');
-  const esikatselu = get(values, 'esikatselu');
-
-  const julkinen = Boolean(get(values, 'julkinen'));
-  const tutkinnonOsat = (get(values, 'tutkinnonosat.osat') || []).map(
-    ({
-      eperuste: { value: eperusteId },
-      koulutus: { value: koulutusId },
-      tutkinnonosa: { value: tutkinnonosaId },
-      tutkinnonosaviite,
-    }) => ({
-      eperusteId: eperusteId,
-      tutkinnonosaId: tutkinnonosaId,
-      koulutusId: koulutusId,
-      tutkinnonosaViite: tutkinnonosaviite,
-    })
-  );
+  const koulutustyyppi = values?.koulutustyyppi || null;
+  const osiot = values?.lisatiedot?.osiot ?? [];
 
   return {
     johtaaTutkintoon: true,
     muokkaaja,
     tila,
     kielivalinta,
-    tarjoajat,
-    koulutusKoodiUri,
+    tarjoajat:
+      pohjanTarjoajat && kaytaPohjanJarjestajaa
+        ? pohjanTarjoajat
+        : values?.tarjoajat?.tarjoajat || [],
+    koulutusKoodiUri: values?.information?.koulutus?.value || null,
     koulutustyyppi,
-    nimi,
-    julkinen,
-    esikatselu,
-    ePerusteId,
-    teemakuva,
+    nimi:
+      koulutustyyppi === KOULUTUSTYYPPI.TUTKINNON_OSA
+        ? pickNimiFromSelectedTutkinnonOsat(values, kielivalinta) ??
+          pickTranslations(values?.tutkinnonosat?.nimi ?? {})
+        : pickTranslations(values?.information?.nimi ?? {}),
+    julkinen: Boolean(values?.julkinen),
+    esikatselu: values?.esikatselu,
+    ePerusteId: values?.information?.eperuste?.value || null,
+    teemakuva: values?.teemakuva,
     metadata: {
-      tutkinnonOsat: tutkinnonOsat,
+      tutkinnonOsat: (values?.tutkinnonosat?.osat ?? []).map(
+        ({
+          eperuste: { value: ePerusteId },
+          koulutus: { value: koulutusKoodiUri },
+          tutkinnonosa: { value: tutkinnonosaId },
+          tutkinnonosaviite: tutkinnonosaViite,
+        }) => ({
+          ePerusteId: Number(ePerusteId),
+          koulutusKoodiUri,
+          tutkinnonosaId: Number(tutkinnonosaId),
+          tutkinnonosaViite: Number(tutkinnonosaViite),
+        })
+      ),
       tyyppi: koulutustyyppi,
-      lisatiedot: osiotWithKuvaukset,
-      kuvaus,
-      opintojenLaajuusKoodiUri,
-      tutkintonimikeKoodiUrit,
-      kuvauksenNimi,
-      koulutusalaKoodiUrit,
+      lisatiedot: osiot.map(({ value }) => ({
+        otsikkoKoodiUri: value,
+        teksti: pickTranslations(
+          values?.lisatiedot?.osioKuvaukset?.[value] ?? {},
+          kielivalinta
+        ),
+      })),
+      kuvaus: pickTranslations(values?.description?.kuvaus ?? {}),
+      opintojenLaajuusKoodiUri:
+        values?.information?.opintojenLaajuus?.value || null,
+      tutkintonimikeKoodiUrit: (values?.information?.tutkintonimike ?? []).map(
+        ({ value }) => value
+      ),
+      kuvauksenNimi: pickTranslations(values?.description?.nimi ?? {}),
+      koulutusalaKoodiUrit: (values?.information?.koulutusalat ?? []).map(
+        ({ value }) => value
+      ),
     },
   };
 };

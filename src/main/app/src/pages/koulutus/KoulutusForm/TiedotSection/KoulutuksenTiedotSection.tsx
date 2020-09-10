@@ -92,7 +92,7 @@ const InfoRow = ({ title, description, suffix }) => {
       </Cell>
       <Cell key="description-cell">
         <Typography>
-          {_.isNil(description) || _.get(description, 'length') === 0
+          {_.isNil(description) || description?.length === 0
             ? '-'
             : description}
           {description && suffix ? ` ${suffix}` : ''}
@@ -156,7 +156,7 @@ const KoulutusInfo = ({
       koulutusala: koulutus
         ? getLanguageValue(koulutus.koulutusala, language)
         : undefined,
-      opintojenlaajuus: _.get(ePeruste, 'laajuus'),
+      opintojenlaajuus: ePeruste?.laajuus,
       nimikkeet: ePeruste
         ? getListNimiLanguageValues(ePeruste.tutkintonimikeKoodit, language)
         : [],
@@ -171,7 +171,7 @@ const KoulutusInfo = ({
   const tutkinnonosatFieldValue = useFieldValue(`${name}.tutkinnonosa`);
   const selectedTutkinnonosat = _.find(
     ePeruste?.tutkinnonosat,
-    t => t._tutkinnonOsa === _.get(tutkinnonosatFieldValue, 'value')
+    t => t._tutkinnonOsa === tutkinnonosatFieldValue?.value
   );
 
   const { change } = useBoundFormActions();
@@ -180,7 +180,7 @@ const KoulutusInfo = ({
   }, [name, selectedTutkinnonosat, change]);
 
   useEffect(() => {
-    change(`${name}.tutkinnonosaviite`, _.get(selectedTutkinnonosat, 'id'));
+    change(`${name}.tutkinnonosaviite`, selectedTutkinnonosat?.id);
   }, [name, tutkinnonosatFieldValue, change, selectedTutkinnonosat]);
 
   return koulutus || isLoading ? (
@@ -221,18 +221,18 @@ const KoulutusInfo = ({
                             href={apiUrls.url(
                               'eperusteet.kooste',
                               language,
-                              _.get(ePeruste, 'id')
+                              ePeruste?.id
                             )}
                             target="_blank"
                           >
-                            {_.get(ePeruste, 'diaarinumero')}
+                            {ePeruste?.diaarinumero}
                           </Anchor>
                         ),
                       },
                       {
                         title: t('yleiset.voimaantulo'),
                         description: getReadableDateTime(
-                          _.get(ePeruste, 'voimassaoloAlkaa')
+                          ePeruste?.voimassaoloAlkaa
                         ),
                       },
                       {
@@ -304,12 +304,12 @@ const KoulutusInfo = ({
                       href={apiUrls.url(
                         'eperusteet.tutkinnonosat',
                         language,
-                        _.get(ePeruste, 'id'),
-                        _.get(selectedTutkinnonosat, 'id')
+                        ePeruste?.id,
+                        selectedTutkinnonosat?.id
                       )}
                       target="_blank"
                     >
-                      {_.get(selectedTutkinnonosat, 'id')}
+                      {selectedTutkinnonosat?.id}
                     </Anchor>
                   ),
                 },
@@ -337,7 +337,7 @@ const KoulutuksenTiedotSection = ({
   selectLabel: selectLabelProp,
 }) => {
   const { t } = useTranslation();
-  const koulutusFieldValue = _.get(koulutuskoodi, 'value');
+  const koulutusFieldValue = koulutuskoodi?.value;
 
   const { data: koulutus, isLoading } = useApiAsync({
     promiseFn: getKoulutusByKoodi,
@@ -346,13 +346,12 @@ const KoulutuksenTiedotSection = ({
   });
 
   const ePerusteFieldValue = useFieldValue(`${name}.eperuste`);
-  const ePerusteet = _.get(koulutus, 'ePerusteet');
+  const ePerusteet = koulutus?.ePerusteet;
 
   const selectedPeruste = _.find(
     ePerusteet,
     ePeruste =>
-      ePeruste.id.toString() ===
-      _.get(ePerusteFieldValue, 'value', '').toString()
+      ePeruste.id.toString() === _.toString(ePerusteFieldValue?.value ?? '')
   );
 
   const { change } = useBoundFormActions();

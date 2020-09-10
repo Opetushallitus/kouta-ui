@@ -63,7 +63,7 @@
     "format": "prettier --write './src/**/*.{js,jsx,ts,tsx}' './cypress/**/*.{js,jsx,ts,tsx}'",
     "cypress:run": "cypress run -b chrome",
     "cypress:open": "cypress open -b chrome",
-    "test:integration": "REACT_APP_LANG=cimode START_SERVER_AND_TEST_INSECURE=1 CYPRESS_RETRIES=2 NODE_ENV=test REACT_APP_CYPRESS=true start-server-and-test start https://localhost:3000 'npm run cypress:run -- --headless'",
+    "test:integration": "DISABLE_LOCAL_PROXY=true REACT_APP_LANG=cimode START_SERVER_AND_TEST_INSECURE=1 CYPRESS_RETRIES=2 NODE_ENV=test REACT_APP_CYPRESS=true start-server-and-test start https://localhost:3000 'npm run cypress:run -- --headless'",
     "test:ci": "CI=true npm run test:integration"
   },
   "browserslist": [

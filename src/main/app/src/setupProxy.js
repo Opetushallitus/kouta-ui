@@ -2,7 +2,11 @@
 // https://create-react-app.dev/docs/proxying-api-requests-in-development
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
-const { DEV_VIRKAILIJA_URL, REACT_APP_DEV_SERVER_URL } = process.env;
+const {
+  DEV_VIRKAILIJA_URL,
+  REACT_APP_DEV_SERVER_URL,
+  DISABLE_LOCAL_PROXY,
+} = process.env;
 
 const devProxyMiddleware = createProxyMiddleware({
   autoRewrite: true,
@@ -16,10 +20,12 @@ const devProxyMiddleware = createProxyMiddleware({
 });
 
 module.exports = function (app) {
-  app.use('*', function (req, res, next) {
-    return ['/', '/kouta'].includes(req.originalUrl) ||
-      req.originalUrl.startsWith('/kouta/')
-      ? next()
-      : devProxyMiddleware(req, res, next);
-  });
+  if (!DISABLE_LOCAL_PROXY) {
+    app.use('*', function (req, res, next) {
+      return ['/', '/kouta'].includes(req.originalUrl) ||
+        req.originalUrl.startsWith('/kouta/')
+        ? next()
+        : devProxyMiddleware(req, res, next);
+    });
+  }
 };

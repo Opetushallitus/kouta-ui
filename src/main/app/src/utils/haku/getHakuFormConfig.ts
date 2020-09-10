@@ -58,6 +58,33 @@ const config = createFormConfigBuilder().registerSections([
         required: true,
       },
       {
+        field: '.toteutuksenAjankohta',
+      },
+      {
+        field: '.alkamiskausi',
+        required: true,
+        validate: validateIfJulkaistu(eb =>
+          eb.validateExistence('aikataulut.alkamiskausi')
+        ),
+      },
+      {
+        field: '.alkamisvuosi',
+        validate: validateIfJulkaistu(eb =>
+          eb.validateExistence('aikataulut.alkamisvuosi')
+        ),
+      },
+      {
+        field: '.tiedossaTarkkaAjankohta',
+      },
+      {
+        field: '.tarkkaAjankohtaAlkaa',
+        required: true,
+      },
+      {
+        field: '.tarkkaAjankohtaPaattyy',
+        required: true,
+      },
+      {
         field: '.hakuaika',
         validate: validateIfJulkaistu(
           (errorBuilder, values) =>

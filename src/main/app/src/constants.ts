@@ -256,9 +256,3 @@ export const CRUD_ROLES = {
 
 export const HAKEUTUMINEN = 'hakeutuminen';
 export const ILMOITTAUTUMINEN = 'ilmoittautuminen';
-
-export const HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA = {
-  MUU_HAKULOMAKE: 'muuHakulomake',
-  HAKEMUSPALVELU: 'hakemuspalvelu',
-  EI_SAHKOISTA_HAKUA: 'eiSahkoistaHakua',
-};

@@ -13,16 +13,12 @@ import DateTimeRange from '#/src/components/DateTimeRange';
 import { createFormFieldComponent } from '#/src/components/formFields';
 import { useFieldValue } from '#/src/hooks/form';
 import {
-  HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA,
+  HAKULOMAKETYYPPI,
   HAKEUTUMINEN,
   ILMOITTAUTUMINEN,
 } from '#/src/constants';
 
-const {
-  MUU_HAKULOMAKE,
-  HAKEMUSPALVELU,
-  EI_SAHKOISTA_HAKUA,
-} = HAKEUTUMIS_TAI_ILMOITTAUTUMISTAPA;
+const { MUU, ATARU, EI_SAHKOISTA_HAKUA } = HAKULOMAKETYYPPI;
 
 const StyledGrayRadio = styled(Radio)`
   background-color: ${getThemeProp('colors.grayLighten6', transparentize(0.5))};
@@ -87,13 +83,13 @@ const HakeutumisTaiIlmoittautusmistapaFields = createFormFieldComponent(
     return hakuTapa ? (
       <Box display="flex" flexDirection="column" alignItems="stretch">
         <StyledGrayRadio
-          checked={value === MUU_HAKULOMAKE}
-          value={MUU_HAKULOMAKE}
+          checked={value === MUU}
+          value={MUU}
           onChange={onChange}
         >
           {t('toteutuslomake.muuHakulomake')}
         </StyledGrayRadio>
-        {value === MUU_HAKULOMAKE && (
+        {value === MUU && (
           <MuuHakulomakeBox
             tapa={hakuTapa}
             section={section}
@@ -101,8 +97,8 @@ const HakeutumisTaiIlmoittautusmistapaFields = createFormFieldComponent(
           />
         )}
         <StyledGrayRadio
-          checked={value === HAKEMUSPALVELU}
-          value={HAKEMUSPALVELU}
+          checked={value === ATARU}
+          value={ATARU}
           onChange={onChange}
         >
           {t('toteutuslomake.hakemuspalvelu')}

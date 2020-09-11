@@ -23,7 +23,13 @@ const toOptionalInteger = value => {
 };
 
 const getToteutusByFormValues = values => {
-  const { koulutustyyppi, tila, muokkaaja, jarjestamistiedot } = values;
+  const {
+    koulutustyyppi,
+    tila,
+    muokkaaja,
+    jarjestamistiedot,
+    hakeutumisTaiIlmoittautumistapa: HTIT = {},
+  } = values;
   const kielivalinta = values?.kieliversiot || [];
   const pickTranslations = _.pick(kielivalinta);
 
@@ -104,13 +110,13 @@ const getToteutusByFormValues = values => {
           onkoStipendia && isNumeric(values?.jarjestamistiedot?.stipendinMaara)
             ? parseFloat(values.jarjestamistiedot.stipendinMaara)
             : null,
-        diplomiKoodiUrit: (values?.jarjestamistiedot.diplomiTyypit || []).map(
+        diplomiKoodiUrit: (values?.jarjestamistiedot?.diplomiTyypit || []).map(
           ({ value }) => value
         ),
         diplomiKuvaus: pickTranslations(
           values?.jarjestamistiedot?.diplomiKuvaus || {}
         ),
-        A1JaA2Kielivalikoima: (values?.jarjestamistiedot.A1A2Kielet || []).map(
+        A1JaA2Kielivalikoima: (values?.jarjestamistiedot?.A1A2Kielet || []).map(
           ({ value }) => value
         ),
         aidinkieliKielivalikoima: (
@@ -208,6 +214,15 @@ const getToteutusByFormValues = values => {
           ),
         })
       ),
+      hakulomakeLinkki: pickTranslations(HTIT?.linkki),
+      lisatietoaHakeutumisesta: pickTranslations(HTIT?.lisatiedot),
+      lisatietoaValintaperusteista: pickTranslations(
+        HTIT?.lisatiedotValintaperusteista
+      ),
+      hakuaika: {
+        alkaa: HTIT?.hakuaikaAlkaa || null,
+        paattyy: HTIT?.hakuaikaPaattyy || null,
+      },
     },
   };
 };

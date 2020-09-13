@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-import { isArray } from 'lodash';
 import { useTranslation } from 'react-i18next';
+import _ from 'lodash/fp';
 
 import Button from '#/src/components/Button';
 import Modal from '#/src/components/Modal';
@@ -25,11 +25,14 @@ const useOptions = data => {
 
   return useMemo(
     () =>
-      isArray(data)
-        ? data.map(({ nimi, oid }) => ({
-            value: oid,
-            label: getFirstLanguageValue(nimi, language),
-          }))
+      _.isArray(data)
+        ? _.pipe(
+            _.map(({ nimi, oid }) => ({
+              value: oid,
+              label: getFirstLanguageValue(nimi, language),
+            })),
+            _.orderBy('label', 'asc')
+          )(data)
         : [],
     [data, language]
   );

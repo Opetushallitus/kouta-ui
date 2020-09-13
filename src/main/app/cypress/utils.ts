@@ -22,7 +22,7 @@ export const paste = loggable('paste', value => $element => {
   return cy.wrap($element);
 });
 
-export const getByTestId = testId => cy.get(`[data-testid="${testId}"]`);
+export const getByTestId = cy.findByTestId;
 
 export const getRadio = value =>
   cy.get(`input[type="radio"][value="${value}"]`);

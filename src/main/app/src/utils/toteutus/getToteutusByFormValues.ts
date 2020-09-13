@@ -1,7 +1,10 @@
 import _ from 'lodash/fp';
 
-import { isNumeric, getKoutaDateString } from '#/src/utils';
+import { isNumeric, getKoutaDateString, isPartialDate } from '#/src/utils';
 import serializeSisaltoField from '#/src/utils/form/serializeSisaltoField';
+import { serializeEditorState } from '#/src/components/Editor/utils';
+import { HAKULOMAKETYYPPI } from '#/src/constants';
+const { MUU, EI_SAHKOISTA_HAKUA } = HAKULOMAKETYYPPI;
 
 const getOsaamisalatByValues = ({ osaamisalat, pickTranslations }) => {
   return (osaamisalat || []).map(
@@ -30,6 +33,7 @@ const getToteutusByFormValues = values => {
     jarjestamistiedot,
     hakeutumisTaiIlmoittautumistapa: HTIT = {},
   } = values;
+  const hakulomaketyyppi = HTIT?.hakeutumisTaiIlmoittautumistapa;
   const kielivalinta = values?.kieliversiot || [];
   const pickTranslations = _.pick(kielivalinta);
 
@@ -214,15 +218,36 @@ const getToteutusByFormValues = values => {
           ),
         })
       ),
-      hakulomakeLinkki: pickTranslations(HTIT?.linkki),
-      lisatietoaHakeutumisesta: pickTranslations(HTIT?.lisatiedot),
-      lisatietoaValintaperusteista: pickTranslations(
-        HTIT?.lisatiedotValintaperusteista
-      ),
-      hakuaika: {
-        alkaa: HTIT?.hakuaikaAlkaa || null,
-        paattyy: HTIT?.hakuaikaPaattyy || null,
-      },
+      hakutermi: HTIT?.hakuTapa,
+      hakulomaketyyppi,
+      hakulomakeLinkki:
+        hakulomaketyyppi === MUU ? pickTranslations(HTIT?.linkki) : {},
+      lisatietoaHakeutumisesta:
+        hakulomaketyyppi === MUU || hakulomaketyyppi === EI_SAHKOISTA_HAKUA
+          ? _.pipe(
+              pickTranslations,
+              _.mapValues(serializeEditorState)
+            )(HTIT?.lisatiedot)
+          : {},
+      lisatietoaValintaperusteista:
+        hakulomaketyyppi === MUU
+          ? _.pipe(
+              pickTranslations,
+              _.mapValues(serializeEditorState)
+            )(HTIT?.lisatiedotValintaperusteista)
+          : {},
+      hakuaika:
+        hakulomaketyyppi === MUU &&
+        !(_.isNil(HTIT?.hakuaikaAlkaa) && _.isNil(HTIT?.hakuaikaPaattyy))
+          ? {
+              alkaa: isPartialDate(HTIT?.hakuaikaAlkaa)
+                ? null
+                : HTIT?.hakuaikaAlkaa,
+              paattyy: isPartialDate(HTIT?.hakuaikaPaattyy)
+                ? null
+                : HTIT?.hakuaikaPaattyy,
+            }
+          : null,
     },
   };
 };

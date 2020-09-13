@@ -1,5 +1,6 @@
 import _ from 'lodash/fp';
 import parseSisaltoField from '#/src/utils/form/parseSisaltoField';
+import { parseEditorState } from '#/src/components/Editor/utils';
 
 const getFormValuesByToteutus = toteutus => {
   const {
@@ -202,6 +203,21 @@ const getFormValuesByToteutus = toteutus => {
       })
     ),
     teemakuva,
+    hakeutumisTaiIlmoittautumistapa: {
+      hakeutumisTaiIlmoittautumistapa: metadata?.hakulomaketyyppi,
+      hakuTapa: metadata?.hakutermi,
+      linkki: metadata?.hakulomakeLinkki,
+      lisatiedot: _.mapValues(
+        parseEditorState,
+        metadata?.lisatietoaHakeutumisesta
+      ),
+      lisatiedotValintaperusteista: _.mapValues(
+        parseEditorState,
+        metadata?.lisatietoaValintaperusteista
+      ),
+      hakuaikaAlkaa: metadata?.hakuaika?.alkaa,
+      hakuaikaPaattyy: metadata?.hakuaika?.paattyy,
+    },
   };
 };
 

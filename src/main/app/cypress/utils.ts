@@ -293,3 +293,9 @@ export const fillKieliversiotSection = (
     pressJatka && jatka();
   });
 };
+
+export const fillPohjaSection = () => {
+  getByTestId('pohjaSection').within(() => {
+    jatka();
+  });
+};

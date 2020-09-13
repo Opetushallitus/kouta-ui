@@ -7,6 +7,7 @@ import {
   jatka,
   paste,
   fillKieliversiotSection,
+  fillPohjaSection,
 } from '#/cypress/utils';
 
 import createSoraKuvaus from '#/cypress/data/soraKuvaus';
@@ -15,12 +16,6 @@ import { stubSoraKuvausFormRoutes } from '#/cypress/soraKuvausFormUtils';
 const fillKoulutustyyppiSection = () => {
   getByTestId('koulutustyyppiSection').within(() => {
     fillKoulutustyyppiSelect(['amm']);
-  });
-};
-
-const fillPohjaSection = () => {
-  getByTestId('pohjaSection').within(() => {
-    jatka();
   });
 };
 

@@ -11,6 +11,7 @@ import {
   paste,
   fillValintakokeetSection,
   fillKieliversiotSection,
+  fillPohjaSection,
 } from '#/cypress/utils';
 import valintaperuste from '#/cypress/data/valintaperuste';
 import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils';
@@ -22,12 +23,6 @@ const tallenna = () => {
 const fillKoulutustyyppiSection = path => {
   getByTestId('tyyppiSection').within(() => {
     fillKoulutustyyppiSelect(path);
-  });
-};
-
-const fillPohjaSection = () => {
-  getByTestId('pohjaSection').within(() => {
-    jatka();
   });
 };
 

@@ -11,6 +11,7 @@ import {
   getByTestId,
   paste,
   fillKieliversiotSection,
+  fillPohjaSection,
 } from '#/cypress/utils';
 
 import koulutus from '#/cypress/data/koulutus';
@@ -19,12 +20,6 @@ import { stubToteutusFormRoutes } from '#/cypress/toteutusFormUtils';
 const fillTilaSection = (tila = 'julkaistu') => {
   getByTestId('tilaSection').within(() => {
     getRadio(tila).check({ force: true });
-  });
-};
-
-const fillPohjaSection = () => {
-  getByTestId('pohjaSection').within(() => {
-    jatka();
   });
 };
 

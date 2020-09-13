@@ -8,15 +8,10 @@ import {
   getByTestId,
   jatka,
   paste,
+  fillPohjaSection,
 } from '#/cypress/utils';
 
 import { stubHakuFormRoutes } from '#/cypress/hakuFormUtils';
-
-const fillPohjaSection = () => {
-  getByTestId('pohjaSection').within(() => {
-    jatka();
-  });
-};
 
 const fillTilaSection = (tila = 'julkaistu') => {
   getByTestId('tilaSection').within(() => {

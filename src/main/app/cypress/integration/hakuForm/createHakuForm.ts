@@ -2,7 +2,7 @@ import {
   getRadio,
   getSelectOption,
   fillDateTimeInput,
-  chooseKieliversiotLanguages,
+  fillKieliversiotSection,
   selectOption,
   fillYhteyshenkilotFields,
   getByTestId,
@@ -21,13 +21,6 @@ const fillPohjaSection = () => {
 const fillTilaSection = (tila = 'julkaistu') => {
   getByTestId('tilaSection').within(() => {
     getRadio(tila).check({ force: true });
-  });
-};
-
-const fillKieliversiotSection = () => {
-  getByTestId('kieliversiotSection').within(() => {
-    chooseKieliversiotLanguages(['fi']);
-    jatka();
   });
 };
 
@@ -185,7 +178,7 @@ describe('createHakuForm', () => {
     }).as('createHakuRequest');
 
     fillPohjaSection();
-    fillKieliversiotSection();
+    fillKieliversiotSection({ jatka: true });
     fillNimiSection();
     fillKohdejoukkoSection();
     fillHakutapaSection();

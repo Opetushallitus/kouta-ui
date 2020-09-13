@@ -1,15 +1,9 @@
 import { merge } from 'lodash';
 
-import { chooseKieliversiotLanguages, getByTestId } from '#/cypress/utils';
+import { getByTestId, fillKieliversiotSection } from '#/cypress/utils';
 import { stubSoraKuvausFormRoutes } from '#/cypress/soraKuvausFormUtils';
 
 import createSoraKuvaus from '#/cypress/data/soraKuvaus';
-
-const fillKieliversiotSection = () => {
-  getByTestId('kieliversiotSection').within(() => {
-    chooseKieliversiotLanguages(['fi']);
-  });
-};
 
 const tallenna = () => {
   getByTestId('tallennaSoraKuvausButton').click();

@@ -5,12 +5,12 @@ import {
   typeToEditor,
   getTableInput,
   getCheckbox,
-  chooseKieliversiotLanguages,
   fillKoulutustyyppiSelect,
   jatka,
   getByTestId,
   paste,
   fillValintakokeetSection,
+  fillKieliversiotSection,
 } from '#/cypress/utils';
 import valintaperuste from '#/cypress/data/valintaperuste';
 import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils';
@@ -28,12 +28,6 @@ const fillKoulutustyyppiSection = path => {
 const fillPohjaSection = () => {
   getByTestId('pohjaSection').within(() => {
     jatka();
-  });
-};
-
-const fillKieliversiotSection = () => {
-  getByTestId('kieliversiotSection').within(() => {
-    chooseKieliversiotLanguages(['fi']);
   });
 };
 

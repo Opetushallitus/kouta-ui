@@ -3,13 +3,13 @@ import {
   selectOption,
   getCheckbox,
   fillDateTimeInput,
-  chooseKieliversiotLanguages,
   fillValintakokeetSection,
   fillAsyncSelect,
   typeToEditor,
   jatka,
   getByTestId,
   paste,
+  fillKieliversiotSection,
 } from '#/cypress/utils';
 
 import { prepareTest } from '#/cypress/hakukohdeFormUtils';
@@ -20,13 +20,6 @@ const lisaa = () => {
 
 const tallenna = () => {
   getByTestId('tallennaHakukohdeButton').click();
-};
-
-const fillKieliversiotSection = () => {
-  getByTestId('kieliversiotSection').within(() => {
-    chooseKieliversiotLanguages(['fi']);
-    jatka();
-  });
 };
 
 const fillPohjakoulutusvaatimusSection = () => {
@@ -183,7 +176,7 @@ describe('createHakukohdeForm', () => {
       organisaatioOid,
     });
 
-    fillKieliversiotSection();
+    fillKieliversiotSection({ jatka: true });
     fillPohjakoulutusvaatimusSection();
     fillPerustiedotSection();
     fillAloituspaikatSection();
@@ -211,7 +204,7 @@ describe('createHakukohdeForm', () => {
       organisaatioOid,
     });
 
-    fillKieliversiotSection();
+    fillKieliversiotSection({ jatka: true });
     fillPohjakoulutusvaatimusSection();
     fillPerustiedotSection({ isKorkeakoulu: true });
     fillAloituspaikatSection({ isKorkeakoulu: true });

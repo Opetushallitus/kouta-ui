@@ -282,3 +282,14 @@ export const fillValintakokeetSection = () => {
     jatka();
   });
 };
+
+export const fillKieliversiotSection = (
+  { jatka: pressJatka } = {
+    jatka: false,
+  }
+) => {
+  getByTestId('kieliversiotSection').within(() => {
+    chooseKieliversiotLanguages(['fi']);
+    pressJatka && jatka();
+  });
+};

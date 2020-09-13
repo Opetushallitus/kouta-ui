@@ -34,24 +34,20 @@ const fillPohjakoulutusvaatimusSection = () => {
   });
 };
 
-const fillDatetime = ({ date, time }) => {
-  fillDateTimeInput({ date, time });
-};
-
 const fillHakuajatSection = () => {
   getByTestId('hakuajatSection').within(() => {
     getCheckbox(null).click({ force: true });
     lisaa();
 
     getByTestId('alkaa').within(() => {
-      fillDatetime({
+      fillDateTimeInput({
         date: '02.04.2019',
         time: '10:45',
       });
     });
 
     getByTestId('paattyy').within(() => {
-      fillDatetime({
+      fillDateTimeInput({
         date: '25.11.2019',
         time: '23:59',
       });
@@ -134,7 +130,7 @@ const fillLiitteetSection = () => {
 
       getByTestId('kuvaus').find('textarea').pipe(paste('Kuvaus'));
 
-      fillDatetime({
+      fillDateTimeInput({
         date: '25.11.2019',
         time: '23:59',
       });

@@ -58,24 +58,20 @@ const lisaa = () => {
   getByTestId('lisaaButton').click({ force: true });
 };
 
-const fillDatetime = ({ date, time }) => {
-  fillDateTimeInput({ date, time });
-};
-
 const fillAikatauluSection = () => {
   getByTestId('aikataulutSection').within(() => {
     getByTestId('hakuajat').within(() => {
       lisaa();
 
       getByTestId('alkaa').within(() => {
-        fillDatetime({
+        fillDateTimeInput({
           date: '02.04.2019',
           time: '10:45',
         });
       });
 
       getByTestId('paattyy').within(() => {
-        fillDatetime({
+        fillDateTimeInput({
           date: '25.11.2019',
           time: '23:59',
         });
@@ -86,14 +82,14 @@ const fillAikatauluSection = () => {
       lisaa();
 
       getByTestId('alkaa').within(() => {
-        fillDatetime({
+        fillDateTimeInput({
           date: '11.10.2019',
           time: '09:05',
         });
       });
 
       getByTestId('paattyy').within(() => {
-        fillDatetime({
+        fillDateTimeInput({
           date: '25.12.2019',
           time: '20:30',
         });
@@ -113,21 +109,21 @@ const fillAikatauluSection = () => {
     });
 
     getByTestId('perumisenTakaraja').within(() => {
-      fillDatetime({
+      fillDateTimeInput({
         date: '24.12.2019',
         time: '21:20',
       });
     });
 
     getByTestId('muokkauksenTakaraja').within(() => {
-      fillDatetime({
+      fillDateTimeInput({
         date: '11.12.2019',
         time: '19:15',
       });
     });
 
     getByTestId('julkaisupaivamaara').within(() => {
-      fillDatetime({
+      fillDateTimeInput({
         date: '05.12.2019',
         time: '06:45',
       });

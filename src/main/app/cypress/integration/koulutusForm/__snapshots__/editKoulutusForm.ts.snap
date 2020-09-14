@@ -22,6 +22,7 @@ exports[`editKoulutusForm > should be able to edit ammatillinen koulutus #0`] =
       }
     ],
     "opintojenLaajuusKoodiUri": null,
+    "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "amm"
   },
@@ -68,6 +69,7 @@ exports[`editKoulutusForm > should be able to edit korkeakoulu koulutus #0`] =
       }
     ],
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_1#1",
+    "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [
       "tutkintonimikekk_1#1",
       "tutkintonimikekk_2#1"
@@ -111,6 +113,7 @@ exports[`editKoulutusForm > should be able to edit lukiokoulutus #0`] =
       }
     ],
     "opintojenLaajuusKoodiUri": null,
+    "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "lk"
   },

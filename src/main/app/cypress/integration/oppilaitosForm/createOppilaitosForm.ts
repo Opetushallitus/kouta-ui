@@ -1,12 +1,12 @@
 import {
   fillAsyncSelect,
-  chooseKieliversiotLanguages,
   selectOption,
   typeToEditor,
   getRadio,
   getByTestId,
   jatka,
   paste,
+  fillKieliversiotSection,
 } from '#/cypress/utils';
 
 import { stubOppilaitosFormRoutes } from '#/cypress/oppilaitosFormUtils';
@@ -14,13 +14,6 @@ import { stubOppilaitosFormRoutes } from '#/cypress/oppilaitosFormUtils';
 const fillTilaSection = (tila = 'julkaistu') => {
   getByTestId('tilaSection').within(() => {
     getRadio(tila).check({ force: true });
-  });
-};
-
-const fillKieliversiotSection = () => {
-  getByTestId('kieliversiotSection').within(() => {
-    chooseKieliversiotLanguages(['fi']);
-    jatka();
   });
 };
 
@@ -117,7 +110,7 @@ describe('createOppilaitosForm', () => {
       },
     }).as('createOppilaitosResponse');
 
-    fillKieliversiotSection();
+    fillKieliversiotSection({ jatka: true });
 
     fillPerustiedotSection();
 

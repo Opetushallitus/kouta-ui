@@ -63,7 +63,7 @@
     "format": "prettier --write './src/**/*.{js,jsx,ts,tsx}' './cypress/**/*.{js,jsx,ts,tsx}'",
     "cypress:run": "cypress run -b chrome",
     "cypress:open": "cypress open -b chrome",
-    "test:integration": "REACT_APP_LANG=cimode START_SERVER_AND_TEST_INSECURE=1 CYPRESS_RETRIES=2 NODE_ENV=test REACT_APP_CYPRESS=true start-server-and-test start https://localhost:3000 'npm run cypress:run -- --headless'",
+    "test:integration": "DISABLE_LOCAL_PROXY=true REACT_APP_LANG=cimode START_SERVER_AND_TEST_INSECURE=1 CYPRESS_RETRIES=2 NODE_ENV=test REACT_APP_CYPRESS=true start-server-and-test start https://localhost:3000 'npm run cypress:run -- --headless'",
     "test:ci": "CI=true npm run test:integration"
   },
   "browserslist": [
@@ -113,9 +113,8 @@
     "babel-loader": "^8.1.0",
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-styled-components": "^1.10.7",
-    "cypress": "^4.6.0",
+    "cypress": "^5.1.0",
     "cypress-pipe": "^1.7.0",
-    "cypress-plugin-retries": "^1.5.2",
     "cypress-plugin-snapshots": "^1.4.3",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",

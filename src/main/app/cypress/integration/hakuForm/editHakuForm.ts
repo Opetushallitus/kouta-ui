@@ -1,13 +1,7 @@
 import { merge } from 'lodash';
-import { getByTestId, chooseKieliversiotLanguages } from '#/cypress/utils';
+import { getByTestId, fillKieliversiotSection } from '#/cypress/utils';
 import { stubHakuFormRoutes } from '#/cypress/hakuFormUtils';
 import haku from '#/cypress/data/haku';
-
-const fillKieliversiotSection = () => {
-  getByTestId('kieliversiotSection').within(() => {
-    chooseKieliversiotLanguages(['fi']);
-  });
-};
 
 const tallenna = () => {
   getByTestId('tallennaHakuButton').click();

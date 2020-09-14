@@ -1,5 +1,4 @@
 import {
-  chooseKieliversiotLanguages,
   typeToEditor,
   getCheckbox,
   fillKoulutustyyppiSelect,
@@ -7,6 +6,8 @@ import {
   getByTestId,
   jatka,
   paste,
+  fillKieliversiotSection,
+  fillPohjaSection,
 } from '#/cypress/utils';
 
 import createSoraKuvaus from '#/cypress/data/soraKuvaus';
@@ -15,19 +16,6 @@ import { stubSoraKuvausFormRoutes } from '#/cypress/soraKuvausFormUtils';
 const fillKoulutustyyppiSection = () => {
   getByTestId('koulutustyyppiSection').within(() => {
     fillKoulutustyyppiSelect(['amm']);
-  });
-};
-
-const fillPohjaSection = () => {
-  getByTestId('pohjaSection').within(() => {
-    jatka();
-  });
-};
-
-const fillKieliversiotSection = () => {
-  getByTestId('kieliversiotSection').within(() => {
-    chooseKieliversiotLanguages(['fi']);
-    jatka();
   });
 };
 
@@ -88,7 +76,7 @@ describe('createSoraKuvausForm', () => {
 
     fillKoulutustyyppiSection();
     fillPohjaSection();
-    fillKieliversiotSection();
+    fillKieliversiotSection({ jatka: true });
     fillTiedotSection();
     fillJulkisuusSection();
     fillTilaSection();

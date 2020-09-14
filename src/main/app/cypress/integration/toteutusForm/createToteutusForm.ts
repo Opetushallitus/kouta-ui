@@ -4,13 +4,14 @@ import {
   getRadio,
   getSelectOption,
   getCheckbox,
-  chooseKieliversiotLanguages,
   selectOption,
   fillAsyncSelect,
   fillTreeSelect,
   jatka,
   getByTestId,
   paste,
+  fillKieliversiotSection,
+  fillPohjaSection,
 } from '#/cypress/utils';
 
 import koulutus from '#/cypress/data/koulutus';
@@ -19,19 +20,6 @@ import { stubToteutusFormRoutes } from '#/cypress/toteutusFormUtils';
 const fillTilaSection = (tila = 'julkaistu') => {
   getByTestId('tilaSection').within(() => {
     getRadio(tila).check({ force: true });
-  });
-};
-
-const fillPohjaSection = () => {
-  getByTestId('pohjaSection').within(() => {
-    jatka();
-  });
-};
-
-const fillKieliversiotSection = () => {
-  getByTestId('kieliversiotSection').within(() => {
-    chooseKieliversiotLanguages(['fi']);
-    jatka();
   });
 };
 
@@ -285,7 +273,7 @@ describe('createToteutusForm', () => {
     }).as('createAmmToteutusResponse');
 
     fillPohjaSection();
-    fillKieliversiotSection();
+    fillKieliversiotSection({ jatka: true });
     fillTiedotSection();
 
     getByTestId('osaamisalatSection').within(() => {
@@ -336,7 +324,7 @@ describe('createToteutusForm', () => {
     }).as('createYoToteutusResponse');
 
     fillPohjaSection();
-    fillKieliversiotSection();
+    fillKieliversiotSection({ jatka: true });
     fillTiedotSection();
 
     getByTestId('alemmanKorkeakoulututkinnonOsaamisalatSection').within(() => {
@@ -380,7 +368,7 @@ describe('createToteutusForm', () => {
     }).as('createLkToteutusResponse');
 
     fillPohjaSection();
-    fillKieliversiotSection();
+    fillKieliversiotSection({ jatka: true });
     fillLukiolinjatSection();
 
     getByTestId('jarjestamistiedotSection').within(() => {

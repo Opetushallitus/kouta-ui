@@ -1,7 +1,6 @@
 import {
   getSelectOption,
   getCheckbox,
-  chooseKieliversiotLanguages,
   selectOption,
   fillTreeSelect,
   fillKoulutustyyppiSelect,
@@ -10,6 +9,8 @@ import {
   getByTestId,
   jatka,
   paste,
+  fillKieliversiotSection,
+  fillPohjaSection,
 } from '#/cypress/utils';
 
 import { stubKoulutusFormRoutes } from '#/cypress/koulutusFormUtils';
@@ -23,19 +24,6 @@ const fillTilaSection = (tila = 'julkaistu') => {
 const fillKoulutustyyppiSection = path => {
   getByTestId('koulutustyyppiSection').within(() => {
     fillKoulutustyyppiSelect(path);
-    jatka();
-  });
-};
-
-const fillPohjaSection = () => {
-  getByTestId('pohjaSection').within(() => {
-    jatka();
-  });
-};
-
-const fillKieliversiotSection = () => {
-  getByTestId('kieliversiotSection').within(() => {
-    chooseKieliversiotLanguages(['fi']);
     jatka();
   });
 };
@@ -83,7 +71,7 @@ const fillJarjestajaSection = () => {
 const fillCommon = ({ koulutustyyppiPath }) => {
   fillKoulutustyyppiSection(koulutustyyppiPath);
   fillPohjaSection();
-  fillKieliversiotSection();
+  fillKieliversiotSection({ jatka: true });
 };
 
 const fillNakyvyysSection = () => {

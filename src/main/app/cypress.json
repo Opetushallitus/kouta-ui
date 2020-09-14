@@ -6,6 +6,10 @@
       "serverEnabled": false
     }
   },
+  "retries": {
+    "runMode": 2,
+    "openMode": 0
+  },
   "video": false,
   "useRelativeSnapshots": true,
   "ignoreTestFiles": "**/__snapshots__/*"

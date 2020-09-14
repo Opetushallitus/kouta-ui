@@ -1,12 +1,6 @@
 import createOppilaitos from '#/cypress/data/oppilaitos';
-import { chooseKieliversiotLanguages, getByTestId } from '#/cypress/utils';
+import { getByTestId, fillKieliversiotSection } from '#/cypress/utils';
 import { stubOppilaitosFormRoutes } from '#/cypress/oppilaitosFormUtils';
-
-const fillKieliversiotSection = () => {
-  getByTestId('kieliversiotSection').within(() => {
-    chooseKieliversiotLanguages(['fi']);
-  });
-};
 
 const tallenna = () => {
   getByTestId('tallennaOppilaitosButton').click();

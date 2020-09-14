@@ -1,14 +1,8 @@
 import { merge } from 'lodash';
 
-import { chooseKieliversiotLanguages, getByTestId } from '#/cypress/utils';
+import { getByTestId, fillKieliversiotSection } from '#/cypress/utils';
 import koulutus from '#/cypress/data/koulutus';
 import { stubKoulutusFormRoutes } from '#/cypress/koulutusFormUtils';
-
-const fillKieliversiotSection = () => {
-  getByTestId('kieliversiotSection').within(() => {
-    chooseKieliversiotLanguages(['fi']);
-  });
-};
 
 const tallenna = () => {
   getByTestId('tallennaKoulutusButton').click();

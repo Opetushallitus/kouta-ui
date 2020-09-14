@@ -21,6 +21,7 @@ exports[`createKoulutusForm > should be able to create ammatillinen koulutus #0`
       }
     ],
     "opintojenLaajuusKoodiUri": null,
+    "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "amm"
   },
@@ -64,6 +65,7 @@ exports[`createKoulutusForm > should be able to create korkeakoulu koulutus #0`]
       }
     ],
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_0#1",
+    "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [
       "tutkintonimikekk_0#1"
     ],
@@ -103,6 +105,7 @@ exports[`createKoulutusForm > should be able to create lukiokoulutus #0`] =
       }
     ],
     "opintojenLaajuusKoodiUri": null,
+    "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],
     "tyyppi": "lk"
   },

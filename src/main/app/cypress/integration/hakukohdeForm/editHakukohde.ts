@@ -1,11 +1,5 @@
-import { getByTestId, chooseKieliversiotLanguages } from '#/cypress/utils';
+import { getByTestId, fillKieliversiotSection } from '#/cypress/utils';
 import { prepareTest } from '#/cypress/hakukohdeFormUtils';
-
-const fillKieliversiotSection = () => {
-  getByTestId('kieliversiotSection').within(() => {
-    chooseKieliversiotLanguages(['fi']);
-  });
-};
 
 const tallenna = () => {
   getByTestId('tallennaHakukohdeButton').click();

@@ -6,6 +6,8 @@ import { serializeEditorState } from '#/src/components/Editor/utils';
 import { HAKULOMAKETYYPPI } from '#/src/constants';
 const { MUU, EI_SAHKOISTA_HAKUA } = HAKULOMAKETYYPPI;
 
+const RADIX = 10;
+
 const getOsaamisalatByValues = ({ osaamisalat, pickTranslations }) => {
   return (osaamisalat || []).map(
     ({ kuvaus = {}, nimi = {}, linkki = {}, otsikko = {} }) => ({
@@ -18,7 +20,7 @@ const getOsaamisalatByValues = ({ osaamisalat, pickTranslations }) => {
 };
 
 const toOptionalInteger = value => {
-  const integerValue = _.parseInt(value);
+  const integerValue = _.parseInt(RADIX, value);
   if (value === '') {
     return null;
   }
@@ -36,6 +38,7 @@ const getToteutusByFormValues = values => {
   const hakulomaketyyppi = HTIT?.hakeutumisTaiIlmoittautumistapa;
   const kielivalinta = values?.kieliversiot || [];
   const pickTranslations = _.pick(kielivalinta);
+  console.log(values?.jarjestamistiedot?.koulutuksenAlkamisvuosi?.value);
 
   const osioKuvaukset = values?.jarjestamistiedot?.osioKuvaukset || {};
 
@@ -103,7 +106,8 @@ const getToteutusByFormValues = values => {
           : null,
         koulutuksenAlkamisvuosi: !koulutuksenTarkkaAlkamisaika
           ? _.parseInt(
-              (values?.jarjestamistiedot?.koulutuksenAlkamisvuosi || {}).value
+              RADIX,
+              values?.jarjestamistiedot?.koulutuksenAlkamisvuosi?.value
             )
           : null,
         onkoStipendia,
@@ -193,14 +197,14 @@ const getToteutusByFormValues = values => {
       )(values?.kuvaus || {}),
       tyyppi: koulutustyyppi,
       laajuus: isNumeric(values?.tiedot?.laajuus)
-        ? _.parseInt(values.tiedot.laajuus)
+        ? _.parseInt(RADIX, values.tiedot.laajuus)
         : null,
       laajuusyksikkoKoodiUri: values?.tiedot?.laajuusyksikko?.value || null,
       ilmoittautumislinkki: pickTranslations(
         values?.tiedot?.ilmoittautumislinkki
       ),
       aloituspaikat: isNumeric(values?.tiedot?.aloituspaikat)
-        ? _.parseInt(values.tiedot.aloituspaikat)
+        ? _.parseInt(RADIX, values.tiedot.aloituspaikat)
         : null,
       toteutusjaksot: (values?.toteutusjaksot || []).map(
         ({ nimi, koodi, laajuus, ilmoittautumislinkki, kuvaus, sisalto }) => ({

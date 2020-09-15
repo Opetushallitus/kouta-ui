@@ -1,5 +1,8 @@
 import _ from 'lodash/fp';
-import { KOULUTUSTYYPPI } from '#/src/constants';
+import {
+  KOULUTUSTYYPPI,
+  TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
+} from '#/src/constants';
 
 const pickNimiFromSelectedTutkinnonOsat = (values, kielivalinta) => {
   const osat = values?.tutkinnonosat?.osat ?? [];
@@ -21,7 +24,9 @@ const getKoulutusByFormValues = values => {
   const osiot = values?.lisatiedot?.osiot ?? [];
 
   return {
-    johtaaTutkintoon: true,
+    johtaaTutkintoon: TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT.includes(
+      koulutustyyppi
+    ),
     muokkaaja,
     tila,
     kielivalinta,

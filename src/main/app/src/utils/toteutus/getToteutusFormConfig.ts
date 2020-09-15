@@ -49,13 +49,6 @@ const config = createFormConfigBuilder().registerSections([
         validate: (eb, values) =>
           eb.validateTranslations('tiedot.nimi', getKielivalinta(values)),
       },
-      createOptionalTranslatedFieldConfig({
-        name: 'tiedot.toteutuksenKuvaus',
-        koulutustyypit: _.without(
-          [KOULUTUSTYYPPI.LUKIOKOULUTUS],
-          KOULUTUSTYYPIT
-        ),
-      }),
       {
         field: '.ilmoittautumislinkki',
         koulutustyypit: _.without(
@@ -87,8 +80,15 @@ const config = createFormConfigBuilder().registerSections([
   },
   {
     section: 'kuvaus',
-    field: 'kuvaus',
-    koulutustyypit: KOULUTUSTYYPIT,
+    parts: [
+      createOptionalTranslatedFieldConfig({
+        name: 'kuvaus',
+        koulutustyypit: _.without(
+          [KOULUTUSTYYPPI.LUKIOKOULUTUS],
+          KOULUTUSTYYPIT
+        ),
+      }),
+    ],
   },
   {
     section: 'lukiolinjat',

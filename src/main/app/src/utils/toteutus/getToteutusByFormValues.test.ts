@@ -8,10 +8,6 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
         fi: 'Fi nimi',
         sv: 'Sv nimi',
       },
-      toteutuksenKuvaus: {
-        fi: 'Fi toteutuksenkuvaus',
-        sv: 'Sv toteutuksenkuvaus',
-      },
       ilmoittautumislinkki: {
         fi: 'Fi linkki',
         sv: 'Sv linkki',
@@ -19,6 +15,10 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
       aloituspaikat: '56',
       laajuus: '252',
       laajuusyksikko: { value: 'laajuus_1#1' },
+    },
+    kuvaus: {
+      fi: parseEditorState('Fi toteutuksenkuvaus'),
+      sv: parseEditorState('Sv toteutuksenkuvaus'),
     },
     kieliversiot: ['fi', 'sv'],
     tarjoajat: ['org1', 'org2'],

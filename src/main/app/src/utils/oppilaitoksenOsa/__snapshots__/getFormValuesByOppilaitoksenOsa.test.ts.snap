@@ -3,10 +3,11 @@
 exports[`getFormValuesByOppilaitoksenOsa returns correct form values given oppilaitoksen osa 1`] = `
 Object {
   "esittely": Object {
-    "fi": "<p><em>Fi esittely</em></p>",
-    "sv": "<p><em>Sv esittely</em></p>",
+    "fi":       "<p><em>Fi esittely</em></p>",
+    "sv":       "<p><em>Sv esittely</em></p>",
   },
   "kielivalinta": undefined,
+  "oppilaitosOid": "888.888.888",
   "perustiedot": Object {
     "kampus": Object {
       "fi": "Fi kampus",
@@ -14,7 +15,8 @@ Object {
     },
     "opiskelijoita": 100,
   },
-  "tila": undefined,
+  "teemakuva": undefined,
+  "tila": "tallennettu",
   "yhteystiedot": Object {
     "osoite": Object {
       "fi": "Fi osoite",

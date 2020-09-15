@@ -48,16 +48,22 @@ Object {
         "kieli": "sv",
       },
     ],
+    "hakuaika": null,
+    "hakulomakeLinkki": Object {},
+    "hakulomaketyyppi": undefined,
+    "hakutermi": undefined,
     "ilmoittautumislinkki": Object {
       "fi": "Fi linkki",
       "sv": "Sv linkki",
     },
     "kuvaus": Object {
-      "fi": "Fi toteutuksenkuvaus",
-      "sv": "Sv toteutuksenkuvaus",
+      "fi": "<p>Fi toteutuksenkuvaus</p>",
+      "sv": "<p>Sv toteutuksenkuvaus</p>",
     },
     "laajuus": 252,
     "laajuusyksikkoKoodiUri": "laajuus_1#1",
+    "lisatietoaHakeutumisesta": Object {},
+    "lisatietoaValintaperusteista": Object {},
     "lukiolinjaKoodiUri": "linja_1#1",
     "opetus": Object {
       "A1JaA2Kielivalikoima": Array [

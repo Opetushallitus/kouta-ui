@@ -2,7 +2,7 @@
 
 exports[`getKoulutusByFormValues returns correct koulutus given form values 1`] = `
 Object {
-  "ePerusteId": undefined,
+  "ePerusteId": null,
   "esikatselu": undefined,
   "johtaaTutkintoon": true,
   "julkinen": true,
@@ -39,6 +39,14 @@ Object {
       },
     ],
     "opintojenLaajuusKoodiUri": "laajuus_1#1",
+    "tutkinnonOsat": Array [
+      Object {
+        "ePerusteId": 1234,
+        "koulutusKoodiUri": "koulutuskoodi_2#1",
+        "tutkinnonosaId": 567567,
+        "tutkinnonosaViite": 9847598475,
+      },
+    ],
     "tutkintonimikeKoodiUrit": Array [
       "nimike_1#1",
       "nimike_2#1",

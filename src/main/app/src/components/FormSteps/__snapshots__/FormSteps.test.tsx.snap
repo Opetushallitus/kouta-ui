@@ -38,7 +38,7 @@ exports[`renders correctly 1`] = `
   border: 3px solid;
   background-color: white;
   border-color: #cecece;
-  border-color: #159ecb;
+  border-color: #0a789c;
 }
 
 .c8 {
@@ -60,7 +60,7 @@ exports[`renders correctly 1`] = `
   border: 3px solid;
   background-color: white;
   border-color: #cecece;
-  background-color: #159ecb;
+  background-color: #0a789c;
   border-color: white;
 }
 
@@ -89,7 +89,7 @@ exports[`renders correctly 1`] = `
   margin-top: 8px;
   text-align: center;
   font-family: 'Roboto',sans-serif;
-  color: #666666;
+  color: #666;
   font-size: 0.8rem;
   white-space: nowrap;
 }
@@ -98,20 +98,20 @@ exports[`renders correctly 1`] = `
   margin-top: 8px;
   text-align: center;
   font-family: 'Roboto',sans-serif;
-  color: #666666;
+  color: #666;
   font-size: 0.8rem;
   white-space: nowrap;
-  color: #159ecb;
+  color: #0a789c;
 }
 
 .c6 {
   font-size: 2rem;
-  color: #666666;
+  color: #666;
 }
 
 .c9 {
   font-size: 2rem;
-  color: #666666;
+  color: #666;
   color: white;
 }
 

@@ -22,6 +22,15 @@ Object {
       },
     },
   ],
+  "hakeutumisTaiIlmoittautumistapa": Object {
+    "hakeutumisTaiIlmoittautumistapa": undefined,
+    "hakuTapa": undefined,
+    "hakuaikaAlkaa": undefined,
+    "hakuaikaPaattyy": undefined,
+    "linkki": undefined,
+    "lisatiedot": Object {},
+    "lisatiedotValintaperusteista": Object {},
+  },
   "jarjestamistiedot": Object {
     "A1A2Kielet": Array [
       Object {
@@ -64,10 +73,6 @@ Object {
     },
     "koulutuksenPaattymispaivamaara": "",
     "koulutuksenTarkkaAlkamisaika": false,
-    "kuvaus": Object {
-      "fi": "Fi toteutuksenkuvaus",
-      "sv": "Sv toteutuksenkuvaus",
-    },
     "maksullisuus": Object {
       "maksu": "",
       "tyyppi": "kylla",
@@ -143,8 +148,8 @@ Object {
     "sv",
   ],
   "kuvaus": Object {
-    "fi": "Fi toteutuksenkuvaus",
-    "sv": "Sv toteutuksenkuvaus",
+    "fi":       "<p>Fi toteutuksenkuvaus</p>",
+    "sv":       "<p>Sv toteutuksenkuvaus</p>",
   },
   "lukiolinjat": Object {
     "lukiolinja": Object {
@@ -225,10 +230,6 @@ Object {
     "nimi": Object {
       "fi": "Fi nimi",
       "sv": "Sv nimi",
-    },
-    "toteutuksenKuvaus": Object {
-      "fi": "Fi toteutuksenkuvaus",
-      "sv": "Sv toteutuksenkuvaus",
     },
   },
   "tila": "tallennettu",

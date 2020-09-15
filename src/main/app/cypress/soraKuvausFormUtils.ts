@@ -21,7 +21,7 @@ export const stubSoraKuvausFormRoutes = ({ organisaatioOid }) => {
 
   cy.route({
     method: 'GET',
-    url: '**/sora-kuvaus/list**',
+    url: '**/sorakuvaus/list**',
     response: [],
   });
 

@@ -216,7 +216,7 @@ export const stubCommonRoutes = () => {
   stubKoutaBackendSessionRoute();
 };
 
-export const jatka = () => getByTestId('jatkaButton').click({ force: true });
+export const jatka = () => getByTestId('jatkaButton').click();
 
 export const OPH_TEST_ORGANISAATIO_OID = '1.2.246.562.10.48587687889';
 

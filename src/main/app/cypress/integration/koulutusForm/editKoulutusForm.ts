@@ -16,7 +16,7 @@ const prepareTest = tyyppi => {
     oid: koulutusOid,
     organisaatioOid: organisaatioOid,
     koulutusKoodiUri: 'koulutus_0#1',
-    tarjoajat: ['4.1.1.1.1.1', '2.1.1.1.1.1'],
+    tarjoajat: ['1.1.1.1.1.1', '1.2.1.1.1.1'],
   };
 
   cy.server();

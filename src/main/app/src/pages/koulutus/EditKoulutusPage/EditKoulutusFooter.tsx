@@ -37,10 +37,9 @@ const getTarjoajaOperations = (availableOids, oids) => {
   };
 };
 
-const mergeTarjoajat = (koulutusOids, valueOids, availableOids) => {
+const mergeTarjoajat = (koulutusOids = [], valueOids, availableOids) => {
   const { inserted, deleted } = getTarjoajaOperations(availableOids, valueOids);
-
-  return uniq(without([...(koulutusOids || []), ...inserted], ...deleted));
+  return uniq(without([...koulutusOids, ...inserted], ...deleted));
 };
 
 const EditKoulutusFooter = ({ koulutus, organisaatioOid, canUpdate }) => {
@@ -66,7 +65,7 @@ const EditKoulutusFooter = ({ koulutus, organisaatioOid, canUpdate }) => {
             ...getKoulutusByFormValues(values),
             tarjoajat: mergeTarjoajat(
               koulutus.tarjoajat,
-              values.tarjoajat,
+              values?.tarjoajat?.tarjoajat,
               availableTarjoajaOids
             ),
             // This is a workaround for updating tarjoajat. Muokkaaja-field shouldn't be needed anymore

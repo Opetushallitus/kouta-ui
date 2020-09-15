@@ -12,6 +12,7 @@ import {
   paste,
   fillKieliversiotSection,
   fillPohjaSection,
+  typeToEditor,
 } from '#/cypress/utils';
 
 import koulutus from '#/cypress/data/koulutus';
@@ -147,10 +148,15 @@ const fillTiedotSection = () => {
       .clear({ force: true })
       .pipe(paste('toteutuksen nimi'));
 
-    getByTestId('toteutuksenKuvaus')
-      .find('textarea')
-      .pipe(paste('Toteutuksen kuvaus'));
+    jatka();
+  });
+};
 
+const fillKuvausSection = () => {
+  getByTestId('kuvausSection').within(() => {
+    getByTestId('toteutuksenKuvaus').within(() => {
+      typeToEditor('Toteutuksen kuvaus');
+    });
     jatka();
   });
 };
@@ -275,6 +281,7 @@ describe('createToteutusForm', () => {
     fillPohjaSection();
     fillKieliversiotSection({ jatka: true });
     fillTiedotSection();
+    fillKuvausSection();
 
     getByTestId('osaamisalatSection').within(() => {
       getByTestId('osaamisalaSelection').within(() => {
@@ -326,6 +333,7 @@ describe('createToteutusForm', () => {
     fillPohjaSection();
     fillKieliversiotSection({ jatka: true });
     fillTiedotSection();
+    fillKuvausSection();
 
     getByTestId('alemmanKorkeakoulututkinnonOsaamisalatSection').within(() => {
       fillKkOsaamisalat();

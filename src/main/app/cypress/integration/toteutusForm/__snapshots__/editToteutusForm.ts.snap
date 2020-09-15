@@ -23,10 +23,14 @@ exports[`editToteutusForm > should be able to edit ammatillinen toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "hakuaika": null,
+    "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
     "kuvaus": {},
     "laajuus": null,
     "laajuusyksikkoKoodiUri": null,
+    "lisatietoaHakeutumisesta": {},
+    "lisatietoaValintaperusteista": {},
     "lukiolinjaKoodiUri": null,
     "opetus": {
       "A1JaA2Kielivalikoima": [],
@@ -174,10 +178,14 @@ exports[`editToteutusForm > should be able to edit korkeakoulu toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "hakuaika": null,
+    "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
     "kuvaus": {},
     "laajuus": null,
     "laajuusyksikkoKoodiUri": null,
+    "lisatietoaHakeutumisesta": {},
+    "lisatietoaValintaperusteista": {},
     "lukiolinjaKoodiUri": null,
     "opetus": {
       "A1JaA2Kielivalikoima": [],
@@ -315,10 +323,14 @@ exports[`editToteutusForm > should be able to edit lukio toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "hakuaika": null,
+    "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
     "kuvaus": {},
     "laajuus": null,
     "laajuusyksikkoKoodiUri": null,
+    "lisatietoaHakeutumisesta": {},
+    "lisatietoaValintaperusteista": {},
     "lukiolinjaKoodiUri": "lukiolinjat_0#1",
     "opetus": {
       "A1JaA2Kielivalikoima": [

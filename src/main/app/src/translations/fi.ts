@@ -272,6 +272,10 @@ export default {
     listaVahintaan:
       'Tälle kentälle täytyy syöttää vähintään {{lukumaara}} arvoa',
     kokonaislukuValilta: 'Syötä kokonaisluku väliltä {{min}} - {{max}}',
+    pakollinenAlkamisaikaJosPaattymisaika:
+      'Aikavälin alkamisaika on pakollinen, jos päättymisaika on annettu.',
+    alkamisaikaEnnenPaattymisaikaa:
+      'Aikavälin alkamisajan täytyy olla ennen päättymisaikaa.',
   },
   hakulomakeValinnat: {
     ataru: 'Käytetään hakemuspalvelun lomaketta',

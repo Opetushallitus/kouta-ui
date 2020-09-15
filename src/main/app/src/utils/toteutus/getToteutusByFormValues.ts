@@ -38,7 +38,6 @@ const getToteutusByFormValues = values => {
   const hakulomaketyyppi = HTIT?.hakeutumisTaiIlmoittautumistapa;
   const kielivalinta = values?.kieliversiot || [];
   const pickTranslations = _.pick(kielivalinta);
-  console.log(values?.jarjestamistiedot?.koulutuksenAlkamisvuosi?.value);
 
   const osioKuvaukset = values?.jarjestamistiedot?.osioKuvaukset || {};
 

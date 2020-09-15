@@ -5,6 +5,10 @@ import createFormConfigBuilder from '#/src/utils/form/createFormConfigBuilder';
 import {
   validateExistence,
   validateInteger,
+  validateExistenceOfDate,
+  validate,
+  validateTranslations,
+  validateUrl,
 } from '#/src/utils/form/createErrorBuilder';
 
 import {
@@ -14,6 +18,7 @@ import {
   TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
   JULKAISUTILA,
+  HAKULOMAKETYYPPI,
 } from '#/src/constants';
 
 import {
@@ -23,7 +28,30 @@ import {
   pohjaValintaSectionConfig,
   validateRelations,
   createOptionalTranslatedFieldConfig,
+  validateIf,
 } from '#/src/utils/form/formConfigUtils';
+
+const validateDateTimeRange = (alkaaFieldName, paattyyFieldName) => (
+  eb,
+  values
+) => {
+  const alkaaValue = _.get(alkaaFieldName, values);
+  const paattyyValue = _.get(paattyyFieldName, values);
+  return _.pipe(
+    eb =>
+      paattyyValue
+        ? validateExistenceOfDate(alkaaFieldName, {
+            message: 'validointivirheet.pakollinenAlkamisaikaJosPaattymisaika',
+          })(eb)
+        : eb,
+    eb =>
+      alkaaValue && paattyyValue
+        ? validate(alkaaFieldName, () => alkaaValue < paattyyValue, {
+            message: 'validointivirheet.alkamisaikaEnnenPaattymisaikaa',
+          })(eb)
+        : eb
+  )(eb);
+};
 
 const config = createFormConfigBuilder().registerSections([
   pohjaValintaSectionConfig,
@@ -322,7 +350,82 @@ const config = createFormConfigBuilder().registerSections([
   {
     section: 'hakeutumisTaiIlmoittautumistapa',
     koulutustyypit: [KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA],
-    field: 'hakeutumisTaiIlmoittautumistapa',
+    validate: (eb, values) =>
+      _.pipe(
+        eb =>
+          validateDateTimeRange(
+            'hakeutumisTaiIlmoittautumistapa.hakuaikaAlkaa',
+            'hakeutumisTaiIlmoittautumistapa.hakuaikaPaattyy'
+          )(eb, values),
+        validateIf(values?.tila === JULKAISUTILA.JULKAISTU, eb => {
+          const hakeutumisTaiIlmoittautumistapa =
+            values?.hakeutumisTaiIlmoittautumistapa
+              ?.hakeutumisTaiIlmoittautumistapa;
+          return _.pipe(
+            validateExistence('hakeutumisTaiIlmoittautumistapa.hakuTapa'),
+            validateExistence(
+              'hakeutumisTaiIlmoittautumistapa.hakeutumisTaiIlmoittautumistapa'
+            ),
+            validateIf(
+              hakeutumisTaiIlmoittautumistapa === HAKULOMAKETYYPPI.MUU,
+              _.pipe(
+                validateUrl(
+                  'hakeutumisTaiIlmoittautumistapa.linkki',
+                  getKielivalinta(values)
+                ),
+                validateTranslations(
+                  'hakeutumisTaiIlmoittautumistapa.lisatiedotValintaperusteista',
+                  getKielivalinta(values),
+                  { optional: true }
+                ),
+                validateExistenceOfDate(
+                  'hakeutumisTaiIlmoittautumistapa.hakuaikaAlkaa'
+                ),
+                validateExistenceOfDate(
+                  'hakeutumisTaiIlmoittautumistapa.hakuaikaPaattyy'
+                )
+              )
+            ),
+            validateIf(
+              [
+                HAKULOMAKETYYPPI.MUU,
+                HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA,
+              ].includes(hakeutumisTaiIlmoittautumistapa),
+              validateTranslations(
+                'hakeutumisTaiIlmoittautumistapa.lisatiedot',
+                getKielivalinta(values),
+                { optional: true }
+              )
+            )
+          )(eb);
+        })
+      )(eb),
+    parts: [
+      {
+        field: '.hakuTapa',
+        required: true,
+      },
+      {
+        field: '.hakeutumisTaiIlmoittautumistapa',
+        required: true,
+      },
+      {
+        field: '.linkki',
+        required: true,
+      },
+      {
+        field: '.lisatiedot',
+      },
+      {
+        field: '.lisatiedotValintaperusteista',
+      },
+      {
+        field: '.hakuaikaAlkaa',
+      },
+      {
+        field: '.hakuaikaPaattyy',
+      },
+    ],
   },
   {
     section: 'soraKuvaus',

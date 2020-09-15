@@ -149,6 +149,7 @@ export const validate = bindValidator('validate');
 export const validateArray = bindValidator('validateArray');
 export const validateArrayMinLength = bindValidator('validateArrayMinLength');
 export const validateExistence = bindValidator('validateExistence');
+export const validateExistenceOfDate = bindValidator('validateExistenceOfDate');
 export const validateTranslations = bindValidator('validateTranslations');
 export const validateUrl = bindValidator('validateUrl');
 export const validateInteger = bindValidator('validateInteger');

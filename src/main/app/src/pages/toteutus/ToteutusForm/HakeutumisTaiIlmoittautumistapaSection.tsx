@@ -80,7 +80,7 @@ const HakeutumisTaiIlmoittautusmistapaFields = createFormFieldComponent(
   ({ hakuTapa, section, onChange, value, language }) => {
     const { t } = useTranslation();
 
-    return hakuTapa ? (
+    return (
       <Box display="flex" flexDirection="column" alignItems="stretch">
         <StyledGrayRadio
           checked={value === MUU}
@@ -120,8 +120,6 @@ const HakeutumisTaiIlmoittautusmistapaFields = createFormFieldComponent(
           </StyledBlueBox>
         )}
       </Box>
-    ) : (
-      <div />
     );
   }
 );
@@ -157,14 +155,16 @@ export const HakeutumisTaiIlmoittautumistapaSection = ({
         />
       </Box>
       <Box>
-        <Field
-          label={hakuTapa && t(`toteutuslomake.${hakuTapa}.valitseTapa`)}
-          component={HakeutumisTaiIlmoittautusmistapaFields}
-          name={`${name}.hakeutumisTaiIlmoittautumistapa`}
-          section={name}
-          hakuTapa={hakuTapa}
-          language={language}
-        />
+        {hakuTapa && (
+          <Field
+            label={hakuTapa && t(`toteutuslomake.${hakuTapa}.valitseTapa`)}
+            component={HakeutumisTaiIlmoittautusmistapaFields}
+            name={`${name}.hakeutumisTaiIlmoittautumistapa`}
+            section={name}
+            hakuTapa={hakuTapa}
+            language={language}
+          />
+        )}
       </Box>
     </Box>
   );

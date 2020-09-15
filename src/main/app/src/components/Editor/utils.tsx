@@ -72,3 +72,6 @@ export const serializeEditorState = value => {
 
   return convertToHTML(value.getCurrentContent());
 };
+
+export const isEmptyEditorState = editorState =>
+  editorState?.getCurrentContent?.().hasText?.() !== true;

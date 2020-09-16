@@ -61,6 +61,7 @@ const getToteutusByFormValues = values => {
     tila,
     muokkaaja,
     teemakuva: values?.teemakuva,
+    sorakuvausId: values?.soraKuvaus?.value || null,
     metadata: {
       opetus: {
         lisatiedot: (values?.jarjestamistiedot?.osiot || []).map(

@@ -130,6 +130,7 @@ exports[`editToteutusForm > should be able to edit ammatillinen toteutus #0`] =
   },
   "oid": "1.3.1.1.1.1",
   "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
   "tarjoajat": [
     "5.1.1.1.1.1",
     "3.1.1.1.1.1"
@@ -290,6 +291,7 @@ exports[`editToteutusForm > should be able to edit korkeakoulu toteutus #0`] =
   },
   "oid": "1.3.1.1.1.1",
   "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
   "tarjoajat": [
     "5.1.1.1.1.1",
     "3.1.1.1.1.1"
@@ -436,6 +438,7 @@ exports[`editToteutusForm > should be able to edit lukio toteutus #0`] =
   },
   "oid": "1.3.1.1.1.1",
   "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
   "tarjoajat": [
     "5.1.1.1.1.1",
     "3.1.1.1.1.1"

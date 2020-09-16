@@ -468,6 +468,10 @@ const config = createFormConfigBuilder().registerSections([
           key: 'koulutus',
           t: 'yleiset.koulutus',
         },
+        {
+          key: 'soraKuvaus',
+          t: 'yleiset.soraKuvaus',
+        },
       ])(eb.validateExistence('tila'), values),
   },
 ]);

@@ -20,12 +20,12 @@ const devProxyMiddleware = createProxyMiddleware({
 });
 
 module.exports = function (app) {
-  if (!DISABLE_LOCAL_PROXY) {
-    app.use('*', function (req, res, next) {
-      return ['/', '/kouta'].includes(req.originalUrl) ||
-        req.originalUrl.startsWith('/kouta/')
-        ? next()
-        : devProxyMiddleware(req, res, next);
-    });
-  }
+  app.use('*', function (req, res, next) {
+    return ['/', '/kouta'].includes(req.originalUrl) ||
+      req.originalUrl.startsWith('/kouta/')
+      ? next()
+      : DISABLE_LOCAL_PROXY
+      ? res.sendStatus(404)
+      : devProxyMiddleware(req, res, next);
+  });
 };

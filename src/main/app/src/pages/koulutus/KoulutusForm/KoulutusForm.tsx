@@ -22,14 +22,14 @@ import TeemakuvaSection from '#/src/components/TeemakuvaSection';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import TypeSection from './TypeSection';
 import TiedotSection, {
-  KoulutuksenNimiSection,
   TutkinnonOsienKuvausSection,
+  TutkinnonOsatSection,
 } from './TiedotSection';
+import { KoulutuksenNimiSection } from './KoulutuksenNimiSection';
 import KuvausSection from './KuvausSection';
 import JarjestajaSection from './JarjestajaSection';
 import LisatiedotSection from './LisatiedotSection';
 import ToteutuksetSection from './ToteutuksetSection';
-import { TutkinnonOsatSection } from './TiedotSection';
 
 const isInHierarkia = org => hierarkia =>
   hierarkia.organisaatioOid === org.organisaatioOid ||

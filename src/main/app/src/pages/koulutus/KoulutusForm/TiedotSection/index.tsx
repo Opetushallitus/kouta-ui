@@ -136,39 +136,6 @@ const TutkinnonOsatFields = ({
   );
 };
 
-export const KoulutuksenNimiSection = ({ language, name }) => {
-  const { t } = useTranslation();
-  const tutkinnonosat = useFieldValue(`${name}.osat`);
-  const oneAndOnlyOne = all => all && all.length === 1 && all[0];
-
-  const oneSelectedTutkinnonOsa = oneAndOnlyOne(
-    tutkinnonosat?.flatMap(t => t.selectedTutkinnonosat?.nimi)
-  );
-
-  const { change } = useBoundFormActions();
-  const isDirty = useIsDirty();
-
-  useEffect(() => {
-    if (isDirty && oneSelectedTutkinnonOsa) {
-      change(
-        `${name}.nimi.${language}`,
-        getLanguageValue(oneSelectedTutkinnonOsa, language)
-      );
-    }
-  }, [change, name, isDirty, oneSelectedTutkinnonOsa, language]);
-
-  return (
-    <Box mb={2} {...getTestIdProps('koulutuksenNimi')}>
-      <Field
-        disabled={oneSelectedTutkinnonOsa}
-        name={`${name}.nimi.${language}`}
-        component={FormFieldInput}
-        label={t('koulutuslomake.lisaaKoulutuksenNimi')}
-      />
-    </Box>
-  );
-};
-
 const TutkinnonOsaInfo = ({ className, eperuste, viite, osa, language }) => {
   const { t } = useTranslation();
   const apiUrls = useUrls();

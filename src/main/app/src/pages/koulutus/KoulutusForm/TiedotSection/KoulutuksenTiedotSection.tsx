@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { usePrevious } from 'react-use';
 
 import { getKoulutusByKoodi } from '#/src/utils/koulutus/getKoulutusByKoodi';
-import { getThemeProp } from '#/src/theme';
+import { getThemeProp, spacing } from '#/src/theme';
 import { getReadableDateTime, getTestIdProps } from '#/src/utils';
 import { getLanguageValue } from '#/src/utils/languageUtils';
 import {
@@ -22,6 +22,7 @@ import useApiAsync from '#/src/hooks/useApiAsync';
 import { useFieldValue } from '#/src/hooks/form';
 import KoulutusField from '../KoulutusField';
 import { useUrls } from '#/src/contexts/contextHooks';
+import { InfoBoxGrid } from '../KoulutuksenEPerusteTiedot/InfoBoxGrid';
 
 const getListNimiLanguageValues = (list = [], language) =>
   list
@@ -84,24 +85,6 @@ const TutkinnonOsatField = ({ isLoading, ...props }) => {
   );
 };
 
-const InfoRow = ({ title, description, suffix }) => {
-  return (
-    <React.Fragment>
-      <Cell key="title-cell">
-        <Typography color="text.dark">{title}:</Typography>
-      </Cell>
-      <Cell key="description-cell">
-        <Typography>
-          {_.isNil(description) || description?.length === 0
-            ? '-'
-            : description}
-          {description && suffix ? ` ${suffix}` : ''}
-        </Typography>
-      </Cell>
-    </React.Fragment>
-  );
-};
-
 const TilaBadge = ({ status = '', className }) => {
   const { t } = useTranslation();
   return (
@@ -115,24 +98,6 @@ const StyledTilaBadge = styled(TilaBadge)`
   font-weight: bold;
   ${getEPerusteStatusCss}
 `;
-
-const InfoGrid = ({ rows, ...props }) => (
-  <Grid
-    columns={'auto minmax(0, 1fr)'}
-    columnGap="20px"
-    rowGap="25px"
-    {...props}
-  >
-    {rows.map(({ title, description, suffix }) => (
-      <InfoRow
-        key={title}
-        title={title}
-        description={description}
-        suffix={suffix}
-      />
-    ))}
-  </Grid>
-);
 
 const KoulutusInfo = ({
   koulutus,
@@ -192,7 +157,7 @@ const KoulutusInfo = ({
           <Typography variant="h6" mb={2}>
             {t('koulutuslomake.koulutuksenTiedot')}
           </Typography>
-          <InfoGrid
+          <InfoBoxGrid
             style={{ marginBottom: '40px' }}
             rows={[
               {
@@ -212,7 +177,7 @@ const KoulutusInfo = ({
               </Typography>
               <Grid columns="minmax(300px, 40%) auto">
                 <Cell key="eperusteen-tiedot-1">
-                  <InfoGrid
+                  <InfoBoxGrid
                     rows={[
                       {
                         title: t('yleiset.diaarinumero'),
@@ -256,7 +221,7 @@ const KoulutusInfo = ({
                   />
                 </Cell>
                 <Cell key="eperusteen-tiedot-2">
-                  <InfoGrid
+                  <InfoBoxGrid
                     rows={[
                       {
                         title: t('yleiset.osaamisalat'),
@@ -287,7 +252,7 @@ const KoulutusInfo = ({
             </Box>
           )}
           {selectedTutkinnonosat && (
-            <InfoGrid
+            <InfoBoxGrid
               style={{ marginBottom: '40px' }}
               rows={[
                 {
@@ -324,7 +289,7 @@ const KoulutusInfo = ({
 
 const StyledKoulutusInfo = styled(KoulutusInfo)`
   background-color: ${getThemeProp('colors.grayLighten6')};
-  padding: ${({ theme }) => theme.spacing.unit * 4}px;
+  padding: ${spacing(4)};
   line-height: 23px;
 `;
 
@@ -334,7 +299,7 @@ const KoulutuksenTiedotSection = ({
   language,
   koulutuskoodi,
   name,
-  selectLabel: selectLabelProp,
+  selectLabel: selectLabelProp = undefined,
 }) => {
   const { t } = useTranslation();
   const koulutusFieldValue = koulutuskoodi?.value;

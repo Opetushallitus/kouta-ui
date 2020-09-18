@@ -21,15 +21,14 @@ import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import TeemakuvaSection from '#/src/components/TeemakuvaSection';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import TypeSection from './TypeSection';
-import TiedotSection, {
-  TutkinnonOsienKuvausSection,
-  TutkinnonOsatSection,
-} from './TiedotSection';
+import TiedotSection from './TiedotSection';
 import { KoulutuksenNimiSection } from './KoulutuksenNimiSection';
 import KuvausSection from './KuvausSection';
 import JarjestajaSection from './JarjestajaSection';
 import LisatiedotSection from './LisatiedotSection';
 import ToteutuksetSection from './ToteutuksetSection';
+import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';
+import { TutkinnonOsatSection } from './TutkinnonOsatSection';
 
 const isInHierarkia = org => hierarkia =>
   hierarkia.organisaatioOid === org.organisaatioOid ||

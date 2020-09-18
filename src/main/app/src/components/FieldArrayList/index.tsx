@@ -36,7 +36,7 @@ export const FieldArrayList = ({
   hasDivider = true,
   hasRemoveButton = true,
   removeButtonText: removeButtonTextProp,
-  children = () => null,
+  children,
 }) => {
   const { t } = useTranslation();
   const removeButtonText = removeButtonTextProp || t('yleiset.poista');

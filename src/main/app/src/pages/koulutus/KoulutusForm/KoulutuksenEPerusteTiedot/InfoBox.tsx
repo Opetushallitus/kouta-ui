@@ -1,9 +1,20 @@
 import React from 'react';
 import _ from 'lodash';
 import { Grid, Cell } from 'styled-css-grid';
+import styled from 'styled-components';
+import { transparentize } from 'polished';
+import { Box } from '#/src/components/virkailija';
 import { Typography } from '#/src/components/virkailija';
+import { getThemeProp } from '#/src/theme';
 
-const EPerusteInfoRow = ({ title, description, suffix }) => {
+export const StyledInfoBox = styled(Box)`
+  background-color: ${getThemeProp('colors.blueLighten4', transparentize(0.7))};
+  padding: 30px;
+  line-height: 23px;
+  width: 100%;
+`;
+
+const InfoBoxRow = ({ title, description, suffix }) => {
   return (
     <>
       <Cell key="title-cell">
@@ -29,7 +40,7 @@ export const InfoBoxGrid = ({ rows, ...props }) => (
     {...props}
   >
     {rows.map(({ title, description, suffix }) => (
-      <EPerusteInfoRow
+      <InfoBoxRow
         key={title}
         title={title}
         description={description}

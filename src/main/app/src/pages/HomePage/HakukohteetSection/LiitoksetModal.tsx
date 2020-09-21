@@ -18,7 +18,6 @@ import {
 } from '#/src/components/virkailija';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import useLanguage from '#/src/hooks/useLanguage';
-import { KOULUTUSTYYPPI } from '#/src/constants';
 
 const useOptions = data => {
   const language = useLanguage();
@@ -50,23 +49,12 @@ const LiitoksetModal = ({ onClose, organisaatioOid, open }) => {
     watch: organisaatioOid,
   });
 
-  const { data: toteutuksetData } = useApiAsync({
+  const { data: toteutukset } = useApiAsync({
     promiseFn: getToteutukset,
     organisaatioOid,
     watch: organisaatioOid,
+    vainHakukohteeseenLiitettavat: true,
   });
-
-  const toteutukset = useMemo(
-    () =>
-      toteutuksetData?.filter(
-        toteutus =>
-          !toteutus?.tyyppi?.includes(
-            KOULUTUSTYYPPI.OSAAMISALA,
-            KOULUTUSTYYPPI.TUTKINNON_OSA
-          )
-      ),
-    [toteutuksetData]
-  );
 
   const hakuOptions = useOptions(haut);
   const toteutusOptions = useOptions(toteutukset);

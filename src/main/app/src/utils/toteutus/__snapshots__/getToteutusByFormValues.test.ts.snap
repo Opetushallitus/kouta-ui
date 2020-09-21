@@ -315,6 +315,7 @@ Object {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
+  "sorakuvausId": null,
   "tarjoajat": Array [
     "org1",
     "org2",

@@ -212,6 +212,7 @@ Object {
       "osaamisala2",
     ],
   },
+  "soraKuvaus": null,
   "tarjoajat": Array [
     "org1",
     "org2",

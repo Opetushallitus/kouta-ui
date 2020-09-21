@@ -4,7 +4,10 @@ import _ from 'lodash';
 import stripTags from 'striptags';
 import { ALLOWED_HTML_TAGS } from '#/src/constants';
 import { memoize } from '#/src/utils/memoize';
-import { isEditorState, isEmptyEditorState } from '../components/Editor/utils';
+import {
+  isEditorState,
+  isEmptyEditorState,
+} from '#/src/components/Editor/utils';
 
 export const isDev = process.env.NODE_ENV === 'development';
 

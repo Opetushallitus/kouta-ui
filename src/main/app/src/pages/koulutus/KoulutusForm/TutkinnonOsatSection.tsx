@@ -15,19 +15,21 @@ const TutkinnonOsatField = ({ disabled, language, koulutustyyppi, name }) => {
   const koulutuskoodi = useFieldValue(`${name}.koulutus`);
 
   useLocalizedKoulutus({
-    fieldName: name,
-    koulutusValue: koulutuskoodi,
+    nimiFieldName: `${name}.nimi`,
+    koulutusFieldName: `${name}.koulutus`,
     language,
   });
   return (
-    <KoulutuksenTiedotSection
-      disabled={disabled}
-      language={language}
-      koulutuskoodi={koulutuskoodi}
-      koulutustyyppi={koulutustyyppi}
-      name={name}
-      selectLabel={t('koulutuslomake.valitseKoulutus')}
-    />
+    <Box mt={2}>
+      <KoulutuksenTiedotSection
+        disabled={disabled}
+        language={language}
+        koulutuskoodi={koulutuskoodi}
+        koulutustyyppi={koulutustyyppi}
+        name={name}
+        selectLabel={t('koulutuslomake.valitseKoulutus')}
+      />
+    </Box>
   );
 };
 

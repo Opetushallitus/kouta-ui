@@ -22,8 +22,8 @@ const TiedotSection = ({
   const { t } = useTranslation();
 
   useLocalizedKoulutus({
-    fieldName: name,
-    koulutusValue: koulutuskoodi,
+    nimiFieldName: `${name}.nimi`,
+    koulutusFieldName: `${name}.koulutus`,
     language,
   });
 

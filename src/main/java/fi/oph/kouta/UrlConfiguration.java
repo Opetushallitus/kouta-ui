@@ -70,6 +70,7 @@ public class UrlConfiguration extends OphProperties {
         this.frontProperties.setProperty("koodisto-service.codeelement", this.require("koodisto-service.codeelement"));
 
         this.frontProperties.setProperty("eperusteet.kooste", this.require("eperusteet.kooste"));
+        this.frontProperties.setProperty("eperusteet.sisalto", this.require("eperusteet.sisalto"));
         this.frontProperties.setProperty("eperusteet.tutkinnonosat", this.require("eperusteet.tutkinnonosat"));
 
         this.frontProperties.setProperty("eperusteet-service.base-url", this.require("eperusteet-service.base-url"));
@@ -79,6 +80,7 @@ public class UrlConfiguration extends OphProperties {
         this.frontProperties.setProperty("eperusteet-service.peruste-tutkinnonosat", this.require("eperusteet-service.peruste-tutkinnonosat"));
         this.frontProperties.setProperty("eperusteet-service.tutkinnonosankuvaukset", this.require("eperusteet-service.tutkinnonosankuvaukset"));
         this.frontProperties.setProperty("eperusteet-service.peruste-rakenne", this.require("eperusteet-service.peruste-rakenne"));
+        this.frontProperties.setProperty("eperusteet-service.peruste-sisalto", this.require("eperusteet-service.peruste-sisalto"));
 
         this.frontProperties.setProperty("organisaatio-service.base-url", this.require("organisaatio-service.base-url"));
         this.frontProperties.setProperty("organisaatio-service.children", this.require("organisaatio-service.children"));

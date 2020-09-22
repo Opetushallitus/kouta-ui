@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import { PersistGate } from 'redux-persist/integration/react';
 import { I18nextProvider } from 'react-i18next';
+import { ReactQueryDevtools } from 'react-query-devtools';
 
 import FullSpin from '#/src/components/FullSpin';
 import GlobalStyle from '#/src/components/GlobalStyle';
@@ -25,6 +26,7 @@ const App = ({
 }) => {
   return (
     <Provider store={store}>
+      <ReactQueryDevtools initialIsOpen={false} />
       <I18nextProvider i18n={localization}>
         <ThemeProvider theme={theme}>
           <PersistGate

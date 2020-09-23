@@ -117,7 +117,7 @@
     "babel-plugin-styled-components": "^1.10.7",
     "cypress": "^5.1.0",
     "cypress-pipe": "^1.7.0",
-    "cypress-plugin-snapshots": "^1.4.3",
+    "cypress-plugin-snapshots": "^1.4.4",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "enzyme-to-json": "^3.5.0",

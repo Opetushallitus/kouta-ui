@@ -26,6 +26,8 @@ import KuvausSection from './KuvausSection';
 import JarjestajaSection from './JarjestajaSection';
 import LisatiedotSection from './LisatiedotSection';
 import ToteutuksetSection from './ToteutuksetSection';
+import { OsaamisalaSection } from './OsaamisalaSection';
+import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
 import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';
 import { TutkinnonOsatSection } from './TutkinnonOsatSection';
 import { TutkinnonOsaKoulutusNimiSection } from './TutkinnonOsaKoulutusNimiSection';
@@ -102,6 +104,15 @@ const KoulutusForm = ({
       />
 
       <FormCollapse
+        section="osaamisala"
+        header={t('koulutuslomake.valitseOsaamisala')}
+        Component={OsaamisalaSection}
+        languages={languageTabs}
+        disabled={onlyTarjoajaRights}
+        koulutustyyppi={koulutustyyppi}
+      />
+
+      <FormCollapse
         section="information"
         header={t('koulutuslomake.koulutuksenTiedot')}
         Component={TiedotSection}
@@ -116,6 +127,16 @@ const KoulutusForm = ({
         header={t('koulutuslomake.tutkinnonOsat')}
         Component={TutkinnonOsatSection}
         name={'tutkinnonosat.osat'}
+        languages={languageTabs}
+        disabled={onlyTarjoajaRights}
+        koulutustyyppi={koulutustyyppi}
+      />
+
+      <FormCollapse
+        section="osaamisalanKuvaus"
+        header={t('koulutuslomake.osaamisalanKuvaus')}
+        Component={OsaamisalanKuvausSection}
+        name={'osaamisala.osaamisala'}
         languages={languageTabs}
         disabled={onlyTarjoajaRights}
         koulutustyyppi={koulutustyyppi}

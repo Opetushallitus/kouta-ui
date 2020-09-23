@@ -11,6 +11,9 @@ const pickNimiFromSelectedTutkinnonOsat = (values, kielivalinta) => {
     : null;
 };
 
+const osaamisalaKoodiToKoodiUri = value =>
+  value ? `osaamisala_${value}` : null;
+
 const getKoulutusByFormValues = values => {
   const { muokkaaja, tila } = values;
   const kielivalinta = values?.kieliversiot ?? [];
@@ -22,6 +25,7 @@ const getKoulutusByFormValues = values => {
 
   const koulutustyyppi = values?.koulutustyyppi || null;
   const osiot = values?.lisatiedot?.osiot ?? [];
+  const osaamisala = values?.osaamisala;
 
   return {
     johtaaTutkintoon: TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT.includes(
@@ -34,7 +38,8 @@ const getKoulutusByFormValues = values => {
       pohjanTarjoajat && kaytaPohjanJarjestajaa
         ? pohjanTarjoajat
         : values?.tarjoajat?.tarjoajat || [],
-    koulutusKoodiUri: values?.information?.koulutus?.value || null,
+    koulutusKoodiUri:
+      values?.information?.koulutus?.value || osaamisala?.koulutus?.value,
     koulutustyyppi,
     nimi:
       koulutustyyppi === KOULUTUSTYYPPI.TUTKINNON_OSA
@@ -43,7 +48,10 @@ const getKoulutusByFormValues = values => {
         : pickTranslations(values?.information?.nimi ?? {}),
     julkinen: Boolean(values?.julkinen),
     esikatselu: values?.esikatselu,
-    ePerusteId: values?.information?.eperuste?.value || null,
+    ePerusteId:
+      values?.information?.eperuste?.value ||
+      osaamisala?.eperuste?.value ||
+      null,
     teemakuva: values?.teemakuva,
     metadata: {
       tutkinnonOsat: (values?.tutkinnonosat?.osat ?? []).map(
@@ -59,7 +67,10 @@ const getKoulutusByFormValues = values => {
           tutkinnonosaViite: Number(tutkinnonosaViite),
         })
       ),
-      tyyppi: koulutustyyppi,
+      osaamisalaKoodiUri: osaamisalaKoodiToKoodiUri(
+        osaamisala?.osaamisala?.value
+      ),
+      koulutustyyppi,
       lisatiedot: osiot.map(({ value }) => ({
         otsikkoKoodiUri: value,
         teksti: pickTranslations(

@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from 'lodash/fp';
 
 import {
   KOULUTUSTYYPPI,
@@ -8,6 +8,7 @@ import {
 } from '#/src/constants';
 
 import createFormConfigBuilder from '#/src/utils/form/createFormConfigBuilder';
+import { validateExistence } from '#/src/utils/form/createErrorBuilder';
 
 import {
   validateIfJulkaistu,
@@ -41,7 +42,7 @@ const config = createFormConfigBuilder().registerSections([
         koulutustyypit: [KOULUTUSTYYPPI.TUTKINNON_OSA],
         validate: eb =>
           eb.validateArray('tutkinnonosat.osat', eb => {
-            return _.flow([
+            return _.pipe([
               eb => eb.validateExistence('eperuste'),
               eb => eb.validateExistence('koulutus'),
               eb => eb.validateExistence('tutkinnonosa'),
@@ -63,6 +64,33 @@ const config = createFormConfigBuilder().registerSections([
         required: true,
       },
     ],
+  },
+  {
+    section: 'osaamisala',
+    koulutustyypit: [KOULUTUSTYYPPI.OSAAMISALA],
+    field: 'osaamisala',
+    parts: [
+      {
+        field: '.koulutus',
+        validate: validateExistence('osaamisala.koulutus'),
+        required: true,
+      },
+      {
+        field: '.eperuste',
+        validate: validateExistence('osaamisala.eperuste'),
+        required: true,
+      },
+      {
+        field: '.osaamisala',
+        validate: validateExistence('osaamisala.osaamisala'),
+        required: true,
+      },
+    ],
+  },
+  {
+    section: 'osaamisalanKuvaus',
+    koulutustyypit: [KOULUTUSTYYPPI.OSAAMISALA],
+    field: 'osaamisalanKuvaus',
   },
   {
     section: 'information',
@@ -98,10 +126,7 @@ const config = createFormConfigBuilder().registerSections([
       {
         field: '.koulutus',
         fragment: 'osaamisala',
-        koulutustyypit: [
-          KOULUTUSTYYPPI.LUKIOKOULUTUS,
-          KOULUTUSTYYPPI.OSAAMISALA,
-        ],
+        koulutustyypit: [KOULUTUSTYYPPI.LUKIOKOULUTUS],
         validate: eb => eb.validateExistence('information.koulutus'),
         required: true,
       },
@@ -155,7 +180,6 @@ const config = createFormConfigBuilder().registerSections([
         koulutustyypit: [
           ...TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
           KOULUTUSTYYPPI.LUKIOKOULUTUS,
-          KOULUTUSTYYPPI.OSAAMISALA,
         ],
       },
     ],

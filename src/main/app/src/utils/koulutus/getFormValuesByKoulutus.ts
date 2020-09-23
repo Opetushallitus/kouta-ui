@@ -1,4 +1,9 @@
 import _ from 'lodash/fp';
+import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
+
+const koodiUriToKoodi = koodiUri => {
+  return parseKoodiUri(koodiUri)?.koodiArvo;
+};
 
 export const getFormValuesByKoulutus = koulutus => {
   const {
@@ -23,6 +28,7 @@ export const getFormValuesByKoulutus = koulutus => {
     tutkintonimikeKoodiUrit = [],
     kuvauksenNimi = {},
     koulutusalaKoodiUrit = [],
+    osaamisalaKoodiUri,
   } = metadata;
 
   return {
@@ -78,6 +84,13 @@ export const getFormValuesByKoulutus = koulutus => {
     esikatselu,
     julkinen,
     teemakuva,
+    osaamisala: {
+      osaamisala: {
+        value: koodiUriToKoodi(osaamisalaKoodiUri),
+      },
+      eperuste: { value: ePerusteId },
+      koulutus: { value: koulutusKoodiUri },
+    },
   };
 };
 

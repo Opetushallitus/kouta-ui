@@ -26,6 +26,7 @@ export const prepareTest = ({
   const toteutusOid = '2.1.1.1.1.1';
   const koulutusOid = '3.1.1.1.1';
   const valintaperusteId = '649adb37-cd4d-4846-91a9-84b58b90f928';
+  const tarjoajat = ['1.2.3.4.5.6.7', '7.7.7.7.7'];
 
   const testHakukohdeFields = {
     toteutusOid,
@@ -37,7 +38,7 @@ export const prepareTest = ({
 
   cy.server();
 
-  stubHakukohdeFormRoutes({ organisaatioOid, hakuOid });
+  stubHakukohdeFormRoutes({ organisaatioOid, hakuOid, tarjoajat });
 
   cy.route({
     method: 'GET',
@@ -55,6 +56,7 @@ export const prepareTest = ({
     url: `**/koulutus/${koulutusOid}`,
     response: merge(koulutus({ tyyppi }), {
       oid: koulutusOid,
+      tarjoajat,
       organisaatioOid: organisaatioOid,
       tila: 'julkaistu',
     }),
@@ -115,7 +117,11 @@ export const prepareTest = ({
   );
 };
 
-export const stubHakukohdeFormRoutes = ({ organisaatioOid, hakuOid }) => {
+export const stubHakukohdeFormRoutes = ({
+  organisaatioOid,
+  hakuOid,
+  tarjoajat = [],
+}) => {
   stubCommonRoutes();
 
   cy.route({
@@ -124,6 +130,16 @@ export const stubHakukohdeFormRoutes = ({ organisaatioOid, hakuOid }) => {
     response: merge(organisaatio(), {
       oid: organisaatioOid,
     }),
+  });
+
+  tarjoajat.forEach(tarjoajaOid => {
+    cy.route({
+      method: 'GET',
+      url: `**/organisaatio-service/rest/organisaatio/v4/hierarkia/hae?oid=${tarjoajaOid}**`,
+      response: merge(organisaatio(), {
+        oid: tarjoajaOid,
+      }),
+    });
   });
 
   cy.route({
@@ -142,6 +158,10 @@ export const stubHakukohdeFormRoutes = ({ organisaatioOid, hakuOid }) => {
   stubKoodistoRoute({ koodisto: 'liitetyypitamm' });
   stubKoodistoRoute({ koodisto: 'kausi' });
   stubKoodiRoute(createKoodi({ koodisto: 'posti', versio: 2 }));
+  stubKoodiRoute(createKoodi({ koodisto: 'posti', versio: 2 }));
+  stubKoodiRoute(
+    createKoodi({ koodisto: 'posti', koodiArvo: '00350', versio: 1 })
+  );
 
   cy.route({
     method: 'GET',

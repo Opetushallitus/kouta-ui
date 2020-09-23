@@ -10,16 +10,14 @@ import {
   getByTestId,
   paste,
   fillKieliversiotSection,
+  fillTilaSection,
+  tallenna,
 } from '#/cypress/utils';
 
 import { prepareTest } from '#/cypress/hakukohdeFormUtils';
 
 const lisaa = () => {
   getByTestId('lisaaButton').click({ force: true });
-};
-
-const tallenna = () => {
-  getByTestId('tallennaHakukohdeButton').click();
 };
 
 const fillPohjakoulutusvaatimusSection = () => {
@@ -151,12 +149,6 @@ const fillLiitteetSection = () => {
     });
 
     jatka();
-  });
-};
-
-const fillTilaSection = (tila = 'julkaistu') => {
-  getByTestId('tilaSection').within(() => {
-    getRadio(tila).check({ force: true });
   });
 };
 

@@ -1,13 +1,7 @@
-import { merge } from 'lodash';
-
-import { getByTestId, fillKieliversiotSection } from '#/cypress/utils';
-import { stubSoraKuvausFormRoutes } from '#/cypress/soraKuvausFormUtils';
-
 import createSoraKuvaus from '#/cypress/data/soraKuvaus';
-
-const tallenna = () => {
-  getByTestId('tallennaSoraKuvausButton').click();
-};
+import { stubSoraKuvausFormRoutes } from '#/cypress/soraKuvausFormUtils';
+import { fillKieliversiotSection, tallenna } from '#/cypress/utils';
+import { merge } from 'lodash';
 
 describe('editSoraKuvausForm', () => {
   const organisaatioOid = '1.1.1.1.1.1';

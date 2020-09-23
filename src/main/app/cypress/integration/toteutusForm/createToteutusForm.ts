@@ -13,16 +13,12 @@ import {
   fillKieliversiotSection,
   fillPohjaSection,
   typeToEditor,
+  fillTilaSection,
+  tallenna,
 } from '#/cypress/utils';
 
 import koulutus from '#/cypress/data/koulutus';
 import { stubToteutusFormRoutes } from '#/cypress/toteutusFormUtils';
-
-const fillTilaSection = (tila = 'julkaistu') => {
-  getByTestId('tilaSection').within(() => {
-    getRadio(tila).check({ force: true });
-  });
-};
 
 const fillOpetuskieli = () => {
   getByTestId('opetuskieli').within(() => {
@@ -125,10 +121,6 @@ const fillNayttamistiedotSection = () => {
 
     jatka();
   });
-};
-
-const tallenna = () => {
-  getByTestId('tallennaToteutusButton').click();
 };
 
 const fillJarjestajatSection = () => {

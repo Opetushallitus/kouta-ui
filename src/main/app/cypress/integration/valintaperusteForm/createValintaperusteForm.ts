@@ -12,13 +12,11 @@ import {
   fillValintakokeetSection,
   fillKieliversiotSection,
   fillPohjaSection,
+  fillTilaSection,
+  tallenna,
 } from '#/cypress/utils';
 import valintaperuste from '#/cypress/data/valintaperuste';
 import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils';
-
-const tallenna = () => {
-  getByTestId('tallennaValintaperusteButton').click();
-};
 
 const fillKoulutustyyppiSection = path => {
   getByTestId('tyyppiSection').within(() => {
@@ -122,12 +120,6 @@ const fillPerustiedotSection = () => {
     fillKohdejoukonRajausSection();
 
     jatka();
-  });
-};
-
-const fillTilaSection = (tila = 'julkaistu') => {
-  getByTestId('tilaSection').within(() => {
-    getRadio(tila).check({ force: true });
   });
 };
 

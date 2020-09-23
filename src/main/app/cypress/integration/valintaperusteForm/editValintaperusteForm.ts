@@ -1,12 +1,12 @@
 import { merge } from 'lodash';
 
-import { getByTestId, fillKieliversiotSection } from '#/cypress/utils';
+import {
+  getByTestId,
+  fillKieliversiotSection,
+  tallenna,
+} from '#/cypress/utils';
 import valintaperuste from '#/cypress/data/valintaperuste';
 import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils';
-
-const tallenna = () => {
-  getByTestId('tallennaValintaperusteButton').click();
-};
 
 const prepareTest = tyyppi => {
   const organisaatioOid = '1.1.1.1.1.1';

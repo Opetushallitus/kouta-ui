@@ -218,7 +218,8 @@ export const stubCommonRoutes = () => {
   stubKoodistoOpintojenLaajuusYksikko();
 };
 
-export const jatka = () => getByTestId('jatkaButton').click();
+export const jatka = () =>
+  cy.findByRole('button', { name: 'yleiset.jatka' }).click();
 
 export const OPH_TEST_ORGANISAATIO_OID = '1.2.246.562.10.48587687889';
 
@@ -309,4 +310,14 @@ export const stubKoodistoOpintojenLaajuusYksikko = () => {
       '**/koodisto-service/rest/json/opintojenlaajuusyksikko/koodi?onlyValidKoodis=true&koodistoVersio=',
     response: koodistoOpintojenLaajuusYksikko,
   });
+};
+
+export const fillTilaSection = (tila = 'julkaistu') => {
+  getByTestId('tilaSection').within(() => {
+    getRadio(tila).check({ force: true });
+  });
+};
+
+export const tallenna = () => {
+  cy.findByRole('button', { name: 'yleiset.tallenna' }).click();
 };

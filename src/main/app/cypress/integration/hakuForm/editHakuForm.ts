@@ -1,11 +1,7 @@
 import { merge } from 'lodash';
-import { getByTestId, fillKieliversiotSection } from '#/cypress/utils';
+import { fillKieliversiotSection, tallenna } from '#/cypress/utils';
 import { stubHakuFormRoutes } from '#/cypress/hakuFormUtils';
 import haku from '#/cypress/data/haku';
-
-const tallenna = () => {
-  getByTestId('tallennaHakuButton').click();
-};
 
 describe('editHakuForm', () => {
   const organisaatioOid = '1.1.1.1.1.1';

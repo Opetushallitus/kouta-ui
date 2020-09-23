@@ -4,22 +4,17 @@ import {
   selectOption,
   fillTreeSelect,
   fillKoulutustyyppiSelect,
-  getRadio,
   fillAsyncSelect,
   getByTestId,
   jatka,
   paste,
   fillKieliversiotSection,
   fillPohjaSection,
+  fillTilaSection,
+  tallenna,
 } from '#/cypress/utils';
 
 import { stubKoulutusFormRoutes } from '#/cypress/koulutusFormUtils';
-
-const fillTilaSection = (tila = 'julkaistu') => {
-  getByTestId('tilaSection').within(() => {
-    getRadio(tila).check({ force: true });
-  });
-};
 
 const fillKoulutustyyppiSection = path => {
   getByTestId('koulutustyyppiSection').within(() => {
@@ -49,12 +44,6 @@ const fillLisatiedotSection = () => {
 const fillTeemakuvaSection = () => {
   getByTestId('teemakuvaSection').within(() => {
     jatka();
-  });
-};
-
-const tallenna = () => {
-  getByTestId('tallennaKoulutusButton').within(() => {
-    cy.contains('yleiset.tallenna').click();
   });
 };
 

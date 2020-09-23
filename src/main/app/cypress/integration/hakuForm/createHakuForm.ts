@@ -9,15 +9,11 @@ import {
   jatka,
   paste,
   fillPohjaSection,
+  fillTilaSection,
+  tallenna,
 } from '#/cypress/utils';
 
 import { stubHakuFormRoutes } from '#/cypress/hakuFormUtils';
-
-const fillTilaSection = (tila = 'julkaistu') => {
-  getByTestId('tilaSection').within(() => {
-    getRadio(tila).check({ force: true });
-  });
-};
 
 const fillNimiSection = () => {
   getByTestId('nimiSection').within(() => {
@@ -135,10 +131,6 @@ const fillHakulomakeSection = () => {
 
     jatka();
   });
-};
-
-const tallenna = () => {
-  getByTestId('tallennaHakuButton').click();
 };
 
 const fillYhteystiedotSection = () => {

@@ -3,12 +3,13 @@ import {
   typeToEditor,
   getCheckbox,
   fillKoulutustyyppiSelect,
-  getRadio,
   getByTestId,
   jatka,
   paste,
   fillKieliversiotSection,
   fillPohjaSection,
+  fillTilaSection,
+  tallenna,
 } from '#/cypress/utils';
 
 import createSoraKuvaus from '#/cypress/data/soraKuvaus';
@@ -37,16 +38,6 @@ const fillJulkisuusSection = () => {
   getByTestId('julkinenSection').within(() => {
     getCheckbox(null).check({ force: true });
     jatka();
-  });
-};
-
-const tallenna = () => {
-  getByTestId('tallennaSoraKuvausButton').click();
-};
-
-const fillTilaSection = (tila = 'julkaistu') => {
-  getByTestId('tilaSection').within(() => {
-    getRadio(tila).check({ force: true });
   });
 };
 

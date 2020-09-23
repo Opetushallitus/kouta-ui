@@ -1,12 +1,8 @@
 import { merge } from 'lodash';
 
-import { getByTestId, fillKieliversiotSection } from '#/cypress/utils';
+import { fillKieliversiotSection, tallenna } from '#/cypress/utils';
 import koulutus from '#/cypress/data/koulutus';
 import { stubKoulutusFormRoutes } from '#/cypress/koulutusFormUtils';
-
-const tallenna = () => {
-  getByTestId('tallennaKoulutusButton').click();
-};
 
 const prepareTest = tyyppi => {
   const organisaatioOid = '1.1.1.1.1.1';

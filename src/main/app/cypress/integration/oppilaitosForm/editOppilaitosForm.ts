@@ -1,10 +1,6 @@
 import createOppilaitos from '#/cypress/data/oppilaitos';
-import { getByTestId, fillKieliversiotSection } from '#/cypress/utils';
 import { stubOppilaitosFormRoutes } from '#/cypress/oppilaitosFormUtils';
-
-const tallenna = () => {
-  getByTestId('tallennaOppilaitosButton').click();
-};
+import { fillKieliversiotSection, tallenna } from '#/cypress/utils';
 
 describe('editOppilaitosForm', () => {
   const organisaatioOid = '1.1.1.1.1.1';

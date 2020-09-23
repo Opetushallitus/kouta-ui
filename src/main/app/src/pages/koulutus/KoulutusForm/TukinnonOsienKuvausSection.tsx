@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
+import _ from 'lodash/fp';
 import { useFieldValue } from '#/src/hooks/form';
 import { getLanguageValue } from '#/src/utils/languageUtils';
 import FormConfigFragment from '#/src/components/FormConfigFragment';
@@ -8,15 +9,51 @@ import { Box, Typography } from '#/src/components/virkailija';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import { getTutkinnonOsanKuvaus } from '#/src/utils/koulutus/getTutkinnonOsanKuvaus';
 import StyledSectionHTML from '#/src/components/StyledSectionHTML';
-import { getThemeProp, spacing } from '#/src/theme';
+import { getThemeProp } from '#/src/theme';
 import Anchor from '#/src/components/Anchor';
 import { useUrls } from '#/src/contexts/contextHooks';
+import { sanitizeHTML } from '#/src/utils';
+import { StyledInfoBox } from './KoulutuksenEPerusteTiedot/InfoBox';
 
-const TutkinnonOsaInfo = ({ className, eperuste, viite, osa, language }) => {
-  const { t } = useTranslation();
+const BodyHeading = styled(Typography).attrs({ variant: 'h6' })`
+  color: ${getThemeProp('colors.text.primary')};
+`;
+
+const AmmattitaitoVaatimukset = ({ tutkinnonOsa, language }) => {
+  const { ammattitaitovaatimukset, ammattitaitovaatimukset2019 } = tutkinnonOsa;
+
+  if (ammattitaitovaatimukset) {
+    return <StyledSectionHTML html={ammattitaitovaatimukset[language]} />;
+  } else if (ammattitaitovaatimukset2019) {
+    return (
+      <>
+        {_.map(({ kuvaus, vaatimukset }) => {
+          return (
+            <div key={kuvaus?._id}>
+              <BodyHeading>{sanitizeHTML(kuvaus[language])}</BodyHeading>
+              <Typography variant="body">
+                <ul>
+                  {_.map(({ vaatimus, koodi }) => (
+                    <li key={koodi?.uri}>{vaatimus[language]}</li>
+                  ))(vaatimukset)}
+                </ul>
+              </Typography>
+            </div>
+          );
+        })(ammattitaitovaatimukset2019?.kohdealueet)}
+      </>
+    );
+  }
+  return <Typography variant="body">-</Typography>;
+};
+
+const TutkinnonOsaInfo = ({ eperuste, viite, osa, language }) => {
+  const { i18n } = useTranslation();
+  const t = i18n.getFixedT(language);
+
   const apiUrls = useUrls();
   return (
-    <div className={className}>
+    <>
       <Typography variant="h4" mb={2}>
         {getLanguageValue(osa?.nimi, language)}, {viite?.laajuus} osp (
         <Anchor
@@ -34,26 +71,21 @@ const TutkinnonOsaInfo = ({ className, eperuste, viite, osa, language }) => {
       </Typography>
 
       <Typography variant="h6" mb={2}>
-        {t('koulutuslomake.ammattitaitovaatimukset')}
+        {t('eperuste.ammattitaitovaatimukset')}
       </Typography>
 
-      <StyledSectionHTML html={osa?.ammattitaitovaatimukset?.[language]} />
+      <AmmattitaitoVaatimukset tutkinnonOsa={osa} language={language} />
 
       <Typography variant="h6" mb={2}>
-        {t('koulutuslomake.ammattitaidonOsoittamistavat')}
+        {t('eperuste.ammattitaidonOsoittamistavat')}
       </Typography>
       <StyledSectionHTML html={osa?.ammattitaidonOsoittamistavat?.[language]} />
-    </div>
+    </>
   );
 };
 
-const StyledTutkinnonOsaInfo = styled(TutkinnonOsaInfo)`
-  background-color: ${getThemeProp('colors.grayLighten6')};
-  padding: ${spacing(4)};
-  line-height: 23px;
-`;
-
 export const TutkinnonOsienKuvausSection = ({ disabled, language, name }) => {
+  const { t } = useTranslation();
   const tutkinnonosat = useFieldValue(`${name}.osat`);
 
   const selectedTutkinnonOsat = useMemo(() => {
@@ -83,14 +115,18 @@ export const TutkinnonOsienKuvausSection = ({ disabled, language, name }) => {
       <FormConfigFragment name="osat">
         <Box mb={2}>
           {(kuvaukset || []).map((osa, index) => (
-            <StyledTutkinnonOsaInfo
-              viite={viiteForOsa(osa)}
-              eperuste={eperusteForOsa(osa)}
-              key={`${osa.id}_${index}`}
-              osa={osa}
-              language={language}
-            />
+            <StyledInfoBox key={`${osa.id}_${index}`} mb={2}>
+              <TutkinnonOsaInfo
+                viite={viiteForOsa(osa)}
+                eperuste={eperusteForOsa(osa)}
+                osa={osa}
+                language={language}
+              />
+            </StyledInfoBox>
           ))}
+          <Typography variant="secondary" as="div" marginTop={1}>
+            ({t('yleiset.lahde')}: {t('yleiset.ePerusteet')})
+          </Typography>
         </Box>
       </FormConfigFragment>
     </Box>

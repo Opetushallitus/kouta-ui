@@ -156,3 +156,5 @@ export const isDeepEmptyFormValues = value =>
   (_.isObjectLike(value) && _.every(value, isDeepEmptyFormValues));
 
 export const assert = console.assert;
+
+export const oneAndOnlyOne = all => all && all.length === 1 && all[0];

@@ -8,12 +8,14 @@ import {
   useIsDirty,
 } from '#/src/hooks/form';
 import { getLanguageValue } from '#/src/utils/languageUtils';
-import { getTestIdProps } from '#/src/utils';
+import { getTestIdProps, oneAndOnlyOne } from '#/src/utils';
 import { FormFieldInput } from '#/src/components/formFields';
 
-const oneAndOnlyOne = all => all && all.length === 1 && all[0];
-
-export const KoulutuksenNimiSection = ({ language, name }) => {
+export const TutkinnonOsaKoulutusNimiSection = ({
+  language,
+  name,
+  disabled,
+}) => {
   const { t } = useTranslation();
   const tutkinnonosat = useFieldValue(`${name}.osat`);
 
@@ -36,7 +38,7 @@ export const KoulutuksenNimiSection = ({ language, name }) => {
   return (
     <Box mb={2} {...getTestIdProps('koulutuksenNimi')}>
       <Field
-        disabled={oneSelectedTutkinnonOsa}
+        disabled={disabled || oneSelectedTutkinnonOsa}
         name={`${name}.nimi.${language}`}
         component={FormFieldInput}
         label={t('koulutuslomake.lisaaKoulutuksenNimi')}

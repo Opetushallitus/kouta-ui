@@ -22,13 +22,13 @@ import TeemakuvaSection from '#/src/components/TeemakuvaSection';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import TypeSection from './TypeSection';
 import TiedotSection from './TiedotSection';
-import { KoulutuksenNimiSection } from './KoulutuksenNimiSection';
 import KuvausSection from './KuvausSection';
 import JarjestajaSection from './JarjestajaSection';
 import LisatiedotSection from './LisatiedotSection';
 import ToteutuksetSection from './ToteutuksetSection';
 import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';
 import { TutkinnonOsatSection } from './TutkinnonOsatSection';
+import { TutkinnonOsaKoulutusNimiSection } from './TutkinnonOsaKoulutusNimiSection';
 
 const isInHierarkia = org => hierarkia =>
   hierarkia.organisaatioOid === org.organisaatioOid ||
@@ -124,7 +124,7 @@ const KoulutusForm = ({
       <FormCollapse
         section="tutkinnonosat"
         header={t('koulutuslomake.koulutuksenNimi')}
-        Component={KoulutuksenNimiSection}
+        Component={TutkinnonOsaKoulutusNimiSection}
         languages={languageTabs}
         disabled={onlyTarjoajaRights}
         koulutustyyppi={koulutustyyppi}

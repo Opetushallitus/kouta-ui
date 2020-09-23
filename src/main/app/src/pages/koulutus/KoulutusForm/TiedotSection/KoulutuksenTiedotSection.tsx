@@ -327,7 +327,7 @@ const KoulutuksenTiedotSection = ({
   return (
     <Box display="flex" flexDirection="column">
       <Box flexDirection="row" display="flex" mb={3}>
-        <Box width={0.5} mr={2} {...getTestIdProps('koulutustyyppiSelect')}>
+        <Box width={0.5} mr={2} {...getTestIdProps('koulutusSelect')}>
           <KoulutusField
             disabled={disabled}
             name={`${name}.koulutus`}

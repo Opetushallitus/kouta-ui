@@ -99,9 +99,9 @@ describe('createKoulutusForm', () => {
     fillCommon({ koulutustyyppiPath: ['amm'] });
 
     getByTestId('informationSection').within(() => {
-      getByTestId('koulutustyyppiSelect').click();
+      getByTestId('koulutusSelect').click();
 
-      getByTestId('koulutustyyppiSelect').within(() => {
+      getByTestId('koulutusSelect').within(() => {
         fillAsyncSelect('0', 'koulutus_0');
       });
 

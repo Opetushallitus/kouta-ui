@@ -25,7 +25,7 @@ export const ValitseKoulutusBox = ({
 
   return (
     <StyledInfoBox mb={2}>
-      <Box width={0.7} mb={2} {...getTestIdProps('koulutustyyppiSelect')}>
+      <Box width={0.7} mb={2} {...getTestIdProps('koulutusSelect')}>
         <KoulutusField
           disabled={disabled}
           name={fieldName}

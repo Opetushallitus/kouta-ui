@@ -1,9 +1,9 @@
+import _ from 'lodash';
 import {
   getSelectOption,
   getCheckbox,
   selectOption,
   fillTreeSelect,
-  fillKoulutustyyppiSelect,
   fillAsyncSelect,
   getByTestId,
   jatka,
@@ -12,16 +12,10 @@ import {
   fillPohjaSection,
   fillTilaSection,
   tallenna,
+  fillKoulutustyyppiSection,
 } from '#/cypress/utils';
 
 import { stubKoulutusFormRoutes } from '#/cypress/koulutusFormUtils';
-
-const fillKoulutustyyppiSection = path => {
-  getByTestId('koulutustyyppiSection').within(() => {
-    fillKoulutustyyppiSelect(path);
-    jatka();
-  });
-};
 
 const fillLisatiedotSection = () => {
   getByTestId('lisatiedotSection').within(() => {
@@ -102,11 +96,11 @@ describe('createKoulutusForm', () => {
       getByTestId('koulutusSelect').click();
 
       getByTestId('koulutusSelect').within(() => {
-        fillAsyncSelect('0', 'koulutus_0');
+        fillAsyncSelect('Kaivosalan perustutkinto');
       });
 
       getByTestId('ePerusteSelect').within(() => {
-        fillAsyncSelect('1', 'koulutus_0');
+        fillAsyncSelect('Kaivosalan perustutkinto');
       });
 
       jatka();
@@ -133,7 +127,63 @@ describe('createKoulutusForm', () => {
     });
   });
 
-  it('should be able to create korkeakoulu koulutus', () => {
+  it('should be able to create ammatillinen tutkinnon osa koulutus', () => {
+    cy.route({
+      method: 'PUT',
+      url: '**/koulutus',
+      response: {
+        oid: koulutusOid,
+      },
+    }).as('createAmmKoulutusResponse');
+
+    fillCommon({ koulutustyyppiPath: ['ammatillinen', 'amm-tutkinnon-osa'] });
+
+    getByTestId('tutkinnonosatSection').within(() => {
+      getByTestId('lisaaKoulutusButton').click();
+
+      getByTestId('koulutusSelect').click();
+
+      getByTestId('koulutusSelect').within(() => {
+        fillAsyncSelect('Kaivosalan perustutkinto');
+      });
+
+      getByTestId('ePerusteSelect').within(() => {
+        fillAsyncSelect('Kaivosalan perustutkinto');
+      });
+
+      getByTestId('tutkinnonOsatSelect').within(() => {
+        fillAsyncSelect('Louhintaporaus');
+      });
+
+      jatka();
+    });
+
+    getByTestId('nimiSection').within(() => {
+      jatka();
+    });
+
+    getByTestId('tutkinnonOsienKuvausSection').within(() => {
+      jatka();
+    });
+
+    fillLisatiedotSection();
+
+    fillTeemakuvaSection();
+
+    fillJarjestajaSection();
+
+    fillNakyvyysSection();
+
+    fillTilaSection();
+
+    tallenna();
+
+    cy.wait('@createAmmKoulutusResponse').then(({ request }) => {
+      cy.wrap(request.body).toMatchSnapshot();
+    });
+  });
+
+  it('should be able to create AMK-koulutus', () => {
     cy.route({
       method: 'PUT',
       url: '**/koulutus',
@@ -148,7 +198,7 @@ describe('createKoulutusForm', () => {
       getByTestId('koulutuskoodiSelect').click();
 
       getByTestId('koulutuskoodiSelect').within(() => {
-        fillAsyncSelect('0', 'koulutus_0');
+        fillAsyncSelect('Fysioterapeutti (AMK)');
       });
 
       getByTestId('nimiInput').within(() => {
@@ -215,10 +265,10 @@ describe('createKoulutusForm', () => {
     fillCommon({ koulutustyyppiPath: ['lk'] });
 
     getByTestId('informationSection').within(() => {
-      getByTestId('koulutustyyppiSelect').click();
+      getByTestId('koulutusSelect').click();
 
-      getByTestId('koulutustyyppiSelect').within(() => {
-        fillAsyncSelect('0', 'koulutus_0');
+      getByTestId('koulutusSelect').within(() => {
+        fillAsyncSelect('Lukion oppimäärä');
       });
 
       jatka();

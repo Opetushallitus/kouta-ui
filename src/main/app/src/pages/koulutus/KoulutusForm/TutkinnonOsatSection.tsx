@@ -68,7 +68,7 @@ const TutkinnonOsatFields = ({
           onClick={onAddField}
           {...getTestIdProps('lisaaKoulutusButton')}
         >
-          {t('toteutuslomake.lisaaKoulutus')}
+          {t('koulutuslomake.lisaaKoulutus')}
         </Button>
       </Box>
     </>

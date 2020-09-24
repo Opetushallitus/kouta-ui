@@ -1,4 +1,4 @@
-import { merge } from 'lodash';
+import _ from 'lodash';
 
 import { fillKieliversiotSection, tallenna } from '#/cypress/utils';
 import koulutus from '#/cypress/data/koulutus';
@@ -11,7 +11,6 @@ const prepareTest = tyyppi => {
   const testKoulutusFields = {
     oid: koulutusOid,
     organisaatioOid: organisaatioOid,
-    koulutusKoodiUri: 'koulutus_0#1',
     tarjoajat: ['1.1.1.1.1.1', '1.2.1.1.1.1'],
   };
 
@@ -34,7 +33,7 @@ const prepareTest = tyyppi => {
   cy.route({
     method: 'GET',
     url: `**/koulutus/${koulutusOid}`,
-    response: merge(koulutus({ tyyppi }), testKoulutusFields),
+    response: _.merge(koulutus({ tyyppi }), testKoulutusFields),
   });
 
   cy.visit(`/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`);

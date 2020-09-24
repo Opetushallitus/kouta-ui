@@ -3,6 +3,7 @@ import { loggable } from 'cypress-pipe';
 import { fireEvent } from '@testing-library/react';
 import koodisto from '#/cypress/data/koodisto';
 import koodistoOpintojenLaajuusYksikko from '#/cypress/data/koodistoOpintojenLaajuusYksikko';
+import ePerusteByKoulutusKoodi351107 from './data/ePerusteByKoulutusKoodi351107';
 
 export const paste = loggable('paste', value => $element => {
   $element.focus();
@@ -191,20 +192,8 @@ export const stubEPerusteetByKoulutuskoodiRoute = () => {
   cy.route({
     method: 'GET',
     url:
-      '**/eperusteet-service/api/perusteet?tuleva=true&siirtyma=false&voimassaolo=true&poistunut=false&kieli=fi&koulutuskoodi=koulutus_0',
-    response: {
-      data: [
-        {
-          nimi: { fi: 'koulutus_0' },
-          kuvaus: { fi: 'koulutus_0 kuvaus' },
-          osaamisalat: [
-            { uri: 'osaamisala_0', nimi: { fi: 'osaamisala_0 nimi' } },
-          ],
-          tutkintonimikeKoodiUri: 'nimike_1#1',
-          id: 1,
-        },
-      ],
-    },
+      '**/eperusteet-service/api/perusteet?tuleva=true&siirtyma=false&voimassaolo=true&poistunut=false&kieli=fi&koulutuskoodi=koulutus_351107',
+    response: ePerusteByKoulutusKoodi351107,
   });
 };
 

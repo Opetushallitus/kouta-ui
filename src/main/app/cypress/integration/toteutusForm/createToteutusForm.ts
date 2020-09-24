@@ -230,7 +230,7 @@ const toteutusOid = '1.2.3.4.5.6';
 const prepareTest = tyyppi => {
   const organisaatioOid = '1.1.1.1.1.1';
   const koulutusOid = '1.2.1.1.1.1';
-  const perusteId = '1';
+  const perusteId = 6777660;
 
   const testKoulutusFields = {
     oid: koulutusOid,

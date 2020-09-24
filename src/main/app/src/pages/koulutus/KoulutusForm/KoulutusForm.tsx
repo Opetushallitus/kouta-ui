@@ -31,6 +31,7 @@ import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
 import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';
 import { TutkinnonOsatSection } from './TutkinnonOsatSection';
 import { TutkinnonOsaKoulutusNimiSection } from './TutkinnonOsaKoulutusNimiSection';
+import { getTestIdProps } from '#/src/utils';
 
 const isInHierarkia = org => hierarkia =>
   hierarkia.organisaatioOid === org.organisaatioOid ||
@@ -149,6 +150,7 @@ const KoulutusForm = ({
         languages={languageTabs}
         disabled={onlyTarjoajaRights}
         koulutustyyppi={koulutustyyppi}
+        {...getTestIdProps('nimiSection')}
       />
 
       <FormCollapse
@@ -158,6 +160,7 @@ const KoulutusForm = ({
         languages={languageTabs}
         disabled={onlyTarjoajaRights}
         koulutustyyppi={koulutustyyppi}
+        {...getTestIdProps('tutkinnonOsienKuvausSection')}
       />
 
       <FormCollapse

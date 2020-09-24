@@ -204,6 +204,7 @@ export default {
     onJulkinen: '{{entity}} on julkinen',
     kokeetTaiLisanaytot: 'Kokeet tai lisänäytöt',
     organisaatiot: 'Organisaatiot',
+    ladataan: 'Ladataan...',
   },
   ilmoitukset: {
     tallentamattomiaMuutoksia: {
@@ -401,9 +402,9 @@ export default {
       'Koulutuksen näkyminen muille koulutustoimijoille',
     julkisuusKuvaus:
       'Valitse näkyykö koulutus muille koulutustoimijoille. Jos koulutus on julkinen, muut koulutustoimijat voivat käyttää sitä pohjana luodessaan uusia.',
+    lisaaKoulutus: 'Lisää uusi koulutus',
   },
   toteutuslomake: {
-    lisaaKoulutus: 'Lisää uusi koulutus',
     toteutuksenTiedot: 'Toteutuksen tiedot',
     toteutuksenKuvaus: 'Toteutuksen kuvaus',
     toteutuksenYleinenKuvaus: 'Toteutuksen yleinen kuvaus',

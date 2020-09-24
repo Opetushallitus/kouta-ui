@@ -1,3 +1,4 @@
+import _ from 'lodash/fp';
 import { loggable } from 'cypress-pipe';
 import { fireEvent } from '@testing-library/react';
 import koodisto from '#/cypress/data/koodisto';
@@ -29,7 +30,7 @@ export const getRadio = value =>
   cy.get(`input[type="radio"][value="${value}"]`);
 
 export const getSelectOption = value =>
-  cy.get('[class*="option"]').contains(value);
+  cy.findAllByRole('option').contains(value);
 
 export const getCheckbox = value =>
   cy.get(`input[type="checkbox"]${value ? `[name="${value}"]` : ''}`);
@@ -44,10 +45,13 @@ export const selectOption = value => {
     });
 };
 
-export const fillAsyncSelect = (input, match) => {
+export const fillAsyncSelect = (input, match = null) => {
+  const searchTerm = match || input;
   getSelect().within(() => {
     cy.get('input[type="text"]').pipe(paste(input));
-    cy.get(`div:contains(${match})`).first().click();
+    cy.findAllByRole('option', { name: _.includes(searchTerm) })
+      .first()
+      .click();
   });
 };
 

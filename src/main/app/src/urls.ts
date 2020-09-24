@@ -1,3 +1,5 @@
+import { isNodeEnv, isCypress } from './utils';
+
 const { REACT_APP_DEV_SERVER_URL, REACT_APP_KOUTA_BACKEND_URL } = process.env;
 
 const koutaBackendDevUrl =
@@ -81,11 +83,7 @@ export const development = ({ isCypress }) => ({
 });
 
 export const configure = async (urls, httpClient) => {
-  const { NODE_ENV, REACT_APP_CYPRESS } = process.env;
-
-  const isCypress = !!REACT_APP_CYPRESS;
-
-  if (['development', 'test'].includes(NODE_ENV)) {
+  if (isNodeEnv(['development', 'test'])) {
     urls.addProperties(development({ isCypress }));
   } else {
     const { data } = await httpClient.get('/kouta/rest/config/frontProperties');

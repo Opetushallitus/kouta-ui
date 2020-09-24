@@ -9,7 +9,14 @@ import {
   isEmptyEditorState,
 } from '#/src/components/Editor/utils';
 
-export const isDev = process.env.NODE_ENV === 'development';
+const { NODE_ENV, REACT_APP_CYPRESS } = process.env;
+
+export const isDev = NODE_ENV === 'development';
+
+export const isNodeEnv = env =>
+  (_.isArray(env) ? env : [env]).includes(NODE_ENV);
+
+export const isCypress = Boolean(REACT_APP_CYPRESS);
 
 export const isValidDate = value => _.isDate(value) && !_.isNaN(value);
 

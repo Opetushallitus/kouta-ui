@@ -5,7 +5,6 @@ import {
   typeToEditor,
   getTableInput,
   getCheckbox,
-  fillKoulutustyyppiSelect,
   jatka,
   getByTestId,
   paste,
@@ -14,15 +13,10 @@ import {
   fillPohjaSection,
   fillTilaSection,
   tallenna,
+  fillKoulutustyyppiSelect,
 } from '#/cypress/utils';
 import valintaperuste from '#/cypress/data/valintaperuste';
 import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils';
-
-const fillKoulutustyyppiSection = path => {
-  getByTestId('tyyppiSection').within(() => {
-    fillKoulutustyyppiSelect(path);
-  });
-};
 
 const fillHakutavanRajausSection = () => {
   getByTestId('hakutapaSection').within(() => {
@@ -114,7 +108,9 @@ const fillJulkisuusSection = () => {
 
 const fillPerustiedotSection = () => {
   getByTestId('perustiedotSection').within(() => {
-    fillKoulutustyyppiSection(['korkeakoulutus']);
+    getByTestId('koulutustyyppiSection').within(() => {
+      fillKoulutustyyppiSelect(['korkeakoulutus', 'yo']);
+    });
     fillKieliversiotSection();
     fillHakutavanRajausSection();
     fillKohdejoukonRajausSection();

@@ -173,12 +173,6 @@ export const fillTreeSelect = value => {
   });
 };
 
-export const fillKoulutustyyppiSelect = path => {
-  path.forEach(option => {
-    getRadio(option).check({ force: true });
-  });
-};
-
 export const fillDatePickerInput = value => {
   cy.get('.DatePickerInput__').find('input').pipe(paste(value));
 };
@@ -324,4 +318,32 @@ export const fillTilaSection = (tila = 'julkaistu') => {
 
 export const tallenna = () => {
   cy.findByRole('button', { name: 'yleiset.tallenna' }).click();
+};
+
+const isTutkintoonJohtava = koulutustyyppi =>
+  ['amk', 'yo', 'amm', 'lk'].includes(koulutustyyppi);
+
+export const fillKoulutustyyppiSelect = koulutustyyppiPath => {
+  const johtaaTutkintoon = isTutkintoonJohtava(_.last(koulutustyyppiPath));
+
+  if (johtaaTutkintoon) {
+    cy.findByRole('button', {
+      name: 'koulutustyyppivalikko.tutkintoonJohtavatKoulutustyypit',
+    }).click();
+  } else {
+    cy.findByRole('button', {
+      name: 'koulutustyyppivalikko.muutKoulutustyypit',
+    }).click();
+  }
+
+  koulutustyyppiPath.forEach(option => {
+    getRadio(option).check({ force: true });
+  });
+};
+
+export const fillKoulutustyyppiSection = koulutustyyppiPath => {
+  getByTestId('koulutustyyppiSection').within(() => {
+    fillKoulutustyyppiSelect(koulutustyyppiPath);
+    jatka();
+  });
 };

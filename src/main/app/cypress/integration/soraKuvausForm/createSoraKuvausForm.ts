@@ -2,7 +2,6 @@ import _ from 'lodash';
 import {
   typeToEditor,
   getCheckbox,
-  fillKoulutustyyppiSelect,
   getByTestId,
   jatka,
   paste,
@@ -10,17 +9,11 @@ import {
   fillPohjaSection,
   fillTilaSection,
   tallenna,
+  fillKoulutustyyppiSection,
 } from '#/cypress/utils';
 
 import createSoraKuvaus from '#/cypress/data/soraKuvaus';
 import { stubSoraKuvausFormRoutes } from '#/cypress/soraKuvausFormUtils';
-
-const fillKoulutustyyppiSection = () => {
-  getByTestId('koulutustyyppiSection').within(() => {
-    fillKoulutustyyppiSelect(['amm']);
-    jatka();
-  });
-};
 
 const fillTiedotSection = () => {
   getByTestId('tiedotSection').within(() => {
@@ -69,7 +62,7 @@ describe('createSoraKuvausForm', () => {
       },
     }).as('createSoraKuvausRequest');
 
-    fillKoulutustyyppiSection();
+    fillKoulutustyyppiSection(['amm']);
     fillPohjaSection();
     fillKieliversiotSection({ jatka: true });
     fillTiedotSection();

@@ -142,7 +142,7 @@ describe('createKoulutusForm', () => {
       },
     }).as('createYoKoulutusResponse');
 
-    fillCommon({ koulutustyyppiPath: ['korkeakoulutus', 'yo'] });
+    fillCommon({ koulutustyyppiPath: ['korkeakoulutus', 'amk'] });
 
     getByTestId('informationSection').within(() => {
       getByTestId('koulutuskoodiSelect').click();

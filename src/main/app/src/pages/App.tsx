@@ -13,6 +13,7 @@ import VirkailijaRaamit from '#/src/components/VirkailijaRaamit';
 import UserGate from '#/src/pages/UserGate';
 import HttpErrorNotifier from '#/src/components/HttpErrorNotifier';
 import ErrorBoundaryNotifier from '#/src/components/ErrorBoundaryNotifier';
+import { isDev } from '#/src/utils';
 import Routes from './Routes';
 
 const App = ({
@@ -26,7 +27,7 @@ const App = ({
 }) => {
   return (
     <Provider store={store}>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {isDev && <ReactQueryDevtools initialIsOpen={false} />}
       <I18nextProvider i18n={localization}>
         <ThemeProvider theme={theme}>
           <PersistGate

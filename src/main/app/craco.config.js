@@ -1,8 +1,11 @@
+const _ = require('lodash/fp');
 const { ESLINT_MODES } = require('@craco/craco');
 const alias = require('./webpack-alias');
 const { withoutPlugins } = require('./webpack-utils');
 
-const isDev = process.env.NODE_ENV === 'development';
+const { CI, NODE_ENV } = process.env;
+
+const isDev = NODE_ENV === 'development';
 
 module.exports = {
   eslint: {
@@ -17,7 +20,23 @@ module.exports = {
   },
   webpack: {
     alias,
-    configure: withoutPlugins(['GenerateSW']),
+    configure: _.pipe(
+      config => ({
+        ...config,
+        ...(CI
+          ? {
+              devtool: false,
+              devServer: {
+                hot: false,
+                inline: false,
+                liveReload: false,
+                proxy: false,
+              },
+            }
+          : {}),
+      }),
+      withoutPlugins(['GenerateSW'])
+    ),
   },
   typescript: {
     enableTypeChecking: isDev,

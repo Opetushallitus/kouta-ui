@@ -20,7 +20,7 @@ import { FormFieldSelect } from '#/src/components/formFields';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import { useFieldValue } from '#/src/hooks/form';
 import { useUrls } from '#/src/contexts/contextHooks';
-import KoulutusField from '../KoulutusField';
+import KoulutusField from '#/src/components/KoulutusField';
 import {
   InfoBoxGrid,
   StyledInfoBox,

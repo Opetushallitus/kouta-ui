@@ -377,7 +377,6 @@ export default {
     valitseJarjestajat:
       'Valitse ne organisaatiot, jotka järjestävät koulutusta',
     kaytaPohjanJarjestajaa: 'Käytä pohjaksi kopioidun koulutuksen järjestäjää',
-    valitseKoulutus: 'Valitse koulutus',
     valitseKaytettavaEperuste: 'Valitse käytettävä ePeruste',
     valitseKaytettavaTutkinnonOsa: 'Valitse tutkinnon osat',
     valitseKoulutuskoodi: 'Valitse koulutuskoodi',
@@ -670,6 +669,7 @@ export default {
       'SORA-kuvauksen näkyminen muille koulutustoimijoille',
     julkisuusKuvaus:
       'Valitse näkyykö SORA-kuvaus muille koulutustoimijoille. Jos SORA-kuvaus on julkinen, muut koulutustoimijat voivat käyttää sitä pohjana luodessaan uusia.',
+    valitseKoulutusala: 'Valitse koulutusala',
   },
   oppilaitoslomake: {
     oppilaitoksenPerustiedot: 'Oppilaitoksen perustiedot',

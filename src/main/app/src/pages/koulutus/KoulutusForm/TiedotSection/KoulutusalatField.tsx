@@ -7,10 +7,10 @@ import {
   selectMapProps,
 } from '#/src/components/formFields';
 import { getTestIdProps } from '#/src/utils';
-import KoulutusalatSelect from './KoulutusalatSelect';
+import KoulutusalaSelect from '#/src/components/KoulutusalaSelect';
 
-const KoulutusalatFieldComponent = createFormFieldComponent(
-  KoulutusalatSelect,
+const KoulutusalaFieldComponent = createFormFieldComponent(
+  KoulutusalaSelect,
   selectMapProps
 );
 
@@ -22,8 +22,9 @@ export const KoulutusalatField = ({ disabled, name }) => {
       <Field
         disabled={disabled}
         name={`${name}.koulutusalat`}
-        component={KoulutusalatFieldComponent}
+        component={KoulutusalaFieldComponent}
         label={t('koulutuslomake.valitseKoulutusalat')}
+        isMulti={true}
       />
     </div>
   );

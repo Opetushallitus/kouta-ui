@@ -1,18 +1,20 @@
 import React from 'react';
 import { Field } from 'redux-form';
-import { get } from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import { FormFieldSoraKuvausSelect } from '#/src/components/formFields';
 import Button from '#/src/components/Button';
 import { Box, Divider } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
+import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 
 const SoraKuvausSection = ({ name, organisaatioOid, languages }) => {
   const { t } = useTranslation();
   const soraKuvaus = useFieldValue(name);
-  const soraKuvausId = get(soraKuvaus, 'value');
+  const soraKuvausId = soraKuvaus?.value;
   const kieliValinnat = languages;
+
+  const isOphVirkailija = useIsOphVirkailija();
 
   return (
     <>
@@ -36,18 +38,22 @@ const SoraKuvausSection = ({ name, organisaatioOid, languages }) => {
           </Button>
         </Box>
       ) : null}
-      <Divider marginTop={4} marginBottom={4} />
-      <Box display="flex" justifyContent="center">
-        <Button
-          variant="outlined"
-          color="primary"
-          as="a"
-          href={`/kouta/organisaatio/${organisaatioOid}/sora-kuvaus/kielivalinnat/${kieliValinnat}`}
-          target="_blank"
-        >
-          {t('yleiset.luoUusi', { entity: t('yleiset.soraKuvaus') })}
-        </Button>
-      </Box>
+      {isOphVirkailija && (
+        <>
+          <Divider marginTop={4} marginBottom={4} />
+          <Box display="flex" justifyContent="center">
+            <Button
+              variant="outlined"
+              color="primary"
+              as="a"
+              href={`/kouta/organisaatio/${organisaatioOid}/sora-kuvaus/kielivalinnat/${kieliValinnat}`}
+              target="_blank"
+            >
+              {t('yleiset.luoUusi', { entity: t('yleiset.soraKuvaus') })}
+            </Button>
+          </Box>
+        </>
+      )}
     </>
   );
 };

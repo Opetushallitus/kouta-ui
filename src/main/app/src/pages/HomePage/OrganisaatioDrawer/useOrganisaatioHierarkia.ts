@@ -10,7 +10,7 @@ import getRoleOrganisaatioOid from '#/src/utils/getRoleOrganisaatioOid';
 import useLanguage from '#/src/hooks/useLanguage';
 import {
   filterByName,
-  filterHierarkia,
+  flatFilterHierarkia,
 } from '#/src/utils/organisaatio/hierarkiaHelpers';
 
 const getRolesOrganisaatioOids = roles => {
@@ -77,7 +77,7 @@ const useOrganisaatioHierarkia = ({
 
   const roleHierarkia = useMemo(() => {
     return isArray(data)
-      ? filterHierarkia(
+      ? flatFilterHierarkia(
           data,
           org => hasRequiredRoles(org) && organisaatioHasCorrectType(org)
         )

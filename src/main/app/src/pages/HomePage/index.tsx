@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import queryString from 'query-string';
-import { get } from 'lodash';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
@@ -104,7 +103,7 @@ const HomePage = ({ kayttajaOid = null, location }) => {
   );
 
   const query = useMemo(() => queryString.parse(search), [search]);
-  const organisaatioOid = get(query, 'organisaatioOid') || null;
+  const organisaatioOid = query?.organisaatioOid;
 
   return (
     <>

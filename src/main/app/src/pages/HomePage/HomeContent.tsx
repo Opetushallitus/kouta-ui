@@ -24,7 +24,7 @@ import {
 
 const HomeContent = ({
   organisaatioOid,
-  onOrganisaatioChange: onOrganisaatioChangeProp = () => {},
+  onOrganisaatioChange: onOrganisaatioChangeProp,
 }) => {
   const history = useHistory();
   const roleBuilder = useAuthorizedUserRoleBuilder();
@@ -33,7 +33,9 @@ const HomeContent = ({
 
   const onOrganisaatioChange = useCallback(
     value => {
-      history.push(`/?organisaatioOid=${value}`);
+      history.push({
+        search: null,
+      });
       onOrganisaatioChangeProp(value);
     },
     [history, onOrganisaatioChangeProp]

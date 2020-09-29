@@ -1,9 +1,11 @@
 import _ from 'lodash/fp';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
-export const filterHierarkia = (hierarkia, filterFn) => {
+export const flatFilterHierarkia = (hierarkia, filterFn) => {
   return hierarkia.flatMap(org => [
-    ...(filterFn(org) ? [org] : filterHierarkia(org.children || [], filterFn)),
+    ...(filterFn(org)
+      ? [org]
+      : flatFilterHierarkia(org.children || [], filterFn)),
   ]);
 };
 

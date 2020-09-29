@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import _ from 'lodash/fp';
-import { filterHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
+import { flatFilterHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
 import ListTable, { makeNimiColumn } from '#/src/components/ListTable';
 import ListSpin from '#/src/components/ListSpin';
 import { ORGANISAATIOTYYPPI } from '#/src/constants';
@@ -9,7 +9,7 @@ import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatc
 import { Typography } from '#/src/components/virkailija';
 
 const getOppilaitoksenOsat = oppilaitos => {
-  return filterHierarkia(
+  return flatFilterHierarkia(
     oppilaitos?.children ?? [],
     organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)
   );

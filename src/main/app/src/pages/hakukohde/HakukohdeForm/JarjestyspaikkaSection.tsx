@@ -9,26 +9,40 @@ import { ORGANISAATIOTYYPPI } from '#/src/constants';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-
 import useLanguage from '#/src/hooks/useLanguage';
+import { flatFilterHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
+
 const JARJESTYSPAIKATTOMAT_OPETUSTAVAT = [
   'opetuspaikkakk_2#1', // Verkko
   'opetuspaikkakk_3#1', // Eta
   'opetuspaikkakk_5#1', // Itsenainen
 ];
 
-const JarjestyspaikkaSection = ({ tarjoajat, opetustapaKoodiUrit }) => {
+const JarjestyspaikkaSection = ({
+  tarjoajat,
+  opetustapaKoodiUrit,
+  organisaatioOid,
+}: {
+  tarjoajat: Array<string>;
+  opetustapaKoodiUrit: Array<string>;
+  organisaatioOid: string;
+}) => {
   const { t } = useTranslation();
-  const { hierarkia = [] } = useOrganisaatioHierarkia(tarjoajat, {
-    filter: _.negate(organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)),
-  });
+
+  const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid);
+
   const language = useLanguage();
-  const jarjestysOptions = _.flatMapDeep(({ children }) => children)(
-    hierarkia
+  const jarjestyspaikkaOptions = flatFilterHierarkia(
+    hierarkia,
+    _.overEvery(organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE), org =>
+      // Select intersection of organisaatio branches from selected organisaatio and tarjoajat
+      _.some(tarjoaja => _.includes(tarjoaja, org?.parentOidPath))(tarjoajat)
+    )
   ).map(({ oid, nimi }) => ({
     value: oid,
     label: getFirstLanguageValue(nimi, language),
   }));
+
   const jarjestyspaikkaOidRequired = _.difference(opetustapaKoodiUrit)(
     JARJESTYSPAIKATTOMAT_OPETUSTAVAT
   );
@@ -38,7 +52,7 @@ const JarjestyspaikkaSection = ({ tarjoajat, opetustapaKoodiUrit }) => {
       <Field
         label={t('hakukohdelomake.valitseJarjestyspaikka')}
         component={FormFieldRadioGroup}
-        options={jarjestysOptions}
+        options={jarjestyspaikkaOptions}
         name={`jarjestyspaikkaOid`}
       />
     </div>

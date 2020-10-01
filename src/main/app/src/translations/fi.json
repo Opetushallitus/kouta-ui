@@ -178,7 +178,8 @@
     "valitseAlkamiskausi": "Valitse alkamiskausi",
     "valitseAlkamisvuosi": "Valitse vuosi",
     "aloitusHenkilokohtaisenSuunnitelmanMukaisesti": "Aloitus henkilökohtaisen suunnitelman mukaisesti",
-    "koulutuksenAjankohta": "Koulutuksen aloitusajankohta"
+    "koulutuksenAjankohta": "Koulutuksen aloitusajankohta",
+    "tallennaLuonnoksenaEsikatsellaksesi": "Tallenna lomake luonnoksena esikatsellaksesi."
   },
   "koeTaiLisanaytto": {
     "title": "Koe tai lisänäyttö {{index}}",

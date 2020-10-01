@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
+import EsikatseluControls from '#/src/components/EsikatseluControls';
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
@@ -19,8 +20,8 @@ import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { getFormValuesByValintaperuste } from '#/src/utils/valintaperuste/getFormValuesByValintaperuste';
 import { useValintaperusteById } from '#/src/utils/valintaperuste/getValintaperusteById';
 
-import ValintaperusteForm from '../ValintaperusteForm';
 import { ValintaperusteFooter } from './ValintaperusteFooter';
+import ValintaperusteForm from './ValintaperusteForm';
 
 const EditValintaperustePage = props => {
   const {
@@ -75,7 +76,13 @@ const EditValintaperustePage = props => {
               />
             ) : null
           }
-          draftUrl={apiUrls.url('konfo-ui.valintaperuste', id) + '?draft=true'}
+          esikatseluControls={
+            <EsikatseluControls
+              esikatseluUrl={
+                apiUrls.url('konfo-ui.valintaperuste', id) + '?draft=true'
+              }
+            />
+          }
         >
           <RelationInfoContainer>
             <OrganisaatioRelation organisaatioOid={organisaatioOid} />

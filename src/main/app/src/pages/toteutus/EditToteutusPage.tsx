@@ -3,6 +3,7 @@ import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
+import EsikatseluControls from '#/src/components/EsikatseluControls';
 import FormPage, {
   OrganisaatioRelation,
   KoulutusRelation,
@@ -86,7 +87,13 @@ const EditToteutusPage = props => {
               canUpdate={canUpdate}
             />
           }
-          draftUrl={apiUrls.url('konfo-ui.toteutus', oid) + '?draft=true'}
+          esikatseluControls={
+            <EsikatseluControls
+              esikatseluUrl={
+                apiUrls.url('konfo-ui.toteutus', oid) + '?draft=true'
+              }
+            />
+          }
           steps={<FormSteps activeStep={ENTITY.TOTEUTUS} />}
           footer={
             toteutus ? (

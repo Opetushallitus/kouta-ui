@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
+import EsikatseluControls from '#/src/components/EsikatseluControls';
 import FormPage from '#/src/components/FormPage';
 import FullSpin from '#/src/components/FullSpin';
 import OppilaitosFormSteps from '#/src/components/OppilaitosFormSteps';
@@ -116,9 +117,14 @@ const OppilaitosPage = ({
                 readOnly={readOnly}
               />
             }
-            draftUrl={
-              apiUrls.url('konfo-ui.oppilaitos', organisaatioOid) +
-              '?draft=true'
+            esikatseluControls={
+              <EsikatseluControls
+                esikatseluUrl={
+                  oppilaitos &&
+                  apiUrls.url('konfo-ui.oppilaitos', organisaatioOid) +
+                    '?draft=true'
+                }
+              />
             }
           >
             {organisaatio && (

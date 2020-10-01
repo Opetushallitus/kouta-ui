@@ -41,6 +41,7 @@
     "oph-urls-js": "github:Opetushallitus/oph-urls-js",
     "polished": "^3.6.7",
     "query-string": "^6.13.7",
+    "rc-tooltip": "^5.0.2",
     "react": "^16.14.0",
     "react-async": "^10.0.1",
     "react-dom": "^16.14.0",

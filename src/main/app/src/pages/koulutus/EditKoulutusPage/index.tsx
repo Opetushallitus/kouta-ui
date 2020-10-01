@@ -3,6 +3,7 @@ import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
+import EsikatseluControls from '#/src/components/EsikatseluControls';
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
@@ -83,7 +84,6 @@ const EditKoulutusPage = props => {
             <EntityFormHeader entityType={ENTITY.KOULUTUS} entity={koulutus} />
           }
           steps={<FormSteps activeStep={ENTITY.KOULUTUS} />}
-          draftUrl={apiUrls.url('konfo-ui.koulutus', oid) + '?draft=true'}
           footer={
             koulutus ? (
               <EditKoulutusFooter
@@ -92,6 +92,13 @@ const EditKoulutusPage = props => {
                 canUpdate={canUpdate || isJulkinen}
               />
             ) : null
+          }
+          esikatseluControls={
+            <EsikatseluControls
+              esikatseluUrl={
+                apiUrls.url('konfo-ui.koulutus', oid) + '?draft=true'
+              }
+            />
           }
         >
           <RelationInfoContainer>

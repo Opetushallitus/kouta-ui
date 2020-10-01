@@ -11,6 +11,7 @@ const getOppilaitoksenOsaByFormValues = ({ tila, muokkaaja, ...values }) => {
     yhteystiedot,
     kieliversiot,
     teemakuva,
+    esikatselu,
   } = values;
 
   const {
@@ -27,6 +28,7 @@ const getOppilaitoksenOsaByFormValues = ({ tila, muokkaaja, ...values }) => {
     muokkaaja,
     kielivalinta: kieliversiot,
     teemakuva,
+    esikatselu,
     metadata: {
       yhteystiedot: {
         osoite: {

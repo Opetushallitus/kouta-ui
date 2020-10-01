@@ -9,6 +9,7 @@ const getFormValuesByOppilaitoksenOsa = oppilaitoksenOsa => {
     tila,
     metadata: { yhteystiedot, esittely, opiskelijoita, kampus },
     oppilaitosOid,
+    esikatselu,
   } = oppilaitoksenOsa;
 
   return {
@@ -30,6 +31,7 @@ const getFormValuesByOppilaitoksenOsa = oppilaitoksenOsa => {
       kampus: kampus || {},
     },
     teemakuva,
+    esikatselu,
   };
 };
 

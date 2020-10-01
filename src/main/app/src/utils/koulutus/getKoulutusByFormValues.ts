@@ -4,13 +4,6 @@ import {
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
 } from '#/src/constants';
 
-const pickNimiFromSelectedTutkinnonOsat = (values, kielivalinta) => {
-  const osat = values?.tutkinnonosat?.osat ?? [];
-  return osat.length === 1
-    ? _.pick(kielivalinta, osat[0].selectedTutkinnonosat?.nimi)
-    : null;
-};
-
 const osaamisalaKoodiToKoodiUri = value =>
   value ? `osaamisala_${value}` : null;
 
@@ -45,8 +38,7 @@ const getKoulutusByFormValues = values => {
     koulutustyyppi,
     nimi:
       koulutustyyppi === KOULUTUSTYYPPI.TUTKINNON_OSA
-        ? pickNimiFromSelectedTutkinnonOsat(values, kielivalinta) ??
-          pickTranslations(values?.tutkinnonosat?.nimi ?? {})
+        ? pickTranslations(values?.tutkinnonosat?.nimi ?? {})
         : pickTranslations(values?.information?.nimi ?? {}),
     julkinen: Boolean(values?.julkinen),
     esikatselu: values?.esikatselu,

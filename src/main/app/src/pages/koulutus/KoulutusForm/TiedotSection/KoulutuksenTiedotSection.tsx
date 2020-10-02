@@ -34,9 +34,10 @@ const getListNimiLanguageValues = (list = [], language) =>
 const getTutkinnonosatOptions = (selectedPeruste, language) =>
   _.map(
     selectedPeruste?.tutkinnonosat ?? [],
-    ({ _tutkinnonOsa, nimi, laajuus }) => ({
+    ({ _tutkinnonOsa, nimi, laajuus, id }) => ({
       label: `${getLanguageValue(nimi, language)}, ${laajuus} osp`,
       value: _tutkinnonOsa,
+      viite: id,
     })
   );
 
@@ -82,6 +83,7 @@ const TutkinnonOsatField = ({ isLoading, ...props }) => {
       disabled={
         isLoading || _.isNil(selectedPeruste) || _.isEmpty(selectedPeruste)
       }
+      isMulti={true}
       {...props}
     />
   );
@@ -135,20 +137,17 @@ const KoulutusInfo = ({
   );
   const apiUrls = useUrls();
 
-  const tutkinnonosatFieldValue = useFieldValue(`${name}.tutkinnonosa`);
-  const selectedTutkinnonosat = _.find(
-    ePeruste?.tutkinnonosat,
-    t => t._tutkinnonOsa === tutkinnonosatFieldValue?.value
+  const tutkinnonosatFieldValue = useFieldValue(`${name}.osat`);
+  const selectedTutkinnonosat = useMemo(
+    () =>
+      _.filter(ePeruste?.tutkinnonosat, t =>
+        _.some(
+          tutkinnonosatFieldValue,
+          ({ value }) => value === t._tutkinnonOsa
+        )
+      ),
+    [ePeruste, tutkinnonosatFieldValue]
   );
-
-  const { change } = useBoundFormActions();
-  useEffect(() => {
-    change(`${name}.selectedTutkinnonosat`, selectedTutkinnonosat);
-  }, [name, selectedTutkinnonosat, change]);
-
-  useEffect(() => {
-    change(`${name}.tutkinnonosaviite`, selectedTutkinnonosat?.id);
-  }, [name, tutkinnonosatFieldValue, change, selectedTutkinnonosat]);
 
   return koulutus || isLoading ? (
     isLoading ? (
@@ -244,20 +243,20 @@ const KoulutusInfo = ({
           >
             <TutkinnonOsatField
               isLoading={isLoading}
-              name={`${name}.tutkinnonosa`}
+              name={`${name}.osat`}
               selectedPeruste={ePeruste}
               language={language}
             />
           </Box>
         )}
-        {selectedTutkinnonosat && (
+        {_.map(selectedTutkinnonosat, selectedTutkinnonosa => (
           <InfoBoxGrid
             style={{ marginBottom: '40px' }}
             rows={[
               {
                 title: t('yleiset.nimi'),
                 description: `${getLanguageValue(
-                  selectedTutkinnonosat.nimi,
+                  selectedTutkinnonosa.nimi,
                   language
                 )}`,
               },
@@ -269,17 +268,17 @@ const KoulutusInfo = ({
                       'eperusteet.tutkinnonosat',
                       language,
                       ePeruste?.id,
-                      selectedTutkinnonosat?.id
+                      selectedTutkinnonosa?.id
                     )}
                     target="_blank"
                   >
-                    {selectedTutkinnonosat?.id}
+                    {selectedTutkinnonosa?.id}
                   </Anchor>
                 ),
               },
             ]}
           />
-        )}
+        ))}
       </StyledInfoBox>
     )
   ) : null;

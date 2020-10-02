@@ -48,19 +48,25 @@ const getKoulutusByFormValues = values => {
       null,
     teemakuva: values?.teemakuva,
     metadata: {
-      tutkinnonOsat: (values?.tutkinnonosat?.osat ?? []).map(
-        ({
-          eperuste: { value: ePerusteId },
-          koulutus: { value: koulutusKoodiUri },
-          tutkinnonosa: { value: tutkinnonosaId },
-          tutkinnonosaviite: tutkinnonosaViite,
-        }) => ({
-          ePerusteId: Number(ePerusteId),
-          koulutusKoodiUri,
-          tutkinnonosaId: Number(tutkinnonosaId),
-          tutkinnonosaViite: Number(tutkinnonosaViite),
-        })
-      ),
+      tutkinnonOsat: _.reduce(
+        (
+          resultOsat,
+          {
+            eperuste: { value: ePerusteId },
+            koulutus: { value: koulutusKoodiUri },
+            osat,
+          }
+        ) => [
+          ...resultOsat,
+          ..._.map(({ value, viite }) => ({
+            ePerusteId: Number(ePerusteId),
+            koulutusKoodiUri,
+            tutkinnonosaId: Number(value),
+            tutkinnonosaViite: Number(viite),
+          }))(osat),
+        ],
+        []
+      )(values?.tutkinnonosat?.osat),
       osaamisalaKoodiUri: osaamisalaKoodiToKoodiUri(
         osaamisala?.osaamisala?.value
       ),

@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useQuery } from 'react-query';
 import { useUrls, useHttpClient } from '#/src/contexts/contextHooks';
 
-export const useApiQuery = (key, props, apiFn, options) => {
+export const useApiQuery = (key, props, apiFn, options = {}) => {
   const apiUrls = useUrls();
   const httpClient = useHttpClient();
 

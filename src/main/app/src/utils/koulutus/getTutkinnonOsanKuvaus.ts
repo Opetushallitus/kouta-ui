@@ -1,3 +1,5 @@
+import { EPERUSTE_SERVICE_QUERY_OPTIONS } from '#/src/constants';
+import { useApiQuery } from '#/src/hooks/useApiQuery';
 import _ from 'lodash';
 
 export const getTutkinnonOsanKuvaus = async ({
@@ -17,4 +19,13 @@ export const getTutkinnonOsanKuvaus = async ({
     )
   );
   return kuvaukset;
+};
+
+export const useTutkinnonOsienKuvaukset = props => {
+  return useApiQuery(
+    'getTutkinnonOsienKuvaukset',
+    props,
+    getTutkinnonOsanKuvaus,
+    EPERUSTE_SERVICE_QUERY_OPTIONS
+  );
 };

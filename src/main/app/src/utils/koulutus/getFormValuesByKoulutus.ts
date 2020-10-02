@@ -38,7 +38,7 @@ export const getFormValuesByKoulutus = koulutus => {
     information: {
       nimi,
       eperuste: {
-        value: ePerusteId,
+        value: _.toString(ePerusteId),
       },
       koulutus: {
         value: koulutusKoodiUri,
@@ -62,20 +62,29 @@ export const getFormValuesByKoulutus = koulutus => {
         .map(({ otsikkoKoodiUri }) => ({ value: otsikkoKoodiUri })),
     },
     tutkinnonosat: {
-      osat: tutkinnonOsat.map(
-        ({
-          ePerusteId,
-          koulutusKoodiUri,
-          tutkinnonosaId,
-          tutkinnonosaViite,
-        }) => ({
-          eperuste: { value: _.toString(ePerusteId) },
-          koulutus: { value: koulutusKoodiUri },
-          tutkinnonosa: { value: _.toString(tutkinnonosaId) },
-          tutkinnonosaviite: _.toString(tutkinnonosaViite),
-        })
+      osat: _.values(
+        _.reduce(
+          (
+            grouped,
+            { ePerusteId, koulutusKoodiUri, tutkinnonosaId, tutkinnonosaViite }
+          ) => ({
+            ...grouped,
+            [`${koulutusKoodiUri}_${ePerusteId}`]: {
+              koulutus: { value: koulutusKoodiUri },
+              eperuste: { value: _.toString(ePerusteId) },
+              osat: [
+                ...(grouped?.[`${koulutusKoodiUri}_${ePerusteId}`]?.osat || []),
+                {
+                  value: _.toString(tutkinnonosaId),
+                  viite: _.toString(tutkinnonosaViite),
+                },
+              ],
+            },
+          }),
+          {}
+        )(tutkinnonOsat)
       ),
-      nimi: nimi,
+      nimi,
     },
     description: {
       kuvaus,
@@ -88,7 +97,7 @@ export const getFormValuesByKoulutus = koulutus => {
       osaamisala: {
         value: koodiUriToKoodi(osaamisalaKoodiUri),
       },
-      eperuste: { value: ePerusteId },
+      eperuste: { value: _.toString(ePerusteId) },
       koulutus: { value: koulutusKoodiUri },
     },
   };

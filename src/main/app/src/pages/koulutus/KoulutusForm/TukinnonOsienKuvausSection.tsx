@@ -1,19 +1,19 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import _ from 'lodash/fp';
-import { useFieldValue } from '#/src/hooks/form';
 import { getLanguageValue } from '#/src/utils/languageUtils';
 import FormConfigFragment from '#/src/components/FormConfigFragment';
-import { Box, Typography } from '#/src/components/virkailija';
-import useApiAsync from '#/src/hooks/useApiAsync';
-import { getTutkinnonOsanKuvaus } from '#/src/utils/koulutus/getTutkinnonOsanKuvaus';
+import { Box, Spin, Typography } from '#/src/components/virkailija';
+import { useTutkinnonOsienKuvaukset } from '#/src/utils/koulutus/getTutkinnonOsanKuvaus';
 import StyledSectionHTML from '#/src/components/StyledSectionHTML';
 import { getThemeProp } from '#/src/theme';
 import Anchor from '#/src/components/Anchor';
 import { useUrls } from '#/src/contexts/contextHooks';
 import { sanitizeHTML } from '#/src/utils';
 import { StyledInfoBox } from './KoulutuksenEPerusteTiedot/InfoBox';
+import { useEPerusteTutkinnonOsat } from '#/src/utils/koulutus/getTutkinnonosaViite';
+import { useSelectedTutkinnonOsat } from '../useSelectedTutkinnonOsat';
 
 const BodyHeading = styled(Typography).attrs({ variant: 'h6' })`
   color: ${getThemeProp('colors.text.primary')};
@@ -47,25 +47,35 @@ const AmmattitaitoVaatimukset = ({ tutkinnonOsa, language }) => {
   return <Typography variant="body">-</Typography>;
 };
 
-const TutkinnonOsaInfo = ({ eperuste, viite, osa, language }) => {
+const TutkinnonOsaInfo = ({ eperuste, viiteId, osa, language }) => {
   const { i18n } = useTranslation();
   const t = i18n.getFixedT(language);
 
+  const { data: tutkinnonOsat, isLoading } = useEPerusteTutkinnonOsat({
+    ePerusteId: eperuste,
+  });
+
+  const viiteData = _.find(tutkinnonOsa => tutkinnonOsa?.id === viiteId)(
+    tutkinnonOsat
+  );
+
   const apiUrls = useUrls();
-  return (
+  return isLoading ? (
+    <Spin />
+  ) : (
     <>
       <Typography variant="h4" mb={2}>
-        {getLanguageValue(osa?.nimi, language)}, {viite?.laajuus} osp (
+        {getLanguageValue(osa?.nimi, language)}, {viiteData?.laajuus} osp (
         <Anchor
           href={apiUrls?.url(
             'eperusteet.tutkinnonosat',
             language,
             eperuste,
-            viite?.id
+            viiteData?.id
           )}
           target="_blank"
         >
-          {viite?.id}
+          {viiteData?.id}
         </Anchor>
         )
       </Typography>
@@ -86,30 +96,27 @@ const TutkinnonOsaInfo = ({ eperuste, viite, osa, language }) => {
 
 export const TutkinnonOsienKuvausSection = ({ disabled, language, name }) => {
   const { t } = useTranslation();
-  const tutkinnonosat = useFieldValue(`${name}.osat`);
 
-  const selectedTutkinnonOsat = useMemo(() => {
-    return tutkinnonosat
-      ?.flatMap(t => t.selectedTutkinnonosat?._tutkinnonOsa ?? [])
-      .sort();
-  }, [tutkinnonosat]);
+  const selectedTutkinnonOsat = useSelectedTutkinnonOsat();
 
-  const { data: kuvaukset } = useApiAsync({
-    promiseFn: getTutkinnonOsanKuvaus,
-    tutkinnonOsat: selectedTutkinnonOsat,
-    watch: selectedTutkinnonOsat,
+  const selectedTutkinnonOsaIds = selectedTutkinnonOsat?.map(
+    t => t?.tutkinnonosaId
+  );
+
+  const { data: kuvaukset } = useTutkinnonOsienKuvaukset({
+    tutkinnonOsat: selectedTutkinnonOsaIds,
   });
 
-  const viiteForOsa = ({ id }) => {
-    const viitteet = tutkinnonosat.flatMap(t => t.selectedTutkinnonosat || []);
-    return viitteet.find(v => v._tutkinnonOsa === id.toString());
+  const viiteIdForOsa = ({ id }) => {
+    return selectedTutkinnonOsat.find(v => v.tutkinnonosaId === _.toNumber(id))
+      ?.tutkinnonosaViite;
   };
 
   const eperusteForOsa = ({ id }) => {
-    return tutkinnonosat.find(
-      v => v.selectedTutkinnonosat?._tutkinnonOsa === id.toString()
-    )?.eperuste?.value;
+    return selectedTutkinnonOsat.find(v => v.tutkinnonosaId === _.toNumber(id))
+      ?.ePerusteId;
   };
+
   return (
     <Box mb={-2}>
       <FormConfigFragment name="osat">
@@ -117,7 +124,7 @@ export const TutkinnonOsienKuvausSection = ({ disabled, language, name }) => {
           {(kuvaukset || []).map((osa, index) => (
             <StyledInfoBox key={`${osa.id}_${index}`} mb={2}>
               <TutkinnonOsaInfo
-                viite={viiteForOsa(osa)}
+                viiteId={viiteIdForOsa(osa)}
                 eperuste={eperusteForOsa(osa)}
                 osa={osa}
                 language={language}

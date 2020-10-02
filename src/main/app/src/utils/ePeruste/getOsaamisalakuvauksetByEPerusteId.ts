@@ -7,7 +7,7 @@ export const getOsaamisalakuvauksetByEPerusteId = async ({
   apiUrls,
   ePerusteId,
 }) => {
-  if (!_.isNil(ePerusteId)) {
+  if (ePerusteId) {
     const { data } = await httpClient.get(
       apiUrls.url('eperusteet-service.osaamisalakuvaukset', ePerusteId)
     );

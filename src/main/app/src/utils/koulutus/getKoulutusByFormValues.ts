@@ -3,6 +3,7 @@ import {
   KOULUTUSTYYPPI,
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
 } from '#/src/constants';
+import { maybeParseToNumber } from '#/src/utils';
 
 const osaamisalaKoodiToKoodiUri = value =>
   value ? `osaamisala_${value}` : null;
@@ -42,10 +43,9 @@ const getKoulutusByFormValues = values => {
         : pickTranslations(values?.information?.nimi ?? {}),
     julkinen: Boolean(values?.julkinen),
     esikatselu: values?.esikatselu,
-    ePerusteId:
-      values?.information?.eperuste?.value ||
-      osaamisala?.eperuste?.value ||
-      null,
+    ePerusteId: maybeParseToNumber(
+      values?.information?.eperuste?.value || osaamisala?.eperuste?.value
+    ),
     teemakuva: values?.teemakuva,
     metadata: {
       tutkinnonOsat: _.reduce(
@@ -59,13 +59,18 @@ const getKoulutusByFormValues = values => {
         ) => [
           ...resultOsat,
           ..._.map(({ value, viite }) => ({
-            ePerusteId: Number(ePerusteId),
+            ePerusteId: maybeParseToNumber(ePerusteId),
             koulutusKoodiUri,
-            tutkinnonosaId: Number(value),
-            tutkinnonosaViite: Number(viite),
+            tutkinnonosaId: maybeParseToNumber(value),
+            tutkinnonosaViite: maybeParseToNumber(viite),
           }))(osat),
         ],
-        []
+        [] as Array<{
+          ePerusteId: number;
+          koulutusKoodiUri: string;
+          tutkinnonosaId: number;
+          tutkinnonosaViite: number;
+        }>
       )(values?.tutkinnonosat?.osat),
       osaamisalaKoodiUri: osaamisalaKoodiToKoodiUri(
         osaamisala?.osaamisala?.value
@@ -74,8 +79,7 @@ const getKoulutusByFormValues = values => {
       lisatiedot: osiot.map(({ value }) => ({
         otsikkoKoodiUri: value,
         teksti: pickTranslations(
-          values?.lisatiedot?.osioKuvaukset?.[value] ?? {},
-          kielivalinta
+          values?.lisatiedot?.osioKuvaukset?.[value] ?? {}
         ),
       })),
       kuvaus: pickTranslations(values?.description?.kuvaus ?? {}),

@@ -192,7 +192,7 @@ export const stubEPerusteetByKoulutuskoodiRoute = () => {
   cy.route({
     method: 'GET',
     url:
-      '**/eperusteet-service/api/perusteet?tuleva=true&siirtyma=false&voimassaolo=true&poistunut=false&kieli=fi&koulutuskoodi=koulutus_351107',
+      '**/eperusteet-service/api/perusteet?tuleva=true&siirtyma=false&voimassaolo=true&poistunut=false&kieli=fi&koulutuskoodi=koulutus_351107*',
     response: ePerusteByKoulutusKoodi351107,
   });
 };

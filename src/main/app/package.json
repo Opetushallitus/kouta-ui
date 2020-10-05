@@ -57,6 +57,7 @@
   "scripts": {
     "start": "craco start",
     "start:integration": "REACT_APP_CYPRESS=true DISABLE_LOCAL_PROXY=true NODE_ENV=test REACT_APP_LANG=cimode npm run start",
+    "start:integration:debug": "REACT_APP_CYPRESS=true NODE_ENV=test REACT_APP_LANG=cimode npm run start",
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",

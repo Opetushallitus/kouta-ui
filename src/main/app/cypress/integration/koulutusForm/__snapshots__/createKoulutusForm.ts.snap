@@ -1,6 +1,6 @@
 exports[`createKoulutusForm > should be able to create ammatillinen koulutus #0`] =
 {
-  "ePerusteId": 1,
+  "ePerusteId": 6777660,
   "johtaaTutkintoon": true,
   "julkinen": true,
   "kielivalinta": [
@@ -156,13 +156,13 @@ exports[`createKoulutusForm > should be able to create ammatillinen tutkinnon os
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": [
       {
-        "ePerusteId": 1,
+        "ePerusteId": 6777660,
         "koulutusKoodiUri": "koulutus_351107#12",
         "tutkinnonosaId": 6777674,
         "tutkinnonosaViite": 6778201
       },
       {
-        "ePerusteId": 1,
+        "ePerusteId": 6777660,
         "koulutusKoodiUri": "koulutus_351107#12",
         "tutkinnonosaId": 6778360,
         "tutkinnonosaViite": 6778207

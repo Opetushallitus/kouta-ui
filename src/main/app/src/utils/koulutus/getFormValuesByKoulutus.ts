@@ -93,13 +93,15 @@ export const getFormValuesByKoulutus = koulutus => {
     esikatselu,
     julkinen,
     teemakuva,
-    osaamisala: {
-      osaamisala: {
-        value: koodiUriToKoodi(osaamisalaKoodiUri),
-      },
-      eperuste: { value: _.toString(ePerusteId) },
-      koulutus: { value: koulutusKoodiUri },
-    },
+    osaamisala: osaamisalaKoodiUri
+      ? {
+          osaamisala: {
+            value: koodiUriToKoodi(osaamisalaKoodiUri),
+          },
+          eperuste: { value: _.toString(ePerusteId) },
+          koulutus: { value: koulutusKoodiUri },
+        }
+      : null,
   };
 };
 

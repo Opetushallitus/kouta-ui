@@ -477,10 +477,6 @@ export default {
     toteutusjaksonLaajuus: 'Laajuus',
     toteutusjaksonKuvaus: 'Jakson kuvaus',
     koulutukseenLiittyvatTutkinnonOsat: 'Koulutukseen liittyvät tutkinnon osat',
-    valitseTutkinto: 'Valitse tutkinto',
-    valitseOsaamisala: 'Valitse osaamisala',
-    valitseTutkinnonOsat: 'Valitse tutkinnon osat',
-    lisaaTutkinnonOsa: 'Lisää tutkinnon osa',
     hakukohteenLittaminen: 'Hakukohteen liittäminen toteutukseen',
     eiMuokkausOikeutta:
       'Käyttäjälläsi ei ole oikeuksia muokata tätä toteutusta',

@@ -140,11 +140,6 @@ const config = createFormConfigBuilder().registerSections([
     validate: eb => eb.validateExistence('lukiolinjat.lukiolinja'),
   },
   {
-    section: 'tutkinnonOsat',
-    field: 'tutkinnonOsat',
-    koulutustyypit: [KOULUTUSTYYPPI.TUTKINNON_OSA],
-  },
-  {
     section: 'toteutusjaksot',
     field: 'toteutusjaksot',
     koulutustyypit: [

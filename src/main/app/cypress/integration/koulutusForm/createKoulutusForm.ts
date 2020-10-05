@@ -155,6 +155,10 @@ describe('createKoulutusForm', () => {
         fillAsyncSelect('Louhintaporaus');
       });
 
+      getByTestId('tutkinnonOsatSelect').within(() => {
+        fillAsyncSelect('Kaivosmittaus');
+      });
+
       jatka();
     });
 

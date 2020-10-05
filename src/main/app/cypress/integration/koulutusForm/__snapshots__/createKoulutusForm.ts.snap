@@ -137,6 +137,7 @@ exports[`createKoulutusForm > should be able to create ammatillinen tutkinnon os
   "kielivalinta": [
     "fi"
   ],
+  "koulutusKoodiUri": null,
   "koulutustyyppi": "amm-tutkinnon-osa",
   "metadata": {
     "koulutusalaKoodiUrit": [],
@@ -159,6 +160,12 @@ exports[`createKoulutusForm > should be able to create ammatillinen tutkinnon os
         "koulutusKoodiUri": "koulutus_351107#12",
         "tutkinnonosaId": 6777674,
         "tutkinnonosaViite": 6778201
+      },
+      {
+        "ePerusteId": 1,
+        "koulutusKoodiUri": "koulutus_351107#12",
+        "tutkinnonosaId": 6778360,
+        "tutkinnonosaViite": 6778207
       }
     ],
     "tutkintonimikeKoodiUrit": [],

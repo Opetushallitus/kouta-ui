@@ -38,7 +38,7 @@ export const getFormValuesByKoulutus = koulutus => {
     information: {
       nimi,
       eperuste: {
-        value: _.toString(ePerusteId),
+        value: ePerusteId,
       },
       koulutus: {
         value: koulutusKoodiUri,
@@ -71,7 +71,7 @@ export const getFormValuesByKoulutus = koulutus => {
             ...grouped,
             [`${koulutusKoodiUri}_${ePerusteId}`]: {
               koulutus: { value: koulutusKoodiUri },
-              eperuste: { value: _.toString(ePerusteId) },
+              eperuste: { value: ePerusteId },
               osat: [
                 ...(grouped?.[`${koulutusKoodiUri}_${ePerusteId}`]?.osat || []),
                 {
@@ -98,7 +98,7 @@ export const getFormValuesByKoulutus = koulutus => {
           osaamisala: {
             value: koodiUriToKoodi(osaamisalaKoodiUri),
           },
-          eperuste: { value: _.toString(ePerusteId) },
+          eperuste: { value: ePerusteId },
           koulutus: { value: koulutusKoodiUri },
         }
       : null,

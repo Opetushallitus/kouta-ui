@@ -830,3 +830,44 @@ exports[`createKoulutusForm > should be able to edit lukiokoulutus #0`] =
   "teemakuva": null,
   "tila": "tallennettu"
 };
+
+exports[`createKoulutusForm > should be able to create ammatillinen osaamisala koulutus #0`] =
+{
+  "ePerusteId": 6777660,
+  "johtaaTutkintoon": false,
+  "julkinen": true,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutusKoodiUri": "koulutus_351107#12",
+  "koulutustyyppi": "amm-osaamisala",
+  "metadata": {
+    "koulutusalaKoodiUrit": [],
+    "koulutustyyppi": "amm-osaamisala",
+    "kuvauksenNimi": {},
+    "kuvaus": {},
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "teksti": {
+          "fi": "koulutuksenlisatiedot_0 kuvaus"
+        }
+      }
+    ],
+    "opintojenLaajuusKoodiUri": null,
+    "osaamisalaKoodiUri": "osaamisala_1800",
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "amm-osaamisala"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "Kaivosalan perustutkinto"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "teemakuva": null,
+  "tila": "julkaistu"
+};

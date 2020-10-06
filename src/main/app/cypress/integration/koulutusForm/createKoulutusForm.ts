@@ -127,6 +127,56 @@ describe('createKoulutusForm', () => {
     });
   });
 
+  it('should be able to create ammatillinen osaamisala koulutus', () => {
+    cy.route({
+      method: 'PUT',
+      url: '**/koulutus',
+      response: {
+        oid: koulutusOid,
+      },
+    }).as('createAmmKoulutusResponse');
+
+    fillCommon({ koulutustyyppiPath: ['ammatillinen', 'amm-osaamisala'] });
+
+    getByTestId('osaamisalaSection').within(() => {
+      getByTestId('koulutusSelect').click();
+
+      getByTestId('koulutusSelect').within(() => {
+        fillAsyncSelect('Kaivosalan perustutkinto');
+      });
+
+      getByTestId('ePerusteSelect').within(() => {
+        fillAsyncSelect('Kaivosalan perustutkinto');
+      });
+
+      getByTestId('osaamisalaSelect').within(() => {
+        fillAsyncSelect('Kaivostyön osaamisala');
+      });
+
+      jatka();
+    });
+
+    getByTestId('osaamisalanKuvausSection').within(() => {
+      jatka();
+    });
+
+    fillLisatiedotSection();
+
+    fillTeemakuvaSection();
+
+    fillJarjestajaSection();
+
+    fillNakyvyysSection();
+
+    fillTilaSection();
+
+    tallenna();
+
+    cy.wait('@createAmmKoulutusResponse').then(({ request }) => {
+      cy.wrap(request.body).toMatchSnapshot();
+    });
+  });
+
   it('should be able to create ammatillinen tutkinnon osa koulutus', () => {
     cy.route({
       method: 'PUT',

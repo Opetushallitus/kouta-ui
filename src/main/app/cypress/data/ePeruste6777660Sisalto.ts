@@ -1,0 +1,108 @@
+export default {
+  id: 6777630,
+  lapset: [
+    {
+      id: 6777632,
+      perusteenOsa: {
+        id: 6777670,
+        luotu: 1570023668479,
+        muokattu: 1576764526347,
+        muokkaaja: '1.2.246.562.24.12171520850',
+        nimi: {
+          _tunniste: '1a2a9e34-2b24-4888-b669-6759bf223aaa',
+          fi: 'Tutkinnon muodostuminen',
+          sv: 'Uppbyggnad av examen',
+          en: 'Composition of the qualification',
+          _id: '6900284',
+        },
+        tila: 'valmis',
+        tunniste: 'rakenne',
+        osanTyyppi: 'tekstikappale',
+      },
+      lapset: [],
+      _perusteenOsa: '6777670',
+    },
+    {
+      id: 6858226,
+      perusteenOsa: {
+        id: 6858262,
+        luotu: 1573214202116,
+        muokattu: 1576764526341,
+        muokkaaja: '1.2.246.562.24.12171520850',
+        nimi: {
+          _tunniste: 'b56cc4f1-9202-4bab-891c-eea39dfd1df4',
+          fi: 'Kaivostyön osaamisala',
+          sv: 'Kompetensområdet för gruvarbete',
+          en: 'Kaivostyön osaamisala',
+          _id: '6900285',
+        },
+        tila: 'valmis',
+        kaannettava: true,
+        osanTyyppi: 'tekstikappale',
+      },
+      lapset: [],
+      _perusteenOsa: '6858262',
+    },
+    {
+      id: 6858227,
+      perusteenOsa: {
+        id: 6858263,
+        luotu: 1573214253067,
+        muokattu: 1576764526343,
+        muokkaaja: '1.2.246.562.24.12171520850',
+        nimi: {
+          _tunniste: 'c8f2812e-6749-4424-adf3-6a1492432b49',
+          fi: 'Rikastuksen osaamisala',
+          sv: 'Kompetensområdet för anrikning',
+          en: 'Rikastuksen osaamisala',
+          _id: '6900287',
+        },
+        tila: 'valmis',
+        kaannettava: true,
+        osanTyyppi: 'tekstikappale',
+      },
+      lapset: [],
+      _perusteenOsa: '6858263',
+    },
+    {
+      id: 6858229,
+      perusteenOsa: {
+        id: 6858265,
+        luotu: 1573215841628,
+        muokattu: 1576764526346,
+        muokkaaja: '1.2.246.562.24.12171520850',
+        nimi: {
+          _tunniste: '83eb65e6-6fc7-4765-a9c1-6d7b8af6c6cf',
+          fi: 'Osaamisen arviointi',
+          sv: 'Bedömning av kunnandet',
+          _id: '6918018',
+        },
+        tila: 'valmis',
+        osanTyyppi: 'tekstikappale',
+      },
+      lapset: [],
+      _perusteenOsa: '6858265',
+    },
+    {
+      id: 6858228,
+      perusteenOsa: {
+        id: 6858264,
+        luotu: 1573214272599,
+        muokattu: 1576764526345,
+        muokkaaja: '1.2.246.562.24.12171520850',
+        nimi: {
+          _tunniste: '5b716427-f191-47b7-9ec1-7c251eaf8103',
+          fi:
+            'LIITE (ei määräystä): Tietoa opiskelun ja ammatissa toimimisen edellytyksistä (pätevyydet ja luvat, korttikoulutukset)',
+          sv:
+            'BILAGA (ingen föreskrift): Information om förutsättningarna för att studera och utöva yrket (kompetens och tillstånd, kortutbildningar)',
+          _id: '6900401',
+        },
+        tila: 'valmis',
+        osanTyyppi: 'tekstikappale',
+      },
+      lapset: [],
+      _perusteenOsa: '6858264',
+    },
+  ],
+};

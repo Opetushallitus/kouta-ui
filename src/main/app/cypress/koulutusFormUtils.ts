@@ -21,6 +21,8 @@ import ePerustePerusteenosat6778360 from './data/ePerustePerusteenosat6778360';
 import ePeruste6777660TutkinnonOsat from './data/ePeruste6777660TutkinnonOsat';
 import ePeruste6777660Rakenne from './data/ePeruste6777660Rakenne';
 import ePeruste6777660 from './data/ePeruste6777660';
+import ePeruste6777660Osaamisalakuvaukset from './data/ePeruste6777660Osaamisalakuvaukset';
+import ePeruste6777660Sisalto from './data/ePeruste6777660Sisalto';
 
 export const stubKoulutusFormRoutes = ({ organisaatioOid }) => {
   stubCommonRoutes();
@@ -148,6 +150,19 @@ export const stubKoulutusFormRoutes = ({ organisaatioOid }) => {
     method: 'GET',
     url: '**/eperusteet-service/api/perusteet/6777660',
     response: ePeruste6777660,
+  });
+
+  cy.route({
+    method: 'GET',
+    url: '**/eperusteet-service/api/perusteet/6777660/osaamisalakuvaukset',
+    response: ePeruste6777660Osaamisalakuvaukset,
+  });
+
+  cy.route({
+    method: 'GET',
+    url:
+      '**/eperusteet-service/api/perusteet/6777660/suoritustavat/reformi/sisalto',
+    response: ePeruste6777660Sisalto,
   });
 
   stubEPerusteetByKoulutuskoodiRoute();

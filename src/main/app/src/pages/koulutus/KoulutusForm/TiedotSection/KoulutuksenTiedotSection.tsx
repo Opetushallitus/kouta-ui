@@ -301,13 +301,12 @@ const KoulutuksenTiedotSection = ({
     watch: koulutusFieldValue,
   });
 
-  const ePerusteFieldValue = useFieldValue(`${name}.eperuste`);
+  const ePerusteFieldValue = useFieldValue(`${name}.eperuste`)?.value;
   const ePerusteet = koulutus?.ePerusteet;
 
   const selectedPeruste = _.find(
     ePerusteet,
-    ePeruste =>
-      ePeruste.id.toString() === _.toString(ePerusteFieldValue?.value ?? '')
+    ePeruste => ePeruste.id.toString() === _.toString(ePerusteFieldValue ?? '')
   );
 
   const { change } = useBoundFormActions();
@@ -320,6 +319,14 @@ const KoulutuksenTiedotSection = ({
       change(`${name}.eperuste`, null);
     }
   }, [change, koulutusFieldValue, isDirty, name, previousKoulutus]);
+
+  const previousEPeruste = usePrevious(ePerusteFieldValue);
+
+  useEffect(() => {
+    if (isDirty && previousEPeruste !== ePerusteFieldValue) {
+      change(`${name}.osat`, null);
+    }
+  }, [change, ePerusteFieldValue, isDirty, name, previousEPeruste]);
 
   const selectLabel = selectLabelProp || t('koulutuslomake.valitseKoulutus');
 

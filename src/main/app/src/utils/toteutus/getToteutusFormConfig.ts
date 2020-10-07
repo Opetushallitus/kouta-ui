@@ -19,6 +19,7 @@ import {
   TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
   JULKAISUTILA,
   HAKULOMAKETYYPPI,
+  TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
 } from '#/src/constants';
 
 import {
@@ -441,7 +442,22 @@ const config = createFormConfigBuilder().registerSections([
   {
     section: 'nayttamistiedot',
     koulutustyypit: KOULUTUSTYYPIT,
-    field: 'nayttamistiedot',
+    parts: [
+      {
+        koulutustyypit: [
+          ...TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
+          KOULUTUSTYYPPI.AVOIN_YO,
+          KOULUTUSTYYPPI.AVOIN_AMK,
+          KOULUTUSTYYPPI.TAYDENNYS_KOULUTUS,
+          KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
+          KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO,
+        ],
+        field: '.ammattinimikkeet',
+      },
+      {
+        field: '.avainsanat',
+      },
+    ],
   },
   {
     section: 'tarjoajat',

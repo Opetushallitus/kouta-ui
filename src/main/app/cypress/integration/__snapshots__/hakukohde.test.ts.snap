@@ -1,4 +1,4 @@
-exports[`createHakukohdeForm > should be able to create ammatillinen hakukohde #0`] =
+exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] =
 {
   "alkamiskausiKoodiUri": "kausi_0#1",
   "alkamisvuosi": 2020,
@@ -111,7 +111,7 @@ exports[`createHakukohdeForm > should be able to create ammatillinen hakukohde #
   "valintaperusteId": "649adb37-cd4d-4846-91a9-84b58b90f928"
 };
 
-exports[`createHakukohdeForm > should be able to create korkeakoulu hakukohde #0`] =
+exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
 {
   "alkamiskausiKoodiUri": "kausi_0#1",
   "alkamisvuosi": 2020,
@@ -219,6 +219,123 @@ exports[`createHakukohdeForm > should be able to create korkeakoulu hakukohde #0
         }
       ],
       "tyyppiKoodiUri": "valintakokeentyyppi_1#1"
+    }
+  ],
+  "valintaperusteId": "649adb37-cd4d-4846-91a9-84b58b90f928"
+};
+
+exports[`editHakukohde > should be able to edit hakukohde #0`] =
+{
+  "alkamiskausiKoodiUri": "kausi_0#1",
+  "alkamisvuosi": 2024,
+  "aloituspaikat": 150,
+  "ensikertalaisenAloituspaikat": 49,
+  "hakuOid": "4.1.1.1.1.1",
+  "hakuajat": [
+    {
+      "alkaa": "2011-11-11T10:30",
+      "paattyy": "2011-11-12T11:45"
+    }
+  ],
+  "hakulomake": {},
+  "hakulomakeAtaruId": "12345",
+  "hakulomakeKuvaus": {},
+  "hakulomakeLinkki": {},
+  "hakulomaketyyppi": "ataru",
+  "kaytetaanHaunAikataulua": false,
+  "kaytetaanHaunAlkamiskautta": false,
+  "kaytetaanHaunHakulomaketta": false,
+  "kielivalinta": [
+    "fi"
+  ],
+  "liitteet": [
+    {
+      "kuvaus": {
+        "fi": "Kuvaus"
+      },
+      "nimi": {
+        "fi": "Nimi"
+      },
+      "toimitusaika": "2011-11-11T10:30",
+      "toimitusosoite": {
+        "osoite": {
+          "osoite": {
+            "fi": "Osoite"
+          },
+          "postinumeroKoodiUri": "posti_0#2"
+        },
+        "sahkoposti": "sahkoposti@email.com"
+      },
+      "toimitustapa": "osoite",
+      "tyyppiKoodiUri": "liitetyypitamm_0#1"
+    }
+  ],
+  "liitteetOnkoSamaToimitusaika": false,
+  "liitteetOnkoSamaToimitusosoite": false,
+  "liitteidenToimitusaika": null,
+  "liitteidenToimitusosoite": null,
+  "liitteidenToimitustapa": null,
+  "metadata": {
+    "valintakokeidenYleiskuvaus": {
+      "fi": "<p>Valintakokeiden kuvaus - fi</p>"
+    }
+  },
+  "modified": "2019-04-04T08:28",
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "muuPohjakoulutusvaatimus": {},
+  "nimi": {
+    "fi": "Hakukohteen nimi"
+  },
+  "oid": "6.1.1.1.1.1",
+  "organisaatioOid": "1.1.1.1.1.1",
+  "pohjakoulutusvaatimusKoodiUrit": [
+    "pohjakoulutusvaatimustoinenaste_0#1"
+  ],
+  "pohjakoulutusvaatimusTarkenne": {
+    "fi": "<p>Fi tarkenne</p>"
+  },
+  "tila": "tallennettu",
+  "toinenAsteOnkoKaksoistutkinto": true,
+  "toteutusOid": "2.1.1.1.1.1",
+  "valintakokeet": [
+    {
+      "metadata": {
+        "erityisjarjestelytMahdollisia": true,
+        "liittyyEnnakkovalmistautumista": true,
+        "ohjeetEnnakkovalmistautumiseen": {
+          "fi": "<p>Ohjeet ennakkovalmistautumiseen - fi</p>"
+        },
+        "ohjeetErityisjarjestelyihin": {
+          "fi": "<p>Ohjeet erityisjärjestelyihin - fi</p>"
+        },
+        "tietoja": {
+          "fi": "<p>Tietoa kokeesta - fi</p>"
+        }
+      },
+      "nimi": {
+        "fi": "Kokeen nimi - fi"
+      },
+      "tilaisuudet": [
+        {
+          "aika": {
+            "alkaa": "2019-04-16T08:44",
+            "paattyy": "2019-04-18T08:44"
+          },
+          "jarjestamispaikka": {
+            "fi": "Jarjestamispaikka - fi"
+          },
+          "lisatietoja": {
+            "fi": "fi lisatietoja"
+          },
+          "osoite": {
+            "osoite": {
+              "fi": "fi osoite"
+            },
+            "postinumeroKoodiUri": "posti_00350#1"
+          }
+        }
+      ],
+      "tyyppiKoodiUri": "tyyppi_1#1"
     }
   ],
   "valintaperusteId": "649adb37-cd4d-4846-91a9-84b58b90f928"

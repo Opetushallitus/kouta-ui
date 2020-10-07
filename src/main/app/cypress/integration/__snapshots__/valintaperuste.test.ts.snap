@@ -1,4 +1,4 @@
-exports[`createValintaperusteForm > should be able to create valintaperuste #0`] =
+exports[`createValintaperuste > should be able to create valintaperuste #0`] =
 {
   "hakutapaKoodiUri": "hakutapa_0#1",
   "kielivalinta": [
@@ -128,6 +128,122 @@ exports[`createValintaperusteForm > should be able to create valintaperuste #0`]
         }
       ],
       "tyyppiKoodiUri": "valintakokeentyyppi_1#1"
+    }
+  ]
+};
+
+exports[`editValintaperuste > should be able to edit valintaperuste #0`] =
+{
+  "hakutapaKoodiUri": "hakutapa_0#1",
+  "id": "649adb37-cd4d-4846-91a9-84b58b90f928",
+  "julkinen": false,
+  "kielivalinta": [
+    "fi"
+  ],
+  "kohdejoukkoKoodiUri": "haunkohdejoukko_0#1",
+  "koulutustyyppi": "amm",
+  "metadata": {
+    "kielitaitovaatimukset": [],
+    "kuvaus": {
+      "fi": "<p>Loppukuvaus</p>"
+    },
+    "osaamistaustaKoodiUrit": [],
+    "tyyppi": "amm",
+    "valintakokeidenYleiskuvaus": {
+      "fi": "<p>Valintakokeiden kuvaus - fi</p>"
+    },
+    "valintatavat": [
+      {
+        "enimmaispisteet": 100,
+        "kaytaMuuntotaulukkoa": false,
+        "kuvaus": {},
+        "kynnysehto": {
+          "fi": "Kynnysehto"
+        },
+        "nimi": {
+          "fi": "Valintatavan nimi"
+        },
+        "sisalto": [
+          {
+            "data": {
+              "fi": "<p>Tekstia</p>"
+            },
+            "tyyppi": "teksti"
+          },
+          {
+            "data": {
+              "nimi": {},
+              "rows": [
+                {
+                  "columns": [
+                    {
+                      "index": 0,
+                      "text": {
+                        "fi": "Solu"
+                      }
+                    }
+                  ],
+                  "index": 0,
+                  "isHeader": false
+                }
+              ]
+            },
+            "tyyppi": "taulukko"
+          }
+        ],
+        "vahimmaispisteet": 10,
+        "valintatapaKoodiUri": "valintatapajono_0#1"
+      }
+    ]
+  },
+  "modified": "2019-04-03T13:56",
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "Valintaperusteen nimi"
+  },
+  "onkoJulkinen": false,
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": "1",
+  "tila": "tallennettu",
+  "valintakokeet": [
+    {
+      "metadata": {
+        "erityisjarjestelytMahdollisia": true,
+        "liittyyEnnakkovalmistautumista": true,
+        "ohjeetEnnakkovalmistautumiseen": {
+          "fi": "<p>Ohjeet ennakkovalmistautumiseen - fi</p>"
+        },
+        "ohjeetErityisjarjestelyihin": {
+          "fi": "<p>Ohjeet erityisjärjestelyihin - fi</p>"
+        },
+        "tietoja": {
+          "fi": "<p>Tietoa kokeesta - fi</p>"
+        }
+      },
+      "nimi": {
+        "fi": "Kokeen nimi - fi"
+      },
+      "tilaisuudet": [
+        {
+          "aika": {
+            "alkaa": "2019-04-16T08:44",
+            "paattyy": "2019-04-18T08:44"
+          },
+          "jarjestamispaikka": {
+            "fi": "Jarjestamispaikka - fi"
+          },
+          "lisatietoja": {
+            "fi": "fi lisatietoja"
+          },
+          "osoite": {
+            "osoite": {
+              "fi": "fi osoite"
+            },
+            "postinumeroKoodiUri": "posti_00350#1"
+          }
+        }
+      ],
+      "tyyppiKoodiUri": "tyyppi_1#1"
     }
   ]
 };

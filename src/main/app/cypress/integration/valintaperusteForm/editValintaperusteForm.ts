@@ -31,7 +31,7 @@ const prepareTest = tyyppi => {
   );
 };
 
-describe('editValintaperusteForm', () => {
+export const editValintaperusteForm = () => {
   it('should be able to edit valintaperuste', () => {
     prepareTest('amm');
     cy.route({
@@ -51,4 +51,4 @@ describe('editValintaperusteForm', () => {
       cy.wrap(request.body).toMatchSnapshot();
     });
   });
-});
+};

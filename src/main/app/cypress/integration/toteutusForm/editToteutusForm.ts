@@ -56,7 +56,7 @@ const prepareTest = tyyppi => {
   cy.visit(`/organisaatio/${organisaatioOid}/toteutus/${toteutusOid}/muokkaus`);
 };
 
-describe('editToteutusForm', () => {
+export const editToteutusForm = () => {
   it('should be able to edit ammatillinen toteutus', () => {
     prepareTest('amm');
     cy.route({
@@ -158,4 +158,4 @@ describe('editToteutusForm', () => {
       cy.wrap(request.body).toMatchSnapshot();
     });
   });
-});
+};

@@ -1,5 +1,4 @@
 import _ from 'lodash';
-
 import { fillKieliversiotSection, tallenna } from '#/cypress/utils';
 import koulutus from '#/cypress/data/koulutus';
 import { stubKoulutusFormRoutes } from '#/cypress/koulutusFormUtils';
@@ -39,7 +38,7 @@ const prepareTest = tyyppi => {
   cy.visit(`/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`);
 };
 
-describe('editKoulutusForm', () => {
+export const editKoulutusForm = () => {
   it('should be able to edit ammatillinen koulutus', () => {
     prepareTest('amm');
     cy.route({
@@ -93,4 +92,4 @@ describe('editKoulutusForm', () => {
       cy.wrap(request.body).toMatchSnapshot();
     });
   });
-});
+};

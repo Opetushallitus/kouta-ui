@@ -13,5 +13,5 @@
   "defaultCommandTimeout": 8000,
   "video": false,
   "useRelativeSnapshots": true,
-  "ignoreTestFiles": "**/__snapshots__/*"
+  "testFiles": ["**/*.test.ts"]
 }

@@ -119,7 +119,7 @@ const fillPerustiedotSection = () => {
   });
 };
 
-describe('createValintaperusteForm', () => {
+export const createValintaperusteForm = () => {
   const organisaatioOid = '1.1.1.1.1.1';
   const createdValintaperusteId = '1.2.3.4.5.6';
 
@@ -169,4 +169,4 @@ describe('createValintaperusteForm', () => {
       `/kouta/organisaatio/${organisaatioOid}/valintaperusteet/${createdValintaperusteId}/muokkaus`
     );
   });
-});
+};

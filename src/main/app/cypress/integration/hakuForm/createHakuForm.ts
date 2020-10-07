@@ -140,7 +140,7 @@ const fillYhteystiedotSection = () => {
   });
 };
 
-describe('createHakuForm', () => {
+export const createHakuForm = () => {
   const organisaatioOid = '1.1.1.1.1.1';
   const createdHakuOid = '1.2.3.4.5.6';
 
@@ -181,4 +181,4 @@ describe('createHakuForm', () => {
       `/kouta/organisaatio/${organisaatioOid}/haku/${createdHakuOid}/muokkaus`
     );
   });
-});
+};

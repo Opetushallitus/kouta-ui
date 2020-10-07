@@ -76,7 +76,7 @@ const passOsatSection = () => {
   });
 };
 
-describe('createOppilaitosForm', () => {
+export const createOppilaitosForm = () => {
   const organisaatioOid = '1.1.1.1.1.1';
 
   beforeEach(() => {
@@ -123,4 +123,4 @@ describe('createOppilaitosForm', () => {
       cy.wrap(request.body).toMatchSnapshot();
     });
   });
-});
+};

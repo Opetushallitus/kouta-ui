@@ -34,7 +34,7 @@ const fillJulkisuusSection = () => {
   });
 };
 
-describe('createSoraKuvausForm', () => {
+export const createSoraKuvausForm = () => {
   const organisaatioOid = '1.1.1.1.1.1';
   const soraKuvaus = createSoraKuvaus();
 
@@ -80,4 +80,4 @@ describe('createSoraKuvausForm', () => {
       `/kouta/organisaatio/${organisaatioOid}/sora-kuvaus/${soraKuvaus.id}/muokkaus`
     );
   });
-});
+};

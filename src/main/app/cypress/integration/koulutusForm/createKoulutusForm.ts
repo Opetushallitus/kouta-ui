@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import {
   getSelectOption,
   getCheckbox,
@@ -64,7 +63,7 @@ const fillNakyvyysSection = () => {
   });
 };
 
-describe('createKoulutusForm', () => {
+export const createKoulutusForm = () => {
   const organisaatioOid = '1.1.1.1.1.1';
   const koulutusOid = '1.2.3.4.5';
 
@@ -348,4 +347,4 @@ describe('createKoulutusForm', () => {
       cy.wrap(request.body).toMatchSnapshot();
     });
   });
-});
+};

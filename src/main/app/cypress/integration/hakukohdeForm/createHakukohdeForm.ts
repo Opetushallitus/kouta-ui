@@ -152,7 +152,7 @@ const fillLiitteetSection = () => {
   });
 };
 
-describe('createHakukohdeForm', () => {
+export const createHakukohdeForm = () => {
   const organisaatioOid = '1.1.1.1.1.1';
   const hakuOid = '4.1.1.1.1.1';
   const hakukohdeOid = '1.2.3.4.5.6';
@@ -212,4 +212,4 @@ describe('createHakukohdeForm', () => {
       `/kouta/organisaatio/${organisaatioOid}/hakukohde/${hakukohdeOid}/muokkaus`
     );
   });
-});
+};

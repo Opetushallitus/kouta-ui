@@ -263,7 +263,7 @@ const prepareTest = tyyppi => {
   cy.visit(`/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/toteutus`);
 };
 
-describe('createToteutusForm', () => {
+export const createToteutusForm = () => {
   it('should be able to create ammatillinen tutkinnon osa toteutus', () => {
     prepareTest('amm-tutkinnon-osa');
 
@@ -483,4 +483,4 @@ describe('createToteutusForm', () => {
       cy.wrap(request.body).toMatchSnapshot();
     });
   });
-});
+};

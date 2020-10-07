@@ -1,0 +1,366 @@
+exports[`createKoulutus > should be able to create ammatillinen koulutus #0`] =
+{
+  "ePerusteId": 6777660,
+  "johtaaTutkintoon": true,
+  "julkinen": true,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutusKoodiUri": "koulutus_351107#12",
+  "koulutustyyppi": "amm",
+  "metadata": {
+    "koulutusalaKoodiUrit": [],
+    "koulutustyyppi": "amm",
+    "kuvauksenNimi": {},
+    "kuvaus": {},
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "teksti": {
+          "fi": "koulutuksenlisatiedot_0 kuvaus"
+        }
+      }
+    ],
+    "opintojenLaajuusKoodiUri": null,
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "amm"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "Kaivosalan perustutkinto"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "teemakuva": null,
+  "tila": "julkaistu"
+};
+
+exports[`createKoulutus > should be able to create ammatillinen osaamisala koulutus #0`] =
+{
+  "ePerusteId": 6777660,
+  "johtaaTutkintoon": false,
+  "julkinen": true,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutusKoodiUri": "koulutus_351107#12",
+  "koulutustyyppi": "amm-osaamisala",
+  "metadata": {
+    "koulutusalaKoodiUrit": [],
+    "koulutustyyppi": "amm-osaamisala",
+    "kuvauksenNimi": {},
+    "kuvaus": {},
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "teksti": {
+          "fi": "koulutuksenlisatiedot_0 kuvaus"
+        }
+      }
+    ],
+    "opintojenLaajuusKoodiUri": null,
+    "osaamisalaKoodiUri": "osaamisala_1800",
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "amm-osaamisala"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "Kaivosalan perustutkinto"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "teemakuva": null,
+  "tila": "julkaistu"
+};
+
+exports[`createKoulutus > should be able to create ammatillinen tutkinnon osa koulutus #0`] =
+{
+  "ePerusteId": null,
+  "johtaaTutkintoon": false,
+  "julkinen": true,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutusKoodiUri": null,
+  "koulutustyyppi": "amm-tutkinnon-osa",
+  "metadata": {
+    "koulutusalaKoodiUrit": [],
+    "koulutustyyppi": "amm-tutkinnon-osa",
+    "kuvauksenNimi": {},
+    "kuvaus": {},
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "teksti": {
+          "fi": "koulutuksenlisatiedot_0 kuvaus"
+        }
+      }
+    ],
+    "opintojenLaajuusKoodiUri": null,
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [
+      {
+        "ePerusteId": 6777660,
+        "koulutusKoodiUri": "koulutus_351107#12",
+        "tutkinnonosaId": 6777674,
+        "tutkinnonosaViite": 6778201
+      },
+      {
+        "ePerusteId": 6777660,
+        "koulutusKoodiUri": "koulutus_351107#12",
+        "tutkinnonosaId": 6778360,
+        "tutkinnonosaViite": 6778207
+      }
+    ],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "amm-tutkinnon-osa"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "Louhintaporaus"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "teemakuva": null,
+  "tila": "julkaistu"
+};
+
+exports[`createKoulutus > should be able to create AMK-koulutus #0`] =
+{
+  "ePerusteId": null,
+  "johtaaTutkintoon": true,
+  "julkinen": true,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutusKoodiUri": "koulutus_671112#12",
+  "koulutustyyppi": "amk",
+  "metadata": {
+    "koulutusalaKoodiUrit": [
+      "kansallinenkoulutusluokitus2016koulutusalataso2_0#1"
+    ],
+    "koulutustyyppi": "amk",
+    "kuvauksenNimi": {
+      "fi": "Kuvauksen nimi"
+    },
+    "kuvaus": {
+      "fi": "Kuvaus"
+    },
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "teksti": {
+          "fi": "koulutuksenlisatiedot_0 kuvaus"
+        }
+      }
+    ],
+    "opintojenLaajuusKoodiUri": "opintojenlaajuus_0#1",
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [
+      "tutkintonimikekk_0#1"
+    ],
+    "tyyppi": "amk"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "Tiedot nimi"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "teemakuva": null,
+  "tila": "julkaistu"
+};
+
+exports[`createKoulutus > should be able to create lukiokoulutus #0`] =
+{
+  "ePerusteId": null,
+  "johtaaTutkintoon": true,
+  "julkinen": true,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutusKoodiUri": "koulutus_309902#7",
+  "koulutustyyppi": "lk",
+  "metadata": {
+    "koulutusalaKoodiUrit": [],
+    "koulutustyyppi": "lk",
+    "kuvauksenNimi": {},
+    "kuvaus": {},
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "teksti": {
+          "fi": "koulutuksenlisatiedot_0 kuvaus"
+        }
+      }
+    ],
+    "opintojenLaajuusKoodiUri": null,
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "lk"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "Lukion oppimäärä"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "teemakuva": null,
+  "tila": "julkaistu"
+};
+
+exports[`editKoulutus > should be able to edit ammatillinen koulutus #0`] =
+{
+  "ePerusteId": 6777660,
+  "esikatselu": true,
+  "johtaaTutkintoon": true,
+  "julkinen": true,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutusKoodiUri": "koulutus_351107#12",
+  "koulutustyyppi": "amm",
+  "metadata": {
+    "koulutusalaKoodiUrit": [],
+    "koulutustyyppi": "amm",
+    "kuvauksenNimi": {},
+    "kuvaus": {},
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "teksti": {
+          "fi": "koulutuksenlisatiedot_0 kuvaus"
+        }
+      }
+    ],
+    "opintojenLaajuusKoodiUri": null,
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "amm"
+  },
+  "muokkaaja": "1.2.246.562.24.26603962037",
+  "nimi": {
+    "fi": "Kaivosalan perustutkinto"
+  },
+  "oid": "1.2.3.4.5.6",
+  "organisaatioOid": "1.1.1.1.1.1",
+  "tarjoajat": [
+    "1.1.1.1.1.1",
+    "1.2.1.1.1.1"
+  ],
+  "teemakuva": null,
+  "tila": "tallennettu"
+};
+
+exports[`editKoulutus > should be able to edit korkeakoulu koulutus #0`] =
+{
+  "ePerusteId": null,
+  "esikatselu": true,
+  "johtaaTutkintoon": true,
+  "julkinen": true,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutusKoodiUri": "koulutus_0#1",
+  "koulutustyyppi": "yo",
+  "metadata": {
+    "koulutusalaKoodiUrit": [
+      "kansallinenkoulutusluokitus2016koulutusalataso2_1#1"
+    ],
+    "koulutustyyppi": "yo",
+    "kuvauksenNimi": {
+      "fi": "Fi kuvauksen nimi"
+    },
+    "kuvaus": {
+      "fi": "Fi kuvaus"
+    },
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "teksti": {
+          "fi": "koulutuksenlisatiedot_0 kuvaus"
+        }
+      }
+    ],
+    "opintojenLaajuusKoodiUri": "opintojenlaajuus_1#1",
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [
+      "tutkintonimikekk_1#1",
+      "tutkintonimikekk_2#1"
+    ],
+    "tyyppi": "yo"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "koulutus_0"
+  },
+  "oid": "1.2.3.4.5.6",
+  "organisaatioOid": "1.1.1.1.1.1",
+  "tarjoajat": [
+    "1.1.1.1.1.1",
+    "1.2.1.1.1.1"
+  ],
+  "teemakuva": null,
+  "tila": "tallennettu"
+};
+
+exports[`editKoulutus > should be able to edit lukiokoulutus #0`] =
+{
+  "ePerusteId": null,
+  "esikatselu": true,
+  "johtaaTutkintoon": true,
+  "julkinen": true,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutusKoodiUri": "koulutus_0#1",
+  "koulutustyyppi": "lk",
+  "metadata": {
+    "koulutusalaKoodiUrit": [],
+    "koulutustyyppi": "lk",
+    "kuvauksenNimi": {},
+    "kuvaus": {},
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "teksti": {
+          "fi": "koulutuksenlisatiedot_0 kuvaus"
+        }
+      }
+    ],
+    "opintojenLaajuusKoodiUri": null,
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "lk"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "koulutus_0"
+  },
+  "oid": "1.2.3.4.5.6",
+  "organisaatioOid": "1.1.1.1.1.1",
+  "tarjoajat": [
+    "1.1.1.1.1.1",
+    "1.2.1.1.1.1"
+  ],
+  "teemakuva": null,
+  "tila": "tallennettu"
+};

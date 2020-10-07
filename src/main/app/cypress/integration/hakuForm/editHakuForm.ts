@@ -3,7 +3,7 @@ import { fillKieliversiotSection, tallenna } from '#/cypress/utils';
 import { stubHakuFormRoutes } from '#/cypress/hakuFormUtils';
 import haku from '#/cypress/data/haku';
 
-describe('editHakuForm', () => {
+export const editHakuForm = () => {
   const organisaatioOid = '1.1.1.1.1.1';
   const hakuOid = '2.1.1.1.1.1';
 
@@ -52,4 +52,4 @@ describe('editHakuForm', () => {
       cy.wrap(request.body).toMatchSnapshot();
     });
   });
-});
+};

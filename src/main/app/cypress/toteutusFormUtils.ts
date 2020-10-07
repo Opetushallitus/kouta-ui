@@ -132,5 +132,11 @@ export const stubToteutusFormRoutes = ({ organisaatioOid, perusteId }) => {
     response: [],
   });
 
+  cy.route({
+    method: 'GET',
+    url: '**/sorakuvaus/list**',
+    response: [],
+  });
+
   stubOppijanumerorekisteriHenkiloRoute();
 };

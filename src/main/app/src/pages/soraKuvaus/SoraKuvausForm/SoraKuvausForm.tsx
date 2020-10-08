@@ -61,12 +61,6 @@ const SoraKuvausForm = ({
         Component={TiedotSection}
       />
       <FormCollapse
-        section="julkinen"
-        header={t('soraKuvauslomake.nakyminenMuilleToimijoille')}
-        Component={JulkisuusSection}
-        entity={ENTITY.SORA_KUVAUS}
-      />
-      <FormCollapse
         section="tila"
         header={t('soraKuvauslomake.soraKuvauksenTila')}
         Component={JulkaisutilaField}

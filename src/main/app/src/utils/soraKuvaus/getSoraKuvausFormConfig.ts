@@ -53,7 +53,6 @@ const config = createFormConfigBuilder().registerSections([
       },
     ],
   },
-  julkinenSectionConfig,
   tilaSectionConfig,
 ]);
 

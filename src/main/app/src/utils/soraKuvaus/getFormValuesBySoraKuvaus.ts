@@ -1,11 +1,10 @@
-import { mapValues } from 'lodash';
+import _ from 'lodash/fp';
 
 import { parseEditorState } from '#/src/components/Editor/utils';
 
 const getFormValuesBySoraKuvaus = soraKuvaus => {
   const {
     nimi,
-    julkinen,
     koulutustyyppi,
     kielivalinta,
     metadata = {},
@@ -19,9 +18,8 @@ const getFormValuesBySoraKuvaus = soraKuvaus => {
     kieliversiot: kielivalinta || [],
     tiedot: {
       nimi: nimi || {},
-      kuvaus: mapValues(kuvaus || {}, parseEditorState),
+      kuvaus: _.mapValues(parseEditorState, kuvaus || {}),
     },
-    julkinen: Boolean(julkinen),
     koulutustyyppi: koulutustyyppi || null,
   };
 };

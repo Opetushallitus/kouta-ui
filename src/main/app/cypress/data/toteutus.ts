@@ -156,7 +156,7 @@ const getLukioFields = ({ tyyppi }) =>
   });
 
 export default ({ tyyppi = 'amm' }) => {
-  if (tyyppi === 'amm') {
+  if (tyyppi.startsWith('amm')) {
     return getAmmatillinenFields({ tyyppi });
   } else if (['yo', 'amk'].includes(tyyppi)) {
     return getKorkeakouluFields({ tyyppi });

@@ -53,7 +53,12 @@ const ToteutusForm = ({
     'hakeutumisTaiIlmoittautumistapa.hakeutumisTaiIlmoittautumistapa'
   );
 
-  const kaytetaanHakemuspalvelua = hakeutumisTaiIlmoittautumistapa === ATARU;
+  const kaytetaanHakemuspalvelua = [
+    KOULUTUSTYYPPI.TUTKINNON_OSA,
+    KOULUTUSTYYPPI.OSAAMISALA,
+  ].includes(koulutustyyppi)
+    ? hakeutumisTaiIlmoittautumistapa === ATARU
+    : true;
 
   return (
     <>
@@ -224,6 +229,7 @@ const ToteutusForm = ({
             Component={HakukohteetSection}
             toteutus={toteutus}
             organisaatioOid={organisaatioOid}
+            {...getTestIdProps('hakukohteetSection')}
           />
         ) : null}
       </FormCollapseGroup>

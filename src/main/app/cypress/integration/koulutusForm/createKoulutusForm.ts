@@ -126,7 +126,7 @@ export const createKoulutusForm = () => {
     });
   });
 
-  it('should be able to create ammatillinen osaamisala koulutus', () => {
+  it.only('should be able to create ammatillinen osaamisala koulutus', () => {
     cy.route({
       method: 'PUT',
       url: '**/koulutus',
@@ -150,6 +150,14 @@ export const createKoulutusForm = () => {
 
       getByTestId('osaamisalaSelect').within(() => {
         fillAsyncSelect('Kaivostyön osaamisala');
+      });
+
+      cy.findByRole('link', { name: '1800' }).should($link => {
+        const url = new URL($link.attr('href'));
+        expect(url.pathname).to.equal('/');
+        expect(url.hash).to.equal(
+          '#/fi/esitys/6777660/reformi/sisalto/6858226'
+        );
       });
 
       jatka();

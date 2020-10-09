@@ -276,6 +276,7 @@ export default {
       'Aikavälin alkamisaika on pakollinen, jos päättymisaika on annettu.',
     alkamisaikaEnnenPaattymisaikaa:
       'Aikavälin alkamisajan täytyy olla ennen päättymisaikaa.',
+    positiivinenKokonaisluku: 'Syötä positiivinen kokonaisluku',
   },
   hakulomakeValinnat: {
     ataru: 'Käytetään hakemuspalvelun lomaketta',

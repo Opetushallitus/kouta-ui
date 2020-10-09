@@ -110,6 +110,14 @@ const config = createFormConfigBuilder().registerSections([
           ],
           TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT
         ),
+        validate: validateInteger(
+          'tiedot.aloituspaikat',
+          {
+            min: 1,
+            optional: true,
+          },
+          'validointivirheet.positiivinenKokonaisluku'
+        ),
       },
     ],
   },

@@ -41,7 +41,7 @@ export const useLocalizedKoulutus = ({
   // change the language versioned 'nimi' fields accordingly
   // if the form is dirty (don't override initial values)
   useEffect(() => {
-    if (koulutusHasChanged && isDirty) {
+    if (nimiFieldName && koulutusHasChanged && isDirty) {
       if (koodi) {
         _.each(koodi?.metadata, ({ kieli, nimi }) => {
           const lang = _.toLower(kieli);

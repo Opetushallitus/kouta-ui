@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import _ from 'lodash/fp';
 import { Box } from '#/src/components/virkailija';
-import { useFieldValue } from '#/src/hooks/form';
+import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
 import { useLocalizedKoulutus } from './useLocalizedKoulutus';
 import { ValitseKoulutusBox } from './KoulutuksenEPerusteTiedot/ValitseKoulutusBox';
 import { ValitseEPerusteBox } from './KoulutuksenEPerusteTiedot/ValitseEPerusteBox';
 import { ValitseOsaamisalaBox } from './KoulutuksenEPerusteTiedot/ValitseOsaamisalaBox';
 import { useKoulutusByKoodi } from '#/src/utils/koulutus/getKoulutusByKoodi';
+import { useHasChanged } from '#/src/hooks/useHasChanged';
 
-export const OsaamisalaSection = ({ disabled, language, name }) => {
+export const OsaamisalaSection = ({ disabled, language, languages, name }) => {
   const selectedKoulutus = useFieldValue(`${name}.koulutus`)?.value;
   const selectedEPeruste = useFieldValue(`${name}.eperuste`)?.value;
 
@@ -23,9 +25,32 @@ export const OsaamisalaSection = ({ disabled, language, name }) => {
 
   useLocalizedKoulutus({
     koulutusFieldName: `${name}.koulutus`,
-    nimiFieldName: `information.nimi`,
+    nimiFieldName: null,
     language,
   });
+
+  const osaamisalaValue = useFieldValue(`${name}.osaamisala`);
+
+  const osaamisalaChanged = useHasChanged(osaamisalaValue);
+
+  const { change } = useBoundFormActions();
+
+  const osaamisalat = selectedEPerusteData?.osaamisalat;
+
+  useEffect(() => {
+    const selectedOsaamisalaData = _.find(
+      osaamisala => osaamisala?.arvo === osaamisalaValue?.value,
+      osaamisalat
+    );
+    if (selectedOsaamisalaData) {
+      change(
+        'information.nimi',
+        _.pick(languages, selectedOsaamisalaData?.nimi)
+      );
+    } else {
+      change('information.nimi', {});
+    }
+  }, [change, languages, osaamisalaChanged, osaamisalaValue, osaamisalat]);
 
   return (
     <Box mb={-2}>

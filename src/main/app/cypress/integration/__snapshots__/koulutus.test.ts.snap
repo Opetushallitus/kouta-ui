@@ -70,7 +70,7 @@ exports[`createKoulutus > should be able to create ammatillinen osaamisala koulu
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "Kaivosalan perustutkinto"
+    "fi": "Kaivostyön osaamisala"
   },
   "organisaatioOid": "1.1.1.1.1.1",
   "tarjoajat": [
@@ -268,7 +268,7 @@ exports[`editKoulutus > should be able to edit ammatillinen koulutus #0`] =
   "tila": "tallennettu"
 };
 
-exports[`editKoulutus > should be able to edit korkeakoulu koulutus #0`] =
+exports[`editKoulutus > should be able to edit AMK-koulutus #0`] =
 {
   "ePerusteId": null,
   "esikatselu": true,
@@ -277,13 +277,13 @@ exports[`editKoulutus > should be able to edit korkeakoulu koulutus #0`] =
   "kielivalinta": [
     "fi"
   ],
-  "koulutusKoodiUri": "koulutus_0#1",
-  "koulutustyyppi": "yo",
+  "koulutusKoodiUri": "koulutus_671112#12",
+  "koulutustyyppi": "amk",
   "metadata": {
     "koulutusalaKoodiUrit": [
       "kansallinenkoulutusluokitus2016koulutusalataso2_1#1"
     ],
-    "koulutustyyppi": "yo",
+    "koulutustyyppi": "amk",
     "kuvauksenNimi": {
       "fi": "Fi kuvauksen nimi"
     },
@@ -305,11 +305,11 @@ exports[`editKoulutus > should be able to edit korkeakoulu koulutus #0`] =
       "tutkintonimikekk_1#1",
       "tutkintonimikekk_2#1"
     ],
-    "tyyppi": "yo"
+    "tyyppi": "amk"
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "koulutus_0"
+    "fi": "Fysioterapeutti (AMK)"
   },
   "oid": "1.2.3.4.5.6",
   "organisaatioOid": "1.1.1.1.1.1",
@@ -330,7 +330,7 @@ exports[`editKoulutus > should be able to edit lukiokoulutus #0`] =
   "kielivalinta": [
     "fi"
   ],
-  "koulutusKoodiUri": "koulutus_0#1",
+  "koulutusKoodiUri": "koulutus_309902#12",
   "koulutustyyppi": "lk",
   "metadata": {
     "koulutusalaKoodiUrit": [],
@@ -353,7 +353,7 @@ exports[`editKoulutus > should be able to edit lukiokoulutus #0`] =
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "koulutus_0"
+    "fi": "Lukion oppimäärä"
   },
   "oid": "1.2.3.4.5.6",
   "organisaatioOid": "1.1.1.1.1.1",

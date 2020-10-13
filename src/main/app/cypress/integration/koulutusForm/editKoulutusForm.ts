@@ -57,20 +57,20 @@ export const editKoulutusForm = () => {
     });
   });
 
-  it('should be able to edit korkeakoulu koulutus', () => {
-    prepareTest('yo');
+  it('should be able to edit AMK-koulutus', () => {
+    prepareTest('amk');
     cy.route({
       method: 'POST',
       url: '**/koulutus',
       response: {
         muokattu: false,
       },
-    }).as('updateYoKoulutusResponse');
+    }).as('updateAmkKoulutusResponse');
 
     fillKieliversiotSection();
     tallenna();
 
-    cy.wait('@updateYoKoulutusResponse').then(({ request }) => {
+    cy.wait('@updateAmkKoulutusResponse').then(({ request }) => {
       cy.wrap(request.body).toMatchSnapshot();
     });
   });

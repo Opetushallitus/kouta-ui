@@ -64,8 +64,8 @@ const getKorkeakouluFields = ({ tyyppi }) => {
   return merge(getBaseFields(), {
     johtaaTutkintoon: true,
     koulutustyyppi: tyyppi,
-    koulutusKoodiUri: 'koulutus_0#1',
-    nimi: { fi: 'koulutus_0' },
+    koulutusKoodiUri: 'koulutus_671112#12',
+    nimi: { fi: 'Fysioterapeutti (AMK)', sv: 'Fysioterapeut (YH)' },
     metadata: {
       tyyppi,
       kuvaus: { fi: 'Fi kuvaus', sv: 'Sv kuvaus' },
@@ -80,9 +80,9 @@ const getKorkeakouluFields = ({ tyyppi }) => {
 };
 
 const getLukioFields = ({ tyyppi }) => {
-  return merge(getBaseFields({ tyyppi: 'lk' }), {
-    koulutusKoodiUri: 'koulutus_0#1',
-    nimi: { fi: 'koulutus_0' },
+  return merge(getBaseFields({ tyyppi }), {
+    koulutusKoodiUri: 'koulutus_309902#12',
+    nimi: { fi: 'Lukion oppimäärä' },
   });
 };
 

@@ -126,7 +126,7 @@ export const createKoulutusForm = () => {
     });
   });
 
-  it.only('should be able to create ammatillinen osaamisala koulutus', () => {
+  it('should be able to create ammatillinen osaamisala koulutus', () => {
     cy.route({
       method: 'PUT',
       url: '**/koulutus',
@@ -251,7 +251,7 @@ export const createKoulutusForm = () => {
       response: {
         oid: koulutusOid,
       },
-    }).as('createYoKoulutusResponse');
+    }).as('createAmkKoulutusResponse');
 
     fillCommon({ koulutustyyppiPath: ['korkeakoulutus', 'amk'] });
 
@@ -309,7 +309,7 @@ export const createKoulutusForm = () => {
 
     tallenna();
 
-    cy.wait('@createYoKoulutusResponse').then(({ request }) => {
+    cy.wait('@createAmkKoulutusResponse').then(({ request }) => {
       cy.wrap(request.body).toMatchSnapshot();
     });
   });

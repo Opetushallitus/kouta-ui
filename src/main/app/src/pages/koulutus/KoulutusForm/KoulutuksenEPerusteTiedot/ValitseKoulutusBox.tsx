@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box, Typography, Spin } from '#/src/components/virkailija';
+import { Box, Spin } from '#/src/components/virkailija';
 import { getLanguageValue } from '#/src/utils/languageUtils';
 import { getTestIdProps } from '#/src/utils';
 import { useFieldValue } from '#/src/hooks/form';

@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
 import { EPERUSTE_SERVICE_QUERY_OPTIONS } from '#/src/constants';
 

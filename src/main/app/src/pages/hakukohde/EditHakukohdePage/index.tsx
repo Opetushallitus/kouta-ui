@@ -38,7 +38,7 @@ const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
     getHakuByOid({ httpClient, apiUrls, oid: hakuOid }),
   ]);
 
-  const { koulutustyyppi, tarjoajat } = await (toteutus && toteutus.koulutusOid
+  const { koulutustyyppi } = await (toteutus && toteutus.koulutusOid
     ? getKoulutustyyppiByKoulutusOid({
         oid: toteutus.koulutusOid,
         httpClient,
@@ -51,7 +51,7 @@ const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
     toteutus,
     haku,
     koulutustyyppi,
-    tarjoajat,
+    tarjoajat: toteutus?.tarjoajat,
   };
 };
 

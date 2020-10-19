@@ -34,10 +34,12 @@ const JarjestyspaikkaSection = ({
   const language = useLanguage();
   const jarjestyspaikkaOptions = flatFilterHierarkia(
     hierarkia,
-    _.overEvery(organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE), org =>
-      // Select intersection of organisaatio branches from selected organisaatio and tarjoajat
-      _.some(tarjoaja => _.includes(tarjoaja, org?.parentOidPath))(tarjoajat)
-    )
+    _.overEvery([
+      organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE),
+      org =>
+        // Select intersection of organisaatio branches from selected organisaatio and tarjoajat
+        _.some(tarjoaja => _.includes(tarjoaja, org?.parentOidPath))(tarjoajat),
+    ])
   ).map(({ oid, nimi }) => ({
     value: oid,
     label: getFirstLanguageValue(nimi, language),

@@ -25,6 +25,7 @@ import {
   InfoBoxGrid,
   StyledInfoBox,
 } from '../KoulutuksenEPerusteTiedot/InfoBox';
+import { useTutkinnonOsienKuvaukset } from '#/src/utils/koulutus/getTutkinnonOsanKuvaus';
 
 const getListNimiLanguageValues = (list = [], language) =>
   list
@@ -103,11 +104,42 @@ const StyledTilaBadge = styled(TilaBadge)`
   ${getEPerusteStatusCss}
 `;
 
+const TutkinnonOsaInfo = ({ ePerusteId, tutkinnonOsa, language }) => {
+  const { t } = useTranslation();
+  const apiUrls = useUrls();
+  return (
+    <InfoBoxGrid
+      style={{ marginBottom: '40px' }}
+      rows={[
+        {
+          title: t('yleiset.nimi'),
+          description: `${getLanguageValue(tutkinnonOsa.nimi, language)}`,
+        },
+        {
+          title: t('yleiset.koodi'),
+          description: (
+            <Anchor
+              href={apiUrls.url(
+                'eperusteet.tutkinnonosat',
+                language,
+                ePerusteId,
+                tutkinnonOsa?.id
+              )}
+              target="_blank"
+            >
+              {tutkinnonOsa?.koodiArvo}
+            </Anchor>
+          ),
+        },
+      ]}
+    />
+  );
+};
+
 const KoulutusInfo = ({
   koulutus,
   language = 'fi',
   ePeruste,
-  className,
   isLoading,
   name,
 }) => {
@@ -148,6 +180,19 @@ const KoulutusInfo = ({
       ),
     [ePeruste, tutkinnonosatFieldValue]
   );
+
+  const { data: kuvaukset } = useTutkinnonOsienKuvaukset({
+    tutkinnonOsat: selectedTutkinnonosat?.map(t => t?._tutkinnonOsa),
+  });
+
+  const tutkinnonOsienKuvaukset = kuvaukset?.map(({ id, koodiArvo }) => {
+    return {
+      ...(selectedTutkinnonosat?.find(
+        t => _.toNumber(t?._tutkinnonOsa) === id
+      ) || {}),
+      koodiArvo,
+    };
+  });
 
   return koulutus || isLoading ? (
     isLoading ? (
@@ -249,34 +294,11 @@ const KoulutusInfo = ({
             />
           </Box>
         )}
-        {_.map(selectedTutkinnonosat, selectedTutkinnonosa => (
-          <InfoBoxGrid
-            style={{ marginBottom: '40px' }}
-            rows={[
-              {
-                title: t('yleiset.nimi'),
-                description: `${getLanguageValue(
-                  selectedTutkinnonosa.nimi,
-                  language
-                )}`,
-              },
-              {
-                title: t('yleiset.koodi'),
-                description: (
-                  <Anchor
-                    href={apiUrls.url(
-                      'eperusteet.tutkinnonosat',
-                      language,
-                      ePeruste?.id,
-                      selectedTutkinnonosa?.id
-                    )}
-                    target="_blank"
-                  >
-                    {selectedTutkinnonosa?.id}
-                  </Anchor>
-                ),
-              },
-            ]}
+        {_.map(tutkinnonOsienKuvaukset, tutkinnonOsa => (
+          <TutkinnonOsaInfo
+            tutkinnonOsa={tutkinnonOsa}
+            language={language}
+            ePerusteId={ePeruste?.id}
           />
         ))}
       </StyledInfoBox>

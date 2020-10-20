@@ -47,12 +47,12 @@ const AmmattitaitoVaatimukset = ({ tutkinnonOsa, language }) => {
   return <Typography variant="body">-</Typography>;
 };
 
-const TutkinnonOsaInfo = ({ eperuste, viiteId, osa, language }) => {
+const TutkinnonOsaKuvaus = ({ ePerusteId, viiteId, osa, language }) => {
   const { i18n } = useTranslation();
   const t = i18n.getFixedT(language);
 
   const { data: tutkinnonOsat, isLoading } = useEPerusteTutkinnonOsat({
-    ePerusteId: eperuste,
+    ePerusteId,
   });
 
   const viiteData = _.find(tutkinnonOsa => tutkinnonOsa?.id === viiteId)(
@@ -70,12 +70,12 @@ const TutkinnonOsaInfo = ({ eperuste, viiteId, osa, language }) => {
           href={apiUrls?.url(
             'eperusteet.tutkinnonosat',
             language,
-            eperuste,
+            ePerusteId,
             viiteData?.id
           )}
           target="_blank"
         >
-          {viiteData?.id}
+          {osa.koodiArvo}
         </Anchor>
         )
       </Typography>
@@ -123,9 +123,9 @@ export const TutkinnonOsienKuvausSection = ({ disabled, language, name }) => {
         <Box mb={2}>
           {(kuvaukset || []).map((osa, index) => (
             <StyledInfoBox key={`${osa.id}_${index}`} mb={2}>
-              <TutkinnonOsaInfo
+              <TutkinnonOsaKuvaus
                 viiteId={viiteIdForOsa(osa)}
-                eperuste={eperusteForOsa(osa)}
+                ePerusteId={eperusteForOsa(osa)}
                 osa={osa}
                 language={language}
               />

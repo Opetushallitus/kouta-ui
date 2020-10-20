@@ -212,8 +212,24 @@ export const createKoulutusForm = () => {
         fillAsyncSelect('Louhintaporaus');
       });
 
+      cy.findByRole('link', { name: '106436' }).should($link => {
+        const url = new URL($link.attr('href'));
+        expect(url.pathname).to.equal('/');
+        expect(url.hash).to.equal(
+          '#/fi/esitys/6777660/reformi/tutkinnonosat/6778201'
+        );
+      });
+
       getByTestId('tutkinnonOsatSelect').within(() => {
         fillAsyncSelect('Kaivosmittaus');
+      });
+
+      cy.findByRole('link', { name: '106442' }).should($link => {
+        const url = new URL($link.attr('href'));
+        expect(url.pathname).to.equal('/');
+        expect(url.hash).to.equal(
+          '#/fi/esitys/6777660/reformi/tutkinnonosat/6778207'
+        );
       });
 
       jatka();

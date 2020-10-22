@@ -39,6 +39,8 @@ Object {
     },
   },
   "muokkaaja": "1.1.1.1",
+  "oppilaitosOid": "888.888.888",
+  "teemakuva": undefined,
   "tila": "tallennettu",
 }
 `;

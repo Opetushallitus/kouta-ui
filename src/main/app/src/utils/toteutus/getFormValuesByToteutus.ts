@@ -1,32 +1,50 @@
-import { get, isNumber } from 'lodash';
+import _ from 'lodash/fp';
 import parseSisaltoField from '#/src/utils/form/parseSisaltoField';
+import { parseEditorState } from '#/src/components/Editor/utils';
+
+const toSelectValue = value => (_.isNil(value) ? null : { value });
+
+const kieliArvoListToMultiSelectValue = _.reduce((acc, curr) => {
+  if (curr?.kieli && curr?.arvo) {
+    return {
+      ...acc,
+      [curr.kieli]: [
+        ...(acc[curr.kieli] ?? []),
+        { label: curr.arvo, value: curr.arvo },
+      ],
+    };
+  }
+
+  return acc;
+}, {});
 
 const getFormValuesByToteutus = toteutus => {
   const {
-    kielivalinta = [],
-    nimi = {},
-    tarjoajat = [],
+    kielivalinta,
+    nimi,
+    tarjoajat,
     metadata = {},
     tila,
     teemakuva,
+    sorakuvausId,
   } = toteutus;
 
   const {
     kuvaus = {},
-    ammattinimikkeet = [],
-    asiasanat = [],
+    ammattinimikkeet,
+    asiasanat,
     opetus = {},
-    osaamisalat: osaamisalatArg = [],
-    ylemmanKorkeakoulututkinnonOsaamisalat: ylemmanKorkeakoulututkinnonOsaamisalatArg = [],
-    alemmanKorkeakoulututkinnonOsaamisalat: alemmanKorkeakoulututkinnonOsaamisalatArg = [],
-    yhteyshenkilot = [],
+    osaamisalat,
+    ylemmanKorkeakoulututkinnonOsaamisalat,
+    alemmanKorkeakoulututkinnonOsaamisalat,
+    yhteyshenkilot,
     lukiolinjaKoodiUri,
     laajuus,
     laajuusyksikkoKoodiUri,
     ilmoittautumislinkki,
     aloituspaikat,
     toteutusjaksot,
-    tutkinnonOsat: tutkinnonOsatMetadata,
+    tutkinnonOsat,
   } = metadata;
 
   const {
@@ -43,11 +61,10 @@ const getFormValuesByToteutus = toteutus => {
     B2Kielivalikoima,
     B3Kielivalikoima,
     muuKielivalikoima,
+    lisatiedot,
   } = opetus;
 
-  const osaamisalat = osaamisalatArg.map(({ koodiUri }) => koodiUri);
-
-  const { osaamisalaLinkit, osaamisalaLinkkiOtsikot } = osaamisalatArg.reduce(
+  const { osaamisalaLinkit, osaamisalaLinkkiOtsikot } = _.reduce(
     (acc, curr) => {
       const { koodiUri, linkki = {}, otsikko = {} } = curr;
 
@@ -59,89 +76,68 @@ const getFormValuesByToteutus = toteutus => {
       return acc;
     },
     { osaamisalaLinkit: {}, osaamisalaLinkkiOtsikot: {} }
-  );
+  )(osaamisalat);
 
-  const { lisatiedot = [] } = opetus;
-
-  const osiot = lisatiedot
-    .filter(({ otsikkoKoodiUri }) => !!otsikkoKoodiUri)
-    .map(({ otsikkoKoodiUri }) => ({ value: otsikkoKoodiUri }));
-
-  const osioKuvaukset = lisatiedot.reduce((acc, curr) => {
-    if (curr.otsikkoKoodiUri) {
-      acc[curr.otsikkoKoodiUri] = curr.teksti || {};
-    }
-
-    return acc;
-  }, {});
-
-  const maksullistyyppi = get(opetus, 'onkoLukuvuosimaksua')
+  const maksullisuustyyppi = opetus?.onkoLukuvuosimaksua
     ? 'lukuvuosimaksu'
-    : get(opetus, 'onkoMaksullinen')
+    : opetus?.onkoMaksullinen
     ? 'kylla'
     : 'ei';
-
-  const tutkinnonOsat = (tutkinnonOsatMetadata || []).map(
-    ({ tutkintoKoodiUri, osaamisalaKoodiUri, tutkinnonOsaKoodiUrit }) => ({
-      tutkinto: tutkintoKoodiUri ? { value: tutkintoKoodiUri } : undefined,
-      osaamisalaKoodiUri: osaamisalaKoodiUri
-        ? { value: osaamisalaKoodiUri }
-        : undefined,
-      tutkinnonOsat: (tutkinnonOsaKoodiUrit || []).map(value => ({ value })),
-    })
-  );
 
   return {
     tila,
     tiedot: {
-      nimi,
-      toteutuksenKuvaus: kuvaus,
-      laajuus: isNumber(laajuus) ? laajuus.toString() : '',
-      laajuusyksikko: laajuusyksikkoKoodiUri
-        ? { value: laajuusyksikkoKoodiUri }
-        : undefined,
+      nimi: nimi ?? {},
+      laajuus: _.isNumber(laajuus) ? laajuus.toString() : '',
+      laajuusyksikko: toSelectValue(laajuusyksikkoKoodiUri),
       ilmoittautumislinkki: ilmoittautumislinkki || {},
-      aloituspaikat: isNumber(aloituspaikat) ? aloituspaikat.toString() : '',
+      aloituspaikat: _.isNumber(aloituspaikat) ? aloituspaikat.toString() : '',
     },
-    kieliversiot: kielivalinta,
-    tarjoajat,
+    kuvaus: _.mapValues(parseEditorState, kuvaus || {}),
+    kieliversiot: kielivalinta ?? [],
+    tarjoajat: tarjoajat ?? [],
     jarjestamistiedot: {
-      kuvaus,
       maksullisuus: {
-        tyyppi: maksullistyyppi,
-        maksu: (maksullistyyppi === 'lukuvuosimaksu'
-          ? get(opetus, 'lukuvuosimaksu') || ''
-          : get(opetus, 'maksunMaara') || ''
+        tyyppi: maksullisuustyyppi,
+        maksu: (maksullisuustyyppi === 'lukuvuosimaksu'
+          ? opetus?.lukuvuosimaksu || ''
+          : opetus?.maksunMaara || ''
         ).toString(),
       },
-      maksumaara: get(opetus, 'maksunMaara') || {},
-      opetustapa: get(opetus, 'opetustapaKoodiUrit') || [],
-      opetusaika: get(opetus, 'opetusaikaKoodiUrit') || [],
-      opetuskieli: get(opetus, 'opetuskieliKoodiUrit') || [],
+      maksumaara: opetus?.maksunMaara || {},
+      opetustapa: opetus?.opetustapaKoodiUrit || [],
+      opetusaika: opetus?.opetusaikaKoodiUrit || [],
+      opetuskieli: opetus?.opetuskieliKoodiUrit || [],
       suunniteltuKestoKuvaus: opetus?.suunniteltuKestoKuvaus || {},
       suunniteltuKesto: {
         vuotta: opetus?.suunniteltuKestoVuodet,
         kuukautta: opetus?.suunniteltuKestoKuukaudet,
       },
-      opetusaikaKuvaus: get(opetus, 'opetusaikaKuvaus') || {},
-      opetustapaKuvaus: get(opetus, 'opetustapaKuvaus') || {},
-      opetuskieliKuvaus: get(opetus, 'opetuskieletKuvaus') || {},
-      maksullisuusKuvaus: get(opetus, 'maksullisuusKuvaus') || {},
-      osiot,
-      osioKuvaukset,
+      opetusaikaKuvaus: opetus?.opetusaikaKuvaus || {},
+      opetustapaKuvaus: opetus?.opetustapaKuvaus || {},
+      opetuskieliKuvaus: opetus?.opetuskieletKuvaus || {},
+      maksullisuusKuvaus: opetus?.maksullisuusKuvaus || {},
+      osiot: _.pipe(
+        _.filter(({ otsikkoKoodiUri }) => !!otsikkoKoodiUri),
+        _.map(({ otsikkoKoodiUri }) => ({ value: otsikkoKoodiUri }))
+      )(lisatiedot),
+      osioKuvaukset: _.reduce((acc, curr) => {
+        if (curr.otsikkoKoodiUri) {
+          acc[curr.otsikkoKoodiUri] = curr.teksti || {};
+        }
+        return acc;
+      }, {})(lisatiedot),
       onkoStipendia: opetus?.onkoStipendia ? 'kylla' : 'ei',
       stipendinMaara: opetus?.stipendinMaara,
       stipendinKuvaus: opetus?.stipendinKuvaus || {},
-      diplomiTyypit: (diplomiKoodiUrit || []).map(value => ({ value })),
-      diplomiKuvaus: diplomiKuvaus || {},
-      A1A2Kielet: (A1JaA2Kielivalikoima || []).map(value => ({ value })),
-      aidinkielet: (aidinkieliKielivalikoima || []).map(value => ({
-        value,
-      })),
-      B1Kielet: (B1Kielivalikoima || []).map(value => ({ value })),
-      B2Kielet: (B2Kielivalikoima || []).map(value => ({ value })),
-      B3Kielet: (B3Kielivalikoima || []).map(value => ({ value })),
-      muutKielet: (muuKielivalikoima || []).map(value => ({ value })),
+      diplomiTyypit: _.map(toSelectValue)(diplomiKoodiUrit),
+      diplomiKuvaus: diplomiKuvaus ?? {},
+      A1A2Kielet: _.map(toSelectValue)(A1JaA2Kielivalikoima),
+      aidinkielet: _.map(toSelectValue)(aidinkieliKielivalikoima),
+      B1Kielet: _.map(toSelectValue)(B1Kielivalikoima),
+      B2Kielet: _.map(toSelectValue)(B2Kielivalikoima),
+      B3Kielet: _.map(toSelectValue)(B3Kielivalikoima),
+      muutKielet: _.map(toSelectValue)(muuKielivalikoima),
       koulutuksenAlkamispaivamaara: koulutuksenAlkamispaivamaara
         ? new Date(koulutuksenAlkamispaivamaara)
         : '',
@@ -150,35 +146,13 @@ const getFormValuesByToteutus = toteutus => {
         : '',
       koulutuksenTarkkaAlkamisaika: koulutuksenTarkkaAlkamisaika,
       koulutuksenAlkamiskausi: koulutuksenAlkamiskausi,
-      koulutuksenAlkamisvuosi: koulutuksenAlkamisvuosi
-        ? { value: koulutuksenAlkamisvuosi }
-        : undefined,
+      koulutuksenAlkamisvuosi: toSelectValue(koulutuksenAlkamisvuosi),
     },
     nayttamistiedot: {
-      ammattinimikkeet: ammattinimikkeet.reduce((acc, curr) => {
-        if (get(curr, 'kieli') && get(curr, 'arvo')) {
-          acc[curr.kieli] = acc[curr.kieli] || [];
-          acc[curr.kieli] = [
-            ...acc[curr.kieli],
-            { label: curr.arvo, value: curr.arvo },
-          ];
-        }
-
-        return acc;
-      }, {}),
-      avainsanat: asiasanat.reduce((acc, curr) => {
-        if (get(curr, 'kieli') && get(curr, 'arvo')) {
-          acc[curr.kieli] = acc[curr.kieli] || [];
-          acc[curr.kieli] = [
-            ...acc[curr.kieli],
-            { label: curr.arvo, value: curr.arvo },
-          ];
-        }
-
-        return acc;
-      }, {}),
+      ammattinimikkeet: kieliArvoListToMultiSelectValue(ammattinimikkeet),
+      avainsanat: kieliArvoListToMultiSelectValue(asiasanat),
     },
-    yhteyshenkilot: yhteyshenkilot.map(
+    yhteyshenkilot: _.map(
       ({ nimi, titteli, sahkoposti, wwwSivu, puhelinnumero }) => ({
         nimi: nimi || {},
         titteli: titteli || {},
@@ -186,32 +160,62 @@ const getFormValuesByToteutus = toteutus => {
         verkkosivu: wwwSivu || {},
         puhelinnumero: puhelinnumero || {},
       })
-    ),
+    )(yhteyshenkilot),
     osaamisalat: {
-      osaamisalat,
+      osaamisalat: _.map(({ koodiUri }) => koodiUri)(osaamisalat),
       osaamisalaLinkit,
       osaamisalaLinkkiOtsikot,
     },
-    ylemmanKorkeakoulututkinnonOsaamisalat: ylemmanKorkeakoulututkinnonOsaamisalatArg,
-    alemmanKorkeakoulututkinnonOsaamisalat: alemmanKorkeakoulututkinnonOsaamisalatArg,
-    kuvaus,
+    ylemmanKorkeakoulututkinnonOsaamisalat:
+      ylemmanKorkeakoulututkinnonOsaamisalat ?? [],
+    alemmanKorkeakoulututkinnonOsaamisalat:
+      alemmanKorkeakoulututkinnonOsaamisalat ?? [],
     lukiolinjat: {
       lukiolinja: lukiolinjaKoodiUri
         ? { value: lukiolinjaKoodiUri }
         : undefined,
     },
-    toteutusjaksot: (toteutusjaksot || []).map(
-      ({ nimi, koodi, laajuus, ilmoittautumislinkki, kuvaus, sisalto }) => ({
-        nimi: nimi || {},
-        koodi: koodi || '',
-        laajuus: laajuus || {},
-        ilmoittautumislinkki: ilmoittautumislinkki || {},
-        kuvaus: kuvaus || {},
+    toteutusjaksot: _.map(
+      ({
+        nimi = {},
+        koodi = '',
+        laajuus = {},
+        ilmoittautumislinkki = {},
+        kuvaus = {},
+        sisalto,
+      }) => ({
+        nimi,
+        koodi,
+        laajuus,
+        ilmoittautumislinkki,
+        kuvaus,
         sisalto: parseSisaltoField(sisalto),
       })
-    ),
-    tutkinnonOsat,
+    )(toteutusjaksot),
+    tutkinnonOsat: _.map(
+      ({ tutkintoKoodiUri, osaamisalaKoodiUri, tutkinnonOsaKoodiUrit }) => ({
+        tutkinto: toSelectValue(tutkintoKoodiUri),
+        osaamisalaKoodiUri: toSelectValue(osaamisalaKoodiUri),
+        tutkinnonOsat: _.map(toSelectValue)(tutkinnonOsaKoodiUrit),
+      })
+    )(tutkinnonOsat),
     teemakuva,
+    hakeutumisTaiIlmoittautumistapa: {
+      hakeutumisTaiIlmoittautumistapa: metadata?.hakulomaketyyppi,
+      hakuTapa: metadata?.hakutermi,
+      linkki: metadata?.hakulomakeLinkki,
+      lisatiedot: _.mapValues(
+        parseEditorState,
+        metadata?.lisatietoaHakeutumisesta
+      ),
+      lisatiedotValintaperusteista: _.mapValues(
+        parseEditorState,
+        metadata?.lisatietoaValintaperusteista
+      ),
+      hakuaikaAlkaa: metadata?.hakuaika?.alkaa,
+      hakuaikaPaattyy: metadata?.hakuaika?.paattyy,
+    },
+    soraKuvaus: toSelectValue(sorakuvausId),
   };
 };
 

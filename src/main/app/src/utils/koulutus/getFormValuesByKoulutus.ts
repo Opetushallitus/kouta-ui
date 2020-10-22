@@ -1,3 +1,5 @@
+import _ from 'lodash/fp';
+
 export const getFormValuesByKoulutus = koulutus => {
   const {
     kielivalinta = [],
@@ -23,27 +25,6 @@ export const getFormValuesByKoulutus = koulutus => {
     koulutusalaKoodiUrit = [],
   } = metadata;
 
-  const osiot = lisatiedot
-    .filter(({ otsikkoKoodiUri }) => !!otsikkoKoodiUri)
-    .map(({ otsikkoKoodiUri }) => ({ value: otsikkoKoodiUri }));
-
-  const tutkinnonosat = tutkinnonOsat.map(
-    ({ eperusteId, koulutusId, tutkinnonosaId, tutkinnonosaViite }) => ({
-      eperuste: { value: eperusteId },
-      koulutus: { value: koulutusId },
-      tutkinnonosa: { value: tutkinnonosaId },
-      tutkinnonosaviite: tutkinnonosaViite,
-    })
-  );
-
-  const osioKuvaukset = lisatiedot.reduce((acc, curr) => {
-    if (curr.otsikkoKoodiUri) {
-      acc[curr.otsikkoKoodiUri] = curr.teksti || {};
-    }
-
-    return acc;
-  }, {});
-
   return {
     tila,
     kieliversiot: kielivalinta,
@@ -64,11 +45,30 @@ export const getFormValuesByKoulutus = koulutus => {
     },
     koulutustyyppi,
     lisatiedot: {
-      osioKuvaukset,
-      osiot,
+      osioKuvaukset: lisatiedot.reduce((acc, curr) => {
+        if (curr.otsikkoKoodiUri) {
+          acc[curr.otsikkoKoodiUri] = curr.teksti || {};
+        }
+        return acc;
+      }, {}),
+      osiot: lisatiedot
+        .filter(({ otsikkoKoodiUri }) => !!otsikkoKoodiUri)
+        .map(({ otsikkoKoodiUri }) => ({ value: otsikkoKoodiUri })),
     },
     tutkinnonosat: {
-      osat: tutkinnonosat,
+      osat: tutkinnonOsat.map(
+        ({
+          ePerusteId,
+          koulutusKoodiUri,
+          tutkinnonosaId,
+          tutkinnonosaViite,
+        }) => ({
+          eperuste: { value: _.toString(ePerusteId) },
+          koulutus: { value: koulutusKoodiUri },
+          tutkinnonosa: { value: _.toString(tutkinnonosaId) },
+          tutkinnonosaviite: _.toString(tutkinnonosaViite),
+        })
+      ),
       nimi: nimi,
     },
     description: {

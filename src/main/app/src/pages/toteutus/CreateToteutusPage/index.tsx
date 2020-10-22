@@ -1,7 +1,6 @@
 import React, { useMemo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import queryString from 'query-string';
-import _ from 'lodash';
 
 import { KOULUTUSTYYPPI, POHJAVALINTA, ENTITY } from '#/src/constants';
 import getToteutusByFormValues from '#/src/utils/toteutus/getToteutusByFormValues';
@@ -27,6 +26,8 @@ import FormSteps from '#/src/components/FormSteps';
 import { useEntityFormConfig } from '#/src/hooks/form';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import ToteutusForm, { initialValues } from '../ToteutusForm';
+
+const { AMMATILLINEN_KOULUTUS, TUTKINNON_OSA, OSAAMISALA } = KOULUTUSTYYPPI;
 
 const resolveFn = () => Promise.resolve();
 
@@ -66,8 +67,8 @@ const CreateToteutusPage = props => {
   const koulutustyyppi =
     koulutus?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
 
-  const koulutusNimi = _.get(koulutus, 'nimi');
-  const koulutusKielet = _.get(koulutus, 'kielivalinta');
+  const koulutusNimi = koulutus?.nimi;
+  const koulutusKielet = koulutus?.kielivalinta;
 
   const promiseFn = kopioToteutusOid ? getToteutusByOid : resolveFn;
 
@@ -78,7 +79,9 @@ const CreateToteutusPage = props => {
   });
 
   const initialValues = useMemo(() => {
-    return koulutustyyppi === 'amm'
+    return [AMMATILLINEN_KOULUTUS, TUTKINNON_OSA, OSAAMISALA].includes(
+      koulutustyyppi
+    )
       ? getInitialValues(data, koulutusNimi, koulutusKielet)
       : getInitialValues(data, null, koulutusKielet);
   }, [data, koulutustyyppi, koulutusNimi, koulutusKielet]);

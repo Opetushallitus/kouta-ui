@@ -1,6 +1,7 @@
 import { loggable } from 'cypress-pipe';
 import { fireEvent } from '@testing-library/react';
 import koodisto from '#/cypress/data/koodisto';
+import koodistoOpintojenLaajuusYksikko from '#/cypress/data/koodistoOpintojenLaajuusYksikko';
 
 export const paste = loggable('paste', value => $element => {
   $element.focus();
@@ -214,9 +215,10 @@ export const stubCommonRoutes = () => {
   stubKayttoOikeusMeRoute();
   stubKoutaBackendLoginRoute();
   stubKoutaBackendSessionRoute();
+  stubKoodistoOpintojenLaajuusYksikko();
 };
 
-export const jatka = () => getByTestId('jatkaButton').click({ force: true });
+export const jatka = () => getByTestId('jatkaButton').click();
 
 export const OPH_TEST_ORGANISAATIO_OID = '1.2.246.562.10.48587687889';
 
@@ -297,5 +299,14 @@ export const fillKieliversiotSection = (
 export const fillPohjaSection = () => {
   getByTestId('pohjaSection').within(() => {
     jatka();
+  });
+};
+
+export const stubKoodistoOpintojenLaajuusYksikko = () => {
+  cy.route({
+    method: 'GET',
+    url:
+      '**/koodisto-service/rest/json/opintojenlaajuusyksikko/koodi?onlyValidKoodis=true&koodistoVersio=',
+    response: koodistoOpintojenLaajuusYksikko,
   });
 };

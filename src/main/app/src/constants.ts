@@ -17,8 +17,8 @@ export const KOULUTUSTYYPPI = {
   AMKKOULUTUS: 'amk',
   VALMA: 'valma',
   TELMA: 'telma',
-  TUTKINNON_OSA: 'tutkinnon-osa',
-  OSAAMISALA: 'osaamisala',
+  TUTKINNON_OSA: 'amm-tutkinnon-osa',
+  OSAAMISALA: 'amm-osaamisala',
   AVOIN_YO: 'avoin_yo',
   AVOIN_AMK: 'avoin_amk',
   TAYDENNYS_KOULUTUS: 'taydennyskoulutus',
@@ -253,3 +253,6 @@ export const CRUD_ROLES = {
   UPDATE: 'update',
   CREATE: 'create',
 };
+
+export const HAKEUTUMINEN = 'hakeutuminen';
+export const ILMOITTAUTUMINEN = 'ilmoittautuminen';

@@ -73,6 +73,49 @@ describe('editToteutusForm', () => {
     }).as('updateAmmToteutusResponse');
 
     fillKieliversiotSection();
+
+    cy.findByTestId('hakukohteetSection').should('exist');
+
+    tallenna();
+
+    cy.wait('@updateAmmToteutusResponse').then(({ request }) => {
+      cy.wrap(request.body).toMatchSnapshot();
+    });
+  });
+
+  it('should be able to edit tutkinnon osa toteutus', () => {
+    prepareTest('amm-tutkinnon-osa');
+    cy.route({
+      method: 'POST',
+      url: '**/toteutus',
+      response: {
+        muokattu: false,
+      },
+    }).as('updateAmmToteutusResponse');
+
+    fillKieliversiotSection();
+    cy.findByTestId('hakeutumisTaiIlmoittautumistapaSection').within(() => {
+      cy.findByRole('button', {
+        name: 'toteutuslomake.hakuTapa.hakeutuminen',
+      }).click();
+
+      cy.findByText('toteutuslomake.hakemuspalvelu').click();
+    });
+
+    cy.findByTestId('hakukohteetSection').should('exist');
+
+    cy.findByTestId('hakeutumisTaiIlmoittautumistapaSection').within(() => {
+      cy.findByText('toteutuslomake.muuHakulomake').click();
+    });
+
+    cy.findByTestId('hakukohteetSection').should('not.exist');
+
+    cy.findByTestId('hakeutumisTaiIlmoittautumistapaSection').within(() => {
+      cy.findByText('toteutuslomake.eiSahkoistaHakua').click();
+    });
+
+    cy.findByTestId('hakukohteetSection').should('not.exist');
+
     tallenna();
 
     cy.wait('@updateAmmToteutusResponse').then(({ request }) => {
@@ -111,6 +154,9 @@ describe('editToteutusForm', () => {
     }).as('updateLkToteutusResponse');
 
     fillKieliversiotSection();
+
+    cy.findByTestId('hakukohteetSection').should('exist');
+
     tallenna();
 
     cy.wait('@updateLkToteutusResponse').then(({ request }) => {

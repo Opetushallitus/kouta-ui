@@ -129,6 +129,8 @@ describe('createKoulutusForm', () => {
 
     fillLisatiedotSection();
 
+    fillTeemakuvaSection();
+
     fillJarjestajaSection();
 
     fillNakyvyysSection();
@@ -238,6 +240,8 @@ describe('createKoulutusForm', () => {
     });
 
     fillLisatiedotSection();
+
+    fillTeemakuvaSection();
 
     fillJarjestajaSection();
 

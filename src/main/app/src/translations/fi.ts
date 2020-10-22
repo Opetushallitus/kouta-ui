@@ -272,6 +272,11 @@ export default {
     listaVahintaan:
       'Tälle kentälle täytyy syöttää vähintään {{lukumaara}} arvoa',
     kokonaislukuValilta: 'Syötä kokonaisluku väliltä {{min}} - {{max}}',
+    pakollinenAlkamisaikaJosPaattymisaika:
+      'Aikavälin alkamisaika on pakollinen, jos päättymisaika on annettu.',
+    alkamisaikaEnnenPaattymisaikaa:
+      'Aikavälin alkamisajan täytyy olla ennen päättymisaikaa.',
+    positiivinenKokonaisluku: 'Syötä positiivinen kokonaisluku',
   },
   hakulomakeValinnat: {
     ataru: 'Käytetään hakemuspalvelun lomaketta',
@@ -283,8 +288,8 @@ export default {
     ammatillinen: 'Ammatillinen',
     valma: 'VALMA',
     telma: 'TELMA',
-    tutkinnonOsa: 'Tutkinnon osa',
-    osaamisala: 'Osaamisala',
+    ammTutkinnonOsa: 'Tutkinnon osa',
+    ammOsaamisala: 'Osaamisala',
     korkeakoulutus: 'Korkeakoulutus',
     avoinYo: 'Avoin Yo',
     avoinAmk: 'Avoin AMK',
@@ -400,6 +405,8 @@ export default {
   toteutuslomake: {
     lisaaKoulutus: 'Lisää uusi koulutus',
     toteutuksenTiedot: 'Toteutuksen tiedot',
+    toteutuksenKuvaus: 'Toteutuksen kuvaus',
+    toteutuksenYleinenKuvaus: 'Toteutuksen yleinen kuvaus',
     ilmoittautumislinkki: 'Ilmoittautumislinkki',
     laajuus: 'Laajuus',
     laajuusyksikko: 'Laajuusyksikkö',
@@ -484,6 +491,28 @@ export default {
     valitseMissaJarjestetaan: 'Valitse missä toteutus järjestetään',
     vuotta: 'Vuotta',
     kuukautta: 'Kuukautta',
+    hakeutumisTaiIlmoittautumistapa: 'Hakeutumis- tai ilmoittautumistapa',
+    valitseHakutapa: 'Valitse oppijalle näkyvä hakutapa',
+    hakuTapa: {
+      hakeutuminen: 'Hakeutuminen',
+      ilmoittautuminen: 'Ilmoittautuminen',
+    },
+    hakeutuminen: {
+      valitseTapa: 'Valitse hakeutumistapa',
+      linkki: 'Hakeutumislinkki',
+      lisatiedot: 'Lisätiedot hakeutumiselle',
+    },
+    ilmoittautuminen: {
+      valitseTapa: 'Valitse ilmoittautumistapa',
+      linkki: 'Ilmoittautumislinkki',
+      lisatiedot: 'Lisätiedot ilmoittautumiselle',
+    },
+    muuHakulomake: 'Muu hakulomake',
+    hakemuspalvelu: 'Hakemuspalvelu',
+    eiSahkoistaHakua: 'Ei sähköistä hakua',
+    hakuaikaAlkaa: 'Hakuaika alkaa',
+    hakuaikaPaattyy: 'Hakuaika päättyy',
+    lisatiedotValintaperusteista: 'Lisätiedot valintaperusteista',
   },
   hakulomake: {
     haunNimi: 'Haun nimi',

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import {
   typeToEditor,
   getCheckbox,
@@ -16,6 +17,7 @@ import { stubSoraKuvausFormRoutes } from '#/cypress/soraKuvausFormUtils';
 const fillKoulutustyyppiSection = () => {
   getByTestId('koulutustyyppiSection').within(() => {
     fillKoulutustyyppiSelect(['amm']);
+    jatka();
   });
 };
 
@@ -58,8 +60,10 @@ describe('createSoraKuvausForm', () => {
 
     cy.route({
       method: 'GET',
-      url: '**/sora-kuvaus/*',
-      response: soraKuvaus,
+      url: `**/sorakuvaus/${soraKuvaus.id}`,
+      response: _.merge({}, soraKuvaus, {
+        organisaatioOid,
+      }),
     });
 
     cy.visit(`/organisaatio/${organisaatioOid}/sora-kuvaus/kielivalinnat/`);

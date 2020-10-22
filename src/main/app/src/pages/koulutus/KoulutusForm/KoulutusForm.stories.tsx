@@ -1,11 +1,12 @@
 import React, { useMemo } from 'react';
 import { storiesOf } from '@storybook/react';
 
-import KoulutusForm from './index';
+import KoulutusForm, { initialValues } from './index';
 import ReduxForm from '#/src/components/ReduxForm';
 import getKoulutusFormConfig from '#/src/utils/koulutus/getKoulutusFormConfig';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useFieldValue } from '#/src/hooks/form';
+import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
 import {
   makeStoreDecorator,
@@ -32,14 +33,11 @@ storiesOf('KoulutusForm', module)
   .addDecorator(makeApiDecorator())
   .add('Basic', () => {
     return (
-      <ReduxForm form="koulutus" initialValues={{ koulutustyyppi: 'amm' }}>
-        {() => (
-          <FormWrapper
-            johtaaTutkintoon={true}
-            organisaatioOid="1.2.246.562.10.594252633210"
-            steps={false}
-          />
-        )}
+      <ReduxForm form="koulutus" initialValues={initialValues}>
+        <FormWrapper
+          organisaatioOid={OPETUSHALLITUS_ORGANISAATIO_OID}
+          isNewKoulutus={true}
+        />
       </ReduxForm>
     );
   });

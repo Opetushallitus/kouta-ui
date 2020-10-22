@@ -3,6 +3,7 @@ import { parseEditorState } from '#/src/components/Editor/utils';
 
 test('getOppilaitoksenOsaByFormValues returns correct oppilaitoksen osa given form values', () => {
   const oppilaitos = getOppilaitoksenOsaByFormValues({
+    oppilaitosOid: '888.888.888',
     tila: 'tallennettu',
     muokkaaja: '1.1.1.1',
     kieliversiot: ['fi', 'sv'],

@@ -10,8 +10,9 @@ import {
 import { Box } from '#/src/components/virkailija';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
+import { KOULUTUSTYYPPI } from '#/src/constants';
 
-const LaajuusFields = ({ name }) => {
+const LaajuusFields = ({ name, disabled }) => {
   const { t } = useTranslation();
 
   const { options } = useKoodistoOptions({
@@ -26,6 +27,7 @@ const LaajuusFields = ({ name }) => {
           component={FormFieldInput}
           label={t('toteutuslomake.laajuus')}
           type="number"
+          disabled={disabled}
         />
       </Box>
 
@@ -35,6 +37,7 @@ const LaajuusFields = ({ name }) => {
           component={FormFieldSelect}
           label={t('toteutuslomake.laajuusyksikko')}
           options={options}
+          disabled={disabled}
           isClearable
         />
       </Box>
@@ -42,8 +45,13 @@ const LaajuusFields = ({ name }) => {
   );
 };
 
-const TiedotSection = ({ language, name }) => {
+const TiedotSection = ({ language, name, koulutustyyppi }) => {
   const { t } = useTranslation();
+
+  const disableFieldsCopiedFromKoulutus = [
+    KOULUTUSTYYPPI.OSAAMISALA,
+    KOULUTUSTYYPPI.TUTKINNON_OSA,
+  ].includes(koulutustyyppi);
 
   return (
     <>
@@ -51,15 +59,8 @@ const TiedotSection = ({ language, name }) => {
         <Field
           name={`${name}.nimi.${language}`}
           component={FormFieldInput}
+          disabled={disableFieldsCopiedFromKoulutus}
           label={t('toteutuslomake.toteutuksenNimi')}
-        />
-      </Box>
-
-      <Box mb={2} {...getTestIdProps('toteutuksenKuvaus')}>
-        <Field
-          name={`${name}.toteutuksenKuvaus.${language}`}
-          component={FormFieldTextarea}
-          label={t('yleiset.toteutuksenKuvaus')}
         />
       </Box>
 
@@ -72,7 +73,7 @@ const TiedotSection = ({ language, name }) => {
       </Box>
 
       <Box mb={2}>
-        <LaajuusFields name={name} />
+        <LaajuusFields name={name} disabled={disableFieldsCopiedFromKoulutus} />
       </Box>
 
       <Box mb={2} {...getTestIdProps('aloituspaikat')}>

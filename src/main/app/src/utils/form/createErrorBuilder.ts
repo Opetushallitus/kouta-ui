@@ -125,12 +125,21 @@ class ErrorBuilder {
     const errorMessage = message || 'validointivirheet.kokonaislukuValilta';
     const value = this.getValue(path);
 
-    if (optional && (_.isNil(value) || value === '')) {
-      return this;
+    if (_.isNil(value) || value === '') {
+      if (optional) {
+        return this;
+      } else {
+        this.setError(path, t => t(errorMessage, { min, max }));
+        return this;
+      }
     }
 
-    const integerValue = _.parseInt(value);
-    if (_.isNaN(integerValue) || integerValue < min || integerValue > max) {
+    const numberValue = Number(value);
+    if (
+      !Number.isInteger(numberValue) ||
+      numberValue < min ||
+      numberValue > max
+    ) {
       this.setError(path, t => t(errorMessage, { min, max }));
     }
 
@@ -149,6 +158,7 @@ export const validate = bindValidator('validate');
 export const validateArray = bindValidator('validateArray');
 export const validateArrayMinLength = bindValidator('validateArrayMinLength');
 export const validateExistence = bindValidator('validateExistence');
+export const validateExistenceOfDate = bindValidator('validateExistenceOfDate');
 export const validateTranslations = bindValidator('validateTranslations');
 export const validateUrl = bindValidator('validateUrl');
 export const validateInteger = bindValidator('validateInteger');

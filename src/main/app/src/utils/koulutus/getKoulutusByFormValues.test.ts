@@ -5,7 +5,9 @@ test('getKoulutusByFormValues returns correct koulutus given form values', () =>
     tila: 'tallennettu',
     muokkaaja: '1.1.1.1',
     kieliversiot: ['fi', 'sv'],
-    tarjoajat: ['123.456.789'],
+    tarjoajat: {
+      tarjoajat: ['123.456.789'],
+    },
     information: {
       nimi: {
         fi: 'Fi nimi',
@@ -43,6 +45,16 @@ test('getKoulutusByFormValues returns correct koulutus given form values', () =>
         fi: 'Fi nimi',
         sv: 'Sv nimi',
       },
+    },
+    tutkinnonosat: {
+      osat: [
+        {
+          eperuste: { value: '1234' },
+          koulutus: { value: 'koulutuskoodi_2#1' },
+          tutkinnonosa: { value: '567567' },
+          tutkinnonosaviite: '9847598475',
+        },
+      ],
     },
     julkinen: true,
   });

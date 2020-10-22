@@ -5,6 +5,7 @@ import Async from 'react-async';
 import { urls as ophUrls } from 'oph-urls-js';
 import axios from 'axios';
 import { I18nextProvider } from 'react-i18next';
+import { ThemeProvider } from 'styled-components';
 
 import createStore from './state/store';
 import { configure as configureUrls } from './urls';
@@ -12,6 +13,7 @@ import HttpContext from './contexts/HttpClientContext';
 import UrlContext from '#/src/contexts/UrlContext';
 import createLocalization from './localization';
 import getTranslations from './translations';
+import defaultTheme from '#/src/theme';
 
 const defaultHttpClient = axios.create({});
 const configureOphUrls = () => configureUrls(ophUrls, defaultHttpClient);
@@ -47,7 +49,7 @@ export const makeApiDecorator = ({
   );
 };
 
-export const makeStoreDecorator = ({ logging = false } = {}) => storyFn => {
+export const makeStoreDecorator = ({ logging = false } = {}) => {
   const { store } = createStore({});
   const storeAction = action('change');
 
@@ -56,8 +58,7 @@ export const makeStoreDecorator = ({ logging = false } = {}) => storyFn => {
       storeAction(store.getState());
     });
   }
-
-  return <Provider store={store}>{storyFn()}</Provider>;
+  return storyFn => <Provider store={store}>{storyFn()}</Provider>;
 };
 
 export const makeLocalizationDecorator = () => storyFn => {
@@ -69,3 +70,7 @@ export const makeLocalizationDecorator = () => storyFn => {
     </Suspense>
   );
 };
+
+export const themeDecorator = storyFn => (
+  <ThemeProvider theme={defaultTheme}>{storyFn()}</ThemeProvider>
+);

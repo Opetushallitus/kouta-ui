@@ -103,7 +103,7 @@ const CreateValintaperustePage = props => {
       <Title>{t('sivuTitlet.uusiValintaperuste')}</Title>
       <FormConfigContext.Provider value={config}>
         <FormPage
-          header={<FormHeader>{t('yleiset.valintaperusteet')}</FormHeader>}
+          header={<FormHeader>{t('yleiset.valintaperuste')}</FormHeader>}
           steps={<FormSteps activeStep={ENTITY.VALINTAPERUSTE} />}
           footer={<FormFooter entity={ENTITY.VALINTAPERUSTE} save={save} />}
         >

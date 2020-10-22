@@ -67,10 +67,20 @@ Object {
       },
     ],
   },
-  "tarjoajat": Array [
-    "123.456.789",
-  ],
+  "tarjoajat": Object {
+    "kaytaPohjanJarjestajaa": true,
+    "tarjoajat": Array [
+      "123.456.789",
+    ],
+  },
   "teemakuva": undefined,
   "tila": "tallennettu",
+  "tutkinnonosat": Object {
+    "nimi": Object {
+      "fi": "Fi nimi",
+      "sv": "Sv nimi",
+    },
+    "osat": Array [],
+  },
 }
 `;

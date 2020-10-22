@@ -2,6 +2,7 @@ import getFormValuesByOppilaitoksenOsa from '#/src/utils/oppilaitoksenOsa/getFor
 
 test('getFormValuesByOppilaitoksenOsa returns correct form values given oppilaitoksen osa', () => {
   const values = getFormValuesByOppilaitoksenOsa({
+    oppilaitosOid: '888.888.888',
     kielivalinta: ['fi', 'sv'],
     metadata: {
       esittely: {

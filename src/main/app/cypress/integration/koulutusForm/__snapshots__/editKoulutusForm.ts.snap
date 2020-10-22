@@ -42,6 +42,7 @@ exports[`editKoulutusForm > should be able to edit ammatillinen koulutus #0`] =
 
 exports[`editKoulutusForm > should be able to edit korkeakoulu koulutus #0`] =
 {
+  "ePerusteId": null,
   "esikatselu": true,
   "johtaaTutkintoon": true,
   "julkinen": true,
@@ -92,6 +93,100 @@ exports[`editKoulutusForm > should be able to edit korkeakoulu koulutus #0`] =
 
 exports[`editKoulutusForm > should be able to edit lukiokoulutus #0`] =
 {
+  "ePerusteId": null,
+  "esikatselu": true,
+  "johtaaTutkintoon": true,
+  "julkinen": true,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutusKoodiUri": "koulutus_0#1",
+  "koulutustyyppi": "lk",
+  "metadata": {
+    "koulutusalaKoodiUrit": [],
+    "kuvauksenNimi": {},
+    "kuvaus": {},
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "teksti": {
+          "fi": "koulutuksenlisatiedot_0 kuvaus"
+        }
+      }
+    ],
+    "opintojenLaajuusKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "lk"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "koulutus_0"
+  },
+  "oid": "1.2.3.4.5.6",
+  "organisaatioOid": "1.1.1.1.1.1",
+  "tarjoajat": [
+    "4.1.1.1.1.1",
+    "2.1.1.1.1.1"
+  ],
+  "teemakuva": null,
+  "tila": "tallennettu"
+};
+
+exports[`editKoulutusForm > should be able to edit korkeakoulu koulutus #1`] =
+{
+  "ePerusteId": null,
+  "esikatselu": true,
+  "johtaaTutkintoon": true,
+  "julkinen": true,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutusKoodiUri": "koulutus_0#1",
+  "koulutustyyppi": "yo",
+  "metadata": {
+    "koulutusalaKoodiUrit": [
+      "kansallinenkoulutusluokitus2016koulutusalataso2_1#1"
+    ],
+    "kuvauksenNimi": {
+      "fi": "Fi kuvauksen nimi"
+    },
+    "kuvaus": {
+      "fi": "Fi kuvaus"
+    },
+    "lisatiedot": [
+      {
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "teksti": {
+          "fi": "koulutuksenlisatiedot_0 kuvaus"
+        }
+      }
+    ],
+    "opintojenLaajuusKoodiUri": "opintojenlaajuus_1#1",
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [
+      "tutkintonimikekk_1#1",
+      "tutkintonimikekk_2#1"
+    ],
+    "tyyppi": "yo"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "koulutus_0"
+  },
+  "oid": "1.2.3.4.5.6",
+  "organisaatioOid": "1.1.1.1.1.1",
+  "tarjoajat": [
+    "4.1.1.1.1.1",
+    "2.1.1.1.1.1"
+  ],
+  "teemakuva": null,
+  "tila": "tallennettu"
+};
+
+exports[`editKoulutusForm > should be able to edit lukiokoulutus #1`] =
+{
+  "ePerusteId": null,
   "esikatselu": true,
   "johtaaTutkintoon": true,
   "julkinen": true,

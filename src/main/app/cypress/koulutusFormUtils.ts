@@ -304,7 +304,7 @@ export const stubKoulutusFormRoutes = ({ organisaatioOid }) => {
 
   cy.route({
     method: 'GET',
-    url: `**/organisaatio-service/rest/organisaatio/v4/hierarkia/hae?oid=${organisaatioOid}**`,
+    url: `**/organisaatio-service/rest/organisaatio/v4/hierarkia/hae**`,
     response: organisaatioHierarkia({ rootOid: organisaatioOid }),
   });
 

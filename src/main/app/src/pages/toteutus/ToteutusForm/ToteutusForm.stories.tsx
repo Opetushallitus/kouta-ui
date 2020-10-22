@@ -1,35 +1,50 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
-import ToteutusForm from './index';
+import ToteutusForm, { initialValues } from './index';
 import ReduxForm from '#/src/components/ReduxForm';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
-import getToteutusFormConfig from '#/src/utils/toteutus/getToteutusFormConfig';
+import { useEntityFormConfig } from '#/src/hooks/form';
 
-import {
-  makeStoreDecorator,
-  makeApiDecorator,
-  makeLocalizationDecorator,
-} from '#/src/storybookUtils';
-import { KOULUTUSTYYPPI } from '#/src/constants';
+import { KOULUTUSTYYPIT, ENTITY } from '#/src/constants';
+import { makeStoreDecorator } from '#/src/storybookUtils';
 
-const config = getToteutusFormConfig(KOULUTUSTYYPPI.TUTKINNON_OSA);
+export default {
+  title: 'ToteutusForm',
+  decorators: [makeStoreDecorator()],
+  argTypes: {
+    koulutustyyppi: {
+      control: {
+        type: 'select',
+        options: KOULUTUSTYYPIT,
+      },
+    },
+  },
+};
 
-storiesOf('ToteutusForm', module)
-  .addDecorator(makeLocalizationDecorator())
-  .addDecorator(makeStoreDecorator())
-  .addDecorator(makeApiDecorator())
-  .add('Basic', () => (
-    <ReduxForm form="toteutus">
-      {() => (
-        <FormConfigContext.Provider value={config}>
-          <ToteutusForm
-            koulutusKoodiUri="koulutus_361101#11"
-            organisaatioOid="1.2.246.562.10.594252633210"
-            steps={false}
-            koulutustyyppi={KOULUTUSTYYPPI.TUTKINNON_OSA}
-          />
-        </FormConfigContext.Provider>
-      )}
+const Wrapper = ({ koulutustyyppi = 'amm' }) => {
+  const config = useEntityFormConfig(ENTITY.TOTEUTUS, koulutustyyppi);
+  return (
+    <ReduxForm
+      form="toteutus"
+      initialValues={initialValues('koulutuksen nimi', ['fi'])}
+    >
+      <FormConfigContext.Provider value={config}>
+        <ToteutusForm
+          organisaatioOid="1.2.246.562.10.594252633210"
+          steps={false}
+          koulutus={{
+            koulutustyyppi,
+          }}
+          koulutustyyppi={koulutustyyppi}
+        />
+      </FormConfigContext.Provider>
     </ReduxForm>
-  ));
+  );
+};
+Wrapper.args = {
+  koulutustyyppi: 'amm',
+};
+
+export const basic = ({ koulutustyyppi }) => (
+  <Wrapper koulutustyyppi={koulutustyyppi} />
+);

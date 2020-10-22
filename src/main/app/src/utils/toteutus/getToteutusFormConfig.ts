@@ -5,6 +5,10 @@ import createFormConfigBuilder from '#/src/utils/form/createFormConfigBuilder';
 import {
   validateExistence,
   validateInteger,
+  validateExistenceOfDate,
+  validate,
+  validateTranslations,
+  validateUrl,
 } from '#/src/utils/form/createErrorBuilder';
 
 import {
@@ -14,6 +18,8 @@ import {
   TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
   JULKAISUTILA,
+  HAKULOMAKETYYPPI,
+  TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
 } from '#/src/constants';
 
 import {
@@ -23,7 +29,30 @@ import {
   pohjaValintaSectionConfig,
   validateRelations,
   createOptionalTranslatedFieldConfig,
+  validateIf,
 } from '#/src/utils/form/formConfigUtils';
+
+const validateDateTimeRange = (alkaaFieldName, paattyyFieldName) => (
+  eb,
+  values
+) => {
+  const alkaaValue = _.get(alkaaFieldName, values);
+  const paattyyValue = _.get(paattyyFieldName, values);
+  return _.pipe(
+    eb =>
+      paattyyValue
+        ? validateExistenceOfDate(alkaaFieldName, {
+            message: 'validointivirheet.pakollinenAlkamisaikaJosPaattymisaika',
+          })(eb)
+        : eb,
+    eb =>
+      alkaaValue && paattyyValue
+        ? validate(alkaaFieldName, () => alkaaValue < paattyyValue, {
+            message: 'validointivirheet.alkamisaikaEnnenPaattymisaikaa',
+          })(eb)
+        : eb
+  )(eb);
+};
 
 const config = createFormConfigBuilder().registerSections([
   pohjaValintaSectionConfig,
@@ -49,20 +78,26 @@ const config = createFormConfigBuilder().registerSections([
         validate: (eb, values) =>
           eb.validateTranslations('tiedot.nimi', getKielivalinta(values)),
       },
-      createOptionalTranslatedFieldConfig({
-        name: 'tiedot.toteutuksenKuvaus',
-        koulutustyypit: _.without(
-          [KOULUTUSTYYPPI.LUKIOKOULUTUS],
-          KOULUTUSTYYPIT
-        ),
-      }),
       {
         field: '.ilmoittautumislinkki',
-        koulutustyypit: TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
+        koulutustyypit: _.without(
+          [KOULUTUSTYYPPI.OSAAMISALA, KOULUTUSTYYPPI.TUTKINNON_OSA],
+          TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT
+        ),
       },
       {
         field: '.laajuus',
-        koulutustyypit: TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT,
+        koulutustyypit: _.without(
+          [KOULUTUSTYYPPI.OSAAMISALA, KOULUTUSTYYPPI.TUTKINNON_OSA],
+          TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT
+        ),
+      },
+      {
+        field: '.laajuusyksikko',
+        koulutustyypit: _.without(
+          [KOULUTUSTYYPPI.OSAAMISALA, KOULUTUSTYYPPI.TUTKINNON_OSA],
+          TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT
+        ),
       },
       {
         field: '.aloituspaikat',
@@ -75,7 +110,27 @@ const config = createFormConfigBuilder().registerSections([
           ],
           TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT
         ),
+        validate: validateInteger(
+          'tiedot.aloituspaikat',
+          {
+            min: 1,
+            optional: true,
+          },
+          'validointivirheet.positiivinenKokonaisluku'
+        ),
       },
+    ],
+  },
+  {
+    section: 'kuvaus',
+    parts: [
+      createOptionalTranslatedFieldConfig({
+        name: 'kuvaus',
+        koulutustyypit: _.without(
+          [KOULUTUSTYYPPI.LUKIOKOULUTUS],
+          KOULUTUSTYYPIT
+        ),
+      }),
     ],
   },
   {
@@ -308,9 +363,109 @@ const config = createFormConfigBuilder().registerSections([
     koulutustyypit: KOULUTUSTYYPIT,
   },
   {
+    section: 'hakeutumisTaiIlmoittautumistapa',
+    koulutustyypit: [KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA],
+    validate: (eb, values) =>
+      _.pipe(
+        eb =>
+          validateDateTimeRange(
+            'hakeutumisTaiIlmoittautumistapa.hakuaikaAlkaa',
+            'hakeutumisTaiIlmoittautumistapa.hakuaikaPaattyy'
+          )(eb, values),
+        validateIf(values?.tila === JULKAISUTILA.JULKAISTU, eb => {
+          const hakeutumisTaiIlmoittautumistapa =
+            values?.hakeutumisTaiIlmoittautumistapa
+              ?.hakeutumisTaiIlmoittautumistapa;
+          return _.pipe(
+            validateExistence('hakeutumisTaiIlmoittautumistapa.hakuTapa'),
+            validateExistence(
+              'hakeutumisTaiIlmoittautumistapa.hakeutumisTaiIlmoittautumistapa'
+            ),
+            validateIf(
+              hakeutumisTaiIlmoittautumistapa === HAKULOMAKETYYPPI.MUU,
+              _.pipe(
+                validateUrl(
+                  'hakeutumisTaiIlmoittautumistapa.linkki',
+                  getKielivalinta(values)
+                ),
+                validateTranslations(
+                  'hakeutumisTaiIlmoittautumistapa.lisatiedotValintaperusteista',
+                  getKielivalinta(values),
+                  { optional: true }
+                ),
+                validateExistenceOfDate(
+                  'hakeutumisTaiIlmoittautumistapa.hakuaikaAlkaa'
+                ),
+                validateExistenceOfDate(
+                  'hakeutumisTaiIlmoittautumistapa.hakuaikaPaattyy'
+                )
+              )
+            ),
+            validateIf(
+              [
+                HAKULOMAKETYYPPI.MUU,
+                HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA,
+              ].includes(hakeutumisTaiIlmoittautumistapa),
+              validateTranslations(
+                'hakeutumisTaiIlmoittautumistapa.lisatiedot',
+                getKielivalinta(values),
+                { optional: true }
+              )
+            )
+          )(eb);
+        })
+      )(eb),
+    parts: [
+      {
+        field: '.hakuTapa',
+        required: true,
+      },
+      {
+        field: '.hakeutumisTaiIlmoittautumistapa',
+        required: true,
+      },
+      {
+        field: '.linkki',
+        required: true,
+      },
+      {
+        field: '.lisatiedot',
+      },
+      {
+        field: '.lisatiedotValintaperusteista',
+      },
+      {
+        field: '.hakuaikaAlkaa',
+      },
+      {
+        field: '.hakuaikaPaattyy',
+      },
+    ],
+  },
+  {
+    section: 'soraKuvaus',
+    koulutustyypit: [KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA],
+    field: 'soraKuvaus',
+  },
+  {
     section: 'nayttamistiedot',
     koulutustyypit: KOULUTUSTYYPIT,
-    field: 'nayttamistiedot',
+    parts: [
+      {
+        koulutustyypit: [
+          ...TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
+          KOULUTUSTYYPPI.AVOIN_YO,
+          KOULUTUSTYYPPI.AVOIN_AMK,
+          KOULUTUSTYYPPI.TAYDENNYS_KOULUTUS,
+          KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
+          KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO,
+        ],
+        field: '.ammattinimikkeet',
+      },
+      {
+        field: '.avainsanat',
+      },
+    ],
   },
   {
     section: 'tarjoajat',
@@ -336,6 +491,10 @@ const config = createFormConfigBuilder().registerSections([
         {
           key: 'koulutus',
           t: 'yleiset.koulutus',
+        },
+        {
+          key: 'soraKuvaus',
+          t: 'yleiset.soraKuvaus',
         },
       ])(eb.validateExistence('tila'), values),
   },

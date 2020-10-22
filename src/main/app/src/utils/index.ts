@@ -4,6 +4,10 @@ import _ from 'lodash';
 import stripTags from 'striptags';
 import { ALLOWED_HTML_TAGS } from '#/src/constants';
 import { memoize } from '#/src/utils/memoize';
+import {
+  isEditorState,
+  isEmptyEditorState,
+} from '#/src/components/Editor/utils';
 
 export const isDev = process.env.NODE_ENV === 'development';
 
@@ -143,6 +147,7 @@ export const formValueExists = value =>
     ],
     [allFuncs(_.isPlainObject, _.isEmpty), _.stubFalse],
     [allFuncs(_.isPlainObject, v => v.value === ''), _.stubFalse],
+    [allFuncs(isEditorState, isEmptyEditorState), _.stubFalse],
     [otherwise, _.stubTrue],
   ])(value);
 

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { get, each, find, toLower } from 'lodash';
+import { each, find, toLower } from 'lodash';
 import { Field, FieldArray } from 'redux-form';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
@@ -30,8 +30,8 @@ import { useUrls } from '#/src/contexts/contextHooks';
 
 const useLocalizedKoulutus = ({ fieldName, language, koulutusValue }) => {
   const [changedKoulutus, setChangedKoulutus] = useState(null);
-  const koulutusKoodi = useKoodi(get(koulutusValue, 'value'));
-  const koodi = get(koulutusKoodi, 'koodi');
+  const koulutusKoodi = useKoodi(koulutusValue?.value);
+  const koodi = koulutusKoodi?.koodi;
   const isDirty = useIsDirty();
   const { change } = useBoundFormActions();
 
@@ -40,10 +40,11 @@ const useLocalizedKoulutus = ({ fieldName, language, koulutusValue }) => {
   useEffect(() => {
     if (koodi && isDirty) {
       const { metadata } = koodi;
-      const localizedNimi = get(
-        find(metadata, ({ kieli }) => toLower(kieli) === language),
-        'nimi'
-      );
+      const localizedNimi = find(
+        metadata,
+        ({ kieli }) => toLower(kieli) === language
+      )?.nimi;
+
       if (localizedNimi) {
         change(`${fieldName}.koulutus.label`, localizedNimi);
       }
@@ -61,7 +62,7 @@ const useLocalizedKoulutus = ({ fieldName, language, koulutusValue }) => {
   // if the form is dirty (don't override initial values)
   useEffect(() => {
     if (changedKoulutus && koodi) {
-      each(get(koodi, 'metadata'), ({ kieli, nimi }) => {
+      each(koodi?.metadata, ({ kieli, nimi }) => {
         const lang = toLower(kieli);
         change(`${fieldName}.nimi.${lang}`, nimi);
       });
@@ -174,17 +175,17 @@ const TutkinnonOsaInfo = ({ className, eperuste, viite, osa, language }) => {
   return (
     <div className={className}>
       <Typography variant="h4" mb={2}>
-        {getLanguageValue(osa.nimi, language)}, {viite.laajuus} osp (
+        {getLanguageValue(osa?.nimi, language)}, {viite?.laajuus} osp (
         <Anchor
           href={apiUrls?.url(
             'eperusteet.tutkinnonosat',
             language,
             eperuste,
-            get(viite, 'id')
+            viite?.id
           )}
           target="_blank"
         >
-          {get(viite, 'id')}
+          {viite?.id}
         </Anchor>
         )
       </Typography>
@@ -193,14 +194,12 @@ const TutkinnonOsaInfo = ({ className, eperuste, viite, osa, language }) => {
         {t('koulutuslomake.ammattitaitovaatimukset')}
       </Typography>
 
-      <StyledSectionHTML html={get(osa.ammattitaitovaatimukset, language)} />
+      <StyledSectionHTML html={osa?.ammattitaitovaatimukset?.[language]} />
 
       <Typography variant="h6" mb={2}>
         {t('koulutuslomake.ammattitaidonOsoittamistavat')}
       </Typography>
-      <StyledSectionHTML
-        html={get(osa.ammattitaidonOsoittamistavat, language)}
-      />
+      <StyledSectionHTML html={osa?.ammattitaidonOsoittamistavat?.[language]} />
     </div>
   );
 };
@@ -233,8 +232,8 @@ export const TutkinnonOsienKuvausSection = ({ disabled, language, name }) => {
 
   const eperusteForOsa = ({ id }) => {
     return tutkinnonosat.find(
-      v => v.selectedTutkinnonosat._tutkinnonOsa === id.toString()
-    ).eperuste?.value;
+      v => v.selectedTutkinnonosat?._tutkinnonOsa === id.toString()
+    )?.eperuste?.value;
   };
   return (
     <Box mb={-2}>

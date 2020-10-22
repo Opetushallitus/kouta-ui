@@ -1,3 +1,4 @@
+import autoRecord from 'cypress-autorecord';
 import {
   getRadio,
   selectOption,
@@ -14,7 +15,10 @@ import {
   tallenna,
 } from '#/cypress/utils';
 
-import { prepareTest } from '#/cypress/hakukohdeFormUtils';
+import {
+  fillJarjestyspaikkaSection,
+  prepareTest,
+} from '#/cypress/hakukohdeFormUtils';
 
 const lisaa = () => {
   getByTestId('lisaaButton').click({ force: true });
@@ -152,16 +156,24 @@ const fillLiitteetSection = () => {
   });
 };
 
-export const createHakukohdeForm = () => {
-  const organisaatioOid = '1.1.1.1.1.1';
+export const createHakukohdeForm = function () {
+  const organisaatioOid = '1.2.246.562.10.52251087186'; // Stadin ammatti- ja aikuisopisto
   const hakuOid = '4.1.1.1.1.1';
   const hakukohdeOid = '1.2.3.4.5.6';
-  it('should be able to create ammatillinen hakukohde', () => {
+
+  const tarjoajat = [
+    '1.2.246.562.10.45854578546', // Stadin ammatti- ja aikuisopisto, Myllypuron toimipaikka
+  ];
+
+  autoRecord();
+
+  it('should be able to create ammatillinen hakukohde', function () {
     prepareTest({
       tyyppi: 'amm',
       hakuOid,
       hakukohdeOid,
       organisaatioOid,
+      tarjoajat,
     });
 
     fillKieliversiotSection({ jatka: true });
@@ -171,6 +183,9 @@ export const createHakukohdeForm = () => {
     fillValintaperusteenKuvausSection();
     fillValintakokeetSection();
     fillLiitteetSection();
+    fillJarjestyspaikkaSection({
+      jatka: true,
+    });
     fillTilaSection();
     tallenna();
 
@@ -190,6 +205,7 @@ export const createHakukohdeForm = () => {
       hakuOid,
       hakukohdeOid,
       organisaatioOid,
+      tarjoajat,
     });
 
     fillKieliversiotSection({ jatka: true });
@@ -199,6 +215,7 @@ export const createHakukohdeForm = () => {
     fillValintaperusteenKuvausSection();
     fillValintakokeetSection();
     fillLiitteetSection();
+    fillJarjestyspaikkaSection({ jatka: true });
     fillTilaSection();
 
     tallenna();

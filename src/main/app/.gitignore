@@ -24,5 +24,4 @@ yarn-error.log*
 
 cypress/screenshots
 cypress/videos
-cypress/fixtures
 cypress.env.json

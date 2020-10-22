@@ -67,6 +67,7 @@ Object {
       },
     ],
   },
+  "osaamisala": null,
   "tarjoajat": Object {
     "kaytaPohjanJarjestajaa": true,
     "tarjoajat": Array [

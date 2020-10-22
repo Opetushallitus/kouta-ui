@@ -1,4 +1,9 @@
 import _ from 'lodash/fp';
+import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
+
+const koodiUriToKoodi = koodiUri => {
+  return parseKoodiUri(koodiUri)?.koodiArvo;
+};
 
 export const getFormValuesByKoulutus = koulutus => {
   const {
@@ -23,6 +28,7 @@ export const getFormValuesByKoulutus = koulutus => {
     tutkintonimikeKoodiUrit = [],
     kuvauksenNimi = {},
     koulutusalaKoodiUrit = [],
+    osaamisalaKoodiUri,
   } = metadata;
 
   return {
@@ -56,20 +62,29 @@ export const getFormValuesByKoulutus = koulutus => {
         .map(({ otsikkoKoodiUri }) => ({ value: otsikkoKoodiUri })),
     },
     tutkinnonosat: {
-      osat: tutkinnonOsat.map(
-        ({
-          ePerusteId,
-          koulutusKoodiUri,
-          tutkinnonosaId,
-          tutkinnonosaViite,
-        }) => ({
-          eperuste: { value: _.toString(ePerusteId) },
-          koulutus: { value: koulutusKoodiUri },
-          tutkinnonosa: { value: _.toString(tutkinnonosaId) },
-          tutkinnonosaviite: _.toString(tutkinnonosaViite),
-        })
+      osat: _.values(
+        _.reduce(
+          (
+            grouped,
+            { ePerusteId, koulutusKoodiUri, tutkinnonosaId, tutkinnonosaViite }
+          ) => ({
+            ...grouped,
+            [`${koulutusKoodiUri}_${ePerusteId}`]: {
+              koulutus: { value: koulutusKoodiUri },
+              eperuste: { value: ePerusteId },
+              osat: [
+                ...(grouped?.[`${koulutusKoodiUri}_${ePerusteId}`]?.osat || []),
+                {
+                  value: _.toString(tutkinnonosaId),
+                  viite: _.toString(tutkinnonosaViite),
+                },
+              ],
+            },
+          }),
+          {}
+        )(tutkinnonOsat)
       ),
-      nimi: nimi,
+      nimi,
     },
     description: {
       kuvaus,
@@ -78,6 +93,15 @@ export const getFormValuesByKoulutus = koulutus => {
     esikatselu,
     julkinen,
     teemakuva,
+    osaamisala: osaamisalaKoodiUri
+      ? {
+          osaamisala: {
+            value: koodiUriToKoodi(osaamisalaKoodiUri),
+          },
+          eperuste: { value: ePerusteId },
+          koulutus: { value: koulutusKoodiUri },
+        }
+      : null,
   };
 };
 

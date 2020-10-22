@@ -1,15 +1,9 @@
+import createSoraKuvaus from '#/cypress/data/soraKuvaus';
+import { stubSoraKuvausFormRoutes } from '#/cypress/soraKuvausFormUtils';
+import { fillKieliversiotSection, tallenna } from '#/cypress/utils';
 import { merge } from 'lodash';
 
-import { getByTestId, fillKieliversiotSection } from '#/cypress/utils';
-import { stubSoraKuvausFormRoutes } from '#/cypress/soraKuvausFormUtils';
-
-import createSoraKuvaus from '#/cypress/data/soraKuvaus';
-
-const tallenna = () => {
-  getByTestId('tallennaSoraKuvausButton').click();
-};
-
-describe('editSoraKuvausForm', () => {
+export const editSoraKuvausForm = () => {
   const organisaatioOid = '1.1.1.1.1.1';
   const soraKuvaus = createSoraKuvaus();
 
@@ -46,4 +40,4 @@ describe('editSoraKuvausForm', () => {
       cy.wrap(request.body).toMatchSnapshot();
     });
   });
-});
+};

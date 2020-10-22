@@ -9,15 +9,11 @@ import {
   jatka,
   paste,
   fillPohjaSection,
+  fillTilaSection,
+  tallenna,
 } from '#/cypress/utils';
 
 import { stubHakuFormRoutes } from '#/cypress/hakuFormUtils';
-
-const fillTilaSection = (tila = 'julkaistu') => {
-  getByTestId('tilaSection').within(() => {
-    getRadio(tila).check({ force: true });
-  });
-};
 
 const fillNimiSection = () => {
   getByTestId('nimiSection').within(() => {
@@ -137,10 +133,6 @@ const fillHakulomakeSection = () => {
   });
 };
 
-const tallenna = () => {
-  getByTestId('tallennaHakuButton').click();
-};
-
 const fillYhteystiedotSection = () => {
   getByTestId('yhteyshenkilotSection').within(() => {
     fillYhteyshenkilotFields();
@@ -148,7 +140,7 @@ const fillYhteystiedotSection = () => {
   });
 };
 
-describe('createHakuForm', () => {
+export const createHakuForm = () => {
   const organisaatioOid = '1.1.1.1.1.1';
   const createdHakuOid = '1.2.3.4.5.6';
 
@@ -189,4 +181,4 @@ describe('createHakuForm', () => {
       `/kouta/organisaatio/${organisaatioOid}/haku/${createdHakuOid}/muokkaus`
     );
   });
-});
+};

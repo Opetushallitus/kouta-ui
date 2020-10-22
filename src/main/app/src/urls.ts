@@ -1,3 +1,5 @@
+import { isNodeEnv, isCypress } from './utils';
+
 const { REACT_APP_DEV_SERVER_URL, REACT_APP_KOUTA_BACKEND_URL } = process.env;
 
 const koutaBackendDevUrl =
@@ -54,6 +56,7 @@ export const development = ({ isCypress }) => ({
   'eperusteet-service.tutkinnonosankuvaukset': `${virkailijaDevUrl}/eperusteet-service/api/perusteenosat/$1`,
   'eperusteet-service.peruste-tutkinnonosat': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/$1/suoritustavat/reformi/tutkinnonosat`,
   'eperusteet-service.peruste-rakenne': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/$1/suoritustavat/reformi/rakenne`,
+  'eperusteet-service.peruste-sisalto': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/$1/suoritustavat/reformi/sisalto`,
   'eperusteet-service.perusteet-koulutuskoodilla': `${virkailijaDevUrl}/eperusteet-service/api/perusteet?tuleva=true&siirtyma=false&voimassaolo=true&poistunut=false&kieli=fi&koulutuskoodi=$1&tutkinnonosat=true`,
   'eperusteet-service.osaamisalakuvaukset': `${virkailijaDevUrl}/eperusteet-service/api/perusteet/$1/osaamisalakuvaukset`,
   'organisaatio-service.base-url': `${virkailijaDevUrl}/organisaatio-service`,
@@ -76,14 +79,11 @@ export const development = ({ isCypress }) => ({
   'oppijanumerorekisteri-service.henkilo': `${virkailijaDevUrl}/oppijanumerorekisteri-service/henkilo/$1`,
   'eperusteet.kooste': `${ePerusteetDevUrl}/#/$1/kooste/$2`,
   'eperusteet.tutkinnonosat': `${ePerusteetDevUrl}/#/$1/esitys/$2/reformi/tutkinnonosat/$3`,
+  'eperusteet.sisalto': `${ePerusteetDevUrl}/#/$1/esitys/$2/reformi/sisalto/$3`,
 });
 
 export const configure = async (urls, httpClient) => {
-  const { NODE_ENV, REACT_APP_CYPRESS } = process.env;
-
-  const isCypress = !!REACT_APP_CYPRESS;
-
-  if (['development', 'test'].includes(NODE_ENV)) {
+  if (isNodeEnv(['development', 'test'])) {
     urls.addProperties(development({ isCypress }));
   } else {
     const { data } = await httpClient.get('/kouta/rest/config/frontProperties');

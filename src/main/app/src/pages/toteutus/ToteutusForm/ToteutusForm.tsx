@@ -24,7 +24,6 @@ import LukiolinjatSection from './LukiolinjatSection';
 import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import TiedotSection from './TiedotSection';
 import ToteutusjaksotSection from './ToteutusjaksotSection';
-import TutkinnonOsatSection from './TutkinnonOsatSection';
 import TeemakuvaSection from '#/src/components/TeemakuvaSection';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import HakeutumisTaiIlmoittautumistapaSection from './HakeutumisTaiIlmoittautumistapaSection';
@@ -111,12 +110,6 @@ const ToteutusForm = ({
           header={t('toteutuslomake.lukionlinja')}
           languages={languages}
           Component={LukiolinjatSection}
-        />
-
-        <FormCollapse
-          section="tutkinnonOsat"
-          header={t('toteutuslomake.koulutukseenLiittyvatTutkinnonOsat')}
-          Component={TutkinnonOsatSection}
         />
 
         <FormCollapse

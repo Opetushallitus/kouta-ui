@@ -11,7 +11,7 @@ const PerustiedotSection = ({ name, canEditTyyppi = true }) => {
   return (
     <>
       {canEditTyyppi ? (
-        <div {...getTestIdProps('tyyppiSection')}>
+        <div {...getTestIdProps('koulutustyyppiSection')}>
           <TyyppiSection name={`${name}.tyyppi`} />
           <Divider marginTop={3} marginBottom={3} />
         </div>

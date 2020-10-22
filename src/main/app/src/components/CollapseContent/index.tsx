@@ -1,10 +1,12 @@
 import React from 'react';
-import { Spring, Transition, config } from 'react-spring/renderprops';
+import { Spring, config } from 'react-spring/renderprops';
+import { isCypress } from '#/src/utils';
 
 export const CollapseContent = ({ open = false, children }) => {
   return (
     <Spring
       config={{ ...config.gentle, clamp: true }}
+      immediate={isCypress}
       to={open ? { opacity: 1, height: 'auto' } : { opacity: 0, height: 0 }}
     >
       {({ opacity, height }) => (
@@ -19,32 +21,6 @@ export const CollapseContent = ({ open = false, children }) => {
         </div>
       )}
     </Spring>
-  );
-};
-
-export const UnmountingCollapseContent = ({ open = false, children }) => {
-  return (
-    <Transition
-      enter={{ opacity: 1, height: 'auto' }}
-      leave={{ opacity: 0, height: 0 }}
-      from={{ opacity: 0, height: 0 }}
-      items={open}
-    >
-      {open =>
-        open &&
-        (({ opacity, height }) => (
-          <div
-            style={{
-              opacity,
-              height,
-              overflow: opacity.value === 1 ? 'visible' : 'hidden',
-            }}
-          >
-            {children}
-          </div>
-        ))
-      }
-    </Transition>
   );
 };
 

@@ -1,5 +1,4 @@
-import React from 'react';
-import _ from 'lodash';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { getLanguageValue } from '#/src/utils/languageUtils';
@@ -8,11 +7,12 @@ import { Typography } from '#/src/components/virkailija';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import { useFieldValue } from '#/src/hooks/form';
 import StyledSectionHTML from '#/src/components/StyledSectionHTML';
+import getEPerusteKuvausHTML from '#/src/utils/ePeruste/getEPerusteKuvaus';
 
 const TekstiKuvausSection = ({ language }) => {
   const ePerusteField = useFieldValue('information.eperuste');
-  const ePerusteId = _.get(ePerusteField, 'value');
-  const { t } = useTranslation();
+  const ePerusteId = ePerusteField?.value;
+  const { t, i18n } = useTranslation();
 
   const { data = {} } = useApiAsync({
     promiseFn: getEPerusteById,
@@ -20,7 +20,9 @@ const TekstiKuvausSection = ({ language }) => {
     watch: ePerusteId,
   });
 
-  const { kuvaus, nimi, diaarinumero } = data;
+  const { nimi, diaarinumero } = data;
+
+  const kuvaus = useMemo(() => getEPerusteKuvausHTML(data, i18n), [data, i18n]);
 
   const translatedKuvaus = getLanguageValue(kuvaus, language);
   const translatedNimi = getLanguageValue(nimi, language);

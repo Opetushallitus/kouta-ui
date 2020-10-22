@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next';
 import { usePrevious } from 'react-use';
 
 import { getKoulutusByKoodi } from '#/src/utils/koulutus/getKoulutusByKoodi';
-import { getThemeProp } from '#/src/theme';
 import { getReadableDateTime, getTestIdProps } from '#/src/utils';
 import { getLanguageValue } from '#/src/utils/languageUtils';
 import {
@@ -20,8 +19,13 @@ import { Box, Typography, Spin } from '#/src/components/virkailija';
 import { FormFieldSelect } from '#/src/components/formFields';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import { useFieldValue } from '#/src/hooks/form';
-import KoulutusField from '../KoulutusField';
 import { useUrls } from '#/src/contexts/contextHooks';
+import KoulutusField from '../KoulutusField';
+import {
+  InfoBoxGrid,
+  StyledInfoBox,
+} from '../KoulutuksenEPerusteTiedot/InfoBox';
+import { useTutkinnonOsienKuvaukset } from '#/src/utils/koulutus/getTutkinnonOsanKuvaus';
 
 const getListNimiLanguageValues = (list = [], language) =>
   list
@@ -31,9 +35,10 @@ const getListNimiLanguageValues = (list = [], language) =>
 const getTutkinnonosatOptions = (selectedPeruste, language) =>
   _.map(
     selectedPeruste?.tutkinnonosat ?? [],
-    ({ _tutkinnonOsa, nimi, laajuus }) => ({
+    ({ _tutkinnonOsa, nimi, laajuus, id }) => ({
       label: `${getLanguageValue(nimi, language)}, ${laajuus} osp`,
       value: _tutkinnonOsa,
+      viite: id,
     })
   );
 
@@ -79,26 +84,9 @@ const TutkinnonOsatField = ({ isLoading, ...props }) => {
       disabled={
         isLoading || _.isNil(selectedPeruste) || _.isEmpty(selectedPeruste)
       }
+      isMulti={true}
       {...props}
     />
-  );
-};
-
-const InfoRow = ({ title, description, suffix }) => {
-  return (
-    <React.Fragment>
-      <Cell key="title-cell">
-        <Typography color="text.dark">{title}:</Typography>
-      </Cell>
-      <Cell key="description-cell">
-        <Typography>
-          {_.isNil(description) || description?.length === 0
-            ? '-'
-            : description}
-          {description && suffix ? ` ${suffix}` : ''}
-        </Typography>
-      </Cell>
-    </React.Fragment>
   );
 };
 
@@ -116,29 +104,42 @@ const StyledTilaBadge = styled(TilaBadge)`
   ${getEPerusteStatusCss}
 `;
 
-const InfoGrid = ({ rows, ...props }) => (
-  <Grid
-    columns={'auto minmax(0, 1fr)'}
-    columnGap="20px"
-    rowGap="25px"
-    {...props}
-  >
-    {rows.map(({ title, description, suffix }) => (
-      <InfoRow
-        key={title}
-        title={title}
-        description={description}
-        suffix={suffix}
-      />
-    ))}
-  </Grid>
-);
+const TutkinnonOsaInfo = ({ ePerusteId, tutkinnonOsa, language }) => {
+  const { t } = useTranslation();
+  const apiUrls = useUrls();
+  return (
+    <InfoBoxGrid
+      style={{ marginBottom: '40px' }}
+      rows={[
+        {
+          title: t('yleiset.nimi'),
+          description: `${getLanguageValue(tutkinnonOsa.nimi, language)}`,
+        },
+        {
+          title: t('yleiset.koodi'),
+          description: (
+            <Anchor
+              href={apiUrls.url(
+                'eperusteet.tutkinnonosat',
+                language,
+                ePerusteId,
+                tutkinnonOsa?.id
+              )}
+              target="_blank"
+            >
+              {tutkinnonOsa?.koodiArvo}
+            </Anchor>
+          ),
+        },
+      ]}
+    />
+  );
+};
 
 const KoulutusInfo = ({
   koulutus,
   language = 'fi',
   ePeruste,
-  className,
   isLoading,
   name,
 }) => {
@@ -168,165 +169,142 @@ const KoulutusInfo = ({
   );
   const apiUrls = useUrls();
 
-  const tutkinnonosatFieldValue = useFieldValue(`${name}.tutkinnonosa`);
-  const selectedTutkinnonosat = _.find(
-    ePeruste?.tutkinnonosat,
-    t => t._tutkinnonOsa === tutkinnonosatFieldValue?.value
+  const tutkinnonosatFieldValue = useFieldValue(`${name}.osat`);
+  const selectedTutkinnonosat = useMemo(
+    () =>
+      _.filter(ePeruste?.tutkinnonosat, t =>
+        _.some(
+          tutkinnonosatFieldValue,
+          ({ value }) => value === t._tutkinnonOsa
+        )
+      ),
+    [ePeruste, tutkinnonosatFieldValue]
   );
 
-  const { change } = useBoundFormActions();
-  useEffect(() => {
-    change(`${name}.selectedTutkinnonosat`, selectedTutkinnonosat);
-  }, [name, selectedTutkinnonosat, change]);
+  const { data: kuvaukset } = useTutkinnonOsienKuvaukset({
+    tutkinnonOsat: selectedTutkinnonosat?.map(t => t?._tutkinnonOsa),
+  });
 
-  useEffect(() => {
-    change(`${name}.tutkinnonosaviite`, selectedTutkinnonosat?.id);
-  }, [name, tutkinnonosatFieldValue, change, selectedTutkinnonosat]);
+  const tutkinnonOsienKuvaukset = kuvaukset?.map(({ id, koodiArvo }) => {
+    return {
+      ...(selectedTutkinnonosat?.find(
+        t => _.toNumber(t?._tutkinnonOsa) === id
+      ) || {}),
+      koodiArvo,
+    };
+  });
 
   return koulutus || isLoading ? (
-    <div className={className}>
-      {isLoading ? (
+    isLoading ? (
+      <StyledInfoBox>
         <Spin center />
-      ) : (
-        <>
-          <Typography variant="h6" mb={2}>
-            {t('koulutuslomake.koulutuksenTiedot')}
-          </Typography>
-          <InfoGrid
-            style={{ marginBottom: '40px' }}
-            rows={[
-              {
-                title: t('yleiset.koulutus'),
-                description: `${nimi} (${koulutus.koodiArvo})`,
-              },
-              {
-                title: t('yleiset.koulutusala'),
-                description: koulutusala,
-              },
-            ]}
-          />
-          {ePeruste && (
-            <>
-              <Typography variant="h6" mb={2}>
-                {t('yleiset.ePerusteenTiedot')}
-              </Typography>
-              <Grid columns="minmax(300px, 40%) auto">
-                <Cell key="eperusteen-tiedot-1">
-                  <InfoGrid
-                    rows={[
-                      {
-                        title: t('yleiset.diaarinumero'),
-                        description: (
-                          <Anchor
-                            href={apiUrls.url(
-                              'eperusteet.kooste',
-                              language,
-                              ePeruste?.id
-                            )}
-                            target="_blank"
-                          >
-                            {ePeruste?.diaarinumero}
-                          </Anchor>
-                        ),
-                      },
-                      {
-                        title: t('yleiset.voimaantulo'),
-                        description: getReadableDateTime(
-                          ePeruste?.voimassaoloAlkaa
-                        ),
-                      },
-                      {
-                        title: t('yleiset.tila'),
-                        description: (
-                          <StyledTilaBadge
-                            status={getEPerusteStatus(ePeruste)}
-                          />
-                        ),
-                      },
-                      {
-                        title: t('yleiset.laajuus'),
-                        description: opintojenlaajuus,
-                        suffix: t('yleiset.osaamispistetta'),
-                      },
-                      {
-                        title: t('yleiset.tutkintonimike'),
-                        description: nimikkeet.map(n => <div key={n}>{n}</div>),
-                      },
-                    ]}
-                  />
-                </Cell>
-                <Cell key="eperusteen-tiedot-2">
-                  <InfoGrid
-                    rows={[
-                      {
-                        title: t('yleiset.osaamisalat'),
-                        description: osaamisalat.map(o => (
-                          <div key={o}>{o}</div>
-                        )),
-                      },
-                    ]}
-                  />
-                </Cell>
-              </Grid>
-            </>
-          )}
-          {ePeruste?.tutkinnonosat && (
-            <Box
-              width={0.5}
-              mr={2}
-              mt={5}
-              mb={5}
-              {...getTestIdProps('tutkinnonOsatSelect')}
-            >
-              <TutkinnonOsatField
-                isLoading={isLoading}
-                name={`${name}.tutkinnonosa`}
-                selectedPeruste={ePeruste}
-                language={language}
-              />
-            </Box>
-          )}
-          {selectedTutkinnonosat && (
-            <InfoGrid
-              style={{ marginBottom: '40px' }}
-              rows={[
-                {
-                  title: t('yleiset.nimi'),
-                  description: `${getLanguageValue(
-                    selectedTutkinnonosat.nimi,
-                    language
-                  )}`,
-                },
-                {
-                  title: t('yleiset.koodi'),
-                  description: (
-                    <Anchor
-                      href={apiUrls.url(
-                        'eperusteet.tutkinnonosat',
-                        language,
-                        ePeruste?.id,
-                        selectedTutkinnonosat?.id
-                      )}
-                      target="_blank"
-                    >
-                      {selectedTutkinnonosat?.id}
-                    </Anchor>
-                  ),
-                },
-              ]}
+      </StyledInfoBox>
+    ) : (
+      <StyledInfoBox>
+        <Typography variant="h6" mb={2}>
+          {t('koulutuslomake.koulutuksenTiedot')}
+        </Typography>
+        <InfoBoxGrid
+          style={{ marginBottom: '40px' }}
+          rows={[
+            {
+              title: t('yleiset.koulutus'),
+              description: `${nimi} (${koulutus.koodiArvo})`,
+            },
+            {
+              title: t('yleiset.koulutusala'),
+              description: koulutusala,
+            },
+          ]}
+        />
+        {ePeruste && (
+          <>
+            <Typography variant="h6" mb={2}>
+              {t('yleiset.ePerusteenTiedot')}
+            </Typography>
+            <Grid columns="minmax(300px, 40%) auto">
+              <Cell key="eperusteen-tiedot-1">
+                <InfoBoxGrid
+                  rows={[
+                    {
+                      title: t('yleiset.diaarinumero'),
+                      description: (
+                        <Anchor
+                          href={apiUrls.url(
+                            'eperusteet.kooste',
+                            language,
+                            ePeruste?.id
+                          )}
+                          target="_blank"
+                        >
+                          {ePeruste?.diaarinumero}
+                        </Anchor>
+                      ),
+                    },
+                    {
+                      title: t('yleiset.voimaantulo'),
+                      description: getReadableDateTime(
+                        ePeruste?.voimassaoloAlkaa
+                      ),
+                    },
+                    {
+                      title: t('yleiset.tila'),
+                      description: (
+                        <StyledTilaBadge status={getEPerusteStatus(ePeruste)} />
+                      ),
+                    },
+                    {
+                      title: t('yleiset.laajuus'),
+                      description: opintojenlaajuus,
+                      suffix: t('yleiset.osaamispistetta'),
+                    },
+                    {
+                      title: t('yleiset.tutkintonimike'),
+                      description: nimikkeet.map(n => <div key={n}>{n}</div>),
+                    },
+                  ]}
+                />
+              </Cell>
+              <Cell key="eperusteen-tiedot-2">
+                <InfoBoxGrid
+                  rows={[
+                    {
+                      title: t('yleiset.osaamisalat'),
+                      description: osaamisalat.map(o => <div key={o}>{o}</div>),
+                    },
+                  ]}
+                />
+              </Cell>
+            </Grid>
+          </>
+        )}
+        {ePeruste?.tutkinnonosat && (
+          <Box
+            width={0.5}
+            mr={2}
+            mt={5}
+            mb={5}
+            {...getTestIdProps('tutkinnonOsatSelect')}
+          >
+            <TutkinnonOsatField
+              isLoading={isLoading}
+              name={`${name}.osat`}
+              selectedPeruste={ePeruste}
+              language={language}
             />
-          )}
-        </>
-      )}
-    </div>
+          </Box>
+        )}
+        {_.map(tutkinnonOsienKuvaukset, tutkinnonOsa => (
+          <TutkinnonOsaInfo
+            tutkinnonOsa={tutkinnonOsa}
+            language={language}
+            ePerusteId={ePeruste?.id}
+          />
+        ))}
+      </StyledInfoBox>
+    )
   ) : null;
 };
-
-const StyledKoulutusInfo = styled(KoulutusInfo)`
-  background-color: ${getThemeProp('colors.grayLighten6')};
-  padding: ${({ theme }) => theme.spacing.unit * 4}px;
-  line-height: 23px;
-`;
 
 const KoulutuksenTiedotSection = ({
   disabled,
@@ -334,7 +312,7 @@ const KoulutuksenTiedotSection = ({
   language,
   koulutuskoodi,
   name,
-  selectLabel: selectLabelProp,
+  selectLabel: selectLabelProp = undefined,
 }) => {
   const { t } = useTranslation();
   const koulutusFieldValue = koulutuskoodi?.value;
@@ -345,13 +323,12 @@ const KoulutuksenTiedotSection = ({
     watch: koulutusFieldValue,
   });
 
-  const ePerusteFieldValue = useFieldValue(`${name}.eperuste`);
+  const ePerusteFieldValue = useFieldValue(`${name}.eperuste`)?.value;
   const ePerusteet = koulutus?.ePerusteet;
 
   const selectedPeruste = _.find(
     ePerusteet,
-    ePeruste =>
-      ePeruste.id.toString() === _.toString(ePerusteFieldValue?.value ?? '')
+    ePeruste => ePeruste.id.toString() === _.toString(ePerusteFieldValue ?? '')
   );
 
   const { change } = useBoundFormActions();
@@ -365,12 +342,20 @@ const KoulutuksenTiedotSection = ({
     }
   }, [change, koulutusFieldValue, isDirty, name, previousKoulutus]);
 
+  const previousEPeruste = usePrevious(ePerusteFieldValue);
+
+  useEffect(() => {
+    if (isDirty && previousEPeruste !== ePerusteFieldValue) {
+      change(`${name}.osat`, null);
+    }
+  }, [change, ePerusteFieldValue, isDirty, name, previousEPeruste]);
+
   const selectLabel = selectLabelProp || t('koulutuslomake.valitseKoulutus');
 
   return (
     <Box display="flex" flexDirection="column">
       <Box flexDirection="row" display="flex" mb={3}>
-        <Box width={0.5} mr={2} {...getTestIdProps('koulutustyyppiSelect')}>
+        <Box width={0.5} mr={2} {...getTestIdProps('koulutusSelect')}>
           <KoulutusField
             disabled={disabled}
             name={`${name}.koulutus`}
@@ -389,16 +374,14 @@ const KoulutuksenTiedotSection = ({
         </Box>
       </Box>
       <Box flexDirection="row" width={1} display="flex" mr={2}>
-        <Box width={1}>
-          <StyledKoulutusInfo
-            disabled={disabled}
-            ePeruste={selectedPeruste}
-            koulutus={koulutus}
-            language={language}
-            isLoading={isLoading}
-            name={name}
-          />
-        </Box>
+        <KoulutusInfo
+          disabled={disabled}
+          ePeruste={selectedPeruste}
+          koulutus={koulutus}
+          language={language}
+          isLoading={isLoading}
+          name={name}
+        />
       </Box>
     </Box>
   );

@@ -1,12 +1,7 @@
-import { merge } from 'lodash';
-
-import { getByTestId, fillKieliversiotSection } from '#/cypress/utils';
+import _ from 'lodash';
+import { fillKieliversiotSection, tallenna } from '#/cypress/utils';
 import koulutus from '#/cypress/data/koulutus';
 import { stubKoulutusFormRoutes } from '#/cypress/koulutusFormUtils';
-
-const tallenna = () => {
-  getByTestId('tallennaKoulutusButton').click();
-};
 
 const prepareTest = tyyppi => {
   const organisaatioOid = '1.1.1.1.1.1';
@@ -15,7 +10,6 @@ const prepareTest = tyyppi => {
   const testKoulutusFields = {
     oid: koulutusOid,
     organisaatioOid: organisaatioOid,
-    koulutusKoodiUri: 'koulutus_0#1',
     tarjoajat: ['1.1.1.1.1.1', '1.2.1.1.1.1'],
   };
 
@@ -38,13 +32,13 @@ const prepareTest = tyyppi => {
   cy.route({
     method: 'GET',
     url: `**/koulutus/${koulutusOid}`,
-    response: merge(koulutus({ tyyppi }), testKoulutusFields),
+    response: _.merge(koulutus({ tyyppi }), testKoulutusFields),
   });
 
   cy.visit(`/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`);
 };
 
-describe('editKoulutusForm', () => {
+export const editKoulutusForm = () => {
   it('should be able to edit ammatillinen koulutus', () => {
     prepareTest('amm');
     cy.route({
@@ -63,20 +57,20 @@ describe('editKoulutusForm', () => {
     });
   });
 
-  it('should be able to edit korkeakoulu koulutus', () => {
-    prepareTest('yo');
+  it('should be able to edit AMK-koulutus', () => {
+    prepareTest('amk');
     cy.route({
       method: 'POST',
       url: '**/koulutus',
       response: {
         muokattu: false,
       },
-    }).as('updateYoKoulutusResponse');
+    }).as('updateAmkKoulutusResponse');
 
     fillKieliversiotSection();
     tallenna();
 
-    cy.wait('@updateYoKoulutusResponse').then(({ request }) => {
+    cy.wait('@updateAmkKoulutusResponse').then(({ request }) => {
       cy.wrap(request.body).toMatchSnapshot();
     });
   });
@@ -98,4 +92,4 @@ describe('editKoulutusForm', () => {
       cy.wrap(request.body).toMatchSnapshot();
     });
   });
-});
+};

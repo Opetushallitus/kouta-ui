@@ -29,11 +29,7 @@ const renderActions = ({ actions, onContinue, t }) => {
   return actions ? (
     actions
   ) : isFunction(onContinue) ? (
-    <Button
-      type="button"
-      onClick={onContinue}
-      {...getTestIdProps('jatkaButton')}
-    >
+    <Button type="button" onClick={onContinue}>
       {t('yleiset.jatka')}
     </Button>
   ) : null;

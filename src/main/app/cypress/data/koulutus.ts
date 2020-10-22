@@ -1,9 +1,9 @@
 import { merge } from 'lodash';
 
-const getBaseFields = () => {
+const getBaseFields = ({ tyyppi = 'amm' } = {}) => {
   return {
     oid: '1.2.246.562.13.00000000000000000072',
-    koulutustyyppi: 'amm',
+    koulutustyyppi: tyyppi,
     koulutusKoodiUri: 'koulutus_0#1',
     tila: 'tallennettu',
     tarjoajat: ['1.2.246.562.10.81934895871'],
@@ -13,7 +13,7 @@ const getBaseFields = () => {
       sv: 'Grundexamen inom lantbruksbranschen',
     },
     metadata: {
-      tyyppi: 'amm',
+      tyyppi: tyyppi,
       kuvaus: {},
       lisatiedot: [
         {
@@ -32,18 +32,31 @@ const getBaseFields = () => {
   };
 };
 
-const getAmmatillinenFields = ({ tyyppi }) => {
+const getAmmatillinenFields = ({ tyyppi = 'amm' }) => {
   return merge(getBaseFields(), {
+    oid: '1.2.246.562.13.00000000000000000599',
+    johtaaTutkintoon: false,
     koulutustyyppi: tyyppi,
-    koulutusKoodiUri: 'koulutus_0#1',
+    koulutusKoodiUri: 'koulutus_351107#12',
     tila: 'tallennettu',
+    tarjoajat: [],
     nimi: {
-      en: 'Vocational qualification in Agriculture',
-      fi: 'koulutus_0',
-      sv: 'Grundexamen inom lantbruksbranschen',
+      en: 'Vocational qualification in Mining',
+      fi: 'Kaivosalan perustutkinto',
+      sv: 'Grundexamen inom gruvbranschen',
     },
-    ...(tyyppi === 'amm' ? { ePerusteId: 1 } : {}),
-    metadata: { tyyppi },
+    metadata: {
+      tyyppi: tyyppi,
+      kuvaus: {},
+      lisatiedot: [],
+    },
+    julkinen: true,
+    esikatselu: true,
+    muokkaaja: '1.2.246.562.24.26603962037',
+    organisaatioOid: '1.2.246.562.10.60198812368',
+    kielivalinta: ['fi', 'sv'],
+    ePerusteId: 6777660,
+    modified: '2020-09-21T16:27',
   });
 };
 
@@ -51,8 +64,8 @@ const getKorkeakouluFields = ({ tyyppi }) => {
   return merge(getBaseFields(), {
     johtaaTutkintoon: true,
     koulutustyyppi: tyyppi,
-    koulutusKoodiUri: 'koulutus_0#1',
-    nimi: { fi: 'koulutus_0' },
+    koulutusKoodiUri: 'koulutus_671112#12',
+    nimi: { fi: 'Fysioterapeutti (AMK)', sv: 'Fysioterapeut (YH)' },
     metadata: {
       tyyppi,
       kuvaus: { fi: 'Fi kuvaus', sv: 'Sv kuvaus' },
@@ -66,10 +79,15 @@ const getKorkeakouluFields = ({ tyyppi }) => {
   });
 };
 
-const getLukioFields = ({ tyyppi }) => getAmmatillinenFields({ tyyppi });
+const getLukioFields = ({ tyyppi }) => {
+  return merge(getBaseFields({ tyyppi }), {
+    koulutusKoodiUri: 'koulutus_309902#12',
+    nimi: { fi: 'Lukion oppimäärä' },
+  });
+};
 
 export default ({ tyyppi = 'amm' } = {}) => {
-  if (tyyppi === 'amm') {
+  if (tyyppi.startsWith('amm')) {
     return getAmmatillinenFields({ tyyppi });
   } else if (['yo', 'amk'].includes(tyyppi)) {
     return getKorkeakouluFields({ tyyppi });

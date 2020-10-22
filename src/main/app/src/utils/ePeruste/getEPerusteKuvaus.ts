@@ -1,16 +1,13 @@
 import _ from 'lodash';
 import { LANGUAGES } from '#/src/constants';
 import { sanitizeHTML } from '#/src/utils';
-import { getDefaultLocalization } from '#/src/localization';
 
 const addSection = (heading, content) => `<h6>${heading}</h6>${content}`;
 
-export default function getEPerusteKuvaus(ePeruste) {
-  const i18next = getDefaultLocalization();
-
+export default function getEPerusteKuvausHTML(ePeruste, i18n) {
   const TRANSLATORS = _.transform(
     LANGUAGES,
-    (result, lang) => (result[lang] = i18next.getFixedT(lang)),
+    (result, lang) => (result[lang] = i18n.getFixedT(lang)),
     {}
   );
 
@@ -21,8 +18,8 @@ export default function getEPerusteKuvaus(ePeruste) {
   } = ePeruste;
 
   if (tyotehtavatJoissaVoiToimia && suorittaneenOsaaminen) {
-    return _.mapValues(TRANSLATORS, (t, lang) => {
-      return sanitizeHTML(
+    return _.mapValues(TRANSLATORS, (t, lang) =>
+      sanitizeHTML(
         `${addSection(
           t('eperuste.suorittaneenOsaaminen'),
           _.get(suorittaneenOsaaminen, lang) || '-'
@@ -30,9 +27,9 @@ export default function getEPerusteKuvaus(ePeruste) {
           t('eperuste.tyotehtavatJoissaVoiToimia'),
           _.get(tyotehtavatJoissaVoiToimia, lang) || '-'
         )}`
-      );
-    });
-  } else {
+      )
+    );
+  } else if (kuvaus) {
     return _.mapValues(kuvaus, sanitizeHTML);
   }
 }

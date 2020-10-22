@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import { PersistGate } from 'redux-persist/integration/react';
 import { I18nextProvider } from 'react-i18next';
+import { ReactQueryDevtools } from 'react-query-devtools';
 
 import FullSpin from '#/src/components/FullSpin';
 import GlobalStyle from '#/src/components/GlobalStyle';
@@ -12,6 +13,7 @@ import VirkailijaRaamit from '#/src/components/VirkailijaRaamit';
 import UserGate from '#/src/pages/UserGate';
 import HttpErrorNotifier from '#/src/components/HttpErrorNotifier';
 import ErrorBoundaryNotifier from '#/src/components/ErrorBoundaryNotifier';
+import { isDev } from '#/src/utils';
 import Routes from './Routes';
 
 const App = ({
@@ -25,6 +27,7 @@ const App = ({
 }) => {
   return (
     <Provider store={store}>
+      {isDev && <ReactQueryDevtools initialIsOpen={false} />}
       <I18nextProvider i18n={localization}>
         <ThemeProvider theme={theme}>
           <PersistGate

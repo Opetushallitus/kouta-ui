@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
+import { useApiQuery } from '#/src/hooks/useApiQuery';
 
 export const getKoulutusByKoodi = async ({
   httpClient,
@@ -118,3 +119,8 @@ export const getKoulutusByKoodi = async ({
     nimi: _.mapValues(nimi, ({ nimi: nimiField }) => nimiField || null),
   };
 };
+
+export const useKoulutusByKoodi = props =>
+  useApiQuery('getKoulutusByKoodi', props, getKoulutusByKoodi, {
+    cacheTime: 5000,
+  });

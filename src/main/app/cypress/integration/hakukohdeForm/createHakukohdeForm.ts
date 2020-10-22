@@ -10,16 +10,14 @@ import {
   getByTestId,
   paste,
   fillKieliversiotSection,
+  fillTilaSection,
+  tallenna,
 } from '#/cypress/utils';
 
 import { prepareTest } from '#/cypress/hakukohdeFormUtils';
 
 const lisaa = () => {
   getByTestId('lisaaButton').click({ force: true });
-};
-
-const tallenna = () => {
-  getByTestId('tallennaHakukohdeButton').click();
 };
 
 const fillPohjakoulutusvaatimusSection = () => {
@@ -154,13 +152,7 @@ const fillLiitteetSection = () => {
   });
 };
 
-const fillTilaSection = (tila = 'julkaistu') => {
-  getByTestId('tilaSection').within(() => {
-    getRadio(tila).check({ force: true });
-  });
-};
-
-describe('createHakukohdeForm', () => {
+export const createHakukohdeForm = () => {
   const organisaatioOid = '1.1.1.1.1.1';
   const hakuOid = '4.1.1.1.1.1';
   const hakukohdeOid = '1.2.3.4.5.6';
@@ -220,4 +212,4 @@ describe('createHakukohdeForm', () => {
       `/kouta/organisaatio/${organisaatioOid}/hakukohde/${hakukohdeOid}/muokkaus`
     );
   });
-});
+};

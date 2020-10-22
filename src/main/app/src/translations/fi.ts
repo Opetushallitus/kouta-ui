@@ -204,6 +204,7 @@ export default {
     onJulkinen: '{{entity}} on julkinen',
     kokeetTaiLisanaytot: 'Kokeet tai lisänäytöt',
     organisaatiot: 'Organisaatiot',
+    ladataan: 'Ladataan...',
   },
   ilmoitukset: {
     tallentamattomiaMuutoksia: {
@@ -354,14 +355,14 @@ export default {
     haeHakukohteita: 'Hae hakukohteita',
   },
   koulutuslomake: {
+    osaamisalanKuvaus: 'Osaamisalan kuvaus',
+    osaamisala: 'Osaamisala',
     tutkinnonOsat: 'Valitse tutkinnon osat',
     koulutuksenNimi: 'Koulutuksen nimi',
     lisaaKoulutuksenNimi: 'Lisää koulutuksen nimi',
     tutkinnonOsienKuvaus: 'Tutkinnon osien kuvaus',
     eiTutkinnonOsia: 'Ei valittuja tutkinnon osia',
     koulutuksenTiedot: 'Koulutuksen tiedot',
-    ammattitaitovaatimukset: 'Ammattitaitovaatimukset',
-    ammattitaidonOsoittamistavat: 'Ammattitaidon osoittamistavat',
     koulutuksenKuvaus: 'Valitun koulutuksen kuvaus',
     koulutuksenLisatiedot: 'Koulutuksen lisätiedot',
     koulutuksenJarjestaja: 'Koulutuksen järjestävä organisaatio',
@@ -401,9 +402,9 @@ export default {
       'Koulutuksen näkyminen muille koulutustoimijoille',
     julkisuusKuvaus:
       'Valitse näkyykö koulutus muille koulutustoimijoille. Jos koulutus on julkinen, muut koulutustoimijat voivat käyttää sitä pohjana luodessaan uusia.',
+    lisaaKoulutus: 'Lisää uusi koulutus',
   },
   toteutuslomake: {
-    lisaaKoulutus: 'Lisää uusi koulutus',
     toteutuksenTiedot: 'Toteutuksen tiedot',
     toteutuksenKuvaus: 'Toteutuksen kuvaus',
     toteutuksenYleinenKuvaus: 'Toteutuksen yleinen kuvaus',
@@ -476,10 +477,6 @@ export default {
     toteutusjaksonLaajuus: 'Laajuus',
     toteutusjaksonKuvaus: 'Jakson kuvaus',
     koulutukseenLiittyvatTutkinnonOsat: 'Koulutukseen liittyvät tutkinnon osat',
-    valitseTutkinto: 'Valitse tutkinto',
-    valitseOsaamisala: 'Valitse osaamisala',
-    valitseTutkinnonOsat: 'Valitse tutkinnon osat',
-    lisaaTutkinnonOsa: 'Lisää tutkinnon osa',
     hakukohteenLittaminen: 'Hakukohteen liittäminen toteutukseen',
     eiMuokkausOikeutta:
       'Käyttäjälläsi ei ole oikeuksia muokata tätä toteutusta',
@@ -707,5 +704,7 @@ export default {
     suorittaneenOsaaminen: 'Tutkinnon suorittaneen osaaminen',
     tyotehtavatJoissaVoiToimia:
       'Työtehtäviä, joissa tutkinnon suorittanut voi toimia',
+    ammattitaitovaatimukset: 'Ammattitaitovaatimukset',
+    ammattitaidonOsoittamistavat: 'Ammattitaidon osoittamistavat',
   },
 };

@@ -97,33 +97,37 @@ const FormCollapseGroup = ({
     }
   }, [sectionNeedsFocus, activeRef]);
 
-  return React.Children.map(visibleChildren, (child, index) => {
-    const isLast = index === visibleChildren.length - 1;
-    const childProps = {
-      index,
-      isOpen: collapsesOpen[index],
-      onToggle: () => {
-        setCollapseOpen(index, !collapsesOpen[index]);
-      },
-      onContinue:
-        !isLast && enabled
-          ? () => {
-              if (isFunction(child.props.onContinue)) {
-                child.props.onContinue();
-              }
-              setSectionNeedsFocus(index + 1);
-            }
-          : null,
-    };
-    return (
-      <Box
-        ref={index === sectionNeedsFocus ? activeRef : null}
-        mb={isLast ? 0 : 4}
-      >
-        {React.cloneElement(child, childProps)}
-      </Box>
-    );
-  });
+  return (
+    <>
+      {React.Children.map(visibleChildren, (child, index) => {
+        const isLast = index === visibleChildren.length - 1;
+        const childProps = {
+          index,
+          isOpen: collapsesOpen[index],
+          onToggle: () => {
+            setCollapseOpen(index, !collapsesOpen[index]);
+          },
+          onContinue:
+            !isLast && enabled
+              ? () => {
+                  if (isFunction(child.props.onContinue)) {
+                    child.props.onContinue();
+                  }
+                  setSectionNeedsFocus(index + 1);
+                }
+              : null,
+        };
+        return (
+          <Box
+            ref={index === sectionNeedsFocus ? activeRef : null}
+            mb={isLast ? 0 : 4}
+          >
+            {React.cloneElement(child, childProps)}
+          </Box>
+        );
+      })}
+    </>
+  );
 };
 
 export default FormCollapseGroup;

@@ -21,15 +21,17 @@ import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import TeemakuvaSection from '#/src/components/TeemakuvaSection';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import TypeSection from './TypeSection';
-import TiedotSection, {
-  KoulutuksenNimiSection,
-  TutkinnonOsienKuvausSection,
-} from './TiedotSection';
+import TiedotSection from './TiedotSection';
 import KuvausSection from './KuvausSection';
 import JarjestajaSection from './JarjestajaSection';
 import LisatiedotSection from './LisatiedotSection';
 import ToteutuksetSection from './ToteutuksetSection';
-import { TutkinnonOsatSection } from './TiedotSection';
+import { OsaamisalaSection } from './OsaamisalaSection';
+import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
+import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';
+import { TutkinnonOsatSection } from './TutkinnonOsatSection';
+import { TutkinnonOsaKoulutusNimiSection } from './TutkinnonOsaKoulutusNimiSection';
+import { getTestIdProps } from '#/src/utils';
 
 const isInHierarkia = org => hierarkia =>
   hierarkia.organisaatioOid === org.organisaatioOid ||
@@ -103,6 +105,15 @@ const KoulutusForm = ({
       />
 
       <FormCollapse
+        section="osaamisala"
+        header={t('koulutuslomake.valitseOsaamisala')}
+        Component={OsaamisalaSection}
+        languages={languageTabs}
+        disabled={onlyTarjoajaRights}
+        koulutustyyppi={koulutustyyppi}
+      />
+
+      <FormCollapse
         section="information"
         header={t('koulutuslomake.koulutuksenTiedot')}
         Component={TiedotSection}
@@ -123,12 +134,23 @@ const KoulutusForm = ({
       />
 
       <FormCollapse
-        section="tutkinnonosat"
-        header={t('koulutuslomake.koulutuksenNimi')}
-        Component={KoulutuksenNimiSection}
+        section="osaamisalanKuvaus"
+        header={t('koulutuslomake.osaamisalanKuvaus')}
+        Component={OsaamisalanKuvausSection}
+        name={'osaamisala.osaamisala'}
         languages={languageTabs}
         disabled={onlyTarjoajaRights}
         koulutustyyppi={koulutustyyppi}
+      />
+
+      <FormCollapse
+        section="tutkinnonosat"
+        header={t('koulutuslomake.koulutuksenNimi')}
+        Component={TutkinnonOsaKoulutusNimiSection}
+        languages={languageTabs}
+        disabled={onlyTarjoajaRights}
+        koulutustyyppi={koulutustyyppi}
+        {...getTestIdProps('nimiSection')}
       />
 
       <FormCollapse
@@ -138,6 +160,7 @@ const KoulutusForm = ({
         languages={languageTabs}
         disabled={onlyTarjoajaRights}
         koulutustyyppi={koulutustyyppi}
+        {...getTestIdProps('tutkinnonOsienKuvausSection')}
       />
 
       <FormCollapse

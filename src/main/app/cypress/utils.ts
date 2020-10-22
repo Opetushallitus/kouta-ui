@@ -1,7 +1,9 @@
+import _ from 'lodash/fp';
 import { loggable } from 'cypress-pipe';
 import { fireEvent } from '@testing-library/react';
 import koodisto from '#/cypress/data/koodisto';
 import koodistoOpintojenLaajuusYksikko from '#/cypress/data/koodistoOpintojenLaajuusYksikko';
+import ePerusteByKoulutusKoodi351107 from './data/ePerusteByKoulutusKoodi351107';
 
 export const paste = loggable('paste', value => $element => {
   $element.focus();
@@ -29,7 +31,7 @@ export const getRadio = value =>
   cy.get(`input[type="radio"][value="${value}"]`);
 
 export const getSelectOption = value =>
-  cy.get('[class*="option"]').contains(value);
+  cy.findAllByRole('option').contains(value);
 
 export const getCheckbox = value =>
   cy.get(`input[type="checkbox"]${value ? `[name="${value}"]` : ''}`);
@@ -44,10 +46,13 @@ export const selectOption = value => {
     });
 };
 
-export const fillAsyncSelect = (input, match) => {
+export const fillAsyncSelect = (input, match = null) => {
+  const searchTerm = match || input;
   getSelect().within(() => {
     cy.get('input[type="text"]').pipe(paste(input));
-    cy.get(`div:contains(${match})`).first().click();
+    cy.findAllByRole('option', { name: _.includes(searchTerm) })
+      .first()
+      .click();
   });
 };
 
@@ -169,12 +174,6 @@ export const fillTreeSelect = value => {
   });
 };
 
-export const fillKoulutustyyppiSelect = path => {
-  path.forEach(option => {
-    getRadio(option).check({ force: true });
-  });
-};
-
 export const fillDatePickerInput = value => {
   cy.get('.DatePickerInput__').find('input').pipe(paste(value));
 };
@@ -193,20 +192,8 @@ export const stubEPerusteetByKoulutuskoodiRoute = () => {
   cy.route({
     method: 'GET',
     url:
-      '**/eperusteet-service/api/perusteet?tuleva=true&siirtyma=false&voimassaolo=true&poistunut=false&kieli=fi&koulutuskoodi=koulutus_0',
-    response: {
-      data: [
-        {
-          nimi: { fi: 'koulutus_0' },
-          kuvaus: { fi: 'koulutus_0 kuvaus' },
-          osaamisalat: [
-            { uri: 'osaamisala_0', nimi: { fi: 'osaamisala_0 nimi' } },
-          ],
-          tutkintonimikeKoodiUri: 'nimike_1#1',
-          id: 1,
-        },
-      ],
-    },
+      '**/eperusteet-service/api/perusteet?tuleva=true&siirtyma=false&voimassaolo=true&poistunut=false&kieli=fi&koulutuskoodi=koulutus_351107*',
+    response: ePerusteByKoulutusKoodi351107,
   });
 };
 
@@ -218,7 +205,8 @@ export const stubCommonRoutes = () => {
   stubKoodistoOpintojenLaajuusYksikko();
 };
 
-export const jatka = () => getByTestId('jatkaButton').click();
+export const jatka = () =>
+  cy.findByRole('button', { name: 'yleiset.jatka' }).click();
 
 export const OPH_TEST_ORGANISAATIO_OID = '1.2.246.562.10.48587687889';
 
@@ -308,5 +296,43 @@ export const stubKoodistoOpintojenLaajuusYksikko = () => {
     url:
       '**/koodisto-service/rest/json/opintojenlaajuusyksikko/koodi?onlyValidKoodis=true&koodistoVersio=',
     response: koodistoOpintojenLaajuusYksikko,
+  });
+};
+
+export const fillTilaSection = (tila = 'julkaistu') => {
+  getByTestId('tilaSection').within(() => {
+    getRadio(tila).check({ force: true });
+  });
+};
+
+export const tallenna = () => {
+  cy.findByRole('button', { name: 'yleiset.tallenna' }).click();
+};
+
+const isTutkintoonJohtava = koulutustyyppi =>
+  ['amk', 'yo', 'amm', 'lk'].includes(koulutustyyppi);
+
+export const fillKoulutustyyppiSelect = koulutustyyppiPath => {
+  const johtaaTutkintoon = isTutkintoonJohtava(_.last(koulutustyyppiPath));
+
+  if (johtaaTutkintoon) {
+    cy.findByRole('button', {
+      name: 'koulutustyyppivalikko.tutkintoonJohtavatKoulutustyypit',
+    }).click();
+  } else {
+    cy.findByRole('button', {
+      name: 'koulutustyyppivalikko.muutKoulutustyypit',
+    }).click();
+  }
+
+  koulutustyyppiPath.forEach(option => {
+    getRadio(option).check({ force: true });
+  });
+};
+
+export const fillKoulutustyyppiSection = koulutustyyppiPath => {
+  getByTestId('koulutustyyppiSection').within(() => {
+    fillKoulutustyyppiSelect(koulutustyyppiPath);
+    jatka();
   });
 };

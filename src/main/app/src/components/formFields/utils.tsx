@@ -1,6 +1,6 @@
 import React, { createElement } from 'react';
 import _ from 'lodash';
-import { FormControl } from '#/src/components/virkailija';
+import { FormControl, FormLabel } from '#/src/components/virkailija';
 import {
   useFieldConfig,
   useFieldIsRequired,
@@ -22,7 +22,15 @@ export const createComponent = (Component, mapProps = simpleMapProps) => {
 
     const { error } = meta;
     const isError = !_.isNil(error);
-    const children = createElement(Component, mapProps(props));
+    const labelId = `FormLabel_${name}`;
+    const children = createElement(
+      Component,
+      mapProps({
+        ...props,
+        ariaLabelledBy: labelId,
+        input: { ...props.input, ariaLabelledBy: labelId },
+      })
+    );
 
     const fieldConfig = useFieldConfig(name);
     const { readOnly } = useFormConfig();
@@ -34,7 +42,11 @@ export const createComponent = (Component, mapProps = simpleMapProps) => {
         helperText={
           <FormHelperTextMulti errorMessage={error} helperText={helperText} />
         }
-        label={`${label}${required ? ' *' : ''}`}
+        label={
+          <FormLabel error={error} disabled={disabled} mb={1} id={labelId}>
+            {`${label}${required ? ' *' : ''}`}
+          </FormLabel>
+        }
         disabled={disabled || readOnly}
       >
         {children}

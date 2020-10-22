@@ -1,12 +1,15 @@
 import _ from 'lodash/fp';
 
-import { isNumeric, getKoutaDateString, isPartialDate } from '#/src/utils';
+import {
+  isNumeric,
+  getKoutaDateString,
+  isPartialDate,
+  maybeParseToNumber,
+} from '#/src/utils';
 import serializeSisaltoField from '#/src/utils/form/serializeSisaltoField';
 import { serializeEditorState } from '#/src/components/Editor/utils';
 import { HAKULOMAKETYYPPI } from '#/src/constants';
 const { MUU, EI_SAHKOISTA_HAKUA } = HAKULOMAKETYYPPI;
-
-const RADIX = 10;
 
 const getOsaamisalatByValues = ({ osaamisalat, pickTranslations }) => {
   return (osaamisalat || []).map(
@@ -17,14 +20,6 @@ const getOsaamisalatByValues = ({ osaamisalat, pickTranslations }) => {
       otsikko: pickTranslations(otsikko),
     })
   );
-};
-
-const toOptionalInteger = value => {
-  const integerValue = _.parseInt(RADIX, value);
-  if (value === '') {
-    return null;
-  }
-  return _.isNaN(integerValue) ? value : integerValue;
 };
 
 const getToteutusByFormValues = values => {
@@ -72,10 +67,9 @@ const getToteutusByFormValues = values => {
         ),
         opetuskieliKoodiUrit: values?.jarjestamistiedot?.opetuskieli || [],
         onkoMaksullinen,
-        maksunMaara:
-          onkoMaksullinen && isNumeric(maksullisuusMaksu)
-            ? parseFloat(maksullisuusMaksu)
-            : null,
+        maksunMaara: onkoMaksullinen
+          ? maybeParseToNumber(maksullisuusMaksu)
+          : null,
         opetustapaKoodiUrit: values?.jarjestamistiedot?.opetustapa || [],
         opetusaikaKoodiUrit: values?.jarjestamistiedot?.opetusaika || [],
         opetuskieletKuvaus: pickTranslations(
@@ -105,8 +99,7 @@ const getToteutusByFormValues = values => {
           ? values?.jarjestamistiedot?.koulutuksenAlkamiskausi
           : null,
         koulutuksenAlkamisvuosi: !koulutuksenTarkkaAlkamisaika
-          ? _.parseInt(
-              RADIX,
+          ? maybeParseToNumber(
               values?.jarjestamistiedot?.koulutuksenAlkamisvuosi?.value
             )
           : null,
@@ -116,7 +109,7 @@ const getToteutusByFormValues = values => {
         ),
         stipendinMaara:
           onkoStipendia && isNumeric(values?.jarjestamistiedot?.stipendinMaara)
-            ? parseFloat(values.jarjestamistiedot.stipendinMaara)
+            ? maybeParseToNumber(values.jarjestamistiedot.stipendinMaara)
             : null,
         diplomiKoodiUrit: (values?.jarjestamistiedot?.diplomiTyypit || []).map(
           ({ value }) => value
@@ -142,10 +135,10 @@ const getToteutusByFormValues = values => {
         muuKielivalikoima: (values?.jarjestamistiedot?.muutKielet || []).map(
           ({ value }) => value
         ),
-        suunniteltuKestoVuodet: toOptionalInteger(
+        suunniteltuKestoVuodet: maybeParseToNumber(
           jarjestamistiedot?.suunniteltuKesto?.vuotta
         ),
-        suunniteltuKestoKuukaudet: toOptionalInteger(
+        suunniteltuKestoKuukaudet: maybeParseToNumber(
           jarjestamistiedot?.suunniteltuKesto?.kuukautta
         ),
         suunniteltuKestoKuvaus: pickTranslations(
@@ -196,16 +189,12 @@ const getToteutusByFormValues = values => {
         _.mapValues(serializeEditorState)
       )(values?.kuvaus || {}),
       tyyppi: koulutustyyppi,
-      laajuus: isNumeric(values?.tiedot?.laajuus)
-        ? _.parseInt(RADIX, values.tiedot.laajuus)
-        : null,
+      laajuus: maybeParseToNumber(values?.tiedot?.laajuus),
       laajuusyksikkoKoodiUri: values?.tiedot?.laajuusyksikko?.value || null,
       ilmoittautumislinkki: pickTranslations(
         values?.tiedot?.ilmoittautumislinkki
       ),
-      aloituspaikat: isNumeric(values?.tiedot?.aloituspaikat)
-        ? _.parseInt(RADIX, values.tiedot.aloituspaikat)
-        : null,
+      aloituspaikat: maybeParseToNumber(values?.tiedot?.aloituspaikat),
       toteutusjaksot: (values?.toteutusjaksot || []).map(
         ({ nimi, koodi, laajuus, ilmoittautumislinkki, kuvaus, sisalto }) => ({
           nimi: pickTranslations(nimi),

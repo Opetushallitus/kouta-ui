@@ -1,13 +1,8 @@
-import { merge } from 'lodash';
-
-import { getByTestId, fillKieliversiotSection } from '#/cypress/utils';
 import koulutus from '#/cypress/data/koulutus';
 import toteutus from '#/cypress/data/toteutus';
 import { stubToteutusFormRoutes } from '#/cypress/toteutusFormUtils';
-
-const tallenna = () => {
-  getByTestId('tallennaToteutusButton').click();
-};
+import { fillKieliversiotSection, tallenna } from '#/cypress/utils';
+import { merge } from 'lodash';
 
 const prepareTest = tyyppi => {
   const organisaatioOid = '1.1.1.1.1.1';
@@ -61,7 +56,7 @@ const prepareTest = tyyppi => {
   cy.visit(`/organisaatio/${organisaatioOid}/toteutus/${toteutusOid}/muokkaus`);
 };
 
-describe('editToteutusForm', () => {
+export const editToteutusForm = () => {
   it('should be able to edit ammatillinen toteutus', () => {
     prepareTest('amm');
     cy.route({
@@ -163,4 +158,4 @@ describe('editToteutusForm', () => {
       cy.wrap(request.body).toMatchSnapshot();
     });
   });
-});
+};

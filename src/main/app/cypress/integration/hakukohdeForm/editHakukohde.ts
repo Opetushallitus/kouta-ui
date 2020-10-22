@@ -1,11 +1,7 @@
-import { getByTestId, fillKieliversiotSection } from '#/cypress/utils';
 import { prepareTest } from '#/cypress/hakukohdeFormUtils';
+import { fillKieliversiotSection, tallenna } from '#/cypress/utils';
 
-const tallenna = () => {
-  getByTestId('tallennaHakukohdeButton').click();
-};
-
-describe('editHakukohdeForm', () => {
+export const editHakukohdeForm = () => {
   const organisaatioOid = '1.1.1.1.1.1';
   const hakuOid = '4.1.1.1.1.1';
   const hakukohdeOid = '6.1.1.1.1.1';
@@ -26,4 +22,4 @@ describe('editHakukohdeForm', () => {
       cy.wrap(request.body).toMatchSnapshot();
     });
   });
-});
+};

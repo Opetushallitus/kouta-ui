@@ -2,20 +2,15 @@ import {
   fillAsyncSelect,
   selectOption,
   typeToEditor,
-  getRadio,
   getByTestId,
   jatka,
   paste,
   fillKieliversiotSection,
+  fillTilaSection,
+  tallenna,
 } from '#/cypress/utils';
 
 import { stubOppilaitosFormRoutes } from '#/cypress/oppilaitosFormUtils';
-
-const fillTilaSection = (tila = 'julkaistu') => {
-  getByTestId('tilaSection').within(() => {
-    getRadio(tila).check({ force: true });
-  });
-};
 
 const fillPerustiedotSection = () => {
   getByTestId('perustiedotSection').within(() => {
@@ -81,11 +76,7 @@ const passOsatSection = () => {
   });
 };
 
-const tallenna = () => {
-  getByTestId('tallennaOppilaitosButton').click();
-};
-
-describe('createOppilaitosForm', () => {
+export const createOppilaitosForm = () => {
   const organisaatioOid = '1.1.1.1.1.1';
 
   beforeEach(() => {
@@ -132,4 +123,4 @@ describe('createOppilaitosForm', () => {
       cy.wrap(request.body).toMatchSnapshot();
     });
   });
-});
+};

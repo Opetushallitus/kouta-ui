@@ -1,5 +1,3 @@
-import { get } from 'lodash';
-
 const getOrganisaatioHierarkiaByOid = async ({
   oid,
   skipParents = false,
@@ -7,11 +5,11 @@ const getOrganisaatioHierarkiaByOid = async ({
   httpClient,
 }) => {
   const { data } = await httpClient.get(
-    apiUrls.url('organisaatio-service.hierarkia', oid),
-    { params: { skipParents: skipParents ? 'true' : 'false' } }
+    apiUrls.url('organisaatio-service.hierarkia', oid) +
+      (skipParents ? '&skipParents=true' : '')
   );
 
-  return get(data, 'organisaatiot') || [];
+  return data?.organisaatiot ?? [];
 };
 
 export default getOrganisaatioHierarkiaByOid;

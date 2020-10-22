@@ -2,24 +2,18 @@ import _ from 'lodash';
 import {
   typeToEditor,
   getCheckbox,
-  fillKoulutustyyppiSelect,
-  getRadio,
   getByTestId,
   jatka,
   paste,
   fillKieliversiotSection,
   fillPohjaSection,
+  fillTilaSection,
+  tallenna,
+  fillKoulutustyyppiSection,
 } from '#/cypress/utils';
 
 import createSoraKuvaus from '#/cypress/data/soraKuvaus';
 import { stubSoraKuvausFormRoutes } from '#/cypress/soraKuvausFormUtils';
-
-const fillKoulutustyyppiSection = () => {
-  getByTestId('koulutustyyppiSection').within(() => {
-    fillKoulutustyyppiSelect(['amm']);
-    jatka();
-  });
-};
 
 const fillTiedotSection = () => {
   getByTestId('tiedotSection').within(() => {
@@ -40,17 +34,7 @@ const fillJulkisuusSection = () => {
   });
 };
 
-const tallenna = () => {
-  getByTestId('tallennaSoraKuvausButton').click();
-};
-
-const fillTilaSection = (tila = 'julkaistu') => {
-  getByTestId('tilaSection').within(() => {
-    getRadio(tila).check({ force: true });
-  });
-};
-
-describe('createSoraKuvausForm', () => {
+export const createSoraKuvausForm = () => {
   const organisaatioOid = '1.1.1.1.1.1';
   const soraKuvaus = createSoraKuvaus();
 
@@ -78,7 +62,7 @@ describe('createSoraKuvausForm', () => {
       },
     }).as('createSoraKuvausRequest');
 
-    fillKoulutustyyppiSection();
+    fillKoulutustyyppiSection(['amm']);
     fillPohjaSection();
     fillKieliversiotSection({ jatka: true });
     fillTiedotSection();
@@ -96,4 +80,4 @@ describe('createSoraKuvausForm', () => {
       `/kouta/organisaatio/${organisaatioOid}/sora-kuvaus/${soraKuvaus.id}/muokkaus`
     );
   });
-});
+};

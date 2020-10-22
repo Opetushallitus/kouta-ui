@@ -5,26 +5,18 @@ import {
   typeToEditor,
   getTableInput,
   getCheckbox,
-  fillKoulutustyyppiSelect,
   jatka,
   getByTestId,
   paste,
   fillValintakokeetSection,
   fillKieliversiotSection,
   fillPohjaSection,
+  fillTilaSection,
+  tallenna,
+  fillKoulutustyyppiSelect,
 } from '#/cypress/utils';
 import valintaperuste from '#/cypress/data/valintaperuste';
 import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils';
-
-const tallenna = () => {
-  getByTestId('tallennaValintaperusteButton').click();
-};
-
-const fillKoulutustyyppiSection = path => {
-  getByTestId('tyyppiSection').within(() => {
-    fillKoulutustyyppiSelect(path);
-  });
-};
 
 const fillHakutavanRajausSection = () => {
   getByTestId('hakutapaSection').within(() => {
@@ -116,7 +108,9 @@ const fillJulkisuusSection = () => {
 
 const fillPerustiedotSection = () => {
   getByTestId('perustiedotSection').within(() => {
-    fillKoulutustyyppiSection(['korkeakoulutus']);
+    getByTestId('koulutustyyppiSection').within(() => {
+      fillKoulutustyyppiSelect(['korkeakoulutus', 'yo']);
+    });
     fillKieliversiotSection();
     fillHakutavanRajausSection();
     fillKohdejoukonRajausSection();
@@ -125,13 +119,7 @@ const fillPerustiedotSection = () => {
   });
 };
 
-const fillTilaSection = (tila = 'julkaistu') => {
-  getByTestId('tilaSection').within(() => {
-    getRadio(tila).check({ force: true });
-  });
-};
-
-describe('createValintaperusteForm', () => {
+export const createValintaperusteForm = () => {
   const organisaatioOid = '1.1.1.1.1.1';
   const createdValintaperusteId = '1.2.3.4.5.6';
 
@@ -181,4 +169,4 @@ describe('createValintaperusteForm', () => {
       `/kouta/organisaatio/${organisaatioOid}/valintaperusteet/${createdValintaperusteId}/muokkaus`
     );
   });
-});
+};

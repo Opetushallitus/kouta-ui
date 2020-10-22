@@ -13,16 +13,13 @@ import {
   fillKieliversiotSection,
   fillPohjaSection,
   typeToEditor,
+  fillTilaSection,
+  tallenna,
+  fillDateTimeInput,
 } from '#/cypress/utils';
 
 import koulutus from '#/cypress/data/koulutus';
 import { stubToteutusFormRoutes } from '#/cypress/toteutusFormUtils';
-
-const fillTilaSection = (tila = 'julkaistu') => {
-  getByTestId('tilaSection').within(() => {
-    getRadio(tila).check({ force: true });
-  });
-};
 
 const fillOpetuskieli = () => {
   getByTestId('opetuskieli').within(() => {
@@ -113,11 +110,15 @@ const fillTeemakuvaSection = () => {
   });
 };
 
-const fillNayttamistiedotSection = () => {
+const fillNayttamistiedotSection = (
+  { ammattinimikkeet } = { ammattinimikkeet: true }
+) => {
   getByTestId('nayttamistiedotSection').within(() => {
-    getByTestId('ammattinimikkeetSelect').within(() => {
-      fillAsyncSelect('ammattinimike', 'yleiset.luoKohde');
-    });
+    if (ammattinimikkeet) {
+      getByTestId('ammattinimikkeetSelect').within(() => {
+        fillAsyncSelect('ammattinimike', 'yleiset.luoKohde');
+      });
+    }
 
     getByTestId('avainsanatSelect').within(() => {
       fillAsyncSelect('avainsana', 'yleiset.luoKohde');
@@ -125,10 +126,6 @@ const fillNayttamistiedotSection = () => {
 
     jatka();
   });
-};
-
-const tallenna = () => {
-  getByTestId('tallennaToteutusButton').click();
 };
 
 const fillJarjestajatSection = () => {
@@ -163,7 +160,7 @@ const fillKuvausSection = () => {
 
 const fillYhteystiedotSection = () => {
   getByTestId('yhteyshenkilotSection').within(() => {
-    getByTestId('lisaaYhteyshenkiloButton').click({ force: true });
+    getByTestId('lisaaYhteyshenkiloButton').click();
 
     getByTestId('nimi').find('input').pipe(paste('nimi'));
     getByTestId('titteli').find('input').pipe(paste('titteli'));
@@ -238,7 +235,7 @@ const toteutusOid = '1.2.3.4.5.6';
 const prepareTest = tyyppi => {
   const organisaatioOid = '1.1.1.1.1.1';
   const koulutusOid = '1.2.1.1.1.1';
-  const perusteId = '1';
+  const perusteId = 6777660;
 
   const testKoulutusFields = {
     oid: koulutusOid,
@@ -266,7 +263,94 @@ const prepareTest = tyyppi => {
   cy.visit(`/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/toteutus`);
 };
 
-describe('createToteutusForm', () => {
+export const createToteutusForm = () => {
+  it('should be able to create ammatillinen tutkinnon osa toteutus', () => {
+    prepareTest('amm-tutkinnon-osa');
+
+    cy.route({
+      method: 'PUT',
+      url: '**/toteutus',
+      response: {
+        oid: toteutusOid,
+      },
+    }).as('createAmmToteutusResponse');
+
+    fillPohjaSection();
+    fillKieliversiotSection({ jatka: true });
+    fillTiedotSection();
+    fillKuvausSection();
+
+    getByTestId('jarjestamistiedotSection').within(() => {
+      fillCommonJarjestamistiedot();
+      jatka();
+    });
+
+    fillTeemakuvaSection();
+    fillNayttamistiedotSection({ ammattinimikkeet: false });
+    fillJarjestajatSection();
+
+    cy.findByTestId('soraKuvausSection').should('not.exist');
+
+    getByTestId('hakeutumisTaiIlmoittautumistapaSection').within(() => {
+      cy.findByRole('button', {
+        name: 'toteutuslomake.hakuTapa.hakeutuminen',
+      }).click();
+
+      cy.findByRole('button', {
+        name: 'toteutuslomake.hakuTapa.hakeutuminen',
+      }).click();
+
+      cy.findByText('toteutuslomake.muuHakulomake').click();
+
+      cy.findByRole('textbox', {
+        name: /^toteutuslomake.hakeutuminen.linkki/,
+      })
+        .click()
+        .pipe(paste('http://example.com'));
+
+      cy.findByRole('textbox', {
+        name: /^toteutuslomake.hakeutuminen.lisatiedot/,
+      })
+        .click()
+        .pipe(paste('lisätiedot'));
+
+      cy.findByRole('textbox', {
+        name: /^toteutuslomake.lisatiedotValintaperusteista/,
+      })
+        .click()
+        .pipe(paste('lisätiedot valintaperusteista'));
+
+      cy.findByTestId('alkaa').within(() => {
+        fillDateTimeInput({
+          date: '01.04.2050',
+          time: '00:00',
+        });
+      });
+
+      cy.findByTestId('paattyy').within(() => {
+        fillDateTimeInput({
+          date: '01.09.2050',
+          time: '00:00',
+        });
+      });
+
+      jatka();
+    });
+
+    getByTestId('soraKuvausSection').within(() => {
+      jatka();
+    });
+
+    fillYhteystiedotSection();
+    fillTilaSection();
+
+    tallenna();
+
+    cy.wait('@createAmmToteutusResponse').then(({ request }) => {
+      cy.wrap(request.body).toMatchSnapshot();
+    });
+  });
+
   it('should be able to create ammatillinen toteutus', () => {
     prepareTest('amm');
 
@@ -399,4 +483,4 @@ describe('createToteutusForm', () => {
       cy.wrap(request.body).toMatchSnapshot();
     });
   });
-});
+};

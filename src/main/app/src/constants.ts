@@ -256,3 +256,7 @@ export const CRUD_ROLES = {
 
 export const HAKEUTUMINEN = 'hakeutuminen';
 export const ILMOITTAUTUMINEN = 'ilmoittautuminen';
+
+export const EPERUSTE_SERVICE_QUERY_OPTIONS = {
+  cacheTime: Infinity,
+};

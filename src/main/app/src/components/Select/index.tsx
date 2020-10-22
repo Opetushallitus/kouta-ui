@@ -15,12 +15,10 @@ import UiSelect, {
 import { memoizeOne } from '#/src/utils/memoize';
 import { useTranslation } from 'react-i18next';
 
-const addTestId = (Component, getTestId) => props => (
-  <Component
+const OptionComponent = props => (
+  <components.Option
     {...props}
-    innerProps={Object.assign({}, props.innerProps, {
-      'data-testid': getTestId(props),
-    })}
+    innerProps={{ ...props.innerProps, role: 'option' }}
   />
 );
 
@@ -34,20 +32,17 @@ const makeDefaultFormatCreateLabel = t => value =>
 
 const makeDefaultPlaceholder = t => t('yleiset.valitseVaihtoehdoista');
 
-const defaultLoadingMessage = () => 'Ladataan...';
+const defaultLoadingMessage = t => () => t('yleiset.ladataan');
 
 const getDefaultProps = memoizeOne(t => ({
   isClearable: true,
   formatCreateLabel: makeDefaultFormatCreateLabel(t),
   noOptionsMessage: makeDefaultNoOptionsMessage(t),
   placeholder: makeDefaultPlaceholder(t),
-  loadingMessage: defaultLoadingMessage,
+  loadingMessage: defaultLoadingMessage(t),
   className: 'Select__',
   components: {
-    Option: addTestId(
-      components.Option,
-      ({ value }) => `react-select-option_${value}`
-    ),
+    Option: OptionComponent,
   },
 }));
 

@@ -7,11 +7,11 @@
     }
   },
   "retries": {
-    "runMode": 2,
+    "runMode": 0,
     "openMode": 0
   },
   "defaultCommandTimeout": 8000,
   "video": false,
   "useRelativeSnapshots": true,
-  "ignoreTestFiles": "**/__snapshots__/*"
+  "testFiles": ["**/*.test.ts"]
 }

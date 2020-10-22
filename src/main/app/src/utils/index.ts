@@ -9,7 +9,14 @@ import {
   isEmptyEditorState,
 } from '#/src/components/Editor/utils';
 
-export const isDev = process.env.NODE_ENV === 'development';
+const { NODE_ENV, REACT_APP_CYPRESS } = process.env;
+
+export const isDev = NODE_ENV === 'development';
+
+export const isNodeEnv = env =>
+  (_.isArray(env) ? env : [env]).includes(NODE_ENV);
+
+export const isCypress = Boolean(REACT_APP_CYPRESS);
 
 export const isValidDate = value => _.isDate(value) && !_.isNaN(value);
 
@@ -156,3 +163,18 @@ export const isDeepEmptyFormValues = value =>
   (_.isObjectLike(value) && _.every(value, isDeepEmptyFormValues));
 
 export const assert = console.assert;
+
+export const oneAndOnlyOne = all => all && all.length === 1 && all[0];
+
+/** Tries to parse a (form) value to a number.
+ * For empty values (null, undefined or empty string) returns null and when conversion to number fails, returns the given value.
+ * This way we can pass a number representation to backend when needed, and give null when the value should be removed,
+ * but fall back to original value when conversion fails, which is less confusing when debugging.
+ */
+export const maybeParseToNumber = value => {
+  if (_.isNil(value) || value === '') {
+    return null;
+  }
+  const numberValue = Number(value);
+  return _.isNaN(numberValue) ? value : numberValue;
+};

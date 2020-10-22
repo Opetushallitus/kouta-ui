@@ -1,6 +1,5 @@
 import React, { useMemo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import _ from 'lodash';
 
 import FormPage, { FormFooter } from '#/src/components/FormPage';
 import getOrganisaatioByOid from '#/src/utils/organisaatio/getOrganisaatioByOid';
@@ -80,16 +79,13 @@ const CreateHakukohdePage = props => {
     watch: [organisaatioOid, toteutusOid, hakuOid].join(','),
   });
 
-  const haku = _.get(data, 'haku');
-  const toteutus = _.get(data, 'toteutus');
+  const haku = data?.haku;
+  const toteutus = data?.toteutus;
 
   const initialValues = useMemo(() => {
     return (
       data &&
-      getInitialValues(
-        _.get(data, 'toteutus.nimi'),
-        _.get(data, 'toteutus.kielivalinta')
-      )
+      getInitialValues(data?.toteutus?.nimi, data?.toteutus?.kielivalinta)
     );
   }, [data]);
 
@@ -150,8 +146,7 @@ const CreateHakukohdePage = props => {
                 toteutus={toteutus}
                 tarjoajat={data.tarjoajat}
                 koulutustyyppi={
-                  _.get(data, 'koulutustyyppi') ||
-                  KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
+                  data?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
                 }
                 showArkistoituTilaOption={false}
               />

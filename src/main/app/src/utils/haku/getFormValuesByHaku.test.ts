@@ -1,7 +1,13 @@
 import { merge } from 'lodash';
 
-import { HAKULOMAKETYYPPI } from '#/src/constants';
-import getFormValuesByHaku from './getFormValuesByHaku';
+import {
+  ALKAMISKAUSITYYPPI,
+  HAKULOMAKETYYPPI,
+  TOTEUTUKSEN_AJANKOHTA,
+} from '#/src/constants';
+import getFormValuesByHaku, {
+  alkamiskausityyppiToToteutuksenAjankohta,
+} from './getFormValuesByHaku';
 
 const baseHaku = {
   tila: 'tallennettu',
@@ -67,4 +73,24 @@ test('getFormValuesByHaku returns correct form values given different hakulomake
 
   expect(valuesMuu).toMatchSnapshot();
   expect(valuesEiHakua).toMatchSnapshot();
+});
+
+test('alkamiskausityyppiToToteutuksenAjankohta', () => {
+  expect(
+    alkamiskausityyppiToToteutuksenAjankohta(
+      ALKAMISKAUSITYYPPI.ALKAMISKAUSI_JA_VUOSI
+    )
+  ).toEqual(TOTEUTUKSEN_AJANKOHTA.ALKAMISKAUSI);
+
+  expect(
+    alkamiskausityyppiToToteutuksenAjankohta(
+      ALKAMISKAUSITYYPPI.TARKKA_ALKAMISAJANKOHTA
+    )
+  ).toEqual(TOTEUTUKSEN_AJANKOHTA.ALKAMISKAUSI);
+
+  expect(
+    alkamiskausityyppiToToteutuksenAjankohta(
+      ALKAMISKAUSITYYPPI.HENKILOKOHTAINEN_SUUNNITELMA
+    )
+  ).toEqual(TOTEUTUKSEN_AJANKOHTA.HENKILOKOHTAINEN_SUUNNITELMA);
 });

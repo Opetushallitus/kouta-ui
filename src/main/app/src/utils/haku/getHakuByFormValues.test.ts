@@ -1,12 +1,17 @@
 import { merge } from 'lodash';
 
-import getHakuByFormValues from '#/src/utils/haku/getHakuByFormValues';
+import getHakuByFormValues, {
+  getAlkamiskausityyppi,
+} from '#/src/utils/haku/getHakuByFormValues';
 
-import { HAKULOMAKETYYPPI } from '#/src/constants';
+import {
+  ALKAMISKAUSITYYPPI,
+  HAKULOMAKETYYPPI,
+  TOTEUTUKSEN_AJANKOHTA,
+} from '#/src/constants';
 
-const baseValues = {
+const baseValues: HakuFormValues = {
   tila: 'tallennettu',
-  muokkaaja: '1.1.1.1',
   nimi: {
     fi: 'Nimi',
     sv: 'Namn',
@@ -35,6 +40,10 @@ const baseValues = {
         paattyy: '2019-09-18T08:44',
       },
     ],
+    toteutuksenAjankohta: 'alkamiskausi',
+    tiedossaTarkkaAjankohta: true,
+    tarkkaAlkaa: '2019-09-16T08:44',
+    tarkkaPaattyy: '2019-09-16T08:44',
     lisaamisenTakaraja: '2019-09-16T08:44',
     muokkauksenTakaraja: '2019-10-16T08:44',
     ajastettuJulkaisu: '2019-11-16T08:44',
@@ -89,4 +98,39 @@ test('getHakuByFormValues returns correct haku given different hakulomake variat
 
   expect(hakuMuu).toMatchSnapshot();
   expect(hakuEiHakua).toMatchSnapshot();
+});
+
+test('getAlkamiskausityyppi', () => {
+  expect(
+    getAlkamiskausityyppi(
+      merge({}, baseValues, {
+        aikataulut: {
+          toteutuksenAjankohta: TOTEUTUKSEN_AJANKOHTA.ALKAMISKAUSI,
+          tiedossaTarkkaAjankohta: true,
+        },
+      })
+    )
+  ).toEqual(ALKAMISKAUSITYYPPI.TARKKA_ALKAMISAJANKOHTA);
+
+  expect(
+    getAlkamiskausityyppi(
+      merge({}, baseValues, {
+        aikataulut: {
+          toteutuksenAjankohta: TOTEUTUKSEN_AJANKOHTA.ALKAMISKAUSI,
+          tiedossaTarkkaAjankohta: false,
+        },
+      })
+    )
+  ).toEqual(ALKAMISKAUSITYYPPI.ALKAMISKAUSI_JA_VUOSI);
+
+  expect(
+    getAlkamiskausityyppi(
+      merge({}, baseValues, {
+        aikataulut: {
+          toteutuksenAjankohta:
+            TOTEUTUKSEN_AJANKOHTA.HENKILOKOHTAINEN_SUUNNITELMA,
+        },
+      })
+    )
+  ).toEqual(ALKAMISKAUSITYYPPI.HENKILOKOHTAINEN_SUUNNITELMA);
 });

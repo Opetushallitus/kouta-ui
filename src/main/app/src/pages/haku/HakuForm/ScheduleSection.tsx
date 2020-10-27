@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 import { Field, FieldArray } from 'redux-form';
 import { useTranslation } from 'react-i18next';
 
@@ -26,11 +25,12 @@ const KausiJaVuosiFields = ({ name }) => {
   const tiedossaTarkkaAjankohta = useFieldValue(
     `${name}.tiedossaTarkkaAjankohta`
   );
+
   return (
     <Spacing>
       <Box flexGrow="1" p={1}>
         <Field
-          name={`${name}.alkamiskausi`}
+          name={`${name}.kausi`}
           component={FormFieldRadioGroup}
           label={t('hakulomake.valitseAlkamiskausi')}
           options={options}
@@ -38,7 +38,7 @@ const KausiJaVuosiFields = ({ name }) => {
       </Box>
       <Box flexGrow="1" p={1}>
         <Field
-          name={`${name}.alkamisvuosi`}
+          name={`${name}.vuosi`}
           component={FormFieldYearSelect}
           placeholder={t('hakulomake.valitseAlkamisvuosi')}
         />
@@ -55,10 +55,10 @@ const KausiJaVuosiFields = ({ name }) => {
         <Box flexGrow="1" p={1}>
           <DateTimeRange
             startProps={{
-              name: `${name}.tarkkaAjankohtaAlkaa`,
+              name: `${name}.tarkkaAlkaa`,
             }}
             endProps={{
-              name: `${name}.tarkkaAjankohtaPaattyy`,
+              name: `${name}.tarkkaPaattyy`,
             }}
           />
         </Box>

@@ -142,7 +142,7 @@ export const HAKULOMAKETYYPPI = {
   HAKUAPP: 'haku-app',
   MUU: 'muu',
   EI_SAHKOISTA_HAKUA: 'ei sähköistä',
-};
+} as Record<any, HakulomakeTyyppi>;
 
 export const VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI =
   'kielitaidonosoittaminen_04';
@@ -267,3 +267,14 @@ export const ILMOITTAUTUMINEN = 'ilmoittautuminen';
 export const EPERUSTE_SERVICE_QUERY_OPTIONS = {
   cacheTime: Infinity,
 };
+
+export enum ALKAMISKAUSITYYPPI {
+  TARKKA_ALKAMISAJANKOHTA = 'tarkka alkamisajankohta',
+  ALKAMISKAUSI_JA_VUOSI = 'alkamiskausi ja -vuosi',
+  HENKILOKOHTAINEN_SUUNNITELMA = 'henkilokohtainen suunnitelma',
+}
+
+export enum TOTEUTUKSEN_AJANKOHTA {
+  ALKAMISKAUSI = 'alkamiskausi',
+  HENKILOKOHTAINEN_SUUNNITELMA = 'aloitusHenkilokohtaisenSuunnitelmanMukaisesti',
+}

@@ -145,7 +145,10 @@ export const validateRelations = specs => (eb, values) => {
 
 export const createOptionalTranslatedFieldConfig = ({
   name,
-  koulutustyypit = undefined,
+  koulutustyypit,
+}: {
+  name: string;
+  koulutustyypit?: typeof KOULUTUSTYYPIT;
 }) => ({
   field: name,
   koulutustyypit,

@@ -6,7 +6,18 @@ import { FormFieldDateTimeInput } from '#/src/components/formFields';
 import Flex, { FlexItem } from '#/src/components/Flex';
 import RemoveButton from '#/src/components/RemoveButton';
 
-export const DateTimeRange = ({ startProps, endProps, onRemove, ...props }) => {
+type DateTimeRangeProps = {
+  startProps?: object;
+  endProps?: object;
+  onRemove?: () => void;
+};
+
+export const DateTimeRange: React.FC<DateTimeRangeProps> = ({
+  startProps = {},
+  endProps = {},
+  onRemove,
+  ...props
+}) => {
   const { t } = useTranslation();
   return (
     <Flex mb={2} alignStart {...props}>

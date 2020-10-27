@@ -172,7 +172,7 @@ export const oneAndOnlyOne = all => all && all.length === 1 && all[0];
  * This way we can pass a number representation to backend when needed, and give null when the value should be removed,
  * but fall back to original value when conversion fails, which is less confusing when debugging.
  */
-export const maybeParseToNumber = value => {
+export const maybeParseNumber = value => {
   if (_.isNil(value) || value === '') {
     return null;
   }

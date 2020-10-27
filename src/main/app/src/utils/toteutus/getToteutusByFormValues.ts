@@ -4,7 +4,7 @@ import {
   isNumeric,
   getKoutaDateString,
   isPartialDate,
-  maybeParseToNumber,
+  maybeParseNumber,
 } from '#/src/utils';
 import serializeSisaltoField from '#/src/utils/form/serializeSisaltoField';
 import { serializeEditorState } from '#/src/components/Editor/utils';
@@ -68,7 +68,7 @@ const getToteutusByFormValues = values => {
         opetuskieliKoodiUrit: values?.jarjestamistiedot?.opetuskieli || [],
         onkoMaksullinen,
         maksunMaara: onkoMaksullinen
-          ? maybeParseToNumber(maksullisuusMaksu)
+          ? maybeParseNumber(maksullisuusMaksu)
           : null,
         opetustapaKoodiUrit: values?.jarjestamistiedot?.opetustapa || [],
         opetusaikaKoodiUrit: values?.jarjestamistiedot?.opetusaika || [],
@@ -99,7 +99,7 @@ const getToteutusByFormValues = values => {
           ? values?.jarjestamistiedot?.koulutuksenAlkamiskausi
           : null,
         koulutuksenAlkamisvuosi: !koulutuksenTarkkaAlkamisaika
-          ? maybeParseToNumber(
+          ? maybeParseNumber(
               values?.jarjestamistiedot?.koulutuksenAlkamisvuosi?.value
             )
           : null,
@@ -109,7 +109,7 @@ const getToteutusByFormValues = values => {
         ),
         stipendinMaara:
           onkoStipendia && isNumeric(values?.jarjestamistiedot?.stipendinMaara)
-            ? maybeParseToNumber(values.jarjestamistiedot.stipendinMaara)
+            ? maybeParseNumber(values.jarjestamistiedot.stipendinMaara)
             : null,
         diplomiKoodiUrit: (values?.jarjestamistiedot?.diplomiTyypit || []).map(
           ({ value }) => value
@@ -135,10 +135,10 @@ const getToteutusByFormValues = values => {
         muuKielivalikoima: (values?.jarjestamistiedot?.muutKielet || []).map(
           ({ value }) => value
         ),
-        suunniteltuKestoVuodet: maybeParseToNumber(
+        suunniteltuKestoVuodet: maybeParseNumber(
           jarjestamistiedot?.suunniteltuKesto?.vuotta
         ),
-        suunniteltuKestoKuukaudet: maybeParseToNumber(
+        suunniteltuKestoKuukaudet: maybeParseNumber(
           jarjestamistiedot?.suunniteltuKesto?.kuukautta
         ),
         suunniteltuKestoKuvaus: pickTranslations(
@@ -189,12 +189,12 @@ const getToteutusByFormValues = values => {
         _.mapValues(serializeEditorState)
       )(values?.kuvaus || {}),
       tyyppi: koulutustyyppi,
-      laajuus: maybeParseToNumber(values?.tiedot?.laajuus),
+      laajuus: maybeParseNumber(values?.tiedot?.laajuus),
       laajuusyksikkoKoodiUri: values?.tiedot?.laajuusyksikko?.value || null,
       ilmoittautumislinkki: pickTranslations(
         values?.tiedot?.ilmoittautumislinkki
       ),
-      aloituspaikat: maybeParseToNumber(values?.tiedot?.aloituspaikat),
+      aloituspaikat: maybeParseNumber(values?.tiedot?.aloituspaikat),
       toteutusjaksot: (values?.toteutusjaksot || []).map(
         ({ nimi, koodi, laajuus, ilmoittautumislinkki, kuvaus, sisalto }) => ({
           nimi: pickTranslations(nimi),

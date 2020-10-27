@@ -1,4 +1,4 @@
-import { cond, flow, get } from 'lodash';
+import _ from 'lodash/fp';
 import { ifAny, otherwise } from '#/src/utils';
 import { HAKULOMAKETYYPPI } from '#/src/constants';
 import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
@@ -12,7 +12,7 @@ import {
   tilaSectionConfig,
 } from '#/src/utils/form/formConfigUtils';
 
-const getHakutapa = values => get(values, 'hakutapa');
+const getHakutapa = values => values?.hakutapa;
 
 const config = createFormConfigBuilder().registerSections([
   kieliversiotSectionConfig,
@@ -97,7 +97,7 @@ const config = createFormConfigBuilder().registerSections([
                 const isErillishaku = isErillishakuHakutapa(hakutapa);
                 const isYhteishaku = isYhteishakuHakutapa(hakutapa);
 
-                return flow([
+                return _.flow([
                   eb => eb.validateExistenceOfDate('alkaa'),
                   eb =>
                     isYhteishaku || isErillishaku
@@ -111,7 +111,7 @@ const config = createFormConfigBuilder().registerSections([
               const isErillishaku = isErillishakuHakutapa(hakutapa);
               const isYhteishaku = isYhteishakuHakutapa(hakutapa);
 
-              return flow([
+              return _.flow([
                 eb => eb.validateExistenceOfDate('alkaa'),
                 eb =>
                   isYhteishaku || isErillishaku
@@ -175,7 +175,7 @@ const config = createFormConfigBuilder().registerSections([
         validate: validateIfJulkaistu(
           (eb, values) =>
             eb.validateExistence('hakulomake.tyyppi') &&
-            cond([
+            _.cond([
               [
                 ifAny(HAKULOMAKETYYPPI.ATARU),
                 () => eb.validateExistence('hakulomake.lomake'),
@@ -189,7 +189,7 @@ const config = createFormConfigBuilder().registerSections([
                   ),
               ],
               [otherwise, () => eb],
-            ])(tyyppi => get(values, 'hakulomake.tyyppi') === tyyppi)
+            ])(tyyppi => values?.hakulomake?.tyyppi === tyyppi)
         ),
       },
       {

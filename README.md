@@ -4,7 +4,8 @@ Uuden koulutustarjonnan käyttöliittymä.
 
 Kouta-UI on luotu create-react-app:lla. Backend, jonka ainoa tehtävä on jakaa käyttöliittymä, on Spring Boot 2.0 -sovellus.
 
-[![Build status](https://travis-ci.org/Opetushallitus/kouta-ui.svg?branch=master)](https://travis-ci.org/Opetushallitus/kouta-ui)
+[![Build Status](https://travis-ci.com/Opetushallitus/kouta-ui.svg?branch=master)](https://travis-ci.com/Opetushallitus/kouta-ui)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/4fd6253f529e45efaba604131e864189)](https://www.codacy.com/gh/Opetushallitus/kouta-ui/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Opetushallitus/kouta-ui&amp;utm_campaign=Badge_Grade)
 
 ## Vaatimukset
 

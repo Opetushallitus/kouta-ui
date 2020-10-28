@@ -305,42 +305,37 @@ const config = createFormConfigBuilder().registerSections([
         name: 'jarjestamistiedot.stipendinKuvaus',
       }),
       {
-        field: '.koulutuksenAlkamispaivaamara',
-        validate: validateIfJulkaistu(eb =>
-          eb.getValue('jarjestamistiedot.koulutuksenTarkkaAlkamisaika')
-            ? eb.validateExistence(
-                'jarjestamistiedot.koulutuksenAlkamispaivamaara'
-              )
-            : eb
-        ),
+        field: '.koulutuksenAlkamispaivamaara',
+        validate: (eb, values) =>
+          validateIf(
+            values?.jarjestamistiedot?.koulutuksenTarkkaAlkamisaika,
+            validateDateTimeRange(
+              'jarjestamistiedot.koulutuksenAlkamispaivamaara',
+              'jarjestamistiedot.koulutuksenPaattymispaivamaara'
+            )
+          )(eb),
+        required: true,
       },
       {
         field: '.koulutuksenPaattymispaivamaara',
         validate: validateIfJulkaistu(eb =>
           eb.getValue('jarjestamistiedot.koulutuksenTarkkaAlkamisaika')
-            ? eb.validateExistence(
-                'jarjestamistiedot.koulutuksenPaattymispaivamaara'
-              )
+            ? eb
+                .validateExistence(
+                  'jarjestamistiedot.koulutuksenAlkamispaivamaara'
+                )
+                .validateExistence(
+                  'jarjestamistiedot.koulutuksenPaattymispaivamaara'
+                )
             : eb
         ),
         required: true,
       },
       {
         field: '.koulutuksenAlkamiskausi',
-        validate: validateIfJulkaistu(eb =>
-          !eb.getValue('jarjestamistiedot.koulutuksenTarkkaAlkamisaika')
-            ? eb.validateExistence('jarjestamistiedot.koulutuksenAlkamiskausi')
-            : eb
-        ),
-        required: true,
       },
       {
         field: '.koulutuksenAlkamisvuosi',
-        validate: validateIfJulkaistu(eb =>
-          !eb.getValue('jarjestamistiedot.koulutuksenTarkkaAlkamisaika')
-            ? eb.validateExistence('jarjestamistiedot.koulutuksenAlkamisvuosi')
-            : eb
-        ),
       },
       {
         fragment: 'diplomi',

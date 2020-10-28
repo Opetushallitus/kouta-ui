@@ -47,7 +47,7 @@ const getToteutusByFormValues = values => {
   const onkoStipendia = values?.jarjestamistiedot?.onkoStipendia === 'kylla';
 
   const koulutuksenTarkkaAlkamisaika =
-    values?.jarjestamistiedot?.koulutuksenTarkkaAlkamisaika || false;
+    values?.jarjestamistiedot?.koulutuksenTarkkaAlkamisaika || null;
 
   return {
     nimi: pickTranslations(values?.tiedot?.nimi || {}),

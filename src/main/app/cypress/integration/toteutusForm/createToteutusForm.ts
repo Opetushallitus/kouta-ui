@@ -16,6 +16,7 @@ import {
   fillTilaSection,
   tallenna,
   fillDateTimeInput,
+  fillYhteyshenkilotFields,
 } from '#/cypress/utils';
 
 import koulutus from '#/cypress/data/koulutus';
@@ -160,14 +161,7 @@ const fillKuvausSection = () => {
 
 const fillYhteystiedotSection = () => {
   getByTestId('yhteyshenkilotSection').within(() => {
-    getByTestId('lisaaYhteyshenkiloButton').click();
-
-    getByTestId('nimi').find('input').pipe(paste('nimi'));
-    getByTestId('titteli').find('input').pipe(paste('titteli'));
-    getByTestId('sahkoposti').find('input').pipe(paste('sähkoposti'));
-    getByTestId('puhelinnumero').find('input').pipe(paste('puhelin'));
-    getByTestId('verkkosivu').find('input').pipe(paste('verkkosivu'));
-
+    fillYhteyshenkilotFields();
     jatka();
   });
 };

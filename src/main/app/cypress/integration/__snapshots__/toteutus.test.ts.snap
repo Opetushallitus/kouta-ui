@@ -103,7 +103,7 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
           "fi": "puhelin"
         },
         "sahkoposti": {
-          "fi": "sähkoposti"
+          "fi": "sähköposti"
         },
         "titteli": {
           "fi": "titteli"
@@ -238,7 +238,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
           "fi": "puhelin"
         },
         "sahkoposti": {
-          "fi": "sähkoposti"
+          "fi": "sähköposti"
         },
         "titteli": {
           "fi": "titteli"
@@ -380,7 +380,7 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
           "fi": "puhelin"
         },
         "sahkoposti": {
-          "fi": "sähkoposti"
+          "fi": "sähköposti"
         },
         "titteli": {
           "fi": "titteli"
@@ -536,7 +536,7 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
           "fi": "puhelin"
         },
         "sahkoposti": {
-          "fi": "sähkoposti"
+          "fi": "sähköposti"
         },
         "titteli": {
           "fi": "titteli"

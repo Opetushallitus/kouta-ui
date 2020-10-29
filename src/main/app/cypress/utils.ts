@@ -101,13 +101,21 @@ export const chooseKieliversiotLanguages = (selectedLanguages = []) => {
 };
 
 export const fillYhteyshenkilotFields = () => {
-  getByTestId('lisaaYhteyshenkiloButton').click({ force: true });
+  cy.findByRole('button', { name: 'yleiset.lisaaYhteyshenkilo' }).click({
+    force: true,
+  });
+  cy.findByRole('textbox', { name: 'yleiset.nimi' }).pipe(paste('nimi'));
+  cy.findByRole('textbox', { name: 'yleiset.titteli' }).pipe(paste('titteli'));
+  cy.findByRole('textbox', { name: 'yleiset.sahkoposti' }).pipe(
+    paste('sähköposti')
+  );
 
-  getByTestId('nimi').find('input').pipe(paste('nimi'));
-  getByTestId('titteli').find('input').pipe(paste('titteli'));
-  getByTestId('sahkoposti').find('input').pipe(paste('sähkoposti'));
-  getByTestId('puhelinnumero').find('input').pipe(paste('puhelin'));
-  getByTestId('verkkosivu').find('input').pipe(paste('verkkosivu'));
+  cy.findByRole('textbox', { name: 'yleiset.puhelinnumero' }).pipe(
+    paste('puhelin')
+  );
+  cy.findByRole('textbox', { name: 'yleiset.verkkosivu' }).pipe(
+    paste('verkkosivu')
+  );
 };
 
 export const stubKayttoOikeusMeRoute = ({ user = {} } = {}) => {

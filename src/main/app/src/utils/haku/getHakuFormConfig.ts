@@ -1,6 +1,10 @@
 import _ from 'lodash/fp';
 import { ifAny, otherwise } from '#/src/utils';
-import { HAKULOMAKETYYPPI } from '#/src/constants';
+import {
+  HAKULOMAKETYYPPI,
+  JULKAISUTILA,
+  TOTEUTUKSEN_AJANKOHTA,
+} from '#/src/constants';
 import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
 import isErillishakuHakutapa from '#/src/utils/isErillishakuHakutapa';
 import createFormConfigBuilder from '#/src/utils/form/createFormConfigBuilder';
@@ -10,7 +14,12 @@ import {
   kieliversiotSectionConfig,
   pohjaValintaSectionConfig,
   tilaSectionConfig,
+  validateIf,
 } from '#/src/utils/form/formConfigUtils';
+import {
+  validateExistence,
+  validateExistenceOfDate,
+} from '#/src/utils/form/createErrorBuilder';
 
 const getHakutapa = values => values?.hakutapa;
 
@@ -46,7 +55,7 @@ const config = createFormConfigBuilder().registerSections([
       {
         field: 'hakutapa',
         required: true,
-        validate: validateIfJulkaistu(eb => eb.validateExistence('hakutapa')),
+        validate: validateIfJulkaistu(validateExistence('hakutapa')),
       },
     ],
   },
@@ -61,27 +70,43 @@ const config = createFormConfigBuilder().registerSections([
         field: '.toteutuksenAjankohta',
       },
       {
-        field: '.alkamiskausi',
-        required: true,
-        validate: validateIfJulkaistu(eb =>
-          eb.validateExistence('aikataulut.alkamiskausi')
-        ),
+        field: '.kausi',
+        required: values => isYhteishakuHakutapa(getHakutapa(values)),
       },
       {
-        field: '.alkamisvuosi',
-        validate: validateIfJulkaistu(eb =>
-          eb.validateExistence('aikataulut.alkamisvuosi')
-        ),
+        field: '.vuosi',
+        validate: (eb, values) =>
+          validateIf(
+            isYhteishakuHakutapa(getHakutapa(values)) &&
+              values?.aikataulut?.toteutuksenAjankohta ===
+                TOTEUTUKSEN_AJANKOHTA.ALKAMISKAUSI &&
+              values?.tila === JULKAISUTILA.JULKAISTU,
+            _.pipe(
+              validateExistence('aikataulut.kausi'),
+              validateExistence('aikataulut.vuosi')
+            )
+          )(eb),
       },
       {
         field: '.tiedossaTarkkaAjankohta',
       },
       {
-        field: '.tarkkaAjankohtaAlkaa',
+        field: '.tarkkaAlkaa',
         required: true,
+        validate: (eb, values) =>
+          validateIf(
+            values?.aikataulut?.toteutuksenAjankohta ===
+              TOTEUTUKSEN_AJANKOHTA.ALKAMISKAUSI &&
+              values?.aikataulut?.tiedossaTarkkaAjankohta &&
+              values?.tila === JULKAISUTILA.JULKAISTU,
+            _.pipe(
+              validateExistenceOfDate('aikataulut.tarkkaAlkaa'),
+              validateExistenceOfDate('aikataulut.tarkkaPaattyy')
+            )
+          )(eb),
       },
       {
-        field: '.tarkkaAjankohtaPaattyy',
+        field: '.tarkkaPaattyy',
         required: true,
       },
       {
@@ -136,24 +161,6 @@ const config = createFormConfigBuilder().registerSections([
       },
       {
         field: '.aikataulu',
-      },
-      {
-        field: '.kausi',
-        validate: validateIfJulkaistu((eb, values) => {
-          const hakutapa = getHakutapa(values);
-          const isYhteishaku = isYhteishakuHakutapa(hakutapa);
-
-          return isYhteishaku
-            ? eb
-                .validateExistence('aikataulut.kausi')
-                .validateExistence('aikataulut.vuosi')
-            : eb;
-        }),
-        required: values => isYhteishakuHakutapa(getHakutapa(values)),
-      },
-      {
-        field: '.vuosi',
-        required: values => isYhteishakuHakutapa(getHakutapa(values)),
       },
       {
         field: '.lisaamisenTakaraja',

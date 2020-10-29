@@ -9,5 +9,5 @@
     "moduleResolution": "node",
     "types": ["cypress", "cypress-plugin-snapshots", "@types/testing-library__cypress"]
   },
-  "include": ["**/*.ts", "**/*.js"]
+  "include": ["**/*.ts", "**/*.js", "../src/constants.ts"]
 }

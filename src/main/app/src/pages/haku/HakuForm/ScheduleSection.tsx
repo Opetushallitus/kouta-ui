@@ -17,6 +17,7 @@ import {
 import Spacing from '#/src/components/Spacing';
 import { useFieldValue } from '#/src/hooks/form';
 import { createStyledRadioSection } from '#/src/components/createStyledRadioSection';
+import { TOTEUTUKSEN_AJANKOHTA } from '#/src/constants';
 
 const KausiJaVuosiFields = ({ name }) => {
   const { options } = useKoodistoOptions({ koodisto: 'kausi' });
@@ -27,7 +28,7 @@ const KausiJaVuosiFields = ({ name }) => {
   );
 
   return (
-    <Spacing>
+    <Spacing {...getTestIdProps('KausiJaVuosiFields')}>
       <Box flexGrow="1" p={1}>
         <Field
           name={`${name}.kausi`}
@@ -70,12 +71,12 @@ const KausiJaVuosiFields = ({ name }) => {
 const ToteutuksenAjankohtaFields = createStyledRadioSection([
   {
     label: t => t('hakulomake.alkamiskausi'),
-    value: 'alkamiskausi',
+    value: TOTEUTUKSEN_AJANKOHTA.ALKAMISKAUSI,
     FieldsComponent: KausiJaVuosiFields,
   },
   {
     label: t => t('hakulomake.aloitusHenkilokohtaisenSuunnitelmanMukaisesti'),
-    value: 'aloitusHenkilokohtaisenSuunnitelmanMukaisesti',
+    value: TOTEUTUKSEN_AJANKOHTA.HENKILOKOHTAINEN_SUUNNITELMA,
   },
 ]);
 

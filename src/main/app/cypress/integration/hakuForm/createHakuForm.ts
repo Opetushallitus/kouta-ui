@@ -87,14 +87,25 @@ const fillAikatauluSection = () => {
       });
     });
 
-    getByTestId('alkamiskausi').within(() => {
+    cy.findByText('hakulomake.alkamiskausi').click();
+
+    getByTestId('KausiJaVuosiFields').within(() => {
       getRadio('kausi_0#1').click({ force: true });
+      selectOption(new Date().getFullYear().toString());
 
-      getByTestId('vuosi').click();
+      cy.findByText('hakulomake.tiedossaTarkkaAjankohta').click();
 
-      getByTestId('vuosi').within(() => {
-        getSelectOption(new Date().getFullYear().toString()).click({
-          force: true,
+      getByTestId('alkaa').within(() => {
+        fillDateTimeInput({
+          date: '1.11.2020',
+          time: '00:00',
+        });
+      });
+
+      getByTestId('paattyy').within(() => {
+        fillDateTimeInput({
+          date: '30.11.2020',
+          time: '00:00',
         });
       });
     });

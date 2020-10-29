@@ -111,37 +111,22 @@ const config = createFormConfigBuilder().registerSections([
       },
       {
         field: '.hakuaika',
-        validate: validateIfJulkaistu(
-          (errorBuilder, values) =>
-            errorBuilder
-              .validateArrayMinLength('aikataulut.hakuaika', 1, {
-                isFieldArray: true,
-              })
-              .validateArray('aikataulut.hakuaika', eb => {
-                const hakutapa = getHakutapa(values);
-                const isErillishaku = isErillishakuHakutapa(hakutapa);
-                const isYhteishaku = isYhteishakuHakutapa(hakutapa);
-
-                return _.flow([
-                  eb => eb.validateExistenceOfDate('alkaa'),
-                  eb =>
-                    isYhteishaku || isErillishaku
-                      ? eb.validateExistenceOfDate('paattyy')
-                      : eb,
-                ])(eb);
-              }),
-          (errorBuilder, values) =>
-            errorBuilder.validateArray('aikataulut.hakuaika', eb => {
+        validate: validateIfJulkaistu((errorBuilder, values) =>
+          errorBuilder
+            .validateArrayMinLength('aikataulut.hakuaika', 1, {
+              isFieldArray: true,
+            })
+            .validateArray('aikataulut.hakuaika', eb => {
               const hakutapa = getHakutapa(values);
               const isErillishaku = isErillishakuHakutapa(hakutapa);
               const isYhteishaku = isYhteishakuHakutapa(hakutapa);
 
               return _.flow([
-                eb => eb.validateExistenceOfDate('alkaa'),
-                eb =>
-                  isYhteishaku || isErillishaku
-                    ? eb.validateExistenceOfDate('paattyy')
-                    : eb,
+                validateExistenceOfDate('alkaa'),
+                validateIf(
+                  isYhteishaku || isErillishaku,
+                  validateExistenceOfDate('paattyy')
+                ),
               ])(eb);
             })
         ),

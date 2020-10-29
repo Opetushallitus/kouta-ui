@@ -13,9 +13,9 @@ import useApiAsync from '#/src/hooks/useApiAsync';
 import useLanguage from '#/src/hooks/useLanguage';
 
 const getCopyOptions = (entities, language) => {
-  return entities.map(({ nimi, oid, id }) => ({
+  return entities.map(({ nimi, oid, id, tila }) => ({
     value: oid || id,
-    label: getFirstLanguageValue(nimi, language),
+    label: getFirstLanguageValue(nimi, language) + ` (${tila})`,
   }));
 };
 

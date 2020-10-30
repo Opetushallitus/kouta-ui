@@ -126,8 +126,10 @@ const JarjestyspaikkaSection = ({
           value: org?.oid,
           label: getFirstLanguageValue(org?.nimi, language),
           disabled:
-            // Select intersection of organisaatio branches from selected organisaatio and tarjoajat
-            !_.some(tarjoaja => _.includes(tarjoaja, org?.parentOidPath))(
+            // Disabled when none of tarjoajat is found up in the organization's
+            // hierarchy including organization itself  or when user has no
+            // update rights for the organization.
+            _.every(tarjoaja => !_.includes(tarjoaja, org?.parentOidPath))(
               tarjoajat
             ) || !getCanUpdate(org),
         })),

@@ -16,7 +16,7 @@ import { useFieldValue } from '#/src/hooks/form';
 const getValintaperusteetOptions = (valintaperusteet, language) =>
   valintaperusteet.map(({ nimi, id, tila }) => ({
     value: id,
-    label: getFirstLanguageValue(nimi, language),
+    label: getFirstLanguageValue(nimi, language) + ` (${tila})`,
   }));
 
 const KuvausSection = ({ haku, organisaatioOid, name, languages }) => {

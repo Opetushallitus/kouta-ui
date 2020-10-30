@@ -53,11 +53,11 @@ const stepIsDone = (step, activeStep) => {
   return stepIndex < activeStepIndex;
 };
 
-const FormSteps = ({ activeStep = KOULUTUS, ...props }) => {
+const FormSteps = ({ activeStep = KOULUTUS }) => {
   const { t } = useTranslation();
 
   return (
-    <Wrapper {...props}>
+    <Wrapper>
       <GroupContainer>
         <StepsIcon
           icon={ICONS[KOULUTUS]}

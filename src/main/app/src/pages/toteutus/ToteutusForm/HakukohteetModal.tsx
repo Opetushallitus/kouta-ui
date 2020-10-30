@@ -12,9 +12,9 @@ import { FormFieldSelect } from '#/src/components/formFields';
 import { useFieldValue } from '#/src/hooks/form';
 
 const getOptions = items => {
-  return items.map(({ nimi, oid }) => ({
+  return items.map(({ nimi, oid, tila }) => ({
     value: oid,
-    label: getFirstLanguageValue(nimi),
+    label: getFirstLanguageValue(nimi) + ` (${tila})`,
   }));
 };
 

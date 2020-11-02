@@ -16,6 +16,7 @@ import getValintaperusteFormConfig from '#/src/utils/valintaperuste/getValintape
 import getSoraKuvausFormConfig from '#/src/utils/soraKuvaus/getSoraKuvausFormConfig';
 import getOppilaitosFormConfig from '#/src/utils/oppilaitos/getOppilaitosFormConfig';
 import getOppilaitoksenOsaFormConfig from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaFormConfig';
+import { getKielivalinta } from '#/src/utils/form/formConfigUtils';
 
 export const useFormName = () => useContext(FormNameContext);
 
@@ -90,4 +91,9 @@ export const useFormConfig = () => {
       ...(contextConfig || {}),
     };
   }, [contextConfig]);
+};
+
+export const useSelectedLanguages = () => {
+  const formName = useFormName();
+  return useSelector(state => getKielivalinta(state?.form?.[formName]?.values));
 };

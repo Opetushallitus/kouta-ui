@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
-import _ from 'lodash';
+import { useEffect, useState } from 'react';
+import _ from 'lodash/fp';
 import useKoodi from '#/src/hooks/useKoodi';
 import {
   useBoundFormActions,
   useIsDirty,
   useFieldValue,
+  useSelectedLanguages,
 } from '#/src/hooks/form';
 import { useHasChanged } from '#/src/hooks/useHasChanged';
 
@@ -13,6 +14,7 @@ export const useLocalizedKoulutus = ({
   nimiFieldName,
   language,
 }) => {
+  const languages = useSelectedLanguages();
   const koulutusValue = useFieldValue(koulutusFieldName);
   const koulutusKoodi = useKoodi(koulutusValue?.value);
   const koodi = koulutusKoodi?.koodi;
@@ -25,8 +27,8 @@ export const useLocalizedKoulutus = ({
     if (koodi && isDirty) {
       const { metadata } = koodi;
       const localizedNimi = _.find(
-        metadata,
-        ({ kieli }) => _.toLower(kieli) === language
+        ({ kieli }) => _.toLower(kieli) === language,
+        metadata
       )?.nimi;
 
       if (localizedNimi) {
@@ -36,20 +38,36 @@ export const useLocalizedKoulutus = ({
   }, [language, koodi, koulutusFieldName, isDirty, change]);
 
   const koulutusHasChanged = useHasChanged(koulutusValue);
+  const [nimiShouldUpdate, setNimiShouldUpdate] = useState(false);
+
+  useEffect(() => {
+    if (koulutusHasChanged) {
+      setNimiShouldUpdate(true);
+    }
+  }, [koulutusHasChanged]);
 
   // When koulutus field has changed to a defined value and got its 'koodi'
   // change the language versioned 'nimi' fields accordingly
   // if the form is dirty (don't override initial values)
   useEffect(() => {
-    if (nimiFieldName && koulutusHasChanged && isDirty) {
-      if (koodi) {
-        _.each(koodi?.metadata, ({ kieli, nimi }) => {
-          const lang = _.toLower(kieli);
-          change(`${nimiFieldName}.${lang}`, nimi);
-        });
-      } else {
-        change(nimiFieldName, {});
-      }
+    if (nimiFieldName && nimiShouldUpdate && isDirty) {
+      const newNimiFieldValue = {};
+      _.each(({ kieli, nimi }) => {
+        const lang = _.toLower(kieli);
+        if (languages.includes(lang)) {
+          newNimiFieldValue[lang] = nimi;
+        }
+      }, koodi?.metadata);
+      change(nimiFieldName, newNimiFieldValue);
+      setNimiShouldUpdate(false);
     }
-  }, [change, nimiFieldName, koodi, language, koulutusHasChanged, isDirty]);
+  }, [
+    change,
+    nimiFieldName,
+    koodi,
+    language,
+    isDirty,
+    languages,
+    nimiShouldUpdate,
+  ]);
 };

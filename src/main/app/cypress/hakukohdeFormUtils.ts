@@ -49,7 +49,9 @@ export const fillJarjestyspaikkaSection = ({ jatka: jatkaProp = true }) => {
     });
 
     cy.findByText(selectedToimipisteNimi).click();
-    jatkaProp && jatka();
+    if (jatkaProp) {
+      jatka();
+    }
   });
 };
 

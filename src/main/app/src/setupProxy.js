@@ -3,12 +3,9 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const {
   DEV_VIRKAILIJA_URL,
-  REACT_APP_DEV_SERVER_URL,
   DISABLE_LOCAL_PROXY,
   KOUTA_BACKEND_URL,
 } = process.env;
-
-const devServerURL = new URL(REACT_APP_DEV_SERVER_URL);
 
 const createKoutaProxyMiddleware = targetUrl =>
   createProxyMiddleware({
@@ -20,7 +17,6 @@ const createKoutaProxyMiddleware = targetUrl =>
     cookieDomainRewrite: 'localhost',
     secure: false,
     target: targetUrl,
-    debug: true,
   });
 
 const devProxyMiddleware = createKoutaProxyMiddleware(DEV_VIRKAILIJA_URL);

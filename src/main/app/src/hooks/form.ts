@@ -74,7 +74,7 @@ export const getFormConfigByEntity = (entityName, koulutustyyppi) => {
   return formConfigsGettersByEntity[entityName](koulutustyyppi);
 };
 
-export const useEntityFormConfig = (entityName, koulutustyyppi) => {
+export const useEntityFormConfig = (entityName, koulutustyyppi = undefined) => {
   return useMemo(() => getFormConfigByEntity(entityName, koulutustyyppi), [
     entityName,
     koulutustyyppi,

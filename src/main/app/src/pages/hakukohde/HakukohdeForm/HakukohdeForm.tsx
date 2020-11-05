@@ -95,7 +95,7 @@ const HakukohdeForm = ({
         tarjoajat={tarjoajat}
         opetustapaKoodiUrit={opetustapaKoodiUrit}
         Component={JarjestyspaikkaSection}
-        organisaatioOid={organisaatioOid}
+        toteutusOrganisaatioOid={toteutus?.organisaatioOid}
       />
 
       <FormCollapse

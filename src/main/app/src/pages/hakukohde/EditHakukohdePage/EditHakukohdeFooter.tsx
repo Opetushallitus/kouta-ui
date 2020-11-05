@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import { queryCache } from 'react-query';
 
 import { useSaveHakukohde } from '#/src/hooks/formSaveHooks';
 import getHakukohdeByFormValues from '#/src/utils/hakukohde/getHakukohdeByFormValues';
@@ -9,8 +9,6 @@ import { FormFooter } from '#/src/components/FormPage';
 import { useFormName } from '#/src/hooks/form';
 
 const EditHakukohdeFooter = ({ hakukohde, haku, toteutus, canUpdate }) => {
-  const history = useHistory();
-
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
       await updateHakukohde({
@@ -22,13 +20,9 @@ const EditHakukohdeFooter = ({ hakukohde, haku, toteutus, canUpdate }) => {
         },
       });
 
-      history.replace({
-        state: {
-          hakukohdeUpdatedAt: Date.now(),
-        },
-      });
+      queryCache.invalidateQueries('hakukohde');
     },
-    [hakukohde, history]
+    [hakukohde]
   );
 
   const formName = useFormName();

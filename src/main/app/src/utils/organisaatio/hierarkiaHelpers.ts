@@ -26,3 +26,8 @@ export const filterByName = (hierarkia, name, language) => {
     return [];
   });
 };
+
+export const flattenHierarkia = _.flatMap(org => [
+  org,
+  ...flattenHierarkia(org?.children ?? []),
+]);

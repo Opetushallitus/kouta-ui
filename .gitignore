@@ -34,3 +34,6 @@ package-lock.json
 
 src/main/app/*.png
 .vscode
+
+cert.pem
+key.pem

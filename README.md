@@ -2,26 +2,10 @@
 
 Uuden koulutustarjonnan käyttöliittymä.
 
-Kouta-UI on luotu create-react-app:lla. Backend, jonka ainoa tehtävä on jakaa käyttöliittymä, on Spring Boot 2.0 -sovellus.
+Kouta-UI on luotu create-react-app:lla, ja se on kääritty Spring Boot 2.0 -sovellukseen, jonka ainoa tehtävä on jakaa käyttöliittymä.
 
 [![Build Status](https://travis-ci.com/Opetushallitus/kouta-ui.svg?branch=master)](https://travis-ci.com/Opetushallitus/kouta-ui)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/4fd6253f529e45efaba604131e864189)](https://www.codacy.com/gh/Opetushallitus/kouta-ui/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Opetushallitus/kouta-ui&amp;utm_campaign=Badge_Grade)
-
-## Vaatimukset
-
-Lokaalia ajoa varten Kouta-backendin pitää vastata osoitteessa:
-
-http://localhost:8099
-
-ja ympäristömuuttuja `REACT_APP_KOUTA_BACKEND_URL` täytyy asettaa (esimerkiksi `.env`-tiedostossa) yllä olevaan arvoon.
-
-Jos projektia halutaan ajaa pilviympäristöä vasten, tiedostoon `koutaui-dev.yml` pitää vaihtaa `host-virkailija` 
-osoittamaan oikeaan ympäristöön. Lisäksi CORSin pystyy kiertämään käynnistämällä Chrome (macissa) komennolla:
-
-`open -a Google\ Chrome --args --disable-web-security --user-data-dir=/tmp/moi`
-
-Kannattaa halutessaan laittaa user-data-dir osoittamaan sopivampaan paikkaan. Jos se on /tmp-hakemistossa, 
-esim. selaimen laajennokset häviävät.
 
 ## Käyttöliittymän kehittäminen
 
@@ -29,15 +13,58 @@ Kehityksen aikana käyttöliittymää kannattaa ajaa pelkästään nodella, joll
 
 `cd src/main/app`
 
-`npm start`
+`npm run start`
 
 Hetken kuluttua käyttöliittymä on käytettävissä osoitteessa (selainta ei avata automaattisesti):
 
 https://localhost:3000
 
-**Huom! HTTPS-protokolla käytössä.** Webpack-dev-serverin proxy on konfiguroitu oletuksena ohjaamaan kaikki muut polut paitsi `/`, `/kouta` ja `/kouta/*` osoitteeseen `https://virkailija.hahtuvaopintopolku.fi`. Tällöin CORS-rajoituksia ei tarvitse kiertää selaimessa. Virkailija-osoitetta, johon proxytaan voi vaihtaa asettamalla ympäristömuuttujan `DEV_VIRKAILIJA_URL` eri arvoon (esim. `.env.local`-tiedostossa).
+**Huom! HTTPS-protokolla käytössä.** Webpack-dev-serverin proxy on konfiguroitu oletuksena ohjaamaan kaikki muut polut paitsi `/`, `/kouta` ja `/kouta/*` osoitteeseen `https://virkailija.hahtuvaopintopolku.fi`. Käytetään oletuksena self-signed-sertifikaatteja, eikä CORS-rajoituksia ei tarvitse kiertää selaimessa. Kehitysympäristön virkailija-osoitetta, johon proxytaan voi vaihtaa asettamalla ympäristömuuttujan `DEV_VIRKAILIJA_URL` eri arvoon (esim. `.env.local`-tiedostossa).
 
-## Buildaus ja käynnistys
+## Ajaminen lokaalisti kouta-backendin kanssa
+
+Aiemmin lokaalia kehitystä varten on laitettu kouta-ui osoittamaan suoraan lokaaliin kouta-backendin lokaaliin osoitteeseen (eri portti), mutta selainten tietoturvakäytäntöjen kiristyessä tästä on tullut melko hankalaa. Chromen voi edelleen käynnistää `--disable-web-security`-optiolla, mutta sille on pakko antaa eri profiilihakemisto `--user-data-dir`-optiolla. Selaimen käynnistäminen ilman tietoturvaominaisuuksia tekee siitä erittäin haavoittuvaisen, jos sillä käynnistettyä selainta käytetään mihinkään muiden kuin lokaalien sivujen avaamiseen. Lisäksi `--user-data-dir`-optiolla täytyy antaa joka kerta tyhjä profiili tai `--disable-web-security`-optiolla ei ole mitään vaikutusta. On melko hankalaa, jos kehitystyössä käytettävät selainpluginit pitää asentaa joka kerta uudestaan. 
+
+Jotta [kouta-backend](https://github.com/Opetushallitus/kouta-backend/) voisi kutsua kouta-ui:n lokaalin proxyn osoitteita, täytyy lokaalin proxyn sertifikaattien olla luotettuja kouta-backendin mielestä. Tähän voi käyttää esim. `mkcert`-työkalua, joka luo lokaalisti luotetun CA:n.
+
+Asenna mkcert. Esim MacOS:ssä löytyy brew:lla:
+
+`brew install mkcert`
+
+Luo sertifikaatit ajamalla seuraavat komennot projektin juurihakemistossa:
+
+    mkdir -p .cert
+    mkcert -key-file ./.cert/key.pem -cert-file ./.cert/cert.pem "localhost"
+
+Aseta create-react-app:n ympäristömuuttujat osoittamaan luotuihin sertifikaatteihin (esim. `.env.local`-tiedostossa):
+
+    SSL_CRT_FILE=./.cert/cert.pem
+    SSL_KEY_FILE=./.cert/key.pem
+
+Varmista, että JAVA_HOME osoittaa kouta-backendin kehitysympäristön Javan kotihakemistoon, ja aja seuraava komento (luo lokaalin CA:n ja lisää sen järjestelmän lokaaleihin storeihin):
+
+`mkcert -install`
+
+Käynnistä Idea (ja käyttämästi selain) uudelleen, jotta ne ottavat käyttöön lokaalin CA:n. 
+
+Korvaa kouta-backendissä dev-vars.yml-tiedostoon: 
+
+    cas_url: https://localhost:3000/cas
+    kouta_backend_cas_service: https://localhost:3000/kouta-backend/auth/login
+
+Aseta kouta-ui:ssa ympäristömuuttuja (esim. `.env.local`-tiedostossa): 
+
+`KOUTA_BACKEND_URL=http://localhost:8099`
+
+Käynnistä kouta-ui lokaalisti komennolla: 
+
+`npm run start`
+
+Käynnistä VPN ja aseta reititykset/tunnelointi, jotta kouta-backend saa yhteyden käyttöoikeus-servicen `userDetails`-rajapintaan. 
+
+Ilman kouta-indeksoijan ajamista lokaalisti etusivun listat eivät toimi, mutta luominen ja muokaaminen lomakkeiden avulla onnistuu.
+
+## Buildaus ja käynnistys (Spring Boot -sovellus)
 
 Projektin saa buildattua komennolla:
 
@@ -55,6 +82,11 @@ Sovellus aukeaa osoitteeseen:
 
 http://localhost:8080
 
+Jos projektia halutaan ajaa pilviympäristöä vasten, tiedostoon `koutaui-dev.yml` pitää vaihtaa `host-virkailija` 
+osoittamaan oikeaan ympäristöön. Lisäksi CORSin pystyy kiertämään käynnistämällä Chrome (macissa) komennolla:
+
+`open -a Google\ Chrome --args --disable-web-security --user-data-dir=/tmp/moi`
+
 ## Testit
 
 Yksikkötestit löytyvät testattavan moduulin `*.test.jsx?` (esim. `components/Input/Input.test.jsx`) tiedostosta, tai sen `__tests__` kansiosta. Integraatiotestit löytyvät `cypress/integration` kansiosta.
@@ -67,7 +99,7 @@ On hauska katsoa ja korjata cypress testia interaktiivisti Cypress TestRunnerill
 
     cd src/main/app
     npm start
-    
+
 Ja sitten samassa kansiossa, mutta toisessa shellissa: 
 
     npx cypress open
@@ -79,4 +111,3 @@ Ja sitten samassa kansiossa, mutta toisessa shellissa:
 ## Lokalisaatio
 
 Lokalisointiin käytetään [react-i18next](https://github.com/i18next/react-i18next) kirjastoa, joka puolestaa käyttää [i18next](https://www.i18next.com/) kirjastoa. React-komponenttien sisällä käytössä on [useTranslation](https://react.i18next.com/latest/usetranslation-hook)-hook. Käännökset haetaan lokalisaatio-service:ltä `kouta`-kategoriasta. Suomenkieliset käännökset on määritelty [translations/fi.js](https://github.com/Opetushallitus/kouta-ui/blob/master/src/main/app/src/translations/fi.js)-tiedostossa. Käännöksissä käytetään ensisijaisesti lokalisaatio-service:n tarjoamia käännöksiä. Uusien käännöksien lisäämisen kannattaa aloittaa lisäämällä suomenkielinen käännös `translations/fi.js`-tiedostoon.
-

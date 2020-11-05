@@ -20,7 +20,8 @@ export const isCypress = Boolean(REACT_APP_CYPRESS);
 
 export const isValidDate = value => _.isDate(value) && !_.isNaN(value);
 
-export const isPartialDate = dateString => {
+export const isPartialDate = date => {
+  const dateString = _.isDate(date) ? getKoutaDateString(date) : null;
   if (dateString) {
     const [date] = dateString.split('T');
     return date === 'NaN-NaN-NaN';

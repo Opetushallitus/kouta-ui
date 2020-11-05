@@ -32,6 +32,7 @@ const DatePickerInput = ({
   dayPickerProps = {},
   disabled,
   value,
+  onChange,
   ...props
 }) => {
   const { t } = useTranslation();
@@ -45,7 +46,10 @@ const DatePickerInput = ({
         ...dayPickerProps,
       }}
       {...props}
-      value={isValid(value) ? value : undefined}
+      value={isValid(value) ? value : ''}
+      onChange={e => {
+        onChange(isValid(e) ? e : null);
+      }}
       inputProps={{ ...(props?.inputProps ?? {}), disabled }}
     />
   );

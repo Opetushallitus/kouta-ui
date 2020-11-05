@@ -48,7 +48,7 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
       "koulutuksenAlkamispaivamaara": null,
       "koulutuksenAlkamisvuosi": 2020,
       "koulutuksenPaattymispaivamaara": null,
-      "koulutuksenTarkkaAlkamisaika": false,
+      "koulutuksenTarkkaAlkamisaika": null,
       "lisatiedot": [
         {
           "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
@@ -173,7 +173,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
       "koulutuksenAlkamispaivamaara": null,
       "koulutuksenAlkamisvuosi": 2020,
       "koulutuksenPaattymispaivamaara": null,
-      "koulutuksenTarkkaAlkamisaika": false,
+      "koulutuksenTarkkaAlkamisaika": null,
       "lisatiedot": [
         {
           "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
@@ -323,7 +323,7 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
       "koulutuksenAlkamispaivamaara": null,
       "koulutuksenAlkamisvuosi": 2020,
       "koulutuksenPaattymispaivamaara": null,
-      "koulutuksenTarkkaAlkamisaika": false,
+      "koulutuksenTarkkaAlkamisaika": null,
       "lisatiedot": [
         {
           "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
@@ -477,7 +477,7 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
       "koulutuksenAlkamispaivamaara": null,
       "koulutuksenAlkamisvuosi": 2020,
       "koulutuksenPaattymispaivamaara": null,
-      "koulutuksenTarkkaAlkamisaika": false,
+      "koulutuksenTarkkaAlkamisaika": null,
       "lisatiedot": [
         {
           "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
@@ -608,7 +608,7 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
       "koulutuksenAlkamispaivamaara": null,
       "koulutuksenAlkamisvuosi": 2020,
       "koulutuksenPaattymispaivamaara": null,
-      "koulutuksenTarkkaAlkamisaika": false,
+      "koulutuksenTarkkaAlkamisaika": null,
       "lisatiedot": [
         {
           "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
@@ -764,7 +764,7 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
       "koulutuksenAlkamispaivamaara": null,
       "koulutuksenAlkamisvuosi": 2020,
       "koulutuksenPaattymispaivamaara": null,
-      "koulutuksenTarkkaAlkamisaika": false,
+      "koulutuksenTarkkaAlkamisaika": null,
       "lisatiedot": [
         {
           "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
@@ -924,7 +924,7 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
       "koulutuksenAlkamispaivamaara": null,
       "koulutuksenAlkamisvuosi": 2020,
       "koulutuksenPaattymispaivamaara": null,
-      "koulutuksenTarkkaAlkamisaika": false,
+      "koulutuksenTarkkaAlkamisaika": null,
       "lisatiedot": [
         {
           "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
@@ -1059,7 +1059,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
       "koulutuksenAlkamispaivamaara": null,
       "koulutuksenAlkamisvuosi": 2020,
       "koulutuksenPaattymispaivamaara": null,
-      "koulutuksenTarkkaAlkamisaika": false,
+      "koulutuksenTarkkaAlkamisaika": null,
       "lisatiedot": [
         {
           "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",

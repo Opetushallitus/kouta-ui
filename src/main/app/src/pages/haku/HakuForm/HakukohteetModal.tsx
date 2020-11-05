@@ -13,9 +13,9 @@ import { FormFieldSelect } from '#/src/components/formFields';
 import { useFieldValue } from '#/src/hooks/form';
 
 const getToteutusOptions = toteutukset => {
-  return toteutukset.map(({ nimi, oid }) => ({
+  return toteutukset.map(({ nimi, oid, tila }) => ({
     value: oid,
-    label: getFirstLanguageValue(nimi),
+    label: getFirstLanguageValue(nimi) + ` (${tila})`,
   }));
 };
 

@@ -26,9 +26,9 @@ const useOptions = data => {
     () =>
       _.isArray(data)
         ? _.pipe(
-            _.map(({ nimi, oid }) => ({
+            _.map(({ nimi, oid, tila }) => ({
               value: oid,
-              label: getFirstLanguageValue(nimi, language),
+              label: getFirstLanguageValue(nimi, language) + ` (${tila})`,
             })),
             _.orderBy('label', 'asc')
           )(data)

@@ -33,9 +33,9 @@ const KoulutusModal = ({ onClose, organisaatioOid, open }) => {
     () =>
       isArray(data)
         ? sortBy(
-            data.map(({ nimi, oid }) => ({
+            data.map(({ nimi, oid, tila }) => ({
               value: oid,
-              label: getFirstLanguageValue(nimi, language),
+              label: getFirstLanguageValue(nimi, language) + ` (${tila})`,
             })),
             ({ label }) => label
           )

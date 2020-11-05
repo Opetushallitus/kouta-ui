@@ -99,7 +99,17 @@ const Wrapper = styled.div`
     `}
 `;
 
-const FormPage = ({
+type FormPageProps = {
+  header?: React.ReactNode;
+  steps?: React.ReactNode;
+  footer?: React.ReactNode;
+  draftUrl?: string;
+  toggleDraft?: React.ReactNode;
+  hasFooterHomeLink?: boolean;
+  readOnly?: boolean;
+};
+
+const FormPage: React.FC<FormPageProps> = ({
   header = null,
   steps = null,
   children = null,

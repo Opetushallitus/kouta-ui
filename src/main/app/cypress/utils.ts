@@ -280,7 +280,9 @@ export const fillKieliversiotSection = (
 ) => {
   getByTestId('kieliversiotSection').within(() => {
     chooseKieliversiotLanguages(['fi']);
-    pressJatka && jatka();
+    if (pressJatka) {
+      jatka();
+    }
   });
 };
 

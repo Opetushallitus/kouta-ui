@@ -1,13 +1,9 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { KOULUTUSTYYPPI, ENTITY, CRUD_ROLES } from '#/src/constants';
-import getKoulutustyyppiByKoulutusOid from '#/src/utils/koulutus/getKoulutustyyppiByKoulutusOid';
-import getHakukohdeByOid from '#/src/utils/hakukohde/getHakukohdeByOid';
-import useApiAsync from '#/src/hooks/useApiAsync';
+import { useHakukohdeByOid } from '#/src/utils/hakukohde/getHakukohdeByOid';
 import FullSpin from '#/src/components/FullSpin';
-import getToteutusByOid from '#/src/utils/toteutus/getToteutusByOid';
 import Title from '#/src/components/Title';
-import getHakuByOid from '#/src/utils/haku/getHakuByOid';
 import ReduxForm from '#/src/components/ReduxForm';
 import getFormValuesByHakukohde from '#/src/utils/hakukohde/getFormValuesByHakukohde';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
@@ -23,56 +19,31 @@ import FormSteps from '#/src/components/FormSteps';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { useEntityFormConfig } from '#/src/hooks/form';
 import EditHakukohdeFooter from './EditHakukohdeFooter';
-
-const getData = async ({ httpClient, apiUrls, oid: hakukohdeOid }) => {
-  const hakukohde = await getHakukohdeByOid({
-    httpClient,
-    apiUrls,
-    oid: hakukohdeOid,
-  });
-
-  const { toteutusOid, hakuOid } = hakukohde;
-
-  const [toteutus, haku] = await Promise.all([
-    getToteutusByOid({ httpClient, apiUrls, oid: toteutusOid }),
-    getHakuByOid({ httpClient, apiUrls, oid: hakuOid }),
-  ]);
-
-  const { koulutustyyppi, tarjoajat } = await (toteutus && toteutus.koulutusOid
-    ? getKoulutustyyppiByKoulutusOid({
-        oid: toteutus.koulutusOid,
-        httpClient,
-        apiUrls,
-      })
-    : null);
-
-  return {
-    hakukohde,
-    toteutus,
-    haku,
-    koulutustyyppi,
-    tarjoajat,
-  };
-};
+import { useHakukohdePageData } from '../getHakukohdePageData';
 
 const EditHakukohdePage = props => {
   const {
     match: {
       params: { organisaatioOid, oid },
     },
-    location: { state = {} },
   } = props;
 
-  const { hakukohdeUpdatedAt = null } = state;
-  const watch = JSON.stringify([oid, hakukohdeUpdatedAt]);
+  const { data: hakukohde, isFetching: hakukohdeLoading } = useHakukohdeByOid({
+    oid,
+  });
 
   const {
-    data: { hakukohde, toteutus, haku, koulutustyyppi, tarjoajat } = {},
-  } = useApiAsync({
-    promiseFn: getData,
-    oid,
-    watch,
-  });
+    data: { toteutus, haku, koulutustyyppi, tarjoajat } = {},
+    isFetching: pageDataLoading,
+  } = useHakukohdePageData(
+    {
+      hakuOid: hakukohde?.hakuOid,
+      toteutusOid: hakukohde?.toteutusOid,
+    },
+    { enabled: hakukohde }
+  );
+
+  const isLoading = hakukohdeLoading || pageDataLoading;
 
   const { t } = useTranslation();
 
@@ -88,7 +59,7 @@ const EditHakukohdePage = props => {
 
   const config = useEntityFormConfig(ENTITY.HAKUKOHDE);
 
-  return !hakukohde ? (
+  return isLoading ? (
     <FullSpin />
   ) : (
     <ReduxForm form="editHakukohdeForm" initialValues={initialValues}>

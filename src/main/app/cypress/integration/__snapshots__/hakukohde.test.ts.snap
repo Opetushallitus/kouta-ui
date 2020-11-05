@@ -15,6 +15,7 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
   "hakulomakeKuvaus": {},
   "hakulomakeLinkki": {},
   "hakulomaketyyppi": "ataru",
+  "jarjestyspaikkaOid": "1.2.246.562.10.45854578546",
   "kaytetaanHaunAikataulua": false,
   "kaytetaanHaunAlkamiskautta": false,
   "kaytetaanHaunHakulomaketta": false,
@@ -57,7 +58,7 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
   "nimi": {
     "fi": "Hakukohteen nimi"
   },
-  "organisaatioOid": "1.1.1.1.1.1",
+  "organisaatioOid": "1.2.246.562.10.52251087186",
   "pohjakoulutusvaatimusKoodiUrit": [
     "pohjakoulutusvaatimustoinenaste_0#1"
   ],
@@ -128,6 +129,7 @@ exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
   "hakulomakeKuvaus": {},
   "hakulomakeLinkki": {},
   "hakulomaketyyppi": "ataru",
+  "jarjestyspaikkaOid": "1.2.246.562.10.45854578546",
   "kaytetaanHaunAikataulua": false,
   "kaytetaanHaunAlkamiskautta": false,
   "kaytetaanHaunHakulomaketta": false,
@@ -170,7 +172,7 @@ exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
   "nimi": {
     "fi": "Hakukohteen nimi"
   },
-  "organisaatioOid": "1.1.1.1.1.1",
+  "organisaatioOid": "1.2.246.562.10.52251087186",
   "pohjakoulutusvaatimusKoodiUrit": [
     "pohjakoulutusvaatimustoinenaste_0#1"
   ],
@@ -242,6 +244,7 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
   "hakulomakeKuvaus": {},
   "hakulomakeLinkki": {},
   "hakulomaketyyppi": "ataru",
+  "jarjestyspaikkaOid": "1.2.246.562.10.45854578546",
   "kaytetaanHaunAikataulua": false,
   "kaytetaanHaunAlkamiskautta": false,
   "kaytetaanHaunHakulomaketta": false,
@@ -287,7 +290,7 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
     "fi": "Hakukohteen nimi"
   },
   "oid": "6.1.1.1.1.1",
-  "organisaatioOid": "1.1.1.1.1.1",
+  "organisaatioOid": "1.2.246.562.10.52251087186",
   "pohjakoulutusvaatimusKoodiUrit": [
     "pohjakoulutusvaatimustoinenaste_0#1"
   ],

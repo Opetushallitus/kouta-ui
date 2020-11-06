@@ -11,11 +11,14 @@ import Spacing from '#/src/components/Spacing';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import { FormFieldSelect } from '#/src/components/formFields';
 import { useFieldValue } from '#/src/hooks/form';
+import { GetJulkaisutilaTranslationKey } from '#/src/constants';
 
-const getToteutusOptions = toteutukset => {
+const getToteutusOptions = (toteutukset, translations) => {
   return toteutukset.map(({ nimi, oid, tila }) => ({
     value: oid,
-    label: getFirstLanguageValue(nimi) + ` (${tila})`,
+    label:
+      getFirstLanguageValue(nimi) +
+      ` (${translations(GetJulkaisutilaTranslationKey(tila))})`,
   }));
 };
 
@@ -40,8 +43,8 @@ const HakukohteetModal = ({
   }, [onSaveProp, toteutus]);
 
   const toteutuksetOptions = useMemo(() => {
-    return toteutukset ? getToteutusOptions(toteutukset) : [];
-  }, [toteutukset]);
+    return toteutukset ? getToteutusOptions(toteutukset, t) : [];
+  }, [toteutukset, t]);
 
   return (
     <Modal

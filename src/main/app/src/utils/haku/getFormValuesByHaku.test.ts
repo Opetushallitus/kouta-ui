@@ -10,8 +10,8 @@ import getFormValuesByHaku, {
 } from './getFormValuesByHaku';
 
 const baseHaku = {
+  muokkaaja: '1.1.1.1',
   tila: 'tallennettu',
-  alkamiskausiKoodiUri: 'kausi_1#1',
   kielivalinta: ['fi', 'sv'],
   hakutapaKoodiUri: 'hakutapa_1#1',
   hakuajat: [{ alkaa: '2019-03-29T12:28', paattyy: '2019-09-29T12:30' }],
@@ -23,6 +23,13 @@ const baseHaku = {
   kohdejoukkoKoodiUri: 'kohdejoukko_1#1',
   kohdejoukonTarkenneKoodiUri: 'tarkenne_1#1',
   metadata: {
+    koulutuksenAlkamiskausi: {
+      alkamiskausityyppi: 'tarkka alkamisajankohta',
+      koulutuksenAlkamiskausiKoodiUri: 'alkamiskausi_1#1',
+      koulutuksenAlkamispaivamaara: '2020-12-20T12:28',
+      koulutuksenPaattymispaivamaara: '2020-12-21T12:28',
+      koulutuksenAlkamisvuosi: '2020',
+    },
     tulevaisuudenAikataulu: [
       { alkaa: '2019-02-20T12:28', paattyy: '2019-08-01T12:45' },
     ],

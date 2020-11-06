@@ -11,6 +11,7 @@ import {
 } from '#/src/constants';
 
 const baseValues: HakuFormValues = {
+  muokkaaja: '1.1.1.1',
   tila: 'tallennettu',
   nimi: {
     fi: 'Nimi',

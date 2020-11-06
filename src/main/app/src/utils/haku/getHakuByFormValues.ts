@@ -46,6 +46,7 @@ const getHakuByFormValues = (values: HakuFormValues) => {
   const kohdejoukkoKoodiUri = values?.kohdejoukko?.kohdejoukko || null;
 
   return {
+    muokkaaja: values?.muokkaaja,
     tila: values?.tila,
     kielivalinta,
     hakutapaKoodiUri: values?.hakutapa || null,
@@ -56,7 +57,7 @@ const getHakuByFormValues = (values: HakuFormValues) => {
       })
     ),
     hakukohteenLiittamisenTakaraja:
-      values?.aikataulut.lisaamisenTakaraja || null,
+      values?.aikataulut?.lisaamisenTakaraja || null,
     nimi: pickTranslations(values?.nimi),
     kohdejoukkoKoodiUri,
     kohdejoukonTarkenneKoodiUri: isKorkeakoulutusKohdejoukkoKoodiUri(

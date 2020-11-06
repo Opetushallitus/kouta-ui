@@ -24,6 +24,7 @@ type Yhteystieto = {
 };
 
 type HakuFormValues = {
+  muokkaaja: string;
   tila: string;
   nimi: TranslatedField<string>;
   kieliversiot: Array<LanguageCode>;

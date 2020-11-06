@@ -3,8 +3,6 @@
 exports[`getHakuByFormValues returns correct haku given different hakulomake variations 1`] = `
 Object {
   "ajastettuJulkaisu": "2019-11-16T08:44",
-  "alkamiskausiKoodiUri": "alkamiskausi_1#1",
-  "alkamisvuosi": 2020,
   "hakuajat": Array [
     Object {
       "alkaa": "2019-04-16T08:44",
@@ -31,6 +29,13 @@ Object {
   "kohdejoukkoKoodiUri": "haunkohdejoukko_12",
   "kohdejoukonTarkenneKoodiUri": "tarkenne_1#1",
   "metadata": Object {
+    "koulutuksenAlkamiskausi": Object {
+      "alkamiskausityyppi": "tarkka alkamisajankohta",
+      "koulutuksenAlkamiskausiKoodiUri": "alkamiskausi_1#1",
+      "koulutuksenAlkamispaivamaara": "2019-09-16T08:44",
+      "koulutuksenAlkamisvuosi": 2020,
+      "koulutuksenPaattymispaivamaara": "2019-09-16T08:44",
+    },
     "tulevaisuudenAikataulu": Array [
       Object {
         "alkaa": "2019-08-16T08:44",
@@ -78,8 +83,6 @@ Object {
 exports[`getHakuByFormValues returns correct haku given different hakulomake variations 2`] = `
 Object {
   "ajastettuJulkaisu": "2019-11-16T08:44",
-  "alkamiskausiKoodiUri": "alkamiskausi_1#1",
-  "alkamisvuosi": 2020,
   "hakuajat": Array [
     Object {
       "alkaa": "2019-04-16T08:44",
@@ -106,6 +109,13 @@ Object {
   "kohdejoukkoKoodiUri": "haunkohdejoukko_12",
   "kohdejoukonTarkenneKoodiUri": "tarkenne_1#1",
   "metadata": Object {
+    "koulutuksenAlkamiskausi": Object {
+      "alkamiskausityyppi": "tarkka alkamisajankohta",
+      "koulutuksenAlkamiskausiKoodiUri": "alkamiskausi_1#1",
+      "koulutuksenAlkamispaivamaara": "2019-09-16T08:44",
+      "koulutuksenAlkamisvuosi": 2020,
+      "koulutuksenPaattymispaivamaara": "2019-09-16T08:44",
+    },
     "tulevaisuudenAikataulu": Array [
       Object {
         "alkaa": "2019-08-16T08:44",
@@ -153,8 +163,6 @@ Object {
 exports[`getHakuByFormValues returns correct haku given form values 1`] = `
 Object {
   "ajastettuJulkaisu": "2019-11-16T08:44",
-  "alkamiskausiKoodiUri": "alkamiskausi_1#1",
-  "alkamisvuosi": 2020,
   "hakuajat": Array [
     Object {
       "alkaa": "2019-04-16T08:44",
@@ -179,6 +187,13 @@ Object {
   "kohdejoukkoKoodiUri": "haunkohdejoukko_12",
   "kohdejoukonTarkenneKoodiUri": "tarkenne_1#1",
   "metadata": Object {
+    "koulutuksenAlkamiskausi": Object {
+      "alkamiskausityyppi": "tarkka alkamisajankohta",
+      "koulutuksenAlkamiskausiKoodiUri": "alkamiskausi_1#1",
+      "koulutuksenAlkamispaivamaara": "2019-09-16T08:44",
+      "koulutuksenAlkamisvuosi": 2020,
+      "koulutuksenPaattymispaivamaara": "2019-09-16T08:44",
+    },
     "tulevaisuudenAikataulu": Array [
       Object {
         "alkaa": "2019-08-16T08:44",

@@ -18,6 +18,7 @@ export const alkamiskausityyppiToToteutuksenAjankohta = _.cond([
 
 const getFormValuesByHaku = (haku): HakuFormValues => {
   const {
+    muokkaaja,
     hakuajat = [],
     hakutapaKoodiUri = '',
     kohdejoukkoKoodiUri = '',
@@ -50,6 +51,7 @@ const getFormValuesByHaku = (haku): HakuFormValues => {
   } = koulutuksenAlkamiskausi;
 
   return {
+    muokkaaja,
     tila,
     nimi,
     kieliversiot: kielivalinta,

@@ -3,19 +3,24 @@ import { isArray } from 'lodash';
 import useSoraKuvaukset from '#/src/hooks/useSoraKuvaukset';
 import useLanguage from '#/src/hooks/useLanguage';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
+import { useTranslation } from 'react-i18next';
+import { GetJulkaisutilaTranslationKey } from '#/src/constants';
 
 export const useSoraKuvausOptions = args => {
   const { soraKuvaukset, ...rest } = useSoraKuvaukset(args);
   const language = useLanguage();
+  const { t } = useTranslation();
 
   const options = useMemo(() => {
     return isArray(soraKuvaukset)
       ? soraKuvaukset.map(({ id, nimi, tila }) => ({
           value: id,
-          label: getFirstLanguageValue(nimi, language) + ` (${tila})`,
+          label:
+            getFirstLanguageValue(nimi, language) +
+            ` (${t(GetJulkaisutilaTranslationKey(tila))})`,
         }))
       : [];
-  }, [soraKuvaukset, language]);
+  }, [soraKuvaukset, language, t]);
 
   return { options, ...rest };
 };

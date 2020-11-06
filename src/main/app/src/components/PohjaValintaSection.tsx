@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-import { POHJAVALINTA } from '#/src/constants';
+import { GetJulkaisutilaTranslationKey, POHJAVALINTA } from '#/src/constants';
 import {
   FormFieldSelect,
   FormFieldRadioGroup,
@@ -12,10 +12,12 @@ import Spacing from '#/src/components/Spacing';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import useLanguage from '#/src/hooks/useLanguage';
 
-const getCopyOptions = (entities, language) => {
+const getCopyOptions = (entities, language, tranlations) => {
   return entities.map(({ nimi, oid, id, tila }) => ({
     value: oid || id,
-    label: getFirstLanguageValue(nimi, language) + ` (${tila})`,
+    label:
+      getFirstLanguageValue(nimi, language) +
+      ` (${tranlations(GetJulkaisutilaTranslationKey(tila))})`,
   }));
 };
 
@@ -60,9 +62,10 @@ export default function PohjaValintaSection({
     },
   ];
 
-  const copyOptions = useMemo(() => getCopyOptions(data, language), [
+  const copyOptions = useMemo(() => getCopyOptions(data, language, t), [
     data,
     language,
+    t,
   ]);
 
   return (

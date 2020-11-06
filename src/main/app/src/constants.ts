@@ -2,11 +2,17 @@ import _ from 'lodash';
 
 export const LANGUAGES = ['fi', 'sv', 'en'];
 
-export const JULKAISUTILA = {
-  TALLENNETTU: 'tallennettu',
-  JULKAISTU: 'julkaistu',
-  ARKISTOITU: 'arkistoitu',
-};
+export enum JULKAISUTILA {
+  TALLENNETTU = 'tallennettu',
+  JULKAISTU = 'julkaistu',
+  ARKISTOITU = 'arkistoitu',
+}
+
+export function GetJulkaisutilaTranslationKey(tila: JULKAISUTILA) {
+  if (tila === JULKAISUTILA.TALLENNETTU) return 'julkaisutilat.tallennettu';
+  if (tila === JULKAISUTILA.ARKISTOITU) return 'julkaisutilat.arkistoitu';
+  if (tila === JULKAISUTILA.JULKAISTU) return 'julkaisutilat.julkaistu';
+}
 
 export const DEFAULT_JULKAISUTILA = JULKAISUTILA.TALLENNETTU;
 

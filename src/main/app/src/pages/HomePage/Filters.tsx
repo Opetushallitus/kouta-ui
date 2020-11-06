@@ -4,12 +4,21 @@ import { useTranslation } from 'react-i18next';
 import { Checkbox, Input, InputIcon } from '#/src/components/virkailija';
 import Flex, { FlexItem } from '#/src/components/Flex';
 import Select from '#/src/components/Select';
-import { JULKAISUTILA } from '#/src/constants';
+import { GetJulkaisutilaTranslationKey, JULKAISUTILA } from '#/src/constants';
 
 const getDefaultOptions = t => [
-  { value: JULKAISUTILA.JULKAISTU, label: t('julkaisutilat.julkaistu') },
-  { value: JULKAISUTILA.TALLENNETTU, label: t('julkaisutilat.tallennettu') },
-  { value: JULKAISUTILA.ARKISTOITU, label: t('julkaisutilat.arkistoitu') },
+  {
+    value: JULKAISUTILA.JULKAISTU,
+    label: t(GetJulkaisutilaTranslationKey(JULKAISUTILA.JULKAISTU)),
+  },
+  {
+    value: JULKAISUTILA.TALLENNETTU,
+    label: t(GetJulkaisutilaTranslationKey(JULKAISUTILA.TALLENNETTU)),
+  },
+  {
+    value: JULKAISUTILA.ARKISTOITU,
+    label: t(GetJulkaisutilaTranslationKey(JULKAISUTILA.ARKISTOITU)),
+  },
 ];
 
 export const Filters = ({

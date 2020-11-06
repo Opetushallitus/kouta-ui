@@ -1,5 +1,5 @@
 import { isString } from 'lodash';
-import { JULKAISUTILA } from '#/src/constants';
+import { GetJulkaisutilaTranslationKey, JULKAISUTILA } from '#/src/constants';
 
 export const getLabel = ({ status, t }) => {
   if (!isString(status)) {
@@ -7,9 +7,15 @@ export const getLabel = ({ status, t }) => {
   }
 
   const labelByStatus = {
-    [JULKAISUTILA.ARKISTOITU]: t('julkaisutilat.arkistoitu'),
-    [JULKAISUTILA.JULKAISTU]: t('julkaisutilat.julkaistu'),
-    [JULKAISUTILA.TALLENNETTU]: t('julkaisutilat.tallennettu'),
+    [JULKAISUTILA.ARKISTOITU]: t(
+      GetJulkaisutilaTranslationKey(JULKAISUTILA.ARKISTOITU)
+    ),
+    [JULKAISUTILA.JULKAISTU]: t(
+      GetJulkaisutilaTranslationKey(JULKAISUTILA.JULKAISTU)
+    ),
+    [JULKAISUTILA.TALLENNETTU]: t(
+      GetJulkaisutilaTranslationKey(JULKAISUTILA.TALLENNETTU)
+    ),
   };
 
   return labelByStatus[status] || null;

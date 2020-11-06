@@ -30,7 +30,7 @@ export const Filters = ({
   nimiPlaceholder = '',
   tilaOptions: tilaOptionsProp,
 }) => {
-  const { t } = useTranslation();
+  const { t  } = useTranslation();
 
   const onTilaChange = useCallback(
     value => {

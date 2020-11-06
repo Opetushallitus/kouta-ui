@@ -12,11 +12,14 @@ import { Box, Divider } from '#/src/components/virkailija';
 import Button from '#/src/components/Button';
 import Alert from '#/src/components/Alert';
 import { useFieldValue } from '#/src/hooks/form';
+import { GetJulkaisutilaTranslationKey } from '#/src/constants';
 
-const getValintaperusteetOptions = (valintaperusteet, language) =>
+const getValintaperusteetOptions = (valintaperusteet, language, translations) =>
   valintaperusteet.map(({ nimi, id, tila }) => ({
     value: id,
-    label: getFirstLanguageValue(nimi, language) + ` (${tila})`,
+    label:
+      getFirstLanguageValue(nimi, language) +
+      ` (${translations(GetJulkaisutilaTranslationKey(tila))})`,
   }));
 
 const KuvausSection = ({ haku, organisaatioOid, name, languages }) => {
@@ -41,8 +44,8 @@ const KuvausSection = ({ haku, organisaatioOid, name, languages }) => {
   }, [reload]);
 
   const options = useMemo(
-    () => getValintaperusteetOptions(data || [], language),
-    [data, language]
+    () => getValintaperusteetOptions(data || [], language, t),
+    [data, language, t]
   );
 
   return (

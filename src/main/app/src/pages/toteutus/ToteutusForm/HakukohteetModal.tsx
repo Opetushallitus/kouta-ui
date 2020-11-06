@@ -10,11 +10,14 @@ import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import { FormFieldSelect } from '#/src/components/formFields';
 import { useFieldValue } from '#/src/hooks/form';
+import { GetJulkaisutilaTranslationKey } from '#/src/constants';
 
-const getOptions = items => {
+const getOptions = (items, translations) => {
   return items.map(({ nimi, oid, tila }) => ({
     value: oid,
-    label: getFirstLanguageValue(nimi) + ` (${tila})`,
+    label:
+      getFirstLanguageValue(nimi) +
+      ` (${translations(GetJulkaisutilaTranslationKey(tila))})`,
   }));
 };
 
@@ -39,8 +42,8 @@ const HakukohteetModal = ({
   }, [onSaveProp, hakuValue]);
 
   const hautOptions = useMemo(() => {
-    return haut ? getOptions(haut) : [];
-  }, [haut]);
+    return haut ? getOptions(haut, t) : [];
+  }, [haut, t]);
 
   return (
     <Modal

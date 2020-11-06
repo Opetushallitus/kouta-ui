@@ -8,10 +8,11 @@ export enum JULKAISUTILA {
   ARKISTOITU = 'arkistoitu',
 }
 
-export function GetJulkaisutilaTranslationKey(tila: JULKAISUTILA) {
+export function GetJulkaisutilaTranslationKey(tila: JULKAISUTILA): string {
   if (tila === JULKAISUTILA.TALLENNETTU) return 'julkaisutilat.tallennettu';
   if (tila === JULKAISUTILA.ARKISTOITU) return 'julkaisutilat.arkistoitu';
   if (tila === JULKAISUTILA.JULKAISTU) return 'julkaisutilat.julkaistu';
+  throw new Error(`Unknown julkaisutila given: ${tila}`);
 }
 
 export const DEFAULT_JULKAISUTILA = JULKAISUTILA.TALLENNETTU;

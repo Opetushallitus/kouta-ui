@@ -18,8 +18,9 @@ import {
 } from '#/src/components/virkailija';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import useLanguage from '#/src/hooks/useLanguage';
+import { GetJulkaisutilaTranslationKey } from '#/src/constants';
 
-const useOptions = data => {
+const useOptions = (data, translations) => {
   const language = useLanguage();
 
   return useMemo(
@@ -28,12 +29,14 @@ const useOptions = data => {
         ? _.pipe(
             _.map(({ nimi, oid, tila }) => ({
               value: oid,
-              label: getFirstLanguageValue(nimi, language) + ` (${tila})`,
+              label:
+                getFirstLanguageValue(nimi, language) +
+                ` (${translations(GetJulkaisutilaTranslationKey(tila))})`,
             })),
             _.orderBy('label', 'asc')
           )(data)
         : [],
-    [data, language]
+    [data, language, translations]
   );
 };
 
@@ -56,8 +59,8 @@ const LiitoksetModal = ({ onClose, organisaatioOid, open }) => {
     vainHakukohteeseenLiitettavat: true,
   });
 
-  const hakuOptions = useOptions(haut);
-  const toteutusOptions = useOptions(toteutukset);
+  const hakuOptions = useOptions(haut, t);
+  const toteutusOptions = useOptions(toteutukset, t);
 
   const disabled = !haku || !toteutus;
 

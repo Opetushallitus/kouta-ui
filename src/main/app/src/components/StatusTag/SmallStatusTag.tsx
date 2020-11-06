@@ -5,7 +5,7 @@ import { get } from 'lodash';
 import Flex from '#/src/components/Flex';
 import { spacing } from '#/src/theme';
 import { Typography } from '#/src/components/virkailija';
-import { JULKAISUTILA } from '#/src/constants';
+import { GetJulkaisutilaTranslationKey, JULKAISUTILA } from '#/src/constants';
 
 import { useTranslation } from 'react-i18next';
 
@@ -41,7 +41,7 @@ const getLabel = ({ children, tila, t }) => {
     return children;
   }
 
-  return t(`julkaisutilat.${tila}`);
+  return t(GetJulkaisutilaTranslationKey(tila));
 };
 
 const SmallStatusTag = ({ children, status, color, ...props }) => {

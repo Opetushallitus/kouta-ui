@@ -39,6 +39,6 @@ module.exports = {
     ),
   },
   typescript: {
-    enableTypeChecking: isDev,
+    enableTypeChecking: false,
   },
 };

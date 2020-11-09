@@ -67,7 +67,7 @@
     "cypress:run": "cypress run -b chrome",
     "cypress:open": "cypress open -b chrome",
     "test:integration": "START_SERVER_AND_TEST_INSECURE=1 start-server-and-test start:integration https://localhost:3000 'npm run cypress:run -- --headless'",
-    "test:ci": "CI=true npm run test:integration"
+    "test:ci": "CI=true npm run test && npm run test:integration"
   },
   "browserslist": [
     ">0.2%",

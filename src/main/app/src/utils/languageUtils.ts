@@ -3,7 +3,10 @@ import _ from 'lodash';
 export const getLanguageValue = (value, language = 'fi') =>
   _.isObject(value) ? value[language] || null : null;
 
-export const getFirstLanguageValue = (value, priorityArg) => {
+export const getFirstLanguageValue = (
+  value,
+  priorityArg?: Array<string> | string
+) => {
   const defaultPriority = ['fi', 'en', 'sv'];
 
   let priority = defaultPriority;

@@ -31,7 +31,7 @@ export const TilaisuusFields = ({ field, language, index, removeSelf }) => {
         {t('valintaperustelomake.tilaisuusTitle', { index: index + 1 })}
       </Heading>
       <SubSectionBox>
-        <Box display="flex" justifyContent="between">
+        <Box display="flex" justifyContent="space-between">
           <DateTimeRange
             startProps={{
               name: `${field}.alkaa`,

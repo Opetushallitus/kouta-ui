@@ -1,25 +1,14 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { Field } from 'redux-form';
 import { useTranslation } from 'react-i18next';
-
 import Modal from '#/src/components/Modal';
 import Button from '#/src/components/Button';
 import getHaut from '#/src/utils/haku/getHaut';
 import Flex from '#/src/components/Flex';
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import { FormFieldSelect } from '#/src/components/formFields';
 import { useFieldValue } from '#/src/hooks/form';
-import { getJulkaisutilaTranslationKey } from '#/src/constants';
-
-const getOptions = (items, translations) => {
-  return items.map(({ nimi, oid, tila }) => ({
-    value: oid,
-    label:
-      getFirstLanguageValue(nimi) +
-      ` (${translations(getJulkaisutilaTranslationKey(tila))})`,
-  }));
-};
+import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
 
 const HakukohteetModal = ({
   onClose,
@@ -41,9 +30,7 @@ const HakukohteetModal = ({
     return onSaveProp({ hakuOid: hakuValue.value });
   }, [onSaveProp, hakuValue]);
 
-  const hautOptions = useMemo(() => {
-    return haut ? getOptions(haut, t) : [];
-  }, [haut, t]);
+  const hautOptions = useEntityOptions(haut);
 
   return (
     <Modal

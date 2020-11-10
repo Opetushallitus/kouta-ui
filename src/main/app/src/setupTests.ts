@@ -1,16 +1,10 @@
 import 'core-js/es';
-import Enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import { createSerializer } from 'enzyme-to-json';
+import 'jest-styled-components';
 import '@testing-library/jest-dom/extend-expect';
 import {
   isEditorState,
   serializeEditorState,
 } from '#/src/components/Editor/utils';
-
-import 'jest-styled-components';
-
-expect.addSnapshotSerializer(createSerializer({ mode: 'deep' }));
 
 // Serialize Draft editor
 expect.addSnapshotSerializer({
@@ -21,5 +15,3 @@ expect.addSnapshotSerializer({
     return indent(serialize(serializeEditorState(value)));
   },
 });
-
-Enzyme.configure({ adapter: new Adapter() });

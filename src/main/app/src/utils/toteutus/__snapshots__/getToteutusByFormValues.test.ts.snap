@@ -93,7 +93,7 @@ Object {
       "koulutuksenAlkamispaivamaara": null,
       "koulutuksenAlkamisvuosi": 2020,
       "koulutuksenPaattymispaivamaara": null,
-      "koulutuksenTarkkaAlkamisaika": false,
+      "koulutuksenTarkkaAlkamisaika": null,
       "lisatiedot": Array [
         Object {
           "otsikkoKoodiUri": "osio_1#1",

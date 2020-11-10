@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { render } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 
 import defaultTheme from './theme';
@@ -8,9 +8,12 @@ const makeFnWithTheme = fn => tree => {
   return fn(<ThemeProvider theme={defaultTheme}>{tree}</ThemeProvider>);
 };
 
-export const shallowWithTheme = makeFnWithTheme(shallow);
+export const renderWithTheme = makeFnWithTheme(render);
 
-export const mountWithTheme = makeFnWithTheme(mount);
+export const mountWithTheme = tree => {
+  const { container } = makeFnWithTheme(render)(tree);
+  return container.firstChild;
+};
 
 export const setMockDate = date => {
   const _Date = Date;
@@ -21,3 +24,5 @@ export const setMockDate = date => {
     global.Date = _Date;
   };
 };
+
+export * from '@testing-library/react';

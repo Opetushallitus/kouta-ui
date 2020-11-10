@@ -1,8 +1,6 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import _ from 'lodash/fp';
-
 import Button from '#/src/components/Button';
 import Modal from '#/src/components/Modal';
 import Select from '#/src/components/Select';
@@ -16,29 +14,7 @@ import {
   ModalFooter,
   ModalHeader,
 } from '#/src/components/virkailija';
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-import useLanguage from '#/src/hooks/useLanguage';
-import { getJulkaisutilaTranslationKey } from '#/src/constants';
-
-const useOptions = (data, translations) => {
-  const language = useLanguage();
-
-  return useMemo(
-    () =>
-      _.isArray(data)
-        ? _.pipe(
-            _.map(({ nimi, oid, tila }) => ({
-              value: oid,
-              label:
-                getFirstLanguageValue(nimi, language) +
-                ` (${translations(getJulkaisutilaTranslationKey(tila))})`,
-            })),
-            _.orderBy('label', 'asc')
-          )(data)
-        : [],
-    [data, language, translations]
-  );
-};
+import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
 
 const LiitoksetModal = ({ onClose, organisaatioOid, open }) => {
   const { t } = useTranslation();
@@ -59,8 +35,8 @@ const LiitoksetModal = ({ onClose, organisaatioOid, open }) => {
     vainHakukohteeseenLiitettavat: true,
   });
 
-  const hakuOptions = useOptions(haut, t);
-  const toteutusOptions = useOptions(toteutukset, t);
+  const hakuOptions = useEntityOptions(haut);
+  const toteutusOptions = useEntityOptions(toteutukset);
 
   const disabled = !haku || !toteutus;
 

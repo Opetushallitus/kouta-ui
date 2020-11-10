@@ -25,7 +25,6 @@ module.exports = {
         ...config,
         ...(CI
           ? {
-              devtool: false,
               devServer: {
                 hot: false,
                 inline: false,
@@ -39,6 +38,6 @@ module.exports = {
     ),
   },
   typescript: {
-    enableTypeChecking: isDev,
+    enableTypeChecking: false,
   },
 };

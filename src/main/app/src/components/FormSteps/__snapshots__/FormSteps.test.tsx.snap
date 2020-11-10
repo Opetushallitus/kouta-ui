@@ -146,123 +146,123 @@ exports[`renders correctly 1`] = `
 }
 
 <div
-  className="c0"
+  class="c0"
 >
   <div
-    className="c1"
+    class="c1"
   >
     <div
-      className="c2 c3"
+      class="c2 c3"
     >
       <div
-        className="c4"
+        class="c4"
       >
         <span
-          className="c5 material-icons c6"
+          class="c5 material-icons c6"
         >
           school
         </span>
       </div>
       <div
-        className="c7"
+        class="c7"
       >
         yleiset.koulutus
       </div>
     </div>
     <div
-      className="c2 c3"
+      class="c2 c3"
     >
       <div
-        className="c4"
+        class="c4"
       >
         <span
-          className="c5 material-icons c6"
+          class="c5 material-icons c6"
         >
           flag
         </span>
       </div>
       <div
-        className="c7"
+        class="c7"
       >
         yleiset.toteutus
       </div>
     </div>
   </div>
   <div
-    className="c1"
+    class="c1"
   >
     <div
-      className="c2 c3"
+      class="c2 c3"
     >
       <div
-        className="c4"
+        class="c4"
       >
         <span
-          className="c5 material-icons c6"
+          class="c5 material-icons c6"
         >
           access_time
         </span>
       </div>
       <div
-        className="c7"
+        class="c7"
       >
         yleiset.haku
       </div>
     </div>
     <div
-      className="c2 c3"
+      class="c2 c3"
     >
       <div
-        className="c8"
+        class="c8"
       >
         <span
-          className="c5 material-icons c9"
+          class="c5 material-icons c9"
         >
           list_alt
         </span>
       </div>
       <div
-        className="c10"
+        class="c10"
       >
         yleiset.hakukohde
       </div>
     </div>
   </div>
   <div
-    className="c1"
+    class="c1"
   >
     <div
-      className="c2 c3"
+      class="c2 c3"
     >
       <div
-        className="c11"
+        class="c11"
       >
         <span
-          className="c5 material-icons c6"
+          class="c5 material-icons c6"
         >
           filter_list
         </span>
       </div>
       <div
-        className="c7"
+        class="c7"
       >
         yleiset.valintaperusteet
       </div>
     </div>
     <div
-      className="c2 c3"
+      class="c2 c3"
     >
       <div
-        className="c11"
+        class="c11"
       >
         <span
-          className="c5 material-icons c6"
+          class="c5 material-icons c6"
         >
           subject
         </span>
       </div>
       <div
-        className="c7"
+        class="c7"
       >
         yleiset.soraKuvaus
       </div>

@@ -77,36 +77,29 @@ exports[`renders correctly 1`] = `
 }
 
 <div
-  className="c0"
+  class="c0"
 >
   <div
-    className="c1"
-    open={true}
+    class="c1"
+    open=""
   >
     <div
-      className="c2"
-      onClick={[Function]}
+      class="c2"
     >
       <h5
-        className="c3"
+        class="c3"
       >
         Text header
       </h5>
     </div>
     <div
-      className="c4"
-      onClick={[Function]}
+      class="c4"
     >
       <span
-        style={
-          Object {
-            "display": "inline-flex",
-            "transform": "rotate(180deg)",
-          }
-        }
+        style="transform: rotate(180deg); display: inline-flex;"
       >
         <span
-          className="c5 material-icons c6"
+          class="c5 material-icons c6"
           role="button"
         >
           expand_more
@@ -115,26 +108,20 @@ exports[`renders correctly 1`] = `
     </div>
   </div>
   <div
-    style={
-      Object {
-        "height": 0,
-        "opacity": 1,
-        "overflow": "visible",
-      }
-    }
+    style="opacity: 1; height: 0px; overflow: visible;"
   >
     <div
-      className="CollapseContent"
+      class="CollapseContent"
     >
       <div
-        className="c7"
+        class="c7"
       >
         <div>
           Collapse children
         </div>
       </div>
       <div
-        className="c8"
+        class="c8"
       >
         <button>
           Footer button
@@ -211,34 +198,27 @@ exports[`renders correctly 2`] = `
 }
 
 <div
-  className="c0"
+  class="c0"
 >
   <div
-    className="c1"
-    open={true}
+    class="c1"
+    open=""
   >
     <div
-      className="c2"
-      onClick={[Function]}
+      class="c2"
     >
       <div>
         Element header
       </div>
     </div>
     <div
-      className="c3"
-      onClick={[Function]}
+      class="c3"
     >
       <span
-        style={
-          Object {
-            "display": "inline-flex",
-            "transform": "rotate(180deg)",
-          }
-        }
+        style="transform: rotate(180deg); display: inline-flex;"
       >
         <span
-          className="c4 material-icons c5"
+          class="c4 material-icons c5"
           role="button"
         >
           expand_more
@@ -247,26 +227,20 @@ exports[`renders correctly 2`] = `
     </div>
   </div>
   <div
-    style={
-      Object {
-        "height": 0,
-        "opacity": 1,
-        "overflow": "visible",
-      }
-    }
+    style="opacity: 1; height: 0px; overflow: visible;"
   >
     <div
-      className="CollapseContent"
+      class="CollapseContent"
     >
       <div
-        className="c6"
+        class="c6"
       >
         <div>
           Collapse children
         </div>
       </div>
       <div
-        className="c7"
+        class="c7"
       >
         <button>
           Footer button
@@ -353,36 +327,28 @@ exports[`renders correctly when closed 1`] = `
 }
 
 <div
-  className="c0"
+  class="c0"
 >
   <div
-    className="c1"
-    open={false}
+    class="c1"
   >
     <div
-      className="c2"
-      onClick={[Function]}
+      class="c2"
     >
       <h5
-        className="c3"
+        class="c3"
       >
         Header
       </h5>
     </div>
     <div
-      className="c4"
-      onClick={[Function]}
+      class="c4"
     >
       <span
-        style={
-          Object {
-            "display": "inline-flex",
-            "transform": "rotate(0deg)",
-          }
-        }
+        style="transform: rotate(0deg); display: inline-flex;"
       >
         <span
-          className="c5 material-icons c6"
+          class="c5 material-icons c6"
           role="button"
         >
           expand_more
@@ -391,26 +357,20 @@ exports[`renders correctly when closed 1`] = `
     </div>
   </div>
   <div
-    style={
-      Object {
-        "height": 0,
-        "opacity": 0,
-        "overflow": "hidden",
-      }
-    }
+    style="opacity: 0; height: 0px; overflow: hidden;"
   >
     <div
-      className="CollapseContent"
+      class="CollapseContent"
     >
       <div
-        className="c7"
+        class="c7"
       >
         <div>
           Hello world!
         </div>
       </div>
       <div
-        className="c8"
+        class="c8"
       >
         <div>
           footer

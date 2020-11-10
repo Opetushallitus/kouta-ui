@@ -25,7 +25,6 @@ module.exports = {
         ...config,
         ...(CI
           ? {
-              devtool: false,
               devServer: {
                 hot: false,
                 inline: false,

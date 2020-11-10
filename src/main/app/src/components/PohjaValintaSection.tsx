@@ -9,7 +9,7 @@ import {
 import { FormControl, Typography } from '#/src/components/virkailija';
 import Spacing from '#/src/components/Spacing';
 import useApiAsync from '#/src/hooks/useApiAsync';
-import { useEntityOptions } from '#/src/hooks/useEntityOptions';
+import { useEntityOptions } from '#/src/hooks/useEntityOptionsHook';
 
 const CopySelect = ({ input: { value }, options, selectName }) => {
   return value === POHJAVALINTA.KOPIO ? (

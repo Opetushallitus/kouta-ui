@@ -1,26 +1,15 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { Field } from 'redux-form';
 import { useTranslation } from 'react-i18next';
-
 import Modal from '#/src/components/Modal';
 import Button from '#/src/components/Button';
 import getToteutukset from '#/src/utils/toteutus/getToteutukset';
 import Flex, { FlexItem } from '#/src/components/Flex';
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import Spacing from '#/src/components/Spacing';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import { FormFieldSelect } from '#/src/components/formFields';
 import { useFieldValue } from '#/src/hooks/form';
-import { getJulkaisutilaTranslationKey } from '#/src/constants';
-
-const getToteutusOptions = (toteutukset, translations) => {
-  return toteutukset.map(({ nimi, oid, tila }) => ({
-    value: oid,
-    label:
-      getFirstLanguageValue(nimi) +
-      ` (${translations(getJulkaisutilaTranslationKey(tila))})`,
-  }));
-};
+import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
 
 const HakukohteetModal = ({
   onClose,
@@ -42,9 +31,7 @@ const HakukohteetModal = ({
     return onSaveProp({ toteutusOid: toteutus.value });
   }, [onSaveProp, toteutus]);
 
-  const toteutuksetOptions = useMemo(() => {
-    return toteutukset ? getToteutusOptions(toteutukset, t) : [];
-  }, [toteutukset, t]);
+  const toteutuksetOptions = useEntityOptions(toteutukset);
 
   return (
     <Modal

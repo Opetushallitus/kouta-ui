@@ -4,7 +4,6 @@ export default () => {
     organisaatioOid: '1.2.246.562.10.594252633210',
     kielivalinta: ['fi', 'sv'],
     tila: 'tallennettu',
-    logo: null,
     metadata: {
       akatemioita: 1,
       esittely: {

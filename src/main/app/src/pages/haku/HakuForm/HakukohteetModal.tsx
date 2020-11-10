@@ -11,14 +11,14 @@ import Spacing from '#/src/components/Spacing';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import { FormFieldSelect } from '#/src/components/formFields';
 import { useFieldValue } from '#/src/hooks/form';
-import { GetJulkaisutilaTranslationKey } from '#/src/constants';
+import { getJulkaisutilaTranslationKey } from '#/src/constants';
 
 const getToteutusOptions = (toteutukset, translations) => {
   return toteutukset.map(({ nimi, oid, tila }) => ({
     value: oid,
     label:
       getFirstLanguageValue(nimi) +
-      ` (${translations(GetJulkaisutilaTranslationKey(tila))})`,
+      ` (${translations(getJulkaisutilaTranslationKey(tila))})`,
   }));
 };
 

@@ -10,14 +10,14 @@ import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import { FormFieldSelect } from '#/src/components/formFields';
 import { useFieldValue } from '#/src/hooks/form';
-import { GetJulkaisutilaTranslationKey } from '#/src/constants';
+import { getJulkaisutilaTranslationKey } from '#/src/constants';
 
 const getOptions = (items, translations) => {
   return items.map(({ nimi, oid, tila }) => ({
     value: oid,
     label:
       getFirstLanguageValue(nimi) +
-      ` (${translations(GetJulkaisutilaTranslationKey(tila))})`,
+      ` (${translations(getJulkaisutilaTranslationKey(tila))})`,
   }));
 };
 

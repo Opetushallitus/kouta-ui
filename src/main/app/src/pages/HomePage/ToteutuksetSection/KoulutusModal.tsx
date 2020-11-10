@@ -16,7 +16,7 @@ import {
 } from '#/src/components/virkailija';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import useLanguage from '#/src/hooks/useLanguage';
-import { GetJulkaisutilaTranslationKey } from '#/src/constants';
+import { getJulkaisutilaTranslationKey } from '#/src/constants';
 
 const KoulutusModal = ({ onClose, organisaatioOid, open }) => {
   const { t } = useTranslation();
@@ -38,7 +38,7 @@ const KoulutusModal = ({ onClose, organisaatioOid, open }) => {
               value: oid,
               label:
                 getFirstLanguageValue(nimi, language) +
-                ` (${t(GetJulkaisutilaTranslationKey(tila))})`,
+                ` (${t(getJulkaisutilaTranslationKey(tila))})`,
             })),
             ({ label }) => label
           )

@@ -4,7 +4,7 @@ import useSoraKuvaukset from '#/src/hooks/useSoraKuvaukset';
 import useLanguage from '#/src/hooks/useLanguage';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import { useTranslation } from 'react-i18next';
-import { GetJulkaisutilaTranslationKey } from '#/src/constants';
+import { getJulkaisutilaTranslationKey } from '#/src/constants';
 
 export const useSoraKuvausOptions = args => {
   const { soraKuvaukset, ...rest } = useSoraKuvaukset(args);
@@ -17,7 +17,7 @@ export const useSoraKuvausOptions = args => {
           value: id,
           label:
             getFirstLanguageValue(nimi, language) +
-            ` (${t(GetJulkaisutilaTranslationKey(tila))})`,
+            ` (${t(getJulkaisutilaTranslationKey(tila))})`,
         }))
       : [];
   }, [soraKuvaukset, language, t]);

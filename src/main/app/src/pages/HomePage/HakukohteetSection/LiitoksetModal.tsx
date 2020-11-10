@@ -18,7 +18,7 @@ import {
 } from '#/src/components/virkailija';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import useLanguage from '#/src/hooks/useLanguage';
-import { GetJulkaisutilaTranslationKey } from '#/src/constants';
+import { getJulkaisutilaTranslationKey } from '#/src/constants';
 
 const useOptions = (data, translations) => {
   const language = useLanguage();
@@ -31,7 +31,7 @@ const useOptions = (data, translations) => {
               value: oid,
               label:
                 getFirstLanguageValue(nimi, language) +
-                ` (${translations(GetJulkaisutilaTranslationKey(tila))})`,
+                ` (${translations(getJulkaisutilaTranslationKey(tila))})`,
             })),
             _.orderBy('label', 'asc')
           )(data)

@@ -1,5 +1,5 @@
 import { isString } from 'lodash';
-import { GetJulkaisutilaTranslationKey, JULKAISUTILA } from '#/src/constants';
+import { getJulkaisutilaTranslationKey, JULKAISUTILA } from '#/src/constants';
 
 export const getLabel = ({ status, t }) => {
   if (!isString(status)) {
@@ -8,13 +8,13 @@ export const getLabel = ({ status, t }) => {
 
   const labelByStatus = {
     [JULKAISUTILA.ARKISTOITU]: t(
-      GetJulkaisutilaTranslationKey(JULKAISUTILA.ARKISTOITU)
+      getJulkaisutilaTranslationKey(JULKAISUTILA.ARKISTOITU)
     ),
     [JULKAISUTILA.JULKAISTU]: t(
-      GetJulkaisutilaTranslationKey(JULKAISUTILA.JULKAISTU)
+      getJulkaisutilaTranslationKey(JULKAISUTILA.JULKAISTU)
     ),
     [JULKAISUTILA.TALLENNETTU]: t(
-      GetJulkaisutilaTranslationKey(JULKAISUTILA.TALLENNETTU)
+      getJulkaisutilaTranslationKey(JULKAISUTILA.TALLENNETTU)
     ),
   };
 

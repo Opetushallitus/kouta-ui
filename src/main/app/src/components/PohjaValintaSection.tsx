@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-import { GetJulkaisutilaTranslationKey, POHJAVALINTA } from '#/src/constants';
+import { getJulkaisutilaTranslationKey, POHJAVALINTA } from '#/src/constants';
 import {
   FormFieldSelect,
   FormFieldRadioGroup,
@@ -17,7 +17,7 @@ const getCopyOptions = (entities, language, tranlations) => {
     value: oid || id,
     label:
       getFirstLanguageValue(nimi, language) +
-      ` (${tranlations(GetJulkaisutilaTranslationKey(tila))})`,
+      ` (${tranlations(getJulkaisutilaTranslationKey(tila))})`,
   }));
 };
 

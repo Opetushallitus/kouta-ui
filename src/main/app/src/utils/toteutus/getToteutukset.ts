@@ -7,7 +7,11 @@ const getToteutukset = async ({
   const { data } = await httpClient.get(
     apiUrls.url('kouta-backend.toteutus-list'),
     {
-      params: { organisaatioOid, vainHakukohteeseenLiitettavat },
+      params: {
+        organisaatioOid,
+        vainHakukohteeseenLiitettavat,
+        myosArkistoidut: false,
+      },
     }
   );
 

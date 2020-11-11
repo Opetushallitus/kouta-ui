@@ -1,26 +1,17 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { Field } from 'redux-form';
 import { get } from 'lodash';
 import { useTranslation } from 'react-i18next';
-
 import getValintaperusteet from '#/src/utils/valintaperuste/getValintaperusteet';
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import { FormFieldSelect } from '#/src/components/formFields';
-import useLanguage from '#/src/hooks/useLanguage';
 import { Box, Divider } from '#/src/components/virkailija';
 import Button from '#/src/components/Button';
 import Alert from '#/src/components/Alert';
 import { useFieldValue } from '#/src/hooks/form';
-
-const getValintaperusteetOptions = (valintaperusteet, language) =>
-  valintaperusteet.map(({ nimi, id, tila }) => ({
-    value: id,
-    label: getFirstLanguageValue(nimi, language) + ` (${tila})`,
-  }));
+import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
 
 const KuvausSection = ({ haku, organisaatioOid, name, languages }) => {
-  const language = useLanguage();
   const hakuOid = get(haku, 'oid');
   const kohdejoukkoKoodiUri = get(haku, 'kohdejoukkoKoodiUri');
   const watch = [hakuOid, organisaatioOid].join(',');
@@ -40,10 +31,7 @@ const KuvausSection = ({ haku, organisaatioOid, name, languages }) => {
     reload();
   }, [reload]);
 
-  const options = useMemo(
-    () => getValintaperusteetOptions(data || [], language),
-    [data, language]
-  );
+  const options = useEntityOptions(data);
 
   return (
     <>

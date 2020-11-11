@@ -1,7 +1,6 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import { POHJAVALINTA } from '#/src/constants';
 import {
   FormFieldSelect,
@@ -10,14 +9,7 @@ import {
 import { FormControl, Typography } from '#/src/components/virkailija';
 import Spacing from '#/src/components/Spacing';
 import useApiAsync from '#/src/hooks/useApiAsync';
-import useLanguage from '#/src/hooks/useLanguage';
-
-const getCopyOptions = (entities, language) => {
-  return entities.map(({ nimi, oid, id, tila }) => ({
-    value: oid || id,
-    label: getFirstLanguageValue(nimi, language) + ` (${tila})`,
-  }));
-};
+import { useEntityOptions } from '#/src/hooks/useEntityOptionsHook';
 
 const CopySelect = ({ input: { value }, options, selectName }) => {
   return value === POHJAVALINTA.KOPIO ? (
@@ -36,8 +28,6 @@ export default function PohjaValintaSection({
   copyLabel,
   createLabel,
 }) {
-  const language = useLanguage();
-
   const { t } = useTranslation();
 
   const { data = [] } = useApiAsync({
@@ -60,10 +50,7 @@ export default function PohjaValintaSection({
     },
   ];
 
-  const copyOptions = useMemo(() => getCopyOptions(data, language), [
-    data,
-    language,
-  ]);
+  const copyOptions = useEntityOptions(data);
 
   return (
     <>

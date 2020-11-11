@@ -36,7 +36,6 @@ public class UrlConfiguration extends OphProperties {
 
         this.frontProperties.setProperty("kouta-backend.hakukohde", this.require("kouta-backend.hakukohde"));
         this.frontProperties.setProperty("kouta-backend.hakukohde-by-oid", this.require("kouta-backend.hakukohde-by-oid"));
-        this.frontProperties.setProperty("kouta-backend.hakukohde-list", this.require("kouta-backend.hakukohde-list"));
 
         this.frontProperties.setProperty("kouta-backend.valintaperuste", this.require("kouta-backend.valintaperuste"));
         this.frontProperties.setProperty("kouta-backend.valintaperuste-by-oid", this.require("kouta-backend.valintaperuste-by-oid"));

@@ -1,6 +1,5 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-import { isArray, sortBy } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import Button from '#/src/components/Button';
 import Modal from '#/src/components/Modal';
@@ -14,13 +13,11 @@ import {
   ModalFooter,
   ModalHeader,
 } from '#/src/components/virkailija';
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-import useLanguage from '#/src/hooks/useLanguage';
+import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
 
 const KoulutusModal = ({ onClose, organisaatioOid, open }) => {
   const { t } = useTranslation();
   const history = useHistory();
-  const language = useLanguage();
   const [koulutus, setKoulutus] = useState();
 
   const { data } = useApiAsync({
@@ -29,19 +26,7 @@ const KoulutusModal = ({ onClose, organisaatioOid, open }) => {
     watch: organisaatioOid,
   });
 
-  const options = useMemo(
-    () =>
-      isArray(data)
-        ? sortBy(
-            data.map(({ nimi, oid, tila }) => ({
-              value: oid,
-              label: getFirstLanguageValue(nimi, language) + ` (${tila})`,
-            })),
-            ({ label }) => label
-          )
-        : [],
-    [data, language]
-  );
+  const options = useEntityOptions(data);
 
   const onSubmit = useCallback(() => {
     if (koulutus) {

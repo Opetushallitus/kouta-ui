@@ -7,7 +7,11 @@ const getValintaperusteet = async ({
   const { data } = await httpClient.get(
     apiUrls.url('kouta-backend.valintaperuste-list'),
     {
-      params: { organisaatioOid, ...(hakuOid && { hakuOid }) },
+      params: {
+        organisaatioOid,
+        ...(hakuOid && { hakuOid }),
+        myosArkistoidut: false,
+      },
     }
   );
 

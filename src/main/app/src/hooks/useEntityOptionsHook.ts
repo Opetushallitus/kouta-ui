@@ -16,8 +16,8 @@ export const useEntityOptions = entities => {
   const language = useLanguage();
   const { t } = useTranslation();
 
-  return useMemo(() => {
-    return () =>
+  return useMemo(
+    () =>
       _.isArray(entities)
         ? _.pipe(
             _.map((entity: EntityForDropdown) => ({
@@ -28,8 +28,9 @@ export const useEntityOptions = entities => {
             })),
             _.orderBy('label', 'asc')
           )(entities as EntityForDropdown[])
-        : [];
-  }, [entities, language, t]);
+        : [],
+    [entities, language, t]
+  );
 };
 
 export default useEntityOptions;

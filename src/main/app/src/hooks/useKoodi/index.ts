@@ -5,11 +5,14 @@ import useKoodisto from '#/src/hooks/useKoodisto';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 
 const useKoodi = koodiUri => {
-  const { koodisto, versio, koodi } = useMemo(() => parseKoodiUri(koodiUri), [
+  const { koodisto, koodi } = useMemo(() => parseKoodiUri(koodiUri), [
     koodiUri,
   ]);
 
-  const { data, ...rest } = useKoodisto({ koodisto, versio });
+  // Not passing koodisto version parsed from koodiUri here, because we
+  // want to use the latest koodisto. Also if a single koodi tries to fetch
+  // koodisto again for an older koodisto versio this will return empty data.
+  const { data, ...rest } = useKoodisto({ koodisto, versio: '' });
 
   const koodistoKoodi = useMemo(() => {
     return isArray(data) ? data.find(k => k.koodiUri === koodi) : undefined;

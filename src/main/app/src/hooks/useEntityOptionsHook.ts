@@ -26,7 +26,7 @@ export const useEntityOptions = entities => {
                 getFirstLanguageValue(entity.nimi, language) +
                 ` (${t(getJulkaisutilaTranslationKey(entity.tila))})`,
             })),
-            _.orderBy('label', 'asc')
+            _.orderBy(({ label }) => _.lowerCase(label), 'asc')
           )(entities as EntityForDropdown[])
         : [],
     [entities, language, t]

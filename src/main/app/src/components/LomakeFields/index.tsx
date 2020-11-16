@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { Field } from 'redux-form';
 import { isFunction } from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   FormFieldSelect,

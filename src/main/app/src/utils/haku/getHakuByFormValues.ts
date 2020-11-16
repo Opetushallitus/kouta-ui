@@ -4,6 +4,7 @@ import { isPartialDate, maybeParseNumber } from '#/src/utils';
 import getHakulomakeFieldsData from '#/src/utils/form/getHakulomakeFieldsData';
 import isKorkeakoulutusKohdejoukkoKoodiUri from '#/src/utils/isKorkeakoulutusKohdejoukkoKoodiUri';
 import { ALKAMISKAUSITYYPPI, TOTEUTUKSEN_AJANKOHTA } from '#/src/constants';
+import { HakuFormValues } from '#/src/types/hakuTypes';
 
 const getKielivalinta = values => values?.kieliversiot || [];
 

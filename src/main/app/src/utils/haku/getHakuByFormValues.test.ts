@@ -9,6 +9,7 @@ import {
   HAKULOMAKETYYPPI,
   TOTEUTUKSEN_AJANKOHTA,
 } from '#/src/constants';
+import { HakuFormValues } from '#/src/types/hakuTypes';
 
 const baseValues: HakuFormValues = {
   muokkaaja: '1.1.1.1',

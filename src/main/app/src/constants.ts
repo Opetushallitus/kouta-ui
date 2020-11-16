@@ -137,12 +137,12 @@ export const KOULUTUSTYYPPI_TO_KOULUTUSTYYPPI_IDS_MAP = {
   [KOULUTUSTYYPPI.AMKKOULUTUS]: ['koulutustyyppi_3'],
 };
 
-export const HAKULOMAKETYYPPI = {
-  ATARU: 'ataru',
-  HAKUAPP: 'haku-app',
-  MUU: 'muu',
-  EI_SAHKOISTA_HAKUA: 'ei sähköistä',
-} as Record<any, HakulomakeTyyppi>;
+export enum HAKULOMAKETYYPPI {
+  ATARU = 'ataru',
+  HAKUAPP = 'haku-app',
+  MUU = 'muu',
+  EI_SAHKOISTA_HAKUA = 'ei sähköistä',
+}
 
 export const VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI =
   'kielitaidonosoittaminen_04';

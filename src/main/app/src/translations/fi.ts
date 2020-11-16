@@ -1,5 +1,7 @@
 export default {
   yleiset: {
+    haunAsetukset: 'Haun asetukset',
+    muokkaaAsetuksia: 'Muokkaa asetuksia',
     esikatselu: 'Esikatsele',
     salliEsikatselu: 'Esikatselu käytössä',
     seuraava: 'Seuraava',

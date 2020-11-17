@@ -535,6 +535,13 @@ export default {
     eiMuokkausOikeutta: 'Käyttäjälläsi ei ole oikeuksia muokata tätä hakua',
     pohjavalintaInfo:
       'Voit halutessasi käyttää aiemmin luotuja hakuja uuden lomakkeen esitäytettynä pohjana.',
+    tiedossaTarkkaAjankohta: 'Tiedossa tarkka ajankohta',
+    alkamiskausi: 'Alkamiskausi',
+    valitseAlkamiskausi: 'Valitse alkamiskausi',
+    valitseAlkamisvuosi: 'Valitse vuosi',
+    aloitusHenkilokohtaisenSuunnitelmanMukaisesti:
+      'Aloitus henkilökohtaisen suunnitelman mukaisesti',
+    toteutuksenAjankohta: 'Toteutuksen ajankohta',
   },
   hakukohdelomake: {
     toteutukseenLiitettyAlkamiskausi: 'Toteutukseen liitetty alkamiskausi',

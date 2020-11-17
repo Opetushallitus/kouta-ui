@@ -22,6 +22,7 @@ import SoraKuvausSelect from '#/src/components/SoraKuvausSelect';
 import LanguageSelect from '#/src/components/LanguageSelect';
 import PostinumeroSelect from '#/src/components/PostinumeroSelect';
 import AsyncKoodistoSelect from '#/src/components/AsyncKoodistoSelect';
+import Switch from '#/src/components/Switch';
 
 export const simpleMapProps = ({ meta, input, ...props }) => ({
   ...input,
@@ -52,6 +53,15 @@ export const FormFieldRadioGroup = createComponent(RadioGroup, simpleMapProps);
 export const FormFieldCheckbox = createComponent(
   Checkbox,
   ({ meta, input: { value, ...input }, ...props }) => ({
+    ...input,
+    checked: !!value,
+    ...props,
+  })
+);
+
+export const FormFieldSwitch = createComponent(
+  Switch,
+  ({ meta, input: { value, checked, ...input }, ...props }) => ({
     ...input,
     checked: !!value,
     ...props,

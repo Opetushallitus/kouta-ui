@@ -1,3 +1,5 @@
+import { ALKAMISKAUSITYYPPI } from '#/src/constants';
+
 export default () => ({
   oid: '1.2.246.562.29.00000000000000000001',
   tila: 'tallennettu',
@@ -5,8 +7,7 @@ export default () => ({
   hakutapaKoodiUri: 'hakutapa_0#1',
   hakukohteenLiittamisenTakaraja: '2019-02-08T07:05',
   hakukohteenMuokkaamisenTakaraja: '2019-02-08T07:05',
-  alkamiskausiKoodiUri: 'kausi_0#1',
-  alkamisvuosi: '2024',
+
   kohdejoukkoKoodiUri: 'haunkohdejoukko_0#1',
   kohdejoukonTarkenneKoodiUri: 'haunkohdejoukontarkenne_0#1',
   hakulomaketyyppi: 'ataru',
@@ -14,6 +15,11 @@ export default () => ({
   hakulomakeKuvaus: {},
   hakulomakeLinkki: {},
   metadata: {
+    koulutuksenAlkamiskausi: {
+      alkamiskausityyppi: ALKAMISKAUSITYYPPI.ALKAMISKAUSI_JA_VUOSI,
+      koulutuksenAlkamiskausiKoodiUri: 'kausi_0#1',
+      koulutuksenAlkamisvuosi: '2024',
+    },
     tulevaisuudenAikataulu: [
       { alkaa: '2019-10-11T09:05', paattyy: '2019-12-25T20:30' },
     ],

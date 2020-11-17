@@ -3,7 +3,7 @@ import {
   KOULUTUSTYYPPI,
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
 } from '#/src/constants';
-import { maybeParseToNumber } from '#/src/utils';
+import { maybeParseNumber } from '#/src/utils';
 
 const osaamisalaKoodiToKoodiUri = value =>
   value ? `osaamisala_${value}` : null;
@@ -43,7 +43,7 @@ const getKoulutusByFormValues = values => {
         : pickTranslations(values?.information?.nimi ?? {}),
     julkinen: Boolean(values?.julkinen),
     esikatselu: values?.esikatselu,
-    ePerusteId: maybeParseToNumber(
+    ePerusteId: maybeParseNumber(
       values?.information?.eperuste?.value || osaamisala?.eperuste?.value
     ),
     teemakuva: values?.teemakuva,
@@ -59,10 +59,10 @@ const getKoulutusByFormValues = values => {
         ) => [
           ...resultOsat,
           ..._.map(({ value, viite }) => ({
-            ePerusteId: maybeParseToNumber(ePerusteId),
+            ePerusteId: maybeParseNumber(ePerusteId),
             koulutusKoodiUri,
-            tutkinnonosaId: maybeParseToNumber(value),
-            tutkinnonosaViite: maybeParseToNumber(viite),
+            tutkinnonosaId: maybeParseNumber(value),
+            tutkinnonosaViite: maybeParseNumber(viite),
           }))(osat),
         ],
         [] as Array<{

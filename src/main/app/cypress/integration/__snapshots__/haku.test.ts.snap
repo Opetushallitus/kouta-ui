@@ -1,8 +1,6 @@
 exports[`createHaku > should be able to create haku #0`] =
 {
   "ajastettuJulkaisu": "2019-12-05T06:45",
-  "alkamiskausiKoodiUri": "kausi_0#1",
-  "alkamisvuosi": 2020,
   "hakuajat": [
     {
       "alkaa": "2019-04-02T10:45",
@@ -22,6 +20,13 @@ exports[`createHaku > should be able to create haku #0`] =
   "kohdejoukkoKoodiUri": "haunkohdejoukko_12#1",
   "kohdejoukonTarkenneKoodiUri": "haunkohdejoukontarkenne_0#1",
   "metadata": {
+    "koulutuksenAlkamiskausi": {
+      "alkamiskausityyppi": "tarkka alkamisajankohta",
+      "koulutuksenAlkamiskausiKoodiUri": "kausi_0#1",
+      "koulutuksenAlkamispaivamaara": "2020-11-01T00:00",
+      "koulutuksenAlkamisvuosi": 2020,
+      "koulutuksenPaattymispaivamaara": "2020-11-30T00:00"
+    },
     "tulevaisuudenAikataulu": [
       {
         "alkaa": "2019-10-11T09:05",
@@ -37,7 +42,7 @@ exports[`createHaku > should be able to create haku #0`] =
           "fi": "puhelin"
         },
         "sahkoposti": {
-          "fi": "sähkoposti"
+          "fi": "sähköposti"
         },
         "titteli": {
           "fi": "titteli"
@@ -59,8 +64,6 @@ exports[`createHaku > should be able to create haku #0`] =
 exports[`editHaku > should be able to edit haku #0`] =
 {
   "ajastettuJulkaisu": "2019-12-05T06:45",
-  "alkamiskausiKoodiUri": "kausi_0#1",
-  "alkamisvuosi": 2024,
   "hakuajat": [
     {
       "alkaa": "2019-02-08T07:05",
@@ -80,6 +83,13 @@ exports[`editHaku > should be able to edit haku #0`] =
   "kohdejoukkoKoodiUri": "haunkohdejoukko_0#1",
   "kohdejoukonTarkenneKoodiUri": null,
   "metadata": {
+    "koulutuksenAlkamiskausi": {
+      "alkamiskausityyppi": "alkamiskausi ja -vuosi",
+      "koulutuksenAlkamiskausiKoodiUri": "kausi_0#1",
+      "koulutuksenAlkamispaivamaara": null,
+      "koulutuksenAlkamisvuosi": 2024,
+      "koulutuksenPaattymispaivamaara": null
+    },
     "tulevaisuudenAikataulu": [
       {
         "alkaa": "2019-10-11T09:05",

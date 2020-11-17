@@ -9,7 +9,7 @@ const SwitchContainer = styled.div`
   display: inline-block;
 `;
 
-const HiddenSwitch = styled.input.attrs({ type: 'Switch' })`
+const HiddenSwitch = styled.input.attrs({ type: 'checkbox' })`
   border: 0;
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
@@ -26,12 +26,22 @@ const StyledSwitch = styled.div`
   display: inline-block;
   position: relative;
   width: 2.5em;
-  height: 1.2em;
+  height: 1.25em;
   border-radius: 1em;
+  border-style: solid;
+  border: 0.0625em solid ${getThemeProp('colors.inputBorder')};
   background-color: rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.25s, border-color 0.25s, background-color 0.25s;
 
   ${HiddenSwitch}:focus + & {
+    box-shadow: 0 0 0 0.1875em
+      ${({ theme }) => theme.colors.primary.focusOutline};
+  }
+
+  &:hover,
+  ${HiddenSwitch}:focus + & {
+    border-color: ${({ theme, error }) =>
+      error ? theme.colors.danger.main : theme.colors.primary.main};
   }
 
   ${({ checked }) =>
@@ -49,6 +59,14 @@ const Label = styled.label`
   line-height: 1.5;
   color: ${getThemeProp('palette.text.primary')};
   align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    & ${StyledSwitch} {
+      border-color: ${({ theme, error }) =>
+        error ? theme.colors.danger.main : theme.colors.primary.main};
+    }
+  }
 
   ${disabledStyle}
 `;
@@ -71,35 +89,58 @@ const SwitchBall = styled.div`
   width: 1em;
   height: 1em;
   position: absolute;
-  top: 0.1em;
+  top: 0.125em;
   position: absolute;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.125em 0.25em 0 rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.25s;
 `;
 
-const Switch = ({
-  className,
-  checked,
-  children,
-  error = false,
-  disabled = false,
-  ...props
-}) => (
-  <Label disabled={disabled}>
-    <SwitchWrapper>
-      <SwitchContainer className={className}>
-        <HiddenSwitch checked={checked} disabled={disabled} {...props} />
-        <StyledSwitch checked={checked} error={error}>
-          <Spring to={{ left: checked ? '1.3em' : '0.1em' }}>
-            {({ left }) => (
-              <SwitchBall error={error} checked={checked} style={{ left }} />
-            )}
-          </Spring>
-        </StyledSwitch>
-      </SwitchContainer>
-    </SwitchWrapper>
-    {children ? <LabelWrapper>{children}</LabelWrapper> : null}
-  </Label>
+type CheckboxBaseProps = {
+  disabled?: boolean;
+  checked?: boolean;
+  children?: React.ReactNode;
+  error?: boolean;
+  className?: string;
+  indeterminate?: boolean;
+  fullWidth?: boolean;
+};
+
+export type SwitchProps = CheckboxBaseProps &
+  Omit<React.ComponentProps<typeof HiddenSwitch>, keyof CheckboxBaseProps>;
+
+const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
+  (
+    {
+      className,
+      checked = false,
+      children,
+      error = false,
+      disabled = false,
+      ...props
+    },
+    ref
+  ) => (
+    <Label disabled={disabled}>
+      <SwitchWrapper>
+        <SwitchContainer className={className}>
+          <HiddenSwitch
+            checked={checked}
+            disabled={disabled}
+            ref={ref}
+            {...props}
+          />
+          <StyledSwitch checked={checked} error={error}>
+            <Spring to={{ left: checked ? '1.4em' : '0.125em' }}>
+              {({ left }) => (
+                <SwitchBall error={error} checked={checked} style={{ left }} />
+              )}
+            </Spring>
+          </StyledSwitch>
+        </SwitchContainer>
+      </SwitchWrapper>
+      {children ? <LabelWrapper>{children}</LabelWrapper> : null}
+    </Label>
+  )
 );
 
 export default Switch;

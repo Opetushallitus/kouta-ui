@@ -1,9 +1,25 @@
+import _ from 'lodash/fp';
 import getHakulomakeFieldsValues from '#/src/utils/form/getHakulomakeFieldsValues';
+import { ALKAMISKAUSITYYPPI, TOTEUTUKSEN_AJANKOHTA } from '#/src/constants';
+import { HakuFormValues } from '#/src/types/hakuTypes';
 
-const getFormValuesByHaku = haku => {
+export const alkamiskausityyppiToToteutuksenAjankohta = _.cond([
+  [
+    _.overSome([
+      _.isEqual(ALKAMISKAUSITYYPPI.ALKAMISKAUSI_JA_VUOSI),
+      _.isEqual(ALKAMISKAUSITYYPPI.TARKKA_ALKAMISAJANKOHTA),
+    ]),
+    () => TOTEUTUKSEN_AJANKOHTA.ALKAMISKAUSI,
+  ],
+  [
+    _.isEqual(ALKAMISKAUSITYYPPI.HENKILOKOHTAINEN_SUUNNITELMA),
+    () => TOTEUTUKSEN_AJANKOHTA.HENKILOKOHTAINEN_SUUNNITELMA,
+  ],
+]);
+
+const getFormValuesByHaku = (haku): HakuFormValues => {
   const {
-    alkamiskausiKoodiUri = '',
-    alkamisvuosi = '',
+    muokkaaja,
     hakuajat = [],
     hakutapaKoodiUri = '',
     kohdejoukkoKoodiUri = '',
@@ -21,27 +37,37 @@ const getFormValuesByHaku = haku => {
     tila,
   } = haku;
 
-  const { tulevaisuudenAikataulu = [], yhteyshenkilot = [] } = metadata;
+  const {
+    tulevaisuudenAikataulu = [],
+    yhteyshenkilot = [],
+    koulutuksenAlkamiskausi = {},
+  } = metadata;
+
+  const {
+    alkamiskausityyppi,
+    koulutuksenAlkamiskausiKoodiUri = null,
+    koulutuksenAlkamispaivamaara = null,
+    koulutuksenPaattymispaivamaara = null,
+    koulutuksenAlkamisvuosi = '',
+  } = koulutuksenAlkamiskausi;
 
   return {
+    muokkaaja,
     tila,
     nimi,
     kieliversiot: kielivalinta,
     aikataulut: {
-      kausi: alkamiskausiKoodiUri,
-      vuosi: { value: alkamisvuosi ? alkamisvuosi.toString() : '' },
-      hakuaika: (hakuajat || []).map(({ alkaa, paattyy }) => {
-        return {
-          alkaa,
-          paattyy,
-        };
-      }),
-      aikataulu: (tulevaisuudenAikataulu || []).map(({ alkaa, paattyy }) => {
-        return {
-          alkaa,
-          paattyy,
-        };
-      }),
+      toteutuksenAjankohta: alkamiskausityyppiToToteutuksenAjankohta(
+        alkamiskausityyppi
+      ),
+      kausi: koulutuksenAlkamiskausiKoodiUri,
+      vuosi: { value: _.toString(koulutuksenAlkamisvuosi) || '' },
+      tiedossaTarkkaAjankohta:
+        alkamiskausityyppi === ALKAMISKAUSITYYPPI.TARKKA_ALKAMISAJANKOHTA,
+      tarkkaAlkaa: koulutuksenAlkamispaivamaara,
+      tarkkaPaattyy: koulutuksenPaattymispaivamaara,
+      hakuaika: hakuajat,
+      aikataulu: tulevaisuudenAikataulu,
       lisaamisenTakaraja: hakukohteenLiittamisenTakaraja,
       muokkauksenTakaraja: hakukohteenMuokkaamisenTakaraja,
       ajastettuJulkaisu,

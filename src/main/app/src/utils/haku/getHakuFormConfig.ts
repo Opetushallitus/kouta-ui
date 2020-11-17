@@ -1,6 +1,10 @@
-import { cond, flow, get } from 'lodash';
+import _ from 'lodash/fp';
 import { ifAny, otherwise } from '#/src/utils';
-import { HAKULOMAKETYYPPI } from '#/src/constants';
+import {
+  HAKULOMAKETYYPPI,
+  JULKAISUTILA,
+  TOTEUTUKSEN_AJANKOHTA,
+} from '#/src/constants';
 import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
 import isErillishakuHakutapa from '#/src/utils/isErillishakuHakutapa';
 import createFormConfigBuilder from '#/src/utils/form/createFormConfigBuilder';
@@ -10,9 +14,14 @@ import {
   kieliversiotSectionConfig,
   pohjaValintaSectionConfig,
   tilaSectionConfig,
+  validateIf,
 } from '#/src/utils/form/formConfigUtils';
+import {
+  validateExistence,
+  validateExistenceOfDate,
+} from '#/src/utils/form/createErrorBuilder';
 
-const getHakutapa = values => get(values, 'hakutapa');
+const getHakutapa = values => values?.hakutapa;
 
 const config = createFormConfigBuilder().registerSections([
   kieliversiotSectionConfig,
@@ -46,7 +55,7 @@ const config = createFormConfigBuilder().registerSections([
       {
         field: 'hakutapa',
         required: true,
-        validate: validateIfJulkaistu(eb => eb.validateExistence('hakutapa')),
+        validate: validateIfJulkaistu(validateExistence('hakutapa')),
       },
     ],
   },
@@ -58,38 +67,66 @@ const config = createFormConfigBuilder().registerSections([
         required: true,
       },
       {
+        field: '.toteutuksenAjankohta',
+      },
+      {
+        field: '.kausi',
+        required: values => isYhteishakuHakutapa(getHakutapa(values)),
+      },
+      {
+        field: '.vuosi',
+        validate: (eb, values) =>
+          validateIf(
+            isYhteishakuHakutapa(getHakutapa(values)) &&
+              values?.aikataulut?.toteutuksenAjankohta ===
+                TOTEUTUKSEN_AJANKOHTA.ALKAMISKAUSI &&
+              values?.tila === JULKAISUTILA.JULKAISTU,
+            _.pipe(
+              validateExistence('aikataulut.kausi'),
+              validateExistence('aikataulut.vuosi')
+            )
+          )(eb),
+      },
+      {
+        field: '.tiedossaTarkkaAjankohta',
+      },
+      {
+        field: '.tarkkaAlkaa',
+        required: true,
+        validate: (eb, values) =>
+          validateIf(
+            values?.aikataulut?.toteutuksenAjankohta ===
+              TOTEUTUKSEN_AJANKOHTA.ALKAMISKAUSI &&
+              values?.aikataulut?.tiedossaTarkkaAjankohta &&
+              values?.tila === JULKAISUTILA.JULKAISTU,
+            _.pipe(
+              validateExistenceOfDate('aikataulut.tarkkaAlkaa'),
+              validateExistenceOfDate('aikataulut.tarkkaPaattyy')
+            )
+          )(eb),
+      },
+      {
+        field: '.tarkkaPaattyy',
+        required: true,
+      },
+      {
         field: '.hakuaika',
-        validate: validateIfJulkaistu(
-          (errorBuilder, values) =>
-            errorBuilder
-              .validateArrayMinLength('aikataulut.hakuaika', 1, {
-                isFieldArray: true,
-              })
-              .validateArray('aikataulut.hakuaika', eb => {
-                const hakutapa = getHakutapa(values);
-                const isErillishaku = isErillishakuHakutapa(hakutapa);
-                const isYhteishaku = isYhteishakuHakutapa(hakutapa);
-
-                return flow([
-                  eb => eb.validateExistenceOfDate('alkaa'),
-                  eb =>
-                    isYhteishaku || isErillishaku
-                      ? eb.validateExistenceOfDate('paattyy')
-                      : eb,
-                ])(eb);
-              }),
-          (errorBuilder, values) =>
-            errorBuilder.validateArray('aikataulut.hakuaika', eb => {
+        validate: validateIfJulkaistu((errorBuilder, values) =>
+          errorBuilder
+            .validateArrayMinLength('aikataulut.hakuaika', 1, {
+              isFieldArray: true,
+            })
+            .validateArray('aikataulut.hakuaika', eb => {
               const hakutapa = getHakutapa(values);
               const isErillishaku = isErillishakuHakutapa(hakutapa);
               const isYhteishaku = isYhteishakuHakutapa(hakutapa);
 
-              return flow([
-                eb => eb.validateExistenceOfDate('alkaa'),
-                eb =>
-                  isYhteishaku || isErillishaku
-                    ? eb.validateExistenceOfDate('paattyy')
-                    : eb,
+              return _.flow([
+                validateExistenceOfDate('alkaa'),
+                validateIf(
+                  isYhteishaku || isErillishaku,
+                  validateExistenceOfDate('paattyy')
+                ),
               ])(eb);
             })
         ),
@@ -111,24 +148,6 @@ const config = createFormConfigBuilder().registerSections([
         field: '.aikataulu',
       },
       {
-        field: '.kausi',
-        validate: validateIfJulkaistu((eb, values) => {
-          const hakutapa = getHakutapa(values);
-          const isYhteishaku = isYhteishakuHakutapa(hakutapa);
-
-          return isYhteishaku
-            ? eb
-                .validateExistence('aikataulut.kausi')
-                .validateExistence('aikataulut.vuosi')
-            : eb;
-        }),
-        required: values => isYhteishakuHakutapa(getHakutapa(values)),
-      },
-      {
-        field: '.vuosi',
-        required: values => isYhteishakuHakutapa(getHakutapa(values)),
-      },
-      {
         field: '.lisaamisenTakaraja',
       },
       {
@@ -148,7 +167,7 @@ const config = createFormConfigBuilder().registerSections([
         validate: validateIfJulkaistu(
           (eb, values) =>
             eb.validateExistence('hakulomake.tyyppi') &&
-            cond([
+            _.cond([
               [
                 ifAny(HAKULOMAKETYYPPI.ATARU),
                 () => eb.validateExistence('hakulomake.lomake'),
@@ -162,7 +181,7 @@ const config = createFormConfigBuilder().registerSections([
                   ),
               ],
               [otherwise, () => eb],
-            ])(tyyppi => get(values, 'hakulomake.tyyppi') === tyyppi)
+            ])(tyyppi => values?.hakulomake?.tyyppi === tyyppi)
         ),
       },
       {

@@ -7,7 +7,6 @@ import Button from '#/src/components/Button';
 import { FormFieldInput } from '#/src/components/formFields';
 import Flex from '#/src/components/Flex';
 import Spacing from '#/src/components/Spacing';
-import { getTestIdProps } from '#/src/utils';
 
 const YhteyshenkilotField = ({ fields, language, t }) => {
   const onAddField = useCallback(() => {
@@ -19,35 +18,35 @@ const YhteyshenkilotField = ({ fields, language, t }) => {
       <FieldArrayList fields={fields}>
         {({ field }) => (
           <>
-            <Spacing marginBottom={2} {...getTestIdProps('nimi')}>
+            <Spacing marginBottom={2}>
               <Field
                 name={`${field}.nimi.${language}`}
                 label={t('yleiset.nimi')}
                 component={FormFieldInput}
               />
             </Spacing>
-            <Spacing marginBottom={2} {...getTestIdProps('titteli')}>
+            <Spacing marginBottom={2}>
               <Field
                 name={`${field}.titteli.${language}`}
                 label={t('yleiset.titteli')}
                 component={FormFieldInput}
               />
             </Spacing>
-            <Spacing marginBottom={2} {...getTestIdProps('sahkoposti')}>
+            <Spacing marginBottom={2}>
               <Field
                 name={`${field}.sahkoposti.${language}`}
                 label={t('yleiset.sahkoposti')}
                 component={FormFieldInput}
               />
             </Spacing>
-            <Spacing marginBottom={2} {...getTestIdProps('puhelinnumero')}>
+            <Spacing marginBottom={2}>
               <Field
                 name={`${field}.puhelinnumero.${language}`}
                 label={t('yleiset.puhelinnumero')}
                 component={FormFieldInput}
               />
             </Spacing>
-            <Spacing {...getTestIdProps('verkkosivu')}>
+            <Spacing>
               <Field
                 name={`${field}.verkkosivu.${language}`}
                 label={t('yleiset.verkkosivu')}
@@ -63,7 +62,6 @@ const YhteyshenkilotField = ({ fields, language, t }) => {
           color="primary"
           type="button"
           onClick={onAddField}
-          {...getTestIdProps('lisaaYhteyshenkiloButton')}
         >
           {t('yleiset.lisaaYhteyshenkilo')}
         </Button>

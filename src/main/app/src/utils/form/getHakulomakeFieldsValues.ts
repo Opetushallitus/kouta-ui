@@ -5,7 +5,7 @@ const getHakulomakeFieldsValues = ({
   hakulomakeAtaruId,
   hakulomakeLinkki,
   hakulomakeKuvaus,
-}) => {
+}): HakulomakeFormSection => {
   return {
     tyyppi: hakulomaketyyppi,
     lomake:

@@ -6,11 +6,17 @@ import {
   useFieldIsRequired,
 } from '#/src/hooks/fieldConfigHooks';
 
-export const FieldGroup = ({
+type FieldGroupProps = {
+  title: string;
+  HeadingComponent?: React.ComponentType;
+  name?: string;
+};
+
+export const FieldGroup: React.FC<FieldGroupProps> = ({
   title,
   children,
   HeadingComponent = DividerHeading,
-  name = undefined,
+  name,
   ...props
 }) => {
   const fieldConfig = useFieldConfig(name);

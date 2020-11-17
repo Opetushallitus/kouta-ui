@@ -4,6 +4,7 @@ import {
   getByTestId,
   fillKieliversiotSection,
   tallenna,
+  assertNoUnsavedChangesDialog,
 } from '#/cypress/utils';
 import valintaperuste from '#/cypress/data/valintaperuste';
 import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils';
@@ -50,5 +51,10 @@ export const editValintaperusteForm = () => {
     cy.wait('@updateValintaperusteRequest').then(({ request }) => {
       cy.wrap(request.body).toMatchSnapshot();
     });
+  });
+
+  it("Shouldn't complain about unsaved changed for untouched form", () => {
+    prepareTest('amm');
+    assertNoUnsavedChangesDialog();
   });
 };

@@ -1,5 +1,9 @@
 import { merge } from 'lodash';
-import { fillKieliversiotSection, tallenna } from '#/cypress/utils';
+import {
+  assertNoUnsavedChangesDialog,
+  fillKieliversiotSection,
+  tallenna,
+} from '#/cypress/utils';
 import { stubHakuFormRoutes } from '#/cypress/hakuFormUtils';
 import haku from '#/cypress/data/haku';
 
@@ -51,5 +55,9 @@ export const editHakuForm = () => {
     cy.wait('@editHakuRequest').then(({ request }) => {
       cy.wrap(request.body).toMatchSnapshot();
     });
+  });
+
+  it("Shouldn't complain about unsaved changed for untouched form", () => {
+    assertNoUnsavedChangesDialog();
   });
 };

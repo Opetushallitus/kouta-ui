@@ -22,9 +22,11 @@ import {
 import koulutus from '#/cypress/data/koulutus';
 import { stubToteutusFormRoutes } from '#/cypress/toteutusFormUtils';
 
-const fillOpetuskieli = () => {
+const fillOpetuskieli = (chosenNumber = '0') => {
   getByTestId('opetuskieli').within(() => {
-    getCheckbox('oppilaitoksenopetuskieli_0#1').click({ force: true });
+    getCheckbox(`oppilaitoksenopetuskieli_${chosenNumber}#1`).click({
+      force: true,
+    });
     cy.get('textarea').pipe(paste('opetuskieli kuvaus'));
   });
 };
@@ -425,6 +427,9 @@ export const createToteutusForm = () => {
 
     getByTestId('jarjestamistiedotSection').within(() => {
       fillCommonJarjestamistiedot({ maksullisuusTyyppi: 'lukuvuosimaksu' });
+      cy.findByTestId('stipendi').should('not.exist');
+      fillOpetuskieli('4'); // "englanti" is needed for stipendi to show up
+      cy.findByTestId('stipendi').should('exist');
       fillStipendi();
       jatka();
     });
@@ -459,7 +464,6 @@ export const createToteutusForm = () => {
 
     getByTestId('jarjestamistiedotSection').within(() => {
       fillCommonJarjestamistiedot();
-      fillStipendi();
       fillDiplomi();
       fillKielivalikoima();
       jatka();

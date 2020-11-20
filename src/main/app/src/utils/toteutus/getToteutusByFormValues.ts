@@ -9,6 +9,8 @@ import {
 import serializeSisaltoField from '#/src/utils/form/serializeSisaltoField';
 import { serializeEditorState } from '#/src/components/Editor/utils';
 import { HAKULOMAKETYYPPI } from '#/src/constants';
+import { isStipendiVisible } from './toteutusVisibilities';
+
 const { MUU, EI_SAHKOISTA_HAKUA } = HAKULOMAKETYYPPI;
 
 const getOsaamisalatByValues = ({ osaamisalat, pickTranslations }) => {
@@ -44,6 +46,8 @@ const getToteutusByFormValues = values => {
   const osaamisalaLinkkiOtsikot =
     values?.osaamisalat?.osaamisalaLinkkiOtsikot || {};
 
+  const opetuskielet = values?.jarjestamistiedot?.opetuskieli;
+  const stipendiVisible = isStipendiVisible(koulutustyyppi, opetuskielet);
   const onkoStipendia = values?.jarjestamistiedot?.onkoStipendia === 'kylla';
 
   const koulutuksenTarkkaAlkamisaika =
@@ -65,7 +69,7 @@ const getToteutusByFormValues = values => {
             teksti: pickTranslations(osioKuvaukset[value] || {}),
           })
         ),
-        opetuskieliKoodiUrit: values?.jarjestamistiedot?.opetuskieli || [],
+        opetuskieliKoodiUrit: opetuskielet || [],
         onkoMaksullinen,
         maksunMaara: onkoMaksullinen
           ? maybeParseNumber(maksullisuusMaksu)
@@ -103,12 +107,14 @@ const getToteutusByFormValues = values => {
               values?.jarjestamistiedot?.koulutuksenAlkamisvuosi?.value
             )
           : null,
-        onkoStipendia,
-        stipendinKuvaus: pickTranslations(
-          values?.jarjestamistiedot?.stipendinKuvaus || {}
-        ),
+        onkoStipendia: stipendiVisible && onkoStipendia,
+        stipendinKuvaus: stipendiVisible
+          ? pickTranslations(values?.jarjestamistiedot?.stipendinKuvaus || {})
+          : null,
         stipendinMaara:
-          onkoStipendia && isNumeric(values?.jarjestamistiedot?.stipendinMaara)
+          stipendiVisible &&
+          onkoStipendia &&
+          isNumeric(values?.jarjestamistiedot?.stipendinMaara)
             ? maybeParseNumber(values.jarjestamistiedot.stipendinMaara)
             : null,
         diplomiKoodiUrit: (values?.jarjestamistiedot?.diplomiTyypit || []).map(

@@ -46,7 +46,7 @@ export function useIsSubmitting() {
   return useSelector(isSubmitting(formName));
 }
 
-export function useFieldValue(name, formNameProp?: string) {
+export function useFieldValue<T = any>(name, formNameProp?: string): T {
   const contextFormName = useContext(FormNameContext);
   const formName = formNameProp || contextFormName;
 

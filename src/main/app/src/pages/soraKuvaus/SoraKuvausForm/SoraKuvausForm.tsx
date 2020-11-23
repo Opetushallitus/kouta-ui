@@ -1,12 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { ENTITY } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import getSoraKuvaukset from '#/src/utils/soraKuvaus/getSoraKuvaukset';
 import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import FormCollapse from '#/src/components/FormCollapse';
-import JulkisuusSection from '#/src/components/JulkisuusSection';
 import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import KoulutustyyppiSection from './KoulutustyyppiSection';
@@ -27,14 +25,13 @@ const SoraKuvausForm = ({
 
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
-      {canEditKoulutustyyppi ? (
-        <FormCollapse
-          section="koulutustyyppi"
-          header={t('yleiset.koulutustyyppi')}
-          scrollOnActive={false}
-          Component={KoulutustyyppiSection}
-        />
-      ) : null}
+      <FormCollapse
+        section="koulutustyyppi"
+        header={t('yleiset.koulutustyyppi')}
+        scrollOnActive={false}
+        Component={KoulutustyyppiSection}
+        disabled={!canEditKoulutustyyppi}
+      />
       {canSelectBase ? (
         <PohjaFormCollapse
           onSelectBase={onSelectBase}

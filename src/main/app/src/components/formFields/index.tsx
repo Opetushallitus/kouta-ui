@@ -1,5 +1,4 @@
-import { createComponent } from './utils';
-import { noop } from 'lodash';
+import _ from 'lodash';
 import {
   DatePicker,
   Checkbox,
@@ -9,19 +8,21 @@ import {
   RadioGroup,
   Textarea,
 } from '#/src/components/virkailija';
-import Select, { AsyncSelect } from '#/src/components/Select';
-import DatePickerInput from '#/src/components/DatePickerInput';
-import DateTimeInput from '#/src/components/DateTimeInput';
-import TimeInput from '#/src/components/TimeInput';
-import Editor from '#/src/components/Editor';
-import YearSelect from '#/src/components/YearSelect';
-import ImageInput from '#/src/components/ImageInput';
-import KoulutustyyppiSelect from '#/src/components/KoulutustyyppiSelect';
-import SoraKuvausSelect from '#/src/components/SoraKuvausSelect';
-import LanguageSelect from '#/src/components/LanguageSelect';
-import PostinumeroSelect from '#/src/components/PostinumeroSelect';
-import AsyncKoodistoSelect from '#/src/components/AsyncKoodistoSelect';
-import Switch from '#/src/components/Switch';
+import { Select, AsyncSelect } from '#/src/components/Select';
+import { DatePickerInput } from '#/src/components/DatePickerInput';
+import { DateTimeInput } from '#/src/components/DateTimeInput';
+import { TimeInput } from '#/src/components/TimeInput';
+import { Editor } from '#/src/components/Editor';
+import { YearSelect } from '#/src/components/YearSelect';
+import { ImageInput } from '#/src/components/ImageInput';
+import { KoulutustyyppiSelect } from '#/src/components/KoulutustyyppiSelect';
+import { KoulutusalaSelect } from '#/src/components/KoulutusalaSelect';
+import { SoraKuvausSelect } from '#/src/components/SoraKuvausSelect';
+import { LanguageSelect } from '#/src/components/LanguageSelect';
+import { PostinumeroSelect } from '#/src/components/PostinumeroSelect';
+import { AsyncKoodistoSelect } from '#/src/components/AsyncKoodistoSelect';
+import { Switch } from '#/src/components/Switch';
+import { createComponent } from './utils';
 
 export const simpleMapProps = ({ meta, input, ...props }) => ({
   ...input,
@@ -30,7 +31,7 @@ export const simpleMapProps = ({ meta, input, ...props }) => ({
 
 export const selectMapProps = ({ input, ...props }) => ({
   ...input,
-  onBlur: noop,
+  onBlur: _.noop,
   ...props,
 });
 
@@ -78,7 +79,7 @@ export const FormFieldSelect = createComponent(
   Select,
   ({ disabled, meta, input, id, ...props }) => ({
     ...input,
-    onBlur: noop,
+    onBlur: _.noop,
     ...props,
     id,
   })
@@ -99,7 +100,7 @@ export const FormFieldYearSelect = createComponent(
   YearSelect,
   ({ meta, input, id, ...props }) => ({
     ...input,
-    onBlur: noop,
+    onBlur: _.noop,
     ...props,
     id,
   })
@@ -116,14 +117,19 @@ export const FormFieldImageInput = createComponent(
 
 export const FormFieldKoulutustyyppiSelect = createComponent(
   KoulutustyyppiSelect,
-  simpleMapProps
+  selectMapProps
+);
+
+export const FormFieldKoulutusalaSelect = createComponent(
+  KoulutusalaSelect,
+  selectMapProps
 );
 
 export const FormFieldSoraKuvausSelect = createComponent(
   SoraKuvausSelect,
   ({ meta, input, id, ...props }) => ({
     ...input,
-    onBlur: noop,
+    onBlur: _.noop,
     ...props,
     id,
   })

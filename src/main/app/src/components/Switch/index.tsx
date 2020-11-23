@@ -108,7 +108,7 @@ type CheckboxBaseProps = {
 export type SwitchProps = CheckboxBaseProps &
   Omit<React.ComponentProps<typeof HiddenSwitch>, keyof CheckboxBaseProps>;
 
-const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
+export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
   (
     {
       className,

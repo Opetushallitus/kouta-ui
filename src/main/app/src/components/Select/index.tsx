@@ -100,7 +100,7 @@ type SelectProps = Props & {
   error?: boolean;
 };
 
-const Select: React.FC<SelectProps> = ({
+export const Select: React.FC<SelectProps> = ({
   id,
   disabled,
   value,

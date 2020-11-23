@@ -7,7 +7,6 @@ import {
   kieliversiotSectionConfig,
   pohjaValintaSectionConfig,
   tilaSectionConfig,
-  julkinenSectionConfig,
 } from '#/src/utils/form/formConfigUtils';
 import { validateExistence } from '../form/createErrorBuilder';
 
@@ -39,9 +38,8 @@ const config = createFormConfigBuilder().registerSections([
     parts: [
       {
         field: '.nimi',
-        validate: validateIfJulkaistu((eb, values) =>
-          eb.validateTranslations('tiedot.nimi', getKielivalinta(values))
-        ),
+        validate: (eb, values) =>
+          eb.validateTranslations('tiedot.nimi', getKielivalinta(values)),
         required: true,
       },
       {

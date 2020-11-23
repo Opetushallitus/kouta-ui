@@ -1,24 +1,51 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import _ from 'lodash';
 import { Field } from 'redux-form';
 import { useTranslation } from 'react-i18next';
 import {
-  createFormFieldComponent,
+  FormFieldAsyncKoodistoSelect,
+  FormFieldKoulutusalaSelect,
   FormFieldKoulutustyyppiSelect,
-  selectMapProps,
 } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
-import KoulutusalaSelect from '#/src/components/KoulutusalaSelect';
-import KoulutusField from '#/src/components/KoulutusField';
-import { useFieldValue } from '#/src/hooks/form';
+import {
+  useBoundFormActions,
+  useFieldValue,
+  useIsDirty,
+} from '#/src/hooks/form';
+import useLoadOptions from '#/src/hooks/useLoadOptions';
+import { useKoodistoDataOptions } from '#/src/hooks/useKoodistoOptions';
+import { useHasChanged } from '#/src/hooks/useHasChanged';
+import { getTestIdProps } from '#/src/utils';
+import { useKoulutuksetByKoulutusala } from '#/src/utils/soraKuvaus/getKoulutuksetBykoulutusala';
 
-const KoulutusalaFieldComponent = createFormFieldComponent(
-  KoulutusalaSelect,
-  selectMapProps
-);
-
-export const KoulutustyyppiSection = ({ name, language }) => {
+export const KoulutustyyppiSection = ({ name, language, disabled }) => {
   const { t } = useTranslation();
-  const koulutustyyppi = useFieldValue(name);
+
+  const { change } = useBoundFormActions();
+
+  const koulutusalaFieldValue = useFieldValue('koulutusala')?.value;
+
+  const koulutusalaHasChanged = useHasChanged(koulutusalaFieldValue);
+
+  const isDirty = useIsDirty();
+
+  useEffect(() => {
+    if (koulutusalaHasChanged && isDirty) {
+      change('koulutukset', null);
+    }
+  }, [change, isDirty, koulutusalaHasChanged]);
+
+  const { data: koulutukset } = useKoulutuksetByKoulutusala(
+    koulutusalaFieldValue
+  );
+
+  const koulutusOptions = useKoodistoDataOptions({
+    koodistoData: koulutukset,
+    language,
+  });
+
+  const loadOptions = useLoadOptions(koulutusOptions);
 
   return (
     <Box display="flex" flexDirection="column" maxWidth="900px">
@@ -26,19 +53,24 @@ export const KoulutustyyppiSection = ({ name, language }) => {
         name={name}
         component={FormFieldKoulutustyyppiSelect}
         label={t('yleiset.valitseKoulutustyyppi')}
+        disabled={disabled}
       />
       <Box display="flex" mt={4}>
-        <Box flex="1 1 50%" mr={2}>
+        <Box flex="1 1 50%" mr={2} {...getTestIdProps('koulutusala')}>
           <Field
-            name={'koulutusala'}
-            component={KoulutusalaFieldComponent}
+            name="koulutusala"
+            component={FormFieldKoulutusalaSelect}
             label={t('soraKuvauslomake.valitseKoulutusala')}
+            disabled={disabled}
           />
         </Box>
-        <Box flex="1 1 50%">
-          <KoulutusField
+        <Box flex="1 1 50%" {...getTestIdProps('koulutukset')}>
+          <Field
             name="koulutukset"
-            koulutustyyppi={koulutustyyppi}
+            loadOptions={loadOptions}
+            component={FormFieldAsyncKoodistoSelect}
+            label={t('yleiset.valitseKoulutus')}
+            disabled={disabled || _.isEmpty(koulutusOptions)}
             language={language}
             isMulti={true}
           />

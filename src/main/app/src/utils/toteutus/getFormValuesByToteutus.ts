@@ -1,8 +1,7 @@
 import _ from 'lodash/fp';
+import { toSelectValue } from '#/src/utils';
 import parseSisaltoField from '#/src/utils/form/parseSisaltoField';
 import { parseEditorState } from '#/src/components/Editor/utils';
-
-const toSelectValue = value => (_.isNil(value) ? null : { value });
 
 const kieliArvoListToMultiSelectValue = _.reduce((acc, curr) => {
   if (curr?.kieli && curr?.arvo) {

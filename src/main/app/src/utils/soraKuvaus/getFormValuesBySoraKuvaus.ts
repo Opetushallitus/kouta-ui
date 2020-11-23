@@ -1,6 +1,7 @@
-import _ from 'lodash/fp';
+import _fp from 'lodash/fp';
 
 import { parseEditorState } from '#/src/components/Editor/utils';
+import { toSelectValue } from '#/src/utils';
 
 const getFormValuesBySoraKuvaus = soraKuvaus => {
   const {
@@ -11,14 +12,15 @@ const getFormValuesBySoraKuvaus = soraKuvaus => {
     tila,
   } = soraKuvaus;
 
-  const { kuvaus } = metadata;
-
+  const { kuvaus, koulutusKoodiUrit, koulutusalaKoodiUri } = metadata;
   return {
     tila,
     kieliversiot: kielivalinta || [],
+    koulutusala: toSelectValue(koulutusalaKoodiUri),
+    koulutukset: _fp.map(value => ({ value }))(koulutusKoodiUrit),
     tiedot: {
       nimi: nimi || {},
-      kuvaus: _.mapValues(parseEditorState, kuvaus || {}),
+      kuvaus: _fp.mapValues(parseEditorState, kuvaus || {}),
     },
     koulutustyyppi: koulutustyyppi || null,
   };

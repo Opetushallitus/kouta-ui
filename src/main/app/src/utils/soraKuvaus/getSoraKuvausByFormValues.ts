@@ -1,12 +1,12 @@
-import _ from 'lodash/fp';
+import _fp from 'lodash/fp';
 
 import { serializeEditorState } from '#/src/components/Editor/utils';
 
 const getSoraKuvausByFormValues = values => {
-  const { tila, muokkaaja } = values;
+  const { tila, muokkaaja, koulutusala, koulutukset } = values;
 
   const kielivalinta = values?.kieliversiot ?? [];
-  const pickTranslations = _.pick(kielivalinta);
+  const pickTranslations = _fp.pick(kielivalinta);
 
   return {
     tila,
@@ -15,7 +15,9 @@ const getSoraKuvausByFormValues = values => {
     koulutustyyppi: values?.koulutustyyppi || null,
     kielivalinta,
     metadata: {
-      kuvaus: _.mapValues(
+      koulutusalaKoodiUri: koulutusala?.value,
+      koulutusKoodiUrit: koulutukset?.map(_fp.prop('value')),
+      kuvaus: _fp.mapValues(
         serializeEditorState,
         pickTranslations(values?.tiedot?.kuvaus ?? {})
       ),

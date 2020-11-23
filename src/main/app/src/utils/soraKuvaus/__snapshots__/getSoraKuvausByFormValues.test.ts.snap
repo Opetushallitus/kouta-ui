@@ -2,13 +2,16 @@
 
 exports[`getSoraKuvausByFormValues returns correct sora-kuvaus given form values 1`] = `
 Object {
-  "julkinen": true,
   "kielivalinta": Array [
     "fi",
     "sv",
   ],
   "koulutustyyppi": "amm",
   "metadata": Object {
+    "koulutusKoodiUrit": Array [
+      "koulutus_754101#7",
+    ],
+    "koulutusalaKoodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_073#1",
     "kuvaus": Object {
       "fi": "<p><strong>Kuvaus fi</strong></p>",
       "sv": "<p><em>Kuvaus sv</em></p>",

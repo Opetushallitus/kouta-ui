@@ -9,6 +9,9 @@ export default () => {
     modified: '2019-04-01T13:01',
     koulutustyyppi: 'amm',
     metadata: {
+      koulutusKoodiUrit: ['koulutus_754101#7'],
+      koulutusalaKoodiUri:
+        'kansallinenkoulutusluokitus2016koulutusalataso2_073#1',
       kuvaus: {
         fi: '<p><strong>Kuvaus fi</strong></p>',
         sv: '<p><em>Kuvaus sv</em></p>',

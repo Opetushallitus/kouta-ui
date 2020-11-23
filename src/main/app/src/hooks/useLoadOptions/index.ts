@@ -1,18 +1,18 @@
+import _ from 'lodash';
 import { useMemo } from 'react';
 import debounce from 'debounce-promise';
-import { isString } from 'lodash';
 
-const getMatchingOptions = (options, input, maxMatches) => {
-  let matches = [];
+const getMatchingOptions = (options: SelectOptions, input, maxMatches) => {
+  let matches: SelectOptions = [];
 
-  if (!isString(input)) {
+  if (!_.isString(input)) {
     return matches;
   }
 
   // eslint-disable-next-line no-unused-vars
   for (const opt of options) {
     if (
-      isString(opt.label) &&
+      _.isString(opt.label) &&
       opt.label.toLowerCase().indexOf(input.toLowerCase()) >= 0
     ) {
       matches.push(opt);
@@ -27,7 +27,7 @@ const getMatchingOptions = (options, input, maxMatches) => {
 };
 
 const useLoadOptions = (
-  options = [],
+  options: SelectOptions = [],
   { debounce: debounceTime = 500, maxOptions = 100 } = {}
 ) => {
   return useMemo(() => {

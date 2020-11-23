@@ -12,7 +12,6 @@ import { useEvent } from 'react-use';
 import { get, minBy, throttle, isFunction } from 'lodash';
 import { useTranslation } from 'react-i18next';
 
-import OrganisaatioDrawer from './OrganisaatioDrawer';
 import {
   Box,
   Typography,
@@ -27,9 +26,10 @@ import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 import Container from '#/src/components/Container';
 import useInView from '#/src/hooks/useInView';
-import { NavigationStateContext } from './NavigationProvider';
 import { spacing, getThemeProp } from '#/src/theme';
 import scrollElementIntoView from '#/src/utils/scrollElementIntoView';
+import { NavigationStateContext } from './NavigationProvider';
+import OrganisaatioDrawer from './OrganisaatioDrawer';
 
 const NavigationContainer = styled.div`
   background-color: white;
@@ -142,7 +142,7 @@ const NavigationBase = ({
   maxInlineItems,
 }) => {
   const { t } = useTranslation();
-  const organisaatioOid = get(organisaatio, 'oid');
+  const organisaatioOid = organisaatio?.oid;
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const onCloseDrawer = useCallback(() => setDrawerOpen(false), [
@@ -151,7 +151,9 @@ const NavigationBase = ({
 
   useLayoutEffect(() => {
     document.documentElement.style.overflowY = drawerOpen ? 'hidden' : 'auto';
-    return () => (document.documentElement.style.overflowY = 'auto');
+    return () => {
+      document.documentElement.style.overflowY = 'auto';
+    };
   }, [drawerOpen]);
 
   const onOpenDrawer = useCallback(() => setDrawerOpen(true), [setDrawerOpen]);
@@ -180,7 +182,7 @@ const NavigationBase = ({
                 <Box flexGrow={1} pr={2}>
                   <Typography {...getTestIdProps('selectedOrganisaatio')}>
                     {organisaatio
-                      ? getFirstLanguageValue(get(organisaatio, 'nimi'))
+                      ? getFirstLanguageValue(organisaatio?.nimi)
                       : null}
                   </Typography>
                 </Box>

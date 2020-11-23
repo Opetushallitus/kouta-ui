@@ -1,7 +1,8 @@
-import React, { useMemo, useState, useCallback } from 'react';
+import React, { useMemo, useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { useUnmount, usePrevious } from 'react-use';
 
 import {
   Drawer,
@@ -121,7 +122,12 @@ const useFavouriteItems = (oids, roleBuilder) => {
   ]);
 };
 
-const DrawerContent = ({ organisaatioOid, onOrganisaatioChange, onClose }) => {
+const DrawerContent = ({
+  organisaatioOid,
+  onOrganisaatioChange,
+  onClose,
+  open,
+}) => {
   const organisaatioFavourites = useSelector(selectOrganisaatioFavourites);
   const [onToggleFavourite] = useActions([toggleFavourite]);
   const roleBuilder = useAuthorizedUserRoleBuilder();
@@ -172,11 +178,6 @@ const DrawerContent = ({ organisaatioOid, onOrganisaatioChange, onClose }) => {
     organisaatioOid
   );
 
-  const onSubmit = useCallback(() => {
-    onOrganisaatioChange(selectedOrganisaatio);
-    onClose();
-  }, [onClose, onOrganisaatioChange, selectedOrganisaatio]);
-
   const onToggleOpen = useCallback(
     oid => {
       if (openOrganisaatiot.includes(oid)) {
@@ -187,6 +188,22 @@ const DrawerContent = ({ organisaatioOid, onOrganisaatioChange, onClose }) => {
     },
     [openOrganisaatiot, setOpenOrganisaatiot]
   );
+
+  const previousOpen = usePrevious(open);
+
+  const saveOrganisaatioIfChanged = useCallback(() => {
+    if (organisaatioOid !== selectedOrganisaatio) {
+      onOrganisaatioChange(selectedOrganisaatio);
+    }
+  }, [onOrganisaatioChange, organisaatioOid, selectedOrganisaatio]);
+
+  useEffect(() => {
+    if (open !== previousOpen && !open) {
+      saveOrganisaatioIfChanged();
+    }
+  }, [open, previousOpen, saveOrganisaatioIfChanged]);
+
+  useUnmount(saveOrganisaatioIfChanged);
 
   return (
     <Container {...getTestIdProps('organisaatioDrawer')}>
@@ -258,7 +275,7 @@ const DrawerContent = ({ organisaatioOid, onOrganisaatioChange, onClose }) => {
 
       <Box>
         <FooterContainer p={2}>
-          <Button onClick={onSubmit} disabled={!selectedOrganisaatio}>
+          <Button onClick={onClose} disabled={!selectedOrganisaatio}>
             {t('yleiset.valitse')}
           </Button>
         </FooterContainer>
@@ -270,7 +287,7 @@ const DrawerContent = ({ organisaatioOid, onOrganisaatioChange, onClose }) => {
 export const OrganisaatioDrawer = ({ open, onClose, ...props }) => {
   return (
     <Drawer open={open} onClose={onClose}>
-      <DrawerContent onClose={onClose} {...props} />
+      <DrawerContent onClose={onClose} open={open} {...props} />
     </Drawer>
   );
 };

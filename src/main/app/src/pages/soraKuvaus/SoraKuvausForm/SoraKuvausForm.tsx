@@ -30,7 +30,7 @@ const SoraKuvausForm = ({
         header={t('yleiset.koulutustyyppi')}
         scrollOnActive={false}
         Component={KoulutustyyppiSection}
-        disabled={!canEditKoulutustyyppi}
+        canEditKoulutustyyppi={canEditKoulutustyyppi}
       />
       {canSelectBase ? (
         <PohjaFormCollapse

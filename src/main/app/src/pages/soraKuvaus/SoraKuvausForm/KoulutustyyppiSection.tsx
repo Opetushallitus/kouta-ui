@@ -19,7 +19,11 @@ import { useHasChanged } from '#/src/hooks/useHasChanged';
 import { getTestIdProps } from '#/src/utils';
 import { useKoulutuksetByKoulutusala } from '#/src/utils/soraKuvaus/getKoulutuksetBykoulutusala';
 
-export const KoulutustyyppiSection = ({ name, language, disabled }) => {
+export const KoulutustyyppiSection = ({
+  name,
+  language,
+  canEditKoulutustyyppi,
+}) => {
   const { t } = useTranslation();
 
   const { change } = useBoundFormActions();
@@ -53,7 +57,7 @@ export const KoulutustyyppiSection = ({ name, language, disabled }) => {
         name={name}
         component={FormFieldKoulutustyyppiSelect}
         label={t('yleiset.valitseKoulutustyyppi')}
-        disabled={disabled}
+        disabled={!canEditKoulutustyyppi}
       />
       <Box display="flex" mt={4}>
         <Box flex="1 1 50%" mr={2} {...getTestIdProps('koulutusala')}>
@@ -61,7 +65,6 @@ export const KoulutustyyppiSection = ({ name, language, disabled }) => {
             name="koulutusala"
             component={FormFieldKoulutusalaSelect}
             label={t('soraKuvauslomake.valitseKoulutusala')}
-            disabled={disabled}
           />
         </Box>
         <Box flex="1 1 50%" {...getTestIdProps('koulutukset')}>
@@ -70,7 +73,7 @@ export const KoulutustyyppiSection = ({ name, language, disabled }) => {
             loadOptions={loadOptions}
             component={FormFieldAsyncKoodistoSelect}
             label={t('yleiset.valitseKoulutus')}
-            disabled={disabled || _.isEmpty(koulutusOptions)}
+            disabled={_.isEmpty(koulutusOptions)}
             language={language}
             isMulti={true}
           />

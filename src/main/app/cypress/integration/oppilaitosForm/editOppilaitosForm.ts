@@ -1,6 +1,10 @@
 import createOppilaitos from '#/cypress/data/oppilaitos';
 import { stubOppilaitosFormRoutes } from '#/cypress/oppilaitosFormUtils';
-import { fillKieliversiotSection, tallenna } from '#/cypress/utils';
+import {
+  assertNoUnsavedChangesDialog,
+  fillKieliversiotSection,
+  tallenna,
+} from '#/cypress/utils';
 
 export const editOppilaitosForm = () => {
   const organisaatioOid = '1.1.1.1.1.1';
@@ -38,5 +42,9 @@ export const editOppilaitosForm = () => {
     cy.wait('@editOppilaitosResponse').then(({ request }) => {
       cy.wrap(request.body).toMatchSnapshot();
     });
+  });
+
+  it("Shouldn't complain about unsaved changed for untouched form", () => {
+    assertNoUnsavedChangesDialog();
   });
 };

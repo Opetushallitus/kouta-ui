@@ -25,11 +25,8 @@ const HakukohdeForm = ({
 }) => {
   const { t } = useTranslation();
   const languages = useFieldValue('kieliversiot') || [];
-  const {
-    metadata: {
-      opetus: { opetustapaKoodiUrit },
-    },
-  } = toteutus;
+
+  const opetustapaKoodiUrit = toteutus?.metadata?.opetus?.opetustapaKoodiUrit;
 
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps} configured>

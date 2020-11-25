@@ -1,5 +1,5 @@
 import React, { useMemo, useContext, useRef, useCallback } from 'react';
-import { components } from 'react-select';
+import { components, Props } from 'react-select';
 import ReactCreatable from 'react-select/creatable';
 import ReactAsyncCreatableSelect from 'react-select/async-creatable';
 import ReactAsyncSelect from 'react-select/async';
@@ -95,12 +95,16 @@ const getValue = (value, options) => {
   return value;
 };
 
-const Select = ({
+type SelectProps = Props & {
+  id?: string;
+  error?: boolean;
+};
+
+const Select: React.FC<SelectProps> = ({
+  id,
   disabled,
-  theme,
   value,
   options,
-  id,
   error = false,
   ...props
 }) => {

@@ -1,24 +1,21 @@
-import React, { useCallback } from 'react';
-import { Field } from 'redux-form';
+import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Modal from '#/src/components/Modal';
 import Button from '#/src/components/Button';
 import getHaut from '#/src/utils/haku/getHaut';
-import Flex from '#/src/components/Flex';
 import useApiAsync from '#/src/hooks/useApiAsync';
-import { FormFieldSelect } from '#/src/components/formFields';
-import { useFieldValue } from '#/src/hooks/form';
 import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
+import Select from '#/src/components/Select';
+import { Box, FormLabel } from '#/src/components/virkailija';
 
 const HakukohteetModal = ({
   onClose,
   organisaatioOid,
-  fieldName = 'hakukohteet',
-  onSave: onSaveProp = () => {},
+  onSave: onSaveProp,
   ...props
 }) => {
   const { t } = useTranslation();
-  const hakuValue = useFieldValue(`${fieldName}.haku`);
+  const [selectedHaku, setHaku] = useState();
 
   const { data: haut } = useApiAsync({
     promiseFn: getHaut,
@@ -27,8 +24,8 @@ const HakukohteetModal = ({
   });
 
   const onSave = useCallback(() => {
-    return onSaveProp({ hakuOid: hakuValue.value });
-  }, [onSaveProp, hakuValue]);
+    return onSaveProp({ hakuOid: selectedHaku });
+  }, [onSaveProp, selectedHaku]);
 
   const hautOptions = useEntityOptions(haut);
 
@@ -37,27 +34,32 @@ const HakukohteetModal = ({
       minHeight="200px"
       header={t('toteutuslomake.hakukohteenLiittaminen')}
       footer={
-        <Flex justifyBetween>
+        <Box display="flex" justifyContent="space-between">
           <Button onClick={onClose} variant="outlined" type="button">
             {t('yleiset.sulje')}
           </Button>
-          <Button onClick={onSave} type="button" disabled={!hakuValue}>
+          <Button onClick={onSave} type="button" disabled={!selectedHaku}>
             {t('yleiset.lisaaHakukohde')}
           </Button>
-        </Flex>
+        </Box>
       }
       onClose={onClose}
       {...props}
     >
-      <Field
-        name={`${fieldName}.haku`}
-        options={hautOptions}
-        component={FormFieldSelect}
-        menuPortalTarget={document.body}
-        menuPosition="fixed"
-        label={t('yleiset.valitseHaku')}
-        configurable={false}
-      />
+      <Box>
+        <FormLabel htmlFor="hakukohteenToteutus">
+          {t('yleiset.valitseHaku')}
+        </FormLabel>
+        <Select
+          options={hautOptions}
+          menuPortalTarget={document.body}
+          menuPosition="fixed"
+          onChange={data => {
+            setHaku(data?.value);
+          }}
+          value={selectedHaku}
+        />
+      </Box>
     </Modal>
   );
 };

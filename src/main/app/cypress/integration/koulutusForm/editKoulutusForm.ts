@@ -1,5 +1,9 @@
 import _ from 'lodash';
-import { fillKieliversiotSection, tallenna } from '#/cypress/utils';
+import {
+  fillKieliversiotSection,
+  tallenna,
+  assertNoUnsavedChangesDialog,
+} from '#/cypress/utils';
 import koulutus from '#/cypress/data/koulutus';
 import { stubKoulutusFormRoutes } from '#/cypress/koulutusFormUtils';
 
@@ -91,5 +95,10 @@ export const editKoulutusForm = () => {
     cy.wait('@updateLkKoulutusResponse').then(({ request }) => {
       cy.wrap(request.body).toMatchSnapshot();
     });
+  });
+
+  it("Shouldn't complain about unsaved changed for untouched form", () => {
+    prepareTest('amm');
+    assertNoUnsavedChangesDialog();
   });
 };

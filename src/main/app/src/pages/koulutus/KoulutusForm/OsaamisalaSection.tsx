@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import _ from 'lodash/fp';
 import { Box } from '#/src/components/virkailija';
-import { useBoundFormActions, useFieldValue } from '#/src/hooks/form';
+import {
+  useBoundFormActions,
+  useFieldValue,
+  useIsDirty,
+} from '#/src/hooks/form';
 import { useLocalizedKoulutus } from './useLocalizedKoulutus';
 import { ValitseKoulutusBox } from './KoulutuksenEPerusteTiedot/ValitseKoulutusBox';
 import { ValitseEPerusteBox } from './KoulutuksenEPerusteTiedot/ValitseEPerusteBox';
@@ -34,23 +38,33 @@ export const OsaamisalaSection = ({ disabled, language, languages, name }) => {
   const osaamisalaChanged = useHasChanged(osaamisalaValue);
 
   const { change } = useBoundFormActions();
+  const isDirty = useIsDirty();
 
   const osaamisalat = selectedEPerusteData?.osaamisalat;
 
   useEffect(() => {
-    const selectedOsaamisalaData = _.find(
-      osaamisala => osaamisala?.arvo === osaamisalaValue?.value,
-      osaamisalat
-    );
-    if (selectedOsaamisalaData) {
-      change(
-        'information.nimi',
-        _.pick(languages, selectedOsaamisalaData?.nimi)
+    if (isDirty && osaamisalaChanged) {
+      const selectedOsaamisalaData = _.find(
+        osaamisala => osaamisala?.arvo === osaamisalaValue?.value,
+        osaamisalat
       );
-    } else {
-      change('information.nimi', {});
+      if (selectedOsaamisalaData) {
+        change(
+          'information.nimi',
+          _.pick(languages, selectedOsaamisalaData?.nimi)
+        );
+      } else {
+        change('information.nimi', {});
+      }
     }
-  }, [change, languages, osaamisalaChanged, osaamisalaValue, osaamisalat]);
+  }, [
+    change,
+    isDirty,
+    languages,
+    osaamisalaChanged,
+    osaamisalaValue,
+    osaamisalat,
+  ]);
 
   return (
     <Box mb={-2}>

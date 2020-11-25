@@ -35,7 +35,6 @@ exports[`createKoulutus > should be able to create ammatillinen koulutus #0`] =
   "tarjoajat": [
     "1.2.1.1.1.1"
   ],
-  "teemakuva": null,
   "tila": "julkaistu"
 };
 
@@ -76,7 +75,6 @@ exports[`createKoulutus > should be able to create ammatillinen osaamisala koulu
   "tarjoajat": [
     "1.2.1.1.1.1"
   ],
-  "teemakuva": null,
   "tila": "julkaistu"
 };
 
@@ -130,7 +128,6 @@ exports[`createKoulutus > should be able to create ammatillinen tutkinnon osa ko
   "tarjoajat": [
     "1.2.1.1.1.1"
   ],
-  "teemakuva": null,
   "tila": "julkaistu"
 };
 
@@ -179,7 +176,6 @@ exports[`createKoulutus > should be able to create AMK-koulutus #0`] =
   "tarjoajat": [
     "1.2.1.1.1.1"
   ],
-  "teemakuva": null,
   "tila": "julkaistu"
 };
 
@@ -220,7 +216,6 @@ exports[`createKoulutus > should be able to create lukiokoulutus #0`] =
   "tarjoajat": [
     "1.2.1.1.1.1"
   ],
-  "teemakuva": null,
   "tila": "julkaistu"
 };
 
@@ -264,7 +259,6 @@ exports[`editKoulutus > should be able to edit ammatillinen koulutus #0`] =
     "1.1.1.1.1.1",
     "1.2.1.1.1.1"
   ],
-  "teemakuva": null,
   "tila": "tallennettu"
 };
 
@@ -317,7 +311,6 @@ exports[`editKoulutus > should be able to edit AMK-koulutus #0`] =
     "1.1.1.1.1.1",
     "1.2.1.1.1.1"
   ],
-  "teemakuva": null,
   "tila": "tallennettu"
 };
 
@@ -361,6 +354,5 @@ exports[`editKoulutus > should be able to edit lukiokoulutus #0`] =
     "1.1.1.1.1.1",
     "1.2.1.1.1.1"
   ],
-  "teemakuva": null,
   "tila": "tallennettu"
 };

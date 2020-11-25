@@ -1,5 +1,4 @@
 import { Machine, assign } from 'xstate';
-import { get } from 'lodash';
 
 export const actionTypes = {
   UPLOAD_FILE: 'UPLOAD_FILE',
@@ -29,6 +28,11 @@ const {
   draggingDisabled,
 } = controlStates;
 
+const clearValue = assign({
+  file: () => null,
+  url: () => null,
+});
+
 const createUploadingState = t => ({
   id: uploading,
   entry: assign({
@@ -45,14 +49,15 @@ const createUploadingState = t => ({
     },
     onError: {
       target: error,
-      actions: assign({
-        file: () => null,
-        url: () => null,
-        error: (_, e) =>
-          e.data instanceof Error
-            ? t('yleiset.kuvanLahetysVirhe')
-            : get(e, 'data.message'),
-      }),
+      actions: [
+        clearValue,
+        assign({
+          error: (_, e) =>
+            e.data instanceof Error
+              ? t('yleiset.kuvanLahetysVirhe')
+              : e?.data?.message,
+        }),
+      ],
     },
   },
 });
@@ -61,7 +66,10 @@ const draggingStates = {
   states: {
     enabled: {
       on: {
-        [DRAG_STOP]: `#${empty}`,
+        [DRAG_STOP]: {
+          target: `#${empty}`,
+          actions: clearValue,
+        },
         [UPLOAD_FILE]: `#${uploading}`,
       },
     },
@@ -93,10 +101,6 @@ export function createImageUploadMachine({ url, externalError, t }) {
     states: {
       [empty]: {
         id: empty,
-        entry: assign({
-          file: () => null,
-          url: () => null,
-        }),
         on: {
           [UPLOAD_FILE]: uploading,
           [DRAG_START]: draggingEnabled,
@@ -105,7 +109,10 @@ export function createImageUploadMachine({ url, externalError, t }) {
       [fileUploaded]: {
         id: fileUploaded,
         on: {
-          [REMOVE_FILE]: empty,
+          [REMOVE_FILE]: {
+            target: empty,
+            actions: clearValue,
+          },
           [DRAG_START]: draggingDisabled,
         },
       },

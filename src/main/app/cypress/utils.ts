@@ -346,3 +346,10 @@ export const fillKoulutustyyppiSection = koulutustyyppiPath => {
     jatka();
   });
 };
+
+export const assertNoUnsavedChangesDialog = () => {
+  cy.findByRole('link', { name: /home/i }).click();
+  cy.findByRole('heading', {
+    name: 'ilmoitukset.tallentamattomiaMuutoksia.otsikko',
+  }).should('not.exist');
+};

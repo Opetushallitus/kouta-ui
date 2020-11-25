@@ -1,7 +1,11 @@
 import koulutus from '#/cypress/data/koulutus';
 import toteutus from '#/cypress/data/toteutus';
 import { stubToteutusFormRoutes } from '#/cypress/toteutusFormUtils';
-import { fillKieliversiotSection, tallenna } from '#/cypress/utils';
+import {
+  assertNoUnsavedChangesDialog,
+  fillKieliversiotSection,
+  tallenna,
+} from '#/cypress/utils';
 import { merge } from 'lodash';
 
 const prepareTest = tyyppi => {
@@ -157,5 +161,10 @@ export const editToteutusForm = () => {
     cy.wait('@updateLkToteutusResponse').then(({ request }) => {
       cy.wrap(request.body).toMatchSnapshot();
     });
+  });
+
+  it("Shouldn't complain about unsaved changed for untouched form", () => {
+    prepareTest('amm');
+    assertNoUnsavedChangesDialog();
   });
 };

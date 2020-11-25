@@ -1,6 +1,10 @@
 import createSoraKuvaus from '#/cypress/data/soraKuvaus';
 import { stubSoraKuvausFormRoutes } from '#/cypress/soraKuvausFormUtils';
-import { fillKieliversiotSection, tallenna } from '#/cypress/utils';
+import {
+  assertNoUnsavedChangesDialog,
+  fillKieliversiotSection,
+  tallenna,
+} from '#/cypress/utils';
 import { merge } from 'lodash';
 
 export const editSoraKuvausForm = () => {
@@ -39,5 +43,9 @@ export const editSoraKuvausForm = () => {
     cy.wait('@editSoraKuvausRequest').then(({ request }) => {
       cy.wrap(request.body).toMatchSnapshot();
     });
+  });
+
+  it("Shouldn't complain about unsaved changed for untouched form", () => {
+    assertNoUnsavedChangesDialog();
   });
 };

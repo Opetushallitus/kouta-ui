@@ -1,48 +1,58 @@
+import { UNAUTHORIZED } from 'http-status-codes';
 import React from 'react';
 import styled from 'styled-components';
-import { UNAUTHORIZED } from 'http-status-codes';
+import Button from '#/src/components/Button';
+import Flex from '#/src/components/Flex';
 import Modal from '#/src/components/Modal';
 import {
   ModalBody,
   ModalFooter,
   ModalHeader,
 } from '#/src/components/virkailija';
-import Button from '#/src/components/Button';
-import Flex from '#/src/components/Flex';
+import {
+  ERROR_INTERNET_DISCONNECTED,
+  ERROR_KAYTTOOIKEUS_SERVICE,
+} from '#/src/constants';
 import { isDev } from '#/src/utils';
 
 const ModalButton = styled(Button)`
   margin-left: 1em;
 `;
 
-export default function SessionErrorModal({
-  sessionErrorCode,
-  setSessionErrorCode,
+const getErrorTranslationKeyPrefix = (code: string | number) => {
+  switch (code) {
+    case UNAUTHORIZED:
+      return 'ilmoitukset.istuntoVirhe';
+    case ERROR_INTERNET_DISCONNECTED:
+      return 'ilmoitukset.yhteysVirhe';
+    case ERROR_KAYTTOOIKEUS_SERVICE:
+      return 'ilmoitukset.kayttooikeusHakuVirhe';
+    default:
+      return 'ilmoitukset.tuntematonVirhe';
+  }
+};
+
+export default function AuthorizationErrorModal({
+  errorCode,
+  setErrorCode,
   apiUrls,
   t,
 }) {
+  const errorKeyPrefix = getErrorTranslationKeyPrefix(errorCode);
   return (
-    <Modal open={sessionErrorCode}>
-      <ModalHeader>
-        {sessionErrorCode === UNAUTHORIZED
-          ? t('ilmoitukset.istuntoVirhe.otsikko')
-          : t('ilmoitukset.yhteysVirhe.otsikko')}
-      </ModalHeader>
-      <ModalBody>
-        {sessionErrorCode === UNAUTHORIZED
-          ? t('ilmoitukset.istuntoVirhe.viesti')
-          : t('ilmoitukset.yhteysVirhe.viesti')}
-      </ModalBody>
+    <Modal open={errorCode}>
+      <ModalHeader>{t(`${errorKeyPrefix}.otsikko`)}</ModalHeader>
+      <ModalBody>{t(`${errorKeyPrefix}.viesti`)}</ModalBody>
       <ModalFooter>
         <Flex justifyCenter>
           <ModalButton
             marginLeft={1}
             color="danger"
-            onClick={() => setSessionErrorCode(null)}
+            onClick={() => setErrorCode(null)}
           >
             {t('yleiset.suljeVaroitus')}
           </ModalButton>
-          {sessionErrorCode === UNAUTHORIZED && (
+          {errorCode === UNAUTHORIZED && (
             <ModalButton
               onClick={() =>
                 isDev

@@ -135,7 +135,7 @@ export const useToaster = () => {
       }),
     openGenericErrorToast: () =>
       openToast({
-        label: t('ilmoitukset.tuntematonVirhe'),
+        label: t('ilmoitukset.tuntematonVirhe.viesti'),
         status: 'danger',
       }),
   };

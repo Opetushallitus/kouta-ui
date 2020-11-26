@@ -214,12 +214,20 @@ export default {
       jatka: 'Jatka',
       peruuta: 'Peruuta',
     },
-    tuntematonVirhe:
-      'Jokin meni vikaan. Jos virhe aiheuttaa ongelmia, yritä päivittää sivu',
+    tuntematonVirhe: {
+      otsikko: 'Tuntematon virhe',
+      viesti:
+        'Jokin meni vikaan. Jos virhe aiheuttaa ongelmia, yritä päivittää sivu',
+    },
     tallennusOnnistui: 'Tallennus onnistui',
     tallennusEpaonnistui:
       'Tallennus epäonnistui. Tarkista lomakkeen tiedot ja yritä uudelleen',
     kayttooikeusVirhe: 'Käyttöoikeuksissasi on puutteita',
+    kayttooikeusHakuVirhe: {
+      otsikko: 'Käyttöoikeuksien haussa tapahtui virhe',
+      viesti:
+        'Käyttöoikeuksien haku ei onnistunut. Yritä päivittää sivu hetken kuluttua udelleen.',
+    },
     istuntoVirhe: {
       otsikko: 'Istuntoa ei löytynyt',
       viesti:

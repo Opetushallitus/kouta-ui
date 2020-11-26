@@ -1,26 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import { useIdle, useEvent, useAsync } from 'react-use';
-import { get } from 'lodash';
-import { useTranslation } from 'react-i18next';
 import { UNAUTHORIZED } from 'http-status-codes';
-
-import { IDLE_TIMEOUT, ERROR_INTERNET_DISCONNECTED } from '#/src/constants';
-import { getMe } from '#/src/utils/api/getMe';
-import { isDev } from '#/src/utils';
-import useApiAsync from '#/src/hooks/useApiAsync';
+import { get } from 'lodash';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useAsync, useEvent, useIdle } from 'react-use';
+import {
+  ERROR_INTERNET_DISCONNECTED,
+  ERROR_KAYTTOOIKEUS_SERVICE,
+  IDLE_TIMEOUT,
+} from '#/src/constants';
 import AuthorizedUserContext from '#/src/contexts/AuthorizedUserContext';
-import SessionErrorModal from './SessionErrorModal';
 import { useHttpClient, useUrls } from '#/src/contexts/contextHooks';
+import useApiAsync from '#/src/hooks/useApiAsync';
+import { isDev } from '#/src/utils';
+import { getMe } from '#/src/utils/api/getMe';
+import AuthorizationErrorModal from './AuthorizationErrorModal';
 
 const UserGate = ({ fallback = null, children = null }) => {
   const apiUrls = useUrls();
   const httpClient = useHttpClient();
   const [isFocused, setFocused] = useState(true);
-  const [sessionErrorCode, setSessionErrorCode] = useState(null);
+  const [errorCode, setErrorCode] = useState<string | number | null>(null);
 
-  const { data } = useApiAsync({ promiseFn: getMe });
+  const { data, error: getMeError } = useApiAsync({ promiseFn: getMe });
+  const isLoaded = !!data?.oid;
   const isIdle = useIdle(IDLE_TIMEOUT);
   const { i18n, t } = useTranslation();
+
+  useEffect(() => {
+    // NOTE: Not sure what could be the case when data does exists but oid does not, but this has probably happened few times
+    if (getMeError || (data && !data.oid)) {
+      setErrorCode(ERROR_KAYTTOOIKEUS_SERVICE);
+    }
+  }, [data, getMeError]);
 
   useEffect(() => {
     if (data && data.lang) {
@@ -51,22 +62,20 @@ const UserGate = ({ fallback = null, children = null }) => {
             silent: true,
           },
         });
-        setSessionErrorCode(null);
+        if (isLoaded) {
+          setErrorCode(null);
+        }
       } catch (e) {
         console.log(get(e, 'response.status'));
-        setSessionErrorCode(
-          get(e, 'response.status') || ERROR_INTERNET_DISCONNECTED
-        );
+        setErrorCode(get(e, 'response.status') || ERROR_INTERNET_DISCONNECTED);
       }
     }
   }, [apiUrls, httpClient, isFocused, isIdle]);
 
   return (
     <>
-      <SessionErrorModal
-        {...{ sessionErrorCode, setSessionErrorCode, apiUrls, t }}
-      />
-      {data == null ? (
+      <AuthorizationErrorModal {...{ errorCode, setErrorCode, apiUrls, t }} />
+      {!isLoaded ? (
         fallback
       ) : (
         <AuthorizedUserContext.Provider value={data}>

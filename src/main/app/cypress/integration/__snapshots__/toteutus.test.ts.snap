@@ -82,7 +82,7 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
       "opetustapaKuvaus": {
         "fi": "opetustapa kuvaus"
       },
-      "stipendinKuvaus": null,
+      "stipendinKuvaus": {},
       "stipendinMaara": null,
       "suunniteltuKestoKuukaudet": 6,
       "suunniteltuKestoKuvaus": {
@@ -207,7 +207,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
       "opetustapaKuvaus": {
         "fi": "opetustapa kuvaus"
       },
-      "stipendinKuvaus": null,
+      "stipendinKuvaus": {},
       "stipendinMaara": null,
       "suunniteltuKestoKuukaudet": 6,
       "suunniteltuKestoKuvaus": {
@@ -514,7 +514,7 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
       "opetustapaKuvaus": {
         "fi": "opetustapa kuvaus"
       },
-      "stipendinKuvaus": null,
+      "stipendinKuvaus": {},
       "stipendinMaara": null,
       "suunniteltuKestoKuukaudet": 6,
       "suunniteltuKestoKuvaus": {
@@ -641,7 +641,7 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
       "opetustapaKuvaus": {
         "fi": "Opetustapa kuvaus"
       },
-      "stipendinKuvaus": null,
+      "stipendinKuvaus": {},
       "stipendinMaara": null,
       "suunniteltuKestoKuukaudet": 6,
       "suunniteltuKestoKuvaus": {
@@ -795,7 +795,7 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
       "opetustapaKuvaus": {
         "fi": "Opetustapa kuvaus"
       },
-      "stipendinKuvaus": null,
+      "stipendinKuvaus": {},
       "stipendinMaara": null,
       "suunniteltuKestoKuukaudet": 6,
       "suunniteltuKestoKuvaus": {
@@ -955,7 +955,7 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
       "opetustapaKuvaus": {
         "fi": "Opetustapa kuvaus"
       },
-      "stipendinKuvaus": null,
+      "stipendinKuvaus": {},
       "stipendinMaara": null,
       "suunniteltuKestoKuukaudet": 6,
       "suunniteltuKestoKuvaus": {
@@ -1086,7 +1086,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
       "opetustapaKuvaus": {
         "fi": "Opetustapa kuvaus"
       },
-      "stipendinKuvaus": null,
+      "stipendinKuvaus": {},
       "stipendinMaara": null,
       "suunniteltuKestoKuukaudet": 6,
       "suunniteltuKestoKuvaus": {

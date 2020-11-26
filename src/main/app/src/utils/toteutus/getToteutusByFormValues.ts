@@ -108,9 +108,9 @@ const getToteutusByFormValues = values => {
             )
           : null,
         onkoStipendia: stipendiVisible && onkoStipendia,
-        stipendinKuvaus: stipendiVisible
-          ? pickTranslations(values?.jarjestamistiedot?.stipendinKuvaus || {})
-          : null,
+        stipendinKuvaus: pickTranslations(
+          (stipendiVisible && values?.jarjestamistiedot?.stipendinKuvaus) || {}
+        ),
         stipendinMaara:
           stipendiVisible &&
           onkoStipendia &&

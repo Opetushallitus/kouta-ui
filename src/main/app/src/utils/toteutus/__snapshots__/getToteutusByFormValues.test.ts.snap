@@ -133,8 +133,9 @@ Object {
         "sv": "Sv kielikuvaus",
       },
       "opetuskieliKoodiUrit": Array [
-        "opetuskieli_1#1",
-        "opetuskieli_2#1",
+        "oppilaitoksenopetuskieli_1#1",
+        "oppilaitoksenopetuskieli_2#1",
+        "oppilaitoksenopetuskieli_4#1",
       ],
       "opetustapaKoodiUrit": Array [
         "opetustapa_1#1",
@@ -264,7 +265,7 @@ Object {
         "tutkintoKoodiUri": "tutkinto_1#1",
       },
     ],
-    "tyyppi": undefined,
+    "tyyppi": "amk",
     "yhteyshenkilot": Array [
       Object {
         "nimi": Object {

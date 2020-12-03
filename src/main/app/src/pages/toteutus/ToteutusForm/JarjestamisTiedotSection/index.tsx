@@ -20,6 +20,7 @@ import {
   createFormFieldComponent,
   FormFieldRadioGroup,
 } from '#/src/components/formFields';
+import { isStipendiVisible } from '#/src/utils/toteutus/toteutusVisibilities';
 
 import MaksullisuusFields from './MaksullisuusFields';
 import AlkamiskausiFields from './AlkamiskausiFields';
@@ -99,55 +100,67 @@ const ExtraFieldWrapper = styled.div`
   width: 100%;
 `;
 
-const ExtraField = ({ children = null }) => (
+const ExtraField = ({ children = null }: { children: JSX.Element | null }) => (
   <ExtraFieldWrapper>{children}</ExtraFieldWrapper>
 );
 
-const StipendiFields = ({ language, name }) => {
+const StipendiFields = ({ koulutustyyppi, language, name }) => {
   const { t } = useTranslation();
-  const onkoStipendia = useFieldValue(`${name}.onkoStipendia`);
+  const onkoStipendia = useFieldValue<'kylla' | 'ei'>(`${name}.onkoStipendia`);
+  const opetuskieliArr = useFieldValue<string[]>(`${name}.opetuskieli`);
+
+  const isVisible = isStipendiVisible(koulutustyyppi, opetuskieliArr);
+
+  if (!isVisible) {
+    return null;
+  }
 
   return (
-    <Flex {...getTestIdProps('stipendi')}>
-      <FlexItem grow={0} basis="30%">
-        <Field
-          label={t('toteutuslomake.valitseKaytettavaApurahoitus')}
-          name={`${name}.onkoStipendia`}
-          component={FormFieldRadioGroup}
-          options={[
-            {
-              label: t('toteutuslomake.stipendi'),
-              value: 'kylla',
-            },
-            {
-              label: t('toteutuslomake.eiKaytossa'),
-              value: 'ei',
-            },
-          ]}
-        />
-        {onkoStipendia === 'kylla' ? (
-          <Spacing marginTop={1} {...getTestIdProps('stipendinMaara')}>
-            <ExtraField>
-              <Field
-                name={`${name}.stipendinMaara`}
-                component={FormFieldInput}
-                placeholder={t('yleiset.maara')}
-                helperText={t('toteutuslomake.stipendinMaaraHelperText')}
-                suffix={<InputIcon type="euro_symbol" />}
-                type="number"
-              />
-            </ExtraField>
-          </Spacing>
-        ) : null}
-      </FlexItem>
-      <FlexItem grow={1} paddingLeft={4}>
-        <Field
-          name={`${name}.stipendinKuvaus.${language}`}
-          component={FormFieldTextarea}
-          label={t('yleiset.tarkempiKuvaus')}
-        />
-      </FlexItem>
-    </Flex>
+    <FieldGroup
+      name={`${name}.apurahaGroup`}
+      title={t('toteutuslomake.apuraha')}
+    >
+      <Flex {...getTestIdProps('stipendi')}>
+        <FlexItem grow={0} basis="30%">
+          <Field
+            label={t('toteutuslomake.valitseKaytettavaApurahoitus')}
+            name={`${name}.onkoStipendia`}
+            component={FormFieldRadioGroup}
+            options={[
+              {
+                label: t('toteutuslomake.stipendi'),
+                value: 'kylla',
+              },
+              {
+                label: t('toteutuslomake.eiKaytossa'),
+                value: 'ei',
+              },
+            ]}
+          />
+          {onkoStipendia === 'kylla' && (
+            <Spacing marginTop={1} {...getTestIdProps('stipendinMaara')}>
+              <ExtraField>
+                <Field
+                  name={`${name}.stipendinMaara`}
+                  component={FormFieldInput}
+                  placeholder={t('yleiset.maara')}
+                  helperText={t('toteutuslomake.stipendinMaaraHelperText')}
+                  suffix={<InputIcon type="euro_symbol" />}
+                  type="number"
+                />
+              </ExtraField>
+            </Spacing>
+          )}
+        </FlexItem>
+        <FlexItem grow={1} paddingLeft={4}>
+          <Field
+            name={`${name}.stipendinKuvaus.${language}`}
+            component={FormFieldTextarea}
+            label={t('yleiset.tarkempiKuvaus')}
+          />
+        </FlexItem>
+      </Flex>
+    </FieldGroup>
   );
 };
 
@@ -290,12 +303,12 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
         </Flex>
       </FieldGroup>
 
-      <FieldGroup
-        name={`${name}.apurahaGroup`}
-        title={t('toteutuslomake.apuraha')}
-      >
-        <StipendiFields language={language} name={name} />
-      </FieldGroup>
+      {/* StipendiFields contains conditional rendering -> FieldGroup moved there */}
+      <StipendiFields
+        language={language}
+        name={name}
+        koulutustyyppi={koulutustyyppi}
+      />
 
       <FieldGroup title={t('toteutuslomake.koulutuksenAjankohta')}>
         <AlkamiskausiFields name={name} />

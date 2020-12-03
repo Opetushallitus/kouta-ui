@@ -3,6 +3,7 @@ import { parseEditorState } from '#/src/components/Editor/utils';
 
 test('getToteutusByFormValues returns correct toteutus given form values', () => {
   const toteutus = getToteutusByFormValues({
+    koulutustyyppi: 'amk',
     tiedot: {
       nimi: {
         fi: 'Fi nimi',
@@ -29,7 +30,11 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
       },
       opetustapa: ['opetustapa_1#1', 'opetustapa_2#1'],
       opetusaika: ['opetusaika_1#1', 'opetusaika_2#1'],
-      opetuskieli: ['opetuskieli_1#1', 'opetuskieli_2#1'],
+      opetuskieli: [
+        'oppilaitoksenopetuskieli_1#1',
+        'oppilaitoksenopetuskieli_2#1',
+        'oppilaitoksenopetuskieli_4#1',
+      ],
       suunniteltuKesto: {
         vuotta: 2,
         kuukautta: 6,

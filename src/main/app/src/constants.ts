@@ -39,7 +39,7 @@ export const KOULUTUSTYYPPI = {
   LUVA: 'luva',
   MUUT_KOULUTUKSET: 'muut_koulutukset',
   PERUSOPETUKSEN_LISAOPETUS: 'perusopetuksen_lisaopetus',
-};
+} as const;
 
 export const KOULUTUSTYYPIT = Object.values(KOULUTUSTYYPPI);
 

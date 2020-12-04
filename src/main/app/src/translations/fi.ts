@@ -96,6 +96,7 @@ export default {
     lisaaHakuaika: 'Lisää hakuaika',
     tyyppi: 'Tyyppi',
     lisatietoja: 'Lisätietoja',
+    lisatietoa: 'Lisätietoa',
     valitseTyyppi: 'Valitse tyyppi',
     valitseKuvaus: 'Valitse kuvaus',
     valitseKieli: 'Valitse kieli',

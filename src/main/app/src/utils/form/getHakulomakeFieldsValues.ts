@@ -1,6 +1,7 @@
 import _fp from 'lodash/fp';
 import { parseEditorState } from '#/src/components/Editor/utils';
 import { HAKULOMAKETYYPPI } from '#/src/constants';
+import { HakulomakeFormSection } from '#/src/types/hakuTypes';
 
 export const getHakulomakeFieldsValues = ({
   hakulomaketyyppi,

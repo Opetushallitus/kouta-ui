@@ -1,4 +1,4 @@
-import { merge } from 'lodash';
+import { mapValues, merge } from 'lodash';
 
 import {
   getHakuByFormValues,
@@ -44,10 +44,8 @@ const baseValues: HakuFormValues = {
         paattyy: '2019-09-18T08:44',
       },
     ],
-    toteutuksenAjankohta: 'alkamiskausi',
-    tiedossaTarkkaAjankohta: true,
-    tarkkaAlkaa: '2019-09-16T08:44',
-    tarkkaPaattyy: '2019-09-16T08:44',
+    toteutuksenAjankohta: TOTEUTUKSEN_AJANKOHTA.ALKAMISKAUSI,
+    tiedossaTarkkaAjankohta: false,
     lisaamisenTakaraja: '2019-09-16T08:44',
     muokkauksenTakaraja: '2019-10-16T08:44',
     ajastettuJulkaisu: '2019-11-16T08:44',
@@ -102,6 +100,44 @@ test('getHakuByFormValues returns correct haku given different hakulomake variat
 
   expect(hakuMuu).toMatchSnapshot();
   expect(hakuEiHakua).toMatchSnapshot();
+});
+
+test('getHakuByFormValues toteutuksen ajankohta - Tarkka alkamisaika', () => {
+  expect(
+    getHakuByFormValues(
+      merge({}, baseValues, {
+        aikataulut: {
+          toteutuksenAjankohta: TOTEUTUKSEN_AJANKOHTA.ALKAMISKAUSI,
+          tiedossaTarkkaAjankohta: true,
+          tarkkaAlkaa: '2019-09-16T08:44',
+          tarkkaPaattyy: '2019-09-16T08:44',
+          kausi: 'alkamiskausi_1#1',
+          vuosi: { value: '2020' },
+        },
+      })
+    )
+  ).toMatchSnapshot();
+});
+
+test('getHakuByFormValues toteutuksen ajankohta - Aloitus henkilokohtaisen suunnitelman mukaisesti', () => {
+  expect(
+    getHakuByFormValues(
+      merge({}, baseValues, {
+        aikataulut: {
+          toteutuksenAjankohta:
+            TOTEUTUKSEN_AJANKOHTA.HENKILOKOHTAINEN_SUUNNITELMA,
+          henkilokohtaisenSuunnitelmanLisatiedot: mapValues(
+            {
+              fi: '<p>hlokoht fi </p>',
+              sv: '<p>hlokoht sv </p>',
+              en: '<p>hlokoht en </p>',
+            },
+            parseEditorState
+          ),
+        },
+      })
+    )
+  ).toMatchSnapshot();
 });
 
 test('getAlkamiskausityyppi', () => {

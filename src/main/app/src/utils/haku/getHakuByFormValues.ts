@@ -5,6 +5,7 @@ import { getHakulomakeFieldsData } from '#/src/utils/form/getHakulomakeFieldsDat
 import isKorkeakoulutusKohdejoukkoKoodiUri from '#/src/utils/isKorkeakoulutusKohdejoukkoKoodiUri';
 import { ALKAMISKAUSITYYPPI, TOTEUTUKSEN_AJANKOHTA } from '#/src/constants';
 import { HakuFormValues } from '#/src/types/hakuTypes';
+import { serializeEditorState } from '#/src/components/Editor/utils';
 
 const getKielivalinta = values => values?.kieliversiot || [];
 
@@ -76,6 +77,10 @@ export const getHakuByFormValues = (values: HakuFormValues) => {
         koulutuksenAlkamisvuosi: maybeParseNumber(
           values?.aikataulut?.vuosi?.value
         ),
+        henkilokohtaisenSuunnitelmanLisatiedot: _fp.compose(
+          _fp.mapValues(serializeEditorState),
+          pickTranslations
+        )(values?.aikataulut?.henkilokohtaisenSuunnitelmanLisatiedot ?? {}),
       },
       tulevaisuudenAikataulu: (values?.aikataulut?.aikataulu || []).map(
         ({ alkaa, paattyy }) => ({

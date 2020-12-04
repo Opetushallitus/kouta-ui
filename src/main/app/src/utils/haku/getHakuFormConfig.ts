@@ -15,6 +15,7 @@ import {
   pohjaValintaSectionConfig,
   tilaSectionConfig,
   validateIf,
+  validateOptionalTranslatedField,
 } from '#/src/utils/form/formConfigUtils';
 import {
   validateExistence,
@@ -129,6 +130,12 @@ const config = createFormConfigBuilder().registerSections([
                 ),
               ])(eb);
             })
+        ),
+      },
+      {
+        field: '.henkilokohtaisenSuunnitelmanLisatiedot',
+        validate: validateOptionalTranslatedField(
+          'aikataulut.henkilokohtaisenSuunnitelmanLisatiedot'
         ),
       },
       {

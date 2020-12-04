@@ -23,7 +23,7 @@ const StyledBlueBox = styled(Box)`
 `;
 
 export const createStyledRadioSection = radioConfig =>
-  createFormFieldComponent(({ onChange, value, section }) => {
+  createFormFieldComponent(({ onChange, value, section, disabled }) => {
     const { t } = useTranslation();
     return (
       <Box display="flex" flexDirection="column">
@@ -36,6 +36,7 @@ export const createStyledRadioSection = radioConfig =>
                   checked={isChecked}
                   value={radioValue}
                   onChange={onChange}
+                  disabled={disabled}
                 >
                   {_.isFunction(label) ? label(t) : label}
                 </StyledGrayRadio>

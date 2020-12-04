@@ -1,6 +1,7 @@
 import { TOTEUTUKSEN_AJANKOHTA, HAKULOMAKETYYPPI } from '#/src/constants';
+import { EditorState } from '#/src/components/Editor/Editor';
 
-type HakulomakeFormSection = {
+export type HakulomakeFormSection = {
   tyyppi: HAKULOMAKETYYPPI;
   lomake: { value?: string };
   linkki?: TranslatedField<string>;
@@ -22,16 +23,19 @@ export type HakuFormValues = {
   kieliversiot: Array<LanguageCode>;
   aikataulut: {
     toteutuksenAjankohta: TOTEUTUKSEN_AJANKOHTA;
-    kausi: string;
-    vuosi: { value?: string };
+    kausi?: string;
+    vuosi?: { value?: string };
     tiedossaTarkkaAjankohta: boolean;
-    tarkkaAlkaa: string;
-    tarkkaPaattyy: string;
+    tarkkaAlkaa?: string;
+    tarkkaPaattyy?: string;
     hakuaika: Array<FormDateRange>;
     aikataulu: Array<FormDateRange>;
     lisaamisenTakaraja: FormDate;
     muokkauksenTakaraja: FormDate;
     ajastettuJulkaisu: FormDate;
+    henkilokohtaisenSuunnitelmanLisatiedot?: TranslatedField<
+      typeof EditorState
+    >;
   };
   hakutapa: string;
   kohdejoukko: {

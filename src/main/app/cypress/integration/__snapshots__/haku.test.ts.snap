@@ -22,6 +22,7 @@ exports[`createHaku > should be able to create haku #0`] =
   "metadata": {
     "koulutuksenAlkamiskausi": {
       "alkamiskausityyppi": "tarkka alkamisajankohta",
+      "henkilokohtaisenSuunnitelmanLisatiedot": {},
       "koulutuksenAlkamiskausiKoodiUri": "kausi_0#1",
       "koulutuksenAlkamispaivamaara": "2020-11-01T00:00",
       "koulutuksenAlkamisvuosi": 2035,
@@ -85,6 +86,7 @@ exports[`editHaku > should be able to edit haku #0`] =
   "metadata": {
     "koulutuksenAlkamiskausi": {
       "alkamiskausityyppi": "alkamiskausi ja -vuosi",
+      "henkilokohtaisenSuunnitelmanLisatiedot": {},
       "koulutuksenAlkamiskausiKoodiUri": "kausi_0#1",
       "koulutuksenAlkamispaivamaara": null,
       "koulutuksenAlkamisvuosi": 2024,

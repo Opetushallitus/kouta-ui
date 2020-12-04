@@ -2,6 +2,7 @@ import _ from 'lodash/fp';
 import { getHakulomakeFieldsValues } from '#/src/utils/form/getHakulomakeFieldsValues';
 import { ALKAMISKAUSITYYPPI, TOTEUTUKSEN_AJANKOHTA } from '#/src/constants';
 import { HakuFormValues } from '#/src/types/hakuTypes';
+import { parseEditorState } from '#/src/components/Editor/utils';
 
 export const alkamiskausityyppiToToteutuksenAjankohta = _.cond([
   [
@@ -49,6 +50,7 @@ export const getFormValuesByHaku = (haku): HakuFormValues => {
     koulutuksenAlkamispaivamaara = null,
     koulutuksenPaattymispaivamaara = null,
     koulutuksenAlkamisvuosi = '',
+    henkilokohtaisenSuunnitelmanLisatiedot,
   } = koulutuksenAlkamiskausi;
 
   return {
@@ -71,6 +73,9 @@ export const getFormValuesByHaku = (haku): HakuFormValues => {
       lisaamisenTakaraja: hakukohteenLiittamisenTakaraja,
       muokkauksenTakaraja: hakukohteenMuokkaamisenTakaraja,
       ajastettuJulkaisu,
+      henkilokohtaisenSuunnitelmanLisatiedot: _.mapValues(parseEditorState)(
+        henkilokohtaisenSuunnitelmanLisatiedot
+      ),
     },
     hakutapa: hakutapaKoodiUri,
     kohdejoukko: {

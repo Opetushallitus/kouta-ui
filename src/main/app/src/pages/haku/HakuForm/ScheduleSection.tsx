@@ -13,6 +13,7 @@ import {
   FormFieldRadioGroup,
   FormFieldYearSelect,
   FormFieldSwitch,
+  FormFieldEditor,
 } from '#/src/components/formFields';
 import Spacing from '#/src/components/Spacing';
 import { useFieldValue } from '#/src/hooks/form';
@@ -68,6 +69,19 @@ const KausiJaVuosiFields = ({ name }) => {
   );
 };
 
+const HenkilokohtaisenSuunnitelmanLisatiedot = ({ name }) => {
+  const { t } = useTranslation();
+  return (
+    <Spacing>
+      <Field
+        name={`${name}.henkilokohtaisenSuunnitelmanLisatiedot`}
+        component={FormFieldEditor}
+        label={t('yleiset.lisatietoa')}
+      />
+    </Spacing>
+  );
+};
+
 const ToteutuksenAjankohtaFields = createStyledRadioSection([
   {
     label: t => t('hakulomake.alkamiskausi'),
@@ -77,6 +91,7 @@ const ToteutuksenAjankohtaFields = createStyledRadioSection([
   {
     label: t => t('hakulomake.aloitusHenkilokohtaisenSuunnitelmanMukaisesti'),
     value: TOTEUTUKSEN_AJANKOHTA.HENKILOKOHTAINEN_SUUNNITELMA,
+    FieldsComponent: HenkilokohtaisenSuunnitelmanLisatiedot,
   },
 ]);
 

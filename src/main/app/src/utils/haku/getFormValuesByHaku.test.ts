@@ -1,4 +1,4 @@
-import { merge } from 'lodash';
+import { merge, each } from 'lodash';
 
 import {
   ALKAMISKAUSITYYPPI,
@@ -9,6 +9,7 @@ import {
   alkamiskausityyppiToToteutuksenAjankohta,
   getFormValuesByHaku,
 } from './getFormValuesByHaku';
+import { serializeEditorState } from '#/src/components/Editor/utils';
 
 const baseHaku = {
   muokkaaja: '1.1.1.1',
@@ -25,10 +26,8 @@ const baseHaku = {
   kohdejoukonTarkenneKoodiUri: 'tarkenne_1#1',
   metadata: {
     koulutuksenAlkamiskausi: {
-      alkamiskausityyppi: 'tarkka alkamisajankohta',
+      alkamiskausityyppi: ALKAMISKAUSITYYPPI.ALKAMISKAUSI_JA_VUOSI,
       koulutuksenAlkamiskausiKoodiUri: 'alkamiskausi_1#1',
-      koulutuksenAlkamispaivamaara: '2020-12-20T12:28',
-      koulutuksenPaattymispaivamaara: '2020-12-21T12:28',
       koulutuksenAlkamisvuosi: '2020',
     },
     tulevaisuudenAikataulu: [
@@ -49,7 +48,6 @@ const baseHaku = {
   },
   hakukohteenMuokkaamisenTakaraja: '2019-03-11T09:45',
   ajastettuJulkaisu: '2020-01-20T05:00',
-  alkamisvuosi: 2020,
   hakulomaketyyppi: HAKULOMAKETYYPPI.ATARU,
   hakulomakeAtaruId: '12345',
 };
@@ -81,6 +79,57 @@ test('getFormValuesByHaku returns correct form values given different hakulomake
 
   expect(valuesMuu).toMatchSnapshot();
   expect(valuesEiHakua).toMatchSnapshot();
+});
+
+test('getFormValuesByHaku toteutuksen ajankohta - Tarkka alkamisaika', () => {
+  expect(
+    getFormValuesByHaku(
+      merge({}, baseHaku, {
+        metadata: {
+          koulutuksenAlkamiskausi: {
+            alkamiskausityyppi: ALKAMISKAUSITYYPPI.TARKKA_ALKAMISAJANKOHTA,
+            koulutuksenAlkamiskausiKoodiUri: 'alkamiskausi_1#1',
+            koulutuksenAlkamispaivamaara: '2030-12-20T12:28',
+            koulutuksenPaattymispaivamaara: '2030-12-21T12:28',
+            koulutuksenAlkamisvuosi: '2030',
+          },
+        },
+      })
+    )
+  ).toMatchSnapshot();
+});
+
+test('getFormValuesByHaku toteutuksen ajankohta - Aloitus henkilokohtaisen suunnitelman mukaisesti', () => {
+  const henkKohtLisatiedotValues = {
+    fi: '<p>hlokoht fi </p>',
+    sv: '<p>hlokoht sv </p>',
+    en: '<p>hlokoht en </p>',
+  };
+
+  const values = getFormValuesByHaku(
+    merge({}, baseHaku, {
+      metadata: {
+        koulutuksenAlkamiskausi: {
+          alkamiskausityyppi: ALKAMISKAUSITYYPPI.HENKILOKOHTAINEN_SUUNNITELMA,
+          henkilokohtaisenSuunnitelmanLisatiedot: henkKohtLisatiedotValues,
+          koulutuksenAlkamiskausiKoodiUri: null,
+          koulutuksenAlkamispaivamaara: null,
+          koulutuksenPaattymispaivamaara: null,
+          koulutuksenAlkamisvuosi: null,
+        },
+      },
+    })
+  );
+  expect(values).toMatchSnapshot();
+
+  each(
+    values?.aikataulut.henkilokohtaisenSuunnitelmanLisatiedot,
+    (lisatiedotEditorState, lisatiedotKey) => {
+      expect(serializeEditorState(lisatiedotEditorState)).toEqual(
+        henkKohtLisatiedotValues[lisatiedotKey]
+      );
+    }
+  );
 });
 
 test('alkamiskausityyppiToToteutuksenAjankohta', () => {

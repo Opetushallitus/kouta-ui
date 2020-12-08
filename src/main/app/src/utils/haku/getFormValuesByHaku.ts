@@ -63,7 +63,9 @@ export const getFormValuesByHaku = (haku): HakuFormValues => {
         alkamiskausityyppi
       ),
       kausi: koulutuksenAlkamiskausiKoodiUri,
-      vuosi: { value: _.toString(koulutuksenAlkamisvuosi) || '' },
+      vuosi: koulutuksenAlkamisvuosi && {
+        value: _.toString(koulutuksenAlkamisvuosi),
+      },
       tiedossaTarkkaAjankohta:
         alkamiskausityyppi === ALKAMISKAUSITYYPPI.TARKKA_ALKAMISAJANKOHTA,
       tarkkaAlkaa: koulutuksenAlkamispaivamaara,

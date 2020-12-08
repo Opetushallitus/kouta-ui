@@ -24,7 +24,7 @@ export type HakuFormValues = {
   aikataulut: {
     toteutuksenAjankohta: TOTEUTUKSEN_AJANKOHTA;
     kausi?: string;
-    vuosi?: { value?: string };
+    vuosi?: { value: string };
     tiedossaTarkkaAjankohta: boolean;
     tarkkaAlkaa?: string;
     tarkkaPaattyy?: string;

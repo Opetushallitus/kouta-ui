@@ -1,4 +1,4 @@
-import _ from 'lodash/fp';
+import _fp from 'lodash/fp';
 import { ifAny, otherwise } from '#/src/utils';
 import {
   HAKULOMAKETYYPPI,
@@ -44,6 +44,9 @@ const config = createFormConfigBuilder().registerSections([
       {
         field: '.kohdejoukko',
         required: true,
+        validate: validateIfJulkaistu(
+          validateExistence('kohdejoukko.kohdejoukko')
+        ),
       },
       {
         field: '.tarkenne',
@@ -69,6 +72,9 @@ const config = createFormConfigBuilder().registerSections([
       },
       {
         field: '.toteutuksenAjankohta',
+        validate: validateIfJulkaistu(
+          validateExistence('aikataulut.toteutuksenAjankohta')
+        ),
       },
       {
         field: '.kausi',
@@ -82,7 +88,7 @@ const config = createFormConfigBuilder().registerSections([
               values?.aikataulut?.toteutuksenAjankohta ===
                 TOTEUTUKSEN_AJANKOHTA.ALKAMISKAUSI &&
               values?.tila === JULKAISUTILA.JULKAISTU,
-            _.pipe(
+            _fp.pipe(
               validateExistence('aikataulut.kausi'),
               validateExistence('aikataulut.vuosi')
             )
@@ -100,15 +106,11 @@ const config = createFormConfigBuilder().registerSections([
               TOTEUTUKSEN_AJANKOHTA.ALKAMISKAUSI &&
               values?.aikataulut?.tiedossaTarkkaAjankohta &&
               values?.tila === JULKAISUTILA.JULKAISTU,
-            _.pipe(
-              validateExistenceOfDate('aikataulut.tarkkaAlkaa'),
-              validateExistenceOfDate('aikataulut.tarkkaPaattyy')
-            )
+            validateExistenceOfDate('aikataulut.tarkkaAlkaa')
           )(eb),
       },
       {
         field: '.tarkkaPaattyy',
-        required: true,
       },
       {
         field: '.hakuaika',
@@ -122,7 +124,7 @@ const config = createFormConfigBuilder().registerSections([
               const isErillishaku = isErillishakuHakutapa(hakutapa);
               const isYhteishaku = isYhteishakuHakutapa(hakutapa);
 
-              return _.flow([
+              return _fp.flow([
                 validateExistenceOfDate('alkaa'),
                 validateIf(
                   isYhteishaku || isErillishaku,
@@ -174,7 +176,7 @@ const config = createFormConfigBuilder().registerSections([
         validate: validateIfJulkaistu(
           (eb, values) =>
             eb.validateExistence('hakulomake.tyyppi') &&
-            _.cond([
+            _fp.cond([
               [
                 ifAny(HAKULOMAKETYYPPI.ATARU),
                 () => eb.validateExistence('hakulomake.lomake'),

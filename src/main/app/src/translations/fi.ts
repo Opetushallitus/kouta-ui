@@ -549,7 +549,7 @@ export default {
     valitseAlkamisvuosi: 'Valitse vuosi',
     aloitusHenkilokohtaisenSuunnitelmanMukaisesti:
       'Aloitus henkilökohtaisen suunnitelman mukaisesti',
-    toteutuksenAjankohta: 'Toteutuksen ajankohta',
+    toteutuksenAjankohta: 'Koulutuksen aloitusajankohta',
   },
   hakukohdelomake: {
     toteutukseenLiitettyAlkamiskausi: 'Toteutukseen liitetty alkamiskausi',

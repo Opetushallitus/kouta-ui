@@ -268,9 +268,7 @@ Object {
     "tarkkaPaattyy": null,
     "tiedossaTarkkaAjankohta": false,
     "toteutuksenAjankohta": "aloitusHenkilokohtaisenSuunnitelmanMukaisesti",
-    "vuosi": Object {
-      "value": "",
-    },
+    "vuosi": null,
   },
   "hakulomake": Object {
     "kuvaus": Object {},

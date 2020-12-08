@@ -5,7 +5,8 @@ import ReactAsyncCreatableSelect from 'react-select/async-creatable';
 import ReactAsyncSelect from 'react-select/async';
 import { ThemeContext } from 'styled-components';
 import { useAsync } from 'react-async';
-import { get, isArray, isObject, isFunction, zipObject } from 'lodash';
+import _ from 'lodash';
+import { useTranslation } from 'react-i18next';
 
 import UiSelect, {
   getStyles,
@@ -13,7 +14,6 @@ import UiSelect, {
 } from '@opetushallitus/virkailija-ui-components/Select';
 
 import { memoizeOne } from '#/src/utils/memoize';
-import { useTranslation } from 'react-i18next';
 
 const OptionComponent = props => (
   <components.Option
@@ -47,7 +47,7 @@ const getDefaultProps = memoizeOne(t => ({
 }));
 
 const getOptionLabelByValue = options => {
-  if (!isArray(options)) {
+  if (!_.isArray(options)) {
     return {};
   }
 
@@ -59,23 +59,23 @@ const getOptionLabelByValue = options => {
 };
 
 const getValue = (value, options) => {
-  const hasOptions = isArray(options);
+  const hasOptions = _.isArray(options);
 
-  if (isObject(value) && value.value) {
+  if (_.isObject(value) && value.value) {
     return hasOptions
-      ? options.find(option => get(option, 'value') === value.value) || {
+      ? options.find(option => option?.value === value.value) || {
           label: value.value,
           ...value,
         }
       : { label: value.value, ...value };
   }
 
-  if (isArray(value)) {
+  if (_.isArray(value)) {
     const labelByValue = getOptionLabelByValue(options);
 
     return value
       .map(item => {
-        if (isObject(item) && item.value) {
+        if (_.isObject(item) && item.value) {
           const { value: itemValue, label: itemLabel, ...rest } = item;
 
           return {
@@ -100,14 +100,14 @@ type SelectProps = Props & {
   error?: boolean;
 };
 
-export const Select: React.FC<SelectProps> = ({
+export const Select = ({
   id,
   disabled,
   value,
   options,
   error = false,
   ...props
-}) => {
+}: SelectProps) => {
   const resolvedValue = useMemo(() => getValue(value, options), [
     value,
     options,
@@ -181,24 +181,24 @@ export const AsyncSelect = ({
   const labelCache = useRef({});
 
   const valuesWithoutLabel = useMemo(() => {
-    const valueArr = isArray(valueProp) ? valueProp : [valueProp];
+    const valueArr = _.isArray(valueProp) ? valueProp : [valueProp];
 
     return valueArr
-      .filter(v => !get(v, 'label') && !labelCache.current[get(v, 'value')])
-      .map(v => get(v, 'value'));
+      .filter(v => !v?.label && !labelCache.current[v?.value])
+      .map(v => v?.value);
   }, [valueProp]);
 
   const promiseFn = useMemo(() => {
     return async () => {
       const labels = await Promise.all(
         valuesWithoutLabel.map(v =>
-          (isFunction(loadLabel) ? loadLabel(v) : noopPromise()).catch(
+          (_.isFunction(loadLabel) ? loadLabel(v) : noopPromise()).catch(
             () => null
           )
         )
       );
 
-      const valueToLabel = zipObject(valuesWithoutLabel, labels);
+      const valueToLabel = _.zipObject(valuesWithoutLabel, labels);
 
       labelCache.current = {
         ...labelCache.current,

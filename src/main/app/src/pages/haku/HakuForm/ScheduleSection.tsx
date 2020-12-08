@@ -69,12 +69,12 @@ const KausiJaVuosiFields = ({ name }) => {
   );
 };
 
-const HenkilokohtaisenSuunnitelmanLisatiedot = ({ name }) => {
+const HenkilokohtaisenSuunnitelmanLisatiedot = ({ name, language }) => {
   const { t } = useTranslation();
   return (
     <Spacing>
       <Field
-        name={`${name}.henkilokohtaisenSuunnitelmanLisatiedot`}
+        name={`${name}.henkilokohtaisenSuunnitelmanLisatiedot.${language}`}
         component={FormFieldEditor}
         label={t('yleiset.lisatietoa')}
       />
@@ -95,7 +95,7 @@ const ToteutuksenAjankohtaFields = createStyledRadioSection([
   },
 ]);
 
-const ScheduleSection = ({ isOphVirkailija, isYhteishaku, name }) => {
+const ScheduleSection = ({ isOphVirkailija, isYhteishaku, name, language }) => {
   const { t } = useTranslation();
 
   return (
@@ -120,6 +120,7 @@ const ScheduleSection = ({ isOphVirkailija, isYhteishaku, name }) => {
           name={`${name}.toteutuksenAjankohta`}
           component={ToteutuksenAjankohtaFields}
           section={name}
+          language={language}
         />
       </FieldGroup>
 

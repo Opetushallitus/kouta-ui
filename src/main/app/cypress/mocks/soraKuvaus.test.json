@@ -5173,5 +5173,134 @@
         "body": null
       }
     ]
+  },
+  "Shouldn't complain about unsaved changed for untouched form": {
+    "timestamp": 1607602563288,
+    "routes": [
+      {
+        "url": "https://localhost:3000/kouta-backend/auth/session",
+        "method": "GET",
+        "status": 200,
+        "headers": {},
+        "body": null,
+        "response": {}
+      },
+      {
+        "url": "https://localhost:3000/kouta-backend/auth/session",
+        "method": "GET",
+        "status": 200,
+        "headers": {},
+        "body": null,
+        "response": {}
+      },
+      {
+        "url": "https://localhost:3000/kayttooikeus-service/cas/me",
+        "method": "GET",
+        "status": 200,
+        "headers": {},
+        "body": null,
+        "response": {
+          "uid": "johndoe",
+          "oid": "1.2.246.562.24.62301161440",
+          "firstName": "John",
+          "lastName": "Doe",
+          "lang": "fi",
+          "roles": "[\"APP_KOUTA\",\"APP_KOUTA_OPHPAAKAYTTAJA\",\"APP_KOUTA_OPHPAAKAYTTAJA_1.2.246.562.10.00000000001\"]"
+        }
+      },
+      {
+        "url": "https://localhost:3000/kouta-backend/sorakuvaus/123e4567-e89b-12d3-a456-426655440000",
+        "method": "GET",
+        "status": 200,
+        "headers": {},
+        "body": null,
+        "response": {
+          "id": "123e4567-e89b-12d3-a456-426655440000",
+          "tila": "tallennettu",
+          "julkinen": true,
+          "muokkaaja": "1.2.246.562.24.62301161440",
+          "organisaatioOid": "1.1.1.1.1.1",
+          "kielivalinta": [
+            "fi",
+            "sv"
+          ],
+          "modified": "2019-04-01T13:01",
+          "koulutustyyppi": "amm",
+          "metadata": {
+            "koulutusKoodiUrit": [
+              "koulutus_754101#7"
+            ],
+            "koulutusalaKoodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_073#1",
+            "kuvaus": {
+              "fi": "<p><strong>Kuvaus fi</strong></p>",
+              "sv": "<p><em>Kuvaus sv</em></p>"
+            }
+          },
+          "nimi": {
+            "fi": "Fi nimi",
+            "sv": "Sv nimi"
+          }
+        }
+      },
+      {
+        "url": "https://localhost:3000/organisaatio-service/rest/organisaatio/v4/findbyoids",
+        "method": "POST",
+        "status": 200,
+        "headers": {},
+        "body": [
+          "1.1.1.1.1.1"
+        ],
+        "response": [
+          {
+            "oid": "1.1.1.1.1.1",
+            "nimi": {
+              "fi": "Organisaatio"
+            },
+            "metadata": {
+              "nimi": {},
+              "hakutoimistonNimi": {},
+              "yhteystiedot": [],
+              "hakutoimistoEctsEmail": {},
+              "hakutoimistoEctsNimi": {},
+              "hakutoimistoEctsPuhelin": {},
+              "hakutoimistoEctsTehtavanimike": {},
+              "luontiPvm": 1376464481941,
+              "muokkausPvm": 1376464481941,
+              "data": {}
+            },
+            "kayntiosoite": {},
+            "ryhmatyypit": [],
+            "kayttoryhmat": [],
+            "parentOidPath": "|1.2.246.562.10.00000000001|",
+            "parentOid": "1.2.246.562.10.00000000001",
+            "status": "AKTIIVINEN"
+          }
+        ]
+      },
+      {
+        "url": "https://localhost:3000/koodisto-service/rest/json/kansallinenkoulutusluokitus2016koulutusalataso2/koodi?onlyValidKoodis=true&koodistoVersio=",
+        "method": "GET",
+        "status": 404,
+        "headers": {},
+        "body": null,
+        "response": "Not Found"
+      },
+      {
+        "url": "https://localhost:3000/koodisto-service/rest/codeelement/koulutus_754101/7",
+        "method": "GET",
+        "status": 404,
+        "headers": {},
+        "body": null,
+        "response": "Not Found"
+      },
+      {
+        "url": "https://localhost:3000/koodisto-service/rest/json/relaatio/sisaltyy-ylakoodit/kansallinenkoulutusluokitus2016koulutusalataso2_073#1",
+        "method": "GET",
+        "status": 404,
+        "headers": {},
+        "body": null,
+        "response": "Not Found"
+      }
+    ]
   }
 }

@@ -4,6 +4,7 @@ import {
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
 } from '#/src/constants';
 import { maybeParseNumber } from '#/src/utils';
+import { serializeEditorState } from '#/src/components/Editor/utils';
 
 const osaamisalaKoodiToKoodiUri = value =>
   value ? `osaamisala_${value}` : null;
@@ -78,11 +79,15 @@ const getKoulutusByFormValues = values => {
       koulutustyyppi,
       lisatiedot: osiot.map(({ value }) => ({
         otsikkoKoodiUri: value,
-        teksti: pickTranslations(
-          values?.lisatiedot?.osioKuvaukset?.[value] ?? {}
-        ),
+        teksti: _.pipe(
+          pickTranslations,
+          _.mapValues(serializeEditorState)
+        )(values?.lisatiedot?.osioKuvaukset?.[value] ?? {}),
       })),
-      kuvaus: pickTranslations(values?.description?.kuvaus ?? {}),
+      kuvaus: _.pipe(
+        pickTranslations,
+        _.mapValues(serializeEditorState)
+      )(values?.description?.kuvaus ?? {}),
       opintojenLaajuusKoodiUri:
         values?.information?.opintojenLaajuus?.value || null,
       tutkintonimikeKoodiUrit: (values?.information?.tutkintonimike ?? []).map(

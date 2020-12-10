@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import FormConfigFragment from '#/src/components/FormConfigFragment';
 import { Box } from '#/src/components/virkailija';
 import TekstiKuvausSection from './TekstiKuvausSection';
-import { FormFieldInput, FormFieldTextarea } from '#/src/components/formFields';
+import { FormFieldInput, FormFieldEditor } from '#/src/components/formFields';
 import { getTestIdProps } from '#/src/utils';
 
 const KuvausSection = ({ disabled, language, name }) => {
@@ -36,7 +36,7 @@ const KuvausSection = ({ disabled, language, name }) => {
         <Field
           disabled={disabled}
           name={`${name}.kuvaus.${language}`}
-          component={FormFieldTextarea}
+          component={FormFieldEditor}
           label={t('yleiset.kuvaus')}
         />
       </Box>

@@ -12,6 +12,7 @@ import {
   fillTilaSection,
   tallenna,
   fillKoulutustyyppiSection,
+  typeToEditor,
 } from '#/cypress/utils';
 
 import { stubKoulutusFormRoutes } from '#/cypress/koulutusFormUtils';
@@ -27,7 +28,7 @@ const fillLisatiedotSection = () => {
     });
 
     getByTestId('osioKuvaus.koulutuksenlisatiedot_0#1').within(() => {
-      cy.get('textarea').pipe(paste('koulutuksenlisatiedot_0 kuvaus'));
+      typeToEditor('koulutuksenlisatiedot_0 kuvaus');
     });
 
     jatka();
@@ -307,7 +308,7 @@ export const createKoulutusForm = () => {
       });
 
       getByTestId('kuvausInput').within(() => {
-        cy.get('textarea').pipe(paste('Kuvaus'));
+        typeToEditor('Kuvaus');
       });
 
       jatka();

@@ -6,10 +6,7 @@ import { useTranslation } from 'react-i18next';
 import Spacing from '#/src/components/Spacing';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
-import {
-  FormFieldTextarea,
-  FormFieldSelect,
-} from '#/src/components/formFields';
+import { FormFieldEditor, FormFieldSelect } from '#/src/components/formFields';
 import { Typography } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
 
@@ -38,7 +35,7 @@ const OsiotFields = ({ disabled, language, osiotOptions, name }) => {
       <Field
         disabled={disabled}
         name={`${name}.osioKuvaukset.${value}.${language}`}
-        component={FormFieldTextarea}
+        component={FormFieldEditor}
         label={label}
       />
     </Spacing>

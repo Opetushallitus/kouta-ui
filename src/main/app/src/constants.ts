@@ -17,29 +17,28 @@ export function getJulkaisutilaTranslationKey(tila: JULKAISUTILA): string {
 
 export const DEFAULT_JULKAISUTILA = JULKAISUTILA.TALLENNETTU;
 
-export const KOULUTUSTYYPPI = {
-  AMMATILLINEN_KOULUTUS: 'amm',
-  LUKIOKOULUTUS: 'lk',
-  YLIOPISTOKOULUTUS: 'yo',
-  AMKKOULUTUS: 'amk',
-  VALMA: 'valma',
-  TELMA: 'telma',
-  TUTKINNON_OSA: 'amm-tutkinnon-osa',
-  OSAAMISALA: 'amm-osaamisala',
-  AVOIN_YO: 'avoin_yo',
-  AVOIN_AMK: 'avoin_amk',
-  TAYDENNYS_KOULUTUS: 'taydennyskoulutus',
-  ERIKOISTUMISKOULUTUS: 'erikoistumiskoulutus',
-  VALMENTAVA_KOULUTUS: 'valmentava_koulutus',
-  AMMATILLINEN_OPETTAJAKOULUTUS: 'ammatillinen_opettajakoulutus',
-  AMMATILLINEN_OPINTO_OHJAAJA_KOULUTUS: 'ammatillinen_opinto_ohjaaja_koulutus',
-  AMMATILLINEN_ERITYISOPETTAJA_KOULUTUS:
-    'ammatillinen_erityisopettaja_koulutus',
-  VAPAA_SIVISTYSTYO: 'vapaa_sivistystyo',
-  LUVA: 'luva',
-  MUUT_KOULUTUKSET: 'muut_koulutukset',
-  PERUSOPETUKSEN_LISAOPETUS: 'perusopetuksen_lisaopetus',
-} as const;
+export enum KOULUTUSTYYPPI {
+  AMMATILLINEN_KOULUTUS = 'amm',
+  LUKIOKOULUTUS = 'lk',
+  YLIOPISTOKOULUTUS = 'yo',
+  AMKKOULUTUS = 'amk',
+  VALMA = 'valma',
+  TELMA = 'telma',
+  TUTKINNON_OSA = 'amm-tutkinnon-osa',
+  OSAAMISALA = 'amm-osaamisala',
+  AVOIN_YO = 'avoin_yo',
+  AVOIN_AMK = 'avoin_amk',
+  TAYDENNYS_KOULUTUS = 'taydennyskoulutus',
+  ERIKOISTUMISKOULUTUS = 'erikoistumiskoulutus',
+  VALMENTAVA_KOULUTUS = 'valmentava_koulutus',
+  AMMATILLINEN_OPETTAJAKOULUTUS = 'ammatillinen_opettajakoulutus',
+  AMMATILLINEN_OPINTO_OHJAAJA_KOULUTUS = 'ammatillinen_opinto_ohjaaja_koulutus',
+  AMMATILLINEN_ERITYISOPETTAJA_KOULUTUS = 'ammatillinen_erityisopettaja_koulutus',
+  VAPAA_SIVISTYSTYO = 'vapaa_sivistystyo',
+  LUVA = 'luva',
+  MUUT_KOULUTUKSET = 'muut_koulutukset',
+  PERUSOPETUKSEN_LISAOPETUS = 'perusopetuksen_lisaopetus',
+}
 
 export const KOULUTUSTYYPIT = Object.values(KOULUTUSTYYPPI);
 

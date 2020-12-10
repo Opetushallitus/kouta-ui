@@ -1,5 +1,6 @@
 import _ from 'lodash/fp';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
+import { parseEditorState } from '#/src/components/Editor/utils';
 
 const koodiUriToKoodi = koodiUri => {
   return parseKoodiUri(koodiUri)?.koodiArvo;
@@ -53,7 +54,10 @@ export const getFormValuesByKoulutus = koulutus => {
     lisatiedot: {
       osioKuvaukset: lisatiedot.reduce((acc, curr) => {
         if (curr.otsikkoKoodiUri) {
-          acc[curr.otsikkoKoodiUri] = curr.teksti || {};
+          acc[curr.otsikkoKoodiUri] = _.mapValues(
+            parseEditorState,
+            curr.teksti
+          );
         }
         return acc;
       }, {}),
@@ -87,7 +91,7 @@ export const getFormValuesByKoulutus = koulutus => {
       nimi,
     },
     description: {
-      kuvaus,
+      kuvaus: _.mapValues(parseEditorState, kuvaus),
       nimi: kuvauksenNimi,
     },
     esikatselu,

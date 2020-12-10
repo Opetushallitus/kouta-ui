@@ -7,7 +7,7 @@ import FormCollapse from '#/src/components/FormCollapse';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
 import OsaamisalatSection from './OsaamisalatSection';
 import JarjestamispaikatSection from './JarjestamispaikatSection';
-import JarjestamisTiedotSection from './JarjestamisTiedotSection';
+import { JarjestamisTiedotSection } from './JarjestamisTiedotSection';
 import NayttamisTiedotSection from './NayttamisTiedotSection';
 import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import HakukohteetSection from './HakukohteetSection';
@@ -32,17 +32,29 @@ import KuvausSection from './KuvausSection';
 
 const { ATARU, MUU } = HAKULOMAKETYYPPI;
 
+type ToteutusFormProps = {
+  koulutus: KoulutusModel;
+  organisaatioOid: string;
+  steps?: boolean;
+  canSelectBase?: boolean;
+  toteutus?: ToteutusModel;
+  onAttachHakukohde?: ({ hakuOid }) => void;
+  koulutustyyppi?: KOULUTUSTYYPPI;
+  showArkistoituTilaOption?: boolean;
+  onSelectBase?: ({ tapa, valinta }) => void;
+};
+
 const ToteutusForm = ({
   koulutus,
   organisaatioOid,
   steps = false,
   canSelectBase = true,
-  toteutus = undefined,
-  onAttachHakukohde = undefined,
+  toteutus,
+  onAttachHakukohde,
   koulutustyyppi = KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
   showArkistoituTilaOption = true,
-  onSelectBase = undefined,
-}) => {
+  onSelectBase,
+}: ToteutusFormProps) => {
   const { t } = useTranslation();
   const kieliversiot = useFieldValue('kieliversiot');
   const languages = kieliversiot || [];

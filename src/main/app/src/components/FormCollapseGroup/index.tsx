@@ -4,6 +4,7 @@ import { produce } from 'immer';
 import { Box } from '#/src/components/virkailija';
 import { useFormConfig, useForm } from '#/src/hooks/form';
 import scrollElementIntoView from '#/src/utils/scrollElementIntoView';
+import { FormCollapseProps } from '#/src/components/FormCollapse';
 
 const getVisibleChildren = (children, config, configured) => {
   return React.Children.toArray(children).filter(c => {
@@ -20,7 +21,7 @@ const getVisibleChildren = (children, config, configured) => {
     }
 
     return true;
-  });
+  }) as Array<React.ReactElement<FormCollapseProps>>;
 };
 
 const FormCollapseGroup = ({
@@ -30,8 +31,10 @@ const FormCollapseGroup = ({
   defaultOpen = true,
   children,
 }) => {
-  const [sectionNeedsFocus, setSectionNeedsFocus] = useState(null);
-  const [errorsNeedAttention, setErrorsNeedAttention] = useState(false);
+  const [sectionNeedsFocus, setSectionNeedsFocus] = useState<number | null>();
+  const [errorsNeedAttention, setErrorsNeedAttention] = useState<boolean>(
+    false
+  );
 
   const activeRef = useRef();
   const config = useFormConfig();
@@ -47,7 +50,7 @@ const FormCollapseGroup = ({
     [children, config, configured]
   );
 
-  const sectionErrors = useMemo(
+  const sectionErrors: Array<boolean> = useMemo(
     () =>
       React.Children.map(visibleChildren, child => {
         // Get the 'section'-prop of the FormCollapse component
@@ -99,7 +102,7 @@ const FormCollapseGroup = ({
 
   return (
     <>
-      {React.Children.map(visibleChildren, (child, index) => {
+      {visibleChildren.map((child, index) => {
         const isLast = index === visibleChildren.length - 1;
         const childProps = {
           index,
@@ -115,7 +118,7 @@ const FormCollapseGroup = ({
                   }
                   setSectionNeedsFocus(index + 1);
                 }
-              : null,
+              : undefined,
         };
         return (
           <Box

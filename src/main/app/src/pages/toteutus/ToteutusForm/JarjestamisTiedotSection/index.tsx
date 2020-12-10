@@ -21,9 +21,9 @@ import {
   FormFieldEditor,
 } from '#/src/components/formFields';
 import { isStipendiVisible } from '#/src/utils/toteutus/toteutusVisibilities';
+import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenAloitusajankohtaFields';
 
 import MaksullisuusFields from './MaksullisuusFields';
-import AlkamiskausiFields from './AlkamiskausiFields';
 import { DiplomiFields } from './DiplomiFields';
 import KielivalikoimaFields from './KielivalikoimaFields';
 import OpetusaikaCheckboxGroup from './OpetusaikaCheckboxGroup';
@@ -197,7 +197,11 @@ const SuunniteltuKestoFields = ({ name }) => {
   );
 };
 
-const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
+export const JarjestamisTiedotSection = ({
+  language,
+  koulutustyyppi,
+  name,
+}) => {
   const { t } = useTranslation();
 
   const { options: osiotOptions } = useKoodistoOptions({
@@ -317,7 +321,11 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
       />
 
       <FieldGroup title={t('toteutuslomake.koulutuksenAjankohta')}>
-        <AlkamiskausiFields name={name} />
+        <KoulutuksenAloitusajankohtaFields
+          section={name}
+          name={`${name}.ajankohta`}
+          language={language}
+        />
       </FieldGroup>
 
       <FormConfigFragment name="kielivalikoima">
@@ -351,15 +359,3 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
     </>
   );
 };
-
-const JarjestamisTiedotSection = ({ language, koulutustyyppi, name }) => {
-  return (
-    <JarjestamisTiedotContent
-      language={language}
-      koulutustyyppi={koulutustyyppi}
-      name={name}
-    />
-  );
-};
-
-export default JarjestamisTiedotSection;

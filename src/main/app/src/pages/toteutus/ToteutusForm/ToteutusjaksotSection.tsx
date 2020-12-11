@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import FieldArrayList from '#/src/components/FieldArrayList';
 import Button from '#/src/components/Button';
-import { FormFieldInput, FormFieldTextarea } from '#/src/components/formFields';
+import { FormFieldInput, FormFieldEditor } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 import SisaltoField from '#/src/components/SisaltoField';
@@ -57,7 +57,7 @@ const ToteutusjaksotField = ({ fields, language, t }) => {
               <Field
                 name={`${field}.kuvaus.${language}`}
                 label={t('toteutuslomake.toteutusjaksonKuvaus')}
-                component={FormFieldTextarea}
+                component={FormFieldEditor}
               />
             </Box>
 

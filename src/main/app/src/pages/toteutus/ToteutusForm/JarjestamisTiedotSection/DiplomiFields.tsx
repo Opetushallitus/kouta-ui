@@ -3,15 +3,12 @@ import { Field } from 'redux-form';
 import { useTranslation } from 'react-i18next';
 
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
-import {
-  FormFieldTextarea,
-  FormFieldSelect,
-} from '#/src/components/formFields';
+import { FormFieldEditor, FormFieldSelect } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
 import DividerHeading from '#/src/components/DividerHeading';
 import { getTestIdProps } from '#/src/utils';
 
-const DiplomiFields = ({ name, language }) => {
+export const DiplomiFields = ({ name, language }) => {
   const { t } = useTranslation();
 
   const { options: diplomiOptions } = useKoodistoOptions({
@@ -35,12 +32,10 @@ const DiplomiFields = ({ name, language }) => {
           <Field
             name={`${name}.diplomiKuvaus.${language}`}
             label={t('toteutuslomake.lukiodiplominTarkempiKuvaus')}
-            component={FormFieldTextarea}
+            component={FormFieldEditor}
           />
         </Box>
       </Box>
     </>
   );
 };
-
-export default DiplomiFields;

@@ -6,7 +6,7 @@ import {
   fillKieliversiotSection,
   tallenna,
 } from '#/cypress/utils';
-import { merge } from 'lodash';
+import _fp from 'lodash/fp';
 
 const prepareTest = tyyppi => {
   const organisaatioOid = '1.1.1.1.1.1';
@@ -48,13 +48,13 @@ const prepareTest = tyyppi => {
   cy.route({
     method: 'GET',
     url: `**/koulutus/${koulutusOid}`,
-    response: merge(koulutus({ tyyppi }), testKoulutusFields),
+    response: _fp.merge(koulutus({ tyyppi }), testKoulutusFields),
   });
 
   cy.route({
     method: 'GET',
     url: `**/toteutus/${toteutusOid}`,
-    response: merge(toteutus({ tyyppi }), testToteutusFields),
+    response: _fp.merge(toteutus({ tyyppi }), testToteutusFields),
   });
 
   cy.visit(`/organisaatio/${organisaatioOid}/toteutus/${toteutusOid}/muokkaus`);

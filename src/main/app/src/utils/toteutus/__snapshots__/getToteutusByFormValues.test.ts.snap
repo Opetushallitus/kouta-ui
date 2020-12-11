@@ -10,8 +10,8 @@ Object {
     "alemmanKorkeakoulututkinnonOsaamisalat": Array [
       Object {
         "kuvaus": Object {
-          "fi": "Fi alempikuvaus",
-          "sv": "Sv alempikuvaus",
+          "fi": "<p>Fi alempikuvaus</p>",
+          "sv": "<p>Sv alempikuvaus</p>",
         },
         "linkki": Object {
           "fi": "Fi alempilinkki",
@@ -86,8 +86,8 @@ Object {
         "diplomi_2#1",
       ],
       "diplomiKuvaus": Object {
-        "fi": "Fi diplomi",
-        "sv": "Sv diplomi",
+        "fi": "<p>Fi diplomi</p>",
+        "sv": "<p>Sv diplomi</p>",
       },
       "koulutuksenAlkamiskausi": "kausi_0#1",
       "koulutuksenAlkamispaivamaara": null,
@@ -98,21 +98,21 @@ Object {
         Object {
           "otsikkoKoodiUri": "osio_1#1",
           "teksti": Object {
-            "fi": "Fi kuvaus1",
-            "sv": "Sv kuvaus1",
+            "fi": "<p>Fi kuvaus1</p>",
+            "sv": "<p>Sv kuvaus1</p>",
           },
         },
         Object {
           "otsikkoKoodiUri": "osio_2#1",
           "teksti": Object {
-            "fi": "Fi kuvaus2",
-            "sv": "Sv kuvaus2",
+            "fi": "<p>Fi kuvaus2</p>",
+            "sv": "<p>Sv kuvaus2</p>",
           },
         },
       ],
       "maksullisuusKuvaus": Object {
-        "fi": "Fi maksullisuuskuvaus",
-        "sv": "Sv maksullisuuskuvaus",
+        "fi": "<p>Fi maksullisuuskuvaus</p>",
+        "sv": "<p>Sv maksullisuuskuvaus</p>",
       },
       "maksunMaara": 50.5,
       "muuKielivalikoima": Array [
@@ -125,12 +125,12 @@ Object {
         "opetusaika_2#1",
       ],
       "opetusaikaKuvaus": Object {
-        "fi": "Fi aikakuvaus",
-        "sv": "Sv aikakuvaus",
+        "fi": "<p>Fi aikakuvaus</p>",
+        "sv": "<p>Sv aikakuvaus</p>",
       },
       "opetuskieletKuvaus": Object {
-        "fi": "Fi kielikuvaus",
-        "sv": "Sv kielikuvaus",
+        "fi": "<p>Fi kielikuvaus</p>",
+        "sv": "<p>Sv kielikuvaus</p>",
       },
       "opetuskieliKoodiUrit": Array [
         "oppilaitoksenopetuskieli_1#1",
@@ -142,18 +142,18 @@ Object {
         "opetustapa_2#1",
       ],
       "opetustapaKuvaus": Object {
-        "fi": "Fi tapakuvaus",
-        "sv": "Sv tapakuvaus",
+        "fi": "<p>Fi tapakuvaus</p>",
+        "sv": "<p>Sv tapakuvaus</p>",
       },
       "stipendinKuvaus": Object {
-        "fi": "Fi stipendikuvaus",
-        "sv": "Sv stipendikuvaus",
+        "fi": "<p>Fi stipendikuvaus</p>",
+        "sv": "<p>Sv stipendikuvaus</p>",
       },
       "stipendinMaara": 20,
       "suunniteltuKestoKuukaudet": 6,
       "suunniteltuKestoKuvaus": Object {
-        "fi": "Fi aikakuvaus",
-        "sv": "Sv aikakuvaus",
+        "fi": "<p>Fi aikakuvaus</p>",
+        "sv": "<p>Sv aikakuvaus</p>",
       },
       "suunniteltuKestoVuodet": 2,
     },
@@ -189,8 +189,8 @@ Object {
         },
         "koodi": "koodi 123",
         "kuvaus": Object {
-          "fi": "Fi kuvaus",
-          "sv": "Sv kuvaus",
+          "fi": "<p>Fi kuvaus</p>",
+          "sv": "<p>Sv kuvaus</p>",
         },
         "laajuus": Object {
           "fi": "Fi laajuus",
@@ -293,8 +293,8 @@ Object {
     "ylemmanKorkeakoulututkinnonOsaamisalat": Array [
       Object {
         "kuvaus": Object {
-          "fi": "Fi ylempikuvaus",
-          "sv": "Sv ylempikuvaus",
+          "fi": "<p>Fi ylempikuvaus</p>",
+          "sv": "<p>Sv ylempikuvaus</p>",
         },
         "linkki": Object {
           "fi": "Fi ylempilinkki",

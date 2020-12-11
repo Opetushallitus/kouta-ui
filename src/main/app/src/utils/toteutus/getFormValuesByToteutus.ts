@@ -1,10 +1,10 @@
-import _ from 'lodash/fp';
+import _fp from 'lodash/fp';
 import parseSisaltoField from '#/src/utils/form/parseSisaltoField';
 import { parseEditorState } from '#/src/components/Editor/utils';
 
-const toSelectValue = value => (_.isNil(value) ? null : { value });
+const toSelectValue = value => (_fp.isNil(value) ? null : { value });
 
-const kieliArvoListToMultiSelectValue = _.reduce((acc, curr) => {
+const kieliArvoListToMultiSelectValue = _fp.reduce((acc, curr) => {
   if (curr?.kieli && curr?.arvo) {
     return {
       ...acc,
@@ -64,7 +64,7 @@ const getFormValuesByToteutus = toteutus => {
     lisatiedot,
   } = opetus;
 
-  const { osaamisalaLinkit, osaamisalaLinkkiOtsikot } = _.reduce(
+  const { osaamisalaLinkit, osaamisalaLinkkiOtsikot } = _fp.reduce(
     (acc, curr) => {
       const { koodiUri, linkki = {}, otsikko = {} } = curr;
 
@@ -88,12 +88,14 @@ const getFormValuesByToteutus = toteutus => {
     tila,
     tiedot: {
       nimi: nimi ?? {},
-      laajuus: _.isNumber(laajuus) ? laajuus.toString() : '',
+      laajuus: _fp.isNumber(laajuus) ? laajuus.toString() : '',
       laajuusyksikko: toSelectValue(laajuusyksikkoKoodiUri),
       ilmoittautumislinkki: ilmoittautumislinkki || {},
-      aloituspaikat: _.isNumber(aloituspaikat) ? aloituspaikat.toString() : '',
+      aloituspaikat: _fp.isNumber(aloituspaikat)
+        ? aloituspaikat.toString()
+        : '',
     },
-    kuvaus: _.mapValues(parseEditorState, kuvaus || {}),
+    kuvaus: _fp.mapValues(parseEditorState, kuvaus || {}),
     kieliversiot: kielivalinta ?? [],
     tarjoajat: tarjoajat ?? [],
     jarjestamistiedot: {
@@ -108,36 +110,57 @@ const getFormValuesByToteutus = toteutus => {
       opetustapa: opetus?.opetustapaKoodiUrit || [],
       opetusaika: opetus?.opetusaikaKoodiUrit || [],
       opetuskieli: opetus?.opetuskieliKoodiUrit || [],
-      suunniteltuKestoKuvaus: opetus?.suunniteltuKestoKuvaus || {},
+      suunniteltuKestoKuvaus: _fp.mapValues(
+        parseEditorState,
+        opetus?.suunniteltuKestoKuvaus || {}
+      ),
       suunniteltuKesto: {
         vuotta: opetus?.suunniteltuKestoVuodet,
         kuukautta: opetus?.suunniteltuKestoKuukaudet,
       },
-      opetusaikaKuvaus: opetus?.opetusaikaKuvaus || {},
-      opetustapaKuvaus: opetus?.opetustapaKuvaus || {},
-      opetuskieliKuvaus: opetus?.opetuskieletKuvaus || {},
-      maksullisuusKuvaus: opetus?.maksullisuusKuvaus || {},
-      osiot: _.pipe(
-        _.filter(({ otsikkoKoodiUri }) => !!otsikkoKoodiUri),
-        _.map(({ otsikkoKoodiUri }) => ({ value: otsikkoKoodiUri }))
+      opetusaikaKuvaus: _fp.mapValues(
+        parseEditorState,
+        opetus?.opetusaikaKuvaus || {}
+      ),
+      opetustapaKuvaus: _fp.mapValues(
+        parseEditorState,
+        opetus?.opetustapaKuvaus || {}
+      ),
+      opetuskieliKuvaus: _fp.mapValues(
+        parseEditorState,
+        opetus?.opetuskieletKuvaus || {}
+      ),
+      maksullisuusKuvaus: _fp.mapValues(
+        parseEditorState,
+        opetus?.maksullisuusKuvaus || {}
+      ),
+      osiot: _fp.pipe(
+        _fp.filter(({ otsikkoKoodiUri }) => !!otsikkoKoodiUri),
+        _fp.map(({ otsikkoKoodiUri }) => ({ value: otsikkoKoodiUri }))
       )(lisatiedot),
-      osioKuvaukset: _.reduce((acc, curr) => {
+      osioKuvaukset: _fp.reduce((acc, curr) => {
         if (curr.otsikkoKoodiUri) {
-          acc[curr.otsikkoKoodiUri] = curr.teksti || {};
+          acc[curr.otsikkoKoodiUri] = _fp.mapValues(
+            parseEditorState,
+            curr.teksti || {}
+          );
         }
         return acc;
       }, {})(lisatiedot),
       onkoStipendia: opetus?.onkoStipendia ? 'kylla' : 'ei',
       stipendinMaara: opetus?.stipendinMaara,
-      stipendinKuvaus: opetus?.stipendinKuvaus || {},
-      diplomiTyypit: _.map(toSelectValue)(diplomiKoodiUrit),
-      diplomiKuvaus: diplomiKuvaus ?? {},
-      A1A2Kielet: _.map(toSelectValue)(A1JaA2Kielivalikoima),
-      aidinkielet: _.map(toSelectValue)(aidinkieliKielivalikoima),
-      B1Kielet: _.map(toSelectValue)(B1Kielivalikoima),
-      B2Kielet: _.map(toSelectValue)(B2Kielivalikoima),
-      B3Kielet: _.map(toSelectValue)(B3Kielivalikoima),
-      muutKielet: _.map(toSelectValue)(muuKielivalikoima),
+      stipendinKuvaus: _fp.mapValues(
+        parseEditorState,
+        opetus?.stipendinKuvaus || {}
+      ),
+      diplomiTyypit: _fp.map(toSelectValue)(diplomiKoodiUrit),
+      diplomiKuvaus: _fp.mapValues(parseEditorState, diplomiKuvaus ?? {}),
+      A1A2Kielet: _fp.map(toSelectValue)(A1JaA2Kielivalikoima),
+      aidinkielet: _fp.map(toSelectValue)(aidinkieliKielivalikoima),
+      B1Kielet: _fp.map(toSelectValue)(B1Kielivalikoima),
+      B2Kielet: _fp.map(toSelectValue)(B2Kielivalikoima),
+      B3Kielet: _fp.map(toSelectValue)(B3Kielivalikoima),
+      muutKielet: _fp.map(toSelectValue)(muuKielivalikoima),
       koulutuksenAlkamispaivamaara: koulutuksenAlkamispaivamaara
         ? new Date(koulutuksenAlkamispaivamaara)
         : '',
@@ -152,7 +175,7 @@ const getFormValuesByToteutus = toteutus => {
       ammattinimikkeet: kieliArvoListToMultiSelectValue(ammattinimikkeet),
       avainsanat: kieliArvoListToMultiSelectValue(asiasanat),
     },
-    yhteyshenkilot: _.map(
+    yhteyshenkilot: _fp.map(
       ({ nimi, titteli, sahkoposti, wwwSivu, puhelinnumero }) => ({
         nimi: nimi || {},
         titteli: titteli || {},
@@ -162,20 +185,30 @@ const getFormValuesByToteutus = toteutus => {
       })
     )(yhteyshenkilot),
     osaamisalat: {
-      osaamisalat: _.map(({ koodiUri }) => koodiUri)(osaamisalat),
+      osaamisalat: _fp.map(({ koodiUri }) => koodiUri)(osaamisalat),
       osaamisalaLinkit,
       osaamisalaLinkkiOtsikot,
     },
     ylemmanKorkeakoulututkinnonOsaamisalat:
-      ylemmanKorkeakoulututkinnonOsaamisalat ?? [],
+      _fp.map(({ kuvaus, nimi, linkki, otsikko }) => ({
+        kuvaus: _fp.mapValues(parseEditorState, kuvaus),
+        nimi,
+        linkki,
+        otsikko,
+      }))(ylemmanKorkeakoulututkinnonOsaamisalat) ?? [],
     alemmanKorkeakoulututkinnonOsaamisalat:
-      alemmanKorkeakoulututkinnonOsaamisalat ?? [],
+      _fp.map(({ kuvaus, nimi, linkki, otsikko }) => ({
+        kuvaus: _fp.mapValues(parseEditorState, kuvaus),
+        nimi,
+        linkki,
+        otsikko,
+      }))(alemmanKorkeakoulututkinnonOsaamisalat) ?? [],
     lukiolinjat: {
       lukiolinja: lukiolinjaKoodiUri
         ? { value: lukiolinjaKoodiUri }
         : undefined,
     },
-    toteutusjaksot: _.map(
+    toteutusjaksot: _fp.map(
       ({
         nimi = {},
         koodi = '',
@@ -188,15 +221,15 @@ const getFormValuesByToteutus = toteutus => {
         koodi,
         laajuus,
         ilmoittautumislinkki,
-        kuvaus,
+        kuvaus: _fp.mapValues(parseEditorState, kuvaus),
         sisalto: parseSisaltoField(sisalto),
       })
     )(toteutusjaksot),
-    tutkinnonOsat: _.map(
+    tutkinnonOsat: _fp.map(
       ({ tutkintoKoodiUri, osaamisalaKoodiUri, tutkinnonOsaKoodiUrit }) => ({
         tutkinto: toSelectValue(tutkintoKoodiUri),
         osaamisalaKoodiUri: toSelectValue(osaamisalaKoodiUri),
-        tutkinnonOsat: _.map(toSelectValue)(tutkinnonOsaKoodiUrit),
+        tutkinnonOsat: _fp.map(toSelectValue)(tutkinnonOsaKoodiUrit),
       })
     )(tutkinnonOsat),
     teemakuva,
@@ -204,11 +237,11 @@ const getFormValuesByToteutus = toteutus => {
       hakeutumisTaiIlmoittautumistapa: metadata?.hakulomaketyyppi,
       hakuTapa: metadata?.hakutermi,
       linkki: metadata?.hakulomakeLinkki,
-      lisatiedot: _.mapValues(
+      lisatiedot: _fp.mapValues(
         parseEditorState,
         metadata?.lisatietoaHakeutumisesta
       ),
-      lisatiedotValintaperusteista: _.mapValues(
+      lisatiedotValintaperusteista: _fp.mapValues(
         parseEditorState,
         metadata?.lisatietoaValintaperusteista
       ),

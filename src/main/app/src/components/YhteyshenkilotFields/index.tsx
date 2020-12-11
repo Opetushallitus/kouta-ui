@@ -85,5 +85,3 @@ export const YhteyshenkilotFields = ({
     />
   );
 };
-
-export default YhteyshenkilotFields;

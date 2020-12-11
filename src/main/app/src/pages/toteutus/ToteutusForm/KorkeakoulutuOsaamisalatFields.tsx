@@ -6,7 +6,7 @@ import Button from '#/src/components/Button';
 import Spacing from '#/src/components/Spacing';
 import Flex, { FlexItem } from '#/src/components/Flex';
 import { getTestIdProps } from '#/src/utils';
-import { FormFieldInput, FormFieldTextarea } from '#/src/components/formFields';
+import { FormFieldInput, FormFieldEditor } from '#/src/components/formFields';
 import FieldArrayList from '#/src/components/FieldArrayList';
 
 const OsaamisalatFieldArray = ({ fields, language, t }) => (
@@ -25,7 +25,7 @@ const OsaamisalatFieldArray = ({ fields, language, t }) => (
           <Spacing marginBottom={2} {...getTestIdProps('osaamisalanKuvaus')}>
             <Field
               name={`${field}.kuvaus.${language}`}
-              component={FormFieldTextarea}
+              component={FormFieldEditor}
               label={t('yleiset.kuvaus')}
             />
           </Spacing>

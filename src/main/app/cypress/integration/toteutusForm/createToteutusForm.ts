@@ -1,4 +1,4 @@
-import { merge } from 'lodash';
+import _fp from 'lodash/fp';
 
 import {
   getRadio,
@@ -27,7 +27,7 @@ const fillOpetuskieli = (chosenNumber = '0') => {
     getCheckbox(`oppilaitoksenopetuskieli_${chosenNumber}#1`).click({
       force: true,
     });
-    cy.get('textarea').pipe(paste('opetuskieli kuvaus'));
+    typeToEditor('opetuskieli kuvaus');
   });
 };
 
@@ -35,23 +35,21 @@ const fillSuunniteltuKesto = () => {
   getByTestId('suunniteltuKesto').within(() => {
     getByTestId('suunniteltuKestoVuotta').type('2');
     getByTestId('suunniteltuKestoKuukautta').type('6');
-    getByTestId('suunniteltuKestoKuvaus').pipe(
-      paste('suunniteltu kesto kuvaus')
-    );
+    typeToEditor('suunniteltu kesto kuvaus');
   });
 };
 
 const fillOpetusaika = () => {
   getByTestId('opetusaika').within(() => {
     getCheckbox('opetusaikakk_0#1').click({ force: true });
-    cy.get('textarea').pipe(paste('opetusaika kuvaus'));
+    typeToEditor('opetusaika kuvaus');
   });
 };
 
 const fillOpetustapa = () => {
   getByTestId('opetustapa').within(() => {
     getCheckbox('opetuspaikkakk_0#1').click({ force: true });
-    cy.get('textarea').pipe(paste('opetustapa kuvaus'));
+    typeToEditor('opetustapa kuvaus');
   });
 };
 
@@ -59,10 +57,7 @@ const fillMaksullisuus = tyyppi => {
   getByTestId('maksullisuus').within(() => {
     getRadio(tyyppi).click({ force: true });
     getByTestId('maksu').find('input').pipe(paste('10'));
-
-    getByTestId('maksullisuusKuvaus').within(() => {
-      cy.get('textarea').pipe(paste('maksullisuus kuvaus'));
-    });
+    typeToEditor('maksullisuus kuvaus');
   });
 };
 
@@ -70,7 +65,7 @@ const fillStipendi = () => {
   getByTestId('stipendi').within(() => {
     getRadio('kylla').click({ force: true });
     getByTestId('stipendinMaara').find('input').pipe(paste('20'));
-    cy.get('textarea').pipe(paste('stipendi kuvaus'));
+    typeToEditor('stipendi kuvaus');
   });
 };
 
@@ -92,9 +87,9 @@ const fillOsiot = () => {
     });
   });
 
-  getByTestId('osioKuvaus.koulutuksenlisatiedot_0#1')
-    .find('textarea')
-    .pipe(paste('koulutuksenlisatiedot_0 kuvaus'));
+  getByTestId('osioKuvaus.koulutuksenlisatiedot_0#1').within(() => {
+    typeToEditor('koulutuksenlisatiedot_0 kuvaus');
+  });
 };
 
 const fillCommonJarjestamistiedot = ({ maksullisuusTyyppi = 'kylla' } = {}) => {
@@ -171,9 +166,9 @@ const fillYhteystiedotSection = () => {
 const fillKkOsaamisalat = () => {
   getByTestId('lisaaOsaamisalaButton').click({ force: true });
   getByTestId('osaamisalanNimi').find('input').pipe(paste('osaamisalan nimi'));
-  getByTestId('osaamisalanKuvaus')
-    .find('textarea')
-    .pipe(paste('osaamisalan kuvaus'));
+  getByTestId('osaamisalanKuvaus').within(() => {
+    typeToEditor('osaamisalan kuvaus');
+  });
   getByTestId('osaamisalanLinkki')
     .find('input')
     .pipe(paste('http://linkki.com'));
@@ -197,7 +192,9 @@ const fillDiplomi = () => {
     selectOption('lukiodiplomit_0');
   });
 
-  getByTestId('diplomiKuvaus').find('textarea').pipe(paste('Diplomi kuvaus'));
+  getByTestId('diplomiKuvaus').within(() => {
+    typeToEditor('Diplomi kuvaus');
+  });
 };
 
 const fillKielivalikoima = () => {
@@ -247,7 +244,7 @@ const prepareTest = tyyppi => {
   cy.route({
     method: 'GET',
     url: `**/koulutus/${koulutusOid}`,
-    response: merge(koulutus({ tyyppi }), testKoulutusFields),
+    response: _fp.merge(koulutus({ tyyppi }), testKoulutusFields),
   });
 
   cy.route({

@@ -1,5 +1,5 @@
 import React from 'react';
-import { isFunction } from 'lodash';
+import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 
 import getToteutukset from '#/src/utils/toteutus/getToteutukset';
@@ -16,7 +16,7 @@ import HakukohteetModal from './HakukohteetModal';
 import Flex from '#/src/components/Flex';
 import Button from '#/src/components/Button';
 import KorkeakouluOsaamisalatSection from './KorkeakouluOsaamisalatSection';
-import YhteyshenkilotSection from './YhteyshenkilotSection';
+import { YhteyshenkilotSection } from './YhteyshenkilotSection';
 import { KOULUTUSTYYPPI, HAKULOMAKETYYPPI } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import useModal from '#/src/hooks/useModal';
@@ -208,7 +208,7 @@ const ToteutusForm = ({
           showArkistoitu={showArkistoituTilaOption}
         />
 
-        {isFunction(onAttachHakukohde) && kaytetaanHakemuspalvelua ? (
+        {_fp.isFunction(onAttachHakukohde) && kaytetaanHakemuspalvelua ? (
           <FormCollapse
             header={t('toteutuslomake.toteutukseenLiitetytHakukohteet')}
             id="toteutukseen-liitetetyt-hakukohteet"

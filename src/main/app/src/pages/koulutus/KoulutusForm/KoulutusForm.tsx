@@ -1,5 +1,5 @@
 import React from 'react';
-import _ from 'lodash';
+import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 
 import { ENTITY } from '#/src/constants';
@@ -24,7 +24,7 @@ import TypeSection from './TypeSection';
 import TiedotSection from './TiedotSection';
 import KuvausSection from './KuvausSection';
 import JarjestajaSection from './JarjestajaSection';
-import LisatiedotSection from './LisatiedotSection';
+import { LisatiedotSection } from './LisatiedotSection';
 import ToteutuksetSection from './ToteutuksetSection';
 import { OsaamisalaSection } from './OsaamisalaSection';
 import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
@@ -35,7 +35,7 @@ import { getTestIdProps } from '#/src/utils';
 
 const isInHierarkia = org => hierarkia =>
   hierarkia.organisaatioOid === org.organisaatioOid ||
-  _.first(hierarkia.children.filter(isInHierarkia(org)));
+  _fp.first(hierarkia.children.filter(isInHierarkia(org)));
 
 const KoulutusForm = ({
   organisaatioOid,
@@ -83,7 +83,7 @@ const KoulutusForm = ({
           disabled={onlyTarjoajaRights}
         />
       )}
-      {_.isFunction(onSelectBase) && (
+      {_fp.isFunction(onSelectBase) && (
         <PohjaFormCollapse
           onSelectBase={onSelectBase}
           organisaatioOid={organisaatioOid}
@@ -215,7 +215,7 @@ const KoulutusForm = ({
         showArkistoitu={!isNewKoulutus}
       />
 
-      {_.isFunction(onAttachToteutus) && (
+      {_fp.isFunction(onAttachToteutus) && (
         <FormCollapse
           header={t('koulutuslomake.koulutukseenLiitetytToteutukset')}
           id="koulutukseen-liitetetyt-toteutukset"

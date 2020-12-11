@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _fp from 'lodash/fp';
 import {
   fillKieliversiotSection,
   tallenna,
@@ -36,7 +36,7 @@ const prepareTest = tyyppi => {
   cy.route({
     method: 'GET',
     url: `**/koulutus/${koulutusOid}`,
-    response: _.merge(koulutus({ tyyppi }), testKoulutusFields),
+    response: _fp.merge(koulutus({ tyyppi }), testKoulutusFields),
   });
 
   cy.visit(`/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`);

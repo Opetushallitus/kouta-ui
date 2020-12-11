@@ -44,9 +44,8 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
       "aidinkieliKielivalikoima": [],
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
-      "koulutuksenAlkamiskausi": "kausi_0#1",
       "koulutuksenAlkamispaivamaara": null,
-      "koulutuksenAlkamisvuosi": 2035,
+      "koulutuksenAlkamisvuosi": null,
       "koulutuksenPaattymispaivamaara": null,
       "koulutuksenTarkkaAlkamisaika": null,
       "lisatiedot": [
@@ -168,9 +167,8 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
       "aidinkieliKielivalikoima": [],
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
-      "koulutuksenAlkamiskausi": "kausi_0#1",
       "koulutuksenAlkamispaivamaara": null,
-      "koulutuksenAlkamisvuosi": 2035,
+      "koulutuksenAlkamisvuosi": null,
       "koulutuksenPaattymispaivamaara": null,
       "koulutuksenTarkkaAlkamisaika": null,
       "lisatiedot": [
@@ -317,9 +315,8 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
       "aidinkieliKielivalikoima": [],
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
-      "koulutuksenAlkamiskausi": "kausi_0#1",
       "koulutuksenAlkamispaivamaara": null,
-      "koulutuksenAlkamisvuosi": 2035,
+      "koulutuksenAlkamisvuosi": null,
       "koulutuksenPaattymispaivamaara": null,
       "koulutuksenTarkkaAlkamisaika": null,
       "lisatiedot": [
@@ -471,9 +468,8 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
       "diplomiKuvaus": {
         "fi": "<p>Diplomi kuvaus</p>"
       },
-      "koulutuksenAlkamiskausi": "kausi_0#1",
       "koulutuksenAlkamispaivamaara": null,
-      "koulutuksenAlkamisvuosi": 2035,
+      "koulutuksenAlkamisvuosi": null,
       "koulutuksenPaattymispaivamaara": null,
       "koulutuksenTarkkaAlkamisaika": null,
       "lisatiedot": [

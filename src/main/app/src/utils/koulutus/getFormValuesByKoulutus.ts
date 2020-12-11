@@ -1,4 +1,4 @@
-import _ from 'lodash/fp';
+import _fp from 'lodash/fp';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 import { parseEditorState } from '#/src/components/Editor/utils';
 
@@ -54,7 +54,7 @@ export const getFormValuesByKoulutus = koulutus => {
     lisatiedot: {
       osioKuvaukset: lisatiedot.reduce((acc, curr) => {
         if (curr.otsikkoKoodiUri) {
-          acc[curr.otsikkoKoodiUri] = _.mapValues(
+          acc[curr.otsikkoKoodiUri] = _fp.mapValues(
             parseEditorState,
             curr.teksti
           );
@@ -66,8 +66,8 @@ export const getFormValuesByKoulutus = koulutus => {
         .map(({ otsikkoKoodiUri }) => ({ value: otsikkoKoodiUri })),
     },
     tutkinnonosat: {
-      osat: _.values(
-        _.reduce(
+      osat: _fp.values(
+        _fp.reduce(
           (
             grouped,
             { ePerusteId, koulutusKoodiUri, tutkinnonosaId, tutkinnonosaViite }
@@ -79,8 +79,8 @@ export const getFormValuesByKoulutus = koulutus => {
               osat: [
                 ...(grouped?.[`${koulutusKoodiUri}_${ePerusteId}`]?.osat || []),
                 {
-                  value: _.toString(tutkinnonosaId),
-                  viite: _.toString(tutkinnonosaViite),
+                  value: _fp.toString(tutkinnonosaId),
+                  viite: _fp.toString(tutkinnonosaViite),
                 },
               ],
             },
@@ -91,7 +91,7 @@ export const getFormValuesByKoulutus = koulutus => {
       nimi,
     },
     description: {
-      kuvaus: _.mapValues(parseEditorState, kuvaus),
+      kuvaus: _fp.mapValues(parseEditorState, kuvaus),
       nimi: kuvauksenNimi,
     },
     esikatselu,

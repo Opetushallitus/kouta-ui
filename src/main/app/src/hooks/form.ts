@@ -20,9 +20,10 @@ import { getKielivalinta } from '#/src/utils/form/formConfigUtils';
 
 export const useFormName = () => useContext(FormNameContext);
 
-export const useForm = () => {
+export const useForm = (formNameProp?: string) => {
   const formName = useFormName();
-  return useSelector(state => _.get(state, `form.${formName}`));
+
+  return useSelector(state => _.get(state, `form.${formNameProp || formName}`));
 };
 
 export function useBoundFormActions() {

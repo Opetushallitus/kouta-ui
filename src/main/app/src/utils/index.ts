@@ -2,7 +2,7 @@ import dateFnsformatDate from 'date-fns/format';
 import _fp from 'lodash/fp';
 import _ from 'lodash';
 import stripTags from 'striptags';
-import { ALLOWED_HTML_TAGS } from '#/src/constants';
+import { ALLOWED_HTML_TAGS, LANGUAGES } from '#/src/constants';
 import { memoize } from '#/src/utils/memoize';
 import {
   isEditorState,
@@ -181,3 +181,36 @@ export const maybeParseNumber = value => {
 };
 
 export const toSelectValue = value => (_.isNil(value) ? null : { value });
+
+const getFieldName = name =>
+  name.match(`(.+?)(\\.${LANGUAGES.join('|')})?$`)?.[1];
+
+// Get form values for saving. Filters out fields that user has hidden.
+// Result can be sassed to get**ByFormValues().
+export const getValuesForSaving = (
+  values,
+  registeredFields,
+  unregisteredFields,
+  initialValues = {}
+) => {
+  // Use initial values as a base. Especially important for editing.
+  const saveableValues: any = initialValues;
+
+  // Ensure that all fields that were unregistered (hidden by the user) are sent to backend as empty values
+  _.each(unregisteredFields, ({ name }) => {
+    const fieldName = getFieldName(name);
+    _.set(saveableValues, fieldName, null);
+  });
+
+  // Ensure that the fields that are registered (visible) will be saved
+  _.each(registeredFields, ({ name }) => {
+    const fieldName = getFieldName(name);
+    _.set(saveableValues, fieldName, _.get(values, fieldName));
+  });
+
+  // Some exceptions (fields that should be saved even though they are not visible)
+  // TODO: There might be a few other exceptions. Check before using in other forms and add here.
+  _.set(saveableValues, 'koulutustyyppi', values?.koulutustyyppi);
+  _.set(saveableValues, 'muokkaaja', values?.muokkaaja);
+  return saveableValues;
+};

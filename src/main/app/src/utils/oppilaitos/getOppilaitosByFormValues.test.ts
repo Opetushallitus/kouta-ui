@@ -10,8 +10,8 @@ test('getOppilaitosByFormValues returns correct oppilaitos given form values', (
       osiot: [{ value: 'osio_1#1' }],
       tiedot: {
         'osio_1#1': {
-          fi: 'Fi tiedot',
-          sv: 'Sv tiedot',
+          fi: parseEditorState('Fi tiedot'),
+          sv: parseEditorState('Sv tiedot'),
         },
       },
     },

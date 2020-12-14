@@ -43,9 +43,7 @@ const fillTeemakuvaSection = () => {
 const fillTietoaOpiskelustaSection = () => {
   getByTestId('tietoaSection').within(() => {
     selectOption('organisaationkuvaustiedot_0');
-
-    cy.get('textarea').pipe(paste('Tietoa'));
-
+    typeToEditor('Tietoa');
     jatka();
   });
 };

@@ -24,9 +24,9 @@ const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
   const tietoaOpiskelusta = (get(tietoa, 'osiot') || []).map(
     ({ value: otsikkoKoodiUri }) => ({
       otsikkoKoodiUri,
-      teksti: pick(
-        get(tietoa, ['tiedot', otsikkoKoodiUri]) || {},
-        kieliversiot
+      teksti: mapValues(
+        pick(get(tietoa, ['tiedot', otsikkoKoodiUri]) || {}, kieliversiot),
+        serializeEditorState
       ),
     })
   );

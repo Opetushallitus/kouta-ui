@@ -39,8 +39,8 @@ test('getFormValuesByOppilaitos returns correct form values given oppilaitos', (
         {
           otsikkoKoodiUri: 'osio_1#1',
           teksti: {
-            fi: 'Fi tiedot',
-            sv: 'Sv tiedot',
+            fi: '<p>Fi tiedot</p>',
+            sv: '<p>Sv tiedot</p>',
           },
         },
       ],

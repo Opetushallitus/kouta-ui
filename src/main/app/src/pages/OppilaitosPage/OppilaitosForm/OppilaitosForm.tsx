@@ -10,7 +10,7 @@ import TeemakuvaSection from '#/src/components/TeemakuvaSection';
 import EsittelySection from './EsittelySection';
 import PerustiedotSection from './PerustiedotSection';
 import YhteystiedotSection from './YhteystiedotSection';
-import TietoaOpiskelustaSection from './TietoaOpiskelustaSection';
+import { TietoaOpiskelustaSection } from './TietoaOpiskelustaSection';
 import OppilaitoksenOsatSection from './OppilaitoksenOsatSection';
 
 const OppilaitosForm = ({

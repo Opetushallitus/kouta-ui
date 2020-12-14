@@ -1,4 +1,4 @@
-import _ from 'lodash/fp';
+import _fp from 'lodash/fp';
 
 import createFormConfigBuilder from '#/src/utils/form/createFormConfigBuilder';
 
@@ -36,9 +36,9 @@ const validateDateTimeRange = (alkaaFieldName, paattyyFieldName) => (
   eb,
   values
 ) => {
-  const alkaaValue = _.get(alkaaFieldName, values);
-  const paattyyValue = _.get(paattyyFieldName, values);
-  return _.pipe(
+  const alkaaValue = _fp.get(alkaaFieldName, values);
+  const paattyyValue = _fp.get(paattyyFieldName, values);
+  return _fp.pipe(
     eb =>
       paattyyValue
         ? validateExistenceOfDate(alkaaFieldName, {
@@ -64,7 +64,7 @@ const config = createFormConfigBuilder().registerSections([
       {
         fragment: 'nimi',
         field: '.nimi',
-        koulutustyypit: _.without(
+        koulutustyypit: _fp.without(
           [
             KOULUTUSTYYPPI.LUKIOKOULUTUS,
             KOULUTUSTYYPPI.VALMA,
@@ -80,28 +80,28 @@ const config = createFormConfigBuilder().registerSections([
       },
       {
         field: '.ilmoittautumislinkki',
-        koulutustyypit: _.without(
+        koulutustyypit: _fp.without(
           [KOULUTUSTYYPPI.OSAAMISALA, KOULUTUSTYYPPI.TUTKINNON_OSA],
           TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT
         ),
       },
       {
         field: '.laajuus',
-        koulutustyypit: _.without(
+        koulutustyypit: _fp.without(
           [KOULUTUSTYYPPI.OSAAMISALA, KOULUTUSTYYPPI.TUTKINNON_OSA],
           TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT
         ),
       },
       {
         field: '.laajuusyksikko',
-        koulutustyypit: _.without(
+        koulutustyypit: _fp.without(
           [KOULUTUSTYYPPI.OSAAMISALA, KOULUTUSTYYPPI.TUTKINNON_OSA],
           TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT
         ),
       },
       {
         field: '.aloituspaikat',
-        koulutustyypit: _.without(
+        koulutustyypit: _fp.without(
           [
             KOULUTUSTYYPPI.VALMA,
             KOULUTUSTYYPPI.TELMA,
@@ -126,7 +126,7 @@ const config = createFormConfigBuilder().registerSections([
     parts: [
       createOptionalTranslatedFieldConfig({
         name: 'kuvaus',
-        koulutustyypit: _.without(
+        koulutustyypit: _fp.without(
           [KOULUTUSTYYPPI.LUKIOKOULUTUS],
           KOULUTUSTYYPIT
         ),
@@ -230,7 +230,7 @@ const config = createFormConfigBuilder().registerSections([
         field: '.suunniteltuKesto.vuotta',
         required: false,
         validate: validateIfJulkaistu(
-          _.compose(
+          _fp.compose(
             validateInteger('jarjestamistiedot.suunniteltuKesto.vuotta', {
               min: 0,
               max: 99,
@@ -245,7 +245,7 @@ const config = createFormConfigBuilder().registerSections([
       {
         field: '.suunniteltuKesto.kuukautta',
         required: false,
-        validate: _.compose(
+        validate: _fp.compose(
           validateInteger('jarjestamistiedot.suunniteltuKesto.kuukautta', {
             min: 0,
             max: 11,
@@ -356,7 +356,7 @@ const config = createFormConfigBuilder().registerSections([
     section: 'hakeutumisTaiIlmoittautumistapa',
     koulutustyypit: [KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA],
     validate: (eb, values) =>
-      _.pipe(
+      _fp.pipe(
         eb =>
           validateDateTimeRange(
             'hakeutumisTaiIlmoittautumistapa.hakuaikaAlkaa',
@@ -366,14 +366,14 @@ const config = createFormConfigBuilder().registerSections([
           const hakeutumisTaiIlmoittautumistapa =
             values?.hakeutumisTaiIlmoittautumistapa
               ?.hakeutumisTaiIlmoittautumistapa;
-          return _.pipe(
+          return _fp.pipe(
             validateExistence('hakeutumisTaiIlmoittautumistapa.hakuTapa'),
             validateExistence(
               'hakeutumisTaiIlmoittautumistapa.hakeutumisTaiIlmoittautumistapa'
             ),
             validateIf(
               hakeutumisTaiIlmoittautumistapa === HAKULOMAKETYYPPI.MUU,
-              _.pipe(
+              _fp.pipe(
                 validateUrl(
                   'hakeutumisTaiIlmoittautumistapa.linkki',
                   getKielivalinta(values)

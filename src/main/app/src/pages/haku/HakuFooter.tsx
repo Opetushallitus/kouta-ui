@@ -75,5 +75,3 @@ export const HakuFooter = ({ formMode, haku, canUpdate }: HakuFooterProps) => {
 
   return <FormFooter entity={ENTITY.HAKU} save={save} canUpdate={canUpdate} />;
 };
-
-export default HakuFooter;

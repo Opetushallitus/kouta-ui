@@ -279,3 +279,8 @@ export enum TOTEUTUKSEN_AJANKOHTA {
   ALKAMISKAUSI = 'alkamiskausi',
   HENKILOKOHTAINEN_SUUNNITELMA = 'aloitusHenkilokohtaisenSuunnitelmanMukaisesti',
 }
+
+export enum FormMode {
+  CREATE = 'create',
+  EDIT = 'edit',
+}

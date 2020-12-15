@@ -86,6 +86,7 @@ const AdditionalTyyppiFields = ({
           name={`${baseName}.kuvaus.${language}`}
           component={FormFieldEditor}
           label={t('yleiset.kuvaus')}
+          hideHeaderSelect
         />
       );
     default:

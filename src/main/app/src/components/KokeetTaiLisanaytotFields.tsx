@@ -71,6 +71,7 @@ export const KoeTaiLisanayttoFields = ({
               name={`${field}.tietoaHakijalle.${language}`}
               component={FormFieldEditor}
               label={t(`${translationBase}.tietoaHakijalle`)}
+              hideHeaderSelect
             />
           </Box>
           <Box mb={2} {...getTestIdProps('liittyyEnnakkovalmistautumista')}>
@@ -87,6 +88,7 @@ export const KoeTaiLisanayttoFields = ({
                 name={`${field}.ohjeetEnnakkovalmistautumiseen.${language}`}
                 component={FormFieldEditor}
                 label={t(`${translationBase}.materiaaliJaValmistautumisohjeet`)}
+                hideHeaderSelect
               />
             </Box>
           )}
@@ -104,6 +106,7 @@ export const KoeTaiLisanayttoFields = ({
                 name={`${field}.ohjeetErityisjarjestelyihin.${language}`}
                 component={FormFieldEditor}
                 label={t(`${translationBase}.ohjeetErityisjarjestelyihin`)}
+                hideHeaderSelect
               />
             </Box>
           )}

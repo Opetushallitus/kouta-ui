@@ -325,6 +325,7 @@ export const Editor = ({
   onFocus = () => {},
   onBlur = () => {},
   disabled,
+  hideHeaderSelect = false, // NOTE: If other parts should be able to be hidden too, refactor this as options or smth
   ...props
 }) => {
   const editorState = value ? value : emptyEditorState;
@@ -373,7 +374,7 @@ export const Editor = ({
           {...styleButtonProps}
         />
         <LinkButton {...styleButtonProps} title="Linkki" />
-        <HeaderSelect {...styleButtonProps} />
+        {!hideHeaderSelect && <HeaderSelect {...styleButtonProps} />}
       </Toolbar>
       <EditorWrapper>
         <EditorContent>

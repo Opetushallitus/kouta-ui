@@ -157,6 +157,7 @@ const StipendiFields = ({ koulutustyyppi, language, name }) => {
             name={`${name}.stipendinKuvaus.${language}`}
             component={FormFieldEditor}
             label={t('yleiset.tarkempiKuvaus')}
+            hideHeaderSelect
           />
         </FlexItem>
       </Flex>
@@ -221,6 +222,7 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
               name={`${name}.opetuskieliKuvaus.${language}`}
               component={FormFieldEditor}
               label={t('yleiset.tarkempiKuvaus')}
+              hideHeaderSelect
             />
           </FlexItem>
         </Flex>
@@ -235,6 +237,7 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
               name={`${name}.suunniteltuKestoKuvaus.${language}`}
               component={FormFieldEditor}
               label={t('yleiset.tarkempiKuvaus')}
+              hideHeaderSelect
               {...getTestIdProps('suunniteltuKestoKuvaus')}
             />
           </FlexItem>
@@ -256,6 +259,7 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
               name={`${name}.opetusaikaKuvaus.${language}`}
               component={FormFieldEditor}
               label={t('yleiset.tarkempiKuvaus')}
+              hideHeaderSelect
             />
           </FlexItem>
         </Flex>
@@ -275,6 +279,7 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
               name={`${name}.opetustapaKuvaus.${language}`}
               component={FormFieldEditor}
               label={t('yleiset.tarkempiKuvaus')}
+              hideHeaderSelect
             />
           </FlexItem>
         </Flex>
@@ -298,6 +303,7 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
               name={`${name}.maksullisuusKuvaus.${language}`}
               component={FormFieldEditor}
               label={t('yleiset.tarkempiKuvaus')}
+              hideHeaderSelect
             />
           </FlexItem>
         </Flex>

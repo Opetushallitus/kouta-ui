@@ -116,6 +116,7 @@ const HakeutumisTaiIlmoittautusmistapaFields = createFormFieldComponent(
               component={FormFieldEditor}
               label={t(`toteutuslomake.${hakuTapa}.lisatiedot`)}
               name={`${section}.lisatiedot.${language}`}
+              hideHeaderSelect
             />
           </StyledBlueBox>
         )}

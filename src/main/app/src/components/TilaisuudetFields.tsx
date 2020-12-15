@@ -72,6 +72,7 @@ export const TilaisuusFields = ({ field, language, index, removeSelf }) => {
             name={`${field}.lisatietoja.${language}`}
             component={FormFieldEditor}
             label={t('valintaperustelomake.tilaisuudenLisatiedot')}
+            hideHeaderSelect
           />
         </Box>
       </SubSectionBox>

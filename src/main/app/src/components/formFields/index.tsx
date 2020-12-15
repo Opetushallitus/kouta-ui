@@ -6,7 +6,6 @@ import {
   Input,
   Radio,
   RadioGroup,
-  Textarea,
 } from '#/src/components/virkailija';
 import { Select, AsyncSelect } from '#/src/components/Select';
 import { DatePickerInput } from '#/src/components/DatePickerInput';

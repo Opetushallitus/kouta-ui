@@ -33,6 +33,7 @@ export const DiplomiFields = ({ name, language }) => {
             name={`${name}.diplomiKuvaus.${language}`}
             label={t('toteutuslomake.lukiodiplominTarkempiKuvaus')}
             component={FormFieldEditor}
+            hideHeaderSelect
           />
         </Box>
       </Box>

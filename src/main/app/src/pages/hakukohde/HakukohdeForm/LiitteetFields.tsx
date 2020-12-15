@@ -220,6 +220,7 @@ const LiitteetListField = ({
                 name={`${liite}.kuvaus.${language}`}
                 component={FormFieldEditor}
                 label={t('yleiset.kuvaus')}
+                hideHeaderSelect
               />
             </Spacing>
 

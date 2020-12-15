@@ -1,6 +1,7 @@
 import { merge } from 'lodash';
 
-import getHakuByFormValues, {
+import {
+  getHakuByFormValues,
   getAlkamiskausityyppi,
 } from '#/src/utils/haku/getHakuByFormValues';
 
@@ -10,6 +11,7 @@ import {
   TOTEUTUKSEN_AJANKOHTA,
 } from '#/src/constants';
 import { HakuFormValues } from '#/src/types/hakuTypes';
+import { parseEditorState } from '#/src/components/Editor/utils';
 
 const baseValues: HakuFormValues = {
   muokkaaja: '1.1.1.1',
@@ -93,7 +95,7 @@ test('getHakuByFormValues returns correct haku given different hakulomake variat
     merge({}, baseValues, {
       hakulomake: {
         tyyppi: HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA,
-        kuvaus: { fi: 'kuvaus' },
+        kuvaus: { fi: parseEditorState('kuvaus') },
       },
     })
   );

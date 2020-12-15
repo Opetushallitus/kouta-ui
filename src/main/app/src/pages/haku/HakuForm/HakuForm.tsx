@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
 import Flex from '#/src/components/Flex';
 import Button from '#/src/components/Button';
-import LomakeFields from '#/src/components/LomakeFields';
+import { LomakeFields } from '#/src/components/LomakeFields';
 import useModal from '#/src/hooks/useModal';
 import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
 import { useFieldValue } from '#/src/hooks/form';

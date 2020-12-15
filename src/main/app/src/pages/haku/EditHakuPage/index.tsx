@@ -10,7 +10,7 @@ import { Spin } from '#/src/components/virkailija';
 import getHakuByOid from '#/src/utils/haku/getHakuByOid';
 import Title from '#/src/components/Title';
 import ReduxForm from '#/src/components/ReduxForm';
-import getFormValuesByHaku from '#/src/utils/haku/getFormValuesByHaku';
+import { getFormValuesByHaku } from '#/src/utils/haku/getFormValuesByHaku';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { ENTITY, CRUD_ROLES } from '#/src/constants';
 import EntityFormHeader from '#/src/components/EntityFormHeader';

@@ -1,5 +1,5 @@
 import _ from 'lodash/fp';
-import getHakulomakeFieldsValues from '#/src/utils/form/getHakulomakeFieldsValues';
+import { getHakulomakeFieldsValues } from '#/src/utils/form/getHakulomakeFieldsValues';
 import { ALKAMISKAUSITYYPPI, TOTEUTUKSEN_AJANKOHTA } from '#/src/constants';
 import { HakuFormValues } from '#/src/types/hakuTypes';
 
@@ -17,7 +17,7 @@ export const alkamiskausityyppiToToteutuksenAjankohta = _.cond([
   ],
 ]);
 
-const getFormValuesByHaku = (haku): HakuFormValues => {
+export const getFormValuesByHaku = (haku): HakuFormValues => {
   const {
     muokkaaja,
     hakuajat = [],
@@ -96,5 +96,3 @@ const getFormValuesByHaku = (haku): HakuFormValues => {
     ),
   };
 };
-
-export default getFormValuesByHaku;

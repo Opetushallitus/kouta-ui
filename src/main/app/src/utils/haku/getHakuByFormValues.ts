@@ -1,7 +1,7 @@
-import _ from 'lodash/fp';
+import _fp from 'lodash/fp';
 
 import { isPartialDate, maybeParseNumber } from '#/src/utils';
-import getHakulomakeFieldsData from '#/src/utils/form/getHakulomakeFieldsData';
+import { getHakulomakeFieldsData } from '#/src/utils/form/getHakulomakeFieldsData';
 import isKorkeakoulutusKohdejoukkoKoodiUri from '#/src/utils/isKorkeakoulutusKohdejoukkoKoodiUri';
 import { ALKAMISKAUSITYYPPI, TOTEUTUKSEN_AJANKOHTA } from '#/src/constants';
 import { HakuFormValues } from '#/src/types/hakuTypes';
@@ -14,25 +14,25 @@ const isToteutuksenAjankohta = ajankohta => ({ aikataulut }) =>
 const hasTarkkaAjankohta = ({ aikataulut }) =>
   aikataulut?.tiedossaTarkkaAjankohta;
 
-export const getAlkamiskausityyppi = _.cond([
+export const getAlkamiskausityyppi = _fp.cond([
   [
     isToteutuksenAjankohta(TOTEUTUKSEN_AJANKOHTA.ALKAMISKAUSI),
-    _.cond([
+    _fp.cond([
       [hasTarkkaAjankohta, () => ALKAMISKAUSITYYPPI.TARKKA_ALKAMISAJANKOHTA],
-      [_.T, () => ALKAMISKAUSITYYPPI.ALKAMISKAUSI_JA_VUOSI],
+      [_fp.T, () => ALKAMISKAUSITYYPPI.ALKAMISKAUSI_JA_VUOSI],
     ]),
   ],
   [
     isToteutuksenAjankohta(TOTEUTUKSEN_AJANKOHTA.HENKILOKOHTAINEN_SUUNNITELMA),
     () => ALKAMISKAUSITYYPPI.HENKILOKOHTAINEN_SUUNNITELMA,
   ],
-  [_.T, () => null],
+  [_fp.T, () => null],
 ]);
 
-const getHakuByFormValues = (values: HakuFormValues) => {
+export const getHakuByFormValues = (values: HakuFormValues) => {
   const kielivalinta = getKielivalinta(values);
 
-  const pickTranslations = _.pick(kielivalinta);
+  const pickTranslations = _fp.pick(kielivalinta);
 
   const {
     hakulomaketyyppi,
@@ -101,5 +101,3 @@ const getHakuByFormValues = (values: HakuFormValues) => {
     hakulomakeKuvaus,
   };
 };
-
-export default getHakuByFormValues;

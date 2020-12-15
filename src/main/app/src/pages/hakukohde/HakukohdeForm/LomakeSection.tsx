@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 import { get } from 'lodash';
 import { useTranslation } from 'react-i18next';
 
-import LomakeFields from '#/src/components/LomakeFields';
+import { LomakeFields } from '#/src/components/LomakeFields';
 import { FormFieldCheckbox } from '#/src/components/formFields';
 import Spacing from '#/src/components/Spacing';
 import { getTestIdProps } from '#/src/utils';

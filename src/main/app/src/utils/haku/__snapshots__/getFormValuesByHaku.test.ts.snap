@@ -108,7 +108,7 @@ Object {
   },
   "hakulomake": Object {
     "kuvaus": Object {
-      "fi": "kuvaus",
+      "fi":         "<p>kuvaus</p>",
     },
     "linkki": Object {},
     "lomake": Object {},

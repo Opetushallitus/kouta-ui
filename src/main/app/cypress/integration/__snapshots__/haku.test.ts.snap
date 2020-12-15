@@ -124,3 +124,136 @@ exports[`editHaku > should be able to edit haku #0`] =
   "organisaatioOid": "1.1.1.1.1.1",
   "tila": "tallennettu"
 };
+
+exports[`createHaku > should be able to create haku with ataru hakulomake #0`] =
+{
+  "ajastettuJulkaisu": "2019-12-05T06:45",
+  "hakuajat": [
+    {
+      "alkaa": "2019-04-02T10:45",
+      "paattyy": "2019-11-25T23:59"
+    }
+  ],
+  "hakukohteenLiittamisenTakaraja": "2019-12-24T21:20",
+  "hakukohteenMuokkaamisenTakaraja": "2019-12-11T19:15",
+  "hakulomakeAtaruId": "lomake_1",
+  "hakulomakeKuvaus": {},
+  "hakulomakeLinkki": {},
+  "hakulomaketyyppi": "ataru",
+  "hakutapaKoodiUri": "hakutapa_01#1",
+  "kielivalinta": [
+    "fi"
+  ],
+  "kohdejoukkoKoodiUri": "haunkohdejoukko_12#1",
+  "kohdejoukonTarkenneKoodiUri": "haunkohdejoukontarkenne_0#1",
+  "metadata": {
+    "koulutuksenAlkamiskausi": {
+      "alkamiskausityyppi": "tarkka alkamisajankohta",
+      "koulutuksenAlkamiskausiKoodiUri": "kausi_0#1",
+      "koulutuksenAlkamispaivamaara": "2020-11-01T00:00",
+      "koulutuksenAlkamisvuosi": 2020,
+      "koulutuksenPaattymispaivamaara": "2020-11-30T00:00"
+    },
+    "tulevaisuudenAikataulu": [
+      {
+        "alkaa": "2019-10-11T09:05",
+        "paattyy": "2019-12-25T20:30"
+      }
+    ],
+    "yhteyshenkilot": [
+      {
+        "nimi": {
+          "fi": "nimi"
+        },
+        "puhelinnumero": {
+          "fi": "puhelin"
+        },
+        "sahkoposti": {
+          "fi": "sähköposti"
+        },
+        "titteli": {
+          "fi": "titteli"
+        },
+        "wwwSivu": {
+          "fi": "verkkosivu"
+        }
+      }
+    ]
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "haun nimi"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "tila": "julkaistu"
+};
+
+exports[`createHaku > should be able to create haku with muu hakulomake #0`] =
+{
+  "ajastettuJulkaisu": null,
+  "hakuajat": [],
+  "hakukohteenLiittamisenTakaraja": null,
+  "hakukohteenMuokkaamisenTakaraja": null,
+  "hakulomakeAtaruId": null,
+  "hakulomakeKuvaus": {},
+  "hakulomakeLinkki": {
+    "fi": "http://example.com"
+  },
+  "hakulomaketyyppi": "muu",
+  "hakutapaKoodiUri": null,
+  "kielivalinta": [
+    "fi"
+  ],
+  "kohdejoukkoKoodiUri": null,
+  "kohdejoukonTarkenneKoodiUri": null,
+  "metadata": {
+    "koulutuksenAlkamiskausi": {
+      "alkamiskausityyppi": null,
+      "koulutuksenAlkamiskausiKoodiUri": null,
+      "koulutuksenAlkamisvuosi": null
+    },
+    "tulevaisuudenAikataulu": [],
+    "yhteyshenkilot": []
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "haun nimi"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "tila": "tallennettu"
+};
+
+exports[`createHaku > should be able to create haku with "ei sähköistä" hakulomake #0`] =
+{
+  "ajastettuJulkaisu": null,
+  "hakuajat": [],
+  "hakukohteenLiittamisenTakaraja": null,
+  "hakukohteenMuokkaamisenTakaraja": null,
+  "hakulomakeAtaruId": null,
+  "hakulomakeKuvaus": {
+    "fi": "<p>hakulomake kuvaus</p>"
+  },
+  "hakulomakeLinkki": {},
+  "hakulomaketyyppi": "ei sähköistä",
+  "hakutapaKoodiUri": null,
+  "kielivalinta": [
+    "fi"
+  ],
+  "kohdejoukkoKoodiUri": null,
+  "kohdejoukonTarkenneKoodiUri": null,
+  "metadata": {
+    "koulutuksenAlkamiskausi": {
+      "alkamiskausityyppi": null,
+      "koulutuksenAlkamiskausiKoodiUri": null,
+      "koulutuksenAlkamisvuosi": null
+    },
+    "tulevaisuudenAikataulu": [],
+    "yhteyshenkilot": []
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "haun nimi"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "tila": "tallennettu"
+};

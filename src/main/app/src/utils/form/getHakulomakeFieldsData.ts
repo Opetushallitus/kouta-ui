@@ -1,23 +1,26 @@
-import { get, pick } from 'lodash';
-
+import _ from 'lodash';
 import { HAKULOMAKETYYPPI } from '#/src/constants';
+import { serializeEditorState } from '#/src/components/Editor/utils';
 
-const getHakulomakeFieldsData = ({ hakulomakeValues, kielivalinta }) => {
-  const hakulomaketyyppi = get(hakulomakeValues, 'tyyppi') || null;
+export const getHakulomakeFieldsData = ({ hakulomakeValues, kielivalinta }) => {
+  const hakulomaketyyppi = _.get(hakulomakeValues, 'tyyppi') || null;
 
   const hakulomakeAtaruId =
     hakulomaketyyppi === HAKULOMAKETYYPPI.ATARU
-      ? get(hakulomakeValues, ['lomake', 'value']) || null
+      ? _.get(hakulomakeValues, ['lomake', 'value']) || null
       : null;
 
   const hakulomakeLinkki =
     hakulomaketyyppi === HAKULOMAKETYYPPI.MUU
-      ? pick(get(hakulomakeValues, 'linkki') || {}, kielivalinta)
+      ? _.pick(_.get(hakulomakeValues, 'linkki') || {}, kielivalinta)
       : {};
 
   const hakulomakeKuvaus =
     hakulomaketyyppi === HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA
-      ? pick(get(hakulomakeValues, 'kuvaus') || {}, kielivalinta)
+      ? _.mapValues(
+          _.pick(_.get(hakulomakeValues, 'kuvaus') || {}, kielivalinta),
+          serializeEditorState
+        )
       : {};
 
   return {
@@ -27,5 +30,3 @@ const getHakulomakeFieldsData = ({ hakulomakeValues, kielivalinta }) => {
     hakulomakeKuvaus,
   };
 };
-
-export default getHakulomakeFieldsData;

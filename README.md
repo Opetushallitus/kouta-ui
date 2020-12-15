@@ -93,17 +93,18 @@ Yksikkötestit löytyvät testattavan moduulin `*.test.jsx?` (esim. `components/
 
 Yksikkötestit voi ajaa komennolla `npm test` ja integraatiotestit komennolla `npm run test:integration`. Kaikki testit pystyy ajamaan komennolla `npm run test:ci`.
 
-### Cypress TestRunner, interaktiivisesti
+### Integraatiotestien ajaminen interaktiivisesti (Cypress)
 
-On hauska katsoa ja korjata cypress testia interaktiivisti Cypress TestRunnerilla: 
+Cypress-testejä voi ajaa myös interaktiivisesti käynnistämällä ensin kouta-ui:n integraatio-moodissa:
 
     cd src/main/app
-    npm start
+    npm start:integration
 
-Ja sitten samassa kansiossa, mutta toisessa shellissa: 
+ja sitten samassa kansiossa, mutta toisessa shellissa: 
 
     npx cypress open
     
+Cypress-integraatiotestit olettavat, että sovellus on renderöity käyttäen käännösavaimia, minkä vuoksi on käytettävä `npm start:integration`tai `npm start:integration:debug` komentoa sovelluksen käynnistämiseen. Npm Skripti `start:integration:debug` eroaa `start:integration`:sta siten, että se sallii sovelluksen kyselyt ulkopuolelle. Tämä helpottaa mm. cypressin-testien api-mockien päivittämistä ja testaamista, kun taas normaalisti integraatiotesteissä halutaan estää yhteydet ulkopuolisiin rajapintoihin.
 ### API-kutsujen mockaaminen
 
 Kouta-UI:ssa on toteutettu omat työkalut API-kutsujen mockauksen helpottamiseen. `npm run update-mocks` käy läpi hakemiston `cypress/mocks` JSON-tiedostot, kutsuu niissä määriteltyjä HTTP-pyyntöjä ja päivittää vastaukset kyseisiin tiedostoihin. Pellin alla kutsutaan nodejs:llä toteutettua `update-mocks.js`-skriptiä, jonka voi ajaa myös itse antamalla sille komentoriviparametrina polun hakemistoon, jossa päivitettävät mock-tiedostot sijatsevat. Mock-tiedostojen formaatti on seuraavanlainen:

@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import updateValintaperuste from '#/src/utils/valintaperuste/updateValintaperuste';
-import getValintaperusteByFormValues from '#/src/utils/valintaperuste/getValintaperusteByFormValues';
+import { getValintaperusteByFormValues } from '#/src/utils/valintaperuste/getValintaperusteByFormValues';
 import { ENTITY } from '#/src/constants';
 import { useSaveValintaperuste } from '#/src/hooks/formSaveHooks';
 import { FormFooter } from '#/src/components/FormPage';

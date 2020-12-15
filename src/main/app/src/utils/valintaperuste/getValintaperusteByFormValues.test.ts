@@ -1,5 +1,5 @@
 import { parseEditorState } from '#/src/components/Editor/utils';
-import getValintaperusteByFormValues from '#/src/utils/valintaperuste/getValintaperusteByFormValues';
+import { getValintaperusteByFormValues } from '#/src/utils/valintaperuste/getValintaperusteByFormValues';
 
 const BASE_VALINTAPERUSTE_FORM_DATA = {
   perustiedot: {
@@ -18,40 +18,6 @@ const BASE_VALINTAPERUSTE_FORM_DATA = {
       sv: parseEditorState('<h1>Sv kuvaus</h2>'),
     },
   },
-  osaamistausta: [{ value: 'tausta_1#1' }, { value: 'tausta_2#1' }],
-  kielitaitovaatimukset: [
-    {
-      kieli: { value: 'kieli_1#1' },
-      tyyppi: {
-        'tyyppi_1#1': true,
-        'tyyppi_2#1': true,
-        'tyyppi_3#1': false,
-      },
-      kuvaukset: {
-        'tyyppi_1#1': [
-          {
-            kuvaus: { value: 'kuvaus_1#1' },
-            taso: 'erinomainen',
-          },
-        ],
-        'tyyppi_2#1': [
-          {
-            kuvaus: { value: 'kuvaus_2#1' },
-            taso: 'ok',
-          },
-        ],
-      },
-      osoitustavat: ['osoitustapa_1#1', 'osoitustapa_2#1'],
-      muutOsoitustavat: [
-        {
-          kuvaus: {
-            fi: 'Fi kuvaus',
-            sv: 'Sv kuvaus',
-          },
-        },
-      ],
-    },
-  ],
   valintatavat: [{}],
   soraKuvaus: {
     value: 'sora_1',
@@ -93,8 +59,8 @@ const BASE_VALINTAPERUSTE_FORM_DATA = {
             alkaa: '2019-04-16T08:44',
             paattyy: '2019-04-18T08:44',
             lisatietoja: {
-              fi: 'fi lisatietoja',
-              sv: 'sv lisatietoja',
+              fi: parseEditorState('<p>fi lisatietoja</p>'),
+              sv: parseEditorState('<p>sv lisatietoja</p>'),
             },
             jarjestamispaikka: {
               fi: 'jarjestamispaikka - fi',
@@ -122,8 +88,8 @@ test('Should convert valintaperuste form with valintatapa', () => {
           sv: 'Sv nimi',
         },
         kynnysehto: {
-          fi: 'Fi kynnysehto',
-          sv: 'Sv kynnysehto',
+          fi: parseEditorState('<p>Fi kynnysehto</p>'),
+          sv: parseEditorState('<p>Sv kynnysehto</p>'),
         },
         tapa: { value: 'tapa_1#1' },
         enimmaispistemaara: 20,

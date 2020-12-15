@@ -10,7 +10,7 @@ import getValintaperusteByOid from '#/src/utils/valintaperuste/getValintaperuste
 import { KOULUTUSTYYPPI, ENTITY, CRUD_ROLES } from '#/src/constants';
 import Title from '#/src/components/Title';
 import ReduxForm from '#/src/components/ReduxForm';
-import getFormValuesByValintaperuste from '#/src/utils/valintaperuste/getFormValuesByValintaperuste';
+import { getFormValuesByValintaperuste } from '#/src/utils/valintaperuste/getFormValuesByValintaperuste';
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormSteps from '#/src/components/FormSteps';
 import { useEntityFormConfig } from '#/src/hooks/form';

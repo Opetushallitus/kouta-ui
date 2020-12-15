@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 import { isNumeric } from '#/src/utils';
-import getKokeetTaiLisanaytotValues from '#/src/utils/form/getKokeetTaiLisanaytotValues';
+import { getKokeetTaiLisanaytotValues } from '#/src/utils/form/getKokeetTaiLisanaytotValues';
 import getHakulomakeFieldsValues from '#/src/utils/form/getHakulomakeFieldsValues';
 import { parseEditorState } from '#/src/components/Editor/utils';
 

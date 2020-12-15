@@ -85,8 +85,8 @@ test('getHakukohdeByFormValues returns correct hakukohde given form values', () 
               alkaa: '2019-04-16T08:44',
               paattyy: '2019-04-18T08:44',
               lisatietoja: {
-                fi: 'fi lisatietoja',
-                sv: 'sv lisatietoja',
+                fi: parseEditorState('<p>fi lisatietoja</p>'),
+                sv: parseEditorState('<p>sv lisatietoja</p>'),
               },
               jarjestamispaikka: {
                 fi: 'jarjestamispaikka - fi',

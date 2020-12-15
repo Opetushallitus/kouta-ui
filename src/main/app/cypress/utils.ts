@@ -281,7 +281,9 @@ export const fillValintakokeetSection = () => {
       });
 
       getByTestId('jarjestamispaikka').find('input').pipe(paste('paikka'));
-      getByTestId('lisatietoja').find('textarea').pipe(paste('lisatietoja'));
+      getByTestId('lisatietoja').within(() => {
+        typeToEditor('lisatietoja');
+      });
     });
     jatka();
   });

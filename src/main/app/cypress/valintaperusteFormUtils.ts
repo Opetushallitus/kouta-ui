@@ -54,10 +54,7 @@ export const stubValintaperusteFormRoutes = ({ organisaatioOid }) => {
   stubKoodistoRoute({ koodisto: 'haunkohdejoukko' });
   stubKoodistoRoute({ koodisto: 'valintatapajono' });
   stubKoodistoRoute({ koodisto: 'kielitaidonosoittaminen' });
-  stubKoodistoRoute({ koodisto: 'kielitaitovaatimustyypit' });
-  stubKoodistoRoute({ koodisto: 'kielitaitovaatimustyypitkuvaus' });
   stubKoodistoRoute({ koodisto: 'kieli' });
-  stubKoodistoRoute({ koodisto: 'osaamistausta' });
   stubKoodistoRoute({ koodisto: 'valintakokeentyyppi' });
 
   cy.route({

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 import { isNumeric } from '#/src/utils';
-import getKokeetTaiLisanaytotData from '#/src/utils/form/getKokeetTaiLisanaytotData';
+import { getKokeetTaiLisanaytotData } from '#/src/utils/form/getKokeetTaiLisanaytotData';
 import getHakulomakeFieldsData from '#/src/utils/form/getHakulomakeFieldsData';
 import { serializeEditorState } from '#/src/components/Editor/utils';
 import { LIITTEEN_TOIMITUSTAPA } from '#/src/constants';

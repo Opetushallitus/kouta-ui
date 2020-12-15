@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { serializeEditorState } from '#/src/components/Editor/utils';
 
-const getKokeetTaiLisanaytotData = ({
+export const getKokeetTaiLisanaytotData = ({
   valintakoeValues = {},
   kielivalinta,
 }) => {
@@ -54,12 +54,10 @@ const getKokeetTaiLisanaytotData = ({
             alkaa: alkaa,
             paattyy: paattyy,
           },
-          lisatietoja: _.pick(lisatietoja || {}, kielivalinta),
+          lisatietoja: _.mapValues(lisatietoja || {}, serializeEditorState),
           jarjestamispaikka,
         })
       ),
     })
   );
 };
-
-export default getKokeetTaiLisanaytotData;

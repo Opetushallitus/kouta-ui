@@ -13,9 +13,9 @@ import GridRow from '#/src/components/GridRow';
 import GridColumn from '#/src/components/GridColumn';
 
 import {
+  FormFieldEditor,
   FormFieldInput,
   FormFieldSelect,
-  FormFieldTextarea,
 } from '#/src/components/formFields';
 
 const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
@@ -61,7 +61,7 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
     <Spacing marginBottom={2} {...getTestIdProps('kynnysehto')}>
       <Field
         name={`${valintatapa}.kynnysehto.${language}`}
-        component={FormFieldTextarea}
+        component={FormFieldEditor}
         label={t('valintaperustelomake.kynnysehto')}
       />
     </Spacing>
@@ -97,7 +97,7 @@ const renderValintavat = ({ fields, tapaOptions, language, t }) => (
   </>
 );
 
-const ValintatapaSection = ({ language, name }) => {
+export const ValintatapaSection = ({ language, name }) => {
   const { options } = useKoodistoOptions({ koodisto: 'valintatapajono' });
   const { t } = useTranslation();
 
@@ -111,5 +111,3 @@ const ValintatapaSection = ({ language, name }) => {
     />
   );
 };
-
-export default ValintatapaSection;

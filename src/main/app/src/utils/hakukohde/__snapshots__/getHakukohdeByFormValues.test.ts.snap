@@ -116,8 +116,8 @@ Object {
             "sv": "jarjestamispaikka - sv",
           },
           "lisatietoja": Object {
-            "fi": "fi lisatietoja",
-            "sv": "sv lisatietoja",
+            "fi": "<p>fi lisatietoja</p>",
+            "sv": "<p>sv lisatietoja</p>",
           },
           "osoite": Object {
             "osoite": Object {

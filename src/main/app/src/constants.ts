@@ -224,16 +224,16 @@ export const ALLOWED_HTML_TAGS = [
   'ul',
 ];
 
-export const ENTITY = {
-  KOULUTUS: 'koulutus',
-  TOTEUTUS: 'toteutus',
-  HAKU: 'haku',
-  HAKUKOHDE: 'hakukohde',
-  VALINTAPERUSTE: 'valintaperuste',
-  SORA_KUVAUS: 'soraKuvaus',
-  OPPILAITOS: 'oppilaitos',
-  OPPILAITOKSEN_OSA: 'oppilaitoksenOsa',
-};
+export enum ENTITY {
+  KOULUTUS = 'koulutus',
+  TOTEUTUS = 'toteutus',
+  HAKU = 'haku',
+  HAKUKOHDE = 'hakukohde',
+  VALINTAPERUSTE = 'valintaperuste',
+  SORA_KUVAUS = 'soraKuvaus',
+  OPPILAITOS = 'oppilaitos',
+  OPPILAITOKSEN_OSA = 'oppilaitoksenOsa',
+}
 
 export const ICONS = {
   koulutus: 'school',

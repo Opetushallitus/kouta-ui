@@ -13,14 +13,14 @@ import ReduxForm from '#/src/components/ReduxForm';
 import { Spin } from '#/src/components/virkailija';
 import Title from '#/src/components/Title';
 import FormSteps from '#/src/components/FormSteps';
-import { ENTITY, CRUD_ROLES } from '#/src/constants';
+import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import { useEntityFormConfig } from '#/src/hooks/form';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import FullSpin from '#/src/components/FullSpin';
 import ToteutusForm from './ToteutusForm';
-import EditToteutusFooter from './EditToteutusFooter';
+import { ToteutusFooter } from './ToteutusFooter';
 
 const EditToteutusPage = props => {
   const {
@@ -82,7 +82,8 @@ const EditToteutusPage = props => {
           steps={<FormSteps activeStep={ENTITY.TOTEUTUS} />}
           footer={
             toteutus ? (
-              <EditToteutusFooter
+              <ToteutusFooter
+                formMode={FormMode.EDIT}
                 toteutus={toteutus}
                 koulutus={koulutus}
                 koulutustyyppi={koulutustyyppi}

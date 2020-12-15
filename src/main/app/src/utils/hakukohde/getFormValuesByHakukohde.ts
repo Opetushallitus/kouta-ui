@@ -5,7 +5,7 @@ import { getKokeetTaiLisanaytotValues } from '#/src/utils/form/getKokeetTaiLisan
 import { getHakulomakeFieldsValues } from '#/src/utils/form/getHakulomakeFieldsValues';
 import { parseEditorState } from '#/src/components/Editor/utils';
 
-const getFormValuesByHakukohde = hakukohde => {
+export const getFormValuesByHakukohde = hakukohde => {
   const {
     alkamiskausiKoodiUri = '',
     kaytetaanHaunAikataulua,
@@ -59,12 +59,10 @@ const getFormValuesByHakukohde = hakukohde => {
     },
     hakuajat: {
       eriHakuaika: !kaytetaanHaunAikataulua,
-      hakuajat: (hakuajat || []).map(({ alkaa, paattyy }) => {
-        return {
-          alkaa: alkaa || '',
-          paattyy: paattyy || '',
-        };
-      }),
+      hakuajat: (hakuajat || []).map(({ alkaa = '', paattyy = '' }) => ({
+        alkaa,
+        paattyy,
+      })),
     },
     perustiedot: {
       nimi,
@@ -118,24 +116,22 @@ const getFormValuesByHakukohde = hakukohde => {
           toimitustapa,
           toimitusosoite,
           kuvaus = {},
-        }) => {
-          return {
-            tyyppi: { value: tyyppiKoodiUri },
-            nimi,
-            kuvaus,
-            toimitusaika: toimitusaika || '',
-            toimitustapa: {
-              tapa: toimitustapa || '',
-              paikka: {
-                osoite: _.get(toimitusosoite, 'osoite.osoite') || {},
-                postinumero: _.get(toimitusosoite, 'osoite.postinumeroKoodiUri')
-                  ? { value: toimitusosoite.osoite.postinumeroKoodiUri }
-                  : undefined,
-                sahkoposti: _.get(toimitusosoite, 'sahkoposti') || '',
-              },
+        }) => ({
+          tyyppi: { value: tyyppiKoodiUri },
+          nimi,
+          kuvaus: _.mapValues(kuvaus, parseEditorState),
+          toimitusaika: toimitusaika || '',
+          toimitustapa: {
+            tapa: toimitustapa || '',
+            paikka: {
+              osoite: _.get(toimitusosoite, 'osoite.osoite') || {},
+              postinumero: _.get(toimitusosoite, 'osoite.postinumeroKoodiUri')
+                ? { value: toimitusosoite.osoite.postinumeroKoodiUri }
+                : undefined,
+              sahkoposti: _.get(toimitusosoite, 'sahkoposti') || '',
             },
-          };
-        }
+          },
+        })
       ),
     },
     hakulomake: {
@@ -149,5 +145,3 @@ const getFormValuesByHakukohde = hakukohde => {
     },
   };
 };
-
-export default getFormValuesByHakukohde;

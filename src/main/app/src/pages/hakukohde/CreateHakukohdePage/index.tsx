@@ -19,7 +19,7 @@ import FormHeader from '#/src/components/FormHeader';
 import FormSteps from '#/src/components/FormSteps';
 import { useHistory } from 'react-router-dom';
 import createHakukohde from '#/src/utils/hakukohde/createHakukohde';
-import getHakukohdeByFormValues from '#/src/utils/hakukohde/getHakukohdeByFormValues';
+import { getHakukohdeByFormValues } from '#/src/utils/hakukohde/getHakukohdeByFormValues';
 import { useSaveHakukohde } from '#/src/hooks/formSaveHooks';
 import { useHakukohdePageData } from '../getHakukohdePageData';
 

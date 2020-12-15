@@ -5,7 +5,7 @@ import { useHakukohdeByOid } from '#/src/utils/hakukohde/getHakukohdeByOid';
 import FullSpin from '#/src/components/FullSpin';
 import Title from '#/src/components/Title';
 import ReduxForm from '#/src/components/ReduxForm';
-import getFormValuesByHakukohde from '#/src/utils/hakukohde/getFormValuesByHakukohde';
+import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import HakukohdeForm from '../HakukohdeForm';
 import FormPage, {

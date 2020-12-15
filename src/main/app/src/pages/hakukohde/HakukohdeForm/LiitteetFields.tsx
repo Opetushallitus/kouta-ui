@@ -19,10 +19,10 @@ import {
   FormFieldDateTimeInput,
   FormFieldInput,
   FormFieldSelect,
-  FormFieldTextarea,
   FormFieldCheckbox,
   FormFieldRadioGroup,
   FormFieldPostinumeroSelect,
+  FormFieldEditor,
 } from '#/src/components/formFields';
 
 const ContactInfo = ({
@@ -218,7 +218,7 @@ const LiitteetListField = ({
             >
               <Field
                 name={`${liite}.kuvaus.${language}`}
-                component={FormFieldTextarea}
+                component={FormFieldEditor}
                 label={t('yleiset.kuvaus')}
               />
             </Spacing>

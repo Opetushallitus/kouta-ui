@@ -73,8 +73,6 @@ export const FormFieldCheckboxGroup = createComponent(
   simpleMapProps
 );
 
-export const FormFieldTextarea = createComponent(Textarea, simpleMapProps);
-
 export const FormFieldSelect = createComponent(
   Select,
   ({ disabled, meta, input, id, ...props }) => ({

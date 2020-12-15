@@ -260,7 +260,6 @@ export const fillValintakokeetSection = () => {
         typeToEditor('ohjeet erityisjärjestelyihin');
       });
 
-      getByTestId('tietoaHakijalle').find('input').pipe(paste('tietoa'));
       getByTestId('lisaaTilaisuusButton').click({ force: true });
       getByTestId('osoite').find('input').pipe(paste('osoite'));
       getByTestId('postinumero').within(() => {

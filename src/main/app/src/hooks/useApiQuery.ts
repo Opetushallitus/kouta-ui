@@ -1,8 +1,18 @@
 import { useCallback } from 'react';
-import { useQuery } from 'react-query';
+import { ReactQueryQueriesConfig, useQuery } from 'react-query';
 import { useUrls, useHttpClient } from '#/src/contexts/contextHooks';
 
-export const useApiQuery = (key, props, apiFn, options = {}) => {
+type ApiError = any;
+type ApiResult = any;
+
+export type KoutaApiQueryConfig = ReactQueryQueriesConfig<ApiResult, ApiError>;
+
+export const useApiQuery = (
+  key: string,
+  props: Record<string, any>,
+  apiFn: (any) => any,
+  options: KoutaApiQueryConfig = {}
+) => {
   const apiUrls = useUrls();
   const httpClient = useHttpClient();
 

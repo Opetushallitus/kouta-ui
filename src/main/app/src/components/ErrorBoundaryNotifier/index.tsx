@@ -19,7 +19,7 @@ class ErrorBoundaryNotifier extends Component {
     const { t } = this.props;
     return this.state.error ? (
       <div style={{ margin: '15px' }}>
-        <p>{t('ilmoitukset.tuntematonVirhe')}</p>
+        <p>{t('ilmoitukset.tuntematonVirhe.viesti')}</p>
         <pre>{this.state.error?.stack ?? ''}</pre>
       </div>
     ) : (

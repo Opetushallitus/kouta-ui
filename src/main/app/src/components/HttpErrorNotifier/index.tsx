@@ -13,7 +13,7 @@ const getToastOptions = (error, t) => {
 
   const label = _.cond([
     [_.equals(403), () => t('ilmoitukset.kayttooikeusVirhe')],
-    [otherwise, () => t('ilmoitukset.tuntematonVirhe')],
+    [otherwise, () => t('ilmoitukset.tuntematonVirhe.viesti')],
   ])(status);
 
   return {

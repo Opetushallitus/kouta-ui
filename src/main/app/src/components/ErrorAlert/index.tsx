@@ -40,7 +40,7 @@ export const ErrorAlert = ({
   const { t } = useTranslation();
 
   const reloadText = reloadTextProp || t('yleiset.yritaUudelleen');
-  const text = children || t('ilmoitukset.tuntematonVirhe');
+  const text = children || t('ilmoitukset.tuntematonVirhe.viesti');
 
   const content = (
     <Container>

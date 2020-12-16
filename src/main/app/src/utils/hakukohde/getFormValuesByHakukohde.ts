@@ -93,12 +93,9 @@ export const getFormValuesByHakukohde = hakukohde => {
       toimitustapa: {
         tapa: liitteidenToimitustapa || '',
         paikka: {
-          sahkoposti: _.get(liitteidenToimitusosoite, 'sahkoposti') || '',
-          osoite: _.get(liitteidenToimitusosoite, 'osoite.osoite') || {},
-          postinumero: _.get(
-            liitteidenToimitusosoite,
-            'osoite.postinumeroKoodiUri'
-          )
+          sahkoposti: liitteidenToimitusosoite?.sahkoposti || '',
+          osoite: liitteidenToimitusosoite?.osoite?.osoite || {},
+          postinumero: liitteidenToimitusosoite?.osoite?.postinumeroKoodiUri
             ? {
                 value: liitteidenToimitusosoite.osoite.postinumeroKoodiUri,
               }
@@ -124,11 +121,11 @@ export const getFormValuesByHakukohde = hakukohde => {
           toimitustapa: {
             tapa: toimitustapa || '',
             paikka: {
-              osoite: _.get(toimitusosoite, 'osoite.osoite') || {},
-              postinumero: _.get(toimitusosoite, 'osoite.postinumeroKoodiUri')
+              osoite: toimitusosoite?.osoite?.osoite || {},
+              postinumero: toimitusosoite?.osoite?.postinumeroKoodiUri
                 ? { value: toimitusosoite.osoite.postinumeroKoodiUri }
                 : undefined,
-              sahkoposti: _.get(toimitusosoite, 'sahkoposti') || '',
+              sahkoposti: toimitusosoite?.sahkoposti || '',
             },
           },
         })

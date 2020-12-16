@@ -1,5 +1,4 @@
 import { UNAUTHORIZED } from 'http-status-codes';
-import { get } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAsync, useEvent, useIdle } from 'react-use';
@@ -15,7 +14,7 @@ import { isDev } from '#/src/utils';
 import { getMe } from '#/src/utils/api/getMe';
 import AuthorizationErrorModal from './AuthorizationErrorModal';
 
-const UserGate = ({ fallback = null, children = null }) => {
+export const UserGate = ({ fallback = null, children = null }) => {
   const apiUrls = useUrls();
   const httpClient = useHttpClient();
   const [isFocused, setFocused] = useState(true);
@@ -66,8 +65,8 @@ const UserGate = ({ fallback = null, children = null }) => {
           setErrorCode(null);
         }
       } catch (e) {
-        console.log(get(e, 'response.status'));
-        setErrorCode(get(e, 'response.status') || ERROR_INTERNET_DISCONNECTED);
+        console.error(e?.response?.status);
+        setErrorCode(e?.response?.status || ERROR_INTERNET_DISCONNECTED);
       }
     }
   }, [apiUrls, httpClient, isFocused, isIdle]);
@@ -85,5 +84,3 @@ const UserGate = ({ fallback = null, children = null }) => {
     </>
   );
 };
-
-export default UserGate;

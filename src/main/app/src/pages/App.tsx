@@ -10,7 +10,7 @@ import GlobalStyle from '#/src/components/GlobalStyle';
 import HttpContext from '#/src/contexts/HttpClientContext';
 import UrlContext from '#/src/contexts/UrlContext';
 import VirkailijaRaamit from '#/src/components/VirkailijaRaamit';
-import UserGate from '#/src/pages/UserGate';
+import { UserGate } from '#/src/pages/UserGate';
 import HttpErrorNotifier from '#/src/components/HttpErrorNotifier';
 import ErrorBoundaryNotifier from '#/src/components/ErrorBoundaryNotifier';
 import { isDev } from '#/src/utils';

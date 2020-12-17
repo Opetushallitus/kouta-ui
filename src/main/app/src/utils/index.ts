@@ -180,7 +180,7 @@ export const maybeParseNumber = value => {
   return _.isNaN(numberValue) ? value : numberValue;
 };
 
-export const toSelectValue = value => (_.isNil(value) ? null : { value });
+export const toSelectValue = value => (_.isNil(value) ? undefined : { value });
 
 // Returns field name without language part
 export const getFieldName = name =>

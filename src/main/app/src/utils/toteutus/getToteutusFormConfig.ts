@@ -20,6 +20,7 @@ import {
   JULKAISUTILA,
   HAKULOMAKETYYPPI,
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
+  Ajankohtatyyppi,
 } from '#/src/constants';
 
 import {
@@ -31,6 +32,7 @@ import {
   createOptionalTranslatedFieldConfig,
   validateIf,
 } from '#/src/utils/form/formConfigUtils';
+import { ToteutusFormValues } from '#/src/types/toteutusTypes';
 
 const validateDateTimeRange = (alkaaFieldName, paattyyFieldName) => (
   eb,
@@ -305,37 +307,44 @@ const config = createFormConfigBuilder().registerSections([
         name: 'jarjestamistiedot.stipendinKuvaus',
       }),
       {
-        field: '.koulutuksenAlkamispaivamaara',
-        validate: (eb, values) =>
+        field: '.ajankohta.ajankohtaTyyppi',
+        validate: validateIfJulkaistu(
+          validateExistence('jarjestamistiedot.ajankohta.ajankohtaTyyppi')
+        ),
+      },
+      {
+        field: '.ajankohta.kausi',
+      },
+      {
+        field: '.ajankohta.vuosi',
+        validate: (eb, values: ToteutusFormValues) =>
           validateIf(
-            values?.jarjestamistiedot?.koulutuksenTarkkaAlkamisaika,
-            validateDateTimeRange(
-              'jarjestamistiedot.koulutuksenAlkamispaivamaara',
-              'jarjestamistiedot.koulutuksenPaattymispaivamaara'
+            values?.jarjestamistiedot?.ajankohta?.ajankohtaTyyppi ===
+              Ajankohtatyyppi.ALKAMISKAUSI &&
+              values?.tila === JULKAISUTILA.JULKAISTU,
+            _fp.pipe(
+              validateExistence('jarjestamistiedot.ajankohta.kausi'),
+              validateExistence('jarjestamistiedot.ajankohta.vuosi')
             )
           )(eb),
+      },
+      {
+        field: '.ajankohta.tiedossaTarkkaAjankohta',
+      },
+      {
+        field: '.ajankohta.tarkkaAlkaa',
         required: true,
+        validate: (eb, values: ToteutusFormValues) =>
+          validateIf(
+            values?.jarjestamistiedot?.ajankohta?.ajankohtaTyyppi ===
+              Ajankohtatyyppi.ALKAMISKAUSI &&
+              values?.jarjestamistiedot?.ajankohta?.tiedossaTarkkaAjankohta &&
+              values?.tila === JULKAISUTILA.JULKAISTU,
+            validateExistenceOfDate('jarjestamistiedot.ajankohta.tarkkaAlkaa')
+          )(eb),
       },
       {
-        field: '.koulutuksenPaattymispaivamaara',
-        validate: validateIfJulkaistu(eb =>
-          eb.getValue('jarjestamistiedot.koulutuksenTarkkaAlkamisaika')
-            ? eb
-                .validateExistence(
-                  'jarjestamistiedot.koulutuksenAlkamispaivamaara'
-                )
-                .validateExistence(
-                  'jarjestamistiedot.koulutuksenPaattymispaivamaara'
-                )
-            : eb
-        ),
-        required: true,
-      },
-      {
-        field: '.koulutuksenAlkamiskausi',
-      },
-      {
-        field: '.koulutuksenAlkamisvuosi',
+        field: '.ajankohta.tarkkaPaattyy',
       },
       {
         fragment: 'diplomi',
@@ -413,6 +422,8 @@ const config = createFormConfigBuilder().registerSections([
       )(eb),
     parts: [
       {
+        // Note that this is different from hakutapa in haku-form
+        // Value can be 'hakeutuminen' or 'ilmoittautuminen'
         field: '.hakuTapa',
         required: true,
       },

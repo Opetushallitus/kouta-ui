@@ -1,8 +1,9 @@
+import { Alkamiskausityyppi, JULKAISUTILA } from '#/src/constants';
 import getFormValuesByToteutus from '#/src/utils/toteutus/getFormValuesByToteutus';
 
 test('getFormValuesByToteutus returns correct form values given toteutus', () => {
   const values = getFormValuesByToteutus({
-    tila: 'tallennettu',
+    tila: JULKAISUTILA.TALLENNETTU,
     kielivalinta: ['fi', 'sv'],
     metadata: {
       alemmanKorkeakoulututkinnonOsaamisalat: [
@@ -50,11 +51,13 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
         sv: 'Sv toteutuksenkuvaus',
       },
       opetus: {
-        koulutuksenAlkamispaivamaara: null,
-        koulutuksenPaattymispaivamaara: null,
-        koulutuksenTarkkaAlkamisaika: false,
-        koulutuksenAlkamisvuosi: 2020,
-        koulutuksenAlkamiskausi: 'kausi_0#1',
+        koulutuksenAlkamiskausi: {
+          alkamiskausityyppi: Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,
+          koulutuksenAlkamiskausiKoodiUri: 'kausi_0#1',
+          koulutuksenAlkamispaivamaara: '2021-04-16T00:00',
+          kouutuksenPaattymispaivamaara: '2021-12-12T00:00',
+          koulutuksenAlkamisvuosi: 2020,
+        },
         lisatiedot: [
           {
             otsikkoKoodiUri: 'osio_1#1',

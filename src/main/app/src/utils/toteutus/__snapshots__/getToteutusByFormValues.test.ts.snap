@@ -50,8 +50,8 @@ Object {
     ],
     "hakuaika": null,
     "hakulomakeLinkki": Object {},
-    "hakulomaketyyppi": undefined,
-    "hakutermi": undefined,
+    "hakulomaketyyppi": "muu",
+    "hakutermi": "ilmoittautuminen",
     "ilmoittautumislinkki": Object {
       "fi": "Fi linkki",
       "sv": "Sv linkki",
@@ -62,7 +62,10 @@ Object {
     },
     "laajuus": 252,
     "laajuusyksikkoKoodiUri": "laajuus_1#1",
-    "lisatietoaHakeutumisesta": Object {},
+    "lisatietoaHakeutumisesta": Object {
+      "fi": "<p>Fi lisatiedot</p>",
+      "sv": "<p>Sv sisalto</p>",
+    },
     "lisatietoaValintaperusteista": Object {},
     "lukiolinjaKoodiUri": "linja_1#1",
     "opetus": Object {
@@ -89,11 +92,14 @@ Object {
         "fi": "<p>Fi diplomi</p>",
         "sv": "<p>Sv diplomi</p>",
       },
-      "koulutuksenAlkamiskausi": "kausi_0#1",
-      "koulutuksenAlkamispaivamaara": null,
-      "koulutuksenAlkamisvuosi": 2020,
-      "koulutuksenPaattymispaivamaara": null,
-      "koulutuksenTarkkaAlkamisaika": null,
+      "koulutuksenAlkamiskausi": Object {
+        "alkamiskausityyppi": "alkamiskausi ja -vuosi",
+        "henkilokohtaisenSuunnitelmanLisatiedot": Object {},
+        "koulutuksenAlkamiskausiKoodiUri": "alkamiskausi_1#1",
+        "koulutuksenAlkamispaivamaara": null,
+        "koulutuksenAlkamisvuosi": 2020,
+        "koulutuksenPaattymispaivamaara": null,
+      },
       "lisatiedot": Array [
         Object {
           "otsikkoKoodiUri": "osio_1#1",
@@ -256,15 +262,6 @@ Object {
         ],
       },
     ],
-    "tutkinnonOsat": Array [
-      Object {
-        "osaamisalaKoodiUri": "osaamisala_1#1",
-        "tutkinnonOsaKoodiUrit": Array [
-          "tutkinnonosa_1#1",
-        ],
-        "tutkintoKoodiUri": "tutkinto_1#1",
-      },
-    ],
     "tyyppi": "amk",
     "yhteyshenkilot": Array [
       Object {
@@ -322,6 +319,6 @@ Object {
     "org2",
   ],
   "teemakuva": undefined,
-  "tila": undefined,
+  "tila": "julkaistu",
 }
 `;

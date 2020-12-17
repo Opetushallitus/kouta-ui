@@ -28,6 +28,7 @@ import TeemakuvaSection from '#/src/components/TeemakuvaSection';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import HakeutumisTaiIlmoittautumistapaSection from './HakeutumisTaiIlmoittautumistapaSection';
 import SoraKuvausSection from '#/src/components/SoraKuvausSection';
+import { ToteutusModel } from '#/src/types/toteutusTypes';
 import KuvausSection from './KuvausSection';
 
 const { ATARU, MUU } = HAKULOMAKETYYPPI;

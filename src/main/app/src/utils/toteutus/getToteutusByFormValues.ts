@@ -1,15 +1,12 @@
 import _fp from 'lodash/fp';
 
-import {
-  isNumeric,
-  getKoutaDateString,
-  isPartialDate,
-  maybeParseNumber,
-} from '#/src/utils';
+import { isNumeric, isPartialDate, maybeParseNumber } from '#/src/utils';
 import serializeSisaltoField from '#/src/utils/form/serializeSisaltoField';
 import { serializeEditorState } from '#/src/components/Editor/utils';
 import { HAKULOMAKETYYPPI } from '#/src/constants';
 import { isStipendiVisible } from './toteutusVisibilities';
+import { ToteutusFormValues } from '#/src/types/toteutusTypes';
+import { getAlkamiskausityyppiByAjankohtaSection } from '../form/alkamiskausityyppiHelpers';
 
 const { MUU, EI_SAHKOISTA_HAKUA } = HAKULOMAKETYYPPI;
 
@@ -27,13 +24,13 @@ const getOsaamisalatByValues = ({ osaamisalat, pickTranslations }) => {
   );
 };
 
-const getToteutusByFormValues = values => {
+const getToteutusByFormValues = (values: ToteutusFormValues) => {
   const {
     koulutustyyppi,
     tila,
     muokkaaja,
     jarjestamistiedot,
-    hakeutumisTaiIlmoittautumistapa: HTIT = {},
+    hakeutumisTaiIlmoittautumistapa: HTIT,
   } = values;
   const hakulomaketyyppi = HTIT?.hakeutumisTaiIlmoittautumistapa;
   const kielivalinta = values?.kieliversiot || [];
@@ -53,8 +50,7 @@ const getToteutusByFormValues = values => {
   const stipendiVisible = isStipendiVisible(koulutustyyppi, opetuskielet);
   const onkoStipendia = values?.jarjestamistiedot?.onkoStipendia === 'kylla';
 
-  const koulutuksenTarkkaAlkamisaika =
-    values?.jarjestamistiedot?.koulutuksenTarkkaAlkamisaika || null;
+  const ajankohta = values?.jarjestamistiedot?.ajankohta;
 
   return {
     nimi: pickTranslations(values?.tiedot?.nimi || {}),
@@ -98,25 +94,6 @@ const getToteutusByFormValues = values => {
           pickTranslations,
           _fp.mapValues(serializeEditorState)
         )(values?.jarjestamistiedot?.maksullisuusKuvaus || {}),
-        koulutuksenAlkamispaivamaara: koulutuksenTarkkaAlkamisaika
-          ? getKoutaDateString(
-              values?.jarjestamistiedot?.koulutuksenAlkamispaivamaara
-            )
-          : null,
-        koulutuksenPaattymispaivamaara: koulutuksenTarkkaAlkamisaika
-          ? getKoutaDateString(
-              values?.jarjestamistiedot?.koulutuksenPaattymispaivamaara
-            )
-          : null,
-        koulutuksenTarkkaAlkamisaika,
-        koulutuksenAlkamiskausi: !koulutuksenTarkkaAlkamisaika
-          ? values?.jarjestamistiedot?.koulutuksenAlkamiskausi
-          : null,
-        koulutuksenAlkamisvuosi: !koulutuksenTarkkaAlkamisaika
-          ? maybeParseNumber(
-              values?.jarjestamistiedot?.koulutuksenAlkamisvuosi?.value
-            )
-          : null,
         onkoStipendia: stipendiVisible && onkoStipendia,
         stipendinKuvaus: _fp.pipe(
           pickTranslations,
@@ -131,29 +108,29 @@ const getToteutusByFormValues = values => {
             ? maybeParseNumber(values.jarjestamistiedot.stipendinMaara)
             : null,
         diplomiKoodiUrit: (values?.jarjestamistiedot?.diplomiTyypit || []).map(
-          ({ value }) => value
+          _fp.prop('value')
         ),
         diplomiKuvaus: _fp.pipe(
           pickTranslations,
           _fp.mapValues(serializeEditorState)
         )(values?.jarjestamistiedot?.diplomiKuvaus || {}),
         A1JaA2Kielivalikoima: (values?.jarjestamistiedot?.A1A2Kielet || []).map(
-          ({ value }) => value
+          _fp.prop('value')
         ),
         aidinkieliKielivalikoima: (
           values?.jarjestamistiedot?.aidinkielet || []
-        ).map(({ value }) => value),
+        ).map(_fp.prop('value')),
         B1Kielivalikoima: (values?.jarjestamistiedot?.B1Kielet || []).map(
-          ({ value }) => value
+          _fp.prop('value')
         ),
         B2Kielivalikoima: (values?.jarjestamistiedot?.B2Kielet || []).map(
-          ({ value }) => value
+          _fp.prop('value')
         ),
         B3Kielivalikoima: (values?.jarjestamistiedot?.B3Kielet || []).map(
-          ({ value }) => value
+          _fp.prop('value')
         ),
         muuKielivalikoima: (values?.jarjestamistiedot?.muutKielet || []).map(
-          ({ value }) => value
+          _fp.prop('value')
         ),
         suunniteltuKestoVuodet: maybeParseNumber(
           jarjestamistiedot?.suunniteltuKesto?.vuotta
@@ -165,6 +142,19 @@ const getToteutusByFormValues = values => {
           pickTranslations,
           _fp.mapValues(serializeEditorState)
         )(jarjestamistiedot?.suunniteltuKestoKuvaus || {}),
+        koulutuksenAlkamiskausi: {
+          alkamiskausityyppi: getAlkamiskausityyppiByAjankohtaSection(
+            ajankohta
+          ),
+          koulutuksenAlkamispaivamaara: ajankohta?.tarkkaAlkaa || null,
+          koulutuksenPaattymispaivamaara: ajankohta?.tarkkaPaattyy || null,
+          koulutuksenAlkamiskausiKoodiUri: ajankohta?.kausi || null,
+          koulutuksenAlkamisvuosi: maybeParseNumber(ajankohta?.vuosi?.value),
+          henkilokohtaisenSuunnitelmanLisatiedot: _fp.compose(
+            _fp.mapValues(serializeEditorState),
+            pickTranslations
+          )(ajankohta?.henkilokohtaisenSuunnitelmanLisatiedot ?? {}),
+        },
       },
       lukiolinjaKoodiUri: values?.lukiolinjat?.lukiolinja?.value || null,
       osaamisalat: (values?.osaamisalat?.osaamisalat || []).map(osaamisala => ({
@@ -229,15 +219,6 @@ const getToteutusByFormValues = values => {
             _fp.mapValues(serializeEditorState)
           )(kuvaus),
           sisalto: serializeSisaltoField(sisalto, kielivalinta),
-        })
-      ),
-      tutkinnonOsat: (values?.tutkinnonOsat || []).map(
-        ({ tutkinto, osaamisala, tutkinnonOsat }) => ({
-          tutkintoKoodiUri: tutkinto?.value || null,
-          osaamisalaKoodiUri: osaamisala?.value || null,
-          tutkinnonOsaKoodiUrit: (tutkinnonOsat || []).map(
-            ({ value }) => value
-          ),
         })
       ),
       hakutermi: HTIT?.hakuTapa,

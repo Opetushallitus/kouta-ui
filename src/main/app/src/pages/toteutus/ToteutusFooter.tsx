@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { queryCache } from 'react-query';
 
 import getToteutusByFormValues from '#/src/utils/toteutus/getToteutusByFormValues';
 import updateToteutus from '#/src/utils/toteutus/updateToteutus';
@@ -9,7 +10,6 @@ import { useSaveToteutus } from '#/src/hooks/formSaveHooks';
 import { FormFooter } from '#/src/components/FormPage';
 import { useForm, useFormName } from '#/src/hooks/form';
 import { ENTITY, FormMode } from '#/src/constants';
-import { queryCache } from 'react-query';
 import { getTarjoajaOids } from '#/src/utils/getTarjoajaOids';
 import { getValuesForSaving } from '#/src/utils';
 import createToteutus from '#/src/utils/toteutus/createToteutus';

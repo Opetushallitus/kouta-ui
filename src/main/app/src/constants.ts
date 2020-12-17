@@ -261,8 +261,10 @@ export const CRUD_ROLES = {
   CREATE: 'create',
 };
 
-export const HAKEUTUMINEN = 'hakeutuminen';
-export const ILMOITTAUTUMINEN = 'ilmoittautuminen';
+export enum Hakeutumistapa {
+  HAKEUTUMINEN = 'hakeutuminen',
+  ILMOITTAUTUMINEN = 'ilmoittautuminen',
+}
 
 export const EPERUSTE_SERVICE_QUERY_OPTIONS = {
   cacheTime: Infinity,

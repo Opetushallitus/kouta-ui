@@ -2,98 +2,12 @@ import React from 'react';
 import { Field, FieldArray } from 'redux-form';
 import { useTranslation } from 'react-i18next';
 
-import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
 import { Box } from '#/src/components/virkailija';
 import HakuajatFields from '#/src/components/HakuajatFields';
 import FieldGroup from '#/src/components/FieldGroup';
-import DateTimeRange from '#/src/components/DateTimeRange';
-import {
-  FormFieldDateTimeInput,
-  FormFieldRadioGroup,
-  FormFieldYearSelect,
-  FormFieldSwitch,
-  FormFieldEditor,
-} from '#/src/components/formFields';
-import Spacing from '#/src/components/Spacing';
-import { useFieldValue } from '#/src/hooks/form';
-import { createStyledRadioSection } from '#/src/components/createStyledRadioSection';
-import { TOTEUTUKSEN_AJANKOHTA } from '#/src/constants';
-
-const KausiJaVuosiFields = ({ name }) => {
-  const { options } = useKoodistoOptions({ koodisto: 'kausi' });
-  const { t } = useTranslation();
-
-  const tiedossaTarkkaAjankohta = useFieldValue(
-    `${name}.tiedossaTarkkaAjankohta`
-  );
-
-  return (
-    <Spacing {...getTestIdProps('KausiJaVuosiFields')}>
-      <Box flexGrow="1" p={1}>
-        <Field
-          name={`${name}.kausi`}
-          component={FormFieldRadioGroup}
-          label={t('hakulomake.valitseAlkamiskausi')}
-          options={options}
-        />
-      </Box>
-      <Box flexGrow="1" p={1}>
-        <Field
-          name={`${name}.vuosi`}
-          component={FormFieldYearSelect}
-          placeholder={t('hakulomake.valitseAlkamisvuosi')}
-        />
-      </Box>
-      <Box flexGrow="1" p={1}>
-        <Field
-          name={`${name}.tiedossaTarkkaAjankohta`}
-          component={FormFieldSwitch}
-        >
-          {t('hakulomake.tiedossaTarkkaAjankohta')}
-        </Field>
-      </Box>
-      {tiedossaTarkkaAjankohta && (
-        <Box flexGrow="1" p={1}>
-          <DateTimeRange
-            startProps={{
-              name: `${name}.tarkkaAlkaa`,
-            }}
-            endProps={{
-              name: `${name}.tarkkaPaattyy`,
-            }}
-          />
-        </Box>
-      )}
-    </Spacing>
-  );
-};
-
-const HenkilokohtaisenSuunnitelmanLisatiedot = ({ name, language }) => {
-  const { t } = useTranslation();
-  return (
-    <Spacing>
-      <Field
-        name={`${name}.henkilokohtaisenSuunnitelmanLisatiedot.${language}`}
-        component={FormFieldEditor}
-        label={t('yleiset.lisatietoa')}
-      />
-    </Spacing>
-  );
-};
-
-const ToteutuksenAjankohtaFields = createStyledRadioSection([
-  {
-    label: t => t('hakulomake.alkamiskausi'),
-    value: TOTEUTUKSEN_AJANKOHTA.ALKAMISKAUSI,
-    FieldsComponent: KausiJaVuosiFields,
-  },
-  {
-    label: t => t('hakulomake.aloitusHenkilokohtaisenSuunnitelmanMukaisesti'),
-    value: TOTEUTUKSEN_AJANKOHTA.HENKILOKOHTAINEN_SUUNNITELMA,
-    FieldsComponent: HenkilokohtaisenSuunnitelmanLisatiedot,
-  },
-]);
+import { FormFieldDateTimeInput } from '#/src/components/formFields';
+import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenAloitusajankohtaFields';
 
 const ScheduleSection = ({ isOphVirkailija, isYhteishaku, name, language }) => {
   const { t } = useTranslation();
@@ -116,10 +30,9 @@ const ScheduleSection = ({ isOphVirkailija, isYhteishaku, name, language }) => {
         title={t('hakulomake.toteutuksenAjankohta')}
         {...getTestIdProps('toteutuksenAjankohta')}
       >
-        <Field
-          name={`${name}.toteutuksenAjankohta`}
-          component={ToteutuksenAjankohtaFields}
+        <KoulutuksenAloitusajankohtaFields
           section={name}
+          name={`${name}.toteutuksenAjankohta`}
           language={language}
         />
       </FieldGroup>

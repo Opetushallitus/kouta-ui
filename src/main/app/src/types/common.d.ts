@@ -23,5 +23,3 @@ type Yhteystieto = {
 };
 
 type KoulutusModel = any;
-
-type ToteutusModel = any;

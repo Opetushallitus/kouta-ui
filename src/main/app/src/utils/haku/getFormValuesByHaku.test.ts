@@ -1,15 +1,13 @@
-import { merge, each } from 'lodash';
+import _ from 'lodash';
 
 import {
-  ALKAMISKAUSITYYPPI,
+  Alkamiskausityyppi,
   HAKULOMAKETYYPPI,
-  TOTEUTUKSEN_AJANKOHTA,
+  Ajankohtatyyppi,
 } from '#/src/constants';
-import {
-  alkamiskausityyppiToToteutuksenAjankohta,
-  getFormValuesByHaku,
-} from './getFormValuesByHaku';
+import { getFormValuesByHaku } from './getFormValuesByHaku';
 import { serializeEditorState } from '#/src/components/Editor/utils';
+import { alkamiskausityyppiToAjankohtatyyppi } from '#/src/utils/form/alkamiskausityyppiHelpers';
 
 const baseHaku = {
   muokkaaja: '1.1.1.1',
@@ -26,7 +24,7 @@ const baseHaku = {
   kohdejoukonTarkenneKoodiUri: 'tarkenne_1#1',
   metadata: {
     koulutuksenAlkamiskausi: {
-      alkamiskausityyppi: ALKAMISKAUSITYYPPI.ALKAMISKAUSI_JA_VUOSI,
+      alkamiskausityyppi: Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI,
       koulutuksenAlkamiskausiKoodiUri: 'alkamiskausi_1#1',
       koulutuksenAlkamisvuosi: '2020',
     },
@@ -60,7 +58,7 @@ test('getFormValuesByHaku returns correct form values given haku', () => {
 
 test('getFormValuesByHaku returns correct form values given different hakulomake variations', () => {
   const valuesMuu = getFormValuesByHaku(
-    merge({}, baseHaku, {
+    _.merge({}, baseHaku, {
       hakulomaketyyppi: HAKULOMAKETYYPPI.MUU,
       hakulomakeLinkki: {
         fi: 'https://google.fi',
@@ -69,7 +67,7 @@ test('getFormValuesByHaku returns correct form values given different hakulomake
   );
 
   const valuesEiHakua = getFormValuesByHaku(
-    merge({}, baseHaku, {
+    _.merge({}, baseHaku, {
       hakulomaketyyppi: HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA,
       hakulomakeKuvaus: {
         fi: '<p>kuvaus</p>',
@@ -84,10 +82,10 @@ test('getFormValuesByHaku returns correct form values given different hakulomake
 test('getFormValuesByHaku toteutuksen ajankohta - Tarkka alkamisaika', () => {
   expect(
     getFormValuesByHaku(
-      merge({}, baseHaku, {
+      _.merge({}, baseHaku, {
         metadata: {
           koulutuksenAlkamiskausi: {
-            alkamiskausityyppi: ALKAMISKAUSITYYPPI.TARKKA_ALKAMISAJANKOHTA,
+            alkamiskausityyppi: Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,
             koulutuksenAlkamiskausiKoodiUri: 'alkamiskausi_1#1',
             koulutuksenAlkamispaivamaara: '2030-12-20T12:28',
             koulutuksenPaattymispaivamaara: '2030-12-21T12:28',
@@ -107,10 +105,10 @@ test('getFormValuesByHaku toteutuksen ajankohta - Aloitus henkilokohtaisen suunn
   };
 
   const values = getFormValuesByHaku(
-    merge({}, baseHaku, {
+    _.merge({}, baseHaku, {
       metadata: {
         koulutuksenAlkamiskausi: {
-          alkamiskausityyppi: ALKAMISKAUSITYYPPI.HENKILOKOHTAINEN_SUUNNITELMA,
+          alkamiskausityyppi: Alkamiskausityyppi.HENKILOKOHTAINEN_SUUNNITELMA,
           henkilokohtaisenSuunnitelmanLisatiedot: henkKohtLisatiedotValues,
           koulutuksenAlkamiskausiKoodiUri: null,
           koulutuksenAlkamispaivamaara: null,
@@ -122,7 +120,7 @@ test('getFormValuesByHaku toteutuksen ajankohta - Aloitus henkilokohtaisen suunn
   );
   expect(values).toMatchSnapshot();
 
-  each(
+  _.each(
     values?.aikataulut.henkilokohtaisenSuunnitelmanLisatiedot,
     (lisatiedotEditorState, lisatiedotKey) => {
       expect(serializeEditorState(lisatiedotEditorState)).toEqual(
@@ -134,20 +132,20 @@ test('getFormValuesByHaku toteutuksen ajankohta - Aloitus henkilokohtaisen suunn
 
 test('alkamiskausityyppiToToteutuksenAjankohta', () => {
   expect(
-    alkamiskausityyppiToToteutuksenAjankohta(
-      ALKAMISKAUSITYYPPI.ALKAMISKAUSI_JA_VUOSI
+    alkamiskausityyppiToAjankohtatyyppi(
+      Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI
     )
-  ).toEqual(TOTEUTUKSEN_AJANKOHTA.ALKAMISKAUSI);
+  ).toEqual(Ajankohtatyyppi.ALKAMISKAUSI);
 
   expect(
-    alkamiskausityyppiToToteutuksenAjankohta(
-      ALKAMISKAUSITYYPPI.TARKKA_ALKAMISAJANKOHTA
+    alkamiskausityyppiToAjankohtatyyppi(
+      Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA
     )
-  ).toEqual(TOTEUTUKSEN_AJANKOHTA.ALKAMISKAUSI);
+  ).toEqual(Ajankohtatyyppi.ALKAMISKAUSI);
 
   expect(
-    alkamiskausityyppiToToteutuksenAjankohta(
-      ALKAMISKAUSITYYPPI.HENKILOKOHTAINEN_SUUNNITELMA
+    alkamiskausityyppiToAjankohtatyyppi(
+      Alkamiskausityyppi.HENKILOKOHTAINEN_SUUNNITELMA
     )
-  ).toEqual(TOTEUTUKSEN_AJANKOHTA.HENKILOKOHTAINEN_SUUNNITELMA);
+  ).toEqual(Ajankohtatyyppi.HENKILOKOHTAINEN_SUUNNITELMA);
 });

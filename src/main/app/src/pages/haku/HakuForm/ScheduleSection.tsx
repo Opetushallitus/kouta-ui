@@ -26,13 +26,10 @@ const ScheduleSection = ({ isOphVirkailija, isYhteishaku, name, language }) => {
         />
       </FieldGroup>
 
-      <FieldGroup
-        title={t('hakulomake.toteutuksenAjankohta')}
-        {...getTestIdProps('toteutuksenAjankohta')}
-      >
+      <FieldGroup title={t('hakulomake.koulutuksenAjankohta')}>
         <KoulutuksenAloitusajankohtaFields
           section={name}
-          name={`${name}.toteutuksenAjankohta`}
+          name={`${name}.ajankohtaTyyppi`}
           language={language}
         />
       </FieldGroup>

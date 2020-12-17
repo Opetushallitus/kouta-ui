@@ -1,5 +1,11 @@
-import { TOTEUTUKSEN_AJANKOHTA, HAKULOMAKETYYPPI } from '#/src/constants';
+import {
+  Ajankohtatyyppi,
+  HAKULOMAKETYYPPI,
+  JULKAISUTILA,
+} from '#/src/constants';
 import { EditorState } from '#/src/components/Editor/Editor';
+
+export type HakuModel = any;
 
 export type HakulomakeFormSection = {
   tyyppi: HAKULOMAKETYYPPI;
@@ -8,21 +14,13 @@ export type HakulomakeFormSection = {
   kuvaus?: TranslatedField<string>;
 };
 
-type Yhteystieto = {
-  nimi: TranslatedField<string>;
-  titteli: TranslatedField<string>;
-  puhelinnumero: TranslatedField<string>;
-  sahkoposti: TranslatedField<string>;
-  verkkosivu: TranslatedField<string>;
-};
-
 export type HakuFormValues = {
   muokkaaja: string;
-  tila: string;
+  tila: JULKAISUTILA;
   nimi: TranslatedField<string>;
   kieliversiot: Array<LanguageCode>;
   aikataulut: {
-    toteutuksenAjankohta: TOTEUTUKSEN_AJANKOHTA;
+    ajankohtaTyyppi: Ajankohtatyyppi;
     kausi?: string;
     vuosi?: { value: string };
     tiedossaTarkkaAjankohta: boolean;

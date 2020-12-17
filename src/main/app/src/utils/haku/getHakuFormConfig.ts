@@ -3,7 +3,7 @@ import { ifAny, otherwise } from '#/src/utils';
 import {
   HAKULOMAKETYYPPI,
   JULKAISUTILA,
-  TOTEUTUKSEN_AJANKOHTA,
+  Ajankohtatyyppi,
 } from '#/src/constants';
 import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
 import isErillishakuHakutapa from '#/src/utils/isErillishakuHakutapa';
@@ -71,9 +71,9 @@ const config = createFormConfigBuilder().registerSections([
         required: true,
       },
       {
-        field: '.toteutuksenAjankohta',
+        field: '.ajankohtaTyyppi',
         validate: validateIfJulkaistu(
-          validateExistence('aikataulut.toteutuksenAjankohta')
+          validateExistence('aikataulut.ajankohtaTyyppi')
         ),
       },
       {
@@ -85,8 +85,8 @@ const config = createFormConfigBuilder().registerSections([
         validate: (eb, values) =>
           validateIf(
             isYhteishakuHakutapa(getHakutapa(values)) &&
-              values?.aikataulut?.toteutuksenAjankohta ===
-                TOTEUTUKSEN_AJANKOHTA.ALKAMISKAUSI &&
+              values?.aikataulut?.ajankohtaTyyppi ===
+                Ajankohtatyyppi.ALKAMISKAUSI &&
               values?.tila === JULKAISUTILA.JULKAISTU,
             _fp.pipe(
               validateExistence('aikataulut.kausi'),
@@ -102,8 +102,8 @@ const config = createFormConfigBuilder().registerSections([
         required: true,
         validate: (eb, values) =>
           validateIf(
-            values?.aikataulut?.toteutuksenAjankohta ===
-              TOTEUTUKSEN_AJANKOHTA.ALKAMISKAUSI &&
+            values?.aikataulut?.ajankohtaTyyppi ===
+              Ajankohtatyyppi.ALKAMISKAUSI &&
               values?.aikataulut?.tiedossaTarkkaAjankohta &&
               values?.tila === JULKAISUTILA.JULKAISTU,
             validateExistenceOfDate('aikataulut.tarkkaAlkaa')

@@ -1,22 +1,9 @@
 import _ from 'lodash/fp';
 import { getHakulomakeFieldsValues } from '#/src/utils/form/getHakulomakeFieldsValues';
-import { ALKAMISKAUSITYYPPI, TOTEUTUKSEN_AJANKOHTA } from '#/src/constants';
+import { Alkamiskausityyppi } from '#/src/constants';
 import { HakuFormValues } from '#/src/types/hakuTypes';
 import { parseEditorState } from '#/src/components/Editor/utils';
-
-export const alkamiskausityyppiToToteutuksenAjankohta = _.cond([
-  [
-    _.overSome([
-      _.isEqual(ALKAMISKAUSITYYPPI.ALKAMISKAUSI_JA_VUOSI),
-      _.isEqual(ALKAMISKAUSITYYPPI.TARKKA_ALKAMISAJANKOHTA),
-    ]),
-    () => TOTEUTUKSEN_AJANKOHTA.ALKAMISKAUSI,
-  ],
-  [
-    _.isEqual(ALKAMISKAUSITYYPPI.HENKILOKOHTAINEN_SUUNNITELMA),
-    () => TOTEUTUKSEN_AJANKOHTA.HENKILOKOHTAINEN_SUUNNITELMA,
-  ],
-]);
+import { alkamiskausityyppiToAjankohtatyyppi } from '#/src/utils/form/alkamiskausityyppiHelpers';
 
 export const getFormValuesByHaku = (haku): HakuFormValues => {
   const {
@@ -59,15 +46,13 @@ export const getFormValuesByHaku = (haku): HakuFormValues => {
     nimi,
     kieliversiot: kielivalinta,
     aikataulut: {
-      toteutuksenAjankohta: alkamiskausityyppiToToteutuksenAjankohta(
-        alkamiskausityyppi
-      ),
+      ajankohtaTyyppi: alkamiskausityyppiToAjankohtatyyppi(alkamiskausityyppi),
       kausi: koulutuksenAlkamiskausiKoodiUri,
       vuosi: koulutuksenAlkamisvuosi && {
         value: _.toString(koulutuksenAlkamisvuosi),
       },
       tiedossaTarkkaAjankohta:
-        alkamiskausityyppi === ALKAMISKAUSITYYPPI.TARKKA_ALKAMISAJANKOHTA,
+        alkamiskausityyppi === Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,
       tarkkaAlkaa: koulutuksenAlkamispaivamaara,
       tarkkaPaattyy: koulutuksenPaattymispaivamaara,
       hakuaika: hakuajat,

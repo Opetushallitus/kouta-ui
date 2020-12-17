@@ -15,7 +15,7 @@ import {
 import Spacing from '#/src/components/Spacing';
 import { useFieldValue } from '#/src/hooks/form';
 import { createStyledRadioSection } from '#/src/components/createStyledRadioSection';
-import { TOTEUTUKSEN_AJANKOHTA } from '#/src/constants';
+import { Ajankohtatyyppi } from '#/src/constants';
 
 const AlkamiskausiFields = ({ name }) => {
   const { options } = useKoodistoOptions({ koodisto: 'kausi' });
@@ -82,12 +82,12 @@ const HenkilokohtaisenSuunnitelmanLisatiedot = ({ name, language }) => {
 const KoulutuksenAloitusajankohtaRadioGroup = createStyledRadioSection([
   {
     label: t => t('hakulomake.alkamiskausi'),
-    value: TOTEUTUKSEN_AJANKOHTA.ALKAMISKAUSI,
+    value: Ajankohtatyyppi.ALKAMISKAUSI,
     FieldsComponent: AlkamiskausiFields,
   },
   {
     label: t => t('hakulomake.aloitusHenkilokohtaisenSuunnitelmanMukaisesti'),
-    value: TOTEUTUKSEN_AJANKOHTA.HENKILOKOHTAINEN_SUUNNITELMA,
+    value: Ajankohtatyyppi.HENKILOKOHTAINEN_SUUNNITELMA,
     FieldsComponent: HenkilokohtaisenSuunnitelmanLisatiedot,
   },
 ]);

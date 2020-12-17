@@ -1,21 +1,18 @@
 import { mapValues, merge } from 'lodash';
 
-import {
-  getHakuByFormValues,
-  getAlkamiskausityyppi,
-} from '#/src/utils/haku/getHakuByFormValues';
+import { getHakuByFormValues } from '#/src/utils/haku/getHakuByFormValues';
 
 import {
-  ALKAMISKAUSITYYPPI,
   HAKULOMAKETYYPPI,
-  TOTEUTUKSEN_AJANKOHTA,
+  Ajankohtatyyppi,
+  JULKAISUTILA,
 } from '#/src/constants';
 import { HakuFormValues } from '#/src/types/hakuTypes';
 import { parseEditorState } from '#/src/components/Editor/utils';
 
 const baseValues: HakuFormValues = {
   muokkaaja: '1.1.1.1',
-  tila: 'tallennettu',
+  tila: JULKAISUTILA.TALLENNETTU,
   nimi: {
     fi: 'Nimi',
     sv: 'Namn',
@@ -44,7 +41,7 @@ const baseValues: HakuFormValues = {
         paattyy: '2019-09-18T08:44',
       },
     ],
-    toteutuksenAjankohta: TOTEUTUKSEN_AJANKOHTA.ALKAMISKAUSI,
+    ajankohtaTyyppi: Ajankohtatyyppi.ALKAMISKAUSI,
     tiedossaTarkkaAjankohta: false,
     lisaamisenTakaraja: '2019-09-16T08:44',
     muokkauksenTakaraja: '2019-10-16T08:44',
@@ -107,7 +104,7 @@ test('getHakuByFormValues toteutuksen ajankohta - Tarkka alkamisaika', () => {
     getHakuByFormValues(
       merge({}, baseValues, {
         aikataulut: {
-          toteutuksenAjankohta: TOTEUTUKSEN_AJANKOHTA.ALKAMISKAUSI,
+          ajankohtaTyyppi: Ajankohtatyyppi.ALKAMISKAUSI,
           tiedossaTarkkaAjankohta: true,
           tarkkaAlkaa: '2019-09-16T08:44',
           tarkkaPaattyy: '2019-09-16T08:44',
@@ -124,8 +121,7 @@ test('getHakuByFormValues toteutuksen ajankohta - Aloitus henkilokohtaisen suunn
     getHakuByFormValues(
       merge({}, baseValues, {
         aikataulut: {
-          toteutuksenAjankohta:
-            TOTEUTUKSEN_AJANKOHTA.HENKILOKOHTAINEN_SUUNNITELMA,
+          ajankohtaTyyppi: Ajankohtatyyppi.HENKILOKOHTAINEN_SUUNNITELMA,
           henkilokohtaisenSuunnitelmanLisatiedot: mapValues(
             {
               fi: '<p>hlokoht fi </p>',
@@ -138,39 +134,4 @@ test('getHakuByFormValues toteutuksen ajankohta - Aloitus henkilokohtaisen suunn
       })
     )
   ).toMatchSnapshot();
-});
-
-test('getAlkamiskausityyppi', () => {
-  expect(
-    getAlkamiskausityyppi(
-      merge({}, baseValues, {
-        aikataulut: {
-          toteutuksenAjankohta: TOTEUTUKSEN_AJANKOHTA.ALKAMISKAUSI,
-          tiedossaTarkkaAjankohta: true,
-        },
-      })
-    )
-  ).toEqual(ALKAMISKAUSITYYPPI.TARKKA_ALKAMISAJANKOHTA);
-
-  expect(
-    getAlkamiskausityyppi(
-      merge({}, baseValues, {
-        aikataulut: {
-          toteutuksenAjankohta: TOTEUTUKSEN_AJANKOHTA.ALKAMISKAUSI,
-          tiedossaTarkkaAjankohta: false,
-        },
-      })
-    )
-  ).toEqual(ALKAMISKAUSITYYPPI.ALKAMISKAUSI_JA_VUOSI);
-
-  expect(
-    getAlkamiskausityyppi(
-      merge({}, baseValues, {
-        aikataulut: {
-          toteutuksenAjankohta:
-            TOTEUTUKSEN_AJANKOHTA.HENKILOKOHTAINEN_SUUNNITELMA,
-        },
-      })
-    )
-  ).toEqual(ALKAMISKAUSITYYPPI.HENKILOKOHTAINEN_SUUNNITELMA);
 });

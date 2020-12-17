@@ -1,4 +1,4 @@
-import { ALKAMISKAUSITYYPPI } from '#/src/constants';
+import { Alkamiskausityyppi } from '#/src/constants';
 
 export default () => ({
   oid: '1.2.246.562.29.00000000000000000001',
@@ -16,7 +16,7 @@ export default () => ({
   hakulomakeLinkki: {},
   metadata: {
     koulutuksenAlkamiskausi: {
-      alkamiskausityyppi: ALKAMISKAUSITYYPPI.ALKAMISKAUSI_JA_VUOSI,
+      alkamiskausityyppi: Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI,
       koulutuksenAlkamiskausiKoodiUri: 'kausi_0#1',
       koulutuksenAlkamisvuosi: '2024',
     },

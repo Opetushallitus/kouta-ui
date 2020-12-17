@@ -13,8 +13,15 @@ import createHaku from '#/src/utils/haku/createHaku';
 import { getValuesForSaving } from '#/src/utils';
 import { useForm } from '#/src/hooks/form';
 import { useFormName } from '#/src/contexts/contextHooks';
+import { HakuModel } from '#/src/types/hakuTypes';
 
-const useSaveHaku = (formMode, haku) => {
+type HakuFooterProps = {
+  formMode: FormMode;
+  haku: HakuModel;
+  canUpdate?: boolean;
+};
+
+export const HakuFooter = ({ formMode, haku, canUpdate }: HakuFooterProps) => {
   const history = useHistory();
 
   const form = useForm();
@@ -61,24 +68,11 @@ const useSaveHaku = (formMode, haku) => {
   );
 
   const { save } = useSaveForm({
-    form: 'hakuForm',
+    form: formName,
     submit,
     validate: validateHakuForm,
   });
 
-  return save;
-};
-
-type HakuModel = any;
-
-type HakuFooterProps = {
-  formMode: FormMode;
-  haku: HakuModel;
-  canUpdate?: boolean;
-};
-
-export const HakuFooter = ({ formMode, haku, canUpdate }: HakuFooterProps) => {
-  const save = useSaveHaku(formMode, haku);
   return <FormFooter entity={ENTITY.HAKU} save={save} canUpdate={canUpdate} />;
 };
 

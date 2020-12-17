@@ -52,7 +52,6 @@ const HakuForm = ({
         {canSelectBase ? (
           <PohjaFormCollapse
             section="pohja"
-            header={t('yleiset.pohjanValinta')}
             scrollOnActive={false}
             onSelectBase={onSelectBase}
             infoText={t('hakulomake.pohjavalintaInfo')}

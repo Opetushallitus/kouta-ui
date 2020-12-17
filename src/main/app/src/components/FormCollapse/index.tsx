@@ -76,7 +76,7 @@ export type FormCollapseProps = {
   onContinue?: () => void;
   actions?: React.ReactNode;
   index?: number;
-  header?: React.ReactNode;
+  header: string;
   id?: string;
   defaultLanguage?: LanguageCode;
   showLanguageTabs?: boolean;

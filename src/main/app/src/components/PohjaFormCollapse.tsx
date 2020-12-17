@@ -7,7 +7,6 @@ import PohjaValintaSection from '#/src/components/PohjaValintaSection';
 
 type PohjaFormCollapseProps = {
   section?: string;
-  header?: React.ReactNode;
   infoText?: string;
   onContinue?: () => void;
   scrollOnActive?: boolean;

@@ -12,7 +12,7 @@ export const getMe = async ({ httpClient, apiUrls }) => {
   let res = await fn();
   let count = 3;
   while (
-    res?.request.responseURL !== apiUrls.url('kayttooikeus-service.me') &&
+    res?.request?.responseURL !== apiUrls.url('kayttooikeus-service.me') &&
     count !== 0
   ) {
     res = await fn();

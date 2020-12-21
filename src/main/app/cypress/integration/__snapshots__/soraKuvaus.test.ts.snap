@@ -6,7 +6,7 @@ exports[`createSoraKuvaus > should be able to create sora-kuvaus #0`] =
   "koulutustyyppi": "amm",
   "metadata": {
     "koulutusKoodiUrit": [
-      "koulutus_652501#11"
+      "koulutus_652501#12"
     ],
     "koulutusalaKoodiUri": "kansallinenkoulutusluokitus2016koulutusalataso2_073#1",
     "kuvaus": {

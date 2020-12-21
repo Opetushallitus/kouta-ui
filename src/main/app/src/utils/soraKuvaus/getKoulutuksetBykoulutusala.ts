@@ -1,11 +1,10 @@
-import _ from 'lodash/fp';
+import _fp from 'lodash/fp';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
 import { isBefore, parseISO, endOfToday } from 'date-fns';
 
-const isValidKoulutusKoodi = ({ koodisto, tila, voimassaLoppuPvm }) =>
+const isValidKoulutusKoodi = ({ koodisto, voimassaLoppuPvm }) =>
   koodisto?.koodistoUri === 'koulutus' &&
-  tila === 'HYVAKSYTTY' &&
-  (_.isNil(voimassaLoppuPvm) ||
+  (_fp.isNil(voimassaLoppuPvm) ||
     isBefore(endOfToday(), parseISO(voimassaLoppuPvm)));
 
 const getKoulutuksetByKoulutusala = async ({
@@ -19,7 +18,11 @@ const getKoulutuksetByKoulutusala = async ({
         koulutusalaKoodiUri
     );
 
-    return data?.filter(isValidKoulutusKoodi);
+    return _fp.pipe(
+      _fp.filter(isValidKoulutusKoodi),
+      _fp.groupBy('koodiUri'),
+      _fp.map(_fp.maxBy('versio'))
+    )(data);
   }
 };
 

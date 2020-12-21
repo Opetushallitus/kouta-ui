@@ -3,9 +3,9 @@ import _ from 'lodash';
 import { Field } from 'redux-form';
 import { useTranslation } from 'react-i18next';
 import {
-  FormFieldAsyncKoodistoSelect,
   FormFieldKoulutusalaSelect,
   FormFieldKoulutustyyppiSelect,
+  FormFieldSelect,
 } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
 import {
@@ -13,7 +13,6 @@ import {
   useFieldValue,
   useIsDirty,
 } from '#/src/hooks/form';
-import useLoadOptions from '#/src/hooks/useLoadOptions';
 import { useKoodistoDataOptions } from '#/src/hooks/useKoodistoOptions';
 import { useHasChanged } from '#/src/hooks/useHasChanged';
 import { getTestIdProps } from '#/src/utils';
@@ -49,8 +48,6 @@ export const KoulutustyyppiSection = ({
     language,
   });
 
-  const loadOptions = useLoadOptions(koulutusOptions);
-
   return (
     <Box display="flex" flexDirection="column" maxWidth="900px">
       <Field
@@ -70,8 +67,8 @@ export const KoulutustyyppiSection = ({
         <Box flex="1 1 50%" {...getTestIdProps('koulutukset')}>
           <Field
             name="koulutukset"
-            loadOptions={loadOptions}
-            component={FormFieldAsyncKoodistoSelect}
+            options={koulutusOptions}
+            component={FormFieldSelect}
             label={t('yleiset.valitseKoulutus')}
             disabled={_.isEmpty(koulutusOptions)}
             language={language}

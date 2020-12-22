@@ -27,10 +27,10 @@ export const UserGate = ({ fallback = null, children = null }) => {
 
   useEffect(() => {
     // NOTE: Not sure what could be the case when data does exists but oid does not, but this has probably happened few times
-    if (getMeError || (data && !data.oid)) {
+    if (!errorCode && (getMeError || (data && !data.oid))) {
       setErrorCode(ERROR_KAYTTOOIKEUS_SERVICE);
     }
-  }, [data, getMeError]);
+  }, [data, errorCode, getMeError]);
 
   useEffect(() => {
     if (data && data.lang) {

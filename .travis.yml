@@ -10,7 +10,7 @@ jobs:
   - stage: build
     name: "Run tests"
     language: node_js
-    node_js: 10
+    node_js: 12
     addons:
       chrome: stable
     cache:
@@ -58,7 +58,7 @@ jobs:
   - stage: build
     name: "Publish Storybook"
     language: node_js
-    node_js: 10
+    node_js: 12
     cache:
       directories:
         - $HOME/.m2

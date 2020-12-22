@@ -5,7 +5,7 @@ import FormConfigFragment from '#/src/components/FormConfigFragment';
 import { FormFieldInput } from '#/src/components/formFields';
 import { getTestIdProps } from '#/src/utils';
 import { Box } from '#/src/components/virkailija';
-import KoulutusField from '../KoulutusField';
+import KoulutusField from '#/src/components/KoulutusField';
 import { useLocalizedKoulutus } from '../useLocalizedKoulutus';
 import KoulutuksenTiedotSection from './KoulutuksenTiedotSection';
 import KoulutusalatField from './KoulutusalatField';

@@ -17,7 +17,7 @@ const KoulutusField = props => {
       disabled={disabled}
       loadOptions={loadOptions}
       component={FormFieldAsyncKoodistoSelect}
-      label={t('koulutuslomake.valitseKoulutus')}
+      label={t('yleiset.valitseKoulutus')}
       {...props}
     />
   );

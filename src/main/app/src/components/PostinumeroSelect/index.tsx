@@ -26,7 +26,7 @@ const getKoodiOption = (koodi, versio, language) => {
   };
 };
 
-const PostinumeroSelect = ({ koodistoVersio = 2, ...props }) => {
+export const PostinumeroSelect = ({ koodistoVersio = 2, ...props }) => {
   const httpClient = useHttpClient();
   const apiUrls = useUrls();
   const language = useLanguage();

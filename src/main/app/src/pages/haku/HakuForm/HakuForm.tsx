@@ -1,15 +1,13 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
 import Flex from '#/src/components/Flex';
 import Button from '#/src/components/Button';
 import LomakeFields from '#/src/components/LomakeFields';
-import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
 import useModal from '#/src/hooks/useModal';
 import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
 import { useFieldValue } from '#/src/hooks/form';
-import { HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import PohjaValintaSection from '#/src/components/PohjaValintaSection';
@@ -23,6 +21,7 @@ import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import FormCollapse from '#/src/components/FormCollapse';
 import HakukohteetModal from './HakukohteetModal';
 import HakukohteetSection from './HakukohteetSection';
+import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 
 const HakuForm = ({
   organisaatioOid,
@@ -34,20 +33,13 @@ const HakuForm = ({
   onSelectBase = () => {},
 }) => {
   const { t } = useTranslation();
-  const roleBuilder = useAuthorizedUserRoleBuilder();
   const { isOpen, open, close } = useModal();
   const kieliversiot = useFieldValue('kieliversiot');
   const languages = kieliversiot || [];
   const hakutapa = useFieldValue('hakutapa');
   const isYhteishaku = isYhteishakuHakutapa(hakutapa);
 
-  const isOphVirkailija = useMemo(
-    () =>
-      roleBuilder
-        .hasUpdate(HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID)
-        .result(),
-    [roleBuilder]
-  );
+  const isOphVirkailija = useIsOphVirkailija();
 
   return (
     <>

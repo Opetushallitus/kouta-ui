@@ -4,9 +4,9 @@ import { Box, Spin } from '#/src/components/virkailija';
 import { getLanguageValue } from '#/src/utils/languageUtils';
 import { getTestIdProps } from '#/src/utils';
 import { useFieldValue } from '#/src/hooks/form';
-import KoulutusField from '../KoulutusField';
-import { InfoBoxGrid, StyledInfoBox } from './InfoBox';
+import KoulutusField from '#/src/components/KoulutusField';
 import { useKoulutusByKoodi } from '#/src/utils/koulutus/getKoulutusByKoodi';
+import { InfoBoxGrid, StyledInfoBox } from './InfoBox';
 
 export const ValitseKoulutusBox = ({
   fieldName,

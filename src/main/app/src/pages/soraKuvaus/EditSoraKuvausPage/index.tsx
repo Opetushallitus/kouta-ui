@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 
-import { KOULUTUSTYYPPI, ENTITY, CRUD_ROLES } from '#/src/constants';
+import { KOULUTUSTYYPPI, ENTITY } from '#/src/constants';
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
@@ -15,8 +15,8 @@ import getFormValuesBySoraKuvaus from '#/src/utils/soraKuvaus/getFormValuesBySor
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormSteps from '#/src/components/FormSteps';
-import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { useEntityFormConfig } from '#/src/hooks/form';
+import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import SoraKuvausForm from '../SoraKuvausForm';
 import EditSoraKuvausFooter from './EditSoraKuvausFooter';
 
@@ -44,12 +44,7 @@ const EditSoraKuvausPage = props => {
     return soraKuvaus ? getFormValuesBySoraKuvaus(soraKuvaus) : {};
   }, [soraKuvaus]);
 
-  // SORA-kuvaus rights are the same as valintaperuste rights
-  const canUpdate = useCurrentUserHasRole(
-    ENTITY.VALINTAPERUSTE,
-    CRUD_ROLES.UPDATE,
-    soraKuvaus?.organisaatioOid
-  );
+  const canUpdate = useIsOphVirkailija();
 
   const config = useEntityFormConfig(ENTITY.SORA_KUVAUS, koulutustyyppi);
 

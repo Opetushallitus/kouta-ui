@@ -18,6 +18,16 @@ test('getSoraKuvausByFormValues returns correct sora-kuvaus given form values', 
     },
     julkinen: true,
     koulutustyyppi: 'amm',
+    koulutusala: {
+      value: 'kansallinenkoulutusluokitus2016koulutusalataso2_073#1',
+      label: 'Arkkitehtuuri ja rakentaminen',
+    },
+    koulutukset: [
+      {
+        value: 'koulutus_754101#7',
+        label: 'Arkkitehti',
+      },
+    ],
   });
 
   expect(soraKuvaus).toMatchSnapshot();

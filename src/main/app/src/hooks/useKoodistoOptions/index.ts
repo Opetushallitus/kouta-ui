@@ -1,40 +1,50 @@
 import { useMemo } from 'react';
-import { isArray, mapValues, first, orderBy } from 'lodash';
-
-import {
-  arrayToTranslationObject,
-  getFirstLanguageValue,
-} from '#/src/utils/languageUtils';
-
+import _ from 'lodash';
 import useKoodisto from '#/src/hooks/useKoodisto';
 import useLanguage from '#/src/hooks/useLanguage';
-
-const getOptions = ({ koodisto, language, sort = true }) => {
-  const nimet = isArray(koodisto)
-    ? koodisto.map(({ metadata, koodiUri, versio }) => ({
-        koodiUri: `${koodiUri}#${versio}`,
-        nimi: mapValues(arrayToTranslationObject(metadata), ({ nimi }) => nimi),
-      }))
-    : [];
-
-  return nimet.map(({ nimi, koodiUri }) => ({
-    value: koodiUri,
-    label: getFirstLanguageValue(nimi, language),
-  }));
-};
+import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 
 const defaultSort = options => {
   const byLabel = ({ label }) => label;
   const byFirstNumber = ({ label }) =>
-    /^\d/.test(label) && parseInt(first(label.match(/(\d+)/)));
-  return orderBy(options, [byFirstNumber, byLabel]);
+    /^\d/.test(label) && _.parseInt(label.match(/(\d+)/)?.[0]);
+  return _.orderBy(options, [byFirstNumber, byLabel]);
+};
+
+type GetOptionsProps = {
+  koodisto: Array<Koodi>;
+  language: LanguageCode;
+  sortFn?: (SelectOptions) => SelectOptions;
+};
+
+const getOptions = ({
+  koodisto,
+  language,
+  sortFn = defaultSort,
+}: GetOptionsProps) =>
+  sortFn(
+    _.map(koodisto, koodi => ({
+      value: `${koodi?.koodiUri}#${koodi?.versio}`,
+      label: getKoodiNimiTranslation(koodi, language),
+    }))
+  );
+
+export const useKoodistoDataOptions = ({
+  koodistoData,
+  language,
+  sortFn = undefined,
+}) => {
+  return useMemo(
+    () => getOptions({ koodisto: koodistoData, language, sortFn }),
+    [koodistoData, language, sortFn]
+  );
 };
 
 export const useKoodistoOptions = ({
   koodisto,
   versio = undefined,
   language: languageProp = undefined,
-  sortFn = defaultSort,
+  sortFn = undefined,
   sort = true,
 }) => {
   const translationLanguage = useLanguage();
@@ -42,13 +52,11 @@ export const useKoodistoOptions = ({
 
   const { data, ...rest } = useKoodisto({ koodisto, versio });
 
-  const identity = i => i;
-
-  const options = useMemo(() => {
-    return data
-      ? (sort ? sortFn : identity)(getOptions({ koodisto: data, language }))
-      : [];
-  }, [data, language, sort, sortFn]);
+  const options = useKoodistoDataOptions({
+    koodistoData: data,
+    language,
+    sortFn,
+  });
 
   return { ...rest, options };
 };

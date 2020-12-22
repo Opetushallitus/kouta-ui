@@ -179,3 +179,5 @@ export const maybeParseNumber = value => {
   const numberValue = Number(value);
   return _.isNaN(numberValue) ? value : numberValue;
 };
+
+export const toSelectValue = value => (_.isNil(value) ? null : { value });

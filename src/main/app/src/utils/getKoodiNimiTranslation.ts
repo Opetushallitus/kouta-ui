@@ -1,17 +1,18 @@
-import { get, mapValues } from 'lodash';
+import _fp from 'lodash/fp';
 
 import {
   getFirstLanguageValue,
   arrayToTranslationObject,
 } from '#/src/utils/languageUtils';
 
-const getKoodiNimiTranslation = (koodi, priority) => {
-  const translationObject = mapValues(
-    arrayToTranslationObject(get(koodi, 'metadata')),
-    ({ nimi }) => nimi
+export const getKoodiNimiTranslation = (
+  koodi: Koodi,
+  priority: LanguageCode
+) => {
+  return getFirstLanguageValue(
+    _fp.mapValues(_fp.prop('nimi'), arrayToTranslationObject(koodi?.metadata)),
+    priority
   );
-
-  return getFirstLanguageValue(translationObject, priority);
 };
 
 export default getKoodiNimiTranslation;

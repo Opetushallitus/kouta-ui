@@ -1,17 +1,15 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { ENTITY } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import getSoraKuvaukset from '#/src/utils/soraKuvaus/getSoraKuvaukset';
 import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import FormCollapse from '#/src/components/FormCollapse';
-import JulkisuusSection from '#/src/components/JulkisuusSection';
 import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import KoulutustyyppiSection from './KoulutustyyppiSection';
 import TiedotSection from './TiedotSection';
-import KieliversiotSection from './KieliversiotSection';
+import KieliversiotFields from '#/src/components/KieliversiotFields';
 
 const SoraKuvausForm = ({
   steps = false,
@@ -27,15 +25,13 @@ const SoraKuvausForm = ({
 
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
-      {canEditKoulutustyyppi ? (
-        <FormCollapse
-          section="koulutustyyppi"
-          header={t('yleiset.koulutustyyppi')}
-          scrollOnActive={false}
-          Component={KoulutustyyppiSection}
-        />
-      ) : null}
-
+      <FormCollapse
+        section="koulutustyyppi"
+        header={t('yleiset.koulutustyyppi')}
+        scrollOnActive={false}
+        Component={KoulutustyyppiSection}
+        canEditKoulutustyyppi={canEditKoulutustyyppi}
+      />
       {canSelectBase ? (
         <PohjaFormCollapse
           onSelectBase={onSelectBase}
@@ -50,27 +46,17 @@ const SoraKuvausForm = ({
           })}
         />
       ) : null}
-
       <FormCollapse
         section="kieliversiot"
         header={t('yleiset.kieliversiot')}
-        Component={KieliversiotSection}
+        Component={KieliversiotFields}
       />
-
       <FormCollapse
         section="tiedot"
         header={t('soraKuvauslomake.soraKuvauksenTiedot')}
         languages={languageTabs}
         Component={TiedotSection}
       />
-
-      <FormCollapse
-        section="julkinen"
-        header={t('soraKuvauslomake.nakyminenMuilleToimijoille')}
-        Component={JulkisuusSection}
-        entity={ENTITY.SORA_KUVAUS}
-      />
-
       <FormCollapse
         section="tila"
         header={t('soraKuvauslomake.soraKuvauksenTila')}

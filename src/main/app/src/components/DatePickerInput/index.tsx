@@ -28,7 +28,7 @@ const getLocalizationProps = t => ({
   firstDayOfWeek: 1,
 });
 
-const DatePickerInput = ({
+export const DatePickerInput = ({
   dayPickerProps = {},
   disabled,
   value,

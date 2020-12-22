@@ -8,7 +8,7 @@ import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 import { useUrls, useHttpClient } from '#/src/contexts/contextHooks';
 
-const AsyncKoodistoSelect = ({
+export const AsyncKoodistoSelect = ({
   disabled,
   formatLabel: formatLabelProp,
   language: selectedLanguage,

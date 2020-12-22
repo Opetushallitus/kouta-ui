@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import {
   typeToEditor,
-  getCheckbox,
   getByTestId,
   jatka,
   paste,
@@ -9,11 +8,27 @@ import {
   fillPohjaSection,
   fillTilaSection,
   tallenna,
-  fillKoulutustyyppiSection,
+  fillKoulutustyyppiSelect,
+  fillAsyncSelect,
 } from '#/cypress/utils';
 
 import createSoraKuvaus from '#/cypress/data/soraKuvaus';
 import { stubSoraKuvausFormRoutes } from '#/cypress/soraKuvausFormUtils';
+import autoRecord from 'cypress-autorecord';
+
+const fillKoulutustyyppiSection = () => {
+  getByTestId('koulutustyyppiSection').within(() => {
+    fillKoulutustyyppiSelect(['amm']);
+    cy.findByTestId('koulutusala').within(() => {
+      fillAsyncSelect('Arkkitehtuuri ja rakentaminen');
+    });
+
+    cy.findByTestId('koulutukset').within(() => {
+      fillAsyncSelect('Rakennusarkkitehti (AMK)');
+    });
+    jatka();
+  });
+};
 
 const fillTiedotSection = () => {
   getByTestId('tiedotSection').within(() => {
@@ -26,17 +41,10 @@ const fillTiedotSection = () => {
     jatka();
   });
 };
-
-const fillJulkisuusSection = () => {
-  getByTestId('julkinenSection').within(() => {
-    getCheckbox(null).check({ force: true });
-    jatka();
-  });
-};
-
 export const createSoraKuvausForm = () => {
   const organisaatioOid = '1.1.1.1.1.1';
   const soraKuvaus = createSoraKuvaus();
+  autoRecord();
 
   beforeEach(() => {
     cy.server();
@@ -62,11 +70,10 @@ export const createSoraKuvausForm = () => {
       },
     }).as('createSoraKuvausRequest');
 
-    fillKoulutustyyppiSection(['amm']);
+    fillKoulutustyyppiSection();
     fillPohjaSection();
     fillKieliversiotSection({ jatka: true });
     fillTiedotSection();
-    fillJulkisuusSection();
     fillTilaSection();
 
     tallenna();

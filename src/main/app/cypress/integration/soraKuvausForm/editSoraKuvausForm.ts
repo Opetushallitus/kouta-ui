@@ -1,3 +1,5 @@
+import autoRecord from 'cypress-autorecord';
+import _ from 'lodash';
 import createSoraKuvaus from '#/cypress/data/soraKuvaus';
 import { stubSoraKuvausFormRoutes } from '#/cypress/soraKuvausFormUtils';
 import {
@@ -5,11 +7,12 @@ import {
   fillKieliversiotSection,
   tallenna,
 } from '#/cypress/utils';
-import { merge } from 'lodash';
 
 export const editSoraKuvausForm = () => {
   const organisaatioOid = '1.1.1.1.1.1';
   const soraKuvaus = createSoraKuvaus();
+
+  autoRecord();
 
   beforeEach(() => {
     cy.server();
@@ -18,7 +21,7 @@ export const editSoraKuvausForm = () => {
     cy.route({
       method: 'GET',
       url: `**/sorakuvaus/${soraKuvaus.id}`,
-      response: merge({}, soraKuvaus, {
+      response: _.merge({}, soraKuvaus, {
         organisaatioOid,
       }),
     });

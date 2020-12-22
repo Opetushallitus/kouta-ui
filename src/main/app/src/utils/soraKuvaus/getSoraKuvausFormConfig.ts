@@ -1,17 +1,36 @@
+import { KOULUTUSTYYPIT } from '#/src/constants';
 import createFormConfigBuilder from '#/src/utils/form/createFormConfigBuilder';
 
 import {
   validateIfJulkaistu,
   getKielivalinta,
-  koulutustyyppiSectionConfig,
   kieliversiotSectionConfig,
   pohjaValintaSectionConfig,
   tilaSectionConfig,
-  julkinenSectionConfig,
 } from '#/src/utils/form/formConfigUtils';
+import { validateExistence } from '../form/createErrorBuilder';
 
 const config = createFormConfigBuilder().registerSections([
-  koulutustyyppiSectionConfig,
+  {
+    koulutustyypit: KOULUTUSTYYPIT,
+    section: 'koulutustyyppi',
+    required: true,
+    parts: [
+      {
+        field: 'koulutustyyppi',
+        required: true,
+        validate: validateExistence('koulutustyyppi'),
+      },
+      {
+        field: 'koulutusala',
+        required: true,
+        validate: validateExistence('koulutusala'),
+      },
+      {
+        field: 'koulutukset',
+      },
+    ],
+  },
   pohjaValintaSectionConfig,
   kieliversiotSectionConfig,
   {
@@ -19,9 +38,8 @@ const config = createFormConfigBuilder().registerSections([
     parts: [
       {
         field: '.nimi',
-        validate: validateIfJulkaistu((eb, values) =>
-          eb.validateTranslations('tiedot.nimi', getKielivalinta(values))
-        ),
+        validate: (eb, values) =>
+          eb.validateTranslations('tiedot.nimi', getKielivalinta(values)),
         required: true,
       },
       {
@@ -33,7 +51,6 @@ const config = createFormConfigBuilder().registerSections([
       },
     ],
   },
-  julkinenSectionConfig,
   tilaSectionConfig,
 ]);
 

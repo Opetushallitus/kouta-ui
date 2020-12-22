@@ -1,22 +1,15 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
-import { HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import { FormFieldCheckbox } from './formFields';
 import { Field } from 'redux-form';
+import { useIsOphVirkailija } from '../hooks/useIsOphVirkailija';
 
 export const ToggleDraft = () => {
   const { t } = useTranslation();
-  const roleBuilder = useAuthorizedUserRoleBuilder();
 
-  const isOphVirkailija = useMemo(
-    () =>
-      roleBuilder
-        .hasUpdate(HAKU_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID)
-        .result(),
-    [roleBuilder]
-  );
+  const isOphVirkailija = useIsOphVirkailija();
+
   const esikatselu = useFieldValue('esikatselu');
 
   return esikatselu !== undefined && isOphVirkailija ? (

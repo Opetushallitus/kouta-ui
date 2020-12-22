@@ -60,7 +60,7 @@ const getFirstLevelValue = (hierarkia, value) => {
   return node ? node.tyyppi : undefined;
 };
 
-export const KoulutustyyppiSelect = ({ value, onChange, error }) => {
+export const KoulutustyyppiSelect = ({ value, onChange, error, disabled }) => {
   const [johtaaTutkintoon, setJohtaaTutkintoon] = useState(
     TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT.includes(value)
   );
@@ -139,7 +139,7 @@ export const KoulutustyyppiSelect = ({ value, onChange, error }) => {
           >
             {t('koulutustyyppivalikko.tutkintoonJohtavatKoulutustyypit')}
           </SegmentTab>
-          <SegmentTab value="muut" onClick={onMuutClick}>
+          <SegmentTab value="muut" onClick={onMuutClick} disabled={disabled}>
             {t('koulutustyyppivalikko.muutKoulutustyypit')}
           </SegmentTab>
         </SegmentTabs>
@@ -151,6 +151,7 @@ export const KoulutustyyppiSelect = ({ value, onChange, error }) => {
             value={firstLevelValue}
             onChange={onFirstLevelValueChange}
             error={error}
+            disabled={disabled}
           />
         </Box>
         {hasSecondLevelOptions && (

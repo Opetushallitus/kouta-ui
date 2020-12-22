@@ -34,7 +34,7 @@ module.exports = {
             }
           : {}),
       }),
-      withoutPlugins(['GenerateSW'])
+      withoutPlugins(['ManifestPlugin'])
     ),
   },
   typescript: {

@@ -7,8 +7,8 @@
     "allowJs": true,
     "checkJs": true,
     "esModuleInterop": true,
-    "jsx": "react",
-    "target": "es5",
+    "jsx": "react-jsx",
+    "target": "es6",
     "lib": [
       "dom",
       "dom.iterable",
@@ -23,6 +23,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "noImplicitAny": false,
+    "noFallthroughCasesInSwitch": true,
     "strict": true
   },
   "include": [

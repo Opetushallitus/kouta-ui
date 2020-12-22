@@ -1,13 +1,13 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { KOULUTUSTYYPPI, ENTITY, CRUD_ROLES } from '#/src/constants';
+import { KOULUTUSTYYPPI, ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import { useHakukohdeByOid } from '#/src/utils/hakukohde/getHakukohdeByOid';
 import FullSpin from '#/src/components/FullSpin';
 import Title from '#/src/components/Title';
 import ReduxForm from '#/src/components/ReduxForm';
 import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
-import HakukohdeForm from '../HakukohdeForm';
+import HakukohdeForm from './HakukohdeForm';
 import FormPage, {
   RelationInfoContainer,
   OrganisaatioRelation,
@@ -18,8 +18,8 @@ import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormSteps from '#/src/components/FormSteps';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { useEntityFormConfig } from '#/src/hooks/form';
-import EditHakukohdeFooter from './EditHakukohdeFooter';
-import { useHakukohdePageData } from '../getHakukohdePageData';
+import { HakukohdeFooter } from './HakukohdeFooter';
+import { useHakukohdePageData } from './getHakukohdePageData';
 
 const EditHakukohdePage = props => {
   const {
@@ -62,7 +62,7 @@ const EditHakukohdePage = props => {
   return isLoading ? (
     <FullSpin />
   ) : (
-    <ReduxForm form="editHakukohdeForm" initialValues={initialValues}>
+    <ReduxForm form="hakukohdeForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.hakukohteenMuokkaus')}</Title>
       <FormConfigContext.Provider value={{ ...config, readOnly: !canUpdate }}>
         <FormPage
@@ -75,7 +75,8 @@ const EditHakukohdePage = props => {
           }
           steps={<FormSteps activeStep={ENTITY.HAKUKOHDE} />}
           footer={
-            <EditHakukohdeFooter
+            <HakukohdeFooter
+              formMode={FormMode.EDIT}
               hakukohde={hakukohde}
               toteutus={toteutus}
               haku={haku}

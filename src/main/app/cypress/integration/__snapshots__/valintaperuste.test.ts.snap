@@ -7,9 +7,11 @@ exports[`createValintaperuste > should be able to create valintaperuste #0`] =
   "kohdejoukkoKoodiUri": "haunkohdejoukko_0#1",
   "koulutustyyppi": "yo",
   "metadata": {
+    "kielitaitovaatimukset": [],
     "kuvaus": {
       "fi": "<p>Kuvaus</p>"
     },
+    "osaamistaustaKoodiUrit": [],
     "tyyppi": "yo",
     "valintakokeidenYleiskuvaus": {
       "fi": "<p>Valintakokeiden kuvaus</p>"
@@ -141,9 +143,11 @@ exports[`editValintaperuste > should be able to edit valintaperuste #0`] =
   "kohdejoukkoKoodiUri": "haunkohdejoukko_0#1",
   "koulutustyyppi": "amm",
   "metadata": {
+    "kielitaitovaatimukset": [],
     "kuvaus": {
       "fi": "<p>Loppukuvaus</p>"
     },
+    "osaamistaustaKoodiUrit": [],
     "tyyppi": "amm",
     "valintakokeidenYleiskuvaus": {
       "fi": "<p>Valintakokeiden kuvaus - fi</p>"

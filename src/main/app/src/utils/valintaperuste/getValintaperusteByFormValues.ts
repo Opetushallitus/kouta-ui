@@ -131,6 +131,8 @@ export const getValintaperusteByFormValues = values => {
     metadata: {
       tyyppi: koulutustyyppi,
       valintatavat,
+      kielitaitovaatimukset: [], // TODO: Obsolete, remove from backend
+      osaamistaustaKoodiUrit: [], // TODO: Obsolete, remove from backend
       kuvaus,
       valintakokeidenYleiskuvaus,
     },

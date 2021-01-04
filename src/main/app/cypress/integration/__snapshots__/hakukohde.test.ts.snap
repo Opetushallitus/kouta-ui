@@ -1,7 +1,7 @@
 exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] =
 {
   "alkamiskausiKoodiUri": "kausi_0#1",
-  "alkamisvuosi": 2020,
+  "alkamisvuosi": 2035,
   "aloituspaikat": 10,
   "ensikertalaisenAloituspaikat": null,
   "hakuOid": "4.1.1.1.1.1",
@@ -115,7 +115,7 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
 exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
 {
   "alkamiskausiKoodiUri": "kausi_0#1",
-  "alkamisvuosi": 2020,
+  "alkamisvuosi": 2035,
   "aloituspaikat": 10,
   "ensikertalaisenAloituspaikat": 5,
   "hakuOid": "4.1.1.1.1.1",

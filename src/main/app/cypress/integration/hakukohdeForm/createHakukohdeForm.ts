@@ -96,7 +96,7 @@ const fillAlkamiskausiSection = () => {
     });
 
     getRadio('kausi_0#1').click({ force: true });
-    selectOption(new Date().getFullYear().toString());
+    selectOption(2035);
   });
 };
 

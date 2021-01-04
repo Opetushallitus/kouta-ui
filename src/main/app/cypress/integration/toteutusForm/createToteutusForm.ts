@@ -76,7 +76,7 @@ const fillStipendi = () => {
 
 const fillKausi = () => {
   getByTestId('koulutuksenAlkamisvuosi').within(() => {
-    selectOption('2020');
+    selectOption(2035);
   });
   getByTestId('koulutuksenAlkamiskausi').within(() => {
     getRadio('kausi_0#1').check({ force: true });

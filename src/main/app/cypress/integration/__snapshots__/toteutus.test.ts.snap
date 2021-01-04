@@ -46,7 +46,7 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
       "diplomiKuvaus": {},
       "koulutuksenAlkamiskausi": "kausi_0#1",
       "koulutuksenAlkamispaivamaara": null,
-      "koulutuksenAlkamisvuosi": 2020,
+      "koulutuksenAlkamisvuosi": 2035,
       "koulutuksenPaattymispaivamaara": null,
       "koulutuksenTarkkaAlkamisaika": null,
       "lisatiedot": [
@@ -170,7 +170,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
       "diplomiKuvaus": {},
       "koulutuksenAlkamiskausi": "kausi_0#1",
       "koulutuksenAlkamispaivamaara": null,
-      "koulutuksenAlkamisvuosi": 2020,
+      "koulutuksenAlkamisvuosi": 2035,
       "koulutuksenPaattymispaivamaara": null,
       "koulutuksenTarkkaAlkamisaika": null,
       "lisatiedot": [
@@ -319,7 +319,7 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
       "diplomiKuvaus": {},
       "koulutuksenAlkamiskausi": "kausi_0#1",
       "koulutuksenAlkamispaivamaara": null,
-      "koulutuksenAlkamisvuosi": 2020,
+      "koulutuksenAlkamisvuosi": 2035,
       "koulutuksenPaattymispaivamaara": null,
       "koulutuksenTarkkaAlkamisaika": null,
       "lisatiedot": [
@@ -473,7 +473,7 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
       },
       "koulutuksenAlkamiskausi": "kausi_0#1",
       "koulutuksenAlkamispaivamaara": null,
-      "koulutuksenAlkamisvuosi": 2020,
+      "koulutuksenAlkamisvuosi": 2035,
       "koulutuksenPaattymispaivamaara": null,
       "koulutuksenTarkkaAlkamisaika": null,
       "lisatiedot": [

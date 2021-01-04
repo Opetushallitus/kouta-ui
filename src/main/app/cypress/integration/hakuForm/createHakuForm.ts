@@ -91,7 +91,7 @@ const fillAikatauluSection = () => {
 
     getByTestId('KausiJaVuosiFields').within(() => {
       getRadio('kausi_0#1').click({ force: true });
-      selectOption(new Date().getFullYear().toString());
+      selectOption(2035);
 
       cy.findByText('hakulomake.tiedossaTarkkaAjankohta').click();
 

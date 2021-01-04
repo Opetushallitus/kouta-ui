@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { Typography } from '#/src/components/virkailija';
 import Spacing from '#/src/components/Spacing';
 import { formatKoutaDateString } from '#/src/utils';
-import { FormFieldCheckbox } from '#/src/components/formFields';
+import { FormFieldSwitch } from '#/src/components/formFields';
 import { useFieldValue } from '#/src/hooks/form';
 import HakuajatFields from '#/src/components/HakuajatFields';
 
@@ -60,7 +60,7 @@ const HakuajatSection = ({ haku, name }) => {
       <Spacing marginBottom={2}>
         <HakuaikaInterval haku={haku} />
       </Spacing>
-      <Field name={`${name}.eriHakuaika`} component={FormFieldCheckbox}>
+      <Field name={`${name}.eriHakuaika`} component={FormFieldSwitch}>
         {t('hakukohdelomake.hakukohteellaEriHakuaika')}
       </Field>
       {eriHakuaika ? <CustomHakuaika name={name} /> : null}

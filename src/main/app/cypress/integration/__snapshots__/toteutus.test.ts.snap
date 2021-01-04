@@ -175,7 +175,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
         "henkilokohtaisenSuunnitelmanLisatiedot": {},
         "koulutuksenAlkamiskausiKoodiUri": "kausi_0#1",
         "koulutuksenAlkamispaivamaara": "2020-11-01T00:00",
-        "koulutuksenAlkamisvuosi": 2020,
+        "koulutuksenAlkamisvuosi": 2035,
         "koulutuksenPaattymispaivamaara": "2020-11-30T00:00"
       },
       "lisatiedot": [

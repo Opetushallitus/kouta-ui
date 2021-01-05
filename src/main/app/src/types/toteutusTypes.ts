@@ -11,8 +11,6 @@ export type ToteutusModel = any;
 
 type Kuvaus = TranslatedField<any>;
 
-type SelectOption = { label?: string; value: string };
-
 type MaksullisuusTyyppi = 'kylla' | 'ei' | 'lukuvuosimaksu';
 
 type Toteutusjakso = {

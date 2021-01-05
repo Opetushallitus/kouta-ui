@@ -1,4 +1,4 @@
-import dateFnsformatDate from 'date-fns/format';
+import { format as formatDate, parseISO } from 'date-fns';
 import _fp from 'lodash/fp';
 import _ from 'lodash';
 import stripTags from 'striptags';
@@ -30,8 +30,6 @@ export const isPartialDate = date => {
   }
 };
 
-export const formatDate = dateFnsformatDate;
-
 export const isNumeric = value => {
   if (_.isNumber(value)) {
     return true;
@@ -45,47 +43,30 @@ export const isNumeric = value => {
 };
 
 export const getReadableDateTime = dateData => {
-  try {
-    return formatDate(dateData, 'd.M.yyyy HH:mm');
-  } catch {
-    return '-';
-  }
+  return formatDateValue(dateData, "d.M.yyyy' 'HH:mm") ?? '-';
 };
 
-export const getKoutaDateString = dateData => {
+export const getKoutaDateString = (dateData: Date) => {
   if (isValidDate(dateData)) {
-    return formatDate(dateData, `yyyy-MM-dd'T'HH:mm`);
+    return formatDate(dateData, "yyyy-MM-dd'T'HH:mm");
   }
-
-  if (!_.isObject(dateData)) {
-    return null;
-  }
-
-  const { year, month, day, hour, minute } = dateData;
-
-  return `${year}-${_.padStart(month, 2, '0')}-${_.padStart(day, 2, '0')}T${
-    isNumeric(hour) ? _.padStart(hour, 2, '0') : '00'
-  }:${isNumeric(minute) ? _.padStart(minute, 2, '0') : '00'}`;
+  return null;
 };
 
-export const formatKoutaDateString = (dateString, format) => {
-  if (!_.isString(dateString)) {
-    return '';
-  }
-
-  const [date, time = ''] = dateString.split('T');
-  const [year, month, day] = date.split('-');
-  const [hour = '0', minute = '0'] = time.split(':');
-
-  let formattedDate = format;
-
-  formattedDate = formattedDate.replace(/DD/g, _.padStart(day, 2, '0'));
-  formattedDate = formattedDate.replace(/MM/g, _.padStart(month, 2, '0'));
-  formattedDate = formattedDate.replace(/YYYY/g, year);
-  formattedDate = formattedDate.replace(/HH/g, _.padStart(hour, 2, '0'));
-  formattedDate = formattedDate.replace(/mm/g, _.padStart(minute, 2, '0'));
-
-  return formattedDate;
+export const formatDateValue = (
+  date: Date | string | null,
+  format: string = "dd.MM.yyyy' 'HH:mm"
+) => {
+  try {
+    let parsed = date;
+    if (_.isString(date)) {
+      parsed = parseISO(date);
+    }
+    if (isValidDate(parsed)) {
+      return formatDate(parsed as Date, format);
+    }
+  } catch (e) {}
+  return null;
 };
 
 export const createChainedFunction = (...fns) => (...args) => {
@@ -113,9 +94,9 @@ export const getImageFileDimensions = imgFile => {
   return result;
 };
 
-export const getFileExtension = file => {
+export const getFileExtension = (file: File) => {
   const parts = file.name.split('.');
-  return parts.length > 1 ? _.last(parts).toLowerCase() : '';
+  return parts.length > 1 ? _.toLower(_.last(parts) as string) : '';
 };
 
 /**

@@ -2,6 +2,7 @@ import {
   getFieldName,
   getValuesForSaving,
   isDeepEmptyFormValues,
+  formatDateValue,
 } from '#/src/utils';
 
 const OBJECT_IN_ARRAY = [
@@ -142,4 +143,12 @@ test.each([
   ['perustiedot.nimi', 'perustiedot.nimi'],
 ])('getFieldName', (name, fieldName) => {
   expect(getFieldName(name)).toEqual(fieldName);
+});
+
+test.each([
+  ['2020-01-01T00:00', '01.01.2020 00:00'],
+  [null, ''],
+  ['2020-01-01', '01.01.2020 00:00'],
+])('formatDateValue', (dateString, result) => {
+  expect(formatDateValue(dateString)).toEqual(result);
 });

@@ -285,3 +285,5 @@ export enum FormMode {
   CREATE = 'create',
   EDIT = 'edit',
 }
+
+export const NDASH = '\u2013';

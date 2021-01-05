@@ -66,13 +66,12 @@ const isValidState = ({ date, time }) => {
 const formatValue = ({ date, time }) => {
   const [hour, minute] = time.split(':');
 
-  return getKoutaDateString({
-    hour,
-    minute,
-    day: date.getDate(),
-    month: date.getMonth() + 1,
-    year: date.getFullYear(),
-  });
+  const newDate = new Date(date);
+
+  newDate.setHours(isNumeric(hour) ? parseInt(hour, 10) : 0);
+  newDate.setMinutes(isNumeric(minute) ? parseInt(minute, 10) : 0);
+
+  return getKoutaDateString(newDate);
 };
 
 const getCompactTime = time => {

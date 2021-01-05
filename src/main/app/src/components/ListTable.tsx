@@ -13,7 +13,7 @@ import StatusTag from '#/src/components/StatusTag';
 import useLanguage from '#/src/hooks/useLanguage';
 import Anchor from '#/src/components/Anchor';
 import { Link } from 'react-router-dom';
-import { formatKoutaDateString } from '#/src/utils';
+import { formatDateValue } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 export const makeOnSort = ({ name, onSort }) => dir => onSort(`${name}:${dir}`);
@@ -54,8 +54,7 @@ export const makeModifiedColumn = t => ({
   title: t('yleiset.muokattuViimeksi'),
   key: 'modified',
   sortable: true,
-  render: ({ modified }) =>
-    modified ? formatKoutaDateString(modified, 'DD.MM.YYYY HH:mm') : null,
+  render: ({ modified }) => formatDateValue(modified),
 });
 
 export const makeMuokkaajaColumn = t => ({

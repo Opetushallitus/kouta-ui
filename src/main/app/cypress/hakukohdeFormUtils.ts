@@ -15,6 +15,7 @@ import createKoodi from '#/cypress/data/koodi';
 import koulutus from '#/cypress/data/koulutus';
 import toteutus from '#/cypress/data/toteutus';
 import valintaperuste from '#/cypress/data/valintaperuste';
+import { addMockFileRoutes } from './mockUtils';
 
 const toimipisteTarjoajat = [
   '1.2.246.562.10.16538823663',
@@ -77,6 +78,7 @@ export const prepareTest = ({
 
   cy.server();
 
+  addMockFileRoutes('hakukohde.mock.json');
   stubHakukohdeFormRoutes({ organisaatioOid, hakuOid });
 
   cy.route({

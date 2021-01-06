@@ -67,7 +67,8 @@
     "cypress:run": "cypress run -b chrome",
     "cypress:open": "cypress open -b chrome",
     "test:integration": "START_SERVER_AND_TEST_INSECURE=1 start-server-and-test start:integration https://localhost:3000 'npm run cypress:run -- --headless'",
-    "test:ci": "CI=true npm run test && npm run test:integration"
+    "test:ci": "CI=true npm run test && npm run test:integration",
+    "update-mocks": "node ./scripts/update-mocks.js ./cypress/mocks"
   },
   "browserslist": [
     ">0.2%",
@@ -131,6 +132,7 @@
     "eslint-plugin-cypress": "^2.11.2",
     "eslint-plugin-prettier": "^3.3.0",
     "eslint-plugin-react": "^7.21.5",
+    "glob": "^7.1.6",
     "http-proxy-middleware": "^1.0.6",
     "husky": "^4.3.6",
     "jest-styled-components": "^6.3.4",

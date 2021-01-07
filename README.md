@@ -127,9 +127,9 @@ Kouta-UI:ssa on toteutettu omat työkalut API-kutsujen mockauksen helpottamiseen
     // Lisää vastaavanlaisia objekteja
 ]
 ```
-Kyseisiä mock-tiedostoja voi käyttää Cypressissä `addMockfileRoutes`-funktiolla, jolle annetaan parametrinä mock-tiedoston nimi. Funktio käyläpi tiedoston määrittelyt ja ottaa ne käyttöön. 
+Kyseisiä mock-tiedostoja voi käyttää Cypressissä `addMockFileRoutes`-funktiolla, jolle annetaan parametrinä mock-tiedoston nimi. Funktio käy läpi tiedoston määrittelyt ja ottaa ne käyttöön. 
 
-Uusia-mock-tiedostoja voi luoda kirjoittamalla edellä esitetyn mukaisia tiedostoja, joissa jokaisella  vähintään `url`-kenttä ja kutsumalla update-mocks-skriptiä, joka päivittää mockien vastaukset tiedostoihin. Käynnistä lokaali kehitysproxy (`npm run start`) ennen mockien päivitystä, jotta mockeille tulee oikeaa dataa localhostin kautta.
+Uusia mock-määrittelyitä voi luoda kirjoittamalla edellä esitetyn mukaisia tiedostoja, joissa jokaisella  vähintään `url`-kenttä ja kutsumalla update-mocks-skriptiä, joka päivittää mockien vastaukset tiedostoihin. Käynnistä lokaali kehitysproxy (`npm run start`) ennen mockien päivitystä, jotta mockeille tulee oikeaa dataa localhostin kautta.
 
 ## Storybook
 

@@ -103,6 +103,33 @@ On hauska katsoa ja korjata cypress testia interaktiivisti Cypress TestRunnerill
 Ja sitten samassa kansiossa, mutta toisessa shellissa: 
 
     npx cypress open
+    
+### API-kutsujen mockaaminen
+
+Kouta-UI:ssa on toteutettu omat työkalut API-kutsujen mockauksen helpottamiseen. `npm run update-mocks` käy läpi hakemiston `cypress/mocks` JSON-tiedostot, kutsuu niissä määriteltyjä HTTP-pyyntöjä ja päivittää vastaukset kyseisiin tiedostoihin. Pellin alla kutsutaan nodejs:llä toteutettua `update-mocks.js`-skriptiä, jonka voi ajaa myös itse antamalla sille komentoriviparametrina polun hakemistoon, jossa päivitettävät mock-tiedostot sijatsevat. Mock-tiedostojen formaatti on seuraavanlainen:
+
+```jsonc
+[
+    {
+        "url": "https://example.com", // URL-johon pyyntö tehdään. Tämä on ainut pakollinen kenttä.
+        "method": "GET" // HTTP-pyynnön verbi. Voi jättää pois, jolloin oletus on "GET"
+        "body": {
+            "id": 12345
+        }, // Pyynnön data, jos kyse on esim. POST-pyynnöstä. Ei pakollinen.
+        response: { // Pyynnön vastaus. update-mocks-skripti päivittää nämä.
+            status: 200,
+            body: {
+                "id": 12345,
+                "info": "something"
+            }
+        }
+    }
+    // Lisää vastaavanlaisia objekteja
+]
+```
+Kyseisiä mock-tiedostoja voi käyttää Cypressissä `addMockfileRoutes`-funktiolla, jolle annetaan parametrinä mock-tiedoston nimi. Funktio käyläpi tiedoston määrittelyt ja ottaa ne käyttöön. 
+
+Uusia-mock-tiedostoja voi luoda kirjoittamalla edellä esitetyn mukaisia tiedostoja, joissa jokaisella  vähintään `url`-kenttä ja kutsumalla update-mocks-skriptiä, joka päivittää mockien vastaukset tiedostoihin. Käynnistä lokaali kehitysproxy (`npm run start`) ennen mockien päivitystä, jotta mockeille tulee oikeaa dataa localhostin kautta.
 
 ## Storybook
 

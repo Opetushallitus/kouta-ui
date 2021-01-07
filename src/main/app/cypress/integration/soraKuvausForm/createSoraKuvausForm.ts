@@ -14,7 +14,7 @@ import {
 
 import createSoraKuvaus from '#/cypress/data/soraKuvaus';
 import { stubSoraKuvausFormRoutes } from '#/cypress/soraKuvausFormUtils';
-import autoRecord from 'cypress-autorecord';
+import { addMockFileRoutes } from '#/cypress/mockUtils';
 
 const fillKoulutustyyppiSection = () => {
   getByTestId('koulutustyyppiSection').within(() => {
@@ -44,10 +44,10 @@ const fillTiedotSection = () => {
 export const createSoraKuvausForm = () => {
   const organisaatioOid = '1.1.1.1.1.1';
   const soraKuvaus = createSoraKuvaus();
-  autoRecord();
 
   beforeEach(() => {
     cy.server();
+    addMockFileRoutes('soraKuvaus.mock.json');
     stubSoraKuvausFormRoutes({ organisaatioOid });
 
     cy.route({

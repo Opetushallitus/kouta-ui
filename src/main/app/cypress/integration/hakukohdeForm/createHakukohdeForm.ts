@@ -1,4 +1,3 @@
-import autoRecord from 'cypress-autorecord';
 import {
   getRadio,
   selectOption,
@@ -156,7 +155,7 @@ const fillLiitteetSection = () => {
   });
 };
 
-export const createHakukohdeForm = function () {
+export const createHakukohdeForm = () => {
   const organisaatioOid = '1.2.246.562.10.52251087186'; // Stadin ammatti- ja aikuisopisto
   const hakuOid = '4.1.1.1.1.1';
   const hakukohdeOid = '1.2.3.4.5.6';
@@ -165,9 +164,7 @@ export const createHakukohdeForm = function () {
     '1.2.246.562.10.45854578546', // Stadin ammatti- ja aikuisopisto, Myllypuron toimipaikka
   ];
 
-  autoRecord();
-
-  it('should be able to create ammatillinen hakukohde', function () {
+  it('should be able to create ammatillinen hakukohde', () => {
     prepareTest({
       tyyppi: 'amm',
       hakuOid,

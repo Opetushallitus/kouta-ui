@@ -1,0 +1,2496 @@
+[
+  {
+    "url": "https://localhost:3000/organisaatio-service/rest/organisaatio/v4/1.2.246.562.10.52251087186?includeImage=false",
+    "response": {
+      "body": {
+        "metadata": {
+          "nimi": {},
+          "hakutoimistoEctsNimi": {},
+          "hakutoimistoEctsEmail": {},
+          "hakutoimistoEctsPuhelin": {},
+          "hakutoimistoEctsTehtavanimike": {},
+          "yhteystiedot": [
+            {
+              "kieli": "kieli_fi#1",
+              "www": "http://www.stadinammattiopisto.fi",
+              "yhteystietoOid": "14812023190550.9836378324069386",
+              "id": "3861227"
+            },
+            {
+              "kieli": "kieli_fi#1",
+              "numero": "09 310 89318",
+              "tyyppi": "puhelin",
+              "yhteystietoOid": "1.2.246.562.5.62477770688",
+              "id": "3861228"
+            },
+            {
+              "kieli": "kieli_fi#1",
+              "yhteystietoOid": "14303205263410.7259206293670477",
+              "id": "3861229",
+              "email": "hakutoimisto@edu.hel.fi"
+            },
+            {
+              "osoiteTyyppi": "posti",
+              "kieli": "kieli_fi#1",
+              "postinumeroUri": "posti_00099",
+              "yhteystietoOid": "1.2.246.562.5.20277448420",
+              "id": "3861230",
+              "postitoimipaikka": "HELSINGIN KAUPUNKI",
+              "osoite": "PL 55306"
+            },
+            {
+              "osoiteTyyppi": "kaynti",
+              "kieli": "kieli_fi#1",
+              "postinumeroUri": "posti_00550",
+              "yhteystietoOid": "1.2.246.562.5.26047810076",
+              "id": "3861231",
+              "postitoimipaikka": "HELSINKI",
+              "osoite": "Hattulantie 2, 1. krs"
+            }
+          ],
+          "hakutoimistonNimi": {
+            "kieli_fi#1": "Stadin ammatti- ja aikuisopiston hakutoimisto"
+          },
+          "luontiPvm": 1376895579333,
+          "muokkausPvm": 1376859600000,
+          "data": {
+            "KANSAINVALISET_KOULUTUSOHJELMAT": {},
+            "YLEISKUVAUS": {
+              "kieli_fi#1": "<p>Stadin ammatti- ja aikuisopisto järjestää ammatillista peruskoulutusta, ammatillista täydennyskoulutusta, oppisopimuskoulutusta ja nivelvaiheen koulutusta Helsingin kaupungin alueella 15 eri toimipaikassa. Meillä Suomen suurimmassa ammattiopistossa opiskelee noin 17 000 nuorta ja aikuista yli 50 eri ammattiin.</p> <p>Kun suoritat ammatillisen koulutuksen, saat laaja-alaiset valmiudet toimia oman alasi erilaisissa ja vaihtelevissa työtehtävissä sekä kehittää ammattitaitoasi läpi elämän. Lisäksi ammatillinen perustutkinto antaa sinulle yleisen jatko-opintokelpoisuuden ammattikorkeakouluihin ja yliopistoihin.</p> <p>Stadin ammatti- ja aikuisopistossa voit opiskella joustavasti eri oppimisratkaisuin. Opintojen suunnittelussa huomioidaan aina opiskelijan aiempi osaaminen esimerkiksi yhdistämällä oppilaitosmuotoista opiskelua ja oppisopimuskoulutusta. Lisäksi ammatilliseen perustutkintoon johtavassa koulutuksessa on mahdollista suorittaa lukio-opintoja sekä hakea ohjattuun urheiluvalmennukseen.</p> <p>Stadin ammatti- ja aikuisopiston Brygga tarjoaa nivelvaiheen koulutusta ja palveluja. Siihen kuuluvat ammatilliseen koulutukseen valmentava koulutus (VALMA), osa kaupungin perusopetuksen lisäopetuksesta (kymppiluokat), avoimet opinnot ja nuorten työpajatoiminta. Stadin osaamiskeskus puolestaan yhdistää kuntoutuksen, koulutuksen ja työllistymisen palvelut helsinkiläisille aikuisille maahanmuuttajille.</p> <p>Lisätietoa Stadin ammatti- ja aikuisopiston koulutustarjonnasta löytyy nettisivuiltamme www.stadinammattiopisto.fi</p> <p> </p>"
+            },
+            "KIELIOPINNOT": {
+              "kieli_fi#1": "<p>Kaikkiin perustutkintoihin kuuluu vähintään 2 osaamispistettä englantia (A-kieli) ja 1 osaamispistettä ruotsia. Lisäksi joissain toimipaikoissa voit valinnaisissa opinnoissa opiskella ylimääräisiä kieliä.</p>"
+            },
+            "TERVEYDENHUOLTOPALVELUT": {
+              "kieli_fi#1": "<p>Stadin ammatti- ja aikuisopistossa on sekä terveydenhoitajia että lääkäreitä opiskelijoita varten. Ensimmäisenä opiskeluvuonna terveydenhoitaja kutsuu sinut terveystarkastukseen, jossa selvitetään opiskelun tai ammatissa toimimisen kannalta tärkeät seikat. Lääkärin vastaanotolle haetaan terveydenhoitajan kautta.</p> <p>Oppilaitoksessa ei ole hammashoitolaa. Opiskelijat käyttävät oman asuinalueensa terveysaseman palveluita.</p>"
+            },
+            "TEHTAVANIMIKE": {},
+            "SAHKOPOSTIOSOITE": {},
+            "RAHOITUS": {},
+            "AIEMMIN_HANKITTU_OSAAMINEN": {
+              "kieli_fi#1": "<p>Osaamisen tunnistaminen ja tunnustaminen</p> <p>Ennalta hankittu osaaminen, kuten aiemmin suoritetut opinnot tai työkokemus, voidaan sisällyttää osaksi ammatillista tutkintoasi, mikäli osaamisesi on opetussuunnitelman mukaista. Tällöin opiskeluaikasi mahdollisesti lyhenee ja valmistut aikaisemmin.</p> <p>Osaamisen tunnistamista ja tunnustamista haetaan lomakkeella, jonka saat opettajaltasi tai opinto-ohjaajaltasi. He myös ohjaavat sen täyttämisessä.</p> <p>Opinnoista vapauttaminen</p> <p>Ruotsin kielestä voit anoa vapautusta, jos et ole opiskellut ruotsia aiemmin. Vapautusta haetaan lomakkeella, jonka saat opettajaltasi tai opinto-ohjaajaltasi. Ruotsin sijasta opiskelet jonkin muun sovitun opinnon.</p>"
+            },
+            "sosiaalinenmedia_7#1": {},
+            "sosiaalinenmedia_5#1": {
+              "kieli_fi#1": "http://www.pinterest.com/StadinAO"
+            },
+            "sosiaalinenmedia_6#1": {
+              "kieli_fi#1": "http://www.instagram.com/stadinao"
+            },
+            "OPISKELIJALIIKKUVUUS": {
+              "kieli_fi#1": "<p>Kansainvälisyys on osa Stadin ammatti- ja aikuisopiston arkea. Tarjoamme opiskelijalle mahdollisuuden lisätä kansainvälisyysosaamista opintojen aikana.  Kotikansainvälistymistä edistetään tarjoamalla kieliin ja kulttuuriin liittyviä oppimistilanteita, virtuaaliliikkuvuutta ja taitaja-toimintaa.</p> <p>Stadin ammatti- ja aikuisopistosta voi lähteä työssäoppimisjaksolle ulkomaille. Kansainväliset vaihdot täydentävät opiskelijoiden työelämävalmiuksia ammatillisen osaamisen, kielitaidon ja kulttuurien tuntemisen kautta sekä tukevat opiskelijan itsenäisyyttä, avoimuutta ja rohkeutta.</p> <p>Ulkomaanjaksoja voi suorittaa mm. Pohjoismaissa, Iso-Britanniassa, Hollannissa, Saksassa, Ranskassa, Espanjassa, Irlannissa, Virossa, Sloveniassa, Itävallassa, Venäjällä ja Kiinassa. Ulkomaanjaksolle lähdetään toisena tai kolmantena opintovuotena.</p>"
+            },
+            "VAKUUTUKSET": {
+              "kieli_fi#1": "<p>Kaikki opiskelijat on vakuutettu opiskelun aikana sattuneiden tapaturmien varalta. Tapaturma korvataan, jos se on sattunut oppitunnilla, työssäoppimisen aikana, opintokäynneillä tai koulumatkalla. Koulumatkalla vakuutus on voimassa vain, mikäli matka on tapahtunut viivytyksettä ja suorinta, tavanomaista tietä.</p> <p>Vakuutus on voimassa myös ulkomaille suuntautuvien opintomatkojen ja työssäoppimisjaksojen aikana. Oppilaitoksen vakuutukset eivät kuitenkaan ole voimassa, jos olet sairauslomalla. Pidempien sairauslomien ajaksi opinnot yleensä keskeytetään väliaikaisesti.</p>"
+            },
+            "OPISKELIJA_JARJESTOT": {
+              "kieli_fi#1": "<p>Opiskelijakuntatoiminta ja opiskelijayhdistys STAO ry</p> <p>Jokainen opiskelija kuuluu oman toimipaikkansa opiskelijakuntaan. Kustakin toimipaikasta valitaan lukuvuoden alussa opiskelijakunnan hallitus, jonka tehtävänä on tuoda opiskelijoiden ääni kuuluviin omassa toimipaikassa.</p> <p>STAO ry (Stadin ammattiin opiskelevat) on Stadin ammattiopiston opiskelijayhdistys, johon jokainen opiskelija voi liittyä. Yhdistys edistää opiskelijoiden toimintaa, osallistumista ja hyvinvointia koko oppilaitoksessa.</p>"
+            },
+            "VALINTAMENETTELY": {
+              "kieli_fi#1": "<p>Kevään yhteishaussa hakevat peruskoulunsa päättävät, ylioppilaat ja muut ilman toisen asteen ammatillista tutkintoa olevat (valintamenettelyssä noudatetaan Oph:n antamia ohjeita). Kaikki muut hakevat jatkuvassa haussa (oppilaitoksen oma valintamenettely, hakija saa valintapäätöksen kolmen viikon kuluessa hakemisesta).</p>"
+            },
+            "sosiaalinenmedia_3#1": {},
+            "sosiaalinenmedia_4#1": {
+              "kieli_fi#1": "http://www.twitter.com/stadinao"
+            },
+            "sosiaalinenmedia_1#1": {
+              "kieli_fi#1": "http://www.facebook.com/stadinammattiopisto"
+            },
+            "VASTUUHENKILOT": {},
+            "KUSTANNUKSET": {
+              "kieli_fi#1": "<p>Opintojensa aikana opiskelijat hankkivat itse esimerkiksi oppikirjoja, kansioita, muistiinpanovälineitä sekä henkilökohtaisia työvälineitä. Osassa tutkinnoista työvaatteet ja -kengät saa oppilaitoksen puolesta.</p>"
+            },
+            "OPPIMISYMPARISTO": {
+              "kieli_fi#1": "<p>Stadin ammatti- ja aikuisopiston kaikki toimipaikat sijaitsevat Helsingin kaupungin alueella. Toimipaikkojen oppimisympäristöjä uudistetaan monimuotoisiksi ja viihtyisiksi, jolloin ne tukevat opiskelijakeskeistä ja työelämälähtöistä pedagogiikkaa. Opiskelijoiden ja opettajien käytettävissä on mm. kattava, digitaalisuuden hyödyntämistä tukeva wifi.</p>"
+            },
+            "sosiaalinenmedia_2#1": {},
+            "PUHELINNUMERO": {},
+            "NIMI": {},
+            "OPISKELIJALIIKUNTA": {},
+            "VUOSIKELLO": {},
+            "OPISKELIJARUOKAILU": {
+              "kieli_fi#1": "<p>Stadin ammatti- ja aikuisopistossa on kaikissa toimipaikoissa opiskelijaravintola ja kahvila. Opiskelijoille on koulupäivinä tarjolla yksi maksuton lounasateria. Tarjolla on joka päivä myös kasvislounasvaihtoehto.</p>"
+            },
+            "VAPAA_AIKA": {},
+            "ESTEETOMYYS": {
+              "kieli_fi#1": "<p>Stadin ammatti- ja aikuisopisto on kaikille yhteinen oppilaitos, jossa jokainen pystyy ominaisuuksistaan riippumatta toimimaan yhdenvertaisesti muiden kanssa, jolloin opiskeluympäristössä ei pitäisi olla liikkumiseen, ryhmään kuulumiseen tai oppimiseen liittyviä esteitä.</p> <p><em> </em></p> <p><em>Opiskeluhuolto</em></p> <p>Opiskeluhuollon tavoitteena on edistää oppimistasi, terveyttäsi ja hyvinvointiasi opiskelun aikana. Opiskelijahuolto huolehtii myös oppilaitosyhteisön hyvinvoinnista sekä opiskeluympäristön terveellisyydestä ja turvallisuudesta. Opiskeluhuoltoa toteutetaan sekä yhteisöllisenä että yksilökohtaisena opiskeluhuoltona.</p> <p><em> </em></p> <p><em>Yhteisöllinen opiskeluhuolto</em></p> <p>Yhteisöllinen opiskeluhuolto edistää opiskelijoiden osallisuutta, oppimista, hyvinvointia ja terveyttä. Lisäksi se seuraa ja kehittää opiskeluyhteisön hyvinvointia sekä opiskeluympäristön terveellisyyttä, turvallisuutta ja esteettömyyttä. Toimipaikan hyvinvointiryhmä vastaa opiskeluhuollon suunnittelusta, kehittämisestä ja arvioinnista yhteisöllisen opiskeluhuollon osa-alueet huomioon ottaen. Ryhmää johtaa apulaisrehtori tai koulutuspäällikkö. Opetushenkilöstön lisäksi ryhmään kuuluu erityisopettaja, opinto-ohjaaja, kuraattori, psykologi, terveydenhoitaja ja opiskelijajäseniä. Ryhmään voi kuulua myös huoltajien edustaja.</p> <p><em> </em></p> <p><em>Yksilökohtainen opiskelijahuolto</em></p> <p>Yksilökohtaisella opiskelijahuollolla tarkoitetaan opiskelijan käytössä olevia palveluja, joita ovat • opiskeluterveydenhuolto • opiskeluhuollon psykologi- ja kuraattoripalvelut • yksittäistä opiskelijaa koskeva monialainen opiskeluhuolto, jota toteutetaan tapauskohtaisesti koottavassa monialaisessa asiantuntijaryhmässä. Yksilökohtaista opiskeluhuoltoa tehdään yhteistyössä opiskelijan kanssa ja hänen suostumuksellaan.</p> <p><em> </em></p> <p><em>Kun tarvitset tukea opinnoissasi</em></p> <p>Opintojesi alussa kanssasi tehdään henkilökohtainen osaamisen kehittämisen suunnitelma (HOKS). Suunnitelmaan kirjataan aiemmin hankittu ja osoitettu osaaminen, tarvittava ammattitaidon ja osaamisen hankkiminen, osaamisen osoittaminen sekä ohjaus- ja tukitoimet. Jos tarvitset erityistä tukea, suunnitelmassa sovitaan sinulle tarjottavan erityisen tuen sisällöstä ja erityisen tuen tarpeen mukaisista toimenpiteistä osaamisen hankkimisen aikana. Erityistä tukea voi saada kaikissa ammatilliseen perustutkintoon johtavissa koulutuksissa.</p>"
+            },
+            "TIETOA_ASUMISESTA": {
+              "kieli_fi#1": "<p>Stadin ammatti- ja aikuisopistolla ei ole asuntolaa. Tutkintoon johtavassa koulutuksessa oleva opiskelija voi hakea opiskelija-asuntoa esim. HOAS:lta.</p>"
+            },
+            "TYOHARJOITTELU": {
+              "kieli_fi#1": "<p>Kaikkiin perustutkintoihin kuuluu vähintään 30 osaamispistettä, n. kuusi kuukautta, työssäoppimista. Työssäoppiminen suoritetaan pääasiassa työpaikoilla ja työelämälähtöisissä oppimisympäristöissä.</p>"
+            }
+          }
+        },
+        "oid": "1.2.246.562.10.52251087186",
+        "nimi": {
+          "fi": "Stadin ammatti- ja aikuisopisto",
+          "sv": "Stadin ammatti- ja aikuisopisto",
+          "en": "Stadin ammatti- ja aikuisopisto"
+        },
+        "alkuPvm": "2013-01-01",
+        "oppilaitosKoodi": "10105",
+        "ryhmatyypit": [],
+        "kayttoryhmat": [],
+        "piilotettu": false,
+        "parentOid": "1.2.246.562.10.346830761110",
+        "postiosoite": {
+          "postinumeroUri": "posti_00099",
+          "osoiteTyyppi": "posti",
+          "yhteystietoOid": "1.2.246.562.5.69596457015",
+          "postitoimipaikka": "HELSINGIN KAUPUNKI",
+          "osoite": "PL 55308"
+        },
+        "kuvaus2": {},
+        "tyypit": [
+          "organisaatiotyyppi_02"
+        ],
+        "yhteystietoArvos": [
+          {
+            "YhteystietoArvo.arvoText": "stadiprimus@edu.hel.fi",
+            "YhteystietojenTyyppi.nimi.fi": "KOSKI-palvelun omien tietojen virheilmoituksen sähköpostiosoite",
+            "YhteystietojenTyyppi.nimi.sv": "E-postadress för felanmälan i egna uppgifter i KOSKI-tjänsten",
+            "YhteystietoElementti.tyyppi": "Email",
+            "YhteystietojenTyyppi.oid": "1.2.246.562.5.79385887983",
+            "YhteystietoElementti.oid": "1.2.246.562.5.57850489428",
+            "YhteystietoElementti.nimi": "Sähköpostiosoite",
+            "YhteystietoElementti.nimiSv": "Epostadress",
+            "YhteystietoElementti.pakollinen": "false",
+            "YhteystietojenTyyppi.nimi.en": "KOSKI-palvelun omien tietojen virheilmoituksen sähköpostiosoite",
+            "YhteystietoElementti.kaytossa": "true",
+            "YhteystietoArvo.kieli": "kieli_fi#1"
+          }
+        ],
+        "yhteystiedot": [
+          {
+            "osoiteTyyppi": "posti",
+            "kieli": "kieli_fi#1",
+            "postinumeroUri": "posti_00099",
+            "yhteystietoOid": "1.2.246.562.5.69596457015",
+            "id": "3861240",
+            "postitoimipaikka": "HELSINGIN KAUPUNKI",
+            "osoite": "PL 55308"
+          },
+          {
+            "kieli": "kieli_fi#1",
+            "yhteystietoOid": "14931031965550.42925150233306597",
+            "id": "3861238",
+            "email": "hakutoimisto@edu.hel.fi"
+          },
+          {
+            "osoiteTyyppi": "kaynti",
+            "kieli": "kieli_fi#1",
+            "postinumeroUri": "posti_00550",
+            "yhteystietoOid": "1.2.246.562.5.32847643825",
+            "id": "3861237",
+            "postitoimipaikka": "HELSINKI",
+            "osoite": "Hattulantie 2"
+          },
+          {
+            "kieli": "kieli_fi#1",
+            "numero": "09 310 8415",
+            "tyyppi": "puhelin",
+            "yhteystietoOid": "1.2.246.562.5.90059839549",
+            "id": "3861236"
+          },
+          {
+            "kieli": "kieli_fi#1",
+            "www": "http://www.stadinammattiopisto.fi",
+            "yhteystietoOid": "1.2.246.562.5.38465214716",
+            "id": "3861239"
+          }
+        ],
+        "nimet": [
+          {
+            "nimi": {
+              "fi": "Stadin ammattiopisto"
+            },
+            "alkuPvm": "2013-01-01",
+            "version": 1
+          },
+          {
+            "nimi": {
+              "fi": "Stadin ammatti- ja aikuisopisto",
+              "sv": "Stadin ammatti- ja aikuisopisto",
+              "en": "Stadin ammatti- ja aikuisopisto"
+            },
+            "alkuPvm": "2018-12-31",
+            "version": 0
+          }
+        ],
+        "vuosiluokat": [],
+        "toimipistekoodi": "10105",
+        "kotipaikkaUri": "kunta_091",
+        "kieletUris": [
+          "oppilaitoksenopetuskieli_1#1"
+        ],
+        "parentOidPath": "|1.2.246.562.10.00000000001|1.2.246.562.10.346830761110|",
+        "maaUri": "maatjavaltiot1_fin",
+        "oppilaitosTyyppiUri": "oppilaitostyyppi_21#1",
+        "muutKotipaikatUris": [],
+        "kayntiosoite": {
+          "postinumeroUri": "posti_00550",
+          "osoiteTyyppi": "kaynti",
+          "yhteystietoOid": "1.2.246.562.5.32847643825",
+          "postitoimipaikka": "HELSINKI",
+          "osoite": "Hattulantie 2"
+        },
+        "lisatiedot": [],
+        "muutOppilaitosTyyppiUris": [],
+        "version": 89,
+        "status": "AKTIIVINEN"
+      },
+      "status": 200
+    }
+  },
+  {
+    "url": "https://localhost:3000/koodisto-service/rest/json/pohjakoulutusvaatimustoinenaste/koodi?onlyValidKoodis=true&koodistoVersio=",
+    "response": {
+      "body": [
+        {
+          "koodiUri": "pohjakoulutusvaatimustoinenaste_yo",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutusvaatimustoinenaste_yo",
+          "version": 565,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutusvaatimustoinenaste",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "YO",
+          "paivitysPvm": "2018-01-23",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "1992-01-01",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Gymnasium och/eller studentexamen",
+              "kuvaus": "Gymnasium och/eller studentexamen",
+              "lyhytNimi": "ST",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Lukio ja/tai ylioppilastutkinto",
+              "kuvaus": "Lukio ja/tai ylioppilastutkinto",
+              "lyhytNimi": "YO",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "pohjakoulutusvaatimustoinenaste_pkyo",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutusvaatimustoinenaste_pkyo",
+          "version": 7,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutusvaatimustoinenaste",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "PK/YO",
+          "paivitysPvm": "2015-04-29",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2015-01-27",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Peruskoulu / Lukio",
+              "kuvaus": "Peruskoulu / Lukio",
+              "lyhytNimi": "PK/YO",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            },
+            {
+              "nimi": "Grundskola / Student",
+              "kuvaus": "Grundskola / Student",
+              "lyhytNimi": "GR/ST",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            }
+          ]
+        },
+        {
+          "koodiUri": "pohjakoulutusvaatimustoinenaste_er",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutusvaatimustoinenaste_er",
+          "version": 144,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutusvaatimustoinenaste",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "ER",
+          "paivitysPvm": "2019-02-21",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "1992-01-01",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Grundskola / Individualiserad lärokurs inom den grundläggande utbildningen",
+              "kuvaus": "Individualiserad lärokurs inom den grundläggande utbildningen",
+              "lyhytNimi": "SP",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Peruskoulu / Yksilöllistetty perusopetus",
+              "kuvaus": "Yksilöllistetty perusopetus",
+              "lyhytNimi": "ER",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "pohjakoulutusvaatimustoinenaste_pk",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutusvaatimustoinenaste_pk",
+          "version": 907,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutusvaatimustoinenaste",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "PK",
+          "paivitysPvm": "2018-01-23",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "1992-01-01",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Peruskoulu",
+              "kuvaus": "Peruskoulu",
+              "lyhytNimi": "PK",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            },
+            {
+              "nimi": "Grundskola",
+              "kuvaus": "Grundskola",
+              "lyhytNimi": "GR",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            }
+          ]
+        },
+        {
+          "koodiUri": "pohjakoulutusvaatimustoinenaste_xx",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutusvaatimustoinenaste_xx",
+          "version": 1,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutusvaatimustoinenaste",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "xx",
+          "paivitysPvm": "2015-01-27",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2014-06-01",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Ei pohjakoulutusvaatimusta",
+              "kuvaus": "Ei pohjakoulutusvaatimusta",
+              "lyhytNimi": "Ei pk-vaatimusta",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "pohjakoulutusvaatimustoinenaste_yoam",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/pohjakoulutusvaatimustoinenaste_yoam",
+          "version": 6,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "pohjakoulutusvaatimustoinenaste",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "YO/AM",
+          "paivitysPvm": "2018-01-23",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2017-02-06",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Lukio/ylioppilas / ammatillinen",
+              "kuvaus": "",
+              "lyhytNimi": "",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            }
+          ]
+        }
+      ],
+      "status": 200
+    }
+  },
+  {
+    "url": "https://localhost:3000/organisaatio-service/rest/organisaatio/v4/hierarkia/hae?oid=1.2.246.562.10.52251087186&aktiiviset=true&suunnitellut=true&lakkautetut=false",
+    "response": {
+      "body": {
+        "numHits": 16,
+        "organisaatiot": [
+          {
+            "oid": "1.2.246.562.10.346830761110",
+            "alkuPvm": 268005600000,
+            "parentOid": "1.2.246.562.10.00000000001",
+            "parentOidPath": "1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+            "ytunnus": "0201256-6",
+            "toimipistekoodi": "",
+            "match": false,
+            "nimi": {
+              "fi": "Helsingin kaupunki",
+              "sv": "Helsingfors stad"
+            },
+            "kieletUris": [
+              "oppilaitoksenopetuskieli_1#1",
+              "oppilaitoksenopetuskieli_2#1",
+              "oppilaitoksenopetuskieli_3#1"
+            ],
+            "kotipaikkaUri": "kunta_091",
+            "children": [
+              {
+                "oid": "1.2.246.562.10.52251087186",
+                "alkuPvm": 1356991200000,
+                "parentOid": "1.2.246.562.10.346830761110",
+                "parentOidPath": "1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                "oppilaitosKoodi": "10105",
+                "oppilaitostyyppi": "oppilaitostyyppi_21#1",
+                "toimipistekoodi": "10105",
+                "match": true,
+                "nimi": {
+                  "fi": "Stadin ammatti- ja aikuisopisto",
+                  "sv": "Stadin ammatti- ja aikuisopisto",
+                  "en": "Stadin ammatti- ja aikuisopisto"
+                },
+                "kieletUris": [
+                  "oppilaitoksenopetuskieli_1#1"
+                ],
+                "kotipaikkaUri": "kunta_091",
+                "children": [
+                  {
+                    "oid": "1.2.246.562.10.55355715099",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.55355715099/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010504",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Ilkantien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.56139411567",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.56139411567/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010501",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Abraham Wetterin tien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.78321186062",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.78321186062/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010509",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Savonkadun toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.2013081415065445951365",
+                    "alkuPvm": 1375304400000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.2013081415065445951365/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010514",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Pälkäneentien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.879177258610",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.879177258610/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010507",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Muotoilijankadun toimipaikka",
+                      "en": "Helsinki City College, Muotoilijankatu"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.93115250668",
+                    "alkuPvm": 1413234000000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.93115250668/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010515",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Meritalon toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.55711304158",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.55711304158/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010519",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Teollisuuskadun toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.60465978314",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.60465978314/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010503",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Holkkitien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.16538823663",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.16538823663/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010510",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Sturenkadun toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.656909794910",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.656909794910/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010508",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Prinsessantien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.20866993056",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.20866993056/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010505",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Kullervonkadun toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.20485193278",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.20485193278/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010502",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Vilppulantien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.45854578546",
+                    "alkuPvm": 1413234000000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.45854578546/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010516",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Myllypuron toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.23017513880",
+                    "alkuPvm": 1470603600000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.23017513880/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010517",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Hattulantien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  }
+                ],
+                "aliOrganisaatioMaara": 14,
+                "organisaatiotyypit": [
+                  "organisaatiotyyppi_02"
+                ],
+                "status": "AKTIIVINEN"
+              }
+            ],
+            "aliOrganisaatioMaara": 621,
+            "organisaatiotyypit": [
+              "organisaatiotyyppi_01",
+              "organisaatiotyyppi_07"
+            ],
+            "status": "AKTIIVINEN"
+          }
+        ]
+      },
+      "status": 200
+    }
+  },
+  {
+    "url": "https://localhost:3000/koodisto-service/rest/json/kausi/koodi?onlyValidKoodis=true&koodistoVersio=",
+    "response": {
+      "body": [
+        {
+          "koodiUri": "kausi_s",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/kausi_s",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "kausi",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "S",
+          "paivitysPvm": "2013-10-28",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "1995-08-01",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Höst",
+              "kuvaus": "Höst",
+              "lyhytNimi": "H",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Autumn",
+              "kuvaus": "Autumn",
+              "lyhytNimi": "A",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            },
+            {
+              "nimi": "Syksy",
+              "kuvaus": "Voi olla joko koulutuksen alkamiskausi tai hakukausi",
+              "lyhytNimi": "S",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "kausi_k",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/kausi_k",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "kausi",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "K",
+          "paivitysPvm": "2013-10-28",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "1992-01-01",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Spring",
+              "kuvaus": "Spring",
+              "lyhytNimi": "S",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "EN"
+            },
+            {
+              "nimi": "Vår",
+              "kuvaus": "Vår",
+              "lyhytNimi": "V",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Kevät",
+              "kuvaus": "Voi olla joko koulutuksen alkamiskausi tai hakukausi",
+              "lyhytNimi": "K",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        }
+      ],
+      "status": 200
+    }
+  },
+  {
+    "url": "https://localhost:3000/koodisto-service/rest/json/liitetyypitamm/koodi?onlyValidKoodis=true&koodistoVersio=",
+    "response": {
+      "body": [
+        {
+          "koodiUri": "liitetyypitamm_2",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/liitetyypitamm_2",
+          "version": 18,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "liitetyypitamm",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "2",
+          "paivitysPvm": "2015-03-27",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-05-13",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Urvalsprovets förhandsuppgift",
+              "kuvaus": "Urvalsprovets förhandsuppgift",
+              "lyhytNimi": "Urvalsprovets förhandsuppgift",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Valintakokeen ennakkotehtävä",
+              "kuvaus": "Valintakokeen ennakkotehtävä",
+              "lyhytNimi": "Valintakokeen ennakkotehtävä",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "liitetyypitamm_1",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/liitetyypitamm_1",
+          "version": 20,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "liitetyypitamm",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "1",
+          "paivitysPvm": "2016-10-21",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-05-13",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Tilläggsblankett för idrottare",
+              "kuvaus": "Tilläggsblankett för idrottare",
+              "lyhytNimi": "Tilläggsblankett för idrottare",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Urheilijan lisätietolomake",
+              "kuvaus": "Urheilijan lisätietolomake",
+              "lyhytNimi": "Urheilijan lisätietolomake",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "liitetyypitamm_4",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/liitetyypitamm_4",
+          "version": 20,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "liitetyypitamm",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "4",
+          "paivitysPvm": "2015-03-27",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-11-11",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Utlåtanden",
+              "kuvaus": "Utlåtanden",
+              "lyhytNimi": "Utlåtanden",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Lausunnot",
+              "kuvaus": "Lausunnot",
+              "lyhytNimi": "Lausunnot",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "liitetyypitamm_5",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/liitetyypitamm_5",
+          "version": 3,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "liitetyypitamm",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "5",
+          "paivitysPvm": "2017-12-14",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2017-12-14",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Tilläggsblankett",
+              "kuvaus": "",
+              "lyhytNimi": "Tilläggsblankett",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Lisälomake",
+              "kuvaus": "",
+              "lyhytNimi": "Lisälomake",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "liitetyypitamm_3",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/liitetyypitamm_3",
+          "version": 11,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "liitetyypitamm",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "3",
+          "paivitysPvm": "2017-01-31",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-10-17",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Todistukset",
+              "kuvaus": "Todistukset",
+              "lyhytNimi": "Todistukset",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            },
+            {
+              "nimi": "Betyg",
+              "kuvaus": "Betyg",
+              "lyhytNimi": "Betyg",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            }
+          ]
+        }
+      ],
+      "status": 200
+    }
+  },
+  {
+    "url": "https://localhost:3000/organisaatio-service/rest/organisaatio/v4/findbyoids",
+    "method": "POST",
+    "body": [
+      "1.2.246.562.10.52251087186"
+    ],
+    "response": {
+      "body": [
+        {
+          "metadata": {
+            "nimi": {},
+            "hakutoimistoEctsNimi": {},
+            "hakutoimistoEctsEmail": {},
+            "hakutoimistoEctsPuhelin": {},
+            "hakutoimistoEctsTehtavanimike": {},
+            "yhteystiedot": [
+              {
+                "kieli": "kieli_fi#1",
+                "www": "http://www.stadinammattiopisto.fi",
+                "yhteystietoOid": "14812023190550.9836378324069386",
+                "id": "3861227"
+              },
+              {
+                "kieli": "kieli_fi#1",
+                "numero": "09 310 89318",
+                "tyyppi": "puhelin",
+                "yhteystietoOid": "1.2.246.562.5.62477770688",
+                "id": "3861228"
+              },
+              {
+                "kieli": "kieli_fi#1",
+                "yhteystietoOid": "14303205263410.7259206293670477",
+                "id": "3861229",
+                "email": "hakutoimisto@edu.hel.fi"
+              },
+              {
+                "osoiteTyyppi": "posti",
+                "kieli": "kieli_fi#1",
+                "postinumeroUri": "posti_00099",
+                "yhteystietoOid": "1.2.246.562.5.20277448420",
+                "id": "3861230",
+                "postitoimipaikka": "HELSINGIN KAUPUNKI",
+                "osoite": "PL 55306"
+              },
+              {
+                "osoiteTyyppi": "kaynti",
+                "kieli": "kieli_fi#1",
+                "postinumeroUri": "posti_00550",
+                "yhteystietoOid": "1.2.246.562.5.26047810076",
+                "id": "3861231",
+                "postitoimipaikka": "HELSINKI",
+                "osoite": "Hattulantie 2, 1. krs"
+              }
+            ],
+            "hakutoimistonNimi": {
+              "kieli_fi#1": "Stadin ammatti- ja aikuisopiston hakutoimisto"
+            },
+            "luontiPvm": 1376895579333,
+            "muokkausPvm": 1376859600000,
+            "data": {
+              "KANSAINVALISET_KOULUTUSOHJELMAT": {},
+              "YLEISKUVAUS": {
+                "kieli_fi#1": "<p>Stadin ammatti- ja aikuisopisto järjestää ammatillista peruskoulutusta, ammatillista täydennyskoulutusta, oppisopimuskoulutusta ja nivelvaiheen koulutusta Helsingin kaupungin alueella 15 eri toimipaikassa. Meillä Suomen suurimmassa ammattiopistossa opiskelee noin 17 000 nuorta ja aikuista yli 50 eri ammattiin.</p> <p>Kun suoritat ammatillisen koulutuksen, saat laaja-alaiset valmiudet toimia oman alasi erilaisissa ja vaihtelevissa työtehtävissä sekä kehittää ammattitaitoasi läpi elämän. Lisäksi ammatillinen perustutkinto antaa sinulle yleisen jatko-opintokelpoisuuden ammattikorkeakouluihin ja yliopistoihin.</p> <p>Stadin ammatti- ja aikuisopistossa voit opiskella joustavasti eri oppimisratkaisuin. Opintojen suunnittelussa huomioidaan aina opiskelijan aiempi osaaminen esimerkiksi yhdistämällä oppilaitosmuotoista opiskelua ja oppisopimuskoulutusta. Lisäksi ammatilliseen perustutkintoon johtavassa koulutuksessa on mahdollista suorittaa lukio-opintoja sekä hakea ohjattuun urheiluvalmennukseen.</p> <p>Stadin ammatti- ja aikuisopiston Brygga tarjoaa nivelvaiheen koulutusta ja palveluja. Siihen kuuluvat ammatilliseen koulutukseen valmentava koulutus (VALMA), osa kaupungin perusopetuksen lisäopetuksesta (kymppiluokat), avoimet opinnot ja nuorten työpajatoiminta. Stadin osaamiskeskus puolestaan yhdistää kuntoutuksen, koulutuksen ja työllistymisen palvelut helsinkiläisille aikuisille maahanmuuttajille.</p> <p>Lisätietoa Stadin ammatti- ja aikuisopiston koulutustarjonnasta löytyy nettisivuiltamme www.stadinammattiopisto.fi</p> <p> </p>"
+              },
+              "KIELIOPINNOT": {
+                "kieli_fi#1": "<p>Kaikkiin perustutkintoihin kuuluu vähintään 2 osaamispistettä englantia (A-kieli) ja 1 osaamispistettä ruotsia. Lisäksi joissain toimipaikoissa voit valinnaisissa opinnoissa opiskella ylimääräisiä kieliä.</p>"
+              },
+              "TERVEYDENHUOLTOPALVELUT": {
+                "kieli_fi#1": "<p>Stadin ammatti- ja aikuisopistossa on sekä terveydenhoitajia että lääkäreitä opiskelijoita varten. Ensimmäisenä opiskeluvuonna terveydenhoitaja kutsuu sinut terveystarkastukseen, jossa selvitetään opiskelun tai ammatissa toimimisen kannalta tärkeät seikat. Lääkärin vastaanotolle haetaan terveydenhoitajan kautta.</p> <p>Oppilaitoksessa ei ole hammashoitolaa. Opiskelijat käyttävät oman asuinalueensa terveysaseman palveluita.</p>"
+              },
+              "TEHTAVANIMIKE": {},
+              "SAHKOPOSTIOSOITE": {},
+              "RAHOITUS": {},
+              "AIEMMIN_HANKITTU_OSAAMINEN": {
+                "kieli_fi#1": "<p>Osaamisen tunnistaminen ja tunnustaminen</p> <p>Ennalta hankittu osaaminen, kuten aiemmin suoritetut opinnot tai työkokemus, voidaan sisällyttää osaksi ammatillista tutkintoasi, mikäli osaamisesi on opetussuunnitelman mukaista. Tällöin opiskeluaikasi mahdollisesti lyhenee ja valmistut aikaisemmin.</p> <p>Osaamisen tunnistamista ja tunnustamista haetaan lomakkeella, jonka saat opettajaltasi tai opinto-ohjaajaltasi. He myös ohjaavat sen täyttämisessä.</p> <p>Opinnoista vapauttaminen</p> <p>Ruotsin kielestä voit anoa vapautusta, jos et ole opiskellut ruotsia aiemmin. Vapautusta haetaan lomakkeella, jonka saat opettajaltasi tai opinto-ohjaajaltasi. Ruotsin sijasta opiskelet jonkin muun sovitun opinnon.</p>"
+              },
+              "sosiaalinenmedia_7#1": {},
+              "sosiaalinenmedia_5#1": {
+                "kieli_fi#1": "http://www.pinterest.com/StadinAO"
+              },
+              "sosiaalinenmedia_6#1": {
+                "kieli_fi#1": "http://www.instagram.com/stadinao"
+              },
+              "OPISKELIJALIIKKUVUUS": {
+                "kieli_fi#1": "<p>Kansainvälisyys on osa Stadin ammatti- ja aikuisopiston arkea. Tarjoamme opiskelijalle mahdollisuuden lisätä kansainvälisyysosaamista opintojen aikana.  Kotikansainvälistymistä edistetään tarjoamalla kieliin ja kulttuuriin liittyviä oppimistilanteita, virtuaaliliikkuvuutta ja taitaja-toimintaa.</p> <p>Stadin ammatti- ja aikuisopistosta voi lähteä työssäoppimisjaksolle ulkomaille. Kansainväliset vaihdot täydentävät opiskelijoiden työelämävalmiuksia ammatillisen osaamisen, kielitaidon ja kulttuurien tuntemisen kautta sekä tukevat opiskelijan itsenäisyyttä, avoimuutta ja rohkeutta.</p> <p>Ulkomaanjaksoja voi suorittaa mm. Pohjoismaissa, Iso-Britanniassa, Hollannissa, Saksassa, Ranskassa, Espanjassa, Irlannissa, Virossa, Sloveniassa, Itävallassa, Venäjällä ja Kiinassa. Ulkomaanjaksolle lähdetään toisena tai kolmantena opintovuotena.</p>"
+              },
+              "VAKUUTUKSET": {
+                "kieli_fi#1": "<p>Kaikki opiskelijat on vakuutettu opiskelun aikana sattuneiden tapaturmien varalta. Tapaturma korvataan, jos se on sattunut oppitunnilla, työssäoppimisen aikana, opintokäynneillä tai koulumatkalla. Koulumatkalla vakuutus on voimassa vain, mikäli matka on tapahtunut viivytyksettä ja suorinta, tavanomaista tietä.</p> <p>Vakuutus on voimassa myös ulkomaille suuntautuvien opintomatkojen ja työssäoppimisjaksojen aikana. Oppilaitoksen vakuutukset eivät kuitenkaan ole voimassa, jos olet sairauslomalla. Pidempien sairauslomien ajaksi opinnot yleensä keskeytetään väliaikaisesti.</p>"
+              },
+              "OPISKELIJA_JARJESTOT": {
+                "kieli_fi#1": "<p>Opiskelijakuntatoiminta ja opiskelijayhdistys STAO ry</p> <p>Jokainen opiskelija kuuluu oman toimipaikkansa opiskelijakuntaan. Kustakin toimipaikasta valitaan lukuvuoden alussa opiskelijakunnan hallitus, jonka tehtävänä on tuoda opiskelijoiden ääni kuuluviin omassa toimipaikassa.</p> <p>STAO ry (Stadin ammattiin opiskelevat) on Stadin ammattiopiston opiskelijayhdistys, johon jokainen opiskelija voi liittyä. Yhdistys edistää opiskelijoiden toimintaa, osallistumista ja hyvinvointia koko oppilaitoksessa.</p>"
+              },
+              "VALINTAMENETTELY": {
+                "kieli_fi#1": "<p>Kevään yhteishaussa hakevat peruskoulunsa päättävät, ylioppilaat ja muut ilman toisen asteen ammatillista tutkintoa olevat (valintamenettelyssä noudatetaan Oph:n antamia ohjeita). Kaikki muut hakevat jatkuvassa haussa (oppilaitoksen oma valintamenettely, hakija saa valintapäätöksen kolmen viikon kuluessa hakemisesta).</p>"
+              },
+              "sosiaalinenmedia_3#1": {},
+              "sosiaalinenmedia_4#1": {
+                "kieli_fi#1": "http://www.twitter.com/stadinao"
+              },
+              "sosiaalinenmedia_1#1": {
+                "kieli_fi#1": "http://www.facebook.com/stadinammattiopisto"
+              },
+              "VASTUUHENKILOT": {},
+              "KUSTANNUKSET": {
+                "kieli_fi#1": "<p>Opintojensa aikana opiskelijat hankkivat itse esimerkiksi oppikirjoja, kansioita, muistiinpanovälineitä sekä henkilökohtaisia työvälineitä. Osassa tutkinnoista työvaatteet ja -kengät saa oppilaitoksen puolesta.</p>"
+              },
+              "OPPIMISYMPARISTO": {
+                "kieli_fi#1": "<p>Stadin ammatti- ja aikuisopiston kaikki toimipaikat sijaitsevat Helsingin kaupungin alueella. Toimipaikkojen oppimisympäristöjä uudistetaan monimuotoisiksi ja viihtyisiksi, jolloin ne tukevat opiskelijakeskeistä ja työelämälähtöistä pedagogiikkaa. Opiskelijoiden ja opettajien käytettävissä on mm. kattava, digitaalisuuden hyödyntämistä tukeva wifi.</p>"
+              },
+              "sosiaalinenmedia_2#1": {},
+              "PUHELINNUMERO": {},
+              "NIMI": {},
+              "OPISKELIJALIIKUNTA": {},
+              "VUOSIKELLO": {},
+              "OPISKELIJARUOKAILU": {
+                "kieli_fi#1": "<p>Stadin ammatti- ja aikuisopistossa on kaikissa toimipaikoissa opiskelijaravintola ja kahvila. Opiskelijoille on koulupäivinä tarjolla yksi maksuton lounasateria. Tarjolla on joka päivä myös kasvislounasvaihtoehto.</p>"
+              },
+              "VAPAA_AIKA": {},
+              "ESTEETOMYYS": {
+                "kieli_fi#1": "<p>Stadin ammatti- ja aikuisopisto on kaikille yhteinen oppilaitos, jossa jokainen pystyy ominaisuuksistaan riippumatta toimimaan yhdenvertaisesti muiden kanssa, jolloin opiskeluympäristössä ei pitäisi olla liikkumiseen, ryhmään kuulumiseen tai oppimiseen liittyviä esteitä.</p> <p><em> </em></p> <p><em>Opiskeluhuolto</em></p> <p>Opiskeluhuollon tavoitteena on edistää oppimistasi, terveyttäsi ja hyvinvointiasi opiskelun aikana. Opiskelijahuolto huolehtii myös oppilaitosyhteisön hyvinvoinnista sekä opiskeluympäristön terveellisyydestä ja turvallisuudesta. Opiskeluhuoltoa toteutetaan sekä yhteisöllisenä että yksilökohtaisena opiskeluhuoltona.</p> <p><em> </em></p> <p><em>Yhteisöllinen opiskeluhuolto</em></p> <p>Yhteisöllinen opiskeluhuolto edistää opiskelijoiden osallisuutta, oppimista, hyvinvointia ja terveyttä. Lisäksi se seuraa ja kehittää opiskeluyhteisön hyvinvointia sekä opiskeluympäristön terveellisyyttä, turvallisuutta ja esteettömyyttä. Toimipaikan hyvinvointiryhmä vastaa opiskeluhuollon suunnittelusta, kehittämisestä ja arvioinnista yhteisöllisen opiskeluhuollon osa-alueet huomioon ottaen. Ryhmää johtaa apulaisrehtori tai koulutuspäällikkö. Opetushenkilöstön lisäksi ryhmään kuuluu erityisopettaja, opinto-ohjaaja, kuraattori, psykologi, terveydenhoitaja ja opiskelijajäseniä. Ryhmään voi kuulua myös huoltajien edustaja.</p> <p><em> </em></p> <p><em>Yksilökohtainen opiskelijahuolto</em></p> <p>Yksilökohtaisella opiskelijahuollolla tarkoitetaan opiskelijan käytössä olevia palveluja, joita ovat • opiskeluterveydenhuolto • opiskeluhuollon psykologi- ja kuraattoripalvelut • yksittäistä opiskelijaa koskeva monialainen opiskeluhuolto, jota toteutetaan tapauskohtaisesti koottavassa monialaisessa asiantuntijaryhmässä. Yksilökohtaista opiskeluhuoltoa tehdään yhteistyössä opiskelijan kanssa ja hänen suostumuksellaan.</p> <p><em> </em></p> <p><em>Kun tarvitset tukea opinnoissasi</em></p> <p>Opintojesi alussa kanssasi tehdään henkilökohtainen osaamisen kehittämisen suunnitelma (HOKS). Suunnitelmaan kirjataan aiemmin hankittu ja osoitettu osaaminen, tarvittava ammattitaidon ja osaamisen hankkiminen, osaamisen osoittaminen sekä ohjaus- ja tukitoimet. Jos tarvitset erityistä tukea, suunnitelmassa sovitaan sinulle tarjottavan erityisen tuen sisällöstä ja erityisen tuen tarpeen mukaisista toimenpiteistä osaamisen hankkimisen aikana. Erityistä tukea voi saada kaikissa ammatilliseen perustutkintoon johtavissa koulutuksissa.</p>"
+              },
+              "TIETOA_ASUMISESTA": {
+                "kieli_fi#1": "<p>Stadin ammatti- ja aikuisopistolla ei ole asuntolaa. Tutkintoon johtavassa koulutuksessa oleva opiskelija voi hakea opiskelija-asuntoa esim. HOAS:lta.</p>"
+              },
+              "TYOHARJOITTELU": {
+                "kieli_fi#1": "<p>Kaikkiin perustutkintoihin kuuluu vähintään 30 osaamispistettä, n. kuusi kuukautta, työssäoppimista. Työssäoppiminen suoritetaan pääasiassa työpaikoilla ja työelämälähtöisissä oppimisympäristöissä.</p>"
+              }
+            }
+          },
+          "oid": "1.2.246.562.10.52251087186",
+          "nimi": {
+            "fi": "Stadin ammatti- ja aikuisopisto",
+            "sv": "Stadin ammatti- ja aikuisopisto",
+            "en": "Stadin ammatti- ja aikuisopisto"
+          },
+          "alkuPvm": "2013-01-01",
+          "oppilaitosKoodi": "10105",
+          "ryhmatyypit": [],
+          "kayttoryhmat": [],
+          "piilotettu": false,
+          "parentOid": "1.2.246.562.10.346830761110",
+          "postiosoite": {
+            "postinumeroUri": "posti_00099",
+            "osoiteTyyppi": "posti",
+            "yhteystietoOid": "1.2.246.562.5.69596457015",
+            "postitoimipaikka": "HELSINGIN KAUPUNKI",
+            "osoite": "PL 55308"
+          },
+          "kuvaus2": {},
+          "tyypit": [
+            "organisaatiotyyppi_02"
+          ],
+          "yhteystietoArvos": [
+            {
+              "YhteystietoArvo.arvoText": "stadiprimus@edu.hel.fi",
+              "YhteystietojenTyyppi.nimi.fi": "KOSKI-palvelun omien tietojen virheilmoituksen sähköpostiosoite",
+              "YhteystietojenTyyppi.nimi.sv": "E-postadress för felanmälan i egna uppgifter i KOSKI-tjänsten",
+              "YhteystietoElementti.tyyppi": "Email",
+              "YhteystietojenTyyppi.oid": "1.2.246.562.5.79385887983",
+              "YhteystietoElementti.oid": "1.2.246.562.5.57850489428",
+              "YhteystietoElementti.nimi": "Sähköpostiosoite",
+              "YhteystietoElementti.nimiSv": "Epostadress",
+              "YhteystietoElementti.pakollinen": "false",
+              "YhteystietojenTyyppi.nimi.en": "KOSKI-palvelun omien tietojen virheilmoituksen sähköpostiosoite",
+              "YhteystietoElementti.kaytossa": "true",
+              "YhteystietoArvo.kieli": "kieli_fi#1"
+            }
+          ],
+          "yhteystiedot": [
+            {
+              "osoiteTyyppi": "posti",
+              "kieli": "kieli_fi#1",
+              "postinumeroUri": "posti_00099",
+              "yhteystietoOid": "1.2.246.562.5.69596457015",
+              "id": "3861240",
+              "postitoimipaikka": "HELSINGIN KAUPUNKI",
+              "osoite": "PL 55308"
+            },
+            {
+              "kieli": "kieli_fi#1",
+              "yhteystietoOid": "14931031965550.42925150233306597",
+              "id": "3861238",
+              "email": "hakutoimisto@edu.hel.fi"
+            },
+            {
+              "osoiteTyyppi": "kaynti",
+              "kieli": "kieli_fi#1",
+              "postinumeroUri": "posti_00550",
+              "yhteystietoOid": "1.2.246.562.5.32847643825",
+              "id": "3861237",
+              "postitoimipaikka": "HELSINKI",
+              "osoite": "Hattulantie 2"
+            },
+            {
+              "kieli": "kieli_fi#1",
+              "numero": "09 310 8415",
+              "tyyppi": "puhelin",
+              "yhteystietoOid": "1.2.246.562.5.90059839549",
+              "id": "3861236"
+            },
+            {
+              "kieli": "kieli_fi#1",
+              "www": "http://www.stadinammattiopisto.fi",
+              "yhteystietoOid": "1.2.246.562.5.38465214716",
+              "id": "3861239"
+            }
+          ],
+          "nimet": [
+            {
+              "nimi": {
+                "fi": "Stadin ammattiopisto"
+              },
+              "alkuPvm": "2013-01-01",
+              "version": 1
+            },
+            {
+              "nimi": {
+                "fi": "Stadin ammatti- ja aikuisopisto",
+                "sv": "Stadin ammatti- ja aikuisopisto",
+                "en": "Stadin ammatti- ja aikuisopisto"
+              },
+              "alkuPvm": "2018-12-31",
+              "version": 0
+            }
+          ],
+          "vuosiluokat": [],
+          "toimipistekoodi": "10105",
+          "kotipaikkaUri": "kunta_091",
+          "kieletUris": [
+            "oppilaitoksenopetuskieli_1#1"
+          ],
+          "parentOidPath": "|1.2.246.562.10.00000000001|1.2.246.562.10.346830761110|",
+          "maaUri": "maatjavaltiot1_fin",
+          "oppilaitosTyyppiUri": "oppilaitostyyppi_21#1",
+          "muutKotipaikatUris": [],
+          "kayntiosoite": {
+            "postinumeroUri": "posti_00550",
+            "osoiteTyyppi": "kaynti",
+            "yhteystietoOid": "1.2.246.562.5.32847643825",
+            "postitoimipaikka": "HELSINKI",
+            "osoite": "Hattulantie 2"
+          },
+          "lisatiedot": [],
+          "muutOppilaitosTyyppiUris": [],
+          "version": 89,
+          "status": "AKTIIVINEN"
+        }
+      ],
+      "status": 200
+    }
+  },
+  {
+    "url": "https://localhost:3000/koodisto-service/rest/json/valintakokeentyyppi/koodi?onlyValidKoodis=true&koodistoVersio=",
+    "response": {
+      "body": [
+        {
+          "koodiUri": "valintakokeentyyppi_5",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/valintakokeentyyppi_5",
+          "version": 18,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "valintakokeentyyppi",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "5",
+          "paivitysPvm": "2017-12-05",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-10-28",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Tilläggspoäng",
+              "kuvaus": "Tilläggspoäng",
+              "lyhytNimi": "Tilläggspoäng",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Lisäpiste",
+              "kuvaus": "Lisäpiste",
+              "lyhytNimi": "Lisäpiste",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "valintakokeentyyppi_7",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/valintakokeentyyppi_7",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "valintakokeentyyppi",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "7",
+          "paivitysPvm": "2019-02-20",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2019-02-20",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Kielikoe",
+              "kuvaus": null,
+              "lyhytNimi": null,
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "valintakokeentyyppi_6",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/valintakokeentyyppi_6",
+          "version": 10,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "valintakokeentyyppi",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "6",
+          "paivitysPvm": "2015-03-27",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-10-28",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Haastattelu",
+              "kuvaus": "Haastattelu",
+              "lyhytNimi": "Haastattelu",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            },
+            {
+              "nimi": "Intervju",
+              "kuvaus": "Intervju",
+              "lyhytNimi": "Intervju",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            }
+          ]
+        },
+        {
+          "koodiUri": "valintakokeentyyppi_1",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/valintakokeentyyppi_1",
+          "version": 22,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "valintakokeentyyppi",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "1",
+          "paivitysPvm": "2017-12-05",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-01-02",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Pääsy- ja soveltuvuuskoe",
+              "kuvaus": "Pääsy- ja soveltuvuuskoe",
+              "lyhytNimi": "Pääsy- ja soveltuvuuskoe",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            },
+            {
+              "nimi": "Inträdes- eller lämplighetsprov",
+              "kuvaus": "Inträdes- eller lämplighetsprov",
+              "lyhytNimi": "Inträdes- eller lämplighetsprov",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            }
+          ]
+        },
+        {
+          "koodiUri": "valintakokeentyyppi_8",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/valintakokeentyyppi_8",
+          "version": 0,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "valintakokeentyyppi",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "8",
+          "paivitysPvm": "2020-03-25",
+          "paivittajaOid": "1.2.246.562.24.77925329174",
+          "voimassaAlkuPvm": "2020-03-25",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Valintakoe",
+              "kuvaus": "käyetetään Kouta valintakoetyyppinä",
+              "lyhytNimi": "valintakoe",
+              "kayttoohje": null,
+              "kasite": null,
+              "sisaltaaMerkityksen": null,
+              "eiSisallaMerkitysta": null,
+              "huomioitavaKoodi": null,
+              "sisaltaaKoodiston": null,
+              "kieli": "FI"
+            }
+          ]
+        },
+        {
+          "koodiUri": "valintakokeentyyppi_2",
+          "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/valintakokeentyyppi_2",
+          "version": 20,
+          "versio": 1,
+          "koodisto": {
+            "koodistoUri": "valintakokeentyyppi",
+            "organisaatioOid": "1.2.246.562.10.00000000001",
+            "koodistoVersios": [
+              1
+            ]
+          },
+          "koodiArvo": "2",
+          "paivitysPvm": "2017-12-05",
+          "paivittajaOid": null,
+          "voimassaAlkuPvm": "2013-11-20",
+          "voimassaLoppuPvm": null,
+          "tila": "LUONNOS",
+          "metadata": [
+            {
+              "nimi": "Tilläggsprestation",
+              "kuvaus": "Tilläggsprestation",
+              "lyhytNimi": "Tilläggsprestation",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "SV"
+            },
+            {
+              "nimi": "Lisänäyttö",
+              "kuvaus": "Lisänäyttö",
+              "lyhytNimi": "Lisänäyttö",
+              "kayttoohje": "",
+              "kasite": "",
+              "sisaltaaMerkityksen": "",
+              "eiSisallaMerkitysta": "",
+              "huomioitavaKoodi": "",
+              "sisaltaaKoodiston": "",
+              "kieli": "FI"
+            }
+          ]
+        }
+      ],
+      "status": 200
+    }
+  },
+  {
+    "url": "https://localhost:3000/koodisto-service/rest/codeelement/posti_0/2",
+    "response": {
+      "body": "error.codeelement.not.found",
+      "status": 500
+    }
+  },
+  {
+    "url": "https://localhost:3000/organisaatio-service/rest/organisaatio/v4/1.2.246.562.10.52251087186?includeImage=false",
+    "response": {
+      "body": {
+        "metadata": {
+          "nimi": {},
+          "hakutoimistoEctsNimi": {},
+          "hakutoimistoEctsEmail": {},
+          "hakutoimistoEctsPuhelin": {},
+          "hakutoimistoEctsTehtavanimike": {},
+          "yhteystiedot": [
+            {
+              "kieli": "kieli_fi#1",
+              "www": "http://www.stadinammattiopisto.fi",
+              "yhteystietoOid": "14812023190550.9836378324069386",
+              "id": "3861227"
+            },
+            {
+              "kieli": "kieli_fi#1",
+              "numero": "09 310 89318",
+              "tyyppi": "puhelin",
+              "yhteystietoOid": "1.2.246.562.5.62477770688",
+              "id": "3861228"
+            },
+            {
+              "kieli": "kieli_fi#1",
+              "yhteystietoOid": "14303205263410.7259206293670477",
+              "id": "3861229",
+              "email": "hakutoimisto@edu.hel.fi"
+            },
+            {
+              "osoiteTyyppi": "posti",
+              "kieli": "kieli_fi#1",
+              "postinumeroUri": "posti_00099",
+              "yhteystietoOid": "1.2.246.562.5.20277448420",
+              "id": "3861230",
+              "postitoimipaikka": "HELSINGIN KAUPUNKI",
+              "osoite": "PL 55306"
+            },
+            {
+              "osoiteTyyppi": "kaynti",
+              "kieli": "kieli_fi#1",
+              "postinumeroUri": "posti_00550",
+              "yhteystietoOid": "1.2.246.562.5.26047810076",
+              "id": "3861231",
+              "postitoimipaikka": "HELSINKI",
+              "osoite": "Hattulantie 2, 1. krs"
+            }
+          ],
+          "hakutoimistonNimi": {
+            "kieli_fi#1": "Stadin ammatti- ja aikuisopiston hakutoimisto"
+          },
+          "luontiPvm": 1376895579333,
+          "muokkausPvm": 1376859600000,
+          "data": {
+            "KANSAINVALISET_KOULUTUSOHJELMAT": {},
+            "YLEISKUVAUS": {
+              "kieli_fi#1": "<p>Stadin ammatti- ja aikuisopisto järjestää ammatillista peruskoulutusta, ammatillista täydennyskoulutusta, oppisopimuskoulutusta ja nivelvaiheen koulutusta Helsingin kaupungin alueella 15 eri toimipaikassa. Meillä Suomen suurimmassa ammattiopistossa opiskelee noin 17 000 nuorta ja aikuista yli 50 eri ammattiin.</p> <p>Kun suoritat ammatillisen koulutuksen, saat laaja-alaiset valmiudet toimia oman alasi erilaisissa ja vaihtelevissa työtehtävissä sekä kehittää ammattitaitoasi läpi elämän. Lisäksi ammatillinen perustutkinto antaa sinulle yleisen jatko-opintokelpoisuuden ammattikorkeakouluihin ja yliopistoihin.</p> <p>Stadin ammatti- ja aikuisopistossa voit opiskella joustavasti eri oppimisratkaisuin. Opintojen suunnittelussa huomioidaan aina opiskelijan aiempi osaaminen esimerkiksi yhdistämällä oppilaitosmuotoista opiskelua ja oppisopimuskoulutusta. Lisäksi ammatilliseen perustutkintoon johtavassa koulutuksessa on mahdollista suorittaa lukio-opintoja sekä hakea ohjattuun urheiluvalmennukseen.</p> <p>Stadin ammatti- ja aikuisopiston Brygga tarjoaa nivelvaiheen koulutusta ja palveluja. Siihen kuuluvat ammatilliseen koulutukseen valmentava koulutus (VALMA), osa kaupungin perusopetuksen lisäopetuksesta (kymppiluokat), avoimet opinnot ja nuorten työpajatoiminta. Stadin osaamiskeskus puolestaan yhdistää kuntoutuksen, koulutuksen ja työllistymisen palvelut helsinkiläisille aikuisille maahanmuuttajille.</p> <p>Lisätietoa Stadin ammatti- ja aikuisopiston koulutustarjonnasta löytyy nettisivuiltamme www.stadinammattiopisto.fi</p> <p> </p>"
+            },
+            "KIELIOPINNOT": {
+              "kieli_fi#1": "<p>Kaikkiin perustutkintoihin kuuluu vähintään 2 osaamispistettä englantia (A-kieli) ja 1 osaamispistettä ruotsia. Lisäksi joissain toimipaikoissa voit valinnaisissa opinnoissa opiskella ylimääräisiä kieliä.</p>"
+            },
+            "TERVEYDENHUOLTOPALVELUT": {
+              "kieli_fi#1": "<p>Stadin ammatti- ja aikuisopistossa on sekä terveydenhoitajia että lääkäreitä opiskelijoita varten. Ensimmäisenä opiskeluvuonna terveydenhoitaja kutsuu sinut terveystarkastukseen, jossa selvitetään opiskelun tai ammatissa toimimisen kannalta tärkeät seikat. Lääkärin vastaanotolle haetaan terveydenhoitajan kautta.</p> <p>Oppilaitoksessa ei ole hammashoitolaa. Opiskelijat käyttävät oman asuinalueensa terveysaseman palveluita.</p>"
+            },
+            "TEHTAVANIMIKE": {},
+            "SAHKOPOSTIOSOITE": {},
+            "RAHOITUS": {},
+            "AIEMMIN_HANKITTU_OSAAMINEN": {
+              "kieli_fi#1": "<p>Osaamisen tunnistaminen ja tunnustaminen</p> <p>Ennalta hankittu osaaminen, kuten aiemmin suoritetut opinnot tai työkokemus, voidaan sisällyttää osaksi ammatillista tutkintoasi, mikäli osaamisesi on opetussuunnitelman mukaista. Tällöin opiskeluaikasi mahdollisesti lyhenee ja valmistut aikaisemmin.</p> <p>Osaamisen tunnistamista ja tunnustamista haetaan lomakkeella, jonka saat opettajaltasi tai opinto-ohjaajaltasi. He myös ohjaavat sen täyttämisessä.</p> <p>Opinnoista vapauttaminen</p> <p>Ruotsin kielestä voit anoa vapautusta, jos et ole opiskellut ruotsia aiemmin. Vapautusta haetaan lomakkeella, jonka saat opettajaltasi tai opinto-ohjaajaltasi. Ruotsin sijasta opiskelet jonkin muun sovitun opinnon.</p>"
+            },
+            "sosiaalinenmedia_7#1": {},
+            "sosiaalinenmedia_5#1": {
+              "kieli_fi#1": "http://www.pinterest.com/StadinAO"
+            },
+            "sosiaalinenmedia_6#1": {
+              "kieli_fi#1": "http://www.instagram.com/stadinao"
+            },
+            "OPISKELIJALIIKKUVUUS": {
+              "kieli_fi#1": "<p>Kansainvälisyys on osa Stadin ammatti- ja aikuisopiston arkea. Tarjoamme opiskelijalle mahdollisuuden lisätä kansainvälisyysosaamista opintojen aikana.  Kotikansainvälistymistä edistetään tarjoamalla kieliin ja kulttuuriin liittyviä oppimistilanteita, virtuaaliliikkuvuutta ja taitaja-toimintaa.</p> <p>Stadin ammatti- ja aikuisopistosta voi lähteä työssäoppimisjaksolle ulkomaille. Kansainväliset vaihdot täydentävät opiskelijoiden työelämävalmiuksia ammatillisen osaamisen, kielitaidon ja kulttuurien tuntemisen kautta sekä tukevat opiskelijan itsenäisyyttä, avoimuutta ja rohkeutta.</p> <p>Ulkomaanjaksoja voi suorittaa mm. Pohjoismaissa, Iso-Britanniassa, Hollannissa, Saksassa, Ranskassa, Espanjassa, Irlannissa, Virossa, Sloveniassa, Itävallassa, Venäjällä ja Kiinassa. Ulkomaanjaksolle lähdetään toisena tai kolmantena opintovuotena.</p>"
+            },
+            "VAKUUTUKSET": {
+              "kieli_fi#1": "<p>Kaikki opiskelijat on vakuutettu opiskelun aikana sattuneiden tapaturmien varalta. Tapaturma korvataan, jos se on sattunut oppitunnilla, työssäoppimisen aikana, opintokäynneillä tai koulumatkalla. Koulumatkalla vakuutus on voimassa vain, mikäli matka on tapahtunut viivytyksettä ja suorinta, tavanomaista tietä.</p> <p>Vakuutus on voimassa myös ulkomaille suuntautuvien opintomatkojen ja työssäoppimisjaksojen aikana. Oppilaitoksen vakuutukset eivät kuitenkaan ole voimassa, jos olet sairauslomalla. Pidempien sairauslomien ajaksi opinnot yleensä keskeytetään väliaikaisesti.</p>"
+            },
+            "OPISKELIJA_JARJESTOT": {
+              "kieli_fi#1": "<p>Opiskelijakuntatoiminta ja opiskelijayhdistys STAO ry</p> <p>Jokainen opiskelija kuuluu oman toimipaikkansa opiskelijakuntaan. Kustakin toimipaikasta valitaan lukuvuoden alussa opiskelijakunnan hallitus, jonka tehtävänä on tuoda opiskelijoiden ääni kuuluviin omassa toimipaikassa.</p> <p>STAO ry (Stadin ammattiin opiskelevat) on Stadin ammattiopiston opiskelijayhdistys, johon jokainen opiskelija voi liittyä. Yhdistys edistää opiskelijoiden toimintaa, osallistumista ja hyvinvointia koko oppilaitoksessa.</p>"
+            },
+            "VALINTAMENETTELY": {
+              "kieli_fi#1": "<p>Kevään yhteishaussa hakevat peruskoulunsa päättävät, ylioppilaat ja muut ilman toisen asteen ammatillista tutkintoa olevat (valintamenettelyssä noudatetaan Oph:n antamia ohjeita). Kaikki muut hakevat jatkuvassa haussa (oppilaitoksen oma valintamenettely, hakija saa valintapäätöksen kolmen viikon kuluessa hakemisesta).</p>"
+            },
+            "sosiaalinenmedia_3#1": {},
+            "sosiaalinenmedia_4#1": {
+              "kieli_fi#1": "http://www.twitter.com/stadinao"
+            },
+            "sosiaalinenmedia_1#1": {
+              "kieli_fi#1": "http://www.facebook.com/stadinammattiopisto"
+            },
+            "VASTUUHENKILOT": {},
+            "KUSTANNUKSET": {
+              "kieli_fi#1": "<p>Opintojensa aikana opiskelijat hankkivat itse esimerkiksi oppikirjoja, kansioita, muistiinpanovälineitä sekä henkilökohtaisia työvälineitä. Osassa tutkinnoista työvaatteet ja -kengät saa oppilaitoksen puolesta.</p>"
+            },
+            "OPPIMISYMPARISTO": {
+              "kieli_fi#1": "<p>Stadin ammatti- ja aikuisopiston kaikki toimipaikat sijaitsevat Helsingin kaupungin alueella. Toimipaikkojen oppimisympäristöjä uudistetaan monimuotoisiksi ja viihtyisiksi, jolloin ne tukevat opiskelijakeskeistä ja työelämälähtöistä pedagogiikkaa. Opiskelijoiden ja opettajien käytettävissä on mm. kattava, digitaalisuuden hyödyntämistä tukeva wifi.</p>"
+            },
+            "sosiaalinenmedia_2#1": {},
+            "PUHELINNUMERO": {},
+            "NIMI": {},
+            "OPISKELIJALIIKUNTA": {},
+            "VUOSIKELLO": {},
+            "OPISKELIJARUOKAILU": {
+              "kieli_fi#1": "<p>Stadin ammatti- ja aikuisopistossa on kaikissa toimipaikoissa opiskelijaravintola ja kahvila. Opiskelijoille on koulupäivinä tarjolla yksi maksuton lounasateria. Tarjolla on joka päivä myös kasvislounasvaihtoehto.</p>"
+            },
+            "VAPAA_AIKA": {},
+            "ESTEETOMYYS": {
+              "kieli_fi#1": "<p>Stadin ammatti- ja aikuisopisto on kaikille yhteinen oppilaitos, jossa jokainen pystyy ominaisuuksistaan riippumatta toimimaan yhdenvertaisesti muiden kanssa, jolloin opiskeluympäristössä ei pitäisi olla liikkumiseen, ryhmään kuulumiseen tai oppimiseen liittyviä esteitä.</p> <p><em> </em></p> <p><em>Opiskeluhuolto</em></p> <p>Opiskeluhuollon tavoitteena on edistää oppimistasi, terveyttäsi ja hyvinvointiasi opiskelun aikana. Opiskelijahuolto huolehtii myös oppilaitosyhteisön hyvinvoinnista sekä opiskeluympäristön terveellisyydestä ja turvallisuudesta. Opiskeluhuoltoa toteutetaan sekä yhteisöllisenä että yksilökohtaisena opiskeluhuoltona.</p> <p><em> </em></p> <p><em>Yhteisöllinen opiskeluhuolto</em></p> <p>Yhteisöllinen opiskeluhuolto edistää opiskelijoiden osallisuutta, oppimista, hyvinvointia ja terveyttä. Lisäksi se seuraa ja kehittää opiskeluyhteisön hyvinvointia sekä opiskeluympäristön terveellisyyttä, turvallisuutta ja esteettömyyttä. Toimipaikan hyvinvointiryhmä vastaa opiskeluhuollon suunnittelusta, kehittämisestä ja arvioinnista yhteisöllisen opiskeluhuollon osa-alueet huomioon ottaen. Ryhmää johtaa apulaisrehtori tai koulutuspäällikkö. Opetushenkilöstön lisäksi ryhmään kuuluu erityisopettaja, opinto-ohjaaja, kuraattori, psykologi, terveydenhoitaja ja opiskelijajäseniä. Ryhmään voi kuulua myös huoltajien edustaja.</p> <p><em> </em></p> <p><em>Yksilökohtainen opiskelijahuolto</em></p> <p>Yksilökohtaisella opiskelijahuollolla tarkoitetaan opiskelijan käytössä olevia palveluja, joita ovat • opiskeluterveydenhuolto • opiskeluhuollon psykologi- ja kuraattoripalvelut • yksittäistä opiskelijaa koskeva monialainen opiskeluhuolto, jota toteutetaan tapauskohtaisesti koottavassa monialaisessa asiantuntijaryhmässä. Yksilökohtaista opiskeluhuoltoa tehdään yhteistyössä opiskelijan kanssa ja hänen suostumuksellaan.</p> <p><em> </em></p> <p><em>Kun tarvitset tukea opinnoissasi</em></p> <p>Opintojesi alussa kanssasi tehdään henkilökohtainen osaamisen kehittämisen suunnitelma (HOKS). Suunnitelmaan kirjataan aiemmin hankittu ja osoitettu osaaminen, tarvittava ammattitaidon ja osaamisen hankkiminen, osaamisen osoittaminen sekä ohjaus- ja tukitoimet. Jos tarvitset erityistä tukea, suunnitelmassa sovitaan sinulle tarjottavan erityisen tuen sisällöstä ja erityisen tuen tarpeen mukaisista toimenpiteistä osaamisen hankkimisen aikana. Erityistä tukea voi saada kaikissa ammatilliseen perustutkintoon johtavissa koulutuksissa.</p>"
+            },
+            "TIETOA_ASUMISESTA": {
+              "kieli_fi#1": "<p>Stadin ammatti- ja aikuisopistolla ei ole asuntolaa. Tutkintoon johtavassa koulutuksessa oleva opiskelija voi hakea opiskelija-asuntoa esim. HOAS:lta.</p>"
+            },
+            "TYOHARJOITTELU": {
+              "kieli_fi#1": "<p>Kaikkiin perustutkintoihin kuuluu vähintään 30 osaamispistettä, n. kuusi kuukautta, työssäoppimista. Työssäoppiminen suoritetaan pääasiassa työpaikoilla ja työelämälähtöisissä oppimisympäristöissä.</p>"
+            }
+          }
+        },
+        "oid": "1.2.246.562.10.52251087186",
+        "nimi": {
+          "fi": "Stadin ammatti- ja aikuisopisto",
+          "sv": "Stadin ammatti- ja aikuisopisto",
+          "en": "Stadin ammatti- ja aikuisopisto"
+        },
+        "alkuPvm": "2013-01-01",
+        "oppilaitosKoodi": "10105",
+        "ryhmatyypit": [],
+        "kayttoryhmat": [],
+        "piilotettu": false,
+        "parentOid": "1.2.246.562.10.346830761110",
+        "postiosoite": {
+          "postinumeroUri": "posti_00099",
+          "osoiteTyyppi": "posti",
+          "yhteystietoOid": "1.2.246.562.5.69596457015",
+          "postitoimipaikka": "HELSINGIN KAUPUNKI",
+          "osoite": "PL 55308"
+        },
+        "kuvaus2": {},
+        "tyypit": [
+          "organisaatiotyyppi_02"
+        ],
+        "yhteystietoArvos": [
+          {
+            "YhteystietoArvo.arvoText": "stadiprimus@edu.hel.fi",
+            "YhteystietojenTyyppi.nimi.fi": "KOSKI-palvelun omien tietojen virheilmoituksen sähköpostiosoite",
+            "YhteystietojenTyyppi.nimi.sv": "E-postadress för felanmälan i egna uppgifter i KOSKI-tjänsten",
+            "YhteystietoElementti.tyyppi": "Email",
+            "YhteystietojenTyyppi.oid": "1.2.246.562.5.79385887983",
+            "YhteystietoElementti.oid": "1.2.246.562.5.57850489428",
+            "YhteystietoElementti.nimi": "Sähköpostiosoite",
+            "YhteystietoElementti.nimiSv": "Epostadress",
+            "YhteystietoElementti.pakollinen": "false",
+            "YhteystietojenTyyppi.nimi.en": "KOSKI-palvelun omien tietojen virheilmoituksen sähköpostiosoite",
+            "YhteystietoElementti.kaytossa": "true",
+            "YhteystietoArvo.kieli": "kieli_fi#1"
+          }
+        ],
+        "yhteystiedot": [
+          {
+            "osoiteTyyppi": "posti",
+            "kieli": "kieli_fi#1",
+            "postinumeroUri": "posti_00099",
+            "yhteystietoOid": "1.2.246.562.5.69596457015",
+            "id": "3861240",
+            "postitoimipaikka": "HELSINGIN KAUPUNKI",
+            "osoite": "PL 55308"
+          },
+          {
+            "kieli": "kieli_fi#1",
+            "yhteystietoOid": "14931031965550.42925150233306597",
+            "id": "3861238",
+            "email": "hakutoimisto@edu.hel.fi"
+          },
+          {
+            "osoiteTyyppi": "kaynti",
+            "kieli": "kieli_fi#1",
+            "postinumeroUri": "posti_00550",
+            "yhteystietoOid": "1.2.246.562.5.32847643825",
+            "id": "3861237",
+            "postitoimipaikka": "HELSINKI",
+            "osoite": "Hattulantie 2"
+          },
+          {
+            "kieli": "kieli_fi#1",
+            "numero": "09 310 8415",
+            "tyyppi": "puhelin",
+            "yhteystietoOid": "1.2.246.562.5.90059839549",
+            "id": "3861236"
+          },
+          {
+            "kieli": "kieli_fi#1",
+            "www": "http://www.stadinammattiopisto.fi",
+            "yhteystietoOid": "1.2.246.562.5.38465214716",
+            "id": "3861239"
+          }
+        ],
+        "nimet": [
+          {
+            "nimi": {
+              "fi": "Stadin ammattiopisto"
+            },
+            "alkuPvm": "2013-01-01",
+            "version": 1
+          },
+          {
+            "nimi": {
+              "fi": "Stadin ammatti- ja aikuisopisto",
+              "sv": "Stadin ammatti- ja aikuisopisto",
+              "en": "Stadin ammatti- ja aikuisopisto"
+            },
+            "alkuPvm": "2018-12-31",
+            "version": 0
+          }
+        ],
+        "vuosiluokat": [],
+        "toimipistekoodi": "10105",
+        "kotipaikkaUri": "kunta_091",
+        "kieletUris": [
+          "oppilaitoksenopetuskieli_1#1"
+        ],
+        "parentOidPath": "|1.2.246.562.10.00000000001|1.2.246.562.10.346830761110|",
+        "maaUri": "maatjavaltiot1_fin",
+        "oppilaitosTyyppiUri": "oppilaitostyyppi_21#1",
+        "muutKotipaikatUris": [],
+        "kayntiosoite": {
+          "postinumeroUri": "posti_00550",
+          "osoiteTyyppi": "kaynti",
+          "yhteystietoOid": "1.2.246.562.5.32847643825",
+          "postitoimipaikka": "HELSINKI",
+          "osoite": "Hattulantie 2"
+        },
+        "lisatiedot": [],
+        "muutOppilaitosTyyppiUris": [],
+        "version": 89,
+        "status": "AKTIIVINEN"
+      },
+      "status": 200
+    }
+  },
+  {
+    "url": "https://localhost:3000/organisaatio-service/rest/organisaatio/v4/hierarkia/hae?oid=1.2.246.562.10.52251087186&aktiiviset=true&suunnitellut=true&lakkautetut=false",
+    "response": {
+      "body": {
+        "numHits": 16,
+        "organisaatiot": [
+          {
+            "oid": "1.2.246.562.10.346830761110",
+            "alkuPvm": 268005600000,
+            "parentOid": "1.2.246.562.10.00000000001",
+            "parentOidPath": "1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+            "ytunnus": "0201256-6",
+            "toimipistekoodi": "",
+            "match": false,
+            "nimi": {
+              "fi": "Helsingin kaupunki",
+              "sv": "Helsingfors stad"
+            },
+            "kieletUris": [
+              "oppilaitoksenopetuskieli_1#1",
+              "oppilaitoksenopetuskieli_2#1",
+              "oppilaitoksenopetuskieli_3#1"
+            ],
+            "kotipaikkaUri": "kunta_091",
+            "children": [
+              {
+                "oid": "1.2.246.562.10.52251087186",
+                "alkuPvm": 1356991200000,
+                "parentOid": "1.2.246.562.10.346830761110",
+                "parentOidPath": "1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                "oppilaitosKoodi": "10105",
+                "oppilaitostyyppi": "oppilaitostyyppi_21#1",
+                "toimipistekoodi": "10105",
+                "match": true,
+                "nimi": {
+                  "fi": "Stadin ammatti- ja aikuisopisto",
+                  "sv": "Stadin ammatti- ja aikuisopisto",
+                  "en": "Stadin ammatti- ja aikuisopisto"
+                },
+                "kieletUris": [
+                  "oppilaitoksenopetuskieli_1#1"
+                ],
+                "kotipaikkaUri": "kunta_091",
+                "children": [
+                  {
+                    "oid": "1.2.246.562.10.20866993056",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.20866993056/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010505",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Kullervonkadun toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.60465978314",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.60465978314/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010503",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Holkkitien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.45854578546",
+                    "alkuPvm": 1413234000000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.45854578546/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010516",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Myllypuron toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.2013081415065445951365",
+                    "alkuPvm": 1375304400000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.2013081415065445951365/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010514",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Pälkäneentien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.78321186062",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.78321186062/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010509",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Savonkadun toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.56139411567",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.56139411567/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010501",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Abraham Wetterin tien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.20485193278",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.20485193278/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010502",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Vilppulantien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.93115250668",
+                    "alkuPvm": 1413234000000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.93115250668/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010515",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Meritalon toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.23017513880",
+                    "alkuPvm": 1470603600000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.23017513880/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010517",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Hattulantien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.55355715099",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.55355715099/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010504",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Ilkantien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.656909794910",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.656909794910/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010508",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Prinsessantien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.879177258610",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.879177258610/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010507",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Muotoilijankadun toimipaikka",
+                      "en": "Helsinki City College, Muotoilijankatu"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.16538823663",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.16538823663/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010510",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Sturenkadun toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.55711304158",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.55711304158/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010519",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Teollisuuskadun toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  }
+                ],
+                "aliOrganisaatioMaara": 14,
+                "organisaatiotyypit": [
+                  "organisaatiotyyppi_02"
+                ],
+                "status": "AKTIIVINEN"
+              }
+            ],
+            "aliOrganisaatioMaara": 621,
+            "organisaatiotyypit": [
+              "organisaatiotyyppi_01",
+              "organisaatiotyyppi_07"
+            ],
+            "status": "AKTIIVINEN"
+          }
+        ]
+      },
+      "status": 200
+    }
+  },
+  {
+    "url": "https://localhost:3000/koodisto-service/rest/codeelement/posti_00350/1",
+    "response": {
+      "body": {
+        "koodiUri": "posti_00350",
+        "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/posti_00350",
+        "version": 2,
+        "versio": 1,
+        "koodisto": {
+          "koodistoUri": "posti",
+          "organisaatioOid": "1.2.246.562.10.00000000001",
+          "koodistoVersios": [
+            1
+          ]
+        },
+        "koodiArvo": "00350",
+        "paivitysPvm": "2018-02-05",
+        "paivittajaOid": null,
+        "voimassaAlkuPvm": "1990-01-01",
+        "voimassaLoppuPvm": null,
+        "tila": "HYVAKSYTTY",
+        "metadata": [
+          {
+            "nimi": "HELSINKI",
+            "kuvaus": "HELSINKI",
+            "lyhytNimi": "HELSINKI",
+            "kayttoohje": null,
+            "kasite": null,
+            "sisaltaaMerkityksen": null,
+            "eiSisallaMerkitysta": null,
+            "huomioitavaKoodi": null,
+            "sisaltaaKoodiston": null,
+            "kieli": "FI"
+          },
+          {
+            "nimi": "HELSINGFORS",
+            "kuvaus": "HELSINGFORS",
+            "lyhytNimi": "HELSINGFORS",
+            "kayttoohje": null,
+            "kasite": null,
+            "sisaltaaMerkityksen": null,
+            "eiSisallaMerkitysta": null,
+            "huomioitavaKoodi": null,
+            "sisaltaaKoodiston": null,
+            "kieli": "SV"
+          }
+        ],
+        "withinCodeElements": [
+          {
+            "codeElementUri": "oppilaitosnumero_00084",
+            "codeElementVersion": 1,
+            "codeElementValue": "00084",
+            "relationMetadata": [
+              {
+                "nimi": "Helsingin Ranskalais-Suomalainen koulu",
+                "kieli": "FI",
+                "kuvaus": "Helsingin Ranskalais-Suomalainen koulu"
+              },
+              {
+                "nimi": "Helsingin Ranskalais-Suomalainen koulu",
+                "kieli": "SV",
+                "kuvaus": "Helsingin Ranskalais-Suomalainen koulu"
+              },
+              {
+                "nimi": "Helsingin Ranskalais-Suomalainen koulu",
+                "kieli": "EN",
+                "kuvaus": "Helsingin Ranskalais-Suomalainen koulu"
+              }
+            ],
+            "parentMetadata": [
+              {
+                "nimi": "oppilaitosnumero",
+                "kieli": "FI",
+                "kuvaus": "Tilastokeskus on antanut oppilaitoksille yksilöintitunnuksen. Tunnus on viisimerkkinen ja tunnukselle on varattu numerosarja 00000-99999. Tunnus on annettu ja annetaan ainoastaa pääkoululle. Samaa oppilaitostunnusta käytetään kaikissa oppilaitokseen liittyvissä toimintayksiköissä. Tietoa ylläpidetään organisaatiopalvelussa josta se kopioituu tähän koodistoon."
+              },
+              {
+                "nimi": "oppilaitosnumero",
+                "kieli": "EN",
+                "kuvaus": "oppilaitosnumero"
+              },
+              {
+                "nimi": "oppilaitosnumero",
+                "kieli": "SV",
+                "kuvaus": "oppilaitosnumero"
+              }
+            ],
+            "passive": true
+          },
+          {
+            "codeElementUri": "koulutustoimija_06500110",
+            "codeElementVersion": 1,
+            "codeElementValue": "0650011-0",
+            "relationMetadata": [
+              {
+                "nimi": "Helsingin ranskalais-suomalaisen koulun johtokunta",
+                "kieli": "FI",
+                "kuvaus": "Helsingin ranskalais-suomalaisen koulun johtokunta"
+              }
+            ],
+            "parentMetadata": [
+              {
+                "nimi": "koulutustoimija",
+                "kieli": "FI",
+                "kuvaus": "Koulutustoimija = opetuksen järjestäjä, ylläpitäjä ja koulutuksen järjestäjä. Jokaisella oppilaitoksella on oltava koulutustoimija jotta oppilaitoksen voi lisätä järjestelmään. Koulutustoimija on se taho joka saa valtion rahoituksen toiminsan ylläpitämiseen sekä koulutustehtäväpäätöksen. Koulutustoimijan tiedot haetaan Organisaatiopalveluun YTJ-rekisteristä. Tietoihin lisättän OPHn tarvitsemat muut tiedot.  Tieto kopioituu tähän koodistoon. Tilastokeskus käyttää koulutuksen järjestäjän tunnuksela YTJ-rekisterisä saatavia Y-tunnuksia.\nTätä koodistoa ylläpidetään Opetushallituksen Tietohallintoyksikössä (Heidi Bergström)"
+              },
+              {
+                "nimi": "koulutustoimija",
+                "kieli": "EN",
+                "kuvaus": "koulutustoimija"
+              },
+              {
+                "nimi": "koulutustoimija",
+                "kieli": "SV",
+                "kuvaus": "koulutustoimija"
+              }
+            ],
+            "passive": true
+          },
+          {
+            "codeElementUri": "oppilaitosnumero_01296",
+            "codeElementVersion": 1,
+            "codeElementValue": "01296",
+            "relationMetadata": [
+              {
+                "nimi": "Helsingin IV terveydenhuolto-oppilaitos",
+                "kieli": "EN",
+                "kuvaus": "Helsingin IV terveydenhuolto-oppilaitos"
+              },
+              {
+                "nimi": "Helsingin IV terveydenhuolto-oppilaitos",
+                "kieli": "SV",
+                "kuvaus": "Helsingin IV terveydenhuolto-oppilaitos"
+              },
+              {
+                "nimi": "Helsingin IV terveydenhuolto-oppilaitos",
+                "kieli": "FI",
+                "kuvaus": "Helsingin IV terveydenhuolto-oppilaitos"
+              }
+            ],
+            "parentMetadata": [
+              {
+                "nimi": "oppilaitosnumero",
+                "kieli": "FI",
+                "kuvaus": "Tilastokeskus on antanut oppilaitoksille yksilöintitunnuksen. Tunnus on viisimerkkinen ja tunnukselle on varattu numerosarja 00000-99999. Tunnus on annettu ja annetaan ainoastaa pääkoululle. Samaa oppilaitostunnusta käytetään kaikissa oppilaitokseen liittyvissä toimintayksiköissä. Tietoa ylläpidetään organisaatiopalvelussa josta se kopioituu tähän koodistoon."
+              },
+              {
+                "nimi": "oppilaitosnumero",
+                "kieli": "EN",
+                "kuvaus": "oppilaitosnumero"
+              },
+              {
+                "nimi": "oppilaitosnumero",
+                "kieli": "SV",
+                "kuvaus": "oppilaitosnumero"
+              }
+            ],
+            "passive": true
+          }
+        ],
+        "includesCodeElements": [],
+        "levelsWithCodeElements": []
+      },
+      "status": 200
+    }
+  }
+]

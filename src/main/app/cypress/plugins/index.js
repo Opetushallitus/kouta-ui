@@ -1,7 +1,6 @@
 const fs = require('fs');
 const wp = require('@cypress/webpack-preprocessor');
 const { initPlugin } = require('cypress-plugin-snapshots/plugin');
-const autoRecord = require('cypress-autorecord/plugin');
 const alias = require('../../webpack-alias');
 
 module.exports = (on, config) => {
@@ -37,6 +36,5 @@ module.exports = (on, config) => {
     })
   );
   initPlugin(on, config);
-  autoRecord(on, config, fs);
   return config;
 };

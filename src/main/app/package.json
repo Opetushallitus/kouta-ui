@@ -56,7 +56,7 @@
   },
   "scripts": {
     "start": "craco start",
-    "start:integration": " cross-env REACT_APP_CYPRESS=true DISABLE_LOCAL_PROXY=true NODE_ENV=test REACT_APP_LANG=cimode npm run start",
+    "start:integration": "cross-env REACT_APP_CYPRESS=true DISABLE_LOCAL_PROXY=true NODE_ENV=test REACT_APP_LANG=cimode npm run start",
     "start:integration:debug": "cross-env REACT_APP_CYPRESS=true NODE_ENV=test REACT_APP_LANG=cimode npm run start",
     "build": "craco build",
     "test": "craco test",
@@ -64,10 +64,11 @@
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "NODE_ENV=development build-storybook -c .storybook -o build/storybook --quiet",
     "format": "prettier --write './src/**/*.{js,jsx,ts,tsx}' './cypress/**/*.{js,jsx,ts,tsx}'",
-    "cypress:run": "cypress run -b chrome",
-    "cypress:open": "cypress open -b chrome",
+    "cypress:run": "NODE_OPTIONS=\"--max-http-header-size=8000000\" cypress run -b chrome",
+    "cypress:open": "NODE_OPTIONS=\"--max-http-header-size=8000000\" cypress open -b chrome",
     "test:integration": "START_SERVER_AND_TEST_INSECURE=1 start-server-and-test start:integration https://localhost:3000 'npm run cypress:run -- --headless'",
-    "test:ci": "CI=true npm run test && npm run test:integration"
+    "test:ci": "CI=true npm run test && npm run test:integration",
+    "update-mocks": "node ./scripts/update-mocks.js ./cypress/mocks"
   },
   "browserslist": [
     ">0.2%",
@@ -122,8 +123,7 @@
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-styled-components": "^1.12.0",
     "cross-env": "^7.0.3",
-    "cypress": "^5.6.0",
-    "cypress-autorecord": "^2.0.0",
+    "cypress": "^6.2.1",
     "cypress-pipe": "^1.7.0",
     "cypress-plugin-snapshots": "^1.4.4",
     "eslint": "^7.16.0",
@@ -131,6 +131,7 @@
     "eslint-plugin-cypress": "^2.11.2",
     "eslint-plugin-prettier": "^3.3.0",
     "eslint-plugin-react": "^7.21.5",
+    "glob": "^7.1.6",
     "http-proxy-middleware": "^1.0.6",
     "husky": "^4.3.6",
     "jest-styled-components": "^6.3.4",

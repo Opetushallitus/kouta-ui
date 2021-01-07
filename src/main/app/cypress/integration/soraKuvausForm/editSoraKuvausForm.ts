@@ -1,4 +1,3 @@
-import autoRecord from 'cypress-autorecord';
 import _ from 'lodash';
 import createSoraKuvaus from '#/cypress/data/soraKuvaus';
 import { stubSoraKuvausFormRoutes } from '#/cypress/soraKuvausFormUtils';
@@ -7,15 +6,15 @@ import {
   fillKieliversiotSection,
   tallenna,
 } from '#/cypress/utils';
+import { addMockFileRoutes } from '#/cypress/mockUtils';
 
 export const editSoraKuvausForm = () => {
   const organisaatioOid = '1.1.1.1.1.1';
   const soraKuvaus = createSoraKuvaus();
 
-  autoRecord();
-
   beforeEach(() => {
     cy.server();
+    addMockFileRoutes('soraKuvaus.mock.json');
     stubSoraKuvausFormRoutes({ organisaatioOid });
 
     cy.route({

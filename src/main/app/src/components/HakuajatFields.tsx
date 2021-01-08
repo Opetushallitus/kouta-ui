@@ -5,7 +5,7 @@ import { Box, FormControl } from '#/src/components/virkailija';
 import Button from '#/src/components/Button';
 import DateTimeRange from '#/src/components/DateTimeRange';
 
-export default ({ fields, t, meta: { error } }) => (
+export const HakuajatFields = ({ fields, t, meta: { error } }) => (
   <>
     <FormControl
       error={!_.isNil(error)}

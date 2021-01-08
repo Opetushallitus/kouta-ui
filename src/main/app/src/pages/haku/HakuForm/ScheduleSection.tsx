@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { getTestIdProps } from '#/src/utils';
 import { Box } from '#/src/components/virkailija';
-import HakuajatFields from '#/src/components/HakuajatFields';
+import { HakuajatFields } from '#/src/components/HakuajatFields';
 import FieldGroup from '#/src/components/FieldGroup';
 import { FormFieldDateTimeInput } from '#/src/components/formFields';
 import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenAloitusajankohtaFields';

@@ -8,7 +8,7 @@ import Spacing from '#/src/components/Spacing';
 import { formatDateValue } from '#/src/utils';
 import { FormFieldSwitch } from '#/src/components/formFields';
 import { useFieldValue } from '#/src/hooks/form';
-import HakuajatFields from '#/src/components/HakuajatFields';
+import { HakuajatFields } from '#/src/components/HakuajatFields';
 import { NDASH } from '#/src/constants';
 
 const HakuaikaInterval = ({ haku }) => {

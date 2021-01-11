@@ -62,7 +62,7 @@ Object {
       "henkilokohtaisenSuunnitelmanLisatiedot": Object {},
       "kausi": "kausi_0#1",
       "tarkkaAlkaa": "2021-04-16T00:00",
-      "tarkkaPaattyy": null,
+      "tarkkaPaattyy": "2021-12-12T00:00",
       "tiedossaTarkkaAjankohta": true,
       "vuosi": Object {
         "value": 2020,
@@ -151,6 +151,7 @@ Object {
     "fi",
     "sv",
   ],
+  "koulutustyyppi": undefined,
   "kuvaus": Object {
     "fi":       "<p>Fi toteutuksenkuvaus</p>",
     "sv":       "<p>Sv toteutuksenkuvaus</p>",

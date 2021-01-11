@@ -151,6 +151,7 @@ exports[`createHaku > should be able to create haku with ataru hakulomake #0`] =
   "metadata": {
     "koulutuksenAlkamiskausi": {
       "alkamiskausityyppi": "tarkka alkamisajankohta",
+      "henkilokohtaisenSuunnitelmanLisatiedot": {},
       "koulutuksenAlkamiskausiKoodiUri": "kausi_0#1",
       "koulutuksenAlkamispaivamaara": "2020-11-01T00:00",
       "koulutuksenAlkamisvuosi": 2035,
@@ -211,6 +212,7 @@ exports[`createHaku > should be able to create haku with muu hakulomake #0`] =
   "metadata": {
     "koulutuksenAlkamiskausi": {
       "alkamiskausityyppi": null,
+      "henkilokohtaisenSuunnitelmanLisatiedot": {},
       "koulutuksenAlkamiskausiKoodiUri": null,
       "koulutuksenAlkamisvuosi": null
     },
@@ -246,6 +248,7 @@ exports[`createHaku > should be able to create haku with "ei sähköistä" hakul
   "metadata": {
     "koulutuksenAlkamiskausi": {
       "alkamiskausityyppi": null,
+      "henkilokohtaisenSuunnitelmanLisatiedot": {},
       "koulutuksenAlkamiskausiKoodiUri": null,
       "koulutuksenAlkamisvuosi": null
     },

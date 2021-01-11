@@ -65,7 +65,7 @@
     "build-storybook": "NODE_ENV=development build-storybook -c .storybook -o build/storybook --quiet",
     "format": "prettier --write './src/**/*.{js,jsx,ts,tsx}' './cypress/**/*.{js,jsx,ts,tsx}'",
     "cypress:run": "NODE_OPTIONS=\"--max-http-header-size=8000000\" cypress run -b chrome",
-    "cypress:open": "NODE_OPTIONS=\"--max-http-header-size=8000000\" cypress open -b chrome",
+    "cypress:open": "cross-env NODE_OPTIONS=\"--max-http-header-size=8000000\" cypress open -b chrome",
     "test:integration": "START_SERVER_AND_TEST_INSECURE=1 start-server-and-test start:integration https://localhost:3000 'npm run cypress:run -- --headless'",
     "test:ci": "CI=true npm run test && npm run test:integration",
     "update-mocks": "node ./scripts/update-mocks.js ./cypress/mocks"

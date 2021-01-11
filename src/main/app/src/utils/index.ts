@@ -182,16 +182,17 @@ export const maybeParseNumber = value => {
 
 export const toSelectValue = value => (_.isNil(value) ? null : { value });
 
-const getFieldName = name =>
-  name.match(`(.+?)(\\.${LANGUAGES.join('|')})?$`)?.[1];
+// Returns field name without language part
+export const getFieldName = name =>
+  name.match(`^(.+?)(\\.(${LANGUAGES.join('|')}))?$`)?.[1];
 
 // Get form values for saving. Filters out fields that user has hidden.
 // Result can be sassed to get**ByFormValues().
 export const getValuesForSaving = (
-  values,
-  registeredFields,
-  unregisteredFields,
-  initialValues = {}
+  values: any,
+  registeredFields: Record<string, { name: string }>,
+  unregisteredFields: Record<string, { name: string }>,
+  initialValues: any = {}
 ) => {
   // Use initial values as a base. Especially important for editing.
   const saveableValues: any = initialValues;
@@ -210,7 +211,11 @@ export const getValuesForSaving = (
 
   // Some exceptions (fields that should be saved even though they are not visible)
   // TODO: There might be a few other exceptions. Check before using in other forms and add here.
-  _.set(saveableValues, 'koulutustyyppi', values?.koulutustyyppi);
-  _.set(saveableValues, 'muokkaaja', values?.muokkaaja);
+  if (values?.koulutustyyppi) {
+    _.set(saveableValues, 'koulutustyyppi', values?.koulutustyyppi);
+  }
+  if (values?.muokkaaja) {
+    _.set(saveableValues, 'muokkaaja', values?.muokkaaja);
+  }
   return saveableValues;
 };

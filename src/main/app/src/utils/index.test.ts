@@ -1,4 +1,8 @@
-import { isDeepEmptyFormValues } from '#/src/utils';
+import {
+  getFieldName,
+  getValuesForSaving,
+  isDeepEmptyFormValues,
+} from '#/src/utils';
 
 const OBJECT_IN_ARRAY = [
   {
@@ -33,4 +37,109 @@ test('Should return false for not empty object', () => {
 
 test('Should return false for zero', () => {
   expect(isDeepEmptyFormValues(0)).toEqual(false);
+});
+
+test.each([
+  [
+    {
+      nimi: {
+        fi: 'nimi fi',
+        sv: 'nimi sv',
+      },
+    },
+    {},
+    {
+      'nimi.fi': { name: 'nimi.fi' },
+      'nimi.sv': { name: 'nimi.sv' },
+    },
+    {},
+    {
+      nimi: null,
+    },
+  ],
+  [
+    {
+      nimi: {
+        fi: 'nimi fi',
+        sv: 'nimi sv',
+      },
+    },
+    {
+      'nimi.fi': { name: 'nimi.fi' },
+      'nimi.sv': { name: 'nimi.sv' },
+    },
+    {
+      'nimi.fi': { name: 'nimi.fi' },
+    },
+    {},
+    {
+      nimi: {
+        fi: 'nimi fi',
+        sv: 'nimi sv',
+      },
+    },
+  ],
+  [
+    {
+      nimi: {
+        fi: 'nimi fi',
+        sv: 'nimi sv',
+      },
+    },
+    {
+      'nimi.fi': { name: 'nimi.fi' },
+    },
+    {
+      'nimi.fi': { name: 'nimi.fi' },
+      'nimi.sv': { name: 'nimi.sv' },
+    },
+    {},
+    {
+      nimi: {
+        fi: 'nimi fi',
+        sv: 'nimi sv',
+      },
+    },
+  ],
+  [
+    {
+      nimi: {
+        fi: 'nimi fi',
+        sv: 'nimi sv',
+      },
+    },
+    {
+      'nimi.fi': { name: 'nimi.fi' },
+    },
+    {
+      'nimi.sv': { name: 'nimi.sv' },
+    },
+    {},
+    {
+      nimi: {
+        fi: 'nimi fi',
+        sv: 'nimi sv',
+      },
+    },
+  ],
+])(
+  'getValuesForSaving',
+  (values, registeredFields, unregisteredFields, initialValues, result) => {
+    expect(
+      getValuesForSaving(
+        values,
+        registeredFields,
+        unregisteredFields,
+        initialValues
+      )
+    ).toEqual(result);
+  }
+);
+
+test.each([
+  ['nimi.fi', 'nimi'],
+  ['nimi', 'nimi'],
+  ['perustiedot.nimi', 'perustiedot.nimi'],
+])('getFieldName', (name, fieldName) => {
+  expect(getFieldName(name)).toEqual(fieldName);
 });

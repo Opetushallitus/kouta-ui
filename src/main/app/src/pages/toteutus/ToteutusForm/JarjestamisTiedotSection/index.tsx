@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
-import { get, isArray } from 'lodash';
+import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 
 import Spacing from '#/src/components/Spacing';
@@ -14,24 +14,24 @@ import { useFieldValue } from '#/src/hooks/form';
 import FormConfigFragment from '#/src/components/FormConfigFragment';
 import FieldGroup from '#/src/components/FieldGroup';
 import {
-  FormFieldTextarea,
   FormFieldSelect,
   FormFieldInput,
   createFormFieldComponent,
   FormFieldRadioGroup,
+  FormFieldEditor,
 } from '#/src/components/formFields';
 import { isStipendiVisible } from '#/src/utils/toteutus/toteutusVisibilities';
 
 import MaksullisuusFields from './MaksullisuusFields';
 import AlkamiskausiFields from './AlkamiskausiFields';
-import DiplomiFields from './DiplomiFields';
+import { DiplomiFields } from './DiplomiFields';
 import KielivalikoimaFields from './KielivalikoimaFields';
 import OpetusaikaCheckboxGroup from './OpetusaikaCheckboxGroup';
 import OpetuskieliCheckboxGroup from './OpetuskieliCheckboxGroup';
 import OpetustapaCheckboxGroup from './OpetustapaCheckboxGroup';
 
 const makeCountLimitOnChange = (onChange, max) => items =>
-  isArray(items) && items.length <= max && onChange(items);
+  _fp.isArray(items) && items.length <= max && onChange(items);
 
 const OpetusaikaField = createFormFieldComponent(
   OpetusaikaCheckboxGroup,
@@ -69,9 +69,9 @@ const OsiotFields = ({ language, osiotOptions, name }) => {
       value,
       label: label
         ? label
-        : get(
-            osiotOptions.find(({ value: v }) => v === value),
-            'label'
+        : _fp.get(
+            'label',
+            osiotOptions.find(({ value: v }) => v === value)
           ) || null, // TODO: Use something else than null as a label, when not found
     }));
   }, [osiotArr, osiotOptions]);
@@ -86,7 +86,7 @@ const OsiotFields = ({ language, osiotOptions, name }) => {
         >
           <Field
             name={`${name}.osioKuvaukset.${value}.${language}`}
-            component={FormFieldTextarea}
+            component={FormFieldEditor}
             label={label}
           />
         </Spacing>
@@ -155,8 +155,9 @@ const StipendiFields = ({ koulutustyyppi, language, name }) => {
         <FlexItem grow={1} paddingLeft={4}>
           <Field
             name={`${name}.stipendinKuvaus.${language}`}
-            component={FormFieldTextarea}
+            component={FormFieldEditor}
             label={t('yleiset.tarkempiKuvaus')}
+            hideHeaderSelect
           />
         </FlexItem>
       </Flex>
@@ -219,8 +220,9 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
           <FlexItem grow={1} paddingLeft={4}>
             <Field
               name={`${name}.opetuskieliKuvaus.${language}`}
-              component={FormFieldTextarea}
+              component={FormFieldEditor}
               label={t('yleiset.tarkempiKuvaus')}
+              hideHeaderSelect
             />
           </FlexItem>
         </Flex>
@@ -233,8 +235,9 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
           <FlexItem grow={1} paddingLeft={4}>
             <Field
               name={`${name}.suunniteltuKestoKuvaus.${language}`}
-              component={FormFieldTextarea}
+              component={FormFieldEditor}
               label={t('yleiset.tarkempiKuvaus')}
+              hideHeaderSelect
               {...getTestIdProps('suunniteltuKestoKuvaus')}
             />
           </FlexItem>
@@ -254,8 +257,9 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
           <FlexItem grow={1} paddingLeft={4}>
             <Field
               name={`${name}.opetusaikaKuvaus.${language}`}
-              component={FormFieldTextarea}
+              component={FormFieldEditor}
               label={t('yleiset.tarkempiKuvaus')}
+              hideHeaderSelect
             />
           </FlexItem>
         </Flex>
@@ -273,8 +277,9 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
           <FlexItem grow={1} paddingLeft={4}>
             <Field
               name={`${name}.opetustapaKuvaus.${language}`}
-              component={FormFieldTextarea}
+              component={FormFieldEditor}
               label={t('yleiset.tarkempiKuvaus')}
+              hideHeaderSelect
             />
           </FlexItem>
         </Flex>
@@ -296,8 +301,9 @@ const JarjestamisTiedotContent = ({ language, koulutustyyppi, name }) => {
           >
             <Field
               name={`${name}.maksullisuusKuvaus.${language}`}
-              component={FormFieldTextarea}
+              component={FormFieldEditor}
               label={t('yleiset.tarkempiKuvaus')}
+              hideHeaderSelect
             />
           </FlexItem>
         </Flex>

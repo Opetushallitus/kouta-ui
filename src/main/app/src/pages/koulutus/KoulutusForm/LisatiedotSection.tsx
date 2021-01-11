@@ -1,15 +1,12 @@
 import React, { useMemo } from 'react';
 import { Field } from 'redux-form';
-import { get } from 'lodash';
+import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 
 import Spacing from '#/src/components/Spacing';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
-import {
-  FormFieldTextarea,
-  FormFieldSelect,
-} from '#/src/components/formFields';
+import { FormFieldEditor, FormFieldSelect } from '#/src/components/formFields';
 import { Typography } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
 
@@ -22,9 +19,9 @@ const OsiotFields = ({ disabled, language, osiotOptions, name }) => {
       value,
       label: label
         ? label
-        : get(
-            osiotOptions.find(({ value: v }) => v === value),
-            'label'
+        : _fp.get(
+            'label',
+            osiotOptions.find(({ value: v }) => v === value)
           ) || null,
     }));
   }, [osiotArr, osiotOptions]);
@@ -38,14 +35,14 @@ const OsiotFields = ({ disabled, language, osiotOptions, name }) => {
       <Field
         disabled={disabled}
         name={`${name}.osioKuvaukset.${value}.${language}`}
-        component={FormFieldTextarea}
+        component={FormFieldEditor}
         label={label}
       />
     </Spacing>
   ));
 };
 
-const LisatiedotSection = ({ disabled, language, name }) => {
+export const LisatiedotSection = ({ disabled, language, name }) => {
   const { t } = useTranslation();
 
   const { options: osiotOptions } = useKoodistoOptions({
@@ -78,5 +75,3 @@ const LisatiedotSection = ({ disabled, language, name }) => {
     </>
   );
 };
-
-export default LisatiedotSection;

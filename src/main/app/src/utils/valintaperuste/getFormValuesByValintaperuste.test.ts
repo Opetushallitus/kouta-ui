@@ -1,4 +1,4 @@
-import getFormValuesByValintaperuste from '#/src/utils/valintaperuste/getFormValuesByValintaperuste';
+import { getFormValuesByValintaperuste } from '#/src/utils/valintaperuste/getFormValuesByValintaperuste';
 
 test('getFormValuesByValintaperuste returns correct form values given valintaperuste', () => {
   const values = getFormValuesByValintaperuste({
@@ -56,7 +56,6 @@ test('getFormValuesByValintaperuste returns correct form values given valintaper
         fi: '<h1>Fi kuvaus</h1>',
         sv: '<h1>Sv kuvaus</h1>',
       },
-      osaamistaustaKoodiUrit: ['tausta_1#1', 'tausta_2#1'],
       valintatavat: [
         {
           enimmaispisteet: 20,
@@ -66,8 +65,8 @@ test('getFormValuesByValintaperuste returns correct form values given valintaper
             sv: 'Sv kuvaus',
           },
           kynnysehto: {
-            fi: 'Fi kynnysehto',
-            sv: 'Sv kynnysehto',
+            fi: '<p>Fi kynnysehto</p>',
+            sv: '<p>Sv kynnysehto</p>',
           },
           nimi: {
             fi: 'Fi nimi',
@@ -178,8 +177,8 @@ test('getFormValuesByValintaperuste returns correct form values given valintaper
               paattyy: '2019-04-18T08:44',
             },
             lisatietoja: {
-              fi: 'fi lisatietoja',
-              sv: 'sv lisatietoja',
+              fi: '<p>fi lisatietoja</p>',
+              sv: '<p>sv lisatietoja</p>',
             },
             jarjestamispaikka: {
               fi: 'jarjestamispaikka - fi',

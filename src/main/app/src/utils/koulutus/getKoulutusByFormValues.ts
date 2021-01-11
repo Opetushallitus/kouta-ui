@@ -1,9 +1,10 @@
-import _ from 'lodash/fp';
+import _fp from 'lodash/fp';
 import {
   KOULUTUSTYYPPI,
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
 } from '#/src/constants';
 import { maybeParseNumber } from '#/src/utils';
+import { serializeEditorState } from '#/src/components/Editor/utils';
 
 const osaamisalaKoodiToKoodiUri = value =>
   value ? `osaamisala_${value}` : null;
@@ -11,7 +12,7 @@ const osaamisalaKoodiToKoodiUri = value =>
 const getKoulutusByFormValues = values => {
   const { muokkaaja, tila } = values;
   const kielivalinta = values?.kieliversiot ?? [];
-  const pickTranslations = _.pick(kielivalinta);
+  const pickTranslations = _fp.pick(kielivalinta);
 
   const pohjanTarjoajat = values?.pohja?.tarjoajat;
   const kaytaPohjanJarjestajaa =
@@ -48,7 +49,7 @@ const getKoulutusByFormValues = values => {
     ),
     teemakuva: values?.teemakuva,
     metadata: {
-      tutkinnonOsat: _.reduce(
+      tutkinnonOsat: _fp.reduce(
         (
           resultOsat,
           {
@@ -58,7 +59,7 @@ const getKoulutusByFormValues = values => {
           }
         ) => [
           ...resultOsat,
-          ..._.map(({ value, viite }) => ({
+          ..._fp.map(({ value, viite }) => ({
             ePerusteId: maybeParseNumber(ePerusteId),
             koulutusKoodiUri,
             tutkinnonosaId: maybeParseNumber(value),
@@ -78,11 +79,15 @@ const getKoulutusByFormValues = values => {
       koulutustyyppi,
       lisatiedot: osiot.map(({ value }) => ({
         otsikkoKoodiUri: value,
-        teksti: pickTranslations(
-          values?.lisatiedot?.osioKuvaukset?.[value] ?? {}
-        ),
+        teksti: _fp.pipe(
+          pickTranslations,
+          _fp.mapValues(serializeEditorState)
+        )(values?.lisatiedot?.osioKuvaukset?.[value] ?? {}),
       })),
-      kuvaus: pickTranslations(values?.description?.kuvaus ?? {}),
+      kuvaus: _fp.pipe(
+        pickTranslations,
+        _fp.mapValues(serializeEditorState)
+      )(values?.description?.kuvaus ?? {}),
       opintojenLaajuusKoodiUri:
         values?.information?.opintojenLaajuus?.value || null,
       tutkintonimikeKoodiUrit: (values?.information?.tutkintonimike ?? []).map(

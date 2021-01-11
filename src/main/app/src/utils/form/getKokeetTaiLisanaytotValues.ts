@@ -43,7 +43,7 @@ export const getKokeetTaiLisanaytotValues = (
               : undefined,
             alkaa: _.get(aika, 'alkaa') || '',
             paattyy: _.get(aika, 'paattyy') || '',
-            lisatietoja: lisatietoja || {},
+            lisatietoja: _.mapValues(lisatietoja || {}, parseEditorState),
             jarjestamispaikka,
           })
         ),
@@ -51,5 +51,3 @@ export const getKokeetTaiLisanaytotValues = (
     ),
   };
 };
-
-export default getKokeetTaiLisanaytotValues;

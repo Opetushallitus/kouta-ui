@@ -17,7 +17,7 @@ exports[`createKoulutus > should be able to create ammatillinen koulutus #0`] =
       {
         "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
         "teksti": {
-          "fi": "koulutuksenlisatiedot_0 kuvaus"
+          "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
         }
       }
     ],
@@ -57,7 +57,7 @@ exports[`createKoulutus > should be able to create ammatillinen osaamisala koulu
       {
         "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
         "teksti": {
-          "fi": "koulutuksenlisatiedot_0 kuvaus"
+          "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
         }
       }
     ],
@@ -97,7 +97,7 @@ exports[`createKoulutus > should be able to create ammatillinen tutkinnon osa ko
       {
         "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
         "teksti": {
-          "fi": "koulutuksenlisatiedot_0 kuvaus"
+          "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
         }
       }
     ],
@@ -150,13 +150,13 @@ exports[`createKoulutus > should be able to create AMK-koulutus #0`] =
       "fi": "Kuvauksen nimi"
     },
     "kuvaus": {
-      "fi": "Kuvaus"
+      "fi": "<p>Kuvaus</p>"
     },
     "lisatiedot": [
       {
         "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
         "teksti": {
-          "fi": "koulutuksenlisatiedot_0 kuvaus"
+          "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
         }
       }
     ],
@@ -198,7 +198,7 @@ exports[`createKoulutus > should be able to create lukiokoulutus #0`] =
       {
         "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
         "teksti": {
-          "fi": "koulutuksenlisatiedot_0 kuvaus"
+          "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
         }
       }
     ],
@@ -239,7 +239,7 @@ exports[`editKoulutus > should be able to edit ammatillinen koulutus #0`] =
       {
         "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
         "teksti": {
-          "fi": "koulutuksenlisatiedot_0 kuvaus"
+          "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
         }
       }
     ],
@@ -282,13 +282,13 @@ exports[`editKoulutus > should be able to edit AMK-koulutus #0`] =
       "fi": "Fi kuvauksen nimi"
     },
     "kuvaus": {
-      "fi": "Fi kuvaus"
+      "fi": "<p>Fi kuvaus</p>"
     },
     "lisatiedot": [
       {
         "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
         "teksti": {
-          "fi": "koulutuksenlisatiedot_0 kuvaus"
+          "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
         }
       }
     ],
@@ -334,7 +334,7 @@ exports[`editKoulutus > should be able to edit lukiokoulutus #0`] =
       {
         "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
         "teksti": {
-          "fi": "koulutuksenlisatiedot_0 kuvaus"
+          "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
         }
       }
     ],

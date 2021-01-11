@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { queryCache } from 'react-query';
 
 import { useSaveHakukohde } from '#/src/hooks/formSaveHooks';
-import getHakukohdeByFormValues from '#/src/utils/hakukohde/getHakukohdeByFormValues';
+import { getHakukohdeByFormValues } from '#/src/utils/hakukohde/getHakukohdeByFormValues';
 import updateHakukohde from '#/src/utils/hakukohde/updateHakukohde';
 import { ENTITY } from '#/src/constants';
 import { FormFooter } from '#/src/components/FormPage';

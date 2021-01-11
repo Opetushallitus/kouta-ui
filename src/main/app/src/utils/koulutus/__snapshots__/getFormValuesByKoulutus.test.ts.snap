@@ -4,8 +4,8 @@ exports[`getFormValuesByKoulutus returns correct form values given koulutus 1`] 
 Object {
   "description": Object {
     "kuvaus": Object {
-      "fi": "Fi kuvaus",
-      "sv": "Sv kuvaus",
+      "fi":         "<p>Fi kuvaus</p>",
+      "sv":         "<p>Sv kuvaus</p>",
     },
     "nimi": Object {
       "fi": "Fi nimi",
@@ -54,8 +54,8 @@ Object {
     "osioKuvaukset": Object {
       "osio_1#1": Object {},
       "osio_2#1": Object {
-        "fi": "Fi kuvaus",
-        "sv": "Sv kuvaus",
+        "fi":           "<p>Fi kuvaus</p>",
+        "sv":           "<p>Sv kuvaus</p>",
       },
     },
     "osiot": Array [

@@ -1,4 +1,4 @@
-import getHakukohdeByFormValues from './getHakukohdeByFormValues';
+import { getHakukohdeByFormValues } from './getHakukohdeByFormValues';
 import { parseEditorState } from '#/src/components/Editor/utils';
 import { HAKULOMAKETYYPPI, LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
 
@@ -85,8 +85,8 @@ test('getHakukohdeByFormValues returns correct hakukohde given form values', () 
               alkaa: '2019-04-16T08:44',
               paattyy: '2019-04-18T08:44',
               lisatietoja: {
-                fi: 'fi lisatietoja',
-                sv: 'sv lisatietoja',
+                fi: parseEditorState('<p>fi lisatietoja</p>'),
+                sv: parseEditorState('<p>sv lisatietoja</p>'),
               },
               jarjestamispaikka: {
                 fi: 'jarjestamispaikka - fi',
@@ -127,8 +127,8 @@ test('getHakukohdeByFormValues returns correct hakukohde given form values', () 
             sv: 'Sv nimi',
           },
           kuvaus: {
-            fi: 'Fi kuvaus',
-            sv: 'Sv kuvaus',
+            fi: parseEditorState('Fi kuvaus'),
+            sv: parseEditorState('Sv kuvaus'),
           },
           toimitusaika: '2019-08-17T05:52',
           toimitustapa: {

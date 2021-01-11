@@ -10,8 +10,8 @@ import { spacing } from '#/src/theme';
 
 import {
   FormFieldInput,
-  FormFieldTextarea,
   FormFieldPostinumeroSelect,
+  FormFieldEditor,
 } from '#/src/components/formFields';
 import IconButton from '#/src/components/IconButton';
 import { getThemeProp } from '#/src/theme';
@@ -70,8 +70,9 @@ export const TilaisuusFields = ({ field, language, index, removeSelf }) => {
         <Box {...getTestIdProps('lisatietoja')}>
           <Field
             name={`${field}.lisatietoja.${language}`}
-            component={FormFieldTextarea}
+            component={FormFieldEditor}
             label={t('valintaperustelomake.tilaisuudenLisatiedot')}
+            hideHeaderSelect
           />
         </Box>
       </SubSectionBox>

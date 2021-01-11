@@ -1,10 +1,10 @@
 import React from 'react';
-import _ from 'lodash';
+import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
 import Flex from '#/src/components/Flex';
 import Button from '#/src/components/Button';
-import LomakeFields from '#/src/components/LomakeFields';
+import { LomakeFields } from '#/src/components/LomakeFields';
 import useModal from '#/src/hooks/useModal';
 import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
 import { useFieldValue } from '#/src/hooks/form';
@@ -16,7 +16,7 @@ import NameSection from './NameSection';
 import TargetGroupSection from './TargetGroupSection';
 import SearchTypeSection from './SearchTypeSection';
 import ScheduleSection from './ScheduleSection';
-import YhteyshenkilotSection from './YhteyshenkilotSection';
+import { YhteyshenkilotSection } from './YhteyshenkilotSection';
 import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import FormCollapse from '#/src/components/FormCollapse';
 import HakukohteetModal from './HakukohteetModal';
@@ -122,7 +122,7 @@ const HakuForm = ({
           showArkistoitu={showArkistoituTilaOption}
         />
 
-        {_.isFunction(onAttachHakukohde) ? (
+        {_fp.isFunction(onAttachHakukohde) ? (
           <FormCollapse
             header={t('hakulomake.liitetytHakukohteet')}
             id="liitetyt-hakukohteet"

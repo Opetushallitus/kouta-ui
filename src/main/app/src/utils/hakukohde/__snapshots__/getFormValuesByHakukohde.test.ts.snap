@@ -40,8 +40,8 @@ Object {
     "liitteet": Array [
       Object {
         "kuvaus": Object {
-          "fi": "Fi kuvaus",
-          "sv": "Sv kuvaus",
+          "fi":             "<p>Fi kuvaus</p>",
+          "sv":             "<p>Sv kuvaus</p>",
         },
         "nimi": Object {
           "fi": "Fi nimi",
@@ -138,8 +138,8 @@ Object {
             "alkaa": "2019-04-16T08:44",
             "jarjestamispaikka": undefined,
             "lisatietoja": Object {
-              "fi": "fi lisatietoja",
-              "sv": "sv lisatietoja",
+              "fi":                 "<p>fi lisatietoja</p>",
+              "sv":                 "<p>sv lisatietoja</p>",
             },
             "osoite": Object {
               "fi": "fi osoite",

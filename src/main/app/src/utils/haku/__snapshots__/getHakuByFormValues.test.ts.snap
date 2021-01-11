@@ -97,7 +97,7 @@ Object {
   "hakukohteenMuokkaamisenTakaraja": "2019-10-16T08:44",
   "hakulomakeAtaruId": null,
   "hakulomakeKuvaus": Object {
-    "fi": "kuvaus",
+    "fi": "<p>kuvaus</p>",
   },
   "hakulomakeLinkki": Object {},
   "hakulomaketyyppi": "ei sähköistä",

@@ -40,7 +40,7 @@ const getFormValuesByOppilaitos = oppilaitos => {
       })),
       tiedot: (tietoaOpiskelusta || []).reduce(
         (acc, { otsikkoKoodiUri, teksti }) => {
-          acc[otsikkoKoodiUri] = teksti || {};
+          acc[otsikkoKoodiUri] = mapValues(teksti || {}, parseEditorState);
 
           return acc;
         },

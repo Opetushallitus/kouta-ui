@@ -1,4 +1,4 @@
-import _ from 'lodash/fp';
+import _fp from 'lodash/fp';
 
 import {
   isNumeric,
@@ -16,7 +16,10 @@ const { MUU, EI_SAHKOISTA_HAKUA } = HAKULOMAKETYYPPI;
 const getOsaamisalatByValues = ({ osaamisalat, pickTranslations }) => {
   return (osaamisalat || []).map(
     ({ kuvaus = {}, nimi = {}, linkki = {}, otsikko = {} }) => ({
-      kuvaus: pickTranslations(kuvaus),
+      kuvaus: _fp.pipe(
+        pickTranslations,
+        _fp.mapValues(serializeEditorState)
+      )(kuvaus),
       nimi: pickTranslations(nimi),
       linkki: pickTranslations(linkki),
       otsikko: pickTranslations(otsikko),
@@ -34,7 +37,7 @@ const getToteutusByFormValues = values => {
   } = values;
   const hakulomaketyyppi = HTIT?.hakeutumisTaiIlmoittautumistapa;
   const kielivalinta = values?.kieliversiot || [];
-  const pickTranslations = _.pick(kielivalinta);
+  const pickTranslations = _fp.pick(kielivalinta);
 
   const osioKuvaukset = values?.jarjestamistiedot?.osioKuvaukset || {};
 
@@ -66,7 +69,10 @@ const getToteutusByFormValues = values => {
         lisatiedot: (values?.jarjestamistiedot?.osiot || []).map(
           ({ value }) => ({
             otsikkoKoodiUri: value,
-            teksti: pickTranslations(osioKuvaukset[value] || {}),
+            teksti: _fp.pipe(
+              pickTranslations,
+              _fp.mapValues(serializeEditorState)
+            )(osioKuvaukset[value] || {}),
           })
         ),
         opetuskieliKoodiUrit: opetuskielet || [],
@@ -76,18 +82,22 @@ const getToteutusByFormValues = values => {
           : null,
         opetustapaKoodiUrit: values?.jarjestamistiedot?.opetustapa || [],
         opetusaikaKoodiUrit: values?.jarjestamistiedot?.opetusaika || [],
-        opetuskieletKuvaus: pickTranslations(
-          values?.jarjestamistiedot?.opetuskieliKuvaus || {}
-        ),
-        opetustapaKuvaus: pickTranslations(
-          values?.jarjestamistiedot?.opetustapaKuvaus || {}
-        ),
-        opetusaikaKuvaus: pickTranslations(
-          values?.jarjestamistiedot?.opetusaikaKuvaus || {}
-        ),
-        maksullisuusKuvaus: pickTranslations(
-          values?.jarjestamistiedot?.maksullisuusKuvaus || {}
-        ),
+        opetuskieletKuvaus: _fp.pipe(
+          pickTranslations,
+          _fp.mapValues(serializeEditorState)
+        )(values?.jarjestamistiedot?.opetuskieliKuvaus || {}),
+        opetustapaKuvaus: _fp.pipe(
+          pickTranslations,
+          _fp.mapValues(serializeEditorState)
+        )(values?.jarjestamistiedot?.opetustapaKuvaus || {}),
+        opetusaikaKuvaus: _fp.pipe(
+          pickTranslations,
+          _fp.mapValues(serializeEditorState)
+        )(values?.jarjestamistiedot?.opetusaikaKuvaus || {}),
+        maksullisuusKuvaus: _fp.pipe(
+          pickTranslations,
+          _fp.mapValues(serializeEditorState)
+        )(values?.jarjestamistiedot?.maksullisuusKuvaus || {}),
         koulutuksenAlkamispaivamaara: koulutuksenTarkkaAlkamisaika
           ? getKoutaDateString(
               values?.jarjestamistiedot?.koulutuksenAlkamispaivamaara
@@ -108,7 +118,10 @@ const getToteutusByFormValues = values => {
             )
           : null,
         onkoStipendia: stipendiVisible && onkoStipendia,
-        stipendinKuvaus: pickTranslations(
+        stipendinKuvaus: _fp.pipe(
+          pickTranslations,
+          _fp.mapValues(serializeEditorState)
+        )(
           (stipendiVisible && values?.jarjestamistiedot?.stipendinKuvaus) || {}
         ),
         stipendinMaara:
@@ -120,9 +133,10 @@ const getToteutusByFormValues = values => {
         diplomiKoodiUrit: (values?.jarjestamistiedot?.diplomiTyypit || []).map(
           ({ value }) => value
         ),
-        diplomiKuvaus: pickTranslations(
-          values?.jarjestamistiedot?.diplomiKuvaus || {}
-        ),
+        diplomiKuvaus: _fp.pipe(
+          pickTranslations,
+          _fp.mapValues(serializeEditorState)
+        )(values?.jarjestamistiedot?.diplomiKuvaus || {}),
         A1JaA2Kielivalikoima: (values?.jarjestamistiedot?.A1A2Kielet || []).map(
           ({ value }) => value
         ),
@@ -147,9 +161,10 @@ const getToteutusByFormValues = values => {
         suunniteltuKestoKuukaudet: maybeParseNumber(
           jarjestamistiedot?.suunniteltuKesto?.kuukautta
         ),
-        suunniteltuKestoKuvaus: pickTranslations(
-          jarjestamistiedot?.suunniteltuKestoKuvaus || {}
-        ),
+        suunniteltuKestoKuvaus: _fp.pipe(
+          pickTranslations,
+          _fp.mapValues(serializeEditorState)
+        )(jarjestamistiedot?.suunniteltuKestoKuvaus || {}),
       },
       lukiolinjaKoodiUri: values?.lukiolinjat?.lukiolinja?.value || null,
       osaamisalat: (values?.osaamisalat?.osaamisalat || []).map(osaamisala => ({
@@ -166,22 +181,24 @@ const getToteutusByFormValues = values => {
           wwwSivu: pickTranslations(verkkosivu || {}),
         })
       ),
-      ammattinimikkeet: _.toPairs(
-        pickTranslations(values?.nayttamistiedot?.ammattinimikkeet || {})
-      ).flatMap(([language, nimikkeet]) => {
-        return (nimikkeet || []).map(({ value }) => ({
-          kieli: language,
-          arvo: value,
-        }));
-      }),
-      asiasanat: _.toPairs(
-        pickTranslations(values?.nayttamistiedot?.avainsanat || {})
-      ).flatMap(([language, sanat]) => {
-        return (sanat || []).map(({ value }) => ({
-          kieli: language,
-          arvo: value,
-        }));
-      }),
+      ammattinimikkeet: _fp
+        .toPairs(
+          pickTranslations(values?.nayttamistiedot?.ammattinimikkeet || {})
+        )
+        .flatMap(([language, nimikkeet]) => {
+          return (nimikkeet || []).map(({ value }) => ({
+            kieli: language,
+            arvo: value,
+          }));
+        }),
+      asiasanat: _fp
+        .toPairs(pickTranslations(values?.nayttamistiedot?.avainsanat || {}))
+        .flatMap(([language, sanat]) => {
+          return (sanat || []).map(({ value }) => ({
+            kieli: language,
+            arvo: value,
+          }));
+        }),
       ylemmanKorkeakoulututkinnonOsaamisalat: getOsaamisalatByValues({
         osaamisalat: values?.ylemmanKorkeakoulututkinnonOsaamisalat,
         pickTranslations,
@@ -190,9 +207,9 @@ const getToteutusByFormValues = values => {
         osaamisalat: values?.alemmanKorkeakoulututkinnonOsaamisalat,
         pickTranslations,
       }),
-      kuvaus: _.pipe(
+      kuvaus: _fp.pipe(
         pickTranslations,
-        _.mapValues(serializeEditorState)
+        _fp.mapValues(serializeEditorState)
       )(values?.kuvaus || {}),
       tyyppi: koulutustyyppi,
       laajuus: maybeParseNumber(values?.tiedot?.laajuus),
@@ -207,7 +224,10 @@ const getToteutusByFormValues = values => {
           koodi: koodi || null,
           laajuus: pickTranslations(laajuus),
           ilmoittautumislinkki: pickTranslations(ilmoittautumislinkki),
-          kuvaus: pickTranslations(kuvaus),
+          kuvaus: _fp.pipe(
+            pickTranslations,
+            _fp.mapValues(serializeEditorState)
+          )(kuvaus),
           sisalto: serializeSisaltoField(sisalto, kielivalinta),
         })
       ),
@@ -226,21 +246,21 @@ const getToteutusByFormValues = values => {
         hakulomaketyyppi === MUU ? pickTranslations(HTIT?.linkki) : {},
       lisatietoaHakeutumisesta:
         hakulomaketyyppi === MUU || hakulomaketyyppi === EI_SAHKOISTA_HAKUA
-          ? _.pipe(
+          ? _fp.pipe(
               pickTranslations,
-              _.mapValues(serializeEditorState)
+              _fp.mapValues(serializeEditorState)
             )(HTIT?.lisatiedot)
           : {},
       lisatietoaValintaperusteista:
         hakulomaketyyppi === MUU
-          ? _.pipe(
+          ? _fp.pipe(
               pickTranslations,
-              _.mapValues(serializeEditorState)
+              _fp.mapValues(serializeEditorState)
             )(HTIT?.lisatiedotValintaperusteista)
           : {},
       hakuaika:
         hakulomaketyyppi === MUU &&
-        !(_.isNil(HTIT?.hakuaikaAlkaa) && _.isNil(HTIT?.hakuaikaPaattyy))
+        !(_fp.isNil(HTIT?.hakuaikaAlkaa) && _fp.isNil(HTIT?.hakuaikaPaattyy))
           ? {
               alkaa: isPartialDate(HTIT?.hakuaikaAlkaa)
                 ? null

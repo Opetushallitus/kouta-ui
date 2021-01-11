@@ -1,4 +1,4 @@
-import _ from 'lodash/fp';
+import _fp from 'lodash/fp';
 import { loggable } from 'cypress-pipe';
 import { fireEvent } from '@testing-library/react';
 import koodisto from '#/cypress/data/koodisto';
@@ -55,7 +55,7 @@ export const fillAsyncSelect = (input, match = null) => {
     cy.get('input[type="text"]')
       .pipe(paste(input?.slice(0, -1)))
       .type(input?.slice(-1));
-    cy.findAllByRole('option', { name: _.includes(searchTerm) })
+    cy.findAllByRole('option', { name: _fp.includes(searchTerm) })
       .first()
       .click();
   });
@@ -79,7 +79,8 @@ export const stubLokalisaatioRoute = () => {
 
 export const typeToEditor = value => {
   cy.get('.Editor__').within(() => {
-    cy.get('[contenteditable="true"]').pipe(paste(value));
+    // NOTE: .clear wont work here -> use type instead
+    cy.get('[contenteditable="true"]').type('{selectall}').pipe(paste(value));
   });
 };
 
@@ -259,7 +260,6 @@ export const fillValintakokeetSection = () => {
         typeToEditor('ohjeet erityisjärjestelyihin');
       });
 
-      getByTestId('tietoaHakijalle').find('input').pipe(paste('tietoa'));
       getByTestId('lisaaTilaisuusButton').click({ force: true });
       getByTestId('osoite').find('input').pipe(paste('osoite'));
       getByTestId('postinumero').within(() => {
@@ -280,7 +280,9 @@ export const fillValintakokeetSection = () => {
       });
 
       getByTestId('jarjestamispaikka').find('input').pipe(paste('paikka'));
-      getByTestId('lisatietoja').find('textarea').pipe(paste('lisatietoja'));
+      getByTestId('lisatietoja').within(() => {
+        typeToEditor('lisatietoja');
+      });
     });
     jatka();
   });
@@ -328,7 +330,7 @@ const isTutkintoonJohtava = koulutustyyppi =>
   ['amk', 'yo', 'amm', 'lk'].includes(koulutustyyppi);
 
 export const fillKoulutustyyppiSelect = koulutustyyppiPath => {
-  const johtaaTutkintoon = isTutkintoonJohtava(_.last(koulutustyyppiPath));
+  const johtaaTutkintoon = isTutkintoonJohtava(_fp.last(koulutustyyppiPath));
 
   if (johtaaTutkintoon) {
     cy.findByRole('button', {

@@ -1,4 +1,4 @@
-import getFormValuesByHakukohde from '#/src/utils/hakukohde/getFormValuesByHakukohde';
+import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
 import { HAKULOMAKETYYPPI, LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
 
 test('getFormValuesByHakukohde returns correct form values given hakukohde', () => {
@@ -14,8 +14,8 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
     liitteet: [
       {
         kuvaus: {
-          fi: 'Fi kuvaus',
-          sv: 'Sv kuvaus',
+          fi: '<p>Fi kuvaus</p>',
+          sv: '<p>Sv kuvaus</p>',
         },
         nimi: {
           fi: 'Fi nimi',
@@ -109,8 +109,8 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
               paattyy: '2019-04-18T08:44',
             },
             lisatietoja: {
-              fi: 'fi lisatietoja',
-              sv: 'sv lisatietoja',
+              fi: '<p>fi lisatietoja</p>',
+              sv: '<p>sv lisatietoja</p>',
             },
           },
         ],

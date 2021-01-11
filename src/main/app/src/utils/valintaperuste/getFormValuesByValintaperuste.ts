@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import getKokeetTaiLisanaytotValues from '#/src/utils/form/getKokeetTaiLisanaytotValues';
+import { getKokeetTaiLisanaytotValues } from '#/src/utils/form/getKokeetTaiLisanaytotValues';
 import { parseEditorState } from '#/src/components/Editor/utils';
 
 const parseSisalto = ({ sisalto }) => {
@@ -19,7 +19,7 @@ const parseSisalto = ({ sisalto }) => {
   });
 };
 
-const getFormValuesByValintaperuste = valintaperuste => {
+export const getFormValuesByValintaperuste = valintaperuste => {
   const {
     hakutapaKoodiUri = null,
     kielivalinta = [],
@@ -64,7 +64,7 @@ const getFormValuesByValintaperuste = valintaperuste => {
       }) => ({
         kuvaus: kuvaus || {},
         nimi: nimi || {},
-        kynnysehto: kynnysehto || {},
+        kynnysehto: _.mapValues(kynnysehto || {}, parseEditorState),
         tapa: valintatapaKoodiUri ? { value: valintatapaKoodiUri } : null,
         enimmaispistemaara: enimmaispisteet || '',
         vahimmaispistemaara: vahimmaispisteet || '',
@@ -82,5 +82,3 @@ const getFormValuesByValintaperuste = valintaperuste => {
     ),
   };
 };
-
-export default getFormValuesByValintaperuste;

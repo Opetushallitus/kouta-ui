@@ -3,14 +3,30 @@ import { EditorState } from 'draft-js';
 import { get, isObject, isFunction, isString } from 'lodash';
 import {
   convertToHTML as makeConvertToHTML,
-  convertFromHTML,
+  convertFromHTML as makeConvertFromHTML,
 } from 'draft-convert';
 import linkDecorator from './linkDecorator';
+
+const convertFromHTML = makeConvertFromHTML({
+  htmlToEntity: (nodeName, node, createEntity) => {
+    if (nodeName === 'a') {
+      return createEntity('LINK', 'MUTABLE', { url: node.href });
+    }
+  },
+});
 
 const convertToHTML = makeConvertToHTML({
   entityToHTML: (entity, originalText) => {
     if (entity.type === 'LINK') {
-      return <a href={get(entity, 'data.url') || ''}>{originalText}</a>;
+      return (
+        <a
+          href={get(entity, 'data.url') || ''}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          {originalText}
+        </a>
+      );
     }
 
     return originalText;

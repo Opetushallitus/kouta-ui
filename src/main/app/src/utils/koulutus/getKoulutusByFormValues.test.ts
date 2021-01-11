@@ -1,3 +1,4 @@
+import { parseEditorState } from '#/src/components/Editor/utils';
 import getKoulutusByFormValues from '#/src/utils/koulutus/getKoulutusByFormValues';
 
 test('getKoulutusByFormValues returns correct koulutus given form values', () => {
@@ -30,16 +31,16 @@ test('getKoulutusByFormValues returns correct koulutus given form values', () =>
       osioKuvaukset: {
         'osio_1#1': {},
         'osio_2#1': {
-          fi: 'Fi kuvaus',
-          sv: 'Sv kuvaus',
+          fi: parseEditorState('Fi kuvaus'),
+          sv: parseEditorState('Sv kuvaus'),
         },
       },
       osiot: [{ value: 'osio_1#1' }, { value: 'osio_2#1' }],
     },
     description: {
       kuvaus: {
-        fi: 'Fi kuvaus',
-        sv: 'Sv kuvaus',
+        fi: parseEditorState('Fi kuvaus'),
+        sv: parseEditorState('Sv kuvaus'),
       },
       nimi: {
         fi: 'Fi nimi',

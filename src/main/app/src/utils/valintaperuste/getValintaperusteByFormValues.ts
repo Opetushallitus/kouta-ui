@@ -2,7 +2,7 @@ import _ from 'lodash';
 import produce from 'immer';
 import { isNumeric, isDeepEmptyFormValues } from '#/src/utils';
 import { serializeEditorState } from '#/src/components/Editor/utils';
-import getKokeetTaiLisanaytotData from '#/src/utils/form/getKokeetTaiLisanaytotData';
+import { getKokeetTaiLisanaytotData } from '#/src/utils/form/getKokeetTaiLisanaytotData';
 
 const getArrayValue = (values, key) => {
   const valueCandidate = _.get(values, key);
@@ -59,7 +59,7 @@ const serializeSisalto = ({ sisalto, kielivalinta = [] }) => {
   });
 };
 
-const getValintaperusteByFormValues = values => {
+export const getValintaperusteByFormValues = values => {
   const { tila, muokkaaja, perustiedot } = values;
 
   const hakutapaKoodiUri = _.get(perustiedot, 'hakutapa');
@@ -90,7 +90,10 @@ const getValintaperusteByFormValues = values => {
       valintatapaKoodiUri: _.get(tapa, 'value'),
       sisalto: serializeSisalto({ sisalto, kielivalinta }),
       kaytaMuuntotaulukkoa: false,
-      kynnysehto: _.pick(kynnysehto || {}, kielivalinta),
+      kynnysehto: _.mapValues(
+        _.pick(kynnysehto || {}, kielivalinta),
+        serializeEditorState
+      ),
       enimmaispisteet: isNumeric(enimmaispistemaara)
         ? parseFloat(enimmaispistemaara)
         : null,
@@ -102,7 +105,7 @@ const getValintaperusteByFormValues = values => {
 
   const valintakokeidenYleiskuvaus = _.mapValues(
     _.get(values, 'valintakokeet.yleisKuvaus'),
-    kuvaus => serializeEditorState(kuvaus)
+    serializeEditorState
   );
 
   const valintakokeet = getKokeetTaiLisanaytotData({
@@ -128,12 +131,10 @@ const getValintaperusteByFormValues = values => {
     metadata: {
       tyyppi: koulutustyyppi,
       valintatavat,
-      kielitaitovaatimukset: [],
-      osaamistaustaKoodiUrit: [],
+      kielitaitovaatimukset: [], // TODO: Obsolete, remove from backend
+      osaamistaustaKoodiUrit: [], // TODO: Obsolete, remove from backend
       kuvaus,
       valintakokeidenYleiskuvaus,
     },
   };
 };
-
-export default getValintaperusteByFormValues;

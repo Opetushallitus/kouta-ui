@@ -40,34 +40,34 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
         kuukautta: 6,
       },
       suunniteltuKestoKuvaus: {
-        fi: 'Fi aikakuvaus',
-        sv: 'Sv aikakuvaus',
+        fi: parseEditorState('Fi aikakuvaus'),
+        sv: parseEditorState('Sv aikakuvaus'),
       },
       opetusaikaKuvaus: {
-        fi: 'Fi aikakuvaus',
-        sv: 'Sv aikakuvaus',
+        fi: parseEditorState('Fi aikakuvaus'),
+        sv: parseEditorState('Sv aikakuvaus'),
       },
       opetustapaKuvaus: {
-        fi: 'Fi tapakuvaus',
-        sv: 'Sv tapakuvaus',
+        fi: parseEditorState('Fi tapakuvaus'),
+        sv: parseEditorState('Sv tapakuvaus'),
       },
       opetuskieliKuvaus: {
-        fi: 'Fi kielikuvaus',
-        sv: 'Sv kielikuvaus',
+        fi: parseEditorState('Fi kielikuvaus'),
+        sv: parseEditorState('Sv kielikuvaus'),
       },
       maksullisuusKuvaus: {
-        fi: 'Fi maksullisuuskuvaus',
-        sv: 'Sv maksullisuuskuvaus',
+        fi: parseEditorState('Fi maksullisuuskuvaus'),
+        sv: parseEditorState('Sv maksullisuuskuvaus'),
       },
       osiot: [{ value: 'osio_1#1' }, { value: 'osio_2#1' }],
       osioKuvaukset: {
         'osio_1#1': {
-          fi: 'Fi kuvaus1',
-          sv: 'Sv kuvaus1',
+          fi: parseEditorState('Fi kuvaus1'),
+          sv: parseEditorState('Sv kuvaus1'),
         },
         'osio_2#1': {
-          fi: 'Fi kuvaus2',
-          sv: 'Sv kuvaus2',
+          fi: parseEditorState('Fi kuvaus2'),
+          sv: parseEditorState('Sv kuvaus2'),
         },
       },
       koulutuksenAlkamispaivamaara: null,
@@ -80,13 +80,13 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
       onkoStipendia: 'kylla',
       stipendinMaara: 20,
       stipendinKuvaus: {
-        fi: 'Fi stipendikuvaus',
-        sv: 'Sv stipendikuvaus',
+        fi: parseEditorState('Fi stipendikuvaus'),
+        sv: parseEditorState('Sv stipendikuvaus'),
       },
       diplomiTyypit: [{ value: 'diplomi_1#1' }, { value: 'diplomi_2#1' }],
       diplomiKuvaus: {
-        fi: 'Fi diplomi',
-        sv: 'Sv diplomi',
+        fi: parseEditorState('Fi diplomi'),
+        sv: parseEditorState('Sv diplomi'),
       },
       A1A2Kielet: [{ value: 'kieli_1#1' }],
       B2Kielet: [{ value: 'kieli_2#1' }],
@@ -140,7 +140,10 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
     ylemmanKorkeakoulututkinnonOsaamisalat: [
       {
         nimi: { fi: 'Fi ylempinimi', sv: 'Sv ylempinimi' },
-        kuvaus: { fi: 'Fi ylempikuvaus', sv: 'Sv ylempikuvaus' },
+        kuvaus: {
+          fi: parseEditorState('Fi ylempikuvaus'),
+          sv: parseEditorState('Sv ylempikuvaus'),
+        },
         linkki: { fi: 'Fi ylempilinkki', sv: 'Sv ylempilinkki' },
         otsikko: { fi: 'Fi ylempiotsikko', sv: 'Sv ylempiotsikko' },
       },
@@ -148,7 +151,10 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
     alemmanKorkeakoulututkinnonOsaamisalat: [
       {
         nimi: { fi: 'Fi alempinimi', sv: 'Sv alempinimi' },
-        kuvaus: { fi: 'Fi alempikuvaus', sv: 'Sv alempikuvaus' },
+        kuvaus: {
+          fi: parseEditorState('Fi alempikuvaus'),
+          sv: parseEditorState('Sv alempikuvaus'),
+        },
         linkki: { fi: 'Fi alempilinkki', sv: 'Sv alempilinkki' },
         otsikko: { fi: 'Fi alempiotsikko', sv: 'Sv alempiotsikko' },
       },
@@ -168,8 +174,8 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
           sv: 'Sv laajuus',
         },
         kuvaus: {
-          fi: 'Fi kuvaus',
-          sv: 'Sv kuvaus',
+          fi: parseEditorState('Fi kuvaus'),
+          sv: parseEditorState('Sv kuvaus'),
         },
         ilmoittautumislinkki: {
           fi: 'Fi linkki',

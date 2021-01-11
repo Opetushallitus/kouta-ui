@@ -5,8 +5,9 @@ import {
   HAKULOMAKETYYPPI,
   TOTEUTUKSEN_AJANKOHTA,
 } from '#/src/constants';
-import getFormValuesByHaku, {
+import {
   alkamiskausityyppiToToteutuksenAjankohta,
+  getFormValuesByHaku,
 } from './getFormValuesByHaku';
 
 const baseHaku = {
@@ -73,7 +74,7 @@ test('getFormValuesByHaku returns correct form values given different hakulomake
     merge({}, baseHaku, {
       hakulomaketyyppi: HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA,
       hakulomakeKuvaus: {
-        fi: 'kuvaus',
+        fi: '<p>kuvaus</p>',
       },
     })
   );

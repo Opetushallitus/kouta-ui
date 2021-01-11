@@ -23,8 +23,8 @@ Object {
       "sv": "Sv nimi",
     },
     "kuvaus": Object {
-      "fi": "Fi kuvaus",
-      "sv": "Sv kuvaus",
+      "fi": "<p>Fi kuvaus</p>",
+      "sv": "<p>Sv kuvaus</p>",
     },
     "lisatiedot": Array [
       Object {
@@ -34,8 +34,8 @@ Object {
       Object {
         "otsikkoKoodiUri": "osio_2#1",
         "teksti": Object {
-          "fi": "Fi kuvaus",
-          "sv": "Sv kuvaus",
+          "fi": "<p>Fi kuvaus</p>",
+          "sv": "<p>Sv kuvaus</p>",
         },
       },
     ],

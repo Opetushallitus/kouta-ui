@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import getHakuByFormValues from '#/src/utils/haku/getHakuByFormValues';
+import { getHakuByFormValues } from '#/src/utils/haku/getHakuByFormValues';
 import updateHaku from '#/src/utils/haku/updateHaku';
 import validateHakuForm from '#/src/utils/haku/validateHakuForm';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';

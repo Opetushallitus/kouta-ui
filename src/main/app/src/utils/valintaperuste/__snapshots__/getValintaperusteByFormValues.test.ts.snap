@@ -30,8 +30,8 @@ Object {
           "sv": "Sv kuvaus",
         },
         "kynnysehto": Object {
-          "fi": "Fi kynnysehto",
-          "sv": "Sv kynnysehto",
+          "fi": "<p>Fi kynnysehto</p>",
+          "sv": "<p>Sv kynnysehto</p>",
         },
         "nimi": Object {
           "fi": "Fi nimi",
@@ -138,8 +138,8 @@ Object {
             "sv": "jarjestamispaikka - sv",
           },
           "lisatietoja": Object {
-            "fi": "fi lisatietoja",
-            "sv": "sv lisatietoja",
+            "fi": "<p>fi lisatietoja</p>",
+            "sv": "<p>sv lisatietoja</p>",
           },
           "osoite": Object {
             "osoite": Object {
@@ -221,8 +221,8 @@ Object {
             "sv": "jarjestamispaikka - sv",
           },
           "lisatietoja": Object {
-            "fi": "fi lisatietoja",
-            "sv": "sv lisatietoja",
+            "fi": "<p>fi lisatietoja</p>",
+            "sv": "<p>sv lisatietoja</p>",
           },
           "osoite": Object {
             "osoite": Object {

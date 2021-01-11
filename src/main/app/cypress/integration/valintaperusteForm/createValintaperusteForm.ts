@@ -70,7 +70,9 @@ const fillValintatapaSection = () => {
           });
       });
 
-      getByTestId('kynnysehto').find('textarea').pipe(paste('Kynnysehto'));
+      getByTestId('kynnysehto').within(() => {
+        typeToEditor('Kynnysehto');
+      });
       getByTestId('enimmaispistemaara').find('input').pipe(paste('100'));
       getByTestId('vahimmaispistemaara').find('input').pipe(paste('10'));
     });

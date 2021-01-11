@@ -21,8 +21,8 @@ Object {
       Object {
         "otsikkoKoodiUri": "osio_1#1",
         "teksti": Object {
-          "fi": "Fi tiedot",
-          "sv": "Sv tiedot",
+          "fi": "<p>Fi tiedot</p>",
+          "sv": "<p>Sv tiedot</p>",
         },
       },
     ],

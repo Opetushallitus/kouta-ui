@@ -29,8 +29,8 @@ Object {
     ],
     "tiedot": Object {
       "osio_1#1": Object {
-        "fi": "Fi tiedot",
-        "sv": "Sv tiedot",
+        "fi":           "<p>Fi tiedot</p>",
+        "sv":           "<p>Sv tiedot</p>",
       },
     },
   },

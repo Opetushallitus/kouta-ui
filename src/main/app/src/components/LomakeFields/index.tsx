@@ -7,7 +7,7 @@ import {
   FormFieldSelect,
   FormFieldInput,
   FormFieldRadioGroup,
-  FormFieldTextarea,
+  FormFieldEditor,
 } from '#/src/components/formFields';
 
 import { HAKULOMAKETYYPPI } from '#/src/constants';
@@ -84,8 +84,9 @@ const AdditionalTyyppiFields = ({
       return (
         <Field
           name={`${baseName}.kuvaus.${language}`}
-          component={FormFieldTextarea}
+          component={FormFieldEditor}
           label={t('yleiset.kuvaus')}
+          hideHeaderSelect
         />
       );
     default:
@@ -165,5 +166,3 @@ export const LomakeFields = ({
     </Flex>
   );
 };
-
-export default LomakeFields;

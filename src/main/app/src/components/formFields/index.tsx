@@ -6,7 +6,6 @@ import {
   Input,
   Radio,
   RadioGroup,
-  Textarea,
 } from '#/src/components/virkailija';
 import { Select, AsyncSelect } from '#/src/components/Select';
 import { DatePickerInput } from '#/src/components/DatePickerInput';
@@ -72,8 +71,6 @@ export const FormFieldCheckboxGroup = createComponent(
   CheckboxGroup,
   simpleMapProps
 );
-
-export const FormFieldTextarea = createComponent(Textarea, simpleMapProps);
 
 export const FormFieldSelect = createComponent(
   Select,

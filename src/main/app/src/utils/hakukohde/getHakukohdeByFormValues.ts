@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
 import { isNumeric } from '#/src/utils';
-import getKokeetTaiLisanaytotData from '#/src/utils/form/getKokeetTaiLisanaytotData';
-import getHakulomakeFieldsData from '#/src/utils/form/getHakulomakeFieldsData';
+import { getKokeetTaiLisanaytotData } from '#/src/utils/form/getKokeetTaiLisanaytotData';
+import { getHakulomakeFieldsData } from '#/src/utils/form/getHakulomakeFieldsData';
 import { serializeEditorState } from '#/src/components/Editor/utils';
 import { LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
 
@@ -17,11 +17,9 @@ const getLiitteillaYhteinenToimitusosoite = values =>
 const getKaytetaanHaunAikataulua = values =>
   !_.get(values, 'hakuajat.eriHakuaika');
 
-const getAsNumberOrNull = value => {
-  return isNumeric(value) ? parseInt(value) : null;
-};
+const getAsNumberOrNull = value => (isNumeric(value) ? parseInt(value) : null);
 
-const getHakukohdeByFormValues = values => {
+export const getHakukohdeByFormValues = values => {
   const { muokkaaja, tila, jarjestyspaikkaOid } = values;
   const alkamiskausiKoodiUri = _.get(values, 'alkamiskausi.kausi') || null;
   const alkamisvuosi = getAsNumberOrNull(
@@ -103,7 +101,10 @@ const getHakukohdeByFormValues = values => {
                 sahkoposti: _.get(toimitustapa, 'paikka.sahkoposti') || null,
               }
             : null,
-        kuvaus: _.pick(kuvaus || {}, kielivalinta),
+        kuvaus: _.mapValues(
+          _.pick(kuvaus || {}, kielivalinta),
+          serializeEditorState
+        ),
       };
     }
   );
@@ -189,5 +190,3 @@ const getHakukohdeByFormValues = values => {
     },
   };
 };
-
-export default getHakukohdeByFormValues;

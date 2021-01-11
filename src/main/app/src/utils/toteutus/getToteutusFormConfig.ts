@@ -386,8 +386,14 @@ const config = createFormConfigBuilder().registerSections([
                 validateExistenceOfDate(
                   'hakeutumisTaiIlmoittautumistapa.hakuaikaAlkaa'
                 ),
-                validateExistenceOfDate(
-                  'hakeutumisTaiIlmoittautumistapa.hakuaikaPaattyy'
+                validateIf(
+                  ![
+                    KOULUTUSTYYPPI.TUTKINNON_OSA,
+                    KOULUTUSTYYPPI.OSAAMISALA,
+                  ].includes(values.koulutustyyppi),
+                  validateExistenceOfDate(
+                    'hakeutumisTaiIlmoittautumistapa.hakuaikaPaattyy'
+                  )
                 )
               )
             ),

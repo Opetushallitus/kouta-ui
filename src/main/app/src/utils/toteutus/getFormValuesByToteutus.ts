@@ -22,6 +22,7 @@ const kieliArvoListToMultiSelectValue = _fp.reduce((acc, curr: any) => {
 
 const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
   const {
+    koulutustyyppi,
     kielivalinta,
     nimi,
     tarjoajat,
@@ -58,8 +59,17 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     B3Kielivalikoima,
     muuKielivalikoima,
     lisatiedot,
-    koulutuksenAlkamiskausi = {},
+    koulutuksenAlkamiskausiUUSI = {},
   } = opetus;
+
+  const {
+    alkamiskausityyppi,
+    koulutuksenAlkamiskausiKoodiUri = null,
+    koulutuksenAlkamispaivamaara = null,
+    koulutuksenPaattymispaivamaara = null,
+    koulutuksenAlkamisvuosi = '',
+    henkilokohtaisenSuunnitelmanLisatiedot,
+  } = koulutuksenAlkamiskausiUUSI;
 
   const { osaamisalaLinkit, osaamisalaLinkkiOtsikot } = _fp.reduce(
     (acc, curr: any) => {
@@ -82,6 +92,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     : 'ei';
 
   return {
+    koulutustyyppi,
     tila,
     tiedot: {
       nimi: nimi ?? {},

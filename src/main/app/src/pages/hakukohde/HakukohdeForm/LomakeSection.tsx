@@ -1,10 +1,9 @@
 import React from 'react';
 import { Field } from 'redux-form';
-import { get } from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import { LomakeFields } from '#/src/components/LomakeFields';
-import { FormFieldCheckbox } from '#/src/components/formFields';
+import { FormFieldSwitch } from '#/src/components/formFields';
 import Spacing from '#/src/components/Spacing';
 import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
@@ -12,6 +11,7 @@ import { HAKULOMAKETYYPPI } from '#/src/constants';
 import { Typography } from '#/src/components/virkailija';
 import Anchor from '#/src/components/Anchor';
 import { useUrls } from '#/src/contexts/contextHooks';
+import { InlineInfoBox } from '#/src/components/InlineInfoBox';
 
 const hakulomakeTyyppiToLabel = {
   [HAKULOMAKETYYPPI.MUU]: 'hakukohdelomake.hakuunLiitettyMuuLomake',
@@ -21,13 +21,10 @@ const hakulomakeTyyppiToLabel = {
 
 const HakulomakeInfo = ({ haku, t }) => {
   const apiUrls = useUrls();
-  const hakulomaketyyppi = get(haku, 'hakulomaketyyppi');
-  const hakulomakeId = get(haku, 'hakulomakeId');
+  const hakulomaketyyppi = haku?.hakulomaketyyppi;
+  const hakulomakeId = haku?.hakulomakeAtaruId;
 
-  const hakulomakeLinkki = getFirstLanguageValue(
-    get(haku, 'hakulomakeLinkki'),
-    'fi'
-  );
+  const hakulomakeLinkki = getFirstLanguageValue(haku?.hakulomakeLinkki, 'fi');
 
   let link;
 
@@ -36,24 +33,26 @@ const HakulomakeInfo = ({ haku, t }) => {
   } else if (hakulomaketyyppi === HAKULOMAKETYYPPI.MUU && hakulomakeLinkki) {
     link = hakulomakeLinkki;
   }
-
   const label = hakulomaketyyppi
     ? hakulomakeTyyppiToLabel[hakulomaketyyppi]
     : undefined;
 
   return label ? (
-    <Typography>
-      {t('hakukohdelomake.hakuunLiitettyLomake')}:{' '}
-      <strong>
-        {link ? (
-          <Anchor target="_blank" rel="noopener noreferrer" href={link}>
-            {t(label)}
-          </Anchor>
-        ) : (
-          t(label)
-        )}
-      </strong>
-    </Typography>
+    <InlineInfoBox
+      title={`${t('hakukohdelomake.hakuunLiitettyLomake')}:`}
+      iconType="insert_drive_file"
+      value={
+        <>
+          {link ? (
+            <Anchor target="_blank" rel="noopener noreferrer" href={link}>
+              {t(label)}
+            </Anchor>
+          ) : (
+            t(label)
+          )}
+        </>
+      }
+    />
   ) : (
     <Typography>{t('hakukohdelomake.hakuunEiOleLiitettyLomaketta')}</Typography>
   );
@@ -73,7 +72,7 @@ const ConditionalLomakeFields = ({
 
 const LomakeSection = ({ language, haku }) => {
   const { t } = useTranslation();
-  const haunHakulomaketyyppi = get(haku, 'hakulomaketyyppi');
+  const haunHakulomaketyyppi = haku?.hakulomaketyyppi;
   const canSelectHakulomake = haunHakulomaketyyppi === HAKULOMAKETYYPPI.MUU;
 
   return (
@@ -84,7 +83,7 @@ const LomakeSection = ({ language, haku }) => {
       <div {...getTestIdProps('eriHakulomake')}>
         <Field
           name="hakulomake.eriHakulomake"
-          component={FormFieldCheckbox}
+          component={FormFieldSwitch}
           disabled={!canSelectHakulomake}
           helperText={
             !canSelectHakulomake

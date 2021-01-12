@@ -5,38 +5,27 @@ import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
 } from '#/src/components/FormPage';
-import useApiAsync from '#/src/hooks/useApiAsync';
 import { Spin } from '#/src/components/virkailija';
-import getHakuByOid from '#/src/utils/haku/getHakuByOid';
+import { useHakuByOid } from '#/src/utils/haku/getHakuByOid';
 import Title from '#/src/components/Title';
 import ReduxForm from '#/src/components/ReduxForm';
 import { getFormValuesByHaku } from '#/src/utils/haku/getFormValuesByHaku';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
-import { ENTITY, CRUD_ROLES } from '#/src/constants';
+import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormSteps from '#/src/components/FormSteps';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { useEntityFormConfig } from '#/src/hooks/form';
-import EditHakuFooter from './EditHakuFooter';
-import HakuForm from '#/src/pages/haku/HakuForm';
+import { HakuFooter } from './HakuFooter';
+import HakuForm from './HakuForm';
 
-const EditHakuPage = props => {
-  const {
-    history,
-    match: {
-      params: { organisaatioOid, oid },
-    },
-    location: { state = {} },
-  } = props;
-
-  const { hakuUpdatedAt = null } = state;
-  const watch = JSON.stringify([oid, hakuUpdatedAt]);
-
-  const { data: haku = null } = useApiAsync({
-    promiseFn: getHakuByOid,
-    oid,
-    watch,
-  });
+const EditHakuPage = ({
+  history,
+  match: {
+    params: { organisaatioOid, oid },
+  },
+}) => {
+  const { data: haku, isFetching } = useHakuByOid({ oid });
 
   const { t } = useTranslation();
   const initialValues = useMemo(() => {
@@ -63,7 +52,7 @@ const EditHakuPage = props => {
   const config = useEntityFormConfig(ENTITY.HAKU);
 
   return (
-    <ReduxForm form="editHakuForm" initialValues={initialValues}>
+    <ReduxForm form="hakuForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.haunMuokkaus')}</Title>
       <FormConfigContext.Provider value={{ ...config, readOnly: !canUpdate }}>
         <FormPage
@@ -71,13 +60,19 @@ const EditHakuPage = props => {
           header={<EntityFormHeader entityType={ENTITY.HAKU} entity={haku} />}
           steps={<FormSteps activeStep={ENTITY.HAKU} />}
           footer={
-            haku ? <EditHakuFooter haku={haku} canUpdate={canUpdate} /> : null
+            haku ? (
+              <HakuFooter
+                haku={haku}
+                formMode={FormMode.EDIT}
+                canUpdate={canUpdate}
+              />
+            ) : null
           }
         >
           <RelationInfoContainer>
             <OrganisaatioRelation organisaatioOid={organisaatioOid} />
           </RelationInfoContainer>
-          {haku ? (
+          {!isFetching && haku ? (
             <HakuForm
               haku={haku}
               organisaatioOid={organisaatioOid}

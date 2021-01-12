@@ -269,13 +269,18 @@ export const EPERUSTE_SERVICE_QUERY_OPTIONS = {
   cacheTime: Infinity,
 };
 
-export enum ALKAMISKAUSITYYPPI {
+export enum Alkamiskausityyppi {
   TARKKA_ALKAMISAJANKOHTA = 'tarkka alkamisajankohta',
   ALKAMISKAUSI_JA_VUOSI = 'alkamiskausi ja -vuosi',
   HENKILOKOHTAINEN_SUUNNITELMA = 'henkilokohtainen suunnitelma',
 }
 
-export enum TOTEUTUKSEN_AJANKOHTA {
+export enum Ajankohtatyyppi {
   ALKAMISKAUSI = 'alkamiskausi',
   HENKILOKOHTAINEN_SUUNNITELMA = 'aloitusHenkilokohtaisenSuunnitelmanMukaisesti',
+}
+
+export enum FormMode {
+  CREATE = 'create',
+  EDIT = 'edit',
 }

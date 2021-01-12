@@ -1,11 +1,23 @@
 # Kouta-UI
 
-Uuden koulutustarjonnan käyttöliittymä.
+Uuden koulutustarjonnan virkailijan käyttöliittymä.
 
 Kouta-UI on luotu create-react-app:lla, ja se on kääritty Spring Boot 2.0 -sovellukseen, jonka ainoa tehtävä on jakaa käyttöliittymä.
 
 [![Build Status](https://travis-ci.com/Opetushallitus/kouta-ui.svg?branch=master)](https://travis-ci.com/Opetushallitus/kouta-ui)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/4fd6253f529e45efaba604131e864189)](https://www.codacy.com/gh/Opetushallitus/kouta-ui/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Opetushallitus/kouta-ui&amp;utm_campaign=Badge_Grade)
+
+## Arkkitehtuuri ja kirjastot
+
+### Lomakkeiden logiikka
+
+Lomakkeiden kenttien näkyvyys riippuu muiden kenttien arvoista sekä käyttäjän oikeuksista (joitakin kenttiä näytetään ainoastaan OPH-virkailijoille). Lomakkeiden kenttien näkyvyyksien määrittelyt on tämän kirjoitusaikana (joulukuu 2020) toteutettu osittain lomakkeiden React-komponenteissa ja osittain FormConfig-objekteissa. FormConfig-objektien takia osa lomakkeiden logiikasta sijaitsee erillään komponenteista joihin se vaikuttaa. Tämä aiheuttaa hämmennystä etenkin uusissa kehittäjissä. FormConfig-objekteissa määritelty lomakkeiden kenttien piilottamiseen/näyttämiseen liittyvä logiikka on päätetty siirtää lomakkeiden komponentteihin. 
+
+Lomakkeiden tilan hallinta on toteutettu redux-form-kirjastolla. Redux-form *rekisteröi* kentän kun sitä vastaava komponentti renderöidään. Vastaavasti *rekisteröinti poistetaan* (unregister), kun kenttää vastaava komponentti poistetaan. Näiden redux-tapahtumien avulla tunnistetaan milloin käyttäjä on poistanut kentät itse näkyvistä ja niille halutaan lähettää tyhjä arvo. Tämä onnistuu, koska *unregister*-tapahtumaa ei lähetetä alussa kun kenttä on piilossa.
+
+### Palvelinkyselyiden hallinta ja muistintaminen
+
+Tämän kirjoitusaikana (joulukuu 2020) Kouta-UI:n API-kutsut on toteutettu usealla eri tavalla ja erilaisilla välimuistiratkaisuilla. Jotkin kyselyistä halutaan muistintaa pitkään (organisaatiopalvelu, eperusteet, koodisto jne.), ja joitakin vain hyvin lyhyen aikaa (kouta-backend). Haasteena on myös saman palvelimelta ladatun tiedon käyttäminen eri komponenteissa. Osittain on otettu käyttöön react-query, joka tarjoaa miellyttävän abstraktion palvelinpyyntöjen hallintaan. Samantyyppinen kouta-ui:ssa käytetty react-async-kirjasto ei tarjoa välimuistiratkaisuja ja jättää edelleen `useEffect`:in tapaan riippuvuuksien serialisoinnin käyttäjälle, mikä johtaa helposti ikuisiin latauslooppeihin ja muihin vastaaviin ongelmiin. Tavoite on korvata React-async kokonaan käyttäen react-query-kirjastoa.
 
 ## Käyttöliittymän kehittäminen
 
@@ -93,17 +105,18 @@ Yksikkötestit löytyvät testattavan moduulin `*.test.jsx?` (esim. `components/
 
 Yksikkötestit voi ajaa komennolla `npm test` ja integraatiotestit komennolla `npm run test:integration`. Kaikki testit pystyy ajamaan komennolla `npm run test:ci`.
 
-### Cypress TestRunner, interaktiivisesti
+### Integraatiotestien ajaminen interaktiivisesti (Cypress)
 
-On hauska katsoa ja korjata cypress testia interaktiivisti Cypress TestRunnerilla: 
+Cypress-testejä voi ajaa myös interaktiivisesti käynnistämällä ensin kouta-ui:n integraatio-moodissa:
 
     cd src/main/app
-    npm start
+    npm start:integration
 
-Ja sitten samassa kansiossa, mutta toisessa shellissa: 
+ja sitten samassa kansiossa, mutta toisessa shellissa: 
 
     npx cypress open
     
+Cypress-integraatiotestit olettavat, että sovellus on renderöity käyttäen käännösavaimia, minkä vuoksi on käytettävä `npm start:integration`tai `npm start:integration:debug` komentoa sovelluksen käynnistämiseen. Npm Skripti `start:integration:debug` eroaa `start:integration`:sta siten, että se sallii sovelluksen kyselyt ulkopuolelle. Tämä helpottaa mm. cypressin-testien api-mockien päivittämistä ja testaamista, kun taas normaalisti integraatiotesteissä halutaan estää yhteydet ulkopuolisiin rajapintoihin.
 ### API-kutsujen mockaaminen
 
 Kouta-UI:ssa on toteutettu omat työkalut API-kutsujen mockauksen helpottamiseen. `npm run update-mocks` käy läpi hakemiston `cypress/mocks` JSON-tiedostot, kutsuu niissä määriteltyjä HTTP-pyyntöjä ja päivittää vastaukset kyseisiin tiedostoihin. Pellin alla kutsutaan nodejs:llä toteutettua `update-mocks.js`-skriptiä, jonka voi ajaa myös itse antamalla sille komentoriviparametrina polun hakemistoon, jossa päivitettävät mock-tiedostot sijatsevat. Mock-tiedostojen formaatti on seuraavanlainen:

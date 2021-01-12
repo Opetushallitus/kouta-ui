@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useDispatch, batch, useStore } from 'react-redux';
+import { useDispatch, batch } from 'react-redux';
 import _ from 'lodash';
 import {
   startSubmit as startSubmitAction,
@@ -17,23 +17,24 @@ import validateToteutusForm from '#/src/utils/toteutus/validateToteutusForm';
 import validateHakukohdeForm from '#/src/utils/hakukohde/validateHakukohdeForm';
 import validateValintaperusteForm from '#/src/utils/valintaperuste/validateValintaperusteForm';
 import useToaster from '#/src/hooks/useToaster';
+import { useForm } from '#/src/hooks/form';
 
-export const useSaveForm = ({ form, validate, submit }) => {
+export const useSaveForm = ({ form: formName, validate, submit }) => {
   const dispatch = useDispatch();
   const user = useAuthorizedUser();
   const httpClient = useHttpClient();
   const apiUrls = useUrls();
-  const store = useStore();
   const { openSavingSuccessToast, openSavingErrorToast } = useToaster();
+  const form = useForm(formName);
 
   const startSubmit = useCallback(() => {
-    return dispatch(startSubmitAction(form));
-  }, [form, dispatch]);
+    return dispatch(startSubmitAction(formName));
+  }, [formName, dispatch]);
 
   const stopSubmit = useCallback(
     ({ errors, errorToast, successToast }) => {
       batch(() => {
-        dispatch(stopSubmitAction(form, errors));
+        dispatch(stopSubmitAction(formName, errors));
 
         if (errorToast) {
           errors && openSavingErrorToast();
@@ -42,13 +43,13 @@ export const useSaveForm = ({ form, validate, submit }) => {
         }
       });
     },
-    [form, dispatch, openSavingSuccessToast, openSavingErrorToast]
+    [formName, dispatch, openSavingSuccessToast, openSavingErrorToast]
   );
 
   const save = useCallback(async () => {
-    const values = _.get(store.getState(), ['form', form, 'values']) || {};
-    const muokkaaja = _.get(user, 'oid');
-    const enhancedValues = { muokkaaja, ...values };
+    const muokkaaja = user?.oid;
+    const currentValues = form?.values ?? {};
+    const enhancedValues = { muokkaaja, ...currentValues };
 
     startSubmit();
 
@@ -61,6 +62,7 @@ export const useSaveForm = ({ form, validate, submit }) => {
           stopSubmit({ successToast: true })
         );
       } else {
+        console.error(errors);
         stopSubmit({ errors, errorToast: true });
       }
     } catch (e) {
@@ -68,15 +70,14 @@ export const useSaveForm = ({ form, validate, submit }) => {
       stopSubmit({ errorToast: true });
     }
   }, [
-    store,
     form,
     user,
     startSubmit,
-    stopSubmit,
     validate,
     submit,
     httpClient,
     apiUrls,
+    stopSubmit,
   ]);
 
   return {

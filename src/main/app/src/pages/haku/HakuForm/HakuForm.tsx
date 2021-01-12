@@ -7,7 +7,7 @@ import Button from '#/src/components/Button';
 import { LomakeFields } from '#/src/components/LomakeFields';
 import useModal from '#/src/hooks/useModal';
 import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
-import { useFieldValue } from '#/src/hooks/form';
+import { useFieldValue, useSelectedLanguages } from '#/src/hooks/form';
 import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import PohjaValintaSection from '#/src/components/PohjaValintaSection';
@@ -34,8 +34,7 @@ const HakuForm = ({
 }) => {
   const { t } = useTranslation();
   const { isOpen, open, close } = useModal();
-  const kieliversiot = useFieldValue('kieliversiot');
-  const languages = kieliversiot || [];
+  const languages = useSelectedLanguages();
   const hakutapa = useFieldValue('hakutapa');
   const isYhteishaku = isYhteishakuHakutapa(hakutapa);
 
@@ -99,6 +98,7 @@ const HakuForm = ({
           Component={ScheduleSection}
           isYhteishaku={isYhteishaku}
           isOphVirkailija={isOphVirkailija}
+          languages={languages}
         />
 
         <FormCollapse

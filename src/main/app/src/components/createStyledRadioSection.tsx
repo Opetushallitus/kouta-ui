@@ -23,31 +23,36 @@ const StyledBlueBox = styled(Box)`
 `;
 
 export const createStyledRadioSection = radioConfig =>
-  createFormFieldComponent(({ onChange, value, section }) => {
-    const { t } = useTranslation();
-    return (
-      <Box display="flex" flexDirection="column">
-        {radioConfig.map(
-          ({ label = '', value: radioValue, FieldsComponent }) => {
-            const isChecked = value === radioValue;
-            return (
-              <Box key={radioValue} display="flex" flexDirection="column">
-                <StyledGrayRadio
-                  checked={isChecked}
-                  value={radioValue}
-                  onChange={onChange}
-                >
-                  {_.isFunction(label) ? label(t) : label}
-                </StyledGrayRadio>
-                {isChecked && FieldsComponent && (
-                  <StyledBlueBox>
-                    <FieldsComponent name={section} />
-                  </StyledBlueBox>
-                )}
-              </Box>
-            );
-          }
-        )}
-      </Box>
-    );
-  }, simpleMapProps);
+  createFormFieldComponent(
+    ({ onChange, value, section, disabled, language, error }) => {
+      const { t } = useTranslation();
+      return (
+        <Box display="flex" flexDirection="column">
+          {radioConfig.map(
+            ({ label = '', value: radioValue, FieldsComponent }) => {
+              const isChecked = value === radioValue;
+              return (
+                <Box key={radioValue} display="flex" flexDirection="column">
+                  <StyledGrayRadio
+                    checked={isChecked}
+                    value={radioValue}
+                    onChange={onChange}
+                    disabled={disabled}
+                    error={error}
+                  >
+                    {_.isFunction(label) ? label(t) : label}
+                  </StyledGrayRadio>
+                  {isChecked && FieldsComponent && (
+                    <StyledBlueBox>
+                      <FieldsComponent name={section} language={language} />
+                    </StyledBlueBox>
+                  )}
+                </Box>
+              );
+            }
+          )}
+        </Box>
+      );
+    },
+    simpleMapProps
+  );

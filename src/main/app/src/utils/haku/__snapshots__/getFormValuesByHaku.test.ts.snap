@@ -9,6 +9,7 @@ Object {
         "paattyy": "2019-08-01T12:45",
       },
     ],
+    "ajankohtaTyyppi": "alkamiskausi",
     "ajastettuJulkaisu": "2020-01-20T05:00",
     "hakuaika": Array [
       Object {
@@ -16,13 +17,13 @@ Object {
         "paattyy": "2019-09-29T12:30",
       },
     ],
+    "henkilokohtaisenSuunnitelmanLisatiedot": Object {},
     "kausi": "alkamiskausi_1#1",
     "lisaamisenTakaraja": "2019-03-29T12:28",
     "muokkauksenTakaraja": "2019-03-11T09:45",
-    "tarkkaAlkaa": "2020-12-20T12:28",
-    "tarkkaPaattyy": "2020-12-21T12:28",
-    "tiedossaTarkkaAjankohta": true,
-    "toteutuksenAjankohta": "alkamiskausi",
+    "tarkkaAlkaa": null,
+    "tarkkaPaattyy": null,
+    "tiedossaTarkkaAjankohta": false,
     "vuosi": Object {
       "value": "2020",
     },
@@ -88,6 +89,7 @@ Object {
         "paattyy": "2019-08-01T12:45",
       },
     ],
+    "ajankohtaTyyppi": "alkamiskausi",
     "ajastettuJulkaisu": "2020-01-20T05:00",
     "hakuaika": Array [
       Object {
@@ -95,13 +97,13 @@ Object {
         "paattyy": "2019-09-29T12:30",
       },
     ],
+    "henkilokohtaisenSuunnitelmanLisatiedot": Object {},
     "kausi": "alkamiskausi_1#1",
     "lisaamisenTakaraja": "2019-03-29T12:28",
     "muokkauksenTakaraja": "2019-03-11T09:45",
-    "tarkkaAlkaa": "2020-12-20T12:28",
-    "tarkkaPaattyy": "2020-12-21T12:28",
-    "tiedossaTarkkaAjankohta": true,
-    "toteutuksenAjankohta": "alkamiskausi",
+    "tarkkaAlkaa": null,
+    "tarkkaPaattyy": null,
+    "tiedossaTarkkaAjankohta": false,
     "vuosi": Object {
       "value": "2020",
     },
@@ -167,6 +169,7 @@ Object {
         "paattyy": "2019-08-01T12:45",
       },
     ],
+    "ajankohtaTyyppi": "alkamiskausi",
     "ajastettuJulkaisu": "2020-01-20T05:00",
     "hakuaika": Array [
       Object {
@@ -174,15 +177,177 @@ Object {
         "paattyy": "2019-09-29T12:30",
       },
     ],
+    "henkilokohtaisenSuunnitelmanLisatiedot": Object {},
     "kausi": "alkamiskausi_1#1",
     "lisaamisenTakaraja": "2019-03-29T12:28",
     "muokkauksenTakaraja": "2019-03-11T09:45",
-    "tarkkaAlkaa": "2020-12-20T12:28",
-    "tarkkaPaattyy": "2020-12-21T12:28",
-    "tiedossaTarkkaAjankohta": true,
-    "toteutuksenAjankohta": "alkamiskausi",
+    "tarkkaAlkaa": null,
+    "tarkkaPaattyy": null,
+    "tiedossaTarkkaAjankohta": false,
     "vuosi": Object {
       "value": "2020",
+    },
+  },
+  "hakulomake": Object {
+    "kuvaus": Object {},
+    "linkki": Object {},
+    "lomake": Object {
+      "value": "12345",
+    },
+    "tyyppi": "ataru",
+  },
+  "hakutapa": "hakutapa_1#1",
+  "kieliversiot": Array [
+    "fi",
+    "sv",
+  ],
+  "kohdejoukko": Object {
+    "kohdejoukko": "kohdejoukko_1#1",
+    "tarkenne": Object {
+      "value": "tarkenne_1#1",
+    },
+  },
+  "muokkaaja": "1.1.1.1",
+  "nimi": Object {
+    "fi": "Fi nimi",
+    "sv": "Sv nimi",
+  },
+  "tila": "tallennettu",
+  "yhteyshenkilot": Array [
+    Object {
+      "nimi": Object {
+        "fi": "Fi nimi",
+        "sv": "Sv nimi",
+      },
+      "puhelinnumero": Object {
+        "fi": "Fi puhelinnumero",
+        "sv": "Sv puhelinnumero",
+      },
+      "sahkoposti": Object {
+        "fi": "Fi sähköposti",
+        "sv": "Sv sähköposti",
+      },
+      "titteli": Object {
+        "fi": "Fi titteli",
+        "sv": "Sv titteli",
+      },
+      "verkkosivu": Object {
+        "fi": "Fi verkkosivu",
+        "sv": "Sv verkkosivu",
+      },
+    },
+  ],
+}
+`;
+
+exports[`getFormValuesByHaku toteutuksen ajankohta - Aloitus henkilokohtaisen suunnitelman mukaisesti 1`] = `
+Object {
+  "aikataulut": Object {
+    "aikataulu": Array [
+      Object {
+        "alkaa": "2019-02-20T12:28",
+        "paattyy": "2019-08-01T12:45",
+      },
+    ],
+    "ajankohtaTyyppi": "aloitusHenkilokohtaisenSuunnitelmanMukaisesti",
+    "ajastettuJulkaisu": "2020-01-20T05:00",
+    "hakuaika": Array [
+      Object {
+        "alkaa": "2019-03-29T12:28",
+        "paattyy": "2019-09-29T12:30",
+      },
+    ],
+    "henkilokohtaisenSuunnitelmanLisatiedot": Object {
+      "en":         "<p>hlokoht en </p>",
+      "fi":         "<p>hlokoht fi </p>",
+      "sv":         "<p>hlokoht sv </p>",
+    },
+    "kausi": null,
+    "lisaamisenTakaraja": "2019-03-29T12:28",
+    "muokkauksenTakaraja": "2019-03-11T09:45",
+    "tarkkaAlkaa": null,
+    "tarkkaPaattyy": null,
+    "tiedossaTarkkaAjankohta": false,
+    "vuosi": null,
+  },
+  "hakulomake": Object {
+    "kuvaus": Object {},
+    "linkki": Object {},
+    "lomake": Object {
+      "value": "12345",
+    },
+    "tyyppi": "ataru",
+  },
+  "hakutapa": "hakutapa_1#1",
+  "kieliversiot": Array [
+    "fi",
+    "sv",
+  ],
+  "kohdejoukko": Object {
+    "kohdejoukko": "kohdejoukko_1#1",
+    "tarkenne": Object {
+      "value": "tarkenne_1#1",
+    },
+  },
+  "muokkaaja": "1.1.1.1",
+  "nimi": Object {
+    "fi": "Fi nimi",
+    "sv": "Sv nimi",
+  },
+  "tila": "tallennettu",
+  "yhteyshenkilot": Array [
+    Object {
+      "nimi": Object {
+        "fi": "Fi nimi",
+        "sv": "Sv nimi",
+      },
+      "puhelinnumero": Object {
+        "fi": "Fi puhelinnumero",
+        "sv": "Sv puhelinnumero",
+      },
+      "sahkoposti": Object {
+        "fi": "Fi sähköposti",
+        "sv": "Sv sähköposti",
+      },
+      "titteli": Object {
+        "fi": "Fi titteli",
+        "sv": "Sv titteli",
+      },
+      "verkkosivu": Object {
+        "fi": "Fi verkkosivu",
+        "sv": "Sv verkkosivu",
+      },
+    },
+  ],
+}
+`;
+
+exports[`getFormValuesByHaku toteutuksen ajankohta - Tarkka alkamisaika 1`] = `
+Object {
+  "aikataulut": Object {
+    "aikataulu": Array [
+      Object {
+        "alkaa": "2019-02-20T12:28",
+        "paattyy": "2019-08-01T12:45",
+      },
+    ],
+    "ajankohtaTyyppi": "alkamiskausi",
+    "ajastettuJulkaisu": "2020-01-20T05:00",
+    "hakuaika": Array [
+      Object {
+        "alkaa": "2019-03-29T12:28",
+        "paattyy": "2019-09-29T12:30",
+      },
+    ],
+    "henkilokohtaisenSuunnitelmanLisatiedot": Object {},
+    "kausi": "alkamiskausi_1#1",
+    "lisaamisenTakaraja": "2019-03-29T12:28",
+    "muokkauksenTakaraja": "2019-03-11T09:45",
+    "tarkkaAlkaa": "2030-12-20T12:28",
+    "tarkkaPaattyy": "2030-12-21T12:28",
+    "tiedossaTarkkaAjankohta": true,
+    "vuosi": Object {
+      "value": "2030",
     },
   },
   "hakulomake": Object {

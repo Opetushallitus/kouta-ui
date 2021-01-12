@@ -13,3 +13,13 @@ type Koodi = {
   versio: number;
   metadata: any;
 };
+
+type Yhteystieto = {
+  nimi: TranslatedField<string>;
+  titteli: TranslatedField<string>;
+  puhelinnumero: TranslatedField<string>;
+  sahkoposti: TranslatedField<string>;
+  verkkosivu: TranslatedField<string>;
+};
+
+type KoulutusModel = any;

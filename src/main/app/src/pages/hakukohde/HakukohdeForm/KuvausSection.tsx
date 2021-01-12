@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react';
 import { Field } from 'redux-form';
-import { get } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import getValintaperusteet from '#/src/utils/valintaperuste/getValintaperusteet';
 import useApiAsync from '#/src/hooks/useApiAsync';
@@ -12,12 +11,12 @@ import { useFieldValue } from '#/src/hooks/form';
 import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
 
 const KuvausSection = ({ haku, organisaatioOid, name, languages }) => {
-  const hakuOid = get(haku, 'oid');
-  const kohdejoukkoKoodiUri = get(haku, 'kohdejoukkoKoodiUri');
+  const hakuOid = haku?.oid;
+  const kohdejoukkoKoodiUri = haku?.kohdejoukkoKoodiUri;
   const watch = [hakuOid, organisaatioOid].join(',');
   const { t } = useTranslation();
   const valintaperuste = useFieldValue(name);
-  const valintaperusteOid = get(valintaperuste, 'value');
+  const valintaperusteOid = valintaperuste?.value;
   const kieliValinnat = languages;
 
   const { data, reload } = useApiAsync({

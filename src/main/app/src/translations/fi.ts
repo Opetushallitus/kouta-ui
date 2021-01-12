@@ -96,6 +96,7 @@ export default {
     lisaaHakuaika: 'Lisää hakuaika',
     tyyppi: 'Tyyppi',
     lisatietoja: 'Lisätietoja',
+    lisatietoa: 'Lisätietoa',
     valitseTyyppi: 'Valitse tyyppi',
     valitseKuvaus: 'Valitse kuvaus',
     valitseKieli: 'Valitse kieli',
@@ -548,7 +549,7 @@ export default {
     valitseAlkamisvuosi: 'Valitse vuosi',
     aloitusHenkilokohtaisenSuunnitelmanMukaisesti:
       'Aloitus henkilökohtaisen suunnitelman mukaisesti',
-    toteutuksenAjankohta: 'Toteutuksen ajankohta',
+    koulutuksenAjankohta: 'Koulutuksen aloitusajankohta',
   },
   hakukohdelomake: {
     toteutukseenLiitettyAlkamiskausi: 'Toteutukseen liitetty alkamiskausi',

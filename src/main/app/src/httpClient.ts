@@ -1,7 +1,6 @@
 import axios from 'axios';
 import _ from 'lodash';
 import fp from 'lodash/fp';
-import { setupCache } from 'axios-cache-adapter';
 import { getCookie } from '#/src/utils';
 
 let loggingInPromise = null;
@@ -13,20 +12,6 @@ const isKoutaBackendUrl = url => {
 const isLomakeEditoriUrl = url => {
   return /lomake-editori/.test(url);
 };
-
-const oneHour = 3600000;
-
-const cache = setupCache({
-  limit: 100,
-  maxAge: oneHour,
-  invalidate: null, // Prevent cache invalidation
-  exclude: {
-    query: false,
-    filter: config => {
-      return isKoutaBackendUrl(config.url);
-    },
-  },
-});
 
 const hasBeenRetried = error => {
   return Boolean(_.get(error, 'config.__retried'));
@@ -110,10 +95,9 @@ const withCSRF = client => {
   return client;
 };
 
-const createHttpClient = ({ apiUrls, callerId } = {}) => {
+const createHttpClient = ({ apiUrls, callerId }) => {
   let client = axios.create({
     withCredentials: true,
-    adapter: cache.adapter,
     headers: {
       ...(callerId && {
         'Caller-Id': callerId,

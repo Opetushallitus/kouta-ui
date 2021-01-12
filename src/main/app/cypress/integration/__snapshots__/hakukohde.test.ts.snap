@@ -60,7 +60,7 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
   },
   "organisaatioOid": "1.2.246.562.10.52251087186",
   "pohjakoulutusvaatimusKoodiUrit": [
-    "pohjakoulutuskouta_103#1"
+    "pohjakoulutusvaatimuskouta_103#1"
   ],
   "pohjakoulutusvaatimusTarkenne": {
     "fi": "<p>Tarkenne</p>"
@@ -174,7 +174,7 @@ exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
   },
   "organisaatioOid": "1.2.246.562.10.52251087186",
   "pohjakoulutusvaatimusKoodiUrit": [
-    "pohjakoulutuskouta_103#1"
+    "pohjakoulutusvaatimuskouta_103#1"
   ],
   "pohjakoulutusvaatimusTarkenne": {
     "fi": "<p>Tarkenne</p>"
@@ -292,7 +292,7 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
   "oid": "6.1.1.1.1.1",
   "organisaatioOid": "1.2.246.562.10.52251087186",
   "pohjakoulutusvaatimusKoodiUrit": [
-    "pohjakoulutuskouta_0#1"
+    "pohjakoulutusvaatimuskouta_0#1"
   ],
   "pohjakoulutusvaatimusTarkenne": {
     "fi": "<p>Fi tarkenne</p>"
@@ -379,7 +379,7 @@ exports[`createHakukohde > should be able to create hakukohde with muu hakulomak
   },
   "organisaatioOid": "1.2.246.562.10.52251087186",
   "pohjakoulutusvaatimusKoodiUrit": [
-    "pohjakoulutuskouta_103#1"
+    "pohjakoulutusvaatimuskouta_103#1"
   ],
   "pohjakoulutusvaatimusTarkenne": {
     "fi": "<p>Tarkenne</p>"
@@ -425,7 +425,7 @@ exports[`createHakukohde > should be able to create hakukohde with "ei sähköis
   },
   "organisaatioOid": "1.2.246.562.10.52251087186",
   "pohjakoulutusvaatimusKoodiUrit": [
-    "pohjakoulutuskouta_103#1"
+    "pohjakoulutusvaatimuskouta_103#1"
   ],
   "pohjakoulutusvaatimusTarkenne": {
     "fi": "<p>Tarkenne</p>"

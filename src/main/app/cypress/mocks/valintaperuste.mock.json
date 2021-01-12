@@ -899,21 +899,21 @@
       "body": {
         "koodiUri": "posti_00350",
         "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/posti_00350",
-        "version": 2,
-        "versio": 1,
+        "version": 0,
+        "versio": 2,
         "koodisto": {
           "koodistoUri": "posti",
           "organisaatioOid": "1.2.246.562.10.00000000001",
           "koodistoVersios": [
-            1
+            2
           ]
         },
         "koodiArvo": "00350",
-        "paivitysPvm": "2018-02-05",
+        "paivitysPvm": "2018-11-19",
         "paivittajaOid": null,
         "voimassaAlkuPvm": "1990-01-01",
         "voimassaLoppuPvm": null,
-        "tila": "HYVAKSYTTY",
+        "tila": "LUONNOS",
         "metadata": [
           {
             "nimi": "HELSINKI",
@@ -942,46 +942,6 @@
         ],
         "withinCodeElements": [
           {
-            "codeElementUri": "oppilaitosnumero_00084",
-            "codeElementVersion": 1,
-            "codeElementValue": "00084",
-            "relationMetadata": [
-              {
-                "nimi": "Helsingin Ranskalais-Suomalainen koulu",
-                "kieli": "SV",
-                "kuvaus": "Helsingin Ranskalais-Suomalainen koulu"
-              },
-              {
-                "nimi": "Helsingin Ranskalais-Suomalainen koulu",
-                "kieli": "EN",
-                "kuvaus": "Helsingin Ranskalais-Suomalainen koulu"
-              },
-              {
-                "nimi": "Helsingin Ranskalais-Suomalainen koulu",
-                "kieli": "FI",
-                "kuvaus": "Helsingin Ranskalais-Suomalainen koulu"
-              }
-            ],
-            "parentMetadata": [
-              {
-                "nimi": "oppilaitosnumero",
-                "kieli": "FI",
-                "kuvaus": "Tilastokeskus on antanut oppilaitoksille yksilöintitunnuksen. Tunnus on viisimerkkinen ja tunnukselle on varattu numerosarja 00000-99999. Tunnus on annettu ja annetaan ainoastaa pääkoululle. Samaa oppilaitostunnusta käytetään kaikissa oppilaitokseen liittyvissä toimintayksiköissä. Tietoa ylläpidetään organisaatiopalvelussa josta se kopioituu tähän koodistoon."
-              },
-              {
-                "nimi": "oppilaitosnumero",
-                "kieli": "EN",
-                "kuvaus": "oppilaitosnumero"
-              },
-              {
-                "nimi": "oppilaitosnumero",
-                "kieli": "SV",
-                "kuvaus": "oppilaitosnumero"
-              }
-            ],
-            "passive": true
-          },
-          {
             "codeElementUri": "koulutustoimija_06500110",
             "codeElementVersion": 1,
             "codeElementValue": "0650011-0",
@@ -1009,47 +969,7 @@
                 "kuvaus": "koulutustoimija"
               }
             ],
-            "passive": true
-          },
-          {
-            "codeElementUri": "oppilaitosnumero_01296",
-            "codeElementVersion": 1,
-            "codeElementValue": "01296",
-            "relationMetadata": [
-              {
-                "nimi": "Helsingin IV terveydenhuolto-oppilaitos",
-                "kieli": "EN",
-                "kuvaus": "Helsingin IV terveydenhuolto-oppilaitos"
-              },
-              {
-                "nimi": "Helsingin IV terveydenhuolto-oppilaitos",
-                "kieli": "SV",
-                "kuvaus": "Helsingin IV terveydenhuolto-oppilaitos"
-              },
-              {
-                "nimi": "Helsingin IV terveydenhuolto-oppilaitos",
-                "kieli": "FI",
-                "kuvaus": "Helsingin IV terveydenhuolto-oppilaitos"
-              }
-            ],
-            "parentMetadata": [
-              {
-                "nimi": "oppilaitosnumero",
-                "kieli": "FI",
-                "kuvaus": "Tilastokeskus on antanut oppilaitoksille yksilöintitunnuksen. Tunnus on viisimerkkinen ja tunnukselle on varattu numerosarja 00000-99999. Tunnus on annettu ja annetaan ainoastaa pääkoululle. Samaa oppilaitostunnusta käytetään kaikissa oppilaitokseen liittyvissä toimintayksiköissä. Tietoa ylläpidetään organisaatiopalvelussa josta se kopioituu tähän koodistoon."
-              },
-              {
-                "nimi": "oppilaitosnumero",
-                "kieli": "EN",
-                "kuvaus": "oppilaitosnumero"
-              },
-              {
-                "nimi": "oppilaitosnumero",
-                "kieli": "SV",
-                "kuvaus": "oppilaitosnumero"
-              }
-            ],
-            "passive": true
+            "passive": false
           }
         ],
         "includesCodeElements": [],

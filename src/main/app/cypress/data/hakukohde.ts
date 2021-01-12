@@ -12,7 +12,7 @@ const hakukohde = () => ({
   aloituspaikat: 150,
   ensikertalaisenAloituspaikat: 49,
   kaytetaanHaunAlkamiskautta: false,
-  pohjakoulutusvaatimusKoodiUrit: ['pohjakoulutusvaatimustoinenaste_yo#1'],
+  pohjakoulutusvaatimusKoodiUrit: ['pohjakoulutusvaatimuskouta_0#1'],
   pohjakoulutusvaatimusTarkenne: {
     fi: '<p>Fi tarkenne</p>',
   },

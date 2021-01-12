@@ -8,7 +8,7 @@ export const getHakulomakeFieldsValues = ({
   hakulomakeAtaruId,
   hakulomakeLinkki,
   hakulomakeKuvaus,
-}) => ({
+}): HakulomakeFormSection => ({
   tyyppi: hakulomaketyyppi,
   lomake:
     hakulomaketyyppi === HAKULOMAKETYYPPI.ATARU

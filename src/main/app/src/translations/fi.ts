@@ -552,10 +552,14 @@ export default {
     koulutuksenAjankohta: 'Koulutuksen aloitusajankohta',
   },
   hakukohdelomake: {
-    toteutukseenLiitettyAlkamiskausi: 'Toteutukseen liitetty alkamiskausi',
+    toteutukseenLiitettyAlkamisajankohta:
+      'Toteutukseen liitetty alkamisajankohta',
+    hakuunLiitettyAlkamisajankohta: 'Hakuun liitetty alkamisajankohta',
     toteutukseenEiOleLiitettyAlkamiskautta:
-      'Toteutuksen ei ole liitetty alkamiskautta',
-    hakukohteellaEriAlkamiskausi: 'Hakukohteella on erillinen alkamiskausi',
+      'Toteutukseen ei ole liitetty alkamisajankohtaa',
+    hakuunEiOleLiitettyAlkamiskautta:
+      'Hakuun ei ole liitetty alkamisajankohtaa',
+    hakukohteellaEriAlkamiskausi: 'Hakukohteella on erillinen alkamisajankohta',
     pohjakoulutusvaatimus: 'Pohjakoulutusvaatimus',
     valitsePohjakoulutusvaatimus: 'Valitse pohjakoulutusvaatimus',
     hakukohteenPerustiedot: 'Hakukohteen perustiedot',
@@ -599,6 +603,8 @@ export default {
     pohjakoulutuksenTarkennus: 'Pohjakoulutuksen tarkennus',
     eiMuokkausOikeutta:
       'Käyttäjälläsi ei ole oikeuksia muokata tätä hakukohdetta',
+    eiVoiAsettaaAjankohtaaJosYhteishaku:
+      'Hakukohteella ei voi asettaa koulutuksen ajankohtaa, jos haussa on valittu hakutavaksi yhteishaku.',
   },
   valintaperustelomake: {
     valintaperuste: 'valintaperuste',

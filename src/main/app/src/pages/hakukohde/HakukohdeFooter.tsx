@@ -4,7 +4,7 @@ import { queryCache } from 'react-query';
 import { useHistory } from 'react-router-dom';
 
 import { useSaveHakukohde } from '#/src/hooks/formSaveHooks';
-import getHakukohdeByFormValues from '#/src/utils/hakukohde/getHakukohdeByFormValues';
+import { getHakukohdeByFormValues } from '#/src/utils/hakukohde/getHakukohdeByFormValues';
 import updateHakukohde from '#/src/utils/hakukohde/updateHakukohde';
 import { ENTITY, FormMode } from '#/src/constants';
 import { FormFooter } from '#/src/components/FormPage';

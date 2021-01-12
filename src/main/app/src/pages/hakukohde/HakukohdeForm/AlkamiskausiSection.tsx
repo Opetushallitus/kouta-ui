@@ -1,84 +1,137 @@
 import React from 'react';
+import _fp from 'lodash/fp';
 import { Field } from 'redux-form';
-import { get } from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import Spacing from '#/src/components/Spacing';
-import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
-
-import {
-  FormFieldRadioGroup,
-  FormFieldYearSelect,
-  FormFieldCheckbox,
-} from '#/src/components/formFields';
-
+import { FormFieldSwitch } from '#/src/components/formFields';
 import useKoodiNimi from '#/src/hooks/useKoodiNimi';
-import { Typography } from '#/src/components/virkailija';
-import { getTestIdProps } from '#/src/utils';
 import { useFieldValue } from '#/src/hooks/form';
+import { Alkamiskausityyppi, ICONS } from '#/src/constants';
+import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenAloitusajankohtaFields';
+import FieldGroup from '#/src/components/FieldGroup';
+import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
+import { InlineInfoBox } from '#/src/components/InlineInfoBox';
+import { formatDateValue } from '#/src/utils';
 
-const EriAlkamiskausiFields = ({ name, options, t }) => (
-  <>
-    <Spacing marginBottom={2} marginTop={2}>
-      <Field
-        name={`${name}.kausi`}
-        component={FormFieldRadioGroup}
-        options={options}
-        label={t('yleiset.kausi')}
-      />
-    </Spacing>
-    <Spacing>
-      <Field
-        name={`${name}.vuosi`}
-        component={FormFieldYearSelect}
-        label={t('yleiset.vuosi')}
-      />
-    </Spacing>
-  </>
-);
-
-const AlkamiskausiSection = ({ name, toteutus }) => {
+const InlineAjankohtaInfoBox = ({
+  ajankohta,
+  foundTitle,
+  notFoundTitle,
+  iconType,
+}) => {
   const { t } = useTranslation();
-  const eriAlkamiskausi = useFieldValue(`${name}.eriAlkamiskausi`);
-  const { options } = useKoodistoOptions({ koodisto: 'kausi' });
+  const {
+    alkamiskausityyppi,
+    koulutuksenAlkamiskausiKoodiUri,
+    koulutuksenAlkamisvuosi,
+    koulutuksenAlkamispaivamaara,
+    koulutuksenPaattymispaivamaara,
+  } = ajankohta;
 
-  const toteutusAlkamiskausiKoodiUri = get(
-    toteutus,
-    'metadata.opetus.koulutuksenAlkamiskausi'
+  const { nimi: kausiKoodiNimi } = useKoodiNimi(
+    koulutuksenAlkamiskausiKoodiUri
   );
 
-  const toteutusAlkamisvuosi = get(
-    toteutus,
-    'metadata.opetus.koulutuksenAlkamisvuosi'
-  );
-  const { nimi: kausiKoodiNimi } = useKoodiNimi(toteutusAlkamiskausiKoodiUri);
-
-  const toteutuksenAlkaminenContent =
-    kausiKoodiNimi && toteutusAlkamisvuosi ? (
-      <Typography>
-        {t('hakukohdelomake.toteutukseenLiitettyAlkamiskausi')}:{' '}
-        <strong>
-          {kausiKoodiNimi} {toteutusAlkamisvuosi}
-        </strong>
-      </Typography>
-    ) : (
-      <Typography>
-        {t('hakukohdelomake.toteutukseenEiOleLiitettyAlkamiskautta')}
-      </Typography>
+  if (
+    alkamiskausityyppi === Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI &&
+    koulutuksenAlkamiskausiKoodiUri &&
+    koulutuksenAlkamisvuosi
+  ) {
+    return (
+      <InlineInfoBox
+        title={`${foundTitle}:`}
+        value={
+          <>
+            {kausiKoodiNimi} {koulutuksenAlkamisvuosi}
+          </>
+        }
+        iconType={iconType}
+      />
     );
+  } else if (
+    alkamiskausityyppi === Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA &&
+    koulutuksenAlkamispaivamaara
+  ) {
+    return (
+      <InlineInfoBox
+        title={`${foundTitle}:`}
+        value={
+          <>
+            {formatDateValue(koulutuksenAlkamispaivamaara)}
+            {' - '}
+            {formatDateValue(koulutuksenPaattymispaivamaara)}
+          </>
+        }
+        iconType={iconType}
+      />
+    );
+  } else if (
+    alkamiskausityyppi === Alkamiskausityyppi.HENKILOKOHTAINEN_SUUNNITELMA
+  ) {
+    return (
+      <InlineInfoBox
+        title={`${foundTitle}:`}
+        value={t('hakulomake.aloitusHenkilokohtaisenSuunnitelmanMukaisesti')}
+        iconType={iconType}
+      />
+    );
+  } else {
+    return <InlineInfoBox title={notFoundTitle} iconType={iconType} />;
+  }
+};
+
+const AlkamiskausiSection = ({ name, toteutus, haku, language }) => {
+  const { t } = useTranslation();
+  const kaytetaanHakukohteenAlkamiskautta = useFieldValue(
+    `${name}.kaytetaanHakukohteenAlkamiskautta`
+  );
+
+  const toteutuksenAjankohta =
+    toteutus?.metadata?.opetus?.koulutuksenAlkamiskausiUUSI;
+
+  const haunAjankohta = haku?.metadata?.koulutuksenAlkamiskausi;
+
+  const isYhteishaku = isYhteishakuHakutapa(haku?.hakutapaKoodiUri);
 
   return (
-    <>
-      <Spacing marginBottom={2}>{toteutuksenAlkaminenContent}</Spacing>
-      <div {...getTestIdProps('eriAlkamiskausi')}>
-        <Field name={`${name}.eriAlkamiskausi`} component={FormFieldCheckbox}>
-          {t('hakukohdelomake.hakukohteellaEriAlkamiskausi')}
-        </Field>
-      </div>
-      {eriAlkamiskausi && (
-        <EriAlkamiskausiFields name={name} options={options} t={t} />
+    <FieldGroup title={t('toteutuslomake.koulutuksenAjankohta')}>
+      <Spacing marginBottom={2}>
+        <InlineAjankohtaInfoBox
+          ajankohta={toteutuksenAjankohta}
+          foundTitle={t('hakukohdelomake.toteutukseenLiitettyAlkamisajankohta')}
+          notFoundTitle={t(
+            'hakukohdelomake.toteutukseenEiOleLiitettyAlkamiskautta'
+          )}
+          iconType={ICONS.toteutus}
+        />
+        <InlineAjankohtaInfoBox
+          ajankohta={haunAjankohta}
+          foundTitle={t('hakukohdelomake.hakuunLiitettyAlkamisajankohta')}
+          notFoundTitle={t('hakukohdelomake.hakuunEiOleLiitettyAlkamiskautta')}
+          iconType={ICONS.haku}
+        />
+      </Spacing>
+      <Field
+        name={`${name}.kaytetaanHakukohteenAlkamiskautta`}
+        component={FormFieldSwitch}
+        disabled={isYhteishaku}
+        helperText={
+          isYhteishaku
+            ? t('hakukohdelomake.eiVoiAsettaaAjankohtaaJosYhteishaku')
+            : null
+        }
+      >
+        {t('hakukohdelomake.hakukohteellaEriAlkamiskausi')}
+      </Field>
+      {!isYhteishaku && kaytetaanHakukohteenAlkamiskautta && (
+        <KoulutuksenAloitusajankohtaFields
+          name={`${name}.ajankohtaTyyppi`}
+          section={name}
+          language={language}
+        />
       )}
-    </>
+    </FieldGroup>
   );
 };
 

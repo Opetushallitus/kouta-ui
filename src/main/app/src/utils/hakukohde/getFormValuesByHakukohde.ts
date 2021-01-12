@@ -1,13 +1,27 @@
 import _ from 'lodash';
+import _fp from 'lodash/fp';
 
-import { isNumeric } from '#/src/utils';
 import { getKokeetTaiLisanaytotValues } from '#/src/utils/form/getKokeetTaiLisanaytotValues';
 import { getHakulomakeFieldsValues } from '#/src/utils/form/getHakulomakeFieldsValues';
+import { isNumeric, toSelectValue } from '#/src/utils';
 import { parseEditorState } from '#/src/components/Editor/utils';
+import { alkamiskausityyppiToAjankohtatyyppi } from '../form/alkamiskausityyppiHelpers';
+import { Alkamiskausityyppi } from '#/src/constants';
+import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
 
-export const getFormValuesByHakukohde = hakukohde => {
+const getToimitustapaValues = (toimitustapa, toimitusosoite) => ({
+  tapa: toimitustapa || '',
+  paikka: {
+    osoite: toimitusosoite?.osoite.osoite || {},
+    postinumero: toimitusosoite?.osoite?.postinumeroKoodiUri
+      ? { value: toimitusosoite?.osoite?.postinumeroKoodiUri }
+      : undefined,
+    sahkoposti: toimitusosoite?.sahkoposti || '',
+  },
+});
+
+export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
   const {
-    alkamiskausiKoodiUri = '',
     kaytetaanHaunAikataulua,
     kielivalinta = [],
     aloituspaikat = '',
@@ -15,7 +29,6 @@ export const getFormValuesByHakukohde = hakukohde => {
     liitteetOnkoSamaToimitusaika,
     liitteetOnkoSamaToimitusosoite,
     liitteet = [],
-    alkamisvuosi,
     liitteidenToimitusosoite = {},
     liitteidenToimitusaika,
     liitteidenToimitustapa,
@@ -30,24 +43,29 @@ export const getFormValuesByHakukohde = hakukohde => {
     hakulomakeAtaruId,
     hakulomakeKuvaus,
     hakulomakeLinkki,
-    kaytetaanHaunAlkamiskautta,
     jarjestyspaikkaOid,
     tila,
     pohjakoulutusvaatimusTarkenne,
     metadata = {},
   } = hakukohde;
 
-  const { valintakokeidenYleiskuvaus } = metadata;
+  const {
+    valintakokeidenYleiskuvaus,
+    kaytetaanHaunAlkamiskautta,
+    koulutuksenAlkamiskausi,
+  } = metadata;
+
+  const {
+    alkamiskausityyppi,
+    koulutuksenAlkamiskausiKoodiUri = null,
+    koulutuksenAlkamispaivamaara = null,
+    koulutuksenPaattymispaivamaara = null,
+    koulutuksenAlkamisvuosi = '',
+    henkilokohtaisenSuunnitelmanLisatiedot,
+  } = koulutuksenAlkamiskausi;
 
   return {
     tila,
-    alkamiskausi: {
-      eriAlkamiskausi: !kaytetaanHaunAlkamiskautta,
-      kausi: alkamiskausiKoodiUri,
-      vuosi: {
-        value: isNumeric(alkamisvuosi) ? alkamisvuosi.toString() : '',
-      },
-    },
     kieliversiot: kielivalinta,
     aloituspaikat: {
       aloituspaikkamaara: isNumeric(aloituspaikat)
@@ -67,6 +85,19 @@ export const getFormValuesByHakukohde = hakukohde => {
     perustiedot: {
       nimi,
       voiSuorittaaKaksoistutkinnon: !!toinenAsteOnkoKaksoistutkinto,
+    },
+    ajankohta: {
+      kaytetaanHakukohteenAlkamiskautta: !kaytetaanHaunAlkamiskautta,
+      ajankohtaTyyppi: alkamiskausityyppiToAjankohtatyyppi(alkamiskausityyppi),
+      kausi: koulutuksenAlkamiskausiKoodiUri,
+      vuosi: toSelectValue(koulutuksenAlkamisvuosi),
+      tiedossaTarkkaAjankohta:
+        alkamiskausityyppi === Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,
+      tarkkaAlkaa: koulutuksenAlkamispaivamaara,
+      tarkkaPaattyy: koulutuksenPaattymispaivamaara,
+      henkilokohtaisenSuunnitelmanLisatiedot: _fp.mapValues(parseEditorState)(
+        henkilokohtaisenSuunnitelmanLisatiedot
+      ),
     },
     pohjakoulutus: {
       pohjakoulutusvaatimus: (pohjakoulutusvaatimusKoodiUrit || []).map(
@@ -90,18 +121,10 @@ export const getFormValuesByHakukohde = hakukohde => {
     ),
     jarjestyspaikkaOid,
     liitteet: {
-      toimitustapa: {
-        tapa: liitteidenToimitustapa || '',
-        paikka: {
-          sahkoposti: liitteidenToimitusosoite?.sahkoposti || '',
-          osoite: liitteidenToimitusosoite?.osoite?.osoite || {},
-          postinumero: liitteidenToimitusosoite?.osoite?.postinumeroKoodiUri
-            ? {
-                value: liitteidenToimitusosoite.osoite.postinumeroKoodiUri,
-              }
-            : undefined,
-        },
-      },
+      toimitustapa: getToimitustapaValues(
+        liitteidenToimitustapa,
+        liitteidenToimitusosoite
+      ),
       yhteinenToimituspaikka: Boolean(liitteetOnkoSamaToimitusosoite),
       yhteinenToimitusaika: Boolean(liitteetOnkoSamaToimitusaika),
       toimitusaika: liitteidenToimitusaika || '',
@@ -118,16 +141,7 @@ export const getFormValuesByHakukohde = hakukohde => {
           nimi,
           kuvaus: _.mapValues(kuvaus, parseEditorState),
           toimitusaika: toimitusaika || '',
-          toimitustapa: {
-            tapa: toimitustapa || '',
-            paikka: {
-              osoite: toimitusosoite?.osoite?.osoite || {},
-              postinumero: toimitusosoite?.osoite?.postinumeroKoodiUri
-                ? { value: toimitusosoite.osoite.postinumeroKoodiUri }
-                : undefined,
-              sahkoposti: toimitusosoite?.sahkoposti || '',
-            },
-          },
+          toimitustapa: getToimitustapaValues(toimitustapa, toimitusosoite),
         })
       ),
     },

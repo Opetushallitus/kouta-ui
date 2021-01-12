@@ -46,15 +46,8 @@ export type HakukohdeFormValues = {
   tila: JULKAISUTILA;
   muokkaaja?: string;
   kieliversiot: Array<LanguageCode>;
-  alkamiskausi: {
-    eriAlkamiskausi: Boolean;
-    kausi: string;
-    vuosi?: {
-      value: string;
-    };
-  };
   ajankohta: {
-    eriAlkamiskausi: Boolean;
+    kaytetaanHakukohteenAlkamiskautta: Boolean;
     ajankohtaTyyppi: Ajankohtatyyppi;
     kausi?: string;
     vuosi?: SelectOption;

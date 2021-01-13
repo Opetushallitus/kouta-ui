@@ -163,8 +163,9 @@ const config = createFormConfigBuilder().registerSections([
         field: 'ajankohta.vuosi',
         validate: (eb, values: HakukohdeFormValues) =>
           validateIf(
-            values?.ajankohta?.ajankohtaTyyppi ===
-              Ajankohtatyyppi.ALKAMISKAUSI &&
+            values?.ajankohta?.kaytetaanHakukohteenAlkamiskautta &&
+              values?.ajankohta?.ajankohtaTyyppi ===
+                Ajankohtatyyppi.ALKAMISKAUSI &&
               values?.tila === JULKAISUTILA.JULKAISTU,
             _fp.pipe(
               validateExistence('ajankohta.kausi'),
@@ -180,8 +181,9 @@ const config = createFormConfigBuilder().registerSections([
         required: true,
         validate: (eb, values: HakukohdeFormValues) =>
           validateIf(
-            values?.ajankohta?.ajankohtaTyyppi ===
-              Ajankohtatyyppi.ALKAMISKAUSI &&
+            values?.ajankohta?.kaytetaanHakukohteenAlkamiskautta &&
+              values?.ajankohta?.ajankohtaTyyppi ===
+                Ajankohtatyyppi.ALKAMISKAUSI &&
               values?.ajankohta?.tiedossaTarkkaAjankohta &&
               values?.tila === JULKAISUTILA.JULKAISTU,
             validateExistenceOfDate('ajankohta.tarkkaAlkaa')

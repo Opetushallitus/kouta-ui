@@ -49,12 +49,7 @@ export const selectOption = value => {
 export const fillAsyncSelect = (input, match = null) => {
   const searchTerm = match || input;
   getSelect().within(() => {
-    // Workaround for not showing the options when copy-pasting:
-    // type the last character separately.
-    // TODO: Find out, why copy-paste doesn't work for async selects when using autorecord
-    cy.get('input[type="text"]')
-      .pipe(paste(input?.slice(0, -1)))
-      .type(input?.slice(-1));
+    cy.get('input[type="text"]').pipe(paste(input));
     cy.findAllByRole('option', { name: _fp.includes(searchTerm) })
       .first()
       .click();

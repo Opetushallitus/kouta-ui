@@ -36,6 +36,8 @@ import {
   createEmptyEditorState,
 } from './utils';
 
+export { EditorState } from 'draft-js';
+
 const Container = styled.div`
   border: 1px solid ${getThemeProp('colors.inputBorder')};
   border-radius: ${getThemeProp('shape.borderRadius')};
@@ -315,8 +317,6 @@ const LinkButton = ({ editorState, onChange, editorRef, ...props }) => {
 };
 
 const emptyEditorState = createEmptyEditorState();
-
-export const EditorState = DraftEditorState;
 
 export const Editor = ({
   value,

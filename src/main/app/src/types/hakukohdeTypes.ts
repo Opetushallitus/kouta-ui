@@ -11,7 +11,7 @@ export type HakukohdeModel = any;
 type ToimitustapaFields = {
   tapa: string;
   paikka: {
-    sahkoposti: string;
+    sahkoposti: TranslatedField<string>;
     osoite: TranslatedField<string>;
     postinumero?: {
       value: string;
@@ -20,22 +20,22 @@ type ToimitustapaFields = {
 };
 
 type ValintakokeetValues = {
-  yleisKuvaus: TranslatedField<typeof EditorState>;
+  yleisKuvaus: TranslatedField<EditorState>;
   kokeetTaiLisanaytot: Array<{
-    id: string;
+    id?: string;
     tyyppi: { value: string };
     nimi: TranslatedField<string>;
     liittyyEnnakkovalmistautumista: Boolean;
-    ohjeetEnnakkovalmistautumiseen: TranslatedField<string>;
+    ohjeetEnnakkovalmistautumiseen: TranslatedField<EditorState>;
     erityisjarjestelytMahdollisia: Boolean;
-    ohjeetErityisjarjestelyihin: TranslatedField<string>;
-    tietoaHakijalle: TranslatedField<string>;
+    ohjeetErityisjarjestelyihin: TranslatedField<EditorState>;
+    tietoaHakijalle: TranslatedField<EditorState>;
     tilaisuudet: Array<{
       osoite: TranslatedField<string>;
       postinumero: { value: string };
       alkaa: string;
       paattyy: string;
-      lisatietoja: TranslatedField<typeof EditorState>;
+      lisatietoja: TranslatedField<EditorState>;
       jarjestamispaikka: TranslatedField<string>;
     }>;
   }>;
@@ -54,9 +54,7 @@ export type HakukohdeFormValues = {
     tiedossaTarkkaAjankohta?: boolean;
     tarkkaAlkaa?: string;
     tarkkaPaattyy?: string;
-    henkilokohtaisenSuunnitelmanLisatiedot?: TranslatedField<
-      typeof EditorState
-    >;
+    henkilokohtaisenSuunnitelmanLisatiedot?: TranslatedField<EditorState>;
   };
   aloituspaikat: {
     aloituspaikkamaara: string;
@@ -75,7 +73,7 @@ export type HakukohdeFormValues = {
   };
   pohjakoulutus: {
     pohjakoulutusvaatimus: Array<{ value: string }>;
-    tarkenne: TranslatedField<typeof EditorState>;
+    tarkenne: TranslatedField<EditorState>;
   };
   valintaperusteenKuvaus?: { value: string };
   valintakokeet: ValintakokeetValues;
@@ -88,7 +86,7 @@ export type HakukohdeFormValues = {
     liitteet: Array<{
       tyyppi: { value: string };
       nimi: TranslatedField<string>;
-      kuvaus: TranslatedField<string>;
+      kuvaus: TranslatedField<EditorState>;
       toimitusaika: string;
       toimitustapa: ToimitustapaFields;
     }>;

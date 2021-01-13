@@ -31,9 +31,7 @@ export type HakuFormValues = {
     lisaamisenTakaraja: FormDate;
     muokkauksenTakaraja: FormDate;
     ajastettuJulkaisu: FormDate;
-    henkilokohtaisenSuunnitelmanLisatiedot?: TranslatedField<
-      typeof EditorState
-    >;
+    henkilokohtaisenSuunnitelmanLisatiedot?: TranslatedField<EditorState>;
   };
   hakutapa: string;
   kohdejoukko: {

@@ -37,7 +37,7 @@ export type ToteutusFormValues = {
     ilmoittautumislinkki: TranslatedField<string>;
     aloituspaikat: string;
   };
-  kuvaus: TranslatedField<typeof EditorState>;
+  kuvaus: TranslatedField<EditorState>;
   kieliversiot: Array<LanguageCode>;
   tarjoajat: Array<string>;
   jarjestamistiedot: {
@@ -78,9 +78,7 @@ export type ToteutusFormValues = {
       tiedossaTarkkaAjankohta?: boolean;
       tarkkaAlkaa?: string;
       tarkkaPaattyy?: string;
-      henkilokohtaisenSuunnitelmanLisatiedot?: TranslatedField<
-        typeof EditorState
-      >;
+      henkilokohtaisenSuunnitelmanLisatiedot?: TranslatedField<EditorState>;
     };
   };
   nayttamistiedot: {
@@ -104,8 +102,8 @@ export type ToteutusFormValues = {
     hakeutumisTaiIlmoittautumistapa: HAKULOMAKETYYPPI.MUU;
     hakuTapa?: Hakeutumistapa;
     linkki?: string;
-    lisatiedot?: TranslatedField<typeof EditorState>;
-    lisatiedotValintaperusteista?: TranslatedField<typeof EditorState>;
+    lisatiedot?: TranslatedField<EditorState>;
+    lisatiedotValintaperusteista?: TranslatedField<EditorState>;
     hakuaikaAlkaa?: string;
     hakuaikaPaattyy?: string;
   };

@@ -1,10 +1,10 @@
 exports[`createValintaperuste > should be able to create valintaperuste #0`] =
 {
-  "hakutapaKoodiUri": "hakutapa_0#1",
+  "hakutapaKoodiUri": "hakutapa_01#1",
   "kielivalinta": [
     "fi"
   ],
-  "kohdejoukkoKoodiUri": "haunkohdejoukko_0#1",
+  "kohdejoukkoKoodiUri": "haunkohdejoukko_12#1",
   "koulutustyyppi": "yo",
   "metadata": {
     "kielitaitovaatimukset": [],
@@ -77,7 +77,7 @@ exports[`createValintaperuste > should be able to create valintaperuste #0`] =
           }
         ],
         "vahimmaispisteet": 10,
-        "valintatapaKoodiUri": "valintatapajono_0#1"
+        "valintatapaKoodiUri": "valintatapajono_tv#1"
       }
     ]
   },
@@ -123,24 +123,24 @@ exports[`createValintaperuste > should be able to create valintaperuste #0`] =
             "osoite": {
               "fi": "osoite"
             },
-            "postinumeroKoodiUri": "posti_0#2"
+            "postinumeroKoodiUri": "posti_00350#2"
           }
         }
       ],
-      "tyyppiKoodiUri": "valintakokeentyyppi_1#1"
+      "tyyppiKoodiUri": "valintakokeentyyppi_8#1"
     }
   ]
 };
 
 exports[`editValintaperuste > should be able to edit valintaperuste #0`] =
 {
-  "hakutapaKoodiUri": "hakutapa_0#1",
+  "hakutapaKoodiUri": "hakutapa_01#1",
   "id": "649adb37-cd4d-4846-91a9-84b58b90f928",
   "julkinen": false,
   "kielivalinta": [
     "fi"
   ],
-  "kohdejoukkoKoodiUri": "haunkohdejoukko_0#1",
+  "kohdejoukkoKoodiUri": "haunkohdejoukko_12#1",
   "koulutustyyppi": "amm",
   "metadata": {
     "kielitaitovaatimukset": [],
@@ -192,7 +192,7 @@ exports[`editValintaperuste > should be able to edit valintaperuste #0`] =
           }
         ],
         "vahimmaispisteet": 10,
-        "valintatapaKoodiUri": "valintatapajono_0#1"
+        "valintatapaKoodiUri": "valintatapajono_tv#1"
       }
     ]
   },
@@ -239,7 +239,7 @@ exports[`editValintaperuste > should be able to edit valintaperuste #0`] =
             "osoite": {
               "fi": "fi osoite"
             },
-            "postinumeroKoodiUri": "posti_00350#1"
+            "postinumeroKoodiUri": "posti_00350#2"
           }
         }
       ],

@@ -20,13 +20,13 @@ import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils'
 
 const fillHakutavanRajausSection = () => {
   getByTestId('hakutapaSection').within(() => {
-    getRadio('hakutapa_0#1').click({ force: true });
+    getRadio('hakutapa_01#1').click({ force: true });
   });
 };
 
 const fillKohdejoukonRajausSection = () => {
   getByTestId('kohdejoukkoSection').within(() => {
-    selectOption('haunkohdejoukko_0');
+    selectOption('Korkeakoulutus');
   });
 };
 
@@ -48,7 +48,7 @@ const fillValintatapaSection = () => {
   getByTestId('valintatavatSection').within(() => {
     getByTestId('valintatapalista').within(() => {
       getByTestId('tapa').within(() => {
-        selectOption('valintatapajono_0');
+        selectOption('Todistusvalinta');
       });
 
       getByTestId('nimi').find('input').pipe(paste('Valintatavan nimi'));

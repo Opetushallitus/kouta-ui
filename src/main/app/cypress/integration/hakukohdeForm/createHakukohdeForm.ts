@@ -26,7 +26,7 @@ const lisaa = () => {
 const fillPohjakoulutusvaatimusSection = () => {
   getByTestId('pohjakoulutusSection').within(() => {
     getByTestId('pohjakoulutusvaatimusSelect').within(() => {
-      selectOption('pohjakoulutusvaatimustoinenaste_0');
+      selectOption('Peruskoulu');
     });
 
     typeToEditor('Tarkenne');
@@ -97,12 +97,13 @@ const fillLomakeSection = (type: string = 'ataru') => {
 
 const fillAlkamiskausiSection = () => {
   getByTestId('alkamiskausiSection').within(() => {
-    getByTestId('eriAlkamiskausi').within(() => {
-      getCheckbox(null).click({ force: true });
-    });
+    cy.findByText('hakukohdelomake.hakukohteellaEriAlkamiskausi').click();
+    cy.findByText(
+      'hakulomake.aloitusHenkilokohtaisenSuunnitelmanMukaisesti'
+    ).click();
 
-    getRadio('kausi_0#1').click({ force: true });
-    selectOption(2035);
+    /*getRadio('kausi_k#1').click({ force: true });
+    selectOption(2035);*/
   });
 };
 
@@ -131,7 +132,7 @@ const fillLiitteetSection = () => {
 
     getByTestId('liitelista').within(() => {
       getByTestId('tyyppi').within(() => {
-        selectOption('liitetyypitamm_0');
+        selectOption('Lausunnot');
       });
 
       getByTestId('nimi').find('input').pipe(paste('Nimi'));
@@ -152,7 +153,7 @@ const fillLiitteetSection = () => {
       getByTestId('osoite').find('input').pipe(paste('Osoite'));
 
       getByTestId('postinumero').within(() => {
-        fillAsyncSelect('0', 'Posti_0');
+        fillAsyncSelect('00350');
       });
 
       getByTestId('sahkoposti')

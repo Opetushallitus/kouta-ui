@@ -3,6 +3,12 @@
     "url": "https://localhost:3000/organisaatio-service/rest/organisaatio/v4/1.2.246.562.10.52251087186?includeImage=false",
     "response": {
       "body": {
+        "oid": "1.2.246.562.10.52251087186",
+        "nimi": {
+          "fi": "Stadin ammatti- ja aikuisopisto",
+          "sv": "Stadin ammatti- ja aikuisopisto",
+          "en": "Stadin ammatti- ja aikuisopisto"
+        },
         "metadata": {
           "nimi": {},
           "hakutoimistoEctsNimi": {},
@@ -123,18 +129,16 @@
             }
           }
         },
-        "oid": "1.2.246.562.10.52251087186",
-        "nimi": {
-          "fi": "Stadin ammatti- ja aikuisopisto",
-          "sv": "Stadin ammatti- ja aikuisopisto",
-          "en": "Stadin ammatti- ja aikuisopisto"
-        },
         "alkuPvm": "2013-01-01",
         "oppilaitosKoodi": "10105",
+        "kuvaus2": {},
+        "parentOid": "1.2.246.562.10.346830761110",
+        "tyypit": [
+          "organisaatiotyyppi_02"
+        ],
         "ryhmatyypit": [],
         "kayttoryhmat": [],
         "piilotettu": false,
-        "parentOid": "1.2.246.562.10.346830761110",
         "postiosoite": {
           "postinumeroUri": "posti_00099",
           "osoiteTyyppi": "posti",
@@ -142,10 +146,6 @@
           "postitoimipaikka": "HELSINGIN KAUPUNKI",
           "osoite": "PL 55308"
         },
-        "kuvaus2": {},
-        "tyypit": [
-          "organisaatiotyyppi_02"
-        ],
         "yhteystietoArvos": [
           {
             "YhteystietoArvo.arvoText": "stadiprimus@edu.hel.fi",
@@ -219,13 +219,13 @@
             "version": 0
           }
         ],
+        "parentOidPath": "|1.2.246.562.10.00000000001|1.2.246.562.10.346830761110|",
         "vuosiluokat": [],
         "toimipistekoodi": "10105",
         "kotipaikkaUri": "kunta_091",
         "kieletUris": [
           "oppilaitoksenopetuskieli_1#1"
         ],
-        "parentOidPath": "|1.2.246.562.10.00000000001|1.2.246.562.10.346830761110|",
         "maaUri": "maatjavaltiot1_fin",
         "oppilaitosTyyppiUri": "oppilaitostyyppi_21#1",
         "muutKotipaikatUris": [],
@@ -236,8 +236,8 @@
           "postitoimipaikka": "HELSINKI",
           "osoite": "Hattulantie 2"
         },
-        "lisatiedot": [],
         "muutOppilaitosTyyppiUris": [],
+        "lisatiedot": [],
         "version": 89,
         "status": "AKTIIVINEN"
       },
@@ -543,14 +543,14 @@
                 "kotipaikkaUri": "kunta_091",
                 "children": [
                   {
-                    "oid": "1.2.246.562.10.55355715099",
-                    "alkuPvm": 1356991200000,
+                    "oid": "1.2.246.562.10.45854578546",
+                    "alkuPvm": 1413234000000,
                     "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.55355715099/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010504",
+                    "parentOidPath": "1.2.246.562.10.45854578546/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010516",
                     "match": false,
                     "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Ilkantien toimipaikka"
+                      "fi": "Stadin ammatti- ja aikuisopisto, Myllypuron toimipaikka"
                     },
                     "kieletUris": [
                       "oppilaitoksenopetuskieli_1#1"
@@ -564,14 +564,14 @@
                     "status": "AKTIIVINEN"
                   },
                   {
-                    "oid": "1.2.246.562.10.56139411567",
+                    "oid": "1.2.246.562.10.60465978314",
                     "alkuPvm": 1356991200000,
                     "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.56139411567/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010501",
+                    "parentOidPath": "1.2.246.562.10.60465978314/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010503",
                     "match": false,
                     "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Abraham Wetterin tien toimipaikka"
+                      "fi": "Stadin ammatti- ja aikuisopisto, Holkkitien toimipaikka"
                     },
                     "kieletUris": [
                       "oppilaitoksenopetuskieli_1#1"
@@ -606,14 +606,140 @@
                     "status": "AKTIIVINEN"
                   },
                   {
-                    "oid": "1.2.246.562.10.2013081415065445951365",
-                    "alkuPvm": 1375304400000,
+                    "oid": "1.2.246.562.10.56139411567",
+                    "alkuPvm": 1356991200000,
                     "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.2013081415065445951365/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010514",
+                    "parentOidPath": "1.2.246.562.10.56139411567/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010501",
                     "match": false,
                     "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Pälkäneentien toimipaikka"
+                      "fi": "Stadin ammatti- ja aikuisopisto, Abraham Wetterin tien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.16538823663",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.16538823663/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010510",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Sturenkadun toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.20485193278",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.20485193278/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010502",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Vilppulantien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.20866993056",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.20866993056/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010505",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Kullervonkadun toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.23017513880",
+                    "alkuPvm": 1470603600000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.23017513880/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010517",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Hattulantien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.55355715099",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.55355715099/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010504",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Ilkantien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.93115250668",
+                    "alkuPvm": 1413234000000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.93115250668/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010515",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Meritalon toimipaikka"
                     },
                     "kieletUris": [
                       "oppilaitoksenopetuskieli_1#1"
@@ -649,14 +775,14 @@
                     "status": "AKTIIVINEN"
                   },
                   {
-                    "oid": "1.2.246.562.10.93115250668",
-                    "alkuPvm": 1413234000000,
+                    "oid": "1.2.246.562.10.2013081415065445951365",
+                    "alkuPvm": 1375304400000,
                     "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.93115250668/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010515",
+                    "parentOidPath": "1.2.246.562.10.2013081415065445951365/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010514",
                     "match": false,
                     "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Meritalon toimipaikka"
+                      "fi": "Stadin ammatti- ja aikuisopisto, Pälkäneentien toimipaikka"
                     },
                     "kieletUris": [
                       "oppilaitoksenopetuskieli_1#1"
@@ -691,48 +817,6 @@
                     "status": "AKTIIVINEN"
                   },
                   {
-                    "oid": "1.2.246.562.10.60465978314",
-                    "alkuPvm": 1356991200000,
-                    "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.60465978314/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010503",
-                    "match": false,
-                    "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Holkkitien toimipaikka"
-                    },
-                    "kieletUris": [
-                      "oppilaitoksenopetuskieli_1#1"
-                    ],
-                    "kotipaikkaUri": "kunta_091",
-                    "children": [],
-                    "aliOrganisaatioMaara": 0,
-                    "organisaatiotyypit": [
-                      "organisaatiotyyppi_03"
-                    ],
-                    "status": "AKTIIVINEN"
-                  },
-                  {
-                    "oid": "1.2.246.562.10.16538823663",
-                    "alkuPvm": 1356991200000,
-                    "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.16538823663/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010510",
-                    "match": false,
-                    "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Sturenkadun toimipaikka"
-                    },
-                    "kieletUris": [
-                      "oppilaitoksenopetuskieli_1#1"
-                    ],
-                    "kotipaikkaUri": "kunta_091",
-                    "children": [],
-                    "aliOrganisaatioMaara": 0,
-                    "organisaatiotyypit": [
-                      "organisaatiotyyppi_03"
-                    ],
-                    "status": "AKTIIVINEN"
-                  },
-                  {
                     "oid": "1.2.246.562.10.656909794910",
                     "alkuPvm": 1356991200000,
                     "parentOid": "1.2.246.562.10.52251087186",
@@ -741,90 +825,6 @@
                     "match": false,
                     "nimi": {
                       "fi": "Stadin ammatti- ja aikuisopisto, Prinsessantien toimipaikka"
-                    },
-                    "kieletUris": [
-                      "oppilaitoksenopetuskieli_1#1"
-                    ],
-                    "kotipaikkaUri": "kunta_091",
-                    "children": [],
-                    "aliOrganisaatioMaara": 0,
-                    "organisaatiotyypit": [
-                      "organisaatiotyyppi_03"
-                    ],
-                    "status": "AKTIIVINEN"
-                  },
-                  {
-                    "oid": "1.2.246.562.10.20866993056",
-                    "alkuPvm": 1356991200000,
-                    "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.20866993056/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010505",
-                    "match": false,
-                    "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Kullervonkadun toimipaikka"
-                    },
-                    "kieletUris": [
-                      "oppilaitoksenopetuskieli_1#1"
-                    ],
-                    "kotipaikkaUri": "kunta_091",
-                    "children": [],
-                    "aliOrganisaatioMaara": 0,
-                    "organisaatiotyypit": [
-                      "organisaatiotyyppi_03"
-                    ],
-                    "status": "AKTIIVINEN"
-                  },
-                  {
-                    "oid": "1.2.246.562.10.20485193278",
-                    "alkuPvm": 1356991200000,
-                    "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.20485193278/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010502",
-                    "match": false,
-                    "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Vilppulantien toimipaikka"
-                    },
-                    "kieletUris": [
-                      "oppilaitoksenopetuskieli_1#1"
-                    ],
-                    "kotipaikkaUri": "kunta_091",
-                    "children": [],
-                    "aliOrganisaatioMaara": 0,
-                    "organisaatiotyypit": [
-                      "organisaatiotyyppi_03"
-                    ],
-                    "status": "AKTIIVINEN"
-                  },
-                  {
-                    "oid": "1.2.246.562.10.45854578546",
-                    "alkuPvm": 1413234000000,
-                    "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.45854578546/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010516",
-                    "match": false,
-                    "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Myllypuron toimipaikka"
-                    },
-                    "kieletUris": [
-                      "oppilaitoksenopetuskieli_1#1"
-                    ],
-                    "kotipaikkaUri": "kunta_091",
-                    "children": [],
-                    "aliOrganisaatioMaara": 0,
-                    "organisaatiotyypit": [
-                      "organisaatiotyyppi_03"
-                    ],
-                    "status": "AKTIIVINEN"
-                  },
-                  {
-                    "oid": "1.2.246.562.10.23017513880",
-                    "alkuPvm": 1470603600000,
-                    "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.23017513880/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010517",
-                    "match": false,
-                    "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Hattulantien toimipaikka"
                     },
                     "kieletUris": [
                       "oppilaitoksenopetuskieli_1#1"
@@ -1221,6 +1221,12 @@
     "response": {
       "body": [
         {
+          "oid": "1.2.246.562.10.52251087186",
+          "nimi": {
+            "fi": "Stadin ammatti- ja aikuisopisto",
+            "sv": "Stadin ammatti- ja aikuisopisto",
+            "en": "Stadin ammatti- ja aikuisopisto"
+          },
           "metadata": {
             "nimi": {},
             "hakutoimistoEctsNimi": {},
@@ -1341,18 +1347,16 @@
               }
             }
           },
-          "oid": "1.2.246.562.10.52251087186",
-          "nimi": {
-            "fi": "Stadin ammatti- ja aikuisopisto",
-            "sv": "Stadin ammatti- ja aikuisopisto",
-            "en": "Stadin ammatti- ja aikuisopisto"
-          },
           "alkuPvm": "2013-01-01",
           "oppilaitosKoodi": "10105",
+          "kuvaus2": {},
+          "parentOid": "1.2.246.562.10.346830761110",
+          "tyypit": [
+            "organisaatiotyyppi_02"
+          ],
           "ryhmatyypit": [],
           "kayttoryhmat": [],
           "piilotettu": false,
-          "parentOid": "1.2.246.562.10.346830761110",
           "postiosoite": {
             "postinumeroUri": "posti_00099",
             "osoiteTyyppi": "posti",
@@ -1360,10 +1364,6 @@
             "postitoimipaikka": "HELSINGIN KAUPUNKI",
             "osoite": "PL 55308"
           },
-          "kuvaus2": {},
-          "tyypit": [
-            "organisaatiotyyppi_02"
-          ],
           "yhteystietoArvos": [
             {
               "YhteystietoArvo.arvoText": "stadiprimus@edu.hel.fi",
@@ -1437,13 +1437,13 @@
               "version": 0
             }
           ],
+          "parentOidPath": "|1.2.246.562.10.00000000001|1.2.246.562.10.346830761110|",
           "vuosiluokat": [],
           "toimipistekoodi": "10105",
           "kotipaikkaUri": "kunta_091",
           "kieletUris": [
             "oppilaitoksenopetuskieli_1#1"
           ],
-          "parentOidPath": "|1.2.246.562.10.00000000001|1.2.246.562.10.346830761110|",
           "maaUri": "maatjavaltiot1_fin",
           "oppilaitosTyyppiUri": "oppilaitostyyppi_21#1",
           "muutKotipaikatUris": [],
@@ -1454,8 +1454,8 @@
             "postitoimipaikka": "HELSINKI",
             "osoite": "Hattulantie 2"
           },
-          "lisatiedot": [],
           "muutOppilaitosTyyppiUris": [],
+          "lisatiedot": [],
           "version": 89,
           "status": "AKTIIVINEN"
         }
@@ -1718,16 +1718,15 @@
     }
   },
   {
-    "url": "https://localhost:3000/koodisto-service/rest/codeelement/posti_0/2",
-    "response": {
-      "body": "error.codeelement.not.found",
-      "status": 500
-    }
-  },
-  {
     "url": "https://localhost:3000/organisaatio-service/rest/organisaatio/v4/1.2.246.562.10.52251087186?includeImage=false",
     "response": {
       "body": {
+        "oid": "1.2.246.562.10.52251087186",
+        "nimi": {
+          "fi": "Stadin ammatti- ja aikuisopisto",
+          "sv": "Stadin ammatti- ja aikuisopisto",
+          "en": "Stadin ammatti- ja aikuisopisto"
+        },
         "metadata": {
           "nimi": {},
           "hakutoimistoEctsNimi": {},
@@ -1848,18 +1847,16 @@
             }
           }
         },
-        "oid": "1.2.246.562.10.52251087186",
-        "nimi": {
-          "fi": "Stadin ammatti- ja aikuisopisto",
-          "sv": "Stadin ammatti- ja aikuisopisto",
-          "en": "Stadin ammatti- ja aikuisopisto"
-        },
         "alkuPvm": "2013-01-01",
         "oppilaitosKoodi": "10105",
+        "kuvaus2": {},
+        "parentOid": "1.2.246.562.10.346830761110",
+        "tyypit": [
+          "organisaatiotyyppi_02"
+        ],
         "ryhmatyypit": [],
         "kayttoryhmat": [],
         "piilotettu": false,
-        "parentOid": "1.2.246.562.10.346830761110",
         "postiosoite": {
           "postinumeroUri": "posti_00099",
           "osoiteTyyppi": "posti",
@@ -1867,10 +1864,6 @@
           "postitoimipaikka": "HELSINGIN KAUPUNKI",
           "osoite": "PL 55308"
         },
-        "kuvaus2": {},
-        "tyypit": [
-          "organisaatiotyyppi_02"
-        ],
         "yhteystietoArvos": [
           {
             "YhteystietoArvo.arvoText": "stadiprimus@edu.hel.fi",
@@ -1944,13 +1937,13 @@
             "version": 0
           }
         ],
+        "parentOidPath": "|1.2.246.562.10.00000000001|1.2.246.562.10.346830761110|",
         "vuosiluokat": [],
         "toimipistekoodi": "10105",
         "kotipaikkaUri": "kunta_091",
         "kieletUris": [
           "oppilaitoksenopetuskieli_1#1"
         ],
-        "parentOidPath": "|1.2.246.562.10.00000000001|1.2.246.562.10.346830761110|",
         "maaUri": "maatjavaltiot1_fin",
         "oppilaitosTyyppiUri": "oppilaitostyyppi_21#1",
         "muutKotipaikatUris": [],
@@ -1961,8 +1954,8 @@
           "postitoimipaikka": "HELSINKI",
           "osoite": "Hattulantie 2"
         },
-        "lisatiedot": [],
         "muutOppilaitosTyyppiUris": [],
+        "lisatiedot": [],
         "version": 89,
         "status": "AKTIIVINEN"
       },
@@ -2014,174 +2007,6 @@
                 "kotipaikkaUri": "kunta_091",
                 "children": [
                   {
-                    "oid": "1.2.246.562.10.20866993056",
-                    "alkuPvm": 1356991200000,
-                    "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.20866993056/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010505",
-                    "match": false,
-                    "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Kullervonkadun toimipaikka"
-                    },
-                    "kieletUris": [
-                      "oppilaitoksenopetuskieli_1#1"
-                    ],
-                    "kotipaikkaUri": "kunta_091",
-                    "children": [],
-                    "aliOrganisaatioMaara": 0,
-                    "organisaatiotyypit": [
-                      "organisaatiotyyppi_03"
-                    ],
-                    "status": "AKTIIVINEN"
-                  },
-                  {
-                    "oid": "1.2.246.562.10.60465978314",
-                    "alkuPvm": 1356991200000,
-                    "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.60465978314/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010503",
-                    "match": false,
-                    "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Holkkitien toimipaikka"
-                    },
-                    "kieletUris": [
-                      "oppilaitoksenopetuskieli_1#1"
-                    ],
-                    "kotipaikkaUri": "kunta_091",
-                    "children": [],
-                    "aliOrganisaatioMaara": 0,
-                    "organisaatiotyypit": [
-                      "organisaatiotyyppi_03"
-                    ],
-                    "status": "AKTIIVINEN"
-                  },
-                  {
-                    "oid": "1.2.246.562.10.45854578546",
-                    "alkuPvm": 1413234000000,
-                    "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.45854578546/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010516",
-                    "match": false,
-                    "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Myllypuron toimipaikka"
-                    },
-                    "kieletUris": [
-                      "oppilaitoksenopetuskieli_1#1"
-                    ],
-                    "kotipaikkaUri": "kunta_091",
-                    "children": [],
-                    "aliOrganisaatioMaara": 0,
-                    "organisaatiotyypit": [
-                      "organisaatiotyyppi_03"
-                    ],
-                    "status": "AKTIIVINEN"
-                  },
-                  {
-                    "oid": "1.2.246.562.10.2013081415065445951365",
-                    "alkuPvm": 1375304400000,
-                    "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.2013081415065445951365/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010514",
-                    "match": false,
-                    "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Pälkäneentien toimipaikka"
-                    },
-                    "kieletUris": [
-                      "oppilaitoksenopetuskieli_1#1"
-                    ],
-                    "kotipaikkaUri": "kunta_091",
-                    "children": [],
-                    "aliOrganisaatioMaara": 0,
-                    "organisaatiotyypit": [
-                      "organisaatiotyyppi_03"
-                    ],
-                    "status": "AKTIIVINEN"
-                  },
-                  {
-                    "oid": "1.2.246.562.10.78321186062",
-                    "alkuPvm": 1356991200000,
-                    "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.78321186062/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010509",
-                    "match": false,
-                    "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Savonkadun toimipaikka"
-                    },
-                    "kieletUris": [
-                      "oppilaitoksenopetuskieli_1#1"
-                    ],
-                    "kotipaikkaUri": "kunta_091",
-                    "children": [],
-                    "aliOrganisaatioMaara": 0,
-                    "organisaatiotyypit": [
-                      "organisaatiotyyppi_03"
-                    ],
-                    "status": "AKTIIVINEN"
-                  },
-                  {
-                    "oid": "1.2.246.562.10.56139411567",
-                    "alkuPvm": 1356991200000,
-                    "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.56139411567/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010501",
-                    "match": false,
-                    "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Abraham Wetterin tien toimipaikka"
-                    },
-                    "kieletUris": [
-                      "oppilaitoksenopetuskieli_1#1"
-                    ],
-                    "kotipaikkaUri": "kunta_091",
-                    "children": [],
-                    "aliOrganisaatioMaara": 0,
-                    "organisaatiotyypit": [
-                      "organisaatiotyyppi_03"
-                    ],
-                    "status": "AKTIIVINEN"
-                  },
-                  {
-                    "oid": "1.2.246.562.10.20485193278",
-                    "alkuPvm": 1356991200000,
-                    "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.20485193278/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010502",
-                    "match": false,
-                    "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Vilppulantien toimipaikka"
-                    },
-                    "kieletUris": [
-                      "oppilaitoksenopetuskieli_1#1"
-                    ],
-                    "kotipaikkaUri": "kunta_091",
-                    "children": [],
-                    "aliOrganisaatioMaara": 0,
-                    "organisaatiotyypit": [
-                      "organisaatiotyyppi_03"
-                    ],
-                    "status": "AKTIIVINEN"
-                  },
-                  {
-                    "oid": "1.2.246.562.10.93115250668",
-                    "alkuPvm": 1413234000000,
-                    "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.93115250668/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010515",
-                    "match": false,
-                    "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Meritalon toimipaikka"
-                    },
-                    "kieletUris": [
-                      "oppilaitoksenopetuskieli_1#1"
-                    ],
-                    "kotipaikkaUri": "kunta_091",
-                    "children": [],
-                    "aliOrganisaatioMaara": 0,
-                    "organisaatiotyypit": [
-                      "organisaatiotyyppi_03"
-                    ],
-                    "status": "AKTIIVINEN"
-                  },
-                  {
                     "oid": "1.2.246.562.10.23017513880",
                     "alkuPvm": 1470603600000,
                     "parentOid": "1.2.246.562.10.52251087186",
@@ -2203,35 +2028,14 @@
                     "status": "AKTIIVINEN"
                   },
                   {
-                    "oid": "1.2.246.562.10.55355715099",
+                    "oid": "1.2.246.562.10.16538823663",
                     "alkuPvm": 1356991200000,
                     "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.55355715099/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010504",
+                    "parentOidPath": "1.2.246.562.10.16538823663/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010510",
                     "match": false,
                     "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Ilkantien toimipaikka"
-                    },
-                    "kieletUris": [
-                      "oppilaitoksenopetuskieli_1#1"
-                    ],
-                    "kotipaikkaUri": "kunta_091",
-                    "children": [],
-                    "aliOrganisaatioMaara": 0,
-                    "organisaatiotyypit": [
-                      "organisaatiotyyppi_03"
-                    ],
-                    "status": "AKTIIVINEN"
-                  },
-                  {
-                    "oid": "1.2.246.562.10.656909794910",
-                    "alkuPvm": 1356991200000,
-                    "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.656909794910/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010508",
-                    "match": false,
-                    "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Prinsessantien toimipaikka"
+                      "fi": "Stadin ammatti- ja aikuisopisto, Sturenkadun toimipaikka"
                     },
                     "kieletUris": [
                       "oppilaitoksenopetuskieli_1#1"
@@ -2267,14 +2071,35 @@
                     "status": "AKTIIVINEN"
                   },
                   {
-                    "oid": "1.2.246.562.10.16538823663",
+                    "oid": "1.2.246.562.10.656909794910",
                     "alkuPvm": 1356991200000,
                     "parentOid": "1.2.246.562.10.52251087186",
-                    "parentOidPath": "1.2.246.562.10.16538823663/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
-                    "toimipistekoodi": "1010510",
+                    "parentOidPath": "1.2.246.562.10.656909794910/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010508",
                     "match": false,
                     "nimi": {
-                      "fi": "Stadin ammatti- ja aikuisopisto, Sturenkadun toimipaikka"
+                      "fi": "Stadin ammatti- ja aikuisopisto, Prinsessantien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.60465978314",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.60465978314/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010503",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Holkkitien toimipaikka"
                     },
                     "kieletUris": [
                       "oppilaitoksenopetuskieli_1#1"
@@ -2296,6 +2121,174 @@
                     "match": false,
                     "nimi": {
                       "fi": "Stadin ammatti- ja aikuisopisto, Teollisuuskadun toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.45854578546",
+                    "alkuPvm": 1413234000000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.45854578546/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010516",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Myllypuron toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.93115250668",
+                    "alkuPvm": 1413234000000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.93115250668/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010515",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Meritalon toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.78321186062",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.78321186062/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010509",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Savonkadun toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.20485193278",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.20485193278/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010502",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Vilppulantien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.2013081415065445951365",
+                    "alkuPvm": 1375304400000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.2013081415065445951365/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010514",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Pälkäneentien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.55355715099",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.55355715099/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010504",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Ilkantien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.56139411567",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.56139411567/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010501",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Abraham Wetterin tien toimipaikka"
+                    },
+                    "kieletUris": [
+                      "oppilaitoksenopetuskieli_1#1"
+                    ],
+                    "kotipaikkaUri": "kunta_091",
+                    "children": [],
+                    "aliOrganisaatioMaara": 0,
+                    "organisaatiotyypit": [
+                      "organisaatiotyyppi_03"
+                    ],
+                    "status": "AKTIIVINEN"
+                  },
+                  {
+                    "oid": "1.2.246.562.10.20866993056",
+                    "alkuPvm": 1356991200000,
+                    "parentOid": "1.2.246.562.10.52251087186",
+                    "parentOidPath": "1.2.246.562.10.20866993056/1.2.246.562.10.52251087186/1.2.246.562.10.346830761110/1.2.246.562.10.00000000001",
+                    "toimipistekoodi": "1010505",
+                    "match": false,
+                    "nimi": {
+                      "fi": "Stadin ammatti- ja aikuisopisto, Kullervonkadun toimipaikka"
                     },
                     "kieletUris": [
                       "oppilaitoksenopetuskieli_1#1"
@@ -2329,26 +2322,26 @@
     }
   },
   {
-    "url": "https://localhost:3000/koodisto-service/rest/codeelement/posti_00350/1",
+    "url": "https://localhost:3000/koodisto-service/rest/codeelement/posti_00350/2",
     "response": {
       "body": {
         "koodiUri": "posti_00350",
         "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/posti_00350",
-        "version": 2,
-        "versio": 1,
+        "version": 0,
+        "versio": 2,
         "koodisto": {
           "koodistoUri": "posti",
           "organisaatioOid": "1.2.246.562.10.00000000001",
           "koodistoVersios": [
-            1
+            2
           ]
         },
         "koodiArvo": "00350",
-        "paivitysPvm": "2018-02-05",
+        "paivitysPvm": "2018-11-19",
         "paivittajaOid": null,
         "voimassaAlkuPvm": "1990-01-01",
         "voimassaLoppuPvm": null,
-        "tila": "HYVAKSYTTY",
+        "tila": "LUONNOS",
         "metadata": [
           {
             "nimi": "HELSINKI",
@@ -2377,46 +2370,6 @@
         ],
         "withinCodeElements": [
           {
-            "codeElementUri": "oppilaitosnumero_00084",
-            "codeElementVersion": 1,
-            "codeElementValue": "00084",
-            "relationMetadata": [
-              {
-                "nimi": "Helsingin Ranskalais-Suomalainen koulu",
-                "kieli": "FI",
-                "kuvaus": "Helsingin Ranskalais-Suomalainen koulu"
-              },
-              {
-                "nimi": "Helsingin Ranskalais-Suomalainen koulu",
-                "kieli": "SV",
-                "kuvaus": "Helsingin Ranskalais-Suomalainen koulu"
-              },
-              {
-                "nimi": "Helsingin Ranskalais-Suomalainen koulu",
-                "kieli": "EN",
-                "kuvaus": "Helsingin Ranskalais-Suomalainen koulu"
-              }
-            ],
-            "parentMetadata": [
-              {
-                "nimi": "oppilaitosnumero",
-                "kieli": "FI",
-                "kuvaus": "Tilastokeskus on antanut oppilaitoksille yksilöintitunnuksen. Tunnus on viisimerkkinen ja tunnukselle on varattu numerosarja 00000-99999. Tunnus on annettu ja annetaan ainoastaa pääkoululle. Samaa oppilaitostunnusta käytetään kaikissa oppilaitokseen liittyvissä toimintayksiköissä. Tietoa ylläpidetään organisaatiopalvelussa josta se kopioituu tähän koodistoon."
-              },
-              {
-                "nimi": "oppilaitosnumero",
-                "kieli": "EN",
-                "kuvaus": "oppilaitosnumero"
-              },
-              {
-                "nimi": "oppilaitosnumero",
-                "kieli": "SV",
-                "kuvaus": "oppilaitosnumero"
-              }
-            ],
-            "passive": true
-          },
-          {
             "codeElementUri": "koulutustoimija_06500110",
             "codeElementVersion": 1,
             "codeElementValue": "0650011-0",
@@ -2444,47 +2397,7 @@
                 "kuvaus": "koulutustoimija"
               }
             ],
-            "passive": true
-          },
-          {
-            "codeElementUri": "oppilaitosnumero_01296",
-            "codeElementVersion": 1,
-            "codeElementValue": "01296",
-            "relationMetadata": [
-              {
-                "nimi": "Helsingin IV terveydenhuolto-oppilaitos",
-                "kieli": "EN",
-                "kuvaus": "Helsingin IV terveydenhuolto-oppilaitos"
-              },
-              {
-                "nimi": "Helsingin IV terveydenhuolto-oppilaitos",
-                "kieli": "SV",
-                "kuvaus": "Helsingin IV terveydenhuolto-oppilaitos"
-              },
-              {
-                "nimi": "Helsingin IV terveydenhuolto-oppilaitos",
-                "kieli": "FI",
-                "kuvaus": "Helsingin IV terveydenhuolto-oppilaitos"
-              }
-            ],
-            "parentMetadata": [
-              {
-                "nimi": "oppilaitosnumero",
-                "kieli": "FI",
-                "kuvaus": "Tilastokeskus on antanut oppilaitoksille yksilöintitunnuksen. Tunnus on viisimerkkinen ja tunnukselle on varattu numerosarja 00000-99999. Tunnus on annettu ja annetaan ainoastaa pääkoululle. Samaa oppilaitostunnusta käytetään kaikissa oppilaitokseen liittyvissä toimintayksiköissä. Tietoa ylläpidetään organisaatiopalvelussa josta se kopioituu tähän koodistoon."
-              },
-              {
-                "nimi": "oppilaitosnumero",
-                "kieli": "EN",
-                "kuvaus": "oppilaitosnumero"
-              },
-              {
-                "nimi": "oppilaitosnumero",
-                "kieli": "SV",
-                "kuvaus": "oppilaitosnumero"
-              }
-            ],
-            "passive": true
+            "passive": false
           }
         ],
         "includesCodeElements": [],

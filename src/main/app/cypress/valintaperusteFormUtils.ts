@@ -1,17 +1,16 @@
 import { merge } from 'lodash';
 
 import {
-  stubKoodistoRoute,
   stubOppijanumerorekisteriHenkiloRoute,
-  stubKoodiRoute,
   stubCommonRoutes,
 } from './utils';
 
 import organisaatio from './data/organisaatio';
 import soraKuvaus from './data/soraKuvaus';
-import createKoodi from './data/koodi';
+import { addMockFileRoutes } from './mockUtils';
 
 export const stubValintaperusteFormRoutes = ({ organisaatioOid }) => {
+  addMockFileRoutes('valintaperuste.mock.json');
   stubCommonRoutes();
 
   cy.route({
@@ -50,13 +49,6 @@ export const stubValintaperusteFormRoutes = ({ organisaatioOid }) => {
     ),
   });
 
-  stubKoodistoRoute({ koodisto: 'hakutapa' });
-  stubKoodistoRoute({ koodisto: 'haunkohdejoukko' });
-  stubKoodistoRoute({ koodisto: 'valintatapajono' });
-  stubKoodistoRoute({ koodisto: 'kielitaidonosoittaminen' });
-  stubKoodistoRoute({ koodisto: 'kieli' });
-  stubKoodistoRoute({ koodisto: 'valintakokeentyyppi' });
-
   cy.route({
     method: 'GET',
     url: '**/sorakuvaus/1',
@@ -66,11 +58,6 @@ export const stubValintaperusteFormRoutes = ({ organisaatioOid }) => {
       tila: 'julkaistu',
     }),
   });
-
-  stubKoodiRoute(createKoodi({ koodisto: 'posti', versio: 2 }));
-  stubKoodiRoute(
-    createKoodi({ koodisto: 'posti', koodiArvo: '00350', versio: 1 })
-  );
 
   stubOppijanumerorekisteriHenkiloRoute();
 };

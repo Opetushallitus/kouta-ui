@@ -1,7 +1,5 @@
 exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] =
 {
-  "alkamiskausiKoodiUri": "kausi_0#1",
-  "alkamisvuosi": 2035,
   "aloituspaikat": 10,
   "ensikertalaisenAloituspaikat": null,
   "hakuOid": "4.1.1.1.1.1",
@@ -17,7 +15,6 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
   "hakulomaketyyppi": "ataru",
   "jarjestyspaikkaOid": "1.2.246.562.10.45854578546",
   "kaytetaanHaunAikataulua": false,
-  "kaytetaanHaunAlkamiskautta": false,
   "kaytetaanHaunHakulomaketta": false,
   "kielivalinta": [
     "fi"
@@ -36,12 +33,12 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
           "osoite": {
             "fi": "Osoite"
           },
-          "postinumeroKoodiUri": "posti_0#2"
+          "postinumeroKoodiUri": "posti_00350#2"
         },
         "sahkoposti": "sahkoposti@email.com"
       },
       "toimitustapa": "osoite",
-      "tyyppiKoodiUri": "liitetyypitamm_0#1"
+      "tyyppiKoodiUri": "liitetyypitamm_4#1"
     }
   ],
   "liitteetOnkoSamaToimitusaika": false,
@@ -50,6 +47,15 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
   "liitteidenToimitusosoite": null,
   "liitteidenToimitustapa": null,
   "metadata": {
+    "kaytetaanHaunAlkamiskautta": false,
+    "koulutuksenAlkamiskausi": {
+      "alkamiskausityyppi": "henkilokohtainen suunnitelma",
+      "henkilokohtaisenSuunnitelmanLisatiedot": {},
+      "koulutuksenAlkamiskausiKoodiUri": null,
+      "koulutuksenAlkamispaivamaara": null,
+      "koulutuksenAlkamisvuosi": null,
+      "koulutuksenPaattymispaivamaara": null
+    },
     "valintakokeidenYleiskuvaus": {
       "fi": "<p>Valintakokeiden kuvaus</p>"
     }
@@ -60,7 +66,7 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
   },
   "organisaatioOid": "1.2.246.562.10.52251087186",
   "pohjakoulutusvaatimusKoodiUrit": [
-    "pohjakoulutusvaatimustoinenaste_0#1"
+    "pohjakoulutusvaatimustoinenaste_pk#1"
   ],
   "pohjakoulutusvaatimusTarkenne": {
     "fi": "<p>Tarkenne</p>"
@@ -102,11 +108,11 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
             "osoite": {
               "fi": "osoite"
             },
-            "postinumeroKoodiUri": "posti_0#2"
+            "postinumeroKoodiUri": "posti_00350#2"
           }
         }
       ],
-      "tyyppiKoodiUri": "valintakokeentyyppi_1#1"
+      "tyyppiKoodiUri": "valintakokeentyyppi_8#1"
     }
   ],
   "valintaperusteId": "649adb37-cd4d-4846-91a9-84b58b90f928"
@@ -114,8 +120,6 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
 
 exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
 {
-  "alkamiskausiKoodiUri": "kausi_0#1",
-  "alkamisvuosi": 2035,
   "aloituspaikat": 10,
   "ensikertalaisenAloituspaikat": 5,
   "hakuOid": "4.1.1.1.1.1",
@@ -131,7 +135,6 @@ exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
   "hakulomaketyyppi": "ataru",
   "jarjestyspaikkaOid": "1.2.246.562.10.45854578546",
   "kaytetaanHaunAikataulua": false,
-  "kaytetaanHaunAlkamiskautta": false,
   "kaytetaanHaunHakulomaketta": false,
   "kielivalinta": [
     "fi"
@@ -150,12 +153,12 @@ exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
           "osoite": {
             "fi": "Osoite"
           },
-          "postinumeroKoodiUri": "posti_0#2"
+          "postinumeroKoodiUri": "posti_00350#2"
         },
         "sahkoposti": "sahkoposti@email.com"
       },
       "toimitustapa": "osoite",
-      "tyyppiKoodiUri": "liitetyypitamm_0#1"
+      "tyyppiKoodiUri": "liitetyypitamm_4#1"
     }
   ],
   "liitteetOnkoSamaToimitusaika": false,
@@ -164,6 +167,15 @@ exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
   "liitteidenToimitusosoite": null,
   "liitteidenToimitustapa": null,
   "metadata": {
+    "kaytetaanHaunAlkamiskautta": false,
+    "koulutuksenAlkamiskausi": {
+      "alkamiskausityyppi": "henkilokohtainen suunnitelma",
+      "henkilokohtaisenSuunnitelmanLisatiedot": {},
+      "koulutuksenAlkamiskausiKoodiUri": null,
+      "koulutuksenAlkamispaivamaara": null,
+      "koulutuksenAlkamisvuosi": null,
+      "koulutuksenPaattymispaivamaara": null
+    },
     "valintakokeidenYleiskuvaus": {
       "fi": "<p>Valintakokeiden kuvaus</p>"
     }
@@ -174,7 +186,7 @@ exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
   },
   "organisaatioOid": "1.2.246.562.10.52251087186",
   "pohjakoulutusvaatimusKoodiUrit": [
-    "pohjakoulutusvaatimustoinenaste_0#1"
+    "pohjakoulutusvaatimustoinenaste_pk#1"
   ],
   "pohjakoulutusvaatimusTarkenne": {
     "fi": "<p>Tarkenne</p>"
@@ -216,11 +228,11 @@ exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
             "osoite": {
               "fi": "osoite"
             },
-            "postinumeroKoodiUri": "posti_0#2"
+            "postinumeroKoodiUri": "posti_00350#2"
           }
         }
       ],
-      "tyyppiKoodiUri": "valintakokeentyyppi_1#1"
+      "tyyppiKoodiUri": "valintakokeentyyppi_8#1"
     }
   ],
   "valintaperusteId": "649adb37-cd4d-4846-91a9-84b58b90f928"
@@ -228,8 +240,8 @@ exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
 
 exports[`editHakukohde > should be able to edit hakukohde #0`] =
 {
-  "alkamiskausiKoodiUri": "kausi_0#1",
-  "alkamisvuosi": 2024,
+  "alkamiskausiKoodiUri": "kausi_k#1",
+  "alkamisvuosi": "2024",
   "aloituspaikat": 150,
   "ensikertalaisenAloituspaikat": 49,
   "hakuOid": "4.1.1.1.1.1",
@@ -265,12 +277,12 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
           "osoite": {
             "fi": "Osoite"
           },
-          "postinumeroKoodiUri": "posti_0#2"
+          "postinumeroKoodiUri": "posti_00350#2"
         },
         "sahkoposti": "sahkoposti@email.com"
       },
       "toimitustapa": "osoite",
-      "tyyppiKoodiUri": "liitetyypitamm_0#1"
+      "tyyppiKoodiUri": "liitetyypitamm_4#1"
     }
   ],
   "liitteetOnkoSamaToimitusaika": false,
@@ -279,6 +291,15 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
   "liitteidenToimitusosoite": null,
   "liitteidenToimitustapa": null,
   "metadata": {
+    "kaytetaanHaunAlkamiskautta": false,
+    "koulutuksenAlkamiskausi": {
+      "alkamiskausityyppi": "tarkka alkamisajankohta",
+      "henkilokohtaisenSuunnitelmanLisatiedot": {},
+      "koulutuksenAlkamiskausiKoodiUri": "kausi_k#1",
+      "koulutuksenAlkamispaivamaara": "2021-04-16T00:00",
+      "koulutuksenAlkamisvuosi": 2020,
+      "koulutuksenPaattymispaivamaara": "2021-12-12T00:00"
+    },
     "valintakokeidenYleiskuvaus": {
       "fi": "<p>Valintakokeiden kuvaus - fi</p>"
     }
@@ -292,7 +313,7 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
   "oid": "6.1.1.1.1.1",
   "organisaatioOid": "1.2.246.562.10.52251087186",
   "pohjakoulutusvaatimusKoodiUrit": [
-    "pohjakoulutusvaatimustoinenaste_0#1"
+    "pohjakoulutusvaatimustoinenaste_yo#1"
   ],
   "pohjakoulutusvaatimusTarkenne": {
     "fi": "<p>Fi tarkenne</p>"
@@ -334,7 +355,7 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
             "osoite": {
               "fi": "fi osoite"
             },
-            "postinumeroKoodiUri": "posti_00350#1"
+            "postinumeroKoodiUri": "posti_00350#2"
           }
         }
       ],
@@ -346,8 +367,6 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
 
 exports[`createHakukohde > should be able to create hakukohde with muu hakulomake #0`] =
 {
-  "alkamiskausiKoodiUri": null,
-  "alkamisvuosi": null,
   "aloituspaikat": null,
   "ensikertalaisenAloituspaikat": null,
   "hakuOid": "4.1.1.1.1.1",
@@ -359,7 +378,6 @@ exports[`createHakukohde > should be able to create hakukohde with muu hakulomak
   },
   "hakulomaketyyppi": "muu",
   "kaytetaanHaunAikataulua": true,
-  "kaytetaanHaunAlkamiskautta": true,
   "kaytetaanHaunHakulomaketta": false,
   "kielivalinta": [
     "fi"
@@ -371,6 +389,15 @@ exports[`createHakukohde > should be able to create hakukohde with muu hakulomak
   "liitteidenToimitusosoite": null,
   "liitteidenToimitustapa": null,
   "metadata": {
+    "kaytetaanHaunAlkamiskautta": true,
+    "koulutuksenAlkamiskausi": {
+      "alkamiskausityyppi": null,
+      "henkilokohtaisenSuunnitelmanLisatiedot": {},
+      "koulutuksenAlkamiskausiKoodiUri": null,
+      "koulutuksenAlkamispaivamaara": null,
+      "koulutuksenAlkamisvuosi": null,
+      "koulutuksenPaattymispaivamaara": null
+    },
     "valintakokeidenYleiskuvaus": {}
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
@@ -379,7 +406,7 @@ exports[`createHakukohde > should be able to create hakukohde with muu hakulomak
   },
   "organisaatioOid": "1.2.246.562.10.52251087186",
   "pohjakoulutusvaatimusKoodiUrit": [
-    "pohjakoulutusvaatimustoinenaste_0#1"
+    "pohjakoulutusvaatimustoinenaste_pk#1"
   ],
   "pohjakoulutusvaatimusTarkenne": {
     "fi": "<p>Tarkenne</p>"
@@ -392,8 +419,6 @@ exports[`createHakukohde > should be able to create hakukohde with muu hakulomak
 
 exports[`createHakukohde > should be able to create hakukohde with "ei sähköistä" hakulomake #0`] =
 {
-  "alkamiskausiKoodiUri": null,
-  "alkamisvuosi": null,
   "aloituspaikat": null,
   "ensikertalaisenAloituspaikat": null,
   "hakuOid": "4.1.1.1.1.1",
@@ -405,7 +430,6 @@ exports[`createHakukohde > should be able to create hakukohde with "ei sähköis
   "hakulomakeLinkki": {},
   "hakulomaketyyppi": "ei sähköistä",
   "kaytetaanHaunAikataulua": true,
-  "kaytetaanHaunAlkamiskautta": true,
   "kaytetaanHaunHakulomaketta": false,
   "kielivalinta": [
     "fi"
@@ -417,6 +441,15 @@ exports[`createHakukohde > should be able to create hakukohde with "ei sähköis
   "liitteidenToimitusosoite": null,
   "liitteidenToimitustapa": null,
   "metadata": {
+    "kaytetaanHaunAlkamiskautta": true,
+    "koulutuksenAlkamiskausi": {
+      "alkamiskausityyppi": null,
+      "henkilokohtaisenSuunnitelmanLisatiedot": {},
+      "koulutuksenAlkamiskausiKoodiUri": null,
+      "koulutuksenAlkamispaivamaara": null,
+      "koulutuksenAlkamisvuosi": null,
+      "koulutuksenPaattymispaivamaara": null
+    },
     "valintakokeidenYleiskuvaus": {}
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
@@ -425,7 +458,7 @@ exports[`createHakukohde > should be able to create hakukohde with "ei sähköis
   },
   "organisaatioOid": "1.2.246.562.10.52251087186",
   "pohjakoulutusvaatimusKoodiUrit": [
-    "pohjakoulutusvaatimustoinenaste_0#1"
+    "pohjakoulutusvaatimustoinenaste_pk#1"
   ],
   "pohjakoulutusvaatimusTarkenne": {
     "fi": "<p>Tarkenne</p>"

@@ -231,7 +231,7 @@ export const fillValintakokeetSection = () => {
     getByTestId('kokeetTaiLisanaytot').within(() => {
       getByTestId('lisaaKoeTaiLisanayttoButton').click({ force: true });
       getByTestId('kokeenTaiLisanaytonTyyppi').within(() => {
-        selectOption('valintakokeentyyppi_1');
+        selectOption('Valintakoe');
       });
       getByTestId('hakijalleNakyvaNimi').find('input').pipe(paste('nimi'));
 
@@ -258,7 +258,7 @@ export const fillValintakokeetSection = () => {
       getByTestId('lisaaTilaisuusButton').click({ force: true });
       getByTestId('osoite').find('input').pipe(paste('osoite'));
       getByTestId('postinumero').within(() => {
-        fillAsyncSelect('0', '0 Posti_0');
+        fillAsyncSelect('00350');
       });
       getByTestId('alkaa').within(() => {
         fillDateTimeInput({

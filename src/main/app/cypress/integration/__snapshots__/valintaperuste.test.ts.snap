@@ -11,6 +11,55 @@ exports[`createValintaperuste > should be able to create valintaperuste #0`] =
     "kuvaus": {
       "fi": "<p>Kuvaus</p>"
     },
+    "sisalto": [
+      {
+        "data": {
+          "fi": "<p>Sisältötekstiä</p>"
+        },
+        "tyyppi": "teksti"
+      },
+      {
+        "data": {
+          "rows": [
+            {
+              "columns": [
+                {
+                  "index": 0,
+                  "text": {
+                    "fi": "solu1.1"
+                  }
+                },
+                {
+                  "index": 1,
+                  "text": {
+                    "fi": "solu1.2"
+                  }
+                }
+              ],
+              "index": 0
+            },
+            {
+              "columns": [
+                {
+                  "index": 0,
+                  "text": {
+                    "fi": "solu2.1"
+                  }
+                },
+                {
+                  "index": 1,
+                  "text": {
+                    "fi": "solu2.2"
+                  }
+                }
+              ],
+              "index": 1
+            }
+          ]
+        },
+        "tyyppi": "taulukko"
+      }
+    ],
     "osaamistaustaKoodiUrit": [],
     "tyyppi": "yo",
     "valintakokeidenYleiskuvaus": {
@@ -147,6 +196,34 @@ exports[`editValintaperuste > should be able to edit valintaperuste #0`] =
     "kuvaus": {
       "fi": "<p>Loppukuvaus</p>"
     },
+    "sisalto": [
+      {
+        "data": {
+          "fi": "<p>Tekstia</p>"
+        },
+        "tyyppi": "teksti"
+      },
+      {
+        "data": {
+          "nimi": {},
+          "rows": [
+            {
+              "columns": [
+                {
+                  "index": 0,
+                  "text": {
+                    "fi": "Solu"
+                  }
+                }
+              ],
+              "index": 0,
+              "isHeader": false
+            }
+          ]
+        },
+        "tyyppi": "taulukko"
+      }
+    ],
     "osaamistaustaKoodiUrit": [],
     "tyyppi": "amm",
     "valintakokeidenYleiskuvaus": {

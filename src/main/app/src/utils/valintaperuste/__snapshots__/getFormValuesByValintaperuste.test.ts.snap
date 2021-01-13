@@ -12,6 +12,7 @@ Object {
       "fi": "Fi nimi",
       "sv": "Sv nimi",
     },
+    "sisalto": Array [],
   },
   "perustiedot": Object {
     "hakutapa": "tapa_1#1",

@@ -12,7 +12,7 @@ import JulkisuusSection from '#/src/components/JulkisuusSection';
 import KokeetTaiLisanaytotSection from '#/src/components/KokeetTaiLisanaytotSection';
 import SoraKuvausSection from '#/src/components/SoraKuvausSection';
 import { ValintatapaSection } from './ValintatapaSection';
-import KuvausSection from './KuvausSection';
+import { KuvausSection } from './KuvausSection';
 import PerustiedotSection from './PerustiedotSection';
 
 const ValintaperusteForm = ({

@@ -53,7 +53,7 @@ const fillValintatapaSection = () => {
 
       getByTestId('nimi').find('input').pipe(paste('Valintatavan nimi'));
 
-      getByTestId('sisalto').within(() => {
+      getByTestId('valintatapaSisalto').within(() => {
         lisaaSisaltoa('teksti');
 
         typeToEditor('Sisältötekstiä');
@@ -87,6 +87,23 @@ const fillKuvausSection = () => {
 
     getByTestId('kuvaus').within(() => {
       typeToEditor('Kuvaus');
+    });
+
+    getByTestId('sisalto').within(() => {
+      lisaaSisaltoa('teksti');
+
+      typeToEditor('Sisältötekstiä');
+
+      lisaaSisaltoa('taulukko');
+
+      getTableInput()
+        .find('textarea')
+        .invoke('val', '')
+        .trigger('paste', {
+          clipboardData: {
+            getData: () => 'solu1.1\tsolu1.2\rsolu2.1\tsolu2.2',
+          },
+        });
     });
 
     jatka();

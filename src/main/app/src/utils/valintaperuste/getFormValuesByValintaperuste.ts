@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { getKokeetTaiLisanaytotValues } from '#/src/utils/form/getKokeetTaiLisanaytotValues';
 import { parseEditorState } from '#/src/components/Editor/utils';
 
-const parseSisalto = ({ sisalto }) => {
+const parseSisalto = sisalto => {
   if (!_.isArray(sisalto)) {
     return [];
   }
@@ -36,6 +36,7 @@ export const getFormValuesByValintaperuste = valintaperuste => {
   const {
     valintatavat = [],
     kuvaus = {},
+    sisalto = [],
     valintakokeidenYleiskuvaus,
   } = metadata;
 
@@ -51,24 +52,25 @@ export const getFormValuesByValintaperuste = valintaperuste => {
     kuvaus: {
       nimi,
       kuvaus: _.mapValues(kuvaus || {}, parseEditorState),
+      sisalto: parseSisalto(sisalto),
     },
     valintatavat: (valintatavat || []).map(
       ({
-        kuvaus,
-        nimi,
+        nimi: valintatapaNimi,
+        kuvaus: valintatapaKuvaus,
+        sisalto: valintatapaSisalto,
         valintatapaKoodiUri,
-        sisalto,
         kynnysehto,
         enimmaispisteet,
         vahimmaispisteet,
       }) => ({
-        kuvaus: kuvaus || {},
-        nimi: nimi || {},
-        kynnysehto: _.mapValues(kynnysehto || {}, parseEditorState),
+        nimi: valintatapaNimi || {},
+        kuvaus: valintatapaKuvaus || {},
+        sisalto: parseSisalto(valintatapaSisalto),
         tapa: valintatapaKoodiUri ? { value: valintatapaKoodiUri } : null,
+        kynnysehto: _.mapValues(kynnysehto || {}, parseEditorState),
         enimmaispistemaara: enimmaispisteet || '',
         vahimmaispistemaara: vahimmaispisteet || '',
-        sisalto: parseSisalto({ sisalto }),
       })
     ),
     soraKuvaus: sorakuvausId

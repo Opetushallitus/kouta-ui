@@ -43,6 +43,22 @@ export default ({ tyyppi = 'amm' } = {}) => {
       ],
       kielitaitovaatimukset: [],
       kuvaus: { fi: '<p>Loppukuvaus</p>' },
+      sisalto: [
+        { tyyppi: 'teksti', data: { fi: '<p>Tekstia</p>' } },
+        {
+          tyyppi: 'taulukko',
+          data: {
+            nimi: {},
+            rows: [
+              {
+                index: 0,
+                isHeader: false,
+                columns: [{ index: 0, text: { fi: 'Solu' } }],
+              },
+            ],
+          },
+        },
+      ],
       valintakokeidenYleiskuvaus: {
         fi: '<p>Valintakokeiden kuvaus - fi</p>',
       },

@@ -194,8 +194,8 @@ export const getValuesForSaving = (
   unregisteredFields: Record<string, { name: string }>,
   initialValues: any = {}
 ) => {
-  // Use initial values as a base. Especially important for editing.
-  const saveableValues: any = initialValues;
+  // Use initial values as a base. Both create and edit forms' changes are differences to the initial values.
+  const saveableValues: any = _.cloneDeep(initialValues);
 
   // Ensure that all fields that were unregistered (hidden by the user) are sent to backend as empty values
   _.each(unregisteredFields, ({ name }) => {

@@ -147,7 +147,7 @@ test.each([
 
 test.each([
   ['2020-01-01T00:00', '01.01.2020 00:00'],
-  [null, ''],
+  [null, null],
   ['2020-01-01', '01.01.2020 00:00'],
 ])('formatDateValue', (dateString, result) => {
   expect(formatDateValue(dateString)).toEqual(result);

@@ -1,18 +1,16 @@
 import { getHakukohdeByFormValues } from './getHakukohdeByFormValues';
 import { parseEditorState } from '#/src/components/Editor/utils';
-import { HAKULOMAKETYYPPI, LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
+import {
+  Ajankohtatyyppi,
+  HAKULOMAKETYYPPI,
+  JULKAISUTILA,
+  LIITTEEN_TOIMITUSTAPA,
+} from '#/src/constants';
 
 test('getHakukohdeByFormValues returns correct hakukohde given form values', () => {
   const hakukohde = getHakukohdeByFormValues({
-    tila: 'tallennettu',
+    tila: JULKAISUTILA.TALLENNETTU,
     muokkaaja: '1.1.1.1',
-    alkamiskausi: {
-      eriAlkamiskausi: true,
-      kausi: 'kausi_1#1',
-      vuosi: {
-        value: '2020',
-      },
-    },
     kieliversiot: ['fi', 'sv'],
     aloituspaikat: {
       aloituspaikkamaara: '45',
@@ -49,6 +47,13 @@ test('getHakukohdeByFormValues returns correct hakukohde given form values', () 
       value: 'peruste_1#1',
     },
     jarjestyspaikkaOid: '2.2.2.2.2',
+    ajankohta: {
+      kaytetaanHakukohteenAlkamiskautta: true,
+      ajankohtaTyyppi: Ajankohtatyyppi.ALKAMISKAUSI,
+      tiedossaTarkkaAjankohta: false,
+      kausi: 'alkamiskausi_1#1',
+      vuosi: { value: '2020' },
+    },
     valintakokeet: {
       yleisKuvaus: {
         fi: parseEditorState('<p>Yleiskuvaus - fi</p>'),
@@ -78,10 +83,6 @@ test('getHakukohdeByFormValues returns correct hakukohde given form values', () 
             {
               osoite: { fi: 'fi osoite', sv: 'sv osoite' },
               postinumero: { value: 'posti_1#1' },
-              postitoimipaikka: {
-                fi: 'fi posititoimipaikka',
-                sv: 'sv posititoimipaikka',
-              },
               alkaa: '2019-04-16T08:44',
               paattyy: '2019-04-18T08:44',
               lisatietoja: {
@@ -106,10 +107,6 @@ test('getHakukohdeByFormValues returns correct hakukohde given form values', () 
             sv: 'Sv osoite',
           },
           postinumero: { value: 'posti_1#1' },
-          postitoimipaikka: {
-            fi: 'Fi postitoimipaikka',
-            sv: 'Sv postitoimipaikka',
-          },
           sahkoposti: {
             fi: 'Fi sahkoposti',
             sv: 'Sv sahkoposti',
@@ -139,10 +136,6 @@ test('getHakukohdeByFormValues returns correct hakukohde given form values', () 
                 sv: 'Sv osoite',
               },
               postinumero: { value: 'posti_1#1' },
-              postitoimipaikka: {
-                fi: 'Fi postitoimipaikka',
-                sv: 'Sv postitoimipaikka',
-              },
               sahkoposti: {
                 fi: 'Fi sahkoposti',
                 sv: 'Sv sahkoposti',

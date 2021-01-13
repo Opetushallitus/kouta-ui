@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import _fp from 'lodash/fp';
 
 import { getKokeetTaiLisanaytotValues } from '#/src/utils/form/getKokeetTaiLisanaytotValues';
 import { getHakulomakeFieldsValues } from '#/src/utils/form/getHakulomakeFieldsValues';
@@ -52,7 +51,7 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
   const {
     valintakokeidenYleiskuvaus,
     kaytetaanHaunAlkamiskautta,
-    koulutuksenAlkamiskausi,
+    koulutuksenAlkamiskausi = {},
   } = metadata;
 
   const {
@@ -95,8 +94,9 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
         alkamiskausityyppi === Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,
       tarkkaAlkaa: koulutuksenAlkamispaivamaara,
       tarkkaPaattyy: koulutuksenPaattymispaivamaara,
-      henkilokohtaisenSuunnitelmanLisatiedot: _fp.mapValues(parseEditorState)(
-        henkilokohtaisenSuunnitelmanLisatiedot
+      henkilokohtaisenSuunnitelmanLisatiedot: _.mapValues(
+        henkilokohtaisenSuunnitelmanLisatiedot,
+        parseEditorState
       ),
     },
     pohjakoulutus: {

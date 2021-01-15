@@ -68,6 +68,7 @@ const hakukohde = () => ({
         ohjeetErityisjarjestelyihin: {
           fi: '<p>Ohjeet erityisjärjestelyihin - fi</p>',
         },
+        vahimmaispisteet: 10.03,
       },
       tyyppiKoodiUri: 'tyyppi_1#1',
       tilaisuudet: [

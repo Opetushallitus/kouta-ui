@@ -24,7 +24,6 @@ export const KoeTaiLisanayttoFields = ({
   index,
   field,
   language,
-  meta,
   translationBase,
   removeSelf,
 }) => {
@@ -72,6 +71,14 @@ export const KoeTaiLisanayttoFields = ({
               component={FormFieldEditor}
               label={t(`${translationBase}.tietoaHakijalle`)}
               hideHeaderSelect
+            />
+          </Box>
+          <Box mb={2} {...getTestIdProps('vahimmaispistemaara')}>
+            <Field
+              name={`${field}.vahimmaispistemaara`}
+              component={FormFieldInput}
+              type="number"
+              label={t('valintaperustelomake.vahimmaispistemaara')}
             />
           </Box>
           <Box mb={2} {...getTestIdProps('liittyyEnnakkovalmistautumista')}>

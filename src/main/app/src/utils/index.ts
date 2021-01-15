@@ -30,13 +30,16 @@ export const isPartialDate = date => {
   }
 };
 
+export const parseFloatComma = (value: string | number) =>
+  _.isNumber(value) ? value : parseFloat(value.replace(',', '.'));
+
 export const isNumeric = value => {
   if (_.isNumber(value)) {
     return true;
   }
 
   if (_.isString(value)) {
-    return !_.isNaN(parseFloat(value));
+    return !_.isNaN(parseFloat(value.replace(',', '.')));
   }
 
   return false;

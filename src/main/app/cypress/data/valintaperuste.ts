@@ -37,8 +37,8 @@ const valintaperuste = ({ tyyppi = 'amm' } = {}) => {
           ],
           kaytaMuuntotaulukkoa: false,
           kynnysehto: { fi: 'Kynnysehto' },
-          enimmaispisteet: 100.0,
-          vahimmaispisteet: 10.0,
+          enimmaispisteet: 100.02,
+          vahimmaispisteet: 10.01,
         },
       ],
       kielitaitovaatimukset: [],
@@ -85,6 +85,7 @@ const valintaperuste = ({ tyyppi = 'amm' } = {}) => {
           ohjeetErityisjarjestelyihin: {
             fi: '<p>Ohjeet erityisjärjestelyihin - fi</p>',
           },
+          vahimmaispisteet: 10.03,
         },
         tyyppiKoodiUri: 'tyyppi_1#1',
         tilaisuudet: [

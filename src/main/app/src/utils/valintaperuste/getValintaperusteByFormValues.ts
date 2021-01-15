@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import produce from 'immer';
-import { isNumeric, isDeepEmptyFormValues } from '#/src/utils';
+import { isNumeric, isDeepEmptyFormValues, parseFloatComma } from '#/src/utils';
 import { serializeEditorState } from '#/src/components/Editor/utils';
 import { getKokeetTaiLisanaytotData } from '#/src/utils/form/getKokeetTaiLisanaytotData';
 
@@ -93,10 +93,10 @@ export const getValintaperusteByFormValues = values => {
         serializeEditorState
       ),
       enimmaispisteet: isNumeric(enimmaispistemaara)
-        ? parseFloat(enimmaispistemaara)
+        ? parseFloatComma(enimmaispistemaara)
         : null,
       vahimmaispisteet: isNumeric(vahimmaispistemaara)
-        ? parseFloat(vahimmaispistemaara)
+        ? parseFloatComma(vahimmaispistemaara)
         : null,
     })
   );

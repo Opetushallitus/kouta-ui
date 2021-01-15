@@ -69,8 +69,10 @@ export const getFormValuesByValintaperuste = valintaperuste => {
         sisalto: parseSisalto(valintatapaSisalto),
         tapa: valintatapaKoodiUri ? { value: valintatapaKoodiUri } : null,
         kynnysehto: _.mapValues(kynnysehto || {}, parseEditorState),
-        enimmaispistemaara: enimmaispisteet || '',
-        vahimmaispistemaara: vahimmaispisteet || '',
+        enimmaispistemaara:
+          _.toString(enimmaispisteet)?.replace('.', ',') || '',
+        vahimmaispistemaara:
+          _.toString(vahimmaispisteet)?.replace('.', ',') || '',
       })
     ),
     soraKuvaus: sorakuvausId

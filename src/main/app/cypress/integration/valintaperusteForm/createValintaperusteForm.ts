@@ -73,8 +73,8 @@ const fillValintatapaSection = () => {
       getByTestId('kynnysehto').within(() => {
         typeToEditor('Kynnysehto');
       });
-      getByTestId('enimmaispistemaara').find('input').pipe(paste('100'));
-      getByTestId('vahimmaispistemaara').find('input').pipe(paste('10'));
+      getByTestId('enimmaispistemaara').find('input').pipe(paste('100,02'));
+      getByTestId('vahimmaispistemaara').find('input').pipe(paste('10,01'));
     });
 
     jatka();

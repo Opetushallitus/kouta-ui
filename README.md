@@ -117,32 +117,10 @@ ja sitten samassa kansiossa, mutta toisessa shellissa:
     npx cypress open
     
 Cypress-integraatiotestit olettavat, että sovellus on renderöity käyttäen käännösavaimia, minkä vuoksi on käytettävä `npm start:integration`tai `npm start:integration:debug` komentoa sovelluksen käynnistämiseen. Npm Skripti `start:integration:debug` eroaa `start:integration`:sta siten, että se sallii sovelluksen kyselyt ulkopuolelle. Tämä helpottaa mm. cypressin-testien api-mockien päivittämistä ja testaamista, kun taas normaalisti integraatiotesteissä halutaan estää yhteydet ulkopuolisiin rajapintoihin.
+
 ### API-kutsujen mockaaminen
 
-Kouta-UI:ssa on toteutettu omat työkalut API-kutsujen mockauksen helpottamiseen. `npm run update-mocks` käy läpi hakemiston `cypress/mocks` JSON-tiedostot, kutsuu niissä määriteltyjä HTTP-pyyntöjä ja päivittää vastaukset kyseisiin tiedostoihin. Pellin alla kutsutaan nodejs:llä toteutettua `update-mocks.js`-skriptiä, jonka voi ajaa myös itse antamalla sille komentoriviparametrina polun hakemistoon, jossa päivitettävät mock-tiedostot sijatsevat. Mock-tiedostojen formaatti on seuraavanlainen:
-
-```jsonc
-[
-    {
-        "url": "https://example.com", // URL-johon pyyntö tehdään. Tämä on ainut pakollinen kenttä.
-        "method": "GET" // HTTP-pyynnön verbi. Voi jättää pois, jolloin oletus on "GET"
-        "body": {
-            "id": 12345
-        }, // Pyynnön data, jos kyse on esim. POST-pyynnöstä. Ei pakollinen.
-        response: { // Pyynnön vastaus. update-mocks-skripti päivittää nämä.
-            status: 200,
-            body: {
-                "id": 12345,
-                "info": "something"
-            }
-        }
-    }
-    // Lisää vastaavanlaisia objekteja
-]
-```
-Kyseisiä mock-tiedostoja voi käyttää Cypressissä `addMockFileRoutes`-funktiolla, jolle annetaan parametrinä mock-tiedoston nimi. Funktio käy läpi tiedoston määrittelyt ja ottaa ne käyttöön. 
-
-Uusia mock-määrittelyitä voi luoda kirjoittamalla edellä esitetyn mukaisia tiedostoja, joissa jokaisella  vähintään `url`-kenttä ja kutsumalla update-mocks-skriptiä, joka päivittää mockien vastaukset tiedostoihin. Käynnistä lokaali kehitysproxy (`npm run start`) ennen mockien päivitystä, jotta mockeille tulee oikeaa dataa localhostin kautta.
+KTO-projektissa on toteutettu omat työkalut API-kutsujen mockauksen helpottamiseen. Työkalut ja niiden dokumentaatio löytyvät [kto-ui-common](https://github.com/Opetushallitus/kto-ui-common)-reposta. `Update-mocks.js`-skriptille on tehty käytön helpottamiseksi npm skripti `update-mocks`, jota siis kutsutaan komennolla `npm run update-mocks`. Muista käynnistää lokaali kehitysproxy (`npm run start`) ennen mockien päivitystä, jotta mockeille tulee oikeaa dataa localhostin kautta.
 
 ## Storybook
 

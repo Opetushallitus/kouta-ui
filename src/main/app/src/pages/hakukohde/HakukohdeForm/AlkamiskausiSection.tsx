@@ -15,7 +15,7 @@ import { InlineInfoBox } from '#/src/components/InlineInfoBox';
 import { formatDateValue } from '#/src/utils';
 
 const InlineAjankohtaInfoBox = ({
-  ajankohta,
+  ajankohta = {},
   foundTitle,
   notFoundTitle,
   iconType,
@@ -27,7 +27,7 @@ const InlineAjankohtaInfoBox = ({
     koulutuksenAlkamisvuosi,
     koulutuksenAlkamispaivamaara,
     koulutuksenPaattymispaivamaara,
-  } = ajankohta;
+  } = ajankohta as any;
 
   const { nimi: kausiKoodiNimi } = useKoodiNimi(
     koulutuksenAlkamiskausiKoodiUri

@@ -11,7 +11,7 @@ import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
 const getToimitustapaValues = (toimitustapa, toimitusosoite) => ({
   tapa: toimitustapa || '',
   paikka: {
-    osoite: toimitusosoite?.osoite.osoite || {},
+    osoite: toimitusosoite?.osoite?.osoite || {},
     postinumero: toimitusosoite?.osoite?.postinumeroKoodiUri
       ? { value: toimitusosoite?.osoite?.postinumeroKoodiUri }
       : undefined,

@@ -44,6 +44,7 @@ const hakukohde = () => ({
     valintakokeidenYleiskuvaus: {
       fi: '<p>Valintakokeiden kuvaus - fi</p>',
     },
+    kaytetaanHaunAlkamiskautta: false,
     koulutuksenAlkamiskausi: {
       alkamiskausityyppi: Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,
       koulutuksenAlkamiskausiKoodiUri: 'kausi_k#1',

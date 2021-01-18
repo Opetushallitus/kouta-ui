@@ -71,6 +71,7 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
         fi: '<p>Yleiskuvaus - fi</p>',
         sv: '<p>Yleiskuvaus - sv</p>',
       },
+      kaytetaanHaunAlkamiskautta: false,
       koulutuksenAlkamiskausi: {
         alkamiskausityyppi: Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,
         koulutuksenAlkamiskausiKoodiUri: 'kausi_0#1',

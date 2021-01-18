@@ -75,6 +75,7 @@ Object {
         "tyyppi": Object {
           "value": "tyyppi_1#1",
         },
+        "vahimmaispistemaara": "30,3",
       },
     ],
     "yleisKuvaus": Object {
@@ -84,7 +85,7 @@ Object {
   },
   "valintatavat": Array [
     Object {
-      "enimmaispistemaara": 20,
+      "enimmaispistemaara": "20,2",
       "kuvaus": Object {
         "fi": "Fi kuvaus",
         "sv": "Sv kuvaus",
@@ -154,7 +155,7 @@ Object {
       "tapa": Object {
         "value": "tapa_1#1",
       },
-      "vahimmaispistemaara": 10,
+      "vahimmaispistemaara": "10,1",
     },
   ],
 }

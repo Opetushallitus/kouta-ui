@@ -103,6 +103,7 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
             fi: '<p>Ohjeet erityisjärjestelyihin - fi</p>',
             sv: '<p>Ohjeet erityisjärjestelyihin - sv</p>',
           },
+          vahimmaispisteet: 30.3,
         },
         tilaisuudet: [
           {

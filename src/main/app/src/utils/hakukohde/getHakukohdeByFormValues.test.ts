@@ -68,6 +68,7 @@ test('getHakukohdeByFormValues returns correct hakukohde given form values', () 
             fi: parseEditorState('<p>Tietoa hakijalle - fi</p>'),
             sv: parseEditorState('<p>Tietoa hakijalle - sv</p>'),
           },
+          vahimmaispistemaara: '30,4',
           liittyyEnnakkovalmistautumista: true,
           ohjeetEnnakkovalmistautumiseen: {
             fi: parseEditorState('<p>Ohjeet ennakkovalmistautumiseen - fi</p>'),

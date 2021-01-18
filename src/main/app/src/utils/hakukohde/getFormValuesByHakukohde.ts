@@ -86,7 +86,10 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
       voiSuorittaaKaksoistutkinnon: !!toinenAsteOnkoKaksoistutkinto,
     },
     ajankohta: {
-      kaytetaanHakukohteenAlkamiskautta: !kaytetaanHaunAlkamiskautta,
+      kaytetaanHakukohteenAlkamiskautta:
+        kaytetaanHaunAlkamiskautta === undefined
+          ? false
+          : !kaytetaanHaunAlkamiskautta,
       ajankohtaTyyppi: alkamiskausityyppiToAjankohtatyyppi(alkamiskausityyppi),
       kausi: koulutuksenAlkamiskausiKoodiUri,
       vuosi: toSelectValue(koulutuksenAlkamisvuosi),

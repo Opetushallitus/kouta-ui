@@ -1,4 +1,5 @@
 import { merge } from 'lodash';
+import { playMockFile } from 'kto-ui-common/cypress/mockUtils';
 
 import {
   stubOppijanumerorekisteriHenkiloRoute,
@@ -7,10 +8,9 @@ import {
 
 import organisaatio from './data/organisaatio';
 import soraKuvaus from './data/soraKuvaus';
-import { addMockFileRoutes } from './mockUtils';
 
 export const stubValintaperusteFormRoutes = ({ organisaatioOid }) => {
-  addMockFileRoutes('valintaperuste.mock.json');
+  playMockFile('valintaperuste.mock.json');
   stubCommonRoutes();
 
   cy.route({

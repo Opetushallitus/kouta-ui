@@ -1,7 +1,7 @@
 import getToteutusByFormValues from '#/src/utils/toteutus/getToteutusByFormValues';
 import { parseEditorState } from '#/src/components/Editor/utils';
 import {
-  Ajankohtatyyppi,
+  Alkamiskausityyppi,
   Hakeutumistapa,
   HAKULOMAKETYYPPI,
   JULKAISUTILA,
@@ -97,8 +97,7 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
       B3Kielet: [{ value: 'kieli_5#1' }],
       muutKielet: [{ value: 'kieli_6#1' }],
       ajankohta: {
-        ajankohtaTyyppi: Ajankohtatyyppi.ALKAMISKAUSI,
-        tiedossaTarkkaAjankohta: false,
+        ajankohtaTyyppi: Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI,
         kausi: 'alkamiskausi_1#1',
         vuosi: { value: '2020' },
       },

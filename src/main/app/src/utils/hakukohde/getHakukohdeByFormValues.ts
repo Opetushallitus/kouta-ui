@@ -3,11 +3,11 @@ import _fp from 'lodash/fp';
 
 import { getKokeetTaiLisanaytotData } from '#/src/utils/form/getKokeetTaiLisanaytotData';
 import { getHakulomakeFieldsData } from '#/src/utils/form/getHakulomakeFieldsData';
-import { getAlkamiskausityyppiByAjankohtaSection } from '#/src/utils/form/alkamiskausityyppiHelpers';
 import { maybeParseNumber } from '#/src/utils';
 import { serializeEditorState } from '#/src/components/Editor/utils';
 import { LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
 import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
+import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
 
 const getKielivalinta = values => values?.kieliversiot || [];
 
@@ -164,17 +164,7 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
       ),
       kaytetaanHaunAlkamiskautta: !values?.ajankohta
         ?.kaytetaanHakukohteenAlkamiskautta,
-      koulutuksenAlkamiskausi: {
-        alkamiskausityyppi: getAlkamiskausityyppiByAjankohtaSection(ajankohta),
-        koulutuksenAlkamispaivamaara: ajankohta?.tarkkaAlkaa || null,
-        koulutuksenPaattymispaivamaara: ajankohta?.tarkkaPaattyy || null,
-        koulutuksenAlkamiskausiKoodiUri: ajankohta?.kausi || null,
-        koulutuksenAlkamisvuosi: maybeParseNumber(ajankohta?.vuosi?.value),
-        henkilokohtaisenSuunnitelmanLisatiedot: _fp.compose(
-          _fp.mapValues(serializeEditorState),
-          pickTranslations
-        )(ajankohta?.henkilokohtaisenSuunnitelmanLisatiedot ?? {}),
-      },
+      koulutuksenAlkamiskausi: getAlkamiskausiData(ajankohta, pickTranslations),
     },
   };
 };

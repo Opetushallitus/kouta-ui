@@ -1,3 +1,4 @@
+import { playMockFile } from 'kto-ui-common/cypress/mockUtils';
 import createKoodisto from '#/cypress/data/koodisto';
 
 import organisaatio from '#/cypress/data/organisaatio';
@@ -13,6 +14,7 @@ import {
 
 export const stubHakuFormRoutes = ({ organisaatioOid }) => {
   stubCommonRoutes();
+  playMockFile('haku.mocks.json');
 
   cy.route({
     method: 'GET',
@@ -33,9 +35,7 @@ export const stubHakuFormRoutes = ({ organisaatioOid }) => {
   });
 
   stubKoodistoRoute({ koodisto: 'haunkohdejoukontarkenne' });
-  stubKoodistoRoute({ koodisto: 'kausi' });
   stubKoodistoRoute({ koodisto: 'opetuspaikkakk' });
-  stubKoodistoRoute({ koodisto: 'kausi' });
   stubKoodistoRoute({ koodisto: 'posti' });
   stubKoodiRoute(createKoodi({ koodisto: 'posti', versio: 2 }));
 

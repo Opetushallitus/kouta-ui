@@ -1,10 +1,10 @@
 import {
-  Ajankohtatyyppi,
   HAKULOMAKETYYPPI,
   JULKAISUTILA,
   KOULUTUSTYYPPI,
 } from '#/src/constants';
 import { EditorState } from '#/src/components/Editor/Editor';
+import { AjankohtaFields } from './formTypes';
 
 export type HakukohdeModel = any;
 
@@ -46,15 +46,8 @@ export type HakukohdeFormValues = {
   tila: JULKAISUTILA;
   muokkaaja?: string;
   kieliversiot: Array<LanguageCode>;
-  ajankohta: {
+  ajankohta: AjankohtaFields & {
     kaytetaanHakukohteenAlkamiskautta: Boolean;
-    ajankohtaTyyppi: Ajankohtatyyppi;
-    kausi?: string;
-    vuosi?: SelectOption;
-    tiedossaTarkkaAjankohta?: boolean;
-    tarkkaAlkaa?: string;
-    tarkkaPaattyy?: string;
-    henkilokohtaisenSuunnitelmanLisatiedot?: TranslatedField<EditorState>;
   };
   aloituspaikat: {
     aloituspaikkamaara: string;

@@ -20,7 +20,7 @@ import {
   JULKAISUTILA,
   HAKULOMAKETYYPPI,
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
-  Ajankohtatyyppi,
+  Alkamiskausityyppi,
 } from '#/src/constants';
 
 import {
@@ -320,7 +320,7 @@ const config = createFormConfigBuilder().registerSections([
         validate: (eb, values: ToteutusFormValues) =>
           validateIf(
             values?.jarjestamistiedot?.ajankohta?.ajankohtaTyyppi ===
-              Ajankohtatyyppi.ALKAMISKAUSI &&
+              Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI &&
               values?.tila === JULKAISUTILA.JULKAISTU,
             _fp.pipe(
               validateExistence('jarjestamistiedot.ajankohta.kausi'),
@@ -329,16 +329,12 @@ const config = createFormConfigBuilder().registerSections([
           )(eb),
       },
       {
-        field: '.ajankohta.tiedossaTarkkaAjankohta',
-      },
-      {
         field: '.ajankohta.tarkkaAlkaa',
         required: true,
         validate: (eb, values: ToteutusFormValues) =>
           validateIf(
             values?.jarjestamistiedot?.ajankohta?.ajankohtaTyyppi ===
-              Ajankohtatyyppi.ALKAMISKAUSI &&
-              values?.jarjestamistiedot?.ajankohta?.tiedossaTarkkaAjankohta &&
+              Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA &&
               values?.tila === JULKAISUTILA.JULKAISTU,
             validateExistenceOfDate('jarjestamistiedot.ajankohta.tarkkaAlkaa')
           )(eb),

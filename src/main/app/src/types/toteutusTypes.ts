@@ -1,11 +1,11 @@
 import { EditorState } from '#/src/components/Editor/Editor';
 import {
   JULKAISUTILA,
-  Ajankohtatyyppi,
   KOULUTUSTYYPPI,
   HAKULOMAKETYYPPI,
   Hakeutumistapa,
 } from '#/src/constants';
+import { AjankohtaFields } from './formTypes';
 
 export type ToteutusModel = any;
 
@@ -71,15 +71,7 @@ export type ToteutusFormValues = {
     B2Kielet: Array<SelectOption | undefined>;
     B3Kielet: Array<SelectOption | undefined>;
     muutKielet: Array<SelectOption | undefined>;
-    ajankohta: {
-      ajankohtaTyyppi: Ajankohtatyyppi;
-      kausi?: string;
-      vuosi?: SelectOption;
-      tiedossaTarkkaAjankohta?: boolean;
-      tarkkaAlkaa?: string;
-      tarkkaPaattyy?: string;
-      henkilokohtaisenSuunnitelmanLisatiedot?: TranslatedField<EditorState>;
-    };
+    ajankohta: AjankohtaFields;
   };
   nayttamistiedot: {
     ammattinimikkeet: TranslatedField<Array<SelectOption>>;

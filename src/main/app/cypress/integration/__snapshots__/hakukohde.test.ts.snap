@@ -50,7 +50,9 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
     "kaytetaanHaunAlkamiskautta": false,
     "koulutuksenAlkamiskausi": {
       "alkamiskausityyppi": "henkilokohtainen suunnitelma",
-      "henkilokohtaisenSuunnitelmanLisatiedot": {},
+      "henkilokohtaisenSuunnitelmanLisatiedot": {
+        "fi": "<p>Henkilökohtaisen suunnitelman lisätiedot</p>"
+      },
       "koulutuksenAlkamiskausiKoodiUri": null,
       "koulutuksenAlkamispaivamaara": null,
       "koulutuksenAlkamisvuosi": null,
@@ -170,7 +172,9 @@ exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
     "kaytetaanHaunAlkamiskautta": false,
     "koulutuksenAlkamiskausi": {
       "alkamiskausityyppi": "henkilokohtainen suunnitelma",
-      "henkilokohtaisenSuunnitelmanLisatiedot": {},
+      "henkilokohtaisenSuunnitelmanLisatiedot": {
+        "fi": "<p>Henkilökohtaisen suunnitelman lisätiedot</p>"
+      },
       "koulutuksenAlkamiskausiKoodiUri": null,
       "koulutuksenAlkamispaivamaara": null,
       "koulutuksenAlkamisvuosi": null,
@@ -295,9 +299,9 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
     "koulutuksenAlkamiskausi": {
       "alkamiskausityyppi": "tarkka alkamisajankohta",
       "henkilokohtaisenSuunnitelmanLisatiedot": {},
-      "koulutuksenAlkamiskausiKoodiUri": "kausi_k#1",
+      "koulutuksenAlkamiskausiKoodiUri": null,
       "koulutuksenAlkamispaivamaara": "2021-04-16T00:00",
-      "koulutuksenAlkamisvuosi": 2020,
+      "koulutuksenAlkamisvuosi": null,
       "koulutuksenPaattymispaivamaara": "2021-12-12T00:00"
     },
     "valintakokeidenYleiskuvaus": {

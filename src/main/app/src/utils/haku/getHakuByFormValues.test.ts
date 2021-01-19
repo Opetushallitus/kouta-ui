@@ -4,8 +4,8 @@ import { getHakuByFormValues } from '#/src/utils/haku/getHakuByFormValues';
 
 import {
   HAKULOMAKETYYPPI,
-  Ajankohtatyyppi,
   JULKAISUTILA,
+  Alkamiskausityyppi,
 } from '#/src/constants';
 import { HakuFormValues } from '#/src/types/hakuTypes';
 import { parseEditorState } from '#/src/components/Editor/utils';
@@ -19,6 +19,7 @@ const baseValues: HakuFormValues = {
   },
   kieliversiot: ['fi', 'sv'],
   aikataulut: {
+    ajankohtaTyyppi: Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI,
     kausi: 'alkamiskausi_1#1',
     vuosi: { value: '2020' },
     hakuaika: [
@@ -41,8 +42,6 @@ const baseValues: HakuFormValues = {
         paattyy: '2019-09-18T08:44',
       },
     ],
-    ajankohtaTyyppi: Ajankohtatyyppi.ALKAMISKAUSI,
-    tiedossaTarkkaAjankohta: false,
     lisaamisenTakaraja: '2019-09-16T08:44',
     muokkauksenTakaraja: '2019-10-16T08:44',
     ajastettuJulkaisu: '2019-11-16T08:44',
@@ -104,12 +103,9 @@ test('getHakuByFormValues toteutuksen ajankohta - Tarkka alkamisaika', () => {
     getHakuByFormValues(
       merge({}, baseValues, {
         aikataulut: {
-          ajankohtaTyyppi: Ajankohtatyyppi.ALKAMISKAUSI,
-          tiedossaTarkkaAjankohta: true,
+          ajankohtaTyyppi: Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,
           tarkkaAlkaa: '2019-09-16T08:44',
           tarkkaPaattyy: '2019-09-16T08:44',
-          kausi: 'alkamiskausi_1#1',
-          vuosi: { value: '2020' },
         },
       })
     )
@@ -121,7 +117,7 @@ test('getHakuByFormValues toteutuksen ajankohta - Aloitus henkilokohtaisen suunn
     getHakuByFormValues(
       merge({}, baseValues, {
         aikataulut: {
-          ajankohtaTyyppi: Ajankohtatyyppi.HENKILOKOHTAINEN_SUUNNITELMA,
+          ajankohtaTyyppi: Alkamiskausityyppi.HENKILOKOHTAINEN_SUUNNITELMA,
           henkilokohtaisenSuunnitelmanLisatiedot: mapValues(
             {
               fi: '<p>hlokoht fi </p>',

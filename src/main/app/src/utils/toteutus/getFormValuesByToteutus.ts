@@ -1,10 +1,9 @@
+import _fp from 'lodash/fp';
 import { parseEditorState } from '#/src/components/Editor/utils';
 import { toSelectValue } from '#/src/utils';
-import _fp from 'lodash/fp';
 import parseSisaltoField from '#/src/utils/form/parseSisaltoField';
 import { ToteutusFormValues } from '#/src/types/toteutusTypes';
-import { Alkamiskausityyppi } from '#/src/constants';
-import { alkamiskausityyppiToAjankohtatyyppi } from '#/src/utils/form/alkamiskausityyppiHelpers';
+import { getAjankohtaFields } from '#/src/utils/form/aloitusajankohtaHelpers';
 
 const kieliArvoListToMultiSelectValue = _fp.reduce((acc, curr: any) => {
   if (curr?.kieli && curr?.arvo) {
@@ -61,15 +60,6 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     lisatiedot,
     koulutuksenAlkamiskausiUUSI = {},
   } = opetus;
-
-  const {
-    alkamiskausityyppi,
-    koulutuksenAlkamiskausiKoodiUri = null,
-    koulutuksenAlkamispaivamaara = null,
-    koulutuksenPaattymispaivamaara = null,
-    koulutuksenAlkamisvuosi = '',
-    henkilokohtaisenSuunnitelmanLisatiedot,
-  } = koulutuksenAlkamiskausiUUSI;
 
   const { osaamisalaLinkit, osaamisalaLinkkiOtsikot } = _fp.reduce(
     (acc, curr: any) => {
@@ -169,20 +159,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       B2Kielet: _fp.map(toSelectValue)(B2Kielivalikoima),
       B3Kielet: _fp.map(toSelectValue)(B3Kielivalikoima),
       muutKielet: _fp.map(toSelectValue)(muuKielivalikoima),
-      ajankohta: {
-        ajankohtaTyyppi: alkamiskausityyppiToAjankohtatyyppi(
-          alkamiskausityyppi
-        ),
-        kausi: koulutuksenAlkamiskausiKoodiUri,
-        vuosi: toSelectValue(koulutuksenAlkamisvuosi),
-        tiedossaTarkkaAjankohta:
-          alkamiskausityyppi === Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,
-        tarkkaAlkaa: koulutuksenAlkamispaivamaara,
-        tarkkaPaattyy: koulutuksenPaattymispaivamaara,
-        henkilokohtaisenSuunnitelmanLisatiedot: _fp.mapValues(parseEditorState)(
-          henkilokohtaisenSuunnitelmanLisatiedot
-        ),
-      },
+      ajankohta: getAjankohtaFields(koulutuksenAlkamiskausiUUSI),
     },
     nayttamistiedot: {
       ammattinimikkeet: kieliArvoListToMultiSelectValue(ammattinimikkeet),

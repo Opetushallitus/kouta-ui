@@ -1,7 +1,7 @@
 import { getHakukohdeByFormValues } from './getHakukohdeByFormValues';
 import { parseEditorState } from '#/src/components/Editor/utils';
 import {
-  Ajankohtatyyppi,
+  Alkamiskausityyppi,
   HAKULOMAKETYYPPI,
   JULKAISUTILA,
   LIITTEEN_TOIMITUSTAPA,
@@ -49,8 +49,7 @@ test('getHakukohdeByFormValues returns correct hakukohde given form values', () 
     jarjestyspaikkaOid: '2.2.2.2.2',
     ajankohta: {
       kaytetaanHakukohteenAlkamiskautta: true,
-      ajankohtaTyyppi: Ajankohtatyyppi.ALKAMISKAUSI,
-      tiedossaTarkkaAjankohta: false,
+      ajankohtaTyyppi: Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI,
       kausi: 'alkamiskausi_1#1',
       vuosi: { value: '2020' },
     },

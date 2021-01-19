@@ -2,11 +2,10 @@ import _ from 'lodash';
 
 import { getKokeetTaiLisanaytotValues } from '#/src/utils/form/getKokeetTaiLisanaytotValues';
 import { getHakulomakeFieldsValues } from '#/src/utils/form/getHakulomakeFieldsValues';
-import { isNumeric, toSelectValue } from '#/src/utils';
+import { isNumeric } from '#/src/utils';
 import { parseEditorState } from '#/src/components/Editor/utils';
-import { alkamiskausityyppiToAjankohtatyyppi } from '../form/alkamiskausityyppiHelpers';
-import { Alkamiskausityyppi } from '#/src/constants';
 import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
+import { getAjankohtaFields } from '#/src/utils/form/aloitusajankohtaHelpers';
 
 const getToimitustapaValues = (toimitustapa, toimitusosoite) => ({
   tapa: toimitustapa || '',
@@ -90,17 +89,7 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
         kaytetaanHaunAlkamiskautta === undefined
           ? false
           : !kaytetaanHaunAlkamiskautta,
-      ajankohtaTyyppi: alkamiskausityyppiToAjankohtatyyppi(alkamiskausityyppi),
-      kausi: koulutuksenAlkamiskausiKoodiUri,
-      vuosi: toSelectValue(koulutuksenAlkamisvuosi),
-      tiedossaTarkkaAjankohta:
-        alkamiskausityyppi === Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,
-      tarkkaAlkaa: koulutuksenAlkamispaivamaara,
-      tarkkaPaattyy: koulutuksenPaattymispaivamaara,
-      henkilokohtaisenSuunnitelmanLisatiedot: _.mapValues(
-        henkilokohtaisenSuunnitelmanLisatiedot,
-        parseEditorState
-      ),
+      ...getAjankohtaFields(koulutuksenAlkamiskausi),
     },
     pohjakoulutus: {
       pohjakoulutusvaatimus: (pohjakoulutusvaatimusKoodiUrit || []).map(

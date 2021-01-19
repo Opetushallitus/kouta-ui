@@ -33,9 +33,9 @@ Object {
       "alkamiskausityyppi": "alkamiskausi ja -vuosi",
       "henkilokohtaisenSuunnitelmanLisatiedot": Object {},
       "koulutuksenAlkamiskausiKoodiUri": "alkamiskausi_1#1",
-      "koulutuksenAlkamispaivamaara": undefined,
+      "koulutuksenAlkamispaivamaara": null,
       "koulutuksenAlkamisvuosi": 2020,
-      "koulutuksenPaattymispaivamaara": undefined,
+      "koulutuksenPaattymispaivamaara": null,
     },
     "tulevaisuudenAikataulu": Array [
       Object {
@@ -114,9 +114,9 @@ Object {
       "alkamiskausityyppi": "alkamiskausi ja -vuosi",
       "henkilokohtaisenSuunnitelmanLisatiedot": Object {},
       "koulutuksenAlkamiskausiKoodiUri": "alkamiskausi_1#1",
-      "koulutuksenAlkamispaivamaara": undefined,
+      "koulutuksenAlkamispaivamaara": null,
       "koulutuksenAlkamisvuosi": 2020,
-      "koulutuksenPaattymispaivamaara": undefined,
+      "koulutuksenPaattymispaivamaara": null,
     },
     "tulevaisuudenAikataulu": Array [
       Object {
@@ -193,9 +193,9 @@ Object {
       "alkamiskausityyppi": "alkamiskausi ja -vuosi",
       "henkilokohtaisenSuunnitelmanLisatiedot": Object {},
       "koulutuksenAlkamiskausiKoodiUri": "alkamiskausi_1#1",
-      "koulutuksenAlkamispaivamaara": undefined,
+      "koulutuksenAlkamispaivamaara": null,
       "koulutuksenAlkamisvuosi": 2020,
-      "koulutuksenPaattymispaivamaara": undefined,
+      "koulutuksenPaattymispaivamaara": null,
     },
     "tulevaisuudenAikataulu": Array [
       Object {
@@ -275,9 +275,9 @@ Object {
         "sv": "<p>hlokoht sv </p>",
       },
       "koulutuksenAlkamiskausiKoodiUri": "alkamiskausi_1#1",
-      "koulutuksenAlkamispaivamaara": undefined,
+      "koulutuksenAlkamispaivamaara": null,
       "koulutuksenAlkamisvuosi": 2020,
-      "koulutuksenPaattymispaivamaara": undefined,
+      "koulutuksenPaattymispaivamaara": null,
     },
     "tulevaisuudenAikataulu": Array [
       Object {

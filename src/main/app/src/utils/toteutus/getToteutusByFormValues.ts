@@ -4,9 +4,9 @@ import { isNumeric, isPartialDate, maybeParseNumber } from '#/src/utils';
 import serializeSisaltoField from '#/src/utils/form/serializeSisaltoField';
 import { serializeEditorState } from '#/src/components/Editor/utils';
 import { HAKULOMAKETYYPPI } from '#/src/constants';
-import { isStipendiVisible } from './toteutusVisibilities';
 import { ToteutusFormValues } from '#/src/types/toteutusTypes';
-import { getAlkamiskausityyppiByAjankohtaSection } from '../form/alkamiskausityyppiHelpers';
+import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
+import { isStipendiVisible } from './toteutusVisibilities';
 
 const { MUU, EI_SAHKOISTA_HAKUA } = HAKULOMAKETYYPPI;
 
@@ -142,19 +142,10 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
           pickTranslations,
           _fp.mapValues(serializeEditorState)
         )(jarjestamistiedot?.suunniteltuKestoKuvaus || {}),
-        koulutuksenAlkamiskausiUUSI: {
-          alkamiskausityyppi: getAlkamiskausityyppiByAjankohtaSection(
-            ajankohta
-          ),
-          koulutuksenAlkamispaivamaara: ajankohta?.tarkkaAlkaa || null,
-          koulutuksenPaattymispaivamaara: ajankohta?.tarkkaPaattyy || null,
-          koulutuksenAlkamiskausiKoodiUri: ajankohta?.kausi || null,
-          koulutuksenAlkamisvuosi: maybeParseNumber(ajankohta?.vuosi?.value),
-          henkilokohtaisenSuunnitelmanLisatiedot: _fp.compose(
-            _fp.mapValues(serializeEditorState),
-            pickTranslations
-          )(ajankohta?.henkilokohtaisenSuunnitelmanLisatiedot ?? {}),
-        },
+        koulutuksenAlkamiskausiUUSI: getAlkamiskausiData(
+          ajankohta,
+          pickTranslations
+        ),
       },
       lukiolinjaKoodiUri: values?.lukiolinjat?.lukiolinja?.value || null,
       osaamisalat: (values?.osaamisalat?.osaamisalat || []).map(osaamisala => ({

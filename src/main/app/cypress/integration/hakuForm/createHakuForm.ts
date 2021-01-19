@@ -11,6 +11,7 @@ import {
   fillTilaSection,
   tallenna,
   typeToEditor,
+  fillAjankohtaFields,
 } from '#/cypress/utils';
 
 import { stubHakuFormRoutes } from '#/cypress/hakuFormUtils';
@@ -87,28 +88,7 @@ const fillAikatauluSection = () => {
       });
     });
 
-    cy.findByText('hakulomake.alkamiskausi').click();
-
-    getByTestId('KausiJaVuosiFields').within(() => {
-      getRadio('kausi_0#1').click({ force: true });
-      selectOption(2035);
-
-      cy.findByText('hakulomake.tiedossaTarkkaAjankohta').click();
-
-      getByTestId('alkaa').within(() => {
-        fillDateTimeInput({
-          date: '1.11.2020',
-          time: '00:00',
-        });
-      });
-
-      getByTestId('paattyy').within(() => {
-        fillDateTimeInput({
-          date: '30.11.2020',
-          time: '00:00',
-        });
-      });
-    });
+    fillAjankohtaFields();
 
     getByTestId('perumisenTakaraja').within(() => {
       fillDateTimeInput({
@@ -170,13 +150,15 @@ export const createHakuForm = () => {
   });
 
   it('should be able to create haku with ataru hakulomake', () => {
-    cy.route({
-      method: 'PUT',
-      url: '**/haku',
-      response: {
-        oid: createdHakuOid,
+    cy.intercept(
+      {
+        method: 'PUT',
+        url: '**/haku',
       },
-    }).as('createHakuRequest');
+      {
+        oid: createdHakuOid,
+      }
+    ).as('createHakuRequest');
 
     fillPohjaSection();
     fillKieliversiotSection({ jatka: true });

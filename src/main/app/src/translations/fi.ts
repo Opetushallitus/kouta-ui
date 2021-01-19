@@ -1,4 +1,4 @@
-export default {
+const fi = {
   yleiset: {
     esikatselu: 'Esikatsele',
     salliEsikatselu: 'Esikatselu käytössä',
@@ -206,6 +206,13 @@ export default {
     kokeetTaiLisanaytot: 'Kokeet tai lisänäytöt',
     organisaatiot: 'Organisaatiot',
     ladataan: 'Ladataan...',
+    alkamiskausiJaVuosi: 'Alkamiskausi ja -vuosi',
+    tarkkaAlkamisajankohta: 'Tarkka alkamisajankohta',
+    valitseAlkamiskausi: 'Valitse alkamiskausi',
+    valitseAlkamisvuosi: 'Valitse vuosi',
+    aloitusHenkilokohtaisenSuunnitelmanMukaisesti:
+      'Aloitus henkilökohtaisen suunnitelman mukaisesti',
+    koulutuksenAjankohta: 'Koulutuksen aloitusajankohta',
   },
   ilmoitukset: {
     tallentamattomiaMuutoksia: {
@@ -447,7 +454,6 @@ export default {
     koulutuksenAjankohta: 'Koulutuksen ajankohta',
     koulutuksenAlkamiskausi: 'Valitse alkamiskausi',
     koulutuksenAlkamisvuosi: 'Valitse vuosi',
-    koulutuksenTarkkaAlkamisaika: 'Tiedossa tarkka ajankohta',
     ammattinimikkeet: 'Ammattinimikkeet',
     avainsanat: 'Avainsanat',
     toteutuksenJarjestaja: 'Missä järjestetään?',
@@ -525,7 +531,6 @@ export default {
     hakutapa: 'Hakutapa',
     valitseHakutapa: 'Valitse hakutapa',
     haunAikataulu: 'Haun aikataulu',
-    koulutuksenAlkamiskausi: 'Koulutuksen alkamiskausi',
     hakukohteenLisaamisenJaPerumisenTakaraja:
       'Hakukohteen lisäämisen ja perumisen takaraja',
     hakukohteenMuokkauksenTakaraja: 'Hakukohteen muokkauksen takaraja',
@@ -543,13 +548,6 @@ export default {
     eiMuokkausOikeutta: 'Käyttäjälläsi ei ole oikeuksia muokata tätä hakua',
     pohjavalintaInfo:
       'Voit halutessasi käyttää aiemmin luotuja hakuja uuden lomakkeen esitäytettynä pohjana.',
-    tiedossaTarkkaAjankohta: 'Tiedossa tarkka ajankohta',
-    alkamiskausi: 'Alkamiskausi',
-    valitseAlkamiskausi: 'Valitse alkamiskausi',
-    valitseAlkamisvuosi: 'Valitse vuosi',
-    aloitusHenkilokohtaisenSuunnitelmanMukaisesti:
-      'Aloitus henkilökohtaisen suunnitelman mukaisesti',
-    koulutuksenAjankohta: 'Koulutuksen aloitusajankohta',
   },
   hakukohdelomake: {
     toteutukseenLiitettyAlkamisajankohta:
@@ -730,3 +728,4 @@ export default {
     ammattitaidonOsoittamistavat: 'Ammattitaidon osoittamistavat',
   },
 };
+export default fi;

@@ -12,12 +12,14 @@ import {
   fillKieliversiotSection,
   fillTilaSection,
   tallenna,
+  fillAjankohtaFields,
 } from '#/cypress/utils';
 
 import {
   fillJarjestyspaikkaSection,
   prepareTest,
 } from '#/cypress/hakukohdeFormUtils';
+import { Alkamiskausityyppi } from '#/src/constants';
 
 const lisaa = () => {
   getByTestId('lisaaButton').click({ force: true });
@@ -96,15 +98,8 @@ const fillLomakeSection = (type: string = 'ataru') => {
 };
 
 const fillAlkamiskausiSection = () => {
-  getByTestId('alkamiskausiSection').within(() => {
-    cy.findByText('hakukohdelomake.hakukohteellaEriAlkamiskausi').click();
-    cy.findByText(
-      'hakulomake.aloitusHenkilokohtaisenSuunnitelmanMukaisesti'
-    ).click();
-
-    /*getRadio('kausi_k#1').click({ force: true });
-    selectOption(2035);*/
-  });
+  cy.findByText('hakukohdelomake.hakukohteellaEriAlkamiskausi').click();
+  fillAjankohtaFields(Alkamiskausityyppi.HENKILOKOHTAINEN_SUUNNITELMA);
 };
 
 const fillAloituspaikatSection = ({ isKorkeakoulu = false } = {}) => {

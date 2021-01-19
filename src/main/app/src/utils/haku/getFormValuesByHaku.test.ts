@@ -1,13 +1,8 @@
 import _ from 'lodash';
 
-import {
-  Alkamiskausityyppi,
-  HAKULOMAKETYYPPI,
-  Ajankohtatyyppi,
-} from '#/src/constants';
+import { Alkamiskausityyppi, HAKULOMAKETYYPPI } from '#/src/constants';
 import { getFormValuesByHaku } from './getFormValuesByHaku';
 import { serializeEditorState } from '#/src/components/Editor/utils';
-import { alkamiskausityyppiToAjankohtatyyppi } from '#/src/utils/form/alkamiskausityyppiHelpers';
 
 const baseHaku = {
   muokkaaja: '1.1.1.1',
@@ -128,24 +123,4 @@ test('getFormValuesByHaku toteutuksen ajankohta - Aloitus henkilokohtaisen suunn
       );
     }
   );
-});
-
-test('alkamiskausityyppiToToteutuksenAjankohta', () => {
-  expect(
-    alkamiskausityyppiToAjankohtatyyppi(
-      Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI
-    )
-  ).toEqual(Ajankohtatyyppi.ALKAMISKAUSI);
-
-  expect(
-    alkamiskausityyppiToAjankohtatyyppi(
-      Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA
-    )
-  ).toEqual(Ajankohtatyyppi.ALKAMISKAUSI);
-
-  expect(
-    alkamiskausityyppiToAjankohtatyyppi(
-      Alkamiskausityyppi.HENKILOKOHTAINEN_SUUNNITELMA
-    )
-  ).toEqual(Ajankohtatyyppi.HENKILOKOHTAINEN_SUUNNITELMA);
 });

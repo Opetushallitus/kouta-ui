@@ -9,7 +9,7 @@ Object {
         "paattyy": "2019-08-01T12:45",
       },
     ],
-    "ajankohtaTyyppi": "alkamiskausi",
+    "ajankohtaTyyppi": "alkamiskausi ja -vuosi",
     "ajastettuJulkaisu": "2020-01-20T05:00",
     "hakuaika": Array [
       Object {
@@ -23,7 +23,6 @@ Object {
     "muokkauksenTakaraja": "2019-03-11T09:45",
     "tarkkaAlkaa": null,
     "tarkkaPaattyy": null,
-    "tiedossaTarkkaAjankohta": false,
     "vuosi": Object {
       "value": "2020",
     },
@@ -89,7 +88,7 @@ Object {
         "paattyy": "2019-08-01T12:45",
       },
     ],
-    "ajankohtaTyyppi": "alkamiskausi",
+    "ajankohtaTyyppi": "alkamiskausi ja -vuosi",
     "ajastettuJulkaisu": "2020-01-20T05:00",
     "hakuaika": Array [
       Object {
@@ -103,7 +102,6 @@ Object {
     "muokkauksenTakaraja": "2019-03-11T09:45",
     "tarkkaAlkaa": null,
     "tarkkaPaattyy": null,
-    "tiedossaTarkkaAjankohta": false,
     "vuosi": Object {
       "value": "2020",
     },
@@ -169,7 +167,7 @@ Object {
         "paattyy": "2019-08-01T12:45",
       },
     ],
-    "ajankohtaTyyppi": "alkamiskausi",
+    "ajankohtaTyyppi": "alkamiskausi ja -vuosi",
     "ajastettuJulkaisu": "2020-01-20T05:00",
     "hakuaika": Array [
       Object {
@@ -183,7 +181,6 @@ Object {
     "muokkauksenTakaraja": "2019-03-11T09:45",
     "tarkkaAlkaa": null,
     "tarkkaPaattyy": null,
-    "tiedossaTarkkaAjankohta": false,
     "vuosi": Object {
       "value": "2020",
     },
@@ -249,7 +246,7 @@ Object {
         "paattyy": "2019-08-01T12:45",
       },
     ],
-    "ajankohtaTyyppi": "aloitusHenkilokohtaisenSuunnitelmanMukaisesti",
+    "ajankohtaTyyppi": "henkilokohtainen suunnitelma",
     "ajastettuJulkaisu": "2020-01-20T05:00",
     "hakuaika": Array [
       Object {
@@ -267,8 +264,7 @@ Object {
     "muokkauksenTakaraja": "2019-03-11T09:45",
     "tarkkaAlkaa": null,
     "tarkkaPaattyy": null,
-    "tiedossaTarkkaAjankohta": false,
-    "vuosi": null,
+    "vuosi": undefined,
   },
   "hakulomake": Object {
     "kuvaus": Object {},
@@ -331,7 +327,7 @@ Object {
         "paattyy": "2019-08-01T12:45",
       },
     ],
-    "ajankohtaTyyppi": "alkamiskausi",
+    "ajankohtaTyyppi": "tarkka alkamisajankohta",
     "ajastettuJulkaisu": "2020-01-20T05:00",
     "hakuaika": Array [
       Object {
@@ -345,7 +341,6 @@ Object {
     "muokkauksenTakaraja": "2019-03-11T09:45",
     "tarkkaAlkaa": "2030-12-20T12:28",
     "tarkkaPaattyy": "2030-12-21T12:28",
-    "tiedossaTarkkaAjankohta": true,
     "vuosi": Object {
       "value": "2030",
     },

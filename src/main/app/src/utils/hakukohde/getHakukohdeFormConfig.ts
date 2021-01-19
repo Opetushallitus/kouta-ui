@@ -2,7 +2,7 @@ import _ from 'lodash';
 import _fp from 'lodash/fp';
 
 import {
-  Ajankohtatyyppi,
+  Alkamiskausityyppi,
   JULKAISUTILA,
   LIITTEEN_TOIMITUSTAPA,
 } from '#/src/constants';
@@ -165,7 +165,7 @@ const config = createFormConfigBuilder().registerSections([
           validateIf(
             values?.ajankohta?.kaytetaanHakukohteenAlkamiskautta &&
               values?.ajankohta?.ajankohtaTyyppi ===
-                Ajankohtatyyppi.ALKAMISKAUSI &&
+                Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI &&
               values?.tila === JULKAISUTILA.JULKAISTU,
             _fp.pipe(
               validateExistence('ajankohta.kausi'),
@@ -174,17 +174,13 @@ const config = createFormConfigBuilder().registerSections([
           )(eb),
       },
       {
-        field: 'ajankohta.tiedossaTarkkaAjankohta',
-      },
-      {
         field: 'ajankohta.tarkkaAlkaa',
         required: true,
         validate: (eb, values: HakukohdeFormValues) =>
           validateIf(
             values?.ajankohta?.kaytetaanHakukohteenAlkamiskautta &&
               values?.ajankohta?.ajankohtaTyyppi ===
-                Ajankohtatyyppi.ALKAMISKAUSI &&
-              values?.ajankohta?.tiedossaTarkkaAjankohta &&
+                Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA &&
               values?.tila === JULKAISUTILA.JULKAISTU,
             validateExistenceOfDate('ajankohta.tarkkaAlkaa')
           )(eb),

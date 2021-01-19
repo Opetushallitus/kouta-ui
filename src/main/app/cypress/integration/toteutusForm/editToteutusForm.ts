@@ -1,3 +1,4 @@
+import { playMockFile } from 'kto-ui-common/cypress/mockUtils';
 import koulutus from '#/cypress/data/koulutus';
 import toteutus from '#/cypress/data/toteutus';
 import { stubToteutusFormRoutes } from '#/cypress/toteutusFormUtils';
@@ -36,6 +37,8 @@ const prepareTest = tyyppi => {
   };
 
   cy.server();
+
+  playMockFile('toteutus.mocks.json');
 
   stubToteutusFormRoutes({ organisaatioOid, perusteId });
 

@@ -3,7 +3,8 @@ import { loggable } from 'cypress-pipe';
 import { fireEvent } from '@testing-library/react';
 import koodisto from '#/cypress/data/koodisto';
 import koodistoOpintojenLaajuusYksikko from '#/cypress/data/koodistoOpintojenLaajuusYksikko';
-import ePerusteByKoulutusKoodi351107 from './data/ePerusteByKoulutusKoodi351107';
+import ePerusteByKoulutusKoodi351107 from '#/cypress/data/ePerusteByKoulutusKoodi351107';
+import { Alkamiskausityyppi } from '#/src/constants';
 
 export const paste = loggable('paste', value => $element => {
   $element.focus();
@@ -354,4 +355,41 @@ export const assertNoUnsavedChangesDialog = () => {
   cy.findByRole('heading', {
     name: 'ilmoitukset.tallentamattomiaMuutoksia.otsikko',
   }).should('not.exist');
+};
+
+export const fillAjankohtaFields = (
+  alkamiskausityyppi = Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI
+) => {
+  getByTestId('AloitusajankohtaFields').within(() => {
+    switch (alkamiskausityyppi) {
+      case Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI:
+        cy.findByText('yleiset.alkamiskausiJaVuosi').click();
+
+        getRadio('kausi_k#1').click({ force: true });
+        selectOption(2035);
+        return;
+      case Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA:
+        cy.findByText('yleiset.tarkkaAlkamisajankohta').click();
+
+        getByTestId('alkaa').within(() => {
+          fillDateTimeInput({
+            date: '1.11.2030',
+            time: '00:00',
+          });
+        });
+
+        getByTestId('paattyy').within(() => {
+          fillDateTimeInput({
+            date: '30.11.2030',
+            time: '00:00',
+          });
+        });
+        return;
+      case Alkamiskausityyppi.HENKILOKOHTAINEN_SUUNNITELMA:
+        cy.findByText(
+          'yleiset.aloitusHenkilokohtaisenSuunnitelmanMukaisesti'
+        ).click();
+        typeToEditor('Henkilökohtaisen suunnitelman lisätiedot');
+    }
+  });
 };

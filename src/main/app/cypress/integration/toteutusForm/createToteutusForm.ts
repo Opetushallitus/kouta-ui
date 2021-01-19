@@ -1,4 +1,5 @@
 import _fp from 'lodash/fp';
+import { playMockFile } from 'kto-ui-common/cypress/mockUtils';
 
 import {
   getRadio,
@@ -17,10 +18,12 @@ import {
   tallenna,
   fillDateTimeInput,
   fillYhteyshenkilotFields,
+  fillAjankohtaFields,
 } from '#/cypress/utils';
 
 import koulutus from '#/cypress/data/koulutus';
 import { stubToteutusFormRoutes } from '#/cypress/toteutusFormUtils';
+import { Alkamiskausityyppi } from '#/src/constants';
 
 const fillOpetuskieli = (chosenNumber = '0') => {
   getByTestId('opetuskieli').within(() => {
@@ -69,31 +72,6 @@ const fillStipendi = () => {
   });
 };
 
-const fillKausi = () => {
-  cy.findByText('hakulomake.alkamiskausi').click();
-
-  getByTestId('KausiJaVuosiFields').within(() => {
-    getRadio('kausi_0#1').click({ force: true });
-    selectOption(2035);
-
-    cy.findByText('hakulomake.tiedossaTarkkaAjankohta').click();
-
-    getByTestId('alkaa').within(() => {
-      fillDateTimeInput({
-        date: '1.11.2020',
-        time: '00:00',
-      });
-    });
-
-    getByTestId('paattyy').within(() => {
-      fillDateTimeInput({
-        date: '30.11.2020',
-        time: '00:00',
-      });
-    });
-  });
-};
-
 const fillOsiot = () => {
   getByTestId('osiotSelect').click();
 
@@ -114,7 +92,7 @@ const fillCommonJarjestamistiedot = ({ maksullisuusTyyppi = 'kylla' } = {}) => {
   fillOpetusaika();
   fillOpetustapa();
   fillMaksullisuus(maksullisuusTyyppi);
-  fillKausi();
+  fillAjankohtaFields(Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI);
   fillOsiot();
 };
 
@@ -256,6 +234,7 @@ const prepareTest = tyyppi => {
 
   cy.server();
 
+  playMockFile('toteutus.mocks.json');
   stubToteutusFormRoutes({ perusteId, organisaatioOid });
   cy.route({
     method: 'GET',

@@ -58,12 +58,11 @@ Object {
       },
     ],
     "ajankohta": Object {
-      "ajankohtaTyyppi": "alkamiskausi",
+      "ajankohtaTyyppi": "tarkka alkamisajankohta",
       "henkilokohtaisenSuunnitelmanLisatiedot": Object {},
-      "kausi": "kausi_0#1",
+      "kausi": "kausi_k#1",
       "tarkkaAlkaa": "2021-04-16T00:00",
       "tarkkaPaattyy": "2021-12-12T00:00",
-      "tiedossaTarkkaAjankohta": true,
       "vuosi": Object {
         "value": 2020,
       },

@@ -276,11 +276,6 @@ export enum Alkamiskausityyppi {
   HENKILOKOHTAINEN_SUUNNITELMA = 'henkilokohtainen suunnitelma',
 }
 
-export enum Ajankohtatyyppi {
-  ALKAMISKAUSI = 'alkamiskausi',
-  HENKILOKOHTAINEN_SUUNNITELMA = 'aloitusHenkilokohtaisenSuunnitelmanMukaisesti',
-}
-
 export enum FormMode {
   CREATE = 'create',
   EDIT = 'edit',

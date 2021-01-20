@@ -16,6 +16,7 @@ Object {
       "sv": "<h1>Sv kuvaus</h1>",
     },
     "osaamistaustaKoodiUrit": Array [],
+    "sisalto": Array [],
     "tyyppi": "tyyppi_1#1",
     "valintakokeidenYleiskuvaus": Object {
       "fi": "<p>Yleiskuvaus - fi</p>",
@@ -172,6 +173,7 @@ Object {
       "sv": "<h1>Sv kuvaus</h1>",
     },
     "osaamistaustaKoodiUrit": Array [],
+    "sisalto": Array [],
     "tyyppi": "tyyppi_1#1",
     "valintakokeidenYleiskuvaus": Object {
       "fi": "<p>Yleiskuvaus - fi</p>",

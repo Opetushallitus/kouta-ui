@@ -1,27 +1,26 @@
 import React, { useCallback } from 'react';
-import { FieldArray, Field } from 'redux-form';
-import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-
-import { getTestIdProps } from '#/src/utils';
+import { Field, FieldArray } from 'redux-form';
+import styled from 'styled-components';
 import Button from '#/src/components/Button';
+import Editor from '#/src/components/Editor';
+import Flex, { FlexItem } from '#/src/components/Flex';
+import IconButton from '#/src/components/IconButton';
+import RemoveButton from '#/src/components/RemoveButton';
 import {
   SortableContainer,
   SortableElement,
   SortableHandle,
 } from '#/src/components/Sortable';
-import TableInput from '#/src/components/TableInput';
-import Editor from '#/src/components/Editor';
 import Spacing from '#/src/components/Spacing';
-import Flex, { FlexItem } from '#/src/components/Flex';
+import TableInput from '#/src/components/TableInput';
 import {
   Dropdown,
   DropdownMenu,
   DropdownMenuItem,
   Icon,
 } from '#/src/components/virkailija';
-import RemoveButton from '#/src/components/RemoveButton';
-import IconButton from '#/src/components/IconButton';
+import { getTestIdProps } from '#/src/utils';
 
 const MoveButton = SortableHandle(props => (
   <Button as="div" style={{ cursor: 'grab', width: '100%' }} {...props} />
@@ -173,5 +172,3 @@ export const SisaltoFields = ({ language = 'fi', ...props }) => {
     <FieldArray {...props} component={renderFields} language={language} t={t} />
   );
 };
-
-export default SisaltoFields;

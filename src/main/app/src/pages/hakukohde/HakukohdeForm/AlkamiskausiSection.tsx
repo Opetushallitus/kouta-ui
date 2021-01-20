@@ -1,5 +1,4 @@
 import React from 'react';
-import _fp from 'lodash/fp';
 import { Field } from 'redux-form';
 import { useTranslation } from 'react-i18next';
 
@@ -12,7 +11,7 @@ import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenA
 import FieldGroup from '#/src/components/FieldGroup';
 import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
 import { InlineInfoBox } from '#/src/components/InlineInfoBox';
-import { formatDateValue } from '#/src/utils';
+import { formatDateRange } from '#/src/utils';
 
 const InlineAjankohtaInfoBox = ({
   ajankohta = {},
@@ -58,9 +57,10 @@ const InlineAjankohtaInfoBox = ({
         title={`${foundTitle}:`}
         value={
           <>
-            {formatDateValue(koulutuksenAlkamispaivamaara)}
-            {' - '}
-            {formatDateValue(koulutuksenPaattymispaivamaara)}
+            {formatDateRange(
+              koulutuksenAlkamispaivamaara,
+              koulutuksenPaattymispaivamaara
+            )}
           </>
         }
         iconType={iconType}

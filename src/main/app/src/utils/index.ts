@@ -2,7 +2,7 @@ import { format as formatDate, parseISO } from 'date-fns';
 import _fp from 'lodash/fp';
 import _ from 'lodash';
 import stripTags from 'striptags';
-import { ALLOWED_HTML_TAGS, LANGUAGES } from '#/src/constants';
+import { ALLOWED_HTML_TAGS, LANGUAGES, NDASH } from '#/src/constants';
 import { memoize } from '#/src/utils/memoize';
 import {
   isEditorState,
@@ -54,7 +54,7 @@ export const getKoutaDateString = (dateData: Date) => {
 };
 
 export const formatDateValue = (
-  date: Date | string | null,
+  date?: Date | string,
   format: string = "dd.MM.yyyy' 'HH:mm"
 ) => {
   try {
@@ -68,6 +68,15 @@ export const formatDateValue = (
   } catch (e) {}
   return null;
 };
+
+export const formatDateRange = (
+  start: Date | string,
+  end?: Date | string,
+  dateFormat?: string
+) =>
+  `${formatDateValue(start, dateFormat) ?? ''} ${NDASH} ${
+    formatDateValue(end, dateFormat) ?? ''
+  }`;
 
 export const createChainedFunction = (...fns) => (...args) => {
   // eslint-disable-next-line

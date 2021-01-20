@@ -80,6 +80,7 @@ export const development = ({ isCypress }) => ({
   'eperusteet.kooste': `${ePerusteetDevUrl}/#/$1/kooste/$2`,
   'eperusteet.tutkinnonosat': `${ePerusteetDevUrl}/#/$1/esitys/$2/reformi/tutkinnonosat/$3`,
   'eperusteet.sisalto': `${ePerusteetDevUrl}/#/$1/esitys/$2/reformi/sisalto/$3`,
+  'hakukohderyhmapalvelu.haun-asetukset': `${virkailijaDevUrl}/hakukohderyhmapalvelu/haun-asetukset?hakuOid=$1`,
 });
 
 export const configure = async (urls, httpClient) => {

@@ -102,5 +102,6 @@ public class UrlConfiguration extends OphProperties {
         this.frontProperties.setProperty("lomake-editori.muokkaus-sivu", this.require("lomake-editori.muokkaus-sivu"));
 
         this.frontProperties.setProperty("oppijanumerorekisteri-service.henkilo", this.require("oppijanumerorekisteri-service.henkilo"));
+        this.frontProperties.setProperty("hakukohderyhmapalvelu.haun-asetukset", this.require("hakukohderyhmapalvelu.haun-asetukset"));
     }
 }

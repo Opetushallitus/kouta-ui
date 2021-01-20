@@ -72,7 +72,7 @@ const InlineAjankohtaInfoBox = ({
     return (
       <InlineInfoBox
         title={`${foundTitle}:`}
-        value={t('hakulomake.aloitusHenkilokohtaisenSuunnitelmanMukaisesti')}
+        value={t('yleiset.aloitusHenkilokohtaisenSuunnitelmanMukaisesti')}
         iconType={iconType}
       />
     );

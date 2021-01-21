@@ -394,14 +394,7 @@ exports[`createHakukohde > should be able to create hakukohde with muu hakulomak
   "liitteidenToimitustapa": null,
   "metadata": {
     "kaytetaanHaunAlkamiskautta": true,
-    "koulutuksenAlkamiskausi": {
-      "alkamiskausityyppi": null,
-      "henkilokohtaisenSuunnitelmanLisatiedot": {},
-      "koulutuksenAlkamiskausiKoodiUri": null,
-      "koulutuksenAlkamispaivamaara": null,
-      "koulutuksenAlkamisvuosi": null,
-      "koulutuksenPaattymispaivamaara": null
-    },
+    "koulutuksenAlkamiskausi": null,
     "valintakokeidenYleiskuvaus": {}
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
@@ -446,14 +439,7 @@ exports[`createHakukohde > should be able to create hakukohde with "ei sähköis
   "liitteidenToimitustapa": null,
   "metadata": {
     "kaytetaanHaunAlkamiskautta": true,
-    "koulutuksenAlkamiskausi": {
-      "alkamiskausityyppi": null,
-      "henkilokohtaisenSuunnitelmanLisatiedot": {},
-      "koulutuksenAlkamiskausiKoodiUri": null,
-      "koulutuksenAlkamispaivamaara": null,
-      "koulutuksenAlkamisvuosi": null,
-      "koulutuksenPaattymispaivamaara": null
-    },
+    "koulutuksenAlkamiskausi": null,
     "valintakokeidenYleiskuvaus": {}
   },
   "muokkaaja": "1.2.246.562.24.62301161440",

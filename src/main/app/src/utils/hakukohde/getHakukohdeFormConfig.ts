@@ -152,9 +152,12 @@ const config = createFormConfigBuilder().registerSections([
       { field: 'ajankohta' },
       {
         field: 'ajankohta.ajankohtaTyyppi',
-        validate: validateIfJulkaistu(
-          validateExistence('ajankohta.ajankohtaTyyppi')
-        ),
+        validate: (eb, values: HakukohdeFormValues) =>
+          validateIf(
+            values?.ajankohta?.kaytetaanHakukohteenAlkamiskautta &&
+              values?.tila === JULKAISUTILA.JULKAISTU,
+            validateExistence('ajankohta.ajankohtaTyyppi')
+          )(eb),
       },
       {
         field: 'ajankohta.kausi',

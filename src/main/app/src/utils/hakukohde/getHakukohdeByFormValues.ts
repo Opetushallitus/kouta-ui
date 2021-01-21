@@ -121,6 +121,9 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     kielivalinta
   );
 
+  const kaytetaanHaukukohteenAlkamiskautta =
+    values?.ajankohta?.kaytetaanHakukohteenAlkamiskautta;
+
   return {
     muokkaaja,
     tila,
@@ -162,9 +165,10 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
         values?.valintakokeet?.yleisKuvaus,
         kuvaus => serializeEditorState(kuvaus)
       ),
-      kaytetaanHaunAlkamiskautta: !values?.ajankohta
-        ?.kaytetaanHakukohteenAlkamiskautta,
-      koulutuksenAlkamiskausi: getAlkamiskausiData(ajankohta, pickTranslations),
+      kaytetaanHaunAlkamiskautta: !kaytetaanHaukukohteenAlkamiskautta,
+      koulutuksenAlkamiskausi: kaytetaanHaukukohteenAlkamiskautta
+        ? getAlkamiskausiData(ajankohta, pickTranslations)
+        : null,
     },
   };
 };

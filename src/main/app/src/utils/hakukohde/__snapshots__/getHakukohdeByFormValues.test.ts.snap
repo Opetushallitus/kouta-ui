@@ -20,6 +20,7 @@ Object {
   "hakulomaketyyppi": "ataru",
   "jarjestyspaikkaOid": "2.2.2.2.2",
   "kaytetaanHaunAikataulua": false,
+  "kaytetaanHaunAlkamiskautta": true,
   "kaytetaanHaunHakulomaketta": false,
   "kielivalinta": Array [
     "fi",

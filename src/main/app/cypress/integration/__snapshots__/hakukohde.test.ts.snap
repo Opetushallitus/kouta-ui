@@ -15,6 +15,7 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
   "hakulomaketyyppi": "ataru",
   "jarjestyspaikkaOid": "1.2.246.562.10.45854578546",
   "kaytetaanHaunAikataulua": false,
+  "kaytetaanHaunAlkamiskautta": true,
   "kaytetaanHaunHakulomaketta": false,
   "kielivalinta": [
     "fi"
@@ -137,6 +138,7 @@ exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
   "hakulomaketyyppi": "ataru",
   "jarjestyspaikkaOid": "1.2.246.562.10.45854578546",
   "kaytetaanHaunAikataulua": false,
+  "kaytetaanHaunAlkamiskautta": true,
   "kaytetaanHaunHakulomaketta": false,
   "kielivalinta": [
     "fi"
@@ -262,7 +264,7 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
   "hakulomaketyyppi": "ataru",
   "jarjestyspaikkaOid": "1.2.246.562.10.45854578546",
   "kaytetaanHaunAikataulua": false,
-  "kaytetaanHaunAlkamiskautta": false,
+  "kaytetaanHaunAlkamiskautta": true,
   "kaytetaanHaunHakulomaketta": false,
   "kielivalinta": [
     "fi"
@@ -382,6 +384,7 @@ exports[`createHakukohde > should be able to create hakukohde with muu hakulomak
   },
   "hakulomaketyyppi": "muu",
   "kaytetaanHaunAikataulua": true,
+  "kaytetaanHaunAlkamiskautta": true,
   "kaytetaanHaunHakulomaketta": false,
   "kielivalinta": [
     "fi"
@@ -427,6 +430,7 @@ exports[`createHakukohde > should be able to create hakukohde with "ei sähköis
   "hakulomakeLinkki": {},
   "hakulomaketyyppi": "ei sähköistä",
   "kaytetaanHaunAikataulua": true,
+  "kaytetaanHaunAlkamiskautta": true,
   "kaytetaanHaunHakulomaketta": false,
   "kielivalinta": [
     "fi"

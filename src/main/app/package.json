@@ -62,7 +62,7 @@
     "eject": "craco eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "NODE_ENV=development build-storybook -c .storybook -o build/storybook --quiet",
-    "format": "prettier --write './src/**/*.{js,jsx,ts,tsx}' './cypress/**/*.{js,jsx,ts,tsx}'",
+    "lint:fix": "eslint --fix './src/**/*.{js,jsx,ts,tsx}' './cypress/**/*.{js,jsx,ts,tsx}'",
     "cypress:run": "NODE_OPTIONS=\"--max-http-header-size=8000000\" cypress run -b chrome",
     "cypress:run:headless": "npm run cypress:run -- --headless",
     "cypress:open": "cross-env NODE_OPTIONS=\"--max-http-header-size=8000000\" cypress open -b chrome",

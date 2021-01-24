@@ -16,130 +16,133 @@ const koutaSearchItem = () => ({
 const stubMyOrganisations = () => {
   const oid = '1.2.246.562.10.00000000001';
 
-  cy.route({
-    method: 'GET',
-    url: `**/organisaatio-service/rest/organisaatio/v4/${oid}**`,
-    response: merge(organisaatio(), {
-      oid,
-    }),
-  });
-
-  cy.route({
-    method: 'GET',
-    url: `**/organisaatio-service/rest/organisaatio/v4/hierarkia/hae?oid=${oid}**`,
-    response: organisaatioHierarkia(),
-  });
-
-  cy.route({
-    method: 'POST',
-    url: '**/organisaatio-service/rest/organisaatio/v4/findbyoids',
-    response: [
-      merge(organisaatio(), {
+  cy.intercept(
+    {
+      method: 'GET',
+      url: `/organisaatio-service/rest/organisaatio/v4/${oid}`,
+    },
+    {
+      body: merge(organisaatio(), {
         oid,
-        nimi: {
-          fi: 'Organisaatio_1',
-        },
       }),
-    ],
-  });
+    }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: '**/kayttooikeus-service/organisaatiohenkilo/organisaatioOid**',
-    response: [oid],
-  });
+  cy.intercept(
+    {
+      method: 'GET',
+      url: `/organisaatio-service/rest/organisaatio/v4/hierarkia/hae?oid=${oid}`,
+    },
+    { body: organisaatioHierarkia() }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: '/kouta-backend/koulutus/list**',
-    response: [],
-  });
+  cy.intercept(
+    {
+      method: 'POST',
+      url: '/organisaatio-service/rest/organisaatio/v4/findbyoids',
+    },
+    {
+      body: [
+        merge(organisaatio(), {
+          oid,
+          nimi: {
+            fi: 'Organisaatio_1',
+          },
+        }),
+      ],
+    }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: '/kouta-backend/haku/list**',
-    response: [],
-  });
+  cy.intercept(
+    {
+      method: 'GET',
+      url: '/kayttooikeus-service/organisaatiohenkilo/organisaatioOid',
+    },
+    { body: [oid] }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: '/kouta-backend/toteutus/list**',
-    response: [],
-  });
+  cy.intercept(
+    { method: 'GET', url: '/kouta-backend/koulutus/list' },
+    { body: [] }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: '/kouta-backend/hakukohde/list**',
-    response: [],
-  });
+  cy.intercept(
+    { method: 'GET', url: '/kouta-backend/haku/list' },
+    { body: [] }
+  );
+
+  cy.intercept(
+    { method: 'GET', url: '/kouta-backend/toteutus/list' },
+    { body: [] }
+  );
+
+  cy.intercept(
+    { method: 'GET', url: '/kouta-backend/hakukohde/list' },
+    { body: [] }
+  );
 };
 
 describe('frontPage', () => {
   before(() => {
-    cy.server();
     stubCommonRoutes();
 
-    cy.route({
-      method: 'GET',
-      url: '**/kouta-backend/search/**',
-      response: {
-        result: [],
-        totalCount: 0,
-      },
-    });
+    cy.intercept(
+      { method: 'GET', url: '/kouta-backend/search/koulutukset' },
+      {
+        body: {
+          result: [
+            merge(koutaSearchItem(), { nimi: { fi: 'Koulutuksen nimi' } }),
+          ],
+          totalCount: 1,
+        },
+      }
+    );
 
-    cy.route({
-      method: 'GET',
-      url: '**/kouta-backend/search/koulutukset**',
-      response: {
-        result: [
-          merge(koutaSearchItem(), { nimi: { fi: 'Koulutuksen nimi' } }),
-        ],
-        totalCount: 1,
-      },
-    });
+    cy.intercept(
+      { method: 'GET', url: '/kouta-backend/search/toteutukset' },
+      {
+        body: {
+          result: [
+            merge(koutaSearchItem(), { nimi: { fi: 'Toteutuksen nimi' } }),
+          ],
+          totalCount: 1,
+        },
+      }
+    );
 
-    cy.route({
-      method: 'GET',
-      url: '**/kouta-backend/search/toteutukset**',
-      response: {
-        result: [
-          merge(koutaSearchItem(), { nimi: { fi: 'Toteutuksen nimi' } }),
-        ],
-        totalCount: 1,
-      },
-    });
+    cy.intercept(
+      { method: 'GET', url: '/kouta-backend/search/haut' },
+      {
+        body: {
+          result: [merge(koutaSearchItem(), { nimi: { fi: 'Haun nimi' } })],
+          totalCount: 1,
+        },
+      }
+    );
 
-    cy.route({
-      method: 'GET',
-      url: '**/kouta-backend/search/haut**',
-      response: {
-        result: [merge(koutaSearchItem(), { nimi: { fi: 'Haun nimi' } })],
-        totalCount: 1,
-      },
-    });
+    cy.intercept(
+      { method: 'GET', url: '/kouta-backend/search/valintaperusteet' },
+      {
+        body: {
+          result: [
+            merge(koutaSearchItem(), { nimi: { fi: 'Valintaperusteen nimi' } }),
+          ],
+          totalCount: 1,
+        },
+      }
+    );
 
-    cy.route({
-      method: 'GET',
-      url: '**/kouta-backend/search/valintaperusteet**',
-      response: {
-        result: [
-          merge(koutaSearchItem(), { nimi: { fi: 'Valintaperusteen nimi' } }),
-        ],
-        totalCount: 1,
-      },
-    });
-
-    cy.route({
-      method: 'GET',
-      url: '**/kouta-backend/search/hakukohteet**',
-      response: {
-        result: [
-          merge(koutaSearchItem(), { nimi: { fi: 'Hakukohteen nimi' } }),
-        ],
-        totalCount: 1,
-      },
-    });
+    cy.intercept(
+      { method: 'GET', url: '/kouta-backend/search/hakukohteet' },
+      {
+        body: {
+          result: [
+            merge(koutaSearchItem(), { nimi: { fi: 'Hakukohteen nimi' } }),
+          ],
+          totalCount: 1,
+        },
+      }
+    );
 
     stubMyOrganisations();
 

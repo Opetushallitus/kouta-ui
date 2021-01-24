@@ -143,7 +143,6 @@ export const createHakuForm = () => {
   const createdHakuOid = '1.2.3.4.5.6';
 
   beforeEach(() => {
-    cy.server();
     stubHakuFormRoutes({ organisaatioOid });
 
     cy.visit(`/organisaatio/${organisaatioOid}/haku`);
@@ -183,13 +182,14 @@ export const createHakuForm = () => {
   });
 
   it('should be able to create haku with muu hakulomake', () => {
-    cy.route({
-      method: 'PUT',
-      url: '**/haku',
-      response: {
-        oid: createdHakuOid,
-      },
-    }).as('createHakuRequest');
+    cy.intercept(
+      { method: 'PUT', url: '**/haku' },
+      {
+        body: {
+          oid: createdHakuOid,
+        },
+      }
+    ).as('createHakuRequest');
 
     fillPohjaSection();
     fillKieliversiotSection({ jatka: true });
@@ -205,13 +205,14 @@ export const createHakuForm = () => {
   });
 
   it('should be able to create haku with "ei sähköistä" hakulomake', () => {
-    cy.route({
-      method: 'PUT',
-      url: '**/haku',
-      response: {
-        oid: createdHakuOid,
-      },
-    }).as('createHakuRequest');
+    cy.intercept(
+      { method: 'PUT', url: '**/haku' },
+      {
+        body: {
+          oid: createdHakuOid,
+        },
+      }
+    ).as('createHakuRequest');
 
     fillPohjaSection();
     fillKieliversiotSection({ jatka: true });

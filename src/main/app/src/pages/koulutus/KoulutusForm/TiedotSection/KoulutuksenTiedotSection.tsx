@@ -350,7 +350,7 @@ const KoulutuksenTiedotSection = ({
     }
   }, [change, ePerusteFieldValue, isDirty, name, previousEPeruste]);
 
-  const selectLabel = selectLabelProp || t('koulutuslomake.valitseKoulutus');
+  const selectLabel = selectLabelProp || t('yleiset.valitseKoulutus');
 
   return (
     <Box display="flex" flexDirection="column">

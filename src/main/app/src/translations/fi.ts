@@ -1,13 +1,11 @@
 const fi = {
   yleiset: {
-    haunAsetukset: 'Haun asetukset',
     muokkaaAsetuksia: 'Muokkaa asetuksia',
     esikatselu: 'Esikatsele',
     salliEsikatselu: 'Esikatselu käytössä',
     seuraava: 'Seuraava',
     edellinen: 'Edellinen',
     tallenna: 'Tallenna',
-    tallennaJaJulkaise: 'Tallenna ja julkaise',
     valitse: 'Valitse',
     nimi: 'Nimi',
     muokattuViimeksi: 'Muokattu viimeksi',
@@ -15,7 +13,6 @@ const fi = {
     muokkaa: 'Muokkaa',
     tila: 'Tila',
     jatka: 'Jatka',
-    tyhjennaTiedot: 'Tyhjennä tiedot',
     etusivulle: 'Etusivulle',
     eiValittaviaKohteita: 'Valittavia kohteita ei löytynyt',
     eiValittaviaKohteitaHakusanalla:
@@ -29,28 +26,18 @@ const fi = {
     valintaperuste: 'Valintaperuste',
     valintaperusteet: 'Valintaperusteet',
     pohjanValinta: 'Pohjan valinta',
-    valitsePohja: 'Valitse pohja',
     kieliversiot: 'Kieliversiot',
-    organisaatio: 'Organisaatio',
-    ammatillinenKoulutus: 'Ammatillinen koulutus',
-    amkKoulutus: 'AMK-koulutus',
-    yliopistokoulutus: 'Yliopistokoulutus',
     koulutustyyppi: 'Koulutustyyppi',
     sulje: 'Sulje',
     sahkoposti: 'Sähköposti',
-    puhelin: 'Puhelin',
     titteli: 'Titteli',
     verkkosivu: 'Verkkosivu',
     ei: 'Ei',
     kylla: 'Kyllä',
-    tutkintoonJohtavaKoulutus: 'Tutkintoon johtava koulutus',
-    tutkintoonJohtamatonKoulutus: 'Tutkintoon johtamaton koulutus',
     kuvaus: 'Kuvaus',
-    toteutuksenKuvaus: 'Toteutuksen kuvaus',
     osoite: 'Osoite',
     postinumero: 'Postinumero',
     postitoimipaikka: 'Postitoimipaikka',
-    vuosi: 'Vuosi',
     valitseLisattavaOsio: 'Valitse lisättävä osio',
     valitseKieliversiot:
       'Valitse ne kielet, joilla tiedot julkaistaan Opintopolussa',
@@ -72,9 +59,6 @@ const fi = {
     tutkintonimike: 'Tutkintonimike',
     laajuus: 'Laajuus',
     osaamisalat: 'Osaamisalat',
-    tallennusOnnistui: 'Tallennus onnistui',
-    tallennusEpaonnistui: 'Tallennus epäonnistui',
-    kausi: 'Kausi',
     liitaHakukohde: 'Liitä hakukohde',
     lisaaHakukohde: 'Lisää hakukohde',
     opetuskieli: 'Opetuskieli',
@@ -85,8 +69,12 @@ const fi = {
     linkki: 'Linkki',
     poista: 'Poista',
     siirra: 'Siirrä',
+    luoUusiKoulutus: 'Luo uusi koulutus',
     luoUusiToteutus: 'Luo uusi toteutus',
-    koulutuksenToteutus: 'Koulutuksen toteutus',
+    luoUusiHakukohde: 'Luo uusi hakukohde',
+    luoUusiHaku: 'Luo uusi haku',
+    luoUusiValintaperuste: 'Luo uusi valintaperuste',
+    luoUusiSoraKuvaus: 'Luo uusi SORA-kuvaus',
     haut: 'Haut',
     koulutukset: 'Koulutukset',
     alkaa: 'Alkaa',
@@ -94,16 +82,10 @@ const fi = {
     paivamaaraJaKellonaika: 'Päivämäärä ja kellonaika',
     hakulomakkeenValinta: 'Hakulomakkeen valinta',
     valitseHakulomake: 'Valitse hakulomake',
-    luoUusiHakukohde: 'Luo uusi hakukohde',
     lisaaHakuaika: 'Lisää hakuaika',
     tyyppi: 'Tyyppi',
-    lisatietoja: 'Lisätietoja',
     lisatietoa: 'Lisätietoa',
-    valitseTyyppi: 'Valitse tyyppi',
-    valitseKuvaus: 'Valitse kuvaus',
-    valitseKieli: 'Valitse kieli',
     lisaaKuvaus: 'Lisää kuvaus',
-    taso: 'Taso',
     lisaaRiviAlapuolelle: 'Lisää rivi alapuolelle',
     lisaaRiviYlapuolelle: 'Lisää rivi yläpuolelle',
     poistaRivi: 'Poista rivi',
@@ -117,7 +99,6 @@ const fi = {
     lahde: 'Lähde',
     ePerusteet: 'ePerusteet',
     valitseLomakkeenPohja: 'Valitse lomakkeen pohja',
-    tarkistaLomakkeenTiedot: 'Tarkista lomakkeen tiedot',
     kuukaudet: {
       tammikuu: 'Tammikuu',
       helmikuu: 'Helmikuu',
@@ -145,26 +126,17 @@ const fi = {
     raahaaLiitettavaTiedosto: 'Raahaa liitettävä tiedosto',
     tai: 'tai',
     latausKaynnissa: 'Lataus käynnissä',
-    tiedostonLataaminenEpaonnistui:
-      'Tiedoston lataaminen epäonnistui, yritä uudelleen',
     ladatutTiedostot: 'Ladatut tiedostot',
     selaaTiedostoja: 'Selaa tiedostoja',
     kiellettyTiedostopaate: 'Tiedostopääte "{{extension}}" ei ole sallittu.',
     kuvanResoluutioTuntematon:
       'Kuvatiedoston resoluutiota ei pystytty tunnistamaan.',
     liitaVainYksiTiedosto: 'Vain yhden kuvan liittäminen on sallittua.',
-    varmistaLomakkeenKentat:
-      'Varmistathan että olet täyttänyt lomakkeen kaikki pakolliset kentät',
     valitseMitaHakulomakettaKaytetaan: 'Valitse mitä hakulomaketta käytetään',
     valitseKoulutustyyppi: 'Valitse koulutustyyppi',
-    luoUusi: 'Luo uusi {{entity, unCapitalize}}',
-    kopioiPohjaksi: 'Kopioi pohjaksi aiemmin luotu {{ entity, unCapitalize}}',
-    kopioiTiedot: 'Kopioi tiedot',
     soraKuvaus: 'SORA-kuvaus',
-    lukiokoulutus: 'Lukiokoulutus',
     lisaaYhteyshenkilo: 'Lisää yhteyshenkilö',
     puhelinnumero: 'Puhelinnumero',
-    valitseValintakoetyypit: 'Valitse valintakoetyypit',
     lisaaTilaisuus: 'Lisää tilaisuus',
     avaaLomake: 'Avaa lomake',
     valitseHaunKohdejoukko: 'Valitse haun kohdejoukko',
@@ -197,7 +169,6 @@ const fi = {
     diaarinumero: 'Diaarinumero',
     voimaantulo: 'Voimaantulo',
     osaamispistetta: 'osaamispistettä',
-    ePerusteenTutkinnonOsat: 'Valitse tutkinnon osat',
     ePerusteStatus: {
       voimassa: 'Voimassa',
       tuleva: 'Tuleva',
@@ -215,6 +186,26 @@ const fi = {
     aloitusHenkilokohtaisenSuunnitelmanMukaisesti:
       'Aloitus henkilökohtaisen suunnitelman mukaisesti',
     koulutuksenAjankohta: 'Koulutuksen aloitusajankohta',
+  },
+  koeTaiLisanaytto: {
+    title: 'Koe tai lisänäyttö {{index}}',
+    yleisKuvaus: 'Yleiskuvaus kokeista ja lisänäytöistä',
+    tyyppi: 'Kokeen tai lisänäytön tyyppi',
+    hakijalleNakyvaNimi: 'Hakijalle näkyvä nimi',
+    tietoaHakijalle: 'Tietoa kokeesta tai lisänäytöstä hakijalle',
+    liittyyEnnakkovalmistautumista:
+      'Kokeeseen tai lisänäyttöön liittyy ennakkovalmistautumista',
+    materiaaliJaValmistautumisohjeet:
+      'Materiaali- ja valmistautumisohjeet hakijalle',
+    erityisjarjestelytMahdollisia:
+      'Kokeeseen tai lisänäyttöön on mahdollista ilmoittaa erityisjärjestelyn tarpeesta',
+    ohjeetErityisjarjestelyihin: 'Ohjeet yksilöllisiin erityisjärjestelyihin',
+    lisaa: 'Lisää koe tai lisänäyttö',
+    tilaisuudenLisatiedot: 'Tilaisuuden lisätiedot',
+    jarjestamispaikka: 'Järjestämispaikka',
+    tilaisuusTitle: 'Tilaisuus {{index}}',
+    tilaisuusAlkaa: 'Tilaisuus alkaa',
+    tilaisuusPaattyy: 'Tilaisuus päättyy',
   },
   ilmoitukset: {
     tallentamattomiaMuutoksia: {
@@ -340,9 +331,6 @@ const fi = {
     muuOsoite: 'Muu osoite',
   },
   etusivu: {
-    luoUusiKoulutus: 'Luo uusi koulutus',
-    luoUusiHaku: 'Luo uusi haku',
-    luoUusiValintaperuste: 'Luo uusi valintaperuste',
     naytaArkistoidut: 'Näytä myös arkistoidut',
     vaihdaOrganisaatiota: 'Valitse organisaatio',
     suosikit: 'Suosikit',
@@ -359,11 +347,9 @@ const fi = {
     pikavalinnat: 'Pikavalinnat ({{count}})',
     haeOrganisaatioita: 'Hae organisaatioita',
     rekisterinpitaja: 'Rekisterinpitäjä',
-    luoUusiToteutus: 'Luo uusi toteutus',
     toteutuksenKoulutus: 'Toteutukseen liittyvä koulutus',
     valitseToteutuksenKoulutus:
       'Valitse, mihin koulutukseen toteutus liitetään',
-    luoUusiHakukohde: 'Luo uusi hakukohde',
     hakukohteenToteutusJaHaku: 'Hakukohteeseen liittyvä toteutus ja haku',
     valitseHakukohteenToteutus:
       'Valitse, mihin toteutukseen hakukohde liitetään',
@@ -393,7 +379,6 @@ const fi = {
     valitseTutkintonimike: 'Valitse tutkintonimike',
     valitseOpintojenLaajuus: 'Valitse opintojen laajuus',
     muokkaaKoulutuksenNimea: 'Muokkaa koulutuksen nimeä',
-    luoUusiKoulutus: 'Luo uusi koulutus',
     koulutukseenLiitetytToteutukset: 'Koulutukseen liitetyt toteutukset',
     liitaToteutus: 'Liitä toteutus',
     koulutuksellaEiToteutuksia:
@@ -402,7 +387,6 @@ const fi = {
       'Tähän koulutukseen on liitetty seuraavat toteutukset',
     toteutuksenLiittaminenKoulutukseen: 'Toteutuksen liittäminen koulutukseen',
     kuvausEiOleSaatavilla: 'Kuvaus ei ole saatavilla',
-    valitseKoulutustyyppi: 'Valitse koulutustyyppi',
     valitseKoulutusalat: 'Valitse koulutusalat',
     pohjavalintaInfo:
       'Voit halutessasi käyttää aiemmin luotuja koulutuksia uuden lomakkeen esitäytettynä pohjana.',
@@ -420,6 +404,7 @@ const fi = {
     julkisuusKuvaus:
       'Valitse näkyykö koulutus muille koulutustoimijoille. Jos koulutus on julkinen, muut koulutustoimijat voivat käyttää sitä pohjana luodessaan uusia.',
     lisaaKoulutus: 'Lisää uusi koulutus',
+    kopioiPohjaksi: 'Kopioi pohjaksi aiemmin luotu koulutus',
   },
   toteutuslomake: {
     toteutuksenTiedot: 'Toteutuksen tiedot',
@@ -453,9 +438,6 @@ const fi = {
     stipendi: 'Stipendi',
     stipendinMaaraHelperText: 'Euroa tai prosenttia',
     eiKaytossa: 'Ei käytössä',
-    koulutuksenAjankohta: 'Koulutuksen ajankohta',
-    koulutuksenAlkamiskausi: 'Valitse alkamiskausi',
-    koulutuksenAlkamisvuosi: 'Valitse vuosi',
     ammattinimikkeet: 'Ammattinimikkeet',
     avainsanat: 'Avainsanat',
     toteutuksenJarjestaja: 'Missä järjestetään?',
@@ -470,7 +452,6 @@ const fi = {
     tarkennaKuvausta: 'Tarkenna kuvausta',
     koulutuksenNayttamiseenLiittyvatTiedot:
       'Koulutuksen näyttämiseen liittyvät tiedot',
-    linkinOtsikko: 'Linkin otsikko',
     lisaaLinkki: 'Lisää linkki',
     kaytossaLukuvuosimaksu: 'Käytössä lukuvuosimaksu',
     lukiodiplomi: 'Lukiodiplomi',
@@ -484,7 +465,7 @@ const fi = {
     B3Kielet: 'B3-kielet',
     muutKielet: 'Muut kielet',
     toteutuksenTila: 'Toteutuksen tila',
-    lukionlinja: 'Lukiolinja',
+    lukiolinja: 'Lukiolinja',
     valitseLukiolinja: 'Valitse lukiolinja',
     toteutukseenLiittyvatJaksot: 'Toteutukseen liittyvät jaksot',
     lisaaToteutusjakso: 'Lisää toteutusjakso',
@@ -526,6 +507,9 @@ const fi = {
     hakuaikaAlkaa: 'Hakuaika alkaa',
     hakuaikaPaattyy: 'Hakuaika päättyy',
     lisatiedotValintaperusteista: 'Lisätiedot valintaperusteista',
+    pohjavalintaInfo:
+      'Voit halutessasi käyttää aiemmin luotuja toteutuksia uuden lomakkeen esitäytettynä pohjana.',
+    kopioiPohjaksi: 'Kopioi pohjaksi aiemmin luotu toteutus',
   },
   hakulomake: {
     haunNimi: 'Haun nimi',
@@ -538,7 +522,6 @@ const fi = {
     hakukohteenMuokkauksenTakaraja: 'Hakukohteen muokkauksen takaraja',
     ajastettuHaunJulkaisupaivamaara: 'Ajastettu haun julkaisupäivämäärä',
     haunYhteystiedot: 'Haun yhteystiedot',
-    luoUusiHaku: 'Luo uusi haku',
     liitetytHakukohteet: 'Liitetyt hakukohteet',
     hakuaika: 'Hakuaika',
     aikatauluTulevaisuudesta:
@@ -550,6 +533,7 @@ const fi = {
     eiMuokkausOikeutta: 'Käyttäjälläsi ei ole oikeuksia muokata tätä hakua',
     pohjavalintaInfo:
       'Voit halutessasi käyttää aiemmin luotuja hakuja uuden lomakkeen esitäytettynä pohjana.',
+    kopioiPohjaksi: 'Kopioi pohjaksi aiemmin luotu haku',
   },
   hakukohdelomake: {
     toteutukseenLiitettyAlkamisajankohta:
@@ -582,8 +566,6 @@ const fi = {
       'Käytä liitteille yhteistä toimituspaikkaa',
     valintaperusteenKuvaus: 'Valintaperusteen kuvaus',
     aloituspaikat: 'Aloituspaikat',
-    koulutuksenAlkamiskausi: 'Koulutuksen alkamiskausi',
-    lisaaTilaisuus: 'Lisää tilaisuus',
     voiSuorittaaKaksoistutkinnon: 'Voi suorittaa kaksoistutkinnon',
     eriHakulomake: 'Hakukohteen hakulomake on eri kuin haun hakulomake',
     hakuunEiOleLiitettyLomaketta: 'Hakuun ei ole liitetty lomaketta',
@@ -592,7 +574,6 @@ const fi = {
     hakuunLiitettyHakemuspalvelunLomake: 'Hakemuspalvelun lomake',
     hakuunEiLiitettyMuuLomake:
       'Hakukohteelle voi valita erilisen hakulomakkeen vain, jos haussa on käytössä "muu"-tyyppinen hakulomake',
-    avaaLomake: 'Avaa lomake',
     hakukohteenTila: 'Hakukohteen tila',
     luoUusiValintaperustekuvaus: 'Luo uusi valintaperustekuvaus',
     valitseValintaperustekuvaus: 'Valitse valintaperustekuvaus',
@@ -605,15 +586,15 @@ const fi = {
       'Käyttäjälläsi ei ole oikeuksia muokata tätä hakukohdetta',
     eiVoiAsettaaAjankohtaaJosYhteishaku:
       'Hakukohteella ei voi asettaa koulutuksen ajankohtaa, jos haussa on valittu hakutavaksi yhteishaku.',
+    pohjavalintaInfo:
+      'Voit halutessasi käyttää aiemmin luotuja hakukohteita uuden lomakkeen esitäytettynä pohjana.',
+    kopioiPohjaksi: 'Kopioi pohjaksi aiemmin luotu hakukohde',
   },
   valintaperustelomake: {
-    valintaperuste: 'valintaperuste',
-    valintaperusteen: 'valintaperusteen',
     valintaperusteenPerustiedot: 'Valintaperusteen perustiedot',
     valintaperusteenNimi: 'Valintaperusteen nimi',
     valitseHakutapa: 'Valitse hakutapa',
     valitseHaunKohdejoukko: 'Valitse haun kohdejoukko',
-    valitseOsaamistausta: 'Valitse, mikä osaamistausta hakijalla pitää olla',
     valintatapa: 'Valintatapa',
     lisaaValintatapa: 'Lisää valintatapa',
     lisaaSisaltoa: 'Lisää sisältöä',
@@ -622,17 +603,9 @@ const fi = {
     kynnysehto: 'Kynnysehto',
     enimmaispistemaara: 'Enimmäispistemäärä',
     vahimmaispistemaara: 'Vähimmäispistemäärä',
-    kielitaitovaatimukset: 'Kielitaitovaatimukset',
-    valitseVaatimustyypit: 'Valitse vaatimustyypit',
-    lisaaKielitaitovaatimus: 'Lisää kielitaitovaatimus',
-    ehdotKielitaidonOsoitukseen:
-      'Ehdot kielitaidon osoitukseen, tai vapautukseen',
-    lisaaEhto: 'Lisää ehto',
     valintaperusteenKuvaus: 'Valintaperusteen kuvaus',
-    luoUusiValintaperuste: 'Luo uusi valintaperuste',
     valitseTapa: 'Valitse tapa',
     valintatapajononNimi: 'Valintatapajonon nimi',
-    valitseKoulutustyyppi: 'Valitse koulutustyyppi',
     valitseSoraKuvaus: 'Valitse käytettävä SORA-kuvaus',
     kuvauksenNimi: 'Valintaperusteen kuvauksen nimi',
     kuvauksenTarkenne: 'Kuvauksen tarkenne',
@@ -642,34 +615,16 @@ const fi = {
     avaaSoraKuvaus: 'Avaa SORA-kuvaus',
     eiMuokkausOikeutta:
       'Käyttäjälläsi ei ole oikeuksia muokata tätä valintaperustekuvausta',
+    kopioiPohjaksi: 'Kopioi pohjaksi aiemmin luotu valintaperuste',
     pohjavalintaInfo:
       'Voit halutessasi käyttää aiemmin luotuja valintaperusteita uuden lomakkeen esitäytettynä pohjana.',
     julkisuusKuvaus:
       'Valitse näkyykö valintaperuste muille koulutustoimijoille. Jos valintaperuste on julkinen, muut koulutustoimijat voivat käyttää sitä pohjana luodessaan uusia.',
-    koeTaiLisanaytto: {
-      title: 'Koe tai lisänäyttö {{index}}',
-      yleisKuvaus: 'Yleiskuvaus kokeista ja lisänäytöistä',
-      tyyppi: 'Kokeen tai lisänäytön tyyppi',
-      hakijalleNakyvaNimi: 'Hakijalle näkyvä nimi',
-      tietoaHakijalle: 'Tietoa kokeesta tai lisänäytöstä hakijalle',
-      liittyyEnnakkovalmistautumista:
-        'Kokeeseen tai lisänäyttöön liittyy ennakkovalmistautumista',
-      materiaaliJaValmistautumisohjeet:
-        'Materiaali- ja valmistautumisohjeet hakijalle',
-      erityisjarjestelytMahdollisia:
-        'Kokeeseen tai lisänäyttöön on mahdollista ilmoittaa erityisjärjestelyn tarpeesta',
-      ohjeetErityisjarjestelyihin: 'Ohjeet yksilöllisiin erityisjärjestelyihin',
-      lisaa: 'Lisää koe tai lisänäyttö',
-    },
-    tilaisuudenLisatiedot: 'Tilaisuuden lisätiedot',
-    jarjestamispaikka: 'Järjestämispaikka',
-    tilaisuusTitle: 'Tilaisuus {{index}}',
-    tilaisuusAlkaa: 'Tilaisuus alkaa',
-    tilaisuusPaattyy: 'Tilaisuus päättyy',
   },
   soraKuvauslomake: {
     soraKuvauksenTiedot: 'SORA-kuvauksen tiedot',
     soraKuvauksenTila: 'SORA-kuvauksen tila',
+    kopioiPohjaksi: 'Kopioi pohjaksi aiemmin luotu SORA-kuvaus',
     pohjavalintaInfo:
       'Voit halutessasi käyttää aiemmin luotuja SORA-kuvauksia uuden lomakkeen esitäytettynä pohjana.',
     nakyminenMuilleToimijoille:

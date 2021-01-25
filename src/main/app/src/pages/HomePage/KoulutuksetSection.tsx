@@ -49,7 +49,7 @@ const Actions = ({ organisaatioOid }) => {
 
   return (
     <Button as={Link} to={`/organisaatio/${organisaatioOid}/koulutus`}>
-      {t('etusivu.luoUusiKoulutus')}
+      {t('yleiset.luoUusiKoulutus')}
     </Button>
   );
 };

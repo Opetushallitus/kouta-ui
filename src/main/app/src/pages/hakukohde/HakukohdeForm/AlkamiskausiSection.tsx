@@ -95,7 +95,7 @@ const AlkamiskausiSection = ({ name, toteutus, haku, language }) => {
   const isYhteishaku = isYhteishakuHakutapa(haku?.hakutapaKoodiUri);
 
   return (
-    <FieldGroup title={t('toteutuslomake.koulutuksenAjankohta')}>
+    <FieldGroup title={t('yleiset.koulutuksenAjankohta')}>
       <Spacing marginBottom={2}>
         <InlineAjankohtaInfoBox
           ajankohta={toteutuksenAjankohta}

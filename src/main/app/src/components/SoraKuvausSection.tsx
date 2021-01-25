@@ -49,7 +49,7 @@ const SoraKuvausSection = ({ name, organisaatioOid, languages }) => {
               href={`/kouta/organisaatio/${organisaatioOid}/sora-kuvaus/kielivalinnat/${kieliValinnat}`}
               target="_blank"
             >
-              {t('yleiset.luoUusi', { entity: t('yleiset.soraKuvaus') })}
+              {t('yleiset.luoUusiSoraKuvaus')}
             </Button>
           </Box>
         </>

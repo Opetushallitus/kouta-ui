@@ -320,7 +320,7 @@ export const JarjestamisTiedotSection = ({
         koulutustyyppi={koulutustyyppi}
       />
 
-      <FieldGroup title={t('toteutuslomake.koulutuksenAjankohta')}>
+      <FieldGroup title={t('yleiset.koulutuksenAjankohta')}>
         <KoulutuksenAloitusajankohtaFields
           section={`${name}.ajankohta`}
           name={`${name}.ajankohta.ajankohtaTyyppi`}

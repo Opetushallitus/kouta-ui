@@ -27,7 +27,7 @@ const TutkinnonOsatField = ({ disabled, language, koulutustyyppi, name }) => {
         koulutuskoodi={koulutuskoodi}
         koulutustyyppi={koulutustyyppi}
         name={name}
-        selectLabel={t('koulutuslomake.valitseKoulutus')}
+        selectLabel={t('yleiset.valitseKoulutus')}
       />
     </Box>
   );

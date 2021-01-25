@@ -86,12 +86,9 @@ const ToteutusForm = ({
             onSelectBase={onSelectBase}
             scrollOnActive={false}
             getCopyEntities={getToteutukset}
-            createLabel={t('yleiset.luoUusi', {
-              entity: t('yleiset.toteutus'),
-            })}
-            copyLabel={t('yleiset.kopioiPohjaksi', {
-              entity: t('yleiset.toteutus'),
-            })}
+            infoText={t('toteutuslomake.pohjavalintaInfo')}
+            createLabel={t('yleiset.luoUusiToteutus')}
+            copyLabel={t('toteutuslomake.kopioiPohjaksi')}
             organisaatioOid={organisaatioOid}
           />
         )}
@@ -120,7 +117,7 @@ const ToteutusForm = ({
 
         <FormCollapse
           section="lukiolinjat"
-          header={t('toteutuslomake.lukionlinja')}
+          header={t('toteutuslomake.lukiolinja')}
           languages={languages}
           Component={LukiolinjatSection}
         />

@@ -24,7 +24,6 @@ export const KoeTaiLisanayttoFields = ({
   index,
   field,
   language,
-  translationBase,
   removeSelf,
 }) => {
   const { t } = useTranslation();
@@ -40,7 +39,7 @@ export const KoeTaiLisanayttoFields = ({
   return (
     <>
       <Heading hasDivider>
-        {t(`${translationBase}.title`, { index: index + 1 })}
+        {t(`koeTaiLisanaytto.title`, { index: index + 1 })}
       </Heading>
       <Flex ml={12}>
         <FlexItem grow={1}>
@@ -51,7 +50,7 @@ export const KoeTaiLisanayttoFields = ({
                   name={`${field}.tyyppi`}
                   component={FormFieldSelect}
                   options={options}
-                  label={t(`${translationBase}.tyyppi`)}
+                  label={t('koeTaiLisanaytto.tyyppi')}
                 />
               </Box>
             </FlexItem>
@@ -60,7 +59,7 @@ export const KoeTaiLisanayttoFields = ({
                 <Field
                   name={`${field}.nimi.${language}`}
                   component={FormFieldInput}
-                  label={t(`${translationBase}.hakijalleNakyvaNimi`)}
+                  label={t('koeTaiLisanaytto.hakijalleNakyvaNimi')}
                 />
               </Box>
             </FlexItem>
@@ -69,7 +68,7 @@ export const KoeTaiLisanayttoFields = ({
             <Field
               name={`${field}.tietoaHakijalle.${language}`}
               component={FormFieldEditor}
-              label={t(`${translationBase}.tietoaHakijalle`)}
+              label={t('koeTaiLisanaytto.tietoaHakijalle')}
               hideHeaderSelect
             />
           </Box>
@@ -86,7 +85,7 @@ export const KoeTaiLisanayttoFields = ({
               name={`${field}.liittyyEnnakkovalmistautumista`}
               component={FormFieldCheckbox}
             >
-              {t(`${translationBase}.liittyyEnnakkovalmistautumista`)}
+              {t('koeTaiLisanaytto.liittyyEnnakkovalmistautumista')}
             </Field>
           </Box>
           {liittyyEnnakkovalmistautumista && (
@@ -94,7 +93,7 @@ export const KoeTaiLisanayttoFields = ({
               <Field
                 name={`${field}.ohjeetEnnakkovalmistautumiseen.${language}`}
                 component={FormFieldEditor}
-                label={t(`${translationBase}.materiaaliJaValmistautumisohjeet`)}
+                label={t('koeTaiLisanaytto.materiaaliJaValmistautumisohjeet')}
                 hideHeaderSelect
               />
             </Box>
@@ -104,7 +103,7 @@ export const KoeTaiLisanayttoFields = ({
               name={`${field}.erityisjarjestelytMahdollisia`}
               component={FormFieldCheckbox}
             >
-              {t(`${translationBase}.erityisjarjestelytMahdollisia`)}
+              {t('koeTaiLisanaytto.erityisjarjestelytMahdollisia')}
             </Field>
           </Box>
           {erityisjarjestelytMahdollisia && (
@@ -112,7 +111,7 @@ export const KoeTaiLisanayttoFields = ({
               <Field
                 name={`${field}.ohjeetErityisjarjestelyihin.${language}`}
                 component={FormFieldEditor}
-                label={t(`${translationBase}.ohjeetErityisjarjestelyihin`)}
+                label={t('koeTaiLisanaytto.ohjeetErityisjarjestelyihin')}
                 hideHeaderSelect
               />
             </Box>
@@ -132,13 +131,7 @@ export const KoeTaiLisanayttoFields = ({
   );
 };
 
-const KokeetTaiLisanaytotFields = ({
-  fields,
-  language,
-  t,
-  meta,
-  translationBase,
-}) => {
+const KokeetTaiLisanaytotFields = ({ fields, language, t, meta }) => {
   return (
     <div {...getTestIdProps('kokeetTaiLisanaytot')}>
       <FieldArrayList
@@ -153,7 +146,6 @@ const KokeetTaiLisanaytotFields = ({
             language={language}
             meta={meta}
             index={index}
-            translationBase={translationBase}
             removeSelf={() => fields.remove(index)}
           />
         )}
@@ -167,7 +159,7 @@ const KokeetTaiLisanaytotFields = ({
           onClick={() => fields.push({})}
           {...getTestIdProps('lisaaKoeTaiLisanayttoButton')}
         >
-          {t(`${translationBase}.lisaa`)}
+          {t('koeTaiLisanaytto.lisaa')}
         </IconButton>
       </Flex>
     </div>

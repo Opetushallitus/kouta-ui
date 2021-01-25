@@ -1,6 +1,6 @@
 const createSoraKuvaus = async ({ httpClient, apiUrls, soraKuvaus }) => {
   const { data } = await httpClient.put(
-    apiUrls.url('kouta-backend.sora-kuvaus'),
+    apiUrls.url('kouta-backend.soraKuvaus'),
     soraKuvaus
   );
 

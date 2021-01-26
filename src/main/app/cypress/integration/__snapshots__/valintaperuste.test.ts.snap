@@ -67,7 +67,7 @@ exports[`createValintaperuste > should be able to create valintaperuste #0`] =
     },
     "valintatavat": [
       {
-        "enimmaispisteet": 100,
+        "enimmaispisteet": 100.02,
         "kaytaMuuntotaulukkoa": false,
         "kuvaus": {},
         "kynnysehto": {
@@ -125,7 +125,7 @@ exports[`createValintaperuste > should be able to create valintaperuste #0`] =
             "tyyppi": "taulukko"
           }
         ],
-        "vahimmaispisteet": 10,
+        "vahimmaispisteet": 10.01,
         "valintatapaKoodiUri": "valintatapajono_tv#1"
       }
     ]
@@ -151,7 +151,8 @@ exports[`createValintaperuste > should be able to create valintaperuste #0`] =
         },
         "tietoja": {
           "fi": "<p>Tietoa hakijalle</p>"
-        }
+        },
+        "vahimmaispisteet": 10.03,
       },
       "nimi": {
         "fi": "nimi"
@@ -231,7 +232,7 @@ exports[`editValintaperuste > should be able to edit valintaperuste #0`] =
     },
     "valintatavat": [
       {
-        "enimmaispisteet": 100,
+        "enimmaispisteet": 100.02,
         "kaytaMuuntotaulukkoa": false,
         "kuvaus": {},
         "kynnysehto": {
@@ -268,7 +269,7 @@ exports[`editValintaperuste > should be able to edit valintaperuste #0`] =
             "tyyppi": "taulukko"
           }
         ],
-        "vahimmaispisteet": 10,
+        "vahimmaispisteet": 10.01,
         "valintatapaKoodiUri": "valintatapajono_tv#1"
       }
     ]
@@ -295,7 +296,8 @@ exports[`editValintaperuste > should be able to edit valintaperuste #0`] =
         },
         "tietoja": {
           "fi": "<p>Tietoa kokeesta - fi</p>"
-        }
+        },
+        "vahimmaispisteet": 10.03,
       },
       "nimi": {
         "fi": "Kokeen nimi - fi"

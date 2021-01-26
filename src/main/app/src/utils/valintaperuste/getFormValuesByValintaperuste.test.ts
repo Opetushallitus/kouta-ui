@@ -58,7 +58,7 @@ test('getFormValuesByValintaperuste returns correct form values given valintaper
       },
       valintatavat: [
         {
-          enimmaispisteet: 20,
+          enimmaispisteet: 20.2,
           kaytaMuuntotaulukkoa: false,
           kuvaus: {
             fi: 'Fi kuvaus',
@@ -126,7 +126,7 @@ test('getFormValuesByValintaperuste returns correct form values given valintaper
               tyyppi: 'taulukko',
             },
           ],
-          vahimmaispisteet: 10,
+          vahimmaispisteet: 10.1,
           valintatapaKoodiUri: 'tapa_1#1',
         },
       ],
@@ -151,6 +151,7 @@ test('getFormValuesByValintaperuste returns correct form values given valintaper
             fi: '<p>Tietoa hakijalle - fi</p>',
             sv: '<p>Tietoa hakijalle - sv</p>',
           },
+          vahimmaispisteet: 30.3,
           liittyyEnnakkovalmistautumista: true,
           ohjeetEnnakkovalmistautumiseen: {
             fi: '<p>Ohjeet ennakkovalmistautumiseen - fi</p>',

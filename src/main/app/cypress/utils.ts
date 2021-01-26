@@ -244,6 +244,8 @@ export const fillValintakokeetSection = () => {
         typeToEditor('Tietoa hakijalle');
       });
 
+      getByTestId('vahimmaispistemaara').find('input').pipe(paste('10,03'));
+
       getByTestId('liittyyEnnakkovalmistautumista').within(() => {
         getCheckbox(null).check({ force: true });
       });

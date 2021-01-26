@@ -24,7 +24,7 @@ Object {
     },
     "valintatavat": Array [
       Object {
-        "enimmaispisteet": 20,
+        "enimmaispisteet": 20.2,
         "kaytaMuuntotaulukkoa": false,
         "kuvaus": Object {
           "fi": "Fi kuvaus",
@@ -92,7 +92,7 @@ Object {
             "tyyppi": "taulukko",
           },
         ],
-        "vahimmaispisteet": 10,
+        "vahimmaispisteet": 10.1,
         "valintatapaKoodiUri": "tapa_1#1",
       },
     ],
@@ -123,6 +123,7 @@ Object {
           "fi": "<p>Tietoa hakijalle - fi</p>",
           "sv": "<p>Tietoa hakijalle - sv</p>",
         },
+        "vahimmaispisteet": 30.4,
       },
       "nimi": Object {
         "fi": "nimi - fi",
@@ -207,6 +208,7 @@ Object {
           "fi": "<p>Tietoa hakijalle - fi</p>",
           "sv": "<p>Tietoa hakijalle - sv</p>",
         },
+        "vahimmaispisteet": 30.4,
       },
       "nimi": Object {
         "fi": "nimi - fi",

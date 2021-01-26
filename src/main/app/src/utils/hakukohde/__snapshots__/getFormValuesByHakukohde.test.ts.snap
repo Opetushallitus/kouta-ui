@@ -158,6 +158,7 @@ Object {
         "tyyppi": Object {
           "value": "tyyppi_1#1",
         },
+        "vahimmaispistemaara": "30,3",
       },
     ],
     "yleisKuvaus": Object {

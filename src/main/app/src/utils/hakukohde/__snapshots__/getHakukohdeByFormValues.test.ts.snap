@@ -107,6 +107,7 @@ Object {
           "fi": "<p>Tietoa hakijalle - fi</p>",
           "sv": "<p>Tietoa hakijalle - sv</p>",
         },
+        "vahimmaispisteet": 30.4,
       },
       "nimi": Object {
         "fi": "nimi - fi",

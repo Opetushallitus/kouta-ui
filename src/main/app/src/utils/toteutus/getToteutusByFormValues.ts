@@ -29,6 +29,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
   const {
     koulutustyyppi,
     tila,
+    esikatselu = false,
     muokkaaja,
     jarjestamistiedot,
     hakeutumisTaiIlmoittautumistapa: HTIT,
@@ -52,8 +53,6 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
   const onkoStipendia = values?.jarjestamistiedot?.onkoStipendia === 'kylla';
 
   const ajankohta = values?.jarjestamistiedot?.ajankohta;
-
-  const esikatselu = values?.esikatselu;
 
   return {
     nimi: pickTranslations(values?.tiedot?.nimi || {}),

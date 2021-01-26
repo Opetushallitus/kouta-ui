@@ -199,11 +199,6 @@ const config = createFormConfigBuilder().registerSections([
     koulutustyypit: KOULUTUSTYYPIT,
   },
   {
-    section: 'esikatselu',
-    field: 'esikatselu',
-    koulutustyypit: KOULUTUSTYYPIT,
-  },
-  {
     section: 'tarjoajat',
     koulutustyypit: KOULUTUSTYYPIT,
     parts: [
@@ -225,6 +220,11 @@ const config = createFormConfigBuilder().registerSections([
   },
   julkinenSectionConfig,
   tilaSectionConfig,
+  {
+    section: 'esikatselu',
+    field: 'esikatselu',
+    koulutustyypit: KOULUTUSTYYPIT,
+  },
 ]);
 
 const getKoulutusFormConfig = koulutustyyppi => {

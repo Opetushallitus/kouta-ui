@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
-import EsikatseluControls from '#/src/components/EsikatseluControls';
+import { EsikatseluControls } from '#/src/components/EsikatseluControls';
 import FormPage from '#/src/components/FormPage';
 import OppilaitosFormSteps from '#/src/components/OppilaitosFormSteps';
 import ReduxForm from '#/src/components/ReduxForm';
@@ -129,8 +129,7 @@ const OppilaitoksenOsaPage = ({
             <EsikatseluControls
               esikatseluUrl={
                 oppilaitoksenOsa &&
-                apiUrls.url('konfo-ui.oppilaitos', organisaatioOid) +
-                  '?draft=true'
+                apiUrls.url('konfo-ui.oppilaitos', organisaatioOid)
               }
             />
           }

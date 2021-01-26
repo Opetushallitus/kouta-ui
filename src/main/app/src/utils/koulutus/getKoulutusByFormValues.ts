@@ -11,7 +11,7 @@ const osaamisalaKoodiToKoodiUri = value =>
   value ? `osaamisala_${value}` : null;
 
 const getKoulutusByFormValues = values => {
-  const { muokkaaja, tila } = values;
+  const { muokkaaja, tila, esikatselu = false } = values;
   const kielivalinta = values?.kieliversiot ?? [];
   const pickTranslations = _fp.pick(kielivalinta);
 
@@ -44,7 +44,7 @@ const getKoulutusByFormValues = values => {
         ? pickTranslations(values?.tutkinnonosat?.nimi ?? {})
         : pickTranslations(values?.information?.nimi ?? {}),
     julkinen: Boolean(values?.julkinen),
-    esikatselu: values?.esikatselu,
+    esikatselu,
     ePerusteId: maybeParseNumber(
       values?.information?.eperuste?.value || osaamisala?.eperuste?.value
     ),

@@ -138,6 +138,7 @@ exports[`createValintaperuste > should be able to create valintaperuste #0`] =
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": "1",
   "tila": "julkaistu",
+  "esikatselu": false,
   "valintakokeet": [
     {
       "metadata": {
@@ -283,6 +284,7 @@ exports[`editValintaperuste > should be able to edit valintaperuste #0`] =
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": "1",
   "tila": "tallennettu",
+  "esikatselu": false,
   "valintakokeet": [
     {
       "metadata": {

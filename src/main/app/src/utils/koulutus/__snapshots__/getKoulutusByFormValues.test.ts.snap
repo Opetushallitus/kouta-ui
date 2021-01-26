@@ -3,7 +3,7 @@
 exports[`getKoulutusByFormValues returns correct koulutus given form values 1`] = `
 Object {
   "ePerusteId": null,
-  "esikatselu": undefined,
+  "esikatselu": false,
   "johtaaTutkintoon": true,
   "julkinen": true,
   "kielivalinta": Array [

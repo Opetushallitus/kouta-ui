@@ -1,10 +1,11 @@
 import React, { useMemo, useCallback } from 'react';
 
 import _ from 'lodash';
+import _ from 'lodash';
 import qs from 'query-string';
 import { useTranslation } from 'react-i18next';
 
-import EsikatseluControls from '#/src/components/EsikatseluControls';
+import { EsikatseluControls } from '#/src/components/EsikatseluControls';
 import FormHeader from '#/src/components/FormHeader';
 import FormPage, {
   OrganisaatioRelation,

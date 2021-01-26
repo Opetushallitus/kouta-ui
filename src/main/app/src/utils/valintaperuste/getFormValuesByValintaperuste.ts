@@ -32,7 +32,7 @@ export const getFormValuesByValintaperuste = valintaperuste => {
     tila,
     sorakuvausId,
     valintakokeet,
-    esikatselu,
+    esikatselu = false,
   } = valintaperuste;
 
   const {

@@ -11,7 +11,6 @@ import { Tooltip } from '#/src/components/Tooltip';
 import { JULKAISUTILA } from '#/src/constants';
 import FormConfigSectionContext from '#/src/contexts/FormConfigSectionContext';
 import { useFieldValue, useIsDirty } from '#/src/hooks/form';
-import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 
 const Link = ({ children, ...props }) => <a {...props}>{children}</a>;
 
@@ -23,49 +22,63 @@ type EsikatseluProps = {
   esikatseluUrl?: string;
 };
 
+const withDraft = (s: string) => s + '?draft=true';
+
 export const EsikatseluControls: React.FC<EsikatseluProps> = ({
   esikatseluUrl,
 }) => {
   const { t } = useTranslation();
 
-  const isOphVirkailija = useIsOphVirkailija();
-  const esikatseluEnabled = useFieldValue('esikatselu');
   const tila = useFieldValue('tila');
-
+  const isJulkaistu = tila === JULKAISUTILA.JULKAISTU;
+  const showCheckbox = _.isNil(tila) || tila === JULKAISUTILA.TALLENNETTU;
+  const esikatseluEnabled = useFieldValue('esikatselu');
+  const showButton =
+    tila !== JULKAISUTILA.ARKISTOITU && (esikatseluEnabled || isJulkaistu);
   const isDirty = useIsDirty();
 
   const disabled =
-    isDirty || _.isNil(esikatseluUrl) || tila !== JULKAISUTILA.TALLENNETTU;
+    isDirty ||
+    !esikatseluUrl || // NOTE: url can be false or undefined
+    (tila !== JULKAISUTILA.TALLENNETTU && !isJulkaistu);
+  const tooltipKey = isJulkaistu
+    ? 'yleiset.naytaJulkaistuTooltip'
+    : 'yleiset.tallennaLuonnoksenaEsikatsellaksesi';
+  const textKey = isJulkaistu ? 'yleiset.naytaJulkaistu' : 'yleiset.esikatselu';
 
   return (
     <FormConfigSectionContext.Provider value="esikatselu">
-      {esikatseluEnabled && (
+      {showButton && (
         <Separator>
           <Tooltip
             placement="top"
             trigger={disabled ? 'hover' : []}
-            overlay={
-              <span>{t('yleiset.tallennaLuonnoksenaEsikatsellaksesi')}</span>
-            }
+            overlay={<span>{t(tooltipKey)}</span>}
             arrowContent={<div className="rc-tooltip-arrow-inner"></div>}
             overlayStyle={{
               position: 'fixed',
             }}
           >
             <Button
-              as={Link}
-              href={esikatseluUrl}
               color="primary"
               variant="outlined"
               target="_blank"
-              disabled={disabled}
+              disabled={!disabled}
+              {...(!disabled // NOTE: disabled won't prevent the link from functioning
+                ? {}
+                : {
+                    as: 'a',
+                    href: isJulkaistu
+                      ? esikatseluUrl
+                      : withDraft(esikatseluUrl!),
+                  })}
             >
-              {t('yleiset.esikatselu')}
+              {t(textKey)}
             </Button>
           </Tooltip>
         </Separator>
       )}
-      {isOphVirkailija && (
+      {showCheckbox && (
         <Separator>
           <Field name="esikatselu" component={FormFieldCheckbox}>
             {t('yleiset.salliEsikatselu')}
@@ -75,5 +88,3 @@ export const EsikatseluControls: React.FC<EsikatseluProps> = ({
     </FormConfigSectionContext.Provider>
   );
 };
-
-export default EsikatseluControls;

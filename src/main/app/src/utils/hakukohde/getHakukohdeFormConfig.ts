@@ -4,6 +4,7 @@ import _fp from 'lodash/fp';
 import {
   Alkamiskausityyppi,
   JULKAISUTILA,
+  KOULUTUSTYYPIT,
   LIITTEEN_TOIMITUSTAPA,
 } from '#/src/constants';
 import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
@@ -236,6 +237,11 @@ const config = createFormConfigBuilder().registerSections([
           t: 'yleiset.valintaperuste',
         },
       ])(eb.validateExistence('tila'), values),
+  },
+  {
+    section: 'esikatselu',
+    field: 'esikatselu',
+    koulutustyypit: KOULUTUSTYYPIT,
   },
 ]);
 

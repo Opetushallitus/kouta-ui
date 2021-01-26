@@ -482,11 +482,6 @@ const config = createFormConfigBuilder().registerSections([
     koulutustyypit: KOULUTUSTYYPIT,
   },
   {
-    section: 'esikatselu',
-    field: 'esikatselu',
-    koulutustyypit: KOULUTUSTYYPIT,
-  },
-  {
     koulutustyypit: KOULUTUSTYYPIT,
     section: 'tila',
     field: 'tila',

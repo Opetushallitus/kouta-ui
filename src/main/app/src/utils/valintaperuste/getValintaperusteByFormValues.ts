@@ -61,7 +61,7 @@ const serializeSisalto = (sisalto, kielivalinta = []) => {
 };
 
 export const getValintaperusteByFormValues = values => {
-  const { tila, muokkaaja, perustiedot, esikatselu } = values;
+  const { tila, muokkaaja, perustiedot, esikatselu = false } = values;
 
   const hakutapaKoodiUri = perustiedot?.hakutapa;
   const kielivalinta = perustiedot?.kieliversiot ?? [];

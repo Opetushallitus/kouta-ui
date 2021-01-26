@@ -4,6 +4,7 @@ exports[`getHakukohdeByFormValues returns correct hakukohde given form values 1`
 Object {
   "aloituspaikat": 45,
   "ensikertalaisenAloituspaikat": 29,
+  "esikatselu": false,
   "hakuajat": Array [
     Object {
       "alkaa": "2019-04-17T05:52",

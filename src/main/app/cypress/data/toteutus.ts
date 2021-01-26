@@ -6,6 +6,7 @@ const getBaseFields = () => ({
   oid: '1.2.246.562.17.00000000000000000026',
   koulutusOid: '1.2.246.562.13.00000000000000000041',
   tila: 'tallennettu',
+  esikatselu: false,
   tarjoajat: ['1.2.246.562.10.74534804344'],
   nimi: { fi: 'Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja' },
   metadata: {

@@ -81,10 +81,9 @@ type FormPageProps = {
   header?: React.ReactNode;
   steps?: React.ReactNode;
   footer?: React.ReactNode;
-  draftUrl?: string;
   hasFooterHomeLink?: boolean;
   readOnly?: boolean;
-  esikatseluControls?: any; // TODO: What is this type
+  esikatseluControls?: React.ReactNode;
 };
 
 const FormPage: React.FC<FormPageProps> = ({
@@ -92,7 +91,6 @@ const FormPage: React.FC<FormPageProps> = ({
   steps = null,
   children = null,
   footer = null,
-  draftUrl = null,
   hasFooterHomeLink = true,
   readOnly = false,
   esikatseluControls,
@@ -132,7 +130,7 @@ const FormPage: React.FC<FormPageProps> = ({
                     {t('yleiset.etusivulle')}
                   </Button>
                 ) : null}
-                {esikatseluControls ? esikatseluControls : undefined}
+                {esikatseluControls}
               </Buttons>
               <FooterActions>{footer}</FooterActions>
             </FooterWrapper>

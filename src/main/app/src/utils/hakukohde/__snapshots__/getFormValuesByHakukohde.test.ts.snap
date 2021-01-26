@@ -17,6 +17,7 @@ Object {
     "aloituspaikkamaara": "35",
     "ensikertalaismaara": "39",
   },
+  "esikatselu": false,
   "hakuajat": Object {
     "eriHakuaika": true,
     "hakuajat": Array [

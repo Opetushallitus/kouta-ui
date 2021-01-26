@@ -2,6 +2,7 @@
 
 exports[`getOppilaitoksenOsaByFormValues returns correct oppilaitoksen osa given form values 1`] = `
 Object {
+  "esikatselu": false,
   "kielivalinta": Array [
     "fi",
     "sv",

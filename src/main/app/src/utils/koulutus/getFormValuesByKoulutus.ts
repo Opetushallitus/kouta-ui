@@ -16,7 +16,7 @@ export const getFormValuesByKoulutus = koulutus => {
     metadata = {},
     nimi = {},
     julkinen = false,
-    esikatselu = true,
+    esikatselu = false,
     tila,
     teemakuva,
     ePerusteId,

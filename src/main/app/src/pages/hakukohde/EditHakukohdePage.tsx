@@ -23,6 +23,9 @@ import { useHakukohdeByOid } from '#/src/utils/hakukohde/getHakukohdeByOid';
 import { useHakukohdePageData } from './getHakukohdePageData';
 import { HakukohdeFooter } from './HakukohdeFooter';
 import HakukohdeForm from './HakukohdeForm';
+// TODO: how to show non-published haut in konfo?
+// import { useUrls } from '#/src/contexts/contextHooks';
+// import { EsikatseluControls } from '#/src/components/EsikatseluControls';
 
 const EditHakukohdePage = props => {
   const {
@@ -30,6 +33,7 @@ const EditHakukohdePage = props => {
       params: { organisaatioOid, oid },
     },
   } = props;
+  // const apiUrls = useUrls();
 
   const { data: hakukohde, isFetching: hakukohdeLoading } = useHakukohdeByOid(
     oid
@@ -87,6 +91,15 @@ const EditHakukohdePage = props => {
               canUpdate={canUpdate}
             />
           }
+          // TODO: how to show non-published haut in konfo?
+          // esikatseluControls={
+          //   <EsikatseluControls
+          //     esikatseluUrl={apiUrls.url(
+          //       'konfo-ui.toteutus',
+          //       hakukohde?.toteutusOid
+          //     )}
+          //   />
+          // }
         >
           <>
             <RelationInfoContainer>

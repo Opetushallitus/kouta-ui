@@ -17,15 +17,12 @@ const prepareTest = tyyppi => {
     organisaatioOid,
   };
 
-  cy.server();
-
   stubValintaperusteFormRoutes({ organisaatioOid });
 
-  cy.route({
-    method: 'GET',
-    url: `**/valintaperuste/${valintaperusteId}`,
-    response: merge(valintaperuste({ tyyppi }), testValintaperusteFields),
-  });
+  cy.intercept(
+    { method: 'GET', url: `**/valintaperuste/${valintaperusteId}` },
+    { body: merge(valintaperuste({ tyyppi }), testValintaperusteFields) }
+  );
 
   cy.visit(
     `/organisaatio/${organisaatioOid}/valintaperusteet/${valintaperusteId}/muokkaus`
@@ -35,13 +32,14 @@ const prepareTest = tyyppi => {
 export const editValintaperusteForm = () => {
   it('should be able to edit valintaperuste', () => {
     prepareTest('amm');
-    cy.route({
-      method: 'POST',
-      url: '**/valintaperuste',
-      response: {
-        muokattu: false,
-      },
-    }).as('updateValintaperusteRequest');
+    cy.intercept(
+      { method: 'POST', url: '**/valintaperuste' },
+      {
+        body: {
+          muokattu: false,
+        },
+      }
+    ).as('updateValintaperusteRequest');
 
     getByTestId('postinumero').contains('00350');
 

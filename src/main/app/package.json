@@ -62,13 +62,14 @@
     "eject": "craco eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "NODE_ENV=development build-storybook -c .storybook -o build/storybook --quiet",
-    "format": "prettier --write './src/**/*.{js,jsx,ts,tsx}' './cypress/**/*.{js,jsx,ts,tsx}'",
+    "lint:fix": "eslint --fix './src/**/*.{js,jsx,ts,tsx}' './cypress/**/*.{js,jsx,ts,tsx}'",
     "cypress:run": "NODE_OPTIONS=\"--max-http-header-size=8000000\" cypress run -b chrome",
     "cypress:run:headless": "npm run cypress:run -- --headless",
     "cypress:open": "cross-env NODE_OPTIONS=\"--max-http-header-size=8000000\" cypress open -b chrome",
     "test:integration": "START_SERVER_AND_TEST_INSECURE=1 start-server-and-test start:integration https://localhost:3000 'npm run cypress:run:headless'",
     "test:ci": "CI=true npm run test && npm run test:integration",
-    "update-mocks": "node ./node_modules/kto-ui-common/scripts/update-mocks.js"
+    "update-mocks": "node ./node_modules/kto-ui-common/scripts/update-mocks.js",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "browserslist": [
     ">0.2%",
@@ -142,6 +143,7 @@
     "react-is": "^16.13.1",
     "react-scripts": "^4.0.1",
     "react-test-renderer": "^17.0.1",
+    "source-map-explorer": "^2.5.2",
     "start-server-and-test": "^1.11.6",
     "ts-loader": "^8.0.12",
     "typescript": "^4.1.3"

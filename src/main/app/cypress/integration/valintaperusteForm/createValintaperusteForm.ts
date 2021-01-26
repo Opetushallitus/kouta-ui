@@ -143,30 +143,31 @@ export const createValintaperusteForm = () => {
   const createdValintaperusteId = '1.2.3.4.5.6';
 
   beforeEach(() => {
-    cy.server();
     stubValintaperusteFormRoutes({ organisaatioOid });
 
     cy.visit(`/organisaatio/${organisaatioOid}/valintaperusteet/kielivalinnat`);
   });
 
   it('should be able to create valintaperuste', () => {
-    cy.route({
-      method: 'GET',
-      url: `**/valintaperuste/${createdValintaperusteId}`,
-      response: [
-        merge(valintaperuste(), {
-          oid: createdValintaperusteId,
-        }),
-      ],
-    });
+    cy.intercept(
+      { method: 'GET', url: `**/valintaperuste/${createdValintaperusteId}` },
+      {
+        body: [
+          merge(valintaperuste(), {
+            oid: createdValintaperusteId,
+          }),
+        ],
+      }
+    );
 
-    cy.route({
-      method: 'PUT',
-      url: '**/valintaperuste',
-      response: {
-        id: createdValintaperusteId,
-      },
-    }).as('createValintaperusteRequest');
+    cy.intercept(
+      { method: 'PUT', url: '**/valintaperuste' },
+      {
+        body: {
+          id: createdValintaperusteId,
+        },
+      }
+    ).as('createValintaperusteRequest');
 
     fillPerustiedotSection();
     fillPohjaSection();

@@ -46,29 +46,30 @@ export const createSoraKuvausForm = () => {
   const soraKuvaus = createSoraKuvaus();
 
   beforeEach(() => {
-    cy.server();
     playMockFile('soraKuvaus.mock.json');
     stubSoraKuvausFormRoutes({ organisaatioOid });
 
-    cy.route({
-      method: 'GET',
-      url: `**/sorakuvaus/${soraKuvaus.id}`,
-      response: _.merge({}, soraKuvaus, {
-        organisaatioOid,
-      }),
-    });
+    cy.intercept(
+      { method: 'GET', url: `**/sorakuvaus/${soraKuvaus.id}` },
+      {
+        body: _.merge({}, soraKuvaus, {
+          organisaatioOid,
+        }),
+      }
+    );
 
     cy.visit(`/organisaatio/${organisaatioOid}/sora-kuvaus/kielivalinnat/`);
   });
 
   it('should be able to create sora-kuvaus', () => {
-    cy.route({
-      method: 'PUT',
-      url: '**/sorakuvaus',
-      response: {
-        id: soraKuvaus.id,
-      },
-    }).as('createSoraKuvausRequest');
+    cy.intercept(
+      { method: 'PUT', url: '**/sorakuvaus' },
+      {
+        body: {
+          id: soraKuvaus.id,
+        },
+      }
+    ).as('createSoraKuvausRequest');
 
     fillKoulutustyyppiSection();
     fillPohjaSection();

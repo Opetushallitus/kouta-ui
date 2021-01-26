@@ -17,27 +17,19 @@ const prepareTest = tyyppi => {
     tarjoajat: ['1.1.1.1.1.1', '1.2.1.1.1.1'],
   };
 
-  cy.server();
-
   stubKoulutusFormRoutes({ organisaatioOid });
 
-  cy.route({
-    method: 'GET',
-    url: `**/koulutus/${koulutusOid}/toteutukset`,
-    response: [],
-  });
+  cy.intercept(
+    { method: 'GET', url: `**/koulutus/${koulutusOid}/toteutukset` },
+    { body: [] }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: `**/toteutus/list**`,
-    response: [],
-  });
+  cy.intercept({ method: 'GET', url: `**/toteutus/list**` }, { body: [] });
 
-  cy.route({
-    method: 'GET',
-    url: `**/koulutus/${koulutusOid}`,
-    response: _fp.merge(koulutus({ tyyppi }), testKoulutusFields),
-  });
+  cy.intercept(
+    { method: 'GET', url: `**/koulutus/${koulutusOid}` },
+    { body: _fp.merge(koulutus({ tyyppi }), testKoulutusFields) }
+  );
 
   cy.visit(`/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`);
 };
@@ -45,13 +37,14 @@ const prepareTest = tyyppi => {
 export const editKoulutusForm = () => {
   it('should be able to edit ammatillinen koulutus', () => {
     prepareTest('amm');
-    cy.route({
-      method: 'POST',
-      url: '**/koulutus',
-      response: {
-        oid: '1.2.3.4.5.6',
-      },
-    }).as('updateAmmKoulutusResponse');
+    cy.intercept(
+      { method: 'POST', url: '**/koulutus' },
+      {
+        body: {
+          oid: '1.2.3.4.5.6',
+        },
+      }
+    ).as('updateAmmKoulutusResponse');
 
     fillKieliversiotSection();
     tallenna();
@@ -63,13 +56,14 @@ export const editKoulutusForm = () => {
 
   it('should be able to edit AMK-koulutus', () => {
     prepareTest('amk');
-    cy.route({
-      method: 'POST',
-      url: '**/koulutus',
-      response: {
-        muokattu: false,
-      },
-    }).as('updateAmkKoulutusResponse');
+    cy.intercept(
+      { method: 'POST', url: '**/koulutus' },
+      {
+        body: {
+          muokattu: false,
+        },
+      }
+    ).as('updateAmkKoulutusResponse');
 
     fillKieliversiotSection();
     tallenna();
@@ -81,13 +75,14 @@ export const editKoulutusForm = () => {
 
   it('should be able to edit lukiokoulutus', () => {
     prepareTest('lk');
-    cy.route({
-      method: 'POST',
-      url: '**/koulutus',
-      response: {
-        muokattu: false,
-      },
-    }).as('updateLkKoulutusResponse');
+    cy.intercept(
+      { method: 'POST', url: '**/koulutus' },
+      {
+        body: {
+          muokattu: false,
+        },
+      }
+    ).as('updateLkKoulutusResponse');
 
     fillKieliversiotSection();
     tallenna();

@@ -58,19 +58,20 @@ export const fillAsyncSelect = (input, match = null) => {
 };
 
 export const stubKoodistoRoute = ({ koodisto: koodistonNimi }) => {
-  cy.route({
-    method: 'GET',
-    url: `**/koodisto-service/rest/json/${koodistonNimi}/koodi**`,
-    response: koodisto({ koodisto: koodistonNimi }),
-  });
+  cy.intercept(
+    {
+      method: 'GET',
+      url: `/koodisto-service/rest/json/${koodistonNimi}/koodi`,
+    },
+    { body: koodisto({ koodisto: koodistonNimi }) }
+  );
 };
 
 export const stubLokalisaatioRoute = () => {
-  cy.route({
-    method: 'GET',
-    url: '**/lokalisointi/cxf/rest/v1/localisation**',
-    response: [],
-  });
+  cy.intercept(
+    { method: 'GET', url: '/lokalisointi/cxf/rest/v1/localisation' },
+    { body: [] }
+  );
 };
 
 export const typeToEditor = value => {
@@ -121,61 +122,60 @@ export const fillYhteyshenkilotFields = () => {
 };
 
 export const stubKayttoOikeusMeRoute = ({ user = {} } = {}) => {
-  cy.route({
-    method: 'GET',
-    url: '**/kayttooikeus-service/cas/me',
-    response: {
-      uid: 'johndoe',
-      oid: '1.2.246.562.24.62301161440',
-      firstName: 'John',
-      lastName: 'Doe',
-      lang: 'fi',
-      roles: JSON.stringify([
-        'APP_KOUTA',
-        'APP_KOUTA_OPHPAAKAYTTAJA',
-        'APP_KOUTA_OPHPAAKAYTTAJA_1.2.246.562.10.00000000001',
-      ]),
-      ...user,
-    },
-  });
+  cy.intercept(
+    { method: 'GET', url: '/kayttooikeus-service/cas/me' },
+    {
+      body: {
+        uid: 'johndoe',
+        oid: '1.2.246.562.24.62301161440',
+        firstName: 'John',
+        lastName: 'Doe',
+        lang: 'fi',
+        roles: JSON.stringify([
+          'APP_KOUTA',
+          'APP_KOUTA_OPHPAAKAYTTAJA',
+          'APP_KOUTA_OPHPAAKAYTTAJA_1.2.246.562.10.00000000001',
+        ]),
+        ...user,
+      },
+    }
+  );
 };
 
 export const stubKoutaBackendLoginRoute = () => {
-  cy.route({
-    method: 'GET',
-    url: '**/kouta-backend/auth/login',
-    response: {},
-  });
+  cy.intercept(
+    { method: 'GET', url: '/kouta-backend/auth/login' },
+    { body: {} }
+  );
 };
 
 export const stubKoutaBackendSessionRoute = () => {
-  cy.route({
-    method: 'GET',
-    url: '**/kouta-backend/auth/session',
-    response: {},
-  });
+  cy.intercept(
+    { method: 'GET', url: '/kouta-backend/auth/session' },
+    { body: {} }
+  );
 };
 
 export const stubHakemuspalveluLomakkeetRoute = ({
   lomakkeet = [{ name: { fi: 'Lomake 1' }, key: 'lomake_1' }],
 } = {}) => {
-  cy.route({
-    method: 'GET',
-    url: '**/lomake-editori/api/forms',
-    response: {
-      forms: lomakkeet,
-    },
-  });
+  cy.intercept(
+    { method: 'GET', url: '/lomake-editori/api/forms' },
+    {
+      body: {
+        forms: lomakkeet,
+      },
+    }
+  );
 };
 
 export const stubOppijanumerorekisteriHenkiloRoute = ({
   henkilo = { etunimet: 'John', sukunimi: 'Doe' },
 } = {}) => {
-  cy.route({
-    method: 'GET',
-    url: '**/oppijanumerorekisteri-service/henkilo/**',
-    response: henkilo,
-  });
+  cy.intercept(
+    { method: 'GET', url: '/oppijanumerorekisteri-service/henkilo/' },
+    { body: henkilo }
+  );
 };
 
 export const fillTreeSelect = value => {
@@ -191,20 +191,24 @@ export const fillDatePickerInput = value => {
 export const stubKoodiRoute = koodi => {
   const { koodiUri, versio } = koodi;
 
-  return cy.route({
-    method: 'GET',
-    url: `/koodisto-service/rest/codeelement/${koodiUri}/${versio}`,
-    response: koodi,
-  });
+  return cy.intercept(
+    {
+      method: 'GET',
+      url: `/koodisto-service/rest/codeelement/${koodiUri}/${versio}`,
+    },
+    { body: koodi }
+  );
 };
 
 export const stubEPerusteetByKoulutuskoodiRoute = () => {
-  cy.route({
-    method: 'GET',
-    url:
-      '**/eperusteet-service/api/perusteet?tuleva=true&siirtyma=false&voimassaolo=true&poistunut=false&kieli=fi&koulutuskoodi=koulutus_351107*',
-    response: ePerusteByKoulutusKoodi351107,
-  });
+  cy.intercept(
+    {
+      method: 'GET',
+      url:
+        '/eperusteet-service/api/perusteet?tuleva=true&siirtyma=false&voimassaolo=true&poistunut=false&kieli=fi&koulutuskoodi=koulutus_351107',
+    },
+    { body: ePerusteByKoulutusKoodi351107 }
+  );
 };
 
 export const stubCommonRoutes = () => {
@@ -304,12 +308,14 @@ export const fillPohjaSection = () => {
 };
 
 export const stubKoodistoOpintojenLaajuusYksikko = () => {
-  cy.route({
-    method: 'GET',
-    url:
-      '**/koodisto-service/rest/json/opintojenlaajuusyksikko/koodi?onlyValidKoodis=true&koodistoVersio=',
-    response: koodistoOpintojenLaajuusYksikko,
-  });
+  cy.intercept(
+    {
+      method: 'GET',
+      url:
+        '/koodisto-service/rest/json/opintojenlaajuusyksikko/koodi?onlyValidKoodis=true&koodistoVersio=',
+    },
+    { body: koodistoOpintojenLaajuusYksikko }
+  );
 };
 
 export const fillTilaSection = (tila = 'julkaistu') => {

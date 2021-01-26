@@ -69,26 +69,25 @@ export const createKoulutusForm = () => {
   const koulutusOid = '1.2.3.4.5';
 
   beforeEach(() => {
-    cy.server();
     stubKoulutusFormRoutes({ organisaatioOid });
 
-    cy.route({
-      method: 'GET',
-      url: `**/koulutus/${koulutusOid}`,
-      response: [],
-    });
+    cy.intercept(
+      { method: 'GET', url: `**/koulutus/${koulutusOid}` },
+      { body: [] }
+    );
 
     cy.visit(`/organisaatio/${organisaatioOid}/koulutus?johtaaTutkintoon=true`);
   });
 
   it('should be able to create ammatillinen koulutus', () => {
-    cy.route({
-      method: 'PUT',
-      url: '**/koulutus',
-      response: {
-        oid: koulutusOid,
-      },
-    }).as('createAmmKoulutusResponse');
+    cy.intercept(
+      { method: 'PUT', url: '**/koulutus' },
+      {
+        body: {
+          oid: koulutusOid,
+        },
+      }
+    ).as('createAmmKoulutusResponse');
 
     fillCommon({ koulutustyyppiPath: ['amm'] });
 
@@ -128,13 +127,14 @@ export const createKoulutusForm = () => {
   });
 
   it('should be able to create ammatillinen osaamisala koulutus', () => {
-    cy.route({
-      method: 'PUT',
-      url: '**/koulutus',
-      response: {
-        oid: koulutusOid,
-      },
-    }).as('createAmmKoulutusResponse');
+    cy.intercept(
+      { method: 'PUT', url: '**/koulutus' },
+      {
+        body: {
+          oid: koulutusOid,
+        },
+      }
+    ).as('createAmmKoulutusResponse');
 
     fillCommon({ koulutustyyppiPath: ['ammatillinen', 'amm-osaamisala'] });
 
@@ -186,13 +186,14 @@ export const createKoulutusForm = () => {
   });
 
   it('should be able to create ammatillinen tutkinnon osa koulutus', () => {
-    cy.route({
-      method: 'PUT',
-      url: '**/koulutus',
-      response: {
-        oid: koulutusOid,
-      },
-    }).as('createAmmKoulutusResponse');
+    cy.intercept(
+      { method: 'PUT', url: '**/koulutus' },
+      {
+        body: {
+          oid: koulutusOid,
+        },
+      }
+    ).as('createAmmKoulutusResponse');
 
     fillCommon({ koulutustyyppiPath: ['ammatillinen', 'amm-tutkinnon-osa'] });
 
@@ -262,13 +263,14 @@ export const createKoulutusForm = () => {
   });
 
   it('should be able to create AMK-koulutus', () => {
-    cy.route({
-      method: 'PUT',
-      url: '**/koulutus',
-      response: {
-        oid: koulutusOid,
-      },
-    }).as('createAmkKoulutusResponse');
+    cy.intercept(
+      { method: 'PUT', url: '**/koulutus' },
+      {
+        body: {
+          oid: koulutusOid,
+        },
+      }
+    ).as('createAmkKoulutusResponse');
 
     fillCommon({ koulutustyyppiPath: ['korkeakoulutus', 'amk'] });
 
@@ -332,13 +334,14 @@ export const createKoulutusForm = () => {
   });
 
   it('should be able to create lukiokoulutus', () => {
-    cy.route({
-      method: 'PUT',
-      url: '**/koulutus',
-      response: {
-        oid: koulutusOid,
-      },
-    }).as('createLkKoulutusResponse');
+    cy.intercept(
+      { method: 'PUT', url: '**/koulutus' },
+      {
+        body: {
+          oid: koulutusOid,
+        },
+      }
+    ).as('createLkKoulutusResponse');
 
     fillCommon({ koulutustyyppiPath: ['lk'] });
 

@@ -15,19 +15,25 @@ export const stubOppilaitosFormRoutes = ({ organisaatioOid }) => {
 
   stubKoodistoRoute({ koodisto: 'organisaationkuvaustiedot' });
 
-  cy.route({
-    method: 'POST',
-    url: '**/organisaatio-service/rest/organisaatio/v4/findbyoids',
-    response: [
-      merge(createOrganisaatio(), {
-        oid: organisaatioOid,
-      }),
-    ],
-  });
+  cy.intercept(
+    {
+      method: 'POST',
+      url: '**/organisaatio-service/rest/organisaatio/v4/findbyoids',
+    },
+    {
+      body: [
+        merge(createOrganisaatio(), {
+          oid: organisaatioOid,
+        }),
+      ],
+    }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: `**/organisaatio-service/rest/organisaatio/v4/hierarkia/hae?oid=${organisaatioOid}**`,
-    response: createOrganisaatioHierarkia({ rootOid: organisaatioOid }),
-  });
+  cy.intercept(
+    {
+      method: 'GET',
+      url: `**/organisaatio-service/rest/organisaatio/v4/hierarkia/hae?oid=${organisaatioOid}**`,
+    },
+    { body: createOrganisaatioHierarkia({ rootOid: organisaatioOid }) }
+  );
 };

@@ -13,51 +13,60 @@ export const stubValintaperusteFormRoutes = ({ organisaatioOid }) => {
   playMockFile('valintaperuste.mock.json');
   stubCommonRoutes();
 
-  cy.route({
-    method: 'GET',
-    url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
-    response: merge(organisaatio(), {
-      oid: organisaatioOid,
-    }),
-  });
-
-  cy.route({
-    method: 'POST',
-    url: '**/organisaatio-service/rest/organisaatio/v4/findbyoids',
-    response: [
-      merge(organisaatio(), {
+  cy.intercept(
+    {
+      method: 'GET',
+      url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
+    },
+    {
+      body: merge(organisaatio(), {
         oid: organisaatioOid,
       }),
-    ],
-  });
+    }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: '**/valintaperuste/list**',
-    response: [],
-  });
+  cy.intercept(
+    {
+      method: 'POST',
+      url: '**/organisaatio-service/rest/organisaatio/v4/findbyoids',
+    },
+    {
+      body: [
+        merge(organisaatio(), {
+          oid: organisaatioOid,
+        }),
+      ],
+    }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: '**/sorakuvaus/list**',
-    response: [...new Array(10)].map((v, i) =>
-      merge(soraKuvaus(), {
-        nimi: { fi: `Sora-kuvaus ${i}` },
-        id: i.toString(),
+  cy.intercept(
+    { method: 'GET', url: '**/valintaperuste/list**' },
+    { body: [] }
+  );
+
+  cy.intercept(
+    { method: 'GET', url: '**/sorakuvaus/list**' },
+    {
+      body: [...new Array(10)].map((v, i) =>
+        merge(soraKuvaus(), {
+          nimi: { fi: `Sora-kuvaus ${i}` },
+          id: i.toString(),
+          tila: 'julkaistu',
+        })
+      ),
+    }
+  );
+
+  cy.intercept(
+    { method: 'GET', url: '**/sorakuvaus/1' },
+    {
+      body: merge(soraKuvaus(), {
+        nimi: { fi: `Sora-kuvaus 1` },
+        id: 1,
         tila: 'julkaistu',
-      })
-    ),
-  });
-
-  cy.route({
-    method: 'GET',
-    url: '**/sorakuvaus/1',
-    response: merge(soraKuvaus(), {
-      nimi: { fi: `Sora-kuvaus 1` },
-      id: 1,
-      tila: 'julkaistu',
-    }),
-  });
+      }),
+    }
+  );
 
   stubOppijanumerorekisteriHenkiloRoute();
 };

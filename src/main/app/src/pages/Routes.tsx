@@ -21,6 +21,42 @@ import OppilaitosPage from './OppilaitosPage';
 import OppilaitoksenOsaPage from './OppilaitoksenOsaPage';
 import { createRedirectEntityPage } from './RedirectEntityPage';
 
+const RedirectKoulutusPage = createRedirectEntityPage({
+  entityType: ENTITY.KOULUTUS,
+  getRedirectUrl: ({ organisaatioOid, oid }) =>
+    `/organisaatio/${organisaatioOid}/koulutus/${oid}/muokkaus`,
+});
+
+const RedirectToteutusPage = createRedirectEntityPage({
+  entityType: ENTITY.TOTEUTUS,
+  getRedirectUrl: ({ organisaatioOid, oid }) =>
+    `/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`,
+});
+
+const RedirectHakuPage = createRedirectEntityPage({
+  entityType: ENTITY.HAKU,
+  getRedirectUrl: ({ organisaatioOid, oid }) =>
+    `/organisaatio/${organisaatioOid}/haku/${oid}/muokkaus`,
+});
+
+const RedirectHakukohdePage = createRedirectEntityPage({
+  entityType: ENTITY.HAKUKOHDE,
+  getRedirectUrl: ({ organisaatioOid, oid }) =>
+    `/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`,
+});
+
+const RedirectValintaperustePage = createRedirectEntityPage({
+  entityType: ENTITY.VALINTAPERUSTE,
+  getRedirectUrl: ({ organisaatioOid, oid }) =>
+    `/organisaatio/${organisaatioOid}/valintaperusteet/${oid}/muokkaus`,
+});
+
+const RedirectSoraKuvausPage = createRedirectEntityPage({
+  entityType: ENTITY.SORA_KUVAUS,
+  getRedirectUrl: ({ organisaatioOid, oid }) =>
+    `/organisaatio/${organisaatioOid}/sora-kuvaus/${oid}/muokkaus`,
+});
+
 const Routes = ({ history }) => {
   return (
     <Router history={history}>
@@ -47,11 +83,7 @@ const Routes = ({ history }) => {
           />
           <Route
             path={['/koulutus/:oid', '/koulutus/:oid/muokkaus']}
-            component={createRedirectEntityPage({
-              entityType: ENTITY.KOULUTUS,
-              getRedirectUrl: ({ organisaatioOid, oid }) =>
-                `/organisaatio/${organisaatioOid}/koulutus/${oid}/muokkaus`,
-            })}
+            component={RedirectKoulutusPage}
             exact
           />
 
@@ -67,11 +99,7 @@ const Routes = ({ history }) => {
           />
           <Route
             path={['/toteutus/:oid', '/toteutus/:oid/muokkaus']}
-            component={createRedirectEntityPage({
-              entityType: ENTITY.TOTEUTUS,
-              getRedirectUrl: ({ organisaatioOid, oid }) =>
-                `/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`,
-            })}
+            component={RedirectToteutusPage}
             exact
           />
 
@@ -87,11 +115,7 @@ const Routes = ({ history }) => {
           />
           <Route
             path={['/haku/:oid', '/haku/:oid/muokkaus']}
-            component={createRedirectEntityPage({
-              entityType: ENTITY.HAKU,
-              getRedirectUrl: ({ organisaatioOid, oid }) =>
-                `/organisaatio/${organisaatioOid}/haku/${oid}/muokkaus`,
-            })}
+            component={RedirectHakuPage}
             exact
           />
 
@@ -107,11 +131,7 @@ const Routes = ({ history }) => {
           />
           <Route
             path={['/hakukohde/:oid', '/hakukohde/:oid/muokkaus']}
-            component={createRedirectEntityPage({
-              entityType: ENTITY.HAKUKOHDE,
-              getRedirectUrl: ({ organisaatioOid, oid }) =>
-                `/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`,
-            })}
+            component={RedirectHakukohdePage}
             exact
           />
 
@@ -127,11 +147,7 @@ const Routes = ({ history }) => {
           />
           <Route
             path={['/valintaperusteet/:oid', '/valintaperusteet/:oid/muokkaus']}
-            component={createRedirectEntityPage({
-              entityType: ENTITY.VALINTAPERUSTE,
-              getRedirectUrl: ({ organisaatioOid, oid }) =>
-                `/organisaatio/${organisaatioOid}/valintaperusteet/${oid}/muokkaus`,
-            })}
+            component={RedirectValintaperustePage}
             exact
           />
 
@@ -148,11 +164,7 @@ const Routes = ({ history }) => {
 
           <Route
             path={['/sora-kuvaus/:oid', '/sora-kuvaus/:oid/muokkaus']}
-            component={createRedirectEntityPage({
-              entityType: ENTITY.SORA_KUVAUS,
-              getRedirectUrl: ({ organisaatioOid, oid }) =>
-                `/organisaatio/${organisaatioOid}/sora-kuvaus/${oid}/muokkaus`,
-            })}
+            component={RedirectSoraKuvausPage}
             exact
           />
 

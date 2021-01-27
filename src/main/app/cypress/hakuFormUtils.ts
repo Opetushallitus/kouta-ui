@@ -1,6 +1,7 @@
 import { merge } from 'lodash';
 
-import { playMockFile } from 'kto-ui-common/cypress/mockUtils';
+import { playMocks } from 'kto-ui-common/cypress/mockUtils';
+import hakuMocks from '#/cypress/mocks/haku.mocks.json';
 import createKoodisto from '#/cypress/data/koodisto';
 
 import organisaatio from '#/cypress/data/organisaatio';
@@ -17,7 +18,7 @@ import {
 
 export const stubHakuFormRoutes = ({ organisaatioOid }) => {
   stubCommonRoutes();
-  playMockFile('haku.mocks.json');
+  playMocks(hakuMocks);
 
   cy.intercept(
     {

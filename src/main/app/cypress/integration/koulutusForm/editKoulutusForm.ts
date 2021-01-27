@@ -1,5 +1,6 @@
 import _fp from 'lodash/fp';
-import { playMockFile } from 'kto-ui-common/cypress/mockUtils';
+import { playMocks } from 'kto-ui-common/cypress/mockUtils';
+import koulutusMocks from '#/cypress/mocks/koulutus.mocks.json';
 import {
   fillKieliversiotSection,
   tallenna,
@@ -35,7 +36,7 @@ const prepareTest = tyyppi => {
 
 export const editKoulutusForm = () => {
   beforeEach(() => {
-    playMockFile('koulutus.mocks.json');
+    playMocks(koulutusMocks);
   });
 
   it('should be able to edit ammatillinen koulutus', () => {

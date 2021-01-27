@@ -137,7 +137,7 @@
     "http-proxy-middleware": "^1.0.6",
     "husky": "^4.3.6",
     "jest-styled-components": "^6.3.4",
-    "kto-ui-common": "github:opetushallitus/kto-ui-common#aa6b3376ef6b3b24cf9ada72649cded480a823b5",
+    "kto-ui-common": "github:opetushallitus/kto-ui-common#ee04b5aacac1a8a56a1bb56091f3819d5d7b95fb",
     "lint-staged": "^10.5.3",
     "prettier": "^2.2.1",
     "react-is": "^16.13.1",

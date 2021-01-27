@@ -1,5 +1,6 @@
 import _fp from 'lodash/fp';
-import { playMockFile } from 'kto-ui-common/cypress/mockUtils';
+import { playMocks } from 'kto-ui-common/cypress/mockUtils';
+import toteutusMocks from '#/cypress/mocks/toteutus.mocks.json';
 
 import {
   getRadio,
@@ -232,7 +233,7 @@ const prepareTest = tyyppi => {
     tila: 'julkaistu',
   };
 
-  playMockFile('toteutus.mocks.json');
+  playMocks(toteutusMocks);
   stubToteutusFormRoutes({ perusteId, organisaatioOid });
   cy.intercept(
     { method: 'GET', url: `**/koulutus/${koulutusOid}` },

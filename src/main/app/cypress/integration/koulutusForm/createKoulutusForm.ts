@@ -1,4 +1,5 @@
-import { playMockFile } from 'kto-ui-common/cypress/mockUtils';
+import { playMocks } from 'kto-ui-common/cypress/mockUtils';
+import koulutusMocks from '#/cypress/mocks/koulutus.mocks.json';
 
 import {
   getSelectOption,
@@ -71,7 +72,7 @@ export const createKoulutusForm = () => {
   const koulutusOid = '1.2.3.4.5';
   beforeEach(() => {
     stubKoulutusFormRoutes({ organisaatioOid });
-    playMockFile('koulutus.mocks.json');
+    playMocks(koulutusMocks);
 
     cy.intercept(
       { method: 'GET', url: `**/koulutus/${koulutusOid}` },

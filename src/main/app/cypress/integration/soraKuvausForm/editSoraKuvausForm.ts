@@ -1,5 +1,6 @@
 import _ from 'lodash';
-import { playMockFile } from 'kto-ui-common/cypress/mockUtils';
+import { playMocks } from 'kto-ui-common/cypress/mockUtils';
+import soraKuvausMocks from '#/cypress/mocks/soraKuvaus.mock.json';
 import createSoraKuvaus from '#/cypress/data/soraKuvaus';
 import { stubSoraKuvausFormRoutes } from '#/cypress/soraKuvausFormUtils';
 import {
@@ -15,7 +16,7 @@ export const editSoraKuvausForm = () => {
   const soraKuvaus = createSoraKuvaus({ id: soraKuvausId });
 
   beforeEach(() => {
-    playMockFile('soraKuvaus.mock.json');
+    playMocks(soraKuvausMocks);
     stubSoraKuvausFormRoutes({ organisaatioOid });
 
     cy.intercept(

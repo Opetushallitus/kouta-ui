@@ -15,10 +15,8 @@ export const getEPerusteSisalto = async ({
   }
 };
 
-export const useEPerusteSisalto = props =>
-  useApiQuery(
-    'getEPerusteSisalto',
-    props,
-    getEPerusteSisalto,
-    LONG_CACHE_QUERY_OPTIONS
-  );
+export const useEPerusteSisalto = ({ ePerusteId }) =>
+  useApiQuery('getEPerusteSisalto', { ePerusteId }, getEPerusteSisalto, {
+    enabled: Boolean(ePerusteId),
+    ...LONG_CACHE_QUERY_OPTIONS,
+  });

@@ -15,11 +15,14 @@ export const getEPerusteTutkinnonOsat = async ({
   }
 };
 
-export const useEPerusteTutkinnonOsat = props => {
+export const useEPerusteTutkinnonOsat = ({ ePerusteId }) => {
   return useApiQuery(
     'getTutkinnonOsaViite',
-    props,
+    { ePerusteId },
     getEPerusteTutkinnonOsat,
-    LONG_CACHE_QUERY_OPTIONS
+    {
+      enabled: Boolean(ePerusteId),
+      ...LONG_CACHE_QUERY_OPTIONS,
+    }
   );
 };

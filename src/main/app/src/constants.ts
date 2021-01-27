@@ -266,8 +266,13 @@ export enum Hakeutumistapa {
   ILMOITTAUTUMINEN = 'ilmoittautuminen',
 }
 
-export const EPERUSTE_SERVICE_QUERY_OPTIONS = {
-  cacheTime: Infinity,
+// react-query options for koodisto, eperuste etc. requests that change rarely
+export const LONG_CACHE_QUERY_OPTIONS = {
+  staleTime: 30 * 60 * 1000,
+  cacheTime: 15 * 60 * 1000,
+  refetchOnWindowFocus: false,
+  refetchOnMount: false,
+  refetchOnReconned: false,
 };
 
 export enum Alkamiskausityyppi {

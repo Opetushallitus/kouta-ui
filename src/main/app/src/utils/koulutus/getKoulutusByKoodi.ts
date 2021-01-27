@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
+import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 
 export const getKoulutusByKoodi = async ({
   httpClient,
@@ -121,6 +122,9 @@ export const getKoulutusByKoodi = async ({
 };
 
 export const useKoulutusByKoodi = props =>
-  useApiQuery('getKoulutusByKoodi', props, getKoulutusByKoodi, {
-    cacheTime: 5000,
-  });
+  useApiQuery(
+    'getKoulutusByKoodi',
+    props,
+    getKoulutusByKoodi,
+    LONG_CACHE_QUERY_OPTIONS
+  );

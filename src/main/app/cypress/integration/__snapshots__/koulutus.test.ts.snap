@@ -15,9 +15,9 @@ exports[`createKoulutus > should be able to create ammatillinen koulutus #0`] =
     "kuvaus": {},
     "lisatiedot": [
       {
-        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
         "teksti": {
-          "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
+          "fi": "<p>koulutuksenlisatiedot kuvaus</p>"
         }
       }
     ],
@@ -55,9 +55,9 @@ exports[`createKoulutus > should be able to create ammatillinen osaamisala koulu
     "kuvaus": {},
     "lisatiedot": [
       {
-        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
         "teksti": {
-          "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
+          "fi": "<p>koulutuksenlisatiedot kuvaus</p>"
         }
       }
     ],
@@ -95,9 +95,9 @@ exports[`createKoulutus > should be able to create ammatillinen tutkinnon osa ko
     "kuvaus": {},
     "lisatiedot": [
       {
-        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
         "teksti": {
-          "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
+          "fi": "<p>koulutuksenlisatiedot kuvaus</p>"
         }
       }
     ],
@@ -143,7 +143,7 @@ exports[`createKoulutus > should be able to create AMK-koulutus #0`] =
   "koulutustyyppi": "amk",
   "metadata": {
     "koulutusalaKoodiUrit": [
-      "kansallinenkoulutusluokitus2016koulutusalataso2_0#1"
+      "kansallinenkoulutusluokitus2016koulutusalataso2_073#1"
     ],
     "koulutustyyppi": "amk",
     "kuvauksenNimi": {
@@ -154,17 +154,17 @@ exports[`createKoulutus > should be able to create AMK-koulutus #0`] =
     },
     "lisatiedot": [
       {
-        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
         "teksti": {
-          "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
+          "fi": "<p>koulutuksenlisatiedot kuvaus</p>"
         }
       }
     ],
-    "opintojenLaajuusKoodiUri": "opintojenlaajuus_0#1",
+    "opintojenLaajuusKoodiUri": "opintojenlaajuus_300#1",
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [
-      "tutkintonimikekk_0#1"
+      "tutkintonimikekk_139#2"
     ],
     "tyyppi": "amk"
   },
@@ -196,9 +196,9 @@ exports[`createKoulutus > should be able to create lukiokoulutus #0`] =
     "kuvaus": {},
     "lisatiedot": [
       {
-        "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+        "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
         "teksti": {
-          "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
+          "fi": "<p>koulutuksenlisatiedot kuvaus</p>"
         }
       }
     ],

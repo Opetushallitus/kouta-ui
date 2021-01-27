@@ -45,4 +45,20 @@ export const editHakukohdeForm = () => {
     });
     assertNoUnsavedChangesDialog();
   });
+
+  it('Should redirect from url without organization', () => {
+    prepareTest({
+      tyyppi: 'amm',
+      hakuOid,
+      hakukohdeOid,
+      organisaatioOid,
+      edit: true,
+      tarjoajat: ['1.2.246.562.10.45854578546'],
+    });
+    cy.visit(`/hakukohde/${hakukohdeOid}/muokkaus`);
+    cy.url().should(
+      'include',
+      `/organisaatio/${organisaatioOid}/hakukohde/${hakukohdeOid}/muokkaus`
+    );
+  });
 };

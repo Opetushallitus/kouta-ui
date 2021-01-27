@@ -1,4 +1,4 @@
-export default () => {
+export default (overrides = {}) => {
   return {
     id: '123e4567-e89b-12d3-a456-426655440000',
     tila: 'tallennettu',
@@ -21,5 +21,6 @@ export default () => {
       fi: 'Fi nimi',
       sv: 'Sv nimi',
     },
+    ...overrides,
   };
 };

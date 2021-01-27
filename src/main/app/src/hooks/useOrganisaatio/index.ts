@@ -86,14 +86,16 @@ const oppilaitostyyppiToKoulutustyyppi = o =>
     [_ => ammTyypit.includes(_), _ => 'Amm'],
     [_ => yoTyypit.includes(_), _ => 'Yo'],
     [_ => lkTyypit.includes(_), _ => 'Lk'],
-  ])(o.oppilaitosTyyppiUri);
+  ])(o?.oppilaitostyyppi);
 
 const isParent = parentOid => org => org.parentOidPath.includes(parentOid);
+
 const isChild = childOid => org =>
-  org.oid === childOid || first(org.children.filter(isChild(childOid)));
+  org.oid === childOid || first(org.children?.filter(isChild(childOid)));
+
 const isSameKoulutustyyppi = koulutustyyppi => org =>
   oppilaitostyyppiToKoulutustyyppi(org) === koulutustyyppi ||
-  first(org.children.filter(isSameKoulutustyyppi(koulutustyyppi)));
+  first(org.children?.filter(isSameKoulutustyyppi(koulutustyyppi)));
 
 export const isSameKoulutustyyppiWithOrganisaatio = (
   organisaatio,
@@ -103,7 +105,7 @@ export const isSameKoulutustyyppiWithOrganisaatio = (
 
   return (
     koulutustyyppi &&
-    first(hierarkia.filter(isSameKoulutustyyppi(koulutustyyppi)))
+    first(hierarkia?.filter(isSameKoulutustyyppi(koulutustyyppi)))
   );
 };
 

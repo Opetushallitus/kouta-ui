@@ -9,12 +9,12 @@ import {
 } from '#/cypress/utils';
 import _fp from 'lodash/fp';
 
-const prepareTest = tyyppi => {
-  const organisaatioOid = '1.1.1.1.1.1';
-  const koulutusOid = '1.2.1.1.1.1';
-  const toteutusOid = '1.3.1.1.1.1';
-  const perusteId = '1';
+const organisaatioOid = '1.1.1.1.1.1';
+const koulutusOid = '1.2.1.1.1.1';
+const toteutusOid = '1.3.1.1.1.1';
+const perusteId = '1';
 
+const prepareTest = tyyppi => {
   const testKoulutusFields = {
     oid: koulutusOid,
     organisaatioOid: organisaatioOid,
@@ -168,5 +168,14 @@ export const editToteutusForm = () => {
   it("Shouldn't complain about unsaved changed for untouched form", () => {
     prepareTest('amm');
     assertNoUnsavedChangesDialog();
+  });
+
+  it('Should redirect from url without organization', () => {
+    prepareTest('amm');
+    cy.visit(`/toteutus/${toteutusOid}/muokkaus`);
+    cy.url().should(
+      'include',
+      `/organisaatio/${organisaatioOid}/toteutus/${toteutusOid}/muokkaus`
+    );
   });
 };

@@ -1,3 +1,5 @@
+import { playMockFile } from 'kto-ui-common/cypress/mockUtils';
+
 import {
   getSelectOption,
   getCheckbox,
@@ -22,13 +24,13 @@ const fillLisatiedotSection = () => {
     getByTestId('osiotSelect').click();
 
     getByTestId('osiotSelect').within(() => {
-      getSelectOption('koulutuksenlisatiedot_0').click({
+      getSelectOption('Opintojen rakenne').click({
         force: true,
       });
     });
 
-    getByTestId('osioKuvaus.koulutuksenlisatiedot_0#1').within(() => {
-      typeToEditor('koulutuksenlisatiedot_0 kuvaus');
+    getByTestId('osioKuvaus.koulutuksenlisatiedot_01#1').within(() => {
+      typeToEditor('koulutuksenlisatiedot kuvaus');
     });
 
     jatka();
@@ -67,9 +69,9 @@ const fillNakyvyysSection = () => {
 export const createKoulutusForm = () => {
   const organisaatioOid = '1.1.1.1.1.1';
   const koulutusOid = '1.2.3.4.5';
-
   beforeEach(() => {
     stubKoulutusFormRoutes({ organisaatioOid });
+    playMockFile('koulutus.mocks.json');
 
     cy.intercept(
       { method: 'GET', url: `**/koulutus/${koulutusOid}` },
@@ -221,7 +223,16 @@ export const createKoulutusForm = () => {
           '#/fi/esitys/6777660/reformi/tutkinnonosat/6778201'
         );
       });
+    });
 
+    getByTestId('nimiSection').within(() => {
+      cy.findByLabelText(/koulutuslomake\.lisaaKoulutuksenNimi/).should(
+        'have.value',
+        'Louhintaporaus'
+      );
+    });
+
+    getByTestId('tutkinnonosatSection').within(() => {
       getByTestId('tutkinnonOsatSelect').within(() => {
         fillAsyncSelect('Kaivosmittaus');
       });
@@ -288,17 +299,17 @@ export const createKoulutusForm = () => {
       getByTestId('tutkintonimikeSelect').click();
 
       getByTestId('tutkintonimikeSelect').within(() => {
-        getSelectOption('tutkintonimikekk_0').click({ force: true });
+        getSelectOption('Arkkitehti').click({ force: true });
       });
 
       getByTestId('koulutusalatSelect').within(() => {
-        selectOption('kansallinenkoulutusluokitus2016koulutusalataso2_0');
+        selectOption('Arkkitehtuuri ja rakentaminen');
       });
 
       getByTestId('opintojenLaajuusSelect').click();
 
       getByTestId('opintojenLaajuusSelect').within(() => {
-        getSelectOption('opintojenlaajuus_0').click({ force: true });
+        getSelectOption('300').click({ force: true });
       });
 
       jatka();

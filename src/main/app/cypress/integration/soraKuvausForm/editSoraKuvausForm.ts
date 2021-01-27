@@ -8,9 +8,11 @@ import {
   tallenna,
 } from '#/cypress/utils';
 
+const soraKuvausId = '123e4567-e89b-12d3-a456-426655440000';
+const organisaatioOid = '1.1.1.1.1.1';
+
 export const editSoraKuvausForm = () => {
-  const organisaatioOid = '1.1.1.1.1.1';
-  const soraKuvaus = createSoraKuvaus();
+  const soraKuvaus = createSoraKuvaus({ id: soraKuvausId });
 
   beforeEach(() => {
     playMockFile('soraKuvaus.mock.json');
@@ -50,5 +52,13 @@ export const editSoraKuvausForm = () => {
 
   it("Shouldn't complain about unsaved changed for untouched form", () => {
     assertNoUnsavedChangesDialog();
+  });
+
+  it('Should redirect from url without organization', () => {
+    cy.visit(`/sora-kuvaus/${soraKuvausId}/muokkaus`);
+    cy.url().should(
+      'include',
+      `/organisaatio/${organisaatioOid}/sora-kuvaus/${soraKuvausId}/muokkaus`
+    );
   });
 };

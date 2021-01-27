@@ -181,7 +181,7 @@ export const AsyncSelect = ({
   const labelCache = useRef({});
 
   const valuesWithoutLabel = useMemo(() => {
-    const valueArr = _.isArray(valueProp) ? valueProp : [valueProp];
+    const valueArr = _.castArray(valueProp);
 
     return valueArr
       .filter(v => !v?.label && !labelCache.current[v?.value])
@@ -231,7 +231,7 @@ export const AsyncSelect = ({
   return (
     <ReactAsyncSelect
       {...getDefaultProps(t)}
-      isDisabled={disabled}
+      isDisabled={disabled || _.isUndefined(props?.loadOptions)}
       placeholder={t('yleiset.kirjoitaHakusana')}
       noOptionsMessage={noOptionsMessage}
       styles={getStyles(theme, error)}

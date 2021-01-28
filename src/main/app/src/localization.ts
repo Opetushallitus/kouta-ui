@@ -1,5 +1,6 @@
 import i18n from 'i18next';
 import XHR from 'i18next-xhr-backend';
+import { StatusCodes } from 'http-status-codes';
 import _ from 'lodash';
 import { getLocalization } from '#/src/utils/api/getLocalization';
 import getTranslations from '#/src/translations';
@@ -48,9 +49,9 @@ const createLocalization = ({
 
             loadLocalization({ namespace, language })
               .then(data => {
-                callback(data, { status: '200' });
+                callback(data, { status: StatusCodes.OK });
               })
-              .catch(() => callback(null, { status: '404' }));
+              .catch(() => callback(null, { status: StatusCodes.NOT_FOUND }));
           },
           parse: data => data,
         },
@@ -69,34 +70,24 @@ const createLocalization = ({
 
 const isDev = process.env.NODE_ENV === 'development';
 
-const createLocalizationLoader = ({ httpClient, apiUrls }) => async ({
-  namespace,
-  language,
-}) => {
-  const localization = await getLocalization({
-    category: namespace,
-    locale: language,
-    httpClient,
-    apiUrls,
-  });
-
-  const translations = getTranslations();
-
-  return _.get(translations, [language, namespace])
-    ? _.merge({}, translations[language][namespace], localization || {})
-    : localization;
-};
-
-let localizationInstance = null;
-
 export const createDefaultLocalization = ({ httpClient, apiUrls }) => {
-  localizationInstance = createLocalization({
+  return createLocalization({
     debug: isDev,
-    loadLocalization: createLocalizationLoader({ httpClient, apiUrls }),
-  });
-  return localizationInstance;
-};
+    loadLocalization: async ({ namespace, language }) => {
+      const localization = await getLocalization({
+        category: namespace,
+        locale: language,
+        httpClient,
+        apiUrls,
+      });
 
-export const getDefaultLocalization = () => localizationInstance;
+      const translations = getTranslations();
+
+      return _.get(translations, [language, namespace])
+        ? _.merge({}, translations[language][namespace], localization || {})
+        : localization;
+    },
+  });
+};
 
 export default createLocalization;

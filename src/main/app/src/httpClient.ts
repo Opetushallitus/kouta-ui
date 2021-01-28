@@ -1,6 +1,5 @@
 import axios from 'axios';
 import _ from 'lodash';
-import fp from 'lodash/fp';
 import { getCookie } from '#/src/utils';
 
 let loggingInPromise = null;
@@ -105,9 +104,7 @@ const createHttpClient = ({ apiUrls, callerId }) => {
     },
   });
 
-  client = fp.compose(withCSRF, withAuthorizationInterceptor(apiUrls))(client);
-
-  return client;
+  return _.flow(withCSRF, withAuthorizationInterceptor(apiUrls))(client);
 };
 
 export default createHttpClient;

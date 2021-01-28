@@ -7,10 +7,9 @@ import React, {
   useState,
   useEffect,
 } from 'react';
-
+import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
 import { setLightness } from 'polished';
-
 import {
   Editor as DraftEditor,
   EditorState as DraftEditorState,
@@ -173,13 +172,8 @@ const StyleButton = ({
   );
 };
 
-const HEADER_OPTIONS = [
-  { value: 'unstyled', label: 'Normaali teksti' },
-  { value: 'header-three', label: 'Otsikko 1' },
-  { value: 'header-four', label: 'Otsikko 2' },
-];
-
 const HeaderSelect = ({ editorState, onChange, editorRef }) => {
+  const { t } = useTranslation();
   const onSelect = useCallback(
     ({ value }) => {
       onChange(RichUtils.toggleBlockType(editorState, value));
@@ -196,7 +190,11 @@ const HeaderSelect = ({ editorState, onChange, editorRef }) => {
     <HeaderSelectContainer>
       <Select
         tabIndex="-1"
-        options={HEADER_OPTIONS}
+        options={[
+          { value: 'unstyled', label: t('editor.normaaliTeksti') },
+          { value: 'header-three', label: `${t('editor.otsikko')} 1` },
+          { value: 'header-four', label: `${t('editor.otsikko')} 2` },
+        ]}
         value={{ value }}
         onChange={onSelect}
         menuPortalTarget={document.body}
@@ -328,52 +326,52 @@ export const Editor = ({
   hideHeaderSelect = false, // NOTE: If other parts should be able to be hidden too, refactor this as options or smth
   ...props
 }) => {
+  const { t } = useTranslation();
   const editorState = value ? value : emptyEditorState;
   const [hasFocus, setHasFocus] = useState(false);
   const editorRef = useRef();
 
   const styleButtonProps = { editorState, onChange, editorRef };
 
-  // TODO: Read toolbar titles  etc. from translations
   return (
     <Container className="Editor__" hasFocus={hasFocus} disabled={disabled}>
       <Toolbar>
         <StyleButton
           icon="format_bold"
           styleName="BOLD"
-          title="Lihavointi"
+          title={t('editor.lihavointi')}
           inline
           {...styleButtonProps}
         />
         <StyleButton
           icon="format_italic"
           styleName="ITALIC"
-          title="Kursivointi"
+          title={t('editor.kursivointi')}
           inline
           {...styleButtonProps}
         />
         <StyleButton
           icon="format_underline"
           styleName="UNDERLINE"
-          title="Alleviivaus"
+          title={t('editor.alleviivaus')}
           inline
           {...styleButtonProps}
         />
         <StyleButton
           icon="format_list_bulleted"
           styleName="unordered-list-item"
-          title="Lista"
+          title={t('editor.lista')}
           block
           {...styleButtonProps}
         />
         <StyleButton
           icon="format_list_numbered"
           styleName="ordered-list-item"
-          title="Numeroitu lista"
+          title={t('editor.numeroituLista')}
           block
           {...styleButtonProps}
         />
-        <LinkButton {...styleButtonProps} title="Linkki" />
+        <LinkButton {...styleButtonProps} title={t('editor.linkki')} />
         {!hideHeaderSelect && <HeaderSelect {...styleButtonProps} />}
       </Toolbar>
       <EditorWrapper>

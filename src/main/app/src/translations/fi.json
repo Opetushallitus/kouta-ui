@@ -197,6 +197,16 @@
     "tilaisuusAlkaa": "Tilaisuus alkaa",
     "tilaisuusPaattyy": "Tilaisuus päättyy"
   },
+  "editor": {
+    "lihavointi": "Lihavointi",
+    "kursivointi": "Kursivointi",
+    "alleviivaus": "Alleviivaus",
+    "lista": "Lista",
+    "numeroituLista": "Numeroitu lista",
+    "normaaliTeksti": "Normaali teksti",
+    "otsikko": "Otsikko",
+    "linkki": "Linkki"
+  },
   "ilmoitukset": {
     "tallentamattomiaMuutoksia": {
       "otsikko": "Tallentamattomia muutoksia",

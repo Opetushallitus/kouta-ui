@@ -1,11 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Router, Route, Redirect, Switch } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 
 import Toaster from '#/src/components/Toaster';
 import RouterScrollToTop from '#/src/components/RouterScrollToTop';
-import { LANGUAGES } from '#/src/constants';
-import { useAsiointiKieli } from '#/src/utils/api/getAsiointiKieli';
 
 const HomePage = React.lazy(() => import('#/src/pages/HomePage'));
 const CreateKoulutusPage = React.lazy(
@@ -66,18 +63,6 @@ const OppilaitoksenOsaPage = React.lazy(
 );
 
 const Routes = ({ history }) => {
-  const { i18n } = useTranslation();
-  const { data: asiointiKieli } = useAsiointiKieli();
-
-  useEffect(() => {
-    const newLanguage = LANGUAGES.includes(asiointiKieli)
-      ? asiointiKieli
-      : 'fi';
-    if (i18n.language !== newLanguage) {
-      i18n.changeLanguage(newLanguage);
-    }
-  });
-
   return (
     <Router history={history}>
       <RouterScrollToTop>

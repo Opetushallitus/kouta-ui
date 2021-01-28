@@ -77,6 +77,7 @@ export const development = ({ isCypress }) => ({
   'lomake-editori.cas': `${virkailijaDevUrl}/lomake-editori/auth/cas`,
   'lomake-editori.muokkaus-sivu': `${virkailijaDevUrl}/lomake-editori/editor/$1`,
   'oppijanumerorekisteri-service.henkilo': `${virkailijaDevUrl}/oppijanumerorekisteri-service/henkilo/$1`,
+  'oppijanumerorekisteri-service.asiointiKieli': `${virkailijaDevUrl}/oppijanumerorekisteri-service/henkilo/current/asiointiKieli`,
   'eperusteet.kooste': `${ePerusteetDevUrl}/#/$1/kooste/$2`,
   'eperusteet.tutkinnonosat': `${ePerusteetDevUrl}/#/$1/esitys/$2/reformi/tutkinnonosat/$3`,
   'eperusteet.sisalto': `${ePerusteetDevUrl}/#/$1/esitys/$2/reformi/sisalto/$3`,

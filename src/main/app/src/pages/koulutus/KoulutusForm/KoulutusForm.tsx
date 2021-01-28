@@ -90,10 +90,8 @@ const KoulutusForm = ({
           disabled={onlyTarjoajaRights}
           getCopyEntities={getKoulutukset}
           infoText={t('koulutuslomake.pohjavalintaInfo')}
-          createLabel={t('yleiset.luoUusi', { entity: t('yleiset.koulutus') })}
-          copyLabel={t('yleiset.kopioiPohjaksi', {
-            entity: t('yleiset.koulutus'),
-          })}
+          createLabel={t('yleiset.luoUusiKoulutus')}
+          copyLabel={t('koulutuslomake.kopioiPohjaksi')}
         />
       )}
 

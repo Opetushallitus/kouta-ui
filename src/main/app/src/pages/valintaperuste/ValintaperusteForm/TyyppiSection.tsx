@@ -20,7 +20,7 @@ const TyyppiSection = ({ name }) => {
     <Field
       name={name}
       component={TyyppiField}
-      label={t('valintaperustelomake.valitseKoulutustyyppi')}
+      label={t('yleiset.valitseKoulutustyyppi')}
     />
   );
 };

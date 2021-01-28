@@ -87,7 +87,7 @@ const LiitoksetModal = ({ onClose, organisaatioOid, open }) => {
           </Box>
 
           <Button disabled={disabled} onClick={onSubmit}>
-            {t('etusivu.luoUusiHakukohde')}
+            {t('yleiset.luoUusiHakukohde')}
           </Button>
         </Box>
       </ModalFooter>

@@ -38,12 +38,8 @@ const SoraKuvausForm = ({
           organisaatioOid={organisaatioOid}
           getCopyEntities={getSoraKuvaukset}
           infoText={t('soraKuvauslomake.pohjavalintaInfo')}
-          createLabel={t('yleiset.luoUusi', {
-            entity: t('yleiset.soraKuvaus'),
-          })}
-          copyLabel={t('yleiset.kopioiPohjaksi', {
-            entity: t('yleiset.soraKuvaus'),
-          })}
+          createLabel={t('yleiset.luoUusiSoraKuvaus')}
+          copyLabel={t('soraKuvauslomake.kopioiPohjaksi')}
         />
       ) : null}
       <FormCollapse

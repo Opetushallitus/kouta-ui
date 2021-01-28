@@ -55,10 +55,8 @@ const HakuForm = ({
             scrollOnActive={false}
             onSelectBase={onSelectBase}
             infoText={t('hakulomake.pohjavalintaInfo')}
-            createLabel={t('yleiset.luoUusi', { entity: t('yleiset.haku') })}
-            copyLabel={t('yleiset.kopioiPohjaksi', {
-              entity: t('yleiset.haku'),
-            })}
+            createLabel={t('yleiset.luoUusiHaku')}
+            copyLabel={t('hakulomake.kopioiPohjaksi')}
             organisaatioOid={organisaatioOid}
             getCopyEntities={getHaut}
           />

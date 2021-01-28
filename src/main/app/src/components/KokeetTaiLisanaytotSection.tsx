@@ -7,13 +7,11 @@ import KokeetTaiLisanaytotFields from './KokeetTaiLisanaytotFields';
 import { getTestIdProps } from '#/src/utils';
 import { Box } from '#/src/components/virkailija';
 
-const TRANSLATION_BASE = 'valintaperustelomake.koeTaiLisanaytto';
-
 export const KokeetTaiLisanaytotSection = ({ name, language }) => {
   const { t } = useTranslation();
   return (
     <>
-      <FieldGroup title={t(`${TRANSLATION_BASE}.yleisKuvaus`)}>
+      <FieldGroup title={t('koeTaiLisanaytto.yleisKuvaus')}>
         <Box ml={12} mr={12} {...getTestIdProps('yleisKuvaus')}>
           <Field
             name={`${name}.yleisKuvaus.${language}`}
@@ -25,7 +23,6 @@ export const KokeetTaiLisanaytotSection = ({ name, language }) => {
         name={`${name}.kokeetTaiLisanaytot`}
         component={KokeetTaiLisanaytotFields}
         language={language}
-        translationBase={TRANSLATION_BASE}
         t={t}
       />
     </>

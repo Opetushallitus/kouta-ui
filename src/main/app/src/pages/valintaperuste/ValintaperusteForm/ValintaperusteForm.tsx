@@ -43,12 +43,8 @@ const ValintaperusteForm = ({
           organisaatioOid={organisaatioOid}
           getCopyEntities={getValintaperusteet}
           infoText={t('valintaperustelomake.pohjavalintaInfo')}
-          createLabel={t('yleiset.luoUusi', {
-            entity: t('yleiset.valintaperuste'),
-          })}
-          copyLabel={t('yleiset.kopioiPohjaksi', {
-            entity: t('yleiset.valintaperuste'),
-          })}
+          createLabel={t('yleiset.luoUusiValintaperuste')}
+          copyLabel={t('valintaperustelomake.kopioiPohjaksi')}
         />
       ) : null}
 

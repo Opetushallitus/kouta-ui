@@ -10,7 +10,7 @@ const EditSoraKuvausForm = ({ onSave, soraKuvaus, ...props }) => {
   }, [soraKuvaus]);
 
   return (
-    <ReduxForm form="editSoraKuvausForm" initialValues={initialValues}>
+    <ReduxForm form="soraKuvausForm" initialValues={initialValues}>
       {() => (
         <SoraKuvausForm
           {...props}

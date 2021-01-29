@@ -49,7 +49,7 @@ const EditSoraKuvausPage = props => {
   const config = useEntityFormConfig(ENTITY.SORA_KUVAUS, koulutustyyppi);
 
   return (
-    <ReduxForm form="editSoraKuvausForm" initialValues={initialValues}>
+    <ReduxForm form="soraKuvausForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.soraKuvauksenMuokkaus')}</Title>
       <FormConfigContext.Provider value={{ ...config, readOnly: !canUpdate }}>
         <FormPage

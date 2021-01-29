@@ -32,7 +32,7 @@ const EditSoraKuvausFooter = ({ soraKuvaus, canUpdate }) => {
   );
 
   const { save } = useSaveForm({
-    form: 'editSoraKuvausForm',
+    form: 'soraKuvausForm',
     submit,
     validate: validateSoraKuvausForm,
   });

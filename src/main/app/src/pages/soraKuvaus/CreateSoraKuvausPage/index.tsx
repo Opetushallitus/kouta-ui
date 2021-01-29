@@ -80,13 +80,13 @@ const CreateSoraKuvausPage = props => {
   );
 
   const { save } = useSaveForm({
-    form: 'createSoraKuvausForm',
+    form: 'soraKuvausForm',
     submit,
     validate: validateSoraKuvausForm,
   });
 
   return (
-    <ReduxForm form="createSoraKuvausForm" initialValues={initialValues}>
+    <ReduxForm form="soraKuvausForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.uusiSoraKuvaus')}</Title>
       <FormConfigContext.Provider value={config}>
         <FormPage

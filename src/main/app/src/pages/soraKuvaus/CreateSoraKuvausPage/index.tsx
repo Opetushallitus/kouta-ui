@@ -31,12 +31,14 @@ const getCopyValues = soraKuvausId => ({
 });
 
 const getInitialValues = (soraKuvaus, kieliValinnat) => {
+  const kieliValinnatLista =
+    kieliValinnat == null ? [] : kieliValinnat.split(',');
   return soraKuvaus && soraKuvaus.id
     ? {
         ...getCopyValues(soraKuvaus.id),
         ...getFormValuesBySoraKuvaus(soraKuvaus),
       }
-    : initialValues(kieliValinnat);
+    : initialValues(kieliValinnatLista);
 };
 
 const CreateSoraKuvausPage = props => {
@@ -57,12 +59,10 @@ const CreateSoraKuvausPage = props => {
   });
 
   const { soraKuvaus } = useSoraKuvaus(kopioSoraKuvausOid);
-  const kieliValinnatLista =
-    kieliValinnat == null ? [] : kieliValinnat.split(',');
 
   const initialValues = useMemo(() => {
-    return getInitialValues(soraKuvaus, kieliValinnatLista);
-  }, [soraKuvaus, kieliValinnatLista]);
+    return getInitialValues(soraKuvaus, kieliValinnat);
+  }, [soraKuvaus, kieliValinnat]);
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {

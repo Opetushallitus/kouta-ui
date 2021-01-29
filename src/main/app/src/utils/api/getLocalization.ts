@@ -1,4 +1,4 @@
-import _ from 'lodash/fp';
+import _ from 'lodash';
 
 export const getLocalization = async ({
   category = 'kouta',
@@ -21,7 +21,7 @@ export const getLocalization = async ({
     const { key, value } = translation;
 
     if (lng === locale && key && value) {
-      _.set(key, value, resource);
+      _.set(resource, key, value);
     }
   }
 

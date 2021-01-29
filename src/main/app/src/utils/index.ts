@@ -212,3 +212,21 @@ export const getValuesForSaving = (
   }
   return saveableValues;
 };
+
+export const retryOnRedirect = async ({ httpClient, targetUrl }) => {
+  const fn = () =>
+    httpClient.get(targetUrl, {
+      cache: {
+        ignoreCache: true,
+      },
+    });
+  let res = await fn();
+  let count = 3;
+
+  while (res?.request?.responseURL !== targetUrl && count !== 0) {
+    res = await fn();
+    count -= 1;
+  }
+
+  return res?.data;
+};

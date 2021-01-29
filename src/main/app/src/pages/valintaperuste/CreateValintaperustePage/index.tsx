@@ -25,20 +25,22 @@ import { useEntityFormConfig, useFieldValue } from '#/src/hooks/form';
 
 const resolveFn = () => Promise.resolve(null);
 
-const getCopyValues = valintaperusteOid => ({
+const getCopyValues = valintaperusteId => ({
   pohja: {
     tapa: POHJAVALINTA.KOPIO,
-    valinta: { value: valintaperusteOid },
+    valinta: { value: valintaperusteId },
   },
 });
 
 const getInitialValues = (valintaperuste, kieliValinnat) => {
-  return valintaperuste && valintaperuste.oid
+  const kieliValinnatLista =
+    kieliValinnat == null ? [] : kieliValinnat.split(',');
+  return valintaperuste && valintaperuste.id
     ? {
-        ...getCopyValues(valintaperuste.oid),
+        ...getCopyValues(valintaperuste.id),
         ...getFormValuesByValintaperuste(valintaperuste),
       }
-    : initialValues(kieliValinnat);
+    : initialValues(kieliValinnatLista);
 };
 
 const CreateValintaperustePage = props => {
@@ -65,12 +67,9 @@ const CreateValintaperustePage = props => {
     watch: kopioValintaperusteOid,
   });
 
-  const kieliValinnatLista =
-    kieliValinnat == null ? [] : kieliValinnat.split(',');
-
   const initialValues = useMemo(() => {
-    return getInitialValues(valintaperuste, kieliValinnatLista);
-  }, [valintaperuste, kieliValinnatLista]);
+    return getInitialValues(valintaperuste, kieliValinnat);
+  }, [valintaperuste, kieliValinnat]);
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {

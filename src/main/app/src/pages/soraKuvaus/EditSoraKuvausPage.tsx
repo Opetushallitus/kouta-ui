@@ -1,13 +1,11 @@
-import React, { useEffect, useMemo } from 'react';
-import _ from 'lodash';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { KOULUTUSTYYPPI, ENTITY } from '#/src/constants';
+import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
 } from '#/src/components/FormPage';
-import useSoraKuvaus from '#/src/hooks/useSoraKuvaus';
 import { Spin } from '#/src/components/virkailija';
 import Title from '#/src/components/Title';
 import ReduxForm from '#/src/components/ReduxForm';
@@ -17,23 +15,18 @@ import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormSteps from '#/src/components/FormSteps';
 import { useEntityFormConfig } from '#/src/hooks/form';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
-import SoraKuvausForm from '../SoraKuvausForm';
-import EditSoraKuvausFooter from './EditSoraKuvausFooter';
+import SoraKuvausForm from './SoraKuvausForm';
+import { SoraKuvausFooter } from './SoraKuvausFooter';
+import { useSoraKuvausById } from '#/src/utils/soraKuvaus/getSoraKuvausById';
 
 const EditSoraKuvausPage = props => {
   const {
     match: {
       params: { organisaatioOid, id },
     },
-    location: { state = {} },
   } = props;
 
-  const { soraKuvausUpdatedAt = null } = state;
-  const { soraKuvaus, reload } = useSoraKuvaus(id);
-
-  useEffect(() => {
-    soraKuvausUpdatedAt && _.isFunction(reload) && reload();
-  }, [soraKuvausUpdatedAt]); // eslint-disable-line react-hooks/exhaustive-deps
+  const { data: soraKuvaus } = useSoraKuvausById(id);
 
   const koulutustyyppi =
     soraKuvaus?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
@@ -62,7 +55,8 @@ const EditSoraKuvausPage = props => {
           }
           steps={<FormSteps activeStep={ENTITY.SORA_KUVAUS} />}
           footer={
-            <EditSoraKuvausFooter
+            <SoraKuvausFooter
+              formMode={FormMode.EDIT}
               soraKuvaus={soraKuvaus}
               canUpdate={canUpdate}
             />

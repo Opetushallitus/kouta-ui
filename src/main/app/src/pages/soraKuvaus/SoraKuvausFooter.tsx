@@ -1,19 +1,34 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
+import { queryCache } from 'react-query';
 
 import getSoraKuvausByFormValues from '#/src/utils/soraKuvaus/getSoraKuvausByFormValues';
 import updateSoraKuvaus from '#/src/utils/soraKuvaus/updateSoraKuvaus';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import validateSoraKuvausForm from '#/src/utils/soraKuvaus/validateSoraKuvausForm';
 import { FormFooter } from '#/src/components/FormPage';
-import { ENTITY } from '#/src/constants';
+import { ENTITY, FormMode } from '#/src/constants';
+import createSoraKuvaus from '#/src/utils/soraKuvaus/createSoraKuvaus';
 
-const EditSoraKuvausFooter = ({ soraKuvaus, canUpdate }) => {
+type SoraKuvausFooterProps = {
+  formMode: FormMode;
+  soraKuvaus: SoraKuvausModel;
+  canUpdate?: boolean;
+};
+
+export const SoraKuvausFooter = ({
+  formMode,
+  soraKuvaus,
+  canUpdate,
+}: SoraKuvausFooterProps) => {
   const history = useHistory();
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
-      await updateSoraKuvaus({
+      const dataSendFn =
+        formMode === FormMode.CREATE ? createSoraKuvaus : updateSoraKuvaus;
+
+      const { id } = await dataSendFn({
         httpClient,
         apiUrls,
         soraKuvaus: {
@@ -22,13 +37,15 @@ const EditSoraKuvausFooter = ({ soraKuvaus, canUpdate }) => {
         },
       });
 
-      history.replace({
-        state: {
-          soraKuvausUpdatedAt: Date.now(),
-        },
-      });
+      if (formMode === FormMode.CREATE) {
+        history.push(
+          `/organisaatio/${soraKuvaus.organisaatioOid}/sora-kuvaus/${id}/muokkaus`
+        );
+      } else {
+        queryCache.invalidateQueries(ENTITY.SORA_KUVAUS);
+      }
     },
-    [soraKuvaus, history]
+    [formMode, soraKuvaus, history]
   );
 
   const { save } = useSaveForm({
@@ -41,5 +58,3 @@ const EditSoraKuvausFooter = ({ soraKuvaus, canUpdate }) => {
     <FormFooter entity={ENTITY.SORA_KUVAUS} save={save} canUpdate={canUpdate} />
   );
 };
-
-export default EditSoraKuvausFooter;

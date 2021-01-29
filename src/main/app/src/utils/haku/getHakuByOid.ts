@@ -1,21 +1,15 @@
 import { ENTITY } from '#/src/constants';
-import { useApiQuery } from '#/src/hooks/useApiQuery';
-import _ from 'lodash';
+import { getEntityByOid, useEntityByOid } from '../api/getEntityByOid';
 
-export const getHakuByOid = async ({ oid, httpClient, apiUrls }) => {
-  const { data, headers } = await httpClient.get(
-    apiUrls.url('kouta-backend.haku-by-oid', oid)
-  );
-
-  const lastModified = _.get(headers, 'x-last-modified') || null;
-
-  return _.isObject(data) ? { lastModified, ...data } : data;
-};
-
-export const useHakuByOid = (props, options = {}) =>
-  useApiQuery(ENTITY.HAKU, props, getHakuByOid, {
-    refetchOnWindowFocus: false,
-    ...options,
+export const getHakuByOid = async ({ oid, httpClient, apiUrls }) =>
+  getEntityByOid({
+    entityType: ENTITY.HAKU,
+    oid,
+    httpClient,
+    apiUrls,
   });
+
+export const useHakuByOid = (oid, options = {}) =>
+  useEntityByOid(ENTITY.HAKU, oid, options);
 
 export default getHakuByOid;

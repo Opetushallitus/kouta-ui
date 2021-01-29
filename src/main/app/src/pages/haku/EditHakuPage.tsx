@@ -25,7 +25,7 @@ const EditHakuPage = ({
     params: { organisaatioOid, oid },
   },
 }) => {
-  const { data: haku, isFetching } = useHakuByOid({ oid });
+  const { data: haku, isFetching } = useHakuByOid(oid);
 
   const { t } = useTranslation();
   const initialValues = useMemo(() => {

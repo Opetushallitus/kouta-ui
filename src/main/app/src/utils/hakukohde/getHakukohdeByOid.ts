@@ -1,19 +1,15 @@
-import _ from 'lodash/fp';
-import { useApiQuery } from '#/src/hooks/useApiQuery';
+import { getEntityByOid, useEntityByOid } from '#/src/utils/api/getEntityByOid';
+import { ENTITY } from '#/src/constants';
 
-export const getHakukohdeByOid = async ({ oid, httpClient, apiUrls }) => {
-  const { data, headers } = await httpClient.get(
-    apiUrls.url('kouta-backend.hakukohde-by-oid', oid)
-  );
-
-  const lastModified = headers?.['x-last-modified'] || null;
-
-  return _.isObject(data) ? { lastModified, ...data } : data;
-};
+export const getHakukohdeByOid = async ({ oid, httpClient, apiUrls }) =>
+  getEntityByOid({
+    entityType: ENTITY.SORA_KUVAUS,
+    oid,
+    httpClient,
+    apiUrls,
+  });
 
 export default getHakukohdeByOid;
 
-export const useHakukohdeByOid = props =>
-  useApiQuery('hakukohde', props, getHakukohdeByOid, {
-    refetchOnWindowFocus: false,
-  });
+export const useHakukohdeByOid = (oid, options = {}) =>
+  useEntityByOid(ENTITY.HAKUKOHDE, oid, options);

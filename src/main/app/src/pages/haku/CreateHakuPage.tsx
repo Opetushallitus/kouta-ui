@@ -47,12 +47,9 @@ const CreateHakuPage = props => {
   const { t } = useTranslation();
   const selectBase = useSelectBase(history, { kopioParam: 'kopioHakuOid' });
 
-  const { data } = useHakuByOid(
-    { oid: kopioHakuOid },
-    {
-      enabled: kopioHakuOid,
-    }
-  );
+  const { data } = useHakuByOid(kopioHakuOid, {
+    enabled: kopioHakuOid,
+  });
 
   const initialValues = useMemo(() => {
     return getInitialValues(data);

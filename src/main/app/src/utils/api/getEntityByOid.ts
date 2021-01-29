@@ -32,6 +32,7 @@ export const useEntityByOid = (
 ) =>
   useApiQuery(entityType, { entityType, oid }, getEntityByOid, {
     refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
     enabled: oid,
     ...options,
   });

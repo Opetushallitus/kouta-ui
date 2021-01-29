@@ -28,9 +28,9 @@ const EditHakukohdePage = props => {
     },
   } = props;
 
-  const { data: hakukohde, isFetching: hakukohdeLoading } = useHakukohdeByOid({
-    oid,
-  });
+  const { data: hakukohde, isFetching: hakukohdeLoading } = useHakukohdeByOid(
+    oid
+  );
 
   const {
     data: { toteutus, haku, koulutustyyppi, tarjoajat } = {},

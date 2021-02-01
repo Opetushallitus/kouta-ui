@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import getToteutuksenHakukohteet from '#/src/utils/toteutus/getToteutuksenHakukohteet';
-import RelatedEntitiesTable from '#/src/components/RelatedEntitiesTable';
+import { RelatedEntitiesTable } from '#/src/components/RelatedEntitiesTable';
 
 export default function ({ toteutus, organisaatioOid }) {
   const { t } = useTranslation();

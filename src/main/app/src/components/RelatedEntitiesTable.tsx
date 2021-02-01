@@ -10,7 +10,7 @@ import ListTable, {
 } from '#/src/components/ListTable';
 import ListSpin from '#/src/components/ListSpin';
 
-export default function ({
+export const RelatedEntitiesTable = function ({
   entity,
   organisaatioOid,
   getData,
@@ -65,4 +65,4 @@ export default function ({
       )}
     </>
   );
-}
+};

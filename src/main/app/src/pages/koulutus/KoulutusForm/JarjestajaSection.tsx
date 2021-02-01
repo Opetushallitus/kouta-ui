@@ -51,10 +51,6 @@ const OrganizationSection = ({
   const getIsDisabled = useCallback(
     organisaatio => {
       const kt = koulutus ? koulutus.koulutustyyppi : 'unknown';
-      console.log(
-        'tarjoaja selection isDisabled for koulutustyyppi ',
-        koulutus
-      );
       if (kt === 'amm') {
         return !roleBuilder
           .hasUpdate(OPH_PAAKAYTTAJA_ROLE, organisaatio)

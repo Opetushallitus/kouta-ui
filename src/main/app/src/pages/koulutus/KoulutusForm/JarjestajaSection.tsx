@@ -3,7 +3,11 @@ import { Field } from 'redux-form';
 import { get, negate } from 'lodash';
 import { useTranslation } from 'react-i18next';
 
-import { KOULUTUS_ROLE, ORGANISAATIOTYYPPI } from '#/src/constants';
+import {
+  KOULUTUS_ROLE,
+  OPH_PAAKAYTTAJA_ROLE,
+  ORGANISAATIOTYYPPI,
+} from '#/src/constants';
 import { getTestIdProps } from '#/src/utils';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 import Alert from '#/src/components/Alert';
@@ -45,9 +49,21 @@ const OrganizationSection = ({
   );
 
   const getIsDisabled = useCallback(
-    organisaatio =>
-      !roleBuilder.hasUpdate(KOULUTUS_ROLE, organisaatio).result(),
-    [roleBuilder]
+    organisaatio => {
+      const kt = koulutus ? koulutus.koulutustyyppi : 'unknown';
+      console.log(
+        'tarjoaja selection isDisabled for koulutustyyppi ',
+        koulutus
+      );
+      if (kt === 'amm') {
+        return !roleBuilder
+          .hasUpdate(OPH_PAAKAYTTAJA_ROLE, organisaatio)
+          .result();
+      } else {
+        return !roleBuilder.hasUpdate(KOULUTUS_ROLE, organisaatio).result();
+      }
+    },
+    [roleBuilder, koulutus]
   );
 
   return (

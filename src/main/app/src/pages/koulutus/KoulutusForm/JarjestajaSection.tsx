@@ -51,13 +51,8 @@ const OrganizationSection = ({
   const getIsDisabled = useCallback(
     organisaatio => {
       const kt = koulutus ? koulutus.koulutustyyppi : 'unknown';
-      if (kt === 'amm') {
-        return !roleBuilder
-          .hasUpdate(OPH_PAAKAYTTAJA_ROLE, organisaatio)
-          .result();
-      } else {
-        return !roleBuilder.hasUpdate(KOULUTUS_ROLE, organisaatio).result();
-      }
+      const requiredRole = kt === 'amm' ? OPH_PAAKAYTTAJA_ROLE : KOULUTUS_ROLE;
+      return !roleBuilder.hasUpdate(requiredRole, organisaatio).result();
     },
     [roleBuilder, koulutus]
   );

@@ -3,7 +3,12 @@ import { Field } from 'redux-form';
 import { get, negate } from 'lodash';
 import { useTranslation } from 'react-i18next';
 
-import { KOULUTUS_ROLE, ORGANISAATIOTYYPPI } from '#/src/constants';
+import {
+  KOULUTUS_ROLE,
+  OPH_PAAKAYTTAJA_ROLE,
+  ORGANISAATIOTYYPPI,
+  KOULUTUSTYYPPI,
+} from '#/src/constants';
 import { getTestIdProps } from '#/src/utils';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 import Alert from '#/src/components/Alert';
@@ -45,9 +50,15 @@ const OrganizationSection = ({
   );
 
   const getIsDisabled = useCallback(
-    organisaatio =>
-      !roleBuilder.hasUpdate(KOULUTUS_ROLE, organisaatio).result(),
-    [roleBuilder]
+    organisaatio => {
+      const kt = koulutus ? koulutus.koulutustyyppi : 'unknown';
+      const requiredRole =
+        kt === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
+          ? OPH_PAAKAYTTAJA_ROLE
+          : KOULUTUS_ROLE;
+      return !roleBuilder.hasUpdate(requiredRole, organisaatio).result();
+    },
+    [roleBuilder, koulutus]
   );
 
   return (

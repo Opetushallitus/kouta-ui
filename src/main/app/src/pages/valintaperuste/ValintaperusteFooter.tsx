@@ -1,34 +1,56 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
+import { queryCache } from 'react-query';
 
 import updateValintaperuste from '#/src/utils/valintaperuste/updateValintaperuste';
 import { getValintaperusteByFormValues } from '#/src/utils/valintaperuste/getValintaperusteByFormValues';
-import { ENTITY } from '#/src/constants';
+import { ENTITY, FormMode } from '#/src/constants';
 import { useSaveValintaperuste } from '#/src/hooks/formSaveHooks';
 import { FormFooter } from '#/src/components/FormPage';
 import { useFormName } from '#/src/hooks/form';
+import createValintaperuste from '#/src/utils/valintaperuste/createValintaperuste';
 
-const EditValintaperusteFooter = ({ valintaperuste, canUpdate }) => {
+type ValintaperusteFooterProps = {
+  formMode: FormMode;
+  organisaatioOid: string;
+  valintaperuste?: any;
+  canUpdate?: boolean;
+};
+
+export const ValintaperusteFooter = ({
+  formMode,
+  organisaatioOid,
+  valintaperuste = {},
+  canUpdate,
+}: ValintaperusteFooterProps) => {
   const history = useHistory();
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
-      await updateValintaperuste({
+      const dataSendFn =
+        formMode === FormMode.CREATE
+          ? createValintaperuste
+          : updateValintaperuste;
+
+      const { id } = await dataSendFn({
         httpClient,
         apiUrls,
         valintaperuste: {
+          organisaatioOid,
           ...valintaperuste,
           ...getValintaperusteByFormValues(values),
         },
       });
 
-      history.replace({
-        state: {
-          valintaperusteUpdatedAt: Date.now(),
-        },
-      });
+      if (formMode === FormMode.CREATE) {
+        history.push(
+          `/organisaatio/${organisaatioOid}/valintaperusteet/${id}/muokkaus`
+        );
+      } else {
+        queryCache.invalidateQueries(ENTITY.VALINTAPERUSTE);
+      }
     },
-    [valintaperuste, history]
+    [formMode, organisaatioOid, valintaperuste, history]
   );
 
   const formName = useFormName();
@@ -42,5 +64,3 @@ const EditValintaperusteFooter = ({ valintaperuste, canUpdate }) => {
     />
   );
 };
-
-export default EditValintaperusteFooter;

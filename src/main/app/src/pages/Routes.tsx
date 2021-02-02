@@ -136,7 +136,7 @@ const Routes = ({ history }) => {
           />
 
           <Route
-            path="/organisaatio/:oid/valintaperusteet/kielivalinnat/:kieliValinnat?"
+            path="/organisaatio/:organisaatioOid/valintaperusteet/kielivalinnat/:kieliValinnat?"
             component={CreateValintaperustePage}
             exact
           />

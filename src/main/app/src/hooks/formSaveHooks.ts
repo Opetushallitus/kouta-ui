@@ -11,7 +11,7 @@ import useAuthorizedUser from '#/src/hooks/useAuthorizedUser';
 import getKoulutusByOid from '#/src/utils/koulutus/getKoulutusByOid';
 import getToteutusByOid from '#/src/utils/toteutus/getToteutusByOid';
 import getHakuByOid from '#/src/utils/haku/getHakuByOid';
-import getValintaperusteByOid from '#/src/utils/valintaperuste/getValintaperusteByOid';
+import getValintaperusteById from '#/src/utils/valintaperuste/getValintaperusteById';
 import getSoraKuvausById from '#/src/utils/soraKuvaus/getSoraKuvausById';
 import validateToteutusForm from '#/src/utils/toteutus/validateToteutusForm';
 import validateHakukohdeForm from '#/src/utils/hakukohde/validateHakukohdeForm';
@@ -133,7 +133,7 @@ export const useSaveHakukohde = ({
         getToteutusByOid({ httpClient, apiUrls, oid: oldToteutus.oid }),
         getHakuByOid({ httpClient, apiUrls, oid: oldHaku.oid }),
         valintaperusteId
-          ? getValintaperusteByOid({
+          ? getValintaperusteById({
               httpClient,
               apiUrls,
               oid: valintaperusteId,

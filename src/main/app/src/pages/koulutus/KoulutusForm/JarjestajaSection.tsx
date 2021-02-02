@@ -7,6 +7,7 @@ import {
   KOULUTUS_ROLE,
   OPH_PAAKAYTTAJA_ROLE,
   ORGANISAATIOTYYPPI,
+  KOULUTUSTYYPPI,
 } from '#/src/constants';
 import { getTestIdProps } from '#/src/utils';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
@@ -51,7 +52,10 @@ const OrganizationSection = ({
   const getIsDisabled = useCallback(
     organisaatio => {
       const kt = koulutus ? koulutus.koulutustyyppi : 'unknown';
-      const requiredRole = kt === 'amm' ? OPH_PAAKAYTTAJA_ROLE : KOULUTUS_ROLE;
+      const requiredRole =
+        kt === KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
+          ? OPH_PAAKAYTTAJA_ROLE
+          : KOULUTUS_ROLE;
       return !roleBuilder.hasUpdate(requiredRole, organisaatio).result();
     },
     [roleBuilder, koulutus]

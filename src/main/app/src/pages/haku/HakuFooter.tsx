@@ -17,11 +17,17 @@ import { HakuModel } from '#/src/types/hakuTypes';
 
 type HakuFooterProps = {
   formMode: FormMode;
-  haku: HakuModel;
+  organisaatioOid: string;
+  haku?: HakuModel;
   canUpdate?: boolean;
 };
 
-export const HakuFooter = ({ formMode, haku, canUpdate }: HakuFooterProps) => {
+export const HakuFooter = ({
+  formMode,
+  organisaatioOid,
+  haku = {},
+  canUpdate,
+}: HakuFooterProps) => {
   const history = useHistory();
 
   const form = useForm();
@@ -44,20 +50,20 @@ export const HakuFooter = ({ formMode, haku, canUpdate }: HakuFooterProps) => {
         httpClient,
         apiUrls,
         haku: {
+          organisaatioOid,
           ...haku,
           ...getHakuByFormValues(valuesForSaving),
         },
       });
 
       if (formMode === FormMode.CREATE) {
-        history.push(
-          `/organisaatio/${haku.organisaatioOid}/haku/${oid}/muokkaus`
-        );
+        history.push(`/organisaatio/${organisaatioOid}/haku/${oid}/muokkaus`);
       } else {
         queryCache.invalidateQueries(ENTITY.HAKU);
       }
     },
     [
+      organisaatioOid,
       form.registeredFields,
       formMode,
       haku,

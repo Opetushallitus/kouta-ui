@@ -77,6 +77,7 @@ const EditHakukohdePage = props => {
           footer={
             <HakukohdeFooter
               formMode={FormMode.EDIT}
+              organisaatioOid={organisaatioOid}
               hakukohde={hakukohde}
               toteutus={toteutus}
               haku={haku}

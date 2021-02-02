@@ -63,6 +63,7 @@ const EditHakuPage = ({
             haku ? (
               <HakuFooter
                 haku={haku}
+                organisaatioOid={organisaatioOid}
                 formMode={FormMode.EDIT}
                 canUpdate={canUpdate}
               />

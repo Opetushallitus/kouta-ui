@@ -9,7 +9,7 @@ export const getSoraKuvausById = async ({ httpClient, apiUrls, id }) =>
     apiUrls,
   });
 
-export const useSoraKuvausById = (id, options = {}) =>
+export const useSoraKuvausById = (id: string | null, options = {}) =>
   useEntityByOid(ENTITY.SORA_KUVAUS, id, options);
 
 export default getSoraKuvausById;

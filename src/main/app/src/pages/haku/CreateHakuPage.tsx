@@ -62,7 +62,10 @@ const CreateHakuPage = props => {
         header={<FormHeader>{t('yleiset.haku')}</FormHeader>}
         steps={<FormSteps activeStep={ENTITY.HAKU} />}
         footer={
-          <HakuFooter formMode={FormMode.CREATE} haku={{ organisaatioOid }} />
+          <HakuFooter
+            formMode={FormMode.CREATE}
+            organisaatioOid={organisaatioOid}
+          />
         }
       >
         <RelationInfoContainer>

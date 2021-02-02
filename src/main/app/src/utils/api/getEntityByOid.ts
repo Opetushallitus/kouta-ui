@@ -10,6 +10,7 @@ type GetEntityTypeByOidProps = {
   apiUrls: any;
 };
 
+// NOTE: SORA-kuvaus and valintaperuste use "id" instead of "oid", but this works for them as well.
 export const getEntityByOid = async ({
   entityType,
   oid,

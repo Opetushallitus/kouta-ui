@@ -17,15 +17,17 @@ import { getValuesForSaving } from '#/src/utils';
 
 type HakukohdeFooterProps = {
   formMode: FormMode;
+  organisaatioOid: string;
+  hakukohde?: HakukohdeModel;
   haku: HakuModel;
-  hakukohde: HakukohdeModel;
   toteutus: ToteutusModel;
   canUpdate?: boolean;
 };
 
 export const HakukohdeFooter = ({
   formMode,
-  hakukohde,
+  organisaatioOid,
+  hakukohde = {},
   haku,
   toteutus,
   canUpdate,
@@ -56,7 +58,7 @@ export const HakukohdeFooter = ({
           formMode === FormMode.CREATE
             ? {
                 ...getHakukohdeByFormValues(valuesForSaving),
-                ...hakukohde,
+                organisaatioOid,
                 hakuOid: haku?.oid,
                 toteutusOid: toteutus?.oid,
               }
@@ -68,13 +70,14 @@ export const HakukohdeFooter = ({
 
       if (formMode === FormMode.CREATE) {
         history.push(
-          `/organisaatio/${hakukohde.organisaatioOid}/hakukohde/${oid}/muokkaus`
+          `/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`
         );
       } else {
         queryCache.invalidateQueries(ENTITY.HAKUKOHDE);
       }
     },
     [
+      organisaatioOid,
       form.registeredFields,
       formMode,
       haku,

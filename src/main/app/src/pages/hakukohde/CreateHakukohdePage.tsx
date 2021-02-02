@@ -55,9 +55,9 @@ const CreateHakukohdePage = ({
         footer={
           <HakukohdeFooter
             formMode={FormMode.CREATE}
+            organisaatioOid={organisaatioOid}
             haku={haku}
             toteutus={toteutus}
-            hakukohde={{ organisaatioOid }}
           />
         }
       >

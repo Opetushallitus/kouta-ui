@@ -1,6 +1,0 @@
-export default {
-  eperuste: {
-    suorittaneenOsaaminen: 'Competences aqcuired after completion',
-    tyotehtavatJoissaVoiToimia: 'Work tasks that can be executed',
-  },
-};

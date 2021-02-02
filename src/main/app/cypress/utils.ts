@@ -3,7 +3,8 @@ import { loggable } from 'cypress-pipe';
 import { fireEvent } from '@testing-library/react';
 import koodisto from '#/cypress/data/koodisto';
 import koodistoOpintojenLaajuusYksikko from '#/cypress/data/koodistoOpintojenLaajuusYksikko';
-import ePerusteByKoulutusKoodi351107 from './data/ePerusteByKoulutusKoodi351107';
+import ePerusteByKoulutusKoodi351107 from '#/cypress/data/ePerusteByKoulutusKoodi351107';
+import { Alkamiskausityyppi } from '#/src/constants';
 
 export const paste = loggable('paste', value => $element => {
   $element.focus();
@@ -49,12 +50,7 @@ export const selectOption = value => {
 export const fillAsyncSelect = (input, match = null) => {
   const searchTerm = match || input;
   getSelect().within(() => {
-    // Workaround for not showing the options when copy-pasting:
-    // type the last character separately.
-    // TODO: Find out, why copy-paste doesn't work for async selects when using autorecord
-    cy.get('input[type="text"]')
-      .pipe(paste(input?.slice(0, -1)))
-      .type(input?.slice(-1));
+    cy.get('input[type="text"]').pipe(paste(input));
     cy.findAllByRole('option', { name: _fp.includes(searchTerm) })
       .first()
       .click();
@@ -62,19 +58,20 @@ export const fillAsyncSelect = (input, match = null) => {
 };
 
 export const stubKoodistoRoute = ({ koodisto: koodistonNimi }) => {
-  cy.route({
-    method: 'GET',
-    url: `**/koodisto-service/rest/json/${koodistonNimi}/koodi**`,
-    response: koodisto({ koodisto: koodistonNimi }),
-  });
+  cy.intercept(
+    {
+      method: 'GET',
+      url: `/koodisto-service/rest/json/${koodistonNimi}/koodi`,
+    },
+    { body: koodisto({ koodisto: koodistonNimi }) }
+  );
 };
 
 export const stubLokalisaatioRoute = () => {
-  cy.route({
-    method: 'GET',
-    url: '**/lokalisointi/cxf/rest/v1/localisation**',
-    response: [],
-  });
+  cy.intercept(
+    { method: 'GET', url: '/lokalisointi/cxf/rest/v1/localisation' },
+    { body: [] }
+  );
 };
 
 export const typeToEditor = value => {
@@ -125,61 +122,60 @@ export const fillYhteyshenkilotFields = () => {
 };
 
 export const stubKayttoOikeusMeRoute = ({ user = {} } = {}) => {
-  cy.route({
-    method: 'GET',
-    url: '**/kayttooikeus-service/cas/me',
-    response: {
-      uid: 'johndoe',
-      oid: '1.2.246.562.24.62301161440',
-      firstName: 'John',
-      lastName: 'Doe',
-      lang: 'fi',
-      roles: JSON.stringify([
-        'APP_KOUTA',
-        'APP_KOUTA_OPHPAAKAYTTAJA',
-        'APP_KOUTA_OPHPAAKAYTTAJA_1.2.246.562.10.00000000001',
-      ]),
-      ...user,
-    },
-  });
+  cy.intercept(
+    { method: 'GET', url: '/kayttooikeus-service/cas/me' },
+    {
+      body: {
+        uid: 'johndoe',
+        oid: '1.2.246.562.24.62301161440',
+        firstName: 'John',
+        lastName: 'Doe',
+        lang: 'fi',
+        roles: JSON.stringify([
+          'APP_KOUTA',
+          'APP_KOUTA_OPHPAAKAYTTAJA',
+          'APP_KOUTA_OPHPAAKAYTTAJA_1.2.246.562.10.00000000001',
+        ]),
+        ...user,
+      },
+    }
+  );
 };
 
 export const stubKoutaBackendLoginRoute = () => {
-  cy.route({
-    method: 'GET',
-    url: '**/kouta-backend/auth/login',
-    response: {},
-  });
+  cy.intercept(
+    { method: 'GET', url: '/kouta-backend/auth/login' },
+    { body: {} }
+  );
 };
 
 export const stubKoutaBackendSessionRoute = () => {
-  cy.route({
-    method: 'GET',
-    url: '**/kouta-backend/auth/session',
-    response: {},
-  });
+  cy.intercept(
+    { method: 'GET', url: '/kouta-backend/auth/session' },
+    { body: {} }
+  );
 };
 
 export const stubHakemuspalveluLomakkeetRoute = ({
   lomakkeet = [{ name: { fi: 'Lomake 1' }, key: 'lomake_1' }],
 } = {}) => {
-  cy.route({
-    method: 'GET',
-    url: '**/lomake-editori/api/forms',
-    response: {
-      forms: lomakkeet,
-    },
-  });
+  cy.intercept(
+    { method: 'GET', url: '/lomake-editori/api/forms' },
+    {
+      body: {
+        forms: lomakkeet,
+      },
+    }
+  );
 };
 
 export const stubOppijanumerorekisteriHenkiloRoute = ({
   henkilo = { etunimet: 'John', sukunimi: 'Doe' },
 } = {}) => {
-  cy.route({
-    method: 'GET',
-    url: '**/oppijanumerorekisteri-service/henkilo/**',
-    response: henkilo,
-  });
+  cy.intercept(
+    { method: 'GET', url: '/oppijanumerorekisteri-service/henkilo/' },
+    { body: henkilo }
+  );
 };
 
 export const fillTreeSelect = value => {
@@ -195,20 +191,24 @@ export const fillDatePickerInput = value => {
 export const stubKoodiRoute = koodi => {
   const { koodiUri, versio } = koodi;
 
-  return cy.route({
-    method: 'GET',
-    url: `/koodisto-service/rest/codeelement/${koodiUri}/${versio}`,
-    response: koodi,
-  });
+  return cy.intercept(
+    {
+      method: 'GET',
+      url: `/koodisto-service/rest/codeelement/${koodiUri}/${versio}`,
+    },
+    { body: koodi }
+  );
 };
 
 export const stubEPerusteetByKoulutuskoodiRoute = () => {
-  cy.route({
-    method: 'GET',
-    url:
-      '**/eperusteet-service/api/perusteet?tuleva=true&siirtyma=false&voimassaolo=true&poistunut=false&kieli=fi&koulutuskoodi=koulutus_351107*',
-    response: ePerusteByKoulutusKoodi351107,
-  });
+  cy.intercept(
+    {
+      method: 'GET',
+      url:
+        '/eperusteet-service/api/perusteet?tuleva=true&siirtyma=false&voimassaolo=true&poistunut=false&kieli=fi&koulutuskoodi=koulutus_351107',
+    },
+    { body: ePerusteByKoulutusKoodi351107 }
+  );
 };
 
 export const stubCommonRoutes = () => {
@@ -236,13 +236,15 @@ export const fillValintakokeetSection = () => {
     getByTestId('kokeetTaiLisanaytot').within(() => {
       getByTestId('lisaaKoeTaiLisanayttoButton').click({ force: true });
       getByTestId('kokeenTaiLisanaytonTyyppi').within(() => {
-        selectOption('valintakokeentyyppi_1');
+        selectOption('Valintakoe');
       });
       getByTestId('hakijalleNakyvaNimi').find('input').pipe(paste('nimi'));
 
       getByTestId('tietoaHakijalle').within(() => {
         typeToEditor('Tietoa hakijalle');
       });
+
+      getByTestId('vahimmaispistemaara').find('input').pipe(paste('10,03'));
 
       getByTestId('liittyyEnnakkovalmistautumista').within(() => {
         getCheckbox(null).check({ force: true });
@@ -263,7 +265,7 @@ export const fillValintakokeetSection = () => {
       getByTestId('lisaaTilaisuusButton').click({ force: true });
       getByTestId('osoite').find('input').pipe(paste('osoite'));
       getByTestId('postinumero').within(() => {
-        fillAsyncSelect('0', '0 Posti_0');
+        fillAsyncSelect('00350');
       });
       getByTestId('alkaa').within(() => {
         fillDateTimeInput({
@@ -308,12 +310,14 @@ export const fillPohjaSection = () => {
 };
 
 export const stubKoodistoOpintojenLaajuusYksikko = () => {
-  cy.route({
-    method: 'GET',
-    url:
-      '**/koodisto-service/rest/json/opintojenlaajuusyksikko/koodi?onlyValidKoodis=true&koodistoVersio=',
-    response: koodistoOpintojenLaajuusYksikko,
-  });
+  cy.intercept(
+    {
+      method: 'GET',
+      url:
+        '/koodisto-service/rest/json/opintojenlaajuusyksikko/koodi?onlyValidKoodis=true&koodistoVersio=',
+    },
+    { body: koodistoOpintojenLaajuusYksikko }
+  );
 };
 
 export const fillTilaSection = (tila = 'julkaistu') => {
@@ -359,4 +363,41 @@ export const assertNoUnsavedChangesDialog = () => {
   cy.findByRole('heading', {
     name: 'ilmoitukset.tallentamattomiaMuutoksia.otsikko',
   }).should('not.exist');
+};
+
+export const fillAjankohtaFields = (
+  alkamiskausityyppi = Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI
+) => {
+  getByTestId('AloitusajankohtaFields').within(() => {
+    switch (alkamiskausityyppi) {
+      case Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI:
+        cy.findByText('yleiset.alkamiskausiJaVuosi').click();
+
+        getRadio('kausi_k#1').click({ force: true });
+        selectOption(2035);
+        return;
+      case Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA:
+        cy.findByText('yleiset.tarkkaAlkamisajankohta').click();
+
+        getByTestId('alkaa').within(() => {
+          fillDateTimeInput({
+            date: '1.11.2030',
+            time: '00:00',
+          });
+        });
+
+        getByTestId('paattyy').within(() => {
+          fillDateTimeInput({
+            date: '30.11.2030',
+            time: '00:00',
+          });
+        });
+        return;
+      case Alkamiskausityyppi.HENKILOKOHTAINEN_SUUNNITELMA:
+        cy.findByText(
+          'yleiset.aloitusHenkilokohtaisenSuunnitelmanMukaisesti'
+        ).click();
+        typeToEditor('Henkilökohtaisen suunnitelman lisätiedot');
+    }
+  });
 };

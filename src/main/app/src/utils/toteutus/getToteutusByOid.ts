@@ -1,13 +1,15 @@
-import { get, isObject } from 'lodash';
+import { ENTITY } from '#/src/constants';
+import { getEntityByOid, useEntityByOid } from '#/src/utils/api/getEntityByOid';
 
-const getToteutusByOid = async ({ oid, httpClient, apiUrls }) => {
-  const { data, headers } = await httpClient.get(
-    apiUrls.url('kouta-backend.toteutus-by-oid', oid)
-  );
+const getToteutusByOid = async ({ oid, apiUrls, httpClient }) =>
+  getEntityByOid({
+    entityType: ENTITY.TOTEUTUS,
+    oid,
+    apiUrls,
+    httpClient,
+  });
 
-  const lastModified = get(headers, 'x-last-modified') || null;
-
-  return isObject(data) ? { lastModified, ...data } : data;
-};
+export const useToteutusByOid = (oid?: string | null, options = {}) =>
+  useEntityByOid(ENTITY.TOTEUTUS, oid, options);
 
 export default getToteutusByOid;

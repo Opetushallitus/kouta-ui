@@ -5,13 +5,13 @@ import { useTranslation } from 'react-i18next';
 
 import { Typography } from '#/src/components/virkailija';
 import Spacing from '#/src/components/Spacing';
-import { formatKoutaDateString } from '#/src/utils';
-import { FormFieldCheckbox } from '#/src/components/formFields';
+import { formatDateValue } from '#/src/utils';
+import { FormFieldSwitch } from '#/src/components/formFields';
 import { useFieldValue } from '#/src/hooks/form';
-import HakuajatFields from '#/src/components/HakuajatFields';
+import { HakuajatFields } from '#/src/components/HakuajatFields';
+import { NDASH } from '#/src/constants';
 
 const HakuaikaInterval = ({ haku }) => {
-  const dateFormat = 'DD.MM.YYYY HH:mm';
   const { t } = useTranslation();
 
   const hakuajat = useMemo(
@@ -20,14 +20,14 @@ const HakuaikaInterval = ({ haku }) => {
         ? haku.hakuajat
         : []
       ).map(({ alkaa, paattyy }) => [
-        formatKoutaDateString(alkaa, dateFormat),
-        formatKoutaDateString(paattyy, dateFormat),
+        formatDateValue(alkaa) ?? '',
+        formatDateValue(paattyy) ?? '',
       ]),
     [haku]
   );
 
   const hakuajatContent = useMemo(
-    () => hakuajat.map(([start, end]) => `${start} - ${end}`).join(', '),
+    () => hakuajat.map(([start, end]) => `${start} ${NDASH} ${end}`).join(', '),
     [hakuajat]
   );
 
@@ -60,7 +60,7 @@ const HakuajatSection = ({ haku, name }) => {
       <Spacing marginBottom={2}>
         <HakuaikaInterval haku={haku} />
       </Spacing>
-      <Field name={`${name}.eriHakuaika`} component={FormFieldCheckbox}>
+      <Field name={`${name}.eriHakuaika`} component={FormFieldSwitch}>
         {t('hakukohdelomake.hakukohteellaEriHakuaika')}
       </Field>
       {eriHakuaika ? <CustomHakuaika name={name} /> : null}

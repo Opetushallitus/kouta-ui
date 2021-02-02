@@ -1,11 +1,14 @@
 import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
-import { HAKULOMAKETYYPPI, LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
+import {
+  Alkamiskausityyppi,
+  HAKULOMAKETYYPPI,
+  JULKAISUTILA,
+  LIITTEEN_TOIMITUSTAPA,
+} from '#/src/constants';
 
 test('getFormValuesByHakukohde returns correct form values given hakukohde', () => {
   const values = getFormValuesByHakukohde({
-    tila: 'tallennettu',
-    alkamiskausiKoodiUri: 'kausi_1#1',
-    kaytetaanHaunAikataulua: false,
+    tila: JULKAISUTILA.TALLENNETTU,
     kielivalinta: ['fi', 'sv'],
     aloituspaikat: 35,
     hakuajat: [{ alkaa: '2019-03-29T12:28', paattyy: '2019-09-29T12:30' }],
@@ -43,7 +46,6 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
         toimitustapa: LIITTEEN_TOIMITUSTAPA.MUU_OSOITE,
       },
     ],
-    alkamisvuosi: 2015,
     liitteidenToimitusosoite: {
       osoite: {
         osoite: {
@@ -69,6 +71,14 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
         fi: '<p>Yleiskuvaus - fi</p>',
         sv: '<p>Yleiskuvaus - sv</p>',
       },
+      kaytetaanHaunAlkamiskautta: false,
+      koulutuksenAlkamiskausi: {
+        alkamiskausityyppi: Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,
+        koulutuksenAlkamiskausiKoodiUri: 'kausi_k#1',
+        koulutuksenAlkamispaivamaara: '2021-04-16T00:00',
+        koulutuksenPaattymispaivamaara: '2021-12-12T00:00',
+        koulutuksenAlkamisvuosi: 2020,
+      },
     },
     jarjestyspaikkaOid: '2.2.2.2.2',
     valintakokeet: [
@@ -93,6 +103,7 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
             fi: '<p>Ohjeet erityisjärjestelyihin - fi</p>',
             sv: '<p>Ohjeet erityisjärjestelyihin - sv</p>',
           },
+          vahimmaispisteet: 30.3,
         },
         tilaisuudet: [
           {
@@ -126,7 +137,6 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
     hakulomakeAtaruId: '12345',
     hakulomaketyyppi: HAKULOMAKETYYPPI.ATARU,
     eriHakulomakeKuinHaulla: true,
-    eriAlkamiskausi: true,
   });
 
   expect(values).toMatchSnapshot();

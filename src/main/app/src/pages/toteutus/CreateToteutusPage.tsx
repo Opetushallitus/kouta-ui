@@ -1,35 +1,34 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import queryString from 'query-string';
 
-import { KOULUTUSTYYPPI, POHJAVALINTA, ENTITY } from '#/src/constants';
-import getToteutusByFormValues from '#/src/utils/toteutus/getToteutusByFormValues';
-import getKoulutusByOid from '#/src/utils/koulutus/getKoulutusByOid';
-import getToteutusByOid from '#/src/utils/toteutus/getToteutusByOid';
-import createToteutus from '#/src/utils/toteutus/createToteutus';
+import {
+  KOULUTUSTYYPPI,
+  POHJAVALINTA,
+  ENTITY,
+  FormMode,
+} from '#/src/constants';
+import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
+import { useToteutusByOid } from '#/src/utils/toteutus/getToteutusByOid';
 import getFormValuesByToteutus from '#/src/utils/toteutus/getFormValuesByToteutus';
 
 import FormPage, {
   OrganisaatioRelation,
   KoulutusRelation,
   RelationInfoContainer,
-  FormFooter,
 } from '#/src/components/FormPage';
 import ReduxForm from '#/src/components/ReduxForm';
 import { Spin } from '#/src/components/virkailija';
 import Title from '#/src/components/Title';
-import { useSaveToteutus } from '#/src/hooks/formSaveHooks';
-import useApiAsync from '#/src/hooks/useApiAsync';
 import useSelectBase from '#/src/hooks/useSelectBase';
 import FormHeader from '#/src/components/FormHeader';
 import FormSteps from '#/src/components/FormSteps';
 import { useEntityFormConfig } from '#/src/hooks/form';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
-import ToteutusForm, { initialValues } from '../ToteutusForm';
+import ToteutusForm, { initialValues } from './ToteutusForm';
+import { ToteutusFooter } from './ToteutusFooter';
 
 const { AMMATILLINEN_KOULUTUS, TUTKINNON_OSA, OSAAMISALA } = KOULUTUSTYYPPI;
-
-const resolveFn = () => Promise.resolve();
 
 const getCopyValues = toteutusOid => ({
   pohja: {
@@ -53,13 +52,15 @@ const CreateToteutusPage = props => {
     history,
   } = props;
 
-  const { kopioToteutusOid = null } = queryString.parse(search);
+  const {
+    kopioToteutusOid,
+  }: {
+    kopioToteutusOid?: string;
+  } = queryString.parse(search);
 
-  const { data: koulutus } = useApiAsync({
-    promiseFn: getKoulutusByOid,
-    oid: koulutusOid,
-    watch: koulutusOid,
-  });
+  const { data: koulutus, isFetching: isKoulutusFetching } = useKoulutusByOid(
+    koulutusOid
+  );
 
   const selectBase = useSelectBase(history, { kopioParam: 'kopioToteutusOid' });
   const { t } = useTranslation();
@@ -70,52 +71,22 @@ const CreateToteutusPage = props => {
   const koulutusNimi = koulutus?.nimi;
   const koulutusKielet = koulutus?.kielivalinta;
 
-  const promiseFn = kopioToteutusOid ? getToteutusByOid : resolveFn;
-
-  const { data } = useApiAsync({
-    promiseFn,
-    oid: kopioToteutusOid,
-    watch: kopioToteutusOid,
-  });
+  const { data: toteutus, isFetching: isToteutusFetching } = useToteutusByOid(
+    kopioToteutusOid
+  );
 
   const initialValues = useMemo(() => {
     return [AMMATILLINEN_KOULUTUS, TUTKINNON_OSA, OSAAMISALA].includes(
       koulutustyyppi
     )
-      ? getInitialValues(data, koulutusNimi, koulutusKielet)
-      : getInitialValues(data, null, koulutusKielet);
-  }, [data, koulutustyyppi, koulutusNimi, koulutusKielet]);
+      ? getInitialValues(toteutus, koulutusNimi, koulutusKielet)
+      : getInitialValues(toteutus, null, koulutusKielet);
+  }, [toteutus, koulutustyyppi, koulutusNimi, koulutusKielet]);
 
   const config = useEntityFormConfig(ENTITY.TOTEUTUS, koulutustyyppi);
 
-  const submit = useCallback(
-    async ({ values, httpClient, apiUrls }) => {
-      const { oid } = await createToteutus({
-        httpClient,
-        apiUrls,
-        toteutus: {
-          ...getToteutusByFormValues({ ...values, koulutustyyppi }),
-          organisaatioOid,
-          koulutusOid,
-        },
-      });
-
-      history.push(`/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`);
-    },
-    [organisaatioOid, history, koulutustyyppi, koulutusOid]
-  );
-
-  const FORM_NAME = 'createToteutusForm';
-
-  const save = useSaveToteutus({
-    submit,
-    formName: FORM_NAME,
-    koulutustyyppi,
-    koulutus,
-  });
-
   return (
-    <ReduxForm form={FORM_NAME} initialValues={initialValues}>
+    <ReduxForm form="toteutusForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.uusiToteutus')}</Title>
       <FormConfigContext.Provider value={config}>
         <FormPage
@@ -123,7 +94,14 @@ const CreateToteutusPage = props => {
           steps={<FormSteps activeStep={ENTITY.TOTEUTUS} />}
           footer={
             koulutus ? (
-              <FormFooter entity={ENTITY.TOTEUTUS} save={save} />
+              <ToteutusFooter
+                formMode={FormMode.CREATE}
+                toteutus={toteutus}
+                koulutus={koulutus}
+                koulutustyyppi={koulutustyyppi}
+                organisaatioOid={organisaatioOid}
+                canUpdate={true}
+              />
             ) : null
           }
         >
@@ -134,7 +112,7 @@ const CreateToteutusPage = props => {
             />
             <OrganisaatioRelation organisaatioOid={organisaatioOid} />
           </RelationInfoContainer>
-          {koulutus ? (
+          {!isKoulutusFetching && !isToteutusFetching ? (
             <ToteutusForm
               steps
               koulutus={koulutus}

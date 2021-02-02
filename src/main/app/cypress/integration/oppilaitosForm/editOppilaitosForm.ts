@@ -16,24 +16,20 @@ export const editOppilaitosForm = () => {
   };
 
   beforeEach(() => {
-    cy.server();
     stubOppilaitosFormRoutes({ organisaatioOid });
 
-    cy.route({
-      method: 'GET',
-      url: `**/oppilaitos/${oppilaitos.oid}`,
-      response: oppilaitos,
-    });
+    cy.intercept(
+      { method: 'GET', url: `**/oppilaitos/${oppilaitos.oid}` },
+      { body: oppilaitos }
+    );
 
     cy.visit(`/organisaatio/${organisaatioOid}/oppilaitos`);
   });
 
   it('should be able to edit oppilaitos', () => {
-    cy.route({
-      method: 'POST',
-      url: '**/oppilaitos',
-      response: {},
-    }).as('editOppilaitosResponse');
+    cy.intercept({ method: 'POST', url: '**/oppilaitos' }, { body: {} }).as(
+      'editOppilaitosResponse'
+    );
 
     fillKieliversiotSection();
 

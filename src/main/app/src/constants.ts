@@ -17,29 +17,28 @@ export function getJulkaisutilaTranslationKey(tila: JULKAISUTILA): string {
 
 export const DEFAULT_JULKAISUTILA = JULKAISUTILA.TALLENNETTU;
 
-export const KOULUTUSTYYPPI = {
-  AMMATILLINEN_KOULUTUS: 'amm',
-  LUKIOKOULUTUS: 'lk',
-  YLIOPISTOKOULUTUS: 'yo',
-  AMKKOULUTUS: 'amk',
-  VALMA: 'valma',
-  TELMA: 'telma',
-  TUTKINNON_OSA: 'amm-tutkinnon-osa',
-  OSAAMISALA: 'amm-osaamisala',
-  AVOIN_YO: 'avoin_yo',
-  AVOIN_AMK: 'avoin_amk',
-  TAYDENNYS_KOULUTUS: 'taydennyskoulutus',
-  ERIKOISTUMISKOULUTUS: 'erikoistumiskoulutus',
-  VALMENTAVA_KOULUTUS: 'valmentava_koulutus',
-  AMMATILLINEN_OPETTAJAKOULUTUS: 'ammatillinen_opettajakoulutus',
-  AMMATILLINEN_OPINTO_OHJAAJA_KOULUTUS: 'ammatillinen_opinto_ohjaaja_koulutus',
-  AMMATILLINEN_ERITYISOPETTAJA_KOULUTUS:
-    'ammatillinen_erityisopettaja_koulutus',
-  VAPAA_SIVISTYSTYO: 'vapaa_sivistystyo',
-  LUVA: 'luva',
-  MUUT_KOULUTUKSET: 'muut_koulutukset',
-  PERUSOPETUKSEN_LISAOPETUS: 'perusopetuksen_lisaopetus',
-} as const;
+export enum KOULUTUSTYYPPI {
+  AMMATILLINEN_KOULUTUS = 'amm',
+  LUKIOKOULUTUS = 'lk',
+  YLIOPISTOKOULUTUS = 'yo',
+  AMKKOULUTUS = 'amk',
+  VALMA = 'valma',
+  TELMA = 'telma',
+  TUTKINNON_OSA = 'amm-tutkinnon-osa',
+  OSAAMISALA = 'amm-osaamisala',
+  AVOIN_YO = 'avoin_yo',
+  AVOIN_AMK = 'avoin_amk',
+  TAYDENNYS_KOULUTUS = 'taydennyskoulutus',
+  ERIKOISTUMISKOULUTUS = 'erikoistumiskoulutus',
+  VALMENTAVA_KOULUTUS = 'valmentava_koulutus',
+  AMMATILLINEN_OPETTAJAKOULUTUS = 'ammatillinen_opettajakoulutus',
+  AMMATILLINEN_OPINTO_OHJAAJA_KOULUTUS = 'ammatillinen_opinto_ohjaaja_koulutus',
+  AMMATILLINEN_ERITYISOPETTAJA_KOULUTUS = 'ammatillinen_erityisopettaja_koulutus',
+  VAPAA_SIVISTYSTYO = 'vapaa_sivistystyo',
+  LUVA = 'luva',
+  MUUT_KOULUTUKSET = 'muut_koulutukset',
+  PERUSOPETUKSEN_LISAOPETUS = 'perusopetuksen_lisaopetus',
+}
 
 export const KOULUTUSTYYPIT = Object.values(KOULUTUSTYYPPI);
 
@@ -225,16 +224,16 @@ export const ALLOWED_HTML_TAGS = [
   'ul',
 ];
 
-export const ENTITY = {
-  KOULUTUS: 'koulutus',
-  TOTEUTUS: 'toteutus',
-  HAKU: 'haku',
-  HAKUKOHDE: 'hakukohde',
-  VALINTAPERUSTE: 'valintaperuste',
-  SORA_KUVAUS: 'soraKuvaus',
-  OPPILAITOS: 'oppilaitos',
-  OPPILAITOKSEN_OSA: 'oppilaitoksenOsa',
-};
+export enum ENTITY {
+  KOULUTUS = 'koulutus',
+  TOTEUTUS = 'toteutus',
+  HAKU = 'haku',
+  HAKUKOHDE = 'hakukohde',
+  VALINTAPERUSTE = 'valintaperuste',
+  SORA_KUVAUS = 'soraKuvaus',
+  OPPILAITOS = 'oppilaitos',
+  OPPILAITOKSEN_OSA = 'oppilaitoksenOsa',
+}
 
 export const ICONS = {
   koulutus: 'school',
@@ -262,8 +261,10 @@ export const CRUD_ROLES = {
   CREATE: 'create',
 };
 
-export const HAKEUTUMINEN = 'hakeutuminen';
-export const ILMOITTAUTUMINEN = 'ilmoittautuminen';
+export enum Hakeutumistapa {
+  HAKEUTUMINEN = 'hakeutuminen',
+  ILMOITTAUTUMINEN = 'ilmoittautuminen',
+}
 
 export const EPERUSTE_SERVICE_QUERY_OPTIONS = {
   cacheTime: Infinity,
@@ -275,12 +276,9 @@ export enum Alkamiskausityyppi {
   HENKILOKOHTAINEN_SUUNNITELMA = 'henkilokohtainen suunnitelma',
 }
 
-export enum Ajankohtatyyppi {
-  ALKAMISKAUSI = 'alkamiskausi',
-  HENKILOKOHTAINEN_SUUNNITELMA = 'aloitusHenkilokohtaisenSuunnitelmanMukaisesti',
-}
-
 export enum FormMode {
   CREATE = 'create',
   EDIT = 'edit',
 }
+
+export const NDASH = '\u2013';

@@ -10,7 +10,6 @@ import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
 import { useFieldValue, useSelectedLanguages } from '#/src/hooks/form';
 import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
-import PohjaValintaSection from '#/src/components/PohjaValintaSection';
 import getHaut from '#/src/utils/haku/getHaut';
 import NameSection from './NameSection';
 import TargetGroupSection from './TargetGroupSection';
@@ -53,15 +52,11 @@ const HakuForm = ({
         {canSelectBase ? (
           <PohjaFormCollapse
             section="pohja"
-            header={t('yleiset.pohjanValinta')}
-            Component={PohjaValintaSection}
             scrollOnActive={false}
             onSelectBase={onSelectBase}
             infoText={t('hakulomake.pohjavalintaInfo')}
-            createLabel={t('yleiset.luoUusi', { entity: t('yleiset.haku') })}
-            copyLabel={t('yleiset.kopioiPohjaksi', {
-              entity: t('yleiset.haku'),
-            })}
+            createLabel={t('yleiset.luoUusiHaku')}
+            copyLabel={t('hakulomake.kopioiPohjaksi')}
             organisaatioOid={organisaatioOid}
             getCopyEntities={getHaut}
           />
@@ -105,6 +100,7 @@ const HakuForm = ({
           section="hakulomake"
           header={t('yleiset.hakulomakkeenValinta')}
           languages={languages}
+          haku={hakuProp}
           Component={LomakeFields}
         />
 

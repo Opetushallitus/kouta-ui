@@ -57,6 +57,16 @@ Object {
         "value": "kieli_5#1",
       },
     ],
+    "ajankohta": Object {
+      "ajankohtaTyyppi": "tarkka alkamisajankohta",
+      "henkilokohtaisenSuunnitelmanLisatiedot": Object {},
+      "kausi": "kausi_k#1",
+      "tarkkaAlkaa": "2021-04-16T00:00",
+      "tarkkaPaattyy": "2021-12-12T00:00",
+      "vuosi": Object {
+        "value": 2020,
+      },
+    },
     "diplomiKuvaus": Object {
       "fi":         "<p>Fi diplomi</p>",
       "sv":         "<p>Sv diplomi</p>",
@@ -66,13 +76,6 @@ Object {
         "value": "dipmlomi_1#1",
       },
     ],
-    "koulutuksenAlkamiskausi": "kausi_0#1",
-    "koulutuksenAlkamispaivamaara": "",
-    "koulutuksenAlkamisvuosi": Object {
-      "value": 2020,
-    },
-    "koulutuksenPaattymispaivamaara": "",
-    "koulutuksenTarkkaAlkamisaika": false,
     "maksullisuus": Object {
       "maksu": "",
       "tyyppi": "kylla",
@@ -147,6 +150,7 @@ Object {
     "fi",
     "sv",
   ],
+  "koulutustyyppi": undefined,
   "kuvaus": Object {
     "fi":       "<p>Fi toteutuksenkuvaus</p>",
     "sv":       "<p>Sv toteutuksenkuvaus</p>",
@@ -212,7 +216,7 @@ Object {
       "osaamisala2",
     ],
   },
-  "soraKuvaus": null,
+  "soraKuvaus": undefined,
   "tarjoajat": Array [
     "org1",
     "org2",
@@ -307,21 +311,6 @@ Object {
           "tyyppi": "taulukko",
         },
       ],
-    },
-  ],
-  "tutkinnonOsat": Array [
-    Object {
-      "osaamisalaKoodiUri": Object {
-        "value": "osaamisala_1#1",
-      },
-      "tutkinnonOsat": Array [
-        Object {
-          "value": "tutkinnonosa_1#1",
-        },
-      ],
-      "tutkinto": Object {
-        "value": "tutkinto_1#1",
-      },
     },
   ],
   "yhteyshenkilot": Array [

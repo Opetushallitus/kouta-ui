@@ -50,13 +50,18 @@ const PerustiedotSection = ({
       <Divider marginTop={4} marginBottom={4} />
 
       <div {...getTestIdProps('alkamiskausiSection')}>
-        <AlkamiskausiSection name="alkamiskausi" toteutus={toteutus} />
+        <AlkamiskausiSection
+          name="ajankohta"
+          language={language}
+          toteutus={toteutus}
+          haku={haku}
+        />
       </div>
 
       <Divider marginTop={4} marginBottom={4} />
 
       <div {...getTestIdProps('lomakeSection')}>
-        <LomakeSection haku={haku} />
+        <LomakeSection haku={haku} language={language} />
       </div>
     </>
   );

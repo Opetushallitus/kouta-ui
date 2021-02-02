@@ -62,7 +62,7 @@ const KoulutusModal = ({ onClose, organisaatioOid, open }) => {
           </Box>
 
           <Button disabled={!koulutus} onClick={onSubmit}>
-            {t('etusivu.luoUusiToteutus')}
+            {t('yleiset.luoUusiToteutus')}
           </Button>
         </Box>
       </ModalFooter>

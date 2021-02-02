@@ -1,0 +1,124 @@
+[
+    {
+        "url": "https://localhost:3000/koodisto-service/rest/json/kausi/koodi?onlyValidKoodis=true&koodistoVersio=",
+        "response": {
+            "body": [
+                {
+                    "koodiUri": "kausi_s",
+                    "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/kausi_s",
+                    "version": 0,
+                    "versio": 1,
+                    "koodisto": {
+                        "koodistoUri": "kausi",
+                        "organisaatioOid": "1.2.246.562.10.00000000001",
+                        "koodistoVersios": [
+                            1
+                        ]
+                    },
+                    "koodiArvo": "S",
+                    "paivitysPvm": "2013-10-28",
+                    "paivittajaOid": null,
+                    "voimassaAlkuPvm": "1995-08-01",
+                    "voimassaLoppuPvm": null,
+                    "tila": "LUONNOS",
+                    "metadata": [
+                        {
+                            "nimi": "Höst",
+                            "kuvaus": "Höst",
+                            "lyhytNimi": "H",
+                            "kayttoohje": null,
+                            "kasite": null,
+                            "sisaltaaMerkityksen": null,
+                            "eiSisallaMerkitysta": null,
+                            "huomioitavaKoodi": null,
+                            "sisaltaaKoodiston": null,
+                            "kieli": "SV"
+                        },
+                        {
+                            "nimi": "Autumn",
+                            "kuvaus": "Autumn",
+                            "lyhytNimi": "A",
+                            "kayttoohje": null,
+                            "kasite": null,
+                            "sisaltaaMerkityksen": null,
+                            "eiSisallaMerkitysta": null,
+                            "huomioitavaKoodi": null,
+                            "sisaltaaKoodiston": null,
+                            "kieli": "EN"
+                        },
+                        {
+                            "nimi": "Syksy",
+                            "kuvaus": "Voi olla joko koulutuksen alkamiskausi tai hakukausi",
+                            "lyhytNimi": "S",
+                            "kayttoohje": null,
+                            "kasite": null,
+                            "sisaltaaMerkityksen": null,
+                            "eiSisallaMerkitysta": null,
+                            "huomioitavaKoodi": null,
+                            "sisaltaaKoodiston": null,
+                            "kieli": "FI"
+                        }
+                    ]
+                },
+                {
+                    "koodiUri": "kausi_k",
+                    "resourceUri": "https://virkailija.hahtuvaopintopolku.fi/koodisto-service/rest/codeelement/kausi_k",
+                    "version": 0,
+                    "versio": 1,
+                    "koodisto": {
+                        "koodistoUri": "kausi",
+                        "organisaatioOid": "1.2.246.562.10.00000000001",
+                        "koodistoVersios": [
+                            1
+                        ]
+                    },
+                    "koodiArvo": "K",
+                    "paivitysPvm": "2013-10-28",
+                    "paivittajaOid": null,
+                    "voimassaAlkuPvm": "1992-01-01",
+                    "voimassaLoppuPvm": null,
+                    "tila": "LUONNOS",
+                    "metadata": [
+                        {
+                            "nimi": "Spring",
+                            "kuvaus": "Spring",
+                            "lyhytNimi": "S",
+                            "kayttoohje": null,
+                            "kasite": null,
+                            "sisaltaaMerkityksen": null,
+                            "eiSisallaMerkitysta": null,
+                            "huomioitavaKoodi": null,
+                            "sisaltaaKoodiston": null,
+                            "kieli": "EN"
+                        },
+                        {
+                            "nimi": "Vår",
+                            "kuvaus": "Vår",
+                            "lyhytNimi": "V",
+                            "kayttoohje": null,
+                            "kasite": null,
+                            "sisaltaaMerkityksen": null,
+                            "eiSisallaMerkitysta": null,
+                            "huomioitavaKoodi": null,
+                            "sisaltaaKoodiston": null,
+                            "kieli": "SV"
+                        },
+                        {
+                            "nimi": "Kevät",
+                            "kuvaus": "Voi olla joko koulutuksen alkamiskausi tai hakukausi",
+                            "lyhytNimi": "K",
+                            "kayttoohje": null,
+                            "kasite": null,
+                            "sisaltaaMerkityksen": null,
+                            "eiSisallaMerkitysta": null,
+                            "huomioitavaKoodi": null,
+                            "sisaltaaKoodiston": null,
+                            "kieli": "FI"
+                        }
+                    ]
+                }
+            ],
+            "status": 200
+        }
+    }
+]

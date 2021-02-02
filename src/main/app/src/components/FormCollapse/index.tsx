@@ -70,22 +70,41 @@ const renderHeader = ({
   );
 };
 
-const FormCollapse = ({
+type ComponentProps = any;
+
+export type FormCollapseProps = {
+  onContinue?: () => void;
+  actions?: React.ReactNode;
+  index?: number;
+  header: string;
+  id?: string;
+  defaultLanguage?: LanguageCode;
+  showLanguageTabs?: boolean;
+  languages?: Array<LanguageCode>;
+  active?: boolean;
+  section?: string;
+  isOpen?: boolean;
+  onToggle?: () => void;
+  Component: ComponentProps;
+  [x: string]: any;
+};
+
+export const FormCollapse = ({
   onContinue,
-  actions: actionsProp = null,
+  actions: actionsProp,
   index,
-  header: headerProp = null,
+  header: headerProp,
   id,
   defaultLanguage = 'fi',
   showLanguageTabs = false,
   languages = [],
   active = false,
   section,
-  isOpen,
+  isOpen = false,
   onToggle,
   Component,
   ...props
-}) => {
+}: FormCollapseProps) => {
   const { t } = useTranslation();
   const [language, setLanguage] = useState(defaultLanguage);
 

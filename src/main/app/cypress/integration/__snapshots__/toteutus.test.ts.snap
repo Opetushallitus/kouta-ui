@@ -44,11 +44,14 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
       "aidinkieliKielivalikoima": [],
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
-      "koulutuksenAlkamiskausi": "kausi_0#1",
-      "koulutuksenAlkamispaivamaara": null,
-      "koulutuksenAlkamisvuosi": 2035,
-      "koulutuksenPaattymispaivamaara": null,
-      "koulutuksenTarkkaAlkamisaika": null,
+      "koulutuksenAlkamiskausiUUSI": {
+        "alkamiskausityyppi": "alkamiskausi ja -vuosi",
+        "henkilokohtaisenSuunnitelmanLisatiedot": {},
+        "koulutuksenAlkamiskausiKoodiUri": "kausi_k#1",
+        "koulutuksenAlkamispaivamaara": null,
+        "koulutuksenAlkamisvuosi": 2035,
+        "koulutuksenPaattymispaivamaara": null
+      },
       "lisatiedot": [
         {
           "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
@@ -92,7 +95,6 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
     },
     "osaamisalat": [],
     "toteutusjaksot": [],
-    "tutkinnonOsat": [],
     "tyyppi": "amm-tutkinnon-osa",
     "yhteyshenkilot": [
       {
@@ -168,11 +170,14 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
       "aidinkieliKielivalikoima": [],
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
-      "koulutuksenAlkamiskausi": "kausi_0#1",
-      "koulutuksenAlkamispaivamaara": null,
-      "koulutuksenAlkamisvuosi": 2035,
-      "koulutuksenPaattymispaivamaara": null,
-      "koulutuksenTarkkaAlkamisaika": null,
+      "koulutuksenAlkamiskausiUUSI": {
+        "alkamiskausityyppi": "alkamiskausi ja -vuosi",
+        "henkilokohtaisenSuunnitelmanLisatiedot": {},
+        "koulutuksenAlkamiskausiKoodiUri": "kausi_k#1",
+        "koulutuksenAlkamispaivamaara": null,
+        "koulutuksenAlkamisvuosi": 2035,
+        "koulutuksenPaattymispaivamaara": null
+      },
       "lisatiedot": [
         {
           "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
@@ -226,7 +231,6 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
       }
     ],
     "toteutusjaksot": [],
-    "tutkinnonOsat": [],
     "tyyppi": "amm",
     "yhteyshenkilot": [
       {
@@ -317,11 +321,14 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
       "aidinkieliKielivalikoima": [],
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
-      "koulutuksenAlkamiskausi": "kausi_0#1",
-      "koulutuksenAlkamispaivamaara": null,
-      "koulutuksenAlkamisvuosi": 2035,
-      "koulutuksenPaattymispaivamaara": null,
-      "koulutuksenTarkkaAlkamisaika": null,
+      "koulutuksenAlkamiskausiUUSI": {
+        "alkamiskausityyppi": "alkamiskausi ja -vuosi",
+        "henkilokohtaisenSuunnitelmanLisatiedot": {},
+        "koulutuksenAlkamiskausiKoodiUri": "kausi_k#1",
+        "koulutuksenAlkamispaivamaara": null,
+        "koulutuksenAlkamisvuosi": 2035,
+        "koulutuksenPaattymispaivamaara": null
+      },
       "lisatiedot": [
         {
           "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
@@ -368,7 +375,6 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
     },
     "osaamisalat": [],
     "toteutusjaksot": [],
-    "tutkinnonOsat": [],
     "tyyppi": "yo",
     "yhteyshenkilot": [
       {
@@ -471,11 +477,14 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
       "diplomiKuvaus": {
         "fi": "<p>Diplomi kuvaus</p>"
       },
-      "koulutuksenAlkamiskausi": "kausi_0#1",
-      "koulutuksenAlkamispaivamaara": null,
-      "koulutuksenAlkamisvuosi": 2035,
-      "koulutuksenPaattymispaivamaara": null,
-      "koulutuksenTarkkaAlkamisaika": null,
+      "koulutuksenAlkamiskausiUUSI": {
+        "alkamiskausityyppi": "alkamiskausi ja -vuosi",
+        "henkilokohtaisenSuunnitelmanLisatiedot": {},
+        "koulutuksenAlkamiskausiKoodiUri": "kausi_k#1",
+        "koulutuksenAlkamispaivamaara": null,
+        "koulutuksenAlkamisvuosi": 2035,
+        "koulutuksenPaattymispaivamaara": null
+      },
       "lisatiedot": [
         {
           "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
@@ -521,7 +530,6 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
     },
     "osaamisalat": [],
     "toteutusjaksot": [],
-    "tutkinnonOsat": [],
     "tyyppi": "lk",
     "yhteyshenkilot": [
       {
@@ -599,11 +607,14 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
       "aidinkieliKielivalikoima": [],
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
-      "koulutuksenAlkamiskausi": "kausi_0#1",
-      "koulutuksenAlkamispaivamaara": null,
-      "koulutuksenAlkamisvuosi": 2020,
-      "koulutuksenPaattymispaivamaara": null,
-      "koulutuksenTarkkaAlkamisaika": null,
+      "koulutuksenAlkamiskausiUUSI": {
+        "alkamiskausityyppi": "tarkka alkamisajankohta",
+        "henkilokohtaisenSuunnitelmanLisatiedot": {},
+        "koulutuksenAlkamiskausiKoodiUri": null,
+        "koulutuksenAlkamispaivamaara": "2021-04-16T00:00",
+        "koulutuksenAlkamisvuosi": null,
+        "koulutuksenPaattymispaivamaara": "2021-12-12T00:00"
+      },
       "lisatiedot": [
         {
           "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
@@ -657,7 +668,6 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
       }
     ],
     "toteutusjaksot": [],
-    "tutkinnonOsat": [],
     "tyyppi": "amm",
     "yhteyshenkilot": [
       {
@@ -752,11 +762,14 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
       "aidinkieliKielivalikoima": [],
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
-      "koulutuksenAlkamiskausi": "kausi_0#1",
-      "koulutuksenAlkamispaivamaara": null,
-      "koulutuksenAlkamisvuosi": 2020,
-      "koulutuksenPaattymispaivamaara": null,
-      "koulutuksenTarkkaAlkamisaika": null,
+      "koulutuksenAlkamiskausiUUSI": {
+        "alkamiskausityyppi": "tarkka alkamisajankohta",
+        "henkilokohtaisenSuunnitelmanLisatiedot": {},
+        "koulutuksenAlkamiskausiKoodiUri": null,
+        "koulutuksenAlkamispaivamaara": "2021-04-16T00:00",
+        "koulutuksenAlkamisvuosi": null,
+        "koulutuksenPaattymispaivamaara": "2021-12-12T00:00"
+      },
       "lisatiedot": [
         {
           "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
@@ -800,7 +813,6 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
     },
     "osaamisalat": [],
     "toteutusjaksot": [],
-    "tutkinnonOsat": [],
     "tyyppi": "yo",
     "yhteyshenkilot": [
       {
@@ -909,11 +921,14 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
       "diplomiKuvaus": {
         "fi": "<p>Fi diplomi</p>"
       },
-      "koulutuksenAlkamiskausi": "kausi_0#1",
-      "koulutuksenAlkamispaivamaara": null,
-      "koulutuksenAlkamisvuosi": 2020,
-      "koulutuksenPaattymispaivamaara": null,
-      "koulutuksenTarkkaAlkamisaika": null,
+      "koulutuksenAlkamiskausiUUSI": {
+        "alkamiskausityyppi": "tarkka alkamisajankohta",
+        "henkilokohtaisenSuunnitelmanLisatiedot": {},
+        "koulutuksenAlkamiskausiKoodiUri": null,
+        "koulutuksenAlkamispaivamaara": "2021-04-16T00:00",
+        "koulutuksenAlkamisvuosi": null,
+        "koulutuksenPaattymispaivamaara": "2021-12-12T00:00"
+      },
       "lisatiedot": [
         {
           "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
@@ -959,7 +974,6 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
     },
     "osaamisalat": [],
     "toteutusjaksot": [],
-    "tutkinnonOsat": [],
     "tyyppi": "lk",
     "yhteyshenkilot": [
       {
@@ -1041,11 +1055,14 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
       "aidinkieliKielivalikoima": [],
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
-      "koulutuksenAlkamiskausi": "kausi_0#1",
-      "koulutuksenAlkamispaivamaara": null,
-      "koulutuksenAlkamisvuosi": 2020,
-      "koulutuksenPaattymispaivamaara": null,
-      "koulutuksenTarkkaAlkamisaika": null,
+      "koulutuksenAlkamiskausiUUSI": {
+        "alkamiskausityyppi": "tarkka alkamisajankohta",
+        "henkilokohtaisenSuunnitelmanLisatiedot": {},
+        "koulutuksenAlkamiskausiKoodiUri": null,
+        "koulutuksenAlkamispaivamaara": "2021-04-16T00:00",
+        "koulutuksenAlkamisvuosi": null,
+        "koulutuksenPaattymispaivamaara": "2021-12-12T00:00"
+      },
       "lisatiedot": [
         {
           "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
@@ -1099,7 +1116,6 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
       }
     ],
     "toteutusjaksot": [],
-    "tutkinnonOsat": [],
     "tyyppi": "amm-tutkinnon-osa",
     "yhteyshenkilot": [
       {

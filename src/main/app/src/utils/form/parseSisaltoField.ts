@@ -1,16 +1,16 @@
-import { isObject, isArray, mapValues } from 'lodash';
+import _ from 'lodash';
 import { parseEditorState } from '#/src/components/Editor/utils';
 
 const parseSisaltoField = sisalto => {
-  if (!isArray(sisalto)) {
+  if (!_.isArray(sisalto)) {
     return [];
   }
 
-  return sisalto.map(({ tyyppi, data }) => {
+  return sisalto.map(({ tyyppi, data }: { tyyppi: string; data: any }) => {
     if (tyyppi === 'teksti') {
       return {
         tyyppi,
-        data: isObject(data) ? mapValues(data, parseEditorState) : {},
+        data: _.isObject(data) ? _.mapValues(data, parseEditorState) : {},
       };
     }
 

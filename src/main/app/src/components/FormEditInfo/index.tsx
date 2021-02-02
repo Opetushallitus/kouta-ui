@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { Icon } from '#/src/components/virkailija';
 import { getThemeProp } from '#/src/theme';
-import { formatKoutaDateString } from '#/src/utils';
+import { formatDateValue } from '#/src/utils';
 import Spacing from '#/src/components/Spacing';
 import Anchor from '#/src/components/Anchor';
 import { useTranslation } from 'react-i18next';
@@ -43,7 +43,7 @@ const FormEditInfo = ({ editorOid, date, historyUrl, ...props }) => {
       <InfoContainer>
         <Spacing marginBottom={0.25}>{t('yleiset.muokattuViimeksi')}:</Spacing>
         <Spacing marginBottom={0.25}>
-          {date ? formatKoutaDateString(date, 'DD.MM.YYYY HH:mm') : null}{' '}
+          {formatDateValue(date)}{' '}
           {editorOid ? <Editor oid={editorOid} /> : null}
         </Spacing>
         <div>

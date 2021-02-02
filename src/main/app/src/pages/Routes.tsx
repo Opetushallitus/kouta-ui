@@ -5,61 +5,61 @@ import Toaster from '#/src/components/Toaster';
 import RouterScrollToTop from '#/src/components/RouterScrollToTop';
 
 const HomePage = React.lazy(() => import('#/src/pages/HomePage'));
-const CreateKoulutusPage = React.lazy(() =>
-  import('#/src/pages/koulutus/CreateKoulutusPage')
+const CreateKoulutusPage = React.lazy(
+  () => import('#/src/pages/koulutus/CreateKoulutusPage')
 );
-const EditKoulutusPage = React.lazy(() =>
-  import('#/src/pages/koulutus/EditKoulutusPage')
+const EditKoulutusPage = React.lazy(
+  () => import('#/src/pages/koulutus/EditKoulutusPage')
 );
-const RedirectKoulutusPage = React.lazy(() =>
-  import('#/src/pages/koulutus/RedirectKoulutusPage')
+const RedirectKoulutusPage = React.lazy(
+  () => import('#/src/pages/koulutus/RedirectKoulutusPage')
 );
-const CreateToteutusPage = React.lazy(() =>
-  import('#/src/pages/toteutus/CreateToteutusPage')
+const CreateToteutusPage = React.lazy(
+  () => import('#/src/pages/toteutus/CreateToteutusPage')
 );
-const EditToteutusPage = React.lazy(() =>
-  import('#/src/pages/toteutus/EditToteutusPage')
+const EditToteutusPage = React.lazy(
+  () => import('#/src/pages/toteutus/EditToteutusPage')
 );
-const RedirectToteutusPage = React.lazy(() =>
-  import('#/src/pages/toteutus/RedirectToteutusPage')
+const RedirectToteutusPage = React.lazy(
+  () => import('#/src/pages/toteutus/RedirectToteutusPage')
 );
-const CreateHakuPage = React.lazy(() =>
-  import('#/src/pages/haku/CreateHakuPage')
+const CreateHakuPage = React.lazy(
+  () => import('#/src/pages/haku/CreateHakuPage')
 );
 const EditHakuPage = React.lazy(() => import('#/src/pages/haku/EditHakuPage'));
 
-const RedirectHakuPage = React.lazy(() =>
-  import('#/src/pages/haku/RedirectHakuPage')
+const RedirectHakuPage = React.lazy(
+  () => import('#/src/pages/haku/RedirectHakuPage')
 );
-const CreateHakukohdePage = React.lazy(() =>
-  import('#/src/pages/hakukohde/CreateHakukohdePage')
+const CreateHakukohdePage = React.lazy(
+  () => import('#/src/pages/hakukohde/CreateHakukohdePage')
 );
-const EditHakukohdePage = React.lazy(() =>
-  import('#/src/pages/hakukohde/EditHakukohdePage')
+const EditHakukohdePage = React.lazy(
+  () => import('#/src/pages/hakukohde/EditHakukohdePage')
 );
-const RedirectHakukohdePage = React.lazy(() =>
-  import('#/src/pages/hakukohde/RedirectHakukohdePage')
+const RedirectHakukohdePage = React.lazy(
+  () => import('#/src/pages/hakukohde/RedirectHakukohdePage')
 );
-const CreateValintaperustePage = React.lazy(() =>
-  import('#/src/pages/valintaperuste/CreateValintaperustePage')
+const CreateValintaperustePage = React.lazy(
+  () => import('#/src/pages/valintaperuste/CreateValintaperustePage')
 );
-const EditValintaperustePage = React.lazy(() =>
-  import('#/src/pages/valintaperuste/EditValintaperustePage')
+const EditValintaperustePage = React.lazy(
+  () => import('#/src/pages/valintaperuste/EditValintaperustePage')
 );
-const RedirectValintaperustePage = React.lazy(() =>
-  import('#/src/pages/valintaperuste/RedirectValintaperustePage')
+const RedirectValintaperustePage = React.lazy(
+  () => import('#/src/pages/valintaperuste/RedirectValintaperustePage')
 );
-const CreateSoraKuvausPage = React.lazy(() =>
-  import('#/src/pages/soraKuvaus/CreateSoraKuvausPage')
+const CreateSoraKuvausPage = React.lazy(
+  () => import('#/src/pages/soraKuvaus/CreateSoraKuvausPage')
 );
-const EditSoraKuvausPage = React.lazy(() =>
-  import('#/src/pages/soraKuvaus/EditSoraKuvausPage')
+const EditSoraKuvausPage = React.lazy(
+  () => import('#/src/pages/soraKuvaus/EditSoraKuvausPage')
 );
 
 const OppilaitosPage = React.lazy(() => import('#/src/pages/OppilaitosPage'));
 
-const OppilaitoksenOsaPage = React.lazy(() =>
-  import('#/src/pages/OppilaitoksenOsaPage')
+const OppilaitoksenOsaPage = React.lazy(
+  () => import('#/src/pages/OppilaitoksenOsaPage')
 );
 
 const Routes = ({ history }) => {

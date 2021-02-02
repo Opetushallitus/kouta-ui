@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Field } from 'redux-form';
 import { isFunction } from 'lodash';
 import { useTranslation } from 'react-i18next';
-
+import styled from 'styled-components';
 import {
   FormFieldSelect,
   FormFieldInput,
@@ -23,7 +23,13 @@ import {
 } from './utils';
 import { useUrls } from '#/src/contexts/contextHooks';
 
-const LomakeSelect = ({ input, getShowUrl, t, ...props }) => {
+const Buttons = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+`;
+
+const LomakeSelect = ({ input, apiUrls, haku, getShowUrl, t, ...props }) => {
   const { value } = input;
   const url = isFunction(getShowUrl) ? getShowUrl(value) : null;
 
@@ -32,15 +38,32 @@ const LomakeSelect = ({ input, getShowUrl, t, ...props }) => {
       <FormFieldSelect value={value} {...props} input={input} />
       {url ? (
         <Spacing marginTop={2}>
-          <Button
-            as="a"
-            href={url}
-            target="_blank"
-            variant="outlined"
-            color="primary"
-          >
-            {t('yleiset.avaaLomake')}
-          </Button>
+          <Buttons>
+            <Button
+              as="a"
+              href={url}
+              target="_blank"
+              variant="outlined"
+              color="primary"
+            >
+              {t('yleiset.avaaLomake')}
+            </Button>
+            <Spacing marginRight={1} />
+            {/*haku && haku.oid ? (
+              <Button
+                as="a"
+                href={apiUrls.url(
+                  'hakukohderyhmapalvelu.haun-asetukset',
+                  haku.oid
+                )}
+                target="_blank"
+                variant="outlined"
+                color="primary"
+              >
+                {t('yleiset.muokkaaAsetuksia')}
+              </Button>
+                ) : null*/}
+          </Buttons>
         </Spacing>
       ) : null}
     </>
@@ -50,6 +73,7 @@ const LomakeSelect = ({ input, getShowUrl, t, ...props }) => {
 const AdditionalTyyppiFields = ({
   input: { value },
   baseName,
+  haku,
   ataruOptions,
   getTyyppiShowUrl,
   apiUrls,
@@ -69,6 +93,8 @@ const AdditionalTyyppiFields = ({
           options={ataruOptions}
           label={t('yleiset.valitseHakulomake')}
           getShowUrl={getShowUrl}
+          apiUrls={apiUrls}
+          haku={haku}
           t={t}
         />
       );
@@ -102,6 +128,7 @@ const defaultTyypit = [
 
 export const LomakeFields = ({
   name,
+  haku,
   tyypit = defaultTyypit,
   optionsLabel: optionsLabelProp,
   getTyyppiLabel,
@@ -161,6 +188,7 @@ export const LomakeFields = ({
           t={t}
           component={AdditionalTyyppiFields}
           language={translationLanguage}
+          haku={haku}
         />
       </FlexItem>
     </Flex>

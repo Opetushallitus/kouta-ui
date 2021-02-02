@@ -1,3 +1,4 @@
+import { Alkamiskausityyppi } from '#/src/constants';
 import { merge } from 'lodash';
 
 const getBaseFields = () => ({
@@ -9,8 +10,6 @@ const getBaseFields = () => ({
   metadata: {
     kuvaus: {},
     opetus: {
-      koulutuksenAlkamispaivamaara: '2019-08-23T00:00',
-      koulutuksenPaattymispaivamaara: '2019-08-26T00:00',
       opetuskieliKoodiUrit: ['oppilaitoksenopetuskieli_1#1'],
       opetuskieletKuvaus: {
         fi: 'Opetuskieli kuvaus',
@@ -34,10 +33,10 @@ const getBaseFields = () => ({
         fi: 'Maksullisuus kuvaus',
       },
       maksunMaara: 20,
-      alkamiskausiKoodiUri: 'kausi_1#1',
-      alkamisvuosi: '2024',
-      alkamisaikaKuvaus: {
-        fi: 'Alkamisaika kuvaus',
+      koulutuksenAlkamiskausiUUSI: {
+        alkamiskausityyppi: Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,
+        koulutuksenAlkamispaivamaara: '2021-04-16T00:00',
+        koulutuksenPaattymispaivamaara: '2021-12-12T00:00',
       },
       onkoStipendia: true,
       stipendinMaara: 90,

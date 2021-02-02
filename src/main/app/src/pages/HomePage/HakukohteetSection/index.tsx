@@ -73,7 +73,7 @@ const Actions = ({ organisaatioOid }) => {
         organisaatioOid={organisaatioOid}
         onClose={close}
       />
-      <Button onClick={open}>{t('etusivu.luoUusiHakukohde')}</Button>
+      <Button onClick={open}>{t('yleiset.luoUusiHakukohde')}</Button>
     </>
   );
 };

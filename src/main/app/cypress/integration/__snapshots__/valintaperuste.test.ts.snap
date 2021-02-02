@@ -1,16 +1,65 @@
 exports[`createValintaperuste > should be able to create valintaperuste #0`] =
 {
-  "hakutapaKoodiUri": "hakutapa_0#1",
+  "hakutapaKoodiUri": "hakutapa_01#1",
   "kielivalinta": [
     "fi"
   ],
-  "kohdejoukkoKoodiUri": "haunkohdejoukko_0#1",
+  "kohdejoukkoKoodiUri": "haunkohdejoukko_12#1",
   "koulutustyyppi": "yo",
   "metadata": {
     "kielitaitovaatimukset": [],
     "kuvaus": {
       "fi": "<p>Kuvaus</p>"
     },
+    "sisalto": [
+      {
+        "data": {
+          "fi": "<p>Sisältötekstiä</p>"
+        },
+        "tyyppi": "teksti"
+      },
+      {
+        "data": {
+          "rows": [
+            {
+              "columns": [
+                {
+                  "index": 0,
+                  "text": {
+                    "fi": "solu1.1"
+                  }
+                },
+                {
+                  "index": 1,
+                  "text": {
+                    "fi": "solu1.2"
+                  }
+                }
+              ],
+              "index": 0
+            },
+            {
+              "columns": [
+                {
+                  "index": 0,
+                  "text": {
+                    "fi": "solu2.1"
+                  }
+                },
+                {
+                  "index": 1,
+                  "text": {
+                    "fi": "solu2.2"
+                  }
+                }
+              ],
+              "index": 1
+            }
+          ]
+        },
+        "tyyppi": "taulukko"
+      }
+    ],
     "osaamistaustaKoodiUrit": [],
     "tyyppi": "yo",
     "valintakokeidenYleiskuvaus": {
@@ -18,7 +67,7 @@ exports[`createValintaperuste > should be able to create valintaperuste #0`] =
     },
     "valintatavat": [
       {
-        "enimmaispisteet": 100,
+        "enimmaispisteet": 100.02,
         "kaytaMuuntotaulukkoa": false,
         "kuvaus": {},
         "kynnysehto": {
@@ -76,8 +125,8 @@ exports[`createValintaperuste > should be able to create valintaperuste #0`] =
             "tyyppi": "taulukko"
           }
         ],
-        "vahimmaispisteet": 10,
-        "valintatapaKoodiUri": "valintatapajono_0#1"
+        "vahimmaispisteet": 10.01,
+        "valintatapaKoodiUri": "valintatapajono_tv#1"
       }
     ]
   },
@@ -102,7 +151,8 @@ exports[`createValintaperuste > should be able to create valintaperuste #0`] =
         },
         "tietoja": {
           "fi": "<p>Tietoa hakijalle</p>"
-        }
+        },
+        "vahimmaispisteet": 10.03,
       },
       "nimi": {
         "fi": "nimi"
@@ -123,30 +173,58 @@ exports[`createValintaperuste > should be able to create valintaperuste #0`] =
             "osoite": {
               "fi": "osoite"
             },
-            "postinumeroKoodiUri": "posti_0#2"
+            "postinumeroKoodiUri": "posti_00350#2"
           }
         }
       ],
-      "tyyppiKoodiUri": "valintakokeentyyppi_1#1"
+      "tyyppiKoodiUri": "valintakokeentyyppi_8#1"
     }
   ]
 };
 
 exports[`editValintaperuste > should be able to edit valintaperuste #0`] =
 {
-  "hakutapaKoodiUri": "hakutapa_0#1",
+  "hakutapaKoodiUri": "hakutapa_01#1",
   "id": "649adb37-cd4d-4846-91a9-84b58b90f928",
   "julkinen": false,
   "kielivalinta": [
     "fi"
   ],
-  "kohdejoukkoKoodiUri": "haunkohdejoukko_0#1",
+  "kohdejoukkoKoodiUri": "haunkohdejoukko_12#1",
   "koulutustyyppi": "amm",
   "metadata": {
     "kielitaitovaatimukset": [],
     "kuvaus": {
       "fi": "<p>Loppukuvaus</p>"
     },
+    "sisalto": [
+      {
+        "data": {
+          "fi": "<p>Tekstia</p>"
+        },
+        "tyyppi": "teksti"
+      },
+      {
+        "data": {
+          "nimi": {},
+          "rows": [
+            {
+              "columns": [
+                {
+                  "index": 0,
+                  "text": {
+                    "fi": "Solu"
+                  }
+                }
+              ],
+              "index": 0,
+              "isHeader": false
+            }
+          ]
+        },
+        "tyyppi": "taulukko"
+      }
+    ],
     "osaamistaustaKoodiUrit": [],
     "tyyppi": "amm",
     "valintakokeidenYleiskuvaus": {
@@ -154,7 +232,7 @@ exports[`editValintaperuste > should be able to edit valintaperuste #0`] =
     },
     "valintatavat": [
       {
-        "enimmaispisteet": 100,
+        "enimmaispisteet": 100.02,
         "kaytaMuuntotaulukkoa": false,
         "kuvaus": {},
         "kynnysehto": {
@@ -191,8 +269,8 @@ exports[`editValintaperuste > should be able to edit valintaperuste #0`] =
             "tyyppi": "taulukko"
           }
         ],
-        "vahimmaispisteet": 10,
-        "valintatapaKoodiUri": "valintatapajono_0#1"
+        "vahimmaispisteet": 10.01,
+        "valintatapaKoodiUri": "valintatapajono_tv#1"
       }
     ]
   },
@@ -218,7 +296,8 @@ exports[`editValintaperuste > should be able to edit valintaperuste #0`] =
         },
         "tietoja": {
           "fi": "<p>Tietoa kokeesta - fi</p>"
-        }
+        },
+        "vahimmaispisteet": 10.03,
       },
       "nimi": {
         "fi": "Kokeen nimi - fi"
@@ -239,7 +318,7 @@ exports[`editValintaperuste > should be able to edit valintaperuste #0`] =
             "osoite": {
               "fi": "fi osoite"
             },
-            "postinumeroKoodiUri": "posti_00350#1"
+            "postinumeroKoodiUri": "posti_00350#2"
           }
         }
       ],

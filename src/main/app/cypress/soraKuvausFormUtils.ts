@@ -9,21 +9,21 @@ import {
 export const stubSoraKuvausFormRoutes = ({ organisaatioOid }) => {
   stubCommonRoutes();
 
-  cy.route({
-    method: 'POST',
-    url: '**/organisaatio-service/rest/organisaatio/v4/findbyoids',
-    response: [
-      merge(organisaatio(), {
-        oid: organisaatioOid,
-      }),
-    ],
-  });
+  cy.intercept(
+    {
+      method: 'POST',
+      url: '**/organisaatio-service/rest/organisaatio/v4/findbyoids',
+    },
+    {
+      body: [
+        merge(organisaatio(), {
+          oid: organisaatioOid,
+        }),
+      ],
+    }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: '**/sorakuvaus/list**',
-    response: [],
-  });
+  cy.intercept({ method: 'GET', url: '**/sorakuvaus/list**' }, { body: [] });
 
   stubOppijanumerorekisteriHenkiloRoute();
 };

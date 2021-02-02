@@ -13,17 +13,17 @@ export const editSoraKuvausForm = () => {
   const soraKuvaus = createSoraKuvaus();
 
   beforeEach(() => {
-    cy.server();
     playMockFile('soraKuvaus.mock.json');
     stubSoraKuvausFormRoutes({ organisaatioOid });
 
-    cy.route({
-      method: 'GET',
-      url: `**/sorakuvaus/${soraKuvaus.id}`,
-      response: _.merge({}, soraKuvaus, {
-        organisaatioOid,
-      }),
-    });
+    cy.intercept(
+      { method: 'GET', url: `**/sorakuvaus/${soraKuvaus.id}` },
+      {
+        body: _.merge({}, soraKuvaus, {
+          organisaatioOid,
+        }),
+      }
+    );
 
     cy.visit(
       `/organisaatio/${organisaatioOid}/sora-kuvaus/${soraKuvaus.id}/muokkaus`
@@ -31,13 +31,14 @@ export const editSoraKuvausForm = () => {
   });
 
   it('should be able to edit sora-kuvaus', () => {
-    cy.route({
-      method: 'POST',
-      url: '**/sorakuvaus',
-      response: {
-        muokattu: false,
-      },
-    }).as('editSoraKuvausRequest');
+    cy.intercept(
+      { method: 'POST', url: '**/sorakuvaus' },
+      {
+        body: {
+          muokattu: false,
+        },
+      }
+    ).as('editSoraKuvausRequest');
 
     fillKieliversiotSection();
     tallenna();

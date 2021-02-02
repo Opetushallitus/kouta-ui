@@ -1,75 +1,71 @@
 import { merge } from 'lodash';
+import { playMockFile } from 'kto-ui-common/cypress/mockUtils';
 
 import {
-  stubKoodistoRoute,
   stubOppijanumerorekisteriHenkiloRoute,
-  stubKoodiRoute,
   stubCommonRoutes,
 } from './utils';
 
 import organisaatio from './data/organisaatio';
 import soraKuvaus from './data/soraKuvaus';
-import createKoodi from './data/koodi';
 
 export const stubValintaperusteFormRoutes = ({ organisaatioOid }) => {
+  playMockFile('valintaperuste.mock.json');
   stubCommonRoutes();
 
-  cy.route({
-    method: 'GET',
-    url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
-    response: merge(organisaatio(), {
-      oid: organisaatioOid,
-    }),
-  });
-
-  cy.route({
-    method: 'POST',
-    url: '**/organisaatio-service/rest/organisaatio/v4/findbyoids',
-    response: [
-      merge(organisaatio(), {
+  cy.intercept(
+    {
+      method: 'GET',
+      url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
+    },
+    {
+      body: merge(organisaatio(), {
         oid: organisaatioOid,
       }),
-    ],
-  });
+    }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: '**/valintaperuste/list**',
-    response: [],
-  });
+  cy.intercept(
+    {
+      method: 'POST',
+      url: '**/organisaatio-service/rest/organisaatio/v4/findbyoids',
+    },
+    {
+      body: [
+        merge(organisaatio(), {
+          oid: organisaatioOid,
+        }),
+      ],
+    }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: '**/sorakuvaus/list**',
-    response: [...new Array(10)].map((v, i) =>
-      merge(soraKuvaus(), {
-        nimi: { fi: `Sora-kuvaus ${i}` },
-        id: i.toString(),
+  cy.intercept(
+    { method: 'GET', url: '**/valintaperuste/list**' },
+    { body: [] }
+  );
+
+  cy.intercept(
+    { method: 'GET', url: '**/sorakuvaus/list**' },
+    {
+      body: [...new Array(10)].map((v, i) =>
+        merge(soraKuvaus(), {
+          nimi: { fi: `Sora-kuvaus ${i}` },
+          id: i.toString(),
+          tila: 'julkaistu',
+        })
+      ),
+    }
+  );
+
+  cy.intercept(
+    { method: 'GET', url: '**/sorakuvaus/1' },
+    {
+      body: merge(soraKuvaus(), {
+        nimi: { fi: `Sora-kuvaus 1` },
+        id: 1,
         tila: 'julkaistu',
-      })
-    ),
-  });
-
-  stubKoodistoRoute({ koodisto: 'hakutapa' });
-  stubKoodistoRoute({ koodisto: 'haunkohdejoukko' });
-  stubKoodistoRoute({ koodisto: 'valintatapajono' });
-  stubKoodistoRoute({ koodisto: 'kielitaidonosoittaminen' });
-  stubKoodistoRoute({ koodisto: 'kieli' });
-  stubKoodistoRoute({ koodisto: 'valintakokeentyyppi' });
-
-  cy.route({
-    method: 'GET',
-    url: '**/sorakuvaus/1',
-    response: merge(soraKuvaus(), {
-      nimi: { fi: `Sora-kuvaus 1` },
-      id: 1,
-      tila: 'julkaistu',
-    }),
-  });
-
-  stubKoodiRoute(createKoodi({ koodisto: 'posti', versio: 2 }));
-  stubKoodiRoute(
-    createKoodi({ koodisto: 'posti', koodiArvo: '00350', versio: 1 })
+      }),
+    }
   );
 
   stubOppijanumerorekisteriHenkiloRoute();

@@ -1,4 +1,5 @@
 import { merge } from 'lodash';
+
 import {
   assertNoUnsavedChangesDialog,
   fillKieliversiotSection,
@@ -12,41 +13,37 @@ export const editHakuForm = () => {
   const hakuOid = '2.1.1.1.1.1';
 
   beforeEach(() => {
-    cy.server();
     stubHakuFormRoutes({ organisaatioOid });
 
-    cy.route({
-      method: 'GET',
-      url: `**/haku/${hakuOid}/hakukohteet/list**`,
-      response: [],
-    });
+    cy.intercept(
+      { method: 'GET', url: `**/haku/${hakuOid}/hakukohteet/list**` },
+      { body: [] }
+    );
 
-    cy.route({
-      method: 'GET',
-      url: `**/toteutus/list**`,
-      response: [],
-    });
+    cy.intercept({ method: 'GET', url: `**/toteutus/list**` }, { body: [] });
 
-    cy.route({
-      method: 'GET',
-      url: `**/haku/${hakuOid}`,
-      response: merge(haku(), {
-        oid: hakuOid,
-        organisaatioOid: organisaatioOid,
-      }),
-    });
+    cy.intercept(
+      { method: 'GET', url: `**/haku/${hakuOid}` },
+      {
+        body: merge(haku(), {
+          oid: hakuOid,
+          organisaatioOid: organisaatioOid,
+        }),
+      }
+    );
 
     cy.visit(`/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus`);
   });
 
   it('should be able to edit haku', () => {
-    cy.route({
-      method: 'POST',
-      url: '**/haku',
-      response: {
-        muokattu: false,
-      },
-    }).as('editHakuRequest');
+    cy.intercept(
+      { method: 'POST', url: '**/haku' },
+      {
+        body: {
+          muokattu: false,
+        },
+      }
+    ).as('editHakuRequest');
 
     fillKieliversiotSection();
 

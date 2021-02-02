@@ -15,6 +15,7 @@ export const getKokeetTaiLisanaytotValues = (
         nimi,
         metadata: {
           tietoja,
+          vahimmaispisteet,
           liittyyEnnakkovalmistautumista,
           ohjeetEnnakkovalmistautumiseen,
           erityisjarjestelytMahdollisia,
@@ -35,6 +36,8 @@ export const getKokeetTaiLisanaytotValues = (
           parseEditorState
         ),
         tietoaHakijalle: _.mapValues(tietoja, parseEditorState),
+        vahimmaispistemaara:
+          _.toString(vahimmaispisteet)?.replace('.', ',') || '',
         tilaisuudet: tilaisuudet.map(
           ({ osoite, aika, lisatietoja, jarjestamispaikka }) => ({
             osoite: _.get(osoite, 'osoite') || {},

@@ -1,9 +1,5 @@
-import {
-  Ajankohtatyyppi,
-  HAKULOMAKETYYPPI,
-  JULKAISUTILA,
-} from '#/src/constants';
-import { EditorState } from '#/src/components/Editor/Editor';
+import { HAKULOMAKETYYPPI, JULKAISUTILA } from '#/src/constants';
+import { AjankohtaFields } from './formTypes';
 
 export type HakuModel = any;
 
@@ -19,21 +15,12 @@ export type HakuFormValues = {
   tila: JULKAISUTILA;
   nimi: TranslatedField<string>;
   kieliversiot: Array<LanguageCode>;
-  aikataulut: {
-    ajankohtaTyyppi: Ajankohtatyyppi;
-    kausi?: string;
-    vuosi?: { value: string };
-    tiedossaTarkkaAjankohta: boolean;
-    tarkkaAlkaa?: string;
-    tarkkaPaattyy?: string;
+  aikataulut: AjankohtaFields & {
     hakuaika: Array<FormDateRange>;
     aikataulu: Array<FormDateRange>;
     lisaamisenTakaraja: FormDate;
     muokkauksenTakaraja: FormDate;
     ajastettuJulkaisu: FormDate;
-    henkilokohtaisenSuunnitelmanLisatiedot?: TranslatedField<
-      typeof EditorState
-    >;
   };
   hakutapa: string;
   kohdejoukko: {

@@ -28,18 +28,18 @@ export const TilaisuusFields = ({ field, language, index, removeSelf }) => {
   return (
     <>
       <Heading marginBottom={1}>
-        {t('valintaperustelomake.tilaisuusTitle', { index: index + 1 })}
+        {t('koeTaiLisanaytto.tilaisuusTitle', { index: index + 1 })}
       </Heading>
       <SubSectionBox>
         <Box display="flex" justifyContent="space-between">
           <DateTimeRange
             startProps={{
               name: `${field}.alkaa`,
-              label: t('valintaperustelomake.tilaisuusAlkaa'),
+              label: t('koeTaiLisanaytto.tilaisuusAlkaa'),
             }}
             endProps={{
               name: `${field}.paattyy`,
-              label: t('valintaperustelomake.tilaisuusPaattyy'),
+              label: t('koeTaiLisanaytto.tilaisuusPaattyy'),
             }}
           />
           <Box mt={4} ml={4}>
@@ -50,7 +50,7 @@ export const TilaisuusFields = ({ field, language, index, removeSelf }) => {
           <Field
             name={`${field}.jarjestamispaikka.${language}`}
             component={FormFieldInput}
-            label={t('valintaperustelomake.jarjestamispaikka')}
+            label={t('koeTaiLisanaytto.jarjestamispaikka')}
           />
         </Box>
         <Box mb={2} {...getTestIdProps('osoite')}>
@@ -71,7 +71,7 @@ export const TilaisuusFields = ({ field, language, index, removeSelf }) => {
           <Field
             name={`${field}.lisatietoja.${language}`}
             component={FormFieldEditor}
-            label={t('valintaperustelomake.tilaisuudenLisatiedot')}
+            label={t('koeTaiLisanaytto.tilaisuudenLisatiedot')}
             hideHeaderSelect
           />
         </Box>

@@ -1,22 +1,20 @@
 import React from 'react';
-import { Field, FieldArray } from 'redux-form';
 import { useTranslation } from 'react-i18next';
-
-import Spacing from '#/src/components/Spacing';
+import { Field, FieldArray } from 'redux-form';
 import Button from '#/src/components/Button';
-import Flex from '#/src/components/Flex';
-import ValintatapaContentFields from '#/src/components/ValintatapaContentFields';
-import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
-import { getTestIdProps } from '#/src/utils';
 import FieldArrayList from '#/src/components/FieldArrayList';
-import GridRow from '#/src/components/GridRow';
-import GridColumn from '#/src/components/GridColumn';
-
+import Flex from '#/src/components/Flex';
 import {
   FormFieldEditor,
   FormFieldInput,
   FormFieldSelect,
 } from '#/src/components/formFields';
+import GridColumn from '#/src/components/GridColumn';
+import GridRow from '#/src/components/GridRow';
+import { SisaltoFields } from '#/src/components/SisaltoFields';
+import Spacing from '#/src/components/Spacing';
+import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
+import { getTestIdProps } from '#/src/utils';
 
 const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
   <div {...getTestIdProps('valintatapalista')}>
@@ -66,11 +64,8 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
       />
     </Spacing>
 
-    <div {...getTestIdProps('sisalto')}>
-      <ValintatapaContentFields
-        name={`${valintatapa}.sisalto`}
-        language={language}
-      />
+    <div {...getTestIdProps('valintatapaSisalto')}>
+      <SisaltoFields name={`${valintatapa}.sisalto`} language={language} />
     </div>
   </div>
 );

@@ -22,7 +22,7 @@ const TypeSection = ({ johtaaTutkintoon, name }) => {
     <Field
       name={name}
       component={TyyppiField}
-      label={t('koulutuslomake.valitseKoulutustyyppi')}
+      label={t('yleiset.valitseKoulutustyyppi')}
       johtaaTutkintoon={johtaaTutkintoon}
     />
   );

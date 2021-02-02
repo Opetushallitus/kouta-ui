@@ -1,12 +1,11 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import FormPage, { FormFooter } from '#/src/components/FormPage';
-import { KOULUTUSTYYPPI, ENTITY } from '#/src/constants';
+import FormPage from '#/src/components/FormPage';
+import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
 import { Spin } from '#/src/components/virkailija';
 import Title from '#/src/components/Title';
 import ReduxForm from '#/src/components/ReduxForm';
-import HakukohdeForm, { initialValues } from '../HakukohdeForm';
 import getHakukohdeFormConfig from '#/src/utils/hakukohde/getHakukohdeFormConfig';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import {
@@ -17,15 +16,11 @@ import {
 } from '#/src/components/FormPage';
 import FormHeader from '#/src/components/FormHeader';
 import FormSteps from '#/src/components/FormSteps';
-import { useHistory } from 'react-router-dom';
-import createHakukohde from '#/src/utils/hakukohde/createHakukohde';
-import { getHakukohdeByFormValues } from '#/src/utils/hakukohde/getHakukohdeByFormValues';
-import { useSaveHakukohde } from '#/src/hooks/formSaveHooks';
-import { useHakukohdePageData } from '../getHakukohdePageData';
-
-const getInitialValues = (toteutusNimi, toteutusKielet) => {
-  return initialValues(toteutusNimi, toteutusKielet);
-};
+import HakukohdeForm, {
+  initialValues as getInitialValues,
+} from './HakukohdeForm';
+import { useHakukohdePageData } from './getHakukohdePageData';
+import { HakukohdeFooter } from './HakukohdeFooter';
 
 const CreateHakukohdePage = ({
   match: {
@@ -33,7 +28,6 @@ const CreateHakukohdePage = ({
   },
 }) => {
   const { t } = useTranslation();
-  const history = useHistory();
 
   const { data, isFetching } = useHakukohdePageData({
     hakuOid: hakuOid,
@@ -43,51 +37,29 @@ const CreateHakukohdePage = ({
   const haku = data?.haku;
   const toteutus = data?.toteutus;
 
-  const initialValues = useMemo(() => {
-    return (
+  const initialValues = useMemo(
+    () =>
       data &&
-      getInitialValues(data?.toteutus?.nimi, data?.toteutus?.kielivalinta)
-    );
-  }, [data]);
+      getInitialValues(data?.toteutus?.nimi, data?.toteutus?.kielivalinta),
+    [data]
+  );
 
   const config = useMemo(getHakukohdeFormConfig, []);
 
-  const submit = useCallback(
-    async ({ httpClient, apiUrls, values }) => {
-      const { oid } = await createHakukohde({
-        httpClient,
-        apiUrls,
-        hakukohde: {
-          ...getHakukohdeByFormValues(values),
-          organisaatioOid,
-          hakuOid,
-          toteutusOid,
-        },
-      });
-
-      history.push(
-        `/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`
-      );
-    },
-    [organisaatioOid, hakuOid, toteutusOid, history]
-  );
-
-  const FORM_NAME = 'createHakukohdeForm';
-
-  const save = useSaveHakukohde({
-    submit,
-    haku,
-    toteutus,
-    formName: FORM_NAME,
-  });
-
   return (
-    <ReduxForm form="createHakukohdeForm" initialValues={initialValues}>
+    <ReduxForm form="hakukohdeForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.uusiHakukohde')}</Title>
       <FormPage
         header={<FormHeader>{t('yleiset.hakukohde')}</FormHeader>}
         steps={<FormSteps activeStep={ENTITY.HAKUKOHDE} />}
-        footer={<FormFooter entity={ENTITY.HAKUKOHDE} save={save} />}
+        footer={
+          <HakukohdeFooter
+            formMode={FormMode.CREATE}
+            haku={haku}
+            toteutus={toteutus}
+            hakukohde={{ organisaatioOid }}
+          />
+        }
       >
         {isFetching ? (
           <Spin center />

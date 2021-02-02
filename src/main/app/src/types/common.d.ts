@@ -23,3 +23,5 @@ type Yhteystieto = {
 };
 
 type KoulutusModel = any;
+
+type SelectOption = { label?: string; value: string };

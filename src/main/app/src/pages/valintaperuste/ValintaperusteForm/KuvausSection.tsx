@@ -1,12 +1,12 @@
 import React from 'react';
-import { Field } from 'redux-form';
 import { useTranslation } from 'react-i18next';
-
+import { Field } from 'redux-form';
 import { FormFieldEditor, FormFieldInput } from '#/src/components/formFields';
+import { SisaltoFields } from '#/src/components/SisaltoFields';
 import Spacing from '#/src/components/Spacing';
 import { getTestIdProps } from '#/src/utils';
 
-const KuvausSection = ({ language, name }) => {
+export const KuvausSection = ({ language, name }) => {
   const { t } = useTranslation();
 
   return (
@@ -18,15 +18,16 @@ const KuvausSection = ({ language, name }) => {
           label={t('valintaperustelomake.kuvauksenNimi')}
         />
       </Spacing>
-      <Spacing {...getTestIdProps('kuvaus')}>
+      <Spacing marginBottom={2} {...getTestIdProps('kuvaus')}>
         <Field
           name={`${name}.kuvaus.${language}`}
           component={FormFieldEditor}
           label={t('valintaperustelomake.kuvauksenTarkenne')}
         />
       </Spacing>
+      <Spacing {...getTestIdProps('sisalto')}>
+        <SisaltoFields name={`${name}.sisalto`} language={language} />
+      </Spacing>
     </>
   );
 };
-
-export default KuvausSection;

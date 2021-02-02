@@ -1,3 +1,4 @@
+import { playMockFile } from 'kto-ui-common/cypress/mockUtils';
 import koulutus from '#/cypress/data/koulutus';
 import toteutus from '#/cypress/data/toteutus';
 import { stubToteutusFormRoutes } from '#/cypress/toteutusFormUtils';
@@ -35,27 +36,24 @@ const prepareTest = tyyppi => {
     },
   };
 
-  cy.server();
+  playMockFile('toteutus.mocks.json');
 
   stubToteutusFormRoutes({ organisaatioOid, perusteId });
 
-  cy.route({
-    method: 'GET',
-    url: `**/toteutus/${toteutusOid}/hakukohteet/list**`,
-    response: [],
-  });
+  cy.intercept(
+    { method: 'GET', url: `**/toteutus/${toteutusOid}/hakukohteet/list**` },
+    { body: [] }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: `**/koulutus/${koulutusOid}`,
-    response: _fp.merge(koulutus({ tyyppi }), testKoulutusFields),
-  });
+  cy.intercept(
+    { method: 'GET', url: `**/koulutus/${koulutusOid}` },
+    { body: _fp.merge(koulutus({ tyyppi }), testKoulutusFields) }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: `**/toteutus/${toteutusOid}`,
-    response: _fp.merge(toteutus({ tyyppi }), testToteutusFields),
-  });
+  cy.intercept(
+    { method: 'GET', url: `**/toteutus/${toteutusOid}` },
+    { body: _fp.merge(toteutus({ tyyppi }), testToteutusFields) }
+  );
 
   cy.visit(`/organisaatio/${organisaatioOid}/toteutus/${toteutusOid}/muokkaus`);
 };
@@ -63,13 +61,14 @@ const prepareTest = tyyppi => {
 export const editToteutusForm = () => {
   it('should be able to edit ammatillinen toteutus', () => {
     prepareTest('amm');
-    cy.route({
-      method: 'POST',
-      url: '**/toteutus',
-      response: {
-        muokattu: false,
-      },
-    }).as('updateAmmToteutusResponse');
+    cy.intercept(
+      { method: 'POST', url: '**/toteutus' },
+      {
+        body: {
+          muokattu: false,
+        },
+      }
+    ).as('updateAmmToteutusResponse');
 
     fillKieliversiotSection();
 
@@ -84,13 +83,14 @@ export const editToteutusForm = () => {
 
   it('should be able to edit tutkinnon osa toteutus', () => {
     prepareTest('amm-tutkinnon-osa');
-    cy.route({
-      method: 'POST',
-      url: '**/toteutus',
-      response: {
-        muokattu: false,
-      },
-    }).as('updateAmmToteutusResponse');
+    cy.intercept(
+      { method: 'POST', url: '**/toteutus' },
+      {
+        body: {
+          muokattu: false,
+        },
+      }
+    ).as('updateAmmToteutusResponse');
 
     fillKieliversiotSection();
     cy.findByTestId('hakeutumisTaiIlmoittautumistapaSection').within(() => {
@@ -125,13 +125,14 @@ export const editToteutusForm = () => {
   it('should be able to edit korkeakoulu toteutus', () => {
     prepareTest('yo');
 
-    cy.route({
-      method: 'POST',
-      url: '**/toteutus',
-      response: {
-        muokattu: false,
-      },
-    }).as('updateYoToteutusResponse');
+    cy.intercept(
+      { method: 'POST', url: '**/toteutus' },
+      {
+        body: {
+          muokattu: false,
+        },
+      }
+    ).as('updateYoToteutusResponse');
 
     fillKieliversiotSection();
     tallenna();
@@ -144,13 +145,14 @@ export const editToteutusForm = () => {
   it('should be able to edit lukio toteutus', () => {
     prepareTest('lk');
 
-    cy.route({
-      method: 'POST',
-      url: '**/toteutus',
-      response: {
-        muokattu: false,
-      },
-    }).as('updateLkToteutusResponse');
+    cy.intercept(
+      { method: 'POST', url: '**/toteutus' },
+      {
+        body: {
+          muokattu: false,
+        },
+      }
+    ).as('updateLkToteutusResponse');
 
     fillKieliversiotSection();
 

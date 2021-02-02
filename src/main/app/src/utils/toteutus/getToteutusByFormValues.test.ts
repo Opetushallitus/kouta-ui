@@ -1,9 +1,17 @@
 import getToteutusByFormValues from '#/src/utils/toteutus/getToteutusByFormValues';
 import { parseEditorState } from '#/src/components/Editor/utils';
+import {
+  Alkamiskausityyppi,
+  Hakeutumistapa,
+  HAKULOMAKETYYPPI,
+  JULKAISUTILA,
+  KOULUTUSTYYPPI,
+} from '#/src/constants';
 
 test('getToteutusByFormValues returns correct toteutus given form values', () => {
   const toteutus = getToteutusByFormValues({
-    koulutustyyppi: 'amk',
+    tila: JULKAISUTILA.JULKAISTU,
+    koulutustyyppi: KOULUTUSTYYPPI.AMKKOULUTUS,
     tiedot: {
       nimi: {
         fi: 'Fi nimi',
@@ -28,6 +36,7 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
         tyyppi: 'kylla',
         maksu: '50.50',
       },
+      maksumaara: 100,
       opetustapa: ['opetustapa_1#1', 'opetustapa_2#1'],
       opetusaika: ['opetusaika_1#1', 'opetusaika_2#1'],
       opetuskieli: [
@@ -70,13 +79,6 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
           sv: parseEditorState('Sv kuvaus2'),
         },
       },
-      koulutuksenAlkamispaivamaara: null,
-      koulutuksenPaattymispaivamaara: null,
-      koulutuksenTarkkaAlkamisaika: false,
-      koulutuksenAlkamisvuosi: {
-        value: '2020',
-      },
-      koulutuksenAlkamiskausi: 'kausi_0#1',
       onkoStipendia: 'kylla',
       stipendinMaara: 20,
       stipendinKuvaus: {
@@ -94,6 +96,11 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
       B1Kielet: [{ value: 'kieli_4#1' }],
       B3Kielet: [{ value: 'kieli_5#1' }],
       muutKielet: [{ value: 'kieli_6#1' }],
+      ajankohta: {
+        ajankohtaTyyppi: Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI,
+        kausi: 'alkamiskausi_1#1',
+        vuosi: { value: '2020' },
+      },
     },
     nayttamistiedot: {
       ammattinimikkeet: {
@@ -211,13 +218,14 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
         ],
       },
     ],
-    tutkinnonOsat: [
-      {
-        tutkinto: { value: 'tutkinto_1#1' },
-        osaamisala: { value: 'osaamisala_1#1' },
-        tutkinnonOsat: [{ value: 'tutkinnonosa_1#1' }],
+    hakeutumisTaiIlmoittautumistapa: {
+      hakeutumisTaiIlmoittautumistapa: HAKULOMAKETYYPPI.MUU,
+      hakuTapa: Hakeutumistapa.ILMOITTAUTUMINEN,
+      lisatiedot: {
+        fi: parseEditorState('<p>Fi lisatiedot</p>'),
+        sv: parseEditorState('<p>Sv sisalto</p>'),
       },
-    ],
+    },
   });
 
   expect(toteutus).toMatchSnapshot();

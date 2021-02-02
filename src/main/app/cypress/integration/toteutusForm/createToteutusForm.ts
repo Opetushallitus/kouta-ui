@@ -1,4 +1,5 @@
 import _fp from 'lodash/fp';
+import { playMockFile } from 'kto-ui-common/cypress/mockUtils';
 
 import {
   getRadio,
@@ -17,10 +18,12 @@ import {
   tallenna,
   fillDateTimeInput,
   fillYhteyshenkilotFields,
+  fillAjankohtaFields,
 } from '#/cypress/utils';
 
 import koulutus from '#/cypress/data/koulutus';
 import { stubToteutusFormRoutes } from '#/cypress/toteutusFormUtils';
+import { Alkamiskausityyppi } from '#/src/constants';
 
 const fillOpetuskieli = (chosenNumber = '0') => {
   getByTestId('opetuskieli').within(() => {
@@ -69,15 +72,6 @@ const fillStipendi = () => {
   });
 };
 
-const fillKausi = () => {
-  getByTestId('koulutuksenAlkamisvuosi').within(() => {
-    selectOption(2035);
-  });
-  getByTestId('koulutuksenAlkamiskausi').within(() => {
-    getRadio('kausi_0#1').check({ force: true });
-  });
-};
-
 const fillOsiot = () => {
   getByTestId('osiotSelect').click();
 
@@ -98,7 +92,7 @@ const fillCommonJarjestamistiedot = ({ maksullisuusTyyppi = 'kylla' } = {}) => {
   fillOpetusaika();
   fillOpetustapa();
   fillMaksullisuus(maksullisuusTyyppi);
-  fillKausi();
+  fillAjankohtaFields(Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI);
   fillOsiot();
 };
 
@@ -238,20 +232,17 @@ const prepareTest = tyyppi => {
     tila: 'julkaistu',
   };
 
-  cy.server();
-
+  playMockFile('toteutus.mocks.json');
   stubToteutusFormRoutes({ perusteId, organisaatioOid });
-  cy.route({
-    method: 'GET',
-    url: `**/koulutus/${koulutusOid}`,
-    response: _fp.merge(koulutus({ tyyppi }), testKoulutusFields),
-  });
+  cy.intercept(
+    { method: 'GET', url: `**/koulutus/${koulutusOid}` },
+    { body: _fp.merge(koulutus({ tyyppi }), testKoulutusFields) }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: `**/toteutus/${toteutusOid}`,
-    response: [],
-  });
+  cy.intercept(
+    { method: 'GET', url: `**/toteutus/${toteutusOid}` },
+    { body: [] }
+  );
 
   cy.visit(`/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/toteutus`);
 };
@@ -260,13 +251,14 @@ export const createToteutusForm = () => {
   it('should be able to create ammatillinen tutkinnon osa toteutus', () => {
     prepareTest('amm-tutkinnon-osa');
 
-    cy.route({
-      method: 'PUT',
-      url: '**/toteutus',
-      response: {
-        oid: toteutusOid,
-      },
-    }).as('createAmmToteutusResponse');
+    cy.intercept(
+      { method: 'PUT', url: '**/toteutus' },
+      {
+        body: {
+          oid: toteutusOid,
+        },
+      }
+    ).as('createAmmToteutusResponse');
 
     fillPohjaSection();
     fillKieliversiotSection({ jatka: true });
@@ -347,13 +339,14 @@ export const createToteutusForm = () => {
   it('should be able to create ammatillinen toteutus', () => {
     prepareTest('amm');
 
-    cy.route({
-      method: 'PUT',
-      url: '**/toteutus',
-      response: {
-        oid: toteutusOid,
-      },
-    }).as('createAmmToteutusResponse');
+    cy.intercept(
+      { method: 'PUT', url: '**/toteutus' },
+      {
+        body: {
+          oid: toteutusOid,
+        },
+      }
+    ).as('createAmmToteutusResponse');
 
     fillPohjaSection();
     fillKieliversiotSection({ jatka: true });
@@ -399,13 +392,14 @@ export const createToteutusForm = () => {
   it('should be able to create korkeakoulu toteutus', () => {
     prepareTest('yo');
 
-    cy.route({
-      method: 'PUT',
-      url: '**/toteutus',
-      response: {
-        oid: toteutusOid,
-      },
-    }).as('createYoToteutusResponse');
+    cy.intercept(
+      { method: 'PUT', url: '**/toteutus' },
+      {
+        body: {
+          oid: toteutusOid,
+        },
+      }
+    ).as('createYoToteutusResponse');
 
     fillPohjaSection();
     fillKieliversiotSection({ jatka: true });
@@ -447,13 +441,14 @@ export const createToteutusForm = () => {
   it('should be able to create lukio toteutus', () => {
     prepareTest('lk');
 
-    cy.route({
-      method: 'PUT',
-      url: '**/toteutus',
-      response: {
-        oid: toteutusOid,
-      },
-    }).as('createLkToteutusResponse');
+    cy.intercept(
+      { method: 'PUT', url: '**/toteutus' },
+      {
+        body: {
+          oid: toteutusOid,
+        },
+      }
+    ).as('createLkToteutusResponse');
 
     fillPohjaSection();
     fillKieliversiotSection({ jatka: true });

@@ -49,7 +49,7 @@ const OsaamisalatFieldArray = ({ fields, language, t }) => (
               <Field
                 name={`${field}.otsikko.${language}`}
                 component={FormFieldInput}
-                label={t('toteutuslomake.linkinOtsikko')}
+                label={t('yleiset.linkinOtsikko')}
               />
             </FlexItem>
           </Flex>

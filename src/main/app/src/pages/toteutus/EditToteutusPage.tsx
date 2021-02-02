@@ -7,37 +7,20 @@ import FormPage, {
   RelationInfoContainer,
 } from '#/src/components/FormPage';
 import getFormValuesByToteutus from '#/src/utils/toteutus/getFormValuesByToteutus';
-import getToteutusByOid from '#/src/utils/toteutus/getToteutusByOid';
-import getKoulutusByOid from '#/src/utils/koulutus/getKoulutusByOid';
+import { useToteutusByOid } from '#/src/utils/toteutus/getToteutusByOid';
+import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
 import ReduxForm from '#/src/components/ReduxForm';
-import useApiAsync from '#/src/hooks/useApiAsync';
 import { Spin } from '#/src/components/virkailija';
 import Title from '#/src/components/Title';
 import FormSteps from '#/src/components/FormSteps';
-import { ENTITY, CRUD_ROLES } from '#/src/constants';
+import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import { useEntityFormConfig } from '#/src/hooks/form';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import FullSpin from '#/src/components/FullSpin';
-import ToteutusForm from '../ToteutusForm';
-import EditToteutusFooter from './EditToteutusFooter';
-
-const getToteutusAndKoulutus = async ({ httpClient, apiUrls, oid }) => {
-  const toteutus = await getToteutusByOid({ httpClient, apiUrls, oid });
-
-  if (!toteutus || !toteutus.koulutusOid) {
-    return { toteutus };
-  }
-
-  const koulutus = await getKoulutusByOid({
-    httpClient,
-    apiUrls,
-    oid: toteutus.koulutusOid,
-  });
-
-  return { toteutus, koulutus };
-};
+import ToteutusForm from './ToteutusForm';
+import { ToteutusFooter } from './ToteutusFooter';
 
 const EditToteutusPage = props => {
   const {
@@ -45,17 +28,18 @@ const EditToteutusPage = props => {
     match: {
       params: { organisaatioOid, oid },
     },
-    location: { state = {} },
   } = props;
 
-  const { toteutusUpdatedAt = null } = state;
-  const watch = JSON.stringify([oid, toteutusUpdatedAt]);
+  const { data: toteutus, isFetching: isToteutusFetching } = useToteutusByOid(
+    oid
+  );
 
-  const { data: { toteutus = null, koulutus = null } = {} } = useApiAsync({
-    promiseFn: getToteutusAndKoulutus,
-    oid,
-    watch,
-  });
+  const { data: koulutus, isFetching: isKoulutusFetching } = useKoulutusByOid(
+    toteutus?.koulutusOid,
+    {
+      enabled: Boolean(toteutus),
+    }
+  );
 
   const koulutustyyppi = koulutus ? koulutus.koulutustyyppi : null;
   const { t } = useTranslation();
@@ -75,8 +59,6 @@ const EditToteutusPage = props => {
     [history, toteutus]
   );
 
-  const FORM_NAME = 'editToteutusForm';
-
   const canUpdate = useCurrentUserHasRole(
     ENTITY.TOTEUTUS,
     CRUD_ROLES.UPDATE,
@@ -88,7 +70,7 @@ const EditToteutusPage = props => {
   return !toteutus ? (
     <FullSpin />
   ) : (
-    <ReduxForm form={FORM_NAME} initialValues={initialValues}>
+    <ReduxForm form="toteutusForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.toteutuksenMuokkaus')}</Title>
       <FormConfigContext.Provider value={{ ...config, readOnly: !canUpdate }}>
         <FormPage
@@ -103,7 +85,8 @@ const EditToteutusPage = props => {
           steps={<FormSteps activeStep={ENTITY.TOTEUTUS} />}
           footer={
             toteutus ? (
-              <EditToteutusFooter
+              <ToteutusFooter
+                formMode={FormMode.EDIT}
                 toteutus={toteutus}
                 koulutus={koulutus}
                 koulutustyyppi={koulutustyyppi}
@@ -120,7 +103,7 @@ const EditToteutusPage = props => {
             />
             <OrganisaatioRelation organisaatioOid={organisaatioOid} />
           </RelationInfoContainer>
-          {toteutus && koulutus ? (
+          {!isKoulutusFetching && !isToteutusFetching ? (
             <ToteutusForm
               toteutus={toteutus}
               koulutus={koulutus}

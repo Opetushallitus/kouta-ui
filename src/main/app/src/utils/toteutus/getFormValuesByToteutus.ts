@@ -1,7 +1,9 @@
+import _fp from 'lodash/fp';
 import { parseEditorState } from '#/src/components/Editor/utils';
 import { toSelectValue } from '#/src/utils';
 import parseSisaltoField from '#/src/utils/form/parseSisaltoField';
-import _fp from 'lodash/fp';
+import { ToteutusFormValues } from '#/src/types/toteutusTypes';
+import { getAjankohtaFields } from '#/src/utils/form/aloitusajankohtaHelpers';
 
 const kieliArvoListToMultiSelectValue = _fp.reduce((acc, curr: any) => {
   if (curr?.kieli && curr?.arvo) {
@@ -17,8 +19,9 @@ const kieliArvoListToMultiSelectValue = _fp.reduce((acc, curr: any) => {
   return acc;
 }, {});
 
-const getFormValuesByToteutus = toteutus => {
+const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
   const {
+    koulutustyyppi,
     kielivalinta,
     nimi,
     tarjoajat,
@@ -43,15 +46,9 @@ const getFormValuesByToteutus = toteutus => {
     ilmoittautumislinkki,
     aloituspaikat,
     toteutusjaksot,
-    tutkinnonOsat,
   } = metadata;
 
   const {
-    koulutuksenAlkamispaivamaara,
-    koulutuksenPaattymispaivamaara,
-    koulutuksenAlkamiskausi,
-    koulutuksenAlkamisvuosi,
-    koulutuksenTarkkaAlkamisaika,
     diplomiKoodiUrit,
     diplomiKuvaus,
     A1JaA2Kielivalikoima,
@@ -61,6 +58,7 @@ const getFormValuesByToteutus = toteutus => {
     B3Kielivalikoima,
     muuKielivalikoima,
     lisatiedot,
+    koulutuksenAlkamiskausiUUSI = {},
   } = opetus;
 
   const { osaamisalaLinkit, osaamisalaLinkkiOtsikot } = _fp.reduce(
@@ -84,6 +82,7 @@ const getFormValuesByToteutus = toteutus => {
     : 'ei';
 
   return {
+    koulutustyyppi,
     tila,
     tiedot: {
       nimi: nimi ?? {},
@@ -160,15 +159,7 @@ const getFormValuesByToteutus = toteutus => {
       B2Kielet: _fp.map(toSelectValue)(B2Kielivalikoima),
       B3Kielet: _fp.map(toSelectValue)(B3Kielivalikoima),
       muutKielet: _fp.map(toSelectValue)(muuKielivalikoima),
-      koulutuksenAlkamispaivamaara: koulutuksenAlkamispaivamaara
-        ? new Date(koulutuksenAlkamispaivamaara)
-        : '',
-      koulutuksenPaattymispaivamaara: koulutuksenPaattymispaivamaara
-        ? new Date(koulutuksenPaattymispaivamaara)
-        : '',
-      koulutuksenTarkkaAlkamisaika: koulutuksenTarkkaAlkamisaika,
-      koulutuksenAlkamiskausi: koulutuksenAlkamiskausi,
-      koulutuksenAlkamisvuosi: toSelectValue(koulutuksenAlkamisvuosi),
+      ajankohta: getAjankohtaFields(koulutuksenAlkamiskausiUUSI),
     },
     nayttamistiedot: {
       ammattinimikkeet: kieliArvoListToMultiSelectValue(ammattinimikkeet),
@@ -224,13 +215,6 @@ const getFormValuesByToteutus = toteutus => {
         sisalto: parseSisaltoField(sisalto),
       })
     )(toteutusjaksot),
-    tutkinnonOsat: _fp.map(
-      ({ tutkintoKoodiUri, osaamisalaKoodiUri, tutkinnonOsaKoodiUrit }) => ({
-        tutkinto: toSelectValue(tutkintoKoodiUri),
-        osaamisalaKoodiUri: toSelectValue(osaamisalaKoodiUri),
-        tutkinnonOsat: _fp.map(toSelectValue)(tutkinnonOsaKoodiUrit),
-      })
-    )(tutkinnonOsat),
     teemakuva,
     hakeutumisTaiIlmoittautumistapa: {
       hakeutumisTaiIlmoittautumistapa: metadata?.hakulomaketyyppi,

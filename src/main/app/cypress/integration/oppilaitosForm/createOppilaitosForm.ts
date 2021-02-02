@@ -78,26 +78,25 @@ export const createOppilaitosForm = () => {
   const organisaatioOid = '1.1.1.1.1.1';
 
   beforeEach(() => {
-    cy.server();
     stubOppilaitosFormRoutes({ organisaatioOid });
 
-    cy.route({
-      method: 'GET',
-      url: `**/oppilaitos/${organisaatioOid}`,
-      response: '',
-    });
+    cy.intercept(
+      { method: 'GET', url: `**/oppilaitos/${organisaatioOid}` },
+      { body: '' }
+    );
 
     cy.visit(`/organisaatio/${organisaatioOid}/oppilaitos`);
   });
 
   it('should be able to create oppilaitos', () => {
-    cy.route({
-      method: 'PUT',
-      url: '**/oppilaitos',
-      response: {
-        oid: '1.2.3.4.5.6',
-      },
-    }).as('createOppilaitosResponse');
+    cy.intercept(
+      { method: 'PUT', url: '**/oppilaitos' },
+      {
+        body: {
+          oid: '1.2.3.4.5.6',
+        },
+      }
+    ).as('createOppilaitosResponse');
 
     fillKieliversiotSection({ jatka: true });
 

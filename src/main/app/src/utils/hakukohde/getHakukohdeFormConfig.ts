@@ -1,6 +1,11 @@
 import _ from 'lodash';
+import _fp from 'lodash/fp';
 
-import { LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
+import {
+  Alkamiskausityyppi,
+  JULKAISUTILA,
+  LIITTEEN_TOIMITUSTAPA,
+} from '#/src/constants';
 
 import createFormConfigBuilder from '#/src/utils/form/createFormConfigBuilder';
 
@@ -11,7 +16,13 @@ import {
   pohjaValintaSectionConfig,
   validateRelations,
   valintakokeetSection,
+  validateIf,
 } from '#/src/utils/form/formConfigUtils';
+import {
+  validateExistence,
+  validateExistenceOfDate,
+} from '#/src/utils/form/createErrorBuilder';
+import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
 
 const getLiitteillaYhteinenToimitusaika = values =>
   !!_.get(values, 'liitteet.yhteinenToimitusaika');
@@ -138,12 +149,47 @@ const config = createFormConfigBuilder().registerSections([
         field: 'hakuajat.hakuajat.alkaa',
         required: true,
       },
+      { field: 'ajankohta' },
       {
-        field: 'alkamiskausi',
+        field: 'ajankohta.ajankohtaTyyppi',
+        validate: (eb, values: HakukohdeFormValues) =>
+          validateIf(
+            values?.ajankohta?.kaytetaanHakukohteenAlkamiskautta &&
+              values?.tila === JULKAISUTILA.JULKAISTU,
+            validateExistence('ajankohta.ajankohtaTyyppi')
+          )(eb),
       },
       {
-        field: 'alkamiskausi.kausi',
+        field: 'ajankohta.kausi',
+      },
+      {
+        field: 'ajankohta.vuosi',
+        validate: (eb, values: HakukohdeFormValues) =>
+          validateIf(
+            values?.ajankohta?.kaytetaanHakukohteenAlkamiskautta &&
+              values?.ajankohta?.ajankohtaTyyppi ===
+                Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI &&
+              values?.tila === JULKAISUTILA.JULKAISTU,
+            _fp.pipe(
+              validateExistence('ajankohta.kausi'),
+              validateExistence('ajankohta.vuosi')
+            )
+          )(eb),
+      },
+      {
+        field: 'ajankohta.tarkkaAlkaa',
         required: true,
+        validate: (eb, values: HakukohdeFormValues) =>
+          validateIf(
+            values?.ajankohta?.kaytetaanHakukohteenAlkamiskautta &&
+              values?.ajankohta?.ajankohtaTyyppi ===
+                Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA &&
+              values?.tila === JULKAISUTILA.JULKAISTU,
+            validateExistenceOfDate('ajankohta.tarkkaAlkaa')
+          )(eb),
+      },
+      {
+        field: 'ajankohta.tarkkaPaattyy',
       },
       {
         field: 'hakulomake',

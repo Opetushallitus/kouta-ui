@@ -1,6 +1,6 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-import { isArray, uniq, without, negate, omit } from 'lodash';
+import _ from 'lodash';
 
 import getKoulutusByFormValues from '#/src/utils/koulutus/getKoulutusByFormValues';
 import updateKoulutus from '#/src/utils/koulutus/updateKoulutus';
@@ -8,66 +8,32 @@ import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import validateKoulutusForm from '#/src/utils/koulutus/validateKoulutusForm';
 import { ORGANISAATIOTYYPPI, ENTITY } from '#/src/constants';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
-import iterateTree from '#/src/utils/iterateTree';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 import { FormFooter } from '#/src/components/FormPage';
 import { useFormName } from '#/src/hooks/form';
-
-const getAvailableTarjoajaOids = hierarkia => {
-  const oids = [];
-
-  iterateTree(hierarkia, ({ oid }) => {
-    oid && oids.push(oid);
-  });
-
-  return oids;
-};
-
-const getTarjoajaOperations = (availableOids, oids) => {
-  const normalizedOids = isArray(oids) ? oids : [];
-  const normalizedAvailableOids = isArray(availableOids) ? availableOids : [];
-
-  const inserted = normalizedOids.filter(o =>
-    normalizedAvailableOids.includes(o)
-  );
-
-  return {
-    inserted,
-    deleted: without(availableOids, ...inserted),
-  };
-};
-
-const mergeTarjoajat = (koulutusOids = [], valueOids, availableOids) => {
-  const { inserted, deleted } = getTarjoajaOperations(availableOids, valueOids);
-  return uniq(without([...koulutusOids, ...inserted], ...deleted));
-};
+import { getTarjoajaOids } from '#/src/utils/getTarjoajaOids';
 
 const EditKoulutusFooter = ({ koulutus, organisaatioOid, canUpdate }) => {
   const history = useHistory();
 
   const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid, {
-    filter: negate(organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)),
+    filter: _.negate(organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)),
   });
-
-  const availableTarjoajaOids = useMemo(
-    () => getAvailableTarjoajaOids(hierarkia),
-    [hierarkia]
-  );
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
       await updateKoulutus({
         httpClient,
         apiUrls,
-        koulutus: omit(
+        koulutus: _.omit(
           {
             ...koulutus,
             ...getKoulutusByFormValues(values),
-            tarjoajat: mergeTarjoajat(
-              koulutus.tarjoajat,
-              values?.tarjoajat?.tarjoajat,
-              availableTarjoajaOids
-            ),
+            tarjoajat: getTarjoajaOids({
+              hierarkia,
+              existingTarjoajat: koulutus.tarjoajat,
+              newTarjoajat: values?.tarjoajat?.tarjoajat,
+            }),
             // This is a workaround for updating tarjoajat. Muokkaaja-field shouldn't be needed anymore
             // but backend requires it when creating new ones.
             // TODO: Remove this when backend works without muokkaaja
@@ -84,7 +50,7 @@ const EditKoulutusFooter = ({ koulutus, organisaatioOid, canUpdate }) => {
         },
       });
     },
-    [koulutus, history, availableTarjoajaOids]
+    [hierarkia, koulutus, history]
   );
 
   const formName = useFormName();

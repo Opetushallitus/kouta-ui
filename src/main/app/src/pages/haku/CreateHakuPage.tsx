@@ -17,7 +17,7 @@ import FormSteps from '#/src/components/FormSteps';
 import FormHeader from '#/src/components/FormHeader';
 import { getFormValuesByHaku } from '#/src/utils/haku/getFormValuesByHaku';
 import HakuForm, { initialValues } from './HakuForm';
-import HakuFooter from './HakuFooter';
+import { HakuFooter } from './HakuFooter';
 
 const config = getHakuFormConfig();
 

@@ -1,3 +1,4 @@
+import { playMockFile } from 'kto-ui-common/cypress/mockUtils';
 import createKoodisto from '#/cypress/data/koodisto';
 
 import organisaatio from '#/cypress/data/organisaatio';
@@ -13,69 +14,73 @@ import {
 
 export const stubHakuFormRoutes = ({ organisaatioOid }) => {
   stubCommonRoutes();
+  playMockFile('haku.mocks.json');
 
-  cy.route({
-    method: 'GET',
-    url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
-    response: organisaatio({
-      oid: organisaatioOid,
-    }),
-  });
-
-  cy.route({
-    method: 'POST',
-    url: '**/organisaatio-service/rest/organisaatio/v4/findbyoids',
-    response: [
-      organisaatio({
+  cy.intercept(
+    {
+      method: 'GET',
+      url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
+    },
+    {
+      body: organisaatio({
         oid: organisaatioOid,
       }),
-    ],
-  });
+    }
+  );
+
+  cy.intercept(
+    {
+      method: 'POST',
+      url: '**/organisaatio-service/rest/organisaatio/v4/findbyoids',
+    },
+    {
+      body: [
+        organisaatio({
+          oid: organisaatioOid,
+        }),
+      ],
+    }
+  );
 
   stubKoodistoRoute({ koodisto: 'haunkohdejoukontarkenne' });
-  stubKoodistoRoute({ koodisto: 'kausi' });
   stubKoodistoRoute({ koodisto: 'opetuspaikkakk' });
-  stubKoodistoRoute({ koodisto: 'kausi' });
   stubKoodistoRoute({ koodisto: 'posti' });
   stubKoodiRoute(createKoodi({ koodisto: 'posti', versio: 2 }));
 
-  cy.route({
-    method: 'GET',
-    url: `**/koodisto-service/rest/json/haunkohdejoukko/koodi**`,
-    response: createKoodisto({ koodisto: 'haunkohdejoukko' }).map((v, index) =>
-      index === 0
-        ? {
-            ...v,
-            koodiUri: 'haunkohdejoukko_12',
-          }
-        : v
-    ),
-  });
+  cy.intercept(
+    {
+      method: 'GET',
+      url: `**/koodisto-service/rest/json/haunkohdejoukko/koodi**`,
+    },
+    {
+      body: createKoodisto({ koodisto: 'haunkohdejoukko' }).map((v, index) =>
+        index === 0
+          ? {
+              ...v,
+              koodiUri: 'haunkohdejoukko_12',
+            }
+          : v
+      ),
+    }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: `**/koodisto-service/rest/json/hakutapa/koodi**`,
-    response: createKoodisto({ koodisto: 'hakutapa' }).map((v, index) =>
-      index === 0
-        ? {
-            ...v,
-            koodiUri: 'hakutapa_01',
-          }
-        : v
-    ),
-  });
+  cy.intercept(
+    { method: 'GET', url: `**/koodisto-service/rest/json/hakutapa/koodi**` },
+    {
+      body: createKoodisto({ koodisto: 'hakutapa' }).map((v, index) =>
+        index === 0
+          ? {
+              ...v,
+              koodiUri: 'hakutapa_01',
+            }
+          : v
+      ),
+    }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: '**/haku/list**',
-    response: [],
-  });
+  cy.intercept({ method: 'GET', url: '**/haku/list**' }, { body: [] });
 
-  cy.route({
-    method: 'GET',
-    url: `**/toteutus/list**`,
-    response: [],
-  });
+  cy.intercept({ method: 'GET', url: `**/toteutus/list**` }, { body: [] });
 
   stubHakemuspalveluLomakkeetRoute();
   stubOppijanumerorekisteriHenkiloRoute();

@@ -12,11 +12,7 @@ import SegmentTab from '#/src/components/SegmentTab';
 import DateTimeRange from '#/src/components/DateTimeRange';
 import { createFormFieldComponent } from '#/src/components/formFields';
 import { useFieldValue } from '#/src/hooks/form';
-import {
-  HAKULOMAKETYYPPI,
-  HAKEUTUMINEN,
-  ILMOITTAUTUMINEN,
-} from '#/src/constants';
+import { HAKULOMAKETYYPPI, Hakeutumistapa } from '#/src/constants';
 
 const { MUU, ATARU, EI_SAHKOISTA_HAKUA } = HAKULOMAKETYYPPI;
 
@@ -129,10 +125,10 @@ const HakutapaFormField = createFormFieldComponent(({ onChange, value }) => {
   const { t } = useTranslation();
   return (
     <SegmentTabs value={value}>
-      <SegmentTab value={HAKEUTUMINEN} onClick={onChange}>
+      <SegmentTab value={Hakeutumistapa.HAKEUTUMINEN} onClick={onChange}>
         {t('toteutuslomake.hakuTapa.hakeutuminen')}
       </SegmentTab>
-      <SegmentTab value={ILMOITTAUTUMINEN} onClick={onChange}>
+      <SegmentTab value={Hakeutumistapa.ILMOITTAUTUMINEN} onClick={onChange}>
         {t('toteutuslomake.hakuTapa.ilmoittautuminen')}
       </SegmentTab>
     </SegmentTabs>

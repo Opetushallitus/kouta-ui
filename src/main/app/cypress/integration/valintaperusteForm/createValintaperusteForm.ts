@@ -20,13 +20,13 @@ import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils'
 
 const fillHakutavanRajausSection = () => {
   getByTestId('hakutapaSection').within(() => {
-    getRadio('hakutapa_0#1').click({ force: true });
+    getRadio('hakutapa_01#1').click({ force: true });
   });
 };
 
 const fillKohdejoukonRajausSection = () => {
   getByTestId('kohdejoukkoSection').within(() => {
-    selectOption('haunkohdejoukko_0');
+    selectOption('Korkeakoulutus');
   });
 };
 
@@ -48,12 +48,12 @@ const fillValintatapaSection = () => {
   getByTestId('valintatavatSection').within(() => {
     getByTestId('valintatapalista').within(() => {
       getByTestId('tapa').within(() => {
-        selectOption('valintatapajono_0');
+        selectOption('Todistusvalinta');
       });
 
       getByTestId('nimi').find('input').pipe(paste('Valintatavan nimi'));
 
-      getByTestId('sisalto').within(() => {
+      getByTestId('valintatapaSisalto').within(() => {
         lisaaSisaltoa('teksti');
 
         typeToEditor('Sisältötekstiä');
@@ -73,8 +73,8 @@ const fillValintatapaSection = () => {
       getByTestId('kynnysehto').within(() => {
         typeToEditor('Kynnysehto');
       });
-      getByTestId('enimmaispistemaara').find('input').pipe(paste('100'));
-      getByTestId('vahimmaispistemaara').find('input').pipe(paste('10'));
+      getByTestId('enimmaispistemaara').find('input').pipe(paste('100,02'));
+      getByTestId('vahimmaispistemaara').find('input').pipe(paste('10,01'));
     });
 
     jatka();
@@ -87,6 +87,23 @@ const fillKuvausSection = () => {
 
     getByTestId('kuvaus').within(() => {
       typeToEditor('Kuvaus');
+    });
+
+    getByTestId('sisalto').within(() => {
+      lisaaSisaltoa('teksti');
+
+      typeToEditor('Sisältötekstiä');
+
+      lisaaSisaltoa('taulukko');
+
+      getTableInput()
+        .find('textarea')
+        .invoke('val', '')
+        .trigger('paste', {
+          clipboardData: {
+            getData: () => 'solu1.1\tsolu1.2\rsolu2.1\tsolu2.2',
+          },
+        });
     });
 
     jatka();
@@ -126,30 +143,31 @@ export const createValintaperusteForm = () => {
   const createdValintaperusteId = '1.2.3.4.5.6';
 
   beforeEach(() => {
-    cy.server();
     stubValintaperusteFormRoutes({ organisaatioOid });
 
     cy.visit(`/organisaatio/${organisaatioOid}/valintaperusteet/kielivalinnat`);
   });
 
   it('should be able to create valintaperuste', () => {
-    cy.route({
-      method: 'GET',
-      url: `**/valintaperuste/${createdValintaperusteId}`,
-      response: [
-        merge(valintaperuste(), {
-          oid: createdValintaperusteId,
-        }),
-      ],
-    });
+    cy.intercept(
+      { method: 'GET', url: `**/valintaperuste/${createdValintaperusteId}` },
+      {
+        body: [
+          merge(valintaperuste(), {
+            oid: createdValintaperusteId,
+          }),
+        ],
+      }
+    );
 
-    cy.route({
-      method: 'PUT',
-      url: '**/valintaperuste',
-      response: {
-        id: createdValintaperusteId,
-      },
-    }).as('createValintaperusteRequest');
+    cy.intercept(
+      { method: 'PUT', url: '**/valintaperuste' },
+      {
+        body: {
+          id: createdValintaperusteId,
+        },
+      }
+    ).as('createValintaperusteRequest');
 
     fillPerustiedotSection();
     fillPohjaSection();

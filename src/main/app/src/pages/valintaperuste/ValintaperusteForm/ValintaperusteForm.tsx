@@ -12,7 +12,7 @@ import JulkisuusSection from '#/src/components/JulkisuusSection';
 import KokeetTaiLisanaytotSection from '#/src/components/KokeetTaiLisanaytotSection';
 import SoraKuvausSection from '#/src/components/SoraKuvausSection';
 import { ValintatapaSection } from './ValintatapaSection';
-import KuvausSection from './KuvausSection';
+import { KuvausSection } from './KuvausSection';
 import PerustiedotSection from './PerustiedotSection';
 
 const ValintaperusteForm = ({
@@ -43,12 +43,8 @@ const ValintaperusteForm = ({
           organisaatioOid={organisaatioOid}
           getCopyEntities={getValintaperusteet}
           infoText={t('valintaperustelomake.pohjavalintaInfo')}
-          createLabel={t('yleiset.luoUusi', {
-            entity: t('yleiset.valintaperuste'),
-          })}
-          copyLabel={t('yleiset.kopioiPohjaksi', {
-            entity: t('yleiset.valintaperuste'),
-          })}
+          createLabel={t('yleiset.luoUusiValintaperuste')}
+          copyLabel={t('valintaperustelomake.kopioiPohjaksi')}
         />
       ) : null}
 

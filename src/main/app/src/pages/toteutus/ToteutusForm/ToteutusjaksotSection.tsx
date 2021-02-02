@@ -7,7 +7,7 @@ import Button from '#/src/components/Button';
 import { FormFieldInput, FormFieldEditor } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
-import SisaltoField from '#/src/components/SisaltoField';
+import { SisaltoFields } from '#/src/components/SisaltoFields';
 
 const ToteutusjaksotField = ({ fields, language, t }) => {
   const onAddField = useCallback(() => {
@@ -61,7 +61,7 @@ const ToteutusjaksotField = ({ fields, language, t }) => {
               />
             </Box>
 
-            <SisaltoField name={`${field}.sisalto`} language={language} />
+            <SisaltoFields name={`${field}.sisalto`} language={language} />
           </>
         )}
       </FieldArrayList>

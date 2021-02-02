@@ -12,12 +12,14 @@ import {
   fillKieliversiotSection,
   fillTilaSection,
   tallenna,
+  fillAjankohtaFields,
 } from '#/cypress/utils';
 
 import {
   fillJarjestyspaikkaSection,
   prepareTest,
 } from '#/cypress/hakukohdeFormUtils';
+import { Alkamiskausityyppi } from '#/src/constants';
 
 const lisaa = () => {
   getByTestId('lisaaButton').click({ force: true });
@@ -26,7 +28,7 @@ const lisaa = () => {
 const fillPohjakoulutusvaatimusSection = () => {
   getByTestId('pohjakoulutusSection').within(() => {
     getByTestId('pohjakoulutusvaatimusSelect').within(() => {
-      selectOption('pohjakoulutusvaatimustoinenaste_0');
+      selectOption('Peruskoulu');
     });
 
     typeToEditor('Tarkenne');
@@ -96,14 +98,8 @@ const fillLomakeSection = (type: string = 'ataru') => {
 };
 
 const fillAlkamiskausiSection = () => {
-  getByTestId('alkamiskausiSection').within(() => {
-    getByTestId('eriAlkamiskausi').within(() => {
-      getCheckbox(null).click({ force: true });
-    });
-
-    getRadio('kausi_0#1').click({ force: true });
-    selectOption(2035);
-  });
+  cy.findByText('hakukohdelomake.hakukohteellaEriAlkamiskausi').click();
+  fillAjankohtaFields(Alkamiskausityyppi.HENKILOKOHTAINEN_SUUNNITELMA);
 };
 
 const fillAloituspaikatSection = ({ isKorkeakoulu = false } = {}) => {
@@ -131,7 +127,7 @@ const fillLiitteetSection = () => {
 
     getByTestId('liitelista').within(() => {
       getByTestId('tyyppi').within(() => {
-        selectOption('liitetyypitamm_0');
+        selectOption('Lausunnot');
       });
 
       getByTestId('nimi').find('input').pipe(paste('Nimi'));
@@ -152,7 +148,7 @@ const fillLiitteetSection = () => {
       getByTestId('osoite').find('input').pipe(paste('Osoite'));
 
       getByTestId('postinumero').within(() => {
-        fillAsyncSelect('0', 'Posti_0');
+        fillAsyncSelect('00350');
       });
 
       getByTestId('sahkoposti')

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { getTestIdProps } from '#/src/utils';
 import { Box } from '#/src/components/virkailija';
-import HakuajatFields from '#/src/components/HakuajatFields';
+import { HakuajatFields } from '#/src/components/HakuajatFields';
 import FieldGroup from '#/src/components/FieldGroup';
 import { FormFieldDateTimeInput } from '#/src/components/formFields';
 import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenAloitusajankohtaFields';
@@ -26,7 +26,7 @@ const ScheduleSection = ({ isOphVirkailija, isYhteishaku, name, language }) => {
         />
       </FieldGroup>
 
-      <FieldGroup title={t('hakulomake.koulutuksenAjankohta')}>
+      <FieldGroup title={t('yleiset.koulutuksenAjankohta')}>
         <KoulutuksenAloitusajankohtaFields
           section={name}
           name={`${name}.ajankohtaTyyppi`}

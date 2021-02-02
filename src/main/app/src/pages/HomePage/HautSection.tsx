@@ -50,7 +50,7 @@ const Actions = ({ organisaatioOid }) => {
 
   return (
     <Button as={Link} to={`/organisaatio/${organisaatioOid}/haku`}>
-      {t('etusivu.luoUusiHaku')}
+      {t('yleiset.luoUusiHaku')}
     </Button>
   );
 };

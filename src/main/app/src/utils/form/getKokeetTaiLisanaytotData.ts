@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { serializeEditorState } from '#/src/components/Editor/utils';
+import { isNumeric, parseFloatComma } from '#/src/utils';
 
 export const getKokeetTaiLisanaytotData = ({
   valintakoeValues = {},
@@ -9,12 +10,14 @@ export const getKokeetTaiLisanaytotData = ({
   if (_.isEmpty(kokeetTaiLisanaytot)) {
     return undefined;
   }
+
   return (kokeetTaiLisanaytot || []).map(
     ({
       id,
       tyyppi,
       nimi,
       tietoaHakijalle,
+      vahimmaispistemaara,
       liittyyEnnakkovalmistautumista,
       ohjeetEnnakkovalmistautumiseen,
       erityisjarjestelytMahdollisia,
@@ -26,6 +29,9 @@ export const getKokeetTaiLisanaytotData = ({
       nimi: nimi,
       metadata: {
         tietoja: _.mapValues(tietoaHakijalle, serializeEditorState),
+        vahimmaispisteet: isNumeric(vahimmaispistemaara)
+          ? parseFloatComma(vahimmaispistemaara)
+          : null,
         liittyyEnnakkovalmistautumista,
         ohjeetEnnakkovalmistautumiseen: _.mapValues(
           ohjeetEnnakkovalmistautumiseen,

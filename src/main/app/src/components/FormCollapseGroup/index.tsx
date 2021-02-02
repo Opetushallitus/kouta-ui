@@ -1,26 +1,27 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { get, isFunction } from 'lodash';
+import _ from 'lodash';
 import { produce } from 'immer';
 import { Box } from '#/src/components/virkailija';
 import { useFormConfig, useForm } from '#/src/hooks/form';
 import scrollElementIntoView from '#/src/utils/scrollElementIntoView';
+import { FormCollapseProps } from '#/src/components/FormCollapse';
 
 const getVisibleChildren = (children, config, configured) => {
   return React.Children.toArray(children).filter(c => {
-    const sectionProp = get(c, 'props.section');
+    const sectionProp = _.get(c, 'props.section');
 
     if (!c) {
       return false;
     } else if (
       configured &&
       sectionProp &&
-      !get(config, ['sections', sectionProp])
+      !_.get(config, ['sections', sectionProp])
     ) {
       return false;
     }
 
     return true;
-  });
+  }) as Array<React.ReactElement<FormCollapseProps>>;
 };
 
 const FormCollapseGroup = ({
@@ -30,8 +31,10 @@ const FormCollapseGroup = ({
   defaultOpen = true,
   children,
 }) => {
-  const [sectionNeedsFocus, setSectionNeedsFocus] = useState(null);
-  const [errorsNeedAttention, setErrorsNeedAttention] = useState(false);
+  const [sectionNeedsFocus, setSectionNeedsFocus] = useState<number | null>();
+  const [errorsNeedAttention, setErrorsNeedAttention] = useState<boolean>(
+    false
+  );
 
   const activeRef = useRef();
   const config = useFormConfig();
@@ -47,13 +50,13 @@ const FormCollapseGroup = ({
     [children, config, configured]
   );
 
-  const sectionErrors = useMemo(
+  const sectionErrors: Array<boolean> = useMemo(
     () =>
       React.Children.map(visibleChildren, child => {
         // Get the 'section'-prop of the FormCollapse component
         // TODO: Enforce prop types
-        const firstSection = get(child, 'props.section');
-        return get(formErrors, firstSection) != null;
+        const firstSection = _.get(child, 'props.section');
+        return _.get(formErrors, firstSection) != null;
       }),
     [formErrors, visibleChildren]
   );
@@ -99,7 +102,7 @@ const FormCollapseGroup = ({
 
   return (
     <>
-      {React.Children.map(visibleChildren, (child, index) => {
+      {visibleChildren.map((child, index) => {
         const isLast = index === visibleChildren.length - 1;
         const childProps = {
           index,
@@ -110,15 +113,16 @@ const FormCollapseGroup = ({
           onContinue:
             !isLast && enabled
               ? () => {
-                  if (isFunction(child.props.onContinue)) {
+                  if (_.isFunction(child.props.onContinue)) {
                     child.props.onContinue();
                   }
                   setSectionNeedsFocus(index + 1);
                 }
-              : null,
+              : undefined,
         };
         return (
           <Box
+            key={`FormCollapse_${_.camelCase(child.props.header)}`}
             ref={index === sectionNeedsFocus ? activeRef : null}
             mb={isLast ? 0 : 4}
           >

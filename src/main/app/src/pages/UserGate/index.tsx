@@ -1,4 +1,4 @@
-import { UNAUTHORIZED } from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAsync, useEvent, useIdle } from 'react-use';
@@ -6,6 +6,7 @@ import {
   ERROR_INTERNET_DISCONNECTED,
   ERROR_KAYTTOOIKEUS_SERVICE,
   IDLE_TIMEOUT,
+  LANGUAGES,
 } from '#/src/constants';
 import AuthorizedUserContext from '#/src/contexts/AuthorizedUserContext';
 import { useHttpClient, useUrls } from '#/src/contexts/contextHooks';
@@ -13,8 +14,14 @@ import useApiAsync from '#/src/hooks/useApiAsync';
 import { isDev } from '#/src/utils';
 import { getMe } from '#/src/utils/api/getMe';
 import AuthorizationErrorModal from './AuthorizationErrorModal';
+import { useAsiointiKieli } from '#/src/utils/api/getAsiointiKieli';
 
-export const UserGate = ({ fallback = null, children = null }) => {
+type UserGateProps = {
+  fallback?: React.ReactElement;
+  children?: React.ReactNode;
+};
+
+export const UserGate = ({ fallback, children }: UserGateProps) => {
   const apiUrls = useUrls();
   const httpClient = useHttpClient();
   const [isFocused, setFocused] = useState(true);
@@ -46,7 +53,7 @@ export const UserGate = ({ fallback = null, children = null }) => {
     try {
       await httpClient.get(apiUrls.url('kouta-backend.session'));
     } catch (e) {
-      if (e?.response?.status === UNAUTHORIZED) {
+      if (e?.response?.status === StatusCodes.UNAUTHORIZED) {
         !isDev && window.location.replace(apiUrls.url('cas.login'));
       }
     }
@@ -71,10 +78,24 @@ export const UserGate = ({ fallback = null, children = null }) => {
     }
   }, [apiUrls, httpClient, isFocused, isIdle]);
 
+  const {
+    data: asiointiKieli,
+    isLoading: isLoadingAsiointiKieli,
+  } = useAsiointiKieli();
+
+  useEffect(() => {
+    const newLanguage = LANGUAGES.includes(asiointiKieli)
+      ? asiointiKieli
+      : 'fi';
+    if (i18n.language !== newLanguage) {
+      i18n.changeLanguage(newLanguage);
+    }
+  });
+
   return (
     <>
       <AuthorizationErrorModal {...{ errorCode, setErrorCode, apiUrls, t }} />
-      {!isLoaded ? (
+      {!isLoaded || isLoadingAsiointiKieli ? (
         fallback
       ) : (
         <AuthorizedUserContext.Provider value={data}>

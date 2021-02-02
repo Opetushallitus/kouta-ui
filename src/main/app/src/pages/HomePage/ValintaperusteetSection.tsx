@@ -50,7 +50,7 @@ const Actions = ({ organisaatioOid }) => {
       as={Link}
       to={`/organisaatio/${organisaatioOid}/valintaperusteet/kielivalinnat/`}
     >
-      {t('etusivu.luoUusiValintaperuste')}
+      {t('yleiset.luoUusiValintaperuste')}
     </Button>
   );
 };

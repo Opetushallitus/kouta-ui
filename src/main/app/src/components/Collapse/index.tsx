@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { setLightness } from 'polished';
-import { isString, noop } from 'lodash';
+import _ from 'lodash';
 import { getThemeProp, spacing } from '#/src/theme';
 import CollapseContent from '#/src/components/CollapseContent';
 import { Box, DropdownIcon, Typography } from '#/src/components/virkailija';
@@ -62,7 +62,7 @@ const ToggleIcon = styled(DropdownIcon)`
 `;
 
 const renderHeader = header => {
-  return isString(header) ? (
+  return _.isString(header) ? (
     <Typography variant="h5" p={3}>
       {header}
     </Typography>
@@ -71,22 +71,32 @@ const renderHeader = header => {
   );
 };
 
+type CollapseProps = {
+  header?: React.ReactNode;
+  footer?: React.ReactNode;
+  children?: React.ReactNode;
+  open: boolean;
+  active?: boolean;
+  onToggle?: () => void;
+  toggleOnHeaderClick?: boolean;
+};
+
 const Collapse = ({
   header = null,
   footer = null,
   children = null,
   open,
   active = false,
-  onToggle = noop,
+  onToggle = _.noop,
   toggleOnHeaderClick = true,
   ...props
-}) => {
+}: CollapseProps) => {
   return (
     <Container active={active} {...props}>
       <HeaderContainer open={open}>
         <HeaderContent
           toggleOnHeaderClick={toggleOnHeaderClick}
-          onClick={toggleOnHeaderClick ? onToggle : noop}
+          onClick={toggleOnHeaderClick ? onToggle : _.noop}
         >
           {renderHeader(header)}
         </HeaderContent>

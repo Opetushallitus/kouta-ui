@@ -1,6 +1,6 @@
 import { Alkamiskausityyppi } from '#/src/constants';
 
-export default () => ({
+const haku = () => ({
   oid: '1.2.246.562.29.00000000000000000001',
   tila: 'tallennettu',
   nimi: { fi: 'Haku' },
@@ -17,8 +17,8 @@ export default () => ({
   metadata: {
     koulutuksenAlkamiskausi: {
       alkamiskausityyppi: Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI,
-      koulutuksenAlkamiskausiKoodiUri: 'kausi_0#1',
-      koulutuksenAlkamisvuosi: '2024',
+      koulutuksenAlkamiskausiKoodiUri: 'kausi_k#1',
+      koulutuksenAlkamisvuosi: 2035,
     },
     tulevaisuudenAikataulu: [
       { alkaa: '2019-10-11T09:05', paattyy: '2019-12-25T20:30' },
@@ -50,3 +50,5 @@ export default () => ({
   kielivalinta: ['fi', 'sv'],
   modified: '2019-03-29T12:48',
 });
+
+export default haku;

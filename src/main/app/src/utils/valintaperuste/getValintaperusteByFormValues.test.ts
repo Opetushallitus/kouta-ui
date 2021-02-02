@@ -38,6 +38,7 @@ const BASE_VALINTAPERUSTE_FORM_DATA = {
           fi: parseEditorState('<p>Tietoa hakijalle - fi</p>'),
           sv: parseEditorState('<p>Tietoa hakijalle - sv</p>'),
         },
+        vahimmaispistemaara: '30,4',
         liittyyEnnakkovalmistautumista: true,
         ohjeetEnnakkovalmistautumiseen: {
           fi: parseEditorState('<p>Ohjeet ennakkovalmistautumiseen - fi</p>'),
@@ -92,8 +93,8 @@ test('Should convert valintaperuste form with valintatapa', () => {
           sv: parseEditorState('<p>Sv kynnysehto</p>'),
         },
         tapa: { value: 'tapa_1#1' },
-        enimmaispistemaara: 20,
-        vahimmaispistemaara: 10,
+        enimmaispistemaara: '20,2',
+        vahimmaispistemaara: '10,1',
         sisalto: [
           {
             tyyppi: 'teksti',

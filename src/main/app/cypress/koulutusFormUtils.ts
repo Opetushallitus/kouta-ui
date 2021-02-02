@@ -27,143 +27,172 @@ import ePeruste6777660Sisalto from './data/ePeruste6777660Sisalto';
 export const stubKoulutusFormRoutes = ({ organisaatioOid }) => {
   stubCommonRoutes();
 
-  cy.route({
-    method: 'GET',
-    url: `**/organisaatio-service/rest/organisaatio/v4/hierarkia/hae**`,
-    response: organisaatioHierarkia({ rootOid: organisaatioOid }),
-  });
+  cy.intercept(
+    {
+      method: 'GET',
+      url: `**/organisaatio-service/rest/organisaatio/v4/hierarkia/hae**`,
+    },
+    { body: organisaatioHierarkia({ rootOid: organisaatioOid }) }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
-    response: merge(organisaatio(), {
-      oid: organisaatioOid,
-    }),
-  });
-
-  cy.route({
-    method: 'POST',
-    url: '**/organisaatio-service/rest/organisaatio/v4/findbyoids',
-    response: [
-      merge(organisaatio(), {
+  cy.intercept(
+    {
+      method: 'GET',
+      url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
+    },
+    {
+      body: merge(organisaatio(), {
         oid: organisaatioOid,
       }),
-    ],
-  });
+    }
+  );
 
-  cy.route({
-    method: 'GET',
-    url:
-      '**/koodisto-service/rest/json/relaatio/sisaltyy-ylakoodit/koulutustyyppi_*',
-    response: koodisto({ koodisto: 'koulutus' }),
-  });
+  cy.intercept(
+    {
+      method: 'POST',
+      url: '**/organisaatio-service/rest/organisaatio/v4/findbyoids',
+    },
+    {
+      body: [
+        merge(organisaatio(), {
+          oid: organisaatioOid,
+        }),
+      ],
+    }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: `**/koulutus/list?organisaatioOid=${organisaatioOid}`,
-    response: [],
-  });
+  cy.intercept(
+    {
+      method: 'GET',
+      url:
+        '**/koodisto-service/rest/json/relaatio/sisaltyy-ylakoodit/koulutustyyppi_*',
+    },
+    { body: koodisto({ koodisto: 'koulutus' }) }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: `**/koulutus/*/toteutukset/list**`,
-    response: [],
-  });
+  cy.intercept(
+    {
+      method: 'GET',
+      url: `**/koulutus/list?organisaatioOid=${organisaatioOid}`,
+    },
+    { body: [] }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: '**/koodisto-service/rest/codeelement/koulutus_351107/**',
-    response: koodistoKoulutus351107,
-  });
+  cy.intercept(
+    { method: 'GET', url: `**/koulutus/*/toteutukset/list**` },
+    { body: [] }
+  );
 
-  cy.route({
-    method: 'GET',
-    url:
-      '**/koodisto-service/rest/json/relaatio/sisaltyy-alakoodit/koulutus_351107**',
-    response: koodistoKoulutus351107Alakoodit,
-  });
+  cy.intercept(
+    {
+      method: 'GET',
+      url: '**/koodisto-service/rest/codeelement/koulutus_351107/**',
+    },
+    { body: koodistoKoulutus351107 }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: '**/koodisto-service/rest/codeelement/koulutus_309902/**',
-    response: koodistoKoulutus309902,
-  });
+  cy.intercept(
+    {
+      method: 'GET',
+      url:
+        '**/koodisto-service/rest/json/relaatio/sisaltyy-alakoodit/koulutus_351107**',
+    },
+    { body: koodistoKoulutus351107Alakoodit }
+  );
 
-  cy.route({
-    method: 'GET',
-    url:
-      '**/koodisto-service/rest/json/relaatio/sisaltyy-alakoodit/koulutus_309902**',
-    response: koodistoKoulutus309902Alakoodit,
-  });
+  cy.intercept(
+    {
+      method: 'GET',
+      url: '**/koodisto-service/rest/codeelement/koulutus_309902/**',
+    },
+    { body: koodistoKoulutus309902 }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: '**/koodisto-service/rest/codeelement/koulutus_671112/**',
-    response: koodistoKoulutus671112,
-  });
+  cy.intercept(
+    {
+      method: 'GET',
+      url:
+        '**/koodisto-service/rest/json/relaatio/sisaltyy-alakoodit/koulutus_309902**',
+    },
+    { body: koodistoKoulutus309902Alakoodit }
+  );
 
-  cy.route({
-    method: 'GET',
-    url:
-      '**/koodisto-service/rest/json/relaatio/sisaltyy-alakoodit/koulutus_671112**',
-    response: koodistoKoulutus671112Alakoodit,
-  });
+  cy.intercept(
+    {
+      method: 'GET',
+      url: '**/koodisto-service/rest/codeelement/koulutus_671112/**',
+    },
+    { body: koodistoKoulutus671112 }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: '**/koodisto-service/rest/json/koulutus/koodi?onlyValidKoodis=true**',
-    response: koodistoKoulutukset,
-  });
+  cy.intercept(
+    {
+      method: 'GET',
+      url:
+        '**/koodisto-service/rest/json/relaatio/sisaltyy-alakoodit/koulutus_671112**',
+    },
+    { body: koodistoKoulutus671112Alakoodit }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: '**/eperusteet-service/api/perusteenosat/6777674',
-    response: ePerustePerusteenosat6777674,
-  });
+  cy.intercept(
+    {
+      method: 'GET',
+      url:
+        '**/koodisto-service/rest/json/koulutus/koodi?onlyValidKoodis=true**',
+    },
+    { body: koodistoKoulutukset }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: '**/eperusteet-service/api/perusteenosat/6778360',
-    response: ePerustePerusteenosat6778360,
-  });
+  cy.intercept(
+    { method: 'GET', url: '**/eperusteet-service/api/perusteenosat/6777674' },
+    { body: ePerustePerusteenosat6777674 }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: '**/eperusteet-service/api/perusteenosat/6778360',
-    response: ePerustePerusteenosat6778360,
-  });
+  cy.intercept(
+    { method: 'GET', url: '**/eperusteet-service/api/perusteenosat/6778360' },
+    { body: ePerustePerusteenosat6778360 }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: '**/tutkinnonosat',
-    response: ePeruste6777660TutkinnonOsat,
-  });
+  cy.intercept(
+    { method: 'GET', url: '**/eperusteet-service/api/perusteenosat/6778360' },
+    { body: ePerustePerusteenosat6778360 }
+  );
 
-  cy.route({
-    method: 'GET',
-    url:
-      '**/eperusteet-service/api/perusteet/6777660/suoritustavat/reformi/rakenne',
-    response: ePeruste6777660Rakenne,
-  });
+  cy.intercept(
+    { method: 'GET', url: '**/tutkinnonosat' },
+    { body: ePeruste6777660TutkinnonOsat }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: '**/eperusteet-service/api/perusteet/6777660',
-    response: ePeruste6777660,
-  });
+  cy.intercept(
+    {
+      method: 'GET',
+      url:
+        '**/eperusteet-service/api/perusteet/6777660/suoritustavat/reformi/rakenne',
+    },
+    { body: ePeruste6777660Rakenne }
+  );
 
-  cy.route({
-    method: 'GET',
-    url: '**/eperusteet-service/api/perusteet/6777660/osaamisalakuvaukset',
-    response: ePeruste6777660Osaamisalakuvaukset,
-  });
+  cy.intercept(
+    { method: 'GET', url: '**/eperusteet-service/api/perusteet/6777660' },
+    { body: ePeruste6777660 }
+  );
 
-  cy.route({
-    method: 'GET',
-    url:
-      '**/eperusteet-service/api/perusteet/6777660/suoritustavat/reformi/sisalto',
-    response: ePeruste6777660Sisalto,
-  });
+  cy.intercept(
+    {
+      method: 'GET',
+      url: '**/eperusteet-service/api/perusteet/6777660/osaamisalakuvaukset',
+    },
+    { body: ePeruste6777660Osaamisalakuvaukset }
+  );
+
+  cy.intercept(
+    {
+      method: 'GET',
+      url:
+        '**/eperusteet-service/api/perusteet/6777660/suoritustavat/reformi/sisalto',
+    },
+    { body: ePeruste6777660Sisalto }
+  );
 
   stubEPerusteetByKoulutuskoodiRoute();
 

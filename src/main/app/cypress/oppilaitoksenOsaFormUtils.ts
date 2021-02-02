@@ -8,13 +8,17 @@ export const stubOppilaitosFormRoutes = ({ organisaatioOid }) => {
   stubCommonRoutes();
   stubKoodiRoute(createKoodi({ koodisto: 'posti', versio: 2 }));
 
-  cy.route({
-    method: 'POST',
-    url: '**/organisaatio-service/rest/organisaatio/v4/findbyoids',
-    response: [
-      merge(createOrganisaatio(), {
-        oid: organisaatioOid,
-      }),
-    ],
-  });
+  cy.intercept(
+    {
+      method: 'POST',
+      url: '**/organisaatio-service/rest/organisaatio/v4/findbyoids',
+    },
+    {
+      body: [
+        merge(createOrganisaatio(), {
+          oid: organisaatioOid,
+        }),
+      ],
+    }
+  );
 };

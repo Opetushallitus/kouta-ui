@@ -15,14 +15,23 @@ import { ValintatapaSection } from './ValintatapaSection';
 import { KuvausSection } from './KuvausSection';
 import PerustiedotSection from './PerustiedotSection';
 
+type ValintaperusteFormProps = {
+  organisaatioOid: string;
+  steps?: boolean;
+  canEditTyyppi?: boolean;
+  canSelectBase?: boolean;
+  onSelectBase?: (pohjavalinta: PohjaValinta) => void;
+  showArkistoituTilaOption?: boolean;
+};
+
 const ValintaperusteForm = ({
+  organisaatioOid,
   steps = true,
   canEditTyyppi = true,
   canSelectBase = true,
-  organisaatioOid,
-  onSelectBase = undefined,
+  onSelectBase,
   showArkistoituTilaOption = true,
-}) => {
+}: ValintaperusteFormProps) => {
   const { t } = useTranslation();
   const kieliversiot = useFieldValue('perustiedot.kieliversiot');
   const languages = kieliversiot || [];

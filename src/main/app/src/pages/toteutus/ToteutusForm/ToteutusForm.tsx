@@ -42,7 +42,7 @@ type ToteutusFormProps = {
   onAttachHakukohde?: ({ hakuOid }) => void;
   koulutustyyppi?: KOULUTUSTYYPPI;
   showArkistoituTilaOption?: boolean;
-  onSelectBase?: ({ tapa, valinta }) => void;
+  onSelectBase?: (pohjavalinta: PohjaValinta) => void;
 };
 
 const ToteutusForm = ({

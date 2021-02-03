@@ -13,11 +13,11 @@ const virkailijaDevUrl = REACT_APP_DEV_SERVER_URL;
 const ePerusteetDevUrl = `https://eperusteet.hahtuvaopintopolku.fi`;
 
 export const development = ({ isCypress }) => ({
-  'konfo-ui.koulutus': `${REACT_APP_KONFO_URL}/fi/koulutus/$1`,
-  'konfo-ui.toteutus': `${REACT_APP_KONFO_URL}/fi/toteutus/$1`,
-  'konfo-ui.oppilaitos': `${REACT_APP_KONFO_URL}/fi/oppilaitos/$1`,
-  'konfo-ui.oppilaitoksenOsa': `${REACT_APP_KONFO_URL}/fi/oppilaitososa/$1`,
-  'konfo-ui.valintaperuste': `${REACT_APP_KONFO_URL}/fi/valintaperuste/$1`,
+  'konfo-ui.koulutus': `${REACT_APP_KONFO_URL}/koulutus/$1`,
+  'konfo-ui.toteutus': `${REACT_APP_KONFO_URL}/toteutus/$1`,
+  'konfo-ui.oppilaitos': `${REACT_APP_KONFO_URL}/oppilaitos/$1`,
+  'konfo-ui.oppilaitoksenOsa': `${REACT_APP_KONFO_URL}/oppilaitososa/$1`,
+  'konfo-ui.valintaperuste': `${REACT_APP_KONFO_URL}/valintaperuste/$1`,
   'kouta-backend.base-url': koutaBackendDevUrl,
   'kouta-backend.koulutus': `${koutaBackendDevUrl}/koulutus`,
   'kouta-backend.koulutus-by-oid': `${koutaBackendDevUrl}/koulutus/$1`,

@@ -38,9 +38,8 @@ export const EsikatseluControls: React.FC<EsikatseluProps> = ({
   const isDirty = useIsDirty();
 
   const disabled =
-    isDirty ||
     !esikatseluUrl || // NOTE: url can be false or undefined
-    (tila !== JULKAISUTILA.TALLENNETTU && !isJulkaistu);
+    ((tila === JULKAISUTILA.TALLENNETTU || isJulkaistu) && isDirty);
   const tooltipKey = isJulkaistu
     ? 'yleiset.naytaJulkaistuTooltip'
     : 'yleiset.tallennaLuonnoksenaEsikatsellaksesi';
@@ -63,8 +62,8 @@ export const EsikatseluControls: React.FC<EsikatseluProps> = ({
               color="primary"
               variant="outlined"
               target="_blank"
-              disabled={!disabled}
-              {...(!disabled // NOTE: disabled won't prevent the link from functioning
+              disabled={disabled}
+              {...(disabled // NOTE: disabled won't prevent the link from functioning
                 ? {}
                 : {
                     as: 'a',

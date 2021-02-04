@@ -157,11 +157,11 @@ exports[`renders correctly 1`] = `
       <div
         class="c4"
       >
-        <span
+        <i
           class="c5 material-icons c6"
         >
           school
-        </span>
+        </i>
       </div>
       <div
         class="c7"
@@ -175,11 +175,11 @@ exports[`renders correctly 1`] = `
       <div
         class="c4"
       >
-        <span
+        <i
           class="c5 material-icons c6"
         >
           flag
-        </span>
+        </i>
       </div>
       <div
         class="c7"
@@ -197,11 +197,11 @@ exports[`renders correctly 1`] = `
       <div
         class="c4"
       >
-        <span
+        <i
           class="c5 material-icons c6"
         >
           access_time
-        </span>
+        </i>
       </div>
       <div
         class="c7"
@@ -215,11 +215,11 @@ exports[`renders correctly 1`] = `
       <div
         class="c8"
       >
-        <span
+        <i
           class="c5 material-icons c9"
         >
           list_alt
-        </span>
+        </i>
       </div>
       <div
         class="c10"
@@ -237,11 +237,11 @@ exports[`renders correctly 1`] = `
       <div
         class="c11"
       >
-        <span
+        <i
           class="c5 material-icons c6"
         >
           filter_list
-        </span>
+        </i>
       </div>
       <div
         class="c7"
@@ -255,11 +255,11 @@ exports[`renders correctly 1`] = `
       <div
         class="c11"
       >
-        <span
+        <i
           class="c5 material-icons c6"
         >
           subject
-        </span>
+        </i>
       </div>
       <div
         class="c7"

@@ -98,12 +98,12 @@ exports[`renders correctly 1`] = `
       <span
         style="transform: rotate(180deg); display: inline-flex;"
       >
-        <span
+        <i
           class="c5 material-icons c6"
           role="button"
         >
           expand_more
-        </span>
+        </i>
       </span>
     </div>
   </div>
@@ -217,12 +217,12 @@ exports[`renders correctly 2`] = `
       <span
         style="transform: rotate(180deg); display: inline-flex;"
       >
-        <span
+        <i
           class="c4 material-icons c5"
           role="button"
         >
           expand_more
-        </span>
+        </i>
       </span>
     </div>
   </div>
@@ -347,12 +347,12 @@ exports[`renders correctly when closed 1`] = `
       <span
         style="transform: rotate(0deg); display: inline-flex;"
       >
-        <span
+        <i
           class="c5 material-icons c6"
           role="button"
         >
           expand_more
-        </span>
+        </i>
       </span>
     </div>
   </div>

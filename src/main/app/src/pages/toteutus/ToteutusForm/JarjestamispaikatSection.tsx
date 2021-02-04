@@ -38,6 +38,7 @@ const JarjestamispaikatSection = ({ organisaatioOid, name }) => {
         hierarkia={hierarkia}
         getIsDisabled={getIsDisabled}
         component={JarjestajatField}
+        disableAutoSelect={true}
       />
     </div>
   );

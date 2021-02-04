@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
@@ -17,7 +17,7 @@ import { Spin } from '#/src/components/virkailija';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import { useUrls } from '#/src/contexts/contextHooks';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
-import { useEntityFormConfig } from '#/src/hooks/form';
+import { useEntityFormConfig, useFormInitialValues } from '#/src/hooks/form';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
 import getFormValuesByToteutus from '#/src/utils/toteutus/getFormValuesByToteutus';
@@ -25,6 +25,8 @@ import { useToteutusByOid } from '#/src/utils/toteutus/getToteutusByOid';
 
 import { ToteutusFooter } from './ToteutusFooter';
 import ToteutusForm from './ToteutusForm';
+
+const FORM_NAME = 'toteutusForm';
 
 const EditToteutusPage = props => {
   const {
@@ -49,9 +51,7 @@ const EditToteutusPage = props => {
   const koulutustyyppi = koulutus ? koulutus.koulutustyyppi : null;
   const { t } = useTranslation();
 
-  const initialValues = useMemo(() => {
-    return toteutus && getFormValuesByToteutus(toteutus);
-  }, [toteutus]);
+  useFormInitialValues(FORM_NAME, toteutus, getFormValuesByToteutus);
 
   const onAttachHakukohde = useCallback(
     ({ hakuOid }) => {
@@ -75,7 +75,7 @@ const EditToteutusPage = props => {
   return !toteutus ? (
     <FullSpin />
   ) : (
-    <ReduxForm form="toteutusForm" initialValues={initialValues}>
+    <ReduxForm form={FORM_NAME}>
       <Title>{t('sivuTitlet.toteutuksenMuokkaus')}</Title>
       <FormConfigContext.Provider value={{ ...config, readOnly: !canUpdate }}>
         <FormPage

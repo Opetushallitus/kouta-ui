@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react';
 
-import { queryCache } from 'react-query';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -10,6 +9,7 @@ import { useForm, useFormName } from '#/src/hooks/form';
 import { useSaveToteutus } from '#/src/hooks/formSaveHooks';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { getValuesForSaving } from '#/src/utils';
+import { invalidateEntityQueryByOid } from '#/src/utils/api/getEntityByOid';
 import { getTarjoajaOids } from '#/src/utils/getTarjoajaOids';
 import createToteutus from '#/src/utils/toteutus/createToteutus';
 import getToteutusByFormValues from '#/src/utils/toteutus/getToteutusByFormValues';
@@ -75,7 +75,7 @@ export const ToteutusFooter = ({
           `/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`
         );
       } else {
-        queryCache.invalidateQueries(ENTITY.TOTEUTUS);
+        invalidateEntityQueryByOid(ENTITY.TOTEUTUS, oid);
       }
     },
     [

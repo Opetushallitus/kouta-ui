@@ -1,5 +1,6 @@
 import { AxiosInstance } from 'axios';
 import _ from 'lodash';
+import { queryCache } from 'react-query';
 
 import { ENTITY } from '#/src/constants';
 import { useApiQuery, KoutaApiQueryConfig } from '#/src/hooks/useApiQuery';
@@ -38,3 +39,7 @@ export const useEntityByOid = (
     enabled: oid,
     ...options,
   });
+
+export const invalidateEntityQueryByOid = (entityType, oid) => {
+  queryCache.invalidateQueries(oid ? [entityType, { oid }] : entityType);
+};

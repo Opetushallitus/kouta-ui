@@ -14,7 +14,7 @@ const GridColumnBase = styled.div`
   flex-grow: 1;
   flex-shrink: 0;
   flex-basis: auto;
-  
+
   ${media.lessThan('small')`
     ${props => props.sm && getWidth('xs')}
   `}

@@ -14,12 +14,13 @@ const SegmentTab = styled.button`
   cursor: pointer;
   outline: none;
   position: relative;
-  transition: border-color 0.25s, box-shadow 0.25s, background-color 0.25s, color 0.25s;
+  transition: border-color 0.25s, box-shadow 0.25s, background-color 0.25s,
+    color 0.25s;
   box-shadow: 0px 0px 0px 0px transparent;
 
   &:focus {
-    box-shadow: 0px 0px 0px 2px ${({ theme }) =>
-      theme.colors.primary.focusOutline};
+    box-shadow: 0px 0px 0px 2px
+      ${({ theme }) => theme.colors.primary.focusOutline};
     border-color: ${({ theme }) => theme.colors.primary.main};
   }
 
@@ -50,11 +51,11 @@ const SegmentTab = styled.button`
     `}
   
     ${({ isLast }) =>
-      isLast &&
-      css`
-        border-top-right-radius: ${({ theme }) => theme.radii[1]}px;
-        border-bottom-right-radius: ${({ theme }) => theme.radii[1]}px;
-      `}
+    isLast &&
+    css`
+      border-top-right-radius: ${({ theme }) => theme.radii[1]}px;
+      border-bottom-right-radius: ${({ theme }) => theme.radii[1]}px;
+    `}
 `;
 
 export default SegmentTab;

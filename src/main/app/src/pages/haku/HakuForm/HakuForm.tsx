@@ -19,8 +19,8 @@ import { YhteyshenkilotSection } from './YhteyshenkilotSection';
 import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import FormCollapse from '#/src/components/FormCollapse';
 import HakukohteetModal from './HakukohteetModal';
-import HakukohteetSection from './HakukohteetSection';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
+import { HakukohteetSection } from './HakukohteetSection';
 
 const HakuForm = ({
   organisaatioOid,

@@ -1,4 +1,4 @@
-export default async function ({ image, httpClient, apiUrls }) {
+export const uploadLogo = async function ({ image, httpClient, apiUrls }) {
   const { data } = await httpClient.post(
     apiUrls.url('kouta-backend.upload-logo'),
     image,
@@ -10,4 +10,4 @@ export default async function ({ image, httpClient, apiUrls }) {
   );
 
   return data.url;
-}
+};

@@ -4,9 +4,9 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { reducer as formReducer } from 'redux-form';
 import { persistStore } from 'redux-persist';
 import { isDev } from '#/src/utils';
-import createRootReducer from './rootReducer';
+import { createRootReducer } from './rootReducer';
 
-export default ({ apiUrls, httpClient, history, localization }) => {
+export const store = ({ apiUrls, httpClient, history, localization }) => {
   const rootReducer = createRootReducer({
     form: formReducer,
   });

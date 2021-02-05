@@ -12,7 +12,7 @@ const Header = styled.div`
     css`
       background-color: ${getThemeProp('palette.success.main')};
     `}
-   
+
   ${({ status }) =>
     status === 'danger' &&
     css`

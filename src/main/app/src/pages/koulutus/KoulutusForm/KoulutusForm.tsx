@@ -25,7 +25,7 @@ import TiedotSection from './TiedotSection';
 import KuvausSection from './KuvausSection';
 import JarjestajaSection from './JarjestajaSection';
 import { LisatiedotSection } from './LisatiedotSection';
-import ToteutuksetSection from './ToteutuksetSection';
+import { ToteutuksetSection } from './ToteutuksetSection';
 import { OsaamisalaSection } from './OsaamisalaSection';
 import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
 import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';

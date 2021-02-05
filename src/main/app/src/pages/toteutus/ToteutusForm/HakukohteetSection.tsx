@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import getToteutuksenHakukohteet from '#/src/utils/toteutus/getToteutuksenHakukohteet';
 import { RelatedEntitiesTable } from '#/src/components/RelatedEntitiesTable';
 
-export default function ({ toteutus, organisaatioOid }) {
+export const HakukohteetSection = function ({ toteutus, organisaatioOid }) {
   const { t } = useTranslation();
 
   return (
@@ -19,4 +19,4 @@ export default function ({ toteutus, organisaatioOid }) {
       }}
     />
   );
-}
+};

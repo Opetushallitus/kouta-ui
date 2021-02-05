@@ -53,15 +53,6 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
     koulutuksenAlkamiskausi = {},
   } = metadata;
 
-  const {
-    alkamiskausityyppi,
-    koulutuksenAlkamiskausiKoodiUri = null,
-    koulutuksenAlkamispaivamaara = null,
-    koulutuksenPaattymispaivamaara = null,
-    koulutuksenAlkamisvuosi = '',
-    henkilokohtaisenSuunnitelmanLisatiedot,
-  } = koulutuksenAlkamiskausi;
-
   return {
     tila,
     kieliversiot: kielivalinta,

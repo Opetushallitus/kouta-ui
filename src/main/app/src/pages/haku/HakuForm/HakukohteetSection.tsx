@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import getHaunHakukohteet from '#/src/utils/haku/getHaunHakukohteet';
 import { RelatedEntitiesTable } from '#/src/components/RelatedEntitiesTable';
 
-export default function ({ haku, organisaatioOid }) {
+export const HakukohteetSection = function ({ haku, organisaatioOid }) {
   const { t } = useTranslation();
 
   return (
@@ -18,4 +18,4 @@ export default function ({ haku, organisaatioOid }) {
       }}
     />
   );
-}
+};

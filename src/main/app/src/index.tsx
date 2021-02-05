@@ -8,7 +8,7 @@ import { urls as ophUrls } from 'oph-urls-js';
 import { createDefaultLocalization } from './localization';
 
 import App from './pages/App';
-import createStore from './state';
+import { createStore } from './state';
 import defaultTheme from './theme';
 import { configure as configureUrls } from './urls';
 

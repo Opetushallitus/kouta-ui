@@ -12,10 +12,9 @@ import { useFieldValue } from '#/src/hooks/form';
 
 const OsiotFields = ({ disabled, language, osiotOptions, name }) => {
   const osiot = useFieldValue(`${name}.osiot`);
-  const osiotArr = osiot || [];
 
   const osiotArrWithLabels = useMemo(() => {
-    return osiotArr.map(({ value, label }) => ({
+    return (osiot ?? []).map(({ value, label }) => ({
       value,
       label: label
         ? label
@@ -24,7 +23,7 @@ const OsiotFields = ({ disabled, language, osiotOptions, name }) => {
             osiotOptions.find(({ value: v }) => v === value)
           ) || null,
     }));
-  }, [osiotArr, osiotOptions]);
+  }, [osiot, osiotOptions]);
 
   return osiotArrWithLabels.map(({ value, label }, index) => (
     <Spacing

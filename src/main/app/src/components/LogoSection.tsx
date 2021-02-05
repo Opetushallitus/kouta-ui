@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { Field } from 'redux-form';
 import { FormFieldImageInput } from '#/src/components/formFields';
-import uploadLogo from '#/src/utils/api/uploadLogo';
+import { uploadLogo } from '#/src/utils/api/uploadLogo';
 import {
   LOGO_ACCEPTED_FORMATS,
   LOGO_MAX_DIMENSIONS,

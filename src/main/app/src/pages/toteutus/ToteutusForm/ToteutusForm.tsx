@@ -10,7 +10,7 @@ import JarjestamispaikatSection from './JarjestamispaikatSection';
 import { JarjestamisTiedotSection } from './JarjestamisTiedotSection';
 import NayttamisTiedotSection from './NayttamisTiedotSection';
 import FormCollapseGroup from '#/src/components/FormCollapseGroup';
-import HakukohteetSection from './HakukohteetSection';
+import { HakukohteetSection } from './HakukohteetSection';
 import { getTestIdProps } from '#/src/utils';
 import HakukohteetModal from './HakukohteetModal';
 import Flex from '#/src/components/Flex';

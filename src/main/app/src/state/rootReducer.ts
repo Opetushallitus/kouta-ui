@@ -8,7 +8,7 @@ import organisaatioFavourites from './organisaatioFavourites';
 import organisaatioSelection from './organisaatioSelection';
 import pagination from './pagination';
 
-export default (reducers = {}) =>
+export const createRootReducer = (reducers = {}) =>
   combineReducers({
     pagination,
     organisaatioFavourites: persistReducer(

@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 import { useTranslation } from 'react-i18next';
 
 import { FormFieldImageInput } from './formFields';
-import uploadTeemakuva from '#/src/utils/api/uploadTeemakuva';
+import { uploadTeemakuva } from '#/src/utils/api/uploadTeemakuva';
 import {
   TEEMAKUVA_ACCEPTED_FORMATS,
   TEEMAKUVA_MAX_SIZE,

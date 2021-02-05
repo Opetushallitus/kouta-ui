@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
 import { Field } from 'redux-form';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
@@ -62,10 +62,9 @@ const OpetustapaField = createFormFieldComponent(
 
 const OsiotFields = ({ language, osiotOptions, name }) => {
   const osiot = useFieldValue(`${name}.osiot`);
-  const osiotArr = osiot || [];
 
   const osiotArrWithLabels = useMemo(() => {
-    return osiotArr.map(({ value, label }) => ({
+    return (osiot || []).map(({ value, label }) => ({
       value,
       label: label
         ? label
@@ -74,7 +73,7 @@ const OsiotFields = ({ language, osiotOptions, name }) => {
             osiotOptions.find(({ value: v }) => v === value)
           ) || null, // TODO: Use something else than null as a label, when not found
     }));
-  }, [osiotArr, osiotOptions]);
+  }, [osiot, osiotOptions]);
 
   return (
     <>

@@ -8,6 +8,7 @@ export const Tooltip = ({ children, overlay, ...props }) => (
     overlay={overlay}
     {...props}
   >
-    {children}
+    {/* If children have disabled pointer events, tooltip triggering doesn't work. Using a wrapper as a workaround. */}
+    <div>{children}</div>
   </RcTooltip>
 );

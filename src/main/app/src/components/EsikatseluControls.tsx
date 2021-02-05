@@ -39,7 +39,7 @@ export const EsikatseluControls: React.FC<EsikatseluProps> = ({
 
   const disabled =
     !esikatseluUrl || // NOTE: url can be false or undefined
-    ((tila === JULKAISUTILA.TALLENNETTU || isJulkaistu) && isDirty);
+    (tila === JULKAISUTILA.TALLENNETTU && isDirty);
   const tooltipKey = isJulkaistu
     ? 'yleiset.naytaJulkaistuTooltip'
     : 'yleiset.tallennaLuonnoksenaEsikatsellaksesi';
@@ -51,9 +51,8 @@ export const EsikatseluControls: React.FC<EsikatseluProps> = ({
         <Separator>
           <Tooltip
             placement="top"
-            trigger={disabled ? 'hover' : []}
+            trigger={isJulkaistu || disabled ? ['hover'] : []}
             overlay={<span>{t(tooltipKey)}</span>}
-            arrowContent={<div className="rc-tooltip-arrow-inner"></div>}
             overlayStyle={{
               position: 'fixed',
             }}

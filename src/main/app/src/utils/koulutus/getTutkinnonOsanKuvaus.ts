@@ -1,4 +1,4 @@
-import { EPERUSTE_SERVICE_QUERY_OPTIONS } from '#/src/constants';
+import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
 import _ from 'lodash';
 
@@ -26,6 +26,6 @@ export const useTutkinnonOsienKuvaukset = props => {
     'getTutkinnonOsienKuvaukset',
     props,
     getTutkinnonOsanKuvaus,
-    EPERUSTE_SERVICE_QUERY_OPTIONS
+    LONG_CACHE_QUERY_OPTIONS
   );
 };

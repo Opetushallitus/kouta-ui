@@ -1,8 +1,12 @@
-import { playMockFile } from 'kto-ui-common/cypress/mockUtils';
+import { merge } from 'lodash';
+
+import { playMocks } from 'kto-ui-common/cypress/mockUtils';
+import hakuMocks from '#/cypress/mocks/haku.mocks.json';
 import createKoodisto from '#/cypress/data/koodisto';
 
 import organisaatio from '#/cypress/data/organisaatio';
 import createKoodi from '#/cypress/data/koodi';
+import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
 
 import {
   stubKoodistoRoute,
@@ -14,7 +18,15 @@ import {
 
 export const stubHakuFormRoutes = ({ organisaatioOid }) => {
   stubCommonRoutes();
-  playMockFile('haku.mocks.json');
+  playMocks(hakuMocks);
+
+  cy.intercept(
+    {
+      method: 'GET',
+      url: `**/organisaatio-service/rest/organisaatio/v4/hierarkia/hae?oid=${organisaatioOid}**`,
+    },
+    { body: organisaatioHierarkia({ rootOid: organisaatioOid }) }
+  );
 
   cy.intercept(
     {
@@ -22,7 +34,7 @@ export const stubHakuFormRoutes = ({ organisaatioOid }) => {
       url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
     },
     {
-      body: organisaatio({
+      body: merge(organisaatio(), {
         oid: organisaatioOid,
       }),
     }
@@ -35,7 +47,7 @@ export const stubHakuFormRoutes = ({ organisaatioOid }) => {
     },
     {
       body: [
-        organisaatio({
+        merge(organisaatio(), {
           oid: organisaatioOid,
         }),
       ],

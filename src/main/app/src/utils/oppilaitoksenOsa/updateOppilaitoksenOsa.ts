@@ -10,7 +10,7 @@ const updateOppilaitoksenOsa = async ({
   };
 
   const { data } = await httpClient.post(
-    apiUrls.url('kouta-backend.oppilaitoksen-osa'),
+    apiUrls.url('kouta-backend.oppilaitoksenOsa'),
     rest,
     { headers }
   );

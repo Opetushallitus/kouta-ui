@@ -1,5 +1,6 @@
 import { merge } from 'lodash';
-import { playMockFile } from 'kto-ui-common/cypress/mockUtils';
+import { playMocks } from 'kto-ui-common/cypress/mockUtils';
+import hakukohdeMocks from '#/cypress/mocks/hakukohde.mock.json';
 
 import {
   stubHakemuspalveluLomakkeetRoute,
@@ -13,6 +14,8 @@ import hakukohde from '#/cypress/data/hakukohde';
 import koulutus from '#/cypress/data/koulutus';
 import toteutus from '#/cypress/data/toteutus';
 import valintaperuste from '#/cypress/data/valintaperuste';
+import organisaatioHierarkia from './data/organisaatioHierarkia';
+import organisaatio from './data/organisaatio';
 
 const toimipisteTarjoajat = [
   '1.2.246.562.10.16538823663',
@@ -73,7 +76,7 @@ export const prepareTest = ({
     valintaperusteId,
   };
 
-  playMockFile('hakukohde.mock.json');
+  playMocks(hakukohdeMocks);
   stubHakukohdeFormRoutes({ organisaatioOid, hakuOid });
 
   cy.intercept(
@@ -161,6 +164,40 @@ export const prepareTest = ({
 
 export const stubHakukohdeFormRoutes = ({ organisaatioOid, hakuOid }) => {
   stubCommonRoutes();
+
+  cy.intercept(
+    {
+      method: 'GET',
+      url: `**/organisaatio-service/rest/organisaatio/v4/hierarkia/hae?oid=${organisaatioOid}**`,
+    },
+    { body: organisaatioHierarkia({ rootOid: organisaatioOid }) }
+  );
+
+  cy.intercept(
+    {
+      method: 'GET',
+      url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
+    },
+    {
+      body: merge(organisaatio(), {
+        oid: organisaatioOid,
+      }),
+    }
+  );
+
+  cy.intercept(
+    {
+      method: 'POST',
+      url: '**/organisaatio-service/rest/organisaatio/v4/findbyoids',
+    },
+    {
+      body: [
+        merge(organisaatio(), {
+          oid: organisaatioOid,
+        }),
+      ],
+    }
+  );
 
   cy.intercept(
     { method: 'GET', url: `**/haku/${hakuOid}` },

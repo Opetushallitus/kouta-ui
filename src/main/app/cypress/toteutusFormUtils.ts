@@ -9,6 +9,7 @@ import {
 import organisaatio from '#/cypress/data/organisaatio';
 import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
 import koodisto from '#/cypress/data/koodisto';
+import ePeruste6777660 from './data/ePeruste6777660';
 
 export const stubToteutusFormRoutes = ({ organisaatioOid, perusteId }) => {
   stubCommonRoutes();
@@ -143,6 +144,11 @@ export const stubToteutusFormRoutes = ({ organisaatioOid, perusteId }) => {
   cy.intercept({ method: 'GET', url: '**/asiasana/search/**' }, { body: [] });
 
   cy.intercept({ method: 'GET', url: '**/sorakuvaus/list**' }, { body: [] });
+
+  cy.intercept(
+    { method: 'GET', url: '**/eperusteet-service/api/perusteet/6777660' },
+    { body: ePeruste6777660 }
+  );
 
   stubOppijanumerorekisteriHenkiloRoute();
 };

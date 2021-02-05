@@ -11,7 +11,7 @@ const SpinContainer = styled.div`
   width: 100%;
 `;
 
-const FullSpin = props => (
+export const FullSpin = props => (
   <SpinContainer>
     <Spin {...props} />
   </SpinContainer>

@@ -1,5 +1,5 @@
 import { useApiQuery } from '#/src/hooks/useApiQuery';
-import { EPERUSTE_SERVICE_QUERY_OPTIONS } from '#/src/constants';
+import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 
 export const getOsaamisalakuvauksetByEPerusteId = async ({
   httpClient,
@@ -15,10 +15,13 @@ export const getOsaamisalakuvauksetByEPerusteId = async ({
   }
 };
 
-export const useEPerusteOsaamisalaKuvaukset = props =>
+export const useEPerusteOsaamisalaKuvaukset = ({ ePerusteId }) =>
   useApiQuery(
     'getOsaamisalakuvauksetByEPerusteId',
-    props,
+    { ePerusteId },
     getOsaamisalakuvauksetByEPerusteId,
-    EPERUSTE_SERVICE_QUERY_OPTIONS
+    {
+      enabled: Boolean(ePerusteId),
+      ...LONG_CACHE_QUERY_OPTIONS,
+    }
   );

@@ -1,27 +1,28 @@
 import { useContext } from 'react';
-import { isObject } from 'lodash';
-import useApiAsync from '#/src/hooks/useApiAsync';
+import _ from 'lodash';
+import { useApiQuery } from '#/src/hooks/useApiQuery';
+import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import KoodistoversiotContext from '#/src/contexts/KoodistoversiotContext';
 import getKoodisto from '#/src/utils/koodi/getKoodisto';
-
-const noopPromiseFn = () => Promise.resolve();
 
 export const useKoodisto = ({ koodisto, versio: versioProp }) => {
   const versiot = useContext(KoodistoversiotContext);
 
-  const contextVersio = isObject(versiot) ? versiot[koodisto] : '';
+  const contextVersio = _.isObject(versiot) ? versiot[koodisto] : '';
   const versio = versioProp || contextVersio || '';
 
-  const watch = JSON.stringify([koodisto, versio]);
-
-  const promiseFn = koodisto ? getKoodisto : noopPromiseFn;
-
-  return useApiAsync({
-    promiseFn,
-    koodistoUri: koodisto,
-    versio,
-    watch,
-  });
+  return useApiQuery(
+    'getKoodisto',
+    {
+      koodistoUri: koodisto,
+      versio,
+    },
+    getKoodisto,
+    {
+      enabled: Boolean(koodisto),
+      ...LONG_CACHE_QUERY_OPTIONS,
+    }
+  );
 };
 
 export default useKoodisto;

@@ -50,7 +50,7 @@ export const selectOption = value => {
 export const fillAsyncSelect = (input, match = null) => {
   const searchTerm = match || input;
   getSelect().within(() => {
-    cy.get('input[type="text"]').pipe(paste(input));
+    cy.get('input[type="text"]').should('not.be.disabled').pipe(paste(input));
     cy.findAllByRole('option', { name: _fp.includes(searchTerm) })
       .first()
       .click();
@@ -95,11 +95,13 @@ export const fillDateTimeInput = ({ date, time }) => {
 export const chooseKieliversiotLanguages = (selectedLanguages = []) => {
   const languages = ['en', 'fi', 'sv'];
   languages.forEach(lang => {
-    cy.get(`input[name=${lang}]`).then($checkbox => {
-      return selectedLanguages.includes(lang)
-        ? cy.wrap($checkbox).check({ force: true })
-        : cy.wrap($checkbox).uncheck({ force: true });
-    });
+    cy.get(`input[name=${lang}]`)
+      .should('not.be.disabled')
+      .then($checkbox => {
+        return selectedLanguages.includes(lang)
+          ? cy.wrap($checkbox).check({ force: true })
+          : cy.wrap($checkbox).uncheck({ force: true });
+      });
   });
 };
 

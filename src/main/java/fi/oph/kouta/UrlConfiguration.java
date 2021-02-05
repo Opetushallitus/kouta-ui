@@ -45,14 +45,14 @@ public class UrlConfiguration extends OphProperties {
         this.frontProperties.setProperty("kouta-backend.login", this.require("kouta-backend.login"));
         this.frontProperties.setProperty("kouta-backend.session", this.require("kouta-backend.session"));
 
-        this.frontProperties.setProperty("kouta-backend.sora-kuvaus", this.require("kouta-backend.sora-kuvaus"));
-        this.frontProperties.setProperty("kouta-backend.sora-kuvaus-by-id", this.require("kouta-backend.sora-kuvaus-by-id"));
-        this.frontProperties.setProperty("kouta-backend.sora-kuvaus-list", this.require("kouta-backend.sora-kuvaus-list"));
+        this.frontProperties.setProperty("kouta-backend.soraKuvaus", this.require("kouta-backend.soraKuvaus"));
+        this.frontProperties.setProperty("kouta-backend.soraKuvaus-by-oid", this.require("kouta-backend.soraKuvaus-by-oid"));
+        this.frontProperties.setProperty("kouta-backend.soraKuvaus-list", this.require("kouta-backend.soraKuvaus-list"));
 
         this.frontProperties.setProperty("kouta-backend.oppilaitos", this.require("kouta-backend.oppilaitos"));
         this.frontProperties.setProperty("kouta-backend.oppilaitos-by-oid", this.require("kouta-backend.oppilaitos-by-oid"));
-        this.frontProperties.setProperty("kouta-backend.oppilaitoksen-osa", this.require("kouta-backend.oppilaitoksen-osa"));
-        this.frontProperties.setProperty("kouta-backend.oppilaitoksen-osa-by-oid", this.require("kouta-backend.oppilaitoksen-osa-by-oid"));
+        this.frontProperties.setProperty("kouta-backend.oppilaitoksenOsa", this.require("kouta-backend.oppilaitoksenOsa"));
+        this.frontProperties.setProperty("kouta-backend.oppilaitoksenOsa-by-oid", this.require("kouta-backend.oppilaitoksenOsa-by-oid"));
 
         this.frontProperties.setProperty("kouta-backend.search.koulutukset", this.require("kouta-backend.search.koulutukset"));
         this.frontProperties.setProperty("kouta-backend.search.toteutukset", this.require("kouta-backend.search.toteutukset"));

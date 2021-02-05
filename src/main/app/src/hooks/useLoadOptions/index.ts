@@ -27,15 +27,16 @@ const getMatchingOptions = (options: SelectOptions, input, maxMatches) => {
 };
 
 const useLoadOptions = (
-  options: SelectOptions = [],
+  options?: SelectOptions,
   { debounce: debounceTime = 500, maxOptions = 100 } = {}
 ) => {
   return useMemo(() => {
-    const loadDebounce = debounce(inputValue => {
-      return getMatchingOptions(options, inputValue, maxOptions);
-    }, debounceTime);
-
-    return loadDebounce;
+    if (options && options?.length !== 0) {
+      return debounce(
+        inputValue => getMatchingOptions(options, inputValue, maxOptions),
+        debounceTime
+      );
+    }
   }, [options, debounceTime, maxOptions]);
 };
 

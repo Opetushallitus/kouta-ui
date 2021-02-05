@@ -1,66 +1,61 @@
 import React from 'react';
 import { Router, Route, Redirect, Switch } from 'react-router-dom';
 
+import { ENTITY } from '#/src/constants';
 import Toaster from '#/src/components/Toaster';
 import RouterScrollToTop from '#/src/components/RouterScrollToTop';
+import HomePage from './HomePage';
+import CreateKoulutusPage from './koulutus/CreateKoulutusPage';
+import EditKoulutusPage from './koulutus/EditKoulutusPage';
+import CreateToteutusPage from './toteutus/CreateToteutusPage';
+import EditToteutusPage from './toteutus/EditToteutusPage';
+import CreateHakuPage from './haku/CreateHakuPage';
+import EditHakuPage from './haku/EditHakuPage';
+import CreateHakukohdePage from './hakukohde/CreateHakukohdePage';
+import EditHakukohdePage from './hakukohde/EditHakukohdePage';
+import CreateValintaperustePage from './valintaperuste/CreateValintaperustePage';
+import EditValintaperustePage from './valintaperuste/EditValintaperustePage';
+import CreateSoraKuvausPage from './soraKuvaus/CreateSoraKuvausPage';
+import EditSoraKuvausPage from './soraKuvaus/EditSoraKuvausPage';
+import OppilaitosPage from './OppilaitosPage';
+import OppilaitoksenOsaPage from './OppilaitoksenOsaPage';
+import { createRedirectEntityPage } from './RedirectEntityPage';
 
-const HomePage = React.lazy(() => import('#/src/pages/HomePage'));
-const CreateKoulutusPage = React.lazy(
-  () => import('#/src/pages/koulutus/CreateKoulutusPage')
-);
-const EditKoulutusPage = React.lazy(
-  () => import('#/src/pages/koulutus/EditKoulutusPage')
-);
-const RedirectKoulutusPage = React.lazy(
-  () => import('#/src/pages/koulutus/RedirectKoulutusPage')
-);
-const CreateToteutusPage = React.lazy(
-  () => import('#/src/pages/toteutus/CreateToteutusPage')
-);
-const EditToteutusPage = React.lazy(
-  () => import('#/src/pages/toteutus/EditToteutusPage')
-);
-const RedirectToteutusPage = React.lazy(
-  () => import('#/src/pages/toteutus/RedirectToteutusPage')
-);
-const CreateHakuPage = React.lazy(
-  () => import('#/src/pages/haku/CreateHakuPage')
-);
-const EditHakuPage = React.lazy(() => import('#/src/pages/haku/EditHakuPage'));
+const RedirectKoulutusPage = createRedirectEntityPage({
+  entityType: ENTITY.KOULUTUS,
+  getRedirectUrl: ({ organisaatioOid, oid }) =>
+    `/organisaatio/${organisaatioOid}/koulutus/${oid}/muokkaus`,
+});
 
-const RedirectHakuPage = React.lazy(
-  () => import('#/src/pages/haku/RedirectHakuPage')
-);
-const CreateHakukohdePage = React.lazy(
-  () => import('#/src/pages/hakukohde/CreateHakukohdePage')
-);
-const EditHakukohdePage = React.lazy(
-  () => import('#/src/pages/hakukohde/EditHakukohdePage')
-);
-const RedirectHakukohdePage = React.lazy(
-  () => import('#/src/pages/hakukohde/RedirectHakukohdePage')
-);
-const CreateValintaperustePage = React.lazy(
-  () => import('#/src/pages/valintaperuste/CreateValintaperustePage')
-);
-const EditValintaperustePage = React.lazy(
-  () => import('#/src/pages/valintaperuste/EditValintaperustePage')
-);
-const RedirectValintaperustePage = React.lazy(
-  () => import('#/src/pages/valintaperuste/RedirectValintaperustePage')
-);
-const CreateSoraKuvausPage = React.lazy(
-  () => import('#/src/pages/soraKuvaus/CreateSoraKuvausPage')
-);
-const EditSoraKuvausPage = React.lazy(
-  () => import('#/src/pages/soraKuvaus/EditSoraKuvausPage')
-);
+const RedirectToteutusPage = createRedirectEntityPage({
+  entityType: ENTITY.TOTEUTUS,
+  getRedirectUrl: ({ organisaatioOid, oid }) =>
+    `/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`,
+});
 
-const OppilaitosPage = React.lazy(() => import('#/src/pages/OppilaitosPage'));
+const RedirectHakuPage = createRedirectEntityPage({
+  entityType: ENTITY.HAKU,
+  getRedirectUrl: ({ organisaatioOid, oid }) =>
+    `/organisaatio/${organisaatioOid}/haku/${oid}/muokkaus`,
+});
 
-const OppilaitoksenOsaPage = React.lazy(
-  () => import('#/src/pages/OppilaitoksenOsaPage')
-);
+const RedirectHakukohdePage = createRedirectEntityPage({
+  entityType: ENTITY.HAKUKOHDE,
+  getRedirectUrl: ({ organisaatioOid, oid }) =>
+    `/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`,
+});
+
+const RedirectValintaperustePage = createRedirectEntityPage({
+  entityType: ENTITY.VALINTAPERUSTE,
+  getRedirectUrl: ({ organisaatioOid, oid }) =>
+    `/organisaatio/${organisaatioOid}/valintaperusteet/${oid}/muokkaus`,
+});
+
+const RedirectSoraKuvausPage = createRedirectEntityPage({
+  entityType: ENTITY.SORA_KUVAUS,
+  getRedirectUrl: ({ organisaatioOid, oid }) =>
+    `/organisaatio/${organisaatioOid}/sora-kuvaus/${oid}/muokkaus`,
+});
 
 const Routes = ({ history }) => {
   return (
@@ -86,7 +81,11 @@ const Routes = ({ history }) => {
             component={EditKoulutusPage}
             exact
           />
-          <Route path="/koulutus/:oid" component={RedirectKoulutusPage} exact />
+          <Route
+            path={['/koulutus/:oid', '/koulutus/:oid/muokkaus']}
+            component={RedirectKoulutusPage}
+            exact
+          />
 
           <Route
             path="/organisaatio/:organisaatioOid/koulutus/:koulutusOid/toteutus"
@@ -98,7 +97,11 @@ const Routes = ({ history }) => {
             component={EditToteutusPage}
             exact
           />
-          <Route path="/toteutus/:oid" component={RedirectToteutusPage} exact />
+          <Route
+            path={['/toteutus/:oid', '/toteutus/:oid/muokkaus']}
+            component={RedirectToteutusPage}
+            exact
+          />
 
           <Route
             path="/organisaatio/:organisaatioOid/haku"
@@ -108,8 +111,13 @@ const Routes = ({ history }) => {
           <Route
             path="/organisaatio/:organisaatioOid/haku/:oid/muokkaus"
             component={EditHakuPage}
+            exact
           />
-          <Route path="/haku/:oid" component={RedirectHakuPage} />
+          <Route
+            path={['/haku/:oid', '/haku/:oid/muokkaus']}
+            component={RedirectHakuPage}
+            exact
+          />
 
           <Route
             path="/organisaatio/:organisaatioOid/toteutus/:toteutusOid/haku/:hakuOid/hakukohde"
@@ -122,7 +130,7 @@ const Routes = ({ history }) => {
             exact
           />
           <Route
-            path="/hakukohde/:oid"
+            path={['/hakukohde/:oid', '/hakukohde/:oid/muokkaus']}
             component={RedirectHakukohdePage}
             exact
           />
@@ -138,7 +146,7 @@ const Routes = ({ history }) => {
             exact
           />
           <Route
-            path="/valintaperusteet/:oid"
+            path={['/valintaperusteet/:oid', '/valintaperusteet/:oid/muokkaus']}
             component={RedirectValintaperustePage}
             exact
           />
@@ -151,6 +159,12 @@ const Routes = ({ history }) => {
           <Route
             path="/organisaatio/:organisaatioOid/sora-kuvaus/:id/muokkaus"
             component={EditSoraKuvausPage}
+            exact
+          />
+
+          <Route
+            path={['/sora-kuvaus/:oid', '/sora-kuvaus/:oid/muokkaus']}
+            component={RedirectSoraKuvausPage}
             exact
           />
 

@@ -7,7 +7,7 @@ const getOppilaitoksenOsaByOid = async ({
   silent = false,
 }) => {
   const { data, headers } = await httpClient.get(
-    apiUrls.url('kouta-backend.oppilaitoksen-osa-by-oid', oid),
+    apiUrls.url('kouta-backend.oppilaitoksenOsa-by-oid', oid),
     {
       errorNotifier: {
         silent,

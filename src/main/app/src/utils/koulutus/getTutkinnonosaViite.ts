@@ -1,4 +1,4 @@
-import { EPERUSTE_SERVICE_QUERY_OPTIONS } from '#/src/constants';
+import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
 
 export const getEPerusteTutkinnonOsat = async ({
@@ -15,11 +15,14 @@ export const getEPerusteTutkinnonOsat = async ({
   }
 };
 
-export const useEPerusteTutkinnonOsat = props => {
+export const useEPerusteTutkinnonOsat = ({ ePerusteId }) => {
   return useApiQuery(
     'getTutkinnonOsaViite',
-    props,
+    { ePerusteId },
     getEPerusteTutkinnonOsat,
-    EPERUSTE_SERVICE_QUERY_OPTIONS
+    {
+      enabled: Boolean(ePerusteId),
+      ...LONG_CACHE_QUERY_OPTIONS,
+    }
   );
 };

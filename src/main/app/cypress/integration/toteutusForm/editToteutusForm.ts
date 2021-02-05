@@ -1,4 +1,5 @@
-import { playMockFile } from 'kto-ui-common/cypress/mockUtils';
+import { playMocks } from 'kto-ui-common/cypress/mockUtils';
+import toteutusMocks from '#/cypress/mocks/toteutus.mocks.json';
 import koulutus from '#/cypress/data/koulutus';
 import toteutus from '#/cypress/data/toteutus';
 import { stubToteutusFormRoutes } from '#/cypress/toteutusFormUtils';
@@ -9,12 +10,12 @@ import {
 } from '#/cypress/utils';
 import _fp from 'lodash/fp';
 
-const prepareTest = tyyppi => {
-  const organisaatioOid = '1.1.1.1.1.1';
-  const koulutusOid = '1.2.1.1.1.1';
-  const toteutusOid = '1.3.1.1.1.1';
-  const perusteId = '1';
+const organisaatioOid = '1.1.1.1.1.1';
+const koulutusOid = '1.2.1.1.1.1';
+const toteutusOid = '1.3.1.1.1.1';
+const perusteId = '1';
 
+const prepareTest = tyyppi => {
   const testKoulutusFields = {
     oid: koulutusOid,
     organisaatioOid: organisaatioOid,
@@ -36,7 +37,7 @@ const prepareTest = tyyppi => {
     },
   };
 
-  playMockFile('toteutus.mocks.json');
+  playMocks(toteutusMocks);
 
   stubToteutusFormRoutes({ organisaatioOid, perusteId });
 
@@ -168,5 +169,14 @@ export const editToteutusForm = () => {
   it("Shouldn't complain about unsaved changed for untouched form", () => {
     prepareTest('amm');
     assertNoUnsavedChangesDialog();
+  });
+
+  it('Should redirect from url without organization', () => {
+    prepareTest('amm');
+    cy.visit(`/toteutus/${toteutusOid}/muokkaus`);
+    cy.url().should(
+      'include',
+      `/organisaatio/${organisaatioOid}/toteutus/${toteutusOid}/muokkaus`
+    );
   });
 };

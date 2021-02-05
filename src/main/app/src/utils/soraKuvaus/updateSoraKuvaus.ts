@@ -6,7 +6,7 @@ const updateSoraKuvaus = async ({ httpClient, apiUrls, soraKuvaus }) => {
   };
 
   const { data } = await httpClient.post(
-    apiUrls.url('kouta-backend.sora-kuvaus'),
+    apiUrls.url('kouta-backend.soraKuvaus'),
     rest,
     { headers }
   );

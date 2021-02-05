@@ -6,7 +6,7 @@ import { Grid, Cell } from 'styled-css-grid';
 import { useTranslation } from 'react-i18next';
 import { usePrevious } from 'react-use';
 
-import { getKoulutusByKoodi } from '#/src/utils/koulutus/getKoulutusByKoodi';
+import { useKoulutusByKoodi } from '#/src/utils/koulutus/getKoulutusByKoodi';
 import { getReadableDateTime, getTestIdProps } from '#/src/utils';
 import { getLanguageValue } from '#/src/utils/languageUtils';
 import {
@@ -17,7 +17,6 @@ import { useBoundFormActions, useIsDirty } from '#/src/hooks/form';
 import Anchor from '#/src/components/Anchor';
 import { Box, Typography, Spin } from '#/src/components/virkailija';
 import { FormFieldSelect } from '#/src/components/formFields';
-import useApiAsync from '#/src/hooks/useApiAsync';
 import { useFieldValue } from '#/src/hooks/form';
 import { useUrls } from '#/src/contexts/contextHooks';
 import KoulutusField from '#/src/components/KoulutusField';
@@ -70,7 +69,6 @@ const EPerusteField = ({ isLoading, ...props }) => {
 const TutkinnonOsatField = ({ isLoading, ...props }) => {
   const { selectedPeruste, language } = props;
   const { t } = useTranslation();
-
   const tutkinnonosatOptions = useMemo(
     () => getTutkinnonosatOptions(selectedPeruste, language),
     [selectedPeruste, language]
@@ -317,10 +315,8 @@ const KoulutuksenTiedotSection = ({
   const { t } = useTranslation();
   const koulutusFieldValue = koulutuskoodi?.value;
 
-  const { data: koulutus, isLoading } = useApiAsync({
-    promiseFn: getKoulutusByKoodi,
+  const { data: koulutus, isLoading } = useKoulutusByKoodi({
     koodiUri: koulutusFieldValue,
-    watch: koulutusFieldValue,
   });
 
   const ePerusteFieldValue = useFieldValue(`${name}.eperuste`)?.value;

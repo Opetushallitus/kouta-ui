@@ -1,5 +1,5 @@
 import { useApiQuery } from '#/src/hooks/useApiQuery';
-import { EPERUSTE_SERVICE_QUERY_OPTIONS } from '#/src/constants';
+import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 
 export const getEPerusteSisalto = async ({
   httpClient,
@@ -15,10 +15,8 @@ export const getEPerusteSisalto = async ({
   }
 };
 
-export const useEPerusteSisalto = props =>
-  useApiQuery(
-    'getEPerusteSisalto',
-    props,
-    getEPerusteSisalto,
-    EPERUSTE_SERVICE_QUERY_OPTIONS
-  );
+export const useEPerusteSisalto = ({ ePerusteId }) =>
+  useApiQuery('getEPerusteSisalto', { ePerusteId }, getEPerusteSisalto, {
+    enabled: Boolean(ePerusteId),
+    ...LONG_CACHE_QUERY_OPTIONS,
+  });

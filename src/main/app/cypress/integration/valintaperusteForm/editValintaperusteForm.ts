@@ -9,10 +9,10 @@ import {
 import valintaperuste from '#/cypress/data/valintaperuste';
 import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils';
 
-const prepareTest = tyyppi => {
-  const organisaatioOid = '1.1.1.1.1.1';
-  const valintaperusteId = '1';
+const organisaatioOid = '1.1.1.1.1.1';
+const valintaperusteId = '1';
 
+const prepareTest = tyyppi => {
   const testValintaperusteFields = {
     organisaatioOid,
   };
@@ -54,5 +54,14 @@ export const editValintaperusteForm = () => {
   it("Shouldn't complain about unsaved changed for untouched form", () => {
     prepareTest('amm');
     assertNoUnsavedChangesDialog();
+  });
+
+  it('Should redirect from url without organization', () => {
+    prepareTest('amm');
+    cy.visit(`/valintaperusteet/${valintaperusteId}/muokkaus`);
+    cy.url().should(
+      'include',
+      `/organisaatio/${organisaatioOid}/valintaperusteet/${valintaperusteId}/muokkaus`
+    );
   });
 };

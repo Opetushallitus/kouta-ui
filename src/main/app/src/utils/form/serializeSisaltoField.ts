@@ -1,5 +1,6 @@
 import produce from 'immer';
 import { isObject, isArray, get, pick, mapValues } from 'lodash';
+
 import { serializeEditorState } from '#/src/components/Editor/utils';
 
 const serializeTable = ({ table, kielivalinta }) => {

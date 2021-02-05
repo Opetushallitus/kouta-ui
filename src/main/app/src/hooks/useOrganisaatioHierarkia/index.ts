@@ -1,6 +1,6 @@
 import useApiAsync from '#/src/hooks/useApiAsync';
-import getOrganisaatioHierarkiaByOid from '#/src/utils/organisaatio/getOrganisaatioHierarkiaByOid';
 import filterTree from '#/src/utils/filterTree';
+import getOrganisaatioHierarkiaByOid from '#/src/utils/organisaatio/getOrganisaatioHierarkiaByOid';
 
 type UseOrganisaatioHierarkiaOptions =
   | {

@@ -1,11 +1,12 @@
 import _fp from 'lodash/fp';
 
-import { isNumeric, isPartialDate, maybeParseNumber } from '#/src/utils';
-import serializeSisaltoField from '#/src/utils/form/serializeSisaltoField';
 import { serializeEditorState } from '#/src/components/Editor/utils';
 import { HAKULOMAKETYYPPI } from '#/src/constants';
 import { ToteutusFormValues } from '#/src/types/toteutusTypes';
+import { isNumeric, isPartialDate, maybeParseNumber } from '#/src/utils';
 import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
+import serializeSisaltoField from '#/src/utils/form/serializeSisaltoField';
+
 import { isStipendiVisible } from './toteutusVisibilities';
 
 const { MUU, EI_SAHKOISTA_HAKUA } = HAKULOMAKETYYPPI;

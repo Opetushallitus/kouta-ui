@@ -1,8 +1,10 @@
 import { useMemo } from 'react';
+
 import { get, isArray } from 'lodash';
-import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
-import getKoodisto from '#/src/utils/koodi/getKoodisto';
+
 import useApiAsync from '#/src/hooks/useApiAsync';
+import getKoodisto from '#/src/utils/koodi/getKoodisto';
+import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 
 const noopPromiseFn = () => Promise.resolve([]);
 

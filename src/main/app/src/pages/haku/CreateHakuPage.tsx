@@ -1,23 +1,25 @@
 import React, { useMemo } from 'react';
+
 import queryString from 'query-string';
 import { useTranslation } from 'react-i18next';
 
+import FormHeader from '#/src/components/FormHeader';
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
 } from '#/src/components/FormPage';
-import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
-import useSelectBase from '#/src/hooks/useSelectBase';
-import Title from '#/src/components/Title';
-import ReduxForm from '#/src/components/ReduxForm';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
-import getHakuFormConfig from '#/src/utils/haku/getHakuFormConfig';
-import { useHakuByOid } from '#/src/utils/haku/getHakuByOid';
 import FormSteps from '#/src/components/FormSteps';
-import FormHeader from '#/src/components/FormHeader';
+import ReduxForm from '#/src/components/ReduxForm';
+import Title from '#/src/components/Title';
+import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
+import FormConfigContext from '#/src/contexts/FormConfigContext';
+import useSelectBase from '#/src/hooks/useSelectBase';
 import { getFormValuesByHaku } from '#/src/utils/haku/getFormValuesByHaku';
-import HakuForm, { initialValues } from './HakuForm';
+import { useHakuByOid } from '#/src/utils/haku/getHakuByOid';
+import getHakuFormConfig from '#/src/utils/haku/getHakuFormConfig';
+
 import { HakuFooter } from './HakuFooter';
+import HakuForm, { initialValues } from './HakuForm';
 
 const config = getHakuFormConfig();
 

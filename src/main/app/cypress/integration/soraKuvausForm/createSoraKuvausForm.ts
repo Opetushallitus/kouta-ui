@@ -1,6 +1,9 @@
-import _ from 'lodash';
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
+import _ from 'lodash';
+
+import createSoraKuvaus from '#/cypress/data/soraKuvaus';
 import soraKuvausMocks from '#/cypress/mocks/soraKuvaus.mock.json';
+import { stubSoraKuvausFormRoutes } from '#/cypress/soraKuvausFormUtils';
 import {
   typeToEditor,
   getByTestId,
@@ -13,9 +16,6 @@ import {
   fillKoulutustyyppiSelect,
   fillAsyncSelect,
 } from '#/cypress/utils';
-
-import createSoraKuvaus from '#/cypress/data/soraKuvaus';
-import { stubSoraKuvausFormRoutes } from '#/cypress/soraKuvausFormUtils';
 
 const fillKoulutustyyppiSection = () => {
   getByTestId('koulutustyyppiSection').within(() => {

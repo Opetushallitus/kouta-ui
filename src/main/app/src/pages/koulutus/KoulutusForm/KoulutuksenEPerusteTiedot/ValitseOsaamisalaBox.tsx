@@ -1,22 +1,25 @@
-import _ from 'lodash/fp';
 import React, { useMemo, useEffect } from 'react';
+
+import _ from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
+
+import Anchor from '#/src/components/Anchor';
 import { FormFieldSelect } from '#/src/components/formFields';
 import { Box, Spin } from '#/src/components/virkailija';
+import { useUrls } from '#/src/contexts/contextHooks';
 import {
   useFieldValue,
   useBoundFormActions,
   useIsDirty,
 } from '#/src/hooks/form';
-import { getTestIdProps } from '#/src/utils';
-import { getLanguageValue } from '#/src/utils/languageUtils';
-import { InfoBoxGrid, StyledInfoBox } from './InfoBox';
 import { useHasChanged } from '#/src/hooks/useHasChanged';
-import { useUrls } from '#/src/contexts/contextHooks';
-import Anchor from '#/src/components/Anchor';
+import { getTestIdProps } from '#/src/utils';
 import { useEPerusteSisalto } from '#/src/utils/ePeruste/getEPerusteSisalto';
 import { useEPerusteOsaamisalaKuvaukset } from '#/src/utils/ePeruste/getOsaamisalakuvauksetByEPerusteId';
+import { getLanguageValue } from '#/src/utils/languageUtils';
+
+import { InfoBoxGrid, StyledInfoBox } from './InfoBox';
 
 const getOsaamisalaOptions = (osaamisalat = [], language) =>
   _.map(({ arvo, nimi }) => ({

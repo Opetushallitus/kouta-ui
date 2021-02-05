@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+
 import { isArray } from 'lodash';
 
 import useKoodisto from '#/src/hooks/useKoodisto';

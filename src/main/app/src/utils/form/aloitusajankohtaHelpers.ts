@@ -1,10 +1,11 @@
 import _fp from 'lodash/fp';
+
 import {
   parseEditorState,
   serializeEditorState,
 } from '#/src/components/Editor/utils';
-import { maybeParseNumber, toSelectValue } from '#/src/utils';
 import { AjankohtaFields } from '#/src/types/formTypes';
+import { maybeParseNumber, toSelectValue } from '#/src/utils';
 
 export const getAlkamiskausiData = (
   ajankohta: AjankohtaFields,

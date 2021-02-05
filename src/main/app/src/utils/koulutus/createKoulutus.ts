@@ -1,6 +1,7 @@
-import { getKoulutusByKoodi } from '#/src/utils/koulutus/getKoulutusByKoodi';
-import { isEmpty } from 'lodash';
 import produce from 'immer';
+import { isEmpty } from 'lodash';
+
+import { getKoulutusByKoodi } from '#/src/utils/koulutus/getKoulutusByKoodi';
 
 const createKoulutus = async ({
   httpClient,

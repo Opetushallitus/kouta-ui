@@ -1,12 +1,14 @@
 import React from 'react';
-import { Field } from 'redux-form';
-import { useTranslation } from 'react-i18next';
 
-import { getTestIdProps } from '#/src/utils';
+import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
+
 import {
   createFormFieldComponent,
   selectMapProps,
 } from '#/src/components/formFields';
+import { getTestIdProps } from '#/src/utils';
+
 import TutkintonimikeSelect from './TutkintonimikeSelect';
 
 const TutkintonimikeFieldComponent = createFormFieldComponent(

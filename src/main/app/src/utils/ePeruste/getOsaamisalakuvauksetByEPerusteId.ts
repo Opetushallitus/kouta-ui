@@ -1,5 +1,5 @@
-import { useApiQuery } from '#/src/hooks/useApiQuery';
 import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
+import { useApiQuery } from '#/src/hooks/useApiQuery';
 
 export const getOsaamisalakuvauksetByEPerusteId = async ({
   httpClient,

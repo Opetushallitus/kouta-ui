@@ -1,10 +1,12 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
+
 import { action } from '@storybook/addon-actions';
+import { storiesOf } from '@storybook/react';
+
+import Button from '#/src/components/Button';
+import { Typography } from '#/src/components/virkailija';
 
 import Collapse from './index';
-import { Typography } from '#/src/components/virkailija';
-import Button from '#/src/components/Button';
 
 const header = '1 Koulutustyyppi';
 

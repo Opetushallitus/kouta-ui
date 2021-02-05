@@ -1,4 +1,5 @@
 import _ from 'lodash';
+
 import { KOULUTUSTYYPPI_TO_KOULUTUSTYYPPI_IDS_MAP } from '#/src/constants';
 
 export const getKoulutuksetByKoulutusTyyppi = async ({

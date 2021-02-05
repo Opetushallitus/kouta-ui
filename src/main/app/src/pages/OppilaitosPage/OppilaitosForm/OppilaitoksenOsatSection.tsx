@@ -1,12 +1,14 @@
 import React, { useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
+
 import _ from 'lodash/fp';
-import { flatFilterHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
-import ListTable, { makeNimiColumn } from '#/src/components/ListTable';
+import { useTranslation } from 'react-i18next';
+
 import ListSpin from '#/src/components/ListSpin';
-import { ORGANISAATIOTYYPPI } from '#/src/constants';
-import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
+import ListTable, { makeNimiColumn } from '#/src/components/ListTable';
 import { Typography } from '#/src/components/virkailija';
+import { ORGANISAATIOTYYPPI } from '#/src/constants';
+import { flatFilterHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
+import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
 const getOppilaitoksenOsat = oppilaitos => {
   return flatFilterHierarkia(

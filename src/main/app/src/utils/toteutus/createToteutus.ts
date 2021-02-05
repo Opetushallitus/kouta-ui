@@ -1,7 +1,8 @@
 import { get, isString, isArray, isEmpty, zipObject } from 'lodash';
-import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
-import getKoodisto from '#/src/utils/koodi/getKoodisto';
+
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
+import getKoodisto from '#/src/utils/koodi/getKoodisto';
+import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 
 const resolveToteutusNimi = async ({ httpClient, apiUrls, toteutus }) => {
   if (!isEmpty(toteutus.nimi)) {

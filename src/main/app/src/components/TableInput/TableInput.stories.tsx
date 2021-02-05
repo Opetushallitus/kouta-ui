@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { storiesOf } from '@storybook/react';
+
 import { action } from '@storybook/addon-actions';
+import { storiesOf } from '@storybook/react';
 
 import Button from '#/src/components/Button';
-import TableInput from './index';
 import { makeLocalizationDecorator } from '#/src/storybookUtils';
+
+import TableInput from './index';
 
 const columns = [{ text: { fi: 'Hello' } }, { text: { fi: 'World' } }];
 const changeAction = action('change');

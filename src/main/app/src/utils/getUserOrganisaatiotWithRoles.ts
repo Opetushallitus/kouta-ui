@@ -1,6 +1,7 @@
 import { isArray } from 'lodash';
-import getUserRoles from './getUserRoles';
+
 import getRoleOrganisaatioOid from './getRoleOrganisaatioOid';
+import getUserRoles from './getUserRoles';
 
 const getUserOrganisaatiotWithRoles = (user, roles) => {
   if (!isArray(roles) || !user) {

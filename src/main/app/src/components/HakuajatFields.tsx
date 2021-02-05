@@ -1,9 +1,11 @@
 import React from 'react';
+
 import _ from 'lodash';
-import { getTestIdProps } from '#/src/utils';
-import { Box, FormControl } from '#/src/components/virkailija';
+
 import Button from '#/src/components/Button';
 import DateTimeRange from '#/src/components/DateTimeRange';
+import { Box, FormControl } from '#/src/components/virkailija';
+import { getTestIdProps } from '#/src/utils';
 
 export const HakuajatFields = ({ fields, t, meta: { error } }) => (
   <>

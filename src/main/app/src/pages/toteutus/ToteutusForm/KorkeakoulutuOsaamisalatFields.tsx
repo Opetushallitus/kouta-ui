@@ -1,13 +1,14 @@
 import React from 'react';
-import { FieldArray, Field } from 'redux-form';
+
 import { useTranslation } from 'react-i18next';
+import { FieldArray, Field } from 'redux-form';
 
 import Button from '#/src/components/Button';
-import Spacing from '#/src/components/Spacing';
-import Flex, { FlexItem } from '#/src/components/Flex';
-import { getTestIdProps } from '#/src/utils';
-import { FormFieldInput, FormFieldEditor } from '#/src/components/formFields';
 import FieldArrayList from '#/src/components/FieldArrayList';
+import Flex, { FlexItem } from '#/src/components/Flex';
+import { FormFieldInput, FormFieldEditor } from '#/src/components/formFields';
+import Spacing from '#/src/components/Spacing';
+import { getTestIdProps } from '#/src/utils';
 
 const OsaamisalatFieldArray = ({ fields, language, t }) => (
   <>

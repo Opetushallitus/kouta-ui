@@ -1,5 +1,6 @@
-import { Alkamiskausityyppi } from '#/src/constants';
 import { merge } from 'lodash';
+
+import { Alkamiskausityyppi } from '#/src/constants';
 
 const getBaseFields = () => ({
   oid: '1.2.246.562.17.00000000000000000026',

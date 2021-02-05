@@ -1,4 +1,8 @@
 import {
+  fillJarjestyspaikkaSection,
+  prepareTest,
+} from '#/cypress/hakukohdeFormUtils';
+import {
   getRadio,
   selectOption,
   getCheckbox,
@@ -14,11 +18,6 @@ import {
   tallenna,
   fillAjankohtaFields,
 } from '#/cypress/utils';
-
-import {
-  fillJarjestyspaikkaSection,
-  prepareTest,
-} from '#/cypress/hakukohdeFormUtils';
 import { Alkamiskausityyppi } from '#/src/constants';
 
 const lisaa = () => {

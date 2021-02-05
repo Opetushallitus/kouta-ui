@@ -1,4 +1,5 @@
 import { memoizePromise } from '#/src/utils/memoize';
+
 import getKoulutusByOid from './getKoulutusByOid';
 
 const memoizedGetKoulutusByKoulutusOid = memoizePromise(

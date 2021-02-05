@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
+
 import _ from 'lodash/fp';
+
 import { useFieldValue } from '#/src/hooks/form';
 
 export const useSelectedTutkinnonOsat = () => {

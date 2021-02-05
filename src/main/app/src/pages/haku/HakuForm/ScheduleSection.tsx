@@ -1,13 +1,14 @@
 import React from 'react';
-import { Field, FieldArray } from 'redux-form';
-import { useTranslation } from 'react-i18next';
 
-import { getTestIdProps } from '#/src/utils';
-import { Box } from '#/src/components/virkailija';
-import { HakuajatFields } from '#/src/components/HakuajatFields';
+import { useTranslation } from 'react-i18next';
+import { Field, FieldArray } from 'redux-form';
+
 import FieldGroup from '#/src/components/FieldGroup';
 import { FormFieldDateTimeInput } from '#/src/components/formFields';
+import { HakuajatFields } from '#/src/components/HakuajatFields';
 import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenAloitusajankohtaFields';
+import { Box } from '#/src/components/virkailija';
+import { getTestIdProps } from '#/src/utils';
 
 const ScheduleSection = ({ isOphVirkailija, isYhteishaku, name, language }) => {
   const { t } = useTranslation();

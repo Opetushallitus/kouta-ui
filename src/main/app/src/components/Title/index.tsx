@@ -1,6 +1,7 @@
 import React from 'react';
-import { useTitle } from 'react-use';
+
 import { useTranslation } from 'react-i18next';
+import { useTitle } from 'react-use';
 
 const Title = ({ children, showPrefix = true }) => {
   const { t } = useTranslation();

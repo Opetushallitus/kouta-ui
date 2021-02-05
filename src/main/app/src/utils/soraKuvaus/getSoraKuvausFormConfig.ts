@@ -1,6 +1,5 @@
 import { KOULUTUSTYYPIT } from '#/src/constants';
 import createFormConfigBuilder from '#/src/utils/form/createFormConfigBuilder';
-
 import {
   validateIfJulkaistu,
   getKielivalinta,
@@ -8,6 +7,7 @@ import {
   pohjaValintaSectionConfig,
   tilaSectionConfig,
 } from '#/src/utils/form/formConfigUtils';
+
 import { validateExistence } from '../form/createErrorBuilder';
 
 const config = createFormConfigBuilder().registerSections([

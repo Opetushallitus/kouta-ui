@@ -1,12 +1,14 @@
 import React from 'react';
-import { Field } from 'redux-form';
+
 import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
 
 import FormConfigFragment from '#/src/components/FormConfigFragment';
-import { Box } from '#/src/components/virkailija';
-import TekstiKuvausSection from './TekstiKuvausSection';
 import { FormFieldInput, FormFieldEditor } from '#/src/components/formFields';
+import { Box } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
+
+import TekstiKuvausSection from './TekstiKuvausSection';
 
 const KuvausSection = ({ disabled, language, name }) => {
   const { t } = useTranslation();

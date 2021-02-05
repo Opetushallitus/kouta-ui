@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+
 import { useIntersection } from 'react-use';
 
 export default function useInView(options = {}) {

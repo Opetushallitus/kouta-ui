@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { useKoodistoOptions } from '#/src/hooks/useKoodistoOptions';
 import { Select } from '#/src/components/Select';
+import { useKoodistoOptions } from '#/src/hooks/useKoodistoOptions';
 
 export const KoulutusalaSelect = props => {
   const { options } = useKoodistoOptions({

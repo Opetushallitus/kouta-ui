@@ -1,5 +1,5 @@
-import queryString from 'query-string';
 import { get, isArray } from 'lodash';
+import queryString from 'query-string';
 
 const getOrganisaatioHierarkia = async ({
   searchString = '',

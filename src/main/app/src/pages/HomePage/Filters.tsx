@@ -1,9 +1,10 @@
 import React, { useCallback, useMemo } from 'react';
+
 import { useTranslation } from 'react-i18next';
 
-import { Checkbox, Input, InputIcon } from '#/src/components/virkailija';
 import Flex, { FlexItem } from '#/src/components/Flex';
 import Select from '#/src/components/Select';
+import { Checkbox, Input, InputIcon } from '#/src/components/virkailija';
 import { getJulkaisutilaTranslationKey, JULKAISUTILA } from '#/src/constants';
 
 const getDefaultOptions = t => [

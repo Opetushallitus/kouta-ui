@@ -1,30 +1,32 @@
 import React, { useMemo } from 'react';
-import { Link } from 'react-router-dom';
+
 import debounce from 'debounce-promise';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
-import { ENTITY, ICONS } from '#/src/constants';
-import { getTestIdProps } from '#/src/utils';
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-import searchHakukohteet from '#/src/utils/hakukohde/searchHakukohteet';
 import Anchor from '#/src/components/Anchor';
-import { Box } from '#/src/components/virkailija';
 import Button from '#/src/components/Button';
-import useModal from '#/src/hooks/useModal';
 import ErrorAlert from '#/src/components/ErrorAlert';
-import Pagination from '#/src/components/Pagination';
-import useApiAsync from '#/src/hooks/useApiAsync';
+import ListSpin from '#/src/components/ListSpin';
 import ListTable, {
   makeModifiedColumn,
   makeMuokkaajaColumn,
   makeTilaColumn,
 } from '#/src/components/ListTable';
-import ListSpin from '#/src/components/ListSpin';
-import { getIndexParamsByFilters } from '../utils';
+import Pagination from '#/src/components/Pagination';
+import { Box } from '#/src/components/virkailija';
+import { ENTITY, ICONS } from '#/src/constants';
+import useApiAsync from '#/src/hooks/useApiAsync';
+import useModal from '#/src/hooks/useModal';
+import { getTestIdProps } from '#/src/utils';
+import searchHakukohteet from '#/src/utils/hakukohde/searchHakukohteet';
+import { getFirstLanguageValue } from '#/src/utils/languageUtils';
+
 import Filters from '../Filters';
+import ListCollapse from '../ListCollapse';
 import NavigationAnchor from '../NavigationAnchor';
 import useFilterState from '../useFilterState';
-import ListCollapse from '../ListCollapse';
+import { getIndexParamsByFilters } from '../utils';
 import LiitoksetModal from './LiitoksetModal';
 
 const { HAKUKOHDE } = ENTITY;

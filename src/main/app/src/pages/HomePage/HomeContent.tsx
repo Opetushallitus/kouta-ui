@@ -1,19 +1,10 @@
 import React, { useCallback, useMemo } from 'react';
-import { useHistory } from 'react-router-dom';
-import { connect } from 'react-redux';
-import KoulutuksetSection from './KoulutuksetSection';
-import ToteutuksetSection from './ToteutuksetSection';
-import HautSection from './HautSection';
-import ValintaperusteetSection from './ValintaperusteetSection';
-import { useOrganisaatio } from '#/src/hooks/useOrganisaatio';
-import { setOrganisaatio } from '#/src/state/organisaatioSelection';
-import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
-import { Box, Spin } from '#/src/components/virkailija';
-import Navigation from './Navigation';
-import Container from '#/src/components/Container';
-import NavigationProvider from './NavigationProvider';
-import HakukohteetSection from './HakukohteetSection';
 
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
+import Container from '#/src/components/Container';
+import { Box, Spin } from '#/src/components/virkailija';
 import {
   KOULUTUS_ROLE,
   TOTEUTUS_ROLE,
@@ -21,6 +12,17 @@ import {
   HAKUKOHDE_ROLE,
   VALINTAPERUSTE_ROLE,
 } from '#/src/constants';
+import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
+import { useOrganisaatio } from '#/src/hooks/useOrganisaatio';
+import { setOrganisaatio } from '#/src/state/organisaatioSelection';
+
+import HakukohteetSection from './HakukohteetSection';
+import HautSection from './HautSection';
+import KoulutuksetSection from './KoulutuksetSection';
+import Navigation from './Navigation';
+import NavigationProvider from './NavigationProvider';
+import ToteutuksetSection from './ToteutuksetSection';
+import ValintaperusteetSection from './ValintaperusteetSection';
 
 const HomeContent = ({
   organisaatioOid,

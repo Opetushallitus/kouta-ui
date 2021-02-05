@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+
 import { storiesOf } from '@storybook/react';
 
-import CollapseContent from './index';
-import { Typography } from '#/src/components/virkailija';
 import Button from '#/src/components/Button';
+import { Typography } from '#/src/components/virkailija';
+
+import CollapseContent from './index';
 
 const Story = ({ component: Component = CollapseContent }) => {
   const [open, setOpen] = useState(false);

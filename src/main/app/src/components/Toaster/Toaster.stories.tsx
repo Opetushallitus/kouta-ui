@@ -1,9 +1,11 @@
 import React from 'react';
+
 import { storiesOf } from '@storybook/react';
 import _ from 'lodash/fp';
 
-import Toaster from './index';
 import useToaster from '#/src/hooks/useToaster';
+
+import Toaster from './index';
 
 const toastsArray = [
   {

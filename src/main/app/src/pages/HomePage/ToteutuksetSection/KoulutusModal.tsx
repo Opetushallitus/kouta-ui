@@ -1,11 +1,11 @@
 import React, { useState, useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+
 import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router-dom';
+
 import Button from '#/src/components/Button';
 import Modal from '#/src/components/Modal';
 import Select from '#/src/components/Select';
-import useApiAsync from '#/src/hooks/useApiAsync';
-import getKoulutukset from '#/src/utils/koulutus/getKoulutukset';
 import {
   Box,
   FormLabel,
@@ -13,7 +13,9 @@ import {
   ModalFooter,
   ModalHeader,
 } from '#/src/components/virkailija';
+import useApiAsync from '#/src/hooks/useApiAsync';
 import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
+import getKoulutukset from '#/src/utils/koulutus/getKoulutukset';
 
 const KoulutusModal = ({ onClose, organisaatioOid, open }) => {
   const { t } = useTranslation();

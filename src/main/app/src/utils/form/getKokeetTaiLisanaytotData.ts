@@ -1,4 +1,5 @@
 import _ from 'lodash';
+
 import { serializeEditorState } from '#/src/components/Editor/utils';
 import { isNumeric, parseFloatComma } from '#/src/utils';
 

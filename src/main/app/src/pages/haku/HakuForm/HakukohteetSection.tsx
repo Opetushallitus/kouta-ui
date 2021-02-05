@@ -1,7 +1,9 @@
 import React from 'react';
+
 import { useTranslation } from 'react-i18next';
-import getHaunHakukohteet from '#/src/utils/haku/getHaunHakukohteet';
+
 import { RelatedEntitiesTable } from '#/src/components/RelatedEntitiesTable';
+import getHaunHakukohteet from '#/src/utils/haku/getHaunHakukohteet';
 
 export const HakukohteetSection = function ({ haku, organisaatioOid }) {
   const { t } = useTranslation();

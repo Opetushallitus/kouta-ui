@@ -1,14 +1,15 @@
 import React, { useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
-import { queryCache } from 'react-query';
 
-import updateValintaperuste from '#/src/utils/valintaperuste/updateValintaperuste';
-import { getValintaperusteByFormValues } from '#/src/utils/valintaperuste/getValintaperusteByFormValues';
-import { ENTITY, FormMode } from '#/src/constants';
-import { useSaveValintaperuste } from '#/src/hooks/formSaveHooks';
+import { queryCache } from 'react-query';
+import { useHistory } from 'react-router-dom';
+
 import { FormFooter } from '#/src/components/FormPage';
+import { ENTITY, FormMode } from '#/src/constants';
 import { useFormName } from '#/src/hooks/form';
+import { useSaveValintaperuste } from '#/src/hooks/formSaveHooks';
 import createValintaperuste from '#/src/utils/valintaperuste/createValintaperuste';
+import { getValintaperusteByFormValues } from '#/src/utils/valintaperuste/getValintaperusteByFormValues';
+import updateValintaperuste from '#/src/utils/valintaperuste/updateValintaperuste';
 
 type ValintaperusteFooterProps = {
   formMode: FormMode;

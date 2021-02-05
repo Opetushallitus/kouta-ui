@@ -1,15 +1,17 @@
 import React, { useCallback } from 'react';
-import { Field } from 'redux-form';
+
 import { useTranslation } from 'react-i18next';
-import Modal from '#/src/components/Modal';
+import { Field } from 'redux-form';
+
 import Button from '#/src/components/Button';
-import getToteutukset from '#/src/utils/toteutus/getToteutukset';
 import Flex, { FlexItem } from '#/src/components/Flex';
-import Spacing from '#/src/components/Spacing';
-import useApiAsync from '#/src/hooks/useApiAsync';
 import { FormFieldSelect } from '#/src/components/formFields';
+import Modal from '#/src/components/Modal';
+import Spacing from '#/src/components/Spacing';
 import { useFieldValue } from '#/src/hooks/form';
+import useApiAsync from '#/src/hooks/useApiAsync';
 import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
+import getToteutukset from '#/src/utils/toteutus/getToteutukset';
 
 const HakukohteetModal = ({
   onClose,

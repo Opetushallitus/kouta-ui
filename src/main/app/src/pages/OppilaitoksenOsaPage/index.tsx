@@ -1,28 +1,30 @@
 import React, { useMemo } from 'react';
+
 import { useTranslation } from 'react-i18next';
 
-import useOrganisaatio, { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
+import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage from '#/src/components/FormPage';
 import OppilaitosFormSteps from '#/src/components/OppilaitosFormSteps';
-import useApiAsync from '#/src/hooks/useApiAsync';
-import getOppilaitoksenOsaByOid from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaByOid';
-import { Spin } from '#/src/components/virkailija';
+import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
-import EntityFormHeader from '#/src/components/EntityFormHeader';
+import { Spin } from '#/src/components/virkailija';
 import { ENTITY, CRUD_ROLES, ORGANISAATIOTYYPPI } from '#/src/constants';
-import getOrganisaatioContactInfo from '#/src/utils/organisaatio/getOrganisaatioContactInfo';
+import FormConfigContext from '#/src/contexts/FormConfigContext';
+import useApiAsync from '#/src/hooks/useApiAsync';
+import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
+import useOrganisaatio, { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
 import koodiUriHasVersion from '#/src/utils/koodi/koodiUriHasVersion';
 import getFormValuesByOppilaitoksenOsa from '#/src/utils/oppilaitoksenOsa/getFormValuesByOppilaitoksenOsa';
+import getOppilaitoksenOsaByOid from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaByOid';
 import getOppilaitoksenOsaFormConfig from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaFormConfig';
-import ReduxForm from '#/src/components/ReduxForm';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
-import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
-import OppilaitoksenOsaPageFooter from './OppilaitoksenOsaPageFooter';
+import getOrganisaatioContactInfo from '#/src/utils/organisaatio/getOrganisaatioContactInfo';
+import getOrganisaatioParentOidPath from '#/src/utils/organisaatio/getOrganisaatioParentOidPath';
+import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
+
 import OppilaitoksenOsaForm, {
   initialValues as formInitialValues,
 } from './OppilaitoksenOsaForm';
-import getOrganisaatioParentOidPath from '#/src/utils/organisaatio/getOrganisaatioParentOidPath';
-import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
+import OppilaitoksenOsaPageFooter from './OppilaitoksenOsaPageFooter';
 
 const useOppilaitosOid = oppilaitoksenOsaOrganisaatio => {
   const parentOids = getOrganisaatioParentOidPath(oppilaitoksenOsaOrganisaatio);

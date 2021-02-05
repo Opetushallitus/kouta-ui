@@ -1,12 +1,11 @@
+import { playMocks } from 'kto-ui-common/cypress/mockUtils';
 import { merge } from 'lodash';
 
-import { playMocks } from 'kto-ui-common/cypress/mockUtils';
-import hakuMocks from '#/cypress/mocks/haku.mocks.json';
-import createKoodisto from '#/cypress/data/koodisto';
-
-import organisaatio from '#/cypress/data/organisaatio';
 import createKoodi from '#/cypress/data/koodi';
+import createKoodisto from '#/cypress/data/koodisto';
+import organisaatio from '#/cypress/data/organisaatio';
 import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
+import hakuMocks from '#/cypress/mocks/haku.mocks.json';
 
 import {
   stubKoodistoRoute,

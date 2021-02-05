@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
+
 import { storiesOf } from '@storybook/react';
 
-import AsyncKoodistoSelect from './index';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import useLoadOptions from '#/src/hooks/useLoadOptions';
-
 import {
   makeApiDecorator,
   makeLocalizationDecorator,
 } from '#/src/storybookUtils';
+
+import AsyncKoodistoSelect from './index';
 
 const Story = () => {
   const { options } = useKoodistoOptions({ koodisto: 'posti', versio: 2 });

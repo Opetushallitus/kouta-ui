@@ -1,27 +1,28 @@
 import React, { useCallback } from 'react';
-import { Field } from 'redux-form';
+
 import { get, negate } from 'lodash';
 import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
 
+import Alert from '#/src/components/Alert';
+import {
+  createFormFieldComponent,
+  FormFieldCheckbox,
+} from '#/src/components/formFields';
+import OrganisaatioHierarkiaTreeSelect from '#/src/components/OrganisaatioHierarkiaTreeSelect';
+import Spacing from '#/src/components/Spacing';
+import { Box } from '#/src/components/virkailija';
 import {
   KOULUTUS_ROLE,
   OPH_PAAKAYTTAJA_ROLE,
   ORGANISAATIOTYYPPI,
   KOULUTUSTYYPPI,
 } from '#/src/constants';
+import { useFieldValue } from '#/src/hooks/form';
+import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
+import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { getTestIdProps } from '#/src/utils';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
-import Alert from '#/src/components/Alert';
-import { Box } from '#/src/components/virkailija';
-import OrganisaatioHierarkiaTreeSelect from '#/src/components/OrganisaatioHierarkiaTreeSelect';
-import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
-import {
-  createFormFieldComponent,
-  FormFieldCheckbox,
-} from '#/src/components/formFields';
-import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
-import { useFieldValue } from '#/src/hooks/form';
-import Spacing from '#/src/components/Spacing';
 
 const JarjestajatField = createFormFieldComponent(
   OrganisaatioHierarkiaTreeSelect,

@@ -1,7 +1,8 @@
 import React from 'react';
 
-import FormSteps from './index';
 import { mountWithTheme } from '#/src/testUtils';
+
+import FormSteps from './index';
 
 test('renders correctly', () => {
   expect(

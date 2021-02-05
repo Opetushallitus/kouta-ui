@@ -1,8 +1,9 @@
 import _ from 'lodash';
 
-import { Alkamiskausityyppi, HAKULOMAKETYYPPI } from '#/src/constants';
-import { getFormValuesByHaku } from './getFormValuesByHaku';
 import { serializeEditorState } from '#/src/components/Editor/utils';
+import { Alkamiskausityyppi, HAKULOMAKETYYPPI } from '#/src/constants';
+
+import { getFormValuesByHaku } from './getFormValuesByHaku';
 
 const baseHaku = {
   muokkaaja: '1.1.1.1',

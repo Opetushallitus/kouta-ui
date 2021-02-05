@@ -1,10 +1,10 @@
 import _fp from 'lodash/fp';
 
+import { HakuFormValues } from '#/src/types/hakuTypes';
 import { isPartialDate } from '#/src/utils';
+import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
 import { getHakulomakeFieldsData } from '#/src/utils/form/getHakulomakeFieldsData';
 import isKorkeakoulutusKohdejoukkoKoodiUri from '#/src/utils/isKorkeakoulutusKohdejoukkoKoodiUri';
-import { HakuFormValues } from '#/src/types/hakuTypes';
-import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
 
 const getKielivalinta = values => values?.kieliversiot || [];
 

@@ -1,19 +1,22 @@
 import React from 'react';
+
+import _ from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import _ from 'lodash/fp';
-import { getLanguageValue } from '#/src/utils/languageUtils';
-import FormConfigFragment from '#/src/components/FormConfigFragment';
-import { Box, Spin, Typography } from '#/src/components/virkailija';
-import { useTutkinnonOsienKuvaukset } from '#/src/utils/koulutus/getTutkinnonOsanKuvaus';
-import StyledSectionHTML from '#/src/components/StyledSectionHTML';
-import { getThemeProp } from '#/src/theme';
+
 import Anchor from '#/src/components/Anchor';
+import FormConfigFragment from '#/src/components/FormConfigFragment';
+import StyledSectionHTML from '#/src/components/StyledSectionHTML';
+import { Box, Spin, Typography } from '#/src/components/virkailija';
 import { useUrls } from '#/src/contexts/contextHooks';
+import { getThemeProp } from '#/src/theme';
 import { sanitizeHTML } from '#/src/utils';
-import { StyledInfoBox } from './KoulutuksenEPerusteTiedot/InfoBox';
+import { useTutkinnonOsienKuvaukset } from '#/src/utils/koulutus/getTutkinnonOsanKuvaus';
 import { useEPerusteTutkinnonOsat } from '#/src/utils/koulutus/getTutkinnonosaViite';
+import { getLanguageValue } from '#/src/utils/languageUtils';
+
 import { useSelectedTutkinnonOsat } from '../useSelectedTutkinnonOsat';
+import { StyledInfoBox } from './KoulutuksenEPerusteTiedot/InfoBox';
 
 const BodyHeading = styled(Typography).attrs({ variant: 'h6' })`
   color: ${getThemeProp('colors.text.primary')};

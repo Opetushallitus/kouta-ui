@@ -1,15 +1,13 @@
 import React, { useMemo } from 'react';
-import { useSelector } from 'react-redux';
+
 import queryString from 'query-string';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
-import { useTranslation } from 'react-i18next';
 
-import HomeContent from './HomeContent';
 import Alert from '#/src/components/Alert';
-import { selectOrganisaatio } from '#/src/state/organisaatioSelection';
-import useAuthorizedUser from '#/src/hooks/useAuthorizedUser';
-
+import Title from '#/src/components/Title';
 import {
   KOULUTUS_ROLE,
   TOTEUTUS_ROLE,
@@ -18,10 +16,12 @@ import {
   OPH_PAAKAYTTAJA_ROLE,
   HAKUKOHDE_ROLE,
 } from '#/src/constants';
-
-import getUserRoles from '#/src/utils/getUserRoles';
+import useAuthorizedUser from '#/src/hooks/useAuthorizedUser';
+import { selectOrganisaatio } from '#/src/state/organisaatioSelection';
 import getRoleOrganisaatioOid from '#/src/utils/getRoleOrganisaatioOid';
-import Title from '#/src/components/Title';
+import getUserRoles from '#/src/utils/getUserRoles';
+
+import HomeContent from './HomeContent';
 
 const HomeContainer = styled.div`
   min-height: 100vh;

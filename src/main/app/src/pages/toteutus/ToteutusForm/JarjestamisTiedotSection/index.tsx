@@ -1,18 +1,13 @@
-import { Field } from 'redux-form';
 import React, { useMemo } from 'react';
-import styled from 'styled-components';
+
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
+import styled from 'styled-components';
 
-import Spacing from '#/src/components/Spacing';
-import Flex, { FlexItem } from '#/src/components/Flex';
-import { FormLabel, InputIcon } from '#/src/components/virkailija';
-import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
-import { getTestIdProps } from '#/src/utils';
-import isKorkeakouluKoulutustyyppi from '#/src/utils/koulutus/isKorkeakouluKoulutustyyppi';
-import { useFieldValue } from '#/src/hooks/form';
-import FormConfigFragment from '#/src/components/FormConfigFragment';
 import FieldGroup from '#/src/components/FieldGroup';
+import Flex, { FlexItem } from '#/src/components/Flex';
+import FormConfigFragment from '#/src/components/FormConfigFragment';
 import {
   FormFieldSelect,
   FormFieldInput,
@@ -20,12 +15,18 @@ import {
   FormFieldRadioGroup,
   FormFieldEditor,
 } from '#/src/components/formFields';
-import { isStipendiVisible } from '#/src/utils/toteutus/toteutusVisibilities';
 import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenAloitusajankohtaFields';
+import Spacing from '#/src/components/Spacing';
+import { FormLabel, InputIcon } from '#/src/components/virkailija';
+import { useFieldValue } from '#/src/hooks/form';
+import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
+import { getTestIdProps } from '#/src/utils';
+import isKorkeakouluKoulutustyyppi from '#/src/utils/koulutus/isKorkeakouluKoulutustyyppi';
+import { isStipendiVisible } from '#/src/utils/toteutus/toteutusVisibilities';
 
-import MaksullisuusFields from './MaksullisuusFields';
 import { DiplomiFields } from './DiplomiFields';
 import KielivalikoimaFields from './KielivalikoimaFields';
+import MaksullisuusFields from './MaksullisuusFields';
 import OpetusaikaCheckboxGroup from './OpetusaikaCheckboxGroup';
 import OpetuskieliCheckboxGroup from './OpetuskieliCheckboxGroup';
 import OpetustapaCheckboxGroup from './OpetustapaCheckboxGroup';

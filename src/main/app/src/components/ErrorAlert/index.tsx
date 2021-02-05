@@ -1,13 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
+
 import { isFunction } from 'lodash';
 import { setLightness } from 'polished';
 import { useTranslation } from 'react-i18next';
+import styled from 'styled-components';
 
 import Anchor from '#/src/components/Anchor';
-import { Icon, Typography } from '#/src/components/virkailija';
 import Flex, { FlexItem } from '#/src/components/Flex';
 import Spacing from '#/src/components/Spacing';
+import { Icon, Typography } from '#/src/components/virkailija';
 import { getThemeProp, spacing } from '#/src/theme';
 
 const ErrorIcon = styled(Icon).attrs({ type: 'error_outline' })`

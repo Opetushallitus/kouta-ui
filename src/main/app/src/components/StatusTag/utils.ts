@@ -1,4 +1,5 @@
 import { isString } from 'lodash';
+
 import { getJulkaisutilaTranslationKey, JULKAISUTILA } from '#/src/constants';
 
 export const getLabel = ({ status, t }) => {

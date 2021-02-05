@@ -1,7 +1,9 @@
-import { StatusCodes } from 'http-status-codes';
 import React, { useEffect, useState } from 'react';
+
+import { StatusCodes } from 'http-status-codes';
 import { useTranslation } from 'react-i18next';
 import { useAsync, useEvent, useIdle } from 'react-use';
+
 import {
   ERROR_INTERNET_DISCONNECTED,
   ERROR_KAYTTOOIKEUS_SERVICE,
@@ -12,9 +14,10 @@ import AuthorizedUserContext from '#/src/contexts/AuthorizedUserContext';
 import { useHttpClient, useUrls } from '#/src/contexts/contextHooks';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import { isDev } from '#/src/utils';
-import { getMe } from '#/src/utils/api/getMe';
-import AuthorizationErrorModal from './AuthorizationErrorModal';
 import { useAsiointiKieli } from '#/src/utils/api/getAsiointiKieli';
+import { getMe } from '#/src/utils/api/getMe';
+
+import AuthorizationErrorModal from './AuthorizationErrorModal';
 
 type UserGateProps = {
   fallback?: React.ReactElement;

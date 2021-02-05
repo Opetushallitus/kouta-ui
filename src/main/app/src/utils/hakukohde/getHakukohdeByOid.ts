@@ -1,5 +1,5 @@
-import { getEntityByOid, useEntityByOid } from '#/src/utils/api/getEntityByOid';
 import { ENTITY } from '#/src/constants';
+import { getEntityByOid, useEntityByOid } from '#/src/utils/api/getEntityByOid';
 
 export const getHakukohdeByOid = async ({ oid, httpClient, apiUrls }) =>
   getEntityByOid({

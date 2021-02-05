@@ -1,4 +1,3 @@
-import { getHakukohdeByFormValues } from './getHakukohdeByFormValues';
 import { parseEditorState } from '#/src/components/Editor/utils';
 import {
   Alkamiskausityyppi,
@@ -6,6 +5,8 @@ import {
   JULKAISUTILA,
   LIITTEEN_TOIMITUSTAPA,
 } from '#/src/constants';
+
+import { getHakukohdeByFormValues } from './getHakukohdeByFormValues';
 
 test('getHakukohdeByFormValues returns correct hakukohde given form values', () => {
   const hakukohde = getHakukohdeByFormValues({

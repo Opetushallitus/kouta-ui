@@ -1,10 +1,12 @@
 import React from 'react';
+
 import { storiesOf } from '@storybook/react';
 
-import SoraKuvausForm, { initialValues } from './index';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
 import ReduxForm from '#/src/components/ReduxForm';
+import FormConfigContext from '#/src/contexts/FormConfigContext';
 import getSoraKuvausFormConfig from '#/src/utils/soraKuvaus/getSoraKuvausFormConfig';
+
+import SoraKuvausForm, { initialValues } from './index';
 
 storiesOf('SoraKuvausForm', module).add('Basic', () => (
   <ReduxForm form="toteutus" initialValues={initialValues(['fi'])}>

@@ -1,6 +1,7 @@
-import getKoulutusFormConfig from './getKoulutusFormConfig';
 import getErrorBuilderByFormConfig from '#/src/utils/form/getErrorBuilderByFormConfig';
 import isOphOrganisaatio from '#/src/utils/organisaatio/isOphOrganisaatio';
+
+import getKoulutusFormConfig from './getKoulutusFormConfig';
 
 const validateKoulutusForm = values => {
   const { koulutustyyppi } = values;

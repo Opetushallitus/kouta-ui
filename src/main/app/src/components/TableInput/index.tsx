@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
-import styled, { css } from 'styled-components';
 
 import { get, isArray, isObject, isFunction } from 'lodash';
+import { useTranslation } from 'react-i18next';
+import styled, { css } from 'styled-components';
+
 import Flex, { FlexItem } from '#/src/components/Flex';
+import {
+  Dropdown,
+  DropdownMenu,
+  DropdownMenuItem,
+} from '#/src/components/virkailija';
 import { getThemeProp, spacing } from '#/src/theme';
 
 import {
@@ -16,14 +23,6 @@ import {
   setRowHeaderStatus,
   setColumnFieldValue,
 } from './utils';
-
-import {
-  Dropdown,
-  DropdownMenu,
-  DropdownMenuItem,
-} from '#/src/components/virkailija';
-
-import { useTranslation } from 'react-i18next';
 
 const ColumnInput = styled.textarea.attrs({ rows: 2 })`
   width: 100%;

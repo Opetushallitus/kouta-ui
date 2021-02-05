@@ -1,7 +1,11 @@
 import React, { Fragment, useState } from 'react';
-import styled, { css } from 'styled-components';
-import { get, isFunction } from 'lodash';
 
+import { get, isFunction } from 'lodash';
+import { Link } from 'react-router-dom';
+import styled, { css } from 'styled-components';
+
+import Anchor from '#/src/components/Anchor';
+import StatusTag from '#/src/components/StatusTag';
 import Table, {
   TableHead,
   TableBody,
@@ -9,10 +13,7 @@ import Table, {
   TableCell,
 } from '#/src/components/Table';
 import { Icon, Dropdown } from '#/src/components/virkailija';
-import StatusTag from '#/src/components/StatusTag';
 import useLanguage from '#/src/hooks/useLanguage';
-import Anchor from '#/src/components/Anchor';
-import { Link } from 'react-router-dom';
 import { formatDateValue } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 

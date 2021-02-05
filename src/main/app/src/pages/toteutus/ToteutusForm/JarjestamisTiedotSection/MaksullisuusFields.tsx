@@ -1,14 +1,15 @@
 import React, { useMemo } from 'react';
+
+import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
-import { useTranslation } from 'react-i18next';
 
 import {
   FormFieldRadioGroup,
   FormFieldInput,
 } from '#/src/components/formFields';
-import { InputIcon } from '#/src/components/virkailija';
 import Spacing from '#/src/components/Spacing';
+import { InputIcon } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 
 const MaksuInputWrapper = styled.div`

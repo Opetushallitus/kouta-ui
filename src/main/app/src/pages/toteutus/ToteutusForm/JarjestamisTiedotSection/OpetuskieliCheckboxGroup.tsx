@@ -1,9 +1,9 @@
 import React from 'react';
 
+import { orderBy } from 'lodash';
+
 import { CheckboxGroup } from '#/src/components/virkailija';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
-
-import { orderBy } from 'lodash';
 
 const OpetuskieliCheckboxGroup = props => {
   const sort = options => {

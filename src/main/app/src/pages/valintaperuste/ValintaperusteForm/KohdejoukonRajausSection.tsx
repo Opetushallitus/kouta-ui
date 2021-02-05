@@ -1,9 +1,10 @@
 import React from 'react';
-import { Field } from 'redux-form';
-import { useTranslation } from 'react-i18next';
 
-import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
+import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
+
 import { FormFieldSelect } from '#/src/components/formFields';
+import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 
 const KohdejoukonRajausSection = ({ name }) => {
   const { options } = useKoodistoOptions({ koodisto: 'haunkohdejoukko' });

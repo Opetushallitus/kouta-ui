@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { withTranslation } from 'react-i18next';
 
 class ErrorBoundaryNotifier extends Component {

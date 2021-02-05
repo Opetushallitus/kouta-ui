@@ -1,26 +1,28 @@
 import React, { useMemo } from 'react';
+
 import { useTranslation } from 'react-i18next';
+
+import EntityFormHeader from '#/src/components/EntityFormHeader';
+import FormPage from '#/src/components/FormPage';
+import FullSpin from '#/src/components/FullSpin';
+import OppilaitosFormSteps from '#/src/components/OppilaitosFormSteps';
+import ReduxForm from '#/src/components/ReduxForm';
+import Title from '#/src/components/Title';
+import { ENTITY, CRUD_ROLES } from '#/src/constants';
+import FormConfigContext from '#/src/contexts/FormConfigContext';
+import { useEntityFormConfig } from '#/src/hooks/form';
+import useApiAsync from '#/src/hooks/useApiAsync';
+import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
+import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
+import koodiUriHasVersion from '#/src/utils/koodi/koodiUriHasVersion';
+import getFormValuesByOppilaitos from '#/src/utils/oppilaitos/getFormValuesByOppilaitos';
+import getOppilaitosByOid from '#/src/utils/oppilaitos/getOppilaitosByOid';
+import getOrganisaatioContactInfo from '#/src/utils/organisaatio/getOrganisaatioContactInfo';
 
 import OppilaitosForm, {
   initialValues as formInitialValues,
 } from './OppilaitosForm';
-import FormPage from '#/src/components/FormPage';
-import OppilaitosFormSteps from '#/src/components/OppilaitosFormSteps';
-import useApiAsync from '#/src/hooks/useApiAsync';
-import getOppilaitosByOid from '#/src/utils/oppilaitos/getOppilaitosByOid';
-import Title from '#/src/components/Title';
-import { ENTITY, CRUD_ROLES } from '#/src/constants';
-import getOrganisaatioContactInfo from '#/src/utils/organisaatio/getOrganisaatioContactInfo';
-import koodiUriHasVersion from '#/src/utils/koodi/koodiUriHasVersion';
-import getFormValuesByOppilaitos from '#/src/utils/oppilaitos/getFormValuesByOppilaitos';
-import ReduxForm from '#/src/components/ReduxForm';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
-import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
-import { useEntityFormConfig } from '#/src/hooks/form';
-import FullSpin from '#/src/components/FullSpin';
 import OppilaitosPageFooter from './OppilaitosPageFooter';
-import EntityFormHeader from '#/src/components/EntityFormHeader';
-import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 
 const OppilaitosPage = ({
   match: {

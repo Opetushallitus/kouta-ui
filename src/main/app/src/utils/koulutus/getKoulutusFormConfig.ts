@@ -6,10 +6,8 @@ import {
   TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
 } from '#/src/constants';
-
-import createFormConfigBuilder from '#/src/utils/form/createFormConfigBuilder';
 import { validateExistence } from '#/src/utils/form/createErrorBuilder';
-
+import createFormConfigBuilder from '#/src/utils/form/createFormConfigBuilder';
 import {
   validateIfJulkaistu,
   getKielivalinta,

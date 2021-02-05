@@ -1,12 +1,15 @@
 import React, { useCallback } from 'react';
+
 import { useTranslation } from 'react-i18next';
 import { FieldArray } from 'redux-form';
+
 import Button from '#/src/components/Button';
 import FieldArrayList from '#/src/components/FieldArrayList';
 import FormConfigFragment from '#/src/components/FormConfigFragment';
 import { Box } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
 import { getTestIdProps } from '#/src/utils';
+
 import KoulutuksenTiedotSection from './TiedotSection/KoulutuksenTiedotSection';
 import { useLocalizedKoulutus } from './useLocalizedKoulutus';
 

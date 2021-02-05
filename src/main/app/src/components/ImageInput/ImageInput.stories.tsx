@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { storiesOf } from '@storybook/react';
+
 import { action } from '@storybook/addon-actions';
+import { storiesOf } from '@storybook/react';
 
 import { makeLocalizationDecorator } from '#/src/storybookUtils';
+
 import ImageInput from './index';
 
 const upload = file =>

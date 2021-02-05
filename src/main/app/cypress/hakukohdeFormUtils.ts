@@ -1,7 +1,12 @@
-import { merge } from 'lodash';
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
-import hakukohdeMocks from '#/cypress/mocks/hakukohde.mock.json';
+import { merge } from 'lodash';
 
+import haku from '#/cypress/data/haku';
+import hakukohde from '#/cypress/data/hakukohde';
+import koulutus from '#/cypress/data/koulutus';
+import toteutus from '#/cypress/data/toteutus';
+import valintaperuste from '#/cypress/data/valintaperuste';
+import hakukohdeMocks from '#/cypress/mocks/hakukohde.mock.json';
 import {
   stubHakemuspalveluLomakkeetRoute,
   stubOppijanumerorekisteriHenkiloRoute,
@@ -9,13 +14,8 @@ import {
   jatka,
 } from '#/cypress/utils';
 
-import haku from '#/cypress/data/haku';
-import hakukohde from '#/cypress/data/hakukohde';
-import koulutus from '#/cypress/data/koulutus';
-import toteutus from '#/cypress/data/toteutus';
-import valintaperuste from '#/cypress/data/valintaperuste';
-import organisaatioHierarkia from './data/organisaatioHierarkia';
 import organisaatio from './data/organisaatio';
+import organisaatioHierarkia from './data/organisaatioHierarkia';
 
 const toimipisteTarjoajat = [
   '1.2.246.562.10.16538823663',

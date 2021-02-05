@@ -1,5 +1,6 @@
-import _ from 'lodash';
 import { AxiosInstance } from 'axios';
+import _ from 'lodash';
+
 import { ENTITY } from '#/src/constants';
 import { useApiQuery, KoutaApiQueryConfig } from '#/src/hooks/useApiQuery';
 

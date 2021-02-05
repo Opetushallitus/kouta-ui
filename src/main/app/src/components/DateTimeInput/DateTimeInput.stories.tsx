@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { storiesOf } from '@storybook/react';
+
 import { action } from '@storybook/addon-actions';
+import { storiesOf } from '@storybook/react';
+
+import { makeLocalizationDecorator } from '#/src/storybookUtils';
 
 import DateTimeInput from './index';
-import { makeLocalizationDecorator } from '#/src/storybookUtils';
 
 const Story = () => {
   const [date, setDate] = useState('2019-04-11T09:17');

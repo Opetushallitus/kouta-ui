@@ -1,11 +1,14 @@
 import React from 'react';
+
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
+
 import FormConfigFragment from '#/src/components/FormConfigFragment';
 import { FormFieldInput } from '#/src/components/formFields';
-import { getTestIdProps } from '#/src/utils';
-import { Box } from '#/src/components/virkailija';
 import KoulutusField from '#/src/components/KoulutusField';
+import { Box } from '#/src/components/virkailija';
+import { getTestIdProps } from '#/src/utils';
+
 import { useLocalizedKoulutus } from '../useLocalizedKoulutus';
 import KoulutuksenTiedotSection from './KoulutuksenTiedotSection';
 import KoulutusalatField from './KoulutusalatField';

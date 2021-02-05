@@ -1,33 +1,33 @@
 import React, { useMemo } from 'react';
-import { Link } from 'react-router-dom';
+
 import debounce from 'debounce-promise';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
-import { ENTITY, ICONS } from '#/src/constants';
-
-import { getTestIdProps } from '#/src/utils';
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-
-import searchHaut from '#/src/utils/haku/searchHaut';
-import Button from '#/src/components/Button';
-import Pagination from '#/src/components/Pagination';
-import Flex from '#/src/components/Flex';
-import Spacing from '#/src/components/Spacing';
-import useApiAsync from '#/src/hooks/useApiAsync';
-import Badge from '#/src/components/Badge';
-import ErrorAlert from '#/src/components/ErrorAlert';
 import Anchor from '#/src/components/Anchor';
+import Badge from '#/src/components/Badge';
+import Button from '#/src/components/Button';
+import ErrorAlert from '#/src/components/ErrorAlert';
+import Flex from '#/src/components/Flex';
 import ListSpin from '#/src/components/ListSpin';
 import ListTable, {
   makeModifiedColumn,
   makeMuokkaajaColumn,
   makeTilaColumn,
 } from '#/src/components/ListTable';
-import NavigationAnchor from './NavigationAnchor';
+import Pagination from '#/src/components/Pagination';
+import Spacing from '#/src/components/Spacing';
+import { ENTITY, ICONS } from '#/src/constants';
+import useApiAsync from '#/src/hooks/useApiAsync';
+import { getTestIdProps } from '#/src/utils';
+import searchHaut from '#/src/utils/haku/searchHaut';
+import { getFirstLanguageValue } from '#/src/utils/languageUtils';
+
 import Filters from './Filters';
 import ListCollapse from './ListCollapse';
-import { getIndexParamsByFilters } from './utils';
+import NavigationAnchor from './NavigationAnchor';
 import useFilterState from './useFilterState';
+import { getIndexParamsByFilters } from './utils';
 
 const { HAKU } = ENTITY;
 

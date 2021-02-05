@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { EditorState } from 'draft-js';
-import { get, isObject, isFunction, isString } from 'lodash';
+
 import {
   convertToHTML as makeConvertToHTML,
   convertFromHTML as makeConvertFromHTML,
 } from 'draft-convert';
+import { EditorState } from 'draft-js';
+import { get, isObject, isFunction, isString } from 'lodash';
+
 import linkDecorator from './linkDecorator';
 
 const convertFromHTML = makeConvertFromHTML({

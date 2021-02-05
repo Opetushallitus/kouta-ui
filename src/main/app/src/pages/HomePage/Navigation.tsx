@@ -7,11 +7,14 @@ import React, {
   useRef,
   useLayoutEffect,
 } from 'react';
-import styled, { css } from 'styled-components';
-import { useEvent } from 'react-use';
+
 import { get, minBy, throttle, isFunction } from 'lodash';
 import { useTranslation } from 'react-i18next';
+import { useEvent } from 'react-use';
+import styled, { css } from 'styled-components';
 
+import Button from '#/src/components/Button';
+import Container from '#/src/components/Container';
 import {
   Box,
   Typography,
@@ -20,14 +23,12 @@ import {
   DropdownMenu,
   DropdownMenuItem,
 } from '#/src/components/virkailija';
-import Button from '#/src/components/Button';
-import { getTestIdProps } from '#/src/utils';
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-
-import Container from '#/src/components/Container';
 import useInView from '#/src/hooks/useInView';
 import { spacing, getThemeProp } from '#/src/theme';
+import { getTestIdProps } from '#/src/utils';
+import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import scrollElementIntoView from '#/src/utils/scrollElementIntoView';
+
 import { NavigationStateContext } from './NavigationProvider';
 import OrganisaatioDrawer from './OrganisaatioDrawer';
 

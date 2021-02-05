@@ -1,9 +1,11 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
+
 import { action } from '@storybook/addon-actions';
+import { storiesOf } from '@storybook/react';
+
+import SegmentTab from '#/src/components/SegmentTab';
 
 import SegmentTabs from './index';
-import SegmentTab from '#/src/components/SegmentTab';
 
 storiesOf('SegmentTabs', module).add('Basic', () => (
   <SegmentTabs value="b" onChange={action('change')}>

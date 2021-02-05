@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
-import { Field } from 'redux-form';
+
 import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
 
 import { FormFieldCheckboxGroup } from '#/src/components/formFields';
 

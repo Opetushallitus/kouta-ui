@@ -1,9 +1,12 @@
 import React, { useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
+
 import _ from 'lodash/fp';
-import { FormCollapse } from './FormCollapse';
-import { useFieldValue } from '#/src/hooks/form';
+import { useTranslation } from 'react-i18next';
+
 import PohjaValintaSection from '#/src/components/PohjaValintaSection';
+import { useFieldValue } from '#/src/hooks/form';
+
+import { FormCollapse } from './FormCollapse';
 
 type PohjaFormCollapseProps = {
   section?: string;

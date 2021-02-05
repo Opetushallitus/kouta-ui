@@ -1,11 +1,11 @@
 import _ from 'lodash';
 
-import { getKokeetTaiLisanaytotValues } from '#/src/utils/form/getKokeetTaiLisanaytotValues';
-import { getHakulomakeFieldsValues } from '#/src/utils/form/getHakulomakeFieldsValues';
-import { isNumeric } from '#/src/utils';
 import { parseEditorState } from '#/src/components/Editor/utils';
 import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
+import { isNumeric } from '#/src/utils';
 import { getAjankohtaFields } from '#/src/utils/form/aloitusajankohtaHelpers';
+import { getHakulomakeFieldsValues } from '#/src/utils/form/getHakulomakeFieldsValues';
+import { getKokeetTaiLisanaytotValues } from '#/src/utils/form/getKokeetTaiLisanaytotValues';
 
 const getToimitustapaValues = (toimitustapa, toimitusosoite) => ({
   tapa: toimitustapa || '',

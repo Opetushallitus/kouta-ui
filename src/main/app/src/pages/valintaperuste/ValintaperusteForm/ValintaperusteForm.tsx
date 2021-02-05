@@ -1,19 +1,21 @@
 import React from 'react';
+
 import { useTranslation } from 'react-i18next';
 
-import { ENTITY } from '#/src/constants';
-import { useFieldValue } from '#/src/hooks/form';
-import getValintaperusteet from '#/src/utils/valintaperuste/getValintaperusteet';
-import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import FormCollapse from '#/src/components/FormCollapse';
-import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
+import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import JulkisuusSection from '#/src/components/JulkisuusSection';
 import KokeetTaiLisanaytotSection from '#/src/components/KokeetTaiLisanaytotSection';
+import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import SoraKuvausSection from '#/src/components/SoraKuvausSection';
-import { ValintatapaSection } from './ValintatapaSection';
+import { ENTITY } from '#/src/constants';
+import { useFieldValue } from '#/src/hooks/form';
+import getValintaperusteet from '#/src/utils/valintaperuste/getValintaperusteet';
+
 import { KuvausSection } from './KuvausSection';
 import PerustiedotSection from './PerustiedotSection';
+import { ValintatapaSection } from './ValintatapaSection';
 
 type ValintaperusteFormProps = {
   organisaatioOid: string;

@@ -1,4 +1,5 @@
 import _ from 'lodash';
+
 import iterateTree from '#/src/utils/iterateTree';
 
 const getAvailableTarjoajaOids = hierarkia => {

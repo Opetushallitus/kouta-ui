@@ -1,5 +1,6 @@
-import getOppilaitosFormConfig from './getOppilaitosFormConfig';
 import getErrorBuilderByFormConfig from '#/src/utils/form/getErrorBuilderByFormConfig';
+
+import getOppilaitosFormConfig from './getOppilaitosFormConfig';
 
 const validateOppilaitosForm = values => {
   return getErrorBuilderByFormConfig(

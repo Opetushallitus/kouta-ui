@@ -1,9 +1,10 @@
+import { EditorState } from '#/src/components/Editor/Editor';
 import {
   HAKULOMAKETYYPPI,
   JULKAISUTILA,
   KOULUTUSTYYPPI,
 } from '#/src/constants';
-import { EditorState } from '#/src/components/Editor/Editor';
+
 import { AjankohtaFields } from './formTypes';
 
 export type HakukohdeModel = any;

@@ -1,5 +1,5 @@
-import useSoraKuvaukset from '#/src/hooks/useSoraKuvaukset';
 import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
+import useSoraKuvaukset from '#/src/hooks/useSoraKuvaukset';
 
 export const useSoraKuvausOptions = args => {
   const { soraKuvaukset, ...rest } = useSoraKuvaukset(args);

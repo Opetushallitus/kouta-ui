@@ -1,23 +1,25 @@
 import React, { useMemo } from 'react';
+
 import queryString from 'query-string';
 import { useTranslation } from 'react-i18next';
 
+import FormHeader from '#/src/components/FormHeader';
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
 } from '#/src/components/FormPage';
-import useSelectBase from '#/src/hooks/useSelectBase';
-import Title from '#/src/components/Title';
-import ReduxForm from '#/src/components/ReduxForm';
-import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
-import { getFormValuesByValintaperuste } from '#/src/utils/valintaperuste/getFormValuesByValintaperuste';
-import ValintaperusteForm, { initialValues } from './ValintaperusteForm';
-import { useValintaperusteById } from '#/src/utils/valintaperuste/getValintaperusteById';
-import FormHeader from '#/src/components/FormHeader';
 import FormSteps from '#/src/components/FormSteps';
+import ReduxForm from '#/src/components/ReduxForm';
+import Title from '#/src/components/Title';
+import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useEntityFormConfig, useFieldValue } from '#/src/hooks/form';
+import useSelectBase from '#/src/hooks/useSelectBase';
+import { getFormValuesByValintaperuste } from '#/src/utils/valintaperuste/getFormValuesByValintaperuste';
+import { useValintaperusteById } from '#/src/utils/valintaperuste/getValintaperusteById';
+
 import { ValintaperusteFooter } from './ValintaperusteFooter';
+import ValintaperusteForm, { initialValues } from './ValintaperusteForm';
 
 const getCopyValues = valintaperusteId => ({
   pohja: {

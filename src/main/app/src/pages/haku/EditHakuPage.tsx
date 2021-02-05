@@ -1,21 +1,23 @@
 import React, { useCallback, useMemo } from 'react';
+
 import { useTranslation } from 'react-i18next';
 
+import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
 } from '#/src/components/FormPage';
-import { Spin } from '#/src/components/virkailija';
-import { useHakuByOid } from '#/src/utils/haku/getHakuByOid';
-import Title from '#/src/components/Title';
-import ReduxForm from '#/src/components/ReduxForm';
-import { getFormValuesByHaku } from '#/src/utils/haku/getFormValuesByHaku';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
-import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
-import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormSteps from '#/src/components/FormSteps';
-import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
+import ReduxForm from '#/src/components/ReduxForm';
+import Title from '#/src/components/Title';
+import { Spin } from '#/src/components/virkailija';
+import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
+import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useEntityFormConfig } from '#/src/hooks/form';
+import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
+import { getFormValuesByHaku } from '#/src/utils/haku/getFormValuesByHaku';
+import { useHakuByOid } from '#/src/utils/haku/getHakuByOid';
+
 import { HakuFooter } from './HakuFooter';
 import HakuForm from './HakuForm';
 

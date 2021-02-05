@@ -1,13 +1,14 @@
 import React, { useCallback } from 'react';
-import { Field, FieldArray } from 'redux-form';
-import { useTranslation } from 'react-i18next';
 
-import FieldArrayList from '#/src/components/FieldArrayList';
+import { useTranslation } from 'react-i18next';
+import { Field, FieldArray } from 'redux-form';
+
 import Button from '#/src/components/Button';
+import FieldArrayList from '#/src/components/FieldArrayList';
 import { FormFieldInput, FormFieldEditor } from '#/src/components/formFields';
+import { SisaltoFields } from '#/src/components/SisaltoFields';
 import { Box } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
-import { SisaltoFields } from '#/src/components/SisaltoFields';
 
 const ToteutusjaksotField = ({ fields, language, t }) => {
   const onAddField = useCallback(() => {

@@ -1,9 +1,10 @@
 import _fp from 'lodash/fp';
+
 import { parseEditorState } from '#/src/components/Editor/utils';
-import { toSelectValue } from '#/src/utils';
-import parseSisaltoField from '#/src/utils/form/parseSisaltoField';
 import { ToteutusFormValues } from '#/src/types/toteutusTypes';
+import { toSelectValue } from '#/src/utils';
 import { getAjankohtaFields } from '#/src/utils/form/aloitusajankohtaHelpers';
+import parseSisaltoField from '#/src/utils/form/parseSisaltoField';
 
 const kieliArvoListToMultiSelectValue = _fp.reduce((acc, curr: any) => {
   if (curr?.kieli && curr?.arvo) {

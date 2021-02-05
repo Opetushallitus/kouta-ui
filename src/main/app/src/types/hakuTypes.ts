@@ -1,4 +1,5 @@
 import { HAKULOMAKETYYPPI, JULKAISUTILA } from '#/src/constants';
+
 import { AjankohtaFields } from './formTypes';
 
 export type HakuModel = any;

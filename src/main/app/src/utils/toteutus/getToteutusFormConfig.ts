@@ -1,16 +1,5 @@
 import _fp from 'lodash/fp';
 
-import createFormConfigBuilder from '#/src/utils/form/createFormConfigBuilder';
-
-import {
-  validateExistence,
-  validateInteger,
-  validateExistenceOfDate,
-  validate,
-  validateTranslations,
-  validateUrl,
-} from '#/src/utils/form/createErrorBuilder';
-
 import {
   KOULUTUSTYYPPI,
   KOULUTUSTYYPIT,
@@ -22,7 +11,16 @@ import {
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
   Alkamiskausityyppi,
 } from '#/src/constants';
-
+import { ToteutusFormValues } from '#/src/types/toteutusTypes';
+import {
+  validateExistence,
+  validateInteger,
+  validateExistenceOfDate,
+  validate,
+  validateTranslations,
+  validateUrl,
+} from '#/src/utils/form/createErrorBuilder';
+import createFormConfigBuilder from '#/src/utils/form/createFormConfigBuilder';
 import {
   validateIfJulkaistu,
   getKielivalinta,
@@ -32,7 +30,6 @@ import {
   createOptionalTranslatedFieldConfig,
   validateIf,
 } from '#/src/utils/form/formConfigUtils';
-import { ToteutusFormValues } from '#/src/types/toteutusTypes';
 
 const validateDateTimeRange = (alkaaFieldName, paattyyFieldName) => (
   eb,

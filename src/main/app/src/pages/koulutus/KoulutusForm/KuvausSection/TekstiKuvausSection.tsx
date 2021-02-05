@@ -1,13 +1,14 @@
 import React, { useMemo } from 'react';
+
 import { useTranslation } from 'react-i18next';
 
-import { getLanguageValue } from '#/src/utils/languageUtils';
-import { getEPerusteById } from '#/src/utils/ePeruste/getEPerusteById';
-import { Typography } from '#/src/components/virkailija';
-import useApiAsync from '#/src/hooks/useApiAsync';
-import { useFieldValue } from '#/src/hooks/form';
 import StyledSectionHTML from '#/src/components/StyledSectionHTML';
+import { Typography } from '#/src/components/virkailija';
+import { useFieldValue } from '#/src/hooks/form';
+import useApiAsync from '#/src/hooks/useApiAsync';
+import { getEPerusteById } from '#/src/utils/ePeruste/getEPerusteById';
 import getEPerusteKuvausHTML from '#/src/utils/ePeruste/getEPerusteKuvaus';
+import { getLanguageValue } from '#/src/utils/languageUtils';
 
 const TekstiKuvausSection = ({ language }) => {
   const ePerusteField = useFieldValue('information.eperuste');

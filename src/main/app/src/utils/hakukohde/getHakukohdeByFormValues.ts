@@ -1,13 +1,13 @@
 import _ from 'lodash';
 import _fp from 'lodash/fp';
 
-import { getKokeetTaiLisanaytotData } from '#/src/utils/form/getKokeetTaiLisanaytotData';
-import { getHakulomakeFieldsData } from '#/src/utils/form/getHakulomakeFieldsData';
-import { maybeParseNumber } from '#/src/utils';
 import { serializeEditorState } from '#/src/components/Editor/utils';
 import { LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
 import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
+import { maybeParseNumber } from '#/src/utils';
 import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
+import { getHakulomakeFieldsData } from '#/src/utils/form/getHakulomakeFieldsData';
+import { getKokeetTaiLisanaytotData } from '#/src/utils/form/getKokeetTaiLisanaytotData';
 
 const getKielivalinta = values => values?.kieliversiot || [];
 

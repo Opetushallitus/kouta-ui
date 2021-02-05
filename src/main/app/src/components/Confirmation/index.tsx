@@ -1,15 +1,17 @@
 import React, { useCallback } from 'react';
+
+import { noop, isString } from 'lodash';
 import { setLightness } from 'polished';
 import styled, { css } from 'styled-components';
-import { noop, isString } from 'lodash';
-import { getThemeProp, spacing } from '#/src/theme';
-import { createChainedFunction } from '#/src/utils';
+
+import Flex, { FlexItem } from '#/src/components/Flex';
 import {
   Dropdown,
   DropdownMenu,
   Typography,
 } from '#/src/components/virkailija';
-import Flex, { FlexItem } from '#/src/components/Flex';
+import { getThemeProp, spacing } from '#/src/theme';
+import { createChainedFunction } from '#/src/utils';
 
 const Wrapper = styled.div`
   overflow: hidden;

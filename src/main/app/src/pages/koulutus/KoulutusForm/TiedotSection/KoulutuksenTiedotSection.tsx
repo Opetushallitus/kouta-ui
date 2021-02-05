@@ -1,30 +1,32 @@
 import React, { useMemo, useEffect } from 'react';
+
 import _ from 'lodash';
+import { useTranslation } from 'react-i18next';
+import { usePrevious } from 'react-use';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
 import { Grid, Cell } from 'styled-css-grid';
-import { useTranslation } from 'react-i18next';
-import { usePrevious } from 'react-use';
 
-import { useKoulutusByKoodi } from '#/src/utils/koulutus/getKoulutusByKoodi';
+import Anchor from '#/src/components/Anchor';
+import { FormFieldSelect } from '#/src/components/formFields';
+import KoulutusField from '#/src/components/KoulutusField';
+import { Box, Typography, Spin } from '#/src/components/virkailija';
+import { useUrls } from '#/src/contexts/contextHooks';
+import { useBoundFormActions, useIsDirty } from '#/src/hooks/form';
+import { useFieldValue } from '#/src/hooks/form';
 import { getReadableDateTime, getTestIdProps } from '#/src/utils';
-import { getLanguageValue } from '#/src/utils/languageUtils';
 import {
   getEPerusteStatus,
   getEPerusteStatusCss,
 } from '#/src/utils/ePeruste/ePerusteStatus';
-import { useBoundFormActions, useIsDirty } from '#/src/hooks/form';
-import Anchor from '#/src/components/Anchor';
-import { Box, Typography, Spin } from '#/src/components/virkailija';
-import { FormFieldSelect } from '#/src/components/formFields';
-import { useFieldValue } from '#/src/hooks/form';
-import { useUrls } from '#/src/contexts/contextHooks';
-import KoulutusField from '#/src/components/KoulutusField';
+import { useKoulutusByKoodi } from '#/src/utils/koulutus/getKoulutusByKoodi';
+import { useTutkinnonOsienKuvaukset } from '#/src/utils/koulutus/getTutkinnonOsanKuvaus';
+import { getLanguageValue } from '#/src/utils/languageUtils';
+
 import {
   InfoBoxGrid,
   StyledInfoBox,
 } from '../KoulutuksenEPerusteTiedot/InfoBox';
-import { useTutkinnonOsienKuvaukset } from '#/src/utils/koulutus/getTutkinnonOsanKuvaus';
 
 const getListNimiLanguageValues = (list = [], language) =>
   list

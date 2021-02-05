@@ -1,12 +1,13 @@
 import React, { useMemo, Fragment } from 'react';
-import { Field } from 'redux-form';
-import { useTranslation } from 'react-i18next';
 
+import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
+
+import DividerHeading from '#/src/components/DividerHeading';
 import { FormFieldEditor, FormFieldSelect } from '#/src/components/formFields';
+import { Typography } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
-import DividerHeading from '#/src/components/DividerHeading';
-import { Typography } from '#/src/components/virkailija';
 
 export const TietoaOpiskelustaSection = ({ name, language }) => {
   const { t } = useTranslation();

@@ -1,10 +1,12 @@
 import React from 'react';
+
 import { useTranslation } from 'react-i18next';
+
+import StyledSectionHTML from '#/src/components/StyledSectionHTML';
 import { Box, Typography } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
 import { useEPerusteOsaamisalaKuvaukset } from '#/src/utils/ePeruste/getOsaamisalakuvauksetByEPerusteId';
 import { getLanguageValue } from '#/src/utils/languageUtils';
-import StyledSectionHTML from '#/src/components/StyledSectionHTML';
 
 export const OsaamisalanKuvausSection = ({ disabled, language, name }) => {
   const { t } = useTranslation();

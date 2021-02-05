@@ -1,6 +1,7 @@
-import _fp from 'lodash/fp';
-import { useApiQuery } from '#/src/hooks/useApiQuery';
 import { isBefore, parseISO, endOfToday } from 'date-fns';
+import _fp from 'lodash/fp';
+
+import { useApiQuery } from '#/src/hooks/useApiQuery';
 
 const isValidKoulutusKoodi = ({ koodisto, voimassaLoppuPvm }) =>
   koodisto?.koodistoUri === 'koulutus' &&

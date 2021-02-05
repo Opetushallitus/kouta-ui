@@ -1,15 +1,16 @@
 import { useCallback } from 'react';
+
 import DataLoader from 'dataloader';
 import { cond, first, uniqBy } from 'lodash';
 
-import { memoize } from '#/src/utils/memoize';
-import useApiAsync from '#/src/hooks/useApiAsync';
-import getOrganisaatiotByOids from '#/src/utils/organisaatio/getOrganisaatiotByOids';
-import useAuthorizedUser from '#/src/hooks/useAuthorizedUser';
-import getUserRoles from '#/src/utils/getUserRoles';
-import getUserOrganisaatiotWithRoles from '#/src/utils/getUserOrganisaatiotWithRoles';
-import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { useUrls, useHttpClient } from '#/src/contexts/contextHooks';
+import useApiAsync from '#/src/hooks/useApiAsync';
+import useAuthorizedUser from '#/src/hooks/useAuthorizedUser';
+import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
+import getUserOrganisaatiotWithRoles from '#/src/utils/getUserOrganisaatiotWithRoles';
+import getUserRoles from '#/src/utils/getUserRoles';
+import { memoize } from '#/src/utils/memoize';
+import getOrganisaatiotByOids from '#/src/utils/organisaatio/getOrganisaatiotByOids';
 
 const getOrganisaatioLoader = memoize((httpClient, apiUrls) => {
   return new DataLoader(oids =>

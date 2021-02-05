@@ -1,13 +1,14 @@
 import React, { useCallback } from 'react';
+
 import { useHistory } from 'react-router-dom';
 
-import { useSaveForm } from '#/src/hooks/formSaveHooks';
-import validateOppilaitosForm from '#/src/utils/oppilaitos/validateOppilaitosForm';
-import createOppilaitos from '#/src/utils/oppilaitos/createOppilaitos';
-import updateOppilaitos from '#/src/utils/oppilaitos/updateOppilaitos';
-import getOppilaitosByFormValues from '#/src/utils/oppilaitos/getOppilaitosByFormValues';
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY } from '#/src/constants';
+import { useSaveForm } from '#/src/hooks/formSaveHooks';
+import createOppilaitos from '#/src/utils/oppilaitos/createOppilaitos';
+import getOppilaitosByFormValues from '#/src/utils/oppilaitos/getOppilaitosByFormValues';
+import updateOppilaitos from '#/src/utils/oppilaitos/updateOppilaitos';
+import validateOppilaitosForm from '#/src/utils/oppilaitos/validateOppilaitosForm';
 
 const OppilaitosPageFooter = ({ oppilaitos, organisaatioOid, readOnly }) => {
   const history = useHistory();

@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { useTranslation } from 'react-i18next';
+
 import IconButton from '#/src/components/IconButton';
 
 export default function RemoveButton({ children = undefined, ...props }) {

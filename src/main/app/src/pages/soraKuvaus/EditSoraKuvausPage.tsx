@@ -1,23 +1,25 @@
 import React, { useMemo } from 'react';
+
 import { useTranslation } from 'react-i18next';
 
-import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
+import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
 } from '#/src/components/FormPage';
-import { Spin } from '#/src/components/virkailija';
-import Title from '#/src/components/Title';
-import ReduxForm from '#/src/components/ReduxForm';
-import getFormValuesBySoraKuvaus from '#/src/utils/soraKuvaus/getFormValuesBySoraKuvaus';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
-import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormSteps from '#/src/components/FormSteps';
+import ReduxForm from '#/src/components/ReduxForm';
+import Title from '#/src/components/Title';
+import { Spin } from '#/src/components/virkailija';
+import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
+import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useEntityFormConfig } from '#/src/hooks/form';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
-import SoraKuvausForm from './SoraKuvausForm';
-import { SoraKuvausFooter } from './SoraKuvausFooter';
+import getFormValuesBySoraKuvaus from '#/src/utils/soraKuvaus/getFormValuesBySoraKuvaus';
 import { useSoraKuvausById } from '#/src/utils/soraKuvaus/getSoraKuvausById';
+
+import { SoraKuvausFooter } from './SoraKuvausFooter';
+import SoraKuvausForm from './SoraKuvausForm';
 
 const EditSoraKuvausPage = props => {
   const {

@@ -1,17 +1,20 @@
 import { useMemo, useCallback } from 'react';
+
 import { isString, isArray, uniq } from 'lodash';
-import getOrganisaatioHierarkia from '#/src/utils/organisaatio/getOrganisaatioHierarkia';
+
 import useApiAsync from '#/src/hooks/useApiAsync';
-import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
-import { createCanReadSomethingRoleBuilder } from '../utils';
 import useAuthorizedUser from '#/src/hooks/useAuthorizedUser';
-import getUserRoles from '#/src/utils/getUserRoles';
-import getRoleOrganisaatioOid from '#/src/utils/getRoleOrganisaatioOid';
+import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
 import useLanguage from '#/src/hooks/useLanguage';
+import getRoleOrganisaatioOid from '#/src/utils/getRoleOrganisaatioOid';
+import getUserRoles from '#/src/utils/getUserRoles';
+import getOrganisaatioHierarkia from '#/src/utils/organisaatio/getOrganisaatioHierarkia';
 import {
   filterByName,
   flatFilterHierarkia,
 } from '#/src/utils/organisaatio/hierarkiaHelpers';
+
+import { createCanReadSomethingRoleBuilder } from '../utils';
 
 const getRolesOrganisaatioOids = roles => {
   return uniq(roles.map(getRoleOrganisaatioOid).filter(Boolean));

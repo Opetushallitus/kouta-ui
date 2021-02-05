@@ -1,7 +1,8 @@
-import { Machine, interpret, assign, spawn, forwardTo } from 'xstate';
 import { useService } from '@xstate/react';
-import { useTranslation } from 'react-i18next';
 import _ from 'lodash/fp';
+import { useTranslation } from 'react-i18next';
+import { Machine, interpret, assign, spawn, forwardTo } from 'xstate';
+
 import { isDev } from '#/src/utils';
 
 const DEFAULT_TOAST_DURATION = 5000;

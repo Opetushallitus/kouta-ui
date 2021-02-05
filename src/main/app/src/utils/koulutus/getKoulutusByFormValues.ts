@@ -1,10 +1,11 @@
 import _fp from 'lodash/fp';
+
+import { serializeEditorState } from '#/src/components/Editor/utils';
 import {
   KOULUTUSTYYPPI,
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
 } from '#/src/constants';
 import { maybeParseNumber } from '#/src/utils';
-import { serializeEditorState } from '#/src/components/Editor/utils';
 
 const osaamisalaKoodiToKoodiUri = value =>
   value ? `osaamisala_${value}` : null;

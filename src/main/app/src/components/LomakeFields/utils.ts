@@ -1,9 +1,11 @@
 import { useMemo } from 'react';
+
 import { isFunction, isString } from 'lodash';
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
+
 import { HAKULOMAKETYYPPI } from '#/src/constants';
-import { getHakemuspalveluLomakkeet } from '#/src/utils/api/getHakemuspalveluLomakkeet';
 import useApiAsync from '#/src/hooks/useApiAsync';
+import { getHakemuspalveluLomakkeet } from '#/src/utils/api/getHakemuspalveluLomakkeet';
+import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 const tyyppiToLabel = {
   [HAKULOMAKETYYPPI.ATARU]: 'hakulomakeValinnat.ataru',

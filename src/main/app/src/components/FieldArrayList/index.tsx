@@ -1,12 +1,14 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+
 import { get, isNil } from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { spacing, getThemeProp } from '#/src/theme';
+import styled, { css } from 'styled-components';
+
 import Flex, { FlexItem } from '#/src/components/Flex';
-import { FormControl } from '#/src/components/virkailija';
 import FormHelperTextMulti from '#/src/components/FormHelperTextMulti';
 import RemoveButton from '#/src/components/RemoveButton';
+import { FormControl } from '#/src/components/virkailija';
+import { spacing, getThemeProp } from '#/src/theme';
 
 const Item = styled.div`
   padding-bottom: ${spacing(4)};

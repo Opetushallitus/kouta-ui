@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import _ from 'lodash';
+
 import { produce } from 'immer';
+import _ from 'lodash';
+
+import { FormCollapseProps } from '#/src/components/FormCollapse';
 import { Box } from '#/src/components/virkailija';
 import { useFormConfig, useForm } from '#/src/hooks/form';
 import scrollElementIntoView from '#/src/utils/scrollElementIntoView';
-import { FormCollapseProps } from '#/src/components/FormCollapse';
 
 const getVisibleChildren = (children, config, configured) => {
   return React.Children.toArray(children).filter(c => {

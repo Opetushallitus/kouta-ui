@@ -1,22 +1,23 @@
 import React, { useMemo } from 'react';
-import { Field } from 'redux-form';
+
 import _ from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
 import styled, { css } from 'styled-components';
 
-import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import {
   createFormFieldComponent,
   simpleMapProps,
 } from '#/src/components/formFields';
+import { Radio } from '#/src/components/virkailija';
 import { CRUD_ROLES, ENTITY, ORGANISAATIOTYYPPI } from '#/src/constants';
-import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
+import { useGetCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
+import useLanguage from '#/src/hooks/useLanguage';
+import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-import useLanguage from '#/src/hooks/useLanguage';
-import { Radio } from '#/src/components/virkailija';
-import { useGetCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { flattenHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
+import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
 const JARJESTYSPAIKATTOMAT_OPETUSTAVAT = [
   'opetuspaikkakk_2#1', // Verkko

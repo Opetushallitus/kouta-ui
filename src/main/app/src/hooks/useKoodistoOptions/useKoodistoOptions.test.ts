@@ -1,4 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
+
 import { useKoodistoDataOptions } from './index';
 
 test('useKoodistoDataOptions should return array of select options sorted by label for simple koodisto', () => {

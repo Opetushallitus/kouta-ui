@@ -1,5 +1,6 @@
-import getHakukohdeFormConfig from './getHakukohdeFormConfig';
 import getErrorBuilderByFormConfig from '#/src/utils/form/getErrorBuilderByFormConfig';
+
+import getHakukohdeFormConfig from './getHakukohdeFormConfig';
 
 const validateHakukohdeForm = values => {
   return getErrorBuilderByFormConfig(

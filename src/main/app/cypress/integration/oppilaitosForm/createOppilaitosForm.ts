@@ -1,3 +1,4 @@
+import { stubOppilaitosFormRoutes } from '#/cypress/oppilaitosFormUtils';
 import {
   fillAsyncSelect,
   selectOption,
@@ -9,8 +10,6 @@ import {
   fillTilaSection,
   tallenna,
 } from '#/cypress/utils';
-
-import { stubOppilaitosFormRoutes } from '#/cypress/oppilaitosFormUtils';
 
 const fillPerustiedotSection = () => {
   getByTestId('perustiedotSection').within(() => {

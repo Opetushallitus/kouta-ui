@@ -5,6 +5,7 @@ import {
   stubOppijanumerorekisteriHenkiloRoute,
   stubCommonRoutes,
 } from '#/cypress/utils';
+
 import organisaatioHierarkia from './data/organisaatioHierarkia';
 
 export const stubSoraKuvausFormRoutes = ({ organisaatioOid }) => {

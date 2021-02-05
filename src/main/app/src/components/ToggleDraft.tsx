@@ -1,9 +1,12 @@
 import React from 'react';
+
 import { useTranslation } from 'react-i18next';
-import { useFieldValue } from '#/src/hooks/form';
-import { FormFieldCheckbox } from './formFields';
 import { Field } from 'redux-form';
+
+import { useFieldValue } from '#/src/hooks/form';
+
 import { useIsOphVirkailija } from '../hooks/useIsOphVirkailija';
+import { FormFieldCheckbox } from './formFields';
 
 export const ToggleDraft = () => {
   const { t } = useTranslation();

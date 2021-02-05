@@ -1,11 +1,12 @@
 import React from 'react';
+
 import { get } from 'lodash';
 
+import FormEditInfo from '#/src/components/FormEditInfo';
 import FormHeader from '#/src/components/FormHeader';
 import StatusTag from '#/src/components/StatusTag';
-import FormEditInfo from '#/src/components/FormEditInfo';
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import useLanguage from '#/src/hooks/useLanguage';
+import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 const OppilaitoksenOsaPageHeader = ({ oppilaitos, organisaatio }) => {
   const language = useLanguage();

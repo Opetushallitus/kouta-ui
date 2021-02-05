@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+
 import { isFunction, isString, isArray } from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { getTestIdProps } from '#/src/utils';
-import Collapse from '#/src/components/Collapse';
+import styled from 'styled-components';
+
 import Button from '#/src/components/Button';
+import Collapse from '#/src/components/Collapse';
 import { Box, Typography } from '#/src/components/virkailija';
 import FormConfigSectionContext from '#/src/contexts/FormConfigSectionContext';
+import { getTestIdProps } from '#/src/utils';
+
 import LanguageTabs from './LanguageTabs';
 
 const HeaderWrapper = styled.div`

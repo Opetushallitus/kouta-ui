@@ -1,7 +1,10 @@
-import { storiesOf } from '@storybook/react';
 import React from 'react';
+
+import { storiesOf } from '@storybook/react';
 import { reduxForm } from 'redux-form';
+
 import { makeStoreDecorator } from '#/src/storybookUtils';
+
 import { SisaltoFields } from '.';
 
 const StoryForm = reduxForm({

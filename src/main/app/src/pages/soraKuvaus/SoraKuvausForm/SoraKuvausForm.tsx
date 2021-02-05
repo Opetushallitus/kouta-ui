@@ -1,15 +1,17 @@
 import React from 'react';
+
 import { useTranslation } from 'react-i18next';
 
+import FormCollapse from '#/src/components/FormCollapse';
+import FormCollapseGroup from '#/src/components/FormCollapseGroup';
+import JulkaisutilaField from '#/src/components/JulkaisutilaField';
+import KieliversiotFields from '#/src/components/KieliversiotFields';
+import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import { useFieldValue } from '#/src/hooks/form';
 import getSoraKuvaukset from '#/src/utils/soraKuvaus/getSoraKuvaukset';
-import FormCollapseGroup from '#/src/components/FormCollapseGroup';
-import FormCollapse from '#/src/components/FormCollapse';
-import JulkaisutilaField from '#/src/components/JulkaisutilaField';
-import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
+
 import KoulutustyyppiSection from './KoulutustyyppiSection';
 import TiedotSection from './TiedotSection';
-import KieliversiotFields from '#/src/components/KieliversiotFields';
 
 const SoraKuvausForm = ({
   steps = false,

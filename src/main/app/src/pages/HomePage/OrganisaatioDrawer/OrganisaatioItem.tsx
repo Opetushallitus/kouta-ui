@@ -1,13 +1,14 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
-import { Link } from 'react-router-dom';
+
 import { isEmpty, noop } from 'lodash';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import styled, { css } from 'styled-components';
 
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import { Box, Radio, Icon, Typography } from '#/src/components/virkailija';
-import { getThemeProp } from '#/src/theme';
 import { disabledStyle } from '#/src/system';
+import { getThemeProp } from '#/src/theme';
+import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 const FavouriteIconBase = styled(Icon)`
   color: ${getThemeProp('palette.text.primary')};

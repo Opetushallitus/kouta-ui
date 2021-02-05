@@ -1,9 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
-import { useTranslation } from 'react-i18next';
 
-import { ENTITY, ICONS } from '#/src/constants';
+import { useTranslation } from 'react-i18next';
+import styled from 'styled-components';
+
 import FormStepIcon from '#/src/components/FormStepIcon';
+import { ENTITY, ICONS } from '#/src/constants';
 
 const {
   KOULUTUS,

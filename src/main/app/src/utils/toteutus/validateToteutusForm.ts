@@ -1,5 +1,6 @@
-import getToteutusFormConfig from './getToteutusFormConfig';
 import getErrorBuilderByFormConfig from '#/src/utils/form/getErrorBuilderByFormConfig';
+
+import getToteutusFormConfig from './getToteutusFormConfig';
 
 const validateToteutusForm = values => {
   const { koulutustyyppi } = values;

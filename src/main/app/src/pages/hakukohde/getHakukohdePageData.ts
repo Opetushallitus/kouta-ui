@@ -1,7 +1,7 @@
-import getHakuByOid from '#/src/utils/haku/getHakuByOid';
-import getToteutusByOid from '#/src/utils/toteutus/getToteutusByOid';
-import getKoulutustyyppiByKoulutusOid from '#/src/utils/koulutus/getKoulutustyyppiByKoulutusOid';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
+import getHakuByOid from '#/src/utils/haku/getHakuByOid';
+import getKoulutustyyppiByKoulutusOid from '#/src/utils/koulutus/getKoulutustyyppiByKoulutusOid';
+import getToteutusByOid from '#/src/utils/toteutus/getToteutusByOid';
 
 export const getHakukohdePageData = async ({
   hakuOid,

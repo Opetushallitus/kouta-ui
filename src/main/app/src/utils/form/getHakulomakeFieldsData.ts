@@ -1,6 +1,7 @@
 import _ from 'lodash';
-import { HAKULOMAKETYYPPI } from '#/src/constants';
+
 import { serializeEditorState } from '#/src/components/Editor/utils';
+import { HAKULOMAKETYYPPI } from '#/src/constants';
 
 export const getHakulomakeFieldsData = ({ hakulomakeValues, kielivalinta }) => {
   const hakulomaketyyppi = _.get(hakulomakeValues, 'tyyppi') || null;

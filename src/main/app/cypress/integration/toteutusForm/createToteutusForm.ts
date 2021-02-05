@@ -1,7 +1,9 @@
-import _fp from 'lodash/fp';
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
-import toteutusMocks from '#/cypress/mocks/toteutus.mocks.json';
+import _fp from 'lodash/fp';
 
+import koulutus from '#/cypress/data/koulutus';
+import toteutusMocks from '#/cypress/mocks/toteutus.mocks.json';
+import { stubToteutusFormRoutes } from '#/cypress/toteutusFormUtils';
 import {
   getRadio,
   getSelectOption,
@@ -21,9 +23,6 @@ import {
   fillYhteyshenkilotFields,
   fillAjankohtaFields,
 } from '#/cypress/utils';
-
-import koulutus from '#/cypress/data/koulutus';
-import { stubToteutusFormRoutes } from '#/cypress/toteutusFormUtils';
 import { Alkamiskausityyppi } from '#/src/constants';
 
 const fillOpetuskieli = (chosenNumber = '0') => {

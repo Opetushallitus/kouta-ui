@@ -1,6 +1,7 @@
 import { isNil } from 'lodash';
-import { css } from 'styled-components';
 import { setLightness } from 'polished';
+import { css } from 'styled-components';
+
 import {
   EPERUSTE_STATUS_TULEVA,
   EPERUSTE_STATUS_VOIMASSA,

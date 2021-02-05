@@ -1,32 +1,33 @@
 import React, { useMemo } from 'react';
-import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+
 import debounce from 'debounce-promise';
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
-import { ENTITY, ICONS } from '#/src/constants';
-import { getTestIdProps } from '#/src/utils';
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-
-import searchKoulutukset from '#/src/utils/koulutus/searchKoulutukset';
 import Anchor from '#/src/components/Anchor';
-import Button from '#/src/components/Button';
-import Pagination from '#/src/components/Pagination';
-import Flex from '#/src/components/Flex';
-import Spacing from '#/src/components/Spacing';
-import useApiAsync from '#/src/hooks/useApiAsync';
 import Badge from '#/src/components/Badge';
+import Button from '#/src/components/Button';
 import ErrorAlert from '#/src/components/ErrorAlert';
+import Flex from '#/src/components/Flex';
+import ListSpin from '#/src/components/ListSpin';
 import ListTable, {
   makeModifiedColumn,
   makeMuokkaajaColumn,
   makeTilaColumn,
 } from '#/src/components/ListTable';
-import ListSpin from '#/src/components/ListSpin';
-import { getIndexParamsByFilters } from './utils';
+import Pagination from '#/src/components/Pagination';
+import Spacing from '#/src/components/Spacing';
+import { ENTITY, ICONS } from '#/src/constants';
+import useApiAsync from '#/src/hooks/useApiAsync';
+import { getTestIdProps } from '#/src/utils';
+import searchKoulutukset from '#/src/utils/koulutus/searchKoulutukset';
+import { getFirstLanguageValue } from '#/src/utils/languageUtils';
+
 import Filters from './Filters';
-import NavigationAnchor from './NavigationAnchor';
 import ListCollapse from './ListCollapse';
+import NavigationAnchor from './NavigationAnchor';
 import useFilterState from './useFilterState';
+import { getIndexParamsByFilters } from './utils';
 
 const { KOULUTUS } = ENTITY;
 

@@ -1,30 +1,31 @@
 import React, { useMemo, useCallback } from 'react';
+
+import _ from 'lodash';
 import qs from 'query-string';
 import { useTranslation } from 'react-i18next';
 
-import { POHJAVALINTA, ENTITY } from '#/src/constants';
-import { useSaveForm } from '#/src/hooks/formSaveHooks';
-import validateKoulutusForm from '#/src/utils/koulutus/validateKoulutusForm';
-import getFormValuesByKoulutus from '#/src/utils/koulutus/getFormValuesByKoulutus';
-import getKoulutusByFormValues from '#/src/utils/koulutus/getKoulutusByFormValues';
-import getKoulutusByOid from '#/src/utils/koulutus/getKoulutusByOid';
-import createKoulutus from '#/src/utils/koulutus/createKoulutus';
-
+import FormHeader from '#/src/components/FormHeader';
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
   FormFooter,
 } from '#/src/components/FormPage';
-import ReduxForm from '#/src/components/ReduxForm';
-import FormHeader from '#/src/components/FormHeader';
-import Title from '#/src/components/Title';
-import KoulutusForm, { initialValues } from '../KoulutusForm';
 import FormSteps from '#/src/components/FormSteps';
-import useSelectBase from '#/src/hooks/useSelectBase';
-import useApiAsync from '#/src/hooks/useApiAsync';
+import ReduxForm from '#/src/components/ReduxForm';
+import Title from '#/src/components/Title';
+import { POHJAVALINTA, ENTITY } from '#/src/constants';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useFieldValue, useEntityFormConfig } from '#/src/hooks/form';
-import _ from 'lodash';
+import { useSaveForm } from '#/src/hooks/formSaveHooks';
+import useApiAsync from '#/src/hooks/useApiAsync';
+import useSelectBase from '#/src/hooks/useSelectBase';
+import createKoulutus from '#/src/utils/koulutus/createKoulutus';
+import getFormValuesByKoulutus from '#/src/utils/koulutus/getFormValuesByKoulutus';
+import getKoulutusByFormValues from '#/src/utils/koulutus/getKoulutusByFormValues';
+import getKoulutusByOid from '#/src/utils/koulutus/getKoulutusByOid';
+import validateKoulutusForm from '#/src/utils/koulutus/validateKoulutusForm';
+
+import KoulutusForm, { initialValues } from '../KoulutusForm';
 
 const resolveFn = () => Promise.resolve();
 const getCopyValues = koulutus => ({

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
+
 import _ from 'lodash/fp';
-import useKoodi from '#/src/hooks/useKoodi';
+
 import {
   useBoundFormActions,
   useIsDirty,
@@ -8,6 +9,7 @@ import {
   useSelectedLanguages,
 } from '#/src/hooks/form';
 import { useHasChanged } from '#/src/hooks/useHasChanged';
+import useKoodi from '#/src/hooks/useKoodi';
 
 export const useLocalizedKoulutus = ({
   koulutusFieldName,

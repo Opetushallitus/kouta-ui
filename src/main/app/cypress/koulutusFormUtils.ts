@@ -1,11 +1,11 @@
 import { merge } from 'lodash';
 
+import organisaatio from '#/cypress/data/organisaatio';
+import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
 import {
   stubOppijanumerorekisteriHenkiloRoute,
   stubCommonRoutes,
 } from '#/cypress/utils';
-import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
-import organisaatio from '#/cypress/data/organisaatio';
 
 export const stubKoulutusFormRoutes = ({ organisaatioOid }) => {
   stubCommonRoutes();

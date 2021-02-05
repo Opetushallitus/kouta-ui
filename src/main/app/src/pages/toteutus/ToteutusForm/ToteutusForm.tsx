@@ -1,35 +1,37 @@
 import React from 'react';
+
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 
-import getToteutukset from '#/src/utils/toteutus/getToteutukset';
-import FormCollapse from '#/src/components/FormCollapse';
-import KieliversiotFields from '#/src/components/KieliversiotFields';
-import OsaamisalatSection from './OsaamisalatSection';
-import JarjestamispaikatSection from './JarjestamispaikatSection';
-import { JarjestamisTiedotSection } from './JarjestamisTiedotSection';
-import NayttamisTiedotSection from './NayttamisTiedotSection';
-import FormCollapseGroup from '#/src/components/FormCollapseGroup';
-import { HakukohteetSection } from './HakukohteetSection';
-import { getTestIdProps } from '#/src/utils';
-import HakukohteetModal from './HakukohteetModal';
-import Flex from '#/src/components/Flex';
 import Button from '#/src/components/Button';
-import KorkeakouluOsaamisalatSection from './KorkeakouluOsaamisalatSection';
-import { YhteyshenkilotSection } from './YhteyshenkilotSection';
+import Flex from '#/src/components/Flex';
+import FormCollapse from '#/src/components/FormCollapse';
+import FormCollapseGroup from '#/src/components/FormCollapseGroup';
+import JulkaisutilaField from '#/src/components/JulkaisutilaField';
+import KieliversiotFields from '#/src/components/KieliversiotFields';
+import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
+import SoraKuvausSection from '#/src/components/SoraKuvausSection';
+import TeemakuvaSection from '#/src/components/TeemakuvaSection';
 import { KOULUTUSTYYPPI, HAKULOMAKETYYPPI } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import useModal from '#/src/hooks/useModal';
+import { ToteutusModel } from '#/src/types/toteutusTypes';
+import { getTestIdProps } from '#/src/utils';
+import getToteutukset from '#/src/utils/toteutus/getToteutukset';
+
+import HakeutumisTaiIlmoittautumistapaSection from './HakeutumisTaiIlmoittautumistapaSection';
+import HakukohteetModal from './HakukohteetModal';
+import { HakukohteetSection } from './HakukohteetSection';
+import JarjestamispaikatSection from './JarjestamispaikatSection';
+import { JarjestamisTiedotSection } from './JarjestamisTiedotSection';
+import KorkeakouluOsaamisalatSection from './KorkeakouluOsaamisalatSection';
+import KuvausSection from './KuvausSection';
 import LukiolinjatSection from './LukiolinjatSection';
-import JulkaisutilaField from '#/src/components/JulkaisutilaField';
+import NayttamisTiedotSection from './NayttamisTiedotSection';
+import OsaamisalatSection from './OsaamisalatSection';
 import TiedotSection from './TiedotSection';
 import ToteutusjaksotSection from './ToteutusjaksotSection';
-import TeemakuvaSection from '#/src/components/TeemakuvaSection';
-import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
-import HakeutumisTaiIlmoittautumistapaSection from './HakeutumisTaiIlmoittautumistapaSection';
-import SoraKuvausSection from '#/src/components/SoraKuvausSection';
-import { ToteutusModel } from '#/src/types/toteutusTypes';
-import KuvausSection from './KuvausSection';
+import { YhteyshenkilotSection } from './YhteyshenkilotSection';
 
 const { ATARU, MUU } = HAKULOMAKETYYPPI;
 

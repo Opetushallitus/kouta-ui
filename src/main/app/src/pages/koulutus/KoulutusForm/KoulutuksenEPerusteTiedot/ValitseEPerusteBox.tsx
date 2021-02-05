@@ -1,25 +1,28 @@
 import React, { useMemo, useEffect } from 'react';
+
 import _ from 'lodash';
-import { Grid, Cell } from 'styled-css-grid';
-import styled from 'styled-components';
-import { Field } from 'redux-form';
 import { useTranslation } from 'react-i18next';
-import { Box, Spin } from '#/src/components/virkailija';
+import { Field } from 'redux-form';
+import styled from 'styled-components';
+import { Grid, Cell } from 'styled-css-grid';
+
 import Anchor from '#/src/components/Anchor';
-import {
-  getEPerusteStatusCss,
-  getEPerusteStatus,
-} from '#/src/utils/ePeruste/ePerusteStatus';
-import { getLanguageValue } from '#/src/utils/languageUtils';
-import { getTestIdProps, getReadableDateTime } from '#/src/utils';
+import { FormFieldSelect } from '#/src/components/formFields';
+import { Box, Spin } from '#/src/components/virkailija';
+import { useUrls } from '#/src/contexts/contextHooks';
 import {
   useFieldValue,
   useBoundFormActions,
   useIsDirty,
 } from '#/src/hooks/form';
-import { useUrls } from '#/src/contexts/contextHooks';
-import { FormFieldSelect } from '#/src/components/formFields';
 import { useHasChanged } from '#/src/hooks/useHasChanged';
+import { getTestIdProps, getReadableDateTime } from '#/src/utils';
+import {
+  getEPerusteStatusCss,
+  getEPerusteStatus,
+} from '#/src/utils/ePeruste/ePerusteStatus';
+import { getLanguageValue } from '#/src/utils/languageUtils';
+
 import { InfoBoxGrid, StyledInfoBox } from './InfoBox';
 
 const getListNimiLanguageValues = (list = [], language) =>

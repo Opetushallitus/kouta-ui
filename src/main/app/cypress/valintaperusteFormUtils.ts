@@ -1,15 +1,15 @@
-import { merge } from 'lodash';
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
+import { merge } from 'lodash';
+
 import valintaperusteMocks from '#/cypress/mocks/valintaperuste.mock.json';
 
+import organisaatio from './data/organisaatio';
+import organisaatioHierarkia from './data/organisaatioHierarkia';
+import soraKuvaus from './data/soraKuvaus';
 import {
   stubOppijanumerorekisteriHenkiloRoute,
   stubCommonRoutes,
 } from './utils';
-
-import organisaatio from './data/organisaatio';
-import soraKuvaus from './data/soraKuvaus';
-import organisaatioHierarkia from './data/organisaatioHierarkia';
 
 export const stubValintaperusteFormRoutes = ({ organisaatioOid }) => {
   playMocks(valintaperusteMocks);

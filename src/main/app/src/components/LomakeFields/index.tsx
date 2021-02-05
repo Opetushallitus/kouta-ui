@@ -1,27 +1,28 @@
 import React, { useMemo } from 'react';
-import { Field } from 'redux-form';
+
 import { isFunction } from 'lodash';
 import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
 import styled from 'styled-components';
+
+import Button from '#/src/components/Button';
+import Flex, { FlexItem } from '#/src/components/Flex';
 import {
   FormFieldSelect,
   FormFieldInput,
   FormFieldRadioGroup,
   FormFieldEditor,
 } from '#/src/components/formFields';
-
-import { HAKULOMAKETYYPPI } from '#/src/constants';
 import Spacing from '#/src/components/Spacing';
+import { HAKULOMAKETYYPPI } from '#/src/constants';
+import { useUrls } from '#/src/contexts/contextHooks';
 import useLanguage from '#/src/hooks/useLanguage';
-import Flex, { FlexItem } from '#/src/components/Flex';
-import Button from '#/src/components/Button';
 
 import {
   createEnhancedGetTyyppiLabel,
   createEnhancedGetTyyppiShowUrl,
   useLomakeOptions,
 } from './utils';
-import { useUrls } from '#/src/contexts/contextHooks';
 
 const Buttons = styled.div`
   display: flex;

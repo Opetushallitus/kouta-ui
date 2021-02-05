@@ -1,18 +1,21 @@
 import React from 'react';
-import { KOULUTUSTYYPPI } from '#/src/constants';
+
+import { useTranslation } from 'react-i18next';
+
 import FormCollapse from '#/src/components/FormCollapse';
+import FormCollapseGroup from '#/src/components/FormCollapseGroup';
+import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
 import KokeetTaiLisanaytotSection from '#/src/components/KokeetTaiLisanaytotSection';
-import FormCollapseGroup from '#/src/components/FormCollapseGroup';
+import { KOULUTUSTYYPPI } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
+
+import AloituspaikatSection from './AloituspaikatSection';
+import JarjestyspaikkaSection from './JarjestyspaikkaSection';
+import KuvausSection from './KuvausSection';
+import LiitteetSection from './LiitteetSection';
 import PerustiedotSection from './PerustiedotSection';
 import PohjakoulutusSection from './PohjakoulutusSection';
-import AloituspaikatSection from './AloituspaikatSection';
-import LiitteetSection from './LiitteetSection';
-import KuvausSection from './KuvausSection';
-import { useTranslation } from 'react-i18next';
-import JulkaisutilaField from '#/src/components/JulkaisutilaField';
-import JarjestyspaikkaSection from './JarjestyspaikkaSection';
 
 const HakukohdeForm = ({
   steps = true,

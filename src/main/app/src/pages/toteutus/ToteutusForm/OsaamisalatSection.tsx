@@ -1,30 +1,31 @@
 import React, { useMemo } from 'react';
-import { Field } from 'redux-form';
-import styled from 'styled-components';
+
 import { get, isEmpty, isString, mapValues } from 'lodash';
 import { Trans, useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
+import styled from 'styled-components';
 
+import AbstractCollapse from '#/src/components/AbstractCollapse';
+import Anchor from '#/src/components/Anchor';
 import FieldGroup from '#/src/components/FieldGroup';
-import { getOsaamisalakuvauksetByEPerusteId } from '#/src/utils/ePeruste/getOsaamisalakuvauksetByEPerusteId';
-import { getEPerusteById } from '#/src/utils/ePeruste/getEPerusteById';
-import { getThemeProp } from '#/src/theme';
-import { getTestIdProps } from '#/src/utils';
-import { getLanguageValue } from '#/src/utils/languageUtils';
-import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
-import { sanitizeHTML } from '#/src/utils';
 import {
   FormFieldInput,
   FormFieldCheckboxGroup,
 } from '#/src/components/formFields';
-import Anchor from '#/src/components/Anchor';
-import AbstractCollapse from '#/src/components/AbstractCollapse';
-import { Divider, Icon, Typography, Spin } from '#/src/components/virkailija';
 import LocalLink from '#/src/components/LocalLink';
 import Spacing from '#/src/components/Spacing';
+import StyledSectionHTML from '#/src/components/StyledSectionHTML';
+import { Divider, Icon, Typography, Spin } from '#/src/components/virkailija';
 import { useUrls } from '#/src/contexts/contextHooks';
 import { useFieldValue } from '#/src/hooks/form';
 import useApiAsync from '#/src/hooks/useApiAsync';
-import StyledSectionHTML from '#/src/components/StyledSectionHTML';
+import { getThemeProp } from '#/src/theme';
+import { sanitizeHTML } from '#/src/utils';
+import { getTestIdProps } from '#/src/utils';
+import { getEPerusteById } from '#/src/utils/ePeruste/getEPerusteById';
+import { getOsaamisalakuvauksetByEPerusteId } from '#/src/utils/ePeruste/getOsaamisalakuvauksetByEPerusteId';
+import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
+import { getLanguageValue } from '#/src/utils/languageUtils';
 
 const Container = styled.div`
   display: flex;

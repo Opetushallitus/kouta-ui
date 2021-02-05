@@ -1,6 +1,7 @@
 import React from 'react';
-import { Field } from 'redux-form';
+
 import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
 
 import { FormFieldEditor, FormFieldInput } from '#/src/components/formFields';
 import Spacing from '#/src/components/Spacing';

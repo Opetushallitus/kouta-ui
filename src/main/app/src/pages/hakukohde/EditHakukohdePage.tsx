@@ -1,25 +1,28 @@
 import React, { useMemo } from 'react';
+
 import { useTranslation } from 'react-i18next';
-import { KOULUTUSTYYPPI, ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
-import { useHakukohdeByOid } from '#/src/utils/hakukohde/getHakukohdeByOid';
-import FullSpin from '#/src/components/FullSpin';
-import Title from '#/src/components/Title';
-import ReduxForm from '#/src/components/ReduxForm';
-import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
-import HakukohdeForm from './HakukohdeForm';
+
+import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
   RelationInfoContainer,
   OrganisaatioRelation,
   HakuRelation,
   ToteutusRelation,
 } from '#/src/components/FormPage';
-import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormSteps from '#/src/components/FormSteps';
-import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
+import FullSpin from '#/src/components/FullSpin';
+import ReduxForm from '#/src/components/ReduxForm';
+import Title from '#/src/components/Title';
+import { KOULUTUSTYYPPI, ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
+import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useEntityFormConfig } from '#/src/hooks/form';
-import { HakukohdeFooter } from './HakukohdeFooter';
+import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
+import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
+import { useHakukohdeByOid } from '#/src/utils/hakukohde/getHakukohdeByOid';
+
 import { useHakukohdePageData } from './getHakukohdePageData';
+import { HakukohdeFooter } from './HakukohdeFooter';
+import HakukohdeForm from './HakukohdeForm';
 
 const EditHakukohdePage = props => {
   const {

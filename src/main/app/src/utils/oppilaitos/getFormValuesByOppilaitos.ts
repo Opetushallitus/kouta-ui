@@ -1,4 +1,5 @@
 import { get, isNumber, mapValues } from 'lodash';
+
 import { parseEditorState } from '#/src/components/Editor/utils';
 
 const getFormValuesByOppilaitos = oppilaitos => {

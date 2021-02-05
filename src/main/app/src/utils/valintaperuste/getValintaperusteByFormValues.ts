@@ -1,7 +1,8 @@
-import _ from 'lodash';
 import produce from 'immer';
-import { isNumeric, isDeepEmptyFormValues, parseFloatComma } from '#/src/utils';
+import _ from 'lodash';
+
 import { serializeEditorState } from '#/src/components/Editor/utils';
+import { isNumeric, isDeepEmptyFormValues, parseFloatComma } from '#/src/utils';
 import { getKokeetTaiLisanaytotData } from '#/src/utils/form/getKokeetTaiLisanaytotData';
 
 const getArrayValue = (values, key) => {

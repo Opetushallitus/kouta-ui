@@ -1,23 +1,25 @@
 import React, { useMemo } from 'react';
+
 import queryString from 'query-string';
 import { useTranslation } from 'react-i18next';
 
+import FormHeader from '#/src/components/FormHeader';
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
 } from '#/src/components/FormPage';
-import useSelectBase from '#/src/hooks/useSelectBase';
+import FormSteps from '#/src/components/FormSteps';
+import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
-import getFormValuesBySoraKuvaus from '#/src/utils/soraKuvaus/getFormValuesBySoraKuvaus';
-import SoraKuvausForm, { initialValues } from './SoraKuvausForm';
-import ReduxForm from '#/src/components/ReduxForm';
-import getSoraKuvausFormConfig from '#/src/utils/soraKuvaus/getSoraKuvausFormConfig';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
-import FormHeader from '#/src/components/FormHeader';
-import FormSteps from '#/src/components/FormSteps';
-import { SoraKuvausFooter } from './SoraKuvausFooter';
+import useSelectBase from '#/src/hooks/useSelectBase';
+import getFormValuesBySoraKuvaus from '#/src/utils/soraKuvaus/getFormValuesBySoraKuvaus';
 import { useSoraKuvausById } from '#/src/utils/soraKuvaus/getSoraKuvausById';
+import getSoraKuvausFormConfig from '#/src/utils/soraKuvaus/getSoraKuvausFormConfig';
+
+import { SoraKuvausFooter } from './SoraKuvausFooter';
+import SoraKuvausForm, { initialValues } from './SoraKuvausForm';
 
 const getCopyValues = soraKuvausId => ({
   pohja: {

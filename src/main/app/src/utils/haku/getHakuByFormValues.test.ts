@@ -1,14 +1,13 @@
 import { mapValues, merge } from 'lodash';
 
-import { getHakuByFormValues } from '#/src/utils/haku/getHakuByFormValues';
-
+import { parseEditorState } from '#/src/components/Editor/utils';
 import {
   HAKULOMAKETYYPPI,
   JULKAISUTILA,
   Alkamiskausityyppi,
 } from '#/src/constants';
 import { HakuFormValues } from '#/src/types/hakuTypes';
-import { parseEditorState } from '#/src/components/Editor/utils';
+import { getHakuByFormValues } from '#/src/utils/haku/getHakuByFormValues';
 
 const baseValues: HakuFormValues = {
   muokkaaja: '1.1.1.1',

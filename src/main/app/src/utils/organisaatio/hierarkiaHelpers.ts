@@ -1,4 +1,5 @@
 import _ from 'lodash/fp';
+
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 export const flatFilterHierarkia = (hierarkia, filterFn) => {

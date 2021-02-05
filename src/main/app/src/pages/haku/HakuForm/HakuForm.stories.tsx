@@ -1,16 +1,17 @@
 import React from 'react';
+
 import { storiesOf } from '@storybook/react';
 
-import HakuForm, { initialValues } from './index';
 import ReduxForm from '#/src/components/ReduxForm';
-import getHakuFormConfig from '#/src/utils/haku/getHakuFormConfig';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
-
 import {
   makeStoreDecorator,
   makeApiDecorator,
   makeLocalizationDecorator,
 } from '#/src/storybookUtils';
+import getHakuFormConfig from '#/src/utils/haku/getHakuFormConfig';
+
+import HakuForm, { initialValues } from './index';
 
 const config = getHakuFormConfig();
 

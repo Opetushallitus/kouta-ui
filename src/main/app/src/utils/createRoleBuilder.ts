@@ -1,7 +1,8 @@
 import { isString, isObject, isArray, set } from 'lodash';
 
-import getOrganisaatioParentOidPath from '#/src/utils/organisaatio/getOrganisaatioParentOidPath';
 import { OPH_PAAKAYTTAJA_ROLE } from '#/src/constants';
+import getOrganisaatioParentOidPath from '#/src/utils/organisaatio/getOrganisaatioParentOidPath';
+
 import getRoleOrganisaatioOid from './getRoleOrganisaatioOid';
 import isOid from './isOid';
 

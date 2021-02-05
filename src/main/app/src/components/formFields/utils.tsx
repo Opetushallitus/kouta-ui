@@ -1,13 +1,15 @@
 import React, { createElement } from 'react';
+
 import _ from 'lodash';
+
+import { simpleMapProps } from '#/src/components/formFields';
+import FormHelperTextMulti from '#/src/components/FormHelperTextMulti';
 import { FormControl, FormLabel } from '#/src/components/virkailija';
 import {
   useFieldConfig,
   useFieldIsRequired,
 } from '#/src/hooks/fieldConfigHooks';
-import FormHelperTextMulti from '#/src/components/FormHelperTextMulti';
 import { useFormConfig } from '#/src/hooks/form';
-import { simpleMapProps } from '#/src/components/formFields';
 
 export const createComponent = (Component, mapProps = simpleMapProps) => {
   const InputComponent = props => {

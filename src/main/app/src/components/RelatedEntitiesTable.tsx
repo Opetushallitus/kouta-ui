@@ -1,14 +1,16 @@
 import React, { useMemo, useCallback } from 'react';
+
 import { map, sortBy, compose, isNil } from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
-import { Typography } from '#/src/components/virkailija';
-import useApiAsync from '#/src/hooks/useApiAsync';
+
+import ListSpin from '#/src/components/ListSpin';
 import ListTable, {
   makeNimiColumn,
   makeModifiedColumn,
   makeTilaColumn,
 } from '#/src/components/ListTable';
-import ListSpin from '#/src/components/ListSpin';
+import { Typography } from '#/src/components/virkailija';
+import useApiAsync from '#/src/hooks/useApiAsync';
 
 export const RelatedEntitiesTable = function ({
   entity,

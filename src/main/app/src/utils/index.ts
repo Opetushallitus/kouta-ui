@@ -1,13 +1,14 @@
 import { format as formatDate, parseISO } from 'date-fns';
-import _fp from 'lodash/fp';
 import _ from 'lodash';
+import _fp from 'lodash/fp';
 import stripTags from 'striptags';
-import { ALLOWED_HTML_TAGS, LANGUAGES, NDASH } from '#/src/constants';
-import { memoize } from '#/src/utils/memoize';
+
 import {
   isEditorState,
   isEmptyEditorState,
 } from '#/src/components/Editor/utils';
+import { ALLOWED_HTML_TAGS, LANGUAGES, NDASH } from '#/src/constants';
+import { memoize } from '#/src/utils/memoize';
 
 const { NODE_ENV, REACT_APP_CYPRESS } = process.env;
 

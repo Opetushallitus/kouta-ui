@@ -1,20 +1,20 @@
 import React, { useMemo, useState, useEffect, useCallback } from 'react';
-import styled from 'styled-components';
+
 import { camelCase, isArray, isEmpty } from 'lodash';
 import { useTranslation } from 'react-i18next';
+import styled from 'styled-components';
 
+import SegmentTab from '#/src/components/SegmentTab';
+import SegmentTabs from '#/src/components/SegmentTabs';
+import { Box, RadioGroup } from '#/src/components/virkailija';
 import {
   TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
   TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
   KOULUTUSTYYPPI,
 } from '#/src/constants';
-
-import { getTestIdProps } from '#/src/utils';
-import { Box, RadioGroup } from '#/src/components/virkailija';
 import { spacing, getThemeProp } from '#/src/theme';
-import SegmentTabs from '#/src/components/SegmentTabs';
-import SegmentTab from '#/src/components/SegmentTab';
+import { getTestIdProps } from '#/src/utils';
 
 const SecondLevelContainer = styled(Box).attrs({ flexGrow: 0 })`
   margin-left: ${spacing(4)};

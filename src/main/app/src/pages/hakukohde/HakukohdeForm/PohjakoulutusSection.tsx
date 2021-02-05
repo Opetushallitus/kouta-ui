@@ -1,11 +1,12 @@
 import React from 'react';
-import { Field } from 'redux-form';
-import { useTranslation } from 'react-i18next';
 
-import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
-import { getTestIdProps } from '#/src/utils';
+import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
+
 import { FormFieldSelect, FormFieldEditor } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
+import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
+import { getTestIdProps } from '#/src/utils';
 
 const PohjakoulutusSection = ({ name, language }) => {
   const { options } = useKoodistoOptions({

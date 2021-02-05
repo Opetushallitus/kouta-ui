@@ -1,26 +1,29 @@
 import React from 'react';
+
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
-import KieliversiotFields from '#/src/components/KieliversiotFields';
-import Flex from '#/src/components/Flex';
+
 import Button from '#/src/components/Button';
-import { LomakeFields } from '#/src/components/LomakeFields';
-import useModal from '#/src/hooks/useModal';
-import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
-import { useFieldValue, useSelectedLanguages } from '#/src/hooks/form';
-import JulkaisutilaField from '#/src/components/JulkaisutilaField';
-import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
-import getHaut from '#/src/utils/haku/getHaut';
-import NameSection from './NameSection';
-import TargetGroupSection from './TargetGroupSection';
-import SearchTypeSection from './SearchTypeSection';
-import ScheduleSection from './ScheduleSection';
-import { YhteyshenkilotSection } from './YhteyshenkilotSection';
-import FormCollapseGroup from '#/src/components/FormCollapseGroup';
+import Flex from '#/src/components/Flex';
 import FormCollapse from '#/src/components/FormCollapse';
-import HakukohteetModal from './HakukohteetModal';
+import FormCollapseGroup from '#/src/components/FormCollapseGroup';
+import JulkaisutilaField from '#/src/components/JulkaisutilaField';
+import KieliversiotFields from '#/src/components/KieliversiotFields';
+import { LomakeFields } from '#/src/components/LomakeFields';
+import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
+import { useFieldValue, useSelectedLanguages } from '#/src/hooks/form';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
+import useModal from '#/src/hooks/useModal';
+import getHaut from '#/src/utils/haku/getHaut';
+import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
+
+import HakukohteetModal from './HakukohteetModal';
 import { HakukohteetSection } from './HakukohteetSection';
+import NameSection from './NameSection';
+import ScheduleSection from './ScheduleSection';
+import SearchTypeSection from './SearchTypeSection';
+import TargetGroupSection from './TargetGroupSection';
+import { YhteyshenkilotSection } from './YhteyshenkilotSection';
 
 const HakuForm = ({
   organisaatioOid,

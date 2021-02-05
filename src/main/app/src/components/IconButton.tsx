@@ -1,7 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
-import Button from '#/src/components/Button';
+
 import Icon from '@opetushallitus/virkailija-ui-components/Icon';
+import styled from 'styled-components';
+
+import Button from '#/src/components/Button';
 
 const SizedIcon = styled(Icon)`
   font-size: 1.2em;

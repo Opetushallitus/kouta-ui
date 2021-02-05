@@ -1,13 +1,14 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
-import { Transition } from 'react-spring/renderprops';
-import _ from 'lodash/fp';
 
-import { getThemeProp } from '#/src/theme';
+import _ from 'lodash/fp';
+import { useTranslation } from 'react-i18next';
+import { Transition } from 'react-spring/renderprops';
+import styled, { css } from 'styled-components';
+
+import AbstractCollapse from '#/src/components/AbstractCollapse';
 import { Box, Icon, Typography } from '#/src/components/virkailija';
 import useToaster from '#/src/hooks/useToaster';
-import AbstractCollapse from '#/src/components/AbstractCollapse';
-import { useTranslation } from 'react-i18next';
+import { getThemeProp } from '#/src/theme';
 
 const ToasterContainer = styled.div`
   display: flex;

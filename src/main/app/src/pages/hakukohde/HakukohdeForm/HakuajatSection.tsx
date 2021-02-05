@@ -1,15 +1,16 @@
 import React, { useMemo } from 'react';
-import { Field, FieldArray } from 'redux-form';
+
 import { isArray } from 'lodash';
 import { useTranslation } from 'react-i18next';
+import { Field, FieldArray } from 'redux-form';
 
-import { Typography } from '#/src/components/virkailija';
-import Spacing from '#/src/components/Spacing';
-import { formatDateValue } from '#/src/utils';
 import { FormFieldSwitch } from '#/src/components/formFields';
-import { useFieldValue } from '#/src/hooks/form';
 import { HakuajatFields } from '#/src/components/HakuajatFields';
+import Spacing from '#/src/components/Spacing';
+import { Typography } from '#/src/components/virkailija';
 import { NDASH } from '#/src/constants';
+import { useFieldValue } from '#/src/hooks/form';
+import { formatDateValue } from '#/src/utils';
 
 const HakuaikaInterval = ({ haku }) => {
   const { t } = useTranslation();

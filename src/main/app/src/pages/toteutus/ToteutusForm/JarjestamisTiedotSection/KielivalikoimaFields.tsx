@@ -1,11 +1,12 @@
 import React from 'react';
-import { Field } from 'redux-form';
-import { useTranslation } from 'react-i18next';
 
-import { FormFieldSelect } from '#/src/components/formFields';
-import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
-import { Box } from '#/src/components/virkailija';
+import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
+
 import DividerHeading from '#/src/components/DividerHeading';
+import { FormFieldSelect } from '#/src/components/formFields';
+import { Box } from '#/src/components/virkailija';
+import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
 
 const KielivalikoimaBox = props => (

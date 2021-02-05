@@ -1,9 +1,11 @@
-import useLanguage from '#/src/hooks/useLanguage';
-import { useTranslation } from 'react-i18next';
 import { useMemo } from 'react';
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-import { getJulkaisutilaTranslationKey, JULKAISUTILA } from '#/src/constants';
+
 import _ from 'lodash/fp';
+import { useTranslation } from 'react-i18next';
+
+import { getJulkaisutilaTranslationKey, JULKAISUTILA } from '#/src/constants';
+import useLanguage from '#/src/hooks/useLanguage';
+import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 interface EntityForDropdown {
   nimi: Record<LanguageCode, string>;

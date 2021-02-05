@@ -1,4 +1,18 @@
 import _ from 'lodash';
+
+import { AsyncKoodistoSelect } from '#/src/components/AsyncKoodistoSelect';
+import { DatePickerInput } from '#/src/components/DatePickerInput';
+import { DateTimeInput } from '#/src/components/DateTimeInput';
+import { Editor } from '#/src/components/Editor';
+import { ImageInput } from '#/src/components/ImageInput';
+import { KoulutusalaSelect } from '#/src/components/KoulutusalaSelect';
+import { KoulutustyyppiSelect } from '#/src/components/KoulutustyyppiSelect';
+import { LanguageSelect } from '#/src/components/LanguageSelect';
+import { PostinumeroSelect } from '#/src/components/PostinumeroSelect';
+import { Select, AsyncSelect } from '#/src/components/Select';
+import { SoraKuvausSelect } from '#/src/components/SoraKuvausSelect';
+import { Switch } from '#/src/components/Switch';
+import { TimeInput } from '#/src/components/TimeInput';
 import {
   DatePicker,
   Checkbox,
@@ -7,20 +21,8 @@ import {
   Radio,
   RadioGroup,
 } from '#/src/components/virkailija';
-import { Select, AsyncSelect } from '#/src/components/Select';
-import { DatePickerInput } from '#/src/components/DatePickerInput';
-import { DateTimeInput } from '#/src/components/DateTimeInput';
-import { TimeInput } from '#/src/components/TimeInput';
-import { Editor } from '#/src/components/Editor';
 import { YearSelect } from '#/src/components/YearSelect';
-import { ImageInput } from '#/src/components/ImageInput';
-import { KoulutustyyppiSelect } from '#/src/components/KoulutustyyppiSelect';
-import { KoulutusalaSelect } from '#/src/components/KoulutusalaSelect';
-import { SoraKuvausSelect } from '#/src/components/SoraKuvausSelect';
-import { LanguageSelect } from '#/src/components/LanguageSelect';
-import { PostinumeroSelect } from '#/src/components/PostinumeroSelect';
-import { AsyncKoodistoSelect } from '#/src/components/AsyncKoodistoSelect';
-import { Switch } from '#/src/components/Switch';
+
 import { createComponent } from './utils';
 
 export const simpleMapProps = ({ meta, input, ...props }) => ({

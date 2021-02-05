@@ -1,12 +1,13 @@
 import React from 'react';
-import { Field } from 'redux-form';
+
 import { setLightness } from 'polished';
-import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
+import styled from 'styled-components';
 
 import { FormFieldRadioGroup } from '#/src/components/formFields';
-import { JULKAISUTILA } from '#/src/constants';
 import { Box, Radio, Typography } from '#/src/components/virkailija';
+import { JULKAISUTILA } from '#/src/constants';
 
 const tilaCss = ({ theme, tila }) => {
   const color = theme.colors[tila] || theme.colors.tallennettu;

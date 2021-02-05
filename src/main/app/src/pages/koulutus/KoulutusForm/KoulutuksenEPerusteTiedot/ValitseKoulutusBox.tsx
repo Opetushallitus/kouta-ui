@@ -1,11 +1,14 @@
 import React from 'react';
+
 import { useTranslation } from 'react-i18next';
-import { Box, Spin } from '#/src/components/virkailija';
-import { getLanguageValue } from '#/src/utils/languageUtils';
-import { getTestIdProps } from '#/src/utils';
-import { useFieldValue } from '#/src/hooks/form';
+
 import KoulutusField from '#/src/components/KoulutusField';
+import { Box, Spin } from '#/src/components/virkailija';
+import { useFieldValue } from '#/src/hooks/form';
+import { getTestIdProps } from '#/src/utils';
 import { useKoulutusByKoodi } from '#/src/utils/koulutus/getKoulutusByKoodi';
+import { getLanguageValue } from '#/src/utils/languageUtils';
+
 import { InfoBoxGrid, StyledInfoBox } from './InfoBox';
 
 export const ValitseKoulutusBox = ({

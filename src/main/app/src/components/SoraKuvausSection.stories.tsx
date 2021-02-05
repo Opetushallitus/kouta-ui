@@ -1,11 +1,12 @@
 import React from 'react';
+
 import { storiesOf } from '@storybook/react';
 
-import SoraKuvausSection from './SoraKuvausSection';
-import ReduxForm from './ReduxForm';
 import FormConfigContext from '../contexts/FormConfigContext';
 import FormConfigSectionContext from '../contexts/FormConfigSectionContext';
 import getValintaperusteFormConfig from '../utils/valintaperuste/getValintaperusteFormConfig';
+import ReduxForm from './ReduxForm';
+import SoraKuvausSection from './SoraKuvausSection';
 
 storiesOf('SoraKuvausSection', module).add('Basic', () => (
   <ReduxForm form={'valintaperuste'}>

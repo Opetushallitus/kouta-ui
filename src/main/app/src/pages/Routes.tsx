@@ -1,25 +1,27 @@
 import React from 'react';
+
 import { Router, Route, Redirect, Switch } from 'react-router-dom';
 
-import { ENTITY } from '#/src/constants';
-import Toaster from '#/src/components/Toaster';
 import RouterScrollToTop from '#/src/components/RouterScrollToTop';
-import HomePage from './HomePage';
-import CreateKoulutusPage from './koulutus/CreateKoulutusPage';
-import EditKoulutusPage from './koulutus/EditKoulutusPage';
-import CreateToteutusPage from './toteutus/CreateToteutusPage';
-import EditToteutusPage from './toteutus/EditToteutusPage';
+import Toaster from '#/src/components/Toaster';
+import { ENTITY } from '#/src/constants';
+
 import CreateHakuPage from './haku/CreateHakuPage';
 import EditHakuPage from './haku/EditHakuPage';
 import CreateHakukohdePage from './hakukohde/CreateHakukohdePage';
 import EditHakukohdePage from './hakukohde/EditHakukohdePage';
-import CreateValintaperustePage from './valintaperuste/CreateValintaperustePage';
-import EditValintaperustePage from './valintaperuste/EditValintaperustePage';
+import HomePage from './HomePage';
+import CreateKoulutusPage from './koulutus/CreateKoulutusPage';
+import EditKoulutusPage from './koulutus/EditKoulutusPage';
+import OppilaitoksenOsaPage from './OppilaitoksenOsaPage';
+import OppilaitosPage from './OppilaitosPage';
+import { createRedirectEntityPage } from './RedirectEntityPage';
 import CreateSoraKuvausPage from './soraKuvaus/CreateSoraKuvausPage';
 import EditSoraKuvausPage from './soraKuvaus/EditSoraKuvausPage';
-import OppilaitosPage from './OppilaitosPage';
-import OppilaitoksenOsaPage from './OppilaitoksenOsaPage';
-import { createRedirectEntityPage } from './RedirectEntityPage';
+import CreateToteutusPage from './toteutus/CreateToteutusPage';
+import EditToteutusPage from './toteutus/EditToteutusPage';
+import CreateValintaperustePage from './valintaperuste/CreateValintaperustePage';
+import EditValintaperustePage from './valintaperuste/EditValintaperustePage';
 
 const RedirectKoulutusPage = createRedirectEntityPage({
   entityType: ENTITY.KOULUTUS,

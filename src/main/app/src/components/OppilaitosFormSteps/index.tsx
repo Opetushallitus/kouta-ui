@@ -1,8 +1,9 @@
 import React from 'react';
+
 import { useTranslation } from 'react-i18next';
 
-import { Box } from '#/src/components/virkailija';
 import FormStepIcon from '#/src/components/FormStepIcon';
+import { Box } from '#/src/components/virkailija';
 import { ENTITY, ICONS } from '#/src/constants';
 
 const { OPPILAITOS, OPPILAITOKSEN_OSA } = ENTITY;

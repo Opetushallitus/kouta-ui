@@ -1,10 +1,11 @@
 import _ from 'lodash/fp';
+
+import { KOULUTUSTYYPIT, JULKAISUTILA, POHJAVALINTA } from '#/src/constants';
 import {
   validateArray,
   validateExistence,
   validateTranslations,
 } from '#/src/utils/form/createErrorBuilder';
-import { KOULUTUSTYYPIT, JULKAISUTILA, POHJAVALINTA } from '#/src/constants';
 
 export const validateIfJulkaistu = (
   validate,

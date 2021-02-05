@@ -1,17 +1,18 @@
 import React, { useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
-import _ from 'lodash';
 
+import _ from 'lodash';
+import { useHistory } from 'react-router-dom';
+
+import { FormFooter } from '#/src/components/FormPage';
+import { ORGANISAATIOTYYPPI, ENTITY } from '#/src/constants';
+import { useFormName } from '#/src/hooks/form';
+import { useSaveForm } from '#/src/hooks/formSaveHooks';
+import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
+import { getTarjoajaOids } from '#/src/utils/getTarjoajaOids';
 import getKoulutusByFormValues from '#/src/utils/koulutus/getKoulutusByFormValues';
 import updateKoulutus from '#/src/utils/koulutus/updateKoulutus';
-import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import validateKoulutusForm from '#/src/utils/koulutus/validateKoulutusForm';
-import { ORGANISAATIOTYYPPI, ENTITY } from '#/src/constants';
-import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
-import { FormFooter } from '#/src/components/FormPage';
-import { useFormName } from '#/src/hooks/form';
-import { getTarjoajaOids } from '#/src/utils/getTarjoajaOids';
 
 const EditKoulutusFooter = ({ koulutus, organisaatioOid, canUpdate }) => {
   const history = useHistory();

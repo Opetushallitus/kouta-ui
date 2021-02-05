@@ -1,8 +1,9 @@
 import React from 'react';
+
 import { useTranslation } from 'react-i18next';
 
-import getKoulutuksenToteutukset from '#/src/utils/koulutus/getKoulutuksenToteutukset';
 import { RelatedEntitiesTable } from '#/src/components/RelatedEntitiesTable';
+import getKoulutuksenToteutukset from '#/src/utils/koulutus/getKoulutuksenToteutukset';
 
 export const ToteutuksetSection = function ({ koulutus, organisaatioOid }) {
   const { t } = useTranslation();

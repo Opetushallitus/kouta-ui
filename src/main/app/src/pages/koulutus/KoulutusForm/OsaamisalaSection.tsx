@@ -1,17 +1,20 @@
 import React, { useEffect } from 'react';
+
 import _ from 'lodash/fp';
+
 import { Box } from '#/src/components/virkailija';
 import {
   useBoundFormActions,
   useFieldValue,
   useIsDirty,
 } from '#/src/hooks/form';
-import { useLocalizedKoulutus } from './useLocalizedKoulutus';
-import { ValitseKoulutusBox } from './KoulutuksenEPerusteTiedot/ValitseKoulutusBox';
-import { ValitseEPerusteBox } from './KoulutuksenEPerusteTiedot/ValitseEPerusteBox';
-import { ValitseOsaamisalaBox } from './KoulutuksenEPerusteTiedot/ValitseOsaamisalaBox';
-import { useKoulutusByKoodi } from '#/src/utils/koulutus/getKoulutusByKoodi';
 import { useHasChanged } from '#/src/hooks/useHasChanged';
+import { useKoulutusByKoodi } from '#/src/utils/koulutus/getKoulutusByKoodi';
+
+import { ValitseEPerusteBox } from './KoulutuksenEPerusteTiedot/ValitseEPerusteBox';
+import { ValitseKoulutusBox } from './KoulutuksenEPerusteTiedot/ValitseKoulutusBox';
+import { ValitseOsaamisalaBox } from './KoulutuksenEPerusteTiedot/ValitseOsaamisalaBox';
+import { useLocalizedKoulutus } from './useLocalizedKoulutus';
 
 export const OsaamisalaSection = ({ disabled, language, languages, name }) => {
   const selectedKoulutus = useFieldValue(`${name}.koulutus`)?.value;

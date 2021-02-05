@@ -1,8 +1,10 @@
-import _ from 'lodash/fp';
 import { useCallback, useMemo } from 'react';
-import useOrganisaatio from '#/src/hooks/useOrganisaatio';
-import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
+
+import _ from 'lodash/fp';
+
 import { ENTITY_ROLES, CRUD_ROLES } from '#/src/constants';
+import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
+import useOrganisaatio from '#/src/hooks/useOrganisaatio';
 
 export const useGetCurrentUserHasRole = (entity, role = CRUD_ROLES.READ) => {
   const roleBuilder = useAuthorizedUserRoleBuilder();

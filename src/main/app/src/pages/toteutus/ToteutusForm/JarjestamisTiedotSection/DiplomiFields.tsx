@@ -1,11 +1,12 @@
 import React from 'react';
-import { Field } from 'redux-form';
-import { useTranslation } from 'react-i18next';
 
-import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
+import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
+
+import DividerHeading from '#/src/components/DividerHeading';
 import { FormFieldEditor, FormFieldSelect } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
-import DividerHeading from '#/src/components/DividerHeading';
+import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
 
 export const DiplomiFields = ({ name, language }) => {

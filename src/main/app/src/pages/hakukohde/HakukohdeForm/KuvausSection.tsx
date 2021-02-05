@@ -1,14 +1,16 @@
 import React, { useCallback } from 'react';
-import { Field } from 'redux-form';
+
 import { useTranslation } from 'react-i18next';
-import getValintaperusteet from '#/src/utils/valintaperuste/getValintaperusteet';
-import useApiAsync from '#/src/hooks/useApiAsync';
+import { Field } from 'redux-form';
+
+import Alert from '#/src/components/Alert';
+import Button from '#/src/components/Button';
 import { FormFieldSelect } from '#/src/components/formFields';
 import { Box, Divider } from '#/src/components/virkailija';
-import Button from '#/src/components/Button';
-import Alert from '#/src/components/Alert';
 import { useFieldValue } from '#/src/hooks/form';
+import useApiAsync from '#/src/hooks/useApiAsync';
 import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
+import getValintaperusteet from '#/src/utils/valintaperuste/getValintaperusteet';
 
 const KuvausSection = ({ haku, organisaatioOid, name, languages }) => {
   const hakuOid = haku?.oid;

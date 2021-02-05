@@ -7,25 +7,26 @@ import React, {
   useState,
   useEffect,
 } from 'react';
-import { useTranslation } from 'react-i18next';
-import styled, { css } from 'styled-components';
-import { setLightness } from 'polished';
+
 import {
   Editor as DraftEditor,
   EditorState as DraftEditorState,
   RichUtils,
 } from 'draft-js';
+import { setLightness } from 'polished';
+import { useTranslation } from 'react-i18next';
+import styled, { css } from 'styled-components';
 
-import { spacing, getThemeProp } from '#/src/theme';
+import Button from '#/src/components/Button';
+import Flex, { FlexItem } from '#/src/components/Flex';
+import Select from '#/src/components/Select';
 import {
   Icon,
   Input,
   Dropdown,
   DropdownMenu,
 } from '#/src/components/virkailija';
-import Select from '#/src/components/Select';
-import Flex, { FlexItem } from '#/src/components/Flex';
-import Button from '#/src/components/Button';
+import { spacing, getThemeProp } from '#/src/theme';
 
 import {
   getBlockType,

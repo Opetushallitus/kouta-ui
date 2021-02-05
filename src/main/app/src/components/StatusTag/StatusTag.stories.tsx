@@ -1,7 +1,9 @@
 import React from 'react';
+
 import { storiesOf } from '@storybook/react';
 
 import { makeLocalizationDecorator } from '#/src/storybookUtils';
+
 import StatusTag from './index';
 
 storiesOf('StatusTag', module)

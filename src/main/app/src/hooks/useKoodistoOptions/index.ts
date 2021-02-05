@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
+
 import _ from 'lodash';
+
 import useKoodisto from '#/src/hooks/useKoodisto';
 import useLanguage from '#/src/hooks/useLanguage';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';

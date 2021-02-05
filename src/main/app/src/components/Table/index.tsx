@@ -1,9 +1,10 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
-import { isFunction } from 'lodash';
 
-import { getThemeProp, spacing } from '#/src/theme';
+import { isFunction } from 'lodash';
+import styled, { css } from 'styled-components';
+
 import { Icon } from '#/src/components/virkailija';
+import { getThemeProp, spacing } from '#/src/theme';
 
 export const TableBase = styled.table`
   width: 100%;

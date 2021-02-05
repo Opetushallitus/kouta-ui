@@ -1,11 +1,14 @@
 import React from 'react';
-import { Field, FieldArray } from 'redux-form';
+
 import { useTranslation } from 'react-i18next';
-import { FormFieldEditor } from '#/src/components/formFields';
+import { Field, FieldArray } from 'redux-form';
+
 import FieldGroup from '#/src/components/FieldGroup';
-import KokeetTaiLisanaytotFields from './KokeetTaiLisanaytotFields';
-import { getTestIdProps } from '#/src/utils';
+import { FormFieldEditor } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
+import { getTestIdProps } from '#/src/utils';
+
+import KokeetTaiLisanaytotFields from './KokeetTaiLisanaytotFields';
 
 export const KokeetTaiLisanaytotSection = ({ name, language }) => {
   const { t } = useTranslation();

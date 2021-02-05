@@ -1,13 +1,14 @@
 import React, { useCallback } from 'react';
-import { Field } from 'redux-form';
-import { useTranslation } from 'react-i18next';
 
-import OrganisaatioHierarkiaTreeSelect from '#/src/components/OrganisaatioHierarkiaTreeSelect';
-import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
+import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
+
 import { createFormFieldComponent } from '#/src/components/formFields';
-import { getTestIdProps } from '#/src/utils';
-import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
+import OrganisaatioHierarkiaTreeSelect from '#/src/components/OrganisaatioHierarkiaTreeSelect';
 import { TOTEUTUS_ROLE } from '#/src/constants';
+import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
+import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
+import { getTestIdProps } from '#/src/utils';
 
 const JarjestajatField = createFormFieldComponent(
   OrganisaatioHierarkiaTreeSelect,

@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect } from 'react';
 
-import _ from 'lodash/fp';
+import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
@@ -22,7 +22,7 @@ import { getLanguageValue } from '#/src/utils/languageUtils';
 import { InfoBoxGrid, StyledInfoBox } from './InfoBox';
 
 const getOsaamisalaOptions = (osaamisalat = [], language) =>
-  _.map(({ arvo, nimi }) => ({
+  _fp.map(({ arvo, nimi }) => ({
     label: getLanguageValue(nimi, language),
     value: arvo,
   }))(osaamisalat);
@@ -65,7 +65,7 @@ export const ValitseOsaamisalaBox = ({
     [language, osaamisalat]
   );
 
-  const selectedOsaamisalaData = _.find(
+  const selectedOsaamisalaData = _fp.find(
     ({ arvo }) => arvo === selectedOsaamisala?.value
   )(osaamisalat);
 
@@ -77,7 +77,7 @@ export const ValitseOsaamisalaBox = ({
 
   const isDirty = useIsDirty();
 
-  const perusteenOsaId = _.find(
+  const perusteenOsaId = _fp.find(
     ({ _perusteenOsa }) =>
       Number(_perusteenOsa) === Number(selectedOsaamisalaKuvausId)
   )(ePerusteSisalto?.lapset)?.id;
@@ -94,7 +94,7 @@ export const ValitseOsaamisalaBox = ({
           name={fieldName}
           label={t('koulutuslomake.valitseOsaamisala')}
           options={osaamisalaOptions}
-          disabled={_.isNil(osaamisalat) || _.isEmpty(osaamisalat)}
+          disabled={_fp.isNil(osaamisalat) || _fp.isEmpty(osaamisalat)}
         />
       </Box>
       {isLoading ? (

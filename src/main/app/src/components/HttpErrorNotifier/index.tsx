@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import _ from 'lodash/fp';
+import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 
 import { useHttpClient } from '#/src/contexts/contextHooks';
@@ -12,8 +12,8 @@ const getToastOptions = (error, t) => {
   const status = response?.status;
   const data = response?.data;
 
-  const label = _.cond([
-    [_.equals(403), () => t('ilmoitukset.kayttooikeusVirhe')],
+  const label = _fp.cond([
+    [_fp.equals(403), () => t('ilmoitukset.kayttooikeusVirhe')],
     [otherwise, () => t('ilmoitukset.tuntematonVirhe.viesti')],
   ])(status);
 

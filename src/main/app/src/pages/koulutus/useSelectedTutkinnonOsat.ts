@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import _ from 'lodash/fp';
+import _fp from 'lodash/fp';
 
 import { useFieldValue } from '#/src/hooks/form';
 
@@ -8,10 +8,10 @@ export const useSelectedTutkinnonOsat = () => {
   const tutkinnonosat = useFieldValue(`tutkinnonosat.osat`);
   return useMemo(
     () =>
-      _.reduce(
+      _fp.reduce(
         (resultOsat, { eperuste, koulutus, osat }) => [
           ...resultOsat,
-          ..._.map(
+          ..._fp.map(
             ({ value, viite }) => ({
               ePerusteId: Number(eperuste?.value),
               koulutusKoodiUri: koulutus?.value,

@@ -1,4 +1,4 @@
-import _ from 'lodash/fp';
+import _fp from 'lodash/fp';
 
 import { KOULUTUSTYYPIT, JULKAISUTILA, POHJAVALINTA } from '#/src/constants';
 import {
@@ -23,14 +23,14 @@ export const validateIf = (condition, validate) => eb =>
 
 export const validateValintakokeet = (errorBuilder, values) => {
   const kieliversiot = getKielivalinta(values);
-  return _.compose(
+  return _fp.compose(
     validateTranslations('valintakokeet.yleisKuvaus', kieliversiot, {
       optional: true,
     }),
     validateArray(
       'valintakokeet.kokeetTaiLisanaytot',
       (eb, { liittyyEnnakkovalmistautumista, erityisjarjestelytMahdollisia }) =>
-        _.compose(
+        _fp.compose(
           validateExistence('tyyppi'),
           validateIf(
             liittyyEnnakkovalmistautumista,
@@ -48,7 +48,7 @@ export const validateValintakokeet = (errorBuilder, values) => {
           }),
           validateArray(
             'tilaisuudet',
-            _.compose(
+            _fp.compose(
               validateTranslations('osoite', kieliversiot),
               validateExistence('postinumero'),
               validateExistence('alkaa'),
@@ -75,8 +75,8 @@ export const kieliversiotSectionConfig = {
 };
 
 export const getKielivalinta = values =>
-  _.get('kieliversiot', values) ||
-  _.get('perustiedot.kieliversiot', values) ||
+  _fp.get('kieliversiot', values) ||
+  _fp.get('perustiedot.kieliversiot', values) ||
   [];
 
 export const pohjaValintaSectionConfig = {
@@ -90,7 +90,7 @@ export const pohjaValintaSectionConfig = {
     {
       field: '.valinta',
       validate: (eb, values) =>
-        _.get('pohja.tapa', values) === POHJAVALINTA.KOPIO
+        _fp.get('pohja.tapa', values) === POHJAVALINTA.KOPIO
           ? eb.validateExistence('pohja.valinta')
           : eb,
     },
@@ -123,11 +123,11 @@ export const validateRelations = specs => (eb, values) => {
   const { errors, isValid } = specs.reduce(
     (acc, { key, t: translationKey }) => {
       const { tila } = values;
-      const ref = _.get(key, values);
+      const ref = _fp.get(key, values);
       if (
-        !_.isNil(ref) &&
+        !_fp.isNil(ref) &&
         tila === JULKAISUTILA.JULKAISTU &&
-        _.get('tila', ref) !== JULKAISUTILA.JULKAISTU
+        _fp.get('tila', ref) !== JULKAISUTILA.JULKAISTU
       ) {
         acc.isValid = false;
         acc.errors.push(t =>

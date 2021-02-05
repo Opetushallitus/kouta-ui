@@ -1,4 +1,4 @@
-import _ from 'lodash/fp';
+import _fp from 'lodash/fp';
 
 import {
   KOULUTUSTYYPPI,
@@ -40,7 +40,7 @@ const config = createFormConfigBuilder().registerSections([
         koulutustyypit: [KOULUTUSTYYPPI.TUTKINNON_OSA],
         validate: eb =>
           eb.validateArray('tutkinnonosat.osat', eb => {
-            return _.pipe([
+            return _fp.pipe([
               eb => eb.validateExistence('eperuste'),
               eb => eb.validateExistence('koulutus'),
               eb => eb.validateArrayMinLength('osat', 1),

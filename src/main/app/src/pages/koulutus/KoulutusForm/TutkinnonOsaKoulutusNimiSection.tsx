@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import _ from 'lodash/fp';
+import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
@@ -45,7 +45,7 @@ export const TutkinnonOsaKoulutusNimiSection: React.FC<TutkinnonOsaKoulutusNimiS
 
   useEffect(() => {
     if (isDirty && selectedTutkinnonosaNimi) {
-      _.each(lang => {
+      _fp.each(lang => {
         change(
           `${name}.nimi.${lang}`,
           selectedTutkinnonosaNimi

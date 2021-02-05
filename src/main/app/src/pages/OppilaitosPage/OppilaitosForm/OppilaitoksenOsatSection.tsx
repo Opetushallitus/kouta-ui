@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import _ from 'lodash/fp';
+import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 
 import ListSpin from '#/src/components/ListSpin';
@@ -30,16 +30,16 @@ const OppilaitoksenOsatSection = ({ organisaatio }) => {
   const rows = useMemo(() => {
     return (
       data &&
-      _.compose(
-        _.sortBy(e => e.nimi[i18n.language]),
-        _.map(entity => ({ ...entity, key: entity.oid }))
+      _fp.compose(
+        _fp.sortBy(e => e.nimi[i18n.language]),
+        _fp.map(entity => ({ ...entity, key: entity.oid }))
       )(data)
     );
   }, [data, i18n.language]);
 
   return (
     <>
-      {_.isNil(rows) ? (
+      {_fp.isNil(rows) ? (
         <ListSpin />
       ) : (
         <>

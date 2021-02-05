@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 
-import _ from 'lodash/fp';
+import _fp from 'lodash/fp';
 
 import { ENTITY_ROLES, CRUD_ROLES } from '#/src/constants';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
@@ -11,7 +11,7 @@ export const useGetCurrentUserHasRole = (entity, role = CRUD_ROLES.READ) => {
 
   return useCallback(
     organisaatio =>
-      roleBuilder[`has${_.upperFirst(role)}`](
+      roleBuilder[`has${_fp.upperFirst(role)}`](
         ENTITY_ROLES[entity],
         organisaatio
       ).result(),

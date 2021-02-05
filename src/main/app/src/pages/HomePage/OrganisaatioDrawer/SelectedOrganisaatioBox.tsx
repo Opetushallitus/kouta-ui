@@ -1,6 +1,6 @@
 import React from 'react';
 
-import _ from 'lodash/fp';
+import _fp from 'lodash/fp';
 import { transparentize } from 'polished';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -29,9 +29,9 @@ export const SelectedOrganisaatioBox = ({ organisaatioOid }) => {
 
   const tyypit = getOrganisaatioTyypit(organisaatio);
 
-  const orgEntityType = _.cond([
-    [_.includes(ORGANISAATIOTYYPPI.OPPILAITOS), () => 'oppilaitos'],
-    [_.includes(ORGANISAATIOTYYPPI.TOIMIPISTE), () => 'oppilaitoksen-osa'],
+  const orgEntityType = _fp.cond([
+    [_fp.includes(ORGANISAATIOTYYPPI.OPPILAITOS), () => 'oppilaitos'],
+    [_fp.includes(ORGANISAATIOTYYPPI.TOIMIPISTE), () => 'oppilaitoksen-osa'],
     [otherwise, () => undefined],
   ])(tyypit);
 

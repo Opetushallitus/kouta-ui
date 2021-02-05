@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import _ from 'lodash/fp';
+import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 import styled, { css } from 'styled-components';
@@ -68,7 +68,7 @@ export const RadioGroup = ({
 
         return (
           <Container
-            key={_.uniqueId('RadioContainer_')}
+            key={_fp.uniqueId('RadioContainer_')}
             isLast={index === childrenCount - 1}
           >
             {element}
@@ -120,26 +120,26 @@ const JarjestyspaikkaSection = ({
   const language = useLanguage();
   const jarjestyspaikkaOptions = useMemo(
     () =>
-      _.pipe(
+      _fp.pipe(
         flattenHierarkia,
-        _.filter(organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)),
-        _.map(org => ({
+        _fp.filter(organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)),
+        _fp.map(org => ({
           value: org?.oid,
           label: getFirstLanguageValue(org?.nimi, language),
           disabled:
             // Disabled when none of tarjoajat is found up in the organization's
             // hierarchy including organization itself  or when user has no
             // update rights for the organization.
-            _.every(tarjoaja => !_.includes(tarjoaja, org?.parentOidPath))(
+            _fp.every(tarjoaja => !_fp.includes(tarjoaja, org?.parentOidPath))(
               tarjoajat
             ) || !getCanUpdate(org),
         })),
-        _.sortBy('label')
+        _fp.sortBy('label')
       )(hierarkia),
     [getCanUpdate, hierarkia, language, tarjoajat]
   );
 
-  const jarjestyspaikkaOidRequired = _.difference(opetustapaKoodiUrit)(
+  const jarjestyspaikkaOidRequired = _fp.difference(opetustapaKoodiUrit)(
     JARJESTYSPAIKATTOMAT_OPETUSTAVAT
   );
 

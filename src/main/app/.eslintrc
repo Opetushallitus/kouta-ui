@@ -51,6 +51,7 @@
     "lodash/prefer-lodash-chain": "off",
     "lodash/prefer-constant": "off",
     "lodash/prefer-noop": "off",
-    "lodash/prefer-includes": "off"
+    "lodash/prefer-includes": "off",
+    "lodash/path-style": ["error", "as-needed"]
   }
 }

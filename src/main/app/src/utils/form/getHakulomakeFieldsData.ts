@@ -8,7 +8,7 @@ export const getHakulomakeFieldsData = ({ hakulomakeValues, kielivalinta }) => {
 
   const hakulomakeAtaruId =
     hakulomaketyyppi === HAKULOMAKETYYPPI.ATARU
-      ? _.get(hakulomakeValues, ['lomake', 'value']) || null
+      ? _.get(hakulomakeValues, 'lomake.value') || null
       : null;
 
   const hakulomakeLinkki =

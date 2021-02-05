@@ -1,3 +1,6 @@
+import VUCIcon from '@opetushallitus/virkailija-ui-components/Icon';
+export const Icon = props => <VUCIcon {...props} variant="outlined" />;
+
 export { default as Box } from '@opetushallitus/virkailija-ui-components/Box';
 export { default as Button } from '@opetushallitus/virkailija-ui-components/Button';
 export { default as Checkbox } from '@opetushallitus/virkailija-ui-components/Checkbox';
@@ -12,7 +15,6 @@ export { default as DropdownIcon } from '@opetushallitus/virkailija-ui-component
 export { default as FormControl } from '@opetushallitus/virkailija-ui-components/FormControl';
 export { default as FormHelperText } from '@opetushallitus/virkailija-ui-components/FormHelperText';
 export { default as FormLabel } from '@opetushallitus/virkailija-ui-components/FormLabel';
-export { default as Icon } from '@opetushallitus/virkailija-ui-components/Icon';
 export { default as Input } from '@opetushallitus/virkailija-ui-components/Input';
 export { default as InputIcon } from '@opetushallitus/virkailija-ui-components/InputIcon';
 export { default as ModalBody } from '@opetushallitus/virkailija-ui-components/ModalBody';

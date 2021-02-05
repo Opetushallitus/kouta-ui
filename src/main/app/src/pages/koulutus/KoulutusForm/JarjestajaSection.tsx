@@ -66,7 +66,7 @@ const OrganizationSection = ({
     <>
       {tarjoajat.length > 0 || disableTarjoajaHierarkia ? (
         <Box mb={2}>
-          <Alert variant="info">
+          <Alert status="info">
             {t('koulutuslomake.tarjoajienLukumaara', {
               lukumaara: tarjoajat.length,
             })}

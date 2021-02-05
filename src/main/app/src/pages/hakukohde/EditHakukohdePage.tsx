@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 
@@ -15,7 +15,7 @@ import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { KOULUTUSTYYPPI, ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
-import { useEntityFormConfig } from '#/src/hooks/form';
+import { useEntityFormConfig, useFormInitialValues } from '#/src/hooks/form';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
 import { useHakukohdeByOid } from '#/src/utils/hakukohde/getHakukohdeByOid';
@@ -26,6 +26,8 @@ import HakukohdeForm from './HakukohdeForm';
 // TODO: how to show non-published haut in konfo?
 // import { useUrls } from '#/src/contexts/contextHooks';
 // import { EsikatseluControls } from '#/src/components/EsikatseluControls';
+
+const FORM_NAME = 'hakukohdeForm';
 
 const EditHakukohdePage = props => {
   const {
@@ -54,9 +56,7 @@ const EditHakukohdePage = props => {
 
   const { t } = useTranslation();
 
-  const initialValues = useMemo(() => {
-    return hakukohde && getFormValuesByHakukohde(hakukohde);
-  }, [hakukohde]);
+  useFormInitialValues(FORM_NAME, haku, getFormValuesByHakukohde);
 
   const canUpdate = useCurrentUserHasRole(
     ENTITY.HAKUKOHDE,
@@ -69,7 +69,7 @@ const EditHakukohdePage = props => {
   return isLoading ? (
     <FullSpin />
   ) : (
-    <ReduxForm form="hakukohdeForm" initialValues={initialValues}>
+    <ReduxForm form={FORM_NAME}>
       <Title>{t('sivuTitlet.hakukohteenMuokkaus')}</Title>
       <FormConfigContext.Provider value={{ ...config, readOnly: !canUpdate }}>
         <FormPage

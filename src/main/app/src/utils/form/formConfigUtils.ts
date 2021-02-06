@@ -23,14 +23,14 @@ export const validateIf = (condition, validate) => eb =>
 
 export const validateValintakokeet = (errorBuilder, values) => {
   const kieliversiot = getKielivalinta(values);
-  return _fp.compose(
+  return _fp.flow(
     validateTranslations('valintakokeet.yleisKuvaus', kieliversiot, {
       optional: true,
     }),
     validateArray(
       'valintakokeet.kokeetTaiLisanaytot',
       (eb, { liittyyEnnakkovalmistautumista, erityisjarjestelytMahdollisia }) =>
-        _fp.compose(
+        _fp.flow(
           validateExistence('tyyppi'),
           validateIf(
             liittyyEnnakkovalmistautumista,
@@ -48,7 +48,7 @@ export const validateValintakokeet = (errorBuilder, values) => {
           }),
           validateArray(
             'tilaisuudet',
-            _fp.compose(
+            _fp.flow(
               validateTranslations('osoite', kieliversiot),
               validateExistence('postinumero'),
               validateExistence('alkaa'),

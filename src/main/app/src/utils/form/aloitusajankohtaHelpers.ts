@@ -16,9 +16,9 @@ export const getAlkamiskausiData = (
   koulutuksenPaattymispaivamaara: ajankohta?.tarkkaPaattyy || null,
   koulutuksenAlkamiskausiKoodiUri: ajankohta?.kausi || null,
   koulutuksenAlkamisvuosi: maybeParseNumber(ajankohta?.vuosi?.value),
-  henkilokohtaisenSuunnitelmanLisatiedot: _fp.compose(
-    _fp.mapValues(serializeEditorState),
-    pickTranslations
+  henkilokohtaisenSuunnitelmanLisatiedot: _fp.flow(
+    pickTranslations,
+    _fp.mapValues(serializeEditorState)
   )(ajankohta?.henkilokohtaisenSuunnitelmanLisatiedot ?? {}),
 });
 

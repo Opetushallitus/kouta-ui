@@ -40,7 +40,7 @@ const config = createFormConfigBuilder().registerSections([
         koulutustyypit: [KOULUTUSTYYPPI.TUTKINNON_OSA],
         validate: eb =>
           eb.validateArray('tutkinnonosat.osat', eb => {
-            return _fp.pipe([
+            return _fp.flow([
               eb => eb.validateExistence('eperuste'),
               eb => eb.validateExistence('koulutus'),
               eb => eb.validateArrayMinLength('osat', 1),

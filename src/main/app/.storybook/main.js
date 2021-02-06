@@ -1,4 +1,4 @@
-const { compose } = require('lodash/fp');
+const _fp = require('lodash/fp');
 const { withoutPlugins, withImportAlias } = require('../webpack-utils');
 
 module.exports = {
@@ -8,7 +8,7 @@ module.exports = {
     '@storybook/addon-essentials',
     '@storybook/addon-links/preset',
   ],
-  webpackFinal: compose(
+  webpackFinal: _fp.flow(
     withoutPlugins(['ForkTsCheckerWebpackPlugin']),
     withImportAlias
   ),

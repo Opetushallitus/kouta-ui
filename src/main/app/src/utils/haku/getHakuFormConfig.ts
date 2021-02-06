@@ -89,7 +89,7 @@ const config = createFormConfigBuilder().registerSections([
             values?.aikataulut?.ajankohtaTyyppi ===
               Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI &&
               values?.tila === JULKAISUTILA.JULKAISTU,
-            _fp.pipe(
+            _fp.flow(
               validateExistence('aikataulut.kausi'),
               validateExistence('aikataulut.vuosi')
             )

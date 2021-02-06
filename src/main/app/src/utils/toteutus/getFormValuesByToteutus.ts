@@ -133,7 +133,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
         parseEditorState,
         opetus?.maksullisuusKuvaus || {}
       ),
-      osiot: _fp.pipe(
+      osiot: _fp.flow(
         _fp.filter(({ otsikkoKoodiUri }) => !!otsikkoKoodiUri),
         _fp.map(({ otsikkoKoodiUri }) => ({ value: otsikkoKoodiUri }))
       )(lisatiedot),

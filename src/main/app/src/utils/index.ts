@@ -126,10 +126,10 @@ export const otherwise = () => true;
 export const sanitizeHTML = html => stripTags(html, ALLOWED_HTML_TAGS);
 
 export const parseKeyVal = memoize(
-  _fp.compose(
-    _fp.fromPairs,
+  _fp.flow(
+    _fp.split(';'),
     _fp.map(keyVal => keyVal.split('=')),
-    _fp.split(';')
+    _fp.fromPairs
   )
 );
 

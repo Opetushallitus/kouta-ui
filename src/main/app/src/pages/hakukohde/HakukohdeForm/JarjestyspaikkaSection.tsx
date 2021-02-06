@@ -120,7 +120,7 @@ const JarjestyspaikkaSection = ({
   const language = useLanguage();
   const jarjestyspaikkaOptions = useMemo(
     () =>
-      _fp.pipe(
+      _fp.flow(
         flattenHierarkia,
         _fp.filter(organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)),
         _fp.map(org => ({

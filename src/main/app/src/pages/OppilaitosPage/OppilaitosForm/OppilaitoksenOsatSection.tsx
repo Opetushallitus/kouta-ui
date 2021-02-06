@@ -30,9 +30,9 @@ const OppilaitoksenOsatSection = ({ organisaatio }) => {
   const rows = useMemo(() => {
     return (
       data &&
-      _fp.compose(
-        _fp.sortBy(e => e.nimi[i18n.language]),
-        _fp.map(entity => ({ ...entity, key: entity.oid }))
+      _fp.flow(
+        _fp.map(entity => ({ ...entity, key: entity.oid })),
+        _fp.sortBy(e => e.nimi[i18n.language])
       )(data)
     );
   }, [data, i18n.language]);

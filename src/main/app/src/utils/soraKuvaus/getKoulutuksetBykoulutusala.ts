@@ -19,7 +19,7 @@ const getKoulutuksetByKoulutusala = async ({
         koulutusalaKoodiUri
     );
 
-    return _fp.pipe(
+    return _fp.flow(
       _fp.filter(isValidKoulutusKoodi),
       _fp.groupBy('koodiUri'),
       _fp.map(_fp.maxBy('versio'))

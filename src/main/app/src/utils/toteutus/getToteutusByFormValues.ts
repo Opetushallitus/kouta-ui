@@ -14,7 +14,7 @@ const { MUU, EI_SAHKOISTA_HAKUA } = HAKULOMAKETYYPPI;
 const getOsaamisalatByValues = ({ osaamisalat, pickTranslations }) => {
   return (osaamisalat || []).map(
     ({ kuvaus = {}, nimi = {}, linkki = {}, otsikko = {} }) => ({
-      kuvaus: _fp.pipe(
+      kuvaus: _fp.flow(
         pickTranslations,
         _fp.mapValues(serializeEditorState)
       )(kuvaus),
@@ -66,7 +66,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
         lisatiedot: (values?.jarjestamistiedot?.osiot || []).map(
           ({ value }) => ({
             otsikkoKoodiUri: value,
-            teksti: _fp.pipe(
+            teksti: _fp.flow(
               pickTranslations,
               _fp.mapValues(serializeEditorState)
             )(osioKuvaukset[value] || {}),
@@ -79,24 +79,24 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
           : null,
         opetustapaKoodiUrit: values?.jarjestamistiedot?.opetustapa || [],
         opetusaikaKoodiUrit: values?.jarjestamistiedot?.opetusaika || [],
-        opetuskieletKuvaus: _fp.pipe(
+        opetuskieletKuvaus: _fp.flow(
           pickTranslations,
           _fp.mapValues(serializeEditorState)
         )(values?.jarjestamistiedot?.opetuskieliKuvaus || {}),
-        opetustapaKuvaus: _fp.pipe(
+        opetustapaKuvaus: _fp.flow(
           pickTranslations,
           _fp.mapValues(serializeEditorState)
         )(values?.jarjestamistiedot?.opetustapaKuvaus || {}),
-        opetusaikaKuvaus: _fp.pipe(
+        opetusaikaKuvaus: _fp.flow(
           pickTranslations,
           _fp.mapValues(serializeEditorState)
         )(values?.jarjestamistiedot?.opetusaikaKuvaus || {}),
-        maksullisuusKuvaus: _fp.pipe(
+        maksullisuusKuvaus: _fp.flow(
           pickTranslations,
           _fp.mapValues(serializeEditorState)
         )(values?.jarjestamistiedot?.maksullisuusKuvaus || {}),
         onkoStipendia: stipendiVisible && onkoStipendia,
-        stipendinKuvaus: _fp.pipe(
+        stipendinKuvaus: _fp.flow(
           pickTranslations,
           _fp.mapValues(serializeEditorState)
         )(
@@ -111,7 +111,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
         diplomiKoodiUrit: (values?.jarjestamistiedot?.diplomiTyypit || []).map(
           _fp.prop('value')
         ),
-        diplomiKuvaus: _fp.pipe(
+        diplomiKuvaus: _fp.flow(
           pickTranslations,
           _fp.mapValues(serializeEditorState)
         )(values?.jarjestamistiedot?.diplomiKuvaus || {}),
@@ -139,7 +139,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
         suunniteltuKestoKuukaudet: maybeParseNumber(
           jarjestamistiedot?.suunniteltuKesto?.kuukautta
         ),
-        suunniteltuKestoKuvaus: _fp.pipe(
+        suunniteltuKestoKuvaus: _fp.flow(
           pickTranslations,
           _fp.mapValues(serializeEditorState)
         )(jarjestamistiedot?.suunniteltuKestoKuvaus || {}),
@@ -189,7 +189,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
         osaamisalat: values?.alemmanKorkeakoulututkinnonOsaamisalat,
         pickTranslations,
       }),
-      kuvaus: _fp.pipe(
+      kuvaus: _fp.flow(
         pickTranslations,
         _fp.mapValues(serializeEditorState)
       )(values?.kuvaus || {}),
@@ -206,7 +206,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
           koodi: koodi || null,
           laajuus: pickTranslations(laajuus),
           ilmoittautumislinkki: pickTranslations(ilmoittautumislinkki),
-          kuvaus: _fp.pipe(
+          kuvaus: _fp.flow(
             pickTranslations,
             _fp.mapValues(serializeEditorState)
           )(kuvaus),
@@ -219,14 +219,14 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
         hakulomaketyyppi === MUU ? pickTranslations(HTIT?.linkki) : {},
       lisatietoaHakeutumisesta:
         hakulomaketyyppi === MUU || hakulomaketyyppi === EI_SAHKOISTA_HAKUA
-          ? _fp.pipe(
+          ? _fp.flow(
               pickTranslations,
               _fp.mapValues(serializeEditorState)
             )(HTIT?.lisatiedot)
           : {},
       lisatietoaValintaperusteista:
         hakulomaketyyppi === MUU
-          ? _fp.pipe(
+          ? _fp.flow(
               pickTranslations,
               _fp.mapValues(serializeEditorState)
             )(HTIT?.lisatiedotValintaperusteista)

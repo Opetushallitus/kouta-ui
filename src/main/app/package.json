@@ -3,6 +3,24 @@
   "version": "0.1.0",
   "homepage": "/kouta",
   "private": true,
+  "scripts": {
+    "start": "craco start",
+    "start:integration": "cross-env REACT_APP_CYPRESS=true DISABLE_LOCAL_PROXY=true NODE_ENV=test REACT_APP_LANG=cimode npm run start",
+    "start:integration:debug": "cross-env REACT_APP_CYPRESS=true NODE_ENV=test REACT_APP_LANG=cimode npm run start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "NODE_ENV=development build-storybook -c .storybook -o build/storybook --quiet",
+    "lint:fix": "eslint --fix './src/**/*.{js,jsx,ts,tsx}' './cypress/**/*.{js,jsx,ts,tsx}'",
+    "cypress:run": "NODE_OPTIONS=\"--max-http-header-size=8000000\" cypress run -b chrome",
+    "cypress:run:headless": "npm run cypress:run -- --headless",
+    "cypress:open": "cross-env NODE_OPTIONS=\"--max-http-header-size=8000000\" cypress open -b chrome",
+    "test:integration": "START_SERVER_AND_TEST_INSECURE=1 start-server-and-test start:integration https://localhost:3000 'npm run cypress:run:headless'",
+    "test:ci": "CI=true npm run test && npm run test:integration",
+    "update-mocks": "node ./node_modules/kto-ui-common/scripts/update-mocks.js",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
+  },
   "dependencies": {
     "@opetushallitus/virkailija-ui-components": "^0.3.4",
     "@xstate/react": "^1.2.1",
@@ -52,52 +70,6 @@
     "styled-media-query": "^2.1.2",
     "styled-system": "^5.1.5",
     "xstate": "^4.15.1"
-  },
-  "scripts": {
-    "start": "craco start",
-    "start:integration": "cross-env REACT_APP_CYPRESS=true DISABLE_LOCAL_PROXY=true NODE_ENV=test REACT_APP_LANG=cimode npm run start",
-    "start:integration:debug": "cross-env REACT_APP_CYPRESS=true NODE_ENV=test REACT_APP_LANG=cimode npm run start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "craco eject",
-    "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "NODE_ENV=development build-storybook -c .storybook -o build/storybook --quiet",
-    "lint:fix": "eslint --fix './src/**/*.{js,jsx,ts,tsx}' './cypress/**/*.{js,jsx,ts,tsx}'",
-    "cypress:run": "NODE_OPTIONS=\"--max-http-header-size=8000000\" cypress run -b chrome",
-    "cypress:run:headless": "npm run cypress:run -- --headless",
-    "cypress:open": "cross-env NODE_OPTIONS=\"--max-http-header-size=8000000\" cypress open -b chrome",
-    "test:integration": "START_SERVER_AND_TEST_INSECURE=1 start-server-and-test start:integration https://localhost:3000 'npm run cypress:run:headless'",
-    "test:ci": "CI=true npm run test && npm run test:integration",
-    "update-mocks": "node ./node_modules/kto-ui-common/scripts/update-mocks.js",
-    "analyze": "source-map-explorer 'build/static/js/*.js'"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{json,css,md}": [
-      "prettier --write"
-    ],
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix"
-    ]
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "^#(.*)$": "<rootDir>$1",
-      "\\.(css|less)$": "<rootDir>/src/dummy.js"
-    },
-    "transformIgnorePatterns": [
-      "<rootDir>/node_modules/(?!(react-spring)/)"
-    ]
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
@@ -149,5 +121,33 @@
     "start-server-and-test": "^1.11.6",
     "ts-loader": "^8.0.12",
     "typescript": "^4.1.3"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{json,css,md}": [
+      "prettier --write"
+    ],
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^#(.*)$": "<rootDir>$1",
+      "\\.(css|less)$": "<rootDir>/src/dummy.js"
+    },
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/(?!(react-spring)/)"
+    ]
   }
 }

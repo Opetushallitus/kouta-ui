@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { isFunction } from 'lodash';
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
@@ -32,7 +32,7 @@ const Buttons = styled.div`
 
 const LomakeSelect = ({ input, apiUrls, haku, getShowUrl, t, ...props }) => {
   const { value } = input;
-  const url = isFunction(getShowUrl) ? getShowUrl(value) : null;
+  const url = _.isFunction(getShowUrl) ? getShowUrl(value) : null;
 
   return (
     <>

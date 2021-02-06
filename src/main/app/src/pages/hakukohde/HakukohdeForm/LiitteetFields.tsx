@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { get } from 'lodash';
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Field, FieldArray, Fields } from 'redux-form';
 
@@ -271,11 +271,11 @@ const LiitteetField = ({
   ...props
 }) => {
   const yhteinenToimitusaika = Boolean(
-    get(props, [baseName, 'yhteinenToimitusaika', 'input', 'value'])
+    _.get(props, [baseName, 'yhteinenToimitusaika', 'input', 'value'])
   );
 
   const yhteinenToimituspaikka = Boolean(
-    get(props, [baseName, 'yhteinenToimituspaikka', 'input', 'value'])
+    _.get(props, [baseName, 'yhteinenToimituspaikka', 'input', 'value'])
   );
 
   return (

@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import DataLoader from 'dataloader';
-import { cond, first, uniqBy } from 'lodash';
+import _ from 'lodash';
 
 import { useUrls, useHttpClient } from '#/src/contexts/contextHooks';
 import useApiAsync from '#/src/hooks/useApiAsync';
@@ -83,7 +83,7 @@ const yoTyypit = [
 const lkTyypit = ['oppilaitostyyppi_15#1', 'oppilaitostyyppi_19#1'];
 
 const oppilaitostyyppiToKoulutustyyppi = o =>
-  cond([
+  _.cond([
     [_ => ammTyypit.includes(_), _ => 'Amm'],
     [_ => yoTyypit.includes(_), _ => 'Yo'],
     [_ => lkTyypit.includes(_), _ => 'Lk'],
@@ -92,11 +92,11 @@ const oppilaitostyyppiToKoulutustyyppi = o =>
 const isParent = parentOid => org => org.parentOidPath.includes(parentOid);
 
 const isChild = childOid => org =>
-  org.oid === childOid || first(org.children?.filter(isChild(childOid)));
+  org.oid === childOid || _.head(org.children?.filter(isChild(childOid)));
 
 const isSameKoulutustyyppi = koulutustyyppi => org =>
   oppilaitostyyppiToKoulutustyyppi(org) === koulutustyyppi ||
-  first(org.children?.filter(isSameKoulutustyyppi(koulutustyyppi)));
+  _.head(org.children?.filter(isSameKoulutustyyppi(koulutustyyppi)));
 
 export const isSameKoulutustyyppiWithOrganisaatio = (
   organisaatio,
@@ -106,14 +106,14 @@ export const isSameKoulutustyyppiWithOrganisaatio = (
 
   return (
     koulutustyyppi &&
-    first(hierarkia?.filter(isSameKoulutustyyppi(koulutustyyppi)))
+    _.head(hierarkia?.filter(isSameKoulutustyyppi(koulutustyyppi)))
   );
 };
 
 export const usePreferredOrganisaatio = creatorOrganisaatioOid => {
   const user = useAuthorizedUser();
   const roles = getUserRoles(user);
-  const orgOids = uniqBy(getUserOrganisaatiotWithRoles(user, roles));
+  const orgOids = _.uniq(getUserOrganisaatiotWithRoles(user, roles));
   const { organisaatiot } = useOrganisaatiot(orgOids);
   const { hierarkia } = useOrganisaatioHierarkia(creatorOrganisaatioOid, {
     skipParents: false,
@@ -121,7 +121,7 @@ export const usePreferredOrganisaatio = creatorOrganisaatioOid => {
   const firstSameKoulutustyyppiOrganisation =
     organisaatiot &&
     hierarkia &&
-    first(
+    _.head(
       organisaatiot
         .filter(org => isSameKoulutustyyppiWithOrganisaatio(org, hierarkia))
         .map(_ => _.oid)
@@ -129,11 +129,11 @@ export const usePreferredOrganisaatio = creatorOrganisaatioOid => {
   const firstChildOrganisation =
     organisaatiot &&
     hierarkia &&
-    first(orgOids.filter(org => hierarkia.filter(isChild(org.oid))));
+    _.head(orgOids.filter(org => hierarkia.filter(isChild(org.oid))));
   const firstParentOrganisation =
     organisaatiot &&
     hierarkia &&
-    first(orgOids.filter(org => hierarkia.filter(isParent(org.oid))));
+    _.head(orgOids.filter(org => hierarkia.filter(isParent(org.oid))));
 
   const preferredOrganisaatio =
     organisaatiot &&

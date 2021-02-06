@@ -1,9 +1,9 @@
-import { isString } from 'lodash';
+import _ from 'lodash';
 
 import { getJulkaisutilaTranslationKey, JULKAISUTILA } from '#/src/constants';
 
 export const getLabel = ({ status, t }) => {
-  if (!isString(status)) {
+  if (!_.isString(status)) {
     return null;
   }
 

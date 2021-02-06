@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 
-import { cond, noop } from 'lodash';
+import _ from 'lodash';
 import prettyBytes from 'pretty-bytes';
 import { useDropzone } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';
@@ -183,7 +183,7 @@ const ImageConstraints = ({
 
 const InputAreaContent = ({ file, machineError, state, open, onRemove, t }) => (
   <>
-    {cond([
+    {_.cond([
       [
         ifAny([CS.empty, CS.error]),
         () => (
@@ -219,7 +219,7 @@ const InputAreaContent = ({ file, machineError, state, open, onRemove, t }) => (
 export const ImageInput = props => {
   const {
     disabled = false,
-    onChange = noop,
+    onChange = _.noop,
     error: externalError,
     upload,
     maxSize,

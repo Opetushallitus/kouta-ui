@@ -37,7 +37,7 @@ import TypeSection from './TypeSection';
 
 const isInHierarkia = org => hierarkia =>
   hierarkia.organisaatioOid === org.organisaatioOid ||
-  _fp.first(hierarkia.children.filter(isInHierarkia(org)));
+  _fp.head(hierarkia.children.filter(isInHierarkia(org)));
 
 const KoulutusForm = ({
   organisaatioOid,

@@ -1,4 +1,4 @@
-import { isString, isObject, isArray, set } from 'lodash';
+import _ from 'lodash';
 
 import { OPH_PAAKAYTTAJA_ROLE } from '#/src/constants';
 import getOrganisaatioParentOidPath from '#/src/utils/organisaatio/getOrganisaatioParentOidPath';
@@ -11,7 +11,7 @@ const UPDATE_ROLES = ['UPDATE', 'READ_UPDATE', 'CRUD'];
 const CREATE_ROLES = ['CRUD'];
 
 const getRoleName = role => {
-  if (!isString(role)) {
+  if (!_.isString(role)) {
     return undefined;
   }
 
@@ -21,15 +21,15 @@ const getRoleName = role => {
 };
 
 const resolveOidPath = value => {
-  if (isString(value)) {
+  if (_.isString(value)) {
     return [value];
   }
 
-  if (isArray(value)) {
+  if (_.isArray(value)) {
     return value;
   }
 
-  if (isObject(value)) {
+  if (_.isObject(value)) {
     return getOrganisaatioParentOidPath(value);
   }
 
@@ -53,7 +53,7 @@ const createRoleLookup = roles => {
       continue;
     }
 
-    set(lookup, [organisaatioOid, roleName], true);
+    _.set(lookup, [organisaatioOid, roleName], true);
   }
 
   return lookup;

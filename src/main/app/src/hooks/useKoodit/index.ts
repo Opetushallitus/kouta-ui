@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { get, isArray } from 'lodash';
+import _ from 'lodash';
 
 import useApiAsync from '#/src/hooks/useApiAsync';
 import getKoodisto from '#/src/utils/koodi/getKoodisto';
@@ -10,7 +10,7 @@ const noopPromiseFn = () => Promise.resolve([]);
 
 const useKoodit = koodiUris => {
   const versiot = useMemo(() => {
-    const versiotMap = isArray(koodiUris)
+    const versiotMap = _.isArray(koodiUris)
       ? koodiUris.reduce((acc, uri) => {
           const { koodisto, versio } = parseKoodiUri(uri);
 
@@ -51,8 +51,8 @@ const useKoodit = koodiUris => {
       const dataKoodisto = data
         ? data.find(
             k =>
-              get(k, '[0].koodisto.koodistoUri') === koodisto &&
-              `${get(k, '[0].versio')}` === versio
+              _.get(k, '[0].koodisto.koodistoUri') === koodisto &&
+              `${_.get(k, '[0].versio')}` === versio
           )
         : undefined;
 

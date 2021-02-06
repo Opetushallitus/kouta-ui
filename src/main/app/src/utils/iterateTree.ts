@@ -1,9 +1,9 @@
-import { isArray } from 'lodash';
+import _ from 'lodash';
 
 const iterateTree = (tree, fn, options = {}) => {
   const { childrenKey = 'children' } = options;
 
-  if (isArray(tree)) {
+  if (_.isArray(tree)) {
     tree.forEach(child => {
       fn(child);
       iterateTree(child[childrenKey], fn, options);

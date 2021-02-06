@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { noop, isArray } from 'lodash';
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
@@ -17,8 +17,8 @@ const CreatableField = createFormFieldComponent(
   AsyncCreatableSelect,
   ({ input: { onChange, ...input }, maxItems, ...props }) => ({
     ...input,
-    onBlur: noop,
-    onChange: v => isArray(v) && v.length <= maxItems && onChange(v),
+    onBlur: _.noop,
+    onChange: v => _.isArray(v) && v.length <= maxItems && onChange(v),
     maxItems,
     ...props,
   })

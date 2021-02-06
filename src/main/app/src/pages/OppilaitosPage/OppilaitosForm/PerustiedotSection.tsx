@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { get } from 'lodash';
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
@@ -100,10 +100,10 @@ const TiedotSection = ({ name, t }) => {
 
 const OrganisaatioSection = ({ organisaatio, t }) => {
   const language = useLanguage();
-  const opetuskieletUris = get(organisaatio, 'kieletUris') || [];
-  const paikkakuntaUri = get(organisaatio, 'kotipaikkaUri');
-  const oppilaitostyyppiUri = get(organisaatio, 'oppilaitosTyyppiUri');
-  const nimi = getFirstLanguageValue(get(organisaatio, 'nimi'), language);
+  const opetuskieletUris = _.get(organisaatio, 'kieletUris') || [];
+  const paikkakuntaUri = _.get(organisaatio, 'kotipaikkaUri');
+  const oppilaitostyyppiUri = _.get(organisaatio, 'oppilaitosTyyppiUri');
+  const nimi = getFirstLanguageValue(_.get(organisaatio, 'nimi'), language);
 
   const { nimet: opetuskielet } = useKoodiNimet(opetuskieletUris);
   const { nimi: paikkakunta } = useKoodiNimi(paikkakuntaUri);

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { isArray } from 'lodash';
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Field, FieldArray } from 'redux-form';
 
@@ -17,7 +17,7 @@ const HakuaikaInterval = ({ haku }) => {
 
   const hakuajat = useMemo(
     () =>
-      (haku && isArray(haku.hakuajat)
+      (haku && _.isArray(haku.hakuajat)
         ? haku.hakuajat
         : []
       ).map(({ alkaa, paattyy }) => [

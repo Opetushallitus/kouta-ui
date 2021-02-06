@@ -10,7 +10,7 @@ const defaultSort = options => {
   const byLabel = ({ label }) => label;
   const byFirstNumber = ({ label }) =>
     /^\d/.test(label) && _.parseInt(label.match(/(\d+)/)?.[0]);
-  return _.orderBy(options, [byFirstNumber, byLabel]);
+  return _.sortBy(options, [byFirstNumber, byLabel]);
 };
 
 type GetOptionsProps = {

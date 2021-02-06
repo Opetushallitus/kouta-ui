@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { isFunction } from 'lodash';
+import _ from 'lodash';
 import { setLightness } from 'polished';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
@@ -52,7 +52,7 @@ export const ErrorAlert = ({
         <FlexItem grow={1}>
           <ErrorTypography>{text}</ErrorTypography>{' '}
           <Spacing>
-            {isFunction(onReload) ? (
+            {_.isFunction(onReload) ? (
               <ReloadAnchor as="span" onClick={onReload}>
                 {reloadText}
               </ReloadAnchor>

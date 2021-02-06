@@ -116,7 +116,7 @@ test('getFormValuesByHaku toteutuksen ajankohta - Aloitus henkilokohtaisen suunn
   );
   expect(values).toMatchSnapshot();
 
-  _.each(
+  _.forEach(
     values?.aikataulut.henkilokohtaisenSuunnitelmanLisatiedot,
     (lisatiedotEditorState, lisatiedotKey) => {
       expect(serializeEditorState(lisatiedotEditorState)).toEqual(

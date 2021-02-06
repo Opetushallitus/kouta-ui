@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { isString, upperFirst } from 'lodash';
+import _ from 'lodash';
 
 import AsyncKoodistoSelect from '#/src/components/AsyncKoodistoSelect';
 import { useUrls, useHttpClient } from '#/src/contexts/contextHooks';
@@ -13,7 +13,7 @@ const getKoodiLabel = (koodi, language) => {
 
   const [, postinumero] = koodiUri.split('_');
 
-  return `${postinumero} ${upperFirst(
+  return `${postinumero} ${_.upperFirst(
     getKoodiNimiTranslation(koodi, language).toLowerCase()
   )}`;
 };
@@ -41,7 +41,7 @@ export const PostinumeroSelect = ({ koodistoVersio = 2, ...props }) => {
 
   const loadOptions = useCallback(
     async inputValue => {
-      if (!isString(inputValue)) {
+      if (!_.isString(inputValue)) {
         return [];
       }
 

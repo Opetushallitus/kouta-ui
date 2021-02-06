@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { noop, isString } from 'lodash';
+import _ from 'lodash';
 import { setLightness } from 'polished';
 import styled, { css } from 'styled-components';
 
@@ -55,7 +55,7 @@ const Action = styled(FlexItem).attrs({ grow: 1 })`
 
 export const Confirmation = ({
   content = 'Oletko varma?',
-  onConfirm = noop,
+  onConfirm = _.noop,
   ...props
 }) => {
   const overlay = useCallback(
@@ -63,7 +63,7 @@ export const Confirmation = ({
       <DropdownMenu>
         <Wrapper>
           <ContentContainer>
-            {isString(content) ? <Typography>{content}</Typography> : content}
+            {_.isString(content) ? <Typography>{content}</Typography> : content}
           </ContentContainer>
           <Flex>
             <Action

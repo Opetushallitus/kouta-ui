@@ -8,7 +8,7 @@ import React, {
   useLayoutEffect,
 } from 'react';
 
-import { get, minBy, throttle, isFunction } from 'lodash';
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useEvent } from 'react-use';
 import styled, { css } from 'styled-components';
@@ -208,11 +208,11 @@ const NavigationBase = ({
 };
 
 const getElementViewportTop = element => {
-  if (!element || !isFunction(element.getBoundingClientRect)) {
+  if (!element || !_.isFunction(element.getBoundingClientRect)) {
     return Number.MIN_SAFE_INTEGER;
   }
 
-  return get(element.getBoundingClientRect(), 'top');
+  return _.get(element.getBoundingClientRect(), 'top');
 };
 
 const getActiveAnchor = items => {
@@ -220,7 +220,7 @@ const getActiveAnchor = items => {
     return [id, Math.abs(getElementViewportTop(document.getElementById(id)))];
   });
 
-  const min = minBy(idAndTop, ([, top]) => top);
+  const min = _.minBy(idAndTop, ([, top]) => top);
 
   return min ? min[0] : undefined;
 };
@@ -239,7 +239,7 @@ const Navigation = ({ maxInlineItems = 3, ...props }) => {
   }, [items, setActiveItem]);
 
   useEffect(() => {
-    setActiveItemThrottle.current = throttle(() => {
+    setActiveItemThrottle.current = _.throttle(() => {
       setActiveItem(getActiveAnchor(items));
     }, 500);
   }, [items, setActiveItem]);
@@ -249,7 +249,7 @@ const Navigation = ({ maxInlineItems = 3, ...props }) => {
       setHasScrolled(true);
     }
 
-    isFunction(setActiveItemThrottle.current) &&
+    _.isFunction(setActiveItemThrottle.current) &&
       setActiveItemThrottle.current();
   }, [hasScrolled]);
 

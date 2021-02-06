@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { get } from 'lodash';
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
@@ -14,7 +14,7 @@ const Badge = styled.div`
   height: 0.8rem;
   border-radius: 3px;
   background-color: ${({ theme, color }) =>
-    get(theme, ['colors', color]) || theme.colors.tallennettu};
+    _.get(theme, ['colors', color]) || theme.colors.tallennettu};
   margin-right: ${spacing(1)};
 `;
 

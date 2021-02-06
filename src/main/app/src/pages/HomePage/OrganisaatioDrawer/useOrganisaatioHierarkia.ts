@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from 'react';
 
-import { isString, isArray, uniq } from 'lodash';
+import _ from 'lodash';
 
 import useApiAsync from '#/src/hooks/useApiAsync';
 import useAuthorizedUser from '#/src/hooks/useAuthorizedUser';
@@ -17,10 +17,10 @@ import {
 import { createCanReadSomethingRoleBuilder } from '../utils';
 
 const getRolesOrganisaatioOids = roles => {
-  return uniq(roles.map(getRoleOrganisaatioOid).filter(Boolean));
+  return _.uniq(roles.map(getRoleOrganisaatioOid).filter(Boolean));
 };
 
-const isValidNameSearch = name => isString(name) && name.length >= 3;
+const isValidNameSearch = name => _.isString(name) && name.length >= 3;
 
 const invalidOrganisaatioTypeMap = {
   organisaatiotyyppi_05: true,
@@ -32,7 +32,7 @@ const invalidOrganisaatioTypeMap = {
 const organisaatioHasCorrectType = organisaatio => {
   const { organisaatiotyypit } = organisaatio;
 
-  if (!isArray(organisaatiotyypit)) {
+  if (!_.isArray(organisaatiotyypit)) {
     return true;
   }
 
@@ -59,7 +59,7 @@ const useOrganisaatioHierarkia = ({
   }, [name, nameSearchEnabled]);
 
   const watch = JSON.stringify([name, oids]);
-  const formattedName = isString(name) ? name.toLowerCase() : undefined;
+  const formattedName = _.isString(name) ? name.toLowerCase() : undefined;
 
   const { data, ...rest } = useApiAsync({
     promiseFn,
@@ -79,7 +79,7 @@ const useOrganisaatioHierarkia = ({
   );
 
   const roleHierarkia = useMemo(() => {
-    return isArray(data)
+    return _.isArray(data)
       ? flatFilterHierarkia(
           data,
           org => hasRequiredRoles(org) && organisaatioHasCorrectType(org)

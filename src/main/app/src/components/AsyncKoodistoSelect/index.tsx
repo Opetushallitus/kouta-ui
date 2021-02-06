@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 
-import { isFunction } from 'lodash';
+import _ from 'lodash';
 
 import { AsyncSelect } from '#/src/components/Select';
 import { useUrls, useHttpClient } from '#/src/contexts/contextHooks';
@@ -21,7 +21,7 @@ export const AsyncKoodistoSelect = ({
   const language = selectedLanguage || userLanguage;
 
   const formatLabel = useMemo(() => {
-    return isFunction(formatLabelProp)
+    return _.isFunction(formatLabelProp)
       ? formatLabelProp
       : koodi => getKoodiNimiTranslation(koodi, language);
   }, [language, formatLabelProp]);

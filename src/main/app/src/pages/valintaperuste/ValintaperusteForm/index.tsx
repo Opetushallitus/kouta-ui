@@ -1,4 +1,4 @@
-import { isEmpty } from 'lodash';
+import _ from 'lodash';
 
 import {
   KOULUTUSTYYPPI,
@@ -15,7 +15,7 @@ export const initialValues = kieliValinnat => ({
   },
   perustiedot: {
     tyyppi: KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
-    kieliversiot: isEmpty(kieliValinnat) ? ['fi'] : kieliValinnat,
+    kieliversiot: _.isEmpty(kieliValinnat) ? ['fi'] : kieliValinnat,
   },
   valintatavat: [{}],
 });

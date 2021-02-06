@@ -1,6 +1,6 @@
 import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
-import { camelCase, isArray, isEmpty } from 'lodash';
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
@@ -22,10 +22,10 @@ const SecondLevelContainer = styled(Box).attrs({ flexGrow: 0 })`
   border-left: 1px solid ${getThemeProp('palette.divider')};
 `;
 
-const getTranslationKey = tyyppi => `koulutustyypit.${camelCase(tyyppi)}`;
+const getTranslationKey = tyyppi => `koulutustyypit.${_.camelCase(tyyppi)}`;
 
 const getFirstLevelOptions = (hierarkia, t) => {
-  return isArray(hierarkia)
+  return _.isArray(hierarkia)
     ? hierarkia.map(({ tyyppi }) => ({
         value: tyyppi,
         label: t(getTranslationKey(tyyppi)),
@@ -98,7 +98,7 @@ export const KoulutustyyppiSelect = ({ value, onChange, error, disabled }) => {
 
       setFirstLevelValue(node.tyyppi);
 
-      if (isEmpty(node.children)) {
+      if (_.isEmpty(node.children)) {
         onChange(e.target.value);
       } else {
         onChange(node.children[0].tyyppi);
@@ -107,7 +107,7 @@ export const KoulutustyyppiSelect = ({ value, onChange, error, disabled }) => {
     [setFirstLevelValue, onChange, hierarkia]
   );
 
-  const hasSecondLevelOptions = !isEmpty(secondLevelOptions);
+  const hasSecondLevelOptions = !_.isEmpty(secondLevelOptions);
 
   const onTutkintoonJohtavatClick = useCallback(() => {
     if (!johtaaTutkintoon) {

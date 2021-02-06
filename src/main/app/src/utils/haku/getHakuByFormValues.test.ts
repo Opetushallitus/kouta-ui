@@ -1,4 +1,4 @@
-import { mapValues, merge } from 'lodash';
+import _ from 'lodash';
 
 import { parseEditorState } from '#/src/components/Editor/utils';
 import {
@@ -76,7 +76,7 @@ test('getHakuByFormValues returns correct haku given form values', () => {
 
 test('getHakuByFormValues returns correct haku given different hakulomake variations', () => {
   const hakuMuu = getHakuByFormValues(
-    merge({}, baseValues, {
+    _.merge({}, baseValues, {
       hakulomake: {
         tyyppi: HAKULOMAKETYYPPI.MUU,
         linkki: { fi: 'https://google.fi' },
@@ -85,7 +85,7 @@ test('getHakuByFormValues returns correct haku given different hakulomake variat
   );
 
   const hakuEiHakua = getHakuByFormValues(
-    merge({}, baseValues, {
+    _.merge({}, baseValues, {
       hakulomake: {
         tyyppi: HAKULOMAKETYYPPI.EI_SAHKOISTA_HAKUA,
         kuvaus: { fi: parseEditorState('kuvaus') },
@@ -100,7 +100,7 @@ test('getHakuByFormValues returns correct haku given different hakulomake variat
 test('getHakuByFormValues toteutuksen ajankohta - Tarkka alkamisaika', () => {
   expect(
     getHakuByFormValues(
-      merge({}, baseValues, {
+      _.merge({}, baseValues, {
         aikataulut: {
           ajankohtaTyyppi: Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,
           tarkkaAlkaa: '2019-09-16T08:44',
@@ -114,10 +114,10 @@ test('getHakuByFormValues toteutuksen ajankohta - Tarkka alkamisaika', () => {
 test('getHakuByFormValues toteutuksen ajankohta - Aloitus henkilokohtaisen suunnitelman mukaisesti', () => {
   expect(
     getHakuByFormValues(
-      merge({}, baseValues, {
+      _.merge({}, baseValues, {
         aikataulut: {
           ajankohtaTyyppi: Alkamiskausityyppi.HENKILOKOHTAINEN_SUUNNITELMA,
-          henkilokohtaisenSuunnitelmanLisatiedot: mapValues(
+          henkilokohtaisenSuunnitelmanLisatiedot: _.mapValues(
             {
               fi: '<p>hlokoht fi </p>',
               sv: '<p>hlokoht sv </p>',

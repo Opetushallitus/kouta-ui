@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { get, isEmpty, isString, mapValues } from 'lodash';
+import _ from 'lodash';
 import { Trans, useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
@@ -84,9 +84,9 @@ const getExtendedEPeruste = async ({ httpClient, apiUrls, ePerusteId }) => {
 
   const osaamisalatWithDescriptions = osaamisalat.map(osaamisala => ({
     ...osaamisala,
-    kuvaus: mapValues(
-      get(osaamisalakuvaukset, [osaamisala.uri, 0, 'teksti']) || {},
-      v => (isString(v) ? sanitizeHTML(v) : v)
+    kuvaus: _.mapValues(
+      _.get(osaamisalakuvaukset, [osaamisala.uri, 0, 'teksti']) || {},
+      v => (_.isString(v) ? sanitizeHTML(v) : v)
     ),
   }));
 
@@ -190,16 +190,16 @@ const OsaamisalatContainer = ({
       })),
     [osaamisalat, language]
   );
-  const { koodiArvo } = parseKoodiUri(get(koulutus, 'koulutusKoodiUri'));
+  const { koodiArvo } = parseKoodiUri(_.get(koulutus, 'koulutusKoodiUri'));
 
   const osaamisalatValue = useFieldValue(`${name}.osaamisalat`);
   const koulutusLinkText = `${getLanguageValue(
-    get(koulutus, 'nimi'),
+    _.get(koulutus, 'nimi'),
     language
   )} (${koodiArvo})`;
 
   const ePerusteLinkText = `${getLanguageValue(nimi, language)} (${id})`;
-  return isEmpty(osaamisalat) ? (
+  return _.isEmpty(osaamisalat) ? (
     <Typography>
       <Trans
         i18nKey="toteutuslomake.eiOsaamisaloja"

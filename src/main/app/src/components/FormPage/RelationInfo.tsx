@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { isObject } from 'lodash';
+import _ from 'lodash';
 
 import Flex, { FlexItem } from '#/src/components/Flex';
 import LocalLink from '#/src/components/LocalLink';
@@ -8,7 +8,7 @@ import { Typography } from '#/src/components/virkailija';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 const getEntityName = entity => {
-  return entity && isObject(entity.nimi)
+  return entity && _.isObject(entity.nimi)
     ? getFirstLanguageValue(entity.nimi)
     : null;
 };

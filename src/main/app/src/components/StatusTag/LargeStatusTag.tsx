@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { isString } from 'lodash';
+import _ from 'lodash';
 import { setLightness } from 'polished';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
@@ -18,7 +18,7 @@ const statusByIcon = {
 };
 
 const getStatusIconType = status => {
-  if (!isString(status)) {
+  if (!_.isString(status)) {
     return '';
   }
 

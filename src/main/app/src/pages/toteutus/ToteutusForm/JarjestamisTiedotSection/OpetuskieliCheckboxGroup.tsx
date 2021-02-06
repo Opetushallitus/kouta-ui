@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { orderBy } from 'lodash';
+import _ from 'lodash';
 
 import { CheckboxGroup } from '#/src/components/virkailija';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
@@ -13,7 +13,7 @@ const OpetuskieliCheckboxGroup = props => {
       const order = fixedOrder.indexOf(label);
       return order !== -1 ? order : Number.MAX_SAFE_INTEGER;
     };
-    return orderBy(options, [byFixedOrder, byLabel]);
+    return _.sortBy(options, [byFixedOrder, byLabel]);
   };
 
   const { options } = useKoodistoOptions({

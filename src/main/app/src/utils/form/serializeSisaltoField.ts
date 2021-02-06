@@ -1,24 +1,24 @@
 import produce from 'immer';
-import { isObject, isArray, get, pick, mapValues } from 'lodash';
+import _ from 'lodash';
 
 import { serializeEditorState } from '#/src/components/Editor/utils';
 
 const serializeTable = ({ table, kielivalinta }) => {
-  if (!get(table, 'rows')) {
+  if (!_.get(table, 'rows')) {
     return { rows: [] };
   }
 
   return produce(table, draft => {
     (draft.rows || []).forEach((row, rowIndex) => {
-      if (isObject(row)) {
+      if (_.isObject(row)) {
         row.index = rowIndex;
 
         (row.columns || []).forEach((column, columnIndex) => {
-          if (isObject(column)) {
+          if (_.isObject(column)) {
             column.index = columnIndex;
 
-            if (isObject(column.text)) {
-              column.text = pick(column.text, kielivalinta);
+            if (_.isObject(column.text)) {
+              column.text = _.pick(column.text, kielivalinta);
             }
           }
         });
@@ -28,7 +28,7 @@ const serializeTable = ({ table, kielivalinta }) => {
 };
 
 const serializeSisaltoField = (sisalto, kielivalinta) => {
-  if (!isArray(sisalto)) {
+  if (!_.isArray(sisalto)) {
     return [];
   }
 
@@ -36,8 +36,8 @@ const serializeSisaltoField = (sisalto, kielivalinta) => {
     let serializedData = {};
 
     if (tyyppi === 'teksti') {
-      serializedData = pick(
-        isObject(data) ? mapValues(data, serializeEditorState) : {},
+      serializedData = _.pick(
+        _.isObject(data) ? _.mapValues(data, serializeEditorState) : {},
         kielivalinta
       );
     }

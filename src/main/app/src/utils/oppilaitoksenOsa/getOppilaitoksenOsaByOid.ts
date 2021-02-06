@@ -1,4 +1,4 @@
-import { get, isObject } from 'lodash';
+import _ from 'lodash';
 
 const getOppilaitoksenOsaByOid = async ({
   oid,
@@ -15,9 +15,9 @@ const getOppilaitoksenOsaByOid = async ({
     }
   );
 
-  const lastModified = get(headers, 'x-last-modified') || null;
+  const lastModified = _.get(headers, 'x-last-modified') || null;
 
-  return isObject(data) ? { lastModified, ...data } : data;
+  return _.isObject(data) ? { lastModified, ...data } : data;
 };
 
 export default getOppilaitoksenOsaByOid;

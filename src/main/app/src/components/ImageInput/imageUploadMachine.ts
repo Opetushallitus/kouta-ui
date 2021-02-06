@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Machine, assign } from 'xstate';
 
 export const actionTypes = {
@@ -36,7 +37,7 @@ const clearValue = assign({
 const createUploadingState = t => ({
   id: uploading,
   entry: assign({
-    file: (_, e) => e.files[0],
+    file: (ctx, e) => e.files[0],
   }),
   invoke: {
     id: 'uploadFile',
@@ -44,7 +45,7 @@ const createUploadingState = t => ({
     onDone: {
       target: fileUploaded,
       actions: assign({
-        url: (_, e) => e.data,
+        url: (ctx, e) => e.data,
       }),
     },
     onError: {
@@ -52,8 +53,8 @@ const createUploadingState = t => ({
       actions: [
         clearValue,
         assign({
-          error: (_, e) =>
-            e.data instanceof Error
+          error: (ctx, e) =>
+            _.isError(e.data)
               ? t('yleiset.kuvanLahetysVirhe')
               : e?.data?.message,
         }),

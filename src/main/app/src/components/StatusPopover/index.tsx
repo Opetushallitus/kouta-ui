@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { isFunction } from 'lodash';
+import _ from 'lodash';
 import styled, { css } from 'styled-components';
 
 import Flex, { FlexItem } from '#/src/components/Flex';
@@ -57,7 +57,7 @@ export const StatusPopover = ({
   onClose,
   ...props
 }) => {
-  const canClose = isFunction(onClose);
+  const canClose = _.isFunction(onClose);
 
   const overlay = (
     <Container>

@@ -48,7 +48,7 @@ class ErrorBuilder {
         return false;
       }
     };
-    _.each(Object.entries(value || {}), ([lang, value]) => {
+    _.forEach(Object.entries(value || {}), ([lang, value]) => {
       if (!validURL(value)) {
         this.setError(`${path}.${lang}`, errorMessage);
       }

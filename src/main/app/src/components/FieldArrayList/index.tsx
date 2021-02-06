@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { get, isNil } from 'lodash';
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
 
@@ -42,7 +42,7 @@ export const FieldArrayList = ({
 }) => {
   const { t } = useTranslation();
   const removeButtonText = removeButtonTextProp || t('yleiset.poista');
-  const error = get(meta, 'error');
+  const error = _.get(meta, 'error');
 
   const fieldsContent = fields.map((field, index, f) => {
     return (
@@ -68,7 +68,7 @@ export const FieldArrayList = ({
 
   return (
     <FormControl
-      error={!isNil(error)}
+      error={!_.isNil(error)}
       helperText={<FormHelperTextMulti errorMessage={error} />}
     >
       {fieldsContent}

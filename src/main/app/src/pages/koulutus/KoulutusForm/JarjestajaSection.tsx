@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { get, negate } from 'lodash';
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
@@ -40,11 +40,11 @@ const OrganizationSection = ({
 }) => {
   const { t } = useTranslation();
   const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid, {
-    filter: negate(organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)),
+    filter: _.negate(organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)),
   });
 
   const roleBuilder = useAuthorizedUserRoleBuilder();
-  const tarjoajat = get(koulutus, 'tarjoajat') || [];
+  const tarjoajat = _.get(koulutus, 'tarjoajat') || [];
   const tarjoajatFromPohja = useFieldValue('pohja.tarjoajat');
   const kaytaPohjanJarjestajaa = useFieldValue(
     'tarjoajat.kaytaPohjanJarjestajaa'

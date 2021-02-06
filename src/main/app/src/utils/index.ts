@@ -192,13 +192,13 @@ export const getValuesForSaving = (
   const saveableValues: any = _.cloneDeep(initialValues);
 
   // Ensure that all fields that were unregistered (hidden by the user) are sent to backend as empty values
-  _.each(unregisteredFields, ({ name }) => {
+  _.forEach(unregisteredFields, ({ name }) => {
     const fieldName = getFieldName(name);
     _.set(saveableValues, fieldName, null);
   });
 
   // Ensure that the fields that are registered (visible) will be saved
-  _.each(registeredFields, ({ name }) => {
+  _.forEach(registeredFields, ({ name }) => {
     const fieldName = getFieldName(name);
     _.set(saveableValues, fieldName, _.get(values, fieldName));
   });

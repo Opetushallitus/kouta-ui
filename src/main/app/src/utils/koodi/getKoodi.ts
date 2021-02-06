@@ -1,4 +1,4 @@
-const isNullish = value => value === undefined || value === null;
+import _ from 'lodash';
 
 const getKoodi = async ({
   apiUrls,
@@ -11,7 +11,7 @@ const getKoodi = async ({
     apiUrls.url(
       'koodisto-service.codeelement',
       koodi,
-      !isNullish(versio) ? versio : ''
+      !_.isNil(versio) ? versio : ''
     ),
     {
       errorNotifier: {

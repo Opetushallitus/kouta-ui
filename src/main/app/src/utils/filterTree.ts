@@ -1,13 +1,13 @@
-import { isArray, isEmpty, isFunction } from 'lodash';
+import _ from 'lodash';
 
 const filterTree = (tree, filterFn, options = {}) => {
-  if (!isFunction(filterFn)) {
+  if (!_.isFunction(filterFn)) {
     return tree;
   }
 
   const { childrenKey = 'children', filterChildren = false } = options;
 
-  if (isEmpty(tree) || !isArray(tree)) {
+  if (_.isEmpty(tree) || !_.isArray(tree)) {
     return [];
   }
 
@@ -17,7 +17,7 @@ const filterTree = (tree, filterFn, options = {}) => {
       [childrenKey]: filterTree(branch[childrenKey], filterFn, options),
     }))
     .filter(item =>
-      filterChildren || isEmpty(item[childrenKey]) ? filterFn(item) : true
+      filterChildren || _.isEmpty(item[childrenKey]) ? filterFn(item) : true
     );
 };
 

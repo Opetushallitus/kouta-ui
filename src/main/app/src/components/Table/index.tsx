@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { isFunction } from 'lodash';
+import _ from 'lodash';
 import styled, { css } from 'styled-components';
 
 import { Icon } from '#/src/components/virkailija';
@@ -131,7 +131,7 @@ export const TableCell = ({
 }) => {
   return (
     <TableCellBase {...props}>
-      {isFunction(onSort) ? (
+      {_.isFunction(onSort) ? (
         <SortContainer
           onClick={() => {
             onSort(sortDirection === 'desc' ? 'asc' : 'desc');

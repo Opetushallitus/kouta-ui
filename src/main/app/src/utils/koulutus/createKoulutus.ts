@@ -1,5 +1,5 @@
 import produce from 'immer';
-import { isEmpty } from 'lodash';
+import _ from 'lodash';
 
 import { getKoulutusByKoodi } from '#/src/utils/koulutus/getKoulutusByKoodi';
 
@@ -12,7 +12,7 @@ const createKoulutus = async ({
     draft.metadata.tyyppi = koulutusArg.koulutustyyppi;
   });
 
-  if (isEmpty(koulutus.nimi) && koulutus.koulutusKoodiUri) {
+  if (_.isEmpty(koulutus.nimi) && koulutus.koulutusKoodiUri) {
     const { nimi } = await getKoulutusByKoodi({
       koodiUri: koulutus.koulutusKoodiUri,
       httpClient,

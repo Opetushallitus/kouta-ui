@@ -1,4 +1,4 @@
-import { get, isNumber, mapValues } from 'lodash';
+import _ from 'lodash';
 
 import { parseEditorState } from '#/src/components/Editor/utils';
 
@@ -25,15 +25,15 @@ const getFormValuesByOppilaitos = oppilaitos => {
   return {
     kieliversiot: kielivalinta || [],
     tila,
-    esittely: mapValues(esittely || {}, parseEditorState),
+    esittely: _.mapValues(esittely || {}, parseEditorState),
     yhteystiedot: {
-      osoite: get(yhteystiedot, 'osoite.osoite') || {},
-      postinumero: get(yhteystiedot, 'osoite.postinumeroKoodiUri')
+      osoite: _.get(yhteystiedot, 'osoite.osoite') || {},
+      postinumero: _.get(yhteystiedot, 'osoite.postinumeroKoodiUri')
         ? { value: yhteystiedot.osoite.postinumeroKoodiUri }
         : null,
-      verkkosivu: get(yhteystiedot, 'wwwSivu') || {},
-      puhelinnumero: get(yhteystiedot, 'puhelinnumero') || {},
-      sahkoposti: get(yhteystiedot, 'sahkoposti') || {},
+      verkkosivu: _.get(yhteystiedot, 'wwwSivu') || {},
+      puhelinnumero: _.get(yhteystiedot, 'puhelinnumero') || {},
+      sahkoposti: _.get(yhteystiedot, 'sahkoposti') || {},
     },
     tietoa: {
       osiot: (tietoaOpiskelusta || []).map(({ otsikkoKoodiUri }) => ({
@@ -41,7 +41,7 @@ const getFormValuesByOppilaitos = oppilaitos => {
       })),
       tiedot: (tietoaOpiskelusta || []).reduce(
         (acc, { otsikkoKoodiUri, teksti }) => {
-          acc[otsikkoKoodiUri] = mapValues(teksti || {}, parseEditorState);
+          acc[otsikkoKoodiUri] = _.mapValues(teksti || {}, parseEditorState);
 
           return acc;
         },
@@ -49,13 +49,13 @@ const getFormValuesByOppilaitos = oppilaitos => {
       ),
     },
     perustiedot: {
-      opiskelijoita: isNumber(opiskelijoita) ? opiskelijoita : '',
-      korkeakouluja: isNumber(korkeakouluja) ? korkeakouluja : '',
-      tiedekuntia: isNumber(tiedekuntia) ? tiedekuntia : '',
-      kampuksia: isNumber(kampuksia) ? kampuksia : '',
-      yksikoita: isNumber(yksikoita) ? yksikoita : '',
-      toimipisteita: isNumber(toimipisteita) ? toimipisteita : '',
-      akatemioita: isNumber(akatemioita) ? akatemioita : '',
+      opiskelijoita: _.isNumber(opiskelijoita) ? opiskelijoita : '',
+      korkeakouluja: _.isNumber(korkeakouluja) ? korkeakouluja : '',
+      tiedekuntia: _.isNumber(tiedekuntia) ? tiedekuntia : '',
+      kampuksia: _.isNumber(kampuksia) ? kampuksia : '',
+      yksikoita: _.isNumber(yksikoita) ? yksikoita : '',
+      toimipisteita: _.isNumber(toimipisteita) ? toimipisteita : '',
+      akatemioita: _.isNumber(akatemioita) ? akatemioita : '',
       logo,
     },
     teemakuva,

@@ -1,4 +1,4 @@
-import { get, isArray } from 'lodash';
+import _ from 'lodash';
 import queryString from 'query-string';
 
 const getOrganisaatioHierarkia = async ({
@@ -15,7 +15,7 @@ const getOrganisaatioHierarkia = async ({
     aktiiviset: aktiiviset ? 'true' : 'false',
     suunnitellut: suunnitellut ? 'true' : 'false',
     lakkautetut: lakkautetut ? 'true' : 'false',
-    ...(isArray(oids) && { oidResctrictionList: oids }),
+    ...(_.isArray(oids) && { oidResctrictionList: oids }),
   };
 
   const { data } = await httpClient.get(
@@ -26,7 +26,7 @@ const getOrganisaatioHierarkia = async ({
     }
   );
 
-  return get(data, 'organisaatiot') || [];
+  return _.get(data, 'organisaatiot') || [];
 };
 
 export default getOrganisaatioHierarkia;

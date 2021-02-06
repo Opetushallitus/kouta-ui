@@ -1,5 +1,5 @@
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
-import { merge } from 'lodash';
+import _ from 'lodash';
 
 import valintaperusteMocks from '#/cypress/mocks/valintaperuste.mock.json';
 
@@ -29,7 +29,7 @@ export const stubValintaperusteFormRoutes = ({ organisaatioOid }) => {
       url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
     },
     {
-      body: merge(organisaatio(), {
+      body: _.merge(organisaatio(), {
         oid: organisaatioOid,
       }),
     }
@@ -42,7 +42,7 @@ export const stubValintaperusteFormRoutes = ({ organisaatioOid }) => {
     },
     {
       body: [
-        merge(organisaatio(), {
+        _.merge(organisaatio(), {
           oid: organisaatioOid,
         }),
       ],
@@ -58,7 +58,7 @@ export const stubValintaperusteFormRoutes = ({ organisaatioOid }) => {
     { method: 'GET', url: '**/sorakuvaus/list**' },
     {
       body: [...new Array(10)].map((v, i) =>
-        merge(soraKuvaus(), {
+        _.merge(soraKuvaus(), {
           nimi: { fi: `Sora-kuvaus ${i}` },
           id: i.toString(),
           tila: 'julkaistu',
@@ -70,7 +70,7 @@ export const stubValintaperusteFormRoutes = ({ organisaatioOid }) => {
   cy.intercept(
     { method: 'GET', url: '**/sorakuvaus/1' },
     {
-      body: merge(soraKuvaus(), {
+      body: _.merge(soraKuvaus(), {
         nimi: { fi: `Sora-kuvaus 1` },
         id: 1,
         tila: 'julkaistu',

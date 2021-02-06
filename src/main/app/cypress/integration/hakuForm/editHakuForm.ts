@@ -1,4 +1,4 @@
-import { merge } from 'lodash';
+import _ from 'lodash';
 
 import haku from '#/cypress/data/haku';
 import { stubHakuFormRoutes } from '#/cypress/hakuFormUtils';
@@ -25,7 +25,7 @@ export const editHakuForm = () => {
     cy.intercept(
       { method: 'GET', url: `**/haku/${hakuOid}` },
       {
-        body: merge(haku(), {
+        body: _.merge(haku(), {
           oid: hakuOid,
           organisaatioOid: organisaatioOid,
         }),

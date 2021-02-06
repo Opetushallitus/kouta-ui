@@ -1,4 +1,4 @@
-import { merge } from 'lodash';
+import _ from 'lodash';
 
 import valintaperuste from '#/cypress/data/valintaperuste';
 import {
@@ -21,7 +21,7 @@ const prepareTest = tyyppi => {
 
   cy.intercept(
     { method: 'GET', url: `**/valintaperuste/${valintaperusteId}` },
-    { body: merge(valintaperuste({ tyyppi }), testValintaperusteFields) }
+    { body: _.merge(valintaperuste({ tyyppi }), testValintaperusteFields) }
   );
 
   cy.visit(

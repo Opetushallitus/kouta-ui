@@ -1,4 +1,4 @@
-import { merge } from 'lodash';
+import _ from 'lodash';
 
 import createKoodi from '#/cypress/data/koodi';
 import createOrganisaatio from '#/cypress/data/organisaatio';
@@ -22,7 +22,7 @@ export const stubOppilaitosFormRoutes = ({ organisaatioOid }) => {
     },
     {
       body: [
-        merge(createOrganisaatio(), {
+        _.merge(createOrganisaatio(), {
           oid: organisaatioOid,
         }),
       ],

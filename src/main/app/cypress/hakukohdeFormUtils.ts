@@ -1,5 +1,5 @@
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
-import { merge } from 'lodash';
+import _ from 'lodash';
 
 import haku from '#/cypress/data/haku';
 import hakukohde from '#/cypress/data/hakukohde';
@@ -82,7 +82,7 @@ export const prepareTest = ({
   cy.intercept(
     { method: 'GET', url: `**/toteutus/${toteutusOid}` },
     {
-      body: merge(toteutus({ tyyppi }), {
+      body: _.merge(toteutus({ tyyppi }), {
         oid: toteutusOid,
         organisaatioOid,
         koulutusOid: koulutusOid,
@@ -95,7 +95,7 @@ export const prepareTest = ({
   cy.intercept(
     { method: 'GET', url: `**/koulutus/${koulutusOid}` },
     {
-      body: merge(koulutus({ tyyppi }), {
+      body: _.merge(koulutus({ tyyppi }), {
         oid: koulutusOid,
         tarjoajat,
         organisaatioOid: organisaatioOid,
@@ -108,7 +108,7 @@ export const prepareTest = ({
     { method: 'GET', url: '**/valintaperuste/list**' },
     {
       body: [
-        merge(valintaperuste(), {
+        _.merge(valintaperuste(), {
           id: valintaperusteId,
           nimi: { fi: 'Valintaperusteen nimi' },
           tila: 'julkaistu',
@@ -120,7 +120,7 @@ export const prepareTest = ({
   cy.intercept(
     { method: 'GET', url: `**/valintaperuste/${valintaperusteId}` },
     {
-      body: merge(valintaperuste(), {
+      body: _.merge(valintaperuste(), {
         id: valintaperusteId,
         nimi: { fi: 'Valintaperusteen nimi' },
         tila: 'julkaistu',
@@ -130,7 +130,7 @@ export const prepareTest = ({
 
   cy.intercept(
     { method: 'GET', url: `**/hakukohde/${hakukohdeOid}` },
-    { body: merge(hakukohde(), testHakukohdeFields) }
+    { body: _.merge(hakukohde(), testHakukohdeFields) }
   );
 
   edit
@@ -179,7 +179,7 @@ export const stubHakukohdeFormRoutes = ({ organisaatioOid, hakuOid }) => {
       url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
     },
     {
-      body: merge(organisaatio(), {
+      body: _.merge(organisaatio(), {
         oid: organisaatioOid,
       }),
     }
@@ -192,7 +192,7 @@ export const stubHakukohdeFormRoutes = ({ organisaatioOid, hakuOid }) => {
     },
     {
       body: [
-        merge(organisaatio(), {
+        _.merge(organisaatio(), {
           oid: organisaatioOid,
         }),
       ],
@@ -202,7 +202,7 @@ export const stubHakukohdeFormRoutes = ({ organisaatioOid, hakuOid }) => {
   cy.intercept(
     { method: 'GET', url: `**/haku/${hakuOid}` },
     {
-      body: merge(haku(), {
+      body: _.merge(haku(), {
         oid: hakuOid,
         organisaatioOid: organisaatioOid,
         hakulomaketyyppi: 'muu',

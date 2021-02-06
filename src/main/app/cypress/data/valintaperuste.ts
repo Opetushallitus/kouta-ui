@@ -1,6 +1,6 @@
-import { merge } from 'lodash';
+import _ from 'lodash';
 
-const withKorkeakouluFields = valintaperuste => merge({}, valintaperuste, {});
+const withKorkeakouluFields = valintaperuste => _.merge({}, valintaperuste, {});
 
 const valintaperuste = ({ tyyppi = 'amm' } = {}) => {
   const baseFields = {

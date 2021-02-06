@@ -1,4 +1,4 @@
-import { merge } from 'lodash';
+import _ from 'lodash';
 
 import { Alkamiskausityyppi } from '#/src/constants';
 
@@ -90,7 +90,7 @@ const getBaseFields = () => ({
 });
 
 const getAmmatillinenFields = ({ tyyppi }) =>
-  merge(getBaseFields(), {
+  _.merge(getBaseFields(), {
     metadata: {
       tyyppi,
       osaamisalat: [
@@ -108,7 +108,7 @@ const getAmmatillinenFields = ({ tyyppi }) =>
   });
 
 const getKorkeakouluFields = ({ tyyppi }) =>
-  merge(getBaseFields(), {
+  _.merge(getBaseFields(), {
     metadata: {
       tyyppi,
       ylemmanKorkeakoulututkinnonOsaamisalat: [
@@ -131,7 +131,7 @@ const getKorkeakouluFields = ({ tyyppi }) =>
   });
 
 const getLukioFields = ({ tyyppi }) =>
-  merge(getBaseFields(), {
+  _.merge(getBaseFields(), {
     metadata: {
       tyyppi,
       opetus: {

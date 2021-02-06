@@ -1,5 +1,5 @@
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
-import { merge } from 'lodash';
+import _ from 'lodash';
 
 import createKoodi from '#/cypress/data/koodi';
 import createKoodisto from '#/cypress/data/koodisto';
@@ -33,7 +33,7 @@ export const stubHakuFormRoutes = ({ organisaatioOid }) => {
       url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
     },
     {
-      body: merge(organisaatio(), {
+      body: _.merge(organisaatio(), {
         oid: organisaatioOid,
       }),
     }
@@ -46,7 +46,7 @@ export const stubHakuFormRoutes = ({ organisaatioOid }) => {
     },
     {
       body: [
-        merge(organisaatio(), {
+        _.merge(organisaatio(), {
           oid: organisaatioOid,
         }),
       ],

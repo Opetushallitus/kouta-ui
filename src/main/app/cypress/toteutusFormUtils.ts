@@ -1,4 +1,4 @@
-import { merge } from 'lodash';
+import _ from 'lodash';
 
 import koodisto from '#/cypress/data/koodisto';
 import organisaatio from '#/cypress/data/organisaatio';
@@ -31,7 +31,7 @@ export const stubToteutusFormRoutes = ({ organisaatioOid, perusteId }) => {
       url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
     },
     {
-      body: merge(organisaatio(), {
+      body: _.merge(organisaatio(), {
         oid: organisaatioOid,
       }),
     }
@@ -44,7 +44,7 @@ export const stubToteutusFormRoutes = ({ organisaatioOid, perusteId }) => {
     },
     {
       body: [
-        merge(organisaatio(), {
+        _.merge(organisaatio(), {
           oid: organisaatioOid,
         }),
       ],

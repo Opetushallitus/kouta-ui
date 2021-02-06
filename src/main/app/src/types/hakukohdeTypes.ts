@@ -26,9 +26,9 @@ type ValintakokeetValues = {
     id?: string;
     tyyppi: { value: string };
     nimi: TranslatedField<string>;
-    liittyyEnnakkovalmistautumista: Boolean;
+    liittyyEnnakkovalmistautumista: boolean;
     ohjeetEnnakkovalmistautumiseen: TranslatedField<EditorState>;
-    erityisjarjestelytMahdollisia: Boolean;
+    erityisjarjestelytMahdollisia: boolean;
     ohjeetErityisjarjestelyihin: TranslatedField<EditorState>;
     tietoaHakijalle: TranslatedField<EditorState>;
     tilaisuudet: Array<{
@@ -48,14 +48,14 @@ export type HakukohdeFormValues = {
   muokkaaja?: string;
   kieliversiot: Array<LanguageCode>;
   ajankohta: AjankohtaFields & {
-    kaytetaanHakukohteenAlkamiskautta: Boolean;
+    kaytetaanHakukohteenAlkamiskautta: boolean;
   };
   aloituspaikat: {
     aloituspaikkamaara: string;
     ensikertalaismaara: string;
   };
   hakuajat: {
-    eriHakuaika: Boolean;
+    eriHakuaika: boolean;
     hakuajat: Array<{
       alkaa: string;
       paattyy: string;
@@ -63,7 +63,7 @@ export type HakukohdeFormValues = {
   };
   perustiedot: {
     nimi: TranslatedField<string>;
-    voiSuorittaaKaksoistutkinnon: Boolean;
+    voiSuorittaaKaksoistutkinnon: boolean;
   };
   pohjakoulutus: {
     pohjakoulutusvaatimus: Array<{ value: string }>;
@@ -74,8 +74,8 @@ export type HakukohdeFormValues = {
   jarjestyspaikkaOid: string;
   liitteet: {
     toimitustapa: ToimitustapaFields;
-    yhteinenToimituspaikka: Boolean;
-    yhteinenToimitusaika: Boolean;
+    yhteinenToimituspaikka: boolean;
+    yhteinenToimitusaika: boolean;
     toimitusaika: string;
     liitteet: Array<{
       tyyppi: { value: string };
@@ -90,6 +90,6 @@ export type HakukohdeFormValues = {
     lomake?: { value?: string };
     linkki?: TranslatedField<string>;
     kuvaus?: TranslatedField<string>;
-    eriHakulomake: Boolean;
+    eriHakulomake: boolean;
   };
 };

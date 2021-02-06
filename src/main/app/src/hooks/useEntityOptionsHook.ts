@@ -29,7 +29,7 @@ export const useEntityOptions = entities => {
                 ` (${t(getJulkaisutilaTranslationKey(entity.tila))})`,
             })),
             _fp.orderBy(({ label }) => _fp.lowerCase(label), 'asc')
-          )(entities as EntityForDropdown[])
+          )(entities as Array<EntityForDropdown>)
         : [],
     [entities, language, t]
   );

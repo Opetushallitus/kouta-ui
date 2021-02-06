@@ -107,7 +107,7 @@ const ExtraField = ({ children = null }: { children: JSX.Element | null }) => (
 const StipendiFields = ({ koulutustyyppi, language, name }) => {
   const { t } = useTranslation();
   const onkoStipendia = useFieldValue<'kylla' | 'ei'>(`${name}.onkoStipendia`);
-  const opetuskieliArr = useFieldValue<string[]>(`${name}.opetuskieli`);
+  const opetuskieliArr = useFieldValue<Array<string>>(`${name}.opetuskieli`);
 
   const isVisible = isStipendiVisible(koulutustyyppi, opetuskieliArr);
 

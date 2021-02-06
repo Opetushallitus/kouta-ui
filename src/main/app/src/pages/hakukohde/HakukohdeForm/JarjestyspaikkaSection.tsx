@@ -51,7 +51,7 @@ export const RadioGroup = ({
 }) => {
   const validChildren = React.Children.toArray(childrenProp).filter(c =>
     React.isValidElement(c)
-  ) as RadioGroupChild[];
+  ) as Array<RadioGroupChild>;
 
   const childrenCount = React.Children.count(validChildren);
 

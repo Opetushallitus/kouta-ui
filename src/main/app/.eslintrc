@@ -15,6 +15,21 @@
     "cypress/globals": true
   },
   "rules": {
+    "@typescript-eslint/ban-types": [
+      "error",
+      {
+        "types": {
+          "object": false
+        },
+        "extendDefaults": true
+      }
+    ],
+    "@typescript-eslint/array-type": [
+      "warn",
+      {
+        "default": "generic"
+      }
+    ],
     "prettier/prettier": "warn",
     "import/no-anonymous-default-export": "off",
     "import/order": [
@@ -52,6 +67,9 @@
     "lodash/prefer-constant": "off",
     "lodash/prefer-noop": "off",
     "lodash/prefer-includes": "off",
-    "lodash/path-style": ["error", "as-needed"]
+    "lodash/path-style": [
+      "error",
+      "as-needed"
+    ]
   }
 }

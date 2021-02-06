@@ -8,7 +8,7 @@ type KoulutusTyyppi = typeof KOULUTUSTYYPIT[0];
 
 export const isStipendiVisible = (
   koulutustyyppi: KoulutusTyyppi,
-  opetuskielet: string[] = []
+  opetuskielet: Array<string> = []
 ) => {
   const isKorkeakoulu = TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT.some(
     t => t === koulutustyyppi

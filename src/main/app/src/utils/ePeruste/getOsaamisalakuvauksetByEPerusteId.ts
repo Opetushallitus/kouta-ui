@@ -18,8 +18,8 @@ export const getOsaamisalakuvauksetByEPerusteId = async ({
 export const useEPerusteOsaamisalaKuvaukset = ({ ePerusteId }) =>
   useApiQuery(
     'getOsaamisalakuvauksetByEPerusteId',
-    { ePerusteId },
     getOsaamisalakuvauksetByEPerusteId,
+    { ePerusteId },
     {
       enabled: Boolean(ePerusteId),
       ...LONG_CACHE_QUERY_OPTIONS,

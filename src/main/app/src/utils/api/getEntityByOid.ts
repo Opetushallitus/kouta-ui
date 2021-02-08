@@ -30,16 +30,17 @@ export const getEntityByOid = async ({
 
 export const useEntityByOid = (
   entityType: ENTITY,
-  oid?: string | null,
+  props?: { oid?: string | null; silent?: boolean },
   options: KoutaApiQueryConfig = {}
 ) =>
-  useApiQuery(entityType, { entityType, oid }, getEntityByOid, {
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
-    enabled: oid,
-    ...options,
-  });
-
-export const invalidateEntityQueryByOid = (entityType, oid) => {
-  queryCache.invalidateQueries(oid ? [entityType, { oid }] : entityType);
-};
+  useApiQuery(
+    entityType,
+    getEntityByOid,
+    { entityType, ...props },
+    {
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      enabled: props?.oid,
+      ...options,
+    }
+  );

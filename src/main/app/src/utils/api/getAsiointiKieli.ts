@@ -10,7 +10,12 @@ export const getAsiointiKieli = async ({ httpClient, apiUrls }) => {
 };
 
 export const useAsiointiKieli = () =>
-  useApiQuery('getAsiointiKieli', {}, getAsiointiKieli, {
-    retry: 0,
-    refetchOnWindowFocus: false,
-  });
+  useApiQuery(
+    'getAsiointiKieli',
+    getAsiointiKieli,
+    {},
+    {
+      retry: 0,
+      refetchOnWindowFocus: false,
+    }
+  );

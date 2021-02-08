@@ -10,6 +10,6 @@ const getToteutusByOid = async ({ oid, apiUrls, httpClient }) =>
   });
 
 export const useToteutusByOid = (oid?: string | null, options = {}) =>
-  useEntityByOid(ENTITY.TOTEUTUS, oid, options);
+  useEntityByOid(ENTITY.TOTEUTUS, { oid }, options);
 
 export default getToteutusByOid;

@@ -16,7 +16,12 @@ export const getEPerusteSisalto = async ({
 };
 
 export const useEPerusteSisalto = ({ ePerusteId }) =>
-  useApiQuery('getEPerusteSisalto', { ePerusteId }, getEPerusteSisalto, {
-    enabled: Boolean(ePerusteId),
-    ...LONG_CACHE_QUERY_OPTIONS,
-  });
+  useApiQuery(
+    'getEPerusteSisalto',
+    getEPerusteSisalto,
+    { ePerusteId },
+    {
+      enabled: Boolean(ePerusteId),
+      ...LONG_CACHE_QUERY_OPTIONS,
+    }
+  );

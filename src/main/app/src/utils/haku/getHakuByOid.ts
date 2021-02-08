@@ -11,6 +11,6 @@ export const getHakuByOid = async ({ oid, httpClient, apiUrls }) =>
   });
 
 export const useHakuByOid = (oid, options = {}) =>
-  useEntityByOid(ENTITY.HAKU, oid, options);
+  useEntityByOid(ENTITY.HAKU, { oid }, options);
 
 export default getHakuByOid;

@@ -26,11 +26,15 @@ export const createRedirectEntityPage = ({
     params: { oid },
   },
 }) => {
-  const { data: entity = {} } = useEntityByOid(entityType, oid, {
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
-  });
+  const { data: entity = {} } = useEntityByOid(
+    entityType,
+    { oid },
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    }
+  );
 
   const { preferredOrganisaatio } = usePreferredOrganisaatio(
     entity?.organisaatioOid

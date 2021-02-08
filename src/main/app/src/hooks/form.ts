@@ -110,15 +110,3 @@ export const useSelectedLanguages = () => {
   const formName = useFormName();
   return useSelector(state => getKielivalinta(state?.form?.[formName]?.values));
 };
-
-export const useFormInitialValues = (formName, entity, getFormValues) => {
-  const isSubmitting = useIsSubmitting(formName);
-  const submitErrors = useSubmitErrors(formName);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (entity && !isSubmitting && _.isEmpty(submitErrors)) {
-      dispatch(initialize(formName, getFormValues(entity)));
-    }
-  }, [dispatch, formName, isSubmitting, submitErrors, entity, getFormValues]);
-};

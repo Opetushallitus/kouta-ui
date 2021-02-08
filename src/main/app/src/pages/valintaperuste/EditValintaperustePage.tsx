@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
@@ -15,7 +15,7 @@ import Title from '#/src/components/Title';
 import { KOULUTUSTYYPPI, ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import { useUrls } from '#/src/contexts/contextHooks';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
-import { useEntityFormConfig, useFormInitialValues } from '#/src/hooks/form';
+import { useEntityFormConfig } from '#/src/hooks/form';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { getFormValuesByValintaperuste } from '#/src/utils/valintaperuste/getFormValuesByValintaperuste';
 import { useValintaperusteById } from '#/src/utils/valintaperuste/getValintaperusteById';
@@ -34,12 +34,6 @@ const EditValintaperustePage = props => {
 
   const { t } = useTranslation();
 
-  useFormInitialValues(
-    'valintaperusteForm',
-    valintaperuste,
-    getFormValuesByValintaperuste
-  );
-
   const canUpdate = useCurrentUserHasRole(
     ENTITY.VALINTAPERUSTE,
     CRUD_ROLES.UPDATE,
@@ -53,10 +47,15 @@ const EditValintaperustePage = props => {
 
   const apiUrls = useUrls();
 
+  const initialValues = useMemo(
+    () => (valintaperuste ? getFormValuesByValintaperuste(valintaperuste) : {}),
+    [valintaperuste]
+  );
+
   return isLoading ? (
     <FullSpin />
   ) : (
-    <ReduxForm form="valintaperusteForm">
+    <ReduxForm form="valintaperusteForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.valintaperusteenMuokkaus')}</Title>
       <FormConfigContext.Provider value={{ ...config, readOnly: !canUpdate }}>
         <FormPage

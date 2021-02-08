@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
@@ -13,7 +13,7 @@ import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
-import { useEntityFormConfig, useFormInitialValues } from '#/src/hooks/form';
+import { useEntityFormConfig } from '#/src/hooks/form';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { getFormValuesByHaku } from '#/src/utils/haku/getFormValuesByHaku';
 import { useHakuByOid } from '#/src/utils/haku/getHakuByOid';
@@ -31,8 +31,6 @@ const EditHakuPage = ({
 }) => {
   const { data: haku, isFetching } = useHakuByOid(oid);
   const { t } = useTranslation();
-
-  useFormInitialValues(FORM_NAME, haku, getFormValuesByHaku);
 
   const onAttachHakukohde = useCallback(
     ({ toteutusOid }) => {
@@ -53,8 +51,12 @@ const EditHakuPage = ({
 
   const config = useEntityFormConfig(ENTITY.HAKU);
 
+  const initialValues = useMemo(() => (haku ? getFormValuesByHaku(haku) : {}), [
+    haku,
+  ]);
+
   return (
-    <ReduxForm form={FORM_NAME}>
+    <ReduxForm form={FORM_NAME} initialValues={initialValues}>
       <Title>{t('sivuTitlet.haunMuokkaus')}</Title>
       <FormConfigContext.Provider value={{ ...config, readOnly: !canUpdate }}>
         <FormPage

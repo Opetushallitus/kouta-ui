@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
@@ -15,7 +15,7 @@ import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { KOULUTUSTYYPPI, ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
-import { useEntityFormConfig, useFormInitialValues } from '#/src/hooks/form';
+import { useEntityFormConfig } from '#/src/hooks/form';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
 import { useHakukohdeByOid } from '#/src/utils/hakukohde/getHakukohdeByOid';
@@ -56,8 +56,6 @@ const EditHakukohdePage = props => {
 
   const { t } = useTranslation();
 
-  useFormInitialValues(FORM_NAME, hakukohde, getFormValuesByHakukohde);
-
   const canUpdate = useCurrentUserHasRole(
     ENTITY.HAKUKOHDE,
     CRUD_ROLES.UPDATE,
@@ -66,10 +64,15 @@ const EditHakukohdePage = props => {
 
   const config = useEntityFormConfig(ENTITY.HAKUKOHDE);
 
+  const initialValues = useMemo(
+    () => (hakukohde ? getFormValuesByHakukohde(hakukohde) : {}),
+    [hakukohde]
+  );
+
   return isLoading ? (
     <FullSpin />
   ) : (
-    <ReduxForm form={FORM_NAME}>
+    <ReduxForm form={FORM_NAME} initialValues={initialValues}>
       <Title>{t('sivuTitlet.hakukohteenMuokkaus')}</Title>
       <FormConfigContext.Provider value={{ ...config, readOnly: !canUpdate }}>
         <FormPage

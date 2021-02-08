@@ -158,7 +158,7 @@ exports[`renders correctly 1`] = `
         class="c4"
       >
         <i
-          class="c5 material-icons c6"
+          class="c5 material-icons-outlined c6"
         >
           school
         </i>
@@ -176,7 +176,7 @@ exports[`renders correctly 1`] = `
         class="c4"
       >
         <i
-          class="c5 material-icons c6"
+          class="c5 material-icons-outlined c6"
         >
           flag
         </i>
@@ -198,7 +198,7 @@ exports[`renders correctly 1`] = `
         class="c4"
       >
         <i
-          class="c5 material-icons c6"
+          class="c5 material-icons-outlined c6"
         >
           access_time
         </i>
@@ -216,7 +216,7 @@ exports[`renders correctly 1`] = `
         class="c8"
       >
         <i
-          class="c5 material-icons c9"
+          class="c5 material-icons-outlined c9"
         >
           list_alt
         </i>
@@ -238,7 +238,7 @@ exports[`renders correctly 1`] = `
         class="c11"
       >
         <i
-          class="c5 material-icons c6"
+          class="c5 material-icons-outlined c6"
         >
           filter_list
         </i>
@@ -256,7 +256,7 @@ exports[`renders correctly 1`] = `
         class="c11"
       >
         <i
-          class="c5 material-icons c6"
+          class="c5 material-icons-outlined c6"
         >
           subject
         </i>

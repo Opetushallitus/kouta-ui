@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
+.c5 {
+  font-size: 1.5rem;
+}
+
 .c7 {
   box-sizing: border-box;
   padding: 24px;
-}
-
-.c5 {
-  font-size: 1.5rem;
 }
 
 .c3 {
@@ -133,13 +133,13 @@ exports[`renders correctly 1`] = `
 `;
 
 exports[`renders correctly 2`] = `
+.c4 {
+  font-size: 1.5rem;
+}
+
 .c6 {
   box-sizing: border-box;
   padding: 24px;
-}
-
-.c4 {
-  font-size: 1.5rem;
 }
 
 .c0 {
@@ -252,13 +252,13 @@ exports[`renders correctly 2`] = `
 `;
 
 exports[`renders correctly when closed 1`] = `
+.c5 {
+  font-size: 1.5rem;
+}
+
 .c7 {
   box-sizing: border-box;
   padding: 24px;
-}
-
-.c5 {
-  font-size: 1.5rem;
 }
 
 .c3 {

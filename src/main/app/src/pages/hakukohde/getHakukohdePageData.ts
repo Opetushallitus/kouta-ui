@@ -31,7 +31,7 @@ export const getHakukohdePageData = async ({
 };
 
 export const useHakukohdePageData = (props, options = {}) =>
-  useApiQuery('hakukohdePageData', props, getHakukohdePageData, {
+  useApiQuery('hakukohdePageData', getHakukohdePageData, props, {
     refetchOnWindowFocus: false,
     ...options,
   });

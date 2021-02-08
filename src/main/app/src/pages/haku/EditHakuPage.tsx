@@ -1,5 +1,7 @@
 import React, { useCallback } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
   OrganisaatioRelation,
@@ -28,6 +30,7 @@ const EditHakuPage = ({
   },
 }) => {
   const { data: haku, isFetching } = useHakuByOid(oid);
+  const { t } = useTranslation();
 
   useFormInitialValues(FORM_NAME, haku, getFormValuesByHaku);
 

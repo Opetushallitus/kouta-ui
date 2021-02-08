@@ -1,7 +1,6 @@
 import React, { useMemo, useCallback } from 'react';
 
 import _ from 'lodash';
-import _ from 'lodash';
 import qs from 'query-string';
 import { useTranslation } from 'react-i18next';
 

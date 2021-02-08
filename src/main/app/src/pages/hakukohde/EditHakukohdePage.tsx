@@ -56,7 +56,7 @@ const EditHakukohdePage = props => {
 
   const { t } = useTranslation();
 
-  useFormInitialValues(FORM_NAME, haku, getFormValuesByHakukohde);
+  useFormInitialValues(FORM_NAME, hakukohde, getFormValuesByHakukohde);
 
   const canUpdate = useCurrentUserHasRole(
     ENTITY.HAKUKOHDE,

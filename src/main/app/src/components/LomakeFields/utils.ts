@@ -1,9 +1,11 @@
 import { useMemo } from 'react';
-import { isFunction, isString } from 'lodash';
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
+
+import _ from 'lodash';
+
 import { HAKULOMAKETYYPPI } from '#/src/constants';
-import { getHakemuspalveluLomakkeet } from '#/src/utils/api/getHakemuspalveluLomakkeet';
 import useApiAsync from '#/src/hooks/useApiAsync';
+import { getHakemuspalveluLomakkeet } from '#/src/utils/api/getHakemuspalveluLomakkeet';
+import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 const tyyppiToLabel = {
   [HAKULOMAKETYYPPI.ATARU]: 'hakulomakeValinnat.ataru',
@@ -13,10 +15,10 @@ const tyyppiToLabel = {
 };
 
 export const createEnhancedGetTyyppiLabel = (getTyyppiLabel, t) => tyyppi => {
-  const key = isString(tyyppi) ? tyyppiToLabel[tyyppi] : null;
+  const key = _.isString(tyyppi) ? tyyppiToLabel[tyyppi] : null;
   const translated = key ? t(key) : null;
 
-  return isFunction(getTyyppiLabel)
+  return _.isFunction(getTyyppiLabel)
     ? getTyyppiLabel(tyyppi) || translated
     : translated;
 };
@@ -30,7 +32,7 @@ export const createEnhancedGetTyyppiShowUrl = getTyyppiShowUrl => ({
     return null;
   }
 
-  if (isFunction(getTyyppiShowUrl)) {
+  if (_.isFunction(getTyyppiShowUrl)) {
     return getTyyppiShowUrl({ tyyppi, option, apiUrls });
   }
 
@@ -46,7 +48,7 @@ export const createEnhancedGetTyyppiLomakkeet = getTyyppiOptions => async ({
   apiUrls,
   tyyppi,
 }) => {
-  if (isFunction(getTyyppiOptions)) {
+  if (_.isFunction(getTyyppiOptions)) {
     return getTyyppiOptions({ httpClient, apiUrls, tyyppi });
   }
 

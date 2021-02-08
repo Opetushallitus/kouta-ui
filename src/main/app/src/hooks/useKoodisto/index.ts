@@ -1,8 +1,10 @@
 import { useContext } from 'react';
+
 import _ from 'lodash';
-import { useApiQuery } from '#/src/hooks/useApiQuery';
+
 import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import KoodistoversiotContext from '#/src/contexts/KoodistoversiotContext';
+import { useApiQuery } from '#/src/hooks/useApiQuery';
 import getKoodisto from '#/src/utils/koodi/getKoodisto';
 
 export const useKoodisto = ({ koodisto, versio: versioProp }) => {

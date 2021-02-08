@@ -1,9 +1,12 @@
 import React, { useCallback } from 'react';
+
+import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
-import _ from 'lodash/fp';
-import { FormCollapse } from './FormCollapse';
-import { useFieldValue } from '#/src/hooks/form';
+
 import PohjaValintaSection from '#/src/components/PohjaValintaSection';
+import { useFieldValue } from '#/src/hooks/form';
+
+import { FormCollapse } from './FormCollapse';
 
 type PohjaFormCollapseProps = {
   section?: string;
@@ -27,8 +30,8 @@ export default function PohjaFormCollapse({
   const tapa = useFieldValue('pohja.tapa');
   const valinta = useFieldValue('pohja.valinta');
   const onPohjaContinue = useCallback(() => {
-    _.isFunction(onContinue) && onContinue();
-    _.isFunction(onSelectBase) &&
+    _fp.isFunction(onContinue) && onContinue();
+    _fp.isFunction(onSelectBase) &&
       onSelectBase({
         tapa,
         valinta: valinta?.value,

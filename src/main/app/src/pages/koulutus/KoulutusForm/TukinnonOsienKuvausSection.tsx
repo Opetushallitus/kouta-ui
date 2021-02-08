@@ -1,19 +1,22 @@
 import React from 'react';
+
+import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import _ from 'lodash/fp';
-import { getLanguageValue } from '#/src/utils/languageUtils';
-import FormConfigFragment from '#/src/components/FormConfigFragment';
-import { Box, Spin, Typography } from '#/src/components/virkailija';
-import { useTutkinnonOsienKuvaukset } from '#/src/utils/koulutus/getTutkinnonOsanKuvaus';
-import StyledSectionHTML from '#/src/components/StyledSectionHTML';
-import { getThemeProp } from '#/src/theme';
+
 import Anchor from '#/src/components/Anchor';
+import FormConfigFragment from '#/src/components/FormConfigFragment';
+import StyledSectionHTML from '#/src/components/StyledSectionHTML';
+import { Box, Spin, Typography } from '#/src/components/virkailija';
 import { useUrls } from '#/src/contexts/contextHooks';
+import { getThemeProp } from '#/src/theme';
 import { sanitizeHTML } from '#/src/utils';
-import { StyledInfoBox } from './KoulutuksenEPerusteTiedot/InfoBox';
+import { useTutkinnonOsienKuvaukset } from '#/src/utils/koulutus/getTutkinnonOsanKuvaus';
 import { useEPerusteTutkinnonOsat } from '#/src/utils/koulutus/getTutkinnonosaViite';
+import { getLanguageValue } from '#/src/utils/languageUtils';
+
 import { useSelectedTutkinnonOsat } from '../useSelectedTutkinnonOsat';
+import { StyledInfoBox } from './KoulutuksenEPerusteTiedot/InfoBox';
 
 const BodyHeading = styled(Typography).attrs({ variant: 'h6' })`
   color: ${getThemeProp('colors.text.primary')};
@@ -27,13 +30,13 @@ const AmmattitaitoVaatimukset = ({ tutkinnonOsa, language }) => {
   } else if (ammattitaitovaatimukset2019) {
     return (
       <>
-        {_.map(({ kuvaus, vaatimukset }) => {
+        {_fp.map(({ kuvaus, vaatimukset }) => {
           return (
             <div key={kuvaus?._id}>
               <BodyHeading>{sanitizeHTML(kuvaus[language])}</BodyHeading>
               <Typography variant="body">
                 <ul>
-                  {_.map(({ vaatimus, koodi }) => (
+                  {_fp.map(({ vaatimus, koodi }) => (
                     <li key={koodi?.uri}>{vaatimus[language]}</li>
                   ))(vaatimukset)}
                 </ul>
@@ -55,7 +58,7 @@ const TutkinnonOsaKuvaus = ({ ePerusteId, viiteId, osa, language }) => {
     ePerusteId,
   });
 
-  const viiteData = _.find(tutkinnonOsa => tutkinnonOsa?.id === viiteId)(
+  const viiteData = _fp.find(tutkinnonOsa => tutkinnonOsa?.id === viiteId)(
     tutkinnonOsat
   );
 
@@ -108,13 +111,15 @@ export const TutkinnonOsienKuvausSection = ({ disabled, language, name }) => {
   });
 
   const viiteIdForOsa = ({ id }) => {
-    return selectedTutkinnonOsat.find(v => v.tutkinnonosaId === _.toNumber(id))
-      ?.tutkinnonosaViite;
+    return selectedTutkinnonOsat.find(
+      v => v.tutkinnonosaId === _fp.toNumber(id)
+    )?.tutkinnonosaViite;
   };
 
   const eperusteForOsa = ({ id }) => {
-    return selectedTutkinnonOsat.find(v => v.tutkinnonosaId === _.toNumber(id))
-      ?.ePerusteId;
+    return selectedTutkinnonOsat.find(
+      v => v.tutkinnonosaId === _fp.toNumber(id)
+    )?.ePerusteId;
   };
 
   return (

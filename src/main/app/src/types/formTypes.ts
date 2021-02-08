@@ -1,4 +1,5 @@
 import { EditorState } from 'draft-js';
+
 import { Alkamiskausityyppi } from '#/src/constants';
 
 export type AjankohtaFields = {

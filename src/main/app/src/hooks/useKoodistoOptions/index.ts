@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
+
 import _ from 'lodash';
+
 import useKoodisto from '#/src/hooks/useKoodisto';
 import useLanguage from '#/src/hooks/useLanguage';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
@@ -8,7 +10,7 @@ const defaultSort = options => {
   const byLabel = ({ label }) => label;
   const byFirstNumber = ({ label }) =>
     /^\d/.test(label) && _.parseInt(label.match(/(\d+)/)?.[0]);
-  return _.orderBy(options, [byFirstNumber, byLabel]);
+  return _.sortBy(options, [byFirstNumber, byLabel]);
 };
 
 type GetOptionsProps = {

@@ -1,10 +1,11 @@
 import _fp from 'lodash/fp';
+
+import { serializeEditorState } from '#/src/components/Editor/utils';
 import {
   KOULUTUSTYYPPI,
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
 } from '#/src/constants';
 import { maybeParseNumber } from '#/src/utils';
-import { serializeEditorState } from '#/src/components/Editor/utils';
 
 const osaamisalaKoodiToKoodiUri = value =>
   value ? `osaamisala_${value}` : null;
@@ -79,12 +80,12 @@ const getKoulutusByFormValues = values => {
       koulutustyyppi,
       lisatiedot: osiot.map(({ value }) => ({
         otsikkoKoodiUri: value,
-        teksti: _fp.pipe(
+        teksti: _fp.flow(
           pickTranslations,
           _fp.mapValues(serializeEditorState)
         )(values?.lisatiedot?.osioKuvaukset?.[value] ?? {}),
       })),
-      kuvaus: _fp.pipe(
+      kuvaus: _fp.flow(
         pickTranslations,
         _fp.mapValues(serializeEditorState)
       )(values?.description?.kuvaus ?? {}),

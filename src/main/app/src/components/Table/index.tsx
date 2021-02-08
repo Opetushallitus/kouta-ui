@@ -1,9 +1,10 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
-import { isFunction } from 'lodash';
 
-import { getThemeProp, spacing } from '#/src/theme';
+import _ from 'lodash';
+import styled, { css } from 'styled-components';
+
 import { Icon } from '#/src/components/virkailija';
+import { getThemeProp, spacing } from '#/src/theme';
 
 export const TableBase = styled.table`
   width: 100%;
@@ -130,7 +131,7 @@ export const TableCell = ({
 }) => {
   return (
     <TableCellBase {...props}>
-      {isFunction(onSort) ? (
+      {_.isFunction(onSort) ? (
         <SortContainer
           onClick={() => {
             onSort(sortDirection === 'desc' ? 'asc' : 'desc');

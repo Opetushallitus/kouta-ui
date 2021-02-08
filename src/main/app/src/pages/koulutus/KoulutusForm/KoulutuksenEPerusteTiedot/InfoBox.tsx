@@ -1,8 +1,10 @@
 import React from 'react';
+
 import _ from 'lodash';
-import { Grid, Cell } from 'styled-css-grid';
-import styled from 'styled-components';
 import { transparentize } from 'polished';
+import styled from 'styled-components';
+import { Grid, Cell } from 'styled-css-grid';
+
 import { Box } from '#/src/components/virkailija';
 import { Typography } from '#/src/components/virkailija';
 import { getThemeProp } from '#/src/theme';

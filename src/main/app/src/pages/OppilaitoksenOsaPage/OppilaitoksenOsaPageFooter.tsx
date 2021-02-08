@@ -1,13 +1,14 @@
 import React, { useCallback } from 'react';
+
 import { useHistory } from 'react-router-dom';
 
+import { FormFooter } from '#/src/components/FormPage';
+import { ENTITY } from '#/src/constants';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
-import validateOppilaitoksenOsaForm from '#/src/utils/oppilaitoksenOsa/validateOppilaitoksenOsaForm';
 import createOppilaitoksenOsa from '#/src/utils/oppilaitoksenOsa/createOppilaitoksenOsa';
 import getOppilaitoksenOsaByFormValues from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaByFormValues';
 import updateOppilaitoksenOsa from '#/src/utils/oppilaitoksenOsa/updateOppilaitoksenOsa';
-import { ENTITY } from '#/src/constants';
-import { FormFooter } from '#/src/components/FormPage';
+import validateOppilaitoksenOsaForm from '#/src/utils/oppilaitoksenOsa/validateOppilaitoksenOsaForm';
 
 const OppilaitoksenOsaPageFooter = ({
   oppilaitoksenOsa,

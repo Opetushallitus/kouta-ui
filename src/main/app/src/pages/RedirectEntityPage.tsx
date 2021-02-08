@@ -1,7 +1,9 @@
 import React from 'react';
+
 import { Redirect } from 'react-router-dom';
-import { ENTITY } from '#/src/constants';
+
 import { FullSpin } from '#/src/components/FullSpin';
+import { ENTITY } from '#/src/constants';
 import { usePreferredOrganisaatio } from '#/src/hooks/useOrganisaatio';
 import { useEntityByOid } from '#/src/utils/api/getEntityByOid';
 

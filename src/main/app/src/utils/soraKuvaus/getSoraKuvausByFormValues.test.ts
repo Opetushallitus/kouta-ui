@@ -1,5 +1,5 @@
-import getSoraKuvausByFormValues from '#/src/utils/soraKuvaus/getSoraKuvausByFormValues';
 import { parseEditorState } from '#/src/components/Editor/utils';
+import getSoraKuvausByFormValues from '#/src/utils/soraKuvaus/getSoraKuvausByFormValues';
 
 test('getSoraKuvausByFormValues returns correct sora-kuvaus given form values', () => {
   const soraKuvaus = getSoraKuvausByFormValues({

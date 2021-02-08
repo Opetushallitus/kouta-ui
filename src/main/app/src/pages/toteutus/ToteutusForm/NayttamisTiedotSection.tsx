@@ -1,23 +1,24 @@
 import React from 'react';
-import { Field } from 'redux-form';
-import { noop, isArray } from 'lodash';
-import { useTranslation } from 'react-i18next';
 
+import _ from 'lodash';
+import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
+
+import { createFormFieldComponent } from '#/src/components/formFields';
 import { AsyncCreatableSelect } from '#/src/components/Select';
 import Spacing from '#/src/components/Spacing';
+import { useUrls, useHttpClient } from '#/src/contexts/contextHooks';
+import { getTestIdProps } from '#/src/utils';
 import searchAmmattinimikkeetByTerm from '#/src/utils/api/searchAmmattinimikkeetByTerm';
 import searchAvainsanatByTerm from '#/src/utils/api/searchAvainsanatByTerm';
-import { getTestIdProps } from '#/src/utils';
 import { memoize } from '#/src/utils/memoize';
-import { createFormFieldComponent } from '#/src/components/formFields';
-import { useUrls, useHttpClient } from '#/src/contexts/contextHooks';
 
 const CreatableField = createFormFieldComponent(
   AsyncCreatableSelect,
   ({ input: { onChange, ...input }, maxItems, ...props }) => ({
     ...input,
-    onBlur: noop,
-    onChange: v => isArray(v) && v.length <= maxItems && onChange(v),
+    onBlur: _.noop,
+    onChange: v => _.isArray(v) && v.length <= maxItems && onChange(v),
     maxItems,
     ...props,
   })

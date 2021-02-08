@@ -1,10 +1,11 @@
 import _fp from 'lodash/fp';
+
 import {
   parseEditorState,
   serializeEditorState,
 } from '#/src/components/Editor/utils';
-import { maybeParseNumber, toSelectValue } from '#/src/utils';
 import { AjankohtaFields } from '#/src/types/formTypes';
+import { maybeParseNumber, toSelectValue } from '#/src/utils';
 
 export const getAlkamiskausiData = (
   ajankohta: AjankohtaFields,
@@ -15,9 +16,9 @@ export const getAlkamiskausiData = (
   koulutuksenPaattymispaivamaara: ajankohta?.tarkkaPaattyy || null,
   koulutuksenAlkamiskausiKoodiUri: ajankohta?.kausi || null,
   koulutuksenAlkamisvuosi: maybeParseNumber(ajankohta?.vuosi?.value),
-  henkilokohtaisenSuunnitelmanLisatiedot: _fp.compose(
-    _fp.mapValues(serializeEditorState),
-    pickTranslations
+  henkilokohtaisenSuunnitelmanLisatiedot: _fp.flow(
+    pickTranslations,
+    _fp.mapValues(serializeEditorState)
   )(ajankohta?.henkilokohtaisenSuunnitelmanLisatiedot ?? {}),
 });
 

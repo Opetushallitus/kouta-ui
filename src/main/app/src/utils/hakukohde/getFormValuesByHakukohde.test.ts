@@ -1,10 +1,10 @@
-import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
 import {
   Alkamiskausityyppi,
   HAKULOMAKETYYPPI,
   JULKAISUTILA,
   LIITTEEN_TOIMITUSTAPA,
 } from '#/src/constants';
+import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
 
 test('getFormValuesByHakukohde returns correct form values given hakukohde', () => {
   const values = getFormValuesByHakukohde({

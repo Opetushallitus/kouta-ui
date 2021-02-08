@@ -1,20 +1,20 @@
 import React from 'react';
+
+import _ from 'lodash';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import { get } from 'lodash';
 
 import Flex from '#/src/components/Flex';
-import { spacing } from '#/src/theme';
 import { Typography } from '#/src/components/virkailija';
 import { getJulkaisutilaTranslationKey, JULKAISUTILA } from '#/src/constants';
-
-import { useTranslation } from 'react-i18next';
+import { spacing } from '#/src/theme';
 
 const Badge = styled.div`
   width: 0.8rem;
   height: 0.8rem;
   border-radius: 3px;
   background-color: ${({ theme, color }) =>
-    get(theme, ['colors', color]) || theme.colors.tallennettu};
+    _.get(theme, ['colors', color]) || theme.colors.tallennettu};
   margin-right: ${spacing(1)};
 `;
 

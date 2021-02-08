@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { isFunction, isString, isArray } from 'lodash';
+
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { getTestIdProps } from '#/src/utils';
-import Collapse from '#/src/components/Collapse';
+import styled from 'styled-components';
+
 import Button from '#/src/components/Button';
+import Collapse from '#/src/components/Collapse';
 import { Box, Typography } from '#/src/components/virkailija';
 import FormConfigSectionContext from '#/src/contexts/FormConfigSectionContext';
+import { getTestIdProps } from '#/src/utils';
+
 import LanguageTabs from './LanguageTabs';
 
 const HeaderWrapper = styled.div`
@@ -28,7 +31,7 @@ const LanguageTabsWrapper = styled.div`
 const renderActions = ({ actions, onContinue, t }) => {
   return actions ? (
     actions
-  ) : isFunction(onContinue) ? (
+  ) : _.isFunction(onContinue) ? (
     <Button type="button" onClick={onContinue}>
       {t('yleiset.jatka')}
     </Button>
@@ -43,7 +46,7 @@ const renderHeader = ({
   onLanguageChange,
   collapseOpen,
 }) => {
-  const headerContent = isString(header) ? (
+  const headerContent = _.isString(header) ? (
     <Typography variant="h5" py={3} px={0}>
       {index + 1}. {header}
     </Typography>
@@ -52,7 +55,7 @@ const renderHeader = ({
   );
 
   const showLanguageTabs =
-    collapseOpen && isArray(languages) && languages.length > 0;
+    collapseOpen && _.isArray(languages) && languages.length > 0;
 
   return (
     <HeaderWrapper>

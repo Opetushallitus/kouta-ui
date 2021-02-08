@@ -1,17 +1,18 @@
 import React from 'react';
+
 import { storiesOf } from '@storybook/react';
 import { reduxForm, Field, FieldArray } from 'redux-form';
 
-import { FormFieldInput } from '#/src/components/formFields';
 import Button from '#/src/components/Button';
-import Spacing from '#/src/components/Spacing';
 import Flex from '#/src/components/Flex';
-import FieldArrayList from './index';
-
+import { FormFieldInput } from '#/src/components/formFields';
+import Spacing from '#/src/components/Spacing';
 import {
   makeStoreDecorator,
   makeLocalizationDecorator,
 } from '#/src/storybookUtils';
+
+import FieldArrayList from './index';
 
 const StoryForm = reduxForm({
   form: 'storyForm',

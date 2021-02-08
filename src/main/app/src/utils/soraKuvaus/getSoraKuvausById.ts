@@ -1,13 +1,15 @@
-import { get, isObject } from 'lodash';
+import { ENTITY } from '#/src/constants';
+import { getEntityByOid, useEntityByOid } from '#/src/utils/api/getEntityByOid';
 
-export const getSoraKuvausById = async ({ httpClient, apiUrls, id }) => {
-  const { data, headers } = await httpClient.get(
-    apiUrls.url('kouta-backend.soraKuvaus-by-oid', id)
-  );
+export const getSoraKuvausById = async ({ httpClient, apiUrls, id }) =>
+  getEntityByOid({
+    entityType: ENTITY.SORA_KUVAUS,
+    oid: id,
+    httpClient,
+    apiUrls,
+  });
 
-  const lastModified = get(headers, 'x-last-modified') || null;
-
-  return isObject(data) ? { lastModified, ...data } : data;
-};
+export const useSoraKuvausById = (id: string | null, options = {}) =>
+  useEntityByOid(ENTITY.SORA_KUVAUS, id, options);
 
 export default getSoraKuvausById;

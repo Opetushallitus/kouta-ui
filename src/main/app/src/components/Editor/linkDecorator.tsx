@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { CompositeDecorator } from 'draft-js';
 
 import Anchor from '#/src/components/Anchor';

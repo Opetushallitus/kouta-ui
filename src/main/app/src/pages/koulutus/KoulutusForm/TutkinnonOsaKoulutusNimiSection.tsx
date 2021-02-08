@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react';
-import _ from 'lodash/fp';
-import { Field } from 'redux-form';
+
+import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
+
+import { FormFieldInput } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
 import { useBoundFormActions, useIsDirty } from '#/src/hooks/form';
-import { getLanguageValue } from '#/src/utils/languageUtils';
 import { getTestIdProps, oneAndOnlyOne } from '#/src/utils';
-import { FormFieldInput } from '#/src/components/formFields';
-import { useSelectedTutkinnonOsat } from '../useSelectedTutkinnonOsat';
 import { useEPerusteTutkinnonOsat } from '#/src/utils/koulutus/getTutkinnonosaViite';
+import { getLanguageValue } from '#/src/utils/languageUtils';
+
+import { useSelectedTutkinnonOsat } from '../useSelectedTutkinnonOsat';
 
 type TutkinnonOsaKoulutusNimiSectionProps = {
   language: LanguageCode;
@@ -42,7 +45,7 @@ export const TutkinnonOsaKoulutusNimiSection: React.FC<TutkinnonOsaKoulutusNimiS
 
   useEffect(() => {
     if (isDirty && selectedTutkinnonosaNimi) {
-      _.each(lang => {
+      _fp.each(lang => {
         change(
           `${name}.nimi.${lang}`,
           selectedTutkinnonosaNimi

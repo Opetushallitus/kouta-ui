@@ -1,5 +1,6 @@
-import _ from 'lodash';
 import { AxiosInstance } from 'axios';
+import _ from 'lodash';
+
 import { ENTITY } from '#/src/constants';
 import { useApiQuery, KoutaApiQueryConfig } from '#/src/hooks/useApiQuery';
 
@@ -10,6 +11,7 @@ type GetEntityTypeByOidProps = {
   apiUrls: any;
 };
 
+// NOTE: SORA-kuvaus and valintaperuste use "id" instead of "oid", but this works for them as well.
 export const getEntityByOid = async ({
   entityType,
   oid,
@@ -32,6 +34,7 @@ export const useEntityByOid = (
 ) =>
   useApiQuery(entityType, { entityType, oid }, getEntityByOid, {
     refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
     enabled: oid,
     ...options,
   });

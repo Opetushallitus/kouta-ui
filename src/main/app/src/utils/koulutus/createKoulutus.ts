@@ -1,6 +1,7 @@
-import { getKoulutusByKoodi } from '#/src/utils/koulutus/getKoulutusByKoodi';
-import { isEmpty } from 'lodash';
 import produce from 'immer';
+import _ from 'lodash';
+
+import { getKoulutusByKoodi } from '#/src/utils/koulutus/getKoulutusByKoodi';
 
 const createKoulutus = async ({
   httpClient,
@@ -11,7 +12,7 @@ const createKoulutus = async ({
     draft.metadata.tyyppi = koulutusArg.koulutustyyppi;
   });
 
-  if (isEmpty(koulutus.nimi) && koulutus.koulutusKoodiUri) {
+  if (_.isEmpty(koulutus.nimi) && koulutus.koulutusKoodiUri) {
     const { nimi } = await getKoulutusByKoodi({
       koodiUri: koulutus.koulutusKoodiUri,
       httpClient,

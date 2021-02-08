@@ -1,12 +1,13 @@
 import React from 'react';
+
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
+import Anchor from '#/src/components/Anchor';
+import Spacing from '#/src/components/Spacing';
 import { Icon } from '#/src/components/virkailija';
 import { getThemeProp } from '#/src/theme';
 import { formatDateValue } from '#/src/utils';
-import Spacing from '#/src/components/Spacing';
-import Anchor from '#/src/components/Anchor';
-import { useTranslation } from 'react-i18next';
 
 const InfoIcon = styled(Icon).attrs({ type: 'info' })`
   color: ${getThemeProp('palette.primary.main')};

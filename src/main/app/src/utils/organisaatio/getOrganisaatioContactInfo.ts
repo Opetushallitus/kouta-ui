@@ -1,21 +1,13 @@
-import {
-  get,
-  groupBy,
-  isString,
-  mapValues,
-  omit,
-  pickBy,
-  upperFirst,
-} from 'lodash';
+import _ from 'lodash';
 
 const kieliUriRegExp = /^kieli_([a-z]+)#.+$/;
 
 const postinumeroUriRegExp = /^posti_(.+)$/;
 
-const prune = value => pickBy(value, v => !!v);
+const prune = value => _.pickBy(value, v => !!v);
 
 const getKieliByKieliUri = uri => {
-  if (!isString(uri)) {
+  if (!_.isString(uri)) {
     return undefined;
   }
 
@@ -25,7 +17,7 @@ const getKieliByKieliUri = uri => {
 };
 
 const getPostinumeroByPostinumeroUri = uri => {
-  if (!isString(uri)) {
+  if (!_.isString(uri)) {
     return undefined;
   }
 
@@ -35,47 +27,47 @@ const getPostinumeroByPostinumeroUri = uri => {
 };
 
 const getOrganisaatioContactInfo = organisaatio => {
-  const yhteystiedot = get(organisaatio, 'yhteystiedot') || [];
+  const yhteystiedot = _.get(organisaatio, 'yhteystiedot') || [];
 
   const kayntiOsoitteet = yhteystiedot.filter(
-    y => get(y, 'osoiteTyyppi') === 'kaynti'
+    y => _.get(y, 'osoiteTyyppi') === 'kaynti'
   );
 
-  const kayntiOsoitteetByKieli = groupBy(
+  const kayntiOsoitteetByKieli = _.groupBy(
     kayntiOsoitteet,
     ({ kieli }) => getKieliByKieliUri(kieli) || '_'
   );
 
-  const verkkosivut = yhteystiedot.filter(y => isString(get(y, 'www')));
-  const sahkopostit = yhteystiedot.filter(y => isString(get(y, 'email')));
+  const verkkosivut = yhteystiedot.filter(y => _.isString(_.get(y, 'www')));
+  const sahkopostit = yhteystiedot.filter(y => _.isString(_.get(y, 'email')));
   const puhelinnumerot = yhteystiedot.filter(
-    y => get(y, 'tyyppi') === 'puhelin' && isString(get(y, 'numero'))
+    y => _.get(y, 'tyyppi') === 'puhelin' && _.isString(_.get(y, 'numero'))
   );
 
-  const verkkosivu = get(verkkosivut, '[0].www');
-  const sahkoposti = get(sahkopostit, '[0].email');
-  const puhelinnumero = get(puhelinnumerot, '[0].numero');
-  const postinumero = get(kayntiOsoitteet, '[0].postinumeroUri')
+  const verkkosivu = _.get(verkkosivut, '[0].www');
+  const sahkoposti = _.get(sahkopostit, '[0].email');
+  const puhelinnumero = _.get(puhelinnumerot, '[0].numero');
+  const postinumero = _.get(kayntiOsoitteet, '[0].postinumeroUri')
     ? getPostinumeroByPostinumeroUri(kayntiOsoitteet[0].postinumeroUri)
     : undefined;
 
-  const postinumeroKoodiUri = get(kayntiOsoitteet, '[0].postinumeroUri')
-    ? get(kayntiOsoitteet, '[0].postinumeroUri')
+  const postinumeroKoodiUri = _.get(kayntiOsoitteet, '[0].postinumeroUri')
+    ? _.get(kayntiOsoitteet, '[0].postinumeroUri')
     : null;
 
-  const osoite = mapValues(kayntiOsoitteetByKieli, osoitteet => {
-    return get(osoitteet, '[0].osoite');
+  const osoite = _.mapValues(kayntiOsoitteetByKieli, osoitteet => {
+    return _.get(osoitteet, '[0].osoite');
   });
 
-  const postitoimipaikka = mapValues(kayntiOsoitteetByKieli, osoitteet => {
-    return get(osoitteet, '[0].postitoimipaikka')
-      ? upperFirst(osoitteet[0].postitoimipaikka.toLowerCase())
+  const postitoimipaikka = _.mapValues(kayntiOsoitteetByKieli, osoitteet => {
+    return _.get(osoitteet, '[0].postitoimipaikka')
+      ? _.upperFirst(osoitteet[0].postitoimipaikka.toLowerCase())
       : undefined;
   });
 
   return {
-    osoite: prune(omit(osoite, ['_'])),
-    postitoimipaikka: prune(omit(postitoimipaikka, ['_'])),
+    osoite: prune(_.omit(osoite, ['_'])),
+    postitoimipaikka: prune(_.omit(postitoimipaikka, ['_'])),
     postinumero,
     sahkoposti,
     puhelinnumero,

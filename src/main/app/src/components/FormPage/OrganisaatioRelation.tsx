@@ -1,6 +1,9 @@
 import React from 'react';
+
 import { useTranslation } from 'react-i18next';
+
 import { useOrganisaatio } from '#/src/hooks/useOrganisaatio';
+
 import { RelationInfo } from './RelationInfo';
 
 const OrganisaatioRelation = ({ organisaatioOid }) => {

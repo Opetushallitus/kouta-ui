@@ -1,4 +1,4 @@
-import _ from 'lodash/fp';
+import _fp from 'lodash/fp';
 
 import {
   KOULUTUSTYYPPI,
@@ -6,10 +6,8 @@ import {
   TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
 } from '#/src/constants';
-
-import createFormConfigBuilder from '#/src/utils/form/createFormConfigBuilder';
 import { validateExistence } from '#/src/utils/form/createErrorBuilder';
-
+import createFormConfigBuilder from '#/src/utils/form/createFormConfigBuilder';
 import {
   validateIfJulkaistu,
   getKielivalinta,
@@ -42,7 +40,7 @@ const config = createFormConfigBuilder().registerSections([
         koulutustyypit: [KOULUTUSTYYPPI.TUTKINNON_OSA],
         validate: eb =>
           eb.validateArray('tutkinnonosat.osat', eb => {
-            return _.pipe([
+            return _fp.flow([
               eb => eb.validateExistence('eperuste'),
               eb => eb.validateExistence('koulutus'),
               eb => eb.validateArrayMinLength('osat', 1),

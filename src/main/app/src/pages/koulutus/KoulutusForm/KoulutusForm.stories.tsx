@@ -1,18 +1,19 @@
 import React, { useMemo } from 'react';
+
 import { storiesOf } from '@storybook/react';
 
-import KoulutusForm, { initialValues } from './index';
 import ReduxForm from '#/src/components/ReduxForm';
-import getKoulutusFormConfig from '#/src/utils/koulutus/getKoulutusFormConfig';
+import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useFieldValue } from '#/src/hooks/form';
-import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
-
 import {
   makeStoreDecorator,
   makeApiDecorator,
   makeLocalizationDecorator,
 } from '#/src/storybookUtils';
+import getKoulutusFormConfig from '#/src/utils/koulutus/getKoulutusFormConfig';
+
+import KoulutusForm, { initialValues } from './index';
 
 const FormWrapper = props => {
   const koulutustyyppi = useFieldValue('koulutustyyppi');

@@ -1,10 +1,12 @@
 import React from 'react';
+
 import { storiesOf } from '@storybook/react';
 
-import OppilaitoksenOsaForm, { initialValues } from './index';
 import ReduxForm from '#/src/components/ReduxForm';
-import getSoraKuvausFormConfig from '#/src/utils/soraKuvaus/getSoraKuvausFormConfig';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
+import getSoraKuvausFormConfig from '#/src/utils/soraKuvaus/getSoraKuvausFormConfig';
+
+import OppilaitoksenOsaForm, { initialValues } from './index';
 
 storiesOf('OppilaitoksenOsaForm', module).add('Basic', () => (
   <ReduxForm form="oppilaitoksenOsaForm" initialValues={initialValues}>

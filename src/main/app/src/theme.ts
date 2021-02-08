@@ -1,6 +1,6 @@
+import createUiTheme from '@opetushallitus/virkailija-ui-components/createTheme';
 import _ from 'lodash';
 import { generateMedia } from 'styled-media-query';
-import createUiTheme from '@opetushallitus/virkailija-ui-components/createTheme';
 
 const breakpoints = ['576px', '768px', '992px'];
 

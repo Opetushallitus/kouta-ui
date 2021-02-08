@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { Spring, config } from 'react-spring/renderprops';
+
 import { isCypress } from '#/src/utils';
 
 export const CollapseContent = ({ open = false, children }) => {

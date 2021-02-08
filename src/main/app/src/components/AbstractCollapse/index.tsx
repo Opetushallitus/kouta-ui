@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
+
 import { hideVisually } from 'polished';
+import styled from 'styled-components';
 
 const Hidden = styled.div`
   ${hideVisually()};

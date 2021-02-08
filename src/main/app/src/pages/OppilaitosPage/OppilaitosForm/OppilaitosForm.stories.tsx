@@ -1,16 +1,17 @@
 import React from 'react';
+
 import { storiesOf } from '@storybook/react';
 
-import OppilaitosForm, { initialValues } from './index';
 import ReduxForm from '#/src/components/ReduxForm';
-
+import FormConfigContext from '#/src/contexts/FormConfigContext';
 import {
   makeStoreDecorator,
   makeApiDecorator,
   makeLocalizationDecorator,
 } from '#/src/storybookUtils';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
 import getOppilaitosFormConfig from '#/src/utils/oppilaitos/getOppilaitosFormConfig';
+
+import OppilaitosForm, { initialValues } from './index';
 
 storiesOf('OppilaitosForm', module)
   .addDecorator(makeLocalizationDecorator())

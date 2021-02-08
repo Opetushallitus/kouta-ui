@@ -1,4 +1,4 @@
-import { merge } from 'lodash';
+import _ from 'lodash';
 
 const getBaseFields = ({ tyyppi = 'amm' } = {}) => {
   return {
@@ -33,7 +33,7 @@ const getBaseFields = ({ tyyppi = 'amm' } = {}) => {
 };
 
 const getAmmatillinenFields = ({ tyyppi = 'amm' }) => {
-  return merge(getBaseFields(), {
+  return _.merge(getBaseFields(), {
     oid: '1.2.246.562.13.00000000000000000599',
     johtaaTutkintoon: false,
     koulutustyyppi: tyyppi,
@@ -61,7 +61,7 @@ const getAmmatillinenFields = ({ tyyppi = 'amm' }) => {
 };
 
 const getKorkeakouluFields = ({ tyyppi }) => {
-  return merge(getBaseFields(), {
+  return _.merge(getBaseFields(), {
     johtaaTutkintoon: true,
     koulutustyyppi: tyyppi,
     koulutusKoodiUri: 'koulutus_671112#12',
@@ -80,7 +80,7 @@ const getKorkeakouluFields = ({ tyyppi }) => {
 };
 
 const getLukioFields = ({ tyyppi }) => {
-  return merge(getBaseFields({ tyyppi }), {
+  return _.merge(getBaseFields({ tyyppi }), {
     koulutusKoodiUri: 'koulutus_309902#12',
     nimi: { fi: 'Lukion oppimäärä' },
   });

@@ -1,4 +1,5 @@
 import { KOULUTUSTYYPPI } from '#/src/constants';
+
 import { isStipendiVisible } from './toteutusVisibilities';
 
 test.each([

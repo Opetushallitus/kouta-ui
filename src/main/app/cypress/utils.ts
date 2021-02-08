@@ -1,9 +1,10 @@
-import _fp from 'lodash/fp';
-import { loggable } from 'cypress-pipe';
 import { fireEvent } from '@testing-library/react';
+import { loggable } from 'cypress-pipe';
+import _fp from 'lodash/fp';
+
+import ePerusteByKoulutusKoodi351107 from '#/cypress/data/ePerusteByKoulutusKoodi351107';
 import koodisto from '#/cypress/data/koodisto';
 import koodistoOpintojenLaajuusYksikko from '#/cypress/data/koodistoOpintojenLaajuusYksikko';
-import ePerusteByKoulutusKoodi351107 from '#/cypress/data/ePerusteByKoulutusKoodi351107';
 import { Alkamiskausityyppi } from '#/src/constants';
 
 export const paste = loggable('paste', value => $element => {

@@ -1,7 +1,9 @@
 import React from 'react';
+
 import { storiesOf } from '@storybook/react';
 
 import { makeLocalizationDecorator } from '#/src/storybookUtils';
+
 import FormEditInfo from './index';
 
 storiesOf('FormEditInfo', module)

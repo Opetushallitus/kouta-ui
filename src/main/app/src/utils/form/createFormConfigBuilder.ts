@@ -5,7 +5,7 @@ import _ from 'lodash';
 const KOULUTUSTYYPPI_DEFAULT = 'default';
 
 const prefixIfDotField = (field = '', prefix = '') =>
-  _.first(field) === '.' ? `${prefix}${field}` : field;
+  _.head(field) === '.' ? `${prefix}${field}` : field;
 
 const fieldsToParts = (fields = {}) =>
   _.transform(

@@ -1,6 +1,7 @@
 import _fp from 'lodash/fp';
-import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
+
 import { parseEditorState } from '#/src/components/Editor/utils';
+import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 
 const koodiUriToKoodi = koodiUri => {
   return parseKoodiUri(koodiUri)?.koodiArvo;

@@ -1,7 +1,11 @@
 import React, { Fragment, useState } from 'react';
-import styled, { css } from 'styled-components';
-import { get, isFunction } from 'lodash';
 
+import _ from 'lodash';
+import { Link } from 'react-router-dom';
+import styled, { css } from 'styled-components';
+
+import Anchor from '#/src/components/Anchor';
+import StatusTag from '#/src/components/StatusTag';
 import Table, {
   TableHead,
   TableBody,
@@ -9,10 +13,7 @@ import Table, {
   TableCell,
 } from '#/src/components/Table';
 import { Icon, Dropdown } from '#/src/components/virkailija';
-import StatusTag from '#/src/components/StatusTag';
 import useLanguage from '#/src/hooks/useLanguage';
-import Anchor from '#/src/components/Anchor';
-import { Link } from 'react-router-dom';
 import { formatDateValue } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
@@ -61,7 +62,7 @@ export const makeMuokkaajaColumn = t => ({
   title: t('yleiset.muokkaaja'),
   key: 'muokkaaja',
   sortable: true,
-  render: ({ muokkaaja }) => get(muokkaaja, 'nimi') || null,
+  render: ({ muokkaaja }) => _.get(muokkaaja, 'nimi') || null,
 });
 
 const ActionsIcon = styled(Icon).attrs({ type: 'more_horiz' })`
@@ -95,7 +96,7 @@ const ActionsDropdown = ({ actionsMenu }) => {
 
 const Cell = styled(TableCell)`
   ${({ onClick }) =>
-    isFunction(onClick) &&
+    _.isFunction(onClick) &&
     css`
       cursor: pointer;
     `}
@@ -115,7 +116,7 @@ export const ListTable = ({
     row: defaultCollapsedRow,
     column: defaultCollapsedColumn,
   });
-  const isTableSortable = isFunction(onSort);
+  const isTableSortable = _.isFunction(onSort);
 
   const language = useLanguage();
 

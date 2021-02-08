@@ -1,7 +1,8 @@
 import _ from 'lodash';
-import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
-import { useApiQuery } from '#/src/hooks/useApiQuery';
+
 import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
+import { useApiQuery } from '#/src/hooks/useApiQuery';
+import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 
 export const getKoulutusByKoodi = async ({
   httpClient,

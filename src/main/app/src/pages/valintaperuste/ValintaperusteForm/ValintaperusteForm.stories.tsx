@@ -1,13 +1,13 @@
 import React from 'react';
 
-import ValintaperusteForm, { initialValues } from './index';
 import ReduxForm from '#/src/components/ReduxForm';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
-import { useEntityFormConfig } from '#/src/hooks/form';
-
 import { ENTITY } from '#/src/constants';
-import { makeStoreDecorator } from '#/src/storybookUtils';
+import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useFieldConfig } from '#/src/hooks/fieldConfigHooks';
+import { useEntityFormConfig } from '#/src/hooks/form';
+import { makeStoreDecorator } from '#/src/storybookUtils';
+
+import ValintaperusteForm, { initialValues } from './index';
 
 export default {
   title: 'ValintaperusteForm',

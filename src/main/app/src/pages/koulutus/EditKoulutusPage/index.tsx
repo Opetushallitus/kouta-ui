@@ -1,27 +1,29 @@
 import React, { useCallback, useMemo } from 'react';
+
 import { useTranslation } from 'react-i18next';
 
-import ReduxForm from '#/src/components/ReduxForm';
+import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
 } from '#/src/components/FormPage';
-import KoulutusForm from '../KoulutusForm';
-import useApiAsync from '#/src/hooks/useApiAsync';
-import getKoulutusByOid from '#/src/utils/koulutus/getKoulutusByOid';
-import { Spin } from '#/src/components/virkailija';
-import Title from '#/src/components/Title';
-import getFormValuesByKoulutus from '#/src/utils/koulutus/getFormValuesByKoulutus';
-import EntityFormHeader from '#/src/components/EntityFormHeader';
-import { ENTITY, CRUD_ROLES } from '#/src/constants';
 import FormSteps from '#/src/components/FormSteps';
-import ToggleDraft from '#/src/components/ToggleDraft';
-import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
-import { useFieldValue, useEntityFormConfig } from '#/src/hooks/form';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
 import FullSpin from '#/src/components/FullSpin';
-import EditKoulutusFooter from './EditKoulutusFooter';
+import ReduxForm from '#/src/components/ReduxForm';
+import Title from '#/src/components/Title';
+import ToggleDraft from '#/src/components/ToggleDraft';
+import { Spin } from '#/src/components/virkailija';
+import { ENTITY, CRUD_ROLES } from '#/src/constants';
 import { useUrls } from '#/src/contexts/contextHooks';
+import FormConfigContext from '#/src/contexts/FormConfigContext';
+import { useFieldValue, useEntityFormConfig } from '#/src/hooks/form';
+import useApiAsync from '#/src/hooks/useApiAsync';
+import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
+import getFormValuesByKoulutus from '#/src/utils/koulutus/getFormValuesByKoulutus';
+import getKoulutusByOid from '#/src/utils/koulutus/getKoulutusByOid';
+
+import KoulutusForm from '../KoulutusForm';
+import EditKoulutusFooter from './EditKoulutusFooter';
 
 const EditKoulutusPage = props => {
   const {

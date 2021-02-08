@@ -1,6 +1,7 @@
-import _fp from 'lodash/fp';
-import { useApiQuery } from '#/src/hooks/useApiQuery';
 import { isBefore, parseISO, endOfToday } from 'date-fns';
+import _fp from 'lodash/fp';
+
+import { useApiQuery } from '#/src/hooks/useApiQuery';
 
 const isValidKoulutusKoodi = ({ koodisto, voimassaLoppuPvm }) =>
   koodisto?.koodistoUri === 'koulutus' &&
@@ -18,7 +19,7 @@ const getKoulutuksetByKoulutusala = async ({
         koulutusalaKoodiUri
     );
 
-    return _fp.pipe(
+    return _fp.flow(
       _fp.filter(isValidKoulutusKoodi),
       _fp.groupBy('koodiUri'),
       _fp.map(_fp.maxBy('versio'))

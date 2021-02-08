@@ -1,9 +1,9 @@
 import React from 'react';
-import { Field } from 'redux-form';
-import { useTranslation } from 'react-i18next';
 
-import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
-import { Box } from '#/src/components/virkailija';
+import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
+
+import { createStyledRadioSection } from '#/src/components/createStyledRadioSection';
 import DateTimeRange from '#/src/components/DateTimeRange';
 import {
   FormFieldRadioGroup,
@@ -11,8 +11,9 @@ import {
   FormFieldEditor,
 } from '#/src/components/formFields';
 import Spacing from '#/src/components/Spacing';
-import { createStyledRadioSection } from '#/src/components/createStyledRadioSection';
+import { Box } from '#/src/components/virkailija';
 import { Alkamiskausityyppi } from '#/src/constants';
+import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
 
 const AlkamiskausiJaVuosiFields = ({ name }) => {

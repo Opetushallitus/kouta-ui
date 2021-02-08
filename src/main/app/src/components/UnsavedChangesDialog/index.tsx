@@ -1,14 +1,16 @@
 import React from 'react';
+
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
+
+import Button from '#/src/components/Button';
+import Flex from '#/src/components/Flex';
+import Modal from '#/src/components/Modal';
 import {
   ModalBody,
   ModalFooter,
   ModalHeader,
 } from '#/src/components/virkailija';
-import Button from '#/src/components/Button';
-import Modal from '#/src/components/Modal';
-import Flex from '#/src/components/Flex';
 
 const ModalButton = styled(Button)`
   margin-left: 1em;

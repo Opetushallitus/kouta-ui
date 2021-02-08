@@ -1,5 +1,6 @@
 import { useContext } from 'react';
-import { get } from 'lodash';
+
+import _ from 'lodash';
 
 import FormConfigSectionContext from '#/src/contexts/FormConfigSectionContext';
 import { useFormConfig } from '#/src/hooks/form';
@@ -9,7 +10,7 @@ const FormConfigFragment = ({ name, children }) => {
   const section = useContext(FormConfigSectionContext);
 
   const isVisible = Boolean(
-    get(config, ['sections', section, 'fragments', name])
+    _.get(config, ['sections', section, 'fragments', name])
   );
 
   return isVisible ? children : null;

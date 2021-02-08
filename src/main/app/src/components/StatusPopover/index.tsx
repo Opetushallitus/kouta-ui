@@ -1,10 +1,11 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
-import { isFunction } from 'lodash';
 
-import { getThemeProp, spacing } from '#/src/theme';
-import { Dropdown, Icon, Typography } from '#/src/components/virkailija';
+import _ from 'lodash';
+import styled, { css } from 'styled-components';
+
 import Flex, { FlexItem } from '#/src/components/Flex';
+import { Dropdown, Icon, Typography } from '#/src/components/virkailija';
+import { getThemeProp, spacing } from '#/src/theme';
 
 const Header = styled.div`
   ${({ status }) =>
@@ -12,7 +13,7 @@ const Header = styled.div`
     css`
       background-color: ${getThemeProp('palette.success.main')};
     `}
-   
+
   ${({ status }) =>
     status === 'danger' &&
     css`
@@ -56,7 +57,7 @@ export const StatusPopover = ({
   onClose,
   ...props
 }) => {
-  const canClose = isFunction(onClose);
+  const canClose = _.isFunction(onClose);
 
   const overlay = (
     <Container>

@@ -1,30 +1,31 @@
 import React, { useMemo } from 'react';
+
+import _ from 'lodash';
+import { Trans, useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
-import { get, isEmpty, isString, mapValues } from 'lodash';
-import { Trans, useTranslation } from 'react-i18next';
 
+import AbstractCollapse from '#/src/components/AbstractCollapse';
+import Anchor from '#/src/components/Anchor';
 import FieldGroup from '#/src/components/FieldGroup';
-import { getOsaamisalakuvauksetByEPerusteId } from '#/src/utils/ePeruste/getOsaamisalakuvauksetByEPerusteId';
-import { getEPerusteById } from '#/src/utils/ePeruste/getEPerusteById';
-import { getThemeProp } from '#/src/theme';
-import { getTestIdProps } from '#/src/utils';
-import { getLanguageValue } from '#/src/utils/languageUtils';
-import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
-import { sanitizeHTML } from '#/src/utils';
 import {
   FormFieldInput,
   FormFieldCheckboxGroup,
 } from '#/src/components/formFields';
-import Anchor from '#/src/components/Anchor';
-import AbstractCollapse from '#/src/components/AbstractCollapse';
-import { Divider, Icon, Typography, Spin } from '#/src/components/virkailija';
 import LocalLink from '#/src/components/LocalLink';
 import Spacing from '#/src/components/Spacing';
+import StyledSectionHTML from '#/src/components/StyledSectionHTML';
+import { Divider, Icon, Typography, Spin } from '#/src/components/virkailija';
 import { useUrls } from '#/src/contexts/contextHooks';
 import { useFieldValue } from '#/src/hooks/form';
 import useApiAsync from '#/src/hooks/useApiAsync';
-import StyledSectionHTML from '#/src/components/StyledSectionHTML';
+import { getThemeProp } from '#/src/theme';
+import { sanitizeHTML } from '#/src/utils';
+import { getTestIdProps } from '#/src/utils';
+import { getEPerusteById } from '#/src/utils/ePeruste/getEPerusteById';
+import { getOsaamisalakuvauksetByEPerusteId } from '#/src/utils/ePeruste/getOsaamisalakuvauksetByEPerusteId';
+import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
+import { getLanguageValue } from '#/src/utils/languageUtils';
 
 const Container = styled.div`
   display: flex;
@@ -83,9 +84,9 @@ const getExtendedEPeruste = async ({ httpClient, apiUrls, ePerusteId }) => {
 
   const osaamisalatWithDescriptions = osaamisalat.map(osaamisala => ({
     ...osaamisala,
-    kuvaus: mapValues(
-      get(osaamisalakuvaukset, [osaamisala.uri, 0, 'teksti']) || {},
-      v => (isString(v) ? sanitizeHTML(v) : v)
+    kuvaus: _.mapValues(
+      _.get(osaamisalakuvaukset, [osaamisala.uri, 0, 'teksti']) || {},
+      v => (_.isString(v) ? sanitizeHTML(v) : v)
     ),
   }));
 
@@ -189,16 +190,16 @@ const OsaamisalatContainer = ({
       })),
     [osaamisalat, language]
   );
-  const { koodiArvo } = parseKoodiUri(get(koulutus, 'koulutusKoodiUri'));
+  const { koodiArvo } = parseKoodiUri(_.get(koulutus, 'koulutusKoodiUri'));
 
   const osaamisalatValue = useFieldValue(`${name}.osaamisalat`);
   const koulutusLinkText = `${getLanguageValue(
-    get(koulutus, 'nimi'),
+    _.get(koulutus, 'nimi'),
     language
   )} (${koodiArvo})`;
 
   const ePerusteLinkText = `${getLanguageValue(nimi, language)} (${id})`;
-  return isEmpty(osaamisalat) ? (
+  return _.isEmpty(osaamisalat) ? (
     <Typography>
       <Trans
         i18nKey="toteutuslomake.eiOsaamisaloja"

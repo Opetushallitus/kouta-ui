@@ -1,8 +1,10 @@
 import React from 'react';
+
 import { useTranslation } from 'react-i18next';
 
-import { Typography } from '#/src/components/virkailija';
 import Spacing from '#/src/components/Spacing';
+import { Typography } from '#/src/components/virkailija';
+
 import OrganisaatioItem from './OrganisaatioItem';
 
 export const OrganisaatioFavouritesList = ({

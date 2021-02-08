@@ -1,12 +1,13 @@
 import React, { useCallback, useMemo } from 'react';
-import { isFunction } from 'lodash';
+
+import _ from 'lodash';
 
 import { AsyncSelect } from '#/src/components/Select';
-import getKoodi from '#/src/utils/koodi/getKoodi';
+import { useUrls, useHttpClient } from '#/src/contexts/contextHooks';
 import useLanguage from '#/src/hooks/useLanguage';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
+import getKoodi from '#/src/utils/koodi/getKoodi';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
-import { useUrls, useHttpClient } from '#/src/contexts/contextHooks';
 
 export const AsyncKoodistoSelect = ({
   disabled,
@@ -20,7 +21,7 @@ export const AsyncKoodistoSelect = ({
   const language = selectedLanguage || userLanguage;
 
   const formatLabel = useMemo(() => {
-    return isFunction(formatLabelProp)
+    return _.isFunction(formatLabelProp)
       ? formatLabelProp
       : koodi => getKoodiNimiTranslation(koodi, language);
   }, [language, formatLabelProp]);

@@ -1,7 +1,8 @@
 import React from 'react';
+
 import _ from 'lodash';
-import styled from 'styled-components';
 import { transparentize } from 'polished';
+import styled from 'styled-components';
 
 import { Box, Icon, Typography } from '#/src/components/virkailija';
 import { getThemeProp } from '#/src/theme';

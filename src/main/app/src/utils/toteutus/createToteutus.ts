@@ -1,17 +1,18 @@
-import { get, isString, isArray, isEmpty, zipObject } from 'lodash';
-import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
-import getKoodisto from '#/src/utils/koodi/getKoodisto';
+import _ from 'lodash';
+
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
+import getKoodisto from '#/src/utils/koodi/getKoodisto';
+import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 
 const resolveToteutusNimi = async ({ httpClient, apiUrls, toteutus }) => {
-  if (!isEmpty(toteutus.nimi)) {
+  if (!_.isEmpty(toteutus.nimi)) {
     return toteutus.nimi;
   }
 
   const { kielivalinta } = toteutus;
-  const lukiolinjaKoodiUri = get(toteutus, 'metadata.lukiolinjaKoodiUri');
+  const lukiolinjaKoodiUri = _.get(toteutus, 'metadata.lukiolinjaKoodiUri');
 
-  if (isString(lukiolinjaKoodiUri) && isArray(kielivalinta)) {
+  if (_.isString(lukiolinjaKoodiUri) && _.isArray(kielivalinta)) {
     const { koodisto, versio, koodi } = parseKoodiUri(lukiolinjaKoodiUri);
 
     const koodistoKoodit = await getKoodisto({
@@ -21,12 +22,12 @@ const resolveToteutusNimi = async ({ httpClient, apiUrls, toteutus }) => {
       koodistoVersio: versio,
     });
 
-    const targetKoodi = isArray(koodistoKoodit)
+    const targetKoodi = _.isArray(koodistoKoodit)
       ? koodistoKoodit.find(k => k.koodiUri === koodi)
       : undefined;
 
     return targetKoodi
-      ? zipObject(
+      ? _.zipObject(
           kielivalinta,
           kielivalinta.map(k => getKoodiNimiTranslation(targetKoodi, k))
         )

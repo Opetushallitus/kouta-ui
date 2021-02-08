@@ -1,4 +1,5 @@
 import React from 'react';
+
 import styled, { css } from 'styled-components';
 
 import { media } from '#/src/theme';
@@ -14,7 +15,7 @@ const GridColumnBase = styled.div`
   flex-grow: 1;
   flex-shrink: 0;
   flex-basis: auto;
-  
+
   ${media.lessThan('small')`
     ${props => props.sm && getWidth('xs')}
   `}

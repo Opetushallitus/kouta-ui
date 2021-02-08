@@ -1,16 +1,18 @@
 import React, { useMemo, useCallback } from 'react';
-import { map, sortBy, compose, isNil } from 'lodash/fp';
+
+import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
-import { Typography } from '#/src/components/virkailija';
-import useApiAsync from '#/src/hooks/useApiAsync';
+
+import ListSpin from '#/src/components/ListSpin';
 import ListTable, {
   makeNimiColumn,
   makeModifiedColumn,
   makeTilaColumn,
 } from '#/src/components/ListTable';
-import ListSpin from '#/src/components/ListSpin';
+import { Typography } from '#/src/components/virkailija';
+import useApiAsync from '#/src/hooks/useApiAsync';
 
-export default function ({
+export const RelatedEntitiesTable = function ({
   entity,
   organisaatioOid,
   getData,
@@ -32,9 +34,9 @@ export default function ({
   const rows = useMemo(() => {
     return (
       results &&
-      compose(
-        sortBy(e => e.nimi[i18n.language]),
-        map(entity => ({ ...entity, key: entity.oid }))
+      _fp.flow(
+        _fp.map(entity => ({ ...entity, key: entity.oid })),
+        _fp.sortBy(e => e.nimi[i18n.language])
       )(results)
     );
   }, [results, i18n.language]);
@@ -52,7 +54,7 @@ export default function ({
 
   return (
     <>
-      {isNil(rows) ? (
+      {_fp.isNil(rows) ? (
         <ListSpin />
       ) : (
         <>
@@ -65,4 +67,4 @@ export default function ({
       )}
     </>
   );
-}
+};

@@ -1,5 +1,5 @@
-import getOppilaitoksenOsaByFormValues from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaByFormValues';
 import { parseEditorState } from '#/src/components/Editor/utils';
+import getOppilaitoksenOsaByFormValues from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaByFormValues';
 
 test('getOppilaitoksenOsaByFormValues returns correct oppilaitoksen osa given form values', () => {
   const oppilaitos = getOppilaitoksenOsaByFormValues({

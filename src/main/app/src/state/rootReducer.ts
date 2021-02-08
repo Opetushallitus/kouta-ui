@@ -1,14 +1,14 @@
+import { produce } from 'immer';
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
-import { produce } from 'immer';
-import storage from 'redux-persist/lib/storage';
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
+import storage from 'redux-persist/lib/storage';
 
 import organisaatioFavourites from './organisaatioFavourites';
 import organisaatioSelection from './organisaatioSelection';
 import pagination from './pagination';
 
-export default (reducers = {}) =>
+export const createRootReducer = (reducers = {}) =>
   combineReducers({
     pagination,
     organisaatioFavourites: persistReducer(

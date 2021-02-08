@@ -1,14 +1,15 @@
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
-import toteutusMocks from '#/cypress/mocks/toteutus.mocks.json';
+import _fp from 'lodash/fp';
+
 import koulutus from '#/cypress/data/koulutus';
 import toteutus from '#/cypress/data/toteutus';
+import toteutusMocks from '#/cypress/mocks/toteutus.mocks.json';
 import { stubToteutusFormRoutes } from '#/cypress/toteutusFormUtils';
 import {
   assertNoUnsavedChangesDialog,
   fillKieliversiotSection,
   tallenna,
 } from '#/cypress/utils';
-import _fp from 'lodash/fp';
 
 const organisaatioOid = '1.1.1.1.1.1';
 const koulutusOid = '1.2.1.1.1.1';

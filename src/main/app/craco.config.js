@@ -1,5 +1,6 @@
-const _ = require('lodash/fp');
 const { ESLINT_MODES } = require('@craco/craco');
+const _fp = require('lodash/fp');
+
 const alias = require('./webpack-alias');
 const { withoutPlugins } = require('./webpack-utils');
 
@@ -20,7 +21,7 @@ module.exports = {
   },
   webpack: {
     alias,
-    configure: _.pipe(
+    configure: _fp.flow(
       config => ({
         ...config,
         ...(CI

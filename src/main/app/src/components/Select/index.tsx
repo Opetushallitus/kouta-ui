@@ -1,17 +1,17 @@
 import React, { useMemo, useContext, useRef, useCallback } from 'react';
-import { components, Props } from 'react-select';
-import ReactCreatable from 'react-select/creatable';
-import ReactAsyncCreatableSelect from 'react-select/async-creatable';
-import ReactAsyncSelect from 'react-select/async';
-import { ThemeContext } from 'styled-components';
-import { useAsync } from 'react-async';
-import _ from 'lodash';
-import { useTranslation } from 'react-i18next';
 
 import UiSelect, {
   getStyles,
   getTheme,
 } from '@opetushallitus/virkailija-ui-components/Select';
+import _ from 'lodash';
+import { useAsync } from 'react-async';
+import { useTranslation } from 'react-i18next';
+import { components, Props } from 'react-select';
+import ReactAsyncSelect from 'react-select/async';
+import ReactAsyncCreatableSelect from 'react-select/async-creatable';
+import ReactCreatable from 'react-select/creatable';
+import { ThemeContext } from 'styled-components';
 
 import { memoizeOne } from '#/src/utils/memoize';
 

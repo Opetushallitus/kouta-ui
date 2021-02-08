@@ -1,9 +1,12 @@
 import React, { useMemo } from 'react';
+
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
+
 import { SimpleCollapse } from '#/src/components/SimpleCollapse';
 import { Typography, Box } from '#/src/components/virkailija';
+import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
+
 import OpetushallitusOrganisaatioItem from './OpetushallitusOrganisaatioItem';
 import OrganisaatioFavouritesList from './OrganisaatioFavouritesList';
 

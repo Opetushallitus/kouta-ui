@@ -1,4 +1,6 @@
-import { merge } from 'lodash';
+import _ from 'lodash';
+
+import valintaperuste from '#/cypress/data/valintaperuste';
 import {
   getRadio,
   selectOption,
@@ -15,7 +17,6 @@ import {
   tallenna,
   fillKoulutustyyppiSelect,
 } from '#/cypress/utils';
-import valintaperuste from '#/cypress/data/valintaperuste';
 import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils';
 
 const fillHakutavanRajausSection = () => {
@@ -153,7 +154,7 @@ export const createValintaperusteForm = () => {
       { method: 'GET', url: `**/valintaperuste/${createdValintaperusteId}` },
       {
         body: [
-          merge(valintaperuste(), {
+          _.merge(valintaperuste(), {
             oid: createdValintaperusteId,
           }),
         ],

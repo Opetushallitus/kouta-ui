@@ -1,6 +1,7 @@
 import _ from 'lodash';
-import { getKokeetTaiLisanaytotValues } from '#/src/utils/form/getKokeetTaiLisanaytotValues';
+
 import { parseEditorState } from '#/src/components/Editor/utils';
+import { getKokeetTaiLisanaytotValues } from '#/src/utils/form/getKokeetTaiLisanaytotValues';
 
 const parseSisalto = sisalto => {
   if (!_.isArray(sisalto)) {

@@ -1,18 +1,13 @@
 import React, { useMemo } from 'react';
-import { Field } from 'redux-form';
-import styled from 'styled-components';
+
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
+import styled from 'styled-components';
 
-import Spacing from '#/src/components/Spacing';
-import Flex, { FlexItem } from '#/src/components/Flex';
-import { FormLabel, InputIcon } from '#/src/components/virkailija';
-import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
-import { getTestIdProps } from '#/src/utils';
-import isKorkeakouluKoulutustyyppi from '#/src/utils/koulutus/isKorkeakouluKoulutustyyppi';
-import { useFieldValue } from '#/src/hooks/form';
-import FormConfigFragment from '#/src/components/FormConfigFragment';
 import FieldGroup from '#/src/components/FieldGroup';
+import Flex, { FlexItem } from '#/src/components/Flex';
+import FormConfigFragment from '#/src/components/FormConfigFragment';
 import {
   FormFieldSelect,
   FormFieldInput,
@@ -20,12 +15,18 @@ import {
   FormFieldRadioGroup,
   FormFieldEditor,
 } from '#/src/components/formFields';
-import { isStipendiVisible } from '#/src/utils/toteutus/toteutusVisibilities';
 import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenAloitusajankohtaFields';
+import Spacing from '#/src/components/Spacing';
+import { FormLabel, InputIcon } from '#/src/components/virkailija';
+import { useFieldValue } from '#/src/hooks/form';
+import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
+import { getTestIdProps } from '#/src/utils';
+import isKorkeakouluKoulutustyyppi from '#/src/utils/koulutus/isKorkeakouluKoulutustyyppi';
+import { isStipendiVisible } from '#/src/utils/toteutus/toteutusVisibilities';
 
-import MaksullisuusFields from './MaksullisuusFields';
 import { DiplomiFields } from './DiplomiFields';
 import KielivalikoimaFields from './KielivalikoimaFields';
+import MaksullisuusFields from './MaksullisuusFields';
 import OpetusaikaCheckboxGroup from './OpetusaikaCheckboxGroup';
 import OpetuskieliCheckboxGroup from './OpetuskieliCheckboxGroup';
 import OpetustapaCheckboxGroup from './OpetustapaCheckboxGroup';
@@ -62,10 +63,9 @@ const OpetustapaField = createFormFieldComponent(
 
 const OsiotFields = ({ language, osiotOptions, name }) => {
   const osiot = useFieldValue(`${name}.osiot`);
-  const osiotArr = osiot || [];
 
   const osiotArrWithLabels = useMemo(() => {
-    return osiotArr.map(({ value, label }) => ({
+    return (osiot || []).map(({ value, label }) => ({
       value,
       label: label
         ? label
@@ -74,7 +74,7 @@ const OsiotFields = ({ language, osiotOptions, name }) => {
             osiotOptions.find(({ value: v }) => v === value)
           ) || null, // TODO: Use something else than null as a label, when not found
     }));
-  }, [osiotArr, osiotOptions]);
+  }, [osiot, osiotOptions]);
 
   return (
     <>
@@ -107,7 +107,7 @@ const ExtraField = ({ children = null }: { children: JSX.Element | null }) => (
 const StipendiFields = ({ koulutustyyppi, language, name }) => {
   const { t } = useTranslation();
   const onkoStipendia = useFieldValue<'kylla' | 'ei'>(`${name}.onkoStipendia`);
-  const opetuskieliArr = useFieldValue<string[]>(`${name}.opetuskieli`);
+  const opetuskieliArr = useFieldValue<Array<string>>(`${name}.opetuskieli`);
 
   const isVisible = isStipendiVisible(koulutustyyppi, opetuskieliArr);
 

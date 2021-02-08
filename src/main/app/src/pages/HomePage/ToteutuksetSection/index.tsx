@@ -1,33 +1,34 @@
 import React, { useMemo } from 'react';
-import { Link } from 'react-router-dom';
+
 import debounce from 'debounce-promise';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
-import { ENTITY, ICONS } from '#/src/constants';
-
-import { getTestIdProps } from '#/src/utils';
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-import searchToteutukset from '#/src/utils/toteutus/searchToteutukset';
 import Anchor from '#/src/components/Anchor';
-import ErrorAlert from '#/src/components/ErrorAlert';
-import Button from '#/src/components/Button';
-import useModal from '#/src/hooks/useModal';
-import Pagination from '#/src/components/Pagination';
-import { Box } from '#/src/components/virkailija';
 import Badge from '#/src/components/Badge';
-import useApiAsync from '#/src/hooks/useApiAsync';
+import Button from '#/src/components/Button';
+import ErrorAlert from '#/src/components/ErrorAlert';
+import ListSpin from '#/src/components/ListSpin';
 import ListTable, {
   makeModifiedColumn,
   makeMuokkaajaColumn,
   makeTilaColumn,
 } from '#/src/components/ListTable';
-import ListSpin from '#/src/components/ListSpin';
-import { getIndexParamsByFilters } from '../utils';
+import Pagination from '#/src/components/Pagination';
+import { Box } from '#/src/components/virkailija';
+import { ENTITY, ICONS } from '#/src/constants';
+import useApiAsync from '#/src/hooks/useApiAsync';
+import useModal from '#/src/hooks/useModal';
+import { getTestIdProps } from '#/src/utils';
+import { getFirstLanguageValue } from '#/src/utils/languageUtils';
+import searchToteutukset from '#/src/utils/toteutus/searchToteutukset';
+
 import Filters from '../Filters';
-import useFilterState from '../useFilterState';
-import NavigationAnchor from '../NavigationAnchor';
-import KoulutusModal from './KoulutusModal';
 import ListCollapse from '../ListCollapse';
+import NavigationAnchor from '../NavigationAnchor';
+import useFilterState from '../useFilterState';
+import { getIndexParamsByFilters } from '../utils';
+import KoulutusModal from './KoulutusModal';
 
 const { TOTEUTUS } = ENTITY;
 

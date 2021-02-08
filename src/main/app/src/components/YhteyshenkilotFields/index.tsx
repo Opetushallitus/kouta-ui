@@ -1,11 +1,12 @@
 import React, { useCallback } from 'react';
-import { Field, FieldArray } from 'redux-form';
-import { useTranslation } from 'react-i18next';
 
-import FieldArrayList from '#/src/components/FieldArrayList';
+import { useTranslation } from 'react-i18next';
+import { Field, FieldArray } from 'redux-form';
+
 import Button from '#/src/components/Button';
-import { FormFieldInput } from '#/src/components/formFields';
+import FieldArrayList from '#/src/components/FieldArrayList';
 import Flex from '#/src/components/Flex';
+import { FormFieldInput } from '#/src/components/formFields';
 import Spacing from '#/src/components/Spacing';
 
 const YhteyshenkilotField = ({ fields, language, t }) => {

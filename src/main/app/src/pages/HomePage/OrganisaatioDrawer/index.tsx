@@ -1,9 +1,13 @@
 import React, { useMemo, useState, useCallback, useEffect } from 'react';
-import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-import { useUnmount, usePrevious } from 'react-use';
 
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { useUnmount, usePrevious } from 'react-use';
+import styled from 'styled-components';
+
+import Button from '#/src/components/Button';
+import DividerHeading from '#/src/components/DividerHeading';
+import Heading from '#/src/components/Heading';
 import {
   Drawer,
   Typography,
@@ -13,35 +17,28 @@ import {
   Box,
   Spin,
 } from '#/src/components/virkailija';
-import { getTestIdProps } from '#/src/utils';
-import { spacing, getThemeProp } from '#/src/theme';
-import Button from '#/src/components/Button';
-
+import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
+import { useActions } from '#/src/hooks/useActions';
+import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
+import useDebounceState from '#/src/hooks/useDebounceState';
+import useLanguage from '#/src/hooks/useLanguage';
+import { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
 import {
   toggleFavourite,
   selectOrganisaatioFavourites,
 } from '#/src/state/organisaatioFavourites';
-
-import useLanguage from '#/src/hooks/useLanguage';
-import { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
-import useDebounceState from '#/src/hooks/useDebounceState';
-import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
-import DividerHeading from '#/src/components/DividerHeading';
+import { spacing, getThemeProp } from '#/src/theme';
+import { getTestIdProps } from '#/src/utils';
 
 import {
   createCanReadSomethingRoleBuilder,
   getEditLinkURL,
   isEditable,
 } from '../utils';
-
-import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
-
-import { useActions } from '#/src/hooks/useActions';
-import Heading from '#/src/components/Heading';
 import OrganisaatioTreeList from './OrganisaatioTreeList';
-import useOrganisaatioHierarkia from './useOrganisaatioHierarkia';
 import { PikavalinnatCollapse } from './PikavalinnatCollapse';
 import { SelectedOrganisaatioBox } from './SelectedOrganisaatioBox';
+import useOrganisaatioHierarkia from './useOrganisaatioHierarkia';
 
 const CloseIcon = styled(Icon).attrs({ type: 'close', role: 'button' })`
   color: ${getThemeProp('palette.text.primary')};

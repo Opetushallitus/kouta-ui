@@ -1,6 +1,7 @@
+import _ from 'lodash';
+
 import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
-import _ from 'lodash';
 
 export const getTutkinnonOsanKuvaus = async ({
   httpClient,

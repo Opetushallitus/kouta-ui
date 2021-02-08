@@ -1,6 +1,8 @@
 const fs = require('fs');
+
 const wp = require('@cypress/webpack-preprocessor');
 const { initPlugin } = require('cypress-plugin-snapshots/plugin');
+
 const alias = require('../../webpack-alias');
 
 module.exports = (on, config) => {

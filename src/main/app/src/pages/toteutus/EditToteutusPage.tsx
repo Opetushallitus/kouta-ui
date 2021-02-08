@@ -1,26 +1,28 @@
 import React, { useCallback, useMemo } from 'react';
+
 import { useTranslation } from 'react-i18next';
 
+import EntityFormHeader from '#/src/components/EntityFormHeader';
 import FormPage, {
   OrganisaatioRelation,
   KoulutusRelation,
   RelationInfoContainer,
 } from '#/src/components/FormPage';
-import getFormValuesByToteutus from '#/src/utils/toteutus/getFormValuesByToteutus';
-import { useToteutusByOid } from '#/src/utils/toteutus/getToteutusByOid';
-import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
-import ReduxForm from '#/src/components/ReduxForm';
-import { Spin } from '#/src/components/virkailija';
-import Title from '#/src/components/Title';
 import FormSteps from '#/src/components/FormSteps';
+import FullSpin from '#/src/components/FullSpin';
+import ReduxForm from '#/src/components/ReduxForm';
+import Title from '#/src/components/Title';
+import { Spin } from '#/src/components/virkailija';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
-import EntityFormHeader from '#/src/components/EntityFormHeader';
+import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useEntityFormConfig } from '#/src/hooks/form';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
-import FullSpin from '#/src/components/FullSpin';
-import ToteutusForm from './ToteutusForm';
+import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
+import getFormValuesByToteutus from '#/src/utils/toteutus/getFormValuesByToteutus';
+import { useToteutusByOid } from '#/src/utils/toteutus/getToteutusByOid';
+
 import { ToteutusFooter } from './ToteutusFooter';
+import ToteutusForm from './ToteutusForm';
 
 const EditToteutusPage = props => {
   const {

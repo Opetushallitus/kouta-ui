@@ -1,6 +1,7 @@
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
-import koulutusMocks from '#/cypress/mocks/koulutus.mocks.json';
 
+import { stubKoulutusFormRoutes } from '#/cypress/koulutusFormUtils';
+import koulutusMocks from '#/cypress/mocks/koulutus.mocks.json';
 import {
   getSelectOption,
   getCheckbox,
@@ -17,8 +18,6 @@ import {
   fillKoulutustyyppiSection,
   typeToEditor,
 } from '#/cypress/utils';
-
-import { stubKoulutusFormRoutes } from '#/cypress/koulutusFormUtils';
 
 const fillLisatiedotSection = () => {
   getByTestId('lisatiedotSection').within(() => {

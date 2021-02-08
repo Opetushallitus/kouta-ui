@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+
 import { KOULUTUS_ROLE, OPETUSHALLITUS_ORGANISAATIO_OID } from '../constants';
 import useAuthorizedUserRoleBuilder from './useAuthorizedUserRoleBuilder';
 

@@ -1,15 +1,15 @@
-import { merge } from 'lodash';
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
+import _ from 'lodash';
+
 import valintaperusteMocks from '#/cypress/mocks/valintaperuste.mock.json';
 
+import organisaatio from './data/organisaatio';
+import organisaatioHierarkia from './data/organisaatioHierarkia';
+import soraKuvaus from './data/soraKuvaus';
 import {
   stubOppijanumerorekisteriHenkiloRoute,
   stubCommonRoutes,
 } from './utils';
-
-import organisaatio from './data/organisaatio';
-import soraKuvaus from './data/soraKuvaus';
-import organisaatioHierarkia from './data/organisaatioHierarkia';
 
 export const stubValintaperusteFormRoutes = ({ organisaatioOid }) => {
   playMocks(valintaperusteMocks);
@@ -29,7 +29,7 @@ export const stubValintaperusteFormRoutes = ({ organisaatioOid }) => {
       url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
     },
     {
-      body: merge(organisaatio(), {
+      body: _.merge(organisaatio(), {
         oid: organisaatioOid,
       }),
     }
@@ -42,7 +42,7 @@ export const stubValintaperusteFormRoutes = ({ organisaatioOid }) => {
     },
     {
       body: [
-        merge(organisaatio(), {
+        _.merge(organisaatio(), {
           oid: organisaatioOid,
         }),
       ],
@@ -58,7 +58,7 @@ export const stubValintaperusteFormRoutes = ({ organisaatioOid }) => {
     { method: 'GET', url: '**/sorakuvaus/list**' },
     {
       body: [...new Array(10)].map((v, i) =>
-        merge(soraKuvaus(), {
+        _.merge(soraKuvaus(), {
           nimi: { fi: `Sora-kuvaus ${i}` },
           id: i.toString(),
           tila: 'julkaistu',
@@ -70,7 +70,7 @@ export const stubValintaperusteFormRoutes = ({ organisaatioOid }) => {
   cy.intercept(
     { method: 'GET', url: '**/sorakuvaus/1' },
     {
-      body: merge(soraKuvaus(), {
+      body: _.merge(soraKuvaus(), {
         nimi: { fi: `Sora-kuvaus 1` },
         id: 1,
         tila: 'julkaistu',

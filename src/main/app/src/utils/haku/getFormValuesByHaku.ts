@@ -1,5 +1,6 @@
-import { getHakulomakeFieldsValues } from '#/src/utils/form/getHakulomakeFieldsValues';
 import { HakuFormValues } from '#/src/types/hakuTypes';
+import { getHakulomakeFieldsValues } from '#/src/utils/form/getHakulomakeFieldsValues';
+
 import { getAjankohtaFields } from '../form/aloitusajankohtaHelpers';
 
 export const getFormValuesByHaku = (haku): HakuFormValues => {

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { storiesOf } from '@storybook/react';
 
-import PostinumeroSelect from './index';
+import { storiesOf } from '@storybook/react';
 
 import {
   makeApiDecorator,
   makeLocalizationDecorator,
 } from '#/src/storybookUtils';
+
+import PostinumeroSelect from './index';
 
 function generateStory(koodi) {
   return () => {

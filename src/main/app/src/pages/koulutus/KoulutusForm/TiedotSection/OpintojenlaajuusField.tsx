@@ -1,11 +1,11 @@
 import React from 'react';
-import { Field } from 'redux-form';
-import { useTranslation } from 'react-i18next';
 
-import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
-import { getTestIdProps } from '#/src/utils';
+import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
 
 import { FormFieldSelect } from '#/src/components/formFields';
+import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
+import { getTestIdProps } from '#/src/utils';
 
 export const OpintojenlaajuusField = ({ disabled, name }) => {
   const { options: laajuusOptions } = useKoodistoOptions({

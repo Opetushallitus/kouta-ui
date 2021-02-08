@@ -1,17 +1,18 @@
 import React from 'react';
-import { Field } from 'redux-form';
-import { useTranslation } from 'react-i18next';
 
-import Spacing from '#/src/components/Spacing';
-import { FormFieldSwitch } from '#/src/components/formFields';
-import useKoodiNimi from '#/src/hooks/useKoodiNimi';
-import { useFieldValue } from '#/src/hooks/form';
-import { Alkamiskausityyppi, ICONS } from '#/src/constants';
-import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenAloitusajankohtaFields';
+import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
+
 import FieldGroup from '#/src/components/FieldGroup';
-import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
+import { FormFieldSwitch } from '#/src/components/formFields';
 import { InlineInfoBox } from '#/src/components/InlineInfoBox';
+import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenAloitusajankohtaFields';
+import Spacing from '#/src/components/Spacing';
+import { Alkamiskausityyppi, ICONS } from '#/src/constants';
+import { useFieldValue } from '#/src/hooks/form';
+import useKoodiNimi from '#/src/hooks/useKoodiNimi';
 import { formatDateRange } from '#/src/utils';
+import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
 
 const InlineAjankohtaInfoBox = ({
   ajankohta = {},

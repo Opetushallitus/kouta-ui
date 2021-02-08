@@ -1,6 +1,8 @@
 import React from 'react';
-import { Field } from 'redux-form';
+
 import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
+
 import { FormFieldEditor } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';

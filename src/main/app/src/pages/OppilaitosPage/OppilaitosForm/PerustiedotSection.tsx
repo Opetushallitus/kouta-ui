@@ -1,20 +1,21 @@
 import React from 'react';
-import { get } from 'lodash';
-import { Field } from 'redux-form';
-import { useTranslation } from 'react-i18next';
 
-import { useOrganisaatio } from '#/src/hooks/useOrganisaatio';
-import useLanguage from '#/src/hooks/useLanguage';
-import useKoodiNimi from '#/src/hooks/useKoodiNimi';
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-import { Box, Typography } from '#/src/components/virkailija';
+import _ from 'lodash';
+import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
+
 import DividerHeading from '#/src/components/DividerHeading';
 import { FormFieldInput } from '#/src/components/formFields';
-import GridRow from '#/src/components/GridRow';
 import GridColumn from '#/src/components/GridColumn';
-import useKoodiNimet from '#/src/hooks/useKoodiNimet';
-import { getTestIdProps } from '#/src/utils';
+import GridRow from '#/src/components/GridRow';
 import LogoSection from '#/src/components/LogoSection';
+import { Box, Typography } from '#/src/components/virkailija';
+import useKoodiNimet from '#/src/hooks/useKoodiNimet';
+import useKoodiNimi from '#/src/hooks/useKoodiNimi';
+import useLanguage from '#/src/hooks/useLanguage';
+import { useOrganisaatio } from '#/src/hooks/useOrganisaatio';
+import { getTestIdProps } from '#/src/utils';
+import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 const InfoLabel = props => (
   <Box flexGrow={0} pr={2} flexBasis="30%" {...props} />
@@ -99,10 +100,10 @@ const TiedotSection = ({ name, t }) => {
 
 const OrganisaatioSection = ({ organisaatio, t }) => {
   const language = useLanguage();
-  const opetuskieletUris = get(organisaatio, 'kieletUris') || [];
-  const paikkakuntaUri = get(organisaatio, 'kotipaikkaUri');
-  const oppilaitostyyppiUri = get(organisaatio, 'oppilaitosTyyppiUri');
-  const nimi = getFirstLanguageValue(get(organisaatio, 'nimi'), language);
+  const opetuskieletUris = _.get(organisaatio, 'kieletUris') || [];
+  const paikkakuntaUri = _.get(organisaatio, 'kotipaikkaUri');
+  const oppilaitostyyppiUri = _.get(organisaatio, 'oppilaitosTyyppiUri');
+  const nimi = getFirstLanguageValue(_.get(organisaatio, 'nimi'), language);
 
   const { nimet: opetuskielet } = useKoodiNimet(opetuskieletUris);
   const { nimi: paikkakunta } = useKoodiNimi(paikkakuntaUri);

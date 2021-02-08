@@ -1,18 +1,19 @@
 import React from 'react';
+
+import { transparentize } from 'polished';
+import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
-import { useTranslation } from 'react-i18next';
-import { transparentize } from 'polished';
 
-import { getThemeProp } from '#/src/theme';
-import { FormFieldInput, FormFieldEditor } from '#/src/components/formFields';
-import { Box, Radio } from '#/src/components/virkailija';
-import SegmentTabs from '#/src/components/SegmentTabs';
-import SegmentTab from '#/src/components/SegmentTab';
 import DateTimeRange from '#/src/components/DateTimeRange';
+import { FormFieldInput, FormFieldEditor } from '#/src/components/formFields';
 import { createFormFieldComponent } from '#/src/components/formFields';
-import { useFieldValue } from '#/src/hooks/form';
+import SegmentTab from '#/src/components/SegmentTab';
+import SegmentTabs from '#/src/components/SegmentTabs';
+import { Box, Radio } from '#/src/components/virkailija';
 import { HAKULOMAKETYYPPI, Hakeutumistapa } from '#/src/constants';
+import { useFieldValue } from '#/src/hooks/form';
+import { getThemeProp } from '#/src/theme';
 
 const { MUU, ATARU, EI_SAHKOISTA_HAKUA } = HAKULOMAKETYYPPI;
 

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import HaunKohdejoukkoFields from '#/src/components/HaunKohdejoukkoFields';
 
 const TargetGroupSection = ({ name }) => {

@@ -1,4 +1,3 @@
-import getToteutusByFormValues from '#/src/utils/toteutus/getToteutusByFormValues';
 import { parseEditorState } from '#/src/components/Editor/utils';
 import {
   Alkamiskausityyppi,
@@ -7,6 +6,7 @@ import {
   JULKAISUTILA,
   KOULUTUSTYYPPI,
 } from '#/src/constants';
+import getToteutusByFormValues from '#/src/utils/toteutus/getToteutusByFormValues';
 
 test('getToteutusByFormValues returns correct toteutus given form values', () => {
   const toteutus = getToteutusByFormValues({

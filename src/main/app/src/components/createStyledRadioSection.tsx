@@ -1,13 +1,15 @@
 import React from 'react';
+
 import _ from 'lodash';
-import styled from 'styled-components';
 import { transparentize } from 'polished';
 import { useTranslation } from 'react-i18next';
-import { Box, Radio } from '#/src/components/virkailija';
+import styled from 'styled-components';
+
 import {
   createFormFieldComponent,
   simpleMapProps,
 } from '#/src/components/formFields';
+import { Box, Radio } from '#/src/components/virkailija';
 import { getThemeProp } from '#/src/theme';
 
 const StyledGrayRadio = styled(Radio)`

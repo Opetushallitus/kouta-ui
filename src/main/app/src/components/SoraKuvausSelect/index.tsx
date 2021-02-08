@@ -1,12 +1,14 @@
 import React, { useMemo } from 'react';
-import { noop } from 'lodash';
-import { createChainedFunction } from '#/src/utils';
-import useSoraKuvausOptions from '#/src/hooks/useSoraKuvausOptions';
+
+import _ from 'lodash';
+
 import Select from '#/src/components/Select';
+import useSoraKuvausOptions from '#/src/hooks/useSoraKuvausOptions';
+import { createChainedFunction } from '#/src/utils';
 
 export const SoraKuvausSelect = ({
   reloadOnFocus = false,
-  onFocus: onFocusProp = noop,
+  onFocus: onFocusProp = _.noop,
   organisaatioOid,
   ...props
 }) => {

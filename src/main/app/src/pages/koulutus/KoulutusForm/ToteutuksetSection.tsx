@@ -1,10 +1,11 @@
 import React from 'react';
+
 import { useTranslation } from 'react-i18next';
 
+import { RelatedEntitiesTable } from '#/src/components/RelatedEntitiesTable';
 import getKoulutuksenToteutukset from '#/src/utils/koulutus/getKoulutuksenToteutukset';
-import RelatedEntitiesTable from '#/src/components/RelatedEntitiesTable';
 
-export default function ({ koulutus, organisaatioOid }) {
+export const ToteutuksetSection = function ({ koulutus, organisaatioOid }) {
   const { t } = useTranslation();
 
   return (
@@ -19,4 +20,4 @@ export default function ({ koulutus, organisaatioOid }) {
       }}
     />
   );
-}
+};

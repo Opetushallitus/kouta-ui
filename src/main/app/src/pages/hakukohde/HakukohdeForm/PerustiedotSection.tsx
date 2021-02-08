@@ -1,14 +1,16 @@
 import React from 'react';
-import { Field } from 'redux-form';
-import { useTranslation } from 'react-i18next';
 
-import Spacing from '#/src/components/Spacing';
-import isAmmatillinenKoulutustyyppi from '#/src/utils/koulutus/isAmmatillinenKoulutustyyppi';
-import { getTestIdProps } from '#/src/utils';
+import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
+
 import { FormFieldCheckbox, FormFieldInput } from '#/src/components/formFields';
+import Spacing from '#/src/components/Spacing';
 import { Divider } from '#/src/components/virkailija';
-import HakuajatSection from './HakuajatSection';
+import { getTestIdProps } from '#/src/utils';
+import isAmmatillinenKoulutustyyppi from '#/src/utils/koulutus/isAmmatillinenKoulutustyyppi';
+
 import AlkamiskausiSection from './AlkamiskausiSection';
+import HakuajatSection from './HakuajatSection';
 import LomakeSection from './LomakeSection';
 
 const PerustiedotSection = ({

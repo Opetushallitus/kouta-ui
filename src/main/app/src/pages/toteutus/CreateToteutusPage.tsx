@@ -1,32 +1,33 @@
 import React, { useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
-import queryString from 'query-string';
 
+import queryString from 'query-string';
+import { useTranslation } from 'react-i18next';
+
+import FormHeader from '#/src/components/FormHeader';
+import FormPage, {
+  OrganisaatioRelation,
+  KoulutusRelation,
+  RelationInfoContainer,
+} from '#/src/components/FormPage';
+import FormSteps from '#/src/components/FormSteps';
+import ReduxForm from '#/src/components/ReduxForm';
+import Title from '#/src/components/Title';
+import { Spin } from '#/src/components/virkailija';
 import {
   KOULUTUSTYYPPI,
   POHJAVALINTA,
   ENTITY,
   FormMode,
 } from '#/src/constants';
-import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
-import { useToteutusByOid } from '#/src/utils/toteutus/getToteutusByOid';
-import getFormValuesByToteutus from '#/src/utils/toteutus/getFormValuesByToteutus';
-
-import FormPage, {
-  OrganisaatioRelation,
-  KoulutusRelation,
-  RelationInfoContainer,
-} from '#/src/components/FormPage';
-import ReduxForm from '#/src/components/ReduxForm';
-import { Spin } from '#/src/components/virkailija';
-import Title from '#/src/components/Title';
-import useSelectBase from '#/src/hooks/useSelectBase';
-import FormHeader from '#/src/components/FormHeader';
-import FormSteps from '#/src/components/FormSteps';
-import { useEntityFormConfig } from '#/src/hooks/form';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
-import ToteutusForm, { initialValues } from './ToteutusForm';
+import { useEntityFormConfig } from '#/src/hooks/form';
+import useSelectBase from '#/src/hooks/useSelectBase';
+import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
+import getFormValuesByToteutus from '#/src/utils/toteutus/getFormValuesByToteutus';
+import { useToteutusByOid } from '#/src/utils/toteutus/getToteutusByOid';
+
 import { ToteutusFooter } from './ToteutusFooter';
+import ToteutusForm, { initialValues } from './ToteutusForm';
 
 const { AMMATILLINEN_KOULUTUS, TUTKINNON_OSA, OSAAMISALA } = KOULUTUSTYYPPI;
 

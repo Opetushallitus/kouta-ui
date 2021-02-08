@@ -1,3 +1,4 @@
+import { stubHakuFormRoutes } from '#/cypress/hakuFormUtils';
 import {
   getRadio,
   fillDateTimeInput,
@@ -13,8 +14,6 @@ import {
   typeToEditor,
   fillAjankohtaFields,
 } from '#/cypress/utils';
-
-import { stubHakuFormRoutes } from '#/cypress/hakuFormUtils';
 
 const fillNimiSection = () => {
   getByTestId('nimiSection').within(() => {

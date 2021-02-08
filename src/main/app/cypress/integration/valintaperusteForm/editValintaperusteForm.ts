@@ -1,12 +1,12 @@
-import { merge } from 'lodash';
+import _ from 'lodash';
 
+import valintaperuste from '#/cypress/data/valintaperuste';
 import {
   getByTestId,
   fillKieliversiotSection,
   tallenna,
   assertNoUnsavedChangesDialog,
 } from '#/cypress/utils';
-import valintaperuste from '#/cypress/data/valintaperuste';
 import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils';
 
 const organisaatioOid = '1.1.1.1.1.1';
@@ -21,7 +21,7 @@ const prepareTest = tyyppi => {
 
   cy.intercept(
     { method: 'GET', url: `**/valintaperuste/${valintaperusteId}` },
-    { body: merge(valintaperuste({ tyyppi }), testValintaperusteFields) }
+    { body: _.merge(valintaperuste({ tyyppi }), testValintaperusteFields) }
   );
 
   cy.visit(

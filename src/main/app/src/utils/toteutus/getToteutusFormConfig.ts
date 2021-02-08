@@ -1,16 +1,5 @@
 import _fp from 'lodash/fp';
 
-import createFormConfigBuilder from '#/src/utils/form/createFormConfigBuilder';
-
-import {
-  validateExistence,
-  validateInteger,
-  validateExistenceOfDate,
-  validate,
-  validateTranslations,
-  validateUrl,
-} from '#/src/utils/form/createErrorBuilder';
-
 import {
   KOULUTUSTYYPPI,
   KOULUTUSTYYPIT,
@@ -22,7 +11,16 @@ import {
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
   Alkamiskausityyppi,
 } from '#/src/constants';
-
+import { ToteutusFormValues } from '#/src/types/toteutusTypes';
+import {
+  validateExistence,
+  validateInteger,
+  validateExistenceOfDate,
+  validate,
+  validateTranslations,
+  validateUrl,
+} from '#/src/utils/form/createErrorBuilder';
+import createFormConfigBuilder from '#/src/utils/form/createFormConfigBuilder';
 import {
   validateIfJulkaistu,
   getKielivalinta,
@@ -32,7 +30,6 @@ import {
   createOptionalTranslatedFieldConfig,
   validateIf,
 } from '#/src/utils/form/formConfigUtils';
-import { ToteutusFormValues } from '#/src/types/toteutusTypes';
 
 const validateDateTimeRange = (alkaaFieldName, paattyyFieldName) => (
   eb,
@@ -40,7 +37,7 @@ const validateDateTimeRange = (alkaaFieldName, paattyyFieldName) => (
 ) => {
   const alkaaValue = _fp.get(alkaaFieldName, values);
   const paattyyValue = _fp.get(paattyyFieldName, values);
-  return _fp.pipe(
+  return _fp.flow(
     eb =>
       paattyyValue
         ? validateExistenceOfDate(alkaaFieldName, {
@@ -232,30 +229,30 @@ const config = createFormConfigBuilder().registerSections([
         field: '.suunniteltuKesto.vuotta',
         required: false,
         validate: validateIfJulkaistu(
-          _fp.compose(
+          _fp.flow(
+            validateIfJulkaistu(
+              validateExistence('jarjestamistiedot.suunniteltuKesto.vuotta')
+            ),
             validateInteger('jarjestamistiedot.suunniteltuKesto.vuotta', {
               min: 0,
               max: 99,
               optional: true,
-            }),
-            validateIfJulkaistu(
-              validateExistence('jarjestamistiedot.suunniteltuKesto.vuotta')
-            )
+            })
           )
         ),
       },
       {
         field: '.suunniteltuKesto.kuukautta',
         required: false,
-        validate: _fp.compose(
+        validate: _fp.flow(
+          validateIfJulkaistu(
+            validateExistence('jarjestamistiedot.suunniteltuKesto.kuukautta')
+          ),
           validateInteger('jarjestamistiedot.suunniteltuKesto.kuukautta', {
             min: 0,
             max: 11,
             optional: true,
-          }),
-          validateIfJulkaistu(
-            validateExistence('jarjestamistiedot.suunniteltuKesto.kuukautta')
-          )
+          })
         ),
       },
       createOptionalTranslatedFieldConfig({
@@ -322,7 +319,7 @@ const config = createFormConfigBuilder().registerSections([
             values?.jarjestamistiedot?.ajankohta?.ajankohtaTyyppi ===
               Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI &&
               values?.tila === JULKAISUTILA.JULKAISTU,
-            _fp.pipe(
+            _fp.flow(
               validateExistence('jarjestamistiedot.ajankohta.kausi'),
               validateExistence('jarjestamistiedot.ajankohta.vuosi')
             )
@@ -361,7 +358,7 @@ const config = createFormConfigBuilder().registerSections([
     section: 'hakeutumisTaiIlmoittautumistapa',
     koulutustyypit: [KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA],
     validate: (eb, values) =>
-      _fp.pipe(
+      _fp.flow(
         eb =>
           validateDateTimeRange(
             'hakeutumisTaiIlmoittautumistapa.hakuaikaAlkaa',
@@ -371,14 +368,14 @@ const config = createFormConfigBuilder().registerSections([
           const hakeutumisTaiIlmoittautumistapa =
             values?.hakeutumisTaiIlmoittautumistapa
               ?.hakeutumisTaiIlmoittautumistapa;
-          return _fp.pipe(
+          return _fp.flow(
             validateExistence('hakeutumisTaiIlmoittautumistapa.hakuTapa'),
             validateExistence(
               'hakeutumisTaiIlmoittautumistapa.hakeutumisTaiIlmoittautumistapa'
             ),
             validateIf(
               hakeutumisTaiIlmoittautumistapa === HAKULOMAKETYYPPI.MUU,
-              _fp.pipe(
+              _fp.flow(
                 validateUrl(
                   'hakeutumisTaiIlmoittautumistapa.linkki',
                   getKielivalinta(values)

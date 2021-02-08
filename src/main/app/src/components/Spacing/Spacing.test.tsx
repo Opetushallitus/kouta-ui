@@ -1,7 +1,8 @@
 import React from 'react';
 
-import Spacing from './index';
 import { mountWithTheme } from '#/src/testUtils';
+
+import Spacing from './index';
 
 test('renders correctly', () => {
   expect(

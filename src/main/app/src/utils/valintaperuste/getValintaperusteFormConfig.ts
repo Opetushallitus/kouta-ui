@@ -1,6 +1,5 @@
 import { KOULUTUSTYYPIT, KOULUTUSTYYPPI } from '#/src/constants';
 import createFormConfigBuilder from '#/src/utils/form/createFormConfigBuilder';
-
 import {
   validateIfJulkaistu,
   getKielivalinta,

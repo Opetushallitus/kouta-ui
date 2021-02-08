@@ -1,6 +1,7 @@
 import React from 'react';
 
 import UiModal from '@opetushallitus/virkailija-ui-components/Modal';
+
 import {
   ModalBody,
   ModalFooter,

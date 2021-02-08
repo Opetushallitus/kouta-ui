@@ -1,6 +1,7 @@
-import _ from 'lodash';
 import { useMemo } from 'react';
+
 import debounce from 'debounce-promise';
+import _ from 'lodash';
 
 const getMatchingOptions = (options: SelectOptions, input, maxMatches) => {
   let matches: SelectOptions = [];

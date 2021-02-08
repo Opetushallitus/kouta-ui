@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { storiesOf } from '@storybook/react';
 
 import Table, { TableHead, TableRow, TableCell, TableBody } from './index';

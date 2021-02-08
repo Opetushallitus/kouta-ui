@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import _ from 'lodash/fp';
-import useKoodi from '#/src/hooks/useKoodi';
+
+import _fp from 'lodash/fp';
+
 import {
   useBoundFormActions,
   useIsDirty,
@@ -8,6 +9,7 @@ import {
   useSelectedLanguages,
 } from '#/src/hooks/form';
 import { useHasChanged } from '#/src/hooks/useHasChanged';
+import useKoodi from '#/src/hooks/useKoodi';
 
 export const useLocalizedKoulutus = ({
   koulutusFieldName,
@@ -26,8 +28,8 @@ export const useLocalizedKoulutus = ({
   useEffect(() => {
     if (koodi && isDirty) {
       const { metadata } = koodi;
-      const localizedNimi = _.find(
-        ({ kieli }) => _.toLower(kieli) === language,
+      const localizedNimi = _fp.find(
+        ({ kieli }) => _fp.toLower(kieli) === language,
         metadata
       )?.nimi;
 
@@ -52,8 +54,8 @@ export const useLocalizedKoulutus = ({
   useEffect(() => {
     if (nimiFieldName && nimiShouldUpdate && isDirty) {
       const newNimiFieldValue = {};
-      _.each(({ kieli, nimi }) => {
-        const lang = _.toLower(kieli);
+      _fp.each(({ kieli, nimi }) => {
+        const lang = _fp.toLower(kieli);
         if (languages.includes(lang)) {
           newNimiFieldValue[lang] = nimi;
         }

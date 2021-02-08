@@ -1,19 +1,21 @@
 import React, { Suspense } from 'react';
-import { Provider } from 'react-redux';
+
 import { action } from '@storybook/addon-actions';
-import Async from 'react-async';
-import { urls as ophUrls } from 'oph-urls-js';
 import axios from 'axios';
+import { urls as ophUrls } from 'oph-urls-js';
+import Async from 'react-async';
 import { I18nextProvider } from 'react-i18next';
+import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 
-import createStore from './state/store';
-import { configure as configureUrls } from './urls';
-import HttpContext from './contexts/HttpClientContext';
 import UrlContext from '#/src/contexts/UrlContext';
-import createLocalization from './localization';
-import getTranslations from './translations';
 import defaultTheme from '#/src/theme';
+
+import HttpContext from './contexts/HttpClientContext';
+import createLocalization from './localization';
+import createStore from './state/store';
+import getTranslations from './translations';
+import { configure as configureUrls } from './urls';
 
 const defaultHttpClient = axios.create({});
 const configureOphUrls = () => configureUrls(ophUrls, defaultHttpClient);

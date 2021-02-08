@@ -1,13 +1,14 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
-import { Link } from 'react-router-dom';
-import { isEmpty, noop } from 'lodash';
-import { useTranslation } from 'react-i18next';
 
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
+import _ from 'lodash';
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import styled, { css } from 'styled-components';
+
 import { Box, Radio, Icon, Typography } from '#/src/components/virkailija';
-import { getThemeProp } from '#/src/theme';
 import { disabledStyle } from '#/src/system';
+import { getThemeProp } from '#/src/theme';
+import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 const FavouriteIconBase = styled(Icon)`
   color: ${getThemeProp('palette.text.primary')};
@@ -87,7 +88,7 @@ export const OrganisaatioItem = ({
             {getFirstLanguageValue(nimi, language)}
           </Radio>
         </Box>
-        {collapse && !isEmpty(children) ? (
+        {collapse && !_.isEmpty(children) ? (
           <Box flexGrow={0} pr={2}>
             <CollapseIcon
               onClick={onToggleOpen}
@@ -102,7 +103,7 @@ export const OrganisaatioItem = ({
           active={favourite}
           disabled={disabled}
           title={t('etusivu.lisaaSuosikkeihin')}
-          onClick={disabled ? noop : onToggleFavourite}
+          onClick={disabled ? _.noop : onToggleFavourite}
         />
         {isEditable && editLinkURL ? (
           <Typography as="div" ml={2}>

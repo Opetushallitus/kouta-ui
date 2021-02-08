@@ -1,9 +1,10 @@
 import React from 'react';
-import { Field } from 'redux-form';
-import { useTranslation } from 'react-i18next';
 
-import { FormFieldSoraKuvausSelect } from '#/src/components/formFields';
+import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
+
 import Button from '#/src/components/Button';
+import { FormFieldSoraKuvausSelect } from '#/src/components/formFields';
 import { Box, Divider } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';

@@ -1,4 +1,4 @@
-import { merge } from 'lodash';
+import _ from 'lodash';
 
 import organisaatio from '#/cypress/data/organisaatio';
 import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
@@ -22,7 +22,7 @@ const stubMyOrganisations = () => {
       url: `/organisaatio-service/rest/organisaatio/v4/${oid}`,
     },
     {
-      body: merge(organisaatio(), {
+      body: _.merge(organisaatio(), {
         oid,
       }),
     }
@@ -43,7 +43,7 @@ const stubMyOrganisations = () => {
     },
     {
       body: [
-        merge(organisaatio(), {
+        _.merge(organisaatio(), {
           oid,
           nimi: {
             fi: 'Organisaatio_1',
@@ -91,7 +91,7 @@ describe('frontPage', () => {
       {
         body: {
           result: [
-            merge(koutaSearchItem(), { nimi: { fi: 'Koulutuksen nimi' } }),
+            _.merge(koutaSearchItem(), { nimi: { fi: 'Koulutuksen nimi' } }),
           ],
           totalCount: 1,
         },
@@ -103,7 +103,7 @@ describe('frontPage', () => {
       {
         body: {
           result: [
-            merge(koutaSearchItem(), { nimi: { fi: 'Toteutuksen nimi' } }),
+            _.merge(koutaSearchItem(), { nimi: { fi: 'Toteutuksen nimi' } }),
           ],
           totalCount: 1,
         },
@@ -114,7 +114,7 @@ describe('frontPage', () => {
       { method: 'GET', url: '/kouta-backend/search/haut' },
       {
         body: {
-          result: [merge(koutaSearchItem(), { nimi: { fi: 'Haun nimi' } })],
+          result: [_.merge(koutaSearchItem(), { nimi: { fi: 'Haun nimi' } })],
           totalCount: 1,
         },
       }
@@ -125,7 +125,9 @@ describe('frontPage', () => {
       {
         body: {
           result: [
-            merge(koutaSearchItem(), { nimi: { fi: 'Valintaperusteen nimi' } }),
+            _.merge(koutaSearchItem(), {
+              nimi: { fi: 'Valintaperusteen nimi' },
+            }),
           ],
           totalCount: 1,
         },
@@ -137,7 +139,7 @@ describe('frontPage', () => {
       {
         body: {
           result: [
-            merge(koutaSearchItem(), { nimi: { fi: 'Hakukohteen nimi' } }),
+            _.merge(koutaSearchItem(), { nimi: { fi: 'Hakukohteen nimi' } }),
           ],
           totalCount: 1,
         },

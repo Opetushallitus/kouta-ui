@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
+
 import _ from 'lodash';
-import { Field } from 'redux-form';
 import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
+
 import {
   FormFieldKoulutusalaSelect,
   FormFieldKoulutustyyppiSelect,
@@ -13,8 +15,8 @@ import {
   useFieldValue,
   useIsDirty,
 } from '#/src/hooks/form';
-import { useKoodistoDataOptions } from '#/src/hooks/useKoodistoOptions';
 import { useHasChanged } from '#/src/hooks/useHasChanged';
+import { useKoodistoDataOptions } from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
 import { useKoulutuksetByKoulutusala } from '#/src/utils/soraKuvaus/getKoulutuksetBykoulutusala';
 

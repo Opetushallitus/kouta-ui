@@ -1,6 +1,7 @@
 import React from 'react';
-import { Box } from '#/src/components/virkailija';
+
 import DividerHeading from '#/src/components/DividerHeading';
+import { Box } from '#/src/components/virkailija';
 import {
   useFieldConfig,
   useFieldIsRequired,

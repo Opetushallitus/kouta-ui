@@ -1,6 +1,8 @@
 import React from 'react';
-import { Field } from 'redux-form';
+
 import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
+
 import { FormFieldCheckbox } from '#/src/components/formFields';
 
 export const JulkisuusSection = ({ entity, name }) => {

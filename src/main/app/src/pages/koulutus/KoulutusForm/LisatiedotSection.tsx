@@ -1,21 +1,21 @@
 import React, { useMemo } from 'react';
-import { Field } from 'redux-form';
+
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
 
-import Spacing from '#/src/components/Spacing';
-import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
-import { getTestIdProps } from '#/src/utils';
 import { FormFieldEditor, FormFieldSelect } from '#/src/components/formFields';
+import Spacing from '#/src/components/Spacing';
 import { Typography } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
+import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
+import { getTestIdProps } from '#/src/utils';
 
 const OsiotFields = ({ disabled, language, osiotOptions, name }) => {
   const osiot = useFieldValue(`${name}.osiot`);
-  const osiotArr = osiot || [];
 
   const osiotArrWithLabels = useMemo(() => {
-    return osiotArr.map(({ value, label }) => ({
+    return (osiot ?? []).map(({ value, label }) => ({
       value,
       label: label
         ? label
@@ -24,7 +24,7 @@ const OsiotFields = ({ disabled, language, osiotOptions, name }) => {
             osiotOptions.find(({ value: v }) => v === value)
           ) || null,
     }));
-  }, [osiotArr, osiotOptions]);
+  }, [osiot, osiotOptions]);
 
   return osiotArrWithLabels.map(({ value, label }, index) => (
     <Spacing

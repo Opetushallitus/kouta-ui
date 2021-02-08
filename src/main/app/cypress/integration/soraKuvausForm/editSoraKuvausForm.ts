@@ -1,7 +1,8 @@
-import _ from 'lodash';
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
-import soraKuvausMocks from '#/cypress/mocks/soraKuvaus.mock.json';
+import _ from 'lodash';
+
 import createSoraKuvaus from '#/cypress/data/soraKuvaus';
+import soraKuvausMocks from '#/cypress/mocks/soraKuvaus.mock.json';
 import { stubSoraKuvausFormRoutes } from '#/cypress/soraKuvausFormUtils';
 import {
   assertNoUnsavedChangesDialog,

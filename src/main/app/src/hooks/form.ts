@@ -1,22 +1,25 @@
 import { useContext, useMemo, useCallback } from 'react';
-import { useSelector } from 'react-redux';
+
 import _ from 'lodash';
+import { useSelector } from 'react-redux';
 import { isDirty, isSubmitting } from 'redux-form';
 import formActions from 'redux-form/lib/actions';
-import FormNameContext from '#/src/contexts/FormNameContext';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
-import { useActions } from './useActions';
-import { assert } from '#/src/utils';
+
 import { ENTITY } from '#/src/constants';
-import getKoulutusFormConfig from '#/src/utils/koulutus/getKoulutusFormConfig';
-import getToteutusFormConfig from '#/src/utils/toteutus/getToteutusFormConfig';
-import getHakukohdeFormConfig from '#/src/utils/hakukohde/getHakukohdeFormConfig';
-import getHakuFormConfig from '#/src/utils/haku/getHakuFormConfig';
-import getValintaperusteFormConfig from '#/src/utils/valintaperuste/getValintaperusteFormConfig';
-import getSoraKuvausFormConfig from '#/src/utils/soraKuvaus/getSoraKuvausFormConfig';
-import getOppilaitosFormConfig from '#/src/utils/oppilaitos/getOppilaitosFormConfig';
-import getOppilaitoksenOsaFormConfig from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaFormConfig';
+import FormConfigContext from '#/src/contexts/FormConfigContext';
+import FormNameContext from '#/src/contexts/FormNameContext';
+import { assert } from '#/src/utils';
 import { getKielivalinta } from '#/src/utils/form/formConfigUtils';
+import getHakuFormConfig from '#/src/utils/haku/getHakuFormConfig';
+import getHakukohdeFormConfig from '#/src/utils/hakukohde/getHakukohdeFormConfig';
+import getKoulutusFormConfig from '#/src/utils/koulutus/getKoulutusFormConfig';
+import getOppilaitoksenOsaFormConfig from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaFormConfig';
+import getOppilaitosFormConfig from '#/src/utils/oppilaitos/getOppilaitosFormConfig';
+import getSoraKuvausFormConfig from '#/src/utils/soraKuvaus/getSoraKuvausFormConfig';
+import getToteutusFormConfig from '#/src/utils/toteutus/getToteutusFormConfig';
+import getValintaperusteFormConfig from '#/src/utils/valintaperuste/getValintaperusteFormConfig';
+
+import { useActions } from './useActions';
 
 export const useFormName = () => useContext(FormNameContext);
 

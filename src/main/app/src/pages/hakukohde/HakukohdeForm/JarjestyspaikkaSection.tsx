@@ -1,22 +1,23 @@
 import React, { useMemo } from 'react';
-import { Field } from 'redux-form';
-import _ from 'lodash/fp';
+
+import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
 import styled, { css } from 'styled-components';
 
-import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import {
   createFormFieldComponent,
   simpleMapProps,
 } from '#/src/components/formFields';
+import { Radio } from '#/src/components/virkailija';
 import { CRUD_ROLES, ENTITY, ORGANISAATIOTYYPPI } from '#/src/constants';
-import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
+import { useGetCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
+import useLanguage from '#/src/hooks/useLanguage';
+import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-import useLanguage from '#/src/hooks/useLanguage';
-import { Radio } from '#/src/components/virkailija';
-import { useGetCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { flattenHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
+import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
 const JARJESTYSPAIKATTOMAT_OPETUSTAVAT = [
   'opetuspaikkakk_2#1', // Verkko
@@ -50,7 +51,7 @@ export const RadioGroup = ({
 }) => {
   const validChildren = React.Children.toArray(childrenProp).filter(c =>
     React.isValidElement(c)
-  ) as RadioGroupChild[];
+  ) as Array<RadioGroupChild>;
 
   const childrenCount = React.Children.count(validChildren);
 
@@ -67,7 +68,7 @@ export const RadioGroup = ({
 
         return (
           <Container
-            key={_.uniqueId('RadioContainer_')}
+            key={_fp.uniqueId('RadioContainer_')}
             isLast={index === childrenCount - 1}
           >
             {element}
@@ -119,26 +120,26 @@ const JarjestyspaikkaSection = ({
   const language = useLanguage();
   const jarjestyspaikkaOptions = useMemo(
     () =>
-      _.pipe(
+      _fp.flow(
         flattenHierarkia,
-        _.filter(organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)),
-        _.map(org => ({
+        _fp.filter(organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)),
+        _fp.map(org => ({
           value: org?.oid,
           label: getFirstLanguageValue(org?.nimi, language),
           disabled:
             // Disabled when none of tarjoajat is found up in the organization's
             // hierarchy including organization itself  or when user has no
             // update rights for the organization.
-            _.every(tarjoaja => !_.includes(tarjoaja, org?.parentOidPath))(
+            _fp.every(tarjoaja => !_fp.includes(tarjoaja, org?.parentOidPath))(
               tarjoajat
             ) || !getCanUpdate(org),
         })),
-        _.sortBy('label')
+        _fp.sortBy('label')
       )(hierarkia),
     [getCanUpdate, hierarkia, language, tarjoajat]
   );
 
-  const jarjestyspaikkaOidRequired = _.difference(opetustapaKoodiUrit)(
+  const jarjestyspaikkaOidRequired = _fp.difference(opetustapaKoodiUrit)(
     JARJESTYSPAIKATTOMAT_OPETUSTAVAT
   );
 

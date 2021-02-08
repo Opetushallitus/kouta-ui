@@ -1,9 +1,11 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
+
 import { action } from '@storybook/addon-actions';
+import { storiesOf } from '@storybook/react';
+
+import { makeLocalizationDecorator } from '#/src/storybookUtils';
 
 import Pagination from './index';
-import { makeLocalizationDecorator } from '#/src/storybookUtils';
 
 storiesOf('Pagination', module)
   .addDecorator(makeLocalizationDecorator())

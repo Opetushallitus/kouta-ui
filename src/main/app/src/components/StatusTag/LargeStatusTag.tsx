@@ -1,11 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
+
+import _ from 'lodash';
 import { setLightness } from 'polished';
-import { isString } from 'lodash';
-import { getThemeProp } from '#/src/theme';
+import { useTranslation } from 'react-i18next';
+import styled from 'styled-components';
+
 import { Icon, Typography } from '#/src/components/virkailija';
 import { JULKAISUTILA } from '#/src/constants';
-import { useTranslation } from 'react-i18next';
+import { getThemeProp } from '#/src/theme';
+
 import { getColor, getLabel } from './utils';
 
 const statusByIcon = {
@@ -15,7 +18,7 @@ const statusByIcon = {
 };
 
 const getStatusIconType = status => {
-  if (!isString(status)) {
+  if (!_.isString(status)) {
     return '';
   }
 

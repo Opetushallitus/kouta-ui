@@ -1,26 +1,28 @@
 import React, { useMemo } from 'react';
+
 import { useTranslation } from 'react-i18next';
 
+import FormHeader from '#/src/components/FormHeader';
 import FormPage from '#/src/components/FormPage';
-import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
-import { Spin } from '#/src/components/virkailija';
-import Title from '#/src/components/Title';
-import ReduxForm from '#/src/components/ReduxForm';
-import getHakukohdeFormConfig from '#/src/utils/hakukohde/getHakukohdeFormConfig';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
 import {
   RelationInfoContainer,
   OrganisaatioRelation,
   HakuRelation,
   ToteutusRelation,
 } from '#/src/components/FormPage';
-import FormHeader from '#/src/components/FormHeader';
 import FormSteps from '#/src/components/FormSteps';
+import ReduxForm from '#/src/components/ReduxForm';
+import Title from '#/src/components/Title';
+import { Spin } from '#/src/components/virkailija';
+import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
+import FormConfigContext from '#/src/contexts/FormConfigContext';
+import getHakukohdeFormConfig from '#/src/utils/hakukohde/getHakukohdeFormConfig';
+
+import { useHakukohdePageData } from './getHakukohdePageData';
+import { HakukohdeFooter } from './HakukohdeFooter';
 import HakukohdeForm, {
   initialValues as getInitialValues,
 } from './HakukohdeForm';
-import { useHakukohdePageData } from './getHakukohdePageData';
-import { HakukohdeFooter } from './HakukohdeFooter';
 
 const CreateHakukohdePage = ({
   match: {
@@ -55,9 +57,9 @@ const CreateHakukohdePage = ({
         footer={
           <HakukohdeFooter
             formMode={FormMode.CREATE}
+            organisaatioOid={organisaatioOid}
             haku={haku}
             toteutus={toteutus}
-            hakukohde={{ organisaatioOid }}
           />
         }
       >

@@ -1,10 +1,11 @@
-const { merge } = require('lodash');
+const _ = require('lodash');
+
 const alias = require('./webpack-alias');
 
 module.exports = {
   withImportAlias: config => ({
     ...config,
-    resolve: merge(config.resolve, {
+    resolve: _.merge(config.resolve, {
       alias,
     }),
   }),

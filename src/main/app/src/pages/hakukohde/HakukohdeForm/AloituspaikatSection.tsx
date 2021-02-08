@@ -1,12 +1,13 @@
 import React from 'react';
-import { Field } from 'redux-form';
+
 import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
 
 import Flex, { FlexItem } from '#/src/components/Flex';
 import { FormFieldInput } from '#/src/components/formFields';
-import isKorkeakouluKoulutustyyppi from '#/src/utils/koulutus/isKorkeakouluKoulutustyyppi';
 import { FormLabel } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
+import isKorkeakouluKoulutustyyppi from '#/src/utils/koulutus/isKorkeakouluKoulutustyyppi';
 
 const AloituspaikatSection = ({ koulutustyyppi, name }) => {
   const isKorkeakoulu = isKorkeakouluKoulutustyyppi(koulutustyyppi);

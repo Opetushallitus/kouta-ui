@@ -1,15 +1,17 @@
 import React, { useCallback } from 'react';
-import { Field } from 'redux-form';
-import { useTranslation } from 'react-i18next';
 
-import { FormFieldImageInput } from './formFields';
-import uploadTeemakuva from '#/src/utils/api/uploadTeemakuva';
+import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
+
 import {
   TEEMAKUVA_ACCEPTED_FORMATS,
   TEEMAKUVA_MAX_SIZE,
   TEEMAKUVA_MIN_DIMENSIONS,
 } from '#/src/constants';
 import { useHttpClient, useUrls } from '#/src/contexts/contextHooks';
+import { uploadTeemakuva } from '#/src/utils/api/uploadTeemakuva';
+
+import { FormFieldImageInput } from './formFields';
 
 export const TeemakuvaSection = props => {
   const { name, disabled } = props;

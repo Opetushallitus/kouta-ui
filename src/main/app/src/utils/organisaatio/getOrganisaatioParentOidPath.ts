@@ -1,4 +1,4 @@
-import { get, isString, isObject } from 'lodash';
+import _ from 'lodash';
 
 const getSeparator = str => {
   if (str.indexOf('|') >= 0) {
@@ -9,14 +9,14 @@ const getSeparator = str => {
 };
 
 const getOrganisaatioParentOidPath = organisaatio => {
-  if (!isObject(organisaatio)) {
+  if (!_.isObject(organisaatio)) {
     return [];
   }
 
-  const pathStr = get(organisaatio, 'parentOidPath');
+  const pathStr = _.get(organisaatio, 'parentOidPath');
 
-  if (!isString(pathStr)) {
-    return get(organisaatio, 'oid') ? [organisaatio.oid] : [];
+  if (!_.isString(pathStr)) {
+    return _.get(organisaatio, 'oid') ? [organisaatio.oid] : [];
   }
 
   const separator = getSeparator(pathStr);

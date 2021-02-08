@@ -1,7 +1,7 @@
-import { sortBy } from 'lodash';
+import _ from 'lodash';
 
 const sortTreeBy = (tree = [], sortOpt) => {
-  return sortBy(
+  return _.sortBy(
     tree.map(item => ({
       ...item,
       children: sortTreeBy(item.children, sortOpt),

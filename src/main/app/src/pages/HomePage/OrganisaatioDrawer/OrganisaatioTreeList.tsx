@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { TreeList } from '#/src/components/virkailija';
+
 import OrganisaatioItem from './OrganisaatioItem';
 
 export const OrganisaatioTreeList = ({

@@ -1,12 +1,13 @@
 import React from 'react';
-import { Field } from 'redux-form';
+
 import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
 
 import { FormFieldInput, FormFieldSelect } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
+import { KOULUTUSTYYPPI } from '#/src/constants';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
-import { KOULUTUSTYYPPI } from '#/src/constants';
 
 const LaajuusFields = ({ name, disabled }) => {
   const { t } = useTranslation();

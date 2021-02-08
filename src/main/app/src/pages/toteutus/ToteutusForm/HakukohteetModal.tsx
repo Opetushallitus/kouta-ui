@@ -1,12 +1,14 @@
 import React, { useCallback, useState } from 'react';
+
 import { useTranslation } from 'react-i18next';
-import Modal from '#/src/components/Modal';
+
 import Button from '#/src/components/Button';
-import getHaut from '#/src/utils/haku/getHaut';
-import useApiAsync from '#/src/hooks/useApiAsync';
-import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
+import Modal from '#/src/components/Modal';
 import Select from '#/src/components/Select';
 import { Box, FormLabel } from '#/src/components/virkailija';
+import useApiAsync from '#/src/hooks/useApiAsync';
+import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
+import getHaut from '#/src/utils/haku/getHaut';
 
 const HakukohteetModal = ({
   onClose,

@@ -1,41 +1,43 @@
 import React from 'react';
+
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 
+import Button from '#/src/components/Button';
+import Flex from '#/src/components/Flex';
+import FormCollapse from '#/src/components/FormCollapse';
+import FormCollapseGroup from '#/src/components/FormCollapseGroup';
+import JulkaisutilaField from '#/src/components/JulkaisutilaField';
+import JulkisuusSection from '#/src/components/JulkisuusSection';
+import KieliversiotFields from '#/src/components/KieliversiotFields';
+import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
+import TeemakuvaSection from '#/src/components/TeemakuvaSection';
 import { ENTITY } from '#/src/constants';
-import isOphOrganisaatio from '#/src/utils/organisaatio/isOphOrganisaatio';
-import getKoulutukset from '#/src/utils/koulutus/getKoulutukset';
 import { useFieldValue } from '#/src/hooks/form';
 import {
   isSameKoulutustyyppiWithOrganisaatio,
   useOrganisaatio,
 } from '#/src/hooks/useOrganisaatio';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
-import Flex from '#/src/components/Flex';
-import Button from '#/src/components/Button';
-import FormCollapseGroup from '#/src/components/FormCollapseGroup';
-import FormCollapse from '#/src/components/FormCollapse';
-import KieliversiotFields from '#/src/components/KieliversiotFields';
-import JulkisuusSection from '#/src/components/JulkisuusSection';
-import JulkaisutilaField from '#/src/components/JulkaisutilaField';
-import TeemakuvaSection from '#/src/components/TeemakuvaSection';
-import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
-import TypeSection from './TypeSection';
-import TiedotSection from './TiedotSection';
-import KuvausSection from './KuvausSection';
-import JarjestajaSection from './JarjestajaSection';
-import { LisatiedotSection } from './LisatiedotSection';
-import ToteutuksetSection from './ToteutuksetSection';
-import { OsaamisalaSection } from './OsaamisalaSection';
-import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
-import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';
-import { TutkinnonOsatSection } from './TutkinnonOsatSection';
-import { TutkinnonOsaKoulutusNimiSection } from './TutkinnonOsaKoulutusNimiSection';
 import { getTestIdProps } from '#/src/utils';
+import getKoulutukset from '#/src/utils/koulutus/getKoulutukset';
+import isOphOrganisaatio from '#/src/utils/organisaatio/isOphOrganisaatio';
+
+import JarjestajaSection from './JarjestajaSection';
+import KuvausSection from './KuvausSection';
+import { LisatiedotSection } from './LisatiedotSection';
+import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
+import { OsaamisalaSection } from './OsaamisalaSection';
+import TiedotSection from './TiedotSection';
+import { ToteutuksetSection } from './ToteutuksetSection';
+import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';
+import { TutkinnonOsaKoulutusNimiSection } from './TutkinnonOsaKoulutusNimiSection';
+import { TutkinnonOsatSection } from './TutkinnonOsatSection';
+import TypeSection from './TypeSection';
 
 const isInHierarkia = org => hierarkia =>
   hierarkia.organisaatioOid === org.organisaatioOid ||
-  _fp.first(hierarkia.children.filter(isInHierarkia(org)));
+  _fp.head(hierarkia.children.filter(isInHierarkia(org)));
 
 const KoulutusForm = ({
   organisaatioOid,

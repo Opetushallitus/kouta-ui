@@ -1,24 +1,26 @@
 import React from 'react';
-import _ from 'lodash';
-import { Field, FieldArray } from 'redux-form';
-import { useTranslation } from 'react-i18next';
-import { Box, Divider } from '#/src/components/virkailija';
-import { getTestIdProps } from '#/src/utils';
-import Flex, { FlexItem } from '#/src/components/Flex';
-import FieldArrayList from '#/src/components/FieldArrayList';
-import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 
+import _ from 'lodash';
+import { useTranslation } from 'react-i18next';
+import { Field, FieldArray } from 'redux-form';
+
+import FieldArrayList from '#/src/components/FieldArrayList';
+import Flex, { FlexItem } from '#/src/components/Flex';
 import {
   FormFieldSelect,
   FormFieldCheckbox,
   FormFieldInput,
   FormFieldEditor,
 } from '#/src/components/formFields';
-import IconButton from '#/src/components/IconButton';
-import { useFieldValue } from '#/src/hooks/form';
-import TilaisuudetFields from './TilaisuudetFields';
-import RemoveButton from '#/src/components/RemoveButton';
 import Heading from '#/src/components/Heading';
+import IconButton from '#/src/components/IconButton';
+import RemoveButton from '#/src/components/RemoveButton';
+import { Box, Divider } from '#/src/components/virkailija';
+import { useFieldValue } from '#/src/hooks/form';
+import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
+import { getTestIdProps } from '#/src/utils';
+
+import TilaisuudetFields from './TilaisuudetFields';
 
 export const KoeTaiLisanayttoFields = ({
   index,

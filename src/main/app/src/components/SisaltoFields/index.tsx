@@ -1,7 +1,9 @@
 import React, { useCallback } from 'react';
+
 import { useTranslation } from 'react-i18next';
 import { Field, FieldArray } from 'redux-form';
 import styled from 'styled-components';
+
 import Button from '#/src/components/Button';
 import Editor from '#/src/components/Editor';
 import Flex, { FlexItem } from '#/src/components/Flex';

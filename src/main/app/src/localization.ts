@@ -1,10 +1,11 @@
+import { StatusCodes } from 'http-status-codes';
 import i18n from 'i18next';
 import XHR from 'i18next-xhr-backend';
-import { StatusCodes } from 'http-status-codes';
 import _ from 'lodash';
-import { getLocalization } from '#/src/utils/api/getLocalization';
-import getTranslations from '#/src/translations';
+
 import { LANGUAGES } from '#/src/constants';
+import getTranslations from '#/src/translations';
+import { getLocalization } from '#/src/utils/api/getLocalization';
 
 const { REACT_APP_LANG } = process.env;
 

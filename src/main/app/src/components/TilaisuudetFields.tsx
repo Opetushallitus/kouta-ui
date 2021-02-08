@@ -1,22 +1,23 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Field } from 'redux-form';
-import { useTranslation } from 'react-i18next';
-import { Box } from '#/src/components/virkailija';
-import { getTestIdProps } from '#/src/utils';
-import FieldArrayList from '#/src/components/FieldArrayList';
-import DateTimeRange from '#/src/components/DateTimeRange';
-import { spacing } from '#/src/theme';
 
+import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
+import styled from 'styled-components';
+
+import DateTimeRange from '#/src/components/DateTimeRange';
+import FieldArrayList from '#/src/components/FieldArrayList';
 import {
   FormFieldInput,
   FormFieldPostinumeroSelect,
   FormFieldEditor,
 } from '#/src/components/formFields';
-import IconButton from '#/src/components/IconButton';
-import { getThemeProp } from '#/src/theme';
 import Heading from '#/src/components/Heading';
+import IconButton from '#/src/components/IconButton';
 import RemoveButton from '#/src/components/RemoveButton';
+import { Box } from '#/src/components/virkailija';
+import { getThemeProp } from '#/src/theme';
+import { spacing } from '#/src/theme';
+import { getTestIdProps } from '#/src/utils';
 
 const SubSectionBox = styled(Box)`
   background-color: ${getThemeProp('colors.grayLighten6')};

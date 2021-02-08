@@ -1,20 +1,12 @@
 import React, { useMemo } from 'react';
-import { Field, FieldArray, Fields } from 'redux-form';
-import { get } from 'lodash';
+
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
+import { Field, FieldArray, Fields } from 'redux-form';
 
-import Spacing from '#/src/components/Spacing';
 import Button from '#/src/components/Button';
-import Flex from '#/src/components/Flex';
-import { getTestIdProps } from '#/src/utils';
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import FieldArrayList from '#/src/components/FieldArrayList';
-import { LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
-import useOrganisaatio from '#/src/hooks/useOrganisaatio';
-import getOrganisaatioContactInfo from '#/src/utils/organisaatio/getOrganisaatioContactInfo';
-import { Typography } from '#/src/components/virkailija';
-
+import Flex from '#/src/components/Flex';
 import {
   FormFieldDateTimeInput,
   FormFieldInput,
@@ -24,6 +16,14 @@ import {
   FormFieldPostinumeroSelect,
   FormFieldEditor,
 } from '#/src/components/formFields';
+import Spacing from '#/src/components/Spacing';
+import { Typography } from '#/src/components/virkailija';
+import { LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
+import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
+import useOrganisaatio from '#/src/hooks/useOrganisaatio';
+import { getTestIdProps } from '#/src/utils';
+import { getFirstLanguageValue } from '#/src/utils/languageUtils';
+import getOrganisaatioContactInfo from '#/src/utils/organisaatio/getOrganisaatioContactInfo';
 
 const ContactInfo = ({
   osoite,
@@ -271,11 +271,11 @@ const LiitteetField = ({
   ...props
 }) => {
   const yhteinenToimitusaika = Boolean(
-    get(props, [baseName, 'yhteinenToimitusaika', 'input', 'value'])
+    _.get(props, [baseName, 'yhteinenToimitusaika', 'input', 'value'])
   );
 
   const yhteinenToimituspaikka = Boolean(
-    get(props, [baseName, 'yhteinenToimituspaikka', 'input', 'value'])
+    _.get(props, [baseName, 'yhteinenToimituspaikka', 'input', 'value'])
   );
 
   return (

@@ -1,10 +1,11 @@
-import { merge } from 'lodash';
+import _ from 'lodash';
 
 import organisaatio from '#/cypress/data/organisaatio';
 import {
   stubOppijanumerorekisteriHenkiloRoute,
   stubCommonRoutes,
 } from '#/cypress/utils';
+
 import organisaatioHierarkia from './data/organisaatioHierarkia';
 
 export const stubSoraKuvausFormRoutes = ({ organisaatioOid }) => {
@@ -23,7 +24,7 @@ export const stubSoraKuvausFormRoutes = ({ organisaatioOid }) => {
       url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
     },
     {
-      body: merge(organisaatio(), {
+      body: _.merge(organisaatio(), {
         oid: organisaatioOid,
       }),
     }
@@ -36,7 +37,7 @@ export const stubSoraKuvausFormRoutes = ({ organisaatioOid }) => {
     },
     {
       body: [
-        merge(organisaatio(), {
+        _.merge(organisaatio(), {
           oid: organisaatioOid,
         }),
       ],

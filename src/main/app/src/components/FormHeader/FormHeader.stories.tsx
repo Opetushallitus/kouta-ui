@@ -1,11 +1,13 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
+
 import { storiesOf } from '@storybook/react';
+import { createBrowserHistory } from 'history';
+import { Router } from 'react-router-dom';
+
+import FormEditInfo from '#/src/components/FormEditInfo';
+import StatusTag from '#/src/components/StatusTag';
 
 import FormHeader from './index';
-import StatusTag from '#/src/components/StatusTag';
-import FormEditInfo from '#/src/components/FormEditInfo';
-import { createBrowserHistory } from 'history';
 
 storiesOf('FormHeader', module).add('Basic', () => (
   <Router history={createBrowserHistory()}>

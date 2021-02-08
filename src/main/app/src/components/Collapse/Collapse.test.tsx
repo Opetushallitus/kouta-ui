@@ -1,7 +1,8 @@
 import React from 'react';
 
-import Collapse from './index';
 import { mountWithTheme, setMockDate } from '#/src/testUtils';
+
+import Collapse from './index';
 
 let clearMockDate;
 

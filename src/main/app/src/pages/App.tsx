@@ -1,19 +1,21 @@
 import React, { Suspense } from 'react';
-import { Provider } from 'react-redux';
-import { ThemeProvider } from 'styled-components';
-import { PersistGate } from 'redux-persist/integration/react';
+
 import { I18nextProvider } from 'react-i18next';
 import { ReactQueryDevtools } from 'react-query-devtools';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { ThemeProvider } from 'styled-components';
 
+import ErrorBoundaryNotifier from '#/src/components/ErrorBoundaryNotifier';
 import FullSpin from '#/src/components/FullSpin';
 import GlobalStyle from '#/src/components/GlobalStyle';
+import HttpErrorNotifier from '#/src/components/HttpErrorNotifier';
+import VirkailijaRaamit from '#/src/components/VirkailijaRaamit';
 import HttpContext from '#/src/contexts/HttpClientContext';
 import UrlContext from '#/src/contexts/UrlContext';
-import VirkailijaRaamit from '#/src/components/VirkailijaRaamit';
 import { UserGate } from '#/src/pages/UserGate';
-import HttpErrorNotifier from '#/src/components/HttpErrorNotifier';
-import ErrorBoundaryNotifier from '#/src/components/ErrorBoundaryNotifier';
 import { isDev } from '#/src/utils';
+
 import Routes from './Routes';
 
 const App = ({

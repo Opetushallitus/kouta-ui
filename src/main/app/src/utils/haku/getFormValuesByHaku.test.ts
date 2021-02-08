@@ -1,8 +1,9 @@
 import _ from 'lodash';
 
-import { Alkamiskausityyppi, HAKULOMAKETYYPPI } from '#/src/constants';
-import { getFormValuesByHaku } from './getFormValuesByHaku';
 import { serializeEditorState } from '#/src/components/Editor/utils';
+import { Alkamiskausityyppi, HAKULOMAKETYYPPI } from '#/src/constants';
+
+import { getFormValuesByHaku } from './getFormValuesByHaku';
 
 const baseHaku = {
   muokkaaja: '1.1.1.1',
@@ -115,7 +116,7 @@ test('getFormValuesByHaku toteutuksen ajankohta - Aloitus henkilokohtaisen suunn
   );
   expect(values).toMatchSnapshot();
 
-  _.each(
+  _.forEach(
     values?.aikataulut.henkilokohtaisenSuunnitelmanLisatiedot,
     (lisatiedotEditorState, lisatiedotKey) => {
       expect(serializeEditorState(lisatiedotEditorState)).toEqual(

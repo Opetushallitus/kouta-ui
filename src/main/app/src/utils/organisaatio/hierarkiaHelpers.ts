@@ -1,4 +1,5 @@
-import _ from 'lodash/fp';
+import _fp from 'lodash/fp';
+
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 export const flatFilterHierarkia = (hierarkia, filterFn) => {
@@ -13,7 +14,7 @@ export const filterByName = (hierarkia, name, language) => {
   return hierarkia.flatMap(org => {
     const orgName = getFirstLanguageValue(org?.nimi, language);
 
-    const isMatch = _.isString(orgName)
+    const isMatch = _fp.isString(orgName)
       ? orgName.toLowerCase().indexOf(name) >= 0
       : false;
 
@@ -27,7 +28,7 @@ export const filterByName = (hierarkia, name, language) => {
   });
 };
 
-export const flattenHierarkia = _.flatMap(org => [
+export const flattenHierarkia = _fp.flatMap(org => [
   org,
   ...flattenHierarkia(org?.children ?? []),
 ]);

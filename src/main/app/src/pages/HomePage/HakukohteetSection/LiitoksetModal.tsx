@@ -1,12 +1,11 @@
 import React, { useState, useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+
 import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router-dom';
+
 import Button from '#/src/components/Button';
 import Modal from '#/src/components/Modal';
 import Select from '#/src/components/Select';
-import useApiAsync from '#/src/hooks/useApiAsync';
-import getToteutukset from '#/src/utils/toteutus/getToteutukset';
-import getHaut from '#/src/utils/haku/getHaut';
 import {
   Box,
   FormLabel,
@@ -14,7 +13,10 @@ import {
   ModalFooter,
   ModalHeader,
 } from '#/src/components/virkailija';
+import useApiAsync from '#/src/hooks/useApiAsync';
 import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
+import getHaut from '#/src/utils/haku/getHaut';
+import getToteutukset from '#/src/utils/toteutus/getToteutukset';
 
 const LiitoksetModal = ({ onClose, organisaatioOid, open }) => {
   const { t } = useTranslation();

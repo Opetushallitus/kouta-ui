@@ -1,8 +1,10 @@
 import React from 'react';
+
 import { storiesOf } from '@storybook/react';
 
-import GridRow from './index';
 import GridColumn from '#/src/components/GridColumn';
+
+import GridRow from './index';
 
 storiesOf('GridRow', module).add('Basic', () => (
   <GridRow gutter={2}>

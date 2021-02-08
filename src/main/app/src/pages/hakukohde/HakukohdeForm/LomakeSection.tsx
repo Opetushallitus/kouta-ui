@@ -1,17 +1,18 @@
 import React from 'react';
-import { Field } from 'redux-form';
-import { useTranslation } from 'react-i18next';
 
-import { LomakeFields } from '#/src/components/LomakeFields';
+import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
+
+import Anchor from '#/src/components/Anchor';
 import { FormFieldSwitch } from '#/src/components/formFields';
+import { InlineInfoBox } from '#/src/components/InlineInfoBox';
+import { LomakeFields } from '#/src/components/LomakeFields';
 import Spacing from '#/src/components/Spacing';
+import { Typography } from '#/src/components/virkailija';
+import { HAKULOMAKETYYPPI } from '#/src/constants';
+import { useUrls } from '#/src/contexts/contextHooks';
 import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-import { HAKULOMAKETYYPPI } from '#/src/constants';
-import { Typography } from '#/src/components/virkailija';
-import Anchor from '#/src/components/Anchor';
-import { useUrls } from '#/src/contexts/contextHooks';
-import { InlineInfoBox } from '#/src/components/InlineInfoBox';
 
 const hakulomakeTyyppiToLabel = {
   [HAKULOMAKETYYPPI.MUU]: 'hakukohdelomake.hakuunLiitettyMuuLomake',

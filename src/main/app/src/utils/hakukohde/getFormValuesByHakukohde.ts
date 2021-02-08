@@ -1,11 +1,11 @@
 import _ from 'lodash';
 
-import { getKokeetTaiLisanaytotValues } from '#/src/utils/form/getKokeetTaiLisanaytotValues';
-import { getHakulomakeFieldsValues } from '#/src/utils/form/getHakulomakeFieldsValues';
-import { isNumeric } from '#/src/utils';
 import { parseEditorState } from '#/src/components/Editor/utils';
 import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
+import { isNumeric } from '#/src/utils';
 import { getAjankohtaFields } from '#/src/utils/form/aloitusajankohtaHelpers';
+import { getHakulomakeFieldsValues } from '#/src/utils/form/getHakulomakeFieldsValues';
+import { getKokeetTaiLisanaytotValues } from '#/src/utils/form/getKokeetTaiLisanaytotValues';
 
 const getToimitustapaValues = (toimitustapa, toimitusosoite) => ({
   tapa: toimitustapa || '',
@@ -52,15 +52,6 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
     kaytetaanHaunAlkamiskautta,
     koulutuksenAlkamiskausi = {},
   } = metadata;
-
-  const {
-    alkamiskausityyppi,
-    koulutuksenAlkamiskausiKoodiUri = null,
-    koulutuksenAlkamispaivamaara = null,
-    koulutuksenPaattymispaivamaara = null,
-    koulutuksenAlkamisvuosi = '',
-    henkilokohtaisenSuunnitelmanLisatiedot,
-  } = koulutuksenAlkamiskausi;
 
   return {
     tila,

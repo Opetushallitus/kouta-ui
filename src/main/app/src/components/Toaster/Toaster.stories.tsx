@@ -1,9 +1,11 @@
 import React from 'react';
+
 import { storiesOf } from '@storybook/react';
-import _ from 'lodash/fp';
+import _fp from 'lodash/fp';
+
+import useToaster from '#/src/hooks/useToaster';
 
 import Toaster from './index';
-import useToaster from '#/src/hooks/useToaster';
 
 const toastsArray = [
   {
@@ -29,8 +31,8 @@ storiesOf('Toaster', module).add('Basic', () =>
         <button
           onClick={() =>
             openToast({
-              ...toastsArray[_.random(0, 1)],
-              key: _.uniqueId('toast_'),
+              ...toastsArray[_fp.random(0, 1)],
+              key: _fp.uniqueId('toast_'),
             })
           }
         >

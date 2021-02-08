@@ -1,12 +1,11 @@
-import { merge } from 'lodash';
-
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
-import hakuMocks from '#/cypress/mocks/haku.mocks.json';
-import createKoodisto from '#/cypress/data/koodisto';
+import _ from 'lodash';
 
-import organisaatio from '#/cypress/data/organisaatio';
 import createKoodi from '#/cypress/data/koodi';
+import createKoodisto from '#/cypress/data/koodisto';
+import organisaatio from '#/cypress/data/organisaatio';
 import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
+import hakuMocks from '#/cypress/mocks/haku.mocks.json';
 
 import {
   stubKoodistoRoute,
@@ -34,7 +33,7 @@ export const stubHakuFormRoutes = ({ organisaatioOid }) => {
       url: `**/organisaatio-service/rest/organisaatio/v4/${organisaatioOid}**`,
     },
     {
-      body: merge(organisaatio(), {
+      body: _.merge(organisaatio(), {
         oid: organisaatioOid,
       }),
     }
@@ -47,7 +46,7 @@ export const stubHakuFormRoutes = ({ organisaatioOid }) => {
     },
     {
       body: [
-        merge(organisaatio(), {
+        _.merge(organisaatio(), {
           oid: organisaatioOid,
         }),
       ],

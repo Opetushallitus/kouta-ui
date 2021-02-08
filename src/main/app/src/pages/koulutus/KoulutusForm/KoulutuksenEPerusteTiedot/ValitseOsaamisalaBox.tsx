@@ -1,25 +1,28 @@
-import _ from 'lodash/fp';
 import React, { useMemo, useEffect } from 'react';
+
+import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
+
+import Anchor from '#/src/components/Anchor';
 import { FormFieldSelect } from '#/src/components/formFields';
 import { Box, Spin } from '#/src/components/virkailija';
+import { useUrls } from '#/src/contexts/contextHooks';
 import {
   useFieldValue,
   useBoundFormActions,
   useIsDirty,
 } from '#/src/hooks/form';
-import { getTestIdProps } from '#/src/utils';
-import { getLanguageValue } from '#/src/utils/languageUtils';
-import { InfoBoxGrid, StyledInfoBox } from './InfoBox';
 import { useHasChanged } from '#/src/hooks/useHasChanged';
-import { useUrls } from '#/src/contexts/contextHooks';
-import Anchor from '#/src/components/Anchor';
+import { getTestIdProps } from '#/src/utils';
 import { useEPerusteSisalto } from '#/src/utils/ePeruste/getEPerusteSisalto';
 import { useEPerusteOsaamisalaKuvaukset } from '#/src/utils/ePeruste/getOsaamisalakuvauksetByEPerusteId';
+import { getLanguageValue } from '#/src/utils/languageUtils';
+
+import { InfoBoxGrid, StyledInfoBox } from './InfoBox';
 
 const getOsaamisalaOptions = (osaamisalat = [], language) =>
-  _.map(({ arvo, nimi }) => ({
+  _fp.map(({ arvo, nimi }) => ({
     label: getLanguageValue(nimi, language),
     value: arvo,
   }))(osaamisalat);
@@ -62,7 +65,7 @@ export const ValitseOsaamisalaBox = ({
     [language, osaamisalat]
   );
 
-  const selectedOsaamisalaData = _.find(
+  const selectedOsaamisalaData = _fp.find(
     ({ arvo }) => arvo === selectedOsaamisala?.value
   )(osaamisalat);
 
@@ -74,7 +77,7 @@ export const ValitseOsaamisalaBox = ({
 
   const isDirty = useIsDirty();
 
-  const perusteenOsaId = _.find(
+  const perusteenOsaId = _fp.find(
     ({ _perusteenOsa }) =>
       Number(_perusteenOsa) === Number(selectedOsaamisalaKuvausId)
   )(ePerusteSisalto?.lapset)?.id;
@@ -91,7 +94,7 @@ export const ValitseOsaamisalaBox = ({
           name={fieldName}
           label={t('koulutuslomake.valitseOsaamisala')}
           options={osaamisalaOptions}
-          disabled={_.isNil(osaamisalat) || _.isEmpty(osaamisalat)}
+          disabled={_fp.isNil(osaamisalat) || _fp.isEmpty(osaamisalat)}
         />
       </Box>
       {isLoading ? (

@@ -1,19 +1,19 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
-import { Field } from 'redux-form';
-import { useTranslation } from 'react-i18next';
 
-import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
-import { useFieldValue } from '#/src/hooks/form';
-import isKorkeakoulutusKohdejoukkoKoodiUri from '#/src/utils/isKorkeakoulutusKohdejoukkoKoodiUri';
+import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
+import styled, { css } from 'styled-components';
+
+import Flex, { FlexItem } from '#/src/components/Flex';
 import {
   FormFieldRadioGroup,
   FormFieldSelect,
 } from '#/src/components/formFields';
+import { useFieldValue } from '#/src/hooks/form';
+import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getThemeProp, spacing } from '#/src/theme';
 import { getTestIdProps } from '#/src/utils';
-
-import Flex, { FlexItem } from '#/src/components/Flex';
+import isKorkeakoulutusKohdejoukkoKoodiUri from '#/src/utils/isKorkeakoulutusKohdejoukkoKoodiUri';
 
 const KohdejoukkoFlexItem = styled(FlexItem).attrs({ grow: 0 })`
   ${({ showTarkenteet }) =>

@@ -1,13 +1,14 @@
 import { format as formatDate, parseISO } from 'date-fns';
-import _fp from 'lodash/fp';
 import _ from 'lodash';
+import _fp from 'lodash/fp';
 import stripTags from 'striptags';
-import { ALLOWED_HTML_TAGS, LANGUAGES, NDASH } from '#/src/constants';
-import { memoize } from '#/src/utils/memoize';
+
 import {
   isEditorState,
   isEmptyEditorState,
 } from '#/src/components/Editor/utils';
+import { ALLOWED_HTML_TAGS, LANGUAGES, NDASH } from '#/src/constants';
+import { memoize } from '#/src/utils/memoize';
 
 const { NODE_ENV, REACT_APP_CYPRESS } = process.env;
 
@@ -125,10 +126,10 @@ export const otherwise = () => true;
 export const sanitizeHTML = html => stripTags(html, ALLOWED_HTML_TAGS);
 
 export const parseKeyVal = memoize(
-  _fp.compose(
-    _fp.fromPairs,
+  _fp.flow(
+    _fp.split(';'),
     _fp.map(keyVal => keyVal.split('=')),
-    _fp.split(';')
+    _fp.fromPairs
   )
 );
 
@@ -191,13 +192,13 @@ export const getValuesForSaving = (
   const saveableValues: any = _.cloneDeep(initialValues);
 
   // Ensure that all fields that were unregistered (hidden by the user) are sent to backend as empty values
-  _.each(unregisteredFields, ({ name }) => {
+  _.forEach(unregisteredFields, ({ name }) => {
     const fieldName = getFieldName(name);
     _.set(saveableValues, fieldName, null);
   });
 
   // Ensure that the fields that are registered (visible) will be saved
-  _.each(registeredFields, ({ name }) => {
+  _.forEach(registeredFields, ({ name }) => {
     const fieldName = getFieldName(name);
     _.set(saveableValues, fieldName, _.get(values, fieldName));
   });

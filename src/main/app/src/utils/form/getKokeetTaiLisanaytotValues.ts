@@ -1,4 +1,5 @@
 import _ from 'lodash';
+
 import { parseEditorState } from '#/src/components/Editor/utils';
 
 export const getKokeetTaiLisanaytotValues = (

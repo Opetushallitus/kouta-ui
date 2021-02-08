@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
+
+import _ from 'lodash';
+import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
 
-import { get, isArray, isObject, isFunction } from 'lodash';
 import Flex, { FlexItem } from '#/src/components/Flex';
+import {
+  Dropdown,
+  DropdownMenu,
+  DropdownMenuItem,
+} from '#/src/components/virkailija';
 import { getThemeProp, spacing } from '#/src/theme';
 
 import {
@@ -16,14 +23,6 @@ import {
   setRowHeaderStatus,
   setColumnFieldValue,
 } from './utils';
-
-import {
-  Dropdown,
-  DropdownMenu,
-  DropdownMenuItem,
-} from '#/src/components/virkailija';
-
-import { useTranslation } from 'react-i18next';
 
 const ColumnInput = styled.textarea.attrs({ rows: 2 })`
   width: 100%;
@@ -137,7 +136,7 @@ const EditColumn = ({
       <DropdownMenuItem onClick={onAddColumnLeft}>
         {t('yleiset.lisaaSarakeVasemmalle')}
       </DropdownMenuItem>
-      {isFunction(onRemoveColumn) ? (
+      {_.isFunction(onRemoveColumn) ? (
         <DropdownMenuItem onClick={onRemoveColumn}>
           {t('yleiset.poistaSarake')}
         </DropdownMenuItem>
@@ -184,7 +183,7 @@ const EditRow = ({
       <DropdownMenuItem onClick={onAddRowAbove}>
         {t('yleiset.lisaaRiviYlapuolelle')}
       </DropdownMenuItem>
-      {isFunction(onRemoveRow) ? (
+      {_.isFunction(onRemoveRow) ? (
         <DropdownMenuItem onClick={onRemoveRow}>
           {t('yleiset.poistaRivi')}
         </DropdownMenuItem>
@@ -256,7 +255,7 @@ class TableInput extends Component {
 
   makeOnToggleRowHeaderStatus = ({ rowIndex }) => () => {
     const value = this.getValue();
-    const currentStatus = !!get(value, ['rows', rowIndex, 'isHeader']);
+    const currentStatus = !!_.get(value, ['rows', rowIndex, 'isHeader']);
 
     this.props.onChange(
       setRowHeaderStatus({
@@ -294,7 +293,7 @@ class TableInput extends Component {
 
     const path = language ? ['text', language] : ['text'];
 
-    return get(column, path) || '';
+    return _.get(column, path) || '';
   };
 
   handlePasteEvent = event => {
@@ -347,7 +346,7 @@ class TableInput extends Component {
           >
             {rowIndex + 1}
           </EditRow>
-          {isArray(row.columns)
+          {_.isArray(row.columns)
             ? row.columns.map((column, columnIndex) =>
                 this.renderColumn({ column, columnIndex, rowIndex })
               )
@@ -360,7 +359,7 @@ class TableInput extends Component {
   getRows() {
     const value = this.getValue();
 
-    return isObject(value) && isArray(value.rows) ? value.rows : [];
+    return _.isObject(value) && _.isArray(value.rows) ? value.rows : [];
   }
 
   render() {

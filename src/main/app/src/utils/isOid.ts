@@ -1,9 +1,9 @@
-import { isString } from 'lodash';
+import _ from 'lodash';
 
 const oidRegExp = /^[0-9]+(\.[0-9]+)+$/;
 
 const isOid = value => {
-  return isString(value) && oidRegExp.test(value);
+  return _.isString(value) && oidRegExp.test(value);
 };
 
 export default isOid;

@@ -1,4 +1,5 @@
 import { createReducer } from 'redux-create-reducer';
+
 import { SET_ORGANISAATIO } from './actions';
 
 const initialState = {

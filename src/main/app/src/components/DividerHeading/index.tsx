@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Heading from '#/src/components/Heading';
 
 export const DividerHeading = ({ children, variant = 'h6', ...spacing }) => {

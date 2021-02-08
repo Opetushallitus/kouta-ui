@@ -1,9 +1,11 @@
 import React from 'react';
 
 import styled from 'styled-components';
-import DividerHeading from './DividerHeading';
+
 import { Icon } from '#/src/components/virkailija';
+
 import AbstractCollapse from './AbstractCollapse';
+import DividerHeading from './DividerHeading';
 
 const SimpleCollapseHeader = styled.div`
   display: flex;

@@ -1,6 +1,7 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+
 import { setLightness } from 'polished';
+import styled, { css } from 'styled-components';
 
 import { Typography, Icon, Box } from '#/src/components/virkailija';
 import { spacing, getThemeProp } from '#/src/theme';

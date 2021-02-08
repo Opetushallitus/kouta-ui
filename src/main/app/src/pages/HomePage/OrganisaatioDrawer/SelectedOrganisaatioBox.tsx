@@ -1,17 +1,19 @@
 import React from 'react';
-import styled from 'styled-components';
+
+import _fp from 'lodash/fp';
 import { transparentize } from 'polished';
-import { Link } from 'react-router-dom';
-import _ from 'lodash/fp';
-import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-import useOrganisaatio from '#/src/hooks/useOrganisaatio';
-import { getOrganisaatioTyypit } from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
-import { ORGANISAATIOTYYPPI } from '#/src/constants';
-import { getThemeProp } from '#/src/theme';
-import { Typography, Box } from '#/src/components/virkailija';
-import EditButton from '#/src/components/EditButton';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+import EditButton from '#/src/components/EditButton';
+import { Typography, Box } from '#/src/components/virkailija';
+import { ORGANISAATIOTYYPPI } from '#/src/constants';
+import useOrganisaatio from '#/src/hooks/useOrganisaatio';
+import { getThemeProp } from '#/src/theme';
 import { otherwise } from '#/src/utils';
+import { getFirstLanguageValue } from '#/src/utils/languageUtils';
+import { getOrganisaatioTyypit } from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
 const StyledBlueBox = styled(Box)`
   background-color: ${getThemeProp('colors.blueLighten4', transparentize(0.7))};
@@ -27,9 +29,9 @@ export const SelectedOrganisaatioBox = ({ organisaatioOid }) => {
 
   const tyypit = getOrganisaatioTyypit(organisaatio);
 
-  const orgEntityType = _.cond([
-    [_.includes(ORGANISAATIOTYYPPI.OPPILAITOS), () => 'oppilaitos'],
-    [_.includes(ORGANISAATIOTYYPPI.TOIMIPISTE), () => 'oppilaitoksen-osa'],
+  const orgEntityType = _fp.cond([
+    [_fp.includes(ORGANISAATIOTYYPPI.OPPILAITOS), () => 'oppilaitos'],
+    [_fp.includes(ORGANISAATIOTYYPPI.TOIMIPISTE), () => 'oppilaitoksen-osa'],
     [otherwise, () => undefined],
   ])(tyypit);
 

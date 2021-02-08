@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
-import { sortBy } from 'lodash';
+
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import { Tab, Tabs } from '#/src/components/virkailija';
@@ -13,7 +14,7 @@ const getLanguageOptions = ({ languages = [], t }) => {
     en: t('yleiset.englanniksi'),
   };
 
-  return sortBy(
+  return _.sortBy(
     languages.map(item => {
       return {
         label: labelByValue[item] || item,

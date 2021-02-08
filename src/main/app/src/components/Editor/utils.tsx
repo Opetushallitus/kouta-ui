@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { EditorState } from 'draft-js';
-import { get, isObject, isFunction, isString } from 'lodash';
+
 import {
   convertToHTML as makeConvertToHTML,
   convertFromHTML as makeConvertFromHTML,
 } from 'draft-convert';
+import { EditorState } from 'draft-js';
+import _ from 'lodash';
+
 import linkDecorator from './linkDecorator';
 
 const convertFromHTML = makeConvertFromHTML({
@@ -20,7 +22,7 @@ const convertToHTML = makeConvertToHTML({
     if (entity.type === 'LINK') {
       return (
         <a
-          href={get(entity, 'data.url') || ''}
+          href={_.get(entity, 'data.url') || ''}
           rel="noopener noreferrer"
           target="_blank"
         >
@@ -74,7 +76,7 @@ const createEditorStateWithContent = contentState =>
   EditorState.createWithContent(contentState, linkDecorator);
 
 export const parseEditorState = value => {
-  if (!isString(value)) {
+  if (!_.isString(value)) {
     return createEmptyEditorState();
   }
 
@@ -82,7 +84,7 @@ export const parseEditorState = value => {
 };
 
 export const serializeEditorState = value => {
-  if (!isObject(value) || !isFunction(value.getCurrentContent)) {
+  if (!_.isObject(value) || !_.isFunction(value.getCurrentContent)) {
     return '';
   }
 

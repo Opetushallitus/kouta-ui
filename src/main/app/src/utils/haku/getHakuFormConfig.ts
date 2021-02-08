@@ -1,12 +1,16 @@
 import _fp from 'lodash/fp';
-import { ifAny, otherwise } from '#/src/utils';
+
 import {
   HAKULOMAKETYYPPI,
   JULKAISUTILA,
   Alkamiskausityyppi,
 } from '#/src/constants';
-import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
-import isErillishakuHakutapa from '#/src/utils/isErillishakuHakutapa';
+import { HakuFormValues } from '#/src/types/hakuTypes';
+import { ifAny, otherwise } from '#/src/utils';
+import {
+  validateExistence,
+  validateExistenceOfDate,
+} from '#/src/utils/form/createErrorBuilder';
 import createFormConfigBuilder from '#/src/utils/form/createFormConfigBuilder';
 import {
   validateIfJulkaistu,
@@ -17,11 +21,8 @@ import {
   validateIf,
   validateOptionalTranslatedField,
 } from '#/src/utils/form/formConfigUtils';
-import {
-  validateExistence,
-  validateExistenceOfDate,
-} from '#/src/utils/form/createErrorBuilder';
-import { HakuFormValues } from '#/src/types/hakuTypes';
+import isErillishakuHakutapa from '#/src/utils/isErillishakuHakutapa';
+import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
 
 const getHakutapa = values => values?.hakutapa;
 
@@ -88,7 +89,7 @@ const config = createFormConfigBuilder().registerSections([
             values?.aikataulut?.ajankohtaTyyppi ===
               Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI &&
               values?.tila === JULKAISUTILA.JULKAISTU,
-            _fp.pipe(
+            _fp.flow(
               validateExistence('aikataulut.kausi'),
               validateExistence('aikataulut.vuosi')
             )

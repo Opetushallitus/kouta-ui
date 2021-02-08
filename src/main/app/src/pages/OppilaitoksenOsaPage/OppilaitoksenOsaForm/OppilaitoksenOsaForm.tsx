@@ -1,15 +1,17 @@
 import React from 'react';
+
 import { useTranslation } from 'react-i18next';
 
-import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import FormCollapse from '#/src/components/FormCollapse';
+import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
-import { useFieldValue } from '#/src/hooks/form';
-import PerustiedotSection from './PerustiedotSection';
-import EsittelySection from './EsittelySection';
-import YhteystiedotSection from './YhteystiedotSection';
 import TeemakuvaSection from '#/src/components/TeemakuvaSection';
+import { useFieldValue } from '#/src/hooks/form';
+
+import EsittelySection from './EsittelySection';
+import PerustiedotSection from './PerustiedotSection';
+import YhteystiedotSection from './YhteystiedotSection';
 
 const OppilaitoksenOsaForm = ({
   steps = false,

@@ -1,10 +1,12 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
-import { setLightness } from 'polished';
+
 import _ from 'lodash';
-import { getThemeProp, spacing } from '#/src/theme';
+import { setLightness } from 'polished';
+import styled, { css } from 'styled-components';
+
 import CollapseContent from '#/src/components/CollapseContent';
 import { Box, DropdownIcon, Typography } from '#/src/components/virkailija';
+import { getThemeProp, spacing } from '#/src/theme';
 
 const Container = styled.div`
   border: 1px solid ${getThemeProp('palette.divider')};

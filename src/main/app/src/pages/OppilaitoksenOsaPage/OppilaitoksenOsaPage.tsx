@@ -1,23 +1,28 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 
+import { StatusCodes } from 'http-status-codes';
 import { useTranslation } from 'react-i18next';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
 import { EsikatseluControls } from '#/src/components/EsikatseluControls';
 import FormPage from '#/src/components/FormPage';
+import FullSpin from '#/src/components/FullSpin';
 import OppilaitosFormSteps from '#/src/components/OppilaitosFormSteps';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
-import { Spin } from '#/src/components/virkailija';
-import { ENTITY, CRUD_ROLES, ORGANISAATIOTYYPPI } from '#/src/constants';
+import {
+  ENTITY,
+  CRUD_ROLES,
+  ORGANISAATIOTYYPPI,
+  FormMode,
+} from '#/src/constants';
 import { useUrls } from '#/src/contexts/contextHooks';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
-import useApiAsync from '#/src/hooks/useApiAsync';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import useOrganisaatio, { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
 import koodiUriHasVersion from '#/src/utils/koodi/koodiUriHasVersion';
 import getFormValuesByOppilaitoksenOsa from '#/src/utils/oppilaitoksenOsa/getFormValuesByOppilaitoksenOsa';
-import getOppilaitoksenOsaByOid from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaByOid';
+import { useOppilaitoksenOsaByOid } from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaByOid';
 import getOppilaitoksenOsaFormConfig from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaFormConfig';
 import getOrganisaatioContactInfo from '#/src/utils/organisaatio/getOrganisaatioContactInfo';
 import getOrganisaatioParentOidPath from '#/src/utils/organisaatio/getOrganisaatioParentOidPath';
@@ -41,23 +46,30 @@ const OppilaitoksenOsaPage = ({
   match: {
     params: { organisaatioOid },
   },
-  location: { state = {} },
 }) => {
   const { organisaatio } = useOrganisaatio(organisaatioOid);
-  const { oppilaitoksenOsaUpdatedAt } = state;
 
-  const { data: oppilaitoksenOsa, finishedAt } = useApiAsync({
-    promiseFn: getOppilaitoksenOsaByOid,
-    oid: organisaatioOid,
-    silent: true,
-    watch: JSON.stringify([organisaatioOid, oppilaitoksenOsaUpdatedAt]),
-  });
+  const [formMode, setFormMode] = useState<FormMode>(FormMode.EDIT);
+
+  const { data: oppilaitoksenOsa, isFetching } = useOppilaitoksenOsaByOid(
+    organisaatioOid,
+    {
+      retry: 0,
+      onError: e => {
+        if (e.response.status === StatusCodes.NOT_FOUND) {
+          setFormMode(FormMode.CREATE);
+        }
+      },
+      onSuccess: () => {
+        setFormMode(FormMode.EDIT);
+      },
+    }
+  );
 
   // TODO: Setting oppilaitosOid should be done in backend. https://jira.oph.ware.fi/jira/browse/KTO-819
   const oppilaitosOid = useOppilaitosOid(organisaatio);
 
   const { t } = useTranslation();
-  const oppilaitoksenOsaIsResolved = !!finishedAt;
 
   const stepsEnabled = !oppilaitoksenOsa;
   const showArkistoituTilaOption = !!oppilaitoksenOsa;
@@ -81,31 +93,37 @@ const OppilaitoksenOsaPage = ({
 
   const initialValues = useMemo(
     () => ({
-      ...formInitialValues,
+      ...(formMode === FormMode.CREATE
+        ? {
+            ...formInitialValues,
+            yhteystiedot: {
+              osoite: contactInfo.osoite || {},
+              postinumero: contactInfo.postinumeroKoodiUri
+                ? {
+                    value: koodiUriHasVersion(contactInfo.postinumeroKoodiUri)
+                      ? contactInfo.postinumeroKoodiUri
+                      : `${contactInfo.postinumeroKoodiUri}#2`,
+                  }
+                : undefined,
+              verkkosivu: contactInfo.verkkosivu || '',
+              puhelinnumero: contactInfo.puhelinnumero || '',
+            },
+          }
+        : oppilaitoksenOsa
+        ? getFormValuesByOppilaitoksenOsa(oppilaitoksenOsa)
+        : {}),
       oppilaitosOid,
-      yhteystiedot: {
-        osoite: contactInfo.osoite || {},
-        postinumero: contactInfo.postinumeroKoodiUri
-          ? {
-              value: koodiUriHasVersion(contactInfo.postinumeroKoodiUri)
-                ? contactInfo.postinumeroKoodiUri
-                : `${contactInfo.postinumeroKoodiUri}#2`,
-            }
-          : undefined,
-        verkkosivu: contactInfo.verkkosivu || '',
-        puhelinnumero: contactInfo.puhelinnumero || '',
-      },
-      ...(oppilaitoksenOsa &&
-        getFormValuesByOppilaitoksenOsa(oppilaitoksenOsa)),
     }),
-    [oppilaitoksenOsa, contactInfo, oppilaitosOid]
+    [formMode, oppilaitoksenOsa, oppilaitosOid, contactInfo]
   );
 
   const config = getOppilaitoksenOsaFormConfig();
 
   const apiUrls = useUrls();
 
-  return (
+  return isFetching ? (
+    <FullSpin />
+  ) : (
     <ReduxForm form="oppilaitoksenOsa" initialValues={initialValues}>
       <FormConfigContext.Provider value={{ ...config, readOnly }}>
         <Title>{t('sivuTitlet.oppilaitoksenOsa')}</Title>
@@ -134,15 +152,13 @@ const OppilaitoksenOsaPage = ({
             />
           }
         >
-          {organisaatio && oppilaitoksenOsaIsResolved ? (
+          {organisaatio ? (
             <OppilaitoksenOsaForm
               organisaatioOid={organisaatioOid}
               steps={stepsEnabled}
               showArkistoituTilaOption={showArkistoituTilaOption}
             />
-          ) : (
-            <Spin center />
-          )}
+          ) : null}
         </FormPage>
       </FormConfigContext.Provider>
     </ReduxForm>

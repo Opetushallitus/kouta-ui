@@ -129,7 +129,7 @@ const OppilaitoksenOsaPage = ({
             <EsikatseluControls
               esikatseluUrl={
                 oppilaitoksenOsa &&
-                apiUrls.url('konfo-ui.oppilaitos', organisaatioOid)
+                apiUrls.url('konfo-ui.oppilaitoksenOsa', organisaatioOid)
               }
             />
           }

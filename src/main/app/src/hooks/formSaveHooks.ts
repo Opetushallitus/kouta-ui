@@ -5,6 +5,7 @@ import { useDispatch, batch } from 'react-redux';
 import {
   startSubmit as startSubmitAction,
   stopSubmit as stopSubmitAction,
+  initialize,
 } from 'redux-form';
 
 import { useHttpClient, useUrls } from '#/src/contexts/contextHooks';
@@ -63,7 +64,9 @@ export const useSaveForm = ({ form: formName, validate, submit }) => {
           () => {
             stopSubmit({ successToast: true });
             // NOTE: initialize values with the saved ones to update the dirty state
-            //dispatch(initialize(formName, currentValues));
+            // This shouldn't be needed, because page data is refetched after save
+            // (in Edit*Page components) and initial values are recalculated when data changes.
+            dispatch(initialize(formName, currentValues));
           }
         );
       } else {
@@ -76,6 +79,7 @@ export const useSaveForm = ({ form: formName, validate, submit }) => {
     }
   }, [
     form,
+    dispatch,
     user,
     startSubmit,
     validate,

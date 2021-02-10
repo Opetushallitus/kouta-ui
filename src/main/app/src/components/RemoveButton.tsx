@@ -11,7 +11,7 @@ export default function RemoveButton({ children = undefined, ...props }) {
       type="button"
       variant="outlined"
       color="secondary"
-      iconType="delete_outlined"
+      iconType="delete"
       {...props}
     >
       {children ? children : t('yleiset.poista')}

@@ -6,34 +6,34 @@ import styled, { css } from 'styled-components';
 import { Typography, Icon, Box } from '#/src/components/virkailija';
 import { spacing, getThemeProp } from '#/src/theme';
 
-const getIconByVariant = variant => {
-  if (variant === 'info') {
+const getIconByStatus = status => {
+  if (status === 'info') {
     return 'info';
-  } else if (variant === 'danger') {
+  } else if (status === 'danger') {
     return 'error';
-  } else if (variant === 'success') {
+  } else if (status === 'success') {
     return 'check_circle';
   }
 
   return undefined;
 };
 
-const getVariantColor = ({ variant, theme }) => {
-  if (variant === 'danger') {
+const getStatusColor = ({ status, theme }) => {
+  if (status === 'danger') {
     return theme.palette.danger.main;
-  } else if (variant === 'success') {
+  } else if (status === 'success') {
     return theme.palette.success.main;
   }
 
   return theme.palette.primary.main;
 };
 
-const VariantIcon = styled(Icon)`
+const StatusIcon = styled(Icon)`
   font-size: 1.8rem;
-  color: ${getVariantColor};
+  color: ${getStatusColor};
 `;
-const getVariantCss = ({ variant, theme }) => {
-  const color = getVariantColor({ theme, variant });
+const getStatusCss = ({ status, theme }) => {
+  const color = getStatusColor({ theme, status });
 
   return css`
     border-color: ${color};
@@ -49,23 +49,23 @@ const AlertBase = styled.div`
 
   ${({ hasTitle }) => !hasTitle && 'align-items: center'}
 
-  ${getVariantCss}
+  ${getStatusCss}
 `;
 
 const Alert = ({
-  variant = 'info',
+  status = 'info',
   title = null,
   children = null,
   showIcon = true,
   ...props
 }) => {
-  const icon = getIconByVariant(variant);
+  const icon = getIconByStatus(status);
   const hasTitle = Boolean(title);
 
   return (
-    <AlertBase variant={variant} hasTitle={hasTitle} {...props}>
+    <AlertBase status={status} hasTitle={hasTitle} {...props}>
       {icon && showIcon ? (
-        <VariantIcon variant={variant} type={icon} mr={2} />
+        <StatusIcon status={status} type={icon} mr={2} />
       ) : null}
       <Box flexGrow={1}>
         {title ? (

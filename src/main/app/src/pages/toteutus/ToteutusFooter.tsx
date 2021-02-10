@@ -5,15 +5,25 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { FormFooter } from '#/src/components/FormPage';
-import { ENTITY, FormMode } from '#/src/constants';
+import { ENTITY, FormMode, KOULUTUSTYYPPI } from '#/src/constants';
 import { useForm, useFormName } from '#/src/hooks/form';
 import { useSaveToteutus } from '#/src/hooks/formSaveHooks';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
+import { ToteutusModel } from '#/src/types/toteutusTypes';
 import { getValuesForSaving } from '#/src/utils';
 import { getTarjoajaOids } from '#/src/utils/getTarjoajaOids';
 import createToteutus from '#/src/utils/toteutus/createToteutus';
 import getToteutusByFormValues from '#/src/utils/toteutus/getToteutusByFormValues';
 import updateToteutus from '#/src/utils/toteutus/updateToteutus';
+
+type ToteutusFooterProps = {
+  formMode: FormMode;
+  organisaatioOid: string;
+  koulutustyyppi: KOULUTUSTYYPPI;
+  toteutus?: ToteutusModel;
+  koulutus?: KoulutusModel;
+  canUpdate?: boolean;
+};
 
 export const ToteutusFooter = ({
   formMode,
@@ -22,7 +32,7 @@ export const ToteutusFooter = ({
   organisaatioOid,
   koulutus,
   canUpdate,
-}) => {
+}: ToteutusFooterProps) => {
   const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid);
 
   const history = useHistory();

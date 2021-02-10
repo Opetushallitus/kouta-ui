@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useMemo } from 'react';
 
 import _ from 'lodash';
 import qs from 'query-string';
@@ -9,26 +9,20 @@ import FormHeader from '#/src/components/FormHeader';
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
-  FormFooter,
 } from '#/src/components/FormPage';
 import FormSteps from '#/src/components/FormSteps';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
-import { POHJAVALINTA, ENTITY } from '#/src/constants';
+import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useFieldValue, useEntityFormConfig } from '#/src/hooks/form';
-import { useSaveForm } from '#/src/hooks/formSaveHooks';
-import useApiAsync from '#/src/hooks/useApiAsync';
 import useSelectBase from '#/src/hooks/useSelectBase';
-import createKoulutus from '#/src/utils/koulutus/createKoulutus';
 import getFormValuesByKoulutus from '#/src/utils/koulutus/getFormValuesByKoulutus';
-import getKoulutusByFormValues from '#/src/utils/koulutus/getKoulutusByFormValues';
-import getKoulutusByOid from '#/src/utils/koulutus/getKoulutusByOid';
-import validateKoulutusForm from '#/src/utils/koulutus/validateKoulutusForm';
+import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
 
+import KoulutusFooter from './KoulutusFooter';
 import KoulutusForm, { initialValues } from './KoulutusForm';
 
-const resolveFn = () => Promise.resolve();
 const getCopyValues = koulutus => ({
   pohja: {
     tarjoajat: koulutus.tarjoajat,
@@ -60,45 +54,13 @@ const CreateKoulutusPage = props => {
 
   const { kopioKoulutusOid = null } = qs.parse(search);
 
-  const promiseFn = kopioKoulutusOid ? getKoulutusByOid : resolveFn;
-  const { data } = useApiAsync({
-    promiseFn,
-    oid: kopioKoulutusOid,
-    watch: kopioKoulutusOid,
-  });
+  const { data } = useKoulutusByOid(kopioKoulutusOid);
+
   const initialValues = useMemo(() => {
     return getInitialValues(data);
   }, [data]);
 
-  const submit = useCallback(
-    async ({ values, httpClient, apiUrls }) => {
-      const { oid } = await createKoulutus({
-        httpClient,
-        apiUrls,
-        koulutus: {
-          ...getKoulutusByFormValues(values),
-          organisaatioOid: valittuOrganisaatioOid,
-        },
-      });
-
-      history.push(
-        `/organisaatio/${valittuOrganisaatioOid}/koulutus/${oid}/muokkaus`
-      );
-    },
-    [history, valittuOrganisaatioOid]
-  );
-
-  const FORM_NAME = 'createKoulutusForm';
-
-  const { save } = useSaveForm({
-    form: 'createKoulutusForm',
-    submit,
-    validate: values =>
-      validateKoulutusForm({
-        ...values,
-        organisaatioOid: valittuOrganisaatioOid,
-      }),
-  });
+  const FORM_NAME = 'koulutusForm';
 
   const koulutustyyppi = useFieldValue('koulutustyyppi', FORM_NAME);
 
@@ -111,8 +73,13 @@ const CreateKoulutusPage = props => {
         <FormPage
           header={<FormHeader>{t('yleiset.koulutus')}</FormHeader>}
           steps={<FormSteps activeStep={ENTITY.KOULUTUS} />}
-          footer={<FormFooter entity={ENTITY.KOULUTUS} save={save} />}
           esikatseluControls={<EsikatseluControls />}
+          footer={
+            <KoulutusFooter
+              formMode={FormMode.CREATE}
+              organisaatioOid={valittuOrganisaatioOid}
+            />
+          }
         >
           <RelationInfoContainer>
             <OrganisaatioRelation organisaatioOid={valittuOrganisaatioOid} />

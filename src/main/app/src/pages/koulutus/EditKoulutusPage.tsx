@@ -22,8 +22,8 @@ import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import getFormValuesByKoulutus from '#/src/utils/koulutus/getFormValuesByKoulutus';
 import getKoulutusByOid from '#/src/utils/koulutus/getKoulutusByOid';
 
-import KoulutusForm from '../KoulutusForm';
 import EditKoulutusFooter from './EditKoulutusFooter';
+import KoulutusForm from './KoulutusForm';
 
 const EditKoulutusPage = props => {
   const {

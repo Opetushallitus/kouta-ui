@@ -26,7 +26,7 @@ import getKoulutusByFormValues from '#/src/utils/koulutus/getKoulutusByFormValue
 import getKoulutusByOid from '#/src/utils/koulutus/getKoulutusByOid';
 import validateKoulutusForm from '#/src/utils/koulutus/validateKoulutusForm';
 
-import KoulutusForm, { initialValues } from '../KoulutusForm';
+import KoulutusForm, { initialValues } from './KoulutusForm';
 
 const resolveFn = () => Promise.resolve();
 const getCopyValues = koulutus => ({

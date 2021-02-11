@@ -22,7 +22,7 @@
     "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "dependencies": {
-    "@opetushallitus/virkailija-ui-components": "^0.3.6",
+    "@opetushallitus/virkailija-ui-components": "^0.4.0",
     "@xstate/react": "^1.2.1",
     "axios": "^0.21.1",
     "core-js": "^3.8.1",

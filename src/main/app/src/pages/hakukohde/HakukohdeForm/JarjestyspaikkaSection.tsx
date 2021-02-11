@@ -3,13 +3,12 @@ import React, { useMemo } from 'react';
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
-import styled, { css } from 'styled-components';
 
 import {
   createFormFieldComponent,
   simpleMapProps,
 } from '#/src/components/formFields';
-import { Radio } from '#/src/components/virkailija';
+import { Radio, RadioGroup } from '#/src/components/virkailija';
 import { CRUD_ROLES, ENTITY, ORGANISAATIOTYYPPI } from '#/src/constants';
 import { useGetCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import useLanguage from '#/src/hooks/useLanguage';
@@ -24,60 +23,6 @@ const JARJESTYSPAIKATTOMAT_OPETUSTAVAT = [
   'opetuspaikkakk_3#1', // Eta
   'opetuspaikkakk_5#1', // Itsenainen
 ];
-
-const Container = styled.div<{ isLast: boolean }>`
-  ${({ isLast }) =>
-    !isLast &&
-    css`
-      margin-bottom: 4px;
-    `}
-`;
-
-type RadioGroupChild = React.ReactElement<{
-  checked?: boolean;
-  value: string;
-  onChange?: (arg: any) => void;
-  disabled?: boolean;
-  error?: boolean;
-}>;
-
-// TODO: Use RadioGroup from virkailija-ui-components when it supports disabled-props for individual Radio-elements
-export const RadioGroup = ({
-  value,
-  onChange,
-  disabled = false,
-  error = false,
-  children: childrenProp,
-}) => {
-  const validChildren = React.Children.toArray(childrenProp).filter(c =>
-    React.isValidElement(c)
-  ) as Array<RadioGroupChild>;
-
-  const childrenCount = React.Children.count(validChildren);
-
-  return (
-    <>
-      {validChildren.map((child, index) => {
-        const checked = value !== undefined && child?.props?.value === value;
-        const element = React.cloneElement(child, {
-          checked,
-          onChange,
-          disabled: disabled || child.props?.disabled,
-          error,
-        });
-
-        return (
-          <Container
-            key={_fp.uniqueId('RadioContainer_')}
-            isLast={index === childrenCount - 1}
-          >
-            {element}
-          </Container>
-        );
-      })}
-    </>
-  );
-};
 
 const JarjestyspaikkaRadioGroup = createFormFieldComponent(
   ({ disabled, options, value, error, onChange }) => {

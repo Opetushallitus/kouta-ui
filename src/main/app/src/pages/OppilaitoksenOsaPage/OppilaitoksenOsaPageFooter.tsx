@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { useHistory } from 'react-router-dom';
+import { queryCache } from 'react-query';
 
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY } from '#/src/constants';
@@ -15,8 +15,6 @@ const OppilaitoksenOsaPageFooter = ({
   organisaatioOid,
   readOnly,
 }) => {
-  const history = useHistory();
-
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
       const fn = oppilaitoksenOsa
@@ -34,13 +32,9 @@ const OppilaitoksenOsaPageFooter = ({
         },
       });
 
-      history.replace({
-        state: {
-          oppilaitoksenOsaUpdatedAt: Date.now(),
-        },
-      });
+      queryCache.invalidateQueries(ENTITY.OPPILAITOKSEN_OSA);
     },
-    [oppilaitoksenOsa, organisaatioOid, history]
+    [oppilaitoksenOsa, organisaatioOid]
   );
 
   const { save } = useSaveForm({

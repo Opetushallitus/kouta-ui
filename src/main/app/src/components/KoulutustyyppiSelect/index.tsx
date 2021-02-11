@@ -60,7 +60,13 @@ const getFirstLevelValue = (hierarkia, value) => {
   return node ? node.tyyppi : undefined;
 };
 
-export const KoulutustyyppiSelect = ({ value, onChange, error, disabled }) => {
+export const KoulutustyyppiSelect = ({
+  value,
+  onChange,
+  error,
+  disabled,
+  getIsDisabled,
+}) => {
   const [johtaaTutkintoon, setJohtaaTutkintoon] = useState(
     TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT.includes(value)
   );
@@ -151,6 +157,7 @@ export const KoulutustyyppiSelect = ({ value, onChange, error, disabled }) => {
             value={firstLevelValue}
             onChange={onFirstLevelValueChange}
             error={error}
+            getIsDisabled={getIsDisabled}
             disabled={disabled}
           />
         </Box>
@@ -161,6 +168,7 @@ export const KoulutustyyppiSelect = ({ value, onChange, error, disabled }) => {
               value={value}
               onChange={onSecondLevelValueChange}
               error={error}
+              getIsDisabled={getIsDisabled}
             />
           </SecondLevelContainer>
         )}

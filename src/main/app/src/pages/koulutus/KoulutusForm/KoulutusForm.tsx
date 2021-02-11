@@ -24,6 +24,7 @@ import getKoulutukset from '#/src/utils/koulutus/getKoulutukset';
 import isOphOrganisaatio from '#/src/utils/organisaatio/isOphOrganisaatio';
 
 import JarjestajaSection from './JarjestajaSection';
+import KoulutustyyppiSection from './KoulutustyyppiSection';
 import KuvausSection from './KuvausSection';
 import { LisatiedotSection } from './LisatiedotSection';
 import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
@@ -33,7 +34,6 @@ import { ToteutuksetSection } from './ToteutuksetSection';
 import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';
 import { TutkinnonOsaKoulutusNimiSection } from './TutkinnonOsaKoulutusNimiSection';
 import { TutkinnonOsatSection } from './TutkinnonOsatSection';
-import TypeSection from './TypeSection';
 
 const isInHierarkia = org => hierarkia =>
   hierarkia.organisaatioOid === org.organisaatioOid ||
@@ -80,9 +80,10 @@ const KoulutusForm = ({
           section="koulutustyyppi"
           header={t('yleiset.koulutustyyppi')}
           scrollOnActive={false}
-          Component={TypeSection}
+          Component={KoulutustyyppiSection}
           johtaaTutkintoon={johtaaTutkintoon}
           disabled={onlyTarjoajaRights}
+          organisaatioOid={organisaatioOid}
         />
       )}
       {_fp.isFunction(onSelectBase) && (

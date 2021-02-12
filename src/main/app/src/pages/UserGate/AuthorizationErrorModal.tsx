@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { UNAUTHORIZED } from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 import styled from 'styled-components';
 
 import Button from '#/src/components/Button';
@@ -23,7 +23,7 @@ const ModalButton = styled(Button)`
 
 const getErrorTranslationKeyPrefix = (code: string | number) => {
   switch (code) {
-    case UNAUTHORIZED:
+    case StatusCodes.UNAUTHORIZED:
       return 'ilmoitukset.istuntoVirhe';
     case ERROR_INTERNET_DISCONNECTED:
       return 'ilmoitukset.yhteysVirhe';
@@ -47,14 +47,10 @@ export default function AuthorizationErrorModal({
       <ModalBody>{t(`${errorKeyPrefix}.viesti`)}</ModalBody>
       <ModalFooter>
         <Flex justifyCenter>
-          <ModalButton
-            marginLeft={1}
-            color="danger"
-            onClick={() => setErrorCode(null)}
-          >
+          <ModalButton color="danger" onClick={() => setErrorCode(null)}>
             {t('yleiset.suljeVaroitus')}
           </ModalButton>
-          {errorCode === UNAUTHORIZED && (
+          {errorCode === StatusCodes.UNAUTHORIZED && (
             <ModalButton
               onClick={() =>
                 isDev

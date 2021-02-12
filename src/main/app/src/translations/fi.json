@@ -605,7 +605,9 @@
         "yhteystiedotInfo": "Anna oppilaitokselle tarvittavat yhteystiedot",
         "oppilaitoksenTila": "Oppilaitoksen tila",
         "oppilaitoksenTeemakuva": "Oppilaitoksen teemakuva",
-        "logo": "Oppilaitoksen logo"
+        "logo": "Oppilaitoksen logo",
+        "eiMuokkausOikeutta": "Käyttäjälläsi ei ole oikeuksia muokata tätä oppilaitosta."
+
     },
     "oppilaitoksenOsaLomake": {
         "oppilaitoksenOsanPerustiedot": "Oppilaitoksen osan perustiedot",
@@ -617,7 +619,9 @@
         "oppilaitoksenOsanYhteystiedot": "Oppilaitoksen osan yhteystiedot",
         "yhteystiedotInfo": "Anna oppilaitokselle tarvittavat yhteystiedot",
         "oppilaitoksenOsanTila": "Oppilaitoksen osan tila",
-        "oppilaitoksenOsanTeemakuva": "Oppilaitoksen osan teemakuva"
+        "oppilaitoksenOsanTeemakuva": "Oppilaitoksen osan teemakuva",
+        "eiMuokkausOikeutta": "Käyttäjälläsi ei ole oikeuksia muokata tätä oppilaitoksen osaa."
+
     },
     "eperuste": {
         "suorittaneenOsaaminen": "Tutkinnon suorittaneen osaaminen",

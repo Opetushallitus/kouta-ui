@@ -296,6 +296,7 @@ const KoulutusInfo = ({
         )}
         {_.map(tutkinnonOsienKuvaukset, tutkinnonOsa => (
           <TutkinnonOsaInfo
+            key={tutkinnonOsa?.id}
             tutkinnonOsa={tutkinnonOsa}
             language={language}
             ePerusteId={ePeruste?.id}

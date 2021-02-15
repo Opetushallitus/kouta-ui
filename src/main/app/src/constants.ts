@@ -62,47 +62,6 @@ export const TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT = _.without(
   ...TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT
 );
 
-export const TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA = [
-  {
-    tyyppi: 'ammatillinen',
-    children: [
-      { tyyppi: KOULUTUSTYYPPI.VALMA },
-      { tyyppi: KOULUTUSTYYPPI.TELMA },
-      { tyyppi: KOULUTUSTYYPPI.TUTKINNON_OSA },
-      { tyyppi: KOULUTUSTYYPPI.OSAAMISALA },
-      { tyyppi: KOULUTUSTYYPPI.MUUT_KOULUTUKSET },
-    ],
-  },
-  {
-    tyyppi: 'korkeakoulutus',
-    children: [
-      { tyyppi: KOULUTUSTYYPPI.AVOIN_YO },
-      { tyyppi: KOULUTUSTYYPPI.AVOIN_AMK },
-      { tyyppi: KOULUTUSTYYPPI.TAYDENNYS_KOULUTUS },
-      { tyyppi: KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS },
-      { tyyppi: KOULUTUSTYYPPI.VALMENTAVA_KOULUTUS },
-      { tyyppi: KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJAKOULUTUS },
-      { tyyppi: KOULUTUSTYYPPI.AMMATILLINEN_OPINTO_OHJAAJA_KOULUTUS },
-      { tyyppi: KOULUTUSTYYPPI.AMMATILLINEN_ERITYISOPETTAJA_KOULUTUS },
-    ],
-  },
-  { tyyppi: KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO },
-  { tyyppi: KOULUTUSTYYPPI.LUVA },
-  { tyyppi: KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS },
-];
-
-export const TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA = [
-  { tyyppi: KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS },
-  {
-    tyyppi: 'korkeakoulutus',
-    children: [
-      { tyyppi: KOULUTUSTYYPPI.YLIOPISTOKOULUTUS },
-      { tyyppi: KOULUTUSTYYPPI.AMKKOULUTUS },
-    ],
-  },
-  { tyyppi: KOULUTUSTYYPPI.LUKIOKOULUTUS },
-];
-
 export const KOULUTUSTYYPPI_TO_KOULUTUSTYYPPI_IDS_MAP = {
   [KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS]: [
     'koulutustyyppi_1',
@@ -143,20 +102,16 @@ export enum HAKULOMAKETYYPPI {
   EI_SAHKOISTA_HAKUA = 'ei sähköistä',
 }
 
-export const VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI =
-  'kielitaidonosoittaminen_04';
-
 export const POHJAVALINTA = {
   UUSI: 'uusi',
   KOPIO: 'kopio',
-  AIEMPI: 'aiempi',
 };
 
-export const ORGANISAATIOTYYPPI = {
-  KOULUTUSTOIMIJA: 'organisaatiotyyppi_01',
-  OPPILAITOS: 'organisaatiotyyppi_02',
-  TOIMIPISTE: 'organisaatiotyyppi_03',
-};
+export enum ORGANISAATIOTYYPPI {
+  KOULUTUSTOIMIJA = 'organisaatiotyyppi_01',
+  OPPILAITOS = 'organisaatiotyyppi_02',
+  TOIMIPISTE = 'organisaatiotyyppi_03',
+}
 
 export const OPETUSHALLITUS_ORGANISAATIO_OID = '1.2.246.562.10.00000000001';
 
@@ -287,3 +242,10 @@ export enum FormMode {
 }
 
 export const NDASH = '\u2013';
+
+export const AMMATILLISET_OPPILAITOSTYYPIT = [
+  'oppilaitostyyppi_21#1', // Ammatilliset oppilaitokset
+  'oppilaitostyyppi_22#1', // Ammatilliset erityisoppilaitokset
+  'oppilaitostyyppi_23#1', // Ammatilliset erikoisoppilaitokset
+  'oppilaitostyyppi_24#1', // Ammatilliset aikuiskoulutuskeskukset
+];

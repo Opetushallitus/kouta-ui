@@ -83,12 +83,11 @@ export const parseEditorState = value => {
   return createEditorStateWithContent(convertFromHTML(value));
 };
 
-export const serializeEditorState = value => {
-  if (!_.isObject(value) || !_.isFunction(value.getCurrentContent)) {
-    return '';
+export const serializeEditorState = (value?: EditorState) => {
+  const currentContent = value?.getCurrentContent?.();
+  if (currentContent?.hasText?.()) {
+    return convertToHTML(currentContent);
   }
-
-  return convertToHTML(value.getCurrentContent());
 };
 
 export const isEmptyEditorState = editorState =>

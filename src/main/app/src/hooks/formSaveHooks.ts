@@ -79,6 +79,7 @@ export const useSaveForm = ({ form: formName, validate, submit }) => {
     }
   }, [
     form,
+    formName,
     dispatch,
     user,
     startSubmit,

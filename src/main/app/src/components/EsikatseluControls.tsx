@@ -12,8 +12,6 @@ import { JULKAISUTILA } from '#/src/constants';
 import FormConfigSectionContext from '#/src/contexts/FormConfigSectionContext';
 import { useFieldValue, useIsDirty } from '#/src/hooks/form';
 
-const Link = ({ children, ...props }) => <a {...props}>{children}</a>;
-
 const Separator = styled.div`
   padding-left: 15px;
 `;

@@ -1,13 +1,8 @@
-import { useContext, useMemo, useCallback, useEffect } from 'react';
+import { useContext, useMemo, useCallback } from 'react';
 
 import _ from 'lodash';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  isDirty,
-  isSubmitting,
-  getFormSubmitErrors,
-  initialize,
-} from 'redux-form';
+import { useSelector } from 'react-redux';
+import { isDirty, isSubmitting, getFormSubmitErrors } from 'redux-form';
 import formActions from 'redux-form/lib/actions';
 
 import { ENTITY } from '#/src/constants';

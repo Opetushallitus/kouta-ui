@@ -180,6 +180,11 @@ export const toSelectValue = value => (_.isNil(value) ? undefined : { value });
 export const getFieldName = name =>
   name.match(`^(.+?)(\\.(${LANGUAGES.join('|')}))?$`)?.[1];
 
+const isEmptyTranslatedField = value =>
+  _.isObject(value) &&
+  !_.isEmpty(_.intersection(_.keys(value), LANGUAGES)) &&
+  _.every(value, v => !formValueExists(v));
+
 // Get form values for saving. Filters out fields that user has hidden.
 // Result can be sassed to get**ByFormValues().
 export const getValuesForSaving = (
@@ -200,7 +205,10 @@ export const getValuesForSaving = (
   // Ensure that the fields that are registered (visible) will be saved
   _.forEach(registeredFields, ({ name }) => {
     const fieldName = getFieldName(name);
-    _.set(saveableValues, fieldName, _.get(values, fieldName));
+    const fieldValue = _.get(values, fieldName);
+
+    const valueForSave = isEmptyTranslatedField(fieldValue) ? {} : fieldValue;
+    _.set(saveableValues, fieldName, valueForSave);
   });
 
   // Some exceptions (fields that should be saved even though they are not visible)

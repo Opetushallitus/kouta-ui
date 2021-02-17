@@ -1,5 +1,7 @@
 import _ from 'lodash';
 
+import { formValueExists } from '#/src/utils';
+
 export const getLanguageValue = (value, language = 'fi') =>
   _.isObject(value) ? value[language] || null : null;
 
@@ -46,13 +48,16 @@ export const arrayToTranslationObject = (arr, languageField = 'kieli') => {
 };
 
 export const getInvalidTranslations = (
-  obj,
-  languages = [],
-  validate = v => !!v,
-  optional
+  obj?: Record<LanguageCode, any>,
+  languages: Array<LanguageCode> = [],
+  validate = formValueExists,
+  optional: boolean = false
 ) => {
-  if (optional && _.isEmpty(obj)) {
-    return [];
+  if (optional) {
+    const existingValues = _.pickBy(obj, formValueExists);
+    if (_.isEmpty(existingValues)) {
+      return [];
+    }
   }
 
   if (!_.isObject(obj)) {
@@ -64,9 +69,7 @@ export const getInvalidTranslations = (
     ..._.pick(obj, languages),
   };
 
-  const pairs = _.toPairs(translationObj);
-
-  return pairs
+  return _.toPairs(translationObj)
     .filter(([, value]) => !validate(value))
     .map(([language]) => language);
 };

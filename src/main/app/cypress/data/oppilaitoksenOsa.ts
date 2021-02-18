@@ -25,8 +25,8 @@ export default () => ({
         sv: '5678',
       },
       wwwSivu: {
-        fi: 'www.verkkosivu.fi',
-        sv: 'www.verkkosivu.sv',
+        fi: 'http://www.verkkosivu.fi',
+        sv: 'http://www.verkkosivu.sv',
       },
       sahkoposti: {
         fi: 'fi@sahkoposti.fi',

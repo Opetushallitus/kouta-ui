@@ -6,7 +6,11 @@ import { FieldArray, Field } from 'redux-form';
 import Button from '#/src/components/Button';
 import FieldArrayList from '#/src/components/FieldArrayList';
 import Flex, { FlexItem } from '#/src/components/Flex';
-import { FormFieldInput, FormFieldEditor } from '#/src/components/formFields';
+import {
+  FormFieldInput,
+  FormFieldEditor,
+  FormFieldUrlInput,
+} from '#/src/components/formFields';
 import Spacing from '#/src/components/Spacing';
 import { getTestIdProps } from '#/src/utils';
 
@@ -38,7 +42,7 @@ const OsaamisalatFieldArray = ({ fields, language, t }) => (
             >
               <Field
                 name={`${field}.linkki.${language}`}
-                component={FormFieldInput}
+                component={FormFieldUrlInput}
                 label={t('yleiset.linkki')}
               />
             </FlexItem>

@@ -6,7 +6,7 @@ import { Field, FieldArray } from 'redux-form';
 import Button from '#/src/components/Button';
 import FieldArrayList from '#/src/components/FieldArrayList';
 import Flex from '#/src/components/Flex';
-import { FormFieldInput } from '#/src/components/formFields';
+import { FormFieldInput, FormFieldUrlInput } from '#/src/components/formFields';
 import Spacing from '#/src/components/Spacing';
 
 const YhteyshenkilotField = ({ fields, language, t }) => {
@@ -51,7 +51,7 @@ const YhteyshenkilotField = ({ fields, language, t }) => {
               <Field
                 name={`${field}.verkkosivu.${language}`}
                 label={t('yleiset.verkkosivu')}
-                component={FormFieldInput}
+                component={FormFieldUrlInput}
               />
             </Spacing>
           </>

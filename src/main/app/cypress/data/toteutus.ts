@@ -77,8 +77,8 @@ const getBaseFields = () => ({
           sv: 'Sv titteli',
         },
         wwwSivu: {
-          fi: 'Fi verkkosivu',
-          sv: 'Sv verkkosivu',
+          fi: 'http://fi-verkkosivu',
+          sv: 'http://sv-verkkosivu',
         },
       },
     ],

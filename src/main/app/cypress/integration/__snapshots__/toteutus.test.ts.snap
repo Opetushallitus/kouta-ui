@@ -111,7 +111,7 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
           "fi": "titteli"
         },
         "wwwSivu": {
-          "fi": "verkkosivu"
+          "fi": "http://verkkosivu"
         }
       }
     ],
@@ -246,7 +246,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
           "fi": "titteli"
         },
         "wwwSivu": {
-          "fi": "verkkosivu"
+          "fi": "http://verkkosivu"
         }
       }
     ],
@@ -389,7 +389,7 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
           "fi": "titteli"
         },
         "wwwSivu": {
-          "fi": "verkkosivu"
+          "fi": "http://verkkosivu"
         }
       }
     ],
@@ -543,7 +543,7 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
           "fi": "titteli"
         },
         "wwwSivu": {
-          "fi": "verkkosivu"
+          "fi": "http://verkkosivu"
         }
       }
     ],
@@ -680,7 +680,7 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
           "fi": "Fi titteli"
         },
         "wwwSivu": {
-          "fi": "Fi verkkosivu"
+          "fi": "http://fi-verkkosivu"
         }
       }
     ],
@@ -825,7 +825,7 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
           "fi": "Fi titteli"
         },
         "wwwSivu": {
-          "fi": "Fi verkkosivu"
+          "fi": "http://fi-verkkosivu"
         }
       }
     ],
@@ -986,7 +986,7 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
           "fi": "Fi titteli"
         },
         "wwwSivu": {
-          "fi": "Fi verkkosivu"
+          "fi": "http://fi-verkkosivu"
         }
       }
     ],
@@ -1128,7 +1128,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
           "fi": "Fi titteli"
         },
         "wwwSivu": {
-          "fi": "Fi verkkosivu"
+          "fi": "http://fi-verkkosivu"
         }
       }
     ],

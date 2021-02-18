@@ -11,6 +11,7 @@ import FieldGroup from '#/src/components/FieldGroup';
 import {
   FormFieldInput,
   FormFieldCheckboxGroup,
+  FormFieldUrlInput,
 } from '#/src/components/formFields';
 import LocalLink from '#/src/components/LocalLink';
 import Spacing from '#/src/components/Spacing';
@@ -107,7 +108,7 @@ const OsaamisalaDetails = ({ osaamisala, language, name }) => {
       >
         <Field
           name={`${name}.osaamisalaLinkit.${osaamisala.uri}.${language}`}
-          component={FormFieldInput}
+          component={FormFieldUrlInput}
           label={t('yleiset.linkki')}
         />
       </Spacing>

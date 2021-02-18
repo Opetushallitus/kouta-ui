@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import styled, { css } from 'styled-components';
 
 import Button from '#/src/components/Button';
-import Flex, { FlexItem } from '#/src/components/Flex';
+import { Flex, FlexItem } from '#/src/components/Flex';
 import Select from '#/src/components/Select';
 import { Icon, Typography } from '#/src/components/virkailija';
 import { spacing } from '#/src/theme';

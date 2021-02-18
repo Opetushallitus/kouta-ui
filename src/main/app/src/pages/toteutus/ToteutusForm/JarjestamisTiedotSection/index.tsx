@@ -6,7 +6,7 @@ import { Field } from 'redux-form';
 import styled from 'styled-components';
 
 import FieldGroup from '#/src/components/FieldGroup';
-import Flex, { FlexItem } from '#/src/components/Flex';
+import { Flex, FlexItem } from '#/src/components/Flex';
 import FormConfigFragment from '#/src/components/FormConfigFragment';
 import {
   FormFieldSelect,

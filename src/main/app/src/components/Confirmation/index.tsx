@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { setLightness } from 'polished';
 import styled, { css } from 'styled-components';
 
-import Flex, { FlexItem } from '#/src/components/Flex';
+import { Flex, FlexItem } from '#/src/components/Flex';
 import {
   Dropdown,
   DropdownMenu,

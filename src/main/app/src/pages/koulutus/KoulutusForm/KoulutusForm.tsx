@@ -4,7 +4,7 @@ import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 
 import Button from '#/src/components/Button';
-import Flex from '#/src/components/Flex';
+import { Flex } from '#/src/components/Flex';
 import FormCollapse from '#/src/components/FormCollapse';
 import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import JulkaisutilaField from '#/src/components/JulkaisutilaField';

@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { reduxForm, Field, FieldArray } from 'redux-form';
 
 import Button from '#/src/components/Button';
-import Flex from '#/src/components/Flex';
+import { Flex } from '#/src/components/Flex';
 import { FormFieldInput } from '#/src/components/formFields';
 import Spacing from '#/src/components/Spacing';
 import {

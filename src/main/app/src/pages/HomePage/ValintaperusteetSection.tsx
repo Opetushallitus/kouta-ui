@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import Anchor from '#/src/components/Anchor';
 import Button from '#/src/components/Button';
 import ErrorAlert from '#/src/components/ErrorAlert';
-import Flex from '#/src/components/Flex';
+import { Flex } from '#/src/components/Flex';
 import ListSpin from '#/src/components/ListSpin';
 import ListTable, {
   makeModifiedColumn,

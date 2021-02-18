@@ -2,7 +2,7 @@ import React from 'react';
 
 import _ from 'lodash';
 
-import Flex, { FlexItem } from '#/src/components/Flex';
+import { Flex, FlexItem } from '#/src/components/Flex';
 import LocalLink from '#/src/components/LocalLink';
 import { Typography } from '#/src/components/virkailija';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';

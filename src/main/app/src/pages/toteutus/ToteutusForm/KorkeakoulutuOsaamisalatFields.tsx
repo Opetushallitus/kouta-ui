@@ -5,12 +5,12 @@ import { FieldArray, Field } from 'redux-form';
 
 import Button from '#/src/components/Button';
 import FieldArrayList from '#/src/components/FieldArrayList';
-import Flex, { FlexItem } from '#/src/components/Flex';
 import {
   FormFieldInput,
   FormFieldEditor,
   FormFieldUrlInput,
 } from '#/src/components/formFields';
+import { Flex, FlexItem } from '#/src/components/Flex';
 import Spacing from '#/src/components/Spacing';
 import { getTestIdProps } from '#/src/utils';
 

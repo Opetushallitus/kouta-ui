@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import Button from '#/src/components/Button';
 import Editor from '#/src/components/Editor';
-import Flex, { FlexItem } from '#/src/components/Flex';
+import { Flex, FlexItem } from '#/src/components/Flex';
 import IconButton from '#/src/components/IconButton';
 import RemoveButton from '#/src/components/RemoveButton';
 import {

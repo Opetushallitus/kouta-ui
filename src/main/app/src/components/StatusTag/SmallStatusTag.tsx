@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
-import Flex from '#/src/components/Flex';
+import { Flex } from '#/src/components/Flex';
 import { Typography } from '#/src/components/virkailija';
 import { getJulkaisutilaTranslationKey, JULKAISUTILA } from '#/src/constants';
 import { spacing } from '#/src/theme';

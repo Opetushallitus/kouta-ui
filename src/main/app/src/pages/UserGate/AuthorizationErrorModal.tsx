@@ -4,7 +4,7 @@ import { StatusCodes } from 'http-status-codes';
 import styled from 'styled-components';
 
 import Button from '#/src/components/Button';
-import Flex from '#/src/components/Flex';
+import { Flex } from '#/src/components/Flex';
 import Modal from '#/src/components/Modal';
 import {
   ModalBody,

@@ -11,5 +11,3 @@ export const FlexItem = styled(SFlexItem)`
   ${space};
   box-sizing: border-box;
 `;
-
-export default Flex;

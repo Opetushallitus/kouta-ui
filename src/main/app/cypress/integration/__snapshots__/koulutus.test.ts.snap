@@ -35,7 +35,8 @@ exports[`createKoulutus > should be able to create ammatillinen koulutus #0`] =
   "tarjoajat": [
     "1.2.1.1.1.1"
   ],
-  "tila": "julkaistu"
+  "tila": "julkaistu",
+  "esikatselu": false
 };
 
 exports[`createKoulutus > should be able to create ammatillinen osaamisala koulutus #0`] =
@@ -75,7 +76,8 @@ exports[`createKoulutus > should be able to create ammatillinen osaamisala koulu
   "tarjoajat": [
     "1.2.1.1.1.1"
   ],
-  "tila": "julkaistu"
+  "tila": "julkaistu",
+  "esikatselu": false
 };
 
 exports[`createKoulutus > should be able to create ammatillinen tutkinnon osa koulutus #0`] =
@@ -128,7 +130,8 @@ exports[`createKoulutus > should be able to create ammatillinen tutkinnon osa ko
   "tarjoajat": [
     "1.2.1.1.1.1"
   ],
-  "tila": "julkaistu"
+  "tila": "julkaistu",
+  "esikatselu": false
 };
 
 exports[`createKoulutus > should be able to create AMK-koulutus #0`] =
@@ -176,7 +179,8 @@ exports[`createKoulutus > should be able to create AMK-koulutus #0`] =
   "tarjoajat": [
     "1.2.1.1.1.1"
   ],
-  "tila": "julkaistu"
+  "tila": "julkaistu",
+  "esikatselu": false
 };
 
 exports[`createKoulutus > should be able to create lukiokoulutus #0`] =
@@ -216,7 +220,8 @@ exports[`createKoulutus > should be able to create lukiokoulutus #0`] =
   "tarjoajat": [
     "1.2.1.1.1.1"
   ],
-  "tila": "julkaistu"
+  "tila": "julkaistu",
+  "esikatselu": false
 };
 
 exports[`editKoulutus > should be able to edit ammatillinen koulutus #0`] =
@@ -259,13 +264,13 @@ exports[`editKoulutus > should be able to edit ammatillinen koulutus #0`] =
     "1.1.1.1.1.1",
     "1.2.1.1.1.1"
   ],
-  "tila": "tallennettu"
+  "tila": "tallennettu",
+  "esikatselu": true
 };
 
 exports[`editKoulutus > should be able to edit AMK-koulutus #0`] =
 {
   "ePerusteId": null,
-  "esikatselu": true,
   "johtaaTutkintoon": true,
   "julkinen": true,
   "kielivalinta": [
@@ -311,13 +316,13 @@ exports[`editKoulutus > should be able to edit AMK-koulutus #0`] =
     "1.1.1.1.1.1",
     "1.2.1.1.1.1"
   ],
-  "tila": "tallennettu"
+  "tila": "tallennettu",
+  "esikatselu": false
 };
 
 exports[`editKoulutus > should be able to edit lukiokoulutus #0`] =
 {
   "ePerusteId": null,
-  "esikatselu": true,
   "johtaaTutkintoon": true,
   "julkinen": true,
   "kielivalinta": [
@@ -354,5 +359,6 @@ exports[`editKoulutus > should be able to edit lukiokoulutus #0`] =
     "1.1.1.1.1.1",
     "1.2.1.1.1.1"
   ],
-  "tila": "tallennettu"
+  "tila": "tallennettu",
+  "esikatselu": false
 };

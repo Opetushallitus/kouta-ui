@@ -43,6 +43,7 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
     hakulomakeLinkki,
     jarjestyspaikkaOid,
     tila,
+    esikatselu = false,
     pohjakoulutusvaatimusTarkenne,
     metadata = {},
   } = hakukohde;
@@ -55,6 +56,7 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
 
   return {
     tila,
+    esikatselu,
     kieliversiot: kielivalinta,
     aloituspaikat: {
       aloituspaikkamaara: isNumeric(aloituspaikat)

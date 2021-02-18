@@ -10,6 +10,6 @@ const getKoulutusByOid = async ({ oid, apiUrls, httpClient }) =>
   });
 
 export const useKoulutusByOid = (oid?: string, options = {}) =>
-  useEntityByOid(ENTITY.KOULUTUS, oid, options);
+  useEntityByOid(ENTITY.KOULUTUS, { oid }, options);
 
 export default getKoulutusByOid;

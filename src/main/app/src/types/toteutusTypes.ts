@@ -101,4 +101,5 @@ export type ToteutusFormValues = {
     hakuaikaPaattyy?: string;
   };
   soraKuvaus?: SelectOption;
+  esikatselu?: boolean;
 };

@@ -8,7 +8,7 @@ import styled, { css } from 'styled-components';
 import Button from '#/src/components/Button';
 import Container from '#/src/components/Container';
 import UnsavedChangesDialog from '#/src/components/UnsavedChangesDialog';
-import { useFieldValue, useIsDirty, useIsSubmitting } from '#/src/hooks/form';
+import { useIsDirty, useIsSubmitting } from '#/src/hooks/form';
 import { getThemeProp } from '#/src/theme';
 
 const HeaderContainer = styled.div`
@@ -58,29 +58,6 @@ const Buttons = styled.div`
 
 const FooterActions = styled.div``;
 
-const Separator = styled.div`
-  padding-left: 15px;
-`;
-
-const Draft = ({ url }) => {
-  const Link = props => <a {...props}>{props.children}</a>;
-  const { t } = useTranslation();
-
-  return (
-    <Separator>
-      <Button
-        as={Link}
-        href={url}
-        color="primary"
-        variant="outlined"
-        target="_blank"
-      >
-        {t('yleiset.esikatselu')}
-      </Button>
-    </Separator>
-  );
-};
-
 const Wrapper = styled.div`
   border: 0;
   padding: 0;
@@ -104,10 +81,9 @@ type FormPageProps = {
   header?: React.ReactNode;
   steps?: React.ReactNode;
   footer?: React.ReactNode;
-  draftUrl?: string;
-  toggleDraft?: React.ReactNode;
   hasFooterHomeLink?: boolean;
   readOnly?: boolean;
+  esikatseluControls?: React.ReactNode;
 };
 
 const FormPage: React.FC<FormPageProps> = ({
@@ -115,13 +91,11 @@ const FormPage: React.FC<FormPageProps> = ({
   steps = null,
   children = null,
   footer = null,
-  draftUrl = null,
-  toggleDraft = null,
   hasFooterHomeLink = true,
   readOnly = false,
+  esikatseluControls,
 }) => {
   const { t } = useTranslation();
-  const esikatselu = useFieldValue('esikatselu');
   const isSubmitting = useIsSubmitting();
   const isDirty = useIsDirty();
 
@@ -156,10 +130,7 @@ const FormPage: React.FC<FormPageProps> = ({
                     {t('yleiset.etusivulle')}
                   </Button>
                 ) : null}
-                {draftUrl && esikatselu === true ? (
-                  <Draft url={draftUrl} />
-                ) : null}
-                {toggleDraft ? <Separator>{toggleDraft}</Separator> : null}
+                {esikatseluControls}
               </Buttons>
               <FooterActions>{footer}</FooterActions>
             </FooterWrapper>

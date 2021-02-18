@@ -45,6 +45,7 @@ type ValintakokeetValues = {
 export type HakukohdeFormValues = {
   koulutustyyppi?: KOULUTUSTYYPPI;
   tila: JULKAISUTILA;
+  esikatselu?: boolean;
   muokkaaja?: string;
   kieliversiot: Array<LanguageCode>;
   ajankohta: AjankohtaFields & {

@@ -11,6 +11,7 @@ const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
     tietoa,
     kieliversiot,
     teemakuva,
+    esikatselu = false,
   } = values;
 
   const {
@@ -37,6 +38,7 @@ const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
     kielivalinta: kieliversiot,
     logo: _.get(perustiedot, 'logo'),
     teemakuva,
+    esikatselu,
     metadata: {
       yhteystiedot: {
         osoite: {

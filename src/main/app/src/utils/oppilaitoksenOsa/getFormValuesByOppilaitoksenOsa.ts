@@ -4,17 +4,18 @@ import { parseEditorState } from '#/src/components/Editor/utils';
 
 const getFormValuesByOppilaitoksenOsa = oppilaitoksenOsa => {
   const {
-    kieliversiot,
+    kielivalinta,
     teemakuva,
     tila,
     metadata: { yhteystiedot, esittely, opiskelijoita, kampus },
     oppilaitosOid,
+    esikatselu = false,
   } = oppilaitoksenOsa;
 
   return {
     tila,
     oppilaitosOid,
-    kielivalinta: kieliversiot,
+    kieliversiot: kielivalinta,
     esittely: _.mapValues(esittely || {}, parseEditorState),
     yhteystiedot: {
       osoite: yhteystiedot?.osoite?.osoite || {},
@@ -30,6 +31,7 @@ const getFormValuesByOppilaitoksenOsa = oppilaitoksenOsa => {
       kampus: kampus || {},
     },
     teemakuva,
+    esikatselu,
   };
 };
 

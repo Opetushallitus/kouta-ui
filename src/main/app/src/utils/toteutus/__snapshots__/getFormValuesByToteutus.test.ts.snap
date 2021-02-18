@@ -22,6 +22,7 @@ Object {
       },
     },
   ],
+  "esikatselu": false,
   "hakeutumisTaiIlmoittautumistapa": Object {
     "hakeutumisTaiIlmoittautumistapa": undefined,
     "hakuTapa": undefined,

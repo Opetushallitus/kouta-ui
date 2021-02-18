@@ -29,6 +29,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
   const {
     koulutustyyppi,
     tila,
+    esikatselu = false,
     muokkaaja,
     jarjestamistiedot,
     hakeutumisTaiIlmoittautumistapa: HTIT,
@@ -61,6 +62,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
     muokkaaja,
     teemakuva: values?.teemakuva,
     sorakuvausId: values?.soraKuvaus?.value || null,
+    esikatselu,
     metadata: {
       opetus: {
         lisatiedot: (values?.jarjestamistiedot?.osiot || []).map(

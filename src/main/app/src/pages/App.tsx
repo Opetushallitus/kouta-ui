@@ -10,6 +10,7 @@ import ErrorBoundaryNotifier from '#/src/components/ErrorBoundaryNotifier';
 import FullSpin from '#/src/components/FullSpin';
 import GlobalStyle from '#/src/components/GlobalStyle';
 import HttpErrorNotifier from '#/src/components/HttpErrorNotifier';
+import { GlobalTooltipStyles } from '#/src/components/Tooltip/TooltipGlobalStyles';
 import VirkailijaRaamit from '#/src/components/VirkailijaRaamit';
 import HttpContext from '#/src/contexts/HttpClientContext';
 import UrlContext from '#/src/contexts/UrlContext';
@@ -39,6 +40,7 @@ const App = ({
             <HttpContext.Provider value={httpClient}>
               <UrlContext.Provider value={urls}>
                 <GlobalStyle />
+                <GlobalTooltipStyles />
                 <Suspense fallback={<FullSpin size="large" />}>
                   <ErrorBoundaryNotifier>
                     <VirkailijaRaamit />

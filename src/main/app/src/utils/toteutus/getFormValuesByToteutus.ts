@@ -30,6 +30,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     tila,
     teemakuva,
     sorakuvausId,
+    esikatselu = false,
   } = toteutus;
 
   const {
@@ -85,6 +86,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
   return {
     koulutustyyppi,
     tila,
+    esikatselu,
     tiedot: {
       nimi: nimi ?? {},
       laajuus: _fp.isNumber(laajuus) ? laajuus.toString() : '',

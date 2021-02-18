@@ -2,6 +2,7 @@
 
 exports[`getToteutusByFormValues returns correct toteutus given form values 1`] = `
 Object {
+  "esikatselu": false,
   "kielivalinta": Array [
     "fi",
     "sv",

@@ -6,6 +6,9 @@ ${normalize()};
 
 #root {
   background-color: ${({ theme }) => theme.colors.mainBackground};
+}
+
+body > :not(#raamit_app_root) {
   font-family: ${({ theme }) => theme.fonts.main};
 }
 

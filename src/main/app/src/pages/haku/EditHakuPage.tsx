@@ -21,6 +21,8 @@ import { useHakuByOid } from '#/src/utils/haku/getHakuByOid';
 import { HakuFooter } from './HakuFooter';
 import HakuForm from './HakuForm';
 
+const FORM_NAME = 'hakuForm';
+
 const EditHakuPage = ({
   history,
   match: {
@@ -28,11 +30,7 @@ const EditHakuPage = ({
   },
 }) => {
   const { data: haku, isFetching } = useHakuByOid(oid);
-
   const { t } = useTranslation();
-  const initialValues = useMemo(() => {
-    return haku && getFormValuesByHaku(haku);
-  }, [haku]);
 
   const onAttachHakukohde = useCallback(
     ({ toteutusOid }) => {
@@ -53,8 +51,12 @@ const EditHakuPage = ({
 
   const config = useEntityFormConfig(ENTITY.HAKU);
 
+  const initialValues = useMemo(() => (haku ? getFormValuesByHaku(haku) : {}), [
+    haku,
+  ]);
+
   return (
-    <ReduxForm form="hakuForm" initialValues={initialValues}>
+    <ReduxForm form={FORM_NAME} initialValues={initialValues}>
       <Title>{t('sivuTitlet.haunMuokkaus')}</Title>
       <FormConfigContext.Provider value={{ ...config, readOnly: !canUpdate }}>
         <FormPage

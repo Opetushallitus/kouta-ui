@@ -2,6 +2,7 @@
 
 exports[`Should convert valintaperuste form with valintatapa 1`] = `
 Object {
+  "esikatselu": false,
   "hakutapaKoodiUri": "tapa_1#1",
   "kielivalinta": Array [
     "fi",
@@ -160,6 +161,7 @@ Object {
 
 exports[`Should convert valintaperuste form without valintatapa 1`] = `
 Object {
+  "esikatselu": false,
   "hakutapaKoodiUri": "tapa_1#1",
   "kielivalinta": Array [
     "fi",

@@ -35,13 +35,14 @@ const EditSoraKuvausPage = props => {
 
   const { t } = useTranslation();
 
-  const initialValues = useMemo(() => {
-    return soraKuvaus ? getFormValuesBySoraKuvaus(soraKuvaus) : {};
-  }, [soraKuvaus]);
-
   const canUpdate = useIsOphVirkailija();
 
   const config = useEntityFormConfig(ENTITY.SORA_KUVAUS, koulutustyyppi);
+
+  const initialValues = useMemo(
+    () => (soraKuvaus ? getFormValuesBySoraKuvaus(soraKuvaus) : {}),
+    [soraKuvaus]
+  );
 
   return (
     <ReduxForm form="soraKuvausForm" initialValues={initialValues}>

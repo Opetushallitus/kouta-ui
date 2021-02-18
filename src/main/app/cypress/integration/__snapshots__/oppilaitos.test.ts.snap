@@ -1,5 +1,6 @@
 exports[`createOppilaitos > should be able to create oppilaitos #0`] =
 {
+  "esikatselu": false,
   "kielivalinta": [
     "fi"
   ],
@@ -48,6 +49,7 @@ exports[`createOppilaitos > should be able to create oppilaitos #0`] =
 
 exports[`editOppilaitos > should be able to edit oppilaitos #0`] =
 {
+  "esikatselu": false,
   "kielivalinta": [
     "fi"
   ],

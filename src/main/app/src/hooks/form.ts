@@ -2,7 +2,7 @@ import { useContext, useMemo, useCallback } from 'react';
 
 import _ from 'lodash';
 import { useSelector } from 'react-redux';
-import { isDirty, isSubmitting } from 'redux-form';
+import { isDirty, isSubmitting, getFormSubmitErrors } from 'redux-form';
 import formActions from 'redux-form/lib/actions';
 
 import { ENTITY } from '#/src/constants';
@@ -45,9 +45,13 @@ export function useIsDirty() {
   const formName = useFormName();
   return useSelector(isDirty(formName));
 }
-export function useIsSubmitting() {
+export function useIsSubmitting(formNameProp) {
   const formName = useFormName();
-  return useSelector(isSubmitting(formName));
+  return useSelector(isSubmitting(formNameProp ?? formName));
+}
+export function useSubmitErrors(formNameProp) {
+  const formName = useFormName();
+  return useSelector(getFormSubmitErrors(formNameProp ?? formName));
 }
 
 export function useFieldValue<T = any>(name, formNameProp?: string): T {

@@ -12,7 +12,7 @@ Object {
       "sv": "Sv nimi",
     },
   },
-  "esikatselu": true,
+  "esikatselu": false,
   "information": Object {
     "eperuste": Object {
       "value": undefined,

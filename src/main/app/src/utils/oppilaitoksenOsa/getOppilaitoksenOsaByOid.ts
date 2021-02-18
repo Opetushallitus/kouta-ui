@@ -1,23 +1,22 @@
-import _ from 'lodash';
+import { ENTITY } from '#/src/constants';
 
-const getOppilaitoksenOsaByOid = async ({
+import { getEntityByOid, useEntityByOid } from '../api/getEntityByOid';
+
+export const getOppilaitoksenOsaByOid = async ({
   oid,
   httpClient,
   apiUrls,
   silent = false,
-}) => {
-  const { data, headers } = await httpClient.get(
-    apiUrls.url('kouta-backend.oppilaitoksenOsa-by-oid', oid),
-    {
-      errorNotifier: {
-        silent,
-      },
-    }
-  );
+}) =>
+  getEntityByOid({
+    entityType: ENTITY.OPPILAITOKSEN_OSA,
+    oid,
+    apiUrls,
+    httpClient,
+    silent,
+  });
 
-  const lastModified = _.get(headers, 'x-last-modified') || null;
-
-  return _.isObject(data) ? { lastModified, ...data } : data;
-};
+export const useOppilaitoksenOsaByOid = (oid?: string | null, options = {}) =>
+  useEntityByOid(ENTITY.OPPILAITOKSEN_OSA, { oid, silent: true }, options);
 
 export default getOppilaitoksenOsaByOid;

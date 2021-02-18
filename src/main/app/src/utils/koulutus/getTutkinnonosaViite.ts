@@ -18,8 +18,8 @@ export const getEPerusteTutkinnonOsat = async ({
 export const useEPerusteTutkinnonOsat = ({ ePerusteId }) => {
   return useApiQuery(
     'getTutkinnonOsaViite',
-    { ePerusteId },
     getEPerusteTutkinnonOsat,
+    { ePerusteId },
     {
       enabled: Boolean(ePerusteId),
       ...LONG_CACHE_QUERY_OPTIONS,

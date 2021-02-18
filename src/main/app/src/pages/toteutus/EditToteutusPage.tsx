@@ -3,6 +3,7 @@ import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
+import { EsikatseluControls } from '#/src/components/EsikatseluControls';
 import FormPage, {
   OrganisaatioRelation,
   KoulutusRelation,
@@ -14,6 +15,7 @@ import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
+import { useUrls } from '#/src/contexts/contextHooks';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useEntityFormConfig } from '#/src/hooks/form';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
@@ -24,6 +26,8 @@ import { useToteutusByOid } from '#/src/utils/toteutus/getToteutusByOid';
 import { ToteutusFooter } from './ToteutusFooter';
 import ToteutusForm from './ToteutusForm';
 
+const FORM_NAME = 'toteutusForm';
+
 const EditToteutusPage = props => {
   const {
     history,
@@ -31,6 +35,7 @@ const EditToteutusPage = props => {
       params: { organisaatioOid, oid },
     },
   } = props;
+  const apiUrls = useUrls();
 
   const { data: toteutus, isFetching: isToteutusFetching } = useToteutusByOid(
     oid
@@ -45,10 +50,6 @@ const EditToteutusPage = props => {
 
   const koulutustyyppi = koulutus ? koulutus.koulutustyyppi : null;
   const { t } = useTranslation();
-
-  const initialValues = useMemo(() => {
-    return toteutus && getFormValuesByToteutus(toteutus);
-  }, [toteutus]);
 
   const onAttachHakukohde = useCallback(
     ({ hakuOid }) => {
@@ -69,10 +70,15 @@ const EditToteutusPage = props => {
 
   const config = useEntityFormConfig(ENTITY.TOTEUTUS, koulutustyyppi);
 
+  const initialValues = useMemo(
+    () => (toteutus ? getFormValuesByToteutus(toteutus) : {}),
+    [toteutus]
+  );
+
   return !toteutus ? (
     <FullSpin />
   ) : (
-    <ReduxForm form="toteutusForm" initialValues={initialValues}>
+    <ReduxForm form={FORM_NAME} initialValues={initialValues}>
       <Title>{t('sivuTitlet.toteutuksenMuokkaus')}</Title>
       <FormConfigContext.Provider value={{ ...config, readOnly: !canUpdate }}>
         <FormPage
@@ -82,6 +88,11 @@ const EditToteutusPage = props => {
               entityType={ENTITY.TOTEUTUS}
               entity={toteutus}
               canUpdate={canUpdate}
+            />
+          }
+          esikatseluControls={
+            <EsikatseluControls
+              esikatseluUrl={apiUrls.url('konfo-ui.toteutus', oid)}
             />
           }
           steps={<FormSteps activeStep={ENTITY.TOTEUTUS} />}

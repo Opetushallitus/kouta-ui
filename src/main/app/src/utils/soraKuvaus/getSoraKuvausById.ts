@@ -10,6 +10,6 @@ export const getSoraKuvausById = async ({ httpClient, apiUrls, id }) =>
   });
 
 export const useSoraKuvausById = (id: string | null, options = {}) =>
-  useEntityByOid(ENTITY.SORA_KUVAUS, id, options);
+  useEntityByOid(ENTITY.SORA_KUVAUS, { oid: id }, options);
 
 export default getSoraKuvausById;

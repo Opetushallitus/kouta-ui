@@ -15,11 +15,11 @@ export const useKoodisto = ({ koodisto, versio: versioProp }) => {
 
   return useApiQuery(
     'getKoodisto',
+    getKoodisto,
     {
       koodistoUri: koodisto,
       versio,
     },
-    getKoodisto,
     {
       enabled: Boolean(koodisto),
       ...LONG_CACHE_QUERY_OPTIONS,

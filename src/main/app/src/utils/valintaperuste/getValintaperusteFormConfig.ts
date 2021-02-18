@@ -110,6 +110,11 @@ const config = createFormConfigBuilder().registerSections([
       ])(eb.validateExistence('tila'), values),
   },
   valintakokeetSection,
+  {
+    section: 'esikatselu',
+    field: 'esikatselu',
+    koulutustyypit: KOULUTUSTYYPIT,
+  },
 ]);
 
 const getValintaperusteFormConfig = koulutustyyppi => {

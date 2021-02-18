@@ -2,6 +2,7 @@
 
 exports[`getFormValuesByOppilaitos returns correct form values given oppilaitos 1`] = `
 Object {
+  "esikatselu": false,
   "esittely": Object {
     "fi":       "<p><em>Fi esittely</em></p>",
     "sv":       "<p><em>Sv esittely</em></p>",

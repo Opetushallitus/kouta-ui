@@ -11,8 +11,8 @@ export type KoutaApiQueryConfig = ReactQueryQueriesConfig<ApiResult, ApiError>;
 
 export const useApiQuery = (
   key: string,
-  props: Record<string, any>,
   apiFn: (any) => any,
+  props: Record<string, any> = {},
   options: KoutaApiQueryConfig = {}
 ) => {
   const apiUrls = useUrls();

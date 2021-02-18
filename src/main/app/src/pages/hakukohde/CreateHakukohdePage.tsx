@@ -23,6 +23,8 @@ import { HakukohdeFooter } from './HakukohdeFooter';
 import HakukohdeForm, {
   initialValues as getInitialValues,
 } from './HakukohdeForm';
+// TODO: how to show non-published haut in konfo?
+// import { EsikatseluControls } from '#/src/components/EsikatseluControls';
 
 const CreateHakukohdePage = ({
   match: {
@@ -62,6 +64,8 @@ const CreateHakukohdePage = ({
             toteutus={toteutus}
           />
         }
+        // TODO: how to show non-published haut in konfo?
+        // esikatseluControls={<EsikatseluControls />}
       >
         {isFetching ? (
           <Spin center />

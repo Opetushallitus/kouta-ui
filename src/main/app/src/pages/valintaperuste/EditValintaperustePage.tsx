@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
+import { EsikatseluControls } from '#/src/components/EsikatseluControls';
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
@@ -12,6 +13,7 @@ import FullSpin from '#/src/components/FullSpin';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { KOULUTUSTYYPPI, ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
+import { useUrls } from '#/src/contexts/contextHooks';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useEntityFormConfig } from '#/src/hooks/form';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
@@ -32,10 +34,6 @@ const EditValintaperustePage = props => {
 
   const { t } = useTranslation();
 
-  const initialValues = useMemo(() => {
-    return valintaperuste && getFormValuesByValintaperuste(valintaperuste);
-  }, [valintaperuste]);
-
   const canUpdate = useCurrentUserHasRole(
     ENTITY.VALINTAPERUSTE,
     CRUD_ROLES.UPDATE,
@@ -45,6 +43,13 @@ const EditValintaperustePage = props => {
   const config = useEntityFormConfig(
     ENTITY.VALINTAPERUSTE,
     valintaperuste?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
+  );
+
+  const apiUrls = useUrls();
+
+  const initialValues = useMemo(
+    () => (valintaperuste ? getFormValuesByValintaperuste(valintaperuste) : {}),
+    [valintaperuste]
   );
 
   return isLoading ? (
@@ -71,6 +76,11 @@ const EditValintaperustePage = props => {
                 canUpdate={canUpdate}
               />
             ) : null
+          }
+          esikatseluControls={
+            <EsikatseluControls
+              esikatseluUrl={apiUrls.url('konfo-ui.valintaperuste', id)}
+            />
           }
         >
           <RelationInfoContainer>

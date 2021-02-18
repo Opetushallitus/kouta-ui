@@ -23,6 +23,11 @@ import { useHakukohdeByOid } from '#/src/utils/hakukohde/getHakukohdeByOid';
 import { useHakukohdePageData } from './getHakukohdePageData';
 import { HakukohdeFooter } from './HakukohdeFooter';
 import HakukohdeForm from './HakukohdeForm';
+// TODO: how to show non-published haut in konfo?
+// import { useUrls } from '#/src/contexts/contextHooks';
+// import { EsikatseluControls } from '#/src/components/EsikatseluControls';
+
+const FORM_NAME = 'hakukohdeForm';
 
 const EditHakukohdePage = props => {
   const {
@@ -30,6 +35,7 @@ const EditHakukohdePage = props => {
       params: { organisaatioOid, oid },
     },
   } = props;
+  // const apiUrls = useUrls();
 
   const { data: hakukohde, isFetching: hakukohdeLoading } = useHakukohdeByOid(
     oid
@@ -50,10 +56,6 @@ const EditHakukohdePage = props => {
 
   const { t } = useTranslation();
 
-  const initialValues = useMemo(() => {
-    return hakukohde && getFormValuesByHakukohde(hakukohde);
-  }, [hakukohde]);
-
   const canUpdate = useCurrentUserHasRole(
     ENTITY.HAKUKOHDE,
     CRUD_ROLES.UPDATE,
@@ -62,10 +64,15 @@ const EditHakukohdePage = props => {
 
   const config = useEntityFormConfig(ENTITY.HAKUKOHDE);
 
+  const initialValues = useMemo(
+    () => (hakukohde ? getFormValuesByHakukohde(hakukohde) : {}),
+    [hakukohde]
+  );
+
   return isLoading ? (
     <FullSpin />
   ) : (
-    <ReduxForm form="hakukohdeForm" initialValues={initialValues}>
+    <ReduxForm form={FORM_NAME} initialValues={initialValues}>
       <Title>{t('sivuTitlet.hakukohteenMuokkaus')}</Title>
       <FormConfigContext.Provider value={{ ...config, readOnly: !canUpdate }}>
         <FormPage
@@ -87,6 +94,15 @@ const EditHakukohdePage = props => {
               canUpdate={canUpdate}
             />
           }
+          // TODO: how to show non-published haut in konfo?
+          // esikatseluControls={
+          //   <EsikatseluControls
+          //     esikatseluUrl={apiUrls.url(
+          //       'konfo-ui.toteutus',
+          //       hakukohde?.toteutusOid
+          //     )}
+          //   />
+          // }
         >
           <>
             <RelationInfoContainer>

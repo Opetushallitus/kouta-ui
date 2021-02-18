@@ -2,6 +2,7 @@
 
 exports[`getFormValuesByValintaperuste returns correct form values given valintaperuste 1`] = `
 Object {
+  "esikatselu": false,
   "julkinen": true,
   "kuvaus": Object {
     "kuvaus": Object {

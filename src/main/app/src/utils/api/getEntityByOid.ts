@@ -9,6 +9,7 @@ type GetEntityTypeByOidProps = {
   oid: string;
   httpClient: AxiosInstance;
   apiUrls: any;
+  silent?: boolean;
 };
 
 // NOTE: SORA-kuvaus and valintaperuste use "id" instead of "oid", but this works for them as well.
@@ -17,9 +18,15 @@ export const getEntityByOid = async ({
   oid,
   httpClient,
   apiUrls,
+  silent = false,
 }: GetEntityTypeByOidProps) => {
   const { data, headers } = await httpClient.get(
-    apiUrls.url(`kouta-backend.${entityType}-by-oid`, oid)
+    apiUrls.url(`kouta-backend.${entityType}-by-oid`, oid),
+    {
+      errorNotifier: {
+        silent,
+      },
+    } as any
   );
 
   const lastModified = _.get(headers, 'x-last-modified') || null;
@@ -29,12 +36,17 @@ export const getEntityByOid = async ({
 
 export const useEntityByOid = (
   entityType: ENTITY,
-  oid?: string | null,
+  props?: { oid?: string | null; silent?: boolean },
   options: KoutaApiQueryConfig = {}
 ) =>
-  useApiQuery(entityType, { entityType, oid }, getEntityByOid, {
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
-    enabled: oid,
-    ...options,
-  });
+  useApiQuery(
+    entityType,
+    getEntityByOid,
+    { entityType, ...props },
+    {
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      enabled: props?.oid,
+      ...options,
+    }
+  );

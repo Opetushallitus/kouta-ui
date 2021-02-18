@@ -3,6 +3,7 @@ import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
+import { EsikatseluControls } from '#/src/components/EsikatseluControls';
 import FormPage, {
   OrganisaatioRelation,
   RelationInfoContainer,
@@ -11,7 +12,6 @@ import FormSteps from '#/src/components/FormSteps';
 import FullSpin from '#/src/components/FullSpin';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
-import ToggleDraft from '#/src/components/ToggleDraft';
 import { Spin } from '#/src/components/virkailija';
 import { ENTITY, CRUD_ROLES } from '#/src/constants';
 import { useUrls } from '#/src/contexts/contextHooks';
@@ -44,7 +44,6 @@ const EditKoulutusPage = props => {
   });
 
   const { t } = useTranslation();
-  const apiUrls = useUrls();
   const initialValues = useMemo(() => {
     return koulutus && getFormValuesByKoulutus(koulutus);
   }, [koulutus]);
@@ -71,6 +70,8 @@ const EditKoulutusPage = props => {
 
   const isJulkinen = useFieldValue('julkinen', FORM_NAME);
 
+  const apiUrls = useUrls();
+
   return !koulutus ? (
     <FullSpin />
   ) : (
@@ -83,8 +84,6 @@ const EditKoulutusPage = props => {
             <EntityFormHeader entityType={ENTITY.KOULUTUS} entity={koulutus} />
           }
           steps={<FormSteps activeStep={ENTITY.KOULUTUS} />}
-          draftUrl={apiUrls.url('konfo-ui.koulutus', oid) + '?draft=true'}
-          toggleDraft={<ToggleDraft />}
           footer={
             koulutus ? (
               <EditKoulutusFooter
@@ -93,6 +92,11 @@ const EditKoulutusPage = props => {
                 canUpdate={canUpdate || isJulkinen}
               />
             ) : null
+          }
+          esikatseluControls={
+            <EsikatseluControls
+              esikatseluUrl={apiUrls.url('konfo-ui.koulutus', oid)}
+            />
           }
         >
           <RelationInfoContainer>

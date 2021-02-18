@@ -24,6 +24,7 @@ public class UrlConfiguration extends OphProperties {
         this.frontProperties.setProperty("kouta-backend.koulutus-list", this.require("kouta-backend.koulutus-list"));
         this.frontProperties.setProperty("kouta-backend.koulutus-toteutukset", this.require("kouta-backend.koulutus-toteutukset"));
 
+        this.frontProperties.setProperty("konfo-ui.toteutus", this.require("konfo-ui.toteutus"));
         this.frontProperties.setProperty("kouta-backend.toteutus", this.require("kouta-backend.toteutus"));
         this.frontProperties.setProperty("kouta-backend.toteutus-by-oid", this.require("kouta-backend.toteutus-by-oid"));
         this.frontProperties.setProperty("kouta-backend.toteutus-list", this.require("kouta-backend.toteutus-list"));
@@ -37,6 +38,7 @@ public class UrlConfiguration extends OphProperties {
         this.frontProperties.setProperty("kouta-backend.hakukohde", this.require("kouta-backend.hakukohde"));
         this.frontProperties.setProperty("kouta-backend.hakukohde-by-oid", this.require("kouta-backend.hakukohde-by-oid"));
 
+        this.frontProperties.setProperty("konfo-ui.valintaperuste", this.require("konfo-ui.valintaperuste"));
         this.frontProperties.setProperty("kouta-backend.valintaperuste", this.require("kouta-backend.valintaperuste"));
         this.frontProperties.setProperty("kouta-backend.valintaperuste-by-oid", this.require("kouta-backend.valintaperuste-by-oid"));
         this.frontProperties.setProperty("kouta-backend.valintaperuste-list", this.require("kouta-backend.valintaperuste-list"));
@@ -49,8 +51,11 @@ public class UrlConfiguration extends OphProperties {
         this.frontProperties.setProperty("kouta-backend.soraKuvaus-by-oid", this.require("kouta-backend.soraKuvaus-by-oid"));
         this.frontProperties.setProperty("kouta-backend.soraKuvaus-list", this.require("kouta-backend.soraKuvaus-list"));
 
+        this.frontProperties.setProperty("konfo-ui.oppilaitos", this.require("konfo-ui.oppilaitos"));
         this.frontProperties.setProperty("kouta-backend.oppilaitos", this.require("kouta-backend.oppilaitos"));
         this.frontProperties.setProperty("kouta-backend.oppilaitos-by-oid", this.require("kouta-backend.oppilaitos-by-oid"));
+
+        this.frontProperties.setProperty("konfo-ui.oppilaitoksenOsa", this.require("konfo-ui.oppilaitoksenOsa"));
         this.frontProperties.setProperty("kouta-backend.oppilaitoksenOsa", this.require("kouta-backend.oppilaitoksenOsa"));
         this.frontProperties.setProperty("kouta-backend.oppilaitoksenOsa-by-oid", this.require("kouta-backend.oppilaitoksenOsa-by-oid"));
 

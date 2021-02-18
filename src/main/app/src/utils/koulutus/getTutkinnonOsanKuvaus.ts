@@ -25,8 +25,8 @@ export const getTutkinnonOsanKuvaus = async ({
 export const useTutkinnonOsienKuvaukset = props => {
   return useApiQuery(
     'getTutkinnonOsienKuvaukset',
-    props,
     getTutkinnonOsanKuvaus,
+    props,
     LONG_CACHE_QUERY_OPTIONS
   );
 };

@@ -20,7 +20,7 @@ const getLiitteillaYhteinenToimitusosoite = values =>
 const getKaytetaanHaunAikataulua = values => !values?.hakuajat.eriHakuaika;
 
 export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
-  const { muokkaaja, tila, jarjestyspaikkaOid } = values;
+  const { muokkaaja, tila, esikatselu = false, jarjestyspaikkaOid } = values;
   const kielivalinta = getKielivalinta(values);
   const pickTranslations = _fp.pick(kielivalinta);
 
@@ -127,6 +127,7 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
   return {
     muokkaaja,
     tila,
+    esikatselu,
     jarjestyspaikkaOid,
     kaytetaanHaunAikataulua,
     kielivalinta,

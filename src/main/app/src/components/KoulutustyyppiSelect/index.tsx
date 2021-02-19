@@ -131,9 +131,7 @@ export const KoulutustyyppiSelect = ({
   disabled,
   getIsDisabled = () => false,
 }) => {
-  const [johtaaTutkintoon, setJohtaaTutkintoon] = useState(
-    TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT.includes(value)
-  );
+  const [johtaaTutkintoon, setJohtaaTutkintoon] = useState(true);
 
   const [firstLevelValue, setFirstLevelValue] = useState();
   const { t } = useTranslation();
@@ -141,11 +139,15 @@ export const KoulutustyyppiSelect = ({
   const hierarkia = useHierarkia(johtaaTutkintoon, getIsDisabled);
 
   useEffect(() => {
-    setJohtaaTutkintoon(TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT.includes(value));
+    if (value) {
+      setJohtaaTutkintoon(TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT.includes(value));
+    }
   }, [value]);
 
   useEffect(() => {
-    setFirstLevelValue(getFirstLevelValue(hierarkia, value));
+    if (KOULUTUSTYYPIT.includes(value)) {
+      setFirstLevelValue(getFirstLevelValue(hierarkia, value));
+    }
   }, [hierarkia, value]);
 
   const firstLevelOptions = useFirstLevelOptions(hierarkia, t);
@@ -164,6 +166,8 @@ export const KoulutustyyppiSelect = ({
 
       if (KOULUTUSTYYPIT.includes(currentValue)) {
         onChange(currentValue);
+      } else {
+        onChange(null);
       }
     },
     [setFirstLevelValue, onChange]

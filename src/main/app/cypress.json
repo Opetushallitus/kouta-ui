@@ -1,4 +1,5 @@
 {
+  "projectId": "kouta",
   "baseUrl": "https://localhost:3000/kouta",
   "nodeVersion": "system",
   "env": {

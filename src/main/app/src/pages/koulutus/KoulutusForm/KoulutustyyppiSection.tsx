@@ -67,7 +67,6 @@ const KoulutustyyppiSection = ({ organisaatioOid, johtaaTutkintoon, name }) => {
       name={name}
       component={FormFieldKoulutustyyppiSelect}
       label={t('yleiset.valitseKoulutustyyppi')}
-      johtaaTutkintoon={johtaaTutkintoon}
       disabled={!canCreate}
       getIsDisabled={value => {
         if (isOphVirkailija) {

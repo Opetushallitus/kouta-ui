@@ -98,7 +98,6 @@ const EditKoulutusPage = props => {
             <KoulutusForm
               steps={false}
               isNewKoulutus={false}
-              johtaaTutkintoon={Boolean(koulutus.johtaaTutkintoon)}
               onAttachToteutus={onAttachToteutus}
               koulutus={koulutus}
               organisaatioOid={organisaatioOid}

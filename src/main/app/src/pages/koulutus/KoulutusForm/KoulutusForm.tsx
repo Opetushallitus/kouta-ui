@@ -44,7 +44,6 @@ const KoulutusForm = ({
   steps = false,
   isNewKoulutus = false,
   koulutus: koulutusProp = null,
-  johtaaTutkintoon = true,
   onAttachToteutus = undefined,
   onSelectBase = undefined,
 }) => {
@@ -81,7 +80,6 @@ const KoulutusForm = ({
           header={t('yleiset.koulutustyyppi')}
           scrollOnActive={false}
           Component={KoulutustyyppiSection}
-          johtaaTutkintoon={johtaaTutkintoon}
           disabled={onlyTarjoajaRights}
           organisaatioOid={organisaatioOid}
         />

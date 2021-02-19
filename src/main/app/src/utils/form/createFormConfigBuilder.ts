@@ -141,12 +141,8 @@ class FormConfigBuilder {
     return this;
   }
 
-  getKoulutustyyppiConfig(koulutustyyppi = KOULUTUSTYYPPI_DEFAULT) {
-    return _.get(this.config, koulutustyyppi);
-  }
-
-  getConfig(koulutustyyppi = KOULUTUSTYYPPI_DEFAULT) {
-    return _.get(this.config, koulutustyyppi);
+  getConfig(koulutustyyppi) {
+    return _.get(this.config, koulutustyyppi || KOULUTUSTYYPPI_DEFAULT);
   }
 }
 

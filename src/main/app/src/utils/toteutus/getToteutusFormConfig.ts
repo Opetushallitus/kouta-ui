@@ -506,7 +506,7 @@ const config = createFormConfigBuilder().registerSections([
 ]);
 
 const getToteutusFormConfig = koulutustyyppi => {
-  return config.getKoulutustyyppiConfig(koulutustyyppi);
+  return config.getConfig(koulutustyyppi);
 };
 
 export default getToteutusFormConfig;

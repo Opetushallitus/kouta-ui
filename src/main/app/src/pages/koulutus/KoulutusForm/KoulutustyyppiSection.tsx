@@ -71,9 +71,8 @@ const KoulutustyyppiSection = ({ organisaatioOid, name }) => {
       name={name}
       component={FormFieldKoulutustyyppiSelect}
       label={t('yleiset.valitseKoulutustyyppi')}
-      disabled={!canCreate}
+      disabled={isLoading || !canCreate}
       getIsDisabled={_fp.cond([
-        [() => isLoading, _fp.T],
         [() => isOphVirkailija, _fp.F],
         [
           (value: any) =>

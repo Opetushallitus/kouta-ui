@@ -110,12 +110,22 @@ const useHierarkia = (johtaaTutkintoon, getIsDisabled) =>
     return hCopy;
   }, [getIsDisabled, johtaaTutkintoon]);
 
-const KoulutustyyppiRadioGroup = ({ value, onChange, error, options }) => {
+const KoulutustyyppiRadioGroup = ({
+  value,
+  onChange,
+  error,
+  options,
+  disabled,
+}) => {
   return (
     <RadioGroup value={value} onChange={onChange} error={error}>
-      {options.map(({ label, value: radioValue, disabled }) => {
+      {options.map(({ label, value: radioValue, disabled: radioDisabled }) => {
         return (
-          <Radio value={radioValue} disabled={disabled} key={radioValue}>
+          <Radio
+            value={radioValue}
+            disabled={disabled || radioDisabled}
+            key={radioValue}
+          >
             {label}
           </Radio>
         );
@@ -204,6 +214,7 @@ export const KoulutustyyppiSelect = ({
             value={firstLevelValue}
             onChange={onFirstLevelValueChange}
             error={error}
+            disabled={disabled}
             options={firstLevelOptions}
           />
         </Box>
@@ -212,6 +223,7 @@ export const KoulutustyyppiSelect = ({
             <KoulutustyyppiRadioGroup
               options={secondLevelOptions}
               value={value}
+              disabled={disabled}
               onChange={e => onChange(e.target.value)}
               error={error}
             />

@@ -19,10 +19,10 @@ import isYhteishakuHakutapa from '#/src/utils/isYhteishakuHakutapa';
 
 import HakukohteetModal from './HakukohteetModal';
 import { HakukohteetSection } from './HakukohteetSection';
+import { HakutapaSection } from './HakutapaSection';
+import HaunKohdejoukkoFields from './HaunKohdejoukkoFields';
 import NameSection from './NameSection';
 import ScheduleSection from './ScheduleSection';
-import SearchTypeSection from './SearchTypeSection';
-import TargetGroupSection from './TargetGroupSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
 
 const HakuForm = ({
@@ -81,13 +81,13 @@ const HakuForm = ({
         <FormCollapse
           section="kohdejoukko"
           header={t('hakulomake.haunKohdejoukko')}
-          Component={TargetGroupSection}
+          Component={HaunKohdejoukkoFields}
         />
 
         <FormCollapse
           section="hakutapa"
           header={t('hakulomake.hakutapa')}
-          Component={SearchTypeSection}
+          Component={HakutapaSection}
         />
 
         <FormCollapse

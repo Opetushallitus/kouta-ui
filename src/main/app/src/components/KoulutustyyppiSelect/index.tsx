@@ -10,7 +10,10 @@ import { Box, Radio, RadioGroup } from '#/src/components/virkailija';
 import {
   KOULUTUSTYYPIT,
   KOULUTUSTYYPPI,
+  TUTKINTOON_JOHTAMATTOMAT_KORKEAKOULU_KOULUTUSTYYPIT,
+  TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
+  TUTKINTOON_JOHTAMATTOMAT_AMMATILLISET_KOULUTUSTYYPIT,
 } from '#/src/constants';
 import { spacing, getThemeProp } from '#/src/theme';
 import { getTestIdProps } from '#/src/utils';
@@ -20,10 +23,9 @@ export const TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA = [
   { value: KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS },
   {
     value: 'korkeakoulutus',
-    children: [
-      { value: KOULUTUSTYYPPI.YLIOPISTOKOULUTUS },
-      { value: KOULUTUSTYYPPI.AMKKOULUTUS },
-    ],
+    children: TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT.map(kt => ({
+      value: kt,
+    })),
   },
   { value: KOULUTUSTYYPPI.LUKIOKOULUTUS },
 ];
@@ -31,26 +33,15 @@ export const TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA = [
 export const TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA = [
   {
     value: 'ammatillinen',
-    children: [
-      { value: KOULUTUSTYYPPI.VALMA },
-      { value: KOULUTUSTYYPPI.TELMA },
-      { value: KOULUTUSTYYPPI.TUTKINNON_OSA },
-      { value: KOULUTUSTYYPPI.OSAAMISALA },
-      { value: KOULUTUSTYYPPI.MUUT_KOULUTUKSET },
-    ],
+    children: TUTKINTOON_JOHTAMATTOMAT_AMMATILLISET_KOULUTUSTYYPIT.map(kt => ({
+      value: kt,
+    })),
   },
   {
     value: 'korkeakoulutus',
-    children: [
-      { value: KOULUTUSTYYPPI.AVOIN_YO },
-      { value: KOULUTUSTYYPPI.AVOIN_AMK },
-      { value: KOULUTUSTYYPPI.TAYDENNYS_KOULUTUS },
-      { value: KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS },
-      { value: KOULUTUSTYYPPI.VALMENTAVA_KOULUTUS },
-      { value: KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJAKOULUTUS },
-      { value: KOULUTUSTYYPPI.AMMATILLINEN_OPINTO_OHJAAJA_KOULUTUS },
-      { value: KOULUTUSTYYPPI.AMMATILLINEN_ERITYISOPETTAJA_KOULUTUS },
-    ],
+    children: TUTKINTOON_JOHTAMATTOMAT_KORKEAKOULU_KOULUTUSTYYPIT.map(kt => ({
+      value: kt,
+    })),
   },
   { value: KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO },
   { value: KOULUTUSTYYPPI.LUVA },

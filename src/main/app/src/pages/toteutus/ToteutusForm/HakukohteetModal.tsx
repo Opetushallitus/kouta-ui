@@ -1,14 +1,14 @@
 import React, { useCallback, useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
+import { GroupedOptionsType } from 'react-select';
 
 import Button from '#/src/components/Button';
 import Modal from '#/src/components/Modal';
 import Select from '#/src/components/Select';
 import { Box, FormLabel } from '#/src/components/virkailija';
-import useApiAsync from '#/src/hooks/useApiAsync';
 import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
-import getHaut from '#/src/utils/haku/getHaut';
+import { useHaut } from '#/src/utils/haku/getHaut';
 
 const HakukohteetModal = ({
   onClose,
@@ -19,10 +19,8 @@ const HakukohteetModal = ({
   const { t } = useTranslation();
   const [selectedHaku, setHaku] = useState();
 
-  const { data: haut } = useApiAsync({
-    promiseFn: getHaut,
+  const { data: haut } = useHaut({
     organisaatioOid,
-    watch: organisaatioOid,
   });
 
   const onSave = useCallback(() => {

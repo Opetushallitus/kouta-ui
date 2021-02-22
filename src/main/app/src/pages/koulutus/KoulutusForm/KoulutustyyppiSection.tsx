@@ -25,7 +25,7 @@ const useOppilaitosTyypit = organisaatioOid => {
     skipParents: false,
   });
 
-  const oppilaitosTyypit = [];
+  const oppilaitosTyypit: Array<any> = [];
 
   iterateTree(hierarkia, org => {
     if (org?.oppilaitostyyppi) {
@@ -77,7 +77,6 @@ const KoulutustyyppiSection = ({ organisaatioOid, name }) => {
         [
           (value: any) =>
             isAmmatillinen &&
-            !isKorkeakoulutus &&
             ![
               KOULUTUSTYYPPI.TUTKINNON_OSA,
               KOULUTUSTYYPPI.OSAAMISALA,
@@ -90,7 +89,7 @@ const KoulutustyyppiSection = ({ organisaatioOid, name }) => {
             isKorkeakoulutus && !KORKEAKOULU_KOULUTUSTYYPIT.includes(value),
           _fp.T,
         ],
-        [value => isLukio && value !== KOULUTUSTYYPPI.LUKIOKOULUTUS, _fp.T],
+        [() => isLukio, _fp.T],
         [otherwise, _fp.F],
       ])}
     />

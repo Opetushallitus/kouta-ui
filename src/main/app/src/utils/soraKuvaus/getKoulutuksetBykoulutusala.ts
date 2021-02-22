@@ -33,7 +33,7 @@ export const useKoulutuksetByKoulutusala = koulutusalat => {
     getKoulutuksetByKoulutusala,
     { koulutusalaKoodiUri: koulutusalat },
     {
-      enabled: koulutusalat,
+      enabled: Boolean(koulutusalat),
     }
   );
 };

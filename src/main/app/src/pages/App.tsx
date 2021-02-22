@@ -1,7 +1,8 @@
 import React, { Suspense } from 'react';
 
 import { I18nextProvider } from 'react-i18next';
-import { ReactQueryDevtools } from 'react-query-devtools';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { ThemeProvider } from 'styled-components';
@@ -15,9 +16,10 @@ import VirkailijaRaamit from '#/src/components/VirkailijaRaamit';
 import HttpContext from '#/src/contexts/HttpClientContext';
 import UrlContext from '#/src/contexts/UrlContext';
 import { UserGate } from '#/src/pages/UserGate';
-import { isDev } from '#/src/utils';
 
 import Routes from './Routes';
+
+const queryClient = new QueryClient();
 
 const App = ({
   store,
@@ -27,10 +29,10 @@ const App = ({
   history,
   localization,
   persistor,
-}) => {
-  return (
-    <Provider store={store}>
-      {isDev && <ReactQueryDevtools initialIsOpen={false} />}
+}) => (
+  <Provider store={store}>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
       <I18nextProvider i18n={localization}>
         <ThemeProvider theme={theme}>
           <PersistGate
@@ -55,8 +57,8 @@ const App = ({
           </PersistGate>
         </ThemeProvider>
       </I18nextProvider>
-    </Provider>
-  );
-};
+    </QueryClientProvider>
+  </Provider>
+);
 
 export default App;

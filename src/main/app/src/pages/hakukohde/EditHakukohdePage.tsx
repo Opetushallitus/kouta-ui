@@ -49,7 +49,7 @@ const EditHakukohdePage = props => {
       hakuOid: hakukohde?.hakuOid,
       toteutusOid: hakukohde?.toteutusOid,
     },
-    { enabled: hakukohde }
+    { enabled: Boolean(hakukohde) }
   );
 
   const isLoading = hakukohdeLoading || pageDataLoading;

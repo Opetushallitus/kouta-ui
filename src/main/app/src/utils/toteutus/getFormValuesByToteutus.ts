@@ -60,6 +60,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     B3Kielivalikoima,
     muuKielivalikoima,
     lisatiedot,
+    ammatillinenPerustutkintoErityisopetuksena,
     koulutuksenAlkamiskausiUUSI = {},
   } = opetus;
 
@@ -89,6 +90,9 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     esikatselu,
     tiedot: {
       nimi: nimi ?? {},
+      ammatillinenPerustutkintoErityisopetuksena: Boolean(
+        ammatillinenPerustutkintoErityisopetuksena
+      ),
       laajuus: _fp.isNumber(laajuus) ? laajuus.toString() : '',
       laajuusyksikko: toSelectValue(laajuusyksikkoKoodiUri),
       ilmoittautumislinkki: ilmoittautumislinkki || {},

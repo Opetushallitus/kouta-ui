@@ -7,6 +7,7 @@ import {
   FormFieldEditor,
   FormFieldInput,
   FormFieldSelect,
+  FormFieldSwitch,
 } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI } from '#/src/constants';
@@ -63,6 +64,15 @@ const TiedotSection = ({ language, name, koulutustyyppi }) => {
           disabled={disableFieldsCopiedFromKoulutus}
           label={t('toteutuslomake.toteutuksenNimi')}
         />
+      </Box>
+
+      <Box mb={2}>
+        <Field
+          name={`${name}.ammatillinenPerustutkintoErityisopetuksena`}
+          component={FormFieldSwitch}
+        >
+          {t('toteutuslomake.ammatillinenPerustutkintoErityisopetuksena')}
+        </Field>
       </Box>
 
       <Box mb={2} {...getTestIdProps('toteutuksenKuvaus')}>

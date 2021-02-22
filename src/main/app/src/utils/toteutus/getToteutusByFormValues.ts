@@ -65,6 +65,8 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
     esikatselu,
     metadata: {
       opetus: {
+        ammatillinenPerustutkintoErityisopetuksena:
+          values?.tiedot?.ammatillinenPerustutkintoErityisopetuksena,
         lisatiedot: (values?.jarjestamistiedot?.osiot || []).map(
           ({ value }) => ({
             otsikkoKoodiUri: value,

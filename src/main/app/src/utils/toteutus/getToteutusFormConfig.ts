@@ -77,6 +77,10 @@ const config = createFormConfigBuilder().registerSections([
         validate: (eb, values) =>
           eb.validateTranslations('tiedot.nimi', getKielivalinta(values)),
       },
+      {
+        koulutustyypit: TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
+        field: '.ammatillinenPerustutkintoErityisopetuksena',
+      },
       createOptionalTranslatedFieldConfig({
         name: 'kuvaus',
         koulutustyypit: _fp.without(

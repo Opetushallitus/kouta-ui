@@ -33,6 +33,7 @@ export type ToteutusFormValues = {
   tila: JULKAISUTILA;
   tiedot: {
     nimi: TranslatedField<string>;
+    ammatillinenPerustutkintoErityisopetuksena: boolean;
     laajuus: string;
     laajuusyksikko?: SelectOption;
     ilmoittautumislinkki: TranslatedField<string>;

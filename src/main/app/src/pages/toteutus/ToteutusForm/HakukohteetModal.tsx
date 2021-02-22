@@ -56,8 +56,8 @@ const HakukohteetModal = ({
           options={hautOptions}
           menuPortalTarget={document.body}
           menuPosition="fixed"
-          onChange={data => {
-            setHaku(data?.value);
+          onChange={(data: any) => {
+            setHaku(data);
           }}
           value={selectedHaku}
         />

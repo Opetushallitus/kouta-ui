@@ -6,8 +6,8 @@ Object {
   "julkinen": true,
   "kuvaus": Object {
     "kuvaus": Object {
-      "fi":         "<h1>Fi kuvaus</h1>",
-      "sv":         "<h1>Sv kuvaus</h1>",
+      "fi": "<h1>Fi kuvaus</h1>",
+      "sv": "<h1>Sv kuvaus</h1>",
     },
     "nimi": Object {
       "fi": "Fi nimi",
@@ -41,16 +41,16 @@ Object {
           "sv": "valintakokeen nimi - sv",
         },
         "ohjeetEnnakkovalmistautumiseen": Object {
-          "fi":             "<p>Ohjeet ennakkovalmistautumiseen - fi</p>",
-          "sv":             "<p>ohjeet ennakkovalmistautumiseen - sv</p>",
+          "fi": "<p>Ohjeet ennakkovalmistautumiseen - fi</p>",
+          "sv": "<p>ohjeet ennakkovalmistautumiseen - sv</p>",
         },
         "ohjeetErityisjarjestelyihin": Object {
-          "fi":             "<p>Ohjeet erityisjärjestelyihin - fi</p>",
-          "sv":             "<p>Ohjeet erityisjärjestelyihin - sv</p>",
+          "fi": "<p>Ohjeet erityisjärjestelyihin - fi</p>",
+          "sv": "<p>Ohjeet erityisjärjestelyihin - sv</p>",
         },
         "tietoaHakijalle": Object {
-          "fi":             "<p>Tietoa hakijalle - fi</p>",
-          "sv":             "<p>Tietoa hakijalle - sv</p>",
+          "fi": "<p>Tietoa hakijalle - fi</p>",
+          "sv": "<p>Tietoa hakijalle - sv</p>",
         },
         "tilaisuudet": Array [
           Object {
@@ -60,8 +60,8 @@ Object {
               "sv": "jarjestamispaikka - sv",
             },
             "lisatietoja": Object {
-              "fi":                 "<p>fi lisatietoja</p>",
-              "sv":                 "<p>sv lisatietoja</p>",
+              "fi": "<p>fi lisatietoja</p>",
+              "sv": "<p>sv lisatietoja</p>",
             },
             "osoite": Object {
               "fi": "fi osoite",
@@ -80,8 +80,8 @@ Object {
       },
     ],
     "yleisKuvaus": Object {
-      "fi":         "<p>Yleiskuvaus - fi</p>",
-      "sv":         "<p>Yleiskuvaus - sv</p>",
+      "fi": "<p>Yleiskuvaus - fi</p>",
+      "sv": "<p>Yleiskuvaus - sv</p>",
     },
   },
   "valintatavat": Array [
@@ -92,8 +92,8 @@ Object {
         "sv": "Sv kuvaus",
       },
       "kynnysehto": Object {
-        "fi":           "<p>Fi kynnysehto</p>",
-        "sv":           "<p>Sv kynnysehto</p>",
+        "fi": "<p>Fi kynnysehto</p>",
+        "sv": "<p>Sv kynnysehto</p>",
       },
       "nimi": Object {
         "fi": "Fi nimi",
@@ -102,8 +102,8 @@ Object {
       "sisalto": Array [
         Object {
           "data": Object {
-            "fi":               "<h2>Fi sisalto</h2>",
-            "sv":               "<h2>Sv sisalto</h2>",
+            "fi": "<h2>Fi sisalto</h2>",
+            "sv": "<h2>Sv sisalto</h2>",
           },
           "tyyppi": "teksti",
         },

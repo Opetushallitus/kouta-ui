@@ -45,8 +45,8 @@ Object {
     "liitteet": Array [
       Object {
         "kuvaus": Object {
-          "fi":             "<p>Fi kuvaus</p>",
-          "sv":             "<p>Sv kuvaus</p>",
+          "fi": "<p>Fi kuvaus</p>",
+          "sv": "<p>Sv kuvaus</p>",
         },
         "nimi": Object {
           "fi": "Fi nimi",
@@ -111,8 +111,8 @@ Object {
       },
     ],
     "tarkenne": Object {
-      "fi":         "<p><strong>Tarkenne fi</strong></p>",
-      "sv":         "<p><strong>Tarkenne sv</strong></p>",
+      "fi": "<p><strong>Tarkenne fi</strong></p>",
+      "sv": "<p><strong>Tarkenne sv</strong></p>",
     },
   },
   "tila": "tallennettu",
@@ -127,24 +127,24 @@ Object {
           "sv": "valintakokeen nimi - sv",
         },
         "ohjeetEnnakkovalmistautumiseen": Object {
-          "fi":             "<p>Ohjeet ennakkovalmistautumiseen - fi</p>",
-          "sv":             "<p>ohjeet ennakkovalmistautumiseen - sv</p>",
+          "fi": "<p>Ohjeet ennakkovalmistautumiseen - fi</p>",
+          "sv": "<p>ohjeet ennakkovalmistautumiseen - sv</p>",
         },
         "ohjeetErityisjarjestelyihin": Object {
-          "fi":             "<p>Ohjeet erityisjärjestelyihin - fi</p>",
-          "sv":             "<p>Ohjeet erityisjärjestelyihin - sv</p>",
+          "fi": "<p>Ohjeet erityisjärjestelyihin - fi</p>",
+          "sv": "<p>Ohjeet erityisjärjestelyihin - sv</p>",
         },
         "tietoaHakijalle": Object {
-          "fi":             "<p>Tietoa hakijalle - fi</p>",
-          "sv":             "<p>Tietoa hakijalle - sv</p>",
+          "fi": "<p>Tietoa hakijalle - fi</p>",
+          "sv": "<p>Tietoa hakijalle - sv</p>",
         },
         "tilaisuudet": Array [
           Object {
             "alkaa": "2019-04-16T08:44",
             "jarjestamispaikka": undefined,
             "lisatietoja": Object {
-              "fi":                 "<p>fi lisatietoja</p>",
-              "sv":                 "<p>sv lisatietoja</p>",
+              "fi": "<p>fi lisatietoja</p>",
+              "sv": "<p>sv lisatietoja</p>",
             },
             "osoite": Object {
               "fi": "fi osoite",
@@ -163,8 +163,8 @@ Object {
       },
     ],
     "yleisKuvaus": Object {
-      "fi":         "<p>Yleiskuvaus - fi</p>",
-      "sv":         "<p>Yleiskuvaus - sv</p>",
+      "fi": "<p>Yleiskuvaus - fi</p>",
+      "sv": "<p>Yleiskuvaus - sv</p>",
     },
   },
   "valintaperusteenKuvaus": Object {

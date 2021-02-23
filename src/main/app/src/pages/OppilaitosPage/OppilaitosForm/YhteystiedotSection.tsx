@@ -6,6 +6,7 @@ import { Field } from 'redux-form';
 import {
   FormFieldInput,
   FormFieldPostinumeroSelect,
+  FormFieldUrlInput,
 } from '#/src/components/formFields';
 import { Box, Typography } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
@@ -53,7 +54,7 @@ const YhteystiedotSection = ({ name, language }) => {
 
       <Box {...getTestIdProps('verkkosivu')}>
         <Field
-          component={FormFieldInput}
+          component={FormFieldUrlInput}
           name={`${name}.verkkosivu.${language}`}
           label={t('yleiset.verkkosivu')}
         />

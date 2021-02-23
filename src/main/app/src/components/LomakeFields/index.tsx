@@ -9,9 +9,9 @@ import Button from '#/src/components/Button';
 import Flex, { FlexItem } from '#/src/components/Flex';
 import {
   FormFieldSelect,
-  FormFieldInput,
   FormFieldRadioGroup,
   FormFieldEditor,
+  FormFieldUrlInput,
 } from '#/src/components/formFields';
 import Spacing from '#/src/components/Spacing';
 import { HAKULOMAKETYYPPI } from '#/src/constants';
@@ -103,7 +103,7 @@ const AdditionalTyyppiFields = ({
       return (
         <Field
           name={`${baseName}.linkki.${language}`}
-          component={FormFieldInput}
+          component={FormFieldUrlInput}
           label={t('yleiset.linkki')}
         />
       );

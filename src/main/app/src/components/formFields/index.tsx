@@ -13,6 +13,7 @@ import { Select, AsyncSelect } from '#/src/components/Select';
 import { SoraKuvausSelect } from '#/src/components/SoraKuvausSelect';
 import { Switch } from '#/src/components/Switch';
 import { TimeInput } from '#/src/components/TimeInput';
+import { UrlInput } from '#/src/components/UrlInput';
 import {
   DatePicker,
   Checkbox,
@@ -39,6 +40,8 @@ export const selectMapProps = ({ input, ...props }) => ({
 export const createFormFieldComponent = createComponent;
 
 export const FormFieldInput = createComponent(Input, simpleMapProps);
+
+export const FormFieldUrlInput = createComponent(UrlInput, simpleMapProps);
 
 export const FormFieldRadio = createComponent(
   Radio,

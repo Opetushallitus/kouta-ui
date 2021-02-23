@@ -6,7 +6,10 @@ import { Field } from 'redux-form';
 import styled from 'styled-components';
 
 import DateTimeRange from '#/src/components/DateTimeRange';
-import { FormFieldInput, FormFieldEditor } from '#/src/components/formFields';
+import {
+  FormFieldEditor,
+  FormFieldUrlInput,
+} from '#/src/components/formFields';
 import { createFormFieldComponent } from '#/src/components/formFields';
 import SegmentTab from '#/src/components/SegmentTab';
 import SegmentTabs from '#/src/components/SegmentTabs';
@@ -37,7 +40,7 @@ const MuuHakulomakeBox = ({ tapa, section, language, ...props }) => {
       <Box display="flex" flexDirection="column">
         <Box mb="20px">
           <Field
-            component={FormFieldInput}
+            component={FormFieldUrlInput}
             label={t(`toteutuslomake.${tapa}.linkki`)}
             name={`${section}.linkki.${language}`}
           />

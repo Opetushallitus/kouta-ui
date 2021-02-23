@@ -35,7 +35,7 @@ const haku = () => ({
           fi: 'puhelin',
         },
         wwwSivu: {
-          fi: 'verkkosivu',
+          fi: 'http://verkkosivu',
         },
         sahkoposti: {
           fi: 'sähkoposti',

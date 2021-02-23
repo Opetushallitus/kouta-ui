@@ -91,15 +91,18 @@ const getFirstLevelValue = (hierarkia, selectedValue) => {
 
 const useHierarkia = (johtaaTutkintoon, getIsDisabled) =>
   useMemo(() => {
-    const h = johtaaTutkintoon
-      ? TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA
-      : TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA;
-
-    const hCopy = _.cloneDeep(h);
+    const hierarkiaCopy = _.cloneDeep(
+      johtaaTutkintoon
+        ? TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA
+        : TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA
+    );
 
     iterateTree(
-      hCopy,
+      hierarkiaCopy,
       item => {
+        // Disable leaves (value is koulutustyyppi) from koulutustyyppi hierarkia based on getIsDisabled().
+        // Disable first level if all of its children are disabled.
+        // This works because leaves are iterated first
         item.disabled =
           (KOULUTUSTYYPIT.includes(item.value) && getIsDisabled(item.value)) ||
           (item?.children &&
@@ -107,7 +110,7 @@ const useHierarkia = (johtaaTutkintoon, getIsDisabled) =>
       },
       { order: Order.BottomUp }
     );
-    return hCopy;
+    return hierarkiaCopy;
   }, [getIsDisabled, johtaaTutkintoon]);
 
 const KoulutustyyppiRadioGroup = ({

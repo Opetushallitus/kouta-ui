@@ -45,7 +45,7 @@ export function useIsDirty() {
   const formName = useFormName();
   return useSelector(isDirty(formName));
 }
-export function useIsSubmitting(formNameProp) {
+export function useIsSubmitting(formNameProp?: string) {
   const formName = useFormName();
   return useSelector(isSubmitting(formNameProp ?? formName));
 }

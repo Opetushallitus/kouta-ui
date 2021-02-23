@@ -50,7 +50,7 @@ const validateLiitteet = (errorBuilder, values) => {
       let enhancedLiitteetEb = liitteetEb
         .validateExistence('tyyppi')
         .validateTranslations('nimi', kieliversiot)
-        .validateTranslations('kuvaus', kieliversiot);
+        .validateTranslations('kuvaus', kieliversiot, { optional: true });
 
       if (!liitteillaYhteinenToimitusaika) {
         enhancedLiitteetEb = enhancedLiitteetEb.validateExistence(

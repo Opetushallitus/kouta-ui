@@ -225,6 +225,7 @@ Object {
   "teemakuva": undefined,
   "tiedot": Object {
     "aloituspaikat": "251",
+    "ammatillinenPerustutkintoErityisopetuksena": true,
     "ilmoittautumislinkki": Object {
       "fi": "Fi linkki",
       "sv": "Sv linkki",

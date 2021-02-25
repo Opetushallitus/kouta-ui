@@ -2,13 +2,15 @@ import React, { useCallback } from 'react';
 
 import _ from 'lodash';
 import { queryCache } from 'react-query';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { FormFooter } from '#/src/components/FormPage';
 import { ORGANISAATIOTYYPPI, ENTITY, FormMode } from '#/src/constants';
-import { useFormName } from '#/src/hooks/form';
+import { useForm, useFormName } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
+import { getValuesForSaving } from '#/src/utils';
 import { getTarjoajaOids } from '#/src/utils/getTarjoajaOids';
 import createKoulutus from '#/src/utils/koulutus/createKoulutus';
 import getKoulutusByFormValues from '#/src/utils/koulutus/getKoulutusByFormValues';
@@ -35,24 +37,35 @@ export const KoulutusFooter = ({
     filter: _.negate(organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)),
   });
 
+  const form = useForm();
+  const formName = useFormName();
+  const unregisteredFields = useSelector(state => state?.unregisteredFields);
+  const initialValues = useSelector(state => state.form?.[formName]?.initial);
+
   const dataSendFn =
     formMode === FormMode.CREATE ? createKoulutus : updateKoulutus;
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
+      const valuesForSaving = getValuesForSaving(
+        values,
+        form.registeredFields,
+        unregisteredFields,
+        initialValues
+      );
       const { oid } = await dataSendFn({
         httpClient,
         apiUrls,
         koulutus:
           formMode === FormMode.CREATE
             ? {
-                ...getKoulutusByFormValues(values),
+                ...getKoulutusByFormValues(valuesForSaving),
                 organisaatioOid,
               }
             : _.omit(
                 {
                   ...koulutus,
-                  ...getKoulutusByFormValues(values),
+                  ...getKoulutusByFormValues(valuesForSaving),
                   tarjoajat: getTarjoajaOids({
                     hierarkia,
                     existingTarjoajat: koulutus.tarjoajat,
@@ -76,10 +89,19 @@ export const KoulutusFooter = ({
         queryCache.invalidateQueries(ENTITY.KOULUTUS);
       }
     },
-    [dataSendFn, formMode, hierarkia, history, koulutus, organisaatioOid]
+    [
+      dataSendFn,
+      form.registeredFields,
+      formMode,
+      hierarkia,
+      history,
+      initialValues,
+      koulutus,
+      organisaatioOid,
+      unregisteredFields,
+    ]
   );
 
-  const formName = useFormName();
   const { save } = useSaveForm({
     form: formName,
     submit,

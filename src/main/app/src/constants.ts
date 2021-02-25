@@ -273,6 +273,8 @@ export const AMMATILLISET_OPPILAITOSTYYPIT = [
   'oppilaitostyyppi_22#1', // Ammatilliset erityisoppilaitokset
   'oppilaitostyyppi_23#1', // Ammatilliset erikoisoppilaitokset
   'oppilaitostyyppi_24#1', // Ammatilliset aikuiskoulutuskeskukset
+  'oppilaitostyyppi_28#1', // Palo-, poliisi- ja vartiointialojen oppilaitokset
+  'oppilaitostyyppi_29#1', // Sotilasalan ammatilliset oppilaitokset
 ];
 
 export const KORKEAKOULU_OPPILAITOSTYYPIT = [

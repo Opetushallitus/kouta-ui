@@ -101,6 +101,7 @@ const KoulutusForm = ({
         header={t('yleiset.kieliversiot')}
         Component={KieliversiotFields}
         disabled={onlyTarjoajaRights}
+        hidden={!koulutustyyppi}
       />
 
       <FormCollapse
@@ -110,6 +111,7 @@ const KoulutusForm = ({
         languages={languageTabs}
         disabled={onlyTarjoajaRights}
         koulutustyyppi={koulutustyyppi}
+        hidden={!koulutustyyppi}
       />
 
       <FormCollapse
@@ -120,6 +122,7 @@ const KoulutusForm = ({
         disabled={onlyTarjoajaRights}
         koulutustyyppi={koulutustyyppi}
         koulutuskoodi={koulutuskoodi}
+        hidden={!koulutustyyppi}
       />
 
       <FormCollapse
@@ -130,6 +133,7 @@ const KoulutusForm = ({
         languages={languageTabs}
         disabled={onlyTarjoajaRights}
         koulutustyyppi={koulutustyyppi}
+        hidden={!koulutustyyppi}
       />
 
       <FormCollapse
@@ -140,6 +144,7 @@ const KoulutusForm = ({
         languages={languageTabs}
         disabled={onlyTarjoajaRights}
         koulutustyyppi={koulutustyyppi}
+        hidden={!koulutustyyppi}
       />
 
       <FormCollapse
@@ -149,6 +154,7 @@ const KoulutusForm = ({
         languages={languageTabs}
         disabled={onlyTarjoajaRights}
         koulutustyyppi={koulutustyyppi}
+        hidden={!koulutustyyppi}
         {...getTestIdProps('nimiSection')}
       />
 
@@ -159,6 +165,7 @@ const KoulutusForm = ({
         languages={languageTabs}
         disabled={onlyTarjoajaRights}
         koulutustyyppi={koulutustyyppi}
+        hidden={!koulutustyyppi}
         {...getTestIdProps('tutkinnonOsienKuvausSection')}
       />
 
@@ -170,6 +177,7 @@ const KoulutusForm = ({
         disabled={onlyTarjoajaRights}
         koulutustyyppi={koulutustyyppi}
         koulutuskoodi={koulutuskoodi}
+        hidden={!koulutustyyppi}
       />
 
       <FormCollapse
@@ -178,6 +186,7 @@ const KoulutusForm = ({
         Component={LisatiedotSection}
         languages={languageTabs}
         disabled={onlyTarjoajaRights}
+        hidden={!koulutustyyppi}
       />
 
       <FormCollapse
@@ -185,6 +194,7 @@ const KoulutusForm = ({
         header={t('koulutuslomake.koulutuksenTeemakuva')}
         Component={TeemakuvaSection}
         disabled={onlyTarjoajaRights}
+        hidden={!koulutustyyppi}
       />
 
       {!isNewOphKoulutus && (
@@ -195,6 +205,7 @@ const KoulutusForm = ({
           organisaatioOid={organisaatioOid}
           koulutus={koulutusProp}
           disableTarjoajaHierarkia={isExistingOphKoulutus}
+          hidden={!koulutustyyppi}
         />
       )}
 
@@ -204,6 +215,7 @@ const KoulutusForm = ({
         disabled={onlyTarjoajaRights}
         Component={JulkisuusSection}
         entity={ENTITY.KOULUTUS}
+        hidden={!koulutustyyppi}
       />
 
       <FormCollapse
@@ -212,6 +224,7 @@ const KoulutusForm = ({
         Component={JulkaisutilaField}
         disabled={onlyTarjoajaRights}
         showArkistoitu={!isNewKoulutus}
+        hidden={!koulutustyyppi}
       />
 
       {_fp.isFunction(onAttachToteutus) && (

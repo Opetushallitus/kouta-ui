@@ -10,6 +10,7 @@ export { default } from './ValintaperusteForm';
 
 export const initialValues = kieliValinnat => ({
   tila: DEFAULT_JULKAISUTILA,
+  esikatselu: false,
   pohja: {
     tapa: POHJAVALINTA.UUSI,
   },

@@ -4,5 +4,6 @@ export { default } from './OppilaitosForm';
 
 export const initialValues = {
   tila: DEFAULT_JULKAISUTILA,
+  esikatselu: false,
   kieliversiot: ['fi', 'sv'],
 };

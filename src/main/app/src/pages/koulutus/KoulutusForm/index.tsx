@@ -4,6 +4,7 @@ export { default } from './KoulutusForm';
 
 export const initialValues = {
   tila: DEFAULT_JULKAISUTILA,
+  esikatselu: false,
   pohja: {
     tapa: POHJAVALINTA.UUSI,
   },

@@ -248,7 +248,7 @@ const OsaamisalatContainer = ({
 
 const OsaamisalatSection = ({ language, koulutus, organisaatioOid, name }) => {
   const { t } = useTranslation();
-  const { ePerusteId } = koulutus;
+  const { ePerusteId } = koulutus || {};
   const { data: ePeruste, isLoading } = useApiAsync({
     promiseFn: getExtendedEPeruste,
     ePerusteId,

@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { GroupedOptionsType } from 'react-select';
 
 import Button from '#/src/components/Button';
 import Modal from '#/src/components/Modal';
@@ -17,15 +16,17 @@ const HakukohteetModal = ({
   ...props
 }) => {
   const { t } = useTranslation();
-  const [selectedHaku, setHaku] = useState();
+  const [selectedHakuOption, setSelectedHakuOption] = useState<
+    SelectOption | undefined
+  >();
 
   const { data: haut } = useHaut({
     organisaatioOid,
   });
 
   const onSave = useCallback(() => {
-    return onSaveProp({ hakuOid: selectedHaku });
-  }, [onSaveProp, selectedHaku]);
+    return onSaveProp({ hakuOid: selectedHakuOption?.value });
+  }, [onSaveProp, selectedHakuOption]);
 
   const hautOptions = useEntityOptions(haut);
 
@@ -38,7 +39,7 @@ const HakukohteetModal = ({
           <Button onClick={onClose} variant="outlined" type="button">
             {t('yleiset.sulje')}
           </Button>
-          <Button onClick={onSave} type="button" disabled={!selectedHaku}>
+          <Button onClick={onSave} type="button" disabled={!selectedHakuOption}>
             {t('yleiset.lisaaHakukohde')}
           </Button>
         </Box>
@@ -54,10 +55,8 @@ const HakukohteetModal = ({
           options={hautOptions}
           menuPortalTarget={document.body}
           menuPosition="fixed"
-          onChange={(data: any) => {
-            setHaku(data);
-          }}
-          value={selectedHaku}
+          onChange={setSelectedHakuOption}
+          value={selectedHakuOption}
         />
       </Box>
     </Modal>

@@ -296,11 +296,11 @@ const config = createFormConfigBuilder().registerSections([
         name: 'jarjestamistiedot.maksullisuusKuvaus',
       }),
       {
-        field: '.onkoStipendia',
+        field: '.apurahaTyyppi',
         required: true,
       },
       createOptionalTranslatedFieldConfig({
-        name: 'jarjestamistiedot.stipendinKuvaus',
+        name: 'jarjestamistiedot.apurahaKuvaus',
       }),
       {
         field: '.ajankohta.ajankohtaTyyppi',

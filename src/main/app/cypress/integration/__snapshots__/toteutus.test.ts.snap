@@ -43,6 +43,7 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
       "B2Kielivalikoima": [],
       "B3Kielivalikoima": [],
       "aidinkieliKielivalikoima": [],
+      "apuraha": {},
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
       "koulutuksenAlkamiskausiUUSI": {
@@ -67,7 +68,6 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
       "maksunMaara": 10,
       "muuKielivalikoima": [],
       "onkoMaksullinen": true,
-      "onkoStipendia": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -86,8 +86,6 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
       "opetustapaKuvaus": {
         "fi": "<p>opetustapa kuvaus</p>"
       },
-      "stipendinKuvaus": {},
-      "stipendinMaara": null,
       "suunniteltuKestoKuukaudet": 6,
       "suunniteltuKestoKuvaus": {
         "fi": "<p>suunniteltu kesto kuvaus</p>"
@@ -169,6 +167,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
       "B2Kielivalikoima": [],
       "B3Kielivalikoima": [],
       "aidinkieliKielivalikoima": [],
+      "apuraha": {},
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
       "koulutuksenAlkamiskausiUUSI": {
@@ -193,7 +192,6 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
       "maksunMaara": 10,
       "muuKielivalikoima": [],
       "onkoMaksullinen": true,
-      "onkoStipendia": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -212,8 +210,6 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
       "opetustapaKuvaus": {
         "fi": "<p>opetustapa kuvaus</p>"
       },
-      "stipendinKuvaus": {},
-      "stipendinMaara": null,
       "suunniteltuKestoKuukaudet": 6,
       "suunniteltuKestoKuvaus": {
         "fi": "<p>suunniteltu kesto kuvaus</p>"
@@ -320,6 +316,13 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
       "B2Kielivalikoima": [],
       "B3Kielivalikoima": [],
       "aidinkieliKielivalikoima": [],
+      "apuraha": {
+        "kuvaus": {
+          "fi": "<p>apuraha kuvaus</p>"
+        },
+        "maara": 20,
+        "tyyppi": "stipendi"
+      },
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
       "koulutuksenAlkamiskausiUUSI": {
@@ -344,7 +347,6 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
       "maksunMaara": null,
       "muuKielivalikoima": [],
       "onkoMaksullinen": false,
-      "onkoStipendia": true,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -364,10 +366,6 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
       "opetustapaKuvaus": {
         "fi": "<p>opetustapa kuvaus</p>"
       },
-      "stipendinKuvaus": {
-        "fi": "<p>stipendi kuvaus</p>"
-      },
-      "stipendinMaara": 20,
       "suunniteltuKestoKuukaudet": 6,
       "suunniteltuKestoKuvaus": {
         "fi": "<p>suunniteltu kesto kuvaus</p>"
@@ -472,6 +470,7 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
       "aidinkieliKielivalikoima": [
         "kieli_fi#1"
       ],
+      "apuraha": {},
       "diplomiKoodiUrit": [
         "lukiodiplomit_6#1"
       ],
@@ -502,7 +501,6 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
         "kieli_zh#1"
       ],
       "onkoMaksullinen": true,
-      "onkoStipendia": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -521,8 +519,6 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
       "opetustapaKuvaus": {
         "fi": "<p>opetustapa kuvaus</p>"
       },
-      "stipendinKuvaus": {},
-      "stipendinMaara": null,
       "suunniteltuKestoKuukaudet": 6,
       "suunniteltuKestoKuvaus": {
         "fi": "<p>suunniteltu kesto kuvaus</p>"
@@ -607,6 +603,7 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
       "B3Kielivalikoima": [],
       "aidinkieliKielivalikoima": [],
       "ammatillinenPerustutkintoErityisopetuksena": false,
+      "apuraha": {},
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
       "koulutuksenAlkamiskausiUUSI": {
@@ -631,7 +628,6 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
       "maksunMaara": 20,
       "muuKielivalikoima": [],
       "onkoMaksullinen": true,
-      "onkoStipendia": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -650,8 +646,6 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
       "opetustapaKuvaus": {
         "fi": "<p>Opetustapa kuvaus</p>"
       },
-      "stipendinKuvaus": {},
-      "stipendinMaara": null,
       "suunniteltuKestoKuukaudet": 6,
       "suunniteltuKestoKuvaus": {
         "fi": "<p>Fi suunniteltuKestoKuvaus</p>"
@@ -764,6 +758,7 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
       "B3Kielivalikoima": [],
       "aidinkieliKielivalikoima": [],
       "ammatillinenPerustutkintoErityisopetuksena": false,
+      "apuraha": {},
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
       "koulutuksenAlkamiskausiUUSI": {
@@ -788,7 +783,6 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
       "maksunMaara": 20,
       "muuKielivalikoima": [],
       "onkoMaksullinen": true,
-      "onkoStipendia": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -807,8 +801,6 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
       "opetustapaKuvaus": {
         "fi": "<p>Opetustapa kuvaus</p>"
       },
-      "stipendinKuvaus": {},
-      "stipendinMaara": null,
       "suunniteltuKestoKuukaudet": 6,
       "suunniteltuKestoKuvaus": {
         "fi": "<p>Fi suunniteltuKestoKuvaus</p>"
@@ -921,6 +913,7 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
         "kieli_4#1"
       ],
       "ammatillinenPerustutkintoErityisopetuksena": false,
+      "apuraha": {},
       "diplomiKoodiUrit": [
         "lukiodiplomit_1#1"
       ],
@@ -951,7 +944,6 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
         "kieli_4#1"
       ],
       "onkoMaksullinen": true,
-      "onkoStipendia": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -970,8 +962,6 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
       "opetustapaKuvaus": {
         "fi": "<p>Opetustapa kuvaus</p>"
       },
-      "stipendinKuvaus": {},
-      "stipendinMaara": null,
       "suunniteltuKestoKuukaudet": 6,
       "suunniteltuKestoKuvaus": {
         "fi": "<p>Fi suunniteltuKestoKuvaus</p>"
@@ -1061,6 +1051,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
       "B3Kielivalikoima": [],
       "aidinkieliKielivalikoima": [],
       "ammatillinenPerustutkintoErityisopetuksena": false,
+      "apuraha": {},
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
       "koulutuksenAlkamiskausiUUSI": {
@@ -1085,7 +1076,6 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
       "maksunMaara": 20,
       "muuKielivalikoima": [],
       "onkoMaksullinen": true,
-      "onkoStipendia": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -1104,8 +1094,6 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
       "opetustapaKuvaus": {
         "fi": "<p>Opetustapa kuvaus</p>"
       },
-      "stipendinKuvaus": {},
-      "stipendinMaara": null,
       "suunniteltuKestoKuukaudet": 6,
       "suunniteltuKestoKuvaus": {
         "fi": "<p>Fi suunniteltuKestoKuvaus</p>"

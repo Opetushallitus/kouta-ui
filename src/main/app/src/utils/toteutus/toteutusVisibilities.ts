@@ -1,13 +1,11 @@
 import {
-  KOULUTUSTYYPIT,
+  KOULUTUSTYYPPI,
   TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
 } from '#/src/constants';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 
-type KoulutusTyyppi = typeof KOULUTUSTYYPIT[0];
-
-export const isStipendiVisible = (
-  koulutustyyppi: KoulutusTyyppi,
+export const isApurahaVisible = (
+  koulutustyyppi: KOULUTUSTYYPPI,
   opetuskielet: Array<string> = []
 ) => {
   const isKorkeakoulu = TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT.some(

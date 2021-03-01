@@ -3,11 +3,11 @@ import _fp from 'lodash/fp';
 import { serializeEditorState } from '#/src/components/Editor/utils';
 import { HAKULOMAKETYYPPI } from '#/src/constants';
 import { ToteutusFormValues } from '#/src/types/toteutusTypes';
-import { isNumeric, isPartialDate, maybeParseNumber } from '#/src/utils';
+import { isPartialDate, maybeParseNumber } from '#/src/utils';
 import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
 import serializeSisaltoField from '#/src/utils/form/serializeSisaltoField';
 
-import { isStipendiVisible } from './toteutusVisibilities';
+import { isApurahaVisible } from './toteutusVisibilities';
 
 const { MUU, EI_SAHKOISTA_HAKUA } = HAKULOMAKETYYPPI;
 
@@ -49,10 +49,9 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
     values?.osaamisalat?.osaamisalaLinkkiOtsikot || {};
 
   const opetuskielet = values?.jarjestamistiedot?.opetuskieli;
-  const stipendiVisible = isStipendiVisible(koulutustyyppi, opetuskielet);
-  const onkoStipendia = values?.jarjestamistiedot?.onkoStipendia === 'kylla';
 
   const ajankohta = values?.jarjestamistiedot?.ajankohta;
+  const apurahaVisible = isApurahaVisible(koulutustyyppi, opetuskielet);
 
   return {
     nimi: pickTranslations(values?.tiedot?.nimi || {}),
@@ -99,19 +98,17 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
           pickTranslations,
           _fp.mapValues(serializeEditorState)
         )(values?.jarjestamistiedot?.maksullisuusKuvaus || {}),
-        onkoStipendia: stipendiVisible && onkoStipendia,
-        stipendinKuvaus: _fp.flow(
-          pickTranslations,
-          _fp.mapValues(serializeEditorState)
-        )(
-          (stipendiVisible && values?.jarjestamistiedot?.stipendinKuvaus) || {}
-        ),
-        stipendinMaara:
-          stipendiVisible &&
-          onkoStipendia &&
-          isNumeric(values?.jarjestamistiedot?.stipendinMaara)
-            ? maybeParseNumber(values.jarjestamistiedot.stipendinMaara)
-            : null,
+        apuraha:
+          apurahaVisible && values?.jarjestamistiedot?.apurahaTyyppi
+            ? {
+                tyyppi: values?.jarjestamistiedot?.apurahaTyyppi,
+                kuvaus: _fp.flow(
+                  pickTranslations,
+                  _fp.mapValues(serializeEditorState)
+                )(values?.jarjestamistiedot?.apurahaKuvaus || {}),
+                maara: maybeParseNumber(values.jarjestamistiedot?.apurahaMaara),
+              }
+            : {},
         diplomiKoodiUrit: (values?.jarjestamistiedot?.diplomiTyypit || []).map(
           _fp.prop('value')
         ),

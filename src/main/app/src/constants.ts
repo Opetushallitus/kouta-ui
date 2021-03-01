@@ -288,3 +288,9 @@ export const LUKIO_OPPILAITOSTYYPIT = [
   'oppilaitostyyppi_15#1', // Lukiot
   'oppilaitostyyppi_19#1', // Perus- ja lukioasteen koulut
 ];
+
+export enum ApurahaTyyppi {
+  EI_KAYTOSSA = 'ei käytössä',
+  STIPENDI = 'stipendi',
+  KOULUTUSSETELI = 'koulutusseteli',
+}

@@ -152,11 +152,11 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
         }
         return acc;
       }, {})(lisatiedot),
-      onkoStipendia: opetus?.onkoStipendia ? 'kylla' : 'ei',
-      stipendinMaara: opetus?.stipendinMaara,
-      stipendinKuvaus: _fp.mapValues(
+      apurahaTyyppi: opetus?.apuraha?.tyyppi,
+      apurahaMaara: opetus?.apuraha?.maara,
+      apurahaKuvaus: _fp.mapValues(
         parseEditorState,
-        opetus?.stipendinKuvaus || {}
+        opetus?.apuraha?.kuvaus || {}
       ),
       diplomiTyypit: _fp.map(toSelectValue)(diplomiKoodiUrit),
       diplomiKuvaus: _fp.mapValues(parseEditorState, diplomiKuvaus ?? {}),

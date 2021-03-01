@@ -1,6 +1,6 @@
 import { KOULUTUSTYYPPI } from '#/src/constants';
 
-import { isStipendiVisible } from './toteutusVisibilities';
+import { isApurahaVisible } from './toteutusVisibilities';
 
 test.each([
   [KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS, [], false],
@@ -12,6 +12,6 @@ test.each([
   ],
 
   [KOULUTUSTYYPPI.AMKKOULUTUS, ['oppilaitoksenopetuskieli_4#1'], true],
-])('isStipendiVisible', (tyyppi, languages, expected) =>
-  expect(isStipendiVisible(tyyppi, languages)).toEqual(expected)
+])('isApurahaVisible', (tyyppi, languages, expected) =>
+  expect(isApurahaVisible(tyyppi, languages)).toEqual(expected)
 );

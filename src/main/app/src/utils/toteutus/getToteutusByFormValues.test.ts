@@ -1,6 +1,7 @@
 import { parseEditorState } from '#/src/components/Editor/utils';
 import {
   Alkamiskausityyppi,
+  ApurahaTyyppi,
   Hakeutumistapa,
   HAKULOMAKETYYPPI,
   JULKAISUTILA,
@@ -81,10 +82,11 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
         },
       },
       onkoStipendia: 'kylla',
-      stipendinMaara: 20,
-      stipendinKuvaus: {
-        fi: parseEditorState('Fi stipendikuvaus'),
-        sv: parseEditorState('Sv stipendikuvaus'),
+      apurahaTyyppi: ApurahaTyyppi.STIPENDI,
+      apurahaMaara: 20,
+      apurahaKuvaus: {
+        fi: parseEditorState('Fi apurahakuvaus'),
+        sv: parseEditorState('Sv apurahakuvaus'),
       },
       diplomiTyypit: [{ value: 'diplomi_1#1' }, { value: 'diplomi_2#1' }],
       diplomiKuvaus: {

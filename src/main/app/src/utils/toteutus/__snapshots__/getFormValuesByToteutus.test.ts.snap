@@ -68,6 +68,12 @@ Object {
         "value": 2020,
       },
     },
+    "apurahaKuvaus": Object {
+      "fi": "<p>Fi apurahakuvaus</p>",
+      "sv": "<p>Sv apurahakuvaus</p>",
+    },
+    "apurahaMaara": 20,
+    "apurahaTyyppi": "stipendi",
     "diplomiKuvaus": Object {
       "fi": "<p>Fi diplomi</p>",
       "sv": "<p>Sv diplomi</p>",
@@ -91,7 +97,6 @@ Object {
         "value": "kieli_6#1",
       },
     ],
-    "onkoStipendia": "kylla",
     "opetusaika": Array [
       "opetusaika_1#1",
     ],
@@ -133,11 +138,6 @@ Object {
         "value": "osio_2#1",
       },
     ],
-    "stipendinKuvaus": Object {
-      "fi": "<p>Fi stipendikuvaus</p>",
-      "sv": "<p>Sv stipendikuvaus</p>",
-    },
-    "stipendinMaara": 20,
     "suunniteltuKesto": Object {
       "kuukautta": 6,
       "vuotta": 2,

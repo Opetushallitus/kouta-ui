@@ -3,7 +3,6 @@ import React, { useMemo } from 'react';
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
-import styled from 'styled-components';
 
 import FieldGroup from '#/src/components/FieldGroup';
 import { Flex, FlexItem } from '#/src/components/Flex';
@@ -17,8 +16,13 @@ import {
 } from '#/src/components/formFields';
 import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenAloitusajankohtaFields';
 import Spacing from '#/src/components/Spacing';
-import { FormLabel, InputIcon } from '#/src/components/virkailija';
-import { ApurahaTyyppi } from '#/src/constants';
+import { Box, FormLabel } from '#/src/components/virkailija';
+import {
+  ApurahaMaaraTyyppi,
+  ApurahaTyyppi,
+  ApurahaYksikko,
+  NDASH,
+} from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
@@ -96,19 +100,35 @@ const OsiotFields = ({ language, osiotOptions, name }) => {
   );
 };
 
-const ExtraFieldWrapper = styled.div`
-  max-width: 250px;
-  width: 100%;
-`;
+const APURAHA_YKSIKKO_OPTIONS = [
+  {
+    label: '€',
+    value: ApurahaYksikko.EURO,
+  },
+  {
+    label: '%',
+    value: ApurahaYksikko.PROSENTTI,
+  },
+];
 
-const ExtraField = ({ children = null }: { children: JSX.Element | null }) => (
-  <ExtraFieldWrapper>{children}</ExtraFieldWrapper>
-);
+const ApurahaYksikkoField = ({ name }) => {
+  return (
+    <Field
+      name={name}
+      component={FormFieldSelect}
+      placeholder={null}
+      isClearable={false}
+      isSearchable={false}
+      options={APURAHA_YKSIKKO_OPTIONS}
+    />
+  );
+};
 
 const ApurahaFields = ({ koulutustyyppi, language, name }) => {
   const { t } = useTranslation();
-  const apurahoitusValue = useFieldValue<ApurahaTyyppi>(
-    `${name}.apurahaTyyppi`
+  const apurahaValue = useFieldValue<ApurahaTyyppi>(`${name}.apurahaTyyppi`);
+  const apurahaMaaraTyyppi = useFieldValue<ApurahaTyyppi>(
+    `${name}.apurahaMaaraTyyppi`
   );
   const opetuskieliArr = useFieldValue<Array<string>>(`${name}.opetuskieli`);
 
@@ -119,10 +139,7 @@ const ApurahaFields = ({ koulutustyyppi, language, name }) => {
   }
 
   return (
-    <FieldGroup
-      name={`${name}.apurahaGroup`}
-      title={t('toteutuslomake.apuraha')}
-    >
+    <FieldGroup title={t('toteutuslomake.apuraha')}>
       <Flex {...getTestIdProps('apuraha')}>
         <FlexItem grow={0} basis="30%">
           <Field
@@ -135,8 +152,8 @@ const ApurahaFields = ({ koulutustyyppi, language, name }) => {
                 value: ApurahaTyyppi.EI_KAYTOSSA,
               },
               {
-                label: t('toteutuslomake.stipendit'),
-                value: ApurahaTyyppi.STIPENDI,
+                label: t('toteutuslomake.apuraha'),
+                value: ApurahaTyyppi.APURAHA,
               },
               {
                 label: t('toteutuslomake.koulutussetelit'),
@@ -144,17 +161,60 @@ const ApurahaFields = ({ koulutustyyppi, language, name }) => {
               },
             ]}
           />
-          {apurahoitusValue !== ApurahaTyyppi.EI_KAYTOSSA && (
-            <Spacing marginTop={1} {...getTestIdProps('apurahaMaara')}>
-              <ExtraField>
+          {apurahaValue && apurahaValue !== ApurahaTyyppi.EI_KAYTOSSA && (
+            <Spacing
+              marginTop={1}
+              {...getTestIdProps('apurahaMaara')}
+              width="200px"
+            >
+              <legend>{t('toteutuslomake.syotaApurahanMaara')} *</legend>
+              <Box mt={1}>
                 <Field
-                  name={`${name}.apurahaMaara`}
-                  component={FormFieldInput}
-                  placeholder={t('yleiset.maara')}
-                  helperText={t('toteutuslomake.apurahaMaaraHelperText')}
-                  type="number"
+                  name={`${name}.apurahaMaaraTyyppi`}
+                  component={FormFieldSelect}
+                  isClearable={false}
+                  isSearchable={false}
+                  options={[
+                    {
+                      label: t('toteutuslomake.yksiArvo'),
+                      value: ApurahaMaaraTyyppi.YKSI_ARVO,
+                    },
+                    {
+                      label: t('toteutuslomake.vaihteluvali'),
+                      value: ApurahaMaaraTyyppi.VAIHTELUVALI,
+                    },
+                  ]}
                 />
-              </ExtraField>
+              </Box>
+              <Flex mt={1} alignCenter justifyBetween>
+                <FlexItem basis="60px" grow={1} data-testid="apurahaMin">
+                  <Field
+                    name={`${name}.apurahaMin`}
+                    placeholder="Min"
+                    component={FormFieldInput}
+                    type="number"
+                  />
+                </FlexItem>
+                {apurahaMaaraTyyppi?.value ===
+                  ApurahaMaaraTyyppi.VAIHTELUVALI && (
+                  <>
+                    <Box style={{ textAlign: 'center', width: '20px' }}>
+                      {NDASH}
+                    </Box>
+                    <FlexItem basis="60px" grow={1}>
+                      <Field
+                        name={`${name}.apurahaMax`}
+                        placeholder="Max"
+                        component={FormFieldInput}
+                        type="number"
+                      />
+                    </FlexItem>
+                  </>
+                )}
+                <Box ml={1} style={{ width: '70px' }}>
+                  <ApurahaYksikkoField name={`${name}.apurahaYksikko`} />
+                </Box>
+              </Flex>
             </Spacing>
           )}
         </FlexItem>

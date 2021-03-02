@@ -2,6 +2,8 @@ import _fp from 'lodash/fp';
 
 import {
   Alkamiskausityyppi,
+  ApurahaMaaraTyyppi,
+  ApurahaTyyppi,
   HAKULOMAKETYYPPI,
   JULKAISUTILA,
   KOULUTUSTYYPIT,
@@ -297,7 +299,15 @@ const config = createFormConfigBuilder().registerSections([
       }),
       {
         field: '.apurahaTyyppi',
-        required: true,
+      },
+      {
+        field: '.apurahaYksikko',
+      },
+      {
+        field: '.apurahaMin',
+      },
+      {
+        field: '.apurahaMax',
       },
       createOptionalTranslatedFieldConfig({
         name: 'jarjestamistiedot.apurahaKuvaus',

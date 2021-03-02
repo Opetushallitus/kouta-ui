@@ -72,8 +72,15 @@ Object {
       "fi": "<p>Fi apurahakuvaus</p>",
       "sv": "<p>Sv apurahakuvaus</p>",
     },
-    "apurahaMaara": 20,
-    "apurahaTyyppi": "stipendi",
+    "apurahaMaaraTyyppi": Object {
+      "value": "range",
+    },
+    "apurahaMax": 200,
+    "apurahaMin": 100,
+    "apurahaTyyppi": "apuraha",
+    "apurahaYksikko": Object {
+      "value": "euroa",
+    },
     "diplomiKuvaus": Object {
       "fi": "<p>Fi diplomi</p>",
       "sv": "<p>Sv diplomi</p>",

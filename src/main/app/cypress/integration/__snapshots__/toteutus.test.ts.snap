@@ -320,8 +320,10 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
         "kuvaus": {
           "fi": "<p>apuraha kuvaus</p>"
         },
-        "maara": 20,
-        "tyyppi": "stipendi"
+        "max": 20,
+        "min": 20,
+        "tyyppi": "apuraha",
+        "yksikko": "euroa"
       },
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},

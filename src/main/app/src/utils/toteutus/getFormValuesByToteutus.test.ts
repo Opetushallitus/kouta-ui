@@ -1,6 +1,7 @@
 import {
   Alkamiskausityyppi,
   ApurahaTyyppi,
+  ApurahaYksikko,
   JULKAISUTILA,
 } from '#/src/constants';
 import getFormValuesByToteutus from '#/src/utils/toteutus/getFormValuesByToteutus';
@@ -110,12 +111,14 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
           sv: 'Sv tapakuvaus',
         },
         apuraha: {
-          tyyppi: ApurahaTyyppi.STIPENDI,
-          maara: 20,
+          tyyppi: ApurahaTyyppi.APURAHA,
+          min: 100,
+          max: 200,
           kuvaus: {
             fi: 'Fi apurahakuvaus',
             sv: 'Sv apurahakuvaus',
           },
+          yksikko: ApurahaYksikko.EURO,
         },
         diplomiKoodiUrit: ['dipmlomi_1#1'],
         diplomiKuvaus: {

@@ -1,7 +1,11 @@
 import _fp from 'lodash/fp';
 
 import { serializeEditorState } from '#/src/components/Editor/utils';
-import { HAKULOMAKETYYPPI } from '#/src/constants';
+import {
+  ApurahaMaaraTyyppi,
+  ApurahaTyyppi,
+  HAKULOMAKETYYPPI,
+} from '#/src/constants';
 import { ToteutusFormValues } from '#/src/types/toteutusTypes';
 import { isPartialDate, maybeParseNumber } from '#/src/utils';
 import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
@@ -51,6 +55,9 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
   const opetuskielet = values?.jarjestamistiedot?.opetuskieli;
 
   const ajankohta = values?.jarjestamistiedot?.ajankohta;
+  const apurahaTyyppi = values?.jarjestamistiedot?.apurahaTyyppi;
+  const apurahaMaaraTyyppi =
+    values?.jarjestamistiedot?.apurahaMaaraTyyppi?.value;
   const apurahaVisible = isApurahaVisible(koulutustyyppi, opetuskielet);
 
   return {
@@ -99,14 +106,26 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
           _fp.mapValues(serializeEditorState)
         )(values?.jarjestamistiedot?.maksullisuusKuvaus || {}),
         apuraha:
-          apurahaVisible && values?.jarjestamistiedot?.apurahaTyyppi
+          apurahaVisible && apurahaTyyppi
             ? {
-                tyyppi: values?.jarjestamistiedot?.apurahaTyyppi,
+                tyyppi: apurahaTyyppi,
                 kuvaus: _fp.flow(
                   pickTranslations,
                   _fp.mapValues(serializeEditorState)
                 )(values?.jarjestamistiedot?.apurahaKuvaus || {}),
-                maara: maybeParseNumber(values.jarjestamistiedot?.apurahaMaara),
+                ...(apurahaTyyppi !== ApurahaTyyppi.EI_KAYTOSSA
+                  ? {
+                      min: maybeParseNumber(
+                        values.jarjestamistiedot?.apurahaMin
+                      ),
+                      max: maybeParseNumber(
+                        apurahaMaaraTyyppi === ApurahaMaaraTyyppi.YKSI_ARVO
+                          ? values?.jarjestamistiedot?.apurahaMin
+                          : values?.jarjestamistiedot?.apurahaMax
+                      ),
+                      yksikko: values?.jarjestamistiedot?.apurahaYksikko?.value,
+                    }
+                  : {}),
               }
             : {},
         diplomiKoodiUrit: (values?.jarjestamistiedot?.diplomiTyypit || []).map(

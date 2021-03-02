@@ -291,6 +291,16 @@ export const LUKIO_OPPILAITOSTYYPIT = [
 
 export enum ApurahaTyyppi {
   EI_KAYTOSSA = 'ei käytössä',
-  STIPENDI = 'stipendi',
-  KOULUTUSSETELI = 'koulutusseteli',
+  APURAHA = 'apuraha',
+  KOULUTUSSETELI = 'koulutussetelit',
+}
+
+export enum ApurahaMaaraTyyppi {
+  YKSI_ARVO = 'single',
+  VAIHTELUVALI = 'range',
+}
+
+export enum ApurahaYksikko {
+  EURO = 'euroa',
+  PROSENTTI = 'prosenttia',
 }

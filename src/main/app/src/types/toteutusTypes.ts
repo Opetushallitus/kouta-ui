@@ -5,6 +5,8 @@ import {
   HAKULOMAKETYYPPI,
   Hakeutumistapa,
   ApurahaTyyppi,
+  ApurahaMaaraTyyppi,
+  ApurahaYksikko,
 } from '#/src/constants';
 
 import { AjankohtaFields } from './formTypes';
@@ -63,9 +65,12 @@ export type ToteutusFormValues = {
     maksullisuusKuvaus: Kuvaus;
     osiot: Array<{ value: string }>;
     osioKuvaukset: Record<string, any>;
-    apurahaTyyppi: ApurahaTyyppi;
-    apurahaMaara: number;
-    apurahaKuvaus: Kuvaus;
+    apurahaTyyppi?: ApurahaTyyppi;
+    apurahaMaaraTyyppi?: SelectOption<ApurahaMaaraTyyppi>;
+    apurahaMin?: number;
+    apurahaMax?: number;
+    apurahaKuvaus?: Kuvaus;
+    apurahaYksikko?: SelectOption<ApurahaYksikko>;
     diplomiTyypit: Array<SelectOption | undefined>;
     diplomiKuvaus: Kuvaus;
     A1A2Kielet: Array<SelectOption | undefined>;

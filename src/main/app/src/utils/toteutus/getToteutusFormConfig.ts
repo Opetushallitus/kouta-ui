@@ -304,9 +304,6 @@ const config = createFormConfigBuilder().registerSections([
       }),
       {
         field: '.ajankohta.ajankohtaTyyppi',
-        validate: validateIfJulkaistu(
-          validateExistence('jarjestamistiedot.ajankohta.ajankohtaTyyppi')
-        ),
       },
       {
         field: '.ajankohta.kausi',

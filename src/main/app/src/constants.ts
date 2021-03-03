@@ -292,7 +292,6 @@ export const LUKIO_OPPILAITOSTYYPIT = [
 export enum ApurahaTyyppi {
   EI_KAYTOSSA = 'ei käytössä',
   APURAHA = 'apuraha',
-  KOULUTUSSETELI = 'koulutussetelit',
 }
 
 export enum ApurahaMaaraTyyppi {

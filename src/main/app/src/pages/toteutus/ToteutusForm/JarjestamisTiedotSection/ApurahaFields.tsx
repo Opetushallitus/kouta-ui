@@ -79,10 +79,6 @@ export const ApurahaFields = ({ koulutustyyppi, language, name }) => {
                 label: t('toteutuslomake.apuraha'),
                 value: ApurahaTyyppi.APURAHA,
               },
-              {
-                label: t('toteutuslomake.koulutussetelit'),
-                value: ApurahaTyyppi.KOULUTUSSETELI,
-              },
             ]}
           />
           {apurahaValue && apurahaValue !== ApurahaTyyppi.EI_KAYTOSSA && (

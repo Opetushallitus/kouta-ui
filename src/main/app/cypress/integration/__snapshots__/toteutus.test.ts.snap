@@ -1,6 +1,6 @@
 exports[`createToteutus > should be able to create ammatillinen tutkinnon osa toteutus #0`] =
 {
-  "esikatselu": null,
+  "esikatselu": false,
   "kielivalinta": [
     "fi"
   ],
@@ -132,7 +132,7 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
 
 exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
 {
-  "esikatselu": null,
+  "esikatselu": false,
   "kielivalinta": [
     "fi"
   ],
@@ -268,7 +268,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
 
 exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
 {
-  "esikatselu": null,
+  "esikatselu": false,
   "kielivalinta": [
     "fi"
   ],
@@ -427,7 +427,7 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
 
 exports[`createToteutus > should be able to create lukio toteutus #0`] =
 {
-  "esikatselu": null,
+  "esikatselu": false,
   "kielivalinta": [
     "fi"
   ],

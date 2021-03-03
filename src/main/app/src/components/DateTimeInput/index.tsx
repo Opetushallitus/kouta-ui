@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect, useCallback } from 'react';
 import _ from 'lodash';
 
 import DatePickerInput from '#/src/components/DatePickerInput';
-import Flex, { FlexItem } from '#/src/components/Flex';
+import { Flex, FlexItem } from '#/src/components/Flex';
 import TimeInput from '#/src/components/TimeInput';
 import { FormControl, FormLabel } from '#/src/components/virkailija';
 import {

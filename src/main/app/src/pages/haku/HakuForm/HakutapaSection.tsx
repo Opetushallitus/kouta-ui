@@ -6,7 +6,7 @@ import { Field } from 'redux-form';
 import { FormFieldRadioGroup } from '#/src/components/formFields';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 
-const TargetGroupSection = ({ name }) => {
+export const HakutapaSection = ({ name }) => {
   const { options } = useKoodistoOptions({ koodisto: 'hakutapa' });
   const { t } = useTranslation();
 
@@ -19,5 +19,3 @@ const TargetGroupSection = ({ name }) => {
     />
   );
 };
-
-export default TargetGroupSection;

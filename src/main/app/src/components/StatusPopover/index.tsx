@@ -3,7 +3,7 @@ import React from 'react';
 import _ from 'lodash';
 import styled, { css } from 'styled-components';
 
-import Flex, { FlexItem } from '#/src/components/Flex';
+import { Flex, FlexItem } from '#/src/components/Flex';
 import { Dropdown, Icon, Typography } from '#/src/components/virkailija';
 import { getThemeProp, spacing } from '#/src/theme';
 

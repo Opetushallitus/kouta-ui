@@ -51,7 +51,7 @@ export const editValintaperusteForm = () => {
     });
   });
 
-  it("Shouldn't complain about unsaved changed for untouched form", () => {
+  it("Shouldn't complain about unsaved changes for untouched form", () => {
     prepareTest('amm');
     assertNoUnsavedChangesDialog();
   });

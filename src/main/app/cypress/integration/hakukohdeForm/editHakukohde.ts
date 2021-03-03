@@ -34,7 +34,7 @@ export const editHakukohdeForm = () => {
     });
   });
 
-  it("Shouldn't complain about unsaved changed for untouched form", () => {
+  it("Shouldn't complain about unsaved changes for untouched form", () => {
     prepareTest({
       tyyppi: 'amm',
       hakuOid,

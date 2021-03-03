@@ -119,7 +119,7 @@ export const FormFieldImageInput = createComponent(
 
 export const FormFieldKoulutustyyppiSelect = createComponent(
   KoulutustyyppiSelect,
-  selectMapProps
+  simpleMapProps
 );
 
 export const FormFieldKoulutusalaSelect = createComponent(

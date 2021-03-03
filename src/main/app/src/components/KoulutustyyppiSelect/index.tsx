@@ -6,15 +6,47 @@ import styled from 'styled-components';
 
 import SegmentTab from '#/src/components/SegmentTab';
 import SegmentTabs from '#/src/components/SegmentTabs';
-import { Box, RadioGroup } from '#/src/components/virkailija';
+import { Box, Radio, RadioGroup } from '#/src/components/virkailija';
 import {
-  TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA,
-  TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA,
-  TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
+  KOULUTUSTYYPIT,
   KOULUTUSTYYPPI,
+  TUTKINTOON_JOHTAMATTOMAT_KORKEAKOULU_KOULUTUSTYYPIT,
+  TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
+  TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
+  TUTKINTOON_JOHTAMATTOMAT_AMMATILLISET_KOULUTUSTYYPIT,
 } from '#/src/constants';
 import { spacing, getThemeProp } from '#/src/theme';
 import { getTestIdProps } from '#/src/utils';
+import iterateTree, { Order } from '#/src/utils/iterateTree';
+
+export const TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA = [
+  { value: KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS },
+  {
+    value: 'korkeakoulutus',
+    children: TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT.map(kt => ({
+      value: kt,
+    })),
+  },
+  { value: KOULUTUSTYYPPI.LUKIOKOULUTUS },
+];
+
+export const TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA = [
+  {
+    value: 'ammatillinen',
+    children: TUTKINTOON_JOHTAMATTOMAT_AMMATILLISET_KOULUTUSTYYPIT.map(kt => ({
+      value: kt,
+    })),
+  },
+  {
+    value: 'korkeakoulutus',
+    children: TUTKINTOON_JOHTAMATTOMAT_KORKEAKOULU_KOULUTUSTYYPIT.map(kt => ({
+      value: kt,
+    })),
+  },
+  { value: KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO },
+  { value: KOULUTUSTYYPPI.LUVA },
+  { value: KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS },
+];
 
 const SecondLevelContainer = styled(Box).attrs({ flexGrow: 0 })`
   margin-left: ${spacing(4)};
@@ -24,110 +56,137 @@ const SecondLevelContainer = styled(Box).attrs({ flexGrow: 0 })`
 
 const getTranslationKey = tyyppi => `koulutustyypit.${_.camelCase(tyyppi)}`;
 
-const getFirstLevelOptions = (hierarkia, t) => {
-  return _.isArray(hierarkia)
-    ? hierarkia.map(({ tyyppi }) => ({
-        value: tyyppi,
-        label: t(getTranslationKey(tyyppi)),
-      }))
-    : [];
-};
-
-const getSecondLevelOptions = (hierarkia, firstLevelValue, t) => {
-  const node = hierarkia.find(({ tyyppi }) => tyyppi === firstLevelValue);
-
-  if (!node) {
-    return [];
-  }
-
-  return (node.children || []).map(({ tyyppi }) => ({
-    value: tyyppi,
-    label: t(getTranslationKey(tyyppi)),
+const useFirstLevelOptions = (hierarkia, t) =>
+  _.map(hierarkia, ({ value, disabled }) => ({
+    value,
+    label: t(getTranslationKey(value)),
+    disabled,
   }));
+
+const useSecondLevelOptions = (hierarkia, firstLevelValue, t) => {
+  return useMemo(() => {
+    const node = hierarkia.find(({ value }) => value === firstLevelValue);
+
+    return _.map(node?.children, ({ value, disabled }) => ({
+      value,
+      label: t(getTranslationKey(value)),
+      disabled,
+    }));
+  }, [hierarkia, firstLevelValue, t]);
 };
 
-const getFirstLevelValue = (hierarkia, value) => {
-  let node = hierarkia.find(({ tyyppi }) => tyyppi === value);
+const getFirstLevelValue = (hierarkia, selectedValue) => {
+  let node = hierarkia.find(({ value }) => value === selectedValue);
 
   if (node) {
-    return node.tyyppi;
+    return node.value;
   }
 
   node = hierarkia.find(({ children }) =>
-    Boolean((children || []).find(({ tyyppi }) => tyyppi === value))
+    _.some(children, ({ value }) => value === selectedValue)
   );
 
-  return node ? node.tyyppi : undefined;
+  return node?.value;
 };
 
-export const KoulutustyyppiSelect = ({ value, onChange, error, disabled }) => {
-  const [johtaaTutkintoon, setJohtaaTutkintoon] = useState(
-    TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT.includes(value)
+const useHierarkia = (johtaaTutkintoon, getIsDisabled) =>
+  useMemo(() => {
+    const hierarkiaCopy = _.cloneDeep(
+      johtaaTutkintoon
+        ? TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA
+        : TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA
+    );
+
+    iterateTree(
+      hierarkiaCopy,
+      item => {
+        // Disable leaves (value is koulutustyyppi) from koulutustyyppi hierarkia based on getIsDisabled().
+        // Disable first level if all of its children are disabled.
+        // This works because leaves are iterated first
+        item.disabled =
+          (KOULUTUSTYYPIT.includes(item.value) && getIsDisabled(item.value)) ||
+          (item?.children &&
+            _.every(item.children, ({ disabled }) => disabled));
+      },
+      { order: Order.BottomUp }
+    );
+    return hierarkiaCopy;
+  }, [getIsDisabled, johtaaTutkintoon]);
+
+const KoulutustyyppiRadioGroup = ({
+  value,
+  onChange,
+  error,
+  options,
+  disabled,
+}) => {
+  return (
+    <RadioGroup value={value} onChange={onChange} error={error}>
+      {options.map(({ label, value: radioValue, disabled: radioDisabled }) => {
+        return (
+          <Radio
+            value={radioValue}
+            disabled={disabled || radioDisabled}
+            key={radioValue}
+          >
+            {label}
+          </Radio>
+        );
+      })}
+    </RadioGroup>
   );
+};
+
+export const KoulutustyyppiSelect = ({
+  value,
+  onChange,
+  error,
+  disabled,
+  getIsDisabled = () => false,
+}) => {
+  const [johtaaTutkintoon, setJohtaaTutkintoon] = useState(true);
 
   const [firstLevelValue, setFirstLevelValue] = useState();
   const { t } = useTranslation();
 
-  const hierarkia = useMemo(() => {
-    return johtaaTutkintoon
-      ? TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA
-      : TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA;
-  }, [johtaaTutkintoon]);
+  const hierarkia = useHierarkia(johtaaTutkintoon, getIsDisabled);
 
   useEffect(() => {
-    setJohtaaTutkintoon(TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT.includes(value));
+    if (value) {
+      setJohtaaTutkintoon(TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT.includes(value));
+    }
   }, [value]);
 
   useEffect(() => {
-    setFirstLevelValue(getFirstLevelValue(hierarkia, value));
+    if (KOULUTUSTYYPIT.includes(value)) {
+      setFirstLevelValue(getFirstLevelValue(hierarkia, value));
+    }
   }, [hierarkia, value]);
 
-  const firstLevelOptions = useMemo(() => getFirstLevelOptions(hierarkia, t), [
-    hierarkia,
-    t,
-  ]);
+  const firstLevelOptions = useFirstLevelOptions(hierarkia, t);
 
-  const secondLevelOptions = useMemo(
-    () => getSecondLevelOptions(hierarkia, firstLevelValue, t),
-    [hierarkia, firstLevelValue, t]
+  const secondLevelOptions = useSecondLevelOptions(
+    hierarkia,
+    firstLevelValue,
+    t
   );
 
   const onFirstLevelValueChange = useCallback(
     e => {
-      const node = hierarkia.find(({ tyyppi }) => tyyppi === e.target.value);
+      const currentValue = e.target.value;
 
-      setFirstLevelValue(node.tyyppi);
+      setFirstLevelValue(currentValue);
 
-      if (_.isEmpty(node.children)) {
-        onChange(e.target.value);
+      if (KOULUTUSTYYPIT.includes(currentValue)) {
+        onChange(currentValue);
       } else {
-        onChange(node.children[0].tyyppi);
+        onChange(null);
       }
     },
-    [setFirstLevelValue, onChange, hierarkia]
+    [setFirstLevelValue, onChange]
   );
 
   const hasSecondLevelOptions = !_.isEmpty(secondLevelOptions);
-
-  const onTutkintoonJohtavatClick = useCallback(() => {
-    if (!johtaaTutkintoon) {
-      onChange(KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS);
-    }
-
-    setJohtaaTutkintoon(true);
-  }, [onChange, johtaaTutkintoon]);
-
-  const onMuutClick = useCallback(() => {
-    if (johtaaTutkintoon) {
-      onChange(KOULUTUSTYYPPI.VALMA);
-    }
-
-    setJohtaaTutkintoon(false);
-  }, [onChange, johtaaTutkintoon]);
-
-  const onSecondLevelValueChange = useCallback(e => onChange(e.target.value), [
-    onChange,
-  ]);
 
   return (
     <>
@@ -135,31 +194,40 @@ export const KoulutustyyppiSelect = ({ value, onChange, error, disabled }) => {
         <SegmentTabs value={johtaaTutkintoon ? 'tutkintoon_johtavat' : 'muut'}>
           <SegmentTab
             value="tutkintoon_johtavat"
-            onClick={onTutkintoonJohtavatClick}
+            onClick={() => {
+              setJohtaaTutkintoon(true);
+            }}
           >
             {t('koulutustyyppivalikko.tutkintoonJohtavatKoulutustyypit')}
           </SegmentTab>
-          <SegmentTab value="muut" onClick={onMuutClick} disabled={disabled}>
+          <SegmentTab
+            value="muut"
+            onClick={() => {
+              setJohtaaTutkintoon(false);
+            }}
+            disabled={disabled}
+          >
             {t('koulutustyyppivalikko.muutKoulutustyypit')}
           </SegmentTab>
         </SegmentTabs>
       </Box>
       <Box display="flex">
         <Box flexGrow={0} {...getTestIdProps('koulutustyyppi_taso_1')}>
-          <RadioGroup
-            options={firstLevelOptions}
+          <KoulutustyyppiRadioGroup
             value={firstLevelValue}
             onChange={onFirstLevelValueChange}
             error={error}
             disabled={disabled}
+            options={firstLevelOptions}
           />
         </Box>
         {hasSecondLevelOptions && (
           <SecondLevelContainer {...getTestIdProps('koulutustyyppi_taso_2')}>
-            <RadioGroup
+            <KoulutustyyppiRadioGroup
               options={secondLevelOptions}
               value={value}
-              onChange={onSecondLevelValueChange}
+              disabled={disabled}
+              onChange={e => onChange(e.target.value)}
               error={error}
             />
           </SecondLevelContainer>

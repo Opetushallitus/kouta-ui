@@ -46,7 +46,7 @@ export const toastService = interpret(
         empty: {},
         showing: {
           on: {
-            '': {
+            always: {
               target: 'empty',
               cond: 'noToasts',
             },

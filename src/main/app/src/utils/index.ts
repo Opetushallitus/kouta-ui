@@ -185,8 +185,17 @@ const isEmptyTranslatedField = value =>
   !_.isEmpty(_.intersection(_.keys(value), LANGUAGES)) &&
   _.every(value, v => !formValueExists(v));
 
+const copyPathsIfDefined = (source, target, paths) => {
+  _.forEach(paths, path => {
+    const val = _.get(source, path);
+    if (!_.isUndefined(val)) {
+      _.set(target, path, val);
+    }
+  });
+};
+
 // Get form values for saving. Filters out fields that user has hidden.
-// Result can be sassed to get**ByFormValues().
+// Result can be passed to get**ByFormValues().
 export const getValuesForSaving = (
   values: any,
   registeredFields: Record<string, { name: string }>,
@@ -213,12 +222,13 @@ export const getValuesForSaving = (
 
   // Some exceptions (fields that should be saved even though they are not visible)
   // TODO: There might be a few other exceptions. Check before using in other forms and add here.
-  if (values?.koulutustyyppi) {
-    _.set(saveableValues, 'koulutustyyppi', values?.koulutustyyppi);
-  }
-  if (values?.muokkaaja) {
-    _.set(saveableValues, 'muokkaaja', values?.muokkaaja);
-  }
+  copyPathsIfDefined(values, saveableValues, [
+    'esikatselu',
+    'koulutustyyppi',
+    'muokkaaja',
+    'information.nimi',
+  ]);
+
   return saveableValues;
 };
 
@@ -236,6 +246,8 @@ export const retryOnRedirect = async ({ httpClient, targetUrl }) => {
     res = await fn();
     count -= 1;
   }
+
+  // TODO: If still trying to redirect, then return 401
 
   return res?.data;
 };

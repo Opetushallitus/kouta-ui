@@ -3,7 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Button from '#/src/components/Button';
-import Flex from '#/src/components/Flex';
+import { Flex } from '#/src/components/Flex';
 import { useIsSubmitting } from '#/src/hooks/form';
 
 const FormFooter = ({ entity, save, canUpdate = true, submitProps = {} }) => {

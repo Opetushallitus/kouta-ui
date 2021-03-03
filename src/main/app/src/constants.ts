@@ -47,6 +47,22 @@ export const TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT = [
   KOULUTUSTYYPPI.YLIOPISTOKOULUTUS,
 ];
 
+export const TUTKINTOON_JOHTAMATTOMAT_KORKEAKOULU_KOULUTUSTYYPIT = [
+  KOULUTUSTYYPPI.AVOIN_YO,
+  KOULUTUSTYYPPI.AVOIN_AMK,
+  KOULUTUSTYYPPI.TAYDENNYS_KOULUTUS,
+  KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
+  KOULUTUSTYYPPI.VALMENTAVA_KOULUTUS,
+  KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJAKOULUTUS,
+  KOULUTUSTYYPPI.AMMATILLINEN_OPINTO_OHJAAJA_KOULUTUS,
+  KOULUTUSTYYPPI.AMMATILLINEN_ERITYISOPETTAJA_KOULUTUS,
+];
+
+export const KORKEAKOULU_KOULUTUSTYYPIT = [
+  ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
+  ...TUTKINTOON_JOHTAMATTOMAT_KORKEAKOULU_KOULUTUSTYYPIT,
+];
+
 export const TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT = [
   KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
   KOULUTUSTYYPPI.LUKIOKOULUTUS,
@@ -57,51 +73,18 @@ export const TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT = [
   KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
 ];
 
+export const TUTKINTOON_JOHTAMATTOMAT_AMMATILLISET_KOULUTUSTYYPIT = [
+  KOULUTUSTYYPPI.VALMA,
+  KOULUTUSTYYPPI.TELMA,
+  KOULUTUSTYYPPI.TUTKINNON_OSA,
+  KOULUTUSTYYPPI.OSAAMISALA,
+  KOULUTUSTYYPPI.MUUT_KOULUTUKSET,
+];
+
 export const TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT = _.without(
   KOULUTUSTYYPIT,
   ...TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT
 );
-
-export const TUTKINTOON_JOHTAMATON_KOULUTUSTYYPPIHIERARKIA = [
-  {
-    tyyppi: 'ammatillinen',
-    children: [
-      { tyyppi: KOULUTUSTYYPPI.VALMA },
-      { tyyppi: KOULUTUSTYYPPI.TELMA },
-      { tyyppi: KOULUTUSTYYPPI.TUTKINNON_OSA },
-      { tyyppi: KOULUTUSTYYPPI.OSAAMISALA },
-      { tyyppi: KOULUTUSTYYPPI.MUUT_KOULUTUKSET },
-    ],
-  },
-  {
-    tyyppi: 'korkeakoulutus',
-    children: [
-      { tyyppi: KOULUTUSTYYPPI.AVOIN_YO },
-      { tyyppi: KOULUTUSTYYPPI.AVOIN_AMK },
-      { tyyppi: KOULUTUSTYYPPI.TAYDENNYS_KOULUTUS },
-      { tyyppi: KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS },
-      { tyyppi: KOULUTUSTYYPPI.VALMENTAVA_KOULUTUS },
-      { tyyppi: KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJAKOULUTUS },
-      { tyyppi: KOULUTUSTYYPPI.AMMATILLINEN_OPINTO_OHJAAJA_KOULUTUS },
-      { tyyppi: KOULUTUSTYYPPI.AMMATILLINEN_ERITYISOPETTAJA_KOULUTUS },
-    ],
-  },
-  { tyyppi: KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO },
-  { tyyppi: KOULUTUSTYYPPI.LUVA },
-  { tyyppi: KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS },
-];
-
-export const TUTKINTOON_JOHTAVA_KOULUTUSTYYPPIHIERARKIA = [
-  { tyyppi: KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS },
-  {
-    tyyppi: 'korkeakoulutus',
-    children: [
-      { tyyppi: KOULUTUSTYYPPI.YLIOPISTOKOULUTUS },
-      { tyyppi: KOULUTUSTYYPPI.AMKKOULUTUS },
-    ],
-  },
-  { tyyppi: KOULUTUSTYYPPI.LUKIOKOULUTUS },
-];
 
 export const KOULUTUSTYYPPI_TO_KOULUTUSTYYPPI_IDS_MAP = {
   [KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS]: [
@@ -143,20 +126,16 @@ export enum HAKULOMAKETYYPPI {
   EI_SAHKOISTA_HAKUA = 'ei sähköistä',
 }
 
-export const VALINTAPERUSTEET_KIELITAITO_MUU_OSOITUS_KOODI_URI =
-  'kielitaidonosoittaminen_04';
-
 export const POHJAVALINTA = {
   UUSI: 'uusi',
   KOPIO: 'kopio',
-  AIEMPI: 'aiempi',
 };
 
-export const ORGANISAATIOTYYPPI = {
-  KOULUTUSTOIMIJA: 'organisaatiotyyppi_01',
-  OPPILAITOS: 'organisaatiotyyppi_02',
-  TOIMIPISTE: 'organisaatiotyyppi_03',
-};
+export enum ORGANISAATIOTYYPPI {
+  KOULUTUSTOIMIJA = 'organisaatiotyyppi_01',
+  OPPILAITOS = 'organisaatiotyyppi_02',
+  TOIMIPISTE = 'organisaatiotyyppi_03',
+}
 
 export const OPETUSHALLITUS_ORGANISAATIO_OID = '1.2.246.562.10.00000000001';
 
@@ -273,6 +252,7 @@ export const LONG_CACHE_QUERY_OPTIONS = {
   refetchOnWindowFocus: false,
   refetchOnMount: false,
   refetchOnReconned: false,
+  retry: 1,
 };
 
 export enum Alkamiskausityyppi {
@@ -287,3 +267,24 @@ export enum FormMode {
 }
 
 export const NDASH = '\u2013';
+
+export const AMMATILLISET_OPPILAITOSTYYPIT = [
+  'oppilaitostyyppi_21#1', // Ammatilliset oppilaitokset
+  'oppilaitostyyppi_22#1', // Ammatilliset erityisoppilaitokset
+  'oppilaitostyyppi_23#1', // Ammatilliset erikoisoppilaitokset
+  'oppilaitostyyppi_24#1', // Ammatilliset aikuiskoulutuskeskukset
+  'oppilaitostyyppi_28#1', // Palo-, poliisi- ja vartiointialojen oppilaitokset
+  'oppilaitostyyppi_29#1', // Sotilasalan ammatilliset oppilaitokset
+];
+
+export const KORKEAKOULU_OPPILAITOSTYYPIT = [
+  'oppilaitostyyppi_41#1', // Ammattikorkeakoulut
+  'oppilaitostyyppi_42#1', // Yliopistot
+  'oppilaitostyyppi_43#1', // Sotilaskorkeakoulut
+  'oppilaitostyyppi_45#1', // Lastentarhanopettajaopistot
+];
+
+export const LUKIO_OPPILAITOSTYYPIT = [
+  'oppilaitostyyppi_15#1', // Lukiot
+  'oppilaitostyyppi_19#1', // Perus- ja lukioasteen koulut
+];

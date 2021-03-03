@@ -5,7 +5,7 @@ import { Field, FieldArray } from 'redux-form';
 
 import Button from '#/src/components/Button';
 import FieldArrayList from '#/src/components/FieldArrayList';
-import Flex from '#/src/components/Flex';
+import { Flex } from '#/src/components/Flex';
 import {
   FormFieldEditor,
   FormFieldInput,

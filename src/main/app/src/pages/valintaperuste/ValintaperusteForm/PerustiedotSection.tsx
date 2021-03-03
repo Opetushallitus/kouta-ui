@@ -6,14 +6,14 @@ import { getTestIdProps } from '#/src/utils';
 
 import HakutavanRajausSection from './HakutavanRajausSection';
 import KohdejoukonRajausSection from './KohdejoukonRajausSection';
-import TyyppiSection from './TyyppiSection';
+import KoulutustyyppiSection from './KoulutustyyppiSection';
 
 const PerustiedotSection = ({ name, canEditTyyppi = true }) => {
   return (
     <>
       {canEditTyyppi ? (
         <div {...getTestIdProps('koulutustyyppiSection')}>
-          <TyyppiSection name={`${name}.tyyppi`} />
+          <KoulutustyyppiSection name={`${name}.tyyppi`} />
           <Divider marginTop={3} marginBottom={3} />
         </div>
       ) : null}

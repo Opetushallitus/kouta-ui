@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import Button from '#/src/components/Button';
-import Flex, { FlexItem } from '#/src/components/Flex';
+import { Flex, FlexItem } from '#/src/components/Flex';
 import { FormFieldSelect } from '#/src/components/formFields';
 import Modal from '#/src/components/Modal';
 import Spacing from '#/src/components/Spacing';

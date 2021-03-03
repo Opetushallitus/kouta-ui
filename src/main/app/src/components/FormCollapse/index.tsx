@@ -106,6 +106,7 @@ export const FormCollapse = ({
   isOpen = false,
   onToggle,
   Component,
+  hidden = false,
   ...props
 }: FormCollapseProps) => {
   const { t } = useTranslation();
@@ -129,7 +130,7 @@ export const FormCollapse = ({
     collapseOpen: isOpen,
   });
 
-  return (
+  return hidden ? null : (
     <Collapse
       header={header}
       footer={

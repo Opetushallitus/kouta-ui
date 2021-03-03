@@ -3,7 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
-import Flex, { FlexItem } from '#/src/components/Flex';
+import { Flex, FlexItem } from '#/src/components/Flex';
 import { FormFieldDateTimeInput } from '#/src/components/formFields';
 import RemoveButton from '#/src/components/RemoveButton';
 import { getTestIdProps } from '#/src/utils';

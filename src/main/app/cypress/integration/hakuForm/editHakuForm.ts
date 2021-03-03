@@ -53,7 +53,7 @@ export const editHakuForm = () => {
     });
   });
 
-  it("Shouldn't complain about unsaved changed for untouched form", () => {
+  it("Shouldn't complain about unsaved changes for untouched form", () => {
     cy.visit(`/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus`);
     assertNoUnsavedChangesDialog();
   });

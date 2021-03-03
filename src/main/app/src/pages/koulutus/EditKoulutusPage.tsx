@@ -13,17 +13,16 @@ import FullSpin from '#/src/components/FullSpin';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
-import { ENTITY, CRUD_ROLES } from '#/src/constants';
+import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import { useUrls } from '#/src/contexts/contextHooks';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useFieldValue, useEntityFormConfig } from '#/src/hooks/form';
-import useApiAsync from '#/src/hooks/useApiAsync';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import getFormValuesByKoulutus from '#/src/utils/koulutus/getFormValuesByKoulutus';
-import getKoulutusByOid from '#/src/utils/koulutus/getKoulutusByOid';
+import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
 
-import KoulutusForm from '../KoulutusForm';
-import EditKoulutusFooter from './EditKoulutusFooter';
+import { KoulutusFooter } from './KoulutusFooter';
+import KoulutusForm from './KoulutusForm';
 
 const EditKoulutusPage = props => {
   const {
@@ -31,17 +30,9 @@ const EditKoulutusPage = props => {
     match: {
       params: { organisaatioOid, oid },
     },
-    location: { state = {} },
   } = props;
 
-  const { koulutusUpdatedAt = null } = state;
-  const watch = JSON.stringify([oid, koulutusUpdatedAt]);
-
-  const { data: koulutus = null } = useApiAsync({
-    promiseFn: getKoulutusByOid,
-    oid,
-    watch,
-  });
+  const { data: koulutus = null } = useKoulutusByOid(oid);
 
   const { t } = useTranslation();
   const initialValues = useMemo(() => {
@@ -56,9 +47,9 @@ const EditKoulutusPage = props => {
       );
   }, [history, koulutus, organisaatioOid]);
 
-  const FORM_NAME = 'editKoulutusForm';
+  const FORM_NAME = 'koulutusForm';
 
-  const selectedKoulutustyyppi = useFieldValue('koulutustyyppi', FORM_NAME);
+  const selectedKoulutustyyppi = koulutus?.koulutustyyppi;
 
   const canUpdate = useCurrentUserHasRole(
     ENTITY.KOULUTUS,
@@ -86,7 +77,8 @@ const EditKoulutusPage = props => {
           steps={<FormSteps activeStep={ENTITY.KOULUTUS} />}
           footer={
             koulutus ? (
-              <EditKoulutusFooter
+              <KoulutusFooter
+                formMode={FormMode.EDIT}
                 koulutus={koulutus}
                 organisaatioOid={organisaatioOid}
                 canUpdate={canUpdate || isJulkinen}
@@ -106,7 +98,6 @@ const EditKoulutusPage = props => {
             <KoulutusForm
               steps={false}
               isNewKoulutus={false}
-              johtaaTutkintoon={Boolean(koulutus.johtaaTutkintoon)}
               onAttachToteutus={onAttachToteutus}
               koulutus={koulutus}
               organisaatioOid={organisaatioOid}

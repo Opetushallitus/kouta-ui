@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Field, FieldArray } from 'redux-form';
 
 import FieldArrayList from '#/src/components/FieldArrayList';
-import Flex, { FlexItem } from '#/src/components/Flex';
+import { Flex, FlexItem } from '#/src/components/Flex';
 import {
   FormFieldSelect,
   FormFieldCheckbox,

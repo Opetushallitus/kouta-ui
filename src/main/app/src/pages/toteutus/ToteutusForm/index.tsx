@@ -4,6 +4,7 @@ export { default } from './ToteutusForm';
 
 export const initialValues = (koulutusNimi, koulutusKielet) => ({
   tila: DEFAULT_JULKAISUTILA,
+  esikatselu: false,
   kieliversiot: koulutusKielet,
   tiedot: {
     nimi: koulutusNimi,

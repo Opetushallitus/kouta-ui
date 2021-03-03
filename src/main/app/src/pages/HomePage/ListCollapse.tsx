@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import Collapse from '#/src/components/Collapse';
-import Flex, { FlexItem } from '#/src/components/Flex';
+import { Flex, FlexItem } from '#/src/components/Flex';
 import { Icon, Typography } from '#/src/components/virkailija';
 import { getThemeProp, spacing } from '#/src/theme';
 

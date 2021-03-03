@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { queryCache } from 'react-query';
+import { useQueryClient } from 'react-query';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -34,6 +34,7 @@ export const HakukohdeFooter = ({
   canUpdate,
 }: HakukohdeFooterProps) => {
   const history = useHistory();
+  const queryClient = useQueryClient();
 
   const form = useForm();
   const formName = useFormName();
@@ -74,7 +75,7 @@ export const HakukohdeFooter = ({
           `/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`
         );
       } else {
-        queryCache.invalidateQueries(ENTITY.HAKUKOHDE);
+        queryClient.invalidateQueries(ENTITY.HAKUKOHDE);
       }
     },
     [
@@ -87,6 +88,7 @@ export const HakukohdeFooter = ({
       initialValues,
       toteutus,
       unregisteredFields,
+      queryClient,
     ]
   );
 

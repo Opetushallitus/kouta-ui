@@ -8,10 +8,6 @@ import {
 
 // Serialize Draft editor
 expect.addSnapshotSerializer({
-  test(value) {
-    return isEditorState(value);
-  },
-  print(value, serialize, indent) {
-    return indent(serialize(serializeEditorState(value)));
-  },
+  test: isEditorState,
+  print: (value, serialize) => serialize(serializeEditorState(value)),
 });

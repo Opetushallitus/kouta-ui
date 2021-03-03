@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { queryCache } from 'react-query';
+import { useQueryClient } from 'react-query';
 
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY } from '#/src/constants';
@@ -11,6 +11,7 @@ import updateOppilaitos from '#/src/utils/oppilaitos/updateOppilaitos';
 import validateOppilaitosForm from '#/src/utils/oppilaitos/validateOppilaitosForm';
 
 const OppilaitosPageFooter = ({ oppilaitos, organisaatioOid, readOnly }) => {
+  const queryClient = useQueryClient();
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
       const fn = oppilaitos ? updateOppilaitos : createOppilaitos;
@@ -26,9 +27,9 @@ const OppilaitosPageFooter = ({ oppilaitos, organisaatioOid, readOnly }) => {
         },
       });
 
-      queryCache.invalidateQueries(ENTITY.OPPILAITOS);
+      queryClient.invalidateQueries(ENTITY.OPPILAITOS);
     },
-    [oppilaitos, organisaatioOid]
+    [oppilaitos, organisaatioOid, queryClient]
   );
 
   const { save } = useSaveForm({

@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { queryCache } from 'react-query';
+import { useQueryClient } from 'react-query';
 import { useHistory } from 'react-router-dom';
 
 import { FormFooter } from '#/src/components/FormPage';
@@ -22,6 +22,7 @@ export const SoraKuvausFooter = ({
   soraKuvaus,
   canUpdate,
 }: SoraKuvausFooterProps) => {
+  const queryClient = useQueryClient();
   const history = useHistory();
 
   const submit = useCallback(
@@ -43,7 +44,7 @@ export const SoraKuvausFooter = ({
           `/organisaatio/${soraKuvaus.organisaatioOid}/sora-kuvaus/${id}/muokkaus`
         );
       } else {
-        queryCache.invalidateQueries(ENTITY.SORA_KUVAUS);
+        queryClient.invalidateQueries(ENTITY.SORA_KUVAUS);
       }
     },
     [formMode, soraKuvaus, history]

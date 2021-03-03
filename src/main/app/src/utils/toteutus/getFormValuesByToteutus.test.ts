@@ -121,6 +121,7 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
         B3Kielivalikoima: ['kieli_4#1'],
         aidinkieliKielivalikoima: ['kieli_5#1'],
         muuKielivalikoima: ['kieli_6#1'],
+        ammatillinenPerustutkintoErityisopetuksena: true,
       },
       osaamisalat: [
         {

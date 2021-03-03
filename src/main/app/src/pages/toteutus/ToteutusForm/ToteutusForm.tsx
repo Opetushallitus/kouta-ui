@@ -25,7 +25,6 @@ import { HakukohteetSection } from './HakukohteetSection';
 import JarjestamispaikatSection from './JarjestamispaikatSection';
 import { JarjestamisTiedotSection } from './JarjestamisTiedotSection';
 import KorkeakouluOsaamisalatSection from './KorkeakouluOsaamisalatSection';
-import KuvausSection from './KuvausSection';
 import LukiolinjatSection from './LukiolinjatSection';
 import NayttamisTiedotSection from './NayttamisTiedotSection';
 import OsaamisalatSection from './OsaamisalatSection';
@@ -106,14 +105,6 @@ const ToteutusForm = ({
           header={t('toteutuslomake.toteutuksenTiedot')}
           languages={languages}
           Component={TiedotSection}
-          koulutustyyppi={koulutustyyppi}
-        />
-
-        <FormCollapse
-          section="kuvaus"
-          header={t('toteutuslomake.toteutuksenKuvaus')}
-          languages={languages}
-          Component={KuvausSection}
           koulutustyyppi={koulutustyyppi}
         />
 

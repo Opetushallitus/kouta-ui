@@ -4,8 +4,8 @@ exports[`getFormValuesByOppilaitos returns correct form values given oppilaitos 
 Object {
   "esikatselu": false,
   "esittely": Object {
-    "fi":       "<p><em>Fi esittely</em></p>",
-    "sv":       "<p><em>Sv esittely</em></p>",
+    "fi": "<p><em>Fi esittely</em></p>",
+    "sv": "<p><em>Sv esittely</em></p>",
   },
   "kieliversiot": Array [
     "fi",
@@ -30,8 +30,8 @@ Object {
     ],
     "tiedot": Object {
       "osio_1#1": Object {
-        "fi":           "<p>Fi tiedot</p>",
-        "sv":           "<p>Sv tiedot</p>",
+        "fi": "<p>Fi tiedot</p>",
+        "sv": "<p>Sv tiedot</p>",
       },
     },
   },

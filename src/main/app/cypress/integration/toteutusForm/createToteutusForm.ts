@@ -137,15 +137,10 @@ const fillTiedotSection = () => {
       .clear({ force: true })
       .pipe(paste('toteutuksen nimi'));
 
-    jatka();
-  });
-};
-
-const fillKuvausSection = () => {
-  getByTestId('kuvausSection').within(() => {
     getByTestId('toteutuksenKuvaus').within(() => {
       typeToEditor('Toteutuksen kuvaus');
     });
+
     jatka();
   });
 };
@@ -263,7 +258,6 @@ export const createToteutusForm = () => {
     fillPohjaSection();
     fillKieliversiotSection({ jatka: true });
     fillTiedotSection();
-    fillKuvausSection();
 
     getByTestId('jarjestamistiedotSection').within(() => {
       fillCommonJarjestamistiedot();
@@ -351,7 +345,6 @@ export const createToteutusForm = () => {
     fillPohjaSection();
     fillKieliversiotSection({ jatka: true });
     fillTiedotSection();
-    fillKuvausSection();
 
     getByTestId('osaamisalatSection').within(() => {
       getByTestId('osaamisalaSelection').within(() => {
@@ -404,7 +397,6 @@ export const createToteutusForm = () => {
     fillPohjaSection();
     fillKieliversiotSection({ jatka: true });
     fillTiedotSection();
-    fillKuvausSection();
 
     getByTestId('alemmanKorkeakoulututkinnonOsaamisalatSection').within(() => {
       fillKkOsaamisalat();

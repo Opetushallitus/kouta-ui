@@ -3,7 +3,12 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
-import { FormFieldInput, FormFieldSelect } from '#/src/components/formFields';
+import {
+  FormFieldEditor,
+  FormFieldInput,
+  FormFieldSelect,
+  FormFieldSwitch,
+} from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI } from '#/src/constants';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
@@ -58,6 +63,23 @@ const TiedotSection = ({ language, name, koulutustyyppi }) => {
           component={FormFieldInput}
           disabled={disableFieldsCopiedFromKoulutus}
           label={t('toteutuslomake.toteutuksenNimi')}
+        />
+      </Box>
+
+      <Box mb={2}>
+        <Field
+          name={`${name}.ammatillinenPerustutkintoErityisopetuksena`}
+          component={FormFieldSwitch}
+        >
+          {t('toteutuslomake.ammatillinenPerustutkintoErityisopetuksena')}
+        </Field>
+      </Box>
+
+      <Box mb={2} {...getTestIdProps('toteutuksenKuvaus')}>
+        <Field
+          name={`kuvaus.${language}`}
+          component={FormFieldEditor}
+          label={t('toteutuslomake.toteutuksenYleinenKuvaus')}
         />
       </Box>
 

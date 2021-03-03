@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 
 import _ from 'lodash';
-import { queryCache } from 'react-query';
+import { useQueryClient } from 'react-query';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -32,6 +32,7 @@ export const KoulutusFooter = ({
   canUpdate,
 }: KoulutusFooterProps) => {
   const history = useHistory();
+  const queryClient = useQueryClient();
 
   const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid, {
     filter: _.negate(organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)),
@@ -86,7 +87,7 @@ export const KoulutusFooter = ({
           `/organisaatio/${organisaatioOid}/koulutus/${oid}/muokkaus`
         );
       } else {
-        queryCache.invalidateQueries(ENTITY.KOULUTUS);
+        queryClient.invalidateQueries(ENTITY.KOULUTUS);
       }
     },
     [
@@ -99,6 +100,7 @@ export const KoulutusFooter = ({
       koulutus,
       organisaatioOid,
       unregisteredFields,
+      queryClient,
     ]
   );
 

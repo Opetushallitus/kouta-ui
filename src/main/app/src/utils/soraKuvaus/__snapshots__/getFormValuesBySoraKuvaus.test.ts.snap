@@ -14,8 +14,8 @@ Object {
   "koulutustyyppi": "amm",
   "tiedot": Object {
     "kuvaus": Object {
-      "fi":         "<p><strong>Kuvaus fi</strong></p>",
-      "sv":         "<p><em>Kuvaus sv</em></p>",
+      "fi": "<p><strong>Kuvaus fi</strong></p>",
+      "sv": "<p><em>Kuvaus sv</em></p>",
     },
     "nimi": Object {
       "fi": "Fi nimi",

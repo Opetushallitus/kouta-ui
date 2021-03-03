@@ -85,6 +85,7 @@ Object {
       "aidinkieliKielivalikoima": Array [
         "kieli_3#1",
       ],
+      "ammatillinenPerustutkintoErityisopetuksena": false,
       "diplomiKoodiUrit": Array [
         "diplomi_1#1",
         "diplomi_2#1",

@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { queryCache } from 'react-query';
+import { useQueryClient } from 'react-query';
 import { useHistory } from 'react-router-dom';
 
 import { FormFooter } from '#/src/components/FormPage';
@@ -25,6 +25,7 @@ export const ValintaperusteFooter = ({
   canUpdate,
 }: ValintaperusteFooterProps) => {
   const history = useHistory();
+  const queryClient = useQueryClient();
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
@@ -48,10 +49,10 @@ export const ValintaperusteFooter = ({
           `/organisaatio/${organisaatioOid}/valintaperusteet/${id}/muokkaus`
         );
       } else {
-        queryCache.invalidateQueries(ENTITY.VALINTAPERUSTE);
+        queryClient.invalidateQueries(ENTITY.VALINTAPERUSTE);
       }
     },
-    [formMode, organisaatioOid, valintaperuste, history]
+    [formMode, organisaatioOid, valintaperuste, history, queryClient]
   );
 
   const formName = useFormName();

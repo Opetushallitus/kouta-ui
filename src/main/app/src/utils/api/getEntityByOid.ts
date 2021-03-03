@@ -46,7 +46,7 @@ export const useEntityByOid = (
     {
       refetchOnWindowFocus: false,
       refetchOnReconnect: false,
-      enabled: props?.oid,
+      enabled: Boolean(props?.oid),
       ...options,
     }
   );

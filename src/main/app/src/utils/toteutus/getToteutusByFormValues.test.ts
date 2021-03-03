@@ -24,6 +24,7 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
       aloituspaikat: '56',
       laajuus: '252',
       laajuusyksikko: { value: 'laajuus_1#1' },
+      ammatillinenPerustutkintoErityisopetuksena: false,
     },
     kuvaus: {
       fi: parseEditorState('Fi toteutuksenkuvaus'),

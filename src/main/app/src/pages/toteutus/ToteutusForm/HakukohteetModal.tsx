@@ -6,9 +6,8 @@ import Button from '#/src/components/Button';
 import Modal from '#/src/components/Modal';
 import Select from '#/src/components/Select';
 import { Box, FormLabel } from '#/src/components/virkailija';
-import useApiAsync from '#/src/hooks/useApiAsync';
 import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
-import getHaut from '#/src/utils/haku/getHaut';
+import { useHaut } from '#/src/utils/haku/getHaut';
 
 const HakukohteetModal = ({
   onClose,
@@ -17,17 +16,17 @@ const HakukohteetModal = ({
   ...props
 }) => {
   const { t } = useTranslation();
-  const [selectedHaku, setHaku] = useState();
+  const [selectedHakuOption, setSelectedHakuOption] = useState<
+    SelectOption | undefined
+  >();
 
-  const { data: haut } = useApiAsync({
-    promiseFn: getHaut,
+  const { data: haut } = useHaut({
     organisaatioOid,
-    watch: organisaatioOid,
   });
 
   const onSave = useCallback(() => {
-    return onSaveProp({ hakuOid: selectedHaku });
-  }, [onSaveProp, selectedHaku]);
+    return onSaveProp({ hakuOid: selectedHakuOption?.value });
+  }, [onSaveProp, selectedHakuOption]);
 
   const hautOptions = useEntityOptions(haut);
 
@@ -40,7 +39,7 @@ const HakukohteetModal = ({
           <Button onClick={onClose} variant="outlined" type="button">
             {t('yleiset.sulje')}
           </Button>
-          <Button onClick={onSave} type="button" disabled={!selectedHaku}>
+          <Button onClick={onSave} type="button" disabled={!selectedHakuOption}>
             {t('yleiset.lisaaHakukohde')}
           </Button>
         </Box>
@@ -56,10 +55,8 @@ const HakukohteetModal = ({
           options={hautOptions}
           menuPortalTarget={document.body}
           menuPosition="fixed"
-          onChange={data => {
-            setHaku(data?.value);
-          }}
-          value={selectedHaku}
+          onChange={setSelectedHakuOption}
+          value={selectedHakuOption}
         />
       </Box>
     </Modal>

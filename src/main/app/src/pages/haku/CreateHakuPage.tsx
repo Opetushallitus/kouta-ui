@@ -50,7 +50,7 @@ const CreateHakuPage = props => {
   const selectBase = useSelectBase(history, { kopioParam: 'kopioHakuOid' });
 
   const { data } = useHakuByOid(kopioHakuOid, {
-    enabled: kopioHakuOid,
+    enabled: Boolean(kopioHakuOid),
   });
 
   const initialValues = useMemo(() => {

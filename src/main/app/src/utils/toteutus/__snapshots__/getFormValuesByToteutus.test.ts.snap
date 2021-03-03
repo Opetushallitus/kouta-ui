@@ -5,8 +5,8 @@ Object {
   "alemmanKorkeakoulututkinnonOsaamisalat": Array [
     Object {
       "kuvaus": Object {
-        "fi":           "<p>Fi alempikuvaus</p>",
-        "sv":           "<p>Sv alempikuvaus</p>",
+        "fi": "<p>Fi alempikuvaus</p>",
+        "sv": "<p>Sv alempikuvaus</p>",
       },
       "linkki": Object {
         "fi": "Fi alempilinkki",
@@ -69,8 +69,8 @@ Object {
       },
     },
     "diplomiKuvaus": Object {
-      "fi":         "<p>Fi diplomi</p>",
-      "sv":         "<p>Sv diplomi</p>",
+      "fi": "<p>Fi diplomi</p>",
+      "sv": "<p>Sv diplomi</p>",
     },
     "diplomiTyypit": Array [
       Object {
@@ -82,8 +82,8 @@ Object {
       "tyyppi": "kylla",
     },
     "maksullisuusKuvaus": Object {
-      "fi":         "<p>Fi maksullisuuskuvaus</p>",
-      "sv":         "<p>Sv maksullisuuskuvaus</p>",
+      "fi": "<p>Fi maksullisuuskuvaus</p>",
+      "sv": "<p>Sv maksullisuuskuvaus</p>",
     },
     "maksumaara": Object {},
     "muutKielet": Array [
@@ -96,33 +96,33 @@ Object {
       "opetusaika_1#1",
     ],
     "opetusaikaKuvaus": Object {
-      "fi":         "<p>Fi aikakuvaus</p>",
-      "sv":         "<p>Sv aikakuvaus</p>",
+      "fi": "<p>Fi aikakuvaus</p>",
+      "sv": "<p>Sv aikakuvaus</p>",
     },
     "opetuskieli": Array [
       "opetuskieli_1#1",
       "opetuskieli_2#1",
     ],
     "opetuskieliKuvaus": Object {
-      "fi":         "<p>Fi kielikuvaus</p>",
-      "sv":         "<p>Sv kielikuvaus</p>",
+      "fi": "<p>Fi kielikuvaus</p>",
+      "sv": "<p>Sv kielikuvaus</p>",
     },
     "opetustapa": Array [
       "opetustapa_1#1",
       "opetustapa_2#1",
     ],
     "opetustapaKuvaus": Object {
-      "fi":         "<p>Fi tapakuvaus</p>",
-      "sv":         "<p>Sv tapakuvaus</p>",
+      "fi": "<p>Fi tapakuvaus</p>",
+      "sv": "<p>Sv tapakuvaus</p>",
     },
     "osioKuvaukset": Object {
       "osio_1#1": Object {
-        "fi":           "<p>Fi kuvaus1</p>",
-        "sv":           "<p>Sv kuvaus1</p>",
+        "fi": "<p>Fi kuvaus1</p>",
+        "sv": "<p>Sv kuvaus1</p>",
       },
       "osio_2#1": Object {
-        "fi":           "<p>Fi kuvaus2</p>",
-        "sv":           "<p>Sv kuvaus2</p>",
+        "fi": "<p>Fi kuvaus2</p>",
+        "sv": "<p>Sv kuvaus2</p>",
       },
     },
     "osiot": Array [
@@ -134,8 +134,8 @@ Object {
       },
     ],
     "stipendinKuvaus": Object {
-      "fi":         "<p>Fi stipendikuvaus</p>",
-      "sv":         "<p>Sv stipendikuvaus</p>",
+      "fi": "<p>Fi stipendikuvaus</p>",
+      "sv": "<p>Sv stipendikuvaus</p>",
     },
     "stipendinMaara": 20,
     "suunniteltuKesto": Object {
@@ -143,8 +143,8 @@ Object {
       "vuotta": 2,
     },
     "suunniteltuKestoKuvaus": Object {
-      "fi":         "<p>Fi suunniteltuKestoKuvaus</p>",
-      "sv":         "<p>Sv suunniteltuKestoKuvaus</p>",
+      "fi": "<p>Fi suunniteltuKestoKuvaus</p>",
+      "sv": "<p>Sv suunniteltuKestoKuvaus</p>",
     },
   },
   "kieliversiot": Array [
@@ -153,8 +153,8 @@ Object {
   ],
   "koulutustyyppi": undefined,
   "kuvaus": Object {
-    "fi":       "<p>Fi toteutuksenkuvaus</p>",
-    "sv":       "<p>Sv toteutuksenkuvaus</p>",
+    "fi": "<p>Fi toteutuksenkuvaus</p>",
+    "sv": "<p>Sv toteutuksenkuvaus</p>",
   },
   "lukiolinjat": Object {
     "lukiolinja": Object {
@@ -225,6 +225,7 @@ Object {
   "teemakuva": undefined,
   "tiedot": Object {
     "aloituspaikat": "251",
+    "ammatillinenPerustutkintoErityisopetuksena": true,
     "ilmoittautumislinkki": Object {
       "fi": "Fi linkki",
       "sv": "Sv linkki",
@@ -247,8 +248,8 @@ Object {
       },
       "koodi": "koodi 123",
       "kuvaus": Object {
-        "fi":           "<p>Fi kuvaus</p>",
-        "sv":           "<p>Sv kuvaus</p>",
+        "fi": "<p>Fi kuvaus</p>",
+        "sv": "<p>Sv kuvaus</p>",
       },
       "laajuus": Object {
         "fi": "Fi laajuus",
@@ -261,8 +262,8 @@ Object {
       "sisalto": Array [
         Object {
           "data": Object {
-            "fi":               "<h2>Fi sisalto</h2>",
-            "sv":               "<h2>Sv sisalto</h2>",
+            "fi": "<h2>Fi sisalto</h2>",
+            "sv": "<h2>Sv sisalto</h2>",
           },
           "tyyppi": "teksti",
         },
@@ -341,8 +342,8 @@ Object {
   "ylemmanKorkeakoulututkinnonOsaamisalat": Array [
     Object {
       "kuvaus": Object {
-        "fi":           "<p>Fi ylempikuvaus</p>",
-        "sv":           "<p>Sv ylempikuvaus</p>",
+        "fi": "<p>Fi ylempikuvaus</p>",
+        "sv": "<p>Sv ylempikuvaus</p>",
       },
       "linkki": Object {
         "fi": "Fi ylempilinkki",

@@ -78,6 +78,17 @@ const config = createFormConfigBuilder().registerSections([
           eb.validateTranslations('tiedot.nimi', getKielivalinta(values)),
       },
       {
+        koulutustyypit: TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
+        field: '.ammatillinenPerustutkintoErityisopetuksena',
+      },
+      createOptionalTranslatedFieldConfig({
+        name: 'kuvaus',
+        koulutustyypit: _fp.without(
+          [KOULUTUSTYYPPI.LUKIOKOULUTUS],
+          KOULUTUSTYYPIT
+        ),
+      }),
+      {
         field: '.ilmoittautumislinkki',
         koulutustyypit: _fp.without(
           [KOULUTUSTYYPPI.OSAAMISALA, KOULUTUSTYYPPI.TUTKINNON_OSA],
@@ -118,18 +129,6 @@ const config = createFormConfigBuilder().registerSections([
           'validointivirheet.positiivinenKokonaisluku'
         ),
       },
-    ],
-  },
-  {
-    section: 'kuvaus',
-    parts: [
-      createOptionalTranslatedFieldConfig({
-        name: 'kuvaus',
-        koulutustyypit: _fp.without(
-          [KOULUTUSTYYPPI.LUKIOKOULUTUS],
-          KOULUTUSTYYPIT
-        ),
-      }),
     ],
   },
   {
@@ -305,9 +304,6 @@ const config = createFormConfigBuilder().registerSections([
       }),
       {
         field: '.ajankohta.ajankohtaTyyppi',
-        validate: validateIfJulkaistu(
-          validateExistence('jarjestamistiedot.ajankohta.ajankohtaTyyppi')
-        ),
       },
       {
         field: '.ajankohta.kausi',

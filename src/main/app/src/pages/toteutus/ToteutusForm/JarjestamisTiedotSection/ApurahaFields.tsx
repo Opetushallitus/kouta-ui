@@ -114,7 +114,11 @@ export const ApurahaFields = ({ koulutustyyppi, language, name }) => {
                 <FlexItem basis="60px" grow={1} data-testid="apurahaMin">
                   <Field
                     name={`${name}.apurahaMin`}
-                    placeholder="Min"
+                    placeholder={
+                      apurahaMaaraTyyppi === ApurahaMaaraTyyppi.YKSI_ARVO
+                        ? t('toteutuslomake.maara')
+                        : t('toteutuslomake.min')
+                    }
                     component={FormFieldInput}
                     type="number"
                   />
@@ -127,7 +131,7 @@ export const ApurahaFields = ({ koulutustyyppi, language, name }) => {
                     <FlexItem basis="60px" grow={1}>
                       <Field
                         name={`${name}.apurahaMax`}
-                        placeholder="Max"
+                        placeholder={t('toteutuslomake.max')}
                         component={FormFieldInput}
                         type="number"
                       />

@@ -10,17 +10,20 @@ import { maybeParseNumber, toSelectValue } from '#/src/utils';
 export const getAlkamiskausiData = (
   ajankohta: AjankohtaFields,
   pickTranslations
-) => ({
-  alkamiskausityyppi: ajankohta?.ajankohtaTyyppi || null,
-  koulutuksenAlkamispaivamaara: ajankohta?.tarkkaAlkaa || null,
-  koulutuksenPaattymispaivamaara: ajankohta?.tarkkaPaattyy || null,
-  koulutuksenAlkamiskausiKoodiUri: ajankohta?.kausi || null,
-  koulutuksenAlkamisvuosi: maybeParseNumber(ajankohta?.vuosi?.value),
-  henkilokohtaisenSuunnitelmanLisatiedot: _fp.flow(
-    pickTranslations,
-    _fp.mapValues(serializeEditorState)
-  )(ajankohta?.henkilokohtaisenSuunnitelmanLisatiedot ?? {}),
-});
+) =>
+  ajankohta?.ajankohtaTyyppi
+    ? {
+        alkamiskausityyppi: ajankohta?.ajankohtaTyyppi || null,
+        koulutuksenAlkamispaivamaara: ajankohta?.tarkkaAlkaa || null,
+        koulutuksenPaattymispaivamaara: ajankohta?.tarkkaPaattyy || null,
+        koulutuksenAlkamiskausiKoodiUri: ajankohta?.kausi || null,
+        koulutuksenAlkamisvuosi: maybeParseNumber(ajankohta?.vuosi?.value),
+        henkilokohtaisenSuunnitelmanLisatiedot: _fp.flow(
+          pickTranslations,
+          _fp.mapValues(serializeEditorState)
+        )(ajankohta?.henkilokohtaisenSuunnitelmanLisatiedot ?? {}),
+      }
+    : {};
 
 export const getAjankohtaFields = (
   alkamiskausiData: any = {}

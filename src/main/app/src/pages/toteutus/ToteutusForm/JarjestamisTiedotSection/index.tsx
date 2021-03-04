@@ -98,7 +98,7 @@ const SuunniteltuKestoFields = ({ name }) => {
   return (
     <FieldGroup
       name={`${name}.suunniteltuKesto`}
-      title="Opintojen suunniteltu kesto"
+      title={t('toteutuslomake.opintojenSuunniteltuKesto')}
       HeadingComponent={FormLabel}
     >
       <Flex>

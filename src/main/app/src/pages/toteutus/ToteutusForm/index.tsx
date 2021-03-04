@@ -18,7 +18,7 @@ export const initialValues = (koulutusNimi, koulutusKielet) => ({
     tapa: POHJAVALINTA.UUSI,
   },
   jarjestamistiedot: {
-    apurahaMaaraTyyppi: { value: ApurahaMaaraTyyppi.YKSI_ARVO },
+    apurahaMaaraTyyppi: ApurahaMaaraTyyppi.YKSI_ARVO,
     apurahaYksikko: { value: ApurahaYksikko.EURO },
   },
 });

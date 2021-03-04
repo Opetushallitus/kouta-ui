@@ -4,7 +4,6 @@ import {
   KOULUTUSTYYPPI,
   HAKULOMAKETYYPPI,
   Hakeutumistapa,
-  ApurahaTyyppi,
   ApurahaMaaraTyyppi,
   ApurahaYksikko,
 } from '#/src/constants';
@@ -65,8 +64,8 @@ export type ToteutusFormValues = {
     maksullisuusKuvaus: Kuvaus;
     osiot: Array<{ value: string }>;
     osioKuvaukset: Record<string, any>;
-    apurahaTyyppi?: ApurahaTyyppi;
-    apurahaMaaraTyyppi?: SelectOption<ApurahaMaaraTyyppi>;
+    onkoApuraha?: boolean;
+    apurahaMaaraTyyppi?: ApurahaMaaraTyyppi;
     apurahaMin?: number;
     apurahaMax?: number;
     apurahaKuvaus?: Kuvaus;

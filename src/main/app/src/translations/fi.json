@@ -277,7 +277,9 @@
     "kokonaislukuValilta": "Syötä kokonaisluku väliltä {{min}} - {{max}}",
     "pakollinenAlkamisaikaJosPaattymisaika": "Aikavälin alkamisaika on pakollinen, jos päättymisaika on annettu.",
     "alkamisaikaEnnenPaattymisaikaa": "Aikavälin alkamisajan täytyy olla ennen päättymisaikaa.",
-    "positiivinenKokonaisluku": "Syötä positiivinen kokonaisluku"
+    "positiivinenKokonaisluku": "Syötä positiivinen kokonaisluku",
+    "eiNegatiivinenKokonaisluku": "Syötä kokonaisluku, joka on suurempi kuin 0",
+    "apurahaMinMax": "Apurahan maksimimäärän täytyy olla suurempi tai yhtäsuuri kuin minimimäärän."
   },
   "hakulomakeValinnat": {
     "ataru": "Käytetään hakemuspalvelun lomaketta",
@@ -411,6 +413,7 @@
     "syotaApurahanMaara": "Syötä apurahan määrä",
     "yksiArvo": "Yksi arvo",
     "vaihteluvali": "Vaihteluväli",
+    "apurahaKaytossa": "Apuraha käytössä",
     "maara": "Määrä",
     "min": "Min",
     "max": "Max",

@@ -153,14 +153,13 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
         }
         return acc;
       }, {})(lisatiedot),
-      apurahaTyyppi: opetus?.apuraha?.tyyppi,
+      onkoApuraha: opetus?.onkoApuraha,
       apurahaMin: opetus?.apuraha?.min,
       apurahaMax: opetus?.apuraha?.max,
-      apurahaMaaraTyyppi: toSelectValue(
+      apurahaMaaraTyyppi:
         opetus?.apuraha?.min === opetus?.apuraha?.max
           ? ApurahaMaaraTyyppi.YKSI_ARVO
-          : ApurahaMaaraTyyppi.VAIHTELUVALI
-      ),
+          : ApurahaMaaraTyyppi.VAIHTELUVALI,
       apurahaYksikko: toSelectValue(opetus?.apuraha?.yksikko),
       apurahaKuvaus: _fp.mapValues(
         parseEditorState,

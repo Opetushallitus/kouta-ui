@@ -64,7 +64,7 @@ const fillMaksullisuus = tyyppi => {
 
 const fillApuraha = () => {
   getByTestId('apuraha').within(() => {
-    cy.findByLabelText('toteutuslomake.apuraha').click({ force: true });
+    cy.findByLabelText('toteutuslomake.apurahaKaytossa').click({ force: true });
     getByTestId('apurahaMin').find('input').pipe(paste('20'));
     typeToEditor('apuraha kuvaus');
   });

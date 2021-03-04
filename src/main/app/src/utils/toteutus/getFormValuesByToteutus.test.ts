@@ -1,6 +1,5 @@
 import {
   Alkamiskausityyppi,
-  ApurahaTyyppi,
   ApurahaYksikko,
   JULKAISUTILA,
 } from '#/src/constants';
@@ -110,8 +109,8 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
           fi: 'Fi tapakuvaus',
           sv: 'Sv tapakuvaus',
         },
+        onkoApuraha: true,
         apuraha: {
-          tyyppi: ApurahaTyyppi.APURAHA,
           min: 100,
           max: 200,
           kuvaus: {

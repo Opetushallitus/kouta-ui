@@ -10,15 +10,11 @@ import {
   FormFieldInput,
   FormFieldRadioGroup,
   FormFieldEditor,
+  FormFieldSwitch,
 } from '#/src/components/formFields';
 import Spacing from '#/src/components/Spacing';
 import { Box } from '#/src/components/virkailija';
-import {
-  ApurahaMaaraTyyppi,
-  ApurahaTyyppi,
-  ApurahaYksikko,
-  NDASH,
-} from '#/src/constants';
+import { ApurahaMaaraTyyppi, ApurahaYksikko, NDASH } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import { getTestIdProps } from '#/src/utils';
 import { isApurahaVisible } from '#/src/utils/toteutus/toteutusVisibilities';
@@ -49,10 +45,10 @@ const ApurahaYksikkoField = ({ name }) => {
 
 export const ApurahaFields = ({ koulutustyyppi, language, name }) => {
   const { t } = useTranslation();
-  const apurahaValue = useFieldValue<ApurahaTyyppi>(`${name}.apurahaTyyppi`);
-  const apurahaMaaraTyyppi = useFieldValue<SelectOption<ApurahaMaaraTyyppi>>(
+  const onkoApuraha = useFieldValue<boolean>(`${name}.onkoApuraha`);
+  const apurahaMaaraTyyppi = useFieldValue<ApurahaMaaraTyyppi>(
     `${name}.apurahaMaaraTyyppi`
-  )?.value;
+  );
 
   const opetuskieliArr = useFieldValue<Array<string>>(`${name}.opetuskieli`);
 
@@ -66,22 +62,10 @@ export const ApurahaFields = ({ koulutustyyppi, language, name }) => {
     <FieldGroup title={t('toteutuslomake.apuraha')}>
       <Flex {...getTestIdProps('apuraha')}>
         <FlexItem grow={0} basis="30%">
-          <Field
-            label={t('toteutuslomake.valitseKaytettavaApurahoitus')}
-            name={`${name}.apurahaTyyppi`}
-            component={FormFieldRadioGroup}
-            options={[
-              {
-                label: t('toteutuslomake.eiKaytossa'),
-                value: ApurahaTyyppi.EI_KAYTOSSA,
-              },
-              {
-                label: t('toteutuslomake.apuraha'),
-                value: ApurahaTyyppi.APURAHA,
-              },
-            ]}
-          />
-          {apurahaValue && apurahaValue !== ApurahaTyyppi.EI_KAYTOSSA && (
+          <Field name={`${name}.onkoApuraha`} component={FormFieldSwitch}>
+            {t('toteutuslomake.apurahaKaytossa')}
+          </Field>
+          {onkoApuraha && (
             <Spacing
               marginTop={1}
               {...getTestIdProps('apurahaMaara')}
@@ -91,9 +75,7 @@ export const ApurahaFields = ({ koulutustyyppi, language, name }) => {
               <Box mt={1}>
                 <Field
                   name={`${name}.apurahaMaaraTyyppi`}
-                  component={FormFieldSelect}
-                  isClearable={false}
-                  isSearchable={false}
+                  component={FormFieldRadioGroup}
                   options={[
                     {
                       label: t('toteutuslomake.yksiArvo'),

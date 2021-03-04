@@ -3,7 +3,6 @@ import _fp from 'lodash/fp';
 import {
   Alkamiskausityyppi,
   ApurahaMaaraTyyppi,
-  ApurahaTyyppi,
   HAKULOMAKETYYPPI,
   JULKAISUTILA,
   KOULUTUSTYYPIT,
@@ -52,6 +51,36 @@ const validateDateTimeRange = (alkaaFieldName, paattyyFieldName) => (
             message: 'validointivirheet.alkamisaikaEnnenPaattymisaikaa',
           })(eb)
         : eb
+  )(eb);
+};
+
+const validateApuraha = (eb, values) => {
+  const apurahaMin = _fp.parseInt(10, values?.jarjestamistiedot?.apurahaMin);
+  const apurahaMax = _fp.parseInt(10, values?.jarjestamistiedot?.apurahaMax);
+  const onkoApuraha = values?.jarjestamistiedot?.onkoApuraha;
+  const apurahaMaaraTyyppi = values?.jarjestamistiedot?.apurahaMaaraTyyppi;
+  return validateIf(
+    onkoApuraha,
+    _fp.flow(
+      validate('jarjestamistiedot.apurahaMin', () => apurahaMin >= 0, {
+        message: ['validointivirheet.eiNegatiivinenKokonaisluku'],
+      }),
+      validateIf(
+        apurahaMaaraTyyppi === ApurahaMaaraTyyppi.VAIHTELUVALI,
+        _fp.flow(
+          validate('jarjestamistiedot.apurahaMin', () => apurahaMax >= 0, {
+            message: ['validointivirheet.eiNegatiivinenKokonaisluku'],
+          }),
+          validate(
+            'jarjestamistiedot.apurahaMin',
+            () => apurahaMin <= apurahaMax,
+            {
+              message: 'validointivirheet.apurahaMinMax',
+            }
+          )
+        )
+      )
+    )
   )(eb);
 };
 
@@ -302,6 +331,10 @@ const config = createFormConfigBuilder().registerSections([
       },
       {
         field: '.apurahaYksikko',
+      },
+      {
+        field: '.apurahaGroup',
+        validate: validateApuraha,
       },
       {
         field: '.apurahaMin',

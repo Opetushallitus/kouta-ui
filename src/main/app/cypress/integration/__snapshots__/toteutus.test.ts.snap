@@ -322,8 +322,7 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
         },
         "max": 20,
         "min": 20,
-        "tyyppi": "apuraha",
-        "yksikko": "euroa"
+        "yksikko": "euro"
       },
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
@@ -348,6 +347,7 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
       },
       "maksunMaara": null,
       "muuKielivalikoima": [],
+      "onkoApuraha": true,
       "onkoMaksullinen": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
@@ -629,6 +629,7 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
       },
       "maksunMaara": 20,
       "muuKielivalikoima": [],
+      "onkoApuraha": true,
       "onkoMaksullinen": true,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
@@ -784,6 +785,7 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
       },
       "maksunMaara": 20,
       "muuKielivalikoima": [],
+      "onkoApuraha": true,
       "onkoMaksullinen": true,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
@@ -945,6 +947,7 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
       "muuKielivalikoima": [
         "kieli_4#1"
       ],
+      "onkoApuraha": true,
       "onkoMaksullinen": true,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
@@ -1077,6 +1080,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
       },
       "maksunMaara": 20,
       "muuKielivalikoima": [],
+      "onkoApuraha": true,
       "onkoMaksullinen": true,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"

@@ -2,7 +2,6 @@ import { parseEditorState } from '#/src/components/Editor/utils';
 import {
   Alkamiskausityyppi,
   ApurahaMaaraTyyppi,
-  ApurahaTyyppi,
   ApurahaYksikko,
   Hakeutumistapa,
   HAKULOMAKETYYPPI,
@@ -83,7 +82,7 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
           sv: parseEditorState('Sv kuvaus2'),
         },
       },
-      apurahaTyyppi: ApurahaTyyppi.APURAHA,
+      onkoApuraha: true,
       apurahaMin: 100,
       apurahaMax: 200,
       apurahaMaaraTyyppi: ApurahaMaaraTyyppi.VAIHTELUVALI,

@@ -1,10 +1,6 @@
 import _ from 'lodash';
 
-import {
-  Alkamiskausityyppi,
-  ApurahaTyyppi,
-  ApurahaYksikko,
-} from '#/src/constants';
+import { Alkamiskausityyppi, ApurahaYksikko } from '#/src/constants';
 
 const getBaseFields = () => ({
   oid: '1.2.246.562.17.00000000000000000026',
@@ -44,8 +40,8 @@ const getBaseFields = () => ({
         koulutuksenAlkamispaivamaara: '2021-04-16T00:00',
         koulutuksenPaattymispaivamaara: '2021-12-12T00:00',
       },
+      onkoApuraha: true,
       apuraha: {
-        tyyppi: ApurahaTyyppi.APURAHA,
         kuvaus: {
           fi: 'Stipendin kuvaus',
         },

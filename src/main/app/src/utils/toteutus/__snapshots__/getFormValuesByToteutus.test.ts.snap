@@ -72,14 +72,11 @@ Object {
       "fi": "<p>Fi apurahakuvaus</p>",
       "sv": "<p>Sv apurahakuvaus</p>",
     },
-    "apurahaMaaraTyyppi": Object {
-      "value": "range",
-    },
+    "apurahaMaaraTyyppi": "range",
     "apurahaMax": 200,
     "apurahaMin": 100,
-    "apurahaTyyppi": "apuraha",
     "apurahaYksikko": Object {
-      "value": "euroa",
+      "value": "euro",
     },
     "diplomiKuvaus": Object {
       "fi": "<p>Fi diplomi</p>",
@@ -104,6 +101,7 @@ Object {
         "value": "kieli_6#1",
       },
     ],
+    "onkoApuraha": true,
     "opetusaika": Array [
       "opetusaika_1#1",
     ],

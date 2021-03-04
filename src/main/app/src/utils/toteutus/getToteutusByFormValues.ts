@@ -1,11 +1,7 @@
 import _fp from 'lodash/fp';
 
 import { serializeEditorState } from '#/src/components/Editor/utils';
-import {
-  ApurahaMaaraTyyppi,
-  ApurahaTyyppi,
-  HAKULOMAKETYYPPI,
-} from '#/src/constants';
+import { ApurahaMaaraTyyppi, HAKULOMAKETYYPPI } from '#/src/constants';
 import { ToteutusFormValues } from '#/src/types/toteutusTypes';
 import { isPartialDate, maybeParseNumber } from '#/src/utils';
 import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
@@ -55,10 +51,12 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
   const opetuskielet = values?.jarjestamistiedot?.opetuskieli;
 
   const ajankohta = values?.jarjestamistiedot?.ajankohta;
-  const apurahaTyyppi = values?.jarjestamistiedot?.apurahaTyyppi;
-  const apurahaMaaraTyyppi =
-    values?.jarjestamistiedot?.apurahaMaaraTyyppi?.value;
+  const onkoApuraha = values?.jarjestamistiedot?.onkoApuraha;
+  const apurahaMaaraTyyppi = values?.jarjestamistiedot?.apurahaMaaraTyyppi;
   const apurahaVisible = isApurahaVisible(koulutustyyppi, opetuskielet);
+
+  const apurahaMin = values?.jarjestamistiedot?.apurahaMin;
+  const apurahaMax = values?.jarjestamistiedot?.apurahaMax;
 
   return {
     nimi: pickTranslations(values?.tiedot?.nimi || {}),
@@ -105,23 +103,21 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
           pickTranslations,
           _fp.mapValues(serializeEditorState)
         )(values?.jarjestamistiedot?.maksullisuusKuvaus || {}),
+        onkoApuraha,
         apuraha:
-          apurahaVisible && apurahaTyyppi
+          apurahaVisible && onkoApuraha
             ? {
-                tyyppi: apurahaTyyppi,
                 kuvaus: _fp.flow(
                   pickTranslations,
                   _fp.mapValues(serializeEditorState)
                 )(values?.jarjestamistiedot?.apurahaKuvaus || {}),
-                ...(apurahaTyyppi !== ApurahaTyyppi.EI_KAYTOSSA
+                ...(onkoApuraha
                   ? {
-                      min: maybeParseNumber(
-                        values.jarjestamistiedot?.apurahaMin
-                      ),
+                      min: maybeParseNumber(apurahaMin),
                       max: maybeParseNumber(
                         apurahaMaaraTyyppi === ApurahaMaaraTyyppi.YKSI_ARVO
-                          ? values?.jarjestamistiedot?.apurahaMin
-                          : values?.jarjestamistiedot?.apurahaMax
+                          ? apurahaMin
+                          : apurahaMax
                       ),
                       yksikko: values?.jarjestamistiedot?.apurahaYksikko?.value,
                     }

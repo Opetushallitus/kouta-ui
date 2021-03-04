@@ -93,8 +93,7 @@ Object {
         },
         "max": 200,
         "min": 100,
-        "tyyppi": "apuraha",
-        "yksikko": "euroa",
+        "yksikko": "euro",
       },
       "diplomiKoodiUrit": Array [
         "diplomi_1#1",
@@ -136,6 +135,7 @@ Object {
       "muuKielivalikoima": Array [
         "kieli_6#1",
       ],
+      "onkoApuraha": true,
       "onkoMaksullinen": true,
       "opetusaikaKoodiUrit": Array [
         "opetusaika_1#1",

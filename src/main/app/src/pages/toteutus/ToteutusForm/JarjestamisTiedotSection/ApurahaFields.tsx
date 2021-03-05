@@ -11,6 +11,7 @@ import {
   FormFieldRadioGroup,
   FormFieldEditor,
   FormFieldSwitch,
+  createFormFieldComponent,
 } from '#/src/components/formFields';
 import Spacing from '#/src/components/Spacing';
 import { Box } from '#/src/components/virkailija';
@@ -30,7 +31,7 @@ const APURAHA_YKSIKKO_OPTIONS = [
   },
 ];
 
-const ApurahaYksikkoField = ({ name }) => {
+const ApurahaYksikkoField = ({ name, disabled }) => {
   return (
     <Field
       name={name}
@@ -39,16 +40,80 @@ const ApurahaYksikkoField = ({ name }) => {
       isClearable={false}
       isSearchable={false}
       options={APURAHA_YKSIKKO_OPTIONS}
+      disabled={disabled}
     />
   );
 };
 
+export const ApurahaMaaraFields = createFormFieldComponent(
+  ({ section, disabled }) => {
+    const { t } = useTranslation();
+    const apurahaMaaraTyyppi = useFieldValue<ApurahaMaaraTyyppi>(
+      `${section}.apurahaMaaraTyyppi`
+    );
+    return (
+      <Spacing marginTop={1} {...getTestIdProps('apurahaMaara')} width="200px">
+        <legend>{t('toteutuslomake.syotaApurahanMaara')} *</legend>
+        <Box mt={1}>
+          <Field
+            name={`${section}.apurahaMaaraTyyppi`}
+            component={FormFieldRadioGroup}
+            options={[
+              {
+                label: t('toteutuslomake.yksiArvo'),
+                value: ApurahaMaaraTyyppi.YKSI_ARVO,
+              },
+              {
+                label: t('toteutuslomake.vaihteluvali'),
+                value: ApurahaMaaraTyyppi.VAIHTELUVALI,
+              },
+            ]}
+            disabled={disabled}
+          />
+        </Box>
+        <Flex mt={1} alignCenter justifyBetween>
+          <FlexItem basis="60px" grow={1} data-testid="apurahaMin">
+            <Field
+              name={`${section}.apurahaMin`}
+              placeholder={
+                apurahaMaaraTyyppi === ApurahaMaaraTyyppi.YKSI_ARVO
+                  ? t('toteutuslomake.maara')
+                  : t('toteutuslomake.min')
+              }
+              component={FormFieldInput}
+              type="number"
+              disabled={disabled}
+            />
+          </FlexItem>
+          {apurahaMaaraTyyppi === ApurahaMaaraTyyppi.VAIHTELUVALI && (
+            <>
+              <Box style={{ textAlign: 'center', width: '20px' }}>{NDASH}</Box>
+              <FlexItem basis="60px" grow={1}>
+                <Field
+                  name={`${section}.apurahaMax`}
+                  placeholder={t('toteutuslomake.max')}
+                  component={FormFieldInput}
+                  type="number"
+                  disabled={disabled}
+                />
+              </FlexItem>
+            </>
+          )}
+          <Box ml={1} style={{ width: '70px' }}>
+            <ApurahaYksikkoField
+              name={`${section}.apurahaYksikko`}
+              disabled={disabled}
+            />
+          </Box>
+        </Flex>
+      </Spacing>
+    );
+  }
+);
+
 export const ApurahaFields = ({ koulutustyyppi, language, name }) => {
   const { t } = useTranslation();
   const onkoApuraha = useFieldValue<boolean>(`${name}.onkoApuraha`);
-  const apurahaMaaraTyyppi = useFieldValue<ApurahaMaaraTyyppi>(
-    `${name}.apurahaMaaraTyyppi`
-  );
 
   const opetuskieliArr = useFieldValue<Array<string>>(`${name}.opetuskieli`);
 
@@ -66,61 +131,11 @@ export const ApurahaFields = ({ koulutustyyppi, language, name }) => {
             {t('toteutuslomake.apurahaKaytossa')}
           </Field>
           {onkoApuraha && (
-            <Spacing
-              marginTop={1}
-              {...getTestIdProps('apurahaMaara')}
-              width="200px"
-            >
-              <legend>{t('toteutuslomake.syotaApurahanMaara')} *</legend>
-              <Box mt={1}>
-                <Field
-                  name={`${name}.apurahaMaaraTyyppi`}
-                  component={FormFieldRadioGroup}
-                  options={[
-                    {
-                      label: t('toteutuslomake.yksiArvo'),
-                      value: ApurahaMaaraTyyppi.YKSI_ARVO,
-                    },
-                    {
-                      label: t('toteutuslomake.vaihteluvali'),
-                      value: ApurahaMaaraTyyppi.VAIHTELUVALI,
-                    },
-                  ]}
-                />
-              </Box>
-              <Flex mt={1} alignCenter justifyBetween>
-                <FlexItem basis="60px" grow={1} data-testid="apurahaMin">
-                  <Field
-                    name={`${name}.apurahaMin`}
-                    placeholder={
-                      apurahaMaaraTyyppi === ApurahaMaaraTyyppi.YKSI_ARVO
-                        ? t('toteutuslomake.maara')
-                        : t('toteutuslomake.min')
-                    }
-                    component={FormFieldInput}
-                    type="number"
-                  />
-                </FlexItem>
-                {apurahaMaaraTyyppi === ApurahaMaaraTyyppi.VAIHTELUVALI && (
-                  <>
-                    <Box style={{ textAlign: 'center', width: '20px' }}>
-                      {NDASH}
-                    </Box>
-                    <FlexItem basis="60px" grow={1}>
-                      <Field
-                        name={`${name}.apurahaMax`}
-                        placeholder={t('toteutuslomake.max')}
-                        component={FormFieldInput}
-                        type="number"
-                      />
-                    </FlexItem>
-                  </>
-                )}
-                <Box ml={1} style={{ width: '70px' }}>
-                  <ApurahaYksikkoField name={`${name}.apurahaYksikko`} />
-                </Box>
-              </Flex>
-            </Spacing>
+            <Field
+              component={ApurahaMaaraFields}
+              name={`${name}.apurahaGroup`}
+              section={name}
+            />
           )}
         </FlexItem>
         <FlexItem grow={1} paddingLeft={4}>

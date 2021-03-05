@@ -210,14 +210,7 @@ exports[`createHaku > should be able to create haku with muu hakulomake #0`] =
   "kohdejoukkoKoodiUri": null,
   "kohdejoukonTarkenneKoodiUri": null,
   "metadata": {
-    "koulutuksenAlkamiskausi": {
-      "alkamiskausityyppi": null,
-      "henkilokohtaisenSuunnitelmanLisatiedot": {},
-      "koulutuksenAlkamiskausiKoodiUri": null,
-      "koulutuksenAlkamispaivamaara": null,
-      "koulutuksenAlkamisvuosi": null,
-      "koulutuksenPaattymispaivamaara": null
-    },
+    "koulutuksenAlkamiskausi": {},
     "tulevaisuudenAikataulu": [],
     "yhteyshenkilot": []
   },
@@ -248,14 +241,7 @@ exports[`createHaku > should be able to create haku with "ei sähköistä" hakul
   "kohdejoukkoKoodiUri": null,
   "kohdejoukonTarkenneKoodiUri": null,
   "metadata": {
-    "koulutuksenAlkamiskausi": {
-      "alkamiskausityyppi": null,
-      "henkilokohtaisenSuunnitelmanLisatiedot": {},
-      "koulutuksenAlkamiskausiKoodiUri": null,
-      "koulutuksenAlkamispaivamaara": null,
-      "koulutuksenAlkamisvuosi": null,
-      "koulutuksenPaattymispaivamaara": null
-    },
+    "koulutuksenAlkamiskausi": {},
     "tulevaisuudenAikataulu": [],
     "yhteyshenkilot": []
   },

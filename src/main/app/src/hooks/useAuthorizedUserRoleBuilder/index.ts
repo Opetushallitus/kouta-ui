@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import useAuthorizedUser from '#/src/hooks/useAuthorizedUser';
+import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
 import createRoleBuilder from '#/src/utils/createRoleBuilder';
 import getUserRoles from '#/src/utils/getUserRoles';
 

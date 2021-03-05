@@ -6,7 +6,8 @@ import { useHistory } from 'react-router-dom';
 
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode, KOULUTUSTYYPPI } from '#/src/constants';
-import { useForm, useFormName } from '#/src/hooks/form';
+import { useFormName } from '#/src/contexts/FormNameContext';
+import { useForm } from '#/src/hooks/form';
 import { useSaveToteutus } from '#/src/hooks/formSaveHooks';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { ToteutusModel } from '#/src/types/toteutusTypes';

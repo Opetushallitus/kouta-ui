@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode } from '#/src/constants';
-import { useFormName } from '#/src/hooks/form';
+import { useFormName } from '#/src/contexts/FormNameContext';
 import { useSaveValintaperuste } from '#/src/hooks/formSaveHooks';
 import createValintaperuste from '#/src/utils/valintaperuste/createValintaperuste';
 import { getValintaperusteByFormValues } from '#/src/utils/valintaperuste/getValintaperusteByFormValues';

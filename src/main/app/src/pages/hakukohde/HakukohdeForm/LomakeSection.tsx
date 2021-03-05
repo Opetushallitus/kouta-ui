@@ -10,7 +10,7 @@ import { LomakeFields } from '#/src/components/LomakeFields';
 import Spacing from '#/src/components/Spacing';
 import { Typography } from '#/src/components/virkailija';
 import { HAKULOMAKETYYPPI } from '#/src/constants';
-import { useUrls } from '#/src/contexts/contextHooks';
+import { useUrls } from '#/src/contexts/UrlContext';
 import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 

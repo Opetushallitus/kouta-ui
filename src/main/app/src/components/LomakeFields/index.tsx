@@ -15,7 +15,7 @@ import {
 } from '#/src/components/formFields';
 import Spacing from '#/src/components/Spacing';
 import { HAKULOMAKETYYPPI } from '#/src/constants';
-import { useUrls } from '#/src/contexts/contextHooks';
+import { useUrls } from '#/src/contexts/UrlContext';
 import useLanguage from '#/src/hooks/useLanguage';
 
 import {

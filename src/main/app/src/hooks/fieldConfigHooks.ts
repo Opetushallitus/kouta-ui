@@ -1,8 +1,6 @@
-import { useContext } from 'react';
-
 import _ from 'lodash';
 
-import FormConfigSectionContext from '#/src/contexts/FormConfigSectionContext';
+import { useFormConfigSection } from '#/src/contexts/FormConfigSectionContext';
 import { useFormConfig, useForm } from '#/src/hooks/form';
 
 const findFieldConfig = (fieldConfigs = [], name) => {
@@ -25,7 +23,7 @@ const findFieldConfig = (fieldConfigs = [], name) => {
 
 export function useFieldConfig(name) {
   const formConfig = useFormConfig();
-  const section = useContext(FormConfigSectionContext);
+  const section = useFormConfigSection();
   const sectionFields = _.get(formConfig, `sections.${section}.fields`);
   return findFieldConfig(sectionFields, name);
 }

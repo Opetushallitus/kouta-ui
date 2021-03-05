@@ -7,7 +7,7 @@ import formActions from 'redux-form/lib/actions';
 
 import { ENTITY } from '#/src/constants';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
-import FormNameContext from '#/src/contexts/FormNameContext';
+import { useFormName } from '#/src/contexts/FormNameContext';
 import { assert } from '#/src/utils';
 import { getKielivalinta } from '#/src/utils/form/formConfigUtils';
 import getHakuFormConfig from '#/src/utils/haku/getHakuFormConfig';
@@ -20,8 +20,6 @@ import getToteutusFormConfig from '#/src/utils/toteutus/getToteutusFormConfig';
 import getValintaperusteFormConfig from '#/src/utils/valintaperuste/getValintaperusteFormConfig';
 
 import { useActions } from './useActions';
-
-export const useFormName = () => useContext(FormNameContext);
 
 export const useForm = (formNameProp?: string) => {
   const formName = useFormName();
@@ -55,7 +53,7 @@ export function useSubmitErrors(formNameProp) {
 }
 
 export function useFieldValue<T = any>(name, formNameProp?: string): T {
-  const contextFormName = useContext(FormNameContext);
+  const contextFormName = useFormName();
   const formName = formNameProp || contextFormName;
 
   assert(formName != null);

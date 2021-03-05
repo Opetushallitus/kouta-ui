@@ -3,9 +3,10 @@ import { useCallback } from 'react';
 import DataLoader from 'dataloader';
 import _ from 'lodash';
 
-import { useUrls, useHttpClient } from '#/src/contexts/contextHooks';
+import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
+import { useHttpClient } from '#/src/contexts/HttpClientContext';
+import { useUrls } from '#/src/contexts/UrlContext';
 import useApiAsync from '#/src/hooks/useApiAsync';
-import useAuthorizedUser from '#/src/hooks/useAuthorizedUser';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import getUserOrganisaatiotWithRoles from '#/src/utils/getUserOrganisaatiotWithRoles';
 import getUserRoles from '#/src/utils/getUserRoles';

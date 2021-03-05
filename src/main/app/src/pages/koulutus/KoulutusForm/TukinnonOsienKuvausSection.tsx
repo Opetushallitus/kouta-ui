@@ -8,7 +8,7 @@ import Anchor from '#/src/components/Anchor';
 import FormConfigFragment from '#/src/components/FormConfigFragment';
 import StyledSectionHTML from '#/src/components/StyledSectionHTML';
 import { Box, Spin, Typography } from '#/src/components/virkailija';
-import { useUrls } from '#/src/contexts/contextHooks';
+import { useUrls } from '#/src/contexts/UrlContext';
 import { getThemeProp } from '#/src/theme';
 import { sanitizeHTML } from '#/src/utils';
 import { useTutkinnonOsienKuvaukset } from '#/src/utils/koulutus/getTutkinnonOsanKuvaus';

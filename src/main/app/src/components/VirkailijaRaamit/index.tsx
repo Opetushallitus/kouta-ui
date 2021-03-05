@@ -2,7 +2,7 @@ import React from 'react';
 
 import UiVirkailijaRaamit from '@opetushallitus/virkailija-ui-components/VirkailijaRaamit';
 
-import { useUrls } from '#/src/contexts/contextHooks';
+import { useUrls } from '#/src/contexts/UrlContext';
 
 const getScriptUrl = urls => {
   let scriptUrl = null;

@@ -16,8 +16,8 @@ import {
   ORGANISAATIOTYYPPI,
   FormMode,
 } from '#/src/constants';
-import { useUrls } from '#/src/contexts/contextHooks';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
+import { useUrls } from '#/src/contexts/UrlContext';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import useOrganisaatio, { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
 import koodiUriHasVersion from '#/src/utils/koodi/koodiUriHasVersion';

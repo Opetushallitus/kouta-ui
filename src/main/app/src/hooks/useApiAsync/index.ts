@@ -1,6 +1,7 @@
 import { useAsync } from 'react-async';
 
-import { useUrls, useHttpClient } from '#/src/contexts/contextHooks';
+import { useHttpClient } from '#/src/contexts/HttpClientContext';
+import { useUrls } from '#/src/contexts/UrlContext';
 import { isDev } from '#/src/utils';
 
 export const useApiAsync = (asyncArgs = {}) => {

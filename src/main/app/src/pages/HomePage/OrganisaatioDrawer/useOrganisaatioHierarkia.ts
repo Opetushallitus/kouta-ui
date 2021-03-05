@@ -2,8 +2,8 @@ import { useMemo, useCallback } from 'react';
 
 import _ from 'lodash';
 
+import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
 import useApiAsync from '#/src/hooks/useApiAsync';
-import useAuthorizedUser from '#/src/hooks/useAuthorizedUser';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
 import useLanguage from '#/src/hooks/useLanguage';
 import getRoleOrganisaatioOid from '#/src/utils/getRoleOrganisaatioOid';

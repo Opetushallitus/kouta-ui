@@ -41,7 +41,7 @@ const fillTeemakuvaSection = () => {
 
 const fillTietoaOpiskelustaSection = () => {
   getByTestId('tietoaSection').within(() => {
-    selectOption('organisaationkuvaustiedot_0');
+    selectOption('Opintojen rahoitus');
     typeToEditor('Tietoa');
     jatka();
   });
@@ -52,7 +52,7 @@ const fillYhteystiedotSection = () => {
     getByTestId('osoite').find('input').pipe(paste('Osoite'));
 
     getByTestId('postinumero').within(() => {
-      fillAsyncSelect('0', 'Posti_0');
+      fillAsyncSelect('00350');
     });
 
     getByTestId('sahkoposti')
@@ -87,7 +87,7 @@ export const createOppilaitosForm = () => {
     cy.visit(`/organisaatio/${organisaatioOid}/oppilaitos`);
   });
 
-  it('should be able to create oppilaitos', () => {
+  it.only('should be able to create oppilaitos', () => {
     cy.intercept(
       { method: 'PUT', url: '**/oppilaitos' },
       {

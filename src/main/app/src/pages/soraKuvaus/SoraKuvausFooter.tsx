@@ -47,7 +47,7 @@ export const SoraKuvausFooter = ({
         queryClient.invalidateQueries(ENTITY.SORA_KUVAUS);
       }
     },
-    [formMode, soraKuvaus, history]
+    [formMode, soraKuvaus, history, queryClient]
   );
 
   const { save } = useSaveForm({

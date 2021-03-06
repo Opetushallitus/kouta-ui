@@ -30,7 +30,7 @@ const fillKohdejoukkoSection = () => {
     });
 
     getByTestId('tarkenne').within(() => {
-      selectOption('haunkohdejoukontarkenne_0');
+      selectOption('Ammatillinen opettajankoulutus');
     });
 
     jatka();

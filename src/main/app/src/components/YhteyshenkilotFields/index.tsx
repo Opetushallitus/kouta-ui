@@ -5,8 +5,8 @@ import { Field, FieldArray } from 'redux-form';
 
 import Button from '#/src/components/Button';
 import FieldArrayList from '#/src/components/FieldArrayList';
-import { FormFieldInput, FormFieldUrlInput } from '#/src/components/formFields';
 import { Flex } from '#/src/components/Flex';
+import { FormFieldInput, FormFieldUrlInput } from '#/src/components/formFields';
 import Spacing from '#/src/components/Spacing';
 
 const YhteyshenkilotField = ({ fields, language, t }) => {

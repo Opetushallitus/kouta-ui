@@ -29,7 +29,7 @@ const getKoulutuksetByKoulutusala = async ({
 
 export const useKoulutuksetByKoulutusala = koulutusalat => {
   return useApiQuery(
-    'koulutusalat',
+    'getKoulutuksetByKoulutusala',
     getKoulutuksetByKoulutusala,
     { koulutusalaKoodiUri: koulutusalat },
     {

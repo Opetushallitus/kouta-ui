@@ -138,14 +138,16 @@ export const ApurahaFields = ({ koulutustyyppi, language, name }) => {
             />
           )}
         </FlexItem>
-        <FlexItem grow={1} paddingLeft={4}>
-          <Field
-            name={`${name}.apurahaKuvaus.${language}`}
-            component={FormFieldEditor}
-            label={t('yleiset.tarkempiKuvaus')}
-            hideHeaderSelect
-          />
-        </FlexItem>
+        {onkoApuraha && (
+          <FlexItem grow={1} paddingLeft={4}>
+            <Field
+              name={`${name}.apurahaKuvaus.${language}`}
+              component={FormFieldEditor}
+              label={t('yleiset.tarkempiKuvaus')}
+              hideHeaderSelect
+            />
+          </FlexItem>
+        )}
       </Flex>
     </FieldGroup>
   );

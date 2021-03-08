@@ -14,7 +14,6 @@ import {
 const organisaatioOid = '1.1.1.1.1.1';
 const koulutusOid = '1.2.1.1.1.1';
 const toteutusOid = '1.3.1.1.1.1';
-const perusteId = '1';
 
 const prepareTest = tyyppi => {
   const testKoulutusFields = {
@@ -29,18 +28,11 @@ const prepareTest = tyyppi => {
     tarjoajat: ['5.1.1.1.1.1', '3.1.1.1.1.1'],
     organisaatioOid: organisaatioOid,
     koulutusOid: koulutusOid,
-    metadata: {
-      opetus: {
-        koulutuksenTarkkaAlkamisaika: false,
-        koulutuksenAlkamiskausi: 'kausi_0#1',
-        koulutuksenAlkamisvuosi: 2020,
-      },
-    },
   };
 
   playMocks(toteutusMocks);
 
-  stubToteutusFormRoutes({ organisaatioOid, perusteId });
+  stubToteutusFormRoutes({ organisaatioOid });
 
   cy.intercept(
     { method: 'GET', url: `**/toteutus/${toteutusOid}/hakukohteet/list**` },

@@ -15,7 +15,7 @@ exports[`createOppilaitos > should be able to create oppilaitos #0`] =
     "tiedekuntia": 3,
     "tietoaOpiskelusta": [
       {
-        "otsikkoKoodiUri": "organisaationkuvaustiedot_0#1",
+        "otsikkoKoodiUri": "organisaationkuvaustiedot_02#1",
         "teksti": {
           "fi": "<p>Tietoa</p>"
         }
@@ -27,7 +27,7 @@ exports[`createOppilaitos > should be able to create oppilaitos #0`] =
         "osoite": {
           "fi": "Osoite"
         },
-        "postinumeroKoodiUri": "posti_0#2"
+        "postinumeroKoodiUri": "posti_00350#2"
       },
       "puhelinnumero": {
         "fi": "12345"

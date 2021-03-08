@@ -1,17 +1,13 @@
 import { playMocks } from 'kto-ui-common/cypress/mockUtils';
 import _ from 'lodash';
 
-import createKoodi from '#/cypress/data/koodi';
-import createKoodisto from '#/cypress/data/koodisto';
 import organisaatio from '#/cypress/data/organisaatio';
 import organisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
 import hakuMocks from '#/cypress/mocks/haku.mocks.json';
 
 import {
-  stubKoodistoRoute,
   stubHakemuspalveluLomakkeetRoute,
   stubOppijanumerorekisteriHenkiloRoute,
-  stubKoodiRoute,
   stubCommonRoutes,
 } from './utils';
 
@@ -50,42 +46,6 @@ export const stubHakuFormRoutes = ({ organisaatioOid }) => {
           oid: organisaatioOid,
         }),
       ],
-    }
-  );
-
-  stubKoodistoRoute({ koodisto: 'haunkohdejoukontarkenne' });
-  stubKoodistoRoute({ koodisto: 'opetuspaikkakk' });
-  stubKoodistoRoute({ koodisto: 'posti' });
-  stubKoodiRoute(createKoodi({ koodisto: 'posti', versio: 2 }));
-
-  cy.intercept(
-    {
-      method: 'GET',
-      url: `**/koodisto-service/rest/json/haunkohdejoukko/koodi**`,
-    },
-    {
-      body: createKoodisto({ koodisto: 'haunkohdejoukko' }).map((v, index) =>
-        index === 0
-          ? {
-              ...v,
-              koodiUri: 'haunkohdejoukko_12',
-            }
-          : v
-      ),
-    }
-  );
-
-  cy.intercept(
-    { method: 'GET', url: `**/koodisto-service/rest/json/hakutapa/koodi**` },
-    {
-      body: createKoodisto({ koodisto: 'hakutapa' }).map((v, index) =>
-        index === 0
-          ? {
-              ...v,
-              koodiUri: 'hakutapa_01',
-            }
-          : v
-      ),
     }
   );
 

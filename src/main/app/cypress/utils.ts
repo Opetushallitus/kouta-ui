@@ -1,10 +1,9 @@
 import { fireEvent } from '@testing-library/react';
 import { loggable } from 'cypress-pipe';
+import { playMocks } from 'kto-ui-common/cypress/mockUtils';
 import _fp from 'lodash/fp';
 
-import ePerusteByKoulutusKoodi351107 from '#/cypress/data/ePerusteByKoulutusKoodi351107';
-import koodisto from '#/cypress/data/koodisto';
-import koodistoOpintojenLaajuusYksikko from '#/cypress/data/koodistoOpintojenLaajuusYksikko';
+import commonMocks from '#/cypress/mocks/common.mocks.json';
 import { Alkamiskausityyppi } from '#/src/constants';
 
 export const paste = loggable('paste', value => $element => {
@@ -38,6 +37,9 @@ export const getSelectOption = value =>
 export const getCheckbox = value =>
   cy.get(`input[type="checkbox"]${value ? `[name="${value}"]` : ''}`);
 
+export const selectCheckbox = name =>
+  cy.findByRole('checkbox', { name }).check({ force: true });
+
 export const getSelect = () => cy.get('.Select__');
 
 export const selectOption = value => {
@@ -56,16 +58,6 @@ export const fillAsyncSelect = (input, match = null) => {
       .first()
       .click();
   });
-};
-
-export const stubKoodistoRoute = ({ koodisto: koodistonNimi }) => {
-  cy.intercept(
-    {
-      method: 'GET',
-      url: `/koodisto-service/rest/json/${koodistonNimi}/koodi`,
-    },
-    { body: koodisto({ koodisto: koodistonNimi }) }
-  );
 };
 
 export const stubLokalisaatioRoute = () => {
@@ -145,6 +137,18 @@ export const stubKayttoOikeusMeRoute = ({ user = {} } = {}) => {
   );
 };
 
+export const stubAsiointikieliRoute = () => {
+  cy.intercept(
+    {
+      method: 'GET',
+      url: '/oppijanumerorekisteri-service/henkilo/current/asiointiKieli',
+    },
+    {
+      body: 'fi',
+    }
+  );
+};
+
 export const stubKoutaBackendLoginRoute = () => {
   cy.intercept(
     { method: 'GET', url: '/kouta-backend/auth/login' },
@@ -191,35 +195,13 @@ export const fillDatePickerInput = value => {
   cy.get('.DatePickerInput__').find('input').pipe(paste(value));
 };
 
-export const stubKoodiRoute = koodi => {
-  const { koodiUri, versio } = koodi;
-
-  return cy.intercept(
-    {
-      method: 'GET',
-      url: `/koodisto-service/rest/codeelement/${koodiUri}/${versio}`,
-    },
-    { body: koodi }
-  );
-};
-
-export const stubEPerusteetByKoulutuskoodiRoute = () => {
-  cy.intercept(
-    {
-      method: 'GET',
-      url:
-        '/eperusteet-service/api/perusteet?tuleva=true&siirtyma=false&voimassaolo=true&poistunut=false&kieli=fi&koulutuskoodi=koulutus_351107',
-    },
-    { body: ePerusteByKoulutusKoodi351107 }
-  );
-};
-
 export const stubCommonRoutes = () => {
   stubLokalisaatioRoute();
   stubKayttoOikeusMeRoute();
+  stubAsiointikieliRoute();
   stubKoutaBackendLoginRoute();
   stubKoutaBackendSessionRoute();
-  stubKoodistoOpintojenLaajuusYksikko();
+  playMocks(commonMocks);
 };
 
 export const jatka = () =>
@@ -310,17 +292,6 @@ export const fillPohjaSection = () => {
   getByTestId('pohjaSection').within(() => {
     jatka();
   });
-};
-
-export const stubKoodistoOpintojenLaajuusYksikko = () => {
-  cy.intercept(
-    {
-      method: 'GET',
-      url:
-        '/koodisto-service/rest/json/opintojenlaajuusyksikko/koodi?onlyValidKoodis=true&koodistoVersio=',
-    },
-    { body: koodistoOpintojenLaajuusYksikko }
-  );
 };
 
 export const fillTilaSection = (tila = 'julkaistu') => {

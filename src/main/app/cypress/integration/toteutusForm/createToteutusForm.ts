@@ -7,7 +7,6 @@ import { stubToteutusFormRoutes } from '#/cypress/toteutusFormUtils';
 import {
   getRadio,
   getSelectOption,
-  getCheckbox,
   selectOption,
   fillAsyncSelect,
   fillTreeSelect,
@@ -22,14 +21,13 @@ import {
   fillDateTimeInput,
   fillYhteyshenkilotFields,
   fillAjankohtaFields,
+  selectCheckbox,
 } from '#/cypress/utils';
 import { Alkamiskausityyppi } from '#/src/constants';
 
-const fillOpetuskieli = (chosenNumber = '0') => {
+const fillOpetuskieli = (chosenLang = 'suomi') => {
   getByTestId('opetuskieli').within(() => {
-    getCheckbox(`oppilaitoksenopetuskieli_${chosenNumber}#1`).click({
-      force: true,
-    });
+    selectCheckbox(chosenLang);
     typeToEditor('opetuskieli kuvaus');
   });
 };
@@ -44,14 +42,14 @@ const fillSuunniteltuKesto = () => {
 
 const fillOpetusaika = () => {
   getByTestId('opetusaika').within(() => {
-    getCheckbox('opetusaikakk_0#1').click({ force: true });
+    selectCheckbox('Päiväopetus');
     typeToEditor('opetusaika kuvaus');
   });
 };
 
 const fillOpetustapa = () => {
   getByTestId('opetustapa').within(() => {
-    getCheckbox('opetuspaikkakk_0#1').click({ force: true });
+    selectCheckbox('Lähiopetus');
     typeToEditor('opetustapa kuvaus');
   });
 };
@@ -76,12 +74,12 @@ const fillOsiot = () => {
   getByTestId('osiotSelect').click();
 
   getByTestId('osiotSelect').within(() => {
-    getSelectOption('koulutuksenlisatiedot_0').click({
+    getSelectOption('Opintojen rakenne').click({
       force: true,
     });
   });
 
-  getByTestId('osioKuvaus.koulutuksenlisatiedot_0#1').within(() => {
+  getByTestId('osioKuvaus.koulutuksenlisatiedot_01#1').within(() => {
     typeToEditor('koulutuksenlisatiedot_0 kuvaus');
   });
 };
@@ -168,9 +166,7 @@ const fillKkOsaamisalat = () => {
 
 const fillLukiolinjatSection = () => {
   getByTestId('lukiolinjatSection').within(() => {
-    getByTestId('lukiolinja').within(() => {
-      selectOption('lukiolinjat_0');
-    });
+    selectOption('Lukio');
 
     jatka();
   });
@@ -178,7 +174,7 @@ const fillLukiolinjatSection = () => {
 
 const fillDiplomi = () => {
   getByTestId('diplomiTyypit').within(() => {
-    selectOption('lukiodiplomit_0');
+    selectOption('Musiikin lukiodiplomi');
   });
 
   getByTestId('diplomiKuvaus').within(() => {
@@ -188,27 +184,27 @@ const fillDiplomi = () => {
 
 const fillKielivalikoima = () => {
   getByTestId('A1A2Kielet').within(() => {
-    selectOption('kieli_0');
+    selectOption('englanti');
   });
 
   getByTestId('B2Kielet').within(() => {
-    selectOption('kieli_1');
+    selectOption('saksa');
   });
 
   getByTestId('aidinkielet').within(() => {
-    selectOption('kieli_2');
+    selectOption('suomi');
   });
 
   getByTestId('B1Kielet').within(() => {
-    selectOption('kieli_3');
+    selectOption('ruotsi');
   });
 
   getByTestId('B3Kielet').within(() => {
-    selectOption('kieli_4');
+    selectOption('espanja');
   });
 
   getByTestId('muutKielet').within(() => {
-    selectOption('kieli_4');
+    selectOption('kiina');
   });
 };
 
@@ -217,7 +213,6 @@ const toteutusOid = '1.2.3.4.5.6';
 const prepareTest = tyyppi => {
   const organisaatioOid = '1.1.1.1.1.1';
   const koulutusOid = '1.2.1.1.1.1';
-  const perusteId = 6777660;
 
   const testKoulutusFields = {
     oid: koulutusOid,
@@ -228,7 +223,7 @@ const prepareTest = tyyppi => {
   };
 
   playMocks(toteutusMocks);
-  stubToteutusFormRoutes({ perusteId, organisaatioOid });
+  stubToteutusFormRoutes({ organisaatioOid });
   cy.intercept(
     { method: 'GET', url: `**/koulutus/${koulutusOid}` },
     { body: _fp.merge(koulutus({ tyyppi }), testKoulutusFields) }
@@ -348,18 +343,14 @@ export const createToteutusForm = () => {
 
     getByTestId('osaamisalatSection').within(() => {
       getByTestId('osaamisalaSelection').within(() => {
-        getCheckbox('osaamisala_0').click({ force: true });
+        selectCheckbox('Kaivostyön osaamisala');
       });
 
-      getByTestId('osaamisalaToggle.osaamisala_0').click({ force: true });
-
-      getByTestId('osaamisalaLinkki.osaamisala_0')
-        .find('input')
-        .pipe(paste('http://linkki.com'));
-
-      getByTestId('osaamisalaOtsikko.osaamisala_0')
-        .find('input')
-        .pipe(paste('osaamisala_0 otsikko'));
+      getByTestId('osaamisalaToggle.osaamisala_1800').click({ force: true });
+      cy.findByLabelText('yleiset.linkki').pipe(paste('http://linkki.com'));
+      cy.findByLabelText('yleiset.linkinOtsikko').pipe(
+        paste('osaamisala_0 otsikko')
+      );
 
       jatka();
     });
@@ -411,7 +402,7 @@ export const createToteutusForm = () => {
     getByTestId('jarjestamistiedotSection').within(() => {
       fillCommonJarjestamistiedot({ maksullisuusTyyppi: 'lukuvuosimaksu' });
       cy.findByTestId('stipendi').should('not.exist');
-      fillOpetuskieli('4'); // "englanti" is needed for stipendi to show up
+      fillOpetuskieli('englanti'); // "englanti" is needed for stipendi to show up
       cy.findByTestId('stipendi').should('exist');
       fillStipendi();
       jatka();

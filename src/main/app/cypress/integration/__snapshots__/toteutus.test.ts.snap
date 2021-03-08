@@ -55,7 +55,7 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
       },
       "lisatiedot": [
         {
-          "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+          "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
           "teksti": {
             "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
           }
@@ -69,7 +69,7 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
       "onkoMaksullinen": true,
       "onkoStipendia": false,
       "opetusaikaKoodiUrit": [
-        "opetusaikakk_0#1"
+        "opetusaikakk_1#1"
       ],
       "opetusaikaKuvaus": {
         "fi": "<p>opetusaika kuvaus</p>"
@@ -78,10 +78,10 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
         "fi": "<p>opetuskieli kuvaus</p>"
       },
       "opetuskieliKoodiUrit": [
-        "oppilaitoksenopetuskieli_0#1"
+        "oppilaitoksenopetuskieli_1#1"
       ],
       "opetustapaKoodiUrit": [
-        "opetuspaikkakk_0#1"
+        "opetuspaikkakk_1#1"
       ],
       "opetustapaKuvaus": {
         "fi": "<p>opetustapa kuvaus</p>"
@@ -181,7 +181,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
       },
       "lisatiedot": [
         {
-          "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+          "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
           "teksti": {
             "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
           }
@@ -195,7 +195,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
       "onkoMaksullinen": true,
       "onkoStipendia": false,
       "opetusaikaKoodiUrit": [
-        "opetusaikakk_0#1"
+        "opetusaikakk_1#1"
       ],
       "opetusaikaKuvaus": {
         "fi": "<p>opetusaika kuvaus</p>"
@@ -204,10 +204,10 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
         "fi": "<p>opetuskieli kuvaus</p>"
       },
       "opetuskieliKoodiUrit": [
-        "oppilaitoksenopetuskieli_0#1"
+        "oppilaitoksenopetuskieli_1#1"
       ],
       "opetustapaKoodiUrit": [
-        "opetuspaikkakk_0#1"
+        "opetuspaikkakk_1#1"
       ],
       "opetustapaKuvaus": {
         "fi": "<p>opetustapa kuvaus</p>"
@@ -222,7 +222,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
     },
     "osaamisalat": [
       {
-        "koodiUri": "osaamisala_0",
+        "koodiUri": "osaamisala_1800",
         "linkki": {
           "fi": "http://linkki.com"
         },
@@ -332,7 +332,7 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
       },
       "lisatiedot": [
         {
-          "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+          "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
           "teksti": {
             "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
           }
@@ -346,7 +346,7 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
       "onkoMaksullinen": false,
       "onkoStipendia": true,
       "opetusaikaKoodiUrit": [
-        "opetusaikakk_0#1"
+        "opetusaikakk_1#1"
       ],
       "opetusaikaKuvaus": {
         "fi": "<p>opetusaika kuvaus</p>"
@@ -355,11 +355,11 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
         "fi": "<p>opetuskieli kuvaus</p>"
       },
       "opetuskieliKoodiUrit": [
-        "oppilaitoksenopetuskieli_0#1",
+        "oppilaitoksenopetuskieli_1#1",
         "oppilaitoksenopetuskieli_4#1"
       ],
       "opetustapaKoodiUrit": [
-        "opetuspaikkakk_0#1"
+        "opetuspaikkakk_1#1"
       ],
       "opetustapaKuvaus": {
         "fi": "<p>opetustapa kuvaus</p>"
@@ -455,25 +455,25 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
     "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
-    "lukiolinjaKoodiUri": "lukiolinjat_0#1",
+    "lukiolinjaKoodiUri": "lukiolinjat_0000#2",
     "opetus": {
       "A1JaA2Kielivalikoima": [
-        "kieli_0#1"
+        "kieli_en#1"
       ],
       "B1Kielivalikoima": [
-        "kieli_3#1"
+        "kieli_sv#1"
       ],
       "B2Kielivalikoima": [
-        "kieli_1#1"
+        "kieli_de#1"
       ],
       "B3Kielivalikoima": [
-        "kieli_4#1"
+        "kieli_es#1"
       ],
       "aidinkieliKielivalikoima": [
-        "kieli_2#1"
+        "kieli_fi#1"
       ],
       "diplomiKoodiUrit": [
-        "lukiodiplomit_0#1"
+        "lukiodiplomit_6#1"
       ],
       "diplomiKuvaus": {
         "fi": "<p>Diplomi kuvaus</p>"
@@ -488,7 +488,7 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
       },
       "lisatiedot": [
         {
-          "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
+          "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
           "teksti": {
             "fi": "<p>koulutuksenlisatiedot_0 kuvaus</p>"
           }
@@ -499,12 +499,12 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
       },
       "maksunMaara": 10,
       "muuKielivalikoima": [
-        "kieli_4#1"
+        "kieli_zh#1"
       ],
       "onkoMaksullinen": true,
       "onkoStipendia": false,
       "opetusaikaKoodiUrit": [
-        "opetusaikakk_0#1"
+        "opetusaikakk_1#1"
       ],
       "opetusaikaKuvaus": {
         "fi": "<p>opetusaika kuvaus</p>"
@@ -513,10 +513,10 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
         "fi": "<p>opetuskieli kuvaus</p>"
       },
       "opetuskieliKoodiUrit": [
-        "oppilaitoksenopetuskieli_0#1"
+        "oppilaitoksenopetuskieli_1#1"
       ],
       "opetustapaKoodiUrit": [
-        "opetuspaikkakk_0#1"
+        "opetuspaikkakk_1#1"
       ],
       "opetustapaKuvaus": {
         "fi": "<p>opetustapa kuvaus</p>"
@@ -555,7 +555,7 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "lukiolinjat_0"
+    "fi": "Lukio"
   },
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": null,

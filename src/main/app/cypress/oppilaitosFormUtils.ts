@@ -1,19 +1,14 @@
+import { playMocks } from 'kto-ui-common/cypress/mockUtils';
 import _ from 'lodash';
 
-import createKoodi from '#/cypress/data/koodi';
 import createOrganisaatio from '#/cypress/data/organisaatio';
 import createOrganisaatioHierarkia from '#/cypress/data/organisaatioHierarkia';
-import {
-  stubKoodiRoute,
-  stubKoodistoRoute,
-  stubCommonRoutes,
-} from '#/cypress/utils';
+import oppilaitosMocks from '#/cypress/mocks/oppilaitos.mocks.json';
+import { stubCommonRoutes } from '#/cypress/utils';
 
 export const stubOppilaitosFormRoutes = ({ organisaatioOid }) => {
   stubCommonRoutes();
-  stubKoodiRoute(createKoodi({ koodisto: 'posti', versio: 2 }));
-
-  stubKoodistoRoute({ koodisto: 'organisaationkuvaustiedot' });
+  playMocks(oppilaitosMocks);
 
   cy.intercept(
     {

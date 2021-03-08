@@ -147,7 +147,7 @@ exports[`createHaku > should be able to create haku with ataru hakulomake #0`] =
     "fi"
   ],
   "kohdejoukkoKoodiUri": "haunkohdejoukko_12#1",
-  "kohdejoukonTarkenneKoodiUri": "haunkohdejoukontarkenne_0#1",
+  "kohdejoukonTarkenneKoodiUri": "haunkohdejoukontarkenne_2#1",
   "metadata": {
     "koulutuksenAlkamiskausi": {
       "alkamiskausityyppi": "alkamiskausi ja -vuosi",

@@ -58,12 +58,12 @@ const getOptionLabelByValue = options => {
   }, {});
 };
 
-const getValue = (value, options) => {
+const getValue = (value?: SelectOption | null, options?: Array<any>) => {
   const hasOptions = _.isArray(options);
 
   if (_.isObject(value) && value.value) {
     return hasOptions
-      ? options.find(option => option?.value === value.value) || {
+      ? options?.find(option => option?.value === value.value) || {
           label: value.value,
           ...value,
         }
@@ -74,7 +74,7 @@ const getValue = (value, options) => {
     const labelByValue = getOptionLabelByValue(options);
 
     return value
-      .map(item => {
+      .map((item?: SelectOption) => {
         if (_.isObject(item) && item.value) {
           const { value: itemValue, label: itemLabel, ...rest } = item;
 
@@ -108,7 +108,7 @@ export const Select = ({
   error = false,
   ...props
 }: SelectProps) => {
-  const resolvedValue = useMemo(() => getValue(value, options), [
+  const resolvedValue = useMemo(() => getValue(value, options as any), [
     value,
     options,
   ]);
@@ -175,13 +175,13 @@ export const AsyncSelect = ({
   isLoading,
   id,
   ...props
-}) => {
+}: SelectProps) => {
   const { t } = useTranslation();
   const theme = useContext(ThemeContext);
   const labelCache = useRef({});
 
   const valuesWithoutLabel = useMemo(() => {
-    const valueArr = _.castArray(valueProp);
+    const valueArr: any = _.castArray(valueProp);
 
     return valueArr
       .filter(v => !v?.label && !labelCache.current[v?.value])
@@ -216,7 +216,7 @@ export const AsyncSelect = ({
   const value = useMemo(() => {
     return getValue(
       valueProp,
-      Object.entries(valueToLabel || {}).map(([k, v]) => ({
+      _.toPairs(valueToLabel).map(([k, v]) => ({
         value: k,
         label: v,
       }))

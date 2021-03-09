@@ -29,7 +29,7 @@ const getMatchingOptions = (options: SelectOptions, input, maxMatches) => {
 
 const useLoadOptions = (
   options?: SelectOptions,
-  { debounce: debounceTime = 500, maxOptions = 100 } = {}
+  { debounce: debounceTime = 500, maxOptions = Infinity } = {}
 ) => {
   return useMemo(() => {
     if (options && options?.length !== 0) {

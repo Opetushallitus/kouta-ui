@@ -86,20 +86,24 @@ export const TUTKINTOON_JOHTAMATTOMAT_KOULUTUSTYYPIT = _.without(
   ...TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT
 );
 
-export const KOULUTUSTYYPPI_TO_KOULUTUSTYYPPI_IDS_MAP = {
-  [KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS]: [
-    'koulutustyyppi_1',
-    'koulutustyyppi_4',
-    'koulutustyyppi_5',
-    'koulutustyyppi_7',
-    'koulutustyyppi_8',
-    'koulutustyyppi_11',
-    'koulutustyyppi_12',
-    'koulutustyyppi_13',
-    'koulutustyyppi_18',
-    'koulutustyyppi_19',
-    'koulutustyyppi_26',
-  ],
+const AMM_KOULUTUS_KOODIURIT = [
+  'koulutustyyppi_1',
+  'koulutustyyppi_4',
+  'koulutustyyppi_5',
+  'koulutustyyppi_7',
+  'koulutustyyppi_8',
+  'koulutustyyppi_11',
+  'koulutustyyppi_12',
+  'koulutustyyppi_13',
+  'koulutustyyppi_18',
+  'koulutustyyppi_19',
+  'koulutustyyppi_26',
+];
+
+export const KOULUTUSTYYPPI_TO_YLAKOODIURI_MAP = {
+  [KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS]: AMM_KOULUTUS_KOODIURIT,
+  [KOULUTUSTYYPPI.OSAAMISALA]: AMM_KOULUTUS_KOODIURIT,
+  [KOULUTUSTYYPPI.TUTKINNON_OSA]: AMM_KOULUTUS_KOODIURIT,
   [KOULUTUSTYYPPI.LUKIOKOULUTUS]: [
     'koulutustyyppi_2',
     'koulutustyyppi_9',
@@ -115,8 +119,22 @@ export const KOULUTUSTYYPPI_TO_KOULUTUSTYYPPI_IDS_MAP = {
     'koulutustyyppi_21',
     'koulutustyyppi_22',
   ],
-  [KOULUTUSTYYPPI.YLIOPISTOKOULUTUS]: ['koulutustyyppi_3'],
-  [KOULUTUSTYYPPI.AMKKOULUTUS]: ['koulutustyyppi_3'],
+  [KOULUTUSTYYPPI.YLIOPISTOKOULUTUS]: [
+    'tutkintotyyppi_13',
+    'tutkintotyyppi_14',
+    'tutkintotyyppi_15',
+    'eqf_8',
+  ],
+  [KOULUTUSTYYPPI.AMKKOULUTUS]: [
+    'tutkintotyyppi_06',
+    'tutkintotyyppi_07',
+    'tutkintotyyppi_12',
+  ],
+  [KOULUTUSTYYPPI.AVOIN_AMK]: [
+    'tutkintotyyppi_06',
+    'tutkintotyyppi_07',
+    'tutkintotyyppi_12',
+  ],
 };
 
 export enum HAKULOMAKETYYPPI {

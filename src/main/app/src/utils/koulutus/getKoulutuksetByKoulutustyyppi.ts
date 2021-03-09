@@ -1,48 +1,55 @@
+import { isBefore, parseISO, endOfToday } from 'date-fns';
 import _ from 'lodash';
+import _fp from 'lodash/fp';
 
-import { KOULUTUSTYYPPI_TO_KOULUTUSTYYPPI_IDS_MAP } from '#/src/constants';
+import { KOULUTUSTYYPPI_TO_YLAKOODIURI_MAP } from '#/src/constants';
+import { useApiQuery } from '#/src/hooks/useApiQuery';
+
+const isValidKoulutusKoodi = ({ koodisto, voimassaLoppuPvm }) =>
+  koodisto?.koodistoUri === 'koulutus' &&
+  (_fp.isNil(voimassaLoppuPvm) ||
+    isBefore(endOfToday(), parseISO(voimassaLoppuPvm)));
 
 export const getKoulutuksetByKoulutusTyyppi = async ({
   httpClient,
   apiUrls,
-  koulutusTyyppi,
+  koulutustyyppi,
 }) => {
-  const ids = KOULUTUSTYYPPI_TO_KOULUTUSTYYPPI_IDS_MAP[koulutusTyyppi];
+  const ids = KOULUTUSTYYPPI_TO_YLAKOODIURI_MAP[koulutustyyppi];
+
+  let responses: any = [];
 
   if (!ids) {
-    return [];
+    responses = [
+      await httpClient.get(apiUrls.url('koodisto-service.koodi', 'koulutus')),
+    ];
+  } else {
+    responses = await Promise.all(
+      ids.map(id =>
+        httpClient.get(apiUrls.url('koodisto-service.sisaltyy-ylakoodit', id))
+      )
+    );
   }
 
-  const responses = await Promise.all(
-    ids.map(id =>
-      httpClient.get(apiUrls.url('koodisto-service.sisaltyy-ylakoodit', id))
-    )
-  );
-
-  const koulutukset = responses.reduce((acc, response) => {
+  const koulutukset = _.flatMap(responses, (response: any) => {
     const { data } = response;
+    return _.isArray(data) ? data : [];
+  });
 
-    if (!_.isArray(data)) {
-      return acc;
+  return _fp.flow(
+    _fp.filter(isValidKoulutusKoodi),
+    _fp.groupBy('koodiUri'),
+    _fp.map(_fp.maxBy('versio'))
+  )(koulutukset);
+};
+
+export const useKoulutuksetByKoulutustyyppi = koulutustyyppi => {
+  return useApiQuery(
+    'getKoulutuksetByKoulutustyyppi',
+    getKoulutuksetByKoulutusTyyppi,
+    { koulutustyyppi },
+    {
+      enabled: Boolean(koulutustyyppi),
     }
-
-    return [
-      ...acc,
-      ...data.map(({ metadata, koodisto, koodiArvo, koodiUri, versio }) => ({
-        metadata,
-        koodisto,
-        koodiArvo,
-        koodiUri,
-        versio,
-      })),
-    ];
-  }, []);
-
-  const latestKoulutukset = _.toPairs(
-    _.groupBy(koulutukset, ({ koodiUri }) => koodiUri)
-  ).map(([, versiot]) => _.maxBy(versiot, ({ versio }) => versio));
-
-  return latestKoulutukset.filter(({ koodiUri }) =>
-    /^koulutus_/.test(koodiUri)
   );
 };

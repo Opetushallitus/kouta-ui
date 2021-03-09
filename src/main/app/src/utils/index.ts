@@ -128,7 +128,7 @@ export const sanitizeHTML = html => stripTags(html, ALLOWED_HTML_TAGS);
 export const parseKeyVal = memoize(
   _fp.flow(
     _fp.split(';'),
-    _fp.map(keyVal => keyVal.split('=')),
+    _fp.map(keyVal => _fp.trim(keyVal).split('=')),
     _fp.fromPairs
   )
 );

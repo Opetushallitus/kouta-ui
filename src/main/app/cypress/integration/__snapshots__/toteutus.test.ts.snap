@@ -43,7 +43,7 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
       "B2Kielivalikoima": [],
       "B3Kielivalikoima": [],
       "aidinkieliKielivalikoima": [],
-      "apuraha": {},
+      "apuraha": null,
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
       "koulutuksenAlkamiskausiUUSI": {
@@ -167,7 +167,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
       "B2Kielivalikoima": [],
       "B3Kielivalikoima": [],
       "aidinkieliKielivalikoima": [],
-      "apuraha": {},
+      "apuraha": null,
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
       "koulutuksenAlkamiskausiUUSI": {
@@ -472,7 +472,7 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
       "aidinkieliKielivalikoima": [
         "kieli_fi#1"
       ],
-      "apuraha": {},
+      "apuraha": null,
       "diplomiKoodiUrit": [
         "lukiodiplomit_6#1"
       ],
@@ -605,7 +605,7 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
       "B3Kielivalikoima": [],
       "aidinkieliKielivalikoima": [],
       "ammatillinenPerustutkintoErityisopetuksena": false,
-      "apuraha": {},
+      "apuraha": null,
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
       "koulutuksenAlkamiskausiUUSI": {
@@ -761,7 +761,7 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
       "B3Kielivalikoima": [],
       "aidinkieliKielivalikoima": [],
       "ammatillinenPerustutkintoErityisopetuksena": false,
-      "apuraha": {},
+      "apuraha": null,
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
       "koulutuksenAlkamiskausiUUSI": {
@@ -917,7 +917,7 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
         "kieli_4#1"
       ],
       "ammatillinenPerustutkintoErityisopetuksena": false,
-      "apuraha": {},
+      "apuraha": null,
       "diplomiKoodiUrit": [
         "lukiodiplomit_1#1"
       ],
@@ -1056,7 +1056,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
       "B3Kielivalikoima": [],
       "aidinkieliKielivalikoima": [],
       "ammatillinenPerustutkintoErityisopetuksena": false,
-      "apuraha": {},
+      "apuraha": null,
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
       "koulutuksenAlkamiskausiUUSI": {

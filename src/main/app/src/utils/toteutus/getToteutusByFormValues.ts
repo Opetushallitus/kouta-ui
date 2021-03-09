@@ -123,7 +123,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
                     }
                   : {}),
               }
-            : {},
+            : null,
         diplomiKoodiUrit: (values?.jarjestamistiedot?.diplomiTyypit || []).map(
           _fp.prop('value')
         ),

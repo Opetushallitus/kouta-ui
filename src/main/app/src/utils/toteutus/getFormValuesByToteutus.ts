@@ -1,7 +1,7 @@
 import _fp from 'lodash/fp';
 
 import { parseEditorState } from '#/src/components/Editor/utils';
-import { ApurahaMaaraTyyppi } from '#/src/constants';
+import { ApurahaMaaraTyyppi, ApurahaYksikko } from '#/src/constants';
 import { ToteutusFormValues } from '#/src/types/toteutusTypes';
 import { toSelectValue } from '#/src/utils';
 import { getAjankohtaFields } from '#/src/utils/form/aloitusajankohtaHelpers';
@@ -160,7 +160,9 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
         opetus?.apuraha?.min === opetus?.apuraha?.max
           ? ApurahaMaaraTyyppi.YKSI_ARVO
           : ApurahaMaaraTyyppi.VAIHTELUVALI,
-      apurahaYksikko: toSelectValue(opetus?.apuraha?.yksikko),
+      apurahaYksikko: toSelectValue(
+        opetus?.apuraha?.yksikko ?? ApurahaYksikko.EURO
+      ),
       apurahaKuvaus: _fp.mapValues(
         parseEditorState,
         opetus?.apuraha?.kuvaus || {}

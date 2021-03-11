@@ -47,7 +47,6 @@ const HakuForm = ({
       <HakukohteetModal
         open={isOpen}
         onClose={close}
-        fieldName="hakukohteet"
         organisaatioOid={organisaatioOid}
         onSave={onAttachHakukohde}
       />

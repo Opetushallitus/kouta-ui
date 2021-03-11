@@ -17,8 +17,8 @@ export const useLocalizedKoulutus = ({
   language,
 }) => {
   const languages = useSelectedLanguages();
-  const koulutusValue = useFieldValue(koulutusFieldName);
-  const koulutusKoodi = useKoodi(koulutusValue?.value);
+  const koulutusValue = useFieldValue(koulutusFieldName)?.value;
+  const koulutusKoodi = useKoodi(koulutusValue);
   const koodi = koulutusKoodi?.koodi;
   const isDirty = useIsDirty();
   const { change } = useBoundFormActions();

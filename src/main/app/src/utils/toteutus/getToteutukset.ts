@@ -1,3 +1,5 @@
+import { useApiQuery } from '#/src/hooks/useApiQuery';
+
 const getToteutukset = async ({
   organisaatioOid,
   vainHakukohteeseenLiitettavat,
@@ -17,5 +19,8 @@ const getToteutukset = async ({
 
   return data;
 };
+
+export const useToteutukset = (props = {}, options = {}) =>
+  useApiQuery('getToteutukset', getToteutukset, props, options);
 
 export default getToteutukset;

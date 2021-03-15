@@ -8,7 +8,8 @@ import {
   TEEMAKUVA_MAX_SIZE,
   TEEMAKUVA_MIN_DIMENSIONS,
 } from '#/src/constants';
-import { useHttpClient, useUrls } from '#/src/contexts/contextHooks';
+import { useHttpClient } from '#/src/contexts/HttpClientContext';
+import { useUrls } from '#/src/contexts/UrlContext';
 import { uploadTeemakuva } from '#/src/utils/api/uploadTeemakuva';
 
 import { FormFieldImageInput } from './formFields';

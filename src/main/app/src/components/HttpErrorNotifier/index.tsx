@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 
-import { useHttpClient } from '#/src/contexts/contextHooks';
+import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useToaster } from '#/src/hooks/useToaster';
 import { otherwise } from '#/src/utils';
 

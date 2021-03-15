@@ -62,11 +62,11 @@ const fillMaksullisuus = tyyppi => {
   });
 };
 
-const fillStipendi = () => {
-  getByTestId('stipendi').within(() => {
-    getRadio('kylla').click({ force: true });
-    getByTestId('stipendinMaara').find('input').pipe(paste('20'));
-    typeToEditor('stipendi kuvaus');
+const fillApuraha = () => {
+  getByTestId('apuraha').within(() => {
+    cy.findByLabelText('toteutuslomake.apurahaKaytossa').click({ force: true });
+    getByTestId('apurahaMin').find('input').pipe(paste('20'));
+    typeToEditor('apuraha kuvaus');
   });
 };
 
@@ -401,10 +401,10 @@ export const createToteutusForm = () => {
 
     getByTestId('jarjestamistiedotSection').within(() => {
       fillCommonJarjestamistiedot({ maksullisuusTyyppi: 'lukuvuosimaksu' });
-      cy.findByTestId('stipendi').should('not.exist');
-      fillOpetuskieli('englanti'); // "englanti" is needed for stipendi to show up
-      cy.findByTestId('stipendi').should('exist');
-      fillStipendi();
+      cy.findByTestId('apuraha').should('not.exist');
+      fillOpetuskieli('englanti'); // "englanti" is needed for apuraha selection to show up
+      cy.findByTestId('apuraha').should('exist');
+      fillApuraha();
       jatka();
     });
 

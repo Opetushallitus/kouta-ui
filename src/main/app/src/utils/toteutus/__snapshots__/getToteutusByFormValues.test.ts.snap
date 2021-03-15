@@ -86,6 +86,15 @@ Object {
         "kieli_3#1",
       ],
       "ammatillinenPerustutkintoErityisopetuksena": false,
+      "apuraha": Object {
+        "kuvaus": Object {
+          "fi": "<p>Fi apurahakuvaus</p>",
+          "sv": "<p>Sv apurahakuvaus</p>",
+        },
+        "max": 200,
+        "min": 100,
+        "yksikko": "euro",
+      },
       "diplomiKoodiUrit": Array [
         "diplomi_1#1",
         "diplomi_2#1",
@@ -126,8 +135,8 @@ Object {
       "muuKielivalikoima": Array [
         "kieli_6#1",
       ],
+      "onkoApuraha": true,
       "onkoMaksullinen": true,
-      "onkoStipendia": true,
       "opetusaikaKoodiUrit": Array [
         "opetusaika_1#1",
         "opetusaika_2#1",
@@ -153,11 +162,6 @@ Object {
         "fi": "<p>Fi tapakuvaus</p>",
         "sv": "<p>Sv tapakuvaus</p>",
       },
-      "stipendinKuvaus": Object {
-        "fi": "<p>Fi stipendikuvaus</p>",
-        "sv": "<p>Sv stipendikuvaus</p>",
-      },
-      "stipendinMaara": 20,
       "suunniteltuKestoKuukaudet": 6,
       "suunniteltuKestoKuvaus": Object {
         "fi": "<p>Fi aikakuvaus</p>",

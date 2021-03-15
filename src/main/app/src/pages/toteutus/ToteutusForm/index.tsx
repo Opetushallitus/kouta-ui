@@ -1,4 +1,9 @@
-import { POHJAVALINTA, DEFAULT_JULKAISUTILA } from '#/src/constants';
+import {
+  POHJAVALINTA,
+  DEFAULT_JULKAISUTILA,
+  ApurahaMaaraTyyppi,
+  ApurahaYksikko,
+} from '#/src/constants';
 
 export { default } from './ToteutusForm';
 
@@ -11,5 +16,9 @@ export const initialValues = (koulutusNimi, koulutusKielet) => ({
   },
   pohja: {
     tapa: POHJAVALINTA.UUSI,
+  },
+  jarjestamistiedot: {
+    apurahaMaaraTyyppi: ApurahaMaaraTyyppi.YKSI_ARVO,
+    apurahaYksikko: { value: ApurahaYksikko.EURO },
   },
 });

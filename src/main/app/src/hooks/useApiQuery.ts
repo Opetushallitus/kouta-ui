@@ -2,7 +2,8 @@ import { useCallback } from 'react';
 
 import { QueryObserverOptions, useQuery } from 'react-query';
 
-import { useUrls, useHttpClient } from '#/src/contexts/contextHooks';
+import { useHttpClient } from '#/src/contexts/HttpClientContext';
+import { useUrls } from '#/src/contexts/UrlContext';
 
 type ApiError = any;
 type ApiResult = any;

@@ -196,6 +196,9 @@ const copyPathsIfDefined = (source, target, paths) => {
 
 // Get form values for saving. Filters out fields that user has hidden.
 // Result can be passed to get**ByFormValues().
+// Note that this does not filter out fields that are already in initialValues but are hidden.
+// This means that in edit-mode values that come from backend will only be filtered out if
+// the user somehow makes those fields visible and then hides them again by changing form values.
 export const getValuesForSaving = (
   values: any,
   registeredFields: Record<string, { name: string }>,

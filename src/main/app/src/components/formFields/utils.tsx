@@ -45,9 +45,11 @@ export const createComponent = (Component, mapProps = simpleMapProps) => {
           <FormHelperTextMulti errorMessage={error} helperText={helperText} />
         }
         label={
-          <FormLabel error={error} disabled={disabled} mb={1} id={labelId}>
-            {`${label}${required ? ' *' : ''}`}
-          </FormLabel>
+          label ? (
+            <FormLabel error={error} disabled={disabled} mb={1} id={labelId}>
+              {`${label}${required ? ' *' : ''}`}
+            </FormLabel>
+          ) : undefined
         }
         disabled={disabled || readOnly}
       >

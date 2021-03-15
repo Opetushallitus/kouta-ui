@@ -9,7 +9,8 @@ import {
   LOGO_MAX_SIZE,
   LOGO_NO_DIMENSION_CHECK_FOR_FORMATS,
 } from '#/src/constants';
-import { useHttpClient, useUrls } from '#/src/contexts/contextHooks';
+import { useHttpClient } from '#/src/contexts/HttpClientContext';
+import { useUrls } from '#/src/contexts/UrlContext';
 import { uploadLogo } from '#/src/utils/api/uploadLogo';
 
 export const LogoSection = ({ name, label = '' }) => {

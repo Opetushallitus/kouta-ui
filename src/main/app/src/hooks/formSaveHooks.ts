@@ -8,9 +8,10 @@ import {
   initialize,
 } from 'redux-form';
 
-import { useHttpClient, useUrls } from '#/src/contexts/contextHooks';
+import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
+import { useHttpClient } from '#/src/contexts/HttpClientContext';
+import { useUrls } from '#/src/contexts/UrlContext';
 import { useForm } from '#/src/hooks/form';
-import useAuthorizedUser from '#/src/hooks/useAuthorizedUser';
 import useToaster from '#/src/hooks/useToaster';
 import getHakuByOid from '#/src/utils/haku/getHakuByOid';
 import validateHakukohdeForm from '#/src/utils/hakukohde/validateHakukohdeForm';

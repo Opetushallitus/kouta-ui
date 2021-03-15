@@ -288,3 +288,13 @@ export const LUKIO_OPPILAITOSTYYPIT = [
   'oppilaitostyyppi_15#1', // Lukiot
   'oppilaitostyyppi_19#1', // Perus- ja lukioasteen koulut
 ];
+
+export enum ApurahaMaaraTyyppi {
+  YKSI_ARVO = 'single',
+  VAIHTELUVALI = 'range',
+}
+
+export enum ApurahaYksikko {
+  EURO = 'euro',
+  PROSENTTI = 'prosentti',
+}

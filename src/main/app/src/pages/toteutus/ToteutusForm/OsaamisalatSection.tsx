@@ -17,7 +17,7 @@ import LocalLink from '#/src/components/LocalLink';
 import Spacing from '#/src/components/Spacing';
 import StyledSectionHTML from '#/src/components/StyledSectionHTML';
 import { Divider, Icon, Typography, Spin } from '#/src/components/virkailija';
-import { useUrls } from '#/src/contexts/contextHooks';
+import { useUrls } from '#/src/contexts/UrlContext';
 import { useFieldValue } from '#/src/hooks/form';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import { getThemeProp } from '#/src/theme';
@@ -248,7 +248,7 @@ const OsaamisalatContainer = ({
 
 const OsaamisalatSection = ({ language, koulutus, organisaatioOid, name }) => {
   const { t } = useTranslation();
-  const { ePerusteId } = koulutus;
+  const { ePerusteId } = koulutus || {};
   const { data: ePeruste, isLoading } = useApiAsync({
     promiseFn: getExtendedEPeruste,
     ePerusteId,

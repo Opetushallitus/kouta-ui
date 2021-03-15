@@ -11,7 +11,7 @@ import Anchor from '#/src/components/Anchor';
 import { FormFieldSelect } from '#/src/components/formFields';
 import KoulutusField from '#/src/components/KoulutusField';
 import { Box, Typography, Spin } from '#/src/components/virkailija';
-import { useUrls } from '#/src/contexts/contextHooks';
+import { useUrls } from '#/src/contexts/UrlContext';
 import { useBoundFormActions, useIsDirty } from '#/src/hooks/form';
 import { useFieldValue } from '#/src/hooks/form';
 import { getReadableDateTime, getTestIdProps } from '#/src/utils';

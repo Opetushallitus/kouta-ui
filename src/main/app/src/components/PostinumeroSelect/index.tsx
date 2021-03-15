@@ -3,7 +3,8 @@ import React, { useCallback } from 'react';
 import _ from 'lodash';
 
 import AsyncKoodistoSelect from '#/src/components/AsyncKoodistoSelect';
-import { useUrls, useHttpClient } from '#/src/contexts/contextHooks';
+import { useHttpClient } from '#/src/contexts/HttpClientContext';
+import { useUrls } from '#/src/contexts/UrlContext';
 import useLanguage from '#/src/hooks/useLanguage';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 import getKoodi from '#/src/utils/koodi/getKoodi';

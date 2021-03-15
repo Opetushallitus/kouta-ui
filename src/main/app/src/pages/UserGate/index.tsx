@@ -11,7 +11,8 @@ import {
   LANGUAGES,
 } from '#/src/constants';
 import AuthorizedUserContext from '#/src/contexts/AuthorizedUserContext';
-import { useHttpClient, useUrls } from '#/src/contexts/contextHooks';
+import { useHttpClient } from '#/src/contexts/HttpClientContext';
+import { useUrls } from '#/src/contexts/UrlContext';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import { isDev } from '#/src/utils';
 import { useAsiointiKieli } from '#/src/utils/api/getAsiointiKieli';

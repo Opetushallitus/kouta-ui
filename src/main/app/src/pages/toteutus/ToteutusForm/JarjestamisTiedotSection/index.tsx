@@ -3,7 +3,6 @@ import React, { useMemo } from 'react';
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
-import styled from 'styled-components';
 
 import FieldGroup from '#/src/components/FieldGroup';
 import { Flex, FlexItem } from '#/src/components/Flex';
@@ -12,18 +11,17 @@ import {
   FormFieldSelect,
   FormFieldInput,
   createFormFieldComponent,
-  FormFieldRadioGroup,
   FormFieldEditor,
 } from '#/src/components/formFields';
 import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenAloitusajankohtaFields';
 import Spacing from '#/src/components/Spacing';
-import { FormLabel, InputIcon } from '#/src/components/virkailija';
+import { FormLabel } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
 import isKorkeakouluKoulutustyyppi from '#/src/utils/koulutus/isKorkeakouluKoulutustyyppi';
-import { isStipendiVisible } from '#/src/utils/toteutus/toteutusVisibilities';
 
+import { ApurahaFields } from './ApurahaFields';
 import { DiplomiFields } from './DiplomiFields';
 import KielivalikoimaFields from './KielivalikoimaFields';
 import MaksullisuusFields from './MaksullisuusFields';
@@ -95,82 +93,12 @@ const OsiotFields = ({ language, osiotOptions, name }) => {
   );
 };
 
-const ExtraFieldWrapper = styled.div`
-  max-width: 250px;
-  width: 100%;
-`;
-
-const ExtraField = ({ children = null }: { children: JSX.Element | null }) => (
-  <ExtraFieldWrapper>{children}</ExtraFieldWrapper>
-);
-
-const StipendiFields = ({ koulutustyyppi, language, name }) => {
-  const { t } = useTranslation();
-  const onkoStipendia = useFieldValue<'kylla' | 'ei'>(`${name}.onkoStipendia`);
-  const opetuskieliArr = useFieldValue<Array<string>>(`${name}.opetuskieli`);
-
-  const isVisible = isStipendiVisible(koulutustyyppi, opetuskieliArr);
-
-  if (!isVisible) {
-    return null;
-  }
-
-  return (
-    <FieldGroup
-      name={`${name}.apurahaGroup`}
-      title={t('toteutuslomake.apuraha')}
-    >
-      <Flex {...getTestIdProps('stipendi')}>
-        <FlexItem grow={0} basis="30%">
-          <Field
-            label={t('toteutuslomake.valitseKaytettavaApurahoitus')}
-            name={`${name}.onkoStipendia`}
-            component={FormFieldRadioGroup}
-            options={[
-              {
-                label: t('toteutuslomake.stipendi'),
-                value: 'kylla',
-              },
-              {
-                label: t('toteutuslomake.eiKaytossa'),
-                value: 'ei',
-              },
-            ]}
-          />
-          {onkoStipendia === 'kylla' && (
-            <Spacing marginTop={1} {...getTestIdProps('stipendinMaara')}>
-              <ExtraField>
-                <Field
-                  name={`${name}.stipendinMaara`}
-                  component={FormFieldInput}
-                  placeholder={t('yleiset.maara')}
-                  helperText={t('toteutuslomake.stipendinMaaraHelperText')}
-                  suffix={<InputIcon type="euro_symbol" />}
-                  type="number"
-                />
-              </ExtraField>
-            </Spacing>
-          )}
-        </FlexItem>
-        <FlexItem grow={1} paddingLeft={4}>
-          <Field
-            name={`${name}.stipendinKuvaus.${language}`}
-            component={FormFieldEditor}
-            label={t('yleiset.tarkempiKuvaus')}
-            hideHeaderSelect
-          />
-        </FlexItem>
-      </Flex>
-    </FieldGroup>
-  );
-};
-
 const SuunniteltuKestoFields = ({ name }) => {
   const { t } = useTranslation();
   return (
     <FieldGroup
       name={`${name}.suunniteltuKesto`}
-      title="Opintojen suunniteltu kesto"
+      title={t('toteutuslomake.opintojenSuunniteltuKesto')}
       HeadingComponent={FormLabel}
     >
       <Flex>
@@ -313,8 +241,8 @@ export const JarjestamisTiedotSection = ({
         </Flex>
       </FieldGroup>
 
-      {/* StipendiFields contains conditional rendering -> FieldGroup moved there */}
-      <StipendiFields
+      {/* ApurahaFields contains conditional rendering -> FieldGroup moved there */}
+      <ApurahaFields
         language={language}
         name={name}
         koulutustyyppi={koulutustyyppi}

@@ -9,7 +9,7 @@ import { Grid, Cell } from 'styled-css-grid';
 import Anchor from '#/src/components/Anchor';
 import { FormFieldSelect } from '#/src/components/formFields';
 import { Box, Spin } from '#/src/components/virkailija';
-import { useUrls } from '#/src/contexts/contextHooks';
+import { useUrls } from '#/src/contexts/UrlContext';
 import {
   useFieldValue,
   useBoundFormActions,

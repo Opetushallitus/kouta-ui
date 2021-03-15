@@ -89,7 +89,7 @@ const AlkamiskausiSection = ({ name, toteutus, haku, language }) => {
   );
 
   const toteutuksenAjankohta =
-    toteutus?.metadata?.opetus?.koulutuksenAlkamiskausiUUSI;
+    toteutus?.metadata?.opetus?.koulutuksenAlkamiskausi;
 
   const haunAjankohta = haku?.metadata?.koulutuksenAlkamiskausi;
 

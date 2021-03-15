@@ -35,7 +35,7 @@ const getBaseFields = () => ({
         fi: 'Maksullisuus kuvaus',
       },
       maksunMaara: 20,
-      koulutuksenAlkamiskausiUUSI: {
+      koulutuksenAlkamiskausi: {
         alkamiskausityyppi: Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,
         koulutuksenAlkamispaivamaara: '2021-04-16T00:00',
         koulutuksenPaattymispaivamaara: '2021-12-12T00:00',

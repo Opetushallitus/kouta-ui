@@ -62,7 +62,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     muuKielivalikoima,
     lisatiedot,
     ammatillinenPerustutkintoErityisopetuksena,
-    koulutuksenAlkamiskausiUUSI = {},
+    koulutuksenAlkamiskausi = {},
   } = opetus;
 
   const { osaamisalaLinkit, osaamisalaLinkkiOtsikot } = _fp.reduce(
@@ -175,7 +175,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       B2Kielet: _fp.map(toSelectValue)(B2Kielivalikoima),
       B3Kielet: _fp.map(toSelectValue)(B3Kielivalikoima),
       muutKielet: _fp.map(toSelectValue)(muuKielivalikoima),
-      ajankohta: getAjankohtaFields(koulutuksenAlkamiskausiUUSI),
+      ajankohta: getAjankohtaFields(koulutuksenAlkamiskausi),
     },
     nayttamistiedot: {
       ammattinimikkeet: kieliArvoListToMultiSelectValue(ammattinimikkeet),

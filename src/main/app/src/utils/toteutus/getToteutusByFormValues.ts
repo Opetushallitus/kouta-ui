@@ -159,7 +159,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
           pickTranslations,
           _fp.mapValues(serializeEditorState)
         )(jarjestamistiedot?.suunniteltuKestoKuvaus || {}),
-        koulutuksenAlkamiskausiUUSI: getAlkamiskausiData(
+        koulutuksenAlkamiskausi: getAlkamiskausiData(
           ajankohta,
           pickTranslations
         ),

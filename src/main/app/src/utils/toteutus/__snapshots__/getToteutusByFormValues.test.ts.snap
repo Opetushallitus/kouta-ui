@@ -103,7 +103,7 @@ Object {
         "fi": "<p>Fi diplomi</p>",
         "sv": "<p>Sv diplomi</p>",
       },
-      "koulutuksenAlkamiskausiUUSI": Object {
+      "koulutuksenAlkamiskausi": Object {
         "alkamiskausityyppi": "alkamiskausi ja -vuosi",
         "henkilokohtaisenSuunnitelmanLisatiedot": Object {},
         "koulutuksenAlkamiskausiKoodiUri": "alkamiskausi_1#1",

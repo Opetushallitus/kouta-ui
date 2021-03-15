@@ -46,7 +46,7 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
       "apuraha": null,
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
-      "koulutuksenAlkamiskausiUUSI": {
+      "koulutuksenAlkamiskausi": {
         "alkamiskausityyppi": "alkamiskausi ja -vuosi",
         "henkilokohtaisenSuunnitelmanLisatiedot": {},
         "koulutuksenAlkamiskausiKoodiUri": "kausi_k#1",
@@ -170,7 +170,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
       "apuraha": null,
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
-      "koulutuksenAlkamiskausiUUSI": {
+      "koulutuksenAlkamiskausi": {
         "alkamiskausityyppi": "alkamiskausi ja -vuosi",
         "henkilokohtaisenSuunnitelmanLisatiedot": {},
         "koulutuksenAlkamiskausiKoodiUri": "kausi_k#1",
@@ -326,7 +326,7 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
       },
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
-      "koulutuksenAlkamiskausiUUSI": {
+      "koulutuksenAlkamiskausi": {
         "alkamiskausityyppi": "alkamiskausi ja -vuosi",
         "henkilokohtaisenSuunnitelmanLisatiedot": {},
         "koulutuksenAlkamiskausiKoodiUri": "kausi_k#1",
@@ -479,7 +479,7 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
       "diplomiKuvaus": {
         "fi": "<p>Diplomi kuvaus</p>"
       },
-      "koulutuksenAlkamiskausiUUSI": {
+      "koulutuksenAlkamiskausi": {
         "alkamiskausityyppi": "alkamiskausi ja -vuosi",
         "henkilokohtaisenSuunnitelmanLisatiedot": {},
         "koulutuksenAlkamiskausiKoodiUri": "kausi_k#1",
@@ -608,7 +608,7 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
       "apuraha": null,
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
-      "koulutuksenAlkamiskausiUUSI": {
+      "koulutuksenAlkamiskausi": {
         "alkamiskausityyppi": "tarkka alkamisajankohta",
         "henkilokohtaisenSuunnitelmanLisatiedot": {},
         "koulutuksenAlkamiskausiKoodiUri": null,
@@ -764,7 +764,7 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
       "apuraha": null,
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
-      "koulutuksenAlkamiskausiUUSI": {
+      "koulutuksenAlkamiskausi": {
         "alkamiskausityyppi": "tarkka alkamisajankohta",
         "henkilokohtaisenSuunnitelmanLisatiedot": {},
         "koulutuksenAlkamiskausiKoodiUri": null,
@@ -924,7 +924,7 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
       "diplomiKuvaus": {
         "fi": "<p>Fi diplomi</p>"
       },
-      "koulutuksenAlkamiskausiUUSI": {
+      "koulutuksenAlkamiskausi": {
         "alkamiskausityyppi": "tarkka alkamisajankohta",
         "henkilokohtaisenSuunnitelmanLisatiedot": {},
         "koulutuksenAlkamiskausiKoodiUri": null,
@@ -1059,7 +1059,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
       "apuraha": null,
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
-      "koulutuksenAlkamiskausiUUSI": {
+      "koulutuksenAlkamiskausi": {
         "alkamiskausityyppi": "tarkka alkamisajankohta",
         "henkilokohtaisenSuunnitelmanLisatiedot": {},
         "koulutuksenAlkamiskausiKoodiUri": null,

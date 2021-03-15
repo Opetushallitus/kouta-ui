@@ -55,7 +55,7 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
         sv: 'Sv toteutuksenkuvaus',
       },
       opetus: {
-        koulutuksenAlkamiskausiUUSI: {
+        koulutuksenAlkamiskausi: {
           alkamiskausityyppi: Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,
           koulutuksenAlkamiskausiKoodiUri: 'kausi_k#1',
           koulutuksenAlkamispaivamaara: '2021-04-16T00:00',

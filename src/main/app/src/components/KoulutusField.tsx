@@ -5,28 +5,19 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { FormFieldAsyncKoodistoSelect } from '#/src/components/formFields';
-import { useKoodistoDataOptions } from '#/src/hooks/useKoodistoOptions';
 import { useKoulutuksetByKoulutustyyppi } from '#/src/utils/koulutus/getKoulutuksetByKoulutustyyppi';
 
 import { useBoundFormActions, useFieldValue, useIsDirty } from '../hooks/form';
 import { useHasChanged } from '../hooks/useHasChanged';
-import useLoadOptions from '../hooks/useLoadOptions';
 
 const KoulutusField = props => {
-  const { language, name } = props;
+  const { name } = props;
 
   const koulutustyyppi = useFieldValue('koulutustyyppi');
 
   const { data: koulutukset, isLoading } = useKoulutuksetByKoulutustyyppi(
     koulutustyyppi
   );
-
-  const options = useKoodistoDataOptions({
-    koodistoData: koulutukset,
-    language,
-  });
-
-  const loadOptions = useLoadOptions(options);
 
   const { t } = useTranslation();
 
@@ -45,11 +36,10 @@ const KoulutusField = props => {
   return (
     <Field
       isLoading={isLoading}
-      loadOptions={loadOptions}
       component={FormFieldAsyncKoodistoSelect}
-      disabled={_.isEmpty(options)}
+      koodistoData={koulutukset}
       label={t('yleiset.valitseKoulutus')}
-      defaultOptions={options}
+      showAllOptions={true}
       {...props}
     />
   );

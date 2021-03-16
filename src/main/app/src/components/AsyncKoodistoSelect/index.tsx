@@ -1,58 +1,68 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 
 import _ from 'lodash';
 
 import { AsyncSelect } from '#/src/components/Select';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
-import useLanguage from '#/src/hooks/useLanguage';
+import { useKoodistoDataOptions } from '#/src/hooks/useKoodistoOptions';
+import useLoadOptions from '#/src/hooks/useLoadOptions';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 import getKoodi from '#/src/utils/koodi/getKoodi';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 
 export const AsyncKoodistoSelect = ({
-  disabled,
-  formatLabel: formatLabelProp,
-  language: selectedLanguage,
+  formatKoodiLabel,
+  language,
+  loadLabel: loadLabelProp,
+  koodistoData,
+  loadOptions: loadOptionsProp,
+  showAllOptions = false,
   ...props
 }) => {
-  const httpClient = useHttpClient();
-  const apiUrls = useUrls();
-  const userLanguage = useLanguage();
-  const language = selectedLanguage || userLanguage;
+  const options = useKoodistoDataOptions({
+    koodistoData,
+    language,
+    formatLabel: formatKoodiLabel,
+  });
 
-  const formatLabel = useMemo(() => {
-    return _.isFunction(formatLabelProp)
-      ? formatLabelProp
-      : koodi => getKoodiNimiTranslation(koodi, language);
-  }, [language, formatLabelProp]);
+  const loadOptions = useLoadOptions(options);
+  const apiUrls = useUrls();
+  const httpClient = useHttpClient();
 
   const loadLabel = useCallback(
     async value => {
-      const { koodi, versio } = parseKoodiUri(value);
+      if (_.isFunction(loadLabelProp)) {
+        return loadLabelProp(value);
+      } else {
+        const { koodi, versio } = parseKoodiUri(value);
 
-      if (!koodi) {
-        return undefined;
-      }
+        if (koodi) {
+          const koodiObj = await getKoodi({
+            httpClient,
+            apiUrls,
+            koodi,
+            versio,
+            silent: true,
+          });
 
-      try {
-        const koodiObj = await getKoodi({
-          httpClient,
-          apiUrls,
-          koodi,
-          versio,
-          silent: true,
-        });
-
-        return formatLabel(koodiObj);
-      } catch {
-        return undefined;
+          return (
+            formatKoodiLabel?.(koodiObj, language) ??
+            getKoodiNimiTranslation(koodiObj, language)
+          );
+        }
       }
     },
-    [httpClient, apiUrls, formatLabel]
+    [httpClient, apiUrls, loadLabelProp, language, formatKoodiLabel]
   );
-
-  return <AsyncSelect disabled={disabled} loadLabel={loadLabel} {...props} />;
+  return (
+    <AsyncSelect
+      loadOptions={loadOptionsProp ?? loadOptions}
+      loadLabel={loadLabel}
+      defaultOptions={showAllOptions && options}
+      {...props}
+    />
+  );
 };
 
 export default AsyncKoodistoSelect;

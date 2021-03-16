@@ -57,11 +57,6 @@ export const editKoulutusForm = () => {
 
     fillKieliversiotSection();
 
-    // Need to wait for changes to settle. Otherwise nimi-field will not be set fast enough.
-    // TODO: Should block save button before all fields have 'settled'. Logic for setting nimi-field could also be simplified.
-    // eslint-disable-next-line
-    cy.wait(2000);
-
     tallenna();
 
     cy.wait('@updateAmmKoulutusResponse').then(({ request }) => {
@@ -85,10 +80,6 @@ export const editKoulutusForm = () => {
 
     fillKieliversiotSection();
 
-    // Need to wait for changes to settle. Otherwise nimi-field will not be set fast enough.
-    // TODO: Should block save button before all fields have 'settled'. Logic for setting nimi-field could also be simplified.
-    // eslint-disable-next-line
-    cy.wait(2000);
     tallenna();
 
     cy.wait('@updateAmkKoulutusResponse').then(({ request }) => {
@@ -111,11 +102,6 @@ export const editKoulutusForm = () => {
     ).as('updateLkKoulutusResponse');
 
     fillKieliversiotSection();
-
-    // Need to wait for changes to settle. Otherwise nimi-field will not be set fast enough.
-    // TODO: Should block save button before all fields have 'settled'. Logic for setting nimi-field could also be simplified.
-    // eslint-disable-next-line
-    cy.wait(2000);
 
     tallenna();
 

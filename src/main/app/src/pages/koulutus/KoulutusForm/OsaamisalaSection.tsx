@@ -14,7 +14,6 @@ import { useKoulutusByKoodi } from '#/src/utils/koulutus/getKoulutusByKoodi';
 import { ValitseEPerusteBox } from './KoulutuksenEPerusteTiedot/ValitseEPerusteBox';
 import { ValitseKoulutusBox } from './KoulutuksenEPerusteTiedot/ValitseKoulutusBox';
 import { ValitseOsaamisalaBox } from './KoulutuksenEPerusteTiedot/ValitseOsaamisalaBox';
-import { useLocalizedKoulutus } from './useLocalizedKoulutus';
 
 export const OsaamisalaSection = ({ disabled, language, languages, name }) => {
   const selectedKoulutus = useFieldValue(`${name}.koulutus`)?.value;
@@ -29,12 +28,6 @@ export const OsaamisalaSection = ({ disabled, language, languages, name }) => {
   const selectedEPerusteData = ePerusteet?.find(
     ({ id }) => id === selectedEPeruste
   );
-
-  useLocalizedKoulutus({
-    koulutusFieldName: `${name}.koulutus`,
-    nimiFieldName: null,
-    language,
-  });
 
   const osaamisalaValue = useFieldValue(`${name}.osaamisala`);
 

@@ -9,7 +9,7 @@ import KoulutusField from '#/src/components/KoulutusField';
 import { Box } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 
-import { useLocalizedKoulutus } from '../useLocalizedKoulutus';
+import { useNimiFromKoulutusKoodi } from '../useNimiFromKoulutusKoodi';
 import KoulutuksenTiedotSection from './KoulutuksenTiedotSection';
 import KoulutusalatField from './KoulutusalatField';
 import OpintojenlaajuusField from './OpintojenlaajuusField';
@@ -24,10 +24,9 @@ const TiedotSection = ({
 }) => {
   const { t } = useTranslation();
 
-  useLocalizedKoulutus({
+  useNimiFromKoulutusKoodi({
     nimiFieldName: `${name}.nimi`,
     koulutusFieldName: `${name}.koulutus`,
-    language,
   });
 
   return (

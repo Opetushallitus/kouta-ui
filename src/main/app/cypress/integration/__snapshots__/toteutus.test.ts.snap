@@ -573,6 +573,7 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
   "metadata": {
     "alemmanKorkeakoulututkinnonOsaamisalat": [],
     "aloituspaikat": null,
+    "ammatillinenPerustutkintoErityisopetuksena": false,
     "ammattinimikkeet": [
       {
         "arvo": "eläintenhoitaja",
@@ -604,7 +605,6 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
       "B2Kielivalikoima": [],
       "B3Kielivalikoima": [],
       "aidinkieliKielivalikoima": [],
-      "ammatillinenPerustutkintoErityisopetuksena": false,
       "apuraha": null,
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
@@ -729,6 +729,7 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
       }
     ],
     "aloituspaikat": null,
+    "ammatillinenPerustutkintoErityisopetuksena": false,
     "ammattinimikkeet": [
       {
         "arvo": "eläintenhoitaja",
@@ -760,7 +761,6 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
       "B2Kielivalikoima": [],
       "B3Kielivalikoima": [],
       "aidinkieliKielivalikoima": [],
-      "ammatillinenPerustutkintoErityisopetuksena": false,
       "apuraha": null,
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
@@ -875,6 +875,7 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
   "metadata": {
     "alemmanKorkeakoulututkinnonOsaamisalat": [],
     "aloituspaikat": null,
+    "ammatillinenPerustutkintoErityisopetuksena": false,
     "ammattinimikkeet": [
       {
         "arvo": "eläintenhoitaja",
@@ -916,7 +917,6 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
       "aidinkieliKielivalikoima": [
         "kieli_4#1"
       ],
-      "ammatillinenPerustutkintoErityisopetuksena": false,
       "apuraha": null,
       "diplomiKoodiUrit": [
         "lukiodiplomit_1#1"
@@ -1022,6 +1022,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
   "metadata": {
     "alemmanKorkeakoulututkinnonOsaamisalat": [],
     "aloituspaikat": null,
+    "ammatillinenPerustutkintoErityisopetuksena": false,
     "ammattinimikkeet": [
       {
         "arvo": "eläintenhoitaja",
@@ -1055,7 +1056,6 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
       "B2Kielivalikoima": [],
       "B3Kielivalikoima": [],
       "aidinkieliKielivalikoima": [],
-      "ammatillinenPerustutkintoErityisopetuksena": false,
       "apuraha": null,
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},

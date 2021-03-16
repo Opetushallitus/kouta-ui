@@ -49,6 +49,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     ilmoittautumislinkki,
     aloituspaikat,
     toteutusjaksot,
+    ammatillinenPerustutkintoErityisopetuksena,
   } = metadata;
 
   const {
@@ -61,7 +62,6 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     B3Kielivalikoima,
     muuKielivalikoima,
     lisatiedot,
-    ammatillinenPerustutkintoErityisopetuksena,
     koulutuksenAlkamiskausi = {},
   } = opetus;
 

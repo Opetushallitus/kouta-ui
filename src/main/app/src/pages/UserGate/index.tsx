@@ -43,12 +43,6 @@ export const UserGate = ({ fallback, children }: UserGateProps) => {
     }
   }, [data, errorCode, getMeError]);
 
-  useEffect(() => {
-    if (data && data.lang) {
-      i18n.changeLanguage(data.lang);
-    }
-  }, [data, i18n]);
-
   useEvent('focus', () => setFocused(true), window);
   useEvent('blur', () => setFocused(false), window);
 

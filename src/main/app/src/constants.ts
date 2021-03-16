@@ -316,3 +316,7 @@ export enum ApurahaYksikko {
   EURO = 'euro',
   PROSENTTI = 'prosentti',
 }
+
+export enum KOODISTO_VERSIOT {
+  posti = 2,
+}

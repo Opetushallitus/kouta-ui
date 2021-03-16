@@ -3,6 +3,7 @@ import _fp from 'lodash/fp';
 import {
   Alkamiskausityyppi,
   ApurahaMaaraTyyppi,
+  ApurahaYksikko,
   HAKULOMAKETYYPPI,
   JULKAISUTILA,
   KOULUTUSTYYPIT,
@@ -59,23 +60,45 @@ const validateApuraha = (eb, values) => {
   const apurahaMax = _fp.parseInt(10, values?.jarjestamistiedot?.apurahaMax);
   const onkoApuraha = values?.jarjestamistiedot?.onkoApuraha;
   const apurahaMaaraTyyppi = values?.jarjestamistiedot?.apurahaMaaraTyyppi;
+  const apurahaYksikko = values?.jarjestamistiedot?.apurahaYksikko?.value;
+
   return validateIf(
     onkoApuraha,
     _fp.flow(
-      validate('jarjestamistiedot.apurahaMin', () => apurahaMin >= 0, {
+      validate('jarjestamistiedot.apurahaGroup', () => apurahaMin >= 0, {
         message: ['validointivirheet.eiNegatiivinenKokonaisluku'],
       }),
+      validate(
+        'jarjestamistiedot.apurahaGroup',
+        () =>
+          apurahaYksikko === ApurahaYksikko.PROSENTTI
+            ? apurahaMin <= 100
+            : true,
+        {
+          message: 'validointivirheet.yliSataProsenttia',
+        }
+      ),
       validateIf(
         apurahaMaaraTyyppi === ApurahaMaaraTyyppi.VAIHTELUVALI,
         _fp.flow(
-          validate('jarjestamistiedot.apurahaMin', () => apurahaMax >= 0, {
+          validate('jarjestamistiedot.apurahaGroup', () => apurahaMax >= 0, {
             message: ['validointivirheet.eiNegatiivinenKokonaisluku'],
           }),
           validate(
-            'jarjestamistiedot.apurahaMin',
+            'jarjestamistiedot.apurahaGroup',
             () => apurahaMin <= apurahaMax,
             {
               message: 'validointivirheet.apurahaMinMax',
+            }
+          ),
+          validate(
+            'jarjestamistiedot.apurahaGroup',
+            () =>
+              apurahaYksikko === ApurahaYksikko.PROSENTTI
+                ? apurahaMax <= 100
+                : true,
+            {
+              message: 'validointivirheet.yliSataProsenttia',
             }
           )
         )

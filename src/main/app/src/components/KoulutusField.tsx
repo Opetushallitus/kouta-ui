@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 
-import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
@@ -20,7 +19,7 @@ const KoulutusField = props => {
     koulutustyyppi
   );
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const koulutustyyppiChanged = useHasChanged(koulutustyyppi);
 
@@ -45,6 +44,7 @@ const KoulutusField = props => {
         `${getKoodiNimiTranslation(koodi, language)} (${koodi.koodiArvo})`
       }
       {...props}
+      language={i18n.language}
     />
   );
 };

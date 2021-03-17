@@ -2,8 +2,11 @@ import _fp from 'lodash/fp';
 
 import { parseEditorState } from '#/src/components/Editor/utils';
 import { ApurahaMaaraTyyppi, ApurahaYksikko } from '#/src/constants';
-import { ToteutusFormValues } from '#/src/types/toteutusTypes';
-import { toSelectValue } from '#/src/utils';
+import {
+  ToteutusFormValues,
+  MaksullisuusTyyppi,
+} from '#/src/types/toteutusTypes';
+import { otherwise, toSelectValue } from '#/src/utils';
 import { getAjankohtaFields } from '#/src/utils/form/aloitusajankohtaHelpers';
 import parseSisaltoField from '#/src/utils/form/parseSisaltoField';
 
@@ -79,11 +82,14 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     { osaamisalaLinkit: {}, osaamisalaLinkkiOtsikot: {} }
   )(osaamisalat);
 
-  const maksullisuustyyppi = opetus?.onkoLukuvuosimaksua
-    ? 'lukuvuosimaksu'
-    : opetus?.onkoMaksullinen
-    ? 'kylla'
-    : 'ei';
+  const maksullisuustyyppi = _fp.cond([
+    [
+      () => opetus?.onkoLukuvuosimaksua,
+      () => MaksullisuusTyyppi.LUKUVUOSIMAKSU,
+    ],
+    [() => opetus?.onkoMaksullinen, () => MaksullisuusTyyppi.KYLLA],
+    [otherwise, () => MaksullisuusTyyppi.EI],
+  ])(undefined);
 
   return {
     koulutustyyppi,

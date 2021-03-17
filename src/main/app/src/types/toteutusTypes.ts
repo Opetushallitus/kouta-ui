@@ -14,7 +14,11 @@ export type ToteutusModel = any;
 
 type Kuvaus = TranslatedField<any>;
 
-type MaksullisuusTyyppi = 'kylla' | 'ei' | 'lukuvuosimaksu';
+export enum MaksullisuusTyyppi {
+  KYLLA = 'kylla',
+  EI = 'ei',
+  LUKUVUOSIMAKSU = 'lukuvuosimaksu',
+}
 
 type Toteutusjakso = {
   nimi: TranslatedField<string>;

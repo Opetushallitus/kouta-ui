@@ -24,24 +24,24 @@ export const useNimiFromKoulutusKoodi = ({
   const [koulutusChanged, setKoulutusChanged] = useState(false);
   const [languagesChanged, setLanguagesChanged] = useState(false);
 
+  // Set flags to indicate if koulutus or languages have potential changes that may trigger
+  // copying of koulutus-field value to nimi field.
   useEffect(() => {
-    if (koulutusValue) {
+    if (isDirty) {
       setKoulutusChanged(true);
     }
   }, [koulutusValue]);
 
   useEffect(() => {
-    if (languages) {
+    if (isDirty) {
       setLanguagesChanged(true);
     }
   }, [languages]);
 
-  // When koulutus field has changed to a defined value and got its 'koodi'
-  // change the language versioned 'nimi' fields accordingly
-  // if the form is dirty (don't override initial values)
+  // When koulutus field value has changed to a defined value (koodi exists) or selected languages (kielivalinta) has changed
+  // change the language versioned nimi fields accordingly
   useEffect(() => {
     if (
-      isDirty &&
       nimiFieldName &&
       (koulutusChanged || languagesChanged) &&
       koulutusKoodi
@@ -52,6 +52,8 @@ export const useNimiFromKoulutusKoodi = ({
           koulutusKoodi?.metadata,
           ({ kieli }) => _.toLower(kieli) === lang
         )?.nimi;
+        // Only overwrite existing nimi values when koulutus-field changes.
+        // When selected languages change, set only language versioned nimi fields that are empty.
         if (
           koulutusChanged ||
           (!koulutusChanged && _.isEmpty(nimiFieldValue[lang]))

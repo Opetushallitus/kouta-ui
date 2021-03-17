@@ -9,6 +9,7 @@ import { useKoulutuksetByKoulutustyyppi } from '#/src/utils/koulutus/getKoulutuk
 
 import { useBoundFormActions, useFieldValue, useIsDirty } from '../hooks/form';
 import { useHasChanged } from '../hooks/useHasChanged';
+import getKoodiNimiTranslation from '../utils/getKoodiNimiTranslation';
 
 const KoulutusField = props => {
   const { name } = props;
@@ -40,6 +41,9 @@ const KoulutusField = props => {
       koodistoData={koulutukset}
       label={t('yleiset.valitseKoulutus')}
       showAllOptions={true}
+      formatKoodiLabel={(koodi, language) =>
+        `${getKoodiNimiTranslation(koodi, language)} (${koodi.koodiArvo})`
+      }
       {...props}
     />
   );

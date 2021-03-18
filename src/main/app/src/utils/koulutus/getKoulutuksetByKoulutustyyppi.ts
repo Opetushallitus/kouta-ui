@@ -1,5 +1,4 @@
 import { isBefore, parseISO, endOfToday } from 'date-fns';
-import _ from 'lodash';
 import _fp from 'lodash/fp';
 
 import { KOULUTUSTYYPPI_TO_YLAKOODIURI_MAP } from '#/src/constants';
@@ -31,10 +30,10 @@ export const getKoulutuksetByKoulutusTyyppi = async ({
     );
   }
 
-  const koulutukset = _.flatMap(responses, (response: any) => {
+  const koulutukset = _fp.flatMap((response: any) => {
     const { data } = response;
-    return _.isArray(data) ? data : [];
-  });
+    return _fp.isArray(data) ? data : [];
+  }, responses);
 
   return _fp.flow(
     _fp.filter(isValidKoulutusKoodi),

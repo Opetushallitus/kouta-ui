@@ -23,7 +23,7 @@ export const getAlkamiskausiData = (
           _fp.mapValues(serializeEditorState)
         )(ajankohta?.henkilokohtaisenSuunnitelmanLisatiedot ?? {}),
       }
-    : {};
+    : null;
 
 export const getAjankohtaFields = (
   alkamiskausiData: any = {}

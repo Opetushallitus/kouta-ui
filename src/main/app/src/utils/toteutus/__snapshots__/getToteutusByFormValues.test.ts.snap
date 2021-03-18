@@ -29,6 +29,7 @@ Object {
       },
     ],
     "aloituspaikat": 56,
+    "ammatillinenPerustutkintoErityisopetuksena": false,
     "ammattinimikkeet": Array [
       Object {
         "arvo": "nimike1",
@@ -85,7 +86,6 @@ Object {
       "aidinkieliKielivalikoima": Array [
         "kieli_3#1",
       ],
-      "ammatillinenPerustutkintoErityisopetuksena": false,
       "apuraha": Object {
         "kuvaus": Object {
           "fi": "<p>Fi apurahakuvaus</p>",
@@ -103,7 +103,7 @@ Object {
         "fi": "<p>Fi diplomi</p>",
         "sv": "<p>Sv diplomi</p>",
       },
-      "koulutuksenAlkamiskausiUUSI": Object {
+      "koulutuksenAlkamiskausi": Object {
         "alkamiskausityyppi": "alkamiskausi ja -vuosi",
         "henkilokohtaisenSuunnitelmanLisatiedot": Object {},
         "koulutuksenAlkamiskausiKoodiUri": "alkamiskausi_1#1",

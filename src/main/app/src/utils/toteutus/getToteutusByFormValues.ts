@@ -69,8 +69,6 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
     esikatselu,
     metadata: {
       opetus: {
-        ammatillinenPerustutkintoErityisopetuksena:
-          values?.tiedot?.ammatillinenPerustutkintoErityisopetuksena,
         lisatiedot: (values?.jarjestamistiedot?.osiot || []).map(
           ({ value }) => ({
             otsikkoKoodiUri: value,
@@ -159,11 +157,13 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
           pickTranslations,
           _fp.mapValues(serializeEditorState)
         )(jarjestamistiedot?.suunniteltuKestoKuvaus || {}),
-        koulutuksenAlkamiskausiUUSI: getAlkamiskausiData(
+        koulutuksenAlkamiskausi: getAlkamiskausiData(
           ajankohta,
           pickTranslations
         ),
       },
+      ammatillinenPerustutkintoErityisopetuksena:
+        values?.tiedot?.ammatillinenPerustutkintoErityisopetuksena,
       lukiolinjaKoodiUri: values?.lukiolinjat?.lukiolinja?.value || null,
       osaamisalat: (values?.osaamisalat?.osaamisalat || []).map(osaamisala => ({
         koodiUri: osaamisala,

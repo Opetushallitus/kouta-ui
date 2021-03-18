@@ -2,6 +2,7 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
 {
   "aloituspaikat": 10,
   "ensikertalaisenAloituspaikat": null,
+  "esikatselu": false,
   "hakuOid": "4.1.1.1.1.1",
   "hakuajat": [
     {
@@ -15,7 +16,6 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
   "hakulomaketyyppi": "ataru",
   "jarjestyspaikkaOid": "1.2.246.562.10.45854578546",
   "kaytetaanHaunAikataulua": false,
-  "kaytetaanHaunAlkamiskautta": true,
   "kaytetaanHaunHakulomaketta": false,
   "kielivalinta": [
     "fi"
@@ -75,7 +75,6 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
     "fi": "<p>Tarkenne</p>"
   },
   "tila": "julkaistu",
-  "esikatselu": false,
   "toinenAsteOnkoKaksoistutkinto": true,
   "toteutusOid": "2.1.1.1.1.1",
   "valintakokeet": [
@@ -127,6 +126,7 @@ exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
 {
   "aloituspaikat": 10,
   "ensikertalaisenAloituspaikat": 5,
+  "esikatselu": false,
   "hakuOid": "4.1.1.1.1.1",
   "hakuajat": [
     {
@@ -140,7 +140,6 @@ exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
   "hakulomaketyyppi": "ataru",
   "jarjestyspaikkaOid": "1.2.246.562.10.45854578546",
   "kaytetaanHaunAikataulua": false,
-  "kaytetaanHaunAlkamiskautta": true,
   "kaytetaanHaunHakulomaketta": false,
   "kielivalinta": [
     "fi"
@@ -200,7 +199,6 @@ exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
     "fi": "<p>Tarkenne</p>"
   },
   "tila": "julkaistu",
-  "esikatselu": false,
   "toinenAsteOnkoKaksoistutkinto": false,
   "toteutusOid": "2.1.1.1.1.1",
   "valintakokeet": [
@@ -254,6 +252,7 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
   "alkamisvuosi": "2024",
   "aloituspaikat": 150,
   "ensikertalaisenAloituspaikat": 49,
+  "esikatselu": false,
   "hakuOid": "4.1.1.1.1.1",
   "hakuajat": [
     {
@@ -268,7 +267,6 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
   "hakulomaketyyppi": "ataru",
   "jarjestyspaikkaOid": "1.2.246.562.10.45854578546",
   "kaytetaanHaunAikataulua": false,
-  "kaytetaanHaunAlkamiskautta": true,
   "kaytetaanHaunHakulomaketta": false,
   "kielivalinta": [
     "fi"
@@ -329,7 +327,6 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
     "fi": "<p>Fi tarkenne</p>"
   },
   "tila": "tallennettu",
-  "esikatselu": false,
   "toinenAsteOnkoKaksoistutkinto": true,
   "toteutusOid": "2.1.1.1.1.1",
   "valintakokeet": [
@@ -381,6 +378,7 @@ exports[`createHakukohde > should be able to create hakukohde with muu hakulomak
 {
   "aloituspaikat": null,
   "ensikertalaisenAloituspaikat": null,
+  "esikatselu": false,
   "hakuOid": "4.1.1.1.1.1",
   "hakuajat": [],
   "hakulomakeAtaruId": null,
@@ -390,7 +388,6 @@ exports[`createHakukohde > should be able to create hakukohde with muu hakulomak
   },
   "hakulomaketyyppi": "muu",
   "kaytetaanHaunAikataulua": true,
-  "kaytetaanHaunAlkamiskautta": true,
   "kaytetaanHaunHakulomaketta": false,
   "kielivalinta": [
     "fi"
@@ -418,7 +415,6 @@ exports[`createHakukohde > should be able to create hakukohde with muu hakulomak
     "fi": "<p>Tarkenne</p>"
   },
   "tila": "tallennettu",
-  "esikatselu": false,
   "toinenAsteOnkoKaksoistutkinto": false,
   "toteutusOid": "2.1.1.1.1.1",
   "valintaperusteId": null
@@ -428,6 +424,7 @@ exports[`createHakukohde > should be able to create hakukohde with "ei sähköis
 {
   "aloituspaikat": null,
   "ensikertalaisenAloituspaikat": null,
+  "esikatselu": false,
   "hakuOid": "4.1.1.1.1.1",
   "hakuajat": [],
   "hakulomakeAtaruId": null,
@@ -437,7 +434,6 @@ exports[`createHakukohde > should be able to create hakukohde with "ei sähköis
   "hakulomakeLinkki": {},
   "hakulomaketyyppi": "ei sähköistä",
   "kaytetaanHaunAikataulua": true,
-  "kaytetaanHaunAlkamiskautta": true,
   "kaytetaanHaunHakulomaketta": false,
   "kielivalinta": [
     "fi"
@@ -465,7 +461,6 @@ exports[`createHakukohde > should be able to create hakukohde with "ei sähköis
     "fi": "<p>Tarkenne</p>"
   },
   "tila": "tallennettu",
-  "esikatselu": false,
   "toinenAsteOnkoKaksoistutkinto": false,
   "toteutusOid": "2.1.1.1.1.1",
   "valintaperusteId": null

@@ -161,9 +161,6 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     hakulomakeAtaruId,
     hakulomakeLinkki,
     hakulomakeKuvaus,
-    // Workaround for kouta-backend validating old alkamiskausi-fields
-    // TODO: Remove this when old fields and validations from kouta-backend are removed
-    kaytetaanHaunAlkamiskautta: true,
     metadata: {
       valintakokeidenYleiskuvaus: _.mapValues(
         values?.valintakokeet?.yleisKuvaus,

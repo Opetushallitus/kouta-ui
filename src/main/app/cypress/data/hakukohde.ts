@@ -11,7 +11,6 @@ const hakukohde = () => ({
   hakulomake: {},
   aloituspaikat: 150,
   ensikertalaisenAloituspaikat: 49,
-  kaytetaanHaunAlkamiskautta: false,
   pohjakoulutusvaatimusKoodiUrit: ['pohjakoulutusvaatimuskouta_pk#1'],
   pohjakoulutusvaatimusTarkenne: {
     fi: '<p>Fi tarkenne</p>',

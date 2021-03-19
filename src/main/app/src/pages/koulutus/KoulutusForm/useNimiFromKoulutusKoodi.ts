@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import _ from 'lodash';
+import { usePrevious } from 'react-use';
 
 import {
   useBoundFormActions,
@@ -23,20 +24,22 @@ export const useNimiFromKoulutusKoodi = ({
 
   const [koulutusChanged, setKoulutusChanged] = useState(false);
   const [languagesChanged, setLanguagesChanged] = useState(false);
+  const previousKoulutus = usePrevious(koulutusValue);
+  const previousLanguages = usePrevious(languages);
 
   // Set flags to indicate if koulutus or languages have potential changes that may trigger
   // copying of koulutus-field value to nimi field.
   useEffect(() => {
-    if (isDirty) {
+    if (isDirty && previousKoulutus !== koulutusValue) {
       setKoulutusChanged(true);
     }
-  }, [koulutusValue]);
+  }, [previousKoulutus, koulutusValue, isDirty]);
 
   useEffect(() => {
-    if (isDirty) {
+    if (isDirty && previousLanguages !== languages) {
       setLanguagesChanged(true);
     }
-  }, [languages]);
+  }, [previousLanguages, languages, isDirty]);
 
   // When koulutus field value has changed to a defined value (koodi exists) or selected languages (kielivalinta) has changed
   // change the language versioned nimi fields accordingly
@@ -71,7 +74,6 @@ export const useNimiFromKoulutusKoodi = ({
     change,
     nimiFieldName,
     koulutusKoodi,
-    isDirty,
     languages,
     languagesChanged,
     koulutusChanged,

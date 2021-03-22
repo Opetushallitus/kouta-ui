@@ -48,6 +48,47 @@ const useOppilaitosTyypit = organisaatioOid => {
   return { isAmmatillinen, isKorkeakoulutus, isLukio, isLoading };
 };
 
+export const createIsKoulutustyyppiDisabledGetter = ({
+  isOphVirkailija,
+  isAmmatillinen,
+  isKorkeakoulutus,
+  isLukio,
+}) => value => {
+  if (isOphVirkailija) {
+    return false;
+  }
+
+  // Don't disable anything, if not detecting any oppilaitos tyyppi
+  if (!isLukio && !isAmmatillinen && !isKorkeakoulutus) {
+    return false;
+  }
+
+  // Lukio koulutustyyppi disabled for all except OPH
+  if (isLukio && !isAmmatillinen && !isKorkeakoulutus) {
+    return true;
+  }
+
+  let isDisabled = true;
+  // Allow "amm" and "kk" to coexist so that koulutustyyppis for both will
+  // be enabled if both types of oppilaitos found.
+  if (
+    isAmmatillinen &&
+    [
+      KOULUTUSTYYPPI.TUTKINNON_OSA,
+      KOULUTUSTYYPPI.OSAAMISALA,
+      KOULUTUSTYYPPI.MUUT_KOULUTUKSET,
+    ].includes(value)
+  ) {
+    isDisabled = false;
+  }
+
+  if (isKorkeakoulutus && KORKEAKOULU_KOULUTUSTYYPIT.includes(value)) {
+    isDisabled = false;
+  }
+
+  return isDisabled;
+};
+
 const KoulutustyyppiSection = ({ organisaatioOid, name }) => {
   const { t } = useTranslation();
 
@@ -72,26 +113,12 @@ const KoulutustyyppiSection = ({ organisaatioOid, name }) => {
       component={FormFieldKoulutustyyppiSelect}
       label={t('yleiset.valitseKoulutustyyppi')}
       disabled={isLoading || !canCreate}
-      getIsDisabled={_fp.cond([
-        [() => isOphVirkailija, _fp.F],
-        [
-          (value: any) =>
-            isAmmatillinen &&
-            ![
-              KOULUTUSTYYPPI.TUTKINNON_OSA,
-              KOULUTUSTYYPPI.OSAAMISALA,
-              KOULUTUSTYYPPI.MUUT_KOULUTUKSET,
-            ].includes(value),
-          _fp.T,
-        ],
-        [
-          value =>
-            isKorkeakoulutus && !KORKEAKOULU_KOULUTUSTYYPIT.includes(value),
-          _fp.T,
-        ],
-        [() => isLukio, _fp.T],
-        [otherwise, _fp.F],
-      ])}
+      getIsDisabled={createIsKoulutustyyppiDisabledGetter({
+        isOphVirkailija,
+        isLukio,
+        isAmmatillinen,
+        isKorkeakoulutus,
+      })}
     />
   );
 };

@@ -87,15 +87,12 @@ Object {
         "value": "dipmlomi_1#1",
       },
     ],
-    "maksullisuus": Object {
-      "maksu": "",
-      "tyyppi": "kylla",
-    },
     "maksullisuusKuvaus": Object {
       "fi": "<p>Fi maksullisuuskuvaus</p>",
       "sv": "<p>Sv maksullisuuskuvaus</p>",
     },
-    "maksumaara": Object {},
+    "maksullisuustyyppi": "maksullinen",
+    "maksunMaara": 500,
     "muutKielet": Array [
       Object {
         "value": "kieli_6#1",

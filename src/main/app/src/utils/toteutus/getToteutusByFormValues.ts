@@ -2,10 +2,7 @@ import _fp from 'lodash/fp';
 
 import { serializeEditorState } from '#/src/components/Editor/utils';
 import { ApurahaMaaraTyyppi, HAKULOMAKETYYPPI } from '#/src/constants';
-import {
-  MaksullisuusTyyppi,
-  ToteutusFormValues,
-} from '#/src/types/toteutusTypes';
+import { ToteutusFormValues } from '#/src/types/toteutusTypes';
 import { isPartialDate, maybeParseNumber } from '#/src/utils';
 import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
 import serializeSisaltoField from '#/src/utils/form/serializeSisaltoField';
@@ -43,12 +40,8 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
 
   const osioKuvaukset = values?.jarjestamistiedot?.osioKuvaukset || {};
 
-  const maksullisuustyyppi = values?.jarjestamistiedot?.maksullisuus?.tyyppi;
-  const onkoLukuvuosimaksu =
-    maksullisuustyyppi === MaksullisuusTyyppi.LUKUVUOSIMAKSU;
-  const onkoMaksullinen =
-    maksullisuustyyppi === MaksullisuusTyyppi.KYLLA || onkoLukuvuosimaksu;
-  const maksullisuusMaksu = values?.jarjestamistiedot?.maksullisuus?.maksu;
+  const maksullisuustyyppi = values?.jarjestamistiedot?.maksullisuustyyppi;
+  const maksunMaara = values?.jarjestamistiedot?.maksunMaara;
 
   const osaamisalaLinkit = values?.osaamisalat?.osaamisalaLinkit || {};
   const osaamisalaLinkkiOtsikot =
@@ -85,11 +78,8 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
           })
         ),
         opetuskieliKoodiUrit: opetuskielet || [],
-        onkoMaksullinen,
-        onkoLukuvuosimaksu,
-        maksunMaara: onkoMaksullinen
-          ? maybeParseNumber(maksullisuusMaksu)
-          : null,
+        maksullisuustyyppi,
+        maksunMaara: maybeParseNumber(maksunMaara),
         opetustapaKoodiUrit: values?.jarjestamistiedot?.opetustapa || [],
         opetusaikaKoodiUrit: values?.jarjestamistiedot?.opetusaika || [],
         opetuskieletKuvaus: _fp.flow(

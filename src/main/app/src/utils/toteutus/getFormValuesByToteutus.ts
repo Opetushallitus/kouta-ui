@@ -66,6 +66,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     muuKielivalikoima,
     lisatiedot,
     koulutuksenAlkamiskausi = {},
+    maksullisuustyyppi = MaksullisuusTyyppi.MAKSUTON,
   } = opetus;
 
   const { osaamisalaLinkit, osaamisalaLinkkiOtsikot } = _fp.reduce(
@@ -81,15 +82,6 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     },
     { osaamisalaLinkit: {}, osaamisalaLinkkiOtsikot: {} }
   )(osaamisalat);
-
-  const maksullisuustyyppi = _fp.cond([
-    [
-      () => opetus?.onkoLukuvuosimaksua,
-      () => MaksullisuusTyyppi.LUKUVUOSIMAKSU,
-    ],
-    [() => opetus?.onkoMaksullinen, () => MaksullisuusTyyppi.KYLLA],
-    [otherwise, () => MaksullisuusTyyppi.EI],
-  ])(undefined);
 
   return {
     koulutustyyppi,
@@ -111,14 +103,8 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     kieliversiot: kielivalinta ?? [],
     tarjoajat: tarjoajat ?? [],
     jarjestamistiedot: {
-      maksullisuus: {
-        tyyppi: maksullisuustyyppi,
-        maksu: (maksullisuustyyppi === 'lukuvuosimaksu'
-          ? opetus?.lukuvuosimaksu || ''
-          : opetus?.maksunMaara || ''
-        ).toString(),
-      },
-      maksumaara: opetus?.maksunMaara || {},
+      maksullisuustyyppi,
+      maksunMaara: opetus?.maksunMaara,
       opetustapa: opetus?.opetustapaKoodiUrit || [],
       opetusaika: opetus?.opetusaikaKoodiUrit || [],
       opetuskieli: opetus?.opetuskieliKoodiUrit || [],

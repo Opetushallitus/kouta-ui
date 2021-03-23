@@ -131,12 +131,12 @@ Object {
         "fi": "<p>Fi maksullisuuskuvaus</p>",
         "sv": "<p>Sv maksullisuuskuvaus</p>",
       },
+      "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 50.5,
       "muuKielivalikoima": Array [
         "kieli_6#1",
       ],
       "onkoApuraha": true,
-      "onkoMaksullinen": true,
       "opetusaikaKoodiUrit": Array [
         "opetusaika_1#1",
         "opetusaika_2#1",

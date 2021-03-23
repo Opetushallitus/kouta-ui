@@ -332,19 +332,11 @@ const config = createFormConfigBuilder().registerSections([
         name: 'jarjestamistiedot.opetustapaKuvaus',
       }),
       {
-        field: '.maksullisuus.tyyppi',
-        validate: validateIfJulkaistu(eb =>
-          eb.validateExistence('jarjestamistiedot.maksullisuus.tyyppi')
-        ),
+        field: '.maksullisuustyyppi',
         required: true,
       },
       {
-        field: '.maksullisuus.maksu',
-        validate: validateIfJulkaistu((eb, values) =>
-          values?.jarjestamistiedot?.maksullisuus?.tyyppi === 'kylla'
-            ? eb.validateExistence('jarjestamistiedot.maksullisuus.maksu')
-            : eb
-        ),
+        field: '.maksunMaara',
       },
       createOptionalTranslatedFieldConfig({
         name: 'jarjestamistiedot.maksullisuusKuvaus',

@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import { Alkamiskausityyppi, ApurahaYksikko } from '#/src/constants';
+import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 
 const getBaseFields = () => ({
   oid: '1.2.246.562.17.00000000000000000026',
@@ -30,7 +31,7 @@ const getBaseFields = () => ({
       opetustapaKuvaus: {
         fi: 'Opetustapa kuvaus',
       },
-      onkoMaksullinen: true,
+      maksullisuustyyppi: MaksullisuusTyyppi.MAKSULLINEN,
       maksullisuusKuvaus: {
         fi: 'Maksullisuus kuvaus',
       },

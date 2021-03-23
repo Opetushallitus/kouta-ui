@@ -67,6 +67,19 @@ const TiedotSection = ({
         </Box>
       </FormConfigFragment>
 
+      <FormConfigFragment name="koulutuskooditKorkeakouluille">
+        <Box mb={2} {...getTestIdProps('koulutuskoodiSelect')}>
+          <KoulutusField
+            disabled={disabled}
+            name={`${name}.koulutukset`}
+            koulutustyyppi={koulutustyyppi}
+            language={language}
+            isMultiSelect={true}
+            valitseKoulutusLabel={t('yleiset.valitseKoulutukset')}
+          />
+        </Box>
+      </FormConfigFragment>
+
       <Box mb={2}>
         <OpintojenlaajuusField disabled={disabled} name={name} />
       </Box>

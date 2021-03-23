@@ -111,13 +111,21 @@ const config = createFormConfigBuilder().registerSections([
         field: '.koulutus',
         fragment: 'koulutuskoodi',
         koulutustyypit: [
-          ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
           KOULUTUSTYYPPI.VALMA,
           KOULUTUSTYYPPI.TELMA,
           KOULUTUSTYYPPI.LUVA,
           KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS,
         ],
         validate: eb => eb.validateExistence('information.koulutus'),
+        required: true,
+      },
+      {
+        field: '.koulutukset',
+        fragment: 'koulutuskooditKorkeakouluille',
+        koulutustyypit: [...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT],
+        validate: validateIfJulkaistu(eb =>
+          eb.validateArrayMinLength('information.koulutukset', 1)
+        ),
         required: true,
       },
       {

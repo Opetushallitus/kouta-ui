@@ -11,6 +11,7 @@ export const getFormValuesByKoulutus = koulutus => {
   const {
     kielivalinta = [],
     koulutusKoodiUri = '',
+    koulutuksetKoodiUri = [],
     koulutustyyppi = '',
     tarjoajat = [],
     metadata = {},
@@ -45,6 +46,7 @@ export const getFormValuesByKoulutus = koulutus => {
       koulutus: {
         value: koulutusKoodiUri,
       },
+      koulutukset: koulutuksetKoodiUri,
       opintojenLaajuus: {
         value: opintojenLaajuusKoodiUri,
       },

@@ -11,15 +11,18 @@ import { useBoundFormActions, useFieldValue, useIsDirty } from '../hooks/form';
 import { useHasChanged } from '../hooks/useHasChanged';
 
 const KoulutusField = props => {
-  const { name } = props;
+  const { t } = useTranslation();
+  const {
+    name,
+    isMultiSelect = false,
+    valitseKoulutusLabel = t('yleiset.valitseKoulutus'),
+  } = props;
 
   const koulutustyyppi = useFieldValue('koulutustyyppi');
 
   const { data: koulutukset, isLoading } = useKoulutuksetByKoulutustyyppi(
-    koulutustyyppi
+      koulutustyyppi
   );
-
-  const { t } = useTranslation();
 
   const koulutustyyppiChanged = useHasChanged(koulutustyyppi);
 
@@ -38,8 +41,9 @@ const KoulutusField = props => {
       isLoading={isLoading}
       component={FormFieldAsyncKoodistoSelect}
       koodistoData={koulutukset}
-      label={t('yleiset.valitseKoulutus')}
+      label={valitseKoulutusLabel}
       showAllOptions={true}
+      isMulti={isMultiSelect}
       {...props}
     />
   );

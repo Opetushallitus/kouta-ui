@@ -69,9 +69,10 @@ const getAsyncValue = async (
     newValue.map(async singleValue => ({
       ...singleValue,
       label:
-        singleValue?.label ??
-        (await loadLabel(singleValue?.value).catch(() => undefined)) ??
-        singleValue?.value,
+        singleValue?.label === singleValue?.value
+          ? (await loadLabel(singleValue?.value).catch(() => undefined)) ??
+            singleValue?.value
+          : singleValue?.label,
     }))
   );
 

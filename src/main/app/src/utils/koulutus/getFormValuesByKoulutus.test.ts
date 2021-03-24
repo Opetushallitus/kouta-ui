@@ -5,7 +5,7 @@ test('getFormValuesByKoulutus returns correct form values given koulutus', () =>
     tila: 'tallennettu',
     julkinen: true,
     kielivalinta: ['fi', 'sv'],
-    koulutusKoodiUri: 'koulutuskoodi_1#1',
+    koulutuksetKoodiUri: ['koulutus_371101#1', 'koulutus_201000#1'],
     koulutustyyppi: 'yo',
     metadata: {
       kuvauksenNimi: {

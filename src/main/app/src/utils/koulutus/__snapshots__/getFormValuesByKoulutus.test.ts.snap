@@ -17,8 +17,12 @@ Object {
     "eperuste": Object {
       "value": undefined,
     },
+    "korkeakoulutukset": Array [
+      "koulutus_371101#1",
+      "koulutus_201000#1",
+    ],
     "koulutus": Object {
-      "value": "koulutuskoodi_1#1",
+      "value": "",
     },
     "koulutusalat": Array [
       Object {

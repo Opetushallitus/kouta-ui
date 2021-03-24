@@ -29,7 +29,7 @@ import KuvausSection from './KuvausSection';
 import { LisatiedotSection } from './LisatiedotSection';
 import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
 import { OsaamisalaSection } from './OsaamisalaSection';
-import TiedotSection from './TiedotSection';
+import { TiedotSection } from './TiedotSection/TiedotSection';
 import { ToteutuksetSection } from './ToteutuksetSection';
 import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';
 import { TutkinnonOsaKoulutusNimiSection } from './TutkinnonOsaKoulutusNimiSection';

@@ -15,7 +15,7 @@ import KoulutusalatField from './KoulutusalatField';
 import OpintojenlaajuusField from './OpintojenlaajuusField';
 import TutkintonimikeField from './TutkintonimikeField';
 
-const TiedotSection = ({
+export const TiedotSection = ({
   disabled,
   language,
   koulutustyyppi,
@@ -103,5 +103,3 @@ const TiedotSection = ({
     </Box>
   );
 };
-
-export default TiedotSection;

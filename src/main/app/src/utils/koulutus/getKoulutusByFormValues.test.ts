@@ -63,3 +63,66 @@ test('getKoulutusByFormValues returns correct koulutus given form values', () =>
 
   expect(koulutus).toMatchSnapshot();
 });
+
+test('getKoulutusByFormValues returns correct koulutuksetKoodiUri for ammatillinen koulutus', () => {
+  const koulutus = getKoulutusByFormValues({
+    tila: 'tallennettu',
+    muokkaaja: '1.1.1.1',
+    kieliversiot: ['fi', 'sv'],
+    tarjoajat: {
+      tarjoajat: ['123.456.789'],
+    },
+    information: {
+      nimi: {
+        fi: 'Fi nimi',
+        sv: 'Sv nimi',
+      },
+      koulutus: {
+        value: 'koulutuskoodi_1#1',
+      },
+      korkeakoulutukset: [],
+      opintojenLaajuus: {
+        value: 'laajuus_1#1',
+      },
+      tutkintonimike: [{ value: 'nimike_1#1' }, { value: 'nimike_2#1' }],
+      koulutusalat: [
+        { value: 'koulutusala_1#1' },
+        { value: 'koulutusala_2#1' },
+      ],
+    },
+    koulutustyyppi: 'amm',
+    lisatiedot: {
+      osioKuvaukset: {
+        'osio_1#1': {},
+        'osio_2#1': {
+          fi: parseEditorState('Fi kuvaus'),
+          sv: parseEditorState('Sv kuvaus'),
+        },
+      },
+      osiot: [{ value: 'osio_1#1' }, { value: 'osio_2#1' }],
+    },
+    description: {
+      kuvaus: {
+        fi: parseEditorState('Fi kuvaus'),
+        sv: parseEditorState('Sv kuvaus'),
+      },
+      nimi: {
+        fi: 'Fi nimi',
+        sv: 'Sv nimi',
+      },
+    },
+    tutkinnonosat: {
+      osat: [
+        {
+          eperuste: { value: '1234' },
+          koulutus: { value: 'koulutuskoodi_2#1' },
+          tutkinnonosa: { value: '567567' },
+          tutkinnonosaviite: '9847598475',
+        },
+      ],
+    },
+    julkinen: true,
+  });
+
+  expect(koulutus).toMatchSnapshot();
+});

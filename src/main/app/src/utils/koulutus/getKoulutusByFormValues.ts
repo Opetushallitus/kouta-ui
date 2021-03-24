@@ -10,10 +10,10 @@ import { maybeParseNumber } from '#/src/utils';
 const osaamisalaKoodiToKoodiUri = value =>
   value ? `osaamisala_${value}` : null;
 
-function getKoulutuksetKoodiUri(values, osaamisala) {
-  return (
-    values?.information?.koulutus?.value || osaamisala?.koulutus?.value || null
-  );
+function getKoulutuksetKoodiUri(values, osaamisala): Array<string> {
+  const koulutusKoodiUri =
+    values?.information?.koulutus?.value || osaamisala?.koulutus?.value || null;
+  return [koulutusKoodiUri];
 }
 
 const getKoulutusByFormValues = values => {
@@ -40,7 +40,7 @@ const getKoulutusByFormValues = values => {
       pohjanTarjoajat && kaytaPohjanJarjestajaa
         ? pohjanTarjoajat
         : values?.tarjoajat?.tarjoajat || [],
-    koulutusKoodiUri: getKoulutuksetKoodiUri(values, osaamisala),
+    koulutuksetKoodiUri: getKoulutuksetKoodiUri(values, osaamisala),
     koulutustyyppi,
     nimi:
       koulutustyyppi === KOULUTUSTYYPPI.TUTKINNON_OSA

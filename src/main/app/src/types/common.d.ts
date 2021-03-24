@@ -25,6 +25,6 @@ type Yhteystieto = {
 type KoulutusModel = any;
 type SoraKuvausModel = any;
 
-type SelectOption<T = string> = { label?: string; value: T };
+type SelectOption<T = string> = { label?: string; value?: T };
 
 type PohjaValinta = { tapa: string; valinta: string };

@@ -292,10 +292,6 @@ export const createKoulutusForm = () => {
         fillAsyncSelect('Fysioterapeutti (AMK)');
       });
 
-      getByTestId('nimiInput').within(() => {
-        cy.get('input').clear().pipe(paste('Tiedot nimi'));
-      });
-
       getByTestId('tutkintonimikeSelect').click();
 
       getByTestId('tutkintonimikeSelect').within(() => {
@@ -310,6 +306,10 @@ export const createKoulutusForm = () => {
 
       getByTestId('opintojenLaajuusSelect').within(() => {
         getSelectOption('300').click({ force: true });
+      });
+
+      getByTestId('nimiInput').within(() => {
+        cy.get('input').clear().pipe(paste('Tiedot nimi'));
       });
 
       jatka();
@@ -360,7 +360,7 @@ export const createKoulutusForm = () => {
       getByTestId('koulutusSelect').click();
 
       getByTestId('koulutusSelect').within(() => {
-        fillAsyncSelect('Lukion oppimäärä');
+        fillAsyncSelect('Ylioppilastutkinto');
       });
 
       jatka();

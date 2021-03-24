@@ -186,12 +186,13 @@ exports[`createKoulutus > should be able to create AMK-koulutus #0`] =
 exports[`createKoulutus > should be able to create lukiokoulutus #0`] =
 {
   "ePerusteId": null,
+  "esikatselu": false,
   "johtaaTutkintoon": true,
   "julkinen": true,
   "kielivalinta": [
     "fi"
   ],
-  "koulutusKoodiUri": "koulutus_309902#7",
+  "koulutusKoodiUri": "koulutus_301101#12",
   "koulutustyyppi": "lk",
   "metadata": {
     "koulutusalaKoodiUrit": [],
@@ -214,14 +215,13 @@ exports[`createKoulutus > should be able to create lukiokoulutus #0`] =
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "Lukion oppimäärä"
+    "fi": "Ylioppilastutkinto"
   },
   "organisaatioOid": "1.1.1.1.1.1",
   "tarjoajat": [
     "1.2.1.1.1.1"
   ],
-  "tila": "julkaistu",
-  "esikatselu": false
+  "tila": "julkaistu"
 };
 
 exports[`editKoulutus > should be able to edit ammatillinen koulutus #0`] =
@@ -264,8 +264,7 @@ exports[`editKoulutus > should be able to edit ammatillinen koulutus #0`] =
     "1.1.1.1.1.1",
     "1.2.1.1.1.1"
   ],
-  "tila": "tallennettu",
-  "esikatselu": true
+  "tila": "tallennettu"
 };
 
 exports[`editKoulutus > should be able to edit AMK-koulutus #0`] =

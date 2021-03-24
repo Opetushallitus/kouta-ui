@@ -87,7 +87,7 @@ export const createOppilaitosForm = () => {
     cy.visit(`/organisaatio/${organisaatioOid}/oppilaitos`);
   });
 
-  it.only('should be able to create oppilaitos', () => {
+  it('should be able to create oppilaitos', () => {
     cy.intercept(
       { method: 'PUT', url: '**/oppilaitos' },
       {

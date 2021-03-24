@@ -1,4 +1,13 @@
-import _ from 'lodash';
+import { KOODISTO_VERSIOT } from '#/src/constants';
+import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
+
+type GetKoodiProps = {
+  apiUrls: any;
+  httpClient: any;
+  koodi: string;
+  versio?: number;
+  silent?: boolean;
+};
 
 const getKoodi = async ({
   apiUrls,
@@ -6,12 +15,13 @@ const getKoodi = async ({
   koodi,
   versio,
   silent = false,
-}) => {
+}: GetKoodiProps) => {
+  const { koodisto } = parseKoodiUri(koodi);
   const { data } = await httpClient.get(
     apiUrls.url(
       'koodisto-service.codeelement',
       koodi,
-      !_.isNil(versio) ? versio : ''
+      versio ?? KOODISTO_VERSIOT[koodisto] ?? ''
     ),
     {
       errorNotifier: {

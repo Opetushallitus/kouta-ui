@@ -1,18 +1,19 @@
-import React, { useMemo, useContext, useRef, useCallback } from 'react';
+import React, { useMemo, useContext } from 'react';
 
 import UiSelect, {
   getStyles,
   getTheme,
 } from '@opetushallitus/virkailija-ui-components/Select';
 import _ from 'lodash';
-import { useAsync } from 'react-async';
 import { useTranslation } from 'react-i18next';
+import { useQuery } from 'react-query';
 import { components, Props } from 'react-select';
 import ReactAsyncSelect from 'react-select/async';
 import ReactAsyncCreatableSelect from 'react-select/async-creatable';
 import ReactCreatable from 'react-select/creatable';
 import { ThemeContext } from 'styled-components';
 
+import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { memoizeOne } from '#/src/utils/memoize';
 
 const OptionComponent = props => (
@@ -21,8 +22,6 @@ const OptionComponent = props => (
     innerProps={{ ...props.innerProps, role: 'option' }}
   />
 );
-
-const noopPromise = () => Promise.resolve();
 
 const makeDefaultNoOptionsMessage = t => () =>
   t('yleiset.eiValittaviaKohteita');
@@ -46,50 +45,65 @@ const getDefaultProps = memoizeOne(t => ({
   },
 }));
 
-const getOptionLabelByValue = options => {
-  if (!_.isArray(options)) {
-    return {};
-  }
+const getOptionLabelByValue = (options: Array<any> = []) =>
+  _.reduce(
+    options,
+    (acc, curr) => {
+      acc[curr?.value || '_'] = curr?.label || curr?.value;
+      return acc;
+    },
+    {}
+  );
 
-  return options.reduce((acc, curr) => {
-    acc[curr.value || '_'] = curr.label;
+const safeArray = v => (_.isNil(v) ? [] : _.castArray(v));
 
-    return acc;
-  }, {});
+const safeArrayToValue = a => (_.size(a) > 1 ? a : _.get(a, 0));
+
+const getAsyncValue = async (
+  value?: SelectOption | Array<SelectOption> | null,
+  options?: Array<any>,
+  loadLabel: any = _.identity
+) => {
+  const newValue = safeArray(getValue(value, options));
+  const result = await Promise.all(
+    newValue.map(async singleValue => ({
+      ...singleValue,
+      label:
+        singleValue?.label === singleValue?.value
+          ? (await loadLabel(singleValue?.value).catch(() => undefined)) ??
+            singleValue?.value
+          : singleValue?.label,
+    }))
+  );
+
+  return safeArrayToValue(result);
 };
 
-const getValue = (value, options) => {
-  const hasOptions = _.isArray(options);
-
+const getValue = (
+  value?: SelectOption | Array<SelectOption> | null,
+  options?: Array<any>
+) => {
+  const labelByValue = getOptionLabelByValue(options);
   if (_.isObject(value) && value.value) {
-    return hasOptions
-      ? options.find(option => option?.value === value.value) || {
-          label: value.value,
-          ...value,
-        }
-      : { label: value.value, ...value };
+    return { ...value, label: labelByValue[value.value] || value.value };
   }
 
   if (_.isArray(value)) {
-    const labelByValue = getOptionLabelByValue(options);
+    const newValue: Array<SelectOption> = [];
 
-    return value
-      .map(item => {
-        if (_.isObject(item) && item.value) {
-          const { value: itemValue, label: itemLabel, ...rest } = item;
+    for (const item of value) {
+      if (_.isObject(item) && item.value) {
+        const { value: itemValue, label: itemLabel, ...rest } = item;
 
-          return {
-            value: itemValue,
-            label: itemLabel || labelByValue[itemValue] || itemValue,
-            ...rest,
-          };
-        }
+        newValue.push({
+          ...rest,
+          value: itemValue,
+          label: labelByValue[itemValue] || itemLabel || itemValue,
+        });
+      }
+    }
 
-        return {
-          value: null,
-        };
-      })
-      .filter(({ value: v }) => !!v);
+    return newValue;
   }
 
   return value;
@@ -108,7 +122,7 @@ export const Select = ({
   error = false,
   ...props
 }: SelectProps) => {
-  const resolvedValue = useMemo(() => getValue(value, options), [
+  const resolvedValue = useMemo(() => getValue(value, options as any), [
     value,
     options,
   ]);
@@ -174,71 +188,35 @@ export const AsyncSelect = ({
   value: valueProp,
   isLoading,
   id,
+  defaultOptions,
   ...props
-}) => {
+}: SelectProps) => {
   const { t } = useTranslation();
   const theme = useContext(ThemeContext);
-  const labelCache = useRef({});
 
-  const valuesWithoutLabel = useMemo(() => {
-    const valueArr = _.castArray(valueProp);
-
-    return valueArr
-      .filter(v => !v?.label && !labelCache.current[v?.value])
-      .map(v => v?.value);
-  }, [valueProp]);
-
-  const promiseFn = useMemo(() => {
-    return async () => {
-      const labels = await Promise.all(
-        valuesWithoutLabel.map(v =>
-          (_.isFunction(loadLabel) ? loadLabel(v) : noopPromise()).catch(
-            () => null
-          )
-        )
-      );
-
-      const valueToLabel = _.zipObject(valuesWithoutLabel, labels);
-
-      labelCache.current = {
-        ...labelCache.current,
-        ...valueToLabel,
-      };
-
-      return labelCache.current;
-    };
-  }, [valuesWithoutLabel, loadLabel]);
-
-  const { data: valueToLabel, isLoading: labelIsLoading } = useAsync({
-    promiseFn,
-  });
-
-  const value = useMemo(() => {
-    return getValue(
-      valueProp,
-      Object.entries(valueToLabel || {}).map(([k, v]) => ({
-        value: k,
-        label: v,
-      }))
-    );
-  }, [valueToLabel, valueProp]);
-
-  const noOptionsMessage = useCallback(
-    () => t('yleiset.eiValittaviaKohteitaHakusanalla'),
-    [t]
+  const { data: value, isFetching: isLoadingValue } = useQuery(
+    ['getAsyncSelectValue', valueProp, defaultOptions, loadLabel],
+    () => getAsyncValue(valueProp, defaultOptions, loadLabel),
+    { enabled: Boolean(valueProp), ...LONG_CACHE_QUERY_OPTIONS }
   );
 
   return (
     <ReactAsyncSelect
       {...getDefaultProps(t)}
-      isDisabled={disabled || _.isUndefined(props?.loadOptions)}
+      isDisabled={
+        disabled ||
+        _.isUndefined(props?.loadOptions) ||
+        isLoading ||
+        isLoadingValue
+      }
       placeholder={t('yleiset.kirjoitaHakusana')}
-      noOptionsMessage={noOptionsMessage}
+      noOptionsMessage={() => t('yleiset.eiValittaviaKohteitaHakusanalla')}
+      defaultOptions={defaultOptions}
       styles={getStyles(theme, error)}
       theme={getTheme(theme)}
       cacheOptions={true}
       value={value}
-      isLoading={labelIsLoading || isLoading}
+      isLoading={isLoading || isLoadingValue}
       inputId={id}
       {...props}
     />

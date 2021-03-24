@@ -13,13 +13,12 @@ const resolveToteutusNimi = async ({ httpClient, apiUrls, toteutus }) => {
   const lukiolinjaKoodiUri = _.get(toteutus, 'metadata.lukiolinjaKoodiUri');
 
   if (_.isString(lukiolinjaKoodiUri) && _.isArray(kielivalinta)) {
-    const { koodisto, versio, koodi } = parseKoodiUri(lukiolinjaKoodiUri);
+    const { koodisto, koodi } = parseKoodiUri(lukiolinjaKoodiUri);
 
     const koodistoKoodit = await getKoodisto({
       httpClient,
       apiUrls,
       koodistoUri: koodisto,
-      koodistoVersio: versio,
     });
 
     const targetKoodi = _.isArray(koodistoKoodit)

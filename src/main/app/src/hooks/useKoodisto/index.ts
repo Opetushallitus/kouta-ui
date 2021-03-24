@@ -1,15 +1,9 @@
-import _ from 'lodash';
-
-import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
-import { useKoodistoVersiot } from '#/src/contexts/KoodistoversiotContext';
+import { KOODISTO_VERSIOT, LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
 import getKoodisto from '#/src/utils/koodi/getKoodisto';
 
 export const useKoodisto = ({ koodisto, versio: versioProp }) => {
-  const versiot = useKoodistoVersiot();
-
-  const contextVersio = _.isObject(versiot) ? versiot[koodisto] : '';
-  const versio = versioProp || contextVersio || '';
+  const versio = versioProp || KOODISTO_VERSIOT[koodisto] || '';
 
   return useApiQuery(
     'getKoodisto',

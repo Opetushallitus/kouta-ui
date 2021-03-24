@@ -9,70 +9,52 @@ import useLanguage from '#/src/hooks/useLanguage';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 import getKoodi from '#/src/utils/koodi/getKoodi';
 
-const getKoodiLabel = (koodi, language) => {
-  const { koodiUri } = koodi;
+const VALID_POSTINUMERO_LENGTH = 5;
 
-  const [, postinumero] = koodiUri.split('_');
+const koodiToKoodiUri = koodi => `${koodi?.koodiUri}#${koodi.versio}`;
+
+const getKoodiLabel = (koodi, language) => {
+  const postinumero = koodi?.koodiArvo;
 
   return `${postinumero} ${_.upperFirst(
     getKoodiNimiTranslation(koodi, language).toLowerCase()
   )}`;
 };
 
-const getKoodiOption = (koodi, versio, language) => {
-  const { koodiUri } = koodi;
-
-  return {
-    label: getKoodiLabel(koodi, language),
-    value: `${koodiUri}#${versio}`,
-  };
-};
-
-export const PostinumeroSelect = ({ koodistoVersio = 2, ...props }) => {
+export const PostinumeroSelect = ({ ...props }) => {
   const httpClient = useHttpClient();
   const apiUrls = useUrls();
   const language = useLanguage();
 
-  const formatLabel = useCallback(
-    koodi => {
-      return getKoodiLabel(koodi, language);
-    },
-    [language]
-  );
-
   const loadOptions = useCallback(
     async inputValue => {
-      if (!_.isString(inputValue)) {
-        return [];
-      }
-
-      const koodiStr = `posti_${inputValue}`;
-
-      try {
+      if (_.size(inputValue) === VALID_POSTINUMERO_LENGTH) {
         const koodi = await getKoodi({
           httpClient,
           apiUrls,
-          koodi: koodiStr,
-          versio: koodistoVersio,
+          koodi: `posti_${_.trim(inputValue)}`,
           silent: true,
         });
 
         if (koodi) {
-          return [getKoodiOption(koodi, koodistoVersio, language)];
+          return [
+            {
+              label: getKoodiLabel(koodi, language),
+              value: koodiToKoodiUri(koodi),
+            },
+          ];
         }
-      } catch (e) {
-        console.log(e);
       }
 
       return [];
     },
-    [httpClient, apiUrls, language, koodistoVersio]
+    [httpClient, apiUrls, language]
   );
 
   return (
     <AsyncKoodistoSelect
       isClearable={true}
-      formatLabel={formatLabel}
+      formatKoodiLabel={getKoodiLabel}
       loadOptions={loadOptions}
       {...props}
     />

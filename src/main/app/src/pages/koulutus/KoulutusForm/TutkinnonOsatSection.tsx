@@ -11,17 +11,17 @@ import { useFieldValue } from '#/src/hooks/form';
 import { getTestIdProps } from '#/src/utils';
 
 import KoulutuksenTiedotSection from './TiedotSection/KoulutuksenTiedotSection';
-import { useLocalizedKoulutus } from './useLocalizedKoulutus';
+import { useNimiFromKoulutusKoodi } from './useNimiFromKoulutusKoodi';
 
 const TutkinnonOsatField = ({ disabled, language, koulutustyyppi, name }) => {
   const { t } = useTranslation();
   const koulutuskoodi = useFieldValue(`${name}.koulutus`);
 
-  useLocalizedKoulutus({
+  useNimiFromKoulutusKoodi({
     nimiFieldName: `${name}.nimi`,
     koulutusFieldName: `${name}.koulutus`,
-    language,
   });
+
   return (
     <Box mt={2}>
       <KoulutuksenTiedotSection

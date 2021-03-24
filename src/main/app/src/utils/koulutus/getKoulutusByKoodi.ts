@@ -123,9 +123,7 @@ export const getKoulutusByKoodi = async ({
 };
 
 export const useKoulutusByKoodi = props =>
-  useApiQuery(
-    'getKoulutusByKoodi',
-    getKoulutusByKoodi,
-    props,
-    LONG_CACHE_QUERY_OPTIONS
-  );
+  useApiQuery('getKoulutusByKoodi', getKoulutusByKoodi, props, {
+    ...LONG_CACHE_QUERY_OPTIONS,
+    enabled: Boolean(props?.koodiUri),
+  });

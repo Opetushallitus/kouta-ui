@@ -52,6 +52,8 @@ export const stubKoulutusFormRoutes = ({ organisaatioOid }) => {
     { body: [] }
   );
 
+  cy.intercept({ method: 'GET', url: `/koulutus/list` }, { body: [] });
+
   cy.intercept(
     { method: 'GET', url: `**/koulutus/*/toteutukset/list**` },
     { body: [] }

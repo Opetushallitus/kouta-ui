@@ -17,17 +17,21 @@ type GetOptionsProps = {
   koodisto: Array<Koodi>;
   language: LanguageCode;
   sortFn?: (SelectOptions) => SelectOptions;
+  formatLabel?: (any, LanguageCode) => string;
 };
 
 const getOptions = ({
   koodisto,
   language,
   sortFn = defaultSort,
+  formatLabel,
 }: GetOptionsProps) =>
   sortFn(
     _.map(koodisto, koodi => ({
       value: `${koodi?.koodiUri}#${koodi?.versio}`,
-      label: getKoodiNimiTranslation(koodi, language),
+      label: _.isFunction(formatLabel)
+        ? formatLabel(koodi, language)
+        : getKoodiNimiTranslation(koodi, language),
     }))
   );
 
@@ -35,10 +39,14 @@ export const useKoodistoDataOptions = ({
   koodistoData,
   language,
   sortFn = undefined,
+  formatLabel = undefined,
 }) => {
   return useMemo(
-    () => getOptions({ koodisto: koodistoData, language, sortFn }),
-    [koodistoData, language, sortFn]
+    () =>
+      koodistoData
+        ? getOptions({ koodisto: koodistoData, language, sortFn, formatLabel })
+        : [],
+    [koodistoData, language, sortFn, formatLabel]
   );
 };
 

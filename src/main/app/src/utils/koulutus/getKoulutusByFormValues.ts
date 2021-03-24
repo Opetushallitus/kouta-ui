@@ -3,6 +3,7 @@ import _fp from 'lodash/fp';
 import { serializeEditorState } from '#/src/components/Editor/utils';
 import {
   KOULUTUSTYYPPI,
+  TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
 } from '#/src/constants';
 import { maybeParseNumber } from '#/src/utils';
@@ -15,11 +16,18 @@ function getKoulutuksetKoodiUri(
   information?: {
     koulutus: { value: string };
     korkeakoulutukset: Array<string>;
-  }
+  },
+  koulutustyyppi?: string
 ): Array<string> {
-  const koulutusKoodiUri =
-    information?.koulutus.value || osaamisala?.koulutus?.value || null;
-  return [koulutusKoodiUri];
+  const isKorkeakoulu = TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT.some(
+    t => t === koulutustyyppi
+  );
+
+  const koulutusKoodiUrit = isKorkeakoulu
+    ? information?.korkeakoulutukset
+    : [information?.koulutus.value];
+
+  return koulutusKoodiUrit || [osaamisala?.koulutus?.value];
 }
 
 const getKoulutusByFormValues = values => {
@@ -48,7 +56,8 @@ const getKoulutusByFormValues = values => {
         : values?.tarjoajat?.tarjoajat || [],
     koulutuksetKoodiUri: getKoulutuksetKoodiUri(
       osaamisala,
-      values?.information
+      values?.information,
+      koulutustyyppi
     ),
     koulutustyyppi,
     nimi:

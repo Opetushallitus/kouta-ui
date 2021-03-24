@@ -13,7 +13,8 @@ const osaamisalaKoodiToKoodiUri = value =>
 function getKoulutuksetKoodiUri(
   osaamisala,
   information?: {
-    koulutus: { value: string; korkeakoulutukset: Array<string> };
+    koulutus: { value: string };
+    korkeakoulutukset: Array<string>;
   }
 ): Array<string> {
   const koulutusKoodiUri =

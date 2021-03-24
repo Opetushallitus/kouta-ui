@@ -71,7 +71,7 @@ export const TiedotSection = ({
         <Box mb={2} {...getTestIdProps('koulutuskoodiSelect')}>
           <KoulutusField
             disabled={disabled}
-            name={`${name}.koulutukset`}
+            name={`${name}.korkeakoulutukset`}
             koulutustyyppi={koulutustyyppi}
             language={language}
             isMultiSelect={true}

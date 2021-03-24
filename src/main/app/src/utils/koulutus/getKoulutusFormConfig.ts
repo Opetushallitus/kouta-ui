@@ -120,11 +120,11 @@ const config = createFormConfigBuilder().registerSections([
         required: true,
       },
       {
-        field: '.koulutukset',
+        field: '.korkeakoulutukset',
         fragment: 'koulutuskooditKorkeakouluille',
         koulutustyypit: [...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT],
         validate: validateIfJulkaistu(eb =>
-          eb.validateArrayMinLength('information.koulutukset', 1)
+          eb.validateArrayMinLength('information.korkeakoulutukset', 1)
         ),
         required: true,
       },

@@ -1,5 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`for osaamisala koulutus, koulutusKoodiUri is resolved 1`] = `
+Object {
+  "ePerusteId": null,
+  "esikatselu": false,
+  "johtaaTutkintoon": true,
+  "julkinen": false,
+  "kielivalinta": Array [],
+  "koulutuksetKoodiUri": Array [
+    "koulutus_371101#1"
+  ],
+  "koulutustyyppi": "amm",
+  "metadata": Object {
+    "koulutusalaKoodiUrit": Array [],
+    "koulutustyyppi": "amm",
+    "kuvauksenNimi": Object {},
+    "kuvaus": Object {},
+    "lisatiedot": Array [],
+    "opintojenLaajuusKoodiUri": null,
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": Array [],
+    "tutkintonimikeKoodiUrit": Array [],
+  },
+  "muokkaaja": undefined,
+  "nimi": Object {},
+  "tarjoajat": Array [],
+  "teemakuva": undefined,
+  "tila": undefined,
+}
+`;
+
 exports[`getKoulutusByFormValues returns correct koulutuksetKoodiUri for ammatillinen koulutus 1`] = `
 Object {
   "ePerusteId": null,

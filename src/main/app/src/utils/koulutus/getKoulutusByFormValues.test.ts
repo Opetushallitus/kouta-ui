@@ -89,3 +89,15 @@ test('getKoulutusByFormValues returns correct koulutuksetKoodiUri for ammatillin
 
   expect(koulutus).toMatchSnapshot();
 });
+
+test('for osaamisala koulutus, koulutusKoodiUri is resolved', () => {
+  const koulutus = getKoulutusByFormValues({
+    information: {
+      korkeakoulutukset: [],
+    },
+    osaamisala: { koulutus: { value: 'koulutus_371101#1' } },
+    koulutustyyppi: 'amm',
+  });
+
+  expect(koulutus).toMatchSnapshot();
+});

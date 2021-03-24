@@ -96,7 +96,7 @@ test('for osaamisala koulutus, koulutusKoodiUri is resolved', () => {
       korkeakoulutukset: [],
     },
     osaamisala: { koulutus: { value: 'koulutus_371101#1' } },
-    koulutustyyppi: 'amm',
+    koulutustyyppi: 'amm-osaamisala',
   });
 
   expect(koulutus).toMatchSnapshot();

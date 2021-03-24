@@ -1,17 +1,35 @@
 import _fp from 'lodash/fp';
 
 import { parseEditorState } from '#/src/components/Editor/utils';
+import { TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT } from '#/src/constants';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 
 const koodiUriToKoodi = koodiUri => {
   return parseKoodiUri(koodiUri)?.koodiArvo;
 };
 
+// Backendissä koulutuskoodiUrit on tallennettu vain yhteen listaan. Frontissa on helpompi käsitellä
+// erikseen tapaus jossa koodiUreja voi olla vain yksi (muut kuin korkeakoulutukset) ja tapaus jossa
+// niitä voi olla monta (korkeakoulutus)
+function getKoulutusKoodiUrit(
+  koulutustyyppi: string,
+  koulutusKoodiUrit?: Array<string>
+): { koulutusKoodiUri: string; korkeakoulutusKoodiUrit: Array<string> } {
+  const isKorkeakoulu = TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT.some(
+    t => t === koulutustyyppi
+  );
+
+  const firstElement = koulutusKoodiUrit ? koulutusKoodiUrit[0] : '';
+
+  return {
+    koulutusKoodiUri: isKorkeakoulu ? '' : firstElement,
+    korkeakoulutusKoodiUrit: isKorkeakoulu ? koulutusKoodiUrit || [] : [],
+  };
+}
+
 export const getFormValuesByKoulutus = koulutus => {
   const {
     kielivalinta = [],
-    koulutusKoodiUri = '',
-    koulutuksetKoodiUri = [],
     koulutustyyppi = '',
     tarjoajat = [],
     metadata = {},
@@ -22,6 +40,11 @@ export const getFormValuesByKoulutus = koulutus => {
     teemakuva,
     ePerusteId,
   } = koulutus;
+
+  const { koulutusKoodiUri, korkeakoulutusKoodiUrit } = getKoulutusKoodiUrit(
+    koulutustyyppi,
+    koulutus.koulutuksetKoodiUri
+  );
 
   const {
     lisatiedot = [],
@@ -46,7 +69,7 @@ export const getFormValuesByKoulutus = koulutus => {
       koulutus: {
         value: koulutusKoodiUri,
       },
-      koulutukset: koulutuksetKoodiUri,
+      koulutukset: korkeakoulutusKoodiUrit,
       opintojenLaajuus: {
         value: opintojenLaajuusKoodiUri,
       },

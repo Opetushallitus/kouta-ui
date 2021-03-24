@@ -5,11 +5,8 @@ Object {
   "ePerusteId": null,
   "esikatselu": false,
   "johtaaTutkintoon": true,
-  "julkinen": true,
-  "kielivalinta": Array [
-    "fi",
-    "sv",
-  ],
+  "julkinen": false,
+  "kielivalinta": Array [],
   "koulutuksetKoodiUri": Array [
     "koulutuskoodi_1#1",
   ],
@@ -20,27 +17,9 @@ Object {
       "koulutusala_2#1",
     ],
     "koulutustyyppi": "amm",
-    "kuvauksenNimi": Object {
-      "fi": "Fi nimi",
-      "sv": "Sv nimi",
-    },
-    "kuvaus": Object {
-      "fi": "<p>Fi kuvaus</p>",
-      "sv": "<p>Sv kuvaus</p>",
-    },
-    "lisatiedot": Array [
-      Object {
-        "otsikkoKoodiUri": "osio_1#1",
-        "teksti": Object {},
-      },
-      Object {
-        "otsikkoKoodiUri": "osio_2#1",
-        "teksti": Object {
-          "fi": "<p>Fi kuvaus</p>",
-          "sv": "<p>Sv kuvaus</p>",
-        },
-      },
-    ],
+    "kuvauksenNimi": Object {},
+    "kuvaus": Object {},
+    "lisatiedot": Array [],
     "opintojenLaajuusKoodiUri": "laajuus_1#1",
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": Array [],
@@ -49,16 +28,11 @@ Object {
       "nimike_2#1",
     ],
   },
-  "muokkaaja": "1.1.1.1",
-  "nimi": Object {
-    "fi": "Fi nimi",
-    "sv": "Sv nimi",
-  },
-  "tarjoajat": Array [
-    "123.456.789",
-  ],
+  "muokkaaja": undefined,
+  "nimi": Object {},
+  "tarjoajat": Array [],
   "teemakuva": undefined,
-  "tila": "tallennettu",
+  "tila": undefined,
 }
 `;
 

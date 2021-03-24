@@ -17,6 +17,7 @@ test('getKoulutusByFormValues returns correct koulutus given form values', () =>
       koulutus: {
         value: 'koulutuskoodi_1#1',
       },
+      korkeakoulutukset: ['koulutus_371101#1', 'koulutus_201000#1'],
       opintojenLaajuus: {
         value: 'laajuus_1#1',
       },

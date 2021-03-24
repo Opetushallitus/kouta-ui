@@ -10,7 +10,10 @@ Object {
     "fi",
     "sv",
   ],
-  "koulutusKoodiUri": "koulutuskoodi_1#1",
+  "koulutuksetKoodiUri": Array [
+    "koulutus_371101#1",
+    "koulutus_201000#1",
+  ],
   "koulutustyyppi": "yo",
   "metadata": Object {
     "koulutusalaKoodiUrit": Array [

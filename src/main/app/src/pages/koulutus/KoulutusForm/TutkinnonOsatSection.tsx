@@ -14,7 +14,6 @@ import KoulutuksenTiedotSection from './TiedotSection/KoulutuksenTiedotSection';
 import { useNimiFromKoulutusKoodi } from './useNimiFromKoulutusKoodi';
 
 const TutkinnonOsatField = ({ disabled, language, koulutustyyppi, name }) => {
-  const { t } = useTranslation();
   const koulutuskoodi = useFieldValue(`${name}.koulutus`);
 
   useNimiFromKoulutusKoodi({
@@ -28,9 +27,7 @@ const TutkinnonOsatField = ({ disabled, language, koulutustyyppi, name }) => {
         disabled={disabled}
         language={language}
         koulutuskoodi={koulutuskoodi}
-        koulutustyyppi={koulutustyyppi}
         name={name}
-        selectLabel={t('yleiset.valitseKoulutus')}
       />
     </Box>
   );

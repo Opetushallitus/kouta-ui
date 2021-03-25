@@ -309,7 +309,6 @@ const KoulutusInfo = ({
 
 const KoulutuksenTiedotSection = ({
   disabled,
-  koulutustyyppi,
   language,
   koulutuskoodi,
   name,
@@ -358,9 +357,7 @@ const KoulutuksenTiedotSection = ({
           <KoulutusField
             disabled={disabled}
             name={`${name}.koulutus`}
-            koulutustyyppi={koulutustyyppi}
             label={selectLabel}
-            language={language}
           />
         </Box>
         <Box width={0.5} ml={2} {...getTestIdProps('ePerusteSelect')}>
@@ -374,7 +371,6 @@ const KoulutuksenTiedotSection = ({
       </Box>
       <Box flexDirection="row" width={1} display="flex" mr={2}>
         <KoulutusInfo
-          disabled={disabled}
           ePeruste={selectedPeruste}
           koulutus={koulutus}
           language={language}

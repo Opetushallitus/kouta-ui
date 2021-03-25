@@ -29,11 +29,7 @@ export const ValitseKoulutusBox = ({
   return (
     <StyledInfoBox mb={2}>
       <Box width={0.7} mb={2} {...getTestIdProps('koulutusSelect')}>
-        <KoulutusField
-          disabled={disabled}
-          name={fieldName}
-          language={language}
-        />
+        <KoulutusField disabled={disabled} name={fieldName} />
       </Box>
       {isFetching ? (
         <Spin />

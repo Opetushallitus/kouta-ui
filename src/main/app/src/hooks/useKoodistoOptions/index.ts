@@ -15,7 +15,7 @@ const defaultSort = options => {
 
 type GetOptionsProps = {
   koodisto: Array<Koodi>;
-  language?: LanguageCode;
+  language: LanguageCode;
   sortFn?: (SelectOptions) => SelectOptions;
   formatLabel?: (any, LanguageCode) => string;
 };
@@ -37,17 +37,16 @@ const getOptions = ({
 
 type UseKoodistoDataOptionsProps = {
   koodistoData: Array<Koodi>;
-  language?: LanguageCode;
   sortFn?: (unknown) => SelectOptions;
   formatLabel?: (unknown) => string;
 };
 
 export const useKoodistoDataOptions = ({
   koodistoData,
-  language,
   sortFn,
   formatLabel,
 }: UseKoodistoDataOptionsProps) => {
+  const language = useUserLanguage();
   return useMemo(
     () =>
       koodistoData
@@ -67,17 +66,12 @@ type UseKoodistoOptionsProps = {
 export const useKoodistoOptions = ({
   koodisto,
   versio,
-  language: languageProp,
   sortFn,
 }: UseKoodistoOptionsProps) => {
-  const translationLanguage = useUserLanguage();
-  const language = languageProp || translationLanguage || 'fi';
-
   const { data, ...rest } = useKoodisto({ koodisto, versio });
 
   const options = useKoodistoDataOptions({
     koodistoData: data,
-    language,
     sortFn,
   });
 

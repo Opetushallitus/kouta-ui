@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { FormFieldAsyncKoodistoSelect } from '#/src/components/formFields';
+import { useHasChanged } from '#/src/hooks/useHasChanged';
 import { useKoulutuksetByKoulutustyyppi } from '#/src/utils/koulutus/getKoulutuksetByKoulutustyyppi';
 
 import { useBoundFormActions, useFieldValue, useIsDirty } from '../hooks/form';
-import { useHasChanged } from '../hooks/useHasChanged';
 
 const KoulutusField = props => {
   const { t } = useTranslation();

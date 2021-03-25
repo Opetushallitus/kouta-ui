@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import _ from 'lodash';
 
 import useKoodisto from '#/src/hooks/useKoodisto';
-import useLanguage from '#/src/hooks/useLanguage';
+import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 
 const defaultSort = options => {
@@ -70,7 +70,7 @@ export const useKoodistoOptions = ({
   language: languageProp,
   sortFn,
 }: UseKoodistoOptionsProps) => {
-  const translationLanguage = useLanguage();
+  const translationLanguage = useUserLanguage();
   const language = languageProp || translationLanguage || 'fi';
 
   const { data, ...rest } = useKoodisto({ koodisto, versio });

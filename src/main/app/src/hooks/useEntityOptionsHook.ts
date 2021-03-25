@@ -4,7 +4,7 @@ import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 
 import { getJulkaisutilaTranslationKey, JULKAISUTILA } from '#/src/constants';
-import useLanguage from '#/src/hooks/useLanguage';
+import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 interface EntityForDropdown {
@@ -15,7 +15,7 @@ interface EntityForDropdown {
 }
 
 export const useEntityOptions = entities => {
-  const language = useLanguage();
+  const language = useUserLanguage();
   const { t } = useTranslation();
 
   return useMemo(

@@ -5,7 +5,7 @@ import _ from 'lodash';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
-import useLanguage from '#/src/hooks/useLanguage';
+import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import getRoleOrganisaatioOid from '#/src/utils/getRoleOrganisaatioOid';
 import getUserRoles from '#/src/utils/getUserRoles';
 import getOrganisaatioHierarkia from '#/src/utils/organisaatio/getOrganisaatioHierarkia';
@@ -45,7 +45,7 @@ const useOrganisaatioHierarkia = ({
   languageFilterEnabled = true,
 }) => {
   const roleBuilder = useAuthorizedUserRoleBuilder();
-  const language = useLanguage();
+  const language = useUserLanguage();
   const user = useAuthorizedUser();
   const roles = useMemo(() => getUserRoles(user), [user]);
   const oids = useMemo(() => getRolesOrganisaatioOids(roles), [roles]);

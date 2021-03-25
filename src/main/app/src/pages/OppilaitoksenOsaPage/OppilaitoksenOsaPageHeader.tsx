@@ -5,11 +5,11 @@ import _ from 'lodash';
 import FormEditInfo from '#/src/components/FormEditInfo';
 import FormHeader from '#/src/components/FormHeader';
 import StatusTag from '#/src/components/StatusTag';
-import useLanguage from '#/src/hooks/useLanguage';
+import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 const OppilaitoksenOsaPageHeader = ({ oppilaitos, organisaatio }) => {
-  const language = useLanguage();
+  const language = useUserLanguage();
 
   const organisaatioNimi = getFirstLanguageValue(
     _.get(organisaatio, 'nimi'),

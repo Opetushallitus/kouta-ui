@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
-import useLanguage from '#/src/hooks/useLanguage';
 import useOrganisaatio from '#/src/hooks/useOrganisaatio';
+import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 
 import OrganisaatioItem from './OrganisaatioItem';
 
 const OpetetushallitusOrganisaatioItem = props => {
-  const language = useLanguage();
+  const language = useUserLanguage();
   const { organisaatio } = useOrganisaatio(OPETUSHALLITUS_ORGANISAATIO_OID);
 
   return (

@@ -12,8 +12,8 @@ import LogoSection from '#/src/components/LogoSection';
 import { Box, Typography } from '#/src/components/virkailija';
 import useKoodiNimet from '#/src/hooks/useKoodiNimet';
 import useKoodiNimi from '#/src/hooks/useKoodiNimi';
-import useLanguage from '#/src/hooks/useLanguage';
 import { useOrganisaatio } from '#/src/hooks/useOrganisaatio';
+import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
@@ -99,7 +99,7 @@ const TiedotSection = ({ name, t }) => {
 };
 
 const OrganisaatioSection = ({ organisaatio, t }) => {
-  const language = useLanguage();
+  const language = useUserLanguage();
   const opetuskieletUris = _.get(organisaatio, 'kieletUris') || [];
   const paikkakuntaUri = _.get(organisaatio, 'kotipaikkaUri');
   const oppilaitostyyppiUri = _.get(organisaatio, 'oppilaitosTyyppiUri');

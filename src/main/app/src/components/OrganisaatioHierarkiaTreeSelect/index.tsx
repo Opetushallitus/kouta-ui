@@ -1,14 +1,14 @@
 import React, { useCallback, useMemo } from 'react';
 
 import { TreeSelect } from '#/src/components/virkailija';
-import useLanguage from '#/src/hooks/useLanguage';
+import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import sortTreeBy from '#/src/utils/sortTreeBy';
 
 const getValue = ({ oid }) => oid;
 
 const OrganisaatioHierarkiaTreeSelect = ({ hierarkia, ...props }) => {
-  const language = useLanguage();
+  const language = useUserLanguage();
 
   const getLabel = useCallback(
     ({ nimi }) => getFirstLanguageValue(nimi, language),

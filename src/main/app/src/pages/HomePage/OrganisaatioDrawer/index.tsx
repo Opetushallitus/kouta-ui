@@ -21,8 +21,8 @@ import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 import { useActions } from '#/src/hooks/useActions';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
 import useDebounceState from '#/src/hooks/useDebounceState';
-import useLanguage from '#/src/hooks/useLanguage';
 import { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
+import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import {
   toggleFavourite,
   selectOrganisaatioFavourites,
@@ -141,7 +141,7 @@ const DrawerContent = ({
   const nameSearchEnabled = hasOphOption;
 
   const { t } = useTranslation();
-  const language = useLanguage();
+  const language = useUserLanguage();
   const [openOrganisaatiot, setOpenOrganisaatiot] = useState([]);
   const [nameFilter, setNameFilter, debounceNameFilter] = useDebounceState(
     '',

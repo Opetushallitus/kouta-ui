@@ -105,8 +105,12 @@ Object {
       "value": undefined,
     },
     "korkeakoulutukset": Array [
-      "koulutus_371101#1",
-      "koulutus_201000#1",
+      Object {
+        "value": "koulutus_371101#1",
+      },
+      Object {
+        "value": "koulutus_201000#1",
+      },
     ],
     "koulutus": Object {
       "value": "",

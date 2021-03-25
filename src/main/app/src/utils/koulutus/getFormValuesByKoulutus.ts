@@ -69,7 +69,7 @@ export const getFormValuesByKoulutus = koulutus => {
       koulutus: {
         value: koulutusKoodiUri,
       },
-      korkeakoulutukset: korkeakoulutusKoodiUrit,
+      korkeakoulutukset: korkeakoulutusKoodiUrit.map(value => ({ value })),
       opintojenLaajuus: {
         value: opintojenLaajuusKoodiUri,
       },

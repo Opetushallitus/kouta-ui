@@ -15,7 +15,9 @@ function getKoulutuksetKoodiUri(
   osaamisala,
   information?: {
     koulutus: { value: string };
-    korkeakoulutukset: Array<string>;
+    korkeakoulutukset: Array<{
+      value: string;
+    }>;
   },
   koulutustyyppi?: string
 ): Array<string> {
@@ -24,12 +26,15 @@ function getKoulutuksetKoodiUri(
   );
   const isOsaamisala = koulutustyyppi === KOULUTUSTYYPPI.OSAAMISALA;
 
-  if (isKorkeakoulu) return information?.korkeakoulutukset || [];
+  if (isKorkeakoulu)
+    return information?.korkeakoulutukset
+      ? information.korkeakoulutukset.map(koodi => koodi.value)
+      : [];
 
   if (isOsaamisala)
-    return osaamisala?.koulutus?.value ? [osaamisala?.koulutus?.value] : [];
+    return osaamisala?.koulutus?.value ? [osaamisala.koulutus.value] : [];
 
-  return information?.koulutus?.value ? [information?.koulutus?.value] : [];
+  return information?.koulutus?.value ? [information.koulutus.value] : [];
 }
 
 const getKoulutusByFormValues = values => {
@@ -56,11 +61,7 @@ const getKoulutusByFormValues = values => {
       pohjanTarjoajat && kaytaPohjanJarjestajaa
         ? pohjanTarjoajat
         : values?.tarjoajat?.tarjoajat || [],
-    koulutuksetKoodiUri: getKoulutuksetKoodiUri(
-      osaamisala,
-      values?.information,
-      koulutustyyppi
-    ),
+    koulutuksetKoodiUri: testi,
     koulutustyyppi,
     nimi:
       koulutustyyppi === KOULUTUSTYYPPI.TUTKINNON_OSA

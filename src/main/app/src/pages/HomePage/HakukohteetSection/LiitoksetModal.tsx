@@ -64,7 +64,7 @@ const LiitoksetModal = ({ onClose, organisaatioOid, open }) => {
             value={toteutus}
             onChange={setToteutus}
             options={toteutusOptions}
-            menuPortalTarget={document.body}
+            menuPortalTarget={document.documentElement}
             id="hakukohteenToteutus"
           />
         </Box>
@@ -76,7 +76,7 @@ const LiitoksetModal = ({ onClose, organisaatioOid, open }) => {
           value={haku}
           onChange={setHaku}
           options={hakuOptions}
-          menuPortalTarget={document.body}
+          menuPortalTarget={document.documentElement}
           id="hakukohteenHaku"
         />
       </ModalBody>

@@ -147,7 +147,7 @@ const EditColumn = ({
   return (
     <Dropdown
       overlay={overlay}
-      portalTarget={document.body}
+      portalTarget={document.documentElement}
       overflow={overflow}
     >
       {({ ref, onToggle }) => (
@@ -194,7 +194,7 @@ const EditRow = ({
   return (
     <Dropdown
       overlay={overlay}
-      portalTarget={document.body}
+      portalTarget={document.documentElement}
       overflow={overflow}
     >
       {({ ref, onToggle }) => (

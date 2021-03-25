@@ -14,6 +14,7 @@ import ReactCreatable from 'react-select/creatable';
 import { ThemeContext } from 'styled-components';
 
 import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
+import { safeArray, safeArrayToValue } from '#/src/utils';
 import { memoizeOne } from '#/src/utils/memoize';
 
 const OptionComponent = props => (
@@ -54,10 +55,6 @@ const getOptionLabelByValue = (options: Array<any> = []) =>
     },
     {}
   );
-
-const safeArray = v => (_.isNil(v) ? [] : _.castArray(v));
-
-const safeArrayToValue = a => (_.size(a) > 1 ? a : _.get(a, 0));
 
 const getAsyncValue = async (
   value?: SelectOption | Array<SelectOption> | null,

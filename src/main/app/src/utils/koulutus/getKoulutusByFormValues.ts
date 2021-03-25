@@ -61,7 +61,11 @@ const getKoulutusByFormValues = values => {
       pohjanTarjoajat && kaytaPohjanJarjestajaa
         ? pohjanTarjoajat
         : values?.tarjoajat?.tarjoajat || [],
-    koulutuksetKoodiUri: testi,
+    koulutuksetKoodiUri: getKoulutuksetKoodiUri(
+      osaamisala,
+      values?.information,
+      koulutustyyppi
+    ),
     koulutustyyppi,
     nimi:
       koulutustyyppi === KOULUTUSTYYPPI.TUTKINNON_OSA

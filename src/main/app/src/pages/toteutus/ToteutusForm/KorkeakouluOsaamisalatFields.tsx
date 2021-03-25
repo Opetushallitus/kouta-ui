@@ -76,7 +76,7 @@ const OsaamisalatFieldArray = ({ fields, language, t }) => (
   </>
 );
 
-const KorkeakouluOsaamisalatFields = ({ name, language }) => {
+export const KorkeakouluOsaamisalatFields = ({ name, language }) => {
   const { t } = useTranslation();
 
   return (
@@ -88,5 +88,3 @@ const KorkeakouluOsaamisalatFields = ({ name, language }) => {
     />
   );
 };
-
-export default KorkeakouluOsaamisalatFields;

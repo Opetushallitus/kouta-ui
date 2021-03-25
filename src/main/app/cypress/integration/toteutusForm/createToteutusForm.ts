@@ -150,6 +150,7 @@ const fillYhteystiedotSection = () => {
   });
 };
 
+/*
 const fillKkOsaamisalat = () => {
   getByTestId('lisaaOsaamisalaButton').click({ force: true });
   getByTestId('osaamisalanNimi').find('input').pipe(paste('osaamisalan nimi'));
@@ -163,6 +164,7 @@ const fillKkOsaamisalat = () => {
     .find('input')
     .pipe(paste('osaamisalan otsikko'));
 };
+*/
 
 const fillLukiolinjatSection = () => {
   getByTestId('lukiolinjatSection').within(() => {
@@ -389,6 +391,7 @@ export const createToteutusForm = () => {
     fillKieliversiotSection({ jatka: true });
     fillTiedotSection();
 
+    /*
     getByTestId('alemmanKorkeakoulututkinnonOsaamisalatSection').within(() => {
       fillKkOsaamisalat();
       jatka();
@@ -398,6 +401,7 @@ export const createToteutusForm = () => {
       fillKkOsaamisalat();
       jatka();
     });
+    */
 
     getByTestId('jarjestamistiedotSection').within(() => {
       fillCommonJarjestamistiedot({ maksullisuusTyyppi: 'lukuvuosimaksu' });

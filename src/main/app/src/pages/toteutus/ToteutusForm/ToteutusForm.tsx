@@ -24,7 +24,7 @@ import HakukohteetModal from './HakukohteetModal';
 import { HakukohteetSection } from './HakukohteetSection';
 import JarjestamispaikatSection from './JarjestamispaikatSection';
 import { JarjestamisTiedotSection } from './JarjestamisTiedotSection';
-import KorkeakouluOsaamisalatSection from './KorkeakouluOsaamisalatSection';
+import { KorkeakouluOsaamisalatFields } from './KorkeakouluOsaamisalatFields';
 import LukiolinjatSection from './LukiolinjatSection';
 import NayttamisTiedotSection from './NayttamisTiedotSection';
 import OsaamisalatSection from './OsaamisalatSection';
@@ -122,13 +122,13 @@ const ToteutusForm = ({
           {...getTestIdProps('toteutusjaksotSection')}
           Component={ToteutusjaksotSection}
         />
-
+        {/* NOTE: Korkeakoulu osaamisala sections are hidden via form config (getToteutusFormConfig) */}
         <FormCollapse
           section="alemmanKorkeakoulututkinnonOsaamisalat"
           header={t(
             'toteutuslomake.alemmanKorkeakoulututkinnonErikoistumisalanKuvaus'
           )}
-          Component={KorkeakouluOsaamisalatSection}
+          Component={KorkeakouluOsaamisalatFields}
           languages={languages}
         />
 
@@ -137,7 +137,7 @@ const ToteutusForm = ({
           header={t(
             'toteutuslomake.ylemmanKorkeakoulututkinnonErikoistumisalanKuvaus'
           )}
-          Component={KorkeakouluOsaamisalatSection}
+          Component={KorkeakouluOsaamisalatFields}
           languages={languages}
         />
 

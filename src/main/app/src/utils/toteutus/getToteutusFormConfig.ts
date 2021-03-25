@@ -201,7 +201,7 @@ const config = createFormConfigBuilder().registerSections([
       KOULUTUSTYYPPI.TAYDENNYS_KOULUTUS,
     ],
   },
-  {
+  /*{
     section: 'alemmanKorkeakoulututkinnonOsaamisalat',
     koulutustyypit: TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
     parts: [
@@ -244,7 +244,7 @@ const config = createFormConfigBuilder().registerSections([
         required: true,
       },
     ],
-  },
+  },*/
   {
     section: 'osaamisalat',
     koulutustyypit: TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,

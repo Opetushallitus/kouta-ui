@@ -141,12 +141,15 @@ exports[`createKoulutus > should be able to create ammatillinen tutkinnon osa ko
 exports[`createKoulutus > should be able to create AMK-koulutus #0`] =
 {
   "ePerusteId": null,
+  "esikatselu": false,
   "johtaaTutkintoon": true,
   "julkinen": true,
   "kielivalinta": [
     "fi"
   ],
-  "koulutusKoodiUri": "koulutus_671112#12",
+  "koulutuksetKoodiUri": [
+    "koulutus_671112#12"
+  ],
   "koulutustyyppi": "amk",
   "metadata": {
     "koulutusalaKoodiUrit": [
@@ -183,8 +186,7 @@ exports[`createKoulutus > should be able to create AMK-koulutus #0`] =
   "tarjoajat": [
     "1.2.1.1.1.1"
   ],
-  "tila": "julkaistu",
-  "esikatselu": false
+  "tila": "julkaistu"
 };
 
 exports[`createKoulutus > should be able to create lukiokoulutus #0`] =
@@ -196,7 +198,9 @@ exports[`createKoulutus > should be able to create lukiokoulutus #0`] =
   "kielivalinta": [
     "fi"
   ],
-  "koulutusKoodiUri": "koulutus_301101#12",
+  "koulutuksetKoodiUri": [
+    "koulutus_301101#12"
+  ],
   "koulutustyyppi": "lk",
   "metadata": {
     "koulutusalaKoodiUrit": [],

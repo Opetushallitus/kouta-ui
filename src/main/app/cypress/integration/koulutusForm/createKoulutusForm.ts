@@ -286,9 +286,9 @@ export const createKoulutusForm = () => {
     fillCommon({ koulutustyyppiPath: ['korkeakoulutus', 'amk'] });
 
     getByTestId('informationSection').within(() => {
-      getByTestId('koulutuskoodiSelect').click();
+      getByTestId('korkeaoulutuskoodiSelect').click();
 
-      getByTestId('koulutuskoodiSelect').within(() => {
+      getByTestId('korkeaoulutuskoodiSelect').within(() => {
         fillAsyncSelect('Fysioterapeutti (AMK)');
       });
 

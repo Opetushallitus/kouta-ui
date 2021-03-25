@@ -68,7 +68,7 @@ export const TiedotSection = ({
       </FormConfigFragment>
 
       <FormConfigFragment name="koulutuskooditKorkeakouluille">
-        <Box mb={2} {...getTestIdProps('korkeaoulutuskoodiSelect')}>
+        <Box mb={2} {...getTestIdProps('korkeakoulutuskoodiSelect')}>
           <KoulutusField
             disabled={disabled}
             name={`${name}.korkeakoulutukset`}

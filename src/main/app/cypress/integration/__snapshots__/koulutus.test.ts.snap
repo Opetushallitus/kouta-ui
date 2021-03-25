@@ -87,12 +87,13 @@ exports[`createKoulutus > should be able to create ammatillinen osaamisala koulu
 exports[`createKoulutus > should be able to create ammatillinen tutkinnon osa koulutus #0`] =
 {
   "ePerusteId": null,
+  "esikatselu": false,
   "johtaaTutkintoon": false,
   "julkinen": true,
   "kielivalinta": [
     "fi"
   ],
-  "koulutusKoodiUri": null,
+  "koulutuksetKoodiUri": [],
   "koulutustyyppi": "amm-tutkinnon-osa",
   "metadata": {
     "koulutusalaKoodiUrit": [],
@@ -134,8 +135,7 @@ exports[`createKoulutus > should be able to create ammatillinen tutkinnon osa ko
   "tarjoajat": [
     "1.2.1.1.1.1"
   ],
-  "tila": "julkaistu",
-  "esikatselu": false
+  "tila": "julkaistu"
 };
 
 exports[`createKoulutus > should be able to create AMK-koulutus #0`] =

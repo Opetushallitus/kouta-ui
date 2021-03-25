@@ -17,6 +17,10 @@ test('getKoulutusByFormValues returns correct koulutus given form values', () =>
       koulutus: {
         value: 'koulutuskoodi_1#1',
       },
+      korkeakoulutukset: [
+        { value: 'koulutus_371101#1' },
+        { value: 'koulutus_201000#1' },
+      ],
       opintojenLaajuus: {
         value: 'laajuus_1#1',
       },
@@ -58,6 +62,53 @@ test('getKoulutusByFormValues returns correct koulutus given form values', () =>
       ],
     },
     julkinen: true,
+  });
+
+  expect(koulutus).toMatchSnapshot();
+});
+
+test('getKoulutusByFormValues returns correct koulutuksetKoodiUri for ammatillinen koulutus', () => {
+  const koulutus = getKoulutusByFormValues({
+    information: {
+      nimi: {
+        fi: 'Fi nimi',
+        sv: 'Sv nimi',
+      },
+      koulutus: {
+        value: 'koulutuskoodi_1#1',
+      },
+      korkeakoulutukset: [],
+      opintojenLaajuus: {
+        value: 'laajuus_1#1',
+      },
+      tutkintonimike: [{ value: 'nimike_1#1' }, { value: 'nimike_2#1' }],
+      koulutusalat: [
+        { value: 'koulutusala_1#1' },
+        { value: 'koulutusala_2#1' },
+      ],
+    },
+    koulutustyyppi: 'amm',
+  });
+
+  expect(koulutus).toMatchSnapshot();
+});
+
+test('for osaamisala koulutus, koulutusKoodiUri is resolved', () => {
+  const koulutus = getKoulutusByFormValues({
+    information: {
+      korkeakoulutukset: [],
+    },
+    osaamisala: { koulutus: { value: 'koulutus_371101#1' } },
+    koulutustyyppi: 'amm-osaamisala',
+  });
+
+  expect(koulutus).toMatchSnapshot();
+});
+
+test('it should return empty array if no koulutusKoodiUri given', () => {
+  const koulutus = getKoulutusByFormValues({
+    information: {},
+    koulutustyyppi: 'yo',
   });
 
   expect(koulutus).toMatchSnapshot();

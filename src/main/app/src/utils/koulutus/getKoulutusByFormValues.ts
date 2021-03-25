@@ -3,12 +3,34 @@ import _fp from 'lodash/fp';
 import { serializeEditorState } from '#/src/components/Editor/utils';
 import {
   KOULUTUSTYYPPI,
+  TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
 } from '#/src/constants';
-import { maybeParseNumber } from '#/src/utils';
+import { maybeParseNumber, safeArray } from '#/src/utils';
 
 const osaamisalaKoodiToKoodiUri = value =>
   value ? `osaamisala_${value}` : null;
+
+function getKoulutuksetKoodiUri(
+  osaamisala,
+  koulutustyyppi: KOULUTUSTYYPPI,
+  information?: {
+    koulutus: { value: string };
+    korkeakoulutukset: Array<{ value: string }>;
+  }
+): Array<string> {
+  const isKorkeakoulu = TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT.includes(
+    koulutustyyppi
+  );
+  const isOsaamisala = koulutustyyppi === KOULUTUSTYYPPI.OSAAMISALA;
+
+  if (isKorkeakoulu)
+    return _fp.map(koodi => koodi.value, information?.korkeakoulutukset);
+
+  if (isOsaamisala) return safeArray(osaamisala?.koulutus?.value);
+
+  return safeArray(information?.koulutus?.value);
+}
 
 const getKoulutusByFormValues = values => {
   const { muokkaaja, tila, esikatselu = false } = values;
@@ -34,10 +56,11 @@ const getKoulutusByFormValues = values => {
       pohjanTarjoajat && kaytaPohjanJarjestajaa
         ? pohjanTarjoajat
         : values?.tarjoajat?.tarjoajat || [],
-    koulutusKoodiUri:
-      values?.information?.koulutus?.value ||
-      osaamisala?.koulutus?.value ||
-      null,
+    koulutuksetKoodiUri: getKoulutuksetKoodiUri(
+      osaamisala,
+      koulutustyyppi,
+      values?.information
+    ),
     koulutustyyppi,
     nimi:
       koulutustyyppi === KOULUTUSTYYPPI.TUTKINNON_OSA

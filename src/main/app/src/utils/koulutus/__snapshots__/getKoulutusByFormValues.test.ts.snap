@@ -1,5 +1,71 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`for osaamisala koulutus, koulutusKoodiUri is resolved 1`] = `
+Object {
+  "ePerusteId": null,
+  "esikatselu": false,
+  "johtaaTutkintoon": false,
+  "julkinen": false,
+  "kielivalinta": Array [],
+  "koulutuksetKoodiUri": Array [
+    "koulutus_371101#1",
+  ],
+  "koulutustyyppi": "amm-osaamisala",
+  "metadata": Object {
+    "koulutusalaKoodiUrit": Array [],
+    "koulutustyyppi": "amm-osaamisala",
+    "kuvauksenNimi": Object {},
+    "kuvaus": Object {},
+    "lisatiedot": Array [],
+    "opintojenLaajuusKoodiUri": null,
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": Array [],
+    "tutkintonimikeKoodiUrit": Array [],
+  },
+  "muokkaaja": undefined,
+  "nimi": Object {},
+  "tarjoajat": Array [],
+  "teemakuva": undefined,
+  "tila": undefined,
+}
+`;
+
+exports[`getKoulutusByFormValues returns correct koulutuksetKoodiUri for ammatillinen koulutus 1`] = `
+Object {
+  "ePerusteId": null,
+  "esikatselu": false,
+  "johtaaTutkintoon": true,
+  "julkinen": false,
+  "kielivalinta": Array [],
+  "koulutuksetKoodiUri": Array [
+    "koulutuskoodi_1#1",
+  ],
+  "koulutustyyppi": "amm",
+  "metadata": Object {
+    "koulutusalaKoodiUrit": Array [
+      "koulutusala_1#1",
+      "koulutusala_2#1",
+    ],
+    "koulutustyyppi": "amm",
+    "kuvauksenNimi": Object {},
+    "kuvaus": Object {},
+    "lisatiedot": Array [],
+    "opintojenLaajuusKoodiUri": "laajuus_1#1",
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": Array [],
+    "tutkintonimikeKoodiUrit": Array [
+      "nimike_1#1",
+      "nimike_2#1",
+    ],
+  },
+  "muokkaaja": undefined,
+  "nimi": Object {},
+  "tarjoajat": Array [],
+  "teemakuva": undefined,
+  "tila": undefined,
+}
+`;
+
 exports[`getKoulutusByFormValues returns correct koulutus given form values 1`] = `
 Object {
   "ePerusteId": null,
@@ -10,7 +76,10 @@ Object {
     "fi",
     "sv",
   ],
-  "koulutusKoodiUri": "koulutuskoodi_1#1",
+  "koulutuksetKoodiUri": Array [
+    "koulutus_371101#1",
+    "koulutus_201000#1",
+  ],
   "koulutustyyppi": "yo",
   "metadata": Object {
     "koulutusalaKoodiUrit": Array [
@@ -57,5 +126,33 @@ Object {
   ],
   "teemakuva": undefined,
   "tila": "tallennettu",
+}
+`;
+
+exports[`it should return empty array if no koulutusKoodiUri given 1`] = `
+Object {
+  "ePerusteId": null,
+  "esikatselu": false,
+  "johtaaTutkintoon": true,
+  "julkinen": false,
+  "kielivalinta": Array [],
+  "koulutuksetKoodiUri": Array [],
+  "koulutustyyppi": "yo",
+  "metadata": Object {
+    "koulutusalaKoodiUrit": Array [],
+    "koulutustyyppi": "yo",
+    "kuvauksenNimi": Object {},
+    "kuvaus": Object {},
+    "lisatiedot": Array [],
+    "opintojenLaajuusKoodiUri": null,
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": Array [],
+    "tutkintonimikeKoodiUrit": Array [],
+  },
+  "muokkaaja": undefined,
+  "nimi": Object {},
+  "tarjoajat": Array [],
+  "teemakuva": undefined,
+  "tila": undefined,
 }
 `;

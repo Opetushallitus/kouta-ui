@@ -4,16 +4,16 @@ exports[`for osaamisala koulutus, koulutusKoodiUri is resolved 1`] = `
 Object {
   "ePerusteId": null,
   "esikatselu": false,
-  "johtaaTutkintoon": true,
+  "johtaaTutkintoon": false,
   "julkinen": false,
   "kielivalinta": Array [],
   "koulutuksetKoodiUri": Array [
-    "koulutus_371101#1"
+    "koulutus_371101#1",
   ],
-  "koulutustyyppi": "amm",
+  "koulutustyyppi": "amm-osaamisala",
   "metadata": Object {
     "koulutusalaKoodiUrit": Array [],
-    "koulutustyyppi": "amm",
+    "koulutustyyppi": "amm-osaamisala",
     "kuvauksenNimi": Object {},
     "kuvaus": Object {},
     "lisatiedot": Array [],

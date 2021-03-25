@@ -22,12 +22,14 @@ function getKoulutuksetKoodiUri(
   const isKorkeakoulu = TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT.some(
     t => t === koulutustyyppi
   );
+  const isOsaamisala = koulutustyyppi === KOULUTUSTYYPPI.OSAAMISALA;
 
-  const koulutusKoodiUrit = isKorkeakoulu
-    ? information?.korkeakoulutukset
-    : [information?.koulutus.value];
+  if (isKorkeakoulu) return information?.korkeakoulutukset || [];
 
-  return koulutusKoodiUrit || [osaamisala?.koulutus?.value];
+  if (isOsaamisala)
+    return osaamisala?.koulutus?.value ? [osaamisala?.koulutus?.value] : [];
+
+  return information?.koulutus?.value ? [information?.koulutus?.value] : [];
 }
 
 const getKoulutusByFormValues = values => {

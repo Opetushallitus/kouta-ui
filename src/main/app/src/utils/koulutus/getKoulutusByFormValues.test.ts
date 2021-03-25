@@ -104,3 +104,12 @@ test('for osaamisala koulutus, koulutusKoodiUri is resolved', () => {
 
   expect(koulutus).toMatchSnapshot();
 });
+
+test('it should return empty array if no koulutusKoodiUri given', () => {
+  const koulutus = getKoulutusByFormValues({
+    information: {},
+    koulutustyyppi: 'yo',
+  });
+
+  expect(koulutus).toMatchSnapshot();
+});

@@ -128,3 +128,31 @@ Object {
   "tila": "tallennettu",
 }
 `;
+
+exports[`it should return empty array if no koulutusKoodiUri given 1`] = `
+Object {
+  "ePerusteId": null,
+  "esikatselu": false,
+  "johtaaTutkintoon": true,
+  "julkinen": false,
+  "kielivalinta": Array [],
+  "koulutuksetKoodiUri": Array [],
+  "koulutustyyppi": "yo",
+  "metadata": Object {
+    "koulutusalaKoodiUrit": Array [],
+    "koulutustyyppi": "yo",
+    "kuvauksenNimi": Object {},
+    "kuvaus": Object {},
+    "lisatiedot": Array [],
+    "opintojenLaajuusKoodiUri": null,
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": Array [],
+    "tutkintonimikeKoodiUrit": Array [],
+  },
+  "muokkaaja": undefined,
+  "nimi": Object {},
+  "tarjoajat": Array [],
+  "teemakuva": undefined,
+  "tila": undefined,
+}
+`;

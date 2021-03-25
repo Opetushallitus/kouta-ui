@@ -6,35 +6,30 @@ import {
   TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
 } from '#/src/constants';
-import { maybeParseNumber } from '#/src/utils';
+import { maybeParseNumber, safeArray } from '#/src/utils';
 
 const osaamisalaKoodiToKoodiUri = value =>
   value ? `osaamisala_${value}` : null;
 
 function getKoulutuksetKoodiUri(
   osaamisala,
+  koulutustyyppi: KOULUTUSTYYPPI,
   information?: {
     koulutus: { value: string };
-    korkeakoulutukset: Array<{
-      value: string;
-    }>;
-  },
-  koulutustyyppi?: string
+    korkeakoulutukset: Array<{ value: string }>;
+  }
 ): Array<string> {
-  const isKorkeakoulu = TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT.some(
-    t => t === koulutustyyppi
+  const isKorkeakoulu = TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT.includes(
+    koulutustyyppi
   );
   const isOsaamisala = koulutustyyppi === KOULUTUSTYYPPI.OSAAMISALA;
 
   if (isKorkeakoulu)
-    return information?.korkeakoulutukset
-      ? information.korkeakoulutukset.map(koodi => koodi.value)
-      : [];
+    return _fp.map(koodi => koodi.value, information?.korkeakoulutukset);
 
-  if (isOsaamisala)
-    return osaamisala?.koulutus?.value ? [osaamisala.koulutus.value] : [];
+  if (isOsaamisala) return safeArray(osaamisala?.koulutus?.value);
 
-  return information?.koulutus?.value ? [information.koulutus.value] : [];
+  return safeArray(information?.koulutus?.value);
 }
 
 const getKoulutusByFormValues = values => {
@@ -63,8 +58,8 @@ const getKoulutusByFormValues = values => {
         : values?.tarjoajat?.tarjoajat || [],
     koulutuksetKoodiUri: getKoulutuksetKoodiUri(
       osaamisala,
-      values?.information,
-      koulutustyyppi
+      koulutustyyppi,
+      values?.information
     ),
     koulutustyyppi,
     nimi:

@@ -1,7 +1,10 @@
 import _fp from 'lodash/fp';
 
 import { parseEditorState } from '#/src/components/Editor/utils';
-import { TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT } from '#/src/constants';
+import {
+  KOULUTUSTYYPPI,
+  TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
+} from '#/src/constants';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 
 const koodiUriToKoodi = koodiUri => {
@@ -12,14 +15,14 @@ const koodiUriToKoodi = koodiUri => {
 // erikseen tapaus jossa koodiUreja voi olla vain yksi (muut kuin korkeakoulutukset) ja tapaus jossa
 // niitä voi olla monta (korkeakoulutus)
 function getKoulutusKoodiUrit(
-  koulutustyyppi: string,
+  koulutustyyppi: KOULUTUSTYYPPI,
   koulutusKoodiUrit?: Array<string>
 ): { koulutusKoodiUri: string; korkeakoulutusKoodiUrit: Array<string> } {
-  const isKorkeakoulu = TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT.some(
-    t => t === koulutustyyppi
+  const isKorkeakoulu = TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT.includes(
+    koulutustyyppi
   );
 
-  const firstElement = koulutusKoodiUrit ? koulutusKoodiUrit[0] : '';
+  const firstElement = koulutusKoodiUrit?.[0] ?? '';
 
   return {
     koulutusKoodiUri: isKorkeakoulu ? '' : firstElement,

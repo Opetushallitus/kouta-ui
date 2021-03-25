@@ -198,7 +198,8 @@ const HeaderSelect = ({ editorState, onChange, editorRef }) => {
         ]}
         value={{ value }}
         onChange={onSelect}
-        menuPortalTarget={document.documentElement}
+        menuPosition="fixed"
+        menuPortalTarget={document.body}
         isClearable={false}
       />
     </HeaderSelectContainer>
@@ -292,7 +293,7 @@ const LinkButton = ({ editorState, onChange, editorRef, ...props }) => {
     <Dropdown
       overlay={overlay}
       closeOnOverlayClick={false}
-      portalTarget={document.documentElement}
+      portalTarget={document.body}
       overflow
     >
       {({ onToggle, ref, open }) => (

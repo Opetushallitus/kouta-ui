@@ -84,11 +84,7 @@ const ActionsIcon = styled(Icon).attrs({ type: 'more_horiz' })`
 
 const ActionsDropdown = ({ actionsMenu }) => {
   return (
-    <Dropdown
-      overlay={actionsMenu}
-      portalTarget={document.documentElement}
-      overflow
-    >
+    <Dropdown overlay={actionsMenu} portalTarget={document.body} overflow>
       {({ ref, onToggle, open }) => (
         <div ref={ref} onClick={onToggle} style={{ display: 'inline-block' }}>
           <ActionsIcon active={open} />

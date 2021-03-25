@@ -65,7 +65,7 @@ export const EntityModal = ({
           onChange={setSelectedEntityOption}
           options={options}
           menuPosition="fixed"
-          menuPortalTarget={document.documentElement}
+          menuPortalTarget={document.body}
           id="entitySelect"
         />
       </Box>

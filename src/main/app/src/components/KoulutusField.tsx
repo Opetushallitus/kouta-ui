@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 
-import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
@@ -21,7 +20,7 @@ const KoulutusField = props => {
   const koulutustyyppi = useFieldValue('koulutustyyppi');
 
   const { data: koulutukset, isLoading } = useKoulutuksetByKoulutustyyppi(
-      koulutustyyppi
+    koulutustyyppi
   );
 
   const koulutustyyppiChanged = useHasChanged(koulutustyyppi);

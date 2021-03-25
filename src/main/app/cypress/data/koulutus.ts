@@ -4,7 +4,7 @@ const getBaseFields = ({ tyyppi = 'amm' } = {}) => {
   return {
     oid: '1.2.246.562.13.00000000000000000072',
     koulutustyyppi: tyyppi,
-    koulutusKoodiUri: 'koulutus_0#1',
+    koulutuksetKoodiUri: ['koulutus_0#1'],
     tila: 'tallennettu',
     tarjoajat: ['1.2.246.562.10.81934895871'],
     nimi: {
@@ -37,7 +37,7 @@ const getAmmatillinenFields = ({ tyyppi = 'amm' }) => {
     oid: '1.2.246.562.13.00000000000000000599',
     johtaaTutkintoon: false,
     koulutustyyppi: tyyppi,
-    koulutusKoodiUri: 'koulutus_351107#12',
+    koulutuksetKoodiUri: ['koulutus_351107#12'],
     tila: 'tallennettu',
     tarjoajat: [],
     nimi: {
@@ -64,7 +64,7 @@ const getKorkeakouluFields = ({ tyyppi }) => {
   return _.merge(getBaseFields(), {
     johtaaTutkintoon: true,
     koulutustyyppi: tyyppi,
-    koulutusKoodiUri: 'koulutus_671112#12',
+    koulutuksetKoodiUri: ['koulutus_671112#12'],
     nimi: { fi: 'Fysioterapeutti (AMK)', sv: 'Fysioterapeut (YH)' },
     metadata: {
       tyyppi,
@@ -81,7 +81,7 @@ const getKorkeakouluFields = ({ tyyppi }) => {
 
 const getLukioFields = ({ tyyppi }) => {
   return _.merge(getBaseFields({ tyyppi }), {
-    koulutusKoodiUri: 'koulutus_309902#12',
+    koulutuksetKoodiUri: ['koulutus_309902#12'],
     nimi: { fi: 'Lukion oppimäärä' },
   });
 };

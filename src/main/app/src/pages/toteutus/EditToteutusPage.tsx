@@ -44,7 +44,7 @@ const EditToteutusPage = props => {
   const { data: koulutus, isFetching: isKoulutusFetching } = useKoulutusByOid(
     toteutus?.koulutusOid,
     {
-      enabled: Boolean(toteutus),
+      enabled: Boolean(toteutus?.koulutusOid),
     }
   );
 

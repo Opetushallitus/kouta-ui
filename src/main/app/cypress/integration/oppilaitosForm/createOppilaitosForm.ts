@@ -49,6 +49,9 @@ const fillTietoaOpiskelustaSection = () => {
 
 const fillYhteystiedotSection = () => {
   getByTestId('yhteystiedotSection').within(() => {
+    getByTestId('lisaaYhteystietoButton').click({ force: true });
+    getByTestId('nimi').find('input').pipe(paste('Yhteystiedon nimi'));
+
     getByTestId('osoite').find('input').pipe(paste('Osoite'));
 
     getByTestId('postinumero').within(() => {
@@ -62,6 +65,29 @@ const fillYhteystiedotSection = () => {
     getByTestId('puhelinnumero').find('input').pipe(paste('12345'));
 
     getByTestId('verkkosivu').find('input').pipe(paste('www.verkkosivu.fi'));
+
+    jatka();
+  });
+};
+
+const fillHakijapalveluidenYhteystiedotSection = () => {
+  getByTestId('hakijapalveluidenYhteystiedotSection').within(() => {
+    // getByTestId('lisaaYhteystietoButton').click({ force: true });
+    // getByTestId('nimi').find('input').pipe(paste('Testiyhteystieto'));
+
+    // getByTestId('osoite').find('input').pipe(paste('Osoite'));
+
+    // getByTestId('postinumero').within(() => {
+    //   fillAsyncSelect('00350');
+    // });
+
+    // getByTestId('sahkoposti')
+    //   .find('input')
+    //   .pipe(paste('sahkoposti@sahkoposti.fi'));
+
+    // getByTestId('puhelinnumero').find('input').pipe(paste('12345'));
+
+    // getByTestId('verkkosivu').find('input').pipe(paste('www.verkkosivu.fi'));
 
     jatka();
   });
@@ -87,7 +113,7 @@ export const createOppilaitosForm = () => {
     cy.visit(`/organisaatio/${organisaatioOid}/oppilaitos`);
   });
 
-  it('should be able to create oppilaitos', () => {
+  it('should be able to create oppilaitos without hakijapalvleuyhteystiedot', () => {
     cy.intercept(
       { method: 'PUT', url: '**/oppilaitos' },
       {
@@ -112,6 +138,8 @@ export const createOppilaitosForm = () => {
     fillTilaSection();
 
     fillYhteystiedotSection();
+
+    fillHakijapalveluidenYhteystiedotSection();
 
     tallenna();
 

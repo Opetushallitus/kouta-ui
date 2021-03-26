@@ -8,19 +8,11 @@ const getOppilaitoksenOsaByFormValues = ({ tila, muokkaaja, ...values }) => {
     oppilaitosOid,
     perustiedot,
     esittely,
-    yhteystiedot,
+    yhteystiedot = [],
     kieliversiot,
     teemakuva,
     esikatselu = false,
   } = values;
-
-  const {
-    osoite,
-    postinumero,
-    puhelinnumero,
-    verkkosivu,
-    sahkoposti,
-  } = yhteystiedot;
 
   return {
     oppilaitosOid,
@@ -30,15 +22,25 @@ const getOppilaitoksenOsaByFormValues = ({ tila, muokkaaja, ...values }) => {
     teemakuva,
     esikatselu,
     metadata: {
-      yhteystiedot: {
-        osoite: {
-          osoite: _.pick(osoite || {}, kieliversiot),
-          postinumeroKoodiUri: postinumero?.value ?? null,
-        },
-        sahkoposti: _.pick(sahkoposti || {}, kieliversiot),
-        puhelinnumero: _.pick(puhelinnumero || {}, kieliversiot),
-        wwwSivu: _.pick(verkkosivu || {}, kieliversiot),
-      },
+      yhteystiedot: yhteystiedot.map(
+        ({
+          nimi,
+          osoite,
+          postinumero,
+          sahkoposti,
+          puhelinnumero,
+          verkkosivu,
+        }) => ({
+          nimi: _.pick(nimi || {}, kieliversiot),
+          osoite: {
+            osoite: _.pick(osoite || {}, kieliversiot),
+            postinumeroKoodiUri: postinumero?.value || null,
+          },
+          sahkoposti: _.pick(sahkoposti || {}, kieliversiot),
+          puhelinnumero: _.pick(puhelinnumero || {}, kieliversiot),
+          wwwSivu: _.pick(verkkosivu || {}, kieliversiot),
+        })
+      ),
       esittely: _.mapValues(
         _.pick(esittely || {}, kieliversiot),
         serializeEditorState

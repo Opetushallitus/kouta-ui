@@ -7,11 +7,11 @@ import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
 import TeemakuvaSection from '#/src/components/TeemakuvaSection';
+import { YhteystiedotSection } from '#/src/components/YhteystiedotSection';
 import { useFieldValue } from '#/src/hooks/form';
 
 import EsittelySection from './EsittelySection';
 import PerustiedotSection from './PerustiedotSection';
-import YhteystiedotSection from './YhteystiedotSection';
 
 const OppilaitoksenOsaForm = ({
   steps = false,
@@ -43,6 +43,7 @@ const OppilaitoksenOsaForm = ({
         section="esittely"
         Component={EsittelySection}
       />
+
       <FormCollapse
         section="teemakuva"
         header={t('oppilaitoksenOsaLomake.oppilaitoksenOsanTeemakuva')}

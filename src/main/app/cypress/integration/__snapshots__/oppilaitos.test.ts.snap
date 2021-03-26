@@ -9,6 +9,7 @@ exports[`createOppilaitos > should be able to create oppilaitos #0`] =
     "esittely": {
       "fi": "<p>Esittely</p>"
     },
+    "hakijapalveluidenYhteystiedot": null,
     "kampuksia": 4,
     "korkeakouluja": 2,
     "opiskelijoita": 1,
@@ -22,23 +23,25 @@ exports[`createOppilaitos > should be able to create oppilaitos #0`] =
       }
     ],
     "toimipisteita": 6,
-    "yhteystiedot": {
-      "osoite": {
+    "yhteystiedot": [
+      {
         "osoite": {
-          "fi": "Osoite"
+          "osoite": {
+            "fi": "Osoite"
+          },
+          "postinumeroKoodiUri": "posti_00350#2"
         },
-        "postinumeroKoodiUri": "posti_00350#2"
-      },
-      "puhelinnumero": {
-        "fi": "12345"
-      },
-      "sahkoposti": {
-        "fi": "sahkoposti@sahkoposti.fi"
-      },
-      "wwwSivu": {
-        "fi": "http://www.verkkosivu.fi"
+        "puhelinnumero": {
+          "fi": "12345"
+        },
+        "sahkoposti": {
+          "fi": "sahkoposti@sahkoposti.fi"
+        },
+        "wwwSivu": {
+          "fi": "http://www.verkkosivu.fi"
+        }
       }
-    },
+    ],
     "yksikoita": 5
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
@@ -58,6 +61,7 @@ exports[`editOppilaitos > should be able to edit oppilaitos #0`] =
     "esittely": {
       "fi": "<p><em>Fi esittely</em></p>"
     },
+    "hakijapalveluidenYhteystiedot": null,
     "kampuksia": 3,
     "korkeakouluja": 5,
     "opiskelijoita": 100,
@@ -71,27 +75,87 @@ exports[`editOppilaitos > should be able to edit oppilaitos #0`] =
       }
     ],
     "toimipisteita": 9,
-    "yhteystiedot": {
-      "osoite": {
-        "osoite": {
-          "fi": "Fi osoite"
+    "yhteystiedot": [
+      {
+        "nimi": {
+          "fi": "Yhteystiedon nimi"
         },
-        "postinumeroKoodiUri": "posti_0#2"
-      },
-      "puhelinnumero": {
-        "fi": "1234"
-      },
-      "sahkoposti": {
-        "fi": "fi@sahkoposti.fi"
-      },
-      "wwwSivu": {
-        "fi": "http://www.verkkosivu.fi"
+        "osoite": {
+          "osoite": {
+            "fi": "Fi osoite"
+          },
+          "postinumeroKoodiUri": "posti_0#2"
+        },
+        "puhelinnumero": {
+          "fi": "1234"
+        },
+        "sahkoposti": {
+          "fi": "fi@sahkoposti.fi"
+        },
+        "wwwSivu": {
+          "fi": "http://www.verkkosivu.fi"
+        }
       }
-    },
+    ],
     "yksikoita": 2
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "oid": "1.1.1.1.1.1",
   "organisaatioOid": "1.1.1.1.1.1",
   "tila": "tallennettu"
+};
+
+exports[`createOppilaitos > should be able to create oppilaitos without hakijapalvleuyhteystiedot #0`] =
+{
+  "esikatselu": false,
+  "kielivalinta": [
+    "fi"
+  ],
+  "metadata": {
+    "akatemioita": 7,
+    "esittely": {
+      "fi": "<p>Esittely</p>"
+    },
+    "hakijapalveluidenYhteystiedot": null,
+    "kampuksia": 4,
+    "korkeakouluja": 2,
+    "opiskelijoita": 1,
+    "tiedekuntia": 3,
+    "tietoaOpiskelusta": [
+      {
+        "otsikkoKoodiUri": "organisaationkuvaustiedot_02#1",
+        "teksti": {
+          "fi": "<p>Tietoa</p>"
+        }
+      }
+    ],
+    "toimipisteita": 6,
+    "yhteystiedot": [
+      {
+        "nimi": {
+          "fi": "Yhteystiedon nimi"
+        },
+        "osoite": {
+          "osoite": {
+            "fi": "Osoite"
+          },
+          "postinumeroKoodiUri": "posti_00350#2"
+        },
+        "puhelinnumero": {
+          "fi": "12345"
+        },
+        "sahkoposti": {
+          "fi": "sahkoposti@sahkoposti.fi"
+        },
+        "wwwSivu": {
+          "fi": "http://www.verkkosivu.fi"
+        }
+      }
+    ],
+    "yksikoita": 5
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "oid": "1.1.1.1.1.1",
+  "organisaatioOid": "1.1.1.1.1.1",
+  "tila": "julkaistu"
 };

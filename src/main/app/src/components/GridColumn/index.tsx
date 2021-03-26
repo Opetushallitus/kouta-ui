@@ -33,7 +33,7 @@ const GridColumnBase = styled.div`
   `}
 `;
 
-const GridColumn = ({ gutter = 0, xs = 12, sm, md, lg, ...props }) => {
+export const GridColumn = ({ gutter = 0, xs = 12, sm, md, lg, ...props }) => {
   return (
     <GridColumnBase
       gutter={gutter}

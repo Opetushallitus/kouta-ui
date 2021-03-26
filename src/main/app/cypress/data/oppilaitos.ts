@@ -10,30 +10,37 @@ export default () => {
         fi: '<p><em>Fi esittely</em></p>',
         sv: '<p><em>Sv esittely</em></p>',
       },
+      hakijapalveluidenYhteystiedot: null,
       kampuksia: 3,
       korkeakouluja: 5,
       opiskelijoita: 100,
-      yhteystiedot: {
-        osoite: {
-          osoite: {
-            fi: 'Fi osoite',
-            sv: 'Sv osoite',
+      yhteystiedot: [
+        {
+          nimi: {
+            fi: 'Yhteystiedon nimi',
+            sv: 'Yhteystiedon nimi sv',
           },
-          postinumeroKoodiUri: 'posti_0#2',
+          osoite: {
+            osoite: {
+              fi: 'Fi osoite',
+              sv: 'Sv osoite',
+            },
+            postinumeroKoodiUri: 'posti_0#2',
+          },
+          puhelinnumero: {
+            fi: '1234',
+            sv: '5678',
+          },
+          wwwSivu: {
+            fi: 'http://www.verkkosivu.fi',
+            sv: 'http://www.verkkosivu.sv',
+          },
+          sahkoposti: {
+            fi: 'fi@sahkoposti.fi',
+            sv: 'sv@sahkoposti.sv',
+          },
         },
-        puhelinnumero: {
-          fi: '1234',
-          sv: '5678',
-        },
-        wwwSivu: {
-          fi: 'http://www.verkkosivu.fi',
-          sv: 'http://www.verkkosivu.sv',
-        },
-        sahkoposti: {
-          fi: 'fi@sahkoposti.fi',
-          sv: 'sv@sahkoposti.sv',
-        },
-      },
+      ],
       tiedekuntia: 4,
       tietoaOpiskelusta: [
         {

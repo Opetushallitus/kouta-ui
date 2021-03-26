@@ -23,7 +23,6 @@ import useOrganisaatio, { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
 import koodiUriHasVersion from '#/src/utils/koodi/koodiUriHasVersion';
 import getFormValuesByOppilaitoksenOsa from '#/src/utils/oppilaitoksenOsa/getFormValuesByOppilaitoksenOsa';
 import { useOppilaitoksenOsaByOid } from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaByOid';
-import getOppilaitoksenOsaFormConfig from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaFormConfig';
 import getOrganisaatioContactInfo from '#/src/utils/organisaatio/getOrganisaatioContactInfo';
 import getOrganisaatioParentOidPath from '#/src/utils/organisaatio/getOrganisaatioParentOidPath';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
@@ -42,7 +41,7 @@ const useOppilaitosOid = oppilaitoksenOsaOrganisaatio => {
   return oppilaitos?.oid;
 };
 
-const OppilaitoksenOsaPage = ({
+export const OppilaitoksenOsaPage = ({
   match: {
     params: { organisaatioOid },
   },
@@ -117,15 +116,13 @@ const OppilaitoksenOsaPage = ({
     [formMode, oppilaitoksenOsa, oppilaitosOid, contactInfo]
   );
 
-  const config = getOppilaitoksenOsaFormConfig();
-
   const apiUrls = useUrls();
 
   return isFetching ? (
     <FullSpin />
   ) : (
     <ReduxForm form="oppilaitoksenOsa" initialValues={initialValues}>
-      <FormConfigContext.Provider value={{ ...config, readOnly }}>
+      <FormConfigContext.Provider value={{ noFieldConfigs: true, readOnly }}>
         <Title>{t('sivuTitlet.oppilaitoksenOsa')}</Title>
         <FormPage
           readOnly={readOnly}
@@ -164,5 +161,3 @@ const OppilaitoksenOsaPage = ({
     </ReduxForm>
   );
 };
-
-export default OppilaitoksenOsaPage;

@@ -28,25 +28,31 @@ test('getOppilaitosByFormValues returns correct oppilaitos given form values', (
       toimipisteita: '9',
       akatemioita: '1',
     },
-    yhteystiedot: {
-      osoite: {
-        fi: 'Fi osoite',
-        sv: 'Sv osoite',
+    yhteystiedot: [
+      {
+        nimi: {
+          fi: 'Yhteystiedon nimi',
+          sv: 'Yhteystiedon nimi sv',
+        },
+        osoite: {
+          fi: 'Fi osoite',
+          sv: 'Sv osoite',
+        },
+        postinumero: { value: 'postinumero_1#1' },
+        puhelinnumero: {
+          fi: '1234',
+          sv: '5678',
+        },
+        sahkoposti: {
+          fi: 'fi@sahkoposti.fi',
+          sv: 'sv@sahkoposti.sv',
+        },
+        verkkosivu: {
+          fi: 'www.verkkosivu.fi',
+          sv: 'www.verkkosivu.sv',
+        },
       },
-      postinumero: { value: 'postinumero_1#1' },
-      puhelinnumero: {
-        fi: '1234',
-        sv: '5678',
-      },
-      sahkoposti: {
-        fi: 'fi@sahkoposti.fi',
-        sv: 'sv@sahkoposti.sv',
-      },
-      verkkosivu: {
-        fi: 'www.verkkosivu.fi',
-        sv: 'www.verkkosivu.sv',
-      },
-    },
+    ],
   });
 
   expect(oppilaitos).toMatchSnapshot();

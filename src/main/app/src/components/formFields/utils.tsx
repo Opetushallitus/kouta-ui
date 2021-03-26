@@ -18,6 +18,7 @@ export const createComponent = (Component, mapProps = simpleMapProps) => {
       label = '',
       helperText,
       meta,
+      required: requiredProp,
       input: { name },
       configurable = true,
     } = props;
@@ -31,14 +32,15 @@ export const createComponent = (Component, mapProps = simpleMapProps) => {
         ...props,
         ariaLabelledBy: labelId,
         input: { ...props.input, ariaLabelledBy: labelId },
+        required: undefined,
       })
     );
 
     const fieldConfig = useFieldConfig(name);
-    const { readOnly } = useFormConfig();
+    const { readOnly, noFieldConfigs } = useFormConfig();
     const required = useFieldIsRequired(fieldConfig);
 
-    return fieldConfig || !configurable ? (
+    return noFieldConfigs || fieldConfig || !configurable ? (
       <FormControl
         error={isError}
         helperText={
@@ -47,7 +49,7 @@ export const createComponent = (Component, mapProps = simpleMapProps) => {
         label={
           label ? (
             <FormLabel error={error} disabled={disabled} mb={1} id={labelId}>
-              {`${label}${required ? ' *' : ''}`}
+              {`${label}${required || requiredProp ? ' *' : ''}`}
             </FormLabel>
           ) : undefined
         }

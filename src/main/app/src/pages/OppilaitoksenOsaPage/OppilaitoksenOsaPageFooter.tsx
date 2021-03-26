@@ -8,7 +8,7 @@ import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import createOppilaitoksenOsa from '#/src/utils/oppilaitoksenOsa/createOppilaitoksenOsa';
 import getOppilaitoksenOsaByFormValues from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaByFormValues';
 import updateOppilaitoksenOsa from '#/src/utils/oppilaitoksenOsa/updateOppilaitoksenOsa';
-import validateOppilaitoksenOsaForm from '#/src/utils/oppilaitoksenOsa/validateOppilaitoksenOsaForm';
+import { validateOppilaitoksenOsaForm } from '#/src/utils/oppilaitoksenOsa/validateOppilaitoksenOsaForm';
 
 const OppilaitoksenOsaPageFooter = ({
   oppilaitoksenOsa,

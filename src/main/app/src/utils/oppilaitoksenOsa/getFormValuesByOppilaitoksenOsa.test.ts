@@ -14,27 +14,33 @@ test('getFormValuesByOppilaitoksenOsa returns correct form values given oppilait
         sv: 'Sv kampus',
       },
       opiskelijoita: 100,
-      yhteystiedot: {
-        osoite: {
-          osoite: {
-            fi: 'Fi osoite',
-            sv: 'Sv osoite',
+      yhteystiedot: [
+        {
+          nimi: {
+            fi: 'Yhteystiedon nimi',
+            sv: 'Yhteystiedon nimi sv',
           },
-          postinumeroKoodiUri: 'postinumero_1#1',
+          osoite: {
+            osoite: {
+              fi: 'Fi osoite',
+              sv: 'Sv osoite',
+            },
+            postinumeroKoodiUri: 'postinumero_1#1',
+          },
+          puhelinnumero: {
+            fi: '1234',
+            sv: '5678',
+          },
+          sahkoposti: {
+            fi: 'fi@sahkoposti.fi',
+            sv: 'sv@sahkoposti.sv',
+          },
+          wwwSivu: {
+            fi: 'www.verkkosivu.fi',
+            sv: 'www.verkkosivu.sv',
+          },
         },
-        puhelinnumero: {
-          fi: '1234',
-          sv: '5678',
-        },
-        sahkoposti: {
-          fi: 'fi@sahkoposti.fi',
-          sv: 'sv@sahkoposti.sv',
-        },
-        wwwSivu: {
-          fi: 'www.verkkosivu.fi',
-          sv: 'www.verkkosivu.sv',
-        },
-      },
+      ],
     },
     muokkaaja: '1.1.1.1',
     tila: 'tallennettu',

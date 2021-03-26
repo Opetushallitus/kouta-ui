@@ -21,26 +21,32 @@ Object {
   },
   "teemakuva": undefined,
   "tila": "tallennettu",
-  "yhteystiedot": Object {
-    "osoite": Object {
-      "fi": "Fi osoite",
-      "sv": "Sv osoite",
+  "yhteystiedot": Array [
+    Object {
+      "nimi": Object {
+        "fi": "Yhteystiedon nimi",
+        "sv": "Yhteystiedon nimi sv",
+      },
+      "osoite": Object {
+        "fi": "Fi osoite",
+        "sv": "Sv osoite",
+      },
+      "postinumero": Object {
+        "value": "postinumero_1#1",
+      },
+      "puhelinnumero": Object {
+        "fi": "1234",
+        "sv": "5678",
+      },
+      "sahkoposti": Object {
+        "fi": "fi@sahkoposti.fi",
+        "sv": "sv@sahkoposti.sv",
+      },
+      "verkkosivu": Object {
+        "fi": "www.verkkosivu.fi",
+        "sv": "www.verkkosivu.sv",
+      },
     },
-    "postinumero": Object {
-      "value": "postinumero_1#1",
-    },
-    "puhelinnumero": Object {
-      "fi": "1234",
-      "sv": "5678",
-    },
-    "sahkoposti": Object {
-      "fi": "fi@sahkoposti.fi",
-      "sv": "sv@sahkoposti.sv",
-    },
-    "verkkosivu": Object {
-      "fi": "www.verkkosivu.fi",
-      "sv": "www.verkkosivu.sv",
-    },
-  },
+  ],
 }
 `;

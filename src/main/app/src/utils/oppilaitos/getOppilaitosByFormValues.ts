@@ -8,21 +8,14 @@ const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
     perustiedot,
     esittely,
     yhteystiedot,
+    hakijapalveluidenYhteystiedot,
     tietoa,
     kieliversiot,
     teemakuva,
     esikatselu = false,
   } = values;
 
-  const {
-    osoite,
-    postinumero,
-    puhelinnumero,
-    verkkosivu,
-    sahkoposti,
-  } = yhteystiedot;
-
-  const tietoaOpiskelusta = (_.get(tietoa, 'osiot') || []).map(
+  const tietoaOpiskelusta = (tietoa?.osiot || []).map(
     ({ value: otsikkoKoodiUri }) => ({
       otsikkoKoodiUri,
       teksti: _.mapValues(
@@ -36,43 +29,82 @@ const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
     tila,
     muokkaaja,
     kielivalinta: kieliversiot,
-    logo: _.get(perustiedot, 'logo'),
+    logo: perustiedot?.logo,
     teemakuva,
     esikatselu,
     metadata: {
-      yhteystiedot: {
-        osoite: {
-          osoite: _.pick(osoite || {}, kieliversiot),
-          postinumeroKoodiUri: _.get(postinumero, 'value') || null,
-        },
-        sahkoposti: _.pick(sahkoposti || {}, kieliversiot),
-        puhelinnumero: _.pick(puhelinnumero || {}, kieliversiot),
-        wwwSivu: _.pick(verkkosivu || {}, kieliversiot),
-      },
+      yhteystiedot: yhteystiedot.map(
+        ({
+          nimi,
+          osoite,
+          postinumero,
+          sahkoposti,
+          puhelinnumero,
+          verkkosivu,
+        }) => ({
+          nimi: _.pick(nimi || {}, kieliversiot),
+          osoite: {
+            osoite: _.pick(osoite || {}, kieliversiot),
+            postinumeroKoodiUri: postinumero?.value || null,
+          },
+          sahkoposti: _.pick(sahkoposti || {}, kieliversiot),
+          puhelinnumero: _.pick(puhelinnumero || {}, kieliversiot),
+          wwwSivu: _.pick(verkkosivu || {}, kieliversiot),
+        })
+      ),
+      hakijapalveluidenYhteystiedot: hakijapalveluidenYhteystiedot
+        ? {
+            nimi: _.pick(
+              hakijapalveluidenYhteystiedot.nimi || {},
+              kieliversiot
+            ),
+            osoite: {
+              osoite: _.pick(
+                hakijapalveluidenYhteystiedot.osoite || {},
+                kieliversiot
+              ),
+              postinumeroKoodiUri:
+                _.get(hakijapalveluidenYhteystiedot.postinumero, 'value') ||
+                null,
+            },
+            sahkoposti: _.pick(
+              hakijapalveluidenYhteystiedot.sahkoposti || {},
+              kieliversiot
+            ),
+            puhelinnumero: _.pick(
+              hakijapalveluidenYhteystiedot.puhelinnumero || {},
+              kieliversiot
+            ),
+            wwwSivu: _.pick(
+              hakijapalveluidenYhteystiedot.verkkosivu || {},
+              kieliversiot
+            ),
+          }
+        : null,
       esittely: _.mapValues(
         _.pick(esittely || {}, kieliversiot),
         serializeEditorState
       ),
       tietoaOpiskelusta,
-      opiskelijoita: isNumeric(_.get(perustiedot, 'opiskelijoita'))
+      opiskelijoita: isNumeric(perustiedot?.opiskelijoita)
         ? parseInt(perustiedot.opiskelijoita)
         : null,
-      korkeakouluja: isNumeric(_.get(perustiedot, 'korkeakouluja'))
+      korkeakouluja: isNumeric(perustiedot?.korkeakouluja)
         ? parseInt(perustiedot.korkeakouluja)
         : null,
-      tiedekuntia: isNumeric(_.get(perustiedot, 'tiedekuntia'))
+      tiedekuntia: isNumeric(perustiedot?.tiedekuntia)
         ? parseInt(perustiedot.tiedekuntia)
         : null,
-      kampuksia: isNumeric(_.get(perustiedot, 'kampuksia'))
+      kampuksia: isNumeric(perustiedot?.kampuksia)
         ? parseInt(perustiedot.kampuksia)
         : null,
-      yksikoita: isNumeric(_.get(perustiedot, 'yksikoita'))
+      yksikoita: isNumeric(perustiedot?.yksikoita)
         ? parseInt(perustiedot.yksikoita)
         : null,
-      toimipisteita: isNumeric(_.get(perustiedot, 'toimipisteita'))
+      toimipisteita: isNumeric(perustiedot?.toimipisteita)
         ? parseInt(perustiedot.toimipisteita)
         : null,
-      akatemioita: isNumeric(_.get(perustiedot, 'akatemioita'))
+      akatemioita: isNumeric(perustiedot?.akatemioita)
         ? parseInt(perustiedot.akatemioita)
         : null,
     },

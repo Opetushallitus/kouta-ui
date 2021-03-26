@@ -7,21 +7,16 @@ import {
   validateTranslations,
 } from '#/src/utils/form/createErrorBuilder';
 
-export const validateIfJulkaistu = (
-  validate,
-  optionalNotJulkaistuValidator = (eb, ..._) => eb
-) => (eb, values, ...rest) => {
-  const { tila } = values;
-
-  return tila === JULKAISUTILA.JULKAISTU
-    ? validate(eb, values, ...rest)
-    : optionalNotJulkaistuValidator(eb, values, ...rest);
+export const validateIfJulkaistu = validate => eb => {
+  const { tila } = eb.getValues();
+  return tila === JULKAISUTILA.JULKAISTU ? validate(eb) : eb;
 };
 
 export const validateIf = (condition, validate) => eb =>
   condition ? validate(eb) : eb;
 
-export const validateValintakokeet = (errorBuilder, values) => {
+export const validateValintakokeet = errorBuilder => {
+  const values = errorBuilder.getValues();
   const kieliversiot = getKielivalinta(values);
   return _fp.flow(
     validateTranslations('valintakokeet.yleisKuvaus', kieliversiot, {
@@ -119,7 +114,8 @@ export const julkinenSectionConfig = {
   field: 'julkinen',
 };
 
-export const validateRelations = specs => (eb, values) => {
+export const validateRelations = specs => eb => {
+  const values = eb.getValues();
   const { errors, isValid } = specs.reduce(
     (acc, { key, t: translationKey }) => {
       const { tila } = values;
@@ -157,8 +153,8 @@ export const createOptionalTranslatedFieldConfig = ({
 });
 
 export const validateOptionalTranslatedField = name =>
-  validateIfJulkaistu((eb, values) =>
-    eb.validateTranslations(name, getKielivalinta(values), {
+  validateIfJulkaistu(eb =>
+    eb.validateTranslations(name, getKielivalinta(eb.getValues()), {
       optional: true,
     })
   );

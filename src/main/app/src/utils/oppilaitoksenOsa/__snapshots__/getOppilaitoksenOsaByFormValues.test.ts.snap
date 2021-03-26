@@ -17,27 +17,33 @@ Object {
       "sv": "Sv kampus",
     },
     "opiskelijoita": 100,
-    "yhteystiedot": Object {
-      "osoite": Object {
-        "osoite": Object {
-          "fi": "Fi osoite",
-          "sv": "Sv osoite",
+    "yhteystiedot": Array [
+      Object {
+        "nimi": Object {
+          "fi": "Yhteystiedon nimi",
+          "sv": "Yhteystiedon nimi sv",
         },
-        "postinumeroKoodiUri": "postinumero_1#1",
+        "osoite": Object {
+          "osoite": Object {
+            "fi": "Fi osoite",
+            "sv": "Sv osoite",
+          },
+          "postinumeroKoodiUri": "postinumero_1#1",
+        },
+        "puhelinnumero": Object {
+          "fi": "1234",
+          "sv": "5678",
+        },
+        "sahkoposti": Object {
+          "fi": "fi@sahkoposti.fi",
+          "sv": "sv@sahkoposti.sv",
+        },
+        "wwwSivu": Object {
+          "fi": "www.verkkosivu.fi",
+          "sv": "www.verkkosivu.sv",
+        },
       },
-      "puhelinnumero": Object {
-        "fi": "1234",
-        "sv": "5678",
-      },
-      "sahkoposti": Object {
-        "fi": "fi@sahkoposti.fi",
-        "sv": "sv@sahkoposti.sv",
-      },
-      "wwwSivu": Object {
-        "fi": "www.verkkosivu.fi",
-        "sv": "www.verkkosivu.sv",
-      },
-    },
+    ],
   },
   "muokkaaja": "1.1.1.1",
   "oppilaitosOid": "888.888.888",

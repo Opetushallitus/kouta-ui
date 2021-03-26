@@ -17,15 +17,16 @@ const getFormValuesByOppilaitoksenOsa = oppilaitoksenOsa => {
     oppilaitosOid,
     kieliversiot: kielivalinta,
     esittely: _.mapValues(esittely || {}, parseEditorState),
-    yhteystiedot: {
-      osoite: yhteystiedot?.osoite?.osoite || {},
-      postinumero: yhteystiedot?.osoite?.postinumeroKoodiUri
-        ? { value: yhteystiedot.osoite.postinumeroKoodiUri }
+    yhteystiedot: yhteystiedot.map(yhteystieto => ({
+      nimi: yhteystieto.nimi || {},
+      osoite: yhteystieto.osoite?.osoite || {},
+      postinumero: yhteystieto.osoite?.postinumeroKoodiUri
+        ? { value: yhteystieto.osoite.postinumeroKoodiUri }
         : null,
-      verkkosivu: yhteystiedot?.wwwSivu || {},
-      puhelinnumero: yhteystiedot?.puhelinnumero || {},
-      sahkoposti: yhteystiedot?.sahkoposti || {},
-    },
+      verkkosivu: yhteystieto.wwwSivu || {},
+      puhelinnumero: yhteystieto.puhelinnumero || {},
+      sahkoposti: yhteystieto.sahkoposti || {},
+    })),
     perustiedot: {
       opiskelijoita: _.isNumber(opiskelijoita) ? opiskelijoita : '',
       kampus: kampus || {},

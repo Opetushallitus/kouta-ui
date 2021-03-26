@@ -172,8 +172,11 @@ const config = createFormConfigBuilder().registerSections([
         field: '.nimi',
         koulutustyypit: TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
         required: true,
-        validate: validateIfJulkaistu((eb, values) =>
-          eb.validateTranslations('description.nimi', getKielivalinta(values))
+        validate: validateIfJulkaistu(eb =>
+          eb.validateTranslations(
+            'description.nimi',
+            getKielivalinta(eb.getValues())
+          )
         ),
       },
       createOptionalTranslatedFieldConfig({
@@ -212,10 +215,10 @@ const config = createFormConfigBuilder().registerSections([
     parts: [
       {
         field: '.tarjoajat',
-        validate: validateIfJulkaistu((eb, values) =>
+        validate: validateIfJulkaistu(eb =>
           eb.validateArrayMinLength(
             'tarjoajat.tarjoajat',
-            getMinTarjoajat(values)
+            getMinTarjoajat(eb.getValues())
           )
         ),
         required: true,

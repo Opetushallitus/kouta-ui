@@ -13,6 +13,10 @@ class ErrorBuilder {
     return _.get(this.values, path);
   }
 
+  getValues() {
+    return this.values;
+  }
+
   setError(path, value) {
     _.set(this.errors, path, value ? _.castArray(value) : null);
   }

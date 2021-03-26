@@ -13,8 +13,6 @@ import { getKielivalinta } from '#/src/utils/form/formConfigUtils';
 import getHakuFormConfig from '#/src/utils/haku/getHakuFormConfig';
 import getHakukohdeFormConfig from '#/src/utils/hakukohde/getHakukohdeFormConfig';
 import getKoulutusFormConfig from '#/src/utils/koulutus/getKoulutusFormConfig';
-import getOppilaitoksenOsaFormConfig from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaFormConfig';
-import getOppilaitosFormConfig from '#/src/utils/oppilaitos/getOppilaitosFormConfig';
 import getSoraKuvausFormConfig from '#/src/utils/soraKuvaus/getSoraKuvausFormConfig';
 import getToteutusFormConfig from '#/src/utils/toteutus/getToteutusFormConfig';
 import getValintaperusteFormConfig from '#/src/utils/valintaperuste/getValintaperusteFormConfig';
@@ -73,8 +71,6 @@ const formConfigsGettersByEntity = {
   [ENTITY.HAKUKOHDE]: getHakukohdeFormConfig,
   [ENTITY.VALINTAPERUSTE]: getValintaperusteFormConfig,
   [ENTITY.SORA_KUVAUS]: getSoraKuvausFormConfig,
-  [ENTITY.OPPILAITOS]: getOppilaitosFormConfig,
-  [ENTITY.OPPILAITOKSEN_OSA]: getOppilaitoksenOsaFormConfig,
 };
 
 export const getFormConfigByEntity = (entityName, koulutustyyppi) => {

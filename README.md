@@ -110,11 +110,11 @@ Yksikkötestit voi ajaa komennolla `npm test` ja integraatiotestit komennolla `n
 Cypress-testejä voi ajaa myös interaktiivisesti käynnistämällä ensin kouta-ui:n integraatio-moodissa:
 
     cd src/main/app
-    npm start:integration
+    npm run start:integration
 
 ja sitten samassa kansiossa, mutta toisessa shellissa: 
 
-    npx cypress open
+    npm run cypress:open
     
 Cypress-integraatiotestit olettavat, että sovellus on renderöity käyttäen käännösavaimia, minkä vuoksi on käytettävä `npm start:integration`tai `npm start:integration:debug` komentoa sovelluksen käynnistämiseen. Npm Skripti `start:integration:debug` eroaa `start:integration`:sta siten, että se sallii sovelluksen kyselyt ulkopuolelle. Tämä helpottaa mm. cypressin-testien api-mockien päivittämistä ja testaamista, kun taas normaalisti integraatiotesteissä halutaan estää yhteydet ulkopuolisiin rajapintoihin.
 

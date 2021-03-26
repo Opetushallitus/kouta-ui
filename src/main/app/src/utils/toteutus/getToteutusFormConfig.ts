@@ -345,7 +345,7 @@ const config = createFormConfigBuilder().registerSections([
             values?.tila === JULKAISUTILA.JULKAISTU &&
               values?.jarjestamistiedot?.maksullisuustyyppi !==
                 MaksullisuusTyyppi.MAKSUTON,
-            validateInteger('jarjestamistiedot.maksunMaara')
+            validateInteger('jarjestamistiedot.maksunMaara', { min: 0 })
           )(eb),
       },
       createOptionalTranslatedFieldConfig({

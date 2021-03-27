@@ -391,6 +391,7 @@ export const createToteutusForm = () => {
     fillKieliversiotSection({ jatka: true });
     fillTiedotSection();
 
+    // NOTE: Korkeakoulu osaamisalat hidden for now (KTO-286, KTO-1175)
     /*
     getByTestId('alemmanKorkeakoulututkinnonOsaamisalatSection').within(() => {
       fillKkOsaamisalat();

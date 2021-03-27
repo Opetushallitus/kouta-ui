@@ -201,6 +201,7 @@ const config = createFormConfigBuilder().registerSections([
       KOULUTUSTYYPPI.TAYDENNYS_KOULUTUS,
     ],
   },
+  // NOTE: Korkeakoulu osaamisalat hidden for now (KTO-286, KTO-1175). Will probably be removed later.
   /*{
     section: 'alemmanKorkeakoulututkinnonOsaamisalat',
     koulutustyypit: TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,

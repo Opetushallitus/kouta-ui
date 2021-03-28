@@ -59,8 +59,8 @@ export function useFieldValue<T = any>(name, formNameProp?: string): T {
   assert(formName != null);
 
   const selector = useCallback(
-    state => _.get(state, `form.${formName || contextFormName}.values.${name}`),
-    [contextFormName, formName, name]
+    state => _.get(state, `form.${formName}.values.${name}`),
+    [formName, name]
   );
 
   return useSelector(selector);

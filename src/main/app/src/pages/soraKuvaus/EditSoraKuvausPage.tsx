@@ -41,12 +41,15 @@ const EditSoraKuvausPage = props => {
     [soraKuvaus]
   );
 
+  const formConfig = useMemo(
+    () => ({ noFieldConfigs: true, readOnly: !canUpdate }),
+    [canUpdate]
+  );
+
   return (
     <ReduxForm form="soraKuvausForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.soraKuvauksenMuokkaus')}</Title>
-      <FormConfigContext.Provider
-        value={{ noFieldConfigs: true, readOnly: !canUpdate }}
-      >
+      <FormConfigContext.Provider value={formConfig}>
         <FormPage
           readOnly={!canUpdate}
           header={

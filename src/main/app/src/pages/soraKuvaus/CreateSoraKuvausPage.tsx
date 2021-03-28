@@ -20,6 +20,8 @@ import { useSoraKuvausById } from '#/src/utils/soraKuvaus/getSoraKuvausById';
 import { SoraKuvausFooter } from './SoraKuvausFooter';
 import SoraKuvausForm, { initialValues } from './SoraKuvausForm';
 
+const formConfig = { noFieldConfigs: true };
+
 const getCopyValues = soraKuvausId => ({
   pohja: {
     tapa: POHJAVALINTA.KOPIO,
@@ -62,7 +64,7 @@ const CreateSoraKuvausPage = props => {
   return (
     <ReduxForm form="soraKuvausForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.uusiSoraKuvaus')}</Title>
-      <FormConfigContext.Provider value={{ noFieldConfigs: true }}>
+      <FormConfigContext.Provider value={formConfig}>
         <FormPage
           header={<FormHeader>{t('yleiset.soraKuvaus')}</FormHeader>}
           steps={<FormSteps activeStep={ENTITY.SORA_KUVAUS} />}

@@ -24,7 +24,6 @@ const validateSoraKuvausForm = values => {
     .flow(
       validateCommonFields,
       validateExistence('koulutustyyppi'),
-      validateExistence('koulutusala'),
       validateArrayMinLength('kieliversiot', 1),
       validateIf(
         isJulkaistu,

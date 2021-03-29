@@ -1,7 +1,7 @@
-import isTutkintoonJohtavaKorkeakouluKoulutustyyppi from './isTutkintoonJohtavaKorkeakouluKoulutustyyppi';
+import isTutkintoonJohtavaKorkeakoulutus from './isTutkintoonJohtavaKorkeakoulutus';
 
 const isKorkeakouluKoulutustyyppi = tyyppi => {
-  return isTutkintoonJohtavaKorkeakouluKoulutustyyppi(tyyppi);
+  return isTutkintoonJohtavaKorkeakoulutus(tyyppi);
 };
 
 export default isKorkeakouluKoulutustyyppi;

@@ -50,27 +50,30 @@ const fillTietoaOpiskelustaSection = () => {
 const fillYhteystiedotSection = () => {
   getByTestId('yhteystiedotSection').within(() => {
     getByTestId('lisaaYhteystietoButton').click({ force: true });
-    getByTestId('nimi').find('input').pipe(paste('Yhteystiedon nimi'));
+    cy.findByLabelText(/oppilaitoslomake\.yhteystiedonNimi/).pipe(
+      paste('Yhteystiedon nimi')
+    );
 
-    getByTestId('postiosoite').find('input').pipe(paste('Osoite'));
+    cy.findByLabelText(/yleiset.postiosoite/).pipe(paste('Osoite'));
 
+    // NOTE: postinumeros are with testIds for they share the same translationkey
     getByTestId('postinumero').within(() => {
       fillAsyncSelect('00350');
     });
 
-    getByTestId('kayntiosoite').find('input').pipe(paste('Osoite'));
+    cy.findByLabelText(/yleiset.kayntiosoite/).pipe(paste('Osoite'));
 
     getByTestId('kayntiosoitePostinumero').within(() => {
       fillAsyncSelect('00350');
     });
 
-    getByTestId('sahkoposti')
-      .find('input')
-      .pipe(paste('sahkoposti@sahkoposti.fi'));
+    cy.findByLabelText(/yleiset.sahkoposti/).pipe(
+      paste('sahkoposti@sahkoposti.fi')
+    );
 
-    getByTestId('puhelinnumero').find('input').pipe(paste('12345'));
+    cy.findByLabelText(/yleiset.puhelinnumero/).pipe(paste('12345'));
 
-    getByTestId('verkkosivu').find('input').pipe(paste('www.verkkosivu.fi'));
+    cy.findByLabelText(/yleiset.verkkosivu/).pipe(paste('www.verkkosivu.fi'));
 
     jatka();
   });
@@ -84,27 +87,30 @@ const skipHakijapalveluidenYhteystiedotSection = () => {
 
 const fillHakijapalveluidenYhteystiedotSection = () => {
   getByTestId('hakijapalveluidenYhteystiedotSection').within(() => {
-    getByTestId('nimi').find('input').pipe(paste('Testihakijapalvelu'));
+    cy.findByLabelText(/oppilaitoslomake\.yhteystiedonNimi/).pipe(
+      paste('Testihakijapalvelu')
+    );
 
-    getByTestId('postiosoite').find('input').pipe(paste('Osoite'));
+    cy.findByLabelText(/yleiset.postiosoite/).pipe(paste('Osoite'));
 
+    // NOTE: postinumeros are with testIds for they share the same translationkey
     getByTestId('postinumero').within(() => {
       fillAsyncSelect('00350');
     });
 
-    getByTestId('kayntiosoite').find('input').pipe(paste('Osoite'));
+    cy.findByLabelText(/yleiset.kayntiosoite/).pipe(paste('Osoite'));
 
     getByTestId('kayntiosoitePostinumero').within(() => {
       fillAsyncSelect('00350');
     });
 
-    getByTestId('sahkoposti')
-      .find('input')
-      .pipe(paste('sahkoposti@sahkoposti.fi'));
+    cy.findByLabelText(/yleiset.sahkoposti/).pipe(
+      paste('sahkoposti@sahkoposti.fi')
+    );
 
-    getByTestId('puhelinnumero').find('input').pipe(paste('12345'));
+    cy.findByLabelText(/yleiset.puhelinnumero/).pipe(paste('12345'));
 
-    getByTestId('verkkosivu').find('input').pipe(paste('www.verkkosivu.fi'));
+    cy.findByLabelText(/yleiset.verkkosivu/).pipe(paste('www.verkkosivu.fi'));
 
     jatka();
   });

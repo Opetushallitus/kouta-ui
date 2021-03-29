@@ -90,6 +90,10 @@ export const OppilaitoksenOsaPage = ({
 
   const readOnly = oppilaitoksenOsa ? !canUpdate : !canCreate;
 
+  const config = useMemo(() => ({ noFieldConfigs: true, readOnly }), [
+    readOnly,
+  ]);
+
   const initialValues = useMemo(
     () => ({
       ...(formMode === FormMode.CREATE
@@ -122,7 +126,7 @@ export const OppilaitoksenOsaPage = ({
     <FullSpin />
   ) : (
     <ReduxForm form="oppilaitoksenOsa" initialValues={initialValues}>
-      <FormConfigContext.Provider value={{ noFieldConfigs: true, readOnly }}>
+      <FormConfigContext.Provider value={config}>
         <Title>{t('sivuTitlet.oppilaitoksenOsa')}</Title>
         <FormPage
           readOnly={readOnly}

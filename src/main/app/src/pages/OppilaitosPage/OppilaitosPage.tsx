@@ -70,6 +70,10 @@ export const OppilaitosPage = ({
 
   const readOnly = oppilaitos ? !canUpdate : !canCreate;
 
+  const config = useMemo(() => ({ noFieldConfigs: true, readOnly }), [
+    readOnly,
+  ]);
+
   const initialValues = useMemo(
     () => ({
       ...(formMode === FormMode.CREATE
@@ -107,7 +111,7 @@ export const OppilaitosPage = ({
   ) : (
     <ReduxForm form={ENTITY.OPPILAITOS} initialValues={initialValues}>
       <Title>{t('sivuTitlet.oppilaitos')}</Title>
-      <FormConfigContext.Provider value={{ noFieldConfigs: true, readOnly }}>
+      <FormConfigContext.Provider value={config}>
         <FormPage
           readOnly={readOnly}
           steps={<OppilaitosFormSteps activeStep={ENTITY.OPPILAITOS} />}

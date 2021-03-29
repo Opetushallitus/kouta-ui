@@ -1,5 +1,5 @@
 import { parseEditorState } from '#/src/components/Editor/utils';
-import getOppilaitosByFormValues from '#/src/utils/oppilaitos/getOppilaitosByFormValues';
+import { getOppilaitosByFormValues } from '#/src/utils/oppilaitos/getOppilaitosByFormValues';
 
 test('getOppilaitosByFormValues returns correct oppilaitos given form values', () => {
   const oppilaitos = getOppilaitosByFormValues({

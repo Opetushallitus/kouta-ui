@@ -27,7 +27,7 @@ export const YhteystietoSection = ({ description, name, language }) => {
           {description}
         </GridColumn>
       )}
-      <GridColumn css={'margin-top: 24px'} md={12} {...getTestIdProps('nimi')}>
+      <GridColumn css={'margin-top: 24px'} md={12}>
         <Field
           required
           component={FormFieldInput}
@@ -39,7 +39,7 @@ export const YhteystietoSection = ({ description, name, language }) => {
         {t('yleiset.postiosoite')}
       </GridColumn>
       <Divider margin={1} />
-      <GridColumn md={6} {...getTestIdProps('postiosoite')}>
+      <GridColumn md={6}>
         <Field
           component={FormFieldInput}
           name={`${name}.postiosoite.${language}`}
@@ -57,7 +57,7 @@ export const YhteystietoSection = ({ description, name, language }) => {
         {t('yleiset.kayntiosoite')}
       </GridColumn>
       <Divider margin={1} />
-      <GridColumn md={6} {...getTestIdProps('kayntiosoite')}>
+      <GridColumn md={6}>
         <Field
           component={FormFieldInput}
           name={`${name}.kayntiosoite.${language}`}
@@ -75,21 +75,21 @@ export const YhteystietoSection = ({ description, name, language }) => {
         {t('oppilaitoslomake.muutYhteystiedot')}
       </GridColumn>
       <Divider margin={1} />
-      <GridColumn md={6} {...getTestIdProps('sahkoposti')}>
+      <GridColumn md={6}>
         <Field
           component={FormFieldInput}
           name={`${name}.sahkoposti.${language}`}
           label={t('yleiset.sahkoposti')}
         />
       </GridColumn>
-      <GridColumn md={6} {...getTestIdProps('puhelinnumero')}>
+      <GridColumn md={6}>
         <Field
           component={FormFieldInput}
           name={`${name}.puhelinnumero.${language}`}
           label={t('yleiset.puhelinnumero')}
         />
       </GridColumn>
-      <GridColumn md={6} {...getTestIdProps('verkkosivu')}>
+      <GridColumn md={6}>
         <Field
           component={FormFieldUrlInput}
           name={`${name}.verkkosivu.${language}`}

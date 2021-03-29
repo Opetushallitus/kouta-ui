@@ -1,9 +1,14 @@
 import _ from 'lodash';
+import _fp from 'lodash/fp';
 
 import { serializeEditorState } from '#/src/components/Editor/utils';
 import { isNumeric } from '#/src/utils';
 
-const getOppilaitoksenOsaByFormValues = ({ tila, muokkaaja, ...values }) => {
+export const getOppilaitoksenOsaByFormValues = ({
+  tila,
+  muokkaaja,
+  ...values
+}) => {
   const {
     oppilaitosOid,
     perustiedot,
@@ -13,6 +18,8 @@ const getOppilaitoksenOsaByFormValues = ({ tila, muokkaaja, ...values }) => {
     teemakuva,
     esikatselu = false,
   } = values;
+
+  const pickTranslations = _fp.pick(kieliversiot || []);
 
   return {
     oppilaitosOid,
@@ -33,36 +40,34 @@ const getOppilaitoksenOsaByFormValues = ({ tila, muokkaaja, ...values }) => {
           puhelinnumero,
           verkkosivu,
         }) => ({
-          nimi: _.pick(nimi || {}, kieliversiot),
+          nimi: pickTranslations(nimi || {}),
           postiosoite:
             !_.isEmpty(postiosoite) || postinumero
               ? {
-                  osoite: _.pick(postiosoite || {}, kieliversiot),
+                  osoite: pickTranslations(postiosoite || {}),
                   postinumeroKoodiUri: postinumero?.value || null,
                 }
               : null,
           kayntiosoite:
-            !_.isEmpty(kayntiosoitePostinumero) || kayntiosoitePostinumero
+            !_.isEmpty(kayntiosoite) || kayntiosoitePostinumero
               ? {
-                  osoite: _.pick(kayntiosoite || {}, kieliversiot),
+                  osoite: pickTranslations(kayntiosoite || {}),
                   postinumeroKoodiUri: kayntiosoitePostinumero?.value || null,
                 }
               : null,
-          sahkoposti: _.pick(sahkoposti || {}, kieliversiot),
-          puhelinnumero: _.pick(puhelinnumero || {}, kieliversiot),
-          wwwSivu: _.pick(verkkosivu || {}, kieliversiot),
+          sahkoposti: pickTranslations(sahkoposti || {}),
+          puhelinnumero: pickTranslations(puhelinnumero || {}),
+          wwwSivu: pickTranslations(verkkosivu || {}),
         })
       ),
       esittely: _.mapValues(
-        _.pick(esittely || {}, kieliversiot),
+        pickTranslations(esittely || {}),
         serializeEditorState
       ),
       opiskelijoita: isNumeric(perustiedot?.opiskelijoita)
         ? parseInt(perustiedot.opiskelijoita)
         : null,
-      kampus: _.pick(perustiedot?.kampus || {}, kieliversiot),
+      kampus: pickTranslations(perustiedot?.kampus || {}),
     },
   };
 };
-
-export default getOppilaitoksenOsaByFormValues;

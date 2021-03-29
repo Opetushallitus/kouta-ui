@@ -11,6 +11,44 @@ import {
 } from '#/src/hooks/form';
 import useKoodi from '#/src/hooks/useKoodi';
 
+function koulutusOrLanguageHasChanged(
+  nimiFieldName,
+  koulutusChanged: boolean,
+  languagesChanged: boolean,
+  koulutusKoodi
+) {
+  return (
+    nimiFieldName && (koulutusChanged || languagesChanged) && koulutusKoodi
+  );
+}
+
+function getNimiFromKoodistoResponse(
+  languages: Array<any>,
+  koulutusKoodi,
+  koulutusChanged: boolean,
+  nimiFieldValue
+) {
+  const newNimiFieldValue = {};
+  languages?.forEach(lang => {
+    const koodiNimi = _.find(
+      koulutusKoodi?.metadata,
+      ({ kieli }) => _.toLower(kieli) === lang
+    )?.nimi;
+    // Only overwrite existing nimi values when koulutus-field changes.
+    // When selected languages change, set only language versioned nimi fields that are empty.
+    if (
+      koulutusChanged ||
+      (!koulutusChanged && _.isEmpty(nimiFieldValue[lang]))
+    ) {
+      newNimiFieldValue[lang] = koodiNimi;
+    } else {
+      newNimiFieldValue[lang] = nimiFieldValue[lang];
+    }
+  });
+
+  return newNimiFieldValue;
+}
+
 export const useNimiFromKoulutusKoodi = ({
   koulutusFieldName,
   nimiFieldName,
@@ -45,27 +83,19 @@ export const useNimiFromKoulutusKoodi = ({
   // change the language versioned nimi fields accordingly
   useEffect(() => {
     if (
-      nimiFieldName &&
-      (koulutusChanged || languagesChanged) &&
-      koulutusKoodi
+      koulutusOrLanguageHasChanged(
+        nimiFieldName,
+        koulutusChanged,
+        languagesChanged,
+        koulutusKoodi
+      )
     ) {
-      const newNimiFieldValue = {};
-      languages?.forEach(lang => {
-        const koodiNimi = _.find(
-          koulutusKoodi?.metadata,
-          ({ kieli }) => _.toLower(kieli) === lang
-        )?.nimi;
-        // Only overwrite existing nimi values when koulutus-field changes.
-        // When selected languages change, set only language versioned nimi fields that are empty.
-        if (
-          koulutusChanged ||
-          (!koulutusChanged && _.isEmpty(nimiFieldValue[lang]))
-        ) {
-          newNimiFieldValue[lang] = koodiNimi;
-        } else {
-          newNimiFieldValue[lang] = nimiFieldValue[lang];
-        }
-      });
+      const newNimiFieldValue = getNimiFromKoodistoResponse(
+        languages,
+        koulutusKoodi,
+        koulutusChanged,
+        nimiFieldValue
+      );
       setKoulutusChanged(false);
       setLanguagesChanged(false);
       change(nimiFieldName, newNimiFieldValue);

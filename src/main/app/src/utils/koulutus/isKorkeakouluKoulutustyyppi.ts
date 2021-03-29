@@ -1,4 +1,4 @@
-import isTutkintoonJohtavaKorkeakoulutus from './isTutkintoonJohtavaKorkeakoulutus';
+import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
 const isKorkeakouluKoulutustyyppi = tyyppi => {
   return isTutkintoonJohtavaKorkeakoulutus(tyyppi);

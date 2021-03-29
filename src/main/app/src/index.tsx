@@ -1,5 +1,3 @@
-import 'core-js/es';
-
 import React from 'react';
 
 import { createBrowserHistory } from 'history';

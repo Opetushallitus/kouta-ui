@@ -2,7 +2,6 @@
   "extends": [
     "react-app",
     "prettier",
-    "prettier/react",
     "plugin:cypress/recommended",
     "plugin:lodash/canonical"
   ],
@@ -67,9 +66,6 @@
     "lodash/prefer-constant": "off",
     "lodash/prefer-noop": "off",
     "lodash/prefer-includes": "off",
-    "lodash/path-style": [
-      "error",
-      "as-needed"
-    ]
+    "lodash/path-style": "off"
   }
 }

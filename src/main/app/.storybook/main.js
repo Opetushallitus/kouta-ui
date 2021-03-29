@@ -9,7 +9,7 @@ module.exports = {
     '@storybook/addon-links/preset',
   ],
   webpackFinal: _fp.flow(
-    withoutPlugins(['ForkTsCheckerWebpackPlugin']),
+    withoutPlugins(['ForkTsCheckerWebpackPlugin', 'ESLintWebpackPlugin']),
     withImportAlias
   ),
 };

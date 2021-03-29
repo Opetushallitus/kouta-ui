@@ -13,7 +13,7 @@ import defaultTheme from '#/src/theme';
 
 import HttpContext from './contexts/HttpClientContext';
 import createLocalization from './localization';
-import createStore from './state/store';
+import { store as createStore } from './state/store';
 import getTranslations from './translations';
 import { configure as configureUrls } from './urls';
 

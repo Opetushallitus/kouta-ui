@@ -3,10 +3,10 @@ import _fp from 'lodash/fp';
 import { serializeEditorState } from '#/src/components/Editor/utils';
 import {
   KOULUTUSTYYPPI,
-  TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
 } from '#/src/constants';
 import { maybeParseNumber, safeArray } from '#/src/utils';
+import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
 const osaamisalaKoodiToKoodiUri = value =>
   value ? `osaamisala_${value}` : null;
@@ -19,15 +19,11 @@ function getKoulutuksetKoodiUri(
     korkeakoulutukset: Array<{ value: string }>;
   }
 ): Array<string> {
-  const isKorkeakoulu = TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT.includes(
-    koulutustyyppi
-  );
-  const isOsaamisala = koulutustyyppi === KOULUTUSTYYPPI.OSAAMISALA;
-
-  if (isKorkeakoulu)
+  if (isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi))
     return _fp.map(koodi => koodi.value, information?.korkeakoulutukset);
 
-  if (isOsaamisala) return safeArray(osaamisala?.koulutus?.value);
+  if (koulutustyyppi === KOULUTUSTYYPPI.OSAAMISALA)
+    return safeArray(osaamisala?.koulutus?.value);
 
   return safeArray(information?.koulutus?.value);
 }

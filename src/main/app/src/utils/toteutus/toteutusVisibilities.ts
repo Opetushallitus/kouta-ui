@@ -1,16 +1,12 @@
-import {
-  KOULUTUSTYYPPI,
-  TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
-} from '#/src/constants';
+import { KOULUTUSTYYPPI } from '#/src/constants';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
+import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
 export const isApurahaVisible = (
   koulutustyyppi: KOULUTUSTYYPPI,
   opetuskielet: Array<string> = []
 ) => {
-  const isKorkeakoulu = TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT.some(
-    t => t === koulutustyyppi
-  );
+  const isKorkeakoulu = isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi);
   const isEnglishChosen = opetuskielet.some(kieli => {
     const { koodisto, koodiArvo } = parseKoodiUri(kieli);
     return koodisto === 'oppilaitoksenopetuskieli' && koodiArvo === '4';

@@ -36,17 +36,29 @@ const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
       yhteystiedot: yhteystiedot.map(
         ({
           nimi,
-          osoite,
+          postiosoite,
           postinumero,
+          kayntiosoite,
+          kayntiosoitePostinumero,
           sahkoposti,
           puhelinnumero,
           verkkosivu,
         }) => ({
           nimi: _.pick(nimi || {}, kieliversiot),
-          osoite: {
-            osoite: _.pick(osoite || {}, kieliversiot),
-            postinumeroKoodiUri: postinumero?.value || null,
-          },
+          postiosoite:
+            !_.isEmpty(postiosoite) || postinumero
+              ? {
+                  osoite: _.pick(postiosoite || {}, kieliversiot),
+                  postinumeroKoodiUri: postinumero?.value || null,
+                }
+              : null,
+          kayntiosoite:
+            !_.isEmpty(kayntiosoite) || kayntiosoitePostinumero
+              ? {
+                  osoite: _.pick(kayntiosoite || {}, kieliversiot),
+                  postinumeroKoodiUri: kayntiosoitePostinumero?.value || null,
+                }
+              : null,
           sahkoposti: _.pick(sahkoposti || {}, kieliversiot),
           puhelinnumero: _.pick(puhelinnumero || {}, kieliversiot),
           wwwSivu: _.pick(verkkosivu || {}, kieliversiot),
@@ -58,15 +70,36 @@ const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
               hakijapalveluidenYhteystiedot.nimi || {},
               kieliversiot
             ),
-            osoite: {
-              osoite: _.pick(
-                hakijapalveluidenYhteystiedot.osoite || {},
-                kieliversiot
-              ),
-              postinumeroKoodiUri:
-                _.get(hakijapalveluidenYhteystiedot.postinumero, 'value') ||
-                null,
-            },
+            postiosoite:
+              !_.isEmpty(hakijapalveluidenYhteystiedot.postiosoite) ||
+              hakijapalveluidenYhteystiedot.postinumero
+                ? {
+                    osoite: _.pick(
+                      hakijapalveluidenYhteystiedot.postiosoite || {},
+                      kieliversiot
+                    ),
+                    postinumeroKoodiUri:
+                      _.get(
+                        hakijapalveluidenYhteystiedot.postinumero,
+                        'value'
+                      ) || null,
+                  }
+                : null,
+            kayntiosoite:
+              !_.isEmpty(hakijapalveluidenYhteystiedot.kayntiosoite) ||
+              hakijapalveluidenYhteystiedot.kayntiosoitePostinumero
+                ? {
+                    osoite: _.pick(
+                      hakijapalveluidenYhteystiedot.kayntiosoite || {},
+                      kieliversiot
+                    ),
+                    postinumeroKoodiUri:
+                      _.get(
+                        hakijapalveluidenYhteystiedot.kayntiosoitePostinumero,
+                        'value'
+                      ) || null,
+                  }
+                : null,
             sahkoposti: _.pick(
               hakijapalveluidenYhteystiedot.sahkoposti || {},
               kieliversiot

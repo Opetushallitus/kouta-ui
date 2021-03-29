@@ -25,17 +25,29 @@ const getOppilaitoksenOsaByFormValues = ({ tila, muokkaaja, ...values }) => {
       yhteystiedot: yhteystiedot.map(
         ({
           nimi,
-          osoite,
+          postiosoite,
           postinumero,
+          kayntiosoite,
+          kayntiosoitePostinumero,
           sahkoposti,
           puhelinnumero,
           verkkosivu,
         }) => ({
           nimi: _.pick(nimi || {}, kieliversiot),
-          osoite: {
-            osoite: _.pick(osoite || {}, kieliversiot),
-            postinumeroKoodiUri: postinumero?.value || null,
-          },
+          postiosoite:
+            !_.isEmpty(postiosoite) || postinumero
+              ? {
+                  osoite: _.pick(postiosoite || {}, kieliversiot),
+                  postinumeroKoodiUri: postinumero?.value || null,
+                }
+              : null,
+          kayntiosoite:
+            !_.isEmpty(kayntiosoitePostinumero) || kayntiosoitePostinumero
+              ? {
+                  osoite: _.pick(kayntiosoite || {}, kieliversiot),
+                  postinumeroKoodiUri: kayntiosoitePostinumero?.value || null,
+                }
+              : null,
           sahkoposti: _.pick(sahkoposti || {}, kieliversiot),
           puhelinnumero: _.pick(puhelinnumero || {}, kieliversiot),
           wwwSivu: _.pick(verkkosivu || {}, kieliversiot),

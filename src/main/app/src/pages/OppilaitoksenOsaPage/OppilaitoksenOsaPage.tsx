@@ -96,7 +96,7 @@ export const OppilaitoksenOsaPage = ({
         ? {
             ...formInitialValues,
             yhteystiedot: {
-              osoite: contactInfo.osoite || {},
+              postiosoite: contactInfo.osoite || {},
               postinumero: contactInfo.postinumeroKoodiUri
                 ? {
                     value: koodiUriHasVersion(contactInfo.postinumeroKoodiUri)

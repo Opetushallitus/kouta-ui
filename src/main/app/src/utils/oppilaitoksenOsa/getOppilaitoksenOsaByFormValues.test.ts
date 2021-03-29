@@ -24,11 +24,16 @@ test('getOppilaitoksenOsaByFormValues returns correct oppilaitoksen osa given fo
           fi: 'Yhteystiedon nimi',
           sv: 'Yhteystiedon nimi sv',
         },
-        osoite: {
+        postiosoite: {
           fi: 'Fi osoite',
           sv: 'Sv osoite',
         },
         postinumero: { value: 'postinumero_1#1' },
+        kayntiosoite: {
+          fi: 'Fi osoite',
+          sv: 'Sv osoite',
+        },
+        kayntiosoitePostinumero: { value: 'postinumero_1#1' },
         puhelinnumero: {
           fi: '1234',
           sv: '5678',

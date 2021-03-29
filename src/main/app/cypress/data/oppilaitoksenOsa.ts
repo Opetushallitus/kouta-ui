@@ -13,7 +13,7 @@ export default () => ({
     },
     opiskelijoita: 100,
     yhteystiedot: {
-      osoite: {
+      postiosoite: {
         osoite: {
           fi: 'Fi osoite',
           sv: 'Sv osoite',

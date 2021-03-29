@@ -14,7 +14,31 @@ Object {
       "fi": "<p><em>Fi esittely</em></p>",
       "sv": "<p><em>Sv esittely</em></p>",
     },
-    "hakijapalveluidenYhteystiedot": null,
+    "hakijapalveluidenYhteystiedot": Object {
+      "nimi": Object {
+        "fi": "Hakijapalveluiden nimi",
+        "sv": "Hakijapalveluiden nimi sv",
+      },
+      "postiosoite": Object {
+        "osoite": Object {
+          "fi": "Fi osoite",
+          "sv": "Sv osoite",
+        },
+        "postinumeroKoodiUri": "postinumero_1#1",
+      },
+      "puhelinnumero": Object {
+        "fi": "1234",
+        "sv": "5678",
+      },
+      "sahkoposti": Object {
+        "fi": "fi@sahkoposti.fi",
+        "sv": "sv@sahkoposti.sv",
+      },
+      "wwwSivu": Object {
+        "fi": "www.verkkosivu.fi",
+        "sv": "www.verkkosivu.sv",
+      },
+    },
     "kampuksia": 3,
     "korkeakouluja": 5,
     "opiskelijoita": 100,
@@ -31,11 +55,18 @@ Object {
     "toimipisteita": 9,
     "yhteystiedot": Array [
       Object {
+        "kayntiosoite": Object {
+          "osoite": Object {
+            "fi": "Fi osoite",
+            "sv": "Sv osoite",
+          },
+          "postinumeroKoodiUri": "postinumero_1#1",
+        },
         "nimi": Object {
           "fi": "Yhteystiedon nimi",
           "sv": "Yhteystiedon nimi sv",
         },
-        "osoite": Object {
+        "postiosoite": Object {
           "osoite": Object {
             "fi": "Fi osoite",
             "sv": "Sv osoite",

@@ -34,11 +34,16 @@ test('getOppilaitosByFormValues returns correct oppilaitos given form values', (
           fi: 'Yhteystiedon nimi',
           sv: 'Yhteystiedon nimi sv',
         },
-        osoite: {
+        postiosoite: {
           fi: 'Fi osoite',
           sv: 'Sv osoite',
         },
         postinumero: { value: 'postinumero_1#1' },
+        kayntiosoite: {
+          fi: 'Fi osoite',
+          sv: 'Sv osoite',
+        },
+        kayntiosoitePostinumero: { value: 'postinumero_1#1' },
         puhelinnumero: {
           fi: '1234',
           sv: '5678',
@@ -53,6 +58,34 @@ test('getOppilaitosByFormValues returns correct oppilaitos given form values', (
         },
       },
     ],
+    hakijapalveluidenYhteystiedot: {
+      nimi: {
+        fi: 'Hakijapalveluiden nimi',
+        sv: 'Hakijapalveluiden nimi sv',
+      },
+      postiosoite: {
+        fi: 'Fi osoite',
+        sv: 'Sv osoite',
+      },
+      postinumero: { value: 'postinumero_1#1' },
+      kayntiosoite: {
+        fi: 'Fi osoite',
+        sv: 'Sv osoite',
+      },
+      kayntiosoitePostinumero: { value: 'postinumero_1#1' },
+      puhelinnumero: {
+        fi: '1234',
+        sv: '5678',
+      },
+      sahkoposti: {
+        fi: 'fi@sahkoposti.fi',
+        sv: 'sv@sahkoposti.sv',
+      },
+      verkkosivu: {
+        fi: 'www.verkkosivu.fi',
+        sv: 'www.verkkosivu.sv',
+      },
+    },
   });
 
   expect(oppilaitos).toMatchSnapshot();

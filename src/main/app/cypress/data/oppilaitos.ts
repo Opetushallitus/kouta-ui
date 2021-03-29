@@ -20,7 +20,7 @@ export default () => {
             fi: 'Yhteystiedon nimi',
             sv: 'Yhteystiedon nimi sv',
           },
-          osoite: {
+          postiosoite: {
             osoite: {
               fi: 'Fi osoite',
               sv: 'Sv osoite',

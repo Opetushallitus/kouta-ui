@@ -7,7 +7,31 @@ Object {
     "fi": "<p><em>Fi esittely</em></p>",
     "sv": "<p><em>Sv esittely</em></p>",
   },
-  "hakijapalveluidenYhteystiedot": null,
+  "hakijapalveluidenYhteystiedot": Object {
+    "nimi": Object {
+      "fi": "Hakijapalveluiden nimi",
+      "sv": "Hakijapalveluiden nimi sv",
+    },
+    "postinumero": Object {
+      "value": "postinumero_1#1",
+    },
+    "postiosoite": Object {
+      "fi": "Fi osoite",
+      "sv": "Sv osoite",
+    },
+    "puhelinnumero": Object {
+      "fi": "1234",
+      "sv": "5678",
+    },
+    "sahkoposti": Object {
+      "fi": "fi@sahkoposti.fi",
+      "sv": "sv@sahkoposti.sv",
+    },
+    "verkkosivu": Object {
+      "fi": "www.verkkosivu.fi",
+      "sv": "www.verkkosivu.sv",
+    },
+  },
   "kieliversiot": Array [
     "fi",
     "sv",
@@ -39,16 +63,23 @@ Object {
   "tila": "tallennettu",
   "yhteystiedot": Array [
     Object {
+      "kayntiosoite": Object {
+        "fi": "Fi osoite",
+        "sv": "Sv osoite",
+      },
+      "kayntiosoitePostinumero": Object {
+        "value": "postinumero_1#1",
+      },
       "nimi": Object {
         "fi": "Yhteystiedon nimi",
         "sv": "Yhteystiedon nimi sv",
       },
-      "osoite": Object {
-        "fi": "Fi osoite",
-        "sv": "Sv osoite",
-      },
       "postinumero": Object {
         "value": "postinumero_1#1",
+      },
+      "postiosoite": Object {
+        "fi": "Fi osoite",
+        "sv": "Sv osoite",
       },
       "puhelinnumero": Object {
         "fi": "1234",

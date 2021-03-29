@@ -20,7 +20,14 @@ test('getFormValuesByOppilaitoksenOsa returns correct form values given oppilait
             fi: 'Yhteystiedon nimi',
             sv: 'Yhteystiedon nimi sv',
           },
-          osoite: {
+          postiosoite: {
+            osoite: {
+              fi: 'Fi osoite',
+              sv: 'Sv osoite',
+            },
+            postinumeroKoodiUri: 'postinumero_1#1',
+          },
+          kayntiosoite: {
             osoite: {
               fi: 'Fi osoite',
               sv: 'Sv osoite',

@@ -39,10 +39,10 @@ export const YhteystietoSection = ({ description, name, language }) => {
         {t('yleiset.postiosoite')}
       </GridColumn>
       <Divider margin={1} />
-      <GridColumn md={6} {...getTestIdProps('osoite')}>
+      <GridColumn md={6} {...getTestIdProps('postiosoite')}>
         <Field
           component={FormFieldInput}
-          name={`${name}.osoite.${language}`}
+          name={`${name}.postiosoite.${language}`}
           label={t('yleiset.postiosoite')}
         />
       </GridColumn>
@@ -60,14 +60,14 @@ export const YhteystietoSection = ({ description, name, language }) => {
       <GridColumn md={6} {...getTestIdProps('kayntiosoite')}>
         <Field
           component={FormFieldInput}
-          name={`${name}.kayntiOsoite.${language}`}
+          name={`${name}.kayntiosoite.${language}`}
           label={t('yleiset.kayntiosoite')}
         />
       </GridColumn>
       <GridColumn md={6} {...getTestIdProps('kayntiosoitePostinumero')}>
         <Field
           component={FormFieldPostinumeroSelect}
-          name={`${name}.kayntiOsoitePostinumero`}
+          name={`${name}.kayntiosoitePostinumero`}
           label={t('yleiset.postinumero')}
         />
       </GridColumn>

@@ -19,7 +19,14 @@ test('getFormValuesByOppilaitos returns correct form values given oppilaitos', (
             fi: 'Yhteystiedon nimi',
             sv: 'Yhteystiedon nimi sv',
           },
-          osoite: {
+          postiosoite: {
+            osoite: {
+              fi: 'Fi osoite',
+              sv: 'Sv osoite',
+            },
+            postinumeroKoodiUri: 'postinumero_1#1',
+          },
+          kayntiosoite: {
             osoite: {
               fi: 'Fi osoite',
               sv: 'Sv osoite',
@@ -40,6 +47,38 @@ test('getFormValuesByOppilaitos returns correct form values given oppilaitos', (
           },
         },
       ],
+      hakijapalveluidenYhteystiedot: {
+        nimi: {
+          fi: 'Hakijapalveluiden nimi',
+          sv: 'Hakijapalveluiden nimi sv',
+        },
+        postiosoite: {
+          osoite: {
+            fi: 'Fi osoite',
+            sv: 'Sv osoite',
+          },
+          postinumeroKoodiUri: 'postinumero_1#1',
+        },
+        kayntiosoite: {
+          osoite: {
+            fi: 'Fi osoite',
+            sv: 'Sv osoite',
+          },
+          postinumeroKoodiUri: 'postinumero_1#1',
+        },
+        puhelinnumero: {
+          fi: '1234',
+          sv: '5678',
+        },
+        sahkoposti: {
+          fi: 'fi@sahkoposti.fi',
+          sv: 'sv@sahkoposti.sv',
+        },
+        wwwSivu: {
+          fi: 'www.verkkosivu.fi',
+          sv: 'www.verkkosivu.sv',
+        },
+      },
       tiedekuntia: 4,
       tietoaOpiskelusta: [
         {

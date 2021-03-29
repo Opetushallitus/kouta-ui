@@ -31,9 +31,13 @@ const getFormValuesByOppilaitos = oppilaitos => {
     esittely: _.mapValues(esittely || {}, parseEditorState),
     yhteystiedot: yhteystiedot.map(yhteystieto => ({
       nimi: yhteystieto.nimi || {},
-      osoite: yhteystieto.osoite?.osoite || {},
-      postinumero: yhteystieto.osoite?.postinumeroKoodiUri
-        ? { value: yhteystieto.osoite.postinumeroKoodiUri }
+      postiosoite: yhteystieto.postiosoite?.osoite || {},
+      postinumero: yhteystieto.postiosoite?.postinumeroKoodiUri
+        ? { value: yhteystieto.postiosoite.postinumeroKoodiUri }
+        : null,
+      kayntiosoite: yhteystieto.kayntiosoite?.osoite || {},
+      kayntiosoitePostinumero: yhteystieto.kayntiosoite?.postinumeroKoodiUri
+        ? { value: yhteystieto.kayntiosoite.postinumeroKoodiUri }
         : null,
       verkkosivu: yhteystieto.wwwSivu || {},
       puhelinnumero: yhteystieto.puhelinnumero || {},
@@ -42,10 +46,12 @@ const getFormValuesByOppilaitos = oppilaitos => {
     hakijapalveluidenYhteystiedot: hakijapalveluidenYhteystiedot
       ? {
           nimi: hakijapalveluidenYhteystiedot.nimi || {},
-          osoite: hakijapalveluidenYhteystiedot.osoite?.osoite || {},
-          postinumero: hakijapalveluidenYhteystiedot.osoite?.postinumeroKoodiUri
+          postiosoite: hakijapalveluidenYhteystiedot.postiosoite?.osoite || {},
+          postinumero: hakijapalveluidenYhteystiedot.postiosoite
+            ?.postinumeroKoodiUri
             ? {
-                value: hakijapalveluidenYhteystiedot.osoite.postinumeroKoodiUri,
+                value:
+                  hakijapalveluidenYhteystiedot.postiosoite.postinumeroKoodiUri,
               }
             : null,
           verkkosivu: hakijapalveluidenYhteystiedot.wwwSivu || {},

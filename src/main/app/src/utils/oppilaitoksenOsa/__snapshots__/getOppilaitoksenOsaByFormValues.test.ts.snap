@@ -19,11 +19,18 @@ Object {
     "opiskelijoita": 100,
     "yhteystiedot": Array [
       Object {
+        "kayntiosoite": Object {
+          "osoite": Object {
+            "fi": "Fi osoite",
+            "sv": "Sv osoite",
+          },
+          "postinumeroKoodiUri": "postinumero_1#1",
+        },
         "nimi": Object {
           "fi": "Yhteystiedon nimi",
           "sv": "Yhteystiedon nimi sv",
         },
-        "osoite": Object {
+        "postiosoite": Object {
           "osoite": Object {
             "fi": "Fi osoite",
             "sv": "Sv osoite",

@@ -65,9 +65,9 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
       "maksullisuusKuvaus": {
         "fi": "<p>maksullisuus kuvaus</p>"
       },
+      "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 10,
       "muuKielivalikoima": [],
-      "onkoMaksullinen": true,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -189,9 +189,9 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
       "maksullisuusKuvaus": {
         "fi": "<p>maksullisuus kuvaus</p>"
       },
+      "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 10,
       "muuKielivalikoima": [],
-      "onkoMaksullinen": true,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -345,10 +345,10 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
       "maksullisuusKuvaus": {
         "fi": "<p>maksullisuus kuvaus</p>"
       },
-      "maksunMaara": null,
+      "maksullisuustyyppi": "lukuvuosimaksu",
+      "maksunMaara": 10,
       "muuKielivalikoima": [],
       "onkoApuraha": true,
-      "onkoMaksullinen": false,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -498,11 +498,11 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
       "maksullisuusKuvaus": {
         "fi": "<p>maksullisuus kuvaus</p>"
       },
+      "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 10,
       "muuKielivalikoima": [
         "kieli_zh#1"
       ],
-      "onkoMaksullinen": true,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -627,10 +627,10 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
       "maksullisuusKuvaus": {
         "fi": "<p>Maksullisuus kuvaus</p>"
       },
+      "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 20,
       "muuKielivalikoima": [],
       "onkoApuraha": true,
-      "onkoMaksullinen": true,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -783,10 +783,10 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
       "maksullisuusKuvaus": {
         "fi": "<p>Maksullisuus kuvaus</p>"
       },
+      "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 20,
       "muuKielivalikoima": [],
       "onkoApuraha": true,
-      "onkoMaksullinen": true,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -943,12 +943,12 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
       "maksullisuusKuvaus": {
         "fi": "<p>Maksullisuus kuvaus</p>"
       },
+      "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 20,
       "muuKielivalikoima": [
         "kieli_4#1"
       ],
       "onkoApuraha": true,
-      "onkoMaksullinen": true,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -1078,10 +1078,10 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
       "maksullisuusKuvaus": {
         "fi": "<p>Maksullisuus kuvaus</p>"
       },
+      "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 20,
       "muuKielivalikoima": [],
       "onkoApuraha": true,
-      "onkoMaksullinen": true,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],

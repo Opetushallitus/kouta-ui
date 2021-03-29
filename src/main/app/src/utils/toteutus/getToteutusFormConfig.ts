@@ -13,7 +13,10 @@ import {
   TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
 } from '#/src/constants';
-import { ToteutusFormValues } from '#/src/types/toteutusTypes';
+import {
+  ToteutusFormValues,
+  MaksullisuusTyyppi,
+} from '#/src/types/toteutusTypes';
 import {
   validate,
   validateExistence,
@@ -332,19 +335,18 @@ const config = createFormConfigBuilder().registerSections([
         name: 'jarjestamistiedot.opetustapaKuvaus',
       }),
       {
-        field: '.maksullisuus.tyyppi',
-        validate: validateIfJulkaistu(eb =>
-          eb.validateExistence('jarjestamistiedot.maksullisuus.tyyppi')
-        ),
+        field: '.maksullisuustyyppi',
         required: true,
       },
       {
-        field: '.maksullisuus.maksu',
-        validate: validateIfJulkaistu((eb, values) =>
-          values?.jarjestamistiedot?.maksullisuus?.tyyppi === 'kylla'
-            ? eb.validateExistence('jarjestamistiedot.maksullisuus.maksu')
-            : eb
-        ),
+        field: '.maksunMaara',
+        validate: (eb, values) =>
+          validateIf(
+            values?.tila === JULKAISUTILA.JULKAISTU &&
+              values?.jarjestamistiedot?.maksullisuustyyppi !==
+                MaksullisuusTyyppi.MAKSUTON,
+            validateInteger('jarjestamistiedot.maksunMaara', { min: 0 })
+          )(eb),
       },
       createOptionalTranslatedFieldConfig({
         name: 'jarjestamistiedot.maksullisuusKuvaus',

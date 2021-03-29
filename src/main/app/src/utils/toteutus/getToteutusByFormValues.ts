@@ -40,9 +40,8 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
 
   const osioKuvaukset = values?.jarjestamistiedot?.osioKuvaukset || {};
 
-  const maksullisuustyyppi = values?.jarjestamistiedot?.maksullisuus?.tyyppi;
-  const onkoMaksullinen = maksullisuustyyppi === 'kylla';
-  const maksullisuusMaksu = values?.jarjestamistiedot?.maksullisuus?.maksu;
+  const maksullisuustyyppi = values?.jarjestamistiedot?.maksullisuustyyppi;
+  const maksunMaara = values?.jarjestamistiedot?.maksunMaara;
 
   const osaamisalaLinkit = values?.osaamisalat?.osaamisalaLinkit || {};
   const osaamisalaLinkkiOtsikot =
@@ -79,10 +78,8 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
           })
         ),
         opetuskieliKoodiUrit: opetuskielet || [],
-        onkoMaksullinen,
-        maksunMaara: onkoMaksullinen
-          ? maybeParseNumber(maksullisuusMaksu)
-          : null,
+        maksullisuustyyppi,
+        maksunMaara: maybeParseNumber(maksunMaara),
         opetustapaKoodiUrit: values?.jarjestamistiedot?.opetustapa || [],
         opetusaikaKoodiUrit: values?.jarjestamistiedot?.opetusaika || [],
         opetuskieletKuvaus: _fp.flow(

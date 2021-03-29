@@ -10,6 +10,7 @@ import {
 } from '#/src/components/formFields';
 import Spacing from '#/src/components/Spacing';
 import { InputIcon } from '#/src/components/virkailija';
+import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 import { getTestIdProps } from '#/src/utils';
 
 const MaksuInputWrapper = styled.div`
@@ -18,9 +19,12 @@ const MaksuInputWrapper = styled.div`
 `;
 
 export const MaksuField = ({ input: { value }, maksuName, t }) => {
-  return ['kylla', 'lukuvuosimaksu'].includes(value) ? (
+  return [
+    MaksullisuusTyyppi.LUKUVUOSIMAKSU,
+    MaksullisuusTyyppi.MAKSULLINEN,
+  ].includes(value) ? (
     <Spacing marginTop={2}>
-      <MaksuInputWrapper {...getTestIdProps('maksu')}>
+      <MaksuInputWrapper>
         <Field
           name={maksuName}
           component={FormFieldInput}
@@ -39,12 +43,12 @@ export const MaksullisuusFields = ({ name, isKorkeakoulu, label }) => {
 
   const options = useMemo(() => {
     return [
-      { value: 'kylla', label: t('yleiset.kylla') },
-      { value: 'ei', label: t('yleiset.ei') },
+      { value: MaksullisuusTyyppi.MAKSULLINEN, label: t('yleiset.kylla') },
+      { value: MaksullisuusTyyppi.MAKSUTON, label: t('yleiset.ei') },
       ...(isKorkeakoulu
         ? [
             {
-              value: 'lukuvuosimaksu',
+              value: MaksullisuusTyyppi.LUKUVUOSIMAKSU,
               label: t('toteutuslomake.kaytossaLukuvuosimaksu'),
             },
           ]
@@ -52,7 +56,7 @@ export const MaksullisuusFields = ({ name, isKorkeakoulu, label }) => {
     ];
   }, [t, isKorkeakoulu]);
 
-  const tyyppiName = `${name}.tyyppi`;
+  const tyyppiName = `${name}.maksullisuustyyppi`;
 
   return (
     <>
@@ -67,7 +71,7 @@ export const MaksullisuusFields = ({ name, isKorkeakoulu, label }) => {
       <Field
         name={tyyppiName}
         component={MaksuField}
-        maksuName={`${name}.maksu`}
+        maksuName={`${name}.maksunMaara`}
         t={t}
       />
     </>

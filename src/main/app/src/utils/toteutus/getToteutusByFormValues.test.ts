@@ -8,6 +8,7 @@ import {
   JULKAISUTILA,
   KOULUTUSTYYPPI,
 } from '#/src/constants';
+import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 import getToteutusByFormValues from '#/src/utils/toteutus/getToteutusByFormValues';
 
 test('getToteutusByFormValues returns correct toteutus given form values', () => {
@@ -35,11 +36,12 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
     kieliversiot: ['fi', 'sv'],
     tarjoajat: ['org1', 'org2'],
     jarjestamistiedot: {
-      maksullisuus: {
-        tyyppi: 'kylla',
-        maksu: '50.50',
+      maksullisuustyyppi: MaksullisuusTyyppi.MAKSULLINEN,
+      maksunMaara: 50.5,
+      maksullisuusKuvaus: {
+        fi: parseEditorState('Fi maksullisuuskuvaus'),
+        sv: parseEditorState('Sv maksullisuuskuvaus'),
       },
-      maksumaara: 100,
       opetustapa: ['opetustapa_1#1', 'opetustapa_2#1'],
       opetusaika: ['opetusaika_1#1', 'opetusaika_2#1'],
       opetuskieli: [
@@ -67,10 +69,7 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
         fi: parseEditorState('Fi kielikuvaus'),
         sv: parseEditorState('Sv kielikuvaus'),
       },
-      maksullisuusKuvaus: {
-        fi: parseEditorState('Fi maksullisuuskuvaus'),
-        sv: parseEditorState('Sv maksullisuuskuvaus'),
-      },
+
       osiot: [{ value: 'osio_1#1' }, { value: 'osio_2#1' }],
       osioKuvaukset: {
         'osio_1#1': {

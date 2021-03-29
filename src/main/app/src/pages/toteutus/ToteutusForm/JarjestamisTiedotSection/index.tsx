@@ -222,7 +222,7 @@ export const JarjestamisTiedotSection = ({
           <FlexItem grow={0} basis="30%">
             <MaksullisuusFields
               isKorkeakoulu={isKorkeakoulu}
-              name={`${name}.maksullisuus`}
+              name={name}
               label={t('toteutuslomake.onkoOpetusMaksullista')}
             />
           </FlexItem>

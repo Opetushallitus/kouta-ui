@@ -3,6 +3,7 @@ import {
   ApurahaYksikko,
   JULKAISUTILA,
 } from '#/src/constants';
+import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 import getFormValuesByToteutus from '#/src/utils/toteutus/getFormValuesByToteutus';
 
 test('getFormValuesByToteutus returns correct form values given toteutus', () => {
@@ -79,16 +80,12 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
             },
           },
         ],
-        maksullisuus: {
-          maksu: '',
-        },
-        maksumaara: {},
+        maksullisuustyyppi: MaksullisuusTyyppi.MAKSULLINEN,
+        maksunMaara: 500.0,
         maksullisuusKuvaus: {
           fi: 'Fi maksullisuuskuvaus',
           sv: 'Sv maksullisuuskuvaus',
         },
-        onkoMaksullinen: true,
-        onkoStipendia: true,
         suunniteltuKestoKuvaus: {
           fi: 'Fi suunniteltuKestoKuvaus',
           sv: 'Sv suunniteltuKestoKuvaus',

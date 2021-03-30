@@ -16,7 +16,7 @@ import { useUrls } from '#/src/contexts/UrlContext';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import koodiUriHasVersion from '#/src/utils/koodi/koodiUriHasVersion';
-import getFormValuesByOppilaitos from '#/src/utils/oppilaitos/getFormValuesByOppilaitos';
+import { getFormValuesByOppilaitos } from '#/src/utils/oppilaitos/getFormValuesByOppilaitos';
 import { useOppilaitosByOid } from '#/src/utils/oppilaitos/getOppilaitosByOid';
 import getOrganisaatioContactInfo from '#/src/utils/organisaatio/getOrganisaatioContactInfo';
 
@@ -89,10 +89,12 @@ export const OppilaitosPage = ({
                         : `${contactInfo.postinumeroKoodiUri}#2`,
                     }
                   : undefined,
-                verkkosivu: contactInfo.verkkosivu || '',
                 puhelinnumero: contactInfo.puhelinnumero || '',
               },
             ],
+            perustiedot: {
+              wwwSivuUrl: contactInfo.verkkosivu || '',
+            },
           }
         : oppilaitos
         ? getFormValuesByOppilaitos(oppilaitos)

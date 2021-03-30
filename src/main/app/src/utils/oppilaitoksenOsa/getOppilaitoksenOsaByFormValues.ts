@@ -38,7 +38,6 @@ export const getOppilaitoksenOsaByFormValues = ({
           kayntiosoitePostinumero,
           sahkoposti,
           puhelinnumero,
-          verkkosivu,
         }) => ({
           nimi: pickTranslations(nimi || {}),
           postiosoite:
@@ -57,7 +56,6 @@ export const getOppilaitoksenOsaByFormValues = ({
               : null,
           sahkoposti: pickTranslations(sahkoposti || {}),
           puhelinnumero: pickTranslations(puhelinnumero || {}),
-          wwwSivu: pickTranslations(verkkosivu || {}),
         })
       ),
       esittely: _.mapValues(
@@ -68,6 +66,10 @@ export const getOppilaitoksenOsaByFormValues = ({
         ? parseInt(perustiedot.opiskelijoita)
         : null,
       kampus: pickTranslations(perustiedot?.kampus || {}),
+      wwwSivu: perustiedot.wwwSivuUrl && {
+        url: pickTranslations(perustiedot.wwwSivuUrl || {}),
+        nimi: pickTranslations(perustiedot.wwwSivuNimi || {}),
+      },
     },
   };
 };

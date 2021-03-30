@@ -17,6 +17,16 @@ Object {
       "sv": "Sv kampus",
     },
     "opiskelijoita": 100,
+    "wwwSivu": Object {
+      "nimi": Object {
+        "fi": "Verkkosivu fi",
+        "sv": "Verkkosivu sv",
+      },
+      "url": Object {
+        "fi": "www.verkkosivu.fi",
+        "sv": "www.verkkosivu.sv",
+      },
+    },
     "yhteystiedot": Array [
       Object {
         "kayntiosoite": Object {
@@ -44,10 +54,6 @@ Object {
         "sahkoposti": Object {
           "fi": "fi@sahkoposti.fi",
           "sv": "sv@sahkoposti.sv",
-        },
-        "wwwSivu": Object {
-          "fi": "www.verkkosivu.fi",
-          "sv": "www.verkkosivu.sv",
         },
       },
     ],

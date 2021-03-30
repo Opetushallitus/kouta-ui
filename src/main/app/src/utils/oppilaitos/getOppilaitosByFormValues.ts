@@ -47,7 +47,6 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
           kayntiosoitePostinumero,
           sahkoposti,
           puhelinnumero,
-          verkkosivu,
         }) => ({
           nimi: pickTranslations(nimi || {}),
           postiosoite:
@@ -66,7 +65,6 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
               : null,
           sahkoposti: pickTranslations(sahkoposti || {}),
           puhelinnumero: pickTranslations(puhelinnumero || {}),
-          wwwSivu: pickTranslations(verkkosivu || {}),
         })
       ),
       hakijapalveluidenYhteystiedot: hy
@@ -89,7 +87,6 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
                 : null,
             sahkoposti: pickTranslations(hy.sahkoposti || {}),
             puhelinnumero: pickTranslations(hy.puhelinnumero || {}),
-            wwwSivu: pickTranslations(hy.verkkosivu || {}),
           }
         : null,
       esittely: _.mapValues(
@@ -104,6 +101,10 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
       yksikoita: parseNumeric(perustiedot?.yksikoita),
       toimipisteita: parseNumeric(perustiedot?.toimipisteita),
       akatemioita: parseNumeric(perustiedot?.akatemioita),
+      wwwSivu: perustiedot?.wwwSivuUrl && {
+        url: pickTranslations(perustiedot.wwwSivuUrl || {}),
+        nimi: pickTranslations(perustiedot.wwwSivuNimi || {}),
+      },
     },
   };
 };

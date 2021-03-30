@@ -17,6 +17,14 @@ test('getOppilaitoksenOsaByFormValues returns correct oppilaitoksen osa given fo
         fi: 'Fi kampus',
         sv: 'Sv kampus',
       },
+      wwwSivuUrl: {
+        fi: 'www.verkkosivu.fi',
+        sv: 'www.verkkosivu.sv',
+      },
+      wwwSivuNimi: {
+        fi: 'Verkkosivu fi',
+        sv: 'Verkkosivu sv',
+      },
     },
     yhteystiedot: [
       {
@@ -41,10 +49,6 @@ test('getOppilaitoksenOsaByFormValues returns correct oppilaitoksen osa given fo
         sahkoposti: {
           fi: 'fi@sahkoposti.fi',
           sv: 'sv@sahkoposti.sv',
-        },
-        verkkosivu: {
-          fi: 'www.verkkosivu.fi',
-          sv: 'www.verkkosivu.sv',
         },
       },
     ],

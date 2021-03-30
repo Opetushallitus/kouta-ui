@@ -21,6 +21,13 @@ const fillPerustiedotSection = () => {
     getByTestId('toimipisteita').find('input').pipe(paste('6'));
     getByTestId('akatemioita').find('input').pipe(paste('7'));
 
+    cy.findByLabelText(/oppilaitoslomake\.wwwSivu\b/).pipe(
+      paste('www.verkkosivu.fi')
+    );
+    cy.findByLabelText(/oppilaitoslomake\.wwwSivuNimi/).pipe(
+      paste('Verkkosivu fi')
+    );
+
     jatka();
   });
 };
@@ -73,8 +80,6 @@ const fillYhteystiedotSection = () => {
 
     cy.findByLabelText(/yleiset.puhelinnumero/).pipe(paste('12345'));
 
-    cy.findByLabelText(/yleiset.verkkosivu/).pipe(paste('www.verkkosivu.fi'));
-
     jatka();
   });
 };
@@ -109,8 +114,6 @@ const fillHakijapalveluidenYhteystiedotSection = () => {
     );
 
     cy.findByLabelText(/yleiset.puhelinnumero/).pipe(paste('12345'));
-
-    cy.findByLabelText(/yleiset.verkkosivu/).pipe(paste('www.verkkosivu.fi'));
 
     jatka();
   });

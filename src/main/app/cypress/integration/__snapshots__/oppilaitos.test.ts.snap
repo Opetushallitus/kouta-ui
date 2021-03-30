@@ -1,55 +1,3 @@
-exports[`createOppilaitos > should be able to create oppilaitos #0`] =
-{
-  "esikatselu": false,
-  "kielivalinta": [
-    "fi"
-  ],
-  "metadata": {
-    "akatemioita": 7,
-    "esittely": {
-      "fi": "<p>Esittely</p>"
-    },
-    "hakijapalveluidenYhteystiedot": null,
-    "kampuksia": 4,
-    "korkeakouluja": 2,
-    "opiskelijoita": 1,
-    "tiedekuntia": 3,
-    "tietoaOpiskelusta": [
-      {
-        "otsikkoKoodiUri": "organisaationkuvaustiedot_02#1",
-        "teksti": {
-          "fi": "<p>Tietoa</p>"
-        }
-      }
-    ],
-    "toimipisteita": 6,
-    "yhteystiedot": [
-      {
-        "postiosoite": {
-          "osoite": {
-            "fi": "Osoite"
-          },
-          "postinumeroKoodiUri": "posti_00350#2"
-        },
-        "puhelinnumero": {
-          "fi": "12345"
-        },
-        "sahkoposti": {
-          "fi": "sahkoposti@sahkoposti.fi"
-        },
-        "wwwSivu": {
-          "fi": "http://www.verkkosivu.fi"
-        }
-      }
-    ],
-    "yksikoita": 5
-  },
-  "muokkaaja": "1.2.246.562.24.62301161440",
-  "oid": "1.1.1.1.1.1",
-  "organisaatioOid": "1.1.1.1.1.1",
-  "tila": "julkaistu"
-};
-
 exports[`editOppilaitos > should be able to edit oppilaitos #0`] =
 {
   "esikatselu": false,
@@ -92,13 +40,18 @@ exports[`editOppilaitos > should be able to edit oppilaitos #0`] =
         },
         "sahkoposti": {
           "fi": "fi@sahkoposti.fi"
-        },
-        "wwwSivu": {
-          "fi": "http://www.verkkosivu.fi"
         }
       }
     ],
-    "yksikoita": 2
+    "yksikoita": 2,
+    "wwwSivu": {
+      url: {
+        "fi": "http://www.verkkosivu.fi"
+      },
+      nimi: {
+        "fi": "Verkkosivu fi"
+      }
+    }
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "oid": "1.1.1.1.1.1",
@@ -154,19 +107,23 @@ exports[`createOppilaitos > should be able to create oppilaitos without hakijapa
         "sahkoposti": {
           "fi": "sahkoposti@sahkoposti.fi"
         },
-        "wwwSivu": {
-          "fi": "http://www.verkkosivu.fi"
-        }
       }
     ],
-    "yksikoita": 5
+    "yksikoita": 5,
+    "wwwSivu": {
+      url: {
+        "fi": "http://www.verkkosivu.fi"
+      },
+      nimi: {
+        "fi": "Verkkosivu fi"
+      }
+    }
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "oid": "1.1.1.1.1.1",
   "organisaatioOid": "1.1.1.1.1.1",
   "tila": "julkaistu"
 };
-
 
 exports[`createOppilaitos > should be able to create oppilaitos with hakijapalveluyhteystiedot #0`] =
 {
@@ -206,9 +163,6 @@ exports[`createOppilaitos > should be able to create oppilaitos with hakijapalve
         },
         "sahkoposti": {
           "fi": "sahkoposti@sahkoposti.fi"
-        },
-        "wwwSivu": {
-          "fi": "http://www.verkkosivu.fi"
         }
       }
     ],
@@ -233,9 +187,6 @@ exports[`createOppilaitos > should be able to create oppilaitos with hakijapalve
       },
       "sahkoposti": {
         "fi": "sahkoposti@sahkoposti.fi"
-      },
-      "wwwSivu": {
-        "fi": "http://www.verkkosivu.fi"
       }
     }
   },

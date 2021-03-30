@@ -1,4 +1,4 @@
-import getFormValuesByOppilaitoksenOsa from '#/src/utils/oppilaitoksenOsa/getFormValuesByOppilaitoksenOsa';
+import { getFormValuesByOppilaitoksenOsa } from '#/src/utils/oppilaitoksenOsa/getFormValuesByOppilaitoksenOsa';
 
 test('getFormValuesByOppilaitoksenOsa returns correct form values given oppilaitoksen osa', () => {
   const values = getFormValuesByOppilaitoksenOsa({
@@ -42,12 +42,18 @@ test('getFormValuesByOppilaitoksenOsa returns correct form values given oppilait
             fi: 'fi@sahkoposti.fi',
             sv: 'sv@sahkoposti.sv',
           },
-          wwwSivu: {
-            fi: 'www.verkkosivu.fi',
-            sv: 'www.verkkosivu.sv',
-          },
         },
       ],
+      wwwSivu: {
+        url: {
+          fi: 'www.verkkosivu.fi',
+          sv: 'www.verkkosivu.sv',
+        },
+        nimi: {
+          fi: 'Verkkosivu fi',
+          sv: 'Verkkosivu sv',
+        },
+      },
     },
     muokkaaja: '1.1.1.1',
     tila: 'tallennettu',

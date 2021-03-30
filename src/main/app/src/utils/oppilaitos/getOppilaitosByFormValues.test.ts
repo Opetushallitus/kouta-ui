@@ -27,6 +27,14 @@ test('getOppilaitosByFormValues returns correct oppilaitos given form values', (
       yksikoita: '2',
       toimipisteita: '9',
       akatemioita: '1',
+      wwwSivuUrl: {
+        fi: 'www.verkkosivu.fi',
+        sv: 'www.verkkosivu.sv',
+      },
+      wwwSivuNimi: {
+        fi: 'Verkkosivu fi',
+        sv: 'Verkkosivu sv',
+      },
     },
     yhteystiedot: [
       {
@@ -52,10 +60,6 @@ test('getOppilaitosByFormValues returns correct oppilaitos given form values', (
           fi: 'fi@sahkoposti.fi',
           sv: 'sv@sahkoposti.sv',
         },
-        verkkosivu: {
-          fi: 'www.verkkosivu.fi',
-          sv: 'www.verkkosivu.sv',
-        },
       },
     ],
     hakijapalveluidenYhteystiedot: {
@@ -80,10 +84,6 @@ test('getOppilaitosByFormValues returns correct oppilaitos given form values', (
       sahkoposti: {
         fi: 'fi@sahkoposti.fi',
         sv: 'sv@sahkoposti.sv',
-      },
-      verkkosivu: {
-        fi: 'www.verkkosivu.fi',
-        sv: 'www.verkkosivu.sv',
       },
     },
   });

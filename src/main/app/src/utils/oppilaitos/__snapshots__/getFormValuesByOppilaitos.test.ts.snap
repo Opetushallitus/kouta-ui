@@ -27,10 +27,6 @@ Object {
       "fi": "fi@sahkoposti.fi",
       "sv": "sv@sahkoposti.sv",
     },
-    "verkkosivu": Object {
-      "fi": "www.verkkosivu.fi",
-      "sv": "www.verkkosivu.sv",
-    },
   },
   "kieliversiot": Array [
     "fi",
@@ -44,6 +40,14 @@ Object {
     "opiskelijoita": 100,
     "tiedekuntia": 4,
     "toimipisteita": 9,
+    "wwwSivuNimi": Object {
+      "fi": "Verkkosivu fi",
+      "sv": "Verkkosivu sv",
+    },
+    "wwwSivuUrl": Object {
+      "fi": "www.verkkosivu.fi",
+      "sv": "www.verkkosivu.sv",
+    },
     "yksikoita": 2,
   },
   "teemakuva": undefined,
@@ -88,10 +92,6 @@ Object {
       "sahkoposti": Object {
         "fi": "fi@sahkoposti.fi",
         "sv": "sv@sahkoposti.sv",
-      },
-      "verkkosivu": Object {
-        "fi": "www.verkkosivu.fi",
-        "sv": "www.verkkosivu.sv",
       },
     },
   ],

@@ -31,16 +31,22 @@ export default () => {
             fi: '1234',
             sv: '5678',
           },
-          wwwSivu: {
-            fi: 'http://www.verkkosivu.fi',
-            sv: 'http://www.verkkosivu.sv',
-          },
           sahkoposti: {
             fi: 'fi@sahkoposti.fi',
             sv: 'sv@sahkoposti.sv',
           },
         },
       ],
+      wwwSivu: {
+        url: {
+          fi: 'http://www.verkkosivu.fi',
+          sv: 'http://www.verkkosivu.sv',
+        },
+        nimi: {
+          fi: 'Verkkosivu fi',
+          sv: 'Verkkosivu sv',
+        },
+      },
       tiedekuntia: 4,
       tietoaOpiskelusta: [
         {

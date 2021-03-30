@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 import { parseEditorState } from '#/src/components/Editor/utils';
 
-const getFormValuesByOppilaitos = oppilaitos => {
+export const getFormValuesByOppilaitos = oppilaitos => {
   const {
     kielivalinta,
     tila,
@@ -21,6 +21,7 @@ const getFormValuesByOppilaitos = oppilaitos => {
       yksikoita,
       toimipisteita,
       akatemioita,
+      wwwSivu,
     },
   } = oppilaitos;
 
@@ -39,7 +40,6 @@ const getFormValuesByOppilaitos = oppilaitos => {
       kayntiosoitePostinumero: yhteystieto.kayntiosoite?.postinumeroKoodiUri
         ? { value: yhteystieto.kayntiosoite.postinumeroKoodiUri }
         : null,
-      verkkosivu: yhteystieto.wwwSivu || {},
       puhelinnumero: yhteystieto.puhelinnumero || {},
       sahkoposti: yhteystieto.sahkoposti || {},
     })),
@@ -54,7 +54,6 @@ const getFormValuesByOppilaitos = oppilaitos => {
                   hakijapalveluidenYhteystiedot.postiosoite.postinumeroKoodiUri,
               }
             : null,
-          verkkosivu: hakijapalveluidenYhteystiedot.wwwSivu || {},
           puhelinnumero: hakijapalveluidenYhteystiedot.puhelinnumero || {},
           sahkoposti: hakijapalveluidenYhteystiedot.sahkoposti || {},
         }
@@ -81,9 +80,9 @@ const getFormValuesByOppilaitos = oppilaitos => {
       toimipisteita: _.isNumber(toimipisteita) ? toimipisteita : '',
       akatemioita: _.isNumber(akatemioita) ? akatemioita : '',
       logo,
+      wwwSivuUrl: wwwSivu?.url || {},
+      wwwSivuNimi: wwwSivu?.nimi || {},
     },
     teemakuva,
   };
 };
-
-export default getFormValuesByOppilaitos;

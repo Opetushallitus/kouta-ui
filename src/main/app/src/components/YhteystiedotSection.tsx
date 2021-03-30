@@ -6,7 +6,6 @@ import { Field, FieldArray } from 'redux-form';
 import {
   FormFieldInput,
   FormFieldPostinumeroSelect,
-  FormFieldUrlInput,
 } from '#/src/components/formFields';
 import { Divider } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
@@ -87,13 +86,6 @@ export const YhteystietoSection = ({ description, name, language }) => {
           component={FormFieldInput}
           name={`${name}.puhelinnumero.${language}`}
           label={t('yleiset.puhelinnumero')}
-        />
-      </GridColumn>
-      <GridColumn md={6}>
-        <Field
-          component={FormFieldUrlInput}
-          name={`${name}.verkkosivu.${language}`}
-          label={t('yleiset.verkkosivu')}
         />
       </GridColumn>
     </GridRow>

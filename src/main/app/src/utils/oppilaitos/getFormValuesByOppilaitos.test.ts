@@ -1,4 +1,4 @@
-import getFormValuesByOppilaitos from '#/src/utils/oppilaitos/getFormValuesByOppilaitos';
+import { getFormValuesByOppilaitos } from '#/src/utils/oppilaitos/getFormValuesByOppilaitos';
 
 test('getFormValuesByOppilaitos returns correct form values given oppilaitos', () => {
   const values = getFormValuesByOppilaitos({
@@ -40,10 +40,6 @@ test('getFormValuesByOppilaitos returns correct form values given oppilaitos', (
           sahkoposti: {
             fi: 'fi@sahkoposti.fi',
             sv: 'sv@sahkoposti.sv',
-          },
-          wwwSivu: {
-            fi: 'www.verkkosivu.fi',
-            sv: 'www.verkkosivu.sv',
           },
         },
       ],
@@ -91,6 +87,16 @@ test('getFormValuesByOppilaitos returns correct form values given oppilaitos', (
       ],
       toimipisteita: 9,
       yksikoita: 2,
+      wwwSivu: {
+        url: {
+          fi: 'www.verkkosivu.fi',
+          sv: 'www.verkkosivu.sv',
+        },
+        nimi: {
+          fi: 'Verkkosivu fi',
+          sv: 'Verkkosivu sv',
+        },
+      },
     },
   });
 

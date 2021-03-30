@@ -21,7 +21,7 @@ import { useUrls } from '#/src/contexts/UrlContext';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import useOrganisaatio, { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
 import koodiUriHasVersion from '#/src/utils/koodi/koodiUriHasVersion';
-import getFormValuesByOppilaitoksenOsa from '#/src/utils/oppilaitoksenOsa/getFormValuesByOppilaitoksenOsa';
+import { getFormValuesByOppilaitoksenOsa } from '#/src/utils/oppilaitoksenOsa/getFormValuesByOppilaitoksenOsa';
 import { useOppilaitoksenOsaByOid } from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaByOid';
 import getOrganisaatioContactInfo from '#/src/utils/organisaatio/getOrganisaatioContactInfo';
 import getOrganisaatioParentOidPath from '#/src/utils/organisaatio/getOrganisaatioParentOidPath';
@@ -99,17 +99,21 @@ export const OppilaitoksenOsaPage = ({
       ...(formMode === FormMode.CREATE
         ? {
             ...formInitialValues,
-            yhteystiedot: {
-              postiosoite: contactInfo.osoite || {},
-              postinumero: contactInfo.postinumeroKoodiUri
-                ? {
-                    value: koodiUriHasVersion(contactInfo.postinumeroKoodiUri)
-                      ? contactInfo.postinumeroKoodiUri
-                      : `${contactInfo.postinumeroKoodiUri}#2`,
-                  }
-                : undefined,
-              verkkosivu: contactInfo.verkkosivu || '',
-              puhelinnumero: contactInfo.puhelinnumero || '',
+            yhteystiedot: [
+              {
+                postiosoite: contactInfo.osoite || {},
+                postinumero: contactInfo.postinumeroKoodiUri
+                  ? {
+                      value: koodiUriHasVersion(contactInfo.postinumeroKoodiUri)
+                        ? contactInfo.postinumeroKoodiUri
+                        : `${contactInfo.postinumeroKoodiUri}#2`,
+                    }
+                  : undefined,
+                puhelinnumero: contactInfo.puhelinnumero || '',
+              },
+            ],
+            perustiedot: {
+              wwwSivuUrl: contactInfo.verkkosivu || '',
             },
           }
         : oppilaitoksenOsa

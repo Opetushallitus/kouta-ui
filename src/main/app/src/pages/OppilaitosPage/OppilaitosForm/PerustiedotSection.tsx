@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import DividerHeading from '#/src/components/DividerHeading';
-import { FormFieldInput } from '#/src/components/formFields';
+import { FormFieldInput, FormFieldUrlInput } from '#/src/components/formFields';
 import GridColumn from '#/src/components/GridColumn';
 import GridRow from '#/src/components/GridRow';
 import LogoSection from '#/src/components/LogoSection';
@@ -23,7 +23,7 @@ const InfoLabel = props => (
 
 const InfoValue = props => <Box flexGrow={1} {...props} />;
 
-const TiedotSection = ({ name, t }) => {
+const TiedotSection = ({ language, name, t }) => {
   return (
     <>
       <Typography as="div" mb={2}>
@@ -87,6 +87,24 @@ const TiedotSection = ({ name, t }) => {
             label={t('oppilaitoslomake.akatemioita')}
           />
         </GridColumn>
+      </GridRow>
+      <GridRow gutter={2}>
+        <GridColumn md={6}>
+          <Field
+            component={FormFieldUrlInput}
+            name={`${name}.wwwSivuUrl.${language}`}
+            label={t('oppilaitoslomake.wwwSivu')}
+          />
+        </GridColumn>
+        <GridColumn md={6}>
+          <Field
+            component={FormFieldInput}
+            name={`${name}.wwwSivuNimi.${language}`}
+            label={t('oppilaitoslomake.wwwSivuNimi')}
+          />
+        </GridColumn>
+      </GridRow>
+      <GridRow gutter={2}>
         <GridColumn md={12} {...getTestIdProps('logo')}>
           <LogoSection
             name={`${name}.logo`}
@@ -98,8 +116,7 @@ const TiedotSection = ({ name, t }) => {
   );
 };
 
-const OrganisaatioSection = ({ organisaatio, t }) => {
-  const language = useUserLanguage();
+const OrganisaatioSection = ({ language, organisaatio, t }) => {
   const opetuskieletUris = _.get(organisaatio, 'kieletUris') || [];
   const paikkakuntaUri = _.get(organisaatio, 'kotipaikkaUri');
   const oppilaitostyyppiUri = _.get(organisaatio, 'oppilaitosTyyppiUri');
@@ -158,14 +175,19 @@ const OrganisaatioSection = ({ organisaatio, t }) => {
 const PerustiedotSection = ({ name, organisaatioOid }) => {
   const { organisaatio } = useOrganisaatio(organisaatioOid);
   const { t } = useTranslation();
+  const language = useLanguage();
 
   return (
     <>
-      <OrganisaatioSection organisaatio={organisaatio} t={t} />
+      <OrganisaatioSection
+        organisaatio={organisaatio}
+        language={language}
+        t={t}
+      />
       <DividerHeading mt={4}>
         {t('oppilaitoslomake.syotaPerustiedot')}
       </DividerHeading>
-      <TiedotSection name={name} t={t} />
+      <TiedotSection name={name} t={t} language={language} />
     </>
   );
 };

@@ -55,8 +55,8 @@ export const useNimiFromKoulutusKoodi = ({
 }) => {
   const languages = useSelectedLanguages();
   const koulutusValue = useFieldValue(koulutusFieldName)?.value;
-  const nimiFieldValue = useFieldValue(nimiFieldName);
   const koulutusKoodi = useKoodi(koulutusValue)?.koodi;
+  const nimiFieldValue = useFieldValue(nimiFieldName);
   const isDirty = useIsDirty();
   const { change } = useBoundFormActions();
 

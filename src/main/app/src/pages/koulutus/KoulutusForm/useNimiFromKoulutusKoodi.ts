@@ -15,10 +15,15 @@ function shouldUpdateNimi(
   nimiFieldName,
   koulutusChanged: boolean,
   languagesChanged: boolean,
-  koulutusKoodi
+  koulutusKoodi,
+  koulutusValue
 ) {
   return (
-    nimiFieldName && (koulutusChanged || languagesChanged) && koulutusKoodi
+    nimiFieldName &&
+    (koulutusChanged || languagesChanged) &&
+    //Halutaan päivittää nimi myös siinä tapauksessa että koulutuksia on valittu
+    //enemmän kuin yksi ja koulutusvalue on null
+    (koulutusKoodi || _.isNil(koulutusValue))
   );
 }
 
@@ -98,7 +103,8 @@ export const useNimiFromKoulutusKoodi = ({
         nimiFieldName,
         koulutusChanged,
         languagesChanged,
-        koulutusKoodi
+        koulutusKoodi,
+        koulutusValue
       )
     ) {
       const newNimiFieldValue = getNimiFromKoodistoResponse(
@@ -114,6 +120,7 @@ export const useNimiFromKoulutusKoodi = ({
   }, [
     change,
     nimiFieldName,
+    koulutusValue,
     koulutusKoodi,
     languages,
     languagesChanged,

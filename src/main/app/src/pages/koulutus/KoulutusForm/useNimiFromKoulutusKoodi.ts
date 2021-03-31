@@ -38,11 +38,11 @@ function getNimiFromKoodistoResponse(
     // When selected languages change, set only language versioned nimi fields that are empty.
     if (
       koulutusChanged ||
-      (!koulutusChanged && _.isEmpty(nimiFieldValue[lang]))
+      (!koulutusChanged && nimiFieldValue && _.isEmpty(nimiFieldValue[lang]))
     ) {
       newNimiFieldValue[lang] = koodiNimi;
     } else {
-      newNimiFieldValue[lang] = nimiFieldValue[lang];
+      newNimiFieldValue[lang] = nimiFieldValue ? nimiFieldValue[lang] : null;
     }
   });
 

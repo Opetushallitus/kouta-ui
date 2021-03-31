@@ -49,12 +49,23 @@ function getNimiFromKoodistoResponse(
   return newNimiFieldValue;
 }
 
+function getKoulutusFromArray(koulutusValue) {
+  // Jos enemmän kuin yksi koulutusKoodi valittuna, pitää käyttäjän syöttää itse koulutuksen nimi
+  return koulutusValue.length > 1 ? null : koulutusValue[0]?.value;
+}
+
+function getKoulutusValue(koulutusValue) {
+  return Array.isArray(koulutusValue)
+    ? getKoulutusFromArray(koulutusValue)
+    : koulutusValue?.value;
+}
+
 export const useNimiFromKoulutusKoodi = ({
   koulutusFieldName,
   nimiFieldName,
 }) => {
   const languages = useSelectedLanguages();
-  const koulutusValue = useFieldValue(koulutusFieldName)?.value;
+  const koulutusValue = getKoulutusValue(useFieldValue(koulutusFieldName));
   const koulutusKoodi = useKoodi(koulutusValue)?.koodi;
   const nimiFieldValue = useFieldValue(nimiFieldName);
   const isDirty = useIsDirty();

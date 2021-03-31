@@ -11,7 +11,7 @@ import {
 } from '#/src/hooks/form';
 import useKoodi from '#/src/hooks/useKoodi';
 
-function koulutusOrLanguageHasChanged(
+function shouldUpdateNimi(
   nimiFieldName,
   koulutusChanged: boolean,
   languagesChanged: boolean,
@@ -94,7 +94,7 @@ export const useNimiFromKoulutusKoodi = ({
   // change the language versioned nimi fields accordingly
   useEffect(() => {
     if (
-      koulutusOrLanguageHasChanged(
+      shouldUpdateNimi(
         nimiFieldName,
         koulutusChanged,
         languagesChanged,

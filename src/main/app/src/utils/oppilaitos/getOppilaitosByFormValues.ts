@@ -101,10 +101,12 @@ export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
       yksikoita: parseNumeric(perustiedot?.yksikoita),
       toimipisteita: parseNumeric(perustiedot?.toimipisteita),
       akatemioita: parseNumeric(perustiedot?.akatemioita),
-      wwwSivu: perustiedot?.wwwSivuUrl && {
-        url: pickTranslations(perustiedot.wwwSivuUrl || {}),
-        nimi: pickTranslations(perustiedot.wwwSivuNimi || {}),
-      },
+      wwwSivu: !_.isEmpty(perustiedot?.wwwSivuUrl)
+        ? {
+            url: pickTranslations(perustiedot.wwwSivuUrl || {}),
+            nimi: pickTranslations(perustiedot.wwwSivuNimi || {}),
+          }
+        : null,
     },
   };
 };

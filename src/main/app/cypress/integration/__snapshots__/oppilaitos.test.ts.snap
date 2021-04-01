@@ -141,6 +141,7 @@ exports[`createOppilaitos > should be able to create oppilaitos with hakijapalve
     "tietoaOpiskelusta": [],
     "toimipisteita": null,
     "yksikoita": null,
+    "wwwSivu": null,
     "yhteystiedot": [
       {
         "nimi": {

@@ -4,6 +4,7 @@ import {
   ApurahaMaaraTyyppi,
   ApurahaYksikko,
 } from '#/src/constants';
+import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 
 export { default } from './ToteutusForm';
 
@@ -18,6 +19,7 @@ export const initialValues = (koulutusNimi, koulutusKielet) => ({
     tapa: POHJAVALINTA.UUSI,
   },
   jarjestamistiedot: {
+    maksullisuustyyppi: MaksullisuusTyyppi.MAKSUTON,
     apurahaMaaraTyyppi: ApurahaMaaraTyyppi.YKSI_ARVO,
     apurahaYksikko: { value: ApurahaYksikko.EURO },
   },

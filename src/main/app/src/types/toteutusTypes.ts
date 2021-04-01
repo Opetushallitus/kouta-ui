@@ -14,7 +14,11 @@ export type ToteutusModel = any;
 
 type Kuvaus = TranslatedField<any>;
 
-type MaksullisuusTyyppi = 'kylla' | 'ei' | 'lukuvuosimaksu';
+export enum MaksullisuusTyyppi {
+  MAKSULLINEN = 'maksullinen',
+  MAKSUTON = 'maksuton',
+  LUKUVUOSIMAKSU = 'lukuvuosimaksu',
+}
 
 type Toteutusjakso = {
   nimi: TranslatedField<string>;
@@ -45,11 +49,9 @@ export type ToteutusFormValues = {
   kieliversiot: Array<LanguageCode>;
   tarjoajat: Array<string>;
   jarjestamistiedot: {
-    maksullisuus: {
-      tyyppi: MaksullisuusTyyppi;
-      maksu: string;
-    };
-    maksumaara: any;
+    maksullisuustyyppi: MaksullisuusTyyppi;
+    maksunMaara: number;
+    maksullisuusKuvaus: Kuvaus;
     opetustapa: Array<string>;
     opetustapaKuvaus: Kuvaus;
     opetusaika: Array<string>;
@@ -61,7 +63,6 @@ export type ToteutusFormValues = {
       kuukautta: number;
     };
     suunniteltuKestoKuvaus: Kuvaus;
-    maksullisuusKuvaus: Kuvaus;
     osiot: Array<{ value: string }>;
     osioKuvaukset: Record<string, any>;
     onkoApuraha?: boolean;

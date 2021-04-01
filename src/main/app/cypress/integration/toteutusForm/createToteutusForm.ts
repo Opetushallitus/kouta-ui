@@ -24,6 +24,7 @@ import {
   selectCheckbox,
 } from '#/cypress/utils';
 import { Alkamiskausityyppi } from '#/src/constants';
+import { MaksullisuusTyyppi } from '#/src/types/toteutusTypes';
 
 const fillOpetuskieli = (chosenLang = 'suomi') => {
   getByTestId('opetuskieli').within(() => {
@@ -57,7 +58,7 @@ const fillOpetustapa = () => {
 const fillMaksullisuus = tyyppi => {
   getByTestId('maksullisuus').within(() => {
     getRadio(tyyppi).click({ force: true });
-    getByTestId('maksu').find('input').pipe(paste('10'));
+    cy.findByPlaceholderText('yleiset.maara').pipe(paste('10'));
     typeToEditor('maksullisuus kuvaus');
   });
 };
@@ -84,7 +85,9 @@ const fillOsiot = () => {
   });
 };
 
-const fillCommonJarjestamistiedot = ({ maksullisuusTyyppi = 'kylla' } = {}) => {
+const fillCommonJarjestamistiedot = ({
+  maksullisuusTyyppi = MaksullisuusTyyppi.MAKSULLINEN,
+} = {}) => {
   fillOpetuskieli();
   fillSuunniteltuKesto();
   fillOpetusaika();
@@ -405,7 +408,9 @@ export const createToteutusForm = () => {
     */
 
     getByTestId('jarjestamistiedotSection').within(() => {
-      fillCommonJarjestamistiedot({ maksullisuusTyyppi: 'lukuvuosimaksu' });
+      fillCommonJarjestamistiedot({
+        maksullisuusTyyppi: MaksullisuusTyyppi.LUKUVUOSIMAKSU,
+      });
       cy.findByTestId('apuraha').should('not.exist');
       fillOpetuskieli('englanti'); // "englanti" is needed for apuraha selection to show up
       cy.findByTestId('apuraha').should('exist');

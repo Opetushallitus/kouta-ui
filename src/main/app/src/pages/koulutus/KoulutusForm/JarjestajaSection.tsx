@@ -20,8 +20,11 @@ import {
 } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import useAuthorizedUserRoleBuilder from '#/src/hooks/useAuthorizedUserRoleBuilder';
+import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
+import { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { getTestIdProps } from '#/src/utils';
+import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
 const JarjestajatField = createFormFieldComponent(
@@ -44,7 +47,11 @@ const OrganizationSection = ({
   });
 
   const roleBuilder = useAuthorizedUserRoleBuilder();
-  const tarjoajat = _.get(koulutus, 'tarjoajat') || [];
+  const tarjoajaOids = koulutus?.tarjoajat ?? [];
+  const isOphVirkailija = useIsOphVirkailija();
+
+  const { organisaatiot: tarjoajat } = useOrganisaatiot(tarjoajaOids);
+  console.log(tarjoajat);
   const tarjoajatFromPohja = useFieldValue('pohja.tarjoajat');
   const kaytaPohjanJarjestajaa = useFieldValue(
     'tarjoajat.kaytaPohjanJarjestajaa'
@@ -64,14 +71,23 @@ const OrganizationSection = ({
 
   return (
     <>
-      {tarjoajat.length > 0 || disableTarjoajaHierarkia ? (
+      {tarjoajaOids.length > 0 || disableTarjoajaHierarkia ? (
         <Box mb={2}>
           <Alert status="info">
             {t('koulutuslomake.tarjoajienLukumaara', {
-              lukumaara: tarjoajat.length,
+              lukumaara: tarjoajaOids.length,
             })}
           </Alert>
         </Box>
+      ) : null}
+      {isOphVirkailija ? (
+        <ul>
+          {tarjoajat?.map(({ nimi, oid }) => (
+            <li>
+              {getFirstLanguageValue(nimi)} ({oid})
+            </li>
+          ))}
+        </ul>
       ) : null}
       {!disableTarjoajaHierarkia ? (
         <>

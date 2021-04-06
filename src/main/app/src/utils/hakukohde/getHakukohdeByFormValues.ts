@@ -152,7 +152,8 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     valintakokeet,
     pohjakoulutusvaatimusKoodiUrit,
     pohjakoulutusvaatimusTarkenne,
-    valintaperusteId: values?.valintaperusteenKuvaus?.value || null,
+    valintaperusteId:
+      values?.valintaperusteenKuvaus?.valintaperuste?.value || null,
     ensikertalaisenAloituspaikat: maybeParseNumber(
       values?.aloituspaikat?.ensikertalaismaara
     ),
@@ -164,6 +165,10 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     metadata: {
       valintakokeidenYleiskuvaus: _.mapValues(
         values?.valintakokeet?.yleisKuvaus,
+        kuvaus => serializeEditorState(kuvaus)
+      ),
+      kynnysehto: _.mapValues(
+        values?.valintaperusteenKuvaus?.kynnysehto,
         kuvaus => serializeEditorState(kuvaus)
       ),
       kaytetaanHaunAlkamiskautta: !kaytetaanHaukukohteenAlkamiskautta,

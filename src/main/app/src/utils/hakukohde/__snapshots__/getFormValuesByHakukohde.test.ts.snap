@@ -168,7 +168,13 @@ Object {
     },
   },
   "valintaperusteenKuvaus": Object {
-    "value": "peruste_1#1",
+    "kynnysehto": Object {
+      "fi": "<p>Hakukohteen kynnysehto - fi</p>",
+      "sv": "<p>Hakukohteen kynnysehto - sv</p>",
+    },
+    "valintaperuste": Object {
+      "value": "peruste_1#1",
+    },
   },
 }
 `;

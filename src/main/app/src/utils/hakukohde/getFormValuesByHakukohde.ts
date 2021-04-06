@@ -50,6 +50,7 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
 
   const {
     valintakokeidenYleiskuvaus,
+    kynnysehto,
     kaytetaanHaunAlkamiskautta,
     koulutuksenAlkamiskausi = {},
   } = metadata;
@@ -95,11 +96,14 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
         parseEditorState
       ),
     },
-    valintaperusteenKuvaus: valintaperusteId
-      ? {
-          value: valintaperusteId,
-        }
-      : undefined,
+    valintaperusteenKuvaus: {
+      valintaperuste: valintaperusteId
+        ? {
+            value: valintaperusteId,
+          }
+        : undefined,
+      kynnysehto: _.mapValues(kynnysehto, parseEditorState),
+    },
     valintakokeet: getKokeetTaiLisanaytotValues(
       valintakokeet,
       valintakokeidenYleiskuvaus

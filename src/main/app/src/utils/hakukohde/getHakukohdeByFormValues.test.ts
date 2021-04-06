@@ -45,7 +45,11 @@ test('getHakukohdeByFormValues returns correct hakukohde given form values', () 
       },
     },
     valintaperusteenKuvaus: {
-      value: 'peruste_1#1',
+      valintaperuste: { value: 'peruste_1#1' },
+      kynnysehto: {
+        fi: parseEditorState('<p>Hakukohteen kynnysehto - fi</p>'),
+        sv: parseEditorState('<p>Hakukohteen kynnysehto - sv</p>'),
+      },
     },
     jarjestyspaikkaOid: '2.2.2.2.2',
     ajankohta: {

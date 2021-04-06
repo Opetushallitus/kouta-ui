@@ -2,17 +2,34 @@ import React, { useCallback } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
+import styled from 'styled-components';
 
 import Alert from '#/src/components/Alert';
 import Button from '#/src/components/Button';
-import { FormFieldSelect } from '#/src/components/formFields';
-import { Box, Divider } from '#/src/components/virkailija';
+import { FormFieldEditor, FormFieldSelect } from '#/src/components/formFields';
+import { Box } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
 import getValintaperusteet from '#/src/utils/valintaperuste/getValintaperusteet';
 
-const KuvausSection = ({ haku, organisaatioOid, name, languages }) => {
+const Buttons = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 12px 0 20px;
+  *:not(:first-child) {
+    padding-left: 8px;
+  }
+`;
+
+export const KuvausSection = ({
+  haku,
+  organisaatioOid,
+  name,
+  language,
+  languages,
+}) => {
   const hakuOid = haku?.oid;
   const kohdejoukkoKoodiUri = haku?.kohdejoukkoKoodiUri;
   const watch = [hakuOid, organisaatioOid].join(',');
@@ -44,15 +61,15 @@ const KuvausSection = ({ haku, organisaatioOid, name, languages }) => {
         </Box>
       )}
       <Field
-        name={name}
+        name={`${name}.valintaperuste`}
         component={FormFieldSelect}
         options={options}
         onFocus={onFocus}
         label={t('hakukohdelomake.valitseValintaperustekuvaus')}
         helperText={t('hakukohdelomake.valintaperustekuvaustenListausperuste')}
       />
-      {valintaperusteOid ? (
-        <Box mt={2}>
+      <Buttons>
+        {valintaperusteOid && (
           <Button
             variant="outlined"
             color="primary"
@@ -62,10 +79,7 @@ const KuvausSection = ({ haku, organisaatioOid, name, languages }) => {
           >
             {t('hakukohdelomake.avaaValintaperuste')}
           </Button>
-        </Box>
-      ) : null}
-      <Divider marginTop={4} marginBottom={4} />
-      <Box display="flex" justifyContent="center">
+        )}
         <Button
           variant="outlined"
           color="primary"
@@ -75,9 +89,12 @@ const KuvausSection = ({ haku, organisaatioOid, name, languages }) => {
         >
           {t('hakukohdelomake.luoUusiValintaperustekuvaus')}
         </Button>
-      </Box>
+      </Buttons>
+      <Field
+        name={`${name}.kynnysehto.${language}`}
+        component={FormFieldEditor}
+        label={t('hakukohdelomake.kynnysehto')}
+      />
     </>
   );
 };
-
-export default KuvausSection;

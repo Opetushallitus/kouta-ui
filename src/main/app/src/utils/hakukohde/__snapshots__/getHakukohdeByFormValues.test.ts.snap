@@ -69,6 +69,10 @@ Object {
       "koulutuksenAlkamisvuosi": 2020,
       "koulutuksenPaattymispaivamaara": null,
     },
+    "kynnysehto": Object {
+      "fi": "<p>Hakukohteen kynnysehto - fi</p>",
+      "sv": "<p>Hakukohteen kynnysehto - sv</p>",
+    },
     "valintakokeidenYleiskuvaus": Object {
       "fi": "<p>Yleiskuvaus - fi</p>",
       "sv": "<p>Yleiskuvaus - sv</p>",

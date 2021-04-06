@@ -70,7 +70,10 @@ export type HakukohdeFormValues = {
     pohjakoulutusvaatimus: Array<{ value: string }>;
     tarkenne: TranslatedField<EditorState>;
   };
-  valintaperusteenKuvaus?: { value: string };
+  valintaperusteenKuvaus: {
+    valintaperuste?: { value: string };
+    kynnysehto?: TranslatedField<EditorState>;
+  };
   valintakokeet: ValintakokeetValues;
   jarjestyspaikkaOid: string;
   liitteet: {

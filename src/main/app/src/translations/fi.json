@@ -555,7 +555,8 @@
     "eiMuokkausOikeutta": "Käyttäjälläsi ei ole oikeuksia muokata tätä hakukohdetta",
     "eiVoiAsettaaAjankohtaaJosYhteishaku": "Hakukohteella ei voi asettaa koulutuksen ajankohtaa, jos haussa on valittu hakutavaksi yhteishaku.",
     "pohjavalintaInfo": "Voit halutessasi käyttää aiemmin luotuja hakukohteita uuden lomakkeen esitäytettynä pohjana.",
-    "kopioiPohjaksi": "Kopioi pohjaksi aiemmin luotu hakukohde"
+    "kopioiPohjaksi": "Kopioi pohjaksi aiemmin luotu hakukohde",
+    "kynnysehto": "Kynnysehto"
   },
   "valintaperustelomake": {
     "valintaperusteenPerustiedot": "Valintaperusteen perustiedot",

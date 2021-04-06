@@ -71,6 +71,10 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
         fi: '<p>Yleiskuvaus - fi</p>',
         sv: '<p>Yleiskuvaus - sv</p>',
       },
+      kynnysehto: {
+        fi: '<p>Hakukohteen kynnysehto - fi</p>',
+        sv: '<p>Hakukohteen kynnysehto - sv</p>',
+      },
       kaytetaanHaunAlkamiskautta: false,
       koulutuksenAlkamiskausi: {
         alkamiskausityyppi: Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,

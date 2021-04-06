@@ -17,6 +17,7 @@ import {
   fillTilaSection,
   tallenna,
   fillAjankohtaFields,
+  getSelectOption,
 } from '#/cypress/utils';
 import { Alkamiskausityyppi } from '#/src/constants';
 
@@ -115,7 +116,13 @@ const fillAloituspaikatSection = ({ isKorkeakoulu = false } = {}) => {
 
 const fillValintaperusteenKuvausSection = () => {
   getByTestId('valintaperusteenKuvausSection').within(() => {
-    selectOption('Valintaperusteen nimi');
+    cy.findByLabelText(/hakukohdelomake\.valitseValintaperustekuvaus/).click({
+      force: true,
+    });
+    getSelectOption('Valintaperusteen nimi').click({ force: true });
+
+    typeToEditor('Kynnysehto');
+
     jatka();
   });
 };

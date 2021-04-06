@@ -12,7 +12,7 @@ import { useFieldValue } from '#/src/hooks/form';
 
 import AloituspaikatSection from './AloituspaikatSection';
 import JarjestyspaikkaSection from './JarjestyspaikkaSection';
-import KuvausSection from './KuvausSection';
+import { KuvausSection } from './KuvausSection';
 import LiitteetSection from './LiitteetSection';
 import PerustiedotSection from './PerustiedotSection';
 import PohjakoulutusSection from './PohjakoulutusSection';

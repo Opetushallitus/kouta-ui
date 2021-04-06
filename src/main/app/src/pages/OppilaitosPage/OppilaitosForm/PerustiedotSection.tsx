@@ -172,10 +172,9 @@ const OrganisaatioSection = ({ language, organisaatio, t }) => {
   );
 };
 
-const PerustiedotSection = ({ name, organisaatioOid }) => {
+const PerustiedotSection = ({ language, name, organisaatioOid }) => {
   const { organisaatio } = useOrganisaatio(organisaatioOid);
   const { t } = useTranslation();
-  const language = useLanguage();
 
   return (
     <>

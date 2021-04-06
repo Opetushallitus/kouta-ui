@@ -7,13 +7,13 @@ import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useKoodistoDataOptions } from '#/src/hooks/useKoodistoOptions';
 import useLoadOptions from '#/src/hooks/useLoadOptions';
+import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 import getKoodi from '#/src/utils/koodi/getKoodi';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 
 export const AsyncKoodistoSelect = ({
   formatKoodiLabel,
-  language,
   loadLabel: loadLabelProp,
   koodistoData,
   loadOptions: loadOptionsProp,
@@ -22,9 +22,10 @@ export const AsyncKoodistoSelect = ({
 }) => {
   const options = useKoodistoDataOptions({
     koodistoData,
-    language,
     formatLabel: formatKoodiLabel,
   });
+
+  const userLanguage = useUserLanguage();
 
   const loadOptions = useLoadOptions(options);
   const apiUrls = useUrls();
@@ -47,13 +48,13 @@ export const AsyncKoodistoSelect = ({
           });
 
           return (
-            formatKoodiLabel?.(koodiObj, language) ??
-            getKoodiNimiTranslation(koodiObj, language)
+            formatKoodiLabel?.(koodiObj, userLanguage) ??
+            getKoodiNimiTranslation(koodiObj, userLanguage)
           );
         }
       }
     },
-    [httpClient, apiUrls, loadLabelProp, language, formatKoodiLabel]
+    [httpClient, apiUrls, loadLabelProp, userLanguage, formatKoodiLabel]
   );
   return (
     <AsyncSelect

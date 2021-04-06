@@ -11,8 +11,8 @@ import {
 import { Radio, RadioGroup } from '#/src/components/virkailija';
 import { CRUD_ROLES, ENTITY, ORGANISAATIOTYYPPI } from '#/src/constants';
 import { useGetCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
-import useLanguage from '#/src/hooks/useLanguage';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
+import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import { flattenHierarkia } from '#/src/utils/organisaatio/hierarkiaHelpers';
@@ -62,7 +62,7 @@ const JarjestyspaikkaSection = ({
     CRUD_ROLES.UPDATE
   );
 
-  const language = useLanguage();
+  const language = useUserLanguage();
   const jarjestyspaikkaOptions = useMemo(
     () =>
       _fp.flow(

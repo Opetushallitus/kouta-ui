@@ -5,7 +5,7 @@ import _ from 'lodash';
 import AsyncKoodistoSelect from '#/src/components/AsyncKoodistoSelect';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
-import useLanguage from '#/src/hooks/useLanguage';
+import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 import getKoodi from '#/src/utils/koodi/getKoodi';
 
@@ -24,7 +24,7 @@ const getKoodiLabel = (koodi, language) => {
 export const PostinumeroSelect = ({ ...props }) => {
   const httpClient = useHttpClient();
   const apiUrls = useUrls();
-  const language = useLanguage();
+  const language = useUserLanguage();
 
   const loadOptions = useCallback(
     async inputValue => {

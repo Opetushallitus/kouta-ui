@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
 
-import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import {
+  FormFieldAsyncKoodistoSelect,
   FormFieldKoulutusalaSelect,
   FormFieldKoulutustyyppiSelect,
-  FormFieldSelect,
 } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
 import {
@@ -16,15 +15,11 @@ import {
   useIsDirty,
 } from '#/src/hooks/form';
 import { useHasChanged } from '#/src/hooks/useHasChanged';
-import { useKoodistoDataOptions } from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
+import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 import { useKoulutuksetByKoulutusala } from '#/src/utils/soraKuvaus/getKoulutuksetBykoulutusala';
 
-export const KoulutustyyppiSection = ({
-  name,
-  language,
-  canEditKoulutustyyppi,
-}) => {
+export const KoulutustyyppiSection = ({ name, canEditKoulutustyyppi }) => {
   const { t } = useTranslation();
 
   const { change } = useBoundFormActions();
@@ -45,11 +40,6 @@ export const KoulutustyyppiSection = ({
     koulutusalaFieldValue
   );
 
-  const koulutusOptions = useKoodistoDataOptions({
-    koodistoData: koulutukset,
-    language,
-  });
-
   return (
     <Box display="flex" flexDirection="column" maxWidth="900px">
       <Field
@@ -69,11 +59,13 @@ export const KoulutustyyppiSection = ({
         <Box flex="1 1 50%" {...getTestIdProps('koulutukset')}>
           <Field
             name="koulutukset"
-            options={koulutusOptions}
-            component={FormFieldSelect}
+            koodistoData={koulutukset}
+            component={FormFieldAsyncKoodistoSelect}
             label={t('yleiset.valitseKoulutus')}
-            disabled={_.isEmpty(koulutusOptions)}
-            language={language}
+            showAllOptions={true}
+            formatKoodiLabel={(koodi, language) =>
+              `${getKoodiNimiTranslation(koodi, language)} (${koodi.koodiArvo})`
+            }
             isMulti={true}
           />
         </Box>

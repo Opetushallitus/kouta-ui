@@ -198,6 +198,7 @@ const HeaderSelect = ({ editorState, onChange, editorRef }) => {
         ]}
         value={{ value }}
         onChange={onSelect}
+        menuPosition="fixed"
         menuPortalTarget={document.body}
         isClearable={false}
       />

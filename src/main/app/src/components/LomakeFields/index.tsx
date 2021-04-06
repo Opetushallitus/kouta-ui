@@ -16,7 +16,6 @@ import {
 import Spacing from '#/src/components/Spacing';
 import { HAKULOMAKETYYPPI } from '#/src/constants';
 import { useUrls } from '#/src/contexts/UrlContext';
-import useLanguage from '#/src/hooks/useLanguage';
 
 import {
   createEnhancedGetTyyppiLabel,
@@ -137,7 +136,9 @@ export const LomakeFields = ({
   getTyyppiShowUrl,
   language: translationLanguage = 'fi',
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const userLanguage = i18n.language;
+
   const tyyppiName = `${name}.tyyppi`;
 
   const optionsLabel =
@@ -145,7 +146,6 @@ export const LomakeFields = ({
       ? t('yleiset.valitseMitaHakulomakettaKaytetaan')
       : optionsLabelProp;
 
-  const language = useLanguage();
   const apiUrls = useUrls();
 
   const enhancedGetTyyppiLabel = useMemo(() => {
@@ -166,7 +166,7 @@ export const LomakeFields = ({
   const { ataruOptions } = useLomakeOptions({
     getTyyppiLomakkeet,
     tyypit,
-    language,
+    language: userLanguage,
   });
 
   return (

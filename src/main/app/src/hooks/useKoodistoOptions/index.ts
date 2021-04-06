@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import _ from 'lodash';
 
 import useKoodisto from '#/src/hooks/useKoodisto';
-import useLanguage from '#/src/hooks/useLanguage';
+import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 
 const defaultSort = options => {
@@ -35,12 +35,18 @@ const getOptions = ({
     }))
   );
 
+type UseKoodistoDataOptionsProps = {
+  koodistoData: Array<Koodi>;
+  sortFn?: (unknown) => SelectOptions;
+  formatLabel?: (unknown) => string;
+};
+
 export const useKoodistoDataOptions = ({
   koodistoData,
-  language,
-  sortFn = undefined,
-  formatLabel = undefined,
-}) => {
+  sortFn,
+  formatLabel,
+}: UseKoodistoDataOptionsProps) => {
+  const language = useUserLanguage();
   return useMemo(
     () =>
       koodistoData
@@ -50,21 +56,22 @@ export const useKoodistoDataOptions = ({
   );
 };
 
+type UseKoodistoOptionsProps = {
+  koodisto: string;
+  versio?: number;
+  language?: LanguageCode;
+  sortFn?: (unknown) => SelectOptions;
+};
+
 export const useKoodistoOptions = ({
   koodisto,
-  versio = undefined,
-  language: languageProp = undefined,
-  sortFn = undefined,
-  sort = true,
-}) => {
-  const translationLanguage = useLanguage();
-  const language = languageProp || translationLanguage || 'fi';
-
+  versio,
+  sortFn,
+}: UseKoodistoOptionsProps) => {
   const { data, ...rest } = useKoodisto({ koodisto, versio });
 
   const options = useKoodistoDataOptions({
     koodistoData: data,
-    language,
     sortFn,
   });
 

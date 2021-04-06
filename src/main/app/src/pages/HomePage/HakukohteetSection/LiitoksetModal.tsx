@@ -64,21 +64,25 @@ const LiitoksetModal = ({ onClose, organisaatioOid, open }) => {
             value={toteutus}
             onChange={setToteutus}
             options={toteutusOptions}
+            menuPosition="fixed"
             menuPortalTarget={document.body}
             id="hakukohteenToteutus"
           />
         </Box>
 
-        <FormLabel htmlFor="hakukohteenHaku">
-          {t('etusivu.valitseHakukohteenHaku')}
-        </FormLabel>
-        <Select
-          value={haku}
-          onChange={setHaku}
-          options={hakuOptions}
-          menuPortalTarget={document.body}
-          id="hakukohteenHaku"
-        />
+        <Box>
+          <FormLabel htmlFor="hakukohteenHaku">
+            {t('etusivu.valitseHakukohteenHaku')}
+          </FormLabel>
+          <Select
+            value={haku}
+            onChange={setHaku}
+            options={hakuOptions}
+            menuPosition="fixed"
+            menuPortalTarget={document.body}
+            id="hakukohteenHaku"
+          />
+        </Box>
       </ModalBody>
       <ModalFooter>
         <Box display="flex" justifyContent="flex-end">

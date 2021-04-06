@@ -4,6 +4,17 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyle = createGlobalStyle`
 ${normalize()};
 
+html {
+  overflow: hidden;
+}
+
+body {
+  position: absolute;
+  overflow-y: auto;
+  height: 100%;
+  width: 100%;
+}
+
 #root {
   background-color: ${({ theme }) => theme.colors.mainBackground};
 }

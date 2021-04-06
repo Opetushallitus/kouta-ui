@@ -13,7 +13,7 @@ import Table, {
   TableCell,
 } from '#/src/components/Table';
 import { Icon, Dropdown } from '#/src/components/virkailija';
-import useLanguage from '#/src/hooks/useLanguage';
+import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { formatDateValue } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
@@ -118,7 +118,7 @@ export const ListTable = ({
   });
   const isTableSortable = _.isFunction(onSort);
 
-  const language = useLanguage();
+  const language = useUserLanguage();
 
   const { row: collapsedRow, column: collapsedColumn } = collapsed;
 

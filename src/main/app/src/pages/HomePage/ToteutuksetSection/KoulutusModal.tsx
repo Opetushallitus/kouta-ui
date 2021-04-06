@@ -51,6 +51,7 @@ const KoulutusModal = ({ onClose, organisaatioOid, open }) => {
           value={koulutus}
           onChange={setKoulutus}
           options={options}
+          menuPosition="fixed"
           menuPortalTarget={document.body}
           id="toteutuksenKoulutus"
         />

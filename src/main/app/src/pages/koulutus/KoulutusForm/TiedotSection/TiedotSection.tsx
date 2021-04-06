@@ -49,7 +49,6 @@ export const TiedotSection = ({
             disabled={disabled}
             language={language}
             koulutuskoodi={koulutuskoodi}
-            koulutustyyppi={koulutustyyppi}
             selectLabel={t('koulutuslomake.valitseOsaamisala')}
             name={name}
           />
@@ -58,12 +57,7 @@ export const TiedotSection = ({
 
       <FormConfigFragment name="koulutuskoodi">
         <Box mb={2} {...getTestIdProps('koulutuskoodiSelect')}>
-          <KoulutusField
-            disabled={disabled}
-            name={`${name}.koulutus`}
-            koulutustyyppi={koulutustyyppi}
-            language={language}
-          />
+          <KoulutusField disabled={disabled} name={`${name}.koulutus`} />
         </Box>
       </FormConfigFragment>
 

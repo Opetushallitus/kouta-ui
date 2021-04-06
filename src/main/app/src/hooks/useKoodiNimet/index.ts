@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 
 import useKoodit from '#/src/hooks/useKoodit';
-import useLanguage from '#/src/hooks/useLanguage';
+import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 
 const useKoodiNimet = koodiUris => {
   const { koodit, ...rest } = useKoodit(koodiUris);
-  const language = useLanguage();
+  const language = useUserLanguage();
 
   const nimet = useMemo(() => {
     return koodit.map(koodi => {

@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 
 import useKoodi from '#/src/hooks/useKoodi';
-import useLanguage from '#/src/hooks/useLanguage';
+import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
 
 const useKoodiNimi = (koodiUri, { language: languageOpt } = {}) => {
   const { koodi, ...rest } = useKoodi(koodiUri);
-  const language = useLanguage();
+  const language = useUserLanguage();
   const koodiLanguage = languageOpt || language;
 
   const nimi = useMemo(() => getKoodiNimiTranslation(koodi, koodiLanguage), [

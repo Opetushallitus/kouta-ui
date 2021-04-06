@@ -115,7 +115,7 @@ const FieldSortableElement = SortableElement(props => <div {...props} />);
 
 const FieldsSortableContainer = SortableContainer(({ fields, language, t }) => {
   return (
-    <div>
+    <div style={{ position: 'relative' }}>
       {fields.map((content, index) => {
         const contentValue = fields.get(index);
 

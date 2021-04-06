@@ -153,6 +153,7 @@ const fillYhteystiedotSection = () => {
   });
 };
 
+/*
 const fillKkOsaamisalat = () => {
   getByTestId('lisaaOsaamisalaButton').click({ force: true });
   getByTestId('osaamisalanNimi').find('input').pipe(paste('osaamisalan nimi'));
@@ -166,6 +167,7 @@ const fillKkOsaamisalat = () => {
     .find('input')
     .pipe(paste('osaamisalan otsikko'));
 };
+*/
 
 const fillLukiolinjatSection = () => {
   getByTestId('lukiolinjatSection').within(() => {
@@ -392,6 +394,8 @@ export const createToteutusForm = () => {
     fillKieliversiotSection({ jatka: true });
     fillTiedotSection();
 
+    // NOTE: Korkeakoulu osaamisalat hidden for now (KTO-286, KTO-1175)
+    /*
     getByTestId('alemmanKorkeakoulututkinnonOsaamisalatSection').within(() => {
       fillKkOsaamisalat();
       jatka();
@@ -401,6 +405,7 @@ export const createToteutusForm = () => {
       fillKkOsaamisalat();
       jatka();
     });
+    */
 
     getByTestId('jarjestamistiedotSection').within(() => {
       fillCommonJarjestamistiedot({

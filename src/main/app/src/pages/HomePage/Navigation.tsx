@@ -151,9 +151,9 @@ const NavigationBase = ({
   ]);
 
   useLayoutEffect(() => {
-    document.documentElement.style.overflowY = drawerOpen ? 'hidden' : 'auto';
+    document.body.style.overflowY = drawerOpen ? 'hidden' : 'auto';
     return () => {
-      document.documentElement.style.overflowY = 'auto';
+      document.body.style.overflowY = 'auto';
     };
   }, [drawerOpen]);
 

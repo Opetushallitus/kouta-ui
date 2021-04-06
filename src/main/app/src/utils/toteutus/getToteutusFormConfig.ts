@@ -343,10 +343,13 @@ const config = createFormConfigBuilder().registerSections([
         field: '.maksunMaara',
         validate: eb =>
           validateIf(
-            eb.getValues()?.tila === JULKAISUTILA.JULKAISTU &&
-              eb.getValues()?.jarjestamistiedot?.maksullisuustyyppi !==
-                MaksullisuusTyyppi.MAKSUTON,
-            validateInteger('jarjestamistiedot.maksunMaara', { min: 0 })
+            eb.getValues()?.jarjestamistiedot?.maksullisuustyyppi !==
+              MaksullisuusTyyppi.MAKSUTON,
+            validateInteger(
+              'jarjestamistiedot.maksunMaara',
+              { min: 1 },
+              'validointivirheet.eiNegatiivinenKokonaisluku'
+            )
           )(eb),
       },
       createOptionalTranslatedFieldConfig({

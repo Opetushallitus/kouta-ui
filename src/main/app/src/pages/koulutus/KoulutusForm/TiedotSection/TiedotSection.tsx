@@ -8,6 +8,7 @@ import { FormFieldInput } from '#/src/components/formFields';
 import KoulutusField from '#/src/components/KoulutusField';
 import { Box } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
+import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
 import { useNimiFromKoulutusKoodi } from '../useNimiFromKoulutusKoodi';
 import KoulutuksenTiedotSection from './KoulutuksenTiedotSection';
@@ -26,7 +27,9 @@ export const TiedotSection = ({
 
   useNimiFromKoulutusKoodi({
     nimiFieldName: `${name}.nimi`,
-    koulutusFieldName: `${name}.koulutus`,
+    koulutusFieldName: isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi)
+      ? `${name}.korkeakoulutukset`
+      : `${name}.koulutus`,
   });
 
   return (

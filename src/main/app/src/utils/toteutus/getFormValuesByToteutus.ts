@@ -6,7 +6,7 @@ import {
   ToteutusFormValues,
   MaksullisuusTyyppi,
 } from '#/src/types/toteutusTypes';
-import { otherwise, toSelectValue } from '#/src/utils';
+import { toSelectValue } from '#/src/utils';
 import { getAjankohtaFields } from '#/src/utils/form/aloitusajankohtaHelpers';
 import parseSisaltoField from '#/src/utils/form/parseSisaltoField';
 

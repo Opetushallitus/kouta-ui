@@ -1,11 +1,9 @@
 import _fp from 'lodash/fp';
 
 import { parseEditorState } from '#/src/components/Editor/utils';
-import {
-  KOULUTUSTYYPPI,
-  TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
-} from '#/src/constants';
+import { KOULUTUSTYYPPI } from '#/src/constants';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
+import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
 const koodiUriToKoodi = koodiUri => {
   return parseKoodiUri(koodiUri)?.koodiArvo;
@@ -18,9 +16,7 @@ function getKoulutusKoodiUrit(
   koulutustyyppi: KOULUTUSTYYPPI,
   koulutusKoodiUrit?: Array<string>
 ): { koulutusKoodiUri: string; korkeakoulutusKoodiUrit: Array<string> } {
-  const isKorkeakoulu = TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT.includes(
-    koulutustyyppi
-  );
+  const isKorkeakoulu = isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi);
 
   const firstElement = koulutusKoodiUrit?.[0] ?? '';
 

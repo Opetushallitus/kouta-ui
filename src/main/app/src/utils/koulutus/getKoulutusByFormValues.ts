@@ -19,11 +19,13 @@ function getKoulutuksetKoodiUri(
     korkeakoulutukset: Array<{ value: string }>;
   }
 ): Array<string> {
-  if (isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi))
+  if (isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi)) {
     return _fp.map(koodi => koodi.value, information?.korkeakoulutukset);
+  }
 
-  if (koulutustyyppi === KOULUTUSTYYPPI.OSAAMISALA)
+  if (koulutustyyppi === KOULUTUSTYYPPI.OSAAMISALA) {
     return safeArray(osaamisala?.koulutus?.value);
+  }
 
   return safeArray(information?.koulutus?.value);
 }

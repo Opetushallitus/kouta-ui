@@ -28,7 +28,7 @@ function shouldUpdateNimi(
 }
 
 function getNimiFromKoodistoResponse(
-  languages: Array<any>,
+  languages: Array<string>,
   koulutusKoodi,
   koulutusChanged: boolean,
   nimiFieldValue

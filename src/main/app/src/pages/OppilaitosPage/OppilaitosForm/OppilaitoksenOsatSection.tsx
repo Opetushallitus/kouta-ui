@@ -31,7 +31,7 @@ const OppilaitoksenOsatSection = ({ organisaatio }) => {
     return (
       data &&
       _fp.flow(
-        _fp.map(entity => ({ ...entity, key: entity.oid })),
+        _fp.map((entity: any) => ({ ...entity, key: entity.oid })),
         _fp.sortBy(e => e.nimi[i18n.language])
       )(data)
     );
@@ -44,7 +44,7 @@ const OppilaitoksenOsatSection = ({ organisaatio }) => {
       ) : (
         <>
           {rows.length === 0 ? (
-            <Typography>Ei oppilaitoksia</Typography>
+            <Typography>{t('oppilaitoslomake.eiOppilaitoksenOsia')}</Typography>
           ) : (
             <ListTable rows={rows} columns={columns} />
           )}

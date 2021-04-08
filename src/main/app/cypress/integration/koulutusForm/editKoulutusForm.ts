@@ -9,6 +9,7 @@ import {
   tallenna,
   assertNoUnsavedChangesDialog,
 } from '#/cypress/utils';
+import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
 const organisaatioOid = '1.1.1.1.1.1';
 const koulutusOid = '1.2.3.4.5.6';
@@ -121,12 +122,12 @@ export const editKoulutusForm = () => {
 
   // Skipping this for now, because it sometimes redirects to "undefined" organization
   // TODO: Fix koulutus redirect sometimes going to undefined organization
-  it.skip('Should redirect from url without organization', () => {
+  it('Should redirect from url without organization', () => {
     prepareTest('amm');
     cy.visit(`/koulutus/${koulutusOid}/muokkaus`);
     cy.url().should(
       'include',
-      `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`
+      `/organisaatio/${OPETUSHALLITUS_ORGANISAATIO_OID}/koulutus/${koulutusOid}/muokkaus`
     );
   });
 };

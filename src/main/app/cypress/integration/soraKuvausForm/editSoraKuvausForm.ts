@@ -9,6 +9,7 @@ import {
   fillKieliversiotSection,
   tallenna,
 } from '#/cypress/utils';
+import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
 const soraKuvausId = '123e4567-e89b-12d3-a456-426655440000';
 const organisaatioOid = '1.1.1.1.1.1';
@@ -60,7 +61,7 @@ export const editSoraKuvausForm = () => {
     cy.visit(`/sora-kuvaus/${soraKuvausId}/muokkaus`);
     cy.url().should(
       'include',
-      `/organisaatio/${organisaatioOid}/sora-kuvaus/${soraKuvausId}/muokkaus`
+      `/organisaatio/${OPETUSHALLITUS_ORGANISAATIO_OID}/sora-kuvaus/${soraKuvausId}/muokkaus`
     );
   });
 };

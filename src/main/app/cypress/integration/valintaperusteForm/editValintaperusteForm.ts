@@ -8,6 +8,7 @@ import {
   assertNoUnsavedChangesDialog,
 } from '#/cypress/utils';
 import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils';
+import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
 const organisaatioOid = '1.1.1.1.1.1';
 const valintaperusteId = '1';
@@ -66,7 +67,7 @@ export const editValintaperusteForm = () => {
     cy.visit(`/valintaperusteet/${valintaperusteId}/muokkaus`);
     cy.url().should(
       'include',
-      `/organisaatio/${organisaatioOid}/valintaperusteet/${valintaperusteId}/muokkaus`
+      `/organisaatio/${OPETUSHALLITUS_ORGANISAATIO_OID}/valintaperusteet/${valintaperusteId}/muokkaus`
     );
   });
 };

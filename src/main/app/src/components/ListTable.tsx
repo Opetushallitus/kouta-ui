@@ -3,8 +3,7 @@ import React, { Fragment, useState } from 'react';
 import _ from 'lodash';
 import styled, { css } from 'styled-components';
 
-import Anchor from '#/src/components/Anchor';
-import StatusTag from '#/src/components/StatusTag';
+import { RouterAnchor } from '#/src/components/Anchor';
 import Table, {
   TableHead,
   TableBody,
@@ -52,9 +51,9 @@ export const makeNimiColumn = (
   key: 'nimi',
   sortable: true,
   render: item => (
-    <Anchor as={Link} to={getLinkUrl(item)}>
+    <RouterAnchor to={getLinkUrl(item)}>
       {getFirstLanguageValue(item.nimi, item.language) || t('yleiset.nimeton')}
-    </Anchor>
+    </RouterAnchor>
   ),
 });
 

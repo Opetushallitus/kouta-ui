@@ -6,14 +6,13 @@ import { Field } from 'redux-form';
 import styled from 'styled-components';
 
 import AbstractCollapse from '#/src/components/AbstractCollapse';
-import Anchor from '#/src/components/Anchor';
+import Anchor, { RouterAnchor } from '#/src/components/Anchor';
 import FieldGroup from '#/src/components/FieldGroup';
 import {
   FormFieldInput,
   FormFieldCheckboxGroup,
   FormFieldUrlInput,
 } from '#/src/components/formFields';
-import LocalLink from '#/src/components/LocalLink';
 import Spacing from '#/src/components/Spacing';
 import StyledSectionHTML from '#/src/components/StyledSectionHTML';
 import { Divider, Icon, Typography, Spin } from '#/src/components/virkailija';
@@ -206,11 +205,11 @@ const OsaamisalatContainer = ({
         i18nKey="toteutuslomake.eiOsaamisaloja"
         values={{ koulutusLinkText, ePerusteLinkText }}
         components={[
-          <LocalLink
+          <RouterAnchor
             to={`/organisaatio/${organisaatioOid}/koulutus/${koulutus.oid}/muokkaus`}
           >
             {koulutusLinkText}
-          </LocalLink>,
+          </RouterAnchor>,
           <Anchor href={urls.url('eperusteet.kooste', language, id)}>
             {ePerusteLinkText}
           </Anchor>,

@@ -2,9 +2,8 @@ import React, { useMemo } from 'react';
 
 import debounce from 'debounce-promise';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
 
-import Anchor from '#/src/components/Anchor';
+import { RouterAnchor } from '#/src/components/Anchor';
 import Badge from '#/src/components/Badge';
 import Button from '#/src/components/Button';
 import ErrorAlert from '#/src/components/ErrorAlert';
@@ -52,12 +51,11 @@ const makeTableColumns = (t, organisaatioOid) => [
     key: 'nimi',
     sortable: true,
     render: ({ nimi, oid, language }) => (
-      <Anchor
-        as={Link}
+      <RouterAnchor
         to={`/organisaatio/${organisaatioOid}/toteutus/${oid}/muokkaus`}
       >
         {getFirstLanguageValue(nimi, language) || t('yleiset.nimeton')}
-      </Anchor>
+      </RouterAnchor>
     ),
   },
   makeTilaColumn(t),

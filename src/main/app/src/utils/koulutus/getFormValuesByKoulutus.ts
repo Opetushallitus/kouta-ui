@@ -15,13 +15,13 @@ const koodiUriToKoodi = koodiUri => {
 function getKoulutusKoodiUrit(
   koulutustyyppi: KOULUTUSTYYPPI,
   koulutusKoodiUrit?: Array<string>
-): { koulutusKoodiUri: string; korkeakoulutusKoodiUrit: Array<string> } {
+): { koulutusKoodiUri?: string; korkeakoulutusKoodiUrit: Array<string> } {
   const isKorkeakoulu = isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi);
 
-  const firstElement = koulutusKoodiUrit?.[0] ?? '';
+  const firstElement = koulutusKoodiUrit?.[0] ?? undefined;
 
   return {
-    koulutusKoodiUri: isKorkeakoulu ? '' : firstElement,
+    koulutusKoodiUri: isKorkeakoulu ? undefined : firstElement,
     korkeakoulutusKoodiUrit: isKorkeakoulu ? koulutusKoodiUrit || [] : [],
   };
 }

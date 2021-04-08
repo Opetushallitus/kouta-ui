@@ -15,7 +15,7 @@ import { useFieldValue } from '#/src/hooks/form';
 
 import EsittelySection from './EsittelySection';
 import OppilaitoksenOsatSection from './OppilaitoksenOsatSection';
-import PerustiedotSection from './PerustiedotSection';
+import { PerustiedotSection } from './PerustiedotSection';
 import { TietoaOpiskelustaSection } from './TietoaOpiskelustaSection';
 
 const OppilaitosForm = ({

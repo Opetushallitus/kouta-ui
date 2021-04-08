@@ -6,15 +6,15 @@ import FormCollapse from '#/src/components/FormCollapse';
 import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
-import KokeetTaiLisanaytotSection from '#/src/components/KokeetTaiLisanaytotSection';
 import { KOULUTUSTYYPPI } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 
 import AloituspaikatSection from './AloituspaikatSection';
+import { HakukohteenValintakokeetSection } from './HakukohteenValintakokeetSection';
 import JarjestyspaikkaSection from './JarjestyspaikkaSection';
 import { KuvausSection } from './KuvausSection';
 import LiitteetSection from './LiitteetSection';
-import PerustiedotSection from './PerustiedotSection';
+import { PerustiedotSection } from './PerustiedotSection';
 import PohjakoulutusSection from './PohjakoulutusSection';
 
 const HakukohdeForm = ({
@@ -78,7 +78,7 @@ const HakukohdeForm = ({
         section="valintakokeet"
         header={t('yleiset.kokeetTaiLisanaytot')}
         languages={languages}
-        Component={KokeetTaiLisanaytotSection}
+        Component={HakukohteenValintakokeetSection}
       />
 
       <FormCollapse

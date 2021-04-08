@@ -71,6 +71,35 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
         fi: '<p>Yleiskuvaus - fi</p>',
         sv: '<p>Yleiskuvaus - sv</p>',
       },
+      valintaperusteenValintakokeidenLisatilaisuudet: [
+        {
+          id: '123-123',
+          tilaisuudet: [
+            {
+              jarjestamispaikka: {
+                fi: 'fi jarjestamispaikka',
+                sv: 'sv jarjestamispaikka',
+              },
+              osoite: {
+                osoite: { fi: 'fi osoite', sv: 'sv osoite' },
+                postinumeroKoodiUri: 'posti_1#1',
+                postitoimipaikka: {
+                  fi: 'fi postitoimipaikka',
+                  sv: 'sv postitoimipaikka',
+                },
+              },
+              aika: {
+                alkaa: '2019-04-16T08:44',
+                paattyy: '2019-04-18T08:44',
+              },
+              lisatietoja: {
+                fi: '<p>fi lisatietoja</p>',
+                sv: '<p>sv lisatietoja</p>',
+              },
+            },
+          ],
+        },
+      ],
       kynnysehto: {
         fi: '<p>Hakukohteen kynnysehto - fi</p>',
         sv: '<p>Hakukohteen kynnysehto - sv</p>',
@@ -115,8 +144,8 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
               osoite: { fi: 'fi osoite', sv: 'sv osoite' },
               postinumeroKoodiUri: 'posti_1#1',
               postitoimipaikka: {
-                fi: 'fi posititoimipaikka',
-                sv: 'sv posititoimipaikka',
+                fi: 'fi postitoimipaikka',
+                sv: 'sv postitoimipaikka',
               },
             },
             aika: {

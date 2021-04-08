@@ -20,27 +20,36 @@ import { spacing } from '#/src/theme';
 import { getTestIdProps } from '#/src/utils';
 
 const SubSectionBox = styled(Box)`
-  background-color: ${getThemeProp('colors.grayLighten6')};
+  background-color: ${({ whiteBackground }) =>
+    whiteBackground ? '#ffffff' : getThemeProp('colors.grayLighten6')};
   padding: ${spacing(4)};
 `;
 
-export const TilaisuusFields = ({ field, language, index, removeSelf }) => {
+export const TilaisuusFields = ({
+  field,
+  language,
+  index,
+  removeSelf,
+  whiteBackground,
+}) => {
   const { t } = useTranslation();
   return (
     <>
       <Heading marginBottom={1}>
-        {t('koeTaiLisanaytto.tilaisuusTitle', { index: index + 1 })}
+        {t('koeTaiLisanaytto.tilaisuusTitle', { index })}
       </Heading>
-      <SubSectionBox>
+      <SubSectionBox whiteBackground={whiteBackground}>
         <Box display="flex" justifyContent="space-between">
           <DateTimeRange
             startProps={{
               name: `${field}.alkaa`,
               label: t('koeTaiLisanaytto.tilaisuusAlkaa'),
+              required: true,
             }}
             endProps={{
               name: `${field}.paattyy`,
               label: t('koeTaiLisanaytto.tilaisuusPaattyy'),
+              required: true,
             }}
           />
           <Box mt={4} ml={4}>
@@ -56,6 +65,7 @@ export const TilaisuusFields = ({ field, language, index, removeSelf }) => {
         </Box>
         <Box mb={2} {...getTestIdProps('osoite')}>
           <Field
+            required
             name={`${field}.osoite.${language}`}
             component={FormFieldInput}
             label={t('yleiset.osoite')}
@@ -63,6 +73,7 @@ export const TilaisuusFields = ({ field, language, index, removeSelf }) => {
         </Box>
         <Box mb={2} {...getTestIdProps('postinumero')}>
           <Field
+            required
             name={`${field}.postinumero`}
             component={FormFieldPostinumeroSelect}
             label={t('yleiset.postinumero')}
@@ -81,7 +92,14 @@ export const TilaisuusFields = ({ field, language, index, removeSelf }) => {
   );
 };
 
-export const TilaisuudetFields = ({ fields, language, t, meta }) => (
+export const TilaisuudetFields = ({
+  fields,
+  language,
+  t,
+  meta,
+  readonlyAmount = 0,
+  whiteBackground,
+}) => (
   <>
     <FieldArrayList
       fields={fields}
@@ -91,7 +109,8 @@ export const TilaisuudetFields = ({ fields, language, t, meta }) => (
     >
       {({ field, index }) => (
         <TilaisuusFields
-          index={index}
+          index={index + 1 + readonlyAmount}
+          whiteBackground={whiteBackground}
           field={field}
           language={language}
           removeSelf={() => fields.remove(index)}
@@ -104,6 +123,7 @@ export const TilaisuudetFields = ({ fields, language, t, meta }) => (
         type="button"
         iconType="add"
         onClick={() => fields.push({})}
+        css={{ backgroundColor: 'white' }}
         {...getTestIdProps('lisaaTilaisuusButton')}
       >
         {t('yleiset.lisaaTilaisuus')}
@@ -111,5 +131,3 @@ export const TilaisuudetFields = ({ fields, language, t, meta }) => (
     </Box>
   </>
 );
-
-export default TilaisuudetFields;

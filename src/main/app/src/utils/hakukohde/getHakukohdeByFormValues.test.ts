@@ -63,6 +63,24 @@ test('getHakukohdeByFormValues returns correct hakukohde given form values', () 
         fi: parseEditorState('<p>Yleiskuvaus - fi</p>'),
         sv: parseEditorState('<p>Yleiskuvaus - sv</p>'),
       },
+      valintaperusteenValintakokeidenLisatilaisuudet: {
+        '123-123': [
+          {
+            osoite: { fi: 'fi osoite', sv: 'sv osoite' },
+            postinumero: { value: 'posti_1#1' },
+            alkaa: '2019-04-16T08:44',
+            paattyy: '2019-04-18T08:44',
+            lisatietoja: {
+              fi: parseEditorState('<p>fi lisatietoja</p>'),
+              sv: parseEditorState('<p>sv lisatietoja</p>'),
+            },
+            jarjestamispaikka: {
+              fi: 'jarjestamispaikka - fi',
+              sv: 'jarjestamispaikka - sv',
+            },
+          },
+        ],
+      },
       kokeetTaiLisanaytot: [
         {
           nimi: { fi: 'nimi - fi', sv: 'nimi - sv' },

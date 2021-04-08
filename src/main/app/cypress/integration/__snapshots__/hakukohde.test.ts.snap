@@ -64,7 +64,32 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
     },
     "valintakokeidenYleiskuvaus": {
       "fi": "<p>Valintakokeiden kuvaus</p>"
-    }
+    },
+    "valintaperusteenValintakokeidenLisatilaisuudet": [
+      {
+        "id": "undefined",
+        "tilaisuudet": [
+          {
+            "aika": {
+              "alkaa": "2019-04-02T10:45",
+              "paattyy": "2019-04-02T19:00"
+            },
+            "jarjestamispaikka": {
+              "fi": "paikka"
+            },
+            "lisatietoja": {
+              "fi": "<p>lisatietoja</p>"
+            },
+            "osoite": {
+              "osoite": {
+                "fi": "osoite"
+              },
+              "postinumeroKoodiUri": "posti_00350#2"
+            }
+          }
+        ]
+      }
+    ]
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
@@ -191,7 +216,32 @@ exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
     },
     "valintakokeidenYleiskuvaus": {
       "fi": "<p>Valintakokeiden kuvaus</p>"
-    }
+    },
+    "valintaperusteenValintakokeidenLisatilaisuudet": [
+      {
+        "id": "undefined",
+        "tilaisuudet": [
+          {
+            "aika": {
+              "alkaa": "2019-04-02T10:45",
+              "paattyy": "2019-04-02T19:00"
+            },
+            "jarjestamispaikka": {
+              "fi": "paikka"
+            },
+            "lisatietoja": {
+              "fi": "<p>lisatietoja</p>"
+            },
+            "osoite": {
+              "osoite": {
+                "fi": "osoite"
+              },
+              "postinumeroKoodiUri": "posti_00350#2"
+            }
+          }
+        ]
+      }
+    ]
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
@@ -317,7 +367,32 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
     "kynnysehto": {},
     "valintakokeidenYleiskuvaus": {
       "fi": "<p>Valintakokeiden kuvaus - fi</p>"
-    }
+    },
+    "valintaperusteenValintakokeidenLisatilaisuudet": [
+      {
+        "id": "undefined",
+        "tilaisuudet": [
+          {
+            "aika": {
+              "alkaa": "2019-04-02T10:45",
+              "paattyy": "2019-04-02T19:00"
+            },
+            "jarjestamispaikka": {
+              "fi": "paikka"
+            },
+            "lisatietoja": {
+              "fi": "<p>lisatietoja</p>"
+            },
+            "osoite": {
+              "osoite": {
+                "fi": "osoite"
+              },
+              "postinumeroKoodiUri": "posti_00350#2"
+            }
+          }
+        ]
+      }
+    ]
   },
   "modified": "2019-04-04T08:28",
   "muokkaaja": "1.2.246.562.24.62301161440",
@@ -409,7 +484,8 @@ exports[`createHakukohde > should be able to create hakukohde with muu hakulomak
     "kaytetaanHaunAlkamiskautta": true,
     "koulutuksenAlkamiskausi": null,
     "kynnysehto": {},
-    "valintakokeidenYleiskuvaus": {}
+    "valintakokeidenYleiskuvaus": {},
+    "valintaperusteenValintakokeidenLisatilaisuudet": []
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
@@ -456,7 +532,8 @@ exports[`createHakukohde > should be able to create hakukohde with "ei sähköis
     "kaytetaanHaunAlkamiskautta": true,
     "koulutuksenAlkamiskausi": null,
     "kynnysehto": {},
-    "valintakokeidenYleiskuvaus": {}
+    "valintakokeidenYleiskuvaus": {},
+    "valintaperusteenValintakokeidenLisatilaisuudet": []
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {

@@ -2,6 +2,22 @@ import _ from 'lodash';
 
 import { parseEditorState } from '#/src/components/Editor/utils';
 
+export const getTilaisuusValues = ({
+  osoite,
+  aika,
+  lisatietoja,
+  jarjestamispaikka,
+}) => ({
+  osoite: osoite?.osoite || {},
+  postinumero: osoite?.postinumeroKoodiUri
+    ? { value: osoite.postinumeroKoodiUri }
+    : undefined,
+  alkaa: aika?.alkaa || '',
+  paattyy: aika?.paattyy || '',
+  lisatietoja: _.mapValues(lisatietoja || {}, parseEditorState),
+  jarjestamispaikka,
+});
+
 export const getKokeetTaiLisanaytotValues = (
   valintakokeet = [],
   yleisKuvaus
@@ -39,18 +55,7 @@ export const getKokeetTaiLisanaytotValues = (
         tietoaHakijalle: _.mapValues(tietoja, parseEditorState),
         vahimmaispistemaara:
           _.toString(vahimmaispisteet)?.replace('.', ',') || '',
-        tilaisuudet: tilaisuudet.map(
-          ({ osoite, aika, lisatietoja, jarjestamispaikka }) => ({
-            osoite: _.get(osoite, 'osoite') || {},
-            postinumero: _.get(osoite, 'postinumeroKoodiUri')
-              ? { value: osoite.postinumeroKoodiUri }
-              : undefined,
-            alkaa: _.get(aika, 'alkaa') || '',
-            paattyy: _.get(aika, 'paattyy') || '',
-            lisatietoja: _.mapValues(lisatietoja || {}, parseEditorState),
-            jarjestamispaikka,
-          })
-        ),
+        tilaisuudet: tilaisuudet.map(getTilaisuusValues),
       })
     ),
   };

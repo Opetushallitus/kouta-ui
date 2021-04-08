@@ -189,7 +189,7 @@ export const createHakukohdeForm = () => {
     fillPerustiedotSection();
     fillAloituspaikatSection();
     fillValintaperusteenKuvausSection();
-    fillValintakokeetSection();
+    fillValintakokeetSection({ withValintaperusteenKokeet: true });
     fillLiitteetSection();
     fillJarjestyspaikkaSection({
       jatka: true,
@@ -221,7 +221,7 @@ export const createHakukohdeForm = () => {
     fillPerustiedotSection({ isKorkeakoulu: true });
     fillAloituspaikatSection({ isKorkeakoulu: true });
     fillValintaperusteenKuvausSection();
-    fillValintakokeetSection();
+    fillValintakokeetSection({ withValintaperusteenKokeet: true });
     fillLiitteetSection();
     fillJarjestyspaikkaSection({ jatka: true });
     fillTilaSection();

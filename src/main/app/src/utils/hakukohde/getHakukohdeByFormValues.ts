@@ -7,7 +7,10 @@ import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
 import { maybeParseNumber } from '#/src/utils';
 import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
 import { getHakulomakeFieldsData } from '#/src/utils/form/getHakulomakeFieldsData';
-import { getKokeetTaiLisanaytotData } from '#/src/utils/form/getKokeetTaiLisanaytotData';
+import {
+  getKokeetTaiLisanaytotData,
+  getTilaisuusData,
+} from '#/src/utils/form/getKokeetTaiLisanaytotData';
 
 const getKielivalinta = values => values?.kieliversiot || [];
 
@@ -124,6 +127,15 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
   const kaytetaanHaukukohteenAlkamiskautta =
     values?.ajankohta?.kaytetaanHakukohteenAlkamiskautta;
 
+  const valintaperusteenValintakokeidenLisatilaisuudet = _.reduce(
+    values?.valintakokeet?.valintaperusteenValintakokeidenLisatilaisuudet || {},
+    (a, v, k) =>
+      v?.length > 0
+        ? [...a, { id: k, tilaisuudet: v.map(getTilaisuusData(kielivalinta)) }]
+        : a,
+    []
+  );
+
   return {
     muokkaaja,
     tila,
@@ -167,6 +179,7 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
         values?.valintakokeet?.yleisKuvaus,
         kuvaus => serializeEditorState(kuvaus)
       ),
+      valintaperusteenValintakokeidenLisatilaisuudet,
       kynnysehto: _.mapValues(
         values?.valintaperusteenKuvaus?.kynnysehto,
         kuvaus => serializeEditorState(kuvaus)

@@ -3,6 +3,26 @@ import _ from 'lodash';
 import { serializeEditorState } from '#/src/components/Editor/utils';
 import { isNumeric, parseFloatComma } from '#/src/utils';
 
+export const getTilaisuusData = kielivalinta => ({
+  osoite,
+  postinumero,
+  alkaa,
+  paattyy,
+  lisatietoja,
+  jarjestamispaikka,
+}) => ({
+  osoite: {
+    osoite: _.pick(osoite || {}, kielivalinta),
+    postinumeroKoodiUri: _.get(postinumero, 'value'),
+  },
+  aika: {
+    alkaa: alkaa,
+    paattyy: paattyy,
+  },
+  lisatietoja: _.mapValues(lisatietoja || {}, serializeEditorState),
+  jarjestamispaikka,
+});
+
 export const getKokeetTaiLisanaytotData = ({
   valintakoeValues = {},
   kielivalinta,
@@ -44,27 +64,7 @@ export const getKokeetTaiLisanaytotData = ({
           serializeEditorState
         ),
       },
-      tilaisuudet: tilaisuudet.map(
-        ({
-          osoite,
-          postinumero,
-          alkaa,
-          paattyy,
-          lisatietoja,
-          jarjestamispaikka,
-        }) => ({
-          osoite: {
-            osoite: _.pick(osoite || {}, kielivalinta),
-            postinumeroKoodiUri: _.get(postinumero, 'value'),
-          },
-          aika: {
-            alkaa: alkaa,
-            paattyy: paattyy,
-          },
-          lisatietoja: _.mapValues(lisatietoja || {}, serializeEditorState),
-          jarjestamispaikka,
-        })
-      ),
+      tilaisuudet: tilaisuudet.map(getTilaisuusData(kielivalinta)),
     })
   );
 };

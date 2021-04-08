@@ -1,11 +1,15 @@
 import _ from 'lodash';
+import _fp from 'lodash/fp';
 
 import { parseEditorState } from '#/src/components/Editor/utils';
 import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
 import { isNumeric } from '#/src/utils';
 import { getAjankohtaFields } from '#/src/utils/form/aloitusajankohtaHelpers';
 import { getHakulomakeFieldsValues } from '#/src/utils/form/getHakulomakeFieldsValues';
-import { getKokeetTaiLisanaytotValues } from '#/src/utils/form/getKokeetTaiLisanaytotValues';
+import {
+  getKokeetTaiLisanaytotValues,
+  getTilaisuusValues,
+} from '#/src/utils/form/getKokeetTaiLisanaytotValues';
 
 const getToimitustapaValues = (toimitustapa, toimitusosoite) => ({
   tapa: toimitustapa || '',
@@ -53,6 +57,7 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
     kynnysehto,
     kaytetaanHaunAlkamiskautta,
     koulutuksenAlkamiskausi = {},
+    valintaperusteenValintakokeidenLisatilaisuudet = [],
   } = metadata;
 
   return {
@@ -104,10 +109,16 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
         : undefined,
       kynnysehto: _.mapValues(kynnysehto, parseEditorState),
     },
-    valintakokeet: getKokeetTaiLisanaytotValues(
-      valintakokeet,
-      valintakokeidenYleiskuvaus
-    ),
+    valintakokeet: {
+      ...getKokeetTaiLisanaytotValues(
+        valintakokeet,
+        valintakokeidenYleiskuvaus
+      ),
+      valintaperusteenValintakokeidenLisatilaisuudet: _fp.pipe(
+        _fp.keyBy('id'),
+        _fp.mapValues(v => v.tilaisuudet.map(getTilaisuusValues))
+      )(valintaperusteenValintakokeidenLisatilaisuudet),
+    },
     jarjestyspaikkaOid,
     liitteet: {
       toimitustapa: getToimitustapaValues(

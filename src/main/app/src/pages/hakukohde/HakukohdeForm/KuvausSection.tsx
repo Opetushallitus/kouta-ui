@@ -34,8 +34,8 @@ export const KuvausSection = ({
   const kohdejoukkoKoodiUri = haku?.kohdejoukkoKoodiUri;
   const watch = [hakuOid, organisaatioOid].join(',');
   const { t } = useTranslation();
-  const valintaperuste = useFieldValue(name);
-  const valintaperusteOid = valintaperuste?.value;
+  const kuvausValues = useFieldValue(name);
+  const valintaperusteOid = kuvausValues?.valintaperuste?.value;
   const kieliValinnat = languages;
 
   const { data, reload } = useApiAsync({

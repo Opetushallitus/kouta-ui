@@ -190,6 +190,10 @@
   "koeTaiLisanaytto": {
     "title": "Koe tai lisänäyttö {{index}}",
     "yleisKuvaus": "Yleiskuvaus kokeista ja lisänäytöistä",
+    "valintaperusteenYleisKuvaus": "Yleiskuvaus valintaperusteen kokeista ja lisänäytöistä",
+    "hakukohteenYleisKuvaus": "Yleiskuvaus hakukohteen kokeista ja lisänäytöistä",
+    "valintaperusteenValintakokeet": "Valintaperusteelle lisätyt valintakokeet",
+    "hakukohteenValintakokeet": "Hakukohteelle lisätyt valintakokeet",
     "tyyppi": "Kokeen tai lisänäytön tyyppi",
     "hakijalleNakyvaNimi": "Hakijalle näkyvä nimi",
     "tietoaHakijalle": "Tietoa kokeesta tai lisänäytöstä hakijalle",

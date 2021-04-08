@@ -258,3 +258,14 @@ export const retryOnRedirect = async ({ httpClient, targetUrl }) => {
 export const safeArray = v => (_.isNil(v) ? [] : _.castArray(v));
 
 export const safeArrayToValue = a => (_.size(a) > 1 ? a : _.get(a, 0));
+
+const postinumeroUriRegExp = /\d{5}/;
+export const getPostinumeroByPostinumeroUri = uri => {
+  if (!_.isString(uri)) {
+    return undefined;
+  }
+
+  const [postinumero] = uri.match(postinumeroUriRegExp) || [];
+
+  return postinumero;
+};

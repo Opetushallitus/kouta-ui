@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 import FormEditInfo from '#/src/components/FormEditInfo';
 import FormHeader from '#/src/components/FormHeader';
-import StatusTag from '#/src/components/StatusTag';
+import LargeStatusTag from '#/src/components/StatusTag/LargeStatusTag';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
@@ -20,7 +20,7 @@ const OppilaitoksenOsaPageHeader = ({ oppilaitos, organisaatio }) => {
     <FormHeader
       status={
         _.get(oppilaitos, 'tila') ? (
-          <StatusTag status={oppilaitos.tila} large />
+          <LargeStatusTag status={oppilaitos.tila} />
         ) : null
       }
       editInfo={

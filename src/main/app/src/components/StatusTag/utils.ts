@@ -2,6 +2,12 @@ import _ from 'lodash';
 
 import { getJulkaisutilaTranslationKey, JULKAISUTILA } from '#/src/constants';
 
+export type StatusTagProps = {
+  status?: JULKAISUTILA | JULKAISUTILA[keyof JULKAISUTILA];
+  color?: string;
+  children?: React.ReactNode;
+};
+
 export const getLabel = ({ status, t }) => {
   if (!_.isString(status)) {
     return null;
@@ -23,15 +29,5 @@ export const getLabel = ({ status, t }) => {
 };
 
 export const getColor = ({ theme, status }) => {
-  let color = theme.colors.tallennettu;
-
-  if (status === JULKAISUTILA.TALLENNETTU) {
-    color = theme.colors.tallennettu;
-  } else if (status === JULKAISUTILA.ARKISTOITU) {
-    color = theme.colors.arkistoitu;
-  } else if (status === JULKAISUTILA.JULKAISTU) {
-    color = theme.colors.julkaistu;
-  }
-
-  return color;
+  return theme.colors[status] ?? theme.colors.tallennettu;
 };

@@ -123,12 +123,22 @@ export const TableRow = ({ children, isTableHead = false, ...props }) => {
   );
 };
 
+type TableCellProps = {
+  sortDirection?: 'asc' | 'desc';
+  onSort?: ((any) => void) | null;
+  children?: React.ReactNode;
+  textCenter?: boolean;
+  isTableHead?: boolean;
+  noBorder?: boolean;
+  active?: boolean;
+} & React.HTMLProps<HTMLTableCellElement>;
+
 export const TableCell = ({
   sortDirection,
   onSort,
-  children = null,
+  children,
   ...props
-}) => {
+}: TableCellProps) => {
   return (
     <TableCellBase {...props}>
       {_.isFunction(onSort) ? (

@@ -9,9 +9,9 @@ import { Icon, Typography } from '#/src/components/virkailija';
 import { JULKAISUTILA } from '#/src/constants';
 import { getThemeProp } from '#/src/theme';
 
-import { getColor, getLabel } from './utils';
+import { getColor, getLabel, StatusTagProps } from './utils';
 
-const statusByIcon = {
+const ICON_BY_STATUS = {
   [JULKAISUTILA.ARKISTOITU]: 'get_app',
   [JULKAISUTILA.JULKAISTU]: 'done',
   [JULKAISUTILA.TALLENNETTU]: 'save',
@@ -22,7 +22,7 @@ const getStatusIconType = status => {
     return '';
   }
 
-  return statusByIcon[status] || '';
+  return ICON_BY_STATUS[status] || '';
 };
 
 const getIconContainerStatusCss = ({ theme, status }) => ({
@@ -70,7 +70,7 @@ const LabelContainer = styled(Typography)`
   color: #313541;
 `;
 
-const LargeStatusTag = ({ status, children = null, ...props }) => {
+const LargeStatusTag = ({ status, children, ...props }: StatusTagProps) => {
   const { t } = useTranslation();
 
   return (

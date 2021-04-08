@@ -2,7 +2,15 @@ import { KOODISTO_VERSIOT, LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
 import getKoodisto from '#/src/utils/koodi/getKoodisto';
 
-export const useKoodisto = ({ koodisto, versio: versioProp }) => {
+type UseKoodistoProps = {
+  koodisto: string;
+  versio?: number;
+};
+
+export const useKoodisto = ({
+  koodisto,
+  versio: versioProp,
+}: UseKoodistoProps) => {
   const versio = versioProp || KOODISTO_VERSIOT[koodisto] || '';
 
   return useApiQuery(

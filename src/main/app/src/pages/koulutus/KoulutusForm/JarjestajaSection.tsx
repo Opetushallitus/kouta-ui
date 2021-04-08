@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
-import _ from 'lodash';
+import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
@@ -9,6 +9,7 @@ import {
   createFormFieldComponent,
   FormFieldCheckbox,
 } from '#/src/components/formFields';
+import ListTable, { makeNimiColumn } from '#/src/components/ListTable';
 import OrganisaatioHierarkiaTreeSelect from '#/src/components/OrganisaatioHierarkiaTreeSelect';
 import Spacing from '#/src/components/Spacing';
 import { Box } from '#/src/components/virkailija';
@@ -35,15 +36,16 @@ const JarjestajatField = createFormFieldComponent(
   })
 );
 
-const OrganizationSection = ({
-  name,
+export const JarjestajaSection = ({
   organisaatioOid,
   koulutus,
   disableTarjoajaHierarkia,
 }) => {
   const { t } = useTranslation();
   const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid, {
-    filter: _.negate(organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)),
+    filter: _fp.negate(
+      organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.TOIMIPISTE)
+    ),
   });
 
   const roleBuilder = useAuthorizedUserRoleBuilder();
@@ -51,7 +53,6 @@ const OrganizationSection = ({
   const isOphVirkailija = useIsOphVirkailija();
 
   const { organisaatiot: tarjoajat } = useOrganisaatiot(tarjoajaOids);
-  console.log(tarjoajat);
   const tarjoajatFromPohja = useFieldValue('pohja.tarjoajat');
   const kaytaPohjanJarjestajaa = useFieldValue(
     'tarjoajat.kaytaPohjanJarjestajaa'
@@ -69,6 +70,25 @@ const OrganizationSection = ({
     [roleBuilder, koulutus]
   );
 
+  const columns = [
+    makeNimiColumn(t, {
+      title: '',
+      getLinkUrl: org => {
+        if (organisaatioMatchesTyyppi(ORGANISAATIOTYYPPI.OPPILAITOS)(org)) {
+          return `/organisaatio/${org.oid}/oppilaitos`;
+        }
+      },
+    }),
+  ];
+
+  const rows = useMemo(() => {
+    return _fp.flow(
+      _fp.filter(Boolean),
+      _fp.map((entity: any = {}) => ({ ...entity, key: entity.oid })),
+      _fp.sortBy(e => getFirstLanguageValue(e.nimi))
+    )(tarjoajat);
+  }, [tarjoajat]);
+
   return (
     <>
       {tarjoajaOids.length > 0 || disableTarjoajaHierarkia ? (
@@ -80,19 +100,16 @@ const OrganizationSection = ({
           </Alert>
         </Box>
       ) : null}
-      {isOphVirkailija ? (
-        <ul>
-          {tarjoajat?.map(({ nimi, oid }) => (
-            <li>
-              {getFirstLanguageValue(nimi)} ({oid})
-            </li>
-          ))}
-        </ul>
-      ) : null}
+
+      {isOphVirkailija && (
+        <Box mb={2}>
+          <ListTable rows={rows} columns={columns} />
+        </Box>
+      )}
       {!disableTarjoajaHierarkia ? (
         <>
           {tarjoajatFromPohja ? (
-            <Spacing marginBottom={2}>
+            <Spacing mb={2}>
               <Field
                 name={`tarjoajat.kaytaPohjanJarjestajaa`}
                 component={FormFieldCheckbox}
@@ -117,5 +134,3 @@ const OrganizationSection = ({
     </>
   );
 };
-
-export default OrganizationSection;

@@ -23,7 +23,7 @@ import { getTestIdProps } from '#/src/utils';
 import getKoulutukset from '#/src/utils/koulutus/getKoulutukset';
 import isOphOrganisaatio from '#/src/utils/organisaatio/isOphOrganisaatio';
 
-import JarjestajaSection from './JarjestajaSection';
+import { JarjestajaSection } from './JarjestajaSection';
 import KoulutustyyppiSection from './KoulutustyyppiSection';
 import KuvausSection from './KuvausSection';
 import { LisatiedotSection } from './LisatiedotSection';

@@ -29,11 +29,13 @@ const getLiitteillaYhteinenToimitusaika = values =>
 const getLiitteillaYhteinenToimitusosoite = values =>
   !!_.get(values, 'liitteet.yhteinenToimituspaikka');
 
-const validatejarjestyspaikkaOid = (errorBuilder, values) => {
+// TODO: Should this be implemented?
+const validatejarjestyspaikkaOid = errorBuilder => {
   return errorBuilder;
 };
 
-const validateLiitteet = (errorBuilder, values) => {
+const validateLiitteet = errorBuilder => {
+  const values = errorBuilder.getValues();
   const kieliversiot = getKielivalinta(values);
 
   const liitteillaYhteinenToimitusaika = getLiitteillaYhteinenToimitusaika(
@@ -132,8 +134,8 @@ const config = createFormConfigBuilder().registerSections([
       },
       {
         field: 'hakuajat',
-        validate: validateIfJulkaistu((eb, values) =>
-          _.get(values, 'hakuajat.eriHakuaika')
+        validate: validateIfJulkaistu(eb =>
+          _.get(eb.getValues(), 'hakuajat.eriHakuaika')
             ? eb
                 .validateArrayMinLength('hakuajat.hakuajat', 1, {
                   isFieldArray: true,
@@ -211,7 +213,7 @@ const config = createFormConfigBuilder().registerSections([
   {
     section: 'liitteet',
     field: 'liitteet',
-    validate: validateIfJulkaistu((eb, values) => validateLiitteet(eb, values)),
+    validate: validateIfJulkaistu(validateLiitteet),
   },
   {
     section: 'jarjestyspaikkaOid',

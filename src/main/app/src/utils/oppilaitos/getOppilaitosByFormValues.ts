@@ -1,32 +1,30 @@
 import _ from 'lodash';
+import _fp from 'lodash/fp';
 
 import { serializeEditorState } from '#/src/components/Editor/utils';
 import { isNumeric } from '#/src/utils';
 
-const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
+const parseNumeric = value => (isNumeric(value) ? parseInt(value) : null);
+
+export const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
   const {
     perustiedot,
     esittely,
     yhteystiedot,
+    hakijapalveluidenYhteystiedot: hy,
     tietoa,
     kieliversiot,
     teemakuva,
     esikatselu = false,
   } = values;
 
-  const {
-    osoite,
-    postinumero,
-    puhelinnumero,
-    verkkosivu,
-    sahkoposti,
-  } = yhteystiedot;
+  const pickTranslations = _fp.pick(kieliversiot || []);
 
-  const tietoaOpiskelusta = (_.get(tietoa, 'osiot') || []).map(
+  const tietoaOpiskelusta = (tietoa?.osiot || []).map(
     ({ value: otsikkoKoodiUri }) => ({
       otsikkoKoodiUri,
       teksti: _.mapValues(
-        _.pick(_.get(tietoa, ['tiedot', otsikkoKoodiUri]) || {}, kieliversiot),
+        pickTranslations(_.get(tietoa, ['tiedot', otsikkoKoodiUri]) || {}),
         serializeEditorState
       ),
     })
@@ -36,47 +34,79 @@ const getOppilaitosByFormValues = ({ tila, muokkaaja, ...values }) => {
     tila,
     muokkaaja,
     kielivalinta: kieliversiot,
-    logo: _.get(perustiedot, 'logo'),
+    logo: perustiedot?.logo,
     teemakuva,
     esikatselu,
     metadata: {
-      yhteystiedot: {
-        osoite: {
-          osoite: _.pick(osoite || {}, kieliversiot),
-          postinumeroKoodiUri: _.get(postinumero, 'value') || null,
-        },
-        sahkoposti: _.pick(sahkoposti || {}, kieliversiot),
-        puhelinnumero: _.pick(puhelinnumero || {}, kieliversiot),
-        wwwSivu: _.pick(verkkosivu || {}, kieliversiot),
-      },
+      yhteystiedot: yhteystiedot.map(
+        ({
+          nimi,
+          postiosoite,
+          postinumero,
+          kayntiosoite,
+          kayntiosoitePostinumero,
+          sahkoposti,
+          puhelinnumero,
+        }) => ({
+          nimi: pickTranslations(nimi || {}),
+          postiosoite:
+            !_.isEmpty(postiosoite) || postinumero
+              ? {
+                  osoite: pickTranslations(postiosoite || {}),
+                  postinumeroKoodiUri: postinumero?.value || null,
+                }
+              : null,
+          kayntiosoite:
+            !_.isEmpty(kayntiosoite) || kayntiosoitePostinumero
+              ? {
+                  osoite: pickTranslations(kayntiosoite || {}),
+                  postinumeroKoodiUri: kayntiosoitePostinumero?.value || null,
+                }
+              : null,
+          sahkoposti: pickTranslations(sahkoposti || {}),
+          puhelinnumero: pickTranslations(puhelinnumero || {}),
+        })
+      ),
+      hakijapalveluidenYhteystiedot: hy
+        ? {
+            nimi: pickTranslations(hy.nimi || {}),
+            postiosoite:
+              !_.isEmpty(hy.postiosoite) || hy.postinumero
+                ? {
+                    osoite: pickTranslations(hy.postiosoite || {}),
+                    postinumeroKoodiUri: hy.postinumero?.value || null,
+                  }
+                : null,
+            kayntiosoite:
+              !_.isEmpty(hy.kayntiosoite) || hy.kayntiosoitePostinumero
+                ? {
+                    osoite: pickTranslations(hy.kayntiosoite || {}),
+                    postinumeroKoodiUri:
+                      hy.kayntiosoitePostinumero?.value || null,
+                  }
+                : null,
+            sahkoposti: pickTranslations(hy.sahkoposti || {}),
+            puhelinnumero: pickTranslations(hy.puhelinnumero || {}),
+          }
+        : null,
       esittely: _.mapValues(
-        _.pick(esittely || {}, kieliversiot),
+        pickTranslations(esittely || {}),
         serializeEditorState
       ),
       tietoaOpiskelusta,
-      opiskelijoita: isNumeric(_.get(perustiedot, 'opiskelijoita'))
-        ? parseInt(perustiedot.opiskelijoita)
-        : null,
-      korkeakouluja: isNumeric(_.get(perustiedot, 'korkeakouluja'))
-        ? parseInt(perustiedot.korkeakouluja)
-        : null,
-      tiedekuntia: isNumeric(_.get(perustiedot, 'tiedekuntia'))
-        ? parseInt(perustiedot.tiedekuntia)
-        : null,
-      kampuksia: isNumeric(_.get(perustiedot, 'kampuksia'))
-        ? parseInt(perustiedot.kampuksia)
-        : null,
-      yksikoita: isNumeric(_.get(perustiedot, 'yksikoita'))
-        ? parseInt(perustiedot.yksikoita)
-        : null,
-      toimipisteita: isNumeric(_.get(perustiedot, 'toimipisteita'))
-        ? parseInt(perustiedot.toimipisteita)
-        : null,
-      akatemioita: isNumeric(_.get(perustiedot, 'akatemioita'))
-        ? parseInt(perustiedot.akatemioita)
+      opiskelijoita: parseNumeric(perustiedot?.opiskelijoita),
+      korkeakouluja: parseNumeric(perustiedot?.korkeakouluja),
+      tiedekuntia: parseNumeric(perustiedot?.tiedekuntia),
+      kampuksia: parseNumeric(perustiedot?.kampuksia),
+      yksikoita: parseNumeric(perustiedot?.yksikoita),
+      toimipisteita: parseNumeric(perustiedot?.toimipisteita),
+      akatemioita: parseNumeric(perustiedot?.akatemioita),
+      wwwSivu: !_.isEmpty(perustiedot?.wwwSivuUrl)
+        ? {
+            url: pickTranslations(perustiedot.wwwSivuUrl || {}),
+            nimi: pickTranslations(perustiedot.wwwSivuNimi || {}),
+          }
         : null,
     },
   };
 };
-
-export default getOppilaitosByFormValues;

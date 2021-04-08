@@ -1,4 +1,4 @@
-import getFormValuesByOppilaitos from '#/src/utils/oppilaitos/getFormValuesByOppilaitos';
+import { getFormValuesByOppilaitos } from '#/src/utils/oppilaitos/getFormValuesByOppilaitos';
 
 test('getFormValuesByOppilaitos returns correct form values given oppilaitos', () => {
   const values = getFormValuesByOppilaitos({
@@ -13,8 +13,49 @@ test('getFormValuesByOppilaitos returns correct form values given oppilaitos', (
       kampuksia: 3,
       korkeakouluja: 5,
       opiskelijoita: 100,
-      yhteystiedot: {
-        osoite: {
+      yhteystiedot: [
+        {
+          nimi: {
+            fi: 'Yhteystiedon nimi',
+            sv: 'Yhteystiedon nimi sv',
+          },
+          postiosoite: {
+            osoite: {
+              fi: 'Fi osoite',
+              sv: 'Sv osoite',
+            },
+            postinumeroKoodiUri: 'postinumero_1#1',
+          },
+          kayntiosoite: {
+            osoite: {
+              fi: 'Fi osoite',
+              sv: 'Sv osoite',
+            },
+            postinumeroKoodiUri: 'postinumero_1#1',
+          },
+          puhelinnumero: {
+            fi: '1234',
+            sv: '5678',
+          },
+          sahkoposti: {
+            fi: 'fi@sahkoposti.fi',
+            sv: 'sv@sahkoposti.sv',
+          },
+        },
+      ],
+      hakijapalveluidenYhteystiedot: {
+        nimi: {
+          fi: 'Hakijapalveluiden nimi',
+          sv: 'Hakijapalveluiden nimi sv',
+        },
+        postiosoite: {
+          osoite: {
+            fi: 'Fi osoite',
+            sv: 'Sv osoite',
+          },
+          postinumeroKoodiUri: 'postinumero_1#1',
+        },
+        kayntiosoite: {
           osoite: {
             fi: 'Fi osoite',
             sv: 'Sv osoite',
@@ -46,6 +87,16 @@ test('getFormValuesByOppilaitos returns correct form values given oppilaitos', (
       ],
       toimipisteita: 9,
       yksikoita: 2,
+      wwwSivu: {
+        url: {
+          fi: 'www.verkkosivu.fi',
+          sv: 'www.verkkosivu.sv',
+        },
+        nimi: {
+          fi: 'Verkkosivu fi',
+          sv: 'Verkkosivu sv',
+        },
+      },
     },
   });
 

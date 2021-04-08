@@ -70,7 +70,7 @@ const config = createFormConfigBuilder().registerSections([
     koulutustyypit: koulutustyypitWithValintatapa,
     fields: {
       valintatavat: {
-        validate: validateIfJulkaistu((eb, values) =>
+        validate: validateIfJulkaistu(eb =>
           eb
             .validateArrayMinLength('valintatavat', 1, {
               isFieldArray: true,
@@ -78,7 +78,7 @@ const config = createFormConfigBuilder().registerSections([
             .validateArray('valintatavat', eb =>
               eb
                 .validateExistence('tapa')
-                .validateTranslations('nimi', getKielivalinta(values))
+                .validateTranslations('nimi', getKielivalinta(eb.getValues()))
             )
         ),
       },

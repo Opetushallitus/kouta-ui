@@ -9,7 +9,6 @@ import {
   makeApiDecorator,
   makeLocalizationDecorator,
 } from '#/src/storybookUtils';
-import getOppilaitosFormConfig from '#/src/utils/oppilaitos/getOppilaitosFormConfig';
 
 import OppilaitosForm, { initialValues } from './index';
 
@@ -19,7 +18,7 @@ storiesOf('OppilaitosForm', module)
   .addDecorator(makeApiDecorator())
   .add('Basic', () => (
     <ReduxForm form="oppilaitosForm" initialValues={initialValues}>
-      <FormConfigContext.Provider value={getOppilaitosFormConfig()}>
+      <FormConfigContext.Provider value={{ noFieldConfigs: true }}>
         <OppilaitosForm organisaatioOid="1.2.246.562.10.39218317368" />
       </FormConfigContext.Provider>
     </ReduxForm>

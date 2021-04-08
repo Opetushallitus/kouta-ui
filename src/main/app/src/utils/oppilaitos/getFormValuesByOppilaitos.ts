@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 import { parseEditorState } from '#/src/components/Editor/utils';
 
-const getFormValuesByOppilaitos = oppilaitos => {
+export const getFormValuesByOppilaitos = oppilaitos => {
   const {
     kielivalinta,
     tila,
@@ -11,7 +11,8 @@ const getFormValuesByOppilaitos = oppilaitos => {
     teemakuva,
     metadata: {
       tietoaOpiskelusta,
-      yhteystiedot,
+      yhteystiedot = [],
+      hakijapalveluidenYhteystiedot,
       esittely,
       opiskelijoita,
       korkeakouluja,
@@ -20,6 +21,7 @@ const getFormValuesByOppilaitos = oppilaitos => {
       yksikoita,
       toimipisteita,
       akatemioita,
+      wwwSivu,
     },
   } = oppilaitos;
 
@@ -28,15 +30,34 @@ const getFormValuesByOppilaitos = oppilaitos => {
     tila,
     esikatselu,
     esittely: _.mapValues(esittely || {}, parseEditorState),
-    yhteystiedot: {
-      osoite: _.get(yhteystiedot, 'osoite.osoite') || {},
-      postinumero: _.get(yhteystiedot, 'osoite.postinumeroKoodiUri')
-        ? { value: yhteystiedot.osoite.postinumeroKoodiUri }
+    yhteystiedot: yhteystiedot.map(yhteystieto => ({
+      nimi: yhteystieto.nimi || {},
+      postiosoite: yhteystieto.postiosoite?.osoite || {},
+      postinumero: yhteystieto.postiosoite?.postinumeroKoodiUri
+        ? { value: yhteystieto.postiosoite.postinumeroKoodiUri }
         : null,
-      verkkosivu: _.get(yhteystiedot, 'wwwSivu') || {},
-      puhelinnumero: _.get(yhteystiedot, 'puhelinnumero') || {},
-      sahkoposti: _.get(yhteystiedot, 'sahkoposti') || {},
-    },
+      kayntiosoite: yhteystieto.kayntiosoite?.osoite || {},
+      kayntiosoitePostinumero: yhteystieto.kayntiosoite?.postinumeroKoodiUri
+        ? { value: yhteystieto.kayntiosoite.postinumeroKoodiUri }
+        : null,
+      puhelinnumero: yhteystieto.puhelinnumero || {},
+      sahkoposti: yhteystieto.sahkoposti || {},
+    })),
+    hakijapalveluidenYhteystiedot: hakijapalveluidenYhteystiedot
+      ? {
+          nimi: hakijapalveluidenYhteystiedot.nimi || {},
+          postiosoite: hakijapalveluidenYhteystiedot.postiosoite?.osoite || {},
+          postinumero: hakijapalveluidenYhteystiedot.postiosoite
+            ?.postinumeroKoodiUri
+            ? {
+                value:
+                  hakijapalveluidenYhteystiedot.postiosoite.postinumeroKoodiUri,
+              }
+            : null,
+          puhelinnumero: hakijapalveluidenYhteystiedot.puhelinnumero || {},
+          sahkoposti: hakijapalveluidenYhteystiedot.sahkoposti || {},
+        }
+      : null,
     tietoa: {
       osiot: (tietoaOpiskelusta || []).map(({ otsikkoKoodiUri }) => ({
         value: otsikkoKoodiUri,
@@ -59,9 +80,9 @@ const getFormValuesByOppilaitos = oppilaitos => {
       toimipisteita: _.isNumber(toimipisteita) ? toimipisteita : '',
       akatemioita: _.isNumber(akatemioita) ? akatemioita : '',
       logo,
+      wwwSivuUrl: wwwSivu?.url || {},
+      wwwSivuNimi: wwwSivu?.nimi || {},
     },
     teemakuva,
   };
 };
-
-export default getFormValuesByOppilaitos;

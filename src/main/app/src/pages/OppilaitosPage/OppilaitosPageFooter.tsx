@@ -6,9 +6,9 @@ import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY } from '#/src/constants';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import createOppilaitos from '#/src/utils/oppilaitos/createOppilaitos';
-import getOppilaitosByFormValues from '#/src/utils/oppilaitos/getOppilaitosByFormValues';
+import { getOppilaitosByFormValues } from '#/src/utils/oppilaitos/getOppilaitosByFormValues';
 import updateOppilaitos from '#/src/utils/oppilaitos/updateOppilaitos';
-import validateOppilaitosForm from '#/src/utils/oppilaitos/validateOppilaitosForm';
+import { validateOppilaitosForm } from '#/src/utils/oppilaitos/validateOppilaitosForm';
 
 const OppilaitosPageFooter = ({ oppilaitos, organisaatioOid, readOnly }) => {
   const queryClient = useQueryClient();

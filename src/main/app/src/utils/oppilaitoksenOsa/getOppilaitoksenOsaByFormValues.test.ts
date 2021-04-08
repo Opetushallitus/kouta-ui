@@ -1,5 +1,5 @@
 import { parseEditorState } from '#/src/components/Editor/utils';
-import getOppilaitoksenOsaByFormValues from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaByFormValues';
+import { getOppilaitoksenOsaByFormValues } from '#/src/utils/oppilaitoksenOsa/getOppilaitoksenOsaByFormValues';
 
 test('getOppilaitoksenOsaByFormValues returns correct oppilaitoksen osa given form values', () => {
   const oppilaitos = getOppilaitoksenOsaByFormValues({
@@ -17,26 +17,41 @@ test('getOppilaitoksenOsaByFormValues returns correct oppilaitoksen osa given fo
         fi: 'Fi kampus',
         sv: 'Sv kampus',
       },
-    },
-    yhteystiedot: {
-      osoite: {
-        fi: 'Fi osoite',
-        sv: 'Sv osoite',
-      },
-      postinumero: { value: 'postinumero_1#1' },
-      puhelinnumero: {
-        fi: '1234',
-        sv: '5678',
-      },
-      sahkoposti: {
-        fi: 'fi@sahkoposti.fi',
-        sv: 'sv@sahkoposti.sv',
-      },
-      verkkosivu: {
+      wwwSivuUrl: {
         fi: 'www.verkkosivu.fi',
         sv: 'www.verkkosivu.sv',
       },
+      wwwSivuNimi: {
+        fi: 'Verkkosivu fi',
+        sv: 'Verkkosivu sv',
+      },
     },
+    yhteystiedot: [
+      {
+        nimi: {
+          fi: 'Yhteystiedon nimi',
+          sv: 'Yhteystiedon nimi sv',
+        },
+        postiosoite: {
+          fi: 'Fi osoite',
+          sv: 'Sv osoite',
+        },
+        postinumero: { value: 'postinumero_1#1' },
+        kayntiosoite: {
+          fi: 'Fi osoite',
+          sv: 'Sv osoite',
+        },
+        kayntiosoitePostinumero: { value: 'postinumero_1#1' },
+        puhelinnumero: {
+          fi: '1234',
+          sv: '5678',
+        },
+        sahkoposti: {
+          fi: 'fi@sahkoposti.fi',
+          sv: 'sv@sahkoposti.sv',
+        },
+      },
+    ],
   });
 
   expect(oppilaitos).toMatchSnapshot();

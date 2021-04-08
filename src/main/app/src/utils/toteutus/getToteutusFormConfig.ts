@@ -341,10 +341,10 @@ const config = createFormConfigBuilder().registerSections([
       },
       {
         field: '.maksunMaara',
-        validate: (eb, values) =>
+        validate: eb =>
           validateIf(
-            values?.tila === JULKAISUTILA.JULKAISTU &&
-              values?.jarjestamistiedot?.maksullisuustyyppi !==
+            eb.getValues()?.tila === JULKAISUTILA.JULKAISTU &&
+              eb.getValues()?.jarjestamistiedot?.maksullisuustyyppi !==
                 MaksullisuusTyyppi.MAKSUTON,
             validateInteger('jarjestamistiedot.maksunMaara', { min: 0 })
           )(eb),

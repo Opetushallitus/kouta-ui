@@ -13,11 +13,10 @@ import Title from '#/src/components/Title';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useUrls } from '#/src/contexts/UrlContext';
-import { useEntityFormConfig } from '#/src/hooks/form';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import koodiUriHasVersion from '#/src/utils/koodi/koodiUriHasVersion';
-import getFormValuesByOppilaitos from '#/src/utils/oppilaitos/getFormValuesByOppilaitos';
+import { getFormValuesByOppilaitos } from '#/src/utils/oppilaitos/getFormValuesByOppilaitos';
 import { useOppilaitosByOid } from '#/src/utils/oppilaitos/getOppilaitosByOid';
 import getOrganisaatioContactInfo from '#/src/utils/organisaatio/getOrganisaatioContactInfo';
 
@@ -26,7 +25,7 @@ import OppilaitosForm, {
 } from './OppilaitosForm';
 import OppilaitosPageFooter from './OppilaitosPageFooter';
 
-const OppilaitosPage = ({
+export const OppilaitosPage = ({
   match: {
     params: { organisaatioOid },
   },
@@ -53,8 +52,6 @@ const OppilaitosPage = ({
 
   const { t } = useTranslation();
 
-  const config = useEntityFormConfig(ENTITY.OPPILAITOS);
-
   const contactInfo = useMemo(() => getOrganisaatioContactInfo(organisaatio), [
     organisaatio,
   ]);
@@ -73,22 +70,30 @@ const OppilaitosPage = ({
 
   const readOnly = oppilaitos ? !canUpdate : !canCreate;
 
+  const config = useMemo(() => ({ noFieldConfigs: true, readOnly }), [
+    readOnly,
+  ]);
+
   const initialValues = useMemo(
     () => ({
       ...(formMode === FormMode.CREATE
         ? {
             ...formInitialValues,
-            yhteystiedot: {
-              osoite: contactInfo.osoite || {},
-              postinumero: contactInfo.postinumeroKoodiUri
-                ? {
-                    value: koodiUriHasVersion(contactInfo.postinumeroKoodiUri)
-                      ? contactInfo.postinumeroKoodiUri
-                      : `${contactInfo.postinumeroKoodiUri}#2`,
-                  }
-                : undefined,
-              verkkosivu: contactInfo.verkkosivu || '',
-              puhelinnumero: contactInfo.puhelinnumero || '',
+            yhteystiedot: [
+              {
+                postiosoite: contactInfo.osoite || {},
+                postinumero: contactInfo.postinumeroKoodiUri
+                  ? {
+                      value: koodiUriHasVersion(contactInfo.postinumeroKoodiUri)
+                        ? contactInfo.postinumeroKoodiUri
+                        : `${contactInfo.postinumeroKoodiUri}#2`,
+                    }
+                  : undefined,
+                puhelinnumero: contactInfo.puhelinnumero || '',
+              },
+            ],
+            perustiedot: {
+              wwwSivuUrl: contactInfo.verkkosivu || '',
             },
           }
         : oppilaitos
@@ -108,7 +113,7 @@ const OppilaitosPage = ({
   ) : (
     <ReduxForm form={ENTITY.OPPILAITOS} initialValues={initialValues}>
       <Title>{t('sivuTitlet.oppilaitos')}</Title>
-      <FormConfigContext.Provider value={{ ...config, readOnly }}>
+      <FormConfigContext.Provider value={config}>
         <FormPage
           readOnly={readOnly}
           steps={<OppilaitosFormSteps activeStep={ENTITY.OPPILAITOS} />}
@@ -147,5 +152,3 @@ const OppilaitosPage = ({
     </ReduxForm>
   );
 };
-
-export default OppilaitosPage;

@@ -1,5 +1,5 @@
 import { parseEditorState } from '#/src/components/Editor/utils';
-import getOppilaitosByFormValues from '#/src/utils/oppilaitos/getOppilaitosByFormValues';
+import { getOppilaitosByFormValues } from '#/src/utils/oppilaitos/getOppilaitosByFormValues';
 
 test('getOppilaitosByFormValues returns correct oppilaitos given form values', () => {
   const oppilaitos = getOppilaitosByFormValues({
@@ -27,13 +27,56 @@ test('getOppilaitosByFormValues returns correct oppilaitos given form values', (
       yksikoita: '2',
       toimipisteita: '9',
       akatemioita: '1',
+      wwwSivuUrl: {
+        fi: 'www.verkkosivu.fi',
+        sv: 'www.verkkosivu.sv',
+      },
+      wwwSivuNimi: {
+        fi: 'Verkkosivu fi',
+        sv: 'Verkkosivu sv',
+      },
     },
-    yhteystiedot: {
-      osoite: {
+    yhteystiedot: [
+      {
+        nimi: {
+          fi: 'Yhteystiedon nimi',
+          sv: 'Yhteystiedon nimi sv',
+        },
+        postiosoite: {
+          fi: 'Fi osoite',
+          sv: 'Sv osoite',
+        },
+        postinumero: { value: 'postinumero_1#1' },
+        kayntiosoite: {
+          fi: 'Fi osoite',
+          sv: 'Sv osoite',
+        },
+        kayntiosoitePostinumero: { value: 'postinumero_1#1' },
+        puhelinnumero: {
+          fi: '1234',
+          sv: '5678',
+        },
+        sahkoposti: {
+          fi: 'fi@sahkoposti.fi',
+          sv: 'sv@sahkoposti.sv',
+        },
+      },
+    ],
+    hakijapalveluidenYhteystiedot: {
+      nimi: {
+        fi: 'Hakijapalveluiden nimi',
+        sv: 'Hakijapalveluiden nimi sv',
+      },
+      postiosoite: {
         fi: 'Fi osoite',
         sv: 'Sv osoite',
       },
       postinumero: { value: 'postinumero_1#1' },
+      kayntiosoite: {
+        fi: 'Fi osoite',
+        sv: 'Sv osoite',
+      },
+      kayntiosoitePostinumero: { value: 'postinumero_1#1' },
       puhelinnumero: {
         fi: '1234',
         sv: '5678',
@@ -41,10 +84,6 @@ test('getOppilaitosByFormValues returns correct oppilaitos given form values', (
       sahkoposti: {
         fi: 'fi@sahkoposti.fi',
         sv: 'sv@sahkoposti.sv',
-      },
-      verkkosivu: {
-        fi: 'www.verkkosivu.fi',
-        sv: 'www.verkkosivu.sv',
       },
     },
   });

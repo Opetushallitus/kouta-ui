@@ -38,14 +38,20 @@ const config = createFormConfigBuilder().registerSections([
     parts: [
       {
         field: '.nimi',
-        validate: (eb, values) =>
-          eb.validateTranslations('tiedot.nimi', getKielivalinta(values)),
+        validate: eb =>
+          eb.validateTranslations(
+            'tiedot.nimi',
+            getKielivalinta(eb.getValues())
+          ),
         required: true,
       },
       {
         field: '.kuvaus',
-        validate: validateIfJulkaistu((eb, values) =>
-          eb.validateTranslations('tiedot.kuvaus', getKielivalinta(values))
+        validate: validateIfJulkaistu(eb =>
+          eb.validateTranslations(
+            'tiedot.kuvaus',
+            getKielivalinta(eb.getValues())
+          )
         ),
         required: true,
       },

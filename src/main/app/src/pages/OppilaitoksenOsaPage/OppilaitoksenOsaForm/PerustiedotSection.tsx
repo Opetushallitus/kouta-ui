@@ -5,7 +5,9 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import DividerHeading from '#/src/components/DividerHeading';
-import { FormFieldInput } from '#/src/components/formFields';
+import { FormFieldInput, FormFieldUrlInput } from '#/src/components/formFields';
+import { GridColumn } from '#/src/components/GridColumn';
+import { GridRow } from '#/src/components/GridRow';
 import { Box, Typography } from '#/src/components/virkailija';
 import useKoodiNimet from '#/src/hooks/useKoodiNimet';
 import useKoodiNimi from '#/src/hooks/useKoodiNimi';
@@ -44,6 +46,22 @@ const TiedotSection = ({ name, t, language }) => {
           />
         </Box>
       </Box>
+      <GridRow gutter={2}>
+        <GridColumn md={6}>
+          <Field
+            component={FormFieldUrlInput}
+            name={`${name}.wwwSivuUrl.${language}`}
+            label={t('oppilaitoslomake.wwwSivu')}
+          />
+        </GridColumn>
+        <GridColumn md={6}>
+          <Field
+            component={FormFieldInput}
+            name={`${name}.wwwSivuNimi.${language}`}
+            label={t('oppilaitoslomake.wwwSivuNimi')}
+          />
+        </GridColumn>
+      </GridRow>
     </>
   );
 };

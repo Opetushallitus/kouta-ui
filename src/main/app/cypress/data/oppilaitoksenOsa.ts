@@ -12,25 +12,33 @@ export default () => ({
       sv: 'Sv kampus',
     },
     opiskelijoita: 100,
-    yhteystiedot: {
-      osoite: {
-        osoite: {
-          fi: 'Fi osoite',
-          sv: 'Sv osoite',
+    yhteystiedot: [
+      {
+        postiosoite: {
+          osoite: {
+            fi: 'Fi osoite',
+            sv: 'Sv osoite',
+          },
+          postinumeroKoodiUri: 'posti_0#2',
         },
-        postinumeroKoodiUri: 'posti_0#2',
+        puhelinnumero: {
+          fi: '1234',
+          sv: '5678',
+        },
+        sahkoposti: {
+          fi: 'fi@sahkoposti.fi',
+          sv: 'sv@sahkoposti.sv',
+        },
       },
-      puhelinnumero: {
-        fi: '1234',
-        sv: '5678',
-      },
-      wwwSivu: {
+    ],
+    wwwSivu: {
+      url: {
         fi: 'http://www.verkkosivu.fi',
         sv: 'http://www.verkkosivu.sv',
       },
-      sahkoposti: {
-        fi: 'fi@sahkoposti.fi',
-        sv: 'sv@sahkoposti.sv',
+      nimi: {
+        fi: 'Verkkosivu fi',
+        sv: 'Verkkosivu sv',
       },
     },
   },

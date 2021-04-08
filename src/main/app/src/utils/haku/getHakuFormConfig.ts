@@ -111,12 +111,13 @@ const config = createFormConfigBuilder().registerSections([
       },
       {
         field: '.hakuaika',
-        validate: validateIfJulkaistu((errorBuilder, values) =>
+        validate: validateIfJulkaistu(errorBuilder =>
           errorBuilder
             .validateArrayMinLength('aikataulut.hakuaika', 1, {
               isFieldArray: true,
             })
             .validateArray('aikataulut.hakuaika', eb => {
+              const values = errorBuilder.getValues();
               const hakutapa = getHakutapa(values);
               const isErillishaku = isErillishakuHakutapa(hakutapa);
               const isYhteishaku = isYhteishakuHakutapa(hakutapa);
@@ -171,7 +172,7 @@ const config = createFormConfigBuilder().registerSections([
         field: '.tyyppi',
         required: true,
         validate: validateIfJulkaistu(
-          (eb, values) =>
+          eb =>
             eb.validateExistence('hakulomake.tyyppi') &&
             _fp.cond([
               [
@@ -183,11 +184,11 @@ const config = createFormConfigBuilder().registerSections([
                 () =>
                   eb.validateTranslations(
                     'hakulomake.linkki',
-                    getKielivalinta(values)
+                    getKielivalinta(eb.getValues())
                   ),
               ],
               [otherwise, () => eb],
-            ])(tyyppi => values?.hakulomake?.tyyppi === tyyppi)
+            ])(tyyppi => eb.getValues()?.hakulomake?.tyyppi === tyyppi)
         ),
       },
       {

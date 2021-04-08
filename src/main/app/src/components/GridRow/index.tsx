@@ -8,9 +8,10 @@ const GridRowBase = styled.div`
   flex-wrap: wrap;
 `;
 
-const GridRow = ({ gutter = 2, children }) => {
-  const wrappedChildren = React.Children.map(children, child =>
-    React.cloneElement(child, { gutter })
+export const GridRow = ({ gutter = 2, children }) => {
+  const wrappedChildren = React.Children.map(
+    children,
+    child => child && React.cloneElement(child, { gutter })
   );
 
   return <GridRowBase gutter={gutter}>{wrappedChildren}</GridRowBase>;

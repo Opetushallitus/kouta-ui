@@ -14,8 +14,12 @@ Object {
     },
   },
   "aloituspaikat": Object {
-    "aloituspaikkamaara": "35",
-    "ensikertalaismaara": "39",
+    "aloituspaikkakuvaus": Object {
+      "fi": "aloituspaikan kuvaus fi",
+      "sv": "aloituspaikan kuvaus sv",
+    },
+    "aloituspaikkamaara": "45",
+    "ensikertalaismaara": "35",
   },
   "esikatselu": false,
   "hakuajat": Object {

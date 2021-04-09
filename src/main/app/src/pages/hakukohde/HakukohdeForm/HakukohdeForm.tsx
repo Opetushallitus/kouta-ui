@@ -9,8 +9,8 @@ import KieliversiotFields from '#/src/components/KieliversiotFields';
 import KokeetTaiLisanaytotSection from '#/src/components/KokeetTaiLisanaytotSection';
 import { KOULUTUSTYYPPI } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
+import { AloituspaikatSection } from '#/src/pages/hakukohde/HakukohdeForm/AloituspaikatSection';
 
-import AloituspaikatSection from './AloituspaikatSection';
 import JarjestyspaikkaSection from './JarjestyspaikkaSection';
 import KuvausSection from './KuvausSection';
 import LiitteetSection from './LiitteetSection';

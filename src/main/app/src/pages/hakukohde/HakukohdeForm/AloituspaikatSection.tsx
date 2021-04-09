@@ -9,7 +9,7 @@ import { FormLabel } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 import isKorkeakouluKoulutustyyppi from '#/src/utils/koulutus/isKorkeakouluKoulutustyyppi';
 
-const AloituspaikatSection = ({ koulutustyyppi, name }) => {
+export const AloituspaikatSection = ({ koulutustyyppi, name }) => {
   const isKorkeakoulu = isKorkeakouluKoulutustyyppi(koulutustyyppi);
   const { t } = useTranslation();
 
@@ -66,5 +66,3 @@ const AloituspaikatSection = ({ koulutustyyppi, name }) => {
     </>
   );
 };
-
-export default AloituspaikatSection;

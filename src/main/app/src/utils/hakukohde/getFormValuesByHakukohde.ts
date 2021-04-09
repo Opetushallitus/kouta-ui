@@ -64,6 +64,7 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
       ensikertalaismaara: isNumeric(aloituspaikat.ensikertalaisille)
         ? aloituspaikat.ensikertalaisille.toString()
         : '',
+      aloituspaikkakuvaus: aloituspaikat.kuvaus,
     },
     hakuajat: {
       eriHakuaika: !kaytetaanHaunAikataulua,

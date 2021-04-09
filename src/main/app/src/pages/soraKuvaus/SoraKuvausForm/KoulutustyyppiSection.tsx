@@ -47,6 +47,7 @@ export const KoulutustyyppiSection = ({ name, canEditKoulutustyyppi }) => {
         component={FormFieldKoulutustyyppiSelect}
         label={t('yleiset.valitseKoulutustyyppi')}
         disabled={!canEditKoulutustyyppi}
+        required
       />
       <Box display="flex" mt={4}>
         <Box flex="1 1 50%" mr={2} {...getTestIdProps('koulutusala')}>

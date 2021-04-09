@@ -13,7 +13,6 @@ import { Box, Typography } from '#/src/components/virkailija';
 import useKoodiNimet from '#/src/hooks/useKoodiNimet';
 import useKoodiNimi from '#/src/hooks/useKoodiNimi';
 import { useOrganisaatio } from '#/src/hooks/useOrganisaatio';
-import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 

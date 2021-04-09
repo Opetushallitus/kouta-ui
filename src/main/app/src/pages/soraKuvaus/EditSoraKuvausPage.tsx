@@ -13,7 +13,6 @@ import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
-import { useEntityFormConfig } from '#/src/hooks/form';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import getFormValuesBySoraKuvaus from '#/src/utils/soraKuvaus/getFormValuesBySoraKuvaus';
 import { useSoraKuvausById } from '#/src/utils/soraKuvaus/getSoraKuvausById';
@@ -37,17 +36,20 @@ const EditSoraKuvausPage = props => {
 
   const canUpdate = useIsOphVirkailija();
 
-  const config = useEntityFormConfig(ENTITY.SORA_KUVAUS, koulutustyyppi);
-
   const initialValues = useMemo(
     () => (soraKuvaus ? getFormValuesBySoraKuvaus(soraKuvaus) : {}),
     [soraKuvaus]
   );
 
+  const formConfig = useMemo(
+    () => ({ noFieldConfigs: true, readOnly: !canUpdate }),
+    [canUpdate]
+  );
+
   return (
     <ReduxForm form="soraKuvausForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.soraKuvauksenMuokkaus')}</Title>
-      <FormConfigContext.Provider value={{ ...config, readOnly: !canUpdate }}>
+      <FormConfigContext.Provider value={formConfig}>
         <FormPage
           readOnly={!canUpdate}
           header={

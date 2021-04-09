@@ -1,6 +1,5 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
-import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Grid, Cell } from 'styled-css-grid';
 
@@ -8,9 +7,9 @@ import Heading from '#/src/components/Heading';
 import StyledSectionHTML from '#/src/components/StyledSectionHTML';
 import { Divider } from '#/src/components/virkailija';
 import { useKoodiNimi } from '#/src/hooks/useKoodiNimi';
-import { useKoodit } from '#/src/hooks/useKoodit';
-import { formatDateValue, getPostinumeroByPostinumeroUri } from '#/src/utils';
-import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
+import { formatDateValue } from '#/src/utils';
+
+import { useReadonlyKokeetJaTilaisuudet } from './useReadonlyKokeetJaTilaisuudet';
 
 type Props = {
   index: number;
@@ -37,11 +36,6 @@ type Props = {
   }>;
 };
 
-const getKoodiLabel = (koodi, language) =>
-  `${koodi?.koodiArvo} ${_.upperFirst(
-    getKoodiNimiTranslation(koodi, language).toLowerCase()
-  )}`;
-
 export const ReadonlyKoeJaTilaisuudet = ({
   language,
   metadata: {
@@ -55,29 +49,9 @@ export const ReadonlyKoeJaTilaisuudet = ({
 }: Props) => {
   const { t } = useTranslation();
   const { nimi: tyyppiKoodiNimi } = useKoodiNimi(tyyppiKoodiUri, { language });
-
-  const neededPostinumeros = useMemo(
-    () => tilaisuudet.map(v => v.osoite?.postinumeroKoodiUri).filter(Boolean),
-    [tilaisuudet]
-  );
-  const { koodit } = useKoodit(neededPostinumeros);
-
-  const usedTilaisuudet = useMemo(
-    () =>
-      tilaisuudet.map(t => {
-        const koodiUri = t.osoite?.postinumeroKoodiUri;
-        const koodi = koodiUri && koodit[neededPostinumeros.indexOf(koodiUri)];
-        return _.set(
-          t,
-          'osoite.postinumero',
-          koodiUri
-            ? koodi
-              ? getKoodiLabel(koodi, language)
-              : getPostinumeroByPostinumeroUri(koodiUri)
-            : null
-        );
-      }),
-    [neededPostinumeros, koodit, language, tilaisuudet]
+  const { tilaisuudet: usedTilaisuudet } = useReadonlyKokeetJaTilaisuudet(
+    tilaisuudet,
+    language
   );
 
   return (
@@ -178,7 +152,7 @@ export const ReadonlyKoeJaTilaisuudet = ({
                       </Cell>
                       <Cell width={8}>
                         <StyledSectionHTML
-                          noMargin
+                          noChildMargin
                           html={lisatietoja[language]}
                         />
                       </Cell>

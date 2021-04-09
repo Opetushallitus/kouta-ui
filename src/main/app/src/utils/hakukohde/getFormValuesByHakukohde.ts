@@ -114,7 +114,8 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
         valintakokeet,
         valintakokeidenYleiskuvaus
       ),
-      valintaperusteenValintakokeidenLisatilaisuudet: _fp.pipe(
+      // NOTE: tässä muutetaan taulukko [{id, tilaisuudet: [tilaisuus1, tilaisuus2]}] objektiksi {id: [tilaisuus1, tilaisuus2]} käsittelyn helpottamiseksi
+      valintaperusteenValintakokeidenLisatilaisuudet: _fp.flow(
         _fp.keyBy('id'),
         _fp.mapValues(v => v.tilaisuudet.map(getTilaisuusValues))
       )(valintaperusteenValintakokeidenLisatilaisuudet),

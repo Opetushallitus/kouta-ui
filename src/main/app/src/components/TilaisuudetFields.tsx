@@ -20,8 +20,8 @@ import { spacing } from '#/src/theme';
 import { getTestIdProps } from '#/src/utils';
 
 const SubSectionBox = styled(Box)`
-  background-color: ${({ whiteBackground }) =>
-    whiteBackground ? '#ffffff' : getThemeProp('colors.grayLighten6')};
+  background-color: ${({ backgroundColor }) =>
+    backgroundColor || getThemeProp('colors.grayLighten6')};
   padding: ${spacing(4)};
 `;
 
@@ -30,7 +30,7 @@ export const TilaisuusFields = ({
   language,
   index,
   removeSelf,
-  whiteBackground,
+  backgroundColor,
 }) => {
   const { t } = useTranslation();
   return (
@@ -38,7 +38,7 @@ export const TilaisuusFields = ({
       <Heading marginBottom={1}>
         {t('koeTaiLisanaytto.tilaisuusTitle', { index })}
       </Heading>
-      <SubSectionBox whiteBackground={whiteBackground}>
+      <SubSectionBox backgroundColor={backgroundColor}>
         <Box display="flex" justifyContent="space-between">
           <DateTimeRange
             startProps={{
@@ -98,7 +98,7 @@ export const TilaisuudetFields = ({
   t,
   meta,
   readonlyAmount = 0,
-  whiteBackground,
+  backgroundColor,
 }) => (
   <>
     <FieldArrayList
@@ -110,7 +110,7 @@ export const TilaisuudetFields = ({
       {({ field, index }) => (
         <TilaisuusFields
           index={index + 1 + readonlyAmount}
-          whiteBackground={whiteBackground}
+          backgroundColor={backgroundColor}
           field={field}
           language={language}
           removeSelf={() => fields.remove(index)}

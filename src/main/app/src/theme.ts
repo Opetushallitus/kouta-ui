@@ -28,6 +28,7 @@ export const createTheme = () => {
     breakpoints,
     space: _.range(0, 256, 8),
     colors: {
+      white: '#ffffff',
       mainBackground: '#f5f5f5',
       grayLighten5: '#f5f5f5',
       grayLighten6: '#f0f3f7',

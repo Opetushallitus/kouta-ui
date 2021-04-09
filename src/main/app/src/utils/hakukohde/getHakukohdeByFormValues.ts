@@ -127,6 +127,7 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
   const kaytetaanHaukukohteenAlkamiskautta =
     values?.ajankohta?.kaytetaanHakukohteenAlkamiskautta;
 
+  // NOTE: Tässä muutetaan object {id: [tilaisuus1, tilaisuus2]} takaisin taulukkomuotoon [{id, tilaisuudet: [tilaisuus1, tilaisuus2]}]
   const valintaperusteenValintakokeidenLisatilaisuudet = _.reduce(
     values?.valintakokeet?.valintaperusteenValintakokeidenLisatilaisuudet || {},
     (a, v, k) =>

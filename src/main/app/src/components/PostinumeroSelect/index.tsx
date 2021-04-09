@@ -6,20 +6,12 @@ import AsyncKoodistoSelect from '#/src/components/AsyncKoodistoSelect';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
-import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
-import getKoodi from '#/src/utils/koodi/getKoodi';
+import { getKoodi } from '#/src/utils/koodi/getKoodi';
+import { getPostinumeroKoodiLabel } from '#/src/utils/koodi/postinumero';
 
 const VALID_POSTINUMERO_LENGTH = 5;
 
 const koodiToKoodiUri = koodi => `${koodi?.koodiUri}#${koodi.versio}`;
-
-const getKoodiLabel = (koodi, language) => {
-  const postinumero = koodi?.koodiArvo;
-
-  return `${postinumero} ${_.upperFirst(
-    getKoodiNimiTranslation(koodi, language).toLowerCase()
-  )}`;
-};
 
 export const PostinumeroSelect = ({ ...props }) => {
   const httpClient = useHttpClient();
@@ -39,7 +31,7 @@ export const PostinumeroSelect = ({ ...props }) => {
         if (koodi) {
           return [
             {
-              label: getKoodiLabel(koodi, language),
+              label: getPostinumeroKoodiLabel(koodi, language),
               value: koodiToKoodiUri(koodi),
             },
           ];
@@ -54,7 +46,7 @@ export const PostinumeroSelect = ({ ...props }) => {
   return (
     <AsyncKoodistoSelect
       isClearable={true}
-      formatKoodiLabel={getKoodiLabel}
+      formatKoodiLabel={getPostinumeroKoodiLabel}
       loadOptions={loadOptions}
       {...props}
     />

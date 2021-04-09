@@ -4,8 +4,8 @@ import _fp from 'lodash/fp';
 import styled, { css } from 'styled-components';
 
 const StyledKuvaus = styled.div`
-  ${({ noMargin }) =>
-    noMargin &&
+  ${({ noChildMargin }) =>
+    noChildMargin &&
     css`
       & * {
         margin: 0;

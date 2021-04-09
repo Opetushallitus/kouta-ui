@@ -45,7 +45,7 @@ const hakukohde = () => ({
     },
     valintaperusteenValintakokeidenLisatilaisuudet: [
       {
-        id: 'undefined',
+        id: 'testi-id-123',
         tilaisuudet: [
           {
             aika: {

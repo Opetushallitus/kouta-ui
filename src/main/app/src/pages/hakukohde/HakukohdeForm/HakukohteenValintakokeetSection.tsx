@@ -13,8 +13,7 @@ import StyledSectionHTML from '#/src/components/StyledSectionHTML';
 import { TilaisuudetFields } from '#/src/components/TilaisuudetFields';
 import { Box } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
-import { getThemeProp } from '#/src/theme';
-import { spacing } from '#/src/theme';
+import { getThemeProp, spacing } from '#/src/theme';
 import { getTestIdProps } from '#/src/utils';
 import { useValintaperusteById } from '#/src/utils/valintaperuste/getValintaperusteById';
 
@@ -71,7 +70,7 @@ export const HakukohteenValintakokeetSection = ({ name, language }) => {
                 <FieldArray
                   name={`${name}.valintaperusteenValintakokeidenLisatilaisuudet.${id}`}
                   readonlyAmount={rest?.tilaisuudet?.length}
-                  whiteBackground
+                  backgroundColor={getThemeProp('colors.white')}
                   component={TilaisuudetFields}
                   language={language}
                   t={t}

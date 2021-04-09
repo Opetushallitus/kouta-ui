@@ -18,7 +18,7 @@ export const KieliversiotSection = ({ name, language }) => {
             name={`${name}.nimi.${language}`}
             label={t('yleiset.nimi')}
             component={FormFieldInput}
-            required={true}
+            required
           />
         </Spacing>
       </div>
@@ -27,7 +27,7 @@ export const KieliversiotSection = ({ name, language }) => {
           name={`${name}.kuvaus.${language}`}
           label={t('yleiset.kuvaus')}
           component={FormFieldEditor}
-          required={true}
+          required
         />
       </div>
     </>

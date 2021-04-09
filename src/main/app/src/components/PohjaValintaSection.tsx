@@ -68,7 +68,7 @@ export default function PohjaValintaSection({
           options={tapaOptions}
           label={t('yleiset.valitseLomakkeenPohja')}
           disabled={disabled}
-          required={true}
+          required
         />
 
         <Field

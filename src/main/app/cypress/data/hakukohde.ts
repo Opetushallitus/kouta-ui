@@ -45,7 +45,6 @@ const hakukohde = () => ({
     aloituspaikat: {
       lukumaara: 150,
       ensikertalaisille: 49,
-      kuvaus: { fi: 'Aloituspaikkojen kuvaus' },
     },
     koulutuksenAlkamiskausi: {
       alkamiskausityyppi: Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,

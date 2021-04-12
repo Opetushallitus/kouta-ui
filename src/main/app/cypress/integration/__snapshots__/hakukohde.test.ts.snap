@@ -48,6 +48,7 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
   "metadata": {
     "aloituspaikat": {
       "ensikertalaisille": null,
+      "kuvaus": {},
       "lukumaara": 10
     },
     "kaytetaanHaunAlkamiskautta": false,
@@ -174,6 +175,7 @@ exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
   "metadata": {
     "aloituspaikat": {
       "ensikertalaisille": 5,
+      "kuvaus": {},
       "lukumaara": 10
     },
     "kaytetaanHaunAlkamiskautta": false,
@@ -303,9 +305,7 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
   "metadata": {
     "aloituspaikat": {
       "ensikertalaisille": 49,
-      "kuvaus": {
-        "fi": "Aloituspaikkojen kuvaus"
-      },
+      "kuvaus": {},
       "lukumaara": 150
     },
     "kaytetaanHaunAlkamiskautta": false,
@@ -408,6 +408,7 @@ exports[`createHakukohde > should be able to create hakukohde with muu hakulomak
   "metadata": {
     "aloituspaikat": {
       "ensikertalaisille": null,
+      "kuvaus": {},
       "lukumaara": null
     },
     "kaytetaanHaunAlkamiskautta": true,
@@ -456,6 +457,7 @@ exports[`createHakukohde > should be able to create hakukohde with "ei sähköis
   "metadata": {
     "aloituspaikat": {
       "ensikertalaisille": null,
+      "kuvaus": {},
       "lukumaara": null
     },
     "kaytetaanHaunAlkamiskautta": true,

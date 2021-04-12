@@ -58,13 +58,13 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
     esikatselu,
     kieliversiot: kielivalinta,
     aloituspaikat: {
-      aloituspaikkamaara: isNumeric(aloituspaikat.lukumaara)
+      aloituspaikkamaara: isNumeric(aloituspaikat?.lukumaara)
         ? aloituspaikat.lukumaara.toString()
         : '',
-      ensikertalaismaara: isNumeric(aloituspaikat.ensikertalaisille)
+      ensikertalaismaara: isNumeric(aloituspaikat?.ensikertalaisille)
         ? aloituspaikat.ensikertalaisille.toString()
         : '',
-      aloituspaikkakuvaus: aloituspaikat.kuvaus,
+      aloituspaikkakuvaus: aloituspaikat?.kuvaus,
     },
     hakuajat: {
       eriHakuaika: !kaytetaanHaunAikataulua,

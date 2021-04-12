@@ -14,7 +14,6 @@ import getHakuFormConfig from '#/src/utils/haku/getHakuFormConfig';
 import getHakukohdeFormConfig from '#/src/utils/hakukohde/getHakukohdeFormConfig';
 import getKoulutusFormConfig from '#/src/utils/koulutus/getKoulutusFormConfig';
 import getToteutusFormConfig from '#/src/utils/toteutus/getToteutusFormConfig';
-import getValintaperusteFormConfig from '#/src/utils/valintaperuste/getValintaperusteFormConfig';
 
 import { useActions } from './useActions';
 
@@ -68,10 +67,9 @@ const formConfigsGettersByEntity = {
   [ENTITY.TOTEUTUS]: getToteutusFormConfig,
   [ENTITY.HAKU]: getHakuFormConfig,
   [ENTITY.HAKUKOHDE]: getHakukohdeFormConfig,
-  [ENTITY.VALINTAPERUSTE]: getValintaperusteFormConfig,
 };
 
-export const getFormConfigByEntity = (entityName, koulutustyyppi) => {
+const getFormConfigByEntity = (entityName, koulutustyyppi) => {
   return formConfigsGettersByEntity[entityName](koulutustyyppi);
 };
 

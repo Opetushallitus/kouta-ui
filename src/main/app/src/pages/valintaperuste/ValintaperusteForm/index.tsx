@@ -6,7 +6,7 @@ import {
   DEFAULT_JULKAISUTILA,
 } from '#/src/constants';
 
-export { default } from './ValintaperusteForm';
+export { ValintaperusteForm } from './ValintaperusteForm';
 
 export const initialValues = kieliValinnat => ({
   tila: DEFAULT_JULKAISUTILA,

@@ -582,7 +582,12 @@
     "eiMuokkausOikeutta": "Käyttäjälläsi ei ole oikeuksia muokata tätä valintaperustekuvausta",
     "kopioiPohjaksi": "Kopioi pohjaksi aiemmin luotu valintaperuste",
     "pohjavalintaInfo": "Voit halutessasi käyttää aiemmin luotuja valintaperusteita uuden lomakkeen esitäytettynä pohjana.",
-    "julkisuusKuvaus": "Valitse näkyykö valintaperuste muille koulutustoimijoille. Jos valintaperuste on julkinen, muut koulutustoimijat voivat käyttää sitä pohjana luodessaan uusia."
+    "julkisuusKuvaus": "Valitse näkyykö valintaperuste muille koulutustoimijoille. Jos valintaperuste on julkinen, muut koulutustoimijat voivat käyttää sitä pohjana luodessaan uusia.",
+    "valintaperusteenHakukelpoisuus": "Hakukelpoisuus",
+    "hakukelpoisuus": "Hakukelpoisuuden kuvaus",
+    "valintaperusteenLisatiedot": "Valintaperusteen lisätiedot",
+    "lisatiedot": "Lisätietoa valintaperusteista",
+    "lisaaVahintaanYksiValintatapa": "Lisää vähintään yksi valintatapa"
   },
   "soraKuvauslomake": {
     "soraKuvauksenTiedot": "SORA-kuvauksen tiedot",

@@ -19,8 +19,8 @@ import getKoulutusByOid from '#/src/utils/koulutus/getKoulutusByOid';
 import getSoraKuvausById from '#/src/utils/soraKuvaus/getSoraKuvausById';
 import getToteutusByOid from '#/src/utils/toteutus/getToteutusByOid';
 import validateToteutusForm from '#/src/utils/toteutus/validateToteutusForm';
-import getValintaperusteById from '#/src/utils/valintaperuste/getValintaperusteById';
-import validateValintaperusteForm from '#/src/utils/valintaperuste/validateValintaperusteForm';
+import { getValintaperusteById } from '#/src/utils/valintaperuste/getValintaperusteById';
+import { validateValintaperusteForm } from '#/src/utils/valintaperuste/validateValintaperusteForm';
 
 export const useSaveForm = ({ form: formName, validate, submit }) => {
   const dispatch = useDispatch();

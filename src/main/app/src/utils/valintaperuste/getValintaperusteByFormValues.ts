@@ -5,6 +5,8 @@ import { serializeEditorState } from '#/src/components/Editor/utils';
 import { isNumeric, isDeepEmptyFormValues, parseFloatComma } from '#/src/utils';
 import { getKokeetTaiLisanaytotData } from '#/src/utils/form/getKokeetTaiLisanaytotData';
 
+import { koulutustyypitWithValintatapa } from './constants';
+
 const getArrayValue = (values, key) => {
   const valueCandidate = _.get(values, key);
   return isDeepEmptyFormValues(valueCandidate) ? [] : valueCandidate;
@@ -63,6 +65,10 @@ const serializeSisalto = (sisalto, kielivalinta = []) => {
 export const getValintaperusteByFormValues = values => {
   const { tila, muokkaaja, perustiedot, esikatselu = false } = values;
 
+  const koulutustyyppi = perustiedot?.tyyppi ?? null;
+  const sorakuvausId = values?.soraKuvaus?.value ?? null;
+  const onkoJulkinen = Boolean(values?.julkinen);
+
   const hakutapaKoodiUri = perustiedot?.hakutapa;
   const kielivalinta = perustiedot?.kieliversiot ?? [];
   const kohdejoukkoKoodiUri = perustiedot?.kohdejoukko?.value ?? null;
@@ -72,35 +78,45 @@ export const getValintaperusteByFormValues = values => {
     _.mapValues(values?.kuvaus?.kuvaus ?? {}, serializeEditorState),
     kielivalinta
   );
+  const hakukelpoisuus = _.mapValues(
+    _.pick(values?.hakukelpoisuus || {}, kielivalinta),
+    serializeEditorState
+  );
+  const lisatiedot = _.mapValues(
+    _.pick(values?.lisatiedot || {}, kielivalinta),
+    serializeEditorState
+  );
   const sisalto = serializeSisalto(values?.kuvaus?.sisalto, kielivalinta);
 
-  const valintatavat = getArrayValue(values, 'valintatavat').map(
-    ({
-      nimi: valintatapaNimi,
-      kuvaus: valintatapaKuvaus,
-      sisalto: valintatapaSisalto,
-      tapa,
-      kynnysehto,
-      enimmaispistemaara,
-      vahimmaispistemaara,
-    }) => ({
-      nimi: _.pick(valintatapaNimi || {}, kielivalinta),
-      kuvaus: _.pick(valintatapaKuvaus || {}, kielivalinta),
-      sisalto: serializeSisalto(valintatapaSisalto, kielivalinta),
-      valintatapaKoodiUri: tapa?.value,
-      kaytaMuuntotaulukkoa: false,
-      kynnysehto: _.mapValues(
-        _.pick(kynnysehto || {}, kielivalinta),
-        serializeEditorState
-      ),
-      enimmaispisteet: isNumeric(enimmaispistemaara)
-        ? parseFloatComma(enimmaispistemaara)
-        : null,
-      vahimmaispisteet: isNumeric(vahimmaispistemaara)
-        ? parseFloatComma(vahimmaispistemaara)
-        : null,
-    })
-  );
+  const valintatavat = koulutustyypitWithValintatapa.includes(koulutustyyppi)
+    ? getArrayValue(values, 'valintatavat').map(
+        ({
+          nimi: valintatapaNimi,
+          kuvaus: valintatapaKuvaus,
+          sisalto: valintatapaSisalto,
+          tapa,
+          kynnysehto,
+          enimmaispistemaara,
+          vahimmaispistemaara,
+        }) => ({
+          nimi: _.pick(valintatapaNimi || {}, kielivalinta),
+          kuvaus: _.pick(valintatapaKuvaus || {}, kielivalinta),
+          sisalto: serializeSisalto(valintatapaSisalto, kielivalinta),
+          valintatapaKoodiUri: tapa?.value,
+          kaytaMuuntotaulukkoa: false,
+          kynnysehto: _.mapValues(
+            _.pick(kynnysehto || {}, kielivalinta),
+            serializeEditorState
+          ),
+          enimmaispisteet: isNumeric(enimmaispistemaara)
+            ? parseFloatComma(enimmaispistemaara)
+            : null,
+          vahimmaispisteet: isNumeric(vahimmaispistemaara)
+            ? parseFloatComma(vahimmaispistemaara)
+            : null,
+        })
+      )
+    : [];
 
   const valintakokeidenYleiskuvaus = _.mapValues(
     values?.valintakokeet?.yleisKuvaus,
@@ -111,10 +127,6 @@ export const getValintaperusteByFormValues = values => {
     valintakoeValues: values?.valintakokeet,
     kielivalinta,
   });
-
-  const koulutustyyppi = perustiedot?.tyyppi ?? null;
-  const sorakuvausId = values?.soraKuvaus?.value ?? null;
-  const onkoJulkinen = Boolean(values?.julkinen);
 
   return {
     tila,
@@ -130,11 +142,11 @@ export const getValintaperusteByFormValues = values => {
     metadata: {
       tyyppi: koulutustyyppi,
       valintatavat,
-      kielitaitovaatimukset: [], // TODO: Obsolete, remove from backend
-      osaamistaustaKoodiUrit: [], // TODO: Obsolete, remove from backend
       kuvaus,
       sisalto,
       valintakokeidenYleiskuvaus,
+      hakukelpoisuus,
+      lisatiedot,
     },
     esikatselu,
   };

@@ -1,35 +1,61 @@
 import React from 'react';
 
-import KieliversiotFields from '#/src/components/KieliversiotFields';
+import { useTranslation } from 'react-i18next';
+import { Field } from 'redux-form';
+
+import {
+  FormFieldKoulutustyyppiSelect,
+  FormFieldRadioGroup,
+  FormFieldSelect,
+} from '#/src/components/formFields';
+import { KieliversiotFields } from '#/src/components/KieliversiotFields';
 import { Divider } from '#/src/components/virkailija';
+import { useKoodistoOptions } from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
 
-import HakutavanRajausSection from './HakutavanRajausSection';
-import KohdejoukonRajausSection from './KohdejoukonRajausSection';
-import KoulutustyyppiSection from './KoulutustyyppiSection';
+export const PerustiedotSection = ({ name, canEditTyyppi = true }) => {
+  const { t } = useTranslation();
+  const { options: hakutapaOptions } = useKoodistoOptions({
+    koodisto: 'hakutapa',
+  });
+  const { options: haunkohdejoukkoOptions } = useKoodistoOptions({
+    koodisto: 'haunkohdejoukko',
+  });
 
-const PerustiedotSection = ({ name, canEditTyyppi = true }) => {
   return (
     <>
-      {canEditTyyppi ? (
-        <div {...getTestIdProps('koulutustyyppiSection')}>
-          <KoulutustyyppiSection name={`${name}.tyyppi`} />
+      {canEditTyyppi && (
+        <>
+          <Field
+            name={`${name}.tyyppi`}
+            required
+            component={FormFieldKoulutustyyppiSelect}
+            label={t('yleiset.valitseKoulutustyyppi')}
+          />
           <Divider marginTop={3} marginBottom={3} />
-        </div>
-      ) : null}
+        </>
+      )}
       <div {...getTestIdProps('kieliversiotSection')}>
         <KieliversiotFields name={`${name}.kieliversiot`} />
       </div>
       <Divider marginTop={3} marginBottom={3} />
-      <div {...getTestIdProps('hakutapaSection')}>
-        <HakutavanRajausSection name={`${name}.hakutapa`} />
-      </div>
+      <Field
+        name={`${name}.hakutapa`}
+        required
+        component={FormFieldRadioGroup}
+        options={hakutapaOptions}
+        label={t('valintaperustelomake.valitseHakutapa')}
+      />
       <Divider marginTop={3} marginBottom={3} />
       <div {...getTestIdProps('kohdejoukkoSection')}>
-        <KohdejoukonRajausSection name={`${name}.kohdejoukko`} />
+        <Field
+          name={`${name}.kohdejoukko`}
+          required
+          component={FormFieldSelect}
+          options={haunkohdejoukkoOptions}
+          label={t('valintaperustelomake.valitseHaunKohdejoukko')}
+        />
       </div>
     </>
   );
 };
-
-export default PerustiedotSection;

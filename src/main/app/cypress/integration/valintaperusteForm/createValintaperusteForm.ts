@@ -19,18 +19,6 @@ import {
 } from '#/cypress/utils';
 import { stubValintaperusteFormRoutes } from '#/cypress/valintaperusteFormUtils';
 
-const fillHakutavanRajausSection = () => {
-  getByTestId('hakutapaSection').within(() => {
-    getRadio('hakutapa_01#1').click({ force: true });
-  });
-};
-
-const fillKohdejoukonRajausSection = () => {
-  getByTestId('kohdejoukkoSection').within(() => {
-    selectOption('Korkeakoulutus');
-  });
-};
-
 const lisaaSisaltoa = tyyppi => {
   getByTestId('sisaltoMenuToggle').click({ force: true });
 
@@ -111,6 +99,22 @@ const fillKuvausSection = () => {
   });
 };
 
+const fillHakukelpoisuusSection = () => {
+  getByTestId('hakukelpoisuusSection').within(() => {
+    typeToEditor('hakukelpoisuus');
+
+    jatka();
+  });
+};
+
+const fillLisatiedotSection = () => {
+  getByTestId('lisatiedotSection').within(() => {
+    typeToEditor('lisatiedot');
+
+    jatka();
+  });
+};
+
 const fillSoraKuvausSection = () => {
   getByTestId('soraKuvausSection').within(() => {
     selectOption('Sora-kuvaus 1');
@@ -128,12 +132,12 @@ const fillJulkisuusSection = () => {
 
 const fillPerustiedotSection = () => {
   getByTestId('perustiedotSection').within(() => {
-    getByTestId('koulutustyyppiSection').within(() => {
-      fillKoulutustyyppiSelect(['korkeakoulutus', 'yo']);
-    });
+    fillKoulutustyyppiSelect(['korkeakoulutus', 'yo']);
     fillKieliversiotSection();
-    fillHakutavanRajausSection();
-    fillKohdejoukonRajausSection();
+    getRadio('hakutapa_01#1').click({ force: true });
+    getByTestId('kohdejoukkoSection').within(() => {
+      selectOption('Korkeakoulutus');
+    });
 
     jatka();
   });
@@ -172,9 +176,11 @@ export const createValintaperusteForm = () => {
 
     fillPerustiedotSection();
     fillPohjaSection();
+    fillHakukelpoisuusSection();
     fillKuvausSection();
     fillValintatapaSection();
     fillValintakokeetSection();
+    fillLisatiedotSection();
     fillSoraKuvausSection();
     fillJulkisuusSection();
     fillTilaSection();

@@ -3,10 +3,12 @@ import _ from 'lodash';
 import { formValueExists as exists, isPartialDate } from '#/src/utils';
 import { getInvalidTranslations } from '#/src/utils/languageUtils';
 
+// TODO: Remove ErrorBuilder and replace all form validations with just _fp.flow(...validators)({values})
 class ErrorBuilder {
-  constructor(values, errors = {}) {
-    this.errors = errors;
+  constructor(values, languages = []) {
+    this.languages = languages;
     this.values = values;
+    this.errors = {};
   }
 
   getValue(path) {
@@ -96,15 +98,16 @@ class ErrorBuilder {
         ? 'validointivirheet.kaikkiKaannoksetJosAinakinYksi'
         : 'validointivirheet.pakollisetKaannokset';
 
+    const usedLanguages = languages || this.languages;
     const invalidTranslations = getInvalidTranslations(
       this.getValue(path),
-      languages,
+      usedLanguages,
       validator,
       optional
     );
 
     if (invalidTranslations.length > 0) {
-      languages.forEach(l => this.setError(`${path}.${l}`, errorMessage));
+      usedLanguages.forEach(l => this.setError(`${path}.${l}`, errorMessage));
     }
 
     return this;
@@ -115,7 +118,7 @@ class ErrorBuilder {
 
     if (_.isArray(value)) {
       const errors = value.map(v => {
-        return makeBuilder(new ErrorBuilder(v), v).getErrors();
+        return makeBuilder(new ErrorBuilder(v, this.languages), v).getErrors();
       });
 
       if (errors.find(e => !_.isEmpty(e))) {
@@ -159,6 +162,7 @@ class ErrorBuilder {
 const bindValidator = name => (...props) => eb =>
   ErrorBuilder.prototype[name].call(eb, ...props);
 
+// TODO: Refactor these as simple pure functional validators that always return a new {values, errors, languages} -object
 export const validate = bindValidator('validate');
 export const validateArray = bindValidator('validateArray');
 export const validateArrayMinLength = bindValidator('validateArrayMinLength');
@@ -168,6 +172,7 @@ export const validateTranslations = bindValidator('validateTranslations');
 export const validateUrl = bindValidator('validateUrl');
 export const validateInteger = bindValidator('validateInteger');
 
-const createErrorBuilder = values => new ErrorBuilder(values);
+export const createErrorBuilder = (values, languages = []) =>
+  new ErrorBuilder(values, languages);
 
 export default createErrorBuilder;

@@ -11,7 +11,7 @@ const getOptions = t => [
   { value: 'en', label: t('yleiset.englanti') },
 ];
 
-const KieliversiotFields = ({ name = 'kieliversiot', ...props }) => {
+export const KieliversiotFields = ({ name = 'kieliversiot', ...props }) => {
   const { t } = useTranslation();
   const options = useMemo(() => getOptions(t), [t]);
 

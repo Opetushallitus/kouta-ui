@@ -14,13 +14,14 @@ import {
 } from '#/src/utils/form/createErrorBuilder';
 import createFormConfigBuilder from '#/src/utils/form/createFormConfigBuilder';
 import {
-  validateIfJulkaistu,
   getKielivalinta,
   kieliversiotSectionConfig,
   pohjaValintaSectionConfig,
+  validateIf,
+  validateIfJulkaistu,
+  validateOptionalTranslatedField,
   validateRelations,
   valintakokeetSection,
-  validateIf,
 } from '#/src/utils/form/formConfigUtils';
 
 const getLiitteillaYhteinenToimitusaika = values =>
@@ -207,11 +208,9 @@ const config = createFormConfigBuilder().registerSections([
     parts: [
       {
         field: '.aloituspaikkakuvaus',
-        validate: (eb, values) =>
-          eb.validateTranslations(
-            'aloituspaikat.aloituspaikkakuvaus',
-            getKielivalinta(values)
-          ),
+        validate: validateOptionalTranslatedField(
+          'aloituspaikat.aloituspaikkakuvaus'
+        ),
       },
     ],
   },

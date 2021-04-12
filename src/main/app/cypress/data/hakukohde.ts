@@ -9,8 +9,6 @@ const hakukohde = () => ({
   alkamiskausiKoodiUri: 'kausi_k#1',
   alkamisvuosi: '2024',
   hakulomake: {},
-  aloituspaikat: 150,
-  ensikertalaisenAloituspaikat: 49,
   pohjakoulutusvaatimusKoodiUrit: ['pohjakoulutusvaatimuskouta_pk#1'],
   pohjakoulutusvaatimusTarkenne: {
     fi: '<p>Fi tarkenne</p>',
@@ -44,6 +42,11 @@ const hakukohde = () => ({
       fi: '<p>Valintakokeiden kuvaus - fi</p>',
     },
     kaytetaanHaunAlkamiskautta: false,
+    aloituspaikat: {
+      lukumaara: 150,
+      ensikertalaisille: 49,
+      kuvaus: { fi: 'Aloituspaikkojen kuvaus' },
+    },
     koulutuksenAlkamiskausi: {
       alkamiskausityyppi: Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,
       koulutuksenAlkamispaivamaara: '2021-04-16T00:00',

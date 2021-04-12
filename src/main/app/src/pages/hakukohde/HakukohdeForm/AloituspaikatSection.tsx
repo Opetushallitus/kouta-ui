@@ -9,7 +9,7 @@ import { Box, FormLabel } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 import isKorkeakouluKoulutustyyppi from '#/src/utils/koulutus/isKorkeakouluKoulutustyyppi';
 
-export const AloituspaikatSection = ({ koulutustyyppi, name }) => {
+export const AloituspaikatSection = ({ language, koulutustyyppi, name }) => {
   const isKorkeakoulu = isKorkeakouluKoulutustyyppi(koulutustyyppi);
   const { t } = useTranslation();
 
@@ -63,7 +63,7 @@ export const AloituspaikatSection = ({ koulutustyyppi, name }) => {
           </Flex>
           <Box marginTop={2}>
             <Field
-              name={`${name}.aloituspaikkakuvaus`}
+              name={`${name}.aloituspaikkakuvaus.${language}`}
               component={FormFieldEditor}
               label={t('hakukohdelomake.aloituspaikkojenKuvaus')}
             />

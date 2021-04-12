@@ -61,6 +61,7 @@ const HakukohdeForm = ({
       <FormCollapse
         section="aloituspaikat"
         header={t('hakukohdelomake.aloituspaikat')}
+        languages={languages}
         Component={AloituspaikatSection}
         koulutustyyppi={koulutustyyppi}
       />

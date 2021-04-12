@@ -54,7 +54,7 @@ export type HakukohdeFormValues = {
   aloituspaikat: {
     aloituspaikkamaara: string;
     ensikertalaismaara: string;
-    aloituspaikkakuvaus: TranslatedField<string>;
+    aloituspaikkakuvaus: TranslatedField<EditorState>;
   };
   hakuajat: {
     eriHakuaika: boolean;

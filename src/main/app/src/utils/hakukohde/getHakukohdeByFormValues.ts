@@ -19,18 +19,20 @@ const getLiitteillaYhteinenToimitusosoite = values =>
 
 const getKaytetaanHaunAikataulua = values => !values?.hakuajat.eriHakuaika;
 
+function getAloituspaikat(values: HakukohdeFormValues) {
+  return {
+    lukumaara: maybeParseNumber(values?.aloituspaikat?.aloituspaikkamaara),
+    ensikertalaisille: maybeParseNumber(
+      values?.aloituspaikat?.ensikertalaismaara
+    ),
+    kuvaus: values?.aloituspaikat?.aloituspaikkakuvaus,
+  };
+}
+
 export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
   const { muokkaaja, tila, esikatselu = false, jarjestyspaikkaOid } = values;
   const kielivalinta = getKielivalinta(values);
   const pickTranslations = _fp.pick(kielivalinta);
-
-  const aloituspaikat = maybeParseNumber(
-    values?.aloituspaikat?.aloituspaikkamaara
-  );
-
-  const ensikertalaisenAloituspaikat = maybeParseNumber(
-    values?.aloituspaikat?.ensikertalaismaara
-  );
 
   const {
     hakulomakeAtaruId,
@@ -135,8 +137,6 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     jarjestyspaikkaOid,
     kaytetaanHaunAikataulua,
     kielivalinta,
-    aloituspaikat,
-    ensikertalaisenAloituspaikat,
     hakuajat,
     liitteetOnkoSamaToimitusaika,
     liitteetOnkoSamaToimitusosoite,
@@ -168,6 +168,7 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
         values?.valintakokeet?.yleisKuvaus,
         kuvaus => serializeEditorState(kuvaus)
       ),
+      aloituspaikat: getAloituspaikat(values),
       kaytetaanHaunAlkamiskautta: !kaytetaanHaukukohteenAlkamiskautta,
       koulutuksenAlkamiskausi: kaytetaanHaukukohteenAlkamiskautta
         ? getAlkamiskausiData(ajankohta, pickTranslations)

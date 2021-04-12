@@ -252,8 +252,6 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
 {
   "alkamiskausiKoodiUri": "kausi_k#1",
   "alkamisvuosi": "2024",
-  "aloituspaikat": 150,
-  "ensikertalaisenAloituspaikat": 49,
   "esikatselu": false,
   "hakuOid": "4.1.1.1.1.1",
   "hakuajat": [
@@ -301,6 +299,13 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
   "liitteidenToimitusosoite": null,
   "liitteidenToimitustapa": null,
   "metadata": {
+    "aloituspaikat": {
+      "ensikertalaisille": 49,
+      "kuvaus": {
+        "fi": "Aloituspaikkojen kuvaus"
+      },
+      "lukumaara": 150
+    },
     "kaytetaanHaunAlkamiskautta": false,
     "koulutuksenAlkamiskausi": {
       "alkamiskausityyppi": "tarkka alkamisajankohta",

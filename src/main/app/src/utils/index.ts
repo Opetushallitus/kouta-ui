@@ -148,7 +148,14 @@ export const formValueExists = value =>
       _.stubFalse,
     ],
     [allFuncs(_.isPlainObject, _.isEmpty), _.stubFalse],
-    [allFuncs(_.isPlainObject, v => v.value === ''), _.stubFalse],
+    [
+      allFuncs(
+        _.isPlainObject,
+        v => _.has(v, 'value'),
+        v => v.value === '' || _.isNil(v.value)
+      ),
+      _.stubFalse,
+    ],
     [allFuncs(isEditorState, isEmptyEditorState), _.stubFalse],
     [otherwise, _.stubTrue],
   ])(value);

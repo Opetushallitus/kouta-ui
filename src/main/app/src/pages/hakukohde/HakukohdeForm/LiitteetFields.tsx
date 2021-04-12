@@ -85,6 +85,7 @@ const ToimituspaikkaFields = ({ name, language }) => {
       <Spacing marginBottom={2} {...getTestIdProps('osoite')}>
         <Field
           name={`${name}.osoite.${language}`}
+          required
           component={FormFieldInput}
           label={t('yleiset.osoite')}
         />
@@ -93,6 +94,7 @@ const ToimituspaikkaFields = ({ name, language }) => {
       <Spacing marginBottom={2} {...getTestIdProps('postinumero')}>
         <Field
           name={`${name}.postinumero`}
+          required
           component={FormFieldPostinumeroSelect}
           label={t('yleiset.postinumero')}
         />
@@ -101,6 +103,7 @@ const ToimituspaikkaFields = ({ name, language }) => {
       <Spacing {...getTestIdProps('sahkoposti')}>
         <Field
           name={`${name}.sahkoposti`}
+          required
           component={FormFieldInput}
           label={t('yleiset.sahkoposti')}
         />
@@ -196,6 +199,7 @@ const LiitteetListField = ({
             <Spacing marginBottom={2} {...getTestIdProps('tyyppi')}>
               <Field
                 name={`${liite}.tyyppi`}
+                required
                 component={FormFieldSelect}
                 options={tyyppiOptions}
                 label={t('yleiset.tyyppi')}
@@ -205,6 +209,7 @@ const LiitteetListField = ({
             <Spacing marginBottom={2} {...getTestIdProps('nimi')}>
               <Field
                 name={`${liite}.nimi.${language}`}
+                required
                 component={FormFieldInput}
                 label={t('yleiset.nimi')}
               />

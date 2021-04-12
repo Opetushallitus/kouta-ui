@@ -28,6 +28,10 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     values?.aloituspaikat?.aloituspaikkamaara
   );
 
+  const ensikertalaisenAloituspaikat = maybeParseNumber(
+    values?.aloituspaikat?.ensikertalaismaara
+  );
+
   const {
     hakulomakeAtaruId,
     hakulomakeKuvaus,
@@ -132,6 +136,7 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     kaytetaanHaunAikataulua,
     kielivalinta,
     aloituspaikat,
+    ensikertalaisenAloituspaikat,
     hakuajat,
     liitteetOnkoSamaToimitusaika,
     liitteetOnkoSamaToimitusosoite,
@@ -153,9 +158,6 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     pohjakoulutusvaatimusKoodiUrit,
     pohjakoulutusvaatimusTarkenne,
     valintaperusteId: values?.valintaperusteenKuvaus?.value || null,
-    ensikertalaisenAloituspaikat: maybeParseNumber(
-      values?.aloituspaikat?.ensikertalaismaara
-    ),
     kaytetaanHaunHakulomaketta: !values?.hakulomake?.eriHakulomake,
     hakulomaketyyppi,
     hakulomakeAtaruId,

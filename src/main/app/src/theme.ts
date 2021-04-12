@@ -1,14 +1,7 @@
 import createUiTheme from '@opetushallitus/virkailija-ui-components/createTheme';
 import _ from 'lodash';
-import { generateMedia } from 'styled-media-query';
 
 const breakpoints = ['576px', '768px', '992px'];
-
-export const media = generateMedia({
-  large: breakpoints[2],
-  medium: breakpoints[1],
-  small: breakpoints[0],
-});
 
 export const getThemeProp = (path, modifier = x => x) => props => {
   const value = _.get(props?.theme, path);

@@ -204,6 +204,16 @@ const config = createFormConfigBuilder().registerSections([
   {
     section: 'aloituspaikat',
     field: 'aloituspaikat',
+    parts: [
+      {
+        field: '.aloituspaikkakuvaus',
+        validate: (eb, values) =>
+          eb.validateTranslations(
+            'aloituspaikat.aloituspaikkakuvaus',
+            getKielivalinta(values)
+          ),
+      },
+    ],
   },
   {
     section: 'valintaperusteenKuvaus',

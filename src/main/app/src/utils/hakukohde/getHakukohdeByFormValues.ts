@@ -1,10 +1,7 @@
 import _ from 'lodash';
 import _fp from 'lodash/fp';
 
-import {
-  parseEditorState,
-  serializeEditorState,
-} from '#/src/components/Editor/utils';
+import { serializeEditorState } from '#/src/components/Editor/utils';
 import { LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
 import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
 import { maybeParseNumber } from '#/src/utils';

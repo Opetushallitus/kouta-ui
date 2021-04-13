@@ -1,9 +1,6 @@
 import _ from 'lodash';
 
-import {
-  parseEditorState,
-  serializeEditorState,
-} from '#/src/components/Editor/utils';
+import { parseEditorState } from '#/src/components/Editor/utils';
 import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
 import { isNumeric } from '#/src/utils';
 import { getAjankohtaFields } from '#/src/utils/form/aloitusajankohtaHelpers';
@@ -67,10 +64,7 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
       ensikertalaismaara: isNumeric(aloituspaikat?.ensikertalaisille)
         ? aloituspaikat.ensikertalaisille.toString()
         : '',
-      aloituspaikkakuvaus: _.mapValues(
-        aloituspaikat?.kuvaus || {},
-        serializeEditorState
-      ),
+      aloituspaikkakuvaus: _.mapValues(aloituspaikat?.kuvaus, parseEditorState),
     },
     hakuajat: {
       eriHakuaika: !kaytetaanHaunAikataulua,

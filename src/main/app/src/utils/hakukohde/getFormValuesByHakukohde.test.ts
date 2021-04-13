@@ -82,8 +82,8 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
         lukumaara: 45,
         ensikertalaisille: 35,
         kuvaus: {
-          fi: 'aloituspaikan kuvaus fi',
-          sv: 'aloituspaikan kuvaus sv',
+          fi: '<p>Aloituspaikan kuvaus - fi</p>',
+          sv: '<p>Aloituspaikan kuvaus - sv</p>',
         },
       },
     },

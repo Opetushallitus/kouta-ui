@@ -61,8 +61,8 @@ Object {
     "aloituspaikat": Object {
       "ensikertalaisille": 29,
       "kuvaus": Object {
-        "fi": "aloituspaikan kuvaus fi",
-        "sv": "aloituspaikan kuvaus sv",
+        "fi": "<p>aloituspaikan kuvaus fi</p>",
+        "sv": "<p>aloituspaikan kuvaus sv</p>",
       },
       "lukumaara": 45,
     },

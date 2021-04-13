@@ -15,8 +15,8 @@ Object {
   },
   "aloituspaikat": Object {
     "aloituspaikkakuvaus": Object {
-      "fi": "aloituspaikan kuvaus fi",
-      "sv": "aloituspaikan kuvaus sv",
+      "fi": "<p>Aloituspaikan kuvaus - fi</p>",
+      "sv": "<p>Aloituspaikan kuvaus - sv</p>",
     },
     "aloituspaikkamaara": "45",
     "ensikertalaismaara": "35",

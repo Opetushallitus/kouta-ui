@@ -4,7 +4,7 @@ import debounce from 'debounce-promise';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import Anchor, { RouterAnchor } from '#/src/components/Anchor';
+import { RouterAnchor } from '#/src/components/Anchor';
 import Button from '#/src/components/Button';
 import ErrorAlert from '#/src/components/ErrorAlert';
 import { Flex } from '#/src/components/Flex';

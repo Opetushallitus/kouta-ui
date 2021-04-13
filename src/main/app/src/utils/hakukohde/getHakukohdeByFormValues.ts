@@ -30,7 +30,7 @@ function getAloituspaikat(values: HakukohdeFormValues) {
     ),
     kuvaus: _.mapValues(
       values?.aloituspaikat?.aloituspaikkakuvaus,
-      parseEditorState
+      serializeEditorState
     ),
   };
 }

@@ -177,7 +177,7 @@ export const maybeParseNumber = value => {
 export const toSelectValue = value => (_.isNil(value) ? undefined : { value });
 
 // Returns field name without language part
-export const getFieldName = name =>
+export const getFieldName = (name: string) =>
   name.match(`^(.+?)(\\.(${LANGUAGES.join('|')}))?$`)?.[1];
 
 const isEmptyTranslatedField = value =>

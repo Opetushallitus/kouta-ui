@@ -59,7 +59,7 @@ export const useSaveForm = ({ form: formName, validate, submit }) => {
     let errors = null;
 
     try {
-      errors = await validate(enhancedValues);
+      errors = await validate(enhancedValues, form.registeredFields);
       if (_.isEmpty(errors)) {
         await submit({ values: enhancedValues, httpClient, apiUrls }).then(
           () => {
@@ -170,12 +170,15 @@ export const useSaveValintaperuste = ({ submit, formName }) => {
   const { save } = useSaveForm({
     form: formName,
     submit,
-    validate: async values => {
+    validate: async (values, registeredFields) => {
       const soraKuvausId = _.get(values, 'soraKuvaus.value');
       const soraKuvaus = soraKuvausId
         ? await getSoraKuvausById({ httpClient, apiUrls, id: soraKuvausId })
         : null;
-      return validateValintaperusteForm({ ...values, soraKuvaus });
+      return validateValintaperusteForm(
+        { ...values, soraKuvaus },
+        registeredFields
+      );
     },
   });
   return save;

@@ -8,12 +8,10 @@ import createErrorBuilder, {
 } from '../form/createErrorBuilder';
 import {
   getKielivalinta,
-  validateIf,
   validateIfJulkaistu,
   validateOptionalTranslatedField,
   validateRelations,
 } from '../form/formConfigUtils';
-import { koulutustyypitWithValintatapa } from './constants';
 
 const validateValintatavat = _fp.flow(
   validateIfJulkaistu(
@@ -27,8 +25,7 @@ const validateValintatavat = _fp.flow(
   )
 );
 
-export const validateValintaperusteForm = values => {
-  const koulutustyyppi = values?.perustiedot?.tyyppi;
+export const validateValintaperusteForm = (values, registeredFields) => {
   const kieliversiot = getKielivalinta(values);
   return _fp
     .flow(
@@ -39,16 +36,13 @@ export const validateValintaperusteForm = values => {
       validateIfJulkaistu(validateExistence('perustiedot.kohdejoukko')),
       validateTranslations('kuvaus.nimi'),
       validateOptionalTranslatedField('kuvaus.kuvaus'),
-      validateIf(
-        koulutustyypitWithValintatapa.some(v => v === koulutustyyppi),
-        validateValintatavat
-      ),
+      validateValintatavat,
       validateRelations([
         {
           key: 'soraKuvaus',
           t: 'yleiset.soraKuvaus',
         },
       ])
-    )(createErrorBuilder(values, kieliversiot))
+    )(createErrorBuilder(values, kieliversiot, registeredFields))
     .getErrors();
 };

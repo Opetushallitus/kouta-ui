@@ -1,15 +1,31 @@
 import _ from 'lodash';
 
-import { formValueExists as exists, isPartialDate } from '#/src/utils';
+import {
+  formValueExists as exists,
+  getFieldName,
+  isPartialDate,
+} from '#/src/utils';
 import { getInvalidTranslations } from '#/src/utils/languageUtils';
 
 // TODO: Remove ErrorBuilder and replace all form validations with just _fp.flow(...validators)({values})
 class ErrorBuilder {
-  constructor(values, languages = []) {
+  constructor(
+    values,
+    languages: Array<LanguageCode> = [],
+    registeredFields: Record<string, { name: string }> | null = null
+  ) {
     this.languages = languages;
     this.values = values;
     this.errors = {};
+    this.registeredFields =
+      registeredFields &&
+      _.values(registeredFields).map(v => getFieldName(v.name)!);
   }
+
+  private languages: Array<LanguageCode>;
+  private values: Record<string, any>;
+  private errors: Record<string, any>;
+  private registeredFields: Array<string> | null;
 
   getValue(path) {
     return _.get(this.values, path);
@@ -19,11 +35,25 @@ class ErrorBuilder {
     return this.values;
   }
 
+  isVisible(path: string) {
+    return (
+      _.isNil(this.registeredFields) || this.registeredFields.includes(path)
+    );
+  }
+
+  getErrors() {
+    return this.errors;
+  }
+
   setError(path, value) {
     _.set(this.errors, path, value ? _.castArray(value) : null);
   }
 
-  validateExistenceOfDate(path, { message } = {}) {
+  validateExistenceOfDate(path, { message = null } = {}) {
+    if (!this.isVisible(path)) {
+      return this;
+    }
+
     const errorMessage = message || 'validointivirheet.pakollinen';
     const value = this.getValue(path);
     if (!exists(value) || isPartialDate(value)) {
@@ -33,7 +63,11 @@ class ErrorBuilder {
     return this;
   }
 
-  validateExistence(path, { message } = {}) {
+  validateExistence(path, { message = null } = {}) {
+    if (!this.isVisible(path)) {
+      return this;
+    }
+
     const errorMessage = message || 'validointivirheet.pakollinen';
 
     if (!exists(this.getValue(path))) {
@@ -43,7 +77,11 @@ class ErrorBuilder {
     return this;
   }
 
-  validateUrl(path, { message } = {}) {
+  validateUrl(path, { message = null } = {}) {
+    if (!this.isVisible(path)) {
+      return this;
+    }
+
     const errorMessage = message || 'validointivirheet.epakelpoUrl';
     const value = this.getValue(path);
     const validURL = str => {
@@ -63,7 +101,11 @@ class ErrorBuilder {
     return this;
   }
 
-  validate(path, validator, { message } = {}) {
+  validate(path, validator, { message = null } = {}) {
+    if (!this.isVisible(path)) {
+      return this;
+    }
+
     const errorMessage = message || 'validointivirheet.pakollinen';
 
     if (!validator(this.getValue(path))) {
@@ -73,30 +115,20 @@ class ErrorBuilder {
     return this;
   }
 
-  validateArrayMinLength(path, min, { message, isFieldArray = false } = {}) {
-    const value = this.getValue(path);
-    const errorMessage = message
-      ? message
-      : min === 1
-      ? 'validointivirheet.listaVahintaanYksi'
-      : t => t('validointivirheet.listaVahintaan', { lukumaara: 1 });
-
-    if (!_.isArray(value) || value.length < min) {
-      this.setError(isFieldArray ? `${path}._error` : path, errorMessage);
-    }
-
-    return this;
-  }
-
   validateTranslations(
     path,
     languages,
-    { optional, message, validator = v => exists(v) } = {}
+    { optional = false, message = null, validator = v => exists(v) } = {}
   ) {
+    if (!this.isVisible(path)) {
+      return this;
+    }
+
     const errorMessage =
-      message || optional
+      message ||
+      (optional
         ? 'validointivirheet.kaikkiKaannoksetJosAinakinYksi'
-        : 'validointivirheet.pakollisetKaannokset';
+        : 'validointivirheet.pakollisetKaannokset');
 
     const usedLanguages = languages || this.languages;
     const invalidTranslations = getInvalidTranslations(
@@ -113,11 +145,40 @@ class ErrorBuilder {
     return this;
   }
 
+  validateArrayMinLength(
+    path,
+    min,
+    { message = null, isFieldArray = false } = {}
+  ) {
+    if (!this.isVisible(path)) {
+      return this;
+    }
+
+    const value = this.getValue(path);
+    const errorMessage = message
+      ? message
+      : min === 1
+      ? 'validointivirheet.listaVahintaanYksi'
+      : t => t('validointivirheet.listaVahintaan', { lukumaara: 1 });
+
+    if (!_.isArray(value) || value.length < min) {
+      this.setError(isFieldArray ? `${path}._error` : path, errorMessage);
+    }
+
+    return this;
+  }
+
   validateArray(path, makeBuilder) {
+    if (!this.isVisible(path)) {
+      return this;
+    }
+
     const value = this.getValue(path);
 
     if (_.isArray(value)) {
       const errors = value.map(v => {
+        // NOTE: ehdollinen näkyvyys *EI* toimi nestatuissa validaattoreissa (e.g. validateArrayn sisäiset validaattorit)
+        // Jos tätä tarvitsee joskus tukea, täytyy errorbuilderille lisätä basepath tjms. mikä kertoo jos se on sisäinen eb
         return makeBuilder(new ErrorBuilder(v, this.languages), v).getErrors();
       });
 
@@ -129,7 +190,11 @@ class ErrorBuilder {
     return this;
   }
 
-  validateInteger(path, { min, max, optional }, message = undefined) {
+  validateInteger(path, { min, max, optional }, message = null) {
+    if (!this.isVisible(path)) {
+      return this;
+    }
+
     const errorMessage = message || 'validointivirheet.kokonaislukuValilta';
     const value = this.getValue(path);
 
@@ -153,10 +218,6 @@ class ErrorBuilder {
 
     return this;
   }
-
-  getErrors() {
-    return this.errors;
-  }
 }
 
 const bindValidator = name => (...props) => eb =>
@@ -172,7 +233,10 @@ export const validateTranslations = bindValidator('validateTranslations');
 export const validateUrl = bindValidator('validateUrl');
 export const validateInteger = bindValidator('validateInteger');
 
-export const createErrorBuilder = (values, languages = []) =>
-  new ErrorBuilder(values, languages);
+export const createErrorBuilder = (
+  values,
+  languages = [],
+  registeredFields = null
+) => new ErrorBuilder(values, languages, registeredFields);
 
 export default createErrorBuilder;

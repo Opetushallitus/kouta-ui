@@ -8,6 +8,13 @@ Object {
     "sv": "<p><em>Sv esittely</em></p>",
   },
   "hakijapalveluidenYhteystiedot": Object {
+    "kayntiosoite": Object {
+      "fi": "Fi osoite",
+      "sv": "Sv osoite",
+    },
+    "kayntiosoitePostinumero": Object {
+      "value": "postinumero_1#1",
+    },
     "nimi": Object {
       "fi": "Hakijapalveluiden nimi",
       "sv": "Hakijapalveluiden nimi sv",

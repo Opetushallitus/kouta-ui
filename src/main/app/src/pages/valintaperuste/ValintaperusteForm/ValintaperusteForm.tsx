@@ -11,7 +11,7 @@ import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import SoraKuvausSection from '#/src/components/SoraKuvausSection';
 import { ENTITY } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
-import { koulutustyypitWithValintatapa } from '#/src/utils/valintaperuste/constants';
+import { KOULUTUSTYYPIT_WITH_VALINTATAPA } from '#/src/utils/valintaperuste/constants';
 import { getValintaperusteet } from '#/src/utils/valintaperuste/getValintaperusteet';
 
 import { HakukelpoisuusSection } from './HakukelpoisuusSection';
@@ -77,7 +77,7 @@ export const ValintaperusteForm = ({
         Component={KuvausSection}
       />
 
-      {koulutustyypitWithValintatapa.includes(koulutustyyppi) && (
+      {KOULUTUSTYYPIT_WITH_VALINTATAPA.includes(koulutustyyppi) && (
         <FormCollapse
           section="valintatavat"
           header={t('valintaperustelomake.valintatapa')}

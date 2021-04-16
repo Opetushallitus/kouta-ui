@@ -5,7 +5,7 @@ import { serializeEditorState } from '#/src/components/Editor/utils';
 import { isNumeric, isDeepEmptyFormValues, parseFloatComma } from '#/src/utils';
 import { getKokeetTaiLisanaytotData } from '#/src/utils/form/getKokeetTaiLisanaytotData';
 
-import { koulutustyypitWithValintatapa } from './constants';
+import { KOULUTUSTYYPIT_WITH_VALINTATAPA } from './constants';
 
 const getArrayValue = (values, key) => {
   const valueCandidate = _.get(values, key);
@@ -88,7 +88,7 @@ export const getValintaperusteByFormValues = values => {
   );
   const sisalto = serializeSisalto(values?.kuvaus?.sisalto, kielivalinta);
 
-  const valintatavat = koulutustyypitWithValintatapa.includes(koulutustyyppi)
+  const valintatavat = KOULUTUSTYYPIT_WITH_VALINTATAPA.includes(koulutustyyppi)
     ? getArrayValue(values, 'valintatavat').map(
         ({
           nimi: valintatapaNimi,

@@ -41,6 +41,10 @@ export const EditValintaperustePage = props => {
     valintaperuste?.organisaatioOid
   );
 
+  const config = useMemo(() => ({ ...formConfig, readOnly: !canUpdate }), [
+    canUpdate,
+  ]);
+
   const apiUrls = useUrls();
 
   const initialValues = useMemo(
@@ -53,9 +57,7 @@ export const EditValintaperustePage = props => {
   ) : (
     <ReduxForm form="valintaperusteForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.valintaperusteenMuokkaus')}</Title>
-      <FormConfigContext.Provider
-        value={{ ...formConfig, readOnly: !canUpdate }}
-      >
+      <FormConfigContext.Provider value={config}>
         <FormPage
           readOnly={!canUpdate}
           header={

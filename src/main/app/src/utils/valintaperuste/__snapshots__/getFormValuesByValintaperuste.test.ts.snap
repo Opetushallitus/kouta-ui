@@ -3,6 +3,10 @@
 exports[`getFormValuesByValintaperuste returns correct form values given valintaperuste 1`] = `
 Object {
   "esikatselu": false,
+  "hakukelpoisuus": Object {
+    "fi": "<h1>Fi hakukelpoisuus</h1>",
+    "sv": "<h1>Sv hakukelpoisuus</h1>",
+  },
   "julkinen": true,
   "kuvaus": Object {
     "kuvaus": Object {
@@ -14,6 +18,10 @@ Object {
       "sv": "Sv nimi",
     },
     "sisalto": Array [],
+  },
+  "lisatiedot": Object {
+    "fi": "<h1>Fi lisatiedot</h1>",
+    "sv": "<h1>Sv lisatiedot</h1>",
   },
   "perustiedot": Object {
     "hakutapa": "tapa_1#1",

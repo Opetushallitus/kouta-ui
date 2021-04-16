@@ -7,9 +7,9 @@ import {
   validateTranslations,
 } from '#/src/utils/form/createErrorBuilder';
 
-export const validateIfJulkaistu = validate => eb => {
+export const validateIfJulkaistu = (...validateFns) => eb => {
   const { tila } = eb.getValues();
-  return tila === JULKAISUTILA.JULKAISTU ? validate(eb) : eb;
+  return tila === JULKAISUTILA.JULKAISTU ? _fp.flow(...validateFns)(eb) : eb;
 };
 
 export const validateIf = (condition, validate) => eb =>

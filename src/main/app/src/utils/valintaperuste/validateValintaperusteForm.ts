@@ -1,15 +1,48 @@
-import _ from 'lodash';
+import _fp from 'lodash/fp';
 
-import getErrorBuilderByFormConfig from '#/src/utils/form/getErrorBuilderByFormConfig';
+import createErrorBuilder, {
+  validateArray,
+  validateArrayMinLength,
+  validateExistence,
+  validateTranslations,
+} from '../form/createErrorBuilder';
+import {
+  getKielivalinta,
+  validateIfJulkaistu,
+  validateOptionalTranslatedField,
+  validateRelations,
+} from '../form/formConfigUtils';
 
-import getValintaperusteFormConfig from './getValintaperusteFormConfig';
+const validateValintatavat = _fp.flow(
+  validateIfJulkaistu(
+    validateArrayMinLength('valintatavat', 1, {
+      isFieldArray: true,
+    }),
+    validateArray(
+      'valintatavat',
+      _fp.flow(validateExistence('tapa'), validateTranslations('nimi'))
+    )
+  )
+);
 
-const validateValintaperusteForm = values => {
-  const koulutustyyppi = _.get(values, 'perustiedot.tyyppi');
-  return getErrorBuilderByFormConfig(
-    getValintaperusteFormConfig(koulutustyyppi),
-    values
-  ).getErrors();
+export const validateValintaperusteForm = (values, registeredFields) => {
+  const kieliversiot = getKielivalinta(values);
+  return _fp
+    .flow(
+      validateExistence('tila'),
+      validateExistence('perustiedot.tyyppi'),
+      validateArrayMinLength('perustiedot.kieliversiot', 1),
+      validateIfJulkaistu(validateExistence('perustiedot.hakutapa')),
+      validateIfJulkaistu(validateExistence('perustiedot.kohdejoukko')),
+      validateTranslations('kuvaus.nimi'),
+      validateOptionalTranslatedField('kuvaus.kuvaus'),
+      validateValintatavat,
+      validateRelations([
+        {
+          key: 'soraKuvaus',
+          t: 'yleiset.soraKuvaus',
+        },
+      ])
+    )(createErrorBuilder(values, kieliversiot, registeredFields))
+    .getErrors();
 };
-
-export default validateValintaperusteForm;

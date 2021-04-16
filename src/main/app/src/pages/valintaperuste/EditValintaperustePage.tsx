@@ -12,18 +12,19 @@ import FormSteps from '#/src/components/FormSteps';
 import FullSpin from '#/src/components/FullSpin';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
-import { KOULUTUSTYYPPI, ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
+import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useUrls } from '#/src/contexts/UrlContext';
-import { useEntityFormConfig } from '#/src/hooks/form';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { getFormValuesByValintaperuste } from '#/src/utils/valintaperuste/getFormValuesByValintaperuste';
 import { useValintaperusteById } from '#/src/utils/valintaperuste/getValintaperusteById';
 
 import { ValintaperusteFooter } from './ValintaperusteFooter';
-import ValintaperusteForm from './ValintaperusteForm';
+import { ValintaperusteForm } from './ValintaperusteForm';
 
-const EditValintaperustePage = props => {
+const formConfig = { noFieldConfigs: true };
+
+export const EditValintaperustePage = props => {
   const {
     match: {
       params: { organisaatioOid, id },
@@ -40,10 +41,9 @@ const EditValintaperustePage = props => {
     valintaperuste?.organisaatioOid
   );
 
-  const config = useEntityFormConfig(
-    ENTITY.VALINTAPERUSTE,
-    valintaperuste?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
-  );
+  const config = useMemo(() => ({ ...formConfig, readOnly: !canUpdate }), [
+    canUpdate,
+  ]);
 
   const apiUrls = useUrls();
 
@@ -57,7 +57,7 @@ const EditValintaperustePage = props => {
   ) : (
     <ReduxForm form="valintaperusteForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.valintaperusteenMuokkaus')}</Title>
-      <FormConfigContext.Provider value={{ ...config, readOnly: !canUpdate }}>
+      <FormConfigContext.Provider value={config}>
         <FormPage
           readOnly={!canUpdate}
           header={
@@ -99,5 +99,3 @@ const EditValintaperustePage = props => {
     </ReduxForm>
   );
 };
-
-export default EditValintaperustePage;

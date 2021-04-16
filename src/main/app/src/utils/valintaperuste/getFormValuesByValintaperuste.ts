@@ -40,6 +40,8 @@ export const getFormValuesByValintaperuste = valintaperuste => {
     kuvaus = {},
     sisalto = [],
     valintakokeidenYleiskuvaus,
+    hakukelpoisuus = {},
+    lisatiedot = {},
   } = metadata;
 
   return {
@@ -56,6 +58,8 @@ export const getFormValuesByValintaperuste = valintaperuste => {
       kuvaus: _.mapValues(kuvaus || {}, parseEditorState),
       sisalto: parseSisalto(sisalto),
     },
+    hakukelpoisuus: _.mapValues(hakukelpoisuus || {}, parseEditorState),
+    lisatiedot: _.mapValues(lisatiedot || {}, parseEditorState),
     valintatavat: (valintatavat || []).map(
       ({
         nimi: valintatapaNimi,

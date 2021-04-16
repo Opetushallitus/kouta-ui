@@ -23,6 +23,7 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
     <Spacing marginBottom={2} {...getTestIdProps('tapa')}>
       <Field
         name={`${valintatapa}.tapa`}
+        required
         component={FormFieldSelect}
         label={t('valintaperustelomake.valitseTapa')}
         options={tapaOptions}
@@ -32,6 +33,7 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
     <Spacing marginBottom={2} {...getTestIdProps('nimi')}>
       <Field
         name={`${valintatapa}.nimi.${language}`}
+        required
         component={FormFieldInput}
         label={t('valintaperustelomake.valintatapajononNimi')}
       />
@@ -74,6 +76,11 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
 
 const renderValintavat = ({ fields, tapaOptions, language, t }) => (
   <>
+    {fields.length === 0 && (
+      <Spacing marginBottom={2}>
+        {t('valintaperustelomake.lisaaVahintaanYksiValintatapa') + ' *'}
+      </Spacing>
+    )}
     <FieldArrayList fields={fields}>
       {({ field: valintatapa }) =>
         renderValintatapaFields({ valintatapa, tapaOptions, language, t })

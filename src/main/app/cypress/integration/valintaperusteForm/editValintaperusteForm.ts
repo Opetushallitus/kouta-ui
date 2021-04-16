@@ -31,7 +31,7 @@ const prepareTest = tyyppi => {
 
 export const editValintaperusteForm = () => {
   it('should be able to edit valintaperuste', () => {
-    prepareTest('amm');
+    prepareTest('amk');
     cy.intercept(
       { method: 'POST', url: '**/valintaperuste' },
       {
@@ -51,8 +51,13 @@ export const editValintaperusteForm = () => {
     });
   });
 
-  it("Shouldn't complain about unsaved changes for untouched form", () => {
+  it("Shouldn't complain about unsaved changes for untouched amm-form", () => {
     prepareTest('amm');
+    assertNoUnsavedChangesDialog();
+  });
+
+  it("Shouldn't complain about unsaved changes for untouched amk-form", () => {
+    prepareTest('amk');
     assertNoUnsavedChangesDialog();
   });
 

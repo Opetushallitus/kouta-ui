@@ -1,4 +1,4 @@
-const getValintaperusteet = async ({
+export const getValintaperusteet = async ({
   organisaatioOid,
   hakuOid,
   httpClient,

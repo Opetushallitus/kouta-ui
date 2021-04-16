@@ -16,6 +16,7 @@ export const KuvausSection = ({ language, name }) => {
       <Spacing marginBottom={2} {...getTestIdProps('nimi')}>
         <Field
           name={`${name}.nimi.${language}`}
+          required
           component={FormFieldInput}
           label={t('valintaperustelomake.kuvauksenNimi')}
         />

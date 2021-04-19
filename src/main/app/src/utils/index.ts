@@ -148,7 +148,14 @@ export const formValueExists = value =>
       _.stubFalse,
     ],
     [allFuncs(_.isPlainObject, _.isEmpty), _.stubFalse],
-    [allFuncs(_.isPlainObject, v => v.value === ''), _.stubFalse],
+    [
+      allFuncs(
+        _.isPlainObject,
+        v => _.has(v, 'value'),
+        v => v.value === '' || _.isNil(v.value)
+      ),
+      _.stubFalse,
+    ],
     [allFuncs(isEditorState, isEmptyEditorState), _.stubFalse],
     [otherwise, _.stubTrue],
   ])(value);
@@ -258,3 +265,7 @@ export const retryOnRedirect = async ({ httpClient, targetUrl }) => {
 export const safeArray = v => (_.isNil(v) ? [] : _.castArray(v));
 
 export const safeArrayToValue = a => (_.size(a) > 1 ? a : _.get(a, 0));
+
+const postinumeroUriRegExp = /\d{5}/;
+export const getPostinumeroByPostinumeroUri = uri =>
+  uri?.match?.(postinumeroUriRegExp)?.[0];

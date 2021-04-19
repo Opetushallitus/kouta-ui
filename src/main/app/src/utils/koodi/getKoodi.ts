@@ -9,7 +9,7 @@ type GetKoodiProps = {
   silent?: boolean;
 };
 
-const getKoodi = async ({
+export const getKoodi = async ({
   apiUrls,
   httpClient,
   koodi,

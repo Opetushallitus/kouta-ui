@@ -69,10 +69,42 @@ Object {
       "koulutuksenAlkamisvuosi": 2020,
       "koulutuksenPaattymispaivamaara": null,
     },
+    "kynnysehto": Object {
+      "fi": "<p>Hakukohteen kynnysehto - fi</p>",
+      "sv": "<p>Hakukohteen kynnysehto - sv</p>",
+    },
     "valintakokeidenYleiskuvaus": Object {
       "fi": "<p>Yleiskuvaus - fi</p>",
       "sv": "<p>Yleiskuvaus - sv</p>",
     },
+    "valintaperusteenValintakokeidenLisatilaisuudet": Array [
+      Object {
+        "id": "123-123",
+        "tilaisuudet": Array [
+          Object {
+            "aika": Object {
+              "alkaa": "2019-04-16T08:44",
+              "paattyy": "2019-04-18T08:44",
+            },
+            "jarjestamispaikka": Object {
+              "fi": "jarjestamispaikka - fi",
+              "sv": "jarjestamispaikka - sv",
+            },
+            "lisatietoja": Object {
+              "fi": "<p>fi lisatietoja</p>",
+              "sv": "<p>sv lisatietoja</p>",
+            },
+            "osoite": Object {
+              "osoite": Object {
+                "fi": "fi osoite",
+                "sv": "sv osoite",
+              },
+              "postinumeroKoodiUri": "posti_1#1",
+            },
+          },
+        ],
+      },
+    ],
   },
   "muokkaaja": "1.1.1.1",
   "nimi": Object {

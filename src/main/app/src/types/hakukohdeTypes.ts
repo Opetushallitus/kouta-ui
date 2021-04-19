@@ -20,8 +20,21 @@ type ToimitustapaFields = {
   };
 };
 
+type Tilaisuus = {
+  osoite: TranslatedField<string>;
+  postinumero: { value: string };
+  alkaa: string;
+  paattyy: string;
+  lisatietoja: TranslatedField<EditorState>;
+  jarjestamispaikka: TranslatedField<string>;
+};
+
 type ValintakokeetValues = {
   yleisKuvaus: TranslatedField<EditorState>;
+  valintaperusteenValintakokeidenLisatilaisuudet: Record<
+    string,
+    Array<Tilaisuus>
+  >;
   kokeetTaiLisanaytot: Array<{
     id?: string;
     tyyppi: { value: string };
@@ -31,14 +44,7 @@ type ValintakokeetValues = {
     erityisjarjestelytMahdollisia: boolean;
     ohjeetErityisjarjestelyihin: TranslatedField<EditorState>;
     tietoaHakijalle: TranslatedField<EditorState>;
-    tilaisuudet: Array<{
-      osoite: TranslatedField<string>;
-      postinumero: { value: string };
-      alkaa: string;
-      paattyy: string;
-      lisatietoja: TranslatedField<EditorState>;
-      jarjestamispaikka: TranslatedField<string>;
-    }>;
+    tilaisuudet: Array<Tilaisuus>;
   }>;
 };
 
@@ -70,7 +76,10 @@ export type HakukohdeFormValues = {
     pohjakoulutusvaatimus: Array<{ value: string }>;
     tarkenne: TranslatedField<EditorState>;
   };
-  valintaperusteenKuvaus?: { value: string };
+  valintaperusteenKuvaus: {
+    valintaperuste?: { value: string };
+    kynnysehto?: TranslatedField<EditorState>;
+  };
   valintakokeet: ValintakokeetValues;
   jarjestyspaikkaOid: string;
   liitteet: {

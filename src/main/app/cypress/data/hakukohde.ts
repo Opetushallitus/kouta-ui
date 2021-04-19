@@ -43,6 +43,31 @@ const hakukohde = () => ({
     valintakokeidenYleiskuvaus: {
       fi: '<p>Valintakokeiden kuvaus - fi</p>',
     },
+    valintaperusteenValintakokeidenLisatilaisuudet: [
+      {
+        id: 'testi-id-123',
+        tilaisuudet: [
+          {
+            aika: {
+              alkaa: '2019-04-02T10:45',
+              paattyy: '2019-04-02T19:00',
+            },
+            jarjestamispaikka: {
+              fi: 'paikka',
+            },
+            lisatietoja: {
+              fi: '<p>lisatietoja</p>',
+            },
+            osoite: {
+              osoite: {
+                fi: 'osoite',
+              },
+              postinumeroKoodiUri: 'posti_00350#2',
+            },
+          },
+        ],
+      },
+    ],
     kaytetaanHaunAlkamiskautta: false,
     koulutuksenAlkamiskausi: {
       alkamiskausityyppi: Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,

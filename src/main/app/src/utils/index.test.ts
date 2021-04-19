@@ -24,8 +24,28 @@ const NOT_EMPTY_OBJECT = {
   key: 'value',
 };
 
+const EMTPY_STRING_VALUE_OBJECT = {
+  value: '',
+};
+
+const EMTPY_VALUE_OBJECT = {
+  value: undefined,
+};
+
 test('Should return true for object with empty values in array', () => {
   expect(isDeepEmptyFormValues(OBJECT_IN_ARRAY)).toEqual(true);
+});
+
+test('Should return true for object with key "value", but undefined', () => {
+  expect(isDeepEmptyFormValues(EMTPY_VALUE_OBJECT)).toEqual(true);
+});
+
+test('Should return true for object with key "value", but empty string', () => {
+  expect(isDeepEmptyFormValues(EMTPY_STRING_VALUE_OBJECT)).toEqual(true);
+});
+
+test('Should return true for empty object', () => {
+  expect(isDeepEmptyFormValues({})).toEqual(true);
 });
 
 test('Should return false for not empty array', () => {

@@ -3,11 +3,10 @@ import React from 'react';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
+import { Grid, Cell } from 'styled-css-grid';
 
 import DividerHeading from '#/src/components/DividerHeading';
 import { FormFieldInput, FormFieldUrlInput } from '#/src/components/formFields';
-import GridColumn from '#/src/components/GridColumn';
-import GridRow from '#/src/components/GridRow';
 import LogoSection from '#/src/components/LogoSection';
 import { Box, Typography } from '#/src/components/virkailija';
 import useKoodiNimet from '#/src/hooks/useKoodiNimet';
@@ -29,88 +28,88 @@ const TiedotSection = ({ language, name, t }) => {
         {t('oppilaitoslomake.perustiedotInfo')}
       </Typography>
 
-      <GridRow gutter={2}>
-        <GridColumn md={4} {...getTestIdProps('opiskelijoita')}>
+      <Grid css={{ marginBottom: '12px' }}>
+        <Cell width={4} {...getTestIdProps('opiskelijoita')}>
           <Field
             component={FormFieldInput}
             name={`${name}.opiskelijoita`}
             type="number"
             label={t('oppilaitoslomake.opiskelijoita')}
           />
-        </GridColumn>
-        <GridColumn md={4} {...getTestIdProps('korkeakouluja')}>
+        </Cell>
+        <Cell width={4} {...getTestIdProps('korkeakouluja')}>
           <Field
             component={FormFieldInput}
             name={`${name}.korkeakouluja`}
             type="number"
             label={t('oppilaitoslomake.korkeakouluja')}
           />
-        </GridColumn>
-        <GridColumn md={4} {...getTestIdProps('tiedekuntia')}>
+        </Cell>
+        <Cell width={4} {...getTestIdProps('tiedekuntia')}>
           <Field
             component={FormFieldInput}
             name={`${name}.tiedekuntia`}
             type="number"
             label={t('oppilaitoslomake.tiedekuntia')}
           />
-        </GridColumn>
-        <GridColumn md={4} {...getTestIdProps('kampuksia')}>
+        </Cell>
+        <Cell width={4} {...getTestIdProps('kampuksia')}>
           <Field
             component={FormFieldInput}
             name={`${name}.kampuksia`}
             type="number"
             label={t('oppilaitoslomake.kampuksia')}
           />
-        </GridColumn>
-        <GridColumn md={4} {...getTestIdProps('yksikoita')}>
+        </Cell>
+        <Cell width={4} {...getTestIdProps('yksikoita')}>
           <Field
             component={FormFieldInput}
             name={`${name}.yksikoita`}
             type="number"
             label={t('oppilaitoslomake.yksikoita')}
           />
-        </GridColumn>
-        <GridColumn md={4} {...getTestIdProps('toimipisteita')}>
+        </Cell>
+        <Cell width={4} {...getTestIdProps('toimipisteita')}>
           <Field
             component={FormFieldInput}
             name={`${name}.toimipisteita`}
             type="number"
             label={t('oppilaitoslomake.toimipisteita')}
           />
-        </GridColumn>
-        <GridColumn md={4} {...getTestIdProps('akatemioita')}>
+        </Cell>
+        <Cell width={4} {...getTestIdProps('akatemioita')}>
           <Field
             component={FormFieldInput}
             name={`${name}.akatemioita`}
             type="number"
             label={t('oppilaitoslomake.akatemioita')}
           />
-        </GridColumn>
-      </GridRow>
-      <GridRow gutter={2}>
-        <GridColumn md={6}>
+        </Cell>
+      </Grid>
+      <Grid css={{ marginBottom: '12px' }}>
+        <Cell width={6}>
           <Field
             component={FormFieldUrlInput}
             name={`${name}.wwwSivuUrl.${language}`}
             label={t('oppilaitoslomake.wwwSivu')}
           />
-        </GridColumn>
-        <GridColumn md={6}>
+        </Cell>
+        <Cell width={6}>
           <Field
             component={FormFieldInput}
             name={`${name}.wwwSivuNimi.${language}`}
             label={t('oppilaitoslomake.wwwSivuNimi')}
           />
-        </GridColumn>
-      </GridRow>
-      <GridRow gutter={2}>
-        <GridColumn md={12} {...getTestIdProps('logo')}>
+        </Cell>
+      </Grid>
+      <Grid>
+        <Cell width={12} {...getTestIdProps('logo')}>
           <LogoSection
             name={`${name}.logo`}
             label={t('oppilaitoslomake.logo')}
           />
-        </GridColumn>
-      </GridRow>
+        </Cell>
+      </Grid>
     </>
   );
 };
@@ -171,7 +170,7 @@ const OrganisaatioSection = ({ language, organisaatio, t }) => {
   );
 };
 
-const PerustiedotSection = ({ language, name, organisaatioOid }) => {
+export const PerustiedotSection = ({ language, name, organisaatioOid }) => {
   const { organisaatio } = useOrganisaatio(organisaatioOid);
   const { t } = useTranslation();
 
@@ -189,5 +188,3 @@ const PerustiedotSection = ({ language, name, organisaatioOid }) => {
     </>
   );
 };
-
-export default PerustiedotSection;

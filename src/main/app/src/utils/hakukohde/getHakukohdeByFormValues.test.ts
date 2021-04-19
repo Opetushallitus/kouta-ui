@@ -45,7 +45,11 @@ test('getHakukohdeByFormValues returns correct hakukohde given form values', () 
       },
     },
     valintaperusteenKuvaus: {
-      value: 'peruste_1#1',
+      valintaperuste: { value: 'peruste_1#1' },
+      kynnysehto: {
+        fi: parseEditorState('<p>Hakukohteen kynnysehto - fi</p>'),
+        sv: parseEditorState('<p>Hakukohteen kynnysehto - sv</p>'),
+      },
     },
     jarjestyspaikkaOid: '2.2.2.2.2',
     ajankohta: {
@@ -58,6 +62,24 @@ test('getHakukohdeByFormValues returns correct hakukohde given form values', () 
       yleisKuvaus: {
         fi: parseEditorState('<p>Yleiskuvaus - fi</p>'),
         sv: parseEditorState('<p>Yleiskuvaus - sv</p>'),
+      },
+      valintaperusteenValintakokeidenLisatilaisuudet: {
+        '123-123': [
+          {
+            osoite: { fi: 'fi osoite', sv: 'sv osoite' },
+            postinumero: { value: 'posti_1#1' },
+            alkaa: '2019-04-16T08:44',
+            paattyy: '2019-04-18T08:44',
+            lisatietoja: {
+              fi: parseEditorState('<p>fi lisatietoja</p>'),
+              sv: parseEditorState('<p>sv lisatietoja</p>'),
+            },
+            jarjestamispaikka: {
+              fi: 'jarjestamispaikka - fi',
+              sv: 'jarjestamispaikka - sv',
+            },
+          },
+        ],
       },
       kokeetTaiLisanaytot: [
         {

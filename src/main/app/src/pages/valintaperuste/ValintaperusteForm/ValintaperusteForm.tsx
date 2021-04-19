@@ -6,7 +6,7 @@ import FormCollapse from '#/src/components/FormCollapse';
 import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import JulkisuusSection from '#/src/components/JulkisuusSection';
-import KokeetTaiLisanaytotSection from '#/src/components/KokeetTaiLisanaytotSection';
+import { KokeetTaiLisanaytotSection } from '#/src/components/KokeetTaiLisanaytotSection';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import SoraKuvausSection from '#/src/components/SoraKuvausSection';
 import { ENTITY } from '#/src/constants';

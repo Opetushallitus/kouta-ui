@@ -291,6 +291,7 @@ exports[`editValintaperuste > should be able to edit valintaperuste #0`] =
   "esikatselu": false,
   "valintakokeet": [
     {
+      "id": "testi-id-123",
       "metadata": {
         "erityisjarjestelytMahdollisia": true,
         "liittyyEnnakkovalmistautumista": true,

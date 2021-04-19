@@ -69,7 +69,6 @@ class ErrorBuilder {
     }
 
     const errorMessage = message || 'validointivirheet.pakollinen';
-
     if (!exists(this.getValue(path))) {
       this.setError(path, errorMessage);
     }

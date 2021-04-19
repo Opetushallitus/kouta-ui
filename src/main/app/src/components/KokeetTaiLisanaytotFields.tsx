@@ -20,7 +20,7 @@ import { useFieldValue } from '#/src/hooks/form';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
 
-import TilaisuudetFields from './TilaisuudetFields';
+import { TilaisuudetFields } from './TilaisuudetFields';
 
 export const KoeTaiLisanayttoFields = ({
   index,
@@ -40,9 +40,7 @@ export const KoeTaiLisanayttoFields = ({
 
   return (
     <>
-      <Heading hasDivider>
-        {t(`koeTaiLisanaytto.title`, { index: index + 1 })}
-      </Heading>
+      <Heading hasDivider>{t(`koeTaiLisanaytto.title`, { index })}</Heading>
       <Flex ml={12}>
         <FlexItem grow={1}>
           <Flex mb={2}>
@@ -133,7 +131,13 @@ export const KoeTaiLisanayttoFields = ({
   );
 };
 
-const KokeetTaiLisanaytotFields = ({ fields, language, t, meta }) => {
+export const KokeetTaiLisanaytotFields = ({
+  fields,
+  language,
+  t,
+  meta,
+  readonlyAmount = 0,
+}) => {
   return (
     <div {...getTestIdProps('kokeetTaiLisanaytot')}>
       <FieldArrayList
@@ -147,7 +151,7 @@ const KokeetTaiLisanaytotFields = ({ fields, language, t, meta }) => {
             field={field}
             language={language}
             meta={meta}
-            index={index}
+            index={index + 1 + readonlyAmount}
             removeSelf={() => fields.remove(index)}
           />
         )}
@@ -167,5 +171,3 @@ const KokeetTaiLisanaytotFields = ({ fields, language, t, meta }) => {
     </div>
   );
 };
-
-export default KokeetTaiLisanaytotFields;

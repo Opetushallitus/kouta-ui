@@ -76,6 +76,7 @@ const valintaperuste = ({ tyyppi = 'amm' } = {}) => {
 
     valintakokeet: [
       {
+        id: 'testi-id-123',
         nimi: {
           fi: 'Kokeen nimi - fi',
         },

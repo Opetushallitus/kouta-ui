@@ -11,7 +11,7 @@ import { YhteystiedotSection } from '#/src/components/YhteystiedotSection';
 import { useFieldValue } from '#/src/hooks/form';
 
 import EsittelySection from './EsittelySection';
-import PerustiedotSection from './PerustiedotSection';
+import { PerustiedotSection } from './PerustiedotSection';
 
 const OppilaitoksenOsaForm = ({
   steps = false,

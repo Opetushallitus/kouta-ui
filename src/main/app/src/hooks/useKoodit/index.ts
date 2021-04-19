@@ -8,7 +8,7 @@ import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 
 const noopPromiseFn = () => Promise.resolve([]);
 
-const useKoodit = koodiUris => {
+export const useKoodit = koodiUris => {
   const versiot = useMemo(() => {
     const versiotMap = _.isArray(koodiUris)
       ? koodiUris.reduce((acc, uri) => {

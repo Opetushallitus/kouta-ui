@@ -10,7 +10,6 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
   const values = getFormValuesByHakukohde({
     tila: JULKAISUTILA.TALLENNETTU,
     kielivalinta: ['fi', 'sv'],
-    aloituspaikat: 35,
     hakuajat: [{ alkaa: '2019-03-29T12:28', paattyy: '2019-09-29T12:30' }],
     liitteetOnkoSamaToimitusaika: false,
     liitteetOnkoSamaToimitusosoite: false,
@@ -112,6 +111,14 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
         koulutuksenPaattymispaivamaara: '2021-12-12T00:00',
         koulutuksenAlkamisvuosi: 2020,
       },
+      aloituspaikat: {
+        lukumaara: 45,
+        ensikertalaisille: 35,
+        kuvaus: {
+          fi: '<p>Aloituspaikan kuvaus - fi</p>',
+          sv: '<p>Aloituspaikan kuvaus - sv</p>',
+        },
+      },
     },
     jarjestyspaikkaOid: '2.2.2.2.2',
     valintakokeet: [
@@ -166,7 +173,6 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
       sv: '<strong>Tarkenne sv</strong>',
     },
     valintaperusteId: 'peruste_1#1',
-    ensikertalaisenAloituspaikat: 39,
     hakulomakeAtaruId: '12345',
     hakulomaketyyppi: HAKULOMAKETYYPPI.ATARU,
     eriHakulomakeKuinHaulla: true,

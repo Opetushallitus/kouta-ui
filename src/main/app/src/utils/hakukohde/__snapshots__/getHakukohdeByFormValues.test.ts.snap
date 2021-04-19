@@ -2,8 +2,6 @@
 
 exports[`getHakukohdeByFormValues returns correct hakukohde given form values 1`] = `
 Object {
-  "aloituspaikat": 45,
-  "ensikertalaisenAloituspaikat": 29,
   "esikatselu": false,
   "hakuajat": Array [
     Object {
@@ -60,6 +58,14 @@ Object {
   "liitteidenToimitusosoite": null,
   "liitteidenToimitustapa": null,
   "metadata": Object {
+    "aloituspaikat": Object {
+      "ensikertalaisille": 29,
+      "kuvaus": Object {
+        "fi": "<p>aloituspaikan kuvaus fi</p>",
+        "sv": "<p>aloituspaikan kuvaus sv</p>",
+      },
+      "lukumaara": 45,
+    },
     "kaytetaanHaunAlkamiskautta": false,
     "koulutuksenAlkamiskausi": Object {
       "alkamiskausityyppi": "alkamiskausi ja -vuosi",

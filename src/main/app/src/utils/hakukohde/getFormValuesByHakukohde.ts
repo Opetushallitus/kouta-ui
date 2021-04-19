@@ -26,7 +26,6 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
   const {
     kaytetaanHaunAikataulua,
     kielivalinta = [],
-    aloituspaikat = '',
     hakuajat = [],
     liitteetOnkoSamaToimitusaika,
     liitteetOnkoSamaToimitusosoite,
@@ -39,7 +38,6 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
     valintakokeet = [],
     pohjakoulutusvaatimusKoodiUrit = [],
     valintaperusteId,
-    ensikertalaisenAloituspaikat = '',
     kaytetaanHaunHakulomaketta,
     hakulomaketyyppi,
     hakulomakeAtaruId,
@@ -58,6 +56,7 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
     kaytetaanHaunAlkamiskautta,
     koulutuksenAlkamiskausi = {},
     valintaperusteenValintakokeidenLisatilaisuudet = [],
+    aloituspaikat,
   } = metadata;
 
   return {
@@ -65,12 +64,13 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
     esikatselu,
     kieliversiot: kielivalinta,
     aloituspaikat: {
-      aloituspaikkamaara: isNumeric(aloituspaikat)
-        ? aloituspaikat.toString()
+      aloituspaikkamaara: isNumeric(aloituspaikat?.lukumaara)
+        ? aloituspaikat.lukumaara.toString()
         : '',
-      ensikertalaismaara: isNumeric(ensikertalaisenAloituspaikat)
-        ? ensikertalaisenAloituspaikat.toString()
+      ensikertalaismaara: isNumeric(aloituspaikat?.ensikertalaisille)
+        ? aloituspaikat.ensikertalaisille.toString()
         : '',
+      aloituspaikkakuvaus: _.mapValues(aloituspaikat?.kuvaus, parseEditorState),
     },
     hakuajat: {
       eriHakuaika: !kaytetaanHaunAikataulua,

@@ -16,6 +16,10 @@ test('getHakukohdeByFormValues returns correct hakukohde given form values', () 
     aloituspaikat: {
       aloituspaikkamaara: '45',
       ensikertalaismaara: '29',
+      aloituspaikkakuvaus: {
+        fi: parseEditorState('aloituspaikan kuvaus fi'),
+        sv: parseEditorState('aloituspaikan kuvaus sv'),
+      },
     },
     hakuajat: {
       eriHakuaika: true,

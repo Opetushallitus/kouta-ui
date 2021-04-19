@@ -22,14 +22,23 @@ const getLiitteillaYhteinenToimitusosoite = values =>
 
 const getKaytetaanHaunAikataulua = values => !values?.hakuajat.eriHakuaika;
 
+function getAloituspaikat(values: HakukohdeFormValues) {
+  return {
+    lukumaara: maybeParseNumber(values?.aloituspaikat?.aloituspaikkamaara),
+    ensikertalaisille: maybeParseNumber(
+      values?.aloituspaikat?.ensikertalaismaara
+    ),
+    kuvaus: _.mapValues(
+      values?.aloituspaikat?.aloituspaikkakuvaus,
+      serializeEditorState
+    ),
+  };
+}
+
 export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
   const { muokkaaja, tila, esikatselu = false, jarjestyspaikkaOid } = values;
   const kielivalinta = getKielivalinta(values);
   const pickTranslations = _fp.pick(kielivalinta);
-
-  const aloituspaikat = maybeParseNumber(
-    values?.aloituspaikat?.aloituspaikkamaara
-  );
 
   const {
     hakulomakeAtaruId,
@@ -144,7 +153,6 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     jarjestyspaikkaOid,
     kaytetaanHaunAikataulua,
     kielivalinta,
-    aloituspaikat,
     hakuajat,
     liitteetOnkoSamaToimitusaika,
     liitteetOnkoSamaToimitusosoite,
@@ -167,9 +175,6 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
     pohjakoulutusvaatimusTarkenne,
     valintaperusteId:
       values?.valintaperusteenKuvaus?.valintaperuste?.value || null,
-    ensikertalaisenAloituspaikat: maybeParseNumber(
-      values?.aloituspaikat?.ensikertalaismaara
-    ),
     kaytetaanHaunHakulomaketta: !values?.hakulomake?.eriHakulomake,
     hakulomaketyyppi,
     hakulomakeAtaruId,
@@ -185,6 +190,7 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
         values?.valintaperusteenKuvaus?.kynnysehto,
         kuvaus => serializeEditorState(kuvaus)
       ),
+      aloituspaikat: getAloituspaikat(values),
       kaytetaanHaunAlkamiskautta: !kaytetaanHaukukohteenAlkamiskautta,
       koulutuksenAlkamiskausi: kaytetaanHaukukohteenAlkamiskautta
         ? getAlkamiskausiData(ajankohta, pickTranslations)

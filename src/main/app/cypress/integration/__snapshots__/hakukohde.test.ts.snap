@@ -1,7 +1,5 @@
 exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] =
 {
-  "aloituspaikat": 10,
-  "ensikertalaisenAloituspaikat": null,
   "esikatselu": false,
   "hakuOid": "4.1.1.1.1.1",
   "hakuajat": [
@@ -48,6 +46,11 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
   "liitteidenToimitusosoite": null,
   "liitteidenToimitustapa": null,
   "metadata": {
+    "aloituspaikat": {
+      "ensikertalaisille": null,
+      "kuvaus": {},
+      "lukumaara": 10
+    },
     "kaytetaanHaunAlkamiskautta": false,
     "koulutuksenAlkamiskausi": {
       "alkamiskausityyppi": "henkilokohtainen suunnitelma",
@@ -152,8 +155,6 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
 
 exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
 {
-  "aloituspaikat": 10,
-  "ensikertalaisenAloituspaikat": 5,
   "esikatselu": false,
   "hakuOid": "4.1.1.1.1.1",
   "hakuajat": [
@@ -200,6 +201,11 @@ exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
   "liitteidenToimitusosoite": null,
   "liitteidenToimitustapa": null,
   "metadata": {
+    "aloituspaikat": {
+      "ensikertalaisille": 5,
+      "kuvaus": {},
+      "lukumaara": 10
+    },
     "kaytetaanHaunAlkamiskautta": false,
     "koulutuksenAlkamiskausi": {
       "alkamiskausityyppi": "henkilokohtainen suunnitelma",
@@ -306,8 +312,6 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
 {
   "alkamiskausiKoodiUri": "kausi_k#1",
   "alkamisvuosi": "2024",
-  "aloituspaikat": 150,
-  "ensikertalaisenAloituspaikat": 49,
   "esikatselu": false,
   "hakuOid": "4.1.1.1.1.1",
   "hakuajat": [
@@ -355,6 +359,11 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
   "liitteidenToimitusosoite": null,
   "liitteidenToimitustapa": null,
   "metadata": {
+    "aloituspaikat": {
+      "ensikertalaisille": 49,
+      "kuvaus": {},
+      "lukumaara": 150
+    },
     "kaytetaanHaunAlkamiskautta": false,
     "koulutuksenAlkamiskausi": {
       "alkamiskausityyppi": "tarkka alkamisajankohta",
@@ -458,8 +467,6 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
 
 exports[`createHakukohde > should be able to create hakukohde with muu hakulomake #0`] =
 {
-  "aloituspaikat": null,
-  "ensikertalaisenAloituspaikat": null,
   "esikatselu": false,
   "hakuOid": "4.1.1.1.1.1",
   "hakuajat": [],
@@ -481,6 +488,11 @@ exports[`createHakukohde > should be able to create hakukohde with muu hakulomak
   "liitteidenToimitusosoite": null,
   "liitteidenToimitustapa": null,
   "metadata": {
+    "aloituspaikat": {
+      "ensikertalaisille": null,
+      "kuvaus": {},
+      "lukumaara": null
+    },
     "kaytetaanHaunAlkamiskautta": true,
     "koulutuksenAlkamiskausi": null,
     "kynnysehto": {},
@@ -506,8 +518,6 @@ exports[`createHakukohde > should be able to create hakukohde with muu hakulomak
 
 exports[`createHakukohde > should be able to create hakukohde with "ei sähköistä" hakulomake #0`] =
 {
-  "aloituspaikat": null,
-  "ensikertalaisenAloituspaikat": null,
   "esikatselu": false,
   "hakuOid": "4.1.1.1.1.1",
   "hakuajat": [],
@@ -529,6 +539,11 @@ exports[`createHakukohde > should be able to create hakukohde with "ei sähköis
   "liitteidenToimitusosoite": null,
   "liitteidenToimitustapa": null,
   "metadata": {
+    "aloituspaikat": {
+      "ensikertalaisille": null,
+      "kuvaus": {},
+      "lukumaara": null
+    },
     "kaytetaanHaunAlkamiskautta": true,
     "koulutuksenAlkamiskausi": null,
     "kynnysehto": {},

@@ -8,8 +8,8 @@ import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
 import { KOULUTUSTYYPPI } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
+import { AloituspaikatSection } from '#/src/pages/hakukohde/HakukohdeForm/AloituspaikatSection';
 
-import AloituspaikatSection from './AloituspaikatSection';
 import { HakukohteenValintakokeetSection } from './HakukohteenValintakokeetSection';
 import JarjestyspaikkaSection from './JarjestyspaikkaSection';
 import { KuvausSection } from './KuvausSection';
@@ -61,6 +61,7 @@ const HakukohdeForm = ({
       <FormCollapse
         section="aloituspaikat"
         header={t('hakukohdelomake.aloituspaikat')}
+        languages={languages}
         Component={AloituspaikatSection}
         koulutustyyppi={koulutustyyppi}
       />

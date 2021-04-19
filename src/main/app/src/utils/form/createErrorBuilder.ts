@@ -1,13 +1,31 @@
 import _ from 'lodash';
 
-import { formValueExists as exists, isPartialDate } from '#/src/utils';
+import {
+  formValueExists as exists,
+  getFieldName,
+  isPartialDate,
+} from '#/src/utils';
 import { getInvalidTranslations } from '#/src/utils/languageUtils';
 
+// TODO: Remove ErrorBuilder and replace all form validations with just _fp.flow(...validators)({values})
 class ErrorBuilder {
-  constructor(values, errors = {}) {
-    this.errors = errors;
+  constructor(
+    values,
+    languages: Array<LanguageCode> = [],
+    registeredFields: Record<string, { name: string }> | null = null
+  ) {
+    this.languages = languages;
     this.values = values;
+    this.errors = {};
+    this.registeredFields =
+      registeredFields &&
+      _.values(registeredFields).map(v => getFieldName(v.name)!);
   }
+
+  private languages: Array<LanguageCode>;
+  private values: Record<string, any>;
+  private errors: Record<string, any>;
+  private registeredFields: Array<string> | null;
 
   getValue(path) {
     return _.get(this.values, path);
@@ -17,11 +35,25 @@ class ErrorBuilder {
     return this.values;
   }
 
+  isVisible(path: string) {
+    return (
+      _.isNil(this.registeredFields) || this.registeredFields.includes(path)
+    );
+  }
+
+  getErrors() {
+    return this.errors;
+  }
+
   setError(path, value) {
     _.set(this.errors, path, value ? _.castArray(value) : null);
   }
 
-  validateExistenceOfDate(path, { message } = {}) {
+  validateExistenceOfDate(path, { message = null } = {}) {
+    if (!this.isVisible(path)) {
+      return this;
+    }
+
     const errorMessage = message || 'validointivirheet.pakollinen';
     const value = this.getValue(path);
     if (!exists(value) || isPartialDate(value)) {
@@ -31,9 +63,12 @@ class ErrorBuilder {
     return this;
   }
 
-  validateExistence(path, { message } = {}) {
-    const errorMessage = message || 'validointivirheet.pakollinen';
+  validateExistence(path, { message = null } = {}) {
+    if (!this.isVisible(path)) {
+      return this;
+    }
 
+    const errorMessage = message || 'validointivirheet.pakollinen';
     if (!exists(this.getValue(path))) {
       this.setError(path, errorMessage);
     }
@@ -41,7 +76,11 @@ class ErrorBuilder {
     return this;
   }
 
-  validateUrl(path, { message } = {}) {
+  validateUrl(path, { message = null } = {}) {
+    if (!this.isVisible(path)) {
+      return this;
+    }
+
     const errorMessage = message || 'validointivirheet.epakelpoUrl';
     const value = this.getValue(path);
     const validURL = str => {
@@ -61,7 +100,11 @@ class ErrorBuilder {
     return this;
   }
 
-  validate(path, validator, { message } = {}) {
+  validate(path, validator, { message = null } = {}) {
+    if (!this.isVisible(path)) {
+      return this;
+    }
+
     const errorMessage = message || 'validointivirheet.pakollinen';
 
     if (!validator(this.getValue(path))) {
@@ -71,7 +114,45 @@ class ErrorBuilder {
     return this;
   }
 
-  validateArrayMinLength(path, min, { message, isFieldArray = false } = {}) {
+  validateTranslations(
+    path,
+    languages,
+    { optional = false, message = null, validator = v => exists(v) } = {}
+  ) {
+    if (!this.isVisible(path)) {
+      return this;
+    }
+
+    const errorMessage =
+      message ||
+      (optional
+        ? 'validointivirheet.kaikkiKaannoksetJosAinakinYksi'
+        : 'validointivirheet.pakollisetKaannokset');
+
+    const usedLanguages = languages || this.languages;
+    const invalidTranslations = getInvalidTranslations(
+      this.getValue(path),
+      usedLanguages,
+      validator,
+      optional
+    );
+
+    if (invalidTranslations.length > 0) {
+      usedLanguages.forEach(l => this.setError(`${path}.${l}`, errorMessage));
+    }
+
+    return this;
+  }
+
+  validateArrayMinLength(
+    path,
+    min,
+    { message = null, isFieldArray = false } = {}
+  ) {
+    if (!this.isVisible(path)) {
+      return this;
+    }
+
     const value = this.getValue(path);
     const errorMessage = message
       ? message
@@ -86,36 +167,18 @@ class ErrorBuilder {
     return this;
   }
 
-  validateTranslations(
-    path,
-    languages,
-    { optional, message, validator = v => exists(v) } = {}
-  ) {
-    const errorMessage =
-      message || optional
-        ? 'validointivirheet.kaikkiKaannoksetJosAinakinYksi'
-        : 'validointivirheet.pakollisetKaannokset';
-
-    const invalidTranslations = getInvalidTranslations(
-      this.getValue(path),
-      languages,
-      validator,
-      optional
-    );
-
-    if (invalidTranslations.length > 0) {
-      languages.forEach(l => this.setError(`${path}.${l}`, errorMessage));
+  validateArray(path, makeBuilder) {
+    if (!this.isVisible(path)) {
+      return this;
     }
 
-    return this;
-  }
-
-  validateArray(path, makeBuilder) {
     const value = this.getValue(path);
 
     if (_.isArray(value)) {
       const errors = value.map(v => {
-        return makeBuilder(new ErrorBuilder(v), v).getErrors();
+        // NOTE: ehdollinen näkyvyys *EI* toimi nestatuissa validaattoreissa (e.g. validateArrayn sisäiset validaattorit)
+        // Jos tätä tarvitsee joskus tukea, täytyy errorbuilderille lisätä basepath tjms. mikä kertoo jos se on sisäinen eb
+        return makeBuilder(new ErrorBuilder(v, this.languages), v).getErrors();
       });
 
       if (errors.find(e => !_.isEmpty(e))) {
@@ -126,7 +189,11 @@ class ErrorBuilder {
     return this;
   }
 
-  validateInteger(path, { min, max, optional }, message = undefined) {
+  validateInteger(path, { min, max, optional }, message = null) {
+    if (!this.isVisible(path)) {
+      return this;
+    }
+
     const errorMessage = message || 'validointivirheet.kokonaislukuValilta';
     const value = this.getValue(path);
 
@@ -150,15 +217,12 @@ class ErrorBuilder {
 
     return this;
   }
-
-  getErrors() {
-    return this.errors;
-  }
 }
 
 const bindValidator = name => (...props) => eb =>
   ErrorBuilder.prototype[name].call(eb, ...props);
 
+// TODO: Refactor these as simple pure functional validators that always return a new {values, errors, languages} -object
 export const validate = bindValidator('validate');
 export const validateArray = bindValidator('validateArray');
 export const validateArrayMinLength = bindValidator('validateArrayMinLength');
@@ -168,6 +232,10 @@ export const validateTranslations = bindValidator('validateTranslations');
 export const validateUrl = bindValidator('validateUrl');
 export const validateInteger = bindValidator('validateInteger');
 
-const createErrorBuilder = values => new ErrorBuilder(values);
+export const createErrorBuilder = (
+  values,
+  languages = [],
+  registeredFields = null
+) => new ErrorBuilder(values, languages, registeredFields);
 
 export default createErrorBuilder;

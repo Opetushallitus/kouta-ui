@@ -13,7 +13,7 @@ import AlkamiskausiSection from './AlkamiskausiSection';
 import HakuajatSection from './HakuajatSection';
 import LomakeSection from './LomakeSection';
 
-const PerustiedotSection = ({
+export const PerustiedotSection = ({
   language,
   koulutustyyppi,
   name,
@@ -68,5 +68,3 @@ const PerustiedotSection = ({
     </>
   );
 };
-
-export default PerustiedotSection;

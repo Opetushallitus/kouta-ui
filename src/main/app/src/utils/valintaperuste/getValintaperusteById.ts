@@ -12,5 +12,3 @@ export const getValintaperusteById = async ({ oid, apiUrls, httpClient }) =>
 
 export const useValintaperusteById = (id?: string | null, options = {}) =>
   useEntityByOid(ENTITY.VALINTAPERUSTE, { oid: id }, options);
-
-export default getValintaperusteById;

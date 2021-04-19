@@ -20,8 +20,8 @@ import CreateSoraKuvausPage from './soraKuvaus/CreateSoraKuvausPage';
 import EditSoraKuvausPage from './soraKuvaus/EditSoraKuvausPage';
 import CreateToteutusPage from './toteutus/CreateToteutusPage';
 import EditToteutusPage from './toteutus/EditToteutusPage';
-import CreateValintaperustePage from './valintaperuste/CreateValintaperustePage';
-import EditValintaperustePage from './valintaperuste/EditValintaperustePage';
+import { CreateValintaperustePage } from './valintaperuste/CreateValintaperustePage';
+import { EditValintaperustePage } from './valintaperuste/EditValintaperustePage';
 
 const RedirectKoulutusPage = createRedirectEntityPage({
   entityType: ENTITY.KOULUTUS,

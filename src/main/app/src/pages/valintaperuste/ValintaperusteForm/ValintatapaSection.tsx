@@ -2,6 +2,7 @@ import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { Field, FieldArray } from 'redux-form';
+import { Grid, Cell } from 'styled-css-grid';
 
 import Button from '#/src/components/Button';
 import FieldArrayList from '#/src/components/FieldArrayList';
@@ -11,8 +12,6 @@ import {
   FormFieldInput,
   FormFieldSelect,
 } from '#/src/components/formFields';
-import GridColumn from '#/src/components/GridColumn';
-import GridRow from '#/src/components/GridRow';
 import { SisaltoFields } from '#/src/components/SisaltoFields';
 import Spacing from '#/src/components/Spacing';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
@@ -23,6 +22,7 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
     <Spacing marginBottom={2} {...getTestIdProps('tapa')}>
       <Field
         name={`${valintatapa}.tapa`}
+        required
         component={FormFieldSelect}
         label={t('valintaperustelomake.valitseTapa')}
         options={tapaOptions}
@@ -32,30 +32,31 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
     <Spacing marginBottom={2} {...getTestIdProps('nimi')}>
       <Field
         name={`${valintatapa}.nimi.${language}`}
+        required
         component={FormFieldInput}
         label={t('valintaperustelomake.valintatapajononNimi')}
       />
     </Spacing>
 
     <Spacing marginBottom={2}>
-      <GridRow>
-        <GridColumn sm={6} {...getTestIdProps('enimmaispistemaara')}>
+      <Grid>
+        <Cell width={6} {...getTestIdProps('enimmaispistemaara')}>
           <Field
             name={`${valintatapa}.enimmaispistemaara`}
             component={FormFieldInput}
             type="number"
             label={t('valintaperustelomake.enimmaispistemaara')}
           />
-        </GridColumn>
-        <GridColumn sm={6} {...getTestIdProps('vahimmaispistemaara')}>
+        </Cell>
+        <Cell width={6} {...getTestIdProps('vahimmaispistemaara')}>
           <Field
             name={`${valintatapa}.vahimmaispistemaara`}
             component={FormFieldInput}
             type="number"
             label={t('valintaperustelomake.vahimmaispistemaara')}
           />
-        </GridColumn>
-      </GridRow>
+        </Cell>
+      </Grid>
     </Spacing>
 
     <Spacing marginBottom={2} {...getTestIdProps('kynnysehto')}>
@@ -74,6 +75,11 @@ const renderValintatapaFields = ({ valintatapa, tapaOptions, language, t }) => (
 
 const renderValintavat = ({ fields, tapaOptions, language, t }) => (
   <>
+    {fields.length === 0 && (
+      <Spacing marginBottom={2}>
+        {t('valintaperustelomake.lisaaVahintaanYksiValintatapa') + ' *'}
+      </Spacing>
+    )}
     <FieldArrayList fields={fields}>
       {({ field: valintatapa }) =>
         renderValintatapaFields({ valintatapa, tapaOptions, language, t })

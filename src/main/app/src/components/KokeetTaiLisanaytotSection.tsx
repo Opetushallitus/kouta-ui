@@ -8,7 +8,7 @@ import { FormFieldEditor } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 
-import KokeetTaiLisanaytotFields from './KokeetTaiLisanaytotFields';
+import { KokeetTaiLisanaytotFields } from './KokeetTaiLisanaytotFields';
 
 export const KokeetTaiLisanaytotSection = ({ name, language }) => {
   const { t } = useTranslation();
@@ -31,5 +31,3 @@ export const KokeetTaiLisanaytotSection = ({ name, language }) => {
     </>
   );
 };
-
-export default KokeetTaiLisanaytotSection;

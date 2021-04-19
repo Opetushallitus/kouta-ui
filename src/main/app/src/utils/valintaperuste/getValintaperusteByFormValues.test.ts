@@ -3,7 +3,7 @@ import { getValintaperusteByFormValues } from '#/src/utils/valintaperuste/getVal
 
 const BASE_VALINTAPERUSTE_FORM_DATA = {
   perustiedot: {
-    tyyppi: 'tyyppi_1#1',
+    tyyppi: 'amk',
     kieliversiot: ['fi', 'sv'],
     hakutapa: 'tapa_1#1',
     kohdejoukko: { value: 'joukko_1#1' },
@@ -17,6 +17,14 @@ const BASE_VALINTAPERUSTE_FORM_DATA = {
       fi: parseEditorState('<h1>Fi kuvaus</h1>'),
       sv: parseEditorState('<h1>Sv kuvaus</h2>'),
     },
+  },
+  hakukelpoisuus: {
+    fi: parseEditorState('<h1>Fi hakukelpoisuus</h1>'),
+    sv: parseEditorState('<h1>Sv hakukelpoisuus</h2>'),
+  },
+  lisatiedot: {
+    fi: parseEditorState('<h1>Fi lisatiedot</h1>'),
+    sv: parseEditorState('<h1>Sv lisatiedot</h2>'),
   },
   valintatavat: [{}],
   soraKuvaus: {
@@ -54,8 +62,8 @@ const BASE_VALINTAPERUSTE_FORM_DATA = {
             osoite: { fi: 'fi osoite', sv: 'sv osoite' },
             postinumero: { value: 'posti_1#1' },
             postitoimipaikka: {
-              fi: 'fi posititoimipaikka',
-              sv: 'sv posititoimipaikka',
+              fi: 'fi postitoimipaikka',
+              sv: 'sv postitoimipaikka',
             },
             alkaa: '2019-04-16T08:44',
             paattyy: '2019-04-18T08:44',

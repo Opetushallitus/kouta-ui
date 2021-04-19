@@ -6,15 +6,18 @@ import FormCollapse from '#/src/components/FormCollapse';
 import FormCollapseGroup from '#/src/components/FormCollapseGroup';
 import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import JulkisuusSection from '#/src/components/JulkisuusSection';
-import KokeetTaiLisanaytotSection from '#/src/components/KokeetTaiLisanaytotSection';
+import { KokeetTaiLisanaytotSection } from '#/src/components/KokeetTaiLisanaytotSection';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import SoraKuvausSection from '#/src/components/SoraKuvausSection';
 import { ENTITY } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
-import getValintaperusteet from '#/src/utils/valintaperuste/getValintaperusteet';
+import { KOULUTUSTYYPIT_WITH_VALINTATAPA } from '#/src/utils/valintaperuste/constants';
+import { getValintaperusteet } from '#/src/utils/valintaperuste/getValintaperusteet';
 
+import { HakukelpoisuusSection } from './HakukelpoisuusSection';
 import { KuvausSection } from './KuvausSection';
-import PerustiedotSection from './PerustiedotSection';
+import { LisatiedotSection } from './LisatiedotSection';
+import { PerustiedotSection } from './PerustiedotSection';
 import { ValintatapaSection } from './ValintatapaSection';
 
 type ValintaperusteFormProps = {
@@ -26,7 +29,7 @@ type ValintaperusteFormProps = {
   showArkistoituTilaOption?: boolean;
 };
 
-const ValintaperusteForm = ({
+export const ValintaperusteForm = ({
   organisaatioOid,
   steps = true,
   canEditTyyppi = true,
@@ -36,10 +39,11 @@ const ValintaperusteForm = ({
 }: ValintaperusteFormProps) => {
   const { t } = useTranslation();
   const kieliversiot = useFieldValue('perustiedot.kieliversiot');
+  const koulutustyyppi = useFieldValue('perustiedot.tyyppi');
   const languages = kieliversiot || [];
 
   return (
-    <FormCollapseGroup enabled={steps} defaultOpen={!steps} configured>
+    <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
       <FormCollapse
         section="perustiedot"
         header={t('valintaperustelomake.valintaperusteenPerustiedot')}
@@ -60,24 +64,40 @@ const ValintaperusteForm = ({
       ) : null}
 
       <FormCollapse
+        section="hakukelpoisuus"
+        header={t('valintaperustelomake.valintaperusteenHakukelpoisuus')}
+        languages={languages}
+        Component={HakukelpoisuusSection}
+      />
+
+      <FormCollapse
         section="kuvaus"
         header={t('valintaperustelomake.valintaperusteenKuvaus')}
         languages={languages}
         Component={KuvausSection}
       />
 
-      <FormCollapse
-        section="valintatavat"
-        header={t('valintaperustelomake.valintatapa')}
-        languages={languages}
-        Component={ValintatapaSection}
-      />
+      {KOULUTUSTYYPIT_WITH_VALINTATAPA.includes(koulutustyyppi) && (
+        <FormCollapse
+          section="valintatavat"
+          header={t('valintaperustelomake.valintatapa')}
+          languages={languages}
+          Component={ValintatapaSection}
+        />
+      )}
 
       <FormCollapse
         section="valintakokeet"
         header={t('yleiset.kokeetTaiLisanaytot')}
         languages={languages}
         Component={KokeetTaiLisanaytotSection}
+      />
+
+      <FormCollapse
+        section="lisatiedot"
+        header={t('valintaperustelomake.valintaperusteenLisatiedot')}
+        languages={languages}
+        Component={LisatiedotSection}
       />
 
       <FormCollapse
@@ -104,5 +124,3 @@ const ValintaperusteForm = ({
     </FormCollapseGroup>
   );
 };
-
-export default ValintaperusteForm;

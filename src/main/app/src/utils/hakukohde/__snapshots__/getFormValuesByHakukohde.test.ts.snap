@@ -166,13 +166,42 @@ Object {
         "vahimmaispistemaara": "30,3",
       },
     ],
+    "valintaperusteenValintakokeidenLisatilaisuudet": Object {
+      "123-123": Array [
+        Object {
+          "alkaa": "2019-04-16T08:44",
+          "jarjestamispaikka": Object {
+            "fi": "fi jarjestamispaikka",
+            "sv": "sv jarjestamispaikka",
+          },
+          "lisatietoja": Object {
+            "fi": "<p>fi lisatietoja</p>",
+            "sv": "<p>sv lisatietoja</p>",
+          },
+          "osoite": Object {
+            "fi": "fi osoite",
+            "sv": "sv osoite",
+          },
+          "paattyy": "2019-04-18T08:44",
+          "postinumero": Object {
+            "value": "posti_1#1",
+          },
+        },
+      ],
+    },
     "yleisKuvaus": Object {
       "fi": "<p>Yleiskuvaus - fi</p>",
       "sv": "<p>Yleiskuvaus - sv</p>",
     },
   },
   "valintaperusteenKuvaus": Object {
-    "value": "peruste_1#1",
+    "kynnysehto": Object {
+      "fi": "<p>Hakukohteen kynnysehto - fi</p>",
+      "sv": "<p>Hakukohteen kynnysehto - sv</p>",
+    },
+    "valintaperuste": Object {
+      "value": "peruste_1#1",
+    },
   },
 }
 `;

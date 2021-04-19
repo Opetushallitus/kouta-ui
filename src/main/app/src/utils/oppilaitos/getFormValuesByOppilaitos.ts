@@ -12,7 +12,7 @@ export const getFormValuesByOppilaitos = oppilaitos => {
     metadata: {
       tietoaOpiskelusta,
       yhteystiedot = [],
-      hakijapalveluidenYhteystiedot,
+      hakijapalveluidenYhteystiedot: hy,
       esittely,
       opiskelijoita,
       korkeakouluja,
@@ -43,19 +43,21 @@ export const getFormValuesByOppilaitos = oppilaitos => {
       puhelinnumero: yhteystieto.puhelinnumero || {},
       sahkoposti: yhteystieto.sahkoposti || {},
     })),
-    hakijapalveluidenYhteystiedot: hakijapalveluidenYhteystiedot
+    hakijapalveluidenYhteystiedot: hy
       ? {
-          nimi: hakijapalveluidenYhteystiedot.nimi || {},
-          postiosoite: hakijapalveluidenYhteystiedot.postiosoite?.osoite || {},
-          postinumero: hakijapalveluidenYhteystiedot.postiosoite
-            ?.postinumeroKoodiUri
+          nimi: hy.nimi || {},
+          postiosoite: hy.postiosoite?.osoite || {},
+          postinumero: hy.postiosoite?.postinumeroKoodiUri
             ? {
-                value:
-                  hakijapalveluidenYhteystiedot.postiosoite.postinumeroKoodiUri,
+                value: hy.postiosoite.postinumeroKoodiUri,
               }
             : null,
-          puhelinnumero: hakijapalveluidenYhteystiedot.puhelinnumero || {},
-          sahkoposti: hakijapalveluidenYhteystiedot.sahkoposti || {},
+          kayntiosoite: hy.kayntiosoite?.osoite || {},
+          kayntiosoitePostinumero: hy.kayntiosoite?.postinumeroKoodiUri
+            ? { value: hy.kayntiosoite.postinumeroKoodiUri }
+            : null,
+          puhelinnumero: hy.puhelinnumero || {},
+          sahkoposti: hy.sahkoposti || {},
         }
       : null,
     tietoa: {

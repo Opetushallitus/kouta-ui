@@ -10,48 +10,6 @@ test('getFormValuesByValintaperuste returns correct form values given valintaper
     onkoJulkinen: true,
     sorakuvausId: 'sora_1',
     metadata: {
-      kielitaitovaatimukset: [
-        {
-          kieliKoodiUri: 'kieli_1#1',
-          kielitaidonVoiOsoittaa: [
-            {
-              kielitaitoKoodiUri: 'osoitustapa_1#1',
-              lisatieto: {},
-            },
-            {
-              kielitaitoKoodiUri: 'osoitustapa_2#1',
-              lisatieto: {},
-            },
-            {
-              kielitaitoKoodiUri: 'kielitaidonosoittaminen_04#1',
-              lisatieto: {
-                fi: 'Fi kuvaus',
-                sv: 'Sv kuvaus',
-              },
-            },
-          ],
-          vaatimukset: [
-            {
-              kielitaitovaatimusKoodiUri: 'tyyppi_1#1',
-              kielitaitovaatimusKuvaukset: [
-                {
-                  kielitaitovaatimusKuvausKoodiUri: 'kuvaus_1#1',
-                  kielitaitovaatimusTaso: 'erinomainen',
-                },
-              ],
-            },
-            {
-              kielitaitovaatimusKoodiUri: 'tyyppi_2#1',
-              kielitaitovaatimusKuvaukset: [
-                {
-                  kielitaitovaatimusKuvausKoodiUri: 'kuvaus_2#1',
-                  kielitaitovaatimusTaso: 'ok',
-                },
-              ],
-            },
-          ],
-        },
-      ],
       kuvaus: {
         fi: '<h1>Fi kuvaus</h1>',
         sv: '<h1>Sv kuvaus</h1>',
@@ -134,6 +92,14 @@ test('getFormValuesByValintaperuste returns correct form values given valintaper
         fi: '<p>Yleiskuvaus - fi</p>',
         sv: '<p>Yleiskuvaus - sv</p>',
       },
+      hakukelpoisuus: {
+        fi: '<h1>Fi hakukelpoisuus</h1>',
+        sv: '<h1>Sv hakukelpoisuus</h1>',
+      },
+      lisatiedot: {
+        fi: '<h1>Fi lisatiedot</h1>',
+        sv: '<h1>Sv lisatiedot</h1>',
+      },
     },
     nimi: {
       fi: 'Fi nimi',
@@ -169,8 +135,8 @@ test('getFormValuesByValintaperuste returns correct form values given valintaper
               osoite: { fi: 'fi osoite', sv: 'sv osoite' },
               postinumeroKoodiUri: 'posti_1#1',
               postitoimipaikka: {
-                fi: 'fi posititoimipaikka',
-                sv: 'sv posititoimipaikka',
+                fi: 'fi postitoimipaikka',
+                sv: 'sv postitoimipaikka',
               },
             },
             aika: {

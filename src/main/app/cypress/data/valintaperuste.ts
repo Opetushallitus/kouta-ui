@@ -1,6 +1,40 @@
 import _ from 'lodash';
 
-const withKorkeakouluFields = valintaperuste => _.merge({}, valintaperuste, {});
+const withKorkeakouluFields = valintaperuste =>
+  _.merge(
+    {
+      metadata: {
+        valintatavat: [
+          {
+            valintatapaKoodiUri: 'valintatapajono_tv#1',
+            kuvaus: {},
+            nimi: { fi: 'Valintatavan nimi' },
+            sisalto: [
+              { tyyppi: 'teksti', data: { fi: '<p>Tekstia</p>' } },
+              {
+                tyyppi: 'taulukko',
+                data: {
+                  nimi: {},
+                  rows: [
+                    {
+                      index: 0,
+                      isHeader: false,
+                      columns: [{ index: 0, text: { fi: 'Solu' } }],
+                    },
+                  ],
+                },
+              },
+            ],
+            kaytaMuuntotaulukkoa: false,
+            kynnysehto: { fi: 'Kynnysehto' },
+            enimmaispisteet: 100.02,
+            vahimmaispisteet: 10.01,
+          },
+        ],
+      },
+    },
+    valintaperuste
+  );
 
 const valintaperuste = ({ tyyppi = 'amm' } = {}) => {
   const baseFields = {
@@ -14,34 +48,6 @@ const valintaperuste = ({ tyyppi = 'amm' } = {}) => {
     sorakuvausId: '1',
     metadata: {
       koulutustyyppi: tyyppi,
-      valintatavat: [
-        {
-          valintatapaKoodiUri: 'valintatapajono_tv#1',
-          kuvaus: {},
-          nimi: { fi: 'Valintatavan nimi' },
-          sisalto: [
-            { tyyppi: 'teksti', data: { fi: '<p>Tekstia</p>' } },
-            {
-              tyyppi: 'taulukko',
-              data: {
-                nimi: {},
-                rows: [
-                  {
-                    index: 0,
-                    isHeader: false,
-                    columns: [{ index: 0, text: { fi: 'Solu' } }],
-                  },
-                ],
-              },
-            },
-          ],
-          kaytaMuuntotaulukkoa: false,
-          kynnysehto: { fi: 'Kynnysehto' },
-          enimmaispisteet: 100.02,
-          vahimmaispisteet: 10.01,
-        },
-      ],
-      kielitaitovaatimukset: [],
       kuvaus: { fi: '<p>Loppukuvaus</p>' },
       sisalto: [
         { tyyppi: 'teksti', data: { fi: '<p>Tekstia</p>' } },
@@ -70,6 +76,7 @@ const valintaperuste = ({ tyyppi = 'amm' } = {}) => {
 
     valintakokeet: [
       {
+        id: 'testi-id-123',
         nimi: {
           fi: 'Kokeen nimi - fi',
         },

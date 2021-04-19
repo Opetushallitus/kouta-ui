@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
-const kieliUriRegExp = /^kieli_([a-z]+)#.+$/;
+import { getPostinumeroByPostinumeroUri } from '#/src/utils';
 
-const postinumeroUriRegExp = /^posti_(.+)$/;
+const kieliUriRegExp = /^kieli_([a-z]+)#.+$/;
 
 const prune = value => _.pickBy(value, v => !!v);
 
@@ -14,16 +14,6 @@ const getKieliByKieliUri = uri => {
   const [, kieli] = uri.match(kieliUriRegExp) || [];
 
   return kieli;
-};
-
-const getPostinumeroByPostinumeroUri = uri => {
-  if (!_.isString(uri)) {
-    return undefined;
-  }
-
-  const [, postinumero] = uri.match(postinumeroUriRegExp) || [];
-
-  return postinumero;
 };
 
 const getOrganisaatioContactInfo = organisaatio => {

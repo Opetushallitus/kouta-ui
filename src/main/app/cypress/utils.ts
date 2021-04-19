@@ -212,11 +212,45 @@ export const OPH_TEST_ORGANISAATIO_OID = '1.2.246.562.10.48587687889';
 export const isStubbed =
   !process.env.CYPRESS_BACKEND || process.env.CYPRESS_BACKEND === 'stubs';
 
-export const fillValintakokeetSection = () => {
+const fillTilaisuus = () => {
+  getByTestId('lisaaTilaisuusButton').click({ force: true });
+  getByTestId('osoite').find('input').pipe(paste('osoite'));
+  getByTestId('postinumero').within(() => {
+    fillAsyncSelect('00350');
+  });
+  getByTestId('alkaa').within(() => {
+    fillDateTimeInput({
+      date: '02.04.2019',
+      time: '10:45',
+    });
+  });
+
+  getByTestId('paattyy').within(() => {
+    fillDateTimeInput({
+      date: '02.04.2019',
+      time: '19:00',
+    });
+  });
+
+  getByTestId('jarjestamispaikka').find('input').pipe(paste('paikka'));
+  getByTestId('lisatietoja').within(() => {
+    typeToEditor('lisatietoja');
+  });
+};
+
+export const fillValintakokeetSection = ({
+  withValintaperusteenKokeet = false,
+} = {}) => {
   getByTestId('valintakokeetSection').within(() => {
     getByTestId('yleisKuvaus').within(() => {
       typeToEditor('Valintakokeiden kuvaus');
     });
+
+    if (withValintaperusteenKokeet) {
+      getByTestId('valintaperusteenValintakokeet').within(() => {
+        fillTilaisuus();
+      });
+    }
 
     getByTestId('kokeetTaiLisanaytot').within(() => {
       getByTestId('lisaaKoeTaiLisanayttoButton').click({ force: true });
@@ -247,29 +281,7 @@ export const fillValintakokeetSection = () => {
         typeToEditor('ohjeet erityisjärjestelyihin');
       });
 
-      getByTestId('lisaaTilaisuusButton').click({ force: true });
-      getByTestId('osoite').find('input').pipe(paste('osoite'));
-      getByTestId('postinumero').within(() => {
-        fillAsyncSelect('00350');
-      });
-      getByTestId('alkaa').within(() => {
-        fillDateTimeInput({
-          date: '02.04.2019',
-          time: '10:45',
-        });
-      });
-
-      getByTestId('paattyy').within(() => {
-        fillDateTimeInput({
-          date: '02.04.2019',
-          time: '19:00',
-        });
-      });
-
-      getByTestId('jarjestamispaikka').find('input').pipe(paste('paikka'));
-      getByTestId('lisatietoja').within(() => {
-        typeToEditor('lisatietoja');
-      });
+      fillTilaisuus();
     });
     jatka();
   });

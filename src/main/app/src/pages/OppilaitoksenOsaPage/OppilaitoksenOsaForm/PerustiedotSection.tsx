@@ -3,11 +3,10 @@ import React from 'react';
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
+import { Grid, Cell } from 'styled-css-grid';
 
 import DividerHeading from '#/src/components/DividerHeading';
 import { FormFieldInput, FormFieldUrlInput } from '#/src/components/formFields';
-import { GridColumn } from '#/src/components/GridColumn';
-import { GridRow } from '#/src/components/GridRow';
 import { Box, Typography } from '#/src/components/virkailija';
 import useKoodiNimet from '#/src/hooks/useKoodiNimet';
 import useKoodiNimi from '#/src/hooks/useKoodiNimi';
@@ -46,22 +45,22 @@ const TiedotSection = ({ name, t, language }) => {
           />
         </Box>
       </Box>
-      <GridRow gutter={2}>
-        <GridColumn md={6}>
+      <Grid>
+        <Cell width={6}>
           <Field
             component={FormFieldUrlInput}
             name={`${name}.wwwSivuUrl.${language}`}
             label={t('oppilaitoslomake.wwwSivu')}
           />
-        </GridColumn>
-        <GridColumn md={6}>
+        </Cell>
+        <Cell width={6}>
           <Field
             component={FormFieldInput}
             name={`${name}.wwwSivuNimi.${language}`}
             label={t('oppilaitoslomake.wwwSivuNimi')}
           />
-        </GridColumn>
-      </GridRow>
+        </Cell>
+      </Grid>
     </>
   );
 };
@@ -123,7 +122,7 @@ const OrganisaatioSection = ({ organisaatio, t }) => {
   );
 };
 
-const PerustiedotSection = ({ name, organisaatioOid, language }) => {
+export const PerustiedotSection = ({ name, organisaatioOid, language }) => {
   const { organisaatio } = useOrganisaatio(organisaatioOid);
   const { t } = useTranslation();
 
@@ -137,5 +136,3 @@ const PerustiedotSection = ({ name, organisaatioOid, language }) => {
     </>
   );
 };
-
-export default PerustiedotSection;

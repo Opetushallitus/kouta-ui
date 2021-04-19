@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { Field, FieldArray } from 'redux-form';
+import { Grid, Cell } from 'styled-css-grid';
 
 import {
   FormFieldInput,
@@ -13,82 +14,86 @@ import { getTestIdProps } from '#/src/utils';
 import { Button } from './Button';
 import { FieldArrayList } from './FieldArrayList';
 import { Flex } from './Flex';
-import { GridColumn } from './GridColumn';
-import { GridRow } from './GridRow';
 
 export const YhteystietoSection = ({ description, name, language }) => {
   const { t } = useTranslation();
 
   return (
-    <GridRow>
+    <Grid>
       {description && (
-        <GridColumn css={'margin-top: 24px'} md={12}>
+        <Cell css={'margin-top: 24px'} width={12}>
           {description}
-        </GridColumn>
+        </Cell>
       )}
-      <GridColumn css={'margin-top: 24px'} md={12}>
+      <Cell css={'margin-top: 24px'} width={12}>
         <Field
           required
           component={FormFieldInput}
           name={`${name}.nimi.${language}`}
           label={t('oppilaitoslomake.yhteystiedonNimi')}
         />
-      </GridColumn>
-      <GridColumn css={'margin-top: 24px'} md={12}>
+      </Cell>
+      <Cell css={'margin-top: 24px'} width={12}>
         {t('yleiset.postiosoite')}
-      </GridColumn>
-      <Divider margin={1} />
-      <GridColumn md={6}>
+      </Cell>
+      <Cell width={12}>
+        <Divider margin={1} />
+      </Cell>
+      <Cell width={6}>
         <Field
           component={FormFieldInput}
           name={`${name}.postiosoite.${language}`}
           label={t('yleiset.postiosoite')}
         />
-      </GridColumn>
-      <GridColumn md={6} {...getTestIdProps('postinumero')}>
+      </Cell>
+      <Cell width={6} {...getTestIdProps('postinumero')}>
         <Field
           component={FormFieldPostinumeroSelect}
           name={`${name}.postinumero`}
           label={t('yleiset.postinumero')}
         />
-      </GridColumn>
-      <GridColumn css={'margin-top: 24px'} md={12}>
+      </Cell>
+      <Cell css={'margin-top: 24px'} width={12}>
         {t('yleiset.kayntiosoite')}
-      </GridColumn>
-      <Divider margin={1} />
-      <GridColumn md={6}>
+      </Cell>
+      <Cell width={12}>
+        <Divider margin={1} />
+      </Cell>
+      <Cell width={6}>
         <Field
           component={FormFieldInput}
           name={`${name}.kayntiosoite.${language}`}
           label={t('yleiset.kayntiosoite')}
         />
-      </GridColumn>
-      <GridColumn md={6} {...getTestIdProps('kayntiosoitePostinumero')}>
+      </Cell>
+      <Cell width={6} {...getTestIdProps('kayntiosoitePostinumero')}>
         <Field
           component={FormFieldPostinumeroSelect}
           name={`${name}.kayntiosoitePostinumero`}
           label={t('yleiset.postinumero')}
         />
-      </GridColumn>
-      <GridColumn css={'margin-top: 24px'} md={12}>
+      </Cell>
+      <Cell css={'margin-top: 24px'} width={12}>
         {t('oppilaitoslomake.muutYhteystiedot')}
-      </GridColumn>
-      <Divider margin={1} />
-      <GridColumn md={6}>
+      </Cell>
+      <Cell width={12}>
+        <Divider margin={1} />
+      </Cell>
+      <Cell width={6}>
         <Field
           component={FormFieldInput}
           name={`${name}.sahkoposti.${language}`}
           label={t('yleiset.sahkoposti')}
         />
-      </GridColumn>
-      <GridColumn md={6}>
+      </Cell>
+      <Cell width={6}>
         <Field
           component={FormFieldInput}
           name={`${name}.puhelinnumero.${language}`}
           label={t('yleiset.puhelinnumero')}
         />
-      </GridColumn>
-    </GridRow>
+      </Cell>
+    </Grid>
   );
 };
 

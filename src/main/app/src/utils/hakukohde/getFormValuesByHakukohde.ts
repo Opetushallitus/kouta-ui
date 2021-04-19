@@ -1,11 +1,15 @@
 import _ from 'lodash';
+import _fp from 'lodash/fp';
 
 import { parseEditorState } from '#/src/components/Editor/utils';
 import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
 import { isNumeric } from '#/src/utils';
 import { getAjankohtaFields } from '#/src/utils/form/aloitusajankohtaHelpers';
 import { getHakulomakeFieldsValues } from '#/src/utils/form/getHakulomakeFieldsValues';
-import { getKokeetTaiLisanaytotValues } from '#/src/utils/form/getKokeetTaiLisanaytotValues';
+import {
+  getKokeetTaiLisanaytotValues,
+  getTilaisuusValues,
+} from '#/src/utils/form/getKokeetTaiLisanaytotValues';
 
 const getToimitustapaValues = (toimitustapa, toimitusosoite) => ({
   tapa: toimitustapa || '',
@@ -48,8 +52,10 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
 
   const {
     valintakokeidenYleiskuvaus,
+    kynnysehto,
     kaytetaanHaunAlkamiskautta,
     koulutuksenAlkamiskausi = {},
+    valintaperusteenValintakokeidenLisatilaisuudet = [],
     aloituspaikat,
   } = metadata;
 
@@ -95,15 +101,25 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
         parseEditorState
       ),
     },
-    valintaperusteenKuvaus: valintaperusteId
-      ? {
-          value: valintaperusteId,
-        }
-      : undefined,
-    valintakokeet: getKokeetTaiLisanaytotValues(
-      valintakokeet,
-      valintakokeidenYleiskuvaus
-    ),
+    valintaperusteenKuvaus: {
+      valintaperuste: valintaperusteId
+        ? {
+            value: valintaperusteId,
+          }
+        : undefined,
+      kynnysehto: _.mapValues(kynnysehto, parseEditorState),
+    },
+    valintakokeet: {
+      ...getKokeetTaiLisanaytotValues(
+        valintakokeet,
+        valintakokeidenYleiskuvaus
+      ),
+      // NOTE: tässä muutetaan taulukko [{id, tilaisuudet: [tilaisuus1, tilaisuus2]}] objektiksi {id: [tilaisuus1, tilaisuus2]} käsittelyn helpottamiseksi
+      valintaperusteenValintakokeidenLisatilaisuudet: _fp.flow(
+        _fp.keyBy('id'),
+        _fp.mapValues(v => v.tilaisuudet.map(getTilaisuusValues))
+      )(valintaperusteenValintakokeidenLisatilaisuudet),
+    },
     jarjestyspaikkaOid,
     liitteet: {
       toimitustapa: getToimitustapaValues(

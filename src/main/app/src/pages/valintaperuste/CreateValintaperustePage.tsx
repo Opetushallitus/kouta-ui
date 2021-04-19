@@ -14,13 +14,15 @@ import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
-import { useEntityFormConfig, useFieldValue } from '#/src/hooks/form';
 import useSelectBase from '#/src/hooks/useSelectBase';
 import { getFormValuesByValintaperuste } from '#/src/utils/valintaperuste/getFormValuesByValintaperuste';
 import { useValintaperusteById } from '#/src/utils/valintaperuste/getValintaperusteById';
 
 import { ValintaperusteFooter } from './ValintaperusteFooter';
-import ValintaperusteForm, { initialValues } from './ValintaperusteForm';
+import { ValintaperusteForm, initialValues } from './ValintaperusteForm';
+
+const FORM_NAME = 'valintaperusteForm';
+const formConfig = { noFieldConfigs: true };
 
 const getCopyValues = valintaperusteId => ({
   pohja: {
@@ -40,7 +42,7 @@ const getInitialValues = (valintaperuste, kieliValinnat) => {
     : initialValues(kieliValinnatLista);
 };
 
-const CreateValintaperustePage = props => {
+export const CreateValintaperustePage = props => {
   const {
     match: {
       params: { organisaatioOid: luojaOrganisaatioOid, kieliValinnat },
@@ -65,16 +67,10 @@ const CreateValintaperustePage = props => {
     return getInitialValues(valintaperuste, kieliValinnat);
   }, [valintaperuste, kieliValinnat]);
 
-  const FORM_NAME = 'valintaperusteForm';
-
-  const koulutustyyppi = useFieldValue('perustiedot.tyyppi', FORM_NAME);
-
-  const config = useEntityFormConfig(ENTITY.VALINTAPERUSTE, koulutustyyppi);
-
   return (
     <ReduxForm form={FORM_NAME} initialValues={initialValues}>
       <Title>{t('sivuTitlet.uusiValintaperuste')}</Title>
-      <FormConfigContext.Provider value={config}>
+      <FormConfigContext.Provider value={formConfig}>
         <FormPage
           header={<FormHeader>{t('yleiset.valintaperuste')}</FormHeader>}
           steps={<FormSteps activeStep={ENTITY.VALINTAPERUSTE} />}
@@ -100,5 +96,3 @@ const CreateValintaperustePage = props => {
     </ReduxForm>
   );
 };
-
-export default CreateValintaperustePage;

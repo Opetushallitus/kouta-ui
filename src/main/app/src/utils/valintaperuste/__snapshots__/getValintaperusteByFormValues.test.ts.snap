@@ -9,16 +9,22 @@ Object {
     "sv",
   ],
   "kohdejoukkoKoodiUri": "joukko_1#1",
-  "koulutustyyppi": "tyyppi_1#1",
+  "koulutustyyppi": "amk",
   "metadata": Object {
-    "kielitaitovaatimukset": Array [],
+    "hakukelpoisuus": Object {
+      "fi": "<h1>Fi hakukelpoisuus</h1>",
+      "sv": "<h1>Sv hakukelpoisuus</h1>",
+    },
     "kuvaus": Object {
       "fi": "<h1>Fi kuvaus</h1>",
       "sv": "<h1>Sv kuvaus</h1>",
     },
-    "osaamistaustaKoodiUrit": Array [],
+    "lisatiedot": Object {
+      "fi": "<h1>Fi lisatiedot</h1>",
+      "sv": "<h1>Sv lisatiedot</h1>",
+    },
     "sisalto": Array [],
-    "tyyppi": "tyyppi_1#1",
+    "tyyppi": "amk",
     "valintakokeidenYleiskuvaus": Object {
       "fi": "<p>Yleiskuvaus - fi</p>",
       "sv": "<p>Yleiskuvaus - sv</p>",
@@ -168,16 +174,22 @@ Object {
     "sv",
   ],
   "kohdejoukkoKoodiUri": "joukko_1#1",
-  "koulutustyyppi": "tyyppi_1#1",
+  "koulutustyyppi": "amk",
   "metadata": Object {
-    "kielitaitovaatimukset": Array [],
+    "hakukelpoisuus": Object {
+      "fi": "<h1>Fi hakukelpoisuus</h1>",
+      "sv": "<h1>Sv hakukelpoisuus</h1>",
+    },
     "kuvaus": Object {
       "fi": "<h1>Fi kuvaus</h1>",
       "sv": "<h1>Sv kuvaus</h1>",
     },
-    "osaamistaustaKoodiUrit": Array [],
+    "lisatiedot": Object {
+      "fi": "<h1>Fi lisatiedot</h1>",
+      "sv": "<h1>Sv lisatiedot</h1>",
+    },
     "sisalto": Array [],
-    "tyyppi": "tyyppi_1#1",
+    "tyyppi": "amk",
     "valintakokeidenYleiskuvaus": Object {
       "fi": "<p>Yleiskuvaus - fi</p>",
       "sv": "<p>Yleiskuvaus - sv</p>",

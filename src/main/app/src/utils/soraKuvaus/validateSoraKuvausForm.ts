@@ -10,7 +10,7 @@ import { validateIf, getKielivalinta } from '#/src/utils/form/formConfigUtils';
 
 const validatePohja = eb =>
   validateIf(
-    eb.values?.pohja?.tapa === POHJAVALINTA.KOPIO,
+    eb.getValues()?.pohja?.tapa === POHJAVALINTA.KOPIO,
     validateExistence('pohja.valinta')
   )(eb);
 

@@ -1,3 +1,6 @@
+import React from 'react';
+
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { getThemeProp } from '#/src/theme';
@@ -11,5 +14,8 @@ const Anchor = styled.a`
     text-decoration: none;
   }
 `;
+
+export const RouterAnchor = props =>
+  props?.to ? <Anchor {...props} as={Link} /> : <>{props.children}</>;
 
 export default Anchor;

@@ -636,7 +636,8 @@
     "oppilaitoksenTila": "Oppilaitoksen tila",
     "oppilaitoksenTeemakuva": "Oppilaitoksen teemakuva",
     "logo": "Oppilaitoksen logo",
-    "eiMuokkausOikeutta": "Käyttäjälläsi ei ole oikeuksia muokata tätä oppilaitosta."
+    "eiMuokkausOikeutta": "Käyttäjälläsi ei ole oikeuksia muokata tätä oppilaitosta.",
+    "eiOppilaitoksenOsia": "Oppilaitoksella ei ole osia"
   },
   "oppilaitoksenOsaLomake": {
     "oppilaitoksenOsanPerustiedot": "Oppilaitoksen osan perustiedot",

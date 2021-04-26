@@ -3,6 +3,11 @@ import { useCallback } from 'react';
 import DataLoader from 'dataloader';
 import _ from 'lodash';
 
+import {
+  AMMATILLISET_OPPILAITOSTYYPIT,
+  KORKEAKOULU_OPPILAITOSTYYPIT,
+  LUKIO_OPPILAITOSTYYPIT,
+} from '#/src/constants';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
@@ -51,6 +56,11 @@ export const useOrganisaatio = oid => {
   return { ...rest, organisaatio };
 };
 
+type UseOrganisaatiotResult = {
+  organisaatiot?: Array<Record<string, any>>;
+  [key: string]: unknown;
+};
+
 export const useOrganisaatiot = oids => {
   const organisaatioLoader = useOrganisaatioLoader();
 
@@ -67,27 +77,14 @@ export const useOrganisaatiot = oids => {
     watch: JSON.stringify(oids),
   });
 
-  return { ...rest, organisaatiot };
+  return { ...rest, organisaatiot } as UseOrganisaatiotResult;
 };
-
-const ammTyypit = [
-  'oppilaitostyyppi_21#1',
-  'oppilaitostyyppi_22#1',
-  'oppilaitostyyppi_23#1',
-  'oppilaitostyyppi_24#1',
-];
-const yoTyypit = [
-  'oppilaitostyyppi_42#1',
-  'oppilaitostyyppi_43#1',
-  'oppilaitostyyppi_45#1',
-];
-const lkTyypit = ['oppilaitostyyppi_15#1', 'oppilaitostyyppi_19#1'];
 
 const oppilaitostyyppiToKoulutustyyppi = o =>
   _.cond([
-    [_ => ammTyypit.includes(_), _ => 'Amm'],
-    [_ => yoTyypit.includes(_), _ => 'Yo'],
-    [_ => lkTyypit.includes(_), _ => 'Lk'],
+    [_ => AMMATILLISET_OPPILAITOSTYYPIT.includes(_), _ => 'Amm'],
+    [_ => KORKEAKOULU_OPPILAITOSTYYPIT.includes(_), _ => 'Yo'],
+    [_ => LUKIO_OPPILAITOSTYYPIT.includes(_), _ => 'Lk'],
   ])(o?.oppilaitostyyppi);
 
 const isParent = parentOid => org => org.parentOidPath.includes(parentOid);

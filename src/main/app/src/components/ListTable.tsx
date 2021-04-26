@@ -1,11 +1,9 @@
 import React, { Fragment, useState } from 'react';
 
 import _ from 'lodash';
-import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
-import Anchor from '#/src/components/Anchor';
-import StatusTag from '#/src/components/StatusTag';
+import { RouterAnchor } from '#/src/components/Anchor';
 import Table, {
   TableHead,
   TableBody,
@@ -16,6 +14,8 @@ import { Icon, Dropdown } from '#/src/components/virkailija';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { formatDateValue } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
+
+import SmallStatusTag from './StatusTag/SmallStatusTag';
 
 export const makeOnSort = ({ name, onSort }) => dir => onSort(`${name}:${dir}`);
 
@@ -33,32 +33,45 @@ export const getSortDirection = ({ sort, name }) => {
   return sortName === name ? dir : null;
 };
 
-export const makeNimiColumn = (t, { getLinkUrl }) => ({
-  title: t('yleiset.nimi'),
+type Column = {
+  title?: string;
+  key: string;
+  sortable: boolean;
+  render: (any) => React.ReactNode;
+};
+
+export const makeNimiColumn = (
+  t,
+  {
+    getLinkUrl,
+    title,
+  }: { getLinkUrl: (unknown) => string | undefined; title?: string }
+): Column => ({
+  title: title ?? t('yleiset.nimi'),
   key: 'nimi',
   sortable: true,
   render: item => (
-    <Anchor as={Link} to={getLinkUrl(item)}>
+    <RouterAnchor to={getLinkUrl(item)}>
       {getFirstLanguageValue(item.nimi, item.language) || t('yleiset.nimeton')}
-    </Anchor>
+    </RouterAnchor>
   ),
 });
 
-export const makeTilaColumn = t => ({
+export const makeTilaColumn = (t): Column => ({
   title: t('yleiset.tila'),
   key: 'tila',
   sortable: true,
-  render: ({ tila }) => <StatusTag status={tila} />,
+  render: ({ tila }) => <SmallStatusTag status={tila} />,
 });
 
-export const makeModifiedColumn = t => ({
+export const makeModifiedColumn = (t): Column => ({
   title: t('yleiset.muokattuViimeksi'),
   key: 'modified',
   sortable: true,
   render: ({ modified }) => formatDateValue(modified),
 });
 
-export const makeMuokkaajaColumn = t => ({
+export const makeMuokkaajaColumn = (t): Column => ({
   title: t('yleiset.muokkaaja'),
   key: 'muokkaaja',
   sortable: true,
@@ -86,7 +99,11 @@ const ActionsDropdown = ({ actionsMenu }) => {
   return (
     <Dropdown overlay={actionsMenu} portalTarget={document.body} overflow>
       {({ ref, onToggle, open }) => (
-        <div ref={ref} onClick={onToggle} style={{ display: 'inline-block' }}>
+        <div
+          ref={ref as React.Ref<HTMLDivElement>}
+          onClick={onToggle}
+          style={{ display: 'inline-block' }}
+        >
           <ActionsIcon active={open} />
         </div>
       )}
@@ -102,17 +119,30 @@ const Cell = styled(TableCell)`
     `}
 `;
 
+type ListTableProps = {
+  onSort?: (string) => any;
+  sort?: boolean;
+  columns?: Array<any>;
+  rows?: Array<any>;
+  renderActionsMenu?: (any) => void;
+  defaultCollapsedRow?: string;
+  defaultCollapsedColumn?: string;
+};
+
 export const ListTable = ({
   onSort,
-  sort,
+  sort = false,
   columns = [],
   rows = [],
   renderActionsMenu,
-  defaultCollapsedRow = null,
-  defaultCollapsedColumn = null,
+  defaultCollapsedRow,
+  defaultCollapsedColumn,
   ...props
-}) => {
-  const [collapsed, setCollapsed] = useState({
+}: ListTableProps) => {
+  const [collapsed, setCollapsed] = useState<{
+    row?: string;
+    column?: string;
+  }>({
     row: defaultCollapsedRow,
     column: defaultCollapsedColumn,
   });

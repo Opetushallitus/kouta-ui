@@ -2,8 +2,8 @@ import React from 'react';
 
 import _ from 'lodash';
 
+import { RouterAnchor } from '#/src/components/Anchor';
 import { Flex, FlexItem } from '#/src/components/Flex';
-import LocalLink from '#/src/components/LocalLink';
 import { Typography } from '#/src/components/virkailija';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
@@ -35,7 +35,7 @@ export function RelationInfo({ title = '', entity, linkUrl = undefined }) {
             {title}
           </Typography>
           <Typography>
-            {linkUrl ? <LocalLink to={linkUrl}>{name}</LocalLink> : name}
+            <RouterAnchor to={linkUrl}>{name}</RouterAnchor>
           </Typography>
         </>
       )}

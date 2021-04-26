@@ -1,40 +1,22 @@
 import React from 'react';
 
-import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 import { Flex } from '#/src/components/Flex';
 import { Typography } from '#/src/components/virkailija';
-import { getJulkaisutilaTranslationKey, JULKAISUTILA } from '#/src/constants';
+import { getJulkaisutilaTranslationKey } from '#/src/constants';
 import { spacing } from '#/src/theme';
+
+import { getColor, StatusTagProps } from './utils';
 
 const Badge = styled.div`
   width: 0.8rem;
   height: 0.8rem;
   border-radius: 3px;
-  background-color: ${({ theme, color }) =>
-    _.get(theme, ['colors', color]) || theme.colors.tallennettu};
+  background-color: ${getColor};
   margin-right: ${spacing(1)};
 `;
-
-const colorByTila = {
-  [JULKAISUTILA.JULKAISTU]: 'julkaistu',
-  [JULKAISUTILA.TALLENNETTU]: 'tallennettu',
-  [JULKAISUTILA.ARKISTOITU]: 'arkistoitu',
-};
-
-const getColor = ({ tila, color }) => {
-  if (color) {
-    return color;
-  }
-
-  if (tila && colorByTila[tila]) {
-    return colorByTila[tila];
-  }
-
-  return 'tallennettu';
-};
 
 const getLabel = ({ children, tila, t }) => {
   if (children) {
@@ -44,12 +26,17 @@ const getLabel = ({ children, tila, t }) => {
   return t(getJulkaisutilaTranslationKey(tila));
 };
 
-const SmallStatusTag = ({ children, status, color, ...props }) => {
+export const SmallStatusTag = ({
+  children,
+  status,
+  color,
+  ...props
+}: StatusTagProps) => {
   const { t } = useTranslation();
 
   return (
     <Flex inline alignCenter {...props}>
-      <Badge color={getColor({ tila: status, color })} />
+      <Badge status={status} color={color} />
       <Typography>{getLabel({ children, tila: status, t })}</Typography>
     </Flex>
   );

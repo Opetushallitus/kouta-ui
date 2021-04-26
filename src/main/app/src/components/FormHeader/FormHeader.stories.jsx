@@ -5,18 +5,14 @@ import { createBrowserHistory } from 'history';
 import { Router } from 'react-router-dom';
 
 import FormEditInfo from '#/src/components/FormEditInfo';
-import StatusTag from '#/src/components/StatusTag';
 
+import LargeStatusTag from '../StatusTag/LargeStatusTag';
 import FormHeader from './index';
 
 storiesOf('FormHeader', module).add('Basic', () => (
   <Router history={createBrowserHistory()}>
     <FormHeader
-      status={
-        <StatusTag status="saved" large>
-          Julkaistu
-        </StatusTag>
-      }
+      status={<LargeStatusTag status="saved">Julkaistu</LargeStatusTag>}
       editInfo={
         <FormEditInfo
           editor="John Doe"

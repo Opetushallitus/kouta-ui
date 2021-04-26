@@ -35,13 +35,20 @@ const TitleContainer = styled.div`
   align-items: center;
 `;
 
+type FormHeaderProps = {
+  status?: React.ReactNode;
+  children: React.ReactNode;
+  editInfo?: React.ReactNode;
+  hasHomeLink?: boolean;
+};
+
 const FormHeader = ({
-  status = undefined,
-  children = undefined,
-  editInfo = undefined,
+  status,
+  children,
+  editInfo,
   hasHomeLink = true,
   ...props
-}) => {
+}: FormHeaderProps) => {
   const homeIconProps = hasHomeLink ? { as: Link, to: '/' } : {};
 
   return (

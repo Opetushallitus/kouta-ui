@@ -46,5 +46,6 @@ export const getAjankohtaFields = (
     henkilokohtaisenSuunnitelmanLisatiedot: _fp.mapValues(parseEditorState)(
       henkilokohtaisenSuunnitelmanLisatiedot
     ),
+    ajankohtaKaytossa: Boolean(alkamiskausityyppi),
   };
 };

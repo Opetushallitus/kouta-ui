@@ -93,6 +93,9 @@ const fillCommonJarjestamistiedot = ({
   fillOpetusaika();
   fillOpetustapa();
   fillMaksullisuus(maksullisuusTyyppi);
+  cy.findByLabelText(
+    'toteutuslomake.toteutuksellaErillinenAloitusajankohta'
+  ).check({ force: true });
   fillAjankohtaFields(Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI);
   fillOsiot();
 };

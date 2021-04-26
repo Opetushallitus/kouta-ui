@@ -73,10 +73,16 @@ const config = createFormConfigBuilder().registerSections([
         required: true,
       },
       {
+        field: '.ajankohtaKaytossa',
+      },
+      {
         field: '.ajankohtaTyyppi',
-        validate: validateIfJulkaistu(
-          validateExistence('aikataulut.ajankohtaTyyppi')
-        ),
+        validate: eb =>
+          validateIf(
+            eb?.values?.aikataulut?.ajankohtaKaytossa &&
+              eb?.values?.tila === JULKAISUTILA.JULKAISTU,
+            validateExistence('aikataulut.ajankohtaTyyppi')
+          )(eb),
       },
       {
         field: '.kausi',
@@ -84,11 +90,12 @@ const config = createFormConfigBuilder().registerSections([
       },
       {
         field: '.vuosi',
-        validate: (eb, values: HakuFormValues) =>
+        validate: eb =>
           validateIf(
-            values?.aikataulut?.ajankohtaTyyppi ===
-              Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI &&
-              values?.tila === JULKAISUTILA.JULKAISTU,
+            eb?.values?.aikataulut?.ajankohtaKaytossa &&
+              eb?.values?.aikataulut?.ajankohtaTyyppi ===
+                Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI &&
+              eb?.values?.tila === JULKAISUTILA.JULKAISTU,
             _fp.flow(
               validateExistence('aikataulut.kausi'),
               validateExistence('aikataulut.vuosi')
@@ -100,8 +107,9 @@ const config = createFormConfigBuilder().registerSections([
         required: true,
         validate: (eb, values: HakuFormValues) =>
           validateIf(
-            values?.aikataulut?.ajankohtaTyyppi ===
-              Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA &&
+            values?.aikataulut?.ajankohtaKaytossa &&
+              values?.aikataulut?.ajankohtaTyyppi ===
+                Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA &&
               values?.tila === JULKAISUTILA.JULKAISTU,
             validateExistenceOfDate('aikataulut.tarkkaAlkaa')
           )(eb),

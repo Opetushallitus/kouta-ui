@@ -3,6 +3,7 @@
 exports[`getFormValuesByHakukohde returns correct form values given hakukohde 1`] = `
 Object {
   "ajankohta": Object {
+    "ajankohtaKaytossa": true,
     "ajankohtaTyyppi": "tarkka alkamisajankohta",
     "henkilokohtaisenSuunnitelmanLisatiedot": Object {},
     "kausi": "kausi_k#1",

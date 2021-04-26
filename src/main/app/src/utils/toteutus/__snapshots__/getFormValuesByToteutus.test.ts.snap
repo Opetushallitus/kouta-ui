@@ -59,6 +59,7 @@ Object {
       },
     ],
     "ajankohta": Object {
+      "ajankohtaKaytossa": true,
       "ajankohtaTyyppi": "tarkka alkamisajankohta",
       "henkilokohtaisenSuunnitelmanLisatiedot": Object {},
       "kausi": "kausi_k#1",

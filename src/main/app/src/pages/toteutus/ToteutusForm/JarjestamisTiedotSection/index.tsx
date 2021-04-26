@@ -12,10 +12,11 @@ import {
   FormFieldInput,
   createFormFieldComponent,
   FormFieldEditor,
+  FormFieldSwitch,
 } from '#/src/components/formFields';
 import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenAloitusajankohtaFields';
 import Spacing from '#/src/components/Spacing';
-import { FormLabel } from '#/src/components/virkailija';
+import { Box, FormLabel } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
@@ -95,6 +96,7 @@ const OsiotFields = ({ language, osiotOptions, name }) => {
 
 const SuunniteltuKestoFields = ({ name }) => {
   const { t } = useTranslation();
+
   return (
     <FieldGroup
       name={`${name}.suunniteltuKesto`}
@@ -137,6 +139,10 @@ export const JarjestamisTiedotSection = ({
   });
 
   const isKorkeakoulu = isKorkeakouluKoulutustyyppi(koulutustyyppi);
+
+  const toteutuksellaErillinenAloitusajankohta = useFieldValue(
+    `${name}.ajankohtaKaytossa`
+  );
 
   return (
     <>
@@ -249,11 +255,18 @@ export const JarjestamisTiedotSection = ({
       />
 
       <FieldGroup title={t('yleiset.koulutuksenAjankohta')}>
-        <KoulutuksenAloitusajankohtaFields
-          section={`${name}.ajankohta`}
-          name={`${name}.ajankohta.ajankohtaTyyppi`}
-          language={language}
-        />
+        <Box mb={2}>
+          <Field name={`${name}.ajankohtaKaytossa`} component={FormFieldSwitch}>
+            {t('toteutuslomake.toteutuksellaErillinenAloitusajankohta')}
+          </Field>
+        </Box>
+        {toteutuksellaErillinenAloitusajankohta && (
+          <KoulutuksenAloitusajankohtaFields
+            section={`${name}.ajankohta`}
+            name={`${name}.ajankohta.ajankohtaTyyppi`}
+            language={language}
+          />
+        )}
       </FieldGroup>
 
       <FormConfigFragment name="kielivalikoima">

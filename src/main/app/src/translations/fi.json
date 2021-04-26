@@ -495,7 +495,8 @@
     "lisatiedotValintaperusteista": "Lisätiedot valintaperusteista",
     "pohjavalintaInfo": "Voit halutessasi käyttää aiemmin luotuja toteutuksia uuden lomakkeen esitäytettynä pohjana.",
     "kopioiPohjaksi": "Kopioi pohjaksi aiemmin luotu toteutus",
-    "ammatillinenPerustutkintoErityisopetuksena": "Ammatillinen perustutkinto järjestetään erityisopetuksena"
+    "ammatillinenPerustutkintoErityisopetuksena": "Ammatillinen perustutkinto järjestetään erityisopetuksena",
+    "toteutuksellaErillinenAloitusajankohta": "Toteutuksella on erillinen aloitusajankohta"
   },
   "hakulomake": {
     "haunNimi": "Haun nimi",
@@ -515,7 +516,8 @@
     "haunTila": "Haun tila",
     "eiMuokkausOikeutta": "Käyttäjälläsi ei ole oikeuksia muokata tätä hakua",
     "pohjavalintaInfo": "Voit halutessasi käyttää aiemmin luotuja hakuja uuden lomakkeen esitäytettynä pohjana.",
-    "kopioiPohjaksi": "Kopioi pohjaksi aiemmin luotu haku"
+    "kopioiPohjaksi": "Kopioi pohjaksi aiemmin luotu haku",
+    "haullaErillinenAloitusajankohta": "Haulla on erillinen aloitusajankohta"
   },
   "hakukohdelomake": {
     "toteutukseenLiitettyAlkamisajankohta": "Toteutukseen liitetty alkamisajankohta",

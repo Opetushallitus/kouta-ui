@@ -15,7 +15,7 @@ class ErrorBuilder {
     registeredFields: Record<string, { name: string }> | null = null
   ) {
     this.languages = languages;
-    this.values = values;
+    this._values = values;
     this.errors = {};
     this.registeredFields =
       registeredFields &&
@@ -23,16 +23,20 @@ class ErrorBuilder {
   }
 
   private languages: Array<LanguageCode>;
-  private values: Record<string, any>;
+  private _values: Record<string, any>;
   private errors: Record<string, any>;
   private registeredFields: Array<string> | null;
 
   getValue(path) {
-    return _.get(this.values, path);
+    return _.get(this._values, path);
   }
 
   getValues() {
-    return this.values;
+    return this._values;
+  }
+
+  get values() {
+    return this._values;
   }
 
   isVisible(path: string) {

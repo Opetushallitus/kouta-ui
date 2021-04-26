@@ -36,6 +36,8 @@ import {
   validateRelations,
 } from '#/src/utils/form/formConfigUtils';
 
+import { isApurahaVisible } from './toteutusVisibilities';
+
 const validateDateTimeRange = (alkaaFieldName, paattyyFieldName) => (
   eb,
   values
@@ -66,7 +68,11 @@ const validateApuraha = (eb, values) => {
   const apurahaYksikko = values?.jarjestamistiedot?.apurahaYksikko?.value;
 
   return validateIf(
-    onkoApuraha,
+    onkoApuraha &&
+      isApurahaVisible(
+        values?.koulutustyyppi,
+        values?.jarjestamistiedot.opetuskieli
+      ),
     _fp.flow(
       validate('jarjestamistiedot.apurahaGroup', () => apurahaMin >= 0, {
         message: ['validointivirheet.eiNegatiivinenKokonaisluku'],

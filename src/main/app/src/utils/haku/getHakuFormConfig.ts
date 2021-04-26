@@ -8,6 +8,7 @@ import {
 import { HakuFormValues } from '#/src/types/hakuTypes';
 import { ifAny, otherwise } from '#/src/utils';
 import {
+  validate,
   validateExistence,
   validateExistenceOfDate,
 } from '#/src/utils/form/createErrorBuilder';
@@ -74,14 +75,26 @@ const config = createFormConfigBuilder().registerSections([
       },
       {
         field: '.ajankohtaKaytossa',
+        validate: eb =>
+          validateIf(
+            !eb?.values?.aikataulut?.ajankohtaKaytossa &&
+              eb?.values?.tila === JULKAISUTILA.JULKAISTU,
+            validate('aikataulut.ajankohtaKaytossa', () => false, {
+              message:
+                'validointivirheet.pakollinenAjankohtaJosJulkaistuYhteishaku',
+            })
+          )(eb),
       },
+
       {
         field: '.ajankohtaTyyppi',
         validate: eb =>
           validateIf(
-            eb?.values?.aikataulut?.ajankohtaKaytossa &&
-              eb?.values?.tila === JULKAISUTILA.JULKAISTU,
-            validateExistence('aikataulut.ajankohtaTyyppi')
+            eb?.values?.tila === JULKAISUTILA.JULKAISTU,
+            validateExistence('aikataulut.ajankohtaTyyppi', {
+              message:
+                'validointivirheet.pakollinenAjankohtaJosJulkaistuYhteishaku',
+            })
           )(eb),
       },
       {

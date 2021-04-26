@@ -288,7 +288,8 @@
     "positiivinenKokonaisluku": "Syötä positiivinen kokonaisluku",
     "eiNegatiivinenKokonaisluku": "Syötä kokonaisluku, joka on suurempi kuin 0",
     "apurahaMinMax": "Apurahan maksimimäärän täytyy olla suurempi tai yhtäsuuri kuin minimimäärän.",
-    "yliSataProsenttia": "Syötetty prosenttiluku ei voi olla yli 100."
+    "yliSataProsenttia": "Syötetty prosenttiluku ei voi olla yli 100.",
+    "pakollinenAjankohtaJosJulkaistuYhteishaku": "Alkamisajankohta on pakollinen, jos haku on julkaistu ja hakutapa on yhteishaku."
   },
   "hakulomakeValinnat": {
     "ataru": "Käytetään hakemuspalvelun lomaketta",

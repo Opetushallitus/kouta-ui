@@ -7,6 +7,7 @@ import {
   fillKieliversiotSection,
   tallenna,
 } from '#/cypress/utils';
+import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
 const organisaatioOid = '1.1.1.1.1.1';
 const hakuOid = '2.1.1.1.1.1';
@@ -62,7 +63,7 @@ export const editHakuForm = () => {
     cy.visit(`/haku/${hakuOid}/muokkaus`);
     cy.url().should(
       'include',
-      `/organisaatio/${organisaatioOid}/haku/${hakuOid}/muokkaus`
+      `/organisaatio/${OPETUSHALLITUS_ORGANISAATIO_OID}/haku/${hakuOid}/muokkaus`
     );
   });
 };

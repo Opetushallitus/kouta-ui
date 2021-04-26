@@ -42,7 +42,7 @@ export const createRedirectEntityPage = ({
 
   return entity && preferredOrganisaatio ? (
     <Redirect
-      to={getRedirectUrl({ oid, organisaatioOid: entity?.organisaatioOid })}
+      to={getRedirectUrl({ oid, organisaatioOid: preferredOrganisaatio })}
     />
   ) : (
     <FullSpin />

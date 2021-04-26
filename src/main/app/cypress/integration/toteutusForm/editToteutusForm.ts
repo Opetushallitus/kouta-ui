@@ -10,6 +10,7 @@ import {
   fillKieliversiotSection,
   tallenna,
 } from '#/cypress/utils';
+import { OPETUSHALLITUS_ORGANISAATIO_OID } from '#/src/constants';
 
 const organisaatioOid = '1.1.1.1.1.1';
 const koulutusOid = '1.2.1.1.1.1';
@@ -169,7 +170,7 @@ export const editToteutusForm = () => {
     cy.visit(`/toteutus/${toteutusOid}/muokkaus`);
     cy.url().should(
       'include',
-      `/organisaatio/${organisaatioOid}/toteutus/${toteutusOid}/muokkaus`
+      `/organisaatio/${OPETUSHALLITUS_ORGANISAATIO_OID}/toteutus/${toteutusOid}/muokkaus`
     );
   });
 };

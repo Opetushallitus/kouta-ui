@@ -141,7 +141,7 @@ export const JarjestamisTiedotSection = ({
   const isKorkeakoulu = isKorkeakouluKoulutustyyppi(koulutustyyppi);
 
   const toteutuksellaErillinenAloitusajankohta = useFieldValue(
-    `${name}.ajankohtaKaytossa`
+    `${name}.ajankohta.ajankohtaKaytossa`
   );
 
   return (
@@ -256,7 +256,10 @@ export const JarjestamisTiedotSection = ({
 
       <FieldGroup title={t('yleiset.koulutuksenAjankohta')}>
         <Box mb={2}>
-          <Field name={`${name}.ajankohtaKaytossa`} component={FormFieldSwitch}>
+          <Field
+            name={`${name}.ajankohta.ajankohtaKaytossa`}
+            component={FormFieldSwitch}
+          >
             {t('toteutuslomake.toteutuksellaErillinenAloitusajankohta')}
           </Field>
         </Box>

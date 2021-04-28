@@ -1,8 +1,12 @@
-const getQueryParams = ({
+import { JULKAISUTILA } from '#/src/constants';
+
+export const FILTER_PAGE_SIZE = 10;
+
+export const getQueryParams = ({
   organisaatioOid,
   nimi = '',
   language = 'fi',
-  pageSize = 10,
+  pageSize = FILTER_PAGE_SIZE,
   showArchived = false,
   page = 1,
   orderField,
@@ -17,7 +21,7 @@ const getQueryParams = ({
     organisaatioOid,
     lng: language,
     size: pageSize,
-    arkistoidut: showArchived,
+    arkistoidut: showArchived || tila === JULKAISUTILA.ARKISTOITU,
     page,
   };
 

@@ -63,6 +63,7 @@ export const Filters = ({
           isClearable
         />
       </FlexItem>
+      {/* TODO: Hide this if any tila is chosen */}
       <FlexItem grow={0}>
         <Checkbox checked={showArchived} onChange={onShowArchivedChange}>
           {t('etusivu.naytaArkistoidut')}

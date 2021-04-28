@@ -75,8 +75,8 @@ const makeTableColumns = (t, organisaatioOid) => [
   {
     title: t('etusivu.kiinnitetytHakukohteet'),
     key: 'hakukohteet',
-    render: ({ hakukohteet = 0 }) => (
-      <Badge color="primary">{hakukohteet}</Badge>
+    render: ({ hakukohdeCount = 0 }) => (
+      <Badge color="primary">{hakukohdeCount}</Badge>
     ),
   },
 ];

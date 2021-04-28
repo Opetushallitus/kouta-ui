@@ -28,7 +28,7 @@ import ListCollapse from '../ListCollapse';
 import NavigationAnchor from '../NavigationAnchor';
 import useFilterState from '../useFilterState';
 import { getIndexParamsByFilters } from '../utils';
-import KoulutusModal from './KoulutusModal';
+import { KoulutusModal } from './KoulutusModal';
 
 const { TOTEUTUS } = ENTITY;
 
@@ -66,8 +66,8 @@ const makeTableColumns = (t, organisaatioOid) => [
   {
     title: t('etusivu.kiinnitetytHakukohteet'),
     key: 'hakukohteet',
-    render: ({ hakukohteet = 0 }) => (
-      <Badge color="primary">{hakukohteet}</Badge>
+    render: ({ hakukohdeCount = 0 }) => (
+      <Badge color="primary">{hakukohdeCount}</Badge>
     ),
   },
 ];

@@ -16,7 +16,7 @@ import {
 import useApiAsync from '#/src/hooks/useApiAsync';
 import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
 import getHaut from '#/src/utils/haku/getHaut';
-import getToteutukset from '#/src/utils/toteutus/getToteutukset';
+import { getToteutukset } from '#/src/utils/toteutus/getToteutukset';
 
 const LiitoksetModal = ({ onClose, organisaatioOid, open }) => {
   const { t } = useTranslation();

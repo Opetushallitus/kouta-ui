@@ -3,17 +3,25 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { RelatedEntitiesTable } from '#/src/components/RelatedEntitiesTable';
-import getToteutuksenHakukohteet from '#/src/utils/toteutus/getToteutuksenHakukohteet';
+import { useToteutuksenHakukohteet } from '#/src/utils/toteutus/useToteutuksenHakukohteet';
 
 export const HakukohteetSection = function ({ toteutus, organisaatioOid }) {
   const { t } = useTranslation();
+  const { data: enrichedToteutus } = useToteutuksenHakukohteet(
+    {
+      organisaatioOid,
+      toteutusOid: toteutus?.oid,
+    },
+    { refetchOnWindowFocus: false }
+  );
 
   return (
     <RelatedEntitiesTable
       {...{
-        entity: toteutus,
-        organisaatioOid,
-        getData: getToteutuksenHakukohteet,
+        data: enrichedToteutus?.hakukohteet.map(hk => ({
+          ...hk,
+          oid: hk.hakukohdeOid, // NOTE: For some reason hakutiedon hakukohde does not have oid
+        })),
         getLinkUrl: ({ oid }) =>
           `/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`,
         noResultsMessage: t('toteutuslomake.toteutuksellaEiHakukohteita'),

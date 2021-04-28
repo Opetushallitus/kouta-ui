@@ -175,6 +175,7 @@
     "riippuvuusEiJulkaistu": "Liitetty {{entity, unCapitalize}} ei ole \"Julkaistu\"-tilassa.",
     "onJulkinen": "{{entity}} on julkinen",
     "kokeetTaiLisanaytot": "Kokeet tai lisänäytöt",
+    "organisaatio": "Organisaatio",
     "organisaatiot": "Organisaatiot",
     "ladataan": "Ladataan...",
     "alkamiskausiJaVuosi": "Alkamiskausi ja -vuosi",

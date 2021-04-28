@@ -49,6 +49,7 @@ export const useKoulutuksetByKoulutustyyppi = koulutustyyppi => {
     { koulutustyyppi },
     {
       enabled: Boolean(koulutustyyppi),
+      refetchOnWindowFocus: false,
     }
   );
 };

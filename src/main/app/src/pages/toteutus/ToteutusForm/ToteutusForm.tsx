@@ -17,7 +17,7 @@ import { useFieldValue } from '#/src/hooks/form';
 import useModal from '#/src/hooks/useModal';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
 import { getTestIdProps } from '#/src/utils';
-import getToteutukset from '#/src/utils/toteutus/getToteutukset';
+import { getToteutukset } from '#/src/utils/toteutus/getToteutukset';
 
 import HakeutumisTaiIlmoittautumistapaSection from './HakeutumisTaiIlmoittautumistapaSection';
 import HakukohteetModal from './HakukohteetModal';

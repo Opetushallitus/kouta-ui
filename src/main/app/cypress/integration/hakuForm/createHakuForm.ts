@@ -87,6 +87,9 @@ const fillAikatauluSection = () => {
       });
     });
 
+    cy.findByLabelText('hakulomake.haullaErillinenAloitusajankohta').check({
+      force: true,
+    });
     fillAjankohtaFields();
 
     getByTestId('perumisenTakaraja').within(() => {

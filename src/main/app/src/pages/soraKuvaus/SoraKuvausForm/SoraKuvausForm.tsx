@@ -11,7 +11,7 @@ import { useFieldValue } from '#/src/hooks/form';
 import getSoraKuvaukset from '#/src/utils/soraKuvaus/getSoraKuvaukset';
 
 import KoulutustyyppiSection from './KoulutustyyppiSection';
-import TiedotSection from './TiedotSection';
+import { TiedotSection } from './TiedotSection';
 
 const SoraKuvausForm = ({
   steps = false,

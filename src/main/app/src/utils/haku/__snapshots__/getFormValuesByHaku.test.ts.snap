@@ -9,6 +9,7 @@ Object {
         "paattyy": "2019-08-01T12:45",
       },
     ],
+    "ajankohtaKaytossa": true,
     "ajankohtaTyyppi": "alkamiskausi ja -vuosi",
     "ajastettuJulkaisu": "2020-01-20T05:00",
     "hakuaika": Array [
@@ -88,6 +89,7 @@ Object {
         "paattyy": "2019-08-01T12:45",
       },
     ],
+    "ajankohtaKaytossa": true,
     "ajankohtaTyyppi": "alkamiskausi ja -vuosi",
     "ajastettuJulkaisu": "2020-01-20T05:00",
     "hakuaika": Array [
@@ -167,6 +169,7 @@ Object {
         "paattyy": "2019-08-01T12:45",
       },
     ],
+    "ajankohtaKaytossa": true,
     "ajankohtaTyyppi": "alkamiskausi ja -vuosi",
     "ajastettuJulkaisu": "2020-01-20T05:00",
     "hakuaika": Array [
@@ -246,6 +249,7 @@ Object {
         "paattyy": "2019-08-01T12:45",
       },
     ],
+    "ajankohtaKaytossa": true,
     "ajankohtaTyyppi": "henkilokohtainen suunnitelma",
     "ajastettuJulkaisu": "2020-01-20T05:00",
     "hakuaika": Array [
@@ -327,6 +331,7 @@ Object {
         "paattyy": "2019-08-01T12:45",
       },
     ],
+    "ajankohtaKaytossa": true,
     "ajankohtaTyyppi": "tarkka alkamisajankohta",
     "ajastettuJulkaisu": "2020-01-20T05:00",
     "hakuaika": Array [

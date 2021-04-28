@@ -36,6 +36,8 @@ import {
   validateRelations,
 } from '#/src/utils/form/formConfigUtils';
 
+import { isApurahaVisible } from './toteutusVisibilities';
+
 const validateDateTimeRange = (alkaaFieldName, paattyyFieldName) => (
   eb,
   values
@@ -66,7 +68,11 @@ const validateApuraha = (eb, values) => {
   const apurahaYksikko = values?.jarjestamistiedot?.apurahaYksikko?.value;
 
   return validateIf(
-    onkoApuraha,
+    onkoApuraha &&
+      isApurahaVisible(
+        values?.koulutustyyppi,
+        values?.jarjestamistiedot.opetuskieli
+      ),
     _fp.flow(
       validate('jarjestamistiedot.apurahaGroup', () => apurahaMin >= 0, {
         message: ['validointivirheet.eiNegatiivinenKokonaisluku'],
@@ -384,8 +390,9 @@ const config = createFormConfigBuilder().registerSections([
         field: '.ajankohta.vuosi',
         validate: (eb, values: ToteutusFormValues) =>
           validateIf(
-            values?.jarjestamistiedot?.ajankohta?.ajankohtaTyyppi ===
-              Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI &&
+            values?.jarjestamistiedot?.ajankohta?.ajankohtaKaytossa &&
+              values?.jarjestamistiedot?.ajankohta?.ajankohtaTyyppi ===
+                Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI &&
               values?.tila === JULKAISUTILA.JULKAISTU,
             _fp.flow(
               validateExistence('jarjestamistiedot.ajankohta.kausi'),
@@ -398,8 +405,9 @@ const config = createFormConfigBuilder().registerSections([
         required: true,
         validate: (eb, values: ToteutusFormValues) =>
           validateIf(
-            values?.jarjestamistiedot?.ajankohta?.ajankohtaTyyppi ===
-              Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA &&
+            eb?.values?.jarjestamistiedot?.ajankohta?.ajankohtaKaytossa &&
+              values?.jarjestamistiedot?.ajankohta?.ajankohtaTyyppi ===
+                Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA &&
               values?.tila === JULKAISUTILA.JULKAISTU,
             validateExistenceOfDate('jarjestamistiedot.ajankohta.tarkkaAlkaa')
           )(eb),

@@ -4,14 +4,22 @@ import { useTranslation } from 'react-i18next';
 import { Field, FieldArray } from 'redux-form';
 
 import FieldGroup from '#/src/components/FieldGroup';
-import { FormFieldDateTimeInput } from '#/src/components/formFields';
+import {
+  FormFieldDateTimeInput,
+  FormFieldSwitch,
+} from '#/src/components/formFields';
 import { HakuajatFields } from '#/src/components/HakuajatFields';
 import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenAloitusajankohtaFields';
 import { Box } from '#/src/components/virkailija';
+import { useFieldValue } from '#/src/hooks/form';
 import { getTestIdProps } from '#/src/utils';
 
 const ScheduleSection = ({ isOphVirkailija, isYhteishaku, name, language }) => {
   const { t } = useTranslation();
+
+  const haullaErillinenAloitusajankohta = useFieldValue(
+    `${name}.ajankohtaKaytossa`
+  );
 
   return (
     <Box mb={-4}>
@@ -28,11 +36,18 @@ const ScheduleSection = ({ isOphVirkailija, isYhteishaku, name, language }) => {
       </FieldGroup>
 
       <FieldGroup title={t('yleiset.koulutuksenAjankohta')}>
-        <KoulutuksenAloitusajankohtaFields
-          section={name}
-          name={`${name}.ajankohtaTyyppi`}
-          language={language}
-        />
+        <Box mb={2}>
+          <Field name={`${name}.ajankohtaKaytossa`} component={FormFieldSwitch}>
+            {t('hakulomake.haullaErillinenAloitusajankohta')}
+          </Field>
+        </Box>
+        {haullaErillinenAloitusajankohta && (
+          <KoulutuksenAloitusajankohtaFields
+            section={name}
+            name={`${name}.ajankohtaTyyppi`}
+            language={language}
+          />
+        )}
       </FieldGroup>
 
       {isYhteishaku && isOphVirkailija ? (

@@ -7,7 +7,7 @@ import { FormFieldEditor, FormFieldInput } from '#/src/components/formFields';
 import Spacing from '#/src/components/Spacing';
 import { getTestIdProps } from '#/src/utils';
 
-export const KieliversiotSection = ({ name, language }) => {
+export const TiedotSection = ({ name, language }) => {
   const { t } = useTranslation();
 
   return (
@@ -33,5 +33,3 @@ export const KieliversiotSection = ({ name, language }) => {
     </>
   );
 };
-
-export default KieliversiotSection;

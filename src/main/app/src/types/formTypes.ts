@@ -12,4 +12,5 @@ export type AjankohtaFields = {
   tarkkaAlkaa?: string;
   tarkkaPaattyy?: string;
   henkilokohtaisenSuunnitelmanLisatiedot?: TranslatedField<EditorState>;
+  ajankohtaKaytossa?: boolean;
 };

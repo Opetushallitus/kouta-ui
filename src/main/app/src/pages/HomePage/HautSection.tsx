@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 
-import debounce from 'debounce-promise';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -31,12 +30,10 @@ import { getIndexParamsByFilters } from './utils';
 
 const { HAKU } = ENTITY;
 
-const debounceHaut = debounce(searchHaut, 300);
-
 const getHautFn = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
 
-  const { result, totalCount } = await debounceHaut({
+  const { result, totalCount } = await searchHaut({
     httpClient,
     apiUrls,
     ...params,
@@ -85,7 +82,7 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate }) => {
   const { t } = useTranslation();
 
   const {
-    debouncedNimi,
+    nimi,
     showArchived,
     page,
     setPage,
@@ -97,7 +94,7 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate }) => {
 
   const watch = JSON.stringify([
     page,
-    debouncedNimi,
+    nimi,
     organisaatioOid,
     showArchived,
     orderBy,
@@ -110,7 +107,7 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate }) => {
     reload,
   } = useApiAsync({
     promiseFn: getHautFn,
-    nimi: debouncedNimi,
+    nimi,
     page,
     showArchived,
     organisaatioOid,

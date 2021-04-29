@@ -30,15 +30,14 @@ export const useFilterState = ({ paginationName } = {}) => {
     [setPagination]
   );
   const onNimiChange = useCallback(
-    e => {
-      setPagination({ nimi: e.target.value });
+    value => {
+      setPagination({ nimi: value });
     },
     [setPagination]
   );
   return {
     setNimi,
     nimi,
-    debouncedNimi: nimi,
     page,
     setPage,
     orderBy,

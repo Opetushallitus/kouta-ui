@@ -84,6 +84,7 @@ export const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
     data: { result: koulutukset, totalCount } = {},
     isError,
     isFetching,
+    isSuccess,
     refetch,
   } = useSearchKoulutukset(params);
 
@@ -107,12 +108,6 @@ export const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
     organisaatioOid,
   ]);
 
-  const hasRows = useMemo(() => !isFetching && !isError && koulutukset, [
-    isFetching,
-    isError,
-    koulutukset,
-  ]);
-
   return (
     <>
       <NavigationAnchor id="koulutukset" />
@@ -133,7 +128,7 @@ export const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
 
         {isFetching && <ListSpin />}
         {isError && <ErrorAlert onReload={refetch} center />}
-        {hasRows && (
+        {isSuccess && (
           <ListTable
             rows={rows}
             columns={tableColumns}

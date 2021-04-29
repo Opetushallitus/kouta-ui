@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 
-import debounce from 'debounce-promise';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -32,12 +31,10 @@ import { KoulutusModal } from './KoulutusModal';
 
 const { TOTEUTUS } = ENTITY;
 
-const debounceToteutukset = debounce(searchToteutukset, 300);
-
 const getToteutuksetFn = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
 
-  const { result, totalCount } = await debounceToteutukset({
+  const { result, totalCount } = await searchToteutukset({
     httpClient,
     apiUrls,
     ...params,
@@ -92,7 +89,7 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
   const {
-    debouncedNimi,
+    nimi,
     showArchived,
     page,
     setPage,
@@ -104,7 +101,7 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
 
   const watch = JSON.stringify([
     page,
-    debouncedNimi,
+    nimi,
     organisaatioOid,
     showArchived,
     orderBy,
@@ -117,7 +114,7 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
     reload,
   } = useApiAsync({
     promiseFn: getToteutuksetFn,
-    nimi: debouncedNimi,
+    nimi,
     page,
     showArchived,
     organisaatioOid,

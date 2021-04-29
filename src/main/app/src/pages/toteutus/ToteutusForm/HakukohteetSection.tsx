@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
@@ -15,13 +15,20 @@ export const HakukohteetSection = function ({ toteutus, organisaatioOid }) {
     { refetchOnWindowFocus: false }
   );
 
+  // NOTE: For some reason hakutiedon hakukohde does not have oid
+  const usedData = useMemo(
+    () =>
+      enrichedToteutus?.hakukohteet.map(hk => ({
+        ...hk,
+        oid: hk.hakukohdeOid,
+      })),
+    [enrichedToteutus]
+  );
+
   return (
     <RelatedEntitiesTable
       {...{
-        data: enrichedToteutus?.hakukohteet.map(hk => ({
-          ...hk,
-          oid: hk.hakukohdeOid, // NOTE: For some reason hakutiedon hakukohde does not have oid
-        })),
+        data: usedData,
         getLinkUrl: ({ oid }) =>
           `/organisaatio/${organisaatioOid}/hakukohde/${oid}/muokkaus`,
         noResultsMessage: t('toteutuslomake.toteutuksellaEiHakukohteita'),

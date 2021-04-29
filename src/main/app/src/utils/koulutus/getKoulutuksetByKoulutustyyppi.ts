@@ -1,7 +1,10 @@
 import { isBefore, parseISO, endOfToday } from 'date-fns';
 import _fp from 'lodash/fp';
 
-import { KOULUTUSTYYPPI_TO_YLAKOODIURI_MAP } from '#/src/constants';
+import {
+  KOULUTUSTYYPPI_TO_YLAKOODIURI_MAP,
+  LONG_CACHE_QUERY_OPTIONS,
+} from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
 
 const isValidKoulutusKoodi = ({ koodisto, voimassaLoppuPvm }) =>
@@ -49,7 +52,7 @@ export const useKoulutuksetByKoulutustyyppi = koulutustyyppi => {
     { koulutustyyppi },
     {
       enabled: Boolean(koulutustyyppi),
-      refetchOnWindowFocus: false,
+      ...LONG_CACHE_QUERY_OPTIONS,
     }
   );
 };

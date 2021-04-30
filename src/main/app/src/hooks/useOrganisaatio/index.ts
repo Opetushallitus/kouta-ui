@@ -1,59 +1,22 @@
-import { useCallback } from 'react';
-
-import DataLoader from 'dataloader';
 import _ from 'lodash';
 
 import {
   AMMATILLISET_OPPILAITOSTYYPIT,
   KORKEAKOULU_OPPILAITOSTYYPIT,
   LUKIO_OPPILAITOSTYYPIT,
+  LONG_CACHE_QUERY_OPTIONS,
 } from '#/src/constants';
 import { useAuthorizedUser } from '#/src/contexts/AuthorizedUserContext';
-import { useHttpClient } from '#/src/contexts/HttpClientContext';
-import { useUrls } from '#/src/contexts/UrlContext';
-import useApiAsync from '#/src/hooks/useApiAsync';
+import { useApiQuery } from '#/src/hooks/useApiQuery';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import getUserOrganisaatiotWithRoles from '#/src/utils/getUserOrganisaatiotWithRoles';
 import getUserRoles from '#/src/utils/getUserRoles';
-import { memoize } from '#/src/utils/memoize';
 import getOrganisaatiotByOids from '#/src/utils/organisaatio/getOrganisaatiotByOids';
 
-const getOrganisaatioLoader = memoize((httpClient, apiUrls) => {
-  return new DataLoader(oids =>
-    getOrganisaatiotByOids({ oids, httpClient, apiUrls }).then(
-      organisaatiot => {
-        return oids.map(
-          oid => organisaatiot.find(({ oid: orgOid }) => orgOid === oid) || null
-        );
-      }
-    )
-  );
-});
-
-export const useOrganisaatioLoader = () => {
-  const apiUrls = useUrls();
-  const httpClient = useHttpClient();
-
-  return getOrganisaatioLoader(httpClient, apiUrls);
-};
-
 export const useOrganisaatio = oid => {
-  const organisaatioLoader = useOrganisaatioLoader();
+  const { organisaatiot, ...rest } = useOrganisaatiot(oid);
 
-  const promiseFn = useCallback(
-    ({ oid }) => {
-      return oid ? organisaatioLoader.load(oid) : Promise.resolve(null);
-    },
-    [organisaatioLoader]
-  );
-
-  const { data: organisaatio, ...rest } = useApiAsync({
-    promiseFn,
-    oid,
-    watch: oid,
-  });
-
-  return { ...rest, organisaatio };
+  return { organisaatio: organisaatiot?.[0], ...rest };
 };
 
 type UseOrganisaatiotResult = {
@@ -62,20 +25,16 @@ type UseOrganisaatiotResult = {
 };
 
 export const useOrganisaatiot = oids => {
-  const organisaatioLoader = useOrganisaatioLoader();
-
-  const promiseFn = useCallback(
-    ({ oids }) => {
-      return organisaatioLoader.loadMany(oids);
-    },
-    [organisaatioLoader]
+  const { data: organisaatiot, ...rest } = useApiQuery(
+    'getOrganisaatiot',
+    getOrganisaatiotByOids,
+    { oids: _.castArray(oids) },
+    {
+      ...LONG_CACHE_QUERY_OPTIONS,
+      enabled: !_.isEmpty(oids) && !_.isNil(oids),
+      retry: 0,
+    }
   );
-
-  const { data: organisaatiot, ...rest } = useApiAsync({
-    promiseFn,
-    oids,
-    watch: JSON.stringify(oids),
-  });
 
   return { ...rest, organisaatiot } as UseOrganisaatiotResult;
 };

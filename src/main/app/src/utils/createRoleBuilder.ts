@@ -78,11 +78,7 @@ class RoleBuilder {
   }
 
   hasOrganisaatioRole(role, organisaatioOid) {
-    console.log('hasOrganisaatioRole', organisaatioOid, this.roleLookup);
-    return (
-      this.roleLookup.hasOwnProperty(organisaatioOid) &&
-      this.roleLookup[organisaatioOid].hasOwnProperty(role)
-    );
+    return Boolean(this.roleLookup?.[organisaatioOid]?.[role]);
   }
 
   hasRead(role, organisaatio) {

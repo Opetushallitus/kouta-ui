@@ -83,16 +83,12 @@ class RoleBuilder {
 
   hasRead(role, organisaatio) {
     return this.clone(
-      Boolean(
-        resolveOidPath(organisaatio).find(oid => {
-          return (
-            this.hasOrganisaatioRole(OPH_PAAKAYTTAJA_ROLE, oid) ||
-            READ_ROLES.map(r =>
-              this.hasOrganisaatioRole(`${role}_${r}`, oid)
-            ).some(Boolean)
-          );
-        })
-      )
+      resolveOidPath(organisaatio).some(oid => {
+        return (
+          this.hasOrganisaatioRole(OPH_PAAKAYTTAJA_ROLE, oid) ||
+          READ_ROLES.some(r => this.hasOrganisaatioRole(`${role}_${r}`, oid))
+        );
+      })
     );
   }
 
@@ -114,16 +110,12 @@ class RoleBuilder {
 
   hasUpdate(role, organisaatio) {
     return this.clone(
-      Boolean(
-        resolveOidPath(organisaatio).find(oid => {
-          return (
-            this.hasOrganisaatioRole(OPH_PAAKAYTTAJA_ROLE, oid) ||
-            UPDATE_ROLES.map(r =>
-              this.hasOrganisaatioRole(`${role}_${r}`, oid)
-            ).some(Boolean)
-          );
-        })
-      )
+      resolveOidPath(organisaatio).some(oid => {
+        return (
+          this.hasOrganisaatioRole(OPH_PAAKAYTTAJA_ROLE, oid) ||
+          UPDATE_ROLES.some(r => this.hasOrganisaatioRole(`${role}_${r}`, oid))
+        );
+      })
     );
   }
 
@@ -145,16 +137,12 @@ class RoleBuilder {
 
   hasCreate(role, organisaatio) {
     return this.clone(
-      Boolean(
-        resolveOidPath(organisaatio).find(oid => {
-          return (
-            this.hasOrganisaatioRole(OPH_PAAKAYTTAJA_ROLE, oid) ||
-            CREATE_ROLES.map(r =>
-              this.hasOrganisaatioRole(`${role}_${r}`, oid)
-            ).some(Boolean)
-          );
-        })
-      )
+      resolveOidPath(organisaatio).some(oid => {
+        return (
+          this.hasOrganisaatioRole(OPH_PAAKAYTTAJA_ROLE, oid) ||
+          CREATE_ROLES.some(r => this.hasOrganisaatioRole(`${role}_${r}`, oid))
+        );
+      })
     );
   }
 

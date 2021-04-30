@@ -48,7 +48,10 @@ const organisaatioHasCorrectType = organisaatio => {
   return !organisaatiotyypit.find(t => Boolean(invalidOrganisaatioTypeMap[t]));
 };
 
-const useOrganisaatioHierarkia = ({ name, nameSearchEnabled = true }) => {
+export const useReadableOrganisaatioHierarkia = ({
+  name,
+  nameSearchEnabled = true,
+}) => {
   const roleBuilder = useAuthorizedUserRoleBuilder();
   const language = useUserLanguage();
   const user = useAuthorizedUser();
@@ -105,5 +108,3 @@ const useOrganisaatioHierarkia = ({ name, nameSearchEnabled = true }) => {
 
   return { hierarkia, ...rest };
 };
-
-export default useOrganisaatioHierarkia;

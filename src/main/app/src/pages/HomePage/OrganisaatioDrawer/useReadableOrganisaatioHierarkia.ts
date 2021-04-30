@@ -19,7 +19,7 @@ import { createCanReadSomethingRoleBuilder } from '../utils';
 
 const pickKoutaRoleOid = role => {
   if (role?.startsWith('APP_KOUTA')) {
-    const oidStr = role.slice(role.lastIndexOf('_') + 1, role.length);
+    const oidStr = role.slice(role.lastIndexOf('_') + 1);
 
     return isOid(oidStr) ? oidStr : undefined;
   }

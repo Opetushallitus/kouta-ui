@@ -31,7 +31,7 @@ export const useOrganisaatiot = oids => {
     { oids: _.castArray(oids) },
     {
       ...LONG_CACHE_QUERY_OPTIONS,
-      enabled: !_.isEmpty(oids) && !_.isNil(oids),
+      enabled: !_.isEmpty(oids),
       retry: 0,
     }
   );

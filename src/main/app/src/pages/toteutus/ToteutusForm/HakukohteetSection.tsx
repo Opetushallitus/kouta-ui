@@ -18,7 +18,7 @@ export const HakukohteetSection = function ({ toteutus, organisaatioOid }) {
   // NOTE: For some reason hakutiedon hakukohde does not have oid
   const usedData = useMemo(
     () =>
-      enrichedToteutus?.hakukohteet.map(hk => ({
+      enrichedToteutus?.hakukohteet?.map(hk => ({
         ...hk,
         oid: hk.hakukohdeOid,
       })),

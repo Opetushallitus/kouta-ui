@@ -37,6 +37,7 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
   const kielivalinta = values?.kieliversiot ?? [];
   const pickTranslations = _fp.pick(kielivalinta);
 
+  // FIXME: pohja.tarjoajat ei ole olemassa, eikä "Käytä pohjan järjestäjää"-ominaisuus toimi käytännössä lainkaan.
   const pohjanTarjoajat = values?.pohja?.tarjoajat;
   const kaytaPohjanJarjestajaa =
     values?.tarjoajat?.kaytaPohjanJarjestajaa ?? false;
@@ -45,7 +46,7 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
   const osiot = values?.lisatiedot?.osiot ?? [];
   const osaamisala = values?.osaamisala;
 
-  const sorakuvausId = values?.soraKuvaus?.value ?? null;
+  const sorakuvausId = values?.soraKuvaus?.value || null;
 
   return {
     johtaaTutkintoon: TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT.includes(

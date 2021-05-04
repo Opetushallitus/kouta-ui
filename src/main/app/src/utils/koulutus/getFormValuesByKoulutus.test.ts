@@ -39,6 +39,7 @@ test('getFormValuesByKoulutus returns correct form values given koulutus', () =>
       sv: 'Sv nimi',
     },
     tarjoajat: ['123.456.789'],
+    sorakuvausId: '1234',
   });
 
   expect(values).toMatchSnapshot();

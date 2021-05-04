@@ -34,9 +34,6 @@ Object {
     },
     "tyyppi": "tyyppi_1#1",
   },
-  "soraKuvaus": Object {
-    "value": "sora_1",
-  },
   "tila": "tallennettu",
   "valintakokeet": Object {
     "kokeetTaiLisanaytot": Array [

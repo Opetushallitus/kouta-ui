@@ -1,12 +1,14 @@
 import { parseEditorState } from '#/src/components/Editor/utils';
+import { JULKAISUTILA, KOULUTUSTYYPPI } from '#/src/constants';
 import getKoulutusByFormValues from '#/src/utils/koulutus/getKoulutusByFormValues';
 
 test('getKoulutusByFormValues returns correct koulutus given form values', () => {
   const koulutus = getKoulutusByFormValues({
-    tila: 'tallennettu',
+    tila: JULKAISUTILA.TALLENNETTU,
     muokkaaja: '1.1.1.1',
     kieliversiot: ['fi', 'sv'],
     tarjoajat: {
+      kaytaPohjanJarjestajaa: false,
       tarjoajat: ['123.456.789'],
     },
     information: {
@@ -30,7 +32,7 @@ test('getKoulutusByFormValues returns correct koulutus given form values', () =>
         { value: 'koulutusala_2#1' },
       ],
     },
-    koulutustyyppi: 'yo',
+    koulutustyyppi: KOULUTUSTYYPPI.YLIOPISTOKOULUTUS,
     lisatiedot: {
       osioKuvaukset: {
         'osio_1#1': {},
@@ -61,6 +63,9 @@ test('getKoulutusByFormValues returns correct koulutus given form values', () =>
         },
       ],
     },
+    soraKuvaus: {
+      value: '1234',
+    },
     julkinen: true,
   });
 
@@ -69,11 +74,13 @@ test('getKoulutusByFormValues returns correct koulutus given form values', () =>
 
 test('getKoulutusByFormValues returns correct koulutuksetKoodiUri for ammatillinen koulutus', () => {
   const koulutus = getKoulutusByFormValues({
+    koulutustyyppi: KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
     information: {
       nimi: {
         fi: 'Fi nimi',
         sv: 'Sv nimi',
       },
+      eperuste: { value: '1' },
       koulutus: {
         value: 'koulutuskoodi_1#1',
       },
@@ -87,7 +94,6 @@ test('getKoulutusByFormValues returns correct koulutuksetKoodiUri for ammatillin
         { value: 'koulutusala_2#1' },
       ],
     },
-    koulutustyyppi: 'amm',
   });
 
   expect(koulutus).toMatchSnapshot();

@@ -11,7 +11,7 @@ export type TutkinnonOsa = {
 
 export type InformationSectionValues = {
   nimi: TranslatedField<string>;
-  eperuste: SelectOption;
+  eperuste?: SelectOption;
   koulutus: SelectOption;
   korkeakoulutukset: SelectOptions;
   opintojenLaajuus: SelectOption;

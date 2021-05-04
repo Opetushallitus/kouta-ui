@@ -113,185 +113,189 @@ export const KoulutusForm = ({
         />
       )}
 
-      <FormCollapse
-        section="kieliversiot"
-        header={t('yleiset.kieliversiot')}
-        Component={KieliversiotFields}
-        disabled={onlyTarjoajaRights}
-      />
-
-      {koulutustyyppi &&
-        ![KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA].includes(
-          koulutustyyppi
-        ) && (
+      {koulutustyyppi && (
+        <>
           <FormCollapse
-            section="information"
-            header={t('koulutuslomake.koulutuksenTiedot')}
-            Component={TiedotSection}
+            section="kieliversiot"
+            header={t('yleiset.kieliversiot')}
+            Component={KieliversiotFields}
+            disabled={onlyTarjoajaRights}
+          />
+
+          {koulutustyyppi &&
+            ![KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA].includes(
+              koulutustyyppi
+            ) && (
+              <FormCollapse
+                section="information"
+                header={t('koulutuslomake.koulutuksenTiedot')}
+                Component={TiedotSection}
+                languages={languageTabs}
+                disabled={onlyTarjoajaRights}
+                koulutustyyppi={koulutustyyppi}
+                koulutuskoodi={koulutuskoodi}
+              />
+            )}
+
+          {koulutustyyppi === KOULUTUSTYYPPI.OSAAMISALA && (
+            <FormCollapse
+              section="osaamisala"
+              header={t('koulutuslomake.valitseOsaamisala')}
+              Component={OsaamisalaSection}
+              languages={languageTabs}
+              disabled={onlyTarjoajaRights}
+              koulutustyyppi={koulutustyyppi}
+            />
+          )}
+
+          {koulutustyyppi === KOULUTUSTYYPPI.TUTKINNON_OSA && (
+            <FormCollapse
+              section="tutkinnonosat"
+              header={t('koulutuslomake.tutkinnonOsat')}
+              Component={TutkinnonOsatSection}
+              name={'tutkinnonosat.osat'}
+              languages={languageTabs}
+              disabled={onlyTarjoajaRights}
+              koulutustyyppi={koulutustyyppi}
+            />
+          )}
+
+          {koulutustyyppi === KOULUTUSTYYPPI.OSAAMISALA && (
+            <FormCollapse
+              section="osaamisalanKuvaus"
+              header={t('koulutuslomake.osaamisalanKuvaus')}
+              Component={OsaamisalanKuvausSection}
+              name={'osaamisala.osaamisala'}
+              languages={languageTabs}
+              disabled={onlyTarjoajaRights}
+              koulutustyyppi={koulutustyyppi}
+            />
+          )}
+
+          {koulutustyyppi === KOULUTUSTYYPPI.TUTKINNON_OSA && (
+            <FormCollapse
+              section="tutkinnonosat"
+              header={t('koulutuslomake.koulutuksenNimi')}
+              Component={TutkinnonOsaKoulutusNimiSection}
+              languages={languageTabs}
+              disabled={onlyTarjoajaRights}
+              koulutustyyppi={koulutustyyppi}
+              {...getTestIdProps('nimiSection')}
+            />
+          )}
+
+          {koulutustyyppi === KOULUTUSTYYPPI.TUTKINNON_OSA && (
+            <FormCollapse
+              section="tutkinnonosat"
+              header={t('koulutuslomake.tutkinnonOsienKuvaus')}
+              Component={TutkinnonOsienKuvausSection}
+              languages={languageTabs}
+              disabled={onlyTarjoajaRights}
+              koulutustyyppi={koulutustyyppi}
+              {...getTestIdProps('tutkinnonOsienKuvausSection')}
+            />
+          )}
+
+          {[
+            ...TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
+            KOULUTUSTYYPPI.LUKIOKOULUTUS,
+          ].includes(koulutustyyppi) && (
+            <FormCollapse
+              section="description"
+              header={t('koulutuslomake.koulutuksenKuvaus')}
+              Component={EPerusteKuvausSection}
+              languages={languageTabs}
+              disabled={onlyTarjoajaRights}
+              koulutustyyppi={koulutustyyppi}
+              koulutuskoodi={koulutuskoodi}
+            />
+          )}
+          {isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi) && (
+            <FormCollapse
+              section="description"
+              header={t('koulutuslomake.koulutuksenKuvaus')}
+              Component={KuvausFieldsSection}
+              languages={languageTabs}
+              disabled={onlyTarjoajaRights}
+              koulutustyyppi={koulutustyyppi}
+              koulutuskoodi={koulutuskoodi}
+            />
+          )}
+
+          <FormCollapse
+            section="lisatiedot"
+            header={t('koulutuslomake.koulutuksenLisatiedot')}
+            Component={LisatiedotSection}
             languages={languageTabs}
             disabled={onlyTarjoajaRights}
-            koulutustyyppi={koulutustyyppi}
-            koulutuskoodi={koulutuskoodi}
           />
-        )}
 
-      {koulutustyyppi === KOULUTUSTYYPPI.OSAAMISALA && (
-        <FormCollapse
-          section="osaamisala"
-          header={t('koulutuslomake.valitseOsaamisala')}
-          Component={OsaamisalaSection}
-          languages={languageTabs}
-          disabled={onlyTarjoajaRights}
-          koulutustyyppi={koulutustyyppi}
-        />
-      )}
+          <FormCollapse
+            section="soraKuvaus"
+            header={t('yleiset.soraKuvaus')}
+            Component={SoraKuvausSection}
+            organisaatioOid={organisaatioOid}
+            languages={languageTabs}
+          />
 
-      {koulutustyyppi === KOULUTUSTYYPPI.TUTKINNON_OSA && (
-        <FormCollapse
-          section="tutkinnonosat"
-          header={t('koulutuslomake.tutkinnonOsat')}
-          Component={TutkinnonOsatSection}
-          name={'tutkinnonosat.osat'}
-          languages={languageTabs}
-          disabled={onlyTarjoajaRights}
-          koulutustyyppi={koulutustyyppi}
-        />
-      )}
+          <FormCollapse
+            section="teemakuva"
+            header={t('koulutuslomake.koulutuksenTeemakuva')}
+            Component={TeemakuvaSection}
+            disabled={onlyTarjoajaRights}
+          />
 
-      {koulutustyyppi === KOULUTUSTYYPPI.OSAAMISALA && (
-        <FormCollapse
-          section="osaamisalanKuvaus"
-          header={t('koulutuslomake.osaamisalanKuvaus')}
-          Component={OsaamisalanKuvausSection}
-          name={'osaamisala.osaamisala'}
-          languages={languageTabs}
-          disabled={onlyTarjoajaRights}
-          koulutustyyppi={koulutustyyppi}
-        />
-      )}
+          {!isNewOphKoulutus && (
+            <FormCollapse
+              section="tarjoajat"
+              header={t('koulutuslomake.koulutuksenJarjestaja')}
+              Component={JarjestajaSection}
+              organisaatioOid={organisaatioOid}
+              koulutus={koulutusProp}
+              disableTarjoajaHierarkia={isExistingOphKoulutus}
+            />
+          )}
 
-      {koulutustyyppi === KOULUTUSTYYPPI.TUTKINNON_OSA && (
-        <FormCollapse
-          section="tutkinnonosat"
-          header={t('koulutuslomake.koulutuksenNimi')}
-          Component={TutkinnonOsaKoulutusNimiSection}
-          languages={languageTabs}
-          disabled={onlyTarjoajaRights}
-          koulutustyyppi={koulutustyyppi}
-          {...getTestIdProps('nimiSection')}
-        />
-      )}
+          <FormCollapse
+            section="julkinen"
+            header={t('koulutuslomake.nakyminenMuilleToimijoille')}
+            disabled={onlyTarjoajaRights}
+            Component={JulkisuusSection}
+            entity={ENTITY.KOULUTUS}
+            hidden={!koulutustyyppi}
+          />
 
-      {koulutustyyppi === KOULUTUSTYYPPI.TUTKINNON_OSA && (
-        <FormCollapse
-          section="tutkinnonosat"
-          header={t('koulutuslomake.tutkinnonOsienKuvaus')}
-          Component={TutkinnonOsienKuvausSection}
-          languages={languageTabs}
-          disabled={onlyTarjoajaRights}
-          koulutustyyppi={koulutustyyppi}
-          {...getTestIdProps('tutkinnonOsienKuvausSection')}
-        />
-      )}
+          <FormCollapse
+            section="tila"
+            header={t('koulutuslomake.koulutuksenTila')}
+            Component={JulkaisutilaField}
+            disabled={onlyTarjoajaRights}
+            showArkistoitu={!isNewKoulutus}
+          />
 
-      {[
-        ...TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
-        KOULUTUSTYYPPI.LUKIOKOULUTUS,
-      ].includes(koulutustyyppi) && (
-        <FormCollapse
-          section="description"
-          header={t('koulutuslomake.koulutuksenKuvaus')}
-          Component={EPerusteKuvausSection}
-          languages={languageTabs}
-          disabled={onlyTarjoajaRights}
-          koulutustyyppi={koulutustyyppi}
-          koulutuskoodi={koulutuskoodi}
-        />
-      )}
-      {isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi) && (
-        <FormCollapse
-          section="description"
-          header={t('koulutuslomake.koulutuksenKuvaus')}
-          Component={KuvausFieldsSection}
-          languages={languageTabs}
-          disabled={onlyTarjoajaRights}
-          koulutustyyppi={koulutustyyppi}
-          koulutuskoodi={koulutuskoodi}
-        />
-      )}
-
-      <FormCollapse
-        section="lisatiedot"
-        header={t('koulutuslomake.koulutuksenLisatiedot')}
-        Component={LisatiedotSection}
-        languages={languageTabs}
-        disabled={onlyTarjoajaRights}
-      />
-
-      <FormCollapse
-        section="soraKuvaus"
-        header={t('yleiset.soraKuvaus')}
-        Component={SoraKuvausSection}
-        organisaatioOid={organisaatioOid}
-        languages={languageTabs}
-      />
-
-      <FormCollapse
-        section="teemakuva"
-        header={t('koulutuslomake.koulutuksenTeemakuva')}
-        Component={TeemakuvaSection}
-        disabled={onlyTarjoajaRights}
-      />
-
-      {!isNewOphKoulutus && (
-        <FormCollapse
-          section="tarjoajat"
-          header={t('koulutuslomake.koulutuksenJarjestaja')}
-          Component={JarjestajaSection}
-          organisaatioOid={organisaatioOid}
-          koulutus={koulutusProp}
-          disableTarjoajaHierarkia={isExistingOphKoulutus}
-        />
-      )}
-
-      <FormCollapse
-        section="julkinen"
-        header={t('koulutuslomake.nakyminenMuilleToimijoille')}
-        disabled={onlyTarjoajaRights}
-        Component={JulkisuusSection}
-        entity={ENTITY.KOULUTUS}
-        hidden={!koulutustyyppi}
-      />
-
-      <FormCollapse
-        section="tila"
-        header={t('koulutuslomake.koulutuksenTila')}
-        Component={JulkaisutilaField}
-        disabled={onlyTarjoajaRights}
-        showArkistoitu={!isNewKoulutus}
-      />
-
-      {_fp.isFunction(onAttachToteutus) && (
-        <FormCollapse
-          header={t('koulutuslomake.koulutukseenLiitetytToteutukset')}
-          id="koulutukseen-liitetetyt-toteutukset"
-          actions={
-            <Flex justifyCenter>
-              <Button
-                disabled={onlyTarjoajaRights}
-                color="primary"
-                onClick={onAttachToteutus}
-                type="button"
-              >
-                {t('koulutuslomake.liitaToteutus')}
-              </Button>
-            </Flex>
-          }
-          Component={ToteutuksetSection}
-          koulutus={koulutusProp}
-          organisaatioOid={organisaatioOid}
-          disabled={onlyTarjoajaRights}
-        />
+          {_fp.isFunction(onAttachToteutus) && (
+            <FormCollapse
+              header={t('koulutuslomake.koulutukseenLiitetytToteutukset')}
+              id="koulutukseen-liitetetyt-toteutukset"
+              actions={
+                <Flex justifyCenter>
+                  <Button
+                    disabled={onlyTarjoajaRights}
+                    color="primary"
+                    onClick={onAttachToteutus}
+                    type="button"
+                  >
+                    {t('koulutuslomake.liitaToteutus')}
+                  </Button>
+                </Flex>
+              }
+              Component={ToteutuksetSection}
+              koulutus={koulutusProp}
+              organisaatioOid={organisaatioOid}
+              disabled={onlyTarjoajaRights}
+            />
+          )}
+        </>
       )}
     </FormCollapseGroup>
   );

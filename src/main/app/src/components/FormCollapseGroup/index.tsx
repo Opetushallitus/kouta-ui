@@ -4,21 +4,40 @@ import { produce } from 'immer';
 import _ from 'lodash';
 
 import { FormCollapseProps } from '#/src/components/FormCollapse';
+import { FIELD_ERROR_CLASSNAME } from '#/src/constants';
 import { useFormConfig, useForm } from '#/src/hooks/form';
 import scrollElementIntoView from '#/src/utils/scrollElementIntoView';
 
+const pushIfVisible = ({ child, configured, config }, acc) => {
+  const section = _.get(child, 'props.section');
+  if (
+    !child ||
+    (configured && section && !_.get(config, ['sections', section]))
+  ) {
+    return;
+  }
+  acc.push(child);
+};
+
+type FormCollapseList = Array<React.ReactElement<FormCollapseProps>>;
+
 const getVisibleChildren = (children, config, configured) => {
-  return React.Children.toArray(children).filter(c => {
-    const section = _.get(c, 'props.section');
+  return React.Children.toArray(children).reduce(
+    (acc: FormCollapseList, child: React.ReactNode) => {
+      const res: FormCollapseList = [];
 
-    if (!c) {
-      return false;
-    } else if (configured && section && !_.get(config, ['sections', section])) {
-      return false;
-    }
+      if (child?.type === React.Fragment) {
+        for (const subchild of React.Children.toArray(child?.props?.children)) {
+          pushIfVisible({ child: subchild, configured, config }, res);
+        }
+      } else {
+        pushIfVisible({ child, configured, config }, res);
+      }
 
-    return true;
-  }) as Array<React.ReactElement<FormCollapseProps>>;
+      return [...acc, ...res];
+    },
+    []
+  ) as FormCollapseList;
 };
 
 const getFormCollapseId = id => `FormCollapse_${id}`;
@@ -86,7 +105,7 @@ const FormCollapseGroup = ({
       );
       const firstError = document.querySelector(`.${FIELD_ERROR_CLASSNAME}`);
       if (firstError) {
-        scrollElementIntoView(firstError);
+        scrollElementIntoView(firstError, 200);
       }
       setErrorsNeedAttention(false);
     }

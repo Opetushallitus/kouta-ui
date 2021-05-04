@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { useSpring, animated } from 'react-spring';
 import styled from 'styled-components';
 
 import Button from '#/src/components/Button';

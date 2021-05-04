@@ -50,7 +50,7 @@ const getEPerusteetOptions = (ePerusteet, language) =>
     value: id,
   }));
 
-const EPerusteField = ({ isLoading, ...props }) => {
+const EPerusteField = ({ isLoading, disabled, ...props }) => {
   const { ePerusteet, language } = props;
   const { t } = useTranslation();
   const ePerusteOptions = useMemo(
@@ -63,7 +63,9 @@ const EPerusteField = ({ isLoading, ...props }) => {
       component={FormFieldSelect}
       label={t('koulutuslomake.valitseKaytettavaEperuste')}
       options={ePerusteOptions}
-      disabled={isLoading || _.isNil(ePerusteet) || _.isEmpty(ePerusteet)}
+      disabled={
+        disabled || isLoading || _.isNil(ePerusteet) || _.isEmpty(ePerusteet)
+      }
       {...props}
     />
   );
@@ -75,6 +77,7 @@ export const ValitseEPerusteBox = ({
   language,
   selectedKoulutus,
   koulutusIsLoading = false,
+  disabled,
 }) => {
   const { t } = useTranslation();
   const apiUrls = useUrls();
@@ -113,6 +116,7 @@ export const ValitseEPerusteBox = ({
           name={fieldName}
           ePerusteet={ePerusteet}
           language={language}
+          disabled={disabled}
         />
       </Box>
       {koulutusIsLoading ? (

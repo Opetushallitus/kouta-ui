@@ -44,7 +44,7 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
   const osiot = values?.lisatiedot?.osiot ?? [];
   const osaamisala = values?.osaamisala;
 
-  const soraKuvausId = values?.soraKuvaus?.value ?? null;
+  const sorakuvausId = values?.soraKuvaus?.value ?? null;
 
   return {
     johtaaTutkintoon: TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT.includes(
@@ -73,7 +73,7 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
       values?.information?.eperuste?.value || osaamisala?.eperuste?.value
     ),
     teemakuva: values?.teemakuva,
-    soraKuvausId,
+    sorakuvausId,
     metadata: {
       tutkinnonOsat: _fp.reduce(
         (

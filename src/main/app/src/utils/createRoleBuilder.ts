@@ -60,7 +60,7 @@ const createRoleLookup = roles => {
 };
 
 class RoleBuilder {
-  constructor({ roles = [], roleLookup = undefined, result = true } = {}) {
+  constructor({ roles = [], roleLookup, result = true } = {}) {
     this.currentResult = result;
     this.roleLookup = roleLookup ? roleLookup : createRoleLookup(roles);
   }
@@ -78,24 +78,17 @@ class RoleBuilder {
   }
 
   hasOrganisaatioRole(role, organisaatioOid) {
-    return (
-      this.roleLookup.hasOwnProperty(organisaatioOid) &&
-      this.roleLookup[organisaatioOid].hasOwnProperty(role)
-    );
+    return Boolean(this.roleLookup?.[organisaatioOid]?.[role]);
   }
 
   hasRead(role, organisaatio) {
     return this.clone(
-      Boolean(
-        resolveOidPath(organisaatio).find(oid => {
-          return (
-            this.hasOrganisaatioRole(OPH_PAAKAYTTAJA_ROLE, oid) ||
-            READ_ROLES.map(r =>
-              this.hasOrganisaatioRole(`${role}_${r}`, oid)
-            ).some(Boolean)
-          );
-        })
-      )
+      resolveOidPath(organisaatio).some(oid => {
+        return (
+          this.hasOrganisaatioRole(OPH_PAAKAYTTAJA_ROLE, oid) ||
+          READ_ROLES.some(r => this.hasOrganisaatioRole(`${role}_${r}`, oid))
+        );
+      })
     );
   }
 
@@ -117,16 +110,12 @@ class RoleBuilder {
 
   hasUpdate(role, organisaatio) {
     return this.clone(
-      Boolean(
-        resolveOidPath(organisaatio).find(oid => {
-          return (
-            this.hasOrganisaatioRole(OPH_PAAKAYTTAJA_ROLE, oid) ||
-            UPDATE_ROLES.map(r =>
-              this.hasOrganisaatioRole(`${role}_${r}`, oid)
-            ).some(Boolean)
-          );
-        })
-      )
+      resolveOidPath(organisaatio).some(oid => {
+        return (
+          this.hasOrganisaatioRole(OPH_PAAKAYTTAJA_ROLE, oid) ||
+          UPDATE_ROLES.some(r => this.hasOrganisaatioRole(`${role}_${r}`, oid))
+        );
+      })
     );
   }
 
@@ -148,16 +137,12 @@ class RoleBuilder {
 
   hasCreate(role, organisaatio) {
     return this.clone(
-      Boolean(
-        resolveOidPath(organisaatio).find(oid => {
-          return (
-            this.hasOrganisaatioRole(OPH_PAAKAYTTAJA_ROLE, oid) ||
-            CREATE_ROLES.map(r =>
-              this.hasOrganisaatioRole(`${role}_${r}`, oid)
-            ).some(Boolean)
-          );
-        })
-      )
+      resolveOidPath(organisaatio).some(oid => {
+        return (
+          this.hasOrganisaatioRole(OPH_PAAKAYTTAJA_ROLE, oid) ||
+          CREATE_ROLES.some(r => this.hasOrganisaatioRole(`${role}_${r}`, oid))
+        );
+      })
     );
   }
 

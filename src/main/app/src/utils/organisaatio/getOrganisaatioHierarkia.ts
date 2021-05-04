@@ -2,16 +2,16 @@ import _ from 'lodash';
 import queryString from 'query-string';
 
 const getOrganisaatioHierarkia = async ({
-  searchString = '',
+  searchString,
+  oids,
   aktiiviset = true,
   suunnitellut = true,
   lakkautetut = false,
-  oids,
   apiUrls,
   httpClient,
 }) => {
   const params = {
-    searchStr: searchString,
+    ...(searchString ? { searchStr: searchString } : {}),
     aktiiviset: aktiiviset ? 'true' : 'false',
     suunnitellut: suunnitellut ? 'true' : 'false',
     lakkautetut: lakkautetut ? 'true' : 'false',

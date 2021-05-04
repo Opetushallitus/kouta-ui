@@ -59,7 +59,7 @@ export const OppilaitosPage = ({
   const canUpdate = useCurrentUserHasRole(
     ENTITY.OPPILAITOS,
     CRUD_ROLES.UPDATE,
-    oppilaitos?.organisaatioOid
+    organisaatioOid
   );
 
   const canCreate = useCurrentUserHasRole(
@@ -68,7 +68,7 @@ export const OppilaitosPage = ({
     organisaatioOid
   );
 
-  const readOnly = oppilaitos ? !canUpdate : !canCreate;
+  const readOnly = formMode === FormMode.EDIT ? !canUpdate : !canCreate;
 
   const config = useMemo(() => ({ noFieldConfigs: true, readOnly }), [
     readOnly,

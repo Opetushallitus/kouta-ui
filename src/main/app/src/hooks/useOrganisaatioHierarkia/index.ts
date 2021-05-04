@@ -1,4 +1,7 @@
-import useApiAsync from '#/src/hooks/useApiAsync';
+import { useMemo } from 'react';
+
+import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
+import { useApiQuery } from '#/src/hooks/useApiQuery';
 import filterTree from '#/src/utils/filterTree';
 import getOrganisaatioHierarkiaByOid from '#/src/utils/organisaatio/getOrganisaatioHierarkiaByOid';
 
@@ -13,14 +16,18 @@ export const useOrganisaatioHierarkia = (
   oid: string,
   { skipParents = false, filter }: UseOrganisaatioHierarkiaOptions = {}
 ) => {
-  const { data, ...rest } = useApiAsync({
-    promiseFn: getOrganisaatioHierarkiaByOid,
-    oid,
-    skipParents,
-    watch: oid,
-  });
+  const { data, ...rest } = useApiQuery(
+    'getOrganisaatioHierarkiaByOid',
+    getOrganisaatioHierarkiaByOid,
+    {
+      promiseFn: getOrganisaatioHierarkiaByOid,
+      oid,
+      skipParents,
+    },
+    { ...LONG_CACHE_QUERY_OPTIONS, enabled: Boolean(oid) }
+  );
 
-  const hierarkia = filterTree(data, filter);
+  const hierarkia = useMemo(() => filterTree(data, filter), [data, filter]);
 
   return { hierarkia, ...rest };
 };

@@ -38,7 +38,7 @@ import {
 import OrganisaatioTreeList from './OrganisaatioTreeList';
 import { PikavalinnatCollapse } from './PikavalinnatCollapse';
 import { SelectedOrganisaatioBox } from './SelectedOrganisaatioBox';
-import useOrganisaatioHierarkia from './useOrganisaatioHierarkia';
+import { useReadableOrganisaatioHierarkia } from './useReadableOrganisaatioHierarkia';
 
 const CloseIcon = styled(Icon).attrs({ type: 'close', role: 'button' })`
   color: ${getThemeProp('palette.text.primary')};
@@ -148,7 +148,10 @@ const DrawerContent = ({
     500
   );
 
-  const { hierarkia, isLoading: loadingHierarkia } = useOrganisaatioHierarkia({
+  const {
+    hierarkia,
+    isLoading: loadingHierarkia,
+  } = useReadableOrganisaatioHierarkia({
     name: debounceNameFilter,
     nameSearchEnabled,
   });

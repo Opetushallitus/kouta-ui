@@ -221,19 +221,19 @@ export const KoulutusForm = ({
       )}
 
       <FormCollapse
-        section="soraKuvaus"
-        header={t('yleiset.soraKuvaus')}
-        Component={SoraKuvausSection}
-        organisaatioOid={organisaatioOid}
-        languages={languageTabs}
-      />
-
-      <FormCollapse
         section="lisatiedot"
         header={t('koulutuslomake.koulutuksenLisatiedot')}
         Component={LisatiedotSection}
         languages={languageTabs}
         disabled={onlyTarjoajaRights}
+      />
+
+      <FormCollapse
+        section="soraKuvaus"
+        header={t('yleiset.soraKuvaus')}
+        Component={SoraKuvausSection}
+        organisaatioOid={organisaatioOid}
+        languages={languageTabs}
       />
 
       <FormCollapse

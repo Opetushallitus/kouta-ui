@@ -5,6 +5,7 @@ import _ from 'lodash';
 import { simpleMapProps } from '#/src/components/formFields';
 import FormHelperTextMulti from '#/src/components/FormHelperTextMulti';
 import { FormControl, FormLabel } from '#/src/components/virkailija';
+import { FIELD_ERROR_CLASSNAME } from '#/src/constants';
 import {
   useFieldConfig,
   useFieldIsRequired,
@@ -41,7 +42,7 @@ export const createComponent = (Component, mapProps = simpleMapProps) => {
     const required = useFieldIsRequired(fieldConfig);
 
     return noFieldConfigs || fieldConfig || !configurable ? (
-      <div className={isError ? 'field-error' : ''}>
+      <div className={isError ? FIELD_ERROR_CLASSNAME : ''}>
         <FormControl
           error={isError}
           helperText={

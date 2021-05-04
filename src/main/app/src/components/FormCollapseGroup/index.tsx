@@ -84,7 +84,7 @@ const FormCollapseGroup = ({
       setCollapsesOpen(collapses =>
         sectionErrors.map((error, i) => error || collapses[i])
       );
-      const firstError = document.querySelector('.field-error');
+      const firstError = document.querySelector(`.${FIELD_ERROR_CLASSNAME}`);
       if (firstError) {
         scrollElementIntoView(firstError);
       }

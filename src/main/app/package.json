@@ -60,7 +60,6 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-form": "^8.3.7",
     "redux-persist": "^6.0.0",
-    "redux-thunk": "^2.3.0",
     "striptags": "^3.1.1",
     "styled-components": "^5.2.1",
     "styled-css-grid": "^1.2.1",

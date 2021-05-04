@@ -5,7 +5,6 @@ import { Field } from 'redux-form';
 import { FormFieldImageInput } from '#/src/components/formFields';
 import {
   LOGO_ACCEPTED_FORMATS,
-  LOGO_MAX_DIMENSIONS,
   LOGO_MAX_SIZE,
   LOGO_NO_DIMENSION_CHECK_FOR_FORMATS,
 } from '#/src/constants';
@@ -29,7 +28,6 @@ export const LogoSection = ({ name, label = '' }) => {
       component={FormFieldImageInput}
       upload={upload}
       maxSize={LOGO_MAX_SIZE}
-      maxDimensions={LOGO_MAX_DIMENSIONS}
       acceptedFileFormats={LOGO_ACCEPTED_FORMATS}
       noDimensionCheckForFormats={LOGO_NO_DIMENSION_CHECK_FOR_FORMATS}
       dropzoneStyle={{ backgroundSize: 'contain' }}

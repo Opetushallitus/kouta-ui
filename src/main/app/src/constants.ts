@@ -184,12 +184,11 @@ export const ERROR_INTERNET_DISCONNECTED = 'ERROR_INTERNET_DISCONNECTED';
 export const ERROR_KAYTTOOIKEUS_SERVICE = 'ERROR_KAYTTOOIKEUS_SERVICE';
 
 export const TEEMAKUVA_ACCEPTED_FORMATS = ['.jpg', '.jpeg', '.png'];
-export const TEEMAKUVA_MAX_SIZE = 2000000;
+export const TEEMAKUVA_MAX_SIZE = 2 * 1000 * 1000;
 export const TEEMAKUVA_MIN_DIMENSIONS = { width: 1260, height: 400 };
 
 export const LOGO_ACCEPTED_FORMATS = ['.jpg', '.jpeg', '.png', '.svg'];
-export const LOGO_MAX_DIMENSIONS = { width: 150, height: 120 };
-export const LOGO_MAX_SIZE = 100000;
+export const LOGO_MAX_SIZE = 100 * 1000;
 export const LOGO_NO_DIMENSION_CHECK_FOR_FORMATS = ['.svg'];
 
 export const EPERUSTE_STATUS_TULEVA = 'tuleva';

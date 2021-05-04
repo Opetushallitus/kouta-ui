@@ -35,7 +35,7 @@ exports[`createKoulutus > should be able to create ammatillinen koulutus #0`] =
     "fi": "Kaivosalan perustutkinto"
   },
   "organisaatioOid": "1.1.1.1.1.1",
-  "soraKuvausId": "1",
+  "sorakuvausId": "1",
   "tarjoajat": [
     "1.2.1.1.1.1"
   ],
@@ -79,7 +79,7 @@ exports[`createKoulutus > should be able to create ammatillinen osaamisala koulu
     "fi": "Kaivostyön osaamisala"
   },
   "organisaatioOid": "1.1.1.1.1.1",
-  "soraKuvausId": "1",
+  "sorakuvausId": "1",
   "tarjoajat": [
     "1.2.1.1.1.1"
   ],
@@ -134,7 +134,7 @@ exports[`createKoulutus > should be able to create ammatillinen tutkinnon osa ko
     "fi": "Louhintaporaus"
   },
   "organisaatioOid": "1.1.1.1.1.1",
-  "soraKuvausId": "1",
+  "sorakuvausId": "1",
   "tarjoajat": [
     "1.2.1.1.1.1"
   ],
@@ -186,7 +186,7 @@ exports[`createKoulutus > should be able to create AMK-koulutus #0`] =
     "fi": "Tiedot nimi"
   },
   "organisaatioOid": "1.1.1.1.1.1",
-  "soraKuvausId": "1",
+  "sorakuvausId": "1",
   "tarjoajat": [
     "1.2.1.1.1.1"
   ],
@@ -275,7 +275,7 @@ exports[`editKoulutus > should be able to edit ammatillinen koulutus #0`] =
   },
   "oid": "1.2.3.4.5.6",
   "organisaatioOid": "1.1.1.1.1.1",
-  "soraKuvausId": null,
+  "sorakuvausId": null,
   "tarjoajat": [
     "1.1.1.1.1.1",
     "1.2.1.1.1.1"
@@ -330,7 +330,7 @@ exports[`editKoulutus > should be able to edit AMK-koulutus #0`] =
   },
   "oid": "1.2.3.4.5.6",
   "organisaatioOid": "1.1.1.1.1.1",
-  "soraKuvausId": null,
+  "sorakuvausId": null,
   "tarjoajat": [
     "1.1.1.1.1.1",
     "1.2.1.1.1.1"

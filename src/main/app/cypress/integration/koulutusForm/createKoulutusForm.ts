@@ -119,9 +119,9 @@ export const createKoulutusForm = () => {
       jatka();
     });
 
-    fillSoraKuvausSection();
-
     fillLisatiedotSection();
+
+    fillSoraKuvausSection();
 
     fillTeemakuvaSection();
 
@@ -180,9 +180,9 @@ export const createKoulutusForm = () => {
       jatka();
     });
 
-    fillSoraKuvausSection();
-
     fillLisatiedotSection();
+
+    fillSoraKuvausSection();
 
     fillTeemakuvaSection();
 
@@ -268,9 +268,9 @@ export const createKoulutusForm = () => {
       jatka();
     });
 
-    fillSoraKuvausSection();
-
     fillLisatiedotSection();
+
+    fillSoraKuvausSection();
 
     fillTeemakuvaSection();
 
@@ -341,9 +341,9 @@ export const createKoulutusForm = () => {
       jatka();
     });
 
-    fillSoraKuvausSection();
-
     fillLisatiedotSection();
+
+    fillSoraKuvausSection();
 
     fillTeemakuvaSection();
 
@@ -389,9 +389,9 @@ export const createKoulutusForm = () => {
       jatka();
     });
 
-    fillSoraKuvausSection();
-
     fillLisatiedotSection();
+
+    fillSoraKuvausSection();
 
     fillTeemakuvaSection();
 

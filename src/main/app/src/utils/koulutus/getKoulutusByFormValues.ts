@@ -5,7 +5,11 @@ import {
   KOULUTUSTYYPPI,
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
 } from '#/src/constants';
-import { KoulutusFormValues } from '#/src/types/koulutusTypes';
+import {
+  InformationSectionValues,
+  KoulutusFormValues,
+  TutkinnonOsa,
+} from '#/src/types/koulutusTypes';
 import { maybeParseNumber, safeArray } from '#/src/utils';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
@@ -15,10 +19,7 @@ const osaamisalaKoodiToKoodiUri = value =>
 function getKoulutuksetKoodiUri(
   osaamisala,
   koulutustyyppi: KOULUTUSTYYPPI,
-  information?: {
-    koulutus: { value: string };
-    korkeakoulutukset: Array<{ value: string }>;
-  }
+  information?: InformationSectionValues
 ): Array<string> {
   if (isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi)) {
     return _fp.map(koodi => koodi.value, information?.korkeakoulutukset);
@@ -82,7 +83,7 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
             eperuste: { value: ePerusteId },
             koulutus: { value: koulutusKoodiUri },
             osat,
-          }
+          }: TutkinnonOsa
         ) => [
           ...resultOsat,
           ..._fp.map(({ value, viite }) => ({
@@ -94,7 +95,7 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
         ],
         [] as Array<{
           ePerusteId: number;
-          koulutusKoodiUri: string;
+          koulutusKoodiUri?: string;
           tutkinnonosaId: number;
           tutkinnonosaViite: number;
         }>

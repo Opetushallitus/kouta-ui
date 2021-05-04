@@ -3,31 +3,36 @@ import { JULKAISUTILA, KOULUTUSTYYPPI } from '#/src/constants';
 
 export type KoulutusModel = any;
 
+export type TutkinnonOsa = {
+  koulutus: SelectOption;
+  eperuste: SelectOption;
+  osat: Array<{ value: string; viite: string }>;
+};
+
+export type InformationSectionValues = {
+  nimi: TranslatedField<string>;
+  eperuste: SelectOption;
+  koulutus: SelectOption;
+  korkeakoulutukset: SelectOptions;
+  opintojenLaajuus: SelectOption;
+  tutkintonimike: SelectOptions;
+  koulutusalat: SelectOptions;
+};
+
 export type KoulutusFormValues = {
   koulutustyyppi: KOULUTUSTYYPPI;
   kieliversiot: Array<LanguageCode>;
   muokkaaja?: string;
   tila: JULKAISUTILA;
-  information: {
-    nimi: TranslatedField<string>;
-    eperuste: SelectOption;
-    koulutus: SelectOption;
-    korkeakoulutukset: Array<SelectOption>;
-    opintojenLaajuus: SelectOption;
-    tutkintonimike: Array<SelectOption>;
-    koulutusalat: Array<SelectOption>;
-  };
+  pohja: any;
+  information: InformationSectionValues;
   lisatiedot: {
-    osiot: Array<{ value: string }>;
+    osiot: SelectOptions;
     osioKuvaukset: Record<string, any>;
   };
   tutkinnonosat: {
     nimi: TranslatedField<string>;
-    osat: Array<{
-      koulutus: SelectOption;
-      eperuste: SelectOption;
-      osat: Array<{ value: string; viite: string }>;
-    }>;
+    osat: Array<TutkinnonOsa>;
   };
   description: {
     kuvaus: TranslatedField<EditorState>;

@@ -183,6 +183,10 @@ export const maybeParseNumber = value => {
 
 export const toSelectValue = value => (_.isNil(value) ? undefined : { value });
 
+export const toSelectValueList = _fp.map((value: string) => ({
+  value,
+}));
+
 // Returns field name without language part
 export const getFieldName = (name: string) =>
   name.match(`^(.+?)(\\.(${LANGUAGES.join('|')}))?$`)?.[1];

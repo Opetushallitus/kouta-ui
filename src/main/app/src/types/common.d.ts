@@ -6,8 +6,6 @@ type FormDateRange = { alkaa: FormDate; paattyy: FormDate };
 
 type TranslatedField<T> = Partial<Record<LanguageCode, T>>;
 
-type SelectOptions = Array<{ value: string; label: string }>;
-
 type Koodi = {
   koodiUri: string;
   versio: number;
@@ -24,6 +22,8 @@ type Yhteystieto = {
 
 type SoraKuvausModel = any;
 
-type SelectOption<T = string> = { label?: string; value?: T };
+type SelectOption<T = string | undefined> = { label?: string; value: T };
+
+type SelectOptions = Array<SelectOption<string>>;
 
 type PohjaValinta = { tapa: string; valinta: string };

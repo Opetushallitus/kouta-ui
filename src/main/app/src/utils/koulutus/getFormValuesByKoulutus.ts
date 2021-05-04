@@ -19,7 +19,7 @@ function getKoulutusKoodiUrit(
 ): { koulutusKoodiUri?: string; korkeakoulutusKoodiUrit: Array<string> } {
   const isKorkeakoulu = isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi);
 
-  const firstElement = koulutusKoodiUrit?.[0] ?? undefined;
+  const firstElement = koulutusKoodiUrit?.[0];
 
   return {
     koulutusKoodiUri: isKorkeakoulu ? undefined : firstElement,

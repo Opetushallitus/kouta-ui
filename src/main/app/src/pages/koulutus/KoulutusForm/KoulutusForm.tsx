@@ -30,10 +30,10 @@ import getKoulutukset from '#/src/utils/koulutus/getKoulutukset';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 import isOphOrganisaatio from '#/src/utils/organisaatio/isOphOrganisaatio';
 
+import { EPerusteKuvausSection } from './EPerusteKuvausSection';
 import { JarjestajaSection } from './JarjestajaSection';
 import { KoulutustyyppiSection } from './KoulutustyyppiSection';
-import { KuvausFields } from './KuvausSection';
-import { EPerusteKuvausSection } from './KuvausSection/EPerusteKuvausSection';
+import { KuvausFieldsSection } from './KuvausFieldsSection';
 import { LisatiedotSection } from './LisatiedotSection';
 import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
 import { OsaamisalaSection } from './OsaamisalaSection';
@@ -212,7 +212,7 @@ export const KoulutusForm = ({
         <FormCollapse
           section="description"
           header={t('koulutuslomake.koulutuksenKuvaus')}
-          Component={KuvausFields}
+          Component={KuvausFieldsSection}
           languages={languageTabs}
           disabled={onlyTarjoajaRights}
           koulutustyyppi={koulutustyyppi}

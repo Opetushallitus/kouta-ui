@@ -7,7 +7,7 @@ import { FormFieldInput, FormFieldEditor } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 
-export const KuvausFields = ({ disabled, language, name }) => {
+export const KuvausFieldsSection = ({ disabled, language, name }) => {
   const { t } = useTranslation();
 
   return (

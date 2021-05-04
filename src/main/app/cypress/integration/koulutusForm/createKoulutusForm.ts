@@ -43,6 +43,14 @@ const fillTeemakuvaSection = () => {
   });
 };
 
+const fillSoraKuvausSection = () => {
+  getByTestId('soraKuvausSection').within(() => {
+    selectOption('Sora-kuvaus 1');
+
+    jatka();
+  });
+};
+
 const fillJarjestajaSection = () => {
   getByTestId('tarjoajatSection').within(() => {
     getByTestId('jarjestajatSelection').within(() => {
@@ -113,6 +121,8 @@ export const createKoulutusForm = () => {
 
     fillLisatiedotSection();
 
+    fillSoraKuvausSection();
+
     fillTeemakuvaSection();
 
     fillJarjestajaSection();
@@ -171,6 +181,8 @@ export const createKoulutusForm = () => {
     });
 
     fillLisatiedotSection();
+
+    fillSoraKuvausSection();
 
     fillTeemakuvaSection();
 
@@ -258,6 +270,8 @@ export const createKoulutusForm = () => {
 
     fillLisatiedotSection();
 
+    fillSoraKuvausSection();
+
     fillTeemakuvaSection();
 
     fillJarjestajaSection();
@@ -329,6 +343,8 @@ export const createKoulutusForm = () => {
 
     fillLisatiedotSection();
 
+    fillSoraKuvausSection();
+
     fillTeemakuvaSection();
 
     fillJarjestajaSection();
@@ -374,6 +390,8 @@ export const createKoulutusForm = () => {
     });
 
     fillLisatiedotSection();
+
+    fillSoraKuvausSection();
 
     fillTeemakuvaSection();
 

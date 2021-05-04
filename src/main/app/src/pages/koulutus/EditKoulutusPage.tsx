@@ -16,13 +16,15 @@ import { Spin } from '#/src/components/virkailija';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useUrls } from '#/src/contexts/UrlContext';
-import { useFieldValue, useEntityFormConfig } from '#/src/hooks/form';
+import { useFieldValue } from '#/src/hooks/form';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import getFormValuesByKoulutus from '#/src/utils/koulutus/getFormValuesByKoulutus';
 import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
 
 import { KoulutusFooter } from './KoulutusFooter';
-import KoulutusForm from './KoulutusForm';
+import { KoulutusForm } from './KoulutusForm';
+
+const FORM_NAME = 'koulutusForm';
 
 const EditKoulutusPage = props => {
   const {
@@ -47,17 +49,16 @@ const EditKoulutusPage = props => {
       );
   }, [history, koulutus, organisaatioOid]);
 
-  const FORM_NAME = 'koulutusForm';
-
-  const selectedKoulutustyyppi = koulutus?.koulutustyyppi;
-
   const canUpdate = useCurrentUserHasRole(
     ENTITY.KOULUTUS,
     CRUD_ROLES.UPDATE,
     koulutus?.organisaatioOid
   );
 
-  const config = useEntityFormConfig(ENTITY.KOULUTUS, selectedKoulutustyyppi);
+  const formConfig = useMemo(
+    () => ({ noFieldConfigs: true, readOnly: !canUpdate }),
+    [canUpdate]
+  );
 
   const isJulkinen = useFieldValue('julkinen', FORM_NAME);
 
@@ -68,7 +69,7 @@ const EditKoulutusPage = props => {
   ) : (
     <ReduxForm form={FORM_NAME} initialValues={initialValues}>
       <Title>{t('sivuTitlet.koulutuksenMuokkaus')}</Title>
-      <FormConfigContext.Provider value={{ ...config, readOnly: !canUpdate }}>
+      <FormConfigContext.Provider value={formConfig}>
         <FormPage
           readOnly={!canUpdate}
           header={
@@ -96,7 +97,6 @@ const EditKoulutusPage = props => {
           </RelationInfoContainer>
           {koulutus ? (
             <KoulutusForm
-              steps={false}
               isNewKoulutus={false}
               onAttachToteutus={onAttachToteutus}
               koulutus={koulutus}

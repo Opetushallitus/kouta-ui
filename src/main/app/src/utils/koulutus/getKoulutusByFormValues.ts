@@ -5,6 +5,11 @@ import {
   KOULUTUSTYYPPI,
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
 } from '#/src/constants';
+import {
+  InformationSectionValues,
+  KoulutusFormValues,
+  TutkinnonOsa,
+} from '#/src/types/koulutusTypes';
 import { maybeParseNumber, safeArray } from '#/src/utils';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
@@ -14,10 +19,7 @@ const osaamisalaKoodiToKoodiUri = value =>
 function getKoulutuksetKoodiUri(
   osaamisala,
   koulutustyyppi: KOULUTUSTYYPPI,
-  information?: {
-    koulutus: { value: string };
-    korkeakoulutukset: Array<{ value: string }>;
-  }
+  information?: InformationSectionValues
 ): Array<string> {
   if (isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi)) {
     return _fp.map(koodi => koodi.value, information?.korkeakoulutukset);
@@ -30,11 +32,12 @@ function getKoulutuksetKoodiUri(
   return safeArray(information?.koulutus?.value);
 }
 
-const getKoulutusByFormValues = values => {
+const getKoulutusByFormValues = (values: KoulutusFormValues) => {
   const { muokkaaja, tila, esikatselu = false } = values;
   const kielivalinta = values?.kieliversiot ?? [];
   const pickTranslations = _fp.pick(kielivalinta);
 
+  // FIXME: pohja.tarjoajat ei ole olemassa, eikä "Käytä pohjan järjestäjää"-ominaisuus toimi käytännössä lainkaan.
   const pohjanTarjoajat = values?.pohja?.tarjoajat;
   const kaytaPohjanJarjestajaa =
     values?.tarjoajat?.kaytaPohjanJarjestajaa ?? false;
@@ -42,6 +45,8 @@ const getKoulutusByFormValues = values => {
   const koulutustyyppi = values?.koulutustyyppi || null;
   const osiot = values?.lisatiedot?.osiot ?? [];
   const osaamisala = values?.osaamisala;
+
+  const sorakuvausId = values?.soraKuvaus?.value || null;
 
   return {
     johtaaTutkintoon: TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT.includes(
@@ -70,6 +75,7 @@ const getKoulutusByFormValues = values => {
       values?.information?.eperuste?.value || osaamisala?.eperuste?.value
     ),
     teemakuva: values?.teemakuva,
+    sorakuvausId,
     metadata: {
       tutkinnonOsat: _fp.reduce(
         (
@@ -78,7 +84,7 @@ const getKoulutusByFormValues = values => {
             eperuste: { value: ePerusteId },
             koulutus: { value: koulutusKoodiUri },
             osat,
-          }
+          }: TutkinnonOsa
         ) => [
           ...resultOsat,
           ..._fp.map(({ value, viite }) => ({
@@ -90,7 +96,7 @@ const getKoulutusByFormValues = values => {
         ],
         [] as Array<{
           ePerusteId: number;
-          koulutusKoodiUri: string;
+          koulutusKoodiUri?: string;
           tutkinnonosaId: number;
           tutkinnonosaViite: number;
         }>

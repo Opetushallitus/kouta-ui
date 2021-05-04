@@ -193,3 +193,9 @@ export const valintakokeetSection = {
     },
   },
 };
+
+export const validatePohja = eb =>
+  validateIf(
+    eb.getValues()?.pohja?.tapa === POHJAVALINTA.KOPIO,
+    validateExistence('pohja.valinta')
+  )(eb);

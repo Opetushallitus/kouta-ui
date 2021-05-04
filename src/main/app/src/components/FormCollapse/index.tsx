@@ -28,17 +28,19 @@ const LanguageTabsWrapper = styled.div`
   padding-left: ${({ theme }) => theme.spacing.unit * 3}px;
 `;
 
-const renderActions = ({ actions, onContinue, t }) => {
+const Actions = ({ actions, onContinue, t }) => {
   return actions ? (
     actions
   ) : _.isFunction(onContinue) ? (
-    <Button type="button" onClick={onContinue}>
-      {t('yleiset.jatka')}
-    </Button>
+    <Box display="flex" justifyContent="center">
+      <Button type="button" onClick={onContinue}>
+        {t('yleiset.jatka')}
+      </Button>
+    </Box>
   ) : null;
 };
 
-const renderHeader = ({
+const Header = ({
   header,
   index,
   languages,
@@ -89,6 +91,7 @@ export type FormCollapseProps = {
   isOpen?: boolean;
   onToggle?: () => void;
   Component: ComponentProps;
+  isLast?: boolean;
   [x: string]: any;
 };
 
@@ -97,6 +100,7 @@ export const FormCollapse = ({
   actions: actionsProp,
   index,
   header: headerProp,
+  key,
   id,
   defaultLanguage = 'fi',
   showLanguageTabs = false,
@@ -106,7 +110,7 @@ export const FormCollapse = ({
   isOpen = false,
   onToggle,
   Component,
-  hidden = false,
+  isLast,
   ...props
 }: FormCollapseProps) => {
   const { t } = useTranslation();
@@ -118,43 +122,40 @@ export const FormCollapse = ({
     }
   }, [languages]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const actions = renderActions({ actions: actionsProp, t, onContinue });
   const childProps = { ...props, language, languages, onContinue };
 
-  const header = renderHeader({
-    header: headerProp,
-    language,
-    languages,
-    onLanguageChange: setLanguage,
-    index,
-    collapseOpen: isOpen,
-  });
-
-  return hidden ? null : (
-    <Collapse
-      header={header}
-      footer={
-        actions && (
-          <Box display="flex" justifyContent="center">
-            {actions}
-          </Box>
-        )
-      }
-      active={active}
-      onToggle={onToggle}
-      open={isOpen}
-      toggleOnHeaderClick
-      {...(section ? getTestIdProps(`${section}Section`) : {})}
-      {...props}
-    >
-      {section ? (
-        <FormConfigSectionContext.Provider value={section}>
+  return (
+    <Box id={id} key={key} mb={isLast ? 0 : 4}>
+      <Collapse
+        header={
+          <Header
+            {...{
+              header: headerProp,
+              language,
+              languages,
+              onLanguageChange: setLanguage,
+              index,
+              collapseOpen: isOpen,
+            }}
+          />
+        }
+        footer={<Actions {...{ actions: actionsProp, t, onContinue }} />}
+        active={active}
+        onToggle={onToggle}
+        open={isOpen}
+        toggleOnHeaderClick
+        {...(section ? getTestIdProps(`${section}Section`) : {})}
+        {...props}
+      >
+        {section ? (
+          <FormConfigSectionContext.Provider value={section}>
+            <Component name={section} {...childProps} />
+          </FormConfigSectionContext.Provider>
+        ) : (
           <Component name={section} {...childProps} />
-        </FormConfigSectionContext.Provider>
-      ) : (
-        <Component name={section} {...childProps} />
-      )}
-    </Collapse>
+        )}
+      </Collapse>
+    </Box>
   );
 };
 

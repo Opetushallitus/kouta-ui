@@ -11,6 +11,7 @@ import Anchor from '#/src/components/Anchor';
 import { FormFieldSelect } from '#/src/components/formFields';
 import KoulutusField from '#/src/components/KoulutusField';
 import { Box, Typography, Spin } from '#/src/components/virkailija';
+import { KOULUTUSTYYPPI } from '#/src/constants';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useBoundFormActions, useIsDirty } from '#/src/hooks/form';
 import { useFieldValue } from '#/src/hooks/form';
@@ -63,6 +64,7 @@ const EPerusteField = ({ isLoading, ...props }) => {
       label={t('koulutuslomake.valitseKaytettavaEperuste')}
       options={ePerusteOptions}
       disabled={isLoading || _.isNil(ePerusteet) || _.isEmpty(ePerusteet)}
+      required
       {...props}
     />
   );
@@ -85,6 +87,7 @@ const TutkinnonOsatField = ({ isLoading, ...props }) => {
         isLoading || _.isNil(selectedPeruste) || _.isEmpty(selectedPeruste)
       }
       isMulti={true}
+      required
       {...props}
     />
   );
@@ -138,6 +141,7 @@ const TutkinnonOsaInfo = ({ ePerusteId, tutkinnonOsa, language }) => {
 
 const KoulutusInfo = ({
   koulutus,
+  koulutustyyppi,
   language = 'fi',
   ePeruste,
   isLoading,
@@ -278,30 +282,34 @@ const KoulutusInfo = ({
             </Grid>
           </>
         )}
-        {ePeruste?.tutkinnonosat && (
-          <Box
-            width={0.5}
-            mr={2}
-            mt={5}
-            mb={5}
-            {...getTestIdProps('tutkinnonOsatSelect')}
-          >
-            <TutkinnonOsatField
-              isLoading={isLoading}
-              name={`${name}.osat`}
-              selectedPeruste={ePeruste}
-              language={language}
-            />
-          </Box>
+        {koulutustyyppi === KOULUTUSTYYPPI.TUTKINNON_OSA && (
+          <>
+            {ePeruste?.tutkinnonosat && (
+              <Box
+                width={0.5}
+                mr={2}
+                mt={5}
+                mb={5}
+                {...getTestIdProps('tutkinnonOsatSelect')}
+              >
+                <TutkinnonOsatField
+                  isLoading={isLoading}
+                  name={`${name}.osat`}
+                  selectedPeruste={ePeruste}
+                  language={language}
+                />
+              </Box>
+            )}
+            {_.map(tutkinnonOsienKuvaukset, tutkinnonOsa => (
+              <TutkinnonOsaInfo
+                key={tutkinnonOsa?.id}
+                tutkinnonOsa={tutkinnonOsa}
+                language={language}
+                ePerusteId={ePeruste?.id}
+              />
+            ))}
+          </>
         )}
-        {_.map(tutkinnonOsienKuvaukset, tutkinnonOsa => (
-          <TutkinnonOsaInfo
-            key={tutkinnonOsa?.id}
-            tutkinnonOsa={tutkinnonOsa}
-            language={language}
-            ePerusteId={ePeruste?.id}
-          />
-        ))}
       </StyledInfoBox>
     )
   ) : null;
@@ -316,6 +324,8 @@ const KoulutuksenTiedotSection = ({
 }) => {
   const { t } = useTranslation();
   const koulutusFieldValue = koulutuskoodi?.value;
+
+  const koulutustyyppi = useFieldValue('koulutustyyppi');
 
   const { data: koulutus, isLoading } = useKoulutusByKoodi({
     koodiUri: koulutusFieldValue,
@@ -372,6 +382,7 @@ const KoulutuksenTiedotSection = ({
       <Box flexDirection="row" width={1} display="flex" mr={2}>
         <KoulutusInfo
           ePeruste={selectedPeruste}
+          koulutustyyppi={koulutustyyppi}
           koulutus={koulutus}
           language={language}
           isLoading={isLoading}

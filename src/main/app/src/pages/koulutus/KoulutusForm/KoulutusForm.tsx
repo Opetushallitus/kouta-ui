@@ -11,21 +11,29 @@ import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import JulkisuusSection from '#/src/components/JulkisuusSection';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
+import SoraKuvausSection from '#/src/components/SoraKuvausSection';
 import TeemakuvaSection from '#/src/components/TeemakuvaSection';
-import { ENTITY } from '#/src/constants';
+import {
+  ENTITY,
+  KOULUTUSTYYPPI,
+  TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
+} from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import {
   isSameKoulutustyyppiWithOrganisaatio,
   useOrganisaatio,
 } from '#/src/hooks/useOrganisaatio';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
+import { KoulutusModel } from '#/src/types/koulutusTypes';
 import { getTestIdProps } from '#/src/utils';
 import getKoulutukset from '#/src/utils/koulutus/getKoulutukset';
+import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 import isOphOrganisaatio from '#/src/utils/organisaatio/isOphOrganisaatio';
 
+import { EPerusteKuvausSection } from './EPerusteKuvausSection';
 import { JarjestajaSection } from './JarjestajaSection';
-import KoulutustyyppiSection from './KoulutustyyppiSection';
-import KuvausSection from './KuvausSection';
+import { KoulutustyyppiSection } from './KoulutustyyppiSection';
+import { KuvausFieldsSection } from './KuvausFieldsSection';
 import { LisatiedotSection } from './LisatiedotSection';
 import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
 import { OsaamisalaSection } from './OsaamisalaSection';
@@ -39,14 +47,23 @@ const isInHierarkia = org => hierarkia =>
   hierarkia.organisaatioOid === org.organisaatioOid ||
   _fp.head(hierarkia.children.filter(isInHierarkia(org)));
 
-const KoulutusForm = ({
+type KoulutusFormProps = {
+  organisaatioOid: string;
+  koulutus?: KoulutusModel;
+  isNewKoulutus?: boolean;
+  steps?: boolean;
+  onSelectBase?: (pohjavalinta: PohjaValinta) => void;
+  onAttachToteutus?: () => void;
+};
+
+export const KoulutusForm = ({
   organisaatioOid,
   steps = false,
   isNewKoulutus = false,
-  koulutus: koulutusProp = null,
-  onAttachToteutus = undefined,
-  onSelectBase = undefined,
-}) => {
+  koulutus: koulutusProp,
+  onAttachToteutus,
+  onSelectBase,
+}: KoulutusFormProps) => {
   const { t } = useTranslation();
 
   const koulutustyyppi = useFieldValue('koulutustyyppi');
@@ -68,22 +85,18 @@ const KoulutusForm = ({
     hierarkia &&
     !isOphOrganisaatio(organisaatioOid) &&
     !isInHierarkia(organisaatio)(hierarkia) &&
-    isSameKoulutustyyppiWithOrganisaatio(organisaatio, hierarkia)
-      ? 'disabled'
-      : null;
+    isSameKoulutustyyppiWithOrganisaatio(organisaatio, hierarkia);
 
   return (
-    <FormCollapseGroup enabled={steps} defaultOpen={!steps} configured>
-      {isNewKoulutus && (
-        <FormCollapse
-          section="koulutustyyppi"
-          header={t('yleiset.koulutustyyppi')}
-          scrollOnActive={false}
-          Component={KoulutustyyppiSection}
-          disabled={onlyTarjoajaRights}
-          organisaatioOid={organisaatioOid}
-        />
-      )}
+    <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
+      <FormCollapse
+        section="koulutustyyppi"
+        header={t('yleiset.koulutustyyppi')}
+        scrollOnActive={false}
+        Component={KoulutustyyppiSection}
+        disabled={!isNewKoulutus || onlyTarjoajaRights}
+        organisaatioOid={organisaatioOid}
+      />
       {_fp.isFunction(onSelectBase) && (
         <PohjaFormCollapse
           onSelectBase={onSelectBase}
@@ -96,161 +109,189 @@ const KoulutusForm = ({
         />
       )}
 
-      <FormCollapse
-        section="kieliversiot"
-        header={t('yleiset.kieliversiot')}
-        Component={KieliversiotFields}
-        disabled={onlyTarjoajaRights}
-        hidden={!koulutustyyppi}
-      />
+      {koulutustyyppi && (
+        <>
+          <FormCollapse
+            section="kieliversiot"
+            header={t('yleiset.kieliversiot')}
+            Component={KieliversiotFields}
+            disabled={onlyTarjoajaRights}
+          />
 
-      <FormCollapse
-        section="osaamisala"
-        header={t('koulutuslomake.valitseOsaamisala')}
-        Component={OsaamisalaSection}
-        languages={languageTabs}
-        disabled={onlyTarjoajaRights}
-        koulutustyyppi={koulutustyyppi}
-        hidden={!koulutustyyppi}
-      />
+          {![KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA].includes(
+            koulutustyyppi
+          ) && (
+            <FormCollapse
+              section="information"
+              header={t('koulutuslomake.koulutuksenTiedot')}
+              Component={TiedotSection}
+              languages={languageTabs}
+              disabled={onlyTarjoajaRights}
+              koulutustyyppi={koulutustyyppi}
+              koulutuskoodi={koulutuskoodi}
+            />
+          )}
 
-      <FormCollapse
-        section="information"
-        header={t('koulutuslomake.koulutuksenTiedot')}
-        Component={TiedotSection}
-        languages={languageTabs}
-        disabled={onlyTarjoajaRights}
-        koulutustyyppi={koulutustyyppi}
-        koulutuskoodi={koulutuskoodi}
-        hidden={!koulutustyyppi}
-      />
+          {koulutustyyppi === KOULUTUSTYYPPI.OSAAMISALA && (
+            <FormCollapse
+              section="osaamisala"
+              header={t('koulutuslomake.valitseOsaamisala')}
+              Component={OsaamisalaSection}
+              languages={languageTabs}
+              disabled={onlyTarjoajaRights}
+              koulutustyyppi={koulutustyyppi}
+            />
+          )}
 
-      <FormCollapse
-        section="tutkinnonosat"
-        header={t('koulutuslomake.tutkinnonOsat')}
-        Component={TutkinnonOsatSection}
-        name={'tutkinnonosat.osat'}
-        languages={languageTabs}
-        disabled={onlyTarjoajaRights}
-        koulutustyyppi={koulutustyyppi}
-        hidden={!koulutustyyppi}
-      />
+          {koulutustyyppi === KOULUTUSTYYPPI.TUTKINNON_OSA && (
+            <FormCollapse
+              section="tutkinnonosat"
+              header={t('koulutuslomake.tutkinnonOsat')}
+              Component={TutkinnonOsatSection}
+              name={'tutkinnonosat.osat'}
+              languages={languageTabs}
+              disabled={onlyTarjoajaRights}
+              koulutustyyppi={koulutustyyppi}
+            />
+          )}
 
-      <FormCollapse
-        section="osaamisalanKuvaus"
-        header={t('koulutuslomake.osaamisalanKuvaus')}
-        Component={OsaamisalanKuvausSection}
-        name={'osaamisala.osaamisala'}
-        languages={languageTabs}
-        disabled={onlyTarjoajaRights}
-        koulutustyyppi={koulutustyyppi}
-        hidden={!koulutustyyppi}
-      />
+          {koulutustyyppi === KOULUTUSTYYPPI.OSAAMISALA && (
+            <FormCollapse
+              section="osaamisalanKuvaus"
+              header={t('koulutuslomake.osaamisalanKuvaus')}
+              Component={OsaamisalanKuvausSection}
+              name={'osaamisala.osaamisala'}
+              languages={languageTabs}
+              disabled={onlyTarjoajaRights}
+              koulutustyyppi={koulutustyyppi}
+            />
+          )}
 
-      <FormCollapse
-        section="tutkinnonosat"
-        header={t('koulutuslomake.koulutuksenNimi')}
-        Component={TutkinnonOsaKoulutusNimiSection}
-        languages={languageTabs}
-        disabled={onlyTarjoajaRights}
-        koulutustyyppi={koulutustyyppi}
-        hidden={!koulutustyyppi}
-        {...getTestIdProps('nimiSection')}
-      />
+          {koulutustyyppi === KOULUTUSTYYPPI.TUTKINNON_OSA && (
+            <FormCollapse
+              section="tutkinnonosat"
+              header={t('koulutuslomake.koulutuksenNimi')}
+              Component={TutkinnonOsaKoulutusNimiSection}
+              languages={languageTabs}
+              disabled={onlyTarjoajaRights}
+              koulutustyyppi={koulutustyyppi}
+              {...getTestIdProps('nimiSection')}
+            />
+          )}
 
-      <FormCollapse
-        section="tutkinnonosat"
-        header={t('koulutuslomake.tutkinnonOsienKuvaus')}
-        Component={TutkinnonOsienKuvausSection}
-        languages={languageTabs}
-        disabled={onlyTarjoajaRights}
-        koulutustyyppi={koulutustyyppi}
-        hidden={!koulutustyyppi}
-        {...getTestIdProps('tutkinnonOsienKuvausSection')}
-      />
+          {koulutustyyppi === KOULUTUSTYYPPI.TUTKINNON_OSA && (
+            <FormCollapse
+              section="tutkinnonosat"
+              header={t('koulutuslomake.tutkinnonOsienKuvaus')}
+              Component={TutkinnonOsienKuvausSection}
+              languages={languageTabs}
+              disabled={onlyTarjoajaRights}
+              koulutustyyppi={koulutustyyppi}
+              {...getTestIdProps('tutkinnonOsienKuvausSection')}
+            />
+          )}
 
-      <FormCollapse
-        section="description"
-        header={t('koulutuslomake.koulutuksenKuvaus')}
-        Component={KuvausSection}
-        languages={languageTabs}
-        disabled={onlyTarjoajaRights}
-        koulutustyyppi={koulutustyyppi}
-        koulutuskoodi={koulutuskoodi}
-        hidden={!koulutustyyppi}
-      />
+          {[
+            ...TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
+            KOULUTUSTYYPPI.LUKIOKOULUTUS,
+          ].includes(koulutustyyppi) && (
+            <FormCollapse
+              section="description"
+              header={t('koulutuslomake.koulutuksenKuvaus')}
+              Component={EPerusteKuvausSection}
+              languages={languageTabs}
+              disabled={onlyTarjoajaRights}
+              koulutustyyppi={koulutustyyppi}
+              koulutuskoodi={koulutuskoodi}
+            />
+          )}
+          {isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi) && (
+            <FormCollapse
+              section="description"
+              header={t('koulutuslomake.koulutuksenKuvaus')}
+              Component={KuvausFieldsSection}
+              languages={languageTabs}
+              disabled={onlyTarjoajaRights}
+              koulutustyyppi={koulutustyyppi}
+              koulutuskoodi={koulutuskoodi}
+            />
+          )}
 
-      <FormCollapse
-        section="lisatiedot"
-        header={t('koulutuslomake.koulutuksenLisatiedot')}
-        Component={LisatiedotSection}
-        languages={languageTabs}
-        disabled={onlyTarjoajaRights}
-        hidden={!koulutustyyppi}
-      />
+          <FormCollapse
+            section="lisatiedot"
+            header={t('koulutuslomake.koulutuksenLisatiedot')}
+            Component={LisatiedotSection}
+            languages={languageTabs}
+            disabled={onlyTarjoajaRights}
+          />
 
-      <FormCollapse
-        section="teemakuva"
-        header={t('koulutuslomake.koulutuksenTeemakuva')}
-        Component={TeemakuvaSection}
-        disabled={onlyTarjoajaRights}
-        hidden={!koulutustyyppi}
-      />
+          <FormCollapse
+            section="soraKuvaus"
+            header={t('yleiset.soraKuvaus')}
+            Component={SoraKuvausSection}
+            organisaatioOid={organisaatioOid}
+            languages={languageTabs}
+          />
 
-      {!isNewOphKoulutus && (
-        <FormCollapse
-          section="tarjoajat"
-          header={t('koulutuslomake.koulutuksenJarjestaja')}
-          Component={JarjestajaSection}
-          organisaatioOid={organisaatioOid}
-          koulutus={koulutusProp}
-          disableTarjoajaHierarkia={isExistingOphKoulutus}
-          hidden={!koulutustyyppi}
-        />
-      )}
+          <FormCollapse
+            section="teemakuva"
+            header={t('koulutuslomake.koulutuksenTeemakuva')}
+            Component={TeemakuvaSection}
+            disabled={onlyTarjoajaRights}
+          />
 
-      <FormCollapse
-        section="julkinen"
-        header={t('koulutuslomake.nakyminenMuilleToimijoille')}
-        disabled={onlyTarjoajaRights}
-        Component={JulkisuusSection}
-        entity={ENTITY.KOULUTUS}
-        hidden={!koulutustyyppi}
-      />
+          {!isNewOphKoulutus && (
+            <FormCollapse
+              section="tarjoajat"
+              header={t('koulutuslomake.koulutuksenJarjestaja')}
+              Component={JarjestajaSection}
+              organisaatioOid={organisaatioOid}
+              koulutus={koulutusProp}
+              disableTarjoajaHierarkia={isExistingOphKoulutus}
+            />
+          )}
 
-      <FormCollapse
-        section="tila"
-        header={t('koulutuslomake.koulutuksenTila')}
-        Component={JulkaisutilaField}
-        disabled={onlyTarjoajaRights}
-        showArkistoitu={!isNewKoulutus}
-        hidden={!koulutustyyppi}
-      />
+          <FormCollapse
+            section="julkinen"
+            header={t('koulutuslomake.nakyminenMuilleToimijoille')}
+            disabled={onlyTarjoajaRights}
+            Component={JulkisuusSection}
+            entity={ENTITY.KOULUTUS}
+            hidden={!koulutustyyppi}
+          />
 
-      {_fp.isFunction(onAttachToteutus) && (
-        <FormCollapse
-          header={t('koulutuslomake.koulutukseenLiitetytToteutukset')}
-          id="koulutukseen-liitetetyt-toteutukset"
-          actions={
-            <Flex justifyCenter>
-              <Button
-                disabled={onlyTarjoajaRights}
-                color="primary"
-                onClick={onAttachToteutus}
-                type="button"
-              >
-                {t('koulutuslomake.liitaToteutus')}
-              </Button>
-            </Flex>
-          }
-          Component={ToteutuksetSection}
-          koulutus={koulutusProp}
-          organisaatioOid={organisaatioOid}
-          disabled={onlyTarjoajaRights}
-        />
+          <FormCollapse
+            section="tila"
+            header={t('koulutuslomake.koulutuksenTila')}
+            Component={JulkaisutilaField}
+            disabled={onlyTarjoajaRights}
+            showArkistoitu={!isNewKoulutus}
+          />
+
+          {_fp.isFunction(onAttachToteutus) && (
+            <FormCollapse
+              header={t('koulutuslomake.koulutukseenLiitetytToteutukset')}
+              id="koulutukseen-liitetetyt-toteutukset"
+              actions={
+                <Flex justifyCenter>
+                  <Button
+                    disabled={onlyTarjoajaRights}
+                    color="primary"
+                    onClick={onAttachToteutus}
+                    type="button"
+                  >
+                    {t('koulutuslomake.liitaToteutus')}
+                  </Button>
+                </Flex>
+              }
+              Component={ToteutuksetSection}
+              koulutus={koulutusProp}
+              organisaatioOid={organisaatioOid}
+              disabled={onlyTarjoajaRights}
+            />
+          )}
+        </>
       )}
     </FormCollapseGroup>
   );
 };
-
-export default KoulutusForm;

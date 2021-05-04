@@ -5,7 +5,6 @@ import { FieldArray } from 'redux-form';
 
 import Button from '#/src/components/Button';
 import FieldArrayList from '#/src/components/FieldArrayList';
-import FormConfigFragment from '#/src/components/FormConfigFragment';
 import { Box } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
 import { getTestIdProps } from '#/src/utils';
@@ -13,7 +12,7 @@ import { getTestIdProps } from '#/src/utils';
 import KoulutuksenTiedotSection from './TiedotSection/KoulutuksenTiedotSection';
 import { useNimiFromKoulutusKoodi } from './useNimiFromKoulutusKoodi';
 
-const TutkinnonOsatField = ({ disabled, language, koulutustyyppi, name }) => {
+const TutkinnonOsatField = ({ disabled, language, name }) => {
   const koulutuskoodi = useFieldValue(`${name}.koulutus`);
 
   useNimiFromKoulutusKoodi({
@@ -33,12 +32,7 @@ const TutkinnonOsatField = ({ disabled, language, koulutustyyppi, name }) => {
   );
 };
 
-const TutkinnonOsatFields = ({
-  disabled,
-  language,
-  koulutustyyppi,
-  fields,
-}) => {
+const TutkinnonOsatFields = ({ disabled, language, fields }) => {
   const { t } = useTranslation();
   const onAddField = useCallback(() => {
     fields.push({});
@@ -51,7 +45,6 @@ const TutkinnonOsatFields = ({
           <TutkinnonOsatField
             disabled={disabled}
             language={language}
-            koulutustyyppi={koulutustyyppi}
             name={field}
           />
         )}
@@ -85,18 +78,16 @@ export const TutkinnonOsatSection = ({
 
   return (
     <Box mb={-2}>
-      <FormConfigFragment name="osat">
-        <Box mb={2}>
-          <FieldArray
-            disabled={disabled}
-            koulutustyyppi={koulutustyyppi}
-            name={name}
-            component={TutkinnonOsatFields}
-            t={t}
-            language={language}
-          />
-        </Box>
-      </FormConfigFragment>
+      <Box mb={2}>
+        <FieldArray
+          disabled={disabled}
+          koulutustyyppi={koulutustyyppi}
+          name={name}
+          component={TutkinnonOsatFields}
+          t={t}
+          language={language}
+        />
+      </Box>
     </Box>
   );
 };

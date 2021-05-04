@@ -8,7 +8,6 @@ import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import JulkisuusSection from '#/src/components/JulkisuusSection';
 import { KokeetTaiLisanaytotSection } from '#/src/components/KokeetTaiLisanaytotSection';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
-import SoraKuvausSection from '#/src/components/SoraKuvausSection';
 import { ENTITY } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import { KOULUTUSTYYPIT_WITH_VALINTATAPA } from '#/src/utils/valintaperuste/constants';
@@ -98,14 +97,6 @@ export const ValintaperusteForm = ({
         header={t('valintaperustelomake.valintaperusteenLisatiedot')}
         languages={languages}
         Component={LisatiedotSection}
-      />
-
-      <FormCollapse
-        section="soraKuvaus"
-        header={t('yleiset.soraKuvaus')}
-        Component={SoraKuvausSection}
-        organisaatioOid={organisaatioOid}
-        languages={languages}
       />
 
       <FormCollapse

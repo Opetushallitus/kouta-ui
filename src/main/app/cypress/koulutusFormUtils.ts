@@ -7,6 +7,8 @@ import {
   stubCommonRoutes,
 } from '#/cypress/utils';
 
+import soraKuvaus from './data/soraKuvaus';
+
 export const stubKoulutusFormRoutes = ({ organisaatioOid }) => {
   stubCommonRoutes();
 
@@ -57,6 +59,35 @@ export const stubKoulutusFormRoutes = ({ organisaatioOid }) => {
   cy.intercept(
     { method: 'GET', url: `**/koulutus/*/toteutukset/list**` },
     { body: [] }
+  );
+
+  cy.intercept(
+    { method: 'GET', url: '**/valintaperuste/list**' },
+    { body: [] }
+  );
+
+  cy.intercept(
+    { method: 'GET', url: '**/sorakuvaus/list**' },
+    {
+      body: [...new Array(10)].map((v, i) =>
+        _.merge(soraKuvaus(), {
+          nimi: { fi: `Sora-kuvaus ${i}` },
+          id: i.toString(),
+          tila: 'julkaistu',
+        })
+      ),
+    }
+  );
+
+  cy.intercept(
+    { method: 'GET', url: '**/sorakuvaus/1' },
+    {
+      body: _.merge(soraKuvaus(), {
+        nimi: { fi: `Sora-kuvaus 1` },
+        id: 1,
+        tila: 'julkaistu',
+      }),
+    }
   );
 
   stubOppijanumerorekisteriHenkiloRoute();

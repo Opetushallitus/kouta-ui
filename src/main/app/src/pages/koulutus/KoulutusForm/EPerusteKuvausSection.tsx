@@ -5,21 +5,16 @@ import { useTranslation } from 'react-i18next';
 import StyledSectionHTML from '#/src/components/StyledSectionHTML';
 import { Typography } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
-import useApiAsync from '#/src/hooks/useApiAsync';
-import { getEPerusteById } from '#/src/utils/ePeruste/getEPerusteById';
+import { useEPerusteById } from '#/src/utils/ePeruste/getEPerusteById';
 import getEPerusteKuvausHTML from '#/src/utils/ePeruste/getEPerusteKuvaus';
 import { getLanguageValue } from '#/src/utils/languageUtils';
 
-const TekstiKuvausSection = ({ language }) => {
+export const EPerusteKuvausSection = ({ language }) => {
   const ePerusteField = useFieldValue('information.eperuste');
   const ePerusteId = ePerusteField?.value;
   const { t, i18n } = useTranslation();
 
-  const { data = {} } = useApiAsync({
-    promiseFn: getEPerusteById,
-    ePerusteId,
-    watch: ePerusteId,
-  });
+  const { data = {} } = useEPerusteById(ePerusteId);
 
   const { nimi, diaarinumero } = data;
 
@@ -51,5 +46,3 @@ const TekstiKuvausSection = ({ language }) => {
     </>
   );
 };
-
-export default TekstiKuvausSection;

@@ -13,15 +13,33 @@ import FormPage, {
 import FormSteps from '#/src/components/FormSteps';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
-import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
+import {
+  POHJAVALINTA,
+  ENTITY,
+  FormMode,
+  DEFAULT_JULKAISUTILA,
+} from '#/src/constants';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
-import { useFieldValue, useEntityFormConfig } from '#/src/hooks/form';
 import useSelectBase from '#/src/hooks/useSelectBase';
 import getFormValuesByKoulutus from '#/src/utils/koulutus/getFormValuesByKoulutus';
 import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
 
 import KoulutusFooter from './KoulutusFooter';
-import KoulutusForm, { initialValues } from './KoulutusForm';
+import { KoulutusForm } from './KoulutusForm';
+
+const FORM_NAME = 'koulutusForm';
+
+const INITIAL_VALUES = {
+  tila: DEFAULT_JULKAISUTILA,
+  esikatselu: false,
+  pohja: {
+    tapa: POHJAVALINTA.UUSI,
+  },
+  kieliversiot: ['fi', 'sv'],
+  tarjoajat: { tarjoajat: [], kaytaPohjanJarjestajaa: true },
+};
+
+const config = { noFieldConfigs: true };
 
 const getCopyValues = koulutus => ({
   pohja: {
@@ -37,7 +55,7 @@ const getInitialValues = koulutus => {
         ...getFormValuesByKoulutus(_.omit(koulutus, ['tarjoajat'])),
         ...getCopyValues(koulutus),
       }
-    : initialValues;
+    : INITIAL_VALUES;
 };
 
 const CreateKoulutusPage = props => {
@@ -59,12 +77,6 @@ const CreateKoulutusPage = props => {
   const initialValues = useMemo(() => {
     return getInitialValues(data);
   }, [data]);
-
-  const FORM_NAME = 'koulutusForm';
-
-  const koulutustyyppi = useFieldValue('koulutustyyppi', FORM_NAME);
-
-  const config = useEntityFormConfig(ENTITY.KOULUTUS, koulutustyyppi);
 
   return (
     <ReduxForm form={FORM_NAME} initialValues={initialValues}>

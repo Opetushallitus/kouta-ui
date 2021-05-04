@@ -6,10 +6,12 @@ import { useHistory } from 'react-router-dom';
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormNameContext';
-import { useSaveValintaperuste } from '#/src/hooks/formSaveHooks';
+import { useForm } from '#/src/hooks/form';
+import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import createValintaperuste from '#/src/utils/valintaperuste/createValintaperuste';
 import { getValintaperusteByFormValues } from '#/src/utils/valintaperuste/getValintaperusteByFormValues';
 import updateValintaperuste from '#/src/utils/valintaperuste/updateValintaperuste';
+import { validateValintaperusteForm } from '#/src/utils/valintaperuste/validateValintaperusteForm';
 
 type ValintaperusteFooterProps = {
   formMode: FormMode;
@@ -26,6 +28,7 @@ export const ValintaperusteFooter = ({
 }: ValintaperusteFooterProps) => {
   const history = useHistory();
   const queryClient = useQueryClient();
+  const form = useForm();
 
   const submit = useCallback(
     async ({ values, httpClient, apiUrls }) => {
@@ -56,7 +59,19 @@ export const ValintaperusteFooter = ({
   );
 
   const formName = useFormName();
-  const save = useSaveValintaperuste({ submit, formName });
+
+  const { save } = useSaveForm({
+    form: formName,
+    submit,
+    validate: values =>
+      validateValintaperusteForm(
+        {
+          organisaatioOid,
+          ...values,
+        },
+        form.registeredFields
+      ),
+  });
 
   return (
     <FormFooter

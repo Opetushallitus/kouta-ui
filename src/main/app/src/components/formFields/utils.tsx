@@ -5,6 +5,7 @@ import _ from 'lodash';
 import { simpleMapProps } from '#/src/components/formFields';
 import FormHelperTextMulti from '#/src/components/FormHelperTextMulti';
 import { FormControl, FormLabel } from '#/src/components/virkailija';
+import { FIELD_ERROR_CLASSNAME } from '#/src/constants';
 import {
   useFieldConfig,
   useFieldIsRequired,
@@ -41,22 +42,24 @@ export const createComponent = (Component, mapProps = simpleMapProps) => {
     const required = useFieldIsRequired(fieldConfig);
 
     return noFieldConfigs || fieldConfig || !configurable ? (
-      <FormControl
-        error={isError}
-        helperText={
-          <FormHelperTextMulti errorMessage={error} helperText={helperText} />
-        }
-        label={
-          label ? (
-            <FormLabel error={error} disabled={disabled} mb={1} id={labelId}>
-              {`${label}${required || requiredProp ? ' *' : ''}`}
-            </FormLabel>
-          ) : undefined
-        }
-        disabled={disabled || readOnly}
-      >
-        {children}
-      </FormControl>
+      <div className={isError ? FIELD_ERROR_CLASSNAME : ''}>
+        <FormControl
+          error={isError}
+          helperText={
+            <FormHelperTextMulti errorMessage={error} helperText={helperText} />
+          }
+          label={
+            label ? (
+              <FormLabel error={error} disabled={disabled} mb={1} id={labelId}>
+                {`${label}${required || requiredProp ? ' *' : ''}`}
+              </FormLabel>
+            ) : undefined
+          }
+          disabled={disabled || readOnly}
+        >
+          {children}
+        </FormControl>
+      </div>
     ) : (
       <></>
     );

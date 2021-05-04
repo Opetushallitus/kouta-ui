@@ -24,6 +24,7 @@ Object {
   },
   "muokkaaja": undefined,
   "nimi": Object {},
+  "sorakuvausId": null,
   "tarjoajat": Array [],
   "teemakuva": undefined,
   "tila": undefined,
@@ -32,7 +33,7 @@ Object {
 
 exports[`getKoulutusByFormValues returns correct koulutuksetKoodiUri for ammatillinen koulutus 1`] = `
 Object {
-  "ePerusteId": null,
+  "ePerusteId": 1,
   "esikatselu": false,
   "johtaaTutkintoon": true,
   "julkinen": false,
@@ -60,6 +61,7 @@ Object {
   },
   "muokkaaja": undefined,
   "nimi": Object {},
+  "sorakuvausId": null,
   "tarjoajat": Array [],
   "teemakuva": undefined,
   "tila": undefined,
@@ -121,6 +123,7 @@ Object {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
+  "sorakuvausId": "1234",
   "tarjoajat": Array [
     "123.456.789",
   ],
@@ -151,6 +154,7 @@ Object {
   },
   "muokkaaja": undefined,
   "nimi": Object {},
+  "sorakuvausId": null,
   "tarjoajat": Array [],
   "teemakuva": undefined,
   "tila": undefined,

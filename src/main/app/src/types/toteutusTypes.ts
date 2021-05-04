@@ -71,19 +71,19 @@ export type ToteutusFormValues = {
     apurahaMax?: number;
     apurahaKuvaus?: Kuvaus;
     apurahaYksikko?: SelectOption<ApurahaYksikko>;
-    diplomiTyypit: Array<SelectOption | undefined>;
+    diplomiTyypit: SelectOptions;
     diplomiKuvaus: Kuvaus;
-    A1A2Kielet: Array<SelectOption | undefined>;
-    aidinkielet: Array<SelectOption | undefined>;
-    B1Kielet: Array<SelectOption | undefined>;
-    B2Kielet: Array<SelectOption | undefined>;
-    B3Kielet: Array<SelectOption | undefined>;
-    muutKielet: Array<SelectOption | undefined>;
+    A1A2Kielet: SelectOptions;
+    aidinkielet: SelectOptions;
+    B1Kielet: SelectOptions;
+    B2Kielet: SelectOptions;
+    B3Kielet: SelectOptions;
+    muutKielet: SelectOptions;
     ajankohta: AjankohtaFields;
   };
   nayttamistiedot: {
-    ammattinimikkeet: TranslatedField<Array<SelectOption>>;
-    avainsanat: TranslatedField<Array<SelectOption>>;
+    ammattinimikkeet: TranslatedField<SelectOptions>;
+    avainsanat: TranslatedField<SelectOptions>;
   };
   yhteyshenkilot: Array<Yhteystieto>;
   osaamisalat: {

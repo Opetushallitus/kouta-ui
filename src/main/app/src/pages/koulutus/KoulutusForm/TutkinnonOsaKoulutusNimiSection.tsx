@@ -63,6 +63,7 @@ export const TutkinnonOsaKoulutusNimiSection: React.FC<TutkinnonOsaKoulutusNimiS
         name={`${name}.nimi.${language}`}
         component={FormFieldInput}
         label={t('koulutuslomake.lisaaKoulutuksenNimi')}
+        required
       />
     </Box>
   );

@@ -1,3 +1,6 @@
+import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
+import { useApiQuery } from '#/src/hooks/useApiQuery';
+
 export const getEPerusteById = async ({ httpClient, apiUrls, ePerusteId }) => {
   if (ePerusteId) {
     const { data } = await httpClient.get(
@@ -7,3 +10,16 @@ export const getEPerusteById = async ({ httpClient, apiUrls, ePerusteId }) => {
     return data;
   }
 };
+
+export const useEPerusteById = ePerusteId =>
+  useApiQuery(
+    'getEPerusteById',
+    getEPerusteById,
+    {
+      ePerusteId,
+    },
+    {
+      enabled: Boolean(ePerusteId),
+      ...LONG_CACHE_QUERY_OPTIONS,
+    }
+  );

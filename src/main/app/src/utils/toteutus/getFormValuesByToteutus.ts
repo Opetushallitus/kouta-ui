@@ -6,7 +6,7 @@ import {
   ToteutusFormValues,
   MaksullisuusTyyppi,
 } from '#/src/types/toteutusTypes';
-import { toSelectValue } from '#/src/utils';
+import { toSelectValue, toSelectValueList } from '#/src/utils';
 import { getAjankohtaFields } from '#/src/utils/form/aloitusajankohtaHelpers';
 import parseSisaltoField from '#/src/utils/form/parseSisaltoField';
 
@@ -159,14 +159,14 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
         parseEditorState,
         opetus?.apuraha?.kuvaus || {}
       ),
-      diplomiTyypit: _fp.map(toSelectValue)(diplomiKoodiUrit),
+      diplomiTyypit: toSelectValueList(diplomiKoodiUrit),
       diplomiKuvaus: _fp.mapValues(parseEditorState, diplomiKuvaus ?? {}),
-      A1A2Kielet: _fp.map(toSelectValue)(A1JaA2Kielivalikoima),
-      aidinkielet: _fp.map(toSelectValue)(aidinkieliKielivalikoima),
-      B1Kielet: _fp.map(toSelectValue)(B1Kielivalikoima),
-      B2Kielet: _fp.map(toSelectValue)(B2Kielivalikoima),
-      B3Kielet: _fp.map(toSelectValue)(B3Kielivalikoima),
-      muutKielet: _fp.map(toSelectValue)(muuKielivalikoima),
+      A1A2Kielet: toSelectValueList(A1JaA2Kielivalikoima),
+      aidinkielet: toSelectValueList(aidinkieliKielivalikoima),
+      B1Kielet: toSelectValueList(B1Kielivalikoima),
+      B2Kielet: toSelectValueList(B2Kielivalikoima),
+      B3Kielet: toSelectValueList(B3Kielivalikoima),
+      muutKielet: toSelectValueList(muuKielivalikoima),
       ajankohta: getAjankohtaFields(koulutuksenAlkamiskausi),
     },
     nayttamistiedot: {

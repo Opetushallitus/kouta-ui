@@ -57,7 +57,7 @@ const getOptionLabelByValue = (options: Array<any> = []) =>
   );
 
 const getAsyncValue = async (
-  value?: SelectOption | Array<SelectOption> | null,
+  value?: SelectOption | SelectOptions | null,
   options?: Array<any>,
   loadLabel: any = _.identity
 ) => {
@@ -77,16 +77,12 @@ const getAsyncValue = async (
 };
 
 const getValue = (
-  value?: SelectOption | Array<SelectOption> | null,
+  value?: SelectOption | SelectOptions | null,
   options?: Array<any>
 ) => {
   const labelByValue = getOptionLabelByValue(options);
-  if (_.isObject(value) && value.value) {
-    return { ...value, label: labelByValue[value.value] || value.value };
-  }
-
   if (_.isArray(value)) {
-    const newValue: Array<SelectOption> = [];
+    const newValue: SelectOptions = [];
 
     for (const item of value) {
       if (_.isObject(item) && item.value) {
@@ -101,6 +97,8 @@ const getValue = (
     }
 
     return newValue;
+  } else if (value?.value) {
+    return { ...value, label: labelByValue[value.value] || value.value };
   }
 
   return value;

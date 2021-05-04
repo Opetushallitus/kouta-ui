@@ -3,10 +3,14 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
-import FormConfigFragment from '#/src/components/FormConfigFragment';
 import { FormFieldInput } from '#/src/components/formFields';
 import KoulutusField from '#/src/components/KoulutusField';
 import { Box } from '#/src/components/virkailija';
+import {
+  KOULUTUSTYYPPI,
+  TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
+  TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
+} from '#/src/constants';
 import { getTestIdProps } from '#/src/utils';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
@@ -34,19 +38,19 @@ export const TiedotSection = ({
 
   return (
     <Box mb={-2}>
-      <FormConfigFragment name="koulutuskoodiTiedoilla">
+      {TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT.includes(
+        koulutustyyppi
+      ) && (
         <Box mb={2}>
           <KoulutuksenTiedotSection
             disabled={disabled}
             language={language}
             koulutuskoodi={koulutuskoodi}
-            koulutustyyppi={koulutustyyppi}
             name={name}
           />
         </Box>
-      </FormConfigFragment>
-
-      <FormConfigFragment name="osaamisala">
+      )}
+      {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && (
         <Box mb={2}>
           <KoulutuksenTiedotSection
             disabled={disabled}
@@ -56,47 +60,68 @@ export const TiedotSection = ({
             name={name}
           />
         </Box>
-      </FormConfigFragment>
-
-      <FormConfigFragment name="koulutuskoodi">
+      )}
+      {[
+        KOULUTUSTYYPPI.VALMA,
+        KOULUTUSTYYPPI.TELMA,
+        KOULUTUSTYYPPI.LUVA,
+        KOULUTUSTYYPPI.PERUSOPETUKSEN_LISAOPETUS,
+      ].includes(koulutustyyppi) && (
         <Box mb={2} {...getTestIdProps('koulutuskoodiSelect')}>
-          <KoulutusField disabled={disabled} name={`${name}.koulutus`} />
-        </Box>
-      </FormConfigFragment>
-
-      <FormConfigFragment name="koulutuskooditKorkeakouluille">
-        <Box mb={2} {...getTestIdProps('korkeakoulutuskoodiSelect')}>
           <KoulutusField
             disabled={disabled}
-            name={`${name}.korkeakoulutukset`}
-            koulutustyyppi={koulutustyyppi}
-            language={language}
-            isMultiSelect={true}
-            valitseKoulutusLabel={t('yleiset.valitseKoulutukset')}
+            name={`${name}.koulutus`}
+            required
           />
         </Box>
-      </FormConfigFragment>
+      )}
+      {isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi) && (
+        <>
+          <Box mb={2} {...getTestIdProps('korkeakoulutuskoodiSelect')}>
+            <KoulutusField
+              disabled={disabled}
+              name={`${name}.korkeakoulutukset`}
+              koulutustyyppi={koulutustyyppi}
+              language={language}
+              isMultiSelect={true}
+              valitseKoulutusLabel={t('yleiset.valitseKoulutukset')}
+              required
+            />
+          </Box>
 
-      <Box mb={2}>
-        <OpintojenlaajuusField disabled={disabled} name={name} />
-      </Box>
+          <Box mb={2}>
+            <OpintojenlaajuusField disabled={disabled} name={name} />
+          </Box>
 
-      <Box mb={2}>
-        <TutkintonimikeField disabled={disabled} name={name} />
-      </Box>
+          <Box mb={2}>
+            <TutkintonimikeField disabled={disabled} name={name} />
+          </Box>
 
-      <Box mb={2}>
-        <KoulutusalatField disabled={disabled} name={name} />
-      </Box>
-
-      <Box mb={2} {...getTestIdProps('nimiInput')}>
-        <Field
-          disabled={disabled}
-          name={`${name}.nimi.${language}`}
-          component={FormFieldInput}
-          label={t('koulutuslomake.muokkaaKoulutuksenNimea')}
-        />
-      </Box>
+          <Box mb={2}>
+            <KoulutusalatField disabled={disabled} name={name} />
+          </Box>
+        </>
+      )}
+      {[
+        ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
+        KOULUTUSTYYPPI.AVOIN_YO,
+        KOULUTUSTYYPPI.AVOIN_AMK,
+        KOULUTUSTYYPPI.TAYDENNYS_KOULUTUS,
+        KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
+        KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJAKOULUTUS,
+        KOULUTUSTYYPPI.AMMATILLINEN_ERITYISOPETTAJA_KOULUTUS,
+        KOULUTUSTYYPPI.AMMATILLINEN_OPINTO_OHJAAJA_KOULUTUS,
+      ].includes(koulutustyyppi) && (
+        <Box mb={2} {...getTestIdProps('nimiInput')}>
+          <Field
+            disabled={disabled}
+            name={`${name}.nimi.${language}`}
+            component={FormFieldInput}
+            label={t('koulutuslomake.muokkaaKoulutuksenNimea')}
+            required
+          />
+        </Box>
+      )}
     </Box>
   );
 };

@@ -14,7 +14,10 @@ type EntityForDropdown<T> = {
   oid?: string;
 } & T;
 
-export const useEntityOptions = <T>(entities, suffixFn?) => {
+export const useEntityOptions = <T>(
+  entities,
+  suffixFn?
+): Array<{ label: string; value: string }> => {
   const language = useUserLanguage();
   const { t } = useTranslation();
 
@@ -31,7 +34,7 @@ export const useEntityOptions = <T>(entities, suffixFn?) => {
             })),
             _fp.orderBy(({ label }) => _fp.lowerCase(label), 'asc')
           )(entities as Array<EntityForDropdown<T>>)
-        : [],
+        : ([] as Array<any>),
     [entities, language, suffixFn, t]
   );
 };

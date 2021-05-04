@@ -27,9 +27,6 @@ const BASE_VALINTAPERUSTE_FORM_DATA = {
     sv: parseEditorState('<h1>Sv lisatiedot</h2>'),
   },
   valintatavat: [{}],
-  soraKuvaus: {
-    value: 'sora_1',
-  },
   julkinen: true,
   valintakokeet: {
     yleisKuvaus: {

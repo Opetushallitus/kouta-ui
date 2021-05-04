@@ -72,6 +72,7 @@ export const OsaamisalaSection = ({ disabled, language, languages, name }) => {
           selectedKoulutus={selectedKoulutus}
           language={language}
           koulutusIsLoading={isLoading}
+          disabled={disabled}
         />
       ) : undefined}
       {selectedEPeruste ? (
@@ -81,6 +82,7 @@ export const OsaamisalaSection = ({ disabled, language, languages, name }) => {
           language={language}
           osaamisalat={selectedEPerusteData?.osaamisalat}
           koulutusIsLoading={isLoading}
+          disabled={disabled}
         />
       ) : undefined}
     </Box>

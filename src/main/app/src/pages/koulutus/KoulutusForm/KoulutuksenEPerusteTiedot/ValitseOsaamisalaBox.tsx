@@ -33,6 +33,7 @@ export const ValitseOsaamisalaBox = ({
   language,
   osaamisalat,
   koulutusIsLoading,
+  disabled,
 }) => {
   const { t } = useTranslation();
   const apiUrls = useUrls();
@@ -94,7 +95,9 @@ export const ValitseOsaamisalaBox = ({
           name={fieldName}
           label={t('koulutuslomake.valitseOsaamisala')}
           options={osaamisalaOptions}
-          disabled={_fp.isNil(osaamisalat) || _fp.isEmpty(osaamisalat)}
+          disabled={
+            disabled || _fp.isNil(osaamisalat) || _fp.isEmpty(osaamisalat)
+          }
         />
       </Box>
       {isLoading ? (

@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 import Anchor from '#/src/components/Anchor';
-import FormConfigFragment from '#/src/components/FormConfigFragment';
 import StyledSectionHTML from '#/src/components/StyledSectionHTML';
 import { Box, Spin, Typography } from '#/src/components/virkailija';
 import { useUrls } from '#/src/contexts/UrlContext';
@@ -124,23 +123,21 @@ export const TutkinnonOsienKuvausSection = ({ disabled, language, name }) => {
 
   return (
     <Box mb={-2}>
-      <FormConfigFragment name="osat">
-        <Box mb={2}>
-          {(kuvaukset || []).map((osa, index) => (
-            <StyledInfoBox key={`${osa.id}_${index}`} mb={2}>
-              <TutkinnonOsaKuvaus
-                viiteId={viiteIdForOsa(osa)}
-                ePerusteId={eperusteForOsa(osa)}
-                osa={osa}
-                language={language}
-              />
-            </StyledInfoBox>
-          ))}
-          <Typography variant="secondary" as="div" marginTop={1}>
-            ({t('yleiset.lahde')}: {t('yleiset.ePerusteet')})
-          </Typography>
-        </Box>
-      </FormConfigFragment>
+      <Box mb={2}>
+        {(kuvaukset || []).map((osa, index) => (
+          <StyledInfoBox key={`${osa.id}_${index}`} mb={2}>
+            <TutkinnonOsaKuvaus
+              viiteId={viiteIdForOsa(osa)}
+              ePerusteId={eperusteForOsa(osa)}
+              osa={osa}
+              language={language}
+            />
+          </StyledInfoBox>
+        ))}
+        <Typography variant="secondary" as="div" marginTop={1}>
+          ({t('yleiset.lahde')}: {t('yleiset.ePerusteet')})
+        </Typography>
+      </Box>
     </Box>
   );
 };

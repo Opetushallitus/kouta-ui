@@ -15,8 +15,7 @@ import {
   useIsDirty,
 } from '#/src/hooks/form';
 import { useHasChanged } from '#/src/hooks/useHasChanged';
-import { getTestIdProps } from '#/src/utils';
-import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
+import { formatKoodiLabelWithArvo, getTestIdProps } from '#/src/utils';
 import { useKoulutuksetByKoulutusala } from '#/src/utils/soraKuvaus/getKoulutuksetBykoulutusala';
 
 export const KoulutustyyppiSection = ({ name, canEditKoulutustyyppi }) => {
@@ -64,9 +63,7 @@ export const KoulutustyyppiSection = ({ name, canEditKoulutustyyppi }) => {
             component={FormFieldAsyncKoodistoSelect}
             label={t('yleiset.valitseKoulutus')}
             showAllOptions={true}
-            formatKoodiLabel={(koodi, language) =>
-              `${getKoodiNimiTranslation(koodi, language)} (${koodi.koodiArvo})`
-            }
+            formatKoodiLabel={formatKoodiLabelWithArvo}
             isMulti={true}
           />
         </Box>

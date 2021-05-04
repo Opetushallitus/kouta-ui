@@ -10,6 +10,8 @@ import {
 import { ALLOWED_HTML_TAGS, LANGUAGES, NDASH } from '#/src/constants';
 import { memoize } from '#/src/utils/memoize';
 
+import getKoodiNimiTranslation from './getKoodiNimiTranslation';
+
 const { NODE_ENV, REACT_APP_CYPRESS } = process.env;
 
 export const isDev = NODE_ENV === 'development';
@@ -273,3 +275,6 @@ export const safeArrayToValue = a => (_.size(a) > 1 ? a : _.get(a, 0));
 const postinumeroUriRegExp = /\d{5}/;
 export const getPostinumeroByPostinumeroUri = uri =>
   uri?.match?.(postinumeroUriRegExp)?.[0];
+
+export const formatKoodiLabelWithArvo = (koodi, language) =>
+  `${getKoodiNimiTranslation(koodi, language)} (${koodi.koodiArvo})`;

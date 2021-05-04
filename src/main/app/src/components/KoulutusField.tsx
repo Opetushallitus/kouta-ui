@@ -4,11 +4,14 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { FormFieldAsyncKoodistoSelect } from '#/src/components/formFields';
+import {
+  useBoundFormActions,
+  useFieldValue,
+  useIsDirty,
+} from '#/src/hooks/form';
 import { useHasChanged } from '#/src/hooks/useHasChanged';
-import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
+import { formatKoodiLabelWithArvo } from '#/src/utils';
 import { useKoulutuksetByKoulutustyyppi } from '#/src/utils/koulutus/getKoulutuksetByKoulutustyyppi';
-
-import { useBoundFormActions, useFieldValue, useIsDirty } from '../hooks/form';
 
 const KoulutusField = props => {
   const { t } = useTranslation();
@@ -44,9 +47,7 @@ const KoulutusField = props => {
       label={valitseKoulutusLabel}
       showAllOptions={true}
       isMulti={isMultiSelect}
-      formatKoodiLabel={(koodi, language) =>
-        `${getKoodiNimiTranslation(koodi, language)} (${koodi.koodiArvo})`
-      }
+      formatKoodiLabel={formatKoodiLabelWithArvo}
       {...props}
     />
   );

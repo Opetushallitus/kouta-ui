@@ -115,14 +115,6 @@ const fillLisatiedotSection = () => {
   });
 };
 
-const fillSoraKuvausSection = () => {
-  getByTestId('soraKuvausSection').within(() => {
-    selectOption('Sora-kuvaus 1');
-
-    jatka();
-  });
-};
-
 const fillJulkisuusSection = () => {
   getByTestId('julkinenSection').within(() => {
     getCheckbox(null).check({ force: true });
@@ -181,7 +173,6 @@ export const createValintaperusteForm = () => {
     fillValintatapaSection();
     fillValintakokeetSection();
     fillLisatiedotSection();
-    fillSoraKuvausSection();
     fillJulkisuusSection();
     fillTilaSection();
 

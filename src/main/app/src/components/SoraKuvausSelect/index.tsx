@@ -1,10 +1,10 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import _ from 'lodash';
 
 import Select from '#/src/components/Select';
-import useSoraKuvausOptions from '#/src/hooks/useSoraKuvausOptions';
-import { createChainedFunction } from '#/src/utils';
+import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
+import { useSoraKuvaukset } from '#/src/utils/soraKuvaus/getSoraKuvaukset';
 
 export const SoraKuvausSelect = ({
   reloadOnFocus = false,
@@ -12,15 +12,11 @@ export const SoraKuvausSelect = ({
   organisaatioOid,
   ...props
 }) => {
-  const { options, reload } = useSoraKuvausOptions({ organisaatioOid });
+  const { soraKuvaukset } = useSoraKuvaukset({ organisaatioOid });
 
-  const onFocus = useMemo(() => {
-    return reloadOnFocus
-      ? createChainedFunction(() => reload(), onFocusProp)
-      : onFocusProp;
-  }, [reloadOnFocus, reload, onFocusProp]);
+  const options = useEntityOptions(soraKuvaukset);
 
-  return <Select options={options} onFocus={onFocus} {...props} />;
+  return <Select options={options} {...props} />;
 };
 
 export default SoraKuvausSelect;

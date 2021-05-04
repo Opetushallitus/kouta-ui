@@ -118,20 +118,19 @@ export const KoulutusForm = ({
             disabled={onlyTarjoajaRights}
           />
 
-          {koulutustyyppi &&
-            ![KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA].includes(
-              koulutustyyppi
-            ) && (
-              <FormCollapse
-                section="information"
-                header={t('koulutuslomake.koulutuksenTiedot')}
-                Component={TiedotSection}
-                languages={languageTabs}
-                disabled={onlyTarjoajaRights}
-                koulutustyyppi={koulutustyyppi}
-                koulutuskoodi={koulutuskoodi}
-              />
-            )}
+          {![KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA].includes(
+            koulutustyyppi
+          ) && (
+            <FormCollapse
+              section="information"
+              header={t('koulutuslomake.koulutuksenTiedot')}
+              Component={TiedotSection}
+              languages={languageTabs}
+              disabled={onlyTarjoajaRights}
+              koulutustyyppi={koulutustyyppi}
+              koulutuskoodi={koulutuskoodi}
+            />
+          )}
 
           {koulutustyyppi === KOULUTUSTYYPPI.OSAAMISALA && (
             <FormCollapse

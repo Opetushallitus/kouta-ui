@@ -11,6 +11,7 @@ import JulkaisutilaField from '#/src/components/JulkaisutilaField';
 import JulkisuusSection from '#/src/components/JulkisuusSection';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
+import SoraKuvausSection from '#/src/components/SoraKuvausSection';
 import TeemakuvaSection from '#/src/components/TeemakuvaSection';
 import { ENTITY } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
@@ -178,6 +179,14 @@ const KoulutusForm = ({
         koulutustyyppi={koulutustyyppi}
         koulutuskoodi={koulutuskoodi}
         hidden={!koulutustyyppi}
+      />
+
+      <FormCollapse
+        section="soraKuvaus"
+        header={t('yleiset.soraKuvaus')}
+        Component={SoraKuvausSection}
+        organisaatioOid={organisaatioOid}
+        languages={languageTabs}
       />
 
       <FormCollapse

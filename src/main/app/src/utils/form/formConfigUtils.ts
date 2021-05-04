@@ -116,6 +116,7 @@ export const julkinenSectionConfig = {
 
 export const validateRelations = specs => eb => {
   const values = eb.getValues();
+  console.log(values);
   const { errors, isValid } = specs.reduce(
     (acc, { key, t: translationKey }) => {
       const { tila } = values;

@@ -5,6 +5,7 @@ import {
   KOULUTUSTYYPPI,
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
 } from '#/src/constants';
+import { KoulutusFormValues } from '#/src/types/koulutusTypes';
 import { maybeParseNumber, safeArray } from '#/src/utils';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
@@ -30,7 +31,7 @@ function getKoulutuksetKoodiUri(
   return safeArray(information?.koulutus?.value);
 }
 
-const getKoulutusByFormValues = values => {
+const getKoulutusByFormValues = (values: KoulutusFormValues) => {
   const { muokkaaja, tila, esikatselu = false } = values;
   const kielivalinta = values?.kieliversiot ?? [];
   const pickTranslations = _fp.pick(kielivalinta);
@@ -42,6 +43,8 @@ const getKoulutusByFormValues = values => {
   const koulutustyyppi = values?.koulutustyyppi || null;
   const osiot = values?.lisatiedot?.osiot ?? [];
   const osaamisala = values?.osaamisala;
+
+  const soraKuvausId = values?.soraKuvaus?.value ?? null;
 
   return {
     johtaaTutkintoon: TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT.includes(
@@ -70,6 +73,7 @@ const getKoulutusByFormValues = values => {
       values?.information?.eperuste?.value || osaamisala?.eperuste?.value
     ),
     teemakuva: values?.teemakuva,
+    soraKuvausId,
     metadata: {
       tutkinnonOsat: _fp.reduce(
         (

@@ -10,6 +10,7 @@ import { useFormName } from '#/src/contexts/FormNameContext';
 import { useForm } from '#/src/hooks/form';
 import { useSaveToteutus } from '#/src/hooks/formSaveHooks';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
+import { KoulutusModel } from '#/src/types/koulutusTypes';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
 import { getValuesForSaving } from '#/src/utils';
 import { getTarjoajaOids } from '#/src/utils/getTarjoajaOids';

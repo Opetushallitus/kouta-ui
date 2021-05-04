@@ -43,6 +43,14 @@ const fillTeemakuvaSection = () => {
   });
 };
 
+const fillSoraKuvausSection = () => {
+  getByTestId('soraKuvausSection').within(() => {
+    selectOption('Sora-kuvaus 1');
+
+    jatka();
+  });
+};
+
 const fillJarjestajaSection = () => {
   getByTestId('tarjoajatSection').within(() => {
     getByTestId('jarjestajatSelection').within(() => {
@@ -111,6 +119,8 @@ export const createKoulutusForm = () => {
       jatka();
     });
 
+    fillSoraKuvausSection();
+
     fillLisatiedotSection();
 
     fillTeemakuvaSection();
@@ -169,6 +179,8 @@ export const createKoulutusForm = () => {
     getByTestId('osaamisalanKuvausSection').within(() => {
       jatka();
     });
+
+    fillSoraKuvausSection();
 
     fillLisatiedotSection();
 
@@ -256,6 +268,8 @@ export const createKoulutusForm = () => {
       jatka();
     });
 
+    fillSoraKuvausSection();
+
     fillLisatiedotSection();
 
     fillTeemakuvaSection();
@@ -327,6 +341,8 @@ export const createKoulutusForm = () => {
       jatka();
     });
 
+    fillSoraKuvausSection();
+
     fillLisatiedotSection();
 
     fillTeemakuvaSection();
@@ -372,6 +388,8 @@ export const createKoulutusForm = () => {
     getByTestId('descriptionSection').within(() => {
       jatka();
     });
+
+    fillSoraKuvausSection();
 
     fillLisatiedotSection();
 

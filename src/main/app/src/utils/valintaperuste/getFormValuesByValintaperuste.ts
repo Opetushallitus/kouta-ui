@@ -30,7 +30,6 @@ export const getFormValuesByValintaperuste = valintaperuste => {
     koulutustyyppi = null,
     onkoJulkinen = false,
     tila,
-    sorakuvausId,
     valintakokeet,
     esikatselu = false,
   } = valintaperuste;
@@ -81,11 +80,6 @@ export const getFormValuesByValintaperuste = valintaperuste => {
           _.toString(vahimmaispisteet)?.replace('.', ',') || '',
       })
     ),
-    soraKuvaus: sorakuvausId
-      ? {
-          value: sorakuvausId,
-        }
-      : null,
     valintakokeet: getKokeetTaiLisanaytotValues(
       valintakokeet,
       valintakokeidenYleiskuvaus

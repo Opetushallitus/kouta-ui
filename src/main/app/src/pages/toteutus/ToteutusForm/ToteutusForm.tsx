@@ -15,6 +15,7 @@ import TeemakuvaSection from '#/src/components/TeemakuvaSection';
 import { KOULUTUSTYYPPI, HAKULOMAKETYYPPI } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import useModal from '#/src/hooks/useModal';
+import { KoulutusModel } from '#/src/types/koulutusTypes';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
 import { getTestIdProps } from '#/src/utils';
 import { getToteutukset } from '#/src/utils/toteutus/getToteutukset';

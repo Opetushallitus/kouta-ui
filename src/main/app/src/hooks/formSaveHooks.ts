@@ -16,11 +16,11 @@ import useToaster from '#/src/hooks/useToaster';
 import getHakuByOid from '#/src/utils/haku/getHakuByOid';
 import validateHakukohdeForm from '#/src/utils/hakukohde/validateHakukohdeForm';
 import getKoulutusByOid from '#/src/utils/koulutus/getKoulutusByOid';
+import validateKoulutusForm from '#/src/utils/koulutus/validateKoulutusForm';
 import getSoraKuvausById from '#/src/utils/soraKuvaus/getSoraKuvausById';
 import getToteutusByOid from '#/src/utils/toteutus/getToteutusByOid';
 import validateToteutusForm from '#/src/utils/toteutus/validateToteutusForm';
 import { getValintaperusteById } from '#/src/utils/valintaperuste/getValintaperusteById';
-import { validateValintaperusteForm } from '#/src/utils/valintaperuste/validateValintaperusteForm';
 
 export const useSaveForm = ({ form: formName, validate, submit }) => {
   const dispatch = useDispatch();
@@ -163,7 +163,7 @@ export const useSaveHakukohde = ({
   return save;
 };
 
-export const useSaveValintaperuste = ({ submit, formName }) => {
+export const useSaveKoulutus = ({ submit, formName }) => {
   const httpClient = useHttpClient();
   const apiUrls = useUrls();
 
@@ -171,14 +171,11 @@ export const useSaveValintaperuste = ({ submit, formName }) => {
     form: formName,
     submit,
     validate: async (values, registeredFields) => {
-      const soraKuvausId = _.get(values, 'soraKuvaus.value');
+      const soraKuvausId = values?.soraKuvaus?.value;
       const soraKuvaus = soraKuvausId
         ? await getSoraKuvausById({ httpClient, apiUrls, id: soraKuvausId })
         : null;
-      return validateValintaperusteForm(
-        { ...values, soraKuvaus },
-        registeredFields
-      );
+      return validateKoulutusForm({ ...values, soraKuvaus }, registeredFields);
     },
   });
   return save;

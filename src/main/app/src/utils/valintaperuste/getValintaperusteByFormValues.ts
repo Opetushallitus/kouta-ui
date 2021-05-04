@@ -66,7 +66,6 @@ export const getValintaperusteByFormValues = values => {
   const { tila, muokkaaja, perustiedot, esikatselu = false } = values;
 
   const koulutustyyppi = perustiedot?.tyyppi ?? null;
-  const sorakuvausId = values?.soraKuvaus?.value ?? null;
   const onkoJulkinen = Boolean(values?.julkinen);
 
   const hakutapaKoodiUri = perustiedot?.hakutapa;
@@ -138,7 +137,6 @@ export const getValintaperusteByFormValues = values => {
     koulutustyyppi,
     onkoJulkinen,
     valintakokeet,
-    sorakuvausId,
     metadata: {
       tyyppi: koulutustyyppi,
       valintatavat,

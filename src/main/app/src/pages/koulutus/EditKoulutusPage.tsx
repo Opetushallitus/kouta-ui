@@ -58,6 +58,10 @@ const EditKoulutusPage = props => {
   );
 
   const config = useEntityFormConfig(ENTITY.KOULUTUS, selectedKoulutustyyppi);
+  const formConfig = useMemo(() => ({ ...config, readOnly: !canUpdate }), [
+    config,
+    canUpdate,
+  ]);
 
   const isJulkinen = useFieldValue('julkinen', FORM_NAME);
 
@@ -68,7 +72,7 @@ const EditKoulutusPage = props => {
   ) : (
     <ReduxForm form={FORM_NAME} initialValues={initialValues}>
       <Title>{t('sivuTitlet.koulutuksenMuokkaus')}</Title>
-      <FormConfigContext.Provider value={{ ...config, readOnly: !canUpdate }}>
+      <FormConfigContext.Provider value={formConfig}>
         <FormPage
           readOnly={!canUpdate}
           header={

@@ -3,7 +3,7 @@ import isOphOrganisaatio from '#/src/utils/organisaatio/isOphOrganisaatio';
 
 import getKoulutusFormConfig from './getKoulutusFormConfig';
 
-const validateKoulutusForm = values => {
+const validateKoulutusForm = (values, registeredFields) => {
   const { koulutustyyppi } = values;
   const { organisaatioOid } = values;
   const minTarjoajat = isOphOrganisaatio(organisaatioOid) ? 0 : 1;

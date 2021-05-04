@@ -1,5 +1,6 @@
 exports[`createValintaperuste > should be able to create valintaperuste #0`] =
 {
+  "esikatselu": false,
   "hakutapaKoodiUri": "hakutapa_01#1",
   "kielivalinta": [
     "fi"
@@ -140,9 +141,7 @@ exports[`createValintaperuste > should be able to create valintaperuste #0`] =
   },
   "onkoJulkinen": true,
   "organisaatioOid": "1.1.1.1.1.1",
-  "sorakuvausId": "1",
   "tila": "julkaistu",
-  "esikatselu": false,
   "valintakokeet": [
     {
       "metadata": {
@@ -157,7 +156,7 @@ exports[`createValintaperuste > should be able to create valintaperuste #0`] =
         "tietoja": {
           "fi": "<p>Tietoa hakijalle</p>"
         },
-        "vahimmaispisteet": 10.03,
+        "vahimmaispisteet": 10.03
       },
       "nimi": {
         "fi": "nimi"
@@ -304,7 +303,7 @@ exports[`editValintaperuste > should be able to edit valintaperuste #0`] =
         "tietoja": {
           "fi": "<p>Tietoa kokeesta - fi</p>"
         },
-        "vahimmaispisteet": 10.03,
+        "vahimmaispisteet": 10.03
       },
       "nimi": {
         "fi": "Kokeen nimi - fi"

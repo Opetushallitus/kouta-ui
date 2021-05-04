@@ -17,6 +17,7 @@ import {
   tilaSectionConfig,
   julkinenSectionConfig,
   createOptionalTranslatedFieldConfig,
+  validateRelations,
 } from '#/src/utils/form/formConfigUtils';
 
 const getMinTarjoajat = values => {
@@ -229,12 +230,24 @@ const config = createFormConfigBuilder().registerSections([
       },
     ],
   },
+  {
+    section: 'soraKuvaus',
+    koulutustyypit: KOULUTUSTYYPIT,
+    field: 'soraKuvaus',
+  },
   julkinenSectionConfig,
   tilaSectionConfig,
   {
     section: 'esikatselu',
     field: 'esikatselu',
     koulutustyypit: KOULUTUSTYYPIT,
+    validate: (eb, values) =>
+      validateRelations([
+        {
+          key: 'soraKuvaus',
+          t: 'yleiset.soraKuvaus',
+        },
+      ])(eb.validateExistence('tila')),
   },
 ]);
 

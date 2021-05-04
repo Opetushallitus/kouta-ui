@@ -22,7 +22,6 @@ type Yhteystieto = {
   verkkosivu: TranslatedField<string>;
 };
 
-type KoulutusModel = any;
 type SoraKuvausModel = any;
 
 type SelectOption<T = string> = { label?: string; value?: T };

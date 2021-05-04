@@ -57,6 +57,14 @@ export const makeNimiColumn = (
   ),
 });
 
+export const makeOrganisaatioColumn = (t): Column => ({
+  title: t('yleiset.organisaatio'),
+  key: 'organisaatio',
+  sortable: true,
+  render: ({ organisaatio }) =>
+    getFirstLanguageValue(organisaatio?.nimi, organisaatio?.language),
+});
+
 export const makeTilaColumn = (t): Column => ({
   title: t('yleiset.tila'),
   key: 'tila',

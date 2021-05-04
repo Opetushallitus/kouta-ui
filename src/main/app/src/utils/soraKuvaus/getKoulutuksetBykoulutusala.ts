@@ -1,6 +1,7 @@
 import { isBefore, parseISO, endOfToday } from 'date-fns';
 import _fp from 'lodash/fp';
 
+import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useApiQuery } from '#/src/hooks/useApiQuery';
 
 const isValidKoulutusKoodi = ({ koodisto, voimassaLoppuPvm }) =>
@@ -34,6 +35,7 @@ export const useKoulutuksetByKoulutusala = koulutusalat => {
     { koulutusalaKoodiUri: koulutusalat },
     {
       enabled: Boolean(koulutusalat),
+      ...LONG_CACHE_QUERY_OPTIONS,
     }
   );
 };

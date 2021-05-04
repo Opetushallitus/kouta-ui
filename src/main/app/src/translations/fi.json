@@ -290,7 +290,9 @@
     "eiNegatiivinenKokonaisluku": "Syötä kokonaisluku, joka on suurempi kuin 0",
     "apurahaMinMax": "Apurahan maksimimäärän täytyy olla suurempi tai yhtäsuuri kuin minimimäärän.",
     "yliSataProsenttia": "Syötetty prosenttiluku ei voi olla yli 100.",
-    "pakollinenAjankohtaJosJulkaistuYhteishaku": "Alkamisajankohta on pakollinen, jos haku on julkaistu ja hakutapa on yhteishaku."
+    "pakollinenAjankohtaJosJulkaistuYhteishaku": "Alkamisajankohta on pakollinen, jos haku on julkaistu ja hakutapa on yhteishaku.",
+    "koulutustyyppiEiVastaaSorakuvauksenTyyppia": "Valittu koulutustyyppi ei vastaa SORA-kuvauksen koulutustyyppiä.",
+    "koulutusEiVastaaSoraKuvauksenKoulutuksia": "Valittu koulutus ei vastaa SORA-kuvauksen koulutuksia."
   },
   "hakulomakeValinnat": {
     "ataru": "Käytetään hakemuspalvelun lomaketta",

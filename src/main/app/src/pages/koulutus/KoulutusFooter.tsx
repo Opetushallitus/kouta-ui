@@ -9,7 +9,7 @@ import { FormFooter } from '#/src/components/FormPage';
 import { ORGANISAATIOTYYPPI, ENTITY, FormMode } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormNameContext';
 import { useForm } from '#/src/hooks/form';
-import { useSaveKoulutus } from '#/src/hooks/formSaveHooks';
+import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
 import { getValuesForSaving } from '#/src/utils';
@@ -17,6 +17,7 @@ import { getTarjoajaOids } from '#/src/utils/getTarjoajaOids';
 import createKoulutus from '#/src/utils/koulutus/createKoulutus';
 import getKoulutusByFormValues from '#/src/utils/koulutus/getKoulutusByFormValues';
 import updateKoulutus from '#/src/utils/koulutus/updateKoulutus';
+import { validateKoulutusForm } from '#/src/utils/koulutus/validateKoulutusForm';
 import organisaatioMatchesTyyppi from '#/src/utils/organisaatio/organisaatioMatchesTyyppi';
 
 type KoulutusFooterProps = {
@@ -105,9 +106,10 @@ export const KoulutusFooter = ({
     ]
   );
 
-  const save = useSaveKoulutus({
-    formName,
+  const { save } = useSaveForm({
+    form: formName,
     submit,
+    validate: values => validateKoulutusForm(values, form?.registeredFields),
   });
 
   return (

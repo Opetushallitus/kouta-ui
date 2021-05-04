@@ -13,11 +13,10 @@ import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useForm } from '#/src/hooks/form';
 import useToaster from '#/src/hooks/useToaster';
+import { withRemoteErrors } from '#/src/utils/form/withRemoteErrors';
 import getHakuByOid from '#/src/utils/haku/getHakuByOid';
 import validateHakukohdeForm from '#/src/utils/hakukohde/validateHakukohdeForm';
 import getKoulutusByOid from '#/src/utils/koulutus/getKoulutusByOid';
-import validateKoulutusForm from '#/src/utils/koulutus/validateKoulutusForm';
-import getSoraKuvausById from '#/src/utils/soraKuvaus/getSoraKuvausById';
 import getToteutusByOid from '#/src/utils/toteutus/getToteutusByOid';
 import validateToteutusForm from '#/src/utils/toteutus/validateToteutusForm';
 import { getValintaperusteById } from '#/src/utils/valintaperuste/getValintaperusteById';
@@ -56,7 +55,7 @@ export const useSaveForm = ({ form: formName, validate, submit }) => {
 
     startSubmit();
 
-    let errors = null;
+    let errors = {};
 
     try {
       errors = await validate(enhancedValues, form.registeredFields);
@@ -76,7 +75,9 @@ export const useSaveForm = ({ form: formName, validate, submit }) => {
       }
     } catch (e) {
       console.error(e);
-      stopSubmit({ errorToast: true });
+      errors = withRemoteErrors(formName, e?.response, errors);
+
+      stopSubmit({ errors, errorToast: true });
     }
   }, [
     form,
@@ -160,23 +161,5 @@ export const useSaveHakukohde = ({
     },
   });
 
-  return save;
-};
-
-export const useSaveKoulutus = ({ submit, formName }) => {
-  const httpClient = useHttpClient();
-  const apiUrls = useUrls();
-
-  const { save } = useSaveForm({
-    form: formName,
-    submit,
-    validate: async (values, registeredFields) => {
-      const soraKuvausId = values?.soraKuvaus?.value;
-      const soraKuvaus = soraKuvausId
-        ? await getSoraKuvausById({ httpClient, apiUrls, id: soraKuvausId })
-        : null;
-      return validateKoulutusForm({ ...values, soraKuvaus }, registeredFields);
-    },
-  });
   return save;
 };

@@ -12,7 +12,6 @@ import {
   validateIf,
   validateOptionalTranslatedField,
   validatePohja,
-  validateRelations,
 } from '#/src/utils/form/formConfigUtils';
 import isOphOrganisaatio from '#/src/utils/organisaatio/isOphOrganisaatio';
 
@@ -25,7 +24,7 @@ const validateCommonFields = _fp.flow(
 const oneAndOnlyOneTutkinnonOsa = values =>
   values?.tutkinnonosat?.osat?.length === 1;
 
-const validateKoulutusForm = (values, registeredFields) => {
+export const validateKoulutusForm = (values, registeredFields) => {
   const { organisaatioOid } = values;
   const minTarjoajat = isOphOrganisaatio(organisaatioOid) ? 0 : 1;
 
@@ -57,12 +56,6 @@ const validateKoulutusForm = (values, registeredFields) => {
           ? eb
           : eb.validateTranslations('tutkinnonosat.nimi'),
       validateExistence('tila'),
-      validateRelations([
-        {
-          key: 'soraKuvaus',
-          t: 'yleiset.soraKuvaus',
-        },
-      ]),
       validateIf(
         isJulkaistu,
         _fp.flow(
@@ -75,5 +68,3 @@ const validateKoulutusForm = (values, registeredFields) => {
     )(createErrorBuilder(values, kieliversiot, registeredFields))
     .getErrors();
 };
-
-export default validateKoulutusForm;

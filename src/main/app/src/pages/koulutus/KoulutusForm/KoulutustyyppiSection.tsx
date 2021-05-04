@@ -88,7 +88,7 @@ export const createIsKoulutustyyppiDisabledGetter = ({
   return isDisabled;
 };
 
-export const KoulutustyyppiSection = ({ organisaatioOid, name }) => {
+export const KoulutustyyppiSection = ({ organisaatioOid, name, disabled }) => {
   const { t } = useTranslation();
 
   const isOphVirkailija = useIsOphVirkailija();
@@ -111,7 +111,7 @@ export const KoulutustyyppiSection = ({ organisaatioOid, name }) => {
       name={name}
       component={FormFieldKoulutustyyppiSelect}
       label={t('yleiset.valitseKoulutustyyppi')}
-      disabled={isLoading || !canCreate}
+      disabled={isLoading || !canCreate || disabled}
       getIsDisabled={createIsKoulutustyyppiDisabledGetter({
         isOphVirkailija,
         isLukio,

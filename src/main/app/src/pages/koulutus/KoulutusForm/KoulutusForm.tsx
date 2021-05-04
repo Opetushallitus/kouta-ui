@@ -85,22 +85,18 @@ export const KoulutusForm = ({
     hierarkia &&
     !isOphOrganisaatio(organisaatioOid) &&
     !isInHierarkia(organisaatio)(hierarkia) &&
-    isSameKoulutustyyppiWithOrganisaatio(organisaatio, hierarkia)
-      ? true
-      : null;
+    isSameKoulutustyyppiWithOrganisaatio(organisaatio, hierarkia);
 
   return (
     <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
-      {isNewKoulutus && (
-        <FormCollapse
-          section="koulutustyyppi"
-          header={t('yleiset.koulutustyyppi')}
-          scrollOnActive={false}
-          Component={KoulutustyyppiSection}
-          disabled={onlyTarjoajaRights}
-          organisaatioOid={organisaatioOid}
-        />
-      )}
+      <FormCollapse
+        section="koulutustyyppi"
+        header={t('yleiset.koulutustyyppi')}
+        scrollOnActive={false}
+        Component={KoulutustyyppiSection}
+        disabled={!isNewKoulutus || onlyTarjoajaRights}
+        organisaatioOid={organisaatioOid}
+      />
       {_fp.isFunction(onSelectBase) && (
         <PohjaFormCollapse
           onSelectBase={onSelectBase}

@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 
-import debounce from 'debounce-promise';
 import { useTranslation } from 'react-i18next';
 
 import { RouterAnchor } from '#/src/components/Anchor';
@@ -30,12 +29,10 @@ import LiitoksetModal from './LiitoksetModal';
 
 const { HAKUKOHDE } = ENTITY;
 
-const debounceHakukohteet = debounce(searchHakukohteet, 300);
-
 const getHakukohteetFn = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
 
-  const { result, totalCount } = await debounceHakukohteet({
+  const { result, totalCount } = await searchHakukohteet({
     httpClient,
     apiUrls,
     ...params,
@@ -82,7 +79,7 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
   const {
-    debouncedNimi,
+    nimi,
     showArchived,
     page,
     setPage,
@@ -94,7 +91,7 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
 
   const watch = JSON.stringify([
     page,
-    debouncedNimi,
+    nimi,
     organisaatioOid,
     showArchived,
     orderBy,
@@ -107,7 +104,7 @@ const HakukohteetSection = ({ organisaatioOid, canCreate = true }) => {
     reload,
   } = useApiAsync({
     promiseFn: getHakukohteetFn,
-    nimi: debouncedNimi,
+    nimi,
     page,
     showArchived,
     organisaatioOid,

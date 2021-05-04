@@ -18,7 +18,7 @@ import { setOrganisaatio } from '#/src/state/organisaatioSelection';
 
 import HakukohteetSection from './HakukohteetSection';
 import HautSection from './HautSection';
-import KoulutuksetSection from './KoulutuksetSection';
+import { KoulutuksetSection } from './KoulutuksetSection';
 import Navigation from './Navigation';
 import NavigationProvider from './NavigationProvider';
 import ToteutuksetSection from './ToteutuksetSection';

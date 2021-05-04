@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 
-import debounce from 'debounce-promise';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -30,12 +29,10 @@ import { getIndexParamsByFilters } from './utils';
 
 const { VALINTAPERUSTE } = ENTITY;
 
-const debounceValintaperusteet = debounce(searchValintaperusteet, 300);
-
 const getValintaperusteetFn = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
 
-  const { result, totalCount } = await debounceValintaperusteet({
+  const { result, totalCount } = await searchValintaperusteet({
     httpClient,
     apiUrls,
     ...params,
@@ -79,7 +76,7 @@ const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
   const {
-    debouncedNimi,
+    nimi,
     showArchived,
     page,
     setPage,
@@ -91,7 +88,7 @@ const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
 
   const watch = JSON.stringify([
     page,
-    debouncedNimi,
+    nimi,
     organisaatioOid,
     showArchived,
     orderBy,
@@ -104,7 +101,7 @@ const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
     reload,
   } = useApiAsync({
     promiseFn: getValintaperusteetFn,
-    nimi: debouncedNimi,
+    nimi,
     page,
     showArchived,
     organisaatioOid,

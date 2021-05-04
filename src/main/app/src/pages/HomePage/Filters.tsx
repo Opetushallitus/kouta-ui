@@ -1,11 +1,14 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 
+import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
 
 import { Flex, FlexItem } from '#/src/components/Flex';
 import Select from '#/src/components/Select';
 import { Checkbox, Input, InputIcon } from '#/src/components/virkailija';
 import { getJulkaisutilaTranslationKey, JULKAISUTILA } from '#/src/constants';
+
+const NAME_INPUT_DEBOUNCE_TIME = 300;
 
 const getDefaultOptions = t => [
   {
@@ -45,13 +48,23 @@ export const Filters = ({
     tilaOptionsProp,
   ]);
 
+  const [usedNimi, setUsedNimi] = useState(nimi);
+  const debouncedNimiChange = useRef(
+    _.debounce(value => onNimiChange(value), NAME_INPUT_DEBOUNCE_TIME)
+  );
+  const onNimiChangeDebounced = useCallback(e => {
+    const value = e.target.value;
+    setUsedNimi(value);
+    debouncedNimiChange.current(value);
+  }, []);
+
   return (
     <Flex alignCenter>
       <FlexItem grow={1} paddingRight={2}>
         <Input
           placeholder={nimiPlaceholder}
-          value={nimi}
-          onChange={onNimiChange}
+          value={usedNimi}
+          onChange={onNimiChangeDebounced}
           suffix={<InputIcon type="search" />}
         />
       </FlexItem>
@@ -63,6 +76,7 @@ export const Filters = ({
           isClearable
         />
       </FlexItem>
+      {/* TODO: Hide this if any tila is chosen */}
       <FlexItem grow={0}>
         <Checkbox checked={showArchived} onChange={onShowArchivedChange}>
           {t('etusivu.naytaArkistoidut')}

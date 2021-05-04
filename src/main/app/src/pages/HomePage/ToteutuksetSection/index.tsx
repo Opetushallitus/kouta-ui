@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 
-import debounce from 'debounce-promise';
 import { useTranslation } from 'react-i18next';
 
 import { RouterAnchor } from '#/src/components/Anchor';
@@ -27,16 +26,14 @@ import ListCollapse from '../ListCollapse';
 import NavigationAnchor from '../NavigationAnchor';
 import useFilterState from '../useFilterState';
 import { getIndexParamsByFilters } from '../utils';
-import KoulutusModal from './KoulutusModal';
+import { KoulutusModal } from './KoulutusModal';
 
 const { TOTEUTUS } = ENTITY;
-
-const debounceToteutukset = debounce(searchToteutukset, 300);
 
 const getToteutuksetFn = async ({ httpClient, apiUrls, ...filters }) => {
   const params = getIndexParamsByFilters(filters);
 
-  const { result, totalCount } = await debounceToteutukset({
+  const { result, totalCount } = await searchToteutukset({
     httpClient,
     apiUrls,
     ...params,
@@ -64,8 +61,8 @@ const makeTableColumns = (t, organisaatioOid) => [
   {
     title: t('etusivu.kiinnitetytHakukohteet'),
     key: 'hakukohteet',
-    render: ({ hakukohteet = 0 }) => (
-      <Badge color="primary">{hakukohteet}</Badge>
+    render: ({ hakukohdeCount = 0 }) => (
+      <Badge color="primary">{hakukohdeCount}</Badge>
     ),
   },
 ];
@@ -90,7 +87,7 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
   const {
-    debouncedNimi,
+    nimi,
     showArchived,
     page,
     setPage,
@@ -102,7 +99,7 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
 
   const watch = JSON.stringify([
     page,
-    debouncedNimi,
+    nimi,
     organisaatioOid,
     showArchived,
     orderBy,
@@ -115,7 +112,7 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
     reload,
   } = useApiAsync({
     promiseFn: getToteutuksetFn,
-    nimi: debouncedNimi,
+    nimi,
     page,
     showArchived,
     organisaatioOid,

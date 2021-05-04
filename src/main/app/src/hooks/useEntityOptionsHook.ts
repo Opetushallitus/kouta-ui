@@ -7,14 +7,14 @@ import { getJulkaisutilaTranslationKey, JULKAISUTILA } from '#/src/constants';
 import { useUserLanguage } from '#/src/hooks/useUserLanguage';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
-interface EntityForDropdown {
+type EntityForDropdown<T> = {
   nimi: Record<LanguageCode, string>;
   tila: JULKAISUTILA;
   id?: string;
   oid?: string;
-}
+} & T;
 
-export const useEntityOptions = entities => {
+export const useEntityOptions = <T>(entities, suffixFn?) => {
   const language = useUserLanguage();
   const { t } = useTranslation();
 
@@ -22,16 +22,17 @@ export const useEntityOptions = entities => {
     () =>
       _fp.isArray(entities)
         ? _fp.flow(
-            _fp.map((entity: EntityForDropdown) => ({
+            _fp.map((entity: EntityForDropdown<T>) => ({
               value: entity.id ?? entity.oid,
               label:
                 getFirstLanguageValue(entity.nimi, language) +
-                ` (${t(getJulkaisutilaTranslationKey(entity.tila))})`,
+                ` (${t(getJulkaisutilaTranslationKey(entity.tila))})` +
+                suffixFn?.(entity),
             })),
             _fp.orderBy(({ label }) => _fp.lowerCase(label), 'asc')
-          )(entities as Array<EntityForDropdown>)
+          )(entities as Array<EntityForDropdown<T>>)
         : [],
-    [entities, language, t]
+    [entities, language, suffixFn, t]
   );
 };
 

@@ -1,6 +1,5 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
-import debounce from 'debounce-promise';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -18,9 +17,11 @@ import ListTable, {
 import Pagination from '#/src/components/Pagination';
 import Spacing from '#/src/components/Spacing';
 import { ENTITY, ICONS } from '#/src/constants';
-import useApiAsync from '#/src/hooks/useApiAsync';
 import { getTestIdProps } from '#/src/utils';
-import searchKoulutukset from '#/src/utils/koulutus/searchKoulutukset';
+import {
+  FILTER_PAGE_SIZE,
+  useSearchKoulutukset,
+} from '#/src/utils/koulutus/searchKoulutukset';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 
 import Filters from './Filters';
@@ -30,20 +31,6 @@ import useFilterState from './useFilterState';
 import { getIndexParamsByFilters } from './utils';
 
 const { KOULUTUS } = ENTITY;
-
-const debounceKoulutukset = debounce(searchKoulutukset, 300);
-
-const getKoulutuksetFn = async ({ httpClient, apiUrls, ...filters }) => {
-  const params = getIndexParamsByFilters(filters);
-
-  const { result, totalCount } = await debounceKoulutukset({
-    httpClient,
-    apiUrls,
-    ...params,
-  });
-
-  return { result, pageCount: Math.ceil(totalCount / 10) };
-};
 
 const Actions = ({ organisaatioOid }) => {
   const { t } = useTranslation();
@@ -74,55 +61,46 @@ const makeTableColumns = (t, organisaatioOid) => [
   {
     title: t('etusivu.kiinnitetytToteutukset'),
     key: 'toteutukset',
-    render: ({ toteutukset = 0 }) => (
-      <Badge color="primary">{toteutukset}</Badge>
+    render: ({ toteutusCount = 0 }) => (
+      <Badge color="primary">{toteutusCount}</Badge>
     ),
   },
 ];
 
-const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
+export const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
-  const {
-    debouncedNimi,
-    showArchived,
-    page,
-    setPage,
-    orderBy,
-    setOrderBy,
-    tila,
-    filtersProps,
-  } = useFilterState({ paginationName: 'koulutukset' });
+  const filterState = useFilterState({ paginationName: 'koulutukset' });
 
-  const watch = JSON.stringify([
-    page,
-    debouncedNimi,
-    organisaatioOid,
-    showArchived,
-    orderBy,
-    tila,
-  ]);
+  const { page, setPage, orderBy, setOrderBy, filtersProps } = filterState;
+
+  const params = useMemo(
+    () => getIndexParamsByFilters({ ...filterState, organisaatioOid }),
+    [filterState, organisaatioOid]
+  );
 
   const {
-    data: { result: koulutukset, pageCount = 0 } = {},
-    error,
-    reload,
-  } = useApiAsync({
-    promiseFn: getKoulutuksetFn,
-    nimi: debouncedNimi,
-    page,
-    showArchived,
-    organisaatioOid,
-    orderBy,
-    tila,
-    watch,
-  });
+    data: { result: koulutukset, totalCount } = {},
+    isError,
+    isFetching,
+    isSuccess,
+    refetch,
+  } = useSearchKoulutukset(params);
 
-  const rows = useMemo(() => {
-    return koulutukset
-      ? koulutukset.map(koulutus => ({ ...koulutus, key: koulutus.oid }))
-      : null;
-  }, [koulutukset]);
+  const [pageCount, setPageCount] = useState(0);
+  useEffect(() => {
+    if (totalCount !== undefined) {
+      setPageCount(Math.ceil(totalCount / FILTER_PAGE_SIZE));
+    }
+  }, [totalCount]);
+
+  const rows = useMemo(
+    () =>
+      koulutukset
+        ? koulutukset.map(koulutus => ({ ...koulutus, key: koulutus.oid }))
+        : null,
+    [koulutukset]
+  );
 
   const tableColumns = useMemo(() => makeTableColumns(t, organisaatioOid), [
     t,
@@ -147,7 +125,9 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
           />
         </Spacing>
 
-        {rows ? (
+        {isFetching && <ListSpin />}
+        {isError && <ErrorAlert onReload={refetch} center />}
+        {isSuccess && (
           <ListTable
             rows={rows}
             columns={tableColumns}
@@ -155,10 +135,6 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
             sort={orderBy}
             {...getTestIdProps('koulutuksetTable')}
           />
-        ) : error ? (
-          <ErrorAlert onReload={reload} center />
-        ) : (
-          <ListSpin />
         )}
 
         <Flex marginTop={3} justifyCenter>
@@ -168,5 +144,3 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
     </>
   );
 };
-
-export default KoulutuksetSection;

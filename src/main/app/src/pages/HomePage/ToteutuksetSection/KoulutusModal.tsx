@@ -1,76 +1,52 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
+import { isFuture } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
-import Button from '#/src/components/Button';
-import Modal from '#/src/components/Modal';
-import Select from '#/src/components/Select';
-import {
-  Box,
-  FormLabel,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-} from '#/src/components/virkailija';
-import useApiAsync from '#/src/hooks/useApiAsync';
+import { EntityModal } from '#/src/components/EntityModal';
 import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
-import getKoulutukset from '#/src/utils/koulutus/getKoulutukset';
+import { useSearchAllKoulutuksetWithOid } from '#/src/utils/koulutus/searchKoulutukset';
 
-const KoulutusModal = ({ onClose, organisaatioOid, open }) => {
+const getEntitySuffix = e =>
+  e.eperuste ? ` - ${e.eperuste.diaarinumero}` : '';
+
+export const KoulutusModal = ({ onClose, organisaatioOid, open }) => {
   const { t } = useTranslation();
   const history = useHistory();
-  const [koulutus, setKoulutus] = useState();
 
-  const { data } = useApiAsync({
-    promiseFn: getKoulutukset,
+  const { data } = useSearchAllKoulutuksetWithOid({
     organisaatioOid,
-    watch: organisaatioOid,
   });
 
-  const options = useEntityOptions(data);
+  const filteredResults = useMemo(
+    () =>
+      data?.result.filter(
+        k =>
+          !k.eperuste?.voimassaoloLoppuu ||
+          isFuture(new Date(k.eperuste?.voimassaoloLoppuu))
+      ),
+    [data]
+  );
 
-  const onSubmit = useCallback(() => {
-    if (koulutus) {
-      history.push(
-        `/organisaatio/${organisaatioOid}/koulutus/${koulutus.value}/toteutus`
-      );
-    }
-  }, [history, koulutus, organisaatioOid]);
+  const options = useEntityOptions(filteredResults, getEntitySuffix);
+
+  const onSubmit = useCallback(
+    ({ oid }) => {
+      history.push(`/organisaatio/${organisaatioOid}/koulutus/${oid}/toteutus`);
+    },
+    [history, organisaatioOid]
+  );
 
   return (
-    <Modal open={open}>
-      <ModalHeader onClose={onClose}>
-        {t('etusivu.toteutuksenKoulutus')}
-      </ModalHeader>
-      <ModalBody>
-        <FormLabel htmlFor="toteutuksenKoulutus">
-          {t('etusivu.valitseToteutuksenKoulutus')}
-        </FormLabel>
-        <Select
-          value={koulutus}
-          onChange={setKoulutus}
-          options={options}
-          menuPosition="fixed"
-          menuPortalTarget={document.body}
-          id="toteutuksenKoulutus"
-        />
-      </ModalBody>
-      <ModalFooter>
-        <Box display="flex" justifyContent="flex-end">
-          <Box mr={2}>
-            <Button variant="text" onClick={onClose}>
-              {t('yleiset.sulje')}
-            </Button>
-          </Box>
-
-          <Button disabled={!koulutus} onClick={onSubmit}>
-            {t('yleiset.luoUusiToteutus')}
-          </Button>
-        </Box>
-      </ModalFooter>
-    </Modal>
+    <EntityModal
+      labelText={t('etusivu.toteutuksenKoulutus')}
+      headerText={t('etusivu.valitseToteutuksenKoulutus')}
+      submitText={t('yleiset.luoUusiToteutus')}
+      options={options}
+      onSubmit={onSubmit}
+      onClose={onClose}
+      open={open}
+    />
   );
 };
-
-export default KoulutusModal;

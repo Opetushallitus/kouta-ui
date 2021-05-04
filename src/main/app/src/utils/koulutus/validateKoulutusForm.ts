@@ -2,6 +2,7 @@ import _fp from 'lodash/fp';
 
 import { JULKAISUTILA } from '#/src/constants';
 import createErrorBuilder, {
+  validateArray,
   validateArrayMinLength,
   validateExistence,
   validateTranslations,
@@ -43,14 +44,14 @@ const validateKoulutusForm = (values, registeredFields) => {
       validateExistence('osaamisala.eperuste'),
       validateExistence('osaamisala.osaamisala'),
       validateOptionalTranslatedField('description.kuvaus'),
-      eb =>
-        eb.validateArray('tutkinnonosat.osat', eb => {
-          return _fp.flow([
-            eb => eb.validateExistence('eperuste'),
-            eb => eb.validateExistence('koulutus'),
-            eb => eb.validateArrayMinLength('osat', 1),
-          ])(eb);
-        }),
+      validateArray(
+        'tutkinnonosat.osat',
+        _fp.flow([
+          eb => eb.validateExistence('eperuste'),
+          eb => eb.validateExistence('koulutus'),
+          eb => eb.validateArrayMinLength('osat', 1),
+        ])
+      ),
       eb =>
         oneAndOnlyOneTutkinnonOsa(values)
           ? eb
@@ -68,8 +69,7 @@ const validateKoulutusForm = (values, registeredFields) => {
           validateTranslations('description.nimi'),
           validateExistence('information.eperuste'),
           validateArrayMinLength('information.korkeakoulutukset', 1),
-          validateArrayMinLength('tarjoajat.tarjoajat', minTarjoajat),
-          validateArrayMinLength('information.korkeakoulutukset', 1)
+          validateArrayMinLength('tarjoajat.tarjoajat', minTarjoajat)
         )
       )
     )(createErrorBuilder(values, kieliversiot, registeredFields))

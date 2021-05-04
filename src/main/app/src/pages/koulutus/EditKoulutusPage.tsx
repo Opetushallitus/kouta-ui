@@ -22,7 +22,9 @@ import getFormValuesByKoulutus from '#/src/utils/koulutus/getFormValuesByKoulutu
 import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
 
 import { KoulutusFooter } from './KoulutusFooter';
-import KoulutusForm from './KoulutusForm';
+import { KoulutusForm } from './KoulutusForm';
+
+const FORM_NAME = 'koulutusForm';
 
 const EditKoulutusPage = props => {
   const {
@@ -46,8 +48,6 @@ const EditKoulutusPage = props => {
         `/organisaatio/${organisaatioOid}/koulutus/${koulutus.oid}/toteutus`
       );
   }, [history, koulutus, organisaatioOid]);
-
-  const FORM_NAME = 'koulutusForm';
 
   const canUpdate = useCurrentUserHasRole(
     ENTITY.KOULUTUS,
@@ -97,7 +97,6 @@ const EditKoulutusPage = props => {
           </RelationInfoContainer>
           {koulutus ? (
             <KoulutusForm
-              steps={false}
               isNewKoulutus={false}
               onAttachToteutus={onAttachToteutus}
               koulutus={koulutus}

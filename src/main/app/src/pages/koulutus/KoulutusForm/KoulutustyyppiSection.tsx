@@ -17,7 +17,6 @@ import {
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import { useOrganisaatioHierarkia } from '#/src/hooks/useOrganisaatioHierarkia';
-import { otherwise } from '#/src/utils';
 import iterateTree from '#/src/utils/iterateTree';
 
 const useOppilaitosTyypit = organisaatioOid => {
@@ -89,7 +88,7 @@ export const createIsKoulutustyyppiDisabledGetter = ({
   return isDisabled;
 };
 
-const KoulutustyyppiSection = ({ organisaatioOid, name }) => {
+export const KoulutustyyppiSection = ({ organisaatioOid, name }) => {
   const { t } = useTranslation();
 
   const isOphVirkailija = useIsOphVirkailija();
@@ -122,5 +121,3 @@ const KoulutustyyppiSection = ({ organisaatioOid, name }) => {
     />
   );
 };
-
-export default KoulutustyyppiSection;

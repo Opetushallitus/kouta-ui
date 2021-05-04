@@ -24,13 +24,14 @@ import {
   useOrganisaatio,
 } from '#/src/hooks/useOrganisaatio';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
+import { KoulutusModel } from '#/src/types/koulutusTypes';
 import { getTestIdProps } from '#/src/utils';
 import getKoulutukset from '#/src/utils/koulutus/getKoulutukset';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 import isOphOrganisaatio from '#/src/utils/organisaatio/isOphOrganisaatio';
 
 import { JarjestajaSection } from './JarjestajaSection';
-import KoulutustyyppiSection from './KoulutustyyppiSection';
+import { KoulutustyyppiSection } from './KoulutustyyppiSection';
 import { KuvausFields } from './KuvausSection';
 import { EPerusteKuvausSection } from './KuvausSection/EPerusteKuvausSection';
 import { LisatiedotSection } from './LisatiedotSection';
@@ -46,14 +47,23 @@ const isInHierarkia = org => hierarkia =>
   hierarkia.organisaatioOid === org.organisaatioOid ||
   _fp.head(hierarkia.children.filter(isInHierarkia(org)));
 
-const KoulutusForm = ({
+type KoulutusFormProps = {
+  organisaatioOid: string;
+  koulutus?: KoulutusModel;
+  isNewKoulutus?: boolean;
+  steps?: boolean;
+  onSelectBase?: (pohjavalinta: PohjaValinta) => void;
+  onAttachToteutus?: () => void;
+};
+
+export const KoulutusForm = ({
   organisaatioOid,
   steps = false,
   isNewKoulutus = false,
-  koulutus: koulutusProp = null,
-  onAttachToteutus = undefined,
-  onSelectBase = undefined,
-}) => {
+  koulutus: koulutusProp,
+  onAttachToteutus,
+  onSelectBase,
+}: KoulutusFormProps) => {
   const { t } = useTranslation();
 
   const koulutustyyppi = useFieldValue('koulutustyyppi');
@@ -110,19 +120,20 @@ const KoulutusForm = ({
         disabled={onlyTarjoajaRights}
       />
 
-      {![KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA].includes(
-        koulutustyyppi
-      ) && (
-        <FormCollapse
-          section="information"
-          header={t('koulutuslomake.koulutuksenTiedot')}
-          Component={TiedotSection}
-          languages={languageTabs}
-          disabled={onlyTarjoajaRights}
-          koulutustyyppi={koulutustyyppi}
-          koulutuskoodi={koulutuskoodi}
-        />
-      )}
+      {koulutustyyppi &&
+        ![KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA].includes(
+          koulutustyyppi
+        ) && (
+          <FormCollapse
+            section="information"
+            header={t('koulutuslomake.koulutuksenTiedot')}
+            Component={TiedotSection}
+            languages={languageTabs}
+            disabled={onlyTarjoajaRights}
+            koulutustyyppi={koulutustyyppi}
+            koulutuskoodi={koulutuskoodi}
+          />
+        )}
 
       {koulutustyyppi === KOULUTUSTYYPPI.OSAAMISALA && (
         <FormCollapse
@@ -285,5 +296,3 @@ const KoulutusForm = ({
     </FormCollapseGroup>
   );
 };
-
-export default KoulutusForm;

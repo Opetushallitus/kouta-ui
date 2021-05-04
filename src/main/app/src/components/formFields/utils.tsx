@@ -41,22 +41,24 @@ export const createComponent = (Component, mapProps = simpleMapProps) => {
     const required = useFieldIsRequired(fieldConfig);
 
     return noFieldConfigs || fieldConfig || !configurable ? (
-      <FormControl
-        error={isError}
-        helperText={
-          <FormHelperTextMulti errorMessage={error} helperText={helperText} />
-        }
-        label={
-          label ? (
-            <FormLabel error={error} disabled={disabled} mb={1} id={labelId}>
-              {`${label}${required || requiredProp ? ' *' : ''}`}
-            </FormLabel>
-          ) : undefined
-        }
-        disabled={disabled || readOnly}
-      >
-        {children}
-      </FormControl>
+      <div className={isError ? 'field-error' : ''}>
+        <FormControl
+          error={isError}
+          helperText={
+            <FormHelperTextMulti errorMessage={error} helperText={helperText} />
+          }
+          label={
+            label ? (
+              <FormLabel error={error} disabled={disabled} mb={1} id={labelId}>
+                {`${label}${required || requiredProp ? ' *' : ''}`}
+              </FormLabel>
+            ) : undefined
+          }
+          disabled={disabled || readOnly}
+        >
+          {children}
+        </FormControl>
+      </div>
     ) : (
       <></>
     );

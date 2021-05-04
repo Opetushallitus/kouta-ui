@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
+import { useSpring, animated } from 'react-spring';
 import styled from 'styled-components';
 
 import Button from '#/src/components/Button';
@@ -28,17 +29,19 @@ const LanguageTabsWrapper = styled.div`
   padding-left: ${({ theme }) => theme.spacing.unit * 3}px;
 `;
 
-const renderActions = ({ actions, onContinue, t }) => {
+const Actions = ({ actions, onContinue, t }) => {
   return actions ? (
     actions
   ) : _.isFunction(onContinue) ? (
-    <Button type="button" onClick={onContinue}>
-      {t('yleiset.jatka')}
-    </Button>
+    <Box display="flex" justifyContent="center">
+      <Button type="button" onClick={onContinue}>
+        {t('yleiset.jatka')}
+      </Button>
+    </Box>
   ) : null;
 };
 
-const renderHeader = ({
+const Header = ({
   header,
   index,
   languages,
@@ -81,6 +84,7 @@ export type FormCollapseProps = {
   index?: number;
   header: string;
   id?: string;
+  key: string;
   defaultLanguage?: LanguageCode;
   showLanguageTabs?: boolean;
   languages?: Array<LanguageCode>;
@@ -98,6 +102,7 @@ export const FormCollapse = ({
   actions: actionsProp,
   index,
   header: headerProp,
+  key,
   id,
   defaultLanguage = 'fi',
   showLanguageTabs = false,
@@ -107,7 +112,6 @@ export const FormCollapse = ({
   isOpen = false,
   onToggle,
   Component,
-  ref,
   isLast,
   ...props
 }: FormCollapseProps) => {
@@ -120,33 +124,24 @@ export const FormCollapse = ({
     }
   }, [languages]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const actions = renderActions({ actions: actionsProp, t, onContinue });
   const childProps = { ...props, language, languages, onContinue };
 
-  const header = renderHeader({
-    header: headerProp,
-    language,
-    languages,
-    onLanguageChange: setLanguage,
-    index,
-    collapseOpen: isOpen,
-  });
-
   return (
-    <Box
-      key={`FormCollapse_${_.camelCase(headerProp)}`}
-      ref={ref}
-      mb={isLast ? 0 : 4}
-    >
+    <Box id={id} key={key} mb={isLast ? 0 : 4}>
       <Collapse
-        header={header}
-        footer={
-          actions && (
-            <Box display="flex" justifyContent="center">
-              {actions}
-            </Box>
-          )
+        header={
+          <Header
+            {...{
+              header: headerProp,
+              language,
+              languages,
+              onLanguageChange: setLanguage,
+              index,
+              collapseOpen: isOpen,
+            }}
+          />
         }
+        footer={<Actions {...{ actions: actionsProp, t, onContinue }} />}
         active={active}
         onToggle={onToggle}
         open={isOpen}

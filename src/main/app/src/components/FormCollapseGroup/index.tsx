@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 import { produce } from 'immer';
 import _ from 'lodash';
@@ -21,6 +21,8 @@ const getVisibleChildren = (children, config, configured) => {
   }) as Array<React.ReactElement<FormCollapseProps>>;
 };
 
+const getFormCollapseId = id => `FormCollapse_${id}`;
+
 const FormCollapseGroup = ({
   enabled = true,
   defaultActiveStep = 0,
@@ -33,7 +35,6 @@ const FormCollapseGroup = ({
     false
   );
 
-  const activeRef = useRef();
   const config = useFormConfig();
 
   const {
@@ -83,8 +84,10 @@ const FormCollapseGroup = ({
       setCollapsesOpen(collapses =>
         sectionErrors.map((error, i) => error || collapses[i])
       );
-      const firstErrorIndex = sectionErrors.indexOf(true);
-      firstErrorIndex !== -1 && setSectionNeedsFocus(firstErrorIndex);
+      const firstError = document.querySelector('.field-error');
+      if (firstError) {
+        scrollElementIntoView(firstError);
+      }
       setErrorsNeedAttention(false);
     }
   }, [errorsNeedAttention, sectionErrors]);
@@ -92,10 +95,11 @@ const FormCollapseGroup = ({
   useEffect(() => {
     if (sectionNeedsFocus != null) {
       setCollapseOpen(sectionNeedsFocus, true);
-      scrollElementIntoView(activeRef.current, 300);
+      const el = document.getElementById(getFormCollapseId(sectionNeedsFocus));
+      scrollElementIntoView(el, 200);
       setSectionNeedsFocus(null);
     }
-  }, [sectionNeedsFocus, activeRef]);
+  }, [sectionNeedsFocus]);
 
   return (
     <>
@@ -118,6 +122,8 @@ const FormCollapseGroup = ({
                 }
               : undefined,
           isLast,
+          key: `FormCollapse_${_.kebabCase(child?.props?.header)}`,
+          id: getFormCollapseId(index),
         };
         return React.cloneElement(child, childProps);
       })}

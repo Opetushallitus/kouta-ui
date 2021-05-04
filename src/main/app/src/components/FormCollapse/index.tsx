@@ -83,7 +83,6 @@ export type FormCollapseProps = {
   index?: number;
   header: string;
   id?: string;
-  key: string;
   defaultLanguage?: LanguageCode;
   showLanguageTabs?: boolean;
   languages?: Array<LanguageCode>;

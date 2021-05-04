@@ -16,8 +16,8 @@ export const FormHelperTextMulti = ({ errorMessage = [], helperText = '' }) => {
     <>
       {helperText && <FormHelperText>{helperText}</FormHelperText>}
       {errors &&
-        errors.map((e, index) => (
-          <FormHelperText key={index} error>
+        errors.map(e => (
+          <FormHelperText key={_.uniqueId('FormHelperText_')} error>
             {_.cond([
               [_.isFunction, f => f(t)],
               [otherwise, t],

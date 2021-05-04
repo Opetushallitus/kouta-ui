@@ -24,7 +24,7 @@ export type KoulutusFormValues = {
   kieliversiot: Array<LanguageCode>;
   muokkaaja?: string;
   tila: JULKAISUTILA;
-  pohja: any;
+  pohja?: PohjaValinta;
   information: InformationSectionValues;
   lisatiedot: {
     osiot: SelectOptions;

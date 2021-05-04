@@ -16,7 +16,7 @@ import { Spin } from '#/src/components/virkailija';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useUrls } from '#/src/contexts/UrlContext';
-import { useFieldValue, useEntityFormConfig } from '#/src/hooks/form';
+import { useFieldValue } from '#/src/hooks/form';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import getFormValuesByKoulutus from '#/src/utils/koulutus/getFormValuesByKoulutus';
 import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
@@ -49,19 +49,16 @@ const EditKoulutusPage = props => {
 
   const FORM_NAME = 'koulutusForm';
 
-  const selectedKoulutustyyppi = koulutus?.koulutustyyppi;
-
   const canUpdate = useCurrentUserHasRole(
     ENTITY.KOULUTUS,
     CRUD_ROLES.UPDATE,
     koulutus?.organisaatioOid
   );
 
-  const config = useEntityFormConfig(ENTITY.KOULUTUS, selectedKoulutustyyppi);
-  const formConfig = useMemo(() => ({ ...config, readOnly: !canUpdate }), [
-    config,
-    canUpdate,
-  ]);
+  const formConfig = useMemo(
+    () => ({ noFieldConfigs: true, readOnly: !canUpdate }),
+    [canUpdate]
+  );
 
   const isJulkinen = useFieldValue('julkinen', FORM_NAME);
 

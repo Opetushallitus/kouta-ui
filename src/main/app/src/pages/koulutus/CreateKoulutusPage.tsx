@@ -23,6 +23,10 @@ import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
 import KoulutusFooter from './KoulutusFooter';
 import KoulutusForm, { initialValues } from './KoulutusForm';
 
+const FORM_NAME = 'koulutusForm';
+
+const config = { noFieldConfigs: true };
+
 const getCopyValues = koulutus => ({
   pohja: {
     tarjoajat: koulutus.tarjoajat,
@@ -59,12 +63,6 @@ const CreateKoulutusPage = props => {
   const initialValues = useMemo(() => {
     return getInitialValues(data);
   }, [data]);
-
-  const FORM_NAME = 'koulutusForm';
-
-  const koulutustyyppi = useFieldValue('koulutustyyppi', FORM_NAME);
-
-  const config = useEntityFormConfig(ENTITY.KOULUTUS, koulutustyyppi);
 
   return (
     <ReduxForm form={FORM_NAME} initialValues={initialValues}>

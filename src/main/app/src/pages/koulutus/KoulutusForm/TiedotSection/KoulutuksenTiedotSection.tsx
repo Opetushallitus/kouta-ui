@@ -63,6 +63,7 @@ const EPerusteField = ({ isLoading, ...props }) => {
       label={t('koulutuslomake.valitseKaytettavaEperuste')}
       options={ePerusteOptions}
       disabled={isLoading || _.isNil(ePerusteet) || _.isEmpty(ePerusteet)}
+      required
       {...props}
     />
   );
@@ -85,6 +86,7 @@ const TutkinnonOsatField = ({ isLoading, ...props }) => {
         isLoading || _.isNil(selectedPeruste) || _.isEmpty(selectedPeruste)
       }
       isMulti={true}
+      required
       {...props}
     />
   );

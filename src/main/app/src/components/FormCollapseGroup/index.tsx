@@ -4,21 +4,16 @@ import { produce } from 'immer';
 import _ from 'lodash';
 
 import { FormCollapseProps } from '#/src/components/FormCollapse';
-import { Box } from '#/src/components/virkailija';
 import { useFormConfig, useForm } from '#/src/hooks/form';
 import scrollElementIntoView from '#/src/utils/scrollElementIntoView';
 
 const getVisibleChildren = (children, config, configured) => {
   return React.Children.toArray(children).filter(c => {
-    const sectionProp = _.get(c, 'props.section');
+    const section = _.get(c, 'props.section');
 
     if (!c) {
       return false;
-    } else if (
-      configured &&
-      sectionProp &&
-      !_.get(config, ['sections', sectionProp])
-    ) {
+    } else if (configured && section && !_.get(config, ['sections', section])) {
       return false;
     }
 
@@ -107,6 +102,7 @@ const FormCollapseGroup = ({
       {visibleChildren.map((child, index) => {
         const isLast = index === visibleChildren.length - 1;
         const childProps = {
+          ...(child?.props ?? {}),
           index,
           isOpen: collapsesOpen[index],
           onToggle: () => {
@@ -121,16 +117,9 @@ const FormCollapseGroup = ({
                   setSectionNeedsFocus(index + 1);
                 }
               : undefined,
+          isLast,
         };
-        return (
-          <Box
-            key={`FormCollapse_${_.camelCase(child.props.header)}`}
-            ref={index === sectionNeedsFocus ? activeRef : null}
-            mb={isLast ? 0 : 4}
-          >
-            {React.cloneElement(child, childProps)}
-          </Box>
-        );
+        return React.cloneElement(child, childProps);
       })}
     </>
   );

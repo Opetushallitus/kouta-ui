@@ -1,20 +1,22 @@
 import _fp from 'lodash/fp';
 
-import { JULKAISUTILA, POHJAVALINTA } from '#/src/constants';
+import { JULKAISUTILA } from '#/src/constants';
 import createErrorBuilder, {
   validateArrayMinLength,
   validateExistence,
   validateTranslations,
 } from '#/src/utils/form/createErrorBuilder';
-import { validateIf, getKielivalinta } from '#/src/utils/form/formConfigUtils';
+import {
+  validateIf,
+  getKielivalinta,
+  validatePohja,
+} from '#/src/utils/form/formConfigUtils';
 
-const validatePohja = eb =>
-  validateIf(
-    eb.getValues()?.pohja?.tapa === POHJAVALINTA.KOPIO,
-    validateExistence('pohja.valinta')
-  )(eb);
-
-const validateCommonFields = _fp.flow(validatePohja, validateExistence('tila'));
+const validateCommonFields = _fp.flow(
+  validateExistence('koulutustyyppi'),
+  validatePohja,
+  validateExistence('tila')
+);
 
 const validateSoraKuvausForm = values => {
   const { tila } = values;
@@ -23,7 +25,6 @@ const validateSoraKuvausForm = values => {
   return _fp
     .flow(
       validateCommonFields,
-      validateExistence('koulutustyyppi'),
       validateArrayMinLength('kieliversiot', 1),
       validateIf(
         isJulkaistu,

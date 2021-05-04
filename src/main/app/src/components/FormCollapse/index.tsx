@@ -89,6 +89,7 @@ export type FormCollapseProps = {
   isOpen?: boolean;
   onToggle?: () => void;
   Component: ComponentProps;
+  isLast?: boolean;
   [x: string]: any;
 };
 
@@ -106,7 +107,8 @@ export const FormCollapse = ({
   isOpen = false,
   onToggle,
   Component,
-  hidden = false,
+  ref,
+  isLast,
   ...props
 }: FormCollapseProps) => {
   const { t } = useTranslation();
@@ -130,31 +132,37 @@ export const FormCollapse = ({
     collapseOpen: isOpen,
   });
 
-  return hidden ? null : (
-    <Collapse
-      header={header}
-      footer={
-        actions && (
-          <Box display="flex" justifyContent="center">
-            {actions}
-          </Box>
-        )
-      }
-      active={active}
-      onToggle={onToggle}
-      open={isOpen}
-      toggleOnHeaderClick
-      {...(section ? getTestIdProps(`${section}Section`) : {})}
-      {...props}
+  return (
+    <Box
+      key={`FormCollapse_${_.camelCase(headerProp)}`}
+      ref={ref}
+      mb={isLast ? 0 : 4}
     >
-      {section ? (
-        <FormConfigSectionContext.Provider value={section}>
+      <Collapse
+        header={header}
+        footer={
+          actions && (
+            <Box display="flex" justifyContent="center">
+              {actions}
+            </Box>
+          )
+        }
+        active={active}
+        onToggle={onToggle}
+        open={isOpen}
+        toggleOnHeaderClick
+        {...(section ? getTestIdProps(`${section}Section`) : {})}
+        {...props}
+      >
+        {section ? (
+          <FormConfigSectionContext.Provider value={section}>
+            <Component name={section} {...childProps} />
+          </FormConfigSectionContext.Provider>
+        ) : (
           <Component name={section} {...childProps} />
-        </FormConfigSectionContext.Provider>
-      ) : (
-        <Component name={section} {...childProps} />
-      )}
-    </Collapse>
+        )}
+      </Collapse>
+    </Box>
   );
 };
 

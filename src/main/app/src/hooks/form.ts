@@ -12,7 +12,6 @@ import { assert } from '#/src/utils';
 import { getKielivalinta } from '#/src/utils/form/formConfigUtils';
 import getHakuFormConfig from '#/src/utils/haku/getHakuFormConfig';
 import getHakukohdeFormConfig from '#/src/utils/hakukohde/getHakukohdeFormConfig';
-import getKoulutusFormConfig from '#/src/utils/koulutus/getKoulutusFormConfig';
 import getToteutusFormConfig from '#/src/utils/toteutus/getToteutusFormConfig';
 
 import { useActions } from './useActions';
@@ -63,7 +62,6 @@ export function useFieldValue<T = any>(name, formNameProp?: string): T {
 }
 
 const formConfigsGettersByEntity = {
-  [ENTITY.KOULUTUS]: getKoulutusFormConfig,
   [ENTITY.TOTEUTUS]: getToteutusFormConfig,
   [ENTITY.HAKU]: getHakuFormConfig,
   [ENTITY.HAKUKOHDE]: getHakukohdeFormConfig,

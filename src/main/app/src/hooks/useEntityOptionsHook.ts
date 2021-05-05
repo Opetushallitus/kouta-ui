@@ -30,7 +30,7 @@ export const useEntityOptions = <T>(
               label:
                 getFirstLanguageValue(entity.nimi, language) +
                 ` (${t(getJulkaisutilaTranslationKey(entity.tila))})` +
-                suffixFn?.(entity),
+                (suffixFn?.(entity) ?? ''),
             })),
             _fp.orderBy(({ label }) => _fp.lowerCase(label), 'asc')
           )(entities as Array<EntityForDropdown<T>>)

@@ -37,7 +37,7 @@ export const withRemoteErrors = (
   errors = {}
 ) => {
   const resData = response?.data;
-  resData?.forEach(remoteError => {
+  resData?.forEach?.(remoteError => {
     const errorConverter =
       REMOTE_ERRORS_TO_FORM_ERRORS[formName]?.[remoteError?.path];
 

@@ -2,6 +2,7 @@ import React from 'react';
 
 import { createBrowserHistory } from 'history';
 import { urls as ophUrls } from 'oph-urls-js';
+import qs from 'query-string';
 import ReactDOM from 'react-dom';
 
 import createHttpClient from './httpClient';
@@ -15,25 +16,22 @@ const history = createBrowserHistory({ basename: 'kouta' });
 
 (async () => {
   let apiUrls = ophUrls;
+  const casTicket = qs.parse(window.location.search)?.ticket;
 
-  let httpClient = createHttpClient({
+  apiUrls = await configureUrls();
+
+  let httpClient = await createHttpClient({
     apiUrls,
     callerId: process.env.REACT_APP_CALLER_ID,
+    casTicket,
   });
-
-  apiUrls = await configureUrls(apiUrls, httpClient);
 
   const localizationInstance = createDefaultLocalization({
     httpClient,
     apiUrls,
   });
 
-  const { store, persistor } = createStore({
-    apiUrls,
-    httpClient,
-    history,
-    localization: localizationInstance,
-  });
+  const { store, persistor } = createStore();
 
   ReactDOM.render(
     <App

@@ -21,7 +21,7 @@ const isAuthorizationError = error => {
   return _.get(error, 'response.status') === 401;
 };
 
-const withAuthorizationInterceptor = apiUrls => client => {
+const withAuthorizationInterceptor = (apiUrls, casTicket) => client => {
   client.interceptors.response.use(
     response => response,
     async error => {
@@ -45,6 +45,7 @@ const withAuthorizationInterceptor = apiUrls => client => {
               cache: {
                 ignoreCache: true,
               },
+              params: { ticket: casTicket },
             });
           }
           await loggingInPromise;
@@ -95,7 +96,7 @@ const withCSRF = client => {
   return client;
 };
 
-const createHttpClient = ({ apiUrls, callerId }) => {
+const createHttpClient = async ({ apiUrls, callerId, casTicket }) => {
   let client = axios.create({
     withCredentials: true,
     headers: {
@@ -105,7 +106,24 @@ const createHttpClient = ({ apiUrls, callerId }) => {
     },
   });
 
-  return _.flow(withCSRF, withAuthorizationInterceptor(apiUrls))(client);
+  client = _.flow(
+    withCSRF,
+    withAuthorizationInterceptor(apiUrls, casTicket)
+  )(client);
+
+  try {
+    if (casTicket) {
+      await client.get(apiUrls.url('kouta-backend.login'), {
+        params: { ticket: casTicket },
+      });
+    } else {
+      await client.post(apiUrls.url('kouta-backend.login'));
+    }
+  } catch (e) {
+    console.log({ e });
+  }
+
+  return client;
 };
 
 export default createHttpClient;

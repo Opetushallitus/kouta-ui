@@ -56,11 +56,12 @@ export default function AuthorizationErrorModal({
                 isDev
                   ? window.open(
                       apiUrls.url('cas.login') +
-                        `?service=${encodeURIComponent(
-                          'https://localhost:3000/kouta'
-                        )}`
+                        `?service=${encodeURIComponent(window.location.href)}`
                     )
-                  : window.location.replace(apiUrls.url('cas.login'))
+                  : window.location.replace(
+                      apiUrls.url('cas.login') +
+                        `?service=${encodeURIComponent(window.location.href)}`
+                    )
               }
             >
               {t('yleiset.meneLoginSivulle')}

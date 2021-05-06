@@ -1,3 +1,5 @@
+import { urls } from 'oph-urls-js';
+
 import { isNodeEnv, isCypress } from './utils';
 
 const {
@@ -95,12 +97,12 @@ export const development = ({ isCypress }) => ({
   'hakukohderyhmapalvelu.haun-asetukset': `${virkailijaDevUrl}/hakukohderyhmapalvelu/haun-asetukset?hakuOid=$1`,
 });
 
-export const configure = async (urls, httpClient) => {
+export const configure = async () => {
+  urls.addCallerId(process.env.REACT_APP_CALLER_ID);
   if (isNodeEnv(['development', 'test'])) {
     urls.addProperties(development({ isCypress }));
   } else {
-    const { data } = await httpClient.get('/kouta/rest/config/frontProperties');
-    urls.addProperties(data);
+    await urls.load('/kouta/rest/config/frontProperties');
   }
 
   return urls;

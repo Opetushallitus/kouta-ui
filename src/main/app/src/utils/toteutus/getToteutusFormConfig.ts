@@ -291,17 +291,15 @@ const config = createFormConfigBuilder().registerSections([
       {
         field: '.suunniteltuKesto.vuotta',
         required: false,
-        validate: validateIfJulkaistu(
-          _fp.flow(
-            validateIfJulkaistu(
-              validateExistence('jarjestamistiedot.suunniteltuKesto.vuotta')
-            ),
-            validateInteger('jarjestamistiedot.suunniteltuKesto.vuotta', {
-              min: 0,
-              max: 99,
-              optional: true,
-            })
-          )
+        validate: _fp.flow(
+          validateIfJulkaistu(
+            validateExistence('jarjestamistiedot.suunniteltuKesto.vuotta')
+          ),
+          validateInteger('jarjestamistiedot.suunniteltuKesto.vuotta', {
+            min: 0,
+            max: 99,
+            optional: true,
+          })
         ),
       },
       {

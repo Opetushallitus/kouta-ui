@@ -11,6 +11,7 @@ import {
   validateIfJulkaistu,
   validateOptionalTranslatedField,
   validateRelations,
+  validateValintakokeet,
 } from '../form/formConfigUtils';
 
 const validateValintatavat = _fp.flow(
@@ -36,6 +37,7 @@ export const validateValintaperusteForm = (values, registeredFields) => {
       validateIfJulkaistu(validateExistence('perustiedot.kohdejoukko')),
       validateTranslations('kuvaus.nimi'),
       validateOptionalTranslatedField('kuvaus.kuvaus'),
+      validateIfJulkaistu(validateValintakokeet),
       validateValintatavat,
       validateRelations([
         {

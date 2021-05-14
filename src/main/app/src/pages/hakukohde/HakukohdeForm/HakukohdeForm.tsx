@@ -2,22 +2,22 @@ import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import FormCollapse from '#/src/components/FormCollapse';
-import FormCollapseGroup from '#/src/components/FormCollapseGroup';
-import JulkaisutilaField from '#/src/components/JulkaisutilaField';
-import KieliversiotFields from '#/src/components/KieliversiotFields';
+import { FormCollapse } from '#/src/components/FormCollapse';
+import { FormCollapseGroup } from '#/src/components/FormCollapseGroup';
+import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
+import { KieliversiotFields } from '#/src/components/KieliversiotFields';
 import { KOULUTUSTYYPPI } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import { AloituspaikatSection } from '#/src/pages/hakukohde/HakukohdeForm/AloituspaikatSection';
 
 import { HakukohteenValintakokeetSection } from './HakukohteenValintakokeetSection';
-import JarjestyspaikkaSection from './JarjestyspaikkaSection';
+import { JarjestyspaikkaSection } from './JarjestyspaikkaSection';
 import { KuvausSection } from './KuvausSection';
-import LiitteetSection from './LiitteetSection';
+import { LiitteetSection } from './LiitteetSection';
 import { PerustiedotSection } from './PerustiedotSection';
-import PohjakoulutusSection from './PohjakoulutusSection';
+import { PohjakoulutusSection } from './PohjakoulutusSection';
 
-const HakukohdeForm = ({
+export const HakukohdeForm = ({
   steps = true,
   organisaatioOid,
   haku,
@@ -32,7 +32,7 @@ const HakukohdeForm = ({
   const opetustapaKoodiUrit = toteutus?.metadata?.opetus?.opetustapaKoodiUrit;
 
   return (
-    <FormCollapseGroup enabled={steps} defaultOpen={!steps} configured>
+    <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
       <FormCollapse
         section="kieliversiot"
         header={t('yleiset.kieliversiot')}
@@ -108,5 +108,3 @@ const HakukohdeForm = ({
     </FormCollapseGroup>
   );
 };
-
-export default HakukohdeForm;

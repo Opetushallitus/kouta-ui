@@ -28,6 +28,7 @@ const AlkamiskausiJaVuosiFields = ({ name }) => {
           component={FormFieldRadioGroup}
           label={t('yleiset.valitseAlkamiskausi')}
           options={options}
+          required
         />
       </Box>
       <Box flexGrow="1" p={1}>
@@ -35,6 +36,7 @@ const AlkamiskausiJaVuosiFields = ({ name }) => {
           name={`${name}.vuosi`}
           component={FormFieldYearSelect}
           placeholder={t('yleiset.valitseAlkamisvuosi')}
+          required
         />
       </Box>
     </Spacing>

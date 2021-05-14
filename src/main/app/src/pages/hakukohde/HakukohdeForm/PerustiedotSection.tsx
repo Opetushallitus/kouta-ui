@@ -9,8 +9,8 @@ import { Divider } from '#/src/components/virkailija';
 import { getTestIdProps } from '#/src/utils';
 import isAmmatillinenKoulutustyyppi from '#/src/utils/koulutus/isAmmatillinenKoulutustyyppi';
 
-import AlkamiskausiSection from './AlkamiskausiSection';
-import HakuajatSection from './HakuajatSection';
+import { AlkamiskausiSection } from './AlkamiskausiSection';
+import { HakuajatSection } from './HakuajatSection';
 import LomakeSection from './LomakeSection';
 
 export const PerustiedotSection = ({
@@ -30,6 +30,7 @@ export const PerustiedotSection = ({
           name={`${name}.nimi.${language}`}
           component={FormFieldInput}
           label={t('yleiset.nimi')}
+          required
         />
       </Spacing>
       {isAmmatillinen ? (

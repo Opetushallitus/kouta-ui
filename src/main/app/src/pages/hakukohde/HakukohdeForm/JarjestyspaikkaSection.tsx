@@ -44,7 +44,7 @@ const JarjestyspaikkaRadioGroup = createFormFieldComponent(
   simpleMapProps
 );
 
-const JarjestyspaikkaSection = ({
+export const JarjestyspaikkaSection = ({
   tarjoajat,
   opetustapaKoodiUrit,
   toteutusOrganisaatioOid,
@@ -95,9 +95,8 @@ const JarjestyspaikkaSection = ({
         component={JarjestyspaikkaRadioGroup}
         options={jarjestyspaikkaOptions}
         name={`jarjestyspaikkaOid`}
+        required
       />
     </div>
   ) : null;
 };
-
-export default JarjestyspaikkaSection;

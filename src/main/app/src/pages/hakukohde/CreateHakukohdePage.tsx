@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
+import { EsikatseluControls } from '#/src/components/EsikatseluControls';
 import FormHeader from '#/src/components/FormHeader';
 import FormPage from '#/src/components/FormPage';
 import {
@@ -16,17 +17,17 @@ import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
 import { KOULUTUSTYYPPI, ENTITY, FormMode } from '#/src/constants';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
-import getHakukohdeFormConfig from '#/src/utils/hakukohde/getHakukohdeFormConfig';
 
 import { useHakukohdePageData } from './getHakukohdePageData';
 import { HakukohdeFooter } from './HakukohdeFooter';
-import HakukohdeForm, {
+import {
+  HakukohdeForm,
   initialValues as getInitialValues,
 } from './HakukohdeForm';
-// TODO: how to show non-published haut in konfo?
-// import { EsikatseluControls } from '#/src/components/EsikatseluControls';
 
-const CreateHakukohdePage = ({
+const formConfig = { noFieldConfigs: true };
+
+export const CreateHakukohdePage = ({
   match: {
     params: { organisaatioOid, toteutusOid, hakuOid },
   },
@@ -48,38 +49,35 @@ const CreateHakukohdePage = ({
     [data]
   );
 
-  const config = useMemo(getHakukohdeFormConfig, []);
-
   return (
     <ReduxForm form="hakukohdeForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.uusiHakukohde')}</Title>
-      <FormPage
-        header={<FormHeader>{t('yleiset.hakukohde')}</FormHeader>}
-        steps={<FormSteps activeStep={ENTITY.HAKUKOHDE} />}
-        footer={
-          <HakukohdeFooter
-            formMode={FormMode.CREATE}
-            organisaatioOid={organisaatioOid}
-            haku={haku}
-            toteutus={toteutus}
-          />
-        }
-        // TODO: how to show non-published haut in konfo?
-        // esikatseluControls={<EsikatseluControls />}
-      >
-        {isFetching ? (
-          <Spin center />
-        ) : (
-          <>
-            <RelationInfoContainer>
-              <HakuRelation organisaatioOid={organisaatioOid} haku={haku} />
-              <ToteutusRelation
-                organisaatioOid={organisaatioOid}
-                toteutus={toteutus}
-              />
-              <OrganisaatioRelation organisaatioOid={organisaatioOid} />
-            </RelationInfoContainer>
-            <FormConfigContext.Provider value={config}>
+      <FormConfigContext.Provider value={formConfig}>
+        <FormPage
+          header={<FormHeader>{t('yleiset.hakukohde')}</FormHeader>}
+          steps={<FormSteps activeStep={ENTITY.HAKUKOHDE} />}
+          esikatseluControls={<EsikatseluControls />}
+          footer={
+            <HakukohdeFooter
+              formMode={FormMode.CREATE}
+              organisaatioOid={organisaatioOid}
+              haku={haku}
+              toteutus={toteutus}
+            />
+          }
+        >
+          {isFetching ? (
+            <Spin center />
+          ) : (
+            <>
+              <RelationInfoContainer>
+                <HakuRelation organisaatioOid={organisaatioOid} haku={haku} />
+                <ToteutusRelation
+                  organisaatioOid={organisaatioOid}
+                  toteutus={toteutus}
+                />
+                <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+              </RelationInfoContainer>
               <HakukohdeForm
                 steps
                 organisaatioOid={organisaatioOid}
@@ -91,12 +89,10 @@ const CreateHakukohdePage = ({
                 }
                 showArkistoituTilaOption={false}
               />
-            </FormConfigContext.Provider>
-          </>
-        )}
-      </FormPage>
+            </>
+          )}
+        </FormPage>
+      </FormConfigContext.Provider>
     </ReduxForm>
   );
 };
-
-export default CreateHakukohdePage;

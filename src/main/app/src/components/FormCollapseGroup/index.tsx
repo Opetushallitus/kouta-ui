@@ -42,7 +42,7 @@ const getVisibleChildren = (children, config, configured) => {
 
 const getFormCollapseId = id => `FormCollapse_${id}`;
 
-const FormCollapseGroup = ({
+export const FormCollapseGroup = ({
   enabled = true,
   defaultActiveStep = 0,
   configured = false,

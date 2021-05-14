@@ -326,7 +326,7 @@ const LiitteetField = ({
   );
 };
 
-const LiitteetFields = ({ language, name, organisaatioOid }) => {
+export const LiitteetFields = ({ language, name, organisaatioOid }) => {
   const { options: tyyppiOptions } = useKoodistoOptions({
     koodisto: 'liitetyypitamm',
   });
@@ -351,5 +351,3 @@ const LiitteetFields = ({ language, name, organisaatioOid }) => {
     />
   );
 };
-
-export default LiitteetFields;

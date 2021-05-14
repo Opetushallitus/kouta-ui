@@ -11,7 +11,6 @@ import { useFormName } from '#/src/contexts/FormNameContext';
 import { assert } from '#/src/utils';
 import { getKielivalinta } from '#/src/utils/form/formConfigUtils';
 import getHakuFormConfig from '#/src/utils/haku/getHakuFormConfig';
-import getHakukohdeFormConfig from '#/src/utils/hakukohde/getHakukohdeFormConfig';
 
 import { useActions } from './useActions';
 
@@ -62,7 +61,6 @@ export function useFieldValue<T = any>(name, formNameProp?: string): T {
 
 const formConfigsGettersByEntity = {
   [ENTITY.HAKU]: getHakuFormConfig,
-  [ENTITY.HAKUKOHDE]: getHakukohdeFormConfig,
 };
 
 const getFormConfigByEntity = (entityName, koulutustyyppi) => {

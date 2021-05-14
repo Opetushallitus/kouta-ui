@@ -8,7 +8,7 @@ import { Box } from '#/src/components/virkailija';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
 
-const PohjakoulutusSection = ({ name, language }) => {
+export const PohjakoulutusSection = ({ name, language }) => {
   const { options } = useKoodistoOptions({
     koodisto: 'pohjakoulutusvaatimuskouta',
   });
@@ -24,6 +24,7 @@ const PohjakoulutusSection = ({ name, language }) => {
           options={options}
           label={t('hakukohdelomake.valitsePohjakoulutusvaatimus')}
           isMulti
+          required
         />
       </Box>
 
@@ -37,5 +38,3 @@ const PohjakoulutusSection = ({ name, language }) => {
     </>
   );
 };
-
-export default PohjakoulutusSection;

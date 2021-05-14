@@ -52,7 +52,7 @@ const CustomHakuaika = ({ name }) => {
   );
 };
 
-const HakuajatSection = ({ haku, name }) => {
+export const HakuajatSection = ({ haku, name }) => {
   const { t } = useTranslation();
   const eriHakuaika = useFieldValue(`${name}.eriHakuaika`);
 
@@ -68,5 +68,3 @@ const HakuajatSection = ({ haku, name }) => {
     </>
   );
 };
-
-export default HakuajatSection;

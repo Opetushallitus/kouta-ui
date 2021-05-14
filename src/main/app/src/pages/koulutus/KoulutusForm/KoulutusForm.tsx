@@ -7,7 +7,7 @@ import Button from '#/src/components/Button';
 import { Flex } from '#/src/components/Flex';
 import FormCollapse from '#/src/components/FormCollapse';
 import FormCollapseGroup from '#/src/components/FormCollapseGroup';
-import JulkaisutilaField from '#/src/components/JulkaisutilaField';
+import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
 import JulkisuusSection from '#/src/components/JulkisuusSection';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';

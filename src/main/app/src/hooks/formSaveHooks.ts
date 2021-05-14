@@ -14,10 +14,6 @@ import { useUrls } from '#/src/contexts/UrlContext';
 import { useForm } from '#/src/hooks/form';
 import useToaster from '#/src/hooks/useToaster';
 import { withRemoteErrors } from '#/src/utils/form/withRemoteErrors';
-import getHakuByOid from '#/src/utils/haku/getHakuByOid';
-import validateHakukohdeForm from '#/src/utils/hakukohde/validateHakukohdeForm';
-import getToteutusByOid from '#/src/utils/toteutus/getToteutusByOid';
-import { getValintaperusteById } from '#/src/utils/valintaperuste/getValintaperusteById';
 
 export const useSaveForm = ({ formName, validate, submit }) => {
   const dispatch = useDispatch();
@@ -91,39 +87,4 @@ export const useSaveForm = ({ formName, validate, submit }) => {
   ]);
 
   return save;
-};
-
-export const useSaveHakukohde = ({
-  formName,
-  submit,
-  haku: oldHaku,
-  toteutus: oldToteutus,
-}) => {
-  const httpClient = useHttpClient();
-  const apiUrls = useUrls();
-
-  return useSaveForm({
-    formName,
-    submit,
-    validate: async values => {
-      const valintaperusteId = _.get(values, 'valintaperusteenKuvaus.value');
-      const [toteutus, haku, valintaperuste] = await Promise.all([
-        getToteutusByOid({ httpClient, apiUrls, oid: oldToteutus.oid }),
-        getHakuByOid({ httpClient, apiUrls, oid: oldHaku.oid }),
-        valintaperusteId
-          ? getValintaperusteById({
-              httpClient,
-              apiUrls,
-              oid: valintaperusteId,
-            })
-          : Promise.resolve(),
-      ]);
-      return validateHakukohdeForm({
-        ...values,
-        haku,
-        toteutus,
-        valintaperuste,
-      });
-    },
-  });
 };

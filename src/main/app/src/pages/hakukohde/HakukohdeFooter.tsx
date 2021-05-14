@@ -8,7 +8,7 @@ import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormNameContext';
 import { useForm } from '#/src/hooks/form';
-import { useSaveHakukohde } from '#/src/hooks/formSaveHooks';
+import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import { HakukohdeModel } from '#/src/types/hakukohdeTypes';
 import { HakuModel } from '#/src/types/hakuTypes';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
@@ -16,6 +16,7 @@ import { getValuesForSaving } from '#/src/utils';
 import createHakukohde from '#/src/utils/hakukohde/createHakukohde';
 import { getHakukohdeByFormValues } from '#/src/utils/hakukohde/getHakukohdeByFormValues';
 import updateHakukohde from '#/src/utils/hakukohde/updateHakukohde';
+import { validateHakukohdeForm } from '#/src/utils/hakukohde/validateHakukohdeForm';
 
 type HakukohdeFooterProps = {
   formMode: FormMode;
@@ -93,7 +94,11 @@ export const HakukohdeFooter = ({
     ]
   );
 
-  const save = useSaveHakukohde({ submit, haku, toteutus, formName });
+  const { save } = useSaveForm({
+    submit,
+    form: formName,
+    validate: validateHakukohdeForm,
+  });
 
   return (
     <FormFooter entity={ENTITY.HAKUKOHDE} save={save} canUpdate={canUpdate} />

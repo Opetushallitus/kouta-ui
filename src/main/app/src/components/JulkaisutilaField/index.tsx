@@ -46,7 +46,7 @@ const Label = ({ tila, t }) => {
   );
 };
 
-const JulkaisutilaField = ({
+export const JulkaisutilaField = ({
   disabled,
   name,
   label: labelProp,
@@ -79,5 +79,3 @@ const JulkaisutilaField = ({
     </Field>
   );
 };
-
-export default JulkaisutilaField;

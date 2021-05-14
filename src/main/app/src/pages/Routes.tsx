@@ -8,8 +8,8 @@ import { ENTITY } from '#/src/constants';
 
 import CreateHakuPage from './haku/CreateHakuPage';
 import EditHakuPage from './haku/EditHakuPage';
-import CreateHakukohdePage from './hakukohde/CreateHakukohdePage';
-import EditHakukohdePage from './hakukohde/EditHakukohdePage';
+import { CreateHakukohdePage } from './hakukohde/CreateHakukohdePage';
+import { EditHakukohdePage } from './hakukohde/EditHakukohdePage';
 import HomePage from './HomePage';
 import CreateKoulutusPage from './koulutus/CreateKoulutusPage';
 import EditKoulutusPage from './koulutus/EditKoulutusPage';

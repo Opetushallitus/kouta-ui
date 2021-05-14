@@ -7,7 +7,7 @@ test('getFormValuesByValintaperuste returns correct form values given valintaper
     kielivalinta: ['fi', 'sv'],
     kohdejoukkoKoodiUri: 'joukko_1#1',
     koulutustyyppi: 'tyyppi_1#1',
-    onkoJulkinen: true,
+    julkinen: true,
     metadata: {
       kuvaus: {
         fi: '<h1>Fi kuvaus</h1>',

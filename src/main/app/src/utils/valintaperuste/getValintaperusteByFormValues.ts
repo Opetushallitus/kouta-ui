@@ -66,7 +66,7 @@ export const getValintaperusteByFormValues = values => {
   const { tila, muokkaaja, perustiedot, esikatselu = false } = values;
 
   const koulutustyyppi = perustiedot?.tyyppi ?? null;
-  const onkoJulkinen = Boolean(values?.julkinen);
+  const julkinen = Boolean(values?.julkinen);
 
   const hakutapaKoodiUri = perustiedot?.hakutapa;
   const kielivalinta = perustiedot?.kieliversiot ?? [];
@@ -135,7 +135,7 @@ export const getValintaperusteByFormValues = values => {
     kohdejoukkoKoodiUri,
     nimi,
     koulutustyyppi,
-    onkoJulkinen,
+    julkinen,
     valintakokeet,
     metadata: {
       tyyppi: koulutustyyppi,

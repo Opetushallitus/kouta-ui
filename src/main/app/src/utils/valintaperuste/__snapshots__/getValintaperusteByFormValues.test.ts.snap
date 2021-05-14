@@ -4,6 +4,7 @@ exports[`Should convert valintaperuste form with valintatapa 1`] = `
 Object {
   "esikatselu": false,
   "hakutapaKoodiUri": "tapa_1#1",
+  "julkinen": true,
   "kielivalinta": Array [
     "fi",
     "sv",
@@ -109,7 +110,6 @@ Object {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
-  "onkoJulkinen": true,
   "tila": "julkaistu",
   "valintakokeet": Array [
     Object {
@@ -168,6 +168,7 @@ exports[`Should convert valintaperuste form without valintatapa 1`] = `
 Object {
   "esikatselu": false,
   "hakutapaKoodiUri": "tapa_1#1",
+  "julkinen": true,
   "kielivalinta": Array [
     "fi",
     "sv",
@@ -200,7 +201,6 @@ Object {
     "fi": "Fi nimi",
     "sv": "Sv nimi",
   },
-  "onkoJulkinen": true,
   "tila": "julkaistu",
   "valintakokeet": Array [
     Object {

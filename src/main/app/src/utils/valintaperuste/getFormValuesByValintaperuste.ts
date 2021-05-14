@@ -28,7 +28,7 @@ export const getFormValuesByValintaperuste = valintaperuste => {
     nimi = {},
     metadata = {},
     koulutustyyppi = null,
-    onkoJulkinen = false,
+    julkinen = false,
     tila,
     valintakokeet,
     esikatselu = false,
@@ -51,7 +51,7 @@ export const getFormValuesByValintaperuste = valintaperuste => {
       hakutapa: hakutapaKoodiUri,
       kohdejoukko: kohdejoukkoKoodiUri ? { value: kohdejoukkoKoodiUri } : null,
     },
-    julkinen: onkoJulkinen,
+    julkinen,
     kuvaus: {
       nimi,
       kuvaus: _.mapValues(kuvaus || {}, parseEditorState),

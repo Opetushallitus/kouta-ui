@@ -43,16 +43,6 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
           />
         </Box>
       )}
-      {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && (
-        <Box mb={2}>
-          <KoulutuksenEPerusteTiedot
-            disabled={disabled}
-            language={language}
-            koulutusLabel={t('koulutuslomake.valitseOsaamisala')}
-            name={name}
-          />
-        </Box>
-      )}
       {[
         KOULUTUSTYYPPI.VALMA,
         KOULUTUSTYYPPI.TELMA,
@@ -94,6 +84,24 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
           </Box>
         </>
       )}
+      {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && (
+        <>
+          <Box mb={2} {...getTestIdProps('koulutusSelect')}>
+            <KoulutusField
+              disabled={disabled}
+              name={`${name}.koulutus`}
+              koulutustyyppi={koulutustyyppi}
+              language={language}
+              valitseKoulutusLabel={t('yleiset.valitseKoulutus')}
+              required
+            />
+          </Box>
+          <Box mb={2}>
+            <OpintojenlaajuusField disabled={disabled} name={name} />
+          </Box>
+        </>
+      )}
+
       {[
         ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
         KOULUTUSTYYPPI.AVOIN_YO,
@@ -103,6 +111,7 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
         KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJAKOULUTUS,
         KOULUTUSTYYPPI.AMMATILLINEN_ERITYISOPETTAJA_KOULUTUS,
         KOULUTUSTYYPPI.AMMATILLINEN_OPINTO_OHJAAJA_KOULUTUS,
+        KOULUTUSTYYPPI.LUKIOKOULUTUS,
       ].includes(koulutustyyppi) && (
         <Box mb={2} {...getTestIdProps('nimiInput')}>
           <Field

@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 
 import AsyncKoodistoSelect from '#/src/components/AsyncKoodistoSelect';
 import useKoodisto from '#/src/hooks/useKoodisto';
-import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
+import { formatKoodiLabelWithArvo } from '#/src/utils';
 
 // Tämän nimi on "-------------" 'tutkintonimikekk'-koodistossa, eli on jonkinlainen tyhjää/tuntematonta vastaava arvo.
 // Tarpeeton, koska Select-komponentista voi poistaa valinnan ja koutaan voidaan tallentaa oikeasti tyhjä arvo.
@@ -21,9 +21,7 @@ export const TutkintonimikeSelect = props => {
       koodistoData={koodistoData}
       isMulti
       showAllOptions={true}
-      formatKoodiLabel={(koodi, language) =>
-        `${getKoodiNimiTranslation(koodi, language)} (${koodi.koodiArvo})`
-      }
+      formatKoodiLabel={formatKoodiLabelWithArvo}
       {...props}
     />
   );

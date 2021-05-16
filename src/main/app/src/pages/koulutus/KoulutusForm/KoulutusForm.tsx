@@ -128,7 +128,6 @@ export const KoulutusForm = ({
               languages={languageTabs}
               disabled={onlyTarjoajaRights}
               koulutustyyppi={koulutustyyppi}
-              koulutuskoodi={koulutuskoodi}
             />
           )}
 

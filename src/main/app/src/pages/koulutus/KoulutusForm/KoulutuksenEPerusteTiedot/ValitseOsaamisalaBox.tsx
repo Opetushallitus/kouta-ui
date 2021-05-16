@@ -29,21 +29,26 @@ const getOsaamisalaOptions = (osaamisalat = [], language) =>
 
 export const ValitseOsaamisalaBox = ({
   fieldName,
-  selectedEPeruste,
   language,
-  osaamisalat,
+  selectedEPeruste,
   koulutusIsLoading,
   disabled,
+  languages,
 }) => {
   const { t } = useTranslation();
   const apiUrls = useUrls();
   const selectedOsaamisala = useFieldValue(fieldName);
+  const osaamisalaChanged = useHasChanged(selectedOsaamisala);
+
+  const selectedEPerusteId = selectedEPeruste?.id;
+
+  const osaamisalat = selectedEPeruste?.osaamisalat;
 
   const {
     data: ePerusteOsaamisalaKuvaukset,
     isLoading: osaamisalatIsLoading,
   } = useEPerusteOsaamisalaKuvaukset({
-    ePerusteId: selectedEPeruste,
+    ePerusteId: selectedEPerusteId,
   });
 
   const selectedOsaamisalaKuvausId =
@@ -55,7 +60,7 @@ export const ValitseOsaamisalaBox = ({
     data: ePerusteSisalto,
     isLoading: sisaltoIsLoading,
   } = useEPerusteSisalto({
-    ePerusteId: selectedEPeruste,
+    ePerusteId: selectedEPerusteId,
   });
 
   const isLoading =
@@ -72,7 +77,7 @@ export const ValitseOsaamisalaBox = ({
 
   const nimi = getLanguageValue(selectedOsaamisalaData?.nimi, language);
 
-  const ePerusteHasChanged = useHasChanged(selectedEPeruste);
+  const ePerusteHasChanged = useHasChanged(selectedEPerusteId);
 
   const { change } = useBoundFormActions();
 
@@ -84,12 +89,38 @@ export const ValitseOsaamisalaBox = ({
   )(ePerusteSisalto?.lapset)?.id;
 
   useEffect(() => {
-    isDirty && ePerusteHasChanged && change(fieldName, null);
+    if (isDirty && ePerusteHasChanged) {
+      change(fieldName, null);
+    }
   }, [change, ePerusteHasChanged, fieldName, isDirty]);
+
+  useEffect(() => {
+    if (isDirty && osaamisalaChanged) {
+      const selectedOsaamisalaData = _fp.find(
+        osaamisala => osaamisala?.arvo === selectedOsaamisala?.value,
+        osaamisalat
+      );
+      if (selectedOsaamisalaData) {
+        change(
+          'information.nimi',
+          _fp.pick(languages, selectedOsaamisalaData?.nimi)
+        );
+      } else {
+        change('information.nimi', {});
+      }
+    }
+  }, [
+    change,
+    isDirty,
+    languages,
+    osaamisalaChanged,
+    selectedOsaamisala,
+    osaamisalat,
+  ]);
 
   return (
     <StyledInfoBox mb={2}>
-      <Box width={0.5} mb={2} {...getTestIdProps('osaamisalaSelect')}>
+      <Box width={0.7} mb={2} {...getTestIdProps('osaamisalaSelect')}>
         <Field
           component={FormFieldSelect}
           name={fieldName}
@@ -116,7 +147,7 @@ export const ValitseOsaamisalaBox = ({
                   href={apiUrls.url(
                     'eperusteet.sisalto',
                     language,
-                    selectedEPeruste,
+                    selectedEPerusteId,
                     perusteenOsaId
                   )}
                   target="_blank"

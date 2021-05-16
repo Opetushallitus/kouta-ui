@@ -14,19 +14,13 @@ import {
 import { getTestIdProps } from '#/src/utils';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
+import { KoulutuksenEPerusteTiedot } from '../KoulutuksenEPerusteTiedot';
 import { useNimiFromKoulutusKoodi } from '../useNimiFromKoulutusKoodi';
-import KoulutuksenTiedotSection from './KoulutuksenTiedotSection';
 import KoulutusalatField from './KoulutusalatField';
 import OpintojenlaajuusField from './OpintojenlaajuusField';
 import TutkintonimikeField from './TutkintonimikeField';
 
-export const TiedotSection = ({
-  disabled,
-  language,
-  koulutustyyppi,
-  koulutuskoodi,
-  name,
-}) => {
+export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
   const { t } = useTranslation();
 
   useNimiFromKoulutusKoodi({
@@ -42,21 +36,19 @@ export const TiedotSection = ({
         koulutustyyppi
       ) && (
         <Box mb={2}>
-          <KoulutuksenTiedotSection
+          <KoulutuksenEPerusteTiedot
             disabled={disabled}
             language={language}
-            koulutuskoodi={koulutuskoodi}
             name={name}
           />
         </Box>
       )}
       {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && (
         <Box mb={2}>
-          <KoulutuksenTiedotSection
+          <KoulutuksenEPerusteTiedot
             disabled={disabled}
             language={language}
-            koulutuskoodi={koulutuskoodi}
-            selectLabel={t('koulutuslomake.valitseOsaamisala')}
+            koulutusLabel={t('koulutuslomake.valitseOsaamisala')}
             name={name}
           />
         </Box>

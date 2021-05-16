@@ -32,12 +32,19 @@ const Container = styled.div`
     setLightness(0.97, theme.palette.danger.main)};
 `;
 
+type ErrorAlertProps = {
+  onReload?: (any) => void;
+  children?: React.ReactNode;
+  reloadText?: string;
+  center?: boolean;
+};
+
 export const ErrorAlert = ({
   onReload,
   children,
   reloadText: reloadTextProp,
   center = false,
-}) => {
+}: ErrorAlertProps) => {
   const { t } = useTranslation();
 
   const reloadText = reloadTextProp || t('yleiset.yritaUudelleen');

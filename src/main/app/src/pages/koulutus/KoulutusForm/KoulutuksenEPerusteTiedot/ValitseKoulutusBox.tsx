@@ -3,7 +3,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import KoulutusField from '#/src/components/KoulutusField';
-import { Box, Spin } from '#/src/components/virkailija';
+import { Box } from '#/src/components/virkailija';
+import { WithQueryIndicators } from '#/src/components/WithQueryIndicators';
 import { useFieldValue } from '#/src/hooks/form';
 import { getTestIdProps } from '#/src/utils';
 import { useKoulutusByKoodi } from '#/src/utils/koulutus/getKoulutusByKoodi';
@@ -11,15 +12,23 @@ import { getLanguageValue } from '#/src/utils/languageUtils';
 
 import { InfoBoxGrid, StyledInfoBox } from './InfoBox';
 
+type ValitseKoulutusBoxProps = {
+  fieldName: string;
+  label?: string;
+  disabled?: boolean;
+  language: LanguageCode;
+};
+
 export const ValitseKoulutusBox = ({
   fieldName,
+  label,
   disabled = false,
   language,
-}) => {
+}: ValitseKoulutusBoxProps) => {
   const { t } = useTranslation();
 
   const koulutusFieldValue = useFieldValue(fieldName)?.value;
-  const { data: koulutus, isFetching } = useKoulutusByKoodi({
+  const { data: koulutus, status } = useKoulutusByKoodi({
     koodiUri: koulutusFieldValue,
   });
 
@@ -29,12 +38,14 @@ export const ValitseKoulutusBox = ({
   return (
     <StyledInfoBox mb={2}>
       <Box width={0.7} mb={2} {...getTestIdProps('koulutusSelect')}>
-        <KoulutusField disabled={disabled} name={fieldName} />
+        <KoulutusField
+          disabled={disabled}
+          valitseKoulutusLabel={label}
+          name={fieldName}
+        />
       </Box>
-      {isFetching ? (
-        <Spin />
-      ) : (
-        koulutus && (
+      {koulutusFieldValue && (
+        <WithQueryIndicators queryStatus={status}>
           <InfoBoxGrid
             rows={[
               {
@@ -47,7 +58,7 @@ export const ValitseKoulutusBox = ({
               },
             ]}
           />
-        )
+        </WithQueryIndicators>
       )}
     </StyledInfoBox>
   );

@@ -4,12 +4,14 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { FormFieldInput } from '#/src/components/formFields';
+import KoulutusalaSelect from '#/src/components/KoulutusalaSelect';
 import KoulutusField from '#/src/components/KoulutusField';
-import { Box } from '#/src/components/virkailija';
+import { Box, FormControl } from '#/src/components/virkailija';
 import {
   KOULUTUSTYYPPI,
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
+  KOULUTUSALA_YLEISSIVISTAVA_KOODIURI,
 } from '#/src/constants';
 import { getTestIdProps } from '#/src/utils';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
@@ -98,6 +100,16 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
           </Box>
           <Box mb={2}>
             <OpintojenlaajuusField disabled={disabled} name={name} />
+          </Box>
+          <Box mb={2}>
+            <FormControl
+              label={t('koulutuslomake.valitseKoulutusalat')}
+              disabled={true}
+            >
+              <KoulutusalaSelect
+                value={{ value: KOULUTUSALA_YLEISSIVISTAVA_KOODIURI }}
+              />
+            </FormControl>
           </Box>
         </>
       )}

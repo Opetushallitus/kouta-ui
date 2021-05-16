@@ -360,9 +360,6 @@ export const createKoulutusForm = () => {
     });
   });
 
-  // Snapshot here fails sometimes because copying koulutus-field to nimi field is too slow.
-  // Should enable retries when snapshot plugin is fixed to work with retries (https://github.com/meinaart/cypress-plugin-snapshots/pull/141)
-  // TODO: Enable lukio tests when supported in backend
   it('should be able to create lukiokoulutus', () => {
     cy.intercept(
       { method: 'PUT', url: '**/koulutus' },

@@ -321,3 +321,6 @@ export const LUKIO_KOULUTUSKOODIURIT = [
   'koulutus_301102', // IB-tutkinto
   'koulutus_301101', // Ylioppilastutkinto
 ];
+
+export const KOULUTUSALA_YLEISSIVISTAVA_KOODIURI =
+  'kansallinenkoulutusluokitus2016koulutusalataso2_001#1';

@@ -2,11 +2,25 @@ import { useMemo } from 'react';
 
 import _ from 'lodash';
 
-import useApiAsync from '#/src/hooks/useApiAsync';
+import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
+import { useApiQuery } from '#/src/hooks/useApiQuery';
 import getKoodisto from '#/src/utils/koodi/getKoodisto';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 
-const noopPromiseFn = () => Promise.resolve([]);
+const getKoodistot = ({ versiot, httpClient, apiUrls }) => {
+  return versiot.length > 0
+    ? Promise.all(
+        versiot.map(([koodisto, versio]) =>
+          getKoodisto({
+            httpClient,
+            apiUrls,
+            koodistoUri: koodisto,
+            versio,
+          }).catch(() => undefined)
+        )
+      )
+    : [];
+};
 
 export const useKoodit = koodiUris => {
   const versiot = useMemo(() => {
@@ -25,24 +39,12 @@ export const useKoodit = koodiUris => {
     return Object.entries(versiotMap);
   }, [koodiUris]);
 
-  const promiseFn = useMemo(() => {
-    return versiot.length > 0
-      ? args =>
-          Promise.all(
-            versiot.map(([koodisto, versio]) =>
-              getKoodisto({
-                ...args,
-                koodistoUri: koodisto,
-                versio,
-              }).catch(() => undefined)
-            )
-          )
-      : noopPromiseFn;
-  }, [versiot]);
-
-  const { data, ...rest } = useApiAsync({
-    promiseFn,
-  });
+  const { data, ...rest } = useApiQuery(
+    'getKoodistot',
+    getKoodistot,
+    { versiot },
+    LONG_CACHE_QUERY_OPTIONS
+  );
 
   const koodit = useMemo(() => {
     return koodiUris.map(uri => {

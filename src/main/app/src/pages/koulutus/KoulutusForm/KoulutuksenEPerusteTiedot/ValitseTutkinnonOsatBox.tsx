@@ -118,8 +118,6 @@ export const ValitseTutkinnonOsatBox = ({
     if (isDirty && previousEPerusteId !== ePeruste?.id) {
       change(fieldName, null);
     }
-
-    return () => change(fieldName, null);
   }, [change, ePeruste?.id, isDirty, fieldName, previousEPerusteId]);
 
   const tutkinnonOsienKuvaukset = useMemo(

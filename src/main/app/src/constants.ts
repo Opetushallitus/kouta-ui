@@ -268,7 +268,7 @@ export const LONG_CACHE_QUERY_OPTIONS = {
   cacheTime: 15 * 60 * 1000,
   refetchOnWindowFocus: false,
   refetchOnMount: false,
-  refetchOnReconned: false,
+  refetchOnReconnect: false,
   retry: 1,
 };
 

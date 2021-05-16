@@ -114,8 +114,6 @@ export const ValitseTutkinnonOsatBox = ({
 
   const isDirty = useIsDirty();
 
-  console.log({ ePeruste, previousEPerusteId });
-
   useEffect(() => {
     if (isDirty && previousEPerusteId !== ePeruste?.id) {
       change(fieldName, null);

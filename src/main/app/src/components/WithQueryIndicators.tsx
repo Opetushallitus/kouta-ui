@@ -1,19 +1,22 @@
 import React from 'react';
 
 import { AxiosError } from 'axios';
-import { QueryStatus } from 'react-query';
+import { QueryObserverResult, QueryStatus } from 'react-query';
 
 import { ErrorAlert } from '#/src/components/ErrorAlert';
 import { Spin } from '#/src/components/virkailija';
 
-export const getCombinedQueryStatus = (statusList = []) => {
-  if (statusList.some(status => status === 'loading')) {
+export const getCombinedQueryStatus = (
+  responses: Array<QueryObserverResult> = []
+) => {
+  if (responses.some(res => res?.status === 'loading')) {
     return 'loading';
-  } else if (statusList.some(status => status === 'error')) {
+  } else if (responses.some(res => res?.status === 'error')) {
     return 'error';
-  } else if (statusList.every(status => status === 'success')) {
+  } else if (responses.every(res => res?.status === 'success')) {
     return 'success';
   }
+  return 'idle';
 };
 
 type Props = {

@@ -48,8 +48,6 @@ export const KoulutuksenEPerusteTiedot = ({
     [ePerusteet, selectedEPerusteId]
   );
 
-  console.log({ selectedEPerusteId });
-
   const koulutusIsLoading = status === 'loading';
 
   return (

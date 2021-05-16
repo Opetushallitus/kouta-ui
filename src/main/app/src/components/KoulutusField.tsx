@@ -10,8 +10,8 @@ import {
   useIsDirty,
 } from '#/src/hooks/form';
 import { useHasChanged } from '#/src/hooks/useHasChanged';
+import { useKoulutuksetByKoulutustyyppi } from '#/src/hooks/useKoulutuksetByKoulutustyyppi';
 import { formatKoodiLabelWithArvo } from '#/src/utils';
-import { useKoulutuksetByKoulutustyyppi } from '#/src/utils/koulutus/getKoulutuksetByKoulutustyyppi';
 
 const KoulutusField = props => {
   const { t } = useTranslation();

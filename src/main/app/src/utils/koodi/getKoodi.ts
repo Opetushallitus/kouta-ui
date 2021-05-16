@@ -18,11 +18,13 @@ export const getKoodi = async ({
 }: GetKoodiProps) => {
   const { koodisto } = parseKoodiUri(koodi);
   const { data } = await httpClient.get(
-    apiUrls.url(
-      'koodisto-service.codeelement',
-      koodi,
-      versio ?? KOODISTO_VERSIOT[koodisto] ?? ''
-    ),
+    versio ?? KOODISTO_VERSIOT[koodisto]
+      ? apiUrls.url(
+          'koodisto-service.codeelement',
+          koodi,
+          versio ?? KOODISTO_VERSIOT[koodisto]
+        )
+      : apiUrls.url('koodisto-service.codeelement', 'latest', koodi),
     {
       errorNotifier: {
         silent,

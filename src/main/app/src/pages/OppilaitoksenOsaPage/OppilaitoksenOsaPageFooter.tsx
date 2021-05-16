@@ -39,8 +39,8 @@ const OppilaitoksenOsaPageFooter = ({
     [oppilaitoksenOsa, organisaatioOid, queryClient]
   );
 
-  const { save } = useSaveForm({
-    form: 'oppilaitoksenOsa',
+  const save = useSaveForm({
+    formName: 'oppilaitoksenOsa',
     submit,
     validate: validateOppilaitoksenOsaForm,
   });

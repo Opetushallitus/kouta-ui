@@ -60,8 +60,8 @@ export const ValintaperusteFooter = ({
 
   const formName = useFormName();
 
-  const { save } = useSaveForm({
-    form: formName,
+  const save = useSaveForm({
+    formName,
     submit,
     validate: values =>
       validateValintaperusteForm(

@@ -76,8 +76,8 @@ export const HakuFooter = ({
     ]
   );
 
-  const { save } = useSaveForm({
-    form: formName,
+  const save = useSaveForm({
+    formName,
     submit,
     validate: validateHakuForm,
   });

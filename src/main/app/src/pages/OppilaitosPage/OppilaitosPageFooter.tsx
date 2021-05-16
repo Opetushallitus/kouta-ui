@@ -32,8 +32,8 @@ const OppilaitosPageFooter = ({ oppilaitos, organisaatioOid, readOnly }) => {
     [oppilaitos, organisaatioOid, queryClient]
   );
 
-  const { save } = useSaveForm({
-    form: 'oppilaitos',
+  const save = useSaveForm({
+    formName: ENTITY.OPPILAITOS,
     submit,
     validate: validateOppilaitosForm,
   });

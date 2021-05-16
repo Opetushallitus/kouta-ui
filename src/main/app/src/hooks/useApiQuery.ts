@@ -30,7 +30,7 @@ export const useApiQuery = (
 
 type QuerySpec = {
   key: string;
-  queryFn: (any) => any;
+  queryFn: (...params: any) => any;
   props?: Record<string, any>;
   options?: KoutaApiQueryConfig;
 };

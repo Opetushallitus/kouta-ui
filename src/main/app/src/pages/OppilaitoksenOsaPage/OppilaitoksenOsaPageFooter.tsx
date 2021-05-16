@@ -40,7 +40,7 @@ const OppilaitoksenOsaPageFooter = ({
   );
 
   const save = useSaveForm({
-    formName: 'oppilaitoksenOsa',
+    formName: ENTITY.OPPILAITOKSEN_OSA,
     submit,
     validate: validateOppilaitoksenOsaForm,
   });

@@ -16,7 +16,9 @@ const getKoodistot = ({ versiot, httpClient, apiUrls }) => {
             apiUrls,
             koodistoUri: koodisto,
             versio,
-          }).catch(() => undefined)
+          }).catch(e => {
+            console.warn(e);
+          })
         )
       )
     : [];

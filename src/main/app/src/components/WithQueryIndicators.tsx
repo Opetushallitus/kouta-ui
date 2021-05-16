@@ -41,7 +41,7 @@ export const WithQueryIndicators = ({
       return children ? children : <div></div>;
     case 'error':
       // TODO: Get Axios response error status codes here.
-      console.log(error);
+      console.error(error);
       return <ErrorAlert onReload={onRetry} />;
     case 'loading':
     default:

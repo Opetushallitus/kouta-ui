@@ -208,7 +208,7 @@ exports[`createKoulutus > should be able to create lukiokoulutus #0`] =
   "koulutustyyppi": "lk",
   "metadata": {
     "koulutusalaKoodiUrit": [
-      "kansallinenkoulutusluokitus2016koulutusalataso2_001#1"
+      "kansallinenkoulutusluokitus2016koulutusalataso1_00#1"
     ],
     "koulutustyyppi": "lk",
     "kuvauksenNimi": {},
@@ -355,7 +355,7 @@ exports[`editKoulutus > should be able to edit lukiokoulutus #0`] =
   "koulutustyyppi": "lk",
   "metadata": {
     "koulutusalaKoodiUrit": [
-      "kansallinenkoulutusluokitus2016koulutusalataso2_001#1"
+      "kansallinenkoulutusluokitus2016koulutusalataso1_00#1"
     ],
     "koulutustyyppi": "lk",
     "kuvauksenNimi": {},

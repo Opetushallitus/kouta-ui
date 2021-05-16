@@ -8,7 +8,7 @@ export const KoulutusalaSelect = props => {
     koodisto: 'kansallinenkoulutusluokitus2016koulutusalataso2',
   });
 
-  return <AsyncKoodistoSelect koodistoData={data} {...props} />;
+  return <AsyncKoodistoSelect koodistoData={data} showAllOptions {...props} />;
 };
 
 export default KoulutusalaSelect;

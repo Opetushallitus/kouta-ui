@@ -16,7 +16,6 @@ export const KoulutusalatField = ({ disabled, name }) => {
         name={`${name}.koulutusalat`}
         component={FormFieldKoulutusalaSelect}
         label={t('koulutuslomake.valitseKoulutusalat')}
-        showAllOptions
         isMulti={true}
       />
     </div>

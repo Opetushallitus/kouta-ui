@@ -1,7 +1,7 @@
 [
   {
     "method": "GET",
-    "url": "https://localhost:3000/koodisto-service/rest/json/hakutapa/koodi?onlyValidKoodis=true&koodistoVersio=",
+    "url": "https://localhost:3000/koodisto-service/rest/json/hakutapa/koodi?onlyValidKoodis=true",
     "response": {
       "body": [
         {
@@ -244,7 +244,7 @@
   },
   {
     "method": "GET",
-    "url": "https://localhost:3000/koodisto-service/rest/json/haunkohdejoukko/koodi?onlyValidKoodis=true&koodistoVersio=",
+    "url": "https://localhost:3000/koodisto-service/rest/json/haunkohdejoukko/koodi?onlyValidKoodis=true",
     "response": {
       "body": [
         {
@@ -790,7 +790,7 @@
   },
   {
     "method": "GET",
-    "url": "https://localhost:3000/koodisto-service/rest/json/haunkohdejoukontarkenne/koodi?onlyValidKoodis=true&koodistoVersio=",
+    "url": "https://localhost:3000/koodisto-service/rest/json/haunkohdejoukontarkenne/koodi?onlyValidKoodis=true",
     "response": {
       "body": [
         {

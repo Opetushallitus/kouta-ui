@@ -307,7 +307,7 @@
   },
   {
     "method": "GET",
-    "url": "https://localhost:3000/koodisto-service/rest/json/kieli/koodi?onlyValidKoodis=true&koodistoVersio=",
+    "url": "https://localhost:3000/koodisto-service/rest/json/kieli/koodi?onlyValidKoodis=true",
     "response": {
       "body": [
         {
@@ -11317,7 +11317,7 @@
   },
   {
     "method": "GET",
-    "url": "https://localhost:3000/koodisto-service/rest/json/koulutuksenlisatiedot/koodi?onlyValidKoodis=true&koodistoVersio=",
+    "url": "https://localhost:3000/koodisto-service/rest/json/koulutuksenlisatiedot/koodi?onlyValidKoodis=true",
     "response": {
       "body": [
         {
@@ -11656,7 +11656,7 @@
   },
   {
     "method": "GET",
-    "url": "https://localhost:3000/koodisto-service/rest/json/lukiodiplomit/koodi?onlyValidKoodis=true&koodistoVersio=",
+    "url": "https://localhost:3000/koodisto-service/rest/json/lukiodiplomit/koodi?onlyValidKoodis=true",
     "response": {
       "body": [
         {
@@ -12025,7 +12025,7 @@
   },
   {
     "method": "GET",
-    "url": "https://localhost:3000/koodisto-service/rest/json/lukiolinjat/koodi?onlyValidKoodis=true&koodistoVersio=",
+    "url": "https://localhost:3000/koodisto-service/rest/json/lukiolinjat/koodi?onlyValidKoodis=true",
     "response": {
       "body": [
         {
@@ -18160,7 +18160,7 @@
   },
   {
     "method": "GET",
-    "url": "https://localhost:3000/koodisto-service/rest/json/opetusaikakk/koodi?onlyValidKoodis=true&koodistoVersio=",
+    "url": "https://localhost:3000/koodisto-service/rest/json/opetusaikakk/koodi?onlyValidKoodis=true",
     "response": {
       "body": [
         {
@@ -18406,7 +18406,7 @@
   },
   {
     "method": "GET",
-    "url": "https://localhost:3000/koodisto-service/rest/json/opetuspaikkakk/koodi?onlyValidKoodis=true&koodistoVersio=",
+    "url": "https://localhost:3000/koodisto-service/rest/json/opetuspaikkakk/koodi?onlyValidKoodis=true",
     "response": {
       "body": [
         {
@@ -18628,7 +18628,7 @@
   },
   {
     "method": "GET",
-    "url": "https://localhost:3000/koodisto-service/rest/json/opintojenlaajuusyksikko/koodi?onlyValidKoodis=true&koodistoVersio=",
+    "url": "https://localhost:3000/koodisto-service/rest/json/opintojenlaajuusyksikko/koodi?onlyValidKoodis=true",
     "response": {
       "body": [
         {
@@ -19036,7 +19036,7 @@
   },
   {
     "method": "GET",
-    "url": "https://localhost:3000/koodisto-service/rest/json/oppilaitoksenopetuskieli/koodi?onlyValidKoodis=true&koodistoVersio=",
+    "url": "https://localhost:3000/koodisto-service/rest/json/oppilaitoksenopetuskieli/koodi?onlyValidKoodis=true",
     "response": {
       "body": [
         {

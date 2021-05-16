@@ -104,12 +104,6 @@ export const KOULUTUSTYYPPI_TO_YLAKOODIURI_MAP = {
   [KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS]: AMM_KOULUTUS_KOODIURIT,
   [KOULUTUSTYYPPI.OSAAMISALA]: AMM_KOULUTUS_KOODIURIT,
   [KOULUTUSTYYPPI.TUTKINNON_OSA]: AMM_KOULUTUS_KOODIURIT,
-  [KOULUTUSTYYPPI.LUKIOKOULUTUS]: [
-    'koulutustyyppi_2',
-    'koulutustyyppi_9',
-    'koulutustyyppi_14',
-    'koulutustyyppi_23',
-  ],
   [KOULUTUSTYYPPI.MUUT_KOULUTUKSET]: [
     'koulutustyyppi_6',
     'koulutustyyppi_10',
@@ -321,3 +315,9 @@ export enum KOODISTO_VERSIOT {
 }
 
 export const FIELD_ERROR_CLASSNAME = 'field-error';
+
+export const LUKIO_KOULUTUSKOODIURIT = [
+  'koulutus_309902', // Lukion oppimäärä
+  'koulutus_301102', // IB-tutkinto
+  'koulutus_301101', // Ylioppilastutkinto
+];

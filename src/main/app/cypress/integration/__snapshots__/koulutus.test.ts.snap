@@ -230,7 +230,7 @@ exports[`createKoulutus > should be able to create lukiokoulutus #0`] =
     "fi": "Ylioppilastutkinto"
   },
   "organisaatioOid": "1.1.1.1.1.1",
-  "soraKuvausId": "1",
+  "sorakuvausId": "1",
   "tarjoajat": [
     "1.2.1.1.1.1"
   ],
@@ -376,6 +376,7 @@ exports[`editKoulutus > should be able to edit lukiokoulutus #0`] =
   },
   "oid": "1.2.3.4.5.6",
   "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
   "tarjoajat": [
     "1.1.1.1.1.1",
     "1.2.1.1.1.1"

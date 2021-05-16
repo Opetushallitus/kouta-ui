@@ -89,7 +89,7 @@ export const editKoulutusForm = () => {
   });
 
   // TODO: Enable lukio tests when supported in backend
-  it.skip('should be able to edit lukiokoulutus', () => {
+  it.only('should be able to edit lukiokoulutus', () => {
     prepareTest('lk');
     cy.visit(
       `/organisaatio/${organisaatioOid}/koulutus/${koulutusOid}/muokkaus`

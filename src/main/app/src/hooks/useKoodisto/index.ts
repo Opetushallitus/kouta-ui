@@ -14,7 +14,7 @@ export const useKoodisto = ({
   const versio = versioProp || KOODISTO_VERSIOT[koodisto] || '';
 
   return useApiQuery(
-    'getKoodisto',
+    GET_KOODISTO_QUERY_KEY,
     getKoodisto,
     {
       koodistoUri: koodisto,
@@ -26,5 +26,7 @@ export const useKoodisto = ({
     }
   );
 };
+
+export const GET_KOODISTO_QUERY_KEY = 'getKoodisto';
 
 export default useKoodisto;

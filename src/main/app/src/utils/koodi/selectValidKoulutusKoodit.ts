@@ -8,7 +8,7 @@ export const selectValidKoulutusKoodit = (
 ) => {
   const koulutukset = _fp.isArray(response)
     ? response.flatMap((response: any) => {
-        const data = response?.data?.data;
+        const data = response?.data;
         return _fp.isArray(data) ? data : [];
       })
     : response?.data ?? [];

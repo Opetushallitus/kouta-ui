@@ -3,13 +3,11 @@ export const getSisaltyyYlakoodit = async ({
   apiUrls,
   koodiUri,
 }) => {
-  if (koodiUri) {
-    return httpClient.get(
-      apiUrls.url('koodisto-service.sisaltyy-ylakoodit', '') + koodiUri
-    );
-  } else {
-    return httpClient.get(apiUrls.url('koodisto-service.koodi', 'koulutus'));
-  }
+  const { data } = await httpClient.get(
+    apiUrls.url('koodisto-service.sisaltyy-ylakoodit', '') + koodiUri
+  );
+
+  return data;
 };
 
-export const GET_SISALTYY_YLAKOODIT_KEY = 'getSisaltyyYlakoodit';
+export const GET_SISALTYY_YLAKOODIT_QUERY_KEY = 'getSisaltyyYlakoodit';

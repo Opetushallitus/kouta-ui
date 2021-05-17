@@ -44,7 +44,7 @@ export const useApiQueries = (koutaQuerySpecs: QuerySpecs) => {
   const querySpecs = useMemo(
     () =>
       koutaQuerySpecs.map(({ key, queryFn, props = {}, options = {} }) => ({
-        queryKey: key,
+        queryKey: [key, props],
         queryFn: () => queryFn({ httpClient, apiUrls, ...props }),
         ...options,
       })),

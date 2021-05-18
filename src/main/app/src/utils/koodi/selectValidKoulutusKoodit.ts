@@ -4,7 +4,7 @@ import { QueryObserverResult } from 'react-query';
 import { isValidKoulutusKoodi } from './isValidKoulutusKoodi';
 
 export const selectValidKoulutusKoodit = (
-  response: QueryObserverResult | Array<QueryObserverResult> = []
+  response: { data } | QueryObserverResult | Array<QueryObserverResult> = []
 ) => {
   const koulutukset = _fp.isArray(response)
     ? response.flatMap((response: any) => {

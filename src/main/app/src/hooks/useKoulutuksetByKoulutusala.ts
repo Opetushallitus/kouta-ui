@@ -13,7 +13,7 @@ export const useKoulutuksetByKoulutusala = koulutusalaKoodiUri => {
     { koodiUri: koulutusalaKoodiUri },
     {
       enabled: Boolean(koulutusalaKoodiUri),
-      select: selectValidKoulutusKoodit,
+      select: data => selectValidKoulutusKoodit({ data }),
       ...LONG_CACHE_QUERY_OPTIONS,
     }
   );

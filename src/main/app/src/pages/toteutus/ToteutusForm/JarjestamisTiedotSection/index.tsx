@@ -6,7 +6,6 @@ import { Field } from 'redux-form';
 
 import FieldGroup from '#/src/components/FieldGroup';
 import { Flex, FlexItem } from '#/src/components/Flex';
-import FormConfigFragment from '#/src/components/FormConfigFragment';
 import {
   FormFieldSelect,
   FormFieldInput,
@@ -17,6 +16,7 @@ import {
 import { KoulutuksenAloitusajankohtaFields } from '#/src/components/KoulutuksenAloitusajankohtaFields';
 import Spacing from '#/src/components/Spacing';
 import { Box, FormLabel } from '#/src/components/virkailija';
+import { KOULUTUSTYYPPI } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
@@ -99,9 +99,9 @@ const SuunniteltuKestoFields = ({ name }) => {
 
   return (
     <FieldGroup
-      name={`${name}.suunniteltuKesto`}
       title={t('toteutuslomake.opintojenSuunniteltuKesto')}
       HeadingComponent={FormLabel}
+      required
     >
       <Flex>
         <FlexItem>
@@ -153,6 +153,7 @@ export const JarjestamisTiedotSection = ({
               name={`${name}.opetuskieli`}
               component={OpetuskieliField}
               label={t('toteutuslomake.valitsePaaasiallinenOpetuskieli')}
+              required
             />
           </FlexItem>
           <FlexItem grow={1} paddingLeft={4}>
@@ -190,6 +191,7 @@ export const JarjestamisTiedotSection = ({
               component={OpetusaikaField}
               label={t('toteutuslomake.valitsePaaasiallinenOpetusaika')}
               helperText={t('yleiset.voitValitaEnintaan', { lukumaara: 2 })}
+              required
             />
           </FlexItem>
           <FlexItem grow={1} paddingLeft={4}>
@@ -210,6 +212,7 @@ export const JarjestamisTiedotSection = ({
               name={`${name}.opetustapa`}
               component={OpetustapaField}
               label={t('toteutuslomake.valitsePaaasiallinenOpetustapa')}
+              required
             />
           </FlexItem>
           <FlexItem grow={1} paddingLeft={4}>
@@ -272,17 +275,17 @@ export const JarjestamisTiedotSection = ({
         )}
       </FieldGroup>
 
-      <FormConfigFragment name="kielivalikoima">
-        <Spacing marginBottom={4}>
-          <KielivalikoimaFields name={name} />
-        </Spacing>
-      </FormConfigFragment>
+      {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && (
+        <>
+          <Spacing marginBottom={4}>
+            <KielivalikoimaFields name={name} />
+          </Spacing>
 
-      <FormConfigFragment name="diplomi">
-        <Spacing marginBottom={4}>
-          <DiplomiFields name={name} language={language} />
-        </Spacing>
-      </FormConfigFragment>
+          <Spacing marginBottom={4}>
+            <DiplomiFields name={name} language={language} />
+          </Spacing>
+        </>
+      )}
 
       <FieldGroup title={t('yleiset.valitseLisattavaOsio')}>
         <div {...getTestIdProps('osiotSelect')}>

@@ -12,7 +12,11 @@ import KieliversiotFields from '#/src/components/KieliversiotFields';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import SoraKuvausSection from '#/src/components/SoraKuvausSection';
 import TeemakuvaSection from '#/src/components/TeemakuvaSection';
-import { KOULUTUSTYYPPI, HAKULOMAKETYYPPI } from '#/src/constants';
+import {
+  KOULUTUSTYYPPI,
+  HAKULOMAKETYYPPI,
+  TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
+} from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import useModal from '#/src/hooks/useModal';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
@@ -23,14 +27,13 @@ import { getToteutukset } from '#/src/utils/toteutus/getToteutukset';
 import HakeutumisTaiIlmoittautumistapaSection from './HakeutumisTaiIlmoittautumistapaSection';
 import HakukohteetModal from './HakukohteetModal';
 import { HakukohteetSection } from './HakukohteetSection';
-import JarjestamispaikatSection from './JarjestamispaikatSection';
+import { JarjestamispaikatSection } from './JarjestamispaikatSection';
 import { JarjestamisTiedotSection } from './JarjestamisTiedotSection';
-import { KorkeakouluOsaamisalatFields } from './KorkeakouluOsaamisalatFields';
-import LukiolinjatSection from './LukiolinjatSection';
-import NayttamisTiedotSection from './NayttamisTiedotSection';
-import OsaamisalatSection from './OsaamisalatSection';
-import TiedotSection from './TiedotSection';
-import ToteutusjaksotSection from './ToteutusjaksotSection';
+import { LukiolinjatSection } from './LukiolinjatSection';
+import { NayttamisTiedotSection } from './NayttamisTiedotSection';
+import { OsaamisalatSection } from './OsaamisalatSection';
+import { TiedotSection } from './TiedotSection';
+import { ToteutusjaksotSection } from './ToteutusjaksotSection';
 import { YhteyshenkilotSection } from './YhteyshenkilotSection';
 
 const { ATARU, MUU } = HAKULOMAKETYYPPI;
@@ -82,7 +85,7 @@ const ToteutusForm = ({
         organisaatioOid={organisaatioOid}
         onSave={onAttachHakukohde}
       />
-      <FormCollapseGroup enabled={steps} defaultOpen={!steps} configured>
+      <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
         {canSelectBase && (
           <PohjaFormCollapse
             onSelectBase={onSelectBase}
@@ -94,36 +97,43 @@ const ToteutusForm = ({
             organisaatioOid={organisaatioOid}
           />
         )}
-
         <FormCollapse
           section="kieliversiot"
           header={t('yleiset.kieliversiot')}
           Component={KieliversiotFields}
         />
-
-        <FormCollapse
-          section="tiedot"
-          header={t('toteutuslomake.toteutuksenTiedot')}
-          languages={languages}
-          Component={TiedotSection}
-          koulutustyyppi={koulutustyyppi}
-        />
-
-        <FormCollapse
-          section="lukiolinjat"
-          header={t('toteutuslomake.lukiolinja')}
-          languages={languages}
-          Component={LukiolinjatSection}
-        />
-
-        <FormCollapse
-          section="toteutusjaksot"
-          header={t('toteutuslomake.toteutukseenLiittyvatJaksot')}
-          languages={languages}
-          {...getTestIdProps('toteutusjaksotSection')}
-          Component={ToteutusjaksotSection}
-        />
-        {/* NOTE: Korkeakoulu osaamisala sections are hidden via form config (getToteutusFormConfig) */}
+        {koulutustyyppi !== KOULUTUSTYYPPI.LUKIOKOULUTUS && (
+          <FormCollapse
+            section="tiedot"
+            header={t('toteutuslomake.toteutuksenTiedot')}
+            languages={languages}
+            Component={TiedotSection}
+            koulutustyyppi={koulutustyyppi}
+          />
+        )}
+        {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && (
+          <FormCollapse
+            section="lukiolinjat"
+            header={t('toteutuslomake.lukiolinja')}
+            languages={languages}
+            Component={LukiolinjatSection}
+          />
+        )}
+        {[
+          KOULUTUSTYYPPI.AVOIN_YO,
+          KOULUTUSTYYPPI.AVOIN_AMK,
+          KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
+          KOULUTUSTYYPPI.TAYDENNYS_KOULUTUS,
+        ].includes(koulutustyyppi) && (
+          <FormCollapse
+            section="toteutusjaksot"
+            header={t('toteutuslomake.toteutukseenLiittyvatJaksot')}
+            languages={languages}
+            {...getTestIdProps('toteutusjaksotSection')}
+            Component={ToteutusjaksotSection}
+          />
+        )}
+        {/* 
         <FormCollapse
           section="alemmanKorkeakoulututkinnonOsaamisalat"
           header={t(
@@ -141,16 +151,19 @@ const ToteutusForm = ({
           Component={KorkeakouluOsaamisalatFields}
           languages={languages}
         />
-
-        <FormCollapse
-          section="osaamisalat"
-          header={t('toteutuslomake.toteutuksenOsaamisalat')}
-          languages={languages}
-          Component={OsaamisalatSection}
-          koulutus={koulutus}
-          organisaatioOid={organisaatioOid}
-        />
-
+        */}
+        {TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT.includes(
+          koulutustyyppi
+        ) && (
+          <FormCollapse
+            section="osaamisalat"
+            header={t('toteutuslomake.toteutuksenOsaamisalat')}
+            languages={languages}
+            Component={OsaamisalatSection}
+            koulutus={koulutus}
+            organisaatioOid={organisaatioOid}
+          />
+        )}
         <FormCollapse
           section="jarjestamistiedot"
           header={t('toteutuslomake.toteutuksenJarjestamistiedot')}
@@ -158,20 +171,18 @@ const ToteutusForm = ({
           Component={JarjestamisTiedotSection}
           koulutustyyppi={koulutustyyppi}
         />
-
         <FormCollapse
           section="teemakuva"
           header={t('toteutuslomake.toteutuksenTeemakuva')}
           Component={TeemakuvaSection}
         />
-
         <FormCollapse
           section="nayttamistiedot"
           header={t('toteutuslomake.koulutuksenNayttamiseenLiittyvatTiedot')}
           Component={NayttamisTiedotSection}
+          koulutustyyppi={koulutustyyppi}
           languages={languages}
         />
-
         <FormCollapse
           section="tarjoajat"
           header={t('toteutuslomake.toteutuksenJarjestaja')}
@@ -179,31 +190,33 @@ const ToteutusForm = ({
           languages={languages}
           organisaatioOid={organisaatioOid}
         />
-
-        <FormCollapse
-          section="hakeutumisTaiIlmoittautumistapa"
-          header={t('toteutuslomake.hakeutumisTaiIlmoittautumistapa')}
-          Component={HakeutumisTaiIlmoittautumistapaSection}
-          languages={languages}
-        />
-
-        {hakeutumisTaiIlmoittautumistapa === MUU && (
-          <FormCollapse
-            section="soraKuvaus"
-            header={t('yleiset.soraKuvaus')}
-            Component={SoraKuvausSection}
-            organisaatioOid={organisaatioOid}
-            languages={languages}
-          />
+        {[KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA].includes(
+          koulutustyyppi
+        ) && (
+          <>
+            <FormCollapse
+              section="hakeutumisTaiIlmoittautumistapa"
+              header={t('toteutuslomake.hakeutumisTaiIlmoittautumistapa')}
+              Component={HakeutumisTaiIlmoittautumistapaSection}
+              languages={languages}
+            />
+            {hakeutumisTaiIlmoittautumistapa === MUU && (
+              <FormCollapse
+                section="soraKuvaus"
+                header={t('yleiset.soraKuvaus')}
+                Component={SoraKuvausSection}
+                organisaatioOid={organisaatioOid}
+                languages={languages}
+              />
+            )}
+          </>
         )}
-
         <FormCollapse
           section="yhteyshenkilot"
           header={t('toteutuslomake.koulutuksenYhteystiedot')}
           Component={YhteyshenkilotSection}
           languages={languages}
         />
-
         <FormCollapse
           section="tila"
           header={t('toteutuslomake.toteutuksenTila')}
@@ -211,7 +224,6 @@ const ToteutusForm = ({
           {...getTestIdProps('tilaSection')}
           showArkistoitu={showArkistoituTilaOption}
         />
-
         {_fp.isFunction(onAttachHakukohde) && kaytetaanHakemuspalvelua ? (
           <FormCollapse
             header={t('toteutuslomake.toteutukseenLiitetytHakukohteet')}

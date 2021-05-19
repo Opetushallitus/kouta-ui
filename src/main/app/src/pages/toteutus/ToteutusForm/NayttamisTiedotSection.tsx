@@ -7,6 +7,10 @@ import { Field } from 'redux-form';
 import { createFormFieldComponent } from '#/src/components/formFields';
 import { AsyncCreatableSelect } from '#/src/components/Select';
 import Spacing from '#/src/components/Spacing';
+import {
+  KOULUTUSTYYPPI,
+  TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
+} from '#/src/constants';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { getTestIdProps } from '#/src/utils';
@@ -59,33 +63,42 @@ const makeLoadAvainsanat = memoize(
   }
 );
 
-const NayttamisTiedotSection = ({ language, name }) => {
+export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
   const { t } = useTranslation();
   const httpClient = useHttpClient();
   const apiUrls = useUrls();
 
   return (
     <>
-      <Spacing marginBottom={2}>
-        <div {...getTestIdProps('ammattinimikkeetSelect')}>
-          <Field
-            name={`${name}.ammattinimikkeet.${language}`}
-            component={CreatableField}
-            isMulti
-            isClearable
-            loadOptions={makeLoadAmmattinimikkeet(
-              httpClient,
-              apiUrls,
-              language
-            )}
-            label={t('toteutuslomake.ammattinimikkeet')}
-            helperText={t('yleiset.voitValitaEnintaan', {
-              lukumaara: MAX_ITEMS,
-            })}
-            maxItems={MAX_ITEMS}
-          />
-        </div>
-      </Spacing>
+      {[
+        ...TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
+        KOULUTUSTYYPPI.AVOIN_YO,
+        KOULUTUSTYYPPI.AVOIN_AMK,
+        KOULUTUSTYYPPI.TAYDENNYS_KOULUTUS,
+        KOULUTUSTYYPPI.ERIKOISTUMISKOULUTUS,
+        KOULUTUSTYYPPI.VAPAA_SIVISTYSTYO,
+      ].includes(koulutustyyppi) && (
+        <Spacing marginBottom={2}>
+          <div {...getTestIdProps('ammattinimikkeetSelect')}>
+            <Field
+              name={`${name}.ammattinimikkeet.${language}`}
+              component={CreatableField}
+              isMulti
+              isClearable
+              loadOptions={makeLoadAmmattinimikkeet(
+                httpClient,
+                apiUrls,
+                language
+              )}
+              label={t('toteutuslomake.ammattinimikkeet')}
+              helperText={t('yleiset.voitValitaEnintaan', {
+                lukumaara: MAX_ITEMS,
+              })}
+              maxItems={MAX_ITEMS}
+            />
+          </div>
+        </Spacing>
+      )}
       <Spacing>
         <div {...getTestIdProps('avainsanatSelect')}>
           <Field
@@ -105,5 +118,3 @@ const NayttamisTiedotSection = ({ language, name }) => {
     </>
   );
 };
-
-export default NayttamisTiedotSection;

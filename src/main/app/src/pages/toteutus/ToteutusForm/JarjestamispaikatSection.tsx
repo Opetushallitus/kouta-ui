@@ -18,7 +18,7 @@ const JarjestajatField = createFormFieldComponent(
   })
 );
 
-const JarjestamispaikatSection = ({ organisaatioOid, name }) => {
+export const JarjestamispaikatSection = ({ organisaatioOid, name }) => {
   const { t } = useTranslation();
   const { hierarkia = [] } = useOrganisaatioHierarkia(organisaatioOid);
   const roleBuilder = useAuthorizedUserRoleBuilder();
@@ -39,9 +39,8 @@ const JarjestamispaikatSection = ({ organisaatioOid, name }) => {
         getIsDisabled={getIsDisabled}
         component={JarjestajatField}
         disableAutoSelect={true}
+        required
       />
     </div>
   );
 };
-
-export default JarjestamispaikatSection;

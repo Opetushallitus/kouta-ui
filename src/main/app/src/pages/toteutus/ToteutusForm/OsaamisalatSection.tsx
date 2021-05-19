@@ -222,7 +222,6 @@ const OsaamisalatContainer = ({
         <Typography variant="h6" marginBottom={1}></Typography>
         <FieldGroup
           title={t('toteutuslomake.valitseOsaamisalat')}
-          name={`${name}.osaamisalatGroup`}
           {...getTestIdProps('osaamisalaSelection')}
         >
           <Field
@@ -245,7 +244,12 @@ const OsaamisalatContainer = ({
   );
 };
 
-const OsaamisalatSection = ({ language, koulutus, organisaatioOid, name }) => {
+export const OsaamisalatSection = ({
+  language,
+  koulutus,
+  organisaatioOid,
+  name,
+}) => {
   const { t } = useTranslation();
   const { ePerusteId } = koulutus || {};
   const { data: ePeruste, isLoading } = useApiAsync({
@@ -274,5 +278,3 @@ const OsaamisalatSection = ({ language, koulutus, organisaatioOid, name }) => {
     </Container>
   );
 };
-
-export default OsaamisalatSection;

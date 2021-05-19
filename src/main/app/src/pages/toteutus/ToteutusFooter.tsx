@@ -17,7 +17,7 @@ import { getTarjoajaOids } from '#/src/utils/getTarjoajaOids';
 import createToteutus from '#/src/utils/toteutus/createToteutus';
 import getToteutusByFormValues from '#/src/utils/toteutus/getToteutusByFormValues';
 import updateToteutus from '#/src/utils/toteutus/updateToteutus';
-import validateToteutusForm from '#/src/utils/toteutus/validateToteutusForm';
+import { validateToteutusForm } from '#/src/utils/toteutus/validateToteutusForm';
 
 type ToteutusFooterProps = {
   formMode: FormMode;
@@ -112,7 +112,10 @@ export const ToteutusFooter = ({
     formName,
     submit,
     validate: values =>
-      validateToteutusForm({ ...values, koulutustyyppi, koulutus }),
+      validateToteutusForm(
+        { ...values, koulutustyyppi, koulutus },
+        form?.registeredFields
+      ),
   });
 
   return (

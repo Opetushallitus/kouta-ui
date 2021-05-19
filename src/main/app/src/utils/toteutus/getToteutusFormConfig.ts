@@ -33,7 +33,6 @@ import {
   pohjaValintaSectionConfig,
   validateIf,
   validateIfJulkaistu,
-  validateRelations,
 } from '#/src/utils/form/formConfigUtils';
 
 import { isApurahaVisible } from './toteutusVisibilities';
@@ -560,17 +559,6 @@ const config = createFormConfigBuilder().registerSections([
     section: 'tila',
     field: 'tila',
     required: true,
-    validate: (eb, values) =>
-      validateRelations([
-        {
-          key: 'koulutus',
-          t: 'yleiset.koulutus',
-        },
-        {
-          key: 'soraKuvaus',
-          t: 'yleiset.soraKuvaus',
-        },
-      ])(eb.validateExistence('tila'), values),
   },
   {
     section: 'esikatselu',

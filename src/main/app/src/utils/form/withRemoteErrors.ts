@@ -2,9 +2,11 @@ import { AxiosResponse } from 'axios';
 import _ from 'lodash';
 
 import { koulutusRemoteErrorsToFormErrors } from '#/src/utils/koulutus/koulutusRemoteErrorsToFormErrors';
+import { toteutusRemoteErrorsToFormErrors } from '#/src/utils/toteutus/toteutusRemoteErrorsToFormErrors';
 
 const REMOTE_ERRORS_TO_FORM_ERRORS = {
   koulutusForm: koulutusRemoteErrorsToFormErrors,
+  toteutusForm: toteutusRemoteErrorsToFormErrors,
 };
 
 const setErrors = (

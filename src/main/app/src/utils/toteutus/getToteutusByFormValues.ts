@@ -25,17 +25,19 @@ const getOsaamisalatByValues = ({ osaamisalat, pickTranslations }) => {
   );
 };
 
-const getLukiolinjaByValues = (linjaValues, pickTranslations) =>
-  linjaValues?.valinnat?.map(
-    ({ value }) => ({
-      koodiUri: value,
-      kuvaus: _fp.flow(
-        pickTranslations,
-        _fp.mapValues(serializeEditorState)
-      )(linjaValues?.kuvaukset[value] ?? {}),
-    }),
-    linjaValues?.valinnat
-  ) ?? null;
+const getLukiolinjatByValues = (linjaValues, pickTranslations) =>
+  (linjaValues?.kaytossa &&
+    linjaValues?.valinnat?.map(
+      ({ value }, index) => ({
+        koodiUri: value,
+        kuvaus: _fp.flow(
+          pickTranslations,
+          _fp.mapValues(serializeEditorState)
+        )(linjaValues.kuvaukset[index] ?? {}),
+      }),
+      linjaValues?.valinnat
+    )) ||
+  [];
 
 const getToteutusByFormValues = (values: ToteutusFormValues) => {
   const {
@@ -173,11 +175,11 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
       },
       ammatillinenPerustutkintoErityisopetuksena:
         values?.tiedot?.ammatillinenPerustutkintoErityisopetuksena,
-      painotukset: getLukiolinjaByValues(
+      painotukset: getLukiolinjatByValues(
         values?.lukiolinjat?.painotukset,
         pickTranslations
       ),
-      erityisetKoulutustehtavat: getLukiolinjaByValues(
+      erityisetKoulutustehtavat: getLukiolinjatByValues(
         values?.lukiolinjat?.erityisetKoulutustehtavat,
         pickTranslations
       ),

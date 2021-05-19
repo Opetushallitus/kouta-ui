@@ -35,7 +35,7 @@ type Toteutusjakso = {
 type LukiolinjatOsio = {
   kaytossa: boolean;
   valinnat: SelectOptions;
-  kuvaukset: { [koodiUri: string]: TranslatedField<EditorState> };
+  kuvaukset: Array<TranslatedField<EditorState>>;
 };
 
 // TODO: Improve toteutus form types

@@ -71,13 +71,13 @@ const LukiolinjaOsio = ({
               isMulti
             />
           </Box>
-          {selectedItemsWithLabels?.map(({ value, label }) => (
+          {selectedItemsWithLabels?.map(({ value, label }, index) => (
             <Box mb={3} key={value}>
               <SectionInnerCollapse header={label} key={value}>
                 <Field
                   component={FormFieldEditor}
                   label={kuvausLabel}
-                  name={`${name}.kuvaukset.${value}.${languageTab}`}
+                  name={`${name}.kuvaukset[${index}].${languageTab}`}
                 />
               </SectionInnerCollapse>
             </Box>

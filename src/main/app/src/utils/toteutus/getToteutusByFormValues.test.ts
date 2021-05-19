@@ -175,16 +175,16 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
       painotukset: {
         kaytossa: true,
         valinnat: [{ value: 'painotus_1#1' }, { value: 'painotus_2#1' }],
-        kuvaukset: {
-          'painotus_1#1': {
+        kuvaukset: [
+          {
             fi: parseEditorState('Fi painotus 1 kuvaus'),
             sv: parseEditorState('Sv painotus 1 kuvaus'),
           },
-          'painotus_2#1': {
+          {
             fi: parseEditorState('Fi painotus 2 kuvaus'),
             sv: parseEditorState('Sv painotus 2 kuvaus'),
           },
-        },
+        ],
       },
       erityisetKoulutustehtavat: {
         kaytossa: true,
@@ -192,16 +192,16 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
           { value: 'erityinenkoulutustehtava_1#1' },
           { value: 'erityinenkoulutustehtava_2#1' },
         ],
-        kuvaukset: {
-          'erityinenkoulutustehtava_1#1': {
+        kuvaukset: [
+          {
             fi: parseEditorState('Fi erityinen koulutustehtävä 1 kuvaus'),
             sv: parseEditorState('Sv erityinen koulutustehtävä 1 kuvaus'),
           },
-          'erityinenkoulutustehtava_2#1': {
+          {
             fi: parseEditorState('Fi erityinen koulutustehtävä 2 kuvaus'),
             sv: parseEditorState('Sv erityinen koulutustehtävä 2 kuvaus'),
           },
-        },
+        ],
       },
     },
     toteutusjaksot: [

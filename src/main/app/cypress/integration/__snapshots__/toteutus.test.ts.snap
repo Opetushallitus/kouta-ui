@@ -15,7 +15,7 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
         "kieli": "fi"
       }
     ],
-    "erityisetKoulutustehtavat": null,
+    "erityisetKoulutustehtavat": [],
     "hakuaika": {
       "alkaa": "2050-04-01T00:00",
       "paattyy": "2050-09-01T00:00"
@@ -93,7 +93,7 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
       "suunniteltuKestoVuodet": 2
     },
     "osaamisalat": [],
-    "painotukset": null,
+    "painotukset": [],
     "toteutusjaksot": [],
     "tyyppi": "amm-tutkinnon-osa",
     "yhteyshenkilot": [
@@ -151,7 +151,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
         "kieli": "fi"
       }
     ],
-    "erityisetKoulutustehtavat": null,
+    "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
@@ -228,7 +228,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
         }
       }
     ],
-    "painotukset": null,
+    "painotukset": [],
     "toteutusjaksot": [],
     "tyyppi": "amm",
     "yhteyshenkilot": [
@@ -286,7 +286,7 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
         "kieli": "fi"
       }
     ],
-    "erityisetKoulutustehtavat": null,
+    "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
@@ -362,7 +362,7 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
       "suunniteltuKestoVuodet": 2
     },
     "osaamisalat": [],
-    "painotukset": null,
+    "painotukset": [],
     "toteutusjaksot": [],
     "tyyppi": "yo",
     "yhteyshenkilot": [
@@ -592,7 +592,7 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
         "kieli": "fi"
       }
     ],
-    "erityisetKoulutustehtavat": null,
+    "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
@@ -668,7 +668,7 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
         }
       }
     ],
-    "painotukset": null,
+    "painotukset": [],
     "toteutusjaksot": [],
     "tyyppi": "amm",
     "yhteyshenkilot": [
@@ -749,7 +749,7 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
         "kieli": "fi"
       }
     ],
-    "erityisetKoulutustehtavat": null,
+    "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
@@ -815,7 +815,7 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
       "suunniteltuKestoVuodet": 2
     },
     "osaamisalat": [],
-    "painotukset": null,
+    "painotukset": [],
     "toteutusjaksot": [],
     "tyyppi": "yo",
     "yhteyshenkilot": [
@@ -896,7 +896,7 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
         "kieli": "fi"
       }
     ],
-    "erityisetKoulutustehtavat": null,
+    "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
@@ -978,7 +978,7 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
       "suunniteltuKestoVuodet": 2
     },
     "osaamisalat": [],
-    "painotukset": null,
+    "painotukset": [],
     "toteutusjaksot": [],
     "tyyppi": "lk",
     "yhteyshenkilot": [
@@ -1044,7 +1044,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
         "kieli": "fi"
       }
     ],
-    "erityisetKoulutustehtavat": null,
+    "erityisetKoulutustehtavat": [],
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "hakulomaketyyppi": "ei sähköistä",
@@ -1122,7 +1122,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
         }
       }
     ],
-    "painotukset": null,
+    "painotukset": [],
     "toteutusjaksot": [],
     "tyyppi": "amm-tutkinnon-osa",
     "yhteyshenkilot": [

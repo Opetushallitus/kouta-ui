@@ -33,13 +33,10 @@ const lukiolinjatiedotToFormValues = lukiolinjatiedot =>
           ...(acc?.valinnat ?? []),
           { value: lukiolinjatieto.koodiUri },
         ],
-        kuvaukset: {
-          ...(acc?.kuvaukset ?? {}),
-          [lukiolinjatieto.koodiUri]: _fp.mapValues(
-            parseEditorState,
-            lukiolinjatieto.kuvaus ?? {}
-          ),
-        },
+        kuvaukset: [
+          ...(acc?.kuvaukset ?? []),
+          _fp.mapValues(parseEditorState, lukiolinjatieto.kuvaus ?? {}),
+        ],
       };
     },
     { kaytossa: !_fp.isEmpty(lukiolinjatiedot) }

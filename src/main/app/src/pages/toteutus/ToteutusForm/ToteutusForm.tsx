@@ -114,7 +114,7 @@ const ToteutusForm = ({
         {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && (
           <FormCollapse
             section="lukiolinjat"
-            header={t('toteutuslomake.lukiolinja')}
+            header={t('toteutuslomake.lukiolinjat')}
             languages={languages}
             Component={LukiolinjatSection}
           />

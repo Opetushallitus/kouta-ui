@@ -458,7 +458,7 @@
     "B3Kielet": "B3-kielet",
     "muutKielet": "Muut kielet",
     "toteutuksenTila": "Toteutuksen tila",
-    "lukiolinja": "Lukiolinja",
+    "lukiolinjat": "Lukiolinjat",
     "valitseLukiolinja": "Valitse lukiolinja",
     "toteutukseenLiittyvatJaksot": "Toteutukseen liittyvät jaksot",
     "lisaaToteutusjakso": "Lisää toteutusjakso",
@@ -500,7 +500,15 @@
     "pohjavalintaInfo": "Voit halutessasi käyttää aiemmin luotuja toteutuksia uuden lomakkeen esitäytettynä pohjana.",
     "kopioiPohjaksi": "Kopioi pohjaksi aiemmin luotu toteutus",
     "ammatillinenPerustutkintoErityisopetuksena": "Ammatillinen perustutkinto järjestetään erityisopetuksena",
-    "toteutuksellaErillinenAloitusajankohta": "Toteutuksella on erillinen aloitusajankohta"
+    "toteutuksellaErillinenAloitusajankohta": "Toteutuksella on erillinen aloitusajankohta",
+    "painotukset": "Painotukset",
+    "valitsePainotukset": "Valitse painotukset",
+    "lukiollaOnPainotuksia": "Lukiolla on painotuksia",
+    "painotuksenKuvaus": "Painotuksen kuvaus",
+    "erityisetKoulutustehtavat": "Erityiset koulutustehtävät",
+    "lukiollaOnErityisiaKoulutustehtavia": "Lukiolla on erityisiä koulutustehtäviä",
+    "valitseErityisetKoulutustehtavat": "Valitse erityiset koulutustehtävät",
+    "erityisenKoulutustehtavanKuvaus": "Erityisen koulutustehtävän kuvaus"
   },
   "hakulomake": {
     "haunNimi": "Haun nimi",

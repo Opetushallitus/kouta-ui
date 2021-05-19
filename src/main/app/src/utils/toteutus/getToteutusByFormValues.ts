@@ -25,6 +25,18 @@ const getOsaamisalatByValues = ({ osaamisalat, pickTranslations }) => {
   );
 };
 
+const getLukiolinjaByValues = (linjaValues, pickTranslations) =>
+  linjaValues?.valinnat?.map(
+    ({ value }) => ({
+      koodiUri: value,
+      kuvaus: _fp.flow(
+        pickTranslations,
+        _fp.mapValues(serializeEditorState)
+      )(linjaValues?.kuvaukset[value] ?? {}),
+    }),
+    linjaValues?.valinnat
+  ) ?? null;
+
 const getToteutusByFormValues = (values: ToteutusFormValues) => {
   const {
     koulutustyyppi,
@@ -161,7 +173,14 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
       },
       ammatillinenPerustutkintoErityisopetuksena:
         values?.tiedot?.ammatillinenPerustutkintoErityisopetuksena,
-      lukiolinjaKoodiUri: values?.lukiolinjat?.lukiolinja?.value || null,
+      painotukset: getLukiolinjaByValues(
+        values?.lukiolinjat?.painotukset,
+        pickTranslations
+      ),
+      erityisetKoulutustehtavat: getLukiolinjaByValues(
+        values?.lukiolinjat?.erityisetKoulutustehtavat,
+        pickTranslations
+      ),
       osaamisalat: (values?.osaamisalat?.osaamisalat || []).map(osaamisala => ({
         koodiUri: osaamisala,
         linkki: osaamisalaLinkit[osaamisala] || {},

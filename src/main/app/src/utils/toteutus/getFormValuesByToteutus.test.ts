@@ -56,6 +56,21 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
         sv: 'Sv toteutuksenkuvaus',
       },
       ammatillinenPerustutkintoErityisopetuksena: true,
+      painotukset: [
+        {
+          koodiUri: 'painotus_1#1',
+          kuvaus: { fi: 'painotus 1 fi', sv: 'painotus 1 sv' },
+        },
+      ],
+      erityisetKoulutustehtavat: [
+        {
+          koodiUri: 'erityinenkoulutustehtava_1#1',
+          kuvaus: {
+            fi: 'erityinen koulutustehtävä 1 fi',
+            sv: 'erityinen koulutustehtävä 1 sv',
+          },
+        },
+      ],
       opetus: {
         koulutuksenAlkamiskausi: {
           alkamiskausityyppi: Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,
@@ -197,7 +212,6 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
           },
         },
       ],
-      lukiolinjaKoodiUri: 'linja_1#1',
       tutkinnonOsat: [
         {
           osaamisalaKoodiUri: 'osaamisala_1#1',

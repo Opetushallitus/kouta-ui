@@ -24,6 +24,27 @@ const kieliArvoListToMultiSelectValue = _fp.reduce((acc, curr: any) => {
   return acc;
 }, {});
 
+const lukiolinjatiedotToFormValues = lukiolinjatiedot =>
+  lukiolinjatiedot?.reduce(
+    (acc, lukiolinjatieto) => {
+      return {
+        ...acc,
+        valinnat: [
+          ...(acc?.valinnat ?? []),
+          { value: lukiolinjatieto.koodiUri },
+        ],
+        kuvaukset: {
+          ...(acc?.kuvaukset ?? {}),
+          [lukiolinjatieto.koodiUri]: _fp.mapValues(
+            parseEditorState,
+            lukiolinjatieto.kuvaus ?? {}
+          ),
+        },
+      };
+    },
+    { kaytossa: !_fp.isEmpty(lukiolinjatiedot) }
+  );
+
 const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
   const {
     koulutustyyppi,
@@ -46,13 +67,14 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     ylemmanKorkeakoulututkinnonOsaamisalat,
     alemmanKorkeakoulututkinnonOsaamisalat,
     yhteyshenkilot,
-    lukiolinjaKoodiUri,
     laajuus,
     laajuusyksikkoKoodiUri,
     ilmoittautumislinkki,
     aloituspaikat,
     toteutusjaksot,
     ammatillinenPerustutkintoErityisopetuksena,
+    painotukset,
+    erityisetKoulutustehtavat,
   } = metadata;
 
   const {
@@ -202,9 +224,10 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
         otsikko,
       }))(alemmanKorkeakoulututkinnonOsaamisalat) ?? [],
     lukiolinjat: {
-      lukiolinja: lukiolinjaKoodiUri
-        ? { value: lukiolinjaKoodiUri }
-        : undefined,
+      painotukset: lukiolinjatiedotToFormValues(painotukset),
+      erityisetKoulutustehtavat: lukiolinjatiedotToFormValues(
+        erityisetKoulutustehtavat
+      ),
     },
     toteutusjaksot: _fp.map(
       ({

@@ -160,8 +160,33 @@ Object {
     "sv": "<p>Sv toteutuksenkuvaus</p>",
   },
   "lukiolinjat": Object {
-    "lukiolinja": Object {
-      "value": "linja_1#1",
+    "erityisetKoulutustehtavat": Object {
+      "kaytossa": true,
+      "kuvaukset": Object {
+        "erityinenkoulutustehtava_1#1": Object {
+          "fi": "<p>erityinen koulutustehtävä 1 fi</p>",
+          "sv": "<p>erityinen koulutustehtävä 1 sv</p>",
+        },
+      },
+      "valinnat": Array [
+        Object {
+          "value": "erityinenkoulutustehtava_1#1",
+        },
+      ],
+    },
+    "painotukset": Object {
+      "kaytossa": true,
+      "kuvaukset": Object {
+        "painotus_1#1": Object {
+          "fi": "<p>painotus 1 fi</p>",
+          "sv": "<p>painotus 1 sv</p>",
+        },
+      },
+      "valinnat": Array [
+        Object {
+          "value": "painotus_1#1",
+        },
+      ],
     },
   },
   "nayttamistiedot": Object {

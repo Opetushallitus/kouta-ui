@@ -32,6 +32,12 @@ type Toteutusjakso = {
   }>;
 };
 
+type LukiolinjatOsio = {
+  kaytossa: boolean;
+  valinnat: SelectOptions;
+  kuvaukset: { [koodiUri: string]: TranslatedField<EditorState> };
+};
+
 // TODO: Improve toteutus form types
 export type ToteutusFormValues = {
   koulutustyyppi: KOULUTUSTYYPPI;
@@ -94,7 +100,8 @@ export type ToteutusFormValues = {
   ylemmanKorkeakoulututkinnonOsaamisalat: Array<any>;
   alemmanKorkeakoulututkinnonOsaamisalat: Array<any>;
   lukiolinjat: {
-    lukiolinja?: { value: string };
+    painotukset: LukiolinjatOsio;
+    erityisetKoulutustehtavat: LukiolinjatOsio;
   };
   toteutusjaksot: Array<Toteutusjakso>;
   teemakuva?: string;

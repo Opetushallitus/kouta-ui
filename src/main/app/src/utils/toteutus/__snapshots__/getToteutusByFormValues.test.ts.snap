@@ -50,6 +50,22 @@ Object {
         "kieli": "sv",
       },
     ],
+    "erityisetKoulutustehtavat": Array [
+      Object {
+        "koodiUri": "erityinenkoulutustehtava_1#1",
+        "kuvaus": Object {
+          "fi": "<p>Fi erityinen koulutustehtävä 1 kuvaus</p>",
+          "sv": "<p>Sv erityinen koulutustehtävä 1 kuvaus</p>",
+        },
+      },
+      Object {
+        "koodiUri": "erityinenkoulutustehtava_2#1",
+        "kuvaus": Object {
+          "fi": "<p>Fi erityinen koulutustehtävä 2 kuvaus</p>",
+          "sv": "<p>Sv erityinen koulutustehtävä 2 kuvaus</p>",
+        },
+      },
+    ],
     "hakuaika": null,
     "hakulomakeLinkki": Object {},
     "hakulomaketyyppi": "muu",
@@ -69,7 +85,6 @@ Object {
       "sv": "<p>Sv sisalto</p>",
     },
     "lisatietoaValintaperusteista": Object {},
-    "lukiolinjaKoodiUri": "linja_1#1",
     "opetus": Object {
       "A1JaA2Kielivalikoima": Array [
         "kieli_1#1",
@@ -190,6 +205,22 @@ Object {
         "otsikko": Object {
           "fi": "Fi otsikko2",
           "sv": "Sv otsikko2",
+        },
+      },
+    ],
+    "painotukset": Array [
+      Object {
+        "koodiUri": "painotus_1#1",
+        "kuvaus": Object {
+          "fi": "<p>Fi painotus 1 kuvaus</p>",
+          "sv": "<p>Sv painotus 1 kuvaus</p>",
+        },
+      },
+      Object {
+        "koodiUri": "painotus_2#1",
+        "kuvaus": Object {
+          "fi": "<p>Fi painotus 2 kuvaus</p>",
+          "sv": "<p>Sv painotus 2 kuvaus</p>",
         },
       },
     ],

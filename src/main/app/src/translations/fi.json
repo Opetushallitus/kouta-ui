@@ -233,6 +233,7 @@
     "tallennusOnnistui": "Tallennus onnistui",
     "tallennusEpaonnistui": "Tallennus epäonnistui. Tarkista lomakkeen tiedot ja yritä uudelleen",
     "kayttooikeusVirhe": "Käyttöoikeuksissasi on puutteita",
+    "virheellinenPalvelinpyynto": "Palvelin ei pystynyt käsittelemään pyyntöä. Jos olet tallentamassa lomaketta, korjaa mahdolliset validointivirheet ja yritä uudelleen. Jos ongelma jatkuu, ota yhteyttä ylläpitoon.",
     "kayttooikeusHakuVirhe": {
       "otsikko": "Käyttöoikeuksien haussa tapahtui virhe",
       "viesti": "Käyttöoikeuksien haku ei onnistunut. Yritä päivittää sivu hetken kuluttua udelleen."

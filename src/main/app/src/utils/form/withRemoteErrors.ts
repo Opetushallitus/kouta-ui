@@ -40,12 +40,9 @@ export const withRemoteErrors = (
 ) => {
   const resData = response?.data;
   resData?.forEach?.(remoteError => {
-    const errorConverter =
-      REMOTE_ERRORS_TO_FORM_ERRORS[formName]?.[remoteError?.path];
+    const errorConverter = REMOTE_ERRORS_TO_FORM_ERRORS[formName];
 
-    const formError = _.isFunction(errorConverter)
-      ? errorConverter(remoteError)
-      : errorConverter;
+    const formError = errorConverter?.(remoteError);
 
     // formError merkkojonona on vain lomakkeen kentän nimi. Virheavain päätellään backend-virheen errorType-kentästä.
     if (_.isString(formError)) {

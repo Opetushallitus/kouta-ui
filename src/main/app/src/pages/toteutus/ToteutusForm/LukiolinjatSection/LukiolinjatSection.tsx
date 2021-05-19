@@ -62,7 +62,7 @@ const LukiolinjaOsio = ({
   );
 };
 
-const LukiolinjatField = ({ name }) => {
+export const LukiolinjatSection = ({ name }) => {
   const { t } = useTranslation();
 
   return (
@@ -89,5 +89,3 @@ const LukiolinjatField = ({ name }) => {
     </>
   );
 };
-
-export default LukiolinjatField;

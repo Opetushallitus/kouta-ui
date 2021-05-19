@@ -75,7 +75,7 @@ export const useSaveForm = ({ formName, validate, submit }) => {
       console.error(e);
       errors = withRemoteErrors(formName, e?.response, errors);
 
-      stopSubmit({ errors, errorToast: true });
+      stopSubmit({ errors, errorToast: false });
     }
   }, [
     form,

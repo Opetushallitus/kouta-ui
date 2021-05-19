@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
@@ -10,8 +12,15 @@ import {
 import { SectionInnerCollapse } from '#/src/components/SectionInnerCollapse';
 import Spacing from '#/src/components/Spacing';
 import { Box } from '#/src/components/virkailija';
+import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
 import { useFieldValue } from '#/src/hooks/form';
-import useKoodisto from '#/src/hooks/useKoodisto';
+import { useKoodisto } from '#/src/hooks/useKoodisto';
+import { useUserLanguage } from '#/src/hooks/useUserLanguage';
+import { getTestIdProps } from '#/src/utils';
+import getKoodiNimiTranslation from '#/src/utils/getKoodiNimiTranslation';
+
+const koodiUriWithoutVersion = koodiUri =>
+  koodiUri.slice(0, koodiUri.lastIndexOf('#'));
 
 const LukiolinjaOsio = ({
   name,
@@ -20,13 +29,30 @@ const LukiolinjaOsio = ({
   valinnatLabel,
   kuvausLabel,
   koodisto,
+  ...props
 }) => {
-  const selectedItems = useFieldValue(`${name}.valinnat`) ?? [];
+  const selectedItems = useFieldValue(`${name}.valinnat`);
   const isKaytossa = useFieldValue(`${name}.kaytossa`);
   const { data } = useKoodisto({ koodisto });
+  const userLanguage = useUserLanguage();
+  const languageTab = useLanguageTab();
+
+  const selectedItemsWithLabels = useMemo(
+    () =>
+      selectedItems?.map(({ value, label }) => {
+        if (!label) {
+          const koodi = data?.find(
+            ({ koodiUri }) => koodiUriWithoutVersion(value) === koodiUri
+          );
+          label = getKoodiNimiTranslation(koodi, userLanguage);
+        }
+        return { value, label };
+      }),
+    [selectedItems, data, userLanguage]
+  );
 
   return (
-    <FieldGroup title={title}>
+    <FieldGroup title={title} {...props}>
       <Box mb={2}>
         <Field component={FormFieldSwitch} name={`${name}.kaytossa`}>
           {isKaytossaLabel}
@@ -45,13 +71,13 @@ const LukiolinjaOsio = ({
               isMulti
             />
           </Box>
-          {selectedItems?.map(({ value, label }) => (
-            <Box mb={3}>
+          {selectedItemsWithLabels?.map(({ value, label }) => (
+            <Box mb={3} key={value}>
               <SectionInnerCollapse header={label} key={value}>
                 <Field
                   component={FormFieldEditor}
                   label={kuvausLabel}
-                  name={`${name}.kuvaukset.${value}`}
+                  name={`${name}.kuvaukset.${value}.${languageTab}`}
                 />
               </SectionInnerCollapse>
             </Box>
@@ -74,6 +100,7 @@ export const LukiolinjatSection = ({ name }) => {
         isKaytossaLabel={t('toteutuslomake.lukiollaOnPainotuksia')}
         valinnatLabel={t('toteutuslomake.valitsePainotukset')}
         koodisto="lukiopainotukset"
+        {...getTestIdProps('painotukset')}
       />
       <Spacing marginBottom={8} />
       <LukiolinjaOsio
@@ -85,6 +112,7 @@ export const LukiolinjatSection = ({ name }) => {
         )}
         valinnatLabel={t('toteutuslomake.valitseErityisetKoulutustehtavat')}
         koodisto="lukiolinjaterityinenkoulutustehtava"
+        {...getTestIdProps('erityisetKoulutustehtavat')}
       />
     </>
   );

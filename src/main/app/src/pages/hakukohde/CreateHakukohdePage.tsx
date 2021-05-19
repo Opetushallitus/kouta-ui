@@ -49,6 +49,9 @@ export const CreateHakukohdePage = ({
     [data]
   );
 
+  const koulutustyyppi =
+    data?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
+
   return (
     <ReduxForm form="hakukohdeForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.uusiHakukohde')}</Title>
@@ -61,6 +64,7 @@ export const CreateHakukohdePage = ({
             <HakukohdeFooter
               formMode={FormMode.CREATE}
               organisaatioOid={organisaatioOid}
+              koulutustyyppi={koulutustyyppi}
               haku={haku}
               toteutus={toteutus}
             />
@@ -84,9 +88,7 @@ export const CreateHakukohdePage = ({
                 haku={haku}
                 toteutus={toteutus}
                 tarjoajat={data.tarjoajat}
-                koulutustyyppi={
-                  data?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
-                }
+                koulutustyyppi={koulutustyyppi}
                 showArkistoituTilaOption={false}
               />
             </>

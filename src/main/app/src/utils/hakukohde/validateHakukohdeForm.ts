@@ -1,6 +1,10 @@
 import _fp from 'lodash/fp';
 
-import { Alkamiskausityyppi, LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
+import {
+  Alkamiskausityyppi,
+  KOULUTUSTYYPPI,
+  LIITTEEN_TOIMITUSTAPA,
+} from '#/src/constants';
 
 import createErrorBuilder, {
   validateArray,
@@ -63,7 +67,10 @@ const validateLiitteet = errorBuilder => {
   )(errorBuilder);
 };
 
-export const validateHakukohdeForm = (values, registeredFields) => {
+export const validateHakukohdeForm = koulutustyyppi => (
+  values,
+  registeredFields
+) => {
   const kieliversiot = getKielivalinta(values);
   return _fp
     .flow(
@@ -72,6 +79,11 @@ export const validateHakukohdeForm = (values, registeredFields) => {
       validateTranslations('perustiedot.nimi'),
       validateIfJulkaistu(
         validateArrayMinLength('pohjakoulutus.pohjakoulutusvaatimus', 1)
+      ),
+      validateIfConditionAndJulkaistu(
+        koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS,
+        validateExistence('hakukohteenLinja.linja'),
+        validateExistence('hakukohteenLinja.alinHyvaksyttyKeskiarvo')
       ),
       validateIfConditionAndJulkaistu(
         values?.hakuajat?.eriHakuaika,

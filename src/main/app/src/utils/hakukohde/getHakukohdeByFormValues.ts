@@ -2,9 +2,9 @@ import _ from 'lodash';
 import _fp from 'lodash/fp';
 
 import { serializeEditorState } from '#/src/components/Editor/utils';
-import { LIITTEEN_TOIMITUSTAPA } from '#/src/constants';
+import { LIITTEEN_TOIMITUSTAPA, LUKIO_YLEISLINJA } from '#/src/constants';
 import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
-import { maybeParseNumber } from '#/src/utils';
+import { maybeParseNumber, parseFloatComma } from '#/src/utils';
 import { getAlkamiskausiData } from '#/src/utils/form/aloitusajankohtaHelpers';
 import { getHakulomakeFieldsData } from '#/src/utils/form/getHakulomakeFieldsData';
 import {
@@ -34,6 +34,23 @@ function getAloituspaikat(values: HakukohdeFormValues) {
     ),
   };
 }
+
+const getHakukohteenLinja = values => {
+  if (!values?.hakukohteenLinja) {
+    return null;
+  }
+  const {
+    alinHyvaksyttyKeskiarvo,
+    linja,
+    lisatietoa,
+  } = values.hakukohteenLinja;
+  return {
+    linja: linja !== LUKIO_YLEISLINJA ? linja : null,
+    alinHyvaksyttyKeskiarvo:
+      alinHyvaksyttyKeskiarvo && parseFloatComma(alinHyvaksyttyKeskiarvo),
+    lisatietoa: _.mapValues(lisatietoa, serializeEditorState),
+  };
+};
 
 export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
   const { muokkaaja, tila, esikatselu = false, jarjestyspaikkaOid } = values;
@@ -195,6 +212,7 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
       koulutuksenAlkamiskausi: kaytetaanHaukukohteenAlkamiskautta
         ? getAlkamiskausiData(ajankohta, pickTranslations)
         : null,
+      hakukohteenLinja: getHakukohteenLinja(values),
     },
   };
 };

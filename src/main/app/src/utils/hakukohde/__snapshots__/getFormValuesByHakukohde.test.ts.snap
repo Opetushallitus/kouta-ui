@@ -32,6 +32,14 @@ Object {
       },
     ],
   },
+  "hakukohteenLinja": Object {
+    "alinHyvaksyttyKeskiarvo": "6,5",
+    "linja": "lukiopainotukset_0104#1",
+    "lisatietoa": Object {
+      "fi": "<p>Fi lisatietoa</p>",
+      "sv": "<p>Sv lisatietoa</p>",
+    },
+  },
   "hakulomake": Object {
     "eriHakulomake": true,
     "kuvaus": Object {},

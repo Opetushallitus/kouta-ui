@@ -58,6 +58,19 @@ const fillHakuajatSection = () => {
   });
 };
 
+const fillLukiolinjaSection = () => {
+  getByTestId('hakukohteenLinjaSection').within(() => {
+    cy.findByText(/Yleislinja/).click();
+
+    getByTestId('alinHyvaksytty')
+      .find('input')
+      .clear({ force: true })
+      .pipe(paste('3,5'));
+
+    typeToEditor('Lisätietoa');
+  });
+};
+
 const fillPerustiedotSection = ({ isKorkeakoulu = false } = {}) => {
   getByTestId('perustiedotSection').within(() => {
     getByTestId('hakukohteenNimi')
@@ -275,6 +288,31 @@ export const createHakukohdeForm = () => {
     fillKieliversiotSection({ jatka: true });
     fillPohjakoulutusvaatimusSection();
     fillLomakeSection('ei sähköistä');
+
+    tallenna();
+
+    cy.wait('@createHakukohdeRequest').then(({ request }) => {
+      cy.wrap(request.body).toMatchSnapshot();
+    });
+
+    cy.location('pathname').should(
+      'eq',
+      `/kouta/organisaatio/${organisaatioOid}/hakukohde/${hakukohdeOid}/muokkaus`
+    );
+  });
+
+  it('should be able to create hakukohde with lukiolinjat', () => {
+    prepareTest({
+      tyyppi: 'lk',
+      hakuOid,
+      hakukohdeOid,
+      organisaatioOid,
+      tarjoajat,
+    });
+
+    fillKieliversiotSection({ jatka: true });
+    fillPohjakoulutusvaatimusSection();
+    fillLukiolinjaSection();
 
     tallenna();
 

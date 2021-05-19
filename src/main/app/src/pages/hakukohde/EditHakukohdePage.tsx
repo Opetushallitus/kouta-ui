@@ -91,6 +91,9 @@ export const EditHakukohdePage = props => {
               organisaatioOid={organisaatioOid}
               hakukohde={hakukohde}
               toteutus={toteutus}
+              koulutustyyppi={
+                koulutustyyppi || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
+              }
               haku={haku}
               canUpdate={canUpdate}
             />

@@ -22,6 +22,7 @@ type HakukohdeFooterProps = {
   formMode: FormMode;
   organisaatioOid: string;
   hakukohde?: HakukohdeModel;
+  koulutustyyppi: string;
   haku: HakuModel;
   toteutus: ToteutusModel;
   canUpdate?: boolean;
@@ -31,6 +32,7 @@ export const HakukohdeFooter = ({
   formMode,
   organisaatioOid,
   hakukohde = {},
+  koulutustyyppi,
   haku,
   toteutus,
   canUpdate,
@@ -97,7 +99,7 @@ export const HakukohdeFooter = ({
   const { save } = useSaveForm({
     submit,
     form: formName,
-    validate: validateHakukohdeForm,
+    validate: validateHakukohdeForm(koulutustyyppi),
   });
 
   return (

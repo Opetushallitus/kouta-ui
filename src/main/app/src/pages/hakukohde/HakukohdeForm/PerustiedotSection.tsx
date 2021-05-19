@@ -6,6 +6,7 @@ import { Field } from 'redux-form';
 import { FormFieldCheckbox, FormFieldInput } from '#/src/components/formFields';
 import Spacing from '#/src/components/Spacing';
 import { Divider } from '#/src/components/virkailija';
+import { KOULUTUSTYYPPI } from '#/src/constants';
 import { getTestIdProps } from '#/src/utils';
 import isAmmatillinenKoulutustyyppi from '#/src/utils/koulutus/isAmmatillinenKoulutustyyppi';
 
@@ -21,6 +22,7 @@ export const PerustiedotSection = ({
   haku,
 }) => {
   const isAmmatillinen = isAmmatillinenKoulutustyyppi(koulutustyyppi);
+  const nimiReadonly = koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS;
   const { t } = useTranslation();
 
   return (
@@ -31,6 +33,7 @@ export const PerustiedotSection = ({
           component={FormFieldInput}
           label={t('yleiset.nimi')}
           required
+          disabled={nimiReadonly}
         />
       </Spacing>
       {isAmmatillinen ? (

@@ -119,6 +119,14 @@ test('getFormValuesByHakukohde returns correct form values given hakukohde', () 
           sv: '<p>Aloituspaikan kuvaus - sv</p>',
         },
       },
+      hakukohteenLinja: {
+        linja: 'lukiopainotukset_0104#1',
+        alinHyvaksyttyKeskiarvo: 6.5,
+        lisatietoa: {
+          fi: '<p>Fi lisatietoa</p>',
+          sv: '<p>Sv lisatietoa</p>',
+        },
+      },
     },
     jarjestyspaikkaOid: '2.2.2.2.2',
     valintakokeet: [

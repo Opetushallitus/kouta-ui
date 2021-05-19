@@ -179,6 +179,14 @@ test('getHakukohdeByFormValues returns correct hakukohde given form values', () 
         value: '12345',
       },
     },
+    hakukohteenLinja: {
+      linja: 'lukiopainotukset_0104#1',
+      alinHyvaksyttyKeskiarvo: '6,5',
+      lisatietoa: {
+        fi: parseEditorState('Fi lisatietoa'),
+        sv: parseEditorState('Sv lisatietoa'),
+      },
+    },
   });
 
   expect(hakukohde).toMatchSnapshot();

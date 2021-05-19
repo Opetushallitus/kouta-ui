@@ -576,7 +576,11 @@
     "eiVoiAsettaaAjankohtaaJosYhteishaku": "Hakukohteella ei voi asettaa koulutuksen ajankohtaa, jos haussa on valittu hakutavaksi yhteishaku.",
     "pohjavalintaInfo": "Voit halutessasi käyttää aiemmin luotuja hakukohteita uuden lomakkeen esitäytettynä pohjana.",
     "kopioiPohjaksi": "Kopioi pohjaksi aiemmin luotu hakukohde",
-    "kynnysehto": "Kynnysehto"
+    "kynnysehto": "Kynnysehto",
+    "hakukohteenLinja": "Hakukohteen linja",
+    "valitseHakukohteenLinja": "Valitse hakukohteen linja",
+    "lukionYleislinja": "Yleislinja",
+    "alinHyvaksyttyKeskiarvo": "Alin hyväksytty keskiarvo"
   },
   "valintaperustelomake": {
     "valintaperusteenPerustiedot": "Valintaperusteen perustiedot",

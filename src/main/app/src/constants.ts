@@ -324,3 +324,5 @@ export const LUKIO_KOULUTUSKOODIURIT = [
 
 export const KOULUTUSALA_YLEISSIVISTAVA_KOODIURI =
   'kansallinenkoulutusluokitus2016koulutusalataso1_00#1';
+
+export const LUKIO_YLEISLINJA = 'yleislinja';

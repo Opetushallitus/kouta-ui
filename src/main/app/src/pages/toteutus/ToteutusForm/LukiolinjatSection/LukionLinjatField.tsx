@@ -73,8 +73,7 @@ const LukiolinjatField = ({ name }) => {
         kuvausLabel={t('toteutuslomake.painotuksenKuvaus')}
         isKaytossaLabel={t('toteutuslomake.lukiollaOnPainotuksia')}
         valinnatLabel={t('toteutuslomake.valitsePainotukset')}
-        // TODO: Vaihda koodisto kun tiedetään mikä se on
-        koodisto="lukiolinjat"
+        koodisto="lukiopainotukset"
       />
       <Spacing marginBottom={8} />
       <LukiolinjaOsio
@@ -85,8 +84,7 @@ const LukiolinjatField = ({ name }) => {
           'toteutuslomake.lukiollaOnErityisiaKoulutustehtavia'
         )}
         valinnatLabel={t('toteutuslomake.valitseErityisetKoulutustehtavat')}
-        // TODO: Vaihda koodisto kun tiedetään mikä se on
-        koodisto="lukiolinjat"
+        koodisto="lukiolinjaterityinenkoulutustehtava"
       />
     </>
   );

@@ -56,7 +56,7 @@ export const fillAsyncSelect = (input, match = null) => {
     cy.get('input[type="text"]').should('not.be.disabled').pipe(paste(input));
     cy.findAllByRole('option', { name: _fp.includes(searchTerm) })
       .first()
-      .click();
+      .click({ force: true });
   });
 };
 

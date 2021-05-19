@@ -15,6 +15,7 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
         "kieli": "fi"
       }
     ],
+    "erityisetKoulutustehtavat": null,
     "hakuaika": {
       "alkaa": "2050-04-01T00:00",
       "paattyy": "2050-09-01T00:00"
@@ -36,7 +37,6 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
     "lisatietoaValintaperusteista": {
       "fi": "<p>lisätiedot valintaperusteista</p>"
     },
-    "lukiolinjaKoodiUri": null,
     "opetus": {
       "A1JaA2Kielivalikoima": [],
       "B1Kielivalikoima": [],
@@ -93,6 +93,7 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
       "suunniteltuKestoVuodet": 2
     },
     "osaamisalat": [],
+    "painotukset": null,
     "toteutusjaksot": [],
     "tyyppi": "amm-tutkinnon-osa",
     "yhteyshenkilot": [
@@ -150,6 +151,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "erityisetKoulutustehtavat": null,
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
@@ -160,7 +162,6 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
     "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
-    "lukiolinjaKoodiUri": null,
     "opetus": {
       "A1JaA2Kielivalikoima": [],
       "B1Kielivalikoima": [],
@@ -227,6 +228,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
         }
       }
     ],
+    "painotukset": null,
     "toteutusjaksot": [],
     "tyyppi": "amm",
     "yhteyshenkilot": [
@@ -284,6 +286,7 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "erityisetKoulutustehtavat": null,
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
@@ -294,7 +297,6 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
     "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
-    "lukiolinjaKoodiUri": null,
     "opetus": {
       "A1JaA2Kielivalikoima": [],
       "B1Kielivalikoima": [],
@@ -360,6 +362,7 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
       "suunniteltuKestoVuodet": 2
     },
     "osaamisalat": [],
+    "painotukset": null,
     "toteutusjaksot": [],
     "tyyppi": "yo",
     "yhteyshenkilot": [
@@ -417,15 +420,30 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "erityisetKoulutustehtavat": [
+      {
+        "koodiUri": "lukiolinjaterityinenkoulutustehtava_0100#1",
+        "kuvaus": {
+          "fi": "<p>IB-linja erityistehtävä kuvaus</p>"
+        }
+      },
+      {
+        "koodiUri": "lukiolinjaterityinenkoulutustehtava_0121#1",
+        "kuvaus": {
+          "fi": "<p>ICT-linja erityistehtävä kuvaus</p>"
+        }
+      }
+    ],
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
-    "kuvaus": {},
+    "kuvaus": {
+      "fi": "<p>Toteutuksen kuvaus</p>"
+    },
     "laajuus": null,
     "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
-    "lukiolinjaKoodiUri": "lukiolinjat_0000#2",
     "opetus": {
       "A1JaA2Kielivalikoima": [
         "kieli_en#1"
@@ -498,6 +516,20 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
       "suunniteltuKestoVuodet": 2
     },
     "osaamisalat": [],
+    "painotukset": [
+      {
+        "koodiUri": "lukiopainotukset_0100#1",
+        "kuvaus": {
+          "fi": "<p>IB-linja painotus kuvaus</p>"
+        }
+      },
+      {
+        "koodiUri": "lukiopainotukset_0121#1",
+        "kuvaus": {
+          "fi": "<p>ICT-linja painotus kuvaus</p>"
+        }
+      }
+    ],
     "toteutusjaksot": [],
     "tyyppi": "lk",
     "yhteyshenkilot": [
@@ -523,7 +555,7 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "Lukio"
+    "fi": "toteutuksen nimi"
   },
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": null,
@@ -560,6 +592,7 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "erityisetKoulutustehtavat": null,
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
@@ -568,7 +601,6 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
     "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
-    "lukiolinjaKoodiUri": null,
     "opetus": {
       "A1JaA2Kielivalikoima": [],
       "B1Kielivalikoima": [],
@@ -636,6 +668,7 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
         }
       }
     ],
+    "painotukset": null,
     "toteutusjaksot": [],
     "tyyppi": "amm",
     "yhteyshenkilot": [
@@ -716,6 +749,7 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "erityisetKoulutustehtavat": null,
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
@@ -724,7 +758,6 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
     "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
-    "lukiolinjaKoodiUri": null,
     "opetus": {
       "A1JaA2Kielivalikoima": [],
       "B1Kielivalikoima": [],
@@ -782,6 +815,7 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
       "suunniteltuKestoVuodet": 2
     },
     "osaamisalat": [],
+    "painotukset": null,
     "toteutusjaksot": [],
     "tyyppi": "yo",
     "yhteyshenkilot": [
@@ -862,6 +896,7 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "erityisetKoulutustehtavat": null,
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
@@ -870,7 +905,6 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
     "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
-    "lukiolinjaKoodiUri": "lukiolinjat_0#1",
     "opetus": {
       "A1JaA2Kielivalikoima": [
         "kieli_1#1"
@@ -944,6 +978,7 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
       "suunniteltuKestoVuodet": 2
     },
     "osaamisalat": [],
+    "painotukset": null,
     "toteutusjaksot": [],
     "tyyppi": "lk",
     "yhteyshenkilot": [
@@ -1009,6 +1044,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
         "kieli": "fi"
       }
     ],
+    "erityisetKoulutustehtavat": null,
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "hakulomaketyyppi": "ei sähköistä",
@@ -1019,7 +1055,6 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
     "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
-    "lukiolinjaKoodiUri": null,
     "opetus": {
       "A1JaA2Kielivalikoima": [],
       "B1Kielivalikoima": [],
@@ -1087,6 +1122,7 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
         }
       }
     ],
+    "painotukset": null,
     "toteutusjaksot": [],
     "tyyppi": "amm-tutkinnon-osa",
     "yhteyshenkilot": [

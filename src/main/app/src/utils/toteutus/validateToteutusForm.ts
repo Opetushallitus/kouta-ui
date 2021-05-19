@@ -175,7 +175,7 @@ export const validateToteutusForm = (
   const isJulkaistu = tila === JULKAISUTILA.JULKAISTU;
   const kieliversiot = getKielivalinta(values);
 
-  // NOTE: Only visible fields will be validated!
+  // NOTE: Only registered fields will be validated!
   return _fp
     .flow(
       validatePohja,
@@ -211,23 +211,24 @@ export const validateToteutusForm = (
       validateApuraha,
       validateOptionalTranslatedField('jarjestamistiedot.apurahaKuvaus'),
       validateHakeutumisTaiIlmoittautumisTapa,
+      validateInteger('jarjestamistiedot.suunniteltuKesto.vuotta', {
+        min: 0,
+        max: 99,
+        optional: true,
+      }),
+      validateInteger('jarjestamistiedot.suunniteltuKesto.kuukautta', {
+        min: 0,
+        max: 11,
+        optional: true,
+      }),
       validateIf(
         isJulkaistu,
         _fp.flow(
           validateArrayMinLength('jarjestamistiedot.opetuskieli', 1),
+          validateExistence('jarjestamistiedot.suunniteltuKesto.vuotta'),
+          validateExistence('jarjestamistiedot.suunniteltuKesto.kuukautta'),
           validateArrayMinLength('jarjestamistiedot.opetusaika', 1),
-          validateInteger('jarjestamistiedot.suunniteltuKesto.vuotta', {
-            min: 0,
-            max: 99,
-            optional: true,
-          }),
-          validateInteger('jarjestamistiedot.suunniteltuKesto.kuukautta', {
-            min: 0,
-            max: 11,
-            optional: true,
-          }),
-          validateArrayMinLength('jarjestamistiedot.suunniteltuKesto', 1),
-          validateExistence('jarjestamistiedot.opetustapa'),
+          validateArrayMinLength('jarjestamistiedot.opetustapa', 1),
           validateIf(
             values?.jarjestamistiedot?.ajankohta?.ajankohtaKaytossa &&
               values?.jarjestamistiedot?.ajankohta?.ajankohtaTyyppi ===

@@ -2,20 +2,25 @@ import React, { Suspense } from 'react';
 
 import { action } from '@storybook/addon-actions';
 import axios from 'axios';
+import _ from 'lodash';
 import { urls as ophUrls } from 'oph-urls-js';
 import Async from 'react-async';
 import { I18nextProvider } from 'react-i18next';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 
 import UrlContext from '#/src/contexts/UrlContext';
 import defaultTheme from '#/src/theme';
 
+import AuthorizedUserContext from './contexts/AuthorizedUserContext';
 import HttpContext from './contexts/HttpClientContext';
 import createLocalization from './localization';
 import { createStore } from './state';
 import getTranslations from './translations';
 import { configure as configureUrls } from './urls';
+
+const queryClient = new QueryClient();
 
 const defaultHttpClient = axios.create({});
 const configureOphUrls = () => configureUrls(ophUrls, defaultHttpClient);
@@ -75,4 +80,14 @@ export const makeLocalizationDecorator = () => storyFn => {
 
 export const themeDecorator = storyFn => (
   <ThemeProvider theme={defaultTheme}>{storyFn()}</ThemeProvider>
+);
+
+export const queryClientDecorator = storyFn => (
+  <QueryClientProvider client={queryClient}>{storyFn()}</QueryClientProvider>
+);
+
+export const authorizedUserDecorator = storyFn => (
+  <AuthorizedUserContext.Provider value={{}}>
+    {storyFn()}
+  </AuthorizedUserContext.Provider>
 );

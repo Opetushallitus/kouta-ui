@@ -17,7 +17,7 @@ export const getEPerusteTutkinnonOsat = async ({
 
 export const useEPerusteTutkinnonOsat = ({ ePerusteId }) => {
   return useApiQuery(
-    'getTutkinnonOsaViite',
+    'getEPerusteTutkinnonOsat',
     getEPerusteTutkinnonOsat,
     { ePerusteId },
     {

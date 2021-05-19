@@ -1,6 +1,6 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
-import { QueryObserverOptions, useQuery } from 'react-query';
+import { QueryObserverOptions, useQueries, useQuery } from 'react-query';
 
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
@@ -26,4 +26,30 @@ export const useApiQuery = (
     props,
   ]);
   return useQuery([key, props], queryFn, options);
+};
+
+type QuerySpec = {
+  key: string;
+  queryFn: (...params: any) => any;
+  props?: Record<string, any>;
+  options?: KoutaApiQueryConfig;
+};
+
+type QuerySpecs = Array<QuerySpec>;
+
+export const useApiQueries = (koutaQuerySpecs: QuerySpecs) => {
+  const apiUrls = useUrls();
+  const httpClient = useHttpClient();
+
+  const querySpecs = useMemo(
+    () =>
+      koutaQuerySpecs.map(({ key, queryFn, props = {}, options = {} }) => ({
+        queryKey: [key, props],
+        queryFn: () => queryFn({ httpClient, apiUrls, ...props }),
+        ...options,
+      })),
+    [koutaQuerySpecs, apiUrls, httpClient]
+  );
+
+  return useQueries(querySpecs);
 };

@@ -2,13 +2,14 @@ import React, { useMemo, useEffect } from 'react';
 
 import _ from 'lodash';
 import { useTranslation } from 'react-i18next';
+import { useUnmount } from 'react-use';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
 import { Grid, Cell } from 'styled-css-grid';
 
 import Anchor from '#/src/components/Anchor';
 import { FormFieldSelect } from '#/src/components/formFields';
-import { Box, Spin } from '#/src/components/virkailija';
+import { Box } from '#/src/components/virkailija';
 import { useUrls } from '#/src/contexts/UrlContext';
 import {
   useFieldValue,
@@ -76,7 +77,7 @@ export const ValitseEPerusteBox = ({
   ePerusteet,
   language,
   selectedKoulutus,
-  koulutusIsLoading = false,
+  koulutusQueryStatus,
   disabled,
 }) => {
   const { t } = useTranslation();
@@ -102,11 +103,17 @@ export const ValitseEPerusteBox = ({
 
   const koulutusHasChanged = useHasChanged(selectedKoulutus);
 
+  const koulutusIsLoading = koulutusQueryStatus === 'loading';
+
   useEffect(() => {
     if (isDirty && koulutusHasChanged) {
       change(fieldName, null);
     }
   }, [change, isDirty, fieldName, koulutusHasChanged]);
+
+  useUnmount(() => {
+    change(fieldName, null);
+  });
 
   return (
     <StyledInfoBox mb={2}>
@@ -119,9 +126,7 @@ export const ValitseEPerusteBox = ({
           disabled={disabled}
         />
       </Box>
-      {koulutusIsLoading ? (
-        <Spin />
-      ) : ePeruste ? (
+      {ePeruste && (
         <Grid columns="minmax(300px, 40%) auto">
           <Cell key="eperusteen-tiedot-1">
             <InfoBoxGrid
@@ -174,8 +179,6 @@ export const ValitseEPerusteBox = ({
             />
           </Cell>
         </Grid>
-      ) : (
-        <div></div>
       )}
     </StyledInfoBox>
   );

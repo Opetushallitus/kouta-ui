@@ -15,8 +15,8 @@ import {
   useIsDirty,
 } from '#/src/hooks/form';
 import { useHasChanged } from '#/src/hooks/useHasChanged';
+import { useKoulutuksetByKoulutusala } from '#/src/hooks/useKoulutuksetByKoulutusala';
 import { formatKoodiLabelWithArvo, getTestIdProps } from '#/src/utils';
-import { useKoulutuksetByKoulutusala } from '#/src/utils/soraKuvaus/getKoulutuksetBykoulutusala';
 
 export const KoulutustyyppiSection = ({ name, canEditKoulutustyyppi }) => {
   const { t } = useTranslation();

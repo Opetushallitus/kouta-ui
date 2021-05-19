@@ -21,7 +21,7 @@ import getToteutusByOid from '#/src/utils/toteutus/getToteutusByOid';
 import validateToteutusForm from '#/src/utils/toteutus/validateToteutusForm';
 import { getValintaperusteById } from '#/src/utils/valintaperuste/getValintaperusteById';
 
-export const useSaveForm = ({ form: formName, validate, submit }) => {
+export const useSaveForm = ({ formName, validate, submit }) => {
   const dispatch = useDispatch();
   const user = useAuthorizedUser();
   const httpClient = useHttpClient();
@@ -92,9 +92,7 @@ export const useSaveForm = ({ form: formName, validate, submit }) => {
     stopSubmit,
   ]);
 
-  return {
-    save,
-  };
+  return save;
 };
 
 export const useSaveToteutus = ({
@@ -106,8 +104,8 @@ export const useSaveToteutus = ({
   const httpClient = useHttpClient();
   const apiUrls = useUrls();
 
-  const { save } = useSaveForm({
-    form: formName,
+  return useSaveForm({
+    formName,
     submit,
     validate: async values => {
       const koulutus = oldKoulutus
@@ -124,7 +122,6 @@ export const useSaveToteutus = ({
       });
     },
   });
-  return save;
 };
 
 export const useSaveHakukohde = ({
@@ -136,8 +133,8 @@ export const useSaveHakukohde = ({
   const httpClient = useHttpClient();
   const apiUrls = useUrls();
 
-  const { save } = useSaveForm({
-    form: formName,
+  return useSaveForm({
+    formName,
     submit,
     validate: async values => {
       const valintaperusteId = _.get(values, 'valintaperusteenKuvaus.value');
@@ -160,6 +157,4 @@ export const useSaveHakukohde = ({
       });
     },
   });
-
-  return save;
 };

@@ -4,6 +4,7 @@ import { serializeEditorState } from '#/src/components/Editor/utils';
 import {
   KOULUTUSTYYPPI,
   TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
+  KOULUTUSALA_YLEISSIVISTAVA_KOODIURI,
 } from '#/src/constants';
 import {
   InformationSectionValues,
@@ -122,9 +123,10 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
         ({ value }) => value
       ),
       kuvauksenNimi: pickTranslations(values?.description?.nimi ?? {}),
-      koulutusalaKoodiUrit: (values?.information?.koulutusalat ?? []).map(
-        ({ value }) => value
-      ),
+      koulutusalaKoodiUrit:
+        koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS
+          ? [KOULUTUSALA_YLEISSIVISTAVA_KOODIURI]
+          : (values?.information?.koulutusalat ?? []).map(({ value }) => value),
     },
   };
 };

@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { Select } from '#/src/components/Select';
-import { useKoodistoOptions } from '#/src/hooks/useKoodistoOptions';
+import AsyncKoodistoSelect from '#/src/components/AsyncKoodistoSelect';
+import useKoodisto from '#/src/hooks/useKoodisto';
 
 export const KoulutusalaSelect = props => {
-  const { options } = useKoodistoOptions({
+  const { data } = useKoodisto({
     koodisto: 'kansallinenkoulutusluokitus2016koulutusalataso2',
   });
 
-  return <Select options={options} {...props} />;
+  return <AsyncKoodistoSelect koodistoData={data} showAllOptions {...props} />;
 };
 
 export default KoulutusalaSelect;

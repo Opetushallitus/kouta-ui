@@ -6,15 +6,12 @@ import { FieldArray } from 'redux-form';
 import Button from '#/src/components/Button';
 import FieldArrayList from '#/src/components/FieldArrayList';
 import { Box } from '#/src/components/virkailija';
-import { useFieldValue } from '#/src/hooks/form';
 import { getTestIdProps } from '#/src/utils';
 
-import KoulutuksenTiedotSection from './TiedotSection/KoulutuksenTiedotSection';
+import { KoulutuksenEPerusteTiedot } from './KoulutuksenEPerusteTiedot';
 import { useNimiFromKoulutusKoodi } from './useNimiFromKoulutusKoodi';
 
 const TutkinnonOsatField = ({ disabled, language, name }) => {
-  const koulutuskoodi = useFieldValue(`${name}.koulutus`);
-
   useNimiFromKoulutusKoodi({
     nimiFieldName: `${name}.nimi`,
     koulutusFieldName: `${name}.koulutus`,
@@ -22,10 +19,9 @@ const TutkinnonOsatField = ({ disabled, language, name }) => {
 
   return (
     <Box mt={2}>
-      <KoulutuksenTiedotSection
+      <KoulutuksenEPerusteTiedot
         disabled={disabled}
         language={language}
-        koulutuskoodi={koulutuskoodi}
         name={name}
       />
     </Box>

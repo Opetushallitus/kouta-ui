@@ -4,29 +4,25 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 
 import { FormFieldInput } from '#/src/components/formFields';
+import KoulutusalaSelect from '#/src/components/KoulutusalaSelect';
 import KoulutusField from '#/src/components/KoulutusField';
-import { Box } from '#/src/components/virkailija';
+import { Box, FormControl } from '#/src/components/virkailija';
 import {
   KOULUTUSTYYPPI,
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
   TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
+  KOULUTUSALA_YLEISSIVISTAVA_KOODIURI,
 } from '#/src/constants';
 import { getTestIdProps } from '#/src/utils';
 import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 
+import { KoulutuksenEPerusteTiedot } from '../KoulutuksenEPerusteTiedot';
 import { useNimiFromKoulutusKoodi } from '../useNimiFromKoulutusKoodi';
-import KoulutuksenTiedotSection from './KoulutuksenTiedotSection';
 import KoulutusalatField from './KoulutusalatField';
 import OpintojenlaajuusField from './OpintojenlaajuusField';
 import TutkintonimikeField from './TutkintonimikeField';
 
-export const TiedotSection = ({
-  disabled,
-  language,
-  koulutustyyppi,
-  koulutuskoodi,
-  name,
-}) => {
+export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
   const { t } = useTranslation();
 
   useNimiFromKoulutusKoodi({
@@ -42,21 +38,9 @@ export const TiedotSection = ({
         koulutustyyppi
       ) && (
         <Box mb={2}>
-          <KoulutuksenTiedotSection
+          <KoulutuksenEPerusteTiedot
             disabled={disabled}
             language={language}
-            koulutuskoodi={koulutuskoodi}
-            name={name}
-          />
-        </Box>
-      )}
-      {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && (
-        <Box mb={2}>
-          <KoulutuksenTiedotSection
-            disabled={disabled}
-            language={language}
-            koulutuskoodi={koulutuskoodi}
-            selectLabel={t('koulutuslomake.valitseOsaamisala')}
             name={name}
           />
         </Box>
@@ -102,6 +86,34 @@ export const TiedotSection = ({
           </Box>
         </>
       )}
+      {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && (
+        <>
+          <Box mb={2} {...getTestIdProps('koulutusSelect')}>
+            <KoulutusField
+              disabled={disabled}
+              name={`${name}.koulutus`}
+              koulutustyyppi={koulutustyyppi}
+              language={language}
+              valitseKoulutusLabel={t('yleiset.valitseKoulutus')}
+              required
+            />
+          </Box>
+          <Box mb={2}>
+            <OpintojenlaajuusField disabled={disabled} name={name} />
+          </Box>
+          <Box mb={2}>
+            <FormControl
+              label={t('koulutuslomake.valitseKoulutusalat')}
+              disabled={true}
+            >
+              <KoulutusalaSelect
+                value={{ value: KOULUTUSALA_YLEISSIVISTAVA_KOODIURI }}
+              />
+            </FormControl>
+          </Box>
+        </>
+      )}
+
       {[
         ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
         KOULUTUSTYYPPI.AVOIN_YO,
@@ -111,6 +123,7 @@ export const TiedotSection = ({
         KOULUTUSTYYPPI.AMMATILLINEN_OPETTAJAKOULUTUS,
         KOULUTUSTYYPPI.AMMATILLINEN_ERITYISOPETTAJA_KOULUTUS,
         KOULUTUSTYYPPI.AMMATILLINEN_OPINTO_OHJAAJA_KOULUTUS,
+        KOULUTUSTYYPPI.LUKIOKOULUTUS,
       ].includes(koulutustyyppi) && (
         <Box mb={2} {...getTestIdProps('nimiInput')}>
           <Field

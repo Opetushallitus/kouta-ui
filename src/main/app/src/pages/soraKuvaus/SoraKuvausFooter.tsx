@@ -50,8 +50,8 @@ export const SoraKuvausFooter = ({
     [formMode, soraKuvaus, history, queryClient]
   );
 
-  const { save } = useSaveForm({
-    form: 'soraKuvausForm',
+  const save = useSaveForm({
+    formName: 'soraKuvausForm',
     submit,
     validate: validateSoraKuvausForm,
   });

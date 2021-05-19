@@ -245,7 +245,7 @@
     }
   },
   {
-    "url": "https://localhost:3000/koodisto-service/rest/json/pohjakoulutusvaatimuskouta/koodi?onlyValidKoodis=true&koodistoVersio=",
+    "url": "https://localhost:3000/koodisto-service/rest/json/pohjakoulutusvaatimuskouta/koodi?onlyValidKoodis=true",
     "response": {
       "body": [
         {
@@ -2208,7 +2208,7 @@
     }
   },
   {
-    "url": "https://localhost:3000/koodisto-service/rest/json/liitetyypitamm/koodi?onlyValidKoodis=true&koodistoVersio=",
+    "url": "https://localhost:3000/koodisto-service/rest/json/liitetyypitamm/koodi?onlyValidKoodis=true",
     "response": {
       "body": [
         {
@@ -2692,7 +2692,7 @@
     }
   },
   {
-    "url": "https://localhost:3000/koodisto-service/rest/json/valintakokeentyyppi/koodi?onlyValidKoodis=true&koodistoVersio=",
+    "url": "https://localhost:3000/koodisto-service/rest/json/valintakokeentyyppi/koodi?onlyValidKoodis=true",
     "response": {
       "body": [
         {

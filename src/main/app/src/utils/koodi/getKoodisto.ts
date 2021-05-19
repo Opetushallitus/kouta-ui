@@ -13,10 +13,13 @@ const getKoodisto = async ({
   apiUrls,
   versio,
 }: GetKoodistoProps) => {
+  const koodistoVersio = versio ?? KOODISTO_VERSIOT[koodistoUri];
   const { data } = await httpClient.get(
     apiUrls.url('koodisto-service.koodi', koodistoUri),
     {
-      params: { koodistoVersio: versio ?? KOODISTO_VERSIOT[koodistoUri] ?? '' },
+      params: {
+        ...(koodistoVersio ? { koodistoVersio } : {}),
+      },
     }
   );
 

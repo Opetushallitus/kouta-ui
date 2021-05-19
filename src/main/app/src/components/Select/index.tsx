@@ -1,4 +1,4 @@
-import React, { useMemo, useContext } from 'react';
+import React, { useMemo, useContext, useCallback } from 'react';
 
 import UiSelect, {
   getStyles,
@@ -189,9 +189,14 @@ export const AsyncSelect = ({
   const { t } = useTranslation();
   const theme = useContext(ThemeContext);
 
+  const getAsyncValueFn = useCallback(
+    () => getAsyncValue(valueProp, defaultOptions, loadLabel),
+    [valueProp, defaultOptions, loadLabel]
+  );
+
   const { data: value, isFetching: isLoadingValue } = useQuery(
     ['getAsyncSelectValue', valueProp, defaultOptions, loadLabel],
-    () => getAsyncValue(valueProp, defaultOptions, loadLabel),
+    getAsyncValueFn,
     { enabled: Boolean(valueProp), ...LONG_CACHE_QUERY_OPTIONS }
   );
 

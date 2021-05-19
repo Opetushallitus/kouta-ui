@@ -102,15 +102,13 @@ const ToteutusForm = ({
           header={t('yleiset.kieliversiot')}
           Component={KieliversiotFields}
         />
-        {koulutustyyppi !== KOULUTUSTYYPPI.LUKIOKOULUTUS && (
-          <FormCollapse
-            section="tiedot"
-            header={t('toteutuslomake.toteutuksenTiedot')}
-            languages={languages}
-            Component={TiedotSection}
-            koulutustyyppi={koulutustyyppi}
-          />
-        )}
+        <FormCollapse
+          section="tiedot"
+          header={t('toteutuslomake.toteutuksenTiedot')}
+          languages={languages}
+          Component={TiedotSection}
+          koulutustyyppi={koulutustyyppi}
+        />
         {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && (
           <FormCollapse
             section="lukiolinjat"

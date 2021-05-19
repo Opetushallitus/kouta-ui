@@ -66,7 +66,6 @@ export const TiedotSection = ({ language, name, koulutustyyppi }) => {
       {_fp
         .without(
           [
-            KOULUTUSTYYPPI.LUKIOKOULUTUS,
             KOULUTUSTYYPPI.VALMA,
             KOULUTUSTYYPPI.TELMA,
             KOULUTUSTYYPPI.LUVA,
@@ -76,6 +75,7 @@ export const TiedotSection = ({ language, name, koulutustyyppi }) => {
         )
         .includes(koulutustyyppi) && (
         <Box mb={2} {...getTestIdProps('toteutuksenNimi')}>
+          {/* TODO: Lukio-KOMOTOn nimi pitäisi generoida linjojen avulla (KTO-1150)*/}
           <Field
             name={`${name}.nimi.${language}`}
             component={FormFieldInput}
@@ -99,18 +99,15 @@ export const TiedotSection = ({ language, name, koulutustyyppi }) => {
         </Box>
       )}
       {
-        /* TODO: name-attribuutin alkuun sectionin name. Muuten validointivirheen tullessa tätä kenttää ei osata näyttää oikein. */
-        _fp
-          .without([KOULUTUSTYYPPI.LUKIOKOULUTUS], KOULUTUSTYYPIT)
-          .includes(koulutustyyppi) && (
-          <Box mb={2} {...getTestIdProps('toteutuksenKuvaus')}>
-            <Field
-              name={`kuvaus.${language}`}
-              component={FormFieldEditor}
-              label={t('toteutuslomake.toteutuksenYleinenKuvaus')}
-            />
-          </Box>
-        )
+        /* TODO: name-attribuutin alkuun sectionin name. Muuten validointivirheen tullessa tätä kenttää ei osata korostaa oikein. */
+
+        <Box mb={2} {...getTestIdProps('toteutuksenKuvaus')}>
+          <Field
+            name={`kuvaus.${language}`}
+            component={FormFieldEditor}
+            label={t('toteutuslomake.toteutuksenYleinenKuvaus')}
+          />
+        </Box>
       }
 
       {_fp

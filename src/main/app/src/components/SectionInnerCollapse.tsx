@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 
+import _ from 'lodash';
 import { transparentize } from 'polished';
 import styled, { css } from 'styled-components';
 
@@ -38,17 +39,33 @@ const SectionInnerCollapseContent = styled(Box)`
   padding: 22px 30px;
 `;
 
-const SectionInnerCollapseToggle = ({ header, isOpen, onToggle }) => {
+const SectionInnerCollapseToggle = ({
+  header,
+  isOpen,
+  onToggle,
+  contentId,
+  buttonId,
+  ...props
+}) => {
   return (
-    <SectionInnerCollapseHeader onClick={onToggle} isOpen={isOpen}>
-      <Heading>
-        <span>{header}</span>
-        <Icon
-          style={{ float: 'right' }}
-          type={isOpen ? 'arrow_drop_up' : 'arrow_drop_down'}
-        />
-      </Heading>
-    </SectionInnerCollapseHeader>
+    <div role="heading" aria-level={3} {...props}>
+      <SectionInnerCollapseHeader
+        id={buttonId}
+        role="button"
+        onClick={onToggle}
+        isOpen={isOpen}
+        aria-expanded={isOpen}
+        aria-controls={contentId}
+      >
+        <Heading>
+          <span>{header}</span>
+          <Icon
+            style={{ float: 'right' }}
+            type={isOpen ? 'arrow_drop_up' : 'arrow_drop_down'}
+          />
+        </Heading>
+      </SectionInnerCollapseHeader>
+    </div>
   );
 };
 
@@ -67,16 +84,25 @@ export const SectionInnerCollapse = ({
 
   const onToggle = useCallback(() => setIsOpen(open => !open), [setIsOpen]);
 
+  const headerId = _.snakeCase(header) + '_header';
+  const buttonId = _.snakeCase(header) + '_headerbutton';
+  const contentId = _.snakeCase(header) + '_content';
+
   return (
     <Box>
       <SectionInnerCollapseToggle
+        id={headerId}
         onToggle={onToggle}
         isOpen={isOpen}
         header={header}
-      ></SectionInnerCollapseToggle>
-      <CollapseContent open={isOpen}>
-        <SectionInnerCollapseContent>{children}</SectionInnerCollapseContent>
-      </CollapseContent>
+        contentId={contentId}
+        buttonId={buttonId}
+      />
+      <div id={contentId} aria-labelledby={buttonId} role="region">
+        <CollapseContent open={isOpen}>
+          <SectionInnerCollapseContent>{children}</SectionInnerCollapseContent>
+        </CollapseContent>
+      </div>
     </Box>
   );
 };

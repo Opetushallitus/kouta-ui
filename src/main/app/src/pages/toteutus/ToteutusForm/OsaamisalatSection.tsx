@@ -217,7 +217,7 @@ const useExtendedEPeruste = ePerusteId => {
   const {
     data: osaamisalaKuvaukset,
     isLoading: osaamisalaKuvauksetLoading,
-  } = useEPerusteOsaamisalaKuvaukset(ePerusteId);
+  } = useEPerusteOsaamisalaKuvaukset({ ePerusteId });
 
   const osaamisalat = ePeruste?.osaamisalat;
 

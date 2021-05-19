@@ -13,7 +13,7 @@ const SectionInnerCollapseHeader = styled.div`
   transition-property: color, background-color border-radius;
   transition-duration: 0.4s;
   color: black;
-  background-color: ${getThemeProp('colors.grayLighten6', transparentize(0.5))};
+  background-color: ${getThemeProp('colors.grayLighten6')};
   cursor: pointer;
   flex: 0 0 auto;
   border-radius: 4px;
@@ -29,6 +29,7 @@ const SectionInnerCollapseHeader = styled.div`
     `}
   & > * {
     margin: 0;
+    line-height: 24px;
   }
 `;
 

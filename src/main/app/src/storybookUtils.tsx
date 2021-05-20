@@ -2,7 +2,6 @@ import React, { Suspense } from 'react';
 
 import { action } from '@storybook/addon-actions';
 import axios from 'axios';
-import _ from 'lodash';
 import { urls as ophUrls } from 'oph-urls-js';
 import Async from 'react-async';
 import { I18nextProvider } from 'react-i18next';

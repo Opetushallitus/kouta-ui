@@ -77,6 +77,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
   const {
     diplomiKoodiUrit,
     diplomiKuvaus,
+    kielivalikoima = {},
     A1JaA2Kielivalikoima,
     aidinkieliKielivalikoima,
     B1Kielivalikoima,
@@ -180,6 +181,14 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
       ),
       diplomiTyypit: toSelectValueList(diplomiKoodiUrit),
       diplomiKuvaus: _fp.mapValues(parseEditorState, diplomiKuvaus ?? {}),
+      kielivalikoima: {
+        A1A2Kielet: toSelectValueList(kielivalikoima.A1JaA2Kielet),
+        aidinkielet: toSelectValueList(kielivalikoima.aidinkielet),
+        B1Kielet: toSelectValueList(kielivalikoima.B1Kielet),
+        B2Kielet: toSelectValueList(kielivalikoima.B2Kielet),
+        B3Kielet: toSelectValueList(kielivalikoima.B3Kielet),
+        muutKielet: toSelectValueList(kielivalikoima.muutKielet),
+      },
       A1A2Kielet: toSelectValueList(A1JaA2Kielivalikoima),
       aidinkielet: toSelectValueList(aidinkieliKielivalikoima),
       B1Kielet: toSelectValueList(B1Kielivalikoima),

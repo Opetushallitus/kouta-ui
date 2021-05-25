@@ -189,12 +189,6 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
         B3Kielet: toSelectValueList(kielivalikoima.B3Kielet),
         muutKielet: toSelectValueList(kielivalikoima.muutKielet),
       },
-      A1A2Kielet: toSelectValueList(A1JaA2Kielivalikoima),
-      aidinkielet: toSelectValueList(aidinkieliKielivalikoima),
-      B1Kielet: toSelectValueList(B1Kielivalikoima),
-      B2Kielet: toSelectValueList(B2Kielivalikoima),
-      B3Kielet: toSelectValueList(B3Kielivalikoima),
-      muutKielet: toSelectValueList(muuKielivalikoima),
       ajankohta: getAjankohtaFields(koulutuksenAlkamiskausi),
     },
     nayttamistiedot: {

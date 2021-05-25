@@ -89,12 +89,6 @@ export type ToteutusFormValues = {
     diplomiTyypit: SelectOptions;
     diplomiKuvaus: Kuvaus;
     kielivalikoima: Kielivalikoima;
-    A1A2Kielet: SelectOptions;
-    aidinkielet: SelectOptions;
-    B1Kielet: SelectOptions;
-    B2Kielet: SelectOptions;
-    B3Kielet: SelectOptions;
-    muutKielet: SelectOptions;
     ajankohta: AjankohtaFields;
   };
   nayttamistiedot: {

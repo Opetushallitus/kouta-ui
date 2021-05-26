@@ -54,7 +54,7 @@ export const HakukohteenValintakokeetSection = ({ name, language }) => {
             {t('koeTaiLisanaytto.valintaperusteenValintakokeet')}
           </DividerHeading>
           {valintaperusteenValintakokeet.map(({ id, ...rest }, index) => (
-            <Box mb={2}>
+            <Box mb={2} key={`valintakoe-${id}`}>
               <SectionInnerCollapse
                 header={t('koeTaiLisanaytto.title', { index: index + 1 })}
                 key={id}

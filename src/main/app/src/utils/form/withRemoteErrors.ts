@@ -2,9 +2,11 @@ import { AxiosResponse } from 'axios';
 import _ from 'lodash';
 
 import { koulutusRemoteErrorsToFormErrors } from '#/src/utils/koulutus/koulutusRemoteErrorsToFormErrors';
+import { toteutusRemoteErrorsToFormErrors } from '#/src/utils/toteutus/toteutusRemoteErrorsToFormErrors';
 
 const REMOTE_ERRORS_TO_FORM_ERRORS = {
   koulutusForm: koulutusRemoteErrorsToFormErrors,
+  toteutusForm: toteutusRemoteErrorsToFormErrors,
 };
 
 const setErrors = (
@@ -38,12 +40,9 @@ export const withRemoteErrors = (
 ) => {
   const resData = response?.data;
   resData?.forEach?.(remoteError => {
-    const errorConverter =
-      REMOTE_ERRORS_TO_FORM_ERRORS[formName]?.[remoteError?.path];
+    const errorConverter = REMOTE_ERRORS_TO_FORM_ERRORS[formName];
 
-    const formError = _.isFunction(errorConverter)
-      ? errorConverter(remoteError)
-      : errorConverter;
+    const formError = errorConverter?.(remoteError);
 
     // formError merkkojonona on vain lomakkeen kentän nimi. Virheavain päätellään backend-virheen errorType-kentästä.
     if (_.isString(formError)) {

@@ -1,16 +1,13 @@
 import React from 'react';
 
 import ReduxForm from '#/src/components/ReduxForm';
-import { KOULUTUSTYYPIT, ENTITY } from '#/src/constants';
+import { KOULUTUSTYYPIT } from '#/src/constants';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
-import { useEntityFormConfig } from '#/src/hooks/form';
-import { makeStoreDecorator } from '#/src/storybookUtils';
 
 import ToteutusForm, { initialValues } from './index';
-
+const config = { noFieldConfigs: true };
 export default {
   title: 'ToteutusForm',
-  decorators: [makeStoreDecorator()],
   argTypes: {
     koulutustyyppi: {
       control: {
@@ -22,7 +19,6 @@ export default {
 };
 
 const Wrapper = ({ koulutustyyppi = 'amm' }) => {
-  const config = useEntityFormConfig(ENTITY.TOTEUTUS, koulutustyyppi);
   return (
     <ReduxForm
       form="toteutus"

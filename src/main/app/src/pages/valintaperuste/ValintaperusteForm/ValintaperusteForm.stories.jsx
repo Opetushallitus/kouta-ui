@@ -2,13 +2,11 @@ import React from 'react';
 
 import ReduxForm from '#/src/components/ReduxForm';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
-import { makeStoreDecorator } from '#/src/storybookUtils';
 
 import { ValintaperusteForm, initialValues } from './index';
 
 export default {
   title: 'ValintaperusteForm',
-  decorators: [makeStoreDecorator()],
 };
 
 const formConfig = { noFieldConfigs: true };

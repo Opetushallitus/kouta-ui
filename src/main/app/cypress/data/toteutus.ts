@@ -153,7 +153,6 @@ const getLukioFields = ({ tyyppi }) =>
         aidinkieliKielivalikoima: ['kieli_4#1'],
         muuKielivalikoima: ['kieli_4#1'],
       },
-      lukiolinjaKoodiUri: 'lukiolinjat_0#1',
       jaksonKuvaus: {
         fi: 'Fi jakso',
         sv: 'Sv jakso',

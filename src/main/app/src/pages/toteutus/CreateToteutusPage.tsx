@@ -21,7 +21,6 @@ import {
   FormMode,
 } from '#/src/constants';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
-import { useEntityFormConfig } from '#/src/hooks/form';
 import useSelectBase from '#/src/hooks/useSelectBase';
 import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
 import getFormValuesByToteutus from '#/src/utils/toteutus/getFormValuesByToteutus';
@@ -31,6 +30,8 @@ import { ToteutusFooter } from './ToteutusFooter';
 import ToteutusForm, { initialValues } from './ToteutusForm';
 
 const { AMMATILLINEN_KOULUTUS, TUTKINNON_OSA, OSAAMISALA } = KOULUTUSTYYPPI;
+
+const config = { noFieldConfigs: true };
 
 const getCopyValues = toteutusOid => ({
   pohja: {
@@ -67,8 +68,7 @@ const CreateToteutusPage = props => {
   const selectBase = useSelectBase(history, { kopioParam: 'kopioToteutusOid' });
   const { t } = useTranslation();
 
-  const koulutustyyppi =
-    koulutus?.koulutustyyppi ?? KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS;
+  const koulutustyyppi = koulutus?.koulutustyyppi ?? AMMATILLINEN_KOULUTUS;
 
   const koulutusNimi = koulutus?.nimi;
   const koulutusKielet = koulutus?.kielivalinta;
@@ -84,8 +84,6 @@ const CreateToteutusPage = props => {
       ? getInitialValues(toteutus, koulutusNimi, koulutusKielet)
       : getInitialValues(toteutus, null, koulutusKielet);
   }, [toteutus, koulutustyyppi, koulutusNimi, koulutusKielet]);
-
-  const config = useEntityFormConfig(ENTITY.TOTEUTUS, koulutustyyppi);
 
   return (
     <ReduxForm form="toteutusForm" initialValues={initialValues}>

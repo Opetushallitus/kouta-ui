@@ -174,8 +174,50 @@ const fillKkOsaamisalat = () => {
 
 const fillLukiolinjatSection = () => {
   getByTestId('lukiolinjatSection').within(() => {
-    selectOption('Lukio');
+    cy.findByTestId('painotukset').within(() => {
+      cy.findByText('toteutuslomake.lukiollaOnPainotuksia').click();
+      fillAsyncSelect('Lukion IB-linja');
+      fillAsyncSelect('Lukion ICT-linja');
 
+      cy.findByRole('button', {
+        name: /^Lukion IB-linja/,
+      }).click();
+
+      cy.findByLabelText(/^Lukion IB-linja/).within(() => {
+        typeToEditor('IB-linja painotus kuvaus');
+      });
+
+      cy.findByRole('button', {
+        name: /^Lukion ICT-linja/,
+      }).click();
+
+      cy.findByLabelText(/^Lukion ICT-linja/).within(() => {
+        typeToEditor('ICT-linja painotus kuvaus');
+      });
+    });
+    cy.findByTestId('erityisetKoulutustehtavat').within(() => {
+      cy.findByText(
+        'toteutuslomake.lukiollaOnErityisiaKoulutustehtavia'
+      ).click();
+      fillAsyncSelect('Lukion IB-linja (erityinen koulutustehtävä)');
+      fillAsyncSelect('Lukion ICT-linja (erityinen koulutustehtävä)');
+
+      cy.findByRole('button', {
+        name: /^Lukion IB-linja/,
+      }).click();
+
+      cy.findByLabelText(/^Lukion IB-linja/).within(() => {
+        typeToEditor('IB-linja erityistehtävä kuvaus');
+      });
+
+      cy.findByRole('button', {
+        name: /^Lukion ICT-linja/,
+      }).click();
+
+      cy.findByLabelText(/^Lukion ICT-linja/).within(() => {
+        typeToEditor('ICT-linja erityistehtävä kuvaus');
+      });
+    });
     jatka();
   });
 };
@@ -448,6 +490,8 @@ export const createToteutusForm = () => {
 
     fillPohjaSection();
     fillKieliversiotSection({ jatka: true });
+    fillTiedotSection();
+
     fillLukiolinjatSection();
 
     getByTestId('jarjestamistiedotSection').within(() => {

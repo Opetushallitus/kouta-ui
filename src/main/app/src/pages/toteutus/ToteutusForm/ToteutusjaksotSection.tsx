@@ -97,5 +97,3 @@ export const ToteutusjaksotSection = ({ name, language = 'fi' }) => {
     />
   );
 };
-
-export default ToteutusjaksotSection;

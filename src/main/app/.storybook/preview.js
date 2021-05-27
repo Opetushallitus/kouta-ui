@@ -3,6 +3,8 @@ import {
   makeLocalizationDecorator,
   makeStoreDecorator,
   makeApiDecorator,
+  queryClientDecorator,
+  authorizedUserDecorator,
 } from '#/src/storybookUtils';
 
 export const decorators = [
@@ -10,6 +12,8 @@ export const decorators = [
   makeLocalizationDecorator(),
   makeApiDecorator(),
   makeStoreDecorator(),
+  queryClientDecorator,
+  authorizedUserDecorator,
 ];
 
 export const parameters = {

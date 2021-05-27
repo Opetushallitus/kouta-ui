@@ -4,10 +4,6 @@ import { storiesOf } from '@storybook/react';
 
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import useLoadOptions from '#/src/hooks/useLoadOptions';
-import {
-  makeApiDecorator,
-  makeLocalizationDecorator,
-} from '#/src/storybookUtils';
 
 import AsyncKoodistoSelect from './index';
 
@@ -31,7 +27,4 @@ const Story = () => {
   );
 };
 
-storiesOf('AsyncKoodistoSelect', module)
-  .addDecorator(makeLocalizationDecorator())
-  .addDecorator(makeApiDecorator())
-  .add('Basic', () => <Story />);
+storiesOf('AsyncKoodistoSelect', module).add('Basic', () => <Story />);

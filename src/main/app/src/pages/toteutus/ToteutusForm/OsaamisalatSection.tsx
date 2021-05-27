@@ -18,12 +18,11 @@ import StyledSectionHTML from '#/src/components/StyledSectionHTML';
 import { Divider, Icon, Typography, Spin } from '#/src/components/virkailija';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useFieldValue } from '#/src/hooks/form';
-import useApiAsync from '#/src/hooks/useApiAsync';
 import { getThemeProp } from '#/src/theme';
 import { sanitizeHTML } from '#/src/utils';
 import { getTestIdProps } from '#/src/utils';
-import { getEPerusteById } from '#/src/utils/ePeruste/getEPerusteById';
-import { getOsaamisalakuvauksetByEPerusteId } from '#/src/utils/ePeruste/getOsaamisalakuvauksetByEPerusteId';
+import { useEPerusteById } from '#/src/utils/ePeruste/getEPerusteById';
+import { useEPerusteOsaamisalaKuvaukset } from '#/src/utils/ePeruste/getOsaamisalakuvauksetByEPerusteId';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 import { getLanguageValue } from '#/src/utils/languageUtils';
 
@@ -61,39 +60,6 @@ const OsaamisalaDetailsToggle = ({ open, onToggle, ...props }) => {
       </Typography>
     </OsaamisalaDetailsToggleContainer>
   );
-};
-
-const getExtendedEPeruste = async ({ httpClient, apiUrls, ePerusteId }) => {
-  if (!ePerusteId) {
-    return null;
-  }
-
-  const ePeruste = await getEPerusteById({
-    httpClient,
-    apiUrls,
-    ePerusteId,
-  });
-
-  const { osaamisalat } = ePeruste;
-
-  const osaamisalakuvaukset = await getOsaamisalakuvauksetByEPerusteId({
-    httpClient,
-    apiUrls,
-    ePerusteId,
-  });
-
-  const osaamisalatWithDescriptions = osaamisalat.map(osaamisala => ({
-    ...osaamisala,
-    kuvaus: _.mapValues(
-      _.get(osaamisalakuvaukset, [osaamisala.uri, 0, 'teksti']) || {},
-      v => (_.isString(v) ? sanitizeHTML(v) : v)
-    ),
-  }));
-
-  return {
-    ...ePeruste,
-    osaamisalat: osaamisalatWithDescriptions,
-  };
 };
 
 const OsaamisalaDetails = ({ osaamisala, language, name }) => {
@@ -222,7 +188,6 @@ const OsaamisalatContainer = ({
         <Typography variant="h6" marginBottom={1}></Typography>
         <FieldGroup
           title={t('toteutuslomake.valitseOsaamisalat')}
-          name={`${name}.osaamisalatGroup`}
           {...getTestIdProps('osaamisalaSelection')}
         >
           <Field
@@ -245,14 +210,46 @@ const OsaamisalatContainer = ({
   );
 };
 
-const OsaamisalatSection = ({ language, koulutus, organisaatioOid, name }) => {
+const useExtendedEPeruste = ePerusteId => {
+  const { data: ePeruste, isLoading: ePerusteLoading } = useEPerusteById(
+    ePerusteId
+  );
+  const {
+    data: osaamisalaKuvaukset,
+    isLoading: osaamisalaKuvauksetLoading,
+  } = useEPerusteOsaamisalaKuvaukset({ ePerusteId });
+
+  const osaamisalat = ePeruste?.osaamisalat;
+
+  const osaamisalatWithDescriptions = useMemo(
+    () =>
+      _.map(osaamisalat, osaamisala => ({
+        ...osaamisala,
+        kuvaus: _.mapValues(
+          _.get(osaamisalaKuvaukset, [osaamisala.uri, 0, 'teksti']) || {},
+          v => (_.isString(v) ? sanitizeHTML(v) : v)
+        ),
+      })),
+    [osaamisalat, osaamisalaKuvaukset]
+  );
+
+  return {
+    data: ePeruste
+      ? { ...ePeruste, osaamisalat: osaamisalatWithDescriptions }
+      : null,
+    isLoading: ePerusteLoading || osaamisalaKuvauksetLoading,
+  };
+};
+
+export const OsaamisalatSection = ({
+  language,
+  koulutus,
+  organisaatioOid,
+  name,
+}) => {
   const { t } = useTranslation();
   const { ePerusteId } = koulutus || {};
-  const { data: ePeruste, isLoading } = useApiAsync({
-    promiseFn: getExtendedEPeruste,
-    ePerusteId,
-    watch: ePerusteId,
-  });
+  const { data: ePeruste, isLoading } = useExtendedEPeruste(ePerusteId);
 
   return (
     <Container>
@@ -274,5 +271,3 @@ const OsaamisalatSection = ({ language, koulutus, organisaatioOid, name }) => {
     </Container>
   );
 };
-
-export default OsaamisalatSection;

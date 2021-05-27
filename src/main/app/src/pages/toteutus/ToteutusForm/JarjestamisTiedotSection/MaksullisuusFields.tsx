@@ -66,6 +66,7 @@ export const MaksullisuusFields = ({ name, isKorkeakoulu, label }) => {
           component={FormFieldRadioGroup}
           options={options}
           label={label}
+          required
         />
       </div>
       <Field

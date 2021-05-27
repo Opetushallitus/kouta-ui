@@ -35,7 +35,7 @@ export const TilaisuusFields = ({
   const { t } = useTranslation();
   return (
     <>
-      <Heading marginBottom={1}>
+      <Heading mb={1}>
         {t('koeTaiLisanaytto.tilaisuusTitle', { index })}
       </Heading>
       <SubSectionBox backgroundColor={backgroundColor}>
@@ -110,7 +110,7 @@ export const TilaisuudetFields = ({
       {({ field, index }) => (
         <TilaisuusFields
           index={index + 1 + readonlyAmount}
-          backgroundColor={backgroundColor}
+          backgroundColor={backgroundColor || getThemeProp('colors.white')}
           field={field}
           language={language}
           removeSelf={() => fields.remove(index)}

@@ -7,10 +7,6 @@ import Button from '#/src/components/Button';
 import { Flex } from '#/src/components/Flex';
 import { FormFieldInput } from '#/src/components/formFields';
 import Spacing from '#/src/components/Spacing';
-import {
-  makeStoreDecorator,
-  makeLocalizationDecorator,
-} from '#/src/storybookUtils';
 
 import FieldArrayList from './index';
 
@@ -42,11 +38,8 @@ const StoryFieldArrayList = ({ fields }) => (
   </>
 );
 
-storiesOf('FieldArrayList', module)
-  .addDecorator(makeStoreDecorator())
-  .addDecorator(makeLocalizationDecorator())
-  .add('Basic', () => (
-    <StoryForm>
-      <FieldArray name="fields" component={StoryFieldArrayList} />
-    </StoryForm>
-  ));
+storiesOf('FieldArrayList', module).add('Basic', () => (
+  <StoryForm>
+    <FieldArray name="fields" component={StoryFieldArrayList} />
+  </StoryForm>
+));

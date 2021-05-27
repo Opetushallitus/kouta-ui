@@ -2,28 +2,21 @@ import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { Field, FieldArray } from 'redux-form';
-import styled from 'styled-components';
 
 import DividerHeading from '#/src/components/DividerHeading';
 import FieldGroup from '#/src/components/FieldGroup';
 import { FormFieldEditor } from '#/src/components/formFields';
 import { KokeetTaiLisanaytotFields } from '#/src/components/KokeetTaiLisanaytotFields';
-import { SimpleCollapse } from '#/src/components/SimpleCollapse';
+import { SectionInnerCollapse } from '#/src/components/SectionInnerCollapse';
 import StyledSectionHTML from '#/src/components/StyledSectionHTML';
 import { TilaisuudetFields } from '#/src/components/TilaisuudetFields';
 import { Box } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
-import { getThemeProp, spacing } from '#/src/theme';
+import { getThemeProp } from '#/src/theme';
 import { getTestIdProps } from '#/src/utils';
 import { useValintaperusteById } from '#/src/utils/valintaperuste/getValintaperusteById';
 
 import { ReadonlyKoeJaTilaisuudet } from './ReadonlyKoeJaTilaisuudet';
-
-const SubSectionBox = styled(Box)`
-  background-color: ${getThemeProp('colors.grayLighten6')};
-  padding: ${spacing(4)};
-  margin-bottom: 16px;
-`;
 
 export const HakukohteenValintakokeetSection = ({ name, language }) => {
   const { t } = useTranslation();
@@ -61,10 +54,11 @@ export const HakukohteenValintakokeetSection = ({ name, language }) => {
             {t('koeTaiLisanaytto.valintaperusteenValintakokeet')}
           </DividerHeading>
           {valintaperusteenValintakokeet.map(({ id, ...rest }, index) => (
-            <SubSectionBox>
-              <SimpleCollapse
+            <Box mb={2}>
+              <SectionInnerCollapse
                 header={t('koeTaiLisanaytto.title', { index: index + 1 })}
                 key={id}
+                defaultOpen={true}
               >
                 <ReadonlyKoeJaTilaisuudet language={language} {...rest} />
                 <FieldArray
@@ -75,8 +69,8 @@ export const HakukohteenValintakokeetSection = ({ name, language }) => {
                   language={language}
                   t={t}
                 />
-              </SimpleCollapse>
-            </SubSectionBox>
+              </SectionInnerCollapse>
+            </Box>
           ))}
         </div>
       )}

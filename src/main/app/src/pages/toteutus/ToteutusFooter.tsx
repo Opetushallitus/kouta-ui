@@ -8,7 +8,7 @@ import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode, KOULUTUSTYYPPI } from '#/src/constants';
 import { useFormName } from '#/src/contexts/FormNameContext';
 import { useForm } from '#/src/hooks/form';
-import { useSaveToteutus } from '#/src/hooks/formSaveHooks';
+import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
@@ -17,6 +17,7 @@ import { getTarjoajaOids } from '#/src/utils/getTarjoajaOids';
 import createToteutus from '#/src/utils/toteutus/createToteutus';
 import getToteutusByFormValues from '#/src/utils/toteutus/getToteutusByFormValues';
 import updateToteutus from '#/src/utils/toteutus/updateToteutus';
+import { validateToteutusForm } from '#/src/utils/toteutus/validateToteutusForm';
 
 type ToteutusFooterProps = {
   formMode: FormMode;
@@ -107,11 +108,14 @@ export const ToteutusFooter = ({
     ]
   );
 
-  const save = useSaveToteutus({
+  const save = useSaveForm({
     formName,
-    koulutustyyppi,
-    koulutus,
     submit,
+    validate: values =>
+      validateToteutusForm(
+        { ...values, koulutustyyppi, koulutus },
+        form?.registeredFields
+      ),
   });
 
   return (

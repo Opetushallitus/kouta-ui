@@ -4,13 +4,11 @@ import ReduxForm from '#/src/components/ReduxForm';
 import { KOULUTUSTYYPIT, ENTITY } from '#/src/constants';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useEntityFormConfig } from '#/src/hooks/form';
-import { makeStoreDecorator } from '#/src/storybookUtils';
 
 import HakukohdeForm, { initialValues } from './index';
 
 export default {
   title: 'HakukohdeForm',
-  decorators: [makeStoreDecorator()],
   argTypes: {
     koulutustyyppi: {
       control: {

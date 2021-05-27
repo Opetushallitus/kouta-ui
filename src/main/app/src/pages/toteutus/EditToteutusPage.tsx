@@ -17,7 +17,6 @@ import { Spin } from '#/src/components/virkailija';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useUrls } from '#/src/contexts/UrlContext';
-import { useEntityFormConfig } from '#/src/hooks/form';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
 import getFormValuesByToteutus from '#/src/utils/toteutus/getFormValuesByToteutus';
@@ -68,11 +67,14 @@ const EditToteutusPage = props => {
     toteutus?.organisaatioOid
   );
 
-  const config = useEntityFormConfig(ENTITY.TOTEUTUS, koulutustyyppi);
-
   const initialValues = useMemo(
     () => (toteutus ? getFormValuesByToteutus(toteutus) : {}),
     [toteutus]
+  );
+
+  const formConfig = useMemo(
+    () => ({ noFieldConfigs: true, readOnly: !canUpdate }),
+    [canUpdate]
   );
 
   return !toteutus ? (
@@ -80,7 +82,7 @@ const EditToteutusPage = props => {
   ) : (
     <ReduxForm form={FORM_NAME} initialValues={initialValues}>
       <Title>{t('sivuTitlet.toteutuksenMuokkaus')}</Title>
-      <FormConfigContext.Provider value={{ ...config, readOnly: !canUpdate }}>
+      <FormConfigContext.Provider value={formConfig}>
         <FormPage
           readOnly={!canUpdate}
           header={

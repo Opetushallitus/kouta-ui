@@ -16,9 +16,7 @@ import useToaster from '#/src/hooks/useToaster';
 import { withRemoteErrors } from '#/src/utils/form/withRemoteErrors';
 import getHakuByOid from '#/src/utils/haku/getHakuByOid';
 import validateHakukohdeForm from '#/src/utils/hakukohde/validateHakukohdeForm';
-import getKoulutusByOid from '#/src/utils/koulutus/getKoulutusByOid';
 import getToteutusByOid from '#/src/utils/toteutus/getToteutusByOid';
-import validateToteutusForm from '#/src/utils/toteutus/validateToteutusForm';
 import { getValintaperusteById } from '#/src/utils/valintaperuste/getValintaperusteById';
 
 export const useSaveForm = ({ formName, validate, submit }) => {
@@ -77,7 +75,7 @@ export const useSaveForm = ({ formName, validate, submit }) => {
       console.error(e);
       errors = withRemoteErrors(formName, e?.response, errors);
 
-      stopSubmit({ errors, errorToast: true });
+      stopSubmit({ errors, errorToast: false });
     }
   }, [
     form,
@@ -93,35 +91,6 @@ export const useSaveForm = ({ formName, validate, submit }) => {
   ]);
 
   return save;
-};
-
-export const useSaveToteutus = ({
-  formName,
-  submit,
-  koulutustyyppi,
-  koulutus: oldKoulutus,
-}) => {
-  const httpClient = useHttpClient();
-  const apiUrls = useUrls();
-
-  return useSaveForm({
-    formName,
-    submit,
-    validate: async values => {
-      const koulutus = oldKoulutus
-        ? await getKoulutusByOid({
-            httpClient,
-            apiUrls,
-            oid: oldKoulutus.oid,
-          })
-        : oldKoulutus;
-      return validateToteutusForm({
-        ...values,
-        koulutustyyppi,
-        koulutus,
-      });
-    },
-  });
 };
 
 export const useSaveHakukohde = ({

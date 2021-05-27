@@ -70,15 +70,14 @@ const Container = styled.div`
 const EditorWrapper = styled.div`
   padding: ${spacing(1)};
   ${getThemeProp('typography.body')};
-`;
-
-const EditorContent = styled.div`
   max-height: 250px;
   min-height: 100px;
   overflow-y: auto;
+  cursor: text;
 `;
 
 const Toolbar = styled.div`
+  position: relative;
   padding: ${spacing(1)};
   border-bottom: 1px solid ${getThemeProp('colors.inputBorder')};
   display: flex;
@@ -279,7 +278,6 @@ const LinkButton = ({ editorState, onChange, editorRef, ...props }) => {
       <LinkDropdown
         value={link}
         onChange={onLinkChange}
-        editorState={editorState}
         onSubmit={() => {
           onAddLink();
           onToggle();
@@ -290,12 +288,7 @@ const LinkButton = ({ editorState, onChange, editorRef, ...props }) => {
   );
 
   return (
-    <Dropdown
-      overlay={overlay}
-      closeOnOverlayClick={false}
-      portalTarget={document.body}
-      overflow
-    >
+    <Dropdown overlay={overlay} closeOnOverlayClick={false} overflow>
       {({ onToggle, ref, open }) => (
         <div ref={ref}>
           <StyleButtonBase
@@ -376,24 +369,28 @@ export const Editor = ({
         <LinkButton {...styleButtonProps} title={t('editor.linkki')} />
         {!hideHeaderSelect && <HeaderSelect {...styleButtonProps} />}
       </Toolbar>
-      <EditorWrapper>
-        <EditorContent>
-          <DraftEditor
-            onFocus={() => {
-              setHasFocus(true);
-              onFocus();
-            }}
-            onBlur={() => {
-              setHasFocus(false);
-              onBlur();
-            }}
-            ref={editorRef}
-            editorState={editorState}
-            onChange={onChange}
-            readOnly={disabled}
-            {...props}
-          />
-        </EditorContent>
+      <EditorWrapper
+        onClick={() => {
+          if (!hasFocus) {
+            editorRef?.current?.focus?.();
+          }
+        }}
+      >
+        <DraftEditor
+          onFocus={() => {
+            setHasFocus(true);
+            onFocus();
+          }}
+          onBlur={() => {
+            setHasFocus(false);
+            onBlur();
+          }}
+          ref={editorRef}
+          editorState={editorState}
+          onChange={onChange}
+          readOnly={disabled}
+          {...props}
+        />
       </EditorWrapper>
     </Container>
   );

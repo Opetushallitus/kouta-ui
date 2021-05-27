@@ -1,18 +1,25 @@
-export const koulutusRemoteErrorsToFormErrors = {
-  koulutustyyppi: ({ msg }) => {
+import { FormError, RemoteErrorsToFormErrors } from '#/src/types/formTypes';
+
+export const koulutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
+  errorType,
+  msg,
+  path,
+}) => {
+  const errors: Array<FormError> = [];
+  if (path === 'koulutustyyppi') {
     if (/sora/i.test(msg)) {
-      return [
+      errors.concat([
         {
           field: 'soraKuvaus',
           errorKey:
             'validointivirheet.koulutustyyppiEiVastaaSorakuvauksenTyyppia',
         },
-      ];
+      ]);
     }
-  },
-  koulutuksetKoodiUri: ({ msg, errorType }) => {
+  }
+  if (path === 'koulutuksetKoodiUri') {
     if (errorType === 'valuesDontMatch' && /sora/i.test(msg)) {
-      return [
+      errors.concat([
         {
           field: 'soraKuvaus',
           errorKey:
@@ -28,16 +35,16 @@ export const koulutusRemoteErrorsToFormErrors = {
           errorKey:
             'validointivirheet.koulutusEiVastaaSoraKuvauksenKoulutuksia',
         },
-      ];
+      ]);
     }
-  },
-  tila: ({ errorType, msg }) => {
+  }
+  if (path === 'tila') {
     if (errorType === 'notYetJulkaistu' && /sora/i.test(msg)) {
       const errorKey = t =>
         t('yleiset.riippuvuusEiJulkaistu', {
           entity: t('yleiset.soraKuvaus'),
         });
-      return [
+      errors.concat([
         {
           field: 'tila',
           errorKey,
@@ -46,7 +53,8 @@ export const koulutusRemoteErrorsToFormErrors = {
           field: 'soraKuvaus',
           errorKey,
         },
-      ];
+      ]);
     }
-  },
+  }
+  return errors;
 };

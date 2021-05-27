@@ -11,6 +11,7 @@ type FieldGroupProps = {
   title: string;
   HeadingComponent?: React.ComponentType;
   name?: string;
+  required?: boolean;
 };
 
 export const FieldGroup: React.FC<FieldGroupProps> = ({
@@ -18,10 +19,11 @@ export const FieldGroup: React.FC<FieldGroupProps> = ({
   children,
   HeadingComponent = DividerHeading,
   name,
+  required: requiredProp = false,
   ...props
 }) => {
   const fieldConfig = useFieldConfig(name);
-  const required = useFieldIsRequired(fieldConfig);
+  const required = useFieldIsRequired(fieldConfig) || requiredProp;
 
   return !name || fieldConfig ? (
     <Box marginBottom={4} {...props}>

@@ -47,6 +47,7 @@ const TarkkaAlkamisaikaFields = ({ name }) => (
       <DateTimeRange
         startProps={{
           name: `${name}.tarkkaAlkaa`,
+          required: true,
         }}
         endProps={{
           name: `${name}.tarkkaPaattyy`,

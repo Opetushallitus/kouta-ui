@@ -43,6 +43,7 @@ const MuuHakulomakeBox = ({ tapa, section, language, ...props }) => {
             component={FormFieldUrlInput}
             label={t(`toteutuslomake.${tapa}.linkki`)}
             name={`${section}.linkki.${language}`}
+            required
           />
         </Box>
         <Box mb="20px">
@@ -153,6 +154,7 @@ export const HakeutumisTaiIlmoittautumistapaSection = ({
           label={t('toteutuslomake.valitseHakutapa')}
           component={HakutapaFormField}
           name={`${name}.hakuTapa`}
+          required
         />
       </Box>
       <Box>
@@ -164,6 +166,7 @@ export const HakeutumisTaiIlmoittautumistapaSection = ({
             section={name}
             hakuTapa={hakuTapa}
             language={language}
+            required
           />
         )}
       </Box>

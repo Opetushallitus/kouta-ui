@@ -14,6 +14,7 @@ const getToastOptions = (error, t) => {
 
   const label = _fp.cond([
     [_fp.equals(403), () => t('ilmoitukset.kayttooikeusVirhe')],
+    [_fp.equals(400), () => t('ilmoitukset.virheellinenPalvelinpyynto')],
     [otherwise, () => t('ilmoitukset.tuntematonVirhe.viesti')],
   ])(status);
 

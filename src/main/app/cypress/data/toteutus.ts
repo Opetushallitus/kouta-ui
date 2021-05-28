@@ -146,14 +146,14 @@ const getLukioFields = ({ tyyppi }) =>
           fi: 'Fi diplomi',
           sv: 'Sv diplomi',
         },
-        kielivalikoima: {
-          A1JaA2Kielet: ['kieli_1#1'],
-          B2Kielet: ['kieli_2#1'],
-          B1Kielet: ['kieli_3#1'],
-          B3Kielet: ['kieli_4#1'],
-          aidinkielet: ['kieli_4#1'],
-          muutKielet: ['kieli_4#1'],
-        },
+      },
+      kielivalikoima: {
+        A1JaA2Kielet: ['kieli_1#1'],
+        B2Kielet: ['kieli_2#1'],
+        B1Kielet: ['kieli_3#1'],
+        B3Kielet: ['kieli_4#1'],
+        aidinkielet: ['kieli_4#1'],
+        muutKielet: ['kieli_4#1'],
       },
       jaksonKuvaus: {
         fi: 'Fi jakso',

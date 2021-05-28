@@ -68,6 +68,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     laajuusyksikkoKoodiUri,
     ilmoittautumislinkki,
     aloituspaikat,
+    kielivalikoima = {},
     toteutusjaksot,
     ammatillinenPerustutkintoErityisopetuksena,
     painotukset,
@@ -77,7 +78,6 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
   const {
     diplomiKoodiUrit,
     diplomiKuvaus,
-    kielivalikoima = {},
     lisatiedot,
     koulutuksenAlkamiskausi = {},
     maksullisuustyyppi = MaksullisuusTyyppi.MAKSUTON,

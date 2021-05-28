@@ -26,6 +26,14 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
     "hakulomaketyyppi": "muu",
     "hakutermi": "hakeutuminen",
     "ilmoittautumislinkki": {},
+    "kielivalikoima": {
+      "A1JaA2Kielet": [],
+      "B1Kielet": [],
+      "B2Kielet": [],
+      "B3Kielet": [],
+      "aidinkielet": [],
+      "muutKielet": []
+    },
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
@@ -41,14 +49,6 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
       "apuraha": null,
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
-      "kielivalikoima": {
-        "A1JaA2Kielet": [],
-        "B1Kielet": [],
-        "B2Kielet": [],
-        "B3Kielet": [],
-        "aidinkielet": [],
-        "muutKielet": []
-      },
       "koulutuksenAlkamiskausi": {
         "alkamiskausityyppi": "alkamiskausi ja -vuosi",
         "henkilokohtaisenSuunnitelmanLisatiedot": {},

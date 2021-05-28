@@ -24,17 +24,15 @@ export const PerustiedotSection = ({ name, canEditTyyppi = true }) => {
 
   return (
     <>
-      {canEditTyyppi && (
-        <>
-          <Field
-            name={`${name}.tyyppi`}
-            required
-            component={FormFieldKoulutustyyppiSelect}
-            label={t('yleiset.valitseKoulutustyyppi')}
-          />
-          <Divider marginTop={3} marginBottom={3} />
-        </>
-      )}
+      <Field
+        disabled={!canEditTyyppi}
+        name={`${name}.tyyppi`}
+        required
+        component={FormFieldKoulutustyyppiSelect}
+        label={t('yleiset.valitseKoulutustyyppi')}
+      />
+      <Divider marginTop={3} marginBottom={3} />
+
       <div {...getTestIdProps('kieliversiotSection')}>
         <KieliversiotFields name={`${name}.kieliversiot`} />
       </div>

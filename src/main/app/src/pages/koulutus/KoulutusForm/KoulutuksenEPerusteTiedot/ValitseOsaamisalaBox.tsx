@@ -15,6 +15,7 @@ import {
 } from '#/src/hooks/form';
 import { useHasChanged } from '#/src/hooks/useHasChanged';
 import { getTestIdProps } from '#/src/utils';
+import { useEPerusteRakenne } from '#/src/utils/ePeruste/getEPerusteRakenne';
 import { useEPerusteSisalto } from '#/src/utils/ePeruste/getEPerusteSisalto';
 import { useEPerusteOsaamisalaKuvaukset } from '#/src/utils/ePeruste/getOsaamisalakuvauksetByEPerusteId';
 import { getLanguageValue } from '#/src/utils/languageUtils';
@@ -63,8 +64,18 @@ export const ValitseOsaamisalaBox = ({
     ePerusteId: selectedEPerusteId,
   });
 
+  const {
+    data: ePerusteRakenne,
+    isLoading: rakenneIsLoading,
+  } = useEPerusteRakenne({
+    ePerusteId: selectedEPerusteId,
+  });
+
   const isLoading =
-    koulutusIsLoading || osaamisalatIsLoading || sisaltoIsLoading;
+    koulutusIsLoading ||
+    osaamisalatIsLoading ||
+    sisaltoIsLoading ||
+    rakenneIsLoading;
 
   const osaamisalaOptions = useMemo(
     () => getOsaamisalaOptions(osaamisalat, language),

@@ -74,6 +74,26 @@ Object {
       "fi": "Fi linkki",
       "sv": "Sv linkki",
     },
+    "kielivalikoima": Object {
+      "A1JaA2Kielet": Array [
+        "kieli_1#1",
+      ],
+      "B1Kielet": Array [
+        "kieli_4#1",
+      ],
+      "B2Kielet": Array [
+        "kieli_2#1",
+      ],
+      "B3Kielet": Array [
+        "kieli_5#1",
+      ],
+      "aidinkielet": Array [
+        "kieli_3#1",
+      ],
+      "muutKielet": Array [
+        "kieli_6#1",
+      ],
+    },
     "kuvaus": Object {
       "fi": "<p>Fi toteutuksenkuvaus</p>",
       "sv": "<p>Sv toteutuksenkuvaus</p>",
@@ -102,26 +122,6 @@ Object {
       "diplomiKuvaus": Object {
         "fi": "<p>Fi diplomi</p>",
         "sv": "<p>Sv diplomi</p>",
-      },
-      "kielivalikoima": Object {
-        "A1JaA2Kielet": Array [
-          "kieli_1#1",
-        ],
-        "B1Kielet": Array [
-          "kieli_4#1",
-        ],
-        "B2Kielet": Array [
-          "kieli_2#1",
-        ],
-        "B3Kielet": Array [
-          "kieli_5#1",
-        ],
-        "aidinkielet": Array [
-          "kieli_3#1",
-        ],
-        "muutKielet": Array [
-          "kieli_6#1",
-        ],
       },
       "koulutuksenAlkamiskausi": Object {
         "alkamiskausityyppi": "alkamiskausi ja -vuosi",

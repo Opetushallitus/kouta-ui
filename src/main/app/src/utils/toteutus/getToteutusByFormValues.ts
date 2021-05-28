@@ -141,18 +141,6 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
           pickTranslations,
           _fp.mapValues(serializeEditorState)
         )(values?.jarjestamistiedot?.diplomiKuvaus || {}),
-        kielivalikoima: {
-          A1JaA2Kielet: (kielivalikoima?.A1A2Kielet || []).map(
-            _fp.prop('value')
-          ),
-          aidinkielet: (kielivalikoima?.aidinkielet || []).map(
-            _fp.prop('value')
-          ),
-          B1Kielet: (kielivalikoima?.B1Kielet || []).map(_fp.prop('value')),
-          B2Kielet: (kielivalikoima?.B2Kielet || []).map(_fp.prop('value')),
-          B3Kielet: (kielivalikoima?.B3Kielet || []).map(_fp.prop('value')),
-          muutKielet: (kielivalikoima?.muutKielet || []).map(_fp.prop('value')),
-        },
         suunniteltuKestoVuodet: maybeParseNumber(
           jarjestamistiedot?.suunniteltuKesto?.vuotta
         ),
@@ -174,6 +162,14 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
         values?.lukiolinjat?.painotukset,
         pickTranslations
       ),
+      kielivalikoima: {
+        A1JaA2Kielet: (kielivalikoima?.A1A2Kielet || []).map(_fp.prop('value')),
+        aidinkielet: (kielivalikoima?.aidinkielet || []).map(_fp.prop('value')),
+        B1Kielet: (kielivalikoima?.B1Kielet || []).map(_fp.prop('value')),
+        B2Kielet: (kielivalikoima?.B2Kielet || []).map(_fp.prop('value')),
+        B3Kielet: (kielivalikoima?.B3Kielet || []).map(_fp.prop('value')),
+        muutKielet: (kielivalikoima?.muutKielet || []).map(_fp.prop('value')),
+      },
       erityisetKoulutustehtavat: getLukiolinjatByValues(
         values?.lukiolinjat?.erityisetKoulutustehtavat,
         pickTranslations

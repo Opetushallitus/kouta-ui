@@ -102,7 +102,8 @@ export const ValitseOsaamisalaBox = ({
     osa => {
       if (
         osa.osaamisala &&
-        osa.osaamisala.osaamisalakoodiArvo === osaamisalakoodi
+        osa.osaamisala.osaamisalakoodiArvo === osaamisalakoodi &&
+        osa.muodostumisSaanto
       ) {
         osaamisalaLaajuus = osa.muodostumisSaanto.laajuus.minimi;
         return;

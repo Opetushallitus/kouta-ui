@@ -6,13 +6,11 @@ export const getEPerusteRakenne = async ({
   apiUrls,
   ePerusteId,
 }) => {
-  console.log('getEPerusteRakenne');
   if (ePerusteId) {
     const { data } = await httpClient.get(
       apiUrls.url('eperusteet-service.peruste-rakenne', ePerusteId)
     );
 
-    console.log({ data });
     return data;
   }
 };

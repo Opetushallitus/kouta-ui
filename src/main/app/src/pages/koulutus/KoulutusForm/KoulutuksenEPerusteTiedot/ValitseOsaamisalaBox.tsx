@@ -18,7 +18,7 @@ import { getTestIdProps } from '#/src/utils';
 import { useEPerusteRakenne } from '#/src/utils/ePeruste/getEPerusteRakenne';
 import { useEPerusteSisalto } from '#/src/utils/ePeruste/getEPerusteSisalto';
 import { useEPerusteOsaamisalaKuvaukset } from '#/src/utils/ePeruste/getOsaamisalakuvauksetByEPerusteId';
-import iterateTree from '#/src/utils/iterateTree';
+import getOsaamisalaLaajuus from '#/src/utils/koulutus/getOsaamisalaLaajuus';
 import { getLanguageValue } from '#/src/utils/languageUtils';
 
 import { InfoBoxGrid, StyledInfoBox } from './InfoBox';
@@ -96,23 +96,13 @@ export const ValitseOsaamisalaBox = ({
   const ePerusteRakenneOsat: Array<OsaamisalaOsa> = ePerusteRakenne?.osat;
   const osaamisalakoodi = selectedOsaamisalaData?.arvo;
 
-  let osaamisalaLaajuus = null;
-  iterateTree(
-    ePerusteRakenneOsat,
-    osa => {
-      if (
-        osa.osaamisala &&
-        osa.osaamisala.osaamisalakoodiArvo === osaamisalakoodi &&
-        osa.muodostumisSaanto
-      ) {
-        osaamisalaLaajuus = osa.muodostumisSaanto.laajuus.minimi;
-        return;
-      }
-    },
-    {
-      childrenKey: 'osat',
-    }
-  );
+  let osaamisalaLaajuus;
+  if (ePerusteRakenneOsat) {
+    osaamisalaLaajuus = getOsaamisalaLaajuus(
+      ePerusteRakenneOsat,
+      osaamisalakoodi
+    );
+  }
 
   const nimi = getLanguageValue(selectedOsaamisalaData?.nimi, language);
 

@@ -18,7 +18,6 @@ import {
   validateIf,
   validateIfJulkaistu,
   validateOptionalTranslatedField,
-  validateRelations,
   validateValintakokeet,
 } from '../form/formConfigUtils';
 
@@ -115,12 +114,7 @@ export const validateHakukohdeForm = koulutustyyppi => (
               Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,
           validateExistenceOfDate('ajankohta.tarkkaAlkaa')
         )
-      ),
-      validateRelations([
-        { key: 'haku', t: 'yleiset.haku' },
-        { key: 'toteutus', t: 'yleiset.toteutus' },
-        { key: 'valintaperuste', t: 'yleiset.valintaperuste' },
-      ])
+      )
     )(createErrorBuilder(values, kieliversiot, registeredFields))
     .getErrors();
 };

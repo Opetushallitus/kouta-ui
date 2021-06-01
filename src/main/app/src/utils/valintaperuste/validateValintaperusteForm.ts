@@ -10,7 +10,6 @@ import {
   getKielivalinta,
   validateIfJulkaistu,
   validateOptionalTranslatedField,
-  validateRelations,
   validateValintakokeet,
 } from '../form/formConfigUtils';
 
@@ -38,13 +37,7 @@ export const validateValintaperusteForm = (values, registeredFields) => {
       validateTranslations('kuvaus.nimi'),
       validateOptionalTranslatedField('kuvaus.kuvaus'),
       validateIfJulkaistu(validateValintakokeet),
-      validateValintatavat,
-      validateRelations([
-        {
-          key: 'soraKuvaus',
-          t: 'yleiset.soraKuvaus',
-        },
-      ])
+      validateValintatavat
     )(createErrorBuilder(values, kieliversiot, registeredFields))
     .getErrors();
 };

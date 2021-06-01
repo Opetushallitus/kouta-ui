@@ -15,11 +15,6 @@ export const validateIfJulkaistu = (...validateFns) => eb => {
 export const validateIf = (condition, ...validateFns) => eb =>
   condition ? _fp.flow(...validateFns)(eb) : eb;
 
-export const validateIfConditionAndJulkaistu = (
-  condition,
-  ...validateFns
-) => eb => (condition ? validateIfJulkaistu(...validateFns)(eb) : eb);
-
 export const validateValintakokeet = errorBuilder => {
   const values = errorBuilder.getValues();
   const kieliversiot = getKielivalinta(values);

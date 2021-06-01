@@ -54,13 +54,13 @@ const useLukiolinjaKoodit = toteutus => {
   });
 
   const {
-    data: ertyisetKoulutusTehtavat = [],
+    data: erityisetKoulutusTehtavat = [],
     isLoading: erityisetLoading,
   } = useKoodisto({
     koodisto: 'lukiolinjaterityinenkoulutustehtava',
   });
   const erityisOptions = useKoodistoDataOptions({
-    koodistoData: ertyisetKoulutusTehtavat,
+    koodistoData: erityisetKoulutusTehtavat,
   });
 
   const loading = painotuksetLoading || erityisetLoading;
@@ -101,10 +101,10 @@ const useLukiolinjaKoodit = toteutus => {
     () => [
       { koodiUri: LUKIO_YLEISLINJA, nimi: yleislinjaTranslations },
       ...lukiopainotukset
-        .concat(ertyisetKoulutusTehtavat)
+        .concat(erityisetKoulutusTehtavat)
         .map(mapKoodiToTranslateable),
     ],
-    [yleislinjaTranslations, lukiopainotukset, ertyisetKoulutusTehtavat]
+    [yleislinjaTranslations, lukiopainotukset, erityisetKoulutusTehtavat]
   );
 
   return { loading, options, nimiLookupArray };

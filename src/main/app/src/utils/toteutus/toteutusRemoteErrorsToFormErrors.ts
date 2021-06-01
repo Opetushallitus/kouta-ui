@@ -1,33 +1,27 @@
 import { LANGUAGES } from '#/src/constants';
-import { FormError, RemoteErrorsToFormErrors } from '#/src/types/formTypes';
+import { RemoteErrorsToFormErrors } from '#/src/types/formTypes';
 
 export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
   errorType,
   msg,
   path,
 }) => {
-  const errors: Array<FormError> = [];
-  const painotusIndex = path.match(/painotukset\[(\d+)\]/)?.[1];
-  const erityinenKoulutustehtavaIndex = path.match(
-    /erityisetKoulutustehtavat\[(\d+)\]/
-  )?.[1];
-
   if (path.endsWith('kuvaus') && errorType === 'InvalidKielistetty') {
+    const painotusIndex = path.match(/painotukset\[(\d+)\]/)?.[1];
+    const erityinenKoulutustehtavaIndex = path.match(
+      /erityisetKoulutustehtavat\[(\d+)\]/
+    )?.[1];
+
     if (painotusIndex) {
-      LANGUAGES.forEach(lng => {
-        errors.push({
-          field: `lukiolinjat.painotukset.kuvaukset[${painotusIndex}].${lng}`,
-          errorKey: 'validointivirheet.kaikkiKaannoksetJosAinakinYksi',
-        });
-      });
-    }
-    if (erityinenKoulutustehtavaIndex) {
-      LANGUAGES.forEach(lng => {
-        errors.push({
-          field: `lukiolinjat.erityisetKoulutustehtavat.kuvaukset[${erityinenKoulutustehtavaIndex}].${lng}`,
-          errorKey: 'validointivirheet.kaikkiKaannoksetJosAinakinYksi',
-        });
-      });
+      return LANGUAGES.map(lng => ({
+        field: `lukiolinjat.painotukset.kuvaukset[${painotusIndex}].${lng}`,
+        errorKey: 'validointivirheet.kaikkiKaannoksetJosAinakinYksi',
+      }));
+    } else if (erityinenKoulutustehtavaIndex) {
+      return LANGUAGES.map(lng => ({
+        field: `lukiolinjat.erityisetKoulutustehtavat.kuvaukset[${erityinenKoulutustehtavaIndex}].${lng}`,
+        errorKey: 'validointivirheet.kaikkiKaannoksetJosAinakinYksi',
+      }));
     }
   }
 
@@ -38,7 +32,7 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
           t('yleiset.riippuvuusEiJulkaistu', {
             entity: t('yleiset.soraKuvaus'),
           });
-        errors.concat([
+        return [
           {
             field: 'tila',
             errorKey,
@@ -47,18 +41,16 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
             field: 'soraKuvaus',
             errorKey,
           },
-        ]);
+        ];
       } else {
-        errors.push({
+        return {
           field: 'tila',
           errorKey: t =>
             t('yleiset.riippuvuusEiJulkaistu', {
               entity: t('yleiset.koulutus'),
             }),
-        });
+        };
       }
     }
   }
-
-  return errors;
 };

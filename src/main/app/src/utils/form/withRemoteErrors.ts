@@ -1,12 +1,14 @@
 import { AxiosResponse } from 'axios';
 import _ from 'lodash';
 
+import { hakukohdeRemoteErrorsToFormErrors } from '#/src/utils/hakukohde/hakukohdeRemoteErrorsToFormErrors';
 import { koulutusRemoteErrorsToFormErrors } from '#/src/utils/koulutus/koulutusRemoteErrorsToFormErrors';
 import { toteutusRemoteErrorsToFormErrors } from '#/src/utils/toteutus/toteutusRemoteErrorsToFormErrors';
 
 const REMOTE_ERRORS_TO_FORM_ERRORS = {
   koulutusForm: koulutusRemoteErrorsToFormErrors,
   toteutusForm: toteutusRemoteErrorsToFormErrors,
+  hakukohdeForm: hakukohdeRemoteErrorsToFormErrors,
 };
 
 const setErrors = (
@@ -38,10 +40,14 @@ export const withRemoteErrors = (
   response: AxiosResponse,
   errors = {}
 ) => {
+  const errorConverter = REMOTE_ERRORS_TO_FORM_ERRORS[formName];
+  // Kaikki lomakkeet käyttävät useSafeFormia, mutta kaikille ei ole toteutettuna converteria
+  if (!errorConverter) {
+    return errors;
+  }
+
   const resData = response?.data;
   resData?.forEach?.(remoteError => {
-    const errorConverter = REMOTE_ERRORS_TO_FORM_ERRORS[formName];
-
     const formError = errorConverter?.(remoteError);
 
     // formError merkkojonona on vain lomakkeen kentän nimi. Virheavain päätellään backend-virheen errorType-kentästä.

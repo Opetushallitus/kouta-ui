@@ -17,6 +17,7 @@ import {
   ENTITY,
   KOULUTUSTYYPPI,
   TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
+  TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
 } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import {
@@ -27,7 +28,6 @@ import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
 import { getTestIdProps } from '#/src/utils';
 import getKoulutukset from '#/src/utils/koulutus/getKoulutukset';
-import { isTutkintoonJohtavaKorkeakoulutus } from '#/src/utils/koulutus/isTutkintoonJohtavaKorkeakoulutus';
 import isOphOrganisaatio from '#/src/utils/organisaatio/isOphOrganisaatio';
 
 import { EPerusteKuvausSection } from './EPerusteKuvausSection';
@@ -190,10 +190,9 @@ export const KoulutusForm = ({
             />
           )}
 
-          {[
-            ...TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT,
-            KOULUTUSTYYPPI.LUKIOKOULUTUS,
-          ].includes(koulutustyyppi) && (
+          {TUTKINTOON_JOHTAVAT_AMMATILLISET_KOULUTUSTYYPIT.includes(
+            koulutustyyppi
+          ) && (
             <FormCollapse
               section="description"
               header={t('koulutuslomake.koulutuksenKuvaus')}
@@ -204,7 +203,12 @@ export const KoulutusForm = ({
               koulutuskoodi={koulutuskoodi}
             />
           )}
-          {isTutkintoonJohtavaKorkeakoulutus(koulutustyyppi) && (
+          {/* TODO: Mille kaikille koulutustyypeille kuvaus-kenttä pitäisi näyttää? 
+              Monien koulutustyyppien metadatassa on kuvaus-kenttä, mutta siihen ei vois syöttää mitään. */}
+          {[
+            KOULUTUSTYYPPI.LUKIOKOULUTUS,
+            ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
+          ].includes(koulutustyyppi) && (
             <FormCollapse
               section="description"
               header={t('koulutuslomake.koulutuksenKuvaus')}

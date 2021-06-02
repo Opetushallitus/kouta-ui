@@ -383,6 +383,10 @@ export const createKoulutusForm = () => {
     });
 
     getByTestId('descriptionSection').within(() => {
+      getByTestId('kuvausInput').within(() => {
+        typeToEditor('Kuvaus');
+      });
+
       jatka();
     });
 

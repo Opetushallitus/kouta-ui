@@ -28,6 +28,7 @@ export const DateTimeRange: React.FC<DateTimeRangeProps> = ({
           label={t('yleiset.alkaa')}
           component={FormFieldDateTimeInput}
           helperText={t('yleiset.paivamaaraJaKellonaika')}
+          required
           {...startProps}
         />
       </FlexItem>

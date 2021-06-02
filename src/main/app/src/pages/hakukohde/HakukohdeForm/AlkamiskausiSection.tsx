@@ -82,7 +82,7 @@ const InlineAjankohtaInfoBox = ({
   }
 };
 
-const AlkamiskausiSection = ({ name, toteutus, haku, language }) => {
+export const AlkamiskausiSection = ({ name, toteutus, haku, language }) => {
   const { t } = useTranslation();
   const kaytetaanHakukohteenAlkamiskautta = useFieldValue(
     `${name}.kaytetaanHakukohteenAlkamiskautta`
@@ -135,5 +135,3 @@ const AlkamiskausiSection = ({ name, toteutus, haku, language }) => {
     </FieldGroup>
   );
 };
-
-export default AlkamiskausiSection;

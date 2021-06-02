@@ -12,8 +12,8 @@ export const validateIfJulkaistu = (...validateFns) => eb => {
   return tila === JULKAISUTILA.JULKAISTU ? _fp.flow(...validateFns)(eb) : eb;
 };
 
-export const validateIf = (condition, validate) => eb =>
-  condition ? validate(eb) : eb;
+export const validateIf = (condition, ...validateFns) => eb =>
+  condition ? _fp.flow(...validateFns)(eb) : eb;
 
 export const validateValintakokeet = errorBuilder => {
   const values = errorBuilder.getValues();
@@ -92,52 +92,12 @@ export const pohjaValintaSectionConfig = {
   ],
 };
 
-export const koulutustyyppiSectionConfig = {
-  koulutustyypit: KOULUTUSTYYPIT,
-  section: 'koulutustyyppi',
-  field: 'koulutustyyppi',
-  validate: validateExistence('koulutustyyppi'),
-  required: true,
-};
-
 export const tilaSectionConfig = {
   koulutustyypit: KOULUTUSTYYPIT,
   section: 'tila',
   field: 'tila',
   required: true,
   validate: validateExistence('tila'),
-};
-
-export const julkinenSectionConfig = {
-  koulutustyypit: KOULUTUSTYYPIT,
-  section: 'julkinen',
-  field: 'julkinen',
-};
-
-export const validateRelations = specs => eb => {
-  const values = eb.getValues();
-  const { errors, isValid } = specs.reduce(
-    (acc, { key, t: translationKey }) => {
-      const { tila } = values;
-      const ref = _fp.get(key, values);
-      if (
-        !_fp.isNil(ref) &&
-        tila === JULKAISUTILA.JULKAISTU &&
-        _fp.get('tila', ref) !== JULKAISUTILA.JULKAISTU
-      ) {
-        acc.isValid = false;
-        acc.errors.push(t =>
-          t('yleiset.riippuvuusEiJulkaistu', {
-            entity: t(translationKey),
-          })
-        );
-      }
-      return acc;
-    },
-    { isValid: true, errors: [] }
-  );
-
-  return eb.validate('tila', () => isValid, { message: errors });
 };
 
 export const createOptionalTranslatedFieldConfig = ({
@@ -158,41 +118,6 @@ export const validateOptionalTranslatedField = name =>
       optional: true,
     })
   );
-
-export const valintakokeetSection = {
-  section: 'valintakokeet',
-  field: 'valintakokeet',
-  koulutustyypit: KOULUTUSTYYPIT,
-  validate: validateIfJulkaistu(validateValintakokeet),
-  fields: {
-    '.kokeetTaiLisanaytot': {
-      fields: {
-        '.tyyppi': {
-          required: true,
-        },
-        '.ohjeetEnnakkovalmistautumiseen': {
-          required: true,
-        },
-        '.tilaisuudet': {
-          fields: {
-            '.alkaa': {
-              required: true,
-            },
-            '.paattyy': {
-              required: true,
-            },
-            '.osoite': {
-              required: true,
-            },
-            '.postinumero': {
-              required: true,
-            },
-          },
-        },
-      },
-    },
-  },
-};
 
 export const validatePohja = eb =>
   validateIf(

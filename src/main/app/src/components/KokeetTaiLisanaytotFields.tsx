@@ -54,6 +54,7 @@ export const KoeTaiLisanayttoFields = ({
                     component={FormFieldSelect}
                     options={options}
                     label={t('koeTaiLisanaytto.tyyppi')}
+                    required
                   />
                 </Box>
               </FlexItem>

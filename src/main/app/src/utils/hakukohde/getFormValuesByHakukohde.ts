@@ -2,6 +2,7 @@ import _ from 'lodash';
 import _fp from 'lodash/fp';
 
 import { parseEditorState } from '#/src/components/Editor/utils';
+import { LUKIO_YLEISLINJA } from '#/src/constants';
 import { HakukohdeFormValues } from '#/src/types/hakukohdeTypes';
 import { isNumeric } from '#/src/utils';
 import { getAjankohtaFields } from '#/src/utils/form/aloitusajankohtaHelpers';
@@ -20,6 +21,17 @@ const getToimitustapaValues = (toimitustapa, toimitusosoite) => ({
       : undefined,
     sahkoposti: toimitusosoite?.sahkoposti || '',
   },
+});
+
+const getHakukohteenLinjaValues = ({
+  linja,
+  alinHyvaksyttyKeskiarvo,
+  lisatietoa,
+}) => ({
+  linja: !linja ? LUKIO_YLEISLINJA : linja,
+  alinHyvaksyttyKeskiarvo:
+    _.toString(alinHyvaksyttyKeskiarvo)?.replace('.', ',') || '',
+  lisatietoa: _.mapValues(lisatietoa, parseEditorState),
 });
 
 export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
@@ -57,6 +69,7 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
     koulutuksenAlkamiskausi = {},
     valintaperusteenValintakokeidenLisatilaisuudet = [],
     aloituspaikat,
+    hakukohteenLinja,
   } = metadata;
 
   return {
@@ -155,5 +168,8 @@ export const getFormValuesByHakukohde = (hakukohde): HakukohdeFormValues => {
       }),
       eriHakulomake: !kaytetaanHaunHakulomaketta,
     },
+    hakukohteenLinja: hakukohteenLinja
+      ? getHakukohteenLinjaValues(hakukohteenLinja)
+      : undefined,
   };
 };

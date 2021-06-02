@@ -51,6 +51,7 @@ exports[`createHakukohde > should be able to create ammatillinen hakukohde #0`] 
       "kuvaus": {},
       "lukumaara": 10
     },
+    "hakukohteenLinja": null,
     "kaytetaanHaunAlkamiskautta": false,
     "koulutuksenAlkamiskausi": {
       "alkamiskausityyppi": "henkilokohtainen suunnitelma",
@@ -206,6 +207,7 @@ exports[`createHakukohde > should be able to create korkeakoulu hakukohde #0`] =
       "kuvaus": {},
       "lukumaara": 10
     },
+    "hakukohteenLinja": null,
     "kaytetaanHaunAlkamiskautta": false,
     "koulutuksenAlkamiskausi": {
       "alkamiskausityyppi": "henkilokohtainen suunnitelma",
@@ -364,6 +366,7 @@ exports[`editHakukohde > should be able to edit hakukohde #0`] =
       "kuvaus": {},
       "lukumaara": 150
     },
+    "hakukohteenLinja": null,
     "kaytetaanHaunAlkamiskautta": false,
     "koulutuksenAlkamiskausi": {
       "alkamiskausityyppi": "tarkka alkamisajankohta",
@@ -493,6 +496,7 @@ exports[`createHakukohde > should be able to create hakukohde with muu hakulomak
       "kuvaus": {},
       "lukumaara": null
     },
+    "hakukohteenLinja": null,
     "kaytetaanHaunAlkamiskautta": true,
     "koulutuksenAlkamiskausi": null,
     "kynnysehto": {},
@@ -544,6 +548,7 @@ exports[`createHakukohde > should be able to create hakukohde with "ei sähköis
       "kuvaus": {},
       "lukumaara": null
     },
+    "hakukohteenLinja": null,
     "kaytetaanHaunAlkamiskautta": true,
     "koulutuksenAlkamiskausi": null,
     "kynnysehto": {},
@@ -553,6 +558,62 @@ exports[`createHakukohde > should be able to create hakukohde with "ei sähköis
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
     "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
+  },
+  "organisaatioOid": "1.2.246.562.10.52251087186",
+  "pohjakoulutusvaatimusKoodiUrit": [
+    "pohjakoulutusvaatimuskouta_pk#1"
+  ],
+  "pohjakoulutusvaatimusTarkenne": {
+    "fi": "<p>Tarkenne</p>"
+  },
+  "tila": "tallennettu",
+  "toinenAsteOnkoKaksoistutkinto": false,
+  "toteutusOid": "2.1.1.1.1.1",
+  "valintaperusteId": null
+};
+
+exports[`createHakukohde > should be able to create hakukohde with lukiolinjat #0`] =
+{
+  "esikatselu": false,
+  "hakuOid": "4.1.1.1.1.1",
+  "hakuajat": [],
+  "hakulomakeAtaruId": null,
+  "hakulomakeKuvaus": {},
+  "hakulomakeLinkki": {},
+  "hakulomaketyyppi": null,
+  "kaytetaanHaunAikataulua": true,
+  "kaytetaanHaunHakulomaketta": true,
+  "kielivalinta": [
+    "fi"
+  ],
+  "liitteet": [],
+  "liitteetOnkoSamaToimitusaika": false,
+  "liitteetOnkoSamaToimitusosoite": false,
+  "liitteidenToimitusaika": null,
+  "liitteidenToimitusosoite": null,
+  "liitteidenToimitustapa": null,
+  "metadata": {
+    "aloituspaikat": {
+      "ensikertalaisille": null,
+      "kuvaus": {},
+      "lukumaara": null
+    },
+    "hakukohteenLinja": {
+      "alinHyvaksyttyKeskiarvo": 3.5,
+      "linja": null,
+      "lisatietoa": {
+        "fi": "<p>Lisätietoa</p>"
+      }
+    },
+    "kaytetaanHaunAlkamiskautta": true,
+    "koulutuksenAlkamiskausi": null,
+    "kynnysehto": {},
+    "valintakokeidenYleiskuvaus": {},
+    "valintaperusteenValintakokeidenLisatilaisuudet": []
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "hakukohdelomake.lukionYleislinja"
   },
   "organisaatioOid": "1.2.246.562.10.52251087186",
   "pohjakoulutusvaatimusKoodiUrit": [

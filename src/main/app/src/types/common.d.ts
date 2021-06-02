@@ -4,7 +4,7 @@ type FormDate = string;
 
 type FormDateRange = { alkaa: FormDate; paattyy: FormDate };
 
-type TranslatedField<T> = Partial<Record<LanguageCode, T>>;
+type TranslatedField<T = string> = Partial<Record<LanguageCode, T>>;
 
 type Koodi = {
   koodiUri: string;

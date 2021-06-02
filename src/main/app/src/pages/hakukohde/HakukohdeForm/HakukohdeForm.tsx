@@ -2,22 +2,25 @@ import React from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import FormCollapse from '#/src/components/FormCollapse';
-import FormCollapseGroup from '#/src/components/FormCollapseGroup';
-import JulkaisutilaField from '#/src/components/JulkaisutilaField';
-import KieliversiotFields from '#/src/components/KieliversiotFields';
+import { FormCollapse } from '#/src/components/FormCollapse';
+import { FormCollapseGroup } from '#/src/components/FormCollapseGroup';
+import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
+import { KieliversiotFields } from '#/src/components/KieliversiotFields';
 import { KOULUTUSTYYPPI } from '#/src/constants';
 import { useFieldValue } from '#/src/hooks/form';
 import { AloituspaikatSection } from '#/src/pages/hakukohde/HakukohdeForm/AloituspaikatSection';
 
+import { HakukohteenLinjaSection } from './HakukohteenLinjaSection';
 import { HakukohteenValintakokeetSection } from './HakukohteenValintakokeetSection';
-import JarjestyspaikkaSection from './JarjestyspaikkaSection';
+import { JarjestyspaikkaSection } from './JarjestyspaikkaSection';
 import { KuvausSection } from './KuvausSection';
-import LiitteetSection from './LiitteetSection';
+import { LiitteetSection } from './LiitteetSection';
 import { PerustiedotSection } from './PerustiedotSection';
-import PohjakoulutusSection from './PohjakoulutusSection';
+import { PohjakoulutusSection } from './PohjakoulutusSection';
 
-const HakukohdeForm = ({
+const PERUSTIEDOT_NAME = 'perustiedot';
+
+export const HakukohdeForm = ({
   steps = true,
   organisaatioOid,
   haku,
@@ -32,7 +35,7 @@ const HakukohdeForm = ({
   const opetustapaKoodiUrit = toteutus?.metadata?.opetus?.opetustapaKoodiUrit;
 
   return (
-    <FormCollapseGroup enabled={steps} defaultOpen={!steps} configured>
+    <FormCollapseGroup enabled={steps} defaultOpen={!steps}>
       <FormCollapse
         section="kieliversiot"
         header={t('yleiset.kieliversiot')}
@@ -45,11 +48,21 @@ const HakukohdeForm = ({
         header={t('hakukohdelomake.pohjakoulutusvaatimus')}
         languages={languages}
         Component={PohjakoulutusSection}
-        koulutustyyppi={koulutustyyppi}
       />
 
+      {koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS && (
+        <FormCollapse
+          section="hakukohteenLinja"
+          header={t('hakukohdelomake.hakukohteenLinja')}
+          languages={languages}
+          Component={HakukohteenLinjaSection}
+          toteutus={toteutus}
+          nimiFieldPath={`${PERUSTIEDOT_NAME}.nimi`}
+        />
+      )}
+
       <FormCollapse
-        section="perustiedot"
+        section={PERUSTIEDOT_NAME}
         header={t('hakukohdelomake.hakukohteenPerustiedot')}
         languages={languages}
         Component={PerustiedotSection}
@@ -108,5 +121,3 @@ const HakukohdeForm = ({
     </FormCollapseGroup>
   );
 };
-
-export default HakukohdeForm;

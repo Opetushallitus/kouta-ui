@@ -1,8 +1,8 @@
-import { useContext, useMemo, useCallback } from 'react';
+import { useContext, useMemo, useCallback, useEffect } from 'react';
 
 import _ from 'lodash';
-import { useSelector } from 'react-redux';
-import { isDirty, isSubmitting, getFormSubmitErrors } from 'redux-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { change, isDirty, isSubmitting, getFormSubmitErrors } from 'redux-form';
 import formActions from 'redux-form/lib/actions';
 
 import { ENTITY } from '#/src/constants';
@@ -11,7 +11,6 @@ import { useFormName } from '#/src/contexts/FormNameContext';
 import { assert } from '#/src/utils';
 import { getKielivalinta } from '#/src/utils/form/formConfigUtils';
 import getHakuFormConfig from '#/src/utils/haku/getHakuFormConfig';
-import getHakukohdeFormConfig from '#/src/utils/hakukohde/getHakukohdeFormConfig';
 
 import { useActions } from './useActions';
 
@@ -60,9 +59,16 @@ export function useFieldValue<T = any>(name, formNameProp?: string): T {
   return useSelector(selector);
 }
 
+export const useSetFieldValue = (name, value) => {
+  const form = useFormName();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(change(form, name, value));
+  }, [dispatch, form, name, value]);
+};
+
 const formConfigsGettersByEntity = {
   [ENTITY.HAKU]: getHakuFormConfig,
-  [ENTITY.HAKUKOHDE]: getHakukohdeFormConfig,
 };
 
 const getFormConfigByEntity = (entityName, koulutustyyppi) => {

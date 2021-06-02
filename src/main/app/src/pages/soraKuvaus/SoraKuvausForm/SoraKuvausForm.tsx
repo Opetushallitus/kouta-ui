@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import FormCollapse from '#/src/components/FormCollapse';
 import FormCollapseGroup from '#/src/components/FormCollapseGroup';
-import JulkaisutilaField from '#/src/components/JulkaisutilaField';
+import { JulkaisutilaField } from '#/src/components/JulkaisutilaField';
 import KieliversiotFields from '#/src/components/KieliversiotFields';
 import PohjaFormCollapse from '#/src/components/PohjaFormCollapse';
 import { useFieldValue } from '#/src/hooks/form';

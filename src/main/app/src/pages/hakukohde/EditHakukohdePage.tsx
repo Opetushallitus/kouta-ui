@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import EntityFormHeader from '#/src/components/EntityFormHeader';
+import { EsikatseluControls } from '#/src/components/EsikatseluControls';
 import FormPage, {
   RelationInfoContainer,
   OrganisaatioRelation,
@@ -15,27 +16,25 @@ import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { KOULUTUSTYYPPI, ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
-import { useEntityFormConfig } from '#/src/hooks/form';
+import { useUrls } from '#/src/contexts/UrlContext';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
 import { useHakukohdeByOid } from '#/src/utils/hakukohde/getHakukohdeByOid';
 
 import { useHakukohdePageData } from './getHakukohdePageData';
 import { HakukohdeFooter } from './HakukohdeFooter';
-import HakukohdeForm from './HakukohdeForm';
-// TODO: how to show non-published haut in konfo?
-// import { useUrls } from '#/src/contexts/contextHooks';
-// import { EsikatseluControls } from '#/src/components/EsikatseluControls';
+import { HakukohdeForm } from './HakukohdeForm';
 
 const FORM_NAME = 'hakukohdeForm';
+const formConfig = { noFieldConfigs: true };
 
-const EditHakukohdePage = props => {
+export const EditHakukohdePage = props => {
   const {
     match: {
       params: { organisaatioOid, oid },
     },
   } = props;
-  // const apiUrls = useUrls();
+  const apiUrls = useUrls();
 
   const { data: hakukohde, isFetching: hakukohdeLoading } = useHakukohdeByOid(
     oid
@@ -62,19 +61,21 @@ const EditHakukohdePage = props => {
     hakukohde?.organisaatioOid
   );
 
-  const config = useEntityFormConfig(ENTITY.HAKUKOHDE);
-
   const initialValues = useMemo(
     () => (hakukohde ? getFormValuesByHakukohde(hakukohde) : {}),
     [hakukohde]
   );
+
+  const config = useMemo(() => ({ ...formConfig, readOnly: !canUpdate }), [
+    canUpdate,
+  ]);
 
   return isLoading ? (
     <FullSpin />
   ) : (
     <ReduxForm form={FORM_NAME} initialValues={initialValues}>
       <Title>{t('sivuTitlet.hakukohteenMuokkaus')}</Title>
-      <FormConfigContext.Provider value={{ ...config, readOnly: !canUpdate }}>
+      <FormConfigContext.Provider value={config}>
         <FormPage
           readOnly={!canUpdate}
           header={
@@ -90,19 +91,21 @@ const EditHakukohdePage = props => {
               organisaatioOid={organisaatioOid}
               hakukohde={hakukohde}
               toteutus={toteutus}
+              koulutustyyppi={
+                koulutustyyppi || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
+              }
               haku={haku}
               canUpdate={canUpdate}
             />
           }
-          // TODO: how to show non-published haut in konfo?
-          // esikatseluControls={
-          //   <EsikatseluControls
-          //     esikatseluUrl={apiUrls.url(
-          //       'konfo-ui.toteutus',
-          //       hakukohde?.toteutusOid
-          //     )}
-          //   />
-          // }
+          esikatseluControls={
+            <EsikatseluControls
+              esikatseluUrl={apiUrls.url(
+                'konfo-ui.toteutus',
+                hakukohde?.toteutusOid
+              )}
+            />
+          }
         >
           <>
             <RelationInfoContainer>
@@ -129,5 +132,3 @@ const EditHakukohdePage = props => {
     </ReduxForm>
   );
 };
-
-export default EditHakukohdePage;

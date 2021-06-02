@@ -66,6 +66,14 @@ Object {
       },
       "lukumaara": 45,
     },
+    "hakukohteenLinja": Object {
+      "alinHyvaksyttyKeskiarvo": 6.5,
+      "linja": "lukiopainotukset_0104#1",
+      "lisatietoa": Object {
+        "fi": "<p>Fi lisatietoa</p>",
+        "sv": "<p>Sv lisatietoa</p>",
+      },
+    },
     "kaytetaanHaunAlkamiskautta": false,
     "koulutuksenAlkamiskausi": Object {
       "alkamiskausityyppi": "alkamiskausi ja -vuosi",

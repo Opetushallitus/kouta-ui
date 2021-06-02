@@ -94,7 +94,7 @@ export const ReadonlyKoeJaTilaisuudet = ({
               { aika, jarjestamispaikka, lisatietoja, osoite },
               tilaisuusIndex
             ) => (
-              <>
+              <React.Fragment key={`readonly-tilaisuus-${tilaisuusIndex}`}>
                 <Heading>
                   {t('koeTaiLisanaytto.tilaisuusTitle', {
                     index: tilaisuusIndex + 1,
@@ -159,7 +159,7 @@ export const ReadonlyKoeJaTilaisuudet = ({
                     </Grid>
                   </Cell>
                 </Grid>
-              </>
+              </React.Fragment>
             )
           )}
           <Divider />

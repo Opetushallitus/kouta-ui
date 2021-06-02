@@ -103,4 +103,9 @@ export type HakukohdeFormValues = {
     kuvaus?: TranslatedField<string>;
     eriHakulomake: boolean;
   };
+  hakukohteenLinja?: {
+    linja?: string; // NOTE: tyhjä on sama asia kuin yleislinja
+    alinHyvaksyttyKeskiarvo: string;
+    lisatietoa: TranslatedField<EditorState>;
+  };
 };

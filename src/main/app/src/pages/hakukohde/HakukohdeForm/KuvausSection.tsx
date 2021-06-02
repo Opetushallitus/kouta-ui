@@ -29,6 +29,7 @@ export const KuvausSection = ({
   name,
   language,
   languages,
+  koulutustyyppi,
 }) => {
   const hakuOid = haku?.oid;
   const kohdejoukkoKoodiUri = haku?.kohdejoukkoKoodiUri;
@@ -84,7 +85,7 @@ export const KuvausSection = ({
           variant="outlined"
           color="primary"
           as="a"
-          href={`/kouta/organisaatio/${organisaatioOid}/valintaperusteet/kielivalinnat/${kieliValinnat}`}
+          href={`/kouta/organisaatio/${organisaatioOid}/valintaperusteet/kielivalinnat/${kieliValinnat}/koulutustyyppi/${koulutustyyppi}`}
           target="_blank"
         >
           {t('hakukohdelomake.luoUusiValintaperustekuvaus')}

@@ -49,7 +49,7 @@ const LomakeSelect = ({ input, apiUrls, haku, getShowUrl, t, ...props }) => {
               {t('yleiset.avaaLomake')}
             </Button>
             <Spacing marginRight={1} />
-            {/*haku && haku.oid ? (
+            {haku && haku.oid ? (
               <Button
                 as="a"
                 href={apiUrls.url(
@@ -62,7 +62,7 @@ const LomakeSelect = ({ input, apiUrls, haku, getShowUrl, t, ...props }) => {
               >
                 {t('yleiset.muokkaaAsetuksia')}
               </Button>
-                ) : null*/}
+            ) : null}
           </Buttons>
         </Spacing>
       ) : null}

@@ -10,10 +10,25 @@ import {
 } from '#/src/components/formFields';
 import { KieliversiotFields } from '#/src/components/KieliversiotFields';
 import { Divider } from '#/src/components/virkailija';
+import { useIsOphVirkailija } from '#/src/hooks/useIsOphVirkailija';
 import { useKoodistoOptions } from '#/src/hooks/useKoodistoOptions';
+import {
+  createIsKoulutustyyppiDisabledGetter,
+  useOppilaitosTyypit,
+} from '#/src/hooks/useOppilaitosTyypit';
 import { getTestIdProps } from '#/src/utils';
 
-export const PerustiedotSection = ({ name, canEditTyyppi = true }) => {
+type Props = {
+  name: string;
+  canEditTyyppi: boolean;
+  organisaatioOid: string;
+};
+
+export const PerustiedotSection = ({
+  name,
+  canEditTyyppi = true,
+  organisaatioOid,
+}: Props) => {
   const { t } = useTranslation();
   const { options: hakutapaOptions } = useKoodistoOptions({
     koodisto: 'hakutapa',
@@ -22,14 +37,29 @@ export const PerustiedotSection = ({ name, canEditTyyppi = true }) => {
     koodisto: 'haunkohdejoukko',
   });
 
+  const isOphVirkailija = useIsOphVirkailija();
+
+  const {
+    isAmmatillinen,
+    isKorkeakoulutus,
+    isLukio,
+    isLoading,
+  } = useOppilaitosTyypit(organisaatioOid);
+
   return (
     <>
       <Field
-        disabled={!canEditTyyppi}
+        disabled={isLoading || !canEditTyyppi}
         name={`${name}.tyyppi`}
         required
         component={FormFieldKoulutustyyppiSelect}
         label={t('yleiset.valitseKoulutustyyppi')}
+        getIsDisabled={createIsKoulutustyyppiDisabledGetter({
+          isOphVirkailija,
+          isLukio,
+          isAmmatillinen,
+          isKorkeakoulutus,
+        })}
       />
       <Divider marginTop={3} marginBottom={3} />
 

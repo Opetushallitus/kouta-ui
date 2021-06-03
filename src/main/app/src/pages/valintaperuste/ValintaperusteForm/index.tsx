@@ -1,10 +1,6 @@
 import _ from 'lodash';
 
-import {
-  KOULUTUSTYYPPI,
-  POHJAVALINTA,
-  DEFAULT_JULKAISUTILA,
-} from '#/src/constants';
+import { POHJAVALINTA, DEFAULT_JULKAISUTILA } from '#/src/constants';
 
 export { ValintaperusteForm } from './ValintaperusteForm';
 
@@ -15,7 +11,7 @@ export const initialValues = (kieliValinnat, koulutustyyppi) => ({
     tapa: POHJAVALINTA.UUSI,
   },
   perustiedot: {
-    tyyppi: koulutustyyppi || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
+    tyyppi: koulutustyyppi,
     kieliversiot: _.isEmpty(kieliValinnat) ? ['fi'] : kieliValinnat,
   },
   valintatavat: [{}],

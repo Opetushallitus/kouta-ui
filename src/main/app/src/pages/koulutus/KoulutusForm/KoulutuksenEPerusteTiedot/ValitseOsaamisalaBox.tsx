@@ -188,6 +188,7 @@ export const ValitseOsaamisalaBox = ({
             {
               title: t('koulutuslomake.osaamisalanLaajuus'),
               description: osaamisalaLaajuus,
+              suffix: t('yleiset.osaamispistetta'),
             },
           ]}
         />

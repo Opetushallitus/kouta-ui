@@ -1,6 +1,10 @@
 import getQueryParams from '#/src/utils/api/getQueryParams';
 
-const getValintaperusteet = async ({ httpClient, apiUrls, ...rest }) => {
+export const searchValintaperusteet = async ({
+  httpClient,
+  apiUrls,
+  ...rest
+}) => {
   const params = getQueryParams(rest);
 
   const { data } = await httpClient.get(
@@ -12,5 +16,3 @@ const getValintaperusteet = async ({ httpClient, apiUrls, ...rest }) => {
 
   return data;
 };
-
-export default getValintaperusteet;

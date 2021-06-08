@@ -1,6 +1,7 @@
 export const getValintaperusteet = async ({
   organisaatioOid,
   hakuOid,
+  koulutustyyppi,
   httpClient,
   apiUrls,
 }) => {
@@ -10,6 +11,7 @@ export const getValintaperusteet = async ({
       params: {
         organisaatioOid,
         ...(hakuOid && { hakuOid }),
+        ...(koulutustyyppi && { koulutustyyppi }),
         myosArkistoidut: false,
       },
     }
@@ -17,5 +19,3 @@ export const getValintaperusteet = async ({
 
   return data;
 };
-
-export default getValintaperusteet;

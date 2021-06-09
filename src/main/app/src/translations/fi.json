@@ -362,6 +362,7 @@
   "koulutuslomake": {
     "osaamisalanKuvaus": "Osaamisalan kuvaus",
     "osaamisala": "Osaamisala",
+    "osaamisalanLaajuus": "Laajuus",
     "tutkinnonOsat": "Valitse tutkinnon osat",
     "koulutuksenNimi": "Koulutuksen nimi",
     "lisaaKoulutuksenNimi": "Lisää koulutuksen nimi",

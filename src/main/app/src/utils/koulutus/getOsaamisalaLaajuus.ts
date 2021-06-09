@@ -1,5 +1,8 @@
 import iterateTree from '#/src/utils/iterateTree';
 
+// Asetetaan osaamisalan "vanhemman" muodostumisSaanto rekursiivisesti alaspäin
+// sellaisille osaamisaloille, joilta se puuttuu,
+// jotta voidaan käyttöliittymässä näyttää osaamisalan laajuus.
 const getOsaamisalaLaajuus = (ePerusteOsat, osaamisalakoodi) => {
   const osat = ePerusteOsat.map(ePerusteOsa => {
     return setDefaultMuodostumisSaanto(ePerusteOsa);

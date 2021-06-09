@@ -49,9 +49,10 @@ export const ValintaperusteForm = ({
         scrollOnActive={false}
         Component={PerustiedotSection}
         canEditTyyppi={canEditTyyppi}
+        organisaatioOid={organisaatioOid}
       />
 
-      {canSelectBase ? (
+      {canSelectBase && (
         <PohjaFormCollapse
           onSelectBase={onSelectBase}
           organisaatioOid={organisaatioOid}
@@ -60,58 +61,62 @@ export const ValintaperusteForm = ({
           createLabel={t('yleiset.luoUusiValintaperuste')}
           copyLabel={t('valintaperustelomake.kopioiPohjaksi')}
         />
-      ) : null}
-
-      <FormCollapse
-        section="hakukelpoisuus"
-        header={t('valintaperustelomake.valintaperusteenHakukelpoisuus')}
-        languages={languages}
-        Component={HakukelpoisuusSection}
-      />
-
-      <FormCollapse
-        section="kuvaus"
-        header={t('valintaperustelomake.valintaperusteenKuvaus')}
-        languages={languages}
-        Component={KuvausSection}
-      />
-
-      {KOULUTUSTYYPIT_WITH_VALINTATAPA.includes(koulutustyyppi) && (
-        <FormCollapse
-          section="valintatavat"
-          header={t('valintaperustelomake.valintatapa')}
-          languages={languages}
-          Component={ValintatapaSection}
-        />
       )}
 
-      <FormCollapse
-        section="valintakokeet"
-        header={t('yleiset.kokeetTaiLisanaytot')}
-        languages={languages}
-        Component={KokeetTaiLisanaytotSection}
-      />
+      {koulutustyyppi && (
+        <>
+          <FormCollapse
+            section="hakukelpoisuus"
+            header={t('valintaperustelomake.valintaperusteenHakukelpoisuus')}
+            languages={languages}
+            Component={HakukelpoisuusSection}
+          />
 
-      <FormCollapse
-        section="lisatiedot"
-        header={t('valintaperustelomake.valintaperusteenLisatiedot')}
-        languages={languages}
-        Component={LisatiedotSection}
-      />
+          <FormCollapse
+            section="kuvaus"
+            header={t('valintaperustelomake.valintaperusteenKuvaus')}
+            languages={languages}
+            Component={KuvausSection}
+          />
 
-      <FormCollapse
-        section="julkinen"
-        header={t('valintaperustelomake.nakyminenMuilleToimijoille')}
-        Component={JulkisuusSection}
-        entity={ENTITY.VALINTAPERUSTE}
-      />
+          {KOULUTUSTYYPIT_WITH_VALINTATAPA.includes(koulutustyyppi) && (
+            <FormCollapse
+              section="valintatavat"
+              header={t('valintaperustelomake.valintatapa')}
+              languages={languages}
+              Component={ValintatapaSection}
+            />
+          )}
 
-      <FormCollapse
-        section="tila"
-        header={t('valintaperustelomake.valintaperusteenTila')}
-        Component={JulkaisutilaField}
-        showArkistoitu={showArkistoituTilaOption}
-      />
+          <FormCollapse
+            section="valintakokeet"
+            header={t('yleiset.kokeetTaiLisanaytot')}
+            languages={languages}
+            Component={KokeetTaiLisanaytotSection}
+          />
+
+          <FormCollapse
+            section="lisatiedot"
+            header={t('valintaperustelomake.valintaperusteenLisatiedot')}
+            languages={languages}
+            Component={LisatiedotSection}
+          />
+
+          <FormCollapse
+            section="julkinen"
+            header={t('valintaperustelomake.nakyminenMuilleToimijoille')}
+            Component={JulkisuusSection}
+            entity={ENTITY.VALINTAPERUSTE}
+          />
+
+          <FormCollapse
+            section="tila"
+            header={t('valintaperustelomake.valintaperusteenTila')}
+            Component={JulkaisutilaField}
+            showArkistoitu={showArkistoituTilaOption}
+          />
+        </>
+      )}
     </FormCollapseGroup>
   );
 };

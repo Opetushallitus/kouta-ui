@@ -5,23 +5,31 @@ import { Field } from 'redux-form';
 
 import { FormFieldInput, FormFieldEditor } from '#/src/components/formFields';
 import { Box } from '#/src/components/virkailija';
+import { KOULUTUSTYYPPI } from '#/src/constants';
 import { getTestIdProps } from '#/src/utils';
 
-export const KuvausFieldsSection = ({ disabled, language, name }) => {
+export const KuvausFieldsSection = ({
+  disabled,
+  language,
+  name,
+  koulutustyyppi,
+}) => {
   const { t } = useTranslation();
 
   return (
     <>
-      <Box mb={2} {...getTestIdProps('kuvauksenNimiInput')}>
-        <Field
-          disabled={disabled}
-          name={`${name}.nimi.${language}`}
-          component={FormFieldInput}
-          label={t('yleiset.kuvauksenNimi')}
-          required
-        />
-      </Box>
-
+      {/* TODO: Onko kuvauksen nimi ylipäänsä tarpeellinen? */}
+      {koulutustyyppi !== KOULUTUSTYYPPI.LUKIOKOULUTUS && (
+        <Box mb={2} {...getTestIdProps('kuvauksenNimiInput')}>
+          <Field
+            disabled={disabled}
+            name={`${name}.nimi.${language}`}
+            component={FormFieldInput}
+            label={t('yleiset.kuvauksenNimi')}
+            required
+          />
+        </Box>
+      )}
       <Box {...getTestIdProps('kuvausInput')}>
         <Field
           disabled={disabled}

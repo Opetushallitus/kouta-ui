@@ -31,7 +31,7 @@ const getCopyValues = valintaperusteId => ({
   },
 });
 
-const getInitialValues = (valintaperuste, kieliValinnat) => {
+const getInitialValues = (valintaperuste, kieliValinnat, koulutustyyppi) => {
   const kieliValinnatLista =
     kieliValinnat == null ? [] : kieliValinnat.split(',');
   return valintaperuste && valintaperuste.id
@@ -39,13 +39,17 @@ const getInitialValues = (valintaperuste, kieliValinnat) => {
         ...getCopyValues(valintaperuste.id),
         ...getFormValuesByValintaperuste(valintaperuste),
       }
-    : initialValues(kieliValinnatLista);
+    : initialValues(kieliValinnatLista, koulutustyyppi);
 };
 
 export const CreateValintaperustePage = props => {
   const {
     match: {
-      params: { organisaatioOid: luojaOrganisaatioOid, kieliValinnat },
+      params: {
+        organisaatioOid: luojaOrganisaatioOid,
+        kieliValinnat,
+        koulutustyyppi,
+      },
     },
     location: { search },
     history,
@@ -64,8 +68,8 @@ export const CreateValintaperustePage = props => {
   );
 
   const initialValues = useMemo(() => {
-    return getInitialValues(valintaperuste, kieliValinnat);
-  }, [valintaperuste, kieliValinnat]);
+    return getInitialValues(valintaperuste, kieliValinnat, koulutustyyppi);
+  }, [valintaperuste, kieliValinnat, koulutustyyppi]);
 
   return (
     <ReduxForm form={FORM_NAME} initialValues={initialValues}>

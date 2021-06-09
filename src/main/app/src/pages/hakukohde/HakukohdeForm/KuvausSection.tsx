@@ -11,7 +11,7 @@ import { Box } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
-import getValintaperusteet from '#/src/utils/valintaperuste/getValintaperusteet';
+import { getValintaperusteet } from '#/src/utils/valintaperuste/getValintaperusteet';
 
 const Buttons = styled.div`
   display: flex;
@@ -29,6 +29,7 @@ export const KuvausSection = ({
   name,
   language,
   languages,
+  koulutustyyppi,
 }) => {
   const hakuOid = haku?.oid;
   const kohdejoukkoKoodiUri = haku?.kohdejoukkoKoodiUri;
@@ -41,6 +42,7 @@ export const KuvausSection = ({
   const { data, reload } = useApiAsync({
     promiseFn: getValintaperusteet,
     hakuOid,
+    koulutustyyppi,
     organisaatioOid,
     watch,
   });
@@ -84,7 +86,7 @@ export const KuvausSection = ({
           variant="outlined"
           color="primary"
           as="a"
-          href={`/kouta/organisaatio/${organisaatioOid}/valintaperusteet/kielivalinnat/${kieliValinnat}`}
+          href={`/kouta/organisaatio/${organisaatioOid}/valintaperusteet/kielivalinnat/${kieliValinnat}/koulutustyyppi/${koulutustyyppi}`}
           target="_blank"
         >
           {t('hakukohdelomake.luoUusiValintaperustekuvaus')}

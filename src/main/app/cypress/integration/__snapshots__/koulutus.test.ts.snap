@@ -212,7 +212,9 @@ exports[`createKoulutus > should be able to create lukiokoulutus #0`] =
     ],
     "koulutustyyppi": "lk",
     "kuvauksenNimi": {},
-    "kuvaus": {},
+    "kuvaus": {
+      "fi": "<p>Kuvaus</p>"
+    },
     "lisatiedot": [
       {
         "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",

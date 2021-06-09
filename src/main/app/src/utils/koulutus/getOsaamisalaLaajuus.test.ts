@@ -322,7 +322,7 @@ test('sets "Ammatilliset tutkinnon osat" muodostumisSaanto for Maarakennuksen os
   expect(result.osat[0].muodostumisSaanto.laajuus.minimi).toEqual(145);
 });
 
-test('keeps muodostusSaanto for "Pakollinen tutkinnon osa" as it is originally set', () => {
+test('keeps muodostumisSaanto for "Pakollinen tutkinnon osa" as it is originally set', () => {
   const osaamisala = {
     nimi: {
       fi: 'Ammatilliset tutkinnon osat',

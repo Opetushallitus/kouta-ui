@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
@@ -24,6 +24,17 @@ export const KoulutustyyppiSection = ({ organisaatioOid, name, disabled }) => {
     isLoading,
   } = useOppilaitosTyypit(organisaatioOid);
 
+  const getIsDisabled = useMemo(
+    () =>
+      createIsKoulutustyyppiDisabledGetter({
+        isOphVirkailija,
+        isLukio,
+        isAmmatillinen,
+        isKorkeakoulutus,
+      }),
+    [isOphVirkailija, isLukio, isAmmatillinen, isKorkeakoulutus]
+  );
+
   const canCreate = useCurrentUserHasRole(
     ENTITY.KOULUTUS,
     CRUD_ROLES.CREATE,
@@ -36,12 +47,7 @@ export const KoulutustyyppiSection = ({ organisaatioOid, name, disabled }) => {
       component={FormFieldKoulutustyyppiSelect}
       label={t('yleiset.valitseKoulutustyyppi')}
       disabled={isLoading || !canCreate || disabled}
-      getIsDisabled={createIsKoulutustyyppiDisabledGetter({
-        isOphVirkailija,
-        isLukio,
-        isAmmatillinen,
-        isKorkeakoulutus,
-      })}
+      getIsDisabled={getIsDisabled}
     />
   );
 };

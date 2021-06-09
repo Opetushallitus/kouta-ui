@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
@@ -46,6 +46,17 @@ export const PerustiedotSection = ({
     isLoading,
   } = useOppilaitosTyypit(organisaatioOid);
 
+  const getIsDisabled = useMemo(
+    () =>
+      createIsKoulutustyyppiDisabledGetter({
+        isOphVirkailija,
+        isLukio,
+        isAmmatillinen,
+        isKorkeakoulutus,
+      }),
+    [isOphVirkailija, isLukio, isAmmatillinen, isKorkeakoulutus]
+  );
+
   return (
     <>
       <Field
@@ -54,12 +65,7 @@ export const PerustiedotSection = ({
         required
         component={FormFieldKoulutustyyppiSelect}
         label={t('yleiset.valitseKoulutustyyppi')}
-        getIsDisabled={createIsKoulutustyyppiDisabledGetter({
-          isOphVirkailija,
-          isLukio,
-          isAmmatillinen,
-          isKorkeakoulutus,
-        })}
+        getIsDisabled={getIsDisabled}
       />
       <Divider marginTop={3} marginBottom={3} />
 

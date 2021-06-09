@@ -24,7 +24,7 @@ const KielivalikoimaFields = ({ name }) => {
         <KielivalikoimaBox {...getTestIdProps('A1A2Kielet')}>
           <Field
             component={FormFieldSelect}
-            name={`${name}.A1A2Kielet`}
+            name={`${name}.kielivalikoima.A1A2Kielet`}
             options={options}
             label={t('toteutuslomake.A1A2Kielet')}
             isMulti
@@ -34,7 +34,7 @@ const KielivalikoimaFields = ({ name }) => {
         <KielivalikoimaBox {...getTestIdProps('B2Kielet')}>
           <Field
             component={FormFieldSelect}
-            name={`${name}.B2Kielet`}
+            name={`${name}.kielivalikoima.B2Kielet`}
             options={options}
             label={t('toteutuslomake.B2Kielet')}
             isMulti
@@ -44,7 +44,7 @@ const KielivalikoimaFields = ({ name }) => {
         <KielivalikoimaBox {...getTestIdProps('aidinkielet')}>
           <Field
             component={FormFieldSelect}
-            name={`${name}.aidinkielet`}
+            name={`${name}.kielivalikoima.aidinkielet`}
             options={options}
             label={t('toteutuslomake.valinnainenAidinkielenOpetus')}
             isMulti
@@ -54,7 +54,7 @@ const KielivalikoimaFields = ({ name }) => {
         <KielivalikoimaBox {...getTestIdProps('B1Kielet')}>
           <Field
             component={FormFieldSelect}
-            name={`${name}.B1Kielet`}
+            name={`${name}.kielivalikoima.B1Kielet`}
             options={options}
             label={t('toteutuslomake.B1Kielet')}
             isMulti
@@ -64,7 +64,7 @@ const KielivalikoimaFields = ({ name }) => {
         <KielivalikoimaBox {...getTestIdProps('B3Kielet')}>
           <Field
             component={FormFieldSelect}
-            name={`${name}.B3Kielet`}
+            name={`${name}.kielivalikoima.B3Kielet`}
             options={options}
             label={t('toteutuslomake.B3Kielet')}
             isMulti
@@ -74,7 +74,7 @@ const KielivalikoimaFields = ({ name }) => {
         <KielivalikoimaBox {...getTestIdProps('muutKielet')}>
           <Field
             component={FormFieldSelect}
-            name={`${name}.muutKielet`}
+            name={`${name}.kielivalikoima.muutKielet`}
             options={options}
             label={t('toteutuslomake.muutKielet')}
             isMulti

@@ -14,7 +14,6 @@ const getOsaamisalaLaajuus = (ePerusteOsat, osaamisalakoodi) => {
         osa.osaamisala.osaamisalakoodiArvo === osaamisalakoodi
       ) {
         osaamisalaLaajuus = osa.muodostumisSaanto.laajuus.minimi;
-        return;
       }
     },
     {

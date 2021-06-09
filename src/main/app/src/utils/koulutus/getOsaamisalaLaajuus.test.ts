@@ -47,11 +47,8 @@ test('keeps the original muodostumisSaanto for Avolouhinnan osaamisala that has 
     },
   };
 
-  const defaultMuodostumisSaanto = undefined;
-
   expect(
-    setDefaultMuodostumisSaanto(osaamisala, defaultMuodostumisSaanto)
-      .muodostumisSaanto.laajuus.minimi
+    setDefaultMuodostumisSaanto(osaamisala).muodostumisSaanto.laajuus.minimi
   ).toEqual(90);
 });
 
@@ -101,12 +98,7 @@ test('keeps the original muodostumisSaanto for Valinnaiset tutkinnon osat that h
     ],
   };
 
-  const defaultMuodostumisSaanto = undefined;
-
-  const result = setDefaultMuodostumisSaanto(
-    osaamisala,
-    defaultMuodostumisSaanto
-  );
+  const result = setDefaultMuodostumisSaanto(osaamisala);
 
   expect(result.osat[0].muodostumisSaanto.laajuus.minimi).toEqual(90);
 });
@@ -158,12 +150,7 @@ test('keeps the original muodostumisSaanto for "Tutkinnon osa tai osia ammattitu
     ],
   };
 
-  const defaultMuodostumisSaanto = undefined;
-
-  const result = setDefaultMuodostumisSaanto(
-    osaamisala,
-    defaultMuodostumisSaanto
-  );
+  const result = setDefaultMuodostumisSaanto(osaamisala);
 
   expect(result.osat[0].osat[0].muodostumisSaanto.laajuus.minimi).toEqual(30);
 });
@@ -235,12 +222,7 @@ test('sets "Ammatilliset tutkinnon osat" muodostumisSaanto for Talonrakennuksen 
     ],
   };
 
-  const defaultMuodostumisSaanto = undefined;
-
-  const result = setDefaultMuodostumisSaanto(
-    osaamisala,
-    defaultMuodostumisSaanto
-  );
+  const result = setDefaultMuodostumisSaanto(osaamisala);
 
   expect(result.osat[0].muodostumisSaanto.laajuus.minimi).toEqual(145);
 });
@@ -312,12 +294,7 @@ test('sets "Ammatilliset tutkinnon osat" muodostumisSaanto for Maarakennuksen os
     ],
   };
 
-  const defaultMuodostumisSaanto = undefined;
-
-  const result = setDefaultMuodostumisSaanto(
-    osaamisala,
-    defaultMuodostumisSaanto
-  );
+  const result = setDefaultMuodostumisSaanto(osaamisala);
 
   expect(result.osat[0].muodostumisSaanto.laajuus.minimi).toEqual(145);
 });
@@ -363,12 +340,7 @@ test('keeps muodostumisSaanto for "Pakollinen tutkinnon osa" as it is originally
     ],
   };
 
-  const defaultMuodostumisSaanto = undefined;
-
-  const result = setDefaultMuodostumisSaanto(
-    osaamisala,
-    defaultMuodostumisSaanto
-  );
+  const result = setDefaultMuodostumisSaanto(osaamisala);
 
   expect(result.osat[0].osat[0].muodostumisSaanto.laajuus.minimi).toEqual(50);
 });

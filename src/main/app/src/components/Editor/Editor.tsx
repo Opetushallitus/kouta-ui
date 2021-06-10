@@ -82,6 +82,7 @@ const Toolbar = styled.div`
   border-bottom: 1px solid ${getThemeProp('colors.inputBorder')};
   display: flex;
   align-items: center;
+  z-index: 20;
 `;
 
 const StyleIcon = styled(Icon)`
@@ -206,6 +207,7 @@ const HeaderSelect = ({ editorState, onChange, editorRef }) => {
 };
 
 const LinkDropdown = ({ value, onChange, onSubmit }) => {
+  const { t } = useTranslation();
   const inputRef = useRef();
 
   useEffect(() => {
@@ -225,7 +227,7 @@ const LinkDropdown = ({ value, onChange, onSubmit }) => {
         </FlexItem>
         <FlexItem grow={0}>
           <Button type="button" onClick={onSubmit}>
-            Lisää
+            {t('editor.lisaa')}
           </Button>
         </FlexItem>
       </Flex>

@@ -38,6 +38,15 @@ type LukiolinjatOsio = {
   kuvaukset: Array<TranslatedField<EditorState>>;
 };
 
+type Kielivalikoima = {
+  A1A2Kielet: SelectOptions;
+  aidinkielet: SelectOptions;
+  B1Kielet: SelectOptions;
+  B2Kielet: SelectOptions;
+  B3Kielet: SelectOptions;
+  muutKielet: SelectOptions;
+};
+
 // TODO: Improve toteutus form types
 export type ToteutusFormValues = {
   koulutustyyppi: KOULUTUSTYYPPI;
@@ -79,12 +88,7 @@ export type ToteutusFormValues = {
     apurahaYksikko?: SelectOption<ApurahaYksikko>;
     diplomiTyypit: SelectOptions;
     diplomiKuvaus: Kuvaus;
-    A1A2Kielet: SelectOptions;
-    aidinkielet: SelectOptions;
-    B1Kielet: SelectOptions;
-    B2Kielet: SelectOptions;
-    B3Kielet: SelectOptions;
-    muutKielet: SelectOptions;
+    kielivalikoima: Kielivalikoima;
     ajankohta: AjankohtaFields;
   };
   nayttamistiedot: {

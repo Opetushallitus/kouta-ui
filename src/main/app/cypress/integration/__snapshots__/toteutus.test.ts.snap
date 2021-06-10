@@ -26,6 +26,14 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
     "hakulomaketyyppi": "muu",
     "hakutermi": "hakeutuminen",
     "ilmoittautumislinkki": {},
+    "kielivalikoima": {
+      "A1JaA2Kielet": [],
+      "B1Kielet": [],
+      "B2Kielet": [],
+      "B3Kielet": [],
+      "aidinkielet": [],
+      "muutKielet": []
+    },
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
@@ -38,11 +46,6 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
       "fi": "<p>lisätiedot valintaperusteista</p>"
     },
     "opetus": {
-      "A1JaA2Kielivalikoima": [],
-      "B1Kielivalikoima": [],
-      "B2Kielivalikoima": [],
-      "B3Kielivalikoima": [],
-      "aidinkieliKielivalikoima": [],
       "apuraha": null,
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
@@ -67,7 +70,6 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 10,
-      "muuKielivalikoima": [],
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -155,6 +157,14 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
+    "kielivalikoima": {
+      "A1JaA2Kielet": [],
+      "B1Kielet": [],
+      "B2Kielet": [],
+      "B3Kielet": [],
+      "aidinkielet": [],
+      "muutKielet": []
+    },
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
@@ -163,11 +173,6 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
-      "A1JaA2Kielivalikoima": [],
-      "B1Kielivalikoima": [],
-      "B2Kielivalikoima": [],
-      "B3Kielivalikoima": [],
-      "aidinkieliKielivalikoima": [],
       "apuraha": null,
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
@@ -192,7 +197,6 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 10,
-      "muuKielivalikoima": [],
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -290,6 +294,14 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
+    "kielivalikoima": {
+      "A1JaA2Kielet": [],
+      "B1Kielet": [],
+      "B2Kielet": [],
+      "B3Kielet": [],
+      "aidinkielet": [],
+      "muutKielet": []
+    },
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
@@ -298,11 +310,6 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
-      "A1JaA2Kielivalikoima": [],
-      "B1Kielivalikoima": [],
-      "B2Kielivalikoima": [],
-      "B3Kielivalikoima": [],
-      "aidinkieliKielivalikoima": [],
       "apuraha": {
         "kuvaus": {
           "fi": "<p>apuraha kuvaus</p>"
@@ -334,7 +341,6 @@ exports[`createToteutus > should be able to create korkeakoulu toteutus #0`] =
       },
       "maksullisuustyyppi": "lukuvuosimaksu",
       "maksunMaara": 10,
-      "muuKielivalikoima": [],
       "onkoApuraha": true,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
@@ -437,6 +443,26 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
+    "kielivalikoima": {
+      "A1JaA2Kielet": [
+        "kieli_en#1"
+      ],
+      "B1Kielet": [
+        "kieli_sv#1"
+      ],
+      "B2Kielet": [
+        "kieli_de#1"
+      ],
+      "B3Kielet": [
+        "kieli_es#1"
+      ],
+      "aidinkielet": [
+        "kieli_fi#1"
+      ],
+      "muutKielet": [
+        "kieli_zh#1"
+      ]
+    },
     "kuvaus": {
       "fi": "<p>Toteutuksen kuvaus</p>"
     },
@@ -445,21 +471,6 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
-      "A1JaA2Kielivalikoima": [
-        "kieli_en#1"
-      ],
-      "B1Kielivalikoima": [
-        "kieli_sv#1"
-      ],
-      "B2Kielivalikoima": [
-        "kieli_de#1"
-      ],
-      "B3Kielivalikoima": [
-        "kieli_es#1"
-      ],
-      "aidinkieliKielivalikoima": [
-        "kieli_fi#1"
-      ],
       "apuraha": null,
       "diplomiKoodiUrit": [
         "lukiodiplomit_6#1"
@@ -488,9 +499,6 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 10,
-      "muuKielivalikoima": [
-        "kieli_zh#1"
-      ],
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
       ],
@@ -596,17 +604,20 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
+    "kielivalikoima": {
+      "A1JaA2Kielet": [],
+      "B1Kielet": [],
+      "B2Kielet": [],
+      "B3Kielet": [],
+      "aidinkielet": [],
+      "muutKielet": []
+    },
     "kuvaus": {},
     "laajuus": null,
     "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
-      "A1JaA2Kielivalikoima": [],
-      "B1Kielivalikoima": [],
-      "B2Kielivalikoima": [],
-      "B3Kielivalikoima": [],
-      "aidinkieliKielivalikoima": [],
       "apuraha": null,
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
@@ -631,7 +642,6 @@ exports[`editToteutus > should be able to edit ammatillinen toteutus #0`] =
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 20,
-      "muuKielivalikoima": [],
       "onkoApuraha": true,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
@@ -753,17 +763,20 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
+    "kielivalikoima": {
+      "A1JaA2Kielet": [],
+      "B1Kielet": [],
+      "B2Kielet": [],
+      "B3Kielet": [],
+      "aidinkielet": [],
+      "muutKielet": []
+    },
     "kuvaus": {},
     "laajuus": null,
     "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
-      "A1JaA2Kielivalikoima": [],
-      "B1Kielivalikoima": [],
-      "B2Kielivalikoima": [],
-      "B3Kielivalikoima": [],
-      "aidinkieliKielivalikoima": [],
       "apuraha": null,
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
@@ -788,7 +801,6 @@ exports[`editToteutus > should be able to edit korkeakoulu toteutus #0`] =
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 20,
-      "muuKielivalikoima": [],
       "onkoApuraha": true,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
@@ -900,27 +912,32 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
     "hakuaika": null,
     "hakulomakeLinkki": {},
     "ilmoittautumislinkki": {},
+    "kielivalikoima": {
+      "A1JaA2Kielet": [
+        "kieli_1#1"
+      ],
+      "B1Kielet": [
+        "kieli_3#1"
+      ],
+      "B2Kielet": [
+        "kieli_2#1"
+      ],
+      "B3Kielet": [
+        "kieli_4#1"
+      ],
+      "aidinkielet": [
+        "kieli_4#1"
+      ],
+      "muutKielet": [
+        "kieli_4#1"
+      ]
+    },
     "kuvaus": {},
     "laajuus": null,
     "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
-      "A1JaA2Kielivalikoima": [
-        "kieli_1#1"
-      ],
-      "B1Kielivalikoima": [
-        "kieli_3#1"
-      ],
-      "B2Kielivalikoima": [
-        "kieli_2#1"
-      ],
-      "B3Kielivalikoima": [
-        "kieli_4#1"
-      ],
-      "aidinkieliKielivalikoima": [
-        "kieli_4#1"
-      ],
       "apuraha": null,
       "diplomiKoodiUrit": [
         "lukiodiplomit_1#1"
@@ -949,9 +966,6 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 20,
-      "muuKielivalikoima": [
-        "kieli_4#1"
-      ],
       "onkoApuraha": true,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"
@@ -1050,17 +1064,20 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
     "hakulomaketyyppi": "ei sähköistä",
     "hakutermi": "hakeutuminen",
     "ilmoittautumislinkki": {},
+    "kielivalikoima": {
+      "A1JaA2Kielet": [],
+      "B1Kielet": [],
+      "B2Kielet": [],
+      "B3Kielet": [],
+      "aidinkielet": [],
+      "muutKielet": []
+    },
     "kuvaus": {},
     "laajuus": null,
     "laajuusyksikkoKoodiUri": null,
     "lisatietoaHakeutumisesta": {},
     "lisatietoaValintaperusteista": {},
     "opetus": {
-      "A1JaA2Kielivalikoima": [],
-      "B1Kielivalikoima": [],
-      "B2Kielivalikoima": [],
-      "B3Kielivalikoima": [],
-      "aidinkieliKielivalikoima": [],
       "apuraha": null,
       "diplomiKoodiUrit": [],
       "diplomiKuvaus": {},
@@ -1085,7 +1102,6 @@ exports[`editToteutus > should be able to edit tutkinnon osa toteutus #0`] =
       },
       "maksullisuustyyppi": "maksullinen",
       "maksunMaara": 20,
-      "muuKielivalikoima": [],
       "onkoApuraha": true,
       "opetusaikaKoodiUrit": [
         "opetusaikakk_1#1"

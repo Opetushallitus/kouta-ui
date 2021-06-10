@@ -27,7 +27,7 @@ import { getFirstLanguageValue } from '#/src/utils/languageUtils';
 import Filters from './Filters';
 import ListCollapse from './ListCollapse';
 import NavigationAnchor from './NavigationAnchor';
-import useFilterState from './useFilterState';
+import { useFilterState } from './useFilterState';
 import { getIndexParamsByFilters } from './utils';
 
 const { KOULUTUS } = ENTITY;
@@ -70,7 +70,7 @@ const makeTableColumns = (t, organisaatioOid) => [
 export const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
   const { t } = useTranslation();
 
-  const filterState = useFilterState({ paginationName: 'koulutukset' });
+  const filterState = useFilterState('koulutukset');
 
   const { page, setPage, orderBy, setOrderBy, filtersProps } = filterState;
 

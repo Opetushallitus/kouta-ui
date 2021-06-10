@@ -137,12 +137,14 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
           fi: 'Fi diplomi',
           sv: 'Sv diplomi',
         },
-        A1JaA2Kielivalikoima: ['kieli_1#1'],
-        B2Kielivalikoima: ['kieli_2#1'],
-        B1Kielivalikoima: ['kieli_3#1'],
-        B3Kielivalikoima: ['kieli_4#1'],
-        aidinkieliKielivalikoima: ['kieli_5#1'],
-        muuKielivalikoima: ['kieli_6#1'],
+      },
+      kielivalikoima: {
+        A1JaA2Kielet: ['kieli_1#1'],
+        B1Kielet: ['kieli_2#1'],
+        B2Kielet: ['kieli_3#1'],
+        B3Kielet: ['kieli_4#1'],
+        aidinkielet: ['kieli_5#1'],
+        muutKielet: ['kieli_6#1'],
       },
       osaamisalat: [
         {

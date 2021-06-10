@@ -33,31 +33,6 @@ Object {
     "lisatiedotValintaperusteista": Object {},
   },
   "jarjestamistiedot": Object {
-    "A1A2Kielet": Array [
-      Object {
-        "value": "kieli_1#1",
-      },
-    ],
-    "B1Kielet": Array [
-      Object {
-        "value": "kieli_3#1",
-      },
-    ],
-    "B2Kielet": Array [
-      Object {
-        "value": "kieli_2#1",
-      },
-    ],
-    "B3Kielet": Array [
-      Object {
-        "value": "kieli_4#1",
-      },
-    ],
-    "aidinkielet": Array [
-      Object {
-        "value": "kieli_5#1",
-      },
-    ],
     "ajankohta": Object {
       "ajankohtaKaytossa": true,
       "ajankohtaTyyppi": "tarkka alkamisajankohta",
@@ -88,17 +63,44 @@ Object {
         "value": "dipmlomi_1#1",
       },
     ],
+    "kielivalikoima": Object {
+      "A1A2Kielet": Array [
+        Object {
+          "value": "kieli_1#1",
+        },
+      ],
+      "B1Kielet": Array [
+        Object {
+          "value": "kieli_2#1",
+        },
+      ],
+      "B2Kielet": Array [
+        Object {
+          "value": "kieli_3#1",
+        },
+      ],
+      "B3Kielet": Array [
+        Object {
+          "value": "kieli_4#1",
+        },
+      ],
+      "aidinkielet": Array [
+        Object {
+          "value": "kieli_5#1",
+        },
+      ],
+      "muutKielet": Array [
+        Object {
+          "value": "kieli_6#1",
+        },
+      ],
+    },
     "maksullisuusKuvaus": Object {
       "fi": "<p>Fi maksullisuuskuvaus</p>",
       "sv": "<p>Sv maksullisuuskuvaus</p>",
     },
     "maksullisuustyyppi": "maksullinen",
     "maksunMaara": 500,
-    "muutKielet": Array [
-      Object {
-        "value": "kieli_6#1",
-      },
-    ],
     "onkoApuraha": true,
     "opetusaika": Array [
       "opetusaika_1#1",

@@ -19,7 +19,7 @@ import { ENTITY, ICONS } from '#/src/constants';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import { getTestIdProps } from '#/src/utils';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
-import searchValintaperusteet from '#/src/utils/valintaperuste/searchValintaperusteet';
+import { searchValintaperusteet } from '#/src/utils/valintaperuste/searchValintaperusteet';
 
 import Filters from './Filters';
 import ListCollapse from './ListCollapse';

@@ -86,6 +86,7 @@ export const HakukohdeForm = ({
         organisaatioOid={organisaatioOid}
         haku={haku}
         languages={languages}
+        koulutustyyppi={koulutustyyppi}
       />
 
       <FormCollapse

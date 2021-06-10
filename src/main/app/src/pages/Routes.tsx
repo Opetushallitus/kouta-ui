@@ -143,6 +143,11 @@ const Routes = ({ history }) => {
             exact
           />
           <Route
+            path="/organisaatio/:organisaatioOid/valintaperusteet/kielivalinnat/:kieliValinnat/koulutustyyppi/:koulutustyyppi"
+            component={CreateValintaperustePage}
+            exact
+          />
+          <Route
             path="/organisaatio/:organisaatioOid/valintaperusteet/:id/muokkaus"
             component={EditValintaperustePage}
             exact

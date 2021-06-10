@@ -24,7 +24,7 @@ import searchValintaperusteet from '#/src/utils/valintaperuste/searchValintaperu
 import Filters from './Filters';
 import ListCollapse from './ListCollapse';
 import NavigationAnchor from './NavigationAnchor';
-import useFilterState from './useFilterState';
+import { useFilterState } from './useFilterState';
 import { getIndexParamsByFilters } from './utils';
 
 const { VALINTAPERUSTE } = ENTITY;
@@ -84,7 +84,7 @@ const ValintaperusteetSection = ({ organisaatioOid, canCreate = true }) => {
     setOrderBy,
     tila,
     filtersProps,
-  } = useFilterState({ paginationName: 'valintaperusteet' });
+  } = useFilterState('valintaperusteet');
 
   const watch = JSON.stringify([
     page,

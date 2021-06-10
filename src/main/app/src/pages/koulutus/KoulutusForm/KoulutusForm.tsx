@@ -27,7 +27,7 @@ import {
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
 import { KoulutusModel } from '#/src/types/koulutusTypes';
 import { getTestIdProps } from '#/src/utils';
-import getKoulutukset from '#/src/utils/koulutus/getKoulutukset';
+import { getKoulutukset } from '#/src/utils/koulutus/getKoulutukset';
 import isOphOrganisaatio from '#/src/utils/organisaatio/isOphOrganisaatio';
 
 import { EPerusteKuvausSection } from './EPerusteKuvausSection';
@@ -102,7 +102,7 @@ export const KoulutusForm = ({
           onSelectBase={onSelectBase}
           organisaatioOid={organisaatioOid}
           disabled={onlyTarjoajaRights}
-          getCopyEntities={getKoulutukset}
+          getCopyEntities={getKoulutukset(koulutustyyppi)}
           infoText={t('koulutuslomake.pohjavalintaInfo')}
           createLabel={t('yleiset.luoUusiKoulutus')}
           copyLabel={t('koulutuslomake.kopioiPohjaksi')}

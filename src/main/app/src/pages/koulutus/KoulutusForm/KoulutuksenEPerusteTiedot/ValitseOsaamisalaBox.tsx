@@ -15,11 +15,18 @@ import {
 } from '#/src/hooks/form';
 import { useHasChanged } from '#/src/hooks/useHasChanged';
 import { getTestIdProps } from '#/src/utils';
+import { useEPerusteRakenne } from '#/src/utils/ePeruste/getEPerusteRakenne';
 import { useEPerusteSisalto } from '#/src/utils/ePeruste/getEPerusteSisalto';
 import { useEPerusteOsaamisalaKuvaukset } from '#/src/utils/ePeruste/getOsaamisalakuvauksetByEPerusteId';
+import getOsaamisalaLaajuus from '#/src/utils/koulutus/getOsaamisalaLaajuus';
 import { getLanguageValue } from '#/src/utils/languageUtils';
 
 import { InfoBoxGrid, StyledInfoBox } from './InfoBox';
+
+type OsaamisalaOsa = {
+  muodostumisSaanto: { laajuus: { minimi: number } };
+  osaamisala: { osaamisalakoodiArvo: number };
+};
 
 const getOsaamisalaOptions = (osaamisalat = [], language) =>
   _fp.map(({ arvo, nimi }) => ({
@@ -63,8 +70,18 @@ export const ValitseOsaamisalaBox = ({
     ePerusteId: selectedEPerusteId,
   });
 
+  const {
+    data: ePerusteRakenne,
+    isLoading: rakenneIsLoading,
+  } = useEPerusteRakenne({
+    ePerusteId: selectedEPerusteId,
+  });
+
   const isLoading =
-    koulutusIsLoading || osaamisalatIsLoading || sisaltoIsLoading;
+    koulutusIsLoading ||
+    osaamisalatIsLoading ||
+    sisaltoIsLoading ||
+    rakenneIsLoading;
 
   const osaamisalaOptions = useMemo(
     () => getOsaamisalaOptions(osaamisalat, language),
@@ -74,6 +91,18 @@ export const ValitseOsaamisalaBox = ({
   const selectedOsaamisalaData = _fp.find(
     ({ arvo }) => arvo === selectedOsaamisala?.value
   )(osaamisalat);
+
+  /* Get laajuus for selected osaamisala */
+  const ePerusteRakenneOsat: Array<OsaamisalaOsa> = ePerusteRakenne?.osat;
+  const osaamisalakoodi = selectedOsaamisalaData?.arvo;
+
+  let osaamisalaLaajuus;
+  if (ePerusteRakenneOsat) {
+    osaamisalaLaajuus = getOsaamisalaLaajuus(
+      ePerusteRakenneOsat,
+      osaamisalakoodi
+    );
+  }
 
   const nimi = getLanguageValue(selectedOsaamisalaData?.nimi, language);
 
@@ -155,6 +184,11 @@ export const ValitseOsaamisalaBox = ({
                   {selectedOsaamisalaData?.arvo}
                 </Anchor>
               ),
+            },
+            {
+              title: t('koulutuslomake.osaamisalanLaajuus'),
+              description: osaamisalaLaajuus,
+              suffix: t('yleiset.osaamispistetta'),
             },
           ]}
         />

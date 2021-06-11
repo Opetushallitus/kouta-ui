@@ -8,6 +8,10 @@ import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
 import parseKoodiUri from '#/src/utils/koodi/parseKoodiUri';
 
+export const isValidOpintojenlaajuus = opintojenlaajuus => {
+  return /(^\d)|(^v\d)/.test(opintojenlaajuus);
+};
+
 const useOpintojenLaajuusOptions = () => {
   const { options } = useKoodistoOptions({
     koodisto: 'opintojenlaajuus',
@@ -18,7 +22,9 @@ const useOpintojenLaajuusOptions = () => {
       options.filter(({ value }) => {
         const { koodiArvo } = parseKoodiUri(value);
         // Only show values starting with a number
-        return /^\d/.test(koodiArvo);
+        // ...or values starting with a single "v" followed by a number
+        // to include "Vähintään 53 op" kind of values
+        return isValidOpintojenlaajuus(koodiArvo);
       }),
     [options]
   );

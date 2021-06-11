@@ -1,6 +1,6 @@
 import { KOULUTUSTYYPIT, KOULUTUSTYYPPI } from '#/src/constants';
 
-import { createIsKoulutustyyppiDisabledGetter } from './KoulutustyyppiSection';
+import { createIsKoulutustyyppiDisabledGetter } from '../useOppilaitosTyypit';
 
 const getIsDisabledForOPH = createIsKoulutustyyppiDisabledGetter({
   isOphVirkailija: true,

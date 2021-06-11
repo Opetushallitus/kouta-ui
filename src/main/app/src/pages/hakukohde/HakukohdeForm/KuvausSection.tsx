@@ -11,7 +11,7 @@ import { Box } from '#/src/components/virkailija';
 import { useFieldValue } from '#/src/hooks/form';
 import useApiAsync from '#/src/hooks/useApiAsync';
 import useEntityOptions from '#/src/hooks/useEntityOptionsHook';
-import getValintaperusteet from '#/src/utils/valintaperuste/getValintaperusteet';
+import { getValintaperusteet } from '#/src/utils/valintaperuste/getValintaperusteet';
 
 const Buttons = styled.div`
   display: flex;
@@ -42,6 +42,7 @@ export const KuvausSection = ({
   const { data, reload } = useApiAsync({
     promiseFn: getValintaperusteet,
     hakuOid,
+    koulutustyyppi,
     organisaatioOid,
     watch,
   });

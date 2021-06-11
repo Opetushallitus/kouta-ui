@@ -147,10 +147,11 @@ const ToimitustapaFields = ({ name, t, language, contactInfo }) => {
           'liitteenToimitustapaValinnat.toimitetaanLahettamisenYhteydessa'
         ),
       },
-      {
-        value: LIITTEEN_TOIMITUSTAPA.JARJESTAJAN_OSOITE,
-        label: t('liitteenToimitustapaValinnat.jarjestajanOsoite'),
-      },
+      // NOTE: Määrittely päivittyi ettei järjestäjän osoitetta haluta näyttää valittavana, mutta palautetaan jos joskus tulee tarve
+      // {
+      //   value: LIITTEEN_TOIMITUSTAPA.JARJESTAJAN_OSOITE,
+      //   label: t('liitteenToimitustapaValinnat.jarjestajanOsoite'),
+      // },
       {
         value: LIITTEEN_TOIMITUSTAPA.MUU_OSOITE,
         label: t('liitteenToimitustapaValinnat.muuOsoite'),

@@ -4,34 +4,35 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { getPagination, setPaginationAction } from '#/src/state/pagination';
 
-export const useFilterState = ({ paginationName } = {}) => {
+export const useFilterState = (name: string) => {
   const { nimi, page, showArchived, orderBy, tila } = useSelector(
-    getPagination(paginationName)
+    getPagination(name)
   );
   const dispatch = useDispatch();
   const setPagination = useCallback(
     pagination => {
-      return dispatch(
-        setPaginationAction({ name: paginationName, ...pagination })
-      );
+      return dispatch(setPaginationAction({ name, ...pagination }));
     },
-    [dispatch, paginationName]
+    [dispatch, name]
   );
-  const setNimi = nimi => setPagination({ nimi });
   const setPage = page => setPagination({ page });
   const setOrderBy = orderBy => setPagination({ orderBy });
-  const setTila = tila => setPagination({ tila });
-  const setShowArchived = showArchived => setPagination({ showArchived });
+
+  // Muut kuin järjestykseen ja paginointiin liittyvät valinnat vaikuttavat hakutulosten määrään -> page 0
+  const setNimi = nimi => setPagination({ page: 0, nimi });
+  const setTila = tila => setPagination({ page: 0, tila });
+  const setShowArchived = showArchived =>
+    setPagination({ page: 0, showArchived });
 
   const onShowArchivedChange = useCallback(
     e => {
-      setPagination({ showArchived: e.target.checked });
+      setPagination({ page: 0, showArchived: e.target.checked });
     },
     [setPagination]
   );
   const onNimiChange = useCallback(
     value => {
-      setPagination({ nimi: value });
+      setPagination({ page: 0, nimi: value });
     },
     [setPagination]
   );
@@ -56,5 +57,3 @@ export const useFilterState = ({ paginationName } = {}) => {
     },
   };
 };
-
-export default useFilterState;

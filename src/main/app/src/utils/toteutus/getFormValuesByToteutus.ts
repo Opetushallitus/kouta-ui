@@ -5,6 +5,8 @@ import { ApurahaMaaraTyyppi, ApurahaYksikko } from '#/src/constants';
 import {
   ToteutusFormValues,
   MaksullisuusTyyppi,
+  LukiolinjatOsio,
+  LukioDiplomiValues,
 } from '#/src/types/toteutusTypes';
 import { toSelectValue, toSelectValueList } from '#/src/utils';
 import { getAjankohtaFields } from '#/src/utils/form/aloitusajankohtaHelpers';
@@ -24,23 +26,40 @@ const kieliArvoListToMultiSelectValue = _fp.reduce((acc, curr: any) => {
   return acc;
 }, {});
 
-const lukiolinjatiedotToFormValues = lukiolinjatiedot =>
-  lukiolinjatiedot?.reduce(
-    (acc, lukiolinjatieto) => {
-      return {
-        ...acc,
-        valinnat: [
-          ...(acc?.valinnat ?? []),
-          { value: lukiolinjatieto.koodiUri },
-        ],
-        kuvaukset: [
-          ...(acc?.kuvaukset ?? []),
-          _fp.mapValues(parseEditorState, lukiolinjatieto.kuvaus ?? {}),
-        ],
-      };
-    },
-    { kaytossa: !_fp.isEmpty(lukiolinjatiedot) }
-  );
+const lukiolinjatiedotToFormValues = (lukiolinjatiedot): LukiolinjatOsio => {
+  const result = {
+    kaytossa: !_fp.isEmpty(lukiolinjatiedot),
+    valinnat: [],
+    kuvaukset: [],
+  } as LukiolinjatOsio;
+
+  lukiolinjatiedot?.forEach(lukiolinjatieto => {
+    result.valinnat.push({ value: lukiolinjatieto.koodiUri });
+    result.kuvaukset.push(
+      _fp.mapValues(parseEditorState, lukiolinjatieto.kuvaus ?? {})
+    );
+  });
+
+  return result;
+};
+
+const diplomitToFormValues = diplomit => {
+  const result: LukioDiplomiValues = {
+    valinnat: [],
+    linkit: [],
+  };
+  diplomit?.forEach(diplomi => {
+    result.valinnat.push({
+      value: diplomi?.koodiUri,
+    });
+    result.linkit.push({
+      url: diplomi?.linkki,
+      alt: diplomi?.linkinAltTeksti,
+    });
+  });
+
+  return result;
+};
 
 const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
   const {
@@ -73,11 +92,10 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     ammatillinenPerustutkintoErityisopetuksena,
     painotukset,
     erityisetKoulutustehtavat,
+    diplomit,
   } = metadata;
 
   const {
-    diplomiKoodiUrit,
-    diplomiKuvaus,
     lisatiedot,
     koulutuksenAlkamiskausi = {},
     maksullisuustyyppi = MaksullisuusTyyppi.MAKSUTON,
@@ -173,8 +191,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
         parseEditorState,
         opetus?.apuraha?.kuvaus || {}
       ),
-      diplomiTyypit: toSelectValueList(diplomiKoodiUrit),
-      diplomiKuvaus: _fp.mapValues(parseEditorState, diplomiKuvaus ?? {}),
+      diplomit: diplomitToFormValues(diplomit),
       kielivalikoima: {
         A1A2Kielet: toSelectValueList(kielivalikoima.A1JaA2Kielet),
         aidinkielet: toSelectValueList(kielivalikoima.aidinkielet),

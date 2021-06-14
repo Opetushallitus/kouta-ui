@@ -511,7 +511,9 @@
     "erityisetKoulutustehtavat": "Erityiset koulutustehtävät",
     "lukiollaOnErityisiaKoulutustehtavia": "Lukiolla on erityisiä koulutustehtäviä",
     "valitseErityisetKoulutustehtavat": "Valitse erityiset koulutustehtävät",
-    "erityisenKoulutustehtavanKuvaus": "Erityisen koulutustehtävän kuvaus"
+    "erityisenKoulutustehtavanKuvaus": "Erityisen koulutustehtävän kuvaus",
+    "linkkiLisatietoihin": "Linkki lisätietoihin",
+    "linkinAltTeksti": "Linkin ALT-teksti"
   },
   "hakulomake": {
     "haunNimi": "Haun nimi",
@@ -677,6 +679,8 @@
     "suorittaneenOsaaminen": "Tutkinnon suorittaneen osaaminen",
     "tyotehtavatJoissaVoiToimia": "Työtehtäviä, joissa tutkinnon suorittanut voi toimia",
     "ammattitaitovaatimukset": "Ammattitaitovaatimukset",
-    "ammattitaidonOsoittamistavat": "Ammattitaidon osoittamistavat"
+    "ammattitaidonOsoittamistavat": "Ammattitaidon osoittamistavat",
+    "yleisetTavoitteet": "Yleiset tavoitteet",
+    "keskeisetSisallot": "Keskeiset sisällöt"
   }
 }

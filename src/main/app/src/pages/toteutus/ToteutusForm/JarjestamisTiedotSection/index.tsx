@@ -282,7 +282,7 @@ export const JarjestamisTiedotSection = ({
           </Spacing>
 
           <Spacing marginBottom={4}>
-            <DiplomiFields name={name} language={language} />
+            <DiplomiFields name={`${name}.diplomit`} />
           </Spacing>
         </>
       )}

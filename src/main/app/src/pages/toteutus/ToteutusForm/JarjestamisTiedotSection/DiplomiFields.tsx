@@ -108,7 +108,7 @@ const DiplomiCollapseContent = ({
         <Box flexGrow={1} mr={2}>
           <Field
             name={`${name}.linkit[${index}].url.${language}`}
-            label={t('toteutuslomake.linkki')}
+            label={t('toteutuslomake.linkkiLisatietoihin')}
             component={FormFieldUrlInput}
           />
         </Box>

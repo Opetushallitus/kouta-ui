@@ -232,7 +232,7 @@ const fillDiplomi = () => {
       name: /^Käsityön lukiodiplomi/,
     }).click();
     cy.findByLabelText(/^Käsityön lukiodiplomi/).within(() => {
-      cy.findByLabelText('toteutuslomake.linkki').pipe(
+      cy.findByLabelText('toteutuslomake.linkkiLisatietoihin').pipe(
         paste('http://example.com')
       );
       cy.findByLabelText('toteutuslomake.linkinAltTeksti').pipe(

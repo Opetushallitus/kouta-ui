@@ -29,9 +29,11 @@ export const KoodistoCollapseList = ({
           const koodi = koodistoData?.find(
             ({ koodiUri }) => koodiUriWithoutVersion(value) === koodiUri
           );
-          label =
-            formatLabel?.(koodi, userLanguage) ??
-            getKoodiNimiTranslation(koodi, userLanguage);
+          if (koodi) {
+            label =
+              formatLabel?.(koodi, userLanguage) ??
+              getKoodiNimiTranslation(koodi, userLanguage);
+          }
         }
         return { value, label };
       }),

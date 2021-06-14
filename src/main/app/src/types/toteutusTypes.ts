@@ -45,7 +45,7 @@ type Kielivalikoima = {
   B2Kielet: SelectOptions;
   B3Kielet: SelectOptions;
   muutKielet: SelectOptions;
-}
+};
 
 export type LukioDiplomiValues = {
   valinnat: Array<SelectOption>;

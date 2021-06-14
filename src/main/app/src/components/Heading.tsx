@@ -20,10 +20,12 @@ export const Heading = ({
   hasDivider = false,
   ...props
 }: HeadingProps) => (
-  <StyledTypography variant={variant} marginBottom={2} {...props}>
-    {children}
-    {hasDivider && <Divider />}
-  </StyledTypography>
+  <>
+    <StyledTypography variant={variant} {...props}>
+      {children}
+    </StyledTypography>
+    {hasDivider && <Divider mb={2} />}
+  </>
 );
 
 export default Heading;

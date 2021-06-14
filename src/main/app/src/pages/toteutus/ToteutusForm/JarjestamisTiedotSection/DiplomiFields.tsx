@@ -5,6 +5,7 @@ import { Field } from 'redux-form';
 import styled from 'styled-components';
 
 import DividerHeading from '#/src/components/DividerHeading';
+import FieldGroup from '#/src/components/FieldGroup';
 import { FormFieldInput, FormFieldUrlInput } from '#/src/components/formFields';
 import { KoodistoCollapseList } from '#/src/components/KoodistoCollapseList';
 import { Box, Typography } from '#/src/components/virkailija';
@@ -186,17 +187,14 @@ export const DiplomiFields = ({ name }) => {
   );
 
   return (
-    <>
-      <DividerHeading>{t('toteutuslomake.lukiodiplomi')}</DividerHeading>
-      <Box>
-        <KoodistoCollapseList
-          koodistoData={filteredKoodistoData}
-          selectLabel={t('toteutuslomake.valitseDiplomiOppiaineet')}
-          CollapseContent={DiplomiCollapseContent}
-          name={name}
-          itemProps={{ diplomiMapping: diplomiKoodiUriToEPerusteToModuuliId }}
-        />
-      </Box>
-    </>
+    <FieldGroup title={t('toteutuslomake.lukiodiplomi')}>
+      <KoodistoCollapseList
+        koodistoData={filteredKoodistoData}
+        selectLabel={t('toteutuslomake.valitseDiplomiOppiaineet')}
+        CollapseContent={DiplomiCollapseContent}
+        name={name}
+        itemProps={{ diplomiMapping: diplomiKoodiUriToEPerusteToModuuliId }}
+      />
+    </FieldGroup>
   );
 };

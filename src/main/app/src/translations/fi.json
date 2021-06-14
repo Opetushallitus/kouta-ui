@@ -325,7 +325,8 @@
     "amm": "Ammatillinen koulutus",
     "lk": "Lukiokoulutus",
     "yo": "Yliopistokoulutus",
-    "amk": "AMK"
+    "amk": "AMK",
+    "tuva": "Tutkintokoulutukseen valmentava koulutus (TUVA)"
   },
   "koulutustyyppivalikko": {
     "muutKoulutustyypit": "Muut",

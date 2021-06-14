@@ -29,19 +29,15 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
 
   if (diplomiIndex) {
     if (path.endsWith('linkinAltTeksti')) {
-      LANGUAGES.forEach(lng => {
-        errors.push({
-          field: `jarjestamistiedot.diplomit.linkit[${diplomiIndex}].alt.${lng}`,
-          errorKey: 'validointivirheet.kaikkiKaannoksetJosAinakinYksi',
-        });
-      });
+      return LANGUAGES.map(lng => ({
+        field: `jarjestamistiedot.diplomit.linkit[${diplomiIndex}].alt.${lng}`,
+        errorKey: 'validointivirheet.kaikkiKaannoksetJosAinakinYksi',
+      }));
     } else if (path.endsWith('linkki')) {
-      LANGUAGES.forEach(lng => {
-        errors.push({
-          field: `jarjestamistiedot.diplomit.linkit[${diplomiIndex}].url.${lng}`,
-          errorKey: 'validointivirheet.kaikkiKaannoksetJosAinakinYksi',
-        });
-      });
+      return LANGUAGES.map(lng => ({
+        field: `jarjestamistiedot.diplomit.linkit[${diplomiIndex}].url.${lng}`,
+        errorKey: 'validointivirheet.kaikkiKaannoksetJosAinakinYksi',
+      }));
     }
   }
 

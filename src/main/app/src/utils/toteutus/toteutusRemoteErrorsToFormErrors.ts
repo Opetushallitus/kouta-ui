@@ -25,6 +25,26 @@ export const toteutusRemoteErrorsToFormErrors: RemoteErrorsToFormErrors = ({
     }
   }
 
+  const diplomiIndex = path.match(/diplomit\[(\d+)\]/)?.[1];
+
+  if (diplomiIndex) {
+    if (path.endsWith('linkinAltTeksti')) {
+      LANGUAGES.forEach(lng => {
+        errors.push({
+          field: `jarjestamistiedot.diplomit.linkit[${diplomiIndex}].alt.${lng}`,
+          errorKey: 'validointivirheet.kaikkiKaannoksetJosAinakinYksi',
+        });
+      });
+    } else if (path.endsWith('linkki')) {
+      LANGUAGES.forEach(lng => {
+        errors.push({
+          field: `jarjestamistiedot.diplomit.linkit[${diplomiIndex}].url.${lng}`,
+          errorKey: 'validointivirheet.kaikkiKaannoksetJosAinakinYksi',
+        });
+      });
+    }
+  }
+
   if (path === 'tila') {
     if (errorType === 'notYetJulkaistu') {
       if (/sora/i.test(msg)) {

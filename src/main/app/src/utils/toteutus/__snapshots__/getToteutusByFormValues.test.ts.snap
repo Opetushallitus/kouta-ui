@@ -50,6 +50,30 @@ Object {
         "kieli": "sv",
       },
     ],
+    "diplomit": Array [
+      Object {
+        "koodiUri": "moduulikoodistolops2021_kald3#1",
+        "linkinAltTeksti": Object {
+          "fi": "Suomeksi 1",
+          "sv": "På svenska 1",
+        },
+        "linkki": Object {
+          "fi": "http://linkki1.fi",
+          "sv": "http://link1.se",
+        },
+      },
+      Object {
+        "koodiUri": "moduulikoodistolops2021_tald7#1",
+        "linkinAltTeksti": Object {
+          "fi": "Suomeksi 2",
+          "sv": "På svenska 2",
+        },
+        "linkki": Object {
+          "fi": "http://linkki2.fi",
+          "sv": "http://link2.se",
+        },
+      },
+    ],
     "erityisetKoulutustehtavat": Array [
       Object {
         "koodiUri": "erityinenkoulutustehtava_1#1",
@@ -114,14 +138,6 @@ Object {
         "max": 200,
         "min": 100,
         "yksikko": "euro",
-      },
-      "diplomiKoodiUrit": Array [
-        "diplomi_1#1",
-        "diplomi_2#1",
-      ],
-      "diplomiKuvaus": Object {
-        "fi": "<p>Fi diplomi</p>",
-        "sv": "<p>Sv diplomi</p>",
       },
       "koulutuksenAlkamiskausi": Object {
         "alkamiskausityyppi": "alkamiskausi ja -vuosi",

@@ -16,6 +16,7 @@ export const KoodistoCollapseList = ({
   selectLabel,
   CollapseContent,
   koodistoData,
+  formatLabel,
   itemProps,
 }) => {
   const selectedItems = useFieldValue(`${name}.valinnat`);
@@ -28,11 +29,13 @@ export const KoodistoCollapseList = ({
           const koodi = koodistoData?.find(
             ({ koodiUri }) => koodiUriWithoutVersion(value) === koodiUri
           );
-          label = getKoodiNimiTranslation(koodi, userLanguage);
+          label =
+            formatLabel?.(koodi, userLanguage) ??
+            getKoodiNimiTranslation(koodi, userLanguage);
         }
         return { value, label };
       }),
-    [selectedItems, koodistoData, userLanguage]
+    [selectedItems, koodistoData, userLanguage, formatLabel]
   );
 
   return (
@@ -44,6 +47,7 @@ export const KoodistoCollapseList = ({
           label={selectLabel}
           koodistoData={koodistoData}
           showAllOptions
+          formatKoodiLabel={formatLabel}
           required
           isMulti
         />

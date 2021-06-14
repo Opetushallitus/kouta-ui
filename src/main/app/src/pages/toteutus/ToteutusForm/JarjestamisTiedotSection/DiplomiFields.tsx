@@ -4,17 +4,21 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
 
-import DividerHeading from '#/src/components/DividerHeading';
 import FieldGroup from '#/src/components/FieldGroup';
 import { FormFieldInput, FormFieldUrlInput } from '#/src/components/formFields';
 import { KoodistoCollapseList } from '#/src/components/KoodistoCollapseList';
 import { Box, Typography } from '#/src/components/virkailija';
-import { LONG_CACHE_QUERY_OPTIONS } from '#/src/constants';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
-import { useApiQuery } from '#/src/hooks/useApiQuery';
 import { useKoodisto } from '#/src/hooks/useKoodisto';
+import { formatKoodiLabelWithArvo } from '#/src/utils';
 import { koodiUriWithoutVersion } from '#/src/utils/koodi/koodiUriWithoutVersion';
 import { getFirstLanguageValue } from '#/src/utils/languageUtils';
+
+import {
+  useDiplomiKoodiUriToIdMapping,
+  useEPerusteLukiodiplomit,
+  useEPerusteLukiodiplomiTiedot,
+} from './diplomiEPerusteHelpers';
 
 const DiplomiKuvausHeading = styled(Typography).attrs({ variant: 'h6' })`
   margin-bottom: 8px;
@@ -75,39 +79,25 @@ const EPerusteDiplomiKuvaus = ({ diplomiTiedot }) => {
   );
 };
 
-const getEPerusteLukiodiplomiTiedot = async ({
-  httpClient,
-  apiUrls,
-  moduuliId,
-}) => {
-  const { data } = await httpClient.get(
-    apiUrls.url('eperusteet-service.lukiodiplomi-tiedot', moduuliId)
-  );
-  return data;
+type DiplomiCollapseContentProps = {
+  koodiUri: string;
+  name: string;
+  index: number;
+  itemProps?: { diplomiKoodiUriToId: Record<string, string> };
 };
-
-const useEPerusteLukiodiplomiTiedot = moduuliId =>
-  useApiQuery(
-    'getEPerusteLukiodiplomiTiedot',
-    getEPerusteLukiodiplomiTiedot,
-    {
-      moduuliId,
-    },
-    { ...LONG_CACHE_QUERY_OPTIONS, enabled: Boolean(moduuliId) }
-  );
 
 const DiplomiCollapseContent = ({
   koodiUri: koodiUriWithVersion,
   name,
   index,
-  itemProps = {},
-}) => {
+  itemProps,
+}: DiplomiCollapseContentProps) => {
   const { t } = useTranslation();
 
   const koodiUri = koodiUriWithoutVersion(koodiUriWithVersion);
   const language = useLanguageTab();
 
-  const moduuliId = itemProps?.diplomiMapping?.[koodiUri];
+  const moduuliId = itemProps?.diplomiKoodiUriToId?.[koodiUri];
 
   const { data: lukiodiplomiTiedot } = useEPerusteLukiodiplomiTiedot(moduuliId);
 
@@ -134,45 +124,12 @@ const DiplomiCollapseContent = ({
   );
 };
 
-const getEPerusteLukiodiplomit = async ({ httpClient, apiUrls }) => {
-  const { data } = await httpClient.get(
-    apiUrls.url('eperusteet-service.lukiodiplomit')
-  );
-  return data;
-};
-
-const useEPerusteLukiodiplomit = () =>
-  useApiQuery(
-    'getEPerusteLukiodiplomit',
-    getEPerusteLukiodiplomit,
-    {},
-    {
-      ...LONG_CACHE_QUERY_OPTIONS,
-      select: data => data?.moduulit,
-    }
-  );
-
-const useDiplomiKoodiUriToEPerusteModuuliId = lukiodiplomitData =>
-  useMemo(
-    () =>
-      lukiodiplomitData?.reduce(
-        (acc, { id, koodi }) => ({
-          ...acc,
-          [koodi?.uri]: id,
-        }),
-        {}
-      ),
-    [lukiodiplomitData]
-  );
-
-export const DiplomiFields = ({ name }) => {
+export const DiplomiFields = ({ name }: { name: string }) => {
   const { t } = useTranslation();
 
   const { data: lukiodiplomitData } = useEPerusteLukiodiplomit();
 
-  const diplomiKoodiUriToEPerusteToModuuliId = useDiplomiKoodiUriToEPerusteModuuliId(
-    lukiodiplomitData
-  );
+  const diplomiKoodiUriToId = useDiplomiKoodiUriToIdMapping(lukiodiplomitData);
 
   const { data: koodistoData } = useKoodisto({
     koodisto: 'moduulikoodistolops2021',
@@ -180,10 +137,8 @@ export const DiplomiFields = ({ name }) => {
 
   const filteredKoodistoData = useMemo(
     () =>
-      koodistoData?.filter(
-        ({ koodiUri }) => diplomiKoodiUriToEPerusteToModuuliId?.[koodiUri]
-      ),
-    [koodistoData, diplomiKoodiUriToEPerusteToModuuliId]
+      koodistoData?.filter(({ koodiUri }) => diplomiKoodiUriToId?.[koodiUri]),
+    [koodistoData, diplomiKoodiUriToId]
   );
 
   return (
@@ -192,8 +147,9 @@ export const DiplomiFields = ({ name }) => {
         koodistoData={filteredKoodistoData}
         selectLabel={t('toteutuslomake.valitseDiplomiOppiaineet')}
         CollapseContent={DiplomiCollapseContent}
+        formatLabel={formatKoodiLabelWithArvo}
         name={name}
-        itemProps={{ diplomiMapping: diplomiKoodiUriToEPerusteToModuuliId }}
+        itemProps={{ diplomiKoodiUriToId }}
       />
     </FieldGroup>
   );

@@ -30,7 +30,7 @@ const useOpintojenLaajuusOptions = () => {
   );
 };
 
-export const OpintojenlaajuusField = ({ disabled, name }) => {
+export const OpintojenlaajuusField = ({ disabled, name, required }) => {
   const laajuusOptions = useOpintojenLaajuusOptions();
 
   const { t } = useTranslation();
@@ -43,6 +43,7 @@ export const OpintojenlaajuusField = ({ disabled, name }) => {
         component={FormFieldSelect}
         options={laajuusOptions}
         label={t('koulutuslomake.valitseOpintojenLaajuus')}
+        required={required}
       />
     </div>
   );

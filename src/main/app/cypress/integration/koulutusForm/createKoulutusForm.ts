@@ -434,5 +434,14 @@ export const createKoulutusForm = () => {
 
       jatka();
     });
+
+    getByTestId('descriptionSection').within(() => {
+      getByTestId('kuvauksenNimiInput').should('not.exist');
+      getByTestId('kuvausInput').within(() => {
+        typeToEditor('Kuvaus');
+      });
+
+      jatka();
+    });
   });
 };

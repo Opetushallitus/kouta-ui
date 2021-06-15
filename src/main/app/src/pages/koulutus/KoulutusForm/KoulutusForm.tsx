@@ -207,6 +207,7 @@ export const KoulutusForm = ({
               Monien koulutustyyppien metadatassa on kuvaus-kenttä, mutta siihen ei vois syöttää mitään. */}
           {[
             KOULUTUSTYYPPI.LUKIOKOULUTUS,
+            KOULUTUSTYYPPI.TUVA,
             ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
           ].includes(koulutustyyppi) && (
             <FormCollapse

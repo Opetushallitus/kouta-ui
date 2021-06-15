@@ -19,17 +19,18 @@ export const KuvausFieldsSection = ({
   return (
     <>
       {/* TODO: Onko kuvauksen nimi ylipäänsä tarpeellinen? */}
-      {koulutustyyppi !== KOULUTUSTYYPPI.LUKIOKOULUTUS && (
-        <Box mb={2} {...getTestIdProps('kuvauksenNimiInput')}>
-          <Field
-            disabled={disabled}
-            name={`${name}.nimi.${language}`}
-            component={FormFieldInput}
-            label={t('yleiset.kuvauksenNimi')}
-            required
-          />
-        </Box>
-      )}
+      {koulutustyyppi !== KOULUTUSTYYPPI.LUKIOKOULUTUS &&
+        koulutustyyppi !== KOULUTUSTYYPPI.TUVA && (
+          <Box mb={2} {...getTestIdProps('kuvauksenNimiInput')}>
+            <Field
+              disabled={disabled}
+              name={`${name}.nimi.${language}`}
+              component={FormFieldInput}
+              label={t('yleiset.kuvauksenNimi')}
+              required
+            />
+          </Box>
+        )}
       <Box {...getTestIdProps('kuvausInput')}>
         <Field
           disabled={disabled}

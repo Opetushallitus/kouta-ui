@@ -408,4 +408,31 @@ export const createKoulutusForm = () => {
       cy.wrap(request.body).toMatchSnapshot();
     });
   });
+
+  it('should be able to create TUVA-koulutus', () => {
+    cy.intercept(
+      { method: 'PUT', url: '**/koulutus' },
+      {
+        body: {
+          oid: koulutusOid,
+        },
+      }
+    ).as('createTuvaKoulutusResponse');
+
+    fillCommon({ koulutustyyppiPath: ['tuva'] });
+
+    getByTestId('informationSection').within(() => {
+      getByTestId('tuvaOpintojenlaajuusSelect')
+        .click()
+        .within(() => {
+          getSelectOption('Vähintään 53 op').click({ force: true });
+        });
+
+      getByTestId('nimiInput').within(() => {
+        cy.get('input').should('have.value', 'koulutustyypit.tuva');
+      });
+
+      jatka();
+    });
+  });
 };

@@ -113,7 +113,31 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
           </Box>
         </>
       )}
-
+      {koulutustyyppi === KOULUTUSTYYPPI.TUVA && (
+        <>
+          <Box mb={2} {...getTestIdProps('tuvaOpintojenlaajuusSelect')}>
+            <OpintojenlaajuusField
+              disabled={disabled}
+              name={name}
+              required={true}
+            />
+          </Box>
+          <Box mb={2} {...getTestIdProps('nimiInput')}>
+            <Field
+              disabled={true}
+              name={`${name}.nimi.${language}`}
+              component={props => (
+                <FormFieldInput
+                  {...props}
+                  value={t(`koulutustyypit.${koulutustyyppi}`)}
+                />
+              )}
+              label={t('koulutuslomake.koulutuksenNimi')}
+              required
+            />
+          </Box>
+        </>
+      )}
       {[
         ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
         KOULUTUSTYYPPI.AVOIN_YO,

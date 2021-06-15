@@ -133,6 +133,9 @@ export const TiedotSection = ({ disabled, language, koulutustyyppi, name }) => {
                 />
               )}
               label={t('koulutuslomake.koulutuksenNimi')}
+              helperText={t(
+                'koulutuslomake.koulutuksenNimiNakyyOppijalleVaroitus'
+              )}
               required
             />
           </Box>

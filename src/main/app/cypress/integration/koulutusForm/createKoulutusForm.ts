@@ -443,5 +443,7 @@ export const createKoulutusForm = () => {
 
       jatka();
     });
+
+    getByTestId('soraKuvausSection').should('not.exist');
   });
 };

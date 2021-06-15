@@ -229,13 +229,15 @@ export const KoulutusForm = ({
             disabled={onlyTarjoajaRights}
           />
 
-          <FormCollapse
-            section="soraKuvaus"
-            header={t('yleiset.soraKuvaus')}
-            Component={SoraKuvausSection}
-            organisaatioOid={organisaatioOid}
-            languages={languageTabs}
-          />
+          {!KOULUTUSTYYPPI.TUVA && (
+            <FormCollapse
+              section="soraKuvaus"
+              header={t('yleiset.soraKuvaus')}
+              Component={SoraKuvausSection}
+              organisaatioOid={organisaatioOid}
+              languages={languageTabs}
+            />
+          )}
 
           <FormCollapse
             section="teemakuva"

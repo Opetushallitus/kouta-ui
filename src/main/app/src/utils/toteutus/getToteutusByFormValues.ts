@@ -158,6 +158,7 @@ const getToteutusByFormValues = (values: ToteutusFormValues) => {
       ),
       ammatillinenPerustutkintoErityisopetuksena:
         values?.tiedot?.ammatillinenPerustutkintoErityisopetuksena,
+      yleislinja: values?.lukiolinjat?.yleislinja,
       painotukset: getLukiolinjatByValues(
         values?.lukiolinjat?.painotukset,
         pickTranslations

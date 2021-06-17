@@ -513,7 +513,8 @@
     "valitseErityisetKoulutustehtavat": "Valitse erityiset koulutustehtävät",
     "erityisenKoulutustehtavanKuvaus": "Erityisen koulutustehtävän kuvaus",
     "linkkiLisatietoihin": "Linkki lisätietoihin",
-    "linkinAltTeksti": "Linkin ALT-teksti"
+    "linkinAltTeksti": "Linkin ALT-teksti",
+    "lukioYleislinja": "Yleislinja"
   },
   "hakulomake": {
     "haunNimi": "Haun nimi",

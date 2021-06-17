@@ -64,6 +64,11 @@ export const LukiolinjatSection = ({ name }) => {
 
   return (
     <>
+      <Box mb={2}>
+        <Field component={FormFieldSwitch} name={`${name}.yleislinja`}>
+          {t('toteutuslomake.lukioYleislinja')}
+        </Field>
+      </Box>
       <LukiolinjaOsio
         name={`${name}.painotukset`}
         title={t('toteutuslomake.painotukset')}

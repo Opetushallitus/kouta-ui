@@ -342,6 +342,7 @@ Object {
         },
       },
     ],
+    "yleislinja": true,
     "ylemmanKorkeakoulututkinnonOsaamisalat": Array [
       Object {
         "kuvaus": Object {

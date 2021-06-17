@@ -22,12 +22,14 @@ import {
 } from '#/src/constants';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import useSelectBase from '#/src/hooks/useSelectBase';
+import { ToteutusModel } from '#/src/types/toteutusTypes';
 import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
 import getFormValuesByToteutus from '#/src/utils/toteutus/getFormValuesByToteutus';
 import { useToteutusByOid } from '#/src/utils/toteutus/getToteutusByOid';
 
+import { initialValues } from './initialToteutusValues';
 import { ToteutusFooter } from './ToteutusFooter';
-import ToteutusForm, { initialValues } from './ToteutusForm';
+import ToteutusForm from './ToteutusForm';
 
 const { AMMATILLINEN_KOULUTUS, TUTKINNON_OSA, OSAAMISALA } = KOULUTUSTYYPPI;
 
@@ -40,10 +42,20 @@ const getCopyValues = toteutusOid => ({
   },
 });
 
-const getInitialValues = (toteutus, koulutusNimi, koulutusKielet) => {
+const getInitialValues = ({
+  toteutus,
+  koulutustyyppi,
+  koulutusNimi,
+  koulutusKielet,
+}: {
+  toteutus: ToteutusModel;
+  koulutustyyppi: KOULUTUSTYYPPI;
+  koulutusNimi?: string;
+  koulutusKielet?: Array<LanguageCode>;
+}) => {
   return toteutus
     ? { ...getCopyValues(toteutus.oid), ...getFormValuesByToteutus(toteutus) }
-    : initialValues(koulutusNimi, koulutusKielet);
+    : initialValues({ koulutustyyppi, koulutusNimi, koulutusKielet });
 };
 
 const CreateToteutusPage = props => {
@@ -81,8 +93,13 @@ const CreateToteutusPage = props => {
     return [AMMATILLINEN_KOULUTUS, TUTKINNON_OSA, OSAAMISALA].includes(
       koulutustyyppi
     )
-      ? getInitialValues(toteutus, koulutusNimi, koulutusKielet)
-      : getInitialValues(toteutus, null, koulutusKielet);
+      ? getInitialValues({
+          koulutustyyppi,
+          toteutus,
+          koulutusNimi,
+          koulutusKielet,
+        })
+      : getInitialValues({ koulutustyyppi, toteutus, koulutusKielet });
   }, [toteutus, koulutustyyppi, koulutusNimi, koulutusKielet]);
 
   return (

@@ -110,6 +110,7 @@ export type ToteutusFormValues = {
   ylemmanKorkeakoulututkinnonOsaamisalat: Array<any>;
   alemmanKorkeakoulututkinnonOsaamisalat: Array<any>;
   lukiolinjat: {
+    yleislinja: boolean;
     painotukset: LukiolinjatOsio;
     erityisetKoulutustehtavat: LukiolinjatOsio;
   };

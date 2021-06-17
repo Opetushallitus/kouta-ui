@@ -93,6 +93,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
     painotukset,
     erityisetKoulutustehtavat,
     diplomit,
+    yleislinja,
   } = metadata;
 
   const {
@@ -235,6 +236,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
         otsikko,
       }))(alemmanKorkeakoulututkinnonOsaamisalat) ?? [],
     lukiolinjat: {
+      yleislinja: yleislinja,
       painotukset: lukiolinjatiedotToFormValues(painotukset),
       erityisetKoulutustehtavat: lukiolinjatiedotToFormValues(
         erityisetKoulutustehtavat

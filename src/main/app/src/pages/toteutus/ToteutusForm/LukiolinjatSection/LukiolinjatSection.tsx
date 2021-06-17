@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 
 import _fp from 'lodash/fp';
 import { useTranslation } from 'react-i18next';
@@ -11,7 +11,12 @@ import Spacing from '#/src/components/Spacing';
 import { Box } from '#/src/components/virkailija';
 import { LANGUAGES } from '#/src/constants';
 import { useLanguageTab } from '#/src/contexts/LanguageTabContext';
-import { useFieldValue, useSetFieldValue } from '#/src/hooks/form';
+import {
+  useBoundFormActions,
+  useFieldValue,
+  useIsDirty,
+  useSetFieldValue,
+} from '#/src/hooks/form';
 import { useKoodisto } from '#/src/hooks/useKoodisto';
 import { getTestIdProps } from '#/src/utils';
 import { koodiUriWithoutVersion } from '#/src/utils/koodi/koodiUriWithoutVersion';
@@ -214,7 +219,20 @@ export const LukiolinjatSection = ({ name, koulutus }) => {
   const linjaSelectionsEmpty =
     _fp.isEmpty(selectedPainotukset) && _fp.isEmpty(selectedKoulutustehtavat);
 
-  console.log({ nimi });
+  const { change } = useBoundFormActions();
+  const isDirty = useIsDirty();
+
+  useEffect(() => {
+    if (isDirty && !isLoading && _fp.isEmpty(selectedLinjatTranslations)) {
+      change(yleislinjaFieldName, true);
+    }
+  }, [
+    change,
+    isDirty,
+    isLoading,
+    selectedLinjatTranslations,
+    yleislinjaFieldName,
+  ]);
 
   useSetFieldValue('tiedot.nimi', nimi);
 

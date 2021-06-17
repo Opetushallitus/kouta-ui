@@ -132,11 +132,6 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
           },
           yksikko: ApurahaYksikko.EURO,
         },
-        diplomiKoodiUrit: ['dipmlomi_1#1'],
-        diplomiKuvaus: {
-          fi: 'Fi diplomi',
-          sv: 'Sv diplomi',
-        },
       },
       kielivalikoima: {
         A1JaA2Kielet: ['kieli_1#1'],
@@ -146,6 +141,13 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
         aidinkielet: ['kieli_5#1'],
         muutKielet: ['kieli_6#1'],
       },
+      diplomit: [
+        {
+          koodiUri: 'moduulikoodistolops2021_kald3#1',
+          linkki: { fi: 'http://linkki.fi', sv: 'http://link.se' },
+          linkinAltTeksti: { fi: 'Suomeksi', sv: 'På svenska' },
+        },
+      ],
       osaamisalat: [
         {
           koodiUri: 'osaamisala1',

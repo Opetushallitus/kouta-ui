@@ -32,7 +32,7 @@ type Toteutusjakso = {
   }>;
 };
 
-type LukiolinjatOsio = {
+export type LukiolinjatOsio = {
   kaytossa: boolean;
   valinnat: SelectOptions;
   kuvaukset: Array<TranslatedField<EditorState>>;
@@ -47,7 +47,14 @@ type Kielivalikoima = {
   muutKielet: SelectOptions;
 };
 
-// TODO: Improve toteutus form types
+export type LukioDiplomiValues = {
+  valinnat: Array<SelectOption>;
+  linkit: Array<{
+    url: TranslatedField<string>;
+    alt: TranslatedField<string>;
+  }>;
+};
+
 export type ToteutusFormValues = {
   koulutustyyppi: KOULUTUSTYYPPI;
   muokkaaja?: string;
@@ -86,9 +93,8 @@ export type ToteutusFormValues = {
     apurahaMax?: number;
     apurahaKuvaus?: Kuvaus;
     apurahaYksikko?: SelectOption<ApurahaYksikko>;
-    diplomiTyypit: SelectOptions;
-    diplomiKuvaus: Kuvaus;
     kielivalikoima: Kielivalikoima;
+    diplomit: LukioDiplomiValues;
     ajankohta: AjankohtaFields;
   };
   nayttamistiedot: {

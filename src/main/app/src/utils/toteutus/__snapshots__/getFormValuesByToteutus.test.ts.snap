@@ -54,15 +54,25 @@ Object {
     "apurahaYksikko": Object {
       "value": "euro",
     },
-    "diplomiKuvaus": Object {
-      "fi": "<p>Fi diplomi</p>",
-      "sv": "<p>Sv diplomi</p>",
+    "diplomit": Object {
+      "linkit": Array [
+        Object {
+          "alt": Object {
+            "fi": "Suomeksi",
+            "sv": "På svenska",
+          },
+          "url": Object {
+            "fi": "http://linkki.fi",
+            "sv": "http://link.se",
+          },
+        },
+      ],
+      "valinnat": Array [
+        Object {
+          "value": "moduulikoodistolops2021_kald3#1",
+        },
+      ],
     },
-    "diplomiTyypit": Array [
-      Object {
-        "value": "dipmlomi_1#1",
-      },
-    ],
     "kielivalikoima": Object {
       "A1A2Kielet": Array [
         Object {

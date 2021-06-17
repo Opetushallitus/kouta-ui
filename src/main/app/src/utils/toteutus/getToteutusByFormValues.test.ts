@@ -90,10 +90,33 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
         fi: parseEditorState('Fi apurahakuvaus'),
         sv: parseEditorState('Sv apurahakuvaus'),
       },
-      diplomiTyypit: [{ value: 'diplomi_1#1' }, { value: 'diplomi_2#1' }],
-      diplomiKuvaus: {
-        fi: parseEditorState('Fi diplomi'),
-        sv: parseEditorState('Sv diplomi'),
+      diplomit: {
+        valinnat: [
+          { value: 'moduulikoodistolops2021_kald3#1' },
+          { value: 'moduulikoodistolops2021_tald7#1' },
+        ],
+        linkit: [
+          {
+            url: {
+              fi: 'http://linkki1.fi',
+              sv: 'http://link1.se',
+            },
+            alt: {
+              fi: 'Suomeksi 1',
+              sv: 'På svenska 1',
+            },
+          },
+          {
+            url: {
+              fi: 'http://linkki2.fi',
+              sv: 'http://link2.se',
+            },
+            alt: {
+              fi: 'Suomeksi 2',
+              sv: 'På svenska 2',
+            },
+          },
+        ],
       },
       kielivalikoima: {
         A1A2Kielet: [{ value: 'kieli_1#1' }],

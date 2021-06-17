@@ -2,6 +2,7 @@ import { playMocks } from 'kto-ui-common/cypress/mockUtils';
 import _fp from 'lodash/fp';
 
 import koulutus from '#/cypress/data/koulutus';
+import toteutusLukioMocks from '#/cypress/mocks/toteutus-lukio.mocks.json';
 import toteutusMocks from '#/cypress/mocks/toteutus.mocks.json';
 import { stubToteutusFormRoutes } from '#/cypress/toteutusFormUtils';
 import {
@@ -223,12 +224,21 @@ const fillLukiolinjatSection = () => {
 };
 
 const fillDiplomi = () => {
-  getByTestId('diplomiTyypit').within(() => {
-    selectOption('Musiikin lukiodiplomi');
-  });
+  cy.findByLabelText('toteutuslomake.lukiodiplomi').within(() => {
+    fillAsyncSelect('Käsityön lukiodiplomi');
+    fillAsyncSelect('Tanssin lukiodiplomi');
 
-  getByTestId('diplomiKuvaus').within(() => {
-    typeToEditor('Diplomi kuvaus');
+    cy.findByRole('button', {
+      name: /^Käsityön lukiodiplomi/,
+    }).click();
+    cy.findByLabelText(/^Käsityön lukiodiplomi/).within(() => {
+      cy.findByLabelText('toteutuslomake.linkkiLisatietoihin').pipe(
+        paste('http://example.com')
+      );
+      cy.findByLabelText('toteutuslomake.linkinAltTeksti').pipe(
+        paste('Käsityön diplomin lisätietoja')
+      );
+    });
   });
 };
 
@@ -273,6 +283,11 @@ const prepareTest = tyyppi => {
   };
 
   playMocks(toteutusMocks);
+
+  if (tyyppi === 'lk') {
+    playMocks(toteutusLukioMocks);
+  }
+
   stubToteutusFormRoutes({ organisaatioOid });
   cy.intercept(
     { method: 'GET', url: `**/koulutus/${koulutusOid}` },
@@ -496,8 +511,8 @@ export const createToteutusForm = () => {
 
     getByTestId('jarjestamistiedotSection').within(() => {
       fillCommonJarjestamistiedot();
-      fillDiplomi();
       fillKielivalikoima();
+      fillDiplomi();
       jatka();
     });
 

@@ -13,6 +13,7 @@ import { getKielivalinta } from '#/src/utils/form/formConfigUtils';
 import getHakuFormConfig from '#/src/utils/haku/getHakuFormConfig';
 
 import { useActions } from './useActions';
+import { useHasChanged } from './useHasChanged';
 
 export const useForm = (formNameProp?: string) => {
   const formName = useFormName();
@@ -62,9 +63,12 @@ export function useFieldValue<T = any>(name, formNameProp?: string): T {
 export const useSetFieldValue = (name, value) => {
   const form = useFormName();
   const dispatch = useDispatch();
+  const valueHasChanged = useHasChanged(value, _.isEqual);
   useEffect(() => {
-    dispatch(change(form, name, value));
-  }, [dispatch, form, name, value]);
+    if (valueHasChanged) {
+      dispatch(change(form, name, value));
+    }
+  }, [dispatch, form, name, value, valueHasChanged]);
 };
 
 const formConfigsGettersByEntity = {

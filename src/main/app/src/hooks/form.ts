@@ -25,8 +25,11 @@ export function useBoundFormActions() {
   const formName = useFormName();
   const boundFormActions = useMemo(
     () =>
-      _.mapValues(formActions, action => (...args) =>
-        action.apply(null, [formName, ...args])
+      _.mapValues(
+        formActions,
+        action =>
+          (...args) =>
+            action.apply(null, [formName, ...args])
       ),
     [formName]
   );
@@ -80,10 +83,10 @@ const getFormConfigByEntity = (entityName, koulutustyyppi) => {
 };
 
 export const useEntityFormConfig = (entityName, koulutustyyppi = undefined) => {
-  return useMemo(() => getFormConfigByEntity(entityName, koulutustyyppi), [
-    entityName,
-    koulutustyyppi,
-  ]);
+  return useMemo(
+    () => getFormConfigByEntity(entityName, koulutustyyppi),
+    [entityName, koulutustyyppi]
+  );
 };
 
 export const useFormConfig = () => {

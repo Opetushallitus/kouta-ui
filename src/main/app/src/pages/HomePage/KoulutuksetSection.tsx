@@ -102,10 +102,10 @@ export const KoulutuksetSection = ({ organisaatioOid, canCreate = true }) => {
     [koulutukset]
   );
 
-  const tableColumns = useMemo(() => makeTableColumns(t, organisaatioOid), [
-    t,
-    organisaatioOid,
-  ]);
+  const tableColumns = useMemo(
+    () => makeTableColumns(t, organisaatioOid),
+    [t, organisaatioOid]
+  );
 
   return (
     <>

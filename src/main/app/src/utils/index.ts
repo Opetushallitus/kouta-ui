@@ -84,14 +84,16 @@ export const formatDateRange = (
     formatDateValue(end, dateFormat) ?? ''
   }`;
 
-export const createChainedFunction = (...fns) => (...args) => {
-  // eslint-disable-next-line
+export const createChainedFunction =
+  (...fns) =>
+  (...args) => {
+    // eslint-disable-next-line
   for (const fn of fns) {
-    if (_.isFunction(fn)) {
-      fn(...args);
+      if (_.isFunction(fn)) {
+        fn(...args);
+      }
     }
-  }
-};
+  };
 
 export const getTestIdProps = testId => ({
   'data-testid': testId,
@@ -137,7 +139,10 @@ export const parseKeyVal = memoize(
 
 export const getCookie = name => _.get(parseKeyVal(document.cookie), name);
 
-const allFuncs = (...fns) => value => _.every(fns, fn => fn(value));
+const allFuncs =
+  (...fns) =>
+  value =>
+    _.every(fns, fn => fn(value));
 
 export const formValueExists = value =>
   _.cond([

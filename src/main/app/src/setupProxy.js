@@ -1,11 +1,8 @@
 // This file is used by react-scripts to customize webpack-dev-server proxy
 // https://create-react-app.dev/docs/proxying-api-requests-in-development
 const { createProxyMiddleware } = require('http-proxy-middleware');
-const {
-  DEV_VIRKAILIJA_URL,
-  DISABLE_LOCAL_PROXY,
-  KOUTA_BACKEND_URL,
-} = process.env;
+const { DEV_VIRKAILIJA_URL, DISABLE_LOCAL_PROXY, KOUTA_BACKEND_URL } =
+  process.env;
 
 const createKoutaProxyMiddleware = targetUrl =>
   createProxyMiddleware({

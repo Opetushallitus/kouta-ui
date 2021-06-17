@@ -51,31 +51,25 @@ export const ValitseOsaamisalaBox = ({
 
   const osaamisalat = selectedEPeruste?.osaamisalat;
 
-  const {
-    data: ePerusteOsaamisalaKuvaukset,
-    isLoading: osaamisalatIsLoading,
-  } = useEPerusteOsaamisalaKuvaukset({
-    ePerusteId: selectedEPerusteId,
-  });
+  const { data: ePerusteOsaamisalaKuvaukset, isLoading: osaamisalatIsLoading } =
+    useEPerusteOsaamisalaKuvaukset({
+      ePerusteId: selectedEPerusteId,
+    });
 
   const selectedOsaamisalaKuvausId =
     ePerusteOsaamisalaKuvaukset?.[
       `osaamisala_${selectedOsaamisala?.value}`
     ]?.[0]?.id;
 
-  const {
-    data: ePerusteSisalto,
-    isLoading: sisaltoIsLoading,
-  } = useEPerusteSisalto({
-    ePerusteId: selectedEPerusteId,
-  });
+  const { data: ePerusteSisalto, isLoading: sisaltoIsLoading } =
+    useEPerusteSisalto({
+      ePerusteId: selectedEPerusteId,
+    });
 
-  const {
-    data: ePerusteRakenne,
-    isLoading: rakenneIsLoading,
-  } = useEPerusteRakenne({
-    ePerusteId: selectedEPerusteId,
-  });
+  const { data: ePerusteRakenne, isLoading: rakenneIsLoading } =
+    useEPerusteRakenne({
+      ePerusteId: selectedEPerusteId,
+    });
 
   const isLoading =
     koulutusIsLoading ||

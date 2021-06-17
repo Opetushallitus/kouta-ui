@@ -50,9 +50,8 @@ export const FormCollapseGroup = ({
   children,
 }) => {
   const [sectionNeedsFocus, setSectionNeedsFocus] = useState<number | null>();
-  const [errorsNeedAttention, setErrorsNeedAttention] = useState<boolean>(
-    false
-  );
+  const [errorsNeedAttention, setErrorsNeedAttention] =
+    useState<boolean>(false);
 
   const config = useFormConfig();
 

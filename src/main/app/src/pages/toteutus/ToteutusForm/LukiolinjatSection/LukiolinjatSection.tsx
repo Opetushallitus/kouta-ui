@@ -74,20 +74,22 @@ const LukiolinjaOsio = ({
   );
 };
 
-const findTranslationsByKoodi = koodistoData => ({ value }) =>
-  mapKoodiToTranslateable(
-    koodistoData?.find(
-      ({ koodiUri }) => koodiUriWithoutVersion(value) === koodiUri
-    )
-  );
+const findTranslationsByKoodi =
+  koodistoData =>
+  ({ value }) =>
+    mapKoodiToTranslateable(
+      koodistoData?.find(
+        ({ koodiUri }) => koodiUriWithoutVersion(value) === koodiUri
+      )
+    );
 
 const useSelectedOsioLinjat = osioFieldName => {
   const osioKaytossa = useFieldValue(`${osioFieldName}.kaytossa`);
   const selectedValinnat = useFieldValue(`${osioFieldName}.valinnat`);
-  return useMemo(() => (osioKaytossa ? selectedValinnat : []), [
-    osioKaytossa,
-    selectedValinnat,
-  ]);
+  return useMemo(
+    () => (osioKaytossa ? selectedValinnat : []),
+    [osioKaytossa, selectedValinnat]
+  );
 };
 
 const renderOpintojenLaajuus = (opintojenLaajuusNumero, t, lng) =>

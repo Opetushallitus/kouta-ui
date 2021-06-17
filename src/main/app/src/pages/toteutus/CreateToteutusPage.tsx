@@ -73,9 +73,8 @@ const CreateToteutusPage = props => {
     kopioToteutusOid?: string;
   } = queryString.parse(search);
 
-  const { data: koulutus, isFetching: isKoulutusFetching } = useKoulutusByOid(
-    koulutusOid
-  );
+  const { data: koulutus, isFetching: isKoulutusFetching } =
+    useKoulutusByOid(koulutusOid);
 
   const selectBase = useSelectBase(history, { kopioParam: 'kopioToteutusOid' });
   const { t } = useTranslation();
@@ -85,9 +84,8 @@ const CreateToteutusPage = props => {
   const koulutusNimi = koulutus?.nimi;
   const koulutusKielet = koulutus?.kielivalinta;
 
-  const { data: toteutus, isFetching: isToteutusFetching } = useToteutusByOid(
-    kopioToteutusOid
-  );
+  const { data: toteutus, isFetching: isToteutusFetching } =
+    useToteutusByOid(kopioToteutusOid);
 
   const initialValues = useMemo(() => {
     return [AMMATILLINEN_KOULUTUS, TUTKINNON_OSA, OSAAMISALA].includes(

@@ -39,12 +39,8 @@ export const PerustiedotSection = ({
 
   const isOphVirkailija = useIsOphVirkailija();
 
-  const {
-    isAmmatillinen,
-    isKorkeakoulutus,
-    isLukio,
-    isLoading,
-  } = useOppilaitosTyypit(organisaatioOid);
+  const { isAmmatillinen, isKorkeakoulutus, isLukio, isLoading } =
+    useOppilaitosTyypit(organisaatioOid);
 
   const getIsDisabled = useMemo(
     () =>

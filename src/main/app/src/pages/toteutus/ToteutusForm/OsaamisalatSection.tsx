@@ -211,13 +211,10 @@ const OsaamisalatContainer = ({
 };
 
 const useExtendedEPeruste = ePerusteId => {
-  const { data: ePeruste, isLoading: ePerusteLoading } = useEPerusteById(
-    ePerusteId
-  );
-  const {
-    data: osaamisalaKuvaukset,
-    isLoading: osaamisalaKuvauksetLoading,
-  } = useEPerusteOsaamisalaKuvaukset({ ePerusteId });
+  const { data: ePeruste, isLoading: ePerusteLoading } =
+    useEPerusteById(ePerusteId);
+  const { data: osaamisalaKuvaukset, isLoading: osaamisalaKuvauksetLoading } =
+    useEPerusteOsaamisalaKuvaukset({ ePerusteId });
 
   const osaamisalat = ePeruste?.osaamisalat;
 

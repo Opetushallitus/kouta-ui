@@ -19,12 +19,10 @@ export const useApiQuery = (
   const apiUrls = useUrls();
   const httpClient = useHttpClient();
 
-  const queryFn = useCallback(() => apiFn({ httpClient, apiUrls, ...props }), [
-    apiFn,
-    httpClient,
-    apiUrls,
-    props,
-  ]);
+  const queryFn = useCallback(
+    () => apiFn({ httpClient, apiUrls, ...props }),
+    [apiFn, httpClient, apiUrls, props]
+  );
   return useQuery([key, props], queryFn, options);
 };
 

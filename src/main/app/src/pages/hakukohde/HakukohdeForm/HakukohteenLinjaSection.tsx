@@ -43,22 +43,18 @@ const useLukiolinjaKoodit = toteutus => {
   const { t } = useTranslation();
 
   // Haetaan koko koodistot hakukohteen nimen tallennusta varten
-  const {
-    data: lukiopainotukset = [],
-    isLoading: painotuksetLoading,
-  } = useKoodisto({
-    koodisto: 'lukiopainotukset',
-  });
+  const { data: lukiopainotukset = [], isLoading: painotuksetLoading } =
+    useKoodisto({
+      koodisto: 'lukiopainotukset',
+    });
   const painotusOptions = useKoodistoDataOptions({
     koodistoData: lukiopainotukset,
   });
 
-  const {
-    data: erityisetKoulutusTehtavat = [],
-    isLoading: erityisetLoading,
-  } = useKoodisto({
-    koodisto: 'lukiolinjaterityinenkoulutustehtava',
-  });
+  const { data: erityisetKoulutusTehtavat = [], isLoading: erityisetLoading } =
+    useKoodisto({
+      koodisto: 'lukiolinjaterityinenkoulutustehtava',
+    });
   const erityisOptions = useKoodistoDataOptions({
     koodistoData: erityisetKoulutusTehtavat,
   });

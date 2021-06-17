@@ -65,6 +65,8 @@ const useLukiolinjaKoodit = toteutus => {
 
   const loading = painotuksetLoading || erityisetLoading;
 
+  const yleislinja = toteutus?.metadata?.yleislinja;
+
   const availableOptionIds = useMemo(
     () =>
       [
@@ -78,11 +80,18 @@ const useLukiolinjaKoodit = toteutus => {
     const filterValues = v => availableOptionIds.some(id => id === v.value);
 
     return [
-      { value: LUKIO_YLEISLINJA, label: t('hakukohdelomake.lukionYleislinja') },
+      ...(yleislinja
+        ? [
+            {
+              value: LUKIO_YLEISLINJA,
+              label: t('hakukohdelomake.lukionYleislinja'),
+            },
+          ]
+        : []),
       ...painotusOptions.filter(filterValues),
       ...erityisOptions.filter(filterValues),
     ];
-  }, [availableOptionIds, erityisOptions, painotusOptions, t]);
+  }, [yleislinja, availableOptionIds, erityisOptions, painotusOptions, t]);
 
   // Tarvitaan kaikki käännökset yleislinjalle hakukohteen nimeä varten
   const yleislinjaTranslations = useMemo(

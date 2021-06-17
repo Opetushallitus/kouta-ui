@@ -118,11 +118,10 @@ export const useLukioToteutusNimi = ({
         ? [
             _fp.zipObject(
               LANGUAGES,
-              LANGUAGES.map(
-                lng =>
-                  `${t('toteutuslomake.lukionYleislinja', {
-                    lng,
-                  })}`
+              LANGUAGES.map(lng =>
+                t('toteutuslomake.lukionYleislinja', {
+                  lng,
+                })
               )
             ),
             ...selectedLinjatTranslations,

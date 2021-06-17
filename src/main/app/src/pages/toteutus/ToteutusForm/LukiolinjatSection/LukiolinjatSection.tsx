@@ -104,45 +104,48 @@ export const useLukioToteutusNimi = ({
   opintojenLaajuusNumero,
 }: UseLukioToteutusNimiProps) => {
   const { t } = useTranslation();
-  const initialNameTranslations = useMemo(
+
+  const allLinjatTranslations = useMemo(
     () =>
-      _fp.zipObject(
-        LANGUAGES,
-        LANGUAGES.map(lng =>
-          yleislinjaSelected
-            ? `${t('toteutuslomake.lukionYleislinja', {
-                lng,
-              })}${renderOpintojenLaajuus(opintojenLaajuusNumero, t, lng)}`
-            : undefined
-        )
-      ),
-    [t, yleislinjaSelected, opintojenLaajuusNumero]
+      yleislinjaSelected
+        ? [
+            _fp.zipObject(
+              LANGUAGES,
+              LANGUAGES.map(
+                lng =>
+                  `${t('toteutuslomake.lukionYleislinja', {
+                    lng,
+                  })}`
+              )
+            ),
+            ...selectedLinjatTranslations,
+          ]
+        : selectedLinjatTranslations,
+    [t, yleislinjaSelected, selectedLinjatTranslations]
   );
+
   return useMemo(
     () =>
       mapValues((translatedNimiAcc: any, lng) =>
         _fp.reduce(
           (result, linjaTranslations) => {
             const translation = linjaTranslations[lng];
-            return result && translation
-              ? `${result}, ${translation}${renderOpintojenLaajuus(
-                  opintojenLaajuusNumero,
-                  t,
-                  lng
-                )}`
-              : translation +
-                  renderOpintojenLaajuus(opintojenLaajuusNumero, t, lng) ?? '';
+            if (!_fp.isUndefined(result) && translation) {
+              return `${
+                result ? result + ', ' : ''
+              }${translation}${renderOpintojenLaajuus(
+                opintojenLaajuusNumero,
+                t,
+                lng
+              )}`;
+            }
+            return undefined;
           },
           translatedNimiAcc,
-          selectedLinjatTranslations
+          allLinjatTranslations
         )
-      )(initialNameTranslations),
-    [
-      t,
-      initialNameTranslations,
-      selectedLinjatTranslations,
-      opintojenLaajuusNumero,
-    ]
+      )({ fi: null, sv: null, en: null }),
+    [t, allLinjatTranslations, opintojenLaajuusNumero]
   );
 };
 

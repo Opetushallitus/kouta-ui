@@ -78,8 +78,29 @@ test('useLukioToteutusNimi should return empty names with only laajuus given', (
   );
 
   expect(result.current).toEqual({
-    fi: undefined,
-    sv: undefined,
+    fi: null,
+    sv: null,
+    en: null,
+  });
+});
+
+test('useLukioToteutusNimi should not try to create nimi when translations are missing ', () => {
+  const { result } = renderHook(() =>
+    useLukioToteutusNimi({
+      yleislinjaSelected: true,
+      selectedLinjatTranslations: [
+        { fi: 'Painotus 1 fi', sv: 'Painotus 1 sv' },
+        { fi: 'Painotus 2 fi', sv: 'Painotus 2 sv' },
+      ],
+      opintojenLaajuusNumero: 150,
+    })
+  );
+
+  expect(result.current).toEqual({
     en: undefined,
+    fi:
+      'toteutuslomake.lukionYleislinja/fi, 150 yleiset.opintopistetta/fi, Painotus 1 fi, 150 yleiset.opintopistetta/fi, Painotus 2 fi, 150 yleiset.opintopistetta/fi',
+    sv:
+      'toteutuslomake.lukionYleislinja/sv, 150 yleiset.opintopistetta/sv, Painotus 1 sv, 150 yleiset.opintopistetta/sv, Painotus 2 sv, 150 yleiset.opintopistetta/sv',
   });
 });

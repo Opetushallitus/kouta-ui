@@ -9,7 +9,7 @@ import { AsyncCreatableSelect } from '#/src/components/Select';
 import Spacing from '#/src/components/Spacing';
 import {
   KOULUTUSTYYPPI,
-  TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
+  TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
 } from '#/src/constants';
 import { useHttpClient } from '#/src/contexts/HttpClientContext';
 import { useUrls } from '#/src/contexts/UrlContext';
@@ -71,7 +71,8 @@ export const NayttamisTiedotSection = ({ language, name, koulutustyyppi }) => {
   return (
     <>
       {[
-        ...TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT,
+        ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
+        KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS,
         KOULUTUSTYYPPI.AVOIN_YO,
         KOULUTUSTYYPPI.AVOIN_AMK,
         KOULUTUSTYYPPI.TAYDENNYS_KOULUTUS,

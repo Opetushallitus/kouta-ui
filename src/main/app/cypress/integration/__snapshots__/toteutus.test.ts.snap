@@ -120,7 +120,7 @@ exports[`createToteutus > should be able to create ammatillinen tutkinnon osa to
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "toteutuksen nimi"
+    "fi": "Kaivosalan perustutkinto"
   },
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": null,
@@ -256,7 +256,7 @@ exports[`createToteutus > should be able to create ammatillinen toteutus #0`] =
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "toteutuksen nimi"
+    "fi": "Kaivosalan perustutkinto"
   },
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": null,
@@ -411,12 +411,7 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
   "metadata": {
     "alemmanKorkeakoulututkinnonOsaamisalat": [],
     "aloituspaikat": null,
-    "ammattinimikkeet": [
-      {
-        "arvo": "ammattinimike",
-        "kieli": "fi"
-      }
-    ],
+    "ammattinimikkeet": [],
     "asiasanat": [
       {
         "arvo": "avainsana",
@@ -571,7 +566,7 @@ exports[`createToteutus > should be able to create lukio toteutus #0`] =
   },
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "toteutuksen nimi"
+    "fi": "toteutuslomake.lukionYleislinja, 150 yleiset.opintopistetta, Lukion IB-linja, 150 yleiset.opintopistetta, Lukion ICT-linja, 150 yleiset.opintopistetta, Lukion IB-linja (erityinen koulutustehtävä), 150 yleiset.opintopistetta, Lukion ICT-linja (erityinen koulutustehtävä), 150 yleiset.opintopistetta"
   },
   "organisaatioOid": "1.1.1.1.1.1",
   "sorakuvausId": null,
@@ -1015,12 +1010,13 @@ exports[`editToteutus > should be able to edit lukio toteutus #0`] =
         }
       }
     ],
+    "yleislinja": true,
     "ylemmanKorkeakoulututkinnonOsaamisalat": []
   },
   "modified": "2019-03-26T10:19",
   "muokkaaja": "1.2.246.562.24.62301161440",
   "nimi": {
-    "fi": "Koulutuskeskus Salpaus, jatkuva haku, eläintenhoitaja"
+    "fi": "toteutuslomake.lukionYleislinja, 150 yleiset.opintopistetta"
   },
   "oid": "1.3.1.1.1.1",
   "organisaatioOid": "1.1.1.1.1.1",

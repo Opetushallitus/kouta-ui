@@ -7,6 +7,7 @@ import koulutus from '#/cypress/data/koulutus';
 import toteutus from '#/cypress/data/toteutus';
 import valintaperuste from '#/cypress/data/valintaperuste';
 import hakukohdeMocks from '#/cypress/mocks/hakukohde.mock.json';
+import lukioMocks from '#/cypress/mocks/lukio.mocks.json';
 import {
   stubHakemuspalveluLomakkeetRoute,
   stubOppijanumerorekisteriHenkiloRoute,
@@ -77,6 +78,9 @@ export const prepareTest = ({
   };
 
   playMocks(hakukohdeMocks);
+  if (tyyppi === 'lk') {
+    playMocks(lukioMocks);
+  }
   stubHakukohdeFormRoutes({ organisaatioOid, hakuOid });
 
   cy.intercept(

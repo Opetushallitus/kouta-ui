@@ -75,11 +75,13 @@ export const TiedotSection = ({ language, name, koulutustyyppi }) => {
         )
         .includes(koulutustyyppi) && (
         <Box mb={2} {...getTestIdProps('toteutuksenNimi')}>
-          {/* TODO: Lukio-KOMOTOn nimi pitäisi generoida linjojen avulla (KTO-1150)*/}
           <Field
             name={`${name}.nimi.${language}`}
             component={FormFieldInput}
-            disabled={disableFieldsCopiedFromKoulutus}
+            disabled={
+              disableFieldsCopiedFromKoulutus ||
+              koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS
+            }
             label={t('toteutuslomake.toteutuksenNimi')}
             required
           />
@@ -100,7 +102,6 @@ export const TiedotSection = ({ language, name, koulutustyyppi }) => {
       )}
       {
         /* TODO: name-attribuutin alkuun sectionin name. Muuten validointivirheen tullessa tätä kenttää ei osata korostaa oikein. */
-
         <Box mb={2} {...getTestIdProps('toteutuksenKuvaus')}>
           <Field
             name={`kuvaus.${language}`}

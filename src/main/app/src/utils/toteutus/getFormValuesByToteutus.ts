@@ -236,7 +236,7 @@ const getFormValuesByToteutus = (toteutus): ToteutusFormValues => {
         otsikko,
       }))(alemmanKorkeakoulututkinnonOsaamisalat) ?? [],
     lukiolinjat: {
-      yleislinja: yleislinja,
+      yleislinja,
       painotukset: lukiolinjatiedotToFormValues(painotukset),
       erityisetKoulutustehtavat: lukiolinjatiedotToFormValues(
         erityisetKoulutustehtavat

@@ -85,6 +85,13 @@ const useSelectedOsioLinjat = osioFieldName => {
   ]);
 };
 
+const renderOpintojenLaajuus = (opintojenLaajuusNumero, t, lng) =>
+  opintojenLaajuusNumero
+    ? `, ${opintojenLaajuusNumero} ${t('yleiset.opintopistetta', {
+        lng,
+      })}`
+    : '';
+
 type UseLukioToteutusNimiProps = {
   yleislinjaSelected: boolean;
   selectedLinjatTranslations: Array<TranslatedField>;
@@ -103,33 +110,33 @@ export const useLukioToteutusNimi = ({
         LANGUAGES,
         LANGUAGES.map(lng =>
           yleislinjaSelected
-            ? t('hakukohdelomake.lukionYleislinja', { lng })
-            : null
+            ? `${t('toteutuslomake.lukionYleislinja', {
+                lng,
+              })}${renderOpintojenLaajuus(opintojenLaajuusNumero, t, lng)}`
+            : undefined
         )
       ),
-    [t, yleislinjaSelected]
+    [t, yleislinjaSelected, opintojenLaajuusNumero]
   );
   return useMemo(
     () =>
-      mapValues((translatedNimiAcc: any, languageCode) => {
-        const nameWithLinjat = _fp.reduce(
+      mapValues((translatedNimiAcc: any, lng) =>
+        _fp.reduce(
           (result, linjaTranslations) => {
-            const translation = linjaTranslations[languageCode];
+            const translation = linjaTranslations[lng];
             return result && translation
-              ? `${result}, ${translation}`
-              : translation ?? '';
+              ? `${result}, ${translation}${renderOpintojenLaajuus(
+                  opintojenLaajuusNumero,
+                  t,
+                  lng
+                )}`
+              : translation +
+                  renderOpintojenLaajuus(opintojenLaajuusNumero, t, lng) ?? '';
           },
           translatedNimiAcc,
           selectedLinjatTranslations
-        );
-
-        return nameWithLinjat && opintojenLaajuusNumero
-          ? `${nameWithLinjat}, ${opintojenLaajuusNumero} ${t(
-              'yleiset.opintopistetta',
-              { lng: languageCode }
-            )}`
-          : undefined;
-      })(initialNameTranslations),
+        )
+      )(initialNameTranslations),
     [
       t,
       initialNameTranslations,
@@ -204,6 +211,8 @@ export const LukiolinjatSection = ({ name, koulutus }) => {
   const linjaSelectionsEmpty =
     _fp.isEmpty(selectedPainotukset) && _fp.isEmpty(selectedKoulutustehtavat);
 
+  console.log({ nimi });
+
   useSetFieldValue('tiedot.nimi', nimi);
 
   return (
@@ -214,7 +223,7 @@ export const LukiolinjatSection = ({ name, koulutus }) => {
           name={yleislinjaFieldName}
           disabled={linjaSelectionsEmpty}
         >
-          {t('toteutuslomake.lukioYleislinja')}
+          {t('toteutuslomake.lukionYleislinja')}
         </Field>
       </Box>
       <LukiolinjaOsio

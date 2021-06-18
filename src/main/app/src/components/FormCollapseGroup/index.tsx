@@ -8,36 +8,21 @@ import { FIELD_ERROR_CLASSNAME } from '#/src/constants';
 import { useForm } from '#/src/hooks/form';
 import scrollElementIntoView from '#/src/utils/scrollElementIntoView';
 
-const pushIfVisible = ({ child, configured, config }, acc) => {
-  const section = _.get(child, 'props.section');
-  if (
-    !child ||
-    (configured && section && !_.get(config, ['sections', section]))
-  ) {
-    return;
-  }
-  acc.push(child);
-};
-
 type FormCollapseList = Array<React.ReactElement<FormCollapseProps>>;
 
-const getVisibleChildren = (children, config, configured) => {
-  return React.Children.toArray(children).reduce(
-    (acc: FormCollapseList, child: React.ReactNode) => {
-      const res: FormCollapseList = [];
+const getFlattenedChildren = children => {
+  let res: FormCollapseList = [];
+  React.Children.forEach(children, child => {
+    if (!child) {
+      return;
+    } else if (child?.type === React.Fragment) {
+      res = [...res, ...getFlattenedChildren(child?.props?.children)];
+    } else {
+      res.push(child);
+    }
+  });
 
-      if (child?.type === React.Fragment) {
-        for (const subchild of React.Children.toArray(child?.props?.children)) {
-          pushIfVisible({ child: subchild, configured, config }, res);
-        }
-      } else {
-        pushIfVisible({ child, configured, config }, res);
-      }
-
-      return [...acc, ...res];
-    },
-    []
-  ) as FormCollapseList;
+  return res as FormCollapseList;
 };
 
 const getFormCollapseId = id => `FormCollapse_${id}`;
@@ -58,20 +43,19 @@ export const FormCollapseGroup = ({
     submitting: isSubmitting,
   } = useForm();
 
-  const visibleChildren = useMemo(
-    () => getVisibleChildren(children, null, false),
-    [children]
-  );
+  const flattenedChildren = useMemo(() => getFlattenedChildren(children), [
+    children,
+  ]);
 
   const sectionErrors: Array<boolean> = useMemo(
     () =>
-      React.Children.map(visibleChildren, child => {
+      flattenedChildren.map(child => {
         // Get the 'section'-prop of the FormCollapse component
         // TODO: Enforce prop types
         const firstSection = _.get(child, 'props.section');
         return _.get(formErrors, firstSection) != null;
       }),
-    [formErrors, visibleChildren]
+    [formErrors, flattenedChildren]
   );
 
   // initialize the collapse components' open/closed state so that the initial
@@ -118,8 +102,8 @@ export const FormCollapseGroup = ({
 
   return (
     <>
-      {visibleChildren.map((child, index) => {
-        const isLast = index === visibleChildren.length - 1;
+      {flattenedChildren.map((child, index) => {
+        const isLast = index === flattenedChildren.length - 1;
         const childProps = {
           ...(child?.props ?? {}),
           index,

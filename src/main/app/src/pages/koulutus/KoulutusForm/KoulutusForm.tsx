@@ -236,15 +236,17 @@ export const KoulutusForm = ({
             />
           )}
 
-          <FormCollapse
-            section="lisatiedot"
-            header={t('koulutuslomake.koulutuksenLisatiedot')}
-            Component={LisatiedotSection}
-            languages={languageTabs}
-            disabled={onlyTarjoajaRights}
-          />
+          {koulutustyyppi !== KOULUTUSTYYPPI.TUVA && (
+            <FormCollapse
+              section="lisatiedot"
+              header={t('koulutuslomake.koulutuksenLisatiedot')}
+              Component={LisatiedotSection}
+              languages={languageTabs}
+              disabled={onlyTarjoajaRights}
+            />
+          )}
 
-          {!KOULUTUSTYYPPI.TUVA && (
+          {koulutustyyppi !== KOULUTUSTYYPPI.TUVA && (
             <FormCollapse
               section="soraKuvaus"
               header={t('yleiset.soraKuvaus')}

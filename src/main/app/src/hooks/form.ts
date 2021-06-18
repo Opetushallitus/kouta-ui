@@ -5,12 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { change, isDirty, isSubmitting, getFormSubmitErrors } from 'redux-form';
 import formActions from 'redux-form/lib/actions';
 
-import { ENTITY } from '#/src/constants';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useFormName } from '#/src/contexts/FormNameContext';
 import { assert } from '#/src/utils';
 import { getKielivalinta } from '#/src/utils/form/formConfigUtils';
-import getHakuFormConfig from '#/src/utils/haku/getHakuFormConfig';
 
 import { useActions } from './useActions';
 import { useHasChanged } from './useHasChanged';
@@ -72,21 +70,6 @@ export const useSetFieldValue = (name, value) => {
       dispatch(change(form, name, value));
     }
   }, [dispatch, form, name, value, valueHasChanged]);
-};
-
-const formConfigsGettersByEntity = {
-  [ENTITY.HAKU]: getHakuFormConfig,
-};
-
-const getFormConfigByEntity = (entityName, koulutustyyppi) => {
-  return formConfigsGettersByEntity[entityName](koulutustyyppi);
-};
-
-export const useEntityFormConfig = (entityName, koulutustyyppi = undefined) => {
-  return useMemo(
-    () => getFormConfigByEntity(entityName, koulutustyyppi),
-    [entityName, koulutustyyppi]
-  );
 };
 
 export const useFormConfig = () => {

@@ -2,10 +2,8 @@ import React from 'react';
 
 import ReduxForm from '#/src/components/ReduxForm';
 import { KOULUTUSTYYPIT } from '#/src/constants';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
 
 import ToteutusForm, { initialValues } from './index';
-const config = {};
 export default {
   title: 'ToteutusForm',
   argTypes: {
@@ -24,16 +22,14 @@ const Wrapper = ({ koulutustyyppi = 'amm' }) => {
       form="toteutus"
       initialValues={initialValues('koulutuksen nimi', ['fi'])}
     >
-      <FormConfigContext.Provider value={config}>
-        <ToteutusForm
-          organisaatioOid="1.2.246.562.10.594252633210"
-          steps={false}
-          koulutus={{
-            koulutustyyppi,
-          }}
-          koulutustyyppi={koulutustyyppi}
-        />
-      </FormConfigContext.Provider>
+      <ToteutusForm
+        organisaatioOid="1.2.246.562.10.594252633210"
+        steps={false}
+        koulutus={{
+          koulutustyyppi,
+        }}
+        koulutustyyppi={koulutustyyppi}
+      />
     </ReduxForm>
   );
 };

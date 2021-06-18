@@ -14,7 +14,6 @@ import FormSteps from '#/src/components/FormSteps';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
 import useSelectBase from '#/src/hooks/useSelectBase';
 import getFormValuesByKoulutus from '#/src/utils/koulutus/getFormValuesByKoulutus';
 import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
@@ -24,8 +23,6 @@ import KoulutusFooter from './KoulutusFooter';
 import { KoulutusForm } from './KoulutusForm';
 
 const FORM_NAME = 'koulutusForm';
-
-const config = {};
 
 const getCopyValues = koulutus => ({
   pohja: {
@@ -67,29 +64,27 @@ const CreateKoulutusPage = props => {
   return (
     <ReduxForm form={FORM_NAME} initialValues={initialValues}>
       <Title>{t('sivuTitlet.uusiKoulutus')}</Title>
-      <FormConfigContext.Provider value={config}>
-        <FormPage
-          header={<FormHeader>{t('yleiset.koulutus')}</FormHeader>}
-          steps={<FormSteps activeStep={ENTITY.KOULUTUS} />}
-          esikatseluControls={<EsikatseluControls />}
-          footer={
-            <KoulutusFooter
-              formMode={FormMode.CREATE}
-              organisaatioOid={valittuOrganisaatioOid}
-            />
-          }
-        >
-          <RelationInfoContainer>
-            <OrganisaatioRelation organisaatioOid={valittuOrganisaatioOid} />
-          </RelationInfoContainer>
-          <KoulutusForm
-            steps
-            isNewKoulutus={true}
+      <FormPage
+        header={<FormHeader>{t('yleiset.koulutus')}</FormHeader>}
+        steps={<FormSteps activeStep={ENTITY.KOULUTUS} />}
+        esikatseluControls={<EsikatseluControls />}
+        footer={
+          <KoulutusFooter
+            formMode={FormMode.CREATE}
             organisaatioOid={valittuOrganisaatioOid}
-            onSelectBase={selectBase}
           />
-        </FormPage>
-      </FormConfigContext.Provider>
+        }
+      >
+        <RelationInfoContainer>
+          <OrganisaatioRelation organisaatioOid={valittuOrganisaatioOid} />
+        </RelationInfoContainer>
+        <KoulutusForm
+          steps
+          isNewKoulutus={true}
+          organisaatioOid={valittuOrganisaatioOid}
+          onSelectBase={selectBase}
+        />
+      </FormPage>
     </ReduxForm>
   );
 };

@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 import { FormCollapseProps } from '#/src/components/FormCollapse';
 import { FIELD_ERROR_CLASSNAME } from '#/src/constants';
-import { useFormConfig, useForm } from '#/src/hooks/form';
+import { useForm } from '#/src/hooks/form';
 import scrollElementIntoView from '#/src/utils/scrollElementIntoView';
 
 const pushIfVisible = ({ child, configured, config }, acc) => {
@@ -45,15 +45,12 @@ const getFormCollapseId = id => `FormCollapse_${id}`;
 export const FormCollapseGroup = ({
   enabled = true,
   defaultActiveStep = 0,
-  configured = false,
   defaultOpen = true,
   children,
 }) => {
   const [sectionNeedsFocus, setSectionNeedsFocus] = useState<number | null>();
   const [errorsNeedAttention, setErrorsNeedAttention] =
     useState<boolean>(false);
-
-  const config = useFormConfig();
 
   const {
     submitFailed,
@@ -62,8 +59,8 @@ export const FormCollapseGroup = ({
   } = useForm();
 
   const visibleChildren = useMemo(
-    () => getVisibleChildren(children, config, configured),
-    [children, config, configured]
+    () => getVisibleChildren(children, null, false),
+    [children]
   );
 
   const sectionErrors: Array<boolean> = useMemo(

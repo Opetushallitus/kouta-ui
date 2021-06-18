@@ -15,7 +15,6 @@ import FullSpin from '#/src/components/FullSpin';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { KOULUTUSTYYPPI, ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { getFormValuesByHakukohde } from '#/src/utils/hakukohde/getFormValuesByHakukohde';
@@ -26,7 +25,6 @@ import { HakukohdeFooter } from './HakukohdeFooter';
 import { HakukohdeForm } from './HakukohdeForm';
 
 const FORM_NAME = 'hakukohdeForm';
-const formConfig = {};
 
 export const EditHakukohdePage = props => {
   const {
@@ -65,70 +63,64 @@ export const EditHakukohdePage = props => {
     [hakukohde]
   );
 
-  const config = useMemo(
-    () => ({ ...formConfig, readOnly: !canUpdate }),
-    [canUpdate]
-  );
-
   return isLoading ? (
     <FullSpin />
   ) : (
-    <ReduxForm form={FORM_NAME} initialValues={initialValues}>
+    <ReduxForm
+      form={FORM_NAME}
+      initialValues={initialValues}
+      disabled={!canUpdate}
+    >
       <Title>{t('sivuTitlet.hakukohteenMuokkaus')}</Title>
-      <FormConfigContext.Provider value={config}>
-        <FormPage
-          readOnly={!canUpdate}
-          header={
-            <EntityFormHeader
-              entityType={ENTITY.HAKUKOHDE}
-              entity={hakukohde}
-            />
-          }
-          steps={<FormSteps activeStep={ENTITY.HAKUKOHDE} />}
-          footer={
-            <HakukohdeFooter
-              formMode={FormMode.EDIT}
+      <FormPage
+        readOnly={!canUpdate}
+        header={
+          <EntityFormHeader entityType={ENTITY.HAKUKOHDE} entity={hakukohde} />
+        }
+        steps={<FormSteps activeStep={ENTITY.HAKUKOHDE} />}
+        footer={
+          <HakukohdeFooter
+            formMode={FormMode.EDIT}
+            organisaatioOid={organisaatioOid}
+            hakukohde={hakukohde}
+            toteutus={toteutus}
+            koulutustyyppi={
+              koulutustyyppi || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
+            }
+            haku={haku}
+            canUpdate={canUpdate}
+          />
+        }
+        esikatseluControls={
+          <EsikatseluControls
+            esikatseluUrl={apiUrls.url(
+              'konfo-ui.toteutus',
+              hakukohde?.toteutusOid
+            )}
+          />
+        }
+      >
+        <>
+          <RelationInfoContainer>
+            <HakuRelation organisaatioOid={organisaatioOid} haku={haku} />
+            <ToteutusRelation
               organisaatioOid={organisaatioOid}
-              hakukohde={hakukohde}
               toteutus={toteutus}
-              koulutustyyppi={
-                koulutustyyppi || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
-              }
-              haku={haku}
-              canUpdate={canUpdate}
             />
-          }
-          esikatseluControls={
-            <EsikatseluControls
-              esikatseluUrl={apiUrls.url(
-                'konfo-ui.toteutus',
-                hakukohde?.toteutusOid
-              )}
-            />
-          }
-        >
-          <>
-            <RelationInfoContainer>
-              <HakuRelation organisaatioOid={organisaatioOid} haku={haku} />
-              <ToteutusRelation
-                organisaatioOid={organisaatioOid}
-                toteutus={toteutus}
-              />
-              <OrganisaatioRelation organisaatioOid={organisaatioOid} />
-            </RelationInfoContainer>
-            <HakukohdeForm
-              steps={false}
-              organisaatioOid={organisaatioOid}
-              haku={haku}
-              toteutus={toteutus}
-              tarjoajat={tarjoajat}
-              koulutustyyppi={
-                koulutustyyppi || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
-              }
-            />
-          </>
-        </FormPage>
-      </FormConfigContext.Provider>
+            <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+          </RelationInfoContainer>
+          <HakukohdeForm
+            steps={false}
+            organisaatioOid={organisaatioOid}
+            haku={haku}
+            toteutus={toteutus}
+            tarjoajat={tarjoajat}
+            koulutustyyppi={
+              koulutustyyppi || KOULUTUSTYYPPI.AMMATILLINEN_KOULUTUS
+            }
+          />
+        </>
+      </FormPage>
     </ReduxForm>
   );
 };

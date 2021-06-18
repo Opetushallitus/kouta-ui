@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useContextOrThrow } from '../hooks/useContextOrThrow';
+import { useContextOrThrow } from '#/src/hooks/useContextOrThrow';
 
 export const AuthorizedUserContext = React.createContext<any>(undefined);
 AuthorizedUserContext.displayName = 'AuthorizedUserContext';

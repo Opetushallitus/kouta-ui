@@ -16,7 +16,6 @@ import {
   ORGANISAATIOTYYPPI,
   FormMode,
 } from '#/src/constants';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import useOrganisaatio, { useOrganisaatiot } from '#/src/hooks/useOrganisaatio';
@@ -91,11 +90,6 @@ export const OppilaitoksenOsaPage = ({
 
   const readOnly = oppilaitoksenOsa ? !canUpdate : !canCreate;
 
-  const config = useMemo(
-    () => ({ noFieldConfigs: true, readOnly }),
-    [readOnly]
-  );
-
   const initialValues = useMemo(
     () => ({
       ...(formMode === FormMode.CREATE
@@ -131,43 +125,45 @@ export const OppilaitoksenOsaPage = ({
   return isFetching ? (
     <FullSpin />
   ) : (
-    <ReduxForm form="oppilaitoksenOsa" initialValues={initialValues}>
-      <FormConfigContext.Provider value={config}>
-        <Title>{t('sivuTitlet.oppilaitoksenOsa')}</Title>
-        <FormPage
-          readOnly={readOnly}
-          steps={<OppilaitosFormSteps activeStep={ENTITY.OPPILAITOKSEN_OSA} />}
-          header={
-            <EntityFormHeader
-              entityType={ENTITY.OPPILAITOKSEN_OSA}
-              entity={{ ...(organisaatio ?? {}), ...(oppilaitoksenOsa ?? {}) }}
-            />
-          }
-          footer={
-            <OppilaitoksenOsaPageFooter
-              oppilaitoksenOsa={oppilaitoksenOsa}
-              organisaatioOid={organisaatioOid}
-              readOnly={readOnly}
-            />
-          }
-          esikatseluControls={
-            <EsikatseluControls
-              esikatseluUrl={
-                oppilaitoksenOsa &&
-                apiUrls.url('konfo-ui.oppilaitoksenOsa', organisaatioOid)
-              }
-            />
-          }
-        >
-          {organisaatio ? (
-            <OppilaitoksenOsaForm
-              organisaatioOid={organisaatioOid}
-              steps={stepsEnabled}
-              showArkistoituTilaOption={showArkistoituTilaOption}
-            />
-          ) : null}
-        </FormPage>
-      </FormConfigContext.Provider>
+    <ReduxForm
+      form="oppilaitoksenOsa"
+      initialValues={initialValues}
+      disabled={readOnly}
+    >
+      <Title>{t('sivuTitlet.oppilaitoksenOsa')}</Title>
+      <FormPage
+        readOnly={readOnly}
+        steps={<OppilaitosFormSteps activeStep={ENTITY.OPPILAITOKSEN_OSA} />}
+        header={
+          <EntityFormHeader
+            entityType={ENTITY.OPPILAITOKSEN_OSA}
+            entity={{ ...(organisaatio ?? {}), ...(oppilaitoksenOsa ?? {}) }}
+          />
+        }
+        footer={
+          <OppilaitoksenOsaPageFooter
+            oppilaitoksenOsa={oppilaitoksenOsa}
+            organisaatioOid={organisaatioOid}
+            readOnly={readOnly}
+          />
+        }
+        esikatseluControls={
+          <EsikatseluControls
+            esikatseluUrl={
+              oppilaitoksenOsa &&
+              apiUrls.url('konfo-ui.oppilaitoksenOsa', organisaatioOid)
+            }
+          />
+        }
+      >
+        {organisaatio ? (
+          <OppilaitoksenOsaForm
+            organisaatioOid={organisaatioOid}
+            steps={stepsEnabled}
+            showArkistoituTilaOption={showArkistoituTilaOption}
+          />
+        ) : null}
+      </FormPage>
     </ReduxForm>
   );
 };

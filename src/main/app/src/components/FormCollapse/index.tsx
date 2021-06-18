@@ -7,7 +7,6 @@ import styled from 'styled-components';
 import Button from '#/src/components/Button';
 import Collapse from '#/src/components/Collapse';
 import { Box, Typography } from '#/src/components/virkailija';
-import FormConfigSectionContext from '#/src/contexts/FormConfigSectionContext';
 import { LanguageTabContext } from '#/src/contexts/LanguageTabContext';
 import { getTestIdProps } from '#/src/utils';
 
@@ -149,13 +148,7 @@ export const FormCollapse = ({
         {...props}
       >
         <LanguageTabContext.Provider value={language}>
-          {section ? (
-            <FormConfigSectionContext.Provider value={section}>
-              <Component name={section} {...childProps} />
-            </FormConfigSectionContext.Provider>
-          ) : (
-            <Component name={section} {...childProps} />
-          )}
+          <Component name={section} {...childProps} />
         </LanguageTabContext.Provider>
       </Collapse>
     </Box>

@@ -6,7 +6,7 @@ import { simpleMapProps } from '#/src/components/formFields';
 import FormHelperTextMulti from '#/src/components/FormHelperTextMulti';
 import { FormControl, FormLabel } from '#/src/components/virkailija';
 import { FIELD_ERROR_CLASSNAME } from '#/src/constants';
-import { useFormConfig } from '#/src/hooks/form';
+import { useFormIsDisabled } from '#/src/contexts/FormContext';
 
 export const createComponent = (Component, mapProps = simpleMapProps) => {
   const InputComponent = props => {
@@ -32,7 +32,7 @@ export const createComponent = (Component, mapProps = simpleMapProps) => {
       })
     );
 
-    const { readOnly } = useFormConfig();
+    const readOnly = useFormIsDisabled();
 
     return (
       <div className={isError ? FIELD_ERROR_CLASSNAME : ''}>

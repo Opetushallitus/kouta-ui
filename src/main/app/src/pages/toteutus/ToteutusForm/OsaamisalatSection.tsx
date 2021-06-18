@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 import AbstractCollapse from '#/src/components/AbstractCollapse';
 import Anchor, { RouterAnchor } from '#/src/components/Anchor';
-import FieldGroup from '#/src/components/FieldGroup';
+import { FieldGroup } from '#/src/components/FieldGroup';
 import {
   FormFieldInput,
   FormFieldCheckboxGroup,

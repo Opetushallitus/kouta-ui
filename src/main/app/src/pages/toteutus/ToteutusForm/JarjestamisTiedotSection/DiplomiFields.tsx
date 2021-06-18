@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
 
-import FieldGroup from '#/src/components/FieldGroup';
+import { FieldGroup } from '#/src/components/FieldGroup';
 import { FormFieldInput, FormFieldUrlInput } from '#/src/components/formFields';
 import { KoodistoCollapseList } from '#/src/components/KoodistoCollapseList';
 import { Box, Typography } from '#/src/components/virkailija';

@@ -43,9 +43,10 @@ export const FormCollapseGroup = ({
     submitting: isSubmitting,
   } = useForm();
 
-  const flattenedChildren = useMemo(() => getFlattenedChildren(children), [
-    children,
-  ]);
+  const flattenedChildren = useMemo(
+    () => getFlattenedChildren(children),
+    [children]
+  );
 
   const sectionErrors: Array<boolean> = useMemo(
     () =>

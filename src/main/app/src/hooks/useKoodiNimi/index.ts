@@ -9,10 +9,10 @@ export const useKoodiNimi = (koodiUri, { language: languageOpt } = {}) => {
   const language = useUserLanguage();
   const koodiLanguage = languageOpt || language;
 
-  const nimi = useMemo(() => getKoodiNimiTranslation(koodi, koodiLanguage), [
-    koodi,
-    koodiLanguage,
-  ]);
+  const nimi = useMemo(
+    () => getKoodiNimiTranslation(koodi, koodiLanguage),
+    [koodi, koodiLanguage]
+  );
 
   return { nimi, ...rest };
 };

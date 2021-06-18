@@ -39,11 +39,8 @@ const getHakukohteenLinja = values => {
   if (!values?.hakukohteenLinja) {
     return null;
   }
-  const {
-    alinHyvaksyttyKeskiarvo,
-    linja,
-    lisatietoa,
-  } = values.hakukohteenLinja;
+  const { alinHyvaksyttyKeskiarvo, linja, lisatietoa } =
+    values.hakukohteenLinja;
   return {
     linja: linja !== LUKIO_YLEISLINJA ? linja : null,
     alinHyvaksyttyKeskiarvo:
@@ -92,13 +89,11 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
 
   const liitteidenToimitusaika = values?.liitteet?.toimitusaika || null;
 
-  const liitteetOnkoSamaToimitusosoite = getLiitteillaYhteinenToimitusosoite(
-    values
-  );
+  const liitteetOnkoSamaToimitusosoite =
+    getLiitteillaYhteinenToimitusosoite(values);
 
-  const liitteetOnkoSamaToimitusaika = getLiitteillaYhteinenToimitusaika(
-    values
-  );
+  const liitteetOnkoSamaToimitusaika =
+    getLiitteillaYhteinenToimitusaika(values);
 
   const ajankohta = values?.ajankohta;
 
@@ -133,8 +128,8 @@ export const getHakukohdeByFormValues = (values: HakukohdeFormValues) => {
 
   const nimi = pickTranslations(values?.perustiedot?.nimi || null);
 
-  const toinenAsteOnkoKaksoistutkinto = !!values?.perustiedot
-    ?.voiSuorittaaKaksoistutkinnon;
+  const toinenAsteOnkoKaksoistutkinto =
+    !!values?.perustiedot?.voiSuorittaaKaksoistutkinnon;
 
   const valintakokeet = getKokeetTaiLisanaytotData({
     valintakoeValues: values?.valintakokeet,

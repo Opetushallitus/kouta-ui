@@ -94,7 +94,9 @@ class RoleBuilder {
 
   hasReadOneOf(roles, organisaatio) {
     return this.hasOneOfFn(
-      rb => (...args) => rb.hasRead(...args),
+      rb =>
+        (...args) =>
+          rb.hasRead(...args),
       roles,
       organisaatio
     );
@@ -102,7 +104,9 @@ class RoleBuilder {
 
   hasReadAll(roles, organisaatio) {
     return this.hasAllFn(
-      rb => (...args) => rb.hasRead(...args),
+      rb =>
+        (...args) =>
+          rb.hasRead(...args),
       roles,
       organisaatio
     );
@@ -121,7 +125,9 @@ class RoleBuilder {
 
   hasUpdateOneOf(roles, organisaatio) {
     return this.hasOneOfFn(
-      rb => (...args) => rb.hasUpdate(...args),
+      rb =>
+        (...args) =>
+          rb.hasUpdate(...args),
       roles,
       organisaatio
     );
@@ -129,7 +135,9 @@ class RoleBuilder {
 
   hasUpdateAll(roles, organisaatio) {
     return this.hasAllFn(
-      rb => (...args) => rb.hasUpdate(...args),
+      rb =>
+        (...args) =>
+          rb.hasUpdate(...args),
       roles,
       organisaatio
     );
@@ -148,7 +156,9 @@ class RoleBuilder {
 
   hasCreateOneOf(roles, organisaatio) {
     return this.hasOneOfFn(
-      rb => (...args) => rb.hasCreate(...args),
+      rb =>
+        (...args) =>
+          rb.hasCreate(...args),
       roles,
       organisaatio
     );
@@ -156,7 +166,9 @@ class RoleBuilder {
 
   hasCreateAll(roles, organisaatio) {
     return this.hasAllFn(
-      rb => (...args) => rb.hasCreate(...args),
+      rb =>
+        (...args) =>
+          rb.hasCreate(...args),
       roles,
       organisaatio
     );

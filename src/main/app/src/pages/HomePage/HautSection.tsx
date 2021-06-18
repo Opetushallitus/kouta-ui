@@ -119,10 +119,10 @@ const KoulutuksetSection = ({ organisaatioOid, canCreate }) => {
     return haut ? haut.map(haku => ({ ...haku, key: haku.oid })) : null;
   }, [haut]);
 
-  const tableColumns = useMemo(() => makeTableColumns(t, organisaatioOid), [
-    t,
-    organisaatioOid,
-  ]);
+  const tableColumns = useMemo(
+    () => makeTableColumns(t, organisaatioOid),
+    [t, organisaatioOid]
+  );
 
   return (
     <>

@@ -12,11 +12,8 @@ export default function getEPerusteKuvausHTML(ePeruste, i18n) {
     {}
   );
 
-  const {
-    kuvaus,
-    tyotehtavatJoissaVoiToimia,
-    suorittaneenOsaaminen,
-  } = ePeruste;
+  const { kuvaus, tyotehtavatJoissaVoiToimia, suorittaneenOsaaminen } =
+    ePeruste;
 
   if (tyotehtavatJoissaVoiToimia && suorittaneenOsaaminen) {
     return _.mapValues(TRANSLATORS, (t, lang) =>

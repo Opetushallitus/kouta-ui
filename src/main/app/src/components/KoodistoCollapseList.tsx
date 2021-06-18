@@ -11,6 +11,13 @@ import { koodiUriWithoutVersion } from '../utils/koodi/koodiUriWithoutVersion';
 import { FormFieldAsyncKoodistoSelect } from './formFields';
 import { SectionInnerCollapse } from './SectionInnerCollapse';
 
+type CollapseContentProps = {
+  koodiUri: string;
+  index: number;
+  name: string;
+  itemProps: any;
+};
+
 export const KoodistoCollapseList = ({
   name,
   selectLabel,
@@ -18,6 +25,13 @@ export const KoodistoCollapseList = ({
   koodistoData,
   formatLabel,
   itemProps,
+}: {
+  name: string;
+  selectLabel: string;
+  CollapseContent: React.ComponentType<CollapseContentProps>;
+  koodistoData: Array<Koodi>;
+  formatLabel?: (koodi: string, language: LanguageCode) => string;
+  itemProps: any;
 }) => {
   const selectedItems = useFieldValue(`${name}.valinnat`);
   const userLanguage = useUserLanguage();

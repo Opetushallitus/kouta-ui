@@ -102,8 +102,11 @@ export const getKoulutusByKoodi = async ({
 
   const { koodiArvo } = latestKoodi;
 
-  const { kuvaus = null, osaamisalat = [], tutkintonimikeKoodit = [] } =
-    ePerusteetData[0] || {};
+  const {
+    kuvaus = null,
+    osaamisalat = [],
+    tutkintonimikeKoodit = [],
+  } = ePerusteetData[0] || {};
 
   return {
     koodiArvo,

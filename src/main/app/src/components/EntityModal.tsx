@@ -30,10 +30,8 @@ export const EntityModal = ({
 }: EntityModalProps) => {
   const { t } = useTranslation();
 
-  const [
-    selectedEntityOption,
-    setSelectedEntityOption,
-  ] = useState<SelectValue>();
+  const [selectedEntityOption, setSelectedEntityOption] =
+    useState<SelectValue>();
 
   const onSubmit = useCallback(() => {
     onSubmitProp({ oid: selectedEntityOption?.value });

@@ -2,7 +2,7 @@ import { playMocks } from 'kto-ui-common/cypress/mockUtils';
 import _fp from 'lodash/fp';
 
 import koulutus from '#/cypress/data/koulutus';
-import toteutusLukioMocks from '#/cypress/mocks/toteutus-lukio.mocks.json';
+import lukioMocks from '#/cypress/mocks/lukio.mocks.json';
 import toteutusMocks from '#/cypress/mocks/toteutus.mocks.json';
 import { stubToteutusFormRoutes } from '#/cypress/toteutusFormUtils';
 import {
@@ -135,13 +135,14 @@ const fillJarjestajatSection = () => {
   });
 };
 
-const fillTiedotSection = () => {
+const fillTiedotSection = tyyppi => {
   getByTestId('tiedotSection').within(() => {
-    getByTestId('toteutuksenNimi')
-      .find('input')
-      .clear({ force: true })
-      .pipe(paste('toteutuksen nimi'));
-
+    if (['yo', 'amk'].includes(tyyppi)) {
+      getByTestId('toteutuksenNimi')
+        .find('input')
+        .clear()
+        .pipe(paste('toteutuksen nimi'));
+    }
     getByTestId('toteutuksenKuvaus').within(() => {
       typeToEditor('Toteutuksen kuvaus');
     });
@@ -285,7 +286,7 @@ const prepareTest = tyyppi => {
   playMocks(toteutusMocks);
 
   if (tyyppi === 'lk') {
-    playMocks(toteutusLukioMocks);
+    playMocks(lukioMocks);
   }
 
   stubToteutusFormRoutes({ organisaatioOid });
@@ -317,7 +318,7 @@ export const createToteutusForm = () => {
 
     fillPohjaSection();
     fillKieliversiotSection({ jatka: true });
-    fillTiedotSection();
+    fillTiedotSection('amm-tutkinnon-osa');
 
     getByTestId('jarjestamistiedotSection').within(() => {
       fillCommonJarjestamistiedot();
@@ -404,7 +405,7 @@ export const createToteutusForm = () => {
 
     fillPohjaSection();
     fillKieliversiotSection({ jatka: true });
-    fillTiedotSection();
+    fillTiedotSection('amm');
 
     getByTestId('osaamisalatSection').within(() => {
       getByTestId('osaamisalaSelection').within(() => {
@@ -452,7 +453,7 @@ export const createToteutusForm = () => {
 
     fillPohjaSection();
     fillKieliversiotSection({ jatka: true });
-    fillTiedotSection();
+    fillTiedotSection('yo');
 
     // NOTE: Korkeakoulu osaamisalat hidden for now (KTO-286, KTO-1175)
     /*
@@ -505,7 +506,7 @@ export const createToteutusForm = () => {
 
     fillPohjaSection();
     fillKieliversiotSection({ jatka: true });
-    fillTiedotSection();
+    fillTiedotSection('lk');
 
     fillLukiolinjatSection();
 
@@ -517,7 +518,7 @@ export const createToteutusForm = () => {
     });
 
     fillTeemakuvaSection();
-    fillNayttamistiedotSection();
+    fillNayttamistiedotSection({ ammattinimikkeet: false });
     fillJarjestajatSection();
     fillYhteystiedotSection();
     fillTilaSection();

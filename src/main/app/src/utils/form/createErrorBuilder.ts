@@ -223,8 +223,11 @@ class ErrorBuilder {
   }
 }
 
-const bindValidator = name => (...props) => eb =>
-  ErrorBuilder.prototype[name].call(eb, ...props);
+const bindValidator =
+  name =>
+  (...props) =>
+  eb =>
+    ErrorBuilder.prototype[name].call(eb, ...props);
 
 // TODO: Refactor these as simple pure functional validators that always return a new {values, errors, languages} -object
 export const validate = bindValidator('validate');

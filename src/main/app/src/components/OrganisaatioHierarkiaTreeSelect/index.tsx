@@ -15,10 +15,10 @@ const OrganisaatioHierarkiaTreeSelect = ({ hierarkia, ...props }) => {
     [language]
   );
 
-  const sortedHierarkia = useMemo(() => sortTreeBy(hierarkia, getLabel), [
-    getLabel,
-    hierarkia,
-  ]);
+  const sortedHierarkia = useMemo(
+    () => sortTreeBy(hierarkia, getLabel),
+    [getLabel, hierarkia]
+  );
 
   return (
     <TreeSelect

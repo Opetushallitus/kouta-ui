@@ -65,56 +65,54 @@ const validateLiitteet = errorBuilder => {
   )(errorBuilder);
 };
 
-export const validateHakukohdeForm = koulutustyyppi => (
-  values,
-  registeredFields
-) => {
-  const kieliversiot = getKielivalinta(values);
+export const validateHakukohdeForm =
+  koulutustyyppi => (values, registeredFields) => {
+    const kieliversiot = getKielivalinta(values);
 
-  return _fp
-    .flow(
-      validateExistence('tila'),
-      validateArrayMinLength('kieliversiot', 1),
-      validateTranslations('perustiedot.nimi'),
-      validateOptionalTranslatedField('aloituspaikat.aloituspaikkakuvaus'),
+    return _fp
+      .flow(
+        validateExistence('tila'),
+        validateArrayMinLength('kieliversiot', 1),
+        validateTranslations('perustiedot.nimi'),
+        validateOptionalTranslatedField('aloituspaikat.aloituspaikkakuvaus'),
 
-      validateIfJulkaistu(
-        validateArrayMinLength('pohjakoulutus.pohjakoulutusvaatimus', 1),
-        validateValintakokeet,
-        validateLiitteet,
-        validateExistence('jarjestyspaikkaOid'),
-        validateIf(
-          koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS,
-          validateExistence('hakukohteenLinja.linja'),
-          validateExistence('hakukohteenLinja.alinHyvaksyttyKeskiarvo')
-        ),
-        validateIf(
-          values?.hakuajat?.eriHakuaika,
-          validateArrayMinLength('hakuajat.hakuajat', 1, {
-            isFieldArray: true,
-          }),
-          validateArray('hakuajat.hakuajat', eb =>
-            eb.validateExistence('alkaa')
+        validateIfJulkaistu(
+          validateArrayMinLength('pohjakoulutus.pohjakoulutusvaatimus', 1),
+          validateValintakokeet,
+          validateLiitteet,
+          validateExistence('jarjestyspaikkaOid'),
+          validateIf(
+            koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS,
+            validateExistence('hakukohteenLinja.linja'),
+            validateExistence('hakukohteenLinja.alinHyvaksyttyKeskiarvo')
+          ),
+          validateIf(
+            values?.hakuajat?.eriHakuaika,
+            validateArrayMinLength('hakuajat.hakuajat', 1, {
+              isFieldArray: true,
+            }),
+            validateArray('hakuajat.hakuajat', eb =>
+              eb.validateExistence('alkaa')
+            )
+          ),
+          validateIf(
+            values?.ajankohta?.kaytetaanHakukohteenAlkamiskautta,
+            validateExistence('ajankohta.ajankohtaTyyppi')
+          ),
+          validateIf(
+            values?.ajankohta?.kaytetaanHakukohteenAlkamiskautta &&
+              values?.ajankohta?.ajankohtaTyyppi ===
+                Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI,
+            validateExistence('ajankohta.kausi'),
+            validateExistence('ajankohta.vuosi')
+          ),
+          validateIf(
+            values?.ajankohta?.kaytetaanHakukohteenAlkamiskautta &&
+              values?.ajankohta?.ajankohtaTyyppi ===
+                Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,
+            validateExistenceOfDate('ajankohta.tarkkaAlkaa')
           )
-        ),
-        validateIf(
-          values?.ajankohta?.kaytetaanHakukohteenAlkamiskautta,
-          validateExistence('ajankohta.ajankohtaTyyppi')
-        ),
-        validateIf(
-          values?.ajankohta?.kaytetaanHakukohteenAlkamiskautta &&
-            values?.ajankohta?.ajankohtaTyyppi ===
-              Alkamiskausityyppi.ALKAMISKAUSI_JA_VUOSI,
-          validateExistence('ajankohta.kausi'),
-          validateExistence('ajankohta.vuosi')
-        ),
-        validateIf(
-          values?.ajankohta?.kaytetaanHakukohteenAlkamiskautta &&
-            values?.ajankohta?.ajankohtaTyyppi ===
-              Alkamiskausityyppi.TARKKA_ALKAMISAJANKOHTA,
-          validateExistenceOfDate('ajankohta.tarkkaAlkaa')
         )
-      )
-    )(createErrorBuilder(values, kieliversiot, registeredFields))
-    .getErrors();
-};
+      )(createErrorBuilder(values, kieliversiot, registeredFields))
+      .getErrors();
+  };

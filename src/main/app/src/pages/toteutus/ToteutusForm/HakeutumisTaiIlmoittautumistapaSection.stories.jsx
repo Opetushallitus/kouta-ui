@@ -10,7 +10,7 @@ import HakeutumisTaiIlmoittautumistapaSection from './HakeutumisTaiIlmoittautumi
 
 storiesOf('HakeutumisTaiIlmoittautumisTapaSection', module).add('Basic', () => (
   <ReduxForm form={'toteutus'}>
-    <FormConfigContext.Provider value={{ noFieldConfigs: true }}>
+    <FormConfigContext.Provider value={{}}>
       <FormConfigSectionContext.Provider value="hakeutumisTaiIlmoittautumistapa">
         <HakeutumisTaiIlmoittautumistapaSection language="fi" />
       </FormConfigSectionContext.Provider>

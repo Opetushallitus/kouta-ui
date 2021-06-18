@@ -22,7 +22,7 @@ import { ValintaperusteFooter } from './ValintaperusteFooter';
 import { ValintaperusteForm, initialValues } from './ValintaperusteForm';
 
 const FORM_NAME = 'valintaperusteForm';
-const formConfig = { noFieldConfigs: true };
+const formConfig = {};
 
 const getCopyValues = valintaperusteId => ({
   pohja: {

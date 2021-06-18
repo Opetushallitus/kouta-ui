@@ -71,10 +71,7 @@ const EditToteutusPage = props => {
     [toteutus]
   );
 
-  const formConfig = useMemo(
-    () => ({ noFieldConfigs: true, readOnly: !canUpdate }),
-    [canUpdate]
-  );
+  const formConfig = useMemo(() => ({ readOnly: !canUpdate }), [canUpdate]);
 
   return !toteutus ? (
     <FullSpin />

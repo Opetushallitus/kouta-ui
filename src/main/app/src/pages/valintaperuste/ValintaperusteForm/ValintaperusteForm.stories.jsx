@@ -9,7 +9,7 @@ export default {
   title: 'ValintaperusteForm',
 };
 
-const formConfig = { noFieldConfigs: true };
+const formConfig = {};
 
 const Wrapper = () => {
   const initial = initialValues(['fi']);

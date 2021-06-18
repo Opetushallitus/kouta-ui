@@ -25,7 +25,7 @@ import { KoulutusForm } from './KoulutusForm';
 
 const FORM_NAME = 'koulutusForm';
 
-const config = { noFieldConfigs: true };
+const config = {};
 
 const getCopyValues = koulutus => ({
   pohja: {

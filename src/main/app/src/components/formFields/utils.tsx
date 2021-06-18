@@ -6,10 +6,6 @@ import { simpleMapProps } from '#/src/components/formFields';
 import FormHelperTextMulti from '#/src/components/FormHelperTextMulti';
 import { FormControl, FormLabel } from '#/src/components/virkailija';
 import { FIELD_ERROR_CLASSNAME } from '#/src/constants';
-import {
-  useFieldConfig,
-  useFieldIsRequired,
-} from '#/src/hooks/fieldConfigHooks';
 import { useFormConfig } from '#/src/hooks/form';
 
 export const createComponent = (Component, mapProps = simpleMapProps) => {
@@ -19,9 +15,8 @@ export const createComponent = (Component, mapProps = simpleMapProps) => {
       label = '',
       helperText,
       meta,
-      required: requiredProp,
+      required,
       input: { name },
-      configurable = true,
     } = props;
 
     const { error } = meta;
@@ -37,11 +32,9 @@ export const createComponent = (Component, mapProps = simpleMapProps) => {
       })
     );
 
-    const fieldConfig = useFieldConfig(name);
-    const { readOnly, noFieldConfigs } = useFormConfig();
-    const required = useFieldIsRequired(fieldConfig);
+    const { readOnly } = useFormConfig();
 
-    return noFieldConfigs || fieldConfig || !configurable ? (
+    return (
       <div className={isError ? FIELD_ERROR_CLASSNAME : ''}>
         <FormControl
           error={isError}
@@ -51,7 +44,7 @@ export const createComponent = (Component, mapProps = simpleMapProps) => {
           label={
             label ? (
               <FormLabel error={error} disabled={disabled} mb={1} id={labelId}>
-                {`${label}${required || requiredProp ? ' *' : ''}`}
+                {`${label}${required ? ' *' : ''}`}
               </FormLabel>
             ) : undefined
           }
@@ -60,8 +53,6 @@ export const createComponent = (Component, mapProps = simpleMapProps) => {
           {children}
         </FormControl>
       </div>
-    ) : (
-      <></>
     );
   };
 

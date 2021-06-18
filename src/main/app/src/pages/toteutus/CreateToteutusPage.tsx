@@ -33,7 +33,7 @@ import ToteutusForm from './ToteutusForm';
 
 const { AMMATILLINEN_KOULUTUS, TUTKINNON_OSA, OSAAMISALA } = KOULUTUSTYYPPI;
 
-const config = { noFieldConfigs: true };
+const config = {};
 
 const getCopyValues = toteutusOid => ({
   pohja: {

@@ -26,7 +26,7 @@ import { HakukohdeFooter } from './HakukohdeFooter';
 import { HakukohdeForm } from './HakukohdeForm';
 
 const FORM_NAME = 'hakukohdeForm';
-const formConfig = { noFieldConfigs: true };
+const formConfig = {};
 
 export const EditHakukohdePage = props => {
   const {

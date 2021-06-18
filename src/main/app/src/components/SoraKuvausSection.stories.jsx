@@ -7,7 +7,7 @@ import FormConfigSectionContext from '../contexts/FormConfigSectionContext';
 import ReduxForm from './ReduxForm';
 import SoraKuvausSection from './SoraKuvausSection';
 
-const formConfig = { noFieldConfigs: true };
+const formConfig = {};
 
 storiesOf('SoraKuvausSection', module).add('Basic', () => (
   <ReduxForm form={'valintaperuste'}>

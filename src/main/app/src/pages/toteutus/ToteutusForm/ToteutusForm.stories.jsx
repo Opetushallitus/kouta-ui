@@ -5,7 +5,7 @@ import { KOULUTUSTYYPIT } from '#/src/constants';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
 
 import ToteutusForm, { initialValues } from './index';
-const config = { noFieldConfigs: true };
+const config = {};
 export default {
   title: 'ToteutusForm',
   argTypes: {

@@ -41,10 +41,7 @@ const EditSoraKuvausPage = props => {
     [soraKuvaus]
   );
 
-  const formConfig = useMemo(
-    () => ({ noFieldConfigs: true, readOnly: !canUpdate }),
-    [canUpdate]
-  );
+  const formConfig = useMemo(() => ({ readOnly: !canUpdate }), [canUpdate]);
 
   return (
     <ReduxForm form="soraKuvausForm" initialValues={initialValues}>

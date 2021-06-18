@@ -22,7 +22,7 @@ import { useValintaperusteById } from '#/src/utils/valintaperuste/getValintaperu
 import { ValintaperusteFooter } from './ValintaperusteFooter';
 import { ValintaperusteForm } from './ValintaperusteForm';
 
-const formConfig = { noFieldConfigs: true };
+const formConfig = {};
 
 export const EditValintaperustePage = props => {
   const {

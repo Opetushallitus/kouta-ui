@@ -55,10 +55,7 @@ const EditKoulutusPage = props => {
     koulutus?.organisaatioOid
   );
 
-  const formConfig = useMemo(
-    () => ({ noFieldConfigs: true, readOnly: !canUpdate }),
-    [canUpdate]
-  );
+  const formConfig = useMemo(() => ({ readOnly: !canUpdate }), [canUpdate]);
 
   const isJulkinen = useFieldValue('julkinen', FORM_NAME);
 

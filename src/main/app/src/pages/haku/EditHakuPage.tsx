@@ -48,10 +48,7 @@ const EditHakuPage = ({
     haku?.organisaatioOid
   );
 
-  const config = useMemo(
-    () => ({ readOnly: !canUpdate, noFieldConfigs: true }),
-    [canUpdate]
-  );
+  const config = useMemo(() => ({ readOnly: !canUpdate }), [canUpdate]);
 
   const initialValues = useMemo(
     () => (haku ? getFormValuesByHaku(haku) : {}),

@@ -25,7 +25,7 @@ import {
   initialValues as getInitialValues,
 } from './HakukohdeForm';
 
-const formConfig = { noFieldConfigs: true };
+const formConfig = {};
 
 export const CreateHakukohdePage = ({
   match: {

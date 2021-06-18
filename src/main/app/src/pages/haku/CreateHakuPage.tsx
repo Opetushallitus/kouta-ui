@@ -33,7 +33,7 @@ const getInitialValues = haku => {
     : initialValues;
 };
 
-const formConfig = { noFieldConfigs: true };
+const formConfig = {};
 
 const CreateHakuPage = props => {
   const {

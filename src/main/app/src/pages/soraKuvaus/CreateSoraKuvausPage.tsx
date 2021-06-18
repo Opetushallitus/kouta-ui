@@ -20,7 +20,7 @@ import { useSoraKuvausById } from '#/src/utils/soraKuvaus/getSoraKuvausById';
 import { SoraKuvausFooter } from './SoraKuvausFooter';
 import SoraKuvausForm, { initialValues } from './SoraKuvausForm';
 
-const formConfig = { noFieldConfigs: true };
+const formConfig = {};
 
 const getCopyValues = soraKuvausId => ({
   pohja: {

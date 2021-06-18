@@ -109,7 +109,7 @@ export const KoulutusFooter = ({
   const save = useSaveForm({
     formName,
     submit,
-    validate: values => validateKoulutusForm(values, form?.registeredFields),
+    validate: validateKoulutusForm,
   });
 
   return (

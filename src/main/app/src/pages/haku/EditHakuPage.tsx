@@ -13,7 +13,6 @@ import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
 import FormConfigContext from '#/src/contexts/FormConfigContext';
-import { useEntityFormConfig } from '#/src/hooks/form';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { getFormValuesByHaku } from '#/src/utils/haku/getFormValuesByHaku';
 import { useHakuByOid } from '#/src/utils/haku/getHakuByOid';
@@ -49,7 +48,10 @@ const EditHakuPage = ({
     haku?.organisaatioOid
   );
 
-  const config = useEntityFormConfig(ENTITY.HAKU);
+  const config = useMemo(
+    () => ({ readOnly: !canUpdate, noFieldConfigs: true }),
+    [canUpdate]
+  );
 
   const initialValues = useMemo(
     () => (haku ? getFormValuesByHaku(haku) : {}),
@@ -59,7 +61,7 @@ const EditHakuPage = ({
   return (
     <ReduxForm form={FORM_NAME} initialValues={initialValues}>
       <Title>{t('sivuTitlet.haunMuokkaus')}</Title>
-      <FormConfigContext.Provider value={{ ...config, readOnly: !canUpdate }}>
+      <FormConfigContext.Provider value={config}>
         <FormPage
           readOnly={!canUpdate}
           header={<EntityFormHeader entityType={ENTITY.HAKU} entity={haku} />}

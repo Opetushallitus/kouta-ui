@@ -26,7 +26,15 @@ const StyledBlueBox = styled(Box)`
 
 export const createStyledRadioSection = radioConfig =>
   createFormFieldComponent(
-    ({ onChange, value, section, disabled, language, error }) => {
+    ({
+      onChange,
+      value,
+      section,
+      disabled,
+      language,
+      error,
+      fieldsComponentProps = {},
+    }) => {
       const { t } = useTranslation();
       return (
         <Box display="flex" flexDirection="column">
@@ -46,7 +54,11 @@ export const createStyledRadioSection = radioConfig =>
                   </StyledGrayRadio>
                   {isChecked && FieldsComponent && (
                     <StyledBlueBox>
-                      <FieldsComponent name={section} language={language} />
+                      <FieldsComponent
+                        name={section}
+                        language={language}
+                        {...fieldsComponentProps}
+                      />
                     </StyledBlueBox>
                   )}
                 </Box>

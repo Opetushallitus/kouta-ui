@@ -16,12 +16,9 @@ import FormConfigContext from '#/src/contexts/FormConfigContext';
 import useSelectBase from '#/src/hooks/useSelectBase';
 import { getFormValuesByHaku } from '#/src/utils/haku/getFormValuesByHaku';
 import { useHakuByOid } from '#/src/utils/haku/getHakuByOid';
-import getHakuFormConfig from '#/src/utils/haku/getHakuFormConfig';
 
 import { HakuFooter } from './HakuFooter';
 import HakuForm, { initialValues } from './HakuForm';
-
-const config = getHakuFormConfig();
 
 const getCopyValues = hakuOid => ({
   pohja: {
@@ -35,6 +32,8 @@ const getInitialValues = haku => {
     ? { ...getCopyValues(haku.oid), ...getFormValuesByHaku(haku) }
     : initialValues;
 };
+
+const formConfig = { noFieldConfigs: true };
 
 const CreateHakuPage = props => {
   const {
@@ -73,7 +72,7 @@ const CreateHakuPage = props => {
         <RelationInfoContainer>
           <OrganisaatioRelation organisaatioOid={organisaatioOid} />
         </RelationInfoContainer>
-        <FormConfigContext.Provider value={config}>
+        <FormConfigContext.Provider value={formConfig}>
           <HakuForm
             steps
             organisaatioOid={organisaatioOid}

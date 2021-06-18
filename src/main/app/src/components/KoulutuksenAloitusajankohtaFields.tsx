@@ -16,7 +16,7 @@ import { Alkamiskausityyppi } from '#/src/constants';
 import useKoodistoOptions from '#/src/hooks/useKoodistoOptions';
 import { getTestIdProps } from '#/src/utils';
 
-const AlkamiskausiJaVuosiFields = ({ name }) => {
+const AlkamiskausiJaVuosiFields = ({ name, kausiRequired }) => {
   const { options } = useKoodistoOptions({ koodisto: 'kausi' });
   const { t } = useTranslation();
 
@@ -28,7 +28,7 @@ const AlkamiskausiJaVuosiFields = ({ name }) => {
           component={FormFieldRadioGroup}
           label={t('yleiset.valitseAlkamiskausi')}
           options={options}
-          required
+          required={kausiRequired}
         />
       </Box>
       <Box flexGrow="1" p={1}>
@@ -36,7 +36,6 @@ const AlkamiskausiJaVuosiFields = ({ name }) => {
           name={`${name}.vuosi`}
           component={FormFieldYearSelect}
           placeholder={t('yleiset.valitseAlkamisvuosi')}
-          required
         />
       </Box>
     </Spacing>
@@ -94,6 +93,12 @@ export const KoulutuksenAloitusajankohtaFields = ({
   name,
   section,
   language,
+  kausiRequired = true,
+}: {
+  name: string;
+  section: string;
+  language: LanguageCode;
+  kausiRequired?: boolean;
 }) => {
   return (
     <div {...getTestIdProps('AloitusajankohtaFields')}>
@@ -102,6 +107,7 @@ export const KoulutuksenAloitusajankohtaFields = ({
         component={KoulutuksenAloitusajankohtaRadioGroup}
         section={section}
         language={language}
+        fieldsComponentProps={{ kausiRequired }}
       />
     </div>
   );

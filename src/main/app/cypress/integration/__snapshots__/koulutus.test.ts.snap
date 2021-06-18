@@ -389,3 +389,40 @@ exports[`editKoulutus > should be able to edit lukiokoulutus #0`] =
   ],
   "tila": "tallennettu"
 };
+
+exports[`createKoulutus > should be able to create TUVA-koulutus #0`] =
+{
+  "ePerusteId": null,
+  "esikatselu": false,
+  "johtaaTutkintoon": false,
+  "julkinen": true,
+  "kielivalinta": [
+    "fi"
+  ],
+  "koulutuksetKoodiUri": [],
+  "koulutustyyppi": "tuva",
+  "metadata": {
+    "koulutusalaKoodiUrit": [],
+    "koulutustyyppi": "tuva",
+    "kuvauksenNimi": {},
+    "kuvaus": {
+      "fi": "<p>Kuvaus</p>"
+    },
+    "lisatiedot": [],
+    "opintojenLaajuusKoodiUri": "opintojenlaajuus_v53#1",
+    "osaamisalaKoodiUri": null,
+    "tutkinnonOsat": [],
+    "tutkintonimikeKoodiUrit": [],
+    "tyyppi": "tuva"
+  },
+  "muokkaaja": "1.2.246.562.24.62301161440",
+  "nimi": {
+    "fi": "koulutustyypit.tuva"
+  },
+  "organisaatioOid": "1.1.1.1.1.1",
+  "sorakuvausId": null,
+  "tarjoajat": [
+    "1.2.1.1.1.1"
+  ],
+  "tila": "julkaistu"
+};

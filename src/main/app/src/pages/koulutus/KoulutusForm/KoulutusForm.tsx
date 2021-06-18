@@ -37,7 +37,10 @@ import { KuvausFieldsSection } from './KuvausFieldsSection';
 import { LisatiedotSection } from './LisatiedotSection';
 import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
 import { OsaamisalaSection } from './OsaamisalaSection';
-import { TiedotSection } from './TiedotSection/TiedotSection';
+import {
+  TiedotSection,
+  TuvaTiedotSection,
+} from './TiedotSection/TiedotSection';
 import { ToteutuksetSection } from './ToteutuksetSection';
 import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';
 import { TutkinnonOsaKoulutusNimiSection } from './TutkinnonOsaKoulutusNimiSection';
@@ -118,9 +121,11 @@ export const KoulutusForm = ({
             disabled={onlyTarjoajaRights}
           />
 
-          {![KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA].includes(
-            koulutustyyppi
-          ) && (
+          {![
+            KOULUTUSTYYPPI.TUTKINNON_OSA,
+            KOULUTUSTYYPPI.OSAAMISALA,
+            KOULUTUSTYYPPI.TUVA,
+          ].includes(koulutustyyppi) && (
             <FormCollapse
               section="information"
               header={t('koulutuslomake.koulutuksenTiedot')}
@@ -128,6 +133,16 @@ export const KoulutusForm = ({
               languages={languageTabs}
               disabled={onlyTarjoajaRights}
               koulutustyyppi={koulutustyyppi}
+            />
+          )}
+
+          {koulutustyyppi === KOULUTUSTYYPPI.TUVA && (
+            <FormCollapse
+              section="information"
+              header={t('koulutuslomake.koulutuksenTiedot')}
+              Component={TuvaTiedotSection}
+              languages={languageTabs}
+              disabled={onlyTarjoajaRights}
             />
           )}
 

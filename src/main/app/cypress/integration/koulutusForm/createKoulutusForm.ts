@@ -410,6 +410,9 @@ export const createKoulutusForm = () => {
   });
 
   it('should be able to create TUVA-koulutus', () => {
+    cy.visit(
+      `/organisaatio/${organisaatioOid}/koulutus?johtaaTutkintoon=false`
+    );
     cy.intercept(
       { method: 'PUT', url: '**/koulutus' },
       {
@@ -425,7 +428,7 @@ export const createKoulutusForm = () => {
       getByTestId('tuvaOpintojenlaajuusSelect')
         .click()
         .within(() => {
-          getSelectOption('Vähintään 53 op').click({ force: true });
+          getSelectOption('Vähintään 53 op').click();
         });
 
       getByTestId('nimiInput').within(() => {
@@ -444,6 +447,21 @@ export const createKoulutusForm = () => {
       jatka();
     });
 
+    fillTeemakuvaSection();
+
+    fillJarjestajaSection();
+
+    fillNakyvyysSection();
+
+    fillTilaSection();
+
     getByTestId('soraKuvausSection').should('not.exist');
+    getByTestId('lisatiedotSection').should('not.exist');
+
+    tallenna();
+
+    cy.wait('@createTuvaKoulutusResponse').then(({ request }) => {
+      cy.wrap(request.body).toMatchSnapshot();
+    });
   });
 };

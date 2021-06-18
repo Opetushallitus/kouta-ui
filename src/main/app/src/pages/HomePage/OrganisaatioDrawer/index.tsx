@@ -113,10 +113,10 @@ const getFavouriteItems = (favourites, roleBuilder) =>
 
 const useFavouriteItems = (oids, roleBuilder) => {
   const { organisaatiot: favourites } = useOrganisaatiot(oids);
-  return useMemo(() => getFavouriteItems(favourites, roleBuilder), [
-    favourites,
-    roleBuilder,
-  ]);
+  return useMemo(
+    () => getFavouriteItems(favourites, roleBuilder),
+    [favourites, roleBuilder]
+  );
 };
 
 const DrawerContent = ({
@@ -148,13 +148,11 @@ const DrawerContent = ({
     500
   );
 
-  const {
-    hierarkia,
-    isLoading: loadingHierarkia,
-  } = useReadableOrganisaatioHierarkia({
-    name: debounceNameFilter,
-    nameSearchEnabled,
-  });
+  const { hierarkia, isLoading: loadingHierarkia } =
+    useReadableOrganisaatioHierarkia({
+      name: debounceNameFilter,
+      nameSearchEnabled,
+    });
 
   const items = useMemo(
     () =>
@@ -170,13 +168,13 @@ const DrawerContent = ({
   const favouriteItems = useFavouriteItems(organisaatioFavourites, roleBuilder);
   const hasFavourites = favouriteItems?.length > 0;
 
-  const onNameFilterChange = useCallback(e => setNameFilter(e.target.value), [
-    setNameFilter,
-  ]);
-
-  const [selectedOrganisaatio, setSelectedOrganisaatio] = useState(
-    organisaatioOid
+  const onNameFilterChange = useCallback(
+    e => setNameFilter(e.target.value),
+    [setNameFilter]
   );
+
+  const [selectedOrganisaatio, setSelectedOrganisaatio] =
+    useState(organisaatioOid);
 
   const onToggleOpen = useCallback(
     oid => {

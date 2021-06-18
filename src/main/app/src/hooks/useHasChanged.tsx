@@ -1,7 +1,8 @@
-import _fp from 'lodash/fp';
 import { usePrevious } from 'react-use';
 
-export const useHasChanged = (value, comparator = _fp.T) => {
+const defaultComparator = (value, previousValue) => value === previousValue;
+
+export const useHasChanged = (value, comparator = defaultComparator) => {
   const previousValue = usePrevious(value);
-  return value !== previousValue && comparator(value);
+  return !comparator(value, previousValue);
 };

@@ -83,6 +83,9 @@ const getLukioFields = ({ tyyppi }) => {
   return _.merge(getBaseFields({ tyyppi }), {
     koulutuksetKoodiUri: ['koulutus_309902#12'],
     nimi: { fi: 'Lukion oppimäärä' },
+    metadata: {
+      opintojenLaajuusKoodiUri: 'opintojenlaajuus_150',
+    },
   });
 };
 

@@ -41,9 +41,10 @@ export const EditValintaperustePage = props => {
     valintaperuste?.organisaatioOid
   );
 
-  const config = useMemo(() => ({ ...formConfig, readOnly: !canUpdate }), [
-    canUpdate,
-  ]);
+  const config = useMemo(
+    () => ({ ...formConfig, readOnly: !canUpdate }),
+    [canUpdate]
+  );
 
   const apiUrls = useUrls();
 

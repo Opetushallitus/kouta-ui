@@ -43,10 +43,10 @@ export const Filters = ({
     [onTilaChangeArg]
   );
 
-  const tilaOptions = useMemo(() => tilaOptionsProp || getDefaultOptions(t), [
-    t,
-    tilaOptionsProp,
-  ]);
+  const tilaOptions = useMemo(
+    () => tilaOptionsProp || getDefaultOptions(t),
+    [t, tilaOptionsProp]
+  );
 
   const [usedNimi, setUsedNimi] = useState(nimi);
   const debouncedNimiChange = useRef(

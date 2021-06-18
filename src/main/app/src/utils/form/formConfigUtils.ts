@@ -7,13 +7,17 @@ import {
   validateTranslations,
 } from '#/src/utils/form/createErrorBuilder';
 
-export const validateIfJulkaistu = (...validateFns) => eb => {
-  const { tila } = eb.getValues();
-  return tila === JULKAISUTILA.JULKAISTU ? _fp.flow(...validateFns)(eb) : eb;
-};
+export const validateIfJulkaistu =
+  (...validateFns) =>
+  eb => {
+    const { tila } = eb.getValues();
+    return tila === JULKAISUTILA.JULKAISTU ? _fp.flow(...validateFns)(eb) : eb;
+  };
 
-export const validateIf = (condition, ...validateFns) => eb =>
-  condition ? _fp.flow(...validateFns)(eb) : eb;
+export const validateIf =
+  (condition, ...validateFns) =>
+  eb =>
+    condition ? _fp.flow(...validateFns)(eb) : eb;
 
 export const validateValintakokeet = errorBuilder => {
   const values = errorBuilder.getValues();

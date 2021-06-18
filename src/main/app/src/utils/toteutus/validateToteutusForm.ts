@@ -30,27 +30,26 @@ import {
 
 import { isApurahaVisible } from './toteutusVisibilities';
 
-const validateDateTimeRange = (alkaaFieldName, paattyyFieldName) => (
-  eb,
-  values
-) => {
-  const alkaaValue = _fp.get(alkaaFieldName, values);
-  const paattyyValue = _fp.get(paattyyFieldName, values);
-  return _fp.flow(
-    eb =>
-      paattyyValue
-        ? validateExistenceOfDate(alkaaFieldName, {
-            message: 'validointivirheet.pakollinenAlkamisaikaJosPaattymisaika',
-          })(eb)
-        : eb,
-    eb =>
-      alkaaValue && paattyyValue
-        ? validate(alkaaFieldName, () => alkaaValue < paattyyValue, {
-            message: 'validointivirheet.alkamisaikaEnnenPaattymisaikaa',
-          })(eb)
-        : eb
-  )(eb);
-};
+const validateDateTimeRange =
+  (alkaaFieldName, paattyyFieldName) => (eb, values) => {
+    const alkaaValue = _fp.get(alkaaFieldName, values);
+    const paattyyValue = _fp.get(paattyyFieldName, values);
+    return _fp.flow(
+      eb =>
+        paattyyValue
+          ? validateExistenceOfDate(alkaaFieldName, {
+              message:
+                'validointivirheet.pakollinenAlkamisaikaJosPaattymisaika',
+            })(eb)
+          : eb,
+      eb =>
+        alkaaValue && paattyyValue
+          ? validate(alkaaFieldName, () => alkaaValue < paattyyValue, {
+              message: 'validointivirheet.alkamisaikaEnnenPaattymisaikaa',
+            })(eb)
+          : eb
+    )(eb);
+  };
 
 const validateApuraha = eb => {
   const values = eb.values;

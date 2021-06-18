@@ -3,16 +3,20 @@ import _ from 'lodash';
 
 const breakpoints = ['576px', '768px', '992px'];
 
-export const getThemeProp = (path, modifier = x => x) => props => {
-  const value = _.get(props?.theme, path);
-  if (_.isUndefined(value)) {
-    console.error(`getThemeProp: Theme value at path ${path} is undefined!`);
-  }
-  return modifier(value);
-};
+export const getThemeProp =
+  (path, modifier = x => x) =>
+  props => {
+    const value = _.get(props?.theme, path);
+    if (_.isUndefined(value)) {
+      console.error(`getThemeProp: Theme value at path ${path} is undefined!`);
+    }
+    return modifier(value);
+  };
 
-export const spacing = (amount = 1) => ({ theme }) =>
-  `${theme.spacing.unit * amount}px`;
+export const spacing =
+  (amount = 1) =>
+  ({ theme }) =>
+    `${theme.spacing.unit * amount}px`;
 
 export const createTheme = () => {
   let theme = createUiTheme();

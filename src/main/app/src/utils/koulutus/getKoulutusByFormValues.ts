@@ -49,9 +49,8 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
   const sorakuvausId = values?.soraKuvaus?.value || null;
 
   return {
-    johtaaTutkintoon: TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT.includes(
-      koulutustyyppi
-    ),
+    johtaaTutkintoon:
+      TUTKINTOON_JOHTAVAT_KOULUTUSTYYPIT.includes(koulutustyyppi),
     muokkaaja,
     tila,
     kielivalinta,

@@ -209,76 +209,95 @@ class TableInput extends Component {
     return this.props.value || { rows: [{ columns: [{ text: '' }] }] };
   }
 
-  makeOnRemoveColumn = ({ columnIndex }) => () => {
-    const nextValue = removeColumn({ columnIndex, value: this.getValue() });
+  makeOnRemoveColumn =
+    ({ columnIndex }) =>
+    () => {
+      const nextValue = removeColumn({ columnIndex, value: this.getValue() });
 
-    this.props.onChange(nextValue);
-  };
+      this.props.onChange(nextValue);
+    };
 
-  makeOnAddColumnLeft = ({ columnIndex }) => () => {
-    const nextValue = addColumnToIndex({
-      value: this.getValue(),
-      columnIndex: columnIndex - 1,
-    });
+  makeOnAddColumnLeft =
+    ({ columnIndex }) =>
+    () => {
+      const nextValue = addColumnToIndex({
+        value: this.getValue(),
+        columnIndex: columnIndex - 1,
+      });
 
-    this.props.onChange(nextValue);
-  };
+      this.props.onChange(nextValue);
+    };
 
-  makeOnAddColumnRight = ({ columnIndex }) => () => {
-    const nextValue = addColumnToIndex({ value: this.getValue(), columnIndex });
-
-    this.props.onChange(nextValue);
-  };
-
-  makeOnAddRowBelow = ({ rowIndex }) => () => {
-    const nextValue = addRowToIndex({ value: this.getValue(), rowIndex });
-
-    this.props.onChange(nextValue);
-  };
-
-  makeOnAddRowAbove = ({ rowIndex }) => () => {
-    const nextValue = addRowToIndex({
-      value: this.getValue(),
-      rowIndex: rowIndex - 1,
-    });
-
-    this.props.onChange(nextValue);
-  };
-
-  makeOnToggleRowHeaderStatus = ({ rowIndex }) => () => {
-    const value = this.getValue();
-    const currentStatus = !!_.get(value, ['rows', rowIndex, 'isHeader']);
-
-    this.props.onChange(
-      setRowHeaderStatus({
-        value,
-        rowIndex,
-        status: !currentStatus,
-      })
-    );
-  };
-
-  makeOnRemoveRow = ({ rowIndex }) => () => {
-    const nextValue = removeRow({ value: this.getValue(), rowIndex });
-
-    this.props.onChange(nextValue);
-  };
-
-  makeOnColumnTextFieldChange = ({ rowIndex, columnIndex }) => e => {
-    const { onChange, language } = this.props;
-    const value = this.getValue();
-
-    onChange(
-      setColumnFieldValue({
-        value,
-        language,
-        rowIndex,
+  makeOnAddColumnRight =
+    ({ columnIndex }) =>
+    () => {
+      const nextValue = addColumnToIndex({
+        value: this.getValue(),
         columnIndex,
-        field: 'text',
-        fieldValue: e.target.value,
-      })
-    );
-  };
+      });
+
+      this.props.onChange(nextValue);
+    };
+
+  makeOnAddRowBelow =
+    ({ rowIndex }) =>
+    () => {
+      const nextValue = addRowToIndex({ value: this.getValue(), rowIndex });
+
+      this.props.onChange(nextValue);
+    };
+
+  makeOnAddRowAbove =
+    ({ rowIndex }) =>
+    () => {
+      const nextValue = addRowToIndex({
+        value: this.getValue(),
+        rowIndex: rowIndex - 1,
+      });
+
+      this.props.onChange(nextValue);
+    };
+
+  makeOnToggleRowHeaderStatus =
+    ({ rowIndex }) =>
+    () => {
+      const value = this.getValue();
+      const currentStatus = !!_.get(value, ['rows', rowIndex, 'isHeader']);
+
+      this.props.onChange(
+        setRowHeaderStatus({
+          value,
+          rowIndex,
+          status: !currentStatus,
+        })
+      );
+    };
+
+  makeOnRemoveRow =
+    ({ rowIndex }) =>
+    () => {
+      const nextValue = removeRow({ value: this.getValue(), rowIndex });
+
+      this.props.onChange(nextValue);
+    };
+
+  makeOnColumnTextFieldChange =
+    ({ rowIndex, columnIndex }) =>
+    e => {
+      const { onChange, language } = this.props;
+      const value = this.getValue();
+
+      onChange(
+        setColumnFieldValue({
+          value,
+          language,
+          rowIndex,
+          columnIndex,
+          field: 'text',
+          fieldValue: e.target.value,
+        })
+      );
+    };
 
   getColumnTextFieldValue = column => {
     const { language } = this.props;

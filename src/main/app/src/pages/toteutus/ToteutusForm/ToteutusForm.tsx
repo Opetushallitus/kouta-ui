@@ -115,6 +115,7 @@ const ToteutusForm = ({
             header={t('toteutuslomake.lukiolinjat')}
             languages={languages}
             Component={LukiolinjatSection}
+            koulutus={koulutus}
           />
         )}
         {[

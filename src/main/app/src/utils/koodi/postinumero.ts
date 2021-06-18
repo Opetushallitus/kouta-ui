@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import { getKoodiNimiTranslation } from '../getKoodiNimiTranslation';
 
 export const getPostinumeroKoodiLabel = (

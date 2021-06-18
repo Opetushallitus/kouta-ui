@@ -51,9 +51,10 @@ const EditHakuPage = ({
 
   const config = useEntityFormConfig(ENTITY.HAKU);
 
-  const initialValues = useMemo(() => (haku ? getFormValuesByHaku(haku) : {}), [
-    haku,
-  ]);
+  const initialValues = useMemo(
+    () => (haku ? getFormValuesByHaku(haku) : {}),
+    [haku]
+  );
 
   return (
     <ReduxForm form={FORM_NAME} initialValues={initialValues}>

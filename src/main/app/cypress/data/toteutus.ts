@@ -140,6 +140,7 @@ const getLukioFields = ({ tyyppi }) =>
   _.merge(getBaseFields(), {
     metadata: {
       tyyppi,
+      yleislinja: true,
       opetus: {
         diplomiKoodiUrit: ['lukiodiplomit_1#1'],
         diplomiKuvaus: {

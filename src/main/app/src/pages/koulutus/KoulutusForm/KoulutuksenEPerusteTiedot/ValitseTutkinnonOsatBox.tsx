@@ -108,7 +108,11 @@ export const ValitseTutkinnonOsatBox = ({
 
   const previousEPerusteId = usePrevious(ePeruste?.id);
 
-  const { data: kuvaukset, status, isLoading } = useTutkinnonOsienKuvaukset({
+  const {
+    data: kuvaukset,
+    status,
+    isLoading,
+  } = useTutkinnonOsienKuvaukset({
     tutkinnonOsat: selectedTutkinnonosat?.map(t => t?._tutkinnonOsa),
   });
 

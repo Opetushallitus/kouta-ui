@@ -88,15 +88,15 @@ const getNavigationItems = (anchors, t) => {
 };
 
 const NavigationItems = ({ items, activeItem, maxInlineItems }) => {
-  const inlineItems = useMemo(() => items.slice(0, maxInlineItems), [
-    items,
-    maxInlineItems,
-  ]);
+  const inlineItems = useMemo(
+    () => items.slice(0, maxInlineItems),
+    [items, maxInlineItems]
+  );
 
-  const moreItems = useMemo(() => items.slice(maxInlineItems, items.length), [
-    items,
-    maxInlineItems,
-  ]);
+  const moreItems = useMemo(
+    () => items.slice(maxInlineItems, items.length),
+    [items, maxInlineItems]
+  );
 
   const moreItemsOverlay = (
     <DropdownMenu>
@@ -146,9 +146,10 @@ const NavigationBase = ({
   const organisaatioOid = organisaatio?.oid;
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  const onCloseDrawer = useCallback(() => setDrawerOpen(false), [
-    setDrawerOpen,
-  ]);
+  const onCloseDrawer = useCallback(
+    () => setDrawerOpen(false),
+    [setDrawerOpen]
+  );
 
   useLayoutEffect(() => {
     document.body.style.overflowY = drawerOpen ? 'hidden' : 'auto';

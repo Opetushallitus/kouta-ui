@@ -127,10 +127,10 @@ const ToteutuksetSection = ({ organisaatioOid, canCreate = true }) => {
       : null;
   }, [toteutukset]);
 
-  const tableColumns = useMemo(() => makeTableColumns(t, organisaatioOid), [
-    t,
-    organisaatioOid,
-  ]);
+  const tableColumns = useMemo(
+    () => makeTableColumns(t, organisaatioOid),
+    [t, organisaatioOid]
+  );
 
   return (
     <>

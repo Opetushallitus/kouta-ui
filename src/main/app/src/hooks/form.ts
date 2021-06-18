@@ -13,6 +13,7 @@ import { getKielivalinta } from '#/src/utils/form/formConfigUtils';
 import getHakuFormConfig from '#/src/utils/haku/getHakuFormConfig';
 
 import { useActions } from './useActions';
+import { useHasChanged } from './useHasChanged';
 
 export const useForm = (formNameProp?: string) => {
   const formName = useFormName();
@@ -24,8 +25,11 @@ export function useBoundFormActions() {
   const formName = useFormName();
   const boundFormActions = useMemo(
     () =>
-      _.mapValues(formActions, action => (...args) =>
-        action.apply(null, [formName, ...args])
+      _.mapValues(
+        formActions,
+        action =>
+          (...args) =>
+            action.apply(null, [formName, ...args])
       ),
     [formName]
   );
@@ -62,9 +66,12 @@ export function useFieldValue<T = any>(name, formNameProp?: string): T {
 export const useSetFieldValue = (name, value) => {
   const form = useFormName();
   const dispatch = useDispatch();
+  const valueHasChanged = useHasChanged(value, _.isEqual);
   useEffect(() => {
-    dispatch(change(form, name, value));
-  }, [dispatch, form, name, value]);
+    if (valueHasChanged) {
+      dispatch(change(form, name, value));
+    }
+  }, [dispatch, form, name, value, valueHasChanged]);
 };
 
 const formConfigsGettersByEntity = {
@@ -76,10 +83,10 @@ const getFormConfigByEntity = (entityName, koulutustyyppi) => {
 };
 
 export const useEntityFormConfig = (entityName, koulutustyyppi = undefined) => {
-  return useMemo(() => getFormConfigByEntity(entityName, koulutustyyppi), [
-    entityName,
-    koulutustyyppi,
-  ]);
+  return useMemo(
+    () => getFormConfigByEntity(entityName, koulutustyyppi),
+    [entityName, koulutustyyppi]
+  );
 };
 
 export const useFormConfig = () => {

@@ -117,10 +117,10 @@ export const Select = ({
   error = false,
   ...props
 }: SelectProps) => {
-  const resolvedValue = useMemo(() => getValue(value, options as any), [
-    value,
-    options,
-  ]);
+  const resolvedValue = useMemo(
+    () => getValue(value, options as any),
+    [value, options]
+  );
 
   const { t } = useTranslation();
 

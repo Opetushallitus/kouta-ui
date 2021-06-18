@@ -370,7 +370,7 @@ exports[`editKoulutus > should be able to edit lukiokoulutus #0`] =
         }
       }
     ],
-    "opintojenLaajuusKoodiUri": null,
+    "opintojenLaajuusKoodiUri": "opintojenlaajuus_150",
     "osaamisalaKoodiUri": null,
     "tutkinnonOsat": [],
     "tutkintonimikeKoodiUrit": [],

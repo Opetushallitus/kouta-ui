@@ -3,6 +3,7 @@ import _fp from 'lodash/fp';
 
 import koulutus from '#/cypress/data/koulutus';
 import toteutus from '#/cypress/data/toteutus';
+import lukioMocks from '#/cypress/mocks/lukio.mocks.json';
 import toteutusMocks from '#/cypress/mocks/toteutus.mocks.json';
 import { stubToteutusFormRoutes } from '#/cypress/toteutusFormUtils';
 import {
@@ -32,6 +33,10 @@ const prepareTest = tyyppi => {
   };
 
   playMocks(toteutusMocks);
+
+  if (tyyppi === 'lk') {
+    playMocks(lukioMocks);
+  }
 
   stubToteutusFormRoutes({ organisaatioOid });
 

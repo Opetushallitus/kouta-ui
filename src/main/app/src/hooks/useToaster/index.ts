@@ -15,24 +15,23 @@ const TOAST_MOUSELEAVE = 'TOAST_MOUSELEAVE';
 const setToastTimer = (key, duration, callback) =>
   setTimeout(() => callback({ type: CLOSE_TOAST, key }), duration);
 
-const createToastActor = (key, duration = DEFAULT_TOAST_DURATION) => (
-  callback,
-  onReceive
-) => {
-  let id = setToastTimer(key, duration, callback);
+const createToastActor =
+  (key, duration = DEFAULT_TOAST_DURATION) =>
+  (callback, onReceive) => {
+    let id = setToastTimer(key, duration, callback);
 
-  onReceive(({ type }) => {
-    if (type === TOAST_MOUSEENTER) {
+    onReceive(({ type }) => {
+      if (type === TOAST_MOUSEENTER) {
+        clearTimeout(id);
+      } else if (type === TOAST_MOUSELEAVE) {
+        id = setToastTimer(key, duration, callback);
+      }
+    });
+
+    return () => {
       clearTimeout(id);
-    } else if (type === TOAST_MOUSELEAVE) {
-      id = setToastTimer(key, duration, callback);
-    }
-  });
-
-  return () => {
-    clearTimeout(id);
+    };
   };
-};
 
 export const toastService = interpret(
   Machine(

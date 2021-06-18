@@ -36,9 +36,8 @@ const EditToteutusPage = props => {
   } = props;
   const apiUrls = useUrls();
 
-  const { data: toteutus, isFetching: isToteutusFetching } = useToteutusByOid(
-    oid
-  );
+  const { data: toteutus, isFetching: isToteutusFetching } =
+    useToteutusByOid(oid);
 
   const { data: koulutus, isFetching: isKoulutusFetching } = useKoulutusByOid(
     toteutus?.koulutusOid,

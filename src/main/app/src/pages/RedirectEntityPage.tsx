@@ -18,33 +18,32 @@ type RedirectProps = {
   }) => string;
 };
 
-export const createRedirectEntityPage = ({
-  entityType,
-  getRedirectUrl,
-}: RedirectProps) => ({
-  match: {
-    params: { oid },
-  },
-}) => {
-  const { data: entity = {} } = useEntityByOid(
-    entityType,
-    { oid },
-    {
-      refetchOnMount: false,
-      refetchOnWindowFocus: false,
-      refetchOnReconnect: false,
-    }
-  );
+export const createRedirectEntityPage =
+  ({ entityType, getRedirectUrl }: RedirectProps) =>
+  ({
+    match: {
+      params: { oid },
+    },
+  }) => {
+    const { data: entity = {} } = useEntityByOid(
+      entityType,
+      { oid },
+      {
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
+        refetchOnReconnect: false,
+      }
+    );
 
-  const { preferredOrganisaatio } = usePreferredOrganisaatio(
-    entity?.organisaatioOid
-  );
+    const { preferredOrganisaatio } = usePreferredOrganisaatio(
+      entity?.organisaatioOid
+    );
 
-  return entity && preferredOrganisaatio ? (
-    <Redirect
-      to={getRedirectUrl({ oid, organisaatioOid: preferredOrganisaatio })}
-    />
-  ) : (
-    <FullSpin />
-  );
-};
+    return entity && preferredOrganisaatio ? (
+      <Redirect
+        to={getRedirectUrl({ oid, organisaatioOid: preferredOrganisaatio })}
+      />
+    ) : (
+      <FullSpin />
+    );
+  };

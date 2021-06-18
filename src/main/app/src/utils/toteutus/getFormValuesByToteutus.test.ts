@@ -56,6 +56,7 @@ test('getFormValuesByToteutus returns correct form values given toteutus', () =>
         sv: 'Sv toteutuksenkuvaus',
       },
       ammatillinenPerustutkintoErityisopetuksena: true,
+      yleislinja: true,
       painotukset: [
         {
           koodiUri: 'painotus_1#1',

@@ -197,6 +197,7 @@ test('getToteutusByFormValues returns correct toteutus given form values', () =>
       },
     ],
     lukiolinjat: {
+      yleislinja: true,
       painotukset: {
         kaytossa: true,
         valinnat: [{ value: 'painotus_1#1' }, { value: 'painotus_2#1' }],

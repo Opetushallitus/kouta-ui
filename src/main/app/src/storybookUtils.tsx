@@ -39,21 +39,23 @@ const getLocalizationInstance = () => {
   return localizationInstance;
 };
 
-export const makeApiDecorator = ({
-  httpClient = defaultHttpClient,
-} = {}) => storyFn => {
-  return (
-    <HttpContext.Provider value={httpClient}>
-      <Async promiseFn={configureOphUrls}>
-        {({ data }) =>
-          data ? (
-            <UrlContext.Provider value={data}>{storyFn()}</UrlContext.Provider>
-          ) : null
-        }
-      </Async>
-    </HttpContext.Provider>
-  );
-};
+export const makeApiDecorator =
+  ({ httpClient = defaultHttpClient } = {}) =>
+  storyFn => {
+    return (
+      <HttpContext.Provider value={httpClient}>
+        <Async promiseFn={configureOphUrls}>
+          {({ data }) =>
+            data ? (
+              <UrlContext.Provider value={data}>
+                {storyFn()}
+              </UrlContext.Provider>
+            ) : null
+          }
+        </Async>
+      </HttpContext.Provider>
+    );
+  };
 
 export const makeStoreDecorator = ({ logging = false } = {}) => {
   const { store } = createStore();

@@ -36,9 +36,8 @@ export const EditHakukohdePage = props => {
   } = props;
   const apiUrls = useUrls();
 
-  const { data: hakukohde, isFetching: hakukohdeLoading } = useHakukohdeByOid(
-    oid
-  );
+  const { data: hakukohde, isFetching: hakukohdeLoading } =
+    useHakukohdeByOid(oid);
 
   const {
     data: { toteutus, haku, koulutustyyppi, tarjoajat } = {},
@@ -66,9 +65,10 @@ export const EditHakukohdePage = props => {
     [hakukohde]
   );
 
-  const config = useMemo(() => ({ ...formConfig, readOnly: !canUpdate }), [
-    canUpdate,
-  ]);
+  const config = useMemo(
+    () => ({ ...formConfig, readOnly: !canUpdate }),
+    [canUpdate]
+  );
 
   return isLoading ? (
     <FullSpin />

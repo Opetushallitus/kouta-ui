@@ -140,33 +140,34 @@ export const Toaster = ({ ...props }) => {
           transform: 'scale(0.5)',
         }}
       >
-        {(item, state, index) => props => (
-          <ToastWrapper last={index === toasts.length - 1}>
-            <Toast
-              key={item.key}
-              status={item.status}
-              style={props}
-              onClose={() => closeToast(item.key)}
-              onMouseEnter={() => toastMouseEnter(item.key)}
-              onMouseLeave={() => toastMouseLeave(item.key)}
-            >
-              <Box mb={1}>{item.label}</Box>
-              {item.error && (
-                <AbstractCollapse
-                  content={
-                    <FormattedError>
-                      {JSON.stringify(item.error, null, 2)}
-                    </FormattedError>
-                  }
-                >
-                  {({ open, onToggle }) => (
-                    <ErrorToggle open={open} onToggle={onToggle} />
-                  )}
-                </AbstractCollapse>
-              )}
-            </Toast>
-          </ToastWrapper>
-        )}
+        {(item, state, index) => props =>
+          (
+            <ToastWrapper last={index === toasts.length - 1}>
+              <Toast
+                key={item.key}
+                status={item.status}
+                style={props}
+                onClose={() => closeToast(item.key)}
+                onMouseEnter={() => toastMouseEnter(item.key)}
+                onMouseLeave={() => toastMouseLeave(item.key)}
+              >
+                <Box mb={1}>{item.label}</Box>
+                {item.error && (
+                  <AbstractCollapse
+                    content={
+                      <FormattedError>
+                        {JSON.stringify(item.error, null, 2)}
+                      </FormattedError>
+                    }
+                  >
+                    {({ open, onToggle }) => (
+                      <ErrorToggle open={open} onToggle={onToggle} />
+                    )}
+                  </AbstractCollapse>
+                )}
+              </Toast>
+            </ToastWrapper>
+          )}
       </Transition>
     </ToasterContainer>
   );

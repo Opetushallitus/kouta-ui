@@ -44,9 +44,10 @@ const Pagination = ({ value = 0, onChange = () => {}, pageCount = 0 }) => {
   const options = useMemo(() => getPageOptions(pageCount), [pageCount]);
   const onPrev = useCallback(() => onChange(value - 1), [value, onChange]);
   const onNext = useCallback(() => onChange(value + 1), [value, onChange]);
-  const onSelectChange = useCallback(({ value }) => onChange(value), [
-    onChange,
-  ]);
+  const onSelectChange = useCallback(
+    ({ value }) => onChange(value),
+    [onChange]
+  );
 
   const pageValue = options[value];
 

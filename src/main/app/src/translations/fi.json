@@ -168,6 +168,7 @@
     "diaarinumero": "Diaarinumero",
     "voimaantulo": "Voimaantulo",
     "osaamispistetta": "osaamispistettä",
+    "opintopistetta": "opintopistettä",
     "ePerusteStatus": {
       "voimassa": "Voimassa",
       "tuleva": "Tuleva"
@@ -513,7 +514,8 @@
     "valitseErityisetKoulutustehtavat": "Valitse erityiset koulutustehtävät",
     "erityisenKoulutustehtavanKuvaus": "Erityisen koulutustehtävän kuvaus",
     "linkkiLisatietoihin": "Linkki lisätietoihin",
-    "linkinAltTeksti": "Linkin ALT-teksti"
+    "linkinAltTeksti": "Linkin ALT-teksti",
+    "lukionYleislinja": "Lukion yleislinja"
   },
   "hakulomake": {
     "haunNimi": "Haun nimi",

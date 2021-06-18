@@ -6,14 +6,8 @@ import styled from 'styled-components';
 import FormStepIcon from '#/src/components/FormStepIcon';
 import { ENTITY, ICONS } from '#/src/constants';
 
-const {
-  KOULUTUS,
-  TOTEUTUS,
-  HAKU,
-  HAKUKOHDE,
-  VALINTAPERUSTE,
-  SORA_KUVAUS,
-} = ENTITY;
+const { KOULUTUS, TOTEUTUS, HAKU, HAKUKOHDE, VALINTAPERUSTE, SORA_KUVAUS } =
+  ENTITY;
 
 const GroupContainer = styled.div`
   display: flex;

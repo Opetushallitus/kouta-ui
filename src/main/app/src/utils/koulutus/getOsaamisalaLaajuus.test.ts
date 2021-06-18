@@ -83,8 +83,7 @@ test('keeps the original muodostumisSaanto for Valinnaiset tutkinnon osat that h
         osat: [
           {
             nimi: {
-              fi:
-                'Tutkinnon osa tai osia ammattitutkinnosta tai erikoisammattitutkinnosta',
+              fi: 'Tutkinnon osa tai osia ammattitutkinnosta tai erikoisammattitutkinnosta',
             },
             muodostumisSaanto: {
               laajuus: {
@@ -134,8 +133,7 @@ test('keeps the original muodostumisSaanto for "Tutkinnon osa tai osia ammattitu
         osat: [
           {
             nimi: {
-              fi:
-                'Tutkinnon osa tai osia ammattitutkinnosta tai erikoisammattitutkinnosta',
+              fi: 'Tutkinnon osa tai osia ammattitutkinnosta tai erikoisammattitutkinnosta',
             },
             muodostumisSaanto: {
               laajuus: {
@@ -390,8 +388,7 @@ test('gets osaamisalan laajuus for Avolouhinnan osaamisala', () => {
           osat: [
             {
               nimi: {
-                fi:
-                  'Tutkinnon osa tai osia ammattitutkinnosta tai erikoisammattitutkinnosta',
+                fi: 'Tutkinnon osa tai osia ammattitutkinnosta tai erikoisammattitutkinnosta',
               },
               muodostumisSaanto: {
                 laajuus: {
@@ -436,8 +433,7 @@ test('gets osaamisalan laajuus for Avolouhinnan osaamisala', () => {
           osat: [
             {
               nimi: {
-                fi:
-                  'Tutkinnon osa tai osia ammattitutkinnosta tai erikoisammattitutkinnosta',
+                fi: 'Tutkinnon osa tai osia ammattitutkinnosta tai erikoisammattitutkinnosta',
               },
               muodostumisSaanto: {
                 laajuus: {

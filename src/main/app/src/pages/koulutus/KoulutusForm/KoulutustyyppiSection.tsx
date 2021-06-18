@@ -17,12 +17,8 @@ export const KoulutustyyppiSection = ({ organisaatioOid, name, disabled }) => {
 
   const isOphVirkailija = useIsOphVirkailija();
 
-  const {
-    isAmmatillinen,
-    isKorkeakoulutus,
-    isLukio,
-    isLoading,
-  } = useOppilaitosTyypit(organisaatioOid);
+  const { isAmmatillinen, isKorkeakoulutus, isLukio, isLoading } =
+    useOppilaitosTyypit(organisaatioOid);
 
   const getIsDisabled = useMemo(
     () =>

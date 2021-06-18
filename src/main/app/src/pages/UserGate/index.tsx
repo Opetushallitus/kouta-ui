@@ -76,10 +76,8 @@ export const UserGate = ({ fallback, children }: UserGateProps) => {
     }
   }, [apiUrls, httpClient, isFocused, isIdle]);
 
-  const {
-    data: asiointiKieli,
-    isLoading: isLoadingAsiointiKieli,
-  } = useAsiointiKieli();
+  const { data: asiointiKieli, isLoading: isLoadingAsiointiKieli } =
+    useAsiointiKieli();
 
   useEffect(() => {
     const newLanguage = LANGUAGES.includes(asiointiKieli)

@@ -52,9 +52,10 @@ export const OppilaitosPage = ({
 
   const { t } = useTranslation();
 
-  const contactInfo = useMemo(() => getOrganisaatioContactInfo(organisaatio), [
-    organisaatio,
-  ]);
+  const contactInfo = useMemo(
+    () => getOrganisaatioContactInfo(organisaatio),
+    [organisaatio]
+  );
 
   const canUpdate = useCurrentUserHasRole(
     ENTITY.OPPILAITOS,
@@ -70,9 +71,10 @@ export const OppilaitosPage = ({
 
   const readOnly = formMode === FormMode.EDIT ? !canUpdate : !canCreate;
 
-  const config = useMemo(() => ({ noFieldConfigs: true, readOnly }), [
-    readOnly,
-  ]);
+  const config = useMemo(
+    () => ({ noFieldConfigs: true, readOnly }),
+    [readOnly]
+  );
 
   const initialValues = useMemo(
     () => ({

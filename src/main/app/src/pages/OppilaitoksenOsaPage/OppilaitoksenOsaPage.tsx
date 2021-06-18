@@ -72,9 +72,10 @@ export const OppilaitoksenOsaPage = ({
 
   const stepsEnabled = !oppilaitoksenOsa;
   const showArkistoituTilaOption = !!oppilaitoksenOsa;
-  const contactInfo = useMemo(() => getOrganisaatioContactInfo(organisaatio), [
-    organisaatio,
-  ]);
+  const contactInfo = useMemo(
+    () => getOrganisaatioContactInfo(organisaatio),
+    [organisaatio]
+  );
 
   const canUpdate = useCurrentUserHasRole(
     ENTITY.OPPILAITOS,
@@ -90,9 +91,10 @@ export const OppilaitoksenOsaPage = ({
 
   const readOnly = oppilaitoksenOsa ? !canUpdate : !canCreate;
 
-  const config = useMemo(() => ({ noFieldConfigs: true, readOnly }), [
-    readOnly,
-  ]);
+  const config = useMemo(
+    () => ({ noFieldConfigs: true, readOnly }),
+    [readOnly]
+  );
 
   const initialValues = useMemo(
     () => ({

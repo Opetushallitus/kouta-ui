@@ -23,9 +23,8 @@ const KoulutusField = props => {
 
   const koulutustyyppi = useFieldValue('koulutustyyppi');
 
-  const { data: koulutukset, isLoading } = useKoulutuksetByKoulutustyyppi(
-    koulutustyyppi
-  );
+  const { data: koulutukset, isLoading } =
+    useKoulutuksetByKoulutustyyppi(koulutustyyppi);
 
   const koulutustyyppiChanged = useHasChanged(koulutustyyppi);
 

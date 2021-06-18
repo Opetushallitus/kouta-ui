@@ -444,6 +444,10 @@ export const createKoulutusForm = () => {
         typeToEditor('Kuvaus');
       });
 
+      getByTestId('linkkiEPerusteisiinInput').within(() => {
+        cy.get('input').pipe(paste('linkki'));
+      });
+
       jatka();
     });
 

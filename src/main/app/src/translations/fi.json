@@ -401,7 +401,8 @@
     "julkisuusKuvaus": "Valitse näkyykö koulutus muille koulutustoimijoille. Jos koulutus on julkinen, muut koulutustoimijat voivat käyttää sitä pohjana luodessaan uusia.",
     "lisaaKoulutus": "Lisää uusi koulutus",
     "kopioiPohjaksi": "Kopioi pohjaksi aiemmin luotu koulutus",
-    "koulutuksenNimiNakyyOppijalleVaroitus": "HUOM! Teksti näkyy oppijalle Opintopolun sivuilla."
+    "koulutuksenNimiNakyyOppijalleVaroitus": "HUOM! Teksti näkyy oppijalle Opintopolun sivuilla.",
+    "linkkiEPerusteisiin": "Linkki ePerusteisiin"
   },
   "toteutuslomake": {
     "toteutuksenTiedot": "Toteutuksen tiedot",

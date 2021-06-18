@@ -39,6 +39,16 @@ export const KuvausFieldsSection = ({
           label={t('yleiset.kuvaus')}
         />
       </Box>
+      {koulutustyyppi === KOULUTUSTYYPPI.TUVA && (
+        <Box mb={2} {...getTestIdProps('linkkiEPerusteisiinInput')}>
+          <Field
+            disabled={disabled}
+            name={`${name}.linkki.${language}`}
+            component={FormFieldInput}
+            label={t('koulutuslomake.linkkiEPerusteisiin')}
+          />
+        </Box>
+      )}
     </>
   );
 };

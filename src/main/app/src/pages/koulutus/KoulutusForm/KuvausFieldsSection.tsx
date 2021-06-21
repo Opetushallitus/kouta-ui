@@ -44,7 +44,7 @@ export const KuvausFieldsSection = ({
         <Box mb={2} {...getTestIdProps('linkkiEPerusteisiinInput')}>
           <Field
             disabled={disabled}
-            name={`${name}.linkki.${language}`}
+            name={`${name}.linkkiEPerusteisiin.${language}`}
             component={FormFieldInput}
             label={t('koulutuslomake.linkkiEPerusteisiin')}
           />

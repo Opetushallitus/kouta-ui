@@ -10,7 +10,7 @@ jobs:
   - stage: build
     name: "Run tests"
     language: node_js
-    node_js: 12
+    node_js: 13
     addons:
       chrome: stable
     cache:

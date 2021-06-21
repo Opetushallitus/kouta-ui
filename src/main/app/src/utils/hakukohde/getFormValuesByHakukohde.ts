@@ -23,14 +23,17 @@ const getToimitustapaValues = (toimitustapa, toimitusosoite) => ({
   },
 });
 
+// Keskiarvossa halutaan näyttää aina vähintään yksi desimaali (e.g. 7,0)
+export const parseKeskiarvo = v =>
+  v ? parseFloat(v).toLocaleString('fi', { minimumFractionDigits: 1 }) : '';
+
 const getHakukohteenLinjaValues = ({
   linja,
   alinHyvaksyttyKeskiarvo,
   lisatietoa,
 }) => ({
   linja: !linja ? LUKIO_YLEISLINJA : linja,
-  alinHyvaksyttyKeskiarvo:
-    _.toString(alinHyvaksyttyKeskiarvo)?.replace('.', ',') || '',
+  alinHyvaksyttyKeskiarvo: parseKeskiarvo(alinHyvaksyttyKeskiarvo),
   lisatietoa: _.mapValues(lisatietoa, parseEditorState),
 });
 

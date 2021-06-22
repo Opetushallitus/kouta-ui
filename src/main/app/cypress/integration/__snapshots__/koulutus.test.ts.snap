@@ -16,6 +16,7 @@ exports[`createKoulutus > should be able to create ammatillinen koulutus #0`] =
     "koulutustyyppi": "amm",
     "kuvauksenNimi": {},
     "kuvaus": {},
+    "linkkiEPerusteisiin": {},
     "lisatiedot": [
       {
         "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
@@ -60,6 +61,7 @@ exports[`createKoulutus > should be able to create ammatillinen osaamisala koulu
     "koulutustyyppi": "amm-osaamisala",
     "kuvauksenNimi": {},
     "kuvaus": {},
+    "linkkiEPerusteisiin": {},
     "lisatiedot": [
       {
         "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
@@ -102,6 +104,7 @@ exports[`createKoulutus > should be able to create ammatillinen tutkinnon osa ko
     "koulutustyyppi": "amm-tutkinnon-osa",
     "kuvauksenNimi": {},
     "kuvaus": {},
+    "linkkiEPerusteisiin": {},
     "lisatiedot": [
       {
         "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
@@ -165,6 +168,7 @@ exports[`createKoulutus > should be able to create AMK-koulutus #0`] =
     "kuvaus": {
       "fi": "<p>Kuvaus</p>"
     },
+    "linkkiEPerusteisiin": {},
     "lisatiedot": [
       {
         "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
@@ -215,6 +219,7 @@ exports[`createKoulutus > should be able to create lukiokoulutus #0`] =
     "kuvaus": {
       "fi": "<p>Kuvaus</p>"
     },
+    "linkkiEPerusteisiin": {},
     "lisatiedot": [
       {
         "otsikkoKoodiUri": "koulutuksenlisatiedot_01#1",
@@ -259,6 +264,7 @@ exports[`editKoulutus > should be able to edit ammatillinen koulutus #0`] =
     "koulutustyyppi": "amm",
     "kuvauksenNimi": {},
     "kuvaus": {},
+    "linkkiEPerusteisiin": {},
     "lisatiedot": [
       {
         "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
@@ -311,6 +317,7 @@ exports[`editKoulutus > should be able to edit AMK-koulutus #0`] =
     "kuvaus": {
       "fi": "<p>Fi kuvaus</p>"
     },
+    "linkkiEPerusteisiin": {},
     "lisatiedot": [
       {
         "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",
@@ -362,6 +369,7 @@ exports[`editKoulutus > should be able to edit lukiokoulutus #0`] =
     "koulutustyyppi": "lk",
     "kuvauksenNimi": {},
     "kuvaus": {},
+    "linkkiEPerusteisiin": {},
     "lisatiedot": [
       {
         "otsikkoKoodiUri": "koulutuksenlisatiedot_0#1",

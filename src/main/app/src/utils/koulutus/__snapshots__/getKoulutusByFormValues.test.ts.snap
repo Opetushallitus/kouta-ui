@@ -16,6 +16,7 @@ Object {
     "koulutustyyppi": "amm-osaamisala",
     "kuvauksenNimi": Object {},
     "kuvaus": Object {},
+    "linkkiEPerusteisiin": Object {},
     "lisatiedot": Array [],
     "opintojenLaajuusKoodiUri": null,
     "osaamisalaKoodiUri": null,
@@ -50,6 +51,7 @@ Object {
     "koulutustyyppi": "amm",
     "kuvauksenNimi": Object {},
     "kuvaus": Object {},
+    "linkkiEPerusteisiin": Object {},
     "lisatiedot": Array [],
     "opintojenLaajuusKoodiUri": "laajuus_1#1",
     "osaamisalaKoodiUri": null,
@@ -97,6 +99,7 @@ Object {
       "fi": "<p>Fi kuvaus</p>",
       "sv": "<p>Sv kuvaus</p>",
     },
+    "linkkiEPerusteisiin": Object {},
     "lisatiedot": Array [
       Object {
         "otsikkoKoodiUri": "osio_1#1",
@@ -146,6 +149,7 @@ Object {
     "koulutustyyppi": "yo",
     "kuvauksenNimi": Object {},
     "kuvaus": Object {},
+    "linkkiEPerusteisiin": Object {},
     "lisatiedot": Array [],
     "opintojenLaajuusKoodiUri": null,
     "osaamisalaKoodiUri": null,

@@ -37,7 +37,10 @@ import { KuvausFieldsSection } from './KuvausFieldsSection';
 import { LisatiedotSection } from './LisatiedotSection';
 import OsaamisalanKuvausSection from './OsaamisalanKuvausSection';
 import { OsaamisalaSection } from './OsaamisalaSection';
-import { TiedotSection } from './TiedotSection/TiedotSection';
+import {
+  TiedotSection,
+  TuvaTiedotSection,
+} from './TiedotSection/TiedotSection';
 import { ToteutuksetSection } from './ToteutuksetSection';
 import { TutkinnonOsienKuvausSection } from './TukinnonOsienKuvausSection';
 import { TutkinnonOsaKoulutusNimiSection } from './TutkinnonOsaKoulutusNimiSection';
@@ -118,9 +121,11 @@ export const KoulutusForm = ({
             disabled={onlyTarjoajaRights}
           />
 
-          {![KOULUTUSTYYPPI.TUTKINNON_OSA, KOULUTUSTYYPPI.OSAAMISALA].includes(
-            koulutustyyppi
-          ) && (
+          {![
+            KOULUTUSTYYPPI.TUTKINNON_OSA,
+            KOULUTUSTYYPPI.OSAAMISALA,
+            KOULUTUSTYYPPI.TUVA,
+          ].includes(koulutustyyppi) && (
             <FormCollapse
               section="information"
               header={t('koulutuslomake.koulutuksenTiedot')}
@@ -128,6 +133,16 @@ export const KoulutusForm = ({
               languages={languageTabs}
               disabled={onlyTarjoajaRights}
               koulutustyyppi={koulutustyyppi}
+            />
+          )}
+
+          {koulutustyyppi === KOULUTUSTYYPPI.TUVA && (
+            <FormCollapse
+              section="information"
+              header={t('koulutuslomake.koulutuksenTiedot')}
+              Component={TuvaTiedotSection}
+              languages={languageTabs}
+              disabled={onlyTarjoajaRights}
             />
           )}
 
@@ -207,6 +222,7 @@ export const KoulutusForm = ({
               Monien koulutustyyppien metadatassa on kuvaus-kenttä, mutta siihen ei vois syöttää mitään. */}
           {[
             KOULUTUSTYYPPI.LUKIOKOULUTUS,
+            KOULUTUSTYYPPI.TUVA,
             ...TUTKINTOON_JOHTAVAT_KORKEAKOULU_KOULUTUSTYYPIT,
           ].includes(koulutustyyppi) && (
             <FormCollapse
@@ -220,21 +236,25 @@ export const KoulutusForm = ({
             />
           )}
 
-          <FormCollapse
-            section="lisatiedot"
-            header={t('koulutuslomake.koulutuksenLisatiedot')}
-            Component={LisatiedotSection}
-            languages={languageTabs}
-            disabled={onlyTarjoajaRights}
-          />
+          {koulutustyyppi !== KOULUTUSTYYPPI.TUVA && (
+            <FormCollapse
+              section="lisatiedot"
+              header={t('koulutuslomake.koulutuksenLisatiedot')}
+              Component={LisatiedotSection}
+              languages={languageTabs}
+              disabled={onlyTarjoajaRights}
+            />
+          )}
 
-          <FormCollapse
-            section="soraKuvaus"
-            header={t('yleiset.soraKuvaus')}
-            Component={SoraKuvausSection}
-            organisaatioOid={organisaatioOid}
-            languages={languageTabs}
-          />
+          {koulutustyyppi !== KOULUTUSTYYPPI.TUVA && (
+            <FormCollapse
+              section="soraKuvaus"
+              header={t('yleiset.soraKuvaus')}
+              Component={SoraKuvausSection}
+              organisaatioOid={organisaatioOid}
+              languages={languageTabs}
+            />
+          )}
 
           <FormCollapse
             section="teemakuva"

@@ -44,6 +44,7 @@ const Container = styled.div`
   background-color: white;
   box-shadow: 0 0 0 0 transparent;
   transition: border-color 0.25s, box-shadow 0.25s;
+  margin-bottom: ${spacing(2)};
 
   &:hover {
     border-color: ${getThemeProp('colors.primary.main')};

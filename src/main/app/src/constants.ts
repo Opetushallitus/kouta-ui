@@ -36,6 +36,7 @@ export enum KOULUTUSTYYPPI {
   AMMATILLINEN_ERITYISOPETTAJA_KOULUTUS = 'ammatillinen_erityisopettaja_koulutus',
   VAPAA_SIVISTYSTYO = 'vapaa_sivistystyo',
   LUVA = 'luva',
+  TUVA = 'tuva',
   MUUT_KOULUTUKSET = 'muut_koulutukset',
   PERUSOPETUKSEN_LISAOPETUS = 'perusopetuksen_lisaopetus',
 }

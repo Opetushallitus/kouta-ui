@@ -125,6 +125,10 @@ const getKoulutusByFormValues = (values: KoulutusFormValues) => {
         koulutustyyppi === KOULUTUSTYYPPI.LUKIOKOULUTUS
           ? [KOULUTUSALA_YLEISSIVISTAVA_KOODIURI]
           : (values?.information?.koulutusalat ?? []).map(({ value }) => value),
+      linkkiEPerusteisiin: pickTranslations(
+        values?.description?.linkkiEPerusteisiin,
+        {}
+      ),
     },
   };
 };

@@ -408,6 +408,9 @@ exports[`createKoulutus > should be able to create TUVA-koulutus #0`] =
     "kuvaus": {
       "fi": "<p>Kuvaus</p>"
     },
+    "linkkiEPerusteisiin": {
+      "fi": "linkki"
+    },
     "lisatiedot": [],
     "opintojenLaajuusKoodiUri": "opintojenlaajuus_v53#1",
     "osaamisalaKoodiUri": null,

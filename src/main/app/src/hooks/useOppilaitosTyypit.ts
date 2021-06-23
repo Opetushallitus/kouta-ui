@@ -2,6 +2,7 @@ import _fp from 'lodash/fp';
 
 import {
   AMMATILLISET_OPPILAITOSTYYPIT,
+  EI_TUETUT_KOULUTUSTYYPIT,
   KORKEAKOULU_KOULUTUSTYYPIT,
   KORKEAKOULU_OPPILAITOSTYYPIT,
   KOULUTUSTYYPPI,
@@ -41,6 +42,10 @@ export const useOppilaitosTyypit = organisaatioOid => {
 export const createIsKoulutustyyppiDisabledGetter =
   ({ isOphVirkailija, isAmmatillinen, isKorkeakoulutus, isLukio }) =>
   value => {
+    if (EI_TUETUT_KOULUTUSTYYPIT.includes(value)) {
+      return true;
+    }
+
     if (isOphVirkailija) {
       return false;
     }

@@ -12,15 +12,12 @@ import FormSteps from '#/src/components/FormSteps';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
 import useSelectBase from '#/src/hooks/useSelectBase';
 import getFormValuesBySoraKuvaus from '#/src/utils/soraKuvaus/getFormValuesBySoraKuvaus';
 import { useSoraKuvausById } from '#/src/utils/soraKuvaus/getSoraKuvausById';
 
 import { SoraKuvausFooter } from './SoraKuvausFooter';
 import SoraKuvausForm, { initialValues } from './SoraKuvausForm';
-
-const formConfig = { noFieldConfigs: true };
 
 const getCopyValues = soraKuvausId => ({
   pohja: {
@@ -64,28 +61,26 @@ const CreateSoraKuvausPage = props => {
   return (
     <ReduxForm form="soraKuvausForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.uusiSoraKuvaus')}</Title>
-      <FormConfigContext.Provider value={formConfig}>
-        <FormPage
-          header={<FormHeader>{t('yleiset.soraKuvaus')}</FormHeader>}
-          steps={<FormSteps activeStep={ENTITY.SORA_KUVAUS} />}
-          footer={
-            <SoraKuvausFooter
-              formMode={FormMode.CREATE}
-              soraKuvaus={{ organisaatioOid }}
-            />
-          }
-        >
-          <RelationInfoContainer>
-            <OrganisaatioRelation organisaatioOid={organisaatioOid} />
-          </RelationInfoContainer>
-          <SoraKuvausForm
-            steps
-            organisaatioOid={organisaatioOid}
-            onSelectBase={selectBase}
-            showArkistoituTilaOption={false}
+      <FormPage
+        header={<FormHeader>{t('yleiset.soraKuvaus')}</FormHeader>}
+        steps={<FormSteps activeStep={ENTITY.SORA_KUVAUS} />}
+        footer={
+          <SoraKuvausFooter
+            formMode={FormMode.CREATE}
+            soraKuvaus={{ organisaatioOid }}
           />
-        </FormPage>
-      </FormConfigContext.Provider>
+        }
+      >
+        <RelationInfoContainer>
+          <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+        </RelationInfoContainer>
+        <SoraKuvausForm
+          steps
+          organisaatioOid={organisaatioOid}
+          onSelectBase={selectBase}
+          showArkistoituTilaOption={false}
+        />
+      </FormPage>
     </ReduxForm>
   );
 };

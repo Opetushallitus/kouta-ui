@@ -16,6 +16,7 @@ export const HakutapaSection = ({ name }) => {
       component={FormFieldRadioGroup}
       label={t('hakulomake.valitseHakutapa')}
       options={options}
+      required
     />
   );
 };

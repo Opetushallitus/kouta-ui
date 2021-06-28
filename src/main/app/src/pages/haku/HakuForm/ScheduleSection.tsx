@@ -3,7 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Field, FieldArray } from 'redux-form';
 
-import FieldGroup from '#/src/components/FieldGroup';
+import { FieldGroup } from '#/src/components/FieldGroup';
 import {
   FormFieldDateTimeInput,
   FormFieldSwitch,
@@ -21,12 +21,13 @@ const ScheduleSection = ({ isOphVirkailija, isYhteishaku, name, language }) => {
     `${name}.ajankohtaKaytossa`
   );
 
+  // TODO: Hakuajoille required-arvot validointien mukaan (alkamisaika aina, päättymisaika yhteis- ja erillishauille)
   return (
     <Box mb={-4}>
       <FieldGroup
         title={t('hakulomake.hakuaika')}
-        name={`${name}.hakuaikaGroup`}
         {...getTestIdProps('hakuajat')}
+        required
       >
         <FieldArray
           name={`${name}.hakuaika`}
@@ -46,6 +47,7 @@ const ScheduleSection = ({ isOphVirkailija, isYhteishaku, name, language }) => {
             section={name}
             name={`${name}.ajankohtaTyyppi`}
             language={language}
+            kausiRequired={isYhteishaku}
           />
         )}
       </FieldGroup>

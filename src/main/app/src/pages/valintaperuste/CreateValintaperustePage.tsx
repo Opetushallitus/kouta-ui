@@ -13,7 +13,6 @@ import FormSteps from '#/src/components/FormSteps';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { POHJAVALINTA, ENTITY, FormMode } from '#/src/constants';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
 import useSelectBase from '#/src/hooks/useSelectBase';
 import { getFormValuesByValintaperuste } from '#/src/utils/valintaperuste/getFormValuesByValintaperuste';
 import { useValintaperusteById } from '#/src/utils/valintaperuste/getValintaperusteById';
@@ -22,7 +21,6 @@ import { ValintaperusteFooter } from './ValintaperusteFooter';
 import { ValintaperusteForm, initialValues } from './ValintaperusteForm';
 
 const FORM_NAME = 'valintaperusteForm';
-const formConfig = { noFieldConfigs: true };
 
 const getCopyValues = valintaperusteId => ({
   pohja: {
@@ -74,29 +72,27 @@ export const CreateValintaperustePage = props => {
   return (
     <ReduxForm form={FORM_NAME} initialValues={initialValues}>
       <Title>{t('sivuTitlet.uusiValintaperuste')}</Title>
-      <FormConfigContext.Provider value={formConfig}>
-        <FormPage
-          header={<FormHeader>{t('yleiset.valintaperuste')}</FormHeader>}
-          steps={<FormSteps activeStep={ENTITY.VALINTAPERUSTE} />}
-          footer={
-            <ValintaperusteFooter
-              formMode={FormMode.CREATE}
-              organisaatioOid={luojaOrganisaatioOid}
-            />
-          }
-          esikatseluControls={<EsikatseluControls />}
-        >
-          <RelationInfoContainer>
-            <OrganisaatioRelation organisaatioOid={luojaOrganisaatioOid} />
-          </RelationInfoContainer>
-          <ValintaperusteForm
-            steps
+      <FormPage
+        header={<FormHeader>{t('yleiset.valintaperuste')}</FormHeader>}
+        steps={<FormSteps activeStep={ENTITY.VALINTAPERUSTE} />}
+        footer={
+          <ValintaperusteFooter
+            formMode={FormMode.CREATE}
             organisaatioOid={luojaOrganisaatioOid}
-            onSelectBase={selectBase}
-            showArkistoituTilaOption={false}
           />
-        </FormPage>
-      </FormConfigContext.Provider>
+        }
+        esikatseluControls={<EsikatseluControls />}
+      >
+        <RelationInfoContainer>
+          <OrganisaatioRelation organisaatioOid={luojaOrganisaatioOid} />
+        </RelationInfoContainer>
+        <ValintaperusteForm
+          steps
+          organisaatioOid={luojaOrganisaatioOid}
+          onSelectBase={selectBase}
+          showArkistoituTilaOption={false}
+        />
+      </FormPage>
     </ReduxForm>
   );
 };

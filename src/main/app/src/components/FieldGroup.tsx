@@ -4,10 +4,6 @@ import _ from 'lodash';
 
 import DividerHeading from '#/src/components/DividerHeading';
 import { Box } from '#/src/components/virkailija';
-import {
-  useFieldConfig,
-  useFieldIsRequired,
-} from '#/src/hooks/fieldConfigHooks';
 
 type FieldGroupProps = {
   title: string;
@@ -20,17 +16,13 @@ export const FieldGroup: React.FC<FieldGroupProps> = ({
   title,
   children,
   HeadingComponent = DividerHeading,
-  name,
-  required: requiredProp = false,
+  required = false,
   ...props
 }) => {
-  const fieldConfig = useFieldConfig(name);
-  const required = useFieldIsRequired(fieldConfig) || requiredProp;
-
   const headerId = _.snakeCase(title) + '_FieldGroup_header';
   const contentId = _.snakeCase(title) + '_FieldGroup_content';
 
-  return !name || fieldConfig ? (
+  return (
     <Box marginBottom={4} {...props}>
       <HeadingComponent id={headerId}>
         {title} {required ? '*' : ''}
@@ -39,9 +31,5 @@ export const FieldGroup: React.FC<FieldGroupProps> = ({
         {children}
       </div>
     </Box>
-  ) : (
-    <div></div>
   );
 };
-
-export default FieldGroup;

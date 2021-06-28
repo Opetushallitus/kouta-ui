@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 import { FormFooter } from '#/src/components/FormPage';
 import { ENTITY, FormMode } from '#/src/constants';
-import { useFormName } from '#/src/contexts/FormNameContext';
+import { useFormName } from '#/src/contexts/FormContext';
 import { useForm } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import { HakuModel } from '#/src/types/hakuTypes';

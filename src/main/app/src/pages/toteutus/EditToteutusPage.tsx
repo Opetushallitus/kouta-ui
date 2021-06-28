@@ -15,7 +15,6 @@ import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
@@ -71,67 +70,64 @@ const EditToteutusPage = props => {
     [toteutus]
   );
 
-  const formConfig = useMemo(
-    () => ({ noFieldConfigs: true, readOnly: !canUpdate }),
-    [canUpdate]
-  );
-
   return !toteutus ? (
     <FullSpin />
   ) : (
-    <ReduxForm form={FORM_NAME} initialValues={initialValues}>
+    <ReduxForm
+      form={FORM_NAME}
+      initialValues={initialValues}
+      disabled={!canUpdate}
+    >
       <Title>{t('sivuTitlet.toteutuksenMuokkaus')}</Title>
-      <FormConfigContext.Provider value={formConfig}>
-        <FormPage
-          readOnly={!canUpdate}
-          header={
-            <EntityFormHeader
-              entityType={ENTITY.TOTEUTUS}
-              entity={toteutus}
-              canUpdate={canUpdate}
-            />
-          }
-          esikatseluControls={
-            <EsikatseluControls
-              esikatseluUrl={apiUrls.url('konfo-ui.toteutus', oid)}
-            />
-          }
-          steps={<FormSteps activeStep={ENTITY.TOTEUTUS} />}
-          footer={
-            toteutus ? (
-              <ToteutusFooter
-                formMode={FormMode.EDIT}
-                toteutus={toteutus}
-                koulutus={koulutus}
-                koulutustyyppi={koulutustyyppi}
-                organisaatioOid={organisaatioOid}
-                canUpdate={canUpdate}
-              />
-            ) : null
-          }
-        >
-          <RelationInfoContainer>
-            <KoulutusRelation
-              organisaatioOid={organisaatioOid}
-              koulutus={koulutus}
-            />
-            <OrganisaatioRelation organisaatioOid={organisaatioOid} />
-          </RelationInfoContainer>
-          {!isKoulutusFetching && !isToteutusFetching ? (
-            <ToteutusForm
+      <FormPage
+        readOnly={!canUpdate}
+        header={
+          <EntityFormHeader
+            entityType={ENTITY.TOTEUTUS}
+            entity={toteutus}
+            canUpdate={canUpdate}
+          />
+        }
+        esikatseluControls={
+          <EsikatseluControls
+            esikatseluUrl={apiUrls.url('konfo-ui.toteutus', oid)}
+          />
+        }
+        steps={<FormSteps activeStep={ENTITY.TOTEUTUS} />}
+        footer={
+          toteutus ? (
+            <ToteutusFooter
+              formMode={FormMode.EDIT}
               toteutus={toteutus}
               koulutus={koulutus}
-              steps={false}
-              canSelectBase={false}
-              onAttachHakukohde={onAttachHakukohde}
-              organisaatioOid={organisaatioOid}
               koulutustyyppi={koulutustyyppi}
+              organisaatioOid={organisaatioOid}
+              canUpdate={canUpdate}
             />
-          ) : (
-            <Spin center />
-          )}
-        </FormPage>
-      </FormConfigContext.Provider>
+          ) : null
+        }
+      >
+        <RelationInfoContainer>
+          <KoulutusRelation
+            organisaatioOid={organisaatioOid}
+            koulutus={koulutus}
+          />
+          <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+        </RelationInfoContainer>
+        {!isKoulutusFetching && !isToteutusFetching ? (
+          <ToteutusForm
+            toteutus={toteutus}
+            koulutus={koulutus}
+            steps={false}
+            canSelectBase={false}
+            onAttachHakukohde={onAttachHakukohde}
+            organisaatioOid={organisaatioOid}
+            koulutustyyppi={koulutustyyppi}
+          />
+        ) : (
+          <Spin center />
+        )}
+      </FormPage>
     </ReduxForm>
   );
 };

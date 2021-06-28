@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { reduxForm } from 'redux-form';
 
-import FormNameContext from '#/src/contexts/FormNameContext';
+import FormContext from '#/src/contexts/FormContext';
 
-const ReduxForm = reduxForm({ initialValues: {}, enableReinitialize: true })(
-  ({ children, form }) => {
-    return (
-      <FormNameContext.Provider value={form}>
-        {children}
-      </FormNameContext.Provider>
-    );
-  }
-);
+const ReduxFormWrapper = reduxForm({
+  initialValues: {},
+  enableReinitialize: true,
+})(({ children }) => <>{children}</>);
+
+const ReduxForm = ({ form, disabled = false, children, initialValues }) => {
+  const formCtx = useMemo(() => ({ name: form, disabled }), [form, disabled]);
+  return (
+    <ReduxFormWrapper form={form} initialValues={initialValues}>
+      <FormContext.Provider value={formCtx}>{children}</FormContext.Provider>
+    </ReduxFormWrapper>
+  );
+};
 
 export default ReduxForm;

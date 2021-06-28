@@ -1,11 +1,9 @@
 import React from 'react';
 
 import ReduxForm from '#/src/components/ReduxForm';
-import { KOULUTUSTYYPIT, ENTITY } from '#/src/constants';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
-import { useEntityFormConfig } from '#/src/hooks/form';
+import { KOULUTUSTYYPIT } from '#/src/constants';
 
-import HakukohdeForm, { initialValues } from './index';
+import { HakukohdeForm, initialValues } from './index';
 
 export default {
   title: 'HakukohdeForm',
@@ -20,26 +18,23 @@ export default {
 };
 
 const Wrapper = ({ koulutustyyppi = 'amm' }) => {
-  const config = useEntityFormConfig(ENTITY.HAKUKOHDE, koulutustyyppi);
   return (
     <ReduxForm
       form="hakukohde"
       initialValues={initialValues('toteutuksen nimi', ['fi'])}
     >
-      <FormConfigContext.Provider value={config}>
-        <HakukohdeForm
-          organisaatioOid="1.2.246.562.10.594252633210"
-          steps={false}
-          haku={{}}
-          tarjoajat={[]}
-          toteutus={{
-            metadata: {
-              opetus: {},
-            },
-          }}
-          koulutustyyppi={koulutustyyppi}
-        />
-      </FormConfigContext.Provider>
+      <HakukohdeForm
+        organisaatioOid="1.2.246.562.10.594252633210"
+        steps={false}
+        haku={{}}
+        tarjoajat={[]}
+        toteutus={{
+          metadata: {
+            opetus: {},
+          },
+        }}
+        koulutustyyppi={koulutustyyppi}
+      />
     </ReduxForm>
   );
 };

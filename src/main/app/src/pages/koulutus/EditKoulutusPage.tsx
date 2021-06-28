@@ -14,7 +14,6 @@ import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { Spin } from '#/src/components/virkailija';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useFieldValue } from '#/src/hooks/form';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
@@ -55,11 +54,6 @@ const EditKoulutusPage = props => {
     koulutus?.organisaatioOid
   );
 
-  const formConfig = useMemo(
-    () => ({ noFieldConfigs: true, readOnly: !canUpdate }),
-    [canUpdate]
-  );
-
   const isJulkinen = useFieldValue('julkinen', FORM_NAME);
 
   const apiUrls = useUrls();
@@ -67,46 +61,48 @@ const EditKoulutusPage = props => {
   return !koulutus ? (
     <FullSpin />
   ) : (
-    <ReduxForm form={FORM_NAME} initialValues={initialValues}>
+    <ReduxForm
+      form={FORM_NAME}
+      initialValues={initialValues}
+      disabled={!canUpdate}
+    >
       <Title>{t('sivuTitlet.koulutuksenMuokkaus')}</Title>
-      <FormConfigContext.Provider value={formConfig}>
-        <FormPage
-          readOnly={!canUpdate}
-          header={
-            <EntityFormHeader entityType={ENTITY.KOULUTUS} entity={koulutus} />
-          }
-          steps={<FormSteps activeStep={ENTITY.KOULUTUS} />}
-          footer={
-            koulutus ? (
-              <KoulutusFooter
-                formMode={FormMode.EDIT}
-                koulutus={koulutus}
-                organisaatioOid={organisaatioOid}
-                canUpdate={canUpdate || isJulkinen}
-              />
-            ) : null
-          }
-          esikatseluControls={
-            <EsikatseluControls
-              esikatseluUrl={apiUrls.url('konfo-ui.koulutus', oid)}
-            />
-          }
-        >
-          <RelationInfoContainer>
-            <OrganisaatioRelation organisaatioOid={organisaatioOid} />
-          </RelationInfoContainer>
-          {koulutus ? (
-            <KoulutusForm
-              isNewKoulutus={false}
-              onAttachToteutus={onAttachToteutus}
+      <FormPage
+        readOnly={!canUpdate}
+        header={
+          <EntityFormHeader entityType={ENTITY.KOULUTUS} entity={koulutus} />
+        }
+        steps={<FormSteps activeStep={ENTITY.KOULUTUS} />}
+        footer={
+          koulutus ? (
+            <KoulutusFooter
+              formMode={FormMode.EDIT}
               koulutus={koulutus}
               organisaatioOid={organisaatioOid}
+              canUpdate={canUpdate || isJulkinen}
             />
-          ) : (
-            <Spin center />
-          )}
-        </FormPage>
-      </FormConfigContext.Provider>
+          ) : null
+        }
+        esikatseluControls={
+          <EsikatseluControls
+            esikatseluUrl={apiUrls.url('konfo-ui.koulutus', oid)}
+          />
+        }
+      >
+        <RelationInfoContainer>
+          <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+        </RelationInfoContainer>
+        {koulutus ? (
+          <KoulutusForm
+            isNewKoulutus={false}
+            onAttachToteutus={onAttachToteutus}
+            koulutus={koulutus}
+            organisaatioOid={organisaatioOid}
+          />
+        ) : (
+          <Spin center />
+        )}
+      </FormPage>
     </ReduxForm>
   );
 };

@@ -20,7 +20,6 @@ import {
   ENTITY,
   FormMode,
 } from '#/src/constants';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
 import useSelectBase from '#/src/hooks/useSelectBase';
 import { ToteutusModel } from '#/src/types/toteutusTypes';
 import { useKoulutusByOid } from '#/src/utils/koulutus/getKoulutusByOid';
@@ -32,8 +31,6 @@ import { ToteutusFooter } from './ToteutusFooter';
 import ToteutusForm from './ToteutusForm';
 
 const { AMMATILLINEN_KOULUTUS, TUTKINNON_OSA, OSAAMISALA } = KOULUTUSTYYPPI;
-
-const config = { noFieldConfigs: true };
 
 const getCopyValues = toteutusOid => ({
   pohja: {
@@ -103,45 +100,43 @@ const CreateToteutusPage = props => {
   return (
     <ReduxForm form="toteutusForm" initialValues={initialValues}>
       <Title>{t('sivuTitlet.uusiToteutus')}</Title>
-      <FormConfigContext.Provider value={config}>
-        <FormPage
-          header={<FormHeader>{t('yleiset.toteutus')}</FormHeader>}
-          steps={<FormSteps activeStep={ENTITY.TOTEUTUS} />}
-          footer={
-            koulutus ? (
-              <ToteutusFooter
-                formMode={FormMode.CREATE}
-                toteutus={toteutus}
-                koulutus={koulutus}
-                koulutustyyppi={koulutustyyppi}
-                organisaatioOid={organisaatioOid}
-                canUpdate={true}
-              />
-            ) : null
-          }
-          esikatseluControls={<EsikatseluControls />}
-        >
-          <RelationInfoContainer>
-            <KoulutusRelation
-              organisaatioOid={organisaatioOid}
+      <FormPage
+        header={<FormHeader>{t('yleiset.toteutus')}</FormHeader>}
+        steps={<FormSteps activeStep={ENTITY.TOTEUTUS} />}
+        footer={
+          koulutus ? (
+            <ToteutusFooter
+              formMode={FormMode.CREATE}
+              toteutus={toteutus}
               koulutus={koulutus}
-            />
-            <OrganisaatioRelation organisaatioOid={organisaatioOid} />
-          </RelationInfoContainer>
-          {!isKoulutusFetching && !isToteutusFetching ? (
-            <ToteutusForm
-              steps
-              koulutus={koulutus}
-              organisaatioOid={organisaatioOid}
               koulutustyyppi={koulutustyyppi}
-              onSelectBase={selectBase}
-              showArkistoituTilaOption={false}
+              organisaatioOid={organisaatioOid}
+              canUpdate={true}
             />
-          ) : (
-            <Spin center />
-          )}
-        </FormPage>
-      </FormConfigContext.Provider>
+          ) : null
+        }
+        esikatseluControls={<EsikatseluControls />}
+      >
+        <RelationInfoContainer>
+          <KoulutusRelation
+            organisaatioOid={organisaatioOid}
+            koulutus={koulutus}
+          />
+          <OrganisaatioRelation organisaatioOid={organisaatioOid} />
+        </RelationInfoContainer>
+        {!isKoulutusFetching && !isToteutusFetching ? (
+          <ToteutusForm
+            steps
+            koulutus={koulutus}
+            organisaatioOid={organisaatioOid}
+            koulutustyyppi={koulutustyyppi}
+            onSelectBase={selectBase}
+            showArkistoituTilaOption={false}
+          />
+        ) : (
+          <Spin center />
+        )}
+      </FormPage>
     </ReduxForm>
   );
 };

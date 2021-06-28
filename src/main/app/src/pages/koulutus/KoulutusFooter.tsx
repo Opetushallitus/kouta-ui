@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 
 import { FormFooter } from '#/src/components/FormPage';
 import { ORGANISAATIOTYYPPI, ENTITY, FormMode } from '#/src/constants';
-import { useFormName } from '#/src/contexts/FormNameContext';
+import { useFormName } from '#/src/contexts/FormContext';
 import { useForm } from '#/src/hooks/form';
 import { useSaveForm } from '#/src/hooks/formSaveHooks';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
@@ -109,7 +109,7 @@ export const KoulutusFooter = ({
   const save = useSaveForm({
     formName,
     submit,
-    validate: values => validateKoulutusForm(values, form?.registeredFields),
+    validate: validateKoulutusForm,
   });
 
   return (

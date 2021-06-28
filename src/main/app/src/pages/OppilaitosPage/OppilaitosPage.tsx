@@ -11,7 +11,6 @@ import OppilaitosFormSteps from '#/src/components/OppilaitosFormSteps';
 import ReduxForm from '#/src/components/ReduxForm';
 import Title from '#/src/components/Title';
 import { ENTITY, CRUD_ROLES, FormMode } from '#/src/constants';
-import FormConfigContext from '#/src/contexts/FormConfigContext';
 import { useUrls } from '#/src/contexts/UrlContext';
 import { useCurrentUserHasRole } from '#/src/hooks/useCurrentUserHasRole';
 import useOrganisaatioHierarkia from '#/src/hooks/useOrganisaatioHierarkia';
@@ -71,11 +70,6 @@ export const OppilaitosPage = ({
 
   const readOnly = formMode === FormMode.EDIT ? !canUpdate : !canCreate;
 
-  const config = useMemo(
-    () => ({ noFieldConfigs: true, readOnly }),
-    [readOnly]
-  );
-
   const initialValues = useMemo(
     () => ({
       ...(formMode === FormMode.CREATE
@@ -113,44 +107,45 @@ export const OppilaitosPage = ({
   return isFetching ? (
     <FullSpin />
   ) : (
-    <ReduxForm form={ENTITY.OPPILAITOS} initialValues={initialValues}>
+    <ReduxForm
+      form={ENTITY.OPPILAITOS}
+      initialValues={initialValues}
+      disabled={readOnly}
+    >
       <Title>{t('sivuTitlet.oppilaitos')}</Title>
-      <FormConfigContext.Provider value={config}>
-        <FormPage
-          readOnly={readOnly}
-          steps={<OppilaitosFormSteps activeStep={ENTITY.OPPILAITOS} />}
-          header={
-            <EntityFormHeader
-              entityType={ENTITY.OPPILAITOS}
-              entity={{ ...(organisaatio ?? {}), ...(oppilaitos ?? {}) }}
-            />
-          }
-          footer={
-            <OppilaitosPageFooter
-              oppilaitos={oppilaitos}
-              organisaatioOid={organisaatioOid}
-              readOnly={readOnly}
-            />
-          }
-          esikatseluControls={
-            <EsikatseluControls
-              esikatseluUrl={
-                oppilaitos &&
-                apiUrls.url('konfo-ui.oppilaitos', organisaatioOid)
-              }
-            />
-          }
-        >
-          {organisaatio && (
-            <OppilaitosForm
-              organisaatioOid={organisaatioOid}
-              organisaatio={organisaatio}
-              steps={stepsEnabled}
-              showArkistoituTilaOption={showArkistoituTilaOption}
-            />
-          )}
-        </FormPage>
-      </FormConfigContext.Provider>
+      <FormPage
+        readOnly={readOnly}
+        steps={<OppilaitosFormSteps activeStep={ENTITY.OPPILAITOS} />}
+        header={
+          <EntityFormHeader
+            entityType={ENTITY.OPPILAITOS}
+            entity={{ ...(organisaatio ?? {}), ...(oppilaitos ?? {}) }}
+          />
+        }
+        footer={
+          <OppilaitosPageFooter
+            oppilaitos={oppilaitos}
+            organisaatioOid={organisaatioOid}
+            readOnly={readOnly}
+          />
+        }
+        esikatseluControls={
+          <EsikatseluControls
+            esikatseluUrl={
+              oppilaitos && apiUrls.url('konfo-ui.oppilaitos', organisaatioOid)
+            }
+          />
+        }
+      >
+        {organisaatio && (
+          <OppilaitosForm
+            organisaatioOid={organisaatioOid}
+            organisaatio={organisaatio}
+            steps={stepsEnabled}
+            showArkistoituTilaOption={showArkistoituTilaOption}
+          />
+        )}
+      </FormPage>
     </ReduxForm>
   );
 };

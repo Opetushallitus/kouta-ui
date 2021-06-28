@@ -9,7 +9,6 @@ import Button from '#/src/components/Button';
 import { FormFieldCheckbox } from '#/src/components/formFields';
 import { Tooltip } from '#/src/components/Tooltip';
 import { JULKAISUTILA } from '#/src/constants';
-import FormConfigSectionContext from '#/src/contexts/FormConfigSectionContext';
 import { useFieldValue, useIsDirty } from '#/src/hooks/form';
 
 const Separator = styled.div`
@@ -44,7 +43,7 @@ export const EsikatseluControls: React.FC<EsikatseluProps> = ({
   const textKey = isJulkaistu ? 'yleiset.naytaJulkaistu' : 'yleiset.esikatselu';
 
   return (
-    <FormConfigSectionContext.Provider value="esikatselu">
+    <>
       {showButton && (
         <Separator>
           <Tooltip
@@ -81,6 +80,6 @@ export const EsikatseluControls: React.FC<EsikatseluProps> = ({
           </Field>
         </Separator>
       )}
-    </FormConfigSectionContext.Provider>
+    </>
   );
 };

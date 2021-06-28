@@ -21,12 +21,21 @@ const KielivalikoimaFields = ({ name }) => {
     <>
       <DividerHeading>{t('toteutuslomake.kielivalikoima')}</DividerHeading>
       <Box display="flex" flexWrap="wrap" m={-1}>
-        <KielivalikoimaBox {...getTestIdProps('A1A2Kielet')}>
+        <KielivalikoimaBox {...getTestIdProps('A1Kielet')}>
           <Field
             component={FormFieldSelect}
-            name={`${name}.kielivalikoima.A1A2Kielet`}
+            name={`${name}.kielivalikoima.A1Kielet`}
             options={options}
-            label={t('toteutuslomake.A1A2Kielet')}
+            label={t('toteutuslomake.A1Kielet')}
+            isMulti
+          />
+        </KielivalikoimaBox>
+        <KielivalikoimaBox {...getTestIdProps('A2Kielet')}>
+          <Field
+            component={FormFieldSelect}
+            name={`${name}.kielivalikoima.A2Kielet`}
+            options={options}
+            label={t('toteutuslomake.A2Kielet')}
             isMulti
           />
         </KielivalikoimaBox>

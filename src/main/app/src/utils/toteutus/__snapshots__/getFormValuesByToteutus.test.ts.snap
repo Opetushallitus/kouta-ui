@@ -74,34 +74,39 @@ Object {
       ],
     },
     "kielivalikoima": Object {
-      "A1A2Kielet": Array [
+      "A1Kielet": Array [
         Object {
           "value": "kieli_1#1",
         },
       ],
-      "B1Kielet": Array [
+      "A2Kielet": Array [
         Object {
           "value": "kieli_2#1",
         },
       ],
-      "B2Kielet": Array [
+      "B1Kielet": Array [
         Object {
           "value": "kieli_3#1",
         },
       ],
-      "B3Kielet": Array [
+      "B2Kielet": Array [
         Object {
           "value": "kieli_4#1",
         },
       ],
-      "aidinkielet": Array [
+      "B3Kielet": Array [
         Object {
           "value": "kieli_5#1",
         },
       ],
-      "muutKielet": Array [
+      "aidinkielet": Array [
         Object {
           "value": "kieli_6#1",
+        },
+      ],
+      "muutKielet": Array [
+        Object {
+          "value": "kieli_7#1",
         },
       ],
     },
